@@ -13,15 +13,16 @@ async
 multiple
 filter
 virtual
-drag-drop-debug
+drag-drop
 ```
 
 ## Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| block-node | `boolean` | `false` |  |
+| allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | 一个不允许 drop 在叶节点内部的函数 | 是否允许 drop |
 | block-line | `boolean` | `false` |  |
+| block-node | `boolean` | `false` |  |
 | cancelable | `boolean` | `false` | 选中之后是否允许取消 |
 | cascade | `boolean` | `false` | 是否关联选项 |
 | checkable | `boolean` | `false` |  |
@@ -31,25 +32,22 @@ drag-drop-debug
 | default-expand-all | `boolean` | `false` |  |
 | default-expanded-keys | `Array<string \| number>` | `[]` |  |
 | default-selected-keys | `Array<string \| number>` | `[]` |  |
+| draggable | `boolean` | `false` |  |
+| expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |
 | filter | `(node: TreeNode) => boolean` | 一个简单的字符串过滤算法 |  |
 | multiple | `boolean` | `false` |  |
-| on-load | `(node: TreeNode) => Promise<any>` | `undefined` |  |
+| on-load | `(node: TreeNode) => Promise<void>` | `undefined` |  |
 | pattern | `string` | `''` |  |
 | remote | `boolean` | `false` | 是否异步获取选项，和 onLoad 配合 |
 | selectable | `boolean` | `true` |  |
 | selected-keys | `Array<string \| number>` | `undefined` | 如果设定则 selected 状态受控 |
 | virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动，启用前你需要设定好树的高度样式 |
-| on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
-| on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
+| on-dragend | `(data: { node: TreeNode, event: DragEvent }) => void` | `undefined` |  |
+| on-dragenter | `(data: { node: TreeNode, event: DragEvent }) => void` | `undefined` |  |
+| on-dragleave | `(data: { node: TreeNode, event: DragEvent }) => void` | `undefined` |  |
+| on-dragstart | `(data: { node: TreeNode, event: DragEvent }) => void` | `undefined` |  |
+| on-drop | `(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` |  |
 | on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
-
-<!--
-| draggable | `boolean` | `false` |  |
-| expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 | |
-| dragstart | `(data: { node: TreeNode, event: DragEvent })` |  |
-| dragend | `(data: { node: TreeNode, event: DragEvent })` |  |
-| dragenter | `(data: { node: TreeNode, event: DragEvent })` |  |
-| dragleave | `(data: { node: TreeNode, event: DragEvent })` |  |
-| drop | `(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })` |  |
--->
+| on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
+| on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |

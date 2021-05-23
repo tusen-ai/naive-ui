@@ -23,7 +23,7 @@ import { NScrollbar, ScrollbarInst } from '../../scrollbar'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
-import { keysWithFilter } from './utils'
+import { keysWithFilter, emptyImage } from './utils'
 import style from './styles/index.cssr'
 import {
   DragInfo,
@@ -34,26 +34,17 @@ import {
   TmNode,
   InternalDragInfo,
   InternalDropInfo,
-  treeInjectionKey,
   DropPosition,
-  AllowDrop
+  AllowDrop,
+  MotionData,
+  treeInjectionKey
 } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
 
 // TODO:
 // During expanding, some node are mis-applied with :active style
-
-const emptyImage = new Image()
-emptyImage.src =
-  'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
-
-interface MotionData {
-  __motion: true
-  height: number | undefined
-  mode: 'expand' | 'collapse'
-  nodes: TmNode[]
-}
+// Async dnd has bug
 
 const ITEM_SIZE = 30
 
@@ -619,7 +610,8 @@ export default defineComponent({
 
       const allowDropInside = allowDrop({
         node: node.rawNode,
-        dropPosition: 'inside'
+        dropPosition: 'inside',
+        phase: 'drag'
       })
 
       if (allowDropInside) {
@@ -755,19 +747,30 @@ export default defineComponent({
       if (
         !allowDrop({
           node: finalDropNode.rawNode,
-          dropPosition: finalDropPosition
+          dropPosition: finalDropPosition,
+          phase: 'drag'
         })
       ) {
         resetDropState()
         return
       }
 
-      droppingPositionRef.value = finalDropPosition
-      droppingNodeRef.value = finalDropNode
-
-      if (nodeKeyToBeExpanded !== finalDropNode.key) {
+      if (
+        nodeKeyToBeExpanded !== finalDropNode.key ||
+        (nodeKeyToBeExpanded === null &&
+          finalDropNode.key === draggingNode.key) ||
+        (nodeKeyToBeExpanded !== null &&
+          nodeKeyToBeExpanded === draggingNode.key)
+      ) {
         if (finalDropPosition === 'inside') {
-          expandDragEnterNode(finalDropNode)
+          if (props.expandOnDragenter) {
+            expandDragEnterNode(finalDropNode)
+          }
+          // Bailout 4
+          if (!finalDropNode.shallowLoaded) {
+            resetDndState()
+            return
+          }
         } else {
           resetDragExpandState()
         }
@@ -776,6 +779,8 @@ export default defineComponent({
           resetDragExpandState()
         }
       }
+      droppingPositionRef.value = finalDropPosition
+      droppingNodeRef.value = finalDropNode
     }
     function handleDrop ({ event, node, dropPosition }: InternalDropInfo): void {
       if (!props.draggable || props.disabled || node.disabled) {
@@ -788,12 +793,22 @@ export default defineComponent({
         return
       }
       // Bailout 1
+      if (
+        !props.allowDrop({
+          node: droppingNode.rawNode,
+          dropPosition: droppingPosition,
+          phase: 'drag'
+        })
+      ) {
+        return
+      }
+      // Bailout 2
       // This is a special case to guard since we want ui to show the status
       // but not to emit a event
       if (draggingNode.key === droppingNode.key) {
         return
       }
-      // Bailout 2
+      // Bailout 3
       // insert before its next node
       // insert after its prev node
       if (droppingPosition === 'before') {

@@ -36,19 +36,6 @@ function createLabel (level) {
   if (level === 1) return 'Out of Three, the created universe'
 }
 
-function dropIsValid ({ dragNode, node }) {
-  /** drop on itselft */
-  if (dragNode.key === node.key) return false
-  /** shouldn't drop parent to its child */
-  const dropNodeInside = (children) => {
-    if (!children) return false
-    return children.reduce((result, child) => {
-      return result || child.key === node.key || dropNodeInside(child.children)
-    }, false)
-  }
-  return !dropNodeInside(dragNode.children)
-}
-
 function findSiblingsAndIndex (node, nodes) {
   if (!nodes) return [null, null]
   for (let i = 0; i < nodes.length; ++i) {
@@ -61,12 +48,7 @@ function findSiblingsAndIndex (node, nodes) {
 }
 
 /**
- * You may wonder why the demo is so complicated.
- * I did take both Element UI like & Antd like's API paradigms into consideration.
- * For providing more ability to control the component,
- * Antd's paradigm is better.
- * Although it is harder to get started with.
- * What's more, the time complexity of the demo can be optimized,
+ * The time complexity of the demo can be optimized,
  * but I'm too lazy to optimize it.
  */
 export default {
@@ -93,16 +75,16 @@ export default {
         data
       )
       dragNodeSiblings.splice(dragNodeIndex, 1)
-      if (dropPosition === 'center') {
+      if (dropPosition === 'inside') {
         if (node.children) {
           node.children.unshift(dragNode)
         } else {
           node.children = [dragNode]
         }
-      } else if (dropPosition === 'top') {
+      } else if (dropPosition === 'before') {
         const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(node, data)
         nodeSiblings.splice(nodeIndex, 0, dragNode)
-      } else if (dropPosition === 'bottom') {
+      } else if (dropPosition === 'after') {
         const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(node, data)
         nodeSiblings.splice(nodeIndex + 1, 0, dragNode)
       }

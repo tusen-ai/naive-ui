@@ -39,7 +39,7 @@ virtual
 | virtual-scroll | `boolean` | `true` |  |
 | on-blur | `() => void` | `undefined` |  |
 | on-focus | `() => void` | `undefined` |  |
-| on-load | `(option: CascaderOption) => Promise<any>` | `undefined` | 在点击未加载完成节点时的回调，在返回的 promise 中设定 `option.children`，在返回的 promise resolve 或 reject 之后完成加载 |
+| on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | 在点击未加载完成节点时的回调，在返回的 promise 中设定 `option.children`，在返回的 promise resolve 或 reject 之后完成加载 |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null) => void` | `undefined` |  |
 
 ## API

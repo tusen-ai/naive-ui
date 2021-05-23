@@ -13,15 +13,16 @@ async
 multiple
 filter
 virtual
-drag-drop-debug
+drag-drop
 ```
 
 ## Props
 
 | Name | Type | default | Description |
 | --- | --- | --- | --- |
-| block-node | `boolean` | `false` |  |
+| allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | A function that prohibit dropping inside leaf node. | Whether to allow dropping. |
 | block-line | `boolean` | `false` |  |
+| block-node | `boolean` | `false` |  |
 | cancelable | `boolean` | `false` | Whether node's select status can be cancelled. |
 | cascade | `boolean` | `false` | Whether to cascade checkboxes. |
 | checkable | `boolean` | `false` |  |
@@ -31,27 +32,22 @@ drag-drop-debug
 | default-expand-all | `boolean` | `false` |  |
 | default-expanded-keys | `Array<string \| number>` | `[]` |  |
 | default-selected-keys | `Array<string \| number>` | `[]` |  |
+| draggable | `boolean` | `false` |  |
+| expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter. |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |
 | filter | `(node: TreeNode) => boolean` | A simple string based filter |  |
 | multiple | `boolean` | `false` |  |
-| on-load | `(node: TreeNode) => Promise<any>` | `undefined` |  |
+| on-load | `(node: TreeNode) => Promise<void>` | `undefined` |  |
 | pattern | `string` | `''` |  |
 | remote | `boolean` | `false` | Whether to load nodes async. It should work with `on-load` |
 | selectable | `boolean` | `true` |  |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scroll. You need to set proper style height of the tree in advance. |
-| on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
-| on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
+| on-dragend | `(data: { node: TreeNode, event: DragEvent }) => void` | `undefined` |  |
+| on-dragenter | `(data: { node: TreeNode, event: DragEvent }) => void` | `undefined` |  |
+| on-dragleave | `(data: { node: TreeNode, event: DragEvent }) => void` | `undefined` |  |
+| on-dragstart | `(data: { node: TreeNode, event: DragEvent }) => void` | `undefined` |  |
+| on-drop | `(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` |  |
 | on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
-
-<!--
-
-| draggable | `boolean` | `false` |  |
-| expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter |
-| dragstart | `(data: { node: TreeNode, event: DragEvent })` |  |
-| dragend | `(data: { node: TreeNode, event: DragEvent })` |  |
-| dragenter | `(data: { node: TreeNode, event: DragEvent })` |  |
-| dragleave | `(data: { node: TreeNode, event: DragEvent })` |  |
-| drop | `(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'top' \| 'center' \| 'bottom', event: DragEvent })` |  |
-
--->
+| on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
+| on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |

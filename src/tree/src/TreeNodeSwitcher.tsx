@@ -45,7 +45,12 @@ export default defineComponent({
                     {{ default: () => <SwitcherIcon /> }}
                   </NBaseIcon>
                 ) : (
-                  <NBaseLoading clsPrefix={clsPrefix} key="loading" />
+                  <NBaseLoading
+                    clsPrefix={clsPrefix}
+                    key="loading"
+                    radius={85}
+                    strokeWidth={20}
+                  />
                 )
             }}
           </NIconSwitchTransition>

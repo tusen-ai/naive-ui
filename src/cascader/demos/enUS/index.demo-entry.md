@@ -39,7 +39,7 @@ virtual
 | virtual-scroll | `boolean` | `true` |  |
 | on-blur | `() => void` | `undefined` |  |
 | on-focus | `() => void` | `undefined` |
-| on-load | `(option: CascaderOption) => Promise<any>` | `undefined` | Callback when click unloaded node. Set `option.children` in the returned promise. Loading is end after the promise is resolved or rejected. |
+| on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | Callback when click unloaded node. Set `option.children` in the returned promise. Loading is end after the promise is resolved or rejected. |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null) => void` | `undefined` |  |
 
 ## API

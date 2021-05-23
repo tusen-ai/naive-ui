@@ -1,4 +1,4 @@
-# 拖放节点 Debug
+# 拖放节点
 
 设定 `draggable` 然后自己写一堆代码来支持节点的拖放。
 
@@ -35,18 +35,6 @@ function createLabel (level) {
   if (level === 2) return '二生三'
   if (level === 1) return '三生万物'
 }
-function dropIsValid ({ dragNode, node }) {
-  /** drop on itselft */
-  if (dragNode.key === node.key) return false
-  /** shouldn't drop parent to its child */
-  const dropNodeInside = (children) => {
-    if (!children) return false
-    return children.reduce((result, child) => {
-      return result || child.key === node.key || dropNodeInside(child.children)
-    }, false)
-  }
-  return !dropNodeInside(dragNode.children)
-}
 
 function findSiblingsAndIndex (node, nodes) {
   if (!nodes) return [null, null]
@@ -60,11 +48,7 @@ function findSiblingsAndIndex (node, nodes) {
 }
 
 /**
- * 你可能好奇为什么要把这个东西搞这么复杂
- * 我确实思考过 Element 和 Antd 他们不同的提供接口的方法
- * 为了给用户提供更强的控制能力 我选择了 Antd 的范式
- * 诚然这样使用门槛更高一点
- * 然后这个例子的时间复杂度确实可以优化 我实在是懒得改了
+ * 这个例子的时间复杂度确实可以优化 我实在是懒得改了
  */
 export default {
   data () {
@@ -82,24 +66,22 @@ export default {
       this.checkedKeys = checkedKeys
     },
     handleDrop ({ node, dragNode, dropPosition }) {
-      const valid = dropIsValid({ node, dragNode })
-      if (!valid) return
       const data = this.data
       const [dragNodeSiblings, dragNodeIndex] = findSiblingsAndIndex(
         dragNode,
         data
       )
       dragNodeSiblings.splice(dragNodeIndex, 1)
-      if (dropPosition === 'center') {
+      if (dropPosition === 'inside') {
         if (node.children) {
           node.children.unshift(dragNode)
         } else {
           node.children = [dragNode]
         }
-      } else if (dropPosition === 'top') {
+      } else if (dropPosition === 'before') {
         const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(node, data)
         nodeSiblings.splice(nodeIndex, 0, dragNode)
-      } else if (dropPosition === 'bottom') {
+      } else if (dropPosition === 'after') {
         const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(node, data)
         nodeSiblings.splice(nodeIndex + 1, 0, dragNode)
       }

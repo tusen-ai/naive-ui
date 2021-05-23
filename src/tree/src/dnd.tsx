@@ -46,6 +46,7 @@ export function defaultAllowDrop ({
   dropPosition: DropPosition
   node: TreeOption
 }): boolean {
+  if (node.isLeaf === false) return true
   if (node.children) {
     return true
   }

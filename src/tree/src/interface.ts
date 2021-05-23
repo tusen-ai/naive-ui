@@ -9,6 +9,7 @@ export interface TreeOption {
   key: Key
   label: string
   disabled?: boolean
+  isLeaf?: boolean
   children?: TreeOption[]
   suffix?: () => VNodeChild
 }
@@ -37,6 +38,7 @@ export type DropPosition = 'before' | 'inside' | 'after'
 export type AllowDrop = (info: {
   dropPosition: DropPosition
   node: TreeOption
+  phase: 'drag' | 'drop'
 }) => boolean
 
 export interface InternalDropInfo {
@@ -79,3 +81,10 @@ export interface TreeInjection {
 export const treeInjectionKey: InjectionKey<TreeInjection> = Symbol('tree')
 
 export type TmNode = TreeNode<TreeOption>
+
+export interface MotionData {
+  __motion: true
+  height: number | undefined
+  mode: 'expand' | 'collapse'
+  nodes: TmNode[]
+}

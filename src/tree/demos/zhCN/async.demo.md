@@ -7,9 +7,11 @@
   block-line
   checkable
   remote
+  draggable
   :data="data"
   :checked-keys="checkedKeys"
   :on-load="handleLoad"
+  @drop="handleDrop"
   @update:checked-keys="handleCheckedKeysChange"
   :expanded-keys="expandedKeys"
   @update:expanded-keys="handleExpandedKeysChange"
@@ -40,6 +42,17 @@ function nextLabel (currentLabel) {
   if (currentLabel === '三生万物') return '道生一'
 }
 
+function findSiblingsAndIndex (node, nodes) {
+  if (!nodes) return [null, null]
+  for (let i = 0; i < nodes.length; ++i) {
+    const siblingNode = nodes[i]
+    if (siblingNode.key === node.key) return [nodes, i]
+    const [siblings, index] = findSiblingsAndIndex(node, siblingNode.children)
+    if (siblings) return [siblings, index]
+  }
+  return [null, null]
+}
+
 export default {
   data () {
     return {
@@ -54,6 +67,28 @@ export default {
     },
     handleCheckedKeysChange (checkedKeys) {
       this.checkedKeys = checkedKeys
+    },
+    handleDrop ({ node, dragNode, dropPosition }) {
+      const data = this.data
+      const [dragNodeSiblings, dragNodeIndex] = findSiblingsAndIndex(
+        dragNode,
+        data
+      )
+      dragNodeSiblings.splice(dragNodeIndex, 1)
+      if (dropPosition === 'inside') {
+        if (node.children) {
+          node.children.unshift(dragNode)
+        } else {
+          node.children = [dragNode]
+        }
+      } else if (dropPosition === 'before') {
+        const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(node, data)
+        nodeSiblings.splice(nodeIndex, 0, dragNode)
+      } else if (dropPosition === 'after') {
+        const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(node, data)
+        nodeSiblings.splice(nodeIndex + 1, 0, dragNode)
+      }
+      this.data = Array.from(data)
     },
     handleLoad (node) {
       return new Promise((resolve, reject) => {
