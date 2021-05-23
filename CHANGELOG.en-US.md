@@ -15,6 +15,7 @@
 ### Fixes
 
 - `n-layout-sider`'s `collapse-mode` not working.
+- Internal selection component's theme peers has wrong key for popover.
 
 ## 2.8.0
 
@@ -130,8 +131,8 @@
 ### Feats
 
 - Add `n-skeleton` component.
-- Add `n-calendar` comopnent.
-- Add `n-color-picker` comopnent.
+- Add `n-calendar` component.
+- Add `n-color-picker` component.
 - `n-date-picker` locale add `firstDayOfWeek`.
 - `n-select` add `showArrow` prop.
 
@@ -164,7 +165,7 @@
 
 ### Feats
 
-- Add `n-image` comopnent.
+- Add `n-image` component.
 - Add `n-global-style` component.
 - Add `n-theme-editor` component.
 - Add `n-page-header` component.

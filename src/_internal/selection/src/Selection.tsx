@@ -612,8 +612,8 @@ export default defineComponent({
           placement: 'top',
           width: 'trigger',
           onUpdateShow: this.onPopoverUpdateShow,
-          theme: this.mergedTheme.peers.popover,
-          themeOverrides: this.mergedTheme.peerOverrides.popover
+          theme: this.mergedTheme.peers.Popover,
+          themeOverrides: this.mergedTheme.peerOverrides.Popover
         } as const)
         : null
       const placeholder =

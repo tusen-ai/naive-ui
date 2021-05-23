@@ -15,6 +15,7 @@
 ### Fixes
 
 - `n-layout-sider` 的 `collapse-mode` 属性不生效
+- 内部 selection 组件的主题 peers 中 popover 的 key 不正确
 
 ## 2.8.0
 

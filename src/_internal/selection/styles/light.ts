@@ -93,7 +93,7 @@ const internalSelectionLight = createTheme({
   name: 'InternalSelection',
   common: commonLight,
   peers: {
-    popover: popoverLight
+    Popover: popoverLight
   },
   self
 })

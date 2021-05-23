@@ -8,7 +8,7 @@ const internalSelectionDark: InternalSelectionTheme = {
   name: 'InternalSelection',
   common: commonDark,
   peers: {
-    popover: popoverDark
+    Popover: popoverDark
   },
   self (vars) {
     const {
