@@ -24,7 +24,7 @@ export interface DropInfo {
   event: DragEvent
   node: TreeOption
   dragNode: TreeOption
-  dropPosition: 'top' | 'center' | 'bottom'
+  dropPosition: 'before' | 'inside' | 'after'
 }
 
 export interface InternalDragInfo {
@@ -32,7 +32,12 @@ export interface InternalDragInfo {
   node: TmNode
 }
 
-export type DropPosition = 'top' | 'center' | 'bottom'
+export type DropPosition = 'before' | 'inside' | 'after'
+
+export type AllowDrop = (info: {
+  dropPosition: DropPosition
+  node: TreeOption
+}) => boolean
 
 export interface InternalDropInfo {
   event: DragEvent
@@ -47,6 +52,7 @@ export interface TreeInjection {
   displayedIndeterminateKeysRef: Ref<Key[]>
   mergedSelectedKeysRef: Ref<Key[]>
   mergedExpandedKeysRef: Ref<Key[]>
+  fNodesRef: Ref<Array<TreeNode<TreeOption>>>
   remoteRef: Ref<boolean>
   draggableRef: Ref<boolean>
   checkableRef: Ref<boolean>

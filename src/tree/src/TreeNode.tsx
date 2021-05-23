@@ -5,7 +5,7 @@ import NTreeNodeSwitcher from './TreeNodeSwitcher'
 import NTreeNodeCheckbox from './TreeNodeCheckbox'
 import NTreeNodeContent from './TreeNodeContent'
 import { TmNode, treeInjectionKey } from './interface'
-import { renderDropMark } from './render-drop-mark'
+import { renderDropMark } from './dnd'
 import { repeat } from 'seemly'
 
 const TreeNode = defineComponent({
@@ -100,15 +100,10 @@ const TreeNode = defineComponent({
     function handleDrop (e: DragEvent): void {
       e.preventDefault()
       if (droppingPositionRef.value !== null) {
-        const dropPosition = ({
-          top: 'top',
-          bottom: 'bottom',
-          center: 'center'
-        } as const)[droppingPositionRef.value]
         NTree.handleDrop({
           event: e,
           node: props.tmNode,
-          dropPosition
+          dropPosition: droppingPositionRef.value
         })
       }
     }
@@ -129,7 +124,7 @@ const TreeNode = defineComponent({
         if (!droppingNodeParent) return false
         const { tmNode } = props
         const { value: droppingPosition } = droppingPositionRef
-        if (droppingPosition === 'top' || droppingPosition === 'bottom') {
+        if (droppingPosition === 'before' || droppingPosition === 'after') {
           return droppingNodeParent.key === tmNode.key
         }
         return false
@@ -252,7 +247,7 @@ const TreeNode = defineComponent({
               })
               : this.showDropMarkAsParent
                 ? renderDropMark({
-                  position: 'center',
+                  position: 'inside',
                   level: tmNode.level,
                   indent: this.indent
                 })

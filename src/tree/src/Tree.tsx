@@ -11,7 +11,7 @@ import {
   CSSProperties,
   VNode
 } from 'vue'
-import { createTreeMate, flatten } from 'treemate'
+import { createTreeMate, flatten, createIndexGetter } from 'treemate'
 import { useMergedState } from 'vooks'
 import { VirtualListInst, VVirtualList } from 'vueuc'
 import { useConfig, useTheme } from '../../_mixins'
@@ -33,9 +33,16 @@ import {
   TmNode,
   InternalDragInfo,
   InternalDropInfo,
-  treeInjectionKey
+  treeInjectionKey,
+  DropPosition,
+  AllowDrop
 } from './interface'
 import MotionWrapper from './MotionWrapper'
+import { defaultAllowDrop } from './dnd'
+
+// TODO:
+// Drag expand has some bugs
+// During expanding, some node are mis-applied with :active style
 
 interface MotionData {
   __motion: true
@@ -52,38 +59,17 @@ const treeProps = {
     type: Array as PropType<TreeOptions>,
     default: () => []
   },
-  defaultExpandAll: {
-    type: Boolean,
-    default: false
-  },
+  defaultExpandAll: Boolean,
   expandOnDragenter: {
     type: Boolean,
     default: true
   },
-  cancelable: {
-    type: Boolean,
-    default: true
-  },
-  checkable: {
-    type: Boolean,
-    default: false
-  },
-  draggable: {
-    type: Boolean,
-    default: false
-  },
-  blockNode: {
-    type: Boolean,
-    default: false
-  },
-  blockLine: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  cancelable: Boolean,
+  checkable: Boolean,
+  draggable: Boolean,
+  blockNode: Boolean,
+  blockLine: Boolean,
+  disabled: Boolean,
   checkedKeys: Array as PropType<Key[]>,
   defaultCheckedKeys: {
     type: Array as PropType<Key[]>,
@@ -130,6 +116,10 @@ const treeProps = {
   indent: {
     type: Number,
     default: 16
+  },
+  allowDrop: {
+    type: Function as PropType<AllowDrop>,
+    default: defaultAllowDrop
   },
   virtualScroll: Boolean,
   onDragenter: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
@@ -268,11 +258,15 @@ export default defineComponent({
 
     const draggingNodeRef = ref<TmNode | null>(null)
     const droppingNodeRef = ref<TmNode | null>(null)
-    const droppingPositionRef = ref<'top' | 'center' | 'bottom' | null>(null)
+    const droppingPositionRef = ref<'before' | 'inside' | 'after' | null>(null)
     const droppingNodeParentRef = computed(() => {
       const { value: droppingNode } = droppingNodeRef
-      if (droppingNode) return droppingNode.parent
-      return null
+      if (!droppingNode) return null
+      // May avoid overlap between line mark of first child & rect mark of parent
+      // if (droppingNode.isFirstChild && droppingPositionRef.value === 'before') {
+      //   return null
+      // }
+      return droppingNode.parent
     })
 
     watch(toRef(props, 'data'), () => {
@@ -376,6 +370,10 @@ export default defineComponent({
           })
         }
       }
+    })
+
+    const getFIndexRef = computed(() => {
+      return createIndexGetter(fNodesRef.value)
     })
 
     const mergedFNodesRef = computed(() => {
@@ -507,16 +505,8 @@ export default defineComponent({
     function handleDragEnter ({ event, node }: InternalDragInfo): void {
       // node should be a tmNode
       if (!props.draggable || props.disabled || node.disabled) return
-      doDragEnter({ event, node: node.rawNode })
-      const { value: draggingNode } = draggingNodeRef
-      // Drag self into self
-      if (draggingNode?.contains(node)) {
-        resetDropState()
-        return
-      }
       handleDragOver({ event, node }, false)
-      // Update dropping node
-      droppingNodeRef.value = node
+      doDragEnter({ event, node: node.rawNode })
       if (!props.expandOnDragenter) return
       if (!mergedExpandedKeysRef.value.includes(node.key) && !node.isLeaf) {
         window.clearTimeout(expandTimerIdRef.value)
@@ -548,7 +538,7 @@ export default defineComponent({
         expandTimerIdRef.value = window.setTimeout(() => {
           expand()
           expandTimerIdRef.value = undefined
-        }, 800)
+        }, 1200)
       }
     }
     function handleDragLeave ({ event, node }: InternalDragInfo): void {
@@ -576,22 +566,111 @@ export default defineComponent({
     ): void {
       if (!props.draggable || props.disabled || node.disabled) return
       const { value: draggingNode } = draggingNodeRef
-      // Drag self into self
-      if (draggingNode?.contains(node)) return
+      if (!draggingNode) return
       // Update dropping node
-      droppingNodeRef.value = node
       const el = event.currentTarget as HTMLElement
       const {
         height: elOffsetHeight,
         top: elClientTop
       } = el.getBoundingClientRect()
       const eventOffsetY = event.clientY - elClientTop
-      if (eventOffsetY <= 8) {
-        droppingPositionRef.value = 'top'
-      } else if (eventOffsetY >= elOffsetHeight - 8) {
-        droppingPositionRef.value = 'bottom'
+      let mousePosition: DropPosition
+
+      const { allowDrop } = props
+      const allowDropInside = allowDrop({
+        node: node.rawNode,
+        dropPosition: 'inside'
+      })
+
+      if (allowDropInside) {
+        if (eventOffsetY <= 8) {
+          mousePosition = 'before'
+        } else if (eventOffsetY >= elOffsetHeight - 8) {
+          mousePosition = 'after'
+        } else {
+          mousePosition = 'inside'
+        }
       } else {
-        droppingPositionRef.value = 'center'
+        if (eventOffsetY <= elOffsetHeight / 2) {
+          mousePosition = 'before'
+        } else {
+          mousePosition = 'after'
+        }
+      }
+
+      const { value: getFindex } = getFIndexRef
+
+      /** determine the drop position and drop node */
+      /** the dropping node needn't to be the mouse hovering node! */
+      /** insert after only happens to the node can be last child */
+      let finalDropNode: TmNode
+      let finalDropPosition: DropPosition
+      if (mousePosition === 'inside') {
+        finalDropNode = node
+        finalDropPosition = 'inside'
+      } else {
+        const hoverNodeFIndex = getFindex(node.key)
+        if (hoverNodeFIndex === null) return
+        // last node in tree view
+        if (hoverNodeFIndex === fNodesRef.value.length) {
+          if (mousePosition === 'before') {
+            finalDropNode = node
+            finalDropPosition = 'before'
+          } else {
+            finalDropNode = node
+            finalDropPosition = 'after'
+          }
+        } else {
+          if (mousePosition === 'after') {
+            if (node.isLastChild) {
+              finalDropNode = node
+              finalDropPosition = 'after'
+            } else {
+              finalDropNode = fNodesRef.value[hoverNodeFIndex + 1]
+              finalDropPosition = 'before'
+            }
+          } else {
+            finalDropNode = node
+            finalDropPosition = 'before'
+          }
+        }
+      }
+
+      // Bailout 1
+      // Drag self into self
+      // Drag it into direct parent
+      if (
+        draggingNode.contains(finalDropNode!) ||
+        (finalDropPosition === 'inside' &&
+          draggingNode.parent?.key === finalDropNode!.key)
+      ) {
+        resetDropState()
+        return
+      }
+
+      // Bailout 2
+      // insert before its next flattened node
+      // insert after its prev flattened node
+      if (
+        (finalDropPosition === 'before' &&
+          getFindex(finalDropNode.key)! - 1 === getFindex(draggingNode.key)!) ||
+        (finalDropPosition === 'after' &&
+          getFindex(finalDropNode.key)! + 1 === getFindex(draggingNode.key)!)
+      ) {
+        resetDropState()
+        return
+      }
+
+      if (
+        allowDrop({
+          node: finalDropNode.rawNode,
+          dropPosition: finalDropPosition
+        })
+      ) {
+        droppingPositionRef.value = finalDropPosition!
+        droppingNodeRef.value = finalDropNode!
+      } else {
+        resetDropState()
       }
       if (emit) doDragOver({ event, node: node.rawNode })
     }
@@ -636,6 +715,7 @@ export default defineComponent({
       droppingNodeParentRef,
       draggingNodeRef,
       droppingPositionRef,
+      fNodesRef,
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,
