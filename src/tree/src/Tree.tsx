@@ -14,6 +14,7 @@ import {
 import { createTreeMate, flatten, createIndexGetter } from 'treemate'
 import { useMergedState } from 'vooks'
 import { VirtualListInst, VVirtualList } from 'vueuc'
+import { sleep } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, warn } from '../../_utils'
@@ -39,10 +40,13 @@ import {
 } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
-import { sleep } from 'seemly'
 
 // TODO:
 // During expanding, some node are mis-applied with :active style
+
+const emptyImage = new Image()
+emptyImage.src =
+  'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 
 interface MotionData {
   __motion: true
@@ -257,9 +261,12 @@ export default defineComponent({
     const highlightKeysRef = ref<Key[]>([])
     const loadingKeysRef = ref<Key[]>([])
 
+    let dragStartX: number = 0
     const draggingNodeRef = ref<TmNode | null>(null)
     const droppingNodeRef = ref<TmNode | null>(null)
+    const droppingMouseNodeRef = ref<TmNode | null>(null)
     const droppingPositionRef = ref<'before' | 'inside' | 'after' | null>(null)
+    const droppingOffsetLevelRef = ref<number>(0)
     const droppingNodeParentRef = computed(() => {
       const { value: droppingNode } = droppingNodeRef
       if (!droppingNode) return null
@@ -446,7 +453,9 @@ export default defineComponent({
       draggingNodeRef.value = null
     }
     function resetDropState (): void {
+      droppingOffsetLevelRef.value = 0
       droppingNodeRef.value = null
+      droppingMouseNodeRef.value = null
       droppingPositionRef.value = null
       resetDragExpandState()
     }
@@ -519,10 +528,10 @@ export default defineComponent({
       nodeKeyToBeExpanded = node.key
       const expand = (): void => {
         if (nodeKeyToBeExpanded !== node.key) return
-        const { value: droppingNode } = droppingNodeRef
+        const { value: droppingMouseNode } = droppingMouseNodeRef
         if (
-          droppingNode &&
-          droppingNode.key === node.key &&
+          droppingMouseNode &&
+          droppingMouseNode.key === node.key &&
           !mergedExpandedKeysRef.value.includes(node.key)
         ) {
           doExpandedKeysChange(mergedExpandedKeysRef.value.concat(node.key))
@@ -584,6 +593,9 @@ export default defineComponent({
     }
     function handleDragStart ({ event, node }: InternalDragInfo): void {
       if (!props.draggable || props.disabled || node.disabled) return
+      // Most of time, the image will block user's view
+      event.dataTransfer?.setDragImage(emptyImage, 0, 0)
+      dragStartX = event.clientX
       draggingNodeRef.value = node
       doDragStart({ event, node: node.rawNode })
     }
@@ -594,6 +606,7 @@ export default defineComponent({
       if (!props.draggable || props.disabled || node.disabled) return
       const { value: draggingNode } = draggingNodeRef
       if (!draggingNode) return
+      const { allowDrop, indent } = props
       if (emit) doDragOver({ event, node: node.rawNode })
       // Update dropping node
       const el = event.currentTarget as HTMLElement
@@ -604,16 +617,15 @@ export default defineComponent({
       const eventOffsetY = event.clientY - elClientTop
       let mousePosition: DropPosition
 
-      const { allowDrop } = props
       const allowDropInside = allowDrop({
         node: node.rawNode,
         dropPosition: 'inside'
       })
 
       if (allowDropInside) {
-        if (eventOffsetY <= 10) {
+        if (eventOffsetY <= 8) {
           mousePosition = 'before'
-        } else if (eventOffsetY >= elOffsetHeight - 10) {
+        } else if (eventOffsetY >= elOffsetHeight - 8) {
           mousePosition = 'after'
         } else {
           mousePosition = 'inside'
@@ -630,78 +642,128 @@ export default defineComponent({
 
       /** determine the drop position and drop node */
       /** the dropping node needn't to be the mouse hovering node! */
-      /** insert after only happens to the node can be last child */
+      /**
+       * if there is something i've learned from implementing a complex
+       * drag & drop. that is never write unit test before you really figure
+       * out what behavior is exactly you want.
+       */
       let finalDropNode: TmNode
       let finalDropPosition: DropPosition
+      const hoverNodeFIndex = getFindex(node.key)
+      if (hoverNodeFIndex === null) {
+        resetDropState()
+        return
+      }
+
+      let mouseAtExpandedNonLeafNode = false
       if (mousePosition === 'inside') {
         finalDropNode = node
         finalDropPosition = 'inside'
       } else {
-        const hoverNodeFIndex = getFindex(node.key)
-        if (hoverNodeFIndex === null) return
-        // last node in tree view
-        if (hoverNodeFIndex === fNodesRef.value.length) {
-          if (mousePosition === 'before') {
+        if (mousePosition === 'before') {
+          if (node.isFirstChild) {
             finalDropNode = node
             finalDropPosition = 'before'
           } else {
-            finalDropNode = node
+            finalDropNode = fNodesRef.value[hoverNodeFIndex - 1]
             finalDropPosition = 'after'
           }
         } else {
-          if (mousePosition === 'after') {
-            if (node.isLastChild) {
-              finalDropNode = node
-              finalDropPosition = 'after'
-            } else {
-              finalDropNode = fNodesRef.value[hoverNodeFIndex + 1]
-              finalDropPosition = 'before'
-            }
-          } else {
+          finalDropNode = node
+          finalDropPosition = 'after'
+        }
+      }
+
+      // If the node is non-leaf and it is expanded, we don't allow it to
+      // drop after it and change it to drop before its next view sibling
+      if (
+        !finalDropNode.isLeaf &&
+        mergedExpandedKeysRef.value.includes(finalDropNode.key)
+      ) {
+        mouseAtExpandedNonLeafNode = true
+        if (finalDropPosition === 'after') {
+          finalDropNode = fNodesRef.value[hoverNodeFIndex + 1]
+          if (!finalDropNode) {
+            // maybe there is no next view sibling when non-leaf node has no
+            // children and it is the last node in the tree
             finalDropNode = node
+            finalDropPosition = 'inside'
+          } else {
             finalDropPosition = 'before'
           }
         }
+      }
+
+      const droppingMouseNode = finalDropNode
+
+      droppingMouseNodeRef.value = droppingMouseNode
+
+      // This is a speacial case, user is dragging a last child itself, so we
+      // only view it as they are trying to drop after it.
+      // There are some relevant codes in bailout 1's child branch.
+      // Also, the expand bailout should have a high priority. If it's non-leaf
+      // node and expanded, keep its origin drop position
+      if (
+        !mouseAtExpandedNonLeafNode &&
+        draggingNode.isLastChild &&
+        draggingNode.key === finalDropNode.key
+      ) {
+        finalDropPosition = 'after'
+      }
+
+      if (finalDropPosition === 'after') {
+        let offset = dragStartX - event.clientX // drag left => > 0
+        let offsetLevel = 0
+        while (
+          offset >= indent / 2 && // divide by 2 to make it easier to trigger
+          finalDropNode.parent !== null &&
+          finalDropNode.isLastChild &&
+          offsetLevel < 1
+        ) {
+          offset -= indent
+          offsetLevel += 1
+          finalDropNode = finalDropNode.parent
+        }
+        droppingOffsetLevelRef.value = offsetLevel
+      } else {
+        droppingOffsetLevelRef.value = 0
       }
 
       // Bailout 1
       // Drag self into self
       // Drag it into direct parent
       if (
-        draggingNode.contains(finalDropNode!) ||
+        draggingNode.contains(finalDropNode) ||
         (finalDropPosition === 'inside' &&
-          draggingNode.parent?.key === finalDropNode!.key)
+          draggingNode.parent?.key === finalDropNode.key)
       ) {
-        resetDropState()
-        return
-      }
-
-      // Bailout 2
-      // insert before its next flattened node
-      // insert after its prev flattened node
-      if (
-        (finalDropPosition === 'before' &&
-          getFindex(finalDropNode.key)! - 1 === getFindex(draggingNode.key)!) ||
-        (finalDropPosition === 'after' &&
-          getFindex(finalDropNode.key)! + 1 === getFindex(draggingNode.key)!)
-      ) {
-        resetDropState()
-        return
+        if (
+          draggingNode.key === droppingMouseNode.key &&
+          draggingNode.key === finalDropNode.key
+        ) {
+          // This is special case that we want ui to show a mark to guide user
+          // to start dragging. Nor they will think nothing happens.
+          // However this is an invalid drop, we need to guard it inside
+          // handleDrop
+        } else {
+          resetDropState()
+          return
+        }
       }
 
       // Bailout 3
       if (
-        allowDrop({
+        !allowDrop({
           node: finalDropNode.rawNode,
           dropPosition: finalDropPosition
         })
       ) {
-        droppingPositionRef.value = finalDropPosition!
-        droppingNodeRef.value = finalDropNode!
-      } else {
         resetDropState()
         return
       }
+
+      droppingPositionRef.value = finalDropPosition
+      droppingNodeRef.value = finalDropNode
 
       if (nodeKeyToBeExpanded !== finalDropNode.key) {
         if (finalDropPosition === 'inside') {
@@ -716,21 +778,48 @@ export default defineComponent({
       }
     }
     function handleDrop ({ event, node, dropPosition }: InternalDropInfo): void {
-      if (
-        !props.draggable ||
-        props.disabled ||
-        node.disabled ||
-        !draggingNodeRef.value ||
-        !droppingNodeRef.value ||
-        !droppingPositionRef.value
-      ) {
+      if (!props.draggable || props.disabled || node.disabled) {
         return
       }
+      const { value: draggingNode } = draggingNodeRef
+      const { value: droppingNode } = droppingNodeRef
+      const { value: droppingPosition } = droppingPositionRef
+      if (!draggingNode || !droppingNode || !droppingPosition) {
+        return
+      }
+      // Bailout 1
+      // This is a special case to guard since we want ui to show the status
+      // but not to emit a event
+      if (draggingNode.key === droppingNode.key) {
+        return
+      }
+      // Bailout 2
+      // insert before its next node
+      // insert after its prev node
+      if (droppingPosition === 'before') {
+        const nextNode = draggingNode.getNext({ includeDisabled: true })
+        if (nextNode) {
+          if (nextNode.key === droppingNode.key) {
+            resetDropState()
+            return
+          }
+        }
+      }
+      if (droppingPosition === 'after') {
+        const prevNode = draggingNode.getPrev({ includeDisabled: true })
+        if (prevNode) {
+          if (prevNode.key === droppingNode.key) {
+            resetDropState()
+            return
+          }
+        }
+      }
+
       doDrop({
         event,
-        node: droppingNodeRef.value.rawNode,
-        dragNode: draggingNodeRef.value.rawNode,
-        dropPosition: droppingPositionRef.value
+        node: droppingNode.rawNode,
+        dragNode: draggingNode.rawNode,
+        dropPosition
       })
       resetDndState()
     }
@@ -754,10 +843,11 @@ export default defineComponent({
       checkableRef: toRef(props, 'checkable'),
       blockLineRef: toRef(props, 'blockLine'),
       indentRef: toRef(props, 'indent'),
-      droppingNodeRef,
+      droppingMouseNodeRef,
       droppingNodeParentRef,
       draggingNodeRef,
       droppingPositionRef,
+      droppingOffsetLevelRef,
       fNodesRef,
       handleSwitcherClick,
       handleDragEnd,

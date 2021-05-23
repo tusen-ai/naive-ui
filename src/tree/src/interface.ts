@@ -61,9 +61,10 @@ export interface TreeInjection {
   blockLineRef: Ref<boolean>
   indentRef: Ref<number>
   draggingNodeRef: Ref<TmNode | null>
-  droppingNodeRef: Ref<TmNode | null>
+  droppingMouseNodeRef: Ref<TmNode | null>
   droppingNodeParentRef: Ref<TmNode | null>
   droppingPositionRef: Ref<null | DropPosition>
+  droppingOffsetLevelRef: Ref<number>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void

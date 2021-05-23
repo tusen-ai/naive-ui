@@ -34,9 +34,10 @@ const TreeNode = defineComponent({
     const NTree = inject(treeInjectionKey)!
     const {
       droppingNodeParentRef,
-      droppingNodeRef,
+      droppingMouseNodeRef,
       draggingNodeRef,
       droppingPositionRef,
+      droppingOffsetLevelRef,
       indentRef
     } = NTree
 
@@ -131,10 +132,12 @@ const TreeNode = defineComponent({
         if (!draggingNode) return
         const { value: droppingPosition } = droppingPositionRef
         if (!droppingPosition) return
-        const { value: droppingNode } = droppingNodeRef
-        if (!droppingNode || draggingNode.key === droppingNode.key) return
+        const { value: droppingMouseNode } = droppingMouseNodeRef
+        if (!droppingMouseNode) {
+          return
+        }
         const { tmNode } = props
-        if (tmNode.key === droppingNode.key) return true
+        if (tmNode.key === droppingMouseNode.key) return true
         return false
       }),
       showDropMarkAsParent: useMemo(() => {
@@ -170,6 +173,7 @@ const TreeNode = defineComponent({
       draggable: NTree.draggableRef,
       blockLine: NTree.blockLineRef,
       droppingPosition: droppingPositionRef,
+      droppingOffsetLevel: droppingOffsetLevelRef,
       indent: indentRef,
       contentInstRef,
       contentElRef,
@@ -262,14 +266,14 @@ const TreeNode = defineComponent({
               ? renderDropMark({
                 el: this.contentElRef.value!,
                 position: this.droppingPosition!,
-                level: tmNode.level,
+                offsetLevel: this.droppingOffsetLevel,
                 indent
               })
               : this.showDropMarkAsParent
                 ? renderDropMark({
                   el: this.contentElRef.value!,
                   position: 'inside',
-                  level: tmNode.level,
+                  offsetLevel: this.droppingOffsetLevel,
                   indent
                 })
                 : null
