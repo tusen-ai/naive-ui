@@ -13,6 +13,7 @@
 - `n-tree` add `block-line` prop.
 - `n-tree` support drag & drop.
 - `n-menu` add `inverted` prop.
+- `n-dropdown` add `inverted` prop.
 
 ### Fixes
 

@@ -18,6 +18,7 @@ manual-position
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | animated | `boolean` | `true` |  |
+| inverted | `boolean` | `false` | Use inverted style. |
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. (Be careful about the potential conflicts with other components keyboard operations) |
 | options | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | `[]` |  |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` |  |

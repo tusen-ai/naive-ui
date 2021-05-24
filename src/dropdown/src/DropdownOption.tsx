@@ -163,10 +163,19 @@ export default defineComponent({
         const { key } = props.tmNode
         return pendingKeyPath.includes(key)
       }),
+      childActive: useMemo(() => {
+        const { value: activeKeyPath } = activeKeyPathRef
+        const { key } = props.tmNode
+        const index = activeKeyPath.findIndex((k) => key === k)
+        if (index === -1) return false
+        return index < activeKeyPath.length - 1
+      }),
       active: useMemo(() => {
         const { value: activeKeyPath } = activeKeyPathRef
         const { key } = props.tmNode
-        return activeKeyPath.includes(key)
+        const index = activeKeyPath.findIndex((k) => key === k)
+        if (index === -1) return false
+        return index === activeKeyPath.length - 1
       }),
       handleClick,
       handleMouseMove,
@@ -199,7 +208,9 @@ export default defineComponent({
             `${clsPrefix}-dropdown-option-body`,
             {
               [`${clsPrefix}-dropdown-option-body--pending`]: this.pending,
-              [`${clsPrefix}-dropdown-option-body--active`]: this.active
+              [`${clsPrefix}-dropdown-option-body--active`]: this.active,
+              [`${clsPrefix}-dropdown-option-body--child-active`]: this
+                .childActive
             }
           ]}
           onMousemove={this.handleMouseMove}

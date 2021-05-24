@@ -13,6 +13,7 @@
 - `n-tree` 新增 `block-line` 属性
 - `n-tree` 支持拖放
 - `n-menu` 新增 `inverted` 属性
+- `n-dropdown` 新增 `inverted` 属性
 
 ### Fixes
 

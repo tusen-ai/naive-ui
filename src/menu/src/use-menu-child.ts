@@ -21,6 +21,8 @@ export interface MenuInjection {
     collapsedWidth: number
     disabled: boolean
   }
+  invertedRef: Ref<boolean>
+  isHorizontalRef: Ref<boolean>
   mergedClsPrefixRef: Ref<string>
   mergedValueRef: Ref<Key | null>
   mergedExpandedKeysRef: Ref<Key[]>

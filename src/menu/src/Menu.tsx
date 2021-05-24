@@ -210,6 +210,8 @@ export default defineComponent({
       mergedExpandedKeysRef,
       activePathRef,
       mergedClsPrefixRef,
+      isHorizontalRef: computed(() => props.mode === 'horizontal'),
+      invertedRef: toRef(props, 'inverted'),
       doSelect,
       toggleExpand
     })
@@ -270,59 +272,55 @@ export default defineComponent({
           self
         } = themeRef.value
         const { borderRadius, borderColorHorizontal, fontSize } = self
-        return {
+        const vars: any = {
           '--bezier': cubicBezierEaseInOut,
           '--font-size': fontSize,
           '--border-color-horizontal': borderColorHorizontal,
-          '--border-radius': borderRadius,
-          '--group-text-color': inverted
-            ? self.groupTextColorInverted
-            : self.groupTextColor,
-          '--color': inverted ? self.colorInverted : self.color,
-          '--item-text-color': inverted
-            ? self.itemTextColorInverted
-            : self.itemTextColor,
-          '--arrow-color': inverted ? self.arrowColorInverted : self.arrowColor,
-          '--arrow-color-hover': inverted
-            ? self.arrowColorHoverInverted
-            : self.arrowColorHover,
-          '--arrow-color-active': inverted
-            ? self.arrowColorActiveInverted
-            : self.arrowColorActive,
-          '--arrow-color-child-active': inverted
-            ? self.arrowColorChildActiveInverted
-            : self.arrowColorChildActive,
-          '--item-icon-color': inverted
-            ? self.itemIconColorInverted
-            : self.itemIconColor,
-          '--item-text-color-hover': inverted
-            ? self.itemTextColorHoverInverted
-            : self.itemTextColorHover,
-          '--item-icon-color-hover': inverted
-            ? self.itemIconColorHoverInverted
-            : self.itemIconColorHover,
-          '--item-text-color-active': inverted
-            ? self.itemTextColorActiveInverted
-            : self.itemTextColorActive,
-          '--item-icon-color-active': inverted
-            ? self.itemIconColorActiveInverted
-            : self.itemIconColorActive,
-          '--item-icon-color-collapsed': inverted
-            ? self.itemIconColorCollapsedInverted
-            : self.itemIconColorCollapsed,
-          '--item-color-active': inverted
-            ? self.itemColorActiveInverted
-            : self.itemColorActive,
-          '--item-color-active-collapsed': inverted
-            ? self.itemColorActiveCollapsedInverted
-            : self.itemColorActiveCollapsed,
-          '--item-text-color-child-active': inverted
-            ? self.itemTextColorChildActiveInverted
-            : self.itemTextColorChildActive,
-          '--item-icon-color-child-active': inverted
-            ? self.itemIconColorChildActiveInverted
-            : self.itemIconColorChildActive
+          '--border-radius': borderRadius
         }
+        if (inverted) {
+          vars['--group-text-color'] = self.groupTextColorInverted
+          vars['--color'] = self.colorInverted
+          vars['--item-text-color'] = self.itemTextColorInverted
+          vars['--arrow-color'] = self.arrowColorInverted
+          vars['--arrow-color-hover'] = self.arrowColorHoverInverted
+          vars['--arrow-color-active'] = self.arrowColorActiveInverted
+          vars['--arrow-color-child-active'] =
+            self.arrowColorChildActiveInverted
+          vars['--item-icon-color'] = self.itemIconColorInverted
+          vars['--item-text-color-hover'] = self.itemTextColorHoverInverted
+          vars['--item-icon-color-hover'] = self.itemIconColorHoverInverted
+          vars['--item-text-color-active'] = self.itemTextColorActiveInverted
+          vars['--item-icon-color-active'] = self.itemIconColorActiveInverted
+          vars['--item-icon-color-collapsed'] =
+            self.itemIconColorCollapsedInverted
+          vars['--item-color-active'] = self.itemColorActiveInverted
+          vars['--item-color-active-collapsed'] =
+            self.itemColorActiveCollapsedInverted
+          vars['--item-text-color-child-active'] =
+            self.itemTextColorChildActiveInverted
+          vars['--item-icon-color-child-active'] =
+            self.itemIconColorChildActiveInverted
+        } else {
+          vars['--group-text-color'] = self.groupTextColor
+          vars['--color'] = self.color
+          vars['--item-text-color'] = self.itemTextColor
+          vars['--arrow-color'] = self.arrowColor
+          vars['--arrow-color-hover'] = self.arrowColorHover
+          vars['--arrow-color-active'] = self.arrowColorActive
+          vars['--arrow-color-child-active'] = self.arrowColorChildActive
+          vars['--item-icon-color'] = self.itemIconColor
+          vars['--item-text-color-hover'] = self.itemTextColorHover
+          vars['--item-icon-color-hover'] = self.itemIconColorHover
+          vars['--item-text-color-active'] = self.itemTextColorActive
+          vars['--item-icon-color-active'] = self.itemIconColorActive
+          vars['--item-icon-color-collapsed'] = self.itemIconColorCollapsed
+          vars['--item-color-active'] = self.itemColorActive
+          vars['--item-color-active-collapsed'] = self.itemColorActiveCollapsed
+          vars['--item-text-color-child-active'] = self.itemTextColorChildActive
+          vars['--item-icon-color-child-active'] = self.itemIconColorChildActive
+        }
+        return vars
       })
     }
   },

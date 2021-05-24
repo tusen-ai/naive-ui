@@ -82,20 +82,15 @@ const dropdownBaseProps = {
     type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
     default: 'medium'
   },
-  submenuWidth: {
-    type: Number,
-    default: null
-  },
-  submenuMinWidth: {
-    type: Number,
-    default: null
-  },
+  inverted: Boolean,
+  // submenuWidth: Number,
+  // submenuMinWidth: Number,
   onSelect: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   options: {
     type: Array as PropType<DropdownMixedOption[]>,
     default: () => []
   },
-  // for menu
+  // for menu, not documented
   value: [String, Number] as PropType<Key | null>
 } as const
 
@@ -113,6 +108,7 @@ export type DropdownProps = ExtractPublicPropTypes<typeof dropdownProps>
 
 export default defineComponent({
   name: 'Dropdown',
+  inheritAttrs: false,
   props: dropdownProps,
   setup (props) {
     const uncontrolledShowRef = ref(false)
@@ -299,36 +295,27 @@ export default defineComponent({
       // methods
       doUpdateShow,
       cssVars: computed(() => {
-        const { size } = props
+        const { size, inverted } = props
         const {
           common: { cubicBezierEaseInOut },
-          self: {
-            padding,
-            color,
-            dividerColor,
-            borderRadius,
-            boxShadow,
-            suffixColor,
-            prefixColor,
-            optionColorHover,
-            optionTextColor,
-            optionTextColorActive,
-            groupHeaderTextColor,
-            [createKey('optionIconSuffixWidth', size)]: optionIconSuffixWidth,
-            [createKey('optionSuffixWidth', size)]: optionSuffixWidth,
-            [createKey('optionIconPrefixWidth', size)]: optionIconPrefixWidth,
-            [createKey('optionPrefixWidth', size)]: optionPrefixWidth,
-            [createKey('fontSize', size)]: fontSize,
-            [createKey('optionHeight', size)]: optionHeight,
-            [createKey('optionIconSize', size)]: optionIconSize
-          }
+          self
         } = themeRef.value
-        return {
+        const {
+          padding,
+          dividerColor,
+          borderRadius,
+          boxShadow,
+          [createKey('optionIconSuffixWidth', size)]: optionIconSuffixWidth,
+          [createKey('optionSuffixWidth', size)]: optionSuffixWidth,
+          [createKey('optionIconPrefixWidth', size)]: optionIconPrefixWidth,
+          [createKey('optionPrefixWidth', size)]: optionPrefixWidth,
+          [createKey('fontSize', size)]: fontSize,
+          [createKey('optionHeight', size)]: optionHeight,
+          [createKey('optionIconSize', size)]: optionIconSize
+        } = self
+        const vars: any = {
           '--bezier': cubicBezierEaseInOut,
           '--font-size': fontSize,
-          '--option-color-hover': optionColorHover,
-          '--divider-color': dividerColor,
-          '--color': color,
           '--padding': padding,
           '--border-radius': borderRadius,
           '--box-shadow': boxShadow,
@@ -337,13 +324,37 @@ export default defineComponent({
           '--option-icon-prefix-width': optionIconPrefixWidth,
           '--option-suffix-width': optionSuffixWidth,
           '--option-icon-suffix-width': optionIconSuffixWidth,
-          '--option-text-color': optionTextColor,
-          '--option-text-color-active': optionTextColorActive,
-          '--prefix-color': prefixColor,
-          '--suffix-color': suffixColor,
-          '--group-header-text-color': groupHeaderTextColor,
-          '--option-icon-size': optionIconSize
+          '--option-icon-size': optionIconSize,
+          '--divider-color': dividerColor
         }
+        // writing like this is the fastest method
+        if (inverted) {
+          vars['--color'] = self.colorInverted
+          vars['--option-color-hover'] = self.optionColorHoverInverted
+          vars['--option-color-active'] = self.optionColorActiveInverted
+          vars['--option-text-color'] = self.optionTextColorInverted
+          vars['--option-text-color-hover'] = self.optionTextColorHoverInverted
+          vars['--option-text-color-active'] =
+            self.optionTextColorActiveInverted
+          vars['--option-text-color-child-active'] =
+            self.optionTextColorChildActiveInverted
+          vars['--prefix-color'] = self.prefixColorInverted
+          vars['--suffix-color'] = self.suffixColorInverted
+          vars['--group-header-text-color'] = self.groupHeaderTextColorInverted
+        } else {
+          vars['--color'] = self.color
+          vars['--option-color-hover'] = self.optionColorHover
+          vars['--option-color-active'] = self.optionColorActive
+          vars['--option-text-color'] = self.optionTextColor
+          vars['--option-text-color-hover'] = self.optionTextColorHover
+          vars['--option-text-color-active'] = self.optionTextColorActive
+          vars['--option-text-color-child-active'] =
+            self.optionTextColorChildActive
+          vars['--prefix-color'] = self.prefixColor
+          vars['--suffix-color'] = self.suffixColor
+          vars['--group-header-text-color'] = self.groupHeaderTextColor
+        }
+        return vars
       })
     }
   },

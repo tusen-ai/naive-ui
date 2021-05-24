@@ -4,7 +4,11 @@ import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins/use-theme'
 
-export function createPartialInvertedVars (color: string, activeColor: string) {
+export function createPartialInvertedVars (
+  color: string,
+  activeColor: string,
+  groupColor: string
+) {
   return {
     itemTextColorInverted: color,
     itemTextColorHoverInverted: activeColor,
@@ -18,7 +22,8 @@ export function createPartialInvertedVars (color: string, activeColor: string) {
     arrowColorInverted: color,
     arrowColorHoverInverted: activeColor,
     arrowColorChildActiveInverted: activeColor,
-    arrowColorActiveInverted: activeColor
+    arrowColorActiveInverted: activeColor,
+    groupTextColorInverted: groupColor
   }
 }
 
@@ -52,12 +57,11 @@ export const self = (vars: ThemeCommonVars) => {
     arrowColorChildActive: primaryColor,
     arrowColorActive: primaryColor,
     colorInverted: 'rgb(0, 20, 40)',
-    groupTextColorInverted: textColor3,
     itemColorActiveInverted: primaryColor,
     itemColorActiveCollapsedInverted: primaryColor,
     borderColorHorizontal: '#0000',
     fontSize,
-    ...createPartialInvertedVars('#BBB', '#FFF')
+    ...createPartialInvertedVars('#BBB', '#FFF', '#AAA')
   }
 }
 

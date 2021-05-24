@@ -111,7 +111,7 @@ export default cB('menu', `
       transition: background-color .3s var(--bezier);
     `),
     cNotM('disabled', [
-      c('&:active::after', {
+      c('&:active::before', {
         backgroundColor: 'var(--item-color-active)'
       })
     ]),
@@ -246,8 +246,7 @@ export default cB('menu', `
     cB('submenu-children', {
       overflow: 'hidden',
       padding: 0
-    },
-    [
+    }, [
       fadeInHeightExpandTransition({
         duration: '.2s'
       })

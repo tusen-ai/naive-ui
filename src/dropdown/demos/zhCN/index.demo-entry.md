@@ -19,6 +19,7 @@ group-debug
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | animated | `boolean` | `true` |  |
+| inverted | `boolean` | `false` | 使用反转样式 |
 | keyboard | `boolean` | `true` | 是否支持键盘操作（注意和其他内容键盘操作可能的冲突） |
 | options | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | `[]` |  |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` |  |

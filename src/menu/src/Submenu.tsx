@@ -77,7 +77,9 @@ export default defineComponent({
       dropdownShowRef.value = value
     }
     return {
-      NMenu,
+      doSelect: NMenu.doSelect,
+      inverted: NMenu.invertedRef,
+      isHorizontal: NMenu.isHorizontalRef,
       mergedClsPrefix: NMenu.mergedClsPrefixRef,
       maxIconSize: MenuChild.maxIconSize,
       activeIconSize: MenuChild.activeIconSize,
@@ -111,7 +113,7 @@ export default defineComponent({
     const { mergedClsPrefix } = this
     const createSubmenuItem = (): VNode => {
       const {
-        NMenu,
+        isHorizontal,
         paddingLeft,
         collapsed,
         mergedDisabled,
@@ -133,7 +135,7 @@ export default defineComponent({
           maxIconSize={maxIconSize}
           activeIconSize={activeIconSize}
           title={title}
-          showArrow={!(NMenu.props.mode === 'horizontal')}
+          showArrow={!isHorizontal}
           childActive={childActive}
           clsPrefix={mergedClsPrefix}
           icon={icon}
@@ -171,15 +173,14 @@ export default defineComponent({
         placement={this.dropdownPlacement}
         onUpdateShow={this.handlePopoverShowChange}
         options={this.rawNodes}
-        onSelect={this.NMenu.doSelect}
+        onSelect={this.doSelect}
+        inverted={this.inverted}
       >
         {{
           default: () => (
             <div class={`${mergedClsPrefix}-submenu`}>
               {createSubmenuItem()}
-              {this.NMenu.props.mode === 'horizontal'
-                ? null
-                : createSubmenuChildren()}
+              {this.isHorizontal ? null : createSubmenuChildren()}
             </div>
           )
         }}

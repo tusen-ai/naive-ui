@@ -1,3 +1,4 @@
+import { changeColor } from 'seemly'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins/use-theme'
@@ -29,20 +30,36 @@ export const self = (vars: ThemeCommonVars) => {
     optionHeightMedium: heightMedium,
     optionHeightLarge: heightLarge,
     optionHeightHuge: heightHuge,
-    optionTextColor: textColor2,
-    optionTextColorActive: primaryColor,
-    color: popoverColor,
-    dividerColor,
     borderRadius,
     boxShadow: boxShadow2,
-    suffixColor: textColor2,
-    prefixColor: textColor2,
-    optionColorHover: hoverColor,
-    groupHeaderTextColor: textColor3,
     fontSizeSmall,
     fontSizeMedium,
     fontSizeLarge,
-    fontSizeHuge
+    fontSizeHuge,
+    // non-inverted
+    optionTextColor: textColor2,
+    optionTextColorHover: textColor2,
+    optionTextColorActive: primaryColor,
+    optionTextColorChildActive: primaryColor,
+    color: popoverColor,
+    dividerColor,
+    suffixColor: textColor2,
+    prefixColor: textColor2,
+    optionColorHover: hoverColor,
+    optionColorActive: changeColor(primaryColor, { alpha: 0.1 }),
+    groupHeaderTextColor: textColor3,
+    // inverted
+    optionTextColorInverted: '#BBB',
+    optionTextColorHoverInverted: '#FFF',
+    optionTextColorActiveInverted: '#FFF',
+    optionTextColorChildActiveInverted: '#FFF',
+    colorInverted: 'rgb(0, 20, 40)',
+    dividerColorInverted: '#BBB',
+    suffixColorInverted: '#BBB',
+    prefixColorInverted: '#BBB',
+    optionColorHoverInverted: primaryColor,
+    optionColorActiveInverted: primaryColor,
+    groupHeaderTextColorInverted: '#AAA'
   }
 }
 
