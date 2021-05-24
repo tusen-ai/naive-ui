@@ -3,7 +3,7 @@
 可以制定标签页展示的指令为 `if` 或者 `show`。使用 `show` 的时候标签页内容不会随着切换重置。
 
 ```html
-<n-tabs v-model:value="tab">
+<n-tabs default-value="show">
   <n-tab-pane name="show" display-directive="show" label="show">
     <show-input />
   </n-tab-pane>
@@ -14,52 +14,29 @@
 ```
 
 ```js
-import { h, resolveComponent } from 'vue'
+import { h, defineComponent } from 'vue'
+import { NInput } from 'naive-ui'
 
-const showInput = {
-  data () {
-    return {
-      value: ''
-    }
-  },
+const showInput = defineComponent({
   render () {
-    return h(resolveComponent('n-input'), {
-      placeholder: '我的内容不会被重置',
-      value: this.value,
-      'onUpdate:value': (v) => {
-        this.value = v
-      }
+    return h(NInput, {
+      placeholder: '我的内容不会被重置'
     })
   }
-}
+})
 
-const ifInput = {
-  data () {
-    return {
-      value: ''
-    }
-  },
+const ifInput = defineComponent({
   render () {
-    return h(resolveComponent('n-input'), {
-      placeholder: '我的内容会被重置',
-      value: this.value,
-      'onUpdate:value': (v) => {
-        this.value = v
-      }
+    return h(NInput, {
+      placeholder: '我的内容会被重置'
     })
   }
-}
+})
 
-export default {
+export default defineComponent({
   components: {
     showInput,
     ifInput
-  },
-  data () {
-    return {
-      tab: 'show',
-      value2: ''
-    }
   }
-}
+})
 ```

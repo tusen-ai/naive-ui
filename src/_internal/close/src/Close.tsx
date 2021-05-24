@@ -20,15 +20,15 @@ export default defineComponent({
   setup (props) {
     useStyle('BaseClose', style, toRef(props, 'clsPrefix'))
     return () => {
-      const { clsPrefix } = props
+      const { clsPrefix, disabled } = props
       return (
         <NBaseIcon
           clsPrefix={clsPrefix}
           class={[
             `${clsPrefix}-base-close`,
-            props.disabled && `${clsPrefix}-base-close--disabled`
+            disabled && `${clsPrefix}-base-close--disabled`
           ]}
-          onClick={props.onClick}
+          onClick={disabled ? undefined : props.onClick}
         >
           {{
             default: () => <CloseIcon />

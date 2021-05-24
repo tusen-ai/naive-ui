@@ -1,6 +1,6 @@
-# Card
+# Card Type
 
-A example to use with card. (demo is the card)
+Set `type='card'`.
 
 ```html
 <n-tabs
@@ -8,18 +8,13 @@ A example to use with card. (demo is the card)
   type="card"
   closable
   @close="handleClose"
-  @scrollable-change="handleScrollableChange"
-  :nav-style="{
-    borderTop: 'none',
-    margin: '0 -24px',
-    padding: `4px ${tabNavScrollable ? 0 : 24}px`
-  }"
+  tab-style="min-width: 80px;"
 >
   <n-tab-pane
     v-for="panel in panels"
     :key="panel"
     :label="panel.toString()"
-    :name="panel.toString()"
+    :name="panel"
   >
     {{ panel }}
   </n-tab-pane>
@@ -32,24 +27,25 @@ import { useMessage } from 'naive-ui'
 
 export default defineComponent({
   setup () {
+    const nameRef = ref(1)
     const message = useMessage()
-    const tabNavScrollableRef = ref(false)
     const panelsRef = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
-    function handleScrollableChange (value) {
-      tabNavScrollableRef.value = value
-    }
     function handleClose (name) {
+      const { value: panels } = panelsRef
+      if (panels.length === 1) {
+        message.error('The last one!')
+        return
+      }
       message.info('Close ' + name)
-      const index = panelsRef.value.findIndex((v) => name === v.toString())
-      if (~index) {
-        panelsRef.value.splice(index, 1)
+      const index = panels.findIndex((v) => name === v)
+      panels.splice(index, 1)
+      if (nameRef.value === name) {
+        nameRef.value = panels[index]
       }
     }
     return {
       panels: panelsRef,
-      name: ref('1'),
-      tabNavScrollable: tabNavScrollableRef,
-      handleScrollableChange,
+      name: nameRef,
       handleClose
     }
   }

@@ -1,4 +1,4 @@
-import { c, cM, cB, cE } from '../../../_utils/cssr'
+import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --bezier
@@ -18,6 +18,7 @@ import { c, cM, cB, cE } from '../../../_utils/cssr'
 // --tab-border-radius
 // --tab-color
 // --tab-font-weight
+// --tab-font-weight-active
 // --tab-text-color
 // --tab-text-color-active
 export default cB('tabs', `
@@ -30,73 +31,82 @@ export default cB('tabs', `
     cB('tabs-nav', {
       width: '100%'
     }, [
-      cB('tabs-label-wrapper', {
+      cB('tabs-wrapper', {
         width: '100%'
       }, [
-        cB('tabs-label', {
+        cB('tabs-tab', {
           marginRight: 0
         })
       ])
     ])
   ]),
   cB('tabs-nav', `
-    line-height: 1.75;
+    box-sizing: border-box;
+    line-height: 1.5;
     display: flex;
-    background-clip: padding-box;
     transition: border-color .3s var(--bezier);
-    overflow: auto;
-    scrollbar-width: none;
   `, [
-    c('&::-webkit-scrollbar', `
-      width: 0;
-      height: 0;
-    `)
+    cB('tabs-nav-scroll', 'flex: 1;'),
+    cE('prefix, suffix', `
+      display: flex;
+      align-items: center;
+    `),
+    cE('prefix', 'padding-right: 16px;'),
+    cE('suffix', 'padding-left: 16px;')
   ]),
-  cB('tabs-label-wrapper', `
-    display: inline-block;
-    font-weight: var(--tab-font-weight);
+  cB('tabs-nav-scroll-content', `
+    display: flex;
+    position: relative;
+  `),
+  cB('tabs-wrapper', `
+    display: inline-flex;
     white-space: nowrap;
     position: relative;
-  `, [
-    cB('tabs-label-bar', `
-      position: absolute;
-      bottom: 2px;
-      height: 2px;
-      border-radius: 1px;
-      background-color: var(--label-bar-color);
-      transition:
-        left .2s var(--bezier),
-        max-width .2s var(--bezier),
-        background-color .3s var(--bezier);
-    `, [
-      cM('transition-disabled', {
-        transition: 'none'
-      })
-    ]),
-    cB('tabs-label', `
-      cursor: pointer;
-      white-space: nowrap;
-      flex-wrap: nowrap;
-      display: inline-flex;
-      align-items: center;
-      transition:
+  `),
+  cB('tabs-tab', `
+    cursor: pointer;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    display: inline-flex;
+    align-items: center;
+    color: var(--label-text-color);
+    font-size: var(--label-font-size-line);
+    background-clip: padding-box;
+    transition:
+      color .3s var(--bezier),
       background-color .3s var(--bezier),
       border-color .3s var(--bezier);
-    `, [
-      cM('disabled', {
-        cursor: 'not-allowed'
-      }),
-      cE('close', `
-        margin-left: 8px;
-        font-size: 16px;
-        transition: color .3s var(--bezier);
-      `),
-      cE('label', `
-        font-size: var(--label-font-size-line);
-        transition: color .3s var(--bezier);
-        color: var(--label-text-color);
-      `)
-    ])
+  `, [
+    cM('disabled', {
+      cursor: 'not-allowed'
+    }),
+    cE('close', `
+      margin-left: 8px;
+      font-size: 12px;
+      transition: color .3s var(--bezier);
+    `),
+    cE('label', `
+      display: flex;
+      align-items: center;
+    `)
+  ]),
+  cB('tabs-bar', `
+    position: absolute;
+    bottom: 2px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: var(--label-bar-color);
+    transition:
+      left .2s var(--bezier),
+      max-width .2s var(--bezier),
+      background-color .3s var(--bezier);
+  `, [
+    cM('transition-disabled', `
+      transition: none;
+    `),
+    cM('disabled', `
+      background-color: var(--label-text-color-disabled)
+    `)
   ]),
   cB('tab-panel', `
     color: var(--pane-text-color);
@@ -107,75 +117,105 @@ export default cB('tabs', `
       background-color .3s var(--bezier);
   `),
   cM('line-type', [
-    cB('tabs-label', `
+    cM('show-divider', [
+      cB('tabs-nav', [
+        cE('prefix, suffix', `
+          transition: border-color .3s var(--bezier);
+          border-bottom: 1px solid var(--tab-border-color);
+        `)
+      ]),
+      cB('tabs-nav-scroll-content', `
+        transition: border-color .3s var(--bezier);
+        border-bottom: 1px solid var(--tab-border-color);
+      `),
+      cB('tabs-bar', `
+        border-radius: 0;
+        bottom: -1px;
+      `)
+    ]),
+    cB('tabs-tab', `
+      font-weight: var(--tab-font-weight-active);
       box-sizing: border-box;
-      padding-bottom: 2px;
+      padding: 4px 0 6px;
       vertical-align: bottom;
     `, [
       c('&:not(:last-child)', {
         marginRight: '36px'
       }),
-      c('&:hover', [
-        cE('label', {
-          color: 'var(--label-text-color-hover)'
-        })
-      ]),
-      cM('active', [
-        cE('label', {
-          color: 'var(--label-text-color-active)'
-        })
-      ]),
-      cM('disabled', [
-        cE('label', {
-          color: 'var(--label-text-color-disabled)'
-        })
-      ])
+      c('&:hover', {
+        color: 'var(--label-text-color-hover)'
+      }),
+      cM('active', {
+        color: 'var(--label-text-color-active)'
+      }),
+      cM('disabled', {
+        color: 'var(--label-text-color-disabled)'
+      })
     ])
   ]),
   cM('card-type', [
-    cB('tabs-nav', `
-      box-sizing: border-box;
-      padding-top: 4px;
-      padding-bottom: 4px;
-      border-top: 1px solid var(--tab-border-color);
-      border-bottom: 1px solid var(--tab-border-color);
-    `, [
-      cB('tabs-label-bar', `
-        bottom: 0;
-        border-radius: 0;
+    cB('tabs-nav', [
+      cE('prefix, suffix', `
+        transition: border-color .3s var(--bezier);
+        border-bottom: 1px solid var(--tab-border-color);
       `)
     ]),
-    cB('tabs-label', `
-      margin-right: 4px;
+    cB('tabs-pad', `
+      flex-grow: 1;
+      transition: border-color .3s var(--bezier);
+      border-bottom: 1px solid var(--tab-border-color);
+    `),
+    cB('tabs-tab-pad', `
+      width: 4px;
+      flex-grow: 0;
+      flex-shrink: 0;
+      transition: border-color .3s var(--bezier);
+      border-bottom: 1px solid var(--tab-border-color);
+    `),
+    cB('tabs-tab-wrapper', `
+      display: flex;
+      flex-shrink: 0;
+      flex-grow: 0;
+    `, [
+      c('&:nth-last-child(2)', [
+        cB('tabs-tab-pad', 'display: none;')
+      ])
+    ]),
+    cB('tabs-tab', `
+      font-weight: var(--tab-font-weight);
+      border: 1px solid var(--tab-border-color);
+      border-top-left-radius: var(--tab-border-radius);
+      border-top-right-radius: var(--tab-border-radius);
+      background-color: var(--tab-color);
       box-sizing: border-box;
-      height: 34px;
-      line-height: 34px;
-      padding: 0 12px;
+      padding: 6px 12px;
       position: relative;
       vertical-align: bottom;
-      border-radius: var(--tab-border-radius);
-      border: 1px solid #0000;
+      display: flex;
+      justify-content: space-between;
+      font-size: var(--label-font-size-card);
+      color: var(--tab-text-color);
     `, [
-      cE('label', `
-        font-size: var(--label-font-size-card);
-        color: var(--tab-text-color);
-      `),
-      c('&:hover', {
-        backgroundColor: 'var(--tab-color)'
-      }),
-      cM('active', {
-        backgroundColor: 'var(--tab-color)',
-        border: '1px solid var(--tab-border-color-active)'
-      }, [
-        cE('label', {
-          color: 'var(--tab-text-color-active)'
-        })
+      cM('addable', `
+        padding-left: 8px;
+        padding-right: 8px;
+        font-size: 16px;
+      `, [
+        cNotM('disabled', [
+          c('&:hover', `
+            color: var(--tab-text-color-active);
+          `)
+        ])
       ]),
-      cM('disabled', [
-        cE('label', {
-          color: 'var(--label-text-color-disabled)'
-        })
-      ])
-    ])
+      cM('closable', 'padding-right: 6px;'),
+      cM('active', `
+        border-bottom: 1px solid #0000;
+        background-color: #0000;
+        font-weight: var(--tab-font-weight-active);
+        color: var(--tab-text-color-active);
+      `),
+      cM('disabled', 'color: var(--label-text-color-disabled);')
+    ]),
+    cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--tab-border-color);')
   ])
 ])

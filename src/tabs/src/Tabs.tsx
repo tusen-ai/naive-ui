@@ -7,39 +7,31 @@ import {
   provide,
   CSSProperties,
   watch,
-  nextTick,
-  toRef,
-  renderSlot
+  toRef
 } from 'vue'
 import { VResizeObserver, VXScroll } from 'vueuc'
 import { throttle } from 'lodash-es'
 import { useCompitable, onFontsReady, useMergedState } from 'vooks'
-import { NBaseClose } from '../../_internal'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, createKey, call } from '../../_utils'
+import { warn, createKey, call, flatten } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { tabsLight } from '../styles'
 import type { TabsTheme } from '../styles'
-import { TabPaneSetupProps, tabsInjectionKey } from './TabPane'
-import type { OnUpdateValueImpl } from './interface'
+import { Addable, tabsInjectionKey } from './interface'
+import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import style from './styles/index.cssr'
+import Tab from './Tab'
 
 const tabsProps = {
   ...(useTheme.props as ThemeProps<TabsTheme>),
   value: [String, Number] as PropType<string | number>,
-  defaultValue: {
-    type: [String, Number] as PropType<string | number | null>,
-    default: null
-  },
+  defaultValue: [String, Number] as PropType<string | number>,
   type: {
     type: String as PropType<'line' | 'card'>,
     default: 'line'
   },
-  closable: {
-    type: Boolean,
-    default: false
-  },
+  closable: Boolean,
   justifyContent: String as PropType<
   'space-between' | 'space-around' | 'space-evenly'
   >,
@@ -47,17 +39,16 @@ const tabsProps = {
     type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
     default: 'medium'
   },
-  navStyle: [String, Object] as PropType<string | CSSProperties>,
-  onScrollableChange: [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
-  >,
+  tabStyle: [String, Object] as PropType<string | CSSProperties>,
+  addable: [Boolean, Object] as PropType<Addable>,
+  tabsPadding: {
+    type: Number,
+    default: 0
+  },
+  showDivider: Boolean,
   // eslint-disable-next-line vue/prop-name-casing
-  'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<(value: string & number) => void>
-  >,
-  onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<(value: string & number) => void>
-  >,
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onClose: [Function, Array] as PropType<MaybeArray<() => void>>,
   // deprecated
   activeName: {
@@ -92,7 +83,7 @@ export type TabsProps = ExtractPublicPropTypes<typeof tabsProps>
 export default defineComponent({
   name: 'Tabs',
   props: tabsProps,
-  setup (props) {
+  setup (props, { slots }) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Tabs',
@@ -106,17 +97,21 @@ export default defineComponent({
     const labelWrapperRef = ref<HTMLElement | null>(null)
     const labelBarRef = ref<HTMLElement | null>(null)
 
-    const panelsRef = ref<TabPaneSetupProps[]>([])
-    const transitionDisabledRef = ref(false)
     const compitableValueRef = useCompitable(props, ['activeName', 'value'])
-    const uncontrolledValueRef = ref(props.defaultValue)
+    const uncontrolledValueRef = ref(
+      compitableValueRef.value ??
+        props.defaultValue ??
+        ((flatten((slots as any).default())[0] as any).props.name as
+          | string
+          | number)
+    )
     const mergedValueRef = useMergedState(
       compitableValueRef,
       uncontrolledValueRef
     )
 
     const labelWrapperStyleRef = computed(() => {
-      if (!props.justifyContent) return undefined
+      if (!props.justifyContent || props.type !== 'line') return undefined
       return {
         display: 'flex',
         justifyContent: props.justifyContent
@@ -124,47 +119,37 @@ export default defineComponent({
     })
 
     watch(mergedValueRef, () => {
-      updateCurrentBarPosition()
+      updateCurrentBarStyle()
     })
 
-    function addPanel (panelProps: TabPaneSetupProps): void {
-      panelsRef.value.push(panelProps)
-    }
-    function removePanel (panelProps: TabPaneSetupProps): void {
-      const index = panelsRef.value.findIndex(
-        (panel) => panel.name === panelProps.name
-      )
-      if (~index) {
-        panelsRef.value.splice(index, 1)
-      }
-    }
-    function updateBarPosition (labelEl: HTMLElement): void {
+    function updateBarStyle (labelEl: HTMLElement): void {
       if (props.type === 'card') return
       const { value: labelBarEl } = labelBarRef
       if (!labelBarEl) return
       if (labelEl) {
+        const disabledClassName = `${mergedClsPrefixRef.value}-tabs-bar--disabled`
+        if (labelEl.dataset.disabled === 'true') {
+          labelBarEl.classList.add(disabledClassName)
+        } else {
+          labelBarEl.classList.remove(disabledClassName)
+        }
         labelBarEl.style.left = `${labelEl.offsetLeft}px`
         labelBarEl.style.width = '8192px'
         labelBarEl.style.maxWidth = `${labelEl.offsetWidth + 1}px`
       }
     }
-    function updateCurrentBarPosition (): void {
+    function updateCurrentBarStyle (): void {
       if (props.type === 'card') return
       const value = mergedValueRef.value
-      for (const panel of panelsRef.value) {
-        if (panel.name === value) {
-          const labelEl = labelWrapperRef.value?.querySelector(
-            `[data-name="${panel.name}"]`
-          )
-          if (labelEl) {
-            updateBarPosition(labelEl as HTMLElement)
-          }
-          break
-        }
+      if (value === null) return
+      const labelEl = labelWrapperRef.value?.querySelector(
+        `[data-name="${value}"]`
+      )
+      if (labelEl) {
+        updateBarStyle(labelEl as HTMLElement)
       }
     }
     function handleTabClick (
-      e: MouseEvent,
       panelName: string | number,
       disabled: boolean
     ): void {
@@ -183,32 +168,44 @@ export default defineComponent({
       }
       if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, panelName)
       if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, panelName)
+      uncontrolledValueRef.value = panelName
     }
-    function handleCloseClick (e: MouseEvent, panel: TabPaneSetupProps): void {
+    function handleClose (e: MouseEvent, panelName: string | number): void {
       const { onClose } = props
-      if (onClose) call(onClose, panel.name)
+      if (onClose) call(onClose, panelName)
       e.stopPropagation()
     }
+
+    let firstTimeUpdatePosition = true
     const handleNavResize = throttle(function handleNavResize () {
-      if (props.type === 'card') {
-        // do nothing
-      } else if (props.type === 'line') {
-        transitionDisabledRef.value = true
-        void nextTick(() => {
-          updateCurrentBarPosition()
-          transitionDisabledRef.value = false
-        })
+      const { type } = props
+      if (
+        type === 'line' &&
+        (firstTimeUpdatePosition || props.justifyContent)
+      ) {
+        const { value: labelBarEl } = labelBarRef
+        if (!labelBarEl) return
+        if (!firstTimeUpdatePosition) firstTimeUpdatePosition = false
+        const disableTransitionClassName = `${mergedClsPrefixRef.value}-tabs-bar--transition-disabled`
+        labelBarEl.classList.add(disableTransitionClassName)
+        updateCurrentBarStyle()
+        labelBarEl.classList.remove(disableTransitionClassName)
       }
     }, 64)
+
+    function handleAdd (): void {}
     provide(tabsInjectionKey, {
+      tabStyleRef: toRef(props, 'tabStyle'),
       mergedClsPrefixRef,
       typeRef: toRef(props, 'type'),
+      closableRef: toRef(props, 'closable'),
       valueRef: mergedValueRef,
-      removePanel,
-      addPanel
+      handleTabClick,
+      handleClose,
+      handleAdd
     })
     onFontsReady(() => {
-      updateCurrentBarPosition()
+      updateCurrentBarStyle()
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -216,11 +213,7 @@ export default defineComponent({
       labelWrapperRef,
       labelBarRef,
       labelWrapperStyle: labelWrapperStyleRef,
-      panels: panelsRef,
-      transitionDisabled: transitionDisabledRef,
-      handleTabClick,
       handleNavResize,
-      handleCloseClick,
       cssVars: computed(() => {
         const { labelSize } = props
         const {
@@ -242,6 +235,7 @@ export default defineComponent({
             tabFontWeight,
             tabBorderRadius,
             labelFontSizeCard,
+            tabFontWeightActive,
             [createKey('labelFontSizeLine', labelSize)]: labelFontSizeLine
           },
           common: { cubicBezierEaseInOut }
@@ -264,6 +258,7 @@ export default defineComponent({
           '--close-color-pressed': closeColorPressed,
           '--tab-color': tabColor,
           '--tab-font-weight': tabFontWeight,
+          '--tab-font-weight-active': tabFontWeightActive,
           '--tab-text-color': tabTextColor,
           '--tab-text-color-active': tabTextColorActive
         }
@@ -271,82 +266,90 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const {
+      mergedClsPrefix,
+      type,
+      $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot }
+    } = this
+    const children = defaultSlot ? flatten(defaultSlot()) : []
+    const prefix = prefixSlot ? prefixSlot() : null
+    const suffix = suffixSlot ? suffixSlot() : null
+    const isLine = type === 'line'
+    const mergedShowDivider = isLine && this.showDivider
+    const mregedJustifyContent = isLine && this.justifyContent
     return (
       <div
         class={[
           `${mergedClsPrefix}-tabs`,
-          `${mergedClsPrefix}-tabs--${this.type}-type`,
+          `${mergedClsPrefix}-tabs--${type}-type`,
           `${mergedClsPrefix}-tabs--${this.labelSize}-size`,
-          this.justifyContent && `${mergedClsPrefix}-tabs--flex`
+          mergedShowDivider && `${mergedClsPrefix}-tabs--show-divider`,
+          mregedJustifyContent && `${mergedClsPrefix}-tabs--flex`
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <VResizeObserver onResize={this.handleNavResize}>
-          {{
-            default: () => (
-              <VXScroll
-                class={`${mergedClsPrefix}-tabs-nav`}
-                style={this.navStyle}
-              >
-                {{
-                  default: () => (
-                    <div
-                      ref="labelWrapperRef"
-                      class={`${mergedClsPrefix}-tabs-label-wrapper`}
-                    >
-                      <div style={this.labelWrapperStyle}>
-                        {this.panels.map((panel, i) => (
-                          <div
-                            key={i}
-                            data-name={panel.name}
-                            class={[
-                              `${mergedClsPrefix}-tabs-label`,
-                              {
-                                [`${mergedClsPrefix}-tabs-label--active`]:
-                                  this.mergedValue === panel.name,
-                                [`${mergedClsPrefix}-tabs-label--disabled`]: panel.disabled
-                              }
-                            ]}
-                            onClick={(e) =>
-                              this.handleTabClick(e, panel.name, panel.disabled)
-                            }
-                          >
-                            <span
-                              class={`${mergedClsPrefix}-tabs-label__label`}
-                            >
-                              {panel.label}
-                            </span>
-                            {this.closable && this.type === 'card' ? (
-                              <NBaseClose
-                                clsPrefix={mergedClsPrefix}
-                                class={`${mergedClsPrefix}-tabs-label__close`}
-                                onClick={(e) => this.handleCloseClick(e, panel)}
-                              />
-                            ) : null}
-                          </div>
-                        ))}
-                      </div>
-                      {this.type === 'line' ? (
+        <div class={`${mergedClsPrefix}-tabs-nav`}>
+          {prefix ? (
+            <div class={`${mergedClsPrefix}-tabs-nav__prefix`}>{prefix}</div>
+          ) : null}
+          <VResizeObserver onResize={this.handleNavResize}>
+            {{
+              default: () => (
+                <VXScroll class={`${mergedClsPrefix}-tabs-nav-scroll`}>
+                  {{
+                    default: () => (
+                      <div
+                        ref="labelWrapperRef"
+                        class={`${mergedClsPrefix}-tabs-nav-scroll-content`}
+                      >
                         <div
-                          ref="labelBarRef"
-                          class={[
-                            `${mergedClsPrefix}-tabs-label-bar`,
-                            {
-                              [`${mergedClsPrefix}-tabs-label-bar--transition-disabled`]: this
-                                .transitionDisabled
-                            }
-                          ]}
-                        />
-                      ) : null}
-                    </div>
-                  )
-                }}
-              </VXScroll>
-            )
-          }}
-        </VResizeObserver>
-        {renderSlot(this.$slots, 'default')}
+                          style={this.labelWrapperStyle}
+                          class={`${mergedClsPrefix}-tabs-wrapper`}
+                        >
+                          <div
+                            class={`${mergedClsPrefix}-tabs-scroll-padding`}
+                            style={{ width: `${this.tabsPadding}px` }}
+                          />
+                          {children.map((tabPaneVNode: any) => {
+                            return <Tab {...tabPaneVNode.props} />
+                          })}
+                          {this.addable && !isLine ? (
+                            <Tab
+                              key="__addable"
+                              name="__addable"
+                              addable
+                              disabled={
+                                typeof this.addable === 'object' &&
+                                this.addable.disabled
+                              }
+                            />
+                          ) : null}
+                          <div
+                            class={`${mergedClsPrefix}-tabs-scroll-padding`}
+                            style={{ width: `${this.tabsPadding}px` }}
+                          />
+                        </div>
+                        {isLine ? null : (
+                          <div class={`${mergedClsPrefix}-tabs-pad`} />
+                        )}
+                        {isLine ? (
+                          <div
+                            ref="labelBarRef"
+                            class={`${mergedClsPrefix}-tabs-bar`}
+                          />
+                        ) : null}
+                      </div>
+                    )
+                  }}
+                </VXScroll>
+              )
+            }}
+          </VResizeObserver>
+          {suffix ? (
+            <div class={`${mergedClsPrefix}-tabs-nav__suffix`}>{suffix}</div>
+          ) : null}
+        </div>
+        {children}
       </div>
     )
   }

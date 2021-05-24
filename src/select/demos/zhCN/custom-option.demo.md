@@ -7,13 +7,14 @@
 ```
 
 ```js
-import { resolveComponent, h } from 'vue'
+import { h } from 'vue'
+import { NIcon } from 'naive-ui'
 import { MdMusicalNote as MusicIcon } from '@vicons/ionicons4'
 
 function render (option, selected) {
   return [
     h(
-      resolveComponent('n-icon'),
+      NIcon,
       {
         style: {
           verticalAlign: 'middle',

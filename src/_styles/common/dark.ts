@@ -32,7 +32,7 @@ const base = {
   alphaDivider: '0.09',
   alphaInput: '0.1',
   alphaAction: '0.06',
-  alphaTab: '0.1',
+  alphaTab: '0.06',
   alphaScrollbar: '0.2',
   alphaScrollbarHover: '0.3',
   alphaCode: '0.12',

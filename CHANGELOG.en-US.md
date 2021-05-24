@@ -14,6 +14,11 @@
 - `n-tree` support drag & drop.
 - `n-menu` add `inverted` prop.
 - `n-dropdown` add `inverted` prop.
+- `n-tabs` add `addable` prop.
+- `n-tabs` add `show-divider` prop.
+- `n-tabs` add `tab-style` prop.
+- `n-tabs` add `tabs-padding` prop.
+- `n-tabs` add `default-value` prop.
 
 ### Fixes
 

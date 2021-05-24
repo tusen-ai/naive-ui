@@ -14,6 +14,11 @@
 - `n-tree` 支持拖放
 - `n-menu` 新增 `inverted` 属性
 - `n-dropdown` 新增 `inverted` 属性
+- `n-tabs` 新增 `addable` 属性
+- `n-tabs` 新增 `show-divider` 属性
+- `n-tabs` 新增 `tab-style` 属性
+- `n-tabs` 新增 `tabs-padding` 属性
+- `n-tabs` 新增 `default-value` 属性
 
 ### Fixes
 

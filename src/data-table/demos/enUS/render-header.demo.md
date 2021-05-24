@@ -10,19 +10,14 @@
 ```
 
 ```js
-import { h, resolveComponent } from 'vue'
+import { h } from 'vue'
+import { NTooltip, NGradientText } from 'naive-ui'
 
 const renderTooltip = (trigger, content) => {
-  return h(
-    resolveComponent('n-tooltip'),
-    {
-      showArrow: true
-    },
-    {
-      trigger: () => trigger,
-      default: () => content
-    }
-  )
+  return h(NTooltip, null, {
+    trigger: () => trigger,
+    default: () => content
+  })
 }
 
 const createColumns = (instance) => {
@@ -32,7 +27,7 @@ const createColumns = (instance) => {
       title (column) {
         return renderTooltip(
           h(
-            resolveComponent('n-gradient-text'),
+            NGradientText,
             {
               size: 24,
               type: 'danger'
@@ -47,7 +42,7 @@ const createColumns = (instance) => {
       key: 'age',
       title (column) {
         return h(
-          resolveComponent('n-gradient-text'),
+          NGradientText,
           {
             size: '20',
             type: 'info'
@@ -60,7 +55,7 @@ const createColumns = (instance) => {
       key: 'address',
       title (column) {
         return h(
-          resolveComponent('n-gradient-text'),
+          NGradientText,
           {
             size: '16',
             type: 'warning'

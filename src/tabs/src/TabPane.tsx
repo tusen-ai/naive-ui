@@ -3,58 +3,41 @@ import {
   withDirectives,
   vShow,
   defineComponent,
-  ExtractPropTypes,
   inject,
-  onBeforeUnmount,
-  PropType,
-  InjectionKey,
-  Ref
+  PropType
 } from 'vue'
-import { getSlot, throwError } from '../../_utils'
+import { throwError } from '../../_utils'
+import { tabsInjectionKey } from './interface'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
-const tabPaneProps = {
+export const tabPaneProps = {
   label: [String, Number] as PropType<string | number>,
   name: {
     type: [String, Number] as PropType<string | number>,
     required: true
   },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  disabled: Boolean,
   displayDirective: {
     type: String as PropType<'if' | 'show'>,
     default: 'if'
+  },
+  closable: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   }
 } as const
 
-export type TabPaneSetupProps = ExtractPropTypes<typeof tabPaneProps>
 export type TabPaneProps = ExtractPublicPropTypes<typeof tabPaneProps>
-
-export interface TabsInjection {
-  mergedClsPrefixRef: Ref<string>
-  valueRef: Ref<string | number | null>
-  typeRef: Ref<'line' | 'card'>
-  addPanel: (props: TabPaneSetupProps) => void
-  removePanel: (props: TabPaneSetupProps) => void
-}
-
-export const tabsInjectionKey: InjectionKey<TabsInjection> = Symbol('tabs')
 
 export default defineComponent({
   name: 'TabPane',
   alias: ['TabPanel'],
   props: tabPaneProps,
-  setup (props) {
+  setup () {
     const NTab = inject(tabsInjectionKey, null)
     if (!NTab) {
       throwError('tab-pane', '`n-tab-pane` must be placed inside `n-tabs`.')
     }
-    NTab.addPanel(props)
-    onBeforeUnmount(() => {
-      NTab.removePanel(props)
-    })
     return {
       mergedClsPrefix: NTab.mergedClsPrefixRef,
       type: NTab.typeRef,
@@ -62,18 +45,14 @@ export default defineComponent({
     }
   },
   render () {
+    const { name } = this
     const useVShow = this.displayDirective === 'show'
-    const show = this.value === this.name
+    const show = this.value === name
     return useVShow || show
       ? withDirectives(
-        h(
-          'div',
-          {
-            class: `${this.mergedClsPrefix}-tab-panel`,
-            key: this.name
-          },
-          getSlot(this)
-        ),
+        <div class={`${this.mergedClsPrefix}-tab-panel`} key={name}>
+          {this.$slots}
+        </div>,
         [[vShow, !useVShow || show]]
       )
       : null

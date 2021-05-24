@@ -1,15 +1,21 @@
 # Flex Labels
 
+Only works with `line` typed tabs.
+
 ```html
 <n-card title="Song of" style="margin-bottom: 16px;">
-  <n-tabs v-model:value="name" justify-content="space-evenly">
-    <n-tab-pane name="oasis" label="Oasis"> Wonderwall </n-tab-pane>
-    <n-tab-pane name="the beatles" label="the Beatles"> Hey Jude </n-tab-pane>
-    <n-tab-pane name="jay chou" label="Jay Chou"> Qilixiang </n-tab-pane>
+  <n-tabs default-value="oasis" justify-content="space-evenly">
+    <n-tab-pane name="oasis" label="Oasis">Wonderwall</n-tab-pane>
+    <n-tab-pane name="the beatles" label="the Beatles">Hey Jude</n-tab-pane>
+    <n-tab-pane name="jay chou" label="Jay Chou">Qilixiang</n-tab-pane>
   </n-tabs>
 </n-card>
 <n-card title="Too Simple">
-  <n-tabs v-model:value="func" label-size="large">
+  <n-tabs
+    default-value="signin"
+    label-size="large"
+    justify-content="space-evenly"
+  >
     <n-tab-pane name="signin" label="Sign in">
       <n-form>
         <n-form-item-row label="Username">
@@ -37,15 +43,4 @@
     </n-tab-pane>
   </n-tabs>
 </n-card>
-```
-
-```js
-export default {
-  data () {
-    return {
-      name: 'oasis',
-      func: 'signin'
-    }
-  }
-}
 ```

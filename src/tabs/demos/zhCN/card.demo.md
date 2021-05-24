@@ -1,6 +1,6 @@
-# 和卡片一起使用
+# 卡片类型
 
-一个和卡片一起使用的例子（例子本身是卡片）。
+设定 `type='card'`。
 
 ```html
 <n-tabs
@@ -8,18 +8,13 @@
   type="card"
   closable
   @close="handleClose"
-  @scrollable-change="handleScrollableChange"
-  :nav-style="{
-    borderTop: 'none',
-    margin: '0 -24px',
-    padding: `4px ${tabNavScrollable ? 0 : 24}px`
-  }"
+  tab-style="min-width: 80px;"
 >
   <n-tab-pane
     v-for="panel in panels"
     :key="panel"
     :label="panel.toString()"
-    :name="panel.toString()"
+    :name="panel"
   >
     {{ panel }}
   </n-tab-pane>
@@ -32,24 +27,25 @@ import { useMessage } from 'naive-ui'
 
 export default defineComponent({
   setup () {
+    const nameRef = ref(1)
     const message = useMessage()
-    const tabNavScrollableRef = ref(false)
     const panelsRef = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
-    function handleScrollableChange (value) {
-      tabNavScrollableRef.value = value
-    }
     function handleClose (name) {
-      message.info('Close ' + name)
-      const index = panelsRef.value.findIndex((v) => name === v.toString())
-      if (~index) {
-        panelsRef.value.splice(index, 1)
+      const { value: panels } = panelsRef
+      if (panels.length === 1) {
+        message.error('最后一个了')
+        return
+      }
+      message.info('关掉 ' + name)
+      const index = panels.findIndex((v) => name === v)
+      panels.splice(index, 1)
+      if (nameRef.value === name) {
+        nameRef.value = panels[index]
       }
     }
     return {
       panels: panelsRef,
-      name: ref('1'),
-      tabNavScrollable: tabNavScrollableRef,
-      handleScrollableChange,
+      name: nameRef,
       handleClose
     }
   }

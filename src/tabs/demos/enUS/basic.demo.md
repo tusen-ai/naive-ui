@@ -2,14 +2,14 @@
 
 ```html
 <n-card title="Song of" style="margin-bottom: 16px;">
-  <n-tabs v-model:value="name">
-    <n-tab-pane name="oasis" label="Oasis"> Wonderwall </n-tab-pane>
-    <n-tab-pane name="the beatles" label="the Beatles"> Hey Jude </n-tab-pane>
-    <n-tab-pane name="jay chou" label="Jay Chou"> Qilixiang </n-tab-pane>
+  <n-tabs show-divider>
+    <n-tab-pane name="oasis" label="Oasis">Wonderwall</n-tab-pane>
+    <n-tab-pane name="the beatles" label="the Beatles">Hey Jude</n-tab-pane>
+    <n-tab-pane name="jay chou" label="Jay Chou">Qilixiang</n-tab-pane>
   </n-tabs>
 </n-card>
 <n-card>
-  <n-tabs v-model:value="func" label-size="large">
+  <n-tabs default-value="signin" label-size="large">
     <n-tab-pane name="signin" label="Sign in">
       <n-form>
         <n-form-item-row label="Username">
@@ -37,15 +37,4 @@
     </n-tab-pane>
   </n-tabs>
 </n-card>
-```
-
-```js
-export default {
-  data () {
-    return {
-      name: 'oasis',
-      func: 'signin'
-    }
-  }
-}
 ```

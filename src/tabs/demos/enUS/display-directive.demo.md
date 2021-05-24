@@ -3,7 +3,7 @@
 You can set tab-panel's display directive to `if` or `show`. When use show, the tab-panel's content won't be reset after tab changes.
 
 ```html
-<n-tabs v-model:value="tab">
+<n-tabs default-value="show">
   <n-tab-pane name="show" display-directive="show" label="show">
     <show-input />
   </n-tab-pane>
@@ -14,52 +14,29 @@ You can set tab-panel's display directive to `if` or `show`. When use show, the 
 ```
 
 ```js
-import { h, resolveComponent } from 'vue'
+import { h, defineComponent } from 'vue'
+import { NInput } from 'naive-ui'
 
-const showInput = {
-  data () {
-    return {
-      value: ''
-    }
-  },
+const showInput = defineComponent({
   render () {
-    return h(resolveComponent('n-input'), {
-      placeholder: "My content won't be reset",
-      value: this.value,
-      'onUpdate:value': (v) => {
-        this.value = v
-      }
+    return h(NInput, {
+      placeholder: "My content won't be reset"
     })
   }
-}
+})
 
-const ifInput = {
-  data () {
-    return {
-      value: ''
-    }
-  },
+const ifInput = defineComponent({
   render () {
-    return h(resolveComponent('n-input'), {
-      placeholder: "My content won't be reset",
-      value: this.value,
-      'onUpdate:value': (v) => {
-        this.value = v
-      }
+    return h(NInput, {
+      placeholder: 'My content will be reset'
     })
   }
-}
+})
 
-export default {
+export default defineComponent({
   components: {
     showInput,
     ifInput
-  },
-  data () {
-    return {
-      tab: 'show',
-      value2: ''
-    }
   }
-}
+})
 ```
