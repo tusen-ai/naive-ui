@@ -1,5 +1,7 @@
 # Cascade Check
 
+Set `cascade` to use cascade check.
+
 ```html
 <n-tree
   block-line

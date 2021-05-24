@@ -9,11 +9,11 @@ What's more, not only biology, I forget balanced tree everytime after I revise i
 ```demo
 basic
 cascade
-async
 multiple
 filter
-virtual
 drag-drop
+virtual
+async
 ```
 
 ## Props
@@ -23,7 +23,7 @@ drag-drop
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | A function that prohibit dropping inside leaf node. | Whether to allow dropping. |
 | block-line | `boolean` | `false` |  |
 | block-node | `boolean` | `false` |  |
-| cancelable | `boolean` | `false` | Whether node's select status can be cancelled. |
+| cancelable | `boolean` | `true` | Whether node's select status can be cancelled. |
 | cascade | `boolean` | `false` | Whether to cascade checkboxes. |
 | checkable | `boolean` | `false` |  |
 | checked-keys | `Array<string \| number>` | `undefined` | If set, checked status will work in controlled manner. |

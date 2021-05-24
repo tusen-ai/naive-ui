@@ -58,7 +58,10 @@ const treeProps = {
     type: Boolean,
     default: true
   },
-  cancelable: Boolean,
+  cancelable: {
+    type: Boolean,
+    default: true
+  },
   checkable: Boolean,
   draggable: Boolean,
   blockNode: Boolean,
@@ -408,7 +411,7 @@ export default defineComponent({
       if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, value)
       if (onCheckedKeysChange) call(onCheckedKeysChange, value)
     }
-    function doSelectedKeysChange (value: Key[]): void {
+    function doUpdateSelectedKeys (value: Key[]): void {
       const {
         'onUpdate:selectedKeys': onUpdateSelectedKeys,
         onSelectedKeysChange
@@ -504,15 +507,15 @@ export default defineComponent({
         } else if (!~index) {
           selectedKeys.push(node.key)
         }
-        doSelectedKeysChange(selectedKeys)
+        doUpdateSelectedKeys(selectedKeys)
       } else {
         const selectedKeys = mergedSelectedKeysRef.value
         if (selectedKeys.includes(node.key)) {
           if (props.cancelable) {
-            doSelectedKeysChange([])
+            doUpdateSelectedKeys([])
           }
         } else {
-          doSelectedKeysChange([node.key])
+          doUpdateSelectedKeys([node.key])
         }
       }
     }

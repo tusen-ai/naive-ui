@@ -1,3 +1,4 @@
+import { changeColor } from 'seemly'
 import { checkboxDark } from '../../checkbox/styles'
 import { scrollbarDark } from '../../scrollbar/styles'
 import { commonDark } from '../../_styles/common'
@@ -11,7 +12,12 @@ const treeDark: TreeTheme = {
     Checkbox: checkboxDark,
     Scrollbar: scrollbarDark
   },
-  self
+  self (vars) {
+    const { primaryColor } = vars
+    const commonSelf = self(vars)
+    commonSelf.nodeColorActive = changeColor(primaryColor, { alpha: 0.15 })
+    return commonSelf
+  }
 }
 
 export default treeDark

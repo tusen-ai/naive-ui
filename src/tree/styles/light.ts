@@ -1,3 +1,4 @@
+import { changeColor } from 'seemly'
 import { checkboxLight } from '../../checkbox/styles'
 import { scrollbarLight } from '../../scrollbar/styles'
 import { commonLight } from '../../_styles/common'
@@ -20,7 +21,7 @@ export const self = (vars: ThemeCommonVars) => {
     nodeBorderRadius: borderRadiusSmall,
     nodeColorHover: hoverColor,
     nodeColorPressed: pressedColor,
-    nodeColorActive: hoverColor,
+    nodeColorActive: changeColor(primaryColor, { alpha: 0.1 }),
     arrowColor: textColor3,
     nodeTextColor: textColor2,
     nodeTextColorDisabled: textColorDisabled,

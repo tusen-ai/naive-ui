@@ -9,11 +9,11 @@
 ```demo
 basic
 cascade
-async
 multiple
 filter
-virtual
 drag-drop
+virtual
+async
 ```
 
 ## Props
@@ -23,7 +23,7 @@ drag-drop
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | 一个不允许 drop 在叶节点内部的函数 | 是否允许 drop |
 | block-line | `boolean` | `false` |  |
 | block-node | `boolean` | `false` |  |
-| cancelable | `boolean` | `false` | 选中之后是否允许取消 |
+| cancelable | `boolean` | `true` | 选中之后是否允许取消 |
 | cascade | `boolean` | `false` | 是否关联选项 |
 | checkable | `boolean` | `false` |  |
 | checked-keys | `Array<string \| number>` | `undefined` | 如果设定则 checked 状态受控 |

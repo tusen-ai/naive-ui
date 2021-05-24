@@ -1,5 +1,7 @@
 # 级联选择
 
+设定 `cascade` 进行级联选择。
+
 ```html
 <n-tree
   block-line
