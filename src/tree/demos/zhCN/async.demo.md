@@ -100,7 +100,6 @@ export default {
               isLeaf: false
             }
           ]
-          this.data = Array.from(this.data)
           resolve()
         }, 1000)
       })

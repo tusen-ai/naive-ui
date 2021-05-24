@@ -9,18 +9,9 @@ export default defineComponent({
       type: String,
       required: true
     },
-    expanded: {
-      type: Boolean,
-      default: false
-    },
-    hide: {
-      type: Boolean,
-      default: false
-    },
-    loading: {
-      type: Boolean,
-      default: false
-    },
+    expanded: Boolean,
+    hide: Boolean,
+    loading: Boolean,
     onClick: Function as PropType<(e: MouseEvent) => void>
   },
   render () {

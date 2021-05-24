@@ -14,7 +14,6 @@ import {
 import { createTreeMate, flatten, createIndexGetter } from 'treemate'
 import { useMergedState } from 'vooks'
 import { VirtualListInst, VVirtualList } from 'vueuc'
-import { sleep } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, warn } from '../../_utils'
@@ -268,10 +267,17 @@ export default defineComponent({
       return droppingNode.parent
     })
 
-    watch(toRef(props, 'data'), () => {
-      loadingKeysRef.value = []
-      resetDndState()
-    })
+    // shallow watch data
+    watch(
+      toRef(props, 'data'),
+      () => {
+        loadingKeysRef.value = []
+        resetDndState()
+      },
+      {
+        deep: false
+      }
+    )
     watch(toRef(props, 'pattern'), (value) => {
       if (value) {
         const [expandedKeysAfterChange, highlightKeys] = keysWithFilter(
@@ -531,29 +537,31 @@ export default defineComponent({
         nodeKeyToBeExpanded = null
       }
       if (!node.shallowLoaded) {
-        if (props.onLoad) {
-          if (!loadingKeysRef.value.includes(node.key)) {
-            loadingKeysRef.value.push(node.key)
-          } else {
-            Promise.all([props.onLoad(node.rawNode), sleep(1000)])
-              .then(() => {
-                loadingKeysRef.value.splice(
-                  loadingKeysRef.value.findIndex((key) => key === node.key),
-                  1
-                )
-                expand()
-              })
-              .catch(([loadError, _]) => {
-                console.error(loadError)
-                resetDragExpandState()
-              })
+        expandTimerId = window.setTimeout(() => {
+          const { onLoad } = props
+          if (onLoad) {
+            if (!loadingKeysRef.value.includes(node.key)) {
+              loadingKeysRef.value.push(node.key)
+              onLoad(node.rawNode)
+                .then(() => {
+                  loadingKeysRef.value.splice(
+                    loadingKeysRef.value.findIndex((key) => key === node.key),
+                    1
+                  )
+                  expand()
+                })
+                .catch((loadError) => {
+                  console.error(loadError)
+                  resetDragExpandState()
+                })
+            }
+          } else if (__DEV__) {
+            warn(
+              'tree',
+              'There is unloaded node in data but props.onLoad is not specified.'
+            )
           }
-        } else if (__DEV__) {
-          warn(
-            'tree',
-            'There is unloaded node in data but props.onLoad is not specified.'
-          )
-        }
+        }, 1000)
       } else {
         expandTimerId = window.setTimeout(() => {
           expand()
@@ -755,28 +763,38 @@ export default defineComponent({
         return
       }
 
-      if (
-        nodeKeyToBeExpanded !== finalDropNode.key ||
-        (nodeKeyToBeExpanded === null &&
-          finalDropNode.key === draggingNode.key) ||
-        (nodeKeyToBeExpanded !== null &&
-          nodeKeyToBeExpanded === draggingNode.key)
-      ) {
-        if (finalDropPosition === 'inside') {
-          if (props.expandOnDragenter) {
-            expandDragEnterNode(finalDropNode)
-          }
-          // Bailout 4
-          if (!finalDropNode.shallowLoaded) {
-            resetDndState()
-            return
+      if (draggingNode.key === finalDropNode.key) {
+        // don't expand when drag on itself
+        resetDragExpandState()
+      } else {
+        if (nodeKeyToBeExpanded !== finalDropNode.key) {
+          if (finalDropPosition === 'inside') {
+            if (props.expandOnDragenter) {
+              expandDragEnterNode(finalDropNode)
+              // Bailout 4
+              // not try to loading
+              if (
+                !finalDropNode.shallowLoaded &&
+                nodeKeyToBeExpanded !== finalDropNode.key
+              ) {
+                resetDndState()
+                return
+              }
+            } else {
+              // Bailout 5
+              // never expands on drag
+              if (!finalDropNode.shallowLoaded) {
+                resetDndState()
+                return
+              }
+            }
+          } else {
+            resetDragExpandState()
           }
         } else {
-          resetDragExpandState()
-        }
-      } else {
-        if (finalDropPosition !== 'inside') {
-          resetDragExpandState()
+          if (finalDropPosition !== 'inside') {
+            resetDragExpandState()
+          }
         }
       }
       droppingPositionRef.value = finalDropPosition
