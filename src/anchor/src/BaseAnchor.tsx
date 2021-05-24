@@ -15,7 +15,7 @@ import { getScrollParent, unwrapElement } from 'seemly'
 import { onFontsReady } from 'vooks'
 import { warn, keysOf } from '../../_utils'
 import { anchorInjectionKey } from './Link'
-import { throttle } from 'lodash'
+import { throttle } from 'lodash-es'
 
 export interface BaseAnchorInst {
   setActiveHref: (href: string) => void
