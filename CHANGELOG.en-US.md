@@ -12,6 +12,7 @@
 - `n-data-table` add `table-layout` prop.
 - `n-tree` add `block-line` prop.
 - `n-tree` support drag & drop.
+- `n-menu` add `inverted` prop.
 
 ### Fixes
 

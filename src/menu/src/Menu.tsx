@@ -61,18 +61,12 @@ const menuProps = {
     type: Number,
     default: 24
   },
-  rootIndent: {
-    type: Number,
-    default: undefined
-  },
+  rootIndent: Number,
   indent: {
     type: Number,
     default: 32
   },
-  defaultExpandAll: {
-    type: Boolean,
-    default: false
-  },
+  defaultExpandAll: Boolean,
   defaultExpandedKeys: {
     type: Array as PropType<Key[]>,
     default: () => []
@@ -90,10 +84,8 @@ const menuProps = {
     type: String as PropType<'vertical' | 'horizontal'>,
     default: 'vertical'
   },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  disabled: Boolean,
+  inverted: Boolean,
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:expandedKeys': [Function, Array] as PropType<
   MaybeArray<OnUpdateKeys>
@@ -272,43 +264,64 @@ export default defineComponent({
       tmNodes: tmNodesRef,
       mergedTheme: themeRef,
       cssVars: computed(() => {
+        const { inverted } = props
         const {
           common: { cubicBezierEaseInOut },
-          self: {
-            borderRadius,
-            groupTextColor,
-            itemColorActive,
-            itemTextColor,
-            itemTextColorHover,
-            itemTextColorChildActive,
-            itemTextColorActive,
-            itemIconColor,
-            itemIconColorHover,
-            itemIconColorActive,
-            itemIconColorChildActive,
-            itemIconColorCollapsed,
-            borderColorHorizontal,
-            arrowColor,
-            fontSize
-          }
+          self
         } = themeRef.value
+        const { borderRadius, borderColorHorizontal, fontSize } = self
         return {
-          '--group-text-color': groupTextColor,
           '--bezier': cubicBezierEaseInOut,
-          '--item-text-color': itemTextColor,
           '--font-size': fontSize,
           '--border-color-horizontal': borderColorHorizontal,
           '--border-radius': borderRadius,
-          '--arrow-color': arrowColor,
-          '--item-icon-color': itemIconColor,
-          '--item-text-color-hover': itemTextColorHover,
-          '--item-icon-color-hover': itemIconColorHover,
-          '--item-text-color-active': itemTextColorActive,
-          '--item-icon-color-active': itemIconColorActive,
-          '--item-icon-color-collapsed': itemIconColorCollapsed,
-          '--item-color-active': itemColorActive,
-          '--item-text-color-child-active': itemTextColorChildActive,
-          '--item-icon-color-child-active': itemIconColorChildActive
+          '--group-text-color': inverted
+            ? self.groupTextColorInverted
+            : self.groupTextColor,
+          '--color': inverted ? self.colorInverted : self.color,
+          '--item-text-color': inverted
+            ? self.itemTextColorInverted
+            : self.itemTextColor,
+          '--arrow-color': inverted ? self.arrowColorInverted : self.arrowColor,
+          '--arrow-color-hover': inverted
+            ? self.arrowColorHoverInverted
+            : self.arrowColorHover,
+          '--arrow-color-active': inverted
+            ? self.arrowColorActiveInverted
+            : self.arrowColorActive,
+          '--arrow-color-child-active': inverted
+            ? self.arrowColorChildActiveInverted
+            : self.arrowColorChildActive,
+          '--item-icon-color': inverted
+            ? self.itemIconColorInverted
+            : self.itemIconColor,
+          '--item-text-color-hover': inverted
+            ? self.itemTextColorHoverInverted
+            : self.itemTextColorHover,
+          '--item-icon-color-hover': inverted
+            ? self.itemIconColorHoverInverted
+            : self.itemIconColorHover,
+          '--item-text-color-active': inverted
+            ? self.itemTextColorActiveInverted
+            : self.itemTextColorActive,
+          '--item-icon-color-active': inverted
+            ? self.itemIconColorActiveInverted
+            : self.itemIconColorActive,
+          '--item-icon-color-collapsed': inverted
+            ? self.itemIconColorCollapsedInverted
+            : self.itemIconColorCollapsed,
+          '--item-color-active': inverted
+            ? self.itemColorActiveInverted
+            : self.itemColorActive,
+          '--item-color-active-collapsed': inverted
+            ? self.itemColorActiveCollapsedInverted
+            : self.itemColorActiveCollapsed,
+          '--item-text-color-child-active': inverted
+            ? self.itemTextColorChildActiveInverted
+            : self.itemTextColorChildActive,
+          '--item-icon-color-child-active': inverted
+            ? self.itemIconColorChildActiveInverted
+            : self.itemIconColorChildActive
         }
       })
     }

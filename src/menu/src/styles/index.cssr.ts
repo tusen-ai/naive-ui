@@ -3,31 +3,37 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
 // vars:
+// --color
 // --group-text-color
 // --bezier
 // --font-size
 // --border-color-horizontal
 // --border-radius
-// --arrow-color
 // --item-color-active
+// --item-color-active-collapsed
+// --arrow-color
+// --arrow-color-hover
+// --arrow-color-active
+// --arrow-color-child-active
 // --item-text-color
-// --item-icon-color
 // --item-text-color-hover
-// --item-icon-color-hover
 // --item-text-color-active
+// --item-text-color-child-active
+// --item-icon-color
+// --item-icon-color-hover
 // --item-icon-color-active
 // --item-icon-color-collapsed
-// --item-text-color-child-active
 // --item-icon-color-child-active
-export default cB('menu', {
-  color: 'var(--item-text-color)',
-  overflow: 'hidden',
-  transition: 'background-color .3s var(--bezier)',
-  width: '100%',
-  boxSizing: 'border-box',
-  fontSize: 'var(--font-size)',
-  paddingBottom: '6px'
-}, [
+export default cB('menu', `
+  background-color: var(--color);
+  color: var(--item-text-color);
+  overflow: hidden;
+  transition: background-color .3s var(--bezier);
+  width: 100%;
+  box-sizing: border-box;
+  font-size: var(--font-size);
+  padding-bottom: 6px;
+`, [
   cM('horizontal', {
     display: 'flex',
     paddingBottom: 0
@@ -38,7 +44,7 @@ export default cB('menu', {
     cB('menu-item', {
       margin: 0
     }, [
-      c('&::after', {
+      c('&::before', {
         backgroundColor: '#0000 !important'
       }),
       cM('selected', [
@@ -67,9 +73,11 @@ export default cB('menu', {
   ),
   cM('collapsed', [
     cB('menu-item', [
-      c('&::after', {
-        backgroundColor: '#0000 !important'
-      })
+      cM('selected', [
+        c('&::before', {
+          backgroundColor: 'var(--item-color-active-collapsed) !important'
+        })
+      ])
     ]),
     cB('menu-item-content', [
       cB('menu-item-content-header', {
@@ -89,7 +97,8 @@ export default cB('menu', {
     marginTop: '6px',
     position: 'relative'
   }, [
-    c('&::after', `
+    c('&::before', `
+      z-index: auto;
       content: "";
       background-color: #0000;
       position: absolute;
@@ -107,10 +116,13 @@ export default cB('menu', {
       })
     ]),
     cM('selected', [
-      c('&::after', {
+      c('&::before', {
         backgroundColor: 'var(--item-color-active)'
       }),
       cB('menu-item-content', [
+        cE('arrow', {
+          color: 'var(--arrow-color-active)'
+        }),
         cE('icon', {
           color: 'var(--item-icon-color-active)'
         }),
@@ -158,12 +170,18 @@ export default cB('menu', {
           color: 'var(--item-text-color-child-active)'
         })
       ]),
+      cE('arrow', {
+        color: 'var(--arrow-color-child-active)'
+      }),
       cE('icon', {
         color: 'var(--item-icon-color-child-active)'
       })
     ]),
     cNotM('disabled', [
       hoverStyle(null, [
+        cE('arrow', {
+          color: 'var(--arrow-color-hover)'
+        }),
         cE('icon', {
           color: 'var(--item-icon-color-hover)'
         }),
@@ -195,6 +213,7 @@ export default cB('menu', {
       transform: rotate(180deg);
       opacity: 1;
       transition:
+        color .3s var(--bezier),
         transform 0.2s var(--bezier),
         opacity 0.2s var(--bezier);
     `),

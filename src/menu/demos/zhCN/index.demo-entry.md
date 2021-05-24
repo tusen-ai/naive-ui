@@ -12,6 +12,7 @@ select
 default-expanded-keys
 indent
 collapse
+inverted
 long-label
 ```
 
@@ -30,6 +31,7 @@ long-label
 | expanded-keys | `Array<string>` | `undefined` | 展开的子菜单标识符数组，如果设定了，菜单的展开将会进入受控状态，`default-expanded-keys` 不会生效 |
 | icon-size | `number` | `20` | 菜单未折叠时图标的大小 |
 | indent | `number` | `32` | 菜单每级的缩进 |
+| inverted | `boolean` | `false` | 使用反转样式 |
 | options | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | `[]` | 菜单的数据 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` |  |
 | root-indent | `number` | `32` | 菜单第一级的缩进，如果没有设定，使用 `indent` 代替 |

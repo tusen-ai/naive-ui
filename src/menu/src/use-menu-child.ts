@@ -17,7 +17,7 @@ export interface MenuInjection {
     iconSize: number
     collapsedIconSize: number | undefined
     indent: number
-    rootIndent: number
+    rootIndent?: number
     collapsedWidth: number
     disabled: boolean
   }

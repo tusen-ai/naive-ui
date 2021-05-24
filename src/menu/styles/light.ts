@@ -4,6 +4,24 @@ import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins/use-theme'
 
+export function createPartialInvertedVars (color: string, activeColor: string) {
+  return {
+    itemTextColorInverted: color,
+    itemTextColorHoverInverted: activeColor,
+    itemTextColorChildActiveInverted: activeColor,
+    itemTextColorActiveInverted: activeColor,
+    itemIconColorInverted: color,
+    itemIconColorHoverInverted: activeColor,
+    itemIconColorActiveInverted: activeColor,
+    itemIconColorChildActiveInverted: activeColor,
+    itemIconColorCollapsedInverted: color,
+    arrowColorInverted: color,
+    arrowColorHoverInverted: activeColor,
+    arrowColorChildActiveInverted: activeColor,
+    arrowColorActiveInverted: activeColor
+  }
+}
+
 export const self = (vars: ThemeCommonVars) => {
   const {
     borderRadius,
@@ -16,8 +34,10 @@ export const self = (vars: ThemeCommonVars) => {
   } = vars
   return {
     borderRadius: borderRadius,
+    color: '#0000',
     groupTextColor: textColor3,
     itemColorActive: changeColor(primaryColor, { alpha: 0.1 }),
+    itemColorActiveCollapsed: '#0000',
     itemTextColor: textColor2,
     itemTextColorHover: primaryColorHover,
     itemTextColorChildActive: primaryColor,
@@ -27,9 +47,17 @@ export const self = (vars: ThemeCommonVars) => {
     itemIconColorActive: primaryColor,
     itemIconColorChildActive: primaryColor,
     itemIconColorCollapsed: textColor1,
-    borderColorHorizontal: '#0000',
     arrowColor: primaryColor,
-    fontSize
+    arrowColorHover: primaryColorHover,
+    arrowColorChildActive: primaryColor,
+    arrowColorActive: primaryColor,
+    colorInverted: 'rgb(0, 20, 40)',
+    groupTextColorInverted: textColor3,
+    itemColorActiveInverted: primaryColor,
+    itemColorActiveCollapsedInverted: primaryColor,
+    borderColorHorizontal: '#0000',
+    fontSize,
+    ...createPartialInvertedVars('#BBB', '#FFF')
   }
 }
 

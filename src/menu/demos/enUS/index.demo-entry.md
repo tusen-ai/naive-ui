@@ -12,6 +12,7 @@ select
 default-expanded-names
 indent
 collapse
+inverted
 long-label
 ```
 
@@ -29,7 +30,8 @@ long-label
 | default-value | `string \| null` | `null` |  |
 | expanded-keys | `Array<string>` | `undefined` | The expanded submenu keys. If set, menu will work in controlled manner and `default-expanded-names` won't work. |
 | icon-size | `number` | `20` | The icon size when menu is not collapsed. |
-| indent | `number` | `32` | The indend of menu |
+| indent | `number` | `32` | The indent of menu. |
+| inverted | `boolean` | `false` | Use inverted style. |
 | options | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | `[]` | Items data of menu. |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` |  |
 | root-indent | `number` | `undefined` | The indent of menu's first level children. If not set, menu will use `indent` in place of it. |
