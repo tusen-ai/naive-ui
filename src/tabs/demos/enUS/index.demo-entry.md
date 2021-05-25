@@ -8,6 +8,7 @@ Switch contents in same area.
 basic
 flex-label
 card
+size
 prefix
 display-directive
 addable

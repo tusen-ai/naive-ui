@@ -12,9 +12,10 @@ import {
   VNode,
   nextTick,
   withDirectives,
-  vShow
+  vShow,
+  watchEffect
 } from 'vue'
-import { VResizeObserver, VXScroll } from 'vueuc'
+import { VResizeObserver, VXScroll, VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
 import { useCompitable, onFontsReady, useMergedState } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
@@ -110,10 +111,16 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
-    const tabWrapperRef = ref<HTMLElement | null>(null)
-    const barRef = ref<HTMLElement | null>(null)
+    const tabsElRef = ref<HTMLElement | null>(null)
+    const barElRef = ref<HTMLElement | null>(null)
+    const scrollWrapperElRef = ref<HTMLElement | null>(null)
     const addTabInstRef = ref<ComponentPublicInstance | null>(null)
-    const xScrollInstRef = ref<ComponentPublicInstance | null>(null)
+    const xScrollInstRef = ref<(VXScrollInst & ComponentPublicInstance) | null>(
+      null
+    )
+
+    const leftReachedRef = ref(true)
+    const rightReachedRef = ref(true)
 
     const compitableSizeRef = useCompitable(props, ['labelSize', 'size'])
     const compitableValueRef = useCompitable(props, ['activeName', 'value'])
@@ -144,12 +151,12 @@ export default defineComponent({
     function getCurrentEl (): HTMLElement | null {
       const { value } = mergedValueRef
       if (value === null) return null
-      const tabEl = tabWrapperRef.value?.querySelector(`[data-name="${value}"]`)
+      const tabEl = tabsElRef.value?.querySelector(`[data-name="${value}"]`)
       return tabEl as HTMLElement | null
     }
     function updateBarStyle (tabEl: HTMLElement): void {
       if (props.type === 'card') return
-      const { value: barEl } = barRef
+      const { value: barEl } = barElRef
       if (!barEl) return
       if (tabEl) {
         const disabledClassName = `${mergedClsPrefixRef.value}-tabs-bar--disabled`
@@ -198,19 +205,21 @@ export default defineComponent({
         (type === 'line' || type === 'bar') &&
         (firstTimeUpdatePosition || props.justifyContent)
       ) {
-        const { value: barEl } = barRef
+        const { value: barEl } = barElRef
         if (!barEl) return
         if (!firstTimeUpdatePosition) firstTimeUpdatePosition = false
         const disableTransitionClassName = `${mergedClsPrefixRef.value}-tabs-bar--transition-disabled`
         barEl.classList.add(disableTransitionClassName)
         updateCurrentBarStyle()
-        void barEl.offsetWidth
+        // here we don't need to force layout after update bar style
+        // since deriveScrollShadow will force layout
+        deriveScrollShadow(xScrollInstRef.value?.$el)
         barEl.classList.remove(disableTransitionClassName)
       }
     }, 64)
 
     const addTabFixedRef = ref(false)
-    function handleTagsResize (entry: ResizeObserverEntry): void {
+    function _handleTabsResize (entry: ResizeObserverEntry): void {
       const {
         target,
         contentRect: { width }
@@ -228,23 +237,35 @@ export default defineComponent({
           addTabFixedRef.value = false
         }
       }
+      deriveScrollShadow(xScrollInstRef.value?.$el)
     }
+    const handleTabsResize = throttle(_handleTabsResize, 64)
 
     function handleAdd (): void {
       const { onAdd } = props
       if (onAdd) onAdd()
       void nextTick(() => {
         const currentEl = getCurrentEl()
-        if (!currentEl) return
-        const scrollContainer: HTMLElement = xScrollInstRef.value?.$el
-        if (!scrollContainer) return
-        scrollContainer.scroll({
+        const { value: xScrollInst } = xScrollInstRef
+        if (!currentEl || !xScrollInst) return
+        xScrollInst.scrollTo({
           left: currentEl.offsetLeft,
           top: 0,
           behavior: 'smooth'
         })
       })
     }
+
+    function deriveScrollShadow (el: HTMLElement | null): void {
+      if (!el) return
+      const { scrollLeft, scrollWidth, offsetWidth } = el
+      leftReachedRef.value = scrollLeft <= 0
+      rightReachedRef.value = scrollLeft + offsetWidth >= scrollWidth
+    }
+
+    const handleScroll = throttle((e: Event) => {
+      deriveScrollShadow(e.target as HTMLElement)
+    }, 64)
     provide(tabsInjectionKey, {
       tabStyleRef: toRef(props, 'tabStyle'),
       mergedClsPrefixRef,
@@ -258,18 +279,39 @@ export default defineComponent({
     onFontsReady(() => {
       updateCurrentBarStyle()
     })
+
+    // avoid useless rerender
+    watchEffect(() => {
+      const { value: el } = scrollWrapperElRef
+      if (!el) return
+      const { value: clsPrefix } = mergedClsPrefixRef
+      const shadowBeforeClass = `${clsPrefix}-tabs-nav-scroll-wrapper--shadow-before`
+      const shadowAfterClass = `${clsPrefix}-tabs-nav-scroll-wrapper--shadow-after`
+      if (leftReachedRef.value) {
+        el.classList.remove(shadowBeforeClass)
+      } else {
+        el.classList.add(shadowBeforeClass)
+      }
+      if (rightReachedRef.value) {
+        el.classList.remove(shadowAfterClass)
+      } else {
+        el.classList.add(shadowAfterClass)
+      }
+    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
-      tabWrapperRef,
-      barRef,
+      tabsElRef,
+      barElRef,
       addTabInstRef,
       xScrollInstRef,
+      scrollWrapperElRef,
       addTabFixed: addTabFixedRef,
       tabWrapperStyle: tabWrapperStyleRef,
       handleNavResize,
       mergedSize: compitableSizeRef,
-      handleTagsResize,
+      handleScroll,
+      handleTabsResize,
       cssVars: computed(() => {
         const { value: size } = compitableSizeRef
         const { type } = props
@@ -354,78 +396,82 @@ export default defineComponent({
           <VResizeObserver onResize={this.handleNavResize}>
             {{
               default: () => (
-                <VXScroll
-                  class={`${mergedClsPrefix}-tabs-nav-scroll`}
-                  ref="xScrollInstRef"
+                <div
+                  class={`${mergedClsPrefix}-tabs-nav-scroll-wrapper`}
+                  ref="scrollWrapperElRef"
                 >
-                  {{
-                    default: () => {
-                      const rawWrappedTags = (
-                        <div
-                          style={this.tabWrapperStyle}
-                          class={`${mergedClsPrefix}-tabs-wrapper`}
-                        >
-                          {mergedJustifyContent ? null : (
-                            <div
-                              class={`${mergedClsPrefix}-tabs-scroll-padding`}
-                              style={{ width: `${this.tabsPadding}px` }}
-                            />
-                          )}
-                          {children.map((tabPaneVNode: any, index: number) => {
-                            return (
-                              <Tab
-                                {...tabPaneVNode.props}
-                                leftPadded={
-                                  index !== 0 && !mergedJustifyContent
-                                }
-                              >
-                                {{
-                                  default: tabPaneVNode.children.tab
-                                }}
-                              </Tab>
-                            )
-                          })}
-                          {!addTabFixed && addable && isCard
-                            ? createAddTag(addable, children.length !== 0)
-                            : null}
-                          {mergedJustifyContent ? null : (
-                            <div
-                              class={`${mergedClsPrefix}-tabs-scroll-padding`}
-                              style={{ width: `${this.tabsPadding}px` }}
-                            />
-                          )}
-                        </div>
-                      )
-                      let wrappedTags = rawWrappedTags
-                      if (isCard && addable) {
-                        wrappedTags = (
-                          <VResizeObserver onResize={this.handleTagsResize}>
-                            {{
-                              default: () => rawWrappedTags
-                            }}
-                          </VResizeObserver>
+                  <VXScroll ref="xScrollInstRef" onScroll={this.handleScroll}>
+                    {{
+                      default: () => {
+                        const rawWrappedTabs = (
+                          <div
+                            style={this.tabWrapperStyle}
+                            class={`${mergedClsPrefix}-tabs-wrapper`}
+                          >
+                            {mergedJustifyContent ? null : (
+                              <div
+                                class={`${mergedClsPrefix}-tabs-scroll-padding`}
+                                style={{ width: `${this.tabsPadding}px` }}
+                              />
+                            )}
+                            {children.map(
+                              (tabPaneVNode: any, index: number) => {
+                                return (
+                                  <Tab
+                                    {...tabPaneVNode.props}
+                                    leftPadded={
+                                      index !== 0 && !mergedJustifyContent
+                                    }
+                                  >
+                                    {{
+                                      default: tabPaneVNode.children.tab
+                                    }}
+                                  </Tab>
+                                )
+                              }
+                            )}
+                            {!addTabFixed && addable && isCard
+                              ? createAddTag(addable, children.length !== 0)
+                              : null}
+                            {mergedJustifyContent ? null : (
+                              <div
+                                class={`${mergedClsPrefix}-tabs-scroll-padding`}
+                                style={{ width: `${this.tabsPadding}px` }}
+                              />
+                            )}
+                          </div>
+                        )
+                        let wrappedTabs = rawWrappedTabs
+                        if (isCard && addable) {
+                          wrappedTabs = (
+                            <VResizeObserver onResize={this.handleTabsResize}>
+                              {{
+                                default: () => rawWrappedTabs
+                              }}
+                            </VResizeObserver>
+                          )
+                        }
+                        return (
+                          <div
+                            ref="tabsElRef"
+                            class={`${mergedClsPrefix}-tabs-nav-scroll-content`}
+                          >
+                            {wrappedTabs}
+                            {isCard ? (
+                              <div class={`${mergedClsPrefix}-tabs-pad`} />
+                            ) : null}
+                            {isCard ? null : (
+                              <div
+                                ref="barElRef"
+                                class={`${mergedClsPrefix}-tabs-bar`}
+                              />
+                            )}
+                          </div>
                         )
                       }
-                      return (
-                        <div
-                          ref="tabWrapperRef"
-                          class={`${mergedClsPrefix}-tabs-nav-scroll-content`}
-                        >
-                          {wrappedTags}
-                          {isCard ? (
-                            <div class={`${mergedClsPrefix}-tabs-pad`} />
-                          ) : null}
-                          {isCard ? null : (
-                            <div
-                              ref="barRef"
-                              class={`${mergedClsPrefix}-tabs-bar`}
-                            />
-                          )}
-                        </div>
-                      )
-                    }
-                  }}
-                </VXScroll>
+                    }}
+                  </VXScroll>
+                </div>
               )
             }}
           </VResizeObserver>

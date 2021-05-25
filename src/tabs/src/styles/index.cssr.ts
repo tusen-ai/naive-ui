@@ -45,13 +45,48 @@ export default cB('tabs', `
     display: flex;
     transition: border-color .3s var(--bezier);
   `, [
-    cB('tabs-nav-scroll', 'flex: 1;'),
     cE('prefix, suffix', `
       display: flex;
       align-items: center;
     `),
     cE('prefix', 'padding-right: 16px;'),
     cE('suffix', 'padding-left: 16px;')
+  ]),
+  cB('tabs-nav-scroll-wrapper', `
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  `, [
+    cM('shadow-before', [
+      c('&::before', `
+        box-shadow: inset 10px 0 8px -8px rgba(0, 0, 0, .12);
+      `)
+    ]),
+    cM('shadow-after', [
+      c('&::after', `
+        box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, .12);
+      `)
+    ]),
+    c('&::before', `
+      transition: box-shadow .3s var(--bezier);
+      pointer-events: none;
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 20px;
+    `),
+    c('&::after', `
+      transition: box-shadow .3s var(--bezier);
+      pointer-events: none;
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 20px;
+    `)
   ]),
   cB('tabs-nav-scroll-content', `
     display: flex;

@@ -26,7 +26,7 @@ import { defineComponent, ref, computed } from 'vue'
 export default defineComponent({
   setup () {
     const valueRef = ref(1)
-    const panelsRef = ref([1, 2, 3])
+    const panelsRef = ref([1, 2, 3, 4, 5])
     const addableRef = computed(() => {
       return {
         disabled: panelsRef.value.length >= 10
