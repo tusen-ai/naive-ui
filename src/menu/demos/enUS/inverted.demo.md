@@ -4,24 +4,18 @@ Set `inverted` to add contrast.
 
 ```html
 <n-space vertical>
-  <n-space>
-    <n-switch v-model:value="collapsed" /> collapsed
-    <n-switch v-model:value="inverted" /> inverted
-  </n-space>
+  <n-space> <n-switch v-model:value="inverted" /> inverted </n-space>
   <n-layout has-sider>
     <n-layout-sider
       bordered
       collapse-mode="width"
       :collapsed-width="64"
       :width="240"
-      :collapsed="collapsed"
       show-trigger
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
+      :inverted="inverted"
     >
       <n-menu
         :inverted="inverted"
-        :collapsed="collapsed"
         :collapsed-width="64"
         :collapsed-icon-size="22"
         :options="menuOptions"
@@ -126,8 +120,6 @@ const menuOptions = [
 export default defineComponent({
   setup () {
     return {
-      activeKey: ref(null),
-      collapsed: ref(false),
       inverted: ref(false),
       menuOptions
     }

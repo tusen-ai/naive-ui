@@ -9,11 +9,9 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 
 const layoutFooterProps = {
   ...(useTheme.props as ThemeProps<LayoutTheme>),
+  inverted: Boolean,
   position: positionProp,
-  bordered: {
-    type: Boolean,
-    default: false
-  }
+  bordered: Boolean
 }
 
 export type LayoutFooterProps = ExtractPublicPropTypes<typeof layoutFooterProps>
@@ -36,13 +34,21 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { footerBorderColor, footerColor }
+          self
         } = themeRef.value
-        return {
-          '--bezier': cubicBezierEaseInOut,
-          '--color': footerColor,
-          '--border-color': footerBorderColor
+        const vars: any = {
+          '--bezier': cubicBezierEaseInOut
         }
+        if (props.inverted) {
+          vars['--color'] = self.footerColorInverted
+          vars['--text-color'] = self.textColorInverted
+          vars['--border-color'] = self.footerBorderColorInverted
+        } else {
+          vars['--color'] = self.footerColor
+          vars['--text-color'] = self.textColor
+          vars['--border-color'] = self.footerBorderColor
+        }
+        return vars
       })
     }
   },
@@ -52,11 +58,9 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-layout-footer`,
-          {
-            [`${mergedClsPrefix}-layout-footer--${this.position}-positioned`]: this
-              .position,
-            [`${mergedClsPrefix}-layout-footer--bordered`]: this.bordered
-          }
+          this.position &&
+            `${mergedClsPrefix}-layout-footer--${this.position}-positioned`,
+          this.bordered && `${mergedClsPrefix}-layout-footer--bordered`
         ]}
         style={this.cssVars as CSSProperties}
       >

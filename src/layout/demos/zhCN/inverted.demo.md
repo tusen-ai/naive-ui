@@ -1,29 +1,40 @@
 # 反转
 
-通过 `inverted` 来增加对比。
+使用 `inverted` 增加对比度，可以使用在 header、footer 和 sider 上，可以和 menu 搭配使用。
 
 ```html
 <n-space vertical>
   <n-space> <n-switch v-model:value="inverted" /> inverted </n-space>
-  <n-layout has-sider>
-    <n-layout-sider
-      bordered
-      collapse-mode="width"
-      :collapsed-width="64"
-      :width="240"
-      show-trigger
-      :inverted="inverted"
-    >
-      <n-menu
-        :inverted="inverted"
+  <n-layout>
+    <n-layout-header :inverted="inverted" bordered>
+      Header Header Header
+      <n-menu mode="horizontal" :inverted="inverted" :options="menuOptions" />
+    </n-layout-header>
+    <n-layout has-sider>
+      <n-layout-sider
+        bordered
+        show-trigger
+        collapse-mode="width"
         :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="menuOptions"
-      />
-    </n-layout-sider>
-    <n-layout>
-      <span>内容</span>
+        :width="240"
+        :native-scrollbar="false"
+        :inverted="inverted"
+        style="max-height: 320px;"
+      >
+        <n-menu
+          :inverted="inverted"
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+        />
+      </n-layout-sider>
+      <n-layout style="max-height: 320px;">
+        <span>内容</span>
+      </n-layout>
     </n-layout>
+    <n-layout-footer :inverted="inverted" bordered>
+      Footer Footer Footer
+    </n-layout-footer>
   </n-layout>
 </n-space>
 ```

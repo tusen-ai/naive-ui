@@ -166,6 +166,7 @@ const derived: ThemeCommonVars = {
   bodyColor: base.neutralBody,
   tagColor: neutral(base.alphaTag),
   avatarColor: overlay(base.alphaAvatar),
+  invertedColor: base.neutralBase,
 
   inputColor: overlay(base.alphaInput),
   codeColor: overlay(base.alphaCode),

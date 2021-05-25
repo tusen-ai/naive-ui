@@ -6,7 +6,8 @@ import {
   ref,
   CSSProperties,
   toRef,
-  inject
+  inject,
+  provide
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -19,16 +20,13 @@ import type { LayoutTheme } from '../styles'
 import style from './styles/layout-sider.cssr'
 import ToggleButton from './ToggleButton'
 import ToggleBar from './ToggleBar'
-import { positionProp } from './interface'
+import { layoutSiderInjectionKey, positionProp } from './interface'
 import { useMergedState } from 'vooks'
 import { layoutInjectionKey } from './Layout'
 
 const layoutSiderProps = {
   position: positionProp,
-  bordered: {
-    type: Boolean,
-    default: false
-  },
+  bordered: Boolean,
   collapsedWidth: {
     type: Number,
     default: 48
@@ -49,10 +47,7 @@ const layoutSiderProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  defaultCollapsed: {
-    type: Boolean,
-    default: false
-  },
+  defaultCollapsed: Boolean,
   showContent: {
     type: Boolean,
     default: true
@@ -69,6 +64,7 @@ const layoutSiderProps = {
     type: Number,
     default: 300
   },
+  inverted: Boolean,
   scrollbarProps: Object as PropType<
   Partial<ScrollbarProps> & { style: CSSProperties }
   >,
@@ -174,6 +170,9 @@ export default defineComponent({
         if (onCollapse) call(onCollapse)
       }
     }
+    provide(layoutSiderInjectionKey, {
+      collapsedRef: mergedCollapsedRef
+    })
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Layout',
@@ -197,22 +196,30 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: {
-            siderColor,
-            siderToggleButtonColor,
-            siderBorderColor,
-            siderToggleBarColor,
-            siderToggleBarColorHover
-          }
+          self
         } = themeRef.value
-        return {
+        const {
+          siderToggleButtonColor,
+          siderToggleBarColor,
+          siderToggleBarColorHover
+        } = self
+        const vars: any = {
           '--bezier': cubicBezierEaseInOut,
-          '--sider-color': siderColor,
-          '--sider-border-color': siderBorderColor,
-          '--sider-toggle-button-color': siderToggleButtonColor,
-          '--sider-toggle-bar-color': siderToggleBarColor,
-          '--sider-toggle-bar-color-hover': siderToggleBarColorHover
+          '--toggle-button-color': siderToggleButtonColor,
+          '--toggle-bar-color': siderToggleBarColor,
+          '--toggle-bar-color-hover': siderToggleBarColorHover
         }
+        if (props.inverted) {
+          vars['--color'] = self.siderColorInverted
+          vars['--text-color'] = self.textColorInverted
+          vars['--border-color'] = self.siderBorderColorInverted
+          vars.__invertScrollbar = self.__invertScrollbar
+        } else {
+          vars['--color'] = self.siderColor
+          vars['--text-color'] = self.textColor
+          vars['--border-color'] = self.siderBorderColor
+        }
+        return vars
       })
     }
   },
@@ -224,15 +231,12 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-layout-sider`,
           `${mergedClsPrefix}-layout-sider--${this.position}-positioned`,
-          {
-            [`${mergedClsPrefix}-layout-sider--bordered`]: this.bordered,
-            [`${mergedClsPrefix}-layout-sider--collapsed`]: this
-              .mergedCollapsed,
-            [`${mergedClsPrefix}-layout-sider--show-content`]: this.showContent
-          }
+          this.bordered && `${mergedClsPrefix}-layout-sider--bordered`,
+          this.mergedCollapsed && `${mergedClsPrefix}-layout-sider--collapsed`,
+          this.showContent && `${mergedClsPrefix}-layout-sider--show-content`
         ]}
         style={[
-          this.cssVars as any,
+          this.cssVars,
           {
             maxWidth: this.styleMaxWidth,
             width: formatLength(this.width)
@@ -248,6 +252,16 @@ export default defineComponent({
             contentStyle={this.contentStyle}
             theme={this.mergedTheme.peers.Scrollbar}
             themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
+            // here is a hack, since in light theme the scrollbar color is dark,
+            // we need to invert it in light color...
+            builtinThemeOverrides={
+              this.inverted && this.cssVars.__invertScrollbar === 'true'
+                ? {
+                  colorHover: 'rgba(255, 255, 255, .4)',
+                  color: 'rgba(255, 255, 255, .3)'
+                }
+                : undefined
+            }
           >
             {this.$slots}
           </NScrollbar>
@@ -259,9 +273,6 @@ export default defineComponent({
             {this.$slots}
           </div>
         )}
-        {this.bordered ? (
-          <div class={`${mergedClsPrefix}-layout-sider__border`} />
-        ) : null}
         {this.showTrigger ? (
           this.showTrigger === 'arrow-circle' ? (
             <ToggleButton

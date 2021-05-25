@@ -29,13 +29,12 @@ export default cB('menu', `
   color: var(--item-text-color);
   overflow: hidden;
   transition: background-color .3s var(--bezier);
-  width: 100%;
   box-sizing: border-box;
   font-size: var(--font-size);
   padding-bottom: 6px;
 `, [
   cM('horizontal', {
-    display: 'flex',
+    display: 'inline-flex',
     paddingBottom: 0
   }, [
     cB('submenu', {

@@ -2,16 +2,19 @@ import { cB, cM } from '../../../_utils/cssr'
 
 // vars:
 // --bezier
-// --header-color
-// --header-border-color
+// --text-color
+// --color
+// --border-color
 export default cB('layout-header', `
   transition:
+    color .3s var(--bezier),
     background-color .3s var(--bezier),
     box-shadow .3s var(--bezier),
     border-color .3s var(--bezier);
   box-sizing: border-box;
   width: 100%;
-  background-color: var(--header-color);
+  background-color: var(--color);
+  color: var(--text-color);
 `, [
   cM('absolute-positioned', `
     position: absolute;
@@ -20,6 +23,6 @@ export default cB('layout-header', `
     top: 0;
   `),
   cM('bordered', `
-    border-bottom: solid 1px var(--header-border-color);
+    border-bottom: solid 1px var(--border-color);
   `)
 ])

@@ -13,7 +13,6 @@ const ICON_MARGIN_RIGHT = 8
 export interface MenuInjection {
   props: {
     mode: 'vertical' | 'horizontal'
-    collapsed: boolean
     iconSize: number
     collapsedIconSize: number | undefined
     indent: number
@@ -21,6 +20,7 @@ export interface MenuInjection {
     collapsedWidth: number
     disabled: boolean
   }
+  mergedCollapsedRef: Ref<boolean>
   invertedRef: Ref<boolean>
   isHorizontalRef: Ref<boolean>
   mergedClsPrefixRef: Ref<string>
@@ -56,7 +56,7 @@ export interface UseMenuChild {
 export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const NMenu = inject(menuInjectionKey)!
-  const { props: menuProps } = NMenu
+  const { props: menuProps, mergedCollapsedRef } = NMenu
   const NSubmenu = inject(submenuInjectionKey, null)
   const NMenuOptionGroup = inject<MenuOptionGroupInjection | null>(
     menuItemGroupInjectionKey,
@@ -79,7 +79,7 @@ export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
     )
   })
   const activeIconSizeRef = computed(() => {
-    if (!horizontalRef.value && props.root && menuProps.collapsed) {
+    if (!horizontalRef.value && props.root && mergedCollapsedRef.value) {
       return menuProps.collapsedIconSize ?? menuProps.iconSize
     } else {
       return menuProps.iconSize
@@ -91,7 +91,7 @@ export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
     const { root, isGroup } = props
     const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
     if (root) {
-      if (menuProps.collapsed) {
+      if (mergedCollapsedRef.value) {
         return collapsedWidth / 2 - maxIconSizeRef.value / 2
       }
       return mergedRootIndent
@@ -113,7 +113,7 @@ export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
     const { root } = props
     if (horizontalRef.value) return ICON_MARGIN_RIGHT
     if (!root) return ICON_MARGIN_RIGHT
-    if (!menuProps.collapsed) return ICON_MARGIN_RIGHT
+    if (!mergedCollapsedRef.value) return ICON_MARGIN_RIGHT
     const mergedRootIndent = rootIndent === undefined ? indent : rootIndent
     return (
       mergedRootIndent +

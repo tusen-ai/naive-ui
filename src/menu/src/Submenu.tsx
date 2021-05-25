@@ -48,7 +48,7 @@ export default defineComponent({
   setup (props) {
     const MenuChild = useMenuChild(props)
     const { NMenu, NSubmenu } = MenuChild
-    const { props: menuProps } = NMenu
+    const { props: menuProps, mergedCollapsedRef } = NMenu
     const mergedDisabledRef = computed(() => {
       const { disabled } = props
       if (NSubmenu?.mergedDisabledRef.value) return true
@@ -67,7 +67,7 @@ export default defineComponent({
     }
     function handleClick (): void {
       if (!mergedDisabledRef.value) {
-        if (!menuProps.collapsed) {
+        if (!mergedCollapsedRef.value) {
           NMenu.toggleExpand(props.internalKey)
         }
         doClick()
@@ -94,7 +94,7 @@ export default defineComponent({
       }),
       collapsed: computed(() => {
         if (menuProps.mode === 'horizontal') return false
-        if (menuProps.collapsed) {
+        if (mergedCollapsedRef.value) {
           return true
         }
         return !NMenu.mergedExpandedKeysRef.value.includes(props.internalKey)
@@ -102,7 +102,7 @@ export default defineComponent({
       dropdownEnabled: computed(() => {
         return (
           !mergedDisabledRef.value &&
-          (menuProps.mode === 'horizontal' || menuProps.collapsed)
+          (menuProps.mode === 'horizontal' || mergedCollapsedRef.value)
         )
       }),
       handlePopoverShowChange,

@@ -21,7 +21,7 @@ line-debug
 | --- | --- | --- | --- |
 | addable | `boolean \| { disabled?: boolean }` | `false` | 是否展示增加按钮，只在 type 为 `'card'` 时生效 |
 | closable | `boolean` | `false` | 是否允许 tab 关闭，只在 type 为 `'card'` 时生效 |
-| default-value | `string \| number` | 第一个标签页的 `name` |  |
+| default-value | `string \| number` | 第一个标签页的 name 属性 |  |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly'` | `undefined` |  |
 | label-size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | 标签的尺寸，只对线型的 Tabs 生效 |
 | show-divider | `boolean` | `false` | 是否展示分割线，只在 type 为 `'line'` 时生效 |

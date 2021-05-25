@@ -4,10 +4,13 @@ import { cB, cM } from '../../../_utils/cssr'
 // --bezier
 // --color
 // --border-color
+// --text-color
 export default cB('layout-footer', `
   transition:
+    color .3s var(--bezier),
     background-color .3s var(--bezier),
     border-color .3s var(--bezier);
+  color: var(--text-color);
   background-color: var(--color);
   box-sizing: border-box;
 `, [

@@ -2,22 +2,26 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --bezier
-// --sider-color
-// --sider-border-color
-// --sider-toggle-button-color
-// --sider-toggle-bar-color
-// --sider-toggle-bar-color-hover
+// --color
+// --text-color
+// --border-color
+// --toggle-button-color
+// --toggle-bar-color
+// --toggle-bar-color-hover
 export default cB('layout-sider', `
   flex-shrink: 0;
   box-sizing: border-box;
   position: relative;
   z-index: 1;
+  color: var(--text-color);
   transition:
+    color .3s var(--bezier),
+    border-color .3s var(--bezier),
     min-width .3s var(--bezier),
     max-width .3s var(--bezier),
     transform .3s var(--bezier),
     background-color .3s var(--bezier);
-  background-color: var(--sider-color);
+  background-color: var(--color);
   display: flex;
   justify-content: flex-end;
 `, [
@@ -32,7 +36,7 @@ export default cB('layout-sider', `
     top: 50%;
     right: 0;
     transform: translateX(50%) translateY(-50%);
-    fill: var(--sider-toggle-button-color);
+    fill: var(--toggle-button-color);
   `),
   cB('layout-toggle-bar', `
     cursor: pointer;
@@ -75,11 +79,11 @@ export default cB('layout-sider', `
       ])
     ]),
     cE('top, bottom', {
-      backgroundColor: 'var(--sider-toggle-bar-color)'
+      backgroundColor: 'var(--toggle-bar-color)'
     }),
     c('&:hover', [
       cE('top, bottom', {
-        backgroundColor: 'var(--sider-toggle-bar-color-hover)'
+        backgroundColor: 'var(--toggle-bar-color-hover)'
       })
     ])
   ]),
@@ -92,6 +96,7 @@ export default cB('layout-sider', `
     transition: background-color .3s var(--bezier);
   `),
   cE('content', `
+    flex-grow: 1;
     flex-shrink: 0;
     box-sizing: border-box;
     height: 100%;
@@ -115,9 +120,7 @@ export default cB('layout-sider', `
     top: 0;
     bottom: 0;
   `),
-  cM('bordered', [
-    cE('border', {
-      backgroundColor: 'var(--sider-border-color)'
-    })
-  ])
+  cM('bordered', `
+    border-right: 1px solid var(--border-color);
+  `)
 ])

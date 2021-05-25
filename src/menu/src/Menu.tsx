@@ -8,7 +8,8 @@ import {
   PropType,
   ExtractPropTypes,
   InjectionKey,
-  CSSProperties
+  CSSProperties,
+  inject
 } from 'vue'
 import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
@@ -28,6 +29,7 @@ import {
   OnUpdateValueImpl,
   OnUpdateKeysImpl
 } from './interface'
+import { layoutSiderInjectionKey } from '../../layout/src/interface'
 
 const menuProps = {
   ...(useTheme.props as ThemeProps<MenuTheme>),
@@ -46,8 +48,8 @@ const menuProps = {
     default: undefined
   },
   collapsed: {
-    type: Boolean,
-    default: false
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   },
   collapsedWidth: {
     type: Number,
@@ -170,6 +172,12 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
+    const layoutSider = inject(layoutSiderInjectionKey, null)
+
+    const mergedCollapsedRef = computed(() => {
+      return props.collapsed ?? layoutSider?.collapsedRef.value ?? false
+    })
+
     const treeMateRef = computed(() =>
       createTreeMate<MenuOption, MenuGroupOption>(
         props.items || props.options,
@@ -205,6 +213,7 @@ export default defineComponent({
     })
     provide(menuInjectionKey, {
       props,
+      mergedCollapsedRef,
       mergedThemeRef: themeRef,
       mergedValueRef,
       mergedExpandedKeysRef,
@@ -265,6 +274,7 @@ export default defineComponent({
       activePath: activePathRef,
       tmNodes: tmNodesRef,
       mergedTheme: themeRef,
+      mergedCollapsed: mergedCollapsedRef,
       cssVars: computed(() => {
         const { inverted } = props
         const {
@@ -331,7 +341,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-menu`,
           `${mergedClsPrefix}-menu--${this.mode}`,
-          this.collapsed && `${mergedClsPrefix}-menu--collapsed`
+          this.mergedCollapsed && `${mergedClsPrefix}-menu--collapsed`
         ]}
         style={this.cssVars as CSSProperties}
       >

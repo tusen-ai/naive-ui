@@ -165,6 +165,7 @@ const derived = {
   bodyColor: base.neutralBody,
   tagColor: 'rgb(250, 250, 252)',
   avatarColor: neutral(base.alphaAvatar),
+  invertedColor: 'rgb(0, 20, 40)',
 
   inputColor: neutral(base.alphaInput),
   codeColor: 'rgb(244, 244, 248)',

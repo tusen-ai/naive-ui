@@ -12,20 +12,29 @@ export const self = (vars: ThemeCommonVars) => {
     dividerColor,
     actionColor,
     scrollbarColor,
-    scrollbarColorHover
+    scrollbarColorHover,
+    invertedColor
   } = vars
   return {
     textColor: textColor2,
+    textColorInverted: '#FFF',
     color: bodyColor,
     headerColor: cardColor,
+    headerColorInverted: invertedColor,
     footerColor: actionColor,
+    footerColorInverted: invertedColor,
     headerBorderColor: dividerColor,
+    headerBorderColorInverted: invertedColor,
     footerBorderColor: dividerColor,
+    footerBorderColorInverted: invertedColor,
     siderBorderColor: dividerColor,
+    siderBorderColorInverted: invertedColor,
     siderColor: cardColor,
+    siderColorInverted: invertedColor,
     siderToggleButtonColor: 'rgba(0, 0, 0, .15)',
     siderToggleBarColor: composite(bodyColor, scrollbarColor),
-    siderToggleBarColorHover: composite(bodyColor, scrollbarColorHover)
+    siderToggleBarColorHover: composite(bodyColor, scrollbarColorHover),
+    __invertScrollbar: 'true'
   }
 }
 

@@ -19,6 +19,7 @@
 - `n-tabs` add `tab-style` prop.
 - `n-tabs` add `tabs-padding` prop.
 - `n-tabs` add `default-value` prop.
+- `n-layout-sider` & `n-layout-footer` & `n-layout-header` add `inverted` prop.
 
 ### Fixes
 

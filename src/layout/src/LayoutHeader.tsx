@@ -9,6 +9,7 @@ import { ExtractPublicPropTypes } from '../../_utils'
 
 const headerProps = {
   position: positionProp,
+  inverted: Boolean,
   bordered: {
     type: Boolean,
     default: false
@@ -38,13 +39,21 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { headerColor, headerBorderColor }
+          self
         } = themeRef.value
-        return {
-          '--bezier': cubicBezierEaseInOut,
-          '--header-color': headerColor,
-          '--header-border-color': headerBorderColor
+        const vars: any = {
+          '--bezier': cubicBezierEaseInOut
         }
+        if (props.inverted) {
+          vars['--color'] = self.headerColorInverted
+          vars['--text-color'] = self.textColorInverted
+          vars['--border-color'] = self.headerBorderColorInverted
+        } else {
+          vars['--color'] = self.headerColor
+          vars['--text-color'] = self.textColor
+          vars['--border-color'] = self.headerBorderColor
+        }
+        return vars
       })
     }
   },

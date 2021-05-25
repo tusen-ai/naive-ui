@@ -56,7 +56,7 @@ export const self = (vars: ThemeCommonVars) => {
     arrowColorHover: primaryColorHover,
     arrowColorChildActive: primaryColor,
     arrowColorActive: primaryColor,
-    colorInverted: 'rgb(0, 20, 40)',
+    colorInverted: '#0000',
     itemColorActiveInverted: primaryColor,
     itemColorActiveCollapsedInverted: primaryColor,
     borderColorHorizontal: '#0000',

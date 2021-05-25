@@ -19,7 +19,7 @@ display-directive
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | addable | `boolean \| { disabled?: boolean }` | `false` | Whether to show add button. Only works when type is `'card'`. |
-| default-value | `string \| number` | `name` of the first tab |  |
+| default-value | `string \| number` | name prop of the first tab |  |
 | closable | `boolean` | `false` | Whether to allow tab to close, Only works when type is `'card'`. |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly'` | `undefined` |  |
 | label-size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | Size of tabs. Only works when type is `'line'`. |
