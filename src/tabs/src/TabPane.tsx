@@ -1,10 +1,21 @@
 import { h, defineComponent, inject, PropType, VNodeChild, VNode } from 'vue'
-import { throwError } from '../../_utils'
+import { throwError, warn } from '../../_utils'
 import { tabsInjectionKey } from './interface'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 export const tabPaneProps = {
-  label: [String, Number, Object, Function] as PropType<
+  /** @deprecated */
+  label: {
+    type: [String, Number, Object, Function] as PropType<
+    string | number | VNode | (() => VNodeChild)
+    >,
+    default: undefined,
+    validator: () => {
+      if (__DEV__) { warn('tab-pane', '`label` is deprecated, please use `tab` instead.') }
+      return true
+    }
+  },
+  tab: [String, Number, Object, Function] as PropType<
   string | number | VNode | (() => VNodeChild)
   >,
   name: {

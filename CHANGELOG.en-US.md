@@ -6,8 +6,12 @@
 
 - `n-tabs` add `on-close` prop.
 - `n-tabs` add `on-add` prop.
-- `n-tabs` add `label` slot.
-- `n-tab-pane`'s `label` prop support render function & VNode.
+- `n-tabs` add `tab` slot.
+- `n-tab-pane`'s `tab` prop support render function & VNode.
+
+### Deprecated
+
+- `n-tab-pane`'s `label` prop is deprecated. Please use `tab` prop instead.
 
 ## 2.9.0
 

@@ -13,7 +13,7 @@
   <n-tab-pane
     v-for="panel in panels"
     :key="panel"
-    :label="panel.toString()"
+    :tab="panel.toString()"
     :name="panel"
   >
     {{ panel }}

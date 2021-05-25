@@ -59,11 +59,13 @@ export default defineComponent({
       name,
       disabled,
       label,
+      tab,
       value,
       mergedClosable,
       style,
       $slots: { default: defaultSlot }
     } = this
+    const mergedTab = label ?? tab
     return (
       <div class={`${clsPrefix}-tabs-tab-wrapper`}>
         {this.leftPadded ? (
@@ -94,10 +96,10 @@ export default defineComponent({
               </NBaseIcon>
             ) : defaultSlot ? (
               defaultSlot()
-            ) : typeof label === 'object' ? (
-              label // VNode
+            ) : typeof mergedTab === 'object' ? (
+              mergedTab // VNode
             ) : (
-              <Render render={label ?? name} />
+              <Render render={mergedTab ?? name} />
             )}
           </span>
           {mergedClosable && this.type === 'card' ? (

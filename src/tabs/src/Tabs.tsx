@@ -42,6 +42,14 @@ const tabsProps = {
   >,
   labelSize: {
     type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
+    validator: () => {
+      if (__DEV__) { warn('tabs', '`label-size` is deprecated, please use `size` instead.') }
+      return true
+    },
+    default: undefined
+  },
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
     default: 'medium'
   },
   tabStyle: [String, Object] as PropType<string | CSSProperties>,
@@ -100,11 +108,12 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
-    const labelWrapperRef = ref<HTMLElement | null>(null)
-    const labelBarRef = ref<HTMLElement | null>(null)
+    const tabWrapperRef = ref<HTMLElement | null>(null)
+    const barRef = ref<HTMLElement | null>(null)
     const addTabInstRef = ref<ComponentPublicInstance | null>(null)
     const xScrollInstRef = ref<ComponentPublicInstance | null>(null)
 
+    const compitableSizeRef = useCompitable(props, ['labelSize', 'size'])
     const compitableValueRef = useCompitable(props, ['activeName', 'value'])
     const uncontrolledValueRef = ref(
       compitableValueRef.value ??
@@ -118,7 +127,7 @@ export default defineComponent({
       uncontrolledValueRef
     )
 
-    const labelWrapperStyleRef = computed(() => {
+    const tabWrapperStyleRef = computed(() => {
       if (!props.justifyContent || props.type !== 'line') return undefined
       return {
         display: 'flex',
@@ -133,32 +142,30 @@ export default defineComponent({
     function getCurrentEl (): HTMLElement | null {
       const { value } = mergedValueRef
       if (value === null) return null
-      const labelEl = labelWrapperRef.value?.querySelector(
-        `[data-name="${value}"]`
-      )
-      return labelEl as HTMLElement | null
+      const tabEl = tabWrapperRef.value?.querySelector(`[data-name="${value}"]`)
+      return tabEl as HTMLElement | null
     }
-    function updateBarStyle (labelEl: HTMLElement): void {
+    function updateBarStyle (tabEl: HTMLElement): void {
       if (props.type === 'card') return
-      const { value: labelBarEl } = labelBarRef
-      if (!labelBarEl) return
-      if (labelEl) {
+      const { value: barEl } = barRef
+      if (!barEl) return
+      if (tabEl) {
         const disabledClassName = `${mergedClsPrefixRef.value}-tabs-bar--disabled`
-        if (labelEl.dataset.disabled === 'true') {
-          labelBarEl.classList.add(disabledClassName)
+        if (tabEl.dataset.disabled === 'true') {
+          barEl.classList.add(disabledClassName)
         } else {
-          labelBarEl.classList.remove(disabledClassName)
+          barEl.classList.remove(disabledClassName)
         }
-        labelBarEl.style.left = `${labelEl.offsetLeft}px`
-        labelBarEl.style.width = '8192px'
-        labelBarEl.style.maxWidth = `${labelEl.offsetWidth + 1}px`
+        barEl.style.left = `${tabEl.offsetLeft}px`
+        barEl.style.width = '8192px'
+        barEl.style.maxWidth = `${tabEl.offsetWidth + 1}px`
       }
     }
     function updateCurrentBarStyle (): void {
       if (props.type === 'card') return
-      const labelEl = getCurrentEl()
-      if (labelEl) {
-        updateBarStyle(labelEl)
+      const tabEl = getCurrentEl()
+      if (tabEl) {
+        updateBarStyle(tabEl)
       }
     }
     function handleTabClick (panelName: string | number): void {
@@ -189,13 +196,13 @@ export default defineComponent({
         type === 'line' &&
         (firstTimeUpdatePosition || props.justifyContent)
       ) {
-        const { value: labelBarEl } = labelBarRef
-        if (!labelBarEl) return
+        const { value: barEl } = barRef
+        if (!barEl) return
         if (!firstTimeUpdatePosition) firstTimeUpdatePosition = false
         const disableTransitionClassName = `${mergedClsPrefixRef.value}-tabs-bar--transition-disabled`
-        labelBarEl.classList.add(disableTransitionClassName)
+        barEl.classList.add(disableTransitionClassName)
         updateCurrentBarStyle()
-        labelBarEl.classList.remove(disableTransitionClassName)
+        barEl.classList.remove(disableTransitionClassName)
       }
     }, 64)
 
@@ -251,61 +258,55 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
-      labelWrapperRef,
-      labelBarRef,
+      tabWrapperRef,
+      barRef,
       addTabInstRef,
       xScrollInstRef,
       addTabFixed: addTabFixedRef,
-      labelWrapperStyle: labelWrapperStyleRef,
+      tabWrapperStyle: tabWrapperStyleRef,
       handleNavResize,
+      mergedSize: compitableSizeRef,
       handleTagsResize,
       cssVars: computed(() => {
-        const { labelSize } = props
+        const { value: size } = compitableSizeRef
+        const { type } = props
         const {
           self: {
-            labelTextColor,
-            labelTextColorActive,
-            labelTextColorHover,
-            labelTextColorDisabled,
-            labelBarColor,
+            barColor,
             closeColor,
             closeColorHover,
             closeColorPressed,
             tabColor,
-            tabBorderColorActive,
-            tabTextColor,
-            tabTextColorActive,
             tabBorderColor,
             paneTextColor,
             tabFontWeight,
             tabBorderRadius,
-            labelFontSizeCard,
             tabFontWeightActive,
-            [createKey('labelFontSizeLine', labelSize)]: labelFontSizeLine
+            [createKey('tabTextColor', type)]: tabTextColor,
+            [createKey('tabTextColorActive', type)]: tabTextColorActive,
+            [createKey('tabTextColorHover', type)]: tabTextColorHover,
+            [createKey('tabTextColorDisabled', type)]: tabTextColorDisabled,
+            [createKey('tabFontSize', size)]: tabFontSize
           },
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
-          '--label-bar-color': labelBarColor,
-          '--label-font-size-card': labelFontSizeCard,
-          '--label-font-size-line': labelFontSizeLine,
-          '--label-text-color': labelTextColor,
-          '--label-text-color-active': labelTextColorActive,
-          '--label-text-color-disabled': labelTextColorDisabled,
-          '--label-text-color-hover': labelTextColorHover,
+          '--bar-color': barColor,
+          '--tab-font-size': tabFontSize,
+          '--tab-text-color': tabTextColor,
+          '--tab-text-color-active': tabTextColorActive,
+          '--tab-text-color-disabled': tabTextColorDisabled,
+          '--tab-text-color-hover': tabTextColorHover,
           '--pane-text-color': paneTextColor,
           '--tab-border-color': tabBorderColor,
-          '--tab-border-color-active': tabBorderColorActive,
           '--tab-border-radius': tabBorderRadius,
           '--close-color': closeColor,
           '--close-color-hover': closeColorHover,
           '--close-color-pressed': closeColorPressed,
           '--tab-color': tabColor,
           '--tab-font-weight': tabFontWeight,
-          '--tab-font-weight-active': tabFontWeightActive,
-          '--tab-text-color': tabTextColor,
-          '--tab-text-color-active': tabTextColorActive
+          '--tab-font-weight-active': tabFontWeightActive
         }
       })
     }
@@ -316,6 +317,7 @@ export default defineComponent({
       type,
       addTabFixed,
       addable,
+      mergedSize,
       $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot }
     } = this
     const children = defaultSlot ? flatten(defaultSlot()) : []
@@ -329,7 +331,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-tabs`,
           `${mergedClsPrefix}-tabs--${type}-type`,
-          `${mergedClsPrefix}-tabs--${this.labelSize}-size`,
+          `${mergedClsPrefix}-tabs--${mergedSize}-size`,
           mergedShowDivider && `${mergedClsPrefix}-tabs--show-divider`,
           mergedJustifyContent && `${mergedClsPrefix}-tabs--flex`
         ]}
@@ -350,7 +352,7 @@ export default defineComponent({
                     default: () => {
                       const rawWrappedTags = (
                         <div
-                          style={this.labelWrapperStyle}
+                          style={this.tabWrapperStyle}
                           class={`${mergedClsPrefix}-tabs-wrapper`}
                         >
                           {mergedJustifyContent ? null : (
@@ -368,7 +370,7 @@ export default defineComponent({
                                 }
                               >
                                 {{
-                                  default: tabPaneVNode.children.label
+                                  default: tabPaneVNode.children.tab
                                 }}
                               </Tab>
                             )
@@ -396,7 +398,7 @@ export default defineComponent({
                       }
                       return (
                         <div
-                          ref="labelWrapperRef"
+                          ref="tabWrapperRef"
                           class={`${mergedClsPrefix}-tabs-nav-scroll-content`}
                         >
                           {wrappedTags}
@@ -405,7 +407,7 @@ export default defineComponent({
                           )}
                           {isLine ? (
                             <div
-                              ref="labelBarRef"
+                              ref="barRef"
                               class={`${mergedClsPrefix}-tabs-bar`}
                             />
                           ) : null}

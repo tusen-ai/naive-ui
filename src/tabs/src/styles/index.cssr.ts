@@ -5,22 +5,18 @@ import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
 // --close-color
 // --close-color-hover
 // --close-color-pressed
-// --label-bar-color
-// --label-font-size-card
-// --label-font-size-line
-// --label-text-color
-// --label-text-color-active
-// --label-text-color-disabled
-// --label-text-color-hover
+// --bar-color
+// --tab-font-size
+// --tab-text-color
+// --tab-text-color-active
+// --tab-text-color-disabled
+// --tab-text-color-hover
 // --pane-text-color
 // --tab-border-color
-// --tab-border-color-active
 // --tab-border-radius
 // --tab-color
 // --tab-font-weight
 // --tab-font-weight-active
-// --tab-text-color
-// --tab-text-color-active
 export default cB('tabs', `
   width: 100%;
   transition:
@@ -75,8 +71,8 @@ export default cB('tabs', `
     flex-wrap: nowrap;
     display: inline-flex;
     align-items: center;
-    color: var(--label-text-color);
-    font-size: var(--label-font-size-line);
+    color: var(--tab-text-color);
+    font-size: var(--tab-font-size);
     background-clip: padding-box;
     transition:
       color .3s var(--bezier),
@@ -88,7 +84,7 @@ export default cB('tabs', `
     }),
     cE('close', `
       margin-left: 8px;
-      font-size: 12px;
+      font-size: 14px;
       transition: color .3s var(--bezier);
     `),
     cE('label', `
@@ -101,7 +97,7 @@ export default cB('tabs', `
     bottom: 2px;
     height: 2px;
     border-radius: 1px;
-    background-color: var(--label-bar-color);
+    background-color: var(--bar-color);
     transition:
       left .2s var(--bezier),
       max-width .2s var(--bezier),
@@ -111,7 +107,7 @@ export default cB('tabs', `
       transition: none;
     `),
     cM('disabled', `
-      background-color: var(--label-text-color-disabled)
+      background-color: var(--tab-text-color-disabled)
     `)
   ]),
   cB('tab-panel', `
@@ -147,13 +143,13 @@ export default cB('tabs', `
       vertical-align: bottom;
     `, [
       c('&:hover', {
-        color: 'var(--label-text-color-hover)'
+        color: 'var(--tab-text-color-hover)'
       }),
       cM('active', {
-        color: 'var(--label-text-color-active)'
+        color: 'var(--tab-text-color-active)'
       }),
       cM('disabled', {
-        color: 'var(--label-text-color-disabled)'
+        color: 'var(--tab-text-color-disabled)'
       })
     ])
   ]),
@@ -188,7 +184,7 @@ export default cB('tabs', `
       vertical-align: bottom;
       display: flex;
       justify-content: space-between;
-      font-size: var(--label-font-size-card);
+      font-size: var(--tab-font-size);
       color: var(--tab-text-color);
     `, [
       cM('addable', `
@@ -209,7 +205,7 @@ export default cB('tabs', `
         font-weight: var(--tab-font-weight-active);
         color: var(--tab-text-color-active);
       `),
-      cM('disabled', 'color: var(--label-text-color-disabled);')
+      cM('disabled', 'color: var(--tab-text-color-disabled);')
     ]),
     cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--tab-border-color);')
   ])

@@ -4,10 +4,10 @@
 
 ```html
 <n-tabs default-value="show">
-  <n-tab-pane name="show" display-directive="show" label="show">
+  <n-tab-pane name="show" display-directive="show" tab="show">
     <show-input />
   </n-tab-pane>
-  <n-tab-pane name="if" display-directive="if" label="if">
+  <n-tab-pane name="if" display-directive="if" tab="if">
     <if-input />
   </n-tab-pane>
 </n-tabs>

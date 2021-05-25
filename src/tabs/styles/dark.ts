@@ -5,11 +5,7 @@ import { self } from './light'
 const tabsDark: TabsTheme = {
   name: 'Tabs',
   common: commonDark,
-  self (vars) {
-    const commonSelf = self(vars)
-    commonSelf.tabBorderColorActive = '#0000'
-    return commonSelf
-  }
+  self
 }
 
 export default tabsDark

@@ -1,6 +1,6 @@
 export default {
-  labelFontSizeLineSmall: '13px',
-  labelFontSizeLineMedium: '14px',
-  labelFontSizeLineLarge: '16px',
-  labelFontSizeLineHuge: '18px'
+  tabFontSizeSmall: '13px',
+  tabFontSizeMedium: '14px',
+  tabFontSizeLarge: '16px',
+  tabFontSizeHuge: '18px'
 }

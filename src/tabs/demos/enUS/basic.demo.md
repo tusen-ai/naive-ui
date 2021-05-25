@@ -3,14 +3,14 @@
 ```html
 <n-card title="Song of" style="margin-bottom: 16px;">
   <n-tabs show-divider>
-    <n-tab-pane name="oasis" label="Oasis">Wonderwall</n-tab-pane>
-    <n-tab-pane name="the beatles" label="the Beatles">Hey Jude</n-tab-pane>
-    <n-tab-pane name="jay chou" label="Jay Chou">Qilixiang</n-tab-pane>
+    <n-tab-pane name="oasis" tab="Oasis">Wonderwall</n-tab-pane>
+    <n-tab-pane name="the beatles" tab="the Beatles">Hey Jude</n-tab-pane>
+    <n-tab-pane name="jay chou" tab="Jay Chou">Qilixiang</n-tab-pane>
   </n-tabs>
 </n-card>
 <n-card>
-  <n-tabs default-value="signin" label-size="large">
-    <n-tab-pane name="signin" label="Sign in">
+  <n-tabs default-value="signin" size="large" show-divider>
+    <n-tab-pane name="signin" tab="Sign in">
       <n-form>
         <n-form-item-row label="Username">
           <n-input />
@@ -21,7 +21,7 @@
       </n-form>
       <n-button type="primary" block>Sign In</n-button>
     </n-tab-pane>
-    <n-tab-pane name="signup" label="Sign Up">
+    <n-tab-pane name="signup" tab="Sign Up">
       <n-form>
         <n-form-item-row label="Username">
           <n-input />
