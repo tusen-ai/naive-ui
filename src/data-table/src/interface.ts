@@ -173,6 +173,8 @@ export interface DataTableInjection {
   bodyWidthRef: Ref<number | null>
   scrollPartRef: Ref<'head' | 'body'>
   tableLayoutRef: Ref<'auto' | 'fixed'>
+  maxHeightRef: Ref<string | number | undefined>
+  minHeightRef: Ref<string | number | undefined>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (
     filters: FilterState,

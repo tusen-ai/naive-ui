@@ -20,6 +20,7 @@
 - `n-tabs` add `tabs-padding` prop.
 - `n-tabs` add `default-value` prop.
 - `n-layout-sider` & `n-layout-footer` & `n-layout-header` add `inverted` prop.
+- `n-data-table`'s `max-height` & `min-height` prop accept CSS value.
 
 ### Fixes
 

@@ -20,6 +20,7 @@
 - `n-tabs` 新增 `tabs-padding` 属性
 - `n-tabs` 新增 `default-value` 属性
 - `n-layout-sider` & `n-layout-footer` & `n-layout-header` 新增 `inverted` 属性
+- `n-data-table` 的 `max-height` & `min-height` 属性接受 CSS 属性
 
 ### Fixes
 

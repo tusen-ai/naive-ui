@@ -48,8 +48,8 @@ export const dataTableProps = {
     type: [Object, Boolean] as PropType<false | PaginationProps>,
     default: false
   },
-  minHeight: Number,
-  maxHeight: Number,
+  minHeight: [Number, String] as PropType<string | number>,
+  maxHeight: [Number, String] as PropType<string | number>,
   columns: {
     type: Array as PropType<TableColumns>,
     default: () => []
@@ -353,6 +353,8 @@ export default defineComponent({
         } as CSSProperties
       }),
       tableLayoutRef: toRef(props, 'tableLayout'),
+      maxHeightRef: toRef(props, 'maxHeight'),
+      minHeightRef: toRef(props, 'minHeight'),
       syncScrollState,
       doUpdateFilters,
       doUpdateSorter,
@@ -484,12 +486,7 @@ export default defineComponent({
           {{
             default: () => [
               <div class={`${mergedClsPrefix}-data-table-wrapper`}>
-                <NMainTable
-                  ref="mainTableInstRef"
-                  maxHeight={this.maxHeight}
-                  minHeight={this.minHeight}
-                  bordered={this.mergedBordered}
-                >
+                <NMainTable ref="mainTableInstRef">
                   {{
                     default: () =>
                       this.paginatedData.length === 0 ? (

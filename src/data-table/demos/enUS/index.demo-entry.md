@@ -51,8 +51,8 @@ tree
 | default-checked-row-keys | `Array<string \| number>` | `[]` |  |
 | indent | `number` | `16` | Indent of row content when using tree data. |
 | loading | `boolean` | `false` |  |
-| max-height | `number \| string` | `undefined` | The max-height of the table. If content height is larger than it, the header will be fixed at top |
-| min-height | `number \| string` | `undefined` | The min-height of the table. |
+| max-height | `number \| string` | `undefined` | The max-height of the table content. Can be a CSS value. |
+| min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |
 | pagination | `false \| Object` | `false` | See [Pagination props](pagination#Props) |
 | paging | `boolean` | `true` | If data-table do automatic paging. You may set it to `false` in async usage. |
 | row-class-name | `string \| (rowData: Object, rowIndex : number) => string \| Object` | `undefined` |  |

@@ -19,20 +19,14 @@ import {
 } from './interface'
 
 export default defineComponent({
-  props: {
-    maxHeight: Number,
-    minHeight: Number,
-    bordered: {
-      type: Boolean,
-      required: true
-    }
-  },
-  setup (props) {
+  setup () {
     const {
       mergedClsPrefixRef,
       rightFixedColumnsRef,
       leftFixedColumnsRef,
       bodyWidthRef,
+      maxHeightRef,
+      minHeightRef,
       handleTableHeaderScroll,
       syncScrollState
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -48,8 +42,8 @@ export default defineComponent({
 
     const bodyStyleRef = computed(() => {
       return {
-        maxHeight: formatLength(props.maxHeight),
-        minHeight: formatLength(props.minHeight)
+        maxHeight: formatLength(maxHeightRef.value),
+        minHeight: formatLength(minHeightRef.value)
       }
     })
     function handleBodyResize (entry: ResizeObserverEntry): void {
@@ -90,6 +84,7 @@ export default defineComponent({
       }
     })
     return {
+      maxHeight: maxHeightRef,
       mergedClsPrefix: mergedClsPrefixRef,
       selfElRef,
       headerInstRef,
