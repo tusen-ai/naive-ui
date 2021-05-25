@@ -1,37 +1,61 @@
 # Basic
 
+I hope the demo can meet you demand, so that you can have more time to do other things.
+
 ```html
-<n-layout>
-  <n-layout-header> Cool Header </n-layout-header>
-  <n-layout-content> Cool Content </n-layout-content>
-  <n-layout-footer> Cool Footer </n-layout-footer>
-</n-layout>
-<br />
-<n-layout>
-  <n-layout-header> Cool Header </n-layout-header>
-  <n-layout has-sider>
-    <n-layout-sider> Cool Sider </n-layout-sider>
-    <n-layout-content> Cool Content </n-layout-content>
-  </n-layout>
-  <n-layout-footer> Cool Footer </n-layout-footer>
-</n-layout>
-<br />
-<n-layout has-sider>
-  <n-layout-sider> Cool Sider </n-layout-sider>
+<n-space vertical size="large">
   <n-layout>
-    <n-layout-header> Cool Header </n-layout-header>
-    <n-layout-content> Cool Content </n-layout-content>
-    <n-layout-footer> Cool Footer </n-layout-footer>
+    <n-layout-header>Yiheyuan Road</n-layout-header>
+    <n-layout-content content-style="padding: 24px"
+      >Pingshan Road</n-layout-content
+    >
+    <n-layout-footer>Chengfu Road</n-layout-footer>
   </n-layout>
-</n-layout>
+  <n-layout>
+    <n-layout-header>Yiheyuan Road</n-layout-header>
+    <n-layout has-sider>
+      <n-layout-sider content-style="padding: 24px"
+        >Handian Bridge</n-layout-sider
+      >
+      <n-layout-content content-style="padding: 24px"
+        >Pingshan Road</n-layout-content
+      >
+    </n-layout>
+    <n-layout-footer>Chengfu Road</n-layout-footer>
+  </n-layout>
+  <n-layout has-sider>
+    <n-layout-sider content-style="padding: 24px;"
+      >Handian Bridge</n-layout-sider
+    >
+    <n-layout>
+      <n-layout-header>Yiheyuan Road</n-layout-header>
+      <n-layout-content content-style="padding: 24px"
+        >Pingshan Road</n-layout-content
+      >
+      <n-layout-footer content-style="padding: 24px"
+        >Chengfu Road</n-layout-footer
+      >
+    </n-layout>
+  </n-layout>
+</n-space>
 ```
 
-```js
-export default {
-  data () {
-    return {
-      collapsed: false
-    }
-  }
+```css
+.n-layout-header {
+  background: rgba(128, 128, 128, 0.2);
+  padding: 24px;
+}
+
+.n-layout-footer {
+  background: rgba(128, 128, 128, 0.2);
+  padding: 24px;
+}
+
+.n-layout-sider {
+  background: rgba(128, 128, 128, 0.3);
+}
+
+.n-layout-content {
+  background: rgba(128, 128, 128, 0.4);
 }
 ```

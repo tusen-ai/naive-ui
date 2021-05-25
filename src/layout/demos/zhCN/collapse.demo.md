@@ -1,62 +1,38 @@
 # 折叠侧边栏
 
-使用 `collapsed` 属性控制侧边栏状态。（对于 `absolute` position 的 `n-layout` 和 `n-layout-sider` 不生效。）
+使用 `collapsed` 属性控制侧边栏状态。（关联的 `n-layout-sider` 和 `n-layout-content` 必须是 static position 的）。
 
-侧边栏有两种 `collapse-mode`：`width` 和 `transform`。`width` 会改变侧边栏的宽度，而 `transform` 只是将侧边栏挪出布局。
+侧边栏有两种 `collapse-mode`，`width` 和 `transform`。`width` 会改变侧边栏的宽度，而 `transform` 只是将侧边栏挪出布局。
 
 使用 `collapsed-width` 和 `width` 设置侧边栏的宽度。
 
 ```html
-<n-switch v-model:value="collapsed" />
-<n-layout style="height: 240px;">
-  <n-layout-header style="height: 64px;"> 酷的页头 </n-layout-header>
-  <n-layout has-sider position="absolute" style="top: 64px;">
+<n-space vertical size="large">
+  <n-layout has-sider>
     <n-layout-sider
       collapse-mode="width"
       :collapsed-width="120"
       :width="240"
-      show-trigger
-      v-model:collapsed="collapsed"
+      show-trigger="arrow-circle"
+      content-style="padding: 24px"
+      bordered
     >
-      <p>边栏 边栏 边栏 边栏 边栏</p>
+      <p>海淀桥 海淀桥 海淀桥 海淀桥 海淀桥</p>
     </n-layout-sider>
-    <n-layout style="padding: 24px">
-      <n-layout-content>
-        <span>内容</span>
-      </n-layout-content>
-      <n-layout-footer>
-        <n-h1>页脚</n-h1>
-      </n-layout-footer>
-    </n-layout>
+    <n-layout-content content-style="padding: 24px">平山道</n-layout-content>
   </n-layout>
-</n-layout>
-<n-layout style="height: 240px; overflow: hidden;">
-  <n-layout-header position="absolute" style="height: 64px;">
-    酷的页头
-  </n-layout-header>
-  <n-layout position="absolute" style="top: 64px;" has-sider>
+  <n-layout has-sider>
     <n-layout-sider
       collapse-mode="transform"
       :collapsed-width="120"
       :width="240"
-      show-trigger
-      v-model:collapsed="collapsed"
+      show-trigger="arrow-circle"
+      content-style="padding: 24px"
+      bordered
     >
-      <n-h1>边栏</n-h1>
+      <n-h2>海淀桥</n-h2>
     </n-layout-sider>
-    <n-layout style="padding: 24px">
-      <span>内容</span>
-    </n-layout>
+    <n-layout-content content-style="padding: 24px">平山道</n-layout-content>
   </n-layout>
-</n-layout>
-```
-
-```js
-export default {
-  data () {
-    return {
-      collapsed: true
-    }
-  }
-}
+</n-space>
 ```

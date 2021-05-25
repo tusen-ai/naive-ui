@@ -1,51 +1,39 @@
 # Hide Sider Content
 
-Sometimes you don't want to see content inside sider after it's collapsed.
+Sometimes you don't want to see content inside sider after it's collapsed. Set `show-collapsed-content` to `false` on sider.
 
 ```html
-<n-switch v-model:value="collapsed" />
-<n-layout style="height: 240px;">
-  <n-layout-header style="height: 64px;"> Cool Header </n-layout-header>
-  <n-layout position="absolute" style="top: 64px;" has-sider>
+<n-space vertical size="large">
+  <n-layout has-sider>
     <n-layout-sider
       collapse-mode="width"
-      :show-content="!collapsed"
       :collapsed-width="120"
       :width="240"
-      v-model:collapsed="collapsed"
-      show-trigger
+      :show-collapsed-content="false"
+      show-trigger="arrow-circle"
+      content-style="padding: 24px"
+      bordered
     >
-      <n-h1>Sider</n-h1>
+      Handian Bridge Handian Bridge Handian Bridge Handian Bridge Handian Bridge
     </n-layout-sider>
-    <n-layout style="padding: 24px;"> Content </n-layout>
+    <n-layout-content content-style="padding: 24px"
+      >Pingshan Road</n-layout-content
+    >
   </n-layout>
-</n-layout>
-<n-layout style="height: 240px; overflow: hidden;">
-  <n-layout-header position="absolute" style="height: 64px;">
-    Cool Header
-  </n-layout-header>
-  <n-layout position="absolute" style="top: 64px;" has-sider>
+  <n-layout has-sider>
     <n-layout-sider
       collapse-mode="transform"
-      :show-content="!collapsed"
       :collapsed-width="120"
       :width="240"
-      v-model:collapsed="collapsed"
-      show-trigger
+      show-trigger="arrow-circle"
+      content-style="padding: 24px"
+      bordered
     >
-      <n-h1>Sider Sider Sider</n-h1>
+      <n-h2>Handian Bridge</n-h2>
     </n-layout-sider>
-    <n-layout style="padding: 24px;"> Content </n-layout>
+    <n-layout-content content-style="padding: 24px"
+      >Pingshan Road</n-layout-content
+    >
   </n-layout>
-</n-layout>
-```
-
-```js
-export default {
-  data () {
-    return {
-      collapsed: false
-    }
-  }
-}
+</n-space>
 ```

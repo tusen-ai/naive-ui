@@ -1,62 +1,47 @@
 # Collapse Sider
 
-Use `collapsed` prop to control status of sider. (Not working for `n-layout` and `n-layout-sider` with `absolute` position.)
+Use `collapsed` prop to control status of sider. (The adjacent `n-layout-sider` and `n-layout-sider` must be `static` positioned.)
 
-Sider has two `collapse-mode`: `width`, `transform`. `width` will actually change width of sider, `transform` will just move sider out of layout.
+Sider has two `collapse-mode`, `width` & `transform`. `width` will actually change width of sider, `transform` will just move sider out of layout.
 
 Use `collapsed-width` and `width` to set sider's width.
 
+Use `show-trigger` to use builtin button.
+
 ```html
-<n-switch v-model:value="collapsed" />
-<n-layout style="height: 240px;">
-  <n-layout-header style="height: 64px;"> Cool Header </n-layout-header>
-  <n-layout position="absolute" style="top: 64px;" has-sider>
+<n-space vertical size="large">
+  <n-layout has-sider>
     <n-layout-sider
       collapse-mode="width"
       :collapsed-width="120"
       :width="240"
-      v-model:collapsed="collapsed"
-      show-trigger
+      show-trigger="arrow-circle"
+      content-style="padding: 24px"
+      bordered
     >
-      Cool Sider Cool Sider Cool Sider
+      <p>
+        Handian Bridge Handian Bridge Handian Bridge Handian Bridge Handian
+        Bridge
+      </p>
     </n-layout-sider>
-    <n-layout style="padding: 24px">
-      <n-layout-content>
-        <span>Content</span>
-      </n-layout-content>
-      <n-layout-footer>
-        <n-h1>Footer</n-h1>
-      </n-layout-footer>
-    </n-layout>
+    <n-layout-content content-style="padding: 24px"
+      >Pingshan Road</n-layout-content
+    >
   </n-layout>
-</n-layout>
-<n-layout style="height: 240px; overflow: hidden;">
-  <n-layout-header position="absolute" style="height: 64px;">
-    Cool Header
-  </n-layout-header>
-  <n-layout position="absolute" style="top: 64px;" has-sider>
+  <n-layout has-sider>
     <n-layout-sider
       collapse-mode="transform"
       :collapsed-width="120"
       :width="240"
-      v-model:collapsed="collapsed"
-      show-trigger
+      show-trigger="arrow-circle"
+      content-style="padding: 24px"
+      bordered
     >
-      <n-h1>Sider</n-h1>
+      <n-h2>Handian Bridge</n-h2>
     </n-layout-sider>
-    <n-layout style="padding: 24px">
-      <span>Content</span>
-    </n-layout>
+    <n-layout-content content-style="padding: 24px"
+      >Pingshan Road</n-layout-content
+    >
   </n-layout>
-</n-layout>
-```
-
-```js
-export default {
-  data () {
-    return {
-      collapsed: true
-    }
-  }
-}
+</n-space>
 ```

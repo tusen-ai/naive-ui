@@ -16,12 +16,18 @@ export default defineComponent({
       options: [
         {
           label: () =>
-            h(NEllipsis, null, { default: () => '电灯熄灭 物换星移 泥牛入海' }),
+            h(NEllipsis, null, {
+              default: () =>
+                'The lights are extinguished. Matter is transformed and the heavens have shifted. Clay figures vanish into the sea.'
+            }),
           key: '1'
         },
         {
           label: () =>
-            h(NEllipsis, null, { default: () => '黑暗好像 一颗巨石 按在胸口' }),
+            h(NEllipsis, null, {
+              default: () =>
+                'The darkness is like a boulder pressing down upon the breast.'
+            }),
           key: '2'
         }
       ]

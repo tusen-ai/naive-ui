@@ -28,9 +28,7 @@
           :options="menuOptions"
         />
       </n-layout-sider>
-      <n-layout style="max-height: 320px;">
-        <span>内容</span>
-      </n-layout>
+      <n-layout style="max-height: 320px;" />
     </n-layout>
     <n-layout-footer :inverted="inverted" bordered>
       Footer Footer Footer

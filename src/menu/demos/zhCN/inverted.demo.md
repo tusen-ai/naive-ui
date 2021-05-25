@@ -1,10 +1,10 @@
 # 反转
 
-通过 `inverted` 来增加对比。
+通过 `inverted` 来增加对比，一般和 `n-layout` 配合使用。
 
 ```html
 <n-space vertical>
-  <n-space> <n-switch v-model:value="inverted" /> inverted </n-space>
+  <n-space> <n-switch v-model:value="inverted" />inverted</n-space>
   <n-layout has-sider>
     <n-layout-sider
       bordered

@@ -1,51 +1,35 @@
 # 隐藏侧边栏内容
 
-有时候收起边栏后，你不想看到里面有什么。
+有时候收起边栏后，你不想看到里面有什么，你可以设定 `show-collapsed-content` 为 `false`。
 
 ```html
-<n-switch v-model:value="collapsed" />
-<n-layout style="height: 240px;">
-  <n-layout-header style="height: 64px;"> 酷的页头 </n-layout-header>
-  <n-layout position="absolute" style="top: 64px;" has-sider>
+<n-space vertical size="large">
+  <n-layout has-sider>
     <n-layout-sider
       collapse-mode="width"
-      :show-content="!collapsed"
       :collapsed-width="120"
       :width="240"
-      v-model:collapsed="collapsed"
-      show-trigger
+      :show-collapsed-content="false"
+      show-trigger="arrow-circle"
+      content-style="padding: 24px;"
+      bordered
     >
-      <n-h1>酷的边栏</n-h1>
+      海淀桥 海淀桥 海淀桥 海淀桥 海淀桥
     </n-layout-sider>
-    <n-layout style="padding: 24px;"> 内容 </n-layout>
+    <n-layout-content content-style="padding: 24px">平山道</n-layout-content>
   </n-layout>
-</n-layout>
-<n-layout style="height: 240px; overflow: hidden;">
-  <n-layout-header position="absolute" style="height: 64px;">
-    酷的页头
-  </n-layout-header>
-  <n-layout position="absolute" style="top: 64px;" has-sider>
+  <n-layout has-sider>
     <n-layout-sider
       collapse-mode="transform"
-      :show-content="!collapsed"
       :collapsed-width="120"
       :width="240"
-      v-model:collapsed="collapsed"
-      show-trigger
+      show-trigger="arrow-circle"
+      content-style="padding: 24px;"
+      bordered
     >
-      <n-h1>边栏 边栏 边栏</n-h1>
+      <n-h2>海淀桥</n-h2>
     </n-layout-sider>
-    <n-layout style="padding: 24px;"> 内容 </n-layout>
+    <n-layout-content content-style="padding: 24px">平山道</n-layout-content>
   </n-layout>
-</n-layout>
-```
-
-```js
-export default {
-  data () {
-    return {
-      collapsed: false
-    }
-  }
-}
+</n-space>
 ```

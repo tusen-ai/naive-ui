@@ -1,7 +1,7 @@
 # 滚动到
 
 ```html
-<n-space vertical :size="12">
+<n-space vertical size="large">
   <n-space>
     <n-button @click="$refs.sider.scrollTo({ top: 120, behavior: 'smooth' })">
       边栏滚到 120px
@@ -10,22 +10,50 @@
       内容滚到 120px
     </n-button>
   </n-space>
-  <n-layout style="height: 480px;">
-    <n-layout-header style="height: 64px;"> 酷的页头 </n-layout-header>
-    <n-layout position="absolute" style="top: 64px; bottom: 64px;" has-sider>
-      <n-layout-sider ref="sider">
-        <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1> <n-h1>长</n-h1
-        ><n-h1>长</n-h1><n-h1>长</n-h1> <n-h1>长</n-h1><n-h1>长</n-h1
-        ><n-h1>长</n-h1> <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
+  <n-layout style="height: 360px;">
+    <n-layout-header style="height: 64px; padding: 24px;" bordered
+      >颐和园路</n-layout-header
+    >
+    <n-layout has-sider position="absolute" style="top: 64px; bottom: 64px;">
+      <n-layout-sider ref="sider" bordered content-style="padding: 24px;">
+        <n-h2>海淀桥</n-h2>
+        <n-h2>海淀桥</n-h2>
+        <n-h2>海淀桥</n-h2>
+        <n-h2>海淀桥</n-h2>
+        <n-h2>海淀桥</n-h2>
+        <n-h2>海淀桥</n-h2>
+        <n-h2>海淀桥</n-h2>
+        <n-h2>海淀桥</n-h2>
+        <n-h2>海淀桥</n-h2>
+        <n-h2>海淀桥</n-h2>
+        <n-h2>海淀桥</n-h2>
+        <n-h2>海淀桥</n-h2>
       </n-layout-sider>
-      <n-layout :native-scrollbar="false" ref="content">
-        <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1> <n-h1>长</n-h1
-        ><n-h1>长</n-h1><n-h1>长</n-h1> <n-h1>长</n-h1><n-h1>长</n-h1
-        ><n-h1>长</n-h1> <n-h1>长</n-h1><n-h1>长</n-h1><n-h1>长</n-h1>
-      </n-layout>
+      <n-layout-content
+        ref="content"
+        content-style="padding: 24px;"
+        :native-scrollbar="false"
+      >
+        <n-h2>平山道</n-h2>
+        <n-h2>平山道</n-h2>
+        <n-h2>平山道</n-h2>
+        <n-h2>平山道</n-h2>
+        <n-h2>平山道</n-h2>
+        <n-h2>平山道</n-h2>
+        <n-h2>平山道</n-h2>
+        <n-h2>平山道</n-h2>
+        <n-h2>平山道</n-h2>
+        <n-h2>平山道</n-h2>
+        <n-h2>平山道</n-h2>
+        <n-h2>平山道</n-h2>
+      </n-layout-content>
     </n-layout>
-    <n-layout-footer position="absolute" style="height: 64px">
-      酷的页脚
+    <n-layout-footer
+      bordered
+      position="absolute"
+      style="height: 64px; padding: 24px;"
+    >
+      成府路
     </n-layout-footer>
   </n-layout>
 </n-space>
