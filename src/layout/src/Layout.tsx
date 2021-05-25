@@ -20,6 +20,7 @@ import { LayoutInst, positionProp } from './interface'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 const layoutProps = {
+  embedded: Boolean,
   position: positionProp,
   nativeScrollbar: {
     type: Boolean,
@@ -88,12 +89,12 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { color, textColor }
+          self
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
-          '--color': color,
-          '--text-color': textColor
+          '--color': props.embedded ? self.colorEmbedded : self.color,
+          '--text-color': self.textColor
         }
       })
     }

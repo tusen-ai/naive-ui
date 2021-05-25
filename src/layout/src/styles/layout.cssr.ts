@@ -12,7 +12,7 @@ export default cB('layout', `
   flex: auto;
   overflow-x: hidden;
   transition:
-    margin-left .3s var(--bezier),
+    box-shadow .3s var(--bezier),
     background-color .3s var(--bezier),
     color .3s var(--bezier);
 `, [

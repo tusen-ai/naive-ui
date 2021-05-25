@@ -7,6 +7,7 @@ import { cB, cM } from '../../../_utils/cssr'
 // --text-color
 export default cB('layout-footer', `
   transition:
+    box-shadow .3s var(--bezier),
     color .3s var(--bezier),
     background-color .3s var(--bezier),
     border-color .3s var(--bezier);

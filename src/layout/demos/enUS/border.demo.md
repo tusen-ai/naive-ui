@@ -1,5 +1,7 @@
 # Border
 
+You can set `bordered` on sider、footer、header.
+
 ```html
 <n-layout has-sider>
   <n-layout-sider bordered> Cool Sider </n-layout-sider>

@@ -19,6 +19,7 @@ export const self = (vars: ThemeCommonVars) => {
     textColor: textColor2,
     textColorInverted: '#FFF',
     color: bodyColor,
+    colorEmbedded: actionColor,
     headerColor: cardColor,
     headerColorInverted: invertedColor,
     footerColor: actionColor,
@@ -34,6 +35,7 @@ export const self = (vars: ThemeCommonVars) => {
     siderToggleButtonColor: 'rgba(0, 0, 0, .15)',
     siderToggleBarColor: composite(bodyColor, scrollbarColor),
     siderToggleBarColorHover: composite(bodyColor, scrollbarColorHover),
+    // hack for inverted background
     __invertScrollbar: 'true'
   }
 }

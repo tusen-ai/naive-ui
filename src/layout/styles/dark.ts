@@ -22,6 +22,7 @@ const layoutDark: LayoutTheme = {
       textColor: textColor2,
       textColorInverted: textColor2,
       color: bodyColor,
+      colorEmbedded: bodyColor,
       headerColor: cardColor,
       headerColorInverted: cardColor,
       footerColor: cardColor,

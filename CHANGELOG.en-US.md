@@ -21,6 +21,7 @@
 - `n-tabs` add `default-value` prop.
 - `n-layout-sider` & `n-layout-footer` & `n-layout-header` add `inverted` prop.
 - `n-data-table`'s `max-height` & `min-height` prop accept CSS value.
+- `n-layout` & `n-layout-content` add `embedded` prop.
 
 ### Fixes
 
