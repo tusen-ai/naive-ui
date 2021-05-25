@@ -81,14 +81,14 @@ export default {
       ...i18n({
         'zh-CN': {
           start: '开始使用',
-          intro1: '一个 Vue 3 UI 框架',
+          intro1: '一个 Vue 3 组件库',
           intro2: '比较完整，主题可调，使用 Typescript，不算太慢',
           intro3: '有点意思',
           intro4: '换个主题'
         },
         'en-US': {
           start: 'Get Started',
-          intro1: 'A Vue 3 UI Framework',
+          intro1: 'A Vue 3 Component Library',
           intro2: 'Rather Complete, Themeable, With Typescript, Not Too Slow',
           intro3: 'Interesting Somehow',
           intro4: 'Change Theme'

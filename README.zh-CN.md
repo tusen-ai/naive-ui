@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">Naive UI</h1>
-<p align="center">一个 Vue 3 UI 框架</p>
+<p align="center">一个 Vue 3 组件库</p>
 <p align="center"><b>比较完整，主题可调，使用 Typescript，不算太慢</b></p>
 <p align="center">有点意思</p>
 

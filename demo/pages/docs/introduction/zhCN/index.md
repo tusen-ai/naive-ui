@@ -2,7 +2,7 @@
 
 # Naive UI
 
-Naive UI 是一个 Vue3 UI 框架。
+Naive UI 是一个 Vue3 的组件库。
 
 要了解如何安装，参见[安装](installation)。
 

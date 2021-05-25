@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">Naive UI</h1>
-<p align="center">A Vue 3 UI Framework</p>
+<p align="center">A Vue 3 Component Library</p>
 <p align="center"><b>Rather Complete, Themable, With Typescript, Not Too Slow</b></p>
 <p align="center">Interesting Somehow</p>
 
