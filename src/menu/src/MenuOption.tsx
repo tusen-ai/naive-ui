@@ -26,7 +26,7 @@ export default defineComponent({
   setup (props) {
     const MenuChild = useMenuChild(props)
     const { NSubmenu, NMenu } = MenuChild
-    const { props: menuProps, mergedClsPrefixRef } = NMenu
+    const { props: menuProps, mergedClsPrefixRef, mergedCollapsedRef } = NMenu
     const submenuDisabledRef = NSubmenu
       ? NSubmenu.mergedDisabledRef
       : { value: false }
@@ -54,7 +54,7 @@ export default defineComponent({
       dropdownEnabled: useMemo(() => {
         return (
           props.root &&
-          menuProps.collapsed &&
+          mergedCollapsedRef.value &&
           menuProps.mode !== 'horizontal' &&
           !mergedDisabledRef.value
         )

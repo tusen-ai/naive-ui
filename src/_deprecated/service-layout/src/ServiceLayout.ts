@@ -58,7 +58,6 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
-    const uncontrolledCollapsedRef = ref(false)
     const menuItemsRef = computed(() => {
       return createItems(props.items)
     })
@@ -70,9 +69,6 @@ export default defineComponent({
       watch(toRef(props, 'items'), () => {
         syncPath(route.path)
       })
-    }
-    function doUpdateCollapsed (value: boolean): void {
-      uncontrolledCollapsedRef.value = value
     }
     function doUpdateValue (value: string): void {
       const { onInput, onSelect, 'onUpdate:value': onUpdateValue } = props
@@ -107,12 +103,10 @@ export default defineComponent({
     return {
       bodyLayoutInstRef,
       scrollTo,
-      doUpdateCollapsed,
       handleMenuUpdateValue,
       menuItems: menuItemsRef,
       mergedValue: mergedValueRef,
-      uncontrolledValue: uncontrolledValueRef,
-      uncontrolledCollapsed: uncontrolledCollapsedRef
+      uncontrolledValue: uncontrolledValueRef
     }
   },
   render () {
@@ -120,9 +114,8 @@ export default defineComponent({
       bordered: true,
       ...this.siderProps,
       showTrigger: true,
-      collapsed: this.uncontrolledCollapsed,
       collapseMode: 'width',
-      showContent: !this.uncontrolledCollapsed,
+      showCollapsedContent: true,
       nativeScrollbar: false,
       collapsedWidth: 0,
       width: 288,
@@ -135,8 +128,7 @@ export default defineComponent({
           flexShrink: 0
         }
       },
-      style: this.siderProps?.style as any,
-      onUpdateCollapsed: this.doUpdateCollapsed
+      style: this.siderProps?.style as any
     }
     const contentProps = {
       ...this.contentProps,
