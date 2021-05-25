@@ -1,6 +1,26 @@
 export default {
-  tabFontSizeSmall: '13px',
+  tabFontSizeSmall: '14px',
   tabFontSizeMedium: '14px',
   tabFontSizeLarge: '16px',
-  tabFontSizeHuge: '18px'
+  tabGapSmallLine: '36px',
+  tabGapMediumLine: '36px',
+  tabGapLargeLine: '36px',
+  tabPaddingSmallLine: '6px 0',
+  tabPaddingMediumLine: '10px 0',
+  tabPaddingLargeLine: '14px 0',
+  tabGapSmallBar: '36px',
+  tabGapMediumBar: '36px',
+  tabGapLargeBar: '36px',
+  tabPaddingSmallBar: '4px 0',
+  tabPaddingMediumBar: '6px 0',
+  tabPaddingLargeBar: '10px 0',
+  tabGapSmallCard: '4px',
+  tabGapMediumCard: '4px',
+  tabGapLargeCard: '4px',
+  tabPaddingSmallCard: '6px 10px',
+  tabPaddingMediumCard: '8px 12px',
+  tabPaddingLargeCard: '8px 16px',
+  panePaddingSmall: '8px 0 0 0',
+  panePaddingMedium: '12px 0 0 0',
+  panePaddingLarge: '16px 0 0 0'
 }

@@ -42,7 +42,7 @@ const tabsProps = {
   >,
   /** deprecated */
   labelSize: {
-    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
+    type: String as PropType<'small' | 'medium' | 'large'>,
     validator: () => {
       if (__DEV__) {
         warn('tabs', '`label-size` is deprecated, please use `size` instead.')
@@ -52,7 +52,7 @@ const tabsProps = {
     default: undefined
   },
   size: {
-    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
+    type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
   tabStyle: [String, Object] as PropType<string | CSSProperties>,
@@ -204,6 +204,7 @@ export default defineComponent({
         const disableTransitionClassName = `${mergedClsPrefixRef.value}-tabs-bar--transition-disabled`
         barEl.classList.add(disableTransitionClassName)
         updateCurrentBarStyle()
+        void barEl.offsetWidth
         barEl.classList.remove(disableTransitionClassName)
       }
     }, 64)
@@ -272,6 +273,9 @@ export default defineComponent({
       cssVars: computed(() => {
         const { value: size } = compitableSizeRef
         const { type } = props
+        const typeSuffix =
+          type === 'card' ? 'Card' : type === 'bar' ? 'Bar' : 'Line'
+        const sizeType = `${size}${typeSuffix}` as const
         const {
           self: {
             barColor,
@@ -284,6 +288,9 @@ export default defineComponent({
             tabFontWeight,
             tabBorderRadius,
             tabFontWeightActive,
+            [createKey('panePadding', size)]: panePadding,
+            [createKey('tabPadding', sizeType)]: tabPadding,
+            [createKey('tabGap', sizeType)]: tabGap,
             [createKey('tabTextColor', type)]: tabTextColor,
             [createKey('tabTextColorActive', type)]: tabTextColorActive,
             [createKey('tabTextColorHover', type)]: tabTextColorHover,
@@ -308,7 +315,10 @@ export default defineComponent({
           '--close-color-pressed': closeColorPressed,
           '--tab-color': tabColor,
           '--tab-font-weight': tabFontWeight,
-          '--tab-font-weight-active': tabFontWeightActive
+          '--tab-font-weight-active': tabFontWeightActive,
+          '--tab-padding': tabPadding,
+          '--tab-gap': tabGap,
+          '--pane-padding': panePadding
         }
       })
     }

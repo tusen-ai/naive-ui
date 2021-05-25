@@ -8,6 +8,7 @@
 basic
 flex-label
 card
+size
 prefix
 display-directive
 addable
@@ -24,7 +25,7 @@ line-debug
 | closable | `boolean` | `false` | 是否允许 tab 关闭，只在 type 为 `'card'` 时生效 |
 | default-value | `string \| number` | 第一个标签页的 name 属性 |  |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly'` | `undefined` |  |
-| label-size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | 标签的尺寸，只对线型的 Tabs 生效 |
+| label-size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 padding |
 | type | `'bar' \| 'line' \| 'card'` | `'bar'` |  |

@@ -17,6 +17,9 @@ import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
 // --tab-color
 // --tab-font-weight
 // --tab-font-weight-active
+// --tab-gap
+// --tab-padding
+// --pane-padding
 export default cB('tabs', `
   width: 100%;
   transition:
@@ -74,6 +77,7 @@ export default cB('tabs', `
     color: var(--tab-text-color);
     font-size: var(--tab-font-size);
     background-clip: padding-box;
+    padding: var(--tab-padding);
     transition:
       color .3s var(--bezier),
       background-color .3s var(--bezier),
@@ -94,7 +98,7 @@ export default cB('tabs', `
   ]),
   cB('tabs-bar', `
     position: absolute;
-    bottom: 2px;
+    bottom: 0;
     height: 2px;
     border-radius: 1px;
     background-color: var(--bar-color);
@@ -110,20 +114,23 @@ export default cB('tabs', `
       background-color: var(--tab-text-color-disabled)
     `)
   ]),
-  cB('tab-panel', `
+  cB('tab-pane', `
     color: var(--pane-text-color);
     width: 100%;
-    margin-top: 8px;
+    padding: var(--pane-padding);
     transition:
       color .3s var(--bezier),
       background-color .3s var(--bezier);
   `),
+  cB('tabs-tab-pad', `
+    width: var(--tab-gap);
+    flex-grow: 0;
+    flex-shrink: 0;
+  `),
   cM('line-type, bar-type', [
-    cB('tabs-tab-pad', 'width: 36px;'),
     cB('tabs-tab', `
       font-weight: var(--tab-font-weight-active);
       box-sizing: border-box;
-      padding: 4px 0 6px;
       vertical-align: bottom;
     `, [
       c('&:hover', {
@@ -166,9 +173,6 @@ export default cB('tabs', `
       border-bottom: 1px solid var(--tab-border-color);
     `),
     cB('tabs-tab-pad', `
-      width: 4px;
-      flex-grow: 0;
-      flex-shrink: 0;
       transition: border-color .3s var(--bezier);
       border-bottom: 1px solid var(--tab-border-color);
     `),
@@ -179,7 +183,6 @@ export default cB('tabs', `
       border-top-right-radius: var(--tab-border-radius);
       background-color: var(--tab-color);
       box-sizing: border-box;
-      padding: 6px 12px;
       position: relative;
       vertical-align: bottom;
       display: flex;

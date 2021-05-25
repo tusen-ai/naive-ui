@@ -11,7 +11,9 @@ export const tabPaneProps = {
     >,
     default: undefined,
     validator: () => {
-      if (__DEV__) { warn('tab-pane', '`label` is deprecated, please use `tab` instead.') }
+      if (__DEV__) {
+        warn('tab-pane', '`label` is deprecated, please use `tab` instead.')
+      }
       return true
     }
   },
@@ -49,6 +51,6 @@ export default defineComponent({
     }
   },
   render () {
-    return <div class={`${this.mergedClsPrefix}-tab-panel`}>{this.$slots}</div>
+    return <div class={`${this.mergedClsPrefix}-tab-pane`}>{this.$slots}</div>
   }
 })
