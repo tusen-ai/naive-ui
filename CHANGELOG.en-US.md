@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-tabs` add `on-close` prop.
+- `n-tabs` add `on-add` prop.
+
 ## 2.9.0
 
 ### Breaking Changes

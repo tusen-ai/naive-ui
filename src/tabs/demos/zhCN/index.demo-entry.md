@@ -10,6 +10,7 @@ flex-label
 card
 prefix
 display-directive
+addable
 line-debug
 ```
 
@@ -29,6 +30,8 @@ line-debug
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 padding |
 | type | `'line' \| 'card'` | `'line'` |  |
 | value | `string \| number` | `undefined` |  |
+| on-add | `() => void` | `undefined` |  |
+| on-close | `(name: string \| number) => void` | `undefined` |  |
 | on-update:value | `(value: string \| number) => void` | `undefined` |  |
 
 ### Tab Pane Props

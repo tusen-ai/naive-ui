@@ -60,8 +60,14 @@ export default cB('tabs', `
   `),
   cB('tabs-wrapper', `
     display: inline-flex;
-    white-space: nowrap;
+    flex-wrap: nowrap;
     position: relative;
+  `),
+  cB('tabs-tab-wrapper', `
+    display: flex;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    flex-grow: 0;
   `),
   cB('tabs-tab', `
     cursor: pointer;
@@ -133,15 +139,13 @@ export default cB('tabs', `
         bottom: -1px;
       `)
     ]),
+    cB('tabs-tab-pad', 'width: 36px;'),
     cB('tabs-tab', `
       font-weight: var(--tab-font-weight-active);
       box-sizing: border-box;
       padding: 4px 0 6px;
       vertical-align: bottom;
     `, [
-      c('&:not(:last-child)', {
-        marginRight: '36px'
-      }),
       c('&:hover', {
         color: 'var(--label-text-color-hover)'
       }),
@@ -172,15 +176,6 @@ export default cB('tabs', `
       transition: border-color .3s var(--bezier);
       border-bottom: 1px solid var(--tab-border-color);
     `),
-    cB('tabs-tab-wrapper', `
-      display: flex;
-      flex-shrink: 0;
-      flex-grow: 0;
-    `, [
-      c('&:nth-last-child(2)', [
-        cB('tabs-tab-pad', 'display: none;')
-      ])
-    ]),
     cB('tabs-tab', `
       font-weight: var(--tab-font-weight);
       border: 1px solid var(--tab-border-color);

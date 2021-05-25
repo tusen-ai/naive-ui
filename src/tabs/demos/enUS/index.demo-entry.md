@@ -10,6 +10,7 @@ flex-label
 card
 prefix
 display-directive
+addable
 ```
 
 ## Props
@@ -28,6 +29,8 @@ display-directive
 | tabs-padding | `number` | `0` | Left & right padding of the group of tabs. |
 | type | `'line' \| 'card'` | `'line'` |  |
 | value | `string \| number` | `undefined` |  |
+| on-add | `() => void` | `undefined` |  |
+| on-close | `(name: string \| number) => void` | `undefined` |  |
 | on-update:value | `(value: string \| number) => void` | `undefined` |  |
 
 ### Tab Pane Props

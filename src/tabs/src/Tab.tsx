@@ -8,6 +8,7 @@ export default defineComponent({
   name: 'Tab',
   props: Object.assign(
     {
+      leftPadded: Boolean,
       addable: Boolean
     },
     tabPaneProps
@@ -35,13 +36,18 @@ export default defineComponent({
       clsPrefix: mergedClsPrefixRef,
       value: valueRef,
       type: typeRef,
-      handleClose,
+      handleClose (e: MouseEvent) {
+        e.stopPropagation()
+        if (props.disabled) return
+        handleClose(props.name)
+      },
       handleClick () {
+        if (props.disabled) return
         if (props.addable) {
           handleAdd()
           return
         }
-        handleTabClick(props.name, props.disabled)
+        handleTabClick(props.name)
       }
     }
   },
@@ -58,6 +64,9 @@ export default defineComponent({
     } = this
     return (
       <div class={`${clsPrefix}-tabs-tab-wrapper`}>
+        {this.leftPadded ? (
+          <div class={`${clsPrefix}-tabs-tab-pad`}></div>
+        ) : null}
         <div
           key={name}
           data-name={name}
@@ -82,19 +91,18 @@ export default defineComponent({
                 }}
               </NBaseIcon>
             ) : (
-              label
+              label ?? name
             )}
           </span>
           {mergedClosable && this.type === 'card' ? (
             <NBaseClose
               clsPrefix={clsPrefix}
               class={`${clsPrefix}-tabs-tab__close`}
-              onClick={(e) => this.handleClose(e, name)}
+              onClick={this.handleClose}
               disabled={disabled}
             />
           ) : null}
         </div>
-        <div class={`${clsPrefix}-tabs-tab-pad`}></div>
       </div>
     )
   }
