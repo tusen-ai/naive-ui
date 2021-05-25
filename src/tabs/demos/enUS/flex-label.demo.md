@@ -4,7 +4,7 @@ Only works with `line` typed tabs.
 
 ```html
 <n-card title="Song of" style="margin-bottom: 16px;">
-  <n-tabs default-value="oasis" justify-content="space-evenly">
+  <n-tabs default-value="oasis" justify-content="space-evenly" type="line">
     <n-tab-pane name="oasis" tab="Oasis">Wonderwall</n-tab-pane>
     <n-tab-pane name="the beatles" tab="the Beatles">Hey Jude</n-tab-pane>
     <n-tab-pane name="jay chou" tab="Jay Chou">Qilixiang</n-tab-pane>

@@ -2,14 +2,14 @@
 
 ```html
 <n-card title="Song of" style="margin-bottom: 16px;">
-  <n-tabs show-divider>
+  <n-tabs type="line">
     <n-tab-pane name="oasis" tab="Oasis">Wonderwall</n-tab-pane>
     <n-tab-pane name="the beatles" tab="the Beatles">Hey Jude</n-tab-pane>
     <n-tab-pane name="jay chou" tab="Jay Chou">Qilixiang</n-tab-pane>
   </n-tabs>
 </n-card>
 <n-card>
-  <n-tabs default-value="signin" size="large" show-divider>
+  <n-tabs default-value="signin" size="large">
     <n-tab-pane name="signin" tab="Sign in">
       <n-form>
         <n-form-item-row label="Username">

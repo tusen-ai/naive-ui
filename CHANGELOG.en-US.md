@@ -8,6 +8,7 @@
 - `n-tabs` add `on-add` prop.
 - `n-tabs` add `tab` slot.
 - `n-tab-pane`'s `tab` prop support render function & VNode.
+- `n-tabs`'s `type` prop support `'line'` option.
 
 ### Deprecated
 
@@ -32,7 +33,6 @@
 - `n-menu` add `inverted` prop.
 - `n-dropdown` add `inverted` prop.
 - `n-tabs` add `addable` prop.
-- `n-tabs` add `show-divider` prop.
 - `n-tabs` add `tab-style` prop.
 - `n-tabs` add `tabs-padding` prop.
 - `n-tabs` add `default-value` prop.

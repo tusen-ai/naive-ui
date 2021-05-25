@@ -33,17 +33,20 @@ const tabsProps = {
   value: [String, Number] as PropType<string | number>,
   defaultValue: [String, Number] as PropType<string | number>,
   type: {
-    type: String as PropType<'line' | 'card'>,
-    default: 'line'
+    type: String as PropType<'bar' | 'line' | 'card'>,
+    default: 'bar'
   },
   closable: Boolean,
   justifyContent: String as PropType<
   'space-between' | 'space-around' | 'space-evenly'
   >,
+  /** deprecated */
   labelSize: {
     type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
     validator: () => {
-      if (__DEV__) { warn('tabs', '`label-size` is deprecated, please use `size` instead.') }
+      if (__DEV__) {
+        warn('tabs', '`label-size` is deprecated, please use `size` instead.')
+      }
       return true
     },
     default: undefined
@@ -58,7 +61,6 @@ const tabsProps = {
     type: Number,
     default: 0
   },
-  showDivider: Boolean,
   onAdd: Function as PropType<() => void>,
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -128,7 +130,7 @@ export default defineComponent({
     )
 
     const tabWrapperStyleRef = computed(() => {
-      if (!props.justifyContent || props.type !== 'line') return undefined
+      if (!props.justifyContent || props.type === 'card') return undefined
       return {
         display: 'flex',
         justifyContent: props.justifyContent
@@ -193,7 +195,7 @@ export default defineComponent({
     const handleNavResize = throttle(function handleNavResize () {
       const { type } = props
       if (
-        type === 'line' &&
+        (type === 'line' || type === 'bar') &&
         (firstTimeUpdatePosition || props.justifyContent)
       ) {
         const { value: barEl } = barRef
@@ -323,16 +325,14 @@ export default defineComponent({
     const children = defaultSlot ? flatten(defaultSlot()) : []
     const prefix = prefixSlot ? prefixSlot() : null
     const suffix = suffixSlot ? suffixSlot() : null
-    const isLine = type === 'line'
-    const mergedShowDivider = isLine && this.showDivider
-    const mergedJustifyContent = isLine && this.justifyContent
+    const isCard = type === 'card'
+    const mergedJustifyContent = !isCard && this.justifyContent
     return (
       <div
         class={[
           `${mergedClsPrefix}-tabs`,
           `${mergedClsPrefix}-tabs--${type}-type`,
           `${mergedClsPrefix}-tabs--${mergedSize}-size`,
-          mergedShowDivider && `${mergedClsPrefix}-tabs--show-divider`,
           mergedJustifyContent && `${mergedClsPrefix}-tabs--flex`
         ]}
         style={this.cssVars as CSSProperties}
@@ -375,7 +375,7 @@ export default defineComponent({
                               </Tab>
                             )
                           })}
-                          {!addTabFixed && addable && !isLine
+                          {!addTabFixed && addable && isCard
                             ? createAddTag(addable, children.length !== 0)
                             : null}
                           {mergedJustifyContent ? null : (
@@ -387,7 +387,7 @@ export default defineComponent({
                         </div>
                       )
                       let wrappedTags = rawWrappedTags
-                      if (!isLine && addable) {
+                      if (isCard && addable) {
                         wrappedTags = (
                           <VResizeObserver onResize={this.handleTagsResize}>
                             {{
@@ -402,15 +402,15 @@ export default defineComponent({
                           class={`${mergedClsPrefix}-tabs-nav-scroll-content`}
                         >
                           {wrappedTags}
-                          {isLine ? null : (
+                          {isCard ? (
                             <div class={`${mergedClsPrefix}-tabs-pad`} />
-                          )}
-                          {isLine ? (
+                          ) : null}
+                          {isCard ? null : (
                             <div
                               ref="barRef"
                               class={`${mergedClsPrefix}-tabs-bar`}
                             />
-                          ) : null}
+                          )}
                         </div>
                       )
                     }
@@ -419,7 +419,7 @@ export default defineComponent({
               )
             }}
           </VResizeObserver>
-          {addTabFixed && addable && !isLine
+          {addTabFixed && addable && isCard
             ? createAddTag(addable, true)
             : null}
           {suffix ? (

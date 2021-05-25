@@ -25,10 +25,9 @@ line-debug
 | default-value | `string \| number` | 第一个标签页的 name 属性 |  |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly'` | `undefined` |  |
 | label-size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | 标签的尺寸，只对线型的 Tabs 生效 |
-| show-divider | `boolean` | `false` | 是否展示分割线，只在 type 为 `'line'` 时生效 |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 padding |
-| type | `'line' \| 'card'` | `'line'` |  |
+| type | `'bar' \| 'line' \| 'card'` | `'bar'` |  |
 | value | `string \| number` | `undefined` |  |
 | on-add | `() => void` | `undefined` |  |
 | on-close | `(name: string \| number) => void` | `undefined` |  |

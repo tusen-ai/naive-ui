@@ -27,7 +27,7 @@ addable
 | show-divider | `boolean` | `false` | Whether to show divider of tabs. Only works when type is `'line'`. |
 | tab-style | `string \| object` | `undefined` | Style of the tab. |
 | tabs-padding | `number` | `0` | Left & right padding of the group of tabs. |
-| type | `'line' \| 'card'` | `'line'` |  |
+| type | `'bar' \| 'line' \| 'card'` | `'bar'` |  |
 | value | `string \| number` | `undefined` |  |
 | on-add | `() => void` | `undefined` |  |
 | on-close | `(name: string \| number) => void` | `undefined` |  |
