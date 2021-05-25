@@ -1,6 +1,7 @@
 import { h, defineComponent, inject, computed } from 'vue'
-import { NBaseClose, NBaseIcon } from '../../_internal'
 import { AddIcon } from '../../_internal/icons'
+import { NBaseClose, NBaseIcon } from '../../_internal'
+import { Render } from '../../_utils'
 import { tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
 
@@ -60,7 +61,8 @@ export default defineComponent({
       label,
       value,
       mergedClosable,
-      style
+      style,
+      $slots: { default: defaultSlot }
     } = this
     return (
       <div class={`${clsPrefix}-tabs-tab-wrapper`}>
@@ -90,8 +92,12 @@ export default defineComponent({
                   default: () => <AddIcon />
                 }}
               </NBaseIcon>
+            ) : defaultSlot ? (
+              defaultSlot()
+            ) : typeof label === 'object' ? (
+              label // VNode
             ) : (
-              label ?? name
+              <Render render={label ?? name} />
             )}
           </span>
           {mergedClosable && this.type === 'card' ? (

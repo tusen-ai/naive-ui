@@ -6,6 +6,8 @@
 
 - `n-tabs` add `on-close` prop.
 - `n-tabs` add `on-add` prop.
+- `n-tabs` add `label` slot.
+- `n-tab-pane`'s `label` prop support render function & VNode.
 
 ## 2.9.0
 

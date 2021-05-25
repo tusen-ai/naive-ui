@@ -1,17 +1,12 @@
-import {
-  h,
-  withDirectives,
-  vShow,
-  defineComponent,
-  inject,
-  PropType
-} from 'vue'
+import { h, defineComponent, inject, PropType, VNodeChild, VNode } from 'vue'
 import { throwError } from '../../_utils'
 import { tabsInjectionKey } from './interface'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 export const tabPaneProps = {
-  label: [String, Number] as PropType<string | number>,
+  label: [String, Number, Object, Function] as PropType<
+  string | number | VNode | (() => VNodeChild)
+  >,
   name: {
     type: [String, Number] as PropType<string | number>,
     required: true
@@ -39,22 +34,10 @@ export default defineComponent({
       throwError('tab-pane', '`n-tab-pane` must be placed inside `n-tabs`.')
     }
     return {
-      mergedClsPrefix: NTab.mergedClsPrefixRef,
-      type: NTab.typeRef,
-      value: NTab.valueRef
+      mergedClsPrefix: NTab.mergedClsPrefixRef
     }
   },
   render () {
-    const { name } = this
-    const useVShow = this.displayDirective === 'show'
-    const show = this.value === name
-    return useVShow || show
-      ? withDirectives(
-        <div class={`${this.mergedClsPrefix}-tab-panel`} key={name}>
-          {this.$slots}
-        </div>,
-        [[vShow, !useVShow || show]]
-      )
-      : null
+    return <div class={`${this.mergedClsPrefix}-tab-panel`}>{this.$slots}</div>
   }
 })

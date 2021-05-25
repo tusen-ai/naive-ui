@@ -10,7 +10,9 @@ import {
   toRef,
   ComponentPublicInstance,
   VNode,
-  nextTick
+  nextTick,
+  withDirectives,
+  vShow
 } from 'vue'
 import { VResizeObserver, VXScroll } from 'vueuc'
 import { throttle } from 'lodash-es'
@@ -205,7 +207,6 @@ export default defineComponent({
       } = entry
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const containerWidth = target.parentElement!.offsetWidth
-      console.log(width, containerWidth)
       if (!addTabFixedRef.value) {
         if (containerWidth < width) {
           addTabFixedRef.value = true
@@ -365,7 +366,11 @@ export default defineComponent({
                                 leftPadded={
                                   index !== 0 && !mergedJustifyContent
                                 }
-                              />
+                              >
+                                {{
+                                  default: tabPaneVNode.children.label
+                                }}
+                              </Tab>
                             )
                           })}
                           {!addTabFixed && addable && !isLine
@@ -419,11 +424,35 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-tabs-nav__suffix`}>{suffix}</div>
           ) : null}
         </div>
-        {children}
+        {filterMapTabPanes(children, this.mergedValue)}
       </div>
     )
   }
 })
+
+function filterMapTabPanes (
+  tabPaneVNodes: VNode[],
+  value: string | number | undefined
+): VNode[] {
+  const children: VNode[] = []
+  tabPaneVNodes.forEach((vNode) => {
+    const { name, displayDirective } = vNode.props as {
+      name: string | number
+      displayDirective: 'show' | 'if' | undefined
+    }
+    const useVShow = displayDirective === 'show'
+    const show = value === name
+    if (vNode.key !== undefined) {
+      vNode.key = name
+    }
+    if (useVShow) {
+      children.push(withDirectives(vNode, [[vShow, show]]))
+    } else if (show) {
+      children.push(vNode)
+    }
+  })
+  return children
+}
 
 function createAddTag (addable: Addable, leftPadded: boolean): VNode {
   return (

@@ -40,15 +40,22 @@ addable
 | closable | `boolean` | `false` | Whether to allow tab to close, Only works when tabs type is `'card'`. |
 | disabled | `boolean` | `false` |  |
 | display-directive | `'if' \| 'show'` | `'if'` | The directive to use in conditionally rendering. 'if' will use 'v-if' and 'show' will use 'v-show'. When use show directive, the status of tab won't be reset after tab changes. |
-| label | `string` | `undefined` |  |
+| label | `string \| VNode \| () => VNodeChild` | `undefined` |  |
 | name | `string \| number` | required |  |
 
 ## Slots
 
-### Tabs, Tab Pane Slots
+### Tabs Slots
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
 | default | `()`       |             |
 | prefix  | `()`       |             |
 | suffux  | `()`       |             |
+
+### Tab Pane Slots
+
+| Name    | Parameters | Description |
+| ------- | ---------- | ----------- |
+| default | `()`       |             |
+| label   | `()`       |             |

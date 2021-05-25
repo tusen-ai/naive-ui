@@ -6,6 +6,8 @@
 
 - `n-tabs` 新增 `on-close` 属性
 - `n-tabs` 新增 `on-add` 属性
+- `n-tab-pane` 新增 `label` slot
+- `n-tab-pane` 的 `label` 属性支持渲染函数和 VNode
 
 ## 2.9.0
 
