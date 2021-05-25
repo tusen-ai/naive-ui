@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-layout-sider` 移除了 `show-content`，使用 `show-collapsed-content` 代替
+
 ### Feats
 
 - `n-data-table` 支持树形数据
@@ -25,6 +29,7 @@
 
 ### Fixes
 
+- `n-layout` & `n-layout-sider` 的 `scrollTo` 在使用原生滚动条时不生效
 - `n-layout-sider` 的 `collapse-mode` 属性不生效
 - 内部 selection 组件的主题 peers 中 popover 的 key 不正确
 

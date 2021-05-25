@@ -48,7 +48,7 @@ const layoutSiderProps = {
     default: undefined
   },
   defaultCollapsed: Boolean,
-  showContent: {
+  showCollapsedContent: {
     type: Boolean,
     default: true
   },
@@ -106,7 +106,7 @@ export default defineComponent({
         }
       }
     }
-    const selfRef = ref<HTMLElement | null>(null)
+    const scrollableDivRef = ref<HTMLElement | null>(null)
     const scrollbarRef = ref<ScrollbarInst | null>(null)
     const styleMaxWidthRef = computed(() => {
       return formatLength(
@@ -140,11 +140,11 @@ export default defineComponent({
     function scrollTo (options: ScrollToOptions | number, y?: number): void {
       if (scrollbarRef.value) {
         scrollbarRef.value.scrollTo(options as any, y as any)
-      } else if (selfRef.value) {
+      } else if (scrollableDivRef.value) {
         if (y === undefined) {
-          selfRef.value.scrollTo(options as any)
+          scrollableDivRef.value.scrollTo(options as any)
         } else {
-          selfRef.value.scrollTo(options as any, y as any)
+          scrollableDivRef.value.scrollTo(options as any, y as any)
         }
       }
     }
@@ -183,7 +183,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     return {
-      selfRef,
+      scrollableDivRef,
       scrollbarRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
@@ -227,13 +227,13 @@ export default defineComponent({
     const { mergedClsPrefix } = this
     return (
       <aside
-        ref="selfRef"
         class={[
           `${mergedClsPrefix}-layout-sider`,
           `${mergedClsPrefix}-layout-sider--${this.position}-positioned`,
           this.bordered && `${mergedClsPrefix}-layout-sider--bordered`,
           this.mergedCollapsed && `${mergedClsPrefix}-layout-sider--collapsed`,
-          this.showContent && `${mergedClsPrefix}-layout-sider--show-content`
+          (!this.mergedCollapsed || this.showCollapsedContent) &&
+            `${mergedClsPrefix}-layout-sider--show-content`
         ]}
         style={[
           this.cssVars,
@@ -269,6 +269,7 @@ export default defineComponent({
           <div
             class={`${mergedClsPrefix}-layout-sider__content`}
             style={this.scrollableDivStyle}
+            ref="scrollableDivRef"
           >
             {this.$slots}
           </div>

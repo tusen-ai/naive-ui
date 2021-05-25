@@ -26,6 +26,7 @@ export default cB('layout', `
       `)
     ])
   ]),
+  cE('content', 'box-sizing: border-box;'),
   cM('absolute-positioned', `
     position: absolute;
     left: 0;

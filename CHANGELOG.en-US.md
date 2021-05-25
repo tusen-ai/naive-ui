@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-layout-sider` removed `show-content` prop. Please use `show-collapsed-content` instead.
+
 ### Feats
 
 - `n-data-table` support tree data.
@@ -25,6 +29,7 @@
 
 ### Fixes
 
+- `n-layout` & `n-layout-sider`'s `scrollTo` not working with native scrollbar.
 - `n-layout-sider`'s `collapse-mode` not working.
 - Internal selection component's theme peers has wrong key for popover.
 
