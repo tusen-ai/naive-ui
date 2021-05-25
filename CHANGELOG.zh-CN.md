@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.9.0
 
 ### Breaking Changes
 
