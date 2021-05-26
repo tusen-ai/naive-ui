@@ -20,7 +20,11 @@ import type { LayoutTheme } from '../styles'
 import style from './styles/layout-sider.cssr'
 import ToggleButton from './ToggleButton'
 import ToggleBar from './ToggleBar'
-import { layoutSiderInjectionKey, positionProp } from './interface'
+import {
+  layoutSiderInjectionKey,
+  LayoutSiderInst,
+  positionProp
+} from './interface'
 import { useMergedState } from 'vooks'
 import { layoutInjectionKey } from './Layout'
 
@@ -106,8 +110,8 @@ export default defineComponent({
         }
       }
     }
-    const scrollableDivRef = ref<HTMLElement | null>(null)
-    const scrollbarRef = ref<ScrollbarInst | null>(null)
+    const scrollableElRef = ref<HTMLElement | null>(null)
+    const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const styleMaxWidthRef = computed(() => {
       return formatLength(
         mergedCollapsedRef.value ? props.collapsedWidth : props.width
@@ -119,17 +123,6 @@ export default defineComponent({
         minWidth: formatLength(props.width)
       }
     })
-    const scrollableDivStyleRef = computed(() => {
-      return [
-        props.contentStyle,
-        scrollContainerStyleRef.value,
-        {
-          width: '100%',
-          height: '100%',
-          overflow: 'auto'
-        }
-      ]
-    })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
     const mergedCollapsedRef = useMergedState(
       toRef(props, 'collapsed'),
@@ -138,13 +131,19 @@ export default defineComponent({
     function scrollTo (options: ScrollToOptions): void
     function scrollTo (x: number, y: number): void
     function scrollTo (options: ScrollToOptions | number, y?: number): void {
-      if (scrollbarRef.value) {
-        scrollbarRef.value.scrollTo(options as any, y as any)
-      } else if (scrollableDivRef.value) {
-        if (y === undefined) {
-          scrollableDivRef.value.scrollTo(options as any)
-        } else {
-          scrollableDivRef.value.scrollTo(options as any, y as any)
+      if (props.nativeScrollbar) {
+        const { value: scrollableEl } = scrollableElRef
+        if (scrollableEl) {
+          if (y === undefined) {
+            scrollableEl.scrollTo(options as any)
+          } else {
+            scrollableEl.scrollTo(options as any, y as any)
+          }
+        }
+      } else {
+        const { value: scrollbarInst } = scrollbarInstRef
+        if (scrollbarInst) {
+          scrollbarInst.scrollTo(options as any, y as any)
         }
       }
     }
@@ -182,16 +181,18 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
+    const exposedMethods: LayoutSiderInst = {
+      scrollTo
+    }
     return {
-      scrollableDivRef,
-      scrollbarRef,
+      scrollableElRef,
+      scrollbarInstRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       styleMaxWidth: styleMaxWidthRef,
       mergedCollapsed: mergedCollapsedRef,
       scrollContainerStyle: scrollContainerStyleRef,
-      scrollableDivStyle: scrollableDivStyleRef,
-      scrollTo,
       handleTriggerClick,
       cssVars: computed(() => {
         const {
@@ -220,19 +221,20 @@ export default defineComponent({
           vars['--border-color'] = self.siderBorderColor
         }
         return vars
-      })
+      }),
+      ...exposedMethods
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, mergedCollapsed, showTrigger } = this
     return (
       <aside
         class={[
           `${mergedClsPrefix}-layout-sider`,
           `${mergedClsPrefix}-layout-sider--${this.position}-positioned`,
           this.bordered && `${mergedClsPrefix}-layout-sider--bordered`,
-          this.mergedCollapsed && `${mergedClsPrefix}-layout-sider--collapsed`,
-          (!this.mergedCollapsed || this.showCollapsedContent) &&
+          mergedCollapsed && `${mergedClsPrefix}-layout-sider--collapsed`,
+          (!mergedCollapsed || this.showCollapsedContent) &&
             `${mergedClsPrefix}-layout-sider--show-content`
         ]}
         style={[
@@ -246,8 +248,7 @@ export default defineComponent({
         {!this.nativeScrollbar ? (
           <NScrollbar
             {...this.scrollbarProps}
-            ref="scrollbarRef"
-            class={`${mergedClsPrefix}-layout-sider__content`}
+            ref="scrollbarInstRef"
             style={this.scrollContainerStyle}
             contentStyle={this.contentStyle}
             theme={this.mergedTheme.peers.Scrollbar}
@@ -267,15 +268,21 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div
-            class={`${mergedClsPrefix}-layout-sider__content`}
-            style={this.scrollableDivStyle}
-            ref="scrollableDivRef"
+            class={`${mergedClsPrefix}-layout-sider-scroll-container`}
+            style={[
+              this.scrollContainerStyle,
+              this.contentStyle,
+              {
+                overflow: 'auto'
+              }
+            ]}
+            ref="scrollableElRef"
           >
             {this.$slots}
           </div>
         )}
-        {this.showTrigger ? (
-          this.showTrigger === 'arrow-circle' ? (
+        {showTrigger ? (
+          showTrigger === 'arrow-circle' ? (
             <ToggleButton
               clsPrefix={mergedClsPrefix}
               style={this.triggerStyle}
@@ -284,7 +291,7 @@ export default defineComponent({
           ) : (
             <ToggleBar
               clsPrefix={mergedClsPrefix}
-              collapsed={this.mergedCollapsed}
+              collapsed={mergedCollapsed}
               style={this.triggerStyle}
               onClick={this.handleTriggerClick}
             />

@@ -15,6 +15,10 @@
 - `n-tabs` 的 `type` 新增 `'line'` 选项
 - `n-tabs` 添加阴影来展示滚动状态
 
+### Fixes
+
+- 修正 `n-layout` `scrollTo` 方法在原生滚动时不生效
+
 ### Deprecated
 
 - `n-tab-pane` 的 `label` 属性被废弃，请使用 `tab` 属性代替

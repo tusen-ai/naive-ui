@@ -95,7 +95,7 @@ export default cB('layout-sider', `
     width: 1px;
     transition: background-color .3s var(--bezier);
   `),
-  cE('content', `
+  cB('layout-sider-scroll-container', `
     flex-grow: 1;
     flex-shrink: 0;
     box-sizing: border-box;
@@ -105,7 +105,7 @@ export default cB('layout-sider', `
     max-width: 100%;
   `),
   cM('show-content', [
-    cE('content', {
+    cB('layout-sider-scroll-container', {
       opacity: 1
     })
   ]),

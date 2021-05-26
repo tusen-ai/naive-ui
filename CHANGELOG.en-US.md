@@ -15,6 +15,10 @@
 - `n-tabs`'s `type` prop support `'line'` option.
 - `n-tabs` add box shadow to indicate scroll status.
 
+### Fixes
+
+- Fix `n-layout`'s `scrollTo` not working when using native scrollbar.
+
 ### Deprecated
 
 - `n-tab-pane`'s `label` prop is deprecated. Please use `tab` prop instead.

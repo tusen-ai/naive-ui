@@ -49,8 +49,8 @@ export function createLayoutComponent (isContent: boolean) {
       ...layoutProps
     },
     setup (props) {
-      const scrollableDivRef = ref<HTMLElement | null>(null)
-      const scrollbarRef = ref<ScrollbarInst | null>(null)
+      const scrollableElRef = ref<HTMLElement | null>(null)
+      const scrollbarInstRef = ref<ScrollbarInst | null>(null)
       const { mergedClsPrefixRef } = useConfig(props)
       const themeRef = useTheme(
         'Layout',
@@ -60,32 +60,40 @@ export function createLayoutComponent (isContent: boolean) {
         props,
         mergedClsPrefixRef
       )
-      const scrollTo: LayoutInst['scrollTo'] = (
-        options: ScrollToOptions | number,
-        y?: number
-      ): void => {
-        if (scrollbarRef.value) {
-          scrollbarRef.value.scrollTo(options as any, y as any)
-        } else if (scrollableDivRef.value) {
-          scrollableDivRef.value.scrollTo(options as any, y as any)
+      function scrollTo (options: ScrollToOptions): void
+      function scrollTo (x: number, y: number): void
+      function scrollTo (options: ScrollToOptions | number, y?: number): void {
+        if (props.nativeScrollbar) {
+          const { value: scrollableEl } = scrollableElRef
+          if (scrollableEl) {
+            if (y === undefined) {
+              scrollableEl.scrollTo(options as any)
+            } else {
+              scrollableEl.scrollTo(options as any, y as any)
+            }
+          }
+        } else {
+          const { value: scrollbarInst } = scrollbarInstRef
+          if (scrollbarInst) {
+            scrollbarInst.scrollTo(options as any, y as any)
+          }
         }
       }
-      const scrollableDivStyleRef = computed(() => {
-        return [
-          props.contentStyle,
-          {
-            height: '100%',
-            overflow: 'auto'
-          }
-        ]
-      })
       if (__DEV__) provide(layoutInjectionKey, props)
+      const hasSiderStyle: CSSProperties = {
+        display: 'flex',
+        flexWrap: 'nowrap',
+        width: '100%',
+        flexDirection: 'row'
+      }
+      const exposedMethods: LayoutInst = {
+        scrollTo
+      }
       return {
         mergedClsPrefix: mergedClsPrefixRef,
-        scrollableDivRef,
-        scrollbarRef,
-        scrollableDivStyle: scrollableDivStyleRef,
-        scrollTo,
+        scrollableElRef,
+        scrollbarInstRef,
+        hasSiderStyle,
         mergedTheme: themeRef,
         cssVars: computed(() => {
           const {
@@ -97,40 +105,38 @@ export function createLayoutComponent (isContent: boolean) {
             '--color': props.embedded ? self.colorEmbedded : self.color,
             '--text-color': self.textColor
           }
-        })
+        }),
+        ...exposedMethods
       }
     },
     render () {
-      const { mergedClsPrefix } = this
+      const { mergedClsPrefix, hasSider } = this
+      const hasSiderStyle = hasSider ? this.hasSiderStyle : undefined
+      const layoutClass = [
+        isContent && `${mergedClsPrefix}-layout-content`,
+        `${mergedClsPrefix}-layout`,
+        `${mergedClsPrefix}-layout--${this.position}-positioned`
+      ]
       return (
-        <div
-          class={[
-            isContent && `${mergedClsPrefix}-layout-content`,
-            `${mergedClsPrefix}-layout`,
-            `${mergedClsPrefix}-layout--${this.position}-positioned`,
-            this.hasSider && `${mergedClsPrefix}-layout--has-sider`
-          ]}
-          style={this.cssVars as CSSProperties}
-        >
-          {!this.nativeScrollbar ? (
-            <NScrollbar
-              {...this.scrollbarProps}
-              ref="scrollbarRef"
-              theme={this.mergedTheme.peers.Scrollbar}
-              themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
-              contentClass={`${mergedClsPrefix}-layout__content`}
-              contentStyle={this.contentStyle}
-            >
-              {this.$slots}
-            </NScrollbar>
-          ) : (
+        <div class={layoutClass} style={this.cssVars as CSSProperties}>
+          {this.nativeScrollbar ? (
             <div
-              ref="scrollableDivRef"
-              class={`${mergedClsPrefix}-layout__content`}
-              style={this.scrollableDivStyle}
+              ref="scrollableElRef"
+              class={`${mergedClsPrefix}-layout-scroll-container`}
+              style={[this.contentStyle, hasSiderStyle] as any}
             >
               {this.$slots}
             </div>
+          ) : (
+            <NScrollbar
+              {...this.scrollbarProps}
+              ref="scrollbarInstRef"
+              theme={this.mergedTheme.peers.Scrollbar}
+              themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
+              contentStyle={[this.contentStyle, hasSiderStyle] as any}
+            >
+              {this.$slots}
+            </NScrollbar>
           )}
         </div>
       )
