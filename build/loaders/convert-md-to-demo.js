@@ -78,7 +78,7 @@ ${parts.style}
   return mergedParts
 }
 
-const cssRuleRegex = /[^{\n]*\{[^}]*\}/g
+const cssRuleRegex = /([^{}]*)(\{[^}]*\})/g
 
 // simulate scss style
 // to remove dep of sass
@@ -86,19 +86,23 @@ const cssRuleRegex = /[^{\n]*\{[^}]*\}/g
 //   mystyle
 // }
 function genStyle (sourceStyle) {
-  const rules = sourceStyle.match(cssRuleRegex)
-  if (rules === null) return null
-  return (
-    '<style scoped>\n' +
-    rules
-      .map((rule) => {
-        return `.demo-card__view ${rule}
+  let match
+  let matched = false
+  const rules = []
 
-.naive-ui-doc ${rule}`
-      })
-      .join('\n') +
-    '</style>'
-  )
+  while ((match = cssRuleRegex.exec(sourceStyle)) !== null) {
+    matched = true
+    const selector = match[1]
+    const body = match[2]
+    rules.push(
+      selector
+        .split(',')
+        .map((part) => `.demo-card__view ${part}, .naive-ui-doc ${part}`)
+        .join(',') + body
+    )
+  }
+  if (!matched) return null
+  return '<style scoped>\n' + rules.join('\n') + '</style>'
 }
 
 function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {

@@ -29,11 +29,7 @@
 ```
 
 ```css
-.n-layout-header {
-  background: rgba(128, 128, 128, 0.2);
-  padding: 24px;
-}
-
+.n-layout-header,
 .n-layout-footer {
   background: rgba(128, 128, 128, 0.2);
   padding: 24px;

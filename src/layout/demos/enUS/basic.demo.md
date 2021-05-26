@@ -41,11 +41,7 @@ I hope the demo can meet you demand, so that you can have more time to do other 
 ```
 
 ```css
-.n-layout-header {
-  background: rgba(128, 128, 128, 0.2);
-  padding: 24px;
-}
-
+.n-layout-header,
 .n-layout-footer {
   background: rgba(128, 128, 128, 0.2);
   padding: 24px;
