@@ -517,7 +517,8 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     tdPaddingLarge: '10px 20px'
   },
   Tabs: {
-    labelTextColor: '#D6D6D6'
+    tabTextColorLine: '#D6D6D6',
+    tabTextColorBar: '#D6D6D6'
   },
   Tag: {
     borderRadius: '100px',
