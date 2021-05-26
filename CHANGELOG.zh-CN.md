@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修正 `n-input-number` 在 blur 后不会恢复有效的值
+
 ## 2.10.0
 
 ### Breaking Changes

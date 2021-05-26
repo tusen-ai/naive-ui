@@ -204,12 +204,18 @@ export default defineComponent({
         return
       }
       const value = deriveValueFromDisplayedValue()
-      // If valid, update has been posted
+      // If valid, update event has been emitted
       // make sure e.target.value is correct in blur callback
       if (value !== false) {
         const inputElRef = inputInstRef.value?.inputElRef
         if (inputElRef) {
           inputElRef.value = String(value || '')
+        }
+        // If value is not changed, the displayed value may be greater than or
+        // less than the current value. The derived value is reformatted so the
+        // value is not changed. We can simply derive a new displayed value
+        if (mergedValueRef.value === value) {
+          deriveDisplayedValueFromValue()
         }
       } else {
         // If not valid, nothing will be emitted, so derive displayed value from
