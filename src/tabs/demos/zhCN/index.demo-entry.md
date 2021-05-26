@@ -26,6 +26,7 @@ line-debug
 | default-value | `string \| number` | 第一个标签页的 name 属性 |  |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly'` | `undefined` |  |
 | label-size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
+| pane-style | `string \| object` | `undefined` | 面板的样式 |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 padding |
 | type | `'bar' \| 'line' \| 'card'` | `'bar'` |  |

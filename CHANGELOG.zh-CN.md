@@ -14,6 +14,7 @@
 - `n-tab-pane` 的 `tab` 属性支持渲染函数和 VNode
 - `n-tabs` 的 `type` 新增 `'line'` 选项
 - `n-tabs` 添加阴影来展示滚动状态
+- `n-tabs` 新增 `pane-style` 属性
 
 ### Fixes
 

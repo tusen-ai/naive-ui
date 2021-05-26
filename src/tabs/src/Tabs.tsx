@@ -57,6 +57,7 @@ const tabsProps = {
     default: 'medium'
   },
   tabStyle: [String, Object] as PropType<string | CSSProperties>,
+  paneStyle: [String, Object] as PropType<string | CSSProperties>,
   addable: [Boolean, Object] as PropType<Addable>,
   tabsPadding: {
     type: Number,
@@ -268,6 +269,7 @@ export default defineComponent({
     }, 64)
     provide(tabsInjectionKey, {
       tabStyleRef: toRef(props, 'tabStyle'),
+      paneStyleRef: toRef(props, 'paneStyle'),
       mergedClsPrefixRef,
       typeRef: toRef(props, 'type'),
       closableRef: toRef(props, 'closable'),

@@ -14,6 +14,7 @@
 - `n-tab-pane`'s `tab` prop support render function & VNode.
 - `n-tabs`'s `type` prop support `'line'` option.
 - `n-tabs` add box shadow to indicate scroll status.
+- `n-tabs` add `pane-style` prop
 
 ### Fixes
 

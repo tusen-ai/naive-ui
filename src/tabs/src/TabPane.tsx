@@ -47,10 +47,15 @@ export default defineComponent({
       throwError('tab-pane', '`n-tab-pane` must be placed inside `n-tabs`.')
     }
     return {
+      style: NTab.paneStyleRef,
       mergedClsPrefix: NTab.mergedClsPrefixRef
     }
   },
   render () {
-    return <div class={`${this.mergedClsPrefix}-tab-pane`}>{this.$slots}</div>
+    return (
+      <div class={`${this.mergedClsPrefix}-tab-pane`} style={this.style}>
+        {this.$slots}
+      </div>
+    )
   }
 })

@@ -12,6 +12,7 @@ export interface TabsInjection {
   typeRef: Ref<'line' | 'card' | 'bar'>
   closableRef: Ref<boolean>
   tabStyleRef: Ref<string | CSSProperties | undefined>
+  paneStyleRef: Ref<string | CSSProperties | undefined>
   handleTabClick: (panelName: string | number) => void
   handleClose: (panelName: string | number) => void
   handleAdd: () => void
