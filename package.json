@@ -8,7 +8,7 @@
     "start": "npm run dev",
     "dev": "npm run clean && npm run gen-version && cross-env NODE_ENV=development vite",
     "build:js": "npm run gen-version && npm run clean && tsc -b --force tsconfig.esm.json && tsc -b --force tsconfig.cjs.json && node scripts/post-build",
-    "build:package": "npm run gen-version && npm run clean && node scripts/pre-build/deprecated-build-icons.js && tsc -b --force tsconfig.esm.json && tsc -b --force tsconfig.cjs.json && node scripts/post-build",
+    "build:package": "npm run gen-version && npm run clean && tsc -b --force tsconfig.esm.json && tsc -b --force tsconfig.cjs.json && node scripts/post-build",
     "build:site": "./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "clean": "rm -rf site lib es node_modules/naive-ui themes/**/es themes/**/lib",
     "release:package": "npm run build:package && npm publish --tag next",
@@ -22,8 +22,7 @@
     "test": "cross-env NODE_ENV=test jest",
     "test:cov": "cross-env NODE_ENV=test jest",
     "gen-version": "node scripts/gen-version",
-    "build:site:ts": "./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
-    "deprecated:build:icons": "npm run clean && node scripts/pre-build/deprecated-build-icons.js"
+    "build:site:ts": "./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh"
   },
   "author": "07akioni",
   "license": "MIT",
