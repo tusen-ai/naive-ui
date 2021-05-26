@@ -11,16 +11,16 @@ export default cB('layout', `
   position: relative;
   z-index: auto;
   flex: auto;
+  overflow: hidden;
   transition:
     box-shadow .3s var(--bezier),
     background-color .3s var(--bezier),
     color .3s var(--bezier);
 `, [
   cB('layout-scroll-container', `
+    overflow-x: hidden;
     box-sizing: border-box;
     height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
   `),
   cM('absolute-positioned', `
     position: absolute;
