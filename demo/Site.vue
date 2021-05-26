@@ -1,14 +1,7 @@
 <template>
   <n-layout :position="isXs ? undefined : 'absolute'" class="root-layout">
     <site-header />
-    <n-layout
-      class="home-layout"
-      :style="isXs ? undefined : 'top: 64px; overflow: hidden'"
-      :position="isXs ? undefined : 'absolute'"
-      :native-scrollbar="false"
-    >
-      <router-view />
-    </n-layout>
+    <router-view />
   </n-layout>
 </template>
 

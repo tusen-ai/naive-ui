@@ -1,5 +1,9 @@
 <template>
-  <n-layout has-sider :position="isXs ? undefined : 'absolute'">
+  <n-layout
+    :has-sider="showSider"
+    :position="isXs ? undefined : 'absolute'"
+    :style="isXs ? undefined : 'top: 64px'"
+  >
     <n-layout-sider
       :native-scrollbar="false"
       :collapsed-width="0"

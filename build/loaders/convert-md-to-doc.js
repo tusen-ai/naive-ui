@@ -113,7 +113,7 @@ export default {
       wrapperStyle: computed(() => {
         return !useSmallPaddingRef.value
           ? 'display: flex; flex-wrap: nowrap; padding: 32px 24px 56px 56px;'
-          : 'padding: 16px;'
+          : 'padding: 16px 16px 24px 16px;'
       }),
       contentStyle: computed(() => {
         return showAnchorRef.value

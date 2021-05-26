@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <div class="banner">
+  <n-layout
+    :native-scrollbar="false"
+    :position="isXs ? 'static' : 'absolute'"
+    :style="isXs ? undefined : 'top: 64px'"
+  >
+    <div class="banner" style="overflow: hidden">
       <right-image class="right-image" v-if="!isS" />
       <n-h1 :style="titleStyle" class="naive-title">
         <span
@@ -48,7 +52,7 @@
     <n-layout-footer>
       <landing-footer centered />
     </n-layout-footer>
-  </div>
+  </n-layout>
 </template>
 
 <script>
@@ -188,10 +192,10 @@ export default {
   .banner {
     position: static;
     text-align: left;
-    margin-left: 16px;
+    padding-left: 16px;
     transform: none;
-    margin-top: 60px;
-    margin-right: 16px;
+    padding-top: 60px;
+    padding-right: 16px;
     min-height: 550px;
     height: calc(100vh - 124px);
   }
