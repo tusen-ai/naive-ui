@@ -14,6 +14,7 @@ border
 segment
 closable
 loading
+no-title
 ```
 
 ## Props

@@ -12,12 +12,12 @@ Use `n-skeleton` to simulate loading effect.
     </template>
     <n-skeleton text v-if="loading" :repeat="6" />
     <template v-else>
-      不要忘了留姓名<br />
-      电话和其他事情<br />
-      不要说的太快免得我没写下你大名<br />
-      或许你不再打来<br />
-      我却等到头发白<br />
-      希望有一天你会打来
+      Please leave you name,<br />
+      number and other things.<br />
+      Don't say too fast that me can't write done your name.<br />
+      Maybe you won't call again.<br />
+      However I waited till my hair got white.<br />
+      Hope someday you'll call me again.
     </template>
   </n-card>
 </n-space>

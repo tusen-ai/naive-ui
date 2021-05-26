@@ -13,7 +13,9 @@ slots
 border
 segment
 closable
+no-title
 loading
+custom-style
 ```
 
 ## Props
