@@ -2,9 +2,9 @@ import { cB, c, cM, cE } from '../../../_utils/cssr'
 import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 
 // vars:
-// --bezier
-// --color
-// --color-hover
+// --scrollbar-bezier
+// --scrollbar-color
+// --scrollbar-color-hover
 export default cB('scrollbar', `
   overflow: hidden;
   position: relative;
@@ -69,12 +69,12 @@ export default cB('scrollbar', `
           position: absolute;
           cursor: pointer;
           pointer-events: all;
-          background-color: var(--color);
-          transition: background-color .2s var(--bezier);
+          background-color: var(--scrollbar-color);
+          transition: background-color .2s var(--scrollbar-bezier);
         `, [
           fadeInTransition(),
           c('&:hover', {
-            backgroundColor: 'var(--color-hover)'
+            backgroundColor: 'var(--scrollbar-color-hover)'
           })
         ])
       ])

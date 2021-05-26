@@ -575,9 +575,9 @@ export default defineComponent({
           self: { color, colorHover }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--color': color,
-          '--color-hover': colorHover
+          '--scrollbar-bezier': cubicBezierEaseInOut,
+          '--scrollbar-color': color,
+          '--scrollbar-color-hover': colorHover
         }
       })
     }
