@@ -24,7 +24,7 @@ manual-position
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` |  |
 | on-select | `(key: string \| number) => void` | `undefined` |  |
 
-For other props, see [Popover Props](popover#Props). Note that `arrow`, `raw` is not available.
+For other props, for example `placement`, please see [Popover Props](popover#Props). Note that `arrow`, `raw` is not available.
 
 ### DropdownOption Type
 
