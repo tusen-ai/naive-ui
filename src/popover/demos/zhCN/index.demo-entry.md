@@ -32,7 +32,7 @@ hoist-debug
 | duration | `number` | `100` | 悬浮关闭弹出信息的延迟 |
 | filp | `boolean` | `true` | 是否在当前放置方式不能提供足够空间的时候调整弹出信息的位置 |
 | overlap | `boolean` | `false` |  |
-| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'bottom'` |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` |  |
 | raw | `boolean` | `false` | 是否不添加默认样式 |
 | show-arrow | `boolean` | `true` |  |
 | show | `boolean` | `undefined` | 是否展示 popover |

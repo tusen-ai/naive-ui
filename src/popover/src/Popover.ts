@@ -101,7 +101,7 @@ export const popoverBaseProps = {
   },
   placement: {
     type: String as PropType<FollowerPlacement>,
-    default: 'bottom'
+    default: 'top'
   },
   x: Number,
   y: Number,

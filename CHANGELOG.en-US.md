@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-popover`'s `placement` prop default value is set to `'top'`.
+
 ### Feats
 
 - `n-tabs` add `on-close` prop.

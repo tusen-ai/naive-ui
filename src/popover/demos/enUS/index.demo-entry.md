@@ -31,7 +31,7 @@ manual-position
 | duration | `number` | `100` | Popover vanish delay when trigger is `hover` |
 | filp | `boolean` | `true` | Whether to filp the popover when there is no space for current placement. |
 | overlap | `boolean` | `false` |  |
-| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'bottom'` |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` |  |
 | raw | `boolean` | `false` | Whether to use no default styles. |
 | show-arrow | `boolean` | `true` |  |
 | show | `boolean` | `undefined` | Whether to show popover if set. |

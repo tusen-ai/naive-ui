@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-popover` 的 `placement` 属性默认值设为 `'top'`
+
 ### Feats
 
 - `n-tabs` 新增 `on-close` 属性
