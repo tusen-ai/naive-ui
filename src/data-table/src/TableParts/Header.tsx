@@ -175,7 +175,7 @@ export default defineComponent({
                       <>
                         <NCheckbox
                           key={currentPage}
-                          tableHeader
+                          privateTableHeader
                           checked={allRowsChecked}
                           indeterminate={someRowsChecked}
                           onUpdateChecked={handleCheckboxUpdateChecked}

@@ -34,23 +34,11 @@ const checkboxProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  defaultChecked: {
-    type: Boolean,
-    default: false
-  },
-  value: [String, Number],
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  indeterminate: {
-    type: Boolean,
-    default: false
-  },
-  label: {
-    type: String,
-    default: undefined
-  },
+  defaultChecked: Boolean,
+  value: [String, Number] as PropType<string | number>,
+  disabled: Boolean,
+  indeterminate: Boolean,
+  label: String,
   focusable: {
     type: Boolean,
     default: true
@@ -63,10 +51,7 @@ const checkboxProps = {
   MaybeArray<(value: boolean) => void>
   >,
   // private
-  tableHeader: {
-    type: Boolean,
-    default: false
-  },
+  privateTableHeader: Boolean,
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<
@@ -246,7 +231,7 @@ export default defineComponent({
       renderedChecked,
       mergedDisabled,
       indeterminate,
-      tableHeader,
+      privateTableHeader,
       cssVars,
       label,
       mergedClsPrefix,
@@ -263,7 +248,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-checkbox--checked`]: renderedChecked,
             [`${mergedClsPrefix}-checkbox--disabled`]: mergedDisabled,
             [`${mergedClsPrefix}-checkbox--indeterminate`]: indeterminate,
-            [`${mergedClsPrefix}-checkbox--table-header`]: tableHeader
+            [`${mergedClsPrefix}-checkbox--table-header`]: privateTableHeader
           }
         ]}
         tabindex={mergedDisabled || !focusable ? undefined : 0}
