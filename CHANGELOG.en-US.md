@@ -2,9 +2,22 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-affix`'s `listen-to` prop is `document` by default (first scrollable parent before).
+
+### Feats
+
+- `n-affix`'s `listen-to` prop support `Window | Document | HTMLElement`.
+
 ### Fixes
 
 - Fix `n-input-number` not restore valid value after blur.
+
+### Deprecated
+
+- `n-affix`'s `offset-top` prop is deprecated, please use `trigger-top` instead.
+- `n-affix`'s `offset-bottom` prop is deprecated, please use `trigger-bottom` instead.
 
 ## 2.10.0
 

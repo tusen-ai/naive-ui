@@ -13,9 +13,9 @@ position
 
 | 名称 | 类型 | 默认值 | 描述 |
 | --- | --- | --- | --- |
-| bottom | `number` | `undefined` | 在触发顶部固定后 Affix 的 CSS bottom 属性（如果没设定，会使用 `offset-bottom` 代替) |
-| listen-to | `string \| HTMLElement` | `undefined` | 需要监听滚动的元素，如果未设定则会监听最近的可滚动祖先元素 |
-| offset-bottom | `number` | `undefined` | 触发底部固定时，Affix 和目标元素元素的底部距离（如果没设定，会使用 `bottom` 代替) |
-| offset-top | `number` | `undefined` | 触发顶部固定时，Affix 和目标元素元素的顶部距离（如果没设定，会使用 `top` 代替) |
+| bottom | `number` | `undefined` | 在触发顶部固定后 Affix 的 CSS bottom 属性（如果没设定，会使用 `trigger-bottom` 代替) |
+| listen-to | `string \| HTMLElement \| Document \| Window` | `document` | 需要监听滚动的元素 |
+| trigger-bottom | `number` | `undefined` | 触发底部固定时，Affix 和目标元素元素的底部距离（如果没设定，会使用 `bottom` 代替) |
+| trigger-top | `number` | `undefined` | 触发顶部固定时，Affix 和目标元素元素的顶部距离（如果没设定，会使用 `top` 代替) |
 | position | `'fixed' \| 'absolute'` | `'fixed'` |  |
-| top | `number` | `undefined` | 在触发顶部固定后 Affix 的 CSS top 属性（如果没设定，会使用 `offset-top` 代替) |
+| top | `number` | `undefined` | 在触发顶部固定后 Affix 的 CSS top 属性（如果没设定，会使用 `trigger-top` 代替) |

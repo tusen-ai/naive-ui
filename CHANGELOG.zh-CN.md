@@ -2,9 +2,22 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-affix` 的 `listen-to` 属性默认为 `document` (曾为首个可滚动的父节点)
+
+### Feats
+
+- `n-affix` 的 `listen-to` 属性支持 `Window | Document | HTMLElement`
+
 ### Fixes
 
 - 修正 `n-input-number` 在 blur 后不会恢复有效的值
+
+### Deprecated
+
+- `n-affix`'s `offset-top` prop is deprecated, please use `trigger-top` instead.
+- `n-affix`'s `offset-bottom` prop is deprecated, please use `trigger-bottom` instead.
 
 ## 2.10.0
 

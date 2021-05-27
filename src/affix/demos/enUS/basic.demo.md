@@ -1,21 +1,29 @@
 # Basic
 
-Affix has `offset-top`, `top`, `offset-bottom` and `bottom`. `offset-top` is top affixing trigger point. `top` is the style `top` value after top affixing is trigger. `offset-bottom` and `bottom` work in similar way.
+Affix has `trigger-top`, `top`, `trigger-bottom` and `bottom`. `trigger-top` is top affixing trigger point. `top` is the style `top` value after top affixing is trigger. `trigger-bottom` and `bottom` work in similar way.
 
 ```html
-<div class="container">
+<div class="container" ref="container">
   <div class="padding"></div>
   <div class="content">
     <n-row>
       <n-col :span="12">
-        <n-affix :top="120" :offset-top="60"
-          ><n-tag>Affix Trigger Top 60px</n-tag></n-affix
+        <n-affix
+          :top="120"
+          :trigger-top="60"
+          :listen-to="() => $refs.container"
         >
+          <n-tag>Affix Trigger Top 60px</n-tag>
+        </n-affix>
       </n-col>
       <n-col :span="12">
-        <n-affix :bottom="120" :offset-bottom="60"
-          ><n-tag>Affix Trigger Bottom 60px</n-tag></n-affix
+        <n-affix
+          :bottom="120"
+          :trigger-bottom="60"
+          :listen-to="() => $refs.container"
         >
+          <n-tag>Affix Trigger Bottom 60px</n-tag>
+        </n-affix>
       </n-col>
     </n-row>
   </div>
