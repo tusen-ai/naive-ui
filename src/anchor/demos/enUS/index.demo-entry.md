@@ -20,7 +20,7 @@ scrollto
 | affix | `boolean` | `false` | If it works like a affix. If set to `true`, it will recieve props from [affix](affix#Props) |
 | bound | `number` | `12` |  |
 | ignore-gap | `boolean` | `false` | If set to `true`, it will be displayed on the exact href |
-| listen-to | `string \| HTMLElement` | `undefined` | The scrolling element to listen scrolling. If not set it will listen to the nearest scrollable ascendant element. |
+| offset-target | `string \| HTMLElement \| Window \| Document \| (() => HTMLElement)` | `document` | The element or selector used to calc offset of link elements. If you are not scrolling the entire document but only a part of it, you may need to set this. |
 | show-rail | `boolean` | `true` | Whether to show the sider rail. |
 | show-background | `boolean` | `true` | Whether to show background of links. |
 

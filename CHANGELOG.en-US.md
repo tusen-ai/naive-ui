@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-affix`'s `listen-to` prop support `Window | Document | HTMLElement`.
+- `n-anchor` add `offset-target` prop.
 
 ### Fixes
 
@@ -18,6 +19,7 @@
 
 - `n-affix`'s `offset-top` prop is deprecated, please use `trigger-top` instead.
 - `n-affix`'s `offset-bottom` prop is deprecated, please use `trigger-bottom` instead.
+- `n-anchor`'s `listen-to` prop is removed.
 
 ## 2.10.0
 

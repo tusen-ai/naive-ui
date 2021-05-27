@@ -7,37 +7,22 @@ import {
   PropType,
   watch,
   onBeforeUnmount,
-  renderSlot,
   onMounted,
   toRef
 } from 'vue'
-import { getScrollParent, unwrapElement } from 'seemly'
+import { unwrapElement } from 'seemly'
 import { onFontsReady } from 'vooks'
-import { warn, keysOf } from '../../_utils'
+import { keysOf } from '../../_utils'
 import { anchorInjectionKey } from './Link'
 import { throttle } from 'lodash-es'
+import { getOffset } from './utils'
+import type { OffsetTarget } from './utils'
 
 export interface BaseAnchorInst {
   setActiveHref: (href: string) => void
 }
 
-function getOffset (
-  el: HTMLElement,
-  container: HTMLElement
-): {
-    top: number
-    height: number
-  } {
-  const { top: elTop, height } = el.getBoundingClientRect()
-  const { top: containerTop } = container.getBoundingClientRect()
-  return {
-    top: elTop - containerTop,
-    height
-  }
-}
-
 export const baseAnchorProps = {
-  listenTo: [String, Object] as PropType<string | (() => HTMLElement)>,
   showRail: {
     type: Boolean,
     default: true
@@ -50,21 +35,10 @@ export const baseAnchorProps = {
     type: Number,
     default: 12
   },
-  ignoreGap: {
-    type: Boolean,
-    default: false
-  },
-  // deprecated
-  target: {
-    type: (Function as unknown) as PropType<(() => HTMLElement) | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn('anchor', '`target` is deprecated, please use`listen-to` instead.')
-      }
-      return true
-    },
-    default: undefined
-  }
+  ignoreGap: Boolean,
+  offsetTarget: [String, Object, Function] as PropType<
+  string | OffsetTarget | (() => HTMLElement)
+  >
 } as const
 
 export const baseAnchorPropKeys = keysOf(baseAnchorProps)
@@ -79,7 +53,6 @@ export default defineComponent({
     }
   },
   setup (props) {
-    let scrollElement: HTMLElement | null
     const collectedLinkHrefs: string[] = []
     const titleEls: HTMLElement[] = []
     const activeHrefRef = ref<string | null>(null)
@@ -159,22 +132,15 @@ export default defineComponent({
     }
     function setActiveHref (href: string, transition = true): void {
       const idMatchResult = /^#([^#]+)$/.exec(href)
-      if (idMatchResult) {
-        const linkEl = document.getElementById(idMatchResult[1])
-        if (linkEl && scrollElement) {
-          activeHrefRef.value = href
-          const top =
-            getOffset(linkEl, scrollElement).top +
-            (scrollElement.scrollTop || 0)
-          scrollElement.scrollTo({
-            top: top
-          })
-          if (!transition) {
-            disableTransitionOneTick()
-          }
-          handleScroll()
-        }
+      if (!idMatchResult) return
+      const linkEl = document.getElementById(idMatchResult[1])
+      if (!linkEl) return
+      activeHrefRef.value = href
+      linkEl.scrollIntoView()
+      if (!transition) {
+        disableTransitionOneTick()
       }
+      handleScroll()
     }
     const handleScroll = throttle(() => _handleScroll(true), 128)
     function _handleScroll (transition = true): void {
@@ -184,18 +150,18 @@ export default defineComponent({
         href: string
       }
       const links: LinkInfo[] = []
+      const offsetTarget = unwrapElement(props.offsetTarget ?? document)
       collectedLinkHrefs.forEach((href) => {
         const idMatchResult = /#([^#]+)$/.exec(href)
-        if (idMatchResult) {
-          const linkEl = document.getElementById(idMatchResult[1])
-          if (linkEl && scrollElement) {
-            const { top, height } = getOffset(linkEl, scrollElement)
-            links.push({
-              top,
-              height,
-              href
-            })
-          }
+        if (!idMatchResult) return
+        const linkEl = document.getElementById(idMatchResult[1])
+        if (linkEl && offsetTarget) {
+          const { top, height } = getOffset(linkEl, offsetTarget)
+          links.push({
+            top,
+            height,
+            href
+          })
         }
       })
       links.sort((a, b) => {
@@ -240,24 +206,6 @@ export default defineComponent({
         activeHrefRef.value = null
       }
     }
-    function init (): void {
-      const { target: getScrollTarget, listenTo } = props
-      let scrollEl
-      if (getScrollTarget) {
-        // deprecated
-        scrollEl = getScrollTarget()
-      } else if (listenTo) {
-        scrollEl = unwrapElement(listenTo)
-      } else {
-        scrollEl = getScrollParent(selfRef.value)
-      }
-      if (scrollEl) {
-        scrollElement = scrollEl
-        scrollElement.addEventListener('scroll', handleScroll)
-      } else if (__DEV__) {
-        warn('anchor', 'Target to be listened to is not valid.')
-      }
-    }
     provide(anchorInjectionKey, {
       activeHref: activeHrefRef,
       mergedClsPrefix: toRef(props, 'mergedClsPrefix'),
@@ -267,18 +215,16 @@ export default defineComponent({
       titleEls
     })
     onMounted(() => {
-      init()
-      setActiveHref(String(window.location))
+      document.addEventListener('scroll', handleScroll, true)
+      setActiveHref(window.location.hash)
       _handleScroll(false)
     })
     onFontsReady(() => {
-      setActiveHref(String(window.location))
+      setActiveHref(window.location.hash)
       _handleScroll(false)
     })
     onBeforeUnmount(() => {
-      if (scrollElement) {
-        scrollElement.removeEventListener('scroll', handleScroll)
-      }
+      document.removeEventListener('scroll', handleScroll, true)
     })
     watch(activeHrefRef, (value) => {
       if (value === null) {
@@ -297,7 +243,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, $slots } = this
     return (
       <div
         class={[
@@ -324,7 +270,7 @@ export default defineComponent({
             />
           </div>
         ) : null}
-        {renderSlot(this.$slots, 'default')}
+        {$slots.default?.()}
       </div>
     )
   }

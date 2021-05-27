@@ -46,7 +46,16 @@ function genDemosTemplate (demoInfos, colSpan) {
 }
 
 function genAnchorTemplate (children, options = {}) {
-  return `<n-anchor :bound="16" style="width: 144px; position: sticky; top: 32px;" :ignore-gap="${options.ignoreGap}">${children}</n-anchor>`
+  return `
+    <n-anchor
+      :bound="16"
+      style="width: 144px; position: sticky; top: 32px;"
+      offset-target="#doc-layout"
+      :ignore-gap="${options.ignoreGap}"
+    >
+      ${children}
+    </n-anchor>
+  `
 }
 
 function genDemosAnchorTemplate (demoInfos) {
@@ -183,7 +192,7 @@ async function convertMd2ComponentDocumentation (
   const docTemplate = `
 <template>
   <div
-    class="n-documentation"
+    class="doc"
     :style="wrapperStyle"
   >
     <div :style="contentStyle">

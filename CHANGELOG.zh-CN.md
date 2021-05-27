@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-affix` 的 `listen-to` 属性支持 `Window | Document | HTMLElement`
+- `n-anchor` 新增 `offset-target` 属性
 
 ### Fixes
 
@@ -16,8 +17,9 @@
 
 ### Deprecated
 
-- `n-affix`'s `offset-top` prop is deprecated, please use `trigger-top` instead.
-- `n-affix`'s `offset-bottom` prop is deprecated, please use `trigger-bottom` instead.
+- 废弃了 `n-affix` 的 `offset-top` 属性，请使用 `trigger-top` 代替
+- 废弃了 `n-affix` 的 `offset-bottom` 属性，请使用 `trigger-bottom` 代替
+- 移除了 `n-anchor` 的 `listen-to` 属性
 
 ## 2.10.0
 

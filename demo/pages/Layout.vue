@@ -1,5 +1,6 @@
 <template>
   <n-layout
+    id="doc-layout"
     :has-sider="showSider"
     :position="isXs ? undefined : 'absolute'"
     :style="isXs ? undefined : 'top: 64px'"

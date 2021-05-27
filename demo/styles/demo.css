@@ -38,7 +38,7 @@ body {
   white-space: nowrap;
 }
 
-.n-documentation .n-p,
+.doc .n-p,
 .n-blockquote {
   max-width: 680px;
 }

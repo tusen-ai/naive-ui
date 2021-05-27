@@ -20,7 +20,7 @@ scrollto
 | affix | `boolean` | `false` | Anchor 是否像 Affix 一样展示，如果设定为 `true`，它还会接受 [Affix](affix#Props) 的 Props |
 | bound | `number` | `12` |  |
 | ignore-gap | `boolean` | `false` | 如果设定为 `true`, 导航将显示在准确的 href 区域 |
-| listen-to | `string \| HTMLElement` | `undefined` | 需要监听滚动的元素，如果未设定则会监听最近的可滚动祖先元素 |
+| offset-target | `string \| HTMLElement \| Window \| Document \| (() => HTMLElement)` | `document` | 计算偏移位置相对的元素或选择器。如果你滚动的不是整个文档而只是其中的一部分，那你有可能要设定这个 |
 | show-rail | `boolean` | `true` | 是否展示侧面的轨道 |
 | show-background | `boolean` | `true` | 是否展示 link 的背景 |
 
