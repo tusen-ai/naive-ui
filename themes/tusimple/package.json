@@ -11,8 +11,5 @@
   "files": [
     "es",
     "lib"
-  ],
-  "publishConfig": {
-    "registry": "***REMOVED***"
-  }
+  ]
 }

@@ -26,9 +26,6 @@
   },
   "author": "07akioni",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "***REMOVED***"
-  },
   "files": [
     "compat",
     "es",
