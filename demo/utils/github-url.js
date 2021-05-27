@@ -1,1 +1,1 @@
-export default 'https://***REMOVED***/tree/develop/'
+export default 'https://github.com/TuSimple/naive-ui/tree/master/'

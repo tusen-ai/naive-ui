@@ -28,8 +28,7 @@ overflow: hidden 可以解决，这是 BFC 的问题
 
 ## 2019.8.1
 
-width: fit-content, min-content, max-content, intrinsic, extrinsic
-flex, flex-grow
+width: fit-content, min-content, max-content, intrinsic, extrinsic flex, flex-grow
 
 ```
 render (h) {
@@ -40,8 +39,7 @@ render (h) {
   }
 ```
 
-为什么 \$props 不一样？解构赋值做了什么
-document.querySelector('\*[n-id=888d3] .simulate-transparent-text') 不合法？
+为什么 \$props 不一样？解构赋值做了什么 document.querySelector('\*[n-id=888d3] .simulate-transparent-text') 不合法？
 
 ## 2019.8.8
 
@@ -49,10 +47,7 @@ document.querySelector('\*[n-id=888d3] .simulate-transparent-text') 不合法？
 
 ## 2019.8.27
 
-activator 外面不应该包元素
-检查内存泄露可能性
-考虑级联异步 api
-placement \$refs 变化更改
+activator 外面不应该包元素检查内存泄露可能性考虑级联异步 api placement \$refs 变化更改
 
 ## 2019.8.28
 
@@ -64,9 +59,7 @@ block transition for date picker in range not via :key
 
 ## 2019.9.2
 
-select menu 更加自治一点 比如 isSelected，可能最后要加到 vmodel 为止
-tooltip css max-content 兼容性
-popover z-index 问题
+select menu 更加自治一点 比如 isSelected，可能最后要加到 vmodel 为止 tooltip css max-content 兼容性 popover z-index 问题
 
 ## 2019.9.3
 
@@ -90,14 +83,16 @@ base picker focus 问题
 
 ## 2019.12.3
 
-Dropdown Submenu 定位问题
-还有那个... Modal + border 的问题，怎么解决
+Dropdown Submenu 定位问题还有那个... Modal + border 的问题，怎么解决
 
 ## 2019.12.20
+
 Anchor Bug 复现 at typography
 
 ## 2019.12.23
+
 Damn eslint
+
 ```
 What fixed it for me was using double quotes and an escaping slash like so:
 "lint": "eslint \"**/*.{js,jsx}\" --quiet",
@@ -107,10 +102,13 @@ Previously, it would not work with single quotes:
 ```
 
 ## 2019.12.30
+
 为了按需引入打包大小依旧可控，需要用某种方式让互相的依赖变为外部依赖。或者就维持原本的文件结构，这样的话需要的是 babel。看起来还是有点麻烦，之后再解决吧。
 
 ## 2019.2.26
+
 虽然没啥用了，还是留着吧
+
 ```
 /**
 * In Chrome, Firefox, Safari, this only happens when devtool opened
@@ -120,25 +118,33 @@ const devtoolIsOpened = e.target === document.activeElement
 ```
 
 ## 2020.3.7
+
 主体差不多做完了，好累
 
 ## 2020.3.8
+
 zindex 有点问题
 
 ## 2020.3.11
+
 zindex 的问题解决了，虽然很简单，在 static 元素上设定 zindex 没用，😅
 
 ## 2020.3.15
+
 在搞响应式页面的时候，我意识到存粹依赖 css 是一种不可靠的方式。虽然从布局层面 grid layout 已经给出了一种近乎完美的解决方案，但是涉及到一切内联样式的... 都需要从 js 的层面来解决。目前想来最 trival 的方式就是让每个 config consumer 都能拿到这个值。
 
 ## 2020.3.20
-一想到到了 1.0 就要写 changelog，就感觉🥚在隐隐作痛
+
+一想到到了 1.0 就要写 changelog，就感觉 🥚 在隐隐作痛
 
 ## 2020.3.25
+
 一个有趣的事情是，blur 到 document.body 之后，document.activeElement 是 body，但是 blurEvent.relatedTarget 会被设为 null
 
 ## 2020.5.18
+
 rerender 报警了
+
 ```
 h('NLayout', {
   ref: 'body',
@@ -153,19 +159,25 @@ h('NLayout', {
   }
 }, null)
 ```
-一个是computed导致重复渲染，还有一个是 getScrollParent 缓存的问题
+
+一个是 computed 导致重复渲染，还有一个是 getScrollParent 缓存的问题
 
 ## 2020.5.19
+
 我在想要不要帮用户检查值，比如说一些不存在的值...现在这个问题就出现在 checkbox 里面，这是个哲学问题
 
 ## 2020.5.19
+
 得看懂 vue 究竟是怎么更新组件的...
 
 ## 2020.5.28
+
 目前看来，对于动态样式，有两种情况，一种是像直接通过 prop 生效，另一种是通过组合才生效，比如 error 的 formitem 与 input，判断是否要生成样式是个比较麻烦的事，目前看来比较凑巧的是这个样式的体积不是很大，其实放在哪边都差不多= =
 
 ## 2020.5.29
+
 主题变量有两种组织方式：
+
 ```
 light {
   error: {
@@ -183,16 +195,21 @@ light {
   }
 }
 ```
+
 我目前觉得第一种好点，因为扩展一般是按照种类扩展，每次插入一个同样结构的块。而第二种是每次扩展的时候在每个块里同样的位置插入一行，这样扩展的时候写起来很别扭。
 
 ## 2020.7.1
+
 shouldMount 可以加到 withCssr
 
 ## 2020.7.8
+
 style overrides RFC
 
 ## 2020.8.2
+
 颜色命名的方式
+
 ```
 1.
 {
@@ -215,7 +232,7 @@ style overrides RFC
   xColorActive,
   xColorDisabled,
   textColor2, // 暂时可以先不改
-  textColor3, // 
+  textColor3, //
   textColorDisabled,
   textColor1,
   textColor2,
@@ -269,10 +286,8 @@ import Button from 'naive-ui/button'
 import buttonLightStyle from 'naive-ui/button/styles/light'
 import buttonDarkStyle from 'naive-ui/button/styles/dark'
 
-const naive = create({
-  components: [
-    Button
-  ],
+create({
+  components: [Button],
   styles: [
     // base styles, required for each theme
     lightStyle,
@@ -285,6 +300,7 @@ const naive = create({
 ```
 
 ## 2020.10.22
+
 ```js
 // extend Element.prototype.scrollTo
 // override 1 (xCoord, yCoord) keep it
@@ -302,6 +318,7 @@ const naive = create({
 ```
 
 ## TODO 排序不分先后
+
 1. <del>Focus Detector on Time Selector</del>
 2. <del>Menu Root Indent = 0 可能造成问题</del>
 3. <del>用 RAF 优化 scrollbar 性能（不一定需要）</del>为了有时候滚动同步的一致性，决定不做了
@@ -413,6 +430,7 @@ const naive = create({
 109. 利用了公用组件的组件样式没办法特殊调教，比如 select 组件自身是没有命名空间的，这个想要单独定制就比较麻烦。先不出来怎么解决
 110. <del>treemate 重构 cascader，异步 api 需要更改</del>
 111. 样式不能被 cloned，因为 peers 机制
+
 ```
 Done
 // modal transform scale
@@ -429,11 +447,7 @@ Done
 // ResizeObserver Polyfill
 // Select 需要进一步重构，现在这种状况 collector 在 corner case 中不会调 updated 钩子，要把 key 换成 value
 ```
-```
-release template
 
-历史变更见：https://***REMOVED***/blob/develop/CHANGELOG.zh-CN.md
-```
 ```cache
 需要注意的是，以 Base 开头的 CSS 文件并不会确保随着版本的更新保持稳定（我会尽力的保持）。因为它是内部实现的一部分。如果你维持按需引入时升级后样式出现了错误，可以来这里检查一下。虽然把这些公共样式各自打包进每个用到他们的组件是可行的，但是相比于升级的繁琐，我更不喜欢重复的代码。（这不意味着这种解决方案是“更好的”，它只是种选择而已）
 
@@ -445,14 +459,7 @@ How I want to use styling API ?
 ```js
 // index.js
 import { createApp } from 'vue'
-import {
-  create,
-  enUS,
-  Button,
-  Input,
-  buttonLight,
-  inputLight,
-} from 'naive-ui'
+import { create, enUS, buttonLight, inputLight } from 'naive-ui'
 
 const app = createApp()
 const naive = create({
@@ -461,23 +468,19 @@ const naive = create({
   //   Button,
   //   Input
   // ],
-  styles: [
-    buttonLight,
-    inputLight
-  ],
-  locales: [
-    enUS
-  ]
+  styles: [buttonLight, inputLight],
+  locales: [enUS]
 })
 
 app.use(naive)
 ```
 
 ## 2020.11.14 是否要给 icon 加上默认的 color transition?
-否。
-前提条件是 svg 在合适的地方用到了 currentColor。
+
+否。前提条件是 svg 在合适的地方用到了 currentColor。
 
 for example:
+
 ```
 <n-icon>
   <svg>
@@ -486,5 +489,4 @@ for example:
 </n-icon>
 ```
 
-我期望的是 n-icon 一直跟着外部走，如果外面有 transtion 了那内部其实不需要 transition，不然的话会重叠。
-如果一定需要 transition 的话应该去保证样式带 color transition。
+我期望的是 n-icon 一直跟着外部走，如果外面有 transtion 了那内部其实不需要 transition，不然的话会重叠。如果一定需要 transition 的话应该去保证样式带 color transition。
