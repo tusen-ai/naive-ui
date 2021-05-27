@@ -10,6 +10,8 @@
 
 - `n-affix` 的 `listen-to` 属性支持 `Window | Document | HTMLElement`
 - `n-anchor` 新增 `offset-target` 属性
+- `n-select` 新增 `virtual-scroll` 属性
+- `n-select` 新增 `consistent-menu-width` 属性
 
 ### Fixes
 

@@ -132,7 +132,7 @@ const selectProps = {
     })
   },
   show: {
-    type: Boolean,
+    type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
   showArrow: {
@@ -140,6 +140,14 @@ const selectProps = {
     default: true
   },
   maxTagCount: [Number, String] as PropType<number | 'responsive'>,
+  consistentMenuWidth: {
+    type: Boolean,
+    default: true
+  },
+  virtualScroll: {
+    type: Boolean,
+    default: true
+  },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<OnUpdateValue> | undefined
@@ -752,7 +760,8 @@ export default defineComponent({
                 to={this.adjustedTo}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
                 containerClass={this.namespace}
-                width="target"
+                width={this.consistentMenuWidth ? 'target' : undefined}
+                minWidth="target"
                 placement="bottom-start"
               >
                 {{
@@ -769,6 +778,9 @@ export default defineComponent({
                           withDirectives(
                             <NInternalSelectMenu
                               ref="menuRef"
+                              virtualScroll={
+                                this.consistentMenuWidth && this.virtualScroll
+                              }
                               class={`${mergedClsPrefix}-select-menu`}
                               clsPrefix={mergedClsPrefix}
                               focusable

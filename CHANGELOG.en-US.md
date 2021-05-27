@@ -10,6 +10,8 @@
 
 - `n-affix`'s `listen-to` prop support `Window | Document | HTMLElement`.
 - `n-anchor` add `offset-target` prop.
+- `n-select` add `virtual-scroll` prop.
+- `n-select` add `consistent-menu-width` prop.
 
 ### Fixes
 

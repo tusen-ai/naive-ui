@@ -11,6 +11,7 @@ multiple
 events
 filterable
 tag
+menu-width
 remote
 remote-multiple
 clearable
@@ -27,6 +28,7 @@ max-tag-count
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| consistent-menu-width | `boolean` | `true` | Whether the menu keeps its width the same as select trigger. Set it to `false` will disable `virtual-scroll`. |
 | clearable | `boolean` | `false` |  |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
@@ -44,6 +46,7 @@ max-tag-count
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | tag | `boolean` | `false` | Whether it can create new option, should be used with `filterable`. |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` |  |
+| virtual-scroll | `boolean` | `false` |  |
 | on-blur | `() => void` | `undefined` | Selection blur. |
 | on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | How to create a option when you input a string to create a option. Note that `filter` will be applied to the created option too. And make sure the value of the created option is not the same as any other option. |
 | on-focus | `() => void` | `undefined` | Selection focus. |

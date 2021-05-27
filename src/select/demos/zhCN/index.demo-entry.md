@@ -11,6 +11,7 @@ multiple
 events
 filterable
 tag
+menu-width
 remote
 remote-multiple
 clearable
@@ -30,6 +31,7 @@ menu-debug
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| consistent-menu-width | `boolean` | `true` | 菜单宽度是否和选择触发器一致，设为 `false` 会使 `virtual-scroll` 失效 |
 | clearable | `boolean` | `false` |  |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
@@ -47,6 +49,7 @@ menu-debug
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` |  |
+| virtual-scroll | `boolean` | `false` |  |
 | on-blur | `() => void` | `undefined` | 选择器 Blur 时发出 |
 | on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | 在输入内容时如何创建一个选项。注意 `filter` 对这个生成的选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复 |
 | on-focus | `() => void` | `undefined` | 选择器 Focus 时发出 |
