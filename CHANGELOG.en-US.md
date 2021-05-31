@@ -12,11 +12,13 @@
 - `n-anchor` add `offset-target` prop.
 - `n-select` add `virtual-scroll` prop.
 - `n-select` add `consistent-menu-width` prop.
+- `n-date-picker` update value after confirm is clicked.
 
 ### Fixes
 
 - Fix `n-date-picker` doesn't disable start date correctly when value is empty.
 - Fix `n-input-number` not restore valid value after blur.
+- Fix `n-date-picker` display selected date when value is null in date mode.
 
 ### Deprecated
 

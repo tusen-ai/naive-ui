@@ -1,4 +1,4 @@
-import { toRef, inject, computed, watch, ref, ExtractPropTypes } from 'vue'
+import { inject, computed, watch, ref, ExtractPropTypes } from 'vue'
 import {
   addMonths,
   format,
@@ -157,26 +157,6 @@ function useDualCalendar (
     const { value } = props
     if (Array.isArray(value)) return value[1]
     return null
-  })
-  // watch
-  watch(toRef(props, 'active'), (value) => {
-    if (value) {
-      if (type === 'datetimerange') {
-        panelCommon.memorizedValue.value = props.value
-        if (Array.isArray(props.value) || props.value === null) {
-          syncCalendarTimeWithValue(props.value)
-        }
-      } else if (type === 'daterange') {
-      }
-    } else {
-      isSelectingRef.value = false
-      if (type === 'datetimerange') {
-        if (isRangeInvalidRef.value) {
-          panelCommon.doUpdateValue(panelCommon.memorizedValue.value)
-        }
-      } else if (type === 'daterange') {
-      }
-    }
   })
   watch(
     computed(() => props.value),
@@ -359,9 +339,9 @@ function useDualCalendar (
       time = getTime(time)
     }
     if (props.value === null) {
-      panelCommon.doUpdateValue([time, time])
+      panelCommon.doUpdateValue([time, time], false)
     } else if (Array.isArray(props.value)) {
-      panelCommon.doUpdateValue([time, Math.max(props.value[1], time)])
+      panelCommon.doUpdateValue([time, Math.max(props.value[1], time)], false)
     }
   }
   function changeEndDateTime (time: number): void {
@@ -369,9 +349,9 @@ function useDualCalendar (
       time = getTime(time)
     }
     if (props.value === null) {
-      panelCommon.doUpdateValue([time, time])
+      panelCommon.doUpdateValue([time, time], false)
     } else if (Array.isArray(props.value)) {
-      panelCommon.doUpdateValue([Math.min(props.value[0], time), time])
+      panelCommon.doUpdateValue([Math.min(props.value[0], time), time], false)
     }
   }
   function changeStartEndTime (startTime: number, endTime?: number): void {
@@ -382,7 +362,7 @@ function useDualCalendar (
     if (typeof endTime !== 'number') {
       endTime = getTime(endTime)
     }
-    panelCommon.doUpdateValue([startTime, endTime])
+    panelCommon.doUpdateValue([startTime, endTime], false)
   }
   function sanitizeValue (datetime: number): number {
     if (type === 'datetimerange') {

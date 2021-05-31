@@ -7,12 +7,11 @@ import {
   ExtractPropTypes
 } from 'vue'
 import { useKeyboard } from 'vooks'
-
 import {
-  OnUpdateValue,
   Value,
-  OnUpdateValueImpl,
-  datePickerInjectionKey
+  datePickerInjectionKey,
+  OnPanelUpdateValue,
+  OnPanelUpdateValueImpl
 } from '../interface'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
@@ -36,7 +35,7 @@ const usePanelCommonProps = {
   onClose: Function,
   onTabOut: Function,
   onUpdateValue: {
-    type: Function as PropType<OnUpdateValue>,
+    type: Function as PropType<OnPanelUpdateValue>,
     required: true
   }
 } as const
@@ -58,16 +57,15 @@ function usePanelCommon (props: UsePanelCommonProps) {
       locale: dateLocaleRef.value.locale
     }
   })
-  const memorizedValueRef = ref(props.value)
   const selfRef = ref<HTMLElement | null>(null)
   const keyboardState = useKeyboard()
   function doConfirm (): void {
     const { onConfirm } = props
     if (onConfirm) onConfirm()
   }
-  function doUpdateValue (value: Value | null): void {
+  function doUpdateValue (value: Value | null, doUpdate: boolean): void {
     const { onUpdateValue } = props
-    if (onUpdateValue) (onUpdateValue as OnUpdateValueImpl)(value)
+    ;(onUpdateValue as OnPanelUpdateValueImpl)(value, doUpdate)
   }
   function doClose (): void {
     const { onClose } = props
@@ -78,7 +76,8 @@ function usePanelCommon (props: UsePanelCommonProps) {
     if (onTabOut) onTabOut()
   }
   function handleClearClick (): void {
-    doUpdateValue(null)
+    doUpdateValue(null, true)
+    doClose()
   }
   function handleFocusDetectorFocus (): void {
     doTabOut()
@@ -120,7 +119,6 @@ function usePanelCommon (props: UsePanelCommonProps) {
     mergedClsPrefix: mergedClsPrefixRef,
     dateFnsOptions: dateFnsOptionsRef,
     timePickerSize: timePickerSizeRef,
-    memorizedValue: memorizedValueRef,
     selfRef,
     locale: localeRef,
     doConfirm,

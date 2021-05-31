@@ -1,4 +1,4 @@
-import { ref, computed, inject, watch, toRef, ExtractPropTypes } from 'vue'
+import { ref, computed, inject, watch, ExtractPropTypes } from 'vue'
 import {
   addMonths,
   addYears,
@@ -15,11 +15,7 @@ import {
 } from 'date-fns'
 import { dateArray, strictParse } from '../utils'
 import { usePanelCommon } from './use-panel-common'
-import {
-  Value,
-  IsSingleDateDisabled,
-  datePickerInjectionKey
-} from '../interface'
+import { IsSingleDateDisabled, datePickerInjectionKey } from '../interface'
 import type { DateItem } from '../utils'
 
 const useCalendarProps = {
@@ -29,11 +25,6 @@ const useCalendarProps = {
     default: () => ['now', 'clear', 'confirm']
   }
 } as const
-
-function ensureValidValue (value: Value | null): number {
-  if (Array.isArray(value) || value === null) return Date.now()
-  return value
-}
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useCalendar (
@@ -77,7 +68,7 @@ function useCalendar (
   const dateArrayRef = computed(() => {
     return dateArray(
       calendarValueRef.value,
-      ensureValidValue(props.value),
+      props.value,
       nowRef.value,
       localeRef.value.firstDayOfWeek
     )
@@ -109,16 +100,6 @@ function useCalendar (
   watch(calendarValueRef, (value, oldValue) => {
     if (!isSameMonth(value, oldValue)) {
       panelCommon.disableTransitionOneTick()
-    }
-  })
-  watch(toRef(props, 'active'), (value) => {
-    if (value) {
-      panelCommon.memorizedValue.value = props.value
-    } else {
-      // restore original value is not valid
-      if (validation.isValueInvalid.value) {
-        panelCommon.doUpdateValue(panelCommon.memorizedValue.value)
-      }
     }
   })
   watch(
@@ -156,14 +137,17 @@ function useCalendar (
     )
     if (isValid(date)) {
       if (props.value === null) {
-        panelCommon.doUpdateValue(getTime(sanitizeValue(Date.now())))
+        panelCommon.doUpdateValue(getTime(sanitizeValue(Date.now())), false)
       } else if (!Array.isArray(props.value)) {
         const newDateTime = set(props.value, {
           year: getYear(date),
           month: getMonth(date),
           date: getDate(date)
         })
-        panelCommon.doUpdateValue(getTime(sanitizeValue(getTime(newDateTime))))
+        panelCommon.doUpdateValue(
+          getTime(sanitizeValue(getTime(newDateTime))),
+          false
+        )
       }
     } else {
       dateInputValueRef.value = value
@@ -178,26 +162,31 @@ function useCalendar (
     )
     if (isValid(date)) {
       if (props.value === null) {
-        panelCommon.doUpdateValue(getTime(sanitizeValue(Date.now())))
+        panelCommon.doUpdateValue(getTime(sanitizeValue(Date.now())), false)
       } else if (!Array.isArray(props.value)) {
         const newDateTime = set(props.value, {
           year: getYear(date),
           month: getMonth(date),
           date: getDate(date)
         })
-        panelCommon.doUpdateValue(getTime(sanitizeValue(getTime(newDateTime))))
+        panelCommon.doUpdateValue(
+          getTime(sanitizeValue(getTime(newDateTime))),
+          false
+        )
       }
     } else {
       deriveDateInputValue()
     }
   }
   function clearSelectedDateTime (): void {
-    panelCommon.doUpdateValue(null)
+    panelCommon.doUpdateValue(null, true)
     dateInputValueRef.value = ''
+    panelCommon.doClose()
   }
   function handleNowClick (): void {
-    panelCommon.doUpdateValue(getTime(sanitizeValue(Date.now())))
+    panelCommon.doUpdateValue(getTime(sanitizeValue(Date.now())), true)
     calendarValueRef.value = Date.now()
+    panelCommon.doClose()
   }
   function handleDateClick (dateItem: DateItem): void {
     if (mergedIsDateDisabled(dateItem.ts)) {
@@ -210,7 +199,10 @@ function useCalendar (
       newValue = Date.now()
     }
     newValue = getTime(set(newValue, dateItem.dateObject))
-    panelCommon.doUpdateValue(getTime(sanitizeValue(newValue)))
+    panelCommon.doUpdateValue(getTime(sanitizeValue(newValue)), type === 'date')
+    if (type === 'date') {
+      panelCommon.doClose()
+    }
   }
   function deriveDateInputValue (time?: number): void {
     // If not selected, display nothing,
@@ -253,7 +245,7 @@ function useCalendar (
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, -1))
   }
   function handleTimePickerChange (value: number): void {
-    panelCommon.doUpdateValue(value)
+    panelCommon.doUpdateValue(value, false)
   }
   return {
     dateArray: dateArrayRef,

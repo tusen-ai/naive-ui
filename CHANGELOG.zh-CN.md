@@ -12,11 +12,13 @@
 - `n-anchor` 新增 `offset-target` 属性
 - `n-select` 新增 `virtual-scroll` 属性
 - `n-select` 新增 `consistent-menu-width` 属性
+- `n-date-picker` 在确认后再更新值
 
 ### Fixes
 
 - 修正 `n-date-picker` 在没有值的状态下起始日期 disabled 状态不正确
 - 修正 `n-input-number` 在 blur 后不会恢复有效的值
+- 修正 `n-date-picker` 在值为 null 的时候仍然显示选中日期
 
 ### Deprecated
 

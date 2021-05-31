@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { computed, ComputedRef } from 'vue'
+import { computed, Ref } from 'vue'
 import { getHours, getMinutes, getSeconds } from 'date-fns'
 import type { DatePickerSetupProps } from './DatePicker'
 import {
@@ -10,7 +10,7 @@ import {
 
 export function uniCalendarValidation (
   props: DatePickerSetupProps,
-  mergedValueRef: ComputedRef<number | [number, number] | null>
+  mergedValueRef: Ref<number | [number, number] | null>
 ) {
   // date, datetime
   const timePickerValidatorRef = computed(() => {
@@ -87,7 +87,7 @@ export function uniCalendarValidation (
 
 export function dualCalendarValidation (
   props: DatePickerSetupProps,
-  mergedValueRef: ComputedRef<number | [number, number] | null>
+  mergedValueRef: Ref<number | [number, number] | null>
 ) {
   // daterange, datetimerange
   const timePickerValidatorRef = computed(() => {

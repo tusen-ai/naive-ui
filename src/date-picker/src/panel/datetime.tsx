@@ -11,6 +11,12 @@ import {
 import { NBaseFocusDetector } from '../../../_internal'
 import { useCalendar } from './use-calendar'
 
+/**
+ * DateTime Panel
+ * Update picker value on:
+ * 1. confirm click
+ * 2. clear click
+ */
 export default defineComponent({
   name: 'DateTimePanel',
   props: useCalendar.props,
@@ -106,12 +112,14 @@ export default defineComponent({
                 class={[
                   `${mergedClsPrefix}-date-panel-date`,
                   {
-                    [`${mergedClsPrefix}-date-panel-date--current`]: dateItem.isCurrentDate,
-                    [`${mergedClsPrefix}-date-panel-date--selected`]: dateItem.selected,
-                    [`${mergedClsPrefix}-date-panel-date--excluded`]: !dateItem.inCurrentMonth,
-                    [`${mergedClsPrefix}-date-panel-date--disabled`]: this.mergedIsDateDisabled(
-                      dateItem.ts
-                    )
+                    [`${mergedClsPrefix}-date-panel-date--current`]:
+                      dateItem.isCurrentDate,
+                    [`${mergedClsPrefix}-date-panel-date--selected`]:
+                      dateItem.selected,
+                    [`${mergedClsPrefix}-date-panel-date--excluded`]:
+                      !dateItem.inCurrentMonth,
+                    [`${mergedClsPrefix}-date-panel-date--disabled`]:
+                      this.mergedIsDateDisabled(dateItem.ts)
                   }
                 ]}
                 onClick={() => this.handleDateClick(dateItem)}
@@ -131,7 +139,7 @@ export default defineComponent({
                 theme={mergedTheme.peers.Button}
                 themeOverrides={mergedTheme.peerOverrides.Button}
                 size="tiny"
-                onClick={this.handleClearClick}
+                onClick={this.clearSelectedDateTime}
               >
                 {{ default: () => this.locale.clear }}
               </NButton>

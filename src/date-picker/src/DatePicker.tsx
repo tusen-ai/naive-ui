@@ -10,13 +10,15 @@ import {
   withDirectives,
   ExtractPropTypes,
   CSSProperties,
-  toRef
+  toRef,
+  Ref,
+  watchEffect
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { format, getTime, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
-import { getAlphaString, toRgbString } from 'seemly'
+import { getAlphaString, happensIn, toRgbString } from 'seemly'
 import { InputInst, InputProps, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
@@ -96,7 +98,16 @@ const datePickerProps = {
   actions: Array as PropType<Array<'clear' | 'cancel' | 'confirm'>>,
   isDateDisabled: Function as PropType<IsDateDisabled>,
   isTimeDisabled: Function as PropType<IsTimeDisabled>,
-  // eslint-disable-next-line vue/prop-name-casing
+  show: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  'onUpdate:show': [Function, Array] as PropType<
+  MaybeArray<(show: boolean) => void>
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+  MaybeArray<(show: boolean) => void>
+  >,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<(e: FocusEvent) => void>,
@@ -135,16 +146,23 @@ export default defineComponent({
     const panelInstRef = ref<PanelRef | null>(null)
     const triggerElRef = ref<HTMLElement | null>(null)
     const inputInstRef = ref<InputInst | null>(null)
+    const uncontrolledShowRef = ref<boolean>(false)
+    const controlledShowRef = toRef(props, 'show')
+    const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = computed(() => props.value)
     const mergedValueRef = useMergedState(
       controlledValueRef,
       uncontrolledValueRef
     )
+    // We don't change value unless blur or confirm is called
+    const pendingValueRef: Ref<Value | null> = ref(null)
+    watchEffect(() => {
+      pendingValueRef.value = mergedValueRef.value
+    })
     const singleInputValueRef = ref('')
     const rangeStartInputValueRef = ref('')
     const rangeEndInputValueRef = ref('')
-    const activeRef = ref(false)
     const themeRef = useTheme(
       'DatePicker',
       'DatePicker',
@@ -206,6 +224,9 @@ export default defineComponent({
     const mergedFormatRef = computed(() => {
       return props.format || DATE_FORMAT[props.type]
     })
+    function doUpdatePendingValue (value: Value | null): void {
+      pendingValueRef.value = value
+    }
     function doUpdateValue (value: Value | null): void {
       const {
         'onUpdate:value': _onUpdateValue,
@@ -232,6 +253,12 @@ export default defineComponent({
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
     }
+    function doUpdateShow (show: boolean): void {
+      const { 'onUpdate:show': _onUpdateShow, onUpdateShow } = props
+      if (_onUpdateShow) call(_onUpdateShow, show)
+      if (onUpdateShow) call(onUpdateShow, show)
+      uncontrolledShowRef.value = show
+    }
     function handleKeyDown (e: KeyboardEvent): void {
       if (e.code === 'Escape') {
         closeCalendar({
@@ -245,8 +272,9 @@ export default defineComponent({
       //   doUpdateValue(nextValue)
       // }
     }
-    function handleClear (e: MouseEvent): void {
-      e.stopPropagation()
+    function handleClear (): void {
+      doUpdateShow(false)
+      inputInstRef.value?.deactivate()
     }
     function handlePanelTabOut (): void {
       closeCalendar({
@@ -254,7 +282,10 @@ export default defineComponent({
       })
     }
     function handleClickOutside (e: MouseEvent): void {
-      if (activeRef.value && !triggerElRef.value?.contains(e.target as Node)) {
+      if (
+        mergedShowRef.value &&
+        !triggerElRef.value?.contains(e.target as Node)
+      ) {
         closeCalendar({
           returnFocus: false
         })
@@ -266,12 +297,22 @@ export default defineComponent({
       })
     }
     // --- Panel update value
-    function handlePanelUpdateValue (value: number): void {
-      doUpdateValue(value)
+    function handlePanelUpdateValue (
+      value: Value | null,
+      doUpdate: boolean
+    ): void {
+      if (doUpdate) {
+        doUpdateValue(value)
+      } else {
+        doUpdatePendingValue(value)
+      }
+    }
+    function handlePanelConfirm (): void {
+      doUpdateValue(pendingValueRef.value)
     }
     // --- Refresh
     function deriveInputState (): void {
-      const value = mergedValueRef.value
+      const { value } = pendingValueRef
       if (isRangeRef.value) {
         if (Array.isArray(value) || value === null) {
           deriveRangeInputState(value)
@@ -300,7 +341,7 @@ export default defineComponent({
     }
     // --- Input deactivate & blur
     function handleInputActivate (): void {
-      if (!activeRef.value) {
+      if (!mergedShowRef.value) {
         openCalendar()
       }
     }
@@ -367,9 +408,10 @@ export default defineComponent({
       }
     }
     // --- Click
-    function handleTriggerClick (): void {
+    function handleTriggerClick (e: MouseEvent): void {
       if (props.disabled) return
-      if (!activeRef.value) {
+      if (happensIn(e, 'clear')) return
+      if (!mergedShowRef.value) {
         openCalendar()
       }
     }
@@ -380,12 +422,12 @@ export default defineComponent({
     }
     // --- Calendar
     function openCalendar (): void {
-      if (props.disabled || activeRef.value) return
-      activeRef.value = true
+      if (props.disabled || mergedShowRef.value) return
+      doUpdateShow(true)
     }
     function closeCalendar ({ returnFocus }: { returnFocus: boolean }): void {
-      if (activeRef.value) {
-        activeRef.value = false
+      if (mergedShowRef.value) {
+        doUpdateShow(false)
         if (returnFocus) {
           inputInstRef.value?.focus()
         }
@@ -393,21 +435,31 @@ export default defineComponent({
     }
     // If new value is valid, set calendarTime and refresh display strings.
     // If new value is invalid, do nothing.
-    watch(mergedValueRef, () => {
+    watch(pendingValueRef, () => {
       deriveInputState()
     })
     // init
     deriveInputState()
 
-    const uniVaidation = uniCalendarValidation(props, mergedValueRef)
-    const dualValidation = dualCalendarValidation(props, mergedValueRef)
+    watch(mergedShowRef, (value) => {
+      if (!value) {
+        // close & restore original value
+        // it won't conflict with props.value change
+        // since when prop is passed, it is already
+        // up to date.
+        pendingValueRef.value = mergedValueRef.value
+      }
+    })
+
+    // use pending value to do validation
+    const uniVaidation = uniCalendarValidation(props, pendingValueRef)
+    const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       timePickerSizeRef,
       localeRef,
       dateLocaleRef,
-      valueRef: mergedValueRef,
       isDateDisabledRef: toRef(props, 'isDateDisabled'),
       ...uniVaidation,
       ...dualValidation
@@ -417,7 +469,7 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       namespace: namespaceRef,
       uncontrolledValue: uncontrolledValueRef,
-      mergedValue: mergedValueRef,
+      pendingValue: pendingValueRef,
       panelInstRef,
       triggerElRef,
       inputInstRef,
@@ -425,7 +477,7 @@ export default defineComponent({
       displayTime: singleInputValueRef,
       displayStartTime: rangeStartInputValueRef,
       displayEndTime: rangeEndInputValueRef,
-      active: activeRef,
+      mergedShow: mergedShowRef,
       adjustedTo: useAdjustedTo(props),
       isRange: isRangeRef,
       localizedStartPlaceholder: localizedStartPlaceholderRef,
@@ -448,6 +500,7 @@ export default defineComponent({
       handleRangeUpdateValue,
       handleSingleUpdateValue,
       handlePanelUpdateValue,
+      handlePanelConfirm,
       mergedTheme: themeRef,
       triggerCssVars: computed(() => {
         const {
@@ -524,7 +577,8 @@ export default defineComponent({
           '--calendar-title-font-size': calendarTitleFontSize,
           '--calendar-title-font-weight': calendarTitleFontWeight,
           '--calendar-title-text-color': calendarTitleTextColor,
-          '--calendar-title-grid-template-columns': calendarTitleGridTempateColumns,
+          '--calendar-title-grid-template-columns':
+            calendarTitleGridTempateColumns,
           '--calendar-days-height': calendarDaysHeight,
           '--calendar-days-divider-color': calendarDaysDividerColor,
           '--calendar-days-font-size': calendarDaysFontSize,
@@ -582,9 +636,10 @@ export default defineComponent({
       onTabOut: this.handlePanelTabOut,
       onClose: this.handlePanelClose,
       onKeydown: this.handleKeyDown,
+      onConfirm: this.handlePanelConfirm,
       ref: 'panelInstRef',
-      value: this.mergedValue,
-      active: this.active,
+      value: this.pendingValue,
+      active: this.mergedShow,
       actions: this.actions,
       style: this.cssVars as CSSProperties
     }
@@ -594,10 +649,8 @@ export default defineComponent({
         ref="triggerElRef"
         class={[
           `${mergedClsPrefix}-date-picker`,
-          {
-            [`${mergedClsPrefix}-date-picker--disabled`]: this.disabled,
-            [`${mergedClsPrefix}-date-picker--range`]: this.isRange
-          }
+          this.disabled && `${mergedClsPrefix}-date-picker--disabled`,
+          this.isRange && `${mergedClsPrefix}-date-picker--range`
         ]}
         style={this.triggerCssVars as CSSProperties}
         onKeydown={this.handleKeyDown}
@@ -624,7 +677,7 @@ export default defineComponent({
                         onUpdateValue={this.handleRangeUpdateValue}
                         theme={this.mergedTheme.peers.Input}
                         themeOverrides={this.mergedTheme.peerOverrides.Input}
-                        internalForceFocus={this.active}
+                        internalForceFocus={this.mergedShow}
                         internalDeactivateOnEnter
                         {...commonInputProps}
                       >
@@ -658,6 +711,8 @@ export default defineComponent({
                             : ''
                         }
                         onUpdateValue={this.handleSingleUpdateValue}
+                        internalForceFocus={this.mergedShow}
+                        internalDeactivateOnEnter
                         {...commonInputProps}
                       >
                         {{
@@ -675,7 +730,7 @@ export default defineComponent({
                 }}
               </VTarget>,
               <VFollower
-                show={this.active}
+                show={this.mergedShow}
                 containerClass={this.namespace}
                 to={this.adjustedTo}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
@@ -689,7 +744,7 @@ export default defineComponent({
                     >
                       {{
                         default: () =>
-                          this.active
+                          this.mergedShow
                             ? withDirectives(
                               this.type === 'datetime' ? (
                                 <DatetimePanel {...commonPanelProps} />

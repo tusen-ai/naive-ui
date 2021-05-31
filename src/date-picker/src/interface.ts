@@ -14,16 +14,24 @@ import {
 
 export type Value = number | [number, number]
 
-export type OnUpdateValue = <
-  T extends number &
-  (number | null) &
-  [number, number] &
-  ([number, number] | null)
->(
-  value: T
+export type OnUpdateValue = (
+  value: number & (number | null) & [number, number] & ([number, number] | null)
 ) => void
 
 export type OnUpdateValueImpl = (value: Value | null) => void
+
+export type OnPanelUpdateValue = (
+  value: number &
+  (number | null) &
+  [number, number] &
+  ([number, number] | null),
+  doUpdate: boolean
+) => void
+
+export type OnPanelUpdateValueImpl = (
+  value: Value | null,
+  doUpdate: boolean
+) => void
 
 export interface PanelRef {
   $el: HTMLElement
@@ -35,14 +43,12 @@ export type DatePickerInjection = {
   timePickerSizeRef: Ref<'small' | 'medium' | 'large'>
   localeRef: Ref<NLocale['DatePicker']>
   dateLocaleRef: Ref<NDateLocale>
-  valueRef: Ref<Value | null>
   isDateDisabledRef: Ref<IsDateDisabled | undefined>
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 
-export const datePickerInjectionKey: InjectionKey<DatePickerInjection> = Symbol(
-  'datePicker'
-)
+export const datePickerInjectionKey: InjectionKey<DatePickerInjection> =
+  Symbol('datePicker')
 
 export type IsDateDisabled = IsSingleDateDisabled | IsRangeDateDisabled
 export type IsSingleDateDisabled = (date: number) => boolean
