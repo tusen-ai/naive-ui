@@ -15,6 +15,7 @@
 
 ### Fixes
 
+- 修正 `n-date-picker` 在没有值的状态下起始日期 disabled 状态不正确
 - 修正 `n-input-number` 在 blur 后不会恢复有效的值
 
 ### Deprecated

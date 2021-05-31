@@ -28,6 +28,12 @@
     :is-date-disabled="isRangeDateDisabled"
     :is-time-disabled="isRangeTimeDisabled"
   />
+  只能选过去的时间
+  <n-date-picker
+    type="daterange"
+    :default-value="[Date.now(), Date.now() + 86400000]"
+    :is-date-disabled="disablePreviousDate"
+  />
 </n-space>
 ```
 
@@ -124,6 +130,9 @@ export default {
             }
           }
         }
+      },
+      disablePreviousDate (ts) {
+        return ts > Date.now()
       }
     }
   }

@@ -276,7 +276,8 @@ function useDualCalendar (
   // The function is used on date panel, not the date-picker value validation
   function mergedIsDateDisabled (ts: number): boolean {
     const isDateDisabled = isDateDisabledRef.value
-    if (!isDateDisabled || !Array.isArray(props.value)) return false
+    if (!isDateDisabled) return false
+    if (!Array.isArray(props.value)) return isDateDisabled(ts, 'start', null)
     if (selectingPhaseRef.value === 'start') {
       // before you really start to select
       return isDateDisabled(ts, 'start', null)

@@ -15,6 +15,7 @@
 
 ### Fixes
 
+- Fix `n-date-picker` doesn't disable start date correctly when value is empty.
 - Fix `n-input-number` not restore valid value after blur.
 
 ### Deprecated
