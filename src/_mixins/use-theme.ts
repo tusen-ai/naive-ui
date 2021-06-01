@@ -13,6 +13,7 @@ import { CNode } from 'css-render'
 import type { GlobalTheme } from '../config-provider'
 import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
 import type { ThemeCommonVars } from '../_styles/common'
+import { ssrInjectionKey } from '../ssr/context'
 
 globalStyle.mount({
   id: 'naive-ui-global',
@@ -95,17 +96,24 @@ function useTheme<N, T, R> (
   props: UseThemeProps<Theme<N, T, R>>,
   clsPrefixRef?: Ref<string | undefined>
 ): ComputedRef<MergedTheme<Theme<N, T, R>>> {
+  const ssrAdapter = inject(ssrInjectionKey, undefined)
   if (style) {
-    onBeforeMount(() => {
+    const mountStyle = (): void => {
       const clsPrefix = clsPrefixRef?.value
       style.mount({
         id: clsPrefix === undefined ? mountId : clsPrefix + mountId,
         head: true,
         props: {
           bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
-        }
+        },
+        ssr: ssrAdapter
       })
-    })
+    }
+    if (ssrAdapter) {
+      mountStyle()
+    } else {
+      onBeforeMount(mountStyle)
+    }
   }
   const NConfigProvider = inject(configProviderInjectionKey, null)
   const mergedThemeRef = computed(() => {
