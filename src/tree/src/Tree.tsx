@@ -323,9 +323,8 @@ export default defineComponent({
         return
       }
       const { virtualScroll } = props
-      const viewportHeight = (virtualScroll
-        ? virtualListInstRef.value!.listElRef
-        : selfElRef.value!
+      const viewportHeight = (
+        virtualScroll ? virtualListInstRef.value!.listElRef : selfElRef.value!
       ).offsetHeight
       const viewportItemCount = Math.ceil(viewportHeight / ITEM_SIZE) + 1
       if (addedKey !== null) {
@@ -596,7 +595,7 @@ export default defineComponent({
     function handleDragStart ({ event, node }: InternalDragInfo): void {
       if (!props.draggable || props.disabled || node.disabled) return
       // Most of time, the image will block user's view
-      event.dataTransfer?.setDragImage(emptyImage, 0, 0)
+      emptyImage && event.dataTransfer?.setDragImage(emptyImage, 0, 0)
       dragStartX = event.clientX
       draggingNodeRef.value = node
       doDragStart({ event, node: node.rawNode })
@@ -612,10 +611,8 @@ export default defineComponent({
       if (emit) doDragOver({ event, node: node.rawNode })
       // Update dropping node
       const el = event.currentTarget as HTMLElement
-      const {
-        height: elOffsetHeight,
-        top: elClientTop
-      } = el.getBoundingClientRect()
+      const { height: elOffsetHeight, top: elClientTop } =
+        el.getBoundingClientRect()
       const eventOffsetY = event.clientY - elClientTop
       let mousePosition: DropPosition
 

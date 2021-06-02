@@ -154,9 +154,11 @@ export default c([
         animationName: 'button-wave-spread, button-wave-opacity'
       })
     ]),
-    'MozBoxSizing' in document.body.style ? c('&::moz-focus-inner', {
-      border: 0
-    }) : null,
+    (typeof window !== 'undefined' && 'MozBoxSizing' in document.body.style)
+      ? c('&::moz-focus-inner', {
+        border: 0
+      })
+      : null,
     cE('border, state-border', `
       position: absolute;
       left: 0;

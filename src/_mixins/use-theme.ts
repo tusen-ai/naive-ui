@@ -15,11 +15,6 @@ import { configProviderInjectionKey } from '../config-provider/src/ConfigProvide
 import type { ThemeCommonVars } from '../_styles/common'
 import { ssrInjectionKey } from '../ssr/context'
 
-globalStyle.mount({
-  id: 'naive-ui-global',
-  head: true
-})
-
 export interface Theme<N, T = {}, R = any> {
   name: N
   common?: ThemeCommonVars
@@ -106,6 +101,11 @@ function useTheme<N, T, R> (
         props: {
           bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
         },
+        ssr: ssrAdapter
+      })
+      globalStyle.mount({
+        id: 'naive-ui/global',
+        head: true,
         ssr: ssrAdapter
       })
     }

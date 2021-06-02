@@ -10,3 +10,6 @@ exports.walk = async function * walk (dir) {
 }
 
 exports.outDirs = ['es', 'lib'].map((d) => path.resolve(__dirname, '../..', d))
+exports.srcDir = path.resolve(__dirname, '../../src')
+
+exports.replaceDefine = require('./replace-define').replaceDefine
