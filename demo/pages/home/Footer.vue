@@ -9,7 +9,10 @@
     <div class="footer-links">
       <div class="footer-links-col">
         <n-text depth="1" class="col-header">{{ t('resources') }}</n-text>
-        <n-button text>{{ t('designResources') }}</n-button>
+        <n-button disabled text>{{ t('designResources') }}</n-button>
+        <n-button text tag="a" target="_blank" href="https://xicons.org">{{
+          t('icons')
+        }}</n-button>
       </div>
       <div class="footer-links-col">
         <n-text depth="1" class="col-header">{{ t('help') }}</n-text>
@@ -22,13 +25,9 @@
       </div>
       <div class="footer-links-col">
         <n-text depth="1" class="col-header">{{ t('community') }}</n-text>
-        <n-button
-text
-tag="a"
-target="_blank"
-href="https://www.github.com"
-          >Github</n-button
-        >
+        <n-button text tag="a" target="_blank" href="https://www.github.com">
+          Github
+        </n-button>
         <n-button text>Discord</n-button>
         <n-button text>钉钉</n-button>
       </div>
@@ -74,7 +73,8 @@ export default {
           changelog: '更新日志',
           commonIssues: '常见问题',
           tusimple: '图森未来',
-          joinUs: '加入我们'
+          joinUs: '加入我们',
+          icons: '图标库'
         },
         'en-US': {
           resources: 'Resources',
@@ -85,7 +85,8 @@ export default {
           changelog: 'Change Log',
           commonIssues: 'Common Issues',
           tusimple: 'TuSimple',
-          joinUs: 'Join Us'
+          joinUs: 'Join Us',
+          icons: 'Icon Library'
         }
       })
     }
