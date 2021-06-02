@@ -3,9 +3,9 @@
 可以嵌套。
 
 ```html
-<n-collapse v-model:expandedNames="activeNames">
+<n-collapse>
   <n-collapse-item title="绿灯" name="1">
-    <n-collapse v-model:expandedNames="activeNames2">
+    <n-collapse>
       <n-collapse-item title="常亮" name="1">
         <div>通过</div>
       </n-collapse-item>
@@ -18,15 +18,4 @@
     <div>停</div>
   </n-collapse-item>
 </n-collapse>
-```
-
-```js
-export default {
-  data () {
-    return {
-      activeNames: [],
-      activeNames2: []
-    }
-  }
-}
 ```

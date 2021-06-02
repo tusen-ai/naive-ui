@@ -3,9 +3,9 @@
 It can be nested.
 
 ```html
-<n-collapse v-model:expandedNames="activeNames">
+<n-collapse>
   <n-collapse-item title="right" name="1">
-    <n-collapse v-model:expandedNames="activeNames2">
+    <n-collapse>
       <n-collapse-item title="right" name="1">
         <div>good</div>
       </n-collapse-item>
@@ -18,15 +18,4 @@ It can be nested.
     <div>good</div>
   </n-collapse-item>
 </n-collapse>
-```
-
-```js
-export default {
-  data () {
-    return {
-      activeNames: [],
-      activeNames2: []
-    }
-  }
-}
 ```

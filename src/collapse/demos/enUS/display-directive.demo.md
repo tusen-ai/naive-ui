@@ -3,9 +3,9 @@
 Set `display-directive` to `if` or `show` to determine whether to keep the DOM inside `n-collapse-item` when inactive.
 
 ```html
-<n-collapse v-model:expandedNames="activeNames" display-directive="show">
+<n-collapse display-directive="show">
   <n-collapse-item title="right" name="1">
-    <n-collapse v-model:expandedNames="activeNames2">
+    <n-collapse>
       <n-collapse-item title="right" name="1">
         <div>good</div>
       </n-collapse-item>
@@ -18,15 +18,4 @@ Set `display-directive` to `if` or `show` to determine whether to keep the DOM i
     <div>good</div>
   </n-collapse-item>
 </n-collapse>
-```
-
-```js
-export default {
-  data () {
-    return {
-      activeNames: [],
-      activeNames2: []
-    }
-  }
-}
 ```

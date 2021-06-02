@@ -1,7 +1,7 @@
 # Basic
 
 ```html
-<n-collapse v-model:expandedNames="activeNames">
+<n-collapse>
   <n-collapse-item title="right" name="1">
     <div>good</div>
   </n-collapse-item>
@@ -12,14 +12,4 @@
     <div>very good</div>
   </n-collapse-item>
 </n-collapse>
-```
-
-```js
-export default {
-  data () {
-    return {
-      activeNames: []
-    }
-  }
-}
 ```
