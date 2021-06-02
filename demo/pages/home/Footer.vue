@@ -13,16 +13,34 @@
       </div>
       <div class="footer-links-col">
         <n-text depth="1" class="col-header">{{ t('help') }}</n-text>
-        <n-button text>{{ t('commonIssues') }}</n-button>
-        <n-button text>{{ t('changelog') }}</n-button>
+        <n-button text @click="push('/docs/common-issues')">{{
+          t('commonIssues')
+        }}</n-button>
+        <n-button text @click="push('/docs/changelog')">{{
+          t('changelog')
+        }}</n-button>
       </div>
       <div class="footer-links-col">
         <n-text depth="1" class="col-header">{{ t('community') }}</n-text>
-        <n-button text>Github</n-button>
+        <n-button
+text
+tag="a"
+target="_blank"
+href="https://www.github.com"
+          >Github</n-button
+        >
+        <n-button text>Discord</n-button>
+        <n-button text>钉钉</n-button>
       </div>
       <div class="footer-links-col footer-links-col--last">
         <n-text depth="1" class="col-header">{{ t('contact') }}</n-text>
-        <n-button text>{{ t('tusimple') }}</n-button>
+        <n-button
+          text
+          tag="a"
+          target="_blank"
+          href="https://www.tusimple.com/"
+          >{{ t('tusimple') }}</n-button
+        >
         <n-button text>{{ t('joinUs') }}</n-button>
       </div>
     </div>
@@ -35,6 +53,7 @@
 
 <script>
 import { i18n } from '../../utils/composables'
+import { push } from '../../store'
 import { version } from 'naive-ui'
 
 export default {
@@ -44,6 +63,7 @@ export default {
   setup () {
     return {
       version,
+      push,
       ...i18n({
         'zh-CN': {
           resources: '资源',

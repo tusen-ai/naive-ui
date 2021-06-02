@@ -149,6 +149,13 @@ function changeThemeInPath (path, theme) {
   return path.replace(themeReg, '$1' + theme)
 }
 
+export function push (partialPath) {
+  const { fullPath } = route
+  router.push(
+    fullPath.replace(/(^\/[^/]+\/[^/]+)((\/.*)|$)/, '$1' + partialPath)
+  )
+}
+
 export function useDisplayMode () {
   return displayModeRef
 }

@@ -81,6 +81,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           en: 'Supported Platforms',
           zh: '支持的平台',
           path: '/supported-platforms'
+        },
+        {
+          en: 'Common Issues',
+          zh: '常见问题',
+          path: '/common-issues'
         }
       ]
     },
