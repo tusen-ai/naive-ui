@@ -2,6 +2,7 @@
 
 body {
   overflow: hidden;
+  --header-height: 64px;
 }
 
 @media only screen and (max-width: 639px) {

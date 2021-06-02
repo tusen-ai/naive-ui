@@ -95,6 +95,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/jsx'
         },
         {
+          en: 'Server-Sider Rendering',
+          zh: '服务端渲染 SSR',
+          path: '/ssr'
+        },
+        {
           en: 'Customize Theme',
           zh: '调整主题',
           path: '/customize-theme'

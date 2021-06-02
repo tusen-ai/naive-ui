@@ -39,6 +39,10 @@ export const enDocRoutes = [
   {
     path: 'jsx',
     component: () => import('../pages/docs/jsx/enUS/index.md')
+  },
+  {
+    path: 'ssr',
+    component: () => import('../pages/docs/ssr/enUS/index.md')
   }
 ]
 
@@ -83,6 +87,10 @@ export const zhDocRoutes = [
   {
     path: 'jsx',
     component: () => import('../pages/docs/jsx/zhCN/index.md')
+  },
+  {
+    path: 'ssr',
+    component: () => import('../pages/docs/ssr/zhCN/index.md')
   }
 ]
 

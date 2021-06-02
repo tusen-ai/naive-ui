@@ -17,7 +17,3 @@ Only Vue 3 (>3.0.5) is supported.
 ## TypeScript
 
 Require version > 4.1.
-
-## SSR
-
-I haven't try SSR yet and not a expert of SSR. You help will always be appreciated!

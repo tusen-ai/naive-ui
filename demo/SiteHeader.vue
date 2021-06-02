@@ -495,7 +495,7 @@ export default {
 <style scoped>
 .nav {
   display: grid;
-  grid-template-rows: 63px;
+  grid-template-rows: calc(var(--header-height) - 1px);
   align-items: center;
   padding: 0 var(--side-padding);
 }
@@ -533,6 +533,6 @@ export default {
 
 <style>
 .nav-menu .n-menu-item {
-  height: 63px !important;
+  height: calc(var(--header-height) - 1px) !important;
 }
 </style>

@@ -72,6 +72,7 @@ export default {
 <style scoped>
 .footer {
   --x-padding: 56px;
+  margin-top: auto;
 }
 
 .footer.footer--centered .footer-links {

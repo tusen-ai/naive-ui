@@ -3,7 +3,7 @@
     id="doc-layout"
     :has-sider="showSider"
     :position="isXs ? undefined : 'absolute'"
-    :style="isXs ? undefined : 'top: 64px'"
+    :style="isXs ? undefined : 'top: var(--header-height)'"
   >
     <n-layout-sider
       :native-scrollbar="false"
@@ -11,7 +11,7 @@
       collapse-mode="transform"
       bordered
       show-trigger="bar"
-      trigger-style="top: calc(50% - 64px);"
+      trigger-style="top: calc(50% - var(--header-height));"
       v-if="showSider"
     >
       <n-menu
@@ -20,7 +20,11 @@
         @update:value="handleMenuUpdateValue"
       />
     </n-layout-sider>
-    <n-layout ref="layoutInstRef" :native-scrollbar="false">
+    <n-layout
+      ref="layoutInstRef"
+      :native-scrollbar="false"
+      content-style="min-height: calc(100vh - var(--header-height)); display: flex; flex-direction: column;"
+    >
       <router-view />
       <site-footer />
     </n-layout>

@@ -2,7 +2,7 @@
   <n-layout
     :native-scrollbar="false"
     :position="isXs ? 'static' : 'absolute'"
-    :style="isXs ? undefined : 'top: 64px'"
+    :style="isXs ? undefined : 'top: var(--header-height);'"
   >
     <div class="banner" style="overflow: hidden">
       <right-image class="right-image" v-if="!isS" />
