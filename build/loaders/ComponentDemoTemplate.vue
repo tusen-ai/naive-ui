@@ -3,6 +3,7 @@
     demo-file-name="<!--DEMO_FILE_NAME-->"
     relative-url="<!--URL-->"
     title="<!--TITLE_SLOT-->"
+    code="<!--CODE_SLOT-->"
   >
     <template #title>
       <!--TITLE_SLOT-->
@@ -14,9 +15,6 @@
       <div class="demo-card__view">
         <!--DEMO_SLOT-->
       </div>
-    </template>
-    <template #code>
-      <!--CODE_SLOT-->
     </template>
   </component-demo>
 </template>

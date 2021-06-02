@@ -18,9 +18,13 @@
 
 <script>
 import { i18n } from '../utils/composables'
+import EditOnGithubButton from './EditOnGithubButton.vue'
 
 export default {
   name: 'EditOnGithubHeader',
+  components: {
+    EditOnGithubButton
+  },
   props: {
     relativeUrl: {
       type: String,

@@ -55,9 +55,11 @@ function mergeParts (parts) {
   mergedParts.title = parts.title
   mergedParts.content = parts.content
   mergedParts.code = ''
-  // console.log(parts)
   if (parts.template) {
-    mergedParts.code += parts.template
+    mergedParts.code += `<template>\n${parts.template
+      .split('\n')
+      .map((line) => (line.length ? '  ' + line : line))
+      .join('\n')}\n</template>`
   }
   if (parts.script) {
     if (parts.template) mergedParts.code += '\n\n'
@@ -71,10 +73,7 @@ ${parts.script}
 ${parts.style}
 </style>`
   }
-  mergedParts.code = `<n-code language="html" uri code="${encodeURIComponent(
-    mergedParts.code
-  )}" />`
-  // console.log(mergedParts.code)
+  mergedParts.code = encodeURIComponent(mergedParts.code)
   return mergedParts
 }
 

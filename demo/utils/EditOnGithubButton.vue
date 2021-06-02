@@ -1,10 +1,5 @@
 <template>
-  <n-button
-    class="edit-button"
-    text
-    :size="size"
-    @click="handleEditOnGithubClick"
-  >
+  <n-button class="edit-button" text :size="size" @click="handleClick">
     <template #icon>
       <n-icon>
         <edit-icon />
@@ -27,28 +22,14 @@ export default {
       type: String,
       required: true
     },
-    text: {
-      type: Boolean,
-      default: false
-    },
-    size: {
-      type: String,
-      default: undefined
-    }
+    text: Boolean,
+    size: String
   },
-  data () {
+  setup (props) {
     return {
-      githubUrl
-    }
-  },
-  computed: {
-    gheDocUrl () {
-      return this.githubUrl + this.relativeUrl
-    }
-  },
-  methods: {
-    handleEditOnGithubClick () {
-      window.open(this.gheDocUrl, '_blank')
+      handleClick () {
+        window.open(githubUrl + props.relativeUrl, '_blank')
+      }
     }
   }
 }
