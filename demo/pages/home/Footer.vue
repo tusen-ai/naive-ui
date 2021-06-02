@@ -28,43 +28,47 @@
     </div>
     <n-divider class="footer-divider" />
     <div style="text-align: center; padding: 20px">
-      <n-text depth="3">Naive UI 2.7.4 · Made by Tusimple</n-text>
+      <n-text depth="3">Naive UI {{ version }} · Made by Tusimple</n-text>
     </div>
   </n-layout-footer>
 </template>
 
 <script>
 import { i18n } from '../../utils/composables'
+import { version } from 'naive-ui'
 
 export default {
   props: {
     centered: Boolean
   },
   setup () {
-    return i18n({
-      'zh-CN': {
-        resources: '资源',
-        designResources: '设计资源',
-        help: '帮助',
-        community: '社区',
-        contact: '联系我们',
-        changelog: '更新日志',
-        commonIssues: '常见问题',
-        tusimple: '图森未来',
-        joinUs: '加入我们'
-      },
-      'en-US': {
-        resources: 'Resources',
-        designResources: 'Design Resources',
-        help: 'Help',
-        community: 'Community',
-        contact: 'Contact Us',
-        changelog: 'Change Log',
-        commonIssues: 'Common Issues',
-        tusimple: 'TuSimple',
-        joinUs: 'Join Us'
-      }
-    })
+    return {
+      version,
+      ...i18n({
+        'zh-CN': {
+          resources: '资源',
+          designResources: '设计资源',
+          help: '帮助',
+          community: '社区',
+          contact: '联系我们',
+          changelog: '更新日志',
+          commonIssues: '常见问题',
+          tusimple: '图森未来',
+          joinUs: '加入我们'
+        },
+        'en-US': {
+          resources: 'Resources',
+          designResources: 'Design Resources',
+          help: 'Help',
+          community: 'Community',
+          contact: 'Contact Us',
+          changelog: 'Change Log',
+          commonIssues: 'Common Issues',
+          tusimple: 'TuSimple',
+          joinUs: 'Join Us'
+        }
+      })
+    }
   }
 }
 </script>

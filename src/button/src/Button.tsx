@@ -39,6 +39,7 @@ const buttonProps = {
   size: String as PropType<Size>,
   ghost: Boolean,
   round: Boolean,
+  depth: [Number, String] as PropType<1 | 2 | 3 | '1' | '2' | '3'>,
   focusable: {
     type: Boolean,
     default: true
@@ -227,6 +228,17 @@ export default defineComponent({
           '--text-color-disabled': 'initial'
         }
         if (text) {
+          const { depth } = props
+          const textColor =
+            color ||
+            (type === 'default' && depth !== undefined
+              ? self[
+                createKey(
+                  'textColorTextDepth',
+                  String(depth) as '1' | '2' | '3'
+                )
+              ]
+              : self[createKey('textColorText', type)])
           colorProps = {
             '--color': '#0000',
             '--color-hover': '#0000',
@@ -234,7 +246,7 @@ export default defineComponent({
             '--color-focus': '#0000',
             '--color-disabled': '#0000',
             '--ripple-color': '#0000',
-            '--text-color': color || self[createKey('textColorText', type)],
+            '--text-color': textColor,
             '--text-color-hover': color
               ? createHoverColor(color)
               : self[createKey('textColorTextHover', type)],

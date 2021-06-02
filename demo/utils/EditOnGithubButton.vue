@@ -1,5 +1,11 @@
 <template>
-  <n-button class="edit-button" text :size="size" @click="handleClick">
+  <n-button
+    class="edit-button"
+    text
+    :size="size"
+    @click="handleClick"
+    :depth="depth"
+  >
     <template #icon>
       <n-icon>
         <edit-icon />
@@ -23,7 +29,8 @@ export default {
       required: true
     },
     text: Boolean,
-    size: String
+    size: String,
+    depth: String
   },
   setup (props) {
     return {

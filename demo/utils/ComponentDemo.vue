@@ -27,6 +27,7 @@
       <n-tooltip trigger="hover" :placement="'top'" :show-arrow="true">
         <template #trigger>
           <edit-on-github-button
+            depth="3"
             style="padding: 0; margin-right: 6px"
             size="tiny"
             :relative-url="relativeUrl"
@@ -45,6 +46,7 @@
             style="padding: 0"
             size="tiny"
             text
+            depth="3"
             @click="toggleCodeDisplay"
           >
             <template #icon>

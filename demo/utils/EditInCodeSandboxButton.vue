@@ -1,5 +1,11 @@
 <template>
-  <n-button class="edit-button" text :size="size" @click="handleClick">
+  <n-button
+    class="edit-button"
+    text
+    :size="size"
+    @click="handleClick"
+    depth="3"
+  >
     <template #icon>
       <n-icon>
         <code-sandbox-icon />
