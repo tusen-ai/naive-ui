@@ -93,8 +93,9 @@ export default {
         'en-US': {
           start: 'Get Started',
           intro1: 'A Vue 3 Component Library',
-          intro2: 'Rather Complete, Themeable, With Typescript, Not Too Slow',
-          intro3: 'Interesting Somehow',
+          intro2:
+            'Fairly Complete, Customizable Themes, Uses Typescript, Not Too Slow',
+          intro3: 'Kinda Interesting',
           intro4: 'Change Theme'
         }
       })
