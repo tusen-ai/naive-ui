@@ -16,8 +16,8 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { getParameters } from 'codesandbox/lib/api/define'
 import CodeSandboxIcon from '@vicons/ionicons5/CubeOutline'
+import { getCodeSandboxParams } from './codesandbox'
 
 export default defineComponent({
   name: 'EditInCodeSandboxButton',
@@ -32,20 +32,7 @@ export default defineComponent({
     return {
       handleClick () {
         const div = document.createElement('div')
-        const parameters = getParameters({
-          files: {
-            'package.json': {
-              content: {
-                dependencies: {
-                  vue: 'latest'
-                }
-              }
-            },
-            'App.vue': {
-              content: props.code
-            }
-          }
-        })
+        const parameters = getCodeSandboxParams(props.code)
         div.style.display = 'none'
         div.innerHTML = `<form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
   <input type="hidden" name="parameters" value="${parameters}" />

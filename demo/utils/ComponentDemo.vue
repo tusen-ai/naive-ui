@@ -1,6 +1,6 @@
 <template>
   <n-card
-    v-if="isShow"
+    v-if="showDemo"
     class="demo-card"
     :id="demoFileName"
     :segmented="{
@@ -36,7 +36,7 @@
         {{ t('editOnGithub') }}
       </n-tooltip>
       <n-tooltip
-        ref="expandCodeButton"
+        ref="expandCodeButtonRef"
         trigger="hover"
         :placement="'top'"
         :show-arrow="true"
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { nextTick } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { CodeOutline } from '@vicons/ionicons5'
 import { useDisplayMode } from '../store'
 import { i18n } from '../utils/composables'
@@ -102,12 +102,29 @@ export default {
     }
   },
   setup (props) {
+    const displayModeRef = useDisplayMode()
+    const isDebugDemo = /(d|D)ebug/.test(props.demoFileName)
+    const showDemoRef = computed(() => {
+      return !(isDebugDemo && displayModeRef.value !== 'debug')
+    })
+    const showCodeRef = ref(false)
+    const expandCodeButtonRef = ref(null)
+    watch(showCodeRef, () => {
+      nextTick(() => {
+        expandCodeButtonRef.value.syncPosition()
+      })
+    })
     return {
+      expandCodeButtonRef,
+      showDemo: showDemoRef,
+      showCode: showCodeRef,
+      sfcCode: decodeURIComponent(props.code),
+      toggleCodeDisplay () {
+        showCodeRef.value = !showCodeRef.value
+      },
       handleTitleClick: () => {
         window.location.hash = `#${props.demoFileName}`
       },
-      displayMode: useDisplayMode(),
-      sfcCode: decodeURIComponent(props.code),
       ...i18n({
         'zh-CN': {
           show: '显示代码',
@@ -122,35 +139,6 @@ export default {
           editInCodeSandbox: 'Edit in CodeSandbox'
         }
       })
-    }
-  },
-  data () {
-    return {
-      showCode: false
-    }
-  },
-  computed: {
-    isDebugDemo () {
-      return (
-        this.demoFileName &&
-        (~this.demoFileName.indexOf('debug') ||
-          ~this.demoFileName.indexOf('Debug'))
-      )
-    },
-    isShow () {
-      return !(this.isDebugDemo && this.displayMode !== 'debug')
-    }
-  },
-  watch: {
-    showCode () {
-      nextTick(() => {
-        this.$refs.expandCodeButton.syncPosition()
-      })
-    }
-  },
-  methods: {
-    toggleCodeDisplay () {
-      this.showCode = !this.showCode
     }
   }
 }
