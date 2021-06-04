@@ -273,5 +273,35 @@ exports[`n-ssr-provider should work with import on demand 1`] = `
   }
 }
 </style>
+<style cssr-id=\\"naive-ui/global\\">
+body {
+
+  margin: 0;
+  font-size: 14px;
+  font-family: v-sans, system-ui, -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", sans-serif, \\"Apple Color Emoji\\", \\"Segoe UI Emoji\\", \\"Segoe UI Symbol\\";
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+
+}
+
+body input {
+
+    font-family: inherit;
+    font-size: inherit;
+  
+}
+</style>
+<style cssr-id=\\"nBaseWave\\">
+.n-base-wave {
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: inherit;
+
+}
+</style>
 <!--[--><button class=\\"n-button n-button--default-type\\" tabindex=\\"0\\" type=\\"button\\" style=\\"--bezier:cubic-bezier(.4, 0, .2, 1);--bezier-ease-out:cubic-bezier(0, 0, .2, 1);--ripple-duration:.6s;--opacity-disabled:0.5;--wave-opacity:0.6;font-weight:400;--color:#0000;--color-hover:#0000;--color-pressed:#0000;--color-focus:#0000;--color-disabled:#0000;--ripple-color:#18a058;--text-color:rgb(51, 54, 57);--text-color-hover:#36ad6a;--text-color-pressed:#0c7a43;--text-color-focus:#36ad6a;--text-color-disabled:rgb(51, 54, 57);--border:1px solid rgb(224, 224, 230);--border-hover:1px solid #36ad6a;--border-pressed:1px solid #0c7a43;--border-focus:1px solid #36ad6a;--border-disabled:1px solid rgb(224, 224, 230);--width:initial;--height:34px;--font-size:14px;--padding:0 14px;--icon-size:18px;--icon-margin:6px;--border-radius:3px;\\"><!----><!----><span class=\\"n-button__content\\">btn</span><div class=\\"n-base-wave\\"></div><div class=\\"n-button__border\\" style=\\"\\"></div><div class=\\"n-button__state-border\\" style=\\"\\"></div></button><!--]-->"
 `;
