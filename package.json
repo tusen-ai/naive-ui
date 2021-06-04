@@ -26,7 +26,6 @@
   "author": "07akioni",
   "license": "MIT",
   "files": [
-    "compat",
     "es",
     "lib",
     "README.md"
@@ -127,5 +126,17 @@
       "pre-commit": "lint-staged"
     }
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "homepage": "https://www.naiveui.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TuSimple/naive-ui"
+  },
+  "keywords": [
+    "naive-ui",
+    "component library",
+    "ui framework",
+    "ui",
+    "vue"
+  ]
 }
