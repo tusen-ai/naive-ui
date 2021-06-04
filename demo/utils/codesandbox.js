@@ -16,6 +16,29 @@ const indexHtml = `<!DOCTYPE html>
 </html>
 `
 
+const appVue = `<template>
+<n-loading-bar-provider>
+  <n-message-provider>
+    <n-notification-provider>
+      <n-dialog-provider>
+        <demo />
+      </n-dialog-provider>
+    </n-notification-provider>
+  </n-message-provider>
+</n-loading-bar-provider>
+</template>
+
+<script>
+import { defineComponent } from "vue";
+import Demo from "./Demo.vue";
+
+export default defineComponent({
+components: {
+  Demo,
+},
+});
+</script>`
+
 const mainJs = `import { createApp } from "vue";
 import naive from "naive-ui";
 import App from "./App.vue";
@@ -35,14 +58,20 @@ export function getCodeSandboxParams (code) {
           dependencies: {
             vue: 'next',
             'naive-ui': 'latest'
+          },
+          devDependencies: {
+            '@vue/cli-plugin-babel': '~4.5.0'
           }
         }
       },
       'index.html': {
         content: indexHtml
       },
-      'src/App.vue': {
+      'src/Demo.vue': {
         content: code
+      },
+      'src/App.vue': {
+        content: appVue
       },
       'src/main.js': {
         content: mainJs
