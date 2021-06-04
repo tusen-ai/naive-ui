@@ -7,7 +7,8 @@ import {
   defineComponent,
   PropType,
   renderSlot,
-  CSSProperties
+  CSSProperties,
+  ButtonHTMLAttributes
 } from 'vue'
 import { useMemo } from 'vooks'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
@@ -74,7 +75,7 @@ const buttonProps = {
 
 export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>
 
-export default defineComponent({
+const Button = defineComponent({
   name: 'Button',
   props: buttonProps,
   setup (props) {
@@ -466,3 +467,20 @@ export default defineComponent({
     )
   }
 })
+
+type NativeButtonProps = Omit<ButtonHTMLAttributes, keyof ButtonProps>
+type MergedProps = Partial<ButtonProps & NativeButtonProps>
+
+export default Button
+
+// XButton is for tsx type checking
+// It's not compitable with render function `h`
+// Currently we don't expose it as public
+// If there's any issue about this, we may expose it
+// Since most people use template, the type checking phase doesn't work as tsx
+export const XButton: new () => { $props: MergedProps } = Button as any
+
+// Also, we may make XButton a generic type which support `tag` prop
+// but currently vue doesn't export IntrinsicElementAttributes from runtime-dom
+// so we can't easily make an attr map by hand
+// just leave it for later

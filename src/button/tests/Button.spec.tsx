@@ -1,21 +1,22 @@
+import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NButton } from '../index'
+import { NButton, NxButton } from '../index'
 
 describe('n-button', () => {
   it('should work with import on demand', () => {
     mount(NButton)
   })
-  it('clickable', () => {
+  it('clickable', async () => {
     const onClick = jest.fn()
     const inst = mount(NButton, {
       props: {
         onClick
       }
     })
-    inst.trigger('click')
+    await inst.trigger('click')
     expect(onClick).toHaveBeenCalled()
   })
-  it('disabled', () => {
+  it('disabled', async () => {
     const onClick = jest.fn()
     const inst = mount(NButton, {
       props: {
@@ -23,7 +24,13 @@ describe('n-button', () => {
         onClick
       }
     })
-    inst.trigger('click')
+    await inst.trigger('click')
     expect(onClick).not.toHaveBeenCalled()
+  })
+  it('passed native event & attr tsx type checking', () => {
+    ;<div>
+      <NxButton onMousedown={() => {}} />
+      <NxButton formaction="" />
+    </div>
   })
 })
