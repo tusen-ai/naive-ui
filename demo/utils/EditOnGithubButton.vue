@@ -16,7 +16,7 @@
 
 <script>
 import EditIcon from '@vicons/fluent/Compose16Regular.js'
-import githubUrl from './github-url'
+import { treeUrl } from './github-url'
 
 export default {
   name: 'EditOnGithubButton',
@@ -35,7 +35,7 @@ export default {
   setup (props) {
     return {
       handleClick () {
-        window.open(githubUrl + props.relativeUrl, '_blank')
+        window.open(treeUrl + props.relativeUrl, '_blank')
       }
     }
   }

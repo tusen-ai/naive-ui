@@ -86,7 +86,9 @@
       <n-button text class="nav-picker" @click="handleThemeUpdate">
         {{ themeLabelMap[theme] }}
       </n-button>
-      <n-button text class="nav-picker">Github</n-button>
+      <n-button tag="a" text class="nav-picker" :href="repoUrl" target="_blank">
+        Github
+      </n-button>
       <n-text class="nav-picker">
         {{ version }}
       </n-text>
@@ -115,6 +117,7 @@ import { computed, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useMessage, version } from 'naive-ui'
 import { MenuOutline } from '@vicons/ionicons5'
+import { repoUrl } from './utils/github-url'
 import { i18n, useIsXs, useIsM, useIsS } from './utils/composables'
 import { findMenuValue } from './utils/route'
 import {
@@ -196,17 +199,18 @@ export default {
     })
     const themeAndLocaleReg = /^(\/[^/]+){2}/
     function handleMenuUpdateValue (value) {
+      if (value === 'github') {
+        window.open(repoUrl, '_blank')
+      }
       if (value === 'home') {
         router.push(themeAndLocaleReg.exec(route.path)[0])
-      }
-      if (value === 'doc') {
+      } else if (value === 'doc') {
         if (!/^(\/[^/]+){2}\/docs/.test(route.path)) {
           router.push(
             themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
           )
         }
-      }
-      if (value === 'component') {
+      } else if (value === 'component') {
         if (!/^(\/[^/]+){2}\/components/.test(route.path)) {
           router.push(
             themeAndLocaleReg.exec(route.path)[0] + '/components/button'
@@ -266,6 +270,10 @@ export default {
         {
           key: 'component',
           title: t('component')
+        },
+        {
+          key: 'github',
+          title: 'Github'
         }
       ]
     })
@@ -308,6 +316,10 @@ export default {
           key: 'component',
           title: t('component'),
           children: componentOptionsRef.value
+        },
+        {
+          key: 'github',
+          title: 'Github'
         }
       ]
     })
@@ -437,6 +449,7 @@ export default {
       isXs: isXsRef,
       isM: useIsM(),
       isS: useIsS(),
+      repoUrl,
       // theme
       theme: themeNameRef,
       handleThemeUpdate,

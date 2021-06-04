@@ -25,10 +25,17 @@
       </div>
       <div class="footer-links-col">
         <n-text depth="1" class="col-header">{{ t('community') }}</n-text>
-        <n-button text tag="a" target="_blank" href="https://www.github.com">
+        <n-button text tag="a" target="_blank" :href="repoUrl">
           Github
         </n-button>
-        <n-button text>Discord</n-button>
+        <n-button
+          text
+          tag="a"
+          href="https://discord.gg/Pqv7Mev5Dd"
+          target="_blank"
+        >
+          Discord
+        </n-button>
         <n-button text>钉钉</n-button>
       </div>
       <div class="footer-links-col footer-links-col--last">
@@ -53,6 +60,7 @@
 <script>
 import { i18n } from '../../utils/composables'
 import { push } from '../../store'
+import { repoUrl } from '../../utils/github-url'
 import { version } from 'naive-ui'
 
 export default {
@@ -62,6 +70,7 @@ export default {
   setup () {
     return {
       version,
+      repoUrl,
       push,
       ...i18n({
         'zh-CN': {
