@@ -50,12 +50,22 @@ app.use(naive);
 app.mount("#app");
 `
 
+function getDeps (code) {
+  return (code.match(/from '([^']+)'\n/g) || [])
+    .map((v) => v.slice(6, v.length - 2))
+    .reduce((prevV, dep) => {
+      prevV[dep] = 'latest'
+      return prevV
+    }, {})
+}
+
 export function getCodeSandboxParams (code) {
   return getParameters({
     files: {
       'package.json': {
         content: {
           dependencies: {
+            ...getDeps(code),
             vue: 'next',
             'naive-ui': 'latest'
           },
