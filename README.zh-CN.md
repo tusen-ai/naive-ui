@@ -11,7 +11,7 @@
 
 ## 文档
 
-[www.naiveui.com(WIP)](http://www.naiveui.com)
+[www.naiveui.com](http://www.naiveui.com)
 
 ## 特性
 

@@ -11,7 +11,7 @@
 
 ## Documentation
 
-[www.naiveui.com(WIP)](http://www.naiveui.com)
+[www.naiveui.com](http://www.naiveui.com)
 
 ## Features
 
