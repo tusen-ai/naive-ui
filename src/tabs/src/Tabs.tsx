@@ -116,9 +116,8 @@ export default defineComponent({
     const barElRef = ref<HTMLElement | null>(null)
     const scrollWrapperElRef = ref<HTMLElement | null>(null)
     const addTabInstRef = ref<ComponentPublicInstance | null>(null)
-    const xScrollInstRef = ref<(VXScrollInst & ComponentPublicInstance) | null>(
-      null
-    )
+    const xScrollInstRef =
+      ref<(VXScrollInst & ComponentPublicInstance) | null>(null)
 
     const leftReachedRef = ref(true)
     const rightReachedRef = ref(true)
@@ -128,9 +127,11 @@ export default defineComponent({
     const uncontrolledValueRef = ref(
       compitableValueRef.value ??
         props.defaultValue ??
-        ((flatten((slots as any).default())[0] as any).props.name as
-          | string
-          | number)
+        (slots.default
+          ? ((flatten((slots as any).default())[0] as any).props.name as
+              | string
+              | number)
+          : null)
     )
     const mergedValueRef = useMergedState(
       compitableValueRef,
@@ -492,7 +493,7 @@ export default defineComponent({
 
 function filterMapTabPanes (
   tabPaneVNodes: VNode[],
-  value: string | number | undefined
+  value: string | number | null
 ): VNode[] {
   const children: VNode[] = []
   tabPaneVNodes.forEach((vNode) => {
