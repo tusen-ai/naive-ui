@@ -32,6 +32,15 @@ Naive UI 全量使用 Typescript 编写，和你的 Typescript 项目无缝衔�
 
 顺便一提，...，没有顺便了。祝你使用愉快。
 
+## 社区
+
+- [Discord](https://discord.gg/Pqv7Mev5Dd)
+- 钉钉群 33482509
+
+## 贡献
+
+请参考 [CONTRIBUTING.md](https://github.com/TuSimple/naive-ui/blob/main/CONTRIBUTING.md)。
+
 ## 许可
 
 Naive UI 使用 [MIT license](https://opensource.org/licenses/MIT) 许可证书。

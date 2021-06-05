@@ -113,12 +113,12 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           en: 'Create Themed Component',
           zh: '创建适配主题的组件',
           path: '/theme'
-        },
-        {
-          en: 'Experimental Features',
-          zh: '试验性特性',
-          path: '/experimental-features'
         }
+        // {
+        //   en: 'Experimental Features',
+        //   zh: '试验性特性',
+        //   path: '/experimental-features'
+        // }
       ]
     },
     {

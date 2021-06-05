@@ -68,6 +68,10 @@ naive-ui 建议使用 [xicons](https://www.xicons.org) 作为图标库。
 - [Discord](https://discord.gg/Pqv7Mev5Dd)
 - 钉钉群 33482509
 
+## 贡献
+
+请参考 [CONTRIBUTING.md](https://github.com/TuSimple/naive-ui/blob/main/CONTRIBUTING.md)。
+
 ## 许可
 
 Naive UI 使用 [MIT license](https://opensource.org/licenses/MIT) 许可证书。

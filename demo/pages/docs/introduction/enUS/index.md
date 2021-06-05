@@ -32,6 +32,15 @@ I try to make it not rather slow. At least select, tree, transfer, table and cas
 
 What's more, ..., no more. Just enjoy it.
 
+## Community
+
+- [Discord](https://discord.gg/Pqv7Mev5Dd)
+- DingTalk Group 33482509
+
+## Contributing
+
+Please see [CONTRIBUTING.md](https://github.com/TuSimple/naive-ui/blob/main/CONTRIBUTING.md).
+
 ## License
 
 Naive UI is licensed under the [MIT license](https://opensource.org/licenses/MIT).

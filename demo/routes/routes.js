@@ -20,10 +20,10 @@ export const enDocRoutes = [
     path: 'from-v1',
     component: () => import('../pages/docs/vue3/enUS/index.vue')
   },
-  {
-    path: 'experimental-features',
-    component: () => import('../pages/docs/experimental-features/enUS/index.md')
-  },
+  // {
+  //   path: 'experimental-features',
+  //   component: () => import('../pages/docs/experimental-features/enUS/index.md')
+  // },
   {
     path: 'customize-theme',
     component: () => import('../pages/docs/customize-theme/enUS/index.md')
@@ -76,10 +76,10 @@ export const zhDocRoutes = [
     path: 'customize-theme',
     component: () => import('../pages/docs/customize-theme/zhCN/index.md')
   },
-  {
-    path: 'experimental-features',
-    component: () => import('../pages/docs/experimental-features/zhCN/index.md')
-  },
+  // {
+  //   path: 'experimental-features',
+  //   component: () => import('../pages/docs/experimental-features/zhCN/index.md')
+  // },
   {
     path: 'changelog',
     component: () => import('../pages/docs/changelog/zhCN/index.vue')
