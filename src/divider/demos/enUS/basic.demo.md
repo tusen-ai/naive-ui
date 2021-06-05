@@ -1,7 +1,7 @@
 # Basic
 
 ```html
-I love her.
+Oops
 <n-divider />
-She loves him.
+Oops
 ```

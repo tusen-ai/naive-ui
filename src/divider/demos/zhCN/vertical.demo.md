@@ -1,5 +1,5 @@
 # 垂直
 
 ```html
-大<n-divider vertical />团圆<n-divider vertical />结局
+这个<n-divider vertical />看起来<n-divider vertical />好像不是很显眼，额...
 ```

@@ -1,5 +1,5 @@
 # Vertical
 
 ```html
-A<n-divider vertical />Happy<n-divider vertical />Ending
+It is<n-divider vertical />not clear<n-divider vertical />to see, emmm...
 ```
