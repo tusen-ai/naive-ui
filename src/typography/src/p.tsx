@@ -38,7 +38,7 @@ export default defineComponent({
             pLineHeight,
             pMargin,
             pTextColor,
-            [`pTextColor${typeSafeDepth}Depth` as `pTextColor${typeof typeSafeDepth}Depth`]: depthTextColor
+            [`pTextColor${typeSafeDepth}Depth` as const]: depthTextColor
           }
         } = themeRef.value
         return {
