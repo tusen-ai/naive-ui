@@ -36,7 +36,12 @@
         >
           Discord
         </n-button>
-        <n-button text>钉钉</n-button>
+        <n-tooltip>
+          <template #trigger>
+            <n-button text>{{ t('dingTalk') }}</n-button>
+          </template>
+          {{ t('dingTalkGroupChat') }} 33482509
+        </n-tooltip>
       </div>
       <div class="footer-links-col footer-links-col--last">
         <n-text depth="1" class="col-header">{{ t('contact') }}</n-text>
@@ -47,7 +52,7 @@
           href="https://www.tusimple.com/"
           >{{ t('tusimple') }}</n-button
         >
-        <n-button text>{{ t('joinUs') }}</n-button>
+        <n-button text disabled>{{ t('joinUs') }}</n-button>
       </div>
     </div>
     <n-divider class="footer-divider" />
@@ -83,7 +88,9 @@ export default {
           commonIssues: '常见问题',
           tusimple: '图森未来',
           joinUs: '加入我们',
-          icons: '图标库'
+          icons: '图标库',
+          dingTalk: '钉钉',
+          dingTalkGroupChat: '钉钉交流群'
         },
         'en-US': {
           resources: 'Resources',
@@ -95,7 +102,9 @@ export default {
           commonIssues: 'Common Issues',
           tusimple: 'TuSimple',
           joinUs: 'Join Us',
-          icons: 'Icon Library'
+          icons: 'Icon Library',
+          dingTalk: 'DingTalk',
+          dingTalkGroupChat: 'DingTalk Group Chat'
         }
       })
     }
