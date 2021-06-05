@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.11.3
 
 - Fix `n-collapse` `default-expanded-names` not working.
 
