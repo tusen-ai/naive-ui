@@ -8,16 +8,16 @@ Use `n-skeleton` to simulate loading effect.
   <n-card>
     <template #header>
       <n-skeleton text v-if="loading" width="60%" />
-      <template v-else>I'm OK</template>
+      <template v-else>Lorem Ipsum</template>
     </template>
     <n-skeleton text v-if="loading" :repeat="6" />
     <template v-else>
-      Please leave you name,<br />
-      number and other things.<br />
-      Don't say too fast that me can't write done your name.<br />
-      Maybe you won't call again.<br />
-      However I waited till my hair got white.<br />
-      Hope someday you'll call me again.
+      Lorem ipsum dolor sit amet,<br />
+      consectetur adipiscing elit,<br />
+      sed do eiusmod tempor incididunt<br />
+      ut labore et dolore magna aliqua.<br />
+      Ut enim ad minim veniam,<br />
+      quis nostrud exercitation ullamco
     </template>
   </n-card>
 </n-space>
