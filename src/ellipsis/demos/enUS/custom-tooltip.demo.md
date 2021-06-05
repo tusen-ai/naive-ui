@@ -4,14 +4,14 @@ Use `tooltip` slot to customize tooltip content.
 
 ```html
 <n-ellipsis style="max-width: 240px;">
-  The oh so lonesome sea monster dwelling in my heart, the king of sorrow,
-  begins to tire of the gloom and still current of the deep waters.
+  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+  doloremque laudantium, totam rem aperiam
   <template #tooltip>
     <div style="text-align: center;">
-      <i>Qinhuangdao</i><br />
-      The oh so lonesome sea monster dwelling in my heart,<br />
-      the king of sorrow,<br />
-      begins to tire of the gloom and still current of the deep waters.
+      <i>Lorem Ipsum</i><br />
+      Sed ut perspiciatis unde omnis<br />
+      iste natus error sit voluptatem accusantium doloremque laudantium,<br />
+      totam rem aperiam
     </div>
   </template>
 </n-ellipsis>
