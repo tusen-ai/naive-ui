@@ -497,15 +497,21 @@ function filterMapTabPanes (
 ): VNode[] {
   const children: VNode[] = []
   tabPaneVNodes.forEach((vNode) => {
-    const { name, displayDirective } = vNode.props as {
+    const {
+      name,
+      displayDirective,
+      'display-directive': _displayDirective
+    } = vNode.props as {
       name: string | number
       displayDirective: 'show' | 'if' | undefined
+      'display-directive': 'show' | 'if' | undefined
     }
-    const useVShow = displayDirective === 'show'
+    const useVShow = displayDirective === 'show' || _displayDirective === 'show'
     const show = value === name
     if (vNode.key !== undefined) {
       vNode.key = name
     }
+    console.log(vNode.props)
     if (useVShow) {
       children.push(withDirectives(vNode, [[vShow, show]]))
     } else if (show) {

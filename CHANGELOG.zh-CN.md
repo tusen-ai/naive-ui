@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修正 `n-tab-pane` `display-directive` 不生效
+
 ## 2.11.3
 
 ### Fixes
