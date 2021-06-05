@@ -97,25 +97,21 @@ function genScript (demoInfos, components = [], url, forceShowAnchor) {
   const script = `<script>
 ${importStmts}
 import { computed } from 'vue'
-import { useBreakpoint, useMemo } from 'vooks'
+import { useMemo } from 'vooks'
 import { useDisplayMode } from '/demo/store'
+import { useIsMobile } from '/demo/utils/composables'
 
 export default {
   components: {
     ${componentStmts}
   },
   setup () {
-    const breakpointRef = useBreakpoint()
+    const isMobileRef = useIsMobile()
     const showAnchorRef = useMemo(() => {
-      const { value: breakpoint } = breakpointRef
-      if (breakpoint === 'xs' || breakpoint === 's') {
-        return false
-      }
+      if (isMobileRef.value) return false
       return ${showAnchor}
     })
-    const useSmallPaddingRef = useMemo(() => {
-      return breakpointRef.value === 'xs'
-    })
+    const useSmallPaddingRef = isMobileRef
     return {
       showAnchor: showAnchorRef,
       displayMode: useDisplayMode(),

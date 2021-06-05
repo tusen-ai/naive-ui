@@ -1,5 +1,5 @@
 import { defineComponent, Fragment, h, computed } from 'vue'
-import { useIsM } from './composables'
+import { useIsMobile, useIsTablet, useIsSmallDesktop } from './composables'
 
 export default defineComponent({
   name: 'ComponentDemos',
@@ -10,9 +10,13 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const isMRef = useIsM()
+    const isMobileRef = useIsMobile()
+    const isTabletRef = useIsTablet()
+    const isSmallDesktop = useIsSmallDesktop()
     const mergedColsRef = computed(() => {
-      return isMRef.value ? 1 : props.span
+      return isMobileRef.value || isTabletRef.value || isSmallDesktop.value
+        ? 1
+        : props.span
     })
     return {
       mergedCols: mergedColsRef

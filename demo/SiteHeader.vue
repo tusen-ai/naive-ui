@@ -2,10 +2,10 @@
   <n-layout-header bordered class="nav" :style="style">
     <n-text tag="div" class="ui-logo" :depth="1" @click="handleLogoClick">
       <img src="./assets/images/naivelogo.svg" />
-      <span v-if="!isXs">Naive UI</span>
+      <span v-if="!isMobile">Naive UI</span>
     </n-text>
-    <div :style="!isXs ? 'display: flex; align-items: center;' : ''">
-      <div class="nav-menu" v-if="!isS">
+    <div :style="!isMobile ? 'display: flex; align-items: center;' : ''">
+      <div class="nav-menu" v-if="!(isMobile || isTablet)">
         <n-menu
           mode="horizontal"
           :value="menuValue"
@@ -15,7 +15,7 @@
       </div>
       <n-auto-complete
         v-model:value="searchPattern"
-        :style="!isXs ? 'width: 216px; margin-left: 24px' : undefined"
+        :style="!isMobile ? 'width: 216px; margin-left: 24px' : undefined"
         :placeholder="t('searchPlaceholder')"
         :options="searchOptions"
         clear-after-select
@@ -24,7 +24,7 @@
       />
     </div>
     <n-popover
-      v-if="isXs"
+      v-if="isMobile || isTablet"
       style="padding: 0; width: 288px"
       placement="bottom-end"
       display-directive="show"
@@ -35,50 +35,13 @@
       </template>
       <div style="overflow: auto; max-height: 79vh">
         <n-menu
-          :value="xsMenuValue"
-          :options="xsMenuOptions"
+          :value="mobileMenuValue"
+          :options="mobileMenuOptions"
           :indent="18"
-          @update:value="handleUpdateXsMenu"
+          @update:value="handleUpdateMobileMenu"
         />
       </div>
     </n-popover>
-    <n-popover
-      v-else-if="isS"
-      style="padding: 0; width: 288px"
-      placement="bottom-end"
-      display-directive="show"
-      trigger="hover"
-    >
-      <template #trigger>
-        <n-icon size="20" style="margin-left: 12px"><menu-outline /></n-icon>
-      </template>
-      <div style="overflow: auto; max-height: 75vh">
-        <n-menu
-          :value="sMenuValue"
-          :options="sMenuOptions"
-          :indent="18"
-          @update:value="handleUpdateSMenu"
-        />
-      </div>
-    </n-popover>
-    <!-- <div style="display: flex" v-else-if="isM">
-      <n-popover
-        style="padding: 0; width: 180px"
-        placement="bottom-end"
-        display-directive="show"
-        trigger="hover"
-      >
-        <template #trigger>
-          <n-icon size="20" style="margin-left: 12px"><menu-outline /></n-icon>
-        </template>
-        <n-menu
-          :value="mMenuValue"
-          :options="mMenuOptions"
-          :indent="18"
-          @update:value="handleUpdateMMenu"
-        />
-      </n-popover>
-    </div> -->
     <div class="nav-end" v-else>
       <n-button text class="nav-picker" @click="handleLocaleUpdate">
         {{ localeLabelMap[locale] }}
@@ -118,7 +81,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useMessage, version } from 'naive-ui'
 import { MenuOutline } from '@vicons/ionicons5'
 import { repoUrl } from './utils/github-url'
-import { i18n, useIsXs, useIsM, useIsS } from './utils/composables'
+import { i18n, useIsMobile, useIsTablet } from './utils/composables'
 import { findMenuValue } from './utils/route'
 import {
   useThemeName,
@@ -225,75 +188,10 @@ export default {
       return null
     })
 
-    // m options
-    // const mMenuOptionsRef = computed(() => [
-    //   {
-    //     key: 'theme',
-    //     title: themeLabelMapRef.value[themeNameRef.value]
-    //   },
-    //   {
-    //     key: 'locale',
-    //     title: localeNameRef.value === 'zh-CN' ? 'English' : '中文'
-    //   }
-    // ])
-    // function handleUpdateMMenu (value, { path }) {
-    //   if (value === 'theme') {
-    //     handleThemeUpdate()
-    //   } else if (value === 'locale') {
-    //     if (localeNameRef.value === 'zh-CN') {
-    //       localeNameRef.value = 'en-US'
-    //     } else {
-    //       localeNameRef.value = 'zh-CN'
-    //     }
-    //   }
-    // }
-
-    // s opitions
-    const sMenuOptionsRef = computed(() => {
-      return [
-        {
-          key: 'theme',
-          title: themeLabelMapRef.value[themeNameRef.value]
-        },
-        {
-          key: 'locale',
-          title: localeNameRef.value === 'zh-CN' ? 'English' : '中文'
-        },
-        {
-          key: 'home',
-          title: t('home')
-        },
-        {
-          key: 'doc',
-          title: t('doc')
-        },
-        {
-          key: 'component',
-          title: t('component')
-        },
-        {
-          key: 'github',
-          title: 'Github'
-        }
-      ]
-    })
-    function handleUpdateSMenu (value) {
-      if (value === 'theme') {
-        handleThemeUpdate()
-      } else if (value === 'locale') {
-        if (localeNameRef.value === 'zh-CN') {
-          localeNameRef.value = 'en-US'
-        } else {
-          localeNameRef.value = 'zh-CN'
-        }
-      } else {
-        handleMenuUpdateValue(value)
-      }
-    }
-    // xs options
+    // mobile options
     const docOptionsRef = useDocOptions()
     const componentOptionsRef = useComponentOptions()
-    const xsMenuOptionsRef = computed(() => {
+    const mobileMenuOptionsRef = computed(() => {
       return [
         {
           key: 'theme',
@@ -323,11 +221,11 @@ export default {
         }
       ]
     })
-    const xsMenuValueRef = computed(() => {
+    const mobileMenuValueRef = computed(() => {
       if (route.name === 'home') return 'home'
-      return findMenuValue(xsMenuOptionsRef.value, route.path)
+      return findMenuValue(mobileMenuOptionsRef.value, route.path)
     })
-    function handleUpdateXsMenu (value, { path }) {
+    function handleUpdateMobileMenu (value, { path }) {
       if (value === 'theme') {
         handleThemeUpdate()
       } else if (value === 'locale') {
@@ -430,7 +328,8 @@ export default {
     }
 
     // common
-    const isXsRef = useIsXs()
+    const isMobileRef = useIsMobile()
+    const isTabletRef = useIsTablet()
     function handleLogoClick () {
       if (/^(\/[^/]+){2}$/.test(route.path)) {
         message.info(t('alreadyHome'))
@@ -440,15 +339,14 @@ export default {
     }
 
     return {
-      // xsMenuOptions,
+      // mobileMenuOptions,
       tusimple: process.env.TUSIMPLE,
       dev: __DEV__,
       message,
       t,
       version,
-      isXs: isXsRef,
-      isM: useIsM(),
-      isS: useIsS(),
+      isMobile: isMobileRef,
+      isTablet: isTabletRef,
       repoUrl,
       // theme
       theme: themeNameRef,
@@ -474,22 +372,14 @@ export default {
       menuOptions: menuOptionsRef,
       menuValue: menuValueRef,
       handleMenuUpdateValue,
-      // m menu
-      // mMenuOptions: mMenuOptionsRef,
-      // handleUpdateMMenu,
-      // mMenuValue: null,
-      // s menu
-      sMenuOptions: sMenuOptionsRef,
-      handleUpdateSMenu,
-      sMenuValue: menuValueRef,
-      // xs menu
-      xsMenuOptions: xsMenuOptionsRef,
-      handleUpdateXsMenu,
-      xsMenuValue: xsMenuValueRef,
+      // mobile & tablet menu
+      mobileMenuOptions: mobileMenuOptionsRef,
+      handleUpdateMobileMenu,
+      mobileMenuValue: mobileMenuValueRef,
       // common
       handleLogoClick,
       style: computed(() => {
-        return isXsRef.value
+        return isMobileRef.value
           ? {
               '--side-padding': '16px',
               'grid-template-columns': 'auto 1fr auto'

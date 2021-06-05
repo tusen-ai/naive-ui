@@ -1,11 +1,11 @@
 <template>
   <n-layout
     :native-scrollbar="false"
-    :position="isXs ? 'static' : 'absolute'"
-    :style="isXs ? undefined : 'top: var(--header-height);'"
+    :position="isMobile ? 'static' : 'absolute'"
+    :style="isMobile ? undefined : 'top: var(--header-height);'"
   >
     <div class="banner" style="overflow: hidden">
-      <right-image class="right-image" v-if="!isS" />
+      <right-image class="right-image" v-if="!(isMobile || isTablet)" />
       <n-h1 :style="titleStyle" class="naive-title">
         <span
           @mouseenter="handleTitleMouseEnter"
@@ -60,7 +60,7 @@ import { computed } from 'vue'
 import LandingFooter from './Footer.vue'
 import leftImage from './Left.vue'
 import rightImage from './Right.vue'
-import { i18n, useIsXs, useIsS } from '../../utils/composables'
+import { i18n, useIsMobile, useIsTablet } from '../../utils/composables'
 import { useThemeName } from '../../store'
 
 export default {
@@ -70,13 +70,13 @@ export default {
     rightImage
   },
   setup () {
-    const isXsRef = useIsXs()
+    const isMobileRef = useIsMobile()
     return {
-      isXs: isXsRef,
-      isS: useIsS(),
+      isMobile: isMobileRef,
+      isTablet: useIsTablet(),
       theme: useThemeName(),
       titleStyle: computed(() => {
-        if (isXsRef.value) {
+        if (isMobileRef.value) {
           return 'margin-top: 0; font-size: 64px !important'
         } else {
           return 'margin-top: 0; font-size: 80px !important'

@@ -2,8 +2,10 @@
   <n-layout
     id="doc-layout"
     :has-sider="showSider"
-    :position="isXs ? undefined : 'absolute'"
-    :style="isXs ? undefined : 'top: var(--header-height)'"
+    :position="isMobile ? 'static' : 'absolute'"
+    :style="{
+      top: isMobile ? '' : 'var(--header-height)'
+    }"
   >
     <n-layout-sider
       :native-scrollbar="false"
@@ -23,6 +25,7 @@
     <n-layout
       ref="layoutInstRef"
       :native-scrollbar="false"
+      :position="isMobile || showSider ? 'static' : 'absolute'"
       content-style="min-height: calc(100vh - var(--header-height)); display: flex; flex-direction: column;"
     >
       <router-view />
@@ -36,7 +39,7 @@
 import { computed, watch, toRef, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { findMenuValue } from '../utils/route'
-import { useIsXs } from '../utils/composables'
+import { useIsMobile, useIsTablet } from '../utils/composables'
 import SiteFooter from './home/Footer.vue'
 import { useDocOptions, useComponentOptions } from '../store'
 import { useMemo } from 'vooks'
@@ -70,15 +73,16 @@ export default {
         layoutInstRef.value.scrollTo(0, 0)
       }
     })
-    const isXsRef = useIsXs()
+    const isMobileRef = useIsMobile()
+    const isTabletRef = useIsTablet()
     return {
       showSider: useMemo(() => {
-        return !isXsRef.value
+        return !isMobileRef.value && !isTabletRef.value
       }),
       layoutInstRef,
       options: optionsRef,
       menuValue: menuValueRef,
-      isXs: isXsRef,
+      isMobile: isMobileRef,
       handleMenuUpdateValue: (_, option) => {
         router.push(option.path)
       }

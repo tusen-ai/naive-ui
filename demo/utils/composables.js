@@ -1,24 +1,24 @@
 import { toRef, inject, provide, reactive, watchEffect } from 'vue'
 import { useBreakpoint, useMemo } from 'vooks'
 
-export function useIsXs () {
+export function useIsMobile () {
   const breakpointRef = useBreakpoint()
   return useMemo(() => {
     return breakpointRef.value === 'xs'
   })
 }
 
-export function useIsS () {
+export function useIsTablet () {
   const breakpointRef = useBreakpoint()
   return useMemo(() => {
-    return ['xs', 's'].includes(breakpointRef.value)
+    return breakpointRef.value === 's'
   })
 }
 
-export function useIsM () {
+export function useIsSmallDesktop () {
   const breakpointRef = useBreakpoint()
   return useMemo(() => {
-    return ['xs', 's', 'm'].includes(breakpointRef.value)
+    return breakpointRef.value === 'm'
   })
 }
 
