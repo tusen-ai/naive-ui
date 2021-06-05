@@ -711,6 +711,8 @@ export default defineComponent({
                             : ''
                         }
                         onUpdateValue={this.handleSingleUpdateValue}
+                        theme={this.mergedTheme.peers.Input}
+                        themeOverrides={this.mergedTheme.peerOverrides.Input}
                         internalForceFocus={this.mergedShow}
                         internalDeactivateOnEnter
                         {...commonInputProps}

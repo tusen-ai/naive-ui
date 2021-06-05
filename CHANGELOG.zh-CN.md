@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-dropdown` 默认位置不是 `bottom`
+- 修复 `n-date-picker` 输入组件在 `date` & `datetime` 类型下未设定主题
 
 ## 2.11.1
 
