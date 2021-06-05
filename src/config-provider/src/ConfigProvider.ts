@@ -21,9 +21,8 @@ import type {
 import type { ConfigProviderInjection } from './internal-interface'
 import { NDateLocale, NLocale } from '../../locales'
 
-export const configProviderInjectionKey: InjectionKey<ConfigProviderInjection> = Symbol(
-  'configProviderInjection'
-)
+export const configProviderInjectionKey: InjectionKey<ConfigProviderInjection> =
+  Symbol('configProviderInjection')
 
 export const configProviderProps = {
   abstract: {
@@ -110,7 +109,12 @@ export default defineComponent({
     const mergedThemeRef = computed(() => {
       const { theme } = props
       if (theme === null) return undefined
-      return theme === undefined ? NConfigProvider?.mergedThemeRef.value : theme
+      const inheritedTheme = NConfigProvider?.mergedThemeRef.value
+      return theme === undefined
+        ? inheritedTheme
+        : inheritedTheme === undefined
+          ? theme
+          : Object.assign({}, inheritedTheme, theme)
     })
     const mergedThemeOverridesRef = computed(() => {
       const { themeOverrides } = props
@@ -180,7 +184,6 @@ export default defineComponent({
         const { hljs } = props
         return hljs === undefined ? NConfigProvider?.mergedHljsRef.value : hljs
       }),
-      // wip, unstable
       mergedThemeRef,
       mergedThemeOverridesRef,
       // deprecated

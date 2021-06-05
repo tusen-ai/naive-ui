@@ -6,6 +6,7 @@
 
 - Fix `n-dropdown` default placement is not `bottom`.
 - Fix `n-date-picker`'s input theme is not set in `date` & `datetime` type.
+- Fix `n-config-provider` doesn't merge inherited theme.
 
 ## 2.11.1
 
