@@ -22,6 +22,14 @@
         <n-button text @click="push('/docs/changelog')">{{
           t('changelog')
         }}</n-button>
+        <n-button
+          text
+          tag="a"
+          target="_blank"
+          href="https://github.com/TuSimple/naive-ui/issues/new/choose"
+        >
+          {{ t('reportBug') }}
+        </n-button>
       </div>
       <div class="footer-links-col">
         <n-text depth="1" class="col-header">{{ t('community') }}</n-text>
@@ -90,7 +98,8 @@ export default {
           joinUs: '加入我们',
           icons: '图标库',
           dingTalk: '钉钉',
-          dingTalkGroupChat: '钉钉交流群'
+          dingTalkGroupChat: '钉钉交流群',
+          reportBug: '报告 Bug'
         },
         'en-US': {
           resources: 'Resources',
@@ -104,7 +113,8 @@ export default {
           joinUs: 'Join Us',
           icons: 'Icon Library',
           dingTalk: 'DingTalk',
-          dingTalkGroupChat: 'DingTalk Group Chat'
+          dingTalkGroupChat: 'DingTalk Group Chat',
+          reportBug: 'Report Bug'
         }
       })
     }
