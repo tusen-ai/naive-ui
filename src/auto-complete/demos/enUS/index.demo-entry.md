@@ -41,11 +41,11 @@ after-select
 
 ### AutoCompleteGroupOption Properties
 
-| Name     | Type          | Description          |
-| -------- | ------------- | -------------------- | --- |
-| children | `Array<string | AutoCompleteOption>` |     |
-| name     | `string`      |                      |
-| type     | `'group'`     |                      |
+| Name     | Type                                  | Description |
+| -------- | ------------------------------------- | ----------- |
+| children | `Array<string \| AutoCompleteOption>` |             |
+| name     | `string`                              |             |
+| type     | `'group'`                             |             |
 
 ## Slots
 
