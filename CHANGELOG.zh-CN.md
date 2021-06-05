@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-collapse` `default-expanded-names` 不生效
+
 ## 2.11.2
 
 ### Fixes

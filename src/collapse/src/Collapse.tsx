@@ -29,9 +29,12 @@ import {
 
 const collapseProps = {
   ...(useTheme.props as ThemeProps<CollapseTheme>),
-  defaultExpandesNames: [Array, String] as PropType<
-  string | number | Array<string | number> | null
-  >,
+  defaultExpandedNames: {
+    type: [Array, String] as PropType<
+    string | number | Array<string | number> | null
+    >,
+    default: null
+  },
   expandedNames: [Array, String] as PropType<
   string | number | Array<string | number> | null
   >,
@@ -98,8 +101,9 @@ export default defineComponent({
   props: collapseProps,
   setup (props, { slots }) {
     const { mergedClsPrefixRef } = useConfig(props)
-    const uncontrolledExpandedNamesRef =
-      ref<string | number | Array<string | number> | null>(null)
+    const uncontrolledExpandedNamesRef = ref<
+    string | number | Array<string | number> | null
+    >(props.defaultExpandedNames)
     const controlledExpandedNamesRef = computed(() => props.expandedNames)
     const mergedExpandedNamesRef = useMergedState(
       controlledExpandedNamesRef,
