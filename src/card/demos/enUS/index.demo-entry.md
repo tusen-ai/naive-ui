@@ -1,6 +1,6 @@
 # Card
 
-Some amatuer UI designers like to apply shadow on every cards.
+Just put something in it.
 
 ## Demos
 
