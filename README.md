@@ -57,11 +57,16 @@ npm i -D vfonts
 
 ### Icons
 
-naive-ui recommends using [xicons](https://www.xicons.org) as icon library.
+Naive UI recommends using [xicons](https://www.xicons.org) as icon library.
 
 ### Design Resources
 
 Sorry, currently there is nothing.
+
+## Community
+
+- [Discord](https://discord.gg/Pqv7Mev5Dd)
+- DingTalk Group 33482509
 
 ## License
 

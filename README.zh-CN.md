@@ -63,6 +63,11 @@ naive-ui 建议使用 [xicons](https://www.xicons.org) 作为图标库。
 
 不好意思暂时没有。
 
+## 社区
+
+- [Discord](https://discord.gg/Pqv7Mev5Dd)
+- 钉钉群 33482509
+
 ## 许可
 
 Naive UI 使用 [MIT license](https://opensource.org/licenses/MIT) 许可证书。
