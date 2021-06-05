@@ -9,9 +9,7 @@ Use different placement.
   placement="bottom-start"
   :options="options"
 >
-  <n-button :keyboard="false"
-    >Money Force Us to Work Rather Than Sleep</n-button
-  >
+  <n-button :keyboard="false">Go For a Trip</n-button>
 </n-dropdown>
 ```
 
