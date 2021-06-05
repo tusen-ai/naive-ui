@@ -8,7 +8,8 @@ import {
   InjectionKey,
   Ref,
   ExtractPropTypes,
-  CSSProperties
+  CSSProperties,
+  Slots
 } from 'vue'
 import { intersection } from 'lodash-es'
 import { useConfig, useTheme } from '../../_mixins'
@@ -81,6 +82,7 @@ export interface NCollapseInjection {
   expandedNamesRef: Ref<string | number | Array<string | number> | null>
   mergedClsPrefixRef: Ref<string>
   collectedItemNames: Array<string | number>
+  slots: Slots
   toggleItem: (
     collapse: boolean,
     name: string | number,
@@ -88,18 +90,16 @@ export interface NCollapseInjection {
   ) => void
 }
 
-export const collapseInjectionKey: InjectionKey<NCollapseInjection> = Symbol(
-  'collapse'
-)
+export const collapseInjectionKey: InjectionKey<NCollapseInjection> =
+  Symbol('collapse')
 
 export default defineComponent({
   name: 'Collapse',
   props: collapseProps,
-  setup (props) {
+  setup (props, { slots }) {
     const { mergedClsPrefixRef } = useConfig(props)
-    const uncontrolledExpandedNamesRef = ref<
-    string | number | Array<string | number> | null
-    >(null)
+    const uncontrolledExpandedNamesRef =
+      ref<string | number | Array<string | number> | null>(null)
     const controlledExpandedNamesRef = computed(() => props.expandedNames)
     const mergedExpandedNamesRef = useMergedState(
       controlledExpandedNamesRef,
@@ -182,6 +182,7 @@ export default defineComponent({
       mergedClsPrefixRef,
       expandedNamesRef: mergedExpandedNamesRef,
       collectedItemNames,
+      slots,
       toggleItem
     })
     return {

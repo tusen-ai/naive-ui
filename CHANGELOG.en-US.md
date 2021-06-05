@@ -8,6 +8,10 @@
 - Fix `n-date-picker`'s input theme is not set in `date` & `datetime` type.
 - Fix `n-config-provider` doesn't merge inherited theme.
 
+### Feats
+
+- `n-collapse` add `arrow` slot
+
 ## 2.11.1
 
 Update package.json & README.md.

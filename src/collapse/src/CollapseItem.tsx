@@ -34,7 +34,8 @@ export default defineComponent({
     const {
       expandedNamesRef,
       props: collapseProps,
-      mergedClsPrefixRef
+      mergedClsPrefixRef,
+      slots: collapseSlots
     } = NCollapse
     useInjectionCollection(
       collapseInjectionKey,
@@ -52,6 +53,7 @@ export default defineComponent({
       return true
     })
     return {
+      collapseSlots,
       randomName,
       mergedClsPrefix: mergedClsPrefixRef,
       collapsed: collapsedRef,
@@ -75,6 +77,7 @@ export default defineComponent({
   },
   render () {
     const {
+      collapseSlots,
       $slots,
       arrowPlacement,
       collapsed,
@@ -100,11 +103,22 @@ export default defineComponent({
         >
           {arrowPlacement === 'right' && headerNode}
           <div class={`${mergedClsPrefix}-collapse-item-arrow`}>
-            {renderSlot($slots, 'arrow', { collapsed: collapsed }, () => [
-              <NBaseIcon clsPrefix={mergedClsPrefix}>
-                {{ default: () => <ArrowIcon /> }}
-              </NBaseIcon>
-            ])}
+            {renderSlot(
+              $slots.arrow
+                ? $slots
+                : collapseSlots.arrow
+                  ? collapseSlots
+                  : $slots,
+              'arrow',
+              { collapsed: collapsed },
+              () => [
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{
+                    default: collapseSlots.expandIcon ?? (() => <ArrowIcon />)
+                  }}
+                </NBaseIcon>
+              ]
+            )}
           </div>
           {arrowPlacement === 'left' && headerNode}
         </div>

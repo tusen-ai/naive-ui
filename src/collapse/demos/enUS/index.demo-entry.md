@@ -11,6 +11,7 @@ accordion
 nested
 display-directive
 item-header-click
+customize-icon
 ```
 
 ## Props
@@ -39,9 +40,10 @@ item-header-click
 
 ### Collapse Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name    | Parameters                          | Description |
+| ------- | ----------------------------------- | ----------- |
+| default | `()`                                |             |
+| arrow   | `(options: { collapsed: boolean })` |             |
 
 ### Collapse Item Slots
 

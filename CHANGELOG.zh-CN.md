@@ -8,6 +8,10 @@
 - 修复 `n-date-picker` 输入组件在 `date` & `datetime` 类型下未设定主题
 - 修复 `n-config-provider` 没有合并继承的主题
 
+### Feats
+
+- `n-collapse` 新增 `arrow` slot
+
 ## 2.11.1
 
 更新 package.json & README.md
