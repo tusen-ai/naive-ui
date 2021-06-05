@@ -2,7 +2,7 @@
 
 <!--single-column-->
 
-These demos used to use some charactor names from _Hard-Boiled Wonderland and the End of the World_ as anchor links, but if so there will be too wired in this page compared with other pages. So I rewrite them. What a pity.
+Tell you where you are.
 
 ## Demos
 
