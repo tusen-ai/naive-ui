@@ -6,6 +6,10 @@
 
 - 修复 `n-dropdown` 默认位置不是 `bottom`
 
+## 2.11.1
+
+更新 package.json & README.md
+
 ## 2.11.0
 
 ### Breaking Changes

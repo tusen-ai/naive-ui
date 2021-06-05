@@ -6,6 +6,10 @@
 
 - Fix `n-dropdown` default placement is not `bottom`.
 
+## 2.11.1
+
+Update package.json & README.md.
+
 ## 2.11.0
 
 ### Breaking Changes
