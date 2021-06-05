@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-dropdown` 默认位置不是 `bottom`
+
 ## 2.11.0
 
 ### Breaking Changes

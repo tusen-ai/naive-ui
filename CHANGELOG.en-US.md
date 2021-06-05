@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-dropdown` default placement is not `bottom`.
+
 ## 2.11.0
 
 ### Breaking Changes

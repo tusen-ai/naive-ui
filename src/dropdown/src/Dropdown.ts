@@ -13,6 +13,7 @@ import {
 } from 'vue'
 import { createTreeMate, Key, TreeMateOptions, TreeNode } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
+import { FollowerPlacement } from 'vueuc'
 import { popoverBaseProps } from '../../popover/src/Popover'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -65,9 +66,8 @@ export interface DropdownInjection {
   doUpdateShow: (value: boolean) => void
 }
 
-export const dropdownInjectionKey: InjectionKey<DropdownInjection> = Symbol(
-  'dropdown'
-)
+export const dropdownInjectionKey: InjectionKey<DropdownInjection> =
+  Symbol('dropdown')
 
 const dropdownBaseProps = {
   animated: {
@@ -83,8 +83,10 @@ const dropdownBaseProps = {
     default: 'medium'
   },
   inverted: Boolean,
-  // submenuWidth: Number,
-  // submenuMinWidth: Number,
+  placement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'bottom'
+  },
   onSelect: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   options: {
     type: Array as PropType<DropdownMixedOption[]>,
