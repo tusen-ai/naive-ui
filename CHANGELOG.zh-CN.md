@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-button` 支持 wai-aria
+
 ### Fixes
 
 - 修正 `n-tab-pane` `display-directive` 不生效

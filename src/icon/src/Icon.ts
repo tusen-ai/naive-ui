@@ -73,6 +73,7 @@ export default defineComponent({
     return h(
       'i',
       mergeProps(this.$attrs, {
+        role: 'img',
         class: [
           `${mergedClsPrefix}-icon`,
           {

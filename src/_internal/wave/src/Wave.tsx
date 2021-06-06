@@ -50,6 +50,7 @@ export default defineComponent({
     return (
       <div
         ref="selfRef"
+        aria-hidden
         class={[
           `${clsPrefix}-base-wave`,
           this.active && `${clsPrefix}-base-wave--active`

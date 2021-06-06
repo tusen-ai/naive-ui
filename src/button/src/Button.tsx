@@ -435,6 +435,7 @@ const Button = defineComponent({
                           <div
                             key="icon"
                             class={`${mergedClsPrefix}-icon-slot`}
+                            role="none"
                           >
                             {renderSlot($slots, 'icon')}
                           </div>
@@ -453,12 +454,14 @@ const Button = defineComponent({
         ) : null}
         {this.showBorder ? (
           <div
+            aria-hidden
             class={`${mergedClsPrefix}-button__border`}
             style={this.customColorCssVars as CSSProperties}
           />
         ) : null}
         {this.showBorder ? (
           <div
+            aria-hidden
             class={`${mergedClsPrefix}-button__state-border`}
             style={this.customColorCssVars as CSSProperties}
           />

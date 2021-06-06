@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-button` supports wai-aria.
+
 ### Fixes
 
 - Fix `n-tab-pane` `display-directive` not working.

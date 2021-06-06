@@ -37,7 +37,12 @@ export default defineComponent({
   render () {
     const { clsPrefix } = this
     return (
-      <div class={`${clsPrefix}-base-loading`} style={{ stroke: this.stroke }}>
+      <div
+        class={`${clsPrefix}-base-loading`}
+        style={{ stroke: this.stroke }}
+        role="img"
+        aria-label="loading"
+      >
         <NIconSwitchTransition>
           {{
             default: () =>
