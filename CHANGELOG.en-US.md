@@ -6,6 +6,7 @@
 
 - `n-button` supports wai-aria.
 - `n-card` supports wai-aria.
+- `n-switch` supports wai-aria.
 
 ### Fixes
 

@@ -15,6 +15,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --rail-height
 // --rail-width
 // --width
+// --box-shadow-focus
 export default cB('switch', `
   height: var(--height);
   width: var(--width);
@@ -25,6 +26,11 @@ export default cB('switch', `
   justify-content: center;
   align-items: center;
 `, [
+  c('&:focus', [
+    cE('rail', `
+      box-shadow: var(--box-shadow-focus);
+    `)
+  ]),
   cM('round', [
     cE('rail', {
       borderRadius: 'calc(var(--rail-height) / 2)'
@@ -35,12 +41,26 @@ export default cB('switch', `
     ])
   ]),
   cNotM('disabled', [
+    cM('pressed', [
+      cE('rail', [
+        c('&::before', {
+          maxWidth: 'var(--button-width-pressed)'
+        })
+      ])
+    ]),
     cE('rail', [
       c('&:active::before', {
         maxWidth: 'var(--button-width-pressed)'
       })
     ]),
     cM('active', [
+      cM('pressed', [
+        cE('rail', [
+          c('&::before', {
+            left: 'calc(100% - var(--offset) - var(--button-width-pressed))'
+          })
+        ])
+      ]),
       cE('rail', [
         c('&:active::before', {
           left: 'calc(100% - var(--offset) - var(--button-width-pressed))'
@@ -61,7 +81,9 @@ export default cB('switch', `
     border-radius: var(--rail-border-radius);
     cursor: pointer;
     position: relative;
-    transition: background-color .3s var(--bezier);
+    transition:
+      background-color .3s var(--bezier),
+      box-shadow .3s var(--bezier);
     background-color: var(--rail-color);
   `, [
     c('&::before', `

@@ -6,6 +6,7 @@
 
 - `n-button` 支持 wai-aria
 - `n-card` 支持 wai-aria
+- `n-switch` 支持 wai-aria
 
 ### Fixes
 

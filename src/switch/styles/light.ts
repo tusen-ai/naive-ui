@@ -1,3 +1,4 @@
+import { changeColor } from 'seemly'
 import commonVars from './_common'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
@@ -19,7 +20,8 @@ const self = (vars: ThemeCommonVars) => {
     railBorderRadiusLarge: borderRadius,
     buttonBorderRadiusSmall: borderRadius,
     buttonBorderRadiusMedium: borderRadius,
-    buttonBorderRadiusLarge: borderRadius
+    buttonBorderRadiusLarge: borderRadius,
+    boxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`
   }
 }
 

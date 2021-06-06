@@ -86,6 +86,7 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+    const pressedRef = ref(false)
     function doUpdateValue (value: boolean): void {
       const {
         'onUpdate:value': _onUpdateValue,
@@ -118,11 +119,27 @@ export default defineComponent({
     }
     function handleBlur (): void {
       doBlur()
+      pressedRef.value = false
+    }
+    function handleKeyup (e: KeyboardEvent): void {
+      if (e.code === 'Space') {
+        doUpdateValue(!mergedValueRef.value)
+        pressedRef.value = false
+      }
+    }
+    function handleKeydown (e: KeyboardEvent): void {
+      if (e.code === 'Space') {
+        e.preventDefault()
+        pressedRef.value = true
+      }
     }
     return {
       handleClick,
       handleBlur,
       handleFocus,
+      handleKeyup,
+      handleKeydown,
+      pressed: pressedRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       cssVars: computed(() => {
@@ -134,6 +151,7 @@ export default defineComponent({
             railColorActive,
             buttonBoxShadow,
             buttonColor,
+            boxShadowFocus,
             [createKey('buttonHeight', size)]: buttonHeight,
             [createKey('buttonWidth', size)]: buttonWidth,
             [createKey('buttonWidthPressed', size)]: buttonWidthPressed,
@@ -166,21 +184,25 @@ export default defineComponent({
           '--rail-color-active': railColorActive,
           '--rail-height': railHeight,
           '--rail-width': railWidth,
-          '--width': width
+          '--width': width,
+          '--box-shadow-focus': boxShadowFocus
         }
       })
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, mergedValue } = this
     return (
       <div
+        role="switch"
+        aria-checked={mergedValue}
         class={[
           `${mergedClsPrefix}-switch`,
           {
-            [`${mergedClsPrefix}-switch--active`]: this.mergedValue,
+            [`${mergedClsPrefix}-switch--active`]: mergedValue,
             [`${mergedClsPrefix}-switch--disabled`]: this.disabled,
-            [`${mergedClsPrefix}-switch--round`]: this.round
+            [`${mergedClsPrefix}-switch--round`]: this.round,
+            [`${mergedClsPrefix}-switch--pressed`]: this.pressed
           }
         ]}
         tabindex={!this.disabled ? 0 : undefined}
@@ -188,8 +210,10 @@ export default defineComponent({
         onClick={this.handleClick}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
+        onKeyup={this.handleKeyup}
+        onKeydown={this.handleKeydown}
       >
-        <div class={`${mergedClsPrefix}-switch__rail`} />
+        <div class={`${mergedClsPrefix}-switch__rail`} aria-hidden="true" />
       </div>
     )
   }

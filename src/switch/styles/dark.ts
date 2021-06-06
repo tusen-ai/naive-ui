@@ -1,3 +1,4 @@
+import { changeColor } from 'seemly'
 import commonVars from './_common'
 import { commonDark } from '../../_styles/common'
 import type { SwitchTheme } from './light'
@@ -6,7 +7,8 @@ const switchDark: SwitchTheme = {
   name: 'Switch',
   common: commonDark,
   self (vars) {
-    const { primaryColorSuppl, opacityDisabled, borderRadius } = vars
+    const { primaryColorSuppl, opacityDisabled, borderRadius, primaryColor } =
+      vars
     const railOverlayColor = 'rgba(255, 255, 255, .20)'
     return {
       ...commonVars,
@@ -20,7 +22,8 @@ const switchDark: SwitchTheme = {
       railBorderRadiusLarge: borderRadius,
       buttonBorderRadiusSmall: borderRadius,
       buttonBorderRadiusMedium: borderRadius,
-      buttonBorderRadiusLarge: borderRadius
+      buttonBorderRadiusLarge: borderRadius,
+      boxShadowFocus: `0 0 8px 0 ${changeColor(primaryColor, { alpha: 0.3 })}`
     }
   }
 }
