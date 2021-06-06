@@ -26,7 +26,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     show: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | undefined>,
       default: undefined
     },
     displayDirective: {
@@ -66,10 +66,10 @@ export default defineComponent({
       displayed: displayedRef,
       transitionName: computed(() => {
         return {
-          right: 'n-slide-in-from-right-transition',
-          left: 'n-slide-in-from-left-transition',
-          top: 'n-slide-in-from-top-transition',
-          bottom: 'n-slide-in-from-bottom-transition'
+          right: 'slide-in-from-right-transition',
+          left: 'slide-in-from-left-transition',
+          top: 'slide-in-from-top-transition',
+          bottom: 'slide-in-from-bottom-transition'
         }[props.placement]
       }),
       handleAfterLeave

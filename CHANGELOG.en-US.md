@@ -13,6 +13,7 @@
 ### Fixes
 
 - Fix `n-tab-pane` `display-directive` not working.
+- Fix `n-drawer` animation.
 
 ## 2.11.3
 

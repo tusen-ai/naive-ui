@@ -13,6 +13,7 @@
 ### Fixes
 
 - 修正 `n-tab-pane` `display-directive` 不生效
+- 修正 `n-drawer` 动画
 
 ## 2.11.3
 
