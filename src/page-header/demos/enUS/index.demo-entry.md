@@ -2,7 +2,7 @@
 
 # PageHeader
 
-I think you possibly can't take advantage of the component. Since according to the design draft you received, writing a new component is the easier way.
+I hope this component fits your demand.
 
 ## Demos
 
