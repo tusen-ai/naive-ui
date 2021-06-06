@@ -6,7 +6,7 @@ Notification component is always with low piority so I can make a lot of useless
 
 <n-space vertical>
 <n-alert title="Prerequisite" type="warning">
-  If you want use notification, you need to wrap the component where you call related methods inside <n-text code>n-nofitication-provider</n-text> and use <n-text code>useNofitication</n-text> to get the API.
+  If you want use notification, you need to wrap the component where you call related methods inside <n-text code>n-nofitication-provider</n-text> and use <n-text code>useNotification</n-text> to get the API.
 </n-alert>
 For example:
 
