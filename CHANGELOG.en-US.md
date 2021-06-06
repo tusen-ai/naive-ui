@@ -8,6 +8,7 @@
 - `n-card` supports wai-aria.
 - `n-switch` supports wai-aria.
 - `n-menu` supports basic wai-aria.
+- `n-divider` supports basic wai-aria.
 
 ### Fixes
 

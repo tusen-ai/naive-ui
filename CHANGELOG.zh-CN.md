@@ -8,6 +8,7 @@
 - `n-card` 支持 wai-aria
 - `n-switch` 支持 wai-aria
 - `n-menu` 部分支持 wai-aria
+- `n-divider` 部分支持 wai-aria
 
 ### Fixes
 

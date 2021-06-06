@@ -19,14 +19,8 @@ const dividerProps = {
     type: String as PropType<'left' | 'center' | 'right'>,
     default: 'center'
   },
-  dashed: {
-    type: Boolean,
-    default: false
-  },
-  vertical: {
-    type: Boolean,
-    default: false
-  }
+  dashed: Boolean,
+  vertical: Boolean
 } as const
 
 export type DividerProps = ExtractPublicPropTypes<typeof dividerProps>
@@ -71,6 +65,7 @@ export default defineComponent({
     } = this
     return (
       <div
+        role="separator"
         class={[
           `${mergedClsPrefix}-divider`,
           {
@@ -84,7 +79,7 @@ export default defineComponent({
         style={cssVars as CSSProperties}
       >
         {!vertical ? (
-          <hr
+          <div
             class={`${mergedClsPrefix}-divider__line ${mergedClsPrefix}-divider__line--left`}
           />
         ) : null}
