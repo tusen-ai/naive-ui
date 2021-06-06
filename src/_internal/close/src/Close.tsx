@@ -13,7 +13,7 @@ export default defineComponent({
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: undefined
     },
     onClick: Function as PropType<(e: MouseEvent) => void>
   },
@@ -23,6 +23,9 @@ export default defineComponent({
       const { clsPrefix, disabled } = props
       return (
         <NBaseIcon
+          role="button"
+          ariaDisabled={disabled}
+          ariaLabel="close"
           clsPrefix={clsPrefix}
           class={[
             `${clsPrefix}-base-close`,

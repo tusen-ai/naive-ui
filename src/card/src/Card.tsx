@@ -162,7 +162,7 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
       >
         {$slots.cover ? (
-          <div class={`${mergedClsPrefix}-card-cover`}>
+          <div class={`${mergedClsPrefix}-card-cover`} role="none">
             {renderSlot($slots, 'cover')}
           </div>
         ) : null}
@@ -171,6 +171,7 @@ export default defineComponent({
             <div
               class={`${mergedClsPrefix}-card-header__main`}
               style={this.headerStyle}
+              role="heading"
             >
               {renderSlot($slots, 'header', {}, () => [this.title])}
             </div>
@@ -191,6 +192,7 @@ export default defineComponent({
         <div
           class={`${mergedClsPrefix}-card__content`}
           style={this.contentStyle}
+          role="none"
         >
           {$slots}
         </div>
@@ -198,12 +200,13 @@ export default defineComponent({
           <div
             class={`${mergedClsPrefix}-card__footer`}
             style={this.footerStyle}
+            role="none"
           >
             {renderSlot($slots, 'footer')}
           </div>
         ) : null}
         {$slots.action ? (
-          <div class={`${mergedClsPrefix}-card__action`}>
+          <div class={`${mergedClsPrefix}-card__action`} role="none">
             {renderSlot($slots, 'action')}
           </div>
         ) : null}
