@@ -1,7 +1,5 @@
 <!--anchor:on-->
 
-<!--anchor:on-->
-
 # Usage
 
 ## Quick Start
@@ -35,24 +33,6 @@ import { createApp } from 'vue'
 import naive from 'naive-ui'
 
 const app = createApp(App)
-app.use(naive)
-```
-
-## Config Fonts
-
-naive-ui works with [vfonts](https://github.com/07akioni/vfonts). You can use font from `vfonts` easily which includes general fonts and monospace fonts.
-
-```js
-import { createApp } from 'vue'
-import naive from 'naive-ui'
-
-// General Font
-import 'vfonts/Lato.css'
-// Monospace Font
-import 'vfonts/FiraCode.css'
-// then it works
-
-const app = createApp()
 app.use(naive)
 ```
 

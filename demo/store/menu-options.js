@@ -78,6 +78,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/usage'
         },
         {
+          en: 'Configuring Fonts',
+          zh: '配置字体',
+          path: '/fonts'
+        },
+        {
           en: 'Supported Platforms',
           zh: '支持的平台',
           path: '/supported-platforms'
@@ -130,12 +135,12 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           en: 'Change Log',
           zh: '变更日志',
           path: '/changelog'
-        },
-        {
-          en: 'Migrate From V1',
-          zh: '从 V1 升级',
-          path: '/from-v1'
         }
+        // {
+        //   en: 'Migrate From V1',
+        //   zh: '从 V1 升级',
+        //   path: '/from-v1'
+        // }
       ]
     }
   ])

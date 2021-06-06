@@ -16,10 +16,10 @@ export const enDocRoutes = [
     path: 'supported-platforms',
     component: () => import('../pages/docs/supported-platforms/enUS/index.md')
   },
-  {
-    path: 'from-v1',
-    component: () => import('../pages/docs/vue3/enUS/index.vue')
-  },
+  // {
+  //   path: 'from-v1',
+  //   component: () => import('../pages/docs/vue3/enUS/index.vue')
+  // },
   // {
   //   path: 'experimental-features',
   //   component: () => import('../pages/docs/experimental-features/enUS/index.md')
@@ -47,6 +47,10 @@ export const enDocRoutes = [
   {
     path: 'common-issues',
     component: () => import('../pages/docs/common-issues/enUS/index.md')
+  },
+  {
+    path: 'fonts',
+    component: () => import('../pages/docs/fonts/enUS/index.md')
   }
 ]
 
@@ -99,6 +103,10 @@ export const zhDocRoutes = [
   {
     path: 'common-issues',
     component: () => import('../pages/docs/common-issues/zhCN/index.md')
+  },
+  {
+    path: 'fonts',
+    component: () => import('../pages/docs/fonts/zhCN/index.md')
   }
 ]
 
