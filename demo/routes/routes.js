@@ -9,8 +9,8 @@ export const enDocRoutes = [
     component: () => import('../pages/docs/installation/enUS/index.md')
   },
   {
-    path: 'usage',
-    component: () => import('../pages/docs/usage/enUS/index.md')
+    path: 'usage-sfc',
+    component: () => import('../pages/docs/usage-sfc/enUS/index.md')
   },
   {
     path: 'supported-platforms',
@@ -51,6 +51,10 @@ export const enDocRoutes = [
   {
     path: 'fonts',
     component: () => import('../pages/docs/fonts/enUS/index.md')
+  },
+  {
+    path: 'import-on-demand',
+    component: () => import('../pages/docs/import-on-demand/enUS/index.md')
   }
 ]
 
@@ -65,8 +69,8 @@ export const zhDocRoutes = [
     component: () => import('../pages/docs/installation/zhCN/index.md')
   },
   {
-    path: 'usage',
-    component: () => import('../pages/docs/usage/zhCN/index.md')
+    path: 'usage-sfc',
+    component: () => import('../pages/docs/usage-sfc/zhCN/index.md')
   },
   {
     path: 'supported-platforms',
@@ -107,6 +111,10 @@ export const zhDocRoutes = [
   {
     path: 'fonts',
     component: () => import('../pages/docs/fonts/zhCN/index.md')
+  },
+  {
+    path: 'import-on-demand',
+    component: () => import('../pages/docs/import-on-demand/zhCN/index.md')
   }
 ]
 

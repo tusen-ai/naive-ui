@@ -73,14 +73,19 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/installation'
         },
         {
-          en: 'Usage',
-          zh: '使用方式',
-          path: '/usage'
+          en: 'Usage in SFC',
+          zh: '在 SFC 中使用',
+          path: '/usage-sfc'
         },
         {
           en: 'Configuring Fonts',
           zh: '配置字体',
           path: '/fonts'
+        },
+        {
+          en: 'Import on Demand',
+          zh: '按需引入',
+          path: '/import-on-demand'
         },
         {
           en: 'Supported Platforms',
@@ -110,7 +115,7 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/ssr'
         },
         {
-          en: 'Customize Theme',
+          en: 'Customizing Theme',
           zh: '调整主题',
           path: '/customize-theme'
         },

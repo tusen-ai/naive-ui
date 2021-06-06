@@ -1,6 +1,6 @@
 <!--anchor:on-->
 
-# Customize Theme
+# Customizing Theme
 
 Naive-ui provide `n-config-provider` to customize the theme.
 
@@ -32,7 +32,7 @@ If `theme` is `undefined` it won't affect the theme of components inside.
 </script>
 ```
 
-## Customize Theme Vars (Design Tokens)
+## Customizing Theme Vars (Design Tokens)
 
 No CSS (Scss, Less) needed.
 
