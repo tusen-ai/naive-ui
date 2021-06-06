@@ -7,13 +7,15 @@ assignees: ''
 
 ---
 
-### Version
+### Environment Info
 
-Version of Naive UI.
+- Naive UI version: (eg. 2.11.0)
+- Browser Info: (eg. Chome 91)
+- System Info: (eg. Mac OS 11.2.3, Windows)
 
 ### Reproduction link
 
-<!-- A CodeSandbox reproduction is recommended. ->
+<!-- A CodeSandbox reproduction link is recommended. ->
 
 ### Steps to reproduce
 
