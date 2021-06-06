@@ -74,6 +74,7 @@ export default defineComponent({
     const { mergedClsPrefix } = this
     return (
       <div
+        role="menuitem"
         class={[
           `${mergedClsPrefix}-menu-item`,
           {

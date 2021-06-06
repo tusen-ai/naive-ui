@@ -6,29 +6,14 @@ import { NBaseIcon } from '../../_internal'
 export default defineComponent({
   name: 'MenuOptionContent',
   props: {
-    collapsed: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
+    collapsed: Boolean,
+    disabled: Boolean,
     title: [String, Function],
     icon: Function,
     extra: [String, Function],
-    showArrow: {
-      type: Boolean,
-      default: false
-    },
-    childActive: {
-      type: Boolean,
-      default: false
-    },
-    hover: {
-      type: Boolean,
-      default: false
-    },
+    showArrow: Boolean,
+    childActive: Boolean,
+    hover: Boolean,
     paddingLeft: Number,
     maxIconSize: {
       type: Number,
@@ -66,34 +51,35 @@ export default defineComponent({
     }
   },
   render () {
-    const { clsPrefix: mergedClsPrefix } = this
+    const { clsPrefix } = this
     return (
       <div
         onClick={this.onClick}
+        role="none"
         class={[
-          `${mergedClsPrefix}-menu-item-content`,
+          `${clsPrefix}-menu-item-content`,
           {
-            [`${mergedClsPrefix}-menu-item-content--collapsed`]: this.collapsed,
-            [`${mergedClsPrefix}-menu-item-content--child-active`]: this
-              .childActive,
-            [`${mergedClsPrefix}-menu-item-content--disabled`]: this.disabled,
-            [`${mergedClsPrefix}-menu-item-content--hover`]: this.hover
+            [`${clsPrefix}-menu-item-content--collapsed`]: this.collapsed,
+            [`${clsPrefix}-menu-item-content--child-active`]: this.childActive,
+            [`${clsPrefix}-menu-item-content--disabled`]: this.disabled,
+            [`${clsPrefix}-menu-item-content--hover`]: this.hover
           }
         ]}
         style={this.style}
       >
         {this.icon ? (
           <div
-            class={`${mergedClsPrefix}-menu-item-content__icon`}
+            class={`${clsPrefix}-menu-item-content__icon`}
             style={this.iconStyle}
+            role="none"
           >
             <Render render={this.icon} />
           </div>
         ) : null}
-        <div class={`${mergedClsPrefix}-menu-item-content-header`}>
+        <div class={`${clsPrefix}-menu-item-content-header`} role="none">
           <Render render={this.title} />
           {this.extra ? (
-            <span class={`${mergedClsPrefix}-menu-item-content-header__extra`}>
+            <span class={`${clsPrefix}-menu-item-content-header__extra`}>
               {' '}
               <Render render={this.extra} />
             </span>
@@ -101,8 +87,9 @@ export default defineComponent({
         </div>
         {this.showArrow ? (
           <NBaseIcon
-            class={`${mergedClsPrefix}-menu-item-content__arrow`}
-            clsPrefix={mergedClsPrefix}
+            ariaHidden={true}
+            class={`${clsPrefix}-menu-item-content__arrow`}
+            clsPrefix={clsPrefix}
           >
             {{
               default: () => <ChevronDownFilledIcon />

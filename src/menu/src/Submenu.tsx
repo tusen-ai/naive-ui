@@ -38,9 +38,8 @@ export const submenuProps = {
   onClick: Function as PropType<() => void>
 } as const
 
-export const submenuInjectionKey: InjectionKey<SubmenuInjection> = Symbol(
-  'submenu'
-)
+export const submenuInjectionKey: InjectionKey<SubmenuInjection> =
+  Symbol('submenu')
 
 export default defineComponent({
   name: 'Submenu',
@@ -151,7 +150,7 @@ export default defineComponent({
             default: () => {
               const { tmNodes, collapsed } = this
               return !collapsed ? (
-                <div class={`${mergedClsPrefix}-submenu-children`}>
+                <div class={`${mergedClsPrefix}-submenu-children`} role="menu">
                   {tmNodes.map((item) => itemRenderer(item))}
                 </div>
               ) : null
@@ -178,7 +177,11 @@ export default defineComponent({
       >
         {{
           default: () => (
-            <div class={`${mergedClsPrefix}-submenu`}>
+            <div
+              class={`${mergedClsPrefix}-submenu`}
+              role="menuitem"
+              aria-expanded={!this.collapsed}
+            >
               {createSubmenuItem()}
               {this.isHorizontal ? null : createSubmenuChildren()}
             </div>
@@ -186,7 +189,11 @@ export default defineComponent({
         }}
       </NDropdown>
     ) : (
-      <div class={`${mergedClsPrefix}-submenu`}>
+      <div
+        class={`${mergedClsPrefix}-submenu`}
+        role="menuitem"
+        aria-expanded={!this.collapsed}
+      >
         {createSubmenuItem()}
         {createSubmenuChildren()}
       </div>

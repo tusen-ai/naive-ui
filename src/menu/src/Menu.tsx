@@ -335,12 +335,13 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, mode } = this
     return (
       <div
+        role={mode === 'horizontal' ? 'menubar' : 'menu'}
         class={[
           `${mergedClsPrefix}-menu`,
-          `${mergedClsPrefix}-menu--${this.mode}`,
+          `${mergedClsPrefix}-menu--${mode}`,
           this.mergedCollapsed && `${mergedClsPrefix}-menu--collapsed`
         ]}
         style={this.cssVars as CSSProperties}

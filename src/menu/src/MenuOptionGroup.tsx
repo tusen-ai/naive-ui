@@ -23,9 +23,8 @@ export const menuItemGroupProps = {
   }
 } as const
 
-export const menuItemGroupInjectionKey: InjectionKey<MenuOptionGroupInjection> = Symbol(
-  'menu-item-group'
-)
+export const menuItemGroupInjectionKey: InjectionKey<MenuOptionGroupInjection> =
+  Symbol('menu-item-group')
 
 export default defineComponent({
   name: 'MenuOptionGroup',
@@ -42,7 +41,7 @@ export default defineComponent({
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       const paddingLeft = MenuChild.paddingLeft.value
       return (
-        <div class={`${mergedClsPrefix}-menu-item-group`}>
+        <div class={`${mergedClsPrefix}-menu-item-group`} role="group">
           <span
             class={`${mergedClsPrefix}-menu-item-group-title`}
             style={
