@@ -24,4 +24,4 @@ naive-ui 建议使用 [xicons](https://www.xicons.org) 作为图标库。
 
 ## 设计资源
 
-不好意思暂时没有。
+正在搞。

@@ -22,4 +22,4 @@ naive-ui recommends using [xicons](https://www.xicons.org) as icon library.
 
 ## Design Resources
 
-Sorry, currently there is nothing.
+Working in progress.
