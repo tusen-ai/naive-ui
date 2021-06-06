@@ -1,6 +1,6 @@
 # Use Naive Element
 
-Naive UI has `n-element` component. See [Element](element).
+Naive UI has `n-element` component. See [Element](../components/element).
 
 ```html
 <n-space vertical>
