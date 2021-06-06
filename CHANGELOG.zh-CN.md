@@ -14,6 +14,7 @@
 
 - 修正 `n-tab-pane` `display-directive` 不生效
 - 修正 `n-drawer` 动画
+- 修正 `n-scrollbar` 在 windows chrome 有重叠轨道
 
 ## 2.11.3
 

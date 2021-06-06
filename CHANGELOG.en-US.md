@@ -14,6 +14,7 @@
 
 - Fix `n-tab-pane` `display-directive` not working.
 - Fix `n-drawer` animation.
+- Fix `n-scrollbar`'s track may be overlayed in chrome windows.
 
 ## 2.11.3
 

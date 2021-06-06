@@ -19,9 +19,10 @@ export default cB('scrollbar', `
       max-height: inherit;
       scrollbar-width: none;
     `, [
-      c('&::-webkit-scrollbar', `
+      c('&::-webkit-scrollbar, &::-webkit-scrollbar-track-piece, &::-webkit-scrollbar-thumb', `
         width: 0;
         height: 0;
+        display: none;
       `),
       c('>', [
         cB('scrollbar-content', `
