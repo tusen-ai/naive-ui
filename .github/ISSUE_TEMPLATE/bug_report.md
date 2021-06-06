@@ -15,7 +15,7 @@ assignees: ''
 
 ### Reproduction link
 
-<!-- A CodeSandbox reproduction link is recommended. ->
+<!-- A CodeSandbox reproduction link is recommended. -->
 
 ### Steps to reproduce
 
