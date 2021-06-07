@@ -334,9 +334,12 @@ export default c([
       padding: var(--panel-action-padding);
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
       border-top: 1px solid var(--panel-action-divider-color);
     `, [
+      cE('prefix, suffix', `
+        display: flex;
+      `),
       cB('button', {
         marginLeft: '8px'
       })

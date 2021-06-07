@@ -15,6 +15,7 @@ disabled-time
 actions
 events
 format
+ranges
 ```
 
 ## Props
@@ -62,6 +63,7 @@ format
 | format | `string` | `'yyyy-MM-dd'` |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
+| ranges | `Record<string, [number, number]>` | `undefined` |  |
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'Start Date'` |  |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |
@@ -75,6 +77,7 @@ format
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
+| ranges | `Record<string, [number, number]>` | `undefined` |  |
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'Start Date and Time'` |  |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |

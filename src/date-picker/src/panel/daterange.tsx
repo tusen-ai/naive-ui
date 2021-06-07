@@ -1,5 +1,5 @@
 import { defineComponent, h } from 'vue'
-import { NButton } from '../../../button'
+import { NButton, NxButton } from '../../../button'
 import {
   BackwardIcon,
   FastBackwardIcon,
@@ -16,7 +16,7 @@ export default defineComponent({
     return useDualCalendar(props, 'daterange')
   },
   render () {
-    const { mergedClsPrefix, mergedTheme } = this
+    const { mergedClsPrefix, mergedTheme, ranges } = this
     return (
       <div
         ref="selfRef"
@@ -80,15 +80,20 @@ export default defineComponent({
                 class={[
                   `${mergedClsPrefix}-date-panel-date`,
                   {
-                    [`${mergedClsPrefix}-date-panel-date--excluded`]: !dateItem.inCurrentMonth,
-                    [`${mergedClsPrefix}-date-panel-date--current`]: dateItem.isCurrentDate,
-                    [`${mergedClsPrefix}-date-panel-date--selected`]: dateItem.selected,
-                    [`${mergedClsPrefix}-date-panel-date--covered`]: dateItem.inSpan,
-                    [`${mergedClsPrefix}-date-panel-date--start`]: dateItem.startOfSpan,
-                    [`${mergedClsPrefix}-date-panel-date--end`]: dateItem.endOfSpan,
-                    [`${mergedClsPrefix}-date-panel-date--disabled`]: this.mergedIsDateDisabled(
-                      dateItem.ts
-                    )
+                    [`${mergedClsPrefix}-date-panel-date--excluded`]:
+                      !dateItem.inCurrentMonth,
+                    [`${mergedClsPrefix}-date-panel-date--current`]:
+                      dateItem.isCurrentDate,
+                    [`${mergedClsPrefix}-date-panel-date--selected`]:
+                      dateItem.selected,
+                    [`${mergedClsPrefix}-date-panel-date--covered`]:
+                      dateItem.inSpan,
+                    [`${mergedClsPrefix}-date-panel-date--start`]:
+                      dateItem.startOfSpan,
+                    [`${mergedClsPrefix}-date-panel-date--end`]:
+                      dateItem.endOfSpan,
+                    [`${mergedClsPrefix}-date-panel-date--disabled`]:
+                      this.mergedIsDateDisabled(dateItem.ts)
                   }
                 ]}
                 onClick={() => this.handleDateClick(dateItem)}
@@ -157,15 +162,20 @@ export default defineComponent({
                 class={[
                   `${mergedClsPrefix}-date-panel-date`,
                   {
-                    [`${mergedClsPrefix}-date-panel-date--excluded`]: !dateItem.inCurrentMonth,
-                    [`${mergedClsPrefix}-date-panel-date--current`]: dateItem.isCurrentDate,
-                    [`${mergedClsPrefix}-date-panel-date--selected`]: dateItem.selected,
-                    [`${mergedClsPrefix}-date-panel-date--covered`]: dateItem.inSpan,
-                    [`${mergedClsPrefix}-date-panel-date--start`]: dateItem.startOfSpan,
-                    [`${mergedClsPrefix}-date-panel-date--end`]: dateItem.endOfSpan,
-                    [`${mergedClsPrefix}-date-panel-date--disabled`]: this.mergedIsDateDisabled(
-                      dateItem.ts
-                    )
+                    [`${mergedClsPrefix}-date-panel-date--excluded`]:
+                      !dateItem.inCurrentMonth,
+                    [`${mergedClsPrefix}-date-panel-date--current`]:
+                      dateItem.isCurrentDate,
+                    [`${mergedClsPrefix}-date-panel-date--selected`]:
+                      dateItem.selected,
+                    [`${mergedClsPrefix}-date-panel-date--covered`]:
+                      dateItem.inSpan,
+                    [`${mergedClsPrefix}-date-panel-date--start`]:
+                      dateItem.startOfSpan,
+                    [`${mergedClsPrefix}-date-panel-date--end`]:
+                      dateItem.endOfSpan,
+                    [`${mergedClsPrefix}-date-panel-date--disabled`]:
+                      this.mergedIsDateDisabled(dateItem.ts)
                   }
                 ]}
                 onClick={() => this.handleDateClick(dateItem)}
@@ -179,30 +189,55 @@ export default defineComponent({
             ))}
           </div>
         </div>
-        {this.actions?.length ? (
+        {this.actions?.length || ranges ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
-            {this.actions.includes('clear') ? (
-              <NButton
-                theme={mergedTheme.peers.Button}
-                themeOverrides={mergedTheme.peerOverrides.Button}
-                size="tiny"
-                onClick={this.handleClearClick}
-              >
-                {{ default: () => this.locale.clear }}
-              </NButton>
-            ) : null}
-            {this.actions.includes('confirm') ? (
-              <NButton
-                theme={mergedTheme.peers.Button}
-                themeOverrides={mergedTheme.peerOverrides.Button}
-                size="tiny"
-                type="primary"
-                disabled={this.isRangeInvalid}
-                onClick={this.handleConfirmClick}
-              >
-                {{ default: () => this.locale.confirm }}
-              </NButton>
-            ) : null}
+            <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
+              {ranges &&
+                Object.keys(ranges).map((key) => {
+                  return (
+                    <NxButton
+                      size="tiny"
+                      onMouseenter={() => {
+                        this.cachePendingValue()
+                        this.changeStartEndTime(...ranges[key])
+                      }}
+                      onClick={() => {
+                        this.changeStartEndTime(...ranges[key])
+                        this.clearPendingValue()
+                      }}
+                      onMouseleave={() => {
+                        this.restorePendingValue()
+                      }}
+                    >
+                      {key}
+                    </NxButton>
+                  )
+                })}
+            </div>
+            <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
+              {this.actions.includes('clear') ? (
+                <NButton
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                  size="tiny"
+                  onClick={this.handleClearClick}
+                >
+                  {{ default: () => this.locale.clear }}
+                </NButton>
+              ) : null}
+              {this.actions.includes('confirm') ? (
+                <NButton
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                  size="tiny"
+                  type="primary"
+                  disabled={this.isRangeInvalid}
+                  onClick={this.handleConfirmClick}
+                >
+                  {{ default: () => this.locale.confirm }}
+                </NButton>
+              ) : null}
+            </div>
           </div>
         ) : null}
         <NBaseFocusDetector onFocus={this.handleFocusDetectorFocus} />
