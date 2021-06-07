@@ -5,7 +5,8 @@ import {
   inject,
   PropType,
   TransitionGroup,
-  Transition
+  Transition,
+  Fragment
 } from 'vue'
 import { VirtualList, VirtualListInst } from 'vueuc'
 import { NEmpty } from '../../empty'
@@ -77,94 +78,96 @@ export default defineComponent({
   },
   render () {
     const { mergedTheme, mergedClsPrefix, syncVLScroller } = this
-    return this.options.length ? (
-      this.virtualScroll ? (
-        <NScrollbar
-          ref="scrollerInstRef"
-          theme={mergedTheme.peers.Scrollbar}
-          themeOverrides={mergedTheme.peerOverrides.Scrollbar}
-          container={this.scrollContainer}
-          content={this.scrollContent}
-        >
-          {{
-            default: () => (
-              <VirtualList
-                ref="srcVlInstRef"
-                style={{ height: '100%' }}
-                class={`${mergedClsPrefix}-transfer-list-content`}
-                items={this.options}
-                itemSize={this.itemSize}
-                showScrollbar={false}
-                onResize={syncVLScroller}
-                onScroll={syncVLScroller}
-                keyField="value"
-              >
-                {{
-                  default: ({ item }: { item: Option }) => {
-                    const { source, disabled } = this
-                    return (
-                      <NTransferListItem
-                        source={source}
-                        key={item.value}
-                        value={item.value}
-                        disabled={item.disabled || disabled}
-                        label={item.label}
-                      />
-                    )
-                  }
-                }}
-              </VirtualList>
-            )
-          }}
-        </NScrollbar>
-      ) : (
-        <NScrollbar
-          theme={mergedTheme.peers.Scrollbar}
-          themeOverrides={mergedTheme.peerOverrides.Scrollbar}
-        >
-          {{
-            default: () => (
-              <div class={`${mergedClsPrefix}-transfer-list-content`}>
-                <TransitionGroup
-                  name="item"
-                  appear={this.isMounted}
-                  css={!this.isInputing}
+    return (
+      <>
+        {this.virtualScroll ? (
+          <NScrollbar
+            ref="scrollerInstRef"
+            theme={mergedTheme.peers.Scrollbar}
+            themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+            container={this.scrollContainer}
+            content={this.scrollContent}
+          >
+            {{
+              default: () => (
+                <VirtualList
+                  ref="srcVlInstRef"
+                  style={{ height: '100%' }}
+                  class={`${mergedClsPrefix}-transfer-list-content`}
+                  items={this.options}
+                  itemSize={this.itemSize}
+                  showScrollbar={false}
+                  onResize={syncVLScroller}
+                  onScroll={syncVLScroller}
+                  keyField="value"
                 >
                   {{
-                    default: () => {
+                    default: ({ item }: { item: Option }) => {
                       const { source, disabled } = this
-                      return this.options.map((option) => (
+                      return (
                         <NTransferListItem
                           source={source}
-                          key={option.value}
-                          value={option.value}
-                          disabled={option.disabled || disabled}
-                          label={option.label}
+                          key={item.value}
+                          value={item.value}
+                          disabled={item.disabled || disabled}
+                          label={item.label}
                         />
-                      ))
+                      )
                     }
                   }}
-                </TransitionGroup>
-              </div>
-            )
+                </VirtualList>
+              )
+            }}
+          </NScrollbar>
+        ) : (
+          <NScrollbar
+            theme={mergedTheme.peers.Scrollbar}
+            themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+          >
+            {{
+              default: () => (
+                <div class={`${mergedClsPrefix}-transfer-list-content`}>
+                  <TransitionGroup
+                    name="item"
+                    appear={this.isMounted}
+                    css={!this.isInputing}
+                  >
+                    {{
+                      default: () => {
+                        const { source, disabled } = this
+                        return this.options.map((option) => (
+                          <NTransferListItem
+                            source={source}
+                            key={option.value}
+                            value={option.value}
+                            disabled={option.disabled || disabled}
+                            label={option.label}
+                          />
+                        ))
+                      }
+                    }}
+                  </TransitionGroup>
+                </div>
+              )
+            }}
+          </NScrollbar>
+        )}
+        <Transition
+          name="fade-in-transition"
+          appear={this.isMounted}
+          css={!this.isInputing}
+        >
+          {{
+            default: () =>
+              this.options.length ? null : (
+                <NEmpty
+                  theme={mergedTheme.peers.Empty}
+                  themeOverrides={mergedTheme.peerOverrides.Empty}
+                />
+              )
           }}
-        </NScrollbar>
-      )
-    ) : (
-      <Transition
-        name="fade-in-transition"
-        appear={this.isMounted}
-        css={!this.isInputing}
-      >
-        {{
-          default: () => (
-            <NEmpty
-              theme={mergedTheme.peers.Empty}
-              themeOverrides={mergedTheme.peerOverrides.Empty}
-            />
-          )
-        }}
-      </Transition>
+        </Transition>
+      </>
     )
   }
 })

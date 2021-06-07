@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-transfer` 的无数据 Icon 没有开关动画
+
 ## 2.11.4
 
 ### Feats

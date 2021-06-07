@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-transfer`'s empty icon is no toggling transition.
+
 ## 2.11.4
 
 ### Feats
