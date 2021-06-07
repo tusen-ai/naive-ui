@@ -9,7 +9,7 @@ For more info about theming, see [Customizing Theme](customize-theme).
 ```html
 <script>
   import { defineComponent } from 'vue'
-  import { NConfigProvider, NInput, NDatePicker } from 'naive-ui'
+  import { NConfigProvider, NInput, NDatePicker, NSpace } from 'naive-ui'
   // theme
   import { createTheme, inputDark, datePickerDark } from 'naive-ui'
   // locale & dateLocale
@@ -19,7 +19,8 @@ For more info about theming, see [Customizing Theme](customize-theme).
     components: {
       NConfigProvider,
       NInput,
-      NDatePicker
+      NDatePicker,
+      NSpace
     },
     setup() {
       return {
