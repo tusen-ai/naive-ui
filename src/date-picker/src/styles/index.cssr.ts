@@ -75,7 +75,7 @@ export default c([
     outline: none;
     margin: 4px 0;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 0fr;
     border-radius: var(--panel-border-radius);
     background-color: var(--panel-color);
     box-shadow: var(--panel-box-shadow);
@@ -339,10 +339,21 @@ export default c([
     `, [
       cE('prefix, suffix', `
         display: flex;
+        margin-bottom: -8px;
       `),
-      cB('button', {
-        marginLeft: '8px'
-      })
+      cE('suffix', `
+        align-self: flex-end;
+      `),
+      cE('prefix', `
+        flex-wrap: wrap;
+      `),
+      cB('button', `
+        margin-bottom: 8px;
+      `, [
+        c('&:not(:last-child)', `
+          margin-right: 8px;
+        `)
+      ])
     ])
   ])
 ])

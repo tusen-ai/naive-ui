@@ -103,27 +103,30 @@ export default defineComponent({
         </div>
         {this.actions?.length ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
-            {this.actions.includes('clear') ? (
-              <NButton
-                theme={mergedTheme.peers.Button}
-                themeOverrides={mergedTheme.peerOverrides.Button}
-                size="tiny"
-                onClick={this.handleClearClick}
-              >
-                {{ default: () => this.locale.clear }}
-              </NButton>
-            ) : null}
-            {this.actions.includes('now') ? (
-              <NButton
-                theme={mergedTheme.peers.Button}
-                themeOverrides={mergedTheme.peerOverrides.Button}
-                size="tiny"
-                onClick={this.handleNowClick}
-              >
-                {{ default: () => this.locale.now }}
-              </NButton>
-            ) : null}
-            {/** we don't need a confirm button for date picking */}
+            <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}></div>
+            <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
+              {this.actions.includes('clear') ? (
+                <NButton
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                  size="tiny"
+                  onClick={this.handleClearClick}
+                >
+                  {{ default: () => this.locale.clear }}
+                </NButton>
+              ) : null}
+              {this.actions.includes('now') ? (
+                <NButton
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                  size="tiny"
+                  onClick={this.handleNowClick}
+                >
+                  {{ default: () => this.locale.now }}
+                </NButton>
+              ) : null}
+              {/** we don't need a confirm button for date picking */}
+            </div>
           </div>
         ) : null}
         <NBaseFocusDetector onFocus={this.handleFocusDetectorFocus} />

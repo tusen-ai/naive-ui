@@ -204,12 +204,13 @@ export default defineComponent({
                       onClick={() => {
                         this.changeStartEndTime(...ranges[key])
                         this.clearPendingValue()
+                        this.handleConfirmClick()
                       }}
                       onMouseleave={() => {
                         this.restorePendingValue()
                       }}
                     >
-                      {key}
+                      {{ default: () => key }}
                     </NxButton>
                   )
                 })}
