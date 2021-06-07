@@ -65,12 +65,12 @@ export default {
   methods: {
     next () {
       if (this.current === null) this.current = 1
-      else if (this.current >= 4) this.current = null
+      else if (this.current >= 5) this.current = null
       else this.current++
     },
     prev () {
       if (this.current === 0) this.current = null
-      else if (this.current === null) this.current = 4
+      else if (this.current === null) this.current = 5
       else this.current--
     }
   }
