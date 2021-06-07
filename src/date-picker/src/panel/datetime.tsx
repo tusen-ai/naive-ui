@@ -134,38 +134,41 @@ export default defineComponent({
         </div>
         {this.actions?.length ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
-            {this.actions.includes('clear') ? (
-              <NButton
-                theme={mergedTheme.peers.Button}
-                themeOverrides={mergedTheme.peerOverrides.Button}
-                size="tiny"
-                onClick={this.clearSelectedDateTime}
-              >
-                {{ default: () => this.locale.clear }}
-              </NButton>
-            ) : null}
-            {this.actions.includes('now') ? (
-              <NButton
-                theme={mergedTheme.peers.Button}
-                themeOverrides={mergedTheme.peerOverrides.Button}
-                size="tiny"
-                onClick={this.handleNowClick}
-              >
-                {{ default: () => this.locale.now }}
-              </NButton>
-            ) : null}
-            {this.actions.includes('confirm') ? (
-              <NButton
-                theme={mergedTheme.peers.Button}
-                themeOverrides={mergedTheme.peerOverrides.Button}
-                size="tiny"
-                type="primary"
-                disabled={this.isDateInvalid}
-                onClick={this.handleConfirmClick}
-              >
-                {{ default: () => this.locale.confirm }}
-              </NButton>
-            ) : null}
+            <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}></div>
+            <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
+              {this.actions.includes('clear') ? (
+                <NButton
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                  size="tiny"
+                  onClick={this.clearSelectedDateTime}
+                >
+                  {{ default: () => this.locale.clear }}
+                </NButton>
+              ) : null}
+              {this.actions.includes('now') ? (
+                <NButton
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                  size="tiny"
+                  onClick={this.handleNowClick}
+                >
+                  {{ default: () => this.locale.now }}
+                </NButton>
+              ) : null}
+              {this.actions.includes('confirm') ? (
+                <NButton
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                  size="tiny"
+                  type="primary"
+                  disabled={this.isDateInvalid}
+                  onClick={this.handleConfirmClick}
+                >
+                  {{ default: () => this.locale.confirm }}
+                </NButton>
+              ) : null}
+            </div>
           </div>
         ) : null}
         <NBaseFocusDetector onFocus={this.handleFocusDetectorFocus} />

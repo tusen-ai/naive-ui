@@ -15,6 +15,7 @@ import {
 import { dateArray, DateItem, strictParse } from '../utils'
 import { usePanelCommon } from './use-panel-common'
 import { datePickerInjectionKey } from '../interface'
+import type { Value } from '../interface'
 
 const useDualCalendarProps = {
   ...usePanelCommon.props,
@@ -44,7 +45,8 @@ function useDualCalendar (
     isStartValueInvalidRef,
     isEndValueInvalidRef,
     isRangeInvalidRef,
-    localeRef
+    localeRef,
+    rangesRef
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -354,6 +356,21 @@ function useDualCalendar (
       panelCommon.doUpdateValue([Math.min(props.value[0], time), time], false)
     }
   }
+  let cachedValue: Value | null = null
+  let cached = false
+  function cachePendingValue (): void {
+    cachedValue = props.value
+    cached = true
+  }
+  function clearPendingValue (): void {
+    cached = false
+  }
+  function restorePendingValue (): void {
+    if (cached) {
+      panelCommon.doUpdateValue(cachedValue, false)
+      cached = false
+    }
+  }
   function changeStartEndTime (startTime: number, endTime?: number): void {
     if (endTime === undefined) endTime = startTime
     if (typeof startTime !== 'number') {
@@ -529,6 +546,11 @@ function useDualCalendar (
     endCalendarNextMonth,
     endCalendarNextYear,
     mergedIsDateDisabled,
+    changeStartEndTime,
+    cachePendingValue,
+    clearPendingValue,
+    restorePendingValue,
+    ranges: rangesRef,
     startCalendarMonth: startCalendarMonthRef,
     startCalendarYear: startCalendarYearRef,
     endCalendarMonth: endCalendarMonthRef,

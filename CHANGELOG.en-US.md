@@ -10,6 +10,7 @@
 - `n-menu` supports basic wai-aria.
 - `n-divider` supports basic wai-aria.
 - `n-data-table` add `row-props` prop.
+- `n-date-picker` add `ranges` prop.
 
 ### Fixes
 
