@@ -16,7 +16,7 @@ import {
   VTarget,
   VFollower,
   FollowerPlacement,
-  FollowerRef
+  FollowerInst
 } from 'vueuc'
 import { depx, changeColor, happensIn } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
@@ -143,9 +143,8 @@ export default defineComponent({
   name: 'Cascader',
   props: cascaderProps,
   setup (props) {
-    const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } = useConfig(
-      props
-    )
+    const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Cascader',
       'Cascader',
@@ -169,8 +168,8 @@ export default defineComponent({
     const keyboardKeyRef = ref<Key | null>(null)
     const hoverKeyRef = ref<Key | null>(null)
     const loadingKeySetRef = ref<Set<Key>>(new Set())
-    const selectMenuFollowerRef = ref<FollowerRef | null>(null)
-    const cascaderMenuFollowerRef = ref<FollowerRef | null>(null)
+    const selectMenuFollowerRef = ref<FollowerInst | null>(null)
+    const cascaderMenuFollowerRef = ref<FollowerInst | null>(null)
     const adjustedToRef = useAdjustedTo(props)
     const focusedRef = ref(false)
     const addLoadingKey = (key: Key): void => {

@@ -18,7 +18,7 @@ import {
   VBinder,
   VFollower,
   VTarget,
-  FollowerRef,
+  FollowerInst,
   FollowerPlacement
 } from 'vueuc'
 import { useIsMounted, useMergedState, useCompitable } from 'vooks'
@@ -220,7 +220,7 @@ export default defineComponent({
       uncontrolledShowRef
     )
     const triggerRef = ref<InternalSelectionInst | null>(null)
-    const followerRef = ref<FollowerRef | null>(null)
+    const followerRef = ref<FollowerInst | null>(null)
     const menuRef = ref<InternalSelectMenuRef | null>(null)
     const { localeRef } = useLocale('Select')
     const localizedPlaceholderRef = computed<string>(() => {

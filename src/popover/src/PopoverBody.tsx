@@ -18,7 +18,7 @@ import {
   VNode,
   renderSlot
 } from 'vue'
-import { VFollower, FollowerPlacement, FollowerRef } from 'vueuc'
+import { VFollower, FollowerPlacement, FollowerInst } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import { useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -72,7 +72,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const followerRef = ref<FollowerRef | null>(null)
+    const followerRef = ref<FollowerInst | null>(null)
     const NPopover = inject<PopoverInjection>('NPopover') as PopoverInjection
     const bodyRef = ref<HTMLElement | null>(null)
     const followerEnabledRef = ref(props.show)
@@ -204,7 +204,8 @@ export default defineComponent({
                     extraClass && `${mergedClsPrefix}-${extraClass}`,
                     {
                       [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
-                      [`${mergedClsPrefix}-popover--no-arrow`]: !props.showArrow,
+                      [`${mergedClsPrefix}-popover--no-arrow`]:
+                        !props.showArrow,
                       [`${mergedClsPrefix}-popover--shadow`]: props.shadow,
                       [`${mergedClsPrefix}-popover--padded`]: props.padded,
                       [`${mergedClsPrefix}-popover--raw`]: props.raw

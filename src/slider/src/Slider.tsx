@@ -16,7 +16,7 @@ import {
   VTarget,
   VFollower,
   FollowerPlacement,
-  FollowerRef
+  FollowerInst
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { on, off } from 'evtd'
@@ -110,8 +110,8 @@ export default defineComponent({
     const handleRef1 = ref<HTMLElement | null>(null)
     const handleRef2 = ref<HTMLElement | null>(null)
     const railRef = ref<HTMLElement | null>(null)
-    const followerRef1 = ref<FollowerRef | null>(null)
-    const followerRef2 = ref<FollowerRef | null>(null)
+    const followerRef1 = ref<FollowerInst | null>(null)
+    const followerRef2 = ref<FollowerInst | null>(null)
 
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -298,10 +298,8 @@ export default defineComponent({
     function handleHandleMouseMove (e: MouseEvent, handleIndex: 0 | 1): void {
       if (!handleRef1.value || !railRef.value) return
       const { width: handleWidth } = handleRef1.value.getBoundingClientRect()
-      const {
-        width: railWidth,
-        left: railLeft
-      } = railRef.value.getBoundingClientRect()
+      const { width: railWidth, left: railLeft } =
+        railRef.value.getBoundingClientRect()
       const { min, max, range } = props
       const offsetRatio =
         (e.clientX - railLeft - handleWidth / 2) / (railWidth - handleWidth)
@@ -798,8 +796,8 @@ export default defineComponent({
               class={[
                 `${mergedClsPrefix}-slider-dots`,
                 {
-                  [`${mergedClsPrefix}-slider-dots--transition-disabled`]: this
-                    .dotTransitionDisabled
+                  [`${mergedClsPrefix}-slider-dots--transition-disabled`]:
+                    this.dotTransitionDisabled
                 }
               ]}
             >

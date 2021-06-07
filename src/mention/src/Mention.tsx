@@ -11,7 +11,7 @@ import {
   CSSProperties
 } from 'vue'
 import { createTreeMate } from 'treemate'
-import { VBinder, VFollower, VTarget, FollowerRef } from 'vueuc'
+import { VBinder, VFollower, VTarget, FollowerInst } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import type { Size as InputSize } from '../../input/src/interface'
 import { NInput } from '../../input'
@@ -101,9 +101,8 @@ export default defineComponent({
   name: 'Mention',
   props: mentionProps,
   setup (props) {
-    const { namespaceRef, mergedClsPrefixRef, mergedBorderedRef } = useConfig(
-      props
-    )
+    const { namespaceRef, mergedClsPrefixRef, mergedBorderedRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Mention',
       'Mention',
@@ -115,7 +114,7 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const inputInstRef = ref<InputInst | null>(null)
     const cursorRef = ref<HTMLElement | null>(null)
-    const followerRef = ref<FollowerRef | null>(null)
+    const followerRef = ref<FollowerInst | null>(null)
     const partialPatternRef = ref<string>('')
     let cachedPrefix: string | null = null
     // cached pattern end is for partial pattern
