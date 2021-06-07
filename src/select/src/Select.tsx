@@ -12,8 +12,15 @@ import {
   withDirectives,
   vShow
 } from 'vue'
+import { happensIn } from 'seemly'
 import { createTreeMate } from 'treemate'
-import { VBinder, VFollower, VTarget, FollowerRef } from 'vueuc'
+import {
+  VBinder,
+  VFollower,
+  VTarget,
+  FollowerRef,
+  FollowerPlacement
+} from 'vueuc'
 import { useIsMounted, useMergedState, useCompitable } from 'vooks'
 import { clickoutside } from 'vdirs'
 import { useTheme, useConfig, useLocale, useFormItem } from '../../_mixins'
@@ -45,7 +52,6 @@ import type {
   Value,
   Size
 } from './interface'
-import { happensIn } from 'seemly'
 
 const selectProps = {
   ...(useTheme.props as ThemeProps<SelectTheme>),
@@ -54,10 +60,7 @@ const selectProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  clearable: {
-    type: Boolean,
-    default: false
-  },
+  clearable: Boolean,
   options: {
     type: Array as PropType<SelectMixedOption[]>,
     default: () => []
@@ -68,27 +71,12 @@ const selectProps = {
   },
   value: [String, Number, Array] as PropType<Value>,
   placeholder: String,
-  multiple: {
-    type: Boolean,
-    default: false
-  },
+  multiple: Boolean,
   size: String as PropType<Size>,
-  filterable: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  remote: {
-    type: Boolean,
-    default: false
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
+  filterable: Boolean,
+  disabled: Boolean,
+  remote: Boolean,
+  loading: Boolean,
   filter: {
     type: Function as PropType<
     (pattern: string, option: SelectBaseOption) => boolean
@@ -104,17 +92,14 @@ const selectProps = {
     }
   },
   placement: {
-    type: String,
+    type: String as PropType<FollowerPlacement>,
     default: 'bottom-start'
   },
   widthMode: {
     type: String,
     default: 'trigger'
   },
-  tag: {
-    type: Boolean,
-    default: false
-  },
+  tag: Boolean,
   onCreate: {
     type: Function as PropType<(label: string) => SelectBaseOption>,
     default: (label: string) => ({
@@ -192,10 +177,6 @@ const selectProps = {
     },
     default: undefined
   },
-  autofocus: {
-    type: Boolean,
-    default: false
-  },
   displayDirective: {
     type: String as PropType<'if' | 'show'>,
     default: 'show'
@@ -208,9 +189,8 @@ export default defineComponent({
   name: 'Select',
   props: selectProps,
   setup (props) {
-    const { mergedClsPrefixRef, mergedBorderedRef, namespaceRef } = useConfig(
-      props
-    )
+    const { mergedClsPrefixRef, mergedBorderedRef, namespaceRef } =
+      useConfig(props)
     const themeRef = useTheme(
       'Select',
       'Select',
@@ -265,9 +245,11 @@ export default defineComponent({
       }
     })
     const localOptionsRef = computed<SelectMixedOption[]>(() => {
-      return (beingCreatedOptionsRef.value.concat(
-        createdOptionsRef.value
-      ) as SelectMixedOption[]).concat(compitableOptionsRef.value)
+      return (
+        beingCreatedOptionsRef.value.concat(
+          createdOptionsRef.value
+        ) as SelectMixedOption[]
+      ).concat(compitableOptionsRef.value)
     })
     const filteredOptionsRef = computed(() => {
       if (props.remote) {
@@ -539,7 +521,7 @@ export default defineComponent({
       )
     }
     function handlePatternInput (e: InputEvent): void {
-      const { value } = (e.target as unknown) as HTMLInputElement
+      const { value } = e.target as unknown as HTMLInputElement
       patternRef.value = value
       const { tag, remote } = props
       doSearch(value)
@@ -739,7 +721,6 @@ export default defineComponent({
                         this.mergedTheme.peerOverrides.InternalSelection
                       }
                       loading={this.loading}
-                      autofocus={this.autofocus}
                       focused={this.focused}
                       onClick={this.handleTriggerClick}
                       onDeleteLastOption={this.handleDeleteLastOption}
