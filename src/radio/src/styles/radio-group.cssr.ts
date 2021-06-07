@@ -5,9 +5,11 @@ import { cB, cE, cM, c, cNotM } from '../../../_utils/cssr'
 // --button-border-color
 // --height
 // --opacity-disabled
-export default cB('radio-group', {
-  display: 'inline-block'
-}, [
+// --font-size
+export default cB('radio-group', `
+  display: inline-block;
+  font-size: var(--font-size);
+`, [
   cE('splitor', `
     display: inline-block;
     vertical-align: bottom;

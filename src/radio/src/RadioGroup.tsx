@@ -74,7 +74,8 @@ function mapSlot (
         [`${clsPrefix}-radio-group__splitor--checked`]: lastInstanceChecked
       }
       const currentInstanceClass = {
-        [`${clsPrefix}-radio-group__splitor--disabled`]: currentInstanceDisabled,
+        [`${clsPrefix}-radio-group__splitor--disabled`]:
+          currentInstanceDisabled,
         [`${clsPrefix}-radio-group__splitor--checked`]: currentInstanceChecked
       }
       const splitorClass =
@@ -116,7 +117,7 @@ const radioGroupProps = {
   onUpdateValue: Function as PropType<(value: string | number) => void>,
   // deprecated
   onChange: {
-    type: (Function as unknown) as PropType<
+    type: Function as unknown as PropType<
     ((value: string | number) => void) | undefined
     >,
     validator: () => {
@@ -199,10 +200,12 @@ export default defineComponent({
             buttonTextColorActive,
             buttonTextColorHover,
             opacityDisabled,
-            [createKey('buttonHeight', size)]: height
+            [createKey('buttonHeight', size)]: height,
+            [createKey('fontSize', size)]: fontSize
           }
         } = themeRef.value
         return {
+          '--font-size': fontSize,
           '--bezier': cubicBezierEaseInOut,
           '--button-border-color': buttonBorderColor,
           '--button-border-color-active': buttonBorderColorActive,
