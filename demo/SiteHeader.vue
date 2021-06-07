@@ -29,6 +29,7 @@
       placement="bottom-end"
       display-directive="show"
       trigger="click"
+      ref="mobilePopoverRef"
     >
       <template #trigger>
         <n-icon size="20" style="margin-left: 12px"><menu-outline /></n-icon>
@@ -140,6 +141,8 @@ export default {
     const route = useRoute()
     const router = useRouter()
 
+    const mobilePopoverRef = ref(null)
+
     // i18n
     const { t } = i18n(locales)
 
@@ -239,6 +242,7 @@ export default {
       } else {
         handleMenuUpdateValue(value)
       }
+      mobilePopoverRef.value.setShow(false)
     }
 
     // theme
@@ -339,7 +343,7 @@ export default {
     }
 
     return {
-      // mobileMenuOptions,
+      mobilePopoverRef,
       tusimple: process.env.TUSIMPLE,
       dev: __DEV__,
       message,
