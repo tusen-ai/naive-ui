@@ -9,6 +9,7 @@
 - `n-switch` 支持 wai-aria
 - `n-menu` 部分支持 wai-aria
 - `n-divider` 部分支持 wai-aria
+- `n-data-table` 新增 `row-props` 属性
 
 ### Fixes
 

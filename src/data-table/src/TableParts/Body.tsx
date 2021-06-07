@@ -124,6 +124,7 @@ export default defineComponent({
       hasChildrenRef,
       firstContentfulColIndexRef,
       indentRef,
+      rowPropsRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -254,6 +255,7 @@ export default defineComponent({
       hasChildren: hasChildrenRef,
       firstContentfulColIndex: firstContentfulColIndexRef,
       indent: indentRef,
+      rowProps: rowPropsRef,
       setHeaderScrollLeft,
       handleMouseenterTable,
       handleVirtualListScroll,
@@ -314,6 +316,7 @@ export default defineComponent({
               showHeader,
               hasChildren,
               firstContentfulColIndex,
+              rowProps,
               handleMouseenterTable,
               handleMouseleaveTable,
               renderExpand,
@@ -383,9 +386,8 @@ export default defineComponent({
               const colNodes = cols.map((col, colIndex) => {
                 if (rowIndex in cordToPass) {
                   const cordOfRowToPass = cordToPass[rowIndex]
-                  const indexInCordOfRowToPass = cordOfRowToPass.indexOf(
-                    colIndex
-                  )
+                  const indexInCordOfRowToPass =
+                    cordOfRowToPass.indexOf(colIndex)
                   if (~indexInCordOfRowToPass) {
                     cordOfRowToPass.splice(indexInCordOfRowToPass, 1)
                     return null
@@ -464,7 +466,8 @@ export default defineComponent({
                           column.type === 'selection',
                         [`${mergedClsPrefix}-data-table-td--expand`]:
                           column.type === 'expand',
-                        [`${mergedClsPrefix}-data-table-td--last-col`]: isLastCol,
+                        [`${mergedClsPrefix}-data-table-td--last-col`]:
+                          isLastCol,
                         [`${mergedClsPrefix}-data-table-td--last-row`]:
                           isLastRow && !showExpandContent
                       }
@@ -529,6 +532,7 @@ export default defineComponent({
                   </td>
                 )
               })
+              const props = rowProps ? rowProps(rowData, rowIndex) : undefined
               const row = (
                 <tr
                   onMouseenter={() => {
@@ -539,6 +543,7 @@ export default defineComponent({
                     `${mergedClsPrefix}-data-table-tr`,
                     createRowClassName(rowData, rowIndex, rowClassName)
                   ]}
+                  {...props}
                 >
                   {colNodes}
                 </tr>

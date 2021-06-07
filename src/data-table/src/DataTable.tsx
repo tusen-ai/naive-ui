@@ -22,7 +22,7 @@ import NMainTable from './MainTable'
 import { useCheck } from './use-check'
 import { useTableData } from './use-table-data'
 import { useScroll } from './use-scroll'
-import {
+import type {
   CreateRowClassName,
   CreateRowKey,
   OnUpdateCheckedRowKeys,
@@ -34,9 +34,10 @@ import {
   MainTableRef,
   DataTableInst,
   OnUpdateExpandedRowKeys,
-  dataTableInjectionKey,
-  CreateSummary
+  CreateSummary,
+  CreateRowProps
 } from './interface'
+import { dataTableInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import { useGroupHeader } from './use-group-header'
 import { useExpand } from './use-expand'
@@ -59,6 +60,7 @@ export const dataTableProps = {
     default: () => []
   },
   rowClassName: [String, Function] as PropType<string | CreateRowClassName>,
+  rowProps: Function as PropType<CreateRowProps>,
   rowKey: Function as PropType<CreateRowKey>,
   loading: {
     type: Boolean,
@@ -333,6 +335,7 @@ export default defineComponent({
       renderExpandRef,
       summaryRef: toRef(props, 'summary'),
       virtualScrollRef: toRef(props, 'virtualScroll'),
+      rowPropsRef: toRef(props, 'rowProps'),
       checkOptionsRef: computed(() => {
         const { value: selectionColumn } = selectionColumnRef
         return selectionColumn?.options
@@ -469,8 +472,8 @@ export default defineComponent({
           `${mergedClsPrefix}-data-table`,
           {
             [`${mergedClsPrefix}-data-table--bordered`]: this.mergedBordered,
-            [`${mergedClsPrefix}-data-table--bottom-bordered`]: this
-              .mergedBottomBordered,
+            [`${mergedClsPrefix}-data-table--bottom-bordered`]:
+              this.mergedBottomBordered,
             [`${mergedClsPrefix}-data-table--single-line`]: this.singleLine,
             [`${mergedClsPrefix}-data-table--single-column`]: this.singleColumn
           }
@@ -494,8 +497,8 @@ export default defineComponent({
                           class={[
                             `${mergedClsPrefix}-data-table-empty`,
                             {
-                              [`${mergedClsPrefix}-data-table-empty--hide`]: this
-                                .loading
+                              [`${mergedClsPrefix}-data-table-empty--hide`]:
+                                this.loading
                             }
                           ]}
                         >

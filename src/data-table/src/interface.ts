@@ -1,5 +1,11 @@
 import { TreeNode } from 'treemate'
-import { CSSProperties, InjectionKey, Ref, VNodeChild } from 'vue'
+import {
+  CSSProperties,
+  InjectionKey,
+  Ref,
+  VNodeChild,
+  HTMLAttributes
+} from 'vue'
 import { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
@@ -15,6 +21,7 @@ export type SortOrderFlag = 1 | -1 | 0
 
 export type CreateRowKey = (row: RowData) => RowKey
 export type CreateRowClassName = (row: RowData, index: number) => string
+export type CreateRowProps = (row: RowData, index: number) => HTMLAttributes
 
 export type Sorter = (row1: RowData, row2: RowData) => number
 export type Filter = (
@@ -175,6 +182,7 @@ export interface DataTableInjection {
   tableLayoutRef: Ref<'auto' | 'fixed'>
   maxHeightRef: Ref<string | number | undefined>
   minHeightRef: Ref<string | number | undefined>
+  rowPropsRef: Ref<CreateRowProps | undefined>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (
     filters: FilterState,
@@ -191,9 +199,8 @@ export interface DataTableInjection {
   setHeaderScrollLeft: (scrollLeft: number) => void
 }
 
-export const dataTableInjectionKey: InjectionKey<DataTableInjection> = Symbol(
-  'dataTable'
-)
+export const dataTableInjectionKey: InjectionKey<DataTableInjection> =
+  Symbol('dataTable')
 
 export interface MainTableInjection {
   leftActiveFixedColKey: ColumnKey | null
