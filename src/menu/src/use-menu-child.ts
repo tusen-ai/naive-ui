@@ -5,21 +5,14 @@ import { MergedTheme } from '../../_mixins/use-theme'
 import type { MenuTheme } from '../styles'
 import { OnUpdateValueImpl } from './interface'
 import { menuInjectionKey } from './Menu'
+import type { MenuSetupProps } from './Menu'
 import { menuItemGroupInjectionKey } from './MenuOptionGroup'
 import { submenuInjectionKey } from './Submenu'
 
 const ICON_MARGIN_RIGHT = 8
 
 export interface MenuInjection {
-  props: {
-    mode: 'vertical' | 'horizontal'
-    iconSize: number
-    collapsedIconSize: number | undefined
-    indent: number
-    rootIndent?: number
-    collapsedWidth: number
-    disabled: boolean
-  }
+  props: MenuSetupProps
   mergedCollapsedRef: Ref<boolean>
   invertedRef: Ref<boolean>
   isHorizontalRef: Ref<boolean>

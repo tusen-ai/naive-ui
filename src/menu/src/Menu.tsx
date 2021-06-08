@@ -53,7 +53,7 @@ const menuProps = {
   },
   collapsedWidth: {
     type: Number,
-    default: undefined
+    default: 48
   },
   iconSize: {
     type: Number,
