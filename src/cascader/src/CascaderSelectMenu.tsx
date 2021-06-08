@@ -37,18 +37,12 @@ export default defineComponent({
       type: [String, Number, Array] as PropType<Value | null>,
       default: null
     },
-    show: {
-      type: Boolean,
-      default: false
-    },
+    show: Boolean,
     pattern: {
       type: String,
       default: ''
     },
-    multiple: {
-      type: Boolean,
-      default: false
-    },
+    multiple: Boolean,
     tmNodes: {
       type: Array as PropType<TmNode[]>,
       default: () => []
