@@ -6,7 +6,6 @@ import {
   defineComponent,
   PropType,
   nextTick,
-  ComputedRef,
   watch,
   Transition,
   withDirectives,
@@ -226,10 +225,7 @@ export default defineComponent({
     const localizedPlaceholderRef = computed<string>(() => {
       return props.placeholder ?? localeRef.value.placeholder
     })
-    const compitableOptionsRef = useCompitable(props, [
-      'items',
-      'options'
-    ]) as ComputedRef<SelectMixedOption[]>
+    const compitableOptionsRef = useCompitable(props, ['items', 'options'])
 
     const createdOptionsRef = ref<SelectBaseOption[]>([])
     const beingCreatedOptionsRef = ref<SelectBaseOption[]>([])
