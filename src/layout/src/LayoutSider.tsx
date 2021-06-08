@@ -170,7 +170,8 @@ export default defineComponent({
       }
     }
     provide(layoutSiderInjectionKey, {
-      collapsedRef: mergedCollapsedRef
+      collapsedRef: mergedCollapsedRef,
+      collapseModeRef: toRef(props, 'collapseMode')
     })
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(

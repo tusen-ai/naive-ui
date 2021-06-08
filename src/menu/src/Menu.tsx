@@ -175,7 +175,15 @@ export default defineComponent({
     const layoutSider = inject(layoutSiderInjectionKey, null)
 
     const mergedCollapsedRef = computed(() => {
-      return props.collapsed ?? layoutSider?.collapsedRef.value ?? false
+      const { collapsed } = props
+      if (collapsed !== undefined) return collapsed
+      if (layoutSider) {
+        const { collapseModeRef, collapsedRef } = layoutSider
+        if (collapseModeRef.value === 'width') {
+          return collapsedRef.value ?? false
+        }
+      }
+      return false
     })
 
     const treeMateRef = computed(() =>
