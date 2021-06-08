@@ -23,7 +23,7 @@ export default defineComponent({
 
 ## Props look like @update:\*
 
-In naive-ui, all props look like `on-update:*` has a corresponding `onUpdate*` prop (since in JSX `onUpdate:*` is not a valid prop name).
+In naive-ui, all props look like `on-update:*` has a corresponding `onUpdate*` prop (since in JSX `on-update:*` is not a valid prop name).
 
 If you find it doesn't exist, I must forget to make it. Please create an issue or PR.
 
