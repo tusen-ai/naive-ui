@@ -81,7 +81,6 @@
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.0.2",
     "codesandbox": "^2.2.3",
-    "copy-text-to-clipboard": "^3.0.1",
     "cross-env": "^7.0.3",
     "cssnano": "^5.0.5",
     "eslint": "^7.20.0",

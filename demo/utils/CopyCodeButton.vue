@@ -7,23 +7,43 @@
     :depth="depth"
   >
     <template #icon>
-      <n-icon>
-        <copy-icon />
+      <n-icon size="14">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -32 544 544">
+          <rect
+            x="128"
+            y="128"
+            width="336"
+            height="336"
+            rx="57"
+            ry="57"
+            style="
+              fill: none;
+              stroke: currentcolor;
+              stroke-linejoin: round;
+              stroke-width: 32px;
+            "
+          ></rect>
+          <path
+            d="M383.5,128l.5-24a56.16,56.16,0,0,0-56-56H112a64.19,64.19,0,0,0-64,64V328a56.16,56.16,0,0,0,56,56h24"
+            style="
+              fill: none;
+              stroke: currentcolor;
+              stroke-linecap: round;
+              stroke-linejoin: round;
+              stroke-width: 32px;
+            "
+          ></path>
+        </svg>
       </n-icon>
     </template>
   </n-button>
 </template>
 
 <script>
-import CopyIcon from '@vicons/fluent/Copy24Regular.js'
-import copy from 'copy-text-to-clipboard'
 import { useMessage } from 'naive-ui'
-
+import copyTextToClipboard from './copy-text'
 export default {
   name: 'CopyCodeButton',
-  components: {
-    CopyIcon
-  },
   props: {
     code: {
       type: String,
@@ -39,10 +59,9 @@ export default {
   },
   setup (props) {
     const message = useMessage()
-
     return {
       handleClick () {
-        copy(props.code)
+        copyTextToClipboard(props.code)
         message.success(props.successText)
       }
     }
