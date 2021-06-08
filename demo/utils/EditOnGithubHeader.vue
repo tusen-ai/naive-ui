@@ -39,10 +39,10 @@ export default {
     return {
       ...i18n({
         'zh-CN': {
-          editOnGithub: '在 Github 上编辑'
+          editOnGithub: '在 GitHub 上编辑'
         },
         'en-US': {
-          editOnGithub: 'Edit on Github'
+          editOnGithub: 'Edit on GitHub'
         }
       })
     }

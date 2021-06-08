@@ -2,4 +2,4 @@
 
 暂时还没有内容。
 
-如果你发现任何问题，欢迎在 Github 上提交 issue 和 PR。
+如果你发现任何问题，欢迎在 GitHub 上提交 issue 和 PR。

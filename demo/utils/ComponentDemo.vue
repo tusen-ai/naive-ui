@@ -142,7 +142,7 @@ export default {
         'zh-CN': {
           show: '显示代码',
           hide: '收起代码',
-          editOnGithub: '在 Github 中编辑',
+          editOnGithub: '在 GitHub 中编辑',
           editInCodeSandbox: '在 CodeSandbox 中编辑',
           copyCode: '复制代码',
           copySuccess: '复制成功'
@@ -150,7 +150,7 @@ export default {
         'en-US': {
           show: 'Show Code',
           hide: 'Hide Code',
-          editOnGithub: 'Edit on Github',
+          editOnGithub: 'Edit on GitHub',
           editInCodeSandbox: 'Edit in CodeSandbox',
           copyCode: 'Copy Code',
           copySuccess: 'Successfully Copied'

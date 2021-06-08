@@ -20,9 +20,9 @@ We provide an advanced type safe theme system that built with typescript. All yo
 
 What's more, no less/sass/css variables, no webpack loaders are required. And you can try the theme editor on the bottom right of the page.
 
-## Uses Typescript
+## Uses TypeScript
 
-All the staff in Naive UI is wrote in Typescript. It can work with your typescript project seamlessly.
+All the staff in Naive UI is wrote in TypeScript. It can work with your typescript project seamlessly.
 
 What's more, you don't need to import any CSS to use the components.
 
