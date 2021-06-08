@@ -41,7 +41,6 @@
 
 <script>
 import { useMessage } from 'naive-ui'
-import copyTextToClipboard from './copy-text'
 export default {
   name: 'CopyCodeButton',
   props: {
@@ -61,8 +60,9 @@ export default {
     const message = useMessage()
     return {
       handleClick () {
-        copyTextToClipboard(props.code)
-        message.success(props.successText)
+        navigator.clipboard.writeText(props.code).then(() => {
+          message.success(props.successText)
+        })
       }
     }
   }
