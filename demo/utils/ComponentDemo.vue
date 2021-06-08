@@ -153,7 +153,7 @@ export default {
           editOnGithub: 'Edit on Github',
           editInCodeSandbox: 'Edit in CodeSandbox',
           copyCode: 'Copy Code',
-          copySuccess: 'Copy Success'
+          copySuccess: 'Successfully Copied'
         }
       })
     }
