@@ -14,6 +14,10 @@ import PanelCol, { Item } from './PanelCol'
 export default defineComponent({
   name: 'TimePickerPanel',
   props: {
+    showDisabled: {
+      type: Boolean,
+      default: true
+    },
     showHour: {
       type: Boolean,
       default: true
@@ -92,18 +96,27 @@ export default defineComponent({
       mergedClsPrefixRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(timePickerInjectionKey)!
-    const hoursRef = computed<Item[]>(() =>
-      time.hours.map((hour) => {
-        const { isHourDisabled } = props
+    const hoursRef = computed<Item[]>(() => {
+      const { isHourDisabled, showDisabled } = props
+      let result = time.hours.map((hour) => {
         return {
           value: hour,
           disabled: isHourDisabled ? isHourDisabled(Number(hour)) : false
         }
       })
+
+      if (!showDisabled) {
+        result = result.filter((hour) => {
+          return !hour.disabled
+        })
+      }
+
+      return result
+    }
     )
-    const minutesRef = computed<Item[]>(() =>
-      time.minutes.map((minute) => {
-        const { isMinuteDisabled } = props
+    const minutesRef = computed<Item[]>(() => {
+      const { isMinuteDisabled, showDisabled } = props
+      let result = time.minutes.map((minute) => {
         return {
           value: minute,
           disabled: isMinuteDisabled
@@ -111,10 +124,19 @@ export default defineComponent({
             : false
         }
       })
+
+      if (!showDisabled) {
+        result = result.filter((minute) => {
+          return !minute.disabled
+        })
+      }
+
+      return result
+    }
     )
-    const secondsRef = computed<Item[]>(() =>
-      time.seconds.map((second) => {
-        const { isSecondDisabled } = props
+    const secondsRef = computed<Item[]>(() => {
+      const { isSecondDisabled, showDisabled } = props
+      let result = time.seconds.map((second) => {
         return {
           value: second,
           disabled: isSecondDisabled
@@ -126,6 +148,14 @@ export default defineComponent({
             : false
         }
       })
+
+      if (!showDisabled) {
+        result = result.filter((second) => {
+          return !second.disabled
+        })
+      }
+      return result
+    }
     )
     return {
       mergedTheme: mergedThemeRef,

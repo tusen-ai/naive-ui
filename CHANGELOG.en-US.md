@@ -6,6 +6,9 @@
 
 - Fix `n-transfer`'s empty icon is no toggling transition.
 
+### Feats
+- `n-time-picker` add `showDisabled` prop.
+
 ## 2.11.4
 
 ### Feats

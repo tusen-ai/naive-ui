@@ -101,6 +101,10 @@ const timePickerProps = {
     type: Boolean,
     default: true
   },
+  showDisabled: {
+    type: Boolean,
+    default: false
+  },
   disabled: {
     type: Boolean,
     default: false
@@ -663,6 +667,7 @@ export default defineComponent({
                                 style={this.cssVars as CSSProperties}
                                 transitionDisabled={this.transitionDisabled}
                                 hourValue={this.hourValue}
+                                showDisabled={this.showDisabled}
                                 showHour={this.hourInFormat}
                                 isHourInvalid={this.isHourInvalid}
                                 isHourDisabled={this.isHourDisabled}

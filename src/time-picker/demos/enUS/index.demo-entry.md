@@ -18,6 +18,7 @@ format
 | clearable | `boolean` | `false` |  |
 | default-value | `number \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
+| showDisabled | `boolean` | `false` |  |
 | format | `string` | `'HH:mm:ss'` |  |
 | is-hour-disabled | `(hour: number) => boolean` | `() => false` |  |
 | is-minute-disabled | `(minute: number, hour: number) => boolean` | `() => false` |  |
