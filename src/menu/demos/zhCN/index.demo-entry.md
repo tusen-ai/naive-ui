@@ -23,7 +23,7 @@ long-label
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | collapsed-icon-size | `number` | `24` | 菜单折叠时图标的大小，如果为设定则使用 `icon-size` 代替 |
-| collapsed-width | `number` | `undefined` | 折叠后菜单的宽度 |
+| collapsed-width | `number` | `48` | 折叠后菜单的宽度 |
 | collapsed | `boolean` | `false` | 菜单是否折叠，值在菜单为垂直时有用 |
 | default-expand-all | `boolean` | `false` |  |
 | default-expanded-keys | `Array<string>` | `[]` | 在非受控状态下默认展开的子菜单标识符数组 |
