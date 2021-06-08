@@ -34,7 +34,7 @@
       <div class="footer-links-col">
         <n-text depth="1" class="col-header">{{ t('community') }}</n-text>
         <n-button text tag="a" target="_blank" :href="repoUrl">
-          Github
+          GitHub
         </n-button>
         <n-button
           text

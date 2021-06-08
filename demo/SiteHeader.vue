@@ -51,7 +51,7 @@
         {{ themeLabelMap[theme] }}
       </n-button>
       <n-button tag="a" text class="nav-picker" :href="repoUrl" target="_blank">
-        Github
+        GitHub
       </n-button>
       <n-text class="nav-picker">
         {{ version }}
@@ -220,7 +220,7 @@ export default {
         },
         {
           key: 'github',
-          title: 'Github'
+          title: 'GitHub'
         }
       ]
     })

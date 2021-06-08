@@ -4,7 +4,7 @@
 
 <h1 align="center">Naive UI</h1>
 <p align="center">一个 Vue 3 组件库</p>
-<p align="center"><b>比较完整，主题可调，使用 Typescript，不算太慢</b></p>
+<p align="center"><b>比较完整，主题可调，使用 TypeScript，不算太慢</b></p>
 <p align="center">有点意思</p>
 
 <p align="center"><a href="README.md">English</a> | 中文</p>
@@ -23,13 +23,13 @@
 
 ### 主题可调
 
-我们提供了一个使用 Typescript 构建的先进的类型安全主题系统。你只需要提供一个样式覆盖的对象，剩下的都交给我们。
+我们提供了一个使用 TypeScript 构建的先进的类型安全主题系统。你只需要提供一个样式覆盖的对象，剩下的都交给我们。
 
 顺便一提，不用 less、sass、css 变量，也不用 webpack 的 loaders。以及你可以试试右下角的主题编辑器。
 
-### 使用 Typescript
+### 使用 TypeScript
 
-Naive UI 全量使用 Typescript 编写，和你的 Typescript 项目无缝衔接。
+Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔接。
 
 顺便一提，你不需要导入任何 CSS 就能让组件正常工作。
 
