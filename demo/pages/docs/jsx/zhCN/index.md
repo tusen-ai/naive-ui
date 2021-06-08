@@ -23,7 +23,7 @@ export default defineComponent({
 
 ## 形如 @update:\* 的 prop
 
-naive-ui 中，所有形如 `on-update:*` 的 prop 都有一个对应的 `onUpdate*` 属性可供使用（由于 JSX 自身的规定，`onUpdate:*` 不是一个合法的 prop）。
+naive-ui 中，所有形如 `on-update:*` 的 prop 都有一个对应的 `onUpdate*` 属性可供使用（由于 JSX 自身的规定，`on-update:*` 和 `onUpdate:*` 不是合法的 prop 名称）。
 
 如果你发现没有，那一定是我忘了写了，请提交一个 Issue 或者 PR。
 
