@@ -60,7 +60,9 @@
           href="https://www.tusimple.com/"
           >{{ t('tusimple') }}</n-button
         >
-        <n-button text disabled>{{ t('joinUs') }}</n-button>
+        <n-button text tag="a" target="_blank" :href="t('joinUsLink')">{{
+          t('joinUs')
+        }}</n-button>
       </div>
     </div>
     <n-divider class="footer-divider" />
@@ -99,7 +101,8 @@ export default {
           icons: '图标库',
           dingTalk: '钉钉',
           dingTalkGroupChat: '钉钉交流群',
-          reportBug: '报告 Bug'
+          reportBug: '报告 Bug',
+          joinUsLink: 'https://app.mokahr.com/campus_apply/tusenweilai/3232#/'
         },
         'en-US': {
           resources: 'Resources',
@@ -114,7 +117,9 @@ export default {
           icons: 'Icon Library',
           dingTalk: 'DingTalk',
           dingTalkGroupChat: 'DingTalk Group Chat',
-          reportBug: 'Report Bug'
+          reportBug: 'Report Bug',
+          joinUsLink:
+            'https://boards.greenhouse.io/tusimplerelocationjobs/jobs/5137805002?gh_src=7908a9242us'
         }
       })
     }
