@@ -68,7 +68,7 @@
     "@types/lodash-es": "^4.17.4",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
-    "@vicons/fluent": "^0.7.0",
+    "@vicons/fluent": "^0.8.0",
     "@vicons/ionicons4": "^0.7.0",
     "@vicons/ionicons5": "^0.8.0",
     "@vitejs/plugin-vue": "^1.2.1",
