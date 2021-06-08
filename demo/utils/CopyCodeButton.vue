@@ -8,7 +8,7 @@
   >
     <template #icon>
       <n-icon size="14">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -32 544 544">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -16 544 560">
           <rect
             x="128"
             y="128"
@@ -41,6 +41,7 @@
 
 <script>
 import { useMessage } from 'naive-ui'
+
 export default {
   name: 'CopyCodeButton',
   props: {

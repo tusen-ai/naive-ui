@@ -14,7 +14,7 @@
       </span>
     </template>
     <template #header-extra>
-      <n-tooltip trigger="hover" :placement="'top'" :show-arrow="true">
+      <n-tooltip>
         <template #trigger>
           <edit-in-code-sandbox-button
             style="padding: 0; margin-right: 6px"
@@ -24,7 +24,7 @@
         </template>
         {{ t('editInCodeSandbox') }}
       </n-tooltip>
-      <n-tooltip trigger="hover" :placement="'top'" :show-arrow="true">
+      <n-tooltip>
         <template #trigger>
           <edit-on-github-button
             depth="3"
@@ -35,7 +35,7 @@
         </template>
         {{ t('editOnGithub') }}
       </n-tooltip>
-      <n-tooltip trigger="hover" :placement="'top'" :show-arrow="true">
+      <n-tooltip>
         <template #trigger>
           <copy-code-button
             depth="3"
@@ -47,12 +47,7 @@
         </template>
         {{ t('copyCode') }}
       </n-tooltip>
-      <n-tooltip
-        ref="expandCodeButtonRef"
-        trigger="hover"
-        :placement="'top'"
-        :show-arrow="true"
-      >
+      <n-tooltip ref="expandCodeButtonRef">
         <template #trigger>
           <n-button
             style="padding: 0"
@@ -87,13 +82,14 @@ import { CodeOutline } from '@vicons/ionicons5'
 import { useDisplayMode } from '../store'
 import { i18n } from '../utils/composables'
 import EditOnGithubButton from './EditOnGithubButton.vue'
-import editInCodeSandboxButton from './EditInCodeSandboxButton.vue'
+import EditInCodeSandboxButton from './EditInCodeSandboxButton.vue'
 import CopyCodeButton from './CopyCodeButton.vue'
+
 export default {
   components: {
     CodeOutline,
     EditOnGithubButton,
-    editInCodeSandboxButton,
+    EditInCodeSandboxButton,
     CopyCodeButton
   },
   props: {

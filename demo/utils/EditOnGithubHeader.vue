@@ -2,7 +2,7 @@
   <n-h1 :id="id" class="naive-doc-title">
     <span>{{ text }}</span>
     <span class="edit-button">
-      <n-tooltip trigger="hover" placement="right" :show-arrow="true">
+      <n-tooltip placement="right">
         <template #trigger>
           <edit-on-github-button
             text
