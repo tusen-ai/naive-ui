@@ -126,7 +126,7 @@ const locales = {
     common: 'Common',
     debug: 'Debug',
     alreadyHome: 'You are already in home page. No clicking anymore.',
-    tusimpleTheme: 'Tusimple Theme',
+    tusimpleTheme: 'TuSimple Theme',
     defaultTheme: 'Default Theme'
   }
 }
