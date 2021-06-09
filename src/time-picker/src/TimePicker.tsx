@@ -58,6 +58,21 @@ import {
   timePickerInjectionKey
 } from './interface'
 
+// validate hours,minutes,seconds prop
+type numberOrNumberArray = number | number[]
+function validateXXXs (value: numberOrNumberArray, max: number): boolean {
+  if (value === undefined) {
+    return true
+  }
+  let valid = false
+  if (Array.isArray(value)) {
+    valid = value.every((v) => v >= 0 && v <= max)
+  } else {
+    valid = value >= 0 && value <= max
+  }
+  return valid
+}
+
 const timePickerProps = {
   ...(useTheme.props as ThemeProps<TimePickerTheme>),
   to: useAdjustedTo.propTo,
@@ -119,9 +134,18 @@ const timePickerProps = {
     },
     default: undefined
   },
-  hours: [Number, Array] as PropType<MaybeArray<number>>,
-  minutes: [Number, Array] as PropType<MaybeArray<number>>,
-  seconds: [Number, Array] as PropType<MaybeArray<number>>
+  hours: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: numberOrNumberArray) => validateXXXs(value, 23)
+  },
+  minutes: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: numberOrNumberArray) => validateXXXs(value, 59)
+  },
+  seconds: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: numberOrNumberArray) => validateXXXs(value, 59)
+  }
 }
 
 export type TimePickerProps = ExtractPublicPropTypes<typeof timePickerProps>
@@ -130,9 +154,8 @@ export default defineComponent({
   name: 'TimePicker',
   props: timePickerProps,
   setup (props) {
-    const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } = useConfig(
-      props
-    )
+    const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } =
+      useConfig(props)
     const { localeRef, dateLocaleRef } = useLocale('TimePicker')
     const formItem = useFormItem(props)
     const themeRef = useTheme(
@@ -365,11 +388,8 @@ export default defineComponent({
     }
     function scrollTimer (): void {
       if (!panelInstRef.value) return
-      const {
-        hourScrollRef,
-        minuteScrollRef,
-        secondScrollRef
-      } = panelInstRef.value
+      const { hourScrollRef, minuteScrollRef, secondScrollRef } =
+        panelInstRef.value
       if (hourScrollRef) {
         const hour = hourScrollRef.contentRef?.querySelector(
           '[data-active]'

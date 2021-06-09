@@ -8,10 +8,6 @@
   :is-hour-disabled="isHourDisabled"
   :is-minute-disabled="isMinuteDisabled"
   :is-second-disabled="isSecondDisabled"
-  :seconds="['05','10']"
-  :hours="['01','02']"
-  minutes="10"
-
 />
 ```
 

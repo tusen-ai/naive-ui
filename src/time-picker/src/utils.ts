@@ -151,3 +151,7 @@ export const time = {
   ],
   period: ['AM', 'PM']
 }
+
+export function getFixValue (value: number): string {
+  return `00${value}`.slice(-2)
+}
