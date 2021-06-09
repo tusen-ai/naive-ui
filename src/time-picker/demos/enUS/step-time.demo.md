@@ -1,14 +1,13 @@
 # Step Time
 
-Pass a number as a step or Pass a array as option。
+Pass a number as step or use an array to specify the item you want.
 
 ```html
 <n-time-picker
   v-model:value="time0"
-  :seconds="['05','10']"
-  :hours="['01','02']"
-  minutes="10"
-
+  :seconds="[0]"
+  :hours="[8,18]"
+  :minutes="30"
 />
 ```
 

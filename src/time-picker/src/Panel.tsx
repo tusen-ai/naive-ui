@@ -86,15 +86,9 @@ export default defineComponent({
     onFocusout: Function as PropType<(e: FocusEvent) => void>,
     onFocusDetectorFocus: Function as PropType<() => void>,
     onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
-    seconds: {
-      type: [String, Array] as PropType<MaybeArray<string>>
-    },
-    hours: {
-      type: [String, Array] as PropType<MaybeArray<string>>
-    },
-    minutes: {
-      type: [String, Array] as PropType<MaybeArray<string>>
-    }
+    hours: [Number, Array] as PropType<MaybeArray<number>>,
+    minutes: [Number, Array] as PropType<MaybeArray<number>>,
+    seconds: [Number, Array] as PropType<MaybeArray<number>>
   },
   setup (props) {
     const {
@@ -105,8 +99,10 @@ export default defineComponent({
     const hoursRef = computed<Item[]>(() => {
       const { isHourDisabled, hours } = props
       let result: string[]
-      if (hours && Array.isArray(hours)) {
-        result = hours
+      if (Array.isArray(hours)) {
+        result = hours.filter(hour => hour >= 0 && hour <= 23)
+          .map(hour => Math.floor(hour))
+          .map(hour => hour < 10 ? '0' + String(hour) : String(hour))
       } else if (hours && !Number.isNaN(Number(hours))) {
         const n = Number(hours)
         result = time.hours.filter((hour) => Number(hour) % n === 0)
@@ -120,13 +116,14 @@ export default defineComponent({
           disabled: isHourDisabled ? isHourDisabled(Number(hour)) : false
         }
       })
-    }
-    )
+    })
     const minutesRef = computed<Item[]>(() => {
       const { isMinuteDisabled, minutes } = props
       let result: string[]
-      if (minutes && Array.isArray(minutes)) {
-        result = minutes
+      if (Array.isArray(minutes)) {
+        result = minutes.filter(minute => minute >= 0 && minute <= 59)
+          .map(minute => Math.floor(minute))
+          .map(minute => minute < 10 ? '0' + String(minute) : String(minute))
       } else if (minutes && !Number.isNaN(Number(minutes))) {
         const n = Number(minutes)
         result = time.minutes.filter((minute) => Number(minute) % n === 0)
@@ -142,13 +139,14 @@ export default defineComponent({
             : false
         }
       })
-    }
-    )
+    })
     const secondsRef = computed<Item[]>(() => {
       const { isSecondDisabled, seconds } = props
       let result: string[]
-      if (seconds && Array.isArray(seconds)) {
-        result = seconds
+      if (Array.isArray(seconds)) {
+        result = seconds.filter(second => second >= 0 && second <= 59)
+          .map(second => Math.floor(second))
+          .map(second => second < 10 ? '0' + String(second) : String(second))
       } else if (seconds && !Number.isNaN(Number(seconds))) {
         const n = Number(seconds)
         result = time.seconds.filter((second) => Number(second) % n === 0)
@@ -168,8 +166,7 @@ export default defineComponent({
             : false
         }
       })
-    }
-    )
+    })
     return {
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,

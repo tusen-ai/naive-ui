@@ -120,15 +120,9 @@ const timePickerProps = {
     },
     default: undefined
   },
-  seconds: {
-    type: [String, Array] as PropType<MaybeArray<string>>
-  },
-  hours: {
-    type: [String, Array] as PropType<MaybeArray<string>>
-  },
-  minutes: {
-    type: [String, Array] as PropType<MaybeArray<string>>
-  }
+  hours: [Number, Array] as PropType<MaybeArray<number>>,
+  minutes: [Number, Array] as PropType<MaybeArray<number>>,
+  seconds: [Number, Array] as PropType<MaybeArray<number>>
 }
 
 export type TimePickerProps = ExtractPublicPropTypes<typeof timePickerProps>
