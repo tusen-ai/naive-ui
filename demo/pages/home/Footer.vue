@@ -10,7 +10,7 @@
       <div class="footer-links-col">
         <n-text depth="1" class="col-header">{{ t('resources') }}</n-text>
         <n-button disabled text>{{ t('designResources') }}</n-button>
-        <n-button text tag="a" target="_blank" href="https://xicons.org">{{
+        <n-button text tag="a" target="_blank" href="https://www.xicons.org">{{
           t('icons')
         }}</n-button>
       </div>
