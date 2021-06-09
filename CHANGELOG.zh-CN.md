@@ -8,7 +8,8 @@
 - 修复 `n-transfer` 的无数据 Icon 没有开关动画
 
 ### Feats
-- `n-time-picker` 新增 `seconds` ，`minutes` ，`hours`属性
+
+- `n-time-picker` 新增 `seconds`、`minutes`、`hours`属性
 - `n-card` 增加 `:target` 的样式
 
 ## 2.11.4

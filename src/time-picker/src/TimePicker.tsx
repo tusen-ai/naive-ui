@@ -59,18 +59,15 @@ import {
 } from './interface'
 
 // validate hours,minutes,seconds prop
-type numberOrNumberArray = number | number[]
-function validateXXXs (value: numberOrNumberArray, max: number): boolean {
+function validateUnits (value: MaybeArray<number>, max: number): boolean {
   if (value === undefined) {
     return true
   }
-  let valid = false
   if (Array.isArray(value)) {
-    valid = value.every((v) => v >= 0 && v <= max)
+    return value.every((v) => v >= 0 && v <= max)
   } else {
-    valid = value >= 0 && value <= max
+    return value >= 0 && value <= max
   }
-  return valid
 }
 
 const timePickerProps = {
@@ -136,15 +133,15 @@ const timePickerProps = {
   },
   hours: {
     type: [Number, Array] as PropType<MaybeArray<number>>,
-    validator: (value: numberOrNumberArray) => validateXXXs(value, 23)
+    validator: (value: MaybeArray<number>) => validateUnits(value, 23)
   },
   minutes: {
     type: [Number, Array] as PropType<MaybeArray<number>>,
-    validator: (value: numberOrNumberArray) => validateXXXs(value, 59)
+    validator: (value: MaybeArray<number>) => validateUnits(value, 59)
   },
   seconds: {
     type: [Number, Array] as PropType<MaybeArray<number>>,
-    validator: (value: numberOrNumberArray) => validateXXXs(value, 59)
+    validator: (value: MaybeArray<number>) => validateUnits(value, 59)
   }
 }
 

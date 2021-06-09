@@ -8,7 +8,8 @@
 - Fix `n-transfer`'s empty icon is no toggling transition.
 
 ### Feats
-- `n-time-picker` add `seconds` ,`minutes` ,`hours` prop.
+
+- `n-time-picker` add `seconds`, `minutes`, `hours` props.
 - `n-card` add `:target` style
 
 ## 2.11.4
