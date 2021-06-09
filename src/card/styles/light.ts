@@ -5,6 +5,7 @@ import { Theme } from '../../_mixins'
 
 export const self = (vars: ThemeCommonVars) => {
   const {
+    primaryColor,
     borderRadius,
     lineHeight,
     fontSize,
@@ -27,6 +28,7 @@ export const self = (vars: ThemeCommonVars) => {
     color: cardColor,
     colorModal: modalColor,
     colorPopover: popoverColor,
+    targetColor: primaryColor,
     textColor: textColor2,
     titleTextColor: textColor1,
     borderColor: dividerColor,
