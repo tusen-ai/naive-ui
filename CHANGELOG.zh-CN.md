@@ -6,6 +6,9 @@
 
 - 修复 `n-transfer` 的无数据 Icon 没有开关动画
 
+### Feats
+- `n-time-picker` 新增 `seconds` ，`minutes` ，`hours`属性
+
 ## 2.11.4
 
 ### Feats

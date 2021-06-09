@@ -118,6 +118,15 @@ const timePickerProps = {
       return true
     },
     default: undefined
+  },
+  seconds: {
+    type: [String, Array] as PropType<MaybeArray<string>>
+  },
+  hours: {
+    type: [String, Array] as PropType<MaybeArray<string>>
+  },
+  minutes: {
+    type: [String, Array] as PropType<MaybeArray<string>>
   }
 }
 
@@ -687,6 +696,10 @@ export default defineComponent({
                                 onFocusDetectorFocus={
                                   this.handleFocusDetectorFocus
                                 }
+                                seconds={this.seconds}
+                                minutes={this.minutes}
+                                hours={this.hours}
+
                               />,
                               [[clickoutside, this.handleClickOutside]]
                             )

@@ -10,6 +10,7 @@ import {
   timePickerInjectionKey
 } from './interface'
 import PanelCol, { Item } from './PanelCol'
+import { MaybeArray } from '../../_utils'
 
 export default defineComponent({
   name: 'TimePickerPanel',
@@ -84,7 +85,16 @@ export default defineComponent({
     onFocusin: Function as PropType<(e: FocusEvent) => void>,
     onFocusout: Function as PropType<(e: FocusEvent) => void>,
     onFocusDetectorFocus: Function as PropType<() => void>,
-    onKeydown: Function as PropType<(e: KeyboardEvent) => void>
+    onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
+    seconds: {
+      type: [String, Array] as PropType<MaybeArray<string>>
+    },
+    hours: {
+      type: [String, Array] as PropType<MaybeArray<string>>
+    },
+    minutes: {
+      type: [String, Array] as PropType<MaybeArray<string>>
+    }
   },
   setup (props) {
     const {
@@ -92,18 +102,39 @@ export default defineComponent({
       mergedClsPrefixRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(timePickerInjectionKey)!
-    const hoursRef = computed<Item[]>(() =>
-      time.hours.map((hour) => {
-        const { isHourDisabled } = props
+    const hoursRef = computed<Item[]>(() => {
+      const { isHourDisabled, hours } = props
+      let result: string[]
+      if (hours && Array.isArray(hours)) {
+        result = hours
+      } else if (hours && !Number.isNaN(Number(hours))) {
+        const n = Number(hours)
+        result = time.hours.filter((hour) => Number(hour) % n === 0)
+      } else {
+        result = time.hours
+      }
+
+      return result.map((hour) => {
         return {
           value: hour,
           disabled: isHourDisabled ? isHourDisabled(Number(hour)) : false
         }
       })
+    }
     )
-    const minutesRef = computed<Item[]>(() =>
-      time.minutes.map((minute) => {
-        const { isMinuteDisabled } = props
+    const minutesRef = computed<Item[]>(() => {
+      const { isMinuteDisabled, minutes } = props
+      let result: string[]
+      if (minutes && Array.isArray(minutes)) {
+        result = minutes
+      } else if (minutes && !Number.isNaN(Number(minutes))) {
+        const n = Number(minutes)
+        result = time.minutes.filter((minute) => Number(minute) % n === 0)
+      } else {
+        result = time.minutes
+      }
+
+      return result.map((minute) => {
         return {
           value: minute,
           disabled: isMinuteDisabled
@@ -111,10 +142,21 @@ export default defineComponent({
             : false
         }
       })
+    }
     )
-    const secondsRef = computed<Item[]>(() =>
-      time.seconds.map((second) => {
-        const { isSecondDisabled } = props
+    const secondsRef = computed<Item[]>(() => {
+      const { isSecondDisabled, seconds } = props
+      let result: string[]
+      if (seconds && Array.isArray(seconds)) {
+        result = seconds
+      } else if (seconds && !Number.isNaN(Number(seconds))) {
+        const n = Number(seconds)
+        result = time.seconds.filter((second) => Number(second) % n === 0)
+      } else {
+        result = time.seconds
+      }
+
+      return result.map((second) => {
         return {
           value: second,
           disabled: isSecondDisabled
@@ -126,6 +168,7 @@ export default defineComponent({
             : false
         }
       })
+    }
     )
     return {
       mergedTheme: mergedThemeRef,
