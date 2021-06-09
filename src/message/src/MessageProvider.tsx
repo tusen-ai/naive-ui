@@ -27,16 +27,15 @@ export interface MessageOptions {
 }
 
 export interface MessageApiInjection {
-  info: (content: string, options: MessageOptions) => MessageReactive
-  success: (content: string, options: MessageOptions) => MessageReactive
-  warning: (content: string, options: MessageOptions) => MessageReactive
-  error: (content: string, options: MessageOptions) => MessageReactive
-  loading: (content: string, options: MessageOptions) => MessageReactive
+  info: (content: string, options?: MessageOptions) => MessageReactive
+  success: (content: string, options?: MessageOptions) => MessageReactive
+  warning: (content: string, options?: MessageOptions) => MessageReactive
+  error: (content: string, options?: MessageOptions) => MessageReactive
+  loading: (content: string, options?: MessageOptions) => MessageReactive
 }
 
-export const messageApiInjectionKey: InjectionKey<MessageApiInjection> = Symbol(
-  'messageApi'
-)
+export const messageApiInjectionKey: InjectionKey<MessageApiInjection> =
+  Symbol('messageApi')
 
 export interface MessageReactive {
   content?: string
@@ -85,19 +84,19 @@ export default defineComponent({
     const messageListRef = ref<PrivateMessageReactive[]>([])
     const messageRefs = ref<{ [key: string]: PrivateMessageRef }>({})
     const api: MessageApiInjection = {
-      info (content: string, options: MessageOptions) {
+      info (content: string, options?: MessageOptions) {
         return create(content, { ...options, type: 'info' })
       },
-      success (content: string, options: MessageOptions) {
+      success (content: string, options?: MessageOptions) {
         return create(content, { ...options, type: 'success' })
       },
-      warning (content: string, options: MessageOptions) {
+      warning (content: string, options?: MessageOptions) {
         return create(content, { ...options, type: 'warning' })
       },
-      error (content: string, options: MessageOptions) {
+      error (content: string, options?: MessageOptions) {
         return create(content, { ...options, type: 'error' })
       },
-      loading (content: string, options: MessageOptions) {
+      loading (content: string, options?: MessageOptions) {
         return create(content, { ...options, type: 'loading' })
       }
     }

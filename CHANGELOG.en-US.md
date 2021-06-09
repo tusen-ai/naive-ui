@@ -6,6 +6,7 @@
 
 - Fix `n-popover` sometimes won't sync position in manual mode.
 - Fix `n-transfer`'s empty icon is no toggling transition.
+- Fix `n-message` API option is not optional.
 
 ## 2.11.4
 
