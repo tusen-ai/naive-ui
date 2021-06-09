@@ -40,9 +40,6 @@ export default c([
       box-shadow .3s var(--bezier),
       border-color .3s var(--bezier);
   `, [
-    c('&:target', {
-      borderColor: 'var(--color-target) !important'
-    }),
     cM('hoverable', [
       c('&:hover', 'box-shadow: var(--box-shadow);')
     ]),
@@ -140,9 +137,10 @@ export default c([
         width: 100%;
       `)
     ]),
-    cM('bordered', {
-      border: '1px solid var(--border-color)'
-    }),
+    cM('bordered', [
+      'border: 1px solid var(--border-color)',
+      c('&:target', 'border-color: var(--color-target);')
+    ]),
     cM('action-segmented', [
       c('>', [
         cE('action', [

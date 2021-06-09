@@ -9,7 +9,7 @@
 
 ### Feats
 
-- 组件文档支持点击 `anchor` 时相应的组件 `demo` 高亮
+- `n-card` 增加 `:target` 的样式
 
 ## 2.11.4
 

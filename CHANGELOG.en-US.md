@@ -9,7 +9,7 @@
 
 ### Feats
 
-- `components docs` supports demo block `target` style when click `anchor`
+- `n-card` add `:target` style
 
 ## 2.11.4
 
