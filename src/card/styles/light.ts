@@ -28,7 +28,7 @@ export const self = (vars: ThemeCommonVars) => {
     color: cardColor,
     colorModal: modalColor,
     colorPopover: popoverColor,
-    targetColor: primaryColor,
+    colorTarget: primaryColor,
     textColor: textColor2,
     titleTextColor: textColor1,
     borderColor: dividerColor,

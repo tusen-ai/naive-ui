@@ -40,6 +40,9 @@ export default c([
       box-shadow .3s var(--bezier),
       border-color .3s var(--bezier);
   `, [
+    c('&:target', {
+      borderColor: 'var(--color-target) !important'
+    }),
     cM('hoverable', [
       c('&:hover', 'box-shadow: var(--box-shadow);')
     ]),

@@ -62,10 +62,6 @@ body {
   font-size: 0.93em !important;
 }
 
-.demo-card:target {
-  border-color: var(--target-color);
-}
-
 .md-card {
   margin-bottom: 16px;
 }

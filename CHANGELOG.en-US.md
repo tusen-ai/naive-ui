@@ -2,6 +2,11 @@
 
 ## Pending
 
+### Fixed
+
+- Fix `n-popover` sometimes won't sync position in manual mode.
+- Fix `n-transfer`'s empty icon is no toggling transition.
+
 ### Feats
 
 - `components docs` supports demo block `target` style when click `anchor`
