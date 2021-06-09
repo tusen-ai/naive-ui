@@ -9,7 +9,7 @@
     "dev": "npm run clean && npm run gen-version && cross-env NODE_ENV=development vite",
     "build:package": "npm run gen-version && npm run clean && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && node scripts/post-build",
     "build:site": "./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
-    "clean": "rm -rf site lib es node_modules/naive-ui themes/**/es themes/**/lib",
+    "clean": "rimraf site lib es node_modules/naive-ui themes/**/es themes/**/lib",
     "release:package": "npm run build:package && npm publish",
     "release:site": "cross-env TUSIMPLE=true npm run build:site && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh",
     "lint": "npm run lint:code && npm run lint:type",
@@ -99,6 +99,7 @@
     "lint-staged": "^11.0.0",
     "marked": "^2.0.1",
     "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
     "typescript": "^4.3.2",
     "vite": "^2.1.3"
   },
