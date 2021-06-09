@@ -2,6 +2,7 @@ import { InjectionKey, PropType, Ref } from 'vue'
 
 export const layoutSiderInjectionKey: InjectionKey<{
   collapsedRef: Ref<boolean>
+  collapseModeRef: Ref<'transform' | 'width'>
 }> = Symbol('layoutSiderInjection')
 
 export const positionProp = {

@@ -4,10 +4,12 @@
 
 ### Fixes
 
+- Fix `n-popover` sometimes won't sync position in manual mode.
 - Fix `n-transfer`'s empty icon is no toggling transition.
 
 ### Feats
 - `n-time-picker` add `seconds` ,`minutes` ,`hours` prop.
+- `n-card` add `:target` style
 
 ## 2.11.4
 

@@ -1,6 +1,6 @@
 # Avatar
 
-On the Internet, nobody knows you're a dog, even if you use a dog picture as avatar.
+On the Internet, nobody knows you're a dog.
 
 ## Demos
 

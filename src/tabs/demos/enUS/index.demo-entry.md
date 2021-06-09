@@ -24,7 +24,7 @@ addable
 | default-value | `string \| number` | name prop of the first tab |  |
 | closable | `boolean` | `false` | Whether to allow tab to close, Only works when type is `'card'`. |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly'` | `undefined` |  |
-| label-size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of tabs. |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of tabs. |
 | show-divider | `boolean` | `false` | Whether to show divider of tabs. Only works when type is `'line'`. |
 | pane-style | `string \| object` | `undefined` | Style of the pane. |
 | tab-style | `string \| object` | `undefined` | Style of the tab. |

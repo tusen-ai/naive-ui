@@ -10,6 +10,7 @@ export default cB('scrollbar', `
   position: relative;
   z-index: auto;
   height: 100%;
+  width: 100%;
 `, [
   c('>', [
     cB('scrollbar-container', `

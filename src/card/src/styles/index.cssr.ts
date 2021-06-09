@@ -137,9 +137,11 @@ export default c([
         width: 100%;
       `)
     ]),
-    cM('bordered', {
-      border: '1px solid var(--border-color)'
-    }),
+    cM('bordered', `
+      border: 1px solid var(--border-color);
+    `, [
+      c('&:target', 'border-color: var(--color-target);')
+    ]),
     cM('action-segmented', [
       c('>', [
         cE('action', [

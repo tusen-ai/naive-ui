@@ -32,18 +32,12 @@ export default defineComponent({
       type: String as PropType<FollowerPlacement>,
       default: 'bottom-start'
     },
-    show: {
-      type: Boolean,
-      default: false
-    },
+    show: Boolean,
     menuModel: {
       type: Array as PropType<MenuModel>,
       required: true
     },
-    loading: {
-      type: Boolean,
-      default: false
-    },
+    loading: Boolean,
     onFocus: {
       type: Function as PropType<(e: FocusEvent) => void>,
       required: true
