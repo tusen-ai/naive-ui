@@ -2,6 +2,11 @@
 
 ## Pending
 
+### Feats
+
+- `n-time-picker` add `hours`, `minutes`, `seconds` prop
+
+
 ### Fixes
 
 - Fix `n-popover` sometimes won't sync position in manual mode.

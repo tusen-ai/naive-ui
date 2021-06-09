@@ -2,6 +2,11 @@
 
 ## Pending
 
+### Feats
+
+- `n-time-picker` 添加 `hours`, `minutes`, `seconds` 属性
+
+
 ### Fixes
 
 - 修复 `n-popover` 有时在手动模式不会同步位置
