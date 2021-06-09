@@ -79,6 +79,18 @@ const timePickerProps = {
     type: String,
     default: 'HH:mm:ss'
   },
+  hours: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    default: null
+  },
+  minutes: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    default: null
+  },
+  seconds: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    default: null
+  },
   isHourDisabled: Function as PropType<IsHourDisabled>,
   size: String as PropType<Size>,
   isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
@@ -145,6 +157,10 @@ export default defineComponent({
 
     const inputInstRef = ref<InputInst | null>(null)
     const panelInstRef = ref<PanelRef | null>(null)
+
+    const hoursRef = toRef(props, 'hours')
+    const minutesRef = toRef(props, 'minutes')
+    const secondsRef = toRef(props, 'seconds')
 
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -521,6 +537,9 @@ export default defineComponent({
       hourValue: hourValueRef,
       minuteValue: minuteValueRef,
       secondValue: secondValueRef,
+      hours: hoursRef,
+      minutes: minutesRef,
+      seconds: secondsRef,
       handleTimeInputFocus,
       handleTimeInputBlur,
       handleNowClick,
@@ -664,6 +683,9 @@ export default defineComponent({
                                 transitionDisabled={this.transitionDisabled}
                                 hourValue={this.hourValue}
                                 showHour={this.hourInFormat}
+                                hours={this.hours}
+                                minutes={this.minutes}
+                                seconds={this.seconds}
                                 isHourInvalid={this.isHourInvalid}
                                 isHourDisabled={this.isHourDisabled}
                                 minuteValue={this.minuteValue}

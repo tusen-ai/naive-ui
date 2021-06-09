@@ -8,6 +8,8 @@ You can disable some time.
   :is-hour-disabled="isHourDisabled"
   :is-minute-disabled="isMinuteDisabled"
   :is-second-disabled="isSecondDisabled"
+  :hours="3"
+  :minutes="[0,10,20,30,40,50]"
 />
 ```
 

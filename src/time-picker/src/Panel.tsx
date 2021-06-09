@@ -58,6 +58,18 @@ export default defineComponent({
       type: Number as PropType<number | null>,
       default: null
     },
+    hours: {
+      type: [Array as PropType<number[]>, Number],
+      default: null
+    },
+    minutes: {
+      type: [Array as PropType<number[]>, Number],
+      default: null
+    },
+    seconds: {
+      type: [Array as PropType<number[]>, Number],
+      default: null
+    },
     isHourDisabled: Function as PropType<IsHourDisabled>,
     isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
     isSecondDisabled: Function as PropType<IsSecondDisabled>,
@@ -92,18 +104,46 @@ export default defineComponent({
       mergedClsPrefixRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(timePickerInjectionKey)!
-    const hoursRef = computed<Item[]>(() =>
-      time.hours.map((hour) => {
-        const { isHourDisabled } = props
+
+    const getStepArray = (array: number[], step: number): number[] => {
+      return array.filter(v => v % step === 0)
+    }
+    const getNumbers = (values: string[]): number[] => {
+      return values.map(v => Number(v))
+    }
+    const getFixValue = (value: number): string => {
+      return `00${value}`.slice(-2)
+    }
+    const getValues = (values: number[]): string[] => {
+      return values.map(v => getFixValue(v))
+    }
+    const setOrDefault = (defaultValue: string[], setValue: number[] | number | null): string[] => {
+      let result: string[] = defaultValue
+      if (setValue) {
+        if (typeof setValue === 'number') {
+          result = getValues(getStepArray(getNumbers(defaultValue), setValue))
+        } else {
+          result = getValues(setValue)
+        }
+      }
+      return result
+    }
+
+    const hoursRef = computed<Item[]>(() => {
+      const { isHourDisabled, hours } = props
+      const timeHours = setOrDefault(time.hours, hours)
+      return timeHours.map((hour) => {
         return {
           value: hour,
           disabled: isHourDisabled ? isHourDisabled(Number(hour)) : false
         }
       })
-    )
-    const minutesRef = computed<Item[]>(() =>
-      time.minutes.map((minute) => {
-        const { isMinuteDisabled } = props
+    })
+    const minutesRef = computed<Item[]>(() => {
+      const { isMinuteDisabled, minutes } = props
+      const timeMinutes = setOrDefault(time.minutes, minutes)
+
+      return timeMinutes.map((minute) => {
         return {
           value: minute,
           disabled: isMinuteDisabled
@@ -111,10 +151,11 @@ export default defineComponent({
             : false
         }
       })
-    )
-    const secondsRef = computed<Item[]>(() =>
-      time.seconds.map((second) => {
-        const { isSecondDisabled } = props
+    })
+    const secondsRef = computed<Item[]>(() => {
+      const { isSecondDisabled, seconds } = props
+      const timeSeconds = setOrDefault(time.seconds, seconds)
+      return timeSeconds.map((second) => {
         return {
           value: second,
           disabled: isSecondDisabled
@@ -126,7 +167,7 @@ export default defineComponent({
             : false
         }
       })
-    )
+    })
     return {
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
