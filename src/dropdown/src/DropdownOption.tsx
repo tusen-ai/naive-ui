@@ -30,9 +30,8 @@ interface NDropdownOptionInjection {
   enteringSubmenuRef: Ref<boolean>
 }
 
-const dropdownOptionInjectionKey: InjectionKey<NDropdownOptionInjection> = Symbol(
-  'dropdown-option'
-)
+const dropdownOptionInjectionKey: InjectionKey<NDropdownOptionInjection> =
+  Symbol('dropdown-option')
 
 export default defineComponent({
   name: 'DropdownOption',
@@ -75,13 +74,18 @@ export default defineComponent({
     const hasSubmenuRef = computed(() => {
       return isSubmenuNode(props.tmNode.rawNode)
     })
+    const mergedDisabledRef = computed(() => {
+      const { disabled } = props.tmNode
+      return disabled
+    })
     const showSubmenuRef = computed(() => {
       if (!hasSubmenuRef.value) return false
       const { value: hoverKey } = hoverKeyRef
       const { value: keyboardKey } = keyboardKeyRef
       const { value: lastToggledSubmenuKey } = lastToggledSubmenuKeyRef
       const { value: pendingKeyPath } = pendingKeyPathRef
-      const { key } = props.tmNode
+      const { key, disabled } = props.tmNode
+      if (disabled) return false
       if (hoverKey !== null) return pendingKeyPath.includes(key)
       if (keyboardKey !== null) {
         return (
@@ -144,7 +148,7 @@ export default defineComponent({
       if (!hasSubmenu && !tmNode.disabled) {
         NDropdown.doSelect(
           tmNode.key,
-          ((tmNode as unknown) as TreeNode<DropdownOption>).rawNode
+          (tmNode as unknown as TreeNode<DropdownOption>).rawNode
         )
         NDropdown.doUpdateShow(false)
       }
@@ -177,6 +181,7 @@ export default defineComponent({
         if (index === -1) return false
         return index === activeKeyPath.length - 1
       }),
+      mergedDisabled: mergedDisabledRef,
       handleClick,
       handleMouseMove,
       handleMouseEnter,
@@ -209,8 +214,10 @@ export default defineComponent({
             {
               [`${clsPrefix}-dropdown-option-body--pending`]: this.pending,
               [`${clsPrefix}-dropdown-option-body--active`]: this.active,
-              [`${clsPrefix}-dropdown-option-body--child-active`]: this
-                .childActive
+              [`${clsPrefix}-dropdown-option-body--child-active`]:
+                this.childActive,
+              [`${clsPrefix}-dropdown-option-body--disabled`]:
+                this.mergedDisabled
             }
           ]}
           onMousemove={this.handleMouseMove}

@@ -23,6 +23,8 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --prefix-color
 // --suffix-color
 // --option-icon-size
+// --color-disabled
+// --text-color-disabled
 export default cB('dropdown-menu', `
   transform-origin: inherit;
   padding: var(--padding);
@@ -62,6 +64,16 @@ export default cB('dropdown-menu', `
       }, [
         cE('prefix, suffix', {
           color: 'var(--option-text-color-active)'
+        })
+      ]),
+      cM('disabled', {
+        color: 'var(--text-color-disabled)',
+        cursor: 'not-allowed',
+        opacity: '.45',
+        backgroundColor: 'var(--color-disabled)'
+      }, [
+        cE('prefix, suffix', {
+          color: 'var(--text-color-disabled)'
         })
       ]),
       cM('child-active', {

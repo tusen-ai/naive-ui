@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-dropdown` 新增 `disabled` 属性
+
 ### Fixes
 
 - 修复 `n-popover` 有时在手动模式不会同步位置

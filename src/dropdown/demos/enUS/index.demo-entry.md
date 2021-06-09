@@ -33,6 +33,7 @@ For other props, for example `placement`, please see [Popover Props](popover#Pro
 | icon?    | `() => VNodeChild` |                   |
 | key      | `string \| number` | Should be unique. |
 | label    | `string`           |                   |
+| disabled | `boolean`          |                   |
 
 ### DropdownDivider Type
 
@@ -50,6 +51,7 @@ For other props, for example `placement`, please see [Popover Props](popover#Pro
 | icon? | `() => VNodeChild` |  |
 | key | `string \| number` | Should be unique. |
 | children | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` |  |
+| disabled | `boolean` |  |
 
 ### DropdownGroup Type
 
