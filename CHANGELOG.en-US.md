@@ -303,6 +303,9 @@
 - Fix `n-menu` the type definition of `extra` property of menu and submenu.
 - Fix `n-dropdown` mouse cursor is not pointer.
 
+### Feats
+- `n-time-picker` add `seconds` ,`minutes` ,`hours` prop.
+
 ## 2.11.4
 
 ### Feats

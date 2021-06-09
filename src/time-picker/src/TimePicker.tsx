@@ -119,6 +119,15 @@ const timePickerProps = {
       return true
     },
     default: undefined
+  },
+  seconds: {
+    type: [String, Array] as PropType<MaybeArray<string>>
+  },
+  hours: {
+    type: [String, Array] as PropType<MaybeArray<string>>
+  },
+  minutes: {
+    type: [String, Array] as PropType<MaybeArray<string>>
   }
 }
 
@@ -666,6 +675,9 @@ export default defineComponent({
                                 <Panel
                                   ref="panelInstRef"
                                   style={this.cssVars as CSSProperties}
+                                  seconds={this.seconds}
+                                  minutes={this.minutes}
+                                  hours={this.hours}
                                   transitionDisabled={this.transitionDisabled}
                                   hourValue={this.hourValue}
                                   showHour={this.hourInFormat}
