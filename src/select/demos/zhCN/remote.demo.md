@@ -73,17 +73,14 @@ export default {
       value: null,
       loading: false,
       options: [],
-      noDataContent: 'please search',
       handleSearch: (query) => {
         if (!query.length) {
           this.options = []
-          this.noDataContent = 'please search'
           return
         }
         this.loading = true
         window.setTimeout(() => {
           this.options = options.filter((item) => ~item.label.indexOf(query))
-          if (!this.options.length) this.noDataContent = 'no result found'
           this.loading = false
         }, 1000)
       }
