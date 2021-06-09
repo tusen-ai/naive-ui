@@ -9,6 +9,7 @@
 - `n-slider` add `format-tooltip` prop.
 - `n-upload` add `event` in `on-finish` callback params.
 - `n-rate` add `readonly` prop.
+- `n-time-picker` add `seconds`, `minutes`, `hours` props.
 
 ### Fixes
 
@@ -304,7 +305,8 @@
 - Fix `n-dropdown` mouse cursor is not pointer.
 
 ### Feats
-- `n-time-picker` add `seconds` ,`minutes` ,`hours` prop.
+
+- `n-card` add `:target` style
 
 ## 2.11.4
 

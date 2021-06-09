@@ -97,25 +97,23 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(timePickerInjectionKey)!
 
-    function getSet (
+    function getTimeUnits (
       defaultValue: string[],
       stepOrList: MaybeArray<number> | undefined
     ): string[] {
-      let result: string[]
       if (Array.isArray(stepOrList)) {
-        result = stepOrList.map((v) => Math.floor(v)).map((v) => getFixValue(v))
+        return stepOrList.map((v) => Math.floor(v)).map((v) => getFixValue(v))
       } else if (typeof stepOrList === 'number') {
-        result = defaultValue.filter((hour) => Number(hour) % stepOrList === 0)
+        return defaultValue.filter((hour) => Number(hour) % stepOrList === 0)
       } else {
-        result = defaultValue
+        return defaultValue
       }
-      return result
     }
 
     const hoursRef = computed<Item[]>(() => {
       const { isHourDisabled, hours } = props
 
-      return getSet(time.hours, hours).map((hour) => {
+      return getTimeUnits(time.hours, hours).map((hour) => {
         return {
           value: hour,
           disabled: isHourDisabled ? isHourDisabled(Number(hour)) : false
@@ -125,7 +123,7 @@ export default defineComponent({
     const minutesRef = computed<Item[]>(() => {
       const { isMinuteDisabled, minutes } = props
 
-      return getSet(time.minutes, minutes).map((minute) => {
+      return getTimeUnits(time.minutes, minutes).map((minute) => {
         return {
           value: minute,
           disabled: isMinuteDisabled
@@ -137,7 +135,7 @@ export default defineComponent({
     const secondsRef = computed<Item[]>(() => {
       const { isSecondDisabled, seconds } = props
 
-      return getSet(time.seconds, seconds).map((second) => {
+      return getTimeUnits(time.seconds, seconds).map((second) => {
         return {
           value: second,
           disabled: isSecondDisabled

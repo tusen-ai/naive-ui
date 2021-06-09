@@ -10,6 +10,7 @@
 - `n-upload` 在 `on-finish` 回调参数中新增 `event`
 - `n-slider` 新增 `format-tooltip` 属性
 - `n-rate` 新增 `readonly` 属性
+- `n-time-picker` 新增 `seconds`、`minutes`、`hours`属性
 
 ### Fixes
 
@@ -305,7 +306,8 @@
 - 修复 `n-dropdown` 选项鼠标形状不是 pointer
 
 ### Feats
-- `n-time-picker` 新增 `seconds` ，`minutes` ，`hours`属性
+
+- `n-card` 增加 `:target` 的样式
 
 ## 2.11.4
 

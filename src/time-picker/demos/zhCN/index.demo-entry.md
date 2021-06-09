@@ -20,9 +20,9 @@ format
 | default-value | `number \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
 | format | `string` | `'HH:mm:ss'` |  |
-| hours | `number \| number[]` | `undefined` |  |
-| minutes | `number \| number[]` | `undefined` |  |
-| seconds | `number \| number[]` | `undefined` |  |
+| hours | `number \| number[]` | `undefined` | 通过数组指定显示的小时。当值为 number 时，将被当做时间步进处理。 |
+| minutes | `number \| number[]` | `undefined` | 通过数组指定显示的分钟。当值为 number 时，将被当做时间步进处理。 |
+| seconds | `number \| number[]` | `undefined` | 通过数组指定显示的秒。当值为 number 时，将被当做时间步进处理。 |
 | is-hour-disabled | `(hour: number) => boolean` | `() => false` |  |
 | is-minute-disabled | `(minute: number, hour: number) => boolean` | `() => false` |  |
 | is-second-disabled | `(second: number, minute: number, hour: number) => boolean` | `() => false` |  |
