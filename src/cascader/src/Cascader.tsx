@@ -62,31 +62,16 @@ const cascaderProps = {
     default: null
   },
   placeholder: String,
-  multiple: {
-    type: Boolean,
-    default: false
-  },
+  multiple: Boolean,
   size: String as PropType<'small' | 'medium' | 'large'>,
-  filterable: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  filterable: Boolean,
+  disabled: Boolean,
   expandTrigger: {
     type: String as PropType<ExpandTrigger>,
     default: 'click'
   },
-  clearable: {
-    type: Boolean,
-    default: false
-  },
-  remote: {
-    type: Boolean,
-    default: false
-  },
+  clearable: Boolean,
+  remote: Boolean,
   onLoad: Function as PropType<OnLoad>,
   separator: {
     type: String,
@@ -101,10 +86,7 @@ const cascaderProps = {
     type: Boolean,
     default: true
   },
-  leafOnly: {
-    type: Boolean,
-    default: false
-  },
+  leafOnly: Boolean,
   showPath: {
     type: Boolean,
     default: true

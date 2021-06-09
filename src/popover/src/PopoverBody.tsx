@@ -146,11 +146,13 @@ export default defineComponent({
       NPopover.setBodyInstance(null)
     })
     watch(toRef(props, 'show'), (value) => {
-      if (value) followerEnabledRef.value = true
-      else {
-        if (!props.animated) {
-          followerEnabledRef.value = false
-        }
+      // If no animation, no transition component will be applied to the
+      // component. So we need to trigger follower manaully.
+      if (props.animated) return
+      if (value) {
+        followerEnabledRef.value = true
+      } else {
+        followerEnabledRef.value = false
       }
     })
     function syncPosition (): void {
@@ -271,6 +273,11 @@ export default defineComponent({
               {
                 name: 'popover-transition',
                 appear: this.NPopover.isMountedRef.value,
+                // Don't use watch to enable follower, since the transition may
+                // make position sync timing very subtle and buggy.
+                onEnter: () => {
+                  this.followerEnabled = true
+                },
                 onAfterLeave: () => {
                   this.followerEnabled = false
                 }

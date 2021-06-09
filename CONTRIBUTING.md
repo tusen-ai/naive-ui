@@ -8,6 +8,7 @@
 ```bash
 # open the dev server, please note that hot module reload doesn't work well
 # if you find anything doesn't work, just refresh the page
+# if you can't open the page at first time, try to do some refresh
 npm run dev
 
 # testing
@@ -39,6 +40,7 @@ npm run lint
 ```bash
 # 开启开发服务器，注意热更新不是很好用
 # 如果你觉得哪里有问题，刷新页面即可
+# 第一次运行打不开时，你可以试试刷新几次浏览器
 npm run dev
 
 # 测试

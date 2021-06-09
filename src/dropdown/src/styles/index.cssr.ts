@@ -29,7 +29,7 @@ export default cB('dropdown-menu', `
   background-color: var(--color);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  transition: 
+  transition:
     background-color .3s var(--bezier),
     box-shadow .3s var(--bezier);
 `, [
@@ -39,7 +39,7 @@ export default cB('dropdown-menu', `
   }, [
     cB('dropdown-option-body', `
       display: flex;
-      cursor: default;
+      cursor: pointer;
       height: var(--option-height);
       line-height: var(--option-height);
       font-size: var(--font-size);

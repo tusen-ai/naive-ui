@@ -83,6 +83,7 @@ export default defineComponent({
           self: {
             color,
             colorModal,
+            colorTarget,
             textColor,
             titleTextColor,
             titleFontWeight,
@@ -113,6 +114,7 @@ export default defineComponent({
           '--color': color,
           '--color-modal': colorModal,
           '--color-popover': colorPopover,
+          '--color-target': colorTarget,
           '--text-color': textColor,
           '--line-height': lineHeight,
           '--action-color': actionColor,
