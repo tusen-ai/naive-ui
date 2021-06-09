@@ -80,12 +80,12 @@ export default defineComponent({
     })
     const showSubmenuRef = computed(() => {
       if (!hasSubmenuRef.value) return false
+      const { key, disabled } = props.tmNode
+      if (disabled) return false
       const { value: hoverKey } = hoverKeyRef
       const { value: keyboardKey } = keyboardKeyRef
       const { value: lastToggledSubmenuKey } = lastToggledSubmenuKeyRef
       const { value: pendingKeyPath } = pendingKeyPathRef
-      const { key, disabled } = props.tmNode
-      if (disabled) return false
       if (hoverKey !== null) return pendingKeyPath.includes(key)
       if (keyboardKey !== null) {
         return (

@@ -307,6 +307,7 @@ export default defineComponent({
           dividerColor,
           borderRadius,
           boxShadow,
+          optionOpacityDisabled,
           [createKey('optionIconSuffixWidth', size)]: optionIconSuffixWidth,
           [createKey('optionSuffixWidth', size)]: optionSuffixWidth,
           [createKey('optionIconPrefixWidth', size)]: optionIconPrefixWidth,
@@ -327,7 +328,8 @@ export default defineComponent({
           '--option-suffix-width': optionSuffixWidth,
           '--option-icon-suffix-width': optionIconSuffixWidth,
           '--option-icon-size': optionIconSize,
-          '--divider-color': dividerColor
+          '--divider-color': dividerColor,
+          '--option-opacity-disabled': optionOpacityDisabled
         }
         // writing like this is the fastest method
         if (inverted) {
