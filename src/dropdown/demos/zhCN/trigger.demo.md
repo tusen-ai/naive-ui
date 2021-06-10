@@ -30,7 +30,8 @@ export default defineComponent({
       options: [
         {
           label: '滨海湾金沙，新加坡',
-          key: 'marina bay sands'
+          key: 'marina bay sands',
+          disabled: true
         },
         {
           label: '布朗酒店，伦敦',

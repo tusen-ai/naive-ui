@@ -23,7 +23,8 @@ export const self = (vars: ThemeCommonVars) => {
     heightMedium,
     heightLarge,
     heightHuge,
-    textColor3
+    textColor3,
+    opacityDisabled
   } = vars
   return {
     ...commonVariables,
@@ -60,7 +61,8 @@ export const self = (vars: ThemeCommonVars) => {
     prefixColorInverted: '#BBB',
     optionColorHoverInverted: primaryColor,
     optionColorActiveInverted: primaryColor,
-    groupHeaderTextColorInverted: '#AAA'
+    groupHeaderTextColorInverted: '#AAA',
+    optionOpacityDisabled: opacityDisabled
   }
 }
 

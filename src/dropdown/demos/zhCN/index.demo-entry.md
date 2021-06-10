@@ -29,11 +29,12 @@ group-debug
 
 ### DropdownOption Type
 
-| 属性  | 类型               | 说明     |
-| ----- | ------------------ | -------- |
-| icon? | `() => VNodeChild` |          |
-| key   | `string \| number` | 需要唯一 |
-| label | `string`           |          |
+| 属性     | 类型               | 说明     |
+| -------- | ------------------ | -------- |
+| icon?    | `() => VNodeChild` |          |
+| key      | `string \| number` | 需要唯一 |
+| label    | `string`           |          |
+| disabled | `boolean`          |          |
 
 ### DropdownDivider Type
 
@@ -51,6 +52,7 @@ group-debug
 | icon? | `() => VNodeChild` |  |
 | key | `string \| number` | 需要唯一 |
 | children | `Array<DropdownOption \| DropdownDivider \| DropdownGroup \| DropdownSubmenu>` |  |
+| disabled | `boolean` |  |
 
 ### DropdownGroup Type
 
