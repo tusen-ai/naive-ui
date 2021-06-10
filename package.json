@@ -23,7 +23,8 @@
     "test:watch": "cross-env NODE_ENV=test jest ---watch --verbose --coverage",
     "gen-version": "node scripts/gen-version",
     "post-changelog": "node scripts/post-changelog",
-    "build:site:ts": "./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh"
+    "build:site:ts": "./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
+    "prepare": "husky install"
   },
   "author": "07akioni",
   "license": "MIT",
@@ -96,7 +97,7 @@
     "eslint-plugin-vue": "^7.6.0",
     "express": "^4.17.1",
     "fs-extra": "^10.0.0",
-    "husky": "^4.3.5",
+    "husky": "^6.0.0",
     "inquirer": "^6.5.2",
     "jest": "^27.0.4",
     "lint-staged": "^11.0.0",
@@ -125,11 +126,6 @@
     "vue": "^3.0.10",
     "vue-router": "^4.0.5",
     "vueuc": "^0.4.7"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "sideEffects": false,
   "homepage": "https://www.naiveui.com",
