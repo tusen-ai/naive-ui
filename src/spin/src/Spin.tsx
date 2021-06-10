@@ -7,6 +7,7 @@ import {
   CSSProperties
 } from 'vue'
 import { useCompitable } from 'vooks'
+import { pxfy } from 'seemly'
 import { NBaseLoading } from '../../_internal'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -16,9 +17,9 @@ import type { SpinTheme } from '../styles'
 import style from './styles/index.cssr'
 
 const STROKE_WIDTH = {
-  small: 22,
-  medium: 20,
-  large: 18
+  small: 20,
+  medium: 18,
+  large: 16
 }
 
 const spinProps = {
@@ -28,7 +29,7 @@ const spinProps = {
     default: undefined
   },
   size: {
-    type: [String, Number] as PropType<'small' | 'medium' | 'large'>,
+    type: [String, Number] as PropType<'small' | 'medium' | 'large' | number>,
     default: 'medium'
   },
   show: {
@@ -71,14 +72,19 @@ export default defineComponent({
         const { strokeWidth } = props
         if (strokeWidth !== undefined) return strokeWidth
         const { size } = props
-        return STROKE_WIDTH[size]
+        return STROKE_WIDTH[typeof size === 'number' ? 'medium' : size]
       }),
       cssVars: computed(() => {
         const { size: spinSize } = props
         const {
           common: { cubicBezierEaseInOut },
-          self: { opacitySpinning, color, [createKey('size', spinSize)]: size }
+          self
         } = themeRef.value
+        const { opacitySpinning, color } = self
+        const size =
+          typeof spinSize === 'number'
+            ? pxfy(spinSize)
+            : self[createKey('size', spinSize)]
         return {
           '--bezier': cubicBezierEaseInOut,
           '--opacity-spinning': opacitySpinning,
