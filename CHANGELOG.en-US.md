@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-spin` animation shifts.
+
 ## 2.11.5 (2021-06-10)
 
 ### Feats

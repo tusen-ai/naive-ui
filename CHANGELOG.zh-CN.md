@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修正 `n-spin` 动画闪烁
+
 ## 2.11.5 (2021-06-10)
 
 ### Feats
