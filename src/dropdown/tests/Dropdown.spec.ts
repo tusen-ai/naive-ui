@@ -11,9 +11,7 @@ describe('n-dropdown', () => {
   })
 
   it('dropdown disabled', async () => {
-    const onSelect = (key: any): void => {
-      expect(key).toEqual(undefined)
-    }
+    const onSelect = jest.fn()
 
     const options = [
       {
@@ -46,6 +44,8 @@ describe('n-dropdown', () => {
     expect(disabledMenu).not.toEqual(null)
 
     await disabledMenu.click()
+
+    expect(onSelect).not.toHaveBeenCalledWith()
 
     wrapper.unmount()
   })
