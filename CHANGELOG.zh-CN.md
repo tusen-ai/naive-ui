@@ -6,6 +6,7 @@
 
 - `n-dropdown` 新增 `disabled` 属性
 - `n-card` 增加 `:target` 的样式
+- `n-input-number` 新增 `show-button` 属性
 
 ### Fixes
 

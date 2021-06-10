@@ -12,6 +12,7 @@ min-max
 size
 step
 validator
+show-button
 ```
 
 ## Props
@@ -19,6 +20,7 @@ validator
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | bordered | `boolean` | `true` |  |
+| show-button | `boolean` | `true` |  |
 | default-value | `number \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
 | max | `number` | `undefined` |  |

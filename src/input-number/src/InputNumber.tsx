@@ -45,6 +45,10 @@ const inputNumberProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  showButton: {
+    type: Boolean,
+    default: true
+  },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<(value: number) => void>
@@ -362,44 +366,47 @@ export default defineComponent({
           onMousedown={this.handleMouseDown}
         >
           {{
-            suffix: () => [
-              <NButton
-                text
-                disabled={!this.minusable || this.disabled}
-                focusable={false}
-                builtinThemeOverrides={this.buttonThemeOverrides}
-                onClick={this.handleMinusClick}
-                ref="minusButtonInstRef"
-              >
-                {{
-                  default: () => (
-                    <NBaseIcon clsPrefix={mergedClsPrefix}>
-                      {{
-                        default: () => <RemoveIcon />
-                      }}
-                    </NBaseIcon>
-                  )
-                }}
-              </NButton>,
-              <NButton
-                text
-                disabled={!this.addable || this.disabled}
-                focusable={false}
-                builtinThemeOverrides={this.buttonThemeOverrides}
-                onClick={this.handleAddClick}
-                ref="addButtonInstRef"
-              >
-                {{
-                  default: () => (
-                    <NBaseIcon clsPrefix={mergedClsPrefix}>
-                      {{
-                        default: () => <AddIcon />
-                      }}
-                    </NBaseIcon>
-                  )
-                }}
-              </NButton>
-            ]
+            suffix: () =>
+              this.showButton
+                ? [
+                  <NButton
+                    text
+                    disabled={!this.minusable || this.disabled}
+                    focusable={false}
+                    builtinThemeOverrides={this.buttonThemeOverrides}
+                    onClick={this.handleMinusClick}
+                    ref="minusButtonInstRef"
+                  >
+                    {{
+                      default: () => (
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
+                          {{
+                            default: () => <RemoveIcon />
+                          }}
+                        </NBaseIcon>
+                      )
+                    }}
+                  </NButton>,
+                  <NButton
+                    text
+                    disabled={!this.addable || this.disabled}
+                    focusable={false}
+                    builtinThemeOverrides={this.buttonThemeOverrides}
+                    onClick={this.handleAddClick}
+                    ref="addButtonInstRef"
+                  >
+                    {{
+                      default: () => (
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
+                          {{
+                            default: () => <AddIcon />
+                          }}
+                        </NBaseIcon>
+                      )
+                    }}
+                  </NButton>
+                ]
+                : null
           }}
         </NInput>
       </div>
