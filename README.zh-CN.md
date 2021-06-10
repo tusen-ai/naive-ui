@@ -35,7 +35,7 @@ Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔�
 
 ### 不算太慢
 
-我尽力让它不要太慢。至少 select、tree、transfer、table、cascader 都可以用虚拟列表。
+我尽力让它不要太慢，事实上它跑得比香港记者还快。至少 select、tree、transfer、table、cascader 都可以用虚拟列表。
 
 顺便一提，...，没有顺便了。祝你使用愉快。
 
