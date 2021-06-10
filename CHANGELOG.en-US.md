@@ -9,10 +9,6 @@
 - Fix `n-message` API option is not optional.
 - Fix `n-calendar` date calculate incorrectly
 
-### Feats
-
-- `n-card` add `:target` style
-
 ## 2.11.4
 
 ### Feats

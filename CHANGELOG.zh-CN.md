@@ -9,10 +9,6 @@
 - 修复 `n-message` API 的 option 不是可选的
 - 修复 `n-calendar` 展示日期计算错误的问题
 
-### Feats
-
-- `n-card` 增加 `:target` 的样式
-
 ## 2.11.4
 
 ### Feats
