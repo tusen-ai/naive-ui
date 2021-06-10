@@ -7,6 +7,11 @@
 - Fix `n-popover` sometimes won't sync position in manual mode.
 - Fix `n-transfer`'s empty icon is no toggling transition.
 - Fix `n-message` API option is not optional.
+- Fix `n-calendar` date calculate incorrectly
+
+### Feats
+
+- `n-card` add `:target` style
 
 ## 2.11.4
 
