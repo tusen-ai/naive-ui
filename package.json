@@ -20,6 +20,7 @@
     "format:md": "prettier --write --parser markdown --prose-wrap never \"(src|demo)/**/*.md\"",
     "test": "cross-env NODE_ENV=test jest --collectCoverage=false",
     "test:cov": "cross-env NODE_ENV=test jest",
+    "test:watch": "cross-env NODE_ENV=test jest ---watch --verbose --coverage",
     "gen-version": "node scripts/gen-version",
     "build:site:ts": "./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh"
   },
