@@ -8,6 +8,7 @@
 - Fix `n-transfer`'s empty icon is no toggling transition.
 - Fix `n-message` API option is not optional.
 - Fix `n-calendar` date calculate incorrectly
+- Fix `n-input` missing the `password` type declaration.
 
 ## 2.11.4
 
