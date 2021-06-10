@@ -8,7 +8,7 @@ export interface MenuOptionBase {
   disabled?: boolean
   icon?: () => VNodeChild
   children?: Array<MenuOption | MenuGroupOption>
-  extra?: string
+  extra?: string | (() => VNodeChild)
   [key: string]: unknown
   /** @deprecated */
   titleExtra?: string | (() => VNodeChild)
