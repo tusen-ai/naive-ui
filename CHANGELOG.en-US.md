@@ -8,6 +8,7 @@
 - Fix `n-transfer`'s empty icon is no toggling transition.
 - Fix `n-message` API option is not optional.
 - Fix `n-input` missing the `password` type declaration.
+- Fix `n-menu` the type definition of `extra` property of menu and submenu.
 
 ## 2.11.4
 
