@@ -9,15 +9,7 @@ import {
   toRef,
   renderSlot
 } from 'vue'
-import {
-  getDate,
-  format,
-  getYear,
-  addMonths,
-  startOfDay,
-  startOfMonth,
-  getMonth
-} from 'date-fns'
+import { format, getYear, addMonths, startOfDay, startOfMonth } from 'date-fns'
 import { useMergedState } from 'vooks'
 import { dateArray } from '../../date-picker/src/utils'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
@@ -187,7 +179,6 @@ export default defineComponent({
     } = this
     const normalizedValue = mergedValue && startOfDay(mergedValue).valueOf()
     const localeMonth = format(monthTs, 'MMMM', { locale })
-    const month = getMonth(monthTs)
     const year = getYear(monthTs)
     const title = monthBeforeYear
       ? `${localeMonth} ${year}`
@@ -254,10 +245,10 @@ export default defineComponent({
         </div>
         <div class={`${mergedClsPrefix}-calendar-dates`}>
           {this.dateItems.map(
-            ({ ts, inCurrentMonth, isCurrentDate }, index) => {
+            ({ dateObject, ts, inCurrentMonth, isCurrentDate }, index) => {
+              const { year, month, date } = dateObject
               const disabled = !inCurrentMonth || isDateDisabled?.(ts) === true
               const selected = normalizedValue === startOfDay(ts).valueOf()
-              const date = getDate(ts)
               return (
                 <div
                   key={isCurrentDate ? 'current' : index}
@@ -271,7 +262,7 @@ export default defineComponent({
                   onClick={() => {
                     this.doUpdateValue(ts, {
                       year,
-                      month,
+                      month: month + 1,
                       date
                     })
                     this.monthTs = startOfMonth(ts).valueOf()
@@ -303,8 +294,8 @@ export default defineComponent({
                   </div>
                   {renderSlot(this.$slots, 'default', {
                     year,
-                    month,
-                    date
+                    month: month + 1,
+                    date: date
                   })}
                   <div
                     class={`${mergedClsPrefix}-calendar-cell__bar`}
