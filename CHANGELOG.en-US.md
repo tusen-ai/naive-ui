@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.11.5 (2021-06-10)
 
 ### Feats
 
@@ -15,6 +15,7 @@
 - Fix `n-calendar` date calculate incorrectly
 - Fix `n-input` missing the `password` type declaration.
 - Fix `n-menu` the type definition of `extra` property of menu and submenu.
+- Fix `n-dropdown` mouse cursor is not pointer.
 
 ## 2.11.4
 

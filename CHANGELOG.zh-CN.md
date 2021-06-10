@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.11.5 (2021-06-10)
 
 ### Feats
 
@@ -15,6 +15,7 @@
 - 修复 `n-calendar` 展示日期计算错误
 - 修复 `n-input` 缺失 `password` 的声明
 - 修复 `n-menu` 的菜单和子菜单的 `extra` 属性的类型定义
+- 修复 `n-dropdown` 选项鼠标形状不是 pointer
 
 ## 2.11.4
 
