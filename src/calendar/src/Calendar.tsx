@@ -295,7 +295,7 @@ export default defineComponent({
                   {renderSlot(this.$slots, 'default', {
                     year,
                     month: month + 1,
-                    date: date
+                    date
                   })}
                   <div
                     class={`${mergedClsPrefix}-calendar-cell__bar`}
