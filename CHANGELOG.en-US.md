@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-spin`'s `size` prop support number.
+
 ## 2.11.5 (2021-06-10)
 
 ### Feats

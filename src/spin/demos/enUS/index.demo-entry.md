@@ -13,10 +13,10 @@ wrap
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| show | `boolean` | `true` | If spin is active |
-| stroke-width | `number` | `undefined` | Relative width of spin's stroke, you can assume the outer radius of spin is 100 |
-| stroke | `string` | `undefined` | Color of spin |
+| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` |  |
+| show | `boolean` | `true` | If spin is active. |
+| stroke-width | `number` | `undefined` | Relative width of spin's stroke, you can assume the outer radius of spin is 100. |
+| stroke | `string` | `undefined` | Color of the spin. |
 
 ## Slots
 

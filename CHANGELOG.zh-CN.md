@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-spin` 的 `size` 属性支持 number 类型
+
 ## 2.11.5 (2021-06-10)
 
 ### Feats
