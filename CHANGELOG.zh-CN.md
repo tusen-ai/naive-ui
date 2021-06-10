@@ -25,7 +25,6 @@
 - 修正 `n-tab-pane` `display-directive` 不生效
 - 修正 `n-drawer` 动画
 - 修正 `n-scrollbar` 在 windows chrome 有重叠轨道
-- 修正 `n-popover` 的 `props` 中 `x` 和 `y` 的描述
 
 ## 2.11.3
 
