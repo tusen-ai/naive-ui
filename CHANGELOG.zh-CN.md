@@ -2,6 +2,11 @@
 
 ## Pending
 
+### Feats
+
+- `n-dropdown` 新增 `disabled` 属性
+- `n-card` 增加 `:target` 的样式
+
 ### Fixes
 
 - 修复 `n-popover` 有时在手动模式不会同步位置
@@ -393,7 +398,7 @@
 - `n-layout-sider` 新增 `default-collapsed` 属性
 - `n-modal` 支持自定义位置
 
-### Fixed
+### Fixes
 
 - 修正 `n-menu` 垂直折叠时 `n-menu-item` tooltip 不显示的问题
 - 修正 `n-menu` `collapsed-icon-size` 不生效的问题

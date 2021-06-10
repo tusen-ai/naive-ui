@@ -2,6 +2,11 @@
 
 ## Pending
 
+### Feats
+
+- `n-dropdown` add `disabled` prop
+- `n-card` add `:target` style
+
 ### Fixes
 
 - Fix `n-popover` sometimes won't sync position in manual mode.

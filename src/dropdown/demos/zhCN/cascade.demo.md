@@ -30,7 +30,8 @@ const options = [
         default: () => h(CashIcon)
       })
     },
-    key: 'daisy buchanan'
+    key: 'daisy buchanan',
+    disabled: true
   },
   {
     type: 'divider',
@@ -55,6 +56,7 @@ const options = [
       {
         label: '其他',
         key: 'others2',
+        disabled: true,
         children: [
           {
             label: '鸡肉',

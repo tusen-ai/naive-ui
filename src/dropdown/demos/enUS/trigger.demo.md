@@ -30,7 +30,8 @@ export default defineComponent({
       options: [
         {
           label: 'Marina Bay Sands',
-          key: 'Marina Bay Sands'
+          key: 'Marina Bay Sands',
+          disabled: true
         },
         {
           label: "Brown's Hotel, London",
