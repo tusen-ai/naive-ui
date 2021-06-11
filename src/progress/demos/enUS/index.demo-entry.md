@@ -28,7 +28,6 @@ processing
 | indicator-text-color | `string` | `undefined` |  |
 | percentage | `number \| Array<number>` | `0` |  |
 | processing | `boolean` | `false` |  |
-| processing | `boolean` | `false` |  |
 | rail-color | `string \| string[]` | `undefined` |  |
 | rail-style | `string \| CSS \| Array<string \| CSS>` | `undefined` |  |
 | show-indicator | `boolean` | `true` |  |

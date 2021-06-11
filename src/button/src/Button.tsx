@@ -437,7 +437,7 @@ const Button = defineComponent({
                             clsPrefix={mergedClsPrefix}
                             key="loading"
                             class={`${mergedClsPrefix}-icon-slot`}
-                            strokeWidth={24}
+                            strokeWidth={20}
                           />
                         ) : (
                           <div

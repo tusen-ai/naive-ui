@@ -35,22 +35,19 @@ export type MenuGroupOption =
 
 export type TmNode = TreeNode<MenuOption, MenuGroupOption>
 
-export type OnUpdateValue = <T extends string & number & (string | number)>(
-  value: T,
+export type OnUpdateValue = (
+  value: string & number & (string | number),
   item: MenuOption
-) => void
-export type OnUpdateKeys = <
-  T extends string[] & number[] & Array<string | number>
->(
-  keys: T
 ) => void
 
-export type OnUpdateValueImpl = <T extends string | number | (string | number)>(
-  value: T,
+export type OnUpdateKeys = (
+  keys: string[] & number[] & Array<string | number>
+) => void
+
+export type OnUpdateValueImpl = (
+  value: string | number | (string | number),
   item: MenuOption
 ) => void
-export type OnUpdateKeysImpl = <
-  T extends string[] | number[] | Array<string | number>
->(
-  keys: T
+export type OnUpdateKeysImpl = (
+  keys: string[] | number[] | Array<string | number>
 ) => void

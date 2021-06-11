@@ -7,6 +7,15 @@
 - `n-spin` 的 `size` 属性支持 number 类型
 - `n-date-picker` 支持 `footer` 插槽
 
+### Fixes
+
+- 修正 `n-slider` 不支持触摸事件
+- 修正 `n-button` 在 head 内部的 script 被引入造成崩溃 [#68](https://github.com/TuSimple/naive-ui/pull/68)
+- 修正 `n-spin` 动画闪烁
+- 修正 `n-menu` 缺少 `on-update-value` 和 `on-update-expanded-keys` 属性
+- 修正 `n-popconfirm` icon slot 不生效
+- 修正 `n-tabs` 在控制台输出无用信息
+
 ## 2.11.5 (2021-06-10)
 
 ### Feats
