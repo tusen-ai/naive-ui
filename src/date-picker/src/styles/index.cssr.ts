@@ -337,7 +337,6 @@ export default c([
       background-color: var(--calendar-divider-color);
     `),
     cB('date-panel-footer', {
-      lineHeight: '38px',
       borderTop: '1px solid var(--panel-action-divider-color)',
       padding: 'var(--panel-extra-footer-padding)'
     }),
