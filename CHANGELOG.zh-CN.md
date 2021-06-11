@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Fix crash when load app contains `n-button` in head tag #68
+- 修正 `n-button` 在 head 内部的 script 被引入造成崩溃 [#68](https://github.com/TuSimple/naive-ui/pull/68)
 - 修正 `n-spin` 动画闪烁
 
 ## 2.11.5 (2021-06-10)
