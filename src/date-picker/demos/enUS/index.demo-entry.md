@@ -85,6 +85,6 @@ footerslot
 
 ## Slots
 
-| 名称   | 参数 | 说明             |
-| ------ | ---- | ---------------- |
-| footer | `()` | add Extra Footer |
+| 名称   | 参数 | 说明          |
+| ------ | ---- | ------------- |
+| footer | `()` | Extra Footer. |

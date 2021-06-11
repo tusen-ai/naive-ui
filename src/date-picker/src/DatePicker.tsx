@@ -464,10 +464,8 @@ export default defineComponent({
       isDateDisabledRef: toRef(props, 'isDateDisabled'),
       rangesRef: toRef(props, 'ranges'),
       ...uniVaidation,
-      ...dualValidation
-    })
-    provide('datePickerSlot', {
-      ...slots
+      ...dualValidation,
+      datePickerSlots: slots
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,

@@ -1,31 +1,18 @@
-# 额外的页脚
+# 额外内容
 
 ```html
 <n-space vertical>
-  <n-date-picker v-model:value="date" type="date">
+  <n-date-picker type="date">
     <template #footer> extra footer </template>
   </n-date-picker>
-  <n-date-picker v-model:value="datetime" type="datetime">
+  <n-date-picker type="datetime">
     <template #footer> extra footer </template>
   </n-date-picker>
-  <n-date-picker v-model:value="daterange" type="daterange">
+  <n-date-picker type="daterange">
     <template #footer> extra footer </template>
   </n-date-picker>
-  <n-date-picker v-model:value="datetimerange" type="datetimerange">
+  <n-date-picker type="datetimerange">
     <template #footer> extra footer </template>
   </n-date-picker>
 </n-space>
-```
-
-```js
-export default {
-  data () {
-    return {
-      datetime: null,
-      date: null,
-      datetimerange: null,
-      daterange: null
-    }
-  }
-}
 ```

@@ -96,12 +96,14 @@ export default c([
     cM('date', {
       gridTemplateAreas: `
         "left-calendar"
+        "footer"
         "action"
       `
     }),
     cM('daterange', {
       gridTemplateAreas: `
         "left-calendar divider right-calendar"
+        "footer footer footer"
         "action action action"
       `
     }),
@@ -109,6 +111,7 @@ export default c([
       gridTemplateAreas: `
         "header"
         "left-calendar"
+        "footer"
         "action"
       `
     }),
@@ -116,8 +119,15 @@ export default c([
       gridTemplateAreas: `
         "header header header"
         "left-calendar divider right-calendar"
+        "footer footer footer"
         "action action action"
       `
+    }),
+    cB('date-panel-footer', {
+      gridArea: 'footer'
+    }),
+    cB('date-panel-actions', {
+      gridArea: 'action'
     }),
     cB('date-panel-header', {
       gridArea: 'header'
@@ -328,9 +338,6 @@ export default c([
     `),
     cB('date-panel-footer', {
       lineHeight: '38px',
-      gridArea: 'action'
-    }),
-    cB('date-panel-extra-footer', {
       borderTop: '1px solid var(--panel-action-divider-color)',
       padding: 'var(--panel-extra-footer-padding)'
     }),
