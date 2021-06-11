@@ -51,6 +51,7 @@
 
 - `n-dropdown` add `disabled` prop
 - `n-card` add `:target` style
+- `n-input-number` add `show-button` prop
 
 ### Fixes
 

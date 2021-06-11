@@ -8,12 +8,14 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: 0,
-      disabled: true
+      value: ref(0),
+      disabled: ref(true)
     }
   }
-}
+})
 ```
