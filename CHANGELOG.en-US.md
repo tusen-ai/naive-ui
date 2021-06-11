@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- Fix `n-button` causes crash when it's imported in script inside head tag. [#68](https://github.com/TuSimple/naive-ui/pull/68)
 - Fix `n-spin` animation shifts.
 
 ## 2.11.5 (2021-06-10)
