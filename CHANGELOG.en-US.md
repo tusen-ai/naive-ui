@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-spin`'s `size` prop support number.
+- `n-date-picker` add `footer` slot
 
 ## 2.11.5 (2021-06-10)
 
