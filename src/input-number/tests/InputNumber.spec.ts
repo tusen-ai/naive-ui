@@ -9,7 +9,7 @@ describe('n-input-number', () => {
 })
 
 describe('n-input-number', () => {
-  it('should work with components `show-button` props', async () => {
+  it('should work with `show-button` props', async () => {
     const wrapper = mount(NInputNumber)
     expect(wrapper.findComponent(NButton).exists()).toBe(true)
 
