@@ -8,6 +8,7 @@
 - 修正 `n-spin` 动画闪烁
 - 修正 `n-menu` 缺少 `on-update-value` 和 `on-update-expanded-keys` 属性
 - 修正 `n-popconfirm` icon slot 不生效
+- 修正 `n-tabs` 在控制台输出无用信息
 
 ## 2.11.5 (2021-06-10)
 

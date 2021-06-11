@@ -8,6 +8,7 @@
 - Fix `n-spin` animation shifts.
 - Fix `n-menu` lack `on-update-value` and `on-update-expanded-keys` props.
 - Fix `n-popconfirm` icon slot not working.
+- Fix `n-tabs` logs useless info.
 
 ## 2.11.5 (2021-06-10)
 
