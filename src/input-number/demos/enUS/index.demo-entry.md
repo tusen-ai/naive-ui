@@ -19,17 +19,17 @@ show-button
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| bordered | `boolean` | `true` |  |
-| show-button | `boolean` | `true` |  |
-| default-value | `number \| null` | `null` |  |
-| disabled | `boolean` | `false` |  |
-| max | `number` | `undefined` |  |
-| min | `number` | `undefined` |  |
+| bordered | `boolean` | `true` | Whether to show border. |
+| default-value | `number \| null` | `null` | Default value in uncontrolled mode. |
+| disabled | `boolean` | `false` | Whether to disable the input. |
+| max | `number` | `undefined` | The max value. |
+| min | `number` | `undefined` | The min value. |
 | placeholder | `string` | `'Please Input'` |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| step | `number` | `1` |  |
-| validator | `(value) => boolean` | `undefined` |  |
-| value | `number` | `undefined` |  |
-| on-blur | `(event: FocusEvent) => void` | `undefined` |  |
-| on-focus | `(event: FocusEvent) => void` | `undefined` |  |
-| on-update:value | `(value: number) => void` | `undefined` |  |
+| show-button | `boolean` | `true` | Whether to show buttons. |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of input box. |
+| step | `number` | `1` | The number to which the current value is increased or decreased. It can be an integer or decimal. |
+| validator | `(value) => boolean` | `undefined` | Set up custom validation. |
+| value | `number` | `undefined` | Value in controlled mode. |
+| on-blur | `(event: FocusEvent) => void` | `undefined` | Callback when remove focus. |
+| on-focus | `(event: FocusEvent) => void` | `undefined` | Callback when get focus. |
+| on-update:value | `(value: number) => void` | `undefined` | Callback when component value changes. |
