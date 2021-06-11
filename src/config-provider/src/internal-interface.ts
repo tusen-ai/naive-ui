@@ -1,4 +1,5 @@
 import { VNodeChild, Ref } from 'vue'
+import { CNode } from 'css-render'
 import type { AlertTheme } from '../../alert/styles'
 import type { AnchorTheme } from '../../anchor/styles'
 import type { AutoCompleteTheme } from '../../auto-complete/styles'
@@ -200,6 +201,16 @@ export interface GlobalIconConfig {
   zoomOut?: () => VNodeChild
 }
 
+export interface RtlItem {
+  name: keyof GlobalThemeWithoutCommon
+  style: CNode
+}
+export type RtlProp = RtlItem[]
+
+export type RtlEnabledState = Partial<
+Record<keyof GlobalThemeWithoutCommon, RtlItem>
+>
+
 export interface ConfigProviderInjection {
   mergedClsPrefixRef: Ref<string | undefined>
   mergedBorderedRef: Ref<boolean | undefined>
@@ -211,6 +222,7 @@ export interface ConfigProviderInjection {
   mergedIconsRef: Ref<GlobalIconConfig | undefined>
   mergedThemeRef: Ref<GlobalTheme | undefined>
   mergedThemeOverridesRef: Ref<GlobalThemeOverrides | undefined>
+  mergedRtlRef: Ref<RtlEnabledState | undefined>
   // deprecated
   /** @deprecated */
   mergedLegacyThemeRef: Ref<string | undefined>
