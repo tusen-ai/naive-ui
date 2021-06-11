@@ -8,6 +8,7 @@ Compared with real world, its space is discrete.
 basic
 alpha
 size
+modes
 form
 ```
 

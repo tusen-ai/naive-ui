@@ -120,7 +120,6 @@ export default c([
       flex-basis: 0;
     `),
     cE('mode', `
-      cursor: pointer;
       width: 72px;
       text-align: center;
     `)
