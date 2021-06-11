@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- Fix crash when load app contains `n-button` in head tag #68
 - Fix `n-spin` animation shifts.
 
 ## 2.11.5 (2021-06-10)

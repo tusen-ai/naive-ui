@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- Fix crash when load app contains `n-button` in head tag #68
 - 修正 `n-spin` 动画闪烁
 
 ## 2.11.5 (2021-06-10)
