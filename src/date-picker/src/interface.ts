@@ -1,4 +1,4 @@
-import { InjectionKey, Ref } from 'vue'
+import { InjectionKey, Ref, Slots } from 'vue'
 import { NLocale, NDateLocale } from '../../locales'
 import {
   IsHourDisabled,
@@ -45,6 +45,7 @@ export type DatePickerInjection = {
   dateLocaleRef: Ref<NDateLocale>
   isDateDisabledRef: Ref<IsDateDisabled | undefined>
   rangesRef: Ref<Record<string, [number, number]> | undefined>
+  datePickerSlots: Slots
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 

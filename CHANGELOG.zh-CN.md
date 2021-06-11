@@ -2,6 +2,11 @@
 
 ## Pending
 
+### Feats
+
+- `n-spin` 的 `size` 属性支持 number 类型
+- `n-date-picker` 支持 `footer` 插槽
+
 ### Fixes
 
 - 修正 `n-slider` 不支持触摸事件

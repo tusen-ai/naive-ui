@@ -41,7 +41,8 @@ function useCalendar (
     isHourDisabledRef,
     isMinuteDisabledRef,
     isSecondDisabledRef,
-    localeRef
+    localeRef,
+    datePickerSlots
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -268,7 +269,8 @@ function useCalendar (
     handleTimePickerChange,
     clearSelectedDateTime,
     timePickerSize: panelCommon.timePickerSize,
-    dateInputValue: dateInputValueRef
+    dateInputValue: dateInputValueRef,
+    datePickerSlots
   }
 }
 

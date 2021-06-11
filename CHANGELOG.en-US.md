@@ -2,6 +2,11 @@
 
 ## Pending
 
+### Feats
+
+- `n-spin`'s `size` prop support number.
+- `n-date-picker` add `footer` slot.
+
 ### Fixes
 
 - Fix `n-slider` doesn't support touch events

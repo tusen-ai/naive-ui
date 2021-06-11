@@ -1,4 +1,4 @@
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, renderSlot } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import { NInput } from '../../../input'
 import { NTimePicker } from '../../../time-picker'
@@ -247,6 +247,11 @@ export default defineComponent({
             ))}
           </div>
         </div>
+        {this.datePickerSlots.footer ? (
+          <div class={`${mergedClsPrefix}-date-panel-footer`}>
+            {renderSlot(this.datePickerSlots, 'footer')}
+          </div>
+        ) : null}
         {this.actions?.length ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
