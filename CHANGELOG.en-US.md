@@ -134,6 +134,12 @@
 - Fix `n-tabs` logs useless info.
 - Fix `n-color-picker` set `modes` not working. [#77](https://github.com/TuSimple/naive-ui/issues/77)
 
+## 2.11.6 (2021-06-11)
+
+### Feats
+
+- Add naive ui design download url to doc
+
 ## 2.11.5 (2021-06-10)
 
 ### Feats
