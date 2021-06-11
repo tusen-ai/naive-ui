@@ -8,6 +8,7 @@
 basic
 alpha
 size
+modes
 form
 ```
 
