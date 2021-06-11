@@ -3,7 +3,7 @@
 ## Pending
 
 ### Fixes
-
+- `n-slider` touch events support
 - Fix `n-button` causes crash when it's imported in script inside head tag. [#68](https://github.com/TuSimple/naive-ui/pull/68)
 - Fix `n-spin` animation shifts.
 - Fix `n-menu` lack `on-update-value` and `on-update-expanded-keys` props.
