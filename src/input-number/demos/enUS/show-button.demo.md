@@ -1,4 +1,6 @@
-# Show Button
+# Hide Button
+
+Use `show-button` prop to control whether to show buttons.
 
 ```html
 <n-space align="center">
