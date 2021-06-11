@@ -10,7 +10,7 @@
 - Fix `n-menu` lack `on-update-value` and `on-update-expanded-keys` props.
 - Fix `n-popconfirm` icon slot not working.
 - Fix `n-tabs` logs useless info.
-- Fix `n-color-picker` set `modes` not working.
+- Fix `n-color-picker` set `modes` not working. [#77](https://github.com/TuSimple/naive-ui/issues/77)
 
 ## 2.11.5 (2021-06-10)
 
