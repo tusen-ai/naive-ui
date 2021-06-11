@@ -27,6 +27,7 @@ import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { sliderLight, SliderTheme } from '../styles'
 import style from './styles/index.cssr'
 import { OnUpdateValueImpl } from './interface'
+import { isTouchEvent } from './utils'
 
 const sliderProps = {
   ...(useTheme.props as ThemeProps<SliderTheme>),
@@ -466,7 +467,8 @@ export default defineComponent({
       }
       return justifiedValue
     }
-    function handleFirstHandleMouseDown (): void {
+    function handleFirstHandleMouseDown (e: MouseEvent | TouchEvent): void {
+      if (isTouchEvent(e)) e.preventDefault()
       if (props.range) {
         memoziedOtherValueRef.value = handleValue2Ref.value
       }
@@ -477,7 +479,8 @@ export default defineComponent({
       on('touchmove', document, handleFirstHandleMouseMove)
       on('mousemove', document, handleFirstHandleMouseMove)
     }
-    function handleSecondHandleMouseDown (): void {
+    function handleSecondHandleMouseDown (e: MouseEvent | TouchEvent): void {
+      if (isTouchEvent(e)) e.preventDefault()
       if (props.range) {
         memoziedOtherValueRef.value = handleValue1Ref.value
       }
@@ -490,7 +493,7 @@ export default defineComponent({
     }
     function handleHandleMouseUp (e: MouseEvent | TouchEvent): void {
       if (
-        (window.TouchEvent && e instanceof window.TouchEvent) ||
+        isTouchEvent(e) ||
         (!handleRef1.value?.contains(e.target as Node) &&
           (props.range ? !handleRef2.value?.contains(e.target as Node) : true))
       ) {
