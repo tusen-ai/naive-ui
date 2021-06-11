@@ -2,6 +2,7 @@ export default {
   itemSize: '24px',
   itemCellWidth: '38px',
   itemCellHeight: '32px',
+  panelExtraFooterPadding: '0px 12px',
   panelActionPadding: '8px 12px',
   calendarTitlePadding: '0',
   calendarTitleHeight: '28px',

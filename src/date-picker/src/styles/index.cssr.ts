@@ -122,9 +122,6 @@ export default c([
     cB('date-panel-header', {
       gridArea: 'header'
     }),
-    cB('date-panel-actions', {
-      gridArea: 'action'
-    }),
     cB('date-panel-header', `
       box-sizing: border-box;
       width: 100%;
@@ -329,6 +326,14 @@ export default c([
       width: 1px;
       background-color: var(--calendar-divider-color);
     `),
+    cB('date-panel-footer', {
+      lineHeight: '38px',
+      gridArea: 'action'
+    }),
+    cB('date-panel-extra-footer', {
+      borderTop: '1px solid var(--panel-action-divider-color)',
+      padding: 'var(--panel-extra-footer-padding)'
+    }),
     cB('date-panel-actions', `
       flex: 1;
       padding: var(--panel-action-padding);

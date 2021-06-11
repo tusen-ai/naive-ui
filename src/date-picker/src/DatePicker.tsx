@@ -135,7 +135,7 @@ export type DatePickerProps = ExtractPublicPropTypes<typeof datePickerProps>
 export default defineComponent({
   name: 'DatePicker',
   props: datePickerProps,
-  setup (props) {
+  setup (props, { slots }) {
     const { localeRef, dateLocaleRef } = useLocale('DatePicker')
     const formItem = useFormItem(props)
     const {
@@ -466,6 +466,9 @@ export default defineComponent({
       ...uniVaidation,
       ...dualValidation
     })
+    provide('datePickerSlot', {
+      ...slots
+    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
@@ -541,6 +544,7 @@ export default defineComponent({
             panelBoxShadow,
             panelBorderRadius,
             calendarTitleFontWeight,
+            panelExtraFooterPadding,
             panelActionPadding,
             itemSize,
             itemCellWidth,
@@ -589,6 +593,7 @@ export default defineComponent({
 
           // panel action
           '--panel-action-padding': panelActionPadding,
+          '--panel-extra-footer-padding': panelExtraFooterPadding,
           '--panel-action-divider-color': panelActionDividerColor,
 
           // panel item

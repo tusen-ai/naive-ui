@@ -1,5 +1,6 @@
 import { defineComponent, h } from 'vue'
 import { NButton, NxButton } from '../../../button'
+import DatePanelFooter from './dateSlots'
 import {
   BackwardIcon,
   FastBackwardIcon,
@@ -190,54 +191,57 @@ export default defineComponent({
           </div>
         </div>
         {this.actions?.length || ranges ? (
-          <div class={`${mergedClsPrefix}-date-panel-actions`}>
-            <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
-              {ranges &&
-                Object.keys(ranges).map((key) => {
-                  return (
-                    <NxButton
-                      size="tiny"
-                      onMouseenter={() => {
-                        this.cachePendingValue()
-                        this.changeStartEndTime(...ranges[key])
-                      }}
-                      onClick={() => {
-                        this.changeStartEndTime(...ranges[key])
-                        this.clearPendingValue()
-                        this.handleConfirmClick()
-                      }}
-                      onMouseleave={() => {
-                        this.restorePendingValue()
-                      }}
-                    >
-                      {{ default: () => key }}
-                    </NxButton>
-                  )
-                })}
-            </div>
-            <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions.includes('clear') ? (
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleClearClick}
-                >
-                  {{ default: () => this.locale.clear }}
-                </NButton>
-              ) : null}
-              {this.actions.includes('confirm') ? (
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  type="primary"
-                  disabled={this.isRangeInvalid}
-                  onClick={this.handleConfirmClick}
-                >
-                  {{ default: () => this.locale.confirm }}
-                </NButton>
-              ) : null}
+          <div class={`${mergedClsPrefix}-date-panel-footer`}>
+            <DatePanelFooter />
+            <div class={`${mergedClsPrefix}-date-panel-actions`}>
+              <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
+                {ranges &&
+                  Object.keys(ranges).map((key) => {
+                    return (
+                      <NxButton
+                        size="tiny"
+                        onMouseenter={() => {
+                          this.cachePendingValue()
+                          this.changeStartEndTime(...ranges[key])
+                        }}
+                        onClick={() => {
+                          this.changeStartEndTime(...ranges[key])
+                          this.clearPendingValue()
+                          this.handleConfirmClick()
+                        }}
+                        onMouseleave={() => {
+                          this.restorePendingValue()
+                        }}
+                      >
+                        {{ default: () => key }}
+                      </NxButton>
+                    )
+                  })}
+              </div>
+              <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
+                {this.actions.includes('clear') ? (
+                  <NButton
+                    theme={mergedTheme.peers.Button}
+                    themeOverrides={mergedTheme.peerOverrides.Button}
+                    size="tiny"
+                    onClick={this.handleClearClick}
+                  >
+                    {{ default: () => this.locale.clear }}
+                  </NButton>
+                ) : null}
+                {this.actions.includes('confirm') ? (
+                  <NButton
+                    theme={mergedTheme.peers.Button}
+                    themeOverrides={mergedTheme.peerOverrides.Button}
+                    size="tiny"
+                    type="primary"
+                    disabled={this.isRangeInvalid}
+                    onClick={this.handleConfirmClick}
+                  >
+                    {{ default: () => this.locale.confirm }}
+                  </NButton>
+                ) : null}
+              </div>
             </div>
           </div>
         ) : null}
