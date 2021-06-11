@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-spin` 的 `size` 属性支持 number 类型
+- `n-date-picker` 支持 `footer` 插槽
 
 ## 2.11.5 (2021-06-10)
 
