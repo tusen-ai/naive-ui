@@ -13,6 +13,11 @@
 
 [www.naiveui.com](http://www.naiveui.com)
 
+## Community
+
+- [Discord](https://discord.gg/Pqv7Mev5Dd)
+- DingTalk Group 33482509
+
 ## Features
 
 ### Fairly Complete
@@ -62,11 +67,6 @@ Naive UI recommends using [xicons](https://www.xicons.org) as icon library.
 ### Design Resources
 
 Working in progress.
-
-## Community
-
-- [Discord](https://discord.gg/Pqv7Mev5Dd)
-- DingTalk Group 33482509
 
 ## Contributing
 

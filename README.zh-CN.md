@@ -13,6 +13,11 @@
 
 [www.naiveui.com](http://www.naiveui.com)
 
+## 社区
+
+- [Discord](https://discord.gg/Pqv7Mev5Dd)
+- 钉钉群 33482509
+
 ## 特性
 
 ### 比较完整
@@ -62,11 +67,6 @@ naive-ui 建议使用 [xicons](https://www.xicons.org) 作为图标库。
 ### 设计资源
 
 正在搞。
-
-## 社区
-
-- [Discord](https://discord.gg/Pqv7Mev5Dd)
-- 钉钉群 33482509
 
 ## 贡献
 
