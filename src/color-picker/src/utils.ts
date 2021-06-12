@@ -1,4 +1,26 @@
+import { warn } from '../../_utils'
+
 export type ColorPickerMode = 'rgb' | 'hsl' | 'hsv' | 'hex'
+
+export function deriveDefaultValue (
+  modes: ColorPickerMode[],
+  showAlpha: boolean
+): string {
+  const mode = modes[0]
+  switch (mode) {
+    case 'hex':
+      return showAlpha ? '#000000FF' : '#000000'
+    case 'rgb':
+      return showAlpha ? 'rgba(0, 0, 0, 1)' : 'rgb(0, 0, 0)'
+    case 'hsl':
+      return showAlpha ? 'hsla(0, 0%, 0%, 1)' : 'hsl(0, 0%, 0%)'
+    case 'hsv':
+      return showAlpha ? 'hsva(0, 0%, 0%, 1)' : 'hsv(0, 0%, 0%)'
+  }
+  if (__DEV__) warn('color-picker', 'props.modes is invalid.')
+  // in case of invalid modes
+  return '#000000'
+}
 
 export function getModeFromValue (color: string | null): ColorPickerMode | null {
   if (color === null) return null

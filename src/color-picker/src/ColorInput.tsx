@@ -108,14 +108,17 @@ export default defineComponent({
         <NInputGroup>
           {{
             default: () => {
-              const { mode, valueArr, value, showAlpha } = this
+              const { mode, valueArr, showAlpha } = this
               if (mode === 'hex') {
+                // hex and rgba shares the same value arr
                 let hexValue = null
                 try {
                   hexValue =
-                    value === null
+                    valueArr === null
                       ? null
-                      : (showAlpha ? toHexaString : toHexString)(value)
+                      : (showAlpha ? toHexaString : toHexString)(
+                        valueArr as RGBA
+                      )
                 } catch {}
                 return (
                   <ColorInputUnit
