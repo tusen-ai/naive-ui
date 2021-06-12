@@ -72,32 +72,32 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, $slots } = this
     return (
       <div style={this.cssVars as CSSProperties}>
         <div class={`${mergedClsPrefix}-popconfirm__body`}>
           {this.showIcon ? (
             <div class={`${mergedClsPrefix}-popconfirm__icon`}>
-              <slot name="icon">
+              {renderSlot($slots, 'icon', undefined, () => [
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{ default: () => <WarningIcon /> }}
                 </NBaseIcon>
-              </slot>
+              ])}
             </div>
           ) : null}
-          {renderSlot(this.$slots, 'default')}
+          {renderSlot($slots, 'default')}
         </div>
         <div class={`${mergedClsPrefix}-popconfirm__action`}>
-          {renderSlot(this.$slots, 'action', undefined, () => [
+          {renderSlot($slots, 'action', undefined, () => [
             <NButton size="small" onClick={this.handleNegativeClick}>
-              {this.localizedNegativeText}
+              {{ default: () => this.localizedNegativeText }}
             </NButton>,
             <NButton
               size="small"
               type="primary"
               onClick={this.handlePositiveClick}
             >
-              {this.localizedPositiveText}
+              {{ default: () => this.localizedPositiveText }}
             </NButton>
           ])}
         </div>

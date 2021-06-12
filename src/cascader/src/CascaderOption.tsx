@@ -176,8 +176,8 @@ export default defineComponent({
             [`${mergedClsPrefix}-cascader-option--pending`]:
               this.keyboardPending || this.hoverPending,
             [`${mergedClsPrefix}-cascader-option--disabled`]: this.disabled,
-            [`${mergedClsPrefix}-cascader-option--show-prefix`]: this
-              .showCheckbox
+            [`${mergedClsPrefix}-cascader-option--show-prefix`]:
+              this.showCheckbox
           }
         ]}
         onMouseenter={this.mergedHandleMouseEnter}
@@ -206,8 +206,8 @@ export default defineComponent({
             {!this.isLeaf ? (
               <NBaseLoading
                 clsPrefix={mergedClsPrefix}
-                scale={0.8}
-                strokeWidth={20}
+                scale={0.85}
+                strokeWidth={24}
                 show={this.isLoading}
                 class={`${mergedClsPrefix}-cascader-option-icon`}
               >

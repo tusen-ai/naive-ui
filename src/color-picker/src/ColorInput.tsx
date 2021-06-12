@@ -27,6 +27,10 @@ export default defineComponent({
       type: String as PropType<ColorPickerMode>,
       required: true
     },
+    modes: {
+      type: Array as PropType<ColorPickerMode[]>,
+      required: true
+    },
     showAlpha: {
       type: Boolean,
       required: true
@@ -37,7 +41,7 @@ export default defineComponent({
       default: null
     },
     valueArr: {
-      type: (Array as unknown) as PropType<HSVA | RGBA | HSLA | null>,
+      type: Array as unknown as PropType<HSVA | RGBA | HSLA | null>,
       default: null
     },
     onUpdateValue: {
@@ -89,12 +93,15 @@ export default defineComponent({
     }
   },
   render () {
-    const { clsPrefix } = this
+    const { clsPrefix, modes } = this
     return (
       <div class={`${clsPrefix}-color-picker-input`}>
         <div
           class={`${clsPrefix}-color-picker-input__mode`}
           onClick={this.onUpdateMode}
+          style={{
+            cursor: modes.length === 1 ? '' : 'pointer'
+          }}
         >
           {this.mode.toUpperCase() + (this.showAlpha ? 'A' : '')}
         </div>

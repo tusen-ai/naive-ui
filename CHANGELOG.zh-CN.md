@@ -1,12 +1,38 @@
 # CHANGELOG
 
-## Pending
+## 2.11.6 (2021-06-11)
+
+### Feats
+
+- `n-spin` 的 `size` 属性支持 number 类型
+- `n-date-picker` 支持 `footer` 插槽
+
+### Fixes
+
+- 修正 `n-slider` 不支持触摸事件
+- 修正 `n-button` 在 head 内部的 script 被引入造成崩溃 [#68](https://github.com/TuSimple/naive-ui/pull/68)
+- 修正 `n-spin` 动画闪烁
+- 修正 `n-menu` 缺少 `on-update-value` 和 `on-update-expanded-keys` 属性
+- 修正 `n-popconfirm` icon slot 不生效
+- 修正 `n-tabs` 在控制台输出无用信息
+- 修正 `n-color-picker` 设定 `modes` 无效 [#77](https://github.com/TuSimple/naive-ui/issues/77)
+
+## 2.11.5 (2021-06-10)
+
+### Feats
+
+- `n-dropdown` 新增 `disabled` 属性
+- `n-card` 增加 `:target` 的样式
 
 ### Fixes
 
 - 修复 `n-popover` 有时在手动模式不会同步位置
 - 修复 `n-transfer` 的无数据 Icon 没有开关动画
 - 修复 `n-message` API 的 option 不是可选的
+- 修复 `n-calendar` 展示日期计算错误
+- 修复 `n-input` 缺失 `password` 的声明
+- 修复 `n-menu` 的菜单和子菜单的 `extra` 属性的类型定义
+- 修复 `n-dropdown` 选项鼠标形状不是 pointer
 
 ## 2.11.4
 
@@ -390,7 +416,7 @@
 - `n-layout-sider` 新增 `default-collapsed` 属性
 - `n-modal` 支持自定义位置
 
-### Fixed
+### Fixes
 
 - 修正 `n-menu` 垂直折叠时 `n-menu-item` tooltip 不显示的问题
 - 修正 `n-menu` `collapsed-icon-size` 不生效的问题

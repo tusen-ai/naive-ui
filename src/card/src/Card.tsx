@@ -6,6 +6,7 @@ import {
   renderSlot,
   CSSProperties
 } from 'vue'
+import { getPadding } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createKey, keysOf } from '../../_utils'
@@ -14,7 +15,7 @@ import { NBaseClose } from '../../_internal'
 import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
 import style from './styles/index.cssr'
-import { getPadding } from 'seemly'
+import useRtl from '../../_mixins/use-rtl'
 
 export interface Segmented {
   content?: boolean | 'soft'
@@ -64,7 +65,7 @@ export default defineComponent({
       const { onClose } = props
       if (onClose) call(onClose)
     }
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
     const themeRef = useTheme(
       'Card',
       'Card',
@@ -73,7 +74,13 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const rtlEnabledRef = useRtl(
+      'Card',
+      NConfigProvider?.mergedRtlRef,
+      mergedClsPrefixRef
+    )
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       handleCloseClick,
@@ -83,6 +90,7 @@ export default defineComponent({
           self: {
             color,
             colorModal,
+            colorTarget,
             textColor,
             titleTextColor,
             titleFontWeight,
@@ -113,6 +121,7 @@ export default defineComponent({
           '--color': color,
           '--color-modal': colorModal,
           '--color-popover': colorPopover,
+          '--color-target': colorTarget,
           '--text-color': textColor,
           '--line-height': lineHeight,
           '--action-color': actionColor,
@@ -135,12 +144,20 @@ export default defineComponent({
     }
   },
   render () {
-    const { segmented, bordered, hoverable, $slots, mergedClsPrefix } = this
+    const {
+      segmented,
+      bordered,
+      hoverable,
+      mergedClsPrefix,
+      rtlEnabled,
+      $slots
+    } = this
     return (
       <div
         class={[
           `${mergedClsPrefix}-card`,
           {
+            [`${mergedClsPrefix}-card--rtl`]: rtlEnabled,
             [`${mergedClsPrefix}-card--content${
               typeof segmented !== 'boolean' && segmented.content === 'soft'
                 ? '-soft'

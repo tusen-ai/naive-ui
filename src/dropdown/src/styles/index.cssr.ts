@@ -1,4 +1,4 @@
-import { cB, cM, cE } from '../../../_utils/cssr'
+import { cB, cM, cE, cNotM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
@@ -23,6 +23,8 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --prefix-color
 // --suffix-color
 // --option-icon-size
+// --option-opacity-disabled
+
 export default cB('dropdown-menu', `
   transform-origin: inherit;
   padding: var(--padding);
@@ -49,9 +51,11 @@ export default cB('dropdown-menu', `
         color .3s var(--bezier);
     `, [
       cM('pending', {
-        color: 'var(--option-text-color-hover)',
-        backgroundColor: 'var(--option-color-hover)'
+        color: 'var(--option-text-color-hover)'
       }, [
+        cNotM('disabled', {
+          backgroundColor: 'var(--option-color-hover)'
+        }),
         cE('prefix, suffix', {
           color: 'var(--option-text-color-hover)'
         })
@@ -64,6 +68,10 @@ export default cB('dropdown-menu', `
           color: 'var(--option-text-color-active)'
         })
       ]),
+      cM('disabled', {
+        cursor: 'not-allowed',
+        opacity: 'var(--option-opacity-disabled)'
+      }),
       cM('child-active', {
         color: 'var(--option-text-color-child-active)'
       }, [

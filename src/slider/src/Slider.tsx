@@ -295,14 +295,18 @@ export default defineComponent({
         }
       }
     }
-    function handleHandleMouseMove (e: MouseEvent, handleIndex: 0 | 1): void {
+    function handleHandleMouseMove (
+      e: MouseEvent | TouchEvent,
+      handleIndex: 0 | 1
+    ): void {
       if (!handleRef1.value || !railRef.value) return
+      const x = 'touches' in e ? e.touches[0].clientX : e.clientX
       const { width: handleWidth } = handleRef1.value.getBoundingClientRect()
       const { width: railWidth, left: railLeft } =
         railRef.value.getBoundingClientRect()
       const { min, max, range } = props
       const offsetRatio =
-        (e.clientX - railLeft - handleWidth / 2) / (railWidth - handleWidth)
+        (x - railLeft - handleWidth / 2) / (railWidth - handleWidth)
       const newValue = min + (max - min) * offsetRatio
       if (range) {
         if (handleIndex === 0) {
@@ -468,7 +472,9 @@ export default defineComponent({
       }
       doUpdateShow(true, false)
       handleClicked1Ref.value = true
+      on('touchend', document, handleHandleMouseUp)
       on('mouseup', document, handleHandleMouseUp)
+      on('touchmove', document, handleFirstHandleMouseMove)
       on('mousemove', document, handleFirstHandleMouseMove)
     }
     function handleSecondHandleMouseDown (): void {
@@ -477,19 +483,25 @@ export default defineComponent({
       }
       doUpdateShow(false, true)
       handleClicked2Ref.value = true
+      on('touchend', document, handleHandleMouseUp)
       on('mouseup', document, handleHandleMouseUp)
+      on('touchmove', document, handleSecondHandleMouseMove)
       on('mousemove', document, handleSecondHandleMouseMove)
     }
-    function handleHandleMouseUp (e: MouseEvent): void {
+    function handleHandleMouseUp (e: MouseEvent | TouchEvent): void {
       if (
-        !handleRef1.value?.contains(e.target as Node) &&
-        (props.range ? !handleRef2.value?.contains(e.target as Node) : true)
+        (window.TouchEvent && e instanceof window.TouchEvent) ||
+        (!handleRef1.value?.contains(e.target as Node) &&
+          (props.range ? !handleRef2.value?.contains(e.target as Node) : true))
       ) {
         doUpdateShow(false, false)
       }
       handleClicked2Ref.value = false
       handleClicked1Ref.value = false
+      off('touchend', document, handleHandleMouseUp)
       off('mouseup', document, handleHandleMouseUp)
+      off('touchmove', document, handleFirstHandleMouseMove)
+      off('touchmove', document, handleSecondHandleMouseMove)
       off('mousemove', document, handleFirstHandleMouseMove)
       off('mousemove', document, handleSecondHandleMouseMove)
     }
@@ -540,10 +552,10 @@ export default defineComponent({
         }
       }
     }
-    function handleFirstHandleMouseMove (e: MouseEvent): void {
+    function handleFirstHandleMouseMove (e: MouseEvent | TouchEvent): void {
       handleHandleMouseMove(e, 0)
     }
-    function handleSecondHandleMouseMove (e: MouseEvent): void {
+    function handleSecondHandleMouseMove (e: MouseEvent | TouchEvent): void {
       handleHandleMouseMove(e, 1)
     }
     function handleFirstHandleMouseEnter (): void {
@@ -652,8 +664,11 @@ export default defineComponent({
       })
     })
     onBeforeUnmount(() => {
+      off('touchmove', document, handleFirstHandleMouseMove)
+      off('touchmove', document, handleSecondHandleMouseMove)
       off('mousemove', document, handleFirstHandleMouseMove)
       off('mousemove', document, handleSecondHandleMouseMove)
+      off('touchend', document, handleHandleMouseUp)
       off('mouseup', document, handleHandleMouseUp)
     })
     return {
@@ -829,6 +844,7 @@ export default defineComponent({
                       style={this.firstHandleStyle}
                       onFocus={this.handleHandleFocus1}
                       onBlur={this.handleHandleBlur1}
+                      onTouchstart={this.handleFirstHandleMouseDown}
                       onMousedown={this.handleFirstHandleMouseDown}
                       onMouseenter={this.handleFirstHandleMouseEnter}
                       onMouseleave={this.handleFirstHandleMouseLeave}
@@ -883,6 +899,7 @@ export default defineComponent({
                         style={this.secondHandleStyle}
                         onFocus={this.handleHandleFocus2}
                         onBlur={this.handleHandleBlur2}
+                        onTouchstart={this.handleSecondHandleMouseDown}
                         onMousedown={this.handleSecondHandleMouseDown}
                         onMouseenter={this.handleSecondHandleMouseEnter}
                         onMouseleave={this.handleSecondHandleMouseLeave}

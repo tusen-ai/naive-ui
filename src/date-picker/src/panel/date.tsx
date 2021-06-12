@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue'
+import { h, defineComponent, renderSlot } from 'vue'
 import { NButton } from '../../../button'
 import {
   BackwardIcon,
@@ -101,6 +101,11 @@ export default defineComponent({
             ))}
           </div>
         </div>
+        {this.datePickerSlots.footer ? (
+          <div class={`${mergedClsPrefix}-date-panel-footer`}>
+            {renderSlot(this.datePickerSlots, 'footer')}
+          </div>
+        ) : null}
         {this.actions?.length ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}></div>

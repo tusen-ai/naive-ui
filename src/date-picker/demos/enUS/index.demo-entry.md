@@ -16,6 +16,7 @@ actions
 events
 format
 ranges
+footerslot
 ```
 
 ## Props
@@ -81,3 +82,9 @@ ranges
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'Start Date and Time'` |  |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |
+
+## Slots
+
+| 名称   | 参数 | 说明          |
+| ------ | ---- | ------------- |
+| footer | `()` | Extra Footer. |

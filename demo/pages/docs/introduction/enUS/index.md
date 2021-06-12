@@ -6,7 +6,7 @@ Naive UI is a Vue 3 component library.
 
 To know how to install it, see [Installation](installation).
 
-It is fairly complele, themeable, wrote in typescript, not too slow.
+It is fairly complele, themeable, written in typescript, not too slow.
 
 ## Fairly Complete
 
@@ -22,7 +22,7 @@ What's more, no less/sass/css variables, no webpack loaders are required. And yo
 
 ## Uses TypeScript
 
-All the staff in Naive UI is wrote in TypeScript. It can work with your typescript project seamlessly.
+All the staff in Naive UI is written in TypeScript. It can work with your typescript project seamlessly.
 
 What's more, you don't need to import any CSS to use the components.
 
