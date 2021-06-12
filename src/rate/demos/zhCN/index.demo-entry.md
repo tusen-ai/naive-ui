@@ -6,7 +6,12 @@
 
 ```demo
 basic
+size
+color
+events
+icon
 ```
+
 
 ## Props
 
@@ -15,4 +20,5 @@ basic
 | count           | `number`                  | `5`         |      |
 | value           | `number`                  | `undefined` |      |
 | default-value   | `number`                  | `0`         |      |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | on-update:value | `(value: number) => void` | `undefined` |      |

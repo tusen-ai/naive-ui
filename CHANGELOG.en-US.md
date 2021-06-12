@@ -26,6 +26,7 @@
 
 - `n-spin`'s `size` prop support number.
 - `n-date-picker` add `footer` slot.
+- `n-rate` support `default` slot and color and size props
 
 ### Fixes
 

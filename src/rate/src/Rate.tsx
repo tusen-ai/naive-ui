@@ -37,6 +37,10 @@ const rateProps = {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
+  color: {
+    type: String,
+    default: undefined
+  },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<(value: number) => void>
@@ -102,7 +106,7 @@ export default defineComponent({
         return {
           '--bezier': cubicBezierEaseInOut,
           '--item-color': itemColor,
-          '--item-color-active': itemColorActive,
+          '--item-color-active': props.color || itemColorActive,
           '--item-size': itemSize
         }
       })
@@ -110,6 +114,7 @@ export default defineComponent({
   },
   render () {
     const { hoverIndex, mergedValue, mergedClsPrefix } = this
+    const defaultSlot = this.$slots.default
     return (
       <div
         class={`${mergedClsPrefix}-rate`}
@@ -131,9 +136,11 @@ export default defineComponent({
             onClick={() => this.handleClick(index)}
             onMouseenter={() => this.handleMouseEnter(index)}
           >
-            <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => StarIcon }}
-            </NBaseIcon>
+            {
+              defaultSlot?.() ?? <NBaseIcon clsPrefix={mergedClsPrefix} size={this.size}>
+                {{ default: () => StarIcon }}
+              </NBaseIcon>
+            }
           </div>
         ))}
       </div>
