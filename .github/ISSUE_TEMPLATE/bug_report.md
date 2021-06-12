@@ -16,6 +16,7 @@ assignees: ''
 ### Reproduction link
 
 <!-- A CodeSandbox reproduction link is recommended. -->
+<!-- If CodeSandbox is not easy to reproduce your issue, please link a GitHub repo. -->
 
 ### Steps to reproduce
 
