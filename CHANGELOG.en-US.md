@@ -6,6 +6,7 @@
 
 - Fix `n-slider` doesn't prevent scrolling when touchstart.
 - Fix `n-color-picker`'s default value doesn't follow modes.
+- Fix not `lodash` & `lodash-es` type.
 
 ## 2.11.6 (2021-06-11)
 
