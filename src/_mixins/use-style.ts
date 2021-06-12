@@ -1,7 +1,7 @@
 import { CNode } from 'css-render'
-import { Ref, onBeforeMount, inject } from 'vue'
+import { Ref, onBeforeMount } from 'vue'
+import { useSsrAdapter } from '@css-render/vue3-ssr'
 import globalStyle from '../_styles/global/index.cssr'
-import { ssrInjectionKey } from '../ssr/context'
 import { throwError } from '../_utils'
 
 export default function useStyle (
@@ -13,7 +13,7 @@ export default function useStyle (
     if (__DEV__) throwError('use-style', 'No style is specified.')
     return
   }
-  const ssrAdapter = inject(ssrInjectionKey, undefined)
+  const ssrAdapter = useSsrAdapter()
   const mountStyle = (): void => {
     const clsPrefix = clsPrefixRef?.value
     style.mount({

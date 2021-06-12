@@ -8,12 +8,12 @@ import {
   PropType
 } from 'vue'
 import { merge } from 'lodash-es'
+import { useSsrAdapter } from '@css-render/vue3-ssr'
 import globalStyle from '../_styles/global/index.cssr'
 import { CNode } from 'css-render'
 import type { GlobalTheme } from '../config-provider'
 import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
 import type { ThemeCommonVars } from '../_styles/common'
-import { ssrInjectionKey } from '../ssr/context'
 
 export interface Theme<N, T = {}, R = any> {
   name: N
@@ -91,7 +91,7 @@ function useTheme<N, T, R> (
   props: UseThemeProps<Theme<N, T, R>>,
   clsPrefixRef?: Ref<string | undefined>
 ): ComputedRef<MergedTheme<Theme<N, T, R>>> {
-  const ssrAdapter = inject(ssrInjectionKey, undefined)
+  const ssrAdapter = useSsrAdapter()
   if (style) {
     const mountStyle = (): void => {
       const clsPrefix = clsPrefixRef?.value
