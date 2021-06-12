@@ -4,7 +4,8 @@
 
 ### Fixes
 
-- 修复 `n-slider` 在 touchstart 发生时没有阻止滚动
+- Fix `n-slider` doesn't prevent scrolling when touchstart.
+- Fix `n-color-picker`'s default value doesn't follow modes.
 
 ## 2.11.6 (2021-06-11)
 
