@@ -8,6 +8,7 @@
 basic
 alpha
 size
+modes
 form
 ```
 
@@ -16,7 +17,7 @@ form
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | default-show | `boolean` | `undefined` | 默认是否展示弹出层 |
-| default-value | `string` | `#000000` | 默认的颜色值 |
+| default-value | `string \| null` | 和第一个 mode 对应的黑色值 | 默认的颜色值 |
 | modes | `Array<'rgb' \| 'hex' \| 'hsl' \| 'hsv'>` | `['rgb', 'hex', 'hsl']` | 颜色选择器支持颜色的格式，注意一旦你在某个模式下选择了值，颜色选择器值的格式将跟随这个格式 |
 | to | `string \| HTMLElement` | `'body'` | 面板的卸载位置 |
 | show | `boolean` | `undefined` | 是否展示面板 |

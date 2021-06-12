@@ -32,8 +32,8 @@ export default defineComponent({
         <NBaseLoading
           clsPrefix={clsPrefix}
           class={`${clsPrefix}-base-selection__mark`}
-          strokeWidth={20}
-          scale={0.8}
+          strokeWidth={24}
+          scale={0.85}
           show={props.loading}
         >
           {{

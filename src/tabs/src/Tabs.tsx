@@ -116,8 +116,9 @@ export default defineComponent({
     const barElRef = ref<HTMLElement | null>(null)
     const scrollWrapperElRef = ref<HTMLElement | null>(null)
     const addTabInstRef = ref<ComponentPublicInstance | null>(null)
-    const xScrollInstRef =
-      ref<(VXScrollInst & ComponentPublicInstance) | null>(null)
+    const xScrollInstRef = ref<(VXScrollInst & ComponentPublicInstance) | null>(
+      null
+    )
 
     const leftReachedRef = ref(true)
     const rightReachedRef = ref(true)
@@ -511,7 +512,6 @@ function filterMapTabPanes (
     if (vNode.key !== undefined) {
       vNode.key = name
     }
-    console.log(vNode.props)
     if (useVShow) {
       children.push(withDirectives(vNode, [[vShow, show]]))
     } else if (show) {

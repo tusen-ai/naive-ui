@@ -1,6 +1,31 @@
 # CHANGELOG
 
-## Pending
+## 2.11.7
+
+### Fixes
+
+- Fix `n-slider` doesn't prevent scrolling when touchstart.
+- Fix `n-color-picker`'s default value doesn't follow modes.
+- Fix not `lodash` & `lodash-es` type.
+
+## 2.11.6 (2021-06-11)
+
+### Feats
+
+- `n-spin`'s `size` prop support number.
+- `n-date-picker` add `footer` slot.
+
+### Fixes
+
+- Fix `n-slider` doesn't support touch events
+- Fix `n-button` causes crash when it's imported in script inside head tag. [#68](https://github.com/TuSimple/naive-ui/pull/68)
+- Fix `n-spin` animation shifts.
+- Fix `n-menu` lack `on-update-value` and `on-update-expanded-keys` props.
+- Fix `n-popconfirm` icon slot not working.
+- Fix `n-tabs` logs useless info.
+- Fix `n-color-picker` set `modes` not working. [#77](https://github.com/TuSimple/naive-ui/issues/77)
+
+## 2.11.5 (2021-06-10)
 
 ### Feats
 
@@ -15,6 +40,7 @@
 - Fix `n-calendar` date calculate incorrectly
 - Fix `n-input` missing the `password` type declaration.
 - Fix `n-menu` the type definition of `extra` property of menu and submenu.
+- Fix `n-dropdown` mouse cursor is not pointer.
 
 ## 2.11.4
 

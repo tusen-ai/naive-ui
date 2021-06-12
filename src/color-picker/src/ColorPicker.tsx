@@ -58,7 +58,7 @@ import AlphaSlider from './AlphaSlider'
 import Pallete from './Pallete'
 import ColorInput from './ColorInput'
 import ColorPickerTrigger from './ColorPickerTrigger'
-import { getModeFromValue } from './utils'
+import { deriveDefaultValue, getModeFromValue } from './utils'
 import type { ColorPickerMode } from './utils'
 import style from './styles/index.cssr'
 import { OnUpdateValue, OnUpdateValueImpl } from './interface'
@@ -75,10 +75,7 @@ export const colorPickerPanelProps = {
     type: Boolean,
     default: false
   },
-  defaultValue: {
-    type: String as PropType<string | null>,
-    default: '#000000'
-  },
+  defaultValue: String as PropType<string | null>,
   modes: {
     type: Array as PropType<ColorPickerMode[]>,
     // no hsva by default since browser doesn't support it
@@ -145,7 +142,12 @@ export default defineComponent({
       uncontrolledShowRef.value = value
     }
 
-    const uncontrolledValueRef = ref(props.defaultValue)
+    const { defaultValue } = props
+    const uncontrolledValueRef = ref(
+      defaultValue === undefined
+        ? deriveDefaultValue(props.modes, props.showAlpha)
+        : defaultValue
+    )
     const mergedValueRef = useMergedState(
       toRef(props, 'value'),
       uncontrolledValueRef
@@ -163,33 +165,11 @@ export default defineComponent({
     function handleUpdateDisplayedMode (): void {
       const { modes } = props
       const { value: displayedMode } = displayedModeRef
-      switch (displayedMode) {
-        case 'rgb':
-          if (modes.includes('hex')) {
-            displayedModeRef.value = 'hex'
-            break
-          }
-        // eslint-disable-next-line no-fallthrough
-        case 'hex':
-          if (modes.includes('hsv')) {
-            displayedModeRef.value = 'hsv'
-            break
-          }
-        // eslint-disable-next-line no-fallthrough
-        case 'hsv':
-          if (modes.includes('hsl')) {
-            displayedModeRef.value = 'hsl'
-            break
-          }
-        // eslint-disable-next-line no-fallthrough
-        case 'hsl':
-          if (modes.includes('rgb')) {
-            displayedModeRef.value = 'rgb'
-            break
-          }
-        // eslint-disable-next-line no-fallthrough
-        default:
-          displayedModeRef.value = 'rgb'
+      const currentModeIndex = modes.findIndex((mode) => mode === displayedMode)
+      if (~currentModeIndex) {
+        displayedModeRef.value = modes[(currentModeIndex + 1) % modes.length]
+      } else {
+        displayedModeRef.value = 'rgb'
       }
     }
 
@@ -501,7 +481,7 @@ export default defineComponent({
     function renderPanel (): VNode {
       const { value: rgba } = rgbaRef
       const { value: displayedHue } = displayedHueRef
-      const { internalActions } = props
+      const { internalActions, modes } = props
       const { value: mergedTheme } = themeRef
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       return (
@@ -540,6 +520,7 @@ export default defineComponent({
               clsPrefix={mergedClsPrefix}
               showAlpha={props.showAlpha}
               mode={displayedModeRef.value}
+              modes={modes}
               onUpdateMode={handleUpdateDisplayedMode}
               value={mergedValueRef.value}
               valueArr={mergedValueArrRef.value}

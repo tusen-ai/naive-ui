@@ -88,11 +88,11 @@ const menuProps = {
   },
   disabled: Boolean,
   inverted: Boolean,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:expandedKeys': [Function, Array] as PropType<
   MaybeArray<OnUpdateKeys>
   >,
-  // eslint-disable-next-line vue/prop-name-casing
+  onUpdateExpandedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   // deprecated
   onOpenNamesChange: {
@@ -233,9 +233,16 @@ export default defineComponent({
       toggleExpand
     })
     function doSelect (value: Key, item: MenuOption): void {
-      const { 'onUpdate:value': onUpdateValue, onSelect } = props
+      const {
+        'onUpdate:value': _onUpdateValue,
+        onUpdateValue,
+        onSelect
+      } = props
       if (onUpdateValue) {
         call(onUpdateValue as OnUpdateValueImpl, value, item)
+      }
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, item)
       }
       if (onSelect) {
         call(onSelect as OnUpdateValueImpl, value, item)
@@ -244,10 +251,14 @@ export default defineComponent({
     }
     function doUpdateExpandedKeys (value: Key[]): void {
       const {
-        'onUpdate:expandedKeys': onUpdateExpandedKeys,
+        'onUpdate:expandedKeys': _onUpdateExpandedKeys,
+        onUpdateExpandedKeys,
         onExpandedNamesChange,
         onOpenNamesChange
       } = props
+      if (_onUpdateExpandedKeys) {
+        call(_onUpdateExpandedKeys as OnUpdateKeysImpl, value)
+      }
       if (onUpdateExpandedKeys) {
         call(onUpdateExpandedKeys as OnUpdateKeysImpl, value)
       }

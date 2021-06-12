@@ -19,7 +19,7 @@ export default defineComponent({
     const { clsPrefix } = this
     return (
       <div class={`${clsPrefix}-log-loader`}>
-        <NBaseLoading clsPrefix={clsPrefix} strokeWidth={24} />
+        <NBaseLoading clsPrefix={clsPrefix} strokeWidth={24} scale={0.85} />
         <span class={`${clsPrefix}-log-loader__content`}>
           {this.locale.loading}
         </span>

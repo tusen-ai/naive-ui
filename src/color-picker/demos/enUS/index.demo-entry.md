@@ -8,6 +8,7 @@ Compared with real world, its space is discrete.
 basic
 alpha
 size
+modes
 form
 ```
 
@@ -16,7 +17,7 @@ form
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | default-show | `boolean` | `undefined` | Whether to show panel by default. |
-| default-value | `string` | `#000000` | Default value of the picker. |
+| default-value | `string` | Black color value of 1st mode's corresponding value. | Default value of the picker. |
 | modes | `Array<'rgb' \| 'hex' \| 'hsl' \| 'hsv'>` | `['rgb', 'hex', 'hsl']` | The value format of the picker. Notice that value will follow the mode once you select a new value from the picker. |
 | to | `string \| HTMLElement` | `'body'` | Where to detach the panel. |
 | show | `boolean` | `undefined` | Whether to show the panel. |

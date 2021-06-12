@@ -1,8 +1,18 @@
 <!--
-Please add the the changelog to `CHANGELOG.zh-CN.md` & `CHANGELOG.en-US.md` in the PR.
-You can only add detailed info in one of them and add a placeholder item in the other (for example `- ***`).
+!!! Read the following content if this is your first pull request !!!
+
+1. If you are working on docs, please set `main` branch as the target branch.
+2. If you are working on bug fixes, please set `main` branch as the target branch.
+3. If you are working on new features,  please set `feat` branch as the target branch.
+
+For people who are working on 2 & 3, please add changelog to `CHANGELOG.zh-CN.md` & `CHANGELOG.en-US.md` in the PR. You need to add changelog to both files. You can use English in both file. The develop team will translate it later.
 -->
 <!--
-请在这个 PR 里向 `CHANGELOG.zh-CN.md` 和 `CHANGELOG.en-US.md` 添加这个 PR 的变更记录，
-你可以只在其中一个添加详细的信息，然后在另一个文件中留着一个占位的项，例如 `- ***`
+!!! 如果这是你第一次提交 PR，请阅读下面的内容 !!!
+
+1. 如果你在修改文档，请提交到 `main` 分支
+2. 如果你在修复 Bug，请提交到 `main` 分支
+3. 如果你在开发新的特性，请提交到 `feat` 分支
+
+对于进行工作 2 & 3 的人，请在 `CHANGELOG.zh-CN.md` & `CHANGELOG.en-US.md` 中添加变更日志，你需要在两个文件中都添加变更日志。你可以只使用中文，开发团队会在之后进行翻译。
 -->
