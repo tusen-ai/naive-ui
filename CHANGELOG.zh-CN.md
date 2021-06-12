@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-slider` not prevent scrolling when touchstart.
+
 ## 2.11.6 (2021-06-11)
 
 ### Feats
