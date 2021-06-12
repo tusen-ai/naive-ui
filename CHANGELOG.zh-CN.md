@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-calendar` 的 `on-update:value` 属性类型
+
 ## 2.11.7
 
 ### Fixes

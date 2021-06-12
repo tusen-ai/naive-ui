@@ -21,6 +21,7 @@ import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { calendarLight } from '../styles'
 import type { CalendarTheme } from '../styles'
+import type { OnUpdateValue, DateItem } from './interface'
 import style from './styles/index.cssr'
 
 const calendarProps = {
@@ -31,21 +32,11 @@ const calendarProps = {
     type: Number as PropType<number | null>,
     defualt: null
   },
-  'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
-  >,
-  onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
-  >
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
 export type CalendarProps = ExtractPublicPropTypes<typeof calendarProps>
-
-interface DateItem {
-  year: number
-  month: number
-  date: number
-}
 
 export default defineComponent({
   name: 'Calendar',
@@ -78,6 +69,7 @@ export default defineComponent({
       if (_onUpdateValue) {
         call(_onUpdateValue, value, time)
       }
+      console.log(time)
       uncontrolledValueRef.value = value
     }
 
