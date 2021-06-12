@@ -39,15 +39,15 @@ export default defineComponent({
       : useMemo(() => tgtCheckedValuesRef.value.includes(props.value))
     const handleClick = source
       ? () => {
-        if (!props.disabled) {
-          handleSrcCheckboxClick(!checkedRef.value, props.value)
+          if (!props.disabled) {
+            handleSrcCheckboxClick(!checkedRef.value, props.value)
+          }
         }
-      }
       : () => {
-        if (!props.disabled) {
-          handleTgtCheckboxClick(!checkedRef.value, props.value)
+          if (!props.disabled) {
+            handleTgtCheckboxClick(!checkedRef.value, props.value)
+          }
         }
-      }
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
@@ -56,14 +56,8 @@ export default defineComponent({
     }
   },
   render () {
-    const {
-      disabled,
-      mergedTheme,
-      mergedClsPrefix,
-      label,
-      checked,
-      source
-    } = this
+    const { disabled, mergedTheme, mergedClsPrefix, label, checked, source } =
+      this
     return (
       <div
         class={[

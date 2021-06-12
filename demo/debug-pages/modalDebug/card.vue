@@ -7,9 +7,7 @@
     <template #header>
       {{ time }}
     </template>
-    <template #footer>
-      #footer
-    </template>
+    <template #footer> #footer </template>
     <template #content>
       <n-input v-model="time" />
       <n-select
@@ -21,9 +19,7 @@
       />
       <n-tooltip placement="bottom" trigger="click" style="margin-right: 12px">
         <template #activator>
-          <n-button style="margin: 0">
-            California Girls(Click)
-          </n-button>
+          <n-button style="margin: 0"> California Girls(Click) </n-button>
         </template>
         <span> I wish they all could be California girls </span>
       </n-tooltip>

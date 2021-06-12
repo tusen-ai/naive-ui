@@ -42,10 +42,10 @@ export type ExtractThemeVars<T> = T extends Theme<unknown, infer U, unknown>
 
 export type ExtractPeerOverrides<T> = T extends Theme<unknown, unknown, infer V>
   ? {
-    peers?: {
-      [k in keyof V]?: ExtractThemeOverrides<V[k]>
+      peers?: {
+        [k in keyof V]?: ExtractThemeOverrides<V[k]>
+      }
     }
-  }
   : T
 
 // V is peers theme
@@ -55,8 +55,8 @@ unknown,
 infer V
 >
   ? {
-    [k in keyof V]?: ExtractPeerOverrides<V[k]>
-  }
+      [k in keyof V]?: ExtractPeerOverrides<V[k]>
+    }
   : T
 
 export type ExtractThemeOverrides<T> = Partial<ExtractThemeVars<T>> &
@@ -76,11 +76,11 @@ type UseThemeProps<T> = Readonly<{
 
 export type MergedTheme<T> = T extends Theme<unknown, infer V, infer W>
   ? {
-    common: ThemeCommonVars
-    self: V
-    peers: W
-    peerOverrides: ExtractMergedPeerOverrides<T>
-  }
+      common: ThemeCommonVars
+      self: V
+      peers: W
+      peerOverrides: ExtractMergedPeerOverrides<T>
+    }
   : T
 
 function useTheme<N, T, R> (

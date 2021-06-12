@@ -121,9 +121,9 @@ export default defineComponent({
     const showCheckMark = multiple && isSelected
     const children = rawNode.render
       ? [
-        rawNode.render(rawNode, isSelected),
-        renderCheckMark(showCheckMark, clsPrefix)
-      ]
+          rawNode.render(rawNode, isSelected),
+          renderCheckMark(showCheckMark, clsPrefix)
+        ]
       : [rawNode.label, renderCheckMark(showCheckMark, clsPrefix)]
     return (
       <div

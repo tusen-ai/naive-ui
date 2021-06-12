@@ -183,26 +183,26 @@ export default defineComponent({
     }
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-        <div class={`${mergedClsPrefix}-modal-body-wrapper`}>
-          <NScrollbar
-            ref="scrollbarRef"
-            theme={this.mergedTheme.peers.Scrollbar}
-            themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
-            contentClass={`${mergedClsPrefix}-modal-scroll-content`}
-          >
-            {{
-              default: () => (
-                <Transition
-                  name="fade-in-scale-up-transition"
-                  appear={this.appear ?? this.isMounted}
-                  onEnter={handleEnter as any}
-                  onAfterLeave={handleAfterLeave}
-                  onBeforeLeave={handleBeforeLeave as any}
-                >
-                  {{
-                    default: () =>
-                      withDirectives(
-                        (this.preset === 'confirm' ||
+          <div class={`${mergedClsPrefix}-modal-body-wrapper`}>
+            <NScrollbar
+              ref="scrollbarRef"
+              theme={this.mergedTheme.peers.Scrollbar}
+              themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
+              contentClass={`${mergedClsPrefix}-modal-scroll-content`}
+            >
+              {{
+                default: () => (
+                  <Transition
+                    name="fade-in-scale-up-transition"
+                    appear={this.appear ?? this.isMounted}
+                    onEnter={handleEnter as any}
+                    onAfterLeave={handleAfterLeave}
+                    onBeforeLeave={handleBeforeLeave as any}
+                  >
+                    {{
+                      default: () =>
+                        withDirectives(
+                          (this.preset === 'confirm' ||
                           this.preset === 'dialog' ? (
                             <NDialog
                               {...this.$attrs}
@@ -216,7 +216,7 @@ export default defineComponent({
                             >
                               {$slots}
                             </NDialog>
-                          ) : this.preset === 'card' ? (
+                              ) : this.preset === 'card' ? (
                             <NCard
                               {...this.$attrs}
                               ref="bodyRef"
@@ -229,26 +229,26 @@ export default defineComponent({
                             >
                               {$slots}
                             </NCard>
-                          ) : (
-                            childNode
-                          )) as any,
-                        [
-                          [vShow, this.show],
-                          [clickoutside, handleClickOutside]
-                        ]
-                      )
-                  }}
-                </Transition>
-              )
-            }}
-          </NScrollbar>
-        </div>,
-        [
+                              ) : (
+                                childNode
+                              )) as any,
+                          [
+                            [vShow, this.show],
+                            [clickoutside, handleClickOutside]
+                          ]
+                        )
+                    }}
+                  </Transition>
+                )
+              }}
+            </NScrollbar>
+          </div>,
           [
-            vShow,
-            this.displayDirective === 'if' || this.displayed || this.show
+            [
+              vShow,
+              this.displayDirective === 'if' || this.displayed || this.show
+            ]
           ]
-        ]
       )
       : null
   }

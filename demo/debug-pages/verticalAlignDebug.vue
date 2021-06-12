@@ -26,7 +26,7 @@
       <input
         style="height: 60px; display: inline-block; vertical-align: baseline"
         value="666"
-      >
+      />
       <n-checkbox />
       <div
         style="
