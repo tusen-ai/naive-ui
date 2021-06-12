@@ -1,5 +1,5 @@
-import { Ref, onBeforeMount, inject, watchEffect, computed } from 'vue'
-import { ssrInjectionKey } from '../ssr/context'
+import { Ref, onBeforeMount, watchEffect, computed } from 'vue'
+import { useSsrAdapter } from '@css-render/vue3-ssr'
 import {
   RtlEnabledState,
   RtlItem
@@ -15,7 +15,7 @@ export default function useRtl (
   clsPrefixRef: Ref<string>
 ): Ref<RtlItem | undefined> | undefined {
   if (!rtlStateRef) return undefined
-  const ssrAdapter = inject(ssrInjectionKey, undefined)
+  const ssrAdapter = useSsrAdapter()
   const componentRtlStateRef = computed(() => {
     const { value: rtlState } = rtlStateRef
     if (!rtlState) {

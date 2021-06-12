@@ -1,5 +1,5 @@
 import { h, defineComponent, ref } from 'vue'
-import { NButton, NSsrProvider } from 'naive-ui'
+import { NButton } from 'naive-ui'
 
 const App = defineComponent({
   setup () {
@@ -8,22 +8,15 @@ const App = defineComponent({
     }
   },
   render () {
-    return h(
-      NSsrProvider,
-      {
-        ssr: typeof window === 'undefined'
-      },
-      {
-        default: () =>
-          h(
-            NButton,
-            {
-              onClick: () => this.count++
-            },
-            { default: () => this.count }
-          )
-      }
-    )
+    return [
+      h(
+        NButton,
+        {
+          onClick: () => this.count++
+        },
+        { default: () => this.count }
+      )
+    ]
   }
 })
 
