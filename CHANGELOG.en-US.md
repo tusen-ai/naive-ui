@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-calendar`'s `on-update:value` prop type.
+
 ## 2.11.7
 
 ### Fixes
