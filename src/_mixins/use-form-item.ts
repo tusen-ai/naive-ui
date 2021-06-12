@@ -21,9 +21,8 @@ export interface FormItemInjection {
   handleContentChange: () => void
 }
 
-export const formItemInjectionKey: InjectionKey<FormItemInjection> = Symbol(
-  'formItem'
-)
+export const formItemInjectionKey: InjectionKey<FormItemInjection> =
+  Symbol('formItem')
 
 interface UseFormItemOptions<T> {
   defaultSize?: FormItemSize
@@ -54,16 +53,16 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
     mergedSize
       ? () => mergedSize(NFormItem)
       : () => {
-        const { size } = props as any
-        if (size) return size
-        if (NFormItem) {
-          const { mergedSize } = NFormItem
-          if (mergedSize.value !== undefined) {
-            return mergedSize.value as T
+          const { size } = props as any
+          if (size) return size
+          if (NFormItem) {
+            const { mergedSize } = NFormItem
+            if (mergedSize.value !== undefined) {
+              return mergedSize.value as T
+            }
           }
+          return defaultSize as T
         }
-        return defaultSize as T
-      }
   )
   onBeforeUnmount(() => {
     if (NFormItem) {

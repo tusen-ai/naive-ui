@@ -141,11 +141,9 @@ export function useTableData (
           column.sortOrder === false)
     )
     // if multiple column is controlled sortable, then we need to find a column with active sortOrder
-    const columnToSort:
-    | TableBaseColumn
-    | undefined = (columnsWithControlledSortOrder as TableBaseColumn[]).filter(
-      (col: TableBaseColumn) => col.sortOrder !== false
-    )[0]
+    const columnToSort: TableBaseColumn | undefined = (
+      columnsWithControlledSortOrder as TableBaseColumn[]
+    ).filter((col: TableBaseColumn) => col.sortOrder !== false)[0]
     if (columnToSort) {
       return {
         columnKey: columnToSort.key,
@@ -263,18 +261,18 @@ export function useTableData (
       const sorter =
         activeSorter.sorter === undefined || activeSorter.sorter === 'default'
           ? (row1: RowData, row2: RowData) => {
-            const value1 = row1[columnKey]
-            const value2 = row2[columnKey]
-            if (typeof value1 === 'number' && typeof value2 === 'number') {
-              return value1 - value2
-            } else if (
-              typeof value1 === 'string' &&
+              const value1 = row1[columnKey]
+              const value2 = row2[columnKey]
+              if (typeof value1 === 'number' && typeof value2 === 'number') {
+                return value1 - value2
+              } else if (
+                typeof value1 === 'string' &&
                 typeof value2 === 'string'
-            ) {
-              return value1.localeCompare(value2)
+              ) {
+                return value1.localeCompare(value2)
+              }
+              return 0
             }
-            return 0
-          }
           : activeSorter.sorter
       return filteredData.sort(
         (tmNode1, tmNode2) =>
@@ -308,10 +306,8 @@ export function useTableData (
   function mergedOnUpdatePageSize (pageSize: number): void {
     const { pagination } = props
     if (pagination) {
-      const {
-        onPageSizeChange,
-        'onUpdate:pageSize': onUpdatePageSize
-      } = pagination
+      const { onPageSizeChange, 'onUpdate:pageSize': onUpdatePageSize } =
+        pagination
       if (onPageSizeChange) call(onPageSizeChange, pageSize)
       if (onUpdatePageSize) call(onUpdatePageSize, pageSize)
       doUpdatePageSize(pageSize)

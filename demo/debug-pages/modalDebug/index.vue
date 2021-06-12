@@ -1,8 +1,6 @@
 <template>
   <div>
-    <n-button @click="isActive = true">
-      active
-    </n-button>
+    <n-button @click="isActive = true"> active </n-button>
     <modal-wrapper v-model="isActive" />
   </div>
 </template>

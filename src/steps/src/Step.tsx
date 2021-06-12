@@ -123,21 +123,21 @@ export default defineComponent({
                   return !(
                     mergedStatus === 'finish' || mergedStatus === 'error'
                   ) ? (
-                      <div
-                        key={this.internalIndex}
-                        class={`${mergedClsPrefix}-step-indicator-slot__index`}
-                      >
-                        {this.internalIndex}
-                      </div>
-                    ) : mergedStatus === 'finish' ? (
-                      <NBaseIcon clsPrefix={mergedClsPrefix} key="finish">
-                        {{ default: () => <FinishedIcon /> }}
-                      </NBaseIcon>
-                    ) : mergedStatus === 'error' ? (
-                      <NBaseIcon clsPrefix={mergedClsPrefix} key="error">
-                        {{ default: () => <ErrorIcon /> }}
-                      </NBaseIcon>
-                    ) : null
+                    <div
+                      key={this.internalIndex}
+                      class={`${mergedClsPrefix}-step-indicator-slot__index`}
+                    >
+                      {this.internalIndex}
+                    </div>
+                      ) : mergedStatus === 'finish' ? (
+                    <NBaseIcon clsPrefix={mergedClsPrefix} key="finish">
+                      {{ default: () => <FinishedIcon /> }}
+                    </NBaseIcon>
+                      ) : mergedStatus === 'error' ? (
+                    <NBaseIcon clsPrefix={mergedClsPrefix} key="error">
+                      {{ default: () => <ErrorIcon /> }}
+                    </NBaseIcon>
+                      ) : null
                 }
               }}
             </NIconSwitchTransition>

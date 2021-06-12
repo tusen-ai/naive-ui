@@ -485,9 +485,10 @@ export default defineComponent({
           </NTag>
         </div>
       )
-      const originalTags = (maxTagCountNumeric
-        ? this.selectedOptions!.slice(0, maxTagCount as number)
-        : this.selectedOptions!
+      const originalTags = (
+        maxTagCountNumeric
+          ? this.selectedOptions!.slice(0, maxTagCount as number)
+          : this.selectedOptions!
       ).map(createTag)
       const input = filterable ? (
         <div
@@ -519,18 +520,18 @@ export default defineComponent({
       // May Overflow
       const renderCounter = maxTagCountResponsive
         ? () => (
-          <div
-            class={`${clsPrefix}-base-selection-tag-wrapper`}
-            ref="counterWrapperRef"
-          >
-            <NTag
-              ref="counterRef"
-              onMouseenter={this.handleMouseEnterCounter}
-              onMouseleave={this.handleMouseLeaveCounter}
-              disabled={disabled}
-            />
-          </div>
-        )
+            <div
+              class={`${clsPrefix}-base-selection-tag-wrapper`}
+              ref="counterWrapperRef"
+            >
+              <NTag
+                ref="counterRef"
+                onMouseenter={this.handleMouseEnterCounter}
+                onMouseleave={this.handleMouseLeaveCounter}
+                disabled={disabled}
+              />
+            </div>
+          )
         : undefined
       let counter: JSX.Element | undefined
       if (maxTagCountNumeric) {
@@ -597,24 +598,24 @@ export default defineComponent({
       )
       const renderPopover = useMaxTagCount
         ? (): JSX.Element => (
-          <div class={`${clsPrefix}-base-selection-popover`}>
-            {maxTagCountResponsive
-              ? originalTags
-              : this.selectedOptions!.map(createTag)}
-          </div>
-        )
+            <div class={`${clsPrefix}-base-selection-popover`}>
+              {maxTagCountResponsive
+                ? originalTags
+                : this.selectedOptions!.map(createTag)}
+            </div>
+          )
         : undefined
       const popoverProps = useMaxTagCount
         ? ({
-          show: this.showTagsPanel,
-          trigger: 'hover',
-          overlap: true,
-          placement: 'top',
-          width: 'trigger',
-          onUpdateShow: this.onPopoverUpdateShow,
-          theme: this.mergedTheme.peers.Popover,
-          themeOverrides: this.mergedTheme.peerOverrides.Popover
-        } as const)
+            show: this.showTagsPanel,
+            trigger: 'hover',
+            overlap: true,
+            placement: 'top',
+            width: 'trigger',
+            onUpdateShow: this.onPopoverUpdateShow,
+            theme: this.mergedTheme.peers.Popover,
+            themeOverrides: this.mergedTheme.peerOverrides.Popover
+          } as const)
         : null
       const placeholder =
         !this.selected && !this.pattern && !this.isCompositing ? (

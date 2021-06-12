@@ -127,13 +127,13 @@ export default defineComponent({
               },
               vertical
                 ? {
-                  marginBottom: index !== lastIndex ? verticalMargin : ''
-                }
+                    marginBottom: index !== lastIndex ? verticalMargin : ''
+                  }
                 : {
-                  marginRight: index !== lastIndex ? horizontalMargin : '',
-                  paddingTop: semiVerticalMargin,
-                  paddingBottom: semiVerticalMargin
-                }
+                    marginRight: index !== lastIndex ? horizontalMargin : '',
+                    paddingTop: semiVerticalMargin,
+                    paddingBottom: semiVerticalMargin
+                  }
             ]}
           >
             {child}

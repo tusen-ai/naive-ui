@@ -7,9 +7,7 @@
             Top Start
           </n-button>
         </template>
-        <div class="large-text">
-          Oops!
-        </div>
+        <div class="large-text">Oops!</div>
       </n-popover>
       <n-popover placement="top" trigger="click">
         <template #activator>
@@ -17,9 +15,7 @@
             Top
           </n-button>
         </template>
-        <div class="large-text">
-          Oops!
-        </div>
+        <div class="large-text">Oops!</div>
       </n-popover>
       <n-popover placement="top-end" trigger="click">
         <template #activator>
@@ -27,9 +23,7 @@
             Top End
           </n-button>
         </template>
-        <div class="large-text">
-          Oops!
-        </div>
+        <div class="large-text">Oops!</div>
       </n-popover>
       <n-popover placement="left-start" trigger="click">
         <template #activator>
@@ -37,9 +31,7 @@
             Left Start
           </n-button>
         </template>
-        <div class="large-text">
-          Oops!
-        </div>
+        <div class="large-text">Oops!</div>
       </n-popover>
       <n-popover placement="left" trigger="click">
         <template #activator>
@@ -47,9 +39,7 @@
             Left
           </n-button>
         </template>
-        <div class="large-text">
-          Oops!
-        </div>
+        <div class="large-text">Oops!</div>
       </n-popover>
       <n-popover placement="left-end" trigger="click">
         <template #activator>
@@ -57,9 +47,7 @@
             Left End
           </n-button>
         </template>
-        <div class="large-text">
-          Oops!
-        </div>
+        <div class="large-text">Oops!</div>
       </n-popover>
       <n-popover placement="right-start" trigger="click">
         <template #activator>
@@ -67,9 +55,7 @@
             Right Start
           </n-button>
         </template>
-        <div class="large-text">
-          Oops!
-        </div>
+        <div class="large-text">Oops!</div>
       </n-popover>
       <n-popover placement="right" trigger="click">
         <template #activator>
@@ -77,9 +63,7 @@
             Right
           </n-button>
         </template>
-        <div class="large-text">
-          Oops!
-        </div>
+        <div class="large-text">Oops!</div>
       </n-popover>
       <n-popover placement="right-end" trigger="click">
         <template #activator>
@@ -87,9 +71,7 @@
             Right End
           </n-button>
         </template>
-        <div class="large-text">
-          Oops!
-        </div>
+        <div class="large-text">Oops!</div>
       </n-popover>
       <n-popover placement="bottom-start" trigger="click">
         <template #activator>
@@ -97,9 +79,7 @@
             Bottom Start
           </n-button>
         </template>
-        <div class="large-text">
-          Oops!
-        </div>
+        <div class="large-text">Oops!</div>
       </n-popover>
       <n-popover placement="bottom" trigger="click">
         <template #activator>
@@ -107,9 +87,7 @@
             Bottom
           </n-button>
         </template>
-        <div class="large-text">
-          Oops!
-        </div>
+        <div class="large-text">Oops!</div>
       </n-popover>
       <n-popover placement="bottom-end" trigger="click">
         <template #activator>
@@ -117,9 +95,7 @@
             Bottom End
           </n-button>
         </template>
-        <div class="large-text">
-          Oops!
-        </div>
+        <div class="large-text">Oops!</div>
       </n-popover>
     </div>
     <!-- <div style="margin-left: 400px;">

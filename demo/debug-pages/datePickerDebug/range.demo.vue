@@ -1,8 +1,6 @@
 <template>
   <div class="n-doc-section">
-    <div class="n-doc-section__header">
-      DateTime Range
-    </div>
+    <div class="n-doc-section__header">DateTime Range</div>
     <div class="n-doc-section__view" style="flex-wrap: wrap">
       <!--EXAMPLE_START-->
       <n-date-picker
@@ -15,7 +13,8 @@
     <pre class="n-doc-section__inspect">
 range1 v-model: {{ JSON.stringify(range1) }}
 range2 v-model: {{ JSON.stringify(range2) }}
-range3 v-model: {{ JSON.stringify(range3) }}</pre>
+range3 v-model: {{ JSON.stringify(range3) }}</pre
+    >
     <pre>
       <!--SOURCE-->
     </pre>
