@@ -1,5 +1,78 @@
 import { mount } from '@vue/test-utils'
+import { ComponentPublicInstance, h, nextTick } from 'vue'
+import { NIcon } from '../../icon'
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NDropdown } from '../index'
+import { VueWrapper } from '@vue/test-utils/dist/vueWrapper'
+
+const className = 'n-dropdown-option-body n-dropdown-option-body--pending'
+const selectors = '.n-dropdown-option-body'
+const options = [
+  {
+    type: 'group',
+    label: '主角和吃的',
+    key: 'main',
+    children: [
+      {
+        label: '杰·盖茨比',
+        key: 'jay gatsby'
+      },
+      {
+        type: 'divider',
+        key: 'd1'
+      },
+      {
+        label: '黛西·布坎南',
+        icon () {
+          return h(NIcon, null, {
+            default: () => h(CashIcon)
+          })
+        },
+        key: 'daisy buchanan',
+        disabled: true
+      }
+    ]
+  },
+  {
+    type: 'divider',
+    key: 'd1'
+  },
+  {
+    label: '其他角色',
+    key: 'others1',
+    children: [
+      {
+        label: '乔丹·贝克',
+        key: 'jordan baker'
+      }
+    ]
+  }
+]
+
+interface IProps {
+  onSelect?: (key: string | number) => void
+  inverted?: boolean
+  data?: any[]
+}
+
+const render = ({
+  onSelect,
+  inverted = false,
+  data = options
+}: IProps = {}): VueWrapper<ComponentPublicInstance> => {
+  return mount(NDropdown, {
+    attachTo: document.body,
+    props: {
+      options: data,
+      trigger: 'click',
+      onSelect,
+      inverted
+    },
+    slots: {
+      default: () => 'star kirby'
+    }
+  })
+}
 
 describe('n-dropdown', () => {
   it('should work with import on demand', () => {
@@ -10,32 +83,125 @@ describe('n-dropdown', () => {
     })
   })
 
-  it('dropdown disabled', async () => {
-    const onSelect = jest.fn()
-
-    const options = [
-      {
-        label: '滨海湾金沙，新加坡',
-        key: 'marina bay sands',
-        disabled: true
-      }
-    ]
-    const triggerEvent = 'click'
-    const wrapper = mount(NDropdown, {
-      attachTo: document.body,
-      props: {
-        options,
-        trigger: triggerEvent,
-        onSelect: onSelect
-      },
-      slots: {
-        default: () => 'star kirby'
-      }
-    })
+  it('show item', async () => {
+    const wrapper = render()
 
     const triggerNodeWrapper = wrapper.find('span')
     expect(triggerNodeWrapper.exists()).toBe(true)
-    await triggerNodeWrapper.trigger(triggerEvent)
+    await triggerNodeWrapper.trigger('click')
+
+    expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
+    wrapper.unmount()
+  })
+
+  it('inverted style', async () => {
+    const wrapper = render({ inverted: true })
+
+    const triggerNodeWrapper = wrapper.find('span')
+    expect(triggerNodeWrapper.exists()).toBe(true)
+    await triggerNodeWrapper.trigger('click')
+
+    expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
+    wrapper.unmount()
+  })
+
+  it('keyboard event', async () => {
+    const onSelect = jest.fn()
+    let wrapper = render({ onSelect })
+
+    let triggerNodeWrapper = wrapper.find('span')
+    await triggerNodeWrapper.trigger('click')
+
+    await triggerNodeWrapper.trigger('keydown', {
+      key: 'ArrowDown'
+    })
+    let options = document.querySelectorAll(selectors)
+    expect(options[1].className).toEqual(className)
+
+    await triggerNodeWrapper.trigger('keydown', {
+      key: 'ArrowDown'
+    })
+    await triggerNodeWrapper.trigger('keydown', {
+      key: 'ArrowRight'
+    })
+    options = document.querySelectorAll(selectors)
+    expect(options.length).toBe(5)
+    expect(options[3].className).toEqual(className)
+    expect(options[4].className).toEqual(className)
+
+    await triggerNodeWrapper.trigger('keydown', {
+      key: 'ArrowLeft'
+    })
+    options = document.querySelectorAll(selectors)
+    expect(options.length).toBe(4)
+
+    await triggerNodeWrapper.trigger('keydown', {
+      key: 'ArrowUp'
+    })
+    expect(options[1].className).toEqual(className)
+    await triggerNodeWrapper.trigger('keyup', {
+      key: 'Enter'
+    })
+    expect(onSelect).toHaveBeenCalledWith('jay gatsby', {
+      key: 'jay gatsby',
+      label: '杰·盖茨比'
+    })
+
+    wrapper = render({ onSelect })
+
+    triggerNodeWrapper = wrapper.find('span')
+    await triggerNodeWrapper.trigger('click')
+    await triggerNodeWrapper.trigger('keydown', {
+      key: 'Escape'
+    })
+    expect(document.querySelector('.n-dropdown')).toBeNull()
+
+    wrapper.unmount()
+  })
+
+  it('option mouse event', async () => {
+    const onSelect = jest.fn()
+    const wrapper = render({ onSelect })
+
+    const triggerNodeWrapper = wrapper.find('span')
+    expect(triggerNodeWrapper.exists()).toBe(true)
+    await triggerNodeWrapper.trigger('click')
+
+    const options = document.querySelectorAll(selectors)
+
+    const mouseEnter = new Event('mouseenter')
+    options[1].dispatchEvent(mouseEnter)
+    await nextTick(() => {
+      expect(options[1].className).toEqual(className)
+    })
+
+    const mouseMove = new Event('mousemove')
+    options[3].dispatchEvent(mouseMove)
+    await nextTick(() => {
+      expect(options[1].className).not.toEqual(className)
+      expect(options[3].className).toEqual(className)
+    })
+    await (options[3] as HTMLDivElement).click()
+    expect(onSelect).not.toHaveBeenCalledWith()
+
+    const mouseLeave = new Event('mouseleave')
+    Object.defineProperty(mouseLeave, 'relatedTarget', {
+      writable: false,
+      value: options[1]
+    })
+    options[3].dispatchEvent(mouseLeave)
+    await nextTick(() => {
+      expect(options[3].className).not.toEqual(className)
+    })
+  })
+
+  it('dropdown disabled', async () => {
+    const onSelect = jest.fn()
+    const wrapper = render({ onSelect })
+
+    const triggerNodeWrapper = wrapper.find('span')
+    expect(triggerNodeWrapper.exists()).toBe(true)
+    await triggerNodeWrapper.trigger('click')
 
     const disabledMenu = document.querySelector(
       '.n-dropdown-option-body--disabled'

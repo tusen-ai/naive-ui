@@ -1,0 +1,409 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`n-dropdown inverted style 1`] = `
+<div
+  class="n-popover n-dropdown n-popover--no-arrow n-popover--padded n-popover--raw"
+  style="--box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05); --bezier: cubic-bezier(.4, 0, .2, 1); --bezier-ease-in: cubic-bezier(.4, 0, 1, 1); --bezier-ease-out: cubic-bezier(0, 0, .2, 1); --font-size: 14px; --text-color: rgb(51, 54, 57); --color: #fff; --border-radius: 3px; --arrow-height: 6px; --arrow-offset: 10px; --arrow-offset-vertical: 10px; --padding: 8px 14px; --space: 6px; --space-arrow: 10px;"
+>
+  
+  <div
+    class="n-dropdown-menu"
+    style="--bezier: cubic-bezier(.4, 0, .2, 1); --font-size: 14px; --padding: 4px 0; --border-radius: 3px; --box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05); --option-height: 34px; --option-prefix-width: 14px; --option-icon-prefix-width: 36px; --option-suffix-width: 14px; --option-icon-suffix-width: 32px; --option-icon-size: 16px; --divider-color: rgb(239, 239, 245); --option-opacity-disabled: 0.5; --color: rgb(0, 20, 40); --option-color-hover: #18a058; --option-color-active: #18a058; --option-text-color: #BBB; --option-text-color-hover: #FFF; --option-text-color-active: #FFF; --option-text-color-child-active: #FFF; --prefix-color: #BBB; --suffix-color: #BBB; --group-header-text-color: #AAA;"
+  >
+    
+    <div
+      class="n-dropdown-option"
+    >
+      <div
+        class="n-dropdown-option-body n-dropdown-option-body--group"
+      >
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        >
+          <!---->
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__label"
+        >
+          主角和吃的
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        />
+      </div>
+    </div>
+    
+    <div
+      class="n-dropdown-option"
+    >
+      <div
+        class="n-dropdown-option-body"
+      >
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        >
+          <!---->
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__label"
+        >
+          杰·盖茨比
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        />
+      </div>
+      <!---->
+    </div>
+    <div
+      class="n-dropdown-divider"
+    />
+    <div
+      class="n-dropdown-option"
+    >
+      <div
+        class="n-dropdown-option-body n-dropdown-option-body--disabled"
+      >
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        >
+          <i
+            class="n-icon"
+            role="img"
+            style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          >
+            <svg
+              viewBox="0 0 512 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                height="256"
+                rx="16"
+                ry="16"
+                style="fill: none; stroke: currentColor; stroke-linejoin: round; stroke-width: 32px;"
+                transform="translate(512 416) rotate(180)"
+                width="448"
+                x="32"
+                y="80"
+              />
+              <line
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                x1="64"
+                x2="448"
+                y1="384"
+                y2="384"
+              />
+              <line
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                x1="96"
+                x2="416"
+                y1="432"
+                y2="432"
+              />
+              <circle
+                cx="256"
+                cy="208"
+                r="80"
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+              />
+              <path
+                d="M480,160a80,80,0,0,1-80-80"
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+              />
+              <path
+                d="M32,160a80,80,0,0,0,80-80"
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+              />
+              <path
+                d="M480,256a80,80,0,0,0-80,80"
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+              />
+              <path
+                d="M32,256a80,80,0,0,1,80,80"
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+              />
+            </svg>
+          </i>
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__label"
+        >
+          黛西·布坎南
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        />
+      </div>
+      <!---->
+    </div>
+    
+    
+    <div
+      class="n-dropdown-divider"
+    />
+    <div
+      class="n-dropdown-option"
+    >
+      <div
+        class="n-dropdown-option-body"
+      >
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        >
+          <!---->
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__label"
+        >
+          其他角色
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        >
+          <i
+            class="n-icon"
+            role="img"
+            style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          >
+            <svg
+              fill="none"
+              viewBox="0 0 16 16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5.64645 3.14645C5.45118 3.34171 5.45118 3.65829 5.64645 3.85355L9.79289 8L5.64645 12.1464C5.45118 12.3417 5.45118 12.6583 5.64645 12.8536C5.84171 13.0488 6.15829 13.0488 6.35355 12.8536L10.8536 8.35355C11.0488 8.15829 11.0488 7.84171 10.8536 7.64645L6.35355 3.14645C6.15829 2.95118 5.84171 2.95118 5.64645 3.14645Z"
+                fill="currentColor"
+              />
+            </svg>
+          </i>
+        </div>
+      </div>
+      
+      <div
+        class="n-dropdown-offset-container"
+      >
+        <!---->
+      </div>
+      
+    </div>
+  </div>
+  
+  <!---->
+</div>
+`;
+
+exports[`n-dropdown show item 1`] = `
+<div
+  class="n-popover n-dropdown n-popover--no-arrow n-popover--padded n-popover--raw"
+  style="--box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05); --bezier: cubic-bezier(.4, 0, .2, 1); --bezier-ease-in: cubic-bezier(.4, 0, 1, 1); --bezier-ease-out: cubic-bezier(0, 0, .2, 1); --font-size: 14px; --text-color: rgb(51, 54, 57); --color: #fff; --border-radius: 3px; --arrow-height: 6px; --arrow-offset: 10px; --arrow-offset-vertical: 10px; --padding: 8px 14px; --space: 6px; --space-arrow: 10px;"
+>
+  
+  <div
+    class="n-dropdown-menu"
+    style="--bezier: cubic-bezier(.4, 0, .2, 1); --font-size: 14px; --padding: 4px 0; --border-radius: 3px; --box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05); --option-height: 34px; --option-prefix-width: 14px; --option-icon-prefix-width: 36px; --option-suffix-width: 14px; --option-icon-suffix-width: 32px; --option-icon-size: 16px; --divider-color: rgb(239, 239, 245); --option-opacity-disabled: 0.5; --color: #fff; --option-color-hover: rgb(243, 243, 245); --option-color-active: rgba(24, 160, 88, 0.1); --option-text-color: rgb(51, 54, 57); --option-text-color-hover: rgb(51, 54, 57); --option-text-color-active: #18a058; --option-text-color-child-active: #18a058; --prefix-color: rgb(51, 54, 57); --suffix-color: rgb(51, 54, 57); --group-header-text-color: rgb(158, 164, 170);"
+  >
+    
+    <div
+      class="n-dropdown-option"
+    >
+      <div
+        class="n-dropdown-option-body n-dropdown-option-body--group"
+      >
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        >
+          <!---->
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__label"
+        >
+          主角和吃的
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        />
+      </div>
+    </div>
+    
+    <div
+      class="n-dropdown-option"
+    >
+      <div
+        class="n-dropdown-option-body"
+      >
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        >
+          <!---->
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__label"
+        >
+          杰·盖茨比
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        />
+      </div>
+      <!---->
+    </div>
+    <div
+      class="n-dropdown-divider"
+    />
+    <div
+      class="n-dropdown-option"
+    >
+      <div
+        class="n-dropdown-option-body n-dropdown-option-body--disabled"
+      >
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        >
+          <i
+            class="n-icon"
+            role="img"
+            style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          >
+            <svg
+              viewBox="0 0 512 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                height="256"
+                rx="16"
+                ry="16"
+                style="fill: none; stroke: currentColor; stroke-linejoin: round; stroke-width: 32px;"
+                transform="translate(512 416) rotate(180)"
+                width="448"
+                x="32"
+                y="80"
+              />
+              <line
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                x1="64"
+                x2="448"
+                y1="384"
+                y2="384"
+              />
+              <line
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                x1="96"
+                x2="416"
+                y1="432"
+                y2="432"
+              />
+              <circle
+                cx="256"
+                cy="208"
+                r="80"
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+              />
+              <path
+                d="M480,160a80,80,0,0,1-80-80"
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+              />
+              <path
+                d="M32,160a80,80,0,0,0,80-80"
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+              />
+              <path
+                d="M480,256a80,80,0,0,0-80,80"
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+              />
+              <path
+                d="M32,256a80,80,0,0,1,80,80"
+                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+              />
+            </svg>
+          </i>
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__label"
+        >
+          黛西·布坎南
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        />
+      </div>
+      <!---->
+    </div>
+    
+    
+    <div
+      class="n-dropdown-divider"
+    />
+    <div
+      class="n-dropdown-option"
+    >
+      <div
+        class="n-dropdown-option-body"
+      >
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        >
+          <!---->
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__label"
+        >
+          其他角色
+        </div>
+        <div
+          __dropdown-option="true"
+          class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        >
+          <i
+            class="n-icon"
+            role="img"
+            style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          >
+            <svg
+              fill="none"
+              viewBox="0 0 16 16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5.64645 3.14645C5.45118 3.34171 5.45118 3.65829 5.64645 3.85355L9.79289 8L5.64645 12.1464C5.45118 12.3417 5.45118 12.6583 5.64645 12.8536C5.84171 13.0488 6.15829 13.0488 6.35355 12.8536L10.8536 8.35355C11.0488 8.15829 11.0488 7.84171 10.8536 7.64645L6.35355 3.14645C6.15829 2.95118 5.84171 2.95118 5.64645 3.14645Z"
+                fill="currentColor"
+              />
+            </svg>
+          </i>
+        </div>
+      </div>
+      
+      <div
+        class="n-dropdown-offset-container"
+      >
+        <!---->
+      </div>
+      
+    </div>
+  </div>
+  
+  <!---->
+</div>
+`;
