@@ -57,7 +57,7 @@ tree
 | pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Props) |
 | paging | `boolean` | `true` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `false` |
 | row-class-name | `string \| (rowData: object, index : number) => string \| object` | `undefined` |  |
-| row-key | `(rowData: object) => number \| string` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |
+| row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` |  |
 | scroll-x | `number \| string` | `undefined` | 表格内容的横向宽度，如果列被水平固定了，则需要设定它 |
 | single-column | `boolean` | `false` |  |
