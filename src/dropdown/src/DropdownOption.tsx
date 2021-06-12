@@ -13,8 +13,7 @@ import {
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { useMemo } from 'vooks'
 import { ChevronRightIcon } from '../../_internal/icons'
-import { useDeferredTrue } from '../../_utils/composable'
-import { render } from '../../_utils'
+import { render, useDeferredTrue } from '../../_utils'
 import { NIcon } from '../../icon'
 import NDropdownMenu, { dropdownMenuInjectionKey } from './DropdownMenu'
 import { dropdownInjectionKey } from './Dropdown'
@@ -119,6 +118,7 @@ export default defineComponent({
       enteringSubmenuRef.value = false
     }
     function handleMouseEnter (): void {
+      console.log(mergedShowRef.value, 1111)
       const { parentKey, tmNode } = props
       if (!mergedShowRef.value) return
       lastToggledSubmenuKeyRef.value = parentKey
@@ -126,12 +126,14 @@ export default defineComponent({
       hoverKeyRef.value = tmNode.key
     }
     function handleMouseMove (): void {
+      console.log(mergedShowRef.value, 11112)
       const { tmNode } = props
       if (!mergedShowRef.value) return
       if (hoverKeyRef.value === tmNode.key) return
       handleMouseEnter()
     }
     function handleMouseLeave (e: MouseEvent): void {
+      console.log(mergedShowRef.value, 11113)
       if (!mergedShowRef.value) return
       const { relatedTarget } = e
       if (
