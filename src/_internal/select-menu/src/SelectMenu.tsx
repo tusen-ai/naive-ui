@@ -50,9 +50,8 @@ export interface InternalSelectMenuInjection {
   valueRef: Ref<string | number | Array<string | number> | null>
 }
 
-export const internalSelectionMenuInjectionKey: InjectionKey<InternalSelectMenuInjection> = Symbol(
-  'internal-select-menu'
-)
+export const internalSelectionMenuInjectionKey: InjectionKey<InternalSelectMenuInjection> =
+  Symbol('internal-select-menu')
 
 interface InternalExposedProps {
   selfRef: Ref<HTMLElement | null>
@@ -79,10 +78,7 @@ export default defineComponent({
       type: Object as PropType<SelectTreeMate>,
       required: true
     },
-    multiple: {
-      type: Boolean,
-      default: false
-    },
+    multiple: Boolean,
     size: {
       type: String as PropType<Size>,
       default: 'medium'
@@ -92,10 +88,7 @@ export default defineComponent({
       default: null
     },
     width: [Number, String],
-    autoPending: {
-      type: Boolean,
-      default: false
-    },
+    autoPending: Boolean,
     virtualScroll: {
       type: Boolean,
       default: true
@@ -428,7 +421,7 @@ export default defineComponent({
                             key={tmNode.key}
                             clsPrefix={clsPrefix}
                             tmNode={
-                              (tmNode as unknown) as TreeNode<SelectGroupOption>
+                              tmNode as unknown as TreeNode<SelectGroupOption>
                             }
                           />
                         ) : tmNode.ignored ? null : (
@@ -436,7 +429,7 @@ export default defineComponent({
                             clsPrefix={clsPrefix}
                             key={tmNode.key}
                             tmNode={
-                              (tmNode as unknown) as TreeNode<SelectBaseOption>
+                              tmNode as unknown as TreeNode<SelectBaseOption>
                             }
                           />
                         )
@@ -457,7 +450,7 @@ export default defineComponent({
                           key={tmNode.key}
                           clsPrefix={clsPrefix}
                           tmNode={
-                            (tmNode as unknown) as TreeNode<SelectGroupOption>
+                            tmNode as unknown as TreeNode<SelectGroupOption>
                           }
                         />
                       ) : (
@@ -465,7 +458,7 @@ export default defineComponent({
                           clsPrefix={clsPrefix}
                           key={tmNode.key}
                           tmNode={
-                            (tmNode as unknown) as TreeNode<SelectBaseOption>
+                            tmNode as unknown as TreeNode<SelectBaseOption>
                           }
                         />
                       )
