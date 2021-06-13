@@ -116,6 +116,10 @@ export const dataTableProps = {
     type: Number,
     default: 16
   },
+  emptyDescription: {
+    type: String,
+    default: 'No Data'
+  },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
@@ -500,6 +504,7 @@ export default defineComponent({
                           ]}
                         >
                           <NEmpty
+                            description={this.emptyDescription}
                             theme={this.mergedTheme.peers.Empty}
                             themeOverrides={
                               this.mergedTheme.peerOverrides.Empty
