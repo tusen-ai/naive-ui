@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-card` 的 `header-style` 没有应用于 header 上 [#103](https://github.com/TuSimple/naive-ui/issues/103)
+- 修复 `n-dialog` 的 `destroyAll` 方法缺失
 
 ## 2.11.8
 
