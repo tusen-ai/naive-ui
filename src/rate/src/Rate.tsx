@@ -101,7 +101,7 @@ export default defineComponent({
           common: { cubicBezierEaseInOut },
           self: { itemColor, itemColorActive, itemSize }
         } = themeRef.value
-        let mergedSize = itemSize
+        let mergedSize: string = itemSize
         if (typeof size === 'number') {
           mergedSize = `${size}px`
         } else {
