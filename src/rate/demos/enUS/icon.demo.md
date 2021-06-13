@@ -1,6 +1,6 @@
 # Icon
 
-Use custom icon.
+The content in default slot will be used as icon.
 
 ```html
 <n-space>
