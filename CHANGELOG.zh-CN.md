@@ -813,4 +813,4 @@
 
 ### Features
 
-- `n-data-table` 增加了 empty 插槽
+- `n-data-table` 增加了 empty 插槽 [#86](https://github.com/TuSimple/naive-ui/issues/86)

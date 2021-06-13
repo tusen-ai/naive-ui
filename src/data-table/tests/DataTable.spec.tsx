@@ -32,13 +32,14 @@ describe('n-data-table', () => {
       }
     ]
     const data: any = []
-    mount(() => (
+    const wrapper = mount(() => (
       <NDataTable columns={columns} data={data}>
         {{
-          empty: () => <div>empty</div>
+          empty: () => <div class="empty-info">empty</div>
         }}
       </NDataTable>
     ))
+    expect(wrapper.find('.empty-info').exists()).toEqual(true)
   })
   describe('props.columns', () => {
     it('has correct type', () => {
