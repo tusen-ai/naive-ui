@@ -15,9 +15,8 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data: any = []
     const wrapper = mount(() => (
-      <NDataTable columns={columns} data={data}>
+      <NDataTable columns={columns} data={[]}>
         {{
           empty: () => <div class="empty-info">empty</div>
         }}
