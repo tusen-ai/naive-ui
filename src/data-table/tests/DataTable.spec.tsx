@@ -13,22 +13,6 @@ describe('n-data-table', () => {
       {
         title: 'Name',
         key: 'name'
-      },
-      {
-        title: 'Age',
-        key: 'age'
-      },
-      {
-        title: 'Address',
-        key: 'address'
-      },
-      {
-        title: 'Tags',
-        key: 'tags'
-      },
-      {
-        title: 'Action',
-        key: 'actions'
       }
     ]
     const data: any = []
