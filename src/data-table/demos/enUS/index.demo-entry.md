@@ -90,7 +90,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 
 | Name  | Type | Description                                    |
 | ----- | ---- | ---------------------------------------------- |
-| empty | `()` | Custom description when data of table is empty |
+| empty | `()` | Custom description when data of table is empty. |
 
 ## API
 
