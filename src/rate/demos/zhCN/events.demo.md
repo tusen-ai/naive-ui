@@ -3,7 +3,7 @@
 处理的事件。
 
 ```html
-<n-rate :value='value' @update:value='handleUpdate' />
+<n-rate :default-value="2" @update:value='handleUpdate' />
 ```
 
 ```js
