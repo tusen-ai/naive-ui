@@ -810,3 +810,7 @@
 ### Fixes
 
 - `n-scrollbar` 的轨道会挡住鼠标事件
+
+### Features
+
+- `n-data-table` 增加了 empty 插槽 [#86](https://github.com/TuSimple/naive-ui/issues/86)

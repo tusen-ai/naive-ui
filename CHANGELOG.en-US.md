@@ -808,3 +808,7 @@ See vue3.md
 ### Fixes
 
 - Rails of `n-scrollbar` shadow mouse event.
+
+### Features
+
+- `n-date-table` add `empty` slot. [#86](https://github.com/TuSimple/naive-ui/issues/86)

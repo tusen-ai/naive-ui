@@ -7,6 +7,7 @@ import {
   PropType,
   ExtractPropTypes,
   toRef,
+  renderSlot,
   CSSProperties
 } from 'vue'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
@@ -499,12 +500,14 @@ export default defineComponent({
                             }
                           ]}
                         >
-                          <NEmpty
-                            theme={this.mergedTheme.peers.Empty}
-                            themeOverrides={
-                              this.mergedTheme.peerOverrides.Empty
-                            }
-                          />
+                          {renderSlot(this.$slots, 'empty', undefined, () => [
+                            <NEmpty
+                              theme={this.mergedTheme.peers.Empty}
+                              themeOverrides={
+                                this.mergedTheme.peerOverrides.Empty
+                              }
+                            />
+                          ])}
                         </div>
                       ) : null
                   }}
