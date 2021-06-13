@@ -10,7 +10,7 @@
     "build:package": "npm run gen-version && npm run clean && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && node scripts/post-build",
     "build:site": "./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "clean": "rimraf site lib es node_modules/naive-ui themes/**/es themes/**/lib",
-    "release:package": "npm run build:package && npm publish",
+    "release:package": "npm run test && npm run build:package && npm publish",
     "release:site": "cross-env TUSIMPLE=true npm run build:site && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh",
     "lint": "npm run lint:code && npm run lint:type",
     "lint:type": "tsc -b --force tsconfig.esm.json",
