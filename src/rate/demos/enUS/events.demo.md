@@ -1,6 +1,6 @@
-# 事件
+# Events
 
-处理的事件。
+Handle events。
 
 ```html
 <n-rate :default-value="2" @update:value='handleUpdate' />

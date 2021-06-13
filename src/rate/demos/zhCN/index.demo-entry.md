@@ -20,7 +20,7 @@ icon
 | count           | `number`                  | `5`         |      |
 | value           | `number`                  | `undefined` |      |
 | default-value   | `number`                  | `0`         |      |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
+| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` |  |
 | on-update:value | `(value: number) => void` | `undefined` |      |
 
 ## Slots

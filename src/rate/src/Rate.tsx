@@ -12,7 +12,7 @@ import { useMergedState } from 'vooks'
 import { NBaseIcon } from '../../_internal'
 import { useTheme, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call } from '../../_utils'
+import { call, createKey } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { rateLight } from '../styles'
 import type { RateTheme } from '../styles'
@@ -34,13 +34,10 @@ const rateProps = {
     default: 0
   },
   size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
+    type: [String, Number] as PropType<number | 'small' | 'medium' | 'large'>,
     default: 'medium'
   },
   color: String,
-    type: String,
-    default: undefined
-  },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<(value: number) => void>
@@ -99,22 +96,28 @@ export default defineComponent({
       handleClick,
       handleMouseLeave,
       cssVars: computed(() => {
+        const { size } = props
         const {
           common: { cubicBezierEaseInOut },
           self: { itemColor, itemColorActive, itemSize }
         } = themeRef.value
+        let syntheticSize: string = itemSize
+        if (typeof size === 'number') {
+          syntheticSize = `${size}px`
+        } else {
+          syntheticSize = themeRef.value.self[createKey('size', size)]
+        }
         return {
           '--bezier': cubicBezierEaseInOut,
           '--item-color': itemColor,
           '--item-color-active': props.color || itemColorActive,
-          '--item-size': itemSize
+          '--item-size': syntheticSize
         }
       })
     }
   },
   render () {
     const { hoverIndex, mergedValue, mergedClsPrefix, $slots: { default: defaultSlot } } = this
-    const defaultSlot = this.$slots.default
     return (
       <div
         class={`${mergedClsPrefix}-rate`}
