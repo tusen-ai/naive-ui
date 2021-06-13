@@ -113,7 +113,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { hoverIndex, mergedValue, mergedClsPrefix } = this
+    const { hoverIndex, mergedValue, mergedClsPrefix, $slots: { default: defaultSlot } } = this
     const defaultSlot = this.$slots.default
     return (
       <div
