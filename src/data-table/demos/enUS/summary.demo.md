@@ -54,7 +54,7 @@ export default defineComponent({
         return {
           name: {
             value: pageData.reduce((prevValue, row) => prevValue + row.age, 0),
-            colSpan: '3'
+            colSpan: 3
           }
         }
       },
