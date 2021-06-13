@@ -7,6 +7,7 @@ import {
   PropType,
   ExtractPropTypes,
   toRef,
+  renderSlot,
   CSSProperties
 } from 'vue'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
@@ -115,10 +116,6 @@ export const dataTableProps = {
   indent: {
     type: Number,
     default: 16
-  },
-  emptyDescription: {
-    type: String,
-    default: 'No Data'
   },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:page': [Function, Array] as PropType<
@@ -503,13 +500,14 @@ export default defineComponent({
                             }
                           ]}
                         >
-                          <NEmpty
-                            description={this.emptyDescription}
-                            theme={this.mergedTheme.peers.Empty}
-                            themeOverrides={
-                              this.mergedTheme.peerOverrides.Empty
-                            }
-                          />
+                          {renderSlot(this.$slots, 'empty', undefined, () => [
+                            <NEmpty
+                              theme={this.mergedTheme.peers.Empty}
+                              themeOverrides={
+                                this.mergedTheme.peerOverrides.Empty
+                              }
+                            />
+                          ])}
                         </div>
                       ) : null
                   }}
