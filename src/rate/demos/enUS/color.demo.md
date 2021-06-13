@@ -1,7 +1,7 @@
 # Color
 
 ```html
-<n-space align="baseline">
+<n-space>
   <n-rate />
   <n-rate color='#4fb233' />
   <n-rate color='red' />
