@@ -51,21 +51,22 @@ export const dataTableProps = {
   },
   minHeight: [Number, String] as PropType<string | number>,
   maxHeight: [Number, String] as PropType<string | number>,
+  // Use any type as row data to make prop data acceptable
   columns: {
-    type: Array as PropType<TableColumns>,
+    type: Array as PropType<TableColumns<any>>,
     default: () => []
   },
+  rowClassName: [String, Function] as PropType<
+  string | CreateRowClassName<any>
+  >,
+  rowProps: Function as PropType<CreateRowProps<any>>,
+  rowKey: Function as PropType<CreateRowKey<any>>,
+  summary: [Function] as PropType<CreateSummary<any>>,
   data: {
     type: Array as PropType<RowData[]>,
     default: () => []
   },
-  rowClassName: [String, Function] as PropType<string | CreateRowClassName>,
-  rowProps: Function as PropType<CreateRowProps>,
-  rowKey: Function as PropType<CreateRowKey>,
-  loading: {
-    type: Boolean,
-    default: false
-  },
+  loading: Boolean,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -87,10 +88,7 @@ export const dataTableProps = {
     type: Boolean,
     default: true
   },
-  singleColumn: {
-    type: Boolean,
-    default: false
-  },
+  singleColumn: Boolean,
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
@@ -101,7 +99,6 @@ export const dataTableProps = {
     default: []
   },
   expandedRowKeys: Array as PropType<RowKey[]>,
-  summary: [Function] as PropType<CreateSummary>,
   virtualScroll: Boolean,
   tableLayout: {
     type: String as PropType<'auto' | 'fixed'>,
