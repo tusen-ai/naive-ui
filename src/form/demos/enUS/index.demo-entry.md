@@ -78,14 +78,14 @@ Accept all props from FormItem & [GridItem](grid#GridItem-Props)
 | Name | Type | Description |
 | --- | --- | --- |
 | validate | `(validateCallback?: (errors?: Array<ValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<void>` | Validate the form. The rejection value type of returned promise is `Array<ValidationError>`. |
-| clearValidationEffect | `() => void` |  |
+| restoreValidation | `() => void` |  |
 
 ### FormItem, FormItemGi Methods
 
 | Name | Type | Description |
 | --- | --- | --- |
 | validate | `(options: { trigger?: string, callback?: (errors?: Array<ValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<void>` | Validate the form item. The rejection value type of returned promise is `Array<ValidationError>`. If trigger is not set, all rules of the item will be applied. `shouldRuleBeApplied` can filter rules after they are filtered by the trigger. |
-| clearValidationEffect | `() => void` |  |
+| restoreValidation | `() => void` |  |
 
 About AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-validator">async-validator</n-a>.
 
