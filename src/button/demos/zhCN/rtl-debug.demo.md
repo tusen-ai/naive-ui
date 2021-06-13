@@ -4,7 +4,11 @@
 <n-space vertical>
   <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
   <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
-    <n-button>Rtl Test</n-button>
+    <n-space>
+      <n-button>Rtl Test</n-button>
+      <n-button>Rtl Test</n-button>
+      <n-button>Rtl Test</n-button>
+    </n-space>
   </n-config-provider>
 </n-space>
 ```
