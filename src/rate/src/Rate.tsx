@@ -137,7 +137,7 @@ export default defineComponent({
             onMouseenter={() => this.handleMouseEnter(index)}
           >
             {
-              defaultSlot?.() ?? <NBaseIcon clsPrefix={mergedClsPrefix} size={this.size}>
+              defaultSlot?.() ?? <NBaseIcon clsPrefix={mergedClsPrefix}>
                 {{ default: () => StarIcon }}
               </NBaseIcon>
             }

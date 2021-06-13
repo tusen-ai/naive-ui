@@ -22,3 +22,9 @@ icon
 | default-value   | `number`                  | `0`         |      |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | on-update:value | `(value: number) => void` | `undefined` |      |
+
+## Slots
+
+| 名称    | 参数 | 说明 |
+| ------- | ---- | ---- |
+| default | `()` |      |

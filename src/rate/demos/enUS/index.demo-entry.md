@@ -6,6 +6,10 @@ If you not very confident, be careful about changing star's color. That will be 
 
 ```demo
 basic
+size
+color
+events
+icon
 ```
 
 ## Props
@@ -15,4 +19,11 @@ basic
 | count           | `number`                  | `5`         |      |
 | value           | `number`                  | `undefined` |      |
 | default-value   | `number`                  | `0`         |      |
-| on-update:value | `(value: number) => void` | `undefined` |      |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
+| on-update:value | `(value: number) => void` | `undefined` |      ||      |
+
+## Slots
+
+| Name    | Parameters | Description |
+| ------- | ---------- | ----------- |
+| default | `()`       |             |
