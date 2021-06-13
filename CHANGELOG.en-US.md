@@ -28,7 +28,7 @@
 - `n-date-picker` add `footer` slot.
 - `n-rate` support `default` slot for icon customizing.
 - `n-rate` add color prop.
-- `n-rate` add size prop
+- `n-rate` add size prop.
 
 ### Fixes
 
