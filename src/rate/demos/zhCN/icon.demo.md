@@ -3,13 +3,11 @@
 默认插槽的内容会被用作图标。
 
 ```html
-<n-space>
-  <n-rate>
-    <n-icon size='20'>
-      <cash-icon />
-    </n-icon>
-  </n-rate>
-</n-space>
+<n-rate>
+  <n-icon size="20">
+    <cash-icon />
+  </n-icon>
+</n-rate>
 ```
 
 ```js

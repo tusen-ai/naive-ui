@@ -3,13 +3,11 @@
 The content in default slot will be used as icon.
 
 ```html
-<n-space>
-  <n-rate>
-    <n-icon size='20'>
-      <cash-icon />
-    </n-icon>
-  </n-rate>
-</n-space>
+<n-rate>
+  <n-icon size="20">
+    <cash-icon />
+  </n-icon>
+</n-rate>
 ```
 
 ```js
