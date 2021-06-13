@@ -86,7 +86,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 
 ## Slots
 
-### Data Table Slots
+### Slots
 
 | Name  | Type | Description                                    |
 | ----- | ---- | ---------------------------------------------- |
