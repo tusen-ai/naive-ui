@@ -37,7 +37,7 @@ const rateProps = {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
-  color: {
+  color: String,
     type: String,
     default: undefined
   },
