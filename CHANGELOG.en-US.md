@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-calendar`'s `on-update:value` prop type.
+- Fix `n-form-item`'s style attribute `grid-template-columns` influence on the layout of child elements. [#93](https://github.com/TuSimple/naive-ui/pull/93)
 
 ## 2.11.7
 
