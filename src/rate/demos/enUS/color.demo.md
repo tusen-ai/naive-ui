@@ -1,8 +1,7 @@
 # Color
 
+That's how disaster happens.
+
 ```html
-<n-space>
-  <n-rate />
-  <n-rate color="#4fb233" />
-</n-space>
+<n-rate color="#4fb233" />
 ```

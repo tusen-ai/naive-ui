@@ -25,10 +25,7 @@ const rateProps = {
     type: Number,
     default: 5
   },
-  value: {
-    type: Number,
-    default: undefined
-  },
+  value: Number,
   defaultValue: {
     type: Number,
     default: 0
@@ -99,13 +96,14 @@ export default defineComponent({
         const { size } = props
         const {
           common: { cubicBezierEaseInOut },
-          self: { itemColor, itemColorActive, itemSize }
+          self
         } = themeRef.value
-        let mergedSize: string = itemSize
+        const { itemColor, itemColorActive } = self
+        let mergedSize: string
         if (typeof size === 'number') {
           mergedSize = `${size}px`
         } else {
-          mergedSize = themeRef.value.self[createKey('size', size)]
+          mergedSize = self[createKey('size', size)]
         }
         return {
           '--bezier': cubicBezierEaseInOut,
