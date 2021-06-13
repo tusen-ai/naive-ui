@@ -8,6 +8,7 @@
 
 ### Fixes
 
+- 修复 `n-dialog` 的 `destroyAll` 方法缺失
 - 修复 `n-calendar` 的 `on-update:value` 属性类型
 - 修复 `n-form-item` 的 `grid-template-columns` 样式属性对子元素布局的影响 [#93](https://github.com/TuSimple/naive-ui/pull/93)
 - 修复 `n-data-table` 的 `rowKey`, `rowClassName`, `rowProps`, `summary` 属性类型和期望值不兼容
