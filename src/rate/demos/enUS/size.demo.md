@@ -1,6 +1,6 @@
 # Size
 
-有 `small`、`medium` 和 `large` 尺寸。
+Rate has `small`, `medium` and `large` size. Also you can use number to specify the size.
 
 ```html
 <n-space align="center">
