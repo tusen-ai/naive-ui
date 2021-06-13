@@ -7,7 +7,7 @@ Use `mask-closable=false` to make modal not emit the event which may close the m
 <n-modal
   v-model:show="showModal"
   :mask-closable="false"
-  preset="confirm"
+  preset="dialog"
   title="Dialog"
   content="Are you sure?"
   positive-text="Confirm"
