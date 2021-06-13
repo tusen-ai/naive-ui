@@ -811,4 +811,4 @@ See vue3.md
 
 ### Features
 
-- `n-date-table` add `empty` slot.
+- `n-date-table` add `empty` slot. [#86](https://github.com/TuSimple/naive-ui/issues/86)
