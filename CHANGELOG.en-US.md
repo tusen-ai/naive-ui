@@ -811,4 +811,4 @@ See vue3.md
 
 ### Features
 
-- `n-date-table` add `empty-description` slot.
+- `n-date-table` add `empty` slot.

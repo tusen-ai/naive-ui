@@ -88,7 +88,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 
 ### Data Table Slots
 
-| 名称  | 参数 | 说明                                           |
+| Name  | Type | Description                                    |
 | ----- | ---- | ---------------------------------------------- |
 | empty | `()` | Custom description when data of table is empty |
 
