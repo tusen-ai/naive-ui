@@ -3,7 +3,7 @@ import { NDropdown } from '../../../dropdown'
 import { NLocale } from '../../../locales'
 import { NBaseIcon } from '../../../_internal'
 import { ChevronDownIcon } from '../../../_internal/icons'
-import type { RowData } from '../interface'
+import type { InternalRowData } from '../interface'
 import { dataTableInjectionKey } from '../interface'
 
 export type DataTableSelectionOption = 'all' | 'none'
@@ -18,11 +18,11 @@ function createSelectHandler (
   | {
     label: string
     key: string | number
-    onSelect: (pageData: RowData[]) => void
+    onSelect: (pageData: InternalRowData[]) => void
   }
   >
   | undefined,
-  rawPaginatedDataRef: Ref<RowData[]>,
+  rawPaginatedDataRef: Ref<InternalRowData[]>,
   doCheckAll: (checkWholeTable?: boolean) => void,
   doUncheckAll: (checkWholeTable?: boolean) => void
 ): (key: string | number) => void {

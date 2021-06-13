@@ -1,8 +1,6 @@
 <template>
   <div style="padding: 100px">
-    <button @click="f">
-      router debug
-    </button>
+    <button @click="f">router debug</button>
   </div>
 </template>
 

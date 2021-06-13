@@ -3,7 +3,7 @@ import { pxfy } from 'seemly'
 import type {
   SortOrder,
   TableBaseColumn,
-  RowData,
+  InternalRowData,
   SortOrderFlag,
   SortState,
   CreateRowClassName,
@@ -51,7 +51,7 @@ export function createCustomWidthStyle (
 }
 
 export function createRowClassName (
-  row: RowData,
+  row: InternalRowData,
   index: number,
   rowClassName?: string | CreateRowClassName
 ): string {

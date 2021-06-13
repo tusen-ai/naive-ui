@@ -57,7 +57,7 @@ tree
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Props) |
 | paging | `boolean` | `true` | If data-table do automatic paging. You may set it to `false` in async usage. |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string \| object` | `undefined` |  |
-| row-key | `(rowData: object) => number \| string` | `undefined` | Generate the key of the row by row data (if you don't want to set the key) |
+| row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key) |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` |  |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set |
 | single-column | `boolean` | `false` |  |
@@ -83,6 +83,14 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }) => void` | Set the active filters of the table. |
 | page | `(page: number) => void` |  |
 | sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | If columnKey set to `null`, it is the same as clearSorter. |
+
+## Slots
+
+### Slots
+
+| Name  | Type | Description                                    |
+| ----- | ---- | ---------------------------------------------- |
+| empty | `()` | Custom description when data of table is empty. |
 
 ## API
 

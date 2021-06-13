@@ -10,7 +10,7 @@ export function getKey (option: SelectMixedOption): string | number {
   if (getIsGroup(option)) {
     return (
       ((option as SelectGroupOption).name as any) ||
-      option.value ||
+      (option as SelectGroupOption).key ||
       'key-required'
     )
   }

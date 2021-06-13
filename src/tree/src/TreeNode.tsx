@@ -204,12 +204,12 @@ const TreeNode = defineComponent({
     // it need to be append to node itself, not wrapper
     const dragEventHandlers = draggable
       ? {
-        onDragenter: this.handleDragEnter,
-        onDragleave: this.handleDragLeave,
-        onDragend: this.handleDragEnd,
-        onDrop: this.handleDrop,
-        onDragover: this.handleDragOver
-      }
+          onDragenter: this.handleDragEnter,
+          onDragleave: this.handleDragLeave,
+          onDragend: this.handleDragEnd,
+          onDrop: this.handleDrop,
+          onDragover: this.handleDragOver
+        }
       : undefined
     return (
       <div class={`${clsPrefix}-tree-node-wrapper`} {...dragEventHandlers}>

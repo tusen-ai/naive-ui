@@ -786,9 +786,9 @@ export default defineComponent({
                             </NInternalSelectMenu>,
                             this.displayDirective === 'show'
                               ? [
-                                [vShow, this.mergedShow],
-                                [clickoutside, this.handleMenuClickOutside]
-                              ]
+                                  [vShow, this.mergedShow],
+                                  [clickoutside, this.handleMenuClickOutside]
+                                ]
                               : [[clickoutside, this.handleMenuClickOutside]]
                           )
                       }}

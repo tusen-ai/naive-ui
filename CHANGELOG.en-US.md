@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 2.11.8
+
+### Feats
+
+- `n-data-table` exports `DataTableCreateRowClassName`, `DataTableCreateRowKey` and `DataTableCreateRowProps` type.
+
+### Fixes
+
+- Fix `n-calendar`'s `on-update:value` prop type.
+- Fix `n-form-item`'s style attribute `grid-template-columns` influence on the layout of child elements. [#93](https://github.com/TuSimple/naive-ui/pull/93)
+- Fix `n-data-table`'s prop types of `rowKey`, `rowClassName`, `rowProps`, `summary` aren't compatible with expected value.
+
+## 2.11.7
+
+### Fixes
+
+- Fix `n-slider` doesn't prevent scrolling when touchstart.
+- Fix `n-color-picker`'s default value doesn't follow modes.
+- Fix not `lodash` & `lodash-es` type.
+
 ## 2.11.6 (2021-06-11)
 
 ### Feats
@@ -788,3 +808,7 @@ See vue3.md
 ### Fixes
 
 - Rails of `n-scrollbar` shadow mouse event.
+
+### Features
+
+- `n-date-table` add `empty` slot. [#86](https://github.com/TuSimple/naive-ui/issues/86)

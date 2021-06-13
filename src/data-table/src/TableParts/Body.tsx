@@ -475,28 +475,28 @@ export default defineComponent({
                   >
                     {hasChildren && colIndex === firstContentfulColIndex
                       ? [
-                        repeat(
-                          isSummary ? 0 : (rowInfo as TmNode).level,
-                          <div
-                            class={`${mergedClsPrefix}-data-table-indent`}
-                            style={indentStyle}
-                          />
-                        ),
-                        isSummary || !(rowInfo as TmNode).children ? (
-                          <div
-                            class={`${mergedClsPrefix}-data-table-expand-placeholder`}
-                          />
-                        ) : (
-                          <ExpandTrigger
-                            class={`${mergedClsPrefix}-data-table-expand-trigger`}
-                            clsPrefix={mergedClsPrefix}
-                            expanded={expanded}
-                            onClick={() => {
-                              handleUpdateExpanded(rowKey)
-                            }}
-                          />
-                        )
-                      ]
+                          repeat(
+                            isSummary ? 0 : (rowInfo as TmNode).level,
+                            <div
+                              class={`${mergedClsPrefix}-data-table-indent`}
+                              style={indentStyle}
+                            />
+                          ),
+                          isSummary || !(rowInfo as TmNode).children ? (
+                            <div
+                              class={`${mergedClsPrefix}-data-table-expand-placeholder`}
+                            />
+                          ) : (
+                            <ExpandTrigger
+                              class={`${mergedClsPrefix}-data-table-expand-trigger`}
+                              clsPrefix={mergedClsPrefix}
+                              expanded={expanded}
+                              onClick={() => {
+                                handleUpdateExpanded(rowKey)
+                              }}
+                            />
+                          )
+                        ]
                       : null}
                     {column.type === 'selection' ? (
                       !isSummary ? (
@@ -513,12 +513,12 @@ export default defineComponent({
                       !isSummary ? (
                         !column.expandable ||
                         column.expandable?.(rowData, rowIndex) ? (
-                            <ExpandTrigger
-                              clsPrefix={mergedClsPrefix}
-                              expanded={expanded}
-                              onClick={() => handleUpdateExpanded(rowKey)}
-                            />
-                          ) : null
+                          <ExpandTrigger
+                            clsPrefix={mergedClsPrefix}
+                            expanded={expanded}
+                            onClick={() => handleUpdateExpanded(rowKey)}
+                          />
+                            ) : null
                       ) : null
                     ) : (
                       <Cell

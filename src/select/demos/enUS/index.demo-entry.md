@@ -67,12 +67,13 @@ max-tag-count
 
 ### SelectGroupOption Properties
 
-| Name     | Type                              | Description |
-| -------- | --------------------------------- | ----------- |
-| children | `Array<SelectOption>`             |             |
-| name     | `string`                          |             |
-| render   | `(option: SelectOption) => VNode` |             |
-| type     | `'group'`                         |             |
+| Name     | Type                              | Description                 |
+| -------- | --------------------------------- | --------------------------- |
+| children | `Array<SelectOption>`             |                             |
+| label    | `string`                          |                             |
+| key      | `string \| number`                | hould be unique in options. |
+| render   | `(option: SelectOption) => VNode` |                             |
+| type     | `'group'`                         |                             |
 
 ## Slots
 

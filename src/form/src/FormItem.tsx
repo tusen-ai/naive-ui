@@ -407,10 +407,10 @@ export default defineComponent({
                 ? this.mergedShowRequireMark
                 : this.mergedRequired
             ) ? (
-                <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
+              <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
                 &nbsp;*
-                </span>
-              ) : null}
+              </span>
+                ) : null}
           </label>
         ) : null}
         <div

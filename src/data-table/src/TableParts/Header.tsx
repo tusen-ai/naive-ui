@@ -149,12 +149,10 @@ export default defineComponent({
                         [`${mergedClsPrefix}-data-table-th--hover`]:
                           mergedSortState?.order &&
                           mergedSortState.columnKey === key,
-                        [`${mergedClsPrefix}-data-table-th--filterable`]: isColumnFilterable(
-                          column
-                        ),
-                        [`${mergedClsPrefix}-data-table-th--sortable`]: isColumnSortable(
-                          column
-                        ),
+                        [`${mergedClsPrefix}-data-table-th--filterable`]:
+                          isColumnFilterable(column),
+                        [`${mergedClsPrefix}-data-table-th--sortable`]:
+                          isColumnSortable(column),
                         [`${mergedClsPrefix}-data-table-th--selection`]:
                           column.type === 'selection',
                         [`${mergedClsPrefix}-data-table-th--last`]: isLast
@@ -166,8 +164,8 @@ export default defineComponent({
                       column.type !== 'expand' &&
                       !('children' in column)
                         ? (e) => {
-                          handleColHeaderClick(e, column)
-                        }
+                            handleColHeaderClick(e, column)
+                          }
                         : undefined
                     }
                   >
@@ -190,15 +188,15 @@ export default defineComponent({
                       </div>
                     ) // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
                       : ellipsis && ellipsis.tooltip ? (
-                        <NEllipsis
-                          tooltip={ellipsis.tooltip}
-                          theme={mergedTheme.peers.Ellipsis}
-                          themeOverrides={mergedTheme.peerOverrides.Ellipsis}
-                        >
-                          {{
-                            default: () => renderTitle(column)
-                          }}
-                        </NEllipsis>
+                      <NEllipsis
+                        tooltip={ellipsis.tooltip}
+                        theme={mergedTheme.peers.Ellipsis}
+                        themeOverrides={mergedTheme.peerOverrides.Ellipsis}
+                      >
+                        {{
+                          default: () => renderTitle(column)
+                        }}
+                      </NEllipsis>
                       ) : (
                         renderTitle(column)
                       )}

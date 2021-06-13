@@ -36,8 +36,9 @@ export default {
       options: [
         {
           type: 'group',
-          name: 'Rubber Soul',
-          render: (data) => [data.name, '(Cool!)'],
+          label: 'Rubber Soul',
+          key: 'Rubber Soul Album',
+          render: (data) => [data.label, '(Cool!)'],
           children: [
             {
               label:
@@ -102,8 +103,9 @@ export default {
         },
         {
           type: 'group',
-          name: 'Let It Be',
-          render: (data) => [data.name, '(Cool!)'],
+          label: 'Let It Be',
+          key: 'Let It Be Album',
+          render: (data) => [data.label, '(Cool!)'],
           children: [
             {
               label: 'Two Of Us',

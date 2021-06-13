@@ -58,7 +58,7 @@ import AlphaSlider from './AlphaSlider'
 import Pallete from './Pallete'
 import ColorInput from './ColorInput'
 import ColorPickerTrigger from './ColorPickerTrigger'
-import { getModeFromValue } from './utils'
+import { deriveDefaultValue, getModeFromValue } from './utils'
 import type { ColorPickerMode } from './utils'
 import style from './styles/index.cssr'
 import { OnUpdateValue, OnUpdateValueImpl } from './interface'
@@ -75,10 +75,7 @@ export const colorPickerPanelProps = {
     type: Boolean,
     default: false
   },
-  defaultValue: {
-    type: String as PropType<string | null>,
-    default: '#000000'
-  },
+  defaultValue: String as PropType<string | null>,
   modes: {
     type: Array as PropType<ColorPickerMode[]>,
     // no hsva by default since browser doesn't support it
@@ -145,7 +142,12 @@ export default defineComponent({
       uncontrolledShowRef.value = value
     }
 
-    const uncontrolledValueRef = ref(props.defaultValue)
+    const { defaultValue } = props
+    const uncontrolledValueRef = ref(
+      defaultValue === undefined
+        ? deriveDefaultValue(props.modes, props.showAlpha)
+        : defaultValue
+    )
     const mergedValueRef = useMergedState(
       toRef(props, 'value'),
       uncontrolledValueRef

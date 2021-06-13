@@ -8,12 +8,12 @@ import {
   PropType
 } from 'vue'
 import { merge } from 'lodash-es'
+import { useSsrAdapter } from '@css-render/vue3-ssr'
 import globalStyle from '../_styles/global/index.cssr'
 import { CNode } from 'css-render'
 import type { GlobalTheme } from '../config-provider'
 import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
 import type { ThemeCommonVars } from '../_styles/common'
-import { ssrInjectionKey } from '../ssr/context'
 
 export interface Theme<N, T = {}, R = any> {
   name: N
@@ -42,10 +42,10 @@ export type ExtractThemeVars<T> = T extends Theme<unknown, infer U, unknown>
 
 export type ExtractPeerOverrides<T> = T extends Theme<unknown, unknown, infer V>
   ? {
-    peers?: {
-      [k in keyof V]?: ExtractThemeOverrides<V[k]>
+      peers?: {
+        [k in keyof V]?: ExtractThemeOverrides<V[k]>
+      }
     }
-  }
   : T
 
 // V is peers theme
@@ -55,8 +55,8 @@ unknown,
 infer V
 >
   ? {
-    [k in keyof V]?: ExtractPeerOverrides<V[k]>
-  }
+      [k in keyof V]?: ExtractPeerOverrides<V[k]>
+    }
   : T
 
 export type ExtractThemeOverrides<T> = Partial<ExtractThemeVars<T>> &
@@ -76,11 +76,11 @@ type UseThemeProps<T> = Readonly<{
 
 export type MergedTheme<T> = T extends Theme<unknown, infer V, infer W>
   ? {
-    common: ThemeCommonVars
-    self: V
-    peers: W
-    peerOverrides: ExtractMergedPeerOverrides<T>
-  }
+      common: ThemeCommonVars
+      self: V
+      peers: W
+      peerOverrides: ExtractMergedPeerOverrides<T>
+    }
   : T
 
 function useTheme<N, T, R> (
@@ -91,7 +91,7 @@ function useTheme<N, T, R> (
   props: UseThemeProps<Theme<N, T, R>>,
   clsPrefixRef?: Ref<string | undefined>
 ): ComputedRef<MergedTheme<Theme<N, T, R>>> {
-  const ssrAdapter = inject(ssrInjectionKey, undefined)
+  const ssrAdapter = useSsrAdapter()
   if (style) {
     const mountStyle = (): void => {
       const clsPrefix = clsPrefixRef?.value

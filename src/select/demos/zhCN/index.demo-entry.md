@@ -70,12 +70,13 @@ menu-debug
 
 ### SelectGroupOption Properties
 
-| 名称     | 类型                              | 说明 |
-| -------- | --------------------------------- | ---- |
-| children | `Array<SelectOption>`             |      |
-| name     | `string`                          |      |
-| render   | `(option: SelectOption) => VNode` |      |
-| type     | `'group'`                         |      |
+| 名称     | 类型                              | 说明                 |
+| -------- | --------------------------------- | -------------------- |
+| children | `Array<SelectOption>`             |                      |
+| label    | `string`                          |                      |
+| key      | `string \| number`                | 在选项中应该是唯一的 |
+| render   | `(option: SelectOption) => VNode` |                      |
+| type     | `'group'`                         |                      |
 
 ## Slots
 

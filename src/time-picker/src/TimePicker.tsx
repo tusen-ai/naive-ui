@@ -127,9 +127,8 @@ export default defineComponent({
   name: 'TimePicker',
   props: timePickerProps,
   setup (props) {
-    const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } = useConfig(
-      props
-    )
+    const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } =
+      useConfig(props)
     const { localeRef, dateLocaleRef } = useLocale('TimePicker')
     const formItem = useFormItem(props)
     const themeRef = useTheme(
@@ -362,11 +361,8 @@ export default defineComponent({
     }
     function scrollTimer (): void {
       if (!panelInstRef.value) return
-      const {
-        hourScrollRef,
-        minuteScrollRef,
-        secondScrollRef
-      } = panelInstRef.value
+      const { hourScrollRef, minuteScrollRef, secondScrollRef } =
+        panelInstRef.value
       if (hourScrollRef) {
         const hour = hourScrollRef.contentRef?.querySelector(
           '[data-active]'
@@ -625,17 +621,17 @@ export default defineComponent({
                     >
                       {this.showIcon
                         ? {
-                          suffix: () => (
-                            <NBaseIcon
-                              clsPrefix={mergedClsPrefix}
-                              class={`${mergedClsPrefix}-time-picker-icon`}
-                            >
-                              {{
-                                default: () => <TimeIcon />
-                              }}
-                            </NBaseIcon>
-                          )
-                        }
+                            suffix: () => (
+                              <NBaseIcon
+                                clsPrefix={mergedClsPrefix}
+                                class={`${mergedClsPrefix}-time-picker-icon`}
+                              >
+                                {{
+                                  default: () => <TimeIcon />
+                                }}
+                              </NBaseIcon>
+                            )
+                          }
                         : null}
                     </NInput>
                   )
@@ -658,37 +654,37 @@ export default defineComponent({
                         default: () =>
                           this.active
                             ? withDirectives(
-                              <Panel
-                                ref="panelInstRef"
-                                style={this.cssVars as CSSProperties}
-                                transitionDisabled={this.transitionDisabled}
-                                hourValue={this.hourValue}
-                                showHour={this.hourInFormat}
-                                isHourInvalid={this.isHourInvalid}
-                                isHourDisabled={this.isHourDisabled}
-                                minuteValue={this.minuteValue}
-                                showMinute={this.minuteInFormat}
-                                isMinuteInvalid={this.isMinuteInvalid}
-                                isMinuteDisabled={this.isMinuteDisabled}
-                                secondValue={this.secondValue}
-                                showSecond={this.secondInFormat}
-                                isSecondInvalid={this.isSecondInvalid}
-                                isSecondDisabled={this.isSecondDisabled}
-                                isValueInvalid={this.isValueInvalid}
-                                nowText={this.localizedNow}
-                                confirmText={this.localizedPositiveText}
-                                onFocusout={this.handleMenuFocusOut}
-                                onKeydown={this.handleMenuKeyDown}
-                                onHourClick={this.handleHourClick}
-                                onMinuteClick={this.handleMinuteClick}
-                                onSecondClick={this.handleSecondClick}
-                                onNowClick={this.handleNowClick}
-                                onConfirmClick={this.handleConfirmClick}
-                                onFocusDetectorFocus={
-                                  this.handleFocusDetectorFocus
-                                }
-                              />,
-                              [[clickoutside, this.handleClickOutside]]
+                                <Panel
+                                  ref="panelInstRef"
+                                  style={this.cssVars as CSSProperties}
+                                  transitionDisabled={this.transitionDisabled}
+                                  hourValue={this.hourValue}
+                                  showHour={this.hourInFormat}
+                                  isHourInvalid={this.isHourInvalid}
+                                  isHourDisabled={this.isHourDisabled}
+                                  minuteValue={this.minuteValue}
+                                  showMinute={this.minuteInFormat}
+                                  isMinuteInvalid={this.isMinuteInvalid}
+                                  isMinuteDisabled={this.isMinuteDisabled}
+                                  secondValue={this.secondValue}
+                                  showSecond={this.secondInFormat}
+                                  isSecondInvalid={this.isSecondInvalid}
+                                  isSecondDisabled={this.isSecondDisabled}
+                                  isValueInvalid={this.isValueInvalid}
+                                  nowText={this.localizedNow}
+                                  confirmText={this.localizedPositiveText}
+                                  onFocusout={this.handleMenuFocusOut}
+                                  onKeydown={this.handleMenuKeyDown}
+                                  onHourClick={this.handleHourClick}
+                                  onMinuteClick={this.handleMinuteClick}
+                                  onSecondClick={this.handleSecondClick}
+                                  onNowClick={this.handleNowClick}
+                                  onConfirmClick={this.handleConfirmClick}
+                                  onFocusDetectorFocus={
+                                    this.handleFocusDetectorFocus
+                                  }
+                                />,
+                                [[clickoutside, this.handleClickOutside]]
                             )
                             : null
                       }}
