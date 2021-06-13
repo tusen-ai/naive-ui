@@ -8,6 +8,38 @@ describe('n-data-table', () => {
   it('should work with import on demand', () => {
     mount(NDataTable)
   })
+  it('show custom empty', () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      },
+      {
+        title: 'Age',
+        key: 'age'
+      },
+      {
+        title: 'Address',
+        key: 'address'
+      },
+      {
+        title: 'Tags',
+        key: 'tags'
+      },
+      {
+        title: 'Action',
+        key: 'actions'
+      }
+    ]
+    const data: any = []
+    mount(() => (
+      <NDataTable columns={columns} data={data}>
+        {{
+          empty: () => <div>empty</div>
+        }}
+      </NDataTable>
+    ))
+  })
   describe('props.columns', () => {
     it('has correct type', () => {
       interface Data {
