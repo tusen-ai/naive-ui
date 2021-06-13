@@ -1,12 +1,12 @@
+import { VueWrapper } from '@vue/test-utils/dist/vueWrapper'
 import { mount } from '@vue/test-utils'
 import { ComponentPublicInstance, h, nextTick } from 'vue'
 import { NIcon } from '../../icon'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { NDropdown } from '../index'
-import { VueWrapper } from '@vue/test-utils/dist/vueWrapper'
+import { NDropdown, DropdownProps } from '../index'
 
-const className = 'n-dropdown-option-body n-dropdown-option-body--pending'
-const selectors = '.n-dropdown-option-body'
+const pendingOptionClassName = 'n-dropdown-option-body n-dropdown-option-body--pending'
+const optionBodySelector = '.n-dropdown-option-body'
 const options = [
   {
     type: 'group',
@@ -49,17 +49,11 @@ const options = [
   }
 ]
 
-interface IProps {
-  onSelect?: (key: string | number) => void
-  inverted?: boolean
-  data?: any[]
-}
-
-const render = ({
+const mountDropdown = ({
   onSelect,
   inverted = false,
-  data = options
-}: IProps = {}): VueWrapper<ComponentPublicInstance> => {
+  options: data = options
+}: DropdownProps = {}): VueWrapper<ComponentPublicInstance> => {
   return mount(NDropdown, {
     attachTo: document.body,
     props: {
@@ -83,8 +77,8 @@ describe('n-dropdown', () => {
     })
   })
 
-  it('show item', async () => {
-    const wrapper = render()
+  it('shows menu after click', async () => {
+    const wrapper = mountDropdown()
 
     const triggerNodeWrapper = wrapper.find('span')
     expect(triggerNodeWrapper.exists()).toBe(true)
@@ -95,7 +89,7 @@ describe('n-dropdown', () => {
   })
 
   it('inverted style', async () => {
-    const wrapper = render({ inverted: true })
+    const wrapper = mountDropdown({ inverted: true })
 
     const triggerNodeWrapper = wrapper.find('span')
     expect(triggerNodeWrapper.exists()).toBe(true)
@@ -107,7 +101,7 @@ describe('n-dropdown', () => {
 
   it('keyboard event', async () => {
     const onSelect = jest.fn()
-    let wrapper = render({ onSelect })
+    let wrapper = mountDropdown({ onSelect })
 
     let triggerNodeWrapper = wrapper.find('span')
     await triggerNodeWrapper.trigger('click')
@@ -115,8 +109,8 @@ describe('n-dropdown', () => {
     await triggerNodeWrapper.trigger('keydown', {
       key: 'ArrowDown'
     })
-    let options = document.querySelectorAll(selectors)
-    expect(options[1].className).toEqual(className)
+    let options = document.querySelectorAll(optionBodySelector)
+    expect(options[1].className).toEqual(pendingOptionClassName)
 
     await triggerNodeWrapper.trigger('keydown', {
       key: 'ArrowDown'
@@ -124,21 +118,21 @@ describe('n-dropdown', () => {
     await triggerNodeWrapper.trigger('keydown', {
       key: 'ArrowRight'
     })
-    options = document.querySelectorAll(selectors)
+    options = document.querySelectorAll(optionBodySelector)
     expect(options.length).toBe(5)
-    expect(options[3].className).toEqual(className)
-    expect(options[4].className).toEqual(className)
+    expect(options[3].className).toEqual(pendingOptionClassName)
+    expect(options[4].className).toEqual(pendingOptionClassName)
 
     await triggerNodeWrapper.trigger('keydown', {
       key: 'ArrowLeft'
     })
-    options = document.querySelectorAll(selectors)
+    options = document.querySelectorAll(optionBodySelector)
     expect(options.length).toBe(4)
 
     await triggerNodeWrapper.trigger('keydown', {
       key: 'ArrowUp'
     })
-    expect(options[1].className).toEqual(className)
+    expect(options[1].className).toEqual(pendingOptionClassName)
     await triggerNodeWrapper.trigger('keyup', {
       key: 'Enter'
     })
@@ -147,7 +141,7 @@ describe('n-dropdown', () => {
       label: '杰·盖茨比'
     })
 
-    wrapper = render({ onSelect })
+    wrapper = mountDropdown({ onSelect })
 
     triggerNodeWrapper = wrapper.find('span')
     await triggerNodeWrapper.trigger('click')
@@ -161,25 +155,25 @@ describe('n-dropdown', () => {
 
   it('option mouse event', async () => {
     const onSelect = jest.fn()
-    const wrapper = render({ onSelect })
+    const wrapper = mountDropdown({ onSelect })
 
     const triggerNodeWrapper = wrapper.find('span')
     expect(triggerNodeWrapper.exists()).toBe(true)
     await triggerNodeWrapper.trigger('click')
 
-    const options = document.querySelectorAll(selectors)
+    const options = document.querySelectorAll(optionBodySelector)
 
     const mouseEnter = new Event('mouseenter')
     options[1].dispatchEvent(mouseEnter)
     await nextTick(() => {
-      expect(options[1].className).toEqual(className)
+      expect(options[1].className).toEqual(pendingOptionClassName)
     })
 
     const mouseMove = new Event('mousemove')
     options[3].dispatchEvent(mouseMove)
     await nextTick(() => {
-      expect(options[1].className).not.toEqual(className)
-      expect(options[3].className).toEqual(className)
+      expect(options[1].className).not.toEqual(pendingOptionClassName)
+      expect(options[3].className).toEqual(pendingOptionClassName)
     })
     await (options[3] as HTMLDivElement).click()
     expect(onSelect).not.toHaveBeenCalledWith()
@@ -191,13 +185,13 @@ describe('n-dropdown', () => {
     })
     options[3].dispatchEvent(mouseLeave)
     await nextTick(() => {
-      expect(options[3].className).not.toEqual(className)
+      expect(options[3].className).not.toEqual(pendingOptionClassName)
     })
   })
 
   it('dropdown disabled', async () => {
     const onSelect = jest.fn()
-    const wrapper = render({ onSelect })
+    const wrapper = mountDropdown({ onSelect })
 
     const triggerNodeWrapper = wrapper.find('span')
     expect(triggerNodeWrapper.exists()).toBe(true)
