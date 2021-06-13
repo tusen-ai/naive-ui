@@ -101,23 +101,28 @@ export default defineComponent({
           common: { cubicBezierEaseInOut },
           self: { itemColor, itemColorActive, itemSize }
         } = themeRef.value
-        let syntheticSize: string = itemSize
+        let mergedSize: string = itemSize
         if (typeof size === 'number') {
-          syntheticSize = `${size}px`
+          mergedSize = `${size}px`
         } else {
-          syntheticSize = themeRef.value.self[createKey('size', size)]
+          mergedSize = themeRef.value.self[createKey('size', size)]
         }
         return {
           '--bezier': cubicBezierEaseInOut,
           '--item-color': itemColor,
           '--item-color-active': props.color || itemColorActive,
-          '--item-size': syntheticSize
+          '--item-size': mergedSize
         }
       })
     }
   },
   render () {
-    const { hoverIndex, mergedValue, mergedClsPrefix, $slots: { default: defaultSlot } } = this
+    const {
+      hoverIndex,
+      mergedValue,
+      mergedClsPrefix,
+      $slots: { default: defaultSlot }
+    } = this
     return (
       <div
         class={`${mergedClsPrefix}-rate`}
@@ -139,11 +144,13 @@ export default defineComponent({
             onClick={() => this.handleClick(index)}
             onMouseenter={() => this.handleMouseEnter(index)}
           >
-            {
-              defaultSlot?.() ?? <NBaseIcon clsPrefix={mergedClsPrefix}>
+            {defaultSlot ? (
+              defaultSlot()
+            ) : (
+              <NBaseIcon clsPrefix={mergedClsPrefix}>
                 {{ default: () => StarIcon }}
               </NBaseIcon>
-            }
+            )}
           </div>
         ))}
       </div>

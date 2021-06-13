@@ -8,7 +8,6 @@ If you not very confident, be careful about changing star's color. That will be 
 basic
 size
 color
-events
 icon
 ```
 
@@ -24,6 +23,6 @@ icon
 
 ## Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name    | Parameters | Description           |
+| ------- | ---------- | --------------------- |
+| default | `()`       | The icon of the rate. |
