@@ -11,7 +11,7 @@ import {
   SortState,
   TableBaseColumn,
   TableSelectionColumn,
-  RowData,
+  InternalRowData,
   TmNode,
   TableExpandColumn,
   RowKey
@@ -46,7 +46,7 @@ export function useTableData (
 
   const treeMateRef = computed(() => {
     const { childrenKey } = props
-    return createTreeMate<RowData>(props.data, {
+    return createTreeMate<InternalRowData>(props.data, {
       getKey: props.rowKey,
       getChildren: (rowData) => rowData[childrenKey] as any,
       getDisabled: (rowData) => {
@@ -185,7 +185,7 @@ export function useTableData (
     const mergedFilterState = mergedFilterStateRef.value
     const { columns } = props
     function createDefaultFilter (columnKey: ColumnKey): Filter {
-      return (filterOptionValue: FilterOptionValue, row: RowData) =>
+      return (filterOptionValue: FilterOptionValue, row: InternalRowData) =>
         !!~String(row[columnKey]).indexOf(String(filterOptionValue))
     }
     const {
@@ -260,7 +260,7 @@ export function useTableData (
       const order = activeSorter.order
       const sorter =
         activeSorter.sorter === undefined || activeSorter.sorter === 'default'
-          ? (row1: RowData, row2: RowData) => {
+          ? (row1: InternalRowData, row2: InternalRowData) => {
               const value1 = row1[columnKey]
               const value2 = row2[columnKey]
               if (typeof value1 === 'number' && typeof value2 === 'number') {
@@ -290,7 +290,7 @@ export function useTableData (
     return sortedDataRef.value.slice(startIndex, startIndex + pageSize)
   })
 
-  const rawPaginatedDataRef = computed<RowData[]>(() => {
+  const rawPaginatedDataRef = computed<InternalRowData[]>(() => {
     return paginatedDataRef.value.map((tmNode) => tmNode.rawNode)
   })
 

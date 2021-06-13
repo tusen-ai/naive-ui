@@ -19,14 +19,26 @@ export type RowKey = string | number
 
 export type SortOrderFlag = 1 | -1 | 0
 
-export type CreateRowKey = (row: RowData) => RowKey
-export type CreateRowClassName = (row: RowData, index: number) => string
-export type CreateRowProps = (row: RowData, index: number) => HTMLAttributes
+export type RowData = Record<string, any>
 
-export type Sorter = (row1: RowData, row2: RowData) => number
-export type Filter = (
+export interface InternalRowData {
+  [key: string]: unknown
+}
+
+export type CreateRowKey<T = InternalRowData> = (row: T) => RowKey
+export type CreateRowClassName<T = InternalRowData> = (
+  row: T,
+  index: number
+) => string
+export type CreateRowProps<T = InternalRowData> = (
+  row: T,
+  index: number
+) => HTMLAttributes
+
+export type Sorter<T = InternalRowData> = (row1: T, row2: T) => number
+export type Filter<T = InternalRowData> = (
   filterOptionValue: FilterOptionValue,
-  row: RowData
+  row: T
 ) => boolean
 
 export interface FilterOption {
@@ -34,12 +46,7 @@ export interface FilterOption {
   value: FilterOptionValue
 }
 
-export interface RowData {
-  [key: string]: unknown
-  // children?: RowData[]
-}
-
-export type TmNode = TreeNode<RowData>
+export type TmNode = TreeNode<InternalRowData>
 
 // for compat may add null
 export type SortOrder = 'ascend' | 'descend' | false
@@ -66,28 +73,28 @@ export type TableColumnGroupTitle =
   | string
   | ((column: TableColumnGroup) => VNodeChild)
 
-export type TableColumnGroup = {
+export type TableColumnGroup<T = InternalRowData> = {
   title?: TableColumnGroupTitle
   type?: never
   key: ColumnKey
-  children: TableBaseColumn[]
+  children: Array<TableBaseColumn<T>>
 
   // to suppress type error in table header
   filterOptions?: never
 } & CommonColumnInfo
 
-export type TableBaseColumn = {
+export type TableBaseColumn<T = InternalRowData> = {
   title?: TableColumnTitle
   titleColSpan?: number
   // for compat maybe default
   type?: never
   key: ColumnKey
 
-  sorter?: boolean | Sorter | 'default'
+  sorter?: boolean | Sorter<T> | 'default'
   defaultSortOrder?: SortOrder
   sortOrder?: SortOrder // controlled
 
-  filter?: 'default' | boolean | Filter
+  filter?: 'default' | boolean | Filter<T>
   filterOptions?: FilterOption[]
   filterOptionValues?: FilterOptionValue[] | null // controlled
   filterOptionValue?: FilterOptionValue | null // controlled
@@ -97,18 +104,18 @@ export type TableBaseColumn = {
   defaultFilterOptionValue?: FilterOptionValue | null
   filterMultiple?: boolean
 
-  render?: (rowData: RowData, rowIndex: number) => VNodeChild
+  render?: (rowData: T, rowIndex: number) => VNodeChild
   renderSorter?: RenderSorter
   renderFilter?: RenderFilter
   renderFilterIcon?: RenderFilter
   renderFilterMenu?: RenderFilterMenu
-  colSpan?: (rowData: RowData, rowIndex: number) => number
-  rowSpan?: (rowData: RowData, rowIndex: number) => number
+  colSpan?: (rowData: T, rowIndex: number) => number
+  rowSpan?: (rowData: T, rowIndex: number) => number
 } & CommonColumnInfo
 
-export type TableSelectionColumn = {
+export type TableSelectionColumn<T = InternalRowData> = {
   type: 'selection'
-  disabled?: (row: RowData) => boolean
+  disabled?: (row: T) => boolean
   options?: DataTableSelectionOptions
 
   // to suppress type error in utils
@@ -121,21 +128,25 @@ export type TableSelectionColumn = {
   rowSpan?: never
 } & CommonColumnInfo
 
-export type RenderExpand = (row: RowData, index: number) => VNodeChild
-export type Expandable = (row: RowData, index: number) => boolean
-export interface TableExpandColumn extends Omit<TableSelectionColumn, 'type'> {
+export type RenderExpand<T = InternalRowData> = (
+  row: T,
+  index: number
+) => VNodeChild
+export type Expandable<T = InternalRowData> = (row: T, index: number) => boolean
+export interface TableExpandColumn<T = InternalRowData>
+  extends Omit<TableSelectionColumn<T>, 'type'> {
   type: 'expand'
   title?: TableExpandColumnTitle
-  renderExpand: RenderExpand
-  expandable?: Expandable
+  renderExpand: RenderExpand<T>
+  expandable?: Expandable<T>
 }
 
-export type TableColumn =
+export type TableColumn<T = InternalRowData> =
   | TableColumnGroup
-  | TableBaseColumn
-  | TableSelectionColumn
-  | TableExpandColumn
-export type TableColumns = TableColumn[]
+  | TableBaseColumn<T>
+  | TableSelectionColumn<T>
+  | TableExpandColumn<T>
+export type TableColumns<T = InternalRowData> = Array<TableColumn<T>>
 
 export type DataTableSelectionOptions = Array<
 | DataTableSelectionOption
@@ -175,7 +186,7 @@ export interface DataTableInjection {
   rowKeyRef: Ref<CreateRowKey | undefined>
   renderExpandRef: Ref<undefined | RenderExpand>
   summaryRef: Ref<undefined | CreateSummary>
-  rawPaginatedDataRef: Ref<RowData[]>
+  rawPaginatedDataRef: Ref<InternalRowData[]>
   virtualScrollRef: Ref<boolean>
   bodyWidthRef: Ref<number | null>
   scrollPartRef: Ref<'head' | 'body'>
@@ -269,8 +280,8 @@ export interface DataTableInst {
   sort: (columnKey: ColumnKey, order: SortOrder) => void
 }
 
-export type CreateSummary = (
-  pageData: RowData[]
+export type CreateSummary<T = InternalRowData> = (
+  pageData: T[]
 ) => SummaryRowData | SummaryRowData[]
 
 export interface SummaryCell {

@@ -1,6 +1,11 @@
 import { computed, ComputedRef, ref } from 'vue'
 import { DataTableSetupProps } from './DataTable'
-import { RowKey, TableSelectionColumn, RowData, TmNode } from './interface'
+import {
+  RowKey,
+  TableSelectionColumn,
+  InternalRowData,
+  TmNode
+} from './interface'
 import { call } from '../../_utils'
 import { TreeMate } from 'treemate'
 
@@ -10,7 +15,7 @@ export function useCheck (
   data: {
     selectionColumnRef: ComputedRef<TableSelectionColumn | null>
     paginatedDataRef: ComputedRef<TmNode[]>
-    treeMateRef: ComputedRef<TreeMate<RowData>>
+    treeMateRef: ComputedRef<TreeMate<InternalRowData>>
   }
 ) {
   const { paginatedDataRef, treeMateRef, selectionColumnRef } = data
