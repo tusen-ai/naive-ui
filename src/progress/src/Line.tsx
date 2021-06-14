@@ -98,7 +98,8 @@ export default defineComponent({
               class={[
                 `${clsPrefix}-progress-graph-line`,
                 {
-                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]: true
+                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]:
+                    true
                 }
               ]}
             >
@@ -127,6 +128,10 @@ export default defineComponent({
                     height: styleHeightRef.value,
                     borderRadius: styleFillBorderRadiusRef.value
                   }}
+                  role="progressbar"
+                  aria-valuemax={100}
+                  aria-valuemin={0}
+                  aria-valuenow={props.percentage}
                 >
                   {indicatorPlacement === 'inside' ? (
                     <div class={`${clsPrefix}-progress-graph-line-indicator`}>

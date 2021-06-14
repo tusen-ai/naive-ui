@@ -68,7 +68,13 @@ export default defineComponent({
       return (
         <div class={`${clsPrefix}-progress-content`}>
           <div class={`${clsPrefix}-progress-graph`}>
-            <div class={`${clsPrefix}-progress-graph-circle`}>
+            <div
+              class={`${clsPrefix}-progress-graph-circle`}
+              role="progressbar"
+              aria-valuemax={100}
+              aria-valuemin={0}
+              aria-valuenow={props.percentage}
+            >
               <svg viewBox="0 0 110 110">
                 <g>
                   <path

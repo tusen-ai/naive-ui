@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-button-group` supports wai-aria
+- `n-progress` supports wai-aria
+
 ## 2.11.8
 
 ### Feats
