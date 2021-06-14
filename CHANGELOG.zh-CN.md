@@ -6,7 +6,7 @@
 
 - 修复 `n-card` 的 `header-style` 没有应用于 header 上 [#103](https://github.com/TuSimple/naive-ui/issues/103)
 - 修复 `n-dialog` 的 `destroyAll` 方法缺失
-- 修复 `n-data-table` 缺少 `on-update-sorter`、`on-update-filter`、`on-update-page`、`on-update-page-size` 属性
+- 修复 `n-data-table` 缺少 `on-update-sorter`、`on-update-filters`、`on-update-page`、`on-update-page-size` 属性
 
 ## 2.11.8 (2021-06-13)
 
