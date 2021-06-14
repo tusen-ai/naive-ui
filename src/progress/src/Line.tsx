@@ -98,8 +98,7 @@ export default defineComponent({
               class={[
                 `${clsPrefix}-progress-graph-line`,
                 {
-                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]:
-                    true
+                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]: true
                 }
               ]}
             >
