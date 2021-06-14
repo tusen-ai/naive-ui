@@ -4,6 +4,8 @@
 
 ### Feats
 
+- `n-button-group` 支持 wai-aria
+- `n-progress` 支持 wai-aria
 - `n-menu` 支持使用 `<a />` 和 `<router-link />` 作为 label，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
 - `n-input-number` 新增 `show-button` 属性
 - `n-rate` 支持使用 default slot 自定义图标

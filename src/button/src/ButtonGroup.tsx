@@ -41,6 +41,7 @@ export default defineComponent({
           `${mergedClsPrefix}-button-group`,
           this.vertical && `${mergedClsPrefix}-button-group--vertical`
         ]}
+        role="group"
       >
         {this.$slots}
       </div>

@@ -66,10 +66,12 @@ export default defineComponent({
         clsPrefix
       } = props
       return (
-        <div class={`${clsPrefix}-progress-content`}>
-          <div class={`${clsPrefix}-progress-graph`}>
-            <div class={`${clsPrefix}-progress-graph-circle`}>
-              <svg viewBox="0 0 110 110">
+        <div class={`${clsPrefix}-progress-content`} role="none">
+          <div class={`${clsPrefix}-progress-graph`} aria-hidden>
+            <div
+              class={`${clsPrefix}-progress-graph-circle`}
+            >
+              <svg viewBox="0 0 110 110" aria-hidden>
                 <g>
                   <path
                     class={`${clsPrefix}-progress-graph-circle-rail`}
@@ -112,7 +114,7 @@ export default defineComponent({
           {showIndicator ? (
             <div>
               {slots.default ? (
-                <div class={`${clsPrefix}-progress-custom-content`}>
+                <div class={`${clsPrefix}-progress-custom-content`} role="none">
                   {slots.default()}
                 </div>
               ) : status !== 'default' ? (

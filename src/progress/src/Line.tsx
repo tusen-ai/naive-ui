@@ -92,8 +92,8 @@ export default defineComponent({
         clsPrefix
       } = props
       return (
-        <div class={`${clsPrefix}-progress-content`}>
-          <div class={`${clsPrefix}-progress-graph`}>
+        <div class={`${clsPrefix}-progress-content`} role="none">
+          <div class={`${clsPrefix}-progress-graph`} aria-hidden>
             <div
               class={[
                 `${clsPrefix}-progress-graph-line`,
@@ -145,6 +145,7 @@ export default defineComponent({
                   style={{
                     color: indicatorTextColor
                   }}
+                  role="none"
                 >
                   {slots.default()}
                 </div>
