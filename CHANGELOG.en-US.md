@@ -5,7 +5,7 @@
 ### Fixes
 
 - Fix `n-card`'s `header-style` it not applied to header. [#103](https://github.com/TuSimple/naive-ui/issues/103)
-- Fix `n-dialog`'s `destroyAll` method is missing.
+- Fix `n-dialog` misses `destroyAll` method.
 
 ## 2.11.8 (2021-06-13)
 
@@ -56,8 +56,8 @@
 - Fix `n-popover` sometimes won't sync position in manual mode.
 - Fix `n-transfer`'s empty icon is no toggling transition.
 - Fix `n-message` API option is not optional.
-- Fix `n-calendar` date calculate incorrectly
-- Fix `n-input` missing the `password` type declaration.
+- Fix `n-calendar` date calculate incorrectly.
+- Fix `n-input` misses the `password` type declaration.
 - Fix `n-menu` the type definition of `extra` property of menu and submenu.
 - Fix `n-dropdown` mouse cursor is not pointer.
 
