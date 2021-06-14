@@ -92,8 +92,8 @@ export default defineComponent({
         clsPrefix
       } = props
       return (
-        <div class={`${clsPrefix}-progress-content`}>
-          <div class={`${clsPrefix}-progress-graph`}>
+        <div class={`${clsPrefix}-progress-content`} role="none">
+          <div class={`${clsPrefix}-progress-graph`} aria-hidden>
             <div
               class={[
                 `${clsPrefix}-progress-graph-line`,
@@ -127,10 +127,6 @@ export default defineComponent({
                     height: styleHeightRef.value,
                     borderRadius: styleFillBorderRadiusRef.value
                   }}
-                  role={props.status === 'default' ? 'progressbar' : 'none'}
-                  aria-valuemax={100}
-                  aria-valuemin={0}
-                  aria-valuenow={props.percentage}
                 >
                   {indicatorPlacement === 'inside' ? (
                     <div class={`${clsPrefix}-progress-graph-line-indicator`}>

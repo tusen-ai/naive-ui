@@ -66,16 +66,12 @@ export default defineComponent({
         clsPrefix
       } = props
       return (
-        <div class={`${clsPrefix}-progress-content`}>
-          <div class={`${clsPrefix}-progress-graph`}>
+        <div class={`${clsPrefix}-progress-content`} role="none">
+          <div class={`${clsPrefix}-progress-graph`} aria-hidden>
             <div
               class={`${clsPrefix}-progress-graph-circle`}
-              role={props.status === 'default' ? 'progressbar' : 'none'}
-              aria-valuemax={100}
-              aria-valuemin={0}
-              aria-valuenow={props.percentage}
             >
-              <svg viewBox="0 0 110 110">
+              <svg viewBox="0 0 110 110" aria-hidden>
                 <g>
                   <path
                     class={`${clsPrefix}-progress-graph-circle-rail`}
