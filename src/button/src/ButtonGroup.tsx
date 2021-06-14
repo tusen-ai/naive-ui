@@ -8,8 +8,9 @@ export interface ButtonGroupInjection {
   size?: Size | undefined
 }
 
-export const buttonGroupInjectionKey: InjectionKey<ButtonGroupInjection> =
-  Symbol('button-group')
+export const buttonGroupInjectionKey: InjectionKey<ButtonGroupInjection> = Symbol(
+  'button-group'
+)
 
 const buttonGroupProps = {
   size: {
