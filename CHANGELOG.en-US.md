@@ -1,12 +1,12 @@
 # CHANGELOG
 
-## Pending
+## 2.11.9 (2021-06-15)
 
 ### Feats
 
-
-- `n-button-group` supports wai-aria
-- `n-progress` supports wai-aria
+- `n-space` supports wai-aria.
+- `n-button-group` supports wai-aria.
+- `n-progress` supports wai-aria.
 - `n-menu` supports use `<a />` and `<router-link />` as label, closes [#84](https://github.com/TuSimple/naive-ui/issues/84).
 - `n-input-number` add `show-button` prop.
 - `n-rate` support `default` slot for icon customizing.

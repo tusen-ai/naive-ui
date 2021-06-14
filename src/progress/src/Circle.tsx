@@ -68,10 +68,8 @@ export default defineComponent({
       return (
         <div class={`${clsPrefix}-progress-content`} role="none">
           <div class={`${clsPrefix}-progress-graph`} aria-hidden>
-            <div
-              class={`${clsPrefix}-progress-graph-circle`}
-            >
-              <svg viewBox="0 0 110 110" aria-hidden>
+            <div class={`${clsPrefix}-progress-graph-circle`}>
+              <svg viewBox="0 0 110 110">
                 <g>
                   <path
                     class={`${clsPrefix}-progress-graph-circle-rail`}
@@ -118,7 +116,7 @@ export default defineComponent({
                   {slots.default()}
                 </div>
               ) : status !== 'default' ? (
-                <div class={`${clsPrefix}-progress-icon`}>
+                <div class={`${clsPrefix}-progress-icon`} aria-hidden>
                   <NBaseIcon clsPrefix={clsPrefix}>
                     {{
                       default: () => iconMap[status]
@@ -131,6 +129,7 @@ export default defineComponent({
                   style={{
                     color: indicatorTextColor
                   }}
+                  role="none"
                 >
                   <span class={`${clsPrefix}-progress-text__percentage`}>
                     {percentage}

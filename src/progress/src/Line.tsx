@@ -98,7 +98,8 @@ export default defineComponent({
               class={[
                 `${clsPrefix}-progress-graph-line`,
                 {
-                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]: true
+                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]:
+                    true
                 }
               ]}
             >
@@ -151,6 +152,7 @@ export default defineComponent({
                 </div>
               ) : status === 'default' ? (
                 <div
+                  role="none"
                   class={`${clsPrefix}-progress-icon ${clsPrefix}-progress-icon--as-text`}
                   style={{
                     color: indicatorTextColor
@@ -160,7 +162,7 @@ export default defineComponent({
                   {unit}
                 </div>
               ) : (
-                <div class={`${clsPrefix}-progress-icon`}>
+                <div class={`${clsPrefix}-progress-icon`} aria-hidden>
                   <NBaseIcon clsPrefix={clsPrefix}>
                     {{ default: () => iconMap[status] }}
                   </NBaseIcon>
