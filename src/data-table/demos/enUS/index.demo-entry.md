@@ -42,34 +42,34 @@ tree
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| bordered | `boolean` | `true` |  |
-| bottom-bordered | `boolean` | `true` |  |
+| bordered | `boolean` | `true` | Whether to show border |
+| bottom-bordered | `boolean` | `true` | Whether to show bottom border |
 | checked-row-keys | `Array<string \| number>` | `undefined` | The keys of checked rows. |
 | cascade | `boolean` | `true` | Whether to do cascade checking when using tree data. |
 | children-key | `string` | `'children'` | The key of children data in tree data's data entity. |
 | columns | `Array<Column>` | `[]` | Columns to display. |
 | data | `Array<object>` | `[]` | Data to display. |
-| default-checked-row-keys | `Array<string \| number>` | `[]` |  |
+| default-checked-row-keys | `Array<string \| number>` | `[]` | The key value selected by default |
 | indent | `number` | `16` | Indent of row content when using tree data. |
-| loading | `boolean` | `false` |  |
+| loading | `boolean` | `false` | Whether to display loading status during data request |
 | max-height | `number \| string` | `undefined` | The max-height of the table content. Can be a CSS value. |
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Props) |
 | paging | `boolean` | `true` | If data-table do automatic paging. You may set it to `false` in async usage. |
-| row-class-name | `string \| (rowData: object, rowIndex : number) => string \| object` | `undefined` |  |
+| row-class-name | `string \| (rowData: object, rowIndex : number) => string \| object` | `undefined` | Class name on each line |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key) |
-| row-props | `(rowData: object, rowIndex : number) => object` | `undefined` |  |
+| row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Custom row attributes |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set |
-| single-column | `boolean` | `false` |  |
-| single-line | `boolean` | `true` |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
+| single-column | `boolean` | `false` | Whether to display as a column (when true, each column has border-bottom) |
+| single-line | `boolean` | `true` | Whether to display as a line (when true, each line has border-bottom) |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size |
 | summary | `CreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#CreateSummary-Type">CreateSummary Type</n-a>. |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellpisis` or `max-height` are set, it will always be `'fixed'` regardless of what you set. |
 | virtual-scroll | `boolean` | `false` | Whether to use virtual scroll to deal with large data. Make sure `max-height` is set before using it. |
-| on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
-| on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)` |  |
-| on-update:page | `(page: number)` | `undefined` |  |
-| on-update:page-size | `(pageSize: number) => void` | `undefined` |  |
+| on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes |
+| on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)` | The callback function triggered when the filters data changes |
+| on-update:page | `(page: number)` | `undefined` | Callback function triggered when the page changes |
+| on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function triggered when the page-size changes |
 | on-update:sorter | `(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => void` | `undefined` | If there won't be a active sorter after change, `options` will be `null` |
 
 ## Methods
@@ -78,10 +78,10 @@ These methods can help you control table in an uncontrolled manner. However, it'
 
 | Name | Type | Description |
 | --- | --- | --- |
-| clearFilters | `() => void` |  |
-| clearSorter | `() => void` |  |
+| clearFilters | `() => void` | Clear all filter data |
+| clearSorter | `() => void` | Clear all sort data |
 | filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }) => void` | Set the active filters of the table. |
-| page | `(page: number) => void` |  |
+| page | `(page: number) => void` | Manually set page |
 | sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | If columnKey set to `null`, it is the same as clearSorter. |
 
 ## Slots
@@ -100,21 +100,21 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | Text align in column |
 | children | `Column[]` | `undefined` | Child nodes of a grouped column |
-| className | `string` | `undefined` |  |
-| colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` |  |
+| className | `string` | `undefined` | Class name of the column |
+| colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The number of cells in the column |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | The default active filter option value in uncontrolled manner. (works when not using multiple filters) |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | The default active filter option values in uncontrolled manner. (works when there are multiple filters) |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | The default sort order of the table in uncontrolled manner |
-| disabled | `(rowData: object, rowIndex: number) => boolean` | `() => false` |  |
-| ellipsis | `boolean \| EllipsisProps` | `false` |  |
+| disabled | `(rowData: object, rowIndex: number) => boolean` | `() => false` | Whether to disable |
+| ellipsis | `boolean \| EllipsisProps` | `false` | Whether to display when the text overflows... |
 | expandable | `(rowData: object, rowIndex: number) => boolean` | `undefined` | Whethe the row is expandable. Only works when `type` is `'expand'`. |
 | filter | `boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'` | `false` | The filter of the column. If set to `true`, it will only display filter button on the column, which can be used in async status. |
-| filterMode | `'and' \| 'or'` | `'or'` |  |
-| filterMultiple | `boolean` | `true` |  |
+| filterMode | `'and' \| 'or'` | `'or'` | he same column filter method is and or or |
+| filterMultiple | `boolean` | `true` | Can the same column filter multiple |
 | filterOptionValue | `string \| number \| null` | `undefined` | The active filter option value in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when not using multiple filters) |
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | The active filter option values in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when there are multiple filters) |
-| filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` |  |
-| fixed | `'left \| 'right' \| false` | `false` |  |
+| filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | filter options data |
+| fixed | `'left \| 'right' \| false` | `false` | Whether the column needs to be fixed |
 | key | `string \| number` | `undefined` | Unique key of this column, **required** when table's row-key is not set. |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | Options of custom selection. Only work with `type='selection'` |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of column row cell. |
@@ -122,12 +122,12 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | renderFilterMenu | `() => VNodeChild` | `undefined` | Render function of column filter menu. |
 | renderFilterIcon | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | Render function of column filter icon. |
 | renderFilter | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | Render function of column filter trigger. |
-| rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` |  |
+| rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The number of cells in the row |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | The controlled sort order of the column. If multiple columns' sortOrder is set, the first one will affect. |
 | sorter | `boolean \| function \| 'default'` | `false` | The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function. |
-| title | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |
-| titleRowSpan | `number` | `undefined` |  |
-| type | `'selection' \| 'expand'` | `undefined` |  |
+| title | `string \| (() => VNodeChild)` | `undefined` | Column title information, Can be a render function. |
+| titleRowSpan | `number` | `undefined` | The number of cells occupied by the title row |
+| type | `'selection' \| 'expand'` | `undefined` | Column type |
 | width | `number \| string` | `undefined` | Width of the column, **required** when fixed. |
 
 ### CreateSummary Type

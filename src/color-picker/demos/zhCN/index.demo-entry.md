@@ -22,7 +22,7 @@ form
 | to | `string \| HTMLElement` | `'body'` | 面板的卸载位置 |
 | show | `boolean` | `undefined` | 是否展示面板 |
 | show-alpha | `boolean` | `true` | 是否可调节 alpha 通道 |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 颜色选择器的尺寸 |
 | value | `string \| null` | `undefined` | 颜色选择器的值 |
 | on-complete | `(value: string) => void` | `undefined` | 颜色完成改变后的回调（在鼠标移动时候不会调用） |
 | on-update:show | `(value: boolean) => void` | `undefined` | 面板可见状态改变的回调 |

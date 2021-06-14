@@ -17,12 +17,12 @@ name-size
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` |  |
-| src | `string` | `undefined` |  |
-| round | `boolean` | `false` |  |
+| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar size |
+| src | `string` | `undefined` | Avatar address |
+| round | `boolean` | `false` | Is the avatar round |
 
 ## Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name    | Parameters | Description                       |
+| ------- | ---------- | --------------------------------- |
+| default | `()`       | The content filled in the avatar. |

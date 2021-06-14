@@ -19,17 +19,17 @@ raw
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| color | `string` | `undefined` |  |
-| dot | `boolean` | `false` |  |
-| max | `number` | `undefined` |  |
-| processing | `boolean` | `false` |  |
-| show-zero | `boolean` | `false` |  |
-| show | `boolean` | `true` |  |
-| type | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` |  |
-| value | `string \| number` | `undefined` |  |
+| color | `string` | `undefined` | Badge color |
+| dot | `boolean` | `false` | Badge show dot |
+| max | `number` | `undefined` | The maximum number of Badge to handle overflow situations |
+| processing | `boolean` | `false` | Badge of processing |
+| show-zero | `boolean` | `false` | Badge show zero |
+| show | `boolean` | `true` | Badge controll show |
+| type | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | Badge show type |
+| value | `string \| number` | `undefined` | Badge of number value |
 
 ## Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name    | Parameters | Description                  |
+| ------- | ---------- | ---------------------------- |
+| default | `()`       | Badge default filled content |

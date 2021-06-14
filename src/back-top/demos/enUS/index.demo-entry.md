@@ -19,10 +19,10 @@ target-container-selector
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| bottom | `number \| string` | `40` |  |
+| bottom | `number \| string` | `40` | The height of BackTop from the bottom of the page |
 | listen-to | `string \| HTMLElement` | `undefined` | The element to be listened to scroll event. If it is `undefined` back top will listen to the nearest scrollable parent. |
-| right | `number \| string` | `40` |  |
+| right | `number \| string` | `40` | The width of BackTop from the right side of the page |
 | show | `boolean` | `undefined` | Whether to show BackTop |
 | to | `string \| HTMLElement` | `'body'` | Container node to show BackTop |
-| visibility-height | `number` | `180` |  |
-| on-update:show | `(value: boolean) => void` | `undefined` |  |
+| visibility-height | `number` | `180` | 滚动时触发的高度 |
+| on-update:show | `(value: boolean) => void` | `undefined` | Event is triggered when BackTop show changes |

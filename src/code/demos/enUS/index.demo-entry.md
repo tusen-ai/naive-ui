@@ -41,7 +41,14 @@ basic
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| code | `string` | `''` |  |
+| code | `string` | `''` | Incoming code string |
 | hljs | `Object` | `undefined` | If you want to set hljs locally, set it on code by the prop |
-| language | `string` | `undefined` |  |
-| trim | `boolean` | `true` |  |
+| language | `string` | `undefined` | Encoding language |
+| trim | `boolean` | `true` | Whether the encoding is trim |
+| uri | `boolean` | `false` | Whether decodeURIComponent |
+
+## Slots
+
+| Name    | Parameters | Description                     |
+| ------- | ---------- | ------------------------------- |
+| default | `()`       | The content filled in the code. |
