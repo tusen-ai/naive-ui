@@ -21,7 +21,16 @@ function renderIcon (icon) {
 
 const menuOptions = [
   {
-    label: 'Hear the Wind Sing',
+    label: () =>
+      h(
+        'a',
+        {
+          href: 'https://en.wikipedia.org/wiki/Hear_the_Wind_Sing',
+          target: '_blank',
+          rel: 'noopenner noreferrer'
+        },
+        'Hear the Wind Sing'
+      ),
     key: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon)
   },
