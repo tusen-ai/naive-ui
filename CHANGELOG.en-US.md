@@ -7,7 +7,7 @@
 - Fix `n-card`'s `header-style` it not applied to header. [#103](https://github.com/TuSimple/naive-ui/issues/103)
 - Fix `n-dialog`'s `destroyAll` method is missing.
 
-## 2.11.8
+## 2.11.8 (2021-06-13)
 
 ### Feats
 
@@ -19,7 +19,7 @@
 - Fix `n-form-item`'s style attribute `grid-template-columns` influence on the layout of child elements. [#93](https://github.com/TuSimple/naive-ui/pull/93)
 - Fix `n-data-table`'s prop types of `rowKey`, `rowClassName`, `rowProps`, `summary` aren't compatible with expected value.
 
-## 2.11.7
+## 2.11.7 (2021-06-12)
 
 ### Fixes
 
