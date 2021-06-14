@@ -82,52 +82,78 @@ exports[`n-dropdown inverted style 1`] = `
             <svg
               viewBox="0 0 512 512"
               xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
             >
               <rect
+                fill="none"
                 height="256"
                 rx="16"
                 ry="16"
-                style="fill: none; stroke: currentColor; stroke-linejoin: round; stroke-width: 32px;"
-                transform="translate(512 416) rotate(180)"
+                stroke="currentColor"
+                stroke-linejoin="round"
+                stroke-width="32"
+                transform="rotate(180 256 208)"
                 width="448"
                 x="32"
                 y="80"
               />
-              <line
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
-                x1="64"
-                x2="448"
-                y1="384"
-                y2="384"
+              <path
+                d="M64 384h384"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
-              <line
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
-                x1="96"
-                x2="416"
-                y1="432"
-                y2="432"
+              <path
+                d="M96 432h320"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
               <circle
                 cx="256"
                 cy="208"
+                fill="none"
                 r="80"
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
               <path
-                d="M480,160a80,80,0,0,1-80-80"
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                d="M480 160a80 80 0 0 1-80-80"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
               <path
-                d="M32,160a80,80,0,0,0,80-80"
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                d="M32 160a80 80 0 0 0 80-80"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
               <path
-                d="M480,256a80,80,0,0,0-80,80"
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                d="M480 256a80 80 0 0 0-80 80"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
               <path
-                d="M32,256a80,80,0,0,1,80,80"
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                d="M32 256a80 80 0 0 1 80 80"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
             </svg>
           </i>
@@ -286,52 +312,78 @@ exports[`n-dropdown shows menu after click 1`] = `
             <svg
               viewBox="0 0 512 512"
               xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
             >
               <rect
+                fill="none"
                 height="256"
                 rx="16"
                 ry="16"
-                style="fill: none; stroke: currentColor; stroke-linejoin: round; stroke-width: 32px;"
-                transform="translate(512 416) rotate(180)"
+                stroke="currentColor"
+                stroke-linejoin="round"
+                stroke-width="32"
+                transform="rotate(180 256 208)"
                 width="448"
                 x="32"
                 y="80"
               />
-              <line
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
-                x1="64"
-                x2="448"
-                y1="384"
-                y2="384"
+              <path
+                d="M64 384h384"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
-              <line
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
-                x1="96"
-                x2="416"
-                y1="432"
-                y2="432"
+              <path
+                d="M96 432h320"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
               <circle
                 cx="256"
                 cy="208"
+                fill="none"
                 r="80"
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
               <path
-                d="M480,160a80,80,0,0,1-80-80"
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                d="M480 160a80 80 0 0 1-80-80"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
               <path
-                d="M32,160a80,80,0,0,0,80-80"
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                d="M32 160a80 80 0 0 0 80-80"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
               <path
-                d="M480,256a80,80,0,0,0-80,80"
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                d="M480 256a80 80 0 0 0-80 80"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
               <path
-                d="M32,256a80,80,0,0,1,80,80"
-                style="fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
+                d="M32 256a80 80 0 0 1 80 80"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
               />
             </svg>
           </i>
