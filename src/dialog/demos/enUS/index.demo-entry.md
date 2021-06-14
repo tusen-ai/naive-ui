@@ -77,11 +77,11 @@ use-component
 All the properties can be modified dynamically.
 
 | Name | Type | Description |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | bordered | `boolean` |  |
 | closable | `boolean` |  |
 | content | `string \| (() => VNodeChild)` | Can be a render function. |
-| icon-placement | `'left' \| 'top'` | `'left'` |  |
+| icon-placement | `'left' \| 'top'` |  |
 | icon | `() => VNodeChild` | Render function. |
 | loading | `boolean` |  |
 | negative-text | `string` | Corresponding button won't show if not set. |
