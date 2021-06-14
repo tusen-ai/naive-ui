@@ -367,45 +367,45 @@ export default defineComponent({
         >
           {this.showButton
             ? {
-              suffix: () => [
-                <NButton
-                  text
-                  disabled={!this.minusable || this.disabled}
-                  focusable={false}
-                  builtinThemeOverrides={this.buttonThemeOverrides}
-                  onClick={this.handleMinusClick}
-                  ref="minusButtonInstRef"
-                >
-                  {{
-                    default: () => (
-                      <NBaseIcon clsPrefix={mergedClsPrefix}>
-                        {{
-                          default: () => <RemoveIcon />
-                        }}
-                      </NBaseIcon>
-                    )
-                  }}
-                </NButton>,
-                <NButton
-                  text
-                  disabled={!this.addable || this.disabled}
-                  focusable={false}
-                  builtinThemeOverrides={this.buttonThemeOverrides}
-                  onClick={this.handleAddClick}
-                  ref="addButtonInstRef"
-                >
-                  {{
-                    default: () => (
-                      <NBaseIcon clsPrefix={mergedClsPrefix}>
-                        {{
-                          default: () => <AddIcon />
-                        }}
-                      </NBaseIcon>
-                    )
-                  }}
-                </NButton>
-              ]
-            }
+                suffix: () => [
+                  <NButton
+                    text
+                    disabled={!this.minusable || this.disabled}
+                    focusable={false}
+                    builtinThemeOverrides={this.buttonThemeOverrides}
+                    onClick={this.handleMinusClick}
+                    ref="minusButtonInstRef"
+                  >
+                    {{
+                      default: () => (
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
+                          {{
+                            default: () => <RemoveIcon />
+                          }}
+                        </NBaseIcon>
+                      )
+                    }}
+                  </NButton>,
+                  <NButton
+                    text
+                    disabled={!this.addable || this.disabled}
+                    focusable={false}
+                    builtinThemeOverrides={this.buttonThemeOverrides}
+                    onClick={this.handleAddClick}
+                    ref="addButtonInstRef"
+                  >
+                    {{
+                      default: () => (
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
+                          {{
+                            default: () => <AddIcon />
+                          }}
+                        </NBaseIcon>
+                      )
+                    }}
+                  </NButton>
+                ]
+              }
             : null}
         </NInput>
       </div>
