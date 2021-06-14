@@ -5,6 +5,10 @@
 ### Feats
 
 - `n-menu` supports use `<a />` and `<router-link />` as label, closes [#84](https://github.com/TuSimple/naive-ui/issues/84).
+- `n-input-number` add `show-button` prop.
+- `n-rate` support `default` slot for icon customizing.
+- `n-rate` add color prop.
+- `n-rate` add size prop.
 
 ### Fixes
 
@@ -38,9 +42,6 @@
 
 - `n-spin`'s `size` prop support number.
 - `n-date-picker` add `footer` slot.
-- `n-rate` support `default` slot for icon customizing.
-- `n-rate` add color prop.
-- `n-rate` add size prop.
 
 ### Fixes
 
@@ -58,7 +59,6 @@
 
 - `n-dropdown` add `disabled` prop
 - `n-card` add `:target` style
-- `n-input-number` add `show-button` prop
 
 ### Fixes
 

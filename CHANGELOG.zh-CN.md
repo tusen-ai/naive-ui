@@ -5,6 +5,10 @@
 ### Feats
 
 - `n-menu` 支持使用 `<a />` 和 `<router-link />` 作为 label，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
+- `n-input-number` 新增 `show-button` 属性
+- `n-rate` 支持使用 default slot 自定义图标
+- `n-rate` 新增 color 属性
+- `n-rate` 新增 size 属性
 
 ### Fixes
 
@@ -38,9 +42,6 @@
 
 - `n-spin` 的 `size` 属性支持 number 类型
 - `n-date-picker` 支持 `footer` 插槽
-- `n-rate` 支持使用 default slot 自定义图标
-- `n-rate` 新增 color 属性
-- `n-rate` 新增 size 属性
 
 ### Fixes
 
@@ -58,7 +59,6 @@
 
 - `n-dropdown` 新增 `disabled` 属性
 - `n-card` 增加 `:target` 的样式
-- `n-input-number` 新增 `show-button` 属性
 
 ### Fixes
 
