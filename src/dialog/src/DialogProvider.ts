@@ -26,6 +26,7 @@ export type DialogReactive = {
 } & DialogOptions
 
 export interface DialogApiInjection {
+  destroyAll: () => void
   create: (options: DialogOptions) => DialogReactive
   success: (options: DialogOptions) => DialogReactive
   warning: (options: DialogOptions) => DialogReactive
@@ -33,18 +34,16 @@ export interface DialogApiInjection {
   info: (options: DialogOptions) => DialogReactive
 }
 
-export const dialogApiInjectionKey: InjectionKey<DialogApiInjection> = Symbol(
-  'dialogApi'
-)
+export const dialogApiInjectionKey: InjectionKey<DialogApiInjection> =
+  Symbol('dialogApi')
 
 export interface DialogProviderInjection {
   clickedRef: Ref<boolean>
   clickPositionRef: Ref<{ x: number, y: number } | null>
 }
 
-export const dialogProviderInjectionKey: InjectionKey<DialogProviderInjection> = Symbol(
-  'dialogProvider'
-)
+export const dialogProviderInjectionKey: InjectionKey<DialogProviderInjection> =
+  Symbol('dialogProvider')
 
 interface DialogInst {
   hide: () => void
@@ -79,11 +78,14 @@ export default defineComponent({
       dialogListRef.value.push(dialogReactive)
       return dialogReactive
     }
-    const typedApi = (['info', 'success', 'warning', 'error'] as Array<
-    'info' | 'success' | 'warning' | 'error'
-    >).map((type) => (options: DialogOptions): DialogReactive => {
+    const typedApi = (
+      ['info', 'success', 'warning', 'error'] as Array<
+      'info' | 'success' | 'warning' | 'error'
+      >
+    ).map((type) => (options: DialogOptions): DialogReactive => {
       return create({ ...options, type })
     })
+
     function handleAfterLeave (key: String): void {
       const { value: dialogList } = dialogListRef
       dialogList.splice(
@@ -91,8 +93,15 @@ export default defineComponent({
         1
       )
     }
+
+    function destroyAll (): void {
+      Object.values(dialogInstRefs)?.forEach((dialogInstRef: DialogInst) =>
+        dialogInstRef?.hide()
+      )
+    }
     const api = {
       create,
+      destroyAll,
       info: typedApi[0],
       success: typedApi[1],
       warning: typedApi[2],
