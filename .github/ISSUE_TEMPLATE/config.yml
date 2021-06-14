@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Create new issue
+    url: https://naive-ui.github.io/issue-helper/
+    about: The issue which is not created via https://naive-ui.github.io/issue-helper/ will be closed immediately.
