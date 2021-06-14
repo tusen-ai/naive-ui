@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-menu` supports use `<a />` and `<router-link />` as label, closes [#84](https://github.com/TuSimple/naive-ui/issues/84).
+
 ### Fixes
 
 - Fix `n-card`'s `header-style` it not applied to header. [#103](https://github.com/TuSimple/naive-ui/issues/103)

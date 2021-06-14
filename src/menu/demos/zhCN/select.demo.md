@@ -1,6 +1,8 @@
 # 选中 & 路由
 
-使用 `@update:value` 监听菜单选择变化。这个回调首个参数为选中菜单项的 `key`，第二个参数为菜单项的原数据。你通常可以在这个地方配合 vue-router 完成路由。
+使用 `@update:value` 监听菜单选择变化。这个回调首个参数为选中菜单项的 `key`，第二个参数为菜单项的原数据。
+
+你通常可以在这个地方配合 vue-router 完成路由。当然，你也可以通过将 `label` 渲染为 `<router-link />` 或 `<a />` 来改变路由。
 
 ```html
 <n-menu @update:value="handleUpdateValue" :options="menuOptions" />
@@ -21,7 +23,16 @@ function renderIcon (icon) {
 
 const menuOptions = [
   {
-    label: '且听风吟',
+    label: () =>
+      h(
+        'a',
+        {
+          href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F',
+          target: '_blank',
+          rel: 'noopenner noreferrer'
+        },
+        '且听风吟'
+      ),
     key: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon)
   },
