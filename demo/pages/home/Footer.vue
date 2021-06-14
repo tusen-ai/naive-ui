@@ -26,7 +26,7 @@
           text
           tag="a"
           target="_blank"
-          href="https://github.com/TuSimple/naive-ui/issues/new/choose"
+          href="https://naive-ui.github.io/issue-helper/"
         >
           {{ t('reportBug') }}
         </n-button>
