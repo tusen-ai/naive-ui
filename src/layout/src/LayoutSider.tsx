@@ -259,9 +259,9 @@ export default defineComponent({
             builtinThemeOverrides={
               this.inverted && this.cssVars.__invertScrollbar === 'true'
                 ? {
-                  colorHover: 'rgba(255, 255, 255, .4)',
-                  color: 'rgba(255, 255, 255, .3)'
-                }
+                    colorHover: 'rgba(255, 255, 255, .4)',
+                    color: 'rgba(255, 255, 255, .3)'
+                  }
                 : undefined
             }
           >

@@ -49,7 +49,7 @@ export default defineComponent({
           if (isGroupNode(child.rawNode)) {
             warn(
               'dropdown',
-              '`group` node is allowed to be put in `group` node.'
+              '`group` node is not allowed to be put in `group` node.'
             )
             return null
           }

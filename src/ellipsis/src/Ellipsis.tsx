@@ -79,12 +79,12 @@ export default defineComponent({
     const handleClickRef = computed(() => {
       return props.expandTrigger === 'click'
         ? () => {
-          const { value: expanded } = expandedRef
-          if (expanded) {
-            tooltipRef.value?.setShow(false)
+            const { value: expanded } = expandedRef
+            if (expanded) {
+              tooltipRef.value?.setShow(false)
+            }
+            expandedRef.value = !expanded
           }
-          expandedRef.value = !expanded
-        }
         : undefined
     })
     const renderTrigger = (): JSX.Element => (

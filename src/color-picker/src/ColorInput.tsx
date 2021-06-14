@@ -117,8 +117,8 @@ export default defineComponent({
                     valueArr === null
                       ? null
                       : (showAlpha ? toHexaString : toHexString)(
-                        valueArr as RGBA
-                      )
+                          valueArr as RGBA
+                        )
                 } catch {}
                 return (
                   <ColorInputUnit

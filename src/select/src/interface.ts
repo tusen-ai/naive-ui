@@ -25,11 +25,11 @@ export interface SelectGroupOptionBase {
 
 export type SelectGroupOption =
   | (SelectGroupOptionBase & {
-    /** @deprecated should use value instead */
+    /** @deprecated should use key and label instead */
     name?: string
   })
   | (SelectGroupOptionBase & {
-    value?: string | number
+    key: string | number
   })
 
 export interface SelectIgnoredOption {

@@ -263,7 +263,8 @@ export default defineComponent({
                                   {this.locale.filterCompName}
                                   <NInput
                                     onChange={() => {
-                                      this.compNamePattern = this.tempCompNamePattern
+                                      this.compNamePattern =
+                                        this.tempCompNamePattern
                                     }}
                                     onInput={(value: string) => {
                                       this.tempCompNamePattern = value
@@ -343,8 +344,10 @@ export default defineComponent({
                                   varNamePattern
                                 } = this
                                 const themeKeys = Object.keys(theme)
-                                const compNamePatternLower = compNamePattern.toLowerCase()
-                                const varNamePatternLower = varNamePattern.toLowerCase()
+                                const compNamePatternLower =
+                                  compNamePattern.toLowerCase()
+                                const varNamePatternLower =
+                                  varNamePattern.toLowerCase()
                                 let filteredItemsCount = 0
                                 const collapsedItems = themeKeys
                                   .filter((themeKey) => {
@@ -400,98 +403,99 @@ export default defineComponent({
                                                         varKey.includes(
                                                           'Color'
                                                         ) ? (
-                                                            <NColorPicker
-                                                              key={varKey}
-                                                              modes={[
-                                                                'rgb',
-                                                                'hex'
-                                                              ]}
-                                                              value={
-                                                                this
-                                                                  .tempOverrides?.[
-                                                                    themeKey
-                                                                  ]?.[varKey] ||
+                                                          <NColorPicker
+                                                            key={varKey}
+                                                            modes={[
+                                                              'rgb',
+                                                              'hex'
+                                                            ]}
+                                                            value={
+                                                              this
+                                                                .tempOverrides?.[
+                                                                  themeKey
+                                                                ]?.[varKey] ||
                                                               componentTheme[
                                                                 varKey
                                                               ]
-                                                              }
-                                                              onComplete={
-                                                                this
-                                                                  .applyTempOverrides
-                                                              }
-                                                              onUpdateValue={(
-                                                                value: string
-                                                              ) => {
-                                                                this.setTempOverrides(
-                                                                  themeKey,
-                                                                  varKey,
-                                                                  value
-                                                                )
-                                                              }}
-                                                            >
-                                                              {{
-                                                                action: () => (
-                                                                  <NButton
-                                                                    size="small"
-                                                                    disabled={
-                                                                      componentTheme[
-                                                                        varKey
-                                                                      ] ===
+                                                            }
+                                                            onComplete={
+                                                              this
+                                                                .applyTempOverrides
+                                                            }
+                                                            onUpdateValue={(
+                                                              value: string
+                                                            ) => {
+                                                              this.setTempOverrides(
+                                                                themeKey,
+                                                                varKey,
+                                                                value
+                                                              )
+                                                            }}
+                                                          >
+                                                            {{
+                                                              action: () => (
+                                                                <NButton
+                                                                  size="small"
+                                                                  disabled={
+                                                                    componentTheme[
+                                                                      varKey
+                                                                    ] ===
                                                                     this
                                                                       .tempOverrides?.[
                                                                         themeKey
                                                                       ]?.[varKey]
-                                                                    }
-                                                                    onClick={() => {
-                                                                      this.setTempOverrides(
-                                                                        themeKey,
-                                                                        varKey,
-                                                                        componentTheme[
-                                                                          varKey
-                                                                        ]
-                                                                      )
-                                                                      this.applyTempOverrides()
-                                                                    }}
-                                                                  >
-                                                                    {{
-                                                                      default: () =>
+                                                                  }
+                                                                  onClick={() => {
+                                                                    this.setTempOverrides(
+                                                                      themeKey,
+                                                                      varKey,
+                                                                      componentTheme[
+                                                                        varKey
+                                                                      ]
+                                                                    )
+                                                                    this.applyTempOverrides()
+                                                                  }}
+                                                                >
+                                                                  {{
+                                                                    default:
+                                                                      () =>
                                                                         this
                                                                           .locale
                                                                           .restore
-                                                                    }}
-                                                                  </NButton>
-                                                                )
-                                                              }}
-                                                            </NColorPicker>
-                                                          ) : (
-                                                            <NInput
-                                                              key={varKey}
-                                                              onChange={
-                                                                this
-                                                                  .applyTempOverrides
-                                                              }
-                                                              onUpdateValue={(
-                                                                value: string
-                                                              ) => {
-                                                                this.setTempOverrides(
-                                                                  themeKey,
-                                                                  varKey,
-                                                                  value
-                                                                )
-                                                              }}
-                                                              value={
-                                                                this
-                                                                  .tempOverrides?.[
-                                                                    themeKey
-                                                                  ]?.[varKey] || ''
-                                                              }
-                                                              placeholder={
-                                                                componentTheme[
-                                                                  varKey
-                                                                ]
-                                                              }
-                                                            />
-                                                          )
+                                                                  }}
+                                                                </NButton>
+                                                              )
+                                                            }}
+                                                          </NColorPicker>
+                                                            ) : (
+                                                          <NInput
+                                                            key={varKey}
+                                                            onChange={
+                                                              this
+                                                                .applyTempOverrides
+                                                            }
+                                                            onUpdateValue={(
+                                                              value: string
+                                                            ) => {
+                                                              this.setTempOverrides(
+                                                                themeKey,
+                                                                varKey,
+                                                                value
+                                                              )
+                                                            }}
+                                                            value={
+                                                              this
+                                                                .tempOverrides?.[
+                                                                  themeKey
+                                                                ]?.[varKey] || ''
+                                                            }
+                                                            placeholder={
+                                                              componentTheme[
+                                                                varKey
+                                                              ]
+                                                            }
+                                                          />
+                                                            )
                                                       ]
                                                     })
                                                 }}

@@ -267,28 +267,28 @@ export default defineComponent({
     function handlePageItemMouseEnter (pageItem: PageItem): void {
       if (props.disabled) return
       switch (pageItem.type) {
-        default:
-          return
         case 'fastBackward':
           showFastBackwardRef.value = true
           break
         case 'fastForward':
           showFastForwardRef.value = true
           break
+        default:
+          return
       }
       disableTransitionOneTick()
     }
     function handlePageItemMouseLeave (pageItem: PageItem): void {
       if (props.disabled) return
       switch (pageItem.type) {
-        default:
-          return
         case 'fastBackward':
           showFastBackwardRef.value = false
           break
         case 'fastForward':
           showFastForwardRef.value = false
           break
+        default:
+          return
       }
       disableTransitionOneTick()
     }
@@ -458,7 +458,7 @@ export default defineComponent({
         {prefix || $slots.prefix ? (
           <div class={`${mergedClsPrefix}-pagination-prefix`}>
             {($slots.prefix
-              ? (($slots.prefix as unknown) as RenderPrefix)
+              ? ($slots.prefix as unknown as RenderPrefix)
               : prefix!)({
               page: mergedPage,
               pageSize: mergedPageSize,
@@ -487,7 +487,8 @@ export default defineComponent({
               class={[
                 `${mergedClsPrefix}-pagination-item`,
                 {
-                  [`${mergedClsPrefix}-pagination-item--active`]: pageItem.active,
+                  [`${mergedClsPrefix}-pagination-item--active`]:
+                    pageItem.active,
                   [`${mergedClsPrefix}-pagination-item--disabled`]: disabled
                 }
               ]}
@@ -566,7 +567,7 @@ export default defineComponent({
         {suffix || $slots.suffix ? (
           <div class={`${mergedClsPrefix}-pagination-suffix`}>
             {($slots.suffix
-              ? (($slots.suffix as unknown) as RenderSuffix)
+              ? ($slots.suffix as unknown as RenderSuffix)
               : suffix!)({
               page: mergedPage,
               pageSize: mergedPageSize,

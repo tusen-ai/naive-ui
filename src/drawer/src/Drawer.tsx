@@ -67,12 +67,12 @@ const drawerProps = {
     type: [Object, String] as PropType<CSSProperties | string | undefined>,
     validator: __DEV__
       ? () => {
-        warn(
-          'drawer',
-          '`drawer-style` is deprecated, please use `style` instead.'
-        )
-        return true
-      }
+          warn(
+            'drawer',
+            '`drawer-style` is deprecated, please use `style` instead.'
+          )
+          return true
+        }
       : undefined,
     default: undefined
   },
@@ -81,21 +81,21 @@ const drawerProps = {
     type: String as PropType<string | undefined>,
     validator: __DEV__
       ? () => {
-        warn(
-          'drawer',
-          '`drawer-class` is deprecated, please use `class` instead.'
-        )
-        return true
-      }
+          warn(
+            'drawer',
+            '`drawer-class` is deprecated, please use `class` instead.'
+          )
+          return true
+        }
       : undefined,
     default: undefined
   },
   target: {
     validator: __DEV__
       ? () => {
-        warn('drawer', '`target` is deprecated, please use `to` instead.')
-        return true
-      }
+          warn('drawer', '`target` is deprecated, please use `to` instead.')
+          return true
+        }
       : undefined,
     default: undefined
   },

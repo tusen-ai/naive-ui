@@ -184,12 +184,11 @@ export default defineComponent({
           </div>
         ) : null}
         {$slots.header || this.title || this.closable ? (
-          <div class={`${mergedClsPrefix}-card-header`}>
-            <div
-              class={`${mergedClsPrefix}-card-header__main`}
-              style={this.headerStyle}
-              role="heading"
-            >
+          <div
+            class={`${mergedClsPrefix}-card-header`}
+            style={this.headerStyle}
+          >
+            <div class={`${mergedClsPrefix}-card-header__main`} role="heading">
               {renderSlot($slots, 'header', {}, () => [this.title])}
             </div>
             {$slots['header-extra'] ? (

@@ -893,24 +893,24 @@ export default defineComponent({
           )}
           {!this.pair &&
           (this.$slots.suffix || this.clearable || this.showCount) ? (
-              <div class={`${mergedClsPrefix}-input__suffix`}>
-                {[
-                  renderSlot(this.$slots, 'suffix'),
-                  this.clearable || this.$slots.clear ? (
-                    <NBaseClear
-                      clsPrefix={mergedClsPrefix}
-                      show={this.showClearButton}
-                      onClear={this.handleClear}
-                    >
-                      {{ default: () => renderSlot(this.$slots, 'clear') }}
-                    </NBaseClear>
-                  ) : null,
-                  this.showCount && this.type !== 'textarea' ? (
-                    <WordCount />
-                  ) : null
-                ]}
-              </div>
-            ) : null}
+            <div class={`${mergedClsPrefix}-input__suffix`}>
+              {[
+                renderSlot(this.$slots, 'suffix'),
+                this.clearable || this.$slots.clear ? (
+                  <NBaseClear
+                    clsPrefix={mergedClsPrefix}
+                    show={this.showClearButton}
+                    onClear={this.handleClear}
+                  >
+                    {{ default: () => renderSlot(this.$slots, 'clear') }}
+                  </NBaseClear>
+                ) : null,
+                this.showCount && this.type !== 'textarea' ? (
+                  <WordCount />
+                ) : null
+              ]}
+            </div>
+              ) : null}
         </div>
         {/* pair input */}
         {this.pair ? (

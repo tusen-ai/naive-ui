@@ -14,7 +14,8 @@ export default {
       options: [
         {
           type: 'group',
-          name: 'Rubber Soul',
+          label: 'Rubber Soul',
+          key: 'Rubber Soul',
           children: [
             {
               label:
@@ -76,7 +77,8 @@ export default {
         },
         {
           type: 'group',
-          name: 'Let It Be',
+          label: 'Let It Be',
+          key: 'Let It Be Album',
           children: [
             {
               label: 'Two Of Us',
