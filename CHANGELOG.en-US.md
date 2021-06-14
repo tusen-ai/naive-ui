@@ -4,8 +4,10 @@
 
 ### Feats
 
+
 - `n-button-group` supports wai-aria
 - `n-progress` supports wai-aria
+- `n-menu` supports use `<a />` and `<router-link />` as label, closes [#84](https://github.com/TuSimple/naive-ui/issues/84).
 
 ## 2.11.8
 
