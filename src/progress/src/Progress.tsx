@@ -174,12 +174,7 @@ export default defineComponent({
         aria-valuemax={100}
         aria-valuemin={0}
         aria-valuenow={percentage as number}
-        role={
-          type !== 'multiple-circle' && (
-            mergedIndicatorPlacement === 'inside' ||
-            (status === 'default' && showIndicator)
-          ) ? 'progressbar' : 'none'
-        }
+        role={ type === 'circle' || type === 'line' ? 'progressbar' : 'none' }
       >
         {type === 'circle' ? (
           <Circle

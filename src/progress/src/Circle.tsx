@@ -114,7 +114,7 @@ export default defineComponent({
           {showIndicator ? (
             <div>
               {slots.default ? (
-                <div class={`${clsPrefix}-progress-custom-content`}>
+                <div class={`${clsPrefix}-progress-custom-content`} role="none">
                   {slots.default()}
                 </div>
               ) : status !== 'default' ? (

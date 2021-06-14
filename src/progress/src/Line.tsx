@@ -145,6 +145,7 @@ export default defineComponent({
                   style={{
                     color: indicatorTextColor
                   }}
+                  role="none"
                 >
                   {slots.default()}
                 </div>
