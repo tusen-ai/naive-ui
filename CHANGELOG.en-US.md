@@ -6,6 +6,7 @@
 
 - Fix `n-card`'s `header-style` it not applied to header. [#103](https://github.com/TuSimple/naive-ui/issues/103)
 - Fix `n-dialog` misses `destroyAll` method.
+- Fix `n-data-table` misses `on-update-sorter`, `on-update-filter`, `on-update-page` and `on-update-page-size` props.
 
 ## 2.11.8 (2021-06-13)
 
