@@ -95,10 +95,11 @@ export default defineComponent({
     }
 
     function destroyAll (): void {
-      Object.values(dialogInstRefs)?.forEach((dialogInstRef: DialogInst) =>
-        dialogInstRef?.hide()
+      Object.values(dialogInstRefs).forEach((dialogInstRef) =>
+        dialogInstRef.hide()
       )
     }
+
     const api = {
       create,
       destroyAll,
