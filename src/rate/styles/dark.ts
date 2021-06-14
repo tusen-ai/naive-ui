@@ -9,7 +9,10 @@ const rateDark: RateTheme = {
     return {
       itemColor: railColor,
       itemColorActive: '#CCAA33',
-      itemSize: '20px'
+      itemSize: '20px',
+      sizeSmall: '14px',
+      sizeMedium: '20px',
+      sizeLarge: '24px'
     }
   }
 }

@@ -84,6 +84,14 @@ tree
 | page | `(page: number) => void` |  |
 | sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 如果 columnKey 设为 `null`，那它和 clearSorter 效果一致 |
 
+## Slots
+
+### Slots
+
+| 名称  | 参数 | 说明                 |
+| ----- | ---- | -------------------- |
+| empty | `()` | 表格数据为空时的展示 |
+
 ## API
 
 ### Column Properties

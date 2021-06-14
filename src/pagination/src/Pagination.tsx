@@ -45,24 +45,15 @@ const paginationProps = {
     type: Number,
     default: 1
   },
-  showSizePicker: {
-    type: Boolean,
-    default: false
-  },
+  showSizePicker: Boolean,
   pageSize: Number as PropType<number>,
   defaultPageSize: Number,
   pageSizes: {
     type: Array as PropType<number[]>,
     default: () => [10]
   },
-  showQuickJumper: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  showQuickJumper: Boolean,
+  disabled: Boolean,
   pageSlot: {
     type: Number,
     default: 9

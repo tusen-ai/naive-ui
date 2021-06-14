@@ -8,6 +8,22 @@ describe('n-data-table', () => {
   it('should work with import on demand', () => {
     mount(NDataTable)
   })
+  it('show custom empty', () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={[]}>
+        {{
+          empty: () => <div class="empty-info">empty</div>
+        }}
+      </NDataTable>
+    ))
+    expect(wrapper.find('.empty-info').exists()).toEqual(true)
+  })
   describe('props.columns', () => {
     it('has correct type', () => {
       interface Data {

@@ -7,7 +7,9 @@ const self = (vars: ThemeCommonVars) => {
   return {
     itemColor: railColor,
     itemColorActive: '#FFCC33',
-    itemSize: '20px'
+    sizeSmall: '16px',
+    sizeMedium: '20px',
+    sizeLarge: '24px'
   }
 }
 

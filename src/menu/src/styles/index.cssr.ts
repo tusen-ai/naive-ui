@@ -227,6 +227,19 @@ export default cB('menu', `
       text-overflow: ellipsis;
       color: var(--item-text-color);
     `, [
+      c('a', `
+        text-decoration: none;
+        color: inherit;
+      `, [
+        c('&::before', `
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+        `)
+      ]),
       cE('extra', `
         font-size: .93em;
         color: var(--group-text-color);

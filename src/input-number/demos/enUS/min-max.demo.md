@@ -10,11 +10,13 @@ You can set min & max of it.
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: null
+      value: ref(null)
     }
   }
-}
+})
 ```

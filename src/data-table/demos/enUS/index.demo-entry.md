@@ -84,6 +84,14 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | page | `(page: number) => void` |  |
 | sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | If columnKey set to `null`, it is the same as clearSorter. |
 
+## Slots
+
+### Slots
+
+| Name  | Type | Description                                    |
+| ----- | ---- | ---------------------------------------------- |
+| empty | `()` | Custom description when data of table is empty. |
+
 ## API
 
 ### Column Properties
