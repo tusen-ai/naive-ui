@@ -1,6 +1,8 @@
 # Select & Routing
 
-Use `@update:value` to listen to the select action of the menu. The firt argument of the callback is the `key` of the selected menu item. The second is the orginal data of the menu item. Usually you can use vue-router here to accomplish routing.
+Use `@update:value` to listen to the select action of the menu. The firt argument of the callback is the `key` of the selected menu item. The second is the orginal data of the menu item.
+
+Usually you can use vue-router here to accomplish routing. Also, you can render `label` as `<router-link />` or `<a />` to set route.
 
 ```html
 <n-menu @update:value="handleUpdateValue" :options="menuOptions" />
@@ -21,7 +23,16 @@ function renderIcon (icon) {
 
 const menuOptions = [
   {
-    label: 'Hear the Wind Sing',
+    label: () =>
+      h(
+        'a',
+        {
+          href: 'https://en.wikipedia.org/wiki/Hear_the_Wind_Sing',
+          target: '_blank',
+          rel: 'noopenner noreferrer'
+        },
+        'Hear the Wind Sing'
+      ),
     key: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon)
   },
