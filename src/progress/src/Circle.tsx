@@ -70,7 +70,7 @@ export default defineComponent({
           <div class={`${clsPrefix}-progress-graph`}>
             <div
               class={`${clsPrefix}-progress-graph-circle`}
-              role="progressbar"
+              role={props.status === 'default' ? 'progressbar' : 'none'}
               aria-valuemax={100}
               aria-valuemin={0}
               aria-valuenow={props.percentage}

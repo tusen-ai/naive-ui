@@ -98,8 +98,7 @@ export default defineComponent({
               class={[
                 `${clsPrefix}-progress-graph-line`,
                 {
-                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]:
-                    true
+                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]: true
                 }
               ]}
             >
@@ -128,7 +127,7 @@ export default defineComponent({
                     height: styleHeightRef.value,
                     borderRadius: styleFillBorderRadiusRef.value
                   }}
-                  role="progressbar"
+                  role={props.status === 'default' ? 'progressbar' : 'none'}
                   aria-valuemax={100}
                   aria-valuemin={0}
                   aria-valuenow={props.percentage}
