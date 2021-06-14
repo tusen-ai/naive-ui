@@ -8,9 +8,8 @@ export interface ButtonGroupInjection {
   size?: Size | undefined
 }
 
-export const buttonGroupInjectionKey: InjectionKey<ButtonGroupInjection> = Symbol(
-  'button-group'
-)
+export const buttonGroupInjectionKey: InjectionKey<ButtonGroupInjection> =
+  Symbol('button-group')
 
 const buttonGroupProps = {
   size: {
@@ -41,6 +40,7 @@ export default defineComponent({
           `${mergedClsPrefix}-button-group`,
           this.vertical && `${mergedClsPrefix}-button-group--vertical`
         ]}
+        role="group"
       >
         {this.$slots}
       </div>
