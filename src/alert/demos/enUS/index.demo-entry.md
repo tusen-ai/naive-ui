@@ -15,9 +15,9 @@ no-icon
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| closable | `boolean` | `false` | Can the alert information be turned off. |
+| closable | `boolean` | `false` | Whether the alert can be closed. |
 | show-icon | `boolean` | `true` | Whether to show the icon of alert. |
-| title | `string` | `undefined` | Title information of alert. |
+| title | `string` | `undefined` | Title of the alert. |
 | type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | alert type. |
 | on-after-leave | `Function` | `undefined` | Callback function executed when the alert disappears. |
 | on-close | `() => boolean \| Promise<boolean> \| any` | `() => true` | The callback function executed when the close icon is clicked. |
@@ -27,5 +27,5 @@ no-icon
 | Name    | Parameters | Description                                   |
 | ------- | ---------- | --------------------------------------------- |
 | default | `()`       | The content of the alert.      |
-| header  | `()`       | The content filled in the alert header.       |
-| icon    | `()`       | The content filled in the icon part of alert. |
+| header  | `()`       | The content placed in the alert header.       |
+| icon    | `()`       | Icon displayed in the alert. |
