@@ -17,5 +17,5 @@ position
 | listen-to | `string \| HTMLElement \| Document \| Window \| (() => HTMLElement)` | `document` | The scrolling element to listen scrolling. |
 | trigger-bottom | `number` | `undefined` | The distance px to bottom of target to trigger bottom affix. (if not set, use `bottom` prop) |
 | trigger-top | `number` | `undefined` | The distance px to top of target to trigger top affix. (if not set, use `top` prop) |
-| position | `'fixed' \| 'absolute'` | `'fixed'` |  |
+| position | `'fixed' \| 'absolute'` | `'fixed'` | Use position method |
 | top | `number` | `undefined` | The css top property after trigger top affix. (if not set, use `trigger-top` prop) |
