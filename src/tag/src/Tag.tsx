@@ -126,7 +126,7 @@ export default defineComponent({
           self: {
             padding,
             closeMargin,
-            closeRtlMargin,
+            closeMarginRtl,
             borderRadius,
             opacityDisabled,
             textColorCheckable,
@@ -158,7 +158,7 @@ export default defineComponent({
           '--close-color-hover': closeColorHover,
           '--close-color-pressed': closeColorPressed,
           '--close-margin': closeMargin,
-          '--close-rtl-margin': closeRtlMargin,
+          '--close-margin-rtl': closeMarginRtl,
           '--close-size': closeSize,
           '--color': color,
           '--color-checkable': colorCheckable,
@@ -207,9 +207,7 @@ export default defineComponent({
             clsPrefix={mergedClsPrefix}
             class={[
               `${mergedClsPrefix}-tag__close`,
-              {
-                [`${mergedClsPrefix}-tag__close--rtl`]: rtlEnabled
-              }
+              rtlEnabled ? `${mergedClsPrefix}-tag__close--rtl` : ''
             ]}
             disabled={this.disabled}
             onClick={this.handleCloseClick}

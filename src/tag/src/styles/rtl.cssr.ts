@@ -5,6 +5,6 @@ export default cB('tag', [
     direction: rtl;
   `),
   cE('close', [cM('rtl', `
-    margin: var(--close-rtl-margin)
+    margin: var(--close-margin-rtl)
   `)])
 ])

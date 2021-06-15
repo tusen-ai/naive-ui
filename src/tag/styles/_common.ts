@@ -5,5 +5,5 @@ export default {
   // closeSize
   padding: '0 7px',
   closeMargin: '0 0 0 3px',
-  closeRtlMargin: '0 3px 0 0'
+  closeMarginRtl: '0 3px 0 0'
 }
