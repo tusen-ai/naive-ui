@@ -18,3 +18,5 @@
 9. 将 release 分支合并到 main（发起一个 PR，CI 过了就合并）
 10. 回到 main 分支拉回最新的代码
 11. git clean -fdx && npm i && npm run release:package
+12. 将 main 合并到 docs（发起一个 PR，CI 过了就合并）
+13. 将 main 合并到 feat（发起一个 PR，CI 过了就合并）
