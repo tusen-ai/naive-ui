@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`n-space render custom style space 1`] = `
+"<div class=\\"n-space\\" style=\\"display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; margin-top: -4px; margin-bottom: -4px;\\">
+  <div style=\\"background-color: red; color: yellow; max-width: 100%; padding-top: 4px; padding-bottom: 4px;\\">div</div>
+</div>"
+`;
+
+exports[`n-space render empty children 1`] = `"<div class=\\"n-space\\" style=\\"display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; margin-top: -4px; margin-bottom: -4px;\\"></div>"`;
+
+exports[`n-space render justify space 1`] = `
+"<div class=\\"n-space\\" style=\\"display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; margin-top: -4px; margin-bottom: -4px;\\">
+  <div style=\\"max-width: 100%; margin-right: 12px; padding-top: 4px; padding-bottom: 4px;\\">
+    <div>1</div>
+  </div>
+  <div style=\\"max-width: 100%; padding-top: 4px; padding-bottom: 4px;\\">
+    <div>2</div>
+  </div>
+</div>"
+`;
+
+exports[`n-space render justify space 2`] = `
+"<div class=\\"n-space\\" style=\\"display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-end; margin-top: -4px; margin-bottom: -4px;\\">
+  <div style=\\"max-width: 100%; margin-right: 12px; padding-top: 4px; padding-bottom: 4px;\\">
+    <div>1</div>
+  </div>
+  <div style=\\"max-width: 100%; padding-top: 4px; padding-bottom: 4px;\\">
+    <div>2</div>
+  </div>
+</div>"
+`;
+
+exports[`n-space render space number size 1`] = `"<div class=\\"n-space\\" style=\\"display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; margin-top: -10px; margin-bottom: -10px;\\"></div>"`;
+
+exports[`n-space render space string size 1`] = `"<div class=\\"n-space\\" style=\\"display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; margin-top: -6px; margin-bottom: -6px;\\"></div>"`;
+
+exports[`n-space render vertical space 1`] = `
+"<div class=\\"n-space\\" style=\\"display: flex; flex-direction: column; flex-wrap: wrap; justify-content: flex-start;\\">
+  <div style=\\"max-width: 100%; margin-bottom: 8px;\\">
+    <div>1</div>
+  </div>
+  <div style=\\"max-width: 100%;\\">
+    <div>2</div>
+  </div>
+</div>"
+`;
+
+exports[`n-space should render with invalidElement 1`] = `
+"<div class=\\"n-space\\" style=\\"display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; margin-top: -4px; margin-bottom: -4px;\\">
+  <div style=\\"max-width: 100%; margin-right: 12px; padding-top: 4px; padding-bottom: 4px;\\">text1</div>
+  <div style=\\"max-width: 100%; margin-right: 12px; padding-top: 4px; padding-bottom: 4px;\\"><span>text1</span></div>
+  <div style=\\"max-width: 100%; padding-top: 4px; padding-bottom: 4px;\\">text1</div>
+</div>"
+`;
