@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-radio-group` 不触发 form-item 验证
+
 ## 2.11.11 (2021-06-15)
 
 ### Fixes

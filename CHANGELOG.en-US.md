@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-radio-group` doesn't trigger form item validation.
+
 ## 2.11.11 (2021-06-15)
 
 ### Fixes
