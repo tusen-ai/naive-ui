@@ -9,6 +9,7 @@ import type { TagTheme } from '../styles'
 import commonProps from './common-props'
 import style from './styles/index.cssr'
 import useRtl from '../../_mixins/use-rtl'
+
 export interface TagPublicMethods {
   setTextContent: (textContent: string) => void
 }

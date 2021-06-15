@@ -5,7 +5,7 @@ export default cB('tag', [
     direction: rtl;
   `, [
     cE('close', `
-      margin: var(--close-margin-rtl)
+      margin: var(--close-margin-rtl);
     `)
   ])
 ])
