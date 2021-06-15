@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.11.11 (2021-06-15)
+
+### Fixes
+
+- 将 `vue` 和 `vue-router` 移至 peer dependencies 避免重复打包
+
 ## 2.11.9 (2021-06-15)
 
 ### Feats
