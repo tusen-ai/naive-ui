@@ -297,9 +297,14 @@ export function useTableData (
   function mergedOnUpdatePage (page: number): void {
     const { pagination } = props
     if (pagination) {
-      const { onChange, 'onUpdate:page': onUpdatePage } = pagination
+      const {
+        onChange,
+        'onUpdate:page': _onUpdatePage,
+        onUpdatePage
+      } = pagination
       if (onChange) call(onChange, page)
       if (onUpdatePage) call(onUpdatePage, page)
+      if (_onUpdatePage) call(_onUpdatePage, page)
       doUpdatePage(page)
     }
   }
@@ -344,7 +349,12 @@ export function useTableData (
     uncontrolledPageSizeRef.value = pageSize
   }
   function doUpdateSorter (sortState: SortState | null): void {
-    const { 'onUpdate:sorter': onUpdateSorter, onSorterChange } = props
+    const {
+      'onUpdate:sorter': _onUpdateSorter,
+      onUpdateSorter,
+      onSorterChange
+    } = props
+    if (_onUpdateSorter) call(_onUpdateSorter, sortState)
     if (onUpdateSorter) call(onUpdateSorter, sortState)
     if (onSorterChange) call(onSorterChange, sortState)
     uncontrolledSortStateRef.value = sortState
@@ -353,8 +363,13 @@ export function useTableData (
     filters: FilterState,
     sourceColumn?: TableBaseColumn
   ): void {
-    const { 'onUpdate:filters': onUpdateFilters, onFiltersChange } = props
+    const {
+      onUpdateFilters,
+      'onUpdate:filters': _onUpdateFilters,
+      onFiltersChange
+    } = props
     if (onUpdateFilters) call(onUpdateFilters, filters, sourceColumn)
+    if (_onUpdateFilters) call(_onUpdateFilters, filters, sourceColumn)
     if (onFiltersChange) call(onFiltersChange, filters, sourceColumn)
     uncontrolledFilterStateRef.value = filters
   }

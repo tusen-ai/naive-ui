@@ -12,7 +12,7 @@ import { useMergedState } from 'vooks'
 import { NBaseIcon } from '../../_internal'
 import { useTheme, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call } from '../../_utils'
+import { call, createKey } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { rateLight } from '../styles'
 import type { RateTheme } from '../styles'
@@ -25,18 +25,16 @@ const rateProps = {
     type: Number,
     default: 5
   },
-  value: {
-    type: Number,
-    default: undefined
-  },
+  value: Number,
   defaultValue: {
     type: Number,
     default: 0
   },
   size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
+    type: [String, Number] as PropType<number | 'small' | 'medium' | 'large'>,
     default: 'medium'
   },
+  color: String,
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<(value: number) => void>
@@ -95,21 +93,34 @@ export default defineComponent({
       handleClick,
       handleMouseLeave,
       cssVars: computed(() => {
+        const { size } = props
         const {
           common: { cubicBezierEaseInOut },
-          self: { itemColor, itemColorActive, itemSize }
+          self
         } = themeRef.value
+        const { itemColor, itemColorActive } = self
+        let mergedSize: string
+        if (typeof size === 'number') {
+          mergedSize = `${size}px`
+        } else {
+          mergedSize = self[createKey('size', size)]
+        }
         return {
           '--bezier': cubicBezierEaseInOut,
           '--item-color': itemColor,
-          '--item-color-active': itemColorActive,
-          '--item-size': itemSize
+          '--item-color-active': props.color || itemColorActive,
+          '--item-size': mergedSize
         }
       })
     }
   },
   render () {
-    const { hoverIndex, mergedValue, mergedClsPrefix } = this
+    const {
+      hoverIndex,
+      mergedValue,
+      mergedClsPrefix,
+      $slots: { default: defaultSlot }
+    } = this
     return (
       <div
         class={`${mergedClsPrefix}-rate`}
@@ -131,9 +142,13 @@ export default defineComponent({
             onClick={() => this.handleClick(index)}
             onMouseenter={() => this.handleMouseEnter(index)}
           >
-            <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => StarIcon }}
-            </NBaseIcon>
+            {defaultSlot ? (
+              defaultSlot()
+            ) : (
+              <NBaseIcon clsPrefix={mergedClsPrefix}>
+                {{ default: () => StarIcon }}
+              </NBaseIcon>
+            )}
           </div>
         ))}
       </div>

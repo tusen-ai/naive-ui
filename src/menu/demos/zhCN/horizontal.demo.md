@@ -21,7 +21,16 @@ function renderIcon (icon) {
 
 const menuOptions = [
   {
-    label: '且听风吟',
+    label: () =>
+      h(
+        'a',
+        {
+          href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F',
+          target: '_blank',
+          rel: 'noopenner noreferrer'
+        },
+        '且听风吟'
+      ),
     key: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon)
   },

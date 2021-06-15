@@ -4,8 +4,32 @@
 
 ### Fixes
 
+- 修复 `n-radio-group` 不触发 form-item 验证
+
+## 2.11.11 (2021-06-15)
+
+### Fixes
+
+- 将 `vue` 和 `vue-router` 移至 peer dependencies 避免重复打包
+
+## 2.11.9 (2021-06-15)
+
+### Feats
+
+- `n-space` 支持 wai-aria
+- `n-button-group` 支持 wai-aria
+- `n-progress` 支持 wai-aria
+- `n-menu` 支持使用 `<a />` 和 `<router-link />` 作为 label，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
+- `n-input-number` 新增 `show-button` 属性
+- `n-rate` 支持使用 default slot 自定义图标
+- `n-rate` 新增 color 属性
+- `n-rate` 新增 size 属性
+
+### Fixes
+
 - 修复 `n-card` 的 `header-style` 没有应用于 header 上 [#103](https://github.com/TuSimple/naive-ui/issues/103)
 - 修复 `n-dialog` 的 `destroyAll` 方法缺失
+- 修复 `n-data-table` 缺少 `on-update-sorter`、`on-update-filters`、`on-update-page`、`on-update-page-size` 属性
 
 ## 2.11.8 (2021-06-13)
 

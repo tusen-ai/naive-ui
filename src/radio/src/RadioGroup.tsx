@@ -139,7 +139,14 @@ export default defineComponent({
   name: 'RadioGroup',
   props: radioGroupProps,
   setup (props) {
-    const formItem = useFormItem(props)
+    const selfElRef = ref<HTMLDivElement | null>(null)
+    const {
+      mergedSizeRef,
+      nTriggerFormChange,
+      nTriggerFormInput,
+      nTriggerFormBlur,
+      nTriggerFormFocus
+    } = useFormItem(props)
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Radio',
@@ -149,7 +156,6 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const { mergedSizeRef } = formItem
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -172,6 +178,20 @@ export default defineComponent({
         call(_onUpdateValue, value)
       }
       uncontrolledValueRef.value = value
+      nTriggerFormChange()
+      nTriggerFormInput()
+    }
+    function handleFocusin (e: FocusEvent): void {
+      const { value: selfEl } = selfElRef
+      if (!selfEl) return
+      if (selfEl.contains(e.relatedTarget as HTMLElement | null)) return
+      nTriggerFormFocus()
+    }
+    function handleFocusout (e: FocusEvent): void {
+      const { value: selfEl } = selfElRef
+      if (!selfEl) return
+      if (selfEl.contains(e.relatedTarget as HTMLElement | null)) return
+      nTriggerFormBlur()
     }
     provide(radioGroupInjectionKey, {
       mergedClsPrefixRef,
@@ -182,8 +202,11 @@ export default defineComponent({
       doUpdateValue
     })
     return {
+      selfElRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
+      handleFocusout,
+      handleFocusin,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const {
@@ -224,7 +247,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedValue, mergedClsPrefix } = this
+    const { mergedValue, mergedClsPrefix, handleFocusin, handleFocusout } = this
     const { children, isButtonGroup } = mapSlot(
       flatten(getSlot(this)),
       mergedValue,
@@ -232,6 +255,9 @@ export default defineComponent({
     )
     return (
       <div
+        onFocusin={handleFocusin}
+        onFocusout={handleFocusout}
+        ref="selfElRef"
         class={[
           `${mergedClsPrefix}-radio-group`,
           isButtonGroup && `${mergedClsPrefix}-radio-group--button-group`

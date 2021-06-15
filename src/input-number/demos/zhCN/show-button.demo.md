@@ -1,9 +1,11 @@
-# 禁用
+# 隐藏按钮
+
+使用 `show-button` 属性来控制是否展示按钮。
 
 ```html
 <n-space align="center">
   <n-switch v-model:value="disabled" />
-  <n-input-number :disabled="disabled" v-model:value="value" />
+  <n-input-number :show-button="disabled" v-model:value="value" />
 </n-space>
 ```
 

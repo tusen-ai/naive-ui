@@ -81,10 +81,7 @@ export const dataTableProps = {
     type: Array as PropType<RowKey[]>,
     default: () => []
   },
-  checkedRowKeys: {
-    type: Array as PropType<RowKey[]>,
-    default: undefined
-  },
+  checkedRowKeys: Array as PropType<RowKey[]>,
   singleLine: {
     type: Boolean,
     default: true
@@ -117,22 +114,26 @@ export const dataTableProps = {
     type: Number,
     default: 16
   },
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
   >,
-  // eslint-disable-next-line vue/prop-name-casing
+  onUpdatePage: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
   'onUpdate:pageSize': [Function, Array] as PropType<
   PaginationProps['onUpdate:pageSize']
   >,
-  // eslint-disable-next-line vue/prop-name-casing
+  onUpdatePageSize: [Function, Array] as PropType<
+  PaginationProps['onUpdate:pageSize']
+  >,
   'onUpdate:sorter': [Function, Array] as PropType<MaybeArray<OnUpdateSorter>>,
-  // eslint-disable-next-line vue/prop-name-casing
+  onUpdateSorter: [Function, Array] as PropType<MaybeArray<OnUpdateSorter>>,
   'onUpdate:filters': [Function, Array] as PropType<
   MaybeArray<OnUpdateFilters>
   >,
-  // eslint-disable-next-line vue/prop-name-casing
+  onUpdateFilters: [Function, Array] as PropType<MaybeArray<OnUpdateFilters>>,
   'onUpdate:checkedRowKeys': [Function, Array] as PropType<
+  MaybeArray<OnUpdateCheckedRowKeys>
+  >,
+  onUpdateCheckedRowKeys: [Function, Array] as PropType<
   MaybeArray<OnUpdateCheckedRowKeys>
   >,
   'onUpdate:expandedRowKeys': [Function, Array] as PropType<

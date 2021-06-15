@@ -1,7 +1,7 @@
 <!--
 !!! Please read the following content if this is your first pull request !!!
 
-1. If you are working on docs, please set `main` branch as the target branch.
+1. If you are working on docs, please set `docs` branch as the target branch.
 2. If you are working on bug fixes, please set `main` branch as the target branch.
 3. If you are working on new features,  please set `feat` branch as the target branch.
 
@@ -12,7 +12,7 @@ About docs & changelog's format and other tips, see in `CONTRIBUTING.md`.
 <!--
 !!! 如果这是你第一次提交 PR，请阅读下面的内容 !!!
 
-1. 如果你在修改文档，请提交到 `main` 分支
+1. 如果你在修改文档，请提交到 `docs` 分支
 2. 如果你在修复 Bug，请提交到 `main` 分支
 3. 如果你在开发新的特性，请提交到 `feat` 分支
 

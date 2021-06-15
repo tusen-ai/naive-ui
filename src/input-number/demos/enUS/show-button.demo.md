@@ -1,9 +1,11 @@
-# 禁用
+# Hide Button
+
+Use `show-button` prop to control whether to show buttons.
 
 ```html
 <n-space align="center">
   <n-switch v-model:value="disabled" />
-  <n-input-number :disabled="disabled" v-model:value="value" />
+  <n-input-number :show-button="disabled" v-model:value="value" />
 </n-space>
 ```
 

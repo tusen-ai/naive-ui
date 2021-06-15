@@ -18,6 +18,7 @@ ghost
 loading
 color
 group
+icon-button
 ```
 
 ## Props

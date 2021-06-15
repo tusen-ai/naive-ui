@@ -4,8 +4,32 @@
 
 ### Fixes
 
+- Fix `n-radio-group` doesn't trigger form item validation.
+
+## 2.11.11 (2021-06-15)
+
+### Fixes
+
+- Move `vue` & `vue-router` to peer dependencies to avoid redundant bundle.
+
+## 2.11.9 (2021-06-15)
+
+### Feats
+
+- `n-space` supports wai-aria.
+- `n-button-group` supports wai-aria.
+- `n-progress` supports wai-aria.
+- `n-menu` supports use `<a />` and `<router-link />` as label, closes [#84](https://github.com/TuSimple/naive-ui/issues/84).
+- `n-input-number` add `show-button` prop.
+- `n-rate` support `default` slot for icon customizing.
+- `n-rate` add color prop.
+- `n-rate` add size prop.
+
+### Fixes
+
 - Fix `n-card`'s `header-style` it not applied to header. [#103](https://github.com/TuSimple/naive-ui/issues/103)
-- Fix `n-dialog`'s `destroyAll` method is missing.
+- Fix `n-dialog` misses `destroyAll` method.
+- Fix `n-data-table` misses `on-update-sorter`, `on-update-filters`, `on-update-page` and `on-update-page-size` props.
 
 ## 2.11.8 (2021-06-13)
 
@@ -56,8 +80,8 @@
 - Fix `n-popover` sometimes won't sync position in manual mode.
 - Fix `n-transfer`'s empty icon is no toggling transition.
 - Fix `n-message` API option is not optional.
-- Fix `n-calendar` date calculate incorrectly
-- Fix `n-input` missing the `password` type declaration.
+- Fix `n-calendar` date calculate incorrectly.
+- Fix `n-input` misses the `password` type declaration.
 - Fix `n-menu` the type definition of `extra` property of menu and submenu.
 - Fix `n-dropdown` mouse cursor is not pointer.
 

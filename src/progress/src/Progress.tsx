@@ -12,10 +12,7 @@ import MultipleCircle from './MultipleCircle'
 
 const progressProps = {
   ...(useTheme.props as ThemeProps<ProgressTheme>),
-  processing: {
-    type: Boolean,
-    default: false
-  },
+  processing: Boolean,
   type: {
     type: String as PropType<'line' | 'circle' | 'multiple-circle'>,
     default: 'line'
@@ -57,26 +54,14 @@ const progressProps = {
     type: String as PropType<'inside' | 'outside'>,
     default: 'outside'
   },
-  indicatorTextColor: {
-    type: String,
-    default: undefined
-  },
+  indicatorTextColor: String,
   circleGap: {
     type: Number,
     default: 1
   },
-  height: {
-    type: Number,
-    default: undefined
-  },
-  borderRadius: {
-    type: [String, Number] as PropType<string | number | undefined>,
-    default: undefined
-  },
-  fillBorderRadius: {
-    type: [String, Number] as PropType<string | number | undefined>,
-    default: undefined
-  }
+  height: Number,
+  borderRadius: [String, Number] as PropType<string | number>,
+  fillBorderRadius: [String, Number] as PropType<string | number>
 } as const
 
 export type ProgressProps = ExtractPublicPropTypes<typeof progressProps>
@@ -171,6 +156,10 @@ export default defineComponent({
           `${mergedClsPrefix}-progress--${status}`
         ]}
         style={cssVars as CSSProperties}
+        aria-valuemax={100}
+        aria-valuemin={0}
+        aria-valuenow={percentage as number}
+        role={type === 'circle' || type === 'line' ? 'progressbar' : 'none'}
       >
         {type === 'circle' ? (
           <Circle

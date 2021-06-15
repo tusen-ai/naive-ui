@@ -18,22 +18,13 @@ type Align =
 
 const spaceProps = {
   ...(useTheme.props as ThemeProps<SpaceTheme>),
-  align: {
-    type: String as PropType<Align>,
-    default: undefined
-  },
+  align: String as PropType<Align>,
   justify: {
     type: String as PropType<'start' | 'end'>,
     default: 'start'
   },
-  inline: {
-    type: Boolean,
-    default: false
-  },
-  vertical: {
-    type: Boolean,
-    default: false
-  },
+  inline: Boolean,
+  vertical: Boolean,
   size: {
     type: [String, Number, Array] as PropType<
     'small' | 'medium' | 'large' | number | [number, number]
@@ -107,6 +98,7 @@ export default defineComponent({
     const lastIndex = children.length - 1
     return (
       <div
+        role="none"
         class={`${mergedClsPrefix}-space`}
         style={{
           display: inline ? 'inline-flex' : 'flex',
@@ -120,6 +112,7 @@ export default defineComponent({
       >
         {children.map((child, index) => (
           <div
+            role="none"
             style={[
               itemStyle as any,
               {
