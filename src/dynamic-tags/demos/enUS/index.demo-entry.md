@@ -13,7 +13,7 @@ form
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| closable | `boolean` | `false` |  |
+| closable | `boolean` | `true` |  |
 | default-value | `string[]` | `[]` |  |
 | disabled | `boolean` | `false` |  |
 | input-style | `string \| Object` | `undefined` |  |
