@@ -13,6 +13,7 @@ jobs:
         uses: actions-cool/issues-helper@v2.2.1
         with:
           actions: 'create-comment,add-labels,close-issue'
+          issue-number: ${{ github.event.issue.number }}
           labels: 'invalid'
           body: |
             Hello @${{ github.event.issue.user.login }}, your issue has been closed because it does not conform to our issue requirements. Please use the [Issue Helper](https://naive-ui.github.io/issue-helper) to create an issue, thank you!
