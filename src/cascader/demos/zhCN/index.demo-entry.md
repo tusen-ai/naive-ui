@@ -19,7 +19,7 @@ virtual
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | cascade | `boolean` | `true` | 在多选时是否关联选项 |
-| clearable | `boolean` | `false` | 是否显示清除图标 |
+| clearable | `boolean` | `false` | 值是否可清除 |
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | 级联菜单默认选中的数据 |
 | disabled | `boolean` | `false` | 是否禁用 |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | 在 `remote` 被设定时 `'hover'` 不生效 |

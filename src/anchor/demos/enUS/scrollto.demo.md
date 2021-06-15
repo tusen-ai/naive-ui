@@ -27,6 +27,7 @@
 
 ```js
 import { defineComponent, ref } from 'vue'
+
 export default defineComponent({
   setup () {
     const anchorRef = ref(null)

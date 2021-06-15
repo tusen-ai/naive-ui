@@ -21,15 +21,15 @@ no-title
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| bordered | `boolean` | `true` | Whether the card shows the border |
-| closable | `boolean` | `false` | Whether the card displays the close icon |
-| content-style | `Object \| string` | `undefined` | Style setting of card content |
-| footer-style | `Object \| string` | `undefined` | Style setting of card footer |
-| header-style | `Object \| string` | `undefined` | Style setting of card header |
-| hoverable | `boolean` | `false` | Whether the card can be hoverable |
-| segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' \| 'hard' }` | `false` | Segmented regional settings of the card |
-| size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | Card size |
-| title | `string` | `undefined` | Card title |
+| bordered | `boolean` | `true` | Whether the card shows the border. |
+| closable | `boolean` | `false` | Whether the card displays the close icon. |
+| content-style | `Object \| string` | `undefined` | Style of the card content. |
+| footer-style | `Object \| string` | `undefined` | Style of the card footer. |
+| header-style | `Object \| string` | `undefined` | Style of the card header. |
+| hoverable | `boolean` | `false` | Whether to show shadow when hovering on the card. |
+| segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' \| 'hard' }` | `false` | Segment divider settings of the card. |
+| size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | Card size. |
+| title | `string` | `undefined` | Card title. |
 | on-close | `() => void` | `undefined` | Callback when the card close icon is clicked |
 
 ## Slots

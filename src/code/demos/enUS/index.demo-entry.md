@@ -41,14 +41,13 @@ basic
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| code | `string` | `''` | Incoming code string |
-| hljs | `Object` | `undefined` | If you want to set hljs locally, set it on code by the prop |
-| language | `string` | `undefined` | Encoding language |
-| trim | `boolean` | `true` | Whether the encoding is trim |
-| uri | `boolean` | `false` | Whether decodeURIComponent |
+| code | `string` | `''` | Incoming code string. |
+| hljs | `Object` | `undefined` | If you want to set hljs locally, set it on code by the prop. |
+| language | `string` | `undefined` | Code language in highlightjs. |
+| trim | `boolean` | `true` | Whether to display trimmed code. |
 
 ## Slots
 
-| Name    | Parameters | Description                     |
-| ------- | ---------- | ------------------------------- |
-| default | `()`       | The content filled in the code. |
+| Name    | Parameters | Description          |
+| ------- | ---------- | -------------------- |
+| default | `()`       | Content of the code. |

@@ -51,7 +51,7 @@ tree
 | data | `Array<object>` | `[]` | 需要展示的数据 |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | 默认选中的 key 值 |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |
-| loading | `boolean` | `false` | 数据请求时是否显示 loading 状态 |
+| loading | `boolean` | `false` | 是否显示 loading 状态 |
 | max-height | `number \| string` | `undefined` | 表格内容的最大高度，可以是 CSS 属性值 |
 | min-height | `number \| string` | `undefined` | 表格内容的最低高度，可以是 CSS 属性值 |
 | pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Props) |
@@ -60,7 +60,7 @@ tree
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |
 | scroll-x | `number \| string` | `undefined` | 表格内容的横向宽度，如果列被水平固定了，则需要设定它 |
-| single-column | `boolean` | `false` | 是否展示为一列(true 时每一列都有 border-bottom) |
+| single-column | `boolean` | `false` | 是否展示为一列（true 时每一列都有 border-bottom） |
 | single-line | `boolean` | `true` | 是否展示为一行（true 时每一行都有 border-bottom) |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |
 | summary | `CreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#CreateSummary-Type">CreateSummary Type</n-a> |
@@ -78,8 +78,8 @@ tree
 
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |
-| clearFilters | `() => void` | 清空所有的 filter 数据 |
-| clearSorter | `() => void` | 清空所有的 sort 数据 |
+| clearFilters | `() => void` | 清空所有的 filter 状态 |
+| clearSorter | `() => void` | 清空所有的 sort 状态 |
 | filters | `(filters: { [string \| number]: Array<string \| number> }) => void` | 设定表格当前的过滤器 |
 | page | `(page: number) => void` | 手动设置 page |
 | sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 如果 columnKey 设为 `null`，那它和 clearSorter 效果一致 |

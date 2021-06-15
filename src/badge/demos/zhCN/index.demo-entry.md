@@ -21,7 +21,7 @@ raw
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | color | `string` | `undefined` | 标记的颜色 |
-| dot | `boolean` | `false` | 标记是否显示点 |
+| dot | `boolean` | `false` | 标记是否显示为点 |
 | max | `number` | `undefined` | 标记最大数来处理溢出情况 |
 | processing | `boolean` | `false` | 标记显示进度 |
 | show-zero | `boolean` | `false` | 标记为 0 时是否显示 |

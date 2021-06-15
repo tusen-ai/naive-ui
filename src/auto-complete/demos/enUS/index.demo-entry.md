@@ -16,39 +16,39 @@ after-select
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| blur-after-select | `boolean` | `false` | Whether to blur after selection |
-| clear-after-select | `boolean` | `false` | Whether to clear after selection |
-| clearable | `boolean` | `false` | Does Auto Complete support clearable |
-| default-value | `string` | `null` | Auto Complete default value  |
-| disabled | `boolean` | `false` | Whether Auto Complete is disabled |
-| options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | Custom options for Auto Complete |
-| placeholder | `string` | `'Please Input'` | Auto Complete prompt information |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Auto Complete size |
-| value | `string` | `undefined` | Auto Complete data user controllable |
-| on-blur | `(event: FocusEvent) => void` | `undefined` | Callback function triggered when blur |
-| on-focus | `(event: FocusEvent) => void` | `undefined` | Callback function triggered when focus |
-| on-select | `(value: string) => void` | `undefined` | Callback function triggered when select is selected |
-| on-update:value | `(value: string \| null) => void` | `undefined` | Callback function triggered when controllable data is updated |
+| blur-after-select | `boolean` | `false` | Whether to blur after selection. |
+| clear-after-select | `boolean` | `false` | Whether to clear after selection. |
+| clearable | `boolean` | `false` | Does auto complete support clearable. |
+| default-value | `string` | `null` | auto complete default value. |
+| disabled | `boolean` | `false` | Whether the auto complete is disabled. |
+| options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | Options of the auto complete. |
+| placeholder | `string` | `'Please Input'` | Auto complete's prompt information. |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Auto complete size. |
+| value | `string` | `undefined` | Value of auto complete in controlled mode. |
+| on-blur | `(event: FocusEvent) => void` | `undefined` | Callback function triggered when blur. |
+| on-focus | `(event: FocusEvent) => void` | `undefined` | Callback function triggered when focus. |
+| on-select | `(value: string) => void` | `undefined` | Callback function triggered when an option is selected. |
+| on-update:value | `(value: string \| null) => void` | `undefined` | Callback function triggered when controllable data is updated. |
 
 ### AutoCompleteOption Properties
 
-| Name     | Type               | Description                  |
-| -------- | ------------------ | ---------------------------- |
-| disabled | `boolean`          | Whether to disable           |
-| label    | `string`           | Displayed label value        |
-| render   | `Function`         | Custom rendering function    |
-| value    | `string \| number` | Should be unique in options. |
+| Name     | Type               | Description                    |
+| -------- | ------------------ | ------------------------------ |
+| disabled | `boolean`          | Whether to disable the option. |
+| label    | `string`           | Displayed label value.         |
+| render   | `Function`         | Custom rendering function.     |
+| value    | `string \| number` | Should be unique in options.   |
 
 ### AutoCompleteGroupOption Properties
 
-| Name     | Type                                  | Description |
-| -------- | ------------------------------------- | ----------- |
-| children | `Array<string \| AutoCompleteOption>` | Children item of AutoCompleteGroup |
-| name     | `string`                              | The name of the AutoCompleteGroup |
-| type     | `'group'`                             | The type of the AutoCompleteGroup|
+| Name | Type | Description |
+| --- | --- | --- |
+| children | `Array<string \| AutoCompleteOption>` | Children item of AutoCompleteGroup. |
+| name | `string` | The name of the AutoCompleteGroup. |
+| type | `'group'` | The type of the AutoCompleteGroup. |
 
 ## Slots
 
 | Name | Parameters | Description |
 | --- | --- | --- |
-| default | `(options: { handleInput: (value: string) => void, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` | Custom input elements, filled by the user |
+| default | `(options: { handleInput: (value: string) => void, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` | Custom input elements, filled by the user. |
