@@ -28,6 +28,6 @@ no-icon
 
 | 名称    | 参数 | 说明                           |
 | ------- | ---- | ------------------------------ |
-| default | `()` | alert 默认填充的内容           |
+| default | `()` | alert 的内容           |
 | header  | `()` | alert 的 header 部分填充的内容 |
 | icon    | `()` | alert 的 icon 部分填充的内容   |

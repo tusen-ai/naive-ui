@@ -50,5 +50,5 @@ customize-icon
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |
 | default | `()` | Collapse Item 的内容 |
-| header | `()` | Collapse Item 的 header 部分填充的内容 |
+| header | `()` | Collapse Item 的 header |
 | arrow | `(options: { collapsed: boolean })` | Collapse Item 自定义图标 |

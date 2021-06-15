@@ -28,4 +28,4 @@ scrollto
 
 | Name | Type | Description |
 | --- | --- | --- |
-| scrollTo | `(href: string) => void` | Manually trigger to the specified scroll position. |
+| scrollTo | `(href: string) => void` | Manually scroll to the specific position. |

@@ -34,11 +34,11 @@ no-title
 
 ## Slots
 
-| Name         | Parameters | Description                          |
-| ------------ | ---------- | ------------------------------------ |
-| cover        | `()`       | The content of the cover part        |
-| header       | `()`       | The content of the header part       |
-| header-extra | `()`       | The content of the header-extra part |
-| default      | `()`       | The default content of the card      |
-| footer       | `()`       | The content of the footer part       |
-| action       | `()`       | The content of the action part       |
+| Name         | Parameters | Description                           |
+| ------------ | ---------- | ------------------------------------- |
+| cover        | `()`       | The content of the cover part.        |
+| header       | `()`       | The content of the header part.       |
+| header-extra | `()`       | The content of the header-extra part. |
+| default      | `()`       | The default content of the card.      |
+| footer       | `()`       | The content of the footer part.       |
+| action       | `()`       | The content of the action part.       |

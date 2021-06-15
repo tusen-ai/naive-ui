@@ -44,7 +44,7 @@ tree
 | --- | --- | --- | --- |
 | bordered | `boolean` | `true` | Whether to show border. |
 | bottom-bordered | `boolean` | `true` | Whether to show bottom border. |
-| checked-row-keys | `Array<string \| number>` | `undefined` | The checked keys by default. |
+| checked-row-keys | `Array<string \| number>` | `undefined` | The keys of checked rows. |
 | cascade | `boolean` | `true` | Whether to do cascade checking when using tree data. |
 | children-key | `string` | `'children'` | The key of children data in tree data's data entity. |
 | columns | `Array<Column>` | `[]` | Columns to display. |
@@ -101,11 +101,11 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | align | `'left' \| 'right' \| 'center'` | `'left'` | Text align in column. |
 | children | `Column[]` | `undefined` | Child nodes of a grouped column. |
 | className | `string` | `undefined` | Class name of the column. |
-| colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The number of cells in the column. |
+| colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The col span of the column cell. |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | The default active filter option value in uncontrolled manner. (works when not using multiple filters). |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | The default active filter option values in uncontrolled manner. (works when there are multiple filters). |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | The default sort order of the table in uncontrolled manner. |
-| disabled | `(rowData: object, rowIndex: number) => boolean` | `() => false` | Whether to disable the row. |
+| disabled | `(rowData: object, rowIndex: number) => boolean` | `() => false` | Whether the row is checkable. |
 | ellipsis | `boolean \| EllipsisProps` | `false` | Ellipsis options when content overflows. |
 | expandable | `(rowData: object, rowIndex: number) => boolean` | `undefined` | Whethe the row is expandable. Only works when `type` is `'expand'`. |
 | filter | `boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'` | `false` | The filter of the column. If set to `true`, it will only display filter button on the column, which can be used in async status. |
@@ -127,7 +127,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | sorter | `boolean \| function \| 'default'` | `false` | The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function. |
 | title | `string \| (() => VNodeChild)` | `undefined` | Column title, Can be a render function. |
 | titleRowSpan | `number` | `undefined` | The number of cells occupied by the title row. |
-| type | `'selection' \| 'expand'` | `undefined` | Column type |
+| type | `'selection' \| 'expand'` | `undefined` | Column type. |
 | width | `number \| string` | `undefined` | Width of the column, **required** when fixed. |
 
 ### CreateSummary Type

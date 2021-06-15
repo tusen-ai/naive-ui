@@ -61,7 +61,7 @@ tree
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |
 | scroll-x | `number \| string` | `undefined` | 表格内容的横向宽度，如果列被水平固定了，则需要设定它 |
 | single-column | `boolean` | `false` | 是否展示为一列（true 时每一列都有 border-bottom） |
-| single-line | `boolean` | `true` | 是否展示为一行（true 时每一行都有 border-bottom) |
+| single-line | `boolean` | `true` | 是否展示为一行（true 时每一行都有 border-bottom）|
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |
 | summary | `CreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#CreateSummary-Type">CreateSummary Type</n-a> |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellpisis` 或 `max-height` 的情况下固定为 `'fixed'` |
@@ -101,12 +101,12 @@ tree
 | align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |
 | children | `Column[]` | `undefined` | 成组列头的子节点 |
 | className | `string` | `undefined` | 列的类名 |
-| colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列所占单元格的个数 |
+| colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的的 col span |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | 非受控状态下默认的过滤器选项值（过滤器单选时生效） |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | 非受控状态下默认的过滤器选项值（过滤器多选时生效） |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | 非受控状态下表格默认的排序方式 |
 | disabled | `(rowData: object, rowIndex: number) => boolean` | `undefined` | 是否禁用 |
-| ellipsis | `boolean \| EllipsisProps` | `false` | 文本溢出时是否显示... |
+| ellipsis | `boolean \| EllipsisProps` | `false` | 文本溢出的设置 |
 | expandable | `(rowData: object, rowIndex: number) => boolean` | `undefined` | 行是否可展开，仅在 `type` 为 `'expand'` 时生效 |
 | filter | `boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'` | `undefined` | 这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。 |
 | filterMode | `'and' \| 'or'` | `'or'` | 同一列筛选方式为与还是或 |
@@ -122,7 +122,7 @@ tree
 | renderFilterMenu | `() => VNodeChild` | `undefined` | 渲染函数，渲染这一列的过滤器菜单 |
 | renderFilterIcon | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | 渲染函数，渲染过滤器图标 |
 | renderFilter | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | 渲染函数，渲染过滤器触发元素 |
-| rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该行所占单元格的个数 |
+| rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的 row span |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 |
 | sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |
 | title | `string \| (() => VNodeChild)` | `undefined` | 列的 title 信息，可以是渲染函数 |

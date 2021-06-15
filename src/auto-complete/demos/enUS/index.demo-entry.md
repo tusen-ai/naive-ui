@@ -19,7 +19,7 @@ after-select
 | blur-after-select | `boolean` | `false` | Whether to blur after selection. |
 | clear-after-select | `boolean` | `false` | Whether to clear after selection. |
 | clearable | `boolean` | `false` | Does auto complete support clearable. |
-| default-value | `string` | `null` | auto complete default value. |
+| default-value | `string` | `null` | Default value of auto complete. |
 | disabled | `boolean` | `false` | Whether the auto complete is disabled. |
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | Options of the auto complete. |
 | placeholder | `string` | `'Please Input'` | Auto complete's prompt information. |
@@ -43,7 +43,7 @@ after-select
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children | `Array<string \| AutoCompleteOption>` | Children item of AutoCompleteGroup. |
+| children | `Array<string \| AutoCompleteOption>` | Children options of AutoCompleteGroup. |
 | name | `string` | The name of the AutoCompleteGroup. |
 | type | `'group'` | The type of the AutoCompleteGroup. |
 

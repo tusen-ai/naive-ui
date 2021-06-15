@@ -34,7 +34,7 @@ event
 | --- | --- | --- | --- |
 | disabled | `boolean` | `false` | Whether the checkbox group is disabled. |
 | default-value | `Array<string \| number>` | `null` | Checkbox group's default selected value. |
-| value | `Array<string \| number> \| null` | `undefined` | Controlled data of checkbox group. |
+| value | `Array<string \| number> \| null` | `undefined` | Controlled value of checkbox group. |
 | on-update:value | `(value: string \| number)` | `undefined` | Callback when checkbox group's value changes. |
 
 ## Slots

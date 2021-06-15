@@ -50,5 +50,5 @@ customize-icon
 | Name | Parameters | Description |
 | --- | --- | --- |
 | default | `()` | Collapse item's content. |
-| header | `()` | Header content of the collapse item. |
-| arrow | `(options: { collapsed: boolean })` | Icon of the collapse item. |
+| header | `()` | Collapse item's header. |
+| arrow | `(options: { collapsed: boolean })` | Collapse item's icon. |
