@@ -26,7 +26,7 @@ after-select
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Auto complete size. |
 | value | `string` | `undefined` | Value of auto complete in controlled mode. |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | Callback function triggered on blur. |
-| on-focus | `(event: FocusEvent) => void` | `undefined` | Callback function triggered when focus. |
+| on-focus | `(event: FocusEvent) => void` | `undefined` | Callback function triggered on focus. |
 | on-select | `(value: string) => void` | `undefined` | Callback function triggered when an option is selected. |
 | on-update:value | `(value: string \| null) => void` | `undefined` | Callback function triggered when controllable data is updated. |
 
