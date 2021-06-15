@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.11.11 (2021-06-15)
+
+### Fixes
+
+- Move `vue` & `vue-router` to peer dependencies to avoid redundant bundle.
+
 ## 2.11.9 (2021-06-15)
 
 ### Feats
