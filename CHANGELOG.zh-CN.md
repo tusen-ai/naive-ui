@@ -2,6 +2,10 @@
 
 ## 2.11.11 (2021-06-15)
 
+### Feats
+
+- `n-tag` 添加 `RTL` 支持
+
 ### Fixes
 
 - 将 `vue` 和 `vue-router` 移至 peer dependencies 避免重复打包
