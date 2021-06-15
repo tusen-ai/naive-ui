@@ -205,10 +205,7 @@ export default defineComponent({
         {!this.checkable && this.closable ? (
           <NBaseClose
             clsPrefix={mergedClsPrefix}
-            class={[
-              `${mergedClsPrefix}-tag__close`,
-              rtlEnabled ? `${mergedClsPrefix}-tag__close--rtl` : ''
-            ]}
+            class={`${mergedClsPrefix}-tag__close`}
             disabled={this.disabled}
             onClick={this.handleCloseClick}
           />
