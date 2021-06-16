@@ -10,6 +10,7 @@ Typography is a kind of art.
 header
 tags
 text
+router-link
 ```
 
 ## Props
@@ -40,12 +41,6 @@ text
 | align-text | `boolean` | `false` |  |
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` |  |
 | prefix | `'bar'` | `undefined` |  |
-
-### A Props
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| to | `string \| Object` | `undefined` | If the prop is set, it will be rendered as a Vue Router `router-link`s component. Make sure you don't want to use `href` attr. |
 
 ### Ul, Ol Props
 

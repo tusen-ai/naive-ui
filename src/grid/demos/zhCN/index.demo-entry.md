@@ -4,8 +4,6 @@
 
 基于 CSS Grid，响应式，远离 IE。
 
-如果你一定要 IE，试试 [旧版栅格](legacy-grid).
-
 ```demo
 basic
 gap
