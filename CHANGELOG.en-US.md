@@ -5,6 +5,7 @@
 ## Feats
 
 - `n-tree` support `disabled` & `checkboxDisabled` on option.
+- `n-input-number` support keyboard events ArrowUp and ArrowDown operations.
 
 ## Fixes
 

@@ -5,6 +5,7 @@
 ## Feats
 
 - `n-tree` 选项支持 `disabled` & `checkboxDisabled` 属性
+- `n-input-number` 支持键盘的上键和下键操作
 
 ## Fixes
 

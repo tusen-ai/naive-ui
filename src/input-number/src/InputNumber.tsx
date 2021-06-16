@@ -293,6 +293,16 @@ export default defineComponent({
         if (value !== false) {
           inputInstRef.value?.deactivate()
         }
+      } else if (e.code === 'ArrowUp') {
+        const value = deriveValueFromDisplayedValue()
+        if (value !== false) {
+          doAdd()
+        }
+      } else if (e.code === 'ArrowDown') {
+        const value = deriveValueFromDisplayedValue()
+        if (value !== false) {
+          doMinus()
+        }
       }
     }
     function handleUpdateDisplayedValue (value: string): void {
