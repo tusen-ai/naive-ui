@@ -22,13 +22,13 @@
 ```
 
 ```js
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
       updateValueOnClose: ref(true)
     }
   }
-}
+})
 ```

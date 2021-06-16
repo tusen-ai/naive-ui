@@ -51,10 +51,10 @@ update-on-close
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` |  |
-| update-value-on-close | `boolean` | `false` |  |
 | is-date-disabled | `(current: number) => boolean` | `() => false` |  |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | placeholder | `string` | `'Select Date and Time'` |  |
+| update-value-on-close | `boolean` | `false` |  |
 | on-update:value | `(value: number \| null) => void` | `undefined` |  |
 
 ### DateRange Type Props
@@ -64,12 +64,12 @@ update-on-close
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` |  |
 | end-placeholder | `string` | `'End Date'` |  |
 | format | `string` | `'yyyy-MM-dd'` |  |
-| update-value-on-close | `boolean` | `false` |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | ranges | `Record<string, [number, number]>` | `undefined` |  |
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'Start Date'` |  |
+| update-value-on-close | `boolean` | `false` |  |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |
 
 ### DateTimeRange Type Props
@@ -79,12 +79,12 @@ update-on-close
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` |  |
 | end-placeholder | `string` | `'End Date and Time'` |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` |  |
-| update-value-on-close | `boolean` | `false` |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | ranges | `Record<string, [number, number]>` | `undefined` |  |
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'Start Date and Time'` |  |
+| update-value-on-close | `boolean` | `false` |  |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |
 
 ## Slots
