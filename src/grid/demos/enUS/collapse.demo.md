@@ -31,10 +31,8 @@ Collapsing works in responsive layout.
   >
     {{ i }}
   </n-gi>
-  <n-gi suffix class="suffix" v-if="showSuffix">
-    <template #="{ overflow }">
-      {{ overflow ? 'Node Overflows Exists' : 'No Node Overflows' }}
-    </template>
+  <n-gi suffix class="suffix" v-if="showSuffix" #="{ overflow }">
+    {{ overflow ? 'Node Overflows Exists' : 'No Node Overflows' }}
   </n-gi>
 </n-grid>
 ```
