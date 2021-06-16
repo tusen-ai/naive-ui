@@ -50,7 +50,6 @@ export default c([
     cB('cascader-submenu', `
       height: var(--menu-height);
       position: relative;
-      overflow: hidden;
       min-width: 180px;
     `, [
       cB('scrollbar-content', {
