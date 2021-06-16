@@ -3,7 +3,7 @@
 如果你觉得内置的颜色不行 🙅‍♂️。
 
 ```html
-<n-element #="{ themeVars }">
+<n-element #="{ themeVars }" abstract>
   <n-progress
     style="margin: 0 8px 12px 0;"
     type="circle"
