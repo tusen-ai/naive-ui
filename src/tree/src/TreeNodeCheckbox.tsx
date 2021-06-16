@@ -9,14 +9,9 @@ export default defineComponent({
       type: String,
       required: true
     },
-    checked: {
-      type: Boolean,
-      default: false
-    },
-    indeterminate: {
-      type: Boolean,
-      default: false
-    },
+    disabled: Boolean,
+    checked: Boolean,
+    indeterminate: Boolean,
     onCheck: Function as PropType<(value: boolean) => void>
   },
   setup (props) {
@@ -40,15 +35,17 @@ export default defineComponent({
   },
   render () {
     const {
+      clsPrefix,
       mergedTheme,
       checked,
       indeterminate,
-      handleUpdateValue,
-      clsPrefix
+      disabled,
+      handleUpdateValue
     } = this
     return (
-      <span class={`${clsPrefix}-tree-node-checkbox`}>
+      <span class={`${clsPrefix}-tree-node-checkbox`} data-checkbox>
         <NCheckbox
+          disabled={disabled}
           theme={mergedTheme.peers.Checkbox}
           themeOverrides={mergedTheme.peerOverrides.Checkbox}
           checked={checked}

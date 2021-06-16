@@ -18,6 +18,7 @@ export default defineComponent({
     const { clsPrefix } = this
     return (
       <span
+        data-switcher
         class={[
           `${clsPrefix}-tree-node-switcher`,
           {

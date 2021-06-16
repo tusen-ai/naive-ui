@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Pending
+
+## Feats
+
+- `n-tree` support `disabled` & `checkboxDisabled` on option.
+
+## Fixes
+
+- `n-tree` click on indent won't trigger select in block line mode.
+
 ## 2.11.12 (2020-06-16)
 
 ### Feats
