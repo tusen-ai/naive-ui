@@ -72,7 +72,7 @@
     "@typescript-eslint/parser": "^4.15.1",
     "@vicons/fluent": "^0.9.0",
     "@vicons/ionicons4": "^0.9.0",
-    "@vicons/ionicons5": "^0.9.0",
+    "@vicons/ionicons5": "^0.10.0",
     "@vitejs/plugin-vue": "^1.2.1",
     "@vue/compiler-sfc": "^3.0.10",
     "@vue/eslint-config-standard": "^6.0.0",
