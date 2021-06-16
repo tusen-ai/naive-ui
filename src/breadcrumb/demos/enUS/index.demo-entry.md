@@ -15,27 +15,27 @@ separator-per-item
 
 ### Breadcrumb Props
 
-| Name      | Type     | Default | Description |
-| --------- | -------- | ------- | ----------- |
-| separator | `string` | `'/'`   |             |
+| Name      | Type     | Default | Description          |
+| --------- | -------- | ------- | -------------------- |
+| separator | `string` | `'/'`   | Breadcrumb separator. |
 
 ### BreadcrumbItem Props
 
-| Name      | Type     | Default     | Description |
-| --------- | -------- | ----------- | ----------- |
-| separator | `string` | `undefined` |             |
+| Name      | Type     | Default     | Description              |
+| --------- | -------- | ----------- | ------------------------ |
+| separator | `string` | `undefined` | BreadcrumbItem separator. |
 
 ## Slots
 
 ### Breadcrumb Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name    | Parameters | Description             |
+| ------- | ---------- | ----------------------- |
+| default | `()`       | Breadcrumb default slot. |
 
 ### Breadcrumb Item Slots
 
-| Name      | Parameters | Description |
-| --------- | ---------- | ----------- |
-| default   | `()`       |             |
-| separator | `()`       |             |
+| Name      | Parameters | Description                   |
+| --------- | ---------- | ----------------------------- |
+| default   | `()`       | BreadcrumbItem default slot.   |
+| separator | `()`       | BreadcrumbItem separator slot. |

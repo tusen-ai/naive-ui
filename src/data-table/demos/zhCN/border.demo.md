@@ -10,7 +10,7 @@
   />
   <n-data-table
     :bordered="false"
-    :single-line="false"
+    :single-line="true"
     :columns="columns"
     :data="data"
     :pagination="pagination"

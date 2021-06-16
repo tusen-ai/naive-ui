@@ -17,14 +17,14 @@
 ```
 
 ```js
-import { ref } from 'vue'
+import { ref, defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   setup () {
     return {
       showRail: ref(true),
       showBackground: ref(true)
     }
   }
-}
+})
 ```

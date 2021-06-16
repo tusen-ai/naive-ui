@@ -25,17 +25,19 @@
 
 ```js
 import { IosAirplane } from '@vicons/ionicons4'
+import { defineComponent, ref } from 'vue'
 
-export default {
+export default defineComponent({
   components: {
     IosAirplane
   },
-  data () {
+  setup () {
+    const show = ref(true)
     return {
-      show: true
+      show
     }
   }
-}
+})
 ```
 
 ```css

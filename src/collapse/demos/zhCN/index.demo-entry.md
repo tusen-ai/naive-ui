@@ -20,35 +20,35 @@ customize-icon
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| accordion | `boolean` | `false` |  |
-| arrow-placement | `'left' \| 'right'` | `'left'` |  |
+| accordion | `boolean` | `false` | 是否只允许展开一个面板 |
+| arrow-placement | `'left' \| 'right'` | `'left'` | 箭头位置 |
 | default-expanded-names | `string \| number \| Array<string \| number> \| null` | `null` | `accordion` 模式时不为数组 |
 | display-directive | `'if' \| 'show'` | `'if'` | 内部 `n-collapse-item` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show` |
 | expanded-names | `string \| number \| Array<string \| number> \| null` | `undefined` | `accordion` 模式时不为数组 |
-| on-update:expanded-names | `(expandedNames: Array<string \| number> \| string \| number \| null) => void` | `undefined` |  |
-| on-item-header-click | `(data: { name: string \| number, expanded: boolean, event: MouseEvent }) => void` | `undefined` |  |
+| on-update:expanded-names | `(expandedNames: Array<string \| number> \| string \| number \| null) => void` | `undefined` | 展开内容改变时触发的回调函数 |
+| on-item-header-click | `(data: { name: string \| number, expanded: boolean, event: MouseEvent }) => void` | `undefined` | 点击标题时触发的回调函数 |
 
 ### Collapse Item Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | display-directive | `'if' \| 'show'` | `undefined` | 自身在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show`。在设定为 `undefined` 的时候跟随外层的 `n-collapse` |
-| name | `string \| number` | 随机字符串 |  |
-| title | `string` | `undefined` |  |
+| name | `string \| number` | 随机字符串 | name 值，会在选中时被用到 |
+| title | `string` | `undefined` | 标题 |
 
 ## Slots
 
 ### Collapse Slots
 
-| 名称    | 参数                                | 说明 |
-| ------- | ----------------------------------- | ---- |
-| default | `()`                                |      |
-| arrow   | `(options: { collapsed: boolean })` |      |
+| 名称    | 参数                                | 说明                |
+| ------- | ----------------------------------- | ------------------- |
+| default | `()`                                | Collapse 的内容     |
+| arrow   | `(options: { collapsed: boolean })` | Collapse 自定义图标 |
 
 ### Collapse Item Slots
 
-| 名称    | 参数                                | 说明 |
-| ------- | ----------------------------------- | ---- |
-| default | `()`                                |      |
-| header  | `()`                                |      |
-| arrow   | `(options: { collapsed: boolean })` |      |
+| 名称 | 参数 | 说明 |
+| --- | --- | --- |
+| default | `()` | Collapse Item 的内容 |
+| header | `()` | Collapse Item 的 header |
+| arrow | `(options: { collapsed: boolean })` | Collapse Item 自定义图标 |

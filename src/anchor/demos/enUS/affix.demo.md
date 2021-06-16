@@ -4,7 +4,7 @@ When in affix mode, Anchor can recieve addition props as same as Affix.
 
 ```html
 <div style="height: 200px;">
-  <n-anchor affix :offset-top="24" :top="88" style="z-index: 1;" :bound="24">
+  <n-anchor affix :trigger-top="24" :top="88" style="z-index: 1;" :bound="24">
     <n-anchor-link title="Demos" href="#Demos">
       <n-anchor-link title="Basic" href="#basic" />
       <n-anchor-link title="Ignore-Gap" href="#ignore-gap" />
