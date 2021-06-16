@@ -8,9 +8,13 @@
 
 ### Feats
 
+- `n-tree` 选项支持 `disabled` & `checkboxDisabled` 属性
+- `n-input-number` 支持键盘的上键和下键操作
+
 ### Fixes
 
 - 修复 `n-cascader` 在 win10 Chrome 环境下文字模糊的问题
+- 修复 `n-tree` 在 block line 模式下点击缩进空白无法触发选择
 
 ## 2.11.12 (2020-06-16)
 

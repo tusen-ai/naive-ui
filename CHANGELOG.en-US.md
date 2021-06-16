@@ -8,9 +8,13 @@
 
 ### Feats
 
+- `n-tree` support `disabled` & `checkboxDisabled` on option.
+- `n-input-number` support keyboard events ArrowUp and ArrowDown operations.
+
 ### Fixes
 
 - Fix `n-cascader` text blur in win10 Chrome.
+- Fix `n-tree` click on indent won't trigger select in block line mode.
 
 ## 2.11.12 (2020-06-16)
 

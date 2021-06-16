@@ -82,14 +82,8 @@ const treeProps = {
     type: Array as PropType<Key[]>,
     default: () => []
   },
-  remote: {
-    type: Boolean,
-    default: false
-  },
-  multiple: {
-    type: Boolean,
-    default: false
-  },
+  remote: Boolean,
+  multiple: Boolean,
   pattern: {
     type: String,
     default: ''
@@ -102,10 +96,7 @@ const treeProps = {
     }
   },
   onLoad: Function as PropType<(node: TreeOption) => Promise<void>>,
-  cascade: {
-    type: Boolean,
-    default: false
-  },
+  cascade: Boolean,
   selectable: {
     type: Boolean,
     default: true
@@ -206,7 +197,13 @@ export default defineComponent({
     function getScrollContent (): HTMLElement | null | undefined {
       return virtualListInstRef.value?.itemsElRef
     }
-    const treeMateRef = computed(() => createTreeMate(props.data))
+    const treeMateRef = computed(() =>
+      createTreeMate(props.data, {
+        getDisabled (node) {
+          return !!(node.disabled || node.checkboxDisabled)
+        }
+      })
+    )
     const uncontrolledCheckedKeysRef = ref(
       props.defaultCheckedKeys || props.checkedKeys
     )
@@ -491,7 +488,7 @@ export default defineComponent({
       }
     }
     function handleSwitcherClick (node: TmNode): void {
-      if (props.disabled || node.disabled || aipRef.value) return
+      if (props.disabled || aipRef.value) return
       toggleExpand(node)
     }
     function handleSelect (node: TmNode): void {
@@ -870,6 +867,7 @@ export default defineComponent({
       mergedSelectedKeysRef,
       mergedExpandedKeysRef,
       mergedThemeRef: themeRef,
+      disabledRef: toRef(props, 'disabled'),
       remoteRef: toRef(props, 'remote'),
       onLoadRef: toRef(props, 'onLoad'),
       draggableRef: toRef(props, 'draggable'),
@@ -939,11 +937,13 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, blockNode, blockLine, draggable } = this
+    const { mergedClsPrefix, blockNode, blockLine, draggable, selectable } =
+      this
     const treeClass = [
       `${mergedClsPrefix}-tree`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
-      blockLine && `${mergedClsPrefix}-tree--block-line`
+      blockLine && `${mergedClsPrefix}-tree--block-line`,
+      selectable && `${mergedClsPrefix}-tree--selectable`
     ]
     const createNode = (tmNode: TmNode | MotionData): VNode =>
       '__motion' in tmNode ? (
