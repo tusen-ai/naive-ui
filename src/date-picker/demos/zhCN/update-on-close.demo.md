@@ -3,17 +3,17 @@
 ```html
 <n-space vertical>
   <n-date-picker
-    v-model:value="datetime"
     type="datetime"
+    :default-value="Date.now()"
     :update-value-on-close="updateValueOnClose"
   />
   <n-date-picker
-    v-model:value="daterange"
+    :default-value="[Date.now(), Date.now()]"
     :update-value-on-close="updateValueOnClose"
     type="daterange"
   />
   <n-date-picker
-    v-model:value="datetimerange"
+    :default-value="[Date.now(), Date.now()]"
     :update-value-on-close="updateValueOnClose"
     type="datetimerange"
   />
@@ -22,13 +22,12 @@
 ```
 
 ```js
+import { ref } from 'vue'
+
 export default {
   data () {
     return {
-      datetime: null,
-      datetimerange: null,
-      daterange: null,
-      updateValueOnClose: true
+      updateValueOnClose: ref(true)
     }
   }
 }

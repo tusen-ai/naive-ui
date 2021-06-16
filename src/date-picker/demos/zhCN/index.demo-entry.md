@@ -51,7 +51,7 @@ update-on-close
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` |  |
-| update-value-on-close | `boolean` | false | 关闭选择器时更新值 |
+| update-value-on-close | `boolean` | `false` | 关闭选择器时更新值 |
 | is-date-disabled | `(current: number) => boolean` | `undefined` |  |
 | is-time-disabled | `(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }` | `undefined` |  |
 | placeholder | `string` | `'选择日期时间'` |  |
@@ -64,7 +64,7 @@ update-on-close
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` |  |
 | end-placeholder | `string` | `'结束日期'` |  |
 | format | `string` | `'yyyy-MM-dd'` |  |
-| update-value-on-close | `boolean` | false | 关闭选择器时更新值 |
+| update-value-on-close | `boolean` | `false` | 关闭选择器时更新值 |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | ranges | `Record<string, [number, number]>` | `undefined` |  |
@@ -79,7 +79,7 @@ update-on-close
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` |  |
 | end-placeholder | `string` | `'结束日期时间'` |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` |  |
-| update-value-on-close | `boolean` | false | 关闭选择器时更新值 |
+| update-value-on-close | `boolean` | `false` | 关闭选择器时更新值 |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | ranges | `Record<string, [number, number]>` | `undefined` |  |

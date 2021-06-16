@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-date-picker` add `update-value-on-close` prop.
+
 ## 2.11.12 (2020-06-16)
 
 ### Feats
@@ -7,7 +13,6 @@
 - `n-drawer-content` add `closable` prop, closes [#139](https://github.com/TuSimple/naive-ui/issues/139).
 - `n-element` pass `themeVars` to default slot.
 - `n-element` add `abstract` prop.
-- `n-date-picker` add `update-value-on-close` prop.
 
 ### Fixes
 
