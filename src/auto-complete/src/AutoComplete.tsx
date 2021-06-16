@@ -57,20 +57,11 @@ const autoCompleteProps = {
     type: String as PropType<string | null>,
     default: null
   },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  disabled: Boolean,
   placeholder: String,
   value: String,
-  blurAfterSelect: {
-    type: Boolean,
-    default: false
-  },
-  clearAfterSelect: {
-    type: Boolean,
-    default: false
-  },
+  blurAfterSelect: Boolean,
+  clearAfterSelect: Boolean,
   size: String as PropType<'small' | 'medium' | 'large'>,
   options: {
     type: Array as PropType<AutoCompleteOptions>,
@@ -104,9 +95,8 @@ export default defineComponent({
   name: 'AutoComplete',
   props: autoCompleteProps,
   setup (props) {
-    const { mergedBorderedRef, namespaceRef, mergedClsPrefixRef } = useConfig(
-      props
-    )
+    const { mergedBorderedRef, namespaceRef, mergedClsPrefixRef } =
+      useConfig(props)
     const formItem = useFormItem(props)
 
     const triggerElRef = ref<HTMLElement | null>(null)
@@ -295,17 +285,18 @@ export default defineComponent({
                   default: () => {
                     const defaultSlot = this.$slots.default
                     if (defaultSlot) {
-                      getFirstSlotVNode(this.$slots, 'default', {
+                      return getFirstSlotVNode(this.$slots, 'default', {
                         handleInput: this.handleInput,
                         handleFocus: this.handleFocus,
                         handleBlur: this.handleBlur,
                         value: this.mergedValue
                       })
                     }
+                    const { mergedTheme } = this
                     return (
                       <NInput
-                        theme={this.mergedTheme.peers.Input}
-                        themeOverrides={this.mergedTheme.peerOverrides.Input}
+                        theme={mergedTheme.peers.Input}
+                        themeOverrides={mergedTheme.peerOverrides.Input}
                         bordered={this.mergedBordered}
                         value={this.mergedValue}
                         placeholder={this.placeholder}
@@ -340,25 +331,25 @@ export default defineComponent({
                         default: () =>
                           this.active
                             ? withDirectives(
-                              <NInternalSelectMenu
-                                clsPrefix={mergedClsPrefix}
-                                ref="menuInstRef"
-                                theme={
-                                  this.mergedTheme.peers.InternalSelectMenu
-                                }
-                                themeOverrides={
-                                  this.mergedTheme.peerOverrides
-                                    .InternalSelectMenu
-                                }
-                                auto-pending
-                                class={`${mergedClsPrefix}-auto-complete-menu`}
-                                style={this.cssVars as CSSProperties}
-                                treeMate={this.treeMate}
-                                multiple={false}
-                                size="medium"
-                                onMenuToggleOption={this.handleToggleOption}
-                              />,
-                              [[clickoutside, this.handleClickOutsideMenu]]
+                                <NInternalSelectMenu
+                                  clsPrefix={mergedClsPrefix}
+                                  ref="menuInstRef"
+                                  theme={
+                                    this.mergedTheme.peers.InternalSelectMenu
+                                  }
+                                  themeOverrides={
+                                    this.mergedTheme.peerOverrides
+                                      .InternalSelectMenu
+                                  }
+                                  auto-pending
+                                  class={`${mergedClsPrefix}-auto-complete-menu`}
+                                  style={this.cssVars as CSSProperties}
+                                  treeMate={this.treeMate}
+                                  multiple={false}
+                                  size="medium"
+                                  onMenuToggleOption={this.handleToggleOption}
+                                />,
+                                [[clickoutside, this.handleClickOutsideMenu]]
                             )
                             : null
                       }}

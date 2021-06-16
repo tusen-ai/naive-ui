@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-radio-group` doesn't trigger form item validation.
+- Fix `n-auto-complete` customizing input not working.
+
 ## 2.11.11 (2021-06-15)
 
 ### Fixes
