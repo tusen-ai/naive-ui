@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-a`'s `to` prop is removed. Now if you want to use `n-a` like a router link, you can follow the doc site.
+
 ### Feats
 
 ### Fixes

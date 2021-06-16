@@ -3,7 +3,11 @@
 其他的 Naive UI 内置标签。
 
 ```html
-<n-a>a 标签</n-a>
+<n-a
+  href="https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F"
+  target="_blank"
+  >且听风吟</n-a
+>
 <n-h1>h1 标签</n-h1>
 <n-p
   >《且听风吟》是日本作家村上春树的第一本小说。它首次出现在 1979 年 6
