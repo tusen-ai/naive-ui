@@ -223,11 +223,4 @@ export interface ConfigProviderInjection {
   mergedThemeRef: Ref<GlobalTheme | undefined>
   mergedThemeOverridesRef: Ref<GlobalThemeOverrides | undefined>
   mergedRtlRef: Ref<RtlEnabledState | undefined>
-  // deprecated
-  /** @deprecated */
-  mergedLegacyThemeRef: Ref<string | undefined>
-  /** @deprecated */
-  mergedLanguageRef: Ref<string | undefined>
-  /** @deprecated */
-  mergedThemeEnvironmentsRef: Ref<any | undefined>
 }
