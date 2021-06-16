@@ -8,44 +8,43 @@
     item-style="margin-bottom: 0;"
     v-model:value="model.dynamicInputValue"
     :on-create="onCreate"
+    #="{ index, value }"
   >
-    <template #="{ index, value }">
-      <div style="display: flex;">
-        <!--
+    <div style="display: flex;">
+      <!--
           通常，path 的变化会导致 form-item 验证内容或规则的改变，所以 naive-ui 会清理掉
           表项已有的验证信息。但是这个例子是个特殊情况，我们明确的知道，path 的改变不会导致
           form-item 验证内容和规则的变化，所以就 ignore-path-change
         -->
-        <n-form-item
-          ignore-path-change
-          :label="false"
-          :path="`dynamicInputValue[${index}].name`"
-          :rule="dynamicInputRule"
-        >
-          <n-input
-            placeholder="Name"
-            @keydown.enter.prevent
-            v-model:value="model.dynamicInputValue[index].name"
-          />
-          <!--
+      <n-form-item
+        ignore-path-change
+        :label="false"
+        :path="`dynamicInputValue[${index}].name`"
+        :rule="dynamicInputRule"
+      >
+        <n-input
+          placeholder="Name"
+          @keydown.enter.prevent
+          v-model:value="model.dynamicInputValue[index].name"
+        />
+        <!--
             由于在 input 元素里按回车会导致 form 里面的 button 被点击，所以阻止了默认行为
           -->
-        </n-form-item>
-        <div style="height: 34px; line-height: 34px; margin: 0 8px;">=</div>
-        <n-form-item
-          ignore-path-change
-          :label="false"
-          :path="`dynamicInputValue[${index}].value`"
-          :rule="dynamicInputRule"
-        >
-          <n-input
-            placeholder="Value"
-            @keydown.enter.prevent
-            v-model:value="model.dynamicInputValue[index].value"
-          />
-        </n-form-item>
-      </div>
-    </template>
+      </n-form-item>
+      <div style="height: 34px; line-height: 34px; margin: 0 8px;">=</div>
+      <n-form-item
+        ignore-path-change
+        :label="false"
+        :path="`dynamicInputValue[${index}].value`"
+        :rule="dynamicInputRule"
+      >
+        <n-input
+          placeholder="Value"
+          @keydown.enter.prevent
+          v-model:value="model.dynamicInputValue[index].value"
+        />
+      </n-form-item>
+    </div>
   </n-dynamic-input>
 </n-form>
 <pre>
