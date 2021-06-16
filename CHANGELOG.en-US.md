@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+### Fixes
+
+- Fix `n-cascader` text blur in win10 Chrome.
+
 ## 2.11.12 (2020-06-16)
 
 ### Feats

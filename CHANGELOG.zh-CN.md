@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+### Fixes
+
+- 修复 `n-cascader` 在 win10 Chrome 环境下文字模糊的问题
+
 ## 2.11.12 (2020-06-16)
 
 ### Feats
