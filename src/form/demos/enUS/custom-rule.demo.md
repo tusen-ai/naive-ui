@@ -4,18 +4,18 @@ Sometimes builtin triggers don't meet you demand. You can custom you valiation b
 
 ```html
 <n-form :model="model" ref="formRef" :rules="rules">
-  <n-form-item-row path="age" label="Age">
+  <n-form-item path="age" label="Age">
     <n-input v-model:value="model.age" @keydown.enter.prevent />
-  </n-form-item-row>
-  <n-form-item-row path="password" label="Password">
+  </n-form-item>
+  <n-form-item path="password" label="Password">
     <n-input
       v-model:value="model.password"
       @input="handlePasswordInput"
       type="password"
       @keydown.enter.prevent
     />
-  </n-form-item-row>
-  <n-form-item-row
+  </n-form-item>
+  <n-form-item
     first
     path="reenteredPassword"
     label="Re-enter Password"
@@ -27,7 +27,7 @@ Sometimes builtin triggers don't meet you demand. You can custom you valiation b
       type="password"
       @keydown.enter.prevent
     />
-  </n-form-item-row>
+  </n-form-item>
   <n-row :gutter="[0, 24]">
     <n-col :span="24">
       <div style="display: flex; justify-content: flex-end;">
