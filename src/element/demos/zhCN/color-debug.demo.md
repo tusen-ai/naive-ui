@@ -5,14 +5,14 @@
 确保你理解这些颜色的含义，请看[使用样式方案的注意事项](../doc/n-theme#style-scheme)。
 
 ```html
-<n-element tag="div" class="myel" style="overflow: auto;" #="{ styleScheme }">
+<n-element tag="div" class="myel" style="overflow: auto;" #="{ themeVars }">
   <pre
     :style="{
-      color: styleScheme.secondaryTextColor,
-      transition: `color .3s ${styleScheme.easeInOutCubicBezier}`
+      color: themeVars.secondaryTextColor,
+      transition: `color .3s ${themeVars.easeInOutCubicBezier}`
     }"
   >
-{{ JSON.stringify(styleScheme, 0, 2) }}</pre
+{{ JSON.stringify(themeVars, 0, 2) }}</pre
   >
 </n-element>
 ```

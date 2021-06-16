@@ -9,8 +9,4 @@ Naive UI 提供一些工具帮助开发者简单的创建支持主题的组件�
 ```demo
 provide-theme
 element
-read-theme-debug
-themed-style-debug
-environment-debug
-style-scheme-debug
 ```

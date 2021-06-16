@@ -249,7 +249,13 @@ export default defineComponent({
           trigger: ['blur', 'change'],
           message: '请输入 timePickerValue'
         },
-        sliderValue: 0,
+        sliderValue: {
+          validator (rule, value) {
+            return value > 50
+          },
+          trigger: ['blur', 'change'],
+          message: 'sliderValue 需要大于 50'
+        },
         transferValue: {
           type: 'array',
           required: true,

@@ -3,10 +3,8 @@
 一个普通的日历。
 
 ```html
-<n-calendar @update:value="handleUpdateValue">
-  <template #="{ year, month, date }">
-    {{ year }}-{{ month }}-{{ date }}
-  </template>
+<n-calendar @update:value="handleUpdateValue" #="{ year, month, date }">
+  {{ year }}-{{ month }}-{{ date }}
 </n-calendar>
 ```
 

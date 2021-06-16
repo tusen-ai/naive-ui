@@ -32,9 +32,7 @@ I hope the demo can meet you demand, so that you can have more time to do other 
       <n-layout-content content-style="padding: 24px"
         >Pingshan Road</n-layout-content
       >
-      <n-layout-footer content-style="padding: 24px"
-        >Chengfu Road</n-layout-footer
-      >
+      <n-layout-footer>Chengfu Road</n-layout-footer>
     </n-layout>
   </n-layout>
 </n-space>

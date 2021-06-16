@@ -31,10 +31,8 @@
   >
     {{ i }}
   </n-gi>
-  <n-gi suffix class="suffix" v-if="showSuffix">
-    <template #="{ overflow }">
-      {{ overflow ? '存在溢出' : '不存在溢出' }}
-    </template>
+  <n-gi suffix class="suffix" v-if="showSuffix" #="{ overflow }">
+    {{ overflow ? '存在溢出' : '不存在溢出' }}
   </n-gi>
 </n-grid>
 ```
