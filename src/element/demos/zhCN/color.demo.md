@@ -1,8 +1,6 @@
-# 样式方案（弃用）
+# 主题变量
 
-它也可以获得 Style Scheme。
-
-确保你理解这些颜色的含义，请看[使用样式方案的注意事项](../doc/n-theme#style-scheme)。
+你可以从 default slot 获取主题变量。
 
 ```html
 <n-element tag="div" class="myel" style="overflow: auto;" #="{ themeVars }">

@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## Pending
+## 2.11.12
+
+### Feats
+
+- `n-drawer-content` 新增 `closable` 属性，关闭 [#139](https://github.com/TuSimple/naive-ui/issues/139)
+- `n-element` 向 default slot 传递 `themeVars`
+- `n-element` 新增 `abstract` 属性
 
 ### Fixes
 
@@ -8,6 +14,10 @@
 - 修复 `n-auto-complete` 无法自定义元素
 
 ## 2.11.11 (2021-06-15)
+
+### Feats
+
+- `n-tag` 添加 `RTL` 支持
 
 ### Fixes
 
