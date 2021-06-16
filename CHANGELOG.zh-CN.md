@@ -7,6 +7,7 @@
 - `n-drawer-content` 新增 `closable` 属性，关闭 [#139](https://github.com/TuSimple/naive-ui/issues/139)
 - `n-element` 向 default slot 传递 `themeVars`
 - `n-element` 新增 `abstract` 属性
+- `n-date-picker` 新增 `update-value-on-close` 属性
 
 ### Fixes
 

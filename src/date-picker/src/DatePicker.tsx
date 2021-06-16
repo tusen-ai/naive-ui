@@ -68,6 +68,10 @@ const datePickerProps = {
     type: Boolean,
     default: false
   },
+  updateValueOnClose: {
+    type: Boolean,
+    default: false
+  },
   defaultValue: {
     type: [Number, Array] as PropType<Value | null>,
     default: null
@@ -427,6 +431,7 @@ export default defineComponent({
       doUpdateShow(true)
     }
     function closeCalendar ({ returnFocus }: { returnFocus: boolean }): void {
+      if (props.type !== 'date' && props.updateValueOnClose) { handlePanelConfirm() }
       if (mergedShowRef.value) {
         doUpdateShow(false)
         if (returnFocus) {
@@ -754,13 +759,13 @@ export default defineComponent({
                           this.mergedShow
                             ? withDirectives(
                               this.type === 'datetime' ? (
-                                <DatetimePanel {...commonPanelProps} />
+                                  <DatetimePanel {...commonPanelProps} />
                               ) : this.type === 'daterange' ? (
-                                <DaterangePanel {...commonPanelProps} />
+                                  <DaterangePanel {...commonPanelProps} />
                               ) : this.type === 'datetimerange' ? (
-                                <DatetimerangePanel {...commonPanelProps} />
+                                  <DatetimerangePanel {...commonPanelProps} />
                               ) : (
-                                <DatePanel {...commonPanelProps} />
+                                  <DatePanel {...commonPanelProps} />
                               ),
                               [[clickoutside, this.handleClickOutside]]
                             )
