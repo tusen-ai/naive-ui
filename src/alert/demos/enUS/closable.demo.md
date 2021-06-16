@@ -38,7 +38,6 @@ export default defineComponent({
   }
 })
 ```
-```
 
 ```css
 .n-alert:not(:last-child) {
