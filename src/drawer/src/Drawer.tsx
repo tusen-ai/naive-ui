@@ -167,17 +167,21 @@ export default defineComponent({
     })
     function handleMaskClick (): void {
       if (props.maskClosable) {
-        const { onHide, onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
-        if (onUpdateShow) call(onUpdateShow, false)
-        if (_onUpdateShow) call(_onUpdateShow, false)
-        // deprecated
-        if (onHide) call(onHide, false)
+        doUpdateShow(false)
       }
+    }
+    function doUpdateShow (show: boolean): void {
+      const { onHide, onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) call(onUpdateShow, show)
+      if (_onUpdateShow) call(_onUpdateShow, show)
+      // deprecated
+      if (onHide && !show) call(onHide, show)
     }
     provide(drawerInjectionKey, {
       isMountedRef: isMountedRef,
       mergedThemeRef: themeRef,
-      mergedClsPrefixRef
+      mergedClsPrefixRef,
+      doUpdateShow
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -204,7 +208,11 @@ export default defineComponent({
             titleTextColor,
             titleFontWeight,
             headerBorderBottom,
-            footerBorderTop
+            footerBorderTop,
+            closeColor,
+            closeColorHover,
+            closeColorPressed,
+            closeSize
           }
         } = themeRef.value
         return {
@@ -222,7 +230,11 @@ export default defineComponent({
           '--title-font-size': titleFontSize,
           '--title-font-weight': titleFontWeight,
           '--header-border-bottom': headerBorderBottom,
-          '--footer-border-top': footerBorderTop
+          '--footer-border-top': footerBorderTop,
+          '--close-color': closeColor,
+          '--close-color-hover': closeColorHover,
+          '--close-color-pressed': closeColorPressed,
+          '--close-size': closeSize
         }
       }),
       isMounted: isMountedRef

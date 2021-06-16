@@ -11,7 +11,10 @@ export const self = (vars: ThemeCommonVars) => {
     boxShadow3,
     lineHeight,
     fontWeightStrong,
-    dividerColor
+    dividerColor,
+    closeColor,
+    closeColorHover,
+    closeColorPressed
   } = vars
   return {
     bodyPadding: '16px 24px',
@@ -25,7 +28,11 @@ export const self = (vars: ThemeCommonVars) => {
     boxShadow: boxShadow3,
     lineHeight,
     headerBorderBottom: `1px solid ${dividerColor}`,
-    footerBorderTop: `1px solid ${dividerColor}`
+    footerBorderTop: `1px solid ${dividerColor}`,
+    closeColor,
+    closeColorHover,
+    closeColorPressed,
+    closeSize: '18px'
   }
 }
 
