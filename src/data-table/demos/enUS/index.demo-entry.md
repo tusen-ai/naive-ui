@@ -67,7 +67,7 @@ tree
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellpisis` or `max-height` are set, it will always be `'fixed'` regardless of what you set. |
 | virtual-scroll | `boolean` | `false` | Whether to use virtual scroll to deal with large data. Make sure `max-height` is set before using it. |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. |
-| on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)` | The callback function triggered when the filters data changes. |
+| on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)` | `undefined` |The callback function triggered when the filters data changes. |
 | on-update:page | `(page: number)` | `undefined` | Callback function triggered when the page changes. |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function triggered when the page-size changes. |
 | on-update:sorter | `(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => void` | `undefined` | If there won't be a active sorter after change, `options` will be `null`. |

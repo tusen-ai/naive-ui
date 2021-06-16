@@ -24,5 +24,5 @@ target-container-selector
 | right | `number \| string` | `40` | The width of BackTop from the right side of the page |
 | show | `boolean` | `undefined` | Whether to show BackTop |
 | to | `string \| HTMLElement` | `'body'` | Container node to show BackTop |
-| visibility-height | `number` | `180` | 滚动时触发的高度 |
+| visibility-height | `number` | `180` | BackTop's trigger scroll top. |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback is triggered when back-top display changes. |
