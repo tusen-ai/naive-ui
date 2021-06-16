@@ -37,8 +37,8 @@ virtual
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Cascader size. |
 | value | `string \| number \| Array<number \| string> \| null` | `undefined` | Value of the cascader in controlled mode. |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |
-| on-blur | `() => void` | `undefined` | Callback executed when blurs. |
-| on-focus | `() => void` | `undefined` | Callback executed when focused. |
+| on-blur | `() => void` | `undefined` | Callback on blurred. |
+| on-focus | `() => void` | `undefined` | Callback on focused. |
 | on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | Callback when click unloaded node. Set `option.children` in the returned promise. Loading is end after the promise is resolved or rejected. |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null) => void` | `undefined` | Callback executed when value changes. |
 

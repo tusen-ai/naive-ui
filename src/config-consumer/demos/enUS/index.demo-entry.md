@@ -18,4 +18,4 @@ basic
 
 | Name | Parameters | Description |
 | --- | --- | --- |
-| default | `(options: { namespace: string })` | Contents of Config Consumer filled by default |
+| default | `(options: { namespace: string })` |  |

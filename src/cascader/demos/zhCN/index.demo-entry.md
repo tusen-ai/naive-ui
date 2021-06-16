@@ -34,7 +34,7 @@ virtual
 | separator | `string` | `' / '` | 数据分隔符 |
 | show | `boolean` | `undefined` | 是否打开菜单 |
 | show-path | `boolean` | `true` | 是否在选择器中显示选项路径 |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸信息 |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | value | `string \| number \| Array<number \| string>` | `undefined` | 级联选择的数据受控 |
 | virtual-scroll | `boolean` | `true` | 是否支持虚拟滚动 |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |

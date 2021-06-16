@@ -25,4 +25,4 @@ target-container-selector
 | show | `boolean` | `undefined` | Whether to show BackTop |
 | to | `string \| HTMLElement` | `'body'` | Container node to show BackTop |
 | visibility-height | `number` | `180` | 滚动时触发的高度 |
-| on-update:show | `(value: boolean) => void` | `undefined` | Event is triggered when BackTop show changes |
+| on-update:show | `(value: boolean) => void` | `undefined` | Callback is triggered when back-top display changes. |

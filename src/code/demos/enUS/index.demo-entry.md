@@ -42,7 +42,7 @@ basic
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | code | `string` | `''` | Incoming code string. |
-| hljs | `Object` | `undefined` | If you want to set hljs locally, set it on code by the prop. |
+| hljs | `Object` | `undefined` | If you want to set hljs locally, pass it using this prop. |
 | language | `string` | `undefined` | Code language in highlightjs. |
 | trim | `boolean` | `true` | Whether to display trimmed code. |
 

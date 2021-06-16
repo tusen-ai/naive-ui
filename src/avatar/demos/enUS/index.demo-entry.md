@@ -17,9 +17,9 @@ name-size
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar size |
-| src | `string` | `undefined` | Avatar address |
-| round | `boolean` | `false` | Is the avatar round |
+| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar's size. |
+| src | `string` | `undefined` | Avatar's source. |
+| round | `boolean` | `false` | Whether to display a rounded avatar. |
 
 ## Slots
 
