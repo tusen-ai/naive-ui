@@ -1,5 +1,4 @@
-import { h, defineComponent, computed, CSSProperties, PropType } from 'vue'
-import { RouteLocationRaw, RouterLink } from 'vue-router'
+import { h, defineComponent, computed, CSSProperties } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
@@ -8,11 +7,7 @@ import style from './styles/a.cssr'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 const aProps = {
-  ...(useTheme.props as ThemeProps<TypographyTheme>),
-  to: {
-    type: [String, Object] as PropType<RouteLocationRaw>,
-    default: null
-  }
+  ...(useTheme.props as ThemeProps<TypographyTheme>)
 } as const
 
 export type AProps = ExtractPublicPropTypes<typeof aProps>
@@ -45,17 +40,6 @@ export default defineComponent({
     }
   },
   render () {
-    if (this.to) {
-      return (
-        <RouterLink
-          class={`${this.mergedClsPrefix}-a`}
-          to={this.to}
-          style={this.cssVars as CSSProperties}
-        >
-          {this.$slots}
-        </RouterLink>
-      )
-    }
     return (
       <a
         class={`${this.mergedClsPrefix}-a`}

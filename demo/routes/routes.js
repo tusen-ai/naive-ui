@@ -445,14 +445,6 @@ export const enComponentRoutes = [
     path: 'color-picker',
     component: () =>
       import('../../src/color-picker/demos/enUS/index.demo-entry.md')
-  },
-  // deprecated
-  {
-    path: 'nimbus-service-layout',
-    component: () =>
-      import(
-        '../pages/docs/deprecated/nimbus-service-layout/enUS/index.demo-entry.md'
-      )
   }
 ]
 
@@ -783,14 +775,6 @@ export const zhComponentRoutes = [
     path: 'color-picker',
     component: () =>
       import('../../src/color-picker/demos/zhCN/index.demo-entry.md')
-  },
-  // deprecated
-  {
-    path: 'nimbus-service-layout',
-    component: () =>
-      import(
-        '../pages/docs/deprecated/nimbus-service-layout/zhCN/index.demo-entry.md'
-      )
   }
 ]
 

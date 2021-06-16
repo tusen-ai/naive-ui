@@ -16,12 +16,6 @@ const appendCounts = (item) => {
   }
 }
 
-const createDeprecatedDemos = (item, mode) => {
-  if (__DEV__ && mode === 'debug') {
-    return [item]
-  } else return []
-}
-
 const createDebugDemos = (item, mode) => {
   if (__DEV__ && mode === 'debug') {
     return [item]
@@ -665,18 +659,6 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
         }
       ]
     },
-    ...createDeprecatedDemos(
-      {
-        en: '--Deprecated',
-        children: [
-          {
-            en: 'Nimbus Service Layout',
-            path: '/nimbus-service-layout'
-          }
-        ]
-      },
-      mode
-    ),
     ...createDebugDemos(
       {
         en: '--Debug',

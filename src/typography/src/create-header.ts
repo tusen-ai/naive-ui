@@ -15,10 +15,7 @@ const headerProps = {
     default: 'default'
   },
   prefix: String,
-  alignText: {
-    type: Boolean,
-    default: false
-  }
+  alignText: Boolean
 } as const
 
 export type HeaderProps = ExtractPublicPropTypes<typeof headerProps>

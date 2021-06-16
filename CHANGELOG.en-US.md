@@ -2,14 +2,19 @@
 
 ## Pending
 
-## Feats
+### Breaking Changes
+
+- `n-a`'s `to` prop is removed. Now if you want to use `n-a` like a router link, you can follow the doc site.
+
+### Feats
 
 - `n-tree` support `disabled` & `checkboxDisabled` on option.
 - `n-input-number` support keyboard events ArrowUp and ArrowDown operations.
 
-## Fixes
+### Fixes
 
-- `n-tree` click on indent won't trigger select in block line mode.
+- Fix `n-cascader` text blur in win10 Chrome.
+- Fix `n-tree` click on indent won't trigger select in block line mode.
 
 ## 2.11.12 (2020-06-16)
 
