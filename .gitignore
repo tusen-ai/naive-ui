@@ -21,3 +21,4 @@ lib
 es
 *.tsbuildinfo
 pnpm-lock.yaml
+~*
