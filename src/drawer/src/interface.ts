@@ -3,15 +3,14 @@ import type { MergedTheme } from '../../_mixins'
 import type { DrawerTheme } from '../styles'
 
 export type DrawerBodyInjection = Ref<HTMLElement | null> | null
-export const drawerBodyInjectionKey: InjectionKey<DrawerBodyInjection> = Symbol(
-  'drawerBody'
-)
+export const drawerBodyInjectionKey: InjectionKey<DrawerBodyInjection> =
+  Symbol('drawerBody')
 
 export interface DrawerInjection {
   isMountedRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<DrawerTheme>>
   mergedClsPrefixRef: Ref<string>
+  doUpdateShow: (show: boolean) => void
 }
-export const drawerInjectionKey: InjectionKey<DrawerInjection> = Symbol(
-  'drawer'
-)
+export const drawerInjectionKey: InjectionKey<DrawerInjection> =
+  Symbol('drawer')

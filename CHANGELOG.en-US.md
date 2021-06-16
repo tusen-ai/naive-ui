@@ -2,12 +2,20 @@
 
 ## Pending
 
+### Feats
+
+- `n-drawer-content` add `closable` prop, closes [#139](https://github.com/TuSimple/naive-ui/issues/139).
+
 ### Fixes
 
 - Fix `n-radio-group` doesn't trigger form item validation.
 - Fix `n-auto-complete` customizing input not working.
 
 ## 2.11.11 (2021-06-15)
+
+### Feats
+
+- `n-tag` add `RTL` support
 
 ### Fixes
 
