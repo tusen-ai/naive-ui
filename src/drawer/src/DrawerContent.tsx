@@ -1,4 +1,5 @@
 import { CSSProperties, defineComponent, h, inject, PropType } from 'vue'
+import { NBaseClose } from '../../_internal'
 import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarProps } from '../../scrollbar'
 import { throwError } from '../../_utils'
@@ -14,7 +15,8 @@ const drawerContentProps = {
   bodyStyle: [Object, String] as PropType<string | CSSProperties>,
   bodyContentStyle: [Object, String] as PropType<string | CSSProperties>,
   nativeScrollbar: { type: Boolean, default: true },
-  scrollbarProps: Object as PropType<ScrollbarProps>
+  scrollbarProps: Object as PropType<ScrollbarProps>,
+  closable: Boolean
 }
 
 export type DrawerContentProps = ExtractPublicPropTypes<
@@ -32,7 +34,12 @@ export default defineComponent({
         '`n-drawer-content` must be placed inside `n-drawer`.'
       )
     }
+    const { doUpdateShow } = NDrawer
+    function handleCloseClick (): void {
+      doUpdateShow(false)
+    }
     return {
+      handleCloseClick,
       mergedTheme: NDrawer.mergedThemeRef,
       mergedClsPrefix: NDrawer.mergedClsPrefixRef
     }
@@ -48,6 +55,7 @@ export default defineComponent({
       headerStyle,
       footerStyle,
       scrollbarProps,
+      closable,
       $slots
     } = this
     return (
@@ -59,9 +67,18 @@ export default defineComponent({
         ]}
         style={headerStyle}
       >
-        {$slots.header || title ? (
+        {$slots.header || title || closable ? (
           <div class={`${mergedClsPrefix}-drawer-header`}>
-            {$slots.header !== undefined ? $slots.header() : title}
+            <div class={`${mergedClsPrefix}-drawer-header__main`}>
+              {$slots.header !== undefined ? $slots.header() : title}
+            </div>
+            {closable && (
+              <NBaseClose
+                onClick={this.handleCloseClick}
+                clsPrefix={mergedClsPrefix}
+                class={`${mergedClsPrefix}-drawer-header__close`}
+              />
+            )}
           </div>
         ) : null}
         {nativeScrollbar ? (

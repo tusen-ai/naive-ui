@@ -1,4 +1,4 @@
-import { c, cB, cM } from '../../../_utils/cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 import slideInFromRightTransition from '../../../_styles/transitions/slide-in-from-right'
 import slideInFromLeftTransition from '../../../_styles/transitions/slide-in-from-left'
 import slideInFromTopTransition from '../../../_styles/transitions/slide-in-from-top'
@@ -21,6 +21,10 @@ import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 // --title-font-weight
 // --header-border-bottom
 // --footer-border-top
+// --close-color
+// --close-color-hover
+// --close-color-pressed
+// --close-size
 export default c([
   cB('drawer', `
     line-height: var(--line-height);
@@ -74,7 +78,15 @@ export default c([
         padding: var(--header-padding);
         border-bottom: 1px solid var(--divider-color);
         border-bottom: var(--header-border-bottom);
-      `),
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      `, [
+        cE('close', `
+          transition: color .3s var(--bezier);
+          font-size: var(--close-size);
+        `)
+      ]),
       cB('drawer-footer', `
         display: flex;
         justify-content: flex-end;

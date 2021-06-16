@@ -8,6 +8,7 @@ I think it is similar with modal, with a bit difference on placement.
 basic
 multiple
 target
+closable
 ```
 
 ## Props
@@ -33,6 +34,7 @@ target
 | --- | --- | --- | --- |
 | body-style | `string \| Object` | `undefined` |  |
 | body-content-style | `string \| Object` | `undefined` | Style of body's scrollable content node. |
+| closable | `boolean` | `false` | Whether the drawer content is closable. |
 | footer-style | `string \| Object` | `undefined` |  |
 | header-style | `string \| Object` | `undefined` |  |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on body part. |
