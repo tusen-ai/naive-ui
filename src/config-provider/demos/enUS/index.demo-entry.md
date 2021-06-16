@@ -13,7 +13,6 @@ inherit-theme
 os-theme
 language
 transparent
-theme-environment-debug
 ```
 
 ## Props
