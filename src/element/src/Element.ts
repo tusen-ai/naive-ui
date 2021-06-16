@@ -1,8 +1,7 @@
-import { computed, h, defineComponent, PropType } from 'vue'
+import { computed, h, defineComponent } from 'vue'
 import { kebabCase } from 'lodash-es'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { elementLight } from '../styles'
 import type { ElementTheme } from '../styles'
@@ -13,23 +12,7 @@ const elementProps = {
     type: String,
     default: 'div'
   },
-  // deprecated
-  onThemeChange: {
-    type: Function as PropType<(theme: string | undefined) => void>,
-    validator: () => {
-      warn('element', '`on-theme-change` is deprecated.')
-      return true
-    },
-    default: undefined
-  },
-  as: {
-    type: String,
-    validator: () => {
-      warn('element', '`as` is deprecated, please use `tag` instead.')
-      return true
-    },
-    default: undefined
-  }
+  abstract: Boolean
 } as const
 
 export type ElementProps = ExtractPublicPropTypes<typeof elementProps>
@@ -64,15 +47,18 @@ export default defineComponent({
   },
   render () {
     const {
-      as,
-      tag,
-      mergedClsPrefix,
       $slots,
-      cssVars,
+      abstract,
       mergedTheme: { common }
     } = this
+    if (abstract) {
+      return $slots.default?.({
+        themeVars: common
+      })
+    }
+    const { tag, mergedClsPrefix, cssVars } = this
     return h(
-      as || tag,
+      tag,
       {
         class: `${mergedClsPrefix}-element`,
         style: cssVars
