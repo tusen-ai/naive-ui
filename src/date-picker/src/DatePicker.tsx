@@ -431,7 +431,9 @@ export default defineComponent({
       doUpdateShow(true)
     }
     function closeCalendar ({ returnFocus }: { returnFocus: boolean }): void {
-      if (props.type !== 'date' && props.updateValueOnClose) { handlePanelConfirm() }
+      if (props.type !== 'date' && props.updateValueOnClose) {
+        handlePanelConfirm()
+      }
       if (mergedShowRef.value) {
         doUpdateShow(false)
         if (returnFocus) {
