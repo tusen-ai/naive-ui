@@ -3,23 +3,23 @@
 有时候内置的 trigger 无法满足验证的需要。你可以通过设定自定的 trigger 然后手动触发它来控制验证。
 
 ```html
-<n-form :model="model" ref="form" :rules="rules">
-  <n-form-item-row path="age" label="年龄">
+<n-form :model="model" ref="formRef" :rules="rules">
+  <n-form-item path="age" label="年龄">
     <n-input v-model:value="model.age" @keydown.enter.prevent />
-  </n-form-item-row>
-  <n-form-item-row path="password" label="密码">
+  </n-form-item>
+  <n-form-item path="password" label="密码">
     <n-input
       v-model:value="model.password"
       @input="handlePasswordInput"
       type="password"
       @keydown.enter.prevent
     />
-  </n-form-item-row>
-  <n-form-item-row
+  </n-form-item>
+  <n-form-item
     first
     path="reenteredPassword"
     label="重复密码"
-    ref="reenteredPassword"
+    ref="rPasswordFormItemRef"
   >
     <n-input
       :disabled="!model.password"
@@ -27,7 +27,7 @@
       type="password"
       @keydown.enter.prevent
     />
-  </n-form-item-row>
+  </n-form-item>
   <n-row :gutter="[0, 24]">
     <n-col :span="24">
       <div style="display: flex; justify-content: flex-end;">
