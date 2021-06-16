@@ -761,13 +761,13 @@ export default defineComponent({
                           this.mergedShow
                             ? withDirectives(
                               this.type === 'datetime' ? (
-                                  <DatetimePanel {...commonPanelProps} />
+                                <DatetimePanel {...commonPanelProps} />
                               ) : this.type === 'daterange' ? (
-                                  <DaterangePanel {...commonPanelProps} />
+                                <DaterangePanel {...commonPanelProps} />
                               ) : this.type === 'datetimerange' ? (
-                                  <DatetimerangePanel {...commonPanelProps} />
+                                <DatetimerangePanel {...commonPanelProps} />
                               ) : (
-                                  <DatePanel {...commonPanelProps} />
+                                <DatePanel {...commonPanelProps} />
                               ),
                               [[clickoutside, this.handleClickOutside]]
                             )
