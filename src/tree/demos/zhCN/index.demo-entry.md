@@ -14,6 +14,7 @@ filter
 drag-drop
 virtual
 async
+disabled
 ```
 
 ## Props
@@ -51,3 +52,16 @@ async
 | on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 | on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 | on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
+
+## API
+
+### TreeNode Properties
+
+| 名称 | 类型 | 说明 |
+| --- | --- | --- |
+| key | `string \| number` | 节点的 key，需要唯一 |
+| label | `string` | 节点的内容 |
+| checkboxDisabled? | `boolean` | 是否禁用节点的 checkbox |
+| children? | `TreeNode[]` | 节点的子节点 |
+| disabled? | `boolean` | 是否禁用节点 |
+| isLeaf? | `boolean` | 节点是否是叶节点，在 remote 模式下是必须的 |

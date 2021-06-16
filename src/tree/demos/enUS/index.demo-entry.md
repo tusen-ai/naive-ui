@@ -14,6 +14,7 @@ filter
 drag-drop
 virtual
 async
+disabled
 ```
 
 ## Props
@@ -51,3 +52,16 @@ async
 | on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 | on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 | on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
+
+## API
+
+### TreeNode Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| key | `string \| number` | Key of the node, should be unique. |
+| label | `string` | Label of the node. |
+| checkboxDisabled? | `boolean` | Whether the checkbox is disabled. |
+| children? | `TreeNode[]` | Child nodes of the node. |
+| disabled? | `boolean` | Whether the node is disabled. |
+| isLeaf? | `boolean` | Whether the node is leaf. Required in remote mode. |

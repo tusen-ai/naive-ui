@@ -10,6 +10,7 @@ Naive UI 提供了常用 HTML 标签的一些基本样式，以及对文本渲�
 header
 tags
 text
+router-link
 ```
 
 ## Props
@@ -40,12 +41,6 @@ text
 | align-text | `boolean` | `false` |  |
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` |  |
 | prefix | `'bar'` | `undefined` |  |
-
-### A Props
-
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| to | `string \| Object` | `undefined` | 如果设定了 to prop，a 会被渲染为一个 Vue Router 的 `router-link` 标签。确保你想用的不是 href 属性 |
 
 ### Ul, Ol Props
 

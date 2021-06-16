@@ -10,12 +10,12 @@ import {
   onMounted
 } from 'vue'
 import { useMemo } from 'vooks'
+import { happensIn, repeat } from 'seemly'
 import NTreeNodeSwitcher from './TreeNodeSwitcher'
 import NTreeNodeCheckbox from './TreeNodeCheckbox'
 import NTreeNodeContent from './TreeNodeContent'
 import { TmNode, treeInjectionKey } from './interface'
 import { renderDropMark } from './dnd'
-import { repeat } from 'seemly'
 
 const TreeNode = defineComponent({
   name: 'TreeNode',
@@ -72,6 +72,7 @@ const TreeNode = defineComponent({
       }
     }
     function handleContentClick (e: MouseEvent): void {
+      if (happensIn(e, 'checkbox') || happensIn(e, 'switcher')) return
       NTree.handleSelect(props.tmNode)
     }
 
@@ -169,6 +170,10 @@ const TreeNode = defineComponent({
         NTree.mergedExpandedKeysRef.value.includes(props.tmNode.key)
       ),
       suffix: computed(() => props.tmNode.rawNode.suffix),
+      disabled: computed(
+        () => NTree.disabledRef.value || props.tmNode.disabled
+      ),
+      checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
       checkable: NTree.checkableRef,
       draggable: NTree.draggableRef,
       blockLine: NTree.blockLineRef,
@@ -198,19 +203,21 @@ const TreeNode = defineComponent({
       draggable,
       blockLine,
       indent,
+      disabled,
       suffix
     } = this
     // drag start not inside
     // it need to be append to node itself, not wrapper
-    const dragEventHandlers = draggable
-      ? {
-          onDragenter: this.handleDragEnter,
-          onDragleave: this.handleDragLeave,
-          onDragend: this.handleDragEnd,
-          onDrop: this.handleDrop,
-          onDragover: this.handleDragOver
-        }
-      : undefined
+    const dragEventHandlers =
+      draggable && !disabled
+        ? {
+            onDragenter: this.handleDragEnter,
+            onDragleave: this.handleDragLeave,
+            onDragend: this.handleDragEnd,
+            onDrop: this.handleDrop,
+            onDragover: this.handleDragOver
+          }
+        : undefined
     return (
       <div class={`${clsPrefix}-tree-node-wrapper`} {...dragEventHandlers}>
         <div
@@ -219,12 +226,16 @@ const TreeNode = defineComponent({
             {
               [`${clsPrefix}-tree-node--selected`]: selected,
               [`${clsPrefix}-tree-node--checkable`]: checkable,
-              [`${clsPrefix}-tree-node--highlight`]: highlight
+              [`${clsPrefix}-tree-node--highlight`]: highlight,
+              [`${clsPrefix}-tree-node--disabled`]: disabled
             }
           ]}
           draggable={draggable && blockLine}
+          onClick={blockLine && !disabled ? this.handleContentClick : undefined}
           onDragstart={
-            draggable && blockLine ? this.handleDragStart : undefined
+            draggable && blockLine && !disabled
+              ? this.handleDragStart
+              : undefined
           }
         >
           {repeat(
@@ -243,6 +254,7 @@ const TreeNode = defineComponent({
           />
           {checkable ? (
             <NTreeNodeCheckbox
+              disabled={disabled || this.checkboxDisabled}
               clsPrefix={clsPrefix}
               checked={this.checked}
               indeterminate={this.indeterminate}
@@ -252,9 +264,13 @@ const TreeNode = defineComponent({
           <NTreeNodeContent
             ref="contentInstRef"
             clsPrefix={clsPrefix}
-            onClick={this.handleContentClick}
+            onClick={
+              blockLine || disabled ? undefined : this.handleContentClick
+            }
             onDragstart={
-              draggable && !blockLine ? this.handleDragStart : undefined
+              draggable && !blockLine && !disabled
+                ? this.handleDragStart
+                : undefined
             }
           >
             {{

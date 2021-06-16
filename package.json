@@ -1,13 +1,13 @@
 {
   "name": "naive-ui",
-  "version": "2.11.12",
+  "version": "2.12.0",
   "description": "A Vue 3 Component Library. Fairly Complete, Customizable Themes, Uses TypeScript, Not Too Slow",
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {
     "start": "npm run dev",
     "dev": "npm run clean && npm run gen-version && cross-env NODE_ENV=development vite",
-    "build:package": "npm run gen-version && npm run clean && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && node scripts/post-build",
+    "build:package": "npm run gen-version && npm run clean && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
     "build:site": "./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "clean": "rimraf site lib es node_modules/naive-ui themes/**/es themes/**/lib",
     "release:package": "npm run test && npm run build:package && npm publish",
@@ -70,9 +70,9 @@
     "@types/jest": "^26.0.20",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
-    "@vicons/fluent": "^0.9.0",
-    "@vicons/ionicons4": "^0.9.0",
-    "@vicons/ionicons5": "^0.9.0",
+    "@vicons/fluent": "^0.10.0",
+    "@vicons/ionicons4": "^0.10.0",
+    "@vicons/ionicons5": "^0.10.0",
     "@vitejs/plugin-vue": "^1.2.1",
     "@vue/compiler-sfc": "^3.0.10",
     "@vue/eslint-config-standard": "^6.0.0",
@@ -110,8 +110,7 @@
     "vue-router": "^4.0.5"
   },
   "peerDependencies": {
-    "vue": "^3.0.0",
-    "vue-router": "^4.0.0"
+    "vue": "^3.0.0"
   },
   "dependencies": {
     "@css-render/plugin-bem": "^0.15.4",
@@ -126,7 +125,7 @@
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "seemly": "^0.3.1",
-    "treemate": "^0.2.10",
+    "treemate": "^0.2.11",
     "vdirs": "^0.1.4",
     "vfonts": "^0.1.0",
     "vooks": "^0.2.6",

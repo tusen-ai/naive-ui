@@ -1,7 +1,7 @@
 # Contributing
 
-- For document & bug fix, please create pull request to `main` branch.
-- For new features, please create pull request to `feat` branch.
+- For new features & bug fixes, please create pull request to `main` branch.
+- For documentation, please create pull request to `docs` branch.
 
 ## Useful Commands
 
@@ -65,8 +65,8 @@ Space bewteen Chinese and Latin charactors:
 
 # 贡献代码
 
-- 对于文档和 bug fix，请对 `main` 分支提交 Pull Request
-- 对于新特性，请对 `feat` 分支提交 Pull Request
+- 对于新特性和 bug fix，请对 `main` 分支提交 Pull Request
+- 对于文档更新，请对 `docs` 分支提交 Pull Request
 
 ## 有用的指令
 

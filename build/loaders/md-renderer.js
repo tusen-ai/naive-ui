@@ -64,7 +64,7 @@ function createRenderer (wrapCodeWithCard = true) {
       if (/^(http:|https:)/.test(href)) {
         return `<n-a href="${href}" target="_blank">${text}</n-a>`
       }
-      return `<n-a to="${href}" >${text}</n-a>`
+      return `<router-link to="${href}" #="{ navigate, href }" custom><n-a :href="href" @click="navigate">${text}</n-a></router-link>`
     },
     list (body, ordered, start) {
       const type = ordered ? 'n-ol' : 'n-ul'

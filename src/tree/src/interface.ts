@@ -8,6 +8,7 @@ export type Key = string | number
 export interface TreeOption {
   key: Key
   label: string
+  checkboxDisabled?: boolean
   disabled?: boolean
   isLeaf?: boolean
   children?: TreeOption[]
@@ -67,6 +68,7 @@ export interface TreeInjection {
   droppingNodeParentRef: Ref<TmNode | null>
   droppingPositionRef: Ref<null | DropPosition>
   droppingOffsetLevelRef: Ref<number>
+  disabledRef: Ref<boolean>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void
