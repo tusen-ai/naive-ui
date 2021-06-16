@@ -30,7 +30,7 @@ no-title
 | segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' \| 'hard' }` | `false` | Segment divider settings of the card. |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | Card size. |
 | title | `string` | `undefined` | Card title. |
-| on-close | `() => void` | `undefined` | Callback when the card close icon is clicked |
+| on-close | `() => void` | `undefined` | Callback function triggered upon closing the card. |
 
 ## Slots
 

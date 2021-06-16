@@ -23,10 +23,10 @@ event
 | indeterminate | `boolean` | `false` | Whether partly selected. |
 | default-checked | `boolean` | `false` | Whether selected by default in uncontrolled mode. |
 | disabled | `boolean` | `false` | Whether to disable. |
-| focusable | `boolean` | `true` | Whether to gather when selected. |
+| focusable | `boolean` | `true` | Whether to focus on selection. |
 | label | `string \| (() => VNodeChild)` | `undefined` | Checkbox label |
 | value | `string \| number` | `undefined` | The value of the checkbox to be used in checkbox group. |
-| on-update:checked | `(checked: boolean) => void` | `undefined` | Callback function triggered when checked changes |
+| on-update:checked | `(checked: boolean) => void` | `undefined` | Callback function triggered on checked status changes. |
 
 ### Checkbox Group Props
 
