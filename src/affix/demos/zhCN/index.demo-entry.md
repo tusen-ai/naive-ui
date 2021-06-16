@@ -17,5 +17,5 @@ position
 | listen-to | `string \| HTMLElement \| Document \| Window \| (() => HTMLElement)` | `document` | 需要监听滚动的元素 |
 | trigger-bottom | `number` | `undefined` | 触发底部固定时，Affix 和目标元素元素的底部距离（如果没设定，会使用 `bottom` 代替) |
 | trigger-top | `number` | `undefined` | 触发顶部固定时，Affix 和目标元素元素的顶部距离（如果没设定，会使用 `top` 代替) |
-| position | `'fixed' \| 'absolute'` | `'fixed'` |  |
+| position | `'fixed' \| 'absolute'` | `'fixed'` | Affix 的 CSS position |
 | top | `number` | `undefined` | 在触发顶部固定后 Affix 的 CSS top 属性（如果没设定，会使用 `trigger-top` 代替) |

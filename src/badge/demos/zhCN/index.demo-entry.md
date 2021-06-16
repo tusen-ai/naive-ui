@@ -20,17 +20,17 @@ raw
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| color | `string` | `undefined` |  |
-| dot | `boolean` | `false` |  |
-| max | `number` | `undefined` |  |
-| processing | `boolean` | `false` |  |
-| show-zero | `boolean` | `false` |  |
-| show | `boolean` | `true` |  |
-| type | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` |  |
-| value | `string \| number` | `undefined` |  |
+| color | `string` | `undefined` | 标记的颜色 |
+| dot | `boolean` | `false` | 标记是否显示为点 |
+| max | `number` | `undefined` | 标记最大数来处理溢出情况 |
+| processing | `boolean` | `false` | 标记显示进度 |
+| show-zero | `boolean` | `false` | 标记为 0 时是否显示 |
+| show | `boolean` | `true` | 标记受控显示 |
+| type | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | 标记显示类型 |
+| value | `string \| number` | `undefined` | 标记数量 |
 
 ## Slots
 
-| 名称    | 参数 | 说明 |
-| ------- | ---- | ---- |
-| default | `()` |      |
+| 名称    | 参数 | 说明             |
+| ------- | ---- | ---------------- |
+| default | `()` | 标记内填充的内容 |
