@@ -17,7 +17,6 @@ describe('n-collapse', () => {
         </NCollapse>
       )
     })
-    console.log(wrapper.html())
     expect(wrapper.find('.my-icon').exists()).toEqual(true)
   })
 })
