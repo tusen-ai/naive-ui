@@ -1,6 +1,12 @@
 # CHANGELOG
 
+## Pending
+
 - `n-input` add show-password prop.
+
+### Feats
+
+- `n-dropdown` support class attr, closes [#180](https://github.com/TuSimple/naive-ui/issues/180).
 
 ## 2.12.0 (2020-06-16)
 

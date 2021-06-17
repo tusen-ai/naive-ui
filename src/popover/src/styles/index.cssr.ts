@@ -150,11 +150,10 @@ function placementStyle (
     : 'width: var(--space-arrow);'
   return c(`[v-placement="${placement}"]`, [
     cB('popover', `
-      margin-${oppositePlacement[position]}: var(--space-arrow);
+      margin-${oppositePlacement[position]}: var(--space);
     `, [
-      cM('no-arrow', `
-        margin-${position}: var(--space);
-        margin-${oppositePlacement[position]}: var(--space);
+      cM('show-arrow', `
+        margin-${oppositePlacement[position]}: var(--space-arrow);
       `),
       cM('overlap', `
         margin: 0;
