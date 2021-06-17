@@ -16,11 +16,12 @@ type Align =
   | 'flex-end'
   | 'flex-start'
 
+type Justify = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
 const spaceProps = {
   ...(useTheme.props as ThemeProps<SpaceTheme>),
   align: String as PropType<Align>,
   justify: {
-    type: String as PropType<'start' | 'end'>,
+    type: String as PropType<Justify>,
     default: 'start'
   },
   inline: Boolean,
@@ -104,7 +105,9 @@ export default defineComponent({
           display: inline ? 'inline-flex' : 'flex',
           flexDirection: vertical ? 'column' : 'row',
           flexWrap: !wrap ? 'nowrap' : 'wrap',
-          justifyContent: 'flex-' + justify,
+          justifyContent: ['start', 'end'].includes(justify)
+            ? 'flex-' + justify
+            : justify,
           marginTop: vertical ? '' : `-${semiVerticalMargin}`,
           marginBottom: vertical ? '' : `-${semiVerticalMargin}`,
           alignItems: align
