@@ -18,7 +18,7 @@ import {
 import { useMergedState } from 'vooks'
 import { toRgbString, getAlphaString, getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
-import { NBaseClear } from '../../_internal'
+import { NBaseClear, NBaseIcon } from '../../_internal'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createKey, ExtractPublicPropTypes } from '../../_utils'
@@ -35,7 +35,7 @@ import {
 import { len } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
-import { Eye } from '@vicons/ionicons5'
+import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 
 const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
@@ -76,10 +76,7 @@ const inputProps = {
     default: false
   },
   passivelyActivated: Boolean,
-  showPassword: {
-    type: Boolean,
-    default: false
-  },
+  showPasswordToggle: Boolean,
   stateful: {
     type: Boolean,
     default: true
@@ -502,7 +499,8 @@ export default defineComponent({
     function handleMouseLeave (): void {
       hoverRef.value = false
     }
-    function handlePasswordVisible (): void {
+    function handlePasswordToggleMousedown (e: MouseEvent): void {
+      e.preventDefault()
       passwordVisibleRef.value = !passwordVisibleRef.value
       // fix focus does not at the end in new version Chrome
       void nextTick(() => {
@@ -671,7 +669,7 @@ export default defineComponent({
       handleChange,
       handleClick,
       handleClear,
-      handlePasswordVisible,
+      handlePasswordToggleMousedown,
       handleWrapperKeyDown,
       handleTextAreaMirrorResize,
       mergedTheme: themeRef,
@@ -773,8 +771,8 @@ export default defineComponent({
           '--suffix-text-color': suffixTextColor
         }
       }),
-      showPwdVisible: computed(() => {
-        return props.showPassword && !props.disabled
+      showPwdVisibleToggle: computed(() => {
+        return props.showPasswordToggle && !props.disabled
       })
     }
   },
@@ -873,7 +871,7 @@ export default defineComponent({
               <input
                 ref="inputElRef"
                 type={
-                  this.showPassword
+                  this.showPasswordToggle
                     ? this.passwordVisible
                       ? 'text'
                       : 'password'
@@ -921,7 +919,7 @@ export default defineComponent({
           (this.$slots.suffix ||
             this.clearable ||
             this.showCount ||
-            this.showPassword) ? (
+            this.showPasswordToggle) ? (
             <div class={`${mergedClsPrefix}-input__suffix`}>
               {[
                 renderSlot(this.$slots, 'suffix'),
@@ -937,15 +935,17 @@ export default defineComponent({
                 this.showCount && this.type !== 'textarea' ? (
                   <WordCount />
                 ) : null,
-                this.showPwdVisible && this.type !== 'textarea' ? (
-                  <i
-                    role="img"
-                    onClick={this.handlePasswordVisible}
-                    class="n-icon"
-                    style="cursor: pointer;"
+                this.showPwdVisibleToggle && this.type !== 'textarea' ? (
+                  <NBaseIcon
+                    clsPrefix={mergedClsPrefix}
+                    class={`${mergedClsPrefix}-base-input__Eye`}
+                    onMousedown={this.handlePasswordToggleMousedown}
                   >
-                    <Eye />
-                  </i>
+                    {{
+                      default: () =>
+                        this.passwordVisible ? <EyeIcon /> : <EyeOffIcon />
+                    }}
+                  </NBaseIcon>
                 ) : null
               ]}
             </div>

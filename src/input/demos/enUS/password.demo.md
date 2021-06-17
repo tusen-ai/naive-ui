@@ -1,5 +1,10 @@
 # Password
 
 ```html
-<n-input type="password" placeholder="Password" :maxlength="8" />
+<n-input
+  type="password"
+  show-password-toggle
+  placeholder="Password"
+  :maxlength="8"
+/>
 ```

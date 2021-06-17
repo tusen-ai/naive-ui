@@ -1,6 +1,6 @@
 # CHANGELOG
 
-- add show-password attribute to `n-input`
+- `n-input` add show-password prop.
 
 ## 2.12.0 (2020-06-16)
 

@@ -1,6 +1,6 @@
 # CHANGELOG
 
-- 为`n-input` 组件中 password 属性增加查看隐藏功能
+- 为 `n-input` 组件中 password 属性增加查看隐藏功能
 
 ## 2.12.0 (2020-06-16)
 
