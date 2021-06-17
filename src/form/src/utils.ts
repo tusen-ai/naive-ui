@@ -1,15 +1,13 @@
 import { inject, computed, ref, ComputedRef } from 'vue'
 import { get } from 'lodash-es'
-import { pxfy } from 'seemly'
 import type { FormItemSetupProps } from './FormItem'
 import { formInjectionKey } from './interface'
 import type { Size, FormItemRule } from './interface'
+import { formatLength } from '../../_utils'
 
-export function formItemSize (
-  props: FormItemSetupProps
-): {
-    mergedSize: ComputedRef<Size>
-  } {
+export function formItemSize (props: FormItemSetupProps): {
+  mergedSize: ComputedRef<Size>
+} {
   const NForm = inject(formInjectionKey, null)
   return {
     mergedSize: computed(() => {
@@ -26,16 +24,22 @@ export function formItemMisc (props: FormItemSetupProps) {
   const mergedLabelWidthRef = computed(() => {
     if (mergedLabelPlacementRef.value === 'top') return
     const { labelWidth } = props
-    if (labelWidth !== undefined) return pxfy(labelWidth)
-    if (NForm?.labelWidth !== undefined) return pxfy(NForm.labelWidth)
+
+    if (labelWidth !== undefined) {
+      return formatLength(labelWidth)
+    }
+
+    if (NForm?.labelWidth !== undefined) {
+      return formatLength(NForm.labelWidth)
+    }
     return undefined
   })
   const mergedLabelStyleRef = computed(() => {
     return [
-      props.labelStyle,
       {
         width: mergedLabelWidthRef.value
-      }
+      },
+      props.labelStyle
     ]
   })
   const mergedLabelPlacementRef = computed(() => {
