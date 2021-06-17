@@ -27,4 +27,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run lint
-    - run: npm run test
+    - run: npm run test:lint
+    - uses: codecov/codecov-action@v1.5.2
+
