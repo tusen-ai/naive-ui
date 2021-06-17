@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-dropdown` 支持 class 属性
+- `n-dropdown` 支持 class 属性，关闭 [#180](https://github.com/TuSimple/naive-ui/issues/180)
 
 ## 2.12.0 (2020-06-16)
 
