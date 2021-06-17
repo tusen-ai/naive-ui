@@ -68,6 +68,10 @@ const datePickerProps = {
     type: Boolean,
     default: false
   },
+  updateValueOnClose: {
+    type: Boolean,
+    default: false
+  },
   defaultValue: {
     type: [Number, Array] as PropType<Value | null>,
     default: null
@@ -429,6 +433,9 @@ export default defineComponent({
     function closeCalendar ({ returnFocus }: { returnFocus: boolean }): void {
       if (mergedShowRef.value) {
         doUpdateShow(false)
+        if (props.type !== 'date' && props.updateValueOnClose) {
+          handlePanelConfirm()
+        }
         if (returnFocus) {
           inputInstRef.value?.focus()
         }

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-date-picker` add `update-value-on-close` prop.
+
 ## 2.12.0 (2020-06-16)
 
 ### Breaking Changes

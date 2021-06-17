@@ -17,6 +17,7 @@ events
 format
 ranges
 footerslot
+update-on-close
 ```
 
 ## Props
@@ -53,6 +54,7 @@ footerslot
 | is-date-disabled | `(current: number) => boolean` | `() => false` |  |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` |  |
 | placeholder | `string` | `'Select Date and Time'` |  |
+| update-value-on-close | `boolean` | `false` |  |
 | on-update:value | `(value: number \| null) => void` | `undefined` |  |
 
 ### DateRange Type Props
@@ -67,6 +69,7 @@ footerslot
 | ranges | `Record<string, [number, number]>` | `undefined` |  |
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'Start Date'` |  |
+| update-value-on-close | `boolean` | `false` |  |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |
 
 ### DateTimeRange Type Props
@@ -81,6 +84,7 @@ footerslot
 | ranges | `Record<string, [number, number]>` | `undefined` |  |
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'Start Date and Time'` |  |
+| update-value-on-close | `boolean` | `false` |  |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |
 
 ## Slots

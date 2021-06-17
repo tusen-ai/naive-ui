@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-date-picker` 新增 `update-value-on-close` 属性
+
 ## 2.12.0 (2020-06-16)
 
 ### Breaking Changes

@@ -17,6 +17,7 @@ events
 format
 ranges
 footerslot
+update-on-close
 ```
 
 ## Props
@@ -53,6 +54,7 @@ footerslot
 | is-date-disabled | `(current: number) => boolean` | `undefined` |  |
 | is-time-disabled | `(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }` | `undefined` |  |
 | placeholder | `string` | `'选择日期时间'` |  |
+| update-value-on-close | `boolean` | `false` | 关闭面板时更新值 |
 | on-update:value | `(value: number \| null) => void` | `undefined` |  |
 
 ### DateRange 类型的 Props
@@ -67,6 +69,7 @@ footerslot
 | ranges | `Record<string, [number, number]>` | `undefined` |  |
 | separator | `string` | `'至'` |  |
 | start-placeholder | `string` | `'开始日期'` |  |
+| update-value-on-close | `boolean` | `false` | 关闭面板时更新值 |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |
 
 ### DateTimeRange 类型的 Props
@@ -81,6 +84,7 @@ footerslot
 | ranges | `Record<string, [number, number]>` | `undefined` |  |
 | separator | `string` | `'to'` |  |
 | start-placeholder | `string` | `'开始日期时间'` |  |
+| update-value-on-close | `boolean` | `false` | 关闭面板时更新值 |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` |  |
 
 ## Slots
