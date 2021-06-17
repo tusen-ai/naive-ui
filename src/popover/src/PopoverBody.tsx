@@ -53,6 +53,7 @@ export const popoverBodyProps = {
   shadow: Boolean,
   padded: Boolean,
   animated: Boolean,
+  onClickoutside: Function as PropType<(value: boolean) => void>,
   /** @deprecated */
   minWidth: Number,
   maxWidth: Number
@@ -77,7 +78,7 @@ export default defineComponent({
     const bodyRef = ref<HTMLElement | null>(null)
     const followerEnabledRef = ref(props.show)
     const directivesRef = computed<DirectiveArguments>(() => {
-      const { trigger } = props
+      const { trigger, onClickoutside } = props
       const directives = []
       const {
         positionManuallyRef: { value: positionManually }
@@ -89,6 +90,9 @@ export default defineComponent({
         if (trigger === 'hover') {
           directives.push([mousemoveoutside, handleMouseMoveOutside])
         }
+      }
+      if (onClickoutside) {
+        directives.push([clickoutside, handleClickOutside])
       }
       if (props.displayDirective === 'show') {
         directives.push([vShow, props.show])
@@ -179,8 +183,9 @@ export default defineComponent({
     }
     function handleClickOutside (e: MouseEvent): void {
       if (
-        props.trigger === 'click' &&
-        !getTriggerElement().contains(e.target as Node)
+        (props.trigger === 'click' &&
+          !getTriggerElement().contains(e.target as Node)) ||
+        props.onClickoutside
       ) {
         NPopover.handleClickOutside(e)
       }

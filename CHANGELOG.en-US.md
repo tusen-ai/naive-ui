@@ -22,6 +22,7 @@
 - `n-popselect` support class attr.
 - `n-select` add `render-label` prop.
 - `n-popselect` add `render-label` prop.
+- `n-dropdown` add `onClickoutside` prop, closes [#123](https://github.com/TuSimple/naive-ui/issues/123).
 
 ### Fixes
 

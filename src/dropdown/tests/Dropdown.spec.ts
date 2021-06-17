@@ -4,6 +4,7 @@ import { ComponentPublicInstance, h, nextTick } from 'vue'
 import { NIcon } from '../../icon'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NDropdown, DropdownProps } from '../index'
+import { NButton } from '../../button'
 
 const pendingOptionClassName =
   'n-dropdown-option-body n-dropdown-option-body--pending'
@@ -53,7 +54,9 @@ const options = [
 const mountDropdown = ({
   onSelect,
   inverted = false,
-  options: data = options
+  onClickoutside = undefined,
+  options: data = options,
+  show = undefined
 }: DropdownProps = {}): VueWrapper<ComponentPublicInstance> => {
   return mount(NDropdown, {
     attachTo: document.body,
@@ -61,7 +64,9 @@ const mountDropdown = ({
       options: data,
       trigger: 'click',
       onSelect,
-      inverted
+      inverted,
+      onClickoutside,
+      show
     },
     slots: {
       default: () => 'star kirby'
@@ -209,5 +214,28 @@ describe('n-dropdown', () => {
     expect(onSelect).not.toHaveBeenCalledWith()
 
     wrapper.unmount()
+  })
+  it('dropdown clickoutside', async () => {
+    const onSelect = jest.fn()
+    const onClick = jest.fn()
+    const inst = mount(NButton, {
+      props: {
+        onClick
+      }
+    })
+    let show = false
+    const onClickoutside = (isShow: boolean): void => {
+      show = isShow
+    }
+    const wrapper = mountDropdown({ onClickoutside, onSelect, show })
+
+    const triggerNodeWrapper = wrapper.find('span')
+    expect(triggerNodeWrapper.exists()).toBe(true)
+    await triggerNodeWrapper.trigger('click')
+    await inst.trigger('click')
+    expect(show).toBe(false)
+
+    wrapper.unmount()
+    inst.unmount()
   })
 })

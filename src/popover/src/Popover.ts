@@ -181,6 +181,7 @@ export const popoverBaseProps = {
     },
     default: undefined
   },
+  onClickoutside: Function as PropType<(value: boolean) => void>,
   /** @deprecated */
   arrow: {
     type: Boolean as PropType<boolean | undefined>,
@@ -322,12 +323,14 @@ export default defineComponent({
     }
     // will be called in popover-content
     function handleClickOutside (): void {
+      const { onClickoutside } = props
       if (!getMergedShow()) return
       if (props.trigger === 'click') {
         clearShowTimer()
         clearHideTimer()
         doUpdateShow(false)
       }
+      onClickoutside?.(false)
     }
     function handleClick (): void {
       if (props.trigger === 'click' && !getMergedDisabled()) {
