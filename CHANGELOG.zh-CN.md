@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 添加 `n-button` 的 `tag` prop 的文档介绍
+
 ## 2.12.0 (2020-06-16)
 
 ### Breaking Changes

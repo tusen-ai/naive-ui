@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-button` add `tag` prop document introduction.
+
 ## 2.12.0 (2020-06-16)
 
 ### Breaking Changes
