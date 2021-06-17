@@ -35,6 +35,7 @@ import {
 import { len } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
+import { Eye } from '@vicons/ionicons5'
 
 const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
@@ -75,6 +76,10 @@ const inputProps = {
     default: false
   },
   passivelyActivated: Boolean,
+  showPassword: {
+    type: Boolean,
+    default: false
+  },
   stateful: {
     type: Boolean,
     default: true
@@ -220,6 +225,8 @@ export default defineComponent({
         return !!mergedValue && (hoverRef.value || mergedFocus)
       }
     })
+    // passwordVisible
+    const passwordVisibleRef = ref<boolean>(false)
     // focus
     const mergedFocusRef = computed(() => {
       return props.internalForceFocus || focusedRef.value
@@ -495,6 +502,14 @@ export default defineComponent({
     function handleMouseLeave (): void {
       hoverRef.value = false
     }
+    function handlePasswordVisible (): void {
+      passwordVisibleRef.value = !passwordVisibleRef.value
+      // fix focus does not at the end in new version Chrome
+      void nextTick(() => {
+        inputElRef.value?.blur()
+        inputElRef.value?.focus()
+      })
+    }
     function handleWrapperKeyDown (e: KeyboardEvent): void {
       props.onKeydown?.(e)
       switch (e.code) {
@@ -630,6 +645,7 @@ export default defineComponent({
       // value
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
+      passwordVisible: passwordVisibleRef,
       mergedPlaceholder: mergedPlaceholderRef,
       showPlaceholder1: showPlaceholder1Ref,
       showPlaceholder2: showPlaceholder2Ref,
@@ -655,6 +671,7 @@ export default defineComponent({
       handleChange,
       handleClick,
       handleClear,
+      handlePasswordVisible,
       handleWrapperKeyDown,
       handleTextAreaMirrorResize,
       mergedTheme: themeRef,
@@ -755,6 +772,9 @@ export default defineComponent({
           '--icon-alpha-disabled': getAlphaString(iconColorDisabled),
           '--suffix-text-color': suffixTextColor
         }
+      }),
+      showPwdVisible: computed(() => {
+        return props.showPassword && !props.disabled
       })
     }
   },
@@ -852,7 +872,13 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
                 ref="inputElRef"
-                type={this.type}
+                type={
+                  this.showPassword
+                    ? this.passwordVisible
+                      ? 'text'
+                      : 'password'
+                    : this.type
+                }
                 class={`${mergedClsPrefix}-input__input-el`}
                 tabindex={
                   this.passivelyActivated && !this.activated ? -1 : undefined
@@ -892,7 +918,10 @@ export default defineComponent({
             </div>
           )}
           {!this.pair &&
-          (this.$slots.suffix || this.clearable || this.showCount) ? (
+          (this.$slots.suffix ||
+            this.clearable ||
+            this.showCount ||
+            this.showPassword) ? (
             <div class={`${mergedClsPrefix}-input__suffix`}>
               {[
                 renderSlot(this.$slots, 'suffix'),
@@ -907,6 +936,16 @@ export default defineComponent({
                 ) : null,
                 this.showCount && this.type !== 'textarea' ? (
                   <WordCount />
+                ) : null,
+                this.showPwdVisible && this.type !== 'textarea' ? (
+                  <i
+                    role="img"
+                    onClick={this.handlePasswordVisible}
+                    class="n-icon"
+                    style="cursor: pointer;"
+                  >
+                    <Eye />
+                  </i>
                 ) : null
               ]}
             </div>

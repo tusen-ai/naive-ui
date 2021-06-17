@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- add show-password attribute to `n-input`
+
 ## 2.12.0 (2020-06-16)
 
 ### Breaking Changes
