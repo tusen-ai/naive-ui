@@ -1,9 +1,9 @@
 import { inject, computed, ref, ComputedRef } from 'vue'
 import { get } from 'lodash-es'
-import { pxfy } from 'seemly'
 import type { FormItemSetupProps } from './FormItem'
 import { formInjectionKey } from './interface'
 import type { Size, FormItemRule } from './interface'
+import { formatLength } from '../../_utils'
 
 export function formItemSize (props: FormItemSetupProps): {
   mergedSize: ComputedRef<Size>
@@ -26,13 +26,11 @@ export function formItemMisc (props: FormItemSetupProps) {
     const { labelWidth } = props
 
     if (labelWidth !== undefined) {
-      const isNumber = !isNaN(+labelWidth)
-      return isNumber ? pxfy(labelWidth) : labelWidth
+      return formatLength(labelWidth)
     }
 
     if (NForm?.labelWidth !== undefined) {
-      const isNumber = !isNaN(+NForm?.labelWidth)
-      return isNumber ? pxfy(NForm.labelWidth) : NForm.labelWidth
+      return formatLength(NForm.labelWidth)
     }
     return undefined
   })
