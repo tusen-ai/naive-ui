@@ -2,7 +2,7 @@
 
 ## Pending
 
-- `n-input` add show-password prop.
+- `n-input` add show-password-toggle prop.
 
 ### Feats
 
