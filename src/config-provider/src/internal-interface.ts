@@ -188,6 +188,8 @@ export interface GlobalIconConfig {
   date?: () => VNodeChild
   download?: () => VNodeChild
   error?: () => VNodeChild
+  eye?: () => VNodeChild
+  eyeinvisible?: () => VNodeChild
   info?: () => VNodeChild
   retry?: () => VNodeChild
   success?: () => VNodeChild
