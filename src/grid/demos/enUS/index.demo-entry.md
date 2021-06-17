@@ -4,8 +4,6 @@
 
 Based on CSS Grid. Responsive. Keep away from IE.
 
-If you do need IE, try [Legacy Grid](legacy-grid).
-
 ```demo
 basic
 gap

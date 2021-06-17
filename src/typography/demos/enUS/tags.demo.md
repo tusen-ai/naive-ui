@@ -3,7 +3,9 @@
 Other naive-ui builtin tags.
 
 ```html
-<n-a>a tag</n-a>
+<n-a href="https://en.wikipedia.org/wiki/Hear_the_Wind_Sing" target="_blank"
+  >Hear the Wind Sing</n-a
+>
 <n-h1>h1 tag</n-h1>
 <n-p
   >Hear the Wind Sing (風の歌を聴け Kaze no uta o kike) is the first novel by

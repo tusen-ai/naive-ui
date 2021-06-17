@@ -67,6 +67,28 @@ export default cB('tree', {
           borderBottomColor: 'var(--node-text-color-disabled)'
         })
       ])
+    ]),
+    cM('disabled', [
+      cB('tree-node-content', `
+        color: var(--node-text-color-disabled);
+        cursor: not-allowed;
+      `)
+    ])
+  ]),
+  cM('selectable', [
+    cM('block-line', [
+      cB('tree-node', [
+        cNotM('disabled', `
+          cursor: pointer;
+        `)
+      ])
+    ]),
+    cB('tree-node', [
+      cNotM('disabled', [
+        cB('tree-node-content', `
+          cursor: pointer;
+        `)
+      ])
     ])
   ]),
   cM('block-node', [
@@ -75,28 +97,34 @@ export default cB('tree', {
     `)
   ]),
   cNotM('block-line', [
-    cB('tree-node-content', nodeStateStyle),
     cB('tree-node', [
-      cM('selected', [
-        cB('tree-node-content', {
-          backgroundColor: 'var(--node-color-active)'
-        })
+      cNotM('disabled', [
+        cB('tree-node-content', nodeStateStyle),
+        cM('selected', [
+          cB('tree-node-content', {
+            backgroundColor: 'var(--node-color-active)'
+          })
+        ])
       ])
     ])
   ]),
   cM('block-line', [
-    cB('tree-node', {
-      cursor: 'pointer'
-    }, [
-      nodeStateStyle,
-      cM('selected', {
-        backgroundColor: 'var(--node-color-active)'
-      })
+    cB('tree-node', [
+      cNotM('disabled', [
+        nodeStateStyle,
+        cM('selected', {
+          backgroundColor: 'var(--node-color-active)'
+        })
+      ]),
+      cM('disabled', `
+        cursor: not-allowed;
+      `)
     ])
   ]),
   cB('tree-node-switcher', `
     cursor: pointer;
     display: inline-flex;
+    flex-shrink: 0;
     height: 24px;
     width: 24px;
     align-items: center;
@@ -152,7 +180,6 @@ export default cB('tree', {
     align-items: center;
     vertical-align: bottom;
     padding: 0 6px;
-    cursor: pointer;
     border-radius: var(--node-border-radius);
     text-decoration-color: #0000;
     text-decoration-line: underline;
