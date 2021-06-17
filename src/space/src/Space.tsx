@@ -94,9 +94,11 @@ export default defineComponent({
     } = this
     const children = flatten(getSlot(this))
     const horizontalMargin = `${margin.horizontal}px`
+    const semiHorizontalMargin = `${margin.horizontal / 2}px`
     const verticalMargin = `${margin.vertical}px`
     const semiVerticalMargin = `${margin.vertical / 2}px`
     const lastIndex = children.length - 1
+    const isJustifySpace = justify.startsWith('space-')
     return (
       <div
         role="none"
@@ -126,7 +128,18 @@ export default defineComponent({
                     marginBottom: index !== lastIndex ? verticalMargin : ''
                   }
                 : {
-                    marginRight: index !== lastIndex ? horizontalMargin : '',
+                    marginRight: isJustifySpace
+                      ? justify === 'space-between' && index === lastIndex
+                        ? ''
+                        : semiHorizontalMargin
+                      : index !== lastIndex
+                        ? horizontalMargin
+                        : '',
+                    marginLeft: isJustifySpace
+                      ? justify === 'space-between' && index === 0
+                        ? ''
+                        : semiHorizontalMargin
+                      : '',
                     paddingTop: semiVerticalMargin,
                     paddingBottom: semiVerticalMargin
                   }

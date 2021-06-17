@@ -1,7 +1,7 @@
 # Space Around
 
 ```html
-<n-space justify="space-around">
+<n-space justify="space-around" size="large">
   <n-button>Oops!</n-button>
   <n-button>Oops!</n-button>
   <n-button>Oops!</n-button>
