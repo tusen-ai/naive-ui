@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-dropdown` support class attr.
+
 ## 2.12.0 (2020-06-16)
 
 ### Breaking Changes
