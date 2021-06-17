@@ -15,7 +15,7 @@ basic
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | default-value | `number` | `null` | 默认被选中的日期的时间戳 |
-| is-date-disabled | `(timestamp: number) => boolean` | `undefined` |  |
+| is-date-disabled | `(timestamp: number) => boolean` | `undefined` | 日期禁用的校验函数 |
 | value | `number \| null` | `undefined` | 被选中的日期的时间戳 |
 | on-update:value | `(timestamp: number, { year: number, month: number, date: number }) => void` | `undefined` | 选中日期的回调 |
 

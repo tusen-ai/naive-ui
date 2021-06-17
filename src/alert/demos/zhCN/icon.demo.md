@@ -17,10 +17,11 @@
 
 ```js
 import { IosAirplane } from '@vicons/ionicons4'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   components: {
     IosAirplane
   }
-}
+})
 ```

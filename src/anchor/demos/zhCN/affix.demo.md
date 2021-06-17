@@ -4,7 +4,7 @@
 
 ```html
 <div style="height: 200px;">
-  <n-anchor affix :offset-top="24" :top="88" style="z-index: 1;" :bound="24">
+  <n-anchor affix :trigger-top="24" :top="88" style="z-index: 1;" :bound="24">
     <n-anchor-link title="演示" href="#演示">
       <n-anchor-link title="基础用法" href="#basic" />
       <n-anchor-link title="忽略间隔" href="#ignore-gap" />

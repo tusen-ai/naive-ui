@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.12.0 (2020-06-16)
 
 ### Breaking Changes
 

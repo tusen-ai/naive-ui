@@ -4,11 +4,11 @@
 <div style="height: 200px; padding-left: 200px;">
   <n-anchor
     affix
-    :offset-top="24"
+    :trigger-top="24"
     :top="88"
     :bound="24"
     style="z-index: 1;"
-    ref="anchor"
+    ref="anchorRef"
   >
     <n-anchor-link title="演示" href="#演示">
       <n-anchor-link title="基础用法" href="#basic" />
@@ -26,11 +26,18 @@
 ```
 
 ```js
-export default {
-  methods: {
-    scrollTo (href) {
-      this.$refs.anchor.scrollTo(href)
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const anchorRef = ref(null)
+    const scrollTo = (href) => {
+      anchorRef.value.scrollTo(href)
+    }
+    return {
+      anchorRef,
+      scrollTo
     }
   }
-}
+})
 ```
