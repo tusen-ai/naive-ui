@@ -2,6 +2,8 @@
 
 ## Pending
 
+- 为 `n-input` 组件中 password 属性增加查看隐藏功能
+
 ### Feats
 
 - `n-form`, `n-form-item` 增强 show-require-mark 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)

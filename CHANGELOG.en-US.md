@@ -2,6 +2,8 @@
 
 ## Pending
 
+- `n-input` add show-password-toggle prop.
+
 ### Feats
 
 - `n-form`, `n-form-item` enhance show-require-mark prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)

@@ -30,6 +30,7 @@ count
 | clearable | `boolean` | `false` |  |
 | default-value | `string \| [string, string] \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
+| show-password-toggle | `boolean` | `false` | Controls the display and hiding of passwords |
 | maxlength | `number` | `undefined` |  |
 | minlength | `number` | `undefined` |  |
 | pair | `boolean` | `false` | Whether to input pairwise value. |

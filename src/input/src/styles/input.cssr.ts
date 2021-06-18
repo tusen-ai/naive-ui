@@ -283,9 +283,13 @@ export default c([
     cE('prefix', {
       marginRight: '4px'
     }),
-    cE('suffix', {
-      marginLeft: '4px'
-    }),
+    cE('suffix', `
+      margin-left: 4px;
+    `, [
+      cE('eye', `
+      cursor: pointer;
+    `)
+    ]),
     cE('suffix, prefix', `
       transition: color .3s var(--bezier);
       flex-wrap: nowrap;
