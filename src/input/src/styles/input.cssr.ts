@@ -132,8 +132,8 @@ export default c([
     `),
     cE('input-el', `
       padding: 0;
-      height: 'var(--height)';
-      line-height:var(--height);
+      height: var(--height);
+      line-height: var(--height);
     `, [
       c('+', [
         cE('placeholder', `
