@@ -37,13 +37,13 @@ export default defineComponent({
               showIcon && `${clsPrefix}-dropdown-option-body__prefix--show-icon`
             ]}
           >
-            {h(render, { render: rawNode.icon })}
+            {render(rawNode.icon)}
           </div>
           <div
             class={`${clsPrefix}-dropdown-option-body__label`}
             __dropdown-option
           >
-            {h(render, { render: rawNode.label ?? rawNode.title })}
+            {render(rawNode.label ?? rawNode.title)}
           </div>
           <div
             class={[

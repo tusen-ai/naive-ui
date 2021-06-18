@@ -37,13 +37,14 @@ menu-debug
 | disabled | `boolean` | `false` |  |
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | 在传入的选项中没有对应当前值的选项时，这个值应该对应的选项。如果设为 `false`，不会为找不到对应选项的值生成回退选项也不会显示它，未在选项中的值会被视为不合法，操作过程中会被组件清除掉 |
 | filterable | `boolean` | `false` | 是否可以过滤 |
-| filter | `(pattern: string, option: Object) => boolean` | 一个简单的字符串搜索算法 |  |
+| filter | `(pattern: string, option: object) => boolean` | 一个简单的字符串搜索算法 |  |
 | loading | `boolean` | `false` |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |
 | multiple | `boolean` | `false` |  |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` |  |
 | placeholder | `string` | `'请选择'` |  |
 | remote | `boolean` | `false` | 是否要异步获取选项。注意如果设定了，那么 `fitler` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options` |
+| render-label | `(option: SelectOption \| SelectGroupOption) => VNodeChild` | `undefined` | 控制全部选项的渲染 |
 | show | `boolean` | `undefined` | 是否展示菜单 |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
@@ -59,24 +60,22 @@ menu-debug
 
 ### SelectOption Properties
 
-| 名称     | 类型                              | 说明                 |
-| -------- | --------------------------------- | -------------------- |
-| class    | `string`                          |                      |
-| disabled | `boolean`                         |                      |
-| label    | `string`                          |                      |
-| render   | `(option: SelectOption) => VNode` |                      |
-| style    | `string`                          |                      |
-| value    | `string \| number`                | 在选项中应该是唯一的 |
+| 名称 | 类型 | 说明 |
+| --- | --- | --- |
+| class | `string` |  |
+| disabled | `boolean` |  |
+| label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` |  |
+| style | `string \| object` |  |
+| value | `string \| number` | 在选项中应该是唯一的 |
 
 ### SelectGroupOption Properties
 
-| 名称     | 类型                              | 说明                 |
-| -------- | --------------------------------- | -------------------- |
-| children | `Array<SelectOption>`             |                      |
-| label    | `string`                          |                      |
-| key      | `string \| number`                | 在选项中应该是唯一的 |
-| render   | `(option: SelectOption) => VNode` |                      |
-| type     | `'group'`                         |                      |
+| 名称 | 类型 | 说明 |
+| --- | --- | --- |
+| children | `Array<SelectOption>` |  |
+| label | `string \| ((option: SelectGroupOption) => VNodeChild)` |  |
+| key | `string \| number` | 在选项中应该是唯一的 |
+| type | `'group'` |  |
 
 ## Slots
 

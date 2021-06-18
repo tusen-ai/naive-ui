@@ -4,10 +4,12 @@
 
 ### Feats
 
-- `n-form`, `n-form-item` 增强 show-require-mark 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-form`, `n-form-item` 增强 `show-require-mark` 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
 - `n-dropdown` 支持 class 属性，关闭 [#180](https://github.com/TuSimple/naive-ui/issues/180)
 - `n-input` 新增 `show-password-toggle` 属性
 - `n-popselect` 支持 class 属性
+- `n-select` 新增 `render-label` 属性
+- `n-select` 的 `option.label` 支持渲染函数
 
 ### Fixes
 

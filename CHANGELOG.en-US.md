@@ -4,10 +4,12 @@
 
 ### Feats
 
-- `n-form`, `n-form-item` enhance show-require-mark prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-form`, `n-form-item` enhance `show-require-mark` prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
 - `n-dropdown` support class attr, closes [#180](https://github.com/TuSimple/naive-ui/issues/180).
 - `n-input` add `show-password-toggle` prop.
 - `n-popselect` support class attr.
+- `n-select` add `render-label` prop.
+- `n-select`'s `option.label` supports render function.
 
 ### Fixes
 

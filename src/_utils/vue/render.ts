@@ -1,21 +1,22 @@
-import { defineComponent, createTextVNode, PropType } from 'vue'
+import { createTextVNode, VNodeChild } from 'vue'
 
-export const render = defineComponent({
-  name: 'Render',
-  props: {
-    render: [String, Number, Function, Boolean] as PropType<unknown>
-  },
-  render () {
-    const { render } = this
-    if (render === undefined || render === null) return null
-    if (typeof render === 'function') {
-      return render()
-    } else if (typeof render === 'string') {
-      return createTextVNode(render)
-    } else if (typeof render === 'number') {
-      return createTextVNode(String(render))
-    } else {
-      return JSON.stringify(render)
-    }
+export const render = <T extends any[]>(
+  r:
+  | string
+  | number
+  | undefined
+  | null
+  | ((...args: [...T]) => VNodeChild)
+  | unknown,
+  ...args: [...T]
+): VNodeChild => {
+  if (typeof r === 'function') {
+    return r(...args)
+  } else if (typeof r === 'string') {
+    return createTextVNode(r)
+  } else if (typeof r === 'number') {
+    return createTextVNode(String(r))
+  } else {
+    return null
   }
-})
+}

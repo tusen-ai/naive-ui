@@ -5,20 +5,25 @@ export type SelectMixedOption =
   | SelectBaseOption
   | SelectGroupOption
   | SelectIgnoredOption
+
 export interface SelectBaseOption<V = string | number> {
   value: V
-  label: string
+  label:
+  | string
+  | ((option: SelectBaseOption<V>, selected: boolean) => VNodeChild)
   class?: string
   style?: string | CSSProperties
   disabled?: boolean
-  render?: (option: SelectBaseOption, selected: boolean) => VNodeChild
+  /** @deprecated */
+  render?: (option: SelectBaseOption<V>, selected: boolean) => VNodeChild
   [k: string]: unknown
 }
 
 export interface SelectGroupOptionBase {
-  label: string
+  label: string | ((option: SelectGroupOption) => VNodeChild)
   type: 'group'
   children: SelectBaseOption[]
+  /** @deprecated */
   render?: (option: SelectGroupOption) => VNodeChild
   [k: string]: unknown
 }
