@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-form`, `n-form-item` enhance show-require-mark prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
 - `n-dropdown` support class attr, closes [#180](https://github.com/TuSimple/naive-ui/issues/180).
 
 ### Fixes
