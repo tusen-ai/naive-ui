@@ -696,7 +696,7 @@ export default defineComponent({
                     ? ''
                     : this.patternInputFocused && this.active
                       ? this.pattern
-                      : this.label
+                      : String(this.label)
                 }
                 placeholder=""
                 readonly={

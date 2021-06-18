@@ -8,22 +8,20 @@ export type SelectMixedOption =
 
 export interface SelectBaseOption<V = string | number> {
   value: V
-  label:
-  | string
-  | ((option: SelectBaseOption<V>, selected: boolean) => VNodeChild)
+  /** label doesn't support render function since it will be used in callbacks */
+  label: string
   class?: string
   style?: string | CSSProperties
   disabled?: boolean
-  /** @deprecated */
   render?: (option: SelectBaseOption<V>, selected: boolean) => VNodeChild
   [k: string]: unknown
 }
 
 export interface SelectGroupOptionBase {
-  label: string | ((option: SelectGroupOption) => VNodeChild)
+  /** label doesn't support render function since it will be used in callbacks */
+  label: string
   type: 'group'
   children: SelectBaseOption[]
-  /** @deprecated */
   render?: (option: SelectGroupOption) => VNodeChild
   [k: string]: unknown
 }

@@ -64,7 +64,8 @@ menu-debug
 | --- | --- | --- |
 | class | `string` |  |
 | disabled | `boolean` |  |
-| label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` |  |
+| label | `string` |  |
+| render | `(option: SelectOption, selected: boolean) => VNodeChild` |  |
 | style | `string \| object` |  |
 | value | `string \| number` | 在选项中应该是唯一的 |
 
@@ -73,8 +74,9 @@ menu-debug
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
 | children | `Array<SelectOption>` |  |
-| label | `string \| ((option: SelectGroupOption) => VNodeChild)` |  |
+| label | `string` |  |
 | key | `string \| number` | 在选项中应该是唯一的 |
+| render | `(option: SelectGroupOption) => VNodeChild` |  |
 | type | `'group'` |  |
 
 ## Slots

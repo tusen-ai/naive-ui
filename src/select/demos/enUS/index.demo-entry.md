@@ -60,7 +60,8 @@ max-tag-count
 | --- | --- | --- |
 | class | `string` |  |
 | disabled | `boolean` |  |
-| label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` |  |
+| label | `string` |  |
+| render | `(option: SelectOption, selected: boolean) => VNodeChild` |  |
 | style | `string` |  |
 | value | `string \| number` | Should be unique in options. |
 
@@ -69,8 +70,9 @@ max-tag-count
 | Name | Type | Description |
 | --- | --- | --- |
 | children | `Array<SelectOption>` |  |
-| label | `string \| ((option: SelectGroupOption) => VNodeChild)` |  |
+| label | `string` |  |
 | key | `string \| number` | hould be unique in options. |
+| render | `(option: SelectGroupOption) => VNodeChild` |  |
 | type | `'group'` |  |
 
 ## Slots
