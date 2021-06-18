@@ -70,7 +70,6 @@ export default c([
         text-decoration-color .3s var(--bezier);
     `),
     cE('input-el, textarea-el', `
-      line-height:var(--height);
       -webkit-appearance: none;
       width: 100%;
       min-width: 0;
@@ -131,10 +130,11 @@ export default c([
       white-space: nowrap;
       pointer-events: none;
     `),
-    cE('input-el', {
-      padding: 0,
-      height: 'var(--height)'
-    }, [
+    cE('input-el', `
+      padding: 0;
+      height: 'var(--height)';
+      line-height:var(--height);
+    `, [
       c('+', [
         cE('placeholder', `
           display: flex;
