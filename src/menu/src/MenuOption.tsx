@@ -1,10 +1,10 @@
 import { h, computed, defineComponent, PropType } from 'vue'
 import { useMemo } from 'vooks'
+import { render } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import NMenuOptionContent from './MenuOptionContent'
 import { useMenuChild, useMenuChildProps } from './use-menu-child'
 import { TmNode } from './interface'
-import { render } from '../../_utils'
 
 export const menuItemProps = {
   ...useMenuChildProps,
@@ -91,7 +91,7 @@ export default defineComponent({
           disabled={!this.dropdownEnabled || this.title === undefined}
         >
           {{
-            default: () => h(render, { render: this.title }),
+            default: () => render(this.title),
             trigger: () => (
               <NMenuOptionContent
                 clsPrefix={mergedClsPrefix}

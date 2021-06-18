@@ -232,14 +232,14 @@ export default defineComponent({
                 `${clsPrefix}-dropdown-option-body__prefix--show-icon`
             ]}
           >
-            {h(render, { render: rawNode.icon })}
+            {render(rawNode.icon)}
           </div>
           <div
             __dropdown-option
             class={`${clsPrefix}-dropdown-option-body__label`}
           >
             {/* TODO: Workaround, menu campatible */}
-            {h(render, { render: rawNode.label ?? rawNode.title })}
+            {render(rawNode.label ?? rawNode.title)}
           </div>
           <div
             __dropdown-option
