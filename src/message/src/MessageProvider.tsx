@@ -24,21 +24,25 @@ export interface MessageOptions {
   closable?: boolean
   icon?: () => VNodeChild
   onClose?: () => void
+  onLeave?: () => void
+  onAfterLeave?: () => void
 }
 
+type ContentType = string | (() => VNodeChild)
+
 export interface MessageApiInjection {
-  info: (content: string, options?: MessageOptions) => MessageReactive
-  success: (content: string, options?: MessageOptions) => MessageReactive
-  warning: (content: string, options?: MessageOptions) => MessageReactive
-  error: (content: string, options?: MessageOptions) => MessageReactive
-  loading: (content: string, options?: MessageOptions) => MessageReactive
+  info: (content: ContentType, options?: MessageOptions) => MessageReactive
+  success: (content: ContentType, options?: MessageOptions) => MessageReactive
+  warning: (content: ContentType, options?: MessageOptions) => MessageReactive
+  error: (content: ContentType, options?: MessageOptions) => MessageReactive
+  loading: (content: ContentType, options?: MessageOptions) => MessageReactive
 }
 
 export const messageApiInjectionKey: InjectionKey<MessageApiInjection> =
   Symbol('messageApi')
 
 export interface MessageReactive {
-  content?: string
+  content?: ContentType
   duration?: number
   closable?: boolean
   icon?: () => VNodeChild
@@ -84,19 +88,19 @@ export default defineComponent({
     const messageListRef = ref<PrivateMessageReactive[]>([])
     const messageRefs = ref<{ [key: string]: PrivateMessageRef }>({})
     const api: MessageApiInjection = {
-      info (content: string, options?: MessageOptions) {
+      info (content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'info' })
       },
-      success (content: string, options?: MessageOptions) {
+      success (content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'success' })
       },
-      warning (content: string, options?: MessageOptions) {
+      warning (content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'warning' })
       },
-      error (content: string, options?: MessageOptions) {
+      error (content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'error' })
       },
-      loading (content: string, options?: MessageOptions) {
+      loading (content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'loading' })
       }
     }
@@ -105,7 +109,7 @@ export default defineComponent({
       mergedClsPrefixRef
     })
     provide(messageApiInjectionKey, api)
-    function create (content: string, options = {}): MessageReactive {
+    function create (content: ContentType, options = {}): MessageReactive {
       const key = createId()
       const messageReactive = reactive({
         ...options,
