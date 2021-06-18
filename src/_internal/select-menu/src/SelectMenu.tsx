@@ -107,6 +107,8 @@ export default defineComponent({
     onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
     onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
     onTabOut: Function as PropType<() => void>,
+    onMouseenter: Function as PropType<(e: MouseEvent) => void>,
+    onMouseleave: Function as PropType<(e: MouseEvent) => void>,
     // deprecated
     onMenuToggleOption: Function as PropType<(value: SelectBaseOption) => void>
   },
@@ -378,6 +380,8 @@ export default defineComponent({
         onKeyup={this.handleKeyUp}
         onKeydown={this.handleKeyDown}
         onMousedown={this.handleMouseDown}
+        onMouseenter={this.onMouseenter}
+        onMouseleave={this.onMouseleave}
       >
         {this.loading ? (
           <div class={`${clsPrefix}-base-select-menu__loading`}>

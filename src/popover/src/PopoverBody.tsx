@@ -241,9 +241,11 @@ export default defineComponent({
         contentNode = renderBody(
           // The popover class and overlap class must exists, they will be used
           // to place the body & transition animation.
+          // Shadow class exists for reuse box-shadow.
           [
             `${mergedClsPrefix}-popover`,
-            props.overlap && `${mergedClsPrefix}-popover--overlap`
+            props.overlap && `${mergedClsPrefix}-popover--overlap`,
+            props.shadow && `${mergedClsPrefix}-popover--shadow`
           ],
           bodyRef,
           styleRef.value as any,

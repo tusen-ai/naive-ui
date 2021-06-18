@@ -28,18 +28,12 @@ import { tmOptions } from '../../select/src/utils'
 import { useConfig } from '../../_mixins'
 
 export const panelProps = {
-  multiple: {
-    type: Boolean,
-    default: false
-  },
+  multiple: Boolean,
   value: {
     type: [String, Number, Array] as PropType<Value | null>,
     default: null
   },
-  cancelable: {
-    type: Boolean,
-    default: false
-  },
+  cancelable: Boolean,
   width: [Number, String] as PropType<string | number>,
   options: {
     type: Array as PropType<SelectMixedOption[]>,
@@ -49,13 +43,11 @@ export const panelProps = {
     type: String as PropType<PopselectSize>,
     default: 'medium'
   },
-  scrollable: {
-    type: Boolean,
-    default: false
-  },
-  // eslint-disable-next-line vue/prop-name-casing
+  scrollable: Boolean,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onMouseenter: Function as PropType<(e: MouseEvent) => void>,
+  onMouseleave: Function as PropType<(e: MouseEvent) => void>,
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
@@ -155,6 +147,8 @@ export default defineComponent({
         virtualScroll={false}
         scrollable={this.scrollable}
         onMenuToggleOption={this.handleMenuToggleOption}
+        onMouseenter={this.onMouseenter}
+        onMouseleave={this.onMouseenter}
       />
     )
   }

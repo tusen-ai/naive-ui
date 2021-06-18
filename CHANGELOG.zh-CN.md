@@ -2,12 +2,12 @@
 
 ## Pending
 
-- 为 `n-input` 组件中 password 属性增加查看隐藏功能
-
 ### Feats
 
 - `n-form`, `n-form-item` 增强 show-require-mark 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
 - `n-dropdown` 支持 class 属性，关闭 [#180](https://github.com/TuSimple/naive-ui/issues/180)
+- `n-input` 新增 `show-password-toggle` 属性
+- `n-popselect` 支持 class 属性
 
 ### Fixes
 
