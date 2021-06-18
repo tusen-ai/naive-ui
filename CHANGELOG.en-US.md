@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.12.1
 
 ### Feats
 
@@ -9,6 +9,7 @@
 - `n-input` add `show-password-toggle` prop.
 - `n-popselect` support class attr.
 - `n-select` add `render-label` prop.
+- `n-popselect` add `render-label` prop.
 
 ### Fixes
 

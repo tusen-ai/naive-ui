@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.12.1
 
 ### Feats
 
@@ -9,6 +9,7 @@
 - `n-input` 新增 `show-password-toggle` 属性
 - `n-popselect` 支持 class 属性
 - `n-select` 新增 `render-label` 属性
+- `n-popselect` 新增 `render-label` 属性
 
 ### Fixes
 
