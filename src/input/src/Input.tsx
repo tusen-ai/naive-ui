@@ -501,10 +501,14 @@ export default defineComponent({
     }
     function handlePasswordToggleClick (): void {
       passwordVisibleRef.value = !passwordVisibleRef.value
+      // fix focus does not at the end in new version Chrome
+      void nextTick(() => {
+        inputElRef.value?.blur()
+        inputElRef.value?.focus()
+      })
     }
     function handlePasswordToggleMousedown (e: MouseEvent): void {
       e.preventDefault()
-      handlePasswordToggleClick()
     }
     function handleWrapperKeyDown (e: KeyboardEvent): void {
       props.onKeydown?.(e)
@@ -667,6 +671,7 @@ export default defineComponent({
       handleChange,
       handleClick,
       handleClear,
+      handlePasswordToggleClick,
       handlePasswordToggleMousedown,
       handleWrapperKeyDown,
       handleTextAreaMirrorResize,
@@ -869,10 +874,10 @@ export default defineComponent({
               <input
                 ref="inputElRef"
                 type={
-                  this.showPasswordToggle
-                    ? this.passwordVisible
-                      ? 'text'
-                      : 'password'
+                  this.type === 'password' &&
+                  this.showPasswordToggle &&
+                  this.passwordVisible
+                    ? 'text'
                     : this.type
                 }
                 class={`${mergedClsPrefix}-input__input-el`}
@@ -938,6 +943,7 @@ export default defineComponent({
                     clsPrefix={mergedClsPrefix}
                     class={`${mergedClsPrefix}-base-input__Eye`}
                     onMousedown={this.handlePasswordToggleMousedown}
+                    onClick={this.handlePasswordToggleClick}
                   >
                     {{
                       default: () =>
