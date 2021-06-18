@@ -1,6 +1,5 @@
 # CHANGELOG
 
-<<<<<<< HEAD
 ## Pending
 - `n-menu` 新增 `renderLabel` 属性，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
 ### Feats
@@ -19,10 +18,7 @@
 - 修复 `n-notification` 位置不正确
 - 修复 `n-message` 的 content & option 类型不正确
 
-## 2.12.0 (2020-06-16)
-=======
 ## 2.12.0 (2021-06-16)
->>>>>>> 874dbb8d2 (docs: fix changelog time (#188))
 
 ### Breaking Changes
 
