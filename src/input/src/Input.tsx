@@ -655,6 +655,9 @@ export default defineComponent({
       textDecorationStyle: textDecorationStyleRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
+      showPasswordToggle: computed(() => {
+        return props.showPasswordToggle && !props.disabled
+      }),
       // methods
       handleCompositionStart,
       handleCompositionEnd,
@@ -772,9 +775,6 @@ export default defineComponent({
           '--icon-alpha-disabled': getAlphaString(iconColorDisabled),
           '--suffix-text-color': suffixTextColor
         }
-      }),
-      showPasswordToggle: computed(() => {
-        return props.showPasswordToggle && !props.disabled
       })
     }
   },
@@ -940,7 +940,7 @@ export default defineComponent({
                 this.showPasswordToggle && this.type === 'password' ? (
                   <NBaseIcon
                     clsPrefix={mergedClsPrefix}
-                    class={`${mergedClsPrefix}-base-input__Eye`}
+                    class={`${mergedClsPrefix}-base-input__eye`}
                     onMousedown={this.handlePasswordToggleMousedown}
                     onMouseup={this.handlePasswordToggleMouseup}
                     onClick={this.handlePasswordToggleClick}
