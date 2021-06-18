@@ -11,6 +11,7 @@
           :value="menuValue"
           :options="menuOptions"
           @update:value="handleMenuUpdateValue"
+          :renderLabel="handleMenuOption"
         />
       </div>
       <n-auto-complete
@@ -77,8 +78,8 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { computed, h, ref } from 'vue'
+import { useRouter, useRoute, RouterLink } from 'vue-router'
 import { useMessage, version } from 'naive-ui'
 import { MenuOutline } from '@vicons/ionicons5'
 import { repoUrl } from './utils/github-url'
@@ -342,7 +343,18 @@ export default {
       router.push(/^(\/[^/]+){2}/.exec(route.path)[0])
     }
 
+    const handleMenuOption = (option) => {
+      return h(
+        RouterLink,
+        {
+          to: option.key
+        },
+        { default: () => option.title }
+      )
+    }
+
     return {
+      handleMenuOption,
       mobilePopoverRef,
       tusimple: process.env.TUSIMPLE,
       dev: __DEV__,

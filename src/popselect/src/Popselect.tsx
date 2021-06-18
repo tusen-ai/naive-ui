@@ -1,6 +1,7 @@
-import { h, ref, provide, defineComponent, PropType } from 'vue'
+import { h, ref, provide, defineComponent, PropType, mergeProps } from 'vue'
 import { NPopover } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'
+import type { PopoverInternalProps } from '../../popover/src/Popover'
 import type { PopoverInst, PopoverTrigger } from '../../popover'
 import NPopselectPanel, { panelPropKeys, panelProps } from './PopselectPanel'
 import { omit, keep } from '../../_utils'
@@ -14,16 +15,11 @@ import { popselectInjectionKey } from './interface'
 const popselectProps = {
   ...(useTheme.props as ThemeProps<PopselectTheme>),
   ...popoverBaseProps,
-  // eslint-disable-next-line vue/require-prop-types
   trigger: {
     type: String as PropType<PopoverTrigger>,
     default: 'hover'
   },
-  // eslint-disable-next-line vue/require-prop-types
-  showArrow: {
-    type: Boolean,
-    default: false
-  },
+  showArrow: Boolean,
   ...panelProps
 }
 
@@ -58,22 +54,47 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme } = this
-    return h(
-      NPopover,
-      omit(this.$props, panelPropKeys, {
-        padded: false,
-        ref: 'popoverInstRef',
-        internalExtraClass: 'popselect',
-        theme: mergedTheme.peers.Popover,
-        themeOverrides: mergedTheme.peerOverrides.Popover
-      }),
-      {
-        trigger: this.$slots.default,
-        default: () => {
-          return h(NPopselectPanel, keep(this.$props, panelPropKeys))
-        }
+    const { mergedTheme, $attrs } = this
+    const popoverProps: PopoverInternalProps & { ref: string } = {
+      theme: mergedTheme.peers.Popover,
+      themeOverrides: mergedTheme.peerOverrides.Popover,
+      ref: 'popoverInstRef',
+      internalRenderBody: (
+        className,
+        ref,
+        style,
+        onMouseenter,
+        onMouseleave
+      ) => {
+        return (
+          <NPopselectPanel
+            {...mergeProps($attrs, {
+              class: className,
+              style
+            })}
+            {...keep(this.$props, panelPropKeys)}
+            ref={
+              ((inst: { $el: HTMLElement | null } | null) => {
+                if (inst) {
+                  ref.value = inst.$el
+                } else {
+                  ref.value = null
+                }
+              }) as any
+            }
+            onMouseenter={onMouseenter}
+            onMouseleave={onMouseleave}
+          />
+        )
       }
+    }
+    return (
+      <NPopover {...omit(this.$props, panelPropKeys)} {...popoverProps}>
+        {{
+          trigger: this.$slots.default,
+          _: true
+        }}
+      </NPopover>
     )
   }
 })

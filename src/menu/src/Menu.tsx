@@ -9,7 +9,8 @@ import {
   ExtractPropTypes,
   InjectionKey,
   CSSProperties,
-  inject
+  inject,
+  VNodeChild
 } from 'vue'
 import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
@@ -149,6 +150,11 @@ const menuProps = {
       return true
     },
     default: undefined
+  },
+  renderLabel: {
+    type: [Function, Array] as PropType<
+    (option: MenuOption | MenuGroupOption) => VNodeChild
+    >
   }
 } as const
 
