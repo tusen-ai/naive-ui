@@ -16,7 +16,7 @@ import {
   provide
 } from 'vue'
 import { useMergedState } from 'vooks'
-import { toRgbString, getAlphaString, getPadding } from 'seemly'
+import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
 import { NBaseClear, NBaseIcon } from '../../_internal'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
@@ -500,12 +500,15 @@ export default defineComponent({
       hoverRef.value = false
     }
     function handlePasswordToggleClick (): void {
+      if (props.disabled) return
       passwordVisibleRef.value = !passwordVisibleRef.value
     }
     function handlePasswordToggleMousedown (e: MouseEvent): void {
+      if (props.disabled) return
       e.preventDefault()
     }
     function handlePasswordToggleMouseup (e: MouseEvent): void {
+      if (props.disabled) return
       e.preventDefault()
     }
     function handleWrapperKeyDown (e: KeyboardEvent): void {
@@ -655,9 +658,6 @@ export default defineComponent({
       textDecorationStyle: textDecorationStyleRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
-      showPasswordToggle: computed(() => {
-        return props.showPasswordToggle && !props.disabled
-      }),
       // methods
       handleCompositionStart,
       handleCompositionEnd,
@@ -720,6 +720,8 @@ export default defineComponent({
             iconColorDisabled,
             suffixTextColor,
             countTextColor,
+            iconColorHover,
+            iconColorPressed,
             [createKey('padding', size)]: padding,
             [createKey('fontSize', size)]: fontSize,
             [createKey('height', size)]: height
@@ -769,10 +771,10 @@ export default defineComponent({
           '--clear-size': clearSize,
           '--clear-color-hover': clearColorHover,
           '--clear-color-pressed': clearColorPressed,
-          '--icon-color': toRgbString(iconColor),
-          '--icon-color-disabled': toRgbString(iconColorDisabled),
-          '--icon-alpha': getAlphaString(iconColor),
-          '--icon-alpha-disabled': getAlphaString(iconColorDisabled),
+          '--icon-color': iconColor,
+          '--icon-color-hover': iconColorHover,
+          '--icon-color-pressed': iconColorPressed,
+          '--icon-color-disabled': iconColorDisabled,
           '--suffix-text-color': suffixTextColor
         }
       })

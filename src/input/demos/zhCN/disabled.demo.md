@@ -20,7 +20,7 @@
   />
   <n-input pair separator="to" clearable :disabled="!active">
     <template #affix>
-      <n-icon><cash-icon /></n-icon>
+      <n-icon><flash-icon /></n-icon>
     </template>
   </n-input>
   <n-switch v-model:value="active" />
@@ -28,16 +28,17 @@
 ```
 
 ```js
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { defineComponent, ref } from 'vue'
+import { FlashOutline as FlashIcon } from '@vicons/ionicons5'
 
-export default {
+export default defineComponent({
   components: {
-    CashIcon
+    FlashIcon
   },
-  data () {
+  setup () {
     return {
-      active: false
+      active: ref(false)
     }
   }
-}
+})
 ```
