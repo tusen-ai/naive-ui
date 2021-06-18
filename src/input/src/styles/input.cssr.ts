@@ -130,10 +130,11 @@ export default c([
       white-space: nowrap;
       pointer-events: none;
     `),
-    cE('input-el', {
-      padding: 0,
-      height: 'var(--height)'
-    }, [
+    cE('input-el', `
+      padding: 0;
+      height: var(--height);
+      line-height: var(--height);
+    `, [
       c('+', [
         cE('placeholder', `
           display: flex;
