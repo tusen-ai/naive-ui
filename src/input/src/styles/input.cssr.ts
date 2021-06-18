@@ -280,16 +280,15 @@ export default c([
       border-color: #0000;
       z-index: 1;
     `),
+    cE('eye', `
+      cursor: pointer;
+    `),
     cE('prefix', {
       marginRight: '4px'
     }),
     cE('suffix', `
       margin-left: 4px;
-    `, [
-      cE('eye', `
-      cursor: pointer;
-    `)
-    ]),
+    `),
     cE('suffix, prefix', `
       transition: color .3s var(--bezier);
       flex-wrap: nowrap;
