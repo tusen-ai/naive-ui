@@ -6,6 +6,10 @@
 
 - `n-dropdown` support class attr, closes [#180](https://github.com/TuSimple/naive-ui/issues/180).
 
+### Fixes
+
+- Fix `n-input` jitter when Chinese and English characters switch input, closes [#174](https://github.com/TuSimple/naive-ui/issues/174).
+
 ## 2.12.0 (2020-06-16)
 
 ### Breaking Changes
@@ -21,7 +25,6 @@
 
 - Fix `n-cascader` text blur in win10 Chrome.
 - Fix `n-tree` click on indent won't trigger select in block line mode.
-- Fix `n-input` jitter when Chinese and English characters switch input.
 
 ## 2.11.12 (2020-06-16)
 

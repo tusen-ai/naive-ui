@@ -6,6 +6,10 @@
 
 - `n-dropdown` 支持 class 属性，关闭 [#180](https://github.com/TuSimple/naive-ui/issues/180)
 
+### Fixes
+
+- 修复 `n-input` 中英文字符切换输入时抖动的问题，关闭[#174](https://github.com/TuSimple/naive-ui/issues/174).
+
 ## 2.12.0 (2020-06-16)
 
 ### Breaking Changes
@@ -21,7 +25,6 @@
 
 - 修复 `n-cascader` 在 win10 Chrome 环境下文字模糊的问题
 - 修复 `n-tree` 在 block line 模式下点击缩进空白无法触发选择
-- 修复 `n-input` 中英文字符切换输入时抖动的问题
 
 ## 2.11.12 (2020-06-16)
 
