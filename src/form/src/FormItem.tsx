@@ -66,11 +66,7 @@ export const formItemProps = {
     default: false
   },
   showRequireMark: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
-  requireMarkPlacement: {
-    type: String as PropType<'start' | 'end'>,
+    type: [Boolean, String] as PropType<'left' | 'right' | boolean>,
     default: undefined
   },
   showFeedback: {
@@ -401,39 +397,26 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
       >
         {this.label || $slots.label ? (
-          this.mergedrequireMarkPlacement === 'end' ? (
-            <label
-              class={`${mergedClsPrefix}-form-item-label`}
-              style={this.mergedLabelStyle as any}
-            >
-              {renderSlot($slots, 'label', undefined, () => [this.label])}
-              {(
-                this.mergedShowRequireMark !== undefined
-                  ? this.mergedShowRequireMark
-                  : this.mergedRequired
-              ) ? (
-                <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
-                  &nbsp;*
-                </span>
-                  ) : null}
-            </label>
-          ) : (
-            <label
-              class={`${mergedClsPrefix}-form-item-label`}
-              style={this.mergedLabelStyle as any}
-            >
-              {(
-                this.mergedShowRequireMark !== undefined
-                  ? this.mergedShowRequireMark
-                  : this.mergedRequired
-              ) ? (
-                <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
-                  *&nbsp;
-                </span>
-                  ) : null}
-              {renderSlot($slots, 'label', undefined, () => [this.label])}
-            </label>
-          )
+          <label
+            class={`${mergedClsPrefix}-form-item-label`}
+            style={this.mergedLabelStyle as any}
+          >
+            {this.mergedShowRequireMark !== 'left'
+              ? renderSlot($slots, 'label', undefined, () => [this.label])
+              : null}
+            {(
+              this.mergedShowRequireMark !== undefined
+                ? this.mergedShowRequireMark
+                : this.mergedRequired
+            ) ? (
+              <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
+                {this.mergedShowRequireMark !== 'left' ? '\u00A0*' : '*\u00A0'}
+              </span>
+                ) : null}
+            {this.mergedShowRequireMark === 'left'
+              ? renderSlot($slots, 'label', undefined, () => [this.label])
+              : null}
+          </label>
         ) : null}
         <div
           class={[

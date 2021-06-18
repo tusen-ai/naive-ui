@@ -31,8 +31,7 @@ validator-debug
 | model | `Object` | `{}` | 获取表项中收集到的值的对象 |
 | rules | `type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }` | `{}` | 验证表项的规则 |
 | show-feedback | `boolean` | `true` |  |
-| show-require-mark | `boolean` | `true` | 是否展示必填的星号 |
-| require-mark-placement | `'start' \| 'end' ` | `end` | 必填的星号所在位置 |
+| show-require-mark | `'left' \| 'right' \| 'boolen'` | `right` | 是否展示必填的星号 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 
 #### FormItemRule Type
@@ -61,8 +60,7 @@ validator-debug
 | rule | `FormItemRule \| Array<FormItemRule>` | `undefined` | 验证表项的规则，它会被通过 `rule-path` 从外层表单获取的规则合并来作为表项的验证规则。推荐还是在外层表单设置所有规则 |
 | rule-path | `string` | `undefined` | 从外层表单的 `rules` 对象获取规则的路径。如果没有设定，使用表项的 `path` 代替 |
 | show-feedback | `boolean` | `true` |  |
-| show-require-mark | `boolean` | `true` | 是否展示必填的星号。如果没有被设定，使用外层 `n-form` 的 `show-require-mark` |
-| require-mark-placement | `'start' \| 'end' ` | `end` | 必填的星号所在位置。如果没有被设定，使用外层 `n-form` 的 `require-mark-placement` |
+| show-require-mark | `'left' \| 'right' \| 'boolen'` | `right` | 是否展示必填的星号。如果没有被设定，使用外层 `n-form` 的 `show-require-mark` |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | 表单的验证状态。不设为 `undefined`时，会覆盖规则验证的结果 |
 
