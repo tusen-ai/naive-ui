@@ -18,7 +18,7 @@
 - 修复 `n-notification` 位置不正确
 - 修复 `n-message` 的 content & option 类型不正确
 
-## 2.12.0 (2020-06-16)
+## 2.12.0 (2021-06-16)
 
 ### Breaking Changes
 
@@ -34,7 +34,7 @@
 - 修复 `n-cascader` 在 win10 Chrome 环境下文字模糊的问题
 - 修复 `n-tree` 在 block line 模式下点击缩进空白无法触发选择
 
-## 2.11.12 (2020-06-16)
+## 2.11.12 (2021-06-16)
 
 ### Feats
 
