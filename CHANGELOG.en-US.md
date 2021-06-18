@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-form`, `n-form-item` add require-mark-placement prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-form`, `n-form-item` enhance show-require-mark prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
 
 ### Feats
 

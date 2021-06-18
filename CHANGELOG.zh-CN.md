@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-form`, `n-form-item` 新增 require-mark-placement 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-form`, `n-form-item` 增强 show-require-mark 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
 
 ### Feats
 
