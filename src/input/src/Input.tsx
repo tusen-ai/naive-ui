@@ -19,6 +19,7 @@ import { useMergedState } from 'vooks'
 import { toRgbString, getAlphaString, getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
 import { NBaseClear, NBaseIcon } from '../../_internal'
+import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createKey, ExtractPublicPropTypes } from '../../_utils'
@@ -35,7 +36,6 @@ import {
 import { len } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
-import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 
 const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
@@ -501,13 +501,11 @@ export default defineComponent({
     }
     function handlePasswordToggleClick (): void {
       passwordVisibleRef.value = !passwordVisibleRef.value
-      // fix focus does not at the end in new version Chrome
-      void nextTick(() => {
-        inputElRef.value?.blur()
-        inputElRef.value?.focus()
-      })
     }
     function handlePasswordToggleMousedown (e: MouseEvent): void {
+      e.preventDefault()
+    }
+    function handlePasswordToggleMouseup (e: MouseEvent): void {
       e.preventDefault()
     }
     function handleWrapperKeyDown (e: KeyboardEvent): void {
@@ -673,6 +671,7 @@ export default defineComponent({
       handleClear,
       handlePasswordToggleClick,
       handlePasswordToggleMousedown,
+      handlePasswordToggleMouseup,
       handleWrapperKeyDown,
       handleTextAreaMirrorResize,
       mergedTheme: themeRef,
@@ -938,11 +937,12 @@ export default defineComponent({
                 this.showCount && this.type !== 'textarea' ? (
                   <WordCount />
                 ) : null,
-                this.showPasswordToggle && this.type !== 'textarea' ? (
+                this.showPasswordToggle && this.type === 'password' ? (
                   <NBaseIcon
                     clsPrefix={mergedClsPrefix}
                     class={`${mergedClsPrefix}-base-input__Eye`}
                     onMousedown={this.handlePasswordToggleMousedown}
+                    onMouseup={this.handlePasswordToggleMouseup}
                     onClick={this.handlePasswordToggleClick}
                   >
                     {{
