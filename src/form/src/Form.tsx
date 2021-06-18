@@ -43,10 +43,6 @@ const formProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  requireMarkPlacement: {
-    type: String as PropType<'start' | 'end'>,
-    default: 'end'
-  },
   showFeedback: {
     type: Boolean,
     default: true
