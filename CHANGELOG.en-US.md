@@ -13,6 +13,7 @@
 
 - Fix `n-input` jitter when Chinese and English characters switch input, closes [#174](https://github.com/TuSimple/naive-ui/issues/174).
 - Fix `n-icon` use setup script, `$parent` is an empty object by default, and access `$parent.$options` will be `undefined`.
+- Fix `n-notification` position not correct.
 
 ## 2.12.0 (2020-06-16)
 
