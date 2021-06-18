@@ -70,6 +70,7 @@ export default c([
         text-decoration-color .3s var(--bezier);
     `),
     cE('input-el, textarea-el', `
+      line-height:var(--height);
       -webkit-appearance: none;
       width: 100%;
       min-width: 0;
