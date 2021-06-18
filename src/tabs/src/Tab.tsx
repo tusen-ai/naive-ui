@@ -1,7 +1,7 @@
 import { h, defineComponent, inject, computed } from 'vue'
 import { AddIcon } from '../../_internal/icons'
 import { NBaseClose, NBaseIcon } from '../../_internal'
-import { Render } from '../../_utils'
+import { render } from '../../_utils'
 import { tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
 
@@ -99,7 +99,7 @@ export default defineComponent({
             ) : typeof mergedTab === 'object' ? (
               mergedTab // VNode
             ) : (
-              <Render render={mergedTab ?? name} />
+              render(mergedTab ?? name)
             )}
           </span>
           {mergedClosable && this.type === 'card' ? (
