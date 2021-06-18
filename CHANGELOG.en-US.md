@@ -4,6 +4,10 @@
 
 ### Feats
 
+- `n-form`, `n-form-item` add require-mark-placement prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
+
+### Feats
+
 - `n-dropdown` support class attr, closes [#180](https://github.com/TuSimple/naive-ui/issues/180).
 
 ## 2.12.0 (2020-06-16)
