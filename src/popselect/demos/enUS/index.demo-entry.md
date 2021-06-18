@@ -17,6 +17,7 @@ multiple
 | --- | --- | --- | --- |
 | multiple | `boolean` | `false` |  |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` |  |
+| render-label | `(option: SelectOption \| SelectGroupOption) => VNodeChild` | `undefined` | Render function of all the options. |
 | scrollable | `boolean` | `false` |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | value | `string \| number \| Array<string \| number> \| null` | `null` |  |

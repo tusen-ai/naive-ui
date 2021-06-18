@@ -18,6 +18,7 @@ multiple
 | multiple | `boolean` | `false` |  |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` |  |
 | scrollable | `boolean` | `false` |  |
+| render-label | `(option: SelectOption \| SelectGroupOption) => VNodeChild` | `undefined` | 控制全部选项的渲染 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | value | `string \| number \| Array<string \| number> \| null` | `null` |  |
 | on-update:value | `(string \| number \| Array<string \| number> \| null) => void` | `undefined` |  |
