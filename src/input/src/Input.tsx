@@ -940,7 +940,7 @@ export default defineComponent({
                 this.showPasswordToggle && this.type === 'password' ? (
                   <NBaseIcon
                     clsPrefix={mergedClsPrefix}
-                    class={`${mergedClsPrefix}-base-input__eye`}
+                    class={`${mergedClsPrefix}-input__eye`}
                     onMousedown={this.handlePasswordToggleMousedown}
                     onMouseup={this.handlePasswordToggleMouseup}
                     onClick={this.handlePasswordToggleClick}

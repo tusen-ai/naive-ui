@@ -283,9 +283,9 @@ export default c([
       marginRight: '4px'
     }),
     cE('suffix', `
-      margin-left: '4px'
+      margin-left: 4px;
     `, [
-      cB('base-input__eye', `
+      cE('eye', `
       cursor: pointer;
     `)
     ]),
