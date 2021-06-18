@@ -13,10 +13,6 @@
 
 ## 2.12.0 (2020-06-16)
 
-### Feats
-
-- `n-input` 的 password 属性支持查看隐藏特性
-
 ### Breaking Changes
 
 - 移除了 `n-a` 的 `to` 属性。现在如果你需要把 `n-a` 用作 router-link，你可以参考文档网站

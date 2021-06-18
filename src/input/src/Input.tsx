@@ -18,7 +18,7 @@ import {
 import { useMergedState } from 'vooks'
 import { toRgbString, getAlphaString, getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
-import { NBaseClear, NBaseEye } from '../../_internal'
+import { NBaseClear } from '../../_internal'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createKey, ExtractPublicPropTypes } from '../../_utils'
@@ -160,7 +160,6 @@ export default defineComponent({
     const hoverRef = ref(false)
     const isComposingRef = ref(false)
     const activatedRef = ref(false)
-    const isShowPwd = ref(false)
     let syncSource: string | null = null
     // placeholder
     const mergedPlaceholderRef = computed<[string, string] | [string]>(() => {
@@ -583,9 +582,6 @@ export default defineComponent({
     function handleTextAreaMirrorResize (): void {
       updateTextAreaStyle()
     }
-    function handleShowPwd (): void {
-      isShowPwd.value = !isShowPwd.value
-    }
 
     let stopWatchMergedValue: WatchStopHandle | null = null
     watchEffect(() => {
@@ -645,7 +641,6 @@ export default defineComponent({
       textDecorationStyle: textDecorationStyleRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
-      isShowPwd,
       // methods
       handleCompositionStart,
       handleCompositionEnd,
@@ -662,7 +657,6 @@ export default defineComponent({
       handleClear,
       handleWrapperKeyDown,
       handleTextAreaMirrorResize,
-      handleShowPwd,
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
@@ -765,7 +759,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, isShowPwd } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         ref="wrapperElRef"
@@ -858,7 +852,7 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
                 ref="inputElRef"
-                type={isShowPwd ? 'input' : this.type}
+                type={this.type}
                 class={`${mergedClsPrefix}-input__input-el`}
                 tabindex={
                   this.passivelyActivated && !this.activated ? -1 : undefined
@@ -898,10 +892,7 @@ export default defineComponent({
             </div>
           )}
           {!this.pair &&
-          (this.$slots.suffix ||
-            this.clearable ||
-            this.showCount ||
-            this.type === 'password') ? (
+          (this.$slots.suffix || this.clearable || this.showCount) ? (
             <div class={`${mergedClsPrefix}-input__suffix`}>
               {[
                 renderSlot(this.$slots, 'suffix'),
@@ -916,12 +907,6 @@ export default defineComponent({
                 ) : null,
                 this.showCount && this.type !== 'textarea' ? (
                   <WordCount />
-                ) : null,
-                this.type === 'password' ? (
-                  <NBaseEye
-                    clsPrefix={mergedClsPrefix}
-                    onClick={this.handleShowPwd}
-                  />
                 ) : null
               ]}
             </div>
