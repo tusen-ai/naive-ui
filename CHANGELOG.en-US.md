@@ -21,6 +21,7 @@
 
 - Fix `n-cascader` text blur in win10 Chrome.
 - Fix `n-tree` click on indent won't trigger select in block line mode.
+- Fix `n-input` jitter when Chinese and English characters switch input.
 
 ## 2.11.12 (2020-06-16)
 
