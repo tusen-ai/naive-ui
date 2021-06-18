@@ -1,4 +1,4 @@
-import { rgba, composite, scaleColor, roundAlpha } from 'seemly'
+import { rgba, composite, scaleColor } from 'seemly'
 import type { ThemeCommonVars } from './light'
 import commonVariables from './_common'
 
@@ -129,6 +129,8 @@ const derived: ThemeCommonVars = {
   placeholderColorDisabled: overlay(base.alpha5),
   iconColor: overlay(base.alpha4),
   iconColorDisabled: overlay(base.alpha5),
+  iconColorHover: overlay(Number(base.alpha4) * 1.25),
+  iconColorPressed: overlay(Number(base.alpha4) * 0.8),
 
   opacity1: base.alpha1,
   opacity2: base.alpha2,
@@ -142,16 +144,13 @@ const derived: ThemeCommonVars = {
   // close
   closeColorHover: overlay(Number(base.alphaClose) * 1.25),
   closeColor: overlay(Number(base.alphaClose)),
-  closeColorPressed: scaleColor(overlay(base.alpha4), { alpha: 0.8 }),
+  closeColorPressed: overlay(Number(base.alphaClose) * 0.8),
   closeColorDisabled: overlay(base.alpha4),
-  closeOpacity: base.alphaClose,
-  closeOpacityHover: String(roundAlpha(Number(base.alphaClose) * 1.25)),
-  closeOpacityPressed: String(roundAlpha(Number(base.alphaClose) * 0.8)),
 
   // clear
   clearColor: overlay(base.alpha4),
   clearColorHover: scaleColor(overlay(base.alpha4), { alpha: 1.25 }),
-  clearColorPressed: scaleColor(overlay(base.alpha4), { alpha: 0.75 }),
+  clearColorPressed: scaleColor(overlay(base.alpha4), { alpha: 0.8 }),
 
   scrollbarColor: overlay(base.alphaScrollbar),
   scrollbarColorHover: overlay(base.alphaScrollbarHover),

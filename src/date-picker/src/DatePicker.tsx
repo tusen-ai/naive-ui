@@ -18,7 +18,7 @@ import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { format, getTime, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
-import { getAlphaString, happensIn, toRgbString } from 'seemly'
+import { happensIn } from 'seemly'
 import { InputInst, InputProps, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
@@ -613,10 +613,8 @@ export default defineComponent({
           '--arrow-color': arrowColor,
 
           // icon in trigger
-          '--icon-color': toRgbString(iconColor),
-          '--icon-color-disabled': toRgbString(iconColorDisabled),
-          '--icon-alpha': getAlphaString(iconColor),
-          '--icon-alpha-disabled': getAlphaString(iconColorDisabled)
+          '--icon-color': iconColor,
+          '--icon-color-disabled': iconColorDisabled
         }
       })
     }
@@ -754,13 +752,13 @@ export default defineComponent({
                           this.mergedShow
                             ? withDirectives(
                               this.type === 'datetime' ? (
-                                <DatetimePanel {...commonPanelProps} />
+                                  <DatetimePanel {...commonPanelProps} />
                               ) : this.type === 'daterange' ? (
-                                <DaterangePanel {...commonPanelProps} />
+                                  <DaterangePanel {...commonPanelProps} />
                               ) : this.type === 'datetimerange' ? (
-                                <DatetimerangePanel {...commonPanelProps} />
+                                  <DatetimerangePanel {...commonPanelProps} />
                               ) : (
-                                <DatePanel {...commonPanelProps} />
+                                  <DatePanel {...commonPanelProps} />
                               ),
                               [[clickoutside, this.handleClickOutside]]
                             )
