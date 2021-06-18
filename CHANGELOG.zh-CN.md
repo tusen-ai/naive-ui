@@ -1,10 +1,27 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-form`, `n-form-item` 增强 `show-require-mark` 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-dropdown` 支持 class 属性，关闭 [#180](https://github.com/TuSimple/naive-ui/issues/180)
+- `n-input` 新增 `show-password-toggle` 属性
+- `n-popselect` 支持 class 属性
+- `n-select` 新增 `render-label` 属性
+
+### Fixes
+
+- 修复 `n-input` 中英文字符切换输入时抖动的问题，关闭[#174](https://github.com/TuSimple/naive-ui/issues/174)
+- 修复 `n-icon` 在使用 setup script 时，`$parent` 默认是一个空对象，访问 `$parent.$options` 会是 `undefined`
+- 修复 `n-notification` 位置不正确
+- 修复 `n-message` 的 content & option 类型不正确
+
 ## 2.12.0 (2021-06-16)
 
 ### Breaking Changes
 
-- 移除了 `n-a` 的 `to` 属性。现在如果你需要把 `n-a` 用作 router-link，你可以参考文档网站。
+- 移除了 `n-a` 的 `to` 属性。现在如果你需要把 `n-a` 用作 router-link，你可以参考文档网站
 
 ### Feats
 

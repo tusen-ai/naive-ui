@@ -7,17 +7,17 @@
   <n-input placeholder="搜索">
     <template #prefix>
       <n-icon>
-        <search-outline />
+        <flash-icon />
       </n-icon>
     </template>
   </n-input>
   <n-input round placeholder="100,000,000">
-    <template #suffix> 元 </template>
+    <template #suffix>元</template>
   </n-input>
   <n-input round placeholder="搜索">
     <template #suffix>
       <n-icon>
-        <search-outline />
+        <flash-icon />
       </n-icon>
     </template>
   </n-input>
@@ -25,11 +25,11 @@
 ```
 
 ```js
-import { SearchOutline } from '@vicons/ionicons5'
+import { FlashOutline as FlashIcon } from '@vicons/ionicons5'
 
 export default {
   components: {
-    SearchOutline
+    FlashIcon
   }
 }
 ```

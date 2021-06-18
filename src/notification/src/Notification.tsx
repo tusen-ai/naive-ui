@@ -8,7 +8,7 @@ import {
   CSSProperties
 } from 'vue'
 import { getPadding } from 'seemly'
-import { createKey, keysOf, render as Render } from '../../_utils'
+import { createKey, keysOf, render } from '../../_utils'
 import { NBaseIcon, NBaseClose } from '../../_internal'
 import {
   InfoIcon,
@@ -144,7 +144,7 @@ export default defineComponent({
         {this.showAvatar ? (
           <div class={`${mergedClsPrefix}-notification__avatar`}>
             {this.avatar ? (
-              <Render render={this.avatar} />
+              render(this.avatar)
             ) : this.type !== 'default' ? (
               <NBaseIcon clsPrefix={mergedClsPrefix}>
                 {{ default: () => iconMap[this.type] }}
@@ -162,17 +162,17 @@ export default defineComponent({
         <div ref="bodyRef" class={`${mergedClsPrefix}-notification-main`}>
           {this.title ? (
             <div class={`${mergedClsPrefix}-notification-main__header`}>
-              <Render render={this.title} />
+              {render(this.title)}
             </div>
           ) : null}
           {this.description ? (
             <div class={`${mergedClsPrefix}-notification-main__description`}>
-              <Render render={this.description} />
+              {render(this.description)}
             </div>
           ) : null}
           {this.content ? (
             <pre class={`${mergedClsPrefix}-notification-main__content`}>
-              <Render render={this.content} />
+              {render(this.content)}
             </pre>
           ) : null}
           {this.meta || this.action ? (
@@ -181,14 +181,14 @@ export default defineComponent({
                 <div
                   class={`${mergedClsPrefix}-notification-main-footer__meta`}
                 >
-                  <Render render={this.meta} />
+                  {render(this.meta)}
                 </div>
               ) : null}
               {this.action ? (
                 <div
                   class={`${mergedClsPrefix}-notification-main-footer__action`}
                 >
-                  <Render render={this.action} />
+                  {render(this.action)}
                 </div>
               ) : null}
             </div>

@@ -56,24 +56,24 @@ max-tag-count
 
 ### SelectOption Properties
 
-| Name     | Type                              | Description                  |
-| -------- | --------------------------------- | ---------------------------- |
-| class    | `string`                          |                              |
-| disabled | `boolean`                         |                              |
-| label    | `string`                          |                              |
-| render   | `(option: SelectOption) => VNode` |                              |
-| style    | `string`                          |                              |
-| value    | `string \| number`                | Should be unique in options. |
+| Name | Type | Description |
+| --- | --- | --- |
+| class | `string` |  |
+| disabled | `boolean` |  |
+| label | `string` |  |
+| render | `(option: SelectOption, selected: boolean) => VNodeChild` |  |
+| style | `string` |  |
+| value | `string \| number` | Should be unique in options. |
 
 ### SelectGroupOption Properties
 
-| Name     | Type                              | Description                 |
-| -------- | --------------------------------- | --------------------------- |
-| children | `Array<SelectOption>`             |                             |
-| label    | `string`                          |                             |
-| key      | `string \| number`                | hould be unique in options. |
-| render   | `(option: SelectOption) => VNode` |                             |
-| type     | `'group'`                         |                             |
+| Name | Type | Description |
+| --- | --- | --- |
+| children | `Array<SelectOption>` |  |
+| label | `string` |  |
+| key | `string \| number` | hould be unique in options. |
+| render | `(option: SelectGroupOption) => VNodeChild` |  |
+| type | `'group'` |  |
 
 ## Slots
 

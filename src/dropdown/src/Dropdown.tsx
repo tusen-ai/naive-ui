@@ -9,12 +9,15 @@ import {
   provide,
   CSSProperties,
   InjectionKey,
-  Ref
+  Ref,
+  mergeProps
 } from 'vue'
 import { createTreeMate, Key, TreeMateOptions, TreeNode } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
 import { FollowerPlacement } from 'vueuc'
+import type { InternalRenderBody } from '../../popover/src/interface'
 import { popoverBaseProps } from '../../popover/src/Popover'
+import type { PopoverInternalProps } from '../../popover/src/Popover'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NPopover } from '../../popover'
@@ -306,7 +309,6 @@ export default defineComponent({
           padding,
           dividerColor,
           borderRadius,
-          boxShadow,
           optionOpacityDisabled,
           [createKey('optionIconSuffixWidth', size)]: optionIconSuffixWidth,
           [createKey('optionSuffixWidth', size)]: optionSuffixWidth,
@@ -321,7 +323,6 @@ export default defineComponent({
           '--font-size': fontSize,
           '--padding': padding,
           '--border-radius': borderRadius,
-          '--box-shadow': boxShadow,
           '--option-height': optionHeight,
           '--option-prefix-width': optionPrefixWidth,
           '--option-icon-prefix-width': optionIconPrefixWidth,
@@ -363,28 +364,43 @@ export default defineComponent({
     }
   },
   render () {
-    return h(
-      NPopover,
-      keep(this.$props, popoverPropKeys, {
-        show: this.mergedShow,
-        onUpdateShow: this.doUpdateShow,
-        showArrow: false,
-        raw: true,
-        shadow: false,
-        theme: this.mergedTheme.peers.Popover,
-        themeOverrides: this.mergedTheme.peerOverrides.Popover,
-        internalExtraClass: 'dropdown'
-      }),
-      {
-        trigger: this.$slots.default,
-        default: () => {
-          return h(NDropdownMenu, {
-            clsPrefix: this.mergedClsPrefix,
-            tmNodes: this.tmNodes,
-            style: this.cssVars as CSSProperties
-          })
-        }
+    const renderPopoverBody: InternalRenderBody = (
+      className,
+      ref,
+      style,
+      onMouseenter,
+      onMouseleave
+    ) => {
+      const { mergedClsPrefix } = this
+      const dropdownProps = {
+        ref,
+        class: [className, `${mergedClsPrefix}-dropdown`],
+        clsPrefix: mergedClsPrefix,
+        tmNodes: this.tmNodes,
+        style: [style, this.cssVars as CSSProperties],
+        onMouseenter,
+        onMouseleave
       }
+      return h(
+        NDropdownMenu,
+        mergeProps(this.$attrs, dropdownProps) as typeof dropdownProps
+      )
+    }
+    const { mergedTheme } = this
+    const popoverProps: PopoverInternalProps = {
+      show: this.mergedShow,
+      theme: mergedTheme.peers.Popover,
+      themeOverrides: mergedTheme.peerOverrides.Popover,
+      internalRenderBody: renderPopoverBody,
+      onUpdateShow: this.doUpdateShow
+    }
+    return (
+      <NPopover {...keep(this.$props, popoverPropKeys)} {...popoverProps}>
+        {{
+          trigger: this.$slots.default,
+          _: true
+        }}
+      </NPopover>
     )
   }
 })

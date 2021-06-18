@@ -2,7 +2,7 @@
 
 ```html
 <n-popselect v-model:value="value" :options="options" size="medium" scrollable>
-  <n-tag style="margin-right: 8px;">{{ value || 'Popselect' }}</n-tag>
+  <n-button style="margin-right: 8px;">{{ value || 'Popselect' }}</n-button>
 </n-popselect>
 ```
 

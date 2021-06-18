@@ -4,7 +4,9 @@
 
 ```html
 <n-popselect v-model:value="value" multiple :options="options">
-  <n-tag>{{ (Array.isArray(value) && value.length) ? value : '没了' }}</n-tag>
+  <n-button
+    >{{ (Array.isArray(value) && value.length) ? value : '没了' }}</n-button
+  >
 </n-popselect>
 ```
 

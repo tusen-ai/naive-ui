@@ -1,5 +1,5 @@
 import { mount, VueWrapper } from '@vue/test-utils'
-import { h } from 'vue'
+import { h, Fragment } from 'vue'
 import { NSpace } from '../index'
 
 const getChildrenNode = (wrapper: VueWrapper<any>): any[] => {
@@ -51,8 +51,9 @@ describe('n-space', () => {
       render () {
         return (
           <NSpace vertical>
-            <div>1</div>
-            <div>2</div>
+            {{
+              default: () => [<div>1</div>, <div>2</div>]
+            }}
           </NSpace>
         )
       }
@@ -66,8 +67,14 @@ describe('n-space', () => {
       render () {
         return (
           <NSpace>
-            text1<span>text1</span>
-            text1
+            {{
+              default: () => (
+                <>
+                  text1<span>text1</span>
+                  text1
+                </>
+              )
+            }}
           </NSpace>
         )
       }
@@ -85,8 +92,9 @@ describe('n-space', () => {
         render () {
           return (
             <NSpace justify={pos}>
-              <div>1</div>
-              <div>2</div>
+              {{
+                default: () => [<div>1</div>, <div>2</div>]
+              }}
             </NSpace>
           )
         }
@@ -102,7 +110,7 @@ describe('n-space', () => {
     const wrapper = mount(
       {
         render () {
-          return <NSpace>div</NSpace>
+          return <NSpace>{{ default: () => 'div' }}</NSpace>
         }
       },
       {

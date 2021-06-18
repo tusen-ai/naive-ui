@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-form`, `n-form-item` enhance `show-require-mark` prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-dropdown` support class attr, closes [#180](https://github.com/TuSimple/naive-ui/issues/180).
+- `n-input` add `show-password-toggle` prop.
+- `n-popselect` support class attr.
+- `n-select` add `render-label` prop.
+
+### Fixes
+
+- Fix `n-input` jitter when Chinese and English characters switch input, closes [#174](https://github.com/TuSimple/naive-ui/issues/174).
+- Fix `n-icon` use setup script, `$parent` is an empty object by default, and access `$parent.$options` will be `undefined`.
+- Fix `n-notification` position not correct.
+- Fix `n-message` content & option type not correct.
+
 ## 2.12.0 (2021-06-16)
 
 ### Breaking Changes

@@ -30,6 +30,7 @@ count
 | clearable | `boolean` | `false` |  |
 | default-value | `string \| [string, string] \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
+| show-password-toggle | `boolean` | `false` | 控制密码的显示隐藏 |
 | maxlength | `number` | `undefined` |  |
 | minlength | `number` | `undefined` |  |
 | pair | `boolean` | `false` | 是否输入成对的值 |
