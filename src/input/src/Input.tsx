@@ -499,14 +499,12 @@ export default defineComponent({
     function handleMouseLeave (): void {
       hoverRef.value = false
     }
+    function handlePasswordToggleClick (): void {
+      passwordVisibleRef.value = !passwordVisibleRef.value
+    }
     function handlePasswordToggleMousedown (e: MouseEvent): void {
       e.preventDefault()
-      passwordVisibleRef.value = !passwordVisibleRef.value
-      // fix focus does not at the end in new version Chrome
-      void nextTick(() => {
-        inputElRef.value?.blur()
-        inputElRef.value?.focus()
-      })
+      handlePasswordToggleClick()
     }
     function handleWrapperKeyDown (e: KeyboardEvent): void {
       props.onKeydown?.(e)
@@ -771,7 +769,7 @@ export default defineComponent({
           '--suffix-text-color': suffixTextColor
         }
       }),
-      showPwdVisibleToggle: computed(() => {
+      showPasswordToggle: computed(() => {
         return props.showPasswordToggle && !props.disabled
       })
     }
@@ -935,7 +933,7 @@ export default defineComponent({
                 this.showCount && this.type !== 'textarea' ? (
                   <WordCount />
                 ) : null,
-                this.showPwdVisibleToggle && this.type !== 'textarea' ? (
+                this.showPasswordToggle && this.type !== 'textarea' ? (
                   <NBaseIcon
                     clsPrefix={mergedClsPrefix}
                     class={`${mergedClsPrefix}-base-input__Eye`}
