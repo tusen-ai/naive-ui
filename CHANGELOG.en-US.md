@@ -6,6 +6,10 @@
 
 - `n-dropdown` support class attr, closes [#180](https://github.com/TuSimple/naive-ui/issues/180).
 
+### Fixes
+
+- Fix `n-icon` use setup script, `$parent` is an empty object by default, and access `$parent.$options` will be `undefined`.
+
 ## 2.12.0 (2020-06-16)
 
 ### Breaking Changes

@@ -6,6 +6,10 @@
 
 - `n-dropdown` 支持 class 属性，关闭 [#180](https://github.com/TuSimple/naive-ui/issues/180)
 
+### Fixes
+
+- 修复 `n-icon` 在使用 setup script 时，`$parent` 默认是一个空对象，访问 `$parent.$options` 会是 `undefined`
+
 ## 2.12.0 (2020-06-16)
 
 ### Breaking Changes
