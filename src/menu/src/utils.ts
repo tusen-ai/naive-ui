@@ -40,7 +40,8 @@ export function itemRenderer (
       keep(props, submenuPropKeys, {
         key,
         rawNodes: tmNode.rawNode.children,
-        tmNodes: tmNode.children
+        tmNodes: tmNode.children,
+        tmNode
       })
     )
   } else {

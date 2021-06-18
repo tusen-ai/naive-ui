@@ -1,7 +1,9 @@
-import { computed, defineComponent, h, PropType } from 'vue'
+import { computed, defineComponent, h, inject, PropType } from 'vue'
 import { ChevronDownFilledIcon } from '../../_internal/icons'
 import { render as Render } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
+import { menuInjectionKey } from './Menu'
+import { TmNode } from './interface'
 
 export default defineComponent({
   name: 'MenuOptionContent',
@@ -31,10 +33,17 @@ export default defineComponent({
       type: String,
       required: true
     },
-    onClick: Function as PropType<(e: MouseEvent) => void>
+    onClick: Function as PropType<(e: MouseEvent) => void>,
+    tmNode: {
+      type: Object as PropType<TmNode>,
+      required: true
+    }
   },
   setup (props) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const { props: menuProps } = inject(menuInjectionKey)!
     return {
+      menuProps,
       style: computed(() => {
         const { paddingLeft } = props
         return { paddingLeft: paddingLeft && `${paddingLeft}px` }
@@ -51,7 +60,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { clsPrefix } = this
+    const { clsPrefix, tmNode } = this
     return (
       <div
         onClick={this.onClick}
@@ -77,7 +86,11 @@ export default defineComponent({
           </div>
         ) : null}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">
-          <Render render={this.title} />
+          {this.menuProps.renderLabel && typeof this.title !== 'function' ? (
+            this.menuProps.renderLabel(tmNode.rawNode)
+          ) : (
+            <Render render={this.title} />
+          )}
           {this.extra ? (
             <span class={`${clsPrefix}-menu-item-content-header__extra`}>
               {' '}

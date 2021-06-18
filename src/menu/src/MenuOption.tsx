@@ -71,7 +71,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, tmNode } = this
     return (
       <div
         role="menuitem"
@@ -94,6 +94,7 @@ export default defineComponent({
             default: () => h(render, { render: this.title }),
             trigger: () => (
               <NMenuOptionContent
+                tmNode={tmNode}
                 clsPrefix={mergedClsPrefix}
                 paddingLeft={this.paddingLeft}
                 iconMarginRight={this.iconMarginRight}
