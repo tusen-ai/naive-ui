@@ -39,6 +39,7 @@ export default c([
   `, [
     c('>', [
       cB('scrollbar', `
+        width: initial;
         overflow: visible;
         height: -moz-fit-content !important;
         height: fit-content !important;
