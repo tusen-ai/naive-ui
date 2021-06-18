@@ -22,6 +22,8 @@
 
 ## 2.12.1 (2021-06-19)
 
+- `n-menu` 新增 `renderLabel` 属性，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
+
 ### Feats
 
 - `n-form`, `n-form-item` 增强 `show-require-mark` 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
