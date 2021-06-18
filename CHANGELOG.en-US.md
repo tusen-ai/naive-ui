@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.12.0 (2020-06-16)
+## 2.12.0 (2021-06-16)
 
 ### Breaking Changes
 
@@ -16,7 +16,7 @@
 - Fix `n-cascader` text blur in win10 Chrome.
 - Fix `n-tree` click on indent won't trigger select in block line mode.
 
-## 2.11.12 (2020-06-16)
+## 2.11.12 (2021-06-16)
 
 ### Feats
 
