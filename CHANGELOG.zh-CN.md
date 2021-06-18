@@ -5,9 +5,6 @@
 ### Feats
 
 - `n-form`, `n-form-item` 增强 show-require-mark 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
-
-### Feats
-
 - `n-dropdown` 支持 class 属性，关闭 [#180](https://github.com/TuSimple/naive-ui/issues/180)
 
 ## 2.12.0 (2020-06-16)
