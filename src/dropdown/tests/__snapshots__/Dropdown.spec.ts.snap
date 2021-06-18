@@ -2,7 +2,7 @@
 
 exports[`n-dropdown inverted style 1`] = `
 <div
-  class="n-dropdown-menu n-popover n-dropdown"
+  class="n-dropdown-menu n-popover n-popover--shadow n-dropdown"
   style="--box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05); --bezier: cubic-bezier(.4, 0, .2, 1); --bezier-ease-in: cubic-bezier(.4, 0, 1, 1); --bezier-ease-out: cubic-bezier(0, 0, .2, 1); --font-size: 14px; --text-color: rgb(51, 54, 57); --color: rgb(0, 20, 40); --border-radius: 3px; --arrow-height: 6px; --arrow-offset: 10px; --arrow-offset-vertical: 10px; --padding: 4px 0; --space: 6px; --space-arrow: 10px; --option-height: 34px; --option-prefix-width: 14px; --option-icon-prefix-width: 36px; --option-suffix-width: 14px; --option-icon-suffix-width: 32px; --option-icon-size: 16px; --divider-color: rgb(239, 239, 245); --option-opacity-disabled: 0.5; --option-color-hover: #18a058; --option-color-active: #18a058; --option-text-color: #BBB; --option-text-color-hover: #FFF; --option-text-color-active: #FFF; --option-text-color-child-active: #FFF; --prefix-color: #BBB; --suffix-color: #BBB; --group-header-text-color: #AAA;"
 >
   
@@ -224,7 +224,7 @@ exports[`n-dropdown inverted style 1`] = `
 
 exports[`n-dropdown shows menu after click 1`] = `
 <div
-  class="n-dropdown-menu n-popover n-dropdown"
+  class="n-dropdown-menu n-popover n-popover--shadow n-dropdown"
   style="--box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05); --bezier: cubic-bezier(.4, 0, .2, 1); --bezier-ease-in: cubic-bezier(.4, 0, 1, 1); --bezier-ease-out: cubic-bezier(0, 0, .2, 1); --font-size: 14px; --text-color: rgb(51, 54, 57); --color: #fff; --border-radius: 3px; --arrow-height: 6px; --arrow-offset: 10px; --arrow-offset-vertical: 10px; --padding: 4px 0; --space: 6px; --space-arrow: 10px; --option-height: 34px; --option-prefix-width: 14px; --option-icon-prefix-width: 36px; --option-suffix-width: 14px; --option-icon-suffix-width: 32px; --option-icon-size: 16px; --divider-color: rgb(239, 239, 245); --option-opacity-disabled: 0.5; --option-color-hover: rgb(243, 243, 245); --option-color-active: rgba(24, 160, 88, 0.1); --option-text-color: rgb(51, 54, 57); --option-text-color-hover: rgb(51, 54, 57); --option-text-color-active: #18a058; --option-text-color-child-active: #18a058; --prefix-color: rgb(51, 54, 57); --suffix-color: rgb(51, 54, 57); --group-header-text-color: rgb(158, 164, 170);"
 >
   

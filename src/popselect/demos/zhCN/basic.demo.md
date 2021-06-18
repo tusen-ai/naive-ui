@@ -1,8 +1,8 @@
 # 基础用法
 
 ```html
-<n-popselect v-model:value="value" :options="options">
-  <n-tag>{{ value || '弹出选择' }}</n-tag>
+<n-popselect v-model:value="value" :options="options" trigger="click">
+  <n-button>{{ value || '弹出选择' }}</n-button>
 </n-popselect>
 ```
 

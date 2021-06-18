@@ -28,3 +28,19 @@
 #### 注意事项
 
 - `feat(xxx)` 必须是组件，不能加 `n`，`feat(input)` ✅，`feat(n-input)` ❌
+
+## Changelog
+
+- 新增属性
+
+```
+- `n-xxx` add xxx prop.
+- `n-xxx` 新增 xxx 属性
+```
+
+- 修复 Bug
+
+```
+- Fix `n-xxx` ...
+- 修复 `n-xxx` ...
+```

@@ -309,7 +309,6 @@ export default defineComponent({
           padding,
           dividerColor,
           borderRadius,
-          boxShadow,
           optionOpacityDisabled,
           [createKey('optionIconSuffixWidth', size)]: optionIconSuffixWidth,
           [createKey('optionSuffixWidth', size)]: optionSuffixWidth,
@@ -324,7 +323,6 @@ export default defineComponent({
           '--font-size': fontSize,
           '--padding': padding,
           '--border-radius': borderRadius,
-          '--box-shadow': boxShadow,
           '--option-height': optionHeight,
           '--option-prefix-width': optionPrefixWidth,
           '--option-icon-prefix-width': optionIconPrefixWidth,
@@ -396,8 +394,13 @@ export default defineComponent({
       internalRenderBody: renderPopoverBody,
       onUpdateShow: this.doUpdateShow
     }
-    return h(NPopover, keep(this.$props, popoverPropKeys, popoverProps), {
-      trigger: this.$slots.default
-    })
+    return (
+      <NPopover {...keep(this.$props, popoverPropKeys)} {...popoverProps}>
+        {{
+          trigger: this.$slots.default,
+          _: true
+        }}
+      </NPopover>
+    )
   }
 })

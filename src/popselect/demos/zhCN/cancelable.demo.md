@@ -4,7 +4,7 @@
 
 ```html
 <n-popselect v-model:value="value" cancelable :options="options">
-  <n-tag>{{ value || '弹出选择' }}</n-tag>
+  <n-button>{{ value || '弹出选择' }}</n-button>
 </n-popselect>
 ```
 
