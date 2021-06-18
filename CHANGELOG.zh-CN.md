@@ -9,6 +9,7 @@
 ### Fixes
 
 - 修复 `n-input` 中英文字符切换输入时抖动的问题，关闭[#174](https://github.com/TuSimple/naive-ui/issues/174).
+- 修复 `n-icon` 在使用 setup script 时，`$parent` 默认是一个空对象，访问 `$parent.$options` 会是 `undefined`
 
 ## 2.12.0 (2020-06-16)
 
