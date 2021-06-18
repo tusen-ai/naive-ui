@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.12.1
 
 - `n-menu` add `renderLabel` prop, closes [#84](https://github.com/TuSimple/naive-ui/issues/84)
 ### Feats
