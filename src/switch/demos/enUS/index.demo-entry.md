@@ -1,6 +1,6 @@
 # Switch
 
-I have a Nintendo Switch, but have no time to play. It awalys make me recall the time when I played NDS, childhood is a happy time.
+I have a Nintendo Switch, but have no time to play. It always make me recall the time when I played NDS, childhood is a happy time.
 
 ## Demos
 
