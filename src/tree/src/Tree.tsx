@@ -521,6 +521,8 @@ export default defineComponent({
         window.clearTimeout(expandTimerId)
         expandTimerId = null
       }
+      // Don't expand leaf node.
+      if (node.isLeaf) return
       nodeKeyToBeExpanded = node.key
       const expand = (): void => {
         if (nodeKeyToBeExpanded !== node.key) return
