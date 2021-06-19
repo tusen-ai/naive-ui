@@ -30,7 +30,7 @@ footerslot
 | disabled | `boolean` | `false` | 是否禁用 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date Picker 的尺寸 |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` | Date Picker 的类型 |
-| value | `number \| [number, number] \| null` | `undefined` | Date Picker 的选中值 |
+| value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |
 | on-focus | `() => void` | `undefined` | 用户 focus 时执行的回调 |
 
