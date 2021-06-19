@@ -28,7 +28,7 @@ footerslot
 | clearable | `boolean` | `false` | 是否支持清除 |
 | default-value | `number \| [number, number] \| null` | `null` | 默认被选中的日期的时间戳 |
 | disabled | `boolean` | `false` | 是否禁用 |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date Picker 的尺寸 |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` | Date Picker 的类型 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |
