@@ -80,7 +80,7 @@ footerslot
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
 | ranges | `Record<string, [number, number]>` | `undefined` | Customize ranges. |
 | separator | `string` | `'to'` | The separator between the start input and the end input. |
-| start-placeholder | `string` | `'Start Date and Time'` | The prompt information of the start select in dateTimeRange. |
+| start-placeholder | `string` | `'Start Date and Time'` | The prompt information of the start input. |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` | Callback when date is selected. |
 
 ## Slots
