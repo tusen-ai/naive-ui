@@ -836,13 +836,9 @@ export default defineComponent({
                 ref="textareaElRef"
                 class={`${mergedClsPrefix}-input__textarea-el`}
                 autofocus={this.autofocus}
-                // @ts-expect-error
                 name={this.name}
-                // @ts-expect-error
                 autocomplete={this.autocomplete}
-                // @ts-expect-error
                 autocapitalize={this.autocapitalize}
-                // @ts-expect-error
                 autocorrect={this.autocorrect}
                 rows={Number(this.rows)}
                 placeholder={this.placeholder as string | undefined}
@@ -885,13 +881,9 @@ export default defineComponent({
           ) : (
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
-                // @ts-expect-error
                 name={this.name}
-                // @ts-expect-error
                 autocomplete={this.autocomplete}
-                // @ts-expect-error
                 autocapitalize={this.autocapitalize}
-                // @ts-expect-error
                 autocorrect={this.autocorrect}
                 ref="inputElRef"
                 type={

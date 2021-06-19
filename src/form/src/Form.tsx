@@ -130,13 +130,9 @@ export default defineComponent({
           this.inline && `${mergedClsPrefix}-form--inline`
         ]}
         onSubmit={this.onSubmit}
-        // @ts-expect-error
         name={this.name}
-        // @ts-expect-error
         autocomplete={this.autocomplete}
-        // @ts-expect-error
         autocapitalize={this.autocapitalize}
-        // @ts-expect-error
         autocorrect={this.autocorrect}
       >
         {this.$slots}
