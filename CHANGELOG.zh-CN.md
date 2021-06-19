@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.12.2
 
 ### Fixes
 
