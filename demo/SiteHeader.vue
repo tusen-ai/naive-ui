@@ -10,6 +10,10 @@
           mode="horizontal"
           :value="menuValue"
           :options="menuOptions"
+<<<<<<< HEAD
+=======
+          @update:value="handleMenuUpdateValue"
+>>>>>>> 29c2ee823 (fix: optimization)
           :render-label="renderMenuLabel"
         />
       </div>
@@ -330,7 +334,7 @@ export default {
       router.push(/^(\/[^/]+){2}/.exec(route.path)[0])
     }
 
-    const handleMenuOption = (option) => {
+    const renderMenuLabel = (option) => {
       if (typeof option.title === 'function') {
         return option.title()
       }
