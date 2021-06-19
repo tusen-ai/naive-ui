@@ -1,6 +1,6 @@
 import { computed, defineComponent, h, inject, PropType } from 'vue'
 import { ChevronDownFilledIcon } from '../../_internal/icons'
-import { render as Render } from '../../_utils'
+import { render } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
 import { menuInjectionKey } from './Menu'
 import { TmNode } from './interface'
@@ -82,19 +82,17 @@ export default defineComponent({
             style={this.iconStyle}
             role="none"
           >
-            <Render render={this.icon} />
+            {render(this.icon)}
           </div>
         ) : null}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">
-          {this.menuProps.renderLabel && typeof this.title !== 'function' ? (
-            this.menuProps.renderLabel(tmNode.rawNode)
-          ) : (
-            <Render render={this.title} />
-          )}
+          {this.menuProps.renderLabel && typeof this.title !== 'function'
+            ? this.menuProps.renderLabel(tmNode.rawNode)
+            : render(this.title)}
           {this.extra ? (
             <span class={`${clsPrefix}-menu-item-content-header__extra`}>
               {' '}
-              <Render render={this.extra} />
+              {render(this.extra)}
             </span>
           ) : null}
         </div>

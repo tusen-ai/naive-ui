@@ -1,21 +1,31 @@
 # CHANGELOG
 
-## Pending
-
-### Feats
-
-- `n-menu` add `renderLabel` prop, closes [#84](https://github.com/TuSimple/naive-ui/issues/84)
-- `n-form`, `n-form-item` enhance show-require-mark prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
-- `n-dropdown` support class attr, closes [#180](https://github.com/TuSimple/naive-ui/issues/180).
-- `n-input` add `show-password-toggle` prop.
-- `n-popselect` support class attr.
+## 2.12.2
 
 ### Fixes
 
-- Fix `n-input` jitter when Chinese and English characters switch input, closes [#174](https://github.com/TuSimple/naive-ui/issues/174).
-- Fix `n-icon` use setup script, `$parent` is an empty object by default, and access `$parent.$options` will be `undefined`.
+- Fix `n-form-item` always show require mark.
+- `n-menu` add `renderLabel` prop, closes [#84](https://github.com/TuSimple/naive-ui/issues/84)
 
-## 2.12.0 (2020-06-16)
+## 2.12.1
+
+### Feats
+
+- `n-form`, `n-form-item` enhance `show-require-mark` prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-dropdown` support class attr, closes [#180](https://github.com/TuSimple/naive-ui/issues/180).
+- `n-input` add `show-password-toggle` prop.
+- `n-popselect` support class attr.
+- `n-select` add `render-label` prop.
+- `n-popselect` add `render-label` prop.
+
+### Fixes
+
+- Fix `n-input` baseline shifts when mix Chinese and English characters in input, closes [#174](https://github.com/TuSimple/naive-ui/issues/174).
+- Fix `n-icon` use setup script, `$parent` is an empty object by default, and access `$parent.$options` will be `undefined`.
+- Fix `n-notification` position not correct.
+- Fix `n-message` content & option type not correct.
+
+## 2.12.0 (2021-06-16)
 
 ### Breaking Changes
 
@@ -31,7 +41,7 @@
 - Fix `n-cascader` text blur in win10 Chrome.
 - Fix `n-tree` click on indent won't trigger select in block line mode.
 
-## 2.11.12 (2020-06-16)
+## 2.11.12 (2021-06-16)
 
 ### Feats
 

@@ -5,7 +5,10 @@ import {
   defineComponent,
   Transition,
   PropType,
-  VNode
+  VNode,
+  warn,
+  VNodeChild,
+  Ref
 } from 'vue'
 import { internalSelectionMenuInjectionKey } from './SelectMenu'
 import { TreeNode } from 'treemate'
@@ -13,6 +16,8 @@ import { useMemo } from 'vooks'
 import type { SelectBaseOption } from '../../../select/src/interface'
 import { CheckmarkIcon } from '../../icons'
 import NBaseIcon from '../../icon'
+import { render } from '../../../_utils'
+import { RenderLabelImpl } from './interface'
 
 const checkMarkIcon = h(CheckmarkIcon)
 
@@ -49,11 +54,18 @@ export default defineComponent({
     }
   },
   setup (props) {
+    if (__DEV__ && props.tmNode.rawNode.render) {
+      warn(
+        'select',
+        'render prop in select option is deprecated, please use `render-label` prop in `n-select`.'
+      )
+    }
     const {
       valueRef,
       pendingTmNodeRef,
       multipleRef,
       valueSetRef,
+      renderLabelRef,
       handleOptionClick,
       handleOptionMouseEnter
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -101,6 +113,7 @@ export default defineComponent({
           return value === optionValue
         }
       }),
+      renderLabel: renderLabelRef as Ref<RenderLabelImpl | undefined>,
       handleMouseMove,
       handleMouseEnter,
       handleClick
@@ -114,17 +127,21 @@ export default defineComponent({
       isPending,
       isGrouped,
       multiple,
+      renderLabel,
       handleClick,
       handleMouseEnter,
       handleMouseMove
     } = this
     const showCheckMark = multiple && isSelected
-    const children = rawNode.render
-      ? [
-          rawNode.render(rawNode, isSelected),
-          renderCheckMark(showCheckMark, clsPrefix)
-        ]
-      : [rawNode.label, renderCheckMark(showCheckMark, clsPrefix)]
+    const checkmark = renderCheckMark(showCheckMark, clsPrefix)
+    let children: VNodeChild[]
+    if (renderLabel) {
+      children = [renderLabel(rawNode, isSelected), checkmark]
+    } else {
+      children = rawNode.render
+        ? [rawNode.render(rawNode, isSelected), checkmark]
+        : [render(rawNode.label, rawNode, isSelected), checkmark]
+    }
     return (
       <div
         class={[

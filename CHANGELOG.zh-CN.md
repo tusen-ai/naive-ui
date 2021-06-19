@@ -1,21 +1,31 @@
 # CHANGELOG
 
-## Pending
+## 2.12.2
+
+### Fixes
+
+- 修复 `n-form-item` 始终展示必需的星号
+- `n-menu` 新增 `renderLabel` 属性，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
+
+## 2.12.1
 
 ### Feats
 
-- `n-menu` 新增 `renderLabel` 属性，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
-- `n-form`, `n-form-item` 增强 show-require-mark 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-form`, `n-form-item` 增强 `show-require-mark` 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
 - `n-dropdown` 支持 class 属性，关闭 [#180](https://github.com/TuSimple/naive-ui/issues/180)
 - `n-input` 新增 `show-password-toggle` 属性
 - `n-popselect` 支持 class 属性
+- `n-select` 新增 `render-label` 属性
+- `n-popselect` 新增 `render-label` 属性
 
 ### Fixes
 
 - 修复 `n-input` 中英文字符切换输入时抖动的问题，关闭[#174](https://github.com/TuSimple/naive-ui/issues/174)
 - 修复 `n-icon` 在使用 setup script 时，`$parent` 默认是一个空对象，访问 `$parent.$options` 会是 `undefined`
+- 修复 `n-notification` 位置不正确
+- 修复 `n-message` 的 content & option 类型不正确
 
-## 2.12.0 (2020-06-16)
+## 2.12.0 (2021-06-16)
 
 ### Breaking Changes
 
@@ -31,7 +41,7 @@
 - 修复 `n-cascader` 在 win10 Chrome 环境下文字模糊的问题
 - 修复 `n-tree` 在 block line 模式下点击缩进空白无法触发选择
 
-## 2.11.12 (2020-06-16)
+## 2.11.12 (2021-06-16)
 
 ### Feats
 

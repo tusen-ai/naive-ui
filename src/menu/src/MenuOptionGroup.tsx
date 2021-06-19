@@ -7,7 +7,7 @@ import {
   InjectionKey,
   inject
 } from 'vue'
-import { render as Render } from '../../_utils'
+import { render } from '../../_utils'
 import { useMenuChild, useMenuChildProps } from './use-menu-child'
 import type { MenuOptionGroupInjection } from './use-menu-child'
 import { itemRenderer } from './utils'
@@ -50,13 +50,8 @@ export default defineComponent({
                 : undefined
             }
           >
-            <Render render={props.title} />
-            {props.extra ? (
-              <>
-                {' '}
-                <Render render={props.extra} />
-              </>
-            ) : null}
+            {render(props.title)}
+            {props.extra ? <> {render(props.extra)}</> : null}
           </span>
           <div>{props.tmNodes.map((tmNode) => itemRenderer(tmNode))}</div>
         </div>

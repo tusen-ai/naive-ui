@@ -1,4 +1,4 @@
-import { PropType } from 'vue'
+import { PropType, VNodeChild } from 'vue'
 import { Key } from 'treemate'
 
 export const useMenuChildProps = {
@@ -12,6 +12,6 @@ export const useMenuChildProps = {
     type: Number,
     required: true
   },
-  title: [String, Function] as PropType<string | Function>,
-  extra: [String, Function] as PropType<string | Function>
+  title: [String, Function] as PropType<string | (() => VNodeChild)>,
+  extra: [String, Function] as PropType<string | (() => VNodeChild)>
 } as const

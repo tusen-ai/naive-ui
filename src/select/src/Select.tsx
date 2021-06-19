@@ -22,6 +22,7 @@ import {
 } from 'vueuc'
 import { useIsMounted, useMergedState, useCompitable } from 'vooks'
 import { clickoutside } from 'vdirs'
+import { RenderLabel } from '../../_internal/select-menu/src/interface'
 import { useTheme, useConfig, useLocale, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, call, useAdjustedTo, ExtractPublicPropTypes } from '../../_utils'
@@ -132,7 +133,7 @@ const selectProps = {
     type: Boolean,
     default: true
   },
-  // eslint-disable-next-line vue/prop-name-casing
+  renderLabel: Function as PropType<RenderLabel>,
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<OnUpdateValue> | undefined
   >,
@@ -770,6 +771,7 @@ export default defineComponent({
                               treeMate={this.treeMate}
                               multiple={this.multiple}
                               size="medium"
+                              renderLabel={this.renderLabel}
                               value={this.mergedValue}
                               style={this.cssVars}
                               onMenuToggleOption={this.handleToggleOption}

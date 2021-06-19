@@ -42,6 +42,7 @@ icon-button
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Button size. |
 | text | `boolean` | `false` | Whether to display as a text button. |
 | type | `'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Button type. |
+| tag | `string` | `'button'` | What tag need the button be rendered as. |
 
 ### Button Group Props
 

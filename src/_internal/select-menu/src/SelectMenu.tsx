@@ -36,7 +36,7 @@ import NSelectOption from './SelectOption'
 import NSelectGroupHeader from './SelectGroupHeader'
 import style from './styles/index.cssr'
 import { internalSelectMenuLight, InternalSelectMenuTheme } from '../styles'
-import { Size } from './interface'
+import { RenderLabel, Size } from './interface'
 
 export interface InternalSelectMenuInjection {
   handleOptionMouseEnter: (
@@ -48,6 +48,7 @@ export interface InternalSelectMenuInjection {
   pendingTmNodeRef: Ref<TreeNode<SelectBaseOption> | null>
   multipleRef: Ref<boolean>
   valueRef: Ref<string | number | Array<string | number> | null>
+  renderLabelRef: Ref<RenderLabel | undefined>
 }
 
 export const internalSelectionMenuInjectionKey: InjectionKey<InternalSelectMenuInjection> =
@@ -100,6 +101,7 @@ export default defineComponent({
     },
     loading: Boolean,
     focusable: Boolean,
+    renderLabel: Function as PropType<RenderLabel>,
     onMousedown: Function as PropType<(e: MouseEvent) => void>,
     onScroll: Function as PropType<(e: Event) => void>,
     onFocus: Function as PropType<(e: FocusEvent) => void>,
@@ -276,6 +278,7 @@ export default defineComponent({
       valueSetRef,
       multipleRef: toRef(props, 'multiple'),
       valueRef: toRef(props, 'value'),
+      renderLabelRef: toRef(props, 'renderLabel'),
       pendingTmNodeRef: pendingNodeRef
     })
     onMounted(() => {

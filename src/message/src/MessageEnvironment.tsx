@@ -12,6 +12,7 @@ export default defineComponent({
       default: 3000
     },
     onAfterLeave: Function,
+    onLeave: Function,
     internalKey: {
       type: String,
       required: true
@@ -47,12 +48,8 @@ export default defineComponent({
       hide()
     }
     function handleAfterLeave (): void {
-      const {
-        onAfterLeave,
-        onInternalAfterLeave,
-        onAfterHide,
-        internalKey
-      } = props
+      const { onAfterLeave, onInternalAfterLeave, onAfterHide, internalKey } =
+        props
       if (onAfterLeave) onAfterLeave()
       if (onInternalAfterLeave) onInternalAfterLeave(internalKey)
       // deprecated
@@ -72,7 +69,11 @@ export default defineComponent({
   },
   render () {
     return (
-      <NFadeInExpandTransition appear onAfterLeave={this.handleAfterLeave}>
+      <NFadeInExpandTransition
+        appear
+        onAfterLeave={this.handleAfterLeave}
+        onLeave={this.onLeave}
+      >
         {{
           default: () => [
             this.show ? (
