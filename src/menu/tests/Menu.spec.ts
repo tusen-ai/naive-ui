@@ -32,6 +32,7 @@ describe('n-menu', () => {
       }
     })
   })
+<<<<<<< HEAD
   it('should work with `render-label` props', async () => {
     const options = [
       {
@@ -81,6 +82,8 @@ describe('n-menu', () => {
 })
 
 describe('n-menu', () => {
+=======
+>>>>>>> f0d568556 (fix: optimization)
   it('should work with `render-label` props', async () => {
     const options = [
       {
@@ -101,7 +104,7 @@ describe('n-menu', () => {
         key: 'test2'
       }
     ]
-    const handleRenderLabel = (option: any): any => {
+    const renderLabel = (option: any): any => {
       if (typeof option.label === 'function') {
         return option.label()
       }
@@ -122,7 +125,7 @@ describe('n-menu', () => {
     expect(wrapper.find('[href="test1"]').exists()).toBe(true)
     expect(wrapper.find('[href="test2"]').exists()).toBe(false)
 
-    await wrapper.setProps({ renderLabel: handleRenderLabel })
+    await wrapper.setProps({ renderLabel: renderLabel })
     expect(wrapper.find('[href="test1"]').exists()).toBe(true)
     expect(wrapper.find('[target="_blank"]').exists()).toBe(true)
     expect(wrapper.find('[href="test2"]').exists()).toBe(true)

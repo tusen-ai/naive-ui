@@ -69,4 +69,8 @@ long-label
 | children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | Group items. **required!** |
 | key | `string` | The indentifier of the menu group. |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |
+<<<<<<< HEAD
 | type | `'group'` | The type of the menu item, **required!** |
+=======
+| type | `'group'` | **required!** The type of the menu item. |
+>>>>>>> f0d568556 (fix: optimization)

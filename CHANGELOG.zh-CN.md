@@ -7,6 +7,8 @@
 - `n-tree` 支持键盘操作
 - 新增 `n-tree-select` 组件
 
+- `n-menu` 新增 `renderLabel` 属性，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
+
 ### Fixes
 
 - 修复 `n-tree` 缺少 `on-update-expanded-keys`、`on-update-selected-keys`、`on-update-checked-keys` 属性
@@ -15,10 +17,6 @@
 - 修复 `n-select` 砸爱 multiple filterable 模式下输入框有无用的空行
 
 ## 2.12.2 (2021-06-19)
-
-### Feats
-
-- `n-menu` 新增 `renderLabel` 属性，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
 
 ### Fixes
 

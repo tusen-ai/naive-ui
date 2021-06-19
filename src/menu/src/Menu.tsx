@@ -152,6 +152,7 @@ const menuProps = {
     default: undefined
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
   renderLabel: Function as PropType<
   (option: MenuOption | MenuGroupOption) => VNodeChild
   >
@@ -162,6 +163,11 @@ const menuProps = {
     >
   }
 >>>>>>> 29c2ee823 (fix: optimization)
+=======
+  renderLabel: Function as PropType<
+  (option: MenuOption | MenuGroupOption) => VNodeChild
+  >
+>>>>>>> f0d568556 (fix: optimization)
 } as const
 
 export type MenuSetupProps = ExtractPropTypes<typeof menuProps>

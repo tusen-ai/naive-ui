@@ -7,6 +7,8 @@
 - `n-tree` supports keyboard operations.
 - Add `n-tree-select` component.
 
+- `n-menu` add `renderLabel` prop, closes [#84](https://github.com/TuSimple/naive-ui/issues/84)
+
 ### Fixes
 
 - Fix `n-tree` drag over leaf node causes error, closes [#200](https://github.com/TuSimple/naive-ui/issues/200).
@@ -15,10 +17,6 @@
 - Fix `n-select`'s input has useless empty row in multiple filterable mode.
 
 ## 2.12.2 (2021-06-19)
-
-### Feats
-
-- `n-menu` add `renderLabel` prop, closes [#84](https://github.com/TuSimple/naive-ui/issues/84)
 
 ### Fixes
 

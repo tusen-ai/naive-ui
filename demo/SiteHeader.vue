@@ -158,6 +158,7 @@ export default {
       return [
         {
           key: 'home',
+<<<<<<< HEAD
           label: t('home'),
           path: themeAndLocaleReg.exec(route.path)[0]
         },
@@ -170,6 +171,17 @@ export default {
           key: 'component',
           label: t('component'),
           path: themeAndLocaleReg.exec(route.path)[0] + '/components/button'
+=======
+          label: t('home')
+        },
+        {
+          key: 'doc',
+          label: t('doc')
+        },
+        {
+          key: 'component',
+          label: t('component')
+>>>>>>> f0d568556 (fix: optimization)
         }
       ]
     })
@@ -195,19 +207,30 @@ export default {
         },
         {
           key: 'home',
+<<<<<<< HEAD
           label: t('home'),
           path: themeAndLocaleReg.exec(route.path)[0]
+=======
+          label: t('home')
+>>>>>>> f0d568556 (fix: optimization)
         },
         {
           key: 'doc',
           label: t('doc'),
+<<<<<<< HEAD
           children: docOptionsRef.value,
           path: themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
+=======
+          children: docOptionsRef.value
+>>>>>>> f0d568556 (fix: optimization)
         },
         {
           key: 'component',
           label: t('component'),
+<<<<<<< HEAD
           path: themeAndLocaleReg.exec(route.path)[0] + '/components/button',
+=======
+>>>>>>> f0d568556 (fix: optimization)
           children: componentOptionsRef.value
         },
         {
@@ -335,15 +358,15 @@ export default {
     }
 
     const renderMenuLabel = (option) => {
-      if (typeof option.title === 'function') {
-        return option.title()
+      if (typeof option.label === 'function') {
+        return option.label()
       }
       return h(
         RouterLink,
         {
           to: option.key
         },
-        { default: () => option.title }
+        { default: () => option.label }
       )
     }
 
