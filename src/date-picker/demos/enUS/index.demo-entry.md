@@ -73,7 +73,7 @@ footerslot
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported in date picker of dateTimeRange type. |
+| actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported in date picker of `datetimerange` type. |
 | end-placeholder | `string` | `'End Date and Time'` | The prompt information of the end select in dateRange. |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Customize format type. |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |
