@@ -49,7 +49,7 @@ footerslot
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported in date picker of `datetime` type. |
-| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Customize format type. |
+| format | `string` | `'yyyy-MM-dd HH:mm:ss'` |  Format of the input. |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
 | placeholder | `string` | `'Select Date and Time'` | Prompt information. |
