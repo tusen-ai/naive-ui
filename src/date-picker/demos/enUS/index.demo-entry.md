@@ -25,7 +25,7 @@ footerslot
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| clearable | `boolean` | `false` | Where date picker is clearable. |
+| clearable | `boolean` | `false` | Whether the date picker is clearable. |
 | default-value | `number \| [number, number] \| null` | `null` | Date picker's default selected value. |
 | disabled | `boolean` | `false` | Where the date picker is disabled. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |
