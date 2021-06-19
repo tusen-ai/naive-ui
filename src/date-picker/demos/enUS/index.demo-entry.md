@@ -27,7 +27,7 @@ footerslot
 | --- | --- | --- | --- |
 | clearable | `boolean` | `false` | Whether the date picker is clearable. |
 | default-value | `number \| [number, number] \| null` | `null` | Date picker's default value. |
-| disabled | `boolean` | `false` | Where the date picker is disabled. |
+| disabled | `boolean` | `false` | Whether the date picker is disabled. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` | Date picker type. |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker in controlled mode. |
