@@ -81,7 +81,7 @@ footerslot
 | ranges | `Record<string, [number, number]>` | `undefined` | 用户自定义 DateTimeRange 范围 |
 | separator | `string` | `'to'` | start 选框与 end 选框之间的分隔符 |
 | start-placeholder | `string` | `'开始日期时间'` | DateTimeRange 中 start 选框的提示信息 |
-| on-update:value | `(value: [number, number] \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 |
+| on-update:value | `(value: [number, number] \| null) => void` | `undefined` | 数据更新时触发的回调函数 |
 
 ## Slots
 
