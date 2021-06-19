@@ -48,7 +48,7 @@ footerslot
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported in date picker of dateTime type. |
+| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported in date picker of `datetime` type. |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Customize format type. |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
