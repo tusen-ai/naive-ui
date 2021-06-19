@@ -67,7 +67,7 @@ footerslot
 | ranges | `Record<string, [number, number]>` | `undefined` | 用户自定义的快捷选择范围 |
 | separator | `string` | `'至'` | start 选框与 end 选框之间的分隔符 |
 | start-placeholder | `string` | `'开始日期'` | DateRange 中 start 选框的提示信息 |
-| on-update:value | `(value: [number, number] \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 |
+| on-update:value | `(value: [number, number] \| null) => void` | `undefined` | 数据更新时触发的回调函数 |
 
 ### DateTimeRange 类型的 Props
 
