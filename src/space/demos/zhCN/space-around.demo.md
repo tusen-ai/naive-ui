@@ -1,4 +1,4 @@
-# 空格围绕
+# 空间围绕
 
 ```html
 <n-space justify="space-around" size="large">
