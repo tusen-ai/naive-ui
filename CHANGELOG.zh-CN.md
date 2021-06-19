@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-form-item` 始终展示必需的星号
+
 ## 2.12.1
 
 ### Feats
