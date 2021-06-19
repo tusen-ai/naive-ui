@@ -35,7 +35,7 @@ long-label
 | inverted | `boolean` | `false` | Use inverted style. |
 | options | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | `[]` | Items data of menu. |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | Menu layout. |
-| render-label | `((option: MenuOption \| MenuGroupOption) => VNodeChild)` | `undefined` | Batch processing menu rendering. |
+| render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all labels. |
 | root-indent | `number` | `undefined` | The indent of menu's first level children. If not set, menu will use `indent` in place of it. |
 | value | `string \| null` | `undefined` | The selected name of menu. |
 | on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` is the array of expanded menu options' `key`. |
@@ -49,7 +49,7 @@ long-label
 | extra? | `string \| (() => VNodeChild)` | The extra parts of menu item. |
 | icon? | `() => VNodeChild` | The icons for menu item. |
 | key | `string` | The indentifier of the menu item. |
-| label | `string \| (() => VNodeChild)` | The name or body of a menu item. |
+| label | `string \| (() => VNodeChild)` | The label of the menu item. |
 
 ### Submenu Properties
 
@@ -60,7 +60,7 @@ long-label
 | extra? | `string \| (() => VNodeChild)` | The extra parts of menu item. |
 | icon? | `() => VNodeChild` | The icons for menu item. |
 | key | `string` | The indentifier of the submenu. |
-| label | `string \| (() => VNodeChild)` | The name or body of a menu item. |
+| label | `string \| (() => VNodeChild)` | The label of the menu item. |
 
 ### MenuOptionGroup Properties
 
@@ -68,5 +68,5 @@ long-label
 | --- | --- | --- |
 | children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | **required!** Submenu. |
 | key | `string` | The indentifier of the menu group. |
-| label | `string \| (() => VNodeChild)` | The name or body of a menu item. |
+| label | `string \| (() => VNodeChild)` | The label of the menu item. |
 | type | `'group'` | **required!** The type of the menu item. |

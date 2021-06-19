@@ -35,7 +35,7 @@ long-label
 | inverted | `boolean` | `false` | 使用反转样式 |
 | options | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | `[]` | 菜单的数据 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | 菜单的布局方式 |
-| render-label | `((option: MenuOption \| MenuGroupOption) => VNodeChild)` | `undefined` | 批量处理菜单渲染 |
+| render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单渲染 |
 | root-indent | `number` | `32` | 菜单第一级的缩进，如果没有设定，使用 `indent` 代替 |
 | value | `string \| null` | `undefined` | 菜单当前的选中值 |
 | on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` 是展开菜单项的 `key` 的数组 |
@@ -43,13 +43,13 @@ long-label
 
 ### Menu Properties
 
-| 名称      | 类型                           | 说明                           |
-| --------- | ------------------------------ | ------------------------------ |
-| disabled? | `boolean`                      | 是否禁用菜单项                 |
-| extra?    | `string \| (() => VNodeChild)` | 菜单项的额外部分               |
-| icon?     | `() => VNode`                  | 菜单项的图标                   |
-| key       | `string`                       | 菜单项的标识符                 |
-| label     | `string \| (() => VNodeChild)` | 菜单项的名称或菜单项的主体部分 |
+| 名称      | 类型                           | 说明             |
+| --------- | ------------------------------ | ---------------- |
+| disabled? | `boolean`                      | 是否禁用菜单项   |
+| extra?    | `string \| (() => VNodeChild)` | 菜单项的额外部分 |
+| icon?     | `() => VNode`                  | 菜单项的图标     |
+| key       | `string`                       | 菜单项的标识符   |
+| label     | `string \| (() => VNodeChild)` | 菜单项的内容     |
 
 ### Submenu Properties
 
@@ -60,7 +60,7 @@ long-label
 | extra? | `string \| (() => VNodeChild)` | 菜单项的额外部分 |
 | icon? | `() => VNodeChild` | 菜单项的图标 |
 | key | `string` | 菜单项的标识符 |
-| label | `string \| (() => VNodeChild)` | 菜单项的名称或菜单项的主体部分 |
+| label | `string \| (() => VNodeChild)` | 菜单项的内容 |
 
 ### MenuOptionGroup Properties
 
@@ -68,5 +68,5 @@ long-label
 | --- | --- | --- |
 | children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | **必填！**子菜单 |
 | key | `string` | 菜单项的标识符 |
-| label | `string \| (() => VNodeChild)` | 菜单项的名称或菜单项的主体部分 |
+| label | `string \| (() => VNodeChild)` | 菜单项的内容 |
 | type | `'group'` | **必填！**菜单项的类型 |

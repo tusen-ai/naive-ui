@@ -9,51 +9,19 @@
 ```js
 import { h } from 'vue'
 import { RouterLink } from 'vue-router'
-import { NIcon } from 'naive-ui'
-import {
-  HomeOutline as HomeIcon,
-  BookOutline as BookIcon,
-  DocumentTextOutline as DocumentTextIcon
-} from '@vicons/ionicons5'
-
-function renderIcon (icon) {
-  return () => h(NIcon, null, { default: () => h(icon) })
-}
 
 const menuOptions = [
   {
-    label: () =>
-      h(
-        'a',
-        {
-          href: 'https://www.naiveui.com/zh-CN/os-theme',
-          target: '_blank',
-          rel: 'home'
-        },
-        '首页'
-      ),
-    key: 'home',
-    icon: renderIcon(HomeIcon)
+    label: '首页',
+    key: '/'
   },
   {
     label: '文档',
-    key: '/zh-CN/os-theme/docs/introduction',
-    icon: renderIcon(DocumentTextIcon)
+    key: '/zh-CN/os-theme/docs/introduction'
   },
   {
     label: '组件',
-    key: '/zh-CN/os-theme/components',
-    icon: renderIcon(BookIcon),
-    children: [
-      {
-        label: '卡片',
-        key: '/zh-CN/os-theme/components/card'
-      },
-      {
-        label: '折叠面板',
-        key: '/zh-CN/os-theme/components/collapse'
-      }
-    ]
+    key: '/zh-CN/os-theme/components'
   }
 ]
 
