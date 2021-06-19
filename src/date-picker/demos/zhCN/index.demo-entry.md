@@ -39,7 +39,7 @@ footerslot
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Date 类型的 Date Picker 中支持的操作 |
-| format | `string` | `'yyyy-MM-dd'` | 用户自定义的数据格式化方式 |
+| format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串 |
 | is-date-disabled | `(current: number) => boolean` | `undefined` | 日期禁用的校验函数 |
 | placeholder | `string` | `'选择日期'` | 自动填充的提示信息 |
 | on-update:value | `(value: number \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 |
