@@ -2,6 +2,11 @@
 
 ## Pending
 - `n-menu` 新增 `renderLabel` 属性，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
+
+### Fixes
+
+- 修复 `n-form-item` 始终展示必需的星号
+
 ## 2.12.1
 
 ### Feats

@@ -41,7 +41,7 @@ const formProps = {
   size: String as PropType<'small' | 'medium' | 'large'>,
   showRequireMark: {
     type: [Boolean, String] as PropType<'left' | 'right' | boolean>,
-    default: 'right'
+    default: undefined
   },
   showFeedback: {
     type: Boolean,

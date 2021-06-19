@@ -34,8 +34,10 @@
 - 新增属性
 
 ```
-- `n-xxx` add xxx prop.
-- `n-xxx` 新增 xxx 属性
+- `n-xxx` add `xxx` prop.
+- `n-xxx` 新增 `xxx` 属性
+
+注意 `xxx` 属性必须是 kebab-case，不能是 camelCase。
 ```
 
 - 修复 Bug
