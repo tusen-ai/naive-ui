@@ -33,6 +33,10 @@ const formProps = {
     type: String as PropType<LabelPlacement>,
     default: 'top'
   },
+  autocomplete: String as PropType<'on' | 'off' | 'new-password'>,
+  autocapitalize: String as PropType<'off' | 'on'>,
+  autocorrect: String as PropType<'off' | 'on'>,
+  name: String,
   model: {
     type: Object as PropType<Record<string, any>>,
     default: () => {}
@@ -126,6 +130,14 @@ export default defineComponent({
           this.inline && `${mergedClsPrefix}-form--inline`
         ]}
         onSubmit={this.onSubmit}
+        // @ts-expect-error
+        name={this.name}
+        // @ts-expect-error
+        autocomplete={this.autocomplete}
+        // @ts-expect-error
+        autocapitalize={this.autocapitalize}
+        // @ts-expect-error
+        autocorrect={this.autocorrect}
       >
         {this.$slots}
       </form>

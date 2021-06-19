@@ -6,5 +6,6 @@
   show-password-toggle
   placeholder="密码"
   :maxlength="8"
+  autocomplete="new-password"
 />
 ```

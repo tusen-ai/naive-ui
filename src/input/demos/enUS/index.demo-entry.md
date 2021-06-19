@@ -25,6 +25,9 @@ count
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| autocapitalize | `'on' \| 'off'` |  | Safari auto capitalize |
+| autocomplete | `'on' \| 'off' \| 'new-password'` |  | Browser auto complate, used with `name` |
+| autocorrect | `'on' \| 'off'` |  | Safari auto correct |
 | autofocus | `boolean` | `false` |  |
 | autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` |  |
 | clearable | `boolean` | `false` |  |

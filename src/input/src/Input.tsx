@@ -82,6 +82,10 @@ const inputProps = {
     default: true
   },
   autofocus: Boolean,
+  autocomplete: String as PropType<'on' | 'off' | 'new-password'>,
+  autocapitalize: String as PropType<'off' | 'on'>,
+  autocorrect: String as PropType<'off' | 'on'>,
+  name: String,
   resizable: {
     type: Boolean,
     default: true
@@ -832,6 +836,14 @@ export default defineComponent({
                 ref="textareaElRef"
                 class={`${mergedClsPrefix}-input__textarea-el`}
                 autofocus={this.autofocus}
+                // @ts-expect-error
+                name={this.name}
+                // @ts-expect-error
+                autocomplete={this.autocomplete}
+                // @ts-expect-error
+                autocapitalize={this.autocapitalize}
+                // @ts-expect-error
+                autocorrect={this.autocorrect}
                 rows={Number(this.rows)}
                 placeholder={this.placeholder as string | undefined}
                 value={this.mergedValue as string | undefined}
@@ -873,6 +885,14 @@ export default defineComponent({
           ) : (
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
+                // @ts-expect-error
+                name={this.name}
+                // @ts-expect-error
+                autocomplete={this.autocomplete}
+                // @ts-expect-error
+                autocapitalize={this.autocapitalize}
+                // @ts-expect-error
+                autocorrect={this.autocorrect}
                 ref="inputElRef"
                 type={
                   this.type === 'password' &&
