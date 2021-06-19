@@ -67,7 +67,7 @@ export default defineComponent({
   },
   render () {
     const { $parent, depth, mergedClsPrefix } = this
-    if ($parent?.$options._n_icon__) {
+    if ($parent?.$options?._n_icon__) {
       warn('icon', "don't wrap `n-icon` inside `n-icon`")
     }
     return h(

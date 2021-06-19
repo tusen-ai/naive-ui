@@ -6,7 +6,6 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --font-size
 // --padding
 // --border-radius
-// --box-shadow
 // --option-height
 // --option-prefix-width
 // --option-icon-prefix-width
@@ -24,6 +23,9 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --suffix-color
 // --option-icon-size
 // --option-opacity-disabled
+
+// shared with popover
+// --box-shadow
 
 export default cB('dropdown-menu', `
   transform-origin: inherit;

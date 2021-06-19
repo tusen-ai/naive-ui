@@ -1,11 +1,80 @@
 # CHANGELOG
 
-## Pending
+## 2.12.1
+
+### Feats
+
+- `n-form`, `n-form-item` enhance `show-require-mark` prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-dropdown` support class attr, closes [#180](https://github.com/TuSimple/naive-ui/issues/180).
+- `n-input` add `show-password-toggle` prop.
+- `n-popselect` support class attr.
+- `n-select` add `render-label` prop.
+- `n-popselect` add `render-label` prop.
+
+### Fixes
+
+- Fix `n-input` jitter when Chinese and English characters switch input, closes [#174](https://github.com/TuSimple/naive-ui/issues/174).
+- Fix `n-icon` use setup script, `$parent` is an empty object by default, and access `$parent.$options` will be `undefined`.
+- Fix `n-notification` position not correct.
+- Fix `n-message` content & option type not correct.
+
+## 2.12.0 (2021-06-16)
+
+### Breaking Changes
+
+- `n-a`'s `to` prop is removed. Now if you want to use `n-a` like a router link, you can follow the doc site.
+
+### Feats
+
+- `n-tree` support `disabled` & `checkboxDisabled` on option.
+- `n-input-number` support keyboard events ArrowUp and ArrowDown operations.
+
+### Fixes
+
+- Fix `n-cascader` text blur in win10 Chrome.
+- Fix `n-tree` click on indent won't trigger select in block line mode.
+
+## 2.11.12 (2021-06-16)
+
+### Feats
+
+- `n-drawer-content` add `closable` prop, closes [#139](https://github.com/TuSimple/naive-ui/issues/139).
+- `n-element` pass `themeVars` to default slot.
+- `n-element` add `abstract` prop.
+
+### Fixes
+
+- Fix `n-radio-group` doesn't trigger form item validation.
+- Fix `n-auto-complete` customizing input not working.
+
+## 2.11.11 (2021-06-15)
+
+### Feats
+
+- `n-tag` add `RTL` support
+
+### Fixes
+
+- Move `vue` & `vue-router` to peer dependencies to avoid redundant bundle.
+
+## 2.11.9 (2021-06-15)
+
+### Feats
+
+- `n-space` supports wai-aria.
+- `n-button-group` supports wai-aria.
+- `n-progress` supports wai-aria.
+- `n-menu` supports use `<a />` and `<router-link />` as label, closes [#84](https://github.com/TuSimple/naive-ui/issues/84).
+- `n-input-number` add `show-button` prop.
+- `n-rate` support `default` slot for icon customizing.
+- `n-rate` add color prop.
+- `n-rate` add size prop.
 
 ### Fixes
 
 - Fix `n-card`'s `header-style` it not applied to header. [#103](https://github.com/TuSimple/naive-ui/issues/103)
-- Fix `n-dialog`'s `destroyAll` method is missing.
+- Fix `n-dialog` misses `destroyAll` method.
+- Fix `n-data-table` misses `on-update-sorter`, `on-update-filters`, `on-update-page` and `on-update-page-size` props.
 
 ## 2.11.8 (2021-06-13)
 
@@ -56,8 +125,8 @@
 - Fix `n-popover` sometimes won't sync position in manual mode.
 - Fix `n-transfer`'s empty icon is no toggling transition.
 - Fix `n-message` API option is not optional.
-- Fix `n-calendar` date calculate incorrectly
-- Fix `n-input` missing the `password` type declaration.
+- Fix `n-calendar` date calculate incorrectly.
+- Fix `n-input` misses the `password` type declaration.
 - Fix `n-menu` the type definition of `extra` property of menu and submenu.
 - Fix `n-dropdown` mouse cursor is not pointer.
 

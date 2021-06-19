@@ -1,11 +1,80 @@
 # CHANGELOG
 
-## Pending
+## 2.12.1
+
+### Feats
+
+- `n-form`, `n-form-item` 增强 `show-require-mark` 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-dropdown` 支持 class 属性，关闭 [#180](https://github.com/TuSimple/naive-ui/issues/180)
+- `n-input` 新增 `show-password-toggle` 属性
+- `n-popselect` 支持 class 属性
+- `n-select` 新增 `render-label` 属性
+- `n-popselect` 新增 `render-label` 属性
+
+### Fixes
+
+- 修复 `n-input` 中英文字符切换输入时抖动的问题，关闭[#174](https://github.com/TuSimple/naive-ui/issues/174)
+- 修复 `n-icon` 在使用 setup script 时，`$parent` 默认是一个空对象，访问 `$parent.$options` 会是 `undefined`
+- 修复 `n-notification` 位置不正确
+- 修复 `n-message` 的 content & option 类型不正确
+
+## 2.12.0 (2021-06-16)
+
+### Breaking Changes
+
+- 移除了 `n-a` 的 `to` 属性。现在如果你需要把 `n-a` 用作 router-link，你可以参考文档网站
+
+### Feats
+
+- `n-tree` 选项支持 `disabled` & `checkboxDisabled` 属性
+- `n-input-number` 支持键盘的上键和下键操作
+
+### Fixes
+
+- 修复 `n-cascader` 在 win10 Chrome 环境下文字模糊的问题
+- 修复 `n-tree` 在 block line 模式下点击缩进空白无法触发选择
+
+## 2.11.12 (2021-06-16)
+
+### Feats
+
+- `n-drawer-content` 新增 `closable` 属性，关闭 [#139](https://github.com/TuSimple/naive-ui/issues/139)
+- `n-element` 向 default slot 传递 `themeVars`
+- `n-element` 新增 `abstract` 属性
+
+### Fixes
+
+- 修复 `n-radio-group` 不触发 form-item 验证
+- 修复 `n-auto-complete` 无法自定义元素
+
+## 2.11.11 (2021-06-15)
+
+### Feats
+
+- `n-tag` 添加 `RTL` 支持
+
+### Fixes
+
+- 将 `vue` 和 `vue-router` 移至 peer dependencies 避免重复打包
+
+## 2.11.9 (2021-06-15)
+
+### Feats
+
+- `n-space` 支持 wai-aria
+- `n-button-group` 支持 wai-aria
+- `n-progress` 支持 wai-aria
+- `n-menu` 支持使用 `<a />` 和 `<router-link />` 作为 label，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
+- `n-input-number` 新增 `show-button` 属性
+- `n-rate` 支持使用 default slot 自定义图标
+- `n-rate` 新增 color 属性
+- `n-rate` 新增 size 属性
 
 ### Fixes
 
 - 修复 `n-card` 的 `header-style` 没有应用于 header 上 [#103](https://github.com/TuSimple/naive-ui/issues/103)
 - 修复 `n-dialog` 的 `destroyAll` 方法缺失
+- 修复 `n-data-table` 缺少 `on-update-sorter`、`on-update-filters`、`on-update-page`、`on-update-page-size` 属性
 
 ## 2.11.8 (2021-06-13)
 

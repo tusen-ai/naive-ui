@@ -13,7 +13,7 @@
       <div style="width:160px;float:right;">
         <n-anchor
           affix
-          :offset-top="24"
+          :trigger-top="24"
           :top="88"
           style="z-index: 1;"
           ignore-gap
@@ -29,7 +29,7 @@
     </n-col>
     <n-col :span="6">
       <div style="width:160px;float:right;">
-        <n-anchor affix :offset-top="24" :top="88" style="z-index: 1;">
+        <n-anchor affix :trigger-top="24" :top="88" style="z-index: 1;">
           <n-anchor-link title="演示" href="#演示">
             <n-anchor-link title="忽略间隔" href="#ignore-gap" />
             <n-anchor-link title="固定" href="#affix" />

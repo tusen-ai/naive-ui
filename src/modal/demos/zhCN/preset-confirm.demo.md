@@ -6,7 +6,7 @@
 <n-button @click="showModal = true"> 来吧 </n-button>
 <n-modal
   v-model:show="showModal"
-  preset="confirm"
+  preset="dialog"
   title="确认"
   content="你确认?"
   positive-text="确认"

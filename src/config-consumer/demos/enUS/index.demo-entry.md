@@ -12,10 +12,10 @@ basic
 
 | Name | Parameters | Default | Description |
 | --- | --- | --- | --- |
-| on-namespace-change | `(namespace: string) => void` | `undefined` |  |
+| on-namespace-change | `(namespace: string) => void` | `undefined` | Callback triggered when namespace is changed |
 
 ## Slots
 
-| Name    | Parameters                         | Description |
-| ------- | ---------------------------------- | ----------- |
-| default | `(options: { namespace: string })` |             |
+| Name | Parameters | Description |
+| --- | --- | --- |
+| default | `(options: { namespace: string })` |  |

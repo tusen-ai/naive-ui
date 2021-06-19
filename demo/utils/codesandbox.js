@@ -67,6 +67,7 @@ export function getCodeSandboxParams (code) {
           dependencies: {
             ...getDeps(code),
             vue: 'next',
+            'vue-router': 'next',
             'naive-ui': 'latest'
           },
           devDependencies: {

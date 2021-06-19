@@ -9,7 +9,6 @@ export const self = (vars: ThemeCommonVars) => {
   const {
     primaryColor,
     textColor2,
-    boxShadow2,
     dividerColor,
     hoverColor,
     popoverColor,
@@ -33,7 +32,6 @@ export const self = (vars: ThemeCommonVars) => {
     optionHeightLarge: heightLarge,
     optionHeightHuge: heightHuge,
     borderRadius,
-    boxShadow: boxShadow2,
     fontSizeSmall,
     fontSizeMedium,
     fontSizeLarge,

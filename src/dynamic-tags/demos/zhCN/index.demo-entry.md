@@ -13,7 +13,7 @@ form
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| closable | `boolean` | `false` |  |
+| closable | `boolean` | `true` |  |
 | default-value | `string[]` | `[]` |  |
 | disabled | `boolean` | `false` |  |
 | input-style | `string \| Object` | `undefined` |  |

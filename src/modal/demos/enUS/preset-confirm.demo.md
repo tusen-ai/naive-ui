@@ -6,7 +6,7 @@ An example of preset `dialog`.
 <n-button @click="showModal = true"> Start Me up </n-button>
 <n-modal
   v-model:show="showModal"
-  preset="confirm"
+  preset="dialog"
   title="Dialog"
   content="Are you sure?"
   positive-text="Submit"

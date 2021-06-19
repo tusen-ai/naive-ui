@@ -69,9 +69,11 @@ export function useCheck (
   })
   function doUpdateCheckedRowKeys (keys: RowKey[]): void {
     const {
-      'onUpdate:checkedRowKeys': onUpdateCheckedRowKeys,
+      'onUpdate:checkedRowKeys': _onUpdateCheckedRowKeys,
+      onUpdateCheckedRowKeys,
       onCheckedRowKeysChange
     } = props
+    if (_onUpdateCheckedRowKeys) call(_onUpdateCheckedRowKeys, keys)
     if (onUpdateCheckedRowKeys) call(onUpdateCheckedRowKeys, keys)
     if (onCheckedRowKeysChange) call(onCheckedRowKeysChange, keys)
     uncontrolledCheckedRowKeysRef.value = keys

@@ -4,7 +4,7 @@
 
 ```html
 <n-button @click="showModal = true"> 来吧 </n-button>
-<n-modal v-model:show="showModal" preset="confirm" title="Dialog">
+<n-modal v-model:show="showModal" preset="dialog" title="Dialog">
   <template #header>
     <div>标题</div>
   </template>

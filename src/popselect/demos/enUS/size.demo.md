@@ -2,10 +2,10 @@
 
 ```html
 <n-popselect v-model:value="value" :options="options" size="medium">
-  <n-tag style="margin-right: 8px;">{{ value || 'Popselect' }}</n-tag>
+  <n-button style="margin-right: 8px;">{{ value || 'Popselect' }}</n-button>
 </n-popselect>
 <n-popselect v-model:value="value" :options="options" size="large">
-  <n-tag>{{ value || 'Popselect' }}</n-tag>
+  <n-button>{{ value || 'Popselect' }}</n-button>
 </n-popselect>
 ```
 

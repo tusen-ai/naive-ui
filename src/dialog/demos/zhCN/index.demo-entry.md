@@ -78,11 +78,11 @@ use-component
 下列属性都可以被动态修改。
 
 | 名称 | 类型 | 说明 |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | bordered | `boolean` |  |
 | closable | `boolean` |  |
 | content | `string \| (() => VNodeChild)` | 可以是 render 函数 |
-| icon-placement | `'left' \| 'top'` | `'left'` |  |
+| icon-placement | `'left' \| 'top'` |  |
 | icon | `() => VNodeChild` | 需要是 render 函数 |
 | loading | `boolean` |  |
 | negative-text | `string` | 不填对应的按钮不会出现 |

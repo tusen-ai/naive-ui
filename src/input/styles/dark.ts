@@ -33,7 +33,11 @@ const inputDark: InputTheme = {
       clearColorHover,
       clearColorPressed,
       placeholderColor,
-      placeholderColorDisabled
+      placeholderColorDisabled,
+      iconColor,
+      iconColorDisabled,
+      iconColorHover,
+      iconColorPressed
     } = vars
     return {
       ...commonVariables,
@@ -88,8 +92,10 @@ const inputDark: InputTheme = {
       clearColor,
       clearColorHover,
       clearColorPressed,
-      iconColor: placeholderColor,
-      iconColorDisabled: placeholderColorDisabled,
+      iconColor,
+      iconColorDisabled,
+      iconColorHover,
+      iconColorPressed,
       suffixTextColor: textColor2
     }
   }

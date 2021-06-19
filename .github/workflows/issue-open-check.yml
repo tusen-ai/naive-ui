@@ -1,0 +1,21 @@
+name: Issue Open Check
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  check-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check format
+        if: (contains(github.event.issue.body, 'issue-helper') == false)
+        uses: actions-cool/issues-helper@v2.2.1
+        with:
+          actions: 'create-comment,add-labels,close-issue'
+          issue-number: ${{ github.event.issue.number }}
+          labels: 'invalid'
+          body: |
+            Hello @${{ github.event.issue.user.login }}, your issue has been closed because it does not conform to our issue requirements. Please use the [Issue Helper](https://naive-ui.github.io/issue-helper) to create an issue, thank you!
+            
+            你好 @${{ github.event.issue.user.login }}，为了能够进行高效沟通，我们对 issue 有一定的格式要求，你的 issue 因为不符合要求而被自动关闭。你可以通过 [issue 助手](https://naive-ui.github.io/issue-helper) 来创建 issue 以方便我们定位错误。谢谢配合！

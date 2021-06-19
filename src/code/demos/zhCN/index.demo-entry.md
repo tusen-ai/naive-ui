@@ -41,7 +41,13 @@ basic
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| code | `string` | `''` |  |
+| code | `string` | `''` | 传入的 code 字符串 |
 | hljs | `Object` | `undefined` | 如果你想局部设定 hljs，可以通过这个属性传给组件 |
-| language | `string` | `undefined` |  |
-| trim | `boolean` | `true` |  |
+| language | `string` | `undefined` | 代码在 highlightjs 中的语言 |
+| trim | `boolean` | `true` | 是否显示 trim 后的代码 |
+
+## Slots
+
+| 名称    | 参数 | 说明        |
+| ------- | ---- | ----------- |
+| default | `()` | code 的内容 |

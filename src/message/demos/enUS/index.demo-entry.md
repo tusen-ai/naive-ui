@@ -60,21 +60,22 @@ multiple-line
 
 | Name | Type | Description |
 | --- | --- | --- |
-| error | `(content: string, option?: MessageOption) => MessageReactive` |  |
-| info | `(content: string, option?: MessageOption) => MessageReactive` |  |
-| loading | `(content: string, option?: MessageOption) => MessageReactive` |  |
-| success | `(content: string, option?: MessageOption) => MessageReactive` |  |
-| warning | `(content: string, option?: MessageOption) => MessageReactive` |  |
+| error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
 
 #### MessageOption Properties
 
-| Name | Type | Description |
-| --- | --- | --- |
-| closable | `boolean` |  |
-| content | `string \| number \| boolean \| (() => VNodeChild)` | Message content. |
-| icon | `() => VNode` | Message icon. |
-| onAfterLeave | `Function` | Callback after message disappeared. |
-| onLeave | `Function` | Callback when message start to disappear. |
+| Name         | Type          | Description                               |
+| ------------ | ------------- | ----------------------------------------- |
+| closable     | `boolean`     |                                           |
+| duration     | `number`      |                                           |
+| icon         | `() => VNode` | Message icon.                             |
+| onAfterLeave | `() => void`  | Callback after message disappeared.       |
+| onClose      | `() => void`  | Callback when close icon is clicked.      |
+| onLeave      | `() => void`  | Callback when message start to disappear. |
 
 #### MessageReactive Properties
 
@@ -82,10 +83,11 @@ multiple-line
 | --- | --- | --- |
 | closable | `boolean` |  |
 | content | `string \| (() => VNodeChild)` | Message content. |
+| destory | `() => void` |  |
 | icon | `() => VNode` | Message icon. |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` |  |
-| onAfterLeave | `Function` | Callback after message disappeared. |
-| onLeave | `Function` | Callback when message start to disappear. |
+| onAfterLeave | `() => void` | Callback after message disappeared. |
+| onLeave | `() => void` | Callback when message start to disappear. |
 
 #### MessageReactive Methods
 

@@ -8,6 +8,7 @@
 basic
 multiple
 target
+closable
 custom-style-debug
 dark-1-debug
 dark-2-debug
@@ -38,6 +39,7 @@ dark-4-debug
 | --- | --- | --- | --- |
 | body-style | `string \| Object` | `undefined` | 主体的样式 |
 | body-content-style | `string \| Object` | `undefined` | 主体可滚动内容节点的样式 |
+| closable | `boolean` | `false` | 是否可关闭 |
 | footer-style | `string \| Object` | `undefined` |  |
 | header-style | `string \| Object` | `undefined` |  |
 | native-scrollbar | `boolean` | `true` | 主体部分是否使用原生滚动条 |

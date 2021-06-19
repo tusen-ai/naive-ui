@@ -4,8 +4,8 @@ Select multiple value in popselect.
 
 ```html
 <n-popselect v-model:value="value" multiple :options="options">
-  <n-tag
-    >{{ (Array.isArray(value) && value.length) ? value : 'Nothing' }}</n-tag
+  <n-button
+    >{{ (Array.isArray(value) && value.length) ? value : 'Nothing' }}</n-button
   >
 </n-popselect>
 ```

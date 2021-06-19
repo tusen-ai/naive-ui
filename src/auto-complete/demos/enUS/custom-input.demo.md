@@ -3,17 +3,19 @@
 You can replace auto-complete's input element.
 
 ```html
-<n-auto-complete :options="options" v-model:value="value">
-  <template #="{ handleInput, handleBlur, handleFocus, value }">
-    <n-input
-      type="textarea"
-      @input="handleInput"
-      @focus="handleFocus"
-      @blur="handleBlur"
-      :value="value"
-      placeholder="Email"
-    />
-  </template>
+<n-auto-complete
+  :options="options"
+  v-model:value="value"
+  #="{ handleInput, handleBlur, handleFocus, value }"
+>
+  <n-input
+    type="textarea"
+    @input="handleInput"
+    @focus="handleFocus"
+    @blur="handleBlur"
+    :value="value"
+    placeholder="Email"
+  />
 </n-auto-complete>
 ```
 

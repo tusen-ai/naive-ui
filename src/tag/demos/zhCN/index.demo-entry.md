@@ -11,6 +11,7 @@ disabled
 size
 checkable
 shape
+rtl-debug
 ```
 
 ## Props

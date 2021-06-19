@@ -66,8 +66,8 @@ export default defineComponent({
         clsPrefix
       } = props
       return (
-        <div class={`${clsPrefix}-progress-content`}>
-          <div class={`${clsPrefix}-progress-graph`}>
+        <div class={`${clsPrefix}-progress-content`} role="none">
+          <div class={`${clsPrefix}-progress-graph`} aria-hidden>
             <div class={`${clsPrefix}-progress-graph-circle`}>
               <svg viewBox="0 0 110 110">
                 <g>
@@ -112,11 +112,11 @@ export default defineComponent({
           {showIndicator ? (
             <div>
               {slots.default ? (
-                <div class={`${clsPrefix}-progress-custom-content`}>
+                <div class={`${clsPrefix}-progress-custom-content`} role="none">
                   {slots.default()}
                 </div>
               ) : status !== 'default' ? (
-                <div class={`${clsPrefix}-progress-icon`}>
+                <div class={`${clsPrefix}-progress-icon`} aria-hidden>
                   <NBaseIcon clsPrefix={clsPrefix}>
                     {{
                       default: () => iconMap[status]
@@ -129,6 +129,7 @@ export default defineComponent({
                   style={{
                     color: indicatorTextColor
                   }}
+                  role="none"
                 >
                   <span class={`${clsPrefix}-progress-text__percentage`}>
                     {percentage}

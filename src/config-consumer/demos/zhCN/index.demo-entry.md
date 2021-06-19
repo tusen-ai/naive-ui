@@ -12,12 +12,12 @@ color-debug
 
 ## Props
 
-| 名称                | 参数                          | 默认值      | 说明 |
-| ------------------- | ----------------------------- | ----------- | ---- |
-| on-namespace-change | `(namespace: string) => void` | `undefined` |      |
+| 名称 | 参数 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| on-namespace-change | `(namespace: string) => void` | `undefined` | namespace 改成时触发的回调 |
 
 ## Slots
 
-| 名称    | 参数                               | 说明 |
-| ------- | ---------------------------------- | ---- |
-| default | `(options: { namespace: string })` |      |
+| 名称 | 参数 | 说明 |
+| --- | --- | --- |
+| default | `(options: { namespace: string })` | Config Consumer 默认填充的内容 |

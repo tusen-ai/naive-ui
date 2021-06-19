@@ -16,9 +16,10 @@ import {
   provide
 } from 'vue'
 import { useMergedState } from 'vooks'
-import { toRgbString, getAlphaString, getPadding } from 'seemly'
+import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
-import { NBaseClear } from '../../_internal'
+import { NBaseClear, NBaseIcon } from '../../_internal'
+import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createKey, ExtractPublicPropTypes } from '../../_utils'
@@ -75,6 +76,7 @@ const inputProps = {
     default: false
   },
   passivelyActivated: Boolean,
+  showPasswordToggle: Boolean,
   stateful: {
     type: Boolean,
     default: true
@@ -220,6 +222,8 @@ export default defineComponent({
         return !!mergedValue && (hoverRef.value || mergedFocus)
       }
     })
+    // passwordVisible
+    const passwordVisibleRef = ref<boolean>(false)
     // focus
     const mergedFocusRef = computed(() => {
       return props.internalForceFocus || focusedRef.value
@@ -495,6 +499,18 @@ export default defineComponent({
     function handleMouseLeave (): void {
       hoverRef.value = false
     }
+    function handlePasswordToggleClick (): void {
+      if (props.disabled) return
+      passwordVisibleRef.value = !passwordVisibleRef.value
+    }
+    function handlePasswordToggleMousedown (e: MouseEvent): void {
+      if (props.disabled) return
+      e.preventDefault()
+    }
+    function handlePasswordToggleMouseup (e: MouseEvent): void {
+      if (props.disabled) return
+      e.preventDefault()
+    }
     function handleWrapperKeyDown (e: KeyboardEvent): void {
       props.onKeydown?.(e)
       switch (e.code) {
@@ -630,6 +646,7 @@ export default defineComponent({
       // value
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
+      passwordVisible: passwordVisibleRef,
       mergedPlaceholder: mergedPlaceholderRef,
       showPlaceholder1: showPlaceholder1Ref,
       showPlaceholder2: showPlaceholder2Ref,
@@ -655,6 +672,9 @@ export default defineComponent({
       handleChange,
       handleClick,
       handleClear,
+      handlePasswordToggleClick,
+      handlePasswordToggleMousedown,
+      handlePasswordToggleMouseup,
       handleWrapperKeyDown,
       handleTextAreaMirrorResize,
       mergedTheme: themeRef,
@@ -700,6 +720,8 @@ export default defineComponent({
             iconColorDisabled,
             suffixTextColor,
             countTextColor,
+            iconColorHover,
+            iconColorPressed,
             [createKey('padding', size)]: padding,
             [createKey('fontSize', size)]: fontSize,
             [createKey('height', size)]: height
@@ -749,10 +771,10 @@ export default defineComponent({
           '--clear-size': clearSize,
           '--clear-color-hover': clearColorHover,
           '--clear-color-pressed': clearColorPressed,
-          '--icon-color': toRgbString(iconColor),
-          '--icon-color-disabled': toRgbString(iconColorDisabled),
-          '--icon-alpha': getAlphaString(iconColor),
-          '--icon-alpha-disabled': getAlphaString(iconColorDisabled),
+          '--icon-color': iconColor,
+          '--icon-color-hover': iconColorHover,
+          '--icon-color-pressed': iconColorPressed,
+          '--icon-color-disabled': iconColorDisabled,
           '--suffix-text-color': suffixTextColor
         }
       })
@@ -852,7 +874,13 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
                 ref="inputElRef"
-                type={this.type}
+                type={
+                  this.type === 'password' &&
+                  this.showPasswordToggle &&
+                  this.passwordVisible
+                    ? 'text'
+                    : this.type
+                }
                 class={`${mergedClsPrefix}-input__input-el`}
                 tabindex={
                   this.passivelyActivated && !this.activated ? -1 : undefined
@@ -892,7 +920,10 @@ export default defineComponent({
             </div>
           )}
           {!this.pair &&
-          (this.$slots.suffix || this.clearable || this.showCount) ? (
+          (this.$slots.suffix ||
+            this.clearable ||
+            this.showCount ||
+            this.showPasswordToggle) ? (
             <div class={`${mergedClsPrefix}-input__suffix`}>
               {[
                 renderSlot(this.$slots, 'suffix'),
@@ -907,6 +938,20 @@ export default defineComponent({
                 ) : null,
                 this.showCount && this.type !== 'textarea' ? (
                   <WordCount />
+                ) : null,
+                this.showPasswordToggle && this.type === 'password' ? (
+                  <NBaseIcon
+                    clsPrefix={mergedClsPrefix}
+                    class={`${mergedClsPrefix}-input__eye`}
+                    onMousedown={this.handlePasswordToggleMousedown}
+                    onMouseup={this.handlePasswordToggleMouseup}
+                    onClick={this.handlePasswordToggleClick}
+                  >
+                    {{
+                      default: () =>
+                        this.passwordVisible ? <EyeIcon /> : <EyeOffIcon />
+                    }}
+                  </NBaseIcon>
                 ) : null
               ]}
             </div>

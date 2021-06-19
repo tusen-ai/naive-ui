@@ -5,12 +5,13 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feat, docs ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, feat, docs ]
 
 jobs:
   build:
+    environment: test
 
     runs-on: ubuntu-latest
 
@@ -27,4 +28,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run lint
-    - run: npm run test
+    - run: npm run test:cov
+    - uses: codecov/codecov-action@v1.5.2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+

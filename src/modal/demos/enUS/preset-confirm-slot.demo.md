@@ -4,7 +4,7 @@ Slots are also related to preset.
 
 ```html
 <n-button @click="showModal = true"> Start Me up </n-button>
-<n-modal v-model:show="showModal" preset="confirm" title="Dialog">
+<n-modal v-model:show="showModal" preset="dialog" title="Dialog">
   <template #header>
     <div>title</div>
   </template>
