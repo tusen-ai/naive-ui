@@ -38,7 +38,7 @@ footerslot
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported in date picker of date type. |
+| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported in date picker of `date` type. |
 | format | `string` | `'yyyy-MM-dd'` | Customize format type. |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |
 | placeholder | `string` | `'Select Date'` | Prompt information. |
