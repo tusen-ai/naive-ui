@@ -78,6 +78,9 @@ export default {
     const isTabletRef = useIsTablet()
 
     const handleMenuOption = (option) => {
+      if (typeof option.label === 'function') {
+        return option.label()
+      }
       return h(
         RouterLink,
         {

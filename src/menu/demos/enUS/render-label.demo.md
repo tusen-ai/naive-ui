@@ -2,8 +2,6 @@
 
 The `renderLabel` can be used to batch process the `label` we pass in in `options`.
 
-**warn: If a callback function is set in `label` in `options`, the data of setting the callback function will not be processed in batch by `renderLabel`.**
-
 ```html
 <n-menu :options="menuOptions" :renderLabel="handleRenderLabel" />
 ```
@@ -64,6 +62,9 @@ export default {
     return {
       menuOptions,
       handleRenderLabel (option) {
+        if (typeof option.label === 'function') {
+          return option.label()
+        }
         return h(
           RouterLink,
           {

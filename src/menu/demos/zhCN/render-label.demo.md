@@ -2,8 +2,6 @@
 
 使用 `renderLabel` 可以批量处理我们在 `options` 中传入的 `label`。
 
-**注意：如果 `options` 中 `label` 有设置回调函数时，设置回调函数的数据不会被 `renderLabel` 批量处理**。
-
 ```html
 <n-menu :options="menuOptions" :renderLabel="handleRenderLabel" />
 ```
@@ -64,6 +62,9 @@ export default {
     return {
       menuOptions,
       handleRenderLabel (option) {
+        if (typeof option.label === 'function') {
+          return option.label()
+        }
         return h(
           RouterLink,
           {

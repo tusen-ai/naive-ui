@@ -2,10 +2,13 @@
 
 ## 2.12.2
 
+### Feats
+
+- `n-menu` add `renderLabel` prop, closes [#84](https://github.com/TuSimple/naive-ui/issues/84)
+
 ### Fixes
 
 - Fix `n-form-item` always show require mark.
-- `n-menu` add `renderLabel` prop, closes [#84](https://github.com/TuSimple/naive-ui/issues/84)
 
 ## 2.12.1
 

@@ -344,6 +344,9 @@ export default {
     }
 
     const handleMenuOption = (option) => {
+      if (typeof option.title === 'function') {
+        return option.title()
+      }
       return h(
         RouterLink,
         {

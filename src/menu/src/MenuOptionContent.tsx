@@ -86,7 +86,7 @@ export default defineComponent({
           </div>
         ) : null}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">
-          {this.menuProps.renderLabel && typeof this.title !== 'function'
+          {this.menuProps.renderLabel
             ? this.menuProps.renderLabel(tmNode.rawNode)
             : render(this.title)}
           {this.extra ? (
