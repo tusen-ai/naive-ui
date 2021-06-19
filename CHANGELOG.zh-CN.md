@@ -2,6 +2,11 @@
 
 ## Pending
 - `n-menu` 新增 `renderLabel` 属性，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
+## 2.12.2
+
+### Feats
+
+- `n-menu` 新增 `renderLabel` 属性，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
 
 ### Fixes
 

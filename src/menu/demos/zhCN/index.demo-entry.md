@@ -22,7 +22,7 @@ long-label
 ### Menu Props
 
 | 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | collapsed-icon-size | `number` | `24` | 菜单折叠时图标的大小，如果为设定则使用 `icon-size` 代替 |
 | collapsed-width | `number` | `48` | 折叠后菜单的宽度 |
 | collapsed | `boolean` | `false` | 菜单是否折叠，值在菜单为垂直时有用 |
@@ -35,7 +35,7 @@ long-label
 | inverted | `boolean` | `false` | 使用反转样式 |
 | options | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | `[]` | 菜单的数据 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | 菜单的布局方式 |
-| render-label | `((option: MenuOption | MenuGroupOption) => VNodeChild)` | `undefined` | 批量处理菜单渲染 |
+| render-label | `((option: MenuOption \| MenuGroupOption) => VNodeChild)` | `undefined` | 批量处理菜单渲染 |
 | root-indent | `number` | `32` | 菜单第一级的缩进，如果没有设定，使用 `indent` 代替 |
 | value | `string \| null` | `undefined` | 菜单当前的选中值 |
 | on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` 是展开菜单项的 `key` 的数组 |

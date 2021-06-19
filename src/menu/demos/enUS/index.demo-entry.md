@@ -22,7 +22,7 @@ long-label
 ### Menu Props
 
 | Name | Type | Default | Description |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | collapsed-icon-size | `number` | `24` | The icon size when menu is collapsed. If not set, menu will use `icon-size` in place of it. |
 | collapsed-width | `number` | `48` | The menu width after collapsed. |
 | collapsed | `boolean` | `false` | The collapsed status of menu, only works when menu is vertical. |
@@ -35,7 +35,7 @@ long-label
 | inverted | `boolean` | `false` | Use inverted style. |
 | options | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | `[]` | Items data of menu. |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | Menu layout. |
-| render-label | `((option: MenuOption | MenuGroupOption) => VNodeChild)` | `undefined` | Batch processing menu rendering. |
+| render-label | `((option: MenuOption \| MenuGroupOption) => VNodeChild)` | `undefined` | Batch processing menu rendering. |
 | root-indent | `number` | `undefined` | The indent of menu's first level children. If not set, menu will use `indent` in place of it. |
 | value | `string \| null` | `undefined` | The selected name of menu. |
 | on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` is the array of expanded menu options' `key`. |
