@@ -53,7 +53,7 @@ footerslot
 | is-date-disabled | `(current: number) => boolean` | `undefined` | 日期禁用的校验函数 |
 | is-time-disabled | `(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }` | `undefined` | 时间禁用的校验函数 |
 | placeholder | `string` | `'选择日期时间'` | 提示信息 |
-| on-update:value | `(value: number \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 |
+| on-update:value | `(value: number \| null) => void` | `undefined` | 数据更新时触发的回调函数 |
 
 ### DateRange 类型的 Props
 
