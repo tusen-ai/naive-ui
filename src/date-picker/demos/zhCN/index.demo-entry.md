@@ -64,7 +64,7 @@ footerslot
 | format | `string` | `'yyyy-MM-dd'` | 用户自定义的数据格式化方式 |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | 时间禁用的校验函数 |
-| ranges | `Record<string, [number, number]>` | `undefined` | 用户自定义的 DateRange 范围 |
+| ranges | `Record<string, [number, number]>` | `undefined` | 用户自定义的快捷选择范围 |
 | separator | `string` | `'至'` | start 选框与 end 选框之间的分隔符 |
 | start-placeholder | `string` | `'开始日期'` | DateRange 中 start 选框的提示信息 |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 |
