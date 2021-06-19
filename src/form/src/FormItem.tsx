@@ -401,6 +401,7 @@ export default defineComponent({
             class={`${mergedClsPrefix}-form-item-label`}
             style={this.mergedLabelStyle as any}
           >
+            {/* undefined || 'right' || true || false */}
             {this.mergedShowRequireMark !== 'left'
               ? renderSlot($slots, 'label', undefined, () => [this.label])
               : null}

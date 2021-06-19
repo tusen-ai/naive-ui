@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-form-item` always show require mark.
+
 ## 2.12.1
 
 ### Feats
