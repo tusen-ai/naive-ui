@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-tree` drag over leaf node causes error, closes [#200](https://github.com/TuSimple/naive-ui/issues/200).
+
 ## 2.12.2 (2021-06-19)
 
 ### Fixes

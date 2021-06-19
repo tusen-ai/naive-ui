@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-tree` 拖拽悬浮叶节点报错，关闭 [#200](https://github.com/TuSimple/naive-ui/issues/200)
+
 ## 2.12.2 (2021-06-19)
 
 ### Fixes
