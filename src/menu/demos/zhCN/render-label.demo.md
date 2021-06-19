@@ -3,7 +3,7 @@
 使用 `renderLabel` 可以批量处理我们在 `options` 中传入的 `label`。
 
 ```html
-<n-menu :options="menuOptions" :renderLabel="handleRenderLabel" />
+<n-menu :options="menuOptions" :render-label="renderMenuLabel" />
 ```
 
 ```js
@@ -61,7 +61,7 @@ export default {
   setup () {
     return {
       menuOptions,
-      handleRenderLabel (option) {
+      renderMenuLabel (option) {
         if (typeof option.label === 'function') {
           return option.label()
         }

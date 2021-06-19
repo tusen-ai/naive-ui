@@ -20,7 +20,7 @@
         :value="menuValue"
         :options="options"
         @update:value="handleMenuUpdateValue"
-        :renderLabel="handleMenuOption"
+        :render-label="renderMenuLabel"
       />
     </n-layout-sider>
     <n-layout
@@ -77,7 +77,7 @@ export default {
     const isMobileRef = useIsMobile()
     const isTabletRef = useIsTablet()
 
-    const handleMenuOption = (option) => {
+    const renderMenuLabel = (option) => {
       if (typeof option.label === 'function') {
         return option.label()
       }
@@ -90,7 +90,7 @@ export default {
       )
     }
     return {
-      handleMenuOption,
+      renderMenuLabel,
       showSider: useMemo(() => {
         return !isMobileRef.value && !isTabletRef.value
       }),

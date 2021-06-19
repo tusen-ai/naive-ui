@@ -11,7 +11,7 @@
           :value="menuValue"
           :options="menuOptions"
           @update:value="handleMenuUpdateValue"
-          :renderLabel="handleMenuOption"
+          :render-label="renderMenuLabel"
         />
       </div>
       <n-auto-complete
@@ -343,7 +343,7 @@ export default {
       router.push(/^(\/[^/]+){2}/.exec(route.path)[0])
     }
 
-    const handleMenuOption = (option) => {
+    const renderMenuLabel = (option) => {
       if (typeof option.title === 'function') {
         return option.title()
       }
@@ -357,7 +357,7 @@ export default {
     }
 
     return {
-      handleMenuOption,
+      renderMenuLabel,
       mobilePopoverRef,
       tusimple: process.env.TUSIMPLE,
       dev: __DEV__,

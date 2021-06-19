@@ -152,7 +152,7 @@ const menuProps = {
     default: undefined
   },
   renderLabel: {
-    type: [Function, Array] as PropType<
+    type: Function as PropType<
     (option: MenuOption | MenuGroupOption) => VNodeChild
     >
   }
