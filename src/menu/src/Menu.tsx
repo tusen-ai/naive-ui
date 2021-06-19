@@ -151,11 +151,9 @@ const menuProps = {
     },
     default: undefined
   },
-  renderLabel: {
-    type: Function as PropType<
-    (option: MenuOption | MenuGroupOption) => VNodeChild
-    >
-  }
+  renderLabel: Function as PropType<
+  (option: MenuOption | MenuGroupOption) => VNodeChild
+  >
 } as const
 
 export type MenuSetupProps = ExtractPropTypes<typeof menuProps>

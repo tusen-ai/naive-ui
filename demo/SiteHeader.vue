@@ -41,6 +41,7 @@
           :options="mobileMenuOptions"
           :indent="18"
           @update:value="handleUpdateMobileMenu"
+          :render-label="renderMenuLabel"
         />
       </div>
     </n-popover>
@@ -78,8 +79,8 @@
 </template>
 
 <script>
-import { computed, h, ref } from 'vue'
-import { useRouter, useRoute, RouterLink } from 'vue-router'
+import { computed, ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useMessage, version } from 'naive-ui'
 import { MenuOutline } from '@vicons/ionicons5'
 import { repoUrl } from './utils/github-url'
@@ -92,7 +93,8 @@ import {
   useFlattenedDocOptions,
   useConfigProviderName,
   useDocOptions,
-  useComponentOptions
+  useComponentOptions,
+  renderMenuLabel
 } from './store'
 
 // match substr
@@ -152,15 +154,15 @@ export default {
       return [
         {
           key: 'home',
-          title: t('home')
+          label: t('home')
         },
         {
           key: 'doc',
-          title: t('doc')
+          label: t('doc')
         },
         {
           key: 'component',
-          title: t('component')
+          label: t('component')
         }
       ]
     })
@@ -199,29 +201,29 @@ export default {
       return [
         {
           key: 'theme',
-          title: themeLabelMapRef.value[themeNameRef.value]
+          label: themeLabelMapRef.value[themeNameRef.value]
         },
         {
           key: 'locale',
-          title: localeNameRef.value === 'zh-CN' ? 'English' : '中文'
+          label: localeNameRef.value === 'zh-CN' ? 'English' : '中文'
         },
         {
           key: 'home',
-          title: t('home')
+          label: t('home')
         },
         {
           key: 'doc',
-          title: t('doc'),
+          label: t('doc'),
           children: docOptionsRef.value
         },
         {
           key: 'component',
-          title: t('component'),
+          label: t('component'),
           children: componentOptionsRef.value
         },
         {
           key: 'github',
-          title: 'GitHub'
+          label: 'GitHub'
         }
       ]
     })
@@ -341,19 +343,6 @@ export default {
         return
       }
       router.push(/^(\/[^/]+){2}/.exec(route.path)[0])
-    }
-
-    const renderMenuLabel = (option) => {
-      if (typeof option.title === 'function') {
-        return option.title()
-      }
-      return h(
-        RouterLink,
-        {
-          to: option.key
-        },
-        { default: () => option.title }
-      )
     }
 
     return {

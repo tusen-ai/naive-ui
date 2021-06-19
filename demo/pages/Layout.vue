@@ -37,12 +37,12 @@
 
 <script>
 // Frame component for components & docs page
-import { computed, watch, toRef, ref, h } from 'vue'
-import { RouterLink, useRoute, useRouter } from 'vue-router'
+import { computed, watch, toRef, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { findMenuValue } from '../utils/route'
 import { useIsMobile, useIsTablet } from '../utils/composables'
 import SiteFooter from './home/Footer.vue'
-import { useDocOptions, useComponentOptions } from '../store'
+import { useDocOptions, useComponentOptions, renderMenuLabel } from '../store'
 import { useMemo } from 'vooks'
 
 export default {
@@ -77,18 +77,6 @@ export default {
     const isMobileRef = useIsMobile()
     const isTabletRef = useIsTablet()
 
-    const renderMenuLabel = (option) => {
-      if (typeof option.label === 'function') {
-        return option.label()
-      }
-      return h(
-        RouterLink,
-        {
-          to: option.key
-        },
-        { default: () => option.label }
-      )
-    }
     return {
       renderMenuLabel,
       showSider: useMemo(() => {
