@@ -314,6 +314,7 @@ export default defineComponent({
       toRef(props, 'data'),
       () => {
         loadingKeysRef.value = []
+        pendingNodeKeyRef.value = null
         resetDndState()
       },
       {

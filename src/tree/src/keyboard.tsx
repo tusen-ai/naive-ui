@@ -1,7 +1,7 @@
-import { ref, Ref } from 'vue'
+import { inject, ref, Ref } from 'vue'
 import { TreeNode } from 'treemate'
-import { Key, TmNode } from '../../tree/src/interface'
-import { TreeOption } from './interface'
+import { Key, TmNode, TreeOption } from './interface'
+import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 
 export function useKeyboard ({
   fNodesRef,
@@ -21,11 +21,16 @@ export function useKeyboard ({
     handleKeydown: (e: KeyboardEvent) => void
   } {
   const { value: mergedSelectedKeys } = mergedSelectedKeysRef
-  const pendingNodeKeyRef = ref<null | Key>(
-    mergedSelectedKeys.length
-      ? mergedSelectedKeys[mergedSelectedKeys.length - 1]
-      : null
-  )
+
+  // If it's used in tree-select, make it take over pending state
+  const treeSelectInjection = inject(treeSelectInjectionKey, null)
+  const pendingNodeKeyRef = treeSelectInjection
+    ? treeSelectInjection.pendingNodeKeyRef
+    : ref<null | Key>(
+      mergedSelectedKeys.length
+        ? mergedSelectedKeys[mergedSelectedKeys.length - 1]
+        : null
+    )
   function handleKeyup (e: KeyboardEvent): void {
     const { value: pendingNodeKey } = pendingNodeKeyRef
     if (pendingNodeKey === null) {
