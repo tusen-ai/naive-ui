@@ -67,6 +67,9 @@ long-label
 | Name | Type | Description |
 | --- | --- | --- |
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 95d494288 (Apply suggestions from code review)
 | children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | Group items. **required!** |
 | key | `string` | The indentifier of the menu group. |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |
