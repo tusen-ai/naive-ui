@@ -10,7 +10,6 @@
           mode="horizontal"
           :value="menuValue"
           :options="menuOptions"
-          @update:value="handleMenuUpdateValue"
           :render-label="renderMenuLabel"
         />
       </div>
@@ -96,6 +95,7 @@ import {
   useComponentOptions,
   renderMenuLabel
 } from './store'
+import { renderMenuLabel } from './store/menu-options'
 
 // match substr
 function match (pattern, string) {
@@ -145,6 +145,7 @@ export default {
     const router = useRouter()
 
     const mobilePopoverRef = ref(null)
+    const themeAndLocaleReg = /^(\/[^/]+){2}/
 
     // i18n
     const { t } = i18n(locales)
@@ -154,39 +155,21 @@ export default {
       return [
         {
           key: 'home',
-          label: t('home')
+          label: t('home'),
+          path: themeAndLocaleReg.exec(route.path)[0]
         },
         {
           key: 'doc',
-          label: t('doc')
+          label: t('doc'),
+          path: themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
         },
         {
           key: 'component',
-          label: t('component')
+          label: t('component'),
+          path: themeAndLocaleReg.exec(route.path)[0] + '/components/button'
         }
       ]
     })
-    const themeAndLocaleReg = /^(\/[^/]+){2}/
-    function handleMenuUpdateValue (value) {
-      if (value === 'github') {
-        window.open(repoUrl, '_blank')
-      }
-      if (value === 'home') {
-        router.push(themeAndLocaleReg.exec(route.path)[0])
-      } else if (value === 'doc') {
-        if (!/^(\/[^/]+){2}\/docs/.test(route.path)) {
-          router.push(
-            themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
-          )
-        }
-      } else if (value === 'component') {
-        if (!/^(\/[^/]+){2}\/components/.test(route.path)) {
-          router.push(
-            themeAndLocaleReg.exec(route.path)[0] + '/components/button'
-          )
-        }
-      }
-    }
     const menuValueRef = computed(() => {
       if (/\/docs\//.test(route.path)) return 'doc'
       if (/\/components\//.test(route.path)) return 'component'
@@ -209,16 +192,19 @@ export default {
         },
         {
           key: 'home',
-          label: t('home')
+          label: t('home'),
+          path: themeAndLocaleReg.exec(route.path)[0]
         },
         {
           key: 'doc',
           label: t('doc'),
-          children: docOptionsRef.value
+          children: docOptionsRef.value,
+          path: themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
         },
         {
           key: 'component',
           label: t('component'),
+          path: themeAndLocaleReg.exec(route.path)[0] + '/components/button',
           children: componentOptionsRef.value
         },
         {
@@ -243,7 +229,7 @@ export default {
       } else if (path) {
         router.push(path)
       } else {
-        handleMenuUpdateValue(value)
+        window.open(repoUrl, '_blank')
       }
       mobilePopoverRef.value.setShow(false)
     }
@@ -379,7 +365,6 @@ export default {
       // menu
       menuOptions: menuOptionsRef,
       menuValue: menuValueRef,
-      handleMenuUpdateValue,
       // mobile & tablet menu
       mobileMenuOptions: mobileMenuOptionsRef,
       handleUpdateMobileMenu,

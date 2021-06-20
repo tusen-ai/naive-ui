@@ -1,6 +1,6 @@
 # 批量处理菜单渲染
 
-使用 `renderLabel` 可以批量处理我们在 `options` 中传入的 `label`。
+使用 `renderLabel` 可以批量控制菜单的选项渲染。
 
 ```html
 <n-menu :options="menuOptions" :render-label="renderMenuLabel" />
