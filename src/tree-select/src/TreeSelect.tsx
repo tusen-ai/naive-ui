@@ -625,7 +625,10 @@ export default defineComponent({
                                   checkable={checkable}
                                   cascade={this.mergedCascade}
                                   multiple={this.multiple}
-                                  virtualScroll={this.virtualScroll}
+                                  virtualScroll={
+                                    !this.consistentMenuWidth &&
+                                    this.virtualScroll
+                                  }
                                   internalDataTreeMate={this.dataTreeMate}
                                   internalDisplayTreeMate={this.displayTreeMate}
                                   internalHighlightKeySet={
