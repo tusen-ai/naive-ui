@@ -5,7 +5,7 @@ import type { TreeTheme } from '../styles'
 
 export type Key = string | number
 
-export interface TreeOption {
+export interface TreeOptionBase {
   key: Key
   label: string
   checkboxDisabled?: boolean
@@ -14,6 +14,8 @@ export interface TreeOption {
   children?: TreeOption[]
   suffix?: () => VNodeChild
 }
+
+export type TreeOption = TreeOptionBase & { [k: string]: unknown }
 
 export type TreeOptions = TreeOption[]
 

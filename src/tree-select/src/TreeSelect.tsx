@@ -22,7 +22,7 @@ import {
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
 import { createTreeMate } from 'treemate'
-import { TreeOptions, Key, InternalTreeInst } from '../../tree/src/interface'
+import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { treeMateOptions, treeSharedProps } from '../../tree/src/Tree'
 import {
@@ -41,12 +41,13 @@ import {
   useAdjustedTo
 } from '../../_utils'
 import { treeSelectLight, TreeSelectTheme } from '../styles'
-import {
+import type {
   OnUpdateValue,
   OnUpdateValueImpl,
-  treeSelectInjectionKey,
+  TreeSelectOption,
   Value
 } from './interface'
+import { treeSelectInjectionKey } from './interface'
 import { treeOption2SelectOption, filterTree } from './utils'
 import style from './styles/index.cssr'
 
@@ -75,7 +76,7 @@ const props = {
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
   options: {
-    type: Array as PropType<TreeOptions>,
+    type: Array as PropType<TreeSelectOption[]>,
     default: () => []
   },
   placeholder: String,
@@ -139,7 +140,7 @@ export default defineComponent({
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
     const patternRef = ref('')
     const filteredTreeInfoRef = computed<{
-      filteredTree: TreeOptions
+      filteredTree: TreeSelectOption[]
       highlightKeySet: Set<Key> | undefined
     }>(() => {
       if (!props.filterable) {
@@ -159,10 +160,13 @@ export default defineComponent({
     })
     // used to resolve selected options
     const dataTreeMateRef = computed(() =>
-      createTreeMate(props.options, treeMateOptions)
+      createTreeMate<TreeSelectOption>(props.options, treeMateOptions)
     )
     const displayTreeMateRef = computed(() =>
-      createTreeMate(filteredTreeInfoRef.value.filteredTree, treeMateOptions)
+      createTreeMate<TreeSelectOption>(
+        filteredTreeInfoRef.value.filteredTree,
+        treeMateOptions
+      )
     )
     const { value: initMergedValue } = mergedValueRef
     const pendingNodeKeyRef = ref(

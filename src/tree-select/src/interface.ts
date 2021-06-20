@@ -1,4 +1,13 @@
 import { InjectionKey, Ref } from 'vue'
+import { TreeOptionBase } from '../../tree/src/interface'
+
+export type TreeSelectOption = Omit<
+TreeOptionBase,
+'checkboxDisabled' | 'isLeaf' | 'children'
+> & {
+  children?: TreeSelectOption[]
+  [k: string]: unknown
+}
 
 export type OnUpdateValue = (
   value: string &

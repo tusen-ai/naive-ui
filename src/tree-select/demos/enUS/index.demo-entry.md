@@ -24,10 +24,10 @@ basic
 | disabled | `boolean` | `false` | Whether to disable the tree select. |
 | expanded-keys | `Array<string \| number>` | `undefined` | Expanded keys. |
 | filterable | `boolean` | `false` | Whether the tree select is disabled. |
-| filter | `(pattern: string, option: TreeOption) => boolean` | - | Filter function. |
+| filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | Filter function. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count to be shown in multiple mode. Set to `'responsive'` will keep all tags in the same row. |
 | multiple | `boolean` | `false` | Whether to support multiple select. |
-| options | `TreeOption[]` | `[]` | Options. |
+| options | `TreeSelectOption[]` | `[]` | Options. |
 | placeholder | `string` | `'Please Select'` | Placeholder. |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | Selected key (or keys when multiple). |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scroll. |
@@ -36,11 +36,11 @@ basic
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Callback on focus. |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null) => void` | `undefined` | Callback on value updated. |
 
-### TreeOption Properties
+### TreeSelectOption Properties
 
-| Name      | Type               | Description                          |
-| --------- | ------------------ | ------------------------------------ |
-| key       | `string \| number` | Key of the option. Should be unique. |
-| label     | `string`           | Displayed content of the option.     |
-| children? | `TreeOption[]`     | Child options of the option.         |
-| disabled? | `boolean`          | Whether to disabled the option.      |
+| Name      | Type                 | Description                          |
+| --------- | -------------------- | ------------------------------------ |
+| key       | `string \| number`   | Key of the option. Should be unique. |
+| label     | `string`             | Displayed content of the option.     |
+| children? | `TreeSelectOption[]` | Child options of the option.         |
+| disabled? | `boolean`            | Whether to disabled the option.      |

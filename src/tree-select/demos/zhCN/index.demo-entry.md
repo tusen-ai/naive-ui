@@ -24,10 +24,10 @@ basic
 | disabled | `boolean` | `false` | 是否禁用 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 展开节点的 key |
 | filterable | `boolean` | `false` | 是否可过滤 |
-| filter | `(pattern: string, option: TreeOption) => boolean` | - | 过滤器函数 |
+| filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | 过滤器函数 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选时最多直接显示多少选项，设为 `'responsive'` 会保证最多一行 |
 | multiple | `boolean` | `false` | 是否支持多选 |
-| options | `TreeOption[]` | `[]` | 选项 |
+| options | `TreeSelectOption[]` | `[]` | 选项 |
 | placeholder | `string` | `'请选择'` | 占位信息 |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | 选中的 key |
 | virtual-scroll | `boolean` | `true` | 是否开启虚拟滚动 |
@@ -36,11 +36,11 @@ basic
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Focus 时的回调 |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null) => void` | `undefined` | 更新值的回调 |
 
-### TreeOption Properties
+### TreeSelectOption Properties
 
-| 名称      | 类型               | 说明                 |
-| --------- | ------------------ | -------------------- |
-| key       | `string \| number` | 选项的 key，需要唯一 |
-| label     | `string`           | 选项的显示内容       |
-| children? | `TreeOption[]`     | 节点的子选项         |
-| disabled? | `boolean`          | 是否禁用选项         |
+| 名称      | 类型                 | 说明                 |
+| --------- | -------------------- | -------------------- |
+| key       | `string \| number`   | 选项的 key，需要唯一 |
+| label     | `string`             | 选项的显示内容       |
+| children? | `TreeSelectOption[]` | 节点的子选项         |
+| disabled? | `boolean`            | 是否禁用选项         |

@@ -1,7 +1,10 @@
 import { SelectBaseOption } from '../../select/src/interface'
-import { TreeOption, TreeOptions, Key } from '../../tree/src/interface'
+import { Key } from '../../tree/src/interface'
+import { TreeSelectOption } from './interface'
 
-export function treeOption2SelectOption (treeOpt: TreeOption): SelectBaseOption {
+export function treeOption2SelectOption (
+  treeOpt: TreeSelectOption
+): SelectBaseOption {
   return {
     ...treeOpt,
     value: treeOpt.key
@@ -9,19 +12,19 @@ export function treeOption2SelectOption (treeOpt: TreeOption): SelectBaseOption 
 }
 
 export function filterTree (
-  tree: TreeOptions,
-  filter: (pattern: string, v: TreeOption) => boolean,
+  tree: TreeSelectOption[],
+  filter: (pattern: string, v: TreeSelectOption) => boolean,
   pattern: string
 ): {
-    filteredTree: TreeOptions
+    filteredTree: TreeSelectOption[]
     highlightKeySet: Set<Key>
   } {
   const visitedTailKeys = new Set<Key>()
   const visitedNonTailKeys = new Set<Key>()
   const highlightKeySet = new Set<Key>()
-  const filteredTree: TreeOptions = []
-  const path: TreeOptions = []
-  function visit (t: TreeOptions): void {
+  const filteredTree: TreeSelectOption[] = []
+  const path: TreeSelectOption[] = []
+  function visit (t: TreeSelectOption[]): void {
     t.forEach((n) => {
       path.push(n)
       if (filter(pattern, n)) {
@@ -46,7 +49,7 @@ export function filterTree (
     })
   }
   visit(tree)
-  function build (t: TreeOptions, sibs: TreeOptions): void {
+  function build (t: TreeSelectOption[], sibs: TreeSelectOption[]): void {
     t.forEach((n) => {
       const { key } = n
       const isVisitedTail = visitedTailKeys.has(key)
