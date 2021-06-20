@@ -55,4 +55,9 @@ if (typeof window !== 'undefined') {
     'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 }
 
+export const defaultFilter = (pattern: string, node: TreeOption): boolean => {
+  if (!pattern.length) return true
+  return node.label.toLowerCase().includes(pattern.toLowerCase())
+}
+
 export { emptyImage }
