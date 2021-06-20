@@ -8,6 +8,7 @@
 ### Feats
 
 - `n-tree` 支持键盘操作
+- 新增 `n-tree-select` 组件
 
 ### Fixes
 

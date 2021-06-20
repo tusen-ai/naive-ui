@@ -8,6 +8,7 @@
 ### Feats
 
 - `n-tree` supports keyboard operations.
+- Add `n-tree-select` component.
 
 ### Fixes
 
