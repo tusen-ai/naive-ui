@@ -17,6 +17,7 @@ pair
 input-group
 passively-activated
 count
+pass-standard-props
 ```
 
 ## Props
@@ -25,14 +26,12 @@ count
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| autocapitalize | `'on' \| 'off'` |  | Safari 自动大写 |
-| autocomplete | `'on' \| 'off' \| 'new-password'` |  | 浏览器的自动补全, 与 `name` 一起使用 |
-| autocorrect | `'on' \| 'off'` |  | Safari 自动更正 |
 | autofocus | `boolean` | `false` |  |
 | autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` |  |
 | clearable | `boolean` | `false` |  |
 | default-value | `string \| [string, string] \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
+| input-props | `object` | `{}` |  |
 | show-password-toggle | `boolean` | `false` | 控制密码的显示隐藏 |
 | maxlength | `number` | `undefined` |  |
 | minlength | `number` | `undefined` |  |

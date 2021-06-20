@@ -13,7 +13,9 @@ import {
   watch,
   watchEffect,
   WatchStopHandle,
-  provide
+  provide,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { getPadding } from 'seemly'
@@ -82,9 +84,10 @@ const inputProps = {
     default: true
   },
   autofocus: Boolean,
-  autocomplete: String as PropType<'on' | 'off' | 'new-password'>,
-  autocapitalize: String as PropType<'off' | 'on'>,
-  autocorrect: String as PropType<'off' | 'on'>,
+  inputProps: {
+    type: Object as PropType<TextareaHTMLAttributes | InputHTMLAttributes>,
+    default: {}
+  },
   name: String,
   resizable: {
     type: Boolean,
@@ -786,6 +789,7 @@ export default defineComponent({
   },
   render () {
     const { mergedClsPrefix } = this
+
     return (
       <div
         ref="wrapperElRef"
@@ -837,9 +841,6 @@ export default defineComponent({
                 class={`${mergedClsPrefix}-input__textarea-el`}
                 autofocus={this.autofocus}
                 name={this.name}
-                autocomplete={this.autocomplete}
-                autocapitalize={this.autocapitalize}
-                autocorrect={this.autocorrect}
                 rows={Number(this.rows)}
                 placeholder={this.placeholder as string | undefined}
                 value={this.mergedValue as string | undefined}
@@ -855,6 +856,7 @@ export default defineComponent({
                 onFocus={this.handleInputFocus}
                 onInput={this.handleInput}
                 onChange={this.handleChange}
+                {...this.inputProps}
               />
               {this.showPlaceholder1 ? (
                 <div
@@ -882,9 +884,6 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
                 name={this.name}
-                autocomplete={this.autocomplete}
-                autocapitalize={this.autocapitalize}
-                autocorrect={this.autocorrect}
                 ref="inputElRef"
                 type={
                   this.type === 'password' &&
@@ -914,6 +913,7 @@ export default defineComponent({
                 onFocus={this.handleInputFocus}
                 onInput={(e) => this.handleInput(e, 0)}
                 onChange={(e) => this.handleChange(e, 0)}
+                {...this.inputProps}
               />
               {this.showPlaceholder1 ? (
                 <div class={`${mergedClsPrefix}-input__placeholder`}>

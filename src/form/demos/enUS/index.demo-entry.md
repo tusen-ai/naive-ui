@@ -23,7 +23,7 @@ async
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | autocapitalize | `'on' \| 'off'` |  | Safari auto capitalize |
-| autocomplete | `'on' \| 'off' \| 'new-password'` |  | Browser auto complate, used with `name` |
+| autocomplete | `'on' \| 'off' \| 'new-password'` |  | Browser auto complete, used with `name` |
 | autocorrect | `'on' \| 'off'` |  | Safari auto correct |
 | inline | `boolean` | `false` |  |
 | label-width | `number \| string` | `undefined` | The width of label. Can be useful when `label-placement` is `'left'`. |

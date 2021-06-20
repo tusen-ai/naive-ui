@@ -17,6 +17,7 @@ pair
 input-group
 passively-activated
 count
+pass-standard-props
 ```
 
 ## Props
@@ -25,14 +26,12 @@ count
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| autocapitalize | `'on' \| 'off'` |  | Safari auto capitalize |
-| autocomplete | `'on' \| 'off' \| 'new-password'` |  | Browser auto complate, used with `name` |
-| autocorrect | `'on' \| 'off'` |  | Safari auto correct |
 | autofocus | `boolean` | `false` |  |
 | autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` |  |
 | clearable | `boolean` | `false` |  |
 | default-value | `string \| [string, string] \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
+| input-props | `object` | `{}` |  |
 | show-password-toggle | `boolean` | `false` | Controls the display and hiding of passwords |
 | maxlength | `number` | `undefined` |  |
 | minlength | `number` | `undefined` |  |
