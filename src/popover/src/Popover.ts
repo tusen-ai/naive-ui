@@ -323,14 +323,13 @@ export default defineComponent({
     }
     // will be called in popover-content
     function handleClickOutside (e: MouseEvent): void {
-      const { onClickoutside } = props
       if (!getMergedShow()) return
       if (props.trigger === 'click') {
         clearShowTimer()
         clearHideTimer()
         doUpdateShow(false)
       }
-      onClickoutside?.(e)
+      props.onClickoutside?.(e)
     }
     function handleClick (): void {
       if (props.trigger === 'click' && !getMergedDisabled()) {

@@ -215,32 +215,22 @@ describe('n-dropdown', () => {
     wrapper.unmount()
   })
   it('dropdown clickoutside', async () => {
-    const mousedown = new MouseEvent('mousedown', { bubbles: true })
-    const mouseup = new MouseEvent('mouseup', { bubbles: true })
-    const onSelect = jest.fn()
+    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
+    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
 
-    let show = true
-    const onClickoutside = jest.fn((e) => {
-      show = false
-    })
-    const wrapper = mountDropdown({ onClickoutside, onSelect })
-    const div = document.createElement('div')
-    div.innerHTML = 'click'
-    div.className = 'click'
+    const onClickoutside = jest.fn()
+    const wrapper = mountDropdown({ onClickoutside })
 
     const triggerNodeWrapper = wrapper.find('span')
     expect(triggerNodeWrapper.exists()).toBe(true)
     await triggerNodeWrapper.trigger('click')
-    const options = document.querySelectorAll(optionBodySelector)
-    expect(options.length).not.toBe(0)
     expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
-    await document.body.appendChild(div)
-    div.dispatchEvent(mousedown)
-    div.dispatchEvent(mouseup)
+    document.body.dispatchEvent(mousedownEvent)
+    document.body.dispatchEvent(mouseupEvent)
     await nextTick(() => {
       const nextOptions = document.querySelectorAll(optionBodySelector)
       expect(nextOptions.length).toBe(0)
     })
-    expect(show).toBe(false)
+    expect(onClickoutside).toHaveBeenCalled()
   })
 })

@@ -84,7 +84,7 @@ export default defineComponent({
         positionManuallyRef: { value: positionManually }
       } = NPopover
       if (!positionManually) {
-        if (trigger === 'click') {
+        if (trigger === 'click' && !onClickoutside) {
           directives.push([clickoutside, handleClickOutside])
         }
         if (trigger === 'hover') {
