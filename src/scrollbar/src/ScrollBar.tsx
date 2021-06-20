@@ -95,6 +95,7 @@ export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
 export default defineComponent({
   name: 'Scrollbar',
   props: scrollbarProps,
+  inheritAttrs: false,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
 
