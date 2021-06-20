@@ -60,7 +60,6 @@ export default defineComponent({
     },
     multiple: Boolean,
     filterable: Boolean,
-    remote: Boolean,
     clearable: Boolean,
     disabled: Boolean,
     size: {
@@ -80,7 +79,6 @@ export default defineComponent({
     onBlur: Function as PropType<(e: FocusEvent) => void>,
     onFocus: Function as PropType<(e: FocusEvent) => void>,
     onDeleteOption: Function,
-    onDeleteLastOption: Function,
     maxTagCount: [String, Number] as PropType<number | 'responsive'>,
     onClear: Function as PropType<(e: MouseEvent) => void>,
     onPatternInput: Function as PropType<(e: InputEvent) => void>
@@ -160,10 +158,6 @@ export default defineComponent({
       const { onDeleteOption } = props
       if (onDeleteOption) onDeleteOption(value)
     }
-    function doDeleteLastOption (): void {
-      const { onDeleteLastOption } = props
-      if (onDeleteLastOption) onDeleteLastOption()
-    }
     function doClear (e: MouseEvent): void {
       const { onClear } = props
       if (onClear) onClear(e)
@@ -204,7 +198,10 @@ export default defineComponent({
     function handlePatternKeyDown (e: KeyboardEvent): void {
       if (e.code === 'Backspace') {
         if (!props.pattern.length) {
-          doDeleteLastOption()
+          const { selectedOptions } = props
+          if (selectedOptions?.length) {
+            handleDeleteOption(selectedOptions[selectedOptions.length - 1])
+          }
         }
       }
     }
