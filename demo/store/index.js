@@ -1,4 +1,4 @@
-import { computed, ref, watch } from 'vue'
+import { computed, h, ref, watch } from 'vue'
 import { useMemo } from 'vooks'
 import {
   NConfigProvider,
@@ -16,6 +16,7 @@ import {
   createComponentMenuOptions
 } from './menu-options'
 import hljs from './hljs'
+import { RouterLink } from 'vue-router'
 
 let route = null
 let router = null
@@ -147,6 +148,16 @@ function changeLangInPath (path, lang) {
 function changeThemeInPath (path, theme) {
   const themeReg = /(^\/[^/]+\/)([^/]+)/
   return path.replace(themeReg, '$1' + theme)
+}
+
+export const renderMenuLabel = (option) => {
+  return h(
+    RouterLink,
+    {
+      to: option.key
+    },
+    { default: () => option.label }
+  )
 }
 
 export function push (partialPath) {

@@ -66,7 +66,7 @@ long-label
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | **required!** Submenu. |
+| children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | Submenu, **required!** |
 | key | `string` | The indentifier of the menu group. |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |
-| type | `'group'` | **required!** The type of the menu item. |
+| type | `'group'` | The type of the menu item, **required!** |

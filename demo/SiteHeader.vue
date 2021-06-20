@@ -79,8 +79,8 @@
 </template>
 
 <script>
-import { computed, h, ref } from 'vue'
-import { useRouter, useRoute, RouterLink } from 'vue-router'
+import { computed, ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useMessage, version } from 'naive-ui'
 import { MenuOutline } from '@vicons/ionicons5'
 import { repoUrl } from './utils/github-url'
@@ -93,7 +93,8 @@ import {
   useFlattenedDocOptions,
   useConfigProviderName,
   useDocOptions,
-  useComponentOptions
+  useComponentOptions,
+  renderMenuLabel
 } from './store'
 
 // match substr
@@ -342,19 +343,6 @@ export default {
         return
       }
       router.push(/^(\/[^/]+){2}/.exec(route.path)[0])
-    }
-
-    const renderMenuLabel = (option) => {
-      if (typeof option.label === 'function') {
-        return option.label()
-      }
-      return h(
-        RouterLink,
-        {
-          to: option.key
-        },
-        { default: () => option.label }
-      )
     }
 
     return {

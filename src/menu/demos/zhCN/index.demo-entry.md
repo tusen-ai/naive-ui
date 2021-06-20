@@ -66,7 +66,7 @@ long-label
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | **必填！**子菜单 |
+| children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | 子菜单，**必填！** |
 | key | `string` | 菜单项的标识符 |
 | label | `string \| (() => VNodeChild)` | 菜单项的内容 |
-| type | `'group'` | **必填！**菜单项的类型 |
+| type | `'group'` | 菜单项的类型，**必填！** |

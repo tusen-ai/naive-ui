@@ -30,9 +30,6 @@ export default {
     return {
       menuOptions,
       renderMenuLabel (option) {
-        if (typeof option.label === 'function') {
-          return option.label()
-        }
         return h(
           RouterLink,
           {
