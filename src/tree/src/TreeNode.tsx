@@ -11,6 +11,7 @@ import {
 } from 'vue'
 import { useMemo } from 'vooks'
 import { happensIn, repeat } from 'seemly'
+import { createDataKey } from '../../_utils'
 import NTreeNodeSwitcher from './TreeNodeSwitcher'
 import NTreeNodeCheckbox from './TreeNodeCheckbox'
 import NTreeNodeContent from './TreeNodeContent'
@@ -177,6 +178,7 @@ const TreeNode = defineComponent({
         () => NTree.disabledRef.value || props.tmNode.disabled
       ),
       checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
+      internalScrollable: NTree.internalScrollableRef,
       checkable: NTree.checkableRef,
       draggable: NTree.draggableRef,
       blockLine: NTree.blockLineRef,
@@ -208,7 +210,8 @@ const TreeNode = defineComponent({
       indent,
       disabled,
       pending,
-      suffix
+      suffix,
+      internalScrollable
     } = this
     // drag start not inside
     // it need to be append to node itself, not wrapper
@@ -222,6 +225,9 @@ const TreeNode = defineComponent({
             onDragover: this.handleDragOver
           }
         : undefined
+    // In non virtual mode, there's no evidence that which element should be
+    // scrolled to, so we need data-key to query the target element.
+    const dataKey = internalScrollable ? createDataKey(tmNode.key) : undefined
     return (
       <div class={`${clsPrefix}-tree-node-wrapper`} {...dragEventHandlers}>
         <div
@@ -235,6 +241,7 @@ const TreeNode = defineComponent({
               [`${clsPrefix}-tree-node--disabled`]: disabled
             }
           ]}
+          data-key={dataKey}
           draggable={draggable && blockLine}
           onClick={blockLine && !disabled ? this.handleContentClick : undefined}
           onDragstart={

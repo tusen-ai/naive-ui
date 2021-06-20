@@ -70,6 +70,7 @@ export interface TreeInjection {
   droppingOffsetLevelRef: Ref<number>
   disabledRef: Ref<boolean>
   pendingNodeKeyRef: Ref<null | Key>
+  internalScrollableRef: Ref<boolean>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void
@@ -90,4 +91,9 @@ export interface MotionData {
   height: number | undefined
   mode: 'expand' | 'collapse'
   nodes: TmNode[]
+}
+
+export interface InternalTreeInst {
+  handleKeyup: (e: KeyboardEvent) => void
+  handleKeydown: (e: KeyboardEvent) => void
 }
