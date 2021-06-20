@@ -5,6 +5,10 @@
 - `n-dropdown` 新增 `on-clickoutside` 属性，关闭 [#123](https://github.com/TuSimple/naive-ui/issues/123)
 - `n-menu` 新增 `render-label` 属性，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
 
+### Feats
+
+- `n-tree` 支持键盘操作
+
 ### Fixes
 
 - 修复 `n-tree` 缺少 `on-update-expanded-keys`、`on-update-selected-keys`、`on-update-checked-keys` 属性

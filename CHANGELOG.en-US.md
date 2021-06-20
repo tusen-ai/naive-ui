@@ -5,6 +5,10 @@
 - `n-dropdown` add `on-clickoutside` prop, closes [#123](https://github.com/TuSimple/naive-ui/issues/123).
 - `n-menu` add `renderLabel` prop, closes [#84](https://github.com/TuSimple/naive-ui/issues/84)
 
+### Feats
+
+- `n-tree` supports keyboard operations.
+
 ### Fixes
 
 - Fix `n-tree` drag over leaf node causes error, closes [#200](https://github.com/TuSimple/naive-ui/issues/200).

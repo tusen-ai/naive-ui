@@ -69,6 +69,7 @@ export interface TreeInjection {
   droppingPositionRef: Ref<null | DropPosition>
   droppingOffsetLevelRef: Ref<number>
   disabledRef: Ref<boolean>
+  pendingNodeKeyRef: Ref<null | Key>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void

@@ -18,12 +18,13 @@ import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { NScrollbar } from '../../scrollbar'
+import { NxScrollbar } from '../../scrollbar'
 import type { ScrollbarInst } from '../../scrollbar'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
 import { keysWithFilter, emptyImage } from './utils'
+import { useKeyboard } from './keyboard'
 import style from './styles/index.cssr'
 import {
   DragInfo,
@@ -255,7 +256,7 @@ export default defineComponent({
     const uncontrolledExpandedKeysRef = ref(
       props.defaultExpandAll
         ? treeMateRef.value.getNonLeafKeys()
-        : props.defaultExpandedKeys || props.expandedKeys
+        : props.defaultExpandedKeys
     )
     const controlledExpandedKeysRef = toRef(props, 'expandedKeys')
     const mergedExpandedKeysRef = useMergedState(
@@ -266,6 +267,13 @@ export default defineComponent({
     const fNodesRef = computed(() =>
       treeMateRef.value.getFlattenedNodes(mergedExpandedKeysRef.value)
     )
+
+    const { pendingNodeKeyRef, handleKeyup, handleKeydown } = useKeyboard({
+      fNodesRef,
+      mergedExpandedKeysRef,
+      handleSelect,
+      handleSwitcherClick
+    })
 
     let expandTimerId: number | null = null
     let nodeKeyToBeExpanded: Key | null = null
@@ -502,26 +510,27 @@ export default defineComponent({
       )
       doCheckedKeysChange(checkedKeys)
     }
-    function toggleExpand (node: TmNode): void {
+    function toggleExpand (key: Key): void {
       if (props.disabled) return
       const { value: mergedExpandedKeys } = mergedExpandedKeysRef
       const index = mergedExpandedKeys.findIndex(
-        (expandNodeId) => expandNodeId === node.key
+        (expandNodeId) => expandNodeId === key
       )
       if (~index) {
         const expandedKeysAfterChange = Array.from(mergedExpandedKeys)
         expandedKeysAfterChange.splice(index, 1)
         doUpdateExpandedKeys(expandedKeysAfterChange)
       } else {
-        doUpdateExpandedKeys(mergedExpandedKeys.concat(node.key))
+        doUpdateExpandedKeys(mergedExpandedKeys.concat(key))
       }
     }
     function handleSwitcherClick (node: TmNode): void {
       if (props.disabled || aipRef.value) return
-      toggleExpand(node)
+      toggleExpand(node.key)
     }
     function handleSelect (node: TmNode): void {
       if (props.disabled || node.disabled || !props.selectable) return
+      pendingNodeKeyRef.value = node.key
       if (props.multiple) {
         const selectedKeys = mergedSelectedKeysRef.value
         const index = selectedKeys.findIndex((key) => key === node.key)
@@ -890,6 +899,19 @@ export default defineComponent({
     function handleResize (): void {
       scrollbarInstRef.value?.sync()
     }
+    function handleFocusout (e: FocusEvent): void {
+      if (props.virtualScroll || props.internalScrollable) {
+        const { value: scrollbarInst } = scrollbarInstRef
+        if (scrollbarInst?.containerRef?.contains(e.relatedTarget as Element)) {
+          return
+        }
+        pendingNodeKeyRef.value = null
+      } else {
+        const { value: selfEl } = selfElRef
+        if (selfEl?.contains(e.relatedTarget as Element)) return
+        pendingNodeKeyRef.value = null
+      }
+    }
     provide(treeInjectionKey, {
       loadingKeysRef,
       highlightKeySetRef: mergedHighlightKeySetRef,
@@ -911,6 +933,7 @@ export default defineComponent({
       droppingPositionRef,
       droppingOffsetLevelRef,
       fNodesRef,
+      pendingNodeKeyRef,
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,
@@ -929,6 +952,9 @@ export default defineComponent({
       selfElRef,
       virtualListInstRef,
       scrollbarInstRef,
+      handleKeydown,
+      handleKeyup,
+      handleFocusout,
       handleDragLeaveTree,
       handleScroll,
       getScrollContainer,
@@ -968,8 +994,18 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, blockNode, blockLine, draggable, selectable } =
-      this
+    const {
+      mergedClsPrefix,
+      blockNode,
+      blockLine,
+      draggable,
+      selectable,
+      disabled,
+      handleKeyup,
+      handleKeydown,
+      handleFocusout
+    } = this
+    const tabindex = disabled ? undefined : '0'
     const treeClass = [
       `${mergedClsPrefix}-tree`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
@@ -996,7 +1032,7 @@ export default defineComponent({
       const { mergedTheme, internalScrollablePadding } = this
       const padding = getPadding(internalScrollablePadding || '0')
       return (
-        <NScrollbar
+        <NxScrollbar
           ref="scrollbarInstRef"
           onDragleave={draggable ? this.handleDragLeaveTree : undefined}
           container={this.getScrollContainer}
@@ -1004,6 +1040,10 @@ export default defineComponent({
           class={treeClass}
           theme={mergedTheme.peers.Scrollbar}
           themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+          tabindex={tabindex}
+          onKeyup={handleKeyup}
+          onKeydown={handleKeydown}
+          onFocusout={handleFocusout}
         >
           {{
             default: () => (
@@ -1033,14 +1073,18 @@ export default defineComponent({
               </VVirtualList>
             )
           }}
-        </NScrollbar>
+        </NxScrollbar>
       )
     }
     const { internalScrollable } = this
     if (internalScrollable) {
       return (
-        <NScrollbar
+        <NxScrollbar
           class={treeClass}
+          tabindex={tabindex}
+          onKeyup={handleKeyup}
+          onKeydown={handleKeydown}
+          onFocusout={handleFocusout}
           style={this.cssVars as CSSProperties}
           contentStyle={{ padding: this.internalScrollablePadding }}
         >
@@ -1054,15 +1098,19 @@ export default defineComponent({
               </div>
             )
           }}
-        </NScrollbar>
+        </NxScrollbar>
       )
     } else {
       return (
         <div
           class={treeClass}
-          style={this.cssVars as CSSProperties}
-          onDragleave={draggable ? this.handleDragLeaveTree : undefined}
+          tabindex={tabindex}
           ref="selfElRef"
+          style={this.cssVars as CSSProperties}
+          onKeyup={handleKeyup}
+          onKeydown={handleKeydown}
+          onFocusout={handleFocusout}
+          onDragleave={draggable ? this.handleDragLeaveTree : undefined}
         >
           {this.fNodes.map(createNode)}
         </div>

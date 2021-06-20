@@ -21,9 +21,10 @@ const nodeStateStyle = [
 // --node-color-pressed
 // --node-text-color
 // --node-text-color-disabled
-export default cB('tree', {
-  fontSize: 'var(--font-size)'
-}, [
+export default cB('tree', `
+  font-size: var(--font-size);
+  outline: none;
+`, [
   c('ul, li', `
     margin: 0;
     padding: 0;
@@ -100,6 +101,11 @@ export default cB('tree', {
     cB('tree-node', [
       cNotM('disabled', [
         cB('tree-node-content', nodeStateStyle),
+        cM('pending', [
+          cB('tree-node-content', `
+            background-color: var(--node-color-hover);
+          `)
+        ]),
         cM('selected', [
           cB('tree-node-content', {
             backgroundColor: 'var(--node-color-active)'
@@ -112,6 +118,9 @@ export default cB('tree', {
     cB('tree-node', [
       cNotM('disabled', [
         nodeStateStyle,
+        cM('pending', `
+          background-color: var(--node-color-hover);
+        `),
         cM('selected', {
           backgroundColor: 'var(--node-color-active)'
         })

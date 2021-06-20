@@ -151,6 +151,9 @@ const TreeNode = defineComponent({
         }
         return false
       }),
+      pending: useMemo(
+        () => NTree.pendingNodeKeyRef.value === props.tmNode.key
+      ),
       loading: useMemo(() =>
         NTree.loadingKeysRef.value.includes(props.tmNode.key)
       ),
@@ -204,6 +207,7 @@ const TreeNode = defineComponent({
       blockLine,
       indent,
       disabled,
+      pending,
       suffix
     } = this
     // drag start not inside
@@ -227,6 +231,7 @@ const TreeNode = defineComponent({
               [`${clsPrefix}-tree-node--selected`]: selected,
               [`${clsPrefix}-tree-node--checkable`]: checkable,
               [`${clsPrefix}-tree-node--highlight`]: highlight,
+              [`${clsPrefix}-tree-node--pending`]: pending,
               [`${clsPrefix}-tree-node--disabled`]: disabled
             }
           ]}
