@@ -1,6 +1,9 @@
 # CHANGELOG
 
-<<<<<<< HEAD
+### Feat
+
+- `n-dropdown` add `onClickoutside` prop, closes [#123](https://github.com/TuSimple/naive-ui/issues/123).
+
 ## Pending
 
 ### Fixes
@@ -14,13 +17,6 @@
 - Fix `n-form-item` always show require mark.
 
 ## 2.12.1 (2021-06-19)
-=======
-### Feats
-
-- `n-dropdown` add `onClickoutside` prop, closes [#123](https://github.com/TuSimple/naive-ui/issues/123).
-
-## 2.12.1
->>>>>>> fix: remove clickoutside demo
 
 ### Feats
 
