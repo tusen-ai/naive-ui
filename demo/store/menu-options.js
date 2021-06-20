@@ -356,6 +356,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/transfer'
         },
         {
+          en: 'Tree Select',
+          zh: '树型选择',
+          enSuffix: true,
+          path: '/tree-select'
+        },
+        {
           en: 'Upload',
           zh: '上传',
           enSuffix: true,
