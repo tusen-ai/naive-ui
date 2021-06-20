@@ -1,6 +1,6 @@
 # Render Label
 
-The `renderLabel` can be used to batch process the `label` we pass in in `options`.
+The `renderLabel` can be used to batch process the `label` rendering.
 
 ```html
 <n-menu :options="menuOptions" :render-label="renderMenuLabel" />

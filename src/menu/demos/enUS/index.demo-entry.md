@@ -46,8 +46,8 @@ long-label
 | Name | Type | Description |
 | --- | --- | --- |
 | disabled? | `boolean` | Whether to disable the menu item. |
-| extra? | `string \| (() => VNodeChild)` | The extra parts of menu item. |
-| icon? | `() => VNodeChild` | The icons for menu item. |
+| extra? | `string \| (() => VNodeChild)` | The extra parts of the menu item. |
+| icon? | `() => VNodeChild` | The icon for the menu item. |
 | key | `string` | The indentifier of the menu item. |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |
 
@@ -55,10 +55,10 @@ long-label
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | Submenu. |
-| disabled? | `boolean` | Whether to disable the menu item. |
-| extra? | `string \| (() => VNodeChild)` | The extra parts of menu item. |
-| icon? | `() => VNodeChild` | The icons for menu item. |
+| children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | Submenu child items. |
+| disabled? | `boolean` | Whether to disable the submenu. |
+| extra? | `string \| (() => VNodeChild)` | The extra parts of the menu item. |
+| icon? | `() => VNodeChild` | The icon for the submenu item. |
 | key | `string` | The indentifier of the submenu. |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |
 
@@ -66,7 +66,7 @@ long-label
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | **required!** Submenu. |
+| children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | Group items. **required!** |
 | key | `string` | The indentifier of the menu group. |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |
 | type | `'group'` | **required!** The type of the menu item. |
