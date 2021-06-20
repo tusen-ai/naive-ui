@@ -6,11 +6,13 @@ import { TreeOption } from './interface'
 export function useKeyboard ({
   fNodesRef,
   mergedExpandedKeysRef,
+  mergedSelectedKeysRef,
   handleSelect,
   handleSwitcherClick
 }: {
   fNodesRef: Ref<Array<TreeNode<TreeOption>>>
   mergedExpandedKeysRef: Ref<Key[]>
+  mergedSelectedKeysRef: Ref<Key[]>
   handleSelect: (node: TmNode) => void
   handleSwitcherClick: (node: TmNode) => void
 }): {
@@ -18,7 +20,12 @@ export function useKeyboard ({
     handleKeyup: (e: KeyboardEvent) => void
     handleKeydown: (e: KeyboardEvent) => void
   } {
-  const pendingNodeKeyRef = ref<null | Key>(null)
+  const { value: mergedSelectedKeys } = mergedSelectedKeysRef
+  const pendingNodeKeyRef = ref<null | Key>(
+    mergedSelectedKeys.length
+      ? mergedSelectedKeys[mergedSelectedKeys.length - 1]
+      : null
+  )
   function handleKeyup (e: KeyboardEvent): void {
     const { value: pendingNodeKey } = pendingNodeKeyRef
     if (pendingNodeKey === null) {

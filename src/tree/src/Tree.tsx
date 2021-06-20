@@ -276,6 +276,7 @@ export default defineComponent({
     )
 
     const { pendingNodeKeyRef, handleKeyup, handleKeydown } = useKeyboard({
+      mergedSelectedKeysRef,
       fNodesRef,
       mergedExpandedKeysRef,
       handleSelect,
@@ -438,7 +439,7 @@ export default defineComponent({
       if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, value)
       if (onExpandedKeysChange) call(onExpandedKeysChange, value)
     }
-    function doCheckedKeysChange (value: Key[]): void {
+    function doUpdateCheckedKeys (value: Key[]): void {
       const {
         'onUpdate:checkedKeys': _onUpdateCheckedKeys,
         onUpdateCheckedKeys,
@@ -515,7 +516,7 @@ export default defineComponent({
           cascade: props.cascade
         }
       )
-      doCheckedKeysChange(checkedKeys)
+      doUpdateCheckedKeys(checkedKeys)
     }
     function toggleExpand (key: Key): void {
       if (props.disabled) return
@@ -539,7 +540,16 @@ export default defineComponent({
       if (props.disabled || node.disabled || !props.selectable) return
       pendingNodeKeyRef.value = node.key
       if (props.internalCheckOnSelect) {
-        handleCheck(node, mergedCheckedKeysRef.value.includes(node.key))
+        const {
+          value: { checkedKeys, indeterminateKeys }
+        } = checkedStatusRef
+        handleCheck(
+          node,
+          !(
+            checkedKeys.includes(node.key) ||
+            indeterminateKeys.includes(node.key)
+          )
+        )
       }
       if (props.multiple) {
         const selectedKeys = Array.from(mergedSelectedKeysRef.value)
