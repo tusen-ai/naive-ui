@@ -5,7 +5,7 @@ describe('n-tree', () => {
   it('should work with import on demand', () => {
     mount(NTree)
   })
-  it('should accepts proper options', () => {
+  it('should accept proper options', () => {
     mount(NTree, {
       props: {
         options: [
