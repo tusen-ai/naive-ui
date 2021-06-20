@@ -13,6 +13,7 @@
 
 - 修复 `n-tree` 缺少 `on-update-expanded-keys`、`on-update-selected-keys`、`on-update-checked-keys` 属性
 - 修复 `n-tree` 拖拽悬浮叶节点报错，关闭 [#200](https://github.com/TuSimple/naive-ui/issues/200)
+- 修复 `n-tree` 对 `selected-keys` 属性影响原数组
 
 ## 2.12.2 (2021-06-19)
 

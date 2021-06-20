@@ -542,7 +542,7 @@ export default defineComponent({
         handleCheck(node, mergedCheckedKeysRef.value.includes(node.key))
       }
       if (props.multiple) {
-        const selectedKeys = mergedSelectedKeysRef.value
+        const selectedKeys = Array.from(mergedSelectedKeysRef.value)
         const index = selectedKeys.findIndex((key) => key === node.key)
         if (~index) {
           if (props.cancelable) {

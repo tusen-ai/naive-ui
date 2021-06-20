@@ -13,6 +13,7 @@
 
 - Fix `n-tree` drag over leaf node causes error, closes [#200](https://github.com/TuSimple/naive-ui/issues/200).
 - Fix `n-tree` misses `on-update-expanded-keys`, `on-update-selected-keys`, `on-update-checked-keys` prop.
+- Fix `n-tree`'s `selected-keys` prop influences original array.
 
 ## 2.12.2 (2021-06-19)
 
