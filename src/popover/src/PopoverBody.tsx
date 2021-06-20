@@ -53,7 +53,7 @@ export const popoverBodyProps = {
   shadow: Boolean,
   padded: Boolean,
   animated: Boolean,
-  onClickoutside: Function as PropType<(value: boolean) => void>,
+  onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   /** @deprecated */
   minWidth: Number,
   maxWidth: Number

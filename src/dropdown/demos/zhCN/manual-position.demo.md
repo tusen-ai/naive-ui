@@ -16,7 +16,7 @@
   :y="y"
   :options="options"
   :show="showDropdown"
-  :onClickoutside="onClickoutside"
+  :on-clickoutside="onClickoutside"
 />
 ```
 
@@ -100,9 +100,9 @@ export default defineComponent({
           yRef.value = e.clientY
         })
       },
-      onClickoutside (show) {
-        message.info('click ' + show)
-        showDropdownRef.value = show
+      onClickoutside (e) {
+        message.info('clickoutside')
+        showDropdownRef.value = false
       }
     }
   }

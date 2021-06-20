@@ -146,7 +146,7 @@ export const popoverBaseProps = {
     default: true
   },
   internalExtraClass: String,
-  onClickoutside: Function as PropType<(value: boolean) => void>,
+  onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   // events
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
@@ -322,7 +322,7 @@ export default defineComponent({
       handleMouseLeave()
     }
     // will be called in popover-content
-    function handleClickOutside (): void {
+    function handleClickOutside (e: MouseEvent): void {
       const { onClickoutside } = props
       if (!getMergedShow()) return
       if (props.trigger === 'click') {
@@ -330,7 +330,7 @@ export default defineComponent({
         clearHideTimer()
         doUpdateShow(false)
       }
-      onClickoutside?.(false)
+      onClickoutside?.(e)
     }
     function handleClick (): void {
       if (props.trigger === 'click' && !getMergedDisabled()) {

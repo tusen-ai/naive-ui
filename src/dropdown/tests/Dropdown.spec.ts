@@ -220,8 +220,8 @@ describe('n-dropdown', () => {
     const onSelect = jest.fn()
 
     let show = true
-    const onClickoutside = jest.fn((isShow) => {
-      show = isShow
+    const onClickoutside = jest.fn((e) => {
+      show = false
     })
     const wrapper = mountDropdown({ onClickoutside, onSelect })
     const div = document.createElement('div')
@@ -237,9 +237,6 @@ describe('n-dropdown', () => {
     await document.body.appendChild(div)
     div.dispatchEvent(mousedown)
     div.dispatchEvent(mouseup)
-    expect(
-      document.body.children[document.body.children.length - 1].className
-    ).toEqual('click')
     await nextTick(() => {
       const nextOptions = document.querySelectorAll(optionBodySelector)
       expect(nextOptions.length).toBe(0)

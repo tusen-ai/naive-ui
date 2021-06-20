@@ -1,8 +1,8 @@
 # CHANGELOG
 
-### Feat
+### Feats
 
-- `n-dropdown` add `onClickoutside` prop, closes [#123](https://github.com/TuSimple/naive-ui/issues/123).
+- `n-dropdown` add `on-clickoutside` prop, closes [#123](https://github.com/TuSimple/naive-ui/issues/123).
 
 ## Pending
 

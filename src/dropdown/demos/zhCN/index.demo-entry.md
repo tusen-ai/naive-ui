@@ -23,7 +23,7 @@ group-debug
 | keyboard | `boolean` | `true` | 是否支持键盘操作（注意和其他内容键盘操作可能的冲突） |
 | options | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | `[]` | 下拉菜单传入的 options |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | 下拉菜单的尺寸大小 |
-| onClickoutside | `(show: boolean) => void` | `undefined` | clickoutside 的时候触发的回调函数 |
+| on-clickoutside | `(e: MouseEvent) => void` | `undefined` | clickoutside 的时候触发的回调函数 |
 | on-select | `(key: string \| number) => void` | `undefined` | select 选中时触发的回调函数 |
 
 对于其他 Props，例如 `placement`，请参考 [Popover Props](popover#Props)。注意 `arrow`、`raw` 属性不可用。

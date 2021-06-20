@@ -22,7 +22,7 @@ manual-position
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. (Be careful about the potential conflicts with other components keyboard operations) |
 | options | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | `[]` | Options of the dropdown. |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | Dropdown size. |
-| onClickoutside | `(show: boolean) => void` | `undefined` | Callback function triggered when clickoutside. |
+| on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when clickoutside. |
 | on-select | `(key: string \| number) => void` | `undefined` | Callback function triggered on blur. |
 
 For other props, for example `placement`, please see [Popover Props](popover#Props). Note that `arrow`, `raw` is not available.

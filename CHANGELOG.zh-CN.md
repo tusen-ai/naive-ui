@@ -2,7 +2,7 @@
 
 ### Feats
 
-- `n-dropdown` 新增 `onClickoutside` 属性，关闭 [#123](https://github.com/TuSimple/naive-ui/issues/123)
+- `n-dropdown` 新增 `on-clickoutside` 属性，关闭 [#123](https://github.com/TuSimple/naive-ui/issues/123)
 
 ## Pending
 
