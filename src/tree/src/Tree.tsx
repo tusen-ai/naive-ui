@@ -11,14 +11,15 @@ import {
   CSSProperties,
   VNode
 } from 'vue'
-import { createTreeMate, flatten, createIndexGetter } from 'treemate'
+import { createTreeMate, flatten, createIndexGetter, TreeMate } from 'treemate'
 import { useMergedState } from 'vooks'
 import { VirtualListInst, VVirtualList } from 'vueuc'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { NScrollbar, ScrollbarInst } from '../../scrollbar'
+import { NScrollbar } from '../../scrollbar'
+import type { ScrollbarInst } from '../../scrollbar'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
@@ -40,6 +41,7 @@ import {
 } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
+import { getPadding } from 'seemly'
 
 // TODO:
 // During expanding, some node are mis-applied with :active style
@@ -47,13 +49,33 @@ import { defaultAllowDrop } from './dnd'
 
 const ITEM_SIZE = 30
 
+export const treeMateOptions = {
+  getDisabled (node: TreeOption) {
+    return !!(node.disabled || node.checkboxDisabled)
+  }
+}
+
+export const treeSharedProps = {
+  defaultExpandAll: Boolean,
+  expandedKeys: Array as PropType<Key[]>,
+  defaultExpandedKeys: {
+    type: Array as PropType<Key[]>,
+    default: () => []
+  },
+  onUpdateExpandedKeys: [Function, Array] as PropType<
+  MaybeArray<(value: Key[]) => void>
+  >,
+  'onUpdate:expandedKeys': [Function, Array] as PropType<
+  MaybeArray<(value: Key[]) => void>
+  >
+} as const
+
 const treeProps = {
   ...(useTheme.props as ThemeProps<TreeTheme>),
   data: {
     type: Array as PropType<TreeOptions>,
     default: () => []
   },
-  defaultExpandAll: Boolean,
   expandOnDragenter: {
     type: Boolean,
     default: true
@@ -69,11 +91,6 @@ const treeProps = {
   disabled: Boolean,
   checkedKeys: Array as PropType<Key[]>,
   defaultCheckedKeys: {
-    type: Array as PropType<Key[]>,
-    default: () => []
-  },
-  expandedKeys: Array as PropType<Key[]>,
-  defaultExpandedKeys: {
     type: Array as PropType<Key[]>,
     default: () => []
   },
@@ -116,18 +133,24 @@ const treeProps = {
   onDragstart: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
   onDragover: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
   onDrop: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
-  // eslint-disable-next-line vue/prop-name-casing
-  'onUpdate:expandedKeys': [Function, Array] as PropType<
+  onUpdateCheckedKeys: [Function, Array] as PropType<
   MaybeArray<(value: Key[]) => void>
   >,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:checkedKeys': [Function, Array] as PropType<
   MaybeArray<(value: Key[]) => void>
   >,
-  // eslint-disable-next-line vue/prop-name-casing
+  onUpdateSelectedKeys: [Function, Array] as PropType<
+  MaybeArray<(value: Key[]) => void>
+  >,
   'onUpdate:selectedKeys': [Function, Array] as PropType<
   MaybeArray<(value: Key[]) => void>
   >,
+  ...treeSharedProps,
+  // set for tree-select
+  internalScrollable: Boolean,
+  internalScrollablePadding: String,
+  internalTreeMate: Object as PropType<TreeMate<TreeOption>>,
+  internalHighlightKeySet: Object as PropType<Set<Key>>,
   // deprecated
   /** @deprecated */
   onExpandedKeysChange: {
@@ -197,13 +220,11 @@ export default defineComponent({
     function getScrollContent (): HTMLElement | null | undefined {
       return virtualListInstRef.value?.itemsElRef
     }
-    const treeMateRef = computed(() =>
-      createTreeMate(props.data, {
-        getDisabled (node) {
-          return !!(node.disabled || node.checkboxDisabled)
-        }
-      })
-    )
+    const treeMateRef = computed(() => {
+      return (
+        props.internalTreeMate || createTreeMate(props.data, treeMateOptions)
+      )
+    })
     const uncontrolledCheckedKeysRef = ref(
       props.defaultCheckedKeys || props.checkedKeys
     )
@@ -248,7 +269,12 @@ export default defineComponent({
 
     let expandTimerId: number | null = null
     let nodeKeyToBeExpanded: Key | null = null
-    const highlightKeysRef = ref<Key[]>([])
+    const uncontrolledHighlightKeySetRef = ref<Set<Key>>(new Set())
+    const controlledHighlightKeySetRef = toRef(props, 'internalHighlightKeySet')
+    const mergedHighlightKeySetRef = useMergedState(
+      controlledHighlightKeySetRef,
+      uncontrolledHighlightKeySetRef
+    )
     const loadingKeysRef = ref<Key[]>([])
 
     let dragStartX: number = 0
@@ -280,15 +306,12 @@ export default defineComponent({
     )
     watch(toRef(props, 'pattern'), (value) => {
       if (value) {
-        const [expandedKeysAfterChange, highlightKeys] = keysWithFilter(
-          props.data,
-          props.pattern,
-          props.filter
-        )
-        highlightKeysRef.value = highlightKeys
-        doExpandedKeysChange(expandedKeysAfterChange)
+        const { expandedKeys: expandedKeysAfterChange, highlightKeySet } =
+          keysWithFilter(props.data, props.pattern, props.filter)
+        uncontrolledHighlightKeySetRef.value = highlightKeySet
+        doUpdateExpandedKeys(expandedKeysAfterChange)
       } else {
-        highlightKeysRef.value = []
+        uncontrolledHighlightKeySetRef.value = new Set()
       }
     })
 
@@ -389,31 +412,37 @@ export default defineComponent({
       aipRef.value = false
     }
 
-    function doExpandedKeysChange (value: Key[]): void {
+    function doUpdateExpandedKeys (value: Key[]): void {
       const {
-        'onUpdate:expandedKeys': onUpdateExpandedKeys,
+        'onUpdate:expandedKeys': _onUpdateExpandedKeys,
+        onUpdateExpandedKeys,
         onExpandedKeysChange
       } = props
       uncontrolledExpandedKeysRef.value = value
+      if (_onUpdateExpandedKeys) call(_onUpdateExpandedKeys, value)
       if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, value)
       if (onExpandedKeysChange) call(onExpandedKeysChange, value)
     }
     function doCheckedKeysChange (value: Key[]): void {
       const {
-        'onUpdate:checkedKeys': onUpdateCheckedKeys,
+        'onUpdate:checkedKeys': _onUpdateCheckedKeys,
+        onUpdateCheckedKeys,
         onCheckedKeysChange
       } = props
       uncontrolledCheckedKeysRef.value = value
       if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, value)
+      if (_onUpdateCheckedKeys) call(_onUpdateCheckedKeys, value)
       if (onCheckedKeysChange) call(onCheckedKeysChange, value)
     }
     function doUpdateSelectedKeys (value: Key[]): void {
       const {
-        'onUpdate:selectedKeys': onUpdateSelectedKeys,
+        'onUpdate:selectedKeys': _onUpdateSelectedKeys,
+        onUpdateSelectedKeys,
         onSelectedKeysChange
       } = props
       uncontrolledSelectedKeysRef.value = value
       if (onUpdateSelectedKeys) call(onUpdateSelectedKeys, value)
+      if (_onUpdateSelectedKeys) call(_onUpdateSelectedKeys, value)
       if (onSelectedKeysChange) call(onSelectedKeysChange, value)
     }
     // Drag & Drop
@@ -482,9 +511,9 @@ export default defineComponent({
       if (~index) {
         const expandedKeysAfterChange = Array.from(mergedExpandedKeys)
         expandedKeysAfterChange.splice(index, 1)
-        doExpandedKeysChange(expandedKeysAfterChange)
+        doUpdateExpandedKeys(expandedKeysAfterChange)
       } else {
-        doExpandedKeysChange(mergedExpandedKeys.concat(node.key))
+        doUpdateExpandedKeys(mergedExpandedKeys.concat(node.key))
       }
     }
     function handleSwitcherClick (node: TmNode): void {
@@ -532,7 +561,7 @@ export default defineComponent({
           droppingMouseNode.key === node.key &&
           !mergedExpandedKeysRef.value.includes(node.key)
         ) {
-          doExpandedKeysChange(mergedExpandedKeysRef.value.concat(node.key))
+          doUpdateExpandedKeys(mergedExpandedKeysRef.value.concat(node.key))
         }
         expandTimerId = null
         nodeKeyToBeExpanded = null
@@ -863,7 +892,7 @@ export default defineComponent({
     }
     provide(treeInjectionKey, {
       loadingKeysRef,
-      highlightKeysRef,
+      highlightKeySetRef: mergedHighlightKeySetRef,
       displayedCheckedKeysRef,
       displayedIndeterminateKeysRef,
       mergedSelectedKeysRef,
@@ -964,7 +993,8 @@ export default defineComponent({
         />
       )
     if (this.virtualScroll) {
-      const { mergedTheme } = this
+      const { mergedTheme, internalScrollablePadding } = this
+      const padding = getPadding(internalScrollablePadding || '0')
       return (
         <NScrollbar
           ref="scrollbarInstRef"
@@ -982,7 +1012,15 @@ export default defineComponent({
                 items={this.fNodes}
                 itemSize={ITEM_SIZE}
                 ignoreItemResize={this.aip}
-                style={this.cssVars as CSSProperties}
+                paddingTop={padding.top}
+                paddingBottom={padding.bottom}
+                style={[
+                  this.cssVars as CSSProperties,
+                  {
+                    paddingLeft: padding.left,
+                    paddingRight: padding.right
+                  }
+                ]}
                 onScroll={this.handleScroll}
                 onResize={this.handleResize}
                 showScrollbar={false}
@@ -998,15 +1036,37 @@ export default defineComponent({
         </NScrollbar>
       )
     }
-    return (
-      <div
-        class={treeClass}
-        style={this.cssVars as CSSProperties}
-        onDragleave={draggable ? this.handleDragLeaveTree : undefined}
-        ref="selfElRef"
-      >
-        {this.fNodes.map(createNode)}
-      </div>
-    )
+    const { internalScrollable } = this
+    if (internalScrollable) {
+      return (
+        <NScrollbar
+          class={treeClass}
+          style={this.cssVars as CSSProperties}
+          contentStyle={{ padding: this.internalScrollablePadding }}
+        >
+          {{
+            default: () => (
+              <div
+                onDragleave={draggable ? this.handleDragLeaveTree : undefined}
+                ref="selfElRef"
+              >
+                {this.fNodes.map(createNode)}
+              </div>
+            )
+          }}
+        </NScrollbar>
+      )
+    } else {
+      return (
+        <div
+          class={treeClass}
+          style={this.cssVars as CSSProperties}
+          onDragleave={draggable ? this.handleDragLeaveTree : undefined}
+          ref="selfElRef"
+        >
+          {this.fNodes.map(createNode)}
+        </div>
+      )
+    }
   }
 })
