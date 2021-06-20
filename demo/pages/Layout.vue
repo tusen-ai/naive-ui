@@ -42,7 +42,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { findMenuValue } from '../utils/route'
 import { useIsMobile, useIsTablet } from '../utils/composables'
 import SiteFooter from './home/Footer.vue'
-import { useDocOptions, useComponentOptions, renderMenuLabel } from '../store'
+import { useDocOptions, useComponentOptions } from '../store'
+import { renderMenuLabel } from '../store/menu-options'
 import { useMemo } from 'vooks'
 
 export default {

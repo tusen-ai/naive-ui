@@ -93,9 +93,9 @@ import {
   useFlattenedDocOptions,
   useConfigProviderName,
   useDocOptions,
-  useComponentOptions,
-  renderMenuLabel
+  useComponentOptions
 } from './store'
+import { renderMenuLabel } from './store/menu-options'
 
 // match substr
 function match (pattern, string) {

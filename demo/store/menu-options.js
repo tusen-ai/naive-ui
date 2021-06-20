@@ -1,5 +1,18 @@
 // rubbish code here
 
+import { h } from 'vue'
+import { RouterLink } from 'vue-router'
+
+export const renderMenuLabel = (option) => {
+  return h(
+    RouterLink,
+    {
+      to: option.key
+    },
+    { default: () => option.label }
+  )
+}
+
 const appendCounts = (item) => {
   if (!item.children) {
     item.count = 1
