@@ -4,7 +4,6 @@ import { ComponentPublicInstance, h, nextTick } from 'vue'
 import { NIcon } from '../../icon'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NDropdown, DropdownProps } from '../index'
-import { NButton } from '../../button'
 
 const pendingOptionClassName =
   'n-dropdown-option-body n-dropdown-option-body--pending'
@@ -216,26 +215,35 @@ describe('n-dropdown', () => {
     wrapper.unmount()
   })
   it('dropdown clickoutside', async () => {
+    const mousedown = new MouseEvent('mousedown', { bubbles: true })
+    const mouseup = new MouseEvent('mouseup', { bubbles: true })
     const onSelect = jest.fn()
-    const onClick = jest.fn()
-    const inst = mount(NButton, {
-      props: {
-        onClick
-      }
-    })
-    let show = false
-    const onClickoutside = (isShow: boolean): void => {
+
+    let show = true
+    const onClickoutside = jest.fn((isShow) => {
       show = isShow
-    }
-    const wrapper = mountDropdown({ onClickoutside, onSelect, show })
+    })
+    const wrapper = mountDropdown({ onClickoutside, onSelect })
+    const div = document.createElement('div')
+    div.innerHTML = 'click'
+    div.className = 'click'
 
     const triggerNodeWrapper = wrapper.find('span')
     expect(triggerNodeWrapper.exists()).toBe(true)
     await triggerNodeWrapper.trigger('click')
-    await inst.trigger('click')
+    const options = document.querySelectorAll(optionBodySelector)
+    expect(options.length).not.toBe(0)
+    expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
+    await document.body.appendChild(div)
+    div.dispatchEvent(mousedown)
+    div.dispatchEvent(mouseup)
+    expect(
+      document.body.children[document.body.children.length - 1].className
+    ).toEqual('click')
+    await nextTick(() => {
+      const nextOptions = document.querySelectorAll(optionBodySelector)
+      expect(nextOptions.length).toBe(0)
+    })
     expect(show).toBe(false)
-
-    wrapper.unmount()
-    inst.unmount()
   })
 })

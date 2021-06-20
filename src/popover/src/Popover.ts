@@ -146,6 +146,7 @@ export const popoverBaseProps = {
     default: true
   },
   internalExtraClass: String,
+  onClickoutside: Function as PropType<(value: boolean) => void>,
   // events
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
@@ -181,7 +182,6 @@ export const popoverBaseProps = {
     },
     default: undefined
   },
-  onClickoutside: Function as PropType<(value: boolean) => void>,
   /** @deprecated */
   arrow: {
     type: Boolean as PropType<boolean | undefined>,
