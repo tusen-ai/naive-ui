@@ -60,7 +60,11 @@ export default defineComponent({
     }
   },
   render () {
-    const { clsPrefix, tmNode } = this
+    const {
+      clsPrefix,
+      tmNode,
+      menuProps: { renderLabel }
+    } = this
     return (
       <div
         onClick={this.onClick}
@@ -86,9 +90,7 @@ export default defineComponent({
           </div>
         ) : null}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">
-          {this.menuProps.renderLabel
-            ? this.menuProps.renderLabel(tmNode.rawNode)
-            : render(this.title)}
+          {renderLabel ? renderLabel(tmNode.rawNode) : render(this.title)}
           {this.extra ? (
             <span class={`${clsPrefix}-menu-item-content-header__extra`}>
               {' '}
