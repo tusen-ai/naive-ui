@@ -11,7 +11,6 @@ cascade
 placement
 size
 manual-position
-clickoutside
 ```
 
 ## Props
@@ -22,7 +21,7 @@ clickoutside
 | inverted | `boolean` | `false` | Use inverted style. |
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. (Be careful about the potential conflicts with other components keyboard operations) |
 | options | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | `[]` | Options of the dropdown. |
-| size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | Dropdown size |
+| size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | Dropdown size. |
 | onClickoutside | `(show: boolean) => void` | `undefined` | Callback function triggered when clickoutside. |
 | on-select | `(key: string \| number) => void` | `undefined` | Callback function triggered on blur. |
 
@@ -30,12 +29,12 @@ For other props, for example `placement`, please see [Popover Props](popover#Pro
 
 ### DropdownOption Type
 
-| Property | Type               | Description                        |
-| -------- | ------------------ | ---------------------------------- |
-| icon?    | `() => VNodeChild` | Custom rendering function of icon. |
-| key      | `string \| number` | Should be unique.                  |
-| label    | `string`           | Displayed label value.             |
-| disabled | `boolean`          | Whether to disable the option.     |
+| Property | Type               | Description                     |
+| -------- | ------------------ | ------------------------------- |
+| icon?    | `() => VNodeChild` | Custom render function of icon. |
+| key      | `string \| number` | Should be unique.               |
+| label    | `string`           | Displayed label value.          |
+| disabled | `boolean`          | Whether to disable the option.  |
 
 ### DropdownDivider Type
 

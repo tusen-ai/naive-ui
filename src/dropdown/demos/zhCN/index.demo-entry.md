@@ -11,7 +11,6 @@ cascade
 placement
 size
 manual-position
-clickoutside
 group-debug
 ```
 

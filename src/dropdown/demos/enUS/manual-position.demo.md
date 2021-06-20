@@ -16,6 +16,7 @@ For some special case, you may want to manually position the dropdown. For examp
   :y="y"
   :options="options"
   :show="showDropdown"
+  :onClickoutside="onClickoutside"
 />
 ```
 
@@ -98,6 +99,10 @@ export default defineComponent({
           xRef.value = e.clientX
           yRef.value = e.clientY
         })
+      },
+      onClickoutside (show) {
+        message.info('click ' + show)
+        showDropdownRef.value = show
       }
     }
   }

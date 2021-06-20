@@ -22,7 +22,6 @@
 - `n-popselect` 支持 class 属性
 - `n-select` 新增 `render-label` 属性
 - `n-popselect` 新增 `render-label` 属性
-- `n-dropdown` 新增 `onClickoutside` 属性，关闭 [#123](https://github.com/TuSimple/naive-ui/issues/123)
 
 ### Fixes
 
