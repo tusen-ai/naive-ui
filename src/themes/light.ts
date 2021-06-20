@@ -71,6 +71,7 @@ import { tooltipLight } from '../tooltip/styles'
 import { transferLight } from '../transfer/styles'
 import { typographyLight } from '../typography/styles'
 import { treeLight } from '../tree/styles'
+import { treeSelectLight } from '../tree-select/styles'
 import { uploadLight } from '../upload/styles'
 import type { BuiltInGlobalTheme } from './interface'
 
@@ -145,6 +146,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Tooltip: tooltipLight,
   Transfer: transferLight,
   Tree: treeLight,
+  TreeSelect: treeSelectLight,
   Typography: typographyLight,
   Upload: uploadLight
 }
