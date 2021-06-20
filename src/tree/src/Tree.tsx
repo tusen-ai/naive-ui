@@ -9,7 +9,8 @@ import {
   PropType,
   watch,
   CSSProperties,
-  VNode
+  VNode,
+  nextTick
 } from 'vue'
 import { createTreeMate, flatten, createIndexGetter, TreeMate } from 'treemate'
 import { useMergedState } from 'vooks'
@@ -391,6 +392,15 @@ export default defineComponent({
 
     function handleAfterEnter (): void {
       aipRef.value = false
+      if (props.virtualScroll) {
+        // If virtual scroll, we won't listen to resize during animation, so
+        // resize callback of virtual list won't be called and as a result
+        // scrollbar won't sync. We need to sync scrollbar manually.
+        void nextTick(() => {
+          const { value: scrollbarInst } = scrollbarInstRef
+          if (scrollbarInst) scrollbarInst.sync()
+        })
+      }
     }
 
     function doUpdateExpandedKeys (value: Key[]): void {
