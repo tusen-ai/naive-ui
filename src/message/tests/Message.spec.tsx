@@ -12,7 +12,7 @@ describe('n-message', () => {
   it('should work with import on demand', () => {
     mount(NMessageProvider)
   })
-  it('should has correct type', () => {
+  it('should have correct type', () => {
     const Test = defineComponent({
       setup () {
         const message = useMessage()
