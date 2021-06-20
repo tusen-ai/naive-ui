@@ -42,7 +42,7 @@ line-debug
 | closable | `boolean` | `false` | 是否允许 tab 关闭，只在 tabs type 为 `'card'` 时生效 |
 | disabled | `boolean` | `false` |  |
 | display-directive | `'if' \| 'show'` | `'if'` | 选择性渲染使用的指令。if 对应 v-if，show 对应 v-show，使用 show 的时候标签页状态切换后不会被重置 |
-| label | `string \| VNode \| () => VNodeChild` | `undefined` |  |
+| tab | `string \| VNode \| () => VNodeChild` | `undefined` |  |
 | name | `string \| number` | required |  |
 
 ## Slots
@@ -60,4 +60,4 @@ line-debug
 | 名称    | 参数 | 说明 |
 | ------- | ---- | ---- |
 | default | `()` |      |
-| label   | `()` |      |
+| tab     | `()` |      |

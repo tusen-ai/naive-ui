@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-tree` drag over leaf node causes error, closes [#200](https://github.com/TuSimple/naive-ui/issues/200).
+- Fix `n-tabs-panel` `label` slots changed to `tab`.
 
 ## 2.12.2 (2021-06-19)
 

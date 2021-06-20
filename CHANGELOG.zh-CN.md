@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-tree` 拖拽悬浮叶节点报错，关闭 [#200](https://github.com/TuSimple/naive-ui/issues/200)
+- 修复 `n-tabs-pane` `label` slots 更改为 `tab`
 
 ## 2.12.2 (2021-06-19)
 
