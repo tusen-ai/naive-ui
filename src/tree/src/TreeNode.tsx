@@ -182,6 +182,7 @@ const TreeNode = defineComponent({
       checkable: NTree.checkableRef,
       draggable: NTree.draggableRef,
       blockLine: NTree.blockLineRef,
+      checkboxFocusable: NTree.internalCheckboxFocusableRef,
       droppingPosition: droppingPositionRef,
       droppingOffsetLevel: droppingOffsetLevelRef,
       indent: indentRef,
@@ -266,6 +267,7 @@ const TreeNode = defineComponent({
           />
           {checkable ? (
             <NTreeNodeCheckbox
+              focusable={this.checkboxFocusable}
               disabled={disabled || this.checkboxDisabled}
               clsPrefix={clsPrefix}
               checked={this.checked}

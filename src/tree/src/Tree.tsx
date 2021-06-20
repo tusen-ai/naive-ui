@@ -154,6 +154,10 @@ const treeProps = {
   internalTreeMate: Object as PropType<TreeMate<TreeOption>>,
   internalHighlightKeySet: Object as PropType<Set<Key>>,
   internalCheckOnSelect: Boolean,
+  internalCheckboxFocusable: {
+    type: Boolean,
+    default: true
+  },
   internalFocusable: {
     // Make tree-select take over keyboard operations
     type: Boolean,
@@ -964,7 +968,6 @@ export default defineComponent({
       checkableRef: toRef(props, 'checkable'),
       blockLineRef: toRef(props, 'blockLine'),
       indentRef: toRef(props, 'indent'),
-      internalScrollableRef: toRef(props, 'internalScrollable'),
       droppingMouseNodeRef,
       droppingNodeParentRef,
       draggingNodeRef,
@@ -972,6 +975,8 @@ export default defineComponent({
       droppingOffsetLevelRef,
       fNodesRef,
       pendingNodeKeyRef,
+      internalScrollableRef: toRef(props, 'internalScrollable'),
+      internalCheckboxFocusableRef: toRef(props, 'internalCheckboxFocusable'),
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,

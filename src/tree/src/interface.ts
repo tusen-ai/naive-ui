@@ -71,6 +71,7 @@ export interface TreeInjection {
   disabledRef: Ref<boolean>
   pendingNodeKeyRef: Ref<null | Key>
   internalScrollableRef: Ref<boolean>
+  internalCheckboxFocusableRef: Ref<boolean>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void
