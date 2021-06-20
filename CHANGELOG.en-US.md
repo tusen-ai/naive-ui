@@ -1,6 +1,18 @@
 # CHANGELOG
 
-## 2.12.1
+## Pending
+
+### Fixes
+
+- Fix `n-tree` drag over leaf node causes error, closes [#200](https://github.com/TuSimple/naive-ui/issues/200).
+
+## 2.12.2 (2021-06-19)
+
+### Fixes
+
+- Fix `n-form-item` always show require mark.
+
+## 2.12.1 (2021-06-19)
 
 ### Feats
 
@@ -13,7 +25,7 @@
 
 ### Fixes
 
-- Fix `n-input` jitter when Chinese and English characters switch input, closes [#174](https://github.com/TuSimple/naive-ui/issues/174).
+- Fix `n-input` baseline shifts when mix Chinese and English characters in input, closes [#174](https://github.com/TuSimple/naive-ui/issues/174).
 - Fix `n-icon` use setup script, `$parent` is an empty object by default, and access `$parent.$options` will be `undefined`.
 - Fix `n-notification` position not correct.
 - Fix `n-message` content & option type not correct.
