@@ -10,7 +10,6 @@
           mode="horizontal"
           :value="menuValue"
           :options="menuOptions"
-          @update:value="handleMenuUpdateValue"
           :render-label="renderMenuLabel"
         />
       </div>
@@ -79,8 +78,8 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { computed, h, ref } from 'vue'
+import { useRouter, useRoute, RouterLink } from 'vue-router'
 import { useMessage, version } from 'naive-ui'
 import { MenuOutline } from '@vicons/ionicons5'
 import { repoUrl } from './utils/github-url'
@@ -95,7 +94,7 @@ import {
   useDocOptions,
   useComponentOptions
 } from './store'
-import { renderMenuLabel } from './store/menu-options'
+// import { renderMenuLabel } from './store/menu-options'
 
 // match substr
 function match (pattern, string) {
@@ -145,6 +144,7 @@ export default {
     const router = useRouter()
 
     const mobilePopoverRef = ref(null)
+    const themeAndLocaleReg = /^(\/[^/]+){2}/
 
     // i18n
     const { t } = i18n(locales)
@@ -154,38 +154,32 @@ export default {
       return [
         {
           key: 'home',
-          label: t('home')
+          label: t('home'),
+          path: themeAndLocaleReg.exec(route.path)[0]
         },
         {
           key: 'doc',
-          label: t('doc')
+          label: t('doc'),
+          path: themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
         },
         {
           key: 'component',
-          label: t('component')
+          label: t('component'),
+          path: themeAndLocaleReg.exec(route.path)[0] + '/components/button'
         }
       ]
     })
-    const themeAndLocaleReg = /^(\/[^/]+){2}/
-    function handleMenuUpdateValue (value) {
-      if (value === 'github') {
-        window.open(repoUrl, '_blank')
+    const renderMenuLabel = (option) => {
+      if (!('path' in option) || option.label === '--Debug') {
+        return option.label
       }
-      if (value === 'home') {
-        router.push(themeAndLocaleReg.exec(route.path)[0])
-      } else if (value === 'doc') {
-        if (!/^(\/[^/]+){2}\/docs/.test(route.path)) {
-          router.push(
-            themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
-          )
-        }
-      } else if (value === 'component') {
-        if (!/^(\/[^/]+){2}\/components/.test(route.path)) {
-          router.push(
-            themeAndLocaleReg.exec(route.path)[0] + '/components/button'
-          )
-        }
-      }
+      return h(
+        RouterLink,
+        {
+          to: option.path
+        },
+        { default: () => option.label }
+      )
     }
     const menuValueRef = computed(() => {
       if (/\/docs\//.test(route.path)) return 'doc'
@@ -209,16 +203,19 @@ export default {
         },
         {
           key: 'home',
-          label: t('home')
+          label: t('home'),
+          path: themeAndLocaleReg.exec(route.path)[0]
         },
         {
           key: 'doc',
           label: t('doc'),
-          children: docOptionsRef.value
+          children: docOptionsRef.value,
+          path: themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
         },
         {
           key: 'component',
           label: t('component'),
+          path: themeAndLocaleReg.exec(route.path)[0] + '/components/button',
           children: componentOptionsRef.value
         },
         {
@@ -243,7 +240,7 @@ export default {
       } else if (path) {
         router.push(path)
       } else {
-        handleMenuUpdateValue(value)
+        window.open(repoUrl, '_blank')
       }
       mobilePopoverRef.value.setShow(false)
     }
@@ -379,7 +376,6 @@ export default {
       // menu
       menuOptions: menuOptionsRef,
       menuValue: menuValueRef,
-      handleMenuUpdateValue,
       // mobile & tablet menu
       mobileMenuOptions: mobileMenuOptionsRef,
       handleUpdateMobileMenu,
