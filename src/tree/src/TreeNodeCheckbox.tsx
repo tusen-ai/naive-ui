@@ -9,6 +9,7 @@ export default defineComponent({
       type: String,
       required: true
     },
+    focusable: Boolean,
     disabled: Boolean,
     checked: Boolean,
     indeterminate: Boolean,
@@ -40,11 +41,13 @@ export default defineComponent({
       checked,
       indeterminate,
       disabled,
+      focusable,
       handleUpdateValue
     } = this
     return (
       <span class={`${clsPrefix}-tree-node-checkbox`} data-checkbox>
         <NCheckbox
+          focusable={focusable}
           disabled={disabled}
           theme={mergedTheme.peers.Checkbox}
           themeOverrides={mergedTheme.peerOverrides.Checkbox}

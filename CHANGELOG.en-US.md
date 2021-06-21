@@ -3,14 +3,16 @@
 ### Feats
 
 - `n-dropdown` add `on-clickoutside` prop, closes [#123](https://github.com/TuSimple/naive-ui/issues/123).
-
-## Pending
-
-- `n-menu` add `renderLabel` prop, closes [#84](https://github.com/TuSimple/naive-ui/issues/84)
+- `n-menu` add `render-label` prop, closes [#84](https://github.com/TuSimple/naive-ui/issues/84)
+- `n-tree` supports keyboard operations.
+- Add `n-tree-select` component.
 
 ### Fixes
 
 - Fix `n-tree` drag over leaf node causes error, closes [#200](https://github.com/TuSimple/naive-ui/issues/200).
+- Fix `n-tree` misses `on-update-expanded-keys`, `on-update-selected-keys`, `on-update-checked-keys` prop.
+- Fix `n-tree`'s `selected-keys` prop influences original array.
+- Fix `n-select`'s input has useless empty row in multiple filterable mode.
 
 ## 2.12.2 (2021-06-19)
 
