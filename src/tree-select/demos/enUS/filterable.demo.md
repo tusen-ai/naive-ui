@@ -2,13 +2,19 @@
 
 ```html
 <n-space vertical>
-  <n-tree-select filterable :options="options" default-value="Drive My Car" />
+  <n-tree-select
+    filterable
+    :options="options"
+    default-value="Drive My Car"
+    clearable
+  />
   <n-tree-select
     multiple
     checkable
     filterable
     :options="options"
     :default-value="['Norwegian Wood']"
+    clearable
   />
 </n-space>
 ```
