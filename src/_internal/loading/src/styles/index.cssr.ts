@@ -19,7 +19,10 @@ export default cB('base-loading', `
       originalTransform: 'translateX(-50%) translateY(-50%)'
     })
   ]),
-  cE('icon', [
+  cE('icon', `
+    height: 1em;
+    width: 1em;
+  `, [
     iconSwitchTransition()
   ])
 ])
