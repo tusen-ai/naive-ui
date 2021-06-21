@@ -540,9 +540,7 @@ export default defineComponent({
       }
     }
     function handleMenuMousedown (e: MouseEvent): void {
-      if (!happensIn(e, 'action') && props.multiple && props.filterable) {
-        focusSelection()
-      }
+      if (!happensIn(e, 'action')) e.preventDefault()
     }
     // scroll events on menu
     function handleMenuScroll (e: Event): void {
