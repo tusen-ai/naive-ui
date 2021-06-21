@@ -10,13 +10,6 @@
           mode="horizontal"
           :value="menuValue"
           :options="menuOptions"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-          @update:value="handleMenuUpdateValue"
->>>>>>> 29c2ee823 (fix: optimization)
-=======
->>>>>>> e232b32cf (fix: fixed path bug in site)
           :render-label="renderMenuLabel"
         />
       </div>
@@ -85,8 +78,8 @@
 </template>
 
 <script>
-import { computed, h, ref } from 'vue'
-import { useRouter, useRoute, RouterLink } from 'vue-router'
+import { computed, ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useMessage, version } from 'naive-ui'
 import { MenuOutline } from '@vicons/ionicons5'
 import { repoUrl } from './utils/github-url'
@@ -102,7 +95,7 @@ import {
   useComponentOptions,
   renderMenuLabel
 } from './store'
-// import { renderMenuLabel } from './store/menu-options'
+import { renderMenuLabel } from './store/menu-options'
 
 // match substr
 function match (pattern, string) {
@@ -162,8 +155,6 @@ export default {
       return [
         {
           key: 'home',
-<<<<<<< HEAD
-<<<<<<< HEAD
           label: t('home'),
           path: themeAndLocaleReg.exec(route.path)[0]
         },
@@ -176,45 +167,9 @@ export default {
           key: 'component',
           label: t('component'),
           path: themeAndLocaleReg.exec(route.path)[0] + '/components/button'
-=======
-          label: t('home')
-=======
-          label: t('home'),
-          path: themeAndLocaleReg.exec(route.path)[0]
->>>>>>> e232b32cf (fix: fixed path bug in site)
-        },
-        {
-          key: 'doc',
-          label: t('doc'),
-          path: themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
-        },
-        {
-          key: 'component',
-<<<<<<< HEAD
-          label: t('component')
->>>>>>> f0d568556 (fix: optimization)
         }
       ]
     })
-=======
-          label: t('component'),
-          path: themeAndLocaleReg.exec(route.path)[0] + '/components/button'
-        }
-      ]
-    })
-    const renderMenuLabel = (option) => {
-      if (!('path' in option) || option.label === '--Debug') {
-        return option.label
-      }
-      return h(
-        RouterLink,
-        {
-          to: option.path
-        },
-        { default: () => option.label }
-      )
-    }
->>>>>>> e232b32cf (fix: fixed path bug in site)
     const menuValueRef = computed(() => {
       if (/\/docs\//.test(route.path)) return 'doc'
       if (/\/components\//.test(route.path)) return 'component'
@@ -237,44 +192,19 @@ export default {
         },
         {
           key: 'home',
-<<<<<<< HEAD
-<<<<<<< HEAD
           label: t('home'),
           path: themeAndLocaleReg.exec(route.path)[0]
-=======
-          label: t('home')
->>>>>>> f0d568556 (fix: optimization)
-=======
-          label: t('home'),
-          path: themeAndLocaleReg.exec(route.path)[0]
->>>>>>> e232b32cf (fix: fixed path bug in site)
         },
         {
           key: 'doc',
           label: t('doc'),
-<<<<<<< HEAD
-<<<<<<< HEAD
           children: docOptionsRef.value,
           path: themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
-=======
-          children: docOptionsRef.value
->>>>>>> f0d568556 (fix: optimization)
-=======
-          children: docOptionsRef.value,
-          path: themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
->>>>>>> e232b32cf (fix: fixed path bug in site)
         },
         {
           key: 'component',
           label: t('component'),
-<<<<<<< HEAD
-<<<<<<< HEAD
           path: themeAndLocaleReg.exec(route.path)[0] + '/components/button',
-=======
->>>>>>> f0d568556 (fix: optimization)
-=======
-          path: themeAndLocaleReg.exec(route.path)[0] + '/components/button',
->>>>>>> e232b32cf (fix: fixed path bug in site)
           children: componentOptionsRef.value
         },
         {

@@ -32,7 +32,6 @@ describe('n-menu', () => {
       }
     })
   })
-<<<<<<< HEAD
   it('should work with `render-label` props', async () => {
     const options = [
       {
@@ -82,8 +81,6 @@ describe('n-menu', () => {
 })
 
 describe('n-menu', () => {
-=======
->>>>>>> f0d568556 (fix: optimization)
   it('should work with `render-label` props', async () => {
     const options = [
       {
