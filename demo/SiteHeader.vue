@@ -78,8 +78,8 @@
 </template>
 
 <script>
-import { computed, h, ref } from 'vue'
-import { useRouter, useRoute, RouterLink } from 'vue-router'
+import { computed, ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useMessage, version } from 'naive-ui'
 import { MenuOutline } from '@vicons/ionicons5'
 import { repoUrl } from './utils/github-url'
@@ -94,7 +94,7 @@ import {
   useDocOptions,
   useComponentOptions
 } from './store'
-// import { renderMenuLabel } from './store/menu-options'
+import { renderMenuLabel } from './store/menu-options'
 
 // match substr
 function match (pattern, string) {
@@ -169,18 +169,6 @@ export default {
         }
       ]
     })
-    const renderMenuLabel = (option) => {
-      if (!('path' in option) || option.label === '--Debug') {
-        return option.label
-      }
-      return h(
-        RouterLink,
-        {
-          to: option.path
-        },
-        { default: () => option.label }
-      )
-    }
     const menuValueRef = computed(() => {
       if (/\/docs\//.test(route.path)) return 'doc'
       if (/\/components\//.test(route.path)) return 'component'

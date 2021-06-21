@@ -19,7 +19,6 @@
       <n-menu
         :value="menuValue"
         :options="options"
-        @update:value="handleMenuUpdateValue"
         :render-label="renderMenuLabel"
       />
     </n-layout-sider>
@@ -38,7 +37,7 @@
 <script>
 // Frame component for components & docs page
 import { computed, watch, toRef, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { findMenuValue } from '../utils/route'
 import { useIsMobile, useIsTablet } from '../utils/composables'
 import SiteFooter from './home/Footer.vue'
@@ -52,7 +51,6 @@ export default {
   },
   setup () {
     const route = useRoute()
-    const router = useRouter()
     const layoutInstRef = ref(null)
     const docOptionsRef = useDocOptions()
     const componentOptionsRef = useComponentOptions()
@@ -86,10 +84,7 @@ export default {
       layoutInstRef,
       options: optionsRef,
       menuValue: menuValueRef,
-      isMobile: isMobileRef,
-      handleMenuUpdateValue: (_, option) => {
-        router.push(option.path)
-      }
+      isMobile: isMobileRef
     }
   }
 }
