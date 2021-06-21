@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## 2.13.0 (2021-06-21)
+
 ### Feats
 
 - `n-dropdown` add `on-clickoutside` prop, closes [#123](https://github.com/TuSimple/naive-ui/issues/123).

@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## 2.13.0 (2021-06-21)
+
 ### Feats
 
 - `n-dropdown` 新增 `on-clickoutside` 属性，关闭 [#123](https://github.com/TuSimple/naive-ui/issues/123)
