@@ -142,18 +142,21 @@ export default defineComponent({
     const filteredTreeInfoRef = computed<{
       filteredTree: TreeSelectOption[]
       highlightKeySet: Set<Key> | undefined
+      expandedKeys: Key[] | undefined
     }>(() => {
       if (!props.filterable) {
         return {
           filteredTree: props.options,
-          highlightKeySet: undefined
+          highlightKeySet: undefined,
+          expandedKeys: undefined
         }
       }
       const { value: pattern } = patternRef
       if (!pattern.length || !props.filter) {
         return {
           filteredTree: props.options,
-          highlightKeySet: undefined
+          highlightKeySet: undefined,
+          expandedKeys: undefined
         }
       }
       return filterTree(props.options, props.filter, pattern)
@@ -469,6 +472,22 @@ export default defineComponent({
     watch(mergedValueRef, () => {
       if (!mergedShowRef.value) return
       void nextTick(syncPosition)
+    })
+    let memorizedExpandedKeys: Key[] | undefined
+    watch(patternRef, (value, oldValue) => {
+      if (!value.length) {
+        if (memorizedExpandedKeys !== undefined) {
+          doUpdateExpandedKeys(memorizedExpandedKeys)
+        }
+      } else {
+        if (!oldValue.length) {
+          memorizedExpandedKeys = mergedExpandedKeysRef.value
+        }
+        const { expandedKeys } = filteredTreeInfoRef.value
+        if (expandedKeys !== undefined) {
+          doUpdateExpandedKeys(expandedKeys)
+        }
+      }
     })
     const themeRef = useTheme(
       'TreeSelect',

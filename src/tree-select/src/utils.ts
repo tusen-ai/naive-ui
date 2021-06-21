@@ -17,11 +17,13 @@ export function filterTree (
   pattern: string
 ): {
     filteredTree: TreeSelectOption[]
+    expandedKeys: Key[]
     highlightKeySet: Set<Key>
   } {
   const visitedTailKeys = new Set<Key>()
   const visitedNonTailKeys = new Set<Key>()
   const highlightKeySet = new Set<Key>()
+  const expandedKeys: Key[] = []
   const filteredTree: TreeSelectOption[] = []
   const path: TreeSelectOption[] = []
   function visit (t: TreeSelectOption[]): void {
@@ -62,6 +64,7 @@ export function filterTree (
           sibs.push(n)
         } else {
           // It it is not visited path tail, use cloned node
+          expandedKeys.push(n.key)
           const clonedNode = { ...n, children: [] }
           sibs.push(clonedNode)
           build(children, clonedNode.children)
@@ -74,6 +77,7 @@ export function filterTree (
   build(tree, filteredTree)
   return {
     filteredTree,
-    highlightKeySet
+    highlightKeySet,
+    expandedKeys
   }
 }
