@@ -50,7 +50,7 @@ import style from './styles/index.cssr'
 // During expanding, some node are mis-applied with :active style
 // Async dnd has bug
 
-const ITEM_SIZE = 30
+const ITEM_SIZE = 30 // 24 + 3 + 3
 
 export const treeMateOptions = {
   getDisabled (node: TreeOption) {
