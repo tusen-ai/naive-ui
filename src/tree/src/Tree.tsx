@@ -301,8 +301,15 @@ export default defineComponent({
       }
     })
 
-    const aipRef = ref(false) // animation in progress
-    const afNodeRef = ref<Array<TmNode | MotionData>>([]) // animation flattened nodes
+    // animation in progress
+    const aipRef = ref(false)
+    // animation flattened nodes
+    const afNodeRef = ref<Array<TmNode | MotionData>>([])
+    // Note: Since the virtual list depends on min height, if there's a node
+    // whose height starts from 0, the virtual list will have a wrong height
+    // during animation. This will seldom cause wired scrollbar status. It is
+    // fixable and need some changes in vueuc, I've no time so I just leave it
+    // here. Maybe the bug won't be fixed during the life time of the project.
     watch(mergedExpandedKeysRef, (value, prevValue) => {
       if (!props.animated) {
         void nextTick(syncScrollbar)
