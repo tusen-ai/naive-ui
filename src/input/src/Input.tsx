@@ -84,11 +84,8 @@ const inputProps = {
     default: true
   },
   autofocus: Boolean,
-  inputProps: {
-    type: Object as PropType<TextareaHTMLAttributes | InputHTMLAttributes>,
-    default: {}
-  },
-  name: String,
+  inputProps: Object as PropType<TextareaHTMLAttributes | InputHTMLAttributes>,
+
   resizable: {
     type: Boolean,
     default: true
@@ -840,7 +837,6 @@ export default defineComponent({
                 ref="textareaElRef"
                 class={`${mergedClsPrefix}-input__textarea-el`}
                 autofocus={this.autofocus}
-                name={this.name}
                 rows={Number(this.rows)}
                 placeholder={this.placeholder as string | undefined}
                 value={this.mergedValue as string | undefined}
@@ -883,7 +879,6 @@ export default defineComponent({
           ) : (
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
-                name={this.name}
                 ref="inputElRef"
                 type={
                   this.type === 'password' &&

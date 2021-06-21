@@ -1,28 +1,16 @@
-# Pass standard props
+# Set Attributes on Input Element
 
 ```html
 <n-space vertical>
   <n-input
-    v-model:value="value"
     type="input"
     placeholder="Pass autocomplete 'off'"
-    :inputProps="{autocomplete: 'off'}"
+    :input-props="{ autocomplete: 'off' }"
   />
   <n-input
-    v-model:value="value"
     type="textarea"
     placeholder="Pass autocomplete 'off'"
-    :inputProps="{autocomplete: 'off'}"
+    :input-props="{ autocomplete: 'off' }"
   />
 </n-space>
-```
-
-```js
-export default {
-  data () {
-    return {
-      value: null
-    }
-  }
-}
 ```

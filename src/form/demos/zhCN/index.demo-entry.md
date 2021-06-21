@@ -24,9 +24,7 @@ validator-debug
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| autocapitalize | `'on' \| 'off'` |  | Safari 自动大写 |
-| autocomplete | `'on' \| 'off' \| 'new-password'` |  | 浏览器的自动补全, 与 `name` 一起使用 |
-| autocorrect | `'on' \| 'off'` |  | Safari 自动更正 |
+| form-props | `object` |  |  |
 | inline | `boolean` | `false` |  |
 | label-width | `number \| string` | `undefined` | 标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用 |
 | label-align | `'left' \| 'right'` | `'left'` | 标签的文本对齐方式 |
