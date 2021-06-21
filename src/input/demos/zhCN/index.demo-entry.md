@@ -31,7 +31,7 @@ pass-standard-props
 | clearable | `boolean` | `false` |  |
 | default-value | `string \| [string, string] \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
-| input-props | `object` | `{}` |  |
+| input-props | `object` | `undefined` |  |
 | show-password-toggle | `boolean` | `false` | 控制密码的显示隐藏 |
 | maxlength | `number` | `undefined` |  |
 | minlength | `number` | `undefined` |  |
