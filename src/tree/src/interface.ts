@@ -5,7 +5,7 @@ import type { TreeTheme } from '../styles'
 
 export type Key = string | number
 
-export interface TreeOption {
+export interface TreeOptionBase {
   key: Key
   label: string
   checkboxDisabled?: boolean
@@ -14,6 +14,8 @@ export interface TreeOption {
   children?: TreeOption[]
   suffix?: () => VNodeChild
 }
+
+export type TreeOption = TreeOptionBase & { [k: string]: unknown }
 
 export type TreeOptions = TreeOption[]
 
@@ -50,7 +52,7 @@ export interface InternalDropInfo {
 
 export interface TreeInjection {
   loadingKeysRef: Ref<Key[]>
-  highlightKeysRef: Ref<Key[]>
+  highlightKeySetRef: Ref<Set<Key>>
   displayedCheckedKeysRef: Ref<Key[]>
   displayedIndeterminateKeysRef: Ref<Key[]>
   mergedSelectedKeysRef: Ref<Key[]>
@@ -69,6 +71,9 @@ export interface TreeInjection {
   droppingPositionRef: Ref<null | DropPosition>
   droppingOffsetLevelRef: Ref<number>
   disabledRef: Ref<boolean>
+  pendingNodeKeyRef: Ref<null | Key>
+  internalScrollableRef: Ref<boolean>
+  internalCheckboxFocusableRef: Ref<boolean>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void
@@ -89,4 +94,9 @@ export interface MotionData {
   height: number | undefined
   mode: 'expand' | 'collapse'
   nodes: TmNode[]
+}
+
+export interface InternalTreeInst {
+  handleKeyup: (e: KeyboardEvent) => void
+  handleKeydown: (e: KeyboardEvent) => void
 }

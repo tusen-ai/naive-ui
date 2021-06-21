@@ -294,7 +294,7 @@ export default defineComponent({
         verticalRailStyle={{ zIndex: 3 }}
         xScrollable
         onScroll={virtualScroll ? undefined : this.handleTableBodyScroll}
-        privateOnSetSL={setHeaderScrollLeft}
+        internalOnUpdateScrollLeft={setHeaderScrollLeft}
         onResize={onResize}
       >
         {{

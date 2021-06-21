@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## 2.13.0 (2021-06-21)
+
+### Feats
+
+- `n-dropdown` add `on-clickoutside` prop, closes [#123](https://github.com/TuSimple/naive-ui/issues/123).
+- `n-menu` add `render-label` prop, closes [#84](https://github.com/TuSimple/naive-ui/issues/84)
+- `n-tree` supports keyboard operations.
+- Add `n-tree-select` component.
+
+### Fixes
+
+- Fix `n-tree` drag over leaf node causes error, closes [#200](https://github.com/TuSimple/naive-ui/issues/200).
+- Fix `n-tree` misses `on-update-expanded-keys`, `on-update-selected-keys`, `on-update-checked-keys` prop.
+- Fix `n-tree`'s `selected-keys` prop influences original array.
+- Fix `n-select`'s input has useless empty row in multiple filterable mode.
+- Fix `n-button`'s loading icon doesn't show on iOS Safari, closes [#219](https://github.com/TuSimple/naive-ui/issues/219).
+- Fix `n-date-picker` doesn't show icon when clearable.
+- Fix `n-time-picker` icon mis-aligned when clearable, closes [#222](https://github.com/TuSimple/naive-ui/issues/222).
+
 ## 2.12.2 (2021-06-19)
 
 ### Fixes

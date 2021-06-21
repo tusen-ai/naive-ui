@@ -1,4 +1,5 @@
 import { h, defineComponent, PropType } from 'vue'
+import { pxfy } from 'seemly'
 import FadeInExpandTransition from '../../_internal/fade-in-expand-transition'
 import { TmNode } from './interface'
 import TreeNode from './TreeNode'
@@ -40,7 +41,7 @@ export default defineComponent({
                 `${clsPrefix}-tree-motion-wrapper--${this.mode}`
               ]}
               style={{
-                height: this.height
+                height: pxfy(this.height)
               }}
             >
               {this.nodes.map((node) => (
