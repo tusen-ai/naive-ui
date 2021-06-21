@@ -151,6 +151,7 @@ export default defineComponent({
     const panelInstRef = ref<PanelRef | null>(null)
     const triggerElRef = ref<HTMLElement | null>(null)
     const inputInstRef = ref<InputInst | null>(null)
+    const isHandleClearRef = ref<boolean>(false)
     const uncontrolledShowRef = ref<boolean>(false)
     const controlledShowRef = toRef(props, 'show')
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
@@ -433,9 +434,14 @@ export default defineComponent({
     function closeCalendar ({ returnFocus }: { returnFocus: boolean }): void {
       if (mergedShowRef.value) {
         doUpdateShow(false)
-        if (props.type !== 'date' && props.updateValueOnClose) {
+        if (
+          props.type !== 'date' &&
+          props.updateValueOnClose &&
+          !isHandleClearRef.value
+        ) {
           handlePanelConfirm()
         }
+        isHandleClearRef.value = false
         if (returnFocus) {
           inputInstRef.value?.focus()
         }
@@ -463,6 +469,7 @@ export default defineComponent({
     const uniVaidation = uniCalendarValidation(props, pendingValueRef)
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
+      isHandleClearRef,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       timePickerSizeRef,
@@ -761,13 +768,13 @@ export default defineComponent({
                           this.mergedShow
                             ? withDirectives(
                               this.type === 'datetime' ? (
-                                <DatetimePanel {...commonPanelProps} />
+                                  <DatetimePanel {...commonPanelProps} />
                               ) : this.type === 'daterange' ? (
-                                <DaterangePanel {...commonPanelProps} />
+                                  <DaterangePanel {...commonPanelProps} />
                               ) : this.type === 'datetimerange' ? (
-                                <DatetimerangePanel {...commonPanelProps} />
+                                  <DatetimerangePanel {...commonPanelProps} />
                               ) : (
-                                <DatePanel {...commonPanelProps} />
+                                  <DatePanel {...commonPanelProps} />
                               ),
                               [[clickoutside, this.handleClickOutside]]
                             )

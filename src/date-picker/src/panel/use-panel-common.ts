@@ -45,6 +45,7 @@ type UsePanelCommonProps = ExtractPropTypes<typeof usePanelCommonProps>
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function usePanelCommon (props: UsePanelCommonProps) {
   const {
+    isHandleClearRef,
     dateLocaleRef,
     timePickerSizeRef,
     localeRef,
@@ -76,6 +77,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
     if (onTabOut) onTabOut()
   }
   function handleClearClick (): void {
+    isHandleClearRef.value = true
     doUpdateValue(null, true)
     doClose()
   }

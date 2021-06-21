@@ -46,6 +46,7 @@ export type DatePickerInjection = {
   isDateDisabledRef: Ref<IsDateDisabled | undefined>
   rangesRef: Ref<Record<string, [number, number]> | undefined>
   datePickerSlots: Slots
+  isHandleClearRef: Ref<boolean>
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 
