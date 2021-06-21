@@ -205,7 +205,7 @@ export default c([
       height: calc(var(--height) - 6px);
       line-height: calc(var(--height) - 6px);
       outline: none;
-      display: inline-block;
+      display: none;
       position: relative;
       margin-bottom: 3px;
       max-width: 100%;

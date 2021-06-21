@@ -93,6 +93,7 @@ export default defineComponent({
     const counterRef = ref<TagRef | null>(null)
     const counterWrapperRef = ref<HTMLElement | null>(null)
     const overflowRef = ref<VOverflowInst | null>(null)
+    const inputTagElRef = ref<HTMLElement | null>(null)
 
     const showTagsPopoverRef = ref<boolean>(false)
     const patternInputFocusedRef = ref(false)
@@ -141,6 +142,17 @@ export default defineComponent({
         }
       }
     }
+    function hideInputTag (): void {
+      const { value: inputTagEl } = inputTagElRef
+      if (inputTagEl) inputTagEl.style.display = 'none'
+    }
+    function showInputTag (): void {
+      const { value: inputTagEl } = inputTagElRef
+      if (inputTagEl) inputTagEl.style.display = 'inline-block'
+    }
+    watch(toRef(props, 'active'), (value) => {
+      if (!value) hideInputTag()
+    })
     watch(toRef(props, 'pattern'), () => {
       if (props.multiple) {
         void nextTick(syncMirrorWidth)
@@ -247,6 +259,7 @@ export default defineComponent({
     function focusInput (): void {
       const { value: patternInputEl } = patternInputRef
       if (patternInputEl) {
+        showInputTag()
         patternInputEl.focus()
       }
     }
@@ -316,6 +329,7 @@ export default defineComponent({
       singleElRef,
       patternInputWrapperRef,
       overflowRef,
+      inputTagElRef,
       handleMouseDown,
       handleFocusin,
       handleClear,
@@ -490,6 +504,7 @@ export default defineComponent({
       const input = filterable ? (
         <div
           class={`${clsPrefix}-base-selection-input-tag`}
+          ref="inputTagElRef"
           key="__input-tag__"
         >
           <input
