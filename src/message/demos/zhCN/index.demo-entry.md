@@ -47,22 +47,27 @@ export default {
 </n-message-provider>
 ```
 
-```js
-/* content.vue */
-import { useMessage } from 'naive-ui'
+```html
+<!-- content.vue -->
+<template> content </template>
 
-// content
-export default {
-  setup () {
-    const message = useMessage()
-    window.$message = message
-    return {
-      warning () {
-        message.warning('...')
+<script>
+  /* content.vue */
+  import { useMessage } from 'naive-ui'
+
+  // content
+  export default {
+    setup() {
+      const message = useMessage()
+      window.$message = message
+      return {
+        warning() {
+          message.warning('...')
+        }
       }
     }
   }
-}
+</script>
 ```
 
 ```js
