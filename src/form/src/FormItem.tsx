@@ -155,7 +155,10 @@ export default defineComponent({
     const { mergedRequired: mergedRequiredRef, mergedRules: mergedRulesRef } =
       formItemRule(props)
     const { mergedSize: mergedSizeRef } = formItemSizeRefs
-    const { mergedLabelPlacement: labelPlacementRef } = formItemMiscRefs
+    const {
+      mergedLabelPlacement: labelPlacementRef,
+      mergedLabelAlign: labelTextAlignRef
+    } = formItemMiscRefs
     const explainsRef = ref<string[]>([])
     const feedbackIdRef = ref(createId())
     const hasFeedbackRef = computed(() => {
@@ -343,6 +346,7 @@ export default defineComponent({
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const { value: labelPlacement } = labelPlacementRef
+        const { value: labelTextAlign } = labelTextAlignRef
         const direction = labelPlacement === 'top' ? 'vertical' : 'horizontal'
         const {
           common: { cubicBezierEaseInOut },
@@ -359,7 +363,6 @@ export default defineComponent({
             [createKey('feedbackFontSize', size)]: feedbackFontSize,
             [createKey('feedbackHeight', size)]: feedbackHeight,
             [createKey('labelPadding', direction)]: labelPadding,
-            [createKey('labelTextAlign', direction)]: labelTextAlign,
             [createKey(createKey('labelFontSize', labelPlacement), size)]:
               labelFontSize
           }
