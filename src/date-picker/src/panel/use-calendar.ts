@@ -65,6 +65,16 @@ function useCalendar (
       ? Date.now()
       : props.value
   )
+  const showMonthPickerRef = ref(false)
+  const showYearPickerRef = ref(false)
+  const monthArrayRef = ref(
+    new Array(12).fill('').map((item, index) => {
+      return {
+        name: `${index + 1}月`,
+        value: index + 1
+      }
+    })
+  )
   const nowRef = ref(Date.now())
   const dateArrayRef = computed(() => {
     return dateArray(
@@ -239,11 +249,15 @@ function useCalendar (
   function prevYear (): void {
     calendarValueRef.value = getTime(addYears(calendarValueRef.value, -1))
   }
-  function nextMonth (): void {
-    calendarValueRef.value = getTime(addMonths(calendarValueRef.value, 1))
+  function nextMonth (NextNumber: number): void {
+    calendarValueRef.value = getTime(
+      addMonths(calendarValueRef.value, NextNumber)
+    )
   }
-  function prevMonth (): void {
-    calendarValueRef.value = getTime(addMonths(calendarValueRef.value, -1))
+  function prevMonth (PrevNumber: number): void {
+    calendarValueRef.value = getTime(
+      addMonths(calendarValueRef.value, PrevNumber)
+    )
   }
   function handleTimePickerChange (value: number): void {
     panelCommon.doUpdateValue(value, false)
@@ -253,6 +267,9 @@ function useCalendar (
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
     weekdays: weekdaysRef,
+    showMonthPicker: showMonthPickerRef,
+    showYearPicker: showYearPickerRef,
+    monthArray: monthArrayRef,
     mergedIsDateDisabled,
     nextYear,
     prevYear,

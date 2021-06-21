@@ -173,6 +173,13 @@ export default c([
         flex-grow: 1;
         text-align: center;
         color: var(--calendar-title-text-color);
+      `),
+      cE('month-year__year:hover', `
+        
+      `),
+      cE('month-year__month:hover', `
+        color: var(--item-color-active);
+        cursor: pointer;
       `)
     ]),
     cB('date-panel-weekdays', `
@@ -326,6 +333,18 @@ export default c([
         ])
       ])
     ]),
+    cB('date-panel-months', `
+      display: flex;
+      width:266px;
+      flex-wrap: wrap;
+    `, [cE('month', `
+      width:33%;
+      height:48px;
+      text-align: center;
+      line-height:48px
+    `, [cM('selected', {
+      color: 'var(--item-color-active)'
+    })])]),
     cE('vertical-divider', `
       grid-area: divider;
       height: 100%;

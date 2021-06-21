@@ -41,18 +41,52 @@ export default defineComponent({
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__prev`}
-              onClick={this.prevMonth}
+              onClick={() => {
+                this.prevMonth(-1)
+              }}
             >
               <BackwardIcon />
             </div>
             <div class={`${mergedClsPrefix}-date-panel-month__month-year`}>
-              {this.locale.monthBeforeYear
-                ? `${this.calendarMonth} ${this.calendarYear}`
-                : `${this.calendarYear} ${this.calendarMonth}`}
+              {this.locale.monthBeforeYear ? (
+                <div>
+                  <span
+                    class={`${mergedClsPrefix}-date-panel-month__month-year__month`}
+                    onClick={() => {
+                      this.showMonthPicker = !this.showMonthPicker
+                    }}
+                  >
+                    {this.calendarMonth}
+                  </span>
+                  <span
+                    class={`${mergedClsPrefix}-date-panel-month__month-year__year`}
+                  >
+                    {this.calendarYear}
+                  </span>
+                </div>
+              ) : (
+                <div>
+                  <span
+                    class={`${mergedClsPrefix}-date-panel-month__month-year__year`}
+                  >
+                    {this.calendarYear}
+                  </span>
+                  <span
+                    class={`${mergedClsPrefix}-date-panel-month__month-year__month`}
+                    onClick={() => {
+                      this.showMonthPicker = !this.showMonthPicker
+                    }}
+                  >
+                    {this.calendarMonth}
+                  </span>
+                </div>
+              )}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}
-              onClick={this.nextMonth}
+              onClick={() => {
+                this.nextMonth(1)
+              }}
             >
               <ForwardIcon />
             </div>
@@ -63,43 +97,89 @@ export default defineComponent({
               <FastForwardIcon />
             </div>
           </div>
-          <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
-            {this.weekdays.map((weekday) => (
-              <div
-                key={weekday}
-                class={`${mergedClsPrefix}-date-panel-weekdays__day`}
-              >
-                {weekday}
+          {this.showMonthPicker ? (
+            <div class={`${mergedClsPrefix}-date-panel-months`}>
+              {this.monthArray.map((monthItem, i) => {
+                const calendarMonthNumber = Number(
+                  this.calendarMonth.substr(0, this.calendarMonth.length - 1)
+                )
+                if (monthItem.value === calendarMonthNumber) {
+                  return (
+                    <div
+                      class={`${mergedClsPrefix}-date-panel-months__month--selected ${mergedClsPrefix}-date-panel-months__month`}
+                      onClick={() => {
+                        if (monthItem.value - calendarMonthNumber > 0) {
+                          this.nextMonth(monthItem.value - calendarMonthNumber)
+                        }
+                        if (monthItem.value - calendarMonthNumber < 0) {
+                          this.prevMonth(monthItem.value - calendarMonthNumber)
+                        }
+                        this.showMonthPicker = !this.showMonthPicker
+                      }}
+                    >
+                      {monthItem.name}
+                    </div>
+                  )
+                }
+                return (
+                  <div
+                    class={`${mergedClsPrefix}-date-panel-months__month`}
+                    onClick={() => {
+                      if (monthItem.value - calendarMonthNumber > 0) {
+                        this.nextMonth(monthItem.value - calendarMonthNumber)
+                      }
+                      if (monthItem.value - calendarMonthNumber < 0) {
+                        this.prevMonth(monthItem.value - calendarMonthNumber)
+                      }
+                      this.showMonthPicker = !this.showMonthPicker
+                    }}
+                  >
+                    {monthItem.name}
+                  </div>
+                )
+              })}
+            </div>
+          ) : (
+            <div>
+              <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
+                {this.weekdays.map((weekday) => (
+                  <div
+                    key={weekday}
+                    class={`${mergedClsPrefix}-date-panel-weekdays__day`}
+                  >
+                    {weekday}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div class={`${mergedClsPrefix}-date-panel-dates`}>
-            {this.dateArray.map((dateItem, i) => (
-              <div
-                data-n-date
-                key={i}
-                class={[
-                  `${mergedClsPrefix}-date-panel-date`,
-                  {
-                    [`${mergedClsPrefix}-date-panel-date--current`]:
-                      dateItem.isCurrentDate,
-                    [`${mergedClsPrefix}-date-panel-date--selected`]:
-                      dateItem.selected,
-                    [`${mergedClsPrefix}-date-panel-date--excluded`]:
-                      !dateItem.inCurrentMonth,
-                    [`${mergedClsPrefix}-date-panel-date--disabled`]:
-                      this.mergedIsDateDisabled(dateItem.ts)
-                  }
-                ]}
-                onClick={() => this.handleDateClick(dateItem)}
-              >
-                {dateItem.dateObject.date}
-                {dateItem.isCurrentDate ? (
-                  <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
-                ) : null}
+              <div class={`${mergedClsPrefix}-date-panel-dates`}>
+                {this.dateArray.map((dateItem, i) => (
+                  <div
+                    data-n-date
+                    key={i}
+                    class={[
+                      `${mergedClsPrefix}-date-panel-date`,
+                      {
+                        [`${mergedClsPrefix}-date-panel-date--current`]:
+                          dateItem.isCurrentDate,
+                        [`${mergedClsPrefix}-date-panel-date--selected`]:
+                          dateItem.selected,
+                        [`${mergedClsPrefix}-date-panel-date--excluded`]:
+                          !dateItem.inCurrentMonth,
+                        [`${mergedClsPrefix}-date-panel-date--disabled`]:
+                          this.mergedIsDateDisabled(dateItem.ts)
+                      }
+                    ]}
+                    onClick={() => this.handleDateClick(dateItem)}
+                  >
+                    {dateItem.dateObject.date}
+                    {dateItem.isCurrentDate ? (
+                      <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
+                    ) : null}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
         {this.datePickerSlots.footer ? (
           <div class={`${mergedClsPrefix}-date-panel-footer`}>
