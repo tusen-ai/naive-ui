@@ -14,6 +14,8 @@
 - 修复 `n-tree` 对 `selected-keys` 属性影响原数组
 - 修复 `n-select` 砸爱 multiple filterable 模式下输入框有无用的空行
 - 修复 `n-button` 的 loading 图标在 iOS Safari 上不显示，关闭 [#219](https://github.com/TuSimple/naive-ui/issues/219)
+- 修复 `n-date-picker` 非 clearable 不显示图标
+- 修复 `n-time-picker` clearable 状态下图标位置不正确，关闭 [#222](https://github.com/TuSimple/naive-ui/issues/222)
 
 ## 2.12.2 (2021-06-19)
 

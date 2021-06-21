@@ -14,6 +14,8 @@
 - Fix `n-tree`'s `selected-keys` prop influences original array.
 - Fix `n-select`'s input has useless empty row in multiple filterable mode.
 - Fix `n-button`'s loading icon doesn't show on iOS Safari, closes [#219](https://github.com/TuSimple/naive-ui/issues/219).
+- Fix `n-date-picker` doesn't show icon when clearable.
+- Fix `n-time-picker` icon mis-aligned when clearable, closes [#222](https://github.com/TuSimple/naive-ui/issues/222).
 
 ## 2.12.2 (2021-06-19)
 
