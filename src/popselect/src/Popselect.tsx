@@ -92,7 +92,7 @@ export default defineComponent({
       <NPopover {...omit(this.$props, panelPropKeys)} {...popoverProps}>
         {{
           trigger: this.$slots.default,
-          _: true
+          _: 1
         }}
       </NPopover>
     )
