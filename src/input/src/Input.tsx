@@ -786,7 +786,6 @@ export default defineComponent({
   },
   render () {
     const { mergedClsPrefix } = this
-
     return (
       <div
         ref="wrapperElRef"
