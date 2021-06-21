@@ -60,11 +60,6 @@ export default {
     setup() {
       const message = useMessage()
       window.$message = message
-      return {
-        warning() {
-          message.warning('...')
-        }
-      }
     }
   }
 </script>

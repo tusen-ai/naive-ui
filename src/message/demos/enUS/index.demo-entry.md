@@ -33,7 +33,7 @@ export default {
 
 </n-space>
 
-## Use outside of setup
+## Use Message Outside Setup
 
 <n-space vertical>
 <n-alert type="warning">
@@ -60,11 +60,6 @@ export default {
     setup() {
       const message = useMessage()
       window.$message = message
-      return {
-        warning() {
-          message.warning('...')
-        }
-      }
     }
   }
 </script>
