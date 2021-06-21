@@ -6,6 +6,10 @@
 
 ```demo
 basic
+multiple
+checkbox
+filterable
+debug
 ```
 
 ## API

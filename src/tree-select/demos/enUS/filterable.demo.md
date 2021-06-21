@@ -1,7 +1,16 @@
-# Basic
+# Filterable
 
 ```html
-<n-tree-select :options="options" default-value="Drive My Car" />
+<n-space vertical>
+  <n-tree-select filterable :options="options" default-value="Drive My Car" />
+  <n-tree-select
+    multiple
+    checkable
+    filterable
+    :options="options"
+    :default-value="['Norwegian Wood']"
+  />
+</n-space>
 ```
 
 ```js

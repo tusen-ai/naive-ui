@@ -455,6 +455,11 @@ export default defineComponent({
       closeMenu()
       focusSelection()
     }
+    function handleMenuMousedown (e: MouseEvent): void {
+      // If there's an action slot later, we need to check if mousedown happens
+      // in action panel
+      e.preventDefault()
+    }
     provide(treeSelectInjectionKey, {
       pendingNodeKeyRef
     })
@@ -515,6 +520,7 @@ export default defineComponent({
       handleKeydown,
       handleKeyup,
       handleTabOut,
+      handleMenuMousedown,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -606,6 +612,7 @@ export default defineComponent({
                               ref="menuElRef"
                               style={this.cssVars as CSSProperties}
                               tabindex={0}
+                              onMousedown={this.handleMenuMousedown}
                               onKeyup={this.handleKeyup}
                               onKeydown={this.handleKeydown}
                               onFocusin={this.handleMenuFocusin}
@@ -630,7 +637,7 @@ export default defineComponent({
                                   cascade={this.mergedCascade}
                                   multiple={this.multiple}
                                   virtualScroll={
-                                    !this.consistentMenuWidth &&
+                                    this.consistentMenuWidth &&
                                     this.virtualScroll
                                   }
                                   internalDataTreeMate={this.dataTreeMate}

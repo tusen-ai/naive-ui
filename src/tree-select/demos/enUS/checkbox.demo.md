@@ -1,7 +1,12 @@
-# Basic
+# Use Checkbox
 
 ```html
-<n-tree-select :options="options" default-value="Drive My Car" />
+<n-tree-select
+  multiple
+  checkable
+  :options="options"
+  :default-value="['Norwegian Wood']"
+/>
 ```
 
 ```js

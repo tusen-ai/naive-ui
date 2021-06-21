@@ -6,6 +6,10 @@ It's said that 99% of the people can't distinguish it from cascader.
 
 ```demo
 basic
+multiple
+checkbox
+filterable
+debug
 ```
 
 ## API
