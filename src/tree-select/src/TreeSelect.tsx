@@ -338,6 +338,12 @@ export default defineComponent({
         doUpdateValue(keys)
       } else {
         doUpdateValue(keys[0] ?? null)
+        closeMenu()
+        if (!props.filterable) {
+          // Currently it is not necessary. However if there is an action slot,
+          // it will be useful. So just leave it here.
+          focusSelection()
+        }
       }
       if (props.filterable) {
         focusSelectionInput()
