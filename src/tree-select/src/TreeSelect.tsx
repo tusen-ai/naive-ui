@@ -622,6 +622,7 @@ export default defineComponent({
                                 <NTree
                                   ref="treeInstRef"
                                   blockLine
+                                  animated={false}
                                   data={filteredTreeInfo.filteredTree}
                                   cancelable={multiple}
                                   theme={mergedTheme.peers.Tree}

@@ -126,6 +126,10 @@ const treeProps = {
     type: Function as PropType<AllowDrop>,
     default: defaultAllowDrop
   },
+  animated: {
+    type: Boolean,
+    default: true
+  },
   virtualScroll: Boolean,
   onDragenter: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
   onDragleave: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
@@ -300,6 +304,10 @@ export default defineComponent({
     const aipRef = ref(false) // animation in progress
     const afNodeRef = ref<Array<TmNode | MotionData>>([]) // animation flattened nodes
     watch(mergedExpandedKeysRef, (value, prevValue) => {
+      if (!props.animated) {
+        void nextTick(syncScrollbar)
+        return
+      }
       const prevVSet = new Set(prevValue)
       let addedKey: Key | null = null
       let removedKey: Key | null = null
@@ -390,16 +398,18 @@ export default defineComponent({
       else return fNodesRef.value
     })
 
+    function syncScrollbar (): void {
+      const { value: scrollbarInst } = scrollbarInstRef
+      if (scrollbarInst) scrollbarInst.sync()
+    }
+
     function handleAfterEnter (): void {
       aipRef.value = false
       if (props.virtualScroll) {
         // If virtual scroll, we won't listen to resize during animation, so
         // resize callback of virtual list won't be called and as a result
         // scrollbar won't sync. We need to sync scrollbar manually.
-        void nextTick(() => {
-          const { value: scrollbarInst } = scrollbarInstRef
-          if (scrollbarInst) scrollbarInst.sync()
-        })
+        void nextTick(syncScrollbar)
       }
     }
 
@@ -881,10 +891,10 @@ export default defineComponent({
       resetDndState()
     }
     function handleScroll (): void {
-      scrollbarInstRef.value?.sync()
+      syncScrollbar()
     }
     function handleResize (): void {
-      scrollbarInstRef.value?.sync()
+      syncScrollbar()
     }
     function handleFocusout (e: FocusEvent): void {
       if (props.virtualScroll || props.internalScrollable) {
