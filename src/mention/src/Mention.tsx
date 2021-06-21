@@ -134,7 +134,13 @@ export default defineComponent({
       SelectBaseOption,
       SelectGroupOption,
       SelectIgnoredOption
-      >(filteredOptionsRef.value, {
+      // We need to cast filteredOptionsRef's type since the render function
+      // is not compitable
+      // MentionOption { value: string, render?: (value: string) => VNodeChild }
+      // SelectOption { value: string | number, render?: (value: string | number) => VNodeChild }
+      // The 2 types are not compatible since `render`s are not compatible
+      // However we know it works...
+      >(filteredOptionsRef.value as any, {
         getKey: (v) => {
           return (v as any).value
         }

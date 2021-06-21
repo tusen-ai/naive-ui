@@ -20,7 +20,8 @@ export default defineComponent({
       required: true
     },
     onClick: Function as PropType<(e: MouseEvent) => void>,
-    onMousedown: Function as PropType<(e: MouseEvent) => void>
+    onMousedown: Function as PropType<(e: MouseEvent) => void>,
+    onMouseup: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {
     useStyle('BaseIcon', style, toRef(props, 'clsPrefix'))
@@ -31,6 +32,7 @@ export default defineComponent({
         class={`${this.clsPrefix}-base-icon`}
         onClick={this.onClick}
         onMousedown={this.onMousedown}
+        onMouseup={this.onMouseup}
         role={this.role}
         aria-label={this.ariaLabel}
         aria-hidden={this.ariaHidden}

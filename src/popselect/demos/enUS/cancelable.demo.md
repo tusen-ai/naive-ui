@@ -4,7 +4,7 @@ Make single value popselect cancelable.
 
 ```html
 <n-popselect v-model:value="value" cancelable :options="options">
-  <n-tag>{{ value || 'Popselect' }}</n-tag>
+  <n-button>{{ value || 'Popselect' }}</n-button>
 </n-popselect>
 ```
 

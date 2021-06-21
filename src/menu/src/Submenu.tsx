@@ -17,7 +17,7 @@ import { itemRenderer } from './utils'
 import { useMenuChild, useMenuChildProps } from './use-menu-child'
 import type { SubmenuInjection } from './use-menu-child'
 import { TreeNode } from 'treemate'
-import { MenuGroupOption, MenuOption } from './interface'
+import { MenuGroupOption, MenuOption, TmNode } from './interface'
 import { menuItemGroupInjectionKey } from './MenuOptionGroup'
 
 export const submenuProps = {
@@ -29,6 +29,10 @@ export const submenuProps = {
   tmNodes: {
     type: Array as PropType<Array<TreeNode<MenuOption, MenuGroupOption>>>,
     default: () => []
+  },
+  tmNode: {
+    type: Object as PropType<TmNode>,
+    required: true
   },
   disabled: {
     type: Boolean,
@@ -123,10 +127,12 @@ export default defineComponent({
         icon,
         handleClick,
         dropdownShow,
-        iconMarginRight
+        iconMarginRight,
+        tmNode
       } = this
       return (
         <NMenuOptionContent
+          tmNode={tmNode}
           paddingLeft={paddingLeft}
           collapsed={collapsed}
           disabled={mergedDisabled}

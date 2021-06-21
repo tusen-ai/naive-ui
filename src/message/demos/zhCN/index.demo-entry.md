@@ -60,32 +60,34 @@ multiple-line
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| error | `(content: string, option?: MessageOption) => MessageReactive` |  |
-| info | `(content: string, option?: MessageOption) => MessageReactive` |  |
-| loading | `(content: string, option?: MessageOption) => MessageReactive` |  |
-| success | `(content: string, option?: MessageOption) => MessageReactive` |  |
-| warning | `(content: string, option?: MessageOption) => MessageReactive` |  |
+| error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
 
 #### MessageOption Properties
 
-| 名称         | 类型                           | 说明                   |
-| ------------ | ------------------------------ | ---------------------- |
-| closable     | `boolean`                      |                        |
-| content      | `string \| (() => VNodeChild)` | 信息内容               |
-| icon         | `() => VNode`                  | 信息图标               |
-| onAfterLeave | `Function`                     | 信息消失动画结束的回调 |
-| onLeave      | `Function`                     | 信息开始消失的回调     |
+| 名称         | 类型          | 说明                   |
+| ------------ | ------------- | ---------------------- |
+| closable     | `boolean`     |                        |
+| duration     | `number`      |                        |
+| icon         | `() => VNode` | 信息图标               |
+| onAfterLeave | `() => void`  | 信息消失动画结束的回调 |
+| onClose      | `() => void`  | 点击关闭图标的回调     |
+| onLeave      | `() => void`  | 信息开始消失的回调     |
 
 #### MessageReactive Properties
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
 | closable | `boolean` |  |
-| content | `string \| number \| boolean \| (() => VNodeChild)` | 信息内容 |
+| content | `string \| (() => VNodeChild)` | 信息内容 |
+| destory | `() => void` |  |
 | icon | `() => VNode` | 信息图标 |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` |  |
-| onAfterLeave | `Function` | 信息消失动画结束的回调 |
-| onLeave | `Function` | 信息开始消失的回调 |
+| onAfterLeave | `() => void` | 信息消失动画结束的回调 |
+| onLeave | `() => void` | 信息开始消失的回调 |
 
 #### MessageReactive Methods
 

@@ -5,17 +5,20 @@ export type SelectMixedOption =
   | SelectBaseOption
   | SelectGroupOption
   | SelectIgnoredOption
+
 export interface SelectBaseOption<V = string | number> {
   value: V
+  /** label doesn't support render function since it will be used in callbacks */
   label: string
   class?: string
   style?: string | CSSProperties
   disabled?: boolean
-  render?: (option: SelectBaseOption, selected: boolean) => VNodeChild
+  render?: (option: SelectBaseOption<V>, selected: boolean) => VNodeChild
   [k: string]: unknown
 }
 
 export interface SelectGroupOptionBase {
+  /** label doesn't support render function since it will be used in callbacks */
   label: string
   type: 'group'
   children: SelectBaseOption[]

@@ -7,7 +7,6 @@ export {
   getVNodeChildren,
   keysOf,
   render,
-  render as Render,
   getFirstSlotVNode
 } from './vue'
 export type { MaybeArray } from './vue'

@@ -3,24 +3,13 @@ import { h, Transition, TransitionGroup, defineComponent, PropType } from 'vue'
 export default defineComponent({
   name: 'FadeInExpandTransition',
   props: {
-    appear: {
-      type: Boolean,
-      default: false
-    },
-    group: {
-      type: Boolean,
-      default: false
-    },
-    mode: {
-      type: String as PropType<'in-out' | 'out-in' | 'default' | undefined>,
-      default: undefined
-    },
+    appear: Boolean,
+    group: Boolean,
+    mode: String as PropType<'in-out' | 'out-in' | 'default'>,
+    onLeave: Function,
     onAfterLeave: Function,
     onAfterEnter: Function,
-    width: {
-      type: Boolean,
-      default: false
-    },
+    width: Boolean,
     // reverse mode is only used in tree
     // it make it from expanded to collapsed after mounted
     reverse: Boolean
@@ -41,6 +30,8 @@ export default defineComponent({
         el.style.maxHeight = '0'
       }
       void el.offsetWidth
+      const { onLeave } = props
+      if (onLeave) onLeave()
     }
     function handleAfterLeave (el: HTMLElement): void {
       if (props.width) {
