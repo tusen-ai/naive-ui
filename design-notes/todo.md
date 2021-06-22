@@ -33,3 +33,4 @@
 ## TreeSelect
 
 - (moderate) Async
+- (easy) Leaf-only check
