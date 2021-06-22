@@ -113,7 +113,7 @@ multiple-line
 
 ```html
 <!-- content.vue -->
-<template> content </template>
+<template>...</template>
 
 <script>
   import { useMessage } from 'naive-ui'
@@ -121,8 +121,7 @@ multiple-line
   // content
   export default {
     setup() {
-      const message = useMessage()
-      window.$message = message
+      window.$message = useMessage()
     }
   }
 </script>
