@@ -21,19 +21,19 @@ size
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| bordered | `boolean` | `false` |  |
-| column | `number` | `3` |  |
-| label-align | `'center' \| 'left' \| 'right'` | `'left'` |  |
-| label-placement | `'top' \| 'left'` | `'top'` |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| title | `string` | `undefined` |  |
+| bordered | `boolean` | `false` | Descriptions whether to display border. |
+| column | `number` | `3` | Descriptions column. |
+| label-align | `'center' \| 'left' \| 'right'` | `'left'` | Descriptions align in label. |
+| label-placement | `'top' \| 'left'` | `'top'` | Descriptions label placement. |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Descriptions size. |
+| title | `string` | `undefined` | Descriptions title. |
 
 ### Description Item Props
 
 | Name  | Type     | Default     | Description |
 | ----- | -------- | ----------- | ----------- |
-| label | `string` | `undefined` |             |
-| span  | `number` | `1`         |             |
+| label | `string` | `undefined` |  The label of the descriptions item.          |
+| span  | `number` | `1`         |  Description item span.           |
 
 ## Slots
 
@@ -41,12 +41,12 @@ size
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
-| default | `()`       |             |
-| header  | `()`       |             |
+| default | `()`       |  Descriptions's content.           |
+| header  | `()`       |  The content placed in the descriptions header.           |
 
 ### Description Item Slots
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
-| default | `()`       |             |
-| label   | `()`       |             |
+| default | `()`       | Descriptions item content.            |
+| label   | `()`       | Descriptions item label slot.            |

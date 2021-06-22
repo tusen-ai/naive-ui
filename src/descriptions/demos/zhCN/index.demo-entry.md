@@ -21,19 +21,19 @@ size
 
 | 名称            | 类型                             | 默认值      | 说明 |
 | --------------- | -------------------------------- | ----------- | ---- |
-| bordered        | `boolean`                        | `false`     |      |
-| column          | `number`                         | `3`         |      |
-| label-align     | `'center' \| 'left' \| 'right'`  | `'left'`    |      |
-| label-placement | `'top' \| 'left'`                | `'top'`     |      |
-| size            | `'small' \| 'medium' \| 'large'` | `'medium'`  |      |
-| title           | `string`                         | `undefined` |      |
+| bordered        | `boolean`                        | `false`     | Descriptions 是否显示 border     |
+| column          | `number`                         | `3`         |  Descriptions 所占的列数    |
+| label-align     | `'center' \| 'left' \| 'right'`  | `'left'`    |  Descriptions 的 label 的对齐方式    |
+| label-placement | `'top' \| 'left'`                | `'top'`     |  Descriptions 的 label 的位置    |
+| size            | `'small' \| 'medium' \| 'large'` | `'medium'`  |  Descriptions 的尺寸    |
+| title           | `string`                         | `undefined` |  Descriptions 的标题    |
 
 ### Description Item Props
 
 | 名称  | 类型     | 默认值      | 说明 |
 | ----- | -------- | ----------- | ---- |
-| label | `string` | `undefined` |      |
-| span  | `number` | `1`         |      |
+| label | `string` | `undefined` | Descriptions item 显示的label     |
+| span  | `number` | `1`         | Descriptions item 显示的列数      |
 
 ## Slots
 
@@ -41,12 +41,12 @@ size
 
 | 名称    | 参数 | 说明 |
 | ------- | ---- | ---- |
-| default | `()` |      |
-| header  | `()` |      |
+| default | `()` | Descriptions 的内容    |
+| header  | `()` | Descriptions 的header 部分的内容     |
 
 ### Description Item Slots
 
 | 名称    | 参数 | 说明 |
 | ------- | ---- | ---- |
-| default | `()` |      |
-| label   | `()` |      |
+| default | `()` | Descriptions item 的内容      |
+| label   | `()` | Descriptions item 的 label 内容     |
