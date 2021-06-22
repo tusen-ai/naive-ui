@@ -67,9 +67,9 @@ function usePanelCommon (props: UsePanelCommonProps) {
     const { onUpdateValue } = props
     ;(onUpdateValue as OnPanelUpdateValueImpl)(value, doUpdate)
   }
-  function doClose (): void {
+  function doClose (disableUpdateOnClose?: boolean): void {
     const { onClose } = props
-    if (onClose) onClose()
+    if (onClose) onClose(disableUpdateOnClose)
   }
   function doTabOut (): void {
     const { onTabOut } = props
@@ -77,7 +77,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
   }
   function handleClearClick (): void {
     doUpdateValue(null, true)
-    doClose()
+    doClose(true)
   }
   function handleFocusDetectorFocus (): void {
     doTabOut()

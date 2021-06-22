@@ -296,9 +296,10 @@ export default defineComponent({
         })
       }
     }
-    function handlePanelClose (): void {
+    function handlePanelClose (disableUpdateOnClose: boolean): void {
       closeCalendar({
-        returnFocus: true
+        returnFocus: true,
+        disableUpdateOnClose
       })
     }
     // --- Panel update value
@@ -430,10 +431,20 @@ export default defineComponent({
       if (props.disabled || mergedShowRef.value) return
       doUpdateShow(true)
     }
-    function closeCalendar ({ returnFocus }: { returnFocus: boolean }): void {
+    function closeCalendar ({
+      returnFocus,
+      disableUpdateOnClose
+    }: {
+      returnFocus: boolean
+      disableUpdateOnClose?: boolean
+    }): void {
       if (mergedShowRef.value) {
         doUpdateShow(false)
-        if (props.type !== 'date' && props.updateValueOnClose) {
+        if (
+          props.type !== 'date' &&
+          props.updateValueOnClose &&
+          !disableUpdateOnClose
+        ) {
           handlePanelConfirm()
         }
         if (returnFocus) {
@@ -761,13 +772,13 @@ export default defineComponent({
                           this.mergedShow
                             ? withDirectives(
                               this.type === 'datetime' ? (
-                                <DatetimePanel {...commonPanelProps} />
+                                  <DatetimePanel {...commonPanelProps} />
                               ) : this.type === 'daterange' ? (
-                                <DaterangePanel {...commonPanelProps} />
+                                  <DaterangePanel {...commonPanelProps} />
                               ) : this.type === 'datetimerange' ? (
-                                <DatetimerangePanel {...commonPanelProps} />
+                                  <DatetimerangePanel {...commonPanelProps} />
                               ) : (
-                                <DatePanel {...commonPanelProps} />
+                                  <DatePanel {...commonPanelProps} />
                               ),
                               [[clickoutside, this.handleClickOutside]]
                             )
