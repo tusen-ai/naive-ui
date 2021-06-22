@@ -5,6 +5,10 @@
 - (moderate) Add fast path for virtual mode if no cell crosses rows
 - (moderate) Multiple column sorting
 
+## Form
+
+- (easy) message support render function
+
 ## Popover
 
 - (easy) Add `header` slot
