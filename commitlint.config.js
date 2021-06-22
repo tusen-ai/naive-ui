@@ -1,24 +1,9 @@
-const { getScopes } = require('./build/utils/get-packages')
+const { getTypes, getScopes } = require('./build/utils/commit-util')
 
 // https://commitlint.js.org/#/reference-rules
 module.exports = {
   rules: {
-    'type-enum': [
-      2,
-      'always',
-      [
-        'feat',
-        'fix',
-        'docs',
-        'style',
-        'refactor',
-        'perf',
-        'test',
-        'ci',
-        'chore',
-        'revert'
-      ]
-    ],
+    'type-enum': [2, 'always', getTypes()],
     'type-case': [2, 'always', 'lower-case'],
     'type-empty': [2, 'never'],
     'scope-enum': [2, 'always', getScopes()],

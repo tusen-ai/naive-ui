@@ -23,5 +23,21 @@ function getScopes (context) {
   return [...getPackages(context), ...scopes]
 }
 
+function getTypes () {
+  return [
+    'feat',
+    'fix',
+    'docs',
+    'style',
+    'refactor',
+    'perf',
+    'test',
+    'ci',
+    'chore',
+    'revert'
+  ]
+}
+
 module.exports.getPackages = getPackages
 module.exports.getScopes = getScopes
+module.exports.getTypes = getTypes

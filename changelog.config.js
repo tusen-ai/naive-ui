@@ -1,19 +1,9 @@
-const { getScopes } = require('./build/utils/get-packages')
+const { getTypes, getScopes } = require('./build/utils/commit-util')
 
 // https://github.com/streamich/git-cz
 module.exports = {
   disableEmoji: false,
-  list: [
-    'feat',
-    'fix',
-    'docs',
-    'style',
-    'refactor',
-    'perf',
-    'test',
-    'ci',
-    'chore'
-  ],
+  list: getTypes(),
   questions: ['type', 'scope', 'subject', 'body', 'breaking', 'issues'],
   scopes: getScopes(),
   maxMessageLength: 100,
