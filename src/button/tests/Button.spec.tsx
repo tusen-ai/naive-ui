@@ -66,7 +66,7 @@ describe('n-button', () => {
     const wrapper = mount(NButton)
 
     await wrapper.setProps({ bordered: false })
-    expect(wrapper.find('button').attributes('style')).toMatchSnapshot()
+    expect(wrapper.find('.n-button__border').exists()).toBe(false)
   })
 
   it('should work with `size` prop', async () => {
@@ -157,14 +157,19 @@ describe('n-button', () => {
           })
       }
     })
-
-    expect(wrapper.find('button').attributes('style')).toMatchSnapshot()
+    const circleReg =
+      /^(?=.*--width: 34px;)(?=.*--padding: initial;)(?=.*--border-radius: 34px;).*$/im
+    expect(wrapper.find('button').attributes('style')).toMatch(circleReg)
 
     await wrapper.setProps({ circle: false, round: true })
-    expect(wrapper.find('button').attributes('style')).toMatchSnapshot()
+    const roundReg =
+      /^(?=.*--width: initial;)(?=.*--padding: 0 18px;)(?=.*--border-radius: 34px;).*$/im
+    expect(wrapper.find('button').attributes('style')).toMatch(roundReg)
 
     await wrapper.setProps({ circle: false, round: false })
-    expect(wrapper.find('button').attributes('style')).toMatchSnapshot()
+    const defaultReg =
+      /^(?=.*--width: initial;)(?=.*--padding: 0 14px;)(?=.*--border-radius: 3px;).*$/im
+    expect(wrapper.find('button').attributes('style')).toMatch(defaultReg)
   })
 
   it('should work with `ghost` prop', () => {
@@ -207,7 +212,9 @@ describe('n-button', () => {
     })
 
     expect(wrapper.find('button').classes()).toContain('n-button--color')
-    expect(wrapper.find('button').attributes('style')).toMatchSnapshot()
+    const reg =
+      /^(?=.*--color: #8a2be2;)(?=.*--color-disabled: #8a2be2;)(?=.*--ripple-color: #8a2be2;).*$/im
+    expect(wrapper.find('button').attributes('style')).toMatch(reg)
   })
 
   it('should work with `button group`', async () => {
