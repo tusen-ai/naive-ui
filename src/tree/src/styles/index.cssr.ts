@@ -21,9 +21,10 @@ const nodeStateStyle = [
 // --node-color-pressed
 // --node-text-color
 // --node-text-color-disabled
-export default cB('tree', {
-  fontSize: 'var(--font-size)'
-}, [
+export default cB('tree', `
+  font-size: var(--font-size);
+  outline: none;
+`, [
   c('ul, li', `
     margin: 0;
     padding: 0;
@@ -100,6 +101,11 @@ export default cB('tree', {
     cB('tree-node', [
       cNotM('disabled', [
         cB('tree-node-content', nodeStateStyle),
+        cM('pending', [
+          cB('tree-node-content', `
+            background-color: var(--node-color-hover);
+          `)
+        ]),
         cM('selected', [
           cB('tree-node-content', {
             backgroundColor: 'var(--node-color-active)'
@@ -112,6 +118,9 @@ export default cB('tree', {
     cB('tree-node', [
       cNotM('disabled', [
         nodeStateStyle,
+        cM('pending', `
+          background-color: var(--node-color-hover);
+        `),
         cM('selected', {
           backgroundColor: 'var(--node-color-active)'
         })
@@ -172,11 +181,10 @@ export default cB('tree', {
   cB('tree-node-content', `
     position: relative;
     display: inline-flex;
-    height: 24px;
+    align-items: center;
+    min-height: 24px;
     box-sizing: border-box;
-    border-bottom: 3px solid #0000;
-    border-top: 3px solid #0000;
-    line-height: 24px;
+    line-height: 1.5;
     align-items: center;
     vertical-align: bottom;
     padding: 0 6px;
@@ -194,7 +202,6 @@ export default cB('tree', {
       marginBottom: 0
     }),
     cE('text', `
-      line-height: 1.25;
       border-bottom: 1px solid #0000;
       transition: border-color .3s var(--bezier);
     `)

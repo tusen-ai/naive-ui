@@ -72,6 +72,7 @@ export * from './timeline'
 export * from './tooltip'
 export * from './transfer'
 export * from './tree'
+export * from './tree-select'
 export * from './typography'
 export * from './upload'
 

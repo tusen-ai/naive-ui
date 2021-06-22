@@ -67,6 +67,7 @@ import { timePickerDark } from '../time-picker/styles'
 import { timelineDark } from '../timeline/styles'
 import { tooltipDark } from '../tooltip/styles'
 import { transferDark } from '../transfer/styles'
+import { treeSelectDark } from '../tree-select/styles'
 import { typographyDark } from '../typography/styles'
 import { treeDark } from '../tree/styles'
 import { uploadDark } from '../upload/styles'
@@ -143,6 +144,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Tooltip: tooltipDark,
   Transfer: transferDark,
   Tree: treeDark,
+  TreeSelect: treeSelectDark,
   Typography: typographyDark,
   Upload: uploadDark
 }

@@ -10,7 +10,7 @@
           mode="horizontal"
           :value="menuValue"
           :options="menuOptions"
-          @update:value="handleMenuUpdateValue"
+          :render-label="renderMenuLabel"
         />
       </div>
       <n-auto-complete
@@ -40,6 +40,7 @@
           :options="mobileMenuOptions"
           :indent="18"
           @update:value="handleUpdateMobileMenu"
+          :render-label="renderMenuLabel"
         />
       </div>
     </n-popover>
@@ -93,6 +94,7 @@ import {
   useDocOptions,
   useComponentOptions
 } from './store'
+import { renderMenuLabel } from './store/menu-options'
 
 // match substr
 function match (pattern, string) {
@@ -142,6 +144,7 @@ export default {
     const router = useRouter()
 
     const mobilePopoverRef = ref(null)
+    const themeAndLocaleReg = /^(\/[^/]+){2}/
 
     // i18n
     const { t } = i18n(locales)
@@ -151,39 +154,21 @@ export default {
       return [
         {
           key: 'home',
-          title: t('home')
+          label: t('home'),
+          path: themeAndLocaleReg.exec(route.path)[0]
         },
         {
           key: 'doc',
-          title: t('doc')
+          label: t('doc'),
+          path: themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
         },
         {
           key: 'component',
-          title: t('component')
+          label: t('component'),
+          path: themeAndLocaleReg.exec(route.path)[0] + '/components/button'
         }
       ]
     })
-    const themeAndLocaleReg = /^(\/[^/]+){2}/
-    function handleMenuUpdateValue (value) {
-      if (value === 'github') {
-        window.open(repoUrl, '_blank')
-      }
-      if (value === 'home') {
-        router.push(themeAndLocaleReg.exec(route.path)[0])
-      } else if (value === 'doc') {
-        if (!/^(\/[^/]+){2}\/docs/.test(route.path)) {
-          router.push(
-            themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
-          )
-        }
-      } else if (value === 'component') {
-        if (!/^(\/[^/]+){2}\/components/.test(route.path)) {
-          router.push(
-            themeAndLocaleReg.exec(route.path)[0] + '/components/button'
-          )
-        }
-      }
-    }
     const menuValueRef = computed(() => {
       if (/\/docs\//.test(route.path)) return 'doc'
       if (/\/components\//.test(route.path)) return 'component'
@@ -198,29 +183,32 @@ export default {
       return [
         {
           key: 'theme',
-          title: themeLabelMapRef.value[themeNameRef.value]
+          label: themeLabelMapRef.value[themeNameRef.value]
         },
         {
           key: 'locale',
-          title: localeNameRef.value === 'zh-CN' ? 'English' : '中文'
+          label: localeNameRef.value === 'zh-CN' ? 'English' : '中文'
         },
         {
           key: 'home',
-          title: t('home')
+          label: t('home'),
+          path: themeAndLocaleReg.exec(route.path)[0]
         },
         {
           key: 'doc',
-          title: t('doc'),
-          children: docOptionsRef.value
+          label: t('doc'),
+          children: docOptionsRef.value,
+          path: themeAndLocaleReg.exec(route.path)[0] + '/docs/introduction'
         },
         {
           key: 'component',
-          title: t('component'),
+          label: t('component'),
+          path: themeAndLocaleReg.exec(route.path)[0] + '/components/button',
           children: componentOptionsRef.value
         },
         {
           key: 'github',
-          title: 'GitHub'
+          label: 'GitHub'
         }
       ]
     })
@@ -240,7 +228,7 @@ export default {
       } else if (path) {
         router.push(path)
       } else {
-        handleMenuUpdateValue(value)
+        window.open(repoUrl, '_blank')
       }
       mobilePopoverRef.value.setShow(false)
     }
@@ -343,6 +331,7 @@ export default {
     }
 
     return {
+      renderMenuLabel,
       mobilePopoverRef,
       tusimple: process.env.TUSIMPLE,
       dev: __DEV__,
@@ -375,7 +364,6 @@ export default {
       // menu
       menuOptions: menuOptionsRef,
       menuValue: menuValueRef,
-      handleMenuUpdateValue,
       // mobile & tablet menu
       mobileMenuOptions: mobileMenuOptionsRef,
       handleUpdateMobileMenu,

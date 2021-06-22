@@ -19,7 +19,7 @@
       <n-menu
         :value="menuValue"
         :options="options"
-        @update:value="handleMenuUpdateValue"
+        :render-label="renderMenuLabel"
       />
     </n-layout-sider>
     <n-layout
@@ -37,11 +37,12 @@
 <script>
 // Frame component for components & docs page
 import { computed, watch, toRef, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { findMenuValue } from '../utils/route'
 import { useIsMobile, useIsTablet } from '../utils/composables'
 import SiteFooter from './home/Footer.vue'
 import { useDocOptions, useComponentOptions } from '../store'
+import { renderMenuLabel } from '../store/menu-options'
 import { useMemo } from 'vooks'
 
 export default {
@@ -50,7 +51,6 @@ export default {
   },
   setup () {
     const route = useRoute()
-    const router = useRouter()
     const layoutInstRef = ref(null)
     const docOptionsRef = useDocOptions()
     const componentOptionsRef = useComponentOptions()
@@ -75,17 +75,16 @@ export default {
     })
     const isMobileRef = useIsMobile()
     const isTabletRef = useIsTablet()
+
     return {
+      renderMenuLabel,
       showSider: useMemo(() => {
         return !isMobileRef.value && !isTabletRef.value
       }),
       layoutInstRef,
       options: optionsRef,
       menuValue: menuValueRef,
-      isMobile: isMobileRef,
-      handleMenuUpdateValue: (_, option) => {
-        router.push(option.path)
-      }
+      isMobile: isMobileRef
     }
   }
 }

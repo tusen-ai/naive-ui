@@ -9,21 +9,24 @@ import {
   PropType,
   watch,
   CSSProperties,
-  VNode
+  VNode,
+  nextTick
 } from 'vue'
-import { createTreeMate, flatten, createIndexGetter } from 'treemate'
+import { createTreeMate, flatten, createIndexGetter, TreeMate } from 'treemate'
 import { useMergedState } from 'vooks'
 import { VirtualListInst, VVirtualList } from 'vueuc'
+import { getPadding } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, warn } from '../../_utils'
+import { call, createDataKey, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { NScrollbar, ScrollbarInst } from '../../scrollbar'
+import { NxScrollbar } from '../../scrollbar'
+import type { ScrollbarInst } from '../../scrollbar'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
-import { keysWithFilter, emptyImage } from './utils'
-import style from './styles/index.cssr'
+import { keysWithFilter, emptyImage, defaultFilter } from './utils'
+import { useKeyboard } from './keyboard'
 import {
   DragInfo,
   DropInfo,
@@ -36,16 +39,43 @@ import {
   DropPosition,
   AllowDrop,
   MotionData,
-  treeInjectionKey
+  treeInjectionKey,
+  InternalTreeInst
 } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
+import style from './styles/index.cssr'
 
 // TODO:
 // During expanding, some node are mis-applied with :active style
 // Async dnd has bug
 
-const ITEM_SIZE = 30
+const ITEM_SIZE = 30 // 24 + 3 + 3
+
+export const treeMateOptions = {
+  getDisabled (node: TreeOption) {
+    return !!(node.disabled || node.checkboxDisabled)
+  }
+}
+
+export const treeSharedProps = {
+  filter: {
+    type: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
+    default: defaultFilter
+  },
+  defaultExpandAll: Boolean,
+  expandedKeys: Array as PropType<Key[]>,
+  defaultExpandedKeys: {
+    type: Array as PropType<Key[]>,
+    default: () => []
+  },
+  onUpdateExpandedKeys: [Function, Array] as PropType<
+  MaybeArray<(value: Key[]) => void>
+  >,
+  'onUpdate:expandedKeys': [Function, Array] as PropType<
+  MaybeArray<(value: Key[]) => void>
+  >
+} as const
 
 const treeProps = {
   ...(useTheme.props as ThemeProps<TreeTheme>),
@@ -53,7 +83,6 @@ const treeProps = {
     type: Array as PropType<TreeOptions>,
     default: () => []
   },
-  defaultExpandAll: Boolean,
   expandOnDragenter: {
     type: Boolean,
     default: true
@@ -72,11 +101,6 @@ const treeProps = {
     type: Array as PropType<Key[]>,
     default: () => []
   },
-  expandedKeys: Array as PropType<Key[]>,
-  defaultExpandedKeys: {
-    type: Array as PropType<Key[]>,
-    default: () => []
-  },
   selectedKeys: Array as PropType<Key[]>,
   defaultSelectedKeys: {
     type: Array as PropType<Key[]>,
@@ -87,13 +111,6 @@ const treeProps = {
   pattern: {
     type: String,
     default: ''
-  },
-  filter: {
-    type: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
-    default: (pattern: string, node: TreeOption) => {
-      if (!pattern) return true
-      return ~node.label.toLowerCase().indexOf(pattern.toLowerCase())
-    }
   },
   onLoad: Function as PropType<(node: TreeOption) => Promise<void>>,
   cascade: Boolean,
@@ -109,6 +126,10 @@ const treeProps = {
     type: Function as PropType<AllowDrop>,
     default: defaultAllowDrop
   },
+  animated: {
+    type: Boolean,
+    default: true
+  },
   virtualScroll: Boolean,
   onDragenter: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
   onDragleave: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
@@ -116,60 +137,37 @@ const treeProps = {
   onDragstart: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
   onDragover: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
   onDrop: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
-  // eslint-disable-next-line vue/prop-name-casing
-  'onUpdate:expandedKeys': [Function, Array] as PropType<
+  onUpdateCheckedKeys: [Function, Array] as PropType<
   MaybeArray<(value: Key[]) => void>
   >,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:checkedKeys': [Function, Array] as PropType<
   MaybeArray<(value: Key[]) => void>
   >,
-  // eslint-disable-next-line vue/prop-name-casing
+  onUpdateSelectedKeys: [Function, Array] as PropType<
+  MaybeArray<(value: Key[]) => void>
+  >,
   'onUpdate:selectedKeys': [Function, Array] as PropType<
   MaybeArray<(value: Key[]) => void>
   >,
-  // deprecated
-  /** @deprecated */
-  onExpandedKeysChange: {
-    type: [Function, Array] as PropType<
-    MaybeArray<(value: Key[]) => void> | undefined
-    >,
-    validator: () => {
-      warn(
-        'tree',
-        '`on-expanded-keys-change` is deprecated, please use `on-update:expanded-keys` instead.'
-      )
-      return true
-    },
-    default: undefined
+  ...treeSharedProps,
+  // internal props for tree-select
+  internalScrollable: Boolean,
+  internalScrollablePadding: String,
+  // use it to do check
+  internalDataTreeMate: Object as PropType<TreeMate<TreeOption>>,
+  // use it to display
+  internalDisplayTreeMate: Object as PropType<TreeMate<TreeOption>>,
+  internalHighlightKeySet: Object as PropType<Set<Key>>,
+  internalCheckOnSelect: Boolean,
+  internalHideFilteredNode: Boolean, // I'm sure this won't work with draggable
+  internalCheckboxFocusable: {
+    type: Boolean,
+    default: true
   },
-  /** @deprecated */
-  onCheckedKeysChange: {
-    type: [Function, Array] as PropType<
-    MaybeArray<(value: Key[]) => void> | undefined
-    >,
-    validator: () => {
-      warn(
-        'tree',
-        '`on-checked-keys-change` is deprecated, please use `on-update:expanded-keys` instead.'
-      )
-      return true
-    },
-    default: undefined
-  },
-  /** @deprecated */
-  onSelectedKeysChange: {
-    type: [Function, Array] as PropType<
-    MaybeArray<(value: Key[]) => void> | undefined
-    >,
-    validator: () => {
-      warn(
-        'tree',
-        '`on-selected-keys-change` is deprecated, please use `on-update:selected-keys` instead.'
-      )
-      return true
-    },
-    default: undefined
+  internalFocusable: {
+    // Make tree-select take over keyboard operations
+    type: Boolean,
+    default: true
   }
 } as const
 
@@ -197,13 +195,13 @@ export default defineComponent({
     function getScrollContent (): HTMLElement | null | undefined {
       return virtualListInstRef.value?.itemsElRef
     }
-    const treeMateRef = computed(() =>
-      createTreeMate(props.data, {
-        getDisabled (node) {
-          return !!(node.disabled || node.checkboxDisabled)
-        }
-      })
-    )
+    // We don't expect data source to change so we just determine it once
+    const displayTreeMateRef = props.internalDisplayTreeMate
+      ? toRef(props, 'internalDisplayTreeMate')
+      : computed(() => createTreeMate(props.data, treeMateOptions))
+    const dataTreeMateRef = props.internalDataTreeMate
+      ? toRef(props, 'internalDataTreeMate')
+      : displayTreeMateRef
     const uncontrolledCheckedKeysRef = ref(
       props.defaultCheckedKeys || props.checkedKeys
     )
@@ -213,7 +211,7 @@ export default defineComponent({
       uncontrolledCheckedKeysRef
     )
     const checkedStatusRef = computed(() => {
-      return treeMateRef.value.getCheckedKeys(mergedCheckedKeysRef.value, {
+      return dataTreeMateRef.value!.getCheckedKeys(mergedCheckedKeysRef.value, {
         cascade: props.cascade
       })
     })
@@ -233,8 +231,8 @@ export default defineComponent({
     )
     const uncontrolledExpandedKeysRef = ref(
       props.defaultExpandAll
-        ? treeMateRef.value.getNonLeafKeys()
-        : props.defaultExpandedKeys || props.expandedKeys
+        ? dataTreeMateRef.value!.getNonLeafKeys()
+        : props.defaultExpandedKeys
     )
     const controlledExpandedKeysRef = toRef(props, 'expandedKeys')
     const mergedExpandedKeysRef = useMergedState(
@@ -243,12 +241,25 @@ export default defineComponent({
     )
 
     const fNodesRef = computed(() =>
-      treeMateRef.value.getFlattenedNodes(mergedExpandedKeysRef.value)
+      displayTreeMateRef.value!.getFlattenedNodes(mergedExpandedKeysRef.value)
     )
+
+    const { pendingNodeKeyRef, handleKeyup, handleKeydown } = useKeyboard({
+      mergedSelectedKeysRef,
+      fNodesRef,
+      mergedExpandedKeysRef,
+      handleSelect,
+      handleSwitcherClick
+    })
 
     let expandTimerId: number | null = null
     let nodeKeyToBeExpanded: Key | null = null
-    const highlightKeysRef = ref<Key[]>([])
+    const uncontrolledHighlightKeySetRef = ref<Set<Key>>(new Set())
+    const controlledHighlightKeySetRef = toRef(props, 'internalHighlightKeySet')
+    const mergedHighlightKeySetRef = useMergedState(
+      controlledHighlightKeySetRef,
+      uncontrolledHighlightKeySetRef
+    )
     const loadingKeysRef = ref<Key[]>([])
 
     let dragStartX: number = 0
@@ -272,6 +283,7 @@ export default defineComponent({
       toRef(props, 'data'),
       () => {
         loadingKeysRef.value = []
+        pendingNodeKeyRef.value = null
         resetDndState()
       },
       {
@@ -280,21 +292,29 @@ export default defineComponent({
     )
     watch(toRef(props, 'pattern'), (value) => {
       if (value) {
-        const [expandedKeysAfterChange, highlightKeys] = keysWithFilter(
-          props.data,
-          props.pattern,
-          props.filter
-        )
-        highlightKeysRef.value = highlightKeys
-        doExpandedKeysChange(expandedKeysAfterChange)
+        const { expandedKeys: expandedKeysAfterChange, highlightKeySet } =
+          keysWithFilter(props.data, props.pattern, props.filter)
+        uncontrolledHighlightKeySetRef.value = highlightKeySet
+        doUpdateExpandedKeys(expandedKeysAfterChange)
       } else {
-        highlightKeysRef.value = []
+        uncontrolledHighlightKeySetRef.value = new Set()
       }
     })
 
-    const aipRef = ref(false) // animation in progress
-    const afNodeRef = ref<Array<TmNode | MotionData>>([]) // animation flattened nodes
+    // animation in progress
+    const aipRef = ref(false)
+    // animation flattened nodes
+    const afNodeRef = ref<Array<TmNode | MotionData>>([])
+    // Note: Since the virtual list depends on min height, if there's a node
+    // whose height starts from 0, the virtual list will have a wrong height
+    // during animation. This will seldom cause wired scrollbar status. It is
+    // fixable and need some changes in vueuc, I've no time so I just leave it
+    // here. Maybe the bug won't be fixed during the life time of the project.
     watch(mergedExpandedKeysRef, (value, prevValue) => {
+      if (!props.animated) {
+        void nextTick(syncScrollbar)
+        return
+      }
       const prevVSet = new Set(prevValue)
       let addedKey: Key | null = null
       let removedKey: Key | null = null
@@ -327,7 +347,7 @@ export default defineComponent({
       if (addedKey !== null) {
         // play add animation
         aipRef.value = true
-        afNodeRef.value = treeMateRef.value.getFlattenedNodes(prevValue)
+        afNodeRef.value = displayTreeMateRef.value!.getFlattenedNodes(prevValue)
         const expandedNodeIndex = afNodeRef.value.findIndex(
           (node) => (node as any).key === addedKey
         )
@@ -352,7 +372,7 @@ export default defineComponent({
       if (removedKey !== null) {
         // play remove animation
         aipRef.value = true
-        afNodeRef.value = treeMateRef.value.getFlattenedNodes(value)
+        afNodeRef.value = displayTreeMateRef.value!.getFlattenedNodes(value)
         const collapsedNodeIndex = afNodeRef.value.findIndex(
           (node) => (node as any).key === removedKey
         )
@@ -385,36 +405,47 @@ export default defineComponent({
       else return fNodesRef.value
     })
 
-    function handleAfterEnter (): void {
-      aipRef.value = false
+    function syncScrollbar (): void {
+      const { value: scrollbarInst } = scrollbarInstRef
+      if (scrollbarInst) scrollbarInst.sync()
     }
 
-    function doExpandedKeysChange (value: Key[]): void {
+    function handleAfterEnter (): void {
+      aipRef.value = false
+      if (props.virtualScroll) {
+        // If virtual scroll, we won't listen to resize during animation, so
+        // resize callback of virtual list won't be called and as a result
+        // scrollbar won't sync. We need to sync scrollbar manually.
+        void nextTick(syncScrollbar)
+      }
+    }
+
+    function doUpdateExpandedKeys (value: Key[]): void {
       const {
-        'onUpdate:expandedKeys': onUpdateExpandedKeys,
-        onExpandedKeysChange
+        'onUpdate:expandedKeys': _onUpdateExpandedKeys,
+        onUpdateExpandedKeys
       } = props
       uncontrolledExpandedKeysRef.value = value
+      if (_onUpdateExpandedKeys) call(_onUpdateExpandedKeys, value)
       if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, value)
-      if (onExpandedKeysChange) call(onExpandedKeysChange, value)
     }
-    function doCheckedKeysChange (value: Key[]): void {
+    function doUpdateCheckedKeys (value: Key[]): void {
       const {
-        'onUpdate:checkedKeys': onUpdateCheckedKeys,
-        onCheckedKeysChange
+        'onUpdate:checkedKeys': _onUpdateCheckedKeys,
+        onUpdateCheckedKeys
       } = props
       uncontrolledCheckedKeysRef.value = value
       if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, value)
-      if (onCheckedKeysChange) call(onCheckedKeysChange, value)
+      if (_onUpdateCheckedKeys) call(_onUpdateCheckedKeys, value)
     }
     function doUpdateSelectedKeys (value: Key[]): void {
       const {
-        'onUpdate:selectedKeys': onUpdateSelectedKeys,
-        onSelectedKeysChange
+        'onUpdate:selectedKeys': _onUpdateSelectedKeys,
+        onUpdateSelectedKeys
       } = props
       uncontrolledSelectedKeysRef.value = value
       if (onUpdateSelectedKeys) call(onUpdateSelectedKeys, value)
-      if (onSelectedKeysChange) call(onSelectedKeysChange, value)
+      if (_onUpdateSelectedKeys) call(_onUpdateSelectedKeys, value)
     }
     // Drag & Drop
     function doDragEnter (info: DragInfo): void {
@@ -464,37 +495,48 @@ export default defineComponent({
     }
     function handleCheck (node: TmNode, checked: boolean): void {
       if (props.disabled || node.disabled) return
-      const { checkedKeys } = treeMateRef.value[checked ? 'check' : 'uncheck'](
-        node.key,
-        displayedCheckedKeysRef.value,
-        {
-          cascade: props.cascade
-        }
-      )
-      doCheckedKeysChange(checkedKeys)
+      const { checkedKeys } = dataTreeMateRef.value![
+        checked ? 'check' : 'uncheck'
+      ](node.key, displayedCheckedKeysRef.value, {
+        cascade: props.cascade
+      })
+      doUpdateCheckedKeys(checkedKeys)
     }
-    function toggleExpand (node: TmNode): void {
+    function toggleExpand (key: Key): void {
       if (props.disabled) return
       const { value: mergedExpandedKeys } = mergedExpandedKeysRef
       const index = mergedExpandedKeys.findIndex(
-        (expandNodeId) => expandNodeId === node.key
+        (expandNodeId) => expandNodeId === key
       )
       if (~index) {
         const expandedKeysAfterChange = Array.from(mergedExpandedKeys)
         expandedKeysAfterChange.splice(index, 1)
-        doExpandedKeysChange(expandedKeysAfterChange)
+        doUpdateExpandedKeys(expandedKeysAfterChange)
       } else {
-        doExpandedKeysChange(mergedExpandedKeys.concat(node.key))
+        doUpdateExpandedKeys(mergedExpandedKeys.concat(key))
       }
     }
     function handleSwitcherClick (node: TmNode): void {
       if (props.disabled || aipRef.value) return
-      toggleExpand(node)
+      toggleExpand(node.key)
     }
     function handleSelect (node: TmNode): void {
       if (props.disabled || node.disabled || !props.selectable) return
+      pendingNodeKeyRef.value = node.key
+      if (props.internalCheckOnSelect) {
+        const {
+          value: { checkedKeys, indeterminateKeys }
+        } = checkedStatusRef
+        handleCheck(
+          node,
+          !(
+            checkedKeys.includes(node.key) ||
+            indeterminateKeys.includes(node.key)
+          )
+        )
+      }
       if (props.multiple) {
-        const selectedKeys = mergedSelectedKeysRef.value
+        const selectedKeys = Array.from(mergedSelectedKeysRef.value)
         const index = selectedKeys.findIndex((key) => key === node.key)
         if (~index) {
           if (props.cancelable) {
@@ -532,7 +574,7 @@ export default defineComponent({
           droppingMouseNode.key === node.key &&
           !mergedExpandedKeysRef.value.includes(node.key)
         ) {
-          doExpandedKeysChange(mergedExpandedKeysRef.value.concat(node.key))
+          doUpdateExpandedKeys(mergedExpandedKeysRef.value.concat(node.key))
         }
         expandTimerId = null
         nodeKeyToBeExpanded = null
@@ -856,14 +898,43 @@ export default defineComponent({
       resetDndState()
     }
     function handleScroll (): void {
-      scrollbarInstRef.value?.sync()
+      syncScrollbar()
     }
     function handleResize (): void {
-      scrollbarInstRef.value?.sync()
+      syncScrollbar()
     }
+    function handleFocusout (e: FocusEvent): void {
+      if (props.virtualScroll || props.internalScrollable) {
+        const { value: scrollbarInst } = scrollbarInstRef
+        if (scrollbarInst?.containerRef?.contains(e.relatedTarget as Element)) {
+          return
+        }
+        pendingNodeKeyRef.value = null
+      } else {
+        const { value: selfEl } = selfElRef
+        if (selfEl?.contains(e.relatedTarget as Element)) return
+        pendingNodeKeyRef.value = null
+      }
+    }
+    watch(pendingNodeKeyRef, (value) => {
+      if (value === null) return
+      if (props.virtualScroll) {
+        virtualListInstRef.value?.scrollTo({ key: value })
+      } else if (props.internalScrollable) {
+        const { value: scrollbarInst } = scrollbarInstRef
+        if (scrollbarInst === null) return
+        const targetEl = scrollbarInst.contentRef?.querySelector(
+          `[data-key="${createDataKey(value)}"]`
+        )
+        if (!targetEl) return
+        scrollbarInst.scrollTo({
+          el: targetEl as any
+        })
+      }
+    })
     provide(treeInjectionKey, {
       loadingKeysRef,
-      highlightKeysRef,
+      highlightKeySetRef: mergedHighlightKeySetRef,
       displayedCheckedKeysRef,
       displayedIndeterminateKeysRef,
       mergedSelectedKeysRef,
@@ -882,6 +953,9 @@ export default defineComponent({
       droppingPositionRef,
       droppingOffsetLevelRef,
       fNodesRef,
+      pendingNodeKeyRef,
+      internalScrollableRef: toRef(props, 'internalScrollable'),
+      internalCheckboxFocusableRef: toRef(props, 'internalCheckboxFocusable'),
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,
@@ -892,6 +966,10 @@ export default defineComponent({
       handleSelect,
       handleCheck
     })
+    const exposedMethods: InternalTreeInst = {
+      handleKeydown,
+      handleKeyup
+    }
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
@@ -900,6 +978,7 @@ export default defineComponent({
       selfElRef,
       virtualListInstRef,
       scrollbarInstRef,
+      handleFocusout,
       handleDragLeaveTree,
       handleScroll,
       getScrollContainer,
@@ -935,12 +1014,25 @@ export default defineComponent({
           '--node-text-color-disabled': nodeTextColorDisabled,
           '--drop-mark-color': dropMarkColor
         }
-      })
+      }),
+      ...exposedMethods
     }
   },
   render () {
-    const { mergedClsPrefix, blockNode, blockLine, draggable, selectable } =
-      this
+    const {
+      mergedClsPrefix,
+      blockNode,
+      blockLine,
+      draggable,
+      selectable,
+      disabled,
+      internalFocusable,
+      handleKeyup,
+      handleKeydown,
+      handleFocusout
+    } = this
+    const mergedFocusable = internalFocusable && !disabled
+    const tabindex = mergedFocusable ? '0' : undefined
     const treeClass = [
       `${mergedClsPrefix}-tree`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
@@ -964,9 +1056,10 @@ export default defineComponent({
         />
       )
     if (this.virtualScroll) {
-      const { mergedTheme } = this
+      const { mergedTheme, internalScrollablePadding } = this
+      const padding = getPadding(internalScrollablePadding || '0')
       return (
-        <NScrollbar
+        <NxScrollbar
           ref="scrollbarInstRef"
           onDragleave={draggable ? this.handleDragLeaveTree : undefined}
           container={this.getScrollContainer}
@@ -974,6 +1067,10 @@ export default defineComponent({
           class={treeClass}
           theme={mergedTheme.peers.Scrollbar}
           themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+          tabindex={tabindex}
+          onKeyup={mergedFocusable ? handleKeyup : undefined}
+          onKeydown={mergedFocusable ? handleKeydown : undefined}
+          onFocusout={mergedFocusable ? handleFocusout : undefined}
         >
           {{
             default: () => (
@@ -982,7 +1079,15 @@ export default defineComponent({
                 items={this.fNodes}
                 itemSize={ITEM_SIZE}
                 ignoreItemResize={this.aip}
-                style={this.cssVars as CSSProperties}
+                paddingTop={padding.top}
+                paddingBottom={padding.bottom}
+                style={[
+                  this.cssVars as CSSProperties,
+                  {
+                    paddingLeft: padding.left,
+                    paddingRight: padding.right
+                  }
+                ]}
                 onScroll={this.handleScroll}
                 onResize={this.handleResize}
                 showScrollbar={false}
@@ -995,18 +1100,48 @@ export default defineComponent({
               </VVirtualList>
             )
           }}
-        </NScrollbar>
+        </NxScrollbar>
       )
     }
-    return (
-      <div
-        class={treeClass}
-        style={this.cssVars as CSSProperties}
-        onDragleave={draggable ? this.handleDragLeaveTree : undefined}
-        ref="selfElRef"
-      >
-        {this.fNodes.map(createNode)}
-      </div>
-    )
+    const { internalScrollable } = this
+    if (internalScrollable) {
+      return (
+        <NxScrollbar
+          class={treeClass}
+          tabindex={tabindex}
+          onKeyup={mergedFocusable ? handleKeyup : undefined}
+          onKeydown={mergedFocusable ? handleKeydown : undefined}
+          onFocusout={mergedFocusable ? handleFocusout : undefined}
+          style={this.cssVars as CSSProperties}
+          contentStyle={{ padding: this.internalScrollablePadding }}
+        >
+          {{
+            default: () => (
+              <div
+                onDragleave={draggable ? this.handleDragLeaveTree : undefined}
+                ref="selfElRef"
+              >
+                {this.fNodes.map(createNode)}
+              </div>
+            )
+          }}
+        </NxScrollbar>
+      )
+    } else {
+      return (
+        <div
+          class={treeClass}
+          tabindex={tabindex}
+          ref="selfElRef"
+          style={this.cssVars as CSSProperties}
+          onKeyup={mergedFocusable ? handleKeyup : undefined}
+          onKeydown={mergedFocusable ? handleKeydown : undefined}
+          onFocusout={mergedFocusable ? handleFocusout : undefined}
+          onDragleave={draggable ? this.handleDragLeaveTree : undefined}
+        >
+          {this.fNodes.map(createNode)}
+        </div>
+      )
+    }
   }
 })

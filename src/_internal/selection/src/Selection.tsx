@@ -60,7 +60,6 @@ export default defineComponent({
     },
     multiple: Boolean,
     filterable: Boolean,
-    remote: Boolean,
     clearable: Boolean,
     disabled: Boolean,
     size: {
@@ -80,7 +79,6 @@ export default defineComponent({
     onBlur: Function as PropType<(e: FocusEvent) => void>,
     onFocus: Function as PropType<(e: FocusEvent) => void>,
     onDeleteOption: Function,
-    onDeleteLastOption: Function,
     maxTagCount: [String, Number] as PropType<number | 'responsive'>,
     onClear: Function as PropType<(e: MouseEvent) => void>,
     onPatternInput: Function as PropType<(e: InputEvent) => void>
@@ -95,6 +93,7 @@ export default defineComponent({
     const counterRef = ref<TagRef | null>(null)
     const counterWrapperRef = ref<HTMLElement | null>(null)
     const overflowRef = ref<VOverflowInst | null>(null)
+    const inputTagElRef = ref<HTMLElement | null>(null)
 
     const showTagsPopoverRef = ref<boolean>(false)
     const patternInputFocusedRef = ref(false)
@@ -143,6 +142,17 @@ export default defineComponent({
         }
       }
     }
+    function hideInputTag (): void {
+      const { value: inputTagEl } = inputTagElRef
+      if (inputTagEl) inputTagEl.style.display = 'none'
+    }
+    function showInputTag (): void {
+      const { value: inputTagEl } = inputTagElRef
+      if (inputTagEl) inputTagEl.style.display = 'inline-block'
+    }
+    watch(toRef(props, 'active'), (value) => {
+      if (!value) hideInputTag()
+    })
     watch(toRef(props, 'pattern'), () => {
       if (props.multiple) {
         void nextTick(syncMirrorWidth)
@@ -159,10 +169,6 @@ export default defineComponent({
     function doDeleteOption (value: SelectBaseOption): void {
       const { onDeleteOption } = props
       if (onDeleteOption) onDeleteOption(value)
-    }
-    function doDeleteLastOption (): void {
-      const { onDeleteLastOption } = props
-      if (onDeleteLastOption) onDeleteLastOption()
     }
     function doClear (e: MouseEvent): void {
       const { onClear } = props
@@ -204,7 +210,10 @@ export default defineComponent({
     function handlePatternKeyDown (e: KeyboardEvent): void {
       if (e.code === 'Backspace') {
         if (!props.pattern.length) {
-          doDeleteLastOption()
+          const { selectedOptions } = props
+          if (selectedOptions?.length) {
+            handleDeleteOption(selectedOptions[selectedOptions.length - 1])
+          }
         }
       }
     }
@@ -250,6 +259,7 @@ export default defineComponent({
     function focusInput (): void {
       const { value: patternInputEl } = patternInputRef
       if (patternInputEl) {
+        showInputTag()
         patternInputEl.focus()
       }
     }
@@ -319,6 +329,7 @@ export default defineComponent({
       singleElRef,
       patternInputWrapperRef,
       overflowRef,
+      inputTagElRef,
       handleMouseDown,
       handleFocusin,
       handleClear,
@@ -493,6 +504,7 @@ export default defineComponent({
       const input = filterable ? (
         <div
           class={`${clsPrefix}-base-selection-input-tag`}
+          ref="inputTagElRef"
           key="__input-tag__"
         >
           <input
@@ -683,69 +695,63 @@ export default defineComponent({
           (this.active || !this.selected) &&
           !this.isCompositing
         body = (
-          <>
-            <div
-              ref="patternInputWrapperRef"
-              class={`${clsPrefix}-base-selection-label`}
-            >
-              <input
-                ref="patternInputRef"
-                class={`${clsPrefix}-base-selection-label__input`}
-                value={
-                  showPlaceholder
-                    ? ''
-                    : this.patternInputFocused && this.active
-                      ? this.pattern
-                      : String(this.label)
-                }
-                placeholder=""
-                readonly={
-                  !(!disabled && filterable && (this.active || this.autofocus))
-                }
-                disabled={disabled}
-                tabindex={-1}
-                autofocus={this.autofocus}
-                onFocus={this.handlePatternInputFocus}
-                onBlur={this.handlePatternInputBlur}
-                onInput={this.handlePatternInputInput as any}
-                onCompositionstart={this.handleCompositionStart}
-                onCompositionend={this.handleCompositionEnd}
-              />
-              {showPlaceholder ? (
-                <div class={`${clsPrefix}-base-selection-placeholder`}>
-                  {this.filterablePlaceholder}
-                </div>
-              ) : null}
-              {suffix}
-            </div>
-          </>
+          <div
+            ref="patternInputWrapperRef"
+            class={`${clsPrefix}-base-selection-label`}
+          >
+            <input
+              ref="patternInputRef"
+              class={`${clsPrefix}-base-selection-label__input`}
+              value={
+                showPlaceholder
+                  ? ''
+                  : this.patternInputFocused && this.active
+                    ? this.pattern
+                    : String(this.label)
+              }
+              placeholder=""
+              readonly={disabled}
+              disabled={disabled}
+              tabindex={-1}
+              autofocus={this.autofocus}
+              onFocus={this.handlePatternInputFocus}
+              onBlur={this.handlePatternInputBlur}
+              onInput={this.handlePatternInputInput as any}
+              onCompositionstart={this.handleCompositionStart}
+              onCompositionend={this.handleCompositionEnd}
+            />
+            {showPlaceholder ? (
+              <div class={`${clsPrefix}-base-selection-placeholder`}>
+                {this.filterablePlaceholder}
+              </div>
+            ) : null}
+            {suffix}
+          </div>
         )
       } else {
         body = (
-          <>
-            <div
-              ref="singleElRef"
-              class={`${clsPrefix}-base-selection-label`}
-              tabindex={this.disabled ? undefined : 0}
-            >
-              {this.label !== undefined ? (
-                <div
-                  class={`${clsPrefix}-base-selection-label__input`}
-                  key="input"
-                >
-                  {this.label}
-                </div>
-              ) : (
-                <div
-                  class={`${clsPrefix}-base-selection-placeholder`}
-                  key="placeholder"
-                >
-                  {this.placeholder}
-                </div>
-              )}
-              {suffix}
-            </div>
-          </>
+          <div
+            ref="singleElRef"
+            class={`${clsPrefix}-base-selection-label`}
+            tabindex={this.disabled ? undefined : 0}
+          >
+            {this.label !== undefined ? (
+              <div
+                class={`${clsPrefix}-base-selection-label__input`}
+                key="input"
+              >
+                {this.label}
+              </div>
+            ) : (
+              <div
+                class={`${clsPrefix}-base-selection-placeholder`}
+                key="placeholder"
+              >
+                {this.placeholder}
+              </div>
+            )}
+            {suffix}
+          </div>
         )
       }
     }
