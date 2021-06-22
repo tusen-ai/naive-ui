@@ -620,13 +620,14 @@ export default defineComponent({
     }
   },
   render () {
+    const { clearable } = this
     const commonInputProps: InputProps = {
       bordered: this.mergedBordered,
       size: this.mergedSize,
       passivelyActivated: true,
       disabled: this.disabled,
       readonly: this.disabled,
-      clearable: this.clearable,
+      clearable,
       onClear: this.handleClear,
       onClick: this.handleTriggerClick,
       onActivate: this.handleInputActivate,
@@ -693,7 +694,7 @@ export default defineComponent({
                               {{ default: () => <ToIcon /> }}
                             </NBaseIcon>
                           ),
-                          clear: () => (
+                          [clearable ? 'clear' : 'suffix']: () => (
                             <NBaseIcon
                               clsPrefix={mergedClsPrefix}
                               class={`${mergedClsPrefix}-date-picker-icon`}
@@ -721,7 +722,7 @@ export default defineComponent({
                         {...commonInputProps}
                       >
                         {{
-                          clear: () => (
+                          [clearable ? 'clear' : 'suffix']: () => (
                             <NBaseIcon
                               clsPrefix={mergedClsPrefix}
                               class={`${mergedClsPrefix}-date-picker-icon`}

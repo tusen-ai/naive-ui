@@ -6,10 +6,8 @@ describe('n-input-number', () => {
   it('should work with import on demand', () => {
     mount(NInputNumber)
   })
-})
 
-describe('n-input-number', () => {
-  it('should work with `show-button` props', async () => {
+  it('should work with `show-button` prop', async () => {
     const wrapper = mount(NInputNumber)
     expect(wrapper.findComponent(NButton).exists()).toBe(true)
 
