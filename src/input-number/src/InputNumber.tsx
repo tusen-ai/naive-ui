@@ -20,7 +20,7 @@ const inputNumberProps = {
     default: null
   },
   value: {
-    type: Number,
+    type: Number as PropType<number | null>,
     default: undefined
   },
   step: {
@@ -51,14 +51,14 @@ const inputNumberProps = {
   },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
+  MaybeArray<(value: number | null) => void>
   >,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<
-    MaybeArray<(value: number) => void> | undefined
+    MaybeArray<(value: number | null) => void> | undefined
     >,
     validator: () => {
       if (__DEV__) {
@@ -124,7 +124,7 @@ export default defineComponent({
       if (parsedNumber !== null) return parsedNumber
       else return null
     })
-    const doUpdateValue = (value: number): void => {
+    const doUpdateValue = (value: number | null): void => {
       const { value: mergedValue } = mergedValueRef
       if (value === mergedValue) return
       const { 'onUpdate:value': onUpdateValue, onChange } = props
@@ -141,21 +141,32 @@ export default defineComponent({
     ): null | number | false => {
       const { value: displayedValue } = displayedValueRef
       const parsedValue = parse(displayedValue)
-      if (parsedValue === null) return null
       if (validator(parsedValue)) {
-        let nextValue = parsedValue + offset
+        let nextValue = parsedValue ? parsedValue + offset : null
         if (validator(nextValue)) {
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
-          if (mergedMax !== null && nextValue > mergedMax) {
+          if (
+            mergedMax !== null &&
+            nextValue !== null &&
+            nextValue > mergedMax
+          ) {
             if (!postUpdateIfValid) return false
             nextValue = mergedMax
           }
-          if (mergedMin !== null && nextValue < mergedMin) {
+          if (
+            mergedMin !== null &&
+            nextValue !== null &&
+            nextValue < mergedMin
+          ) {
             if (!postUpdateIfValid) return false
             nextValue = mergedMin
           }
-          if (props.validator && !props.validator(nextValue)) return false
+          if (
+            props.validator &&
+            nextValue !== null &&
+            !props.validator(nextValue)
+          ) { return false }
           if (postUpdateIfValid) doUpdateValue(nextValue)
           return nextValue
         }

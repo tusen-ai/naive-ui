@@ -6,6 +6,7 @@
 
 ### Fixes
 
+- 修复 `n-input-number` 清空输入框时绑定的值未变为 null
 - `n-select` 在可过滤单选模式下在 iOS Safari 无法输入，关闭 [#230](https://github.com/TuSimple/naive-ui/issues/230)
 
 ## 2.13.0 (2021-06-21)

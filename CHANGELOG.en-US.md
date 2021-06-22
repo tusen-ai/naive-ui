@@ -6,6 +6,7 @@
 
 ### Fixes
 
+- Fix `n-input-number` clear input box but value not null.
 - `n-select` can't input in filterable mode in single mode in iOS Safari, closes [#230](https://github.com/TuSimple/naive-ui/issues/230)
 
 ## 2.13.0 (2021-06-21)
