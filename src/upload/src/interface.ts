@@ -43,6 +43,8 @@ export type DoChange = (
   }
 ) => void
 
+export type OnUpdateFileList = (fileList: FileInfo[]) => void
+
 export interface UploadInjection {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<UploadTheme>>
@@ -55,7 +57,8 @@ export interface UploadInjection {
   onDownloadRef: Ref<OnDownload | undefined>
   XhrMap: Map<string, XMLHttpRequest>
   submit: (fileId?: string) => void
-  doChange: DoChange
+  doChange: DoChange,
+  handleFileListChange: () => void
 }
 
 export const uploadInjectionKey: InjectionKey<UploadInjection> =

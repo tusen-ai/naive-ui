@@ -85,7 +85,9 @@ export default defineComponent({
         XhrMap,
         doChange,
         onRemoveRef: { value: onRemove },
-        mergedFileListRef: { value: mergedFileList }
+        mergedFileListRef: { value: mergedFileList },
+        handleFileListChange
+
       } = NUpload
       void Promise.resolve(
         onRemove
@@ -103,6 +105,7 @@ export default defineComponent({
         doChange(fileAfterChange, undefined, {
           remove: true
         })
+        handleFileListChange()
       })
     }
     function handleDownload (file: FileInfo): void {
