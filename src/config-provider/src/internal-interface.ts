@@ -10,6 +10,7 @@ import type { BreadcrumbTheme } from '../../breadcrumb/styles'
 import type { ButtonTheme } from '../../button/styles'
 import type { CalendarTheme } from '../../calendar/styles'
 import type { CardTheme } from '../../card/styles'
+import type { CarouselTheme } from '../../carousel/styles'
 import type { CascaderTheme } from '../../cascader/styles'
 import type { CheckboxTheme } from '../../checkbox/styles'
 import type { CodeTheme } from '../../code/styles'
@@ -95,6 +96,7 @@ export interface GlobalThemeWithoutCommon {
   Button?: ButtonTheme
   Calendar?: CalendarTheme
   Card?: CardTheme
+  Carousel?: CarouselTheme
   Cascader?: CascaderTheme
   Checkbox?: CheckboxTheme
   Code?: CodeTheme

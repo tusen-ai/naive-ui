@@ -450,6 +450,10 @@ export const enComponentRoutes = [
     path: 'tree-select',
     component: () =>
       import('../../src/tree-select/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'carousel',
+    component: () => import('../../src/carousel/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -785,6 +789,10 @@ export const zhComponentRoutes = [
     path: 'tree-select',
     component: () =>
       import('../../src/tree-select/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'carousel',
+    component: () => import('../../src/carousel/demos/zhCN/index.demo-entry.md')
   }
 ]
 

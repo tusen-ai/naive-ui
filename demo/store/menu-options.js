@@ -187,6 +187,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/card'
         },
         {
+          en: 'Carousel',
+          zh: '轮播图',
+          enSuffix: true,
+          path: '/carousel'
+        },
+        {
           en: 'Collapse',
           zh: '折叠面板',
           enSuffix: true,

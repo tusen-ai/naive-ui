@@ -11,6 +11,7 @@ import { breadcrumbLight } from '../breadcrumb/styles'
 import { buttonLight } from '../button/styles'
 import { calendarLight } from '../calendar/styles'
 import { cardLight } from '../card/styles'
+import { carouselLight } from '../carousel/styles'
 import { cascaderLight } from '../cascader/styles'
 import { checkboxLight } from '../checkbox/styles'
 import { codeLight } from '../code/styles'
@@ -87,6 +88,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Button: buttonLight,
   Calendar: calendarLight,
   Card: cardLight,
+  Carousel: carouselLight,
   Cascader: cascaderLight,
   Checkbox: checkboxLight,
   Code: codeLight,

@@ -9,6 +9,7 @@ import { breadcrumbDark } from '../breadcrumb/styles'
 import { buttonDark } from '../button/styles'
 import { calendarDark } from '../calendar/styles'
 import { cardDark } from '../card/styles'
+import { carouselDark } from '../carousel/styles'
 import { cascaderDark } from '../cascader/styles'
 import { checkboxDark } from '../checkbox/styles'
 import { codeDark } from '../code/styles'
@@ -85,6 +86,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Button: buttonDark,
   Calendar: calendarDark,
   Card: cardDark,
+  Carousel: carouselDark,
   Cascader: cascaderDark,
   Checkbox: checkboxDark,
   Code: codeDark,
