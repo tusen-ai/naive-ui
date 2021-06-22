@@ -1,7 +1,9 @@
-# Basic
+# 自动播放
+
+设定 `autoplay` 然后它就能自己动了。
 
 ```html
-<n-carousel>
+<n-carousel autoplay>
   <img
     class="carousel-img"
     src="https://s.anw.red/fav/1623979004.jpg!/fw/600/quality/77/ignore-error/true"

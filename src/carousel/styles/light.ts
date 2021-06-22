@@ -3,7 +3,11 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { Theme } from '../../_mixins'
 
 export const self = (vars: ThemeCommonVars) => {
-  return {}
+  return {
+    dotSize: '8px',
+    dotColor: 'rgba(255, 255, 255, .3)',
+    dotColorActive: 'rgba(255, 255, 255, 1)'
+  }
 }
 
 export type CarouselThemeVars = ReturnType<typeof self>
