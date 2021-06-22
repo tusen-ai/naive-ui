@@ -40,7 +40,7 @@ const inputNumberProps = {
     type: Boolean,
     default: false
   },
-  validator: Function as PropType<(value: number) => boolean>,
+  validator: Function as PropType<(value: number | null) => boolean>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -162,11 +162,9 @@ export default defineComponent({
             if (!postUpdateIfValid) return false
             nextValue = mergedMin
           }
-          if (
-            props.validator &&
-            nextValue !== null &&
-            !props.validator(nextValue)
-          ) { return false }
+          if (props.validator && !props.validator(nextValue)) {
+            return false
+          }
           if (postUpdateIfValid) doUpdateValue(nextValue)
           return nextValue
         }
