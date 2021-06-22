@@ -31,6 +31,9 @@ npm run lint
 
 # build site (if vercel preview failed, you may need to run `git clean -fdx` before)
 npm run build:site
+
+# git commit template
+npm run cz
 ```
 
 ## About Docs and Changelog Format
@@ -96,6 +99,9 @@ npm run lint
 
 # 构建文档网站（如果 vercel 的预览挂掉了，你可能需要先运行一下 `git clean -fdx`）
 npm run build:site
+
+# git commit 模板
+npm run cz
 ```
 
 ## 关于文档和变更日志的格式

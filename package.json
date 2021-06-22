@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {
+    "cz": "git cz",
     "start": "npm run dev",
     "dev": "npm run clean && npm run gen-version && cross-env NODE_ENV=development vite",
     "build:package": "npm run gen-version && npm run clean && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
@@ -58,6 +59,11 @@
       "eslint --fix"
     ]
   },
+  "config": {
+    "commitizen": {
+      "path": "git-cz"
+    }
+  },
   "devDependencies": {
     "@babel/generator": "^7.12.11",
     "@babel/parser": "^7.12.11",
@@ -65,6 +71,8 @@
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.12.16",
     "@babel/traverse": "^7.12.12",
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@rollup/plugin-babel": "^5.3.0",
     "@types/estree": "^0.0.48",
     "@types/jest": "^26.0.20",
@@ -96,6 +104,7 @@
     "eslint-plugin-vue": "^7.6.0",
     "express": "^4.17.1",
     "fs-extra": "^10.0.0",
+    "git-cz": "^4.7.6",
     "husky": "^6.0.0",
     "inquirer": "^8.1.0",
     "jest": "^27.0.4",
