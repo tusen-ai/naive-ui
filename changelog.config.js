@@ -2,7 +2,7 @@ const { getTypes, getScopes } = require('./build/utils/commit-util')
 
 // https://github.com/streamich/git-cz
 module.exports = {
-  disableEmoji: false,
+  disableEmoji: true,
   list: getTypes(),
   questions: ['type', 'scope', 'subject', 'body', 'breaking', 'issues'],
   scopes: getScopes(),
