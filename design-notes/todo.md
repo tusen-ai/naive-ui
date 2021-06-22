@@ -13,6 +13,10 @@
 
 - (easy) Add `header` slot
 
+## Radio
+
+- (easy) Button custom align & width
+
 ## Select
 
 - (moderate) `render-tag` prop
