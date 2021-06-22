@@ -40,24 +40,31 @@ export default defineComponent({
     let inTransition = false
     // current from 0 to length + 1
     function next (): void {
+      if (lengthRef.value <= 1) return
       if (inTransition) return
       inTransition = true
       // no need for reset since transitionend handler will handle it
       currentRef.value++
     }
     function prev (): void {
+      if (lengthRef.value <= 1) return
       if (inTransition) return
       inTransition = true
       // no need for reset since transitionend handler will handle it
       currentRef.value--
     }
     function setCurrent (value: number): void {
+      if (lengthRef.value <= 1) return
       if (inTransition) return
       inTransition = true
       const { value: current } = currentRef
-      if (current === 1 && value === lengthRef.value) {
+      if (current === 1 && value === lengthRef.value && value - current > 1) {
         currentRef.value--
-      } else if (value === 1 && current === lengthRef.value) {
+      } else if (
+        value === 1 &&
+        current === lengthRef.value &&
+        current - value > 1
+      ) {
         currentRef.value++
       } else {
         currentRef.value = value
@@ -151,8 +158,8 @@ export default defineComponent({
     const children = defaultSlot?.().filter((v) => v) || []
     const { length } = children
     lengthRef.value = length
-    const leftOverflowVNode = cloneVNode(children[length - 1])
-    const rightOverflowVNode = cloneVNode(children[0])
+    const leftOverflowVNode = length ? cloneVNode(children[length - 1]) : null
+    const rightOverflowVNode = length ? cloneVNode(children[0]) : null
     const total = length + 2
     return (
       <div
