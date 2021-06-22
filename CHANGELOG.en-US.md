@@ -16,6 +16,12 @@
 
 - `n-select` can't input in filterable mode in single mode in iOS Safari, closes [#230](https://github.com/TuSimple/naive-ui/issues/230)
 
+## 2.13.1 (2021-06-21)
+
+### Feats
+
+- `n-upload` add `on-update:file-list` prop
+
 ## 2.13.0 (2021-06-21)
 
 ### Feats

@@ -16,6 +16,12 @@
 
 - `n-select` 在可过滤单选模式下在 iOS Safari 无法输入，关闭 [#230](https://github.com/TuSimple/naive-ui/issues/230)
 
+## 2.13.1 (2021-06-21)
+
+### Feats
+
+- `n-upload` 新增 `on-update:file-list` 属性
+
 ## 2.13.0 (2021-06-21)
 
 ### Feats
