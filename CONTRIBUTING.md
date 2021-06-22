@@ -8,7 +8,7 @@
 ```bash
 # open the dev server, please note that hot module reload doesn't work well
 # if you find anything doesn't work, just refresh the page
-# if you can't open the page at first time, try to do some refresh
+# if you aren't able to open the page at the first time, try to refresh a couple of times
 npm run dev
 
 # testing
@@ -29,7 +29,7 @@ npm run lint:type
 # lint code & type
 npm run lint
 
-# build site (if vercel preview failed, you may need to run `git clean -fdx` before)
+# build site (if vercel preview failed, you might need to run `git clean -fdx` first)
 npm run build:site
 ```
 
@@ -54,7 +54,7 @@ Chinese API table:
 | example | `any` | `undefined` | 描述不要加句号 |
 
 English Changelog:
-- Some changes, need period.
+- Some changes, period needed.
 
 Chinese Changelog:
 - 一些变更，不要加句号
@@ -119,7 +119,7 @@ npm run build:site
 | example | `any` | `undefined` | 描述不要加句号 |
 
 English Changelog:
-- Some changes, need period.
+- Some changes, period needed.
 
 Chinese Changelog:
 - 一些变更，不要加句号
