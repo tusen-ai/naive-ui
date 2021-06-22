@@ -33,50 +33,6 @@ export default {
 
 </n-space>
 
-## Use Message Outside Setup
-
-<n-space vertical>
-<n-alert type="warning">
-  You need to mount the return value of <n-text code>useMessage</n-text> to the window in the top-level setup and then call it. Before calling it, you need to make sure that message has been mounted successfully.
-</n-alert>
-
-```html
-<!-- App.vue -->
-<n-message-provider>
-  <content />
-</n-message-provider>
-```
-
-```html
-<!-- content.vue -->
-<template> content </template>
-
-<script>
-  /* content.vue */
-  import { useMessage } from 'naive-ui'
-
-  // content
-  export default {
-    setup() {
-      const message = useMessage()
-      window.$message = message
-    }
-  }
-</script>
-```
-
-```js
-// xxx.js
-export const handler = () => {
-  // You need to ensure that window.$message = message has been executed in setup
-  window.$message.success(
-    'Cause you walked hand in hand With another man in my place'
-  )
-}
-```
-
-</n-space>
-
 ## Demos
 
 ```demo
@@ -138,3 +94,48 @@ multiple-line
 | Name    | Type | Description |
 | ------- | ---- | ----------- |
 | destroy | `()` |             |
+
+## Q & A
+
+### Use Message Outside Setup
+
+<n-space vertical>
+<n-alert type="warning">
+  You need to mount the return value of <n-text code>useMessage</n-text> to the window in the top-level setup and then call it. Before calling it, you need to make sure that message has been mounted successfully.
+</n-alert>
+
+```html
+<!-- App.vue -->
+<n-message-provider>
+  <content />
+</n-message-provider>
+```
+
+```html
+<!-- content.vue -->
+<template> content </template>
+
+<script>
+  import { useMessage } from 'naive-ui'
+
+  // content
+  export default {
+    setup() {
+      const message = useMessage()
+      window.$message = message
+    }
+  }
+</script>
+```
+
+```js
+// xxx.js
+export const handler = () => {
+  // You need to ensure that window.$message = message has been executed in setup
+  window.$message.success(
+    'Cause you walked hand in hand With another man in my place'
+  )
+}
+```
+
+</n-space>
