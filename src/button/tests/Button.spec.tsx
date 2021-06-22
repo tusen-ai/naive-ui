@@ -1,6 +1,8 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NButton, NxButton } from '../index'
+import { NButton, NButtonGroup, NxButton } from '../index'
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { NIcon } from '../../icon'
 
 describe('n-button', () => {
   it('should work with import on demand', () => {
@@ -60,6 +62,13 @@ describe('n-button', () => {
     expect(wrapper.find('button').classes()).toContain('n-button--dashed')
   })
 
+  it('should work with `bordered` prop', async () => {
+    const wrapper = mount(NButton)
+
+    await wrapper.setProps({ bordered: false })
+    expect(wrapper.find('.n-button__border').exists()).toBe(false)
+  })
+
   it('should work with `size` prop', async () => {
     const wrapper = mount(NButton)
 
@@ -112,5 +121,125 @@ describe('n-button', () => {
     )
     expect(wrapper.find('a').attributes('target')).toContain('_blank')
     expect(wrapper.find('.n-button__content').element.textContent).toBe('test')
+  })
+
+  it('should work with `icon` slot', async () => {
+    const wrapper = mount(NButton, {
+      slots: {
+        icon: () =>
+          h(NIcon, null, {
+            default: () => h(CashIcon)
+          }),
+        default: () => 'test'
+      }
+    })
+
+    expect(wrapper.find('span').classes('n-button__icon')).toBe(true)
+    expect(wrapper.find('div').classes('n-icon-slot')).toBe(true)
+    expect(wrapper.find('i').classes('n-icon')).toBe(true)
+    expect(wrapper.find('i').classes('n-icon')).toBe(true)
+    expect(wrapper.find('.n-button__content').element.textContent).toBe('test')
+    expect(wrapper.find('button').element.children[1].textContent).toBe('test')
+
+    await wrapper.setProps({ iconPlacement: 'right' })
+    expect(wrapper.find('button').element.children[0].textContent).toBe('test')
+  })
+
+  it('should work with `shape` ', async () => {
+    const wrapper = mount(NButton, {
+      props: {
+        circle: true
+      },
+      slots: {
+        icon: () =>
+          h(NIcon, null, {
+            default: () => h(CashIcon)
+          })
+      }
+    })
+    const circleReg =
+      /^(?=.*--width: 34px;)(?=.*--padding: initial;)(?=.*--border-radius: 34px;).*$/im
+    expect(wrapper.find('button').attributes('style')).toMatch(circleReg)
+
+    await wrapper.setProps({ circle: false, round: true })
+    const roundReg =
+      /^(?=.*--width: initial;)(?=.*--padding: 0 18px;)(?=.*--border-radius: 34px;).*$/im
+    expect(wrapper.find('button').attributes('style')).toMatch(roundReg)
+
+    await wrapper.setProps({ circle: false, round: false })
+    const defaultReg =
+      /^(?=.*--width: initial;)(?=.*--padding: 0 14px;)(?=.*--border-radius: 3px;).*$/im
+    expect(wrapper.find('button').attributes('style')).toMatch(defaultReg)
+  })
+
+  it('should work with `ghost` prop', () => {
+    const wrapper = mount(NButton, {
+      props: {
+        ghost: true
+      },
+      slots: {
+        default: () => 'test'
+      }
+    })
+
+    expect(wrapper.find('button').classes()).toContain('n-button--ghost')
+  })
+
+  it('should work with `loading` prop', () => {
+    const wrapper = mount(NButton, {
+      props: {
+        loading: true
+      },
+      slots: {
+        default: () => 'test'
+      }
+    })
+
+    expect(wrapper.find('.n-icon-slot').classes()).toContain('n-base-loading')
+    expect(wrapper.find('.n-icon-slot').attributes('aria-label')).toContain(
+      'loading'
+    )
+  })
+
+  it('should work with `color` prop', () => {
+    const wrapper = mount(NButton, {
+      props: {
+        color: '#8a2be2'
+      },
+      slots: {
+        default: () => 'test'
+      }
+    })
+
+    expect(wrapper.find('button').classes()).toContain('n-button--color')
+    const reg =
+      /^(?=.*--color: #8a2be2;)(?=.*--color-disabled: #8a2be2;)(?=.*--ripple-color: #8a2be2;).*$/im
+    expect(wrapper.find('button').attributes('style')).toMatch(reg)
+  })
+
+  it('should work with `button group`', async () => {
+    const wrapper = mount(NButtonGroup, {
+      slots: {
+        default: () => [
+          h(NButton, null, {
+            default: () => 'test1'
+          }),
+          h(NButton, null, {
+            default: () => 'test2'
+          }),
+          h(NButton, null, {
+            default: () => 'test3'
+          })
+        ]
+      }
+    })
+
+    expect(wrapper.find('[role="group"]').classes()).toContain('n-button-group')
+    expect(wrapper.findAll('button').length).toBe(3)
+
+    await wrapper.setProps({ vertical: true })
+    expect(wrapper.find('[role="group"]').classes()).toContain(
+      'n-button-group--vertical'
+    )
   })
 })
