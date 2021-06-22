@@ -15,7 +15,11 @@ export default cB('carousel', `
   `, [
     c('> div', `
       overflow: hidden;
-    `)
+    `, [
+      c('> img', `
+        display: block;
+      `)
+    ])
   ]),
   cE('dots', `
     position: absolute;
@@ -32,8 +36,14 @@ export default cB('carousel', `
     background-color: var(--dot-color);
     border-radius: 50%;
     cursor: pointer;
-    transition: background-color .3s var(--bezier);
+    transition:
+      box-shadow .3s var(--bezier),
+      background-color .3s var(--bezier);
+    outline: none;
   `, [
+    c('&:focus', `
+      background-color: var(--dot-color-active);
+    `),
     cM('active', `
       background-color: var(--dot-color-active);
     `),

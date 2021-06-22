@@ -95,6 +95,13 @@ export default defineComponent({
         inTransition = false
       }
     }
+    function handleKeydown (e: KeyboardEvent, current: number): void {
+      switch (e.code) {
+        case 'Enter':
+        case 'Space':
+          setCurrent(current)
+      }
+    }
     function resetInterval (): void {
       if (timerId !== null) {
         window.clearInterval(timerId)
@@ -133,6 +140,7 @@ export default defineComponent({
       prev,
       next,
       setCurrent,
+      handleKeydown,
       handleTransitionEnd,
       cssVars: computed(() => {
         const {
@@ -175,25 +183,39 @@ export default defineComponent({
             }%, 0, 0)`
           }}
           onTransitionend={this.handleTransitionEnd}
+          role="listbox"
         >
           {[leftOverflowVNode, ...children, rightOverflowVNode].map(
             (vNode, i) => (
-              <div data-index={i} style={{ width: `${100 / total}%` }} key={i}>
+              <div
+                data-index={i}
+                style={{ width: `${100 / total}%` }}
+                key={i}
+                role="option"
+                aria-hidden={i !== current}
+              >
                 {vNode}
               </div>
             )
           )}
         </div>
-        <div class={`${mergedClsPrefix}-carousel__dots`}>
-          {indexMap(length, (i) => (
-            <div
-              onClick={() => this.setCurrent(i + 1)}
-              class={[
-                `${mergedClsPrefix}-carousel__dot`,
-                i + 1 === current && `${mergedClsPrefix}-carousel__dot--active`
-              ]}
-            />
-          ))}
+        <div class={`${mergedClsPrefix}-carousel__dots`} role="tablist">
+          {indexMap(length, (i) => {
+            const selected = i + 1 === current
+            return (
+              <div
+                aria-selected={selected}
+                role="button"
+                tabindex="0"
+                class={[
+                  `${mergedClsPrefix}-carousel__dot`,
+                  selected && `${mergedClsPrefix}-carousel__dot--active`
+                ]}
+                onClick={() => this.setCurrent(i + 1)}
+                onKeydown={(e) => this.handleKeydown(e, i + 1)}
+              />
+            )
+          })}
         </div>
       </div>
     )
