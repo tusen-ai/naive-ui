@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Chore
+
+- `n-avatar` remove `size` prop tiny & huge type.
+
 ## 2.14.0 (2021-06-23)
 
 ### Breaking Changes

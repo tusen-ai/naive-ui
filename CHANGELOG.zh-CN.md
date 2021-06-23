@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Chore
+
+- `n-avatar` 移除了 `size` 参数中 tiny 和 huge 类型
+
 ## 2.14.0 (2021-06-23)
 
 ### Breaking Changes
