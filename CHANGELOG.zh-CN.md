@@ -45,6 +45,8 @@
 
 ## 2.14.0 (2021-06-23)
 
+- `n-select` 新增 `render-tag` 属性
+
 ### Breaking Changes
 
 - `n-element` 移除了 `abstract` 属性

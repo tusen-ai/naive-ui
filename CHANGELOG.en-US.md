@@ -45,6 +45,8 @@
 
 ## 2.14.0 (2021-06-23)
 
+- `n-select` add `render-tag` prop.
+
 ### Breaking Changes
 
 - `n-element` removes `abstract` prop.
