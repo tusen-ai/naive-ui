@@ -2,9 +2,15 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-element` 移除了 `abstract` 属性
+- `n-element` 不再在 default slot 返回主题变量，请使用 `useThemeVars` 代替
+
 ### Feats
 
 - 新增 `n-carousel` 组件
+- 新增 `useThemeVars` 函数提供主题变量
 
 ### Fixes
 

@@ -2,9 +2,15 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-element` removes `abstract` prop.
+- `n-element` doesn't return theme variables in default slot. Please use `useThemeVars` instead.
+
 ### Feats
 
 - Add `n-carousel` component.
+- Add `useThemeVars` composable to provide theme variables.
 
 ### Fixes
 
