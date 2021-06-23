@@ -18,9 +18,7 @@ import style from './styles/index.cssr'
 const avatarProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme>),
   size: {
-    type: [String, Number] as PropType<
-    number | 'tiny' | 'small' | 'medium' | 'large' | 'huge'
-    >,
+    type: [String, Number] as PropType<number | 'small' | 'medium' | 'large'>,
     default: 'medium'
   },
   src: String,
