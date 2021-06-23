@@ -141,24 +141,20 @@ export default defineComponent({
     ): null | number | false => {
       const { value: displayedValue } = displayedValueRef
       const parsedValue = parse(displayedValue)
+      if (parsedValue === null) {
+        if (postUpdateIfValid) doUpdateValue(parsedValue)
+        return null
+      }
       if (validator(parsedValue)) {
-        let nextValue = parsedValue ? parsedValue + offset : null
+        let nextValue = parsedValue + offset
         if (validator(nextValue)) {
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
-          if (
-            mergedMax !== null &&
-            nextValue !== null &&
-            nextValue > mergedMax
-          ) {
+          if (mergedMax !== null && nextValue > mergedMax) {
             if (!postUpdateIfValid) return false
             nextValue = mergedMax
           }
-          if (
-            mergedMin !== null &&
-            nextValue !== null &&
-            nextValue < mergedMin
-          ) {
+          if (mergedMin !== null && nextValue < mergedMin) {
             if (!postUpdateIfValid) return false
             nextValue = mergedMin
           }
