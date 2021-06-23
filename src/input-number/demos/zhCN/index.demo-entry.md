@@ -19,7 +19,7 @@ debug
 ## Props
 
 | 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | bordered | `boolean` | `true` | 是否有边框 |
 | default-value | `number \| null` | `null` | 非受控模式下的默认值 |
 | disabled | `boolean` | `false` | 是否禁用 |
@@ -33,4 +33,4 @@ debug
 | value | `number \| null` | `undefined` | 受控模式下的值 |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | 移除焦点的回调 |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | 获取焦点的回调 |
-| on-update:value | `(value: number | null) => void` | `undefined` | 组件值发生变化的回调 |
+| on-update:value | `(value: number \| null) => void` | `undefined` | 组件值发生变化的回调 |
