@@ -14,7 +14,14 @@
 
 ### Fixes
 
-- `n-select` can't input in filterable mode in single mode in iOS Safari, closes [#230](https://github.com/TuSimple/naive-ui/issues/230)
+- Fix `n-select` can't input in filterable mode in single mode in iOS Safari, closes [#230](https://github.com/TuSimple/naive-ui/issues/230)
+- Fix `n-input-number` lacks `on-update-value` prop.
+- Fix `n-input-number`'s value can't be null.
+- Fix `n-input-number`'s button doesn't work after value is cleared, closes [#251](https://github.com/TuSimple/naive-ui/issues/251).
+
+## Refactors
+
+- `n-input-number` will focus directly, closes [#244](https://github.com/TuSimple/naive-ui/issues/244).
 
 ## 2.13.0 (2021-06-21)
 
