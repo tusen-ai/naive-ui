@@ -43,6 +43,8 @@ export type DoChange = (
   }
 ) => void
 
+export type OnUpdateFileList = (fileList: FileInfo[]) => void
+
 export interface UploadInjection {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<UploadTheme>>

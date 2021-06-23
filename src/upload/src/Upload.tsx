@@ -11,7 +11,7 @@ import {
 import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { ExtractPublicPropTypes, getFirstSlotVNode, warn } from '../../_utils'
+import { ExtractPublicPropTypes, getFirstSlotVNode, warn, MaybeArray, call } from '../../_utils'
 import { NFadeInExpandTransition } from '../../_internal'
 import { uploadLight, UploadTheme } from '../styles'
 import NUploadFile from './UploadFile'
@@ -26,7 +26,8 @@ import {
   OnRemove,
   OnDownload,
   OnChange,
-  uploadInjectionKey
+  uploadInjectionKey,
+  OnUpdateFileList
 } from './interface'
 import { useMergedState } from 'vooks'
 import { uploadDraggerKey } from './UploadDragger'
@@ -209,6 +210,12 @@ const uploadProps = {
     default: true
   },
   fileList: Array as PropType<FileInfo[]>,
+  'onUpdate:fileList': [Function, Array] as PropType<
+  MaybeArray<OnUpdateFileList>
+  >,
+  onUpdateFileList: [Function, Array] as PropType<
+  MaybeArray<OnUpdateFileList>
+  >,
   fileListStyle: [String, Object] as PropType<string | CSSProperties>,
   defaultFileList: {
     type: Array as PropType<FileInfo[]>,
@@ -248,6 +255,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const uncontrolledFileListRef = ref(props.defaultFileList)
+    const controlledFileListRef = toRef(props, 'fileList')
     const inputElRef = ref<HTMLInputElement | null>(null)
     const draggerInsideRef = {
       value: false
@@ -255,7 +263,7 @@ export default defineComponent({
     const dragOverRef = ref(false)
     const XhrMap = new Map<string, XMLHttpRequest>()
     const mergedFileListRef = useMergedState(
-      toRef(props, 'fileList'),
+      controlledFileListRef,
       uncontrolledFileListRef
     )
     function openFileDialog (): void {
@@ -292,6 +300,15 @@ export default defineComponent({
       handleFileAddition(target.files, e)
       // May have bug! set to null?
       target.value = ''
+    }
+    function doUpdateFileList (files: FileInfo[]): void {
+      const {
+        'onUpdate:fileList': _onUpdateFileList,
+        onUpdateFileList,
+      } = props
+      if (_onUpdateFileList) call(_onUpdateFileList, files)
+      if (onUpdateFileList) call(onUpdateFileList, files)
+      uncontrolledFileListRef.value = files
     }
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files) return
@@ -378,7 +395,7 @@ export default defineComponent({
             event
           })
         }
-        uncontrolledFileListRef.value = fileListAfterChange
+        doUpdateFileList(fileListAfterChange)
       } else if (__DEV__) {
         warn('upload', 'File has no corresponding id in current file list.')
       }

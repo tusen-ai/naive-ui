@@ -36,6 +36,7 @@ default-files
 | show-retry-button | `boolean` | `true` | Whether to show retry button (at file error status). |
 | with-credentials | `boolean` | `false` | If cookie attached. |
 | on-change | `(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => void` | `() => {}` | The callback of status change of the component. Any file status change would fire the callback. |
+| on-update:file-list | `(fileList: UploadFile[]) => void` | `undefined` | Callback function triggered on fileList changes. |
 | on-finish | `(options: { file: UploadFile }) => UploadFile \| void` | `({ file }) => file` | The callback of file upload finish. You can modify the UploadFile or retun a new UploadFile. |
 | on-remove | `(options: { file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any` | `() => true` | The callback of file removal. Return false, promise resolve false or promise reject will cancel this removal. |
 
@@ -48,14 +49,6 @@ default-files
 | status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. **Required** in controlled manner. |
 | percentage | `number` | The progress percentage of file upload. It works when file is uploading. Not required in controlled manner. |
 | file | `File` | The File object of the file in brower. Not required in controlled manner. |
-
-## Events
-
-### Upload Events
-
-| Name   | Parameters                                        | Description |
-| ------ | ------------------------------------------------- | ----------- |
-| change | `(file: UploadFile, fileList: Array<UploadFile>)` |             |
 
 ## Methods
 
