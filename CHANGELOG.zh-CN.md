@@ -4,6 +4,8 @@
 
 ### Feats
 
+- 新增 `n-carousel` 组件
+
 ### Fixes
 
 - `n-select` 在可过滤单选模式下在 iOS Safari 无法输入，关闭 [#230](https://github.com/TuSimple/naive-ui/issues/230)

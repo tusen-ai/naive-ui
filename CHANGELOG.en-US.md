@@ -4,6 +4,8 @@
 
 ### Feats
 
+- Add `n-carousel` component.
+
 ### Fixes
 
 - `n-select` can't input in filterable mode in single mode in iOS Safari, closes [#230](https://github.com/TuSimple/naive-ui/issues/230)
