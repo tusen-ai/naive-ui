@@ -19,6 +19,7 @@
 - Fix `n-input-number` lacks `on-update-value` prop.
 - Fix `n-input-number`'s value can't be null.
 - Fix `n-input-number`'s button doesn't work after value is cleared, closes [#251](https://github.com/TuSimple/naive-ui/issues/251).
+- Fix `n-data-table` expand trigger's cursor is not pointer, closes [#261](https://github.com/TuSimple/naive-ui/issues/261).
 
 ## Refactors
 
