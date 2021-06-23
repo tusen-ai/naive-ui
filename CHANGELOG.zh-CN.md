@@ -14,7 +14,14 @@
 
 ### Fixes
 
-- `n-select` 在可过滤单选模式下在 iOS Safari 无法输入，关闭 [#230](https://github.com/TuSimple/naive-ui/issues/230)
+- 修复 `n-select` 在可过滤单选模式下在 iOS Safari 无法输入，关闭 [#230](https://github.com/TuSimple/naive-ui/issues/230)
+- 修复 `n-input-number` 缺少 `on-update-value` 属性
+- 修复 `n-input-number` 值无法为 `null`
+- 修复 `n-input-number` 的按钮在值清空后无法使用，关闭 [#251](https://github.com/TuSimple/naive-ui/issues/251)
+
+## Refactors
+
+- `n-input-number` 会直接聚焦，关闭 [#244](https://github.com/TuSimple/naive-ui/issues/244)
 
 ## 2.13.0 (2021-06-21)
 
