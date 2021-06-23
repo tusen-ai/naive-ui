@@ -11,8 +11,7 @@ const elementProps = {
   tag: {
     type: String,
     default: 'div'
-  },
-  abstract: Boolean
+  }
 } as const
 
 export type ElementProps = ExtractPublicPropTypes<typeof elementProps>
@@ -33,7 +32,6 @@ export default defineComponent({
     )
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      mergedTheme: themeRef,
       cssVars: computed(() => {
         const { common } = themeRef.value
         return (
@@ -46,16 +44,7 @@ export default defineComponent({
     }
   },
   render () {
-    const {
-      $slots,
-      abstract,
-      mergedTheme: { common }
-    } = this
-    if (abstract) {
-      return $slots.default?.({
-        themeVars: common
-      })
-    }
+    const { $slots } = this
     const { tag, mergedClsPrefix, cssVars } = this
     return h(
       tag,
@@ -63,9 +52,7 @@ export default defineComponent({
         class: `${mergedClsPrefix}-element`,
         style: cssVars
       },
-      ($slots.default?.({
-        themeVars: common
-      }) || null) as any
+      $slots.default?.()
     )
   }
 })

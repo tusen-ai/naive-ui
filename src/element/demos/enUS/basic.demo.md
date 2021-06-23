@@ -1,6 +1,6 @@
 # Basic
 
-It is very useful to create themed component.
+You can use CSS variables from it. If you need to use those variables in JS, please see [useThemeVars](../docs/theme#use-theme-vars).
 
 ```html
 <n-space vertical>
