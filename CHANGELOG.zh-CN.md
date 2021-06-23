@@ -2,6 +2,7 @@
 
 ## Pending
 
+- `n-select` 新增 `render-tag` 属性
 ### Feats
 
 - `n-menu` 新增 `dropdown-placement` 属性
@@ -44,8 +45,6 @@
 - 修复 `n-dropdown` 不能在选项中渲染 `n-popover`
 
 ## 2.14.0 (2021-06-23)
-
-- `n-select` 新增 `render-tag` 属性
 
 ### Breaking Changes
 

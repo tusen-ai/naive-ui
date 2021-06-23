@@ -2,6 +2,7 @@
 
 ## Pending
 
+- `n-select` add `render-tag` prop.
 ### Feats
 
 - `n-menu` add `dropdown-placement` prop.
@@ -44,8 +45,6 @@
 - Fix `n-dropdown` can't render `n-popover` in option.
 
 ## 2.14.0 (2021-06-23)
-
-- `n-select` add `render-tag` prop.
 
 ### Breaking Changes
 
