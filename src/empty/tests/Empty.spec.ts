@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { nextTick } from '@vue/runtime-core'
 import { NEmpty } from '../index'
-import iconSize from '../styles/_common'
+import commonThemeVars from '../styles/_common'
 
 const descriptionSelector = '.n-empty__description'
 
@@ -50,14 +50,14 @@ describe('n-empty', () => {
   it('should resize', async () => {
     const wrapper = mount(NEmpty)
     expect(wrapper.attributes('style')).toContain(
-      '--icon-size: ' + iconSize.iconSizeMedium
+      '--icon-size: ' + commonThemeVars.iconSizeMedium
     )
     await wrapper.setProps({
       size: 'small'
     })
     await nextTick()
     expect(wrapper.attributes('style')).toContain(
-      '--icon-size: ' + iconSize.iconSizeSmall
+      '--icon-size: ' + commonThemeVars.iconSizeSmall
     )
     expect(wrapper.html()).toMatchSnapshot()
   })
