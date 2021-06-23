@@ -17,7 +17,11 @@ export default defineComponent({
   },
   render () {
     return (
-      <NBaseIcon clsPrefix={this.clsPrefix} onClick={this.onClick}>
+      <NBaseIcon
+        class={`${this.clsPrefix}-data-table-expand-trigger`}
+        clsPrefix={this.clsPrefix}
+        onClick={this.onClick}
+      >
         {{
           default: () => {
             return (
