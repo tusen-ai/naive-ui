@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils'
 import { NSelect, SelectProps } from '../index'
 import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
 import { SelectOption, SelectGroupOption } from '../'
+import { NTag } from '../../tag'
 
 describe('n-select', () => {
   it('should work with import on demand', () => {
@@ -172,5 +173,40 @@ describe('n-select', () => {
       expect(menuWrapper.find('.cool3').exists()).toEqual(true)
       wrapper.unmount()
     })
+  })
+
+  it('should work with `render tag` prop', async () => {
+    const options = [
+      {
+        label: 'test',
+        value: 'test',
+        type: 'success'
+      }
+    ]
+
+    const wrapper = mount(NSelect, {
+      props: {
+        defaultValue: ['test'],
+        options: options,
+        multiple: true,
+        renderTag: ({ option, onClose }: any) => {
+          return h(
+            NTag,
+            {
+              type: option.type,
+              closable: true,
+              onClose: onClose
+            },
+            { default: () => option.label }
+          )
+        }
+      }
+    })
+
+    expect(wrapper.find('.n-base-selection-tag-wrapper').exists()).toBe(true)
+    expect(wrapper.find('.n-tag').exists()).toBe(true)
+    expect(wrapper.find('.n-tag').attributes('style')).toContain(
+      '--color: rgba(24, 160, 88, 0.1);'
+    )
   })
 })
