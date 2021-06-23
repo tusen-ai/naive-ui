@@ -6,7 +6,6 @@ Element has many theme variables provided by Naive UI.
 
 ```demo
 basic
-color
 ```
 
 ## Props
