@@ -11,6 +11,7 @@
 
 - 新增 `n-carousel` 组件
 - 新增 `useThemeVars` 函数提供主题变量
+- `n-date-picker` 新增 `update-value-on-close` 属性
 
 ### Fixes
 

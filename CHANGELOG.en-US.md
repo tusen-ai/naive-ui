@@ -11,6 +11,7 @@
 
 - Add `n-carousel` component.
 - Add `useThemeVars` composable to provide theme variables.
+- `n-date-picker` add `update-value-on-close` prop.
 
 ### Fixes
 

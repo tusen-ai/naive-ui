@@ -17,6 +17,7 @@ events
 format
 ranges
 footerslot
+update-on-close
 ```
 
 ## Props
@@ -53,6 +54,7 @@ footerslot
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
 | placeholder | `string` | `'Select Date and Time'` | Prompt information. |
+| update-value-on-close | `boolean` | `false` | Whether to update value on close. |
 | on-update:value | `(value: number \| null) => void` | `undefined` | Callback when date is selected. |
 
 ### DateRange Type Props
@@ -67,6 +69,7 @@ footerslot
 | ranges | `Record<string, [number, number]>` | `undefined` | Customize ranges. |
 | separator | `string` | `'to'` | The separator between the start input and the end input. |
 | start-placeholder | `string` | `'Start Date'` | The prompt information of the start input. |
+| update-value-on-close | `boolean` | `false` | Whether to update value on close.  |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` | Callback when range is changed. |
 
 ### DateTimeRange Type Props
@@ -81,6 +84,7 @@ footerslot
 | ranges | `Record<string, [number, number]>` | `undefined` | Customize ranges. |
 | separator | `string` | `'to'` | The separator between the start input and the end input. |
 | start-placeholder | `string` | `'Start Date and Time'` | The prompt information of the start input. |
+| update-value-on-close | `boolean` | `false` | Whether to update value on close. |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` | Callback when value is changed. |
 
 ## Slots
