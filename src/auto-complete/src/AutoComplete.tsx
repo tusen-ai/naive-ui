@@ -58,6 +58,7 @@ const autoCompleteProps = {
     type: String as PropType<string | null>,
     default: null
   },
+  loading: Boolean,
   disabled: Boolean,
   placeholder: String,
   value: String,
@@ -350,6 +351,7 @@ export default defineComponent({
                                   multiple={false}
                                   size="medium"
                                   onMenuToggleOption={this.handleToggleOption}
+                                  loading={this.loading}
                                 />,
                                 [[clickoutside, this.handleClickOutsideMenu]]
                             )
