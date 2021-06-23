@@ -94,3 +94,47 @@ multiple-line
 | 名称    | 类型 | 说明 |
 | ------- | ---- | ---- |
 | destroy | `()` |      |
+
+## Q & A
+
+### 在 setup 外使用
+
+<n-space vertical>
+<n-alert type="warning">
+  如果你想在 setup 外使用信息，你需要在顶层 setup 中把 <n-text code>useMessage</n-text> 返回的 message 值挂载到 window 下然后再调用，调用前需要确保 message 已经挂载成功。
+</n-alert>
+
+```html
+<!-- App.vue -->
+<n-message-provider>
+  <content />
+</n-message-provider>
+```
+
+```html
+<!-- content.vue -->
+<template>...</template>
+
+<script>
+  import { useMessage } from 'naive-ui'
+
+  // content
+  export default {
+    setup() {
+      window.$message = useMessage()
+    }
+  }
+</script>
+```
+
+```js
+// xxx.js
+export const handler = () => {
+  // 需要确保已经在 setup 中执行了 window.$message = message
+  window.$message.success(
+    'Cause you walked hand in hand With another man in my place'
+  )
+}
+```
+
+</n-space>

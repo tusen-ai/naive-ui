@@ -5,9 +5,10 @@
 ```html
 <n-upload
   action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-  :file-list="fileList"
+  v-model:file-list="fileList"
   @change="handleUploadChange"
   @remove="handleRemove"
+  @update:file-list="handleFileListChange"
 >
   <n-button>上传文件</n-button>
 </n-upload>
@@ -65,6 +66,9 @@ export default defineComponent({
             }, 4000)
           })
         }
+      },
+      handleFileListChange (value) {
+        message.info("是的，file-list 的值变了")
       }
     }
   }

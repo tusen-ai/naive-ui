@@ -68,6 +68,10 @@ const datePickerProps = {
     type: Boolean,
     default: false
   },
+  updateValueOnClose: {
+    type: Boolean,
+    default: false
+  },
   defaultValue: {
     type: [Number, Array] as PropType<Value | null>,
     default: null
@@ -292,9 +296,10 @@ export default defineComponent({
         })
       }
     }
-    function handlePanelClose (): void {
+    function handlePanelClose (disableUpdateOnClose: boolean): void {
       closeCalendar({
-        returnFocus: true
+        returnFocus: true,
+        disableUpdateOnClose
       })
     }
     // --- Panel update value
@@ -426,9 +431,22 @@ export default defineComponent({
       if (props.disabled || mergedShowRef.value) return
       doUpdateShow(true)
     }
-    function closeCalendar ({ returnFocus }: { returnFocus: boolean }): void {
+    function closeCalendar ({
+      returnFocus,
+      disableUpdateOnClose
+    }: {
+      returnFocus: boolean
+      disableUpdateOnClose?: boolean
+    }): void {
       if (mergedShowRef.value) {
         doUpdateShow(false)
+        if (
+          props.type !== 'date' &&
+          props.updateValueOnClose &&
+          !disableUpdateOnClose
+        ) {
+          handlePanelConfirm()
+        }
         if (returnFocus) {
           inputInstRef.value?.focus()
         }
