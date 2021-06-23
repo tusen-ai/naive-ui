@@ -14,6 +14,7 @@ describe('n-popover', () => {
     mount(NPopover, {
       slots: {
         trigger: () => 'star kirby',
+        header: () => 'I am title',
         default: () => <div>star kirby</div>
       }
     })

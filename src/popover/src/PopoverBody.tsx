@@ -118,6 +118,9 @@ export default defineComponent({
           padding,
           fontSize,
           textColor,
+          titleTextColor,
+          border,
+          titleFontWeight,
           color,
           boxShadow,
           borderRadius,
@@ -132,8 +135,11 @@ export default defineComponent({
         '--bezier-ease-in': cubicBezierEaseIn,
         '--bezier-ease-out': cubicBezierEaseOut,
         '--font-size': fontSize,
+        '--title-font-weight': titleFontWeight,
         '--text-color': textColor,
         '--color': color,
+        '--border': border,
+        '--title-text-color': titleTextColor,
         '--border-radius': borderRadius,
         '--arrow-height': arrowHeight,
         '--arrow-offset': arrowOffset,
@@ -228,7 +234,22 @@ export default defineComponent({
             attrs
           ),
           [
-            renderSlot(slots, 'default'),
+            slots.header ? (
+              <div class={`${mergedClsPrefix}-popover__title`}>
+                {renderSlot(slots, 'header')}
+              </div>
+            ) : null,
+            slots.header ? (
+              <div class={`${mergedClsPrefix}-popover__divider`}></div>
+            ) : null,
+            slots.header ? (
+              <div class={`${mergedClsPrefix}-popover__content`}>
+                {renderSlot(slots, 'default')}
+              </div>
+            ) : (
+              renderSlot(slots, 'default')
+            ),
+
             props.showArrow ? (
               <div
                 class={`${mergedClsPrefix}-popover-arrow-wrapper`}
