@@ -1,11 +1,7 @@
 // string => string (expected, not implemented)
 // string => number (legacy)
 export function parse (value: string): number | null {
-  if (
-    value === undefined ||
-    value === null ||
-    (typeof value === 'string' && value.trim() === '')
-  ) {
+  if (value === undefined || value === null) {
     return null
   }
   return Number(value)

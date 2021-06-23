@@ -15,6 +15,7 @@
 ### Fixes
 
 - `n-select` 在可过滤单选模式下在 iOS Safari 无法输入，关闭 [#230](https://github.com/TuSimple/naive-ui/issues/230)
+- 修复 `n-input-number` 至少删除一次输入框内容，则 input-number 不会随 +/- 按钮更改，关闭 [#251](https://github.com/TuSimple/naive-ui/issues/251)
 
 ## 2.13.0 (2021-06-21)
 
