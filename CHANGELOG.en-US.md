@@ -2,11 +2,72 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-element` removes `abstract` prop.
+- `n-element` doesn't return theme variables in default slot. Please use `useThemeVars` instead.
+
 ### Feats
 
+- Add `n-carousel` component.
+- Add `useThemeVars` composable to provide theme variables.
 - `n-date-picker` add `update-value-on-close` prop.
 
-## 2.12.0 (2020-06-16)
+### Fixes
+
+- Fix `n-select` can't input in filterable mode in single mode in iOS Safari, closes [#230](https://github.com/TuSimple/naive-ui/issues/230)
+- Fix `n-input-number` lacks `on-update-value` prop.
+- Fix `n-input-number`'s value can't be null.
+- Fix `n-input-number`'s button doesn't work after value is cleared, closes [#251](https://github.com/TuSimple/naive-ui/issues/251).
+
+## Refactors
+
+- `n-input-number` will focus directly, closes [#244](https://github.com/TuSimple/naive-ui/issues/244).
+
+## 2.13.0 (2021-06-21)
+
+### Feats
+
+- `n-dropdown` add `on-clickoutside` prop, closes [#123](https://github.com/TuSimple/naive-ui/issues/123).
+- `n-menu` add `render-label` prop, closes [#84](https://github.com/TuSimple/naive-ui/issues/84)
+- `n-tree` supports keyboard operations.
+- Add `n-tree-select` component.
+
+### Fixes
+
+- Fix `n-tree` drag over leaf node causes error, closes [#200](https://github.com/TuSimple/naive-ui/issues/200).
+- Fix `n-tree` misses `on-update-expanded-keys`, `on-update-selected-keys`, `on-update-checked-keys` prop.
+- Fix `n-tree`'s `selected-keys` prop influences original array.
+- Fix `n-select`'s input has useless empty row in multiple filterable mode.
+- Fix `n-button`'s loading icon doesn't show on iOS Safari, closes [#219](https://github.com/TuSimple/naive-ui/issues/219).
+- Fix `n-date-picker` doesn't show icon when clearable.
+- Fix `n-time-picker` icon mis-aligned when clearable, closes [#222](https://github.com/TuSimple/naive-ui/issues/222).
+
+## 2.12.2 (2021-06-19)
+
+### Fixes
+
+- Fix `n-form-item` always show require mark.
+
+## 2.12.1 (2021-06-19)
+
+### Feats
+
+- `n-form`, `n-form-item` enhance `show-require-mark` prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-dropdown` support class attr, closes [#180](https://github.com/TuSimple/naive-ui/issues/180).
+- `n-input` add `show-password-toggle` prop.
+- `n-popselect` support class attr.
+- `n-select` add `render-label` prop.
+- `n-popselect` add `render-label` prop.
+
+### Fixes
+
+- Fix `n-input` baseline shifts when mix Chinese and English characters in input, closes [#174](https://github.com/TuSimple/naive-ui/issues/174).
+- Fix `n-icon` use setup script, `$parent` is an empty object by default, and access `$parent.$options` will be `undefined`.
+- Fix `n-notification` position not correct.
+- Fix `n-message` content & option type not correct.
+
+## 2.12.0 (2021-06-16)
 
 ### Breaking Changes
 
@@ -22,7 +83,7 @@
 - Fix `n-cascader` text blur in win10 Chrome.
 - Fix `n-tree` click on indent won't trigger select in block line mode.
 
-## 2.11.12 (2020-06-16)
+## 2.11.12 (2021-06-16)
 
 ### Feats
 

@@ -7,12 +7,12 @@ export {
   getVNodeChildren,
   keysOf,
   render,
-  render as Render,
-  getFirstSlotVNode
+  getFirstSlotVNode,
+  createDataKey
 } from './vue'
 export type { MaybeArray } from './vue'
 export { warn, warnOnce, throwError, smallerSize, largerSize } from './naive'
-export type { ExtractPublicPropTypes } from './naive'
+export type { ExtractPublicPropTypes, ExtractInternalPropTypes } from './naive'
 export { formatLength } from './css'
 export { createKey } from './cssr'
 export * from './composable'

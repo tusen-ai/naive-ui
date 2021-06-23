@@ -1,44 +1,42 @@
 # 自定义选项渲染
 
-经过了很久的思考，我决定放弃支持 slot API。当然，还是提供自定义渲染选项的方式。(例子中是渲染函数，但是你可以直接使用 `option` 的 `style` 或 `class` 选项)
+经过了很久的思考，我决定放弃支持 slot API。当然，还是提供自定义渲染选项的方式。(例子中使用了 `render-label` 属性，但是你可以直接使用 `option` 的 `style` 或 `class` 选项)
 
 ```html
-<n-select v-model:value="value" :options="options" />
+<n-select :options="options" :render-label="renderLabel" />
 ```
 
 ```js
-import { h } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NIcon } from 'naive-ui'
 import { MdMusicalNote as MusicIcon } from '@vicons/ionicons4'
 
-function render (option, selected) {
-  return [
-    h(
-      NIcon,
-      {
-        style: {
-          verticalAlign: 'middle',
-          marginRight: '4px'
-        }
-      },
-      {
-        default: () => h(MusicIcon)
-      }
-    ),
-    option.label
-  ]
-}
-
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      value: null,
+      renderLabel: (option) => {
+        if (option.type === 'group') return option.label + '(Cool!)'
+        return [
+          h(
+            NIcon,
+            {
+              style: {
+                verticalAlign: 'middle',
+                marginRight: '4px'
+              }
+            },
+            {
+              default: () => h(MusicIcon)
+            }
+          ),
+          option.label
+        ]
+      },
       options: [
         {
           type: 'group',
           label: 'Rubber Soul',
           key: 'Rubber Soul Album',
-          render: (data) => [data.label, '(Cool!)'],
           children: [
             {
               label:
@@ -96,16 +94,12 @@ export default {
               label: 'Wait',
               value: 'song12'
             }
-          ].map((v) => ({
-            ...v,
-            render
-          }))
+          ]
         },
         {
           type: 'group',
           label: 'Let It Be',
           key: 'Let It Be Album',
-          render: (data) => [data.label, '(Cool!)'],
           children: [
             {
               label: 'Two Of Us',
@@ -155,13 +149,10 @@ export default {
               label: 'Get Back',
               value: 'Get Back'
             }
-          ].map((v) => ({
-            ...v,
-            render
-          }))
+          ]
         }
       ]
     }
   }
-}
+})
 ```

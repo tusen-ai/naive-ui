@@ -4,20 +4,20 @@ Fill content in prefix or suffix of the input.
 
 ```html
 <n-space vertical>
-  <n-input placeholder="Search">
+  <n-input placeholder="Flash">
     <template #prefix>
       <n-icon>
-        <search-outline />
+        <flash-icon />
       </n-icon>
     </template>
   </n-input>
   <n-input round placeholder="1,400,000">
-    <template #suffix> $ </template>
+    <template #suffix>$</template>
   </n-input>
-  <n-input round placeholder="Search">
+  <n-input round placeholder="Flash">
     <template #suffix>
       <n-icon>
-        <search-outline />
+        <flash-icon />
       </n-icon>
     </template>
   </n-input>
@@ -25,11 +25,11 @@ Fill content in prefix or suffix of the input.
 ```
 
 ```js
-import { SearchOutline } from '@vicons/ionicons5'
+import { FlashOutline as FlashIcon } from '@vicons/ionicons5'
 
 export default {
   components: {
-    SearchOutline
+    FlashIcon
   }
 }
 ```

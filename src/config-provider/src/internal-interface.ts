@@ -10,6 +10,7 @@ import type { BreadcrumbTheme } from '../../breadcrumb/styles'
 import type { ButtonTheme } from '../../button/styles'
 import type { CalendarTheme } from '../../calendar/styles'
 import type { CardTheme } from '../../card/styles'
+import type { CarouselTheme } from '../../carousel/styles'
 import type { CascaderTheme } from '../../cascader/styles'
 import type { CheckboxTheme } from '../../checkbox/styles'
 import type { CodeTheme } from '../../code/styles'
@@ -68,8 +69,9 @@ import type { TimePickerTheme } from '../../time-picker/styles'
 import type { TimelineTheme } from '../../timeline/styles'
 import type { TooltipTheme } from '../../tooltip/styles'
 import type { TransferTheme } from '../../transfer/styles'
-import type { TypographyTheme } from '../../typography/styles'
 import type { TreeTheme } from '../../tree/styles'
+import type { TreeSelectTheme } from '../../tree-select/styles'
+import type { TypographyTheme } from '../../typography/styles'
 import type { UploadTheme } from '../../upload/styles'
 import type { InternalSelectMenuTheme } from '../../_internal/select-menu/styles'
 import type { InternalSelectionTheme } from '../../_internal/selection/styles'
@@ -94,6 +96,7 @@ export interface GlobalThemeWithoutCommon {
   Button?: ButtonTheme
   Calendar?: CalendarTheme
   Card?: CardTheme
+  Carousel?: CarouselTheme
   Cascader?: CascaderTheme
   Checkbox?: CheckboxTheme
   Code?: CodeTheme
@@ -152,8 +155,9 @@ export interface GlobalThemeWithoutCommon {
   Timeline?: TimelineTheme
   Tooltip?: TooltipTheme
   Transfer?: TransferTheme
-  Typography?: TypographyTheme
   Tree?: TreeTheme
+  TreeSelect?: TreeSelectTheme
+  Typography?: TypographyTheme
   Upload?: UploadTheme
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme

@@ -451,18 +451,21 @@ export default defineComponent({
     }
   },
   render () {
-    const { draggerInsideRef, mergedClsPrefix } = this
-    const firstChild = getFirstSlotVNode(this.$slots, 'default')
-    // @ts-expect-error
-    if (firstChild?.type?.[uploadDraggerKey]) {
-      draggerInsideRef.value = true
+    const { draggerInsideRef, mergedClsPrefix, $slots } = this
+    if ($slots.default) {
+      const firstChild = getFirstSlotVNode($slots, 'default')
+      // @ts-expect-error
+      if (firstChild?.type?.[uploadDraggerKey]) {
+        draggerInsideRef.value = true
+      }
     }
     return (
       <div
         class={[
           `${mergedClsPrefix}-upload`,
           {
-            [`${mergedClsPrefix}-upload--dragger-inside`]: draggerInsideRef.value,
+            [`${mergedClsPrefix}-upload--dragger-inside`]:
+              draggerInsideRef.value,
             [`${mergedClsPrefix}-upload--drag-over`]: this.dragOver,
             [`${mergedClsPrefix}-upload--disabled`]: this.disabled
           }

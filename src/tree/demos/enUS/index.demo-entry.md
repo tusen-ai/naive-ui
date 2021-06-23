@@ -17,7 +17,9 @@ async
 disabled
 ```
 
-## Props
+## API
+
+### Tree Props
 
 | Name | Type | default | Description |
 | --- | --- | --- | --- |
@@ -28,7 +30,7 @@ disabled
 | cascade | `boolean` | `false` | Whether to cascade checkboxes. |
 | checkable | `boolean` | `false` |  |
 | checked-keys | `Array<string \| number>` | `undefined` | If set, checked status will work in controlled manner. |
-| data | `Array<TreeNode>` | `[]` | The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner. |
+| data | `Array<TreeOption>` | `[]` | The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner. |
 | default-checked-keys | `Array<string \| number>` | `[]` |  |
 | default-expand-all | `boolean` | `false` |  |
 | default-expanded-keys | `Array<string \| number>` | `[]` |  |
@@ -36,32 +38,30 @@ disabled
 | draggable | `boolean` | `false` |  |
 | expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter. |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |
-| filter | `(node: TreeNode) => boolean` | A simple string based filter |  |
+| filter | `(node: TreeOption) => boolean` | A simple string based filter |  |
 | multiple | `boolean` | `false` |  |
-| on-load | `(node: TreeNode) => Promise<void>` | `undefined` |  |
+| on-load | `(node: TreeOption) => Promise<void>` | `undefined` |  |
 | pattern | `string` | `''` |  |
 | remote | `boolean` | `false` | Whether to load nodes async. It should work with `on-load` |
 | selectable | `boolean` | `true` |  |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scroll. You need to set proper style height of the tree in advance. |
-| on-dragend | `(data: { node: TreeNode, event: DragEvent }) => void` | `undefined` |  |
-| on-dragenter | `(data: { node: TreeNode, event: DragEvent }) => void` | `undefined` |  |
-| on-dragleave | `(data: { node: TreeNode, event: DragEvent }) => void` | `undefined` |  |
-| on-dragstart | `(data: { node: TreeNode, event: DragEvent }) => void` | `undefined` |  |
-| on-drop | `(data: { node: TreeNode, dragNode: TreeNode, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` |  |
+| on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` |  |
+| on-dragenter | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` |  |
+| on-dragleave | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` |  |
+| on-dragstart | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` |  |
+| on-drop | `(data: { node: TreeOption, dragNode: TreeOption, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` |  |
 | on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 | on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 | on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
 
-## API
-
-### TreeNode Properties
+### TreeOption Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
 | key | `string \| number` | Key of the node, should be unique. |
 | label | `string` | Label of the node. |
 | checkboxDisabled? | `boolean` | Whether the checkbox is disabled. |
-| children? | `TreeNode[]` | Child nodes of the node. |
+| children? | `TreeOption[]` | Child nodes of the node. |
 | disabled? | `boolean` | Whether the node is disabled. |
 | isLeaf? | `boolean` | Whether the node is leaf. Required in remote mode. |

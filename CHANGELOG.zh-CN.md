@@ -2,15 +2,76 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-element` 移除了 `abstract` 属性
+- `n-element` 不再在 default slot 返回主题变量，请使用 `useThemeVars` 代替
+
 ### Feats
 
+- 新增 `n-carousel` 组件
+- 新增 `useThemeVars` 函数提供主题变量
 - `n-date-picker` 新增 `update-value-on-close` 属性
 
-## 2.12.0 (2020-06-16)
+### Fixes
+
+- 修复 `n-select` 在可过滤单选模式下在 iOS Safari 无法输入，关闭 [#230](https://github.com/TuSimple/naive-ui/issues/230)
+- 修复 `n-input-number` 缺少 `on-update-value` 属性
+- 修复 `n-input-number` 值无法为 `null`
+- 修复 `n-input-number` 的按钮在值清空后无法使用，关闭 [#251](https://github.com/TuSimple/naive-ui/issues/251)
+
+## Refactors
+
+- `n-input-number` 会直接聚焦，关闭 [#244](https://github.com/TuSimple/naive-ui/issues/244)
+
+## 2.13.0 (2021-06-21)
+
+### Feats
+
+- `n-dropdown` 新增 `on-clickoutside` 属性，关闭 [#123](https://github.com/TuSimple/naive-ui/issues/123)
+- `n-menu` 新增 `render-label` 属性，关闭 [#84](https://github.com/TuSimple/naive-ui/issues/84)
+- `n-tree` 支持键盘操作
+- 新增 `n-tree-select` 组件
+
+### Fixes
+
+- 修复 `n-tree` 缺少 `on-update-expanded-keys`、`on-update-selected-keys`、`on-update-checked-keys` 属性
+- 修复 `n-tree` 拖拽悬浮叶节点报错，关闭 [#200](https://github.com/TuSimple/naive-ui/issues/200)
+- 修复 `n-tree` 对 `selected-keys` 属性影响原数组
+- 修复 `n-select` 在 multiple filterable 模式下输入框有无用的空行
+- 修复 `n-button` 的 loading 图标在 iOS Safari 上不显示，关闭 [#219](https://github.com/TuSimple/naive-ui/issues/219)
+- 修复 `n-date-picker` 非 clearable 不显示图标
+- 修复 `n-time-picker` clearable 状态下图标位置不正确，关闭 [#222](https://github.com/TuSimple/naive-ui/issues/222)
+
+## 2.12.2 (2021-06-19)
+
+### Fixes
+
+- 修复 `n-form-item` 始终展示必需的星号
+
+## 2.12.1 (2021-06-19)
+
+### Feats
+
+- `n-form`, `n-form-item` 增强 `show-require-mark` 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-dropdown` 支持 class 属性，关闭 [#180](https://github.com/TuSimple/naive-ui/issues/180)
+- `n-input` 新增 `show-password-toggle` 属性
+- `n-popselect` 支持 class 属性
+- `n-select` 新增 `render-label` 属性
+- `n-popselect` 新增 `render-label` 属性
+
+### Fixes
+
+- 修复 `n-input` 中英文字符切换输入时抖动的问题，关闭[#174](https://github.com/TuSimple/naive-ui/issues/174)
+- 修复 `n-icon` 在使用 setup script 时，`$parent` 默认是一个空对象，访问 `$parent.$options` 会是 `undefined`
+- 修复 `n-notification` 位置不正确
+- 修复 `n-message` 的 content & option 类型不正确
+
+## 2.12.0 (2021-06-16)
 
 ### Breaking Changes
 
-- 移除了 `n-a` 的 `to` 属性。现在如果你需要把 `n-a` 用作 router-link，你可以参考文档网站。
+- 移除了 `n-a` 的 `to` 属性。现在如果你需要把 `n-a` 用作 router-link，你可以参考文档网站
 
 ### Feats
 
@@ -22,7 +83,7 @@
 - 修复 `n-cascader` 在 win10 Chrome 环境下文字模糊的问题
 - 修复 `n-tree` 在 block line 模式下点击缩进空白无法触发选择
 
-## 2.11.12 (2020-06-16)
+## 2.11.12 (2021-06-16)
 
 ### Feats
 

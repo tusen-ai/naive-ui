@@ -61,8 +61,9 @@ export { timePickerDark } from './time-picker/styles'
 export { timelineDark } from './timeline/styles'
 export { tooltipDark } from './tooltip/styles'
 export { transferDark } from './transfer/styles'
-export { typographyDark } from './typography/styles'
 export { treeDark } from './tree/styles'
+export { treeSelectDark } from './tree-select/styles'
+export { typographyDark } from './typography/styles'
 export { uploadDark } from './upload/styles'
 
 // danger zone, internal styles

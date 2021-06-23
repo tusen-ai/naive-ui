@@ -141,12 +141,10 @@ export default defineComponent({
             actionSpace,
             contentMargin,
             closeSize,
-            [iconPlacement === 'top'
-              ? 'iconMarginIconTop'
-              : 'iconMargin']: iconMargin,
-            [iconPlacement === 'top'
-              ? 'closeMarginIconTop'
-              : 'closeMargin']: closeMargin,
+            [iconPlacement === 'top' ? 'iconMarginIconTop' : 'iconMargin']:
+              iconMargin,
+            [iconPlacement === 'top' ? 'closeMarginIconTop' : 'closeMargin']:
+              closeMargin,
             [createKey('iconColor', type)]: iconColor
           }
         } = themeRef.value
@@ -219,9 +217,7 @@ export default defineComponent({
               {{
                 default: () =>
                   renderSlot($slots, 'icon', undefined, () => [
-                    this.icon
-                      ? h(render, { render: this.icon })
-                      : iconMap[this.type]
+                    this.icon ? render(this.icon) : iconMap[this.type]
                   ])
               }}
             </NBaseIcon>
@@ -236,25 +232,15 @@ export default defineComponent({
               {{
                 default: () =>
                   renderSlot($slots, 'icon', undefined, () => [
-                    this.icon
-                      ? h(render, { render: this.icon })
-                      : iconMap[this.type]
+                    this.icon ? render(this.icon) : iconMap[this.type]
                   ])
               }}
             </NBaseIcon>
           ) : null}
-          {renderSlot($slots, 'header', undefined, () => [
-            h(render, {
-              render: title
-            })
-          ])}
+          {renderSlot($slots, 'header', undefined, () => [render(title)])}
         </div>
         <div class={`${mergedClsPrefix}-dialog__content`}>
-          {renderSlot($slots, 'default', undefined, () => [
-            h(render, {
-              render: content
-            })
-          ])}
+          {renderSlot($slots, 'default', undefined, () => [render(content)])}
         </div>
         <div class={`${mergedClsPrefix}-dialog__action`}>
           {renderSlot($slots, 'action', undefined, () => [
@@ -267,7 +253,7 @@ export default defineComponent({
                 onClick={handleNegativeClick}
               >
                 {{
-                  default: () => h(render, { render: () => this.negativeText })
+                  default: () => render(this.negativeText)
                 }}
               </NButton>
             ) : null,
@@ -281,7 +267,7 @@ export default defineComponent({
               onClick={handlePositiveClick}
             >
               {{
-                default: () => h(render, { render: () => this.positiveText })
+                default: () => render(this.positiveText)
               }}
             </NButton>
           ])}

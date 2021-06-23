@@ -28,9 +28,9 @@ import { cB, c, cE, cM, cNotM, insideFormItem } from '../../../_utils/cssr'
 // --clear-color-pressed
 // --suffix-text-color
 // --icon-color
+// --icon-color-hover
+// --icon-color-pressed
 // --icon-color-disabled
-// --icon-alpha
-// --icon-alpha-disabled
 // --count-text-color
 // ...form item vars
 export default c([
@@ -130,10 +130,11 @@ export default c([
       white-space: nowrap;
       pointer-events: none;
     `),
-    cE('input-el', {
-      padding: 0,
-      height: 'var(--height)'
-    }, [
+    cE('input-el', `
+      padding: 0;
+      height: var(--height);
+      line-height: var(--height);
+    `, [
       c('+', [
         cE('placeholder', `
           display: flex;
@@ -146,6 +147,9 @@ export default c([
         whiteSpace: 'nowrap'
       })
     ]),
+    cE('eye', `
+      transition: color .3s var(--bezier);
+    `),
     // textarea
     cM('textarea', {
       width: '100%'
@@ -198,11 +202,9 @@ export default c([
       `, [
         cB('icon', `
           color: var(--icon-color);
-          opacity: var(--icon-alpha);
         `),
         cB('base-icon', `
           color: var(--icon-color);
-          opacity: var(--icon-alpha);
         `)
       ])
     ]),
@@ -226,11 +228,9 @@ export default c([
       }, [
         cB('icon', `
           color: var(--icon-color-disabled);
-          opacity: var(--icon-alpha-disabled);
         `),
         cB('base-icon', `
           color: var(--icon-color-disabled);
-          opacity: var(--icon-alpha-disabled);
         `)
       ]),
       cE('suffix, prefix', {
@@ -238,15 +238,24 @@ export default c([
       }, [
         cB('icon', `
           color: var(--icon-color-disabled);
-          opacity: var(--icon-alpha-disabled);
         `),
         cB('internal-icon', `
           color: var(--icon-color-disabled);
-          opacity: var(--icon-alpha-disabled);
         `)
       ])
     ]),
     cNotM('disabled', [
+      cE('eye', `
+        color: var(--icon-color);
+        cursor: pointer;
+      `, [
+        c('&:hover', `
+          color: var(--icon-color-hover);
+        `),
+        c('&:active', `
+          color: var(--icon-color-pressed);
+        `)
+      ]),
       cM('focus', {
         backgroundColor: 'var(--color-focus)'
       }, [
@@ -282,9 +291,9 @@ export default c([
     cE('prefix', {
       marginRight: '4px'
     }),
-    cE('suffix', {
-      marginLeft: '4px'
-    }),
+    cE('suffix', `
+      margin-left: 4px;
+    `),
     cE('suffix, prefix', `
       transition: color .3s var(--bezier);
       flex-wrap: nowrap;
@@ -301,17 +310,15 @@ export default c([
       }, [
         cE('placeholder', [
           cB('base-icon', `
-            transition: color .3s var(--bezier), opacity .3s var(--bezier);
+            transition: color .3s var(--bezier);
             color: var(--icon-color);
-            opacity: var(--icon-alpha);
             font-size: var(--icon-size);
           `)
         ])
       ]),
       cB('icon', `
-        transition: color .3s var(--bezier), opacity .3s var(--bezier);
+        transition: color .3s var(--bezier);
         color: var(--icon-color);
-        opacity: var(--icon-alpha);
         font-size: var(--icon-size);
       `),
       cB('base-icon', {

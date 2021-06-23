@@ -11,14 +11,18 @@ import {
   Transition,
   CSSProperties,
   watchEffect,
-  VNode
+  VNode,
+  HTMLAttributes
 } from 'vue'
 import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
 import { useIsIos } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import type {
+  ExtractInternalPropTypes,
+  ExtractPublicPropTypes
+} from '../../_utils'
 import { scrollbarLight } from '../styles'
 import type { ScrollbarTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -86,15 +90,18 @@ const scrollbarProps = {
   onScroll: Function as PropType<(e: Event) => void>,
   onWheel: Function as PropType<(e: WheelEvent) => void>,
   onResize: Function as PropType<(e: ResizeObserverEntry) => void>,
-  onDragleave: Function as PropType<(e: DragEvent) => void>,
-  privateOnSetSL: Function as PropType<(scrollLeft: number) => void>
+  internalOnUpdateScrollLeft: Function as PropType<(scrollLeft: number) => void>
 } as const
 
 export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
+export type ScrollbarInternalProps = ExtractInternalPropTypes<
+  typeof scrollbarProps
+>
 
-export default defineComponent({
+const Scrollbar = defineComponent({
   name: 'Scrollbar',
   props: scrollbarProps,
+  inheritAttrs: false,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
 
@@ -427,8 +434,8 @@ export default defineComponent({
       const { value: container } = mergedContainerRef
       if (container) {
         container.scrollLeft = toScrollLeft
-        const { privateOnSetSL } = props
-        if (privateOnSetSL) privateOnSetSL(toScrollLeft)
+        const { internalOnUpdateScrollLeft } = props
+        if (internalOnUpdateScrollLeft) internalOnUpdateScrollLeft(toScrollLeft)
       }
     }
     function handleXScrollMouseUp (e: MouseEvent): void {
@@ -591,7 +598,6 @@ export default defineComponent({
         mergeProps(this.$attrs, {
           class: `${mergedClsPrefix}-scrollbar`,
           style: this.cssVars,
-          onDragleave: this.onDragleave,
           onMouseenter: this.handleMouseEnterWrapper,
           onMouseleave: this.handleMouseLeaveWrapper
         }),
@@ -690,3 +696,9 @@ export default defineComponent({
     )
   }
 })
+
+type NativeScrollbarProps = Omit<HTMLAttributes, keyof ScrollbarInternalProps>
+type MergedProps = Partial<ScrollbarInternalProps & NativeScrollbarProps>
+
+export default Scrollbar
+export const XScrollbar: new () => { $props: MergedProps } = Scrollbar as any

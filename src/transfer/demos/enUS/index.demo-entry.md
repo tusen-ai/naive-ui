@@ -46,7 +46,7 @@ filterable
 | change | `(Array<string \| number>)` |             |
 
 <!-- ## Notes
-When I heared from my colleague he's going to put more than a thousand items into the transfer, I was astonished. My poor imagination can't come up with a scene that must use a transfer with thousands of items. But I must admit, it's my mind that always not considerate enough.
+When I heard from my colleague he's going to put more than a thousand items into the transfer, I was astonished. My poor imagination can't come up with a scene that must use a transfer with thousands of items. But I must admit, it's my mind that always not considerate enough.
 
 Months earlier, I have built a interesting animation in transfer but it will cause reflow on many DOM elements. At that time, I hadn't think of people would insert so much data in it. Although I never compromise on styles, it's hard to surpass the limit of browser and hardware. It sounds like a kind of philosophy problem to build a car as comfort as a Rolls Royce and as fast as a Ferrari (or Porsche, etc) which is nearly impossible.
 

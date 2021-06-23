@@ -32,6 +32,7 @@ export type OnUpdateValue = <T extends string & number & (string | number)>(
   value: T,
   option: DropdownOption
 ) => void
+
 export type OnUpdateKeys = <
   T extends string[] & number[] & Array<string | number>
 >(

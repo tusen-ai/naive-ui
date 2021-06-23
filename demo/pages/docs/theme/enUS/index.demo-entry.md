@@ -9,4 +9,5 @@ Naive UI provide some tools for developers to create themed components easier.
 ```demo
 provide-theme
 element
+use-theme-vars
 ```

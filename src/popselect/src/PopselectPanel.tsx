@@ -9,11 +9,8 @@ import {
   nextTick
 } from 'vue'
 import { createTreeMate } from 'treemate'
-import { NInternalSelectMenu } from '../../_internal'
-import { call, keysOf, warn } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
-import type { PopselectSize } from './interface'
-import { popselectInjectionKey } from './interface'
+import { RenderLabel } from '../../_internal/select-menu/src/interface'
+import { tmOptions } from '../../select/src/utils'
 import {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -24,22 +21,20 @@ import {
   SelectIgnoredOption,
   ValueAtom
 } from '../../select/src/interface'
-import { tmOptions } from '../../select/src/utils'
 import { useConfig } from '../../_mixins'
+import { NInternalSelectMenu } from '../../_internal'
+import { call, keysOf, warn } from '../../_utils'
+import type { MaybeArray } from '../../_utils'
+import type { PopselectSize } from './interface'
+import { popselectInjectionKey } from './interface'
 
 export const panelProps = {
-  multiple: {
-    type: Boolean,
-    default: false
-  },
+  multiple: Boolean,
   value: {
     type: [String, Number, Array] as PropType<Value | null>,
     default: null
   },
-  cancelable: {
-    type: Boolean,
-    default: false
-  },
+  cancelable: Boolean,
   width: [Number, String] as PropType<string | number>,
   options: {
     type: Array as PropType<SelectMixedOption[]>,
@@ -49,13 +44,12 @@ export const panelProps = {
     type: String as PropType<PopselectSize>,
     default: 'medium'
   },
-  scrollable: {
-    type: Boolean,
-    default: false
-  },
-  // eslint-disable-next-line vue/prop-name-casing
+  scrollable: Boolean,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onMouseenter: Function as PropType<(e: MouseEvent) => void>,
+  onMouseleave: Function as PropType<(e: MouseEvent) => void>,
+  renderLabel: Function as PropType<RenderLabel>,
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
@@ -154,7 +148,10 @@ export default defineComponent({
         width={this.width}
         virtualScroll={false}
         scrollable={this.scrollable}
+        renderLabel={this.renderLabel}
         onMenuToggleOption={this.handleMenuToggleOption}
+        onMouseenter={this.onMouseenter}
+        onMouseleave={this.onMouseenter}
       />
     )
   }

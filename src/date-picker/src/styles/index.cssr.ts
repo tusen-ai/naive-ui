@@ -59,15 +59,11 @@ export default c([
   `, [
     cB('date-picker-icon', `
       color: var(--icon-color);
-      opacity: var(--icon-alpha);
-      transition:
-        color .3s var(--bezier),
-        opacity .3s var(--bezier);
+      transition: color .3s var(--bezier);
     `),
     cM('disabled', [
       cB('date-picker-icon', `
         color: var(--icon-color-disabled);
-        opacity: var(--icon-alpha-disabled);
       `)
     ])
   ]),

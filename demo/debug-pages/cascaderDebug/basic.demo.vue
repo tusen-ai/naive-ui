@@ -15,7 +15,7 @@
       <!--EXAMPLE_END-->
     </div>
     <pre class="n-doc-section__inspect">
-v-model: {{ JSON.stringify(value) }}</pre
+      v-model: {{ JSON.stringify(value) }}</pre
     >
     <pre>
       <!--SOURCE-->
@@ -23,7 +23,7 @@ v-model: {{ JSON.stringify(value) }}</pre
   </div>
 </template>
 
-<script>
+<script lang="ts">
 function genChildren (option) {
   const children = []
   for (let i = 0; i <= option.depth; ++i) {

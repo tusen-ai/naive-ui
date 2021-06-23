@@ -105,7 +105,7 @@ describe('n-avatar', () => {
       },
       render () {
         const { text } = this as any
-        return <NAvatar size="medium">{text}</NAvatar>
+        return <NAvatar size="medium">{{ default: () => text }}</NAvatar>
       }
     }
     const wrapper = mount(AdjustAvatar)

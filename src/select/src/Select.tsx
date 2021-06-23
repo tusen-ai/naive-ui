@@ -22,6 +22,7 @@ import {
 } from 'vueuc'
 import { useIsMounted, useMergedState, useCompitable } from 'vooks'
 import { clickoutside } from 'vdirs'
+import { RenderLabel } from '../../_internal/select-menu/src/interface'
 import { useTheme, useConfig, useLocale, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, call, useAdjustedTo, ExtractPublicPropTypes } from '../../_utils'
@@ -132,7 +133,7 @@ const selectProps = {
     type: Boolean,
     default: true
   },
-  // eslint-disable-next-line vue/prop-name-casing
+  renderLabel: Function as PropType<RenderLabel>,
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<OnUpdateValue> | undefined
   >,
@@ -495,21 +496,6 @@ export default defineComponent({
         doUpdateValue(option.value)
       }
     }
-    function handleDeleteLastOption (): void {
-      if (!patternRef.value.length) {
-        const changedValue = createClearedMultipleSelectValue(
-          mergedValueRef.value
-        )
-        if (Array.isArray(changedValue)) {
-          const poppedValue = changedValue.pop()
-          if (poppedValue === undefined) return
-          const createdOptionIndex = getCreatedOptionIndex(poppedValue)
-          ~createdOptionIndex &&
-            createdOptionsRef.value.splice(createdOptionIndex, 1)
-          doUpdateValue(changedValue)
-        }
-      }
-    }
     function getCreatedOptionIndex (optionValue: string | number): number {
       const createdOptions = createdOptionsRef.value
       return createdOptions.findIndex(
@@ -554,9 +540,7 @@ export default defineComponent({
       }
     }
     function handleMenuMousedown (e: MouseEvent): void {
-      if (!happensIn(e, 'action') && props.multiple && props.filterable) {
-        focusSelection()
-      }
+      if (!happensIn(e, 'action')) e.preventDefault()
     }
     // scroll events on menu
     function handleMenuScroll (e: Event): void {
@@ -659,7 +643,6 @@ export default defineComponent({
       handleMenuBlur,
       handleMenuTabOut,
       handleTriggerClick,
-      handleDeleteLastOption,
       handleToggleOption,
       handlePatternInput,
       handleClear,
@@ -708,7 +691,6 @@ export default defineComponent({
                       selectedOptions={this.selectedOptions}
                       multiple={this.multiple}
                       filterable={this.filterable}
-                      remote={this.remote}
                       clearable={this.clearable}
                       disabled={this.disabled}
                       size={this.mergedSize}
@@ -719,7 +701,6 @@ export default defineComponent({
                       loading={this.loading}
                       focused={this.focused}
                       onClick={this.handleTriggerClick}
-                      onDeleteLastOption={this.handleDeleteLastOption}
                       onDeleteOption={this.handleToggleOption}
                       onPatternInput={this.handlePatternInput}
                       onClear={this.handleClear}
@@ -739,7 +720,7 @@ export default defineComponent({
                 containerClass={this.namespace}
                 width={this.consistentMenuWidth ? 'target' : undefined}
                 minWidth="target"
-                placement="bottom-start"
+                placement={this.placement}
               >
                 {{
                   default: () => (
@@ -770,6 +751,7 @@ export default defineComponent({
                               treeMate={this.treeMate}
                               multiple={this.multiple}
                               size="medium"
+                              renderLabel={this.renderLabel}
                               value={this.mergedValue}
                               style={this.cssVars}
                               onMenuToggleOption={this.handleToggleOption}
