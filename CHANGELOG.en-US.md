@@ -1,5 +1,31 @@
 # CHANGELOG
 
+## 2.14.0 (2021-06-23)
+
+### Breaking Changes
+
+- `n-element` removes `abstract` prop.
+- `n-element` doesn't return theme variables in default slot. Please use `useThemeVars` instead.
+
+### Feats
+
+- Add `n-carousel` component.
+- Add `useThemeVars` composable to provide theme variables.
+- `n-upload` add `on-update:file-list` prop, closes [#135](https://github.com/TuSimple/naive-ui/issues/135).
+- `n-date-picker` add `update-value-on-close` prop.
+
+### Fixes
+
+- Fix `n-select` can't input in filterable mode in single mode in iOS Safari, closes [#230](https://github.com/TuSimple/naive-ui/issues/230)
+- Fix `n-input-number` lacks `on-update-value` prop.
+- Fix `n-input-number`'s value can't be null.
+- Fix `n-input-number`'s button doesn't work after value is cleared, closes [#251](https://github.com/TuSimple/naive-ui/issues/251).
+- Fix `n-data-table` expand trigger's cursor is not pointer, closes [#261](https://github.com/TuSimple/naive-ui/issues/261).
+
+## Refactors
+
+- `n-input-number` will focus directly, closes [#244](https://github.com/TuSimple/naive-ui/issues/244).
+
 ## 2.13.0 (2021-06-21)
 
 ### Feats

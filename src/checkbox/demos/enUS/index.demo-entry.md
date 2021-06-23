@@ -19,7 +19,7 @@ event
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| checked | `boolean` | `undefined` | Whether it is selected in the controlled mode. |
+| checked | `boolean` | `false` | Whether it is selected in the controlled mode. |
 | indeterminate | `boolean` | `false` | Whether partly selected. |
 | default-checked | `boolean` | `false` | Whether selected by default in uncontrolled mode. |
 | disabled | `boolean` | `false` | Whether to disable. |

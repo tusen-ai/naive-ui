@@ -19,7 +19,7 @@ event
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| checked | `boolean` | `undefined` | 受控状态下是否选中 |
+| checked | `boolean` | `false` | 受控状态下是否选中 |
 | indeterminate | `boolean` | `false` | 是否部分选中 |
 | default-checked | `boolean` | `false` | 非受控模式下默认是否选中 |
 | disabled | `boolean` | `false` | 是否禁用 |

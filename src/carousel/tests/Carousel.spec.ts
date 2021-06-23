@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils'
-import { NInput } from '../index'
+import { NCarousel } from '../index'
 
-describe('n-input', () => {
+describe('n-carousel', () => {
   it('should work with import on demand', () => {
-    mount(NInput)
+    mount(NCarousel)
   })
 })

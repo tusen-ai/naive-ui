@@ -6,6 +6,7 @@ export { default as create } from './create'
 
 export * from './locales'
 export * from './components'
+export * from './composables'
 
 // component themes
 export * from './styles'

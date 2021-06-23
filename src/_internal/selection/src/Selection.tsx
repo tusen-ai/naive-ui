@@ -695,69 +695,63 @@ export default defineComponent({
           (this.active || !this.selected) &&
           !this.isCompositing
         body = (
-          <>
-            <div
-              ref="patternInputWrapperRef"
-              class={`${clsPrefix}-base-selection-label`}
-            >
-              <input
-                ref="patternInputRef"
-                class={`${clsPrefix}-base-selection-label__input`}
-                value={
-                  showPlaceholder
-                    ? ''
-                    : this.patternInputFocused && this.active
-                      ? this.pattern
-                      : String(this.label)
-                }
-                placeholder=""
-                readonly={
-                  !(!disabled && filterable && (this.active || this.autofocus))
-                }
-                disabled={disabled}
-                tabindex={-1}
-                autofocus={this.autofocus}
-                onFocus={this.handlePatternInputFocus}
-                onBlur={this.handlePatternInputBlur}
-                onInput={this.handlePatternInputInput as any}
-                onCompositionstart={this.handleCompositionStart}
-                onCompositionend={this.handleCompositionEnd}
-              />
-              {showPlaceholder ? (
-                <div class={`${clsPrefix}-base-selection-placeholder`}>
-                  {this.filterablePlaceholder}
-                </div>
-              ) : null}
-              {suffix}
-            </div>
-          </>
+          <div
+            ref="patternInputWrapperRef"
+            class={`${clsPrefix}-base-selection-label`}
+          >
+            <input
+              ref="patternInputRef"
+              class={`${clsPrefix}-base-selection-label__input`}
+              value={
+                showPlaceholder
+                  ? ''
+                  : this.patternInputFocused && this.active
+                    ? this.pattern
+                    : String(this.label)
+              }
+              placeholder=""
+              readonly={disabled}
+              disabled={disabled}
+              tabindex={-1}
+              autofocus={this.autofocus}
+              onFocus={this.handlePatternInputFocus}
+              onBlur={this.handlePatternInputBlur}
+              onInput={this.handlePatternInputInput as any}
+              onCompositionstart={this.handleCompositionStart}
+              onCompositionend={this.handleCompositionEnd}
+            />
+            {showPlaceholder ? (
+              <div class={`${clsPrefix}-base-selection-placeholder`}>
+                {this.filterablePlaceholder}
+              </div>
+            ) : null}
+            {suffix}
+          </div>
         )
       } else {
         body = (
-          <>
-            <div
-              ref="singleElRef"
-              class={`${clsPrefix}-base-selection-label`}
-              tabindex={this.disabled ? undefined : 0}
-            >
-              {this.label !== undefined ? (
-                <div
-                  class={`${clsPrefix}-base-selection-label__input`}
-                  key="input"
-                >
-                  {this.label}
-                </div>
-              ) : (
-                <div
-                  class={`${clsPrefix}-base-selection-placeholder`}
-                  key="placeholder"
-                >
-                  {this.placeholder}
-                </div>
-              )}
-              {suffix}
-            </div>
-          </>
+          <div
+            ref="singleElRef"
+            class={`${clsPrefix}-base-selection-label`}
+            tabindex={this.disabled ? undefined : 0}
+          >
+            {this.label !== undefined ? (
+              <div
+                class={`${clsPrefix}-base-selection-label__input`}
+                key="input"
+              >
+                {this.label}
+              </div>
+            ) : (
+              <div
+                class={`${clsPrefix}-base-selection-placeholder`}
+                key="placeholder"
+              >
+                {this.placeholder}
+              </div>
+            )}
+            {suffix}
+          </div>
         )
       }
     }

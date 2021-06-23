@@ -11,7 +11,8 @@ import {
   Value,
   datePickerInjectionKey,
   OnPanelUpdateValue,
-  OnPanelUpdateValueImpl
+  OnPanelUpdateValueImpl,
+  OnClose
 } from '../interface'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
@@ -32,7 +33,7 @@ const usePanelCommonProps = {
     default: null
   },
   onConfirm: Function,
-  onClose: Function,
+  onClose: Function as PropType<OnClose>,
   onTabOut: Function,
   onUpdateValue: {
     type: Function as PropType<OnPanelUpdateValue>,
@@ -67,9 +68,9 @@ function usePanelCommon (props: UsePanelCommonProps) {
     const { onUpdateValue } = props
     ;(onUpdateValue as OnPanelUpdateValueImpl)(value, doUpdate)
   }
-  function doClose (): void {
+  function doClose (disableUpdateOnClose: boolean = false): void {
     const { onClose } = props
-    if (onClose) onClose()
+    if (onClose) onClose(disableUpdateOnClose)
   }
   function doTabOut (): void {
     const { onTabOut } = props
@@ -77,7 +78,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
   }
   function handleClearClick (): void {
     doUpdateValue(null, true)
-    doClose()
+    doClose(true)
   }
   function handleFocusDetectorFocus (): void {
     doTabOut()
