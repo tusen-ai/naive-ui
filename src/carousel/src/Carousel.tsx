@@ -142,7 +142,7 @@ export default defineComponent({
         const { offsetWidth } = selfEl
         const { value: dragOffset } = dragOffsetRef
         const duration = Date.now() - dragStartTime
-        // more than 50% width or faster than 0.6px per ms
+        // more than 50% width or faster than 0.4px per ms
         if (dragOffset > offsetWidth / 2 || dragOffset / duration > 0.4) {
           prev()
         } else if (
