@@ -11,6 +11,7 @@ import type { ThemeProps } from '../../_mixins'
 import { warn, call, MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { inputNumberLight, InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber } from './utils'
+import type { OnUpdateValue } from './interface'
 
 const inputNumberProps = {
   ...(useTheme.props as ThemeProps<InputNumberTheme>),
@@ -19,27 +20,15 @@ const inputNumberProps = {
     type: Number as PropType<number | null>,
     default: null
   },
-  value: {
-    type: Number,
-    default: undefined
-  },
+  value: Number,
   step: {
     type: [Number, String],
     default: 1
   },
-  min: {
-    type: [Number, String],
-    default: undefined
-  },
-  max: {
-    type: [Number, String],
-    default: undefined
-  },
+  min: [Number, String],
+  max: [Number, String],
   size: String as PropType<'small' | 'medium' | 'large'>,
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  disabled: Boolean,
   validator: Function as PropType<(value: number) => boolean>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -49,17 +38,13 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
-  // eslint-disable-next-line vue/prop-name-casing
-  'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
-  >,
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   // deprecated
   onChange: {
-    type: [Function, Array] as PropType<
-    MaybeArray<(value: number) => void> | undefined
-    >,
+    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
     validator: () => {
       if (__DEV__) {
         warn(
@@ -124,39 +109,47 @@ export default defineComponent({
       if (parsedNumber !== null) return parsedNumber
       else return null
     })
-    const doUpdateValue = (value: number): void => {
+    const doUpdateValue = (value: number | null): void => {
       const { value: mergedValue } = mergedValueRef
       if (value === mergedValue) return
-      const { 'onUpdate:value': onUpdateValue, onChange } = props
+      const {
+        'onUpdate:value': _onUpdateValue,
+        onUpdateValue,
+        onChange
+      } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
       if (onChange) call(onChange, value)
       if (onUpdateValue) call(onUpdateValue, value)
+      if (_onUpdateValue) call(_onUpdateValue, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
     }
     const deriveValueFromDisplayedValue = (
       offset = 0,
-      postUpdateIfValid = true
+      doUpdateIfValid = true
     ): null | number | false => {
       const { value: displayedValue } = displayedValueRef
       const parsedValue = parse(displayedValue)
-      if (parsedValue === null) return null
+      if (parsedValue === null) {
+        if (doUpdateIfValid) doUpdateValue(null)
+        return null
+      }
       if (validator(parsedValue)) {
         let nextValue = parsedValue + offset
         if (validator(nextValue)) {
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
           if (mergedMax !== null && nextValue > mergedMax) {
-            if (!postUpdateIfValid) return false
+            if (!doUpdateIfValid) return false
             nextValue = mergedMax
           }
           if (mergedMin !== null && nextValue < mergedMin) {
-            if (!postUpdateIfValid) return false
+            if (!doUpdateIfValid) return false
             nextValue = mergedMin
           }
           if (props.validator && !props.validator(nextValue)) return false
-          if (postUpdateIfValid) doUpdateValue(nextValue)
+          if (doUpdateIfValid) doUpdateValue(nextValue)
           return nextValue
         }
       }
@@ -307,6 +300,7 @@ export default defineComponent({
     }
     function handleUpdateDisplayedValue (value: string): void {
       displayedValueRef.value = value
+      deriveValueFromDisplayedValue()
     }
     watch(mergedValueRef, () => {
       deriveDisplayedValueFromValue()
@@ -360,7 +354,6 @@ export default defineComponent({
           bordered={this.mergedBordered}
           value={this.displayedValue}
           onUpdateValue={this.handleUpdateDisplayedValue}
-          passively-activated
           theme={this.mergedTheme.peers.Input}
           themeOverrides={this.mergedTheme.peerOverrides.Input}
           builtinThemeOverrides={this.inputThemeOverrides}

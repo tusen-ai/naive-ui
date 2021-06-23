@@ -33,6 +33,8 @@ export type OnPanelUpdateValueImpl = (
   doUpdate: boolean
 ) => void
 
+export type OnClose = (disableUpdateOnClose: boolean) => void
+
 export interface PanelRef {
   $el: HTMLElement
 }

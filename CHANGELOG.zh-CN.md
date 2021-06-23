@@ -11,10 +11,19 @@
 
 - 新增 `n-carousel` 组件
 - 新增 `useThemeVars` 函数提供主题变量
+- `n-date-picker` 新增 `update-value-on-close` 属性
 
 ### Fixes
 
-- `n-select` 在可过滤单选模式下在 iOS Safari 无法输入，关闭 [#230](https://github.com/TuSimple/naive-ui/issues/230)
+- 修复 `n-select` 在可过滤单选模式下在 iOS Safari 无法输入，关闭 [#230](https://github.com/TuSimple/naive-ui/issues/230)
+- 修复 `n-input-number` 缺少 `on-update-value` 属性
+- 修复 `n-input-number` 值无法为 `null`
+- 修复 `n-input-number` 的按钮在值清空后无法使用，关闭 [#251](https://github.com/TuSimple/naive-ui/issues/251)
+- 修复 `n-data-table` 展开图标光标样式不是 pointer，关闭 [#261](https://github.com/TuSimple/naive-ui/issues/261)
+
+## Refactors
+
+- `n-input-number` 会直接聚焦，关闭 [#244](https://github.com/TuSimple/naive-ui/issues/244)
 
 ## 2.13.0 (2021-06-21)
 
