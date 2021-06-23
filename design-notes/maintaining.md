@@ -12,7 +12,7 @@
 3. 从 main checkout 到 release 分支
 4. 修改 package.json 版本号
 5. npm run gen-version
-6. 修改两个语言的 changelog 版本号
+6. 修改两个语言的 changelog 版本号（还有日期）
 7. 把改动提交到 release 分支，git commit -m "x.x.x"
 8. 将 release 分支合并到 main（发起一个 PR，CI 过了就合并）
 9. 回到 main 分支拉回最新的代码
