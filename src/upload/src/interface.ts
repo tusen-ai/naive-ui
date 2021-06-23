@@ -57,8 +57,7 @@ export interface UploadInjection {
   onDownloadRef: Ref<OnDownload | undefined>
   XhrMap: Map<string, XMLHttpRequest>
   submit: (fileId?: string) => void
-  doChange: DoChange,
-  handleFileListChange: () => void
+  doChange: DoChange
 }
 
 export const uploadInjectionKey: InjectionKey<UploadInjection> =

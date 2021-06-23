@@ -31,7 +31,6 @@ import {
 } from './interface'
 import { useMergedState } from 'vooks'
 import { uploadDraggerKey } from './UploadDragger'
-import { zip } from 'lodash'
 
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
@@ -302,14 +301,14 @@ export default defineComponent({
       // May have bug! set to null?
       target.value = ''
     }
-    function handleFileListChange (): void {
-      const fileListAfterChange = mergedFileListRef.value
-       const {
-          'onUpdate:fileList': _onUpdateFileList,
-          onUpdateFileList,
-        } = props
-        if (_onUpdateFileList) call(_onUpdateFileList, fileListAfterChange)
-        if (onUpdateFileList) call(onUpdateFileList, fileListAfterChange)
+    function doUpdateFileList (files: FileInfo[]): void {
+      const {
+        'onUpdate:fileList': _onUpdateFileList,
+        onUpdateFileList,
+      } = props
+      if (_onUpdateFileList) call(_onUpdateFileList, files)
+      if (onUpdateFileList) call(onUpdateFileList, files)
+      uncontrolledFileListRef.value = files
     }
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files) return
@@ -329,7 +328,6 @@ export default defineComponent({
       if (props.defaultUpload) {
         submit()
       }
-      handleFileListChange()
     }
     function submit (fileId?: string): void {
       const {
@@ -397,7 +395,7 @@ export default defineComponent({
             event
           })
         }
-        uncontrolledFileListRef.value = fileListAfterChange
+        doUpdateFileList(fileListAfterChange)
       } else if (__DEV__) {
         warn('upload', 'File has no corresponding id in current file list.')
       }
@@ -414,8 +412,7 @@ export default defineComponent({
       mergedFileListRef: mergedFileListRef,
       XhrMap,
       submit,
-      doChange,
-      handleFileListChange
+      doChange
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
