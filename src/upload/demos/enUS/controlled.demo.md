@@ -5,7 +5,8 @@ Example is only a joke.
 ```html
 <n-upload
   action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-  :file-list="fileList"
+  v-model:file-list="fileList"
+  @update:file-list="handleFileListChange"
   @change="handleUploadChange"
   @remove="handleRemove"
 >
@@ -68,6 +69,9 @@ export default defineComponent({
             }, 4000)
           })
         }
+      },
+      handleFileListChange (value) {
+        message.info("Yes, file-list changed.")
       }
     }
   }

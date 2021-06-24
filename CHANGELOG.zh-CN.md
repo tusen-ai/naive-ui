@@ -2,6 +2,12 @@
 
 ## Pending
 
+### Feats
+
+- `n-carousel` 支持触控操作，关闭 [#271](https://github.com/TuSimple/naive-ui/issues/271)
+
+## 2.14.0 (2021-06-23)
+
 ### Breaking Changes
 
 - `n-element` 移除了 `abstract` 属性
@@ -11,6 +17,7 @@
 
 - 新增 `n-carousel` 组件
 - 新增 `useThemeVars` 函数提供主题变量
+- `n-upload` 新增 `on-update:file-list` 属性，关闭 [#135](https://github.com/TuSimple/naive-ui/issues/135)
 - `n-date-picker` 新增 `update-value-on-close` 属性
 
 ### Fixes

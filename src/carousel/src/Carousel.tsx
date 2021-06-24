@@ -11,6 +11,7 @@ import {
   onBeforeUnmount
 } from 'vue'
 import { indexMap } from 'seemly'
+import { on, off } from 'evtd'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { ExtractPublicPropTypes } from '../../_utils'
@@ -36,6 +37,9 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const currentRef = ref(1)
     const lengthRef = { value: 1 }
+    const touchingRef = ref(false)
+    const dragOffsetRef = ref(0)
+    const selfElRef = ref<HTMLDivElement | null>(null)
     let timerId: number | null = null
     let inTransition = false
     // current from 0 to length + 1
@@ -84,9 +88,9 @@ export default defineComponent({
       const nextCurrent =
         current === 0 ? length : current === length + 1 ? 1 : null
       if (nextCurrent !== null) {
-        target.style.transition = 'none'
         currentRef.value = nextCurrent
         void nextTick(() => {
+          target.style.transition = 'none'
           void target.offsetWidth
           target.style.transition = ''
           inTransition = false
@@ -101,6 +105,57 @@ export default defineComponent({
         case 'Space':
           setCurrent(current)
       }
+    }
+    let dragStartX = 0
+    let dragStartTime = 0
+    let memorizedContainerWidth = 0
+    function handleTouchstart (e: TouchEvent): void {
+      if (timerId !== null) {
+        window.clearInterval(timerId)
+      }
+      e.preventDefault()
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      memorizedContainerWidth = selfElRef.value!.offsetWidth
+      touchingRef.value = true
+      dragStartTime = Date.now()
+      dragStartX = e.touches[0].clientX
+      on('touchmove', document, handleTouchmove)
+      on('touchend', document, handleTouchend)
+      on('touchcancel', document, handleTouchend)
+    }
+    function handleTouchmove (e: TouchEvent): void {
+      const dragOffset = e.touches[0].clientX - dragStartX
+      dragOffsetRef.value =
+        dragOffset > memorizedContainerWidth
+          ? memorizedContainerWidth
+          : dragOffset < -memorizedContainerWidth
+            ? -memorizedContainerWidth
+            : dragOffset
+    }
+    function handleTouchend (): void {
+      if (props.autoplay) resetInterval()
+      void nextTick(() => {
+        touchingRef.value = false
+      })
+      const { value: selfEl } = selfElRef
+      if (selfEl) {
+        const { offsetWidth } = selfEl
+        const { value: dragOffset } = dragOffsetRef
+        const duration = Date.now() - dragStartTime
+        // more than 50% width or faster than 0.4px per ms
+        if (dragOffset > offsetWidth / 2 || dragOffset / duration > 0.4) {
+          prev()
+        } else if (
+          dragOffset < -offsetWidth / 2 ||
+          dragOffset / duration < -0.4
+        ) {
+          next()
+        }
+      }
+      dragOffsetRef.value = 0
+      off('touchmove', document, handleTouchmove)
+      off('touchend', document, handleTouchend)
+      off('touchcancel', document, handleTouchend)
     }
     function resetInterval (): void {
       if (timerId !== null) {
@@ -134,13 +189,17 @@ export default defineComponent({
       props
     )
     return {
+      selfElRef,
       mergedClsPrefix: mergedClsPrefixRef,
       current: currentRef,
       lengthRef,
+      touching: touchingRef,
+      dragOffset: dragOffsetRef,
       prev,
       next,
       setCurrent,
       handleKeydown,
+      handleTouchstart,
       handleTransitionEnd,
       cssVars: computed(() => {
         const {
@@ -173,14 +232,17 @@ export default defineComponent({
       <div
         class={`${mergedClsPrefix}-carousel`}
         style={this.cssVars as CSSProperties}
+        ref="selfElRef"
       >
         <div
           class={`${mergedClsPrefix}-carousel__slides`}
+          onTouchstart={this.handleTouchstart}
           style={{
             width: `${total}00%`,
-            transform: `translate3d(-${
-              (100 / total) * (current % total)
-            }%, 0, 0)`
+            transition: this.touching ? 'none' : '',
+            transform:
+              `translate3d(-${(100 / total) * (current % total)}%, 0, 0)` +
+              (this.touching ? `translateX(${this.dragOffset}px)` : '')
           }}
           onTransitionend={this.handleTransitionEnd}
           role="listbox"

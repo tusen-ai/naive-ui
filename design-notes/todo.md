@@ -24,6 +24,7 @@
 ## Tabs
 
 - (moderate) Add iOS styled tabs
+- (moderate) Left, right tabs
 
 ## Tree
 

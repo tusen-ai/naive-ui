@@ -2,6 +2,12 @@
 
 ## Pending
 
+### Feats
+
+- `n-carousel` supports touch operation, closes [#271](https://github.com/TuSimple/naive-ui/issues/271).
+
+## 2.14.0 (2021-06-23)
+
 ### Breaking Changes
 
 - `n-element` removes `abstract` prop.
@@ -11,6 +17,7 @@
 
 - Add `n-carousel` component.
 - Add `useThemeVars` composable to provide theme variables.
+- `n-upload` add `on-update:file-list` prop, closes [#135](https://github.com/TuSimple/naive-ui/issues/135).
 - `n-date-picker` add `update-value-on-close` prop.
 
 ### Fixes
