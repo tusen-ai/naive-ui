@@ -21,7 +21,7 @@ export const self = (vars: ThemeCommonVars) => {
     color: popoverColor,
     titleTextColor: textColor1,
     titleFontWeight: fontWeightStrong,
-    border: `1px solid ${dividerColor}`,
+    dividerColor,
     textColor: textColor2,
     boxShadow: boxShadow2
   }

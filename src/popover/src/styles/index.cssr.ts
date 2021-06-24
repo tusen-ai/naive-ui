@@ -62,17 +62,14 @@ export default c([
       })
     ]),
     cE('title', `
+      position: relative;
+      left: -14px;
       font-size: var(--font-size);
       font-weight: var(--title-font-weight);
       color: var(--title-text-color);
-      padding-bottom: 8px;
-    `),
-    cE('divider', `
-      position: absolute;
+      padding: var(--padding);
       width: 100%;
-      left: 0;
-      border-bottom: var(--border);
-      
+      border-bottom: 1px solid var(--divider-color);
     `),
     cE('content', `
       font-size: var(--font-size);

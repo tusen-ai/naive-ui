@@ -16,7 +16,8 @@ import {
   provide,
   CSSProperties,
   VNode,
-  renderSlot
+  renderSlot,
+  Fragment
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerInst } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
@@ -53,6 +54,7 @@ export const popoverBodyProps = {
   shadow: Boolean,
   padded: Boolean,
   animated: Boolean,
+  title: String,
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   /** @deprecated */
   minWidth: Number,
@@ -119,7 +121,7 @@ export default defineComponent({
           fontSize,
           textColor,
           titleTextColor,
-          border,
+          dividerColor,
           titleFontWeight,
           color,
           boxShadow,
@@ -138,7 +140,7 @@ export default defineComponent({
         '--title-font-weight': titleFontWeight,
         '--text-color': textColor,
         '--color': color,
-        '--border': border,
+        '--divider-color': dividerColor,
         '--title-text-color': titleTextColor,
         '--border-radius': borderRadius,
         '--arrow-height': arrowHeight,
@@ -234,18 +236,15 @@ export default defineComponent({
             attrs
           ),
           [
-            slots.header ? (
-              <div class={`${mergedClsPrefix}-popover__title`}>
-                {renderSlot(slots, 'header')}
-              </div>
-            ) : null,
-            slots.header ? (
-              <div class={`${mergedClsPrefix}-popover__divider`}></div>
-            ) : null,
-            slots.header ? (
-              <div class={`${mergedClsPrefix}-popover__content`}>
-                {renderSlot(slots, 'default')}
-              </div>
+            slots.header || props.title ? (
+              <>
+                <div class={`${mergedClsPrefix}-popover__title`}>
+                  {renderSlot(slots, 'header', {}, () => [props.title])}
+                </div>
+                <div class={`${mergedClsPrefix}-popover__content`}>
+                  {renderSlot(slots, 'default')}
+                </div>
+              </>
             ) : (
               renderSlot(slots, 'default')
             ),

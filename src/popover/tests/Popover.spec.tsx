@@ -125,4 +125,26 @@ describe('n-popover', () => {
     expect(document.querySelector(`.${contentClass}`)).toEqual(null)
     wrapper.unmount()
   })
+
+  it('title', () => {
+    mount(NPopover, {
+      props: {
+        title: 'I am a title'
+      },
+      slots: {
+        trigger: () => 'star kirby',
+        default: () => <div>star kirby</div>
+      }
+    })
+  })
+
+  it('header slot', () => {
+    mount(NPopover, {
+      slots: {
+        trigger: () => 'star kirby',
+        header: () => 'I am a title',
+        default: () => <div>star kirby</div>
+      }
+    })
+  })
 })
