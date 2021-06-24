@@ -1,6 +1,6 @@
 # 常见问题
 
-## 1. onUpdate: xxx 和@update: xxx 的区别
+## 1. @update:xxx 和 on-update:xxx 的区别
 
 `@update:xxx` 和 `on-update:xxx` 在模版中使用时没有任何区别。
 
