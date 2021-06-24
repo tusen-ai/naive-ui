@@ -491,7 +491,7 @@ export default defineComponent({
           {renderTag ? (
             renderTag({
               option,
-              onClose: () => this.handleDeleteOption(option)
+              handleClose: () => this.handleDeleteOption(option)
             })
           ) : (
             <NTag

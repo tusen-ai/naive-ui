@@ -37,12 +37,12 @@ render-debug
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | consistent-menu-width | `boolean` | `true` | 菜单宽度是否和选择触发器一致，设为 `false` 会使 `virtual-scroll` 失效 |
-| clearable | `boolean` | `false` | 是否显示清空按钮 |
+| clearable | `boolean` | `false` | 是否可清空 |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | 非受控模式下的默认值 |
 | disabled | `boolean` | `false` | 是否禁用 |
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | 在传入的选项中没有对应当前值的选项时，这个值应该对应的选项。如果设为 `false`，不会为找不到对应选项的值生成回退选项也不会显示它，未在选项中的值会被视为不合法，操作过程中会被组件清除掉 |
 | filterable | `boolean` | `false` | 是否可以过滤 |
-| filter | `(pattern: string, option: object) => boolean` | `undefined` | 一个简单的字符串搜索算法 |
+| filter | `(pattern: string, option: object) => boolean` | 一个简单的字符串搜索算法 | 过滤器函数 |
 | loading | `boolean` | `false` | 是否为加载状态 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |
 | multiple | `boolean` | `false` | 是否为多选 |

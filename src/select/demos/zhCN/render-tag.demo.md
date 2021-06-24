@@ -1,26 +1,24 @@
 # 自定义标签渲染
 
-给标签一点颜色看看
+给标签一点颜色看看。
 
 ```html
-<n-space vertical>
-  <n-select
-    v-model:value="value"
-    multiple
-    :render-tag="renderTag"
-    :options="options"
-  />
-</n-space>
+<n-select
+  v-model:value="value"
+  multiple
+  :render-tag="renderTag"
+  :options="options"
+/>
 ```
 
 ```js
-import { h } from 'vue'
+import { defineComponent, ref, h } from 'vue'
 import { NTag } from 'naive-ui'
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      value: [],
+      value: ref([]),
       options: [
         {
           label: '今天在摸鱼',
@@ -38,18 +36,18 @@ export default {
           type: 'error'
         }
       ],
-      renderTag: ({ option, onClose }) => {
+      renderTag: ({ option, handleClose }) => {
         return h(
           NTag,
           {
             type: option.type,
             closable: true,
-            onClose: onClose
+            onClose: handleClose
           },
           { default: () => option.label }
         )
       }
     }
   }
-}
+})
 ```

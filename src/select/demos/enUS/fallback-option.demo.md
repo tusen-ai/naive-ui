@@ -30,17 +30,19 @@ If you don't need fallback options, simply set it to `false`. Now only the value
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      trim (value) {
+      trim: (value) => {
         return {
-          label: value.split(' ')[0],
+          label: value.slice(0, 2),
           value
         }
       },
-      singleValue: 'A Nowhere Value',
-      multipleValue: ['First Nowhere Value', 'Second Nowhere Value'],
+      singleValue: ref('一个不知哪里来的值'),
+      multipleValue: ref(['一个不知哪里来的值', '两个不知哪里来的值']),
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
@@ -100,5 +102,5 @@ export default {
       ]
     }
   }
-}
+})
 ```

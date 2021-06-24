@@ -204,9 +204,7 @@ describe('n-select', () => {
     })
 
     expect(wrapper.find('.n-base-selection-tag-wrapper').exists()).toBe(true)
-    expect(wrapper.find('.n-tag').exists()).toBe(true)
-    expect(wrapper.find('.n-tag').attributes('style')).toContain(
-      '--color: rgba(24, 160, 88, 0.1);'
-    )
+    expect(wrapper.findComponent(NTag).exists()).toBe(true)
+    expect(wrapper.findComponent(NTag).props('type')).toContain('success')
   })
 })

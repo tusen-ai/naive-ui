@@ -22,10 +22,12 @@ You can use a fixed number or use `responsive` to set a responsive max count.
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: null,
+      value: ref(null),
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
@@ -85,5 +87,5 @@ export default {
       ]
     }
   }
-}
+})
 ```

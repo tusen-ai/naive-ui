@@ -33,15 +33,15 @@ render-tag
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | consistent-menu-width | `boolean` | `true` | Whether the menu keeps its width the same as select trigger. Set it to `false` will disable `virtual-scroll`. |
-| clearable | `boolean` | `false` | Whether to displayed the clear button. |
+| clearable | `boolean` | `false` | Whether the value is clearable. |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | Default value in uncontrolled mode. |
 | disabled | `boolean` | `false` | Whether to disable the select. |
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | The option to be created according the value which has no corresponding option in the options of the component. If set to `false`, the fallback option won't be created and displayed and the value has no corresponding option will be viewed as a invalid value and it will be removed in the operations of the component. |
 | filterable | `boolean` | `false` | Whether it can filter options. |
-| filter | `(pattern: string, option: Object) => boolean` |  | A basic string based search method. |
-| loading | `boolean` | `false` | Whether to loaded. |
+| filter | `(pattern: string, option: Object) => boolean` | A basic string based search method. |  |
+| loading | `boolean` | `false` | Whether to show loading status. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple mode. `responsive` will keep all the tags in single line. |
-| multiple | `boolean` | `false` | Whether to multiple choice. |
+| multiple | `boolean` | `false` | Whether to select multiple values. |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | For details of configuration options, see SelectOption Properties. |
 | placeholder | `string` | `'Please Select'` |  |
 | remote | `boolean` | `false` | If you want to async get options. Note that if remote is set, `filter` & `tag` won't work on `options`. At that time, you are taking all control of `options`. |

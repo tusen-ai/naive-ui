@@ -3,5 +3,5 @@ import type { SelectBaseOption } from '../../../select/src/interface'
 
 export type RenderTag = (props: {
   option: SelectBaseOption
-  onClose: () => void
+  handleClose: () => void
 }) => VNodeChild
