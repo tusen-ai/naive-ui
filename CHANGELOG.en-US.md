@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-carousel` supports touch operation, closes [#271](https://github.com/TuSimple/naive-ui/issues/271).
+
+### Fixes
+
+- Fix `n-date-picker` `n-provider` pass `date-locale` not work, closes [#250](https://github.com/TuSimple/naive-ui/issues/250).
+
 ## 2.14.0 (2021-06-23)
 
 ### Breaking Changes
