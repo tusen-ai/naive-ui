@@ -8,7 +8,7 @@
 
 ### Fixes
 
-- 修复 `n-date-picker` `n-provider` 传递 `date-locale` 属性无效
+- 修复 `n-date-picker` `n-provider` 传递 `date-locale` 属性无效，关闭 [#250](https://github.com/TuSimple/naive-ui/issues/250)
 
 ## 2.14.0 (2021-06-23)
 
