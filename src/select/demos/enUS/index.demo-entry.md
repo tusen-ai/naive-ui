@@ -53,7 +53,7 @@ render-tag
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |
 | tag | `boolean` | `false` | Whether it can create new option, should be used with `filterable`. |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | Value in controlled mode. |
-| virtual-scroll | `boolean` | `false` | Whether to enable virtual scrolling. |
+| virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |
 | on-blur | `() => void` | `undefined` | Selection blur. |
 | on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | How to create a option when you input a string to create a option. Note that `filter` will be applied to the created option too. And make sure the value of the created option is not the same as any other option. |
 | on-focus | `() => void` | `undefined` | Selection focus. |

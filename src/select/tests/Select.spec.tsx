@@ -190,6 +190,7 @@ describe('n-select', () => {
         defaultValue: ['test'],
         options: options,
         multiple: true,
+        virtualScroll: false,
         renderTag: ({
           option,
           handleClose
@@ -213,8 +214,7 @@ describe('n-select', () => {
     expect(wrapper.find('.n-base-selection-tag-wrapper').exists()).toBe(true)
     expect(wrapper.findComponent(NTag).exists()).toBe(true)
     expect(wrapper.findComponent(NTag).props('type')).toContain('success')
-    wrapper.findComponent(NTag).vm.$emit('close')
-    await wrapper.findComponent(NTag).vm.$nextTick()
+    await wrapper.find('.n-tag__close').trigger('click')
     expect(wrapper.findComponent(NTag).exists()).toBe(false)
   })
 })

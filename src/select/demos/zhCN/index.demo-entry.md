@@ -57,7 +57,7 @@ render-debug
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | 受控模式下的值 |
-| virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动 |
+| virtual-scroll | `boolean` | `true` | 是否启用虚拟滚动 |
 | on-blur | `() => void` | `undefined` | 选择器 Blur 时发出 |
 | on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | 在输入内容时如何创建一个选项。注意 `filter` 对这个生成的选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复 |
 | on-focus | `() => void` | `undefined` | 选择器 Focus 时发出 |
