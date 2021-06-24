@@ -24,7 +24,6 @@ validator-debug
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| form-props | `object` |  |  |
 | inline | `boolean` | `false` |  |
 | label-width | `number \| string` | `undefined` | 标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用 |
 | label-align | `'left' \| 'right'` | `'left'` | 标签的文本对齐方式 |

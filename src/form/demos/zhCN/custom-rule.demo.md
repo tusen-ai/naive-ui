@@ -18,7 +18,6 @@
       v-model:value="model.password"
       @input="handlePasswordInput"
       type="password"
-      autocomplete="new-password"
       @keydown.enter.prevent
     />
   </n-form-item>

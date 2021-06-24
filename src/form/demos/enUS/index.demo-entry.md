@@ -22,7 +22,6 @@ async
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| form-props | `object` |  |  |
 | inline | `boolean` | `false` |  |
 | label-width | `number \| string` | `undefined` | The width of label. Can be useful when `label-placement` is `'left'`. |
 | label-align | `'left' \| 'right'` | `'left'` | Text align in label. |

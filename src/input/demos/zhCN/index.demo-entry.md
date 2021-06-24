@@ -17,7 +17,6 @@ pair
 input-group
 passively-activated
 count
-pass-standard-props
 ```
 
 ## Props

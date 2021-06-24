@@ -833,6 +833,7 @@ export default defineComponent({
           {this.type === 'textarea' ? (
             <div class={`${mergedClsPrefix}-input__textarea`}>
               <textarea
+                {...this.inputProps}
                 ref="textareaElRef"
                 class={`${mergedClsPrefix}-input__textarea-el`}
                 autofocus={this.autofocus}
@@ -851,7 +852,6 @@ export default defineComponent({
                 onFocus={this.handleInputFocus}
                 onInput={this.handleInput}
                 onChange={this.handleChange}
-                {...this.inputProps}
               />
               {this.showPlaceholder1 ? (
                 <div
@@ -878,6 +878,7 @@ export default defineComponent({
           ) : (
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
+                {...this.inputProps}
                 ref="inputElRef"
                 type={
                   this.type === 'password' &&
@@ -907,7 +908,6 @@ export default defineComponent({
                 onFocus={this.handleInputFocus}
                 onInput={(e) => this.handleInput(e, 0)}
                 onChange={(e) => this.handleChange(e, 0)}
-                {...this.inputProps}
               />
               {this.showPlaceholder1 ? (
                 <div class={`${mergedClsPrefix}-input__placeholder`}>

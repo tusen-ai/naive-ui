@@ -1,11 +1,4 @@
-import {
-  h,
-  defineComponent,
-  PropType,
-  provide,
-  ExtractPropTypes,
-  FormHTMLAttributes
-} from 'vue'
+import { h, defineComponent, PropType, provide, ExtractPropTypes } from 'vue'
 import { ErrorList } from 'async-validator'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -40,7 +33,6 @@ const formProps = {
     type: String as PropType<LabelPlacement>,
     default: 'top'
   },
-  formProps: Object as PropType<FormHTMLAttributes>,
   model: {
     type: Object as PropType<Record<string, any>>,
     default: () => {}
@@ -134,7 +126,6 @@ export default defineComponent({
           this.inline && `${mergedClsPrefix}-form--inline`
         ]}
         onSubmit={this.onSubmit}
-        {...this.formProps}
       >
         {this.$slots}
       </form>
