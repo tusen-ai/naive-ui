@@ -10,6 +10,8 @@
 - `n-menu` 新增 `dropdown-placement` 属性
 - `n-upload` 新增 `before-upload` 属性
 - 支持小键盘的 enter 键
+- `n-spin` 支持 `icon` 插槽为了自定义加载图标，closes[#260](https://github.com/TuSimple/naive-ui/issues/260)
+- `n-spin` 新增 `rotate` 属性控制自定义加载图标是否有旋转动画
 
 ### Fixes
 

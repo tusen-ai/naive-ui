@@ -10,6 +10,8 @@
 - `n-menu` add `dropdown-placement` prop.
 - `n-upload` add `before-upload` prop.
 - Support the enter key on the numeric keypad.
+- `n-spin` support `icon` slot for icon customizing, closes[#260](https://github.com/TuSimple/naive-ui/issues/260).
+- `n-spin` add `rotate` prop fro slot icon to rotate.
 
 ### Fixes
 
