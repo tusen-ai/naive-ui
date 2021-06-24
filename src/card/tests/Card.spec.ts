@@ -13,45 +13,14 @@ describe('n-card', () => {
 
     await wrapper.setProps({ title: 'test' })
     expect(wrapper.find('.n-card-header').exists()).toBe(true)
-    expect(wrapper.find('.n-card-header__main').element.textContent).toBe(
-      'test'
-    )
+    expect(wrapper.find('.n-card-header__main').text()).toBe('test')
   })
 
   it('should work with `size` prop', async () => {
     const wrapper = mount(NCard)
 
     await wrapper.setProps({ size: 'small' })
-    const smallStyle = [
-      '--padding-top: 12px; --padding-bottom: 12px; --padding-left: 16px;',
-      '--title-font-size: 16px;'
-    ]
-    let cardStyle = wrapper.find('.n-card').attributes('style')
-    expect(smallStyle.every((i) => cardStyle.includes(i))).toBe(true)
-
-    await wrapper.setProps({ size: 'medium' })
-    const mediumStyle = [
-      '--padding-top: 19px; --padding-bottom: 20px; --padding-left: 24px;',
-      '--title-font-size: 18px;'
-    ]
-    cardStyle = wrapper.find('.n-card').attributes('style')
-    expect(mediumStyle.every((i) => cardStyle.includes(i))).toBe(true)
-
-    await wrapper.setProps({ size: 'large' })
-    const largeStyle = [
-      '--padding-top: 23px; --padding-bottom: 24px; --padding-left: 32px;',
-      '--title-font-size: 18px;'
-    ]
-    cardStyle = wrapper.find('.n-card').attributes('style')
-    expect(largeStyle.every((i) => cardStyle.includes(i))).toBe(true)
-
-    await wrapper.setProps({ size: 'huge' })
-    const hugeStyle = [
-      '--padding-top: 27px; --padding-bottom: 28px; --padding-left: 40px;',
-      '--title-font-size: 18px;'
-    ]
-    cardStyle = wrapper.find('.n-card').attributes('style')
-    expect(hugeStyle.every((i) => cardStyle.includes(i))).toBe(true)
+    expect(wrapper.find('.n-card').attributes('style')).toMatchSnapshot()
   })
 
   it('should work with `hoverable` prop', async () => {
@@ -77,26 +46,22 @@ describe('n-card', () => {
     })
 
     expect(wrapper.find('.n-card-cover').exists()).toBe(true)
-    expect(wrapper.find('.n-card-cover').element.textContent).toBe('cover')
+    expect(wrapper.find('.n-card-cover').text()).toBe('cover')
 
     expect(wrapper.find('.n-card-header').exists()).toBe(true)
-    expect(wrapper.find('.n-card-header__main').element.textContent).toBe(
-      'header'
-    )
+    expect(wrapper.find('.n-card-header__main').text()).toBe('header')
 
     expect(wrapper.find('.n-card-header__extra').exists()).toBe(true)
-    expect(wrapper.find('.n-card-header__extra').element.textContent).toBe(
-      'header-extra'
-    )
+    expect(wrapper.find('.n-card-header__extra').text()).toBe('header-extra')
 
     expect(wrapper.find('.n-card__content').exists()).toBe(true)
-    expect(wrapper.find('.n-card__content').element.textContent).toBe('content')
+    expect(wrapper.find('.n-card__content').text()).toBe('content')
 
     expect(wrapper.find('.n-card__footer').exists()).toBe(true)
-    expect(wrapper.find('.n-card__footer').element.textContent).toBe('footer')
+    expect(wrapper.find('.n-card__footer').text()).toBe('footer')
 
     expect(wrapper.find('.n-card__action').exists()).toBe(true)
-    expect(wrapper.find('.n-card__action').element.textContent).toBe('action')
+    expect(wrapper.find('.n-card__action').text()).toBe('action')
   })
 
   it('should work with `bordered` prop', async () => {
