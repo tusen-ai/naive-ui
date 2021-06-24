@@ -4,6 +4,7 @@ import { NSelect, SelectProps } from '../index'
 import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
 import { SelectOption, SelectGroupOption } from '../'
 import { NTag } from '../../tag'
+import { SelectBaseOption } from '../src/interface'
 
 describe('n-select', () => {
   it('should work with import on demand', () => {
@@ -189,13 +190,19 @@ describe('n-select', () => {
         defaultValue: ['test'],
         options: options,
         multiple: true,
-        renderTag: ({ option, onClose }: any) => {
+        renderTag: ({
+          option,
+          handleClose
+        }: {
+          option: SelectBaseOption
+          handleClose: () => void
+        }) => {
           return h(
             NTag,
             {
-              type: option.type,
+              type: option.type as 'success',
               closable: true,
-              onClose: onClose
+              onClose: handleClose
             },
             { default: () => option.label }
           )
@@ -206,5 +213,8 @@ describe('n-select', () => {
     expect(wrapper.find('.n-base-selection-tag-wrapper').exists()).toBe(true)
     expect(wrapper.findComponent(NTag).exists()).toBe(true)
     expect(wrapper.findComponent(NTag).props('type')).toContain('success')
+    wrapper.findComponent(NTag).vm.$emit('close')
+    await wrapper.findComponent(NTag).vm.$nextTick()
+    expect(wrapper.findComponent(NTag).exists()).toBe(false)
   })
 })

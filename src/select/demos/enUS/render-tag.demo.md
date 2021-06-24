@@ -1,4 +1,4 @@
-# Custom Tag Render
+# Custom Tag Rendering
 
 Give the tag a little color.
 

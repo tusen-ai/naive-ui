@@ -3,6 +3,7 @@
 ## Pending
 
 - `n-select` add `render-tag` prop.
+
 ### Feats
 
 - `n-menu` add `dropdown-placement` prop.

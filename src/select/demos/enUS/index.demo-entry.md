@@ -50,7 +50,7 @@ render-tag
 | render-tag | `(option: SelectBaseOption, onClose: () => void) => VNodeChild` | `undefined` | Render function of all the tag. |
 | show | `boolean` | `undefined` | Whether to show menu. |
 | show-arrow | `boolean` | `true` | Whether to show arrow. |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of select box. |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |
 | tag | `boolean` | `false` | Whether it can create new option, should be used with `filterable`. |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | Value in controlled mode. |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scrolling. |
