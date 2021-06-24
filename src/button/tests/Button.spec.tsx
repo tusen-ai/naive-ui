@@ -157,19 +157,31 @@ describe('n-button', () => {
           })
       }
     })
-    const circleReg =
-      /^(?=.*--width: 34px;)(?=.*--padding: initial;)(?=.*--border-radius: 34px;).*$/im
-    expect(wrapper.find('button').attributes('style')).toMatch(circleReg)
+    const circleStyle = [
+      '--width: 34px;',
+      '--padding: initial;',
+      '--border-radius: 34px;'
+    ]
+    let buttonStyle = wrapper.find('button').attributes('style')
+    expect(circleStyle.every((i) => buttonStyle.includes(i))).toBe(true)
 
     await wrapper.setProps({ circle: false, round: true })
-    const roundReg =
-      /^(?=.*--width: initial;)(?=.*--padding: 0 18px;)(?=.*--border-radius: 34px;).*$/im
-    expect(wrapper.find('button').attributes('style')).toMatch(roundReg)
+    const roundStyle = [
+      '--width: initial;',
+      '--padding: 0 18px;',
+      '--border-radius: 34px;'
+    ]
+    buttonStyle = wrapper.find('button').attributes('style')
+    expect(roundStyle.every((i) => buttonStyle.includes(i))).toBe(true)
 
     await wrapper.setProps({ circle: false, round: false })
-    const defaultReg =
-      /^(?=.*--width: initial;)(?=.*--padding: 0 14px;)(?=.*--border-radius: 3px;).*$/im
-    expect(wrapper.find('button').attributes('style')).toMatch(defaultReg)
+    const defaultStyle = [
+      '--width: initial;',
+      '--padding: 0 14px;',
+      '--border-radius: 3px;'
+    ]
+    buttonStyle = wrapper.find('button').attributes('style')
+    expect(defaultStyle.every((i) => buttonStyle.includes(i))).toBe(true)
   })
 
   it('should work with `ghost` prop', () => {
@@ -212,9 +224,13 @@ describe('n-button', () => {
     })
 
     expect(wrapper.find('button').classes()).toContain('n-button--color')
-    const reg =
-      /^(?=.*--color: #8a2be2;)(?=.*--color-disabled: #8a2be2;)(?=.*--ripple-color: #8a2be2;).*$/im
-    expect(wrapper.find('button').attributes('style')).toMatch(reg)
+    const colorStyle = [
+      '--color: #8a2be2;',
+      '--color-disabled: #8a2be2;',
+      '--ripple-color: #8a2be2;'
+    ]
+    const buttonStyle = wrapper.find('button').attributes('style')
+    expect(colorStyle.every((i) => buttonStyle.includes(i))).toBe(true)
   })
 
   it('should work with `button group`', async () => {
