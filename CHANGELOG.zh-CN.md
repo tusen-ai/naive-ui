@@ -941,7 +941,3 @@
 ### Features
 
 - `n-data-table` 增加了 empty 插槽 [#86](https://github.com/TuSimple/naive-ui/issues/86)
-
-### Docs
-
-- common-issues 增加了对 onUpdate: xxx 和@update: xxx 的区别的解释[#124](https://github.com/TuSimple/naive-ui/issues/124)

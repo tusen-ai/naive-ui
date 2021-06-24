@@ -939,7 +939,3 @@ See vue3.md
 ### Features
 
 - `n-date-table` add `empty` slot. [#86](https://github.com/TuSimple/naive-ui/issues/86)
-
-### Docs
-
-- Common-issues adds an explanation of the difference between onUpdate: xxx and @update: xxx.[#124](https://github.com/TuSimple/naive-ui/issues/124)
