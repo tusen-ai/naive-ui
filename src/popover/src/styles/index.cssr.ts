@@ -61,7 +61,7 @@ export default c([
         padding: 'var(--padding)'
       })
     ]),
-    cE('title', `
+    cE('header', `
       position: relative;
       left: -14px;
       font-size: var(--font-size);

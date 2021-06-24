@@ -238,12 +238,10 @@ export default defineComponent({
           [
             slots.header || props.title ? (
               <>
-                <div class={`${mergedClsPrefix}-popover__title`}>
+                <div class={`${mergedClsPrefix}-popover__header`}>
                   {renderSlot(slots, 'header', {}, () => [props.title])}
                 </div>
-                <div class={`${mergedClsPrefix}-popover__content`}>
-                  {renderSlot(slots, 'default')}
-                </div>
+                <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
               </>
             ) : (
               renderSlot(slots, 'default')

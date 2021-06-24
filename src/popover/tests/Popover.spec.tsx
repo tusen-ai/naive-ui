@@ -126,25 +126,43 @@ describe('n-popover', () => {
     wrapper.unmount()
   })
 
-  it('title', () => {
-    mount(NPopover, {
+  it('title', async () => {
+    const popoverBodyHeader = '.n-popover__header'
+    const id = createId()
+    const triggerClass = `trigger-${id}`
+    const wrapper = mount(NPopover, {
+      attachTo: document.body,
       props: {
+        trigger: 'click',
         title: 'I am a title'
       },
       slots: {
-        trigger: () => 'star kirby',
+        trigger: () => <div class={triggerClass}>click</div>,
         default: () => <div>star kirby</div>
       }
     })
+    await wrapper.find(`.${triggerClass}`).trigger('click')
+    expect(document.querySelector(popoverBodyHeader)).not.toEqual(null)
+    wrapper.unmount()
   })
 
-  it('header slot', () => {
-    mount(NPopover, {
+  it('header slot', async () => {
+    const id = createId()
+    const triggerClass = `trigger-${id}`
+    const headerClass = `header-${id}`
+    const wrapper = mount(NPopover, {
+      attachTo: document.body,
+      props: {
+        trigger: 'click'
+      },
       slots: {
-        trigger: () => 'star kirby',
-        header: () => 'I am a title',
+        trigger: () => <div class={triggerClass}>click</div>,
+        header: () => <div class={headerClass}>I am title</div>,
         default: () => <div>star kirby</div>
       }
     })
+    await wrapper.find(`.${triggerClass}`).trigger('click')
+    expect(document.querySelector(`.${headerClass}`)).not.toEqual(null)
+    wrapper.unmount()
   })
 })
