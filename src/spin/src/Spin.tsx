@@ -4,7 +4,8 @@ import {
   h,
   Transition,
   PropType,
-  CSSProperties
+  CSSProperties,
+  renderSlot
 } from 'vue'
 import { useCompitable } from 'vooks'
 import { pxfy } from 'seemly'
@@ -118,7 +119,10 @@ export default defineComponent({
                   stroke={this.stroke}
                   strokeWidth={this.mergedStrokeWidth}
                   class={`${mergedClsPrefix}-spin`}
-                />
+                  show={!$slots.icon}
+                >
+                  {$slots.icon ? renderSlot($slots, 'icon') : null}
+                </NBaseLoading>
               ) : null
           }}
         </Transition>
@@ -130,7 +134,10 @@ export default defineComponent({
         stroke={this.stroke}
         stroke-width={this.mergedStrokeWidth}
         class={`${mergedClsPrefix}-spin`}
-      />
+        show={!$slots.icon}
+      >
+        {$slots.icon ? renderSlot($slots, 'icon') : null}
+      </NBaseLoading>
     )
   }
 })

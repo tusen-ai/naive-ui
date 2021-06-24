@@ -7,6 +7,7 @@ It can be called loading, but why it's called loading? Because there is another 
 ```demo
 basic
 wrap
+customize-icon
 ```
 
 ## Props
@@ -23,3 +24,4 @@ wrap
 | Name    | Parameters | Description                        |
 | ------- | ---------- | ---------------------------------- |
 | default | `()`       | If set, spin will wrap the content |
+| icon | `()`       | Customize the spin icon |
