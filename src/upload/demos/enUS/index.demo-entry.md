@@ -40,7 +40,7 @@ before-upload
 | on-update:file-list | `(fileList: UploadFile[]) => void` | `undefined` | Callback function triggered on fileList changes. |
 | on-finish | `(options: { file: UploadFile }) => UploadFile \| void` | `({ file }) => file` | The callback of file upload finish. You can modify the UploadFile or retun a new UploadFile. |
 | on-remove | `(options: { file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any` | `() => true` | The callback of file removal. Return false, promise resolve false or promise reject will cancel this removal. |
-| on-before-upadte | `(options: { file: FileList, fileList: Array<UploadFile> }) => Promise<boolean>` | `true` | Statements made before file upload, return false or undefined will cancel this upload.  |
+| on-before-upload | `(options: { file: FileList, fileList: Array<UploadFile> }) => (Promise<boolean> \| boolean)` | `true` | Callback before file is uploaded, return false or a Promise that resolve false or reject will cancel this upload.  |
 ### UploadFile Type
 
 | Property | Type | Description |
