@@ -36,8 +36,8 @@ export default defineComponent({
     if (renderLabel) {
       children = renderLabel(rawNode, false)
     } else {
-      children = rawNode.render
-        ? rawNode.render(rawNode)
+      children = rawNode.renderLabel
+        ? rawNode.renderLabel(rawNode)
         : render(rawNode.label ?? rawNode.name, rawNode)
     }
     return <div class={`${clsPrefix}-base-select-group-header`}>{children}</div>

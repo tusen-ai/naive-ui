@@ -57,7 +57,7 @@ export default defineComponent({
     if (__DEV__ && props.tmNode.rawNode.render) {
       warn(
         'select',
-        'render prop in select option is deprecated, please use `render-label` prop in `n-select`.'
+        'render prop in select option is removed, please use `renderLabel` on option or`render-label` prop in `n-select`.'
       )
     }
     const {
@@ -138,8 +138,8 @@ export default defineComponent({
     if (renderLabel) {
       children = [renderLabel(rawNode, isSelected), checkmark]
     } else {
-      children = rawNode.render
-        ? [rawNode.render(rawNode, isSelected), checkmark]
+      children = rawNode.renderLabel
+        ? [rawNode.renderLabel(rawNode, isSelected), checkmark]
         : [render(rawNode.label, rawNode, isSelected), checkmark]
     }
     return (
