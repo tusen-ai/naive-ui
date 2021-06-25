@@ -2,6 +2,8 @@
 
 ## Pending
 
+- `n-input` add standard property `input-props`
+
 ### Feats
 
 - `n-carousel` supports touch operation, closes [#271](https://github.com/TuSimple/naive-ui/issues/271).

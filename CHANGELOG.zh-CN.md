@@ -2,6 +2,8 @@
 
 ## Pending
 
+- `n-input` 添加原生属性 `input-props`
+
 ### Feats
 
 - `n-carousel` 支持触控操作，关闭 [#271](https://github.com/TuSimple/naive-ui/issues/271)
