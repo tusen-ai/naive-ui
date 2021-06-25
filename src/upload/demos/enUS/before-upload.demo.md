@@ -26,10 +26,10 @@ export default defineComponent({
     const message = useMessage()
     return {
       async beforeUpload({ file, fileList }) {
-        const isntPng = [...file].filter(
+        const isNotPng = [...file].filter(
           (file) => file.type !== 'image/png'
         ).length
-        if (isntPng) {
+        if (isNotPng) {
           message.error('Only upload picture files in png format, please re-upload.')
           return false
         }
