@@ -30,23 +30,23 @@ size
 
 ### Description Item Props
 
-| Name  | Type     | Default     | Description                        |
-| ----- | -------- | ----------- | ---------------------------------- |
-| label | `string` | `undefined` | Label of the item. |
-| span  | `number` | `1`         | Column span of the item.             |
+| Name  | Type     | Default     | Description              |
+| ----- | -------- | ----------- | ------------------------ |
+| label | `string` | `undefined` | Label of the item.       |
+| span  | `number` | `1`         | Column span of the item. |
 
 ## Slots
 
 ### Descriptions Slots
 
-| Name    | Parameters | Description                                    |
-| ------- | ---------- | ---------------------------------------------- |
-| default | `()`       | Content.   |
+| Name    | Parameters | Description     |
+| ------- | ---------- | --------------- |
+| default | `()`       | Content.        |
 | header  | `()`       | Header content. |
 
 ### Description Item Slots
 
-| Name    | Parameters | Description                      |
-| ------- | ---------- | -------------------------------- |
+| Name    | Parameters | Description   |
+| ------- | ---------- | ------------- |
 | default | `()`       | Item content. |
-| label   | `()`       |  Item label.   |
+| label   | `()`       | Item label.   |
