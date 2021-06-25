@@ -1,4 +1,6 @@
-# Limit uploading of files
+# Before Upload Hook
+
+Use `before-upload` to prevent uploading.
 
 ```html
 <n-upload
