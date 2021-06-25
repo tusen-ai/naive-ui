@@ -33,7 +33,6 @@ export default defineComponent({
           message.error('Only upload picture files in png format, please re-upload.')
           return false
         }
-        console.log(file)
         return true
       }
     }
