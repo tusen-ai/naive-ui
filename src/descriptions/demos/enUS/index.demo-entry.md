@@ -21,12 +21,12 @@ size
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| bordered | `boolean` | `false` | Descriptions whether to display border. |
-| column | `number` | `3` | Descriptions total columns. |
-| label-align | `'center' \| 'left' \| 'right'` | `'left'` | Descriptions align in label. |
-| label-placement | `'top' \| 'left'` | `'top'` | Descriptions label placement. |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Descriptions size. |
-| title | `string` | `undefined` | Descriptions title. |
+| bordered | `boolean` | `false` | Whether to display border. |
+| column | `number` | `3` | Total columns. |
+| label-align | `'center' \| 'left' \| 'right'` | `'left'` | Label align. |
+| label-placement | `'top' \| 'left'` | `'top'` | Label placement. |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the description. |
+| title | `string` | `undefined` | Title of the description. |
 
 ### Description Item Props
 
