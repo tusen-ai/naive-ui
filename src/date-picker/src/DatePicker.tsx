@@ -333,7 +333,11 @@ export default defineComponent({
       if (value === null) {
         singleInputValueRef.value = ''
       } else {
-        singleInputValueRef.value = format(value, mergedFormatRef.value)
+        singleInputValueRef.value = format(
+          value,
+          mergedFormatRef.value,
+          dateFnsOptionsRef.value
+        )
       }
     }
     function deriveRangeInputState (values: [number, number] | null): void {
@@ -341,8 +345,17 @@ export default defineComponent({
         rangeStartInputValueRef.value = ''
         rangeEndInputValueRef.value = ''
       } else {
-        rangeStartInputValueRef.value = format(values[0], mergedFormatRef.value)
-        rangeEndInputValueRef.value = format(values[1], mergedFormatRef.value)
+        const dateFnsOptions = dateFnsOptionsRef.value
+        rangeStartInputValueRef.value = format(
+          values[0],
+          mergedFormatRef.value,
+          dateFnsOptions
+        )
+        rangeEndInputValueRef.value = format(
+          values[1],
+          mergedFormatRef.value,
+          dateFnsOptions
+        )
       }
     }
     // --- Input deactivate & blur
