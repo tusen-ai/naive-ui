@@ -11,6 +11,7 @@
 ### Fixes
 
 - Fix `n-date-picker` `n-provider` pass `date-locale` not work, closes [#250](https://github.com/TuSimple/naive-ui/issues/250).
+- Fix `n-input` clear button placeholder prevent clicking on actual component [#288](https://github.com/TuSimple/naive-ui/issues/288)
 
 ## 2.14.0 (2021-06-23)
 
