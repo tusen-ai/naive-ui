@@ -48,5 +48,5 @@ size
 
 | Name    | Parameters | Description                      |
 | ------- | ---------- | -------------------------------- |
-| default | `()`       | Content of the description item. |
-| label   | `()`       | Descriptions item label slot.    |
+| default | `()`       | Item content. |
+| label   | `()`       |  Item label.   |
