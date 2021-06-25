@@ -32,8 +32,8 @@ size
 
 | Name  | Type     | Default     | Description                        |
 | ----- | -------- | ----------- | ---------------------------------- |
-| label | `string` | `undefined` | The label of the description item. |
-| span  | `number` | `1`         | Description item span.             |
+| label | `string` | `undefined` | Label of the item. |
+| span  | `number` | `1`         | Column span of the item.             |
 
 ## Slots
 
