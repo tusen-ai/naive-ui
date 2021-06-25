@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-select` 的 `SelectOption` `render` 属性被重命名为 `renderLabel`
+
 ### Feats
 
 - `n-carousel` 支持触控操作，关闭 [#271](https://github.com/TuSimple/naive-ui/issues/271)
