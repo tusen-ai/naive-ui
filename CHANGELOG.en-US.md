@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-carousel` supports touch operation, closes [#271](https://github.com/TuSimple/naive-ui/issues/271).
+- `n-input` add `input-props` prop.
 
 ### Fixes
 

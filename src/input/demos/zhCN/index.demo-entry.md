@@ -30,6 +30,7 @@ count
 | clearable | `boolean` | `false` |  |
 | default-value | `string \| [string, string] \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
+| input-props | `object` | `undefined` | 组件中 input 元素的属性，对 `pair` 类型不生效 |
 | show-password-toggle | `boolean` | `false` | 控制密码的显示隐藏 |
 | maxlength | `number` | `undefined` |  |
 | minlength | `number` | `undefined` |  |
