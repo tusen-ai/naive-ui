@@ -27,7 +27,8 @@ import {
   OnDownload,
   OnChange,
   uploadInjectionKey,
-  OnUpdateFileList
+  OnUpdateFileList,
+  OnBeforeUpload
 } from './interface'
 import { useMergedState } from 'vooks'
 import { uploadDraggerKey } from './UploadDragger'
@@ -203,6 +204,7 @@ const uploadProps = {
   onChange: Function as PropType<OnChange>,
   onRemove: Function as PropType<OnRemove>,
   onFinish: Function as PropType<OnFinish>,
+  onBeforeUpload: Function as PropType<OnBeforeUpload>,
   /** currently of no usage */
   onDownload: Function as PropType<OnDownload>,
   defaultUpload: {
@@ -312,22 +314,35 @@ export default defineComponent({
     }
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files) return
-      Array.from(files).forEach((file) => {
-        const fileInfo: FileInfo = {
-          id: createId(),
-          name: file.name,
-          status: 'pending',
-          percentage: 0,
-          file: file,
-          url: null
-        }
-        doChange(fileInfo, e, {
-          append: true
+      const file = Array.from(files)
+      const {onBeforeUpload} = props
+      Promise.resolve(
+        onBeforeUpload
+        ? onBeforeUpload({
+          file: files,
+          fileList: mergedFileListRef.value
         })
+        : true 
+      ).then(result => {
+        console.log(result)
+        if(result === false || result === undefined) return 
+        Array.from(file).forEach((file) => {
+          const fileInfo: FileInfo = {
+            id: createId(),
+            name: file.name,
+            status: 'pending',
+            percentage: 0,
+            file: file,
+            url: null
+          }
+          doChange(fileInfo, e, {
+            append: true
+          })
+        })
+        if (props.defaultUpload) {
+          submit()
+        }
       })
-      if (props.defaultUpload) {
-        submit()
-      }
     }
     function submit (fileId?: string): void {
       const {

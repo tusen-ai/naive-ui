@@ -73,3 +73,8 @@ export interface XhrHandlers {
 export interface UploadInst {
   submit: () => void
 }
+
+export type OnBeforeUpload = (data: {
+  file: FileList | null
+  fileList: FileInfo[]
+}) => Promise<boolean> 
