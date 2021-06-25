@@ -3,13 +3,7 @@
 有时候内置的 trigger 无法满足验证的需要。你可以通过设定自定的 trigger 然后手动触发它来控制验证。
 
 ```html
-<n-form
-  :model="model"
-  ref="formRef"
-  :rules="rules"
-  autocomplete="off"
-  name="custom-rule"
->
+<n-form :model="model" ref="formRef" :rules="rules">
   <n-form-item path="age" label="年龄">
     <n-input v-model:value="model.age" @keydown.enter.prevent />
   </n-form-item>
