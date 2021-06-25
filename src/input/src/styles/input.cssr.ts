@@ -305,9 +305,6 @@ export default c([
       justify-content: center;
       color: var(--suffix-text-color);
     `, [
-      cB('base-clear--no-pointer', {
-        pointerEvents: 'none'
-      }),
       cB('base-clear', {
         fontSize: 'var(--icon-size)'
       }, [

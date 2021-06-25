@@ -31,13 +31,7 @@ export default defineComponent({
   render () {
     const { clsPrefix } = this
     return (
-      <div
-        class={[
-          `${clsPrefix}-base-clear`,
-          this.show ? '' : `${clsPrefix}-base-clear--no-pointer`
-        ]}
-        data-clear
-      >
+      <div class={[`${clsPrefix}-base-clear`]}>
         <NIconSwitchTransition>
           {{
             default: () => {
@@ -48,6 +42,7 @@ export default defineComponent({
                   class={`${clsPrefix}-base-clear__clear`}
                   onClick={this.onClear}
                   onMousedown={this.handleMouseDown}
+                  data-clear
                 >
                   {{
                     default: () => <ClearIcon />
