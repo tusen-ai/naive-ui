@@ -68,6 +68,7 @@ export default c([
       font-weight: var(--title-font-weight);
       color: var(--title-text-color);
       padding: var(--padding);
+      padding-top: 0;
       width: 100%;
       border-bottom: 1px solid var(--divider-color);
     `),
