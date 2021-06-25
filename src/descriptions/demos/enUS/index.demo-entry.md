@@ -41,8 +41,8 @@ size
 
 | Name    | Parameters | Description                                    |
 | ------- | ---------- | ---------------------------------------------- |
-| default | `()`       | Content of the descriptions.                   |
-| header  | `()`       | The content placed in the descriptions header. |
+| default | `()`       | Content.   |
+| header  | `()`       | Header content. |
 
 ### Description Item Slots
 
