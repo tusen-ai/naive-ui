@@ -57,6 +57,7 @@ import {
   Size,
   timePickerInjectionKey
 } from './interface'
+import { happensIn } from 'seemly'
 
 const timePickerProps = {
   ...(useTheme.props as ThemeProps<TimePickerTheme>),
@@ -297,6 +298,12 @@ export default defineComponent({
         transitionDisabledRef.value = false
       })
     }
+    function handleTriggerClick (e: MouseEvent): void {
+      if (props.disabled || happensIn(e, 'clear')) return
+      if (!activeRef.value) {
+        openPanel()
+      }
+    }
     function handleHourClick (hour: number): void {
       if (mergedValueRef.value === null) {
         doChange(getTime(setHours(startOfHour(new Date()), hour)))
@@ -533,6 +540,7 @@ export default defineComponent({
       handleTimeInputClear,
       handleFocusDetectorFocus,
       handleMenuKeyDown,
+      handleTriggerClick,
       mergedTheme: themeRef,
       triggerCssVars: computed(() => {
         const {
@@ -618,6 +626,7 @@ export default defineComponent({
                       onClear={this.handleTimeInputClear}
                       internalDeactivateOnEnter
                       internalForceFocus={this.active}
+                      onClick={this.handleTriggerClick}
                     >
                       {this.showIcon
                         ? {
