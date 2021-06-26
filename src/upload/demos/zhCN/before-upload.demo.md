@@ -1,5 +1,7 @@
 # 限制上传文件
 
+使用 `before-upload` 限制上传。
+
 ```html
 <n-upload
   action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
@@ -11,7 +13,7 @@
   }"
   @before-upload="beforeUpload"
 >
-  <n-button>上传PNG文件</n-button>
+  <n-button>上传 PNG 文件</n-button>
 </n-upload>
 ```
 
@@ -24,10 +26,10 @@ export default defineComponent({
     const message = useMessage()
     return {
       async beforeUpload({ file, fileList }) {
-        const isntPng = [...file].filter(
+        const isNotPng = file.filter(
           (file) => file.type !== 'image/png'
         ).length
-        if (isntPng) {
+        if (isNotPng) {
           message.error('只能上传png格式的图片文件，请重新上传')
           return false
         }
