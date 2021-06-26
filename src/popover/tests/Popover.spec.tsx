@@ -3,6 +3,8 @@ import { mount } from '@vue/test-utils'
 import { NPopover, PopoverInst } from '../index'
 import { createId } from 'seemly'
 
+const popoverBodyHeader = '.n-popover__header'
+
 async function sleep (ms: number): Promise<void> {
   return await new Promise((resolve) => {
     setTimeout(resolve, ms)
@@ -127,42 +129,38 @@ describe('n-popover', () => {
   })
 
   it('title', async () => {
-    const popoverBodyHeader = '.n-popover__header'
-    const id = createId()
-    const triggerClass = `trigger-${id}`
     const wrapper = mount(NPopover, {
       attachTo: document.body,
       props: {
-        trigger: 'click',
-        title: 'I am a title'
+        show: true,
+        title: 'I am title'
       },
       slots: {
-        trigger: () => <div class={triggerClass}>click</div>,
+        trigger: () => <div>click</div>,
         default: () => <div>star kirby</div>
       }
     })
-    await wrapper.find(`.${triggerClass}`).trigger('click')
-    expect(document.querySelector(popoverBodyHeader)).not.toEqual(null)
+    expect(document.querySelector(popoverBodyHeader)?.textContent).toEqual(
+      'I am title'
+    )
     wrapper.unmount()
   })
 
   it('header slot', async () => {
-    const id = createId()
-    const triggerClass = `trigger-${id}`
-    const headerClass = `header-${id}`
     const wrapper = mount(NPopover, {
       attachTo: document.body,
       props: {
-        trigger: 'click'
+        show: true
       },
       slots: {
-        trigger: () => <div class={triggerClass}>click</div>,
-        header: () => <div class={headerClass}>I am title</div>,
+        trigger: () => <div>click</div>,
+        header: () => <div>I am title</div>,
         default: () => <div>star kirby</div>
       }
     })
-    await wrapper.find(`.${triggerClass}`).trigger('click')
-    expect(document.querySelector(`.${headerClass}`)).not.toEqual(null)
+    expect(document.querySelector(popoverBodyHeader)?.textContent).toEqual(
+      'I am title'
+    )
     wrapper.unmount()
   })
 })

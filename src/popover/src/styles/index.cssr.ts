@@ -62,20 +62,16 @@ export default c([
       })
     ]),
     cE('header', `
-      position: relative;
-      left: -14px;
       font-size: var(--font-size);
       font-weight: var(--title-font-weight);
       color: var(--title-text-color);
       padding: var(--padding);
-      padding-top: 0;
-      width: 100%;
       border-bottom: 1px solid var(--divider-color);
     `),
     cE('content', `
       font-size: var(--font-size);
       color: var(--text-color);
-      padding-top: 8px;
+      padding: var(--padding);
     `),
     cB('popover-arrow-wrapper', `
       position: absolute;

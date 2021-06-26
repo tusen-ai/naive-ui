@@ -151,6 +151,10 @@ export default defineComponent({
         '--space-arrow': spaceArrow
       }
     })
+
+    const hasHeaderRef = computed(() => {
+      return !(slots.header || props.title) && props.padded
+    })
     NPopover.setBodyInstance({
       syncPosition
     })
@@ -224,7 +228,7 @@ export default defineComponent({
                   [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
                   [`${mergedClsPrefix}-popover--show-arrow`]: props.showArrow,
                   [`${mergedClsPrefix}-popover--shadow`]: props.shadow,
-                  [`${mergedClsPrefix}-popover--padded`]: props.padded,
+                  [`${mergedClsPrefix}-popover--padded`]: hasHeaderRef.value,
                   [`${mergedClsPrefix}-popover--raw`]: props.raw
                 }
               ],
@@ -246,7 +250,6 @@ export default defineComponent({
             ) : (
               renderSlot(slots, 'default')
             ),
-
             props.showArrow ? (
               <div
                 class={`${mergedClsPrefix}-popover-arrow-wrapper`}

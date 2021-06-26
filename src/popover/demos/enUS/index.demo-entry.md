@@ -48,7 +48,7 @@ header
 | Name    | Parameters | Description                                     |
 | ------- | ---------- | ----------------------------------------------- |
 | trigger | `()`       | The element or component that triggers popover. |
-| header  | `()`       | The header content of the popover.                  |
+| header  | `()`       | The header content of the popover.              |
 | default | `()`       | The content inside popover.                     |
 
 ## Methods
