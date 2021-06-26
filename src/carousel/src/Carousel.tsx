@@ -60,8 +60,9 @@ export default defineComponent({
     function setCurrent (value: number): void {
       if (lengthRef.value <= 1) return
       if (inTransition) return
-      inTransition = true
       const { value: current } = currentRef
+      if (value === current) return
+      inTransition = true
       if (current === 1 && value === lengthRef.value && value - current > 1) {
         currentRef.value--
       } else if (
