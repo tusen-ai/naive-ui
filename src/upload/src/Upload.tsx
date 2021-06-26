@@ -314,7 +314,7 @@ export default defineComponent({
     }
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files) return
-      const file = Array.from(files)
+      const copyFiles = Array.from(files)
       const {onBeforeUpload} = props
       Promise.resolve(
         onBeforeUpload
@@ -324,9 +324,8 @@ export default defineComponent({
         })
         : true 
       ).then(result => {
-        console.log(result)
-        if(result === false || result === undefined) return 
-        Array.from(file).forEach((file) => {
+        if(result === false) return 
+        Array.from(copyFiles).forEach((file) => {
           const fileInfo: FileInfo = {
             id: createId(),
             name: file.name,
