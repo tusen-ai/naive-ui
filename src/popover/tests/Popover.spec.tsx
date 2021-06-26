@@ -16,7 +16,6 @@ describe('n-popover', () => {
     mount(NPopover, {
       slots: {
         trigger: () => 'star kirby',
-        header: () => 'I am title',
         default: () => <div>star kirby</div>
       }
     })
@@ -128,7 +127,7 @@ describe('n-popover', () => {
     wrapper.unmount()
   })
 
-  it('title', async () => {
+  it('title', () => {
     const wrapper = mount(NPopover, {
       attachTo: document.body,
       props: {
@@ -146,7 +145,7 @@ describe('n-popover', () => {
     wrapper.unmount()
   })
 
-  it('header slot', async () => {
+  it('header slot', () => {
     const wrapper = mount(NPopover, {
       attachTo: document.body,
       props: {
