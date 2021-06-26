@@ -26,7 +26,7 @@ export default defineComponent({
     const message = useMessage()
     return {
       async beforeUpload({ file, fileList }) {
-        const isNotPng = file.filter(
+        const isNotPng = [...file].filter(
           (file) => file.type !== 'image/png'
         ).length
         if (isNotPng) {
