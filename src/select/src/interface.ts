@@ -13,7 +13,7 @@ export interface SelectBaseOption<V = string | number> {
   class?: string
   style?: string | CSSProperties
   disabled?: boolean
-  render?: (option: SelectBaseOption<V>, selected: boolean) => VNodeChild
+  renderLabel?: (option: SelectBaseOption<V>, selected: boolean) => VNodeChild
   [k: string]: unknown
 }
 
@@ -22,7 +22,7 @@ export interface SelectGroupOptionBase {
   label: string
   type: 'group'
   children: SelectBaseOption[]
-  render?: (option: SelectGroupOption) => VNodeChild
+  renderLabel?: (option: SelectGroupOption) => VNodeChild
   [k: string]: unknown
 }
 
