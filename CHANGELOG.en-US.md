@@ -10,6 +10,7 @@
 
 - `n-carousel` supports touch operation, closes [#271](https://github.com/TuSimple/naive-ui/issues/271).
 - `n-input` add `input-props` prop.
+- `n-message` optimize `useMessage` when there is no `n-message-provider`, report an error and prompt the related document link.
 
 ### Fixes
 
