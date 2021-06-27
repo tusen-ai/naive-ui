@@ -346,7 +346,6 @@ export default defineComponent({
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const { value: labelPlacement } = labelPlacementRef
-        const { value: labelAlignInProps } = labelTextAlignRef
         const direction = labelPlacement === 'top' ? 'vertical' : 'horizontal'
         const {
           common: { cubicBezierEaseInOut },
@@ -368,6 +367,9 @@ export default defineComponent({
               labelFontSize
           }
         } = themeRef.value
+
+        const labelTextAlign = labelTextAlignRef.value ?? labelDefaultTextAlign
+
         return {
           '--bezier': cubicBezierEaseInOut,
           '--line-height': lineHeight,
@@ -383,7 +385,7 @@ export default defineComponent({
           '--feedback-text-color': feedbackTextColor,
           '--feedback-text-color-warning': feedbackTextColorWarning,
           '--feedback-text-color-error': feedbackTextColorError,
-          '--label-text-align': labelAlignInProps ?? labelDefaultTextAlign
+          '--label-text-align': labelTextAlign
         }
       })
     }
