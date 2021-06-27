@@ -39,7 +39,7 @@ before-upload
 | on-change | `(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |
 | on-finish | `(options: { file: UploadFile }) => UploadFile \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFile 或者返回一个新的 UploadFile |
 | on-update:file-list | `(fileList: UploadFile[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |
-| on-before-upadte | `(options: { file: FileList, fileList: Array<UploadFile> }) => Promise<boolean>` | `true` | 文件上传之前的回调，返回 `false` , `Promise resolve false` , `Promise rejected` 会取消本次上传 |
+| on-before-upadte | `(options: { file: FileList, fileList: Array<UploadFile> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | 文件上传之前的回调，返回 `false` , `Promise resolve false` , `Promise rejected` 会取消本次上传 |
 ### UploadFile Type
 
 | 属性 | 类型 | 说明 |
