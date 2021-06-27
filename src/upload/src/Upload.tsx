@@ -325,7 +325,7 @@ export default defineComponent({
         : true 
       ).then(result => {
         if(result === false) return 
-        Array.from(copyFiles).forEach((file) => {
+        clonedFiles.forEach((file) => {
           const fileInfo: FileInfo = {
             id: createId(),
             name: file.name,
