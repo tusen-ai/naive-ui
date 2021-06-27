@@ -31,8 +31,10 @@
   "files": [
     "es",
     "lib",
+    "web-types.json",
     "README.md"
   ],
+  "web-types": "./web-types.json",
   "lint-staged": {
     "*.js": [
       "prettier --write",
