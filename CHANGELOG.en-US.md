@@ -15,6 +15,7 @@
 
 - Fix `n-date-picker` `n-provider` pass `date-locale` not work, closes [#250](https://github.com/TuSimple/naive-ui/issues/250).
 - Fix `n-input` clear button placeholder prevent clicking on actual component [#288](https://github.com/TuSimple/naive-ui/issues/288)
+- Fix `n-form` `label-align` prop not work, closes [#213](https://github.com/TuSimple/naive-ui/issues/213)
 
 ## 2.14.0 (2021-06-23)
 
@@ -60,7 +61,6 @@
 - Fix `n-button`'s loading icon doesn't show on iOS Safari, closes [#219](https://github.com/TuSimple/naive-ui/issues/219).
 - Fix `n-date-picker` doesn't show icon when clearable.
 - Fix `n-time-picker` icon mis-aligned when clearable, closes [#222](https://github.com/TuSimple/naive-ui/issues/222).
-- Fix `n-form` `label-align` prop not work, closes [#213](https://github.com/TuSimple/naive-ui/issues/213)
 
 ## 2.12.2 (2021-06-19)
 

@@ -2,7 +2,6 @@
 
 ## Pending
 
-
 ### Breaking Changes
 
 - `n-select` 的 `SelectOption` `render` 属性被重命名为 `renderLabel`
@@ -16,6 +15,7 @@
 
 - 修复 `n-date-picker` `n-provider` 传递 `date-locale` 属性无效，关闭 [#250](https://github.com/TuSimple/naive-ui/issues/250)
 - Fix `n-input` clear button placeholder prevent clicking on actual component [#288](https://github.com/TuSimple/naive-ui/issues/288)
+- 修复 `n-form` `label-align` 属性失效，关闭 [#213](https://github.com/TuSimple/naive-ui/issues/213)
 
 ## 2.14.0 (2021-06-23)
 
@@ -61,7 +61,6 @@
 - 修复 `n-button` 的 loading 图标在 iOS Safari 上不显示，关闭 [#219](https://github.com/TuSimple/naive-ui/issues/219)
 - 修复 `n-date-picker` 非 clearable 不显示图标
 - 修复 `n-time-picker` clearable 状态下图标位置不正确，关闭 [#222](https://github.com/TuSimple/naive-ui/issues/222)
-- 修复 `n-form` `label-align` 属性失效，关闭 [#213](https://github.com/TuSimple/naive-ui/issues/213)
 
 ## 2.12.2 (2021-06-19)
 
