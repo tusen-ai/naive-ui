@@ -314,7 +314,7 @@ export default defineComponent({
     }
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files) return
-      const copyFiles = Array.from(files)
+      const clonedFiles = Array.from(files)
       const {onBeforeUpload} = props
       Promise.resolve(
         onBeforeUpload
