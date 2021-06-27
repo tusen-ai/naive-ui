@@ -8,7 +8,8 @@ export {
   keysOf,
   render,
   getFirstSlotVNode,
-  createDataKey
+  createDataKey,
+  createRefSetter
 } from './vue'
 export type { MaybeArray } from './vue'
 export { warn, warnOnce, throwError, smallerSize, largerSize } from './naive'

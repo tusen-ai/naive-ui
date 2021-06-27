@@ -19,6 +19,7 @@
 - Fix `n-input` clear button placeholder prevent clicking on actual component [#288](https://github.com/TuSimple/naive-ui/issues/288)
 - 修复 `n-carousel` 点击当前页对应的控制按钮时，组件显示异常
 - 修复 `n-menu` 折叠时 `render-label` 对于 tooltip 不生效
+- 修复 `n-dropdown` 不能在选项中渲染 `n-popover`
 
 ## 2.14.0 (2021-06-23)
 
