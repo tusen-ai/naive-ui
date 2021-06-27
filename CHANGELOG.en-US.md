@@ -19,6 +19,7 @@
 - Fix `n-input` clear button placeholder prevent clicking on actual component [#288](https://github.com/TuSimple/naive-ui/issues/288)
 - Fix `n-carousel` click the at current item button, the component behaves abnormally.
 - Fix `n-menu` `render-label` not working for tooltip in collapsed mode.
+- Fix `n-dropdown` can't render `n-popover` in option.
 
 ## 2.14.0 (2021-06-23)
 
