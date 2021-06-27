@@ -8,7 +8,7 @@ export function useMessage (): MessageApiInjection {
   if (api === null) {
     throwError(
       'use-message',
-      'No outer <n-message-provider /> founded. See Prerequisite in https://www.naiveui.com/en-US/os-theme/components/message for more details.'
+      'No outer <n-message-provider /> founded. See prerequisite in https://www.naiveui.com/en-US/os-theme/components/message for more details. If you want to use `useMessage` outside setup, please check https://www.naiveui.com/zh-CN/os-theme/components/message#Q-&-A.'
     )
   }
   return api
