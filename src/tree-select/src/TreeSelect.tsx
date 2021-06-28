@@ -73,6 +73,10 @@ const props = {
   },
   disabled: Boolean,
   filterable: Boolean,
+  leafOnly: {
+    type: Boolean,
+    default: false
+  },
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
   options: {
@@ -624,7 +628,7 @@ export default defineComponent({
                     >
                       {{
                         default: () => {
-                          if (!this.mergedShow) return null
+                          // if (!this.mergedShow) return null
                           const {
                             mergedClsPrefix,
                             filteredTreeInfo,
@@ -661,6 +665,7 @@ export default defineComponent({
                                   selectedKeys={this.treeSelectedKeys}
                                   checkable={checkable}
                                   cascade={this.mergedCascade}
+                                  leafOnly={this.leafOnly}
                                   multiple={this.multiple}
                                   virtualScroll={
                                     this.consistentMenuWidth &&

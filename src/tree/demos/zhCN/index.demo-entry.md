@@ -39,6 +39,7 @@ disabled
 | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |
 | filter | `(node: TreeOption) => boolean` | 一个简单的字符串过滤算法 |  |
+| leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
 | multiple | `boolean` | `false` |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` |  |
 | pattern | `string` | `''` |  |
