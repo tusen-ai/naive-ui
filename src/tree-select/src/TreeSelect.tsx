@@ -628,7 +628,7 @@ export default defineComponent({
                     >
                       {{
                         default: () => {
-                          // if (!this.mergedShow) return null
+                          if (!this.mergedShow) return null
                           const {
                             mergedClsPrefix,
                             filteredTreeInfo,
