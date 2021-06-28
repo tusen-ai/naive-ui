@@ -73,10 +73,7 @@ const props = {
   },
   disabled: Boolean,
   filterable: Boolean,
-  leafOnly: {
-    type: Boolean,
-    default: false
-  },
+  leafOnly: Boolean,
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
   options: {

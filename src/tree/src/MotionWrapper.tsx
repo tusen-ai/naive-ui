@@ -1,8 +1,8 @@
-import { h, defineComponent, PropType, VNode } from 'vue'
+import { h, defineComponent, PropType } from 'vue'
 import { pxfy } from 'seemly'
 import FadeInExpandTransition from '../../_internal/fade-in-expand-transition'
 import { TmNode } from './interface'
-import NTreeNode from './TreeNode'
+import TreeNode from './TreeNode'
 
 export default defineComponent({
   name: 'TreeMotionWrapper',
@@ -23,36 +23,10 @@ export default defineComponent({
     onAfterEnter: {
       type: Function as PropType<() => void>,
       required: true
-    },
-    selectable: {
-      type: Boolean,
-      default: true
-    },
-    checkable: Boolean,
-    leafOnly: {
-      type: Boolean,
-      default: false
     }
   },
   render () {
-    const { clsPrefix, selectable, checkable, leafOnly } = this
-    const createNode = (tmNode: TmNode): VNode => {
-      let mergeSelectable = selectable
-      let mergeCheckable = checkable
-      if (leafOnly) {
-        mergeSelectable = tmNode.isLeaf
-        mergeCheckable = mergeCheckable ? tmNode.isLeaf : false
-      }
-      return (
-        <NTreeNode
-          key={tmNode.key}
-          tmNode={tmNode}
-          clsPrefix={clsPrefix}
-          selectable={mergeSelectable}
-          checkable={mergeCheckable}
-        />
-      )
-    }
+    const { clsPrefix } = this
     return (
       <FadeInExpandTransition
         onAfterEnter={this.onAfterEnter}
@@ -70,7 +44,9 @@ export default defineComponent({
                 height: pxfy(this.height)
               }}
             >
-              {this.nodes.map((node) => createNode(node))}
+              {this.nodes.map((node) => (
+                <TreeNode clsPrefix={clsPrefix} tmNode={node} />
+              ))}
             </div>
           )
         }}

@@ -107,10 +107,7 @@ const treeProps = {
     default: () => []
   },
   remote: Boolean,
-  leafOnly: {
-    type: Boolean,
-    default: false
-  },
+  leafOnly: Boolean,
   multiple: Boolean,
   pattern: {
     type: String,
@@ -499,7 +496,7 @@ export default defineComponent({
       nodeKeyToBeExpanded = null
     }
     function handleCheck (node: TmNode, checked: boolean): void {
-      if (props.leafOnly && node.children && node.children.length > 0) return
+      if (props.leafOnly && !node.isLeaf) return
       if (props.disabled || node.disabled) return
       const { checkedKeys } = dataTreeMateRef.value![
         checked ? 'check' : 'uncheck'
@@ -527,7 +524,7 @@ export default defineComponent({
       toggleExpand(node.key)
     }
     function handleSelect (node: TmNode): void {
-      if (props.leafOnly && node.children && node.children.length > 0) return
+      if (props.leafOnly && !node.isLeaf) return
       if (props.disabled || node.disabled || !props.selectable) return
       pendingNodeKeyRef.value = node.key
       if (props.internalCheckOnSelect) {
@@ -948,6 +945,9 @@ export default defineComponent({
       mergedExpandedKeysRef,
       mergedThemeRef: themeRef,
       disabledRef: toRef(props, 'disabled'),
+      checkable: toRef(props, 'checkable'),
+      leafOnly: toRef(props, 'leafOnly'),
+      selectable: toRef(props, 'selectable'),
       remoteRef: toRef(props, 'remote'),
       onLoadRef: toRef(props, 'onLoad'),
       draggableRef: toRef(props, 'draggable'),
@@ -1030,10 +1030,7 @@ export default defineComponent({
       mergedClsPrefix,
       blockNode,
       blockLine,
-      checkable,
       draggable,
-      selectable,
-      leafOnly,
       disabled,
       internalFocusable,
       handleKeyup,
@@ -1048,12 +1045,6 @@ export default defineComponent({
       blockLine && `${mergedClsPrefix}-tree--block-line`
     ]
     const createNode = (tmNode: TmNode | MotionData): VNode => {
-      let mergeSelectable = selectable
-      let mergeCheckable = checkable
-      if (leafOnly && !('__motion' in tmNode)) {
-        mergeSelectable = tmNode.isLeaf
-        mergeCheckable = mergeCheckable ? tmNode.isLeaf : false
-      }
       return '__motion' in tmNode ? (
         <MotionWrapper
           height={tmNode.height}
@@ -1061,17 +1052,12 @@ export default defineComponent({
           clsPrefix={mergedClsPrefix}
           mode={tmNode.mode}
           onAfterEnter={this.handleAfterEnter}
-          selectable={this.selectable}
-          checkable={this.checkable}
-          leafOnly={this.leafOnly}
         />
       ) : (
         <NTreeNode
           key={tmNode.key}
           tmNode={tmNode}
           clsPrefix={mergedClsPrefix}
-          selectable={mergeSelectable}
-          checkable={mergeCheckable}
         />
       )
     }

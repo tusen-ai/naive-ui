@@ -28,14 +28,6 @@ const TreeNode = defineComponent({
     tmNode: {
       type: Object as PropType<TmNode>,
       required: true
-    },
-    selectable: {
-      type: Boolean,
-      default: true
-    },
-    checkable: {
-      type: Boolean,
-      default: true
     }
   },
   setup (props) {
@@ -54,6 +46,7 @@ const TreeNode = defineComponent({
     const contentInstRef = ref<null | ComponentPublicInstance>(null)
     // must be non-reactive
     const contentElRef: { value: HTMLElement | null } = { value: null }
+
     onMounted(() => {
       contentElRef.value = contentInstRef.value!.$el as HTMLElement
     })
@@ -185,7 +178,17 @@ const TreeNode = defineComponent({
       disabled: computed(
         () => NTree.disabledRef.value || props.tmNode.disabled
       ),
+      checkable: computed(() =>
+        NTree.leafOnly
+          ? NTree.checkable.value
+            ? props.tmNode.isLeaf
+            : false
+          : NTree.checkable.value
+      ),
       checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
+      selectable: computed(() =>
+        NTree.leafOnly ? props.tmNode.isLeaf : NTree.selectable.value
+      ),
       internalScrollable: NTree.internalScrollableRef,
       draggable: NTree.draggableRef,
       blockLine: NTree.blockLineRef,
@@ -237,6 +240,9 @@ const TreeNode = defineComponent({
     // In non virtual mode, there's no evidence that which element should be
     // scrolled to, so we need data-key to query the target element.
     const dataKey = internalScrollable ? createDataKey(tmNode.key) : undefined
+
+    console.log('tmNode.rawNode', tmNode)
+
     return (
       <div class={`${clsPrefix}-tree-node-wrapper`} {...dragEventHandlers}>
         <div

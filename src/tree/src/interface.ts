@@ -70,6 +70,9 @@ export interface TreeInjection {
   droppingPositionRef: Ref<null | DropPosition>
   droppingOffsetLevelRef: Ref<number>
   disabledRef: Ref<boolean>
+  checkable: Ref<boolean>
+  leafOnly: Ref<boolean>
+  selectable: Ref<boolean>
   pendingNodeKeyRef: Ref<null | Key>
   internalScrollableRef: Ref<boolean>
   internalCheckboxFocusableRef: Ref<boolean>

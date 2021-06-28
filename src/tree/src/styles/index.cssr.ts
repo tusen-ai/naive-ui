@@ -75,20 +75,13 @@ export default cB('tree', `
         cursor: not-allowed;
       `)
     ]),
-    cM('selectable', [
-      cB('tree-node-content', `
-        cursor: pointer;
-      `)
-    ])
-  ]),
-  cM('selectable', [
-    cM('block-line', [
-      cB('tree-node', [
-        cNotM('disabled', `
-          cursor: pointer;
-        `)
-      ])
-    ])
+    cNotM('disabled', [
+      cM('selectable', [
+        cB('tree-node-content', `
+            cursor: pointer;
+          `)
+      ])]
+    )
   ]),
   cM('block-node', [
     cB('tree-node-content', `
