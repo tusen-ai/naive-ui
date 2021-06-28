@@ -21,4 +21,5 @@ lib
 es
 *.tsbuildinfo
 pnpm-lock.yaml
+web-types.json
 ~*
