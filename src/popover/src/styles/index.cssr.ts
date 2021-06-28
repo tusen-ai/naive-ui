@@ -62,15 +62,15 @@ export default c([
       })
     ]),
     cE('header', `
-      font-size: var(--font-size);
       font-weight: var(--title-font-weight);
       color: var(--title-text-color);
       padding: var(--padding);
       border-bottom: 1px solid var(--divider-color);
+      transition:
+        color .3s var(--bezier),
+        border-color .3s var(--bezier);
     `),
     cE('content', `
-      font-size: var(--font-size);
-      color: var(--text-color);
       padding: var(--padding);
     `),
     cB('popover-arrow-wrapper', `

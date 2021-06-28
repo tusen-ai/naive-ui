@@ -17,7 +17,8 @@ import {
   CSSProperties,
   VNode,
   renderSlot,
-  Fragment
+  Fragment,
+  Ref
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerInst } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
@@ -151,10 +152,6 @@ export default defineComponent({
         '--space-arrow': spaceArrow
       }
     })
-
-    const hasHeaderRef = computed(() => {
-      return !(slots.header || props.title) && props.padded
-    })
     NPopover.setBodyInstance({
       syncPosition
     })
@@ -209,7 +206,7 @@ export default defineComponent({
     provide(drawerBodyInjectionKey, null)
     provide(modalBodyInjectionKey, null)
 
-    function renderContentNode (): VNode | null {
+    function renderContentNode (hasHeaderRef: Ref): VNode | null {
       let contentNode: VNode
       const {
         internalRenderBodyRef: { value: renderBody }
@@ -294,6 +291,9 @@ export default defineComponent({
     }
   },
   render () {
+    const hasHeaderRef = computed(() => {
+      return !(this.$slots.header || this.title) && this.padded
+    })
     return h(
       VFollower,
       {
@@ -327,10 +327,10 @@ export default defineComponent({
                 }
               },
               {
-                default: this.renderContentNode
+                default: () => this.renderContentNode(hasHeaderRef)
               }
             )
-            : this.renderContentNode()
+            : this.renderContentNode(hasHeaderRef)
         }
       }
     )
