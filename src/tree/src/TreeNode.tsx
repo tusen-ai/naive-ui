@@ -179,15 +179,17 @@ const TreeNode = defineComponent({
         () => NTree.disabledRef.value || props.tmNode.disabled
       ),
       checkable: computed(() =>
-        NTree.leafOnly
-          ? NTree.checkable.value
+        NTree.leafOnlyRef.value
+          ? NTree.checkableRef.value
             ? props.tmNode.isLeaf
             : false
-          : NTree.checkable.value
+          : NTree.checkableRef.value
       ),
       checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
       selectable: computed(() =>
-        NTree.leafOnly ? props.tmNode.isLeaf : NTree.selectable.value
+        NTree.leafOnlyRef.value
+          ? props.tmNode.isLeaf
+          : NTree.selectableRef.value
       ),
       internalScrollable: NTree.internalScrollableRef,
       draggable: NTree.draggableRef,
