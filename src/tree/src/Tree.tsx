@@ -109,7 +109,7 @@ const treeProps = {
   remote: Boolean,
   leafOnly: {
     type: Boolean,
-    default: true
+    default: false
   },
   multiple: Boolean,
   pattern: {
@@ -1050,8 +1050,7 @@ export default defineComponent({
       let mergeSelectable = selectable
       let mergeCheckable = checkable
       if (leafOnly && !('__motion' in tmNode)) {
-        mergeSelectable =
-          !(tmNode.children && tmNode.children.length > 0)
+        mergeSelectable = !(tmNode.children && tmNode.children.length > 0)
         mergeCheckable = mergeCheckable
           ? !(tmNode.children && tmNode.children.length > 0)
           : false
