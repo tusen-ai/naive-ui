@@ -10,7 +10,8 @@ import {
   CSSProperties,
   InjectionKey,
   Ref,
-  mergeProps
+  mergeProps,
+  VNodeChild
 } from 'vue'
 import { createTreeMate, Key, TreeMateOptions, TreeNode } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
@@ -59,6 +60,7 @@ DropdownIgnoredOption
 }
 
 export interface DropdownInjection {
+  props: DropdownProps
   hoverKeyRef: Ref<Key | null>
   keyboardKeyRef: Ref<Key | null>
   lastToggledSubmenuKeyRef: Ref<Key | null>
@@ -97,7 +99,8 @@ const dropdownBaseProps = {
     default: () => []
   },
   // for menu, not documented
-  value: [String, Number] as PropType<Key | null>
+  value: [String, Number] as PropType<Key | null>,
+  renderLabel: Function as PropType<(option: DropdownMixedOption) => VNodeChild>
 } as const
 
 const popoverPropKeys = Object.keys(popoverBaseProps) as Array<
@@ -197,6 +200,7 @@ export default defineComponent({
     )
 
     provide(dropdownInjectionKey, {
+      props,
       hoverKeyRef: hoverKeyRef,
       keyboardKeyRef: keyboardKeyRef,
       lastToggledSubmenuKeyRef: lastToggledSubmenuKeyRef,
