@@ -24,9 +24,9 @@
 ```
 
 ```js
-import { ref } from 'vue'
+import { ref, defineComponent } from 'vue'
 import { Reload } from '@vicons/ionicons5'
-export default {
+export default defineComponent({
   components: {
     Reload
   },
@@ -35,5 +35,5 @@ export default {
       show: ref(false)
     }
   }
-}
+})
 ```

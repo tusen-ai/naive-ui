@@ -119,9 +119,8 @@ export default defineComponent({
                   stroke={this.stroke}
                   strokeWidth={this.mergedStrokeWidth}
                   class={`${mergedClsPrefix}-spin`}
-                  show={!$slots.icon}
                 >
-                  {$slots.icon ? renderSlot($slots, 'icon') : null}
+                  {this.$slots.icon ? { icon: () => renderSlot(this.$slots, 'icon') } : null}
                 </NBaseLoading>
               ) : null
           }}
@@ -134,9 +133,8 @@ export default defineComponent({
         stroke={this.stroke}
         stroke-width={this.mergedStrokeWidth}
         class={`${mergedClsPrefix}-spin`}
-        show={!$slots.icon}
       >
-        {$slots.icon ? renderSlot($slots, 'icon') : null}
+          {this.$slots.icon ? { icon: () => renderSlot(this.$slots, 'icon') } : null}
       </NBaseLoading>
     )
   }
