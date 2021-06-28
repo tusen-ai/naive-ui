@@ -35,6 +35,7 @@ long-label
 | inverted | `boolean` | `false` | Use inverted style. |
 | options | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | `[]` | Items data of menu. |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | Menu layout. |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | Only effective in horizontal mode. |
 | render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all labels. |
 | root-indent | `number` | `undefined` | The indent of menu's first level children. If not set, menu will use `indent` in place of it. |
 | value | `string \| null` | `undefined` | The selected name of menu. |
