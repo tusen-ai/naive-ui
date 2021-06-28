@@ -344,6 +344,7 @@ export default defineComponent({
         return
       }
       const { virtualScroll } = props
+
       const viewportHeight = (
         virtualScroll ? virtualListInstRef.value!.listElRef : selfElRef.value!
       ).offsetHeight
@@ -1050,10 +1051,8 @@ export default defineComponent({
       let mergeSelectable = selectable
       let mergeCheckable = checkable
       if (leafOnly && !('__motion' in tmNode)) {
-        mergeSelectable = !(tmNode.children && tmNode.children.length > 0)
-        mergeCheckable = mergeCheckable
-          ? !(tmNode.children && tmNode.children.length > 0)
-          : false
+        mergeSelectable = tmNode.isLeaf
+        mergeCheckable = mergeCheckable ? tmNode.isLeaf : false
       }
       return '__motion' in tmNode ? (
         <MotionWrapper
@@ -1062,6 +1061,9 @@ export default defineComponent({
           clsPrefix={mergedClsPrefix}
           mode={tmNode.mode}
           onAfterEnter={this.handleAfterEnter}
+          selectable={this.selectable}
+          checkable={this.checkable}
+          leafOnly={this.leafOnly}
         />
       ) : (
         <NTreeNode
