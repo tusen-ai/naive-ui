@@ -11,7 +11,13 @@ import {
 import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { ExtractPublicPropTypes, getFirstSlotVNode, warn, MaybeArray, call } from '../../_utils'
+import {
+  ExtractPublicPropTypes,
+  getFirstSlotVNode,
+  warn,
+  MaybeArray,
+  call
+} from '../../_utils'
 import { NFadeInExpandTransition } from '../../_internal'
 import { uploadLight, UploadTheme } from '../styles'
 import NUploadFile from './UploadFile'
@@ -213,9 +219,7 @@ const uploadProps = {
   'onUpdate:fileList': [Function, Array] as PropType<
   MaybeArray<OnUpdateFileList>
   >,
-  onUpdateFileList: [Function, Array] as PropType<
-  MaybeArray<OnUpdateFileList>
-  >,
+  onUpdateFileList: [Function, Array] as PropType<MaybeArray<OnUpdateFileList>>,
   fileListStyle: [String, Object] as PropType<string | CSSProperties>,
   defaultFileList: {
     type: Array as PropType<FileInfo[]>,
@@ -302,10 +306,7 @@ export default defineComponent({
       target.value = ''
     }
     function doUpdateFileList (files: FileInfo[]): void {
-      const {
-        'onUpdate:fileList': _onUpdateFileList,
-        onUpdateFileList,
-      } = props
+      const { 'onUpdate:fileList': _onUpdateFileList, onUpdateFileList } = props
       if (_onUpdateFileList) call(_onUpdateFileList, files)
       if (onUpdateFileList) call(onUpdateFileList, files)
       uncontrolledFileListRef.value = files

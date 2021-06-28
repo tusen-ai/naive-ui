@@ -51,6 +51,7 @@ export default defineComponent({
       maxIconSize: MenuChild.maxIconSize,
       activeIconSize: MenuChild.activeIconSize,
       mergedTheme: NMenu.mergedThemeRef,
+      menuProps,
       dropdownEnabled: useMemo(() => {
         return (
           props.root &&
@@ -71,7 +72,11 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, tmNode } = this
+    const {
+      mergedClsPrefix,
+      tmNode,
+      menuProps: { renderLabel }
+    } = this
     return (
       <div
         role="menuitem"
@@ -91,7 +96,8 @@ export default defineComponent({
           disabled={!this.dropdownEnabled || this.title === undefined}
         >
           {{
-            default: () => render(this.title),
+            default: () =>
+              renderLabel ? renderLabel(tmNode.rawNode) : render(this.title),
             trigger: () => (
               <NMenuOptionContent
                 tmNode={tmNode}

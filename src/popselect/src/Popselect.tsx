@@ -4,7 +4,7 @@ import type { PopoverInternalProps } from '../../popover/src/Popover'
 import { NPopover } from '../../popover'
 import type { PopoverInst, PopoverTrigger } from '../../popover'
 import NPopselectPanel, { panelPropKeys, panelProps } from './PopselectPanel'
-import { omit, keep } from '../../_utils'
+import { omit, keep, createRefSetter } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -73,15 +73,7 @@ export default defineComponent({
               style
             })}
             {...keep(this.$props, panelPropKeys)}
-            ref={
-              ((inst: { $el: HTMLElement | null } | null) => {
-                if (inst) {
-                  ref.value = inst.$el
-                } else {
-                  ref.value = null
-                }
-              }) as any
-            }
+            ref={createRefSetter(ref)}
             onMouseenter={onMouseenter}
             onMouseleave={onMouseleave}
           />

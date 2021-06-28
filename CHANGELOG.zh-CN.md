@@ -2,7 +2,6 @@
 
 ## Pending
 
-
 ### Breaking Changes
 
 - `n-select` 的 `SelectOption` `render` 属性被重命名为 `renderLabel`
@@ -11,11 +10,16 @@
 
 - `n-carousel` 支持触控操作，关闭 [#271](https://github.com/TuSimple/naive-ui/issues/271)
 - `n-input` 新增 `input-props` 属性
+- `n-message` 优化 `useMessage` 当没有 `n-message-provider` 时的报错信息，增加关联的文档链接
+- 为 webstorm 添加 `web-types.json`，但是我还是推荐使用 VSCode 和 Volar，`web-types.json` 只能为编码提供很有限的信息
 
 ### Fixes
 
 - 修复 `n-date-picker` `n-provider` 传递 `date-locale` 属性无效，关闭 [#250](https://github.com/TuSimple/naive-ui/issues/250)
 - Fix `n-input` clear button placeholder prevent clicking on actual component [#288](https://github.com/TuSimple/naive-ui/issues/288)
+- 修复 `n-carousel` 点击当前页对应的控制按钮时，组件显示异常
+- 修复 `n-menu` 折叠时 `render-label` 对于 tooltip 不生效
+- 修复 `n-dropdown` 不能在选项中渲染 `n-popover`
 
 ## 2.14.0 (2021-06-23)
 
