@@ -1,4 +1,4 @@
-import { h, defineComponent, toRef, renderSlot } from 'vue'
+import { h, defineComponent, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
 import NIconSwitchTransition from '../../icon-switch-transition'
 import style from './styles/index.cssr'
@@ -47,7 +47,7 @@ export default defineComponent({
           {{
             default: () =>
               this.show ? (
-                $slots.icon ? renderSlot(this.$slots, 'icon') : 
+                $slots.icon ? $slots.icon() :
                 <svg
                   class={`${clsPrefix}-base-loading__icon`}
                   viewBox={`0 0 ${2 * scaledRadius} ${2 * scaledRadius}`}

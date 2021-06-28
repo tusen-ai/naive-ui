@@ -17,6 +17,7 @@ describe('n-spin', () => {
       }
     })
 
-    expect(wrapper.find('.n-icon').exists()).toBe(true)
+    expect(wrapper.findComponent(NIcon).exists()).toBe(true)
+    expect(wrapper.findComponent(Reload).exists()).toBe(true)
   })
 })
