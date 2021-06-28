@@ -240,9 +240,6 @@ const TreeNode = defineComponent({
     // In non virtual mode, there's no evidence that which element should be
     // scrolled to, so we need data-key to query the target element.
     const dataKey = internalScrollable ? createDataKey(tmNode.key) : undefined
-
-    console.log('tmNode.rawNode', tmNode)
-
     return (
       <div class={`${clsPrefix}-tree-node-wrapper`} {...dragEventHandlers}>
         <div
