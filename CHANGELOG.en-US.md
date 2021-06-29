@@ -14,6 +14,7 @@
 - Add `web-types.json` for webstorm, however I recommend using VSCode and Volar. `web-types.json` only provides limited information for coding.
 - `n-tree-select` add `leaf-only` prop.
 - `n-tree` add `leaf-only` prop.
+- `n-popover` add `header` slot.
 
 ### Fixes
 

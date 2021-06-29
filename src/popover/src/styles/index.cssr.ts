@@ -1,6 +1,6 @@
 import { CNode } from 'css-render'
 import { FollowerPlacement } from 'vueuc'
-import { c, cB, cM, cNotM } from '../../../_utils/cssr'
+import { c, cB, cM, cNotM, cE } from '../../../_utils/cssr'
 
 const oppositePlacement = {
   top: 'bottom',
@@ -23,6 +23,7 @@ const oppositePlacement = {
 // --padding
 // --space
 // --space-arrow
+// --divider-color
 export default c([
   cB('popover', `
     transition:
@@ -33,6 +34,7 @@ export default c([
     position: relative;
     font-size: var(--font-size);
     color: var(--text-color);
+    box-shadow: var(--box-shadow);
   `, [
     // body transition
     c('&.popover-transition-enter-from, &.popover-transition-leave-to', `
@@ -56,11 +58,18 @@ export default c([
     cNotM('raw', `
       background-color: var(--color);
       border-radius: var(--border-radius);
+      var(--padding);
     `, [
-      cM('padded', {
-        padding: 'var(--padding)'
-      })
+      cNotM('show-header', 'padding: var(--padding);')
     ]),
+    cE('header', `
+      padding: var(--padding);
+      border-bottom: 1px solid var(--divider-color);
+      transition: border-color .3s var(--bezier);
+    `),
+    cE('content', `
+      padding: var(--padding);
+    `),
     cB('popover-arrow-wrapper', `
       position: absolute;
       overflow: hidden;
@@ -77,10 +86,7 @@ export default c([
         background-color: var(--color);
         pointer-events: all;
       `)
-    ]),
-    cM('shadow', {
-      boxShadow: 'var(--box-shadow)'
-    })
+    ])
   ]),
   placementStyle('top-start', `
     top: calc(-0.707 * var(--arrow-height));

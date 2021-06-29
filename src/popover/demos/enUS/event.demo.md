@@ -38,7 +38,7 @@ export default defineComponent({
     return {
       showPopover: ref(false),
       handleUpdateShow (show) {
-        message.success(show)
+        message.success(show ? 'show' : 'hide')
       }
     }
   }
