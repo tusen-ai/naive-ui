@@ -47,7 +47,7 @@ describe('n-select', () => {
       ]
       mount(() => <NSelect options={options} />).unmount()
     })
-    it('renderLabel', () => {
+    it('label as render function', () => {
       const options: SelectProps['options'] = [
         {
           label: () => 'cool1+1',
