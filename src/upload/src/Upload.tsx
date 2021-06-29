@@ -326,14 +326,10 @@ export default defineComponent({
             file: file,
             url: null
           }
-          const isPass = onBeforeUpload
-            ? await onBeforeUpload({
+          if (!onBeforeUpload || await onBeforeUpload({
               file: fileInfo,
               fileList: mergedFileListRef.value
-            })
-            : true
-
-          if (isPass === true) {
+            }) !== false) {
             doChange(fileInfo, e, {
               append: true
             })
