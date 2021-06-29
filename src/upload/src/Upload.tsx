@@ -314,26 +314,37 @@ export default defineComponent({
     }
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files) return
-      const clonedFiles = Array.from(files)
-      const {onBeforeUpload} = props
-      Promise.resolve(
-        onBeforeUpload
-        ? onBeforeUpload({
-          file: files,
-          fileList: mergedFileListRef.value
-        })
-        : true 
-      ).then(result => {
-        if(result === false) return 
-        clonedFiles.forEach((file) => {
-          const fileInfo: FileInfo = {
-            id: createId(),
-            name: file.name,
-            status: 'pending',
-            percentage: 0,
-            file: file,
-            url: null
+      const { onBeforeUpload } = props
+      const fileInfoList: FileInfo[] = Array.from(files).map((file) => {
+        return {
+          id: createId(),
+          name: file.name,
+          status: 'pending',
+          percentage: 0,
+          file: file,
+          url: null
+        }
+      })
+      if (onBeforeUpload) {
+        void Promise.all(
+          fileInfoList.map(async (fileInfo) => {
+            return await onBeforeUpload({
+              file: fileInfo,
+              fileList: mergedFileListRef.value
+            }).then((result) => {
+              if (!result) return
+              doChange(fileInfo, e, {
+                append: true
+              })
+            })
+          })
+        ).then(() => {
+          if (props.defaultUpload) {
+            submit()
           }
+        })
+      } else {
+        fileInfoList.forEach((fileInfo) => {
           doChange(fileInfo, e, {
             append: true
           })
@@ -341,7 +352,7 @@ export default defineComponent({
         if (props.defaultUpload) {
           submit()
         }
-      })
+      }
     }
     function submit (fileId?: string): void {
       const {
@@ -389,7 +400,7 @@ export default defineComponent({
       }
     ) => {
       const { append, remove } = options
-      const fileListAfterChange = mergedFileListRef.value
+      const fileListAfterChange = Array.from(mergedFileListRef.value)
       const fileIndex = fileListAfterChange.findIndex(
         (file) => file.id === fileAfterChange.id
       )

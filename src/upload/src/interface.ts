@@ -75,6 +75,6 @@ export interface UploadInst {
 }
 
 export type OnBeforeUpload = (data: {
-  file: FileList | null
+  file: FileInfo
   fileList: FileInfo[]
-}) => Promise<boolean> 
+}) => Promise<boolean>
