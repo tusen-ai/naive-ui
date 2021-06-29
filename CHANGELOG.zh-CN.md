@@ -12,6 +12,8 @@
 - `n-input` 新增 `input-props` 属性
 - `n-message` 优化 `useMessage` 当没有 `n-message-provider` 时的报错信息，增加关联的文档链接
 - 为 webstorm 添加 `web-types.json`，但是我还是推荐使用 VSCode 和 Volar，`web-types.json` 只能为编码提供很有限的信息
+- `n-tree-select` 新增 `leaf-only` 属性
+- `n-tree` 新增 `leaf-only` 属性
 
 ### Fixes
 

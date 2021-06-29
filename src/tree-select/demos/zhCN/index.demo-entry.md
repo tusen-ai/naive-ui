@@ -29,6 +29,7 @@ debug
 | expanded-keys | `Array<string \| number>` | `undefined` | 展开节点的 key |
 | filterable | `boolean` | `false` | 是否可过滤 |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | 过滤器函数 |
+| leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选时最多直接显示多少选项，设为 `'responsive'` 会保证最多一行 |
 | multiple | `boolean` | `false` | 是否支持多选 |
 | options | `TreeSelectOption[]` | `[]` | 选项 |

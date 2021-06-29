@@ -74,23 +74,14 @@ export default cB('tree', `
         color: var(--node-text-color-disabled);
         cursor: not-allowed;
       `)
-    ])
-  ]),
-  cM('selectable', [
-    cM('block-line', [
-      cB('tree-node', [
-        cNotM('disabled', `
-          cursor: pointer;
-        `)
-      ])
     ]),
-    cB('tree-node', [
-      cNotM('disabled', [
+    cNotM('disabled', [
+      cM('selectable', [
         cB('tree-node-content', `
-          cursor: pointer;
+               cursor: pointer;
         `)
-      ])
-    ])
+      ])]
+    )
   ]),
   cM('block-node', [
     cB('tree-node-content', `
@@ -188,6 +179,7 @@ export default cB('tree', `
     align-items: center;
     vertical-align: bottom;
     padding: 0 6px;
+    cursor: default;
     border-radius: var(--node-border-radius);
     text-decoration-color: #0000;
     text-decoration-line: underline;
