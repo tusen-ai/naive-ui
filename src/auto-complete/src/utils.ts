@@ -3,16 +3,20 @@ import {
   SelectGroupOption,
   SelectMixedOption
 } from '../../select/src/interface'
-import { AutoCompleteOption } from './interface'
+import {
+  AutoCompleteGroupOption,
+  AutoCompleteOption,
+  AutoCompleteOptions
+} from './interface'
 
 export function mapAutoCompleteOptionsToSelectOptions (
-  options: Array<AutoCompleteOption | SelectMixedOption>
+  options: AutoCompleteOptions
 ): SelectMixedOption[] {
   return options.map(convertAutoCompleteOptionToSelectOption)
 }
 
 function convertAutoCompleteOptionToSelectOption (
-  option: AutoCompleteOption | SelectMixedOption
+  option: AutoCompleteOption | AutoCompleteGroupOption | string
 ): SelectMixedOption {
   if (typeof option === 'string') {
     return {
@@ -24,8 +28,8 @@ function convertAutoCompleteOptionToSelectOption (
       type: 'group',
       label: option.label ?? (option.name as any),
       value: option.value ?? (option.name as any),
-      name: option.name as any,
-      children: (option.children as Array<string | SelectBaseOption>).map(
+      key: (option.key || option.name) as any,
+      children: (option.children as Array<string | AutoCompleteOption>).map(
         (groupOption) =>
           convertAutoCompleteOptionToSelectOption(
             groupOption

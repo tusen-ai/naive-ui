@@ -6,11 +6,12 @@ export type SelectMixedOption =
   | SelectGroupOption
   | SelectIgnoredOption
 
-export interface SelectBaseOption<V = string | number> {
+export interface SelectBaseOption<
+  V = string | number,
+  L = string | ((option: SelectBaseOption<V>, selected: boolean) => VNodeChild)
+> {
   value: V
-  label:
-  | string
-  | ((option: SelectBaseOption<V>, selected: boolean) => VNodeChild)
+  label: L
   class?: string
   style?: string | CSSProperties
   disabled?: boolean
