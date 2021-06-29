@@ -315,44 +315,36 @@ export default defineComponent({
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files) return
       const { onBeforeUpload } = props
-      const fileInfoList: FileInfo[] = files.map((file) => {
-        return {
-          id: createId(),
-          name: file.name,
-          status: 'pending',
-          percentage: 0,
-          file: file,
-          url: null
-        }
-      })
-      if (onBeforeUpload) {
-        void Promise.all(
-          fileInfoList.map((fileInfo) => {
-            return onBeforeUpload({
+
+      void Promise.all(
+        Array.from(files).map(async (file) => {
+          const fileInfo: FileInfo = {
+            id: createId(),
+            name: file.name,
+            status: 'pending',
+            percentage: 0,
+            file: file,
+            url: null
+          }
+          const isPass = onBeforeUpload
+            ? await onBeforeUpload({
               file: fileInfo,
               fileList: mergedFileListRef.value
-            }).then((result) => {
-              if (result === false) return
-              doChange(fileInfo, e, {
-                append: true
-              })
             })
-          })
-        ).then(() => {
+            : true
+
+          if (isPass === true) {
+            doChange(fileInfo, e, {
+              append: true
+            })
+          }
+        })
+      )
+        .then(() => {
           if (props.defaultUpload) {
             submit()
           }
         })
-      } else {
-        fileInfoList.forEach((fileInfo) => {
-          doChange(fileInfo, e, {
-            append: true
-          })
-        })
-        if (props.defaultUpload) {
-          submit()
-        }
-      }
     }
     function submit (fileId?: string): void {
       const {
