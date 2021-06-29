@@ -9,10 +9,10 @@ export type SelectMixedOption =
 export interface SelectBaseOption<V = string | number> {
   value: V
   /** label doesn't support render function since it will be used in callbacks */
-  label: string
-  class?:
+  label:
   | string
   | ((option: SelectBaseOption<V>, selected: boolean) => VNodeChild)
+  class?: string
   style?: string | CSSProperties
   disabled?: boolean
   render?: (info: {

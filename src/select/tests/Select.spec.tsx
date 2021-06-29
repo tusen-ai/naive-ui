@@ -50,20 +50,17 @@ describe('n-select', () => {
     it('renderLabel', () => {
       const options: SelectProps['options'] = [
         {
-          label: 'cool1',
-          value: 'cool1',
-          renderLabel: () => 'cool1+1'
+          label: () => 'cool1+1',
+          value: 'cool1'
         },
         {
           type: 'group',
-          label: 'cool',
+          label: () => 'cool1+2',
           key: 'group cool',
-          renderLabel: () => 'cool1+2',
           children: [
             {
-              label: 'cool2',
-              value: 'cool2',
-              renderLabel: () => 'cool1+3'
+              label: () => 'cool1+3',
+              value: 'cool2'
             }
           ]
         }
