@@ -22,18 +22,15 @@ import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
 export default defineComponent({
-  setup() {
+  setup () {
     const message = useMessage()
     return {
-      async beforeUpload({ file, fileList }) {
-        const isNotPng = [...file].filter(
-          (file) => file.type !== 'image/png'
-        ).length
+      async beforeUpload ({ file, fileList }) {
+        const isNotPng = file.file.type !== 'image/png'
         if (isNotPng) {
           message.error('只能上传png格式的图片文件，请重新上传')
           return false
         }
-        console.log(file)
         return true
       }
     }
