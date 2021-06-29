@@ -8,7 +8,6 @@ export type SelectMixedOption =
 
 export interface SelectBaseOption<V = string | number> {
   value: V
-  /** label doesn't support render function since it will be used in callbacks */
   label:
   | string
   | ((option: SelectBaseOption<V>, selected: boolean) => VNodeChild)
@@ -24,22 +23,12 @@ export interface SelectBaseOption<V = string | number> {
 }
 
 export interface SelectGroupOptionBase {
-  /** label doesn't support render function since it will be used in callbacks */
   label: string | ((option: SelectGroupOption) => VNodeChild)
   type: 'group'
   children: SelectBaseOption[]
   render?: (info: { node: VNode, option: SelectGroupOption }) => VNodeChild
   [k: string]: unknown
 }
-
-export type SelectGroupOption =
-  | (SelectGroupOptionBase & {
-    /** @deprecated should use key and label instead */
-    name?: string
-  })
-  | (SelectGroupOptionBase & {
-    key: string | number
-  })
 
 export interface SelectIgnoredOption {
   type: 'ignored'
@@ -79,3 +68,14 @@ SelectIgnoredOption
 >
 
 export type Size = 'small' | 'medium' | 'large'
+
+// Public interfaces
+export type SelectOption = SelectBaseOption<string | number>
+export type SelectGroupOption =
+  | (SelectGroupOptionBase & {
+    /** @deprecated should use key and label instead */
+    name?: string
+  })
+  | (SelectGroupOptionBase & {
+    key: string | number
+  })
