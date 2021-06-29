@@ -78,8 +78,8 @@ export default cB('tree', `
     cNotM('disabled', [
       cM('selectable', [
         cB('tree-node-content', `
-            cursor: pointer;
-          `)
+               cursor: pointer;
+        `)
       ])]
     )
   ]),

@@ -341,7 +341,6 @@ export default defineComponent({
         return
       }
       const { virtualScroll } = props
-
       const viewportHeight = (
         virtualScroll ? virtualListInstRef.value!.listElRef : selfElRef.value!
       ).offsetHeight
@@ -496,8 +495,7 @@ export default defineComponent({
       nodeKeyToBeExpanded = null
     }
     function handleCheck (node: TmNode, checked: boolean): void {
-      if (props.leafOnly && !node.isLeaf) return
-      if (props.disabled || node.disabled) return
+      if (props.disabled || node.disabled || (props.leafOnly && !node.isLeaf)) { return }
       const { checkedKeys } = dataTreeMateRef.value![
         checked ? 'check' : 'uncheck'
       ](node.key, displayedCheckedKeysRef.value, {
@@ -524,8 +522,12 @@ export default defineComponent({
       toggleExpand(node.key)
     }
     function handleSelect (node: TmNode): void {
-      if (props.leafOnly && !node.isLeaf) return
-      if (props.disabled || node.disabled || !props.selectable) return
+      if (
+        props.disabled ||
+        node.disabled ||
+        !props.selectable ||
+        (props.leafOnly && !node.isLeaf)
+      ) { return }
       pendingNodeKeyRef.value = node.key
       if (props.internalCheckOnSelect) {
         const {
