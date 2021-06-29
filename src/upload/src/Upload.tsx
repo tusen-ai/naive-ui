@@ -328,7 +328,7 @@ export default defineComponent({
       if (onBeforeUpload) {
         void Promise.all(
           fileInfoList.map((fileInfo) => {
-            return await onBeforeUpload({
+            return onBeforeUpload({
               file: fileInfo,
               fileList: mergedFileListRef.value
             }).then((result) => {
