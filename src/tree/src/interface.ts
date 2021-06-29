@@ -60,7 +60,6 @@ export interface TreeInjection {
   fNodesRef: Ref<Array<TreeNode<TreeOption>>>
   remoteRef: Ref<boolean>
   draggableRef: Ref<boolean>
-  checkableRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<TreeTheme>>
   onLoadRef: Ref<((node: TreeOption) => Promise<void>) | undefined>
   blockLineRef: Ref<boolean>
@@ -71,6 +70,9 @@ export interface TreeInjection {
   droppingPositionRef: Ref<null | DropPosition>
   droppingOffsetLevelRef: Ref<number>
   disabledRef: Ref<boolean>
+  checkableRef: Ref<boolean>
+  leafOnlyRef: Ref<boolean>
+  selectableRef: Ref<boolean>
   pendingNodeKeyRef: Ref<null | Key>
   internalScrollableRef: Ref<boolean>
   internalCheckboxFocusableRef: Ref<boolean>
