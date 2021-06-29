@@ -16,7 +16,8 @@ import {
   provide,
   CSSProperties,
   VNode,
-  renderSlot
+  renderSlot,
+  Fragment
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerInst } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
@@ -50,8 +51,6 @@ export const popoverBodyProps = {
   placement: String as PropType<FollowerPlacement>,
   width: [Number, String] as PropType<number | 'trigger'>,
   // private
-  shadow: Boolean,
-  padded: Boolean,
   animated: Boolean,
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   /** @deprecated */
@@ -118,6 +117,7 @@ export default defineComponent({
           padding,
           fontSize,
           textColor,
+          dividerColor,
           color,
           boxShadow,
           borderRadius,
@@ -134,6 +134,7 @@ export default defineComponent({
         '--font-size': fontSize,
         '--text-color': textColor,
         '--color': color,
+        '--divider-color': dividerColor,
         '--border-radius': borderRadius,
         '--arrow-height': arrowHeight,
         '--arrow-offset': arrowOffset,
@@ -215,8 +216,7 @@ export default defineComponent({
                 {
                   [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
                   [`${mergedClsPrefix}-popover--show-arrow`]: props.showArrow,
-                  [`${mergedClsPrefix}-popover--shadow`]: props.shadow,
-                  [`${mergedClsPrefix}-popover--padded`]: props.padded,
+                  [`${mergedClsPrefix}-popover--show-header`]: !!slots.header,
                   [`${mergedClsPrefix}-popover--raw`]: props.raw
                 }
               ],
@@ -228,7 +228,16 @@ export default defineComponent({
             attrs
           ),
           [
-            renderSlot(slots, 'default'),
+            slots.header ? (
+              <>
+                <div class={`${mergedClsPrefix}-popover__header`}>
+                  {slots.header()}
+                </div>
+                <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
+              </>
+            ) : (
+              renderSlot(slots, 'default')
+            ),
             props.showArrow ? (
               <div
                 class={`${mergedClsPrefix}-popover-arrow-wrapper`}
@@ -249,8 +258,7 @@ export default defineComponent({
           // Shadow class exists for reuse box-shadow.
           [
             `${mergedClsPrefix}-popover`,
-            props.overlap && `${mergedClsPrefix}-popover--overlap`,
-            props.shadow && `${mergedClsPrefix}-popover--shadow`
+            props.overlap && `${mergedClsPrefix}-popover--overlap`
           ],
           bodyRef,
           styleRef.value as any,
@@ -306,7 +314,7 @@ export default defineComponent({
                 }
               },
               {
-                default: this.renderContentNode
+                default: () => this.renderContentNode()
               }
             )
             : this.renderContentNode()

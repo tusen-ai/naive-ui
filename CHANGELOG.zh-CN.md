@@ -17,6 +17,7 @@
 - `n-select` 的 `SelectOption` 的 `label` 属性支持渲染函数
 - `n-select` 新增 `render-option` 属性
 - `n-select` 导出 `SelectOption` & `SelectGroupOption` 类型
+- `n-popover` 支持使用 `header` slot
 
 ### Fixes
 

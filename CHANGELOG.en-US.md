@@ -17,6 +17,7 @@
 - `n-select`'s `SelectOption`'s `label` supports render function.
 - `n-select` add `render-option` prop.
 - `n-select` export `SelectOption` & `SelectGroupOption` type.
+- `n-popover` add `header` slot.
 
 ### Fixes
 
