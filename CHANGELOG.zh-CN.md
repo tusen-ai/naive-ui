@@ -4,7 +4,7 @@
 
 ### Breaking Changes
 
-- `n-select` 的 `SelectOption` `render` 属性被重命名为 `renderLabel`
+- `n-select` 的 `SelectOption` `render` 属性不再渲染 label 而是整个选项
 
 ### Feats
 
@@ -14,6 +14,9 @@
 - 为 webstorm 添加 `web-types.json`，但是我还是推荐使用 VSCode 和 Volar，`web-types.json` 只能为编码提供很有限的信息
 - `n-tree-select` 新增 `leaf-only` 属性
 - `n-tree` 新增 `leaf-only` 属性
+- `n-select` 的 `SelectOption` 的 `label` 属性支持渲染函数
+- `n-select` 新增 `render-option` 属性
+- `n-select` 导出 `SelectOption` & `SelectGroupOption` 类型
 - `n-popover` 支持使用 `header` slot
 
 ### Fixes

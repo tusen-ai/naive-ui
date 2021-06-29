@@ -22,9 +22,12 @@ custom-option
 action
 fallback-option
 max-tag-count
+add-tooltip
 ```
 
-## Props
+## API
+
+### Select Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -41,7 +44,8 @@ max-tag-count
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` |  |
 | placeholder | `string` | `'Please Select'` |  |
 | remote | `boolean` | `false` | If you want to async get options. Note that if remote is set, `filter` & `tag` won't work on `options`. At that time, you are taking all control of `options`. |
-| render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function of all the options. |
+| render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function of all the options' label. |
+| render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean } }` | `undefined` | Render function of all the options. |
 | show | `boolean` | `undefined` | Whether to show menu. |
 | show-arrow | `boolean` | `true` | Whether to show arrow. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
@@ -61,8 +65,8 @@ max-tag-count
 | --- | --- | --- |
 | class | `string` |  |
 | disabled | `boolean` |  |
-| label | `string` |  |
-| render | `(option: SelectOption, selected: boolean) => VNodeChild` |  |
+| label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | Label of the option. Note that if you are using render function, the default filter will filter the option. |
+| render | `(info: { node: VNode }) => VNodeChild` | Render the entire option. |
 | style | `string` |  |
 | value | `string \| number` | Should be unique in options. |
 
@@ -71,12 +75,12 @@ max-tag-count
 | Name | Type | Description |
 | --- | --- | --- |
 | children | `Array<SelectOption>` |  |
-| label | `string` |  |
+| label | `string \| ((option: SelectGroupOption) => VNodeChild)` | Label of the group option. |
 | key | `string \| number` | hould be unique in options. |
-| render | `(option: SelectGroupOption) => VNodeChild` |  |
+| render | `(info: { node: VNode }) => VNodeChild` | Render the entire option. |
 | type | `'group'` |  |
 
-## Slots
+### Select Slots
 
 | Name   | Parameters | Description |
 | ------ | ---------- | ----------- |

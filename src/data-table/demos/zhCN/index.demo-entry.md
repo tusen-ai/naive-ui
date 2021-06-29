@@ -7,7 +7,7 @@
 ## 演示
 
 <n-alert type="warning" title="注意" style="margin-bottom: 16px;">
-  每一列数据都要有唯一的 key，否则要在 table 上声明 <n-text code>row-key</n-text> 属性
+  每一行数据都要有唯一的 key，否则要在 table 上声明 <n-text code>row-key</n-text> 属性
 </n-alert>
 
 ```demo

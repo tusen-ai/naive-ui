@@ -4,7 +4,7 @@
 
 ### Breaking Changes
 
-- Rename `n-select`'s `SelectOption`'s `render` prop to `renderLabel`.
+- `n-select`'s `SelectOption`'s `render` no longer render label but entire option.
 
 ### Feats
 
@@ -14,6 +14,9 @@
 - Add `web-types.json` for webstorm, however I recommend using VSCode and Volar. `web-types.json` only provides limited information for coding.
 - `n-tree-select` add `leaf-only` prop.
 - `n-tree` add `leaf-only` prop.
+- `n-select`'s `SelectOption`'s `label` supports render function.
+- `n-select` add `render-option` prop.
+- `n-select` export `SelectOption` & `SelectGroupOption` type.
 - `n-popover` add `header` slot.
 
 ### Fixes

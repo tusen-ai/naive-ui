@@ -154,7 +154,7 @@ function placementStyle (
   const sizeStyle = ['top', 'bottom'].includes(position)
     ? 'height: var(--space-arrow);'
     : 'width: var(--space-arrow);'
-  return c(`[v-placement="${placement}"]`, [
+  return c(`[v-placement="${placement}"] >`, [
     cB('popover', `
       margin-${oppositePlacement[position]}: var(--space);
     `, [
