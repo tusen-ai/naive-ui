@@ -332,7 +332,7 @@ export default defineComponent({
               file: fileInfo,
               fileList: mergedFileListRef.value
             }).then((result) => {
-              if (!result) return
+              if (result === false) return
               doChange(fileInfo, e, {
                 append: true
               })
