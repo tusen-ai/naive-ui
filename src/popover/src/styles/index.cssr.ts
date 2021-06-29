@@ -1,6 +1,6 @@
 import { CNode } from 'css-render'
 import { FollowerPlacement } from 'vueuc'
-import { c, cB, cM, cNotM } from '../../../_utils/cssr'
+import { c, cB, cM, cNotM, cE } from '../../../_utils/cssr'
 
 const oppositePlacement = {
   top: 'bottom',
@@ -61,6 +61,18 @@ export default c([
         padding: 'var(--padding)'
       })
     ]),
+    cE('header', `
+      font-weight: var(--title-font-weight);
+      color: var(--title-text-color);
+      padding: var(--padding);
+      border-bottom: 1px solid var(--divider-color);
+      transition:
+        color .3s var(--bezier),
+        border-color .3s var(--bezier);
+    `),
+    cE('content', `
+      padding: var(--padding);
+    `),
     cB('popover-arrow-wrapper', `
       position: absolute;
       overflow: hidden;

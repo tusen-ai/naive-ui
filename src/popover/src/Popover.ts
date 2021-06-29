@@ -145,6 +145,7 @@ export const popoverBaseProps = {
     type: Boolean,
     default: true
   },
+  title: String,
   internalExtraClass: String,
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   // events

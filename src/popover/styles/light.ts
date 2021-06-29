@@ -4,12 +4,24 @@ import type { Theme } from '../../_mixins/use-theme'
 import commonVariables from './_common'
 
 export const self = (vars: ThemeCommonVars) => {
-  const { boxShadow2, popoverColor, textColor2, borderRadius, fontSize } = vars
+  const {
+    boxShadow2,
+    popoverColor,
+    textColor2,
+    borderRadius,
+    fontSize,
+    textColor1,
+    dividerColor,
+    fontWeightStrong
+  } = vars
   return {
     ...commonVariables,
     fontSize,
     borderRadius,
     color: popoverColor,
+    titleTextColor: textColor1,
+    titleFontWeight: fontWeightStrong,
+    dividerColor,
     textColor: textColor2,
     boxShadow: boxShadow2
   }
