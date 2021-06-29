@@ -315,7 +315,7 @@ export default defineComponent({
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files) return
       const { onBeforeUpload } = props
-      const fileInfoList: FileInfo[] = Array.from(files).map((file) => {
+      const fileInfoList: FileInfo[] = files.map((file) => {
         return {
           id: createId(),
           name: file.name,
