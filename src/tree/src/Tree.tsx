@@ -495,11 +495,15 @@ export default defineComponent({
       nodeKeyToBeExpanded = null
     }
     function handleCheck (node: TmNode, checked: boolean): void {
-      if (props.disabled || node.disabled || (props.leafOnly && !node.isLeaf)) { return }
+      // We don't guard for leaf only since we have done it in view layer
+      if (props.disabled || node.disabled) {
+        return
+      }
       const { checkedKeys } = dataTreeMateRef.value![
         checked ? 'check' : 'uncheck'
       ](node.key, displayedCheckedKeysRef.value, {
-        cascade: props.cascade
+        cascade: props.cascade,
+        leafOnly: props.leafOnly
       })
       doUpdateCheckedKeys(checkedKeys)
     }
@@ -527,7 +531,9 @@ export default defineComponent({
         node.disabled ||
         !props.selectable ||
         (props.leafOnly && !node.isLeaf)
-      ) { return }
+      ) {
+        return
+      }
       pendingNodeKeyRef.value = node.key
       if (props.internalCheckOnSelect) {
         const {
@@ -955,6 +961,7 @@ export default defineComponent({
       draggableRef: toRef(props, 'draggable'),
       blockLineRef: toRef(props, 'blockLine'),
       indentRef: toRef(props, 'indent'),
+      cascadeRef: toRef(props, 'cascade'),
       droppingMouseNodeRef,
       droppingNodeParentRef,
       draggingNodeRef,

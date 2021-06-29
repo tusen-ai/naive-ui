@@ -38,7 +38,8 @@ import {
   AutoCompleteOptions,
   OnUpdateValue,
   OnSelect,
-  OnUpdateImpl
+  OnUpdateImpl,
+  AutoCompleteOption
 } from './interface'
 import { tmOptions } from '../../select/src/utils'
 
@@ -177,7 +178,7 @@ export default defineComponent({
           if (!isComposingRef.value) {
             const pendingOptionData = menuInstRef.value?.getPendingOption()
             if (pendingOptionData) {
-              select(pendingOptionData)
+              select(pendingOptionData as AutoCompleteOption)
               e.preventDefault()
             }
           }
@@ -190,7 +191,7 @@ export default defineComponent({
           break
       }
     }
-    function select (option: SelectBaseOption): void {
+    function select (option: AutoCompleteOption): void {
       if (option) {
         if (props.clearAfterSelect) {
           doUpdateValue(null)
@@ -220,7 +221,7 @@ export default defineComponent({
       doUpdateValue(value)
     }
     function handleToggleOption (option: SelectBaseOption): void {
-      select(option)
+      select(option as AutoCompleteOption)
     }
     function handleClickOutsideMenu (e: MouseEvent): void {
       if (!triggerElRef.value?.contains(e.target as Node)) {

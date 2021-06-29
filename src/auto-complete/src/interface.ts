@@ -1,22 +1,15 @@
-import {
-  SelectGroupOption,
-  SelectMixedOption
-} from '../../select/src/interface'
+import { SelectGroupOption, SelectBaseOption } from '../../select/src/interface'
 
-export type AutoCompleteOption =
-  | AutoCompleteBaseOption
-  | AutoCompleteGroupOption
-
-export type AutoCompleteBaseOption = string
+export type AutoCompleteOption = SelectBaseOption<string, string>
 export interface AutoCompleteGroupOption
   extends Omit<SelectGroupOption, 'children'> {
-  children: AutoCompleteBaseOption[]
+  children: string[]
 }
 
-export type AutoCompleteOptions = Array<AutoCompleteOption | SelectMixedOption>
+export type AutoCompleteOptions = Array<
+AutoCompleteOption | AutoCompleteGroupOption | string
+>
 
-export type OnUpdateValue = <T extends string & (string | null)>(
-  value: T
-) => void
+export type OnUpdateValue = (value: string & (string | null)) => void
 export type OnUpdateImpl = (value: string | null) => void
 export type OnSelect = (value: string | number) => void

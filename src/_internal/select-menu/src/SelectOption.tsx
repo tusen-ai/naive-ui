@@ -6,18 +6,19 @@ import {
   Transition,
   PropType,
   VNode,
-  warn,
-  VNodeChild,
   Ref
 } from 'vue'
-import { internalSelectionMenuInjectionKey } from './SelectMenu'
 import { TreeNode } from 'treemate'
 import { useMemo } from 'vooks'
 import type { SelectBaseOption } from '../../../select/src/interface'
 import { CheckmarkIcon } from '../../icons'
 import NBaseIcon from '../../icon'
 import { render } from '../../../_utils'
-import { RenderLabelImpl } from './interface'
+import {
+  RenderLabelImpl,
+  internalSelectionMenuInjectionKey,
+  RenderOptionImpl
+} from './interface'
 
 const checkMarkIcon = h(CheckmarkIcon)
 
@@ -54,18 +55,13 @@ export default defineComponent({
     }
   },
   setup (props) {
-    if (__DEV__ && props.tmNode.rawNode.render) {
-      warn(
-        'select',
-        'render prop in select option is removed, please use `renderLabel` on option or`render-label` prop in `n-select`.'
-      )
-    }
     const {
       valueRef,
       pendingTmNodeRef,
       multipleRef,
       valueSetRef,
       renderLabelRef,
+      renderOptionRef,
       handleOptionClick,
       handleOptionMouseEnter
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -114,6 +110,7 @@ export default defineComponent({
         }
       }),
       renderLabel: renderLabelRef as Ref<RenderLabelImpl | undefined>,
+      renderOption: renderOptionRef as Ref<RenderOptionImpl | undefined>,
       handleMouseMove,
       handleMouseEnter,
       handleClick
@@ -127,6 +124,7 @@ export default defineComponent({
       isPending,
       isGrouped,
       multiple,
+      renderOption,
       renderLabel,
       handleClick,
       handleMouseEnter,
@@ -134,15 +132,10 @@ export default defineComponent({
     } = this
     const showCheckMark = multiple && isSelected
     const checkmark = renderCheckMark(showCheckMark, clsPrefix)
-    let children: VNodeChild[]
-    if (renderLabel) {
-      children = [renderLabel(rawNode, isSelected), checkmark]
-    } else {
-      children = rawNode.renderLabel
-        ? [rawNode.renderLabel(rawNode, isSelected), checkmark]
-        : [render(rawNode.label, rawNode, isSelected), checkmark]
-    }
-    return (
+    const children = renderLabel
+      ? [renderLabel(rawNode, isSelected), checkmark]
+      : [render(rawNode.label, rawNode, isSelected), checkmark]
+    const node = (
       <div
         class={[
           `${clsPrefix}-base-select-option`,
@@ -162,5 +155,10 @@ export default defineComponent({
         {children}
       </div>
     )
+    return rawNode.render
+      ? rawNode.render({ node, option: rawNode, selected: isSelected })
+      : renderOption
+        ? renderOption({ node, option: rawNode, selected: isSelected })
+        : node
   }
 })

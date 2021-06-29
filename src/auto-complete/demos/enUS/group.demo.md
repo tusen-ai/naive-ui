@@ -5,26 +5,28 @@
 ```
 
 ```js
-export default {
-  computed: {
-    options () {
-      return [
-        ['Google', '@gmail.com'],
-        ['Netease', '@163.com'],
-        ['Tencent', '@qq.com']
-      ].map((emailInfo) => {
-        return {
-          type: 'group',
-          name: emailInfo[0],
-          children: [this.value.split('@')[0] + emailInfo[1]]
-        }
+import { defineComponent, ref, computed } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const valueRef = ref('')
+    return {
+      value: valueRef,
+      options: computed(() => {
+        return [
+          ['Google', '@gmail.com'],
+          ['Netease', '@163.com'],
+          ['Tencent', '@qq.com']
+        ].map((emailInfo) => {
+          return {
+            type: 'group',
+            label: emailInfo[0],
+            key: emailInfo[0],
+            children: [valueRef.value.split('@')[0] + emailInfo[1]]
+          }
+        })
       })
     }
-  },
-  data () {
-    return {
-      value: ''
-    }
   }
-}
+})
 ```
