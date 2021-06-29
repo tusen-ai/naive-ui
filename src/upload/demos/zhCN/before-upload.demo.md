@@ -5,12 +5,6 @@
 ```html
 <n-upload
   action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-  :headers="{
-    'naive-info': 'hello!'
-  }"
-  :data="{
-    'naive-data': 'cool! naive!'
-  }"
   @before-upload="beforeUpload"
 >
   <n-button>上传 PNG 文件</n-button>
