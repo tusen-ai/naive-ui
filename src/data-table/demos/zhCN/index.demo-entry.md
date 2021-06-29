@@ -7,7 +7,7 @@
 ## 演示
 
 <n-alert type="warning" title="注意" style="margin-bottom: 16px;">
-  每一列数据都要有唯一的 key，否则要在 table 上声明 <n-text code>row-key</n-text> 属性
+  每一行数据都要有唯一的 key，否则要在 table 上声明 <n-text code>row-key</n-text> 属性
 </n-alert>
 
 ```demo
@@ -61,7 +61,7 @@ tree
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |
 | scroll-x | `number \| string` | `undefined` | 表格内容的横向宽度，如果列被水平固定了，则需要设定它 |
 | single-column | `boolean` | `false` | 是否展示为一列（true 时每一列都有 border-bottom） |
-| single-line | `boolean` | `true` | 是否展示为一行（true 时每一行都有 border-bottom）|
+| single-line | `boolean` | `true` | 是否展示为一行（true 时每一行都有 border-bottom） |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |
 | summary | `CreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#CreateSummary-Type">CreateSummary Type</n-a> |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellpisis` 或 `max-height` 的情况下固定为 `'fixed'` |
