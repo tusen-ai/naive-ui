@@ -22,12 +22,16 @@ custom-option
 action
 fallback-option
 max-tag-count
+add-tooltip
 change-debug
 placeholder-debug
 menu-debug
+render-debug
 ```
 
-## Props
+## API
+
+### Select Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -44,7 +48,8 @@ menu-debug
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` |  |
 | placeholder | `string` | `'请选择'` |  |
 | remote | `boolean` | `false` | 是否要异步获取选项。注意如果设定了，那么 `fitler` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options` |
-| render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | 控制全部选项的渲染 |
+| render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | 选项标签渲染函数 |
+| render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean } }` | `undefined` | 选项的渲染函数 |
 | show | `boolean` | `undefined` | 是否展示菜单 |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
@@ -64,8 +69,8 @@ menu-debug
 | --- | --- | --- |
 | class | `string` |  |
 | disabled | `boolean` |  |
-| label | `string` |  |
-| render | `(option: SelectOption, selected: boolean) => VNodeChild` |  |
+| label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | 选项的标签，注意如果你使用了渲染函数，默认的过滤器将会过滤该选项 |
+| render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | Render the entire option. |
 | style | `string \| object` |  |
 | value | `string \| number` | 在选项中应该是唯一的 |
 
@@ -74,12 +79,12 @@ menu-debug
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
 | children | `Array<SelectOption>` |  |
-| label | `string` |  |
+| label | `string \| ((option: SelectGroupOption) => VNodeChild)` | 选项组的标签 |
 | key | `string \| number` | 在选项中应该是唯一的 |
-| render | `(option: SelectGroupOption) => VNodeChild` |  |
+| render | `(info: { node: VNode, option: SelectOption, selected: boolean } }) => VNodeChild` | Render the entire option. |
 | type | `'group'` |  |
 
-## Slots
+### Select Slots
 
 | 名称   | 参数 | 说明 |
 | ------ | ---- | ---- |

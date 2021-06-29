@@ -13,7 +13,9 @@ import {
   watch,
   watchEffect,
   WatchStopHandle,
-  provide
+  provide,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { getPadding } from 'seemly'
@@ -82,6 +84,8 @@ const inputProps = {
     default: true
   },
   autofocus: Boolean,
+  inputProps: Object as PropType<TextareaHTMLAttributes | InputHTMLAttributes>,
+
   resizable: {
     type: Boolean,
     default: true
@@ -829,6 +833,7 @@ export default defineComponent({
           {this.type === 'textarea' ? (
             <div class={`${mergedClsPrefix}-input__textarea`}>
               <textarea
+                {...this.inputProps}
                 ref="textareaElRef"
                 class={`${mergedClsPrefix}-input__textarea-el`}
                 autofocus={this.autofocus}
@@ -873,6 +878,7 @@ export default defineComponent({
           ) : (
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
+                {...this.inputProps}
                 ref="inputElRef"
                 type={
                   this.type === 'password' &&

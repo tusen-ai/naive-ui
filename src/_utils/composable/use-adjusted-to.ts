@@ -3,6 +3,7 @@ import { ComponentPublicInstance, ComputedRef, inject, PropType } from 'vue'
 import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
+import { internalSelectionMenuBodyInjectionKey } from '../../_internal/select-menu/src/interface'
 
 interface UseAdjustedToProps {
   to?: string | HTMLElement | boolean
@@ -17,6 +18,7 @@ function useAdjustedTo (
   const modal = inject(modalBodyInjectionKey, null)
   const drawer = inject(drawerBodyInjectionKey, null)
   const popover = inject(popoverBodyInjectionKey, null)
+  const selectMenu = inject(internalSelectionMenuBodyInjectionKey, null)
   return useMemo(() => {
     const { to } = props
     if (to !== undefined) {
@@ -29,6 +31,7 @@ function useAdjustedTo (
     }
     if (drawer?.value) return drawer.value
     if (popover?.value) return popover.value
+    if (selectMenu?.value) return selectMenu.value
     return to ?? 'body'
   })
 }

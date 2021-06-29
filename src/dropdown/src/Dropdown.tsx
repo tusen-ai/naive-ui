@@ -26,7 +26,8 @@ import {
   call,
   createKey,
   MaybeArray,
-  ExtractPublicPropTypes
+  ExtractPublicPropTypes,
+  createRefSetter
 } from '../../_utils'
 import { dropdownLight } from '../styles'
 import type { DropdownTheme } from '../styles'
@@ -373,7 +374,7 @@ export default defineComponent({
     ) => {
       const { mergedClsPrefix } = this
       const dropdownProps = {
-        ref,
+        ref: createRefSetter(ref),
         class: [className, `${mergedClsPrefix}-dropdown`],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,

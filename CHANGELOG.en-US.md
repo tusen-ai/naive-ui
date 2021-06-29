@@ -1,5 +1,32 @@
 # CHANGELOG
 
+## 2.15.0 (2021-06-29)
+
+### Breaking Changes
+
+- `n-select`'s `SelectOption`'s `render` no longer render label but the entire option.
+
+### Feats
+
+- `n-carousel` supports touch operation, closes [#271](https://github.com/TuSimple/naive-ui/issues/271).
+- `n-input` add `input-props` prop.
+- `n-message` optimize the error message of `useMessage` when there is no `n-message-provider`, add the related document link.
+- Add `web-types.json` for webstorm, however I recommend using VSCode and Volar. `web-types.json` only provides limited information for coding.
+- `n-tree-select` add `leaf-only` prop.
+- `n-tree` add `leaf-only` prop.
+- `n-select`'s `SelectOption`'s `label` supports render function.
+- `n-select` add `render-option` prop.
+- `n-select` export `SelectOption` & `SelectGroupOption` type.
+- `n-popover` add `header` slot.
+
+### Fixes
+
+- Fix `n-date-picker` `n-provider` pass `date-locale` not work, closes [#250](https://github.com/TuSimple/naive-ui/issues/250).
+- Fix `n-input` clear button placeholder prevent clicking on actual component [#288](https://github.com/TuSimple/naive-ui/issues/288)
+- Fix `n-carousel` click the at current item button, the component behaves abnormally.
+- Fix `n-menu` `render-label` not working for tooltip in collapsed mode.
+- Fix `n-dropdown` can't render `n-popover` in option.
+
 ## 2.14.0 (2021-06-23)
 
 ### Breaking Changes

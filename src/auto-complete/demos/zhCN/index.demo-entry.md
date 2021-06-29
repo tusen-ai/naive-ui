@@ -32,19 +32,19 @@ after-select
 
 ### AutoCompleteOption Properties
 
-| 名称     | 类型               | 介绍            |
-| -------- | ------------------ | --------------- |
-| disabled | `boolean`          | 是否禁用        |
-| label    | `string`           | 显示的 label 值 |
-| render   | `Function`         | 自定义渲染函数  |
-| value    | `string \| number` | 需要唯一        |
+| 名称     | 类型      | 介绍            |
+| -------- | --------- | --------------- |
+| disabled | `boolean` | 是否禁用        |
+| label    | `string`  | 显示的 label 值 |
+| value    | `string`  | 需要唯一        |
 
 ### AutoCompleteGroupOption Properties
 
 | 名称 | 类型 | 介绍 |
 | --- | --- | --- |
 | children | `Array<string \| AutoCompleteOption>` | AutoCompleteGroup 的 children 项 |
-| name | `string` | AutoCompleteGroup 的名字 |
+| label | `string` | AutoCompleteGroup 的名字 |
+| key | `string \| number` | AutoCompleteGroup 的 key |
 | type | `'group'` | AutoCompleteGroup 的类型 |
 
 ## Slots
