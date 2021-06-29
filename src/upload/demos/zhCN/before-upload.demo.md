@@ -26,8 +26,7 @@ export default defineComponent({
     const message = useMessage()
     return {
       async beforeUpload ({ file, fileList }) {
-        const isNotPng = file.file.type !== 'image/png'
-        if (isNotPng) {
+        if (file.file.type !== 'image/png') {
           message.error('只能上传png格式的图片文件，请重新上传')
           return false
         }
