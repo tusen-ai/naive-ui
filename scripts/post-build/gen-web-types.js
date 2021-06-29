@@ -3,10 +3,10 @@ const fs = require('fs')
 const path = require('path')
 const { kebabCase } = require('lodash')
 
-const components = require('../../lib/components')
-const { default: version } = require('../../lib/version')
-
 exports.genWebTypes = function genWebTypes () {
+  const components = require('../../lib/components')
+  const { default: version } = require('../../lib/version')
+
   const tags = []
 
   const scaffold = {

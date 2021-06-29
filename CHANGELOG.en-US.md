@@ -1,10 +1,10 @@
 # CHANGELOG
 
-## Pending
+## 2.15.0 (2021-06-29)
 
 ### Breaking Changes
 
-- `n-select`'s `SelectOption`'s `render` no longer render label but entire option.
+- `n-select`'s `SelectOption`'s `render` no longer render label but the entire option.
 
 ### Feats
 
