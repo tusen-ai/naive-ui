@@ -1,5 +1,5 @@
 import { TreeMate } from 'treemate'
-import { CSSProperties, VNodeChild } from 'vue'
+import { CSSProperties, VNodeChild, VNode } from 'vue'
 
 export type SelectMixedOption =
   | SelectBaseOption
@@ -10,19 +10,25 @@ export interface SelectBaseOption<V = string | number> {
   value: V
   /** label doesn't support render function since it will be used in callbacks */
   label: string
-  class?: string
+  class?:
+  | string
+  | ((option: SelectBaseOption<V>, selected: boolean) => VNodeChild)
   style?: string | CSSProperties
   disabled?: boolean
-  renderLabel?: (option: SelectBaseOption<V>, selected: boolean) => VNodeChild
+  render?: (info: {
+    node: VNode
+    option: SelectBaseOption<V>
+    selected: boolean
+  }) => VNodeChild
   [k: string]: unknown
 }
 
 export interface SelectGroupOptionBase {
   /** label doesn't support render function since it will be used in callbacks */
-  label: string
+  label: string | ((option: SelectGroupOption) => VNodeChild)
   type: 'group'
   children: SelectBaseOption[]
-  renderLabel?: (option: SelectGroupOption) => VNodeChild
+  render?: (info: { node: VNode, option: SelectGroupOption }) => VNodeChild
   [k: string]: unknown
 }
 
