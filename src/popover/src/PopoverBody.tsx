@@ -17,8 +17,7 @@ import {
   CSSProperties,
   VNode,
   renderSlot,
-  Fragment,
-  Ref
+  Fragment
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerInst } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
@@ -206,7 +205,7 @@ export default defineComponent({
     provide(drawerBodyInjectionKey, null)
     provide(modalBodyInjectionKey, null)
 
-    function renderContentNode (hasHeaderRef: Ref): VNode | null {
+    function renderContentNode (hasHeader: boolean): VNode | null {
       let contentNode: VNode
       const {
         internalRenderBodyRef: { value: renderBody }
@@ -225,7 +224,7 @@ export default defineComponent({
                   [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
                   [`${mergedClsPrefix}-popover--show-arrow`]: props.showArrow,
                   [`${mergedClsPrefix}-popover--shadow`]: props.shadow,
-                  [`${mergedClsPrefix}-popover--padded`]: hasHeaderRef.value,
+                  [`${mergedClsPrefix}-popover--padded`]: hasHeader,
                   [`${mergedClsPrefix}-popover--raw`]: props.raw
                 }
               ],
@@ -291,9 +290,7 @@ export default defineComponent({
     }
   },
   render () {
-    const hasHeaderRef = computed(() => {
-      return !(this.$slots.header || this.title) && this.padded
-    })
+    const hasHeader = !(this.$slots.header || this.title) && this.padded
     return h(
       VFollower,
       {
@@ -327,10 +324,10 @@ export default defineComponent({
                 }
               },
               {
-                default: () => this.renderContentNode(hasHeaderRef)
+                default: () => this.renderContentNode(hasHeader)
               }
             )
-            : this.renderContentNode(hasHeaderRef)
+            : this.renderContentNode(hasHeader)
         }
       }
     )
