@@ -14,7 +14,6 @@
 - 为 webstorm 添加 `web-types.json`，但是我还是推荐使用 VSCode 和 Volar，`web-types.json` 只能为编码提供很有限的信息
 - `n-tree-select` 新增 `leaf-only` 属性
 - `n-tree` 新增 `leaf-only` 属性
-- `n-popover` 新增 `title` 属性
 - `n-popover` 支持使用 `header` slot
 
 ### Fixes

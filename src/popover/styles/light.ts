@@ -10,17 +10,13 @@ export const self = (vars: ThemeCommonVars) => {
     textColor2,
     borderRadius,
     fontSize,
-    textColor1,
-    dividerColor,
-    fontWeightStrong
+    dividerColor
   } = vars
   return {
     ...commonVariables,
     fontSize,
     borderRadius,
     color: popoverColor,
-    titleTextColor: textColor1,
-    titleFontWeight: fontWeightStrong,
     dividerColor,
     textColor: textColor2,
     boxShadow: boxShadow2
