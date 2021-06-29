@@ -59,8 +59,9 @@ DropdownIgnoredOption
   }
 }
 
+export type RenderLabelImpl = (option: DropdownMixedOption) => VNodeChild
 export interface DropdownInjection {
-  props: DropdownProps
+  renderLabelRef: Ref<RenderLabelImpl | undefined>
   hoverKeyRef: Ref<Key | null>
   keyboardKeyRef: Ref<Key | null>
   lastToggledSubmenuKeyRef: Ref<Key | null>
@@ -100,7 +101,7 @@ const dropdownBaseProps = {
   },
   // for menu, not documented
   value: [String, Number] as PropType<Key | null>,
-  renderLabel: Function as PropType<(option: DropdownMixedOption) => VNodeChild>
+  renderLabel: Function as PropType<RenderLabelImpl>
 } as const
 
 const popoverPropKeys = Object.keys(popoverBaseProps) as Array<
@@ -200,7 +201,7 @@ export default defineComponent({
     )
 
     provide(dropdownInjectionKey, {
-      props,
+      renderLabelRef: toRef(props, 'renderLabel'),
       hoverKeyRef: hoverKeyRef,
       keyboardKeyRef: keyboardKeyRef,
       lastToggledSubmenuKeyRef: lastToggledSubmenuKeyRef,

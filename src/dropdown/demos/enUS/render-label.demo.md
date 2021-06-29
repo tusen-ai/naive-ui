@@ -8,7 +8,7 @@ The `renderLabel` can be used to batch render dropdown options.
   placement="bottom-start"
   trigger="click"
   @select="handleSelect"
-  :render-label="renderDropDownLabel"
+  :render-label="renderDropdownLabel"
 >
   <n-button :keyboard="false">People and Some Food to Eat</n-button>
 </n-dropdown>
@@ -77,7 +77,7 @@ export default defineComponent({
     const message = useMessage()
     return {
       options,
-      renderDropDownLabel (option) {
+      renderDropdownLabel (option) {
         return h('span', {}, { default: () => option.label })
       },
       handleSelect (key) {
