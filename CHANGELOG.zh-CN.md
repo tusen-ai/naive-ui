@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-carousel` 增加 `trigger` 属性增加触发切换的方式
+
 ## 2.15.1 (2021-06-30)
 
 - 修复缺少 `web-types.json`

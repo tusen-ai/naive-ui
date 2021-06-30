@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-carousel` add `trigger` prop.
+
 ## 2.15.1 (2021-06-30)
 
 - Fix no `web-types.json`.
