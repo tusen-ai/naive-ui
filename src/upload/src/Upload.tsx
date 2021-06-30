@@ -327,21 +327,23 @@ export default defineComponent({
             file: file,
             url: null
           }
-          if (!onBeforeUpload || await onBeforeUpload({
+          if (
+            !onBeforeUpload ||
+            (await onBeforeUpload({
               file: fileInfo,
               fileList: mergedFileListRef.value
-            }) !== false) {
+            })) !== false
+          ) {
             doChange(fileInfo, e, {
               append: true
             })
           }
         })
-      )
-        .then(() => {
-          if (props.defaultUpload) {
-            submit()
-          }
-        })
+      ).then(() => {
+        if (props.defaultUpload) {
+          submit()
+        }
+      })
     }
     function submit (fileId?: string): void {
       const {

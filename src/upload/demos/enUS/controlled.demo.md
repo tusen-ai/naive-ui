@@ -71,7 +71,7 @@ export default defineComponent({
         }
       },
       handleFileListChange (value) {
-        message.info("Yes, file-list changed.")
+        message.info('Yes, file-list changed.')
       }
     }
   }
