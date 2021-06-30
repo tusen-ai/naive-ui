@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-menu` 新增 `dropdown-placement` 属性
+- `n-upload` 新增 `before-upload` 属性
 
 ### Fixes
 

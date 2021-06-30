@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-menu` add `dropdown-placement` prop.
+- `n-upload` add `before-upload` prop.
 
 ### Fixes
 
