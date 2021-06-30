@@ -44,16 +44,16 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, alt } = this
+    const { mergedClsPrefix } = this
     return this.groupId ? (
-      <div class={`${mergedClsPrefix}-image`} role="img" aria-label={alt}>
+      <div class={`${mergedClsPrefix}-image`} role="img" aria-label={this.alt}>
         <img
           class={this.groupId}
           ref="imageRef"
           width={this.width}
           height={this.height}
           src={this.src}
-          alt={alt}
+          alt={this.alt}
           onClick={this.handleClick}
         />
       </div>
@@ -69,14 +69,14 @@ export default defineComponent({
               <div
                 class={`${mergedClsPrefix}-image`}
                 role="img"
-                aria-label={alt}
+                aria-label={this.alt}
               >
                 <img
                   ref="imageRef"
                   width={this.width}
                   height={this.height}
                   src={this.src}
-                  alt={alt}
+                  alt={this.alt}
                   onClick={this.handleClick}
                 />
               </div>
