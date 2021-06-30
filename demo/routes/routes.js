@@ -6,7 +6,7 @@ export const enDocRoutes = [
   },
   {
     path: 'installation',
-    component: () => import('../pages/docs/installation/enUS/index.demo.md')
+    component: () => import('../pages/docs/installation/enUS/index.md')
   },
   {
     path: 'usage-sfc',
@@ -66,7 +66,7 @@ export const zhDocRoutes = [
   },
   {
     path: 'installation',
-    component: () => import('../pages/docs/installation/zhCN/index.demo.md')
+    component: () => import('../pages/docs/installation/zhCN/index.md')
   },
   {
     path: 'usage-sfc',
