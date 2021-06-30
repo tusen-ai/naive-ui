@@ -1,4 +1,5 @@
 # CHANGELOG
+去除calendar组件的console.log
 
 ## 2.15.0 (2021-06-29)
 
