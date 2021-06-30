@@ -72,7 +72,7 @@ exports.genWebTypes = function genWebTypes () {
   })
 
   fs.writeFileSync(
-    path.resolve(__dirname, '../web-types.json'),
+    path.resolve(__dirname, '../../web-types.json'),
     JSON.stringify(scaffold, 0, 2),
     {
       encoding: 'utf-8'
