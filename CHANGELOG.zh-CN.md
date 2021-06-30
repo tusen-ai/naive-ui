@@ -1,4 +1,5 @@
 # CHANGELOG
+去除calendar组件的console.log
 
 ## Pending
 
