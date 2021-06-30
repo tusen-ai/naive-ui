@@ -2,9 +2,24 @@
 
 ## Pending
 
+### Feats
+
+- `n-menu` 新增 `placement` 属性
+
+### Fixes
+
+- 修复 `n-log` 在未设定语言时仍然对缺少 highlight.js 报错，关闭 [#327](https://github.com/TuSimple/naive-ui/issues/327)
+- 移除 `n-calendar` 无用的 console.log
+
+## 2.15.1 (2021-06-30)
+
+- 修复缺少 `web-types.json`
+
+## 2.15.0 (2021-06-29)
+
 ### Breaking Changes
 
-- `n-select` 的 `SelectOption` `render` 属性被重命名为 `renderLabel`
+- `n-select` 的 `SelectOption` `render` 属性不再渲染 label 而是整个选项
 
 ### Feats
 
@@ -12,7 +27,12 @@
 - `n-input` 新增 `input-props` 属性
 - `n-message` 优化 `useMessage` 当没有 `n-message-provider` 时的报错信息，增加关联的文档链接
 - 为 webstorm 添加 `web-types.json`，但是我还是推荐使用 VSCode 和 Volar，`web-types.json` 只能为编码提供很有限的信息
-- `n-menu` 新增 `placement` 属性
+- `n-tree-select` 新增 `leaf-only` 属性
+- `n-tree` 新增 `leaf-only` 属性
+- `n-select` 的 `SelectOption` 的 `label` 属性支持渲染函数
+- `n-select` 新增 `render-option` 属性
+- `n-select` 导出 `SelectOption` & `SelectGroupOption` 类型
+- `n-popover` 支持使用 `header` slot
 
 ### Fixes
 

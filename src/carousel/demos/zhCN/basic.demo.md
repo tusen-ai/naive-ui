@@ -1,4 +1,4 @@
-# Basic
+# 基础用法
 
 ```html
 <n-carousel>

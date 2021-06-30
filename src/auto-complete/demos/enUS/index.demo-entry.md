@@ -32,19 +32,19 @@ after-select
 
 ### AutoCompleteOption Properties
 
-| Name     | Type               | Description                    |
-| -------- | ------------------ | ------------------------------ |
-| disabled | `boolean`          | Whether to disable the option. |
-| label    | `string`           | Displayed label value.         |
-| render   | `Function`         | Custom rendering function.     |
-| value    | `string \| number` | Should be unique in options.   |
+| Name     | Type      | Description                    |
+| -------- | --------- | ------------------------------ |
+| disabled | `boolean` | Whether to disable the option. |
+| label    | `string`  | Displayed label value.         |
+| value    | `string`  | Should be unique in options.   |
 
 ### AutoCompleteGroupOption Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
 | children | `Array<string \| AutoCompleteOption>` | Children options of AutoCompleteGroup. |
-| name | `string` | The name of the AutoCompleteGroup. |
+| label | `string` | The name of the AutoCompleteGroup. |
+| label | `key` | The key of the AutoCompleteGroup. |
 | type | `'group'` | The type of the AutoCompleteGroup. |
 
 ## Slots

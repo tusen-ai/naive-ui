@@ -112,7 +112,8 @@ export default defineComponent({
         trigger="click"
         theme={mergedTheme.peers.Popover}
         themeOverrides={mergedTheme.peerOverrides.Popover}
-        padded={false}
+        placement="bottom"
+        style={{ padding: 0 }}
       >
         {{
           trigger: () => {
@@ -134,10 +135,10 @@ export default defineComponent({
                 class={[
                   `${mergedClsPrefix}-data-table-filter`,
                   {
-                    [`${mergedClsPrefix}-data-table-filter--active`]: this
-                      .active,
-                    [`${mergedClsPrefix}-data-table-filter--show`]: this
-                      .showPopover
+                    [`${mergedClsPrefix}-data-table-filter--active`]:
+                      this.active,
+                    [`${mergedClsPrefix}-data-table-filter--show`]:
+                      this.showPopover
                   }
                 ]}
               >

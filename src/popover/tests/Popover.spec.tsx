@@ -3,6 +3,8 @@ import { mount } from '@vue/test-utils'
 import { NPopover, PopoverInst } from '../index'
 import { createId } from 'seemly'
 
+const popoverBodyHeader = '.n-popover__header'
+
 async function sleep (ms: number): Promise<void> {
   return await new Promise((resolve) => {
     setTimeout(resolve, ms)
@@ -122,6 +124,24 @@ describe('n-popover', () => {
     expect(document.querySelector(`.${contentClass}`)).not.toEqual(null)
     await sleep(150)
     expect(document.querySelector(`.${contentClass}`)).toEqual(null)
+    wrapper.unmount()
+  })
+
+  it('header slot', () => {
+    const wrapper = mount(NPopover, {
+      attachTo: document.body,
+      props: {
+        show: true
+      },
+      slots: {
+        trigger: () => <div>click</div>,
+        header: () => <div>I am title</div>,
+        default: () => <div>star kirby</div>
+      }
+    })
+    expect(document.querySelector(popoverBodyHeader)?.textContent).toEqual(
+      'I am title'
+    )
     wrapper.unmount()
   })
 })

@@ -1,6 +1,6 @@
 # Ellipsis with Tooltip
 
-Set `column.ellipsis.tooltip` to make ellipsis have tooltip. `column.ellipsis` accepts the same props as `n-ellpisis`.
+Set `column.ellipsis.tooltip` to make ellipsis have tooltip. `column.ellipsis` accepts the same props as `n-ellipsis`.
 
 ```html
 <n-data-table

@@ -11,7 +11,6 @@ export default cB('base-select-menu', `
   transition:
     background-color .3s var(--bezier),
     box-shadow .3s var(--bezier);
-  overflow: hidden;
   background-color: var(--color);
 `, [
   cB('scrollbar', `
