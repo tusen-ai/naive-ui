@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.15.1 (2021-06-30)
+
+- Fix no `web-types.json`.
+
 ## 2.15.0 (2021-06-29)
 
 ### Breaking Changes
