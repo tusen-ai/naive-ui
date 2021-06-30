@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-log` 在未设定语言时仍然对缺少 highlight.js 报错，关闭 [#327](https://github.com/TuSimple/naive-ui/issues/327)
+
 ## 2.15.1 (2021-06-30)
 
 - 修复缺少 `web-types.json`
