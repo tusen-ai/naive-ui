@@ -1,11 +1,11 @@
 # CHANGELOG
-去除calendar组件的console.log
 
 ## Pending
 
 ### Fixes
 
 - Fix `n-log` warn on highlight.js when no language is set, closes [#327](https://github.com/TuSimple/naive-ui/issues/327).
+- Remove `n-calendar`'s useless `console.log`.
 
 ## 2.15.1 (2021-06-30)
 
