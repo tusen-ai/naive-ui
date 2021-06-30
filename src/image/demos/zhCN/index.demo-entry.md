@@ -13,18 +13,18 @@ group
 
 ### Image Props
 
-| 名称         | 类型               | 默认值      | 说明 |
-| ------------ | ------------------ | ----------- | ---- |
-| src          | `string`           | `undefined` |      |
-| width        | `string \| number` | `undefined` |      |
-| height       | `string \| number` | `undefined` |      |
-| show-toolbar | `boolean`          | `true`      |      |
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| src | `string` | `undefined` | 图片来源 |
+| width | `string \| number` | `undefined` | 图片宽度 |
+| height | `string \| number` | `undefined` | 图片高度 |
+| show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |
 
 ### ImageGroup Props
 
-| 名称         | 类型      | 默认值 | 说明 |
-| ------------ | --------- | ------ | ---- |
-| show-toolbar | `boolean` | `true` |      |
+| 名称         | 类型      | 默认值 | 说明                         |
+| ------------ | --------- | ------ | ---------------------------- |
+| show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |
 
 ## Slots
 
