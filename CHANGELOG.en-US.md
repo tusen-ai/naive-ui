@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-menu` add `placement` prop.
+
 ### Fixes
 
 - Fix `n-log` warn on highlight.js when no language is set, closes [#327](https://github.com/TuSimple/naive-ui/issues/327).

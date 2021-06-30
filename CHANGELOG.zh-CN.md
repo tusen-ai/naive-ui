@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-menu` 新增 `placement` 属性
+
 ### Fixes
 
 - 修复 `n-log` 在未设定语言时仍然对缺少 highlight.js 报错，关闭 [#327](https://github.com/TuSimple/naive-ui/issues/327)

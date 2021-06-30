@@ -8,6 +8,7 @@ import { menuInjectionKey } from './Menu'
 import type { MenuSetupProps } from './Menu'
 import { menuItemGroupInjectionKey } from './MenuOptionGroup'
 import { submenuInjectionKey } from './Submenu'
+import { FollowerPlacement } from 'vueuc'
 
 const ICON_MARGIN_RIGHT = 8
 
@@ -37,7 +38,7 @@ export interface MenuOptionGroupInjection {
 export type UseMenuChildProps = ExtractPropTypes<typeof useMenuChildProps>
 
 export interface UseMenuChild {
-  dropdownPlacement: ComputedRef<'bottom' | 'right' | 'right-start'>
+  dropdownPlacement: ComputedRef<FollowerPlacement>
   activeIconSize: ComputedRef<number>
   maxIconSize: ComputedRef<number>
   paddingLeft: ComputedRef<number | undefined>
@@ -60,7 +61,7 @@ export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
   })
   const dropdownPlacementRef = computed(() => {
     if (horizontalRef.value) {
-      return 'bottom'
+      return menuProps.placement
     }
     if ('tmNodes' in props) return 'right-start'
     return 'right'
