@@ -64,7 +64,7 @@ tree
 | single-line | `boolean` | `true` | 是否展示为一行（true 时每一行都有 border-bottom） |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |
 | summary | `CreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#CreateSummary-Type">CreateSummary Type</n-a> |
-| table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellpisis` 或 `max-height` 的情况下固定为 `'fixed'` |
+| table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellipsis` 或 `max-height` 的情况下固定为 `'fixed'` |
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height` |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 |
 | on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: DataTableColumn)` | `undefined` | filters 数据改变时触发的回调函数 |

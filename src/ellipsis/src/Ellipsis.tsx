@@ -10,10 +10,10 @@ import type { EllipsisTheme } from '../styles'
 import style from './styles/index.cssr'
 
 function createLineClampClass (clsPrefix: string): string {
-  return `${clsPrefix}-ellpisis--line-clamp`
+  return `${clsPrefix}-ellipsis--line-clamp`
 }
 
-const ellpisisProps = {
+const ellipsisProps = {
   ...(useTheme.props as ThemeProps<EllipsisTheme>),
   expandTrigger: String as PropType<'click'>,
   lineClamp: [Number, String] as PropType<string | number>,
@@ -23,12 +23,12 @@ const ellpisisProps = {
   }
 } as const
 
-export type EllipsisProps = ExtractPublicPropTypes<typeof ellpisisProps>
+export type EllipsisProps = ExtractPublicPropTypes<typeof ellipsisProps>
 
 export default defineComponent({
   name: 'Ellipsis',
   inheritAttrs: false,
-  props: ellpisisProps,
+  props: ellipsisProps,
   setup (props, { slots, attrs }) {
     const { mergedClsPrefixRef } = useConfig(props)
     const mergedTheme = useTheme(
@@ -42,7 +42,7 @@ export default defineComponent({
     const triggerRef = ref<HTMLElement | null>(null)
     const tooltipRef = ref<TooltipInst | null>(null)
     const expandedRef = ref(false)
-    const ellpisisStyleRef = computed(() => {
+    const ellipsisStyleRef = computed(() => {
       const { lineClamp } = props
       const { value: expanded } = expandedRef
       const cursor = props.expandTrigger === 'click' ? 'pointer' : ''
@@ -91,12 +91,12 @@ export default defineComponent({
       <span
         {...mergeProps(attrs, {
           class: [
-            `${mergedClsPrefixRef.value}-ellpisis`,
+            `${mergedClsPrefixRef.value}-ellipsis`,
             props.lineClamp !== undefined
               ? createLineClampClass(mergedClsPrefixRef.value)
               : undefined
           ],
-          style: ellpisisStyleRef.value
+          style: ellipsisStyleRef.value
         })}
         ref="triggerRef"
         onClick={handleClickRef.value}
@@ -106,7 +106,7 @@ export default defineComponent({
     )
     function syncEllipsisStyle (trigger: HTMLElement): void {
       if (!trigger) return
-      const latestStyle = ellpisisStyleRef.value
+      const latestStyle = ellipsisStyleRef.value
       const lineClampClass = createLineClampClass(mergedClsPrefixRef.value)
       if (props.lineClamp !== undefined) {
         if (!trigger.classList.contains(lineClampClass)) {
