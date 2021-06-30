@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Pending
+
+### Breaking Changes
+
+### Feats
+
+- `n-image` add `alt` prop.
+
+### Fixes
+
 ## 2.15.0 (2021-06-29)
 
 ### Breaking Changes

@@ -6,6 +6,7 @@ import { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
 
 const imageProps = {
+  alt: String,
   width: [String, Number] as PropType<string | number>,
   height: [String, Number] as PropType<string | number>,
   src: String,
@@ -43,15 +44,16 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, alt } = this
     return this.groupId ? (
-      <div class={`${mergedClsPrefix}-image`}>
+      <div class={`${mergedClsPrefix}-image`} role="img" aria-label={alt}>
         <img
           class={this.groupId}
           ref="imageRef"
           width={this.width}
           height={this.height}
           src={this.src}
+          alt={alt}
           onClick={this.handleClick}
         />
       </div>
@@ -64,12 +66,17 @@ export default defineComponent({
         {{
           default: () => {
             return (
-              <div class={`${mergedClsPrefix}-image`}>
+              <div
+                class={`${mergedClsPrefix}-image`}
+                role="img"
+                aria-label={alt}
+              >
                 <img
                   ref="imageRef"
                   width={this.width}
                   height={this.height}
                   src={this.src}
+                  alt={alt}
                   onClick={this.handleClick}
                 />
               </div>

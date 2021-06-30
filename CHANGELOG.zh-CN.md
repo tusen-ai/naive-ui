@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Pending
+
+### Breaking Changes
+
+### Feats
+
+- `n-image` 新增 `alt` 属性.
+
+### Fixes
+
 ## 2.15.0 (2021-06-29)
 
 ### Breaking Changes
