@@ -491,6 +491,7 @@ export default defineComponent({
           if (props.filterable) return
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
+        case 'NumpadEnter':
           if (!mergedShowRef.value) {
             openMenu()
           } else {

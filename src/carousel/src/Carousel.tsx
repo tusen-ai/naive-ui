@@ -103,6 +103,7 @@ export default defineComponent({
     function handleKeydown (e: KeyboardEvent, current: number): void {
       switch (e.code) {
         case 'Enter':
+        case 'NumpadEnter':
         case 'Space':
           setCurrent(current)
       }

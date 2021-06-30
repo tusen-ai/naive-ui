@@ -522,6 +522,7 @@ export default defineComponent({
           handleWrapperKeyDownEsc()
           break
         case 'Enter':
+        case 'NumpadEnter':
           handleWrapperKeyDownEnter(e)
           break
       }
