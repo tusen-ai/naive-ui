@@ -61,7 +61,7 @@ export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
   })
   const dropdownPlacementRef = computed(() => {
     if (horizontalRef.value) {
-      return menuProps.placement
+      return menuProps.dropdownPlacement
     }
     if ('tmNodes' in props) return 'right-start'
     return 'right'

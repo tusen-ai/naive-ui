@@ -155,7 +155,7 @@ const menuProps = {
   renderLabel: Function as PropType<
   (option: MenuOption | MenuGroupOption) => VNodeChild
   >,
-  placement: {
+  dropdownPlacement: {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom'
   }

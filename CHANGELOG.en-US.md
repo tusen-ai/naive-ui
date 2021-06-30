@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-menu` add `placement` prop.
+- `n-menu` add `dropdown-placement` prop.
 
 ### Fixes
 

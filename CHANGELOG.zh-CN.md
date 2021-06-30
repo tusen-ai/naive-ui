@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-menu` 新增 `placement` 属性
+- `n-menu` 新增 `dropdown-placement` 属性
 
 ### Fixes
 
