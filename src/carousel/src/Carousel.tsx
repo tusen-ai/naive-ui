@@ -163,7 +163,7 @@ export default defineComponent({
       off('touchend', document, handleTouchend)
       off('touchcancel', document, handleTouchend)
     }
-    function handleMouseover (current: number): void {
+    function handleMouseenter (current: number): void {
       if (props.trigger === 'hover') {
         setCurrent(current)
       }
@@ -212,7 +212,7 @@ export default defineComponent({
       handleKeydown,
       handleTouchstart,
       handleTransitionEnd,
-      handleMouseover,
+      handleMouseenter,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -286,7 +286,7 @@ export default defineComponent({
                   selected && `${mergedClsPrefix}-carousel__dot--active`
                 ]}
                 onClick={() => this.setCurrent(i + 1)}
-                onMouseover={() => this.handleMouseover(i + 1)}
+                onMouseenter={() => this.handleMouseenter(i + 1)}
                 onKeydown={(e) => this.handleKeydown(e, i + 1)}
               />
             )
