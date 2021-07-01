@@ -1,6 +1,6 @@
 import { cB, cNotM, cM } from '../../../_utils/cssr'
 
-export default cB('ellpisis', {
+export default cB('ellipsis', {
   overflow: 'hidden'
 }, [
   cNotM('line-clamp', `
