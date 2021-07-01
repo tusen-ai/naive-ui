@@ -255,7 +255,7 @@ describe('n-dropdown', () => {
     expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
     expect(
       document
-        .querySelectorAll('.n-dropdown a[href="renderLabel').length
+        .querySelectorAll('.n-dropdown a[href="renderLabel"]').length
     ).toBe(3)
     wrapper.unmount()
   })
