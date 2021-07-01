@@ -276,7 +276,7 @@ export default defineComponent({
     const handleAddClick = doAdd
     const handleMinusClick = doMinus
     function handleKeyDown (e: KeyboardEvent): void {
-      if (e.code === 'Enter') {
+      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
         if (e.target === inputInstRef.value?.wrapperElRef) {
           // hit input wrapper
           // which means not activated
