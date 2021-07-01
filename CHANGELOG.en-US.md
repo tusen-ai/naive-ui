@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-carousel` add `trigger` prop.
 - `n-menu` add `dropdown-placement` prop.
 - `n-upload` add `before-upload` prop.
 

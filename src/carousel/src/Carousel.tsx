@@ -8,7 +8,8 @@ import {
   CSSProperties,
   onMounted,
   watchEffect,
-  onBeforeUnmount
+  onBeforeUnmount,
+  PropType
 } from 'vue'
 import { indexMap } from 'seemly'
 import { on, off } from 'evtd'
@@ -25,6 +26,10 @@ const carouselProps = {
   interval: {
     type: Number,
     default: 5000
+  },
+  trigger: {
+    type: String as PropType<'click' | 'hover'>,
+    default: 'click'
   }
 }
 
@@ -158,6 +163,11 @@ export default defineComponent({
       off('touchend', document, handleTouchend)
       off('touchcancel', document, handleTouchend)
     }
+    function handleMouseenter (current: number): void {
+      if (props.trigger === 'hover') {
+        setCurrent(current)
+      }
+    }
     function resetInterval (): void {
       if (timerId !== null) {
         window.clearInterval(timerId)
@@ -202,6 +212,7 @@ export default defineComponent({
       handleKeydown,
       handleTouchstart,
       handleTransitionEnd,
+      handleMouseenter,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -275,6 +286,7 @@ export default defineComponent({
                   selected && `${mergedClsPrefix}-carousel__dot--active`
                 ]}
                 onClick={() => this.setCurrent(i + 1)}
+                onMouseenter={() => this.handleMouseenter(i + 1)}
                 onKeydown={(e) => this.handleKeydown(e, i + 1)}
               />
             )
