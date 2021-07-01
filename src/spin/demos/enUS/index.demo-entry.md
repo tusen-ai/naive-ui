@@ -7,12 +7,14 @@ It can be called loading, but why it's called loading? Because there is another 
 ```demo
 basic
 wrap
+customize-icon
 ```
 
 ## Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| rotate | `boolean` | `true` | If slot icon is rotate. |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` |  |
 | show | `boolean` | `true` | If spin is active. |
 | stroke-width | `number` | `undefined` | Relative width of spin's stroke, you can assume the outer radius of spin is 100. |
@@ -23,3 +25,4 @@ wrap
 | Name    | Parameters | Description                        |
 | ------- | ---------- | ---------------------------------- |
 | default | `()`       | If set, spin will wrap the content |
+| icon | `()`       | Customize the spin icon |
