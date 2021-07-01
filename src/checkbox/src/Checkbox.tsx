@@ -151,6 +151,7 @@ export default defineComponent({
       switch (e.code) {
         case 'Space':
         case 'Enter':
+        case 'NumpadEnter':
           toggle()
       }
     }

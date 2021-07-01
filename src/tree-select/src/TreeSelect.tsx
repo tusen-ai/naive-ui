@@ -437,7 +437,7 @@ export default defineComponent({
       }
     }
     function handleKeyup (e: KeyboardEvent): void {
-      if (e.code === 'Enter') {
+      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
         if (mergedShowRef.value) {
           treeHandleKeyup(e)
           if (!props.multiple) {

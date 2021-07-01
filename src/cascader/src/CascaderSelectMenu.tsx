@@ -77,7 +77,7 @@ export default defineComponent({
         .filter((option) => {
           return filter(
             pattern,
-            { label: option.label, value: option.value },
+            { label: option.label as string, value: option.value },
             option.path
           )
         })
@@ -103,8 +103,8 @@ export default defineComponent({
         syncSelectMenuPosition()
       })
     })
-    function handleToggleOption (option: BaseOption): void {
-      doCheck(option)
+    function handleToggleOption (option: SelectBaseOption): void {
+      doCheck(option as BaseOption)
     }
     function doCheck (option: BaseOption): void {
       if (props.multiple) {
@@ -135,7 +135,7 @@ export default defineComponent({
       if (menuInstRef) {
         const pendingOptionData = menuInstRef.value?.getPendingOption()
         if (pendingOptionData) {
-          doCheck(pendingOptionData)
+          doCheck(pendingOptionData as BaseOption)
         }
         return true
       }
@@ -168,21 +168,21 @@ export default defineComponent({
           default: () =>
             this.show
               ? withDirectives(
-                <NInternalSelectMenu
-                  ref="menuInstRef"
-                  clsPrefix={mergedClsPrefix}
-                  class={`${mergedClsPrefix}-cascader-menu`}
-                  autoPending
-                  themeOverrides={
-                    mergedTheme.peerOverrides.InternalSelectMenu
-                  }
-                  theme={mergedTheme.peers.InternalSelectMenu}
-                  treeMate={this.selectTreeMate}
-                  multiple={this.multiple}
-                  value={this.value}
-                  onMenuToggleOption={this.handleToggleOption}
-                />,
-                [[clickoutside, this.handleClickOutside]]
+                  <NInternalSelectMenu
+                    ref="menuInstRef"
+                    clsPrefix={mergedClsPrefix}
+                    class={`${mergedClsPrefix}-cascader-menu`}
+                    autoPending
+                    themeOverrides={
+                      mergedTheme.peerOverrides.InternalSelectMenu
+                    }
+                    theme={mergedTheme.peers.InternalSelectMenu}
+                    treeMate={this.selectTreeMate}
+                    multiple={this.multiple}
+                    value={this.value}
+                    onMenuToggleOption={this.handleToggleOption}
+                  />,
+                  [[clickoutside, this.handleClickOutside]]
               )
               : null
         }}

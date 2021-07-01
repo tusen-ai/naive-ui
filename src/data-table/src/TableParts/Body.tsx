@@ -460,7 +460,7 @@ export default defineComponent({
                       {
                         [`${mergedClsPrefix}-data-table-td--ellipsis`]:
                           ellipsis === true ||
-                          // don't add ellpisis class if tooltip exists
+                          // don't add ellipsis class if tooltip exists
                           (ellipsis && !ellipsis.tooltip),
                         [`${mergedClsPrefix}-data-table-td--selection`]:
                           column.type === 'selection',

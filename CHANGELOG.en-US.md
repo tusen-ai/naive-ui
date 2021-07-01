@@ -2,9 +2,29 @@
 
 ## Pending
 
+- `n-select` add `render-tag` prop.
+
+### Feats
+
+- `n-carousel` add `trigger` prop.
+- `n-menu` add `dropdown-placement` prop.
+- `n-upload` add `before-upload` prop.
+- Support the enter key on the numeric keypad.
+
+### Fixes
+
+- Fix `n-log` warn on highlight.js when no language is set, closes [#327](https://github.com/TuSimple/naive-ui/issues/327).
+- Remove `n-calendar`'s useless `console.log`.
+
+## 2.15.1 (2021-06-30)
+
+- Fix no `web-types.json`.
+
+## 2.15.0 (2021-06-29)
+
 ### Breaking Changes
 
-- Rename `n-select`'s `SelectOption`'s `render` prop to `renderLabel`.
+- `n-select`'s `SelectOption`'s `render` no longer render label but the entire option.
 
 ### Feats
 
@@ -14,6 +34,9 @@
 - Add `web-types.json` for webstorm, however I recommend using VSCode and Volar. `web-types.json` only provides limited information for coding.
 - `n-tree-select` add `leaf-only` prop.
 - `n-tree` add `leaf-only` prop.
+- `n-select`'s `SelectOption`'s `label` supports render function.
+- `n-select` add `render-option` prop.
+- `n-select` export `SelectOption` & `SelectGroupOption` type.
 - `n-popover` add `header` slot.
 
 ### Fixes
