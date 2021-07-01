@@ -66,7 +66,7 @@ Naive UI recommends using [xicons](https://www.xicons.org) as icon library.
 
 ### Design Resources
 
-Working in progress.
+[Naive UI Design](https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch).
 
 ## Contributing
 
