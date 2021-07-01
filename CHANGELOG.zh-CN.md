@@ -4,6 +4,8 @@
 
 ### Breaking Changes
 
+- `n-select` 新增 `render-tag` 属性
+
 ### Feats
 
 - `n-carousel` 增加 `trigger` 属性增加触发切换的方式
