@@ -30,14 +30,10 @@ describe('n-spin', () => {
           })
       }
     })
-    expect(wrapper.find('.n-base-loading__icon-slot--rotate').exists()).toBe(
-      true
-    )
+    expect(wrapper.find('.n-spin--rotate').exists()).toBe(true)
     await wrapper.setProps({
       rotate: false
     })
-    expect(wrapper.find('.n-base-loading__icon-slot--rotate').exists()).toBe(
-      false
-    )
+    expect(wrapper.find('.n-spin--rotate').exists()).toBe(false)
   })
 })
