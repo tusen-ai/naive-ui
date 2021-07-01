@@ -10,6 +10,7 @@
 - `n-menu` 新增 `dropdown-placement` 属性
 - `n-upload` 新增 `before-upload` 属性
 - 支持小键盘的 enter 键
+- `n-form` 导出 `FormItemRule` & `FormRules` 类型
 
 ### Fixes
 
