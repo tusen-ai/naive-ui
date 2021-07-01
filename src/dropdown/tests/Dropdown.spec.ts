@@ -251,11 +251,12 @@ describe('n-dropdown', () => {
       renderLabel: renderDropdownLabel
     })
     const triggerNodeWrapper = wrapper.find('span')
-    expect(triggerNodeWrapper.exists()).toBe(true)
     await triggerNodeWrapper.trigger('click')
     expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
     expect(
-      document.querySelector('.n-dropdown')?.querySelectorAll('a').length
+      document
+        .querySelector('.n-dropdown')
+        ?.querySelectorAll('a[href="renderLabel"]').length
     ).toBe(3)
     wrapper.unmount()
   })
