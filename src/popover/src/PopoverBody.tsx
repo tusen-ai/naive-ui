@@ -51,10 +51,7 @@ export const popoverBodyProps = {
   placement: String as PropType<FollowerPlacement>,
   width: [Number, String] as PropType<number | 'trigger'>,
   // private
-  shadow: Boolean,
-  padded: Boolean,
   animated: Boolean,
-  title: String,
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   /** @deprecated */
   minWidth: Number,
@@ -120,9 +117,7 @@ export default defineComponent({
           padding,
           fontSize,
           textColor,
-          titleTextColor,
           dividerColor,
-          titleFontWeight,
           color,
           boxShadow,
           borderRadius,
@@ -137,11 +132,9 @@ export default defineComponent({
         '--bezier-ease-in': cubicBezierEaseIn,
         '--bezier-ease-out': cubicBezierEaseOut,
         '--font-size': fontSize,
-        '--title-font-weight': titleFontWeight,
         '--text-color': textColor,
         '--color': color,
         '--divider-color': dividerColor,
-        '--title-text-color': titleTextColor,
         '--border-radius': borderRadius,
         '--arrow-height': arrowHeight,
         '--arrow-offset': arrowOffset,
@@ -205,7 +198,7 @@ export default defineComponent({
     provide(drawerBodyInjectionKey, null)
     provide(modalBodyInjectionKey, null)
 
-    function renderContentNode (hasHeader: boolean): VNode | null {
+    function renderContentNode (): VNode | null {
       let contentNode: VNode
       const {
         internalRenderBodyRef: { value: renderBody }
@@ -223,8 +216,7 @@ export default defineComponent({
                 {
                   [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
                   [`${mergedClsPrefix}-popover--show-arrow`]: props.showArrow,
-                  [`${mergedClsPrefix}-popover--shadow`]: props.shadow,
-                  [`${mergedClsPrefix}-popover--padded`]: hasHeader,
+                  [`${mergedClsPrefix}-popover--show-header`]: !!slots.header,
                   [`${mergedClsPrefix}-popover--raw`]: props.raw
                 }
               ],
@@ -236,10 +228,10 @@ export default defineComponent({
             attrs
           ),
           [
-            slots.header || props.title ? (
+            slots.header ? (
               <>
                 <div class={`${mergedClsPrefix}-popover__header`}>
-                  {renderSlot(slots, 'header', {}, () => [props.title])}
+                  {slots.header()}
                 </div>
                 <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
               </>
@@ -266,8 +258,7 @@ export default defineComponent({
           // Shadow class exists for reuse box-shadow.
           [
             `${mergedClsPrefix}-popover`,
-            props.overlap && `${mergedClsPrefix}-popover--overlap`,
-            props.shadow && `${mergedClsPrefix}-popover--shadow`
+            props.overlap && `${mergedClsPrefix}-popover--overlap`
           ],
           bodyRef,
           styleRef.value as any,
@@ -290,7 +281,6 @@ export default defineComponent({
     }
   },
   render () {
-    const hasHeader = !(this.$slots.header || this.title) && this.padded
     return h(
       VFollower,
       {
@@ -324,10 +314,10 @@ export default defineComponent({
                 }
               },
               {
-                default: () => this.renderContentNode(hasHeader)
+                default: () => this.renderContentNode()
               }
             )
-            : this.renderContentNode(hasHeader)
+            : this.renderContentNode()
         }
       }
     )

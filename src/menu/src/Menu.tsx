@@ -31,6 +31,7 @@ import {
   OnUpdateKeysImpl
 } from './interface'
 import { layoutSiderInjectionKey } from '../../layout/src/interface'
+import { FollowerPlacement } from 'vueuc'
 
 const menuProps = {
   ...(useTheme.props as ThemeProps<MenuTheme>),
@@ -153,7 +154,11 @@ const menuProps = {
   },
   renderLabel: Function as PropType<
   (option: MenuOption | MenuGroupOption) => VNodeChild
-  >
+  >,
+  dropdownPlacement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'bottom'
+  }
 } as const
 
 export type MenuSetupProps = ExtractPropTypes<typeof menuProps>

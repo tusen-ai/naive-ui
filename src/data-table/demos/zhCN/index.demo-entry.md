@@ -7,7 +7,7 @@
 ## 演示
 
 <n-alert type="warning" title="注意" style="margin-bottom: 16px;">
-  每一列数据都要有唯一的 key，否则要在 table 上声明 <n-text code>row-key</n-text> 属性
+  每一行数据都要有唯一的 key，否则要在 table 上声明 <n-text code>row-key</n-text> 属性
 </n-alert>
 
 ```demo
@@ -47,7 +47,7 @@ tree
 | checked-row-keys | `Array<string \| number>` | `undefined` | 被选中的列的 key |
 | cascade | `boolean` | `true` | 在进行树型数据选择的时候是否级联 |
 | children-key | `string` | `'children'` | 树形数据下后代节点在数据中的 key |
-| columns | `Array<Column>` | `[]` | 需要展示的列 |
+| columns | `Array<DataTableColumn>` | `[]` | 需要展示的列 |
 | data | `Array<object>` | `[]` | 需要展示的数据 |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | 默认选中的 key 值 |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |
@@ -61,13 +61,13 @@ tree
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |
 | scroll-x | `number \| string` | `undefined` | 表格内容的横向宽度，如果列被水平固定了，则需要设定它 |
 | single-column | `boolean` | `false` | 是否展示为一列（true 时每一列都有 border-bottom） |
-| single-line | `boolean` | `true` | 是否展示为一行（true 时每一行都有 border-bottom）|
+| single-line | `boolean` | `true` | 是否展示为一行（true 时每一行都有 border-bottom） |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |
 | summary | `CreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#CreateSummary-Type">CreateSummary Type</n-a> |
-| table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellpisis` 或 `max-height` 的情况下固定为 `'fixed'` |
+| table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellipsis` 或 `max-height` 的情况下固定为 `'fixed'` |
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height` |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 |
-| on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: Column)` | `undefined` | filters 数据改变时触发的回调函数 |
+| on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: DataTableColumn)` | `undefined` | filters 数据改变时触发的回调函数 |
 | on-update:page | `(page: number)` | `undefined` | page 改变时触发的回调函数 |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | page-size 改变时触发的回调函数 |
 | on-update:sorter | `(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => void` | `undefined` | 如果在变动后没有激活的排序，那么 `options` 为 `null` |
@@ -94,12 +94,12 @@ tree
 
 ## API
 
-### Column Properties
+### DataTableColumn Properties
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |
-| children | `Column[]` | `undefined` | 成组列头的子节点 |
+| children | `DataTableColumn[]` | `undefined` | 成组列头的子节点 |
 | className | `string` | `undefined` | 列的类名 |
 | colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的的 col span |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | 非受控状态下默认的过滤器选项值（过滤器单选时生效） |

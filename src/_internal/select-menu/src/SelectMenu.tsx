@@ -8,10 +8,7 @@ import {
   watch,
   toRef,
   renderSlot,
-  provide,
-  Ref,
-  UnwrapRef,
-  InjectionKey
+  provide
 } from 'vue'
 import { TreeNode, createIndexGetter } from 'treemate'
 import { VirtualList, VirtualListInst } from 'vueuc'
@@ -36,32 +33,16 @@ import NSelectOption from './SelectOption'
 import NSelectGroupHeader from './SelectGroupHeader'
 import style from './styles/index.cssr'
 import { internalSelectMenuLight, InternalSelectMenuTheme } from '../styles'
-import { RenderLabel, Size } from './interface'
-
-export interface InternalSelectMenuInjection {
-  handleOptionMouseEnter: (
-    e: MouseEvent,
-    tmNode: TreeNode<SelectBaseOption>
-  ) => void
-  handleOptionClick: (e: MouseEvent, tmNode: TreeNode<SelectBaseOption>) => void
-  valueSetRef: Ref<Set<number | string>>
-  pendingTmNodeRef: Ref<TreeNode<SelectBaseOption> | null>
-  multipleRef: Ref<boolean>
-  valueRef: Ref<string | number | Array<string | number> | null>
-  renderLabelRef: Ref<RenderLabel | undefined>
-}
-
-export const internalSelectionMenuInjectionKey: InjectionKey<InternalSelectMenuInjection> =
-  Symbol('internal-select-menu')
-
-interface InternalExposedProps {
-  selfRef: Ref<HTMLElement | null>
-  getPendingOption: () => SelectBaseOption | null
-  prev: () => void
-  next: () => void
-}
-
-export type InternalSelectMenuRef = UnwrapRef<InternalExposedProps>
+import type {
+  RenderLabel,
+  Size,
+  InternalExposedProps,
+  RenderOption
+} from './interface'
+import {
+  internalSelectionMenuInjectionKey,
+  internalSelectionMenuBodyInjectionKey
+} from './interface'
 
 export default defineComponent({
   name: 'InternalSelectMenu',
@@ -102,6 +83,7 @@ export default defineComponent({
     loading: Boolean,
     focusable: Boolean,
     renderLabel: Function as PropType<RenderLabel>,
+    renderOption: Function as PropType<RenderOption>,
     onMousedown: Function as PropType<(e: MouseEvent) => void>,
     onScroll: Function as PropType<(e: Event) => void>,
     onFocus: Function as PropType<(e: FocusEvent) => void>,
@@ -279,8 +261,10 @@ export default defineComponent({
       multipleRef: toRef(props, 'multiple'),
       valueRef: toRef(props, 'value'),
       renderLabelRef: toRef(props, 'renderLabel'),
+      renderOptionRef: toRef(props, 'renderOption'),
       pendingTmNodeRef: pendingNodeRef
     })
+    provide(internalSelectionMenuBodyInjectionKey, selfRef)
     onMounted(() => {
       const { value } = scrollbarRef
       if (value) value.sync()

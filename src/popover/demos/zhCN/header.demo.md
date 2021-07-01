@@ -1,19 +1,15 @@
 # 带标题
 
+使用 `header` slot 来自定义标题。
+
 ```html
-<n-space>
-  <n-popover trigger="click">
-    <template #trigger>
-      <n-button>点击</n-button>
-    </template>
-    <template #header> I am title </template>
-    <span>或许不想知道你的花园长得咋样</span>
-  </n-popover>
-  <n-popover trigger="click" title="I am title">
-    <template #trigger>
-      <n-button>点击</n-button>
-    </template>
-    <span>或许不想知道你的花园长得咋样</span>
-  </n-popover>
-</n-space>
+<n-popover trigger="click">
+  <template #trigger>
+    <n-button>提供这个接口是因为分割线不好写</n-button>
+  </template>
+  <template #header>
+    <n-text strong depth="1">下面就是分割线</n-text>
+  </template>
+  上面就是分割线
+</n-popover>
 ```

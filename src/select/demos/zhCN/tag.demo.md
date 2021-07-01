@@ -16,11 +16,13 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      multipleSelectValue: null,
-      selectValue: null,
+      multipleSelectValue: ref(null),
+      selectValue: ref(null),
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
@@ -80,5 +82,5 @@ export default {
       ]
     }
   }
-}
+})
 ```

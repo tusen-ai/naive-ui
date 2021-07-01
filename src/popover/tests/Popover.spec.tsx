@@ -127,24 +127,6 @@ describe('n-popover', () => {
     wrapper.unmount()
   })
 
-  it('title', () => {
-    const wrapper = mount(NPopover, {
-      attachTo: document.body,
-      props: {
-        show: true,
-        title: 'I am title'
-      },
-      slots: {
-        trigger: () => <div>click</div>,
-        default: () => <div>star kirby</div>
-      }
-    })
-    expect(document.querySelector(popoverBodyHeader)?.textContent).toEqual(
-      'I am title'
-    )
-    wrapper.unmount()
-  })
-
   it('header slot', () => {
     const wrapper = mount(NPopover, {
       attachTo: document.body,

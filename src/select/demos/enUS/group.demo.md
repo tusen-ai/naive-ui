@@ -7,10 +7,12 @@ Group options together.
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: null,
+      value: ref(null),
       options: [
         {
           type: 'group',
@@ -133,5 +135,5 @@ export default {
       ]
     }
   }
-}
+})
 ```

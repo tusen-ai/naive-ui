@@ -21,11 +21,13 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      selectedValue: null,
-      selectedValues: null,
+      selectedValue: ref(null),
+      selectedValues: ref(null),
       options: [
         {
           label: 'Drive My Car',
@@ -78,5 +80,5 @@ export default {
       ]
     }
   }
-}
+})
 ```

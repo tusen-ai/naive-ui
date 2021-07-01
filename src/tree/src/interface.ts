@@ -71,6 +71,7 @@ export interface TreeInjection {
   droppingOffsetLevelRef: Ref<number>
   disabledRef: Ref<boolean>
   checkableRef: Ref<boolean>
+  cascadeRef: Ref<boolean>
   leafOnlyRef: Ref<boolean>
   selectableRef: Ref<boolean>
   pendingNodeKeyRef: Ref<null | Key>
