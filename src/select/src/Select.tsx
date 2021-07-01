@@ -550,6 +550,7 @@ export default defineComponent({
           if (props.filterable) break
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
+        case 'NumpadEnter':
           if (mergedShowRef.value) {
             const menu = menuRef.value
             const pendingOptionData = menu?.getPendingOption()

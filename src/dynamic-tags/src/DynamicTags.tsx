@@ -115,6 +115,7 @@ export default defineComponent({
     function handleInputKeyUp (e: KeyboardEvent): void {
       switch (e.code) {
         case 'Enter':
+        case 'NumpadEnter':
           handleInputConfirm()
       }
     }

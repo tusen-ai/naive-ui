@@ -135,6 +135,7 @@ const Button = defineComponent({
     const handleKeyUp = (e: KeyboardEvent): void => {
       switch (e.code) {
         case 'Enter':
+        case 'NumpadEnter':
           if (!props.keyboard) {
             e.preventDefault()
             return
@@ -150,6 +151,7 @@ const Button = defineComponent({
     const handleKeyDown = (e: KeyboardEvent): void => {
       switch (e.code) {
         case 'Enter':
+        case 'NumpadEnter':
           if (!props.keyboard) return
           e.preventDefault()
           enterPressedRef.value = true

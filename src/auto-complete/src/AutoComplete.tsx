@@ -175,6 +175,7 @@ export default defineComponent({
     function handleKeyDown (e: KeyboardEvent): void {
       switch (e.code) {
         case 'Enter':
+        case 'NumpadEnter':
           if (!isComposingRef.value) {
             const pendingOptionData = menuInstRef.value?.getPendingOption()
             if (pendingOptionData) {
