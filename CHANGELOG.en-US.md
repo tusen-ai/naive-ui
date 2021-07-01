@@ -19,6 +19,7 @@
 
 - Fix `n-log` warn on highlight.js when no language is set, closes [#327](https://github.com/TuSimple/naive-ui/issues/327).
 - Remove `n-calendar`'s useless `console.log`.
+- Fix loading-bar disappears unexpectl, closes [#343](https://github.com/TuSimple/naive-ui/issues/343).
 
 ## 2.15.1 (2021-06-30)
 
