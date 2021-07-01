@@ -64,7 +64,8 @@ export default defineComponent({
       pendingKeyPathRef,
       activeKeyPathRef,
       animatedRef,
-      mergedShowRef
+      mergedShowRef,
+      renderLabelRef
     } = NDropdown
     const NDropdownOption = inject(dropdownOptionInjectionKey, null)
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -153,6 +154,7 @@ export default defineComponent({
       }
     }
     return {
+      renderLabel: renderLabelRef,
       siblingHasIcon: NDropdownMenu.showIconRef,
       siblingHasSubmenu: NDropdownMenu.hasSubmenuRef,
       animated: animatedRef,
@@ -196,7 +198,8 @@ export default defineComponent({
       mergedShowSubmenu,
       clsPrefix,
       siblingHasIcon,
-      siblingHasSubmenu
+      siblingHasSubmenu,
+      renderLabel
     } = this
     const submenuVNode = mergedShowSubmenu ? (
       <NDropdownMenu
@@ -239,7 +242,9 @@ export default defineComponent({
             class={`${clsPrefix}-dropdown-option-body__label`}
           >
             {/* TODO: Workaround, menu campatible */}
-            {render(rawNode.label ?? rawNode.title)}
+            {renderLabel
+              ? renderLabel(rawNode)
+              : render(rawNode.label ?? rawNode.title)}
           </div>
           <div
             __dropdown-option

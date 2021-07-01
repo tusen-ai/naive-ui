@@ -45,6 +45,7 @@
 - `n-select` 新增 `render-option` 属性
 - `n-select` 导出 `SelectOption` & `SelectGroupOption` 类型
 - `n-popover` 支持使用 `header` slot
+- `n-dropdown` 新增 `render-label` 属性
 
 ### Fixes
 
