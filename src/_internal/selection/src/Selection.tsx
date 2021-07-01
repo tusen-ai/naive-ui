@@ -25,6 +25,7 @@ import type { InternalSelectionTheme } from '../styles'
 import Suffix from './Suffix'
 import style from './styles/index.cssr'
 import type { TagRef } from '../../../tag/src/Tag'
+import { RenderTag } from './interface'
 
 export interface InternalSelectionInst {
   focus: () => void
@@ -73,6 +74,7 @@ export default defineComponent({
       default: true
     },
     focused: Boolean,
+    renderTag: Function as PropType<RenderTag>,
     onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
     onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
     onClick: Function as PropType<(e: MouseEvent) => void>,
@@ -463,7 +465,8 @@ export default defineComponent({
       filterable,
       maxTagCount,
       bordered,
-      clsPrefix
+      clsPrefix,
+      renderTag
     } = this
     const maxTagCountResponsive = maxTagCount === 'responsive'
     const maxTagCountNumeric = typeof maxTagCount === 'number'
@@ -485,15 +488,22 @@ export default defineComponent({
           class={`${clsPrefix}-base-selection-tag-wrapper`}
           key={option.value}
         >
-          <NTag
-            size={size}
-            closable
-            disabled={disabled}
-            internalStopClickPropagation
-            onClose={() => this.handleDeleteOption(option)}
-          >
-            {{ default: () => option.label }}
-          </NTag>
+          {renderTag ? (
+            renderTag({
+              option,
+              handleClose: () => this.handleDeleteOption(option)
+            })
+          ) : (
+            <NTag
+              size={size}
+              closable
+              disabled={disabled}
+              internalStopClickPropagation
+              onClose={() => this.handleDeleteOption(option)}
+            >
+              {{ default: () => option.label }}
+            </NTag>
+          )}
         </div>
       )
       const originalTags = (

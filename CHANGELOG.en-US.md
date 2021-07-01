@@ -2,6 +2,8 @@
 
 ## Pending
 
+- `n-select` add `render-tag` prop.
+
 ### Feats
 
 - `n-carousel` add `trigger` prop.
