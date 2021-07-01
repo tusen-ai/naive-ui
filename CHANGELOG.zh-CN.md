@@ -2,6 +2,8 @@
 
 ## Pending
 
+### Breaking Changes
+
 - `n-select` 新增 `render-tag` 属性
 
 ### Feats
@@ -9,6 +11,7 @@
 - `n-carousel` 增加 `trigger` 属性增加触发切换的方式
 - `n-menu` 新增 `dropdown-placement` 属性
 - `n-upload` 新增 `before-upload` 属性
+- `n-image` 新增 `alt` 属性.
 - 支持小键盘的 enter 键
 - `n-form` 导出 `FormItemRule` & `FormRules` 类型
 
