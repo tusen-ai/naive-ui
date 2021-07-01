@@ -47,6 +47,10 @@ const spinProps = {
       return true
     },
     default: undefined
+  },
+  rotate: {
+    type: Boolean,
+    default: true
   }
 }
 
@@ -117,6 +121,7 @@ export default defineComponent({
                   clsPrefix={mergedClsPrefix}
                   stroke={this.stroke}
                   strokeWidth={this.mergedStrokeWidth}
+                  rotate={this.rotate}
                   class={`${mergedClsPrefix}-spin`}
                 >
                   {{ icon: $slots.icon }}
@@ -131,6 +136,7 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
         stroke={this.stroke}
         stroke-width={this.mergedStrokeWidth}
+        rotate={this.rotate}
         class={`${mergedClsPrefix}-spin`}
       >
         {{ icon: $slots.icon }}

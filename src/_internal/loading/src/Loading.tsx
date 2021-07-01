@@ -33,6 +33,10 @@ export default defineComponent({
     show: {
       type: Boolean,
       default: true
+    },
+    rotate: {
+      type: Boolean,
+      default: true
     }
   },
   setup (props) {
@@ -47,7 +51,13 @@ export default defineComponent({
           {{
             default: () =>
               this.show ? (
-                $slots.icon ? $slots.icon() :
+                $slots.icon ?
+                  <div class={[
+                    `${clsPrefix}-base-loading__icon-slot`,
+                    this.rotate && `${clsPrefix}-base-loading__icon-slot--rotate`
+                    ]}>
+                   {$slots.icon()}
+                  </div> :
                 <svg
                   class={`${clsPrefix}-base-loading__icon`}
                   viewBox={`0 0 ${2 * scaledRadius} ${2 * scaledRadius}`}

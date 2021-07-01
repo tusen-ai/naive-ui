@@ -14,6 +14,7 @@ customize-icon
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| rotate | `boolean` | `true` | If slot icon is rotate. |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` |  |
 | show | `boolean` | `true` | If spin is active. |
 | stroke-width | `number` | `undefined` | Relative width of spin's stroke, you can assume the outer radius of spin is 100. |

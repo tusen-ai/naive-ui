@@ -2,7 +2,7 @@
 
 ```html
 <n-space vertical>
-  <n-spin size="small" >
+  <n-spin size="small">
     <template #icon>
       <n-icon>
         <Reload />

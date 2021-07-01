@@ -14,6 +14,7 @@ customize-icon
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| rotate | `boolean` | `true` | 自定义加载图标是否有旋转动画 |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` |  |
 | show | `boolean` | `true` | Spin 在填入内容的状态是否激活 |
 | stroke-width | `number` | `undefined` | Spin 边缘的相对宽度，假定 Spin 的外侧半径是 100 |
