@@ -208,7 +208,7 @@ export default defineComponent({
     }
     provide(logInjectionKey, {
       languageRef: toRef(props, 'language'),
-      mergedHljsRef: useHljs(props),
+      mergedHljsRef: useHljs(props, highlightRef),
       trimRef: toRef(props, 'trim'),
       highlightRef
     })
@@ -270,6 +270,7 @@ export default defineComponent({
           {{
             default: () => (
               <NCode
+                internalNoHighlight
                 theme={mergedTheme.peers.Code}
                 themeOverrides={mergedTheme.peerOverrides.Code}
               >

@@ -1,6 +1,6 @@
 # 菜单内容很长
 
-将 `label` 设为渲染函数，结合 `n-ellpisis`。
+将 `label` 设为渲染函数，结合 `n-ellipsis`。
 
 ```html
 <n-menu :options="options" style="width: 180px;" default-value="1" />

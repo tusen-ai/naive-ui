@@ -69,7 +69,6 @@ export default defineComponent({
       if (_onUpdateValue) {
         call(_onUpdateValue, value, time)
       }
-      console.log(time)
       uncontrolledValueRef.value = value
     }
 
