@@ -22,6 +22,7 @@
 - 修复 `n-log` 在未设定语言时仍然对缺少 highlight.js 报错，关闭 [#327](https://github.com/TuSimple/naive-ui/issues/327)
 - 移除 `n-calendar` 无用的 console.log
 - 修复 loading-bar 自动消失，关闭 [#343](https://github.com/TuSimple/naive-ui/issues/343)
+- 修复 `n-select` 打开菜单时没有自动滚动到选中项，关闭 [#346](https://github.com/TuSimple/naive-ui/issues/346)
 
 ## 2.15.1 (2021-06-30)
 
