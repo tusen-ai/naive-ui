@@ -2,6 +2,8 @@
 
 ## Pending
 
+### Breaking Changes
+
 - `n-select` 新增 `render-tag` 属性
 
 ### Feats
@@ -9,14 +11,17 @@
 - `n-carousel` 增加 `trigger` 属性增加触发切换的方式
 - `n-menu` 新增 `dropdown-placement` 属性
 - `n-upload` 新增 `before-upload` 属性
+- `n-image` 新增 `alt` 属性.
 - 支持小键盘的 enter 键
 - `n-spin` 支持 `icon` 插槽为了自定义加载图标，closes[#260](https://github.com/TuSimple/naive-ui/issues/260)
 - `n-spin` 新增 `rotate` 属性控制自定义加载图标是否有旋转动画
+- `n-form` 导出 `FormItemRule` & `FormRules` 类型
 
 ### Fixes
 
 - 修复 `n-log` 在未设定语言时仍然对缺少 highlight.js 报错，关闭 [#327](https://github.com/TuSimple/naive-ui/issues/327)
 - 移除 `n-calendar` 无用的 console.log
+- 修复 loading-bar 自动消失，关闭 [#343](https://github.com/TuSimple/naive-ui/issues/343)
 
 ## 2.15.1 (2021-06-30)
 

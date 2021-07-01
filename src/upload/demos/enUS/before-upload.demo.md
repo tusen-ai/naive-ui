@@ -21,7 +21,9 @@ export default defineComponent({
     return {
       async beforeUpload ({ file, fileList }) {
         if (file.file.type !== 'image/png') {
-          message.error('Only upload picture files in png format, please re-upload.')
+          message.error(
+            'Only upload picture files in png format, please re-upload.'
+          )
           return false
         }
         return true
