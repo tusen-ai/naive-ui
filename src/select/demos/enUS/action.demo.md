@@ -9,10 +9,12 @@ Is there anybody needs action slot on select menu?
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: null,
+      value: ref(null),
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
@@ -35,5 +37,5 @@ export default {
       ]
     }
   }
-}
+})
 ```
