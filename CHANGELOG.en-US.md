@@ -10,6 +10,7 @@
 - `n-menu` add `dropdown-placement` prop.
 - `n-upload` add `before-upload` prop.
 - Support the enter key on the numeric keypad.
+- `n-form` export `FormItemRule` & `FormRules` type.
 
 ### Fixes
 
