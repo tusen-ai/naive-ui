@@ -11,9 +11,10 @@ describe('n-spin', () => {
   it('should work with icon slot', () => {
     const wrapper = mount(NSpin, {
       slots: {
-        icon: () => h(NIcon, null, {
-          default: () => h(Reload)
-        })
+        icon: () =>
+          h(NIcon, null, {
+            default: () => h(Reload)
+          })
       }
     })
 
@@ -23,15 +24,20 @@ describe('n-spin', () => {
   it('rotate should work on icon slot', async () => {
     const wrapper = mount(NSpin, {
       slots: {
-        icon: () => h(NIcon, null, {
-          default: () => h(Reload)
-        })
+        icon: () =>
+          h(NIcon, null, {
+            default: () => h(Reload)
+          })
       }
     })
-    expect(wrapper.find('.n-base-loading__icon-slot--rotate').exists()).toBe(true)
+    expect(wrapper.find('.n-base-loading__icon-slot--rotate').exists()).toBe(
+      true
+    )
     await wrapper.setProps({
       rotate: false
     })
-    expect(wrapper.find('.n-base-loading__icon-slot--rotate').exists()).toBe(false)
+    expect(wrapper.find('.n-base-loading__icon-slot--rotate').exists()).toBe(
+      false
+    )
   })
 })

@@ -100,6 +100,26 @@ export default defineComponent({
   },
   render () {
     const { $slots, mergedClsPrefix } = this
+    const rotate = $slots.icon && this.rotate
+    const icon = $slots.icon ? (
+      <div
+        class={[
+          `${mergedClsPrefix}-spin`,
+          rotate && `${mergedClsPrefix}-spin--rotate`
+        ]}
+        style={$slots.default ? '' : (this.cssVars as CSSProperties)}
+      >
+        {$slots.icon()}
+      </div>
+    ) : (
+      <NBaseLoading
+        clsPrefix={mergedClsPrefix}
+        style={$slots.default ? '' : (this.cssVars as CSSProperties)}
+        stroke={this.stroke}
+        stroke-width={this.mergedStrokeWidth}
+        class={`${mergedClsPrefix}-spin`}
+      />
+    )
     return $slots.default ? (
       <div
         class={`${mergedClsPrefix}-spin-container`}
@@ -115,32 +135,12 @@ export default defineComponent({
         </div>
         <Transition name="fade-in-transition">
           {{
-            default: () =>
-              this.compitableShow ? (
-                <NBaseLoading
-                  clsPrefix={mergedClsPrefix}
-                  stroke={this.stroke}
-                  strokeWidth={this.mergedStrokeWidth}
-                  rotate={this.rotate}
-                  class={`${mergedClsPrefix}-spin`}
-                >
-                  {{ icon: $slots.icon }}
-                </NBaseLoading>
-              ) : null
+            default: () => (this.compitableShow ? icon : null)
           }}
         </Transition>
       </div>
     ) : (
-      <NBaseLoading
-        clsPrefix={mergedClsPrefix}
-        style={this.cssVars as CSSProperties}
-        stroke={this.stroke}
-        stroke-width={this.mergedStrokeWidth}
-        rotate={this.rotate}
-        class={`${mergedClsPrefix}-spin`}
-      >
-        {{ icon: $slots.icon }}
-      </NBaseLoading>
+      icon
     )
   }
 })
