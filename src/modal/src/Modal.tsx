@@ -81,7 +81,7 @@ const modalProps = {
     default: undefined
   },
   onBeforeHide: {
-    type: (Function as unknown) as PropType<(() => void) | undefined>,
+    type: Function as unknown as PropType<(() => void) | undefined>,
     validator: () => {
       if (__DEV__) {
         warn(
@@ -94,7 +94,7 @@ const modalProps = {
     default: undefined
   },
   onAfterHide: {
-    type: (Function as unknown) as PropType<(() => void) | undefined>,
+    type: Function as unknown as PropType<(() => void) | undefined>,
     validator: () => {
       if (__DEV__) {
         warn(
@@ -107,9 +107,7 @@ const modalProps = {
     default: undefined
   },
   onHide: {
-    type: (Function as unknown) as PropType<
-    ((value: false) => void) | undefined
-    >,
+    type: Function as unknown as PropType<((value: false) => void) | undefined>,
     validator: () => {
       if (__DEV__) warn('modal', '`on-hide` is deprecated.')
       return true
@@ -177,8 +175,9 @@ export default defineComponent({
           if (value === false) return
           doUpdateShow(false)
         })
+      } else {
+        doUpdateShow(false)
       }
-      doUpdateShow(false)
     }
     function handleBeforeLeave (): void {
       const { onBeforeLeave, onBeforeHide } = props
