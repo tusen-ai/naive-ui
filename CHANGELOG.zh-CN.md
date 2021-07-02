@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## Pending
+
 ### Feats
 
 - `n-loading-bar` 导出 `LoadingBarApi` 类型

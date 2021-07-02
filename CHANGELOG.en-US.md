@@ -1,4 +1,6 @@
 # CHANGELOG
+## Pending
+
 ### Feats
 
 - `n-loading-bar` export `LoadingBarApi` type
