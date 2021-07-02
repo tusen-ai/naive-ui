@@ -24,6 +24,7 @@
 - Fix loading-bar disappears unexpectl, closes [#343](https://github.com/TuSimple/naive-ui/issues/343).
 - Fix `n-select` doesn't scroll to selected item when menu is opened, closes [#346](https://github.com/TuSimple/naive-ui/issues/346).
 - Fix `n-tab-pane` throws error when using v-if.
+- Fix `n-menu` `render-label` not working for dropdown in collapsed mode.
 
 ## 2.15.1 (2021-06-30)
 
