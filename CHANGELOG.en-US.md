@@ -2,6 +2,8 @@
 
 ## Pending
 
+- Fix `n-collapse` the props of defaultExpandedNames does not work, closes [#350](https://github.com/TuSimple/naive-ui/issues/350).
+
 ### Breaking Changes
 
 - `n-select` add `render-tag` prop.
