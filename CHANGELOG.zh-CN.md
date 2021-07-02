@@ -2,6 +2,8 @@
 
 ## Pending
 
+- 修复 `n-collapse` 默认指定展开属性无效，关闭 [#350](https://github.com/TuSimple/naive-ui/issues/350)
+
 ### Breaking Changes
 
 - `n-select` 新增 `render-tag` 属性
