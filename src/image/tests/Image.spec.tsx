@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils'
 import { NImage } from '../index'
-import ImagePreview from '../src/ImagePreview'
 
 describe('n-image', () => {
   it('should work with import on demand', () => {
@@ -55,12 +54,27 @@ describe('n-image', () => {
   })
 
   it('should work with `showToolbar` prop', async () => {
-    const wrapper = mount(NImage)
+    const wrapper = mount(NImage, {
+      attachTo: document.body
+    })
 
     await wrapper.setProps({
       showToolbar: true
     })
 
-    expect(wrapper.findComponent(ImagePreview).props('showToolbar')).toBe(true)
+    await wrapper.find('img').trigger('click')
+
+    console.log(document.querySelector('n-image-preview-toolbar'))
+
+    // await wrapper
+    //   .findComponent(ImagePreview)
+    //   .findComponent(LazyTeleport)
+    //   .setProps({
+    //     disabled: true
+    //   })
+
+    // expect(
+    //   wrapper.findComponent(ImagePreview).findComponent(LazyTeleport).html()
+    // ).toBe(true)
   })
 })
