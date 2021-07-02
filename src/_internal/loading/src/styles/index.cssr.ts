@@ -7,12 +7,12 @@ export default cB('base-loading', `
   width: 1em;
   height: 1em;
 `, [
-  cE('placeholder', {
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
-    transform: 'translateX(-50%) translateY(-50%)'
-  }, [
+  cE('placeholder', `
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  `, [
     iconSwitchTransition({
       left: '50%',
       top: '50%',

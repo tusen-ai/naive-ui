@@ -26,6 +26,7 @@ import {
   RenderLabel,
   RenderOption
 } from '../../_internal/select-menu/src/interface'
+import { RenderTag } from '../../_internal/selection/src/interface'
 import { useTheme, useConfig, useLocale, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, call, useAdjustedTo, ExtractPublicPropTypes } from '../../_utils'
@@ -130,6 +131,7 @@ const selectProps = {
   },
   renderLabel: Function as PropType<RenderLabel>,
   renderOption: Function as PropType<RenderOption>,
+  renderTag: Function as PropType<RenderTag>,
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<OnUpdateValue> | undefined
   >,
@@ -550,6 +552,7 @@ export default defineComponent({
           if (props.filterable) break
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
+        case 'NumpadEnter':
           if (mergedShowRef.value) {
             const menu = menuRef.value
             const pendingOptionData = menu?.getPendingOption()
@@ -686,6 +689,7 @@ export default defineComponent({
                       selectedOption={this.selectedOption}
                       selectedOptions={this.selectedOptions}
                       multiple={this.multiple}
+                      renderTag={this.renderTag}
                       filterable={this.filterable}
                       clearable={this.clearable}
                       disabled={this.disabled}

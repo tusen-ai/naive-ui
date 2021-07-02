@@ -11,6 +11,7 @@ cascade
 placement
 size
 manual-position
+render-label
 ```
 
 ## Props
@@ -21,6 +22,7 @@ manual-position
 | inverted | `boolean` | `false` | Use inverted style. |
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. (Be careful about the potential conflicts with other components keyboard operations) |
 | options | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | `[]` | Options of the dropdown. |
+| render-label | `(option: DropdownOption \| DropdownSubmenu) => VNodeChild` | `undefined` | Render function that renders all labels. |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | Dropdown size. |
 | on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when clickoutside. |
 | on-select | `(key: string \| number) => void` | `undefined` | Callback function triggered on blur. |

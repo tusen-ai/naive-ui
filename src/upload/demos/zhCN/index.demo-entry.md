@@ -11,6 +11,7 @@ submit-manually
 controlled
 on-finish
 default-files
+before-upload
 ```
 
 ## Props
@@ -38,7 +39,7 @@ default-files
 | on-change | `(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |
 | on-finish | `(options: { file: UploadFile }) => UploadFile \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFile 或者返回一个新的 UploadFile |
 | on-update:file-list | `(fileList: UploadFile[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |
-| on-remove | `(options: { file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any` | `() => true` | 文件移除的回调，返回 false 或者 promise resolve false 或者 promise reject 会不执行这次删除 |
+| on-before-upload | `(options: { file: UploadFile, fileList: UploadFile[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |
 
 ### UploadFile Type
 

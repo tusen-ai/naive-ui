@@ -1,5 +1,30 @@
 # CHANGELOG
 
+## 2.15.2 (2021-07-02)
+
+### Feats
+
+- `n-carousel` 增加 `trigger` 属性增加触发切换的方式
+- `n-menu` 新增 `dropdown-placement` 属性
+- `n-upload` 新增 `before-upload` 属性
+- `n-image` 新增 `alt` 属性.
+- 支持小键盘的 enter 键
+- `n-spin` 支持 `icon` 插槽为了自定义加载图标，closes[#260](https://github.com/TuSimple/naive-ui/issues/260)
+- `n-spin` 新增 `rotate` 属性控制自定义加载图标是否有旋转动画
+- `n-form` 导出 `FormItemRule` & `FormRules` 类型
+- `n-select` 新增 `render-tag` 属性
+
+### Fixes
+
+- 修复 `n-log` 在未设定语言时仍然对缺少 highlight.js 报错，关闭 [#327](https://github.com/TuSimple/naive-ui/issues/327)
+- 移除 `n-calendar` 无用的 console.log
+- 修复 loading-bar 自动消失，关闭 [#343](https://github.com/TuSimple/naive-ui/issues/343)
+- 修复 `n-select` 打开菜单时没有自动滚动到选中项，关闭 [#346](https://github.com/TuSimple/naive-ui/issues/346)
+- 修复 `n-tab-pane` 在使用 v-if 时报错
+- 修复 `n-modal` `on-negative-click` 返回 false 时 modal 依然关闭
+- 修复 `n-collapse` 在 accordion 模式下默认指定展开属性无效，关闭 [#350](https://github.com/TuSimple/naive-ui/issues/350)
+- 修复 `n-tag` 缺少 `on-update-checked` 属性
+
 ## 2.15.1 (2021-06-30)
 
 - 修复缺少 `web-types.json`
@@ -22,6 +47,7 @@
 - `n-select` 新增 `render-option` 属性
 - `n-select` 导出 `SelectOption` & `SelectGroupOption` 类型
 - `n-popover` 支持使用 `header` slot
+- `n-dropdown` 新增 `render-label` 属性
 
 ### Fixes
 

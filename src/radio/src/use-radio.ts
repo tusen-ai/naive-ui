@@ -58,9 +58,8 @@ export interface RadioGroupInjection {
   doUpdateValue: (value: string | number) => void
 }
 
-export const radioGroupInjectionKey: InjectionKey<RadioGroupInjection> = Symbol(
-  'radioGroup'
-)
+export const radioGroupInjectionKey: InjectionKey<RadioGroupInjection> =
+  Symbol('radioGroup')
 
 export interface UseRadio {
   mergedClsPrefix: Ref<string>
@@ -153,6 +152,7 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
   function handleKeyUp (e: KeyboardEvent): void {
     switch (e.code) {
       case 'Enter':
+      case 'NumpadEnter':
         inputRef.value?.click()
     }
   }
