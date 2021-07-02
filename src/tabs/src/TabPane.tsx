@@ -38,6 +38,7 @@ export const tabPaneProps = {
 export type TabPaneProps = ExtractPublicPropTypes<typeof tabPaneProps>
 
 export default defineComponent({
+  __TAB_PANE__: true,
   name: 'TabPane',
   alias: ['TabPanel'],
   props: tabPaneProps,

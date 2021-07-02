@@ -23,6 +23,7 @@
 - 移除 `n-calendar` 无用的 console.log
 - 修复 loading-bar 自动消失，关闭 [#343](https://github.com/TuSimple/naive-ui/issues/343)
 - 修复 `n-select` 打开菜单时没有自动滚动到选中项，关闭 [#346](https://github.com/TuSimple/naive-ui/issues/346)
+- 修复 `n-tab-pane` 在使用 v-if 时报错
 
 ## 2.15.1 (2021-06-30)
 
