@@ -44,7 +44,13 @@ describe('n-tree', () => {
             label: 'test',
             key: '123',
             prefix: 'prefix',
-            suffix: 'suffix'
+            suffix: 'suffix',
+            children: [
+              {
+                label: '123',
+                key: '123'
+              }
+            ]
           }
         ]
       }
