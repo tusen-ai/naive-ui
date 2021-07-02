@@ -60,8 +60,8 @@ describe('n-image', () => {
       showToolbar: true
     })
 
-    // await wrapper.find('img').trigger('click')
+    await wrapper.find('img').trigger('click')
 
-    expect(!!document.querySelector('.n-image-preview-toolbar')).toBe(true)
+    expect(document.querySelector('.n-image-preview-toolbar')).not.toEqual(null)
   })
 })

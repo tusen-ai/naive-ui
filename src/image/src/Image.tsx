@@ -1,11 +1,11 @@
 import {
-  computed,
   defineComponent,
   h,
   inject,
   ref,
   PropType,
-  ImgHTMLAttributes
+  ImgHTMLAttributes,
+  toRef
 } from 'vue'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
@@ -29,20 +29,12 @@ export default defineComponent({
   props: imageProps,
   setup (props) {
     const imageRef = ref<HTMLImageElement | null>(null)
-    const imgPropsRef = props.imgProps || {}
+    const imgPropsRef = toRef(props, 'imgProps')
     const previewInstRef = ref<ImagePreviewInst | null>(null)
     const imageGroupHandle = inject(imageGroupInjectionKey, null)
     const { mergedClsPrefixRef } = imageGroupHandle || useConfig(props)
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      mergedWidth: computed(() =>
-        props.width ? props.width : imgPropsRef.width
-      ),
-      mergedHeight: computed(() =>
-        props.height ? props.height : imgPropsRef.height
-      ),
-      mergedSrc: computed(() => (props.src ? props.src : imgPropsRef.src)),
-      mergedAlt: computed(() => (props.alt ? props.alt : imgPropsRef.alt)),
       groupId: imageGroupHandle?.groupId,
       previewInstRef,
       imageRef,
@@ -63,21 +55,25 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, imgProps } = this
+    const { mergedClsPrefix, imgProps = {} } = this
+
+    const imgNode = (
+      <img
+        {...imgProps}
+        class={this.groupId}
+        ref="imageRef"
+        width={this.width ? this.width : imgProps.width}
+        height={this.height ? this.height : imgProps.height}
+        src={this.src ? this.src : imgProps.src}
+        alt={this.alt ? this.alt : imgProps.alt}
+        aria-label={this.alt ? this.alt : imgProps.alt}
+        onClick={this.handleClick}
+      />
+    )
 
     return this.groupId ? (
       <div class={`${mergedClsPrefix}-image`} role="none">
-        <img
-          {...imgProps}
-          class={this.groupId}
-          ref="imageRef"
-          width={this.mergedWidth}
-          height={this.mergedHeight}
-          src={this.mergedSrc}
-          alt={this.mergedAlt}
-          aria-label={this.mergedAlt}
-          onClick={this.handleClick}
-        />
+        {imgNode}
       </div>
     ) : (
       <NImagePreview
@@ -89,16 +85,7 @@ export default defineComponent({
           default: () => {
             return (
               <div class={`${mergedClsPrefix}-image`} role="none">
-                <img
-                  ref="imageRef"
-                  {...imgProps}
-                  width={this.mergedWidth}
-                  height={this.mergedHeight}
-                  src={this.mergedSrc}
-                  alt={this.mergedAlt}
-                  aria-label={this.mergedAlt}
-                  onClick={this.handleClick}
-                />
+                {imgNode}
               </div>
             )
           }
