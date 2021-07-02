@@ -1,10 +1,13 @@
 # CHANGELOG
 
+### Feats
+
+- `n-loading-bar` 导出 `LoadingBarApi` 类型
+
 ## 2.15.2 (2021-07-02)
 
 ### Feats
 
-- `n-loading-bar` 导出 `LoadingBarApi` 类型
 - `n-carousel` 增加 `trigger` 属性增加触发切换的方式
 - `n-menu` 新增 `dropdown-placement` 属性
 - `n-upload` 新增 `before-upload` 属性
