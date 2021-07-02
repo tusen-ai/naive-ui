@@ -202,7 +202,7 @@ export default cB('tree', `
       flex-grow:1;
     `),
     cE('suffix', `
-        display: inline-flex;
-      `)
+      display: inline-flex;
+    `)
   ])
 ])

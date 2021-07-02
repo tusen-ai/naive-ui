@@ -1,4 +1,4 @@
-import { h, defineComponent, ref, PropType, computed } from 'vue'
+import { h, defineComponent, ref, PropType } from 'vue'
 import { render } from '../../_utils'
 import { TmNode } from './interface'
 
@@ -31,14 +31,18 @@ export default defineComponent({
     }
     return {
       selfRef,
-      handleClick,
-      prefix: computed(() => props.tmNode.rawNode.prefix),
-      label: computed(() => props.tmNode.rawNode.label),
-      suffix: computed(() => props.tmNode.rawNode.suffix)
+      handleClick
     }
   },
   render () {
-    const { clsPrefix, handleClick, onDragstart, prefix, label, suffix } = this
+    const {
+      clsPrefix,
+      handleClick,
+      onDragstart,
+      tmNode: {
+        rawNode: { prefix, label, suffix }
+      }
+    } = this
     return (
       <span
         ref="selfRef"
@@ -47,15 +51,19 @@ export default defineComponent({
         draggable={onDragstart === undefined ? undefined : true}
         onDragstart={onDragstart}
       >
-        <div class={`${clsPrefix}-tree-node-content__prefix`}>
-          {render(prefix)}
-        </div>
+        {prefix ? (
+          <div class={`${clsPrefix}-tree-node-content__prefix`}>
+            {render(prefix)}
+          </div>
+        ) : null}
         <div class={`${clsPrefix}-tree-node-content__text`}>
           {render(label)}
         </div>
-        <div class={`${clsPrefix}-tree-node-content__suffix`}>
-          {render(suffix)}
-        </div>
+        {suffix ? (
+          <div class={`${clsPrefix}-tree-node-content__suffix`}>
+            {render(suffix)}
+          </div>
+        ) : null}
       </span>
     )
   }

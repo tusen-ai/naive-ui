@@ -51,8 +51,11 @@ describe('n-tree', () => {
     })
     setTimeout(() => {
       expect(wrapper.find('.n-tree-node-content__prefix').exists()).toBe(true)
+      expect(wrapper.find('.n-tree-node-content__prefix').text()).toBe('prefix')
       expect(wrapper.find('.n-tree-node-content__text').exists()).toBe(true)
+      expect(wrapper.find('.n-tree-node-content__text').text()).toBe('test')
       expect(wrapper.find('.n-tree-node-content__suffix').exists()).toBe(true)
+      expect(wrapper.find('.n-tree-node-content__suffix').text()).toBe('suffix')
     }, 100)
   })
 })
