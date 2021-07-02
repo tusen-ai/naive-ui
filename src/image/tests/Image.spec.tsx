@@ -13,6 +13,9 @@ describe('n-image', () => {
     await wrapper.setProps({ alt: 'This is just a picture' })
 
     expect(wrapper.find('img').attributes('alt')).toBe('This is just a picture')
+    expect(wrapper.find('img').attributes('aria-label')).toBe(
+      'This is just a picture'
+    )
   })
 
   it('should work with `width` prop', async () => {
