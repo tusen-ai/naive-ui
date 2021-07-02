@@ -2,12 +2,6 @@
 
 ## Pending
 
-- 修复 `n-collapse` 默认指定展开属性无效，关闭 [#350](https://github.com/TuSimple/naive-ui/issues/350)
-
-### Breaking Changes
-
-- `n-select` 新增 `render-tag` 属性
-
 ### Feats
 
 - `n-carousel` 增加 `trigger` 属性增加触发切换的方式
@@ -18,6 +12,7 @@
 - `n-spin` 支持 `icon` 插槽为了自定义加载图标，closes[#260](https://github.com/TuSimple/naive-ui/issues/260)
 - `n-spin` 新增 `rotate` 属性控制自定义加载图标是否有旋转动画
 - `n-form` 导出 `FormItemRule` & `FormRules` 类型
+- `n-select` 新增 `render-tag` 属性
 
 ### Fixes
 
@@ -27,6 +22,7 @@
 - 修复 `n-select` 打开菜单时没有自动滚动到选中项，关闭 [#346](https://github.com/TuSimple/naive-ui/issues/346)
 - 修复 `n-tab-pane` 在使用 v-if 时报错
 - 修复 `n-modal` `on-negative-click` 返回 false 时 modal 依然关闭
+- 修复 `n-collapse` 在 accordion 模式下默认指定展开属性无效，关闭 [#350](https://github.com/TuSimple/naive-ui/issues/350)
 
 ## 2.15.1 (2021-06-30)
 
