@@ -5,6 +5,7 @@ describe('n-tree', () => {
   it('should work with import on demand', () => {
     mount(NTree)
   })
+
   it('should accept proper options', () => {
     mount(NTree, {
       props: {
@@ -33,5 +34,25 @@ describe('n-tree', () => {
         ]
       }
     })
+  })
+
+  it('should work with `prefix` and `suffix`', async () => {
+    const wrapper = mount(NTree, {
+      props: {
+        options: [
+          {
+            label: 'test',
+            key: '123',
+            prefix: 'prefix',
+            suffix: 'suffix'
+          }
+        ]
+      }
+    })
+    setTimeout(() => {
+      expect(wrapper.find('.n-tree-node-content__prefix').exists()).toBe(true)
+      expect(wrapper.find('.n-tree-node-content__text').exists()).toBe(true)
+      expect(wrapper.find('.n-tree-node-content__suffix').exists()).toBe(true)
+    }, 100)
   })
 })
