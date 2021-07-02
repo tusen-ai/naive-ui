@@ -121,7 +121,7 @@ const menuOptions = [
 ]
 
 export default {
-  data () {
+  setup () {
     return {
       activeKey: null,
       collapsed: true,
