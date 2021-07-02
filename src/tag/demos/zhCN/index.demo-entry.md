@@ -20,15 +20,16 @@ rtl-debug
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| bordered | `boolean` | `true` |  |
-| checkable | `boolean` | `false` |  |
-| checked | `boolean` | `false` |  |
-| closable | `boolean` | `false` |  |
-| disabled | `boolean` | `false` |  |
-| round | `boolean` | `false` |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` |  |
-| on-update:checked | `(value: boolean) => void` | `undefined` |  |
+| bordered | `boolean` | `true` | 是否有边框 |
+| checkable | `boolean` | `false` | 是否可以选择 |
+| checked | `boolean` | `false` | 是否被选中 |
+| closable | `boolean` | `false` | 是否可关闭 |
+| disabled | `boolean` | `false` | 是否禁用 |
+| round | `boolean` | `false` | 是否圆角 |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
+| type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | 类型 |
+| on-click | `(e: MouseEvent) => void` | `undefined` | 点击关闭时的回调 |
+| on-update:checked | `(value: boolean) => void` | `undefined` | 选择状态更改时的回调 |
 
 ## Slots
 

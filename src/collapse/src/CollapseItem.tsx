@@ -49,6 +49,9 @@ export default defineComponent({
         return !~expandedNames.findIndex(
           (expandedName) => expandedName === name
         )
+      } else if (expandedNames) {
+        const { value: name } = mergedNameRef
+        return name !== expandedNames
       }
       return true
     })
