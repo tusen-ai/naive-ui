@@ -2,9 +2,11 @@
 
 ## Pending
 
-### Breaking Changes
+### Feats
 
-- `n-select` add `render-tag` prop.
+- `n-loading-bar` export `LoadingBarApi` type
+
+## 2.15.2 (2021-07-02)
 
 ### Feats
 
@@ -16,6 +18,7 @@
 - `n-spin` support `icon` slot for icon customizing, closes[#260](https://github.com/TuSimple/naive-ui/issues/260).
 - `n-spin` add `rotate` prop fro slot icon to rotate.
 - `n-form` export `FormItemRule` & `FormRules` type.
+- `n-select` add `render-tag` prop.
 
 ### Fixes
 
@@ -24,6 +27,9 @@
 - Fix loading-bar disappears unexpectl, closes [#343](https://github.com/TuSimple/naive-ui/issues/343).
 - Fix `n-select` doesn't scroll to selected item when menu is opened, closes [#346](https://github.com/TuSimple/naive-ui/issues/346).
 - Fix `n-tab-pane` throws error when using v-if.
+- Fix `n-modal` still closes when `on-negative-click` returns `false`.
+- Fix `n-collapse` `defaultExpandedNames` does not work in accrodion mode, closes [#350](https://github.com/TuSimple/naive-ui/issues/350).
+- Fix `n-tag` lacks `on-update-checked` prop.
 - Fix `n-menu` `render-label` not working for dropdown in collapsed mode.
 
 ## 2.15.1 (2021-06-30)
