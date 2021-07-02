@@ -68,7 +68,7 @@
     "@babel/preset-typescript": "^7.12.16",
     "@babel/traverse": "^7.12.12",
     "@rollup/plugin-babel": "^5.3.0",
-    "@types/estree": "^0.0.48",
+    "@types/estree": "^0.0.49",
     "@types/jest": "^26.0.20",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
