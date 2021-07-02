@@ -54,27 +54,14 @@ describe('n-image', () => {
   })
 
   it('should work with `showToolbar` prop', async () => {
-    const wrapper = mount(NImage, {
-      attachTo: document.body
-    })
+    const wrapper = mount(NImage)
 
     await wrapper.setProps({
       showToolbar: true
     })
 
-    await wrapper.find('img').trigger('click')
+    // await wrapper.find('img').trigger('click')
 
-    console.log(document.querySelector('n-image-preview-toolbar'))
-
-    // await wrapper
-    //   .findComponent(ImagePreview)
-    //   .findComponent(LazyTeleport)
-    //   .setProps({
-    //     disabled: true
-    //   })
-
-    // expect(
-    //   wrapper.findComponent(ImagePreview).findComponent(LazyTeleport).html()
-    // ).toBe(true)
+    expect(!!document.querySelector('.n-image-preview-toolbar')).toBe(true)
   })
 })
