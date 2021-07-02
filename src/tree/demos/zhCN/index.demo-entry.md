@@ -15,6 +15,7 @@ drag-drop
 virtual
 async
 disabled
+prefix-and-suffix
 ```
 
 ## API
@@ -66,3 +67,5 @@ disabled
 | children? | `TreeOption[]` | 节点的子节点 |
 | disabled? | `boolean` | 是否禁用节点 |
 | isLeaf? | `boolean` | 节点是否是叶节点，在 remote 模式下是必须的 |
+| prefix? | `string \| (() => VNodeChild)` | 节点的前缀 |
+| suffix? | `string \| (() => VNodeChild)` | 节点的后缀 |

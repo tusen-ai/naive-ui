@@ -10,6 +10,8 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
+
 function createData (level = 4, baseKey = '') {
   if (!level) return undefined
   return Array.apply(null, { length: 2 }).map((_, index) => {
@@ -28,12 +30,12 @@ function createLabel (level) {
   if (level === 2) return '二生三'
   if (level === 1) return '三生万物'
 }
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
       data: createData(),
       pattern: ''
     }
   }
-}
+})
 ```
