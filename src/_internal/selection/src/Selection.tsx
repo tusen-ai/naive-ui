@@ -748,6 +748,11 @@ export default defineComponent({
             {this.label !== undefined ? (
               <div
                 class={`${clsPrefix}-base-selection-label__input`}
+                title={
+                  typeof this.label === 'string' && this.label
+                    ? this.label
+                    : undefined
+                }
                 key="input"
               >
                 {this.label}
