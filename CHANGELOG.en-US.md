@@ -6,6 +6,7 @@
 
 - `n-loading-bar` export `LoadingBarApi` type
 - `n-image` add `imgProps` prop
+- Add native `title` attributes to some components to enhance the experience
 
 ### Fixes
 

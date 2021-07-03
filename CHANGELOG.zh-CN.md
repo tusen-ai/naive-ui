@@ -6,6 +6,7 @@
 
 - `n-loading-bar` 导出 `LoadingBarApi` 类型
 - `n-image` 增加 `imgProps` 属性
+- 在部分组件上添加原生 `title` 属性，以提高用户体验
 
 ### Fixes
 

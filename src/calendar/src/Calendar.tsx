@@ -238,6 +238,7 @@ export default defineComponent({
           {this.dateItems.map(
             ({ dateObject, ts, inCurrentMonth, isCurrentDate }, index) => {
               const { year, month, date } = dateObject
+              const fullDate = format(ts, 'yyyy-MM-dd')
               const disabled = !inCurrentMonth || isDateDisabled?.(ts) === true
               const selected = normalizedValue === startOfDay(ts).valueOf()
               return (
@@ -263,6 +264,7 @@ export default defineComponent({
                     {disabled ? (
                       <div
                         class={`${mergedClsPrefix}-calendar-date__date`}
+                        title={fullDate}
                         key="disabled"
                       >
                         {date}
@@ -270,13 +272,17 @@ export default defineComponent({
                     ) : (
                       <div
                         class={`${mergedClsPrefix}-calendar-date__date`}
+                        title={fullDate}
                         key="available"
                       >
                         {date}
                       </div>
                     )}
                     {index < 7 && (
-                      <div class={`${mergedClsPrefix}-calendar-date__day`}>
+                      <div
+                        class={`${mergedClsPrefix}-calendar-date__day`}
+                        title={fullDate}
+                      >
                         {format(ts, 'EEE', {
                           locale
                         })}
