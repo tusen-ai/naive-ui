@@ -77,7 +77,10 @@ export default defineComponent({
             checked={checked}
           />
         </div>
-        <div class={`${mergedClsPrefix}-transfer-list-item__label`}>
+        <div
+          class={`${mergedClsPrefix}-transfer-list-item__label`}
+          title={label || undefined}
+        >
           {label}
         </div>
       </div>
