@@ -124,7 +124,14 @@ export default defineComponent({
           {{
             default: () =>
               this.showBadge ? (
-                <sup class={`${mergedClsPrefix}-badge-sup`}>
+                <sup
+                  class={`${mergedClsPrefix}-badge-sup`}
+                  title={
+                    this.value === undefined
+                      ? this.value
+                      : String(this.value) || undefined
+                  }
+                >
                   {!this.dot ? (
                     <NBaseSlotMachine
                       clsPrefix={mergedClsPrefix}
