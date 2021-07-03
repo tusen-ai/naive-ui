@@ -1,22 +1,26 @@
-import {
-  defineComponent,
-  h,
-  inject,
-  ref,
-  PropType,
-  ImgHTMLAttributes,
-  toRef
-} from 'vue'
+import { defineComponent, h, inject, ref, PropType, toRef } from 'vue'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
 import { imageGroupInjectionKey } from './ImageGroup'
 import { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
 
+interface imgProps {
+  alt?: string
+  crossorigin?: 'anonymous' | 'use-credentials' | ''
+  decoding?: 'async' | 'auto' | 'sync'
+  height?: number
+  sizes?: string
+  src?: string
+  srcset?: string
+  usemap?: string
+  width?: number
+}
+
 const imageProps = {
   alt: String,
   height: [String, Number] as PropType<string | number>,
-  imgProps: Object as PropType<ImgHTMLAttributes>,
+  imgProps: Object as PropType<imgProps>,
   width: [String, Number] as PropType<string | number>,
   src: String,
   showToolbar: { type: Boolean, default: true }
