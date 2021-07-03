@@ -11,7 +11,7 @@
 ### Fixes
 
 - Fix `n-upload` `multiple=false` doesn't work for drag & drop, closes [#363](https://github.com/TuSimple/naive-ui/issues/363)
-
+- Fix `n-dropdown`'s inner `<a />`'s style.
 
 ## 2.15.2 (2021-07-02)
 

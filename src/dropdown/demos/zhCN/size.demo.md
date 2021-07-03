@@ -9,7 +9,7 @@
     @select="handleSelect"
     :options="options"
   >
-    <n-button :keyboard="false">小号</n-button>
+    <n-button>小号</n-button>
   </n-dropdown>
   <n-dropdown
     placement="bottom-start"
@@ -18,7 +18,7 @@
     @select="handleSelect"
     :options="options"
   >
-    <n-button :keyboard="false">中号</n-button>
+    <n-button>中号</n-button>
   </n-dropdown>
   <n-dropdown
     placement="bottom-start"
@@ -27,7 +27,7 @@
     @select="handleSelect"
     :options="options"
   >
-    <n-button :keyboard="false">大号</n-button>
+    <n-button>大号</n-button>
   </n-dropdown>
   <n-dropdown
     placement="bottom-start"
@@ -36,7 +36,7 @@
     @select="handleSelect"
     :options="options"
   >
-    <n-button :keyboard="false">巨大号</n-button>
+    <n-button>巨大号</n-button>
   </n-dropdown>
 </n-space>
 ```

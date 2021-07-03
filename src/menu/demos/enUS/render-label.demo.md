@@ -22,7 +22,6 @@ The `render-label` can be used to batch render menu options.
         :collapsed-icon-size="22"
         :options="menuOptions"
         :render-label="renderMenuLabel"
-        v-model:value="activeKey"
       />
     </n-layout-sider>
     <n-layout>
@@ -33,7 +32,7 @@ The `render-label` can be used to batch render menu options.
 ```
 
 ```js
-import { h } from 'vue'
+import { h, ref, defineComponent } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -120,12 +119,11 @@ const menuOptions = [
   }
 ]
 
-export default {
+export default defineComponent({
   setup () {
     return {
-      activeKey: null,
-      collapsed: true,
       menuOptions,
+      collapsed: ref(true),
       renderMenuLabel (option) {
         return h(
           'span',
@@ -137,5 +135,5 @@ export default {
       }
     }
   }
-}
+})
 ```

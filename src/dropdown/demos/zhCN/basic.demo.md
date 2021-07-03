@@ -4,7 +4,7 @@
 
 ```html
 <n-dropdown trigger="hover" @select="handleSelect" :options="options">
-  <n-button :keyboard="false">找个地方休息</n-button>
+  <n-button>找个地方休息</n-button>
 </n-dropdown>
 ```
 

@@ -22,7 +22,6 @@
         :collapsed-icon-size="22"
         :options="menuOptions"
         :render-label="renderMenuLabel"
-        v-model:value="activeKey"
       />
     </n-layout-sider>
     <n-layout>
@@ -33,7 +32,7 @@
 ```
 
 ```js
-import { h } from 'vue'
+import { h, ref, defineComponent } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -120,11 +119,10 @@ const menuOptions = [
   }
 ]
 
-export default {
+export default defineComponent({
   setup () {
     return {
-      activeKey: null,
-      collapsed: true,
+      collapsed: ref(true),
       menuOptions,
       renderMenuLabel (option) {
         return h(
@@ -137,5 +135,5 @@ export default {
       }
     }
   }
-}
+})
 ```
