@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-loading-bar` 导出 `LoadingBarApi` 类型
+- `n-image` 增加 `imgProps` 属性
 
 ## 2.15.2 (2021-07-02)
 
