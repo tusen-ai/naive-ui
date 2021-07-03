@@ -14,7 +14,7 @@ import {
   useInjectionCollection,
   useInjectionElementCollection
 } from '../../_utils/composable'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { ExtractPublicPropTypes, getTitleAttribute } from '../../_utils'
 
 export interface AnchorInjection {
   activeHref: Ref<string | null>
@@ -73,7 +73,7 @@ export default defineComponent({
               activeRef.value && `${mergedClsPrefix}-anchor-link__title--active`
             ]}
             href={props.href}
-            title={props.title || undefined}
+            title={getTitleAttribute(props.title)}
             onClick={handleClick}
           >
             {props.title}

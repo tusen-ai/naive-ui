@@ -8,7 +8,7 @@ import {
 } from '../../_internal/icons'
 import { NButton } from '../../button'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
-import { warn } from '../../_utils'
+import { warn, getTitleAttribute } from '../../_utils'
 import NUploadProgress from './UploadProgress'
 import { FileInfo, uploadInjectionKey } from './interface'
 
@@ -151,7 +151,7 @@ export default defineComponent({
         <div class={`${clsPrefix}-upload-file-info`}>
           <div
             class={`${clsPrefix}-upload-file-info__name`}
-            title={this.file.name}
+            title={getTitleAttribute(this.file.name)}
           >
             <NBaseIcon clsPrefix={clsPrefix}>
               {{ default: () => <AttachIcon /> }}
