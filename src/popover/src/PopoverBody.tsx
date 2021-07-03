@@ -212,7 +212,7 @@ export default defineComponent({
             {
               class: [
                 `${mergedClsPrefix}-popover`,
-                extraClass && `${mergedClsPrefix}-${extraClass}`,
+                extraClass.map((v) => `${mergedClsPrefix}-${v}`),
                 {
                   [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
                   [`${mergedClsPrefix}-popover--show-arrow`]: props.showArrow,

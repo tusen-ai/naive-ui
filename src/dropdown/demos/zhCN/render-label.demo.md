@@ -10,65 +10,24 @@
   @select="handleSelect"
   :render-label="renderDropdownLabel"
 >
-  <n-button :keyboard="false">人物和食物</n-button>
+  <n-button>Anyway.FM</n-button>
 </n-dropdown>
 ```
 
 ```js
 import { h, defineComponent } from 'vue'
-import { NIcon, useMessage } from 'naive-ui'
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { useMessage } from 'naive-ui'
 
 const options = [
   {
-    label: '杰·盖茨比',
-    key: 'jay gatsby'
+    label: 'Anyway.FM',
+    key: 'Anyway.FM',
+    href: 'https://anyway.fm/'
   },
   {
-    label: '黛西·布坎南',
-    icon () {
-      return h(NIcon, null, {
-        default: () => h(CashIcon)
-      })
-    },
-    key: 'daisy buchanan'
-  },
-  {
-    type: 'divider',
-    key: 'd1'
-  },
-  {
-    label: '尼克·卡拉威',
-    key: 'nick carraway'
-  },
-  {
-    label: '其他',
-    key: 'others1',
-    children: [
-      {
-        label: '乔丹·贝克',
-        key: 'jordan baker'
-      },
-      {
-        label: '汤姆·布坎南',
-        key: 'tom buchanan'
-      },
-      {
-        label: '其他',
-        key: 'others2',
-        disabled: true,
-        children: [
-          {
-            label: '鸡肉',
-            key: 'chicken'
-          },
-          {
-            label: '牛肉',
-            key: 'beef'
-          }
-        ]
-      }
-    ]
+    label: 'Anyway.News',
+    key: 'Anyway.News',
+    href: 'https://anyway.fm/news/'
   }
 ]
 
@@ -78,7 +37,16 @@ export default defineComponent({
     return {
       options,
       renderDropdownLabel (option) {
-        return h('span', {}, { default: () => option.label })
+        return h(
+          'a',
+          {
+            href: option.href,
+            target: '_blank'
+          },
+          {
+            default: () => option.label
+          }
+        )
       },
       handleSelect (key) {
         message.info(key)

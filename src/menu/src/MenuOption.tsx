@@ -74,6 +74,7 @@ export default defineComponent({
   render () {
     const {
       mergedClsPrefix,
+      mergedTheme,
       tmNode,
       menuProps: { renderLabel }
     } = this
@@ -89,11 +90,12 @@ export default defineComponent({
         ]}
       >
         <NTooltip
-          theme={this.mergedTheme.peers.Tooltip}
-          themeOverrides={this.mergedTheme.peerOverrides.Tooltip}
+          theme={mergedTheme.peers.Tooltip}
+          themeOverrides={mergedTheme.peerOverrides.Tooltip}
           trigger="hover"
           placement={this.dropdownPlacement}
           disabled={!this.dropdownEnabled || this.title === undefined}
+          internalExtraClass={['menu-tooltip']}
         >
           {{
             default: () =>
