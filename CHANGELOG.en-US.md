@@ -4,13 +4,13 @@
 
 ### Feats
 
-- `n-loading-bar` export `LoadingBarApi` type
-- `n-image` add `imgProps` prop
-- Add native `title` attributes to some components to enhance the experience
+- `n-loading-bar` export `LoadingBarApi` type.
+- `n-image` add `imgProps` prop.
+- Add native `title` attributes to some components to enhance the experience.
 
 ### Fixes
 
-- Fix `n-upload` `multiple=false` doesn't work for drag & drop, closes [#363](https://github.com/TuSimple/naive-ui/issues/363)
+- Fix `n-upload` `multiple=false` doesn't work for drag & drop, closes [#363](https://github.com/TuSimple/naive-ui/issues/363).
 - Fix `n-dropdown`'s inner `<a />`'s style.
 - Fix `n-menu` tooltip's inner `<a />`'s style, closes [#338](https://github.com/TuSimple/naive-ui/issues/338).
 
