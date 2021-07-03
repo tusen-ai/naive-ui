@@ -2,6 +2,7 @@ import {
   h,
   defineComponent,
   ref,
+  toRef,
   cloneVNode,
   nextTick,
   computed,
@@ -24,6 +25,10 @@ import style from './styles/index.cssr'
 const carouselProps = {
   ...(useTheme.props as ThemeProps<CarouselTheme>),
   autoplay: Boolean,
+  dotPosition: {
+    type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
+    default: 'bottom'
+  },
   interval: {
     type: Number,
     default: 5000
@@ -46,6 +51,7 @@ export default defineComponent({
     const touchingRef = ref(false)
     const dragOffsetRef = ref(0)
     const selfElRef = ref<HTMLDivElement | null>(null)
+    const dotPositionRef = toRef(props, 'dotPosition')
     let timerId: number | null = null
     let inTransition = false
     // current from 0 to length + 1
@@ -115,30 +121,50 @@ export default defineComponent({
       }
     }
     let dragStartX = 0
+    let dragStartY = 0
     let dragStartTime = 0
     let memorizedContainerWidth = 0
+    let memorizedContainerHeight = 0
     function handleTouchstart (e: TouchEvent): void {
       if (timerId !== null) {
         window.clearInterval(timerId)
       }
       e.preventDefault()
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      memorizedContainerWidth = selfElRef.value!.offsetWidth
-      touchingRef.value = true
-      dragStartTime = Date.now()
-      dragStartX = e.touches[0].clientX
+      if (dotPositionRef.value === 'left' || dotPositionRef.value === 'right') {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        memorizedContainerHeight = selfElRef.value!.offsetHeight
+        touchingRef.value = true
+        dragStartTime = Date.now()
+        dragStartY = e.touches[0].clientY
+      } else {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        memorizedContainerWidth = selfElRef.value!.offsetWidth
+        touchingRef.value = true
+        dragStartTime = Date.now()
+        dragStartX = e.touches[0].clientX
+      }
       on('touchmove', document, handleTouchmove)
       on('touchend', document, handleTouchend)
       on('touchcancel', document, handleTouchend)
     }
     function handleTouchmove (e: TouchEvent): void {
-      const dragOffset = e.touches[0].clientX - dragStartX
-      dragOffsetRef.value =
-        dragOffset > memorizedContainerWidth
-          ? memorizedContainerWidth
-          : dragOffset < -memorizedContainerWidth
-            ? -memorizedContainerWidth
-            : dragOffset
+      if (dotPositionRef.value === 'left' || dotPositionRef.value === 'right') {
+        const dragOffset = e.touches[0].clientY - dragStartY
+        dragOffsetRef.value =
+          dragOffset > memorizedContainerHeight
+            ? memorizedContainerHeight
+            : dragOffset < -memorizedContainerHeight
+              ? -memorizedContainerHeight
+              : dragOffset
+      } else {
+        const dragOffset = e.touches[0].clientX - dragStartX
+        dragOffsetRef.value =
+          dragOffset > memorizedContainerWidth
+            ? memorizedContainerWidth
+            : dragOffset < -memorizedContainerWidth
+              ? -memorizedContainerWidth
+              : dragOffset
+      }
     }
     function handleTouchend (): void {
       if (props.autoplay) resetInterval()
@@ -147,17 +173,31 @@ export default defineComponent({
       })
       const { value: selfEl } = selfElRef
       if (selfEl) {
-        const { offsetWidth } = selfEl
+        const { offsetWidth, offsetHeight } = selfEl
         const { value: dragOffset } = dragOffsetRef
         const duration = Date.now() - dragStartTime
         // more than 50% width or faster than 0.4px per ms
-        if (dragOffset > offsetWidth / 2 || dragOffset / duration > 0.4) {
-          prev()
-        } else if (
-          dragOffset < -offsetWidth / 2 ||
-          dragOffset / duration < -0.4
+        if (
+          dotPositionRef.value === 'left' ||
+          dotPositionRef.value === 'right'
         ) {
-          next()
+          if (dragOffset > offsetHeight / 2 || dragOffset / duration > 0.4) {
+            prev()
+          } else if (
+            dragOffset < -offsetHeight / 2 ||
+            dragOffset / duration < -0.4
+          ) {
+            next()
+          }
+        } else {
+          if (dragOffset > offsetWidth / 2 || dragOffset / duration > 0.4) {
+            prev()
+          } else if (
+            dragOffset < -offsetWidth / 2 ||
+            dragOffset / duration < -0.4
+          ) {
+            next()
+          }
         }
       }
       dragOffsetRef.value = 0
@@ -208,6 +248,7 @@ export default defineComponent({
       lengthRef,
       touching: touchingRef,
       dragOffset: dragOffsetRef,
+      dotPosition: dotPositionRef,
       prev,
       next,
       setCurrent,
@@ -243,6 +284,7 @@ export default defineComponent({
     const leftOverflowVNode = length ? cloneVNode(children[length - 1]) : null
     const rightOverflowVNode = length ? cloneVNode(children[0]) : null
     const total = length + 2
+    const vertical = this.dotPosition === 'left' || this.dotPosition === 'right'
     return (
       <div
         class={`${mergedClsPrefix}-carousel`}
@@ -250,14 +292,20 @@ export default defineComponent({
         ref="selfElRef"
       >
         <div
-          class={`${mergedClsPrefix}-carousel__slides`}
+          class={[
+            `${mergedClsPrefix}-carousel__slides`,
+            vertical && `${mergedClsPrefix}-carousel__slides--vertical`
+          ]}
           onTouchstart={this.handleTouchstart}
           style={{
-            width: `${total}00%`,
+            [vertical ? 'height' : 'width']: `${total}00%`,
+            [vertical ? 'width' : 'height']: '100%',
             transition: this.touching ? 'none' : '',
-            transform:
-              `translate3d(-${(100 / total) * (current % total)}%, 0, 0)` +
-              (this.touching ? `translateX(${this.dragOffset}px)` : '')
+            transform: vertical
+              ? `translate3d(0, -${(100 / total) * (current % total)}%, 0)` +
+                (this.touching ? `translateY(${this.dragOffset}px)` : '')
+              : `translate3d(-${(100 / total) * (current % total)}%, 0, 0)` +
+                (this.touching ? `translateX(${this.dragOffset}px)` : '')
           }}
           onTransitionend={this.handleTransitionEnd}
           role="listbox"
@@ -266,7 +314,7 @@ export default defineComponent({
             (vNode, i) => (
               <div
                 data-index={i}
-                style={{ width: `${100 / total}%` }}
+                style={{ [vertical ? 'height' : 'width']: `${100 / total}%` }}
                 key={i}
                 role="option"
                 aria-hidden={i !== current}
@@ -276,7 +324,13 @@ export default defineComponent({
             )
           )}
         </div>
-        <div class={`${mergedClsPrefix}-carousel__dots`} role="tablist">
+        <div
+          class={[
+            `${mergedClsPrefix}-carousel__dots`,
+            `${mergedClsPrefix}-carousel__dots--${this.dotPosition}`
+          ]}
+          role="tablist"
+        >
           {indexMap(length, (i) => {
             const selected = i + 1 === current
             return (
@@ -286,7 +340,10 @@ export default defineComponent({
                 tabindex="0"
                 class={[
                   `${mergedClsPrefix}-carousel__dot`,
-                  selected && `${mergedClsPrefix}-carousel__dot--active`
+                  selected && `${mergedClsPrefix}-carousel__dot--active`,
+                  vertical
+                    ? `${mergedClsPrefix}-carousel__dot--vertical`
+                    : `${mergedClsPrefix}-carousel__dot--horizontal`
                 ]}
                 onClick={() => this.setCurrent(i + 1)}
                 onMouseenter={() => this.handleMouseenter(i + 1)}
