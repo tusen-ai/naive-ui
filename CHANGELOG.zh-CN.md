@@ -36,6 +36,7 @@
 - 修复 `n-modal` `on-negative-click` 返回 false 时 modal 依然关闭
 - 修复 `n-collapse` 在 accordion 模式下默认指定展开属性无效，关闭 [#350](https://github.com/TuSimple/naive-ui/issues/350)
 - 修复 `n-tag` 缺少 `on-update-checked` 属性
+- 修复 `n-menu` 折叠时 `render-label` 对于 dropdown 不生效
 
 ## 2.15.1 (2021-06-30)
 

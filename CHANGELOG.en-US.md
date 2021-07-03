@@ -36,6 +36,7 @@
 - Fix `n-modal` still closes when `on-negative-click` returns `false`.
 - Fix `n-collapse` `defaultExpandedNames` does not work in accrodion mode, closes [#350](https://github.com/TuSimple/naive-ui/issues/350).
 - Fix `n-tag` lacks `on-update-checked` prop.
+- Fix `n-menu` `render-label` not working for dropdown in collapsed mode.
 
 ## 2.15.1 (2021-06-30)
 
