@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-loading-bar` export `LoadingBarApi` type
+- `n-image` add `imgProps` prop
 
 ## 2.15.2 (2021-07-02)
 
