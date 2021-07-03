@@ -149,7 +149,10 @@ export default defineComponent({
         ]}
       >
         <div class={`${clsPrefix}-upload-file-info`}>
-          <div class={`${clsPrefix}-upload-file-info__name`}>
+          <div
+            class={`${clsPrefix}-upload-file-info__name`}
+            title={this.file.name}
+          >
             <NBaseIcon clsPrefix={clsPrefix}>
               {{ default: () => <AttachIcon /> }}
             </NBaseIcon>
