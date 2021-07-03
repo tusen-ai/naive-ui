@@ -10,25 +10,17 @@ describe('n-gradient-text', () => {
     const wrapper = mount(NGradientText, { slots: { default: () => 'test' } })
     expect(wrapper.find('.n-gradient-text').text()).toContain('test')
 
-    await wrapper.setProps({ type: 'error' })
-    expect(wrapper.find('.n-gradient-text').classes()).toContain(
-      'n-gradient-text--error-type'
-    )
-
-    await wrapper.setProps({ type: 'info' })
-    expect(wrapper.find('.n-gradient-text').classes()).toContain(
-      'n-gradient-text--info-type'
-    )
-
-    await wrapper.setProps({ type: 'warning' })
-    expect(wrapper.find('.n-gradient-text').classes()).toContain(
-      'n-gradient-text--warning-type'
-    )
-
-    await wrapper.setProps({ type: 'success' })
-    expect(wrapper.find('.n-gradient-text').classes()).toContain(
-      'n-gradient-text--success-type'
-    )
+    type Type = 'error' | 'info' | 'warning' | 'success' | 'primary' | 'danger'
+    const typeArray: Type[] = ['error', 'info', 'warning', 'success', 'primary']
+    typeArray.forEach((item: Type) => {
+      const wrapper = mount(NGradientText, {
+        props: { type: item },
+        slots: { default: () => 'test' }
+      })
+      expect(wrapper.find('.n-gradient-text').classes()).toContain(
+        `n-gradient-text--${item}-type`
+      )
+    })
   })
 
   it('should work with `size` prop', async () => {
