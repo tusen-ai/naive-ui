@@ -25,9 +25,8 @@ export interface AnchorInjection {
   titleEls: HTMLElement[]
 }
 
-export const anchorInjectionKey: InjectionKey<AnchorInjection> = Symbol(
-  'anchor'
-)
+export const anchorInjectionKey: InjectionKey<AnchorInjection> =
+  Symbol('anchor')
 
 const anchorLinkProps = {
   title: String,
@@ -74,6 +73,7 @@ export default defineComponent({
               activeRef.value && `${mergedClsPrefix}-anchor-link__title--active`
             ]}
             href={props.href}
+            title={props.title || undefined}
             onClick={handleClick}
           >
             {props.title}
