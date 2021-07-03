@@ -48,7 +48,8 @@ const menuOptions = [
   {
     label: '且听风吟',
     key: 'hear-the-wind-sing',
-    icon: renderIcon(BookIcon)
+    icon: renderIcon(BookIcon),
+    href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F/3199'
   },
   {
     label: '1973年的弹珠玩具',
@@ -97,7 +98,8 @@ const menuOptions = [
         children: [
           {
             label: '威士忌',
-            key: 'whisky'
+            key: 'whisky',
+            href: 'https://baike.baidu.com/item/%E5%A8%81%E5%A3%AB%E5%BF%8C%E9%85%92/2959816?fromtitle=%E5%A8%81%E5%A3%AB%E5%BF%8C&fromid=573&fr=aladdin'
           }
         ]
       },
@@ -125,13 +127,10 @@ export default defineComponent({
       collapsed: ref(true),
       menuOptions,
       renderMenuLabel (option) {
-        return h(
-          'span',
-          {
-            to: option.key
-          },
-          { default: () => option.label }
-        )
+        if ('href' in option) {
+          return h('a', { href: option.href, target: '_blank' }, option.label)
+        }
+        return option.label
       }
     }
   }

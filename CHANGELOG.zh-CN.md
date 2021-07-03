@@ -12,6 +12,7 @@
 
 - 修复 `n-upload` `multiple=false` 对于拖拽不生效，关闭 [#363](https://github.com/TuSimple/naive-ui/issues/363)
 - 修复 `n-dropdown` 中 `<a />` 的样式
+- 修复 `n-menu` tooltip 中 `<a />` 的样式，关闭 [#338](https://github.com/TuSimple/naive-ui/issues/338)
 
 ## 2.15.2 (2021-07-02)
 

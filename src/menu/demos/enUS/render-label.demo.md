@@ -48,7 +48,8 @@ const menuOptions = [
   {
     label: 'Hear the Wind Sing',
     key: 'hear-the-wind-sing',
-    icon: renderIcon(BookIcon)
+    icon: renderIcon(BookIcon),
+    href: 'https://en.wikipedia.org/wiki/Hear_the_Wind_Sing'
   },
   {
     label: 'Pinball 1973',
@@ -97,7 +98,8 @@ const menuOptions = [
         children: [
           {
             label: 'Whisky',
-            key: 'whisky'
+            key: 'whisky',
+            href: 'https://en.wikipedia.org/wiki/Whisky'
           }
         ]
       },
@@ -125,13 +127,10 @@ export default defineComponent({
       menuOptions,
       collapsed: ref(true),
       renderMenuLabel (option) {
-        return h(
-          'span',
-          {
-            to: option.key
-          },
-          { default: () => option.label }
-        )
+        if ('href' in option) {
+          return h('a', { href: option.href, target: '_blank' }, option.label)
+        }
+        return option.label
       }
     }
   }
