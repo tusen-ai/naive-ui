@@ -7,6 +7,11 @@
 - `n-loading-bar` export `LoadingBarApi` type
 - `n-image` add `imgProps` prop
 
+### Fixes
+
+- Fix `n-upload` `multiple=false` doesn't work for drag & drop, closes [#363](https://github.com/TuSimple/naive-ui/issues/363)
+
+
 ## 2.15.2 (2021-07-02)
 
 ### Feats
