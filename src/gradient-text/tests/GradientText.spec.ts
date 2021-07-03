@@ -10,9 +10,14 @@ describe('n-gradient-text', () => {
     const wrapper = mount(NGradientText, { slots: { default: () => 'test' } })
     expect(wrapper.find('.n-gradient-text').text()).toContain('test')
 
-    type Type = 'error' | 'info' | 'warning' | 'success' | 'primary' | 'danger'
-    const typeArray: Type[] = ['error', 'info', 'warning', 'success', 'primary']
-    typeArray.forEach((item: Type) => {
+    const typeArray = [
+      'error',
+      'info',
+      'warning',
+      'success',
+      'primary'
+    ] as const
+    typeArray.forEach((item) => {
       const wrapper = mount(NGradientText, {
         props: { type: item },
         slots: { default: () => 'test' }
