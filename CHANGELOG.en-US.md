@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-loading-bar` export `LoadingBarApi` type
+
 ## 2.15.2 (2021-07-02)
 
 ### Feats
