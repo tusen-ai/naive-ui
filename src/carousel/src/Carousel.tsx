@@ -237,7 +237,6 @@ export default defineComponent({
       $slots: { default: defaultSlot }
     } = this
     const children = flatten(defaultSlot?.() || [])
-    console.log(children)
     const { length } = children
     lengthRef.value = length
     const leftOverflowVNode = length ? cloneVNode(children[length - 1]) : null
