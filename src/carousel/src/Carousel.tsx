@@ -52,7 +52,6 @@ export default defineComponent({
     const dragOffsetRef = ref(0)
     const selfElRef = ref<HTMLDivElement | null>(null)
     const dotPlacementRef = toRef(props, 'dotPlacement')
-    const { value: dotPlacement } = dotPlacementRef
     let timerId: number | null = null
     let inTransition = false
     // current from 0 to length + 1
@@ -131,6 +130,7 @@ export default defineComponent({
         window.clearInterval(timerId)
       }
       e.preventDefault()
+      const { value: dotPlacement } = dotPlacementRef
       if (dotPlacement === 'left' || dotPlacement === 'right') {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         memorizedContainerHeight = selfElRef.value!.offsetHeight
@@ -149,6 +149,7 @@ export default defineComponent({
       on('touchcancel', document, handleTouchend)
     }
     function handleTouchmove (e: TouchEvent): void {
+      const { value: dotPlacement } = dotPlacementRef
       if (dotPlacement === 'left' || dotPlacement === 'right') {
         const dragOffset = e.touches[0].clientY - dragStartY
         dragOffsetRef.value =
@@ -177,6 +178,7 @@ export default defineComponent({
         const { offsetWidth, offsetHeight } = selfEl
         const { value: dragOffset } = dragOffsetRef
         const duration = Date.now() - dragStartTime
+        const { value: dotPlacement } = dotPlacementRef
         // more than 50% width or faster than 0.4px per ms
         if (dotPlacement === 'left' || dotPlacement === 'right') {
           if (dragOffset > offsetHeight / 2 || dragOffset / duration > 0.4) {
@@ -246,7 +248,6 @@ export default defineComponent({
       lengthRef,
       touching: touchingRef,
       dragOffset: dragOffsetRef,
-      dotPlacement: dotPlacementRef,
       prev,
       next,
       setCurrent,
@@ -270,6 +271,7 @@ export default defineComponent({
   },
   render () {
     const {
+      dotPlacement,
       mergedClsPrefix,
       current,
       lengthRef,
@@ -282,8 +284,7 @@ export default defineComponent({
     const leftOverflowVNode = length ? cloneVNode(children[length - 1]) : null
     const rightOverflowVNode = length ? cloneVNode(children[0]) : null
     const total = length + 2
-    const vertical =
-      this.dotPlacement === 'left' || this.dotPlacement === 'right'
+    const vertical = dotPlacement === 'left' || dotPlacement === 'right'
     return (
       <div
         class={[

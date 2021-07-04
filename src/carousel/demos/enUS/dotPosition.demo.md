@@ -1,6 +1,6 @@
-# 更改指示点位置
+# Set Dot Placement
 
-Set 'dot-placement' to change the indication point position.
+# Set `dot-placement` to change the indication point position.
 
 ```html
 <n-carousel dot-placement="left" style="height:240px" autoplay>

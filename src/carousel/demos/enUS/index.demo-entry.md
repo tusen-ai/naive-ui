@@ -19,7 +19,7 @@ dotPlacement
 | --- | --- | --- | --- |
 | autoplay | `boolean` | `false` | Whether to scroll automatically. |
 | interval | `number` | `5000` | Auto play interval. |
-| dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | The panel indicates the location of the point |
+| dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Dot placement in the panel. |
 | trigger | `'click' \| 'hover'` | `'click'` | The way to trigger the switch. |
 
 ### Carousel Slots
