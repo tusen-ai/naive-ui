@@ -47,7 +47,7 @@ export default cB('carousel', `
       margin-right: 0;
     `)
   ]),
-  cM('left', '', [
+  cM('left', [
     cE('slides', `
       flex-direction: column;
     `),
@@ -61,7 +61,7 @@ export default cB('carousel', `
       margin-bottom: 12px;
     `)
   ]),
-  cM('right', '', [
+  cM('right', [
     cE('slides', `
       flex-direction: column;
     `),
@@ -75,7 +75,7 @@ export default cB('carousel', `
       margin-bottom: 12px;
     `)
   ]),
-  cM('top', '', [
+  cM('top', [
     cE('dots', `
       transform: translateX(-50%);
       top: 16px;
@@ -85,7 +85,7 @@ export default cB('carousel', `
       margin-right: 12px;
     `)
   ]),
-  cM('bottom', '', [
+  cM('bottom', [
     cE('dots', `
       transform: translateX(-50%);
       bottom: 16px;
