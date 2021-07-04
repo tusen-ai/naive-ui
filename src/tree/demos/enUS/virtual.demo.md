@@ -13,6 +13,8 @@ Set `virtual-scroll` to use virtual scroll. Note that you should set the height 
 ```
 
 ```js
+import { defineComponent } from 'vue'
+
 function createData (level = 4, baseKey = '') {
   if (!level) return undefined
   return Array.apply(null, { length: 10 - level }).map((_, index) => {
@@ -32,11 +34,11 @@ function createLabel (level) {
   if (level === 1) return 'Out of Three, the created universe'
 }
 
-export default {
+export default defineComponent({
   setup () {
     return {
       data: createData()
     }
   }
-}
+})
 ```

@@ -1,4 +1,6 @@
 import { h, defineComponent, ref, PropType } from 'vue'
+import { render } from '../../_utils'
+import { TmNode } from './interface'
 
 export default defineComponent({
   name: 'TreeNodeContent',
@@ -12,7 +14,11 @@ export default defineComponent({
       default: false
     },
     onClick: Function as PropType<(e: MouseEvent) => void>,
-    onDragstart: Function as PropType<(e: DragEvent) => void>
+    onDragstart: Function as PropType<(e: DragEvent) => void>,
+    tmNode: {
+      type: Object as PropType<TmNode>,
+      required: true
+    }
   },
   setup (props) {
     const selfRef = ref<HTMLElement | null>(null)
@@ -29,7 +35,14 @@ export default defineComponent({
     }
   },
   render () {
-    const { clsPrefix, handleClick, onDragstart } = this
+    const {
+      clsPrefix,
+      handleClick,
+      onDragstart,
+      tmNode: {
+        rawNode: { prefix, label, suffix }
+      }
+    } = this
     return (
       <span
         ref="selfRef"
@@ -38,7 +51,19 @@ export default defineComponent({
         draggable={onDragstart === undefined ? undefined : true}
         onDragstart={onDragstart}
       >
-        <div class={`${clsPrefix}-tree-node-content__text`}>{this.$slots}</div>
+        {prefix ? (
+          <div class={`${clsPrefix}-tree-node-content__prefix`}>
+            {render(prefix)}
+          </div>
+        ) : null}
+        <div class={`${clsPrefix}-tree-node-content__text`}>
+          {render(label)}
+        </div>
+        {suffix ? (
+          <div class={`${clsPrefix}-tree-node-content__suffix`}>
+            {render(suffix)}
+          </div>
+        ) : null}
       </span>
     )
   }

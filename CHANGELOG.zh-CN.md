@@ -7,12 +7,14 @@
 - `n-loading-bar` 导出 `LoadingBarApi` 类型
 - `n-image` 增加 `imgProps` 属性
 - 在部分组件上添加原生 `title` 属性，以提高用户体验
+- `n-tree` 在 TreeOption 中新增 `prefix` 和 `suffix`
 
 ### Fixes
 
 - 修复 `n-upload` `multiple=false` 对于拖拽不生效，关闭 [#363](https://github.com/TuSimple/naive-ui/issues/363)
 - 修复 `n-dropdown` 中 `<a />` 的样式
 - 修复 `n-menu` tooltip 中 `<a />` 的样式，关闭 [#338](https://github.com/TuSimple/naive-ui/issues/338)
+- 修复 `n-carousel` 无法使用 `v-for` 的子元素
 
 ## 2.15.2 (2021-07-02)
 

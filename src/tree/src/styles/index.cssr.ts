@@ -176,7 +176,6 @@ export default cB('tree', `
     min-height: 24px;
     box-sizing: border-box;
     line-height: 1.5;
-    align-items: center;
     vertical-align: bottom;
     padding: 0 6px;
     cursor: default;
@@ -193,9 +192,17 @@ export default cB('tree', `
     c('&:last-child', {
       marginBottom: 0
     }),
+    cE('prefix', `
+      display: inline-flex;
+      margin-right: 8px;
+    `),
     cE('text', `
       border-bottom: 1px solid #0000;
       transition: border-color .3s var(--bezier);
+      flex-grow:1;
+    `),
+    cE('suffix', `
+      display: inline-flex;
     `)
   ])
 ])
