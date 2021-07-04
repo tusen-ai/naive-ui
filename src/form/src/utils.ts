@@ -47,15 +47,9 @@ export function formItemMisc (props: FormItemSetupProps) {
     return undefined
   })
   const mergedLabelStyleRef = computed(() => {
-    const { value: labelAlign } = mergedLabelAlignRef
-    const { value: labelPlacement } = mergedLabelPlacementRef
     return [
       {
-        width: mergedLabelWidthRef.value,
-        justifyContent:
-          labelAlign === 'right' && labelPlacement === 'top'
-            ? 'flex-end'
-            : undefined
+        width: mergedLabelWidthRef.value
       },
       props.labelStyle
     ]
