@@ -8,6 +8,7 @@ It's usually used to display good news.
 basic
 autoplay
 hover
+dotPosition
 ```
 
 ## API
@@ -18,6 +19,7 @@ hover
 | --- | --- | --- | --- |
 | autoplay | `boolean` | `false` | Whether to scroll automatically. |
 | interval | `number` | `5000` | Auto play interval. |
+| dot-position | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | The panel indicates the location of the point |
 | trigger | `'click' \| 'hover'` | `'click'` | The way to trigger the switch. |
 
 ### Carousel Slots

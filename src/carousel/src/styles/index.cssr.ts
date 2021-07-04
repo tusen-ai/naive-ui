@@ -13,9 +13,6 @@ export default cB('carousel', `
     transition: transform .3s var(--bezier);
     display: flex;
   `, [
-    cM('vertical', `
-      flex-direction: column;
-    `),
     c('> div', `
       overflow: hidden;
     `, [
@@ -28,29 +25,7 @@ export default cB('carousel', `
     position: absolute;
     display: flex;
     flex-wrap: nowrap;
-  `, [
-    cM('bottom', `
-      transform: translateX(-50%);
-      bottom: 16px;
-      left: 50%;
-    `),
-    cM('top', `
-      transform: translateX(-50%);
-      top: 16px;
-      left: 50%;
-    `),
-    cM('left', `
-      transform: translateY(-50%);
-      top: 50%;
-      left: 16px;
-      flex-direction: column;
-    `),
-    cM('right', `
-      transform: translateY(-50%);
-      top: 50%;
-      right: 16px;
-      flex-direction: column;
-    `)]),
+  `),
   cE('dot', `
     height: var(--dot-size);
     width: var(--dot-size);
@@ -68,14 +43,56 @@ export default cB('carousel', `
     cM('active', `
       background-color: var(--dot-color-active);
     `),
-    cM('vertical', `
-      margin-bottom: 12px;
-    `),
-    cM('horizontal', `
-      margin-right: 12px;
-    `),
     c('&:last-child', `
       margin-right: 0;
     `)
+  ]),
+  cM('left', '', [
+    cE('slides', `
+        flex-direction: column;
+      `),
+    cE('dots', `
+        transform: translateY(-50%);
+        top: 50%;
+        left: 16px;
+        flex-direction: column;
+      `),
+    cE('dot', `
+        margin-bottom: 12px;
+      `)
+  ]),
+  cM('right', '', [
+    cE('slides', `
+        flex-direction: column;
+      `),
+    cE('dots', `
+        transform: translateY(-50%);
+        top: 50%;
+        right: 16px;
+        flex-direction: column;
+      `),
+    cE('dot', `
+        margin-bottom: 12px;
+      `)
+  ]),
+  cM('top', '', [
+    cE('dots', `
+        transform: translateX(-50%);
+        top: 16px;
+        left: 50%;
+      `),
+    cE('dot', `
+        margin-right: 12px;
+      `)
+  ]),
+  cM('bottom', '', [
+    cE('dots', `
+        transform: translateX(-50%);
+        bottom: 16px;
+        left: 50%;
+      `),
+    cE('dot', `
+        margin-right: 12px;
+      `)
   ])
 ])

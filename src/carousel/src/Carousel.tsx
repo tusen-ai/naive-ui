@@ -52,6 +52,7 @@ export default defineComponent({
     const dragOffsetRef = ref(0)
     const selfElRef = ref<HTMLDivElement | null>(null)
     const dotPositionRef = toRef(props, 'dotPosition')
+    const { value: dotPosition } = dotPositionRef
     let timerId: number | null = null
     let inTransition = false
     // current from 0 to length + 1
@@ -130,7 +131,7 @@ export default defineComponent({
         window.clearInterval(timerId)
       }
       e.preventDefault()
-      if (dotPositionRef.value === 'left' || dotPositionRef.value === 'right') {
+      if (dotPosition === 'left' || dotPosition === 'right') {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         memorizedContainerHeight = selfElRef.value!.offsetHeight
         touchingRef.value = true
@@ -148,7 +149,7 @@ export default defineComponent({
       on('touchcancel', document, handleTouchend)
     }
     function handleTouchmove (e: TouchEvent): void {
-      if (dotPositionRef.value === 'left' || dotPositionRef.value === 'right') {
+      if (dotPosition === 'left' || dotPosition === 'right') {
         const dragOffset = e.touches[0].clientY - dragStartY
         dragOffsetRef.value =
           dragOffset > memorizedContainerHeight
@@ -177,10 +178,7 @@ export default defineComponent({
         const { value: dragOffset } = dragOffsetRef
         const duration = Date.now() - dragStartTime
         // more than 50% width or faster than 0.4px per ms
-        if (
-          dotPositionRef.value === 'left' ||
-          dotPositionRef.value === 'right'
-        ) {
+        if (dotPosition === 'left' || dotPosition === 'right') {
           if (dragOffset > offsetHeight / 2 || dragOffset / duration > 0.4) {
             prev()
           } else if (
@@ -287,15 +285,15 @@ export default defineComponent({
     const vertical = this.dotPosition === 'left' || this.dotPosition === 'right'
     return (
       <div
-        class={`${mergedClsPrefix}-carousel`}
+        class={[
+          `${mergedClsPrefix}-carousel`,
+          `${mergedClsPrefix}-carousel--${this.dotPosition}`
+        ]}
         style={this.cssVars as CSSProperties}
         ref="selfElRef"
       >
         <div
-          class={[
-            `${mergedClsPrefix}-carousel__slides`,
-            vertical && `${mergedClsPrefix}-carousel__slides--vertical`
-          ]}
+          class={`${mergedClsPrefix}-carousel__slides`}
           onTouchstart={this.handleTouchstart}
           style={{
             [vertical ? 'height' : 'width']: `${total}00%`,
@@ -324,13 +322,7 @@ export default defineComponent({
             )
           )}
         </div>
-        <div
-          class={[
-            `${mergedClsPrefix}-carousel__dots`,
-            `${mergedClsPrefix}-carousel__dots--${this.dotPosition}`
-          ]}
-          role="tablist"
-        >
+        <div class={[`${mergedClsPrefix}-carousel__dots`]} role="tablist">
           {indexMap(length, (i) => {
             const selected = i + 1 === current
             return (
@@ -340,10 +332,7 @@ export default defineComponent({
                 tabindex="0"
                 class={[
                   `${mergedClsPrefix}-carousel__dot`,
-                  selected && `${mergedClsPrefix}-carousel__dot--active`,
-                  vertical
-                    ? `${mergedClsPrefix}-carousel__dot--vertical`
-                    : `${mergedClsPrefix}-carousel__dot--horizontal`
+                  selected && `${mergedClsPrefix}-carousel__dot--active`
                 ]}
                 onClick={() => this.setCurrent(i + 1)}
                 onMouseenter={() => this.handleMouseenter(i + 1)}

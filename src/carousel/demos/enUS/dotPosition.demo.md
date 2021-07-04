@@ -1,6 +1,6 @@
 # 更改指示点位置
 
-设定 `dot-position` 来更改指示点位置。
+Set 'dot-position' to change the indication point position.
 
 ```html
 <n-carousel dot-position="left" style="height:240px" autoplay>
