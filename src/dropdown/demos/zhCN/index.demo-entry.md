@@ -12,6 +12,7 @@ placement
 size
 manual-position
 group-debug
+render-label
 ```
 
 ## Props
@@ -22,6 +23,7 @@ group-debug
 | inverted | `boolean` | `false` | 使用反转样式 |
 | keyboard | `boolean` | `true` | 是否支持键盘操作（注意和其他内容键盘操作可能的冲突） |
 | options | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | `[]` | 下拉菜单传入的 options |
+| render-label | `(option: DropdownOption \| DropdownSubmenu) => VNodeChild` | `undefined` | 批量处理下拉菜单渲染 |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | 下拉菜单的尺寸大小 |
 | on-clickoutside | `(e: MouseEvent) => void` | `undefined` | clickoutside 的时候触发的回调函数 |
 | on-select | `(key: string \| number) => void` | `undefined` | select 选中时触发的回调函数 |

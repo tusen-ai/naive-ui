@@ -1,7 +1,8 @@
 import { VueWrapper } from '@vue/test-utils/dist/vueWrapper'
 import { mount } from '@vue/test-utils'
-import { ComponentPublicInstance, h, nextTick } from 'vue'
+import { ComponentPublicInstance, h, nextTick, VNodeChild } from 'vue'
 import { NIcon } from '../../icon'
+import { DropdownMixedOption } from '../src/interface'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NDropdown, DropdownProps } from '../index'
 
@@ -55,7 +56,8 @@ const mountDropdown = ({
   inverted = false,
   onClickoutside = undefined,
   options: data = options,
-  show = undefined
+  show = undefined,
+  renderLabel = undefined
 }: DropdownProps = {}): VueWrapper<ComponentPublicInstance> => {
   return mount(NDropdown, {
     attachTo: document.body,
@@ -65,7 +67,8 @@ const mountDropdown = ({
       onSelect,
       inverted,
       onClickoutside,
-      show
+      show,
+      renderLabel
     },
     slots: {
       default: () => 'star kirby'
@@ -232,5 +235,28 @@ describe('n-dropdown', () => {
       expect(nextOptions.length).toBe(0)
     })
     expect(onClickoutside).toHaveBeenCalled()
+  })
+
+  it('should work with `render-label` props', async () => {
+    const renderDropdownLabel = (option: DropdownMixedOption): VNodeChild => {
+      return h(
+        'a',
+        {
+          href: 'renderLabel'
+        },
+        { default: () => option.label }
+      )
+    }
+    const wrapper = await mountDropdown({
+      renderLabel: renderDropdownLabel
+    })
+    const triggerNodeWrapper = wrapper.find('span')
+    await triggerNodeWrapper.trigger('click')
+    expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
+    expect(
+      document
+        .querySelectorAll('.n-dropdown a[href="renderLabel"]').length
+    ).toBe(3)
+    wrapper.unmount()
   })
 })

@@ -19,7 +19,7 @@ import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
 import { useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
-import { createKey } from '../../../_utils'
+import { createKey, getTitleAttribute } from '../../../_utils'
 import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
 import Suffix from './Suffix'
@@ -748,6 +748,7 @@ export default defineComponent({
             {this.label !== undefined ? (
               <div
                 class={`${clsPrefix}-base-selection-label__input`}
+                title={getTitleAttribute(this.label)}
                 key="input"
               >
                 {this.label}

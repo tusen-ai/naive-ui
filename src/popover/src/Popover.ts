@@ -72,7 +72,7 @@ export interface PopoverInjection {
   internalRenderBodyRef: Ref<InternalRenderBody | undefined>
   positionManuallyRef: ComputedRef<boolean>
   isMountedRef: Ref<boolean>
-  extraClassRef: Ref<string | undefined>
+  extraClassRef: Ref<string[]>
 }
 
 export const popoverBaseProps = {
@@ -80,10 +80,7 @@ export const popoverBaseProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  defaultShow: {
-    type: Boolean,
-    default: false
-  },
+  defaultShow: Boolean,
   showArrow: {
     type: Boolean,
     default: true
@@ -100,20 +97,14 @@ export const popoverBaseProps = {
     type: Number,
     default: 100
   },
-  raw: {
-    type: Boolean,
-    default: false
-  },
+  raw: Boolean,
   placement: {
     type: String as PropType<FollowerPlacement>,
     default: 'top'
   },
   x: Number,
   y: Number,
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  disabled: Boolean,
   getDisabled: Function as PropType<() => boolean>,
   displayDirective: {
     type: String as PropType<'if' | 'show'>,
@@ -132,11 +123,11 @@ export const popoverBaseProps = {
     type: [Number, String] as PropType<number | 'trigger'>,
     default: undefined
   },
-  overlap: {
-    type: Boolean,
-    default: false
+  overlap: Boolean,
+  internalExtraClass: {
+    type: Array as PropType<string[]>,
+    default: () => []
   },
-  internalExtraClass: String,
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   // events
   'onUpdate:show': [Function, Array] as PropType<

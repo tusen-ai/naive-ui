@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       value: 'song0',
-      value1: ['song0', 'song1'],
+      value1: ['song0', 'song1', 'song11'],
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",

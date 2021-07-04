@@ -2,19 +2,43 @@
 
 ## Pending
 
-- `n-select` add `render-tag` prop.
+### Feats
+
+- `n-loading-bar` export `LoadingBarApi` type.
+- `n-image` add `imgProps` prop.
+- Add native `title` attributes to some components to enhance the experience.
+
+### Fixes
+
+- Fix `n-upload` `multiple=false` doesn't work for drag & drop, closes [#363](https://github.com/TuSimple/naive-ui/issues/363).
+- Fix `n-dropdown`'s inner `<a />`'s style.
+- Fix `n-menu` tooltip's inner `<a />`'s style, closes [#338](https://github.com/TuSimple/naive-ui/issues/338).
+
+## 2.15.2 (2021-07-02)
 
 ### Feats
 
 - `n-carousel` add `trigger` prop.
 - `n-menu` add `dropdown-placement` prop.
 - `n-upload` add `before-upload` prop.
+- `n-image` add `alt` prop.
 - Support the enter key on the numeric keypad.
+- `n-spin` support `icon` slot for icon customizing, closes[#260](https://github.com/TuSimple/naive-ui/issues/260).
+- `n-spin` add `rotate` prop fro slot icon to rotate.
+- `n-form` export `FormItemRule` & `FormRules` type.
+- `n-select` add `render-tag` prop.
 
 ### Fixes
 
 - Fix `n-log` warn on highlight.js when no language is set, closes [#327](https://github.com/TuSimple/naive-ui/issues/327).
 - Remove `n-calendar`'s useless `console.log`.
+- Fix loading-bar disappears unexpectl, closes [#343](https://github.com/TuSimple/naive-ui/issues/343).
+- Fix `n-select` doesn't scroll to selected item when menu is opened, closes [#346](https://github.com/TuSimple/naive-ui/issues/346).
+- Fix `n-tab-pane` throws error when using v-if.
+- Fix `n-modal` still closes when `on-negative-click` returns `false`.
+- Fix `n-collapse` `defaultExpandedNames` does not work in accrodion mode, closes [#350](https://github.com/TuSimple/naive-ui/issues/350).
+- Fix `n-tag` lacks `on-update-checked` prop.
+- Fix `n-menu` `render-label` not working for dropdown in collapsed mode.
 
 ## 2.15.1 (2021-06-30)
 
@@ -38,6 +62,7 @@
 - `n-select` add `render-option` prop.
 - `n-select` export `SelectOption` & `SelectGroupOption` type.
 - `n-popover` add `header` slot.
+- `n-dropdown` add `render-label` prop.
 
 ### Fixes
 

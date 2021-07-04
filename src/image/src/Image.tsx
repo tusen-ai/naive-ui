@@ -1,13 +1,27 @@
-import { defineComponent, h, inject, ref, PropType } from 'vue'
+import { defineComponent, h, inject, ref, PropType, toRef } from 'vue'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
 import { imageGroupInjectionKey } from './ImageGroup'
 import { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
 
+interface imgProps {
+  alt?: string
+  crossorigin?: 'anonymous' | 'use-credentials' | ''
+  decoding?: 'async' | 'auto' | 'sync'
+  height?: number
+  sizes?: string
+  src?: string
+  srcset?: string
+  usemap?: string
+  width?: number
+}
+
 const imageProps = {
-  width: [String, Number] as PropType<string | number>,
+  alt: String,
   height: [String, Number] as PropType<string | number>,
+  imgProps: Object as PropType<imgProps>,
+  width: [String, Number] as PropType<string | number>,
   src: String,
   showToolbar: { type: Boolean, default: true }
 }
@@ -19,6 +33,7 @@ export default defineComponent({
   props: imageProps,
   setup (props) {
     const imageRef = ref<HTMLImageElement | null>(null)
+    const imgPropsRef = toRef(props, 'imgProps')
     const previewInstRef = ref<ImagePreviewInst | null>(null)
     const imageGroupHandle = inject(imageGroupInjectionKey, null)
     const { mergedClsPrefixRef } = imageGroupHandle || useConfig(props)
@@ -27,6 +42,7 @@ export default defineComponent({
       groupId: imageGroupHandle?.groupId,
       previewInstRef,
       imageRef,
+      imgProps: imgPropsRef,
       handleClick: () => {
         if (imageGroupHandle) {
           imageGroupHandle.setPreviewSrc(props.src)
@@ -43,17 +59,25 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, imgProps = {} } = this
+
+    const imgNode = (
+      <img
+        {...imgProps}
+        class={this.groupId}
+        ref="imageRef"
+        width={this.width ? this.width : imgProps.width}
+        height={this.height ? this.height : imgProps.height}
+        src={this.src ? this.src : imgProps.src}
+        alt={this.alt ? this.alt : imgProps.alt}
+        aria-label={this.alt ? this.alt : imgProps.alt}
+        onClick={this.handleClick}
+      />
+    )
+
     return this.groupId ? (
-      <div class={`${mergedClsPrefix}-image`}>
-        <img
-          class={this.groupId}
-          ref="imageRef"
-          width={this.width}
-          height={this.height}
-          src={this.src}
-          onClick={this.handleClick}
-        />
+      <div class={`${mergedClsPrefix}-image`} role="none">
+        {imgNode}
       </div>
     ) : (
       <NImagePreview
@@ -64,14 +88,8 @@ export default defineComponent({
         {{
           default: () => {
             return (
-              <div class={`${mergedClsPrefix}-image`}>
-                <img
-                  ref="imageRef"
-                  width={this.width}
-                  height={this.height}
-                  src={this.src}
-                  onClick={this.handleClick}
-                />
+              <div class={`${mergedClsPrefix}-image`} role="none">
+                {imgNode}
               </div>
             )
           }

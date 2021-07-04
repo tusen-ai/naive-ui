@@ -193,20 +193,11 @@ const uploadProps = {
     type: String,
     default: 'POST'
   },
-  multiple: {
-    type: Boolean,
-    default: false
-  },
+  multiple: Boolean,
   data: [Object, Function] as PropType<FuncOrRecordOrUndef>,
   headers: [Object, Function] as PropType<FuncOrRecordOrUndef>,
-  withCredentials: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  withCredentials: Boolean,
+  disabled: Boolean,
   onChange: Function as PropType<OnChange>,
   onRemove: Function as PropType<OnRemove>,
   onFinish: Function as PropType<OnFinish>,
@@ -314,11 +305,12 @@ export default defineComponent({
       uncontrolledFileListRef.value = files
     }
     function handleFileAddition (files: FileList | null, e?: Event): void {
-      if (!files) return
+      if (!files || files.length === 0) return
       const { onBeforeUpload } = props
 
+      const filesAsArray = props.multiple ? Array.from(files) : [files[0]]
       void Promise.all(
-        Array.from(files).map(async (file) => {
+        filesAsArray.map(async (file) => {
           const fileInfo: FileInfo = {
             id: createId(),
             name: file.name,
