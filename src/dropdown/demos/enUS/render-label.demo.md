@@ -10,75 +10,43 @@ The `renderLabel` can be used to batch render dropdown options.
   @select="handleSelect"
   :render-label="renderDropdownLabel"
 >
-  <n-button :keyboard="false">People and Some Food to Eat</n-button>
+  <n-button>Anyway.FM</n-button>
 </n-dropdown>
 ```
 
 ```js
 import { h, defineComponent } from 'vue'
-import { NIcon, useMessage } from 'naive-ui'
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { useMessage } from 'naive-ui'
 
 const options = [
   {
-    label: 'Jay Gatsby',
-    key: 'jay gatsby'
+    label: 'Anyway.FM',
+    key: 'Anyway.FM',
+    href: 'https://anyway.fm/'
   },
   {
-    label: 'Daisy Buchanan',
-    icon () {
-      return h(NIcon, null, {
-        default: () => h(CashIcon)
-      })
-    },
-    key: 'daisy buchanan'
-  },
-  {
-    type: 'divider',
-    key: 'd1'
-  },
-  {
-    label: 'Nick Carraway',
-    key: 'nick carraway'
-  },
-  {
-    label: 'Others',
-    key: 'others1',
-    children: [
-      {
-        label: 'Jordan Baker',
-        key: 'jordan baker'
-      },
-      {
-        label: 'Tom Buchanan',
-        key: 'tom buchanan'
-      },
-      {
-        label: 'Others',
-        key: 'others2',
-        disabled: true,
-        children: [
-          {
-            label: 'Chicken',
-            key: 'chicken'
-          },
-          {
-            label: 'Beef',
-            key: 'beef'
-          }
-        ]
-      }
-    ]
+    label: 'Anyway.News',
+    key: 'Anyway.News',
+    href: 'https://anyway.fm/news/'
   }
 ]
 
 export default defineComponent({
-  data () {
+  setup () {
     const message = useMessage()
     return {
       options,
       renderDropdownLabel (option) {
-        return h('span', {}, { default: () => option.label })
+        return h(
+          'a',
+          {
+            href: option.href,
+            target: '_blank'
+          },
+          {
+            default: () => option.label
+          }
+        )
       },
       handleSelect (key) {
         message.info(key)
