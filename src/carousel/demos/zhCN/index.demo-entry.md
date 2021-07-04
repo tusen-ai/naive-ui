@@ -8,7 +8,7 @@
 basic
 autoplay
 hover
-dotPosition
+dotPlacement
 ```
 
 ## API
@@ -18,7 +18,7 @@ dotPosition
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | autoplay | `boolean` | `false` | 是否自动播放 |
-| dot-position | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | 轮播指示点位置 |
+| dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | 轮播指示点位置 |
 | interval | `number` | `5000` | 自动播放的间隔 |
 | trigger | `'click' \| 'hover'` | `'click'` | 触发切换的方式 |
 

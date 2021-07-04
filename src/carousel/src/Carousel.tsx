@@ -25,7 +25,7 @@ import style from './styles/index.cssr'
 const carouselProps = {
   ...(useTheme.props as ThemeProps<CarouselTheme>),
   autoplay: Boolean,
-  dotPosition: {
+  dotPlacement: {
     type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
     default: 'bottom'
   },
@@ -51,8 +51,8 @@ export default defineComponent({
     const touchingRef = ref(false)
     const dragOffsetRef = ref(0)
     const selfElRef = ref<HTMLDivElement | null>(null)
-    const dotPositionRef = toRef(props, 'dotPosition')
-    const { value: dotPosition } = dotPositionRef
+    const dotPlacementRef = toRef(props, 'dotPlacement')
+    const { value: dotPlacement } = dotPlacementRef
     let timerId: number | null = null
     let inTransition = false
     // current from 0 to length + 1
@@ -131,7 +131,7 @@ export default defineComponent({
         window.clearInterval(timerId)
       }
       e.preventDefault()
-      if (dotPosition === 'left' || dotPosition === 'right') {
+      if (dotPlacement === 'left' || dotPlacement === 'right') {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         memorizedContainerHeight = selfElRef.value!.offsetHeight
         touchingRef.value = true
@@ -149,7 +149,7 @@ export default defineComponent({
       on('touchcancel', document, handleTouchend)
     }
     function handleTouchmove (e: TouchEvent): void {
-      if (dotPosition === 'left' || dotPosition === 'right') {
+      if (dotPlacement === 'left' || dotPlacement === 'right') {
         const dragOffset = e.touches[0].clientY - dragStartY
         dragOffsetRef.value =
           dragOffset > memorizedContainerHeight
@@ -178,7 +178,7 @@ export default defineComponent({
         const { value: dragOffset } = dragOffsetRef
         const duration = Date.now() - dragStartTime
         // more than 50% width or faster than 0.4px per ms
-        if (dotPosition === 'left' || dotPosition === 'right') {
+        if (dotPlacement === 'left' || dotPlacement === 'right') {
           if (dragOffset > offsetHeight / 2 || dragOffset / duration > 0.4) {
             prev()
           } else if (
@@ -246,7 +246,7 @@ export default defineComponent({
       lengthRef,
       touching: touchingRef,
       dragOffset: dragOffsetRef,
-      dotPosition: dotPositionRef,
+      dotPlacement: dotPlacementRef,
       prev,
       next,
       setCurrent,
@@ -282,12 +282,13 @@ export default defineComponent({
     const leftOverflowVNode = length ? cloneVNode(children[length - 1]) : null
     const rightOverflowVNode = length ? cloneVNode(children[0]) : null
     const total = length + 2
-    const vertical = this.dotPosition === 'left' || this.dotPosition === 'right'
+    const vertical =
+      this.dotPlacement === 'left' || this.dotPlacement === 'right'
     return (
       <div
         class={[
           `${mergedClsPrefix}-carousel`,
-          `${mergedClsPrefix}-carousel--${this.dotPosition}`
+          `${mergedClsPrefix}-carousel--${this.dotPlacement}`
         ]}
         style={this.cssVars as CSSProperties}
         ref="selfElRef"
@@ -322,7 +323,7 @@ export default defineComponent({
             )
           )}
         </div>
-        <div class={[`${mergedClsPrefix}-carousel__dots`]} role="tablist">
+        <div class={`${mergedClsPrefix}-carousel__dots`} role="tablist">
           {indexMap(length, (i) => {
             const selected = i + 1 === current
             return (

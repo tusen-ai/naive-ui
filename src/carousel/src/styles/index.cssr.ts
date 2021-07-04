@@ -49,50 +49,50 @@ export default cB('carousel', `
   ]),
   cM('left', '', [
     cE('slides', `
-        flex-direction: column;
-      `),
+      flex-direction: column;
+    `),
     cE('dots', `
-        transform: translateY(-50%);
-        top: 50%;
-        left: 16px;
-        flex-direction: column;
-      `),
+      transform: translateY(-50%);
+      top: 50%;
+      left: 16px;
+      flex-direction: column;
+    `),
     cE('dot', `
-        margin-bottom: 12px;
-      `)
+      margin-bottom: 12px;
+    `)
   ]),
   cM('right', '', [
     cE('slides', `
-        flex-direction: column;
-      `),
+      flex-direction: column;
+    `),
     cE('dots', `
-        transform: translateY(-50%);
-        top: 50%;
-        right: 16px;
-        flex-direction: column;
-      `),
+      transform: translateY(-50%);
+      top: 50%;
+      right: 16px;
+      flex-direction: column;
+    `),
     cE('dot', `
-        margin-bottom: 12px;
-      `)
+      margin-bottom: 12px;
+    `)
   ]),
   cM('top', '', [
     cE('dots', `
-        transform: translateX(-50%);
-        top: 16px;
-        left: 50%;
-      `),
+      transform: translateX(-50%);
+      top: 16px;
+      left: 50%;
+    `),
     cE('dot', `
-        margin-right: 12px;
-      `)
+      margin-right: 12px;
+    `)
   ]),
   cM('bottom', '', [
     cE('dots', `
-        transform: translateX(-50%);
-        bottom: 16px;
-        left: 50%;
-      `),
+      transform: translateX(-50%);
+      bottom: 16px;
+      left: 50%;
+    `),
     cE('dot', `
-        margin-right: 12px;
-      `)
+      margin-right: 12px;
+    `)
   ])
 ])

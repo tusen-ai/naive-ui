@@ -1,9 +1,9 @@
 # 更改指示点位置
 
-设定 `dot-position` 来更改指示点位置。
+设定 `dot-placement` 来更改指示点位置。
 
 ```html
-<n-carousel dot-position="left" style="height:240px" autoplay>
+<n-carousel dot-placement="left" style="height:240px" autoplay>
   <img
     class="carousel-img"
     src="https://s.anw.red/fav/1623979004.jpg!/fw/600/quality/77/ignore-error/true"
