@@ -15,7 +15,8 @@ import { indexMap } from 'seemly'
 import { on, off } from 'evtd'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { ExtractPublicPropTypes } from '../../_utils'
+import { flatten } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { carouselLight } from '../styles'
 import type { CarouselTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -235,7 +236,8 @@ export default defineComponent({
       lengthRef,
       $slots: { default: defaultSlot }
     } = this
-    const children = defaultSlot?.().filter((v) => v) || []
+    const children = flatten(defaultSlot?.() || [])
+    console.log(children)
     const { length } = children
     lengthRef.value = length
     const leftOverflowVNode = length ? cloneVNode(children[length - 1]) : null
