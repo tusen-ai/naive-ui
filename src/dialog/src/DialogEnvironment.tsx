@@ -79,29 +79,46 @@ export default defineComponent({
     function handleUpdateShow (value: boolean): void {
       showRef.value = value
     }
-    return () => {
-      return (
-        <NModal
-          show={showRef.value}
-          onUpdateShow={handleUpdateShow}
-          appear
-          dialog
-          to={props.to}
-          maskClosable={props.maskClosable}
-          onAfterLeave={handleAfterLeave}
-        >
-          {{
-            default: () => (
-              <NDialog
-                {...keep(props, dialogPropKeys)}
-                onClose={handleCloseClick}
-                onNegativeClick={handleNegativeClick}
-                onPositiveClick={handlePositiveClick}
-              />
-            )
-          }}
-        </NModal>
-      )
+    return {
+      show: showRef,
+      hide,
+      handleUpdateShow,
+      handleAfterLeave,
+      handleCloseClick,
+      handleNegativeClick,
+      handlePositiveClick
     }
+  },
+  render () {
+    const {
+      handlePositiveClick,
+      handleUpdateShow,
+      handleNegativeClick,
+      handleCloseClick,
+      handleAfterLeave,
+      show
+    } = this
+    return (
+      <NModal
+        show={show}
+        onUpdateShow={handleUpdateShow}
+        appear
+        dialog
+        to={this.$props.to}
+        maskClosable={this.$props.maskClosable}
+        onAfterLeave={handleAfterLeave}
+      >
+        {{
+          default: () => (
+            <NDialog
+              {...keep(this.$props, dialogPropKeys)}
+              onClose={handleCloseClick}
+              onNegativeClick={handleNegativeClick}
+              onPositiveClick={handlePositiveClick}
+            />
+          )
+        }}
+      </NModal>
+    )
   }
 })

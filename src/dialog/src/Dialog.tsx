@@ -42,7 +42,7 @@ const dialogProps = {
     >,
     default: 'default'
   },
-  title: String,
+  title: [String, Function] as PropType<string | (() => VNodeChild)>,
   closable: {
     type: Boolean,
     default: true

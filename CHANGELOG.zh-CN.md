@@ -22,6 +22,7 @@
 - 修复 `n-form` `label-align` 属性失效，关闭 [#213](https://github.com/TuSimple/naive-ui/issues/213)
 - 修复 `n-popconfirm` 中 `n-popover` 组件的 `internalExtraClass` 属性传入值类型不正确的问题
 - 修复 `n-data-table` 在不设定 `max-height` 时固定列阴影失效，关闭 [#376](https://github.com/TuSimple/naive-ui/issues/376)
+- 修复 `n-dialog` 实例调用 `destroy` 函数错误
 
 ## 2.15.2 (2021-07-02)
 
