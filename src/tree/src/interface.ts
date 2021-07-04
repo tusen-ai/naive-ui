@@ -12,6 +12,7 @@ export interface TreeOptionBase {
   disabled?: boolean
   isLeaf?: boolean
   children?: TreeOption[]
+  prefix?: () => VNodeChild
   suffix?: () => VNodeChild
 }
 

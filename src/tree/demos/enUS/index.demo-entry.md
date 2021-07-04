@@ -15,6 +15,7 @@ drag-drop
 virtual
 async
 disabled
+prefix-and-suffix
 ```
 
 ## API
@@ -65,3 +66,5 @@ disabled
 | children? | `TreeOption[]` | Child nodes of the node. |
 | disabled? | `boolean` | Whether the node is disabled. |
 | isLeaf? | `boolean` | Whether the node is leaf. Required in remote mode. |
+| prefix? | `string \| (() => VNodeChild)` | Prefix of the node. |
+| suffix? | `string \| (() => VNodeChild)` | Suffix of the node. |

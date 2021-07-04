@@ -1,6 +1,6 @@
-# 基础用法
+# 前缀与后缀
 
-好在这颗树不是活的，也不平衡。
+让这棵树变得更好看。
 
 ```html
 <n-tree
@@ -12,7 +12,9 @@
 ```
 
 ```js
-import { defineComponent } from 'vue'
+import { h, defineComponent } from 'vue'
+import { NIcon } from 'naive-ui'
+import { FitnessOutline, FlashOutline } from '@vicons/ionicons5'
 
 function createData (level = 4, baseKey = '') {
   if (!level) return undefined
@@ -21,7 +23,9 @@ function createData (level = 4, baseKey = '') {
     return {
       label: createLabel(level),
       key,
-      children: createData(level - 1, key)
+      children: createData(level - 1, key),
+      prefix: () => h(NIcon, null, { default: () => h(FitnessOutline) }),
+      suffix: () => h(NIcon, null, { default: () => h(FlashOutline) })
     }
   })
 }
