@@ -85,7 +85,6 @@ const inputProps = {
   },
   autofocus: Boolean,
   inputProps: Object as PropType<TextareaHTMLAttributes | InputHTMLAttributes>,
-
   resizable: {
     type: Boolean,
     default: true

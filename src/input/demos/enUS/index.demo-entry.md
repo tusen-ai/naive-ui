@@ -17,6 +17,7 @@ pair
 input-group
 passively-activated
 count
+focus
 ```
 
 ## Props
@@ -72,3 +73,12 @@ count
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
 | default | `()`       |             |
+
+## Methods
+
+### Input Methods
+
+| Name  | Type       | Description          |
+| ----- | ---------- | -------------------- |
+| blur  | () => void | Blur input element.  |
+| focus | () => void | Focus input element. |
