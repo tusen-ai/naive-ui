@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`n-icon should work with \`depth\` prop 1`] = `"--bezier: cubic-bezier(.4, 0, .2, 1); --color: #000; --opacity: 0.18;"`;
