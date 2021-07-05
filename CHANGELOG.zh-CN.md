@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.15.3 (2021-07-05)
 
 ### Feats
 
@@ -11,6 +11,7 @@
 - `n-carousel` 增加 `dot-placement` 属性
 - `n-auto-complete` 新增 `loading` 属性，关闭 [#241](https://github.com/TuSimple/naive-ui/issues/241)
 - `n-slider` 增加 `tooltip` 属性，关闭 [#362](https://github.com/TuSimple/naive-ui/issues/362)
+- `n-input` 新增 `loading` 属性
 
 ### Fixes
 
@@ -19,7 +20,6 @@
 - 修复 `n-menu` tooltip 中 `<a />` 的样式，关闭 [#338](https://github.com/TuSimple/naive-ui/issues/338)
 - 修复 `n-carousel` 无法使用 `v-for` 的子元素
 - 修复 `n-form` `label-align` 属性失效，关闭 [#213](https://github.com/TuSimple/naive-ui/issues/213)
-- 修复 `n-popconfirm` 中 `n-popover` 组件的 `internalExtraClass` 属性传入值类型不正确的问题
 - 修复 `n-data-table` 在不设定 `max-height` 时固定列阴影失效，关闭 [#376](https://github.com/TuSimple/naive-ui/issues/376)
 
 ## 2.15.2 (2021-07-02)

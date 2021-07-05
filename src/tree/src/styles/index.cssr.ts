@@ -2,15 +2,6 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
-const nodeStateStyle = [
-  c('&:hover', {
-    backgroundColor: 'var(--node-color-hover)'
-  }),
-  c('&:active', {
-    backgroundColor: 'var(--node-color-pressed)'
-  })
-]
-
 // vars:
 // --arrow-color
 // --bezier
@@ -91,7 +82,18 @@ export default cB('tree', `
   cNotM('block-line', [
     cB('tree-node', [
       cNotM('disabled', [
-        cB('tree-node-content', nodeStateStyle),
+        cB('tree-node-content', [
+          c('&:hover', {
+            backgroundColor: 'var(--node-color-hover)'
+          })
+        ]),
+        cM('selectable', [
+          cB('tree-node-content', [
+            c('&:active', {
+              backgroundColor: 'var(--node-color-pressed)'
+            })
+          ])
+        ]),
         cM('pending', [
           cB('tree-node-content', `
             background-color: var(--node-color-hover);
@@ -108,7 +110,14 @@ export default cB('tree', `
   cM('block-line', [
     cB('tree-node', [
       cNotM('disabled', [
-        nodeStateStyle,
+        c('&:hover', {
+          backgroundColor: 'var(--node-color-hover)'
+        }),
+        cM('selectable', [
+          c('&:active', {
+            backgroundColor: 'var(--node-color-pressed)'
+          })
+        ]),
         cM('pending', `
           background-color: var(--node-color-hover);
         `),

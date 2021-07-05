@@ -24,8 +24,8 @@ it('should work with `loading` prop', async () => {
       options: options
     }
   })
-  expect(wrapper.find('.n-base-loading').exists()).toBe(false)
+  expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
   await wrapper.setProps({ loading: true })
-  expect(wrapper.find('.n-base-loading').exists()).toBe(true)
+  expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
   wrapper.unmount()
 })
