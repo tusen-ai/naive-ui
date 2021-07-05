@@ -150,6 +150,21 @@ export default c([
         color: var(--text-color);
         transition: color .3s var(--bezier);
         caret-color: var(--caret-color);
+      `),
+      cE('render-label', `
+        white-space: nowrap;
+        overflow: hidden;
+        height: var(--height);
+        line-height: var(--height);
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: var(--padding-single);
+        transition: color .3s var(--bezier);
+        color: var(--text-color);
       `)
     ]),
     cNotM('disabled', [

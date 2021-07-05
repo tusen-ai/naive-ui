@@ -26,6 +26,7 @@
 
 ### Fixes
 
+- 修复 `n-select` 自定义 label 的显示问题，关闭 [#352](https://github.com/TuSimple/naive-ui/issues/352)
 - 修复 `n-upload` `multiple=false` 对于拖拽不生效，关闭 [#363](https://github.com/TuSimple/naive-ui/issues/363)
 - 修复 `n-dropdown` 中 `<a />` 的样式
 - 修复 `n-menu` tooltip 中 `<a />` 的样式，关闭 [#338](https://github.com/TuSimple/naive-ui/issues/338)
