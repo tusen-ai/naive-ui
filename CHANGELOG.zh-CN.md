@@ -9,6 +9,7 @@
 - 在部分组件上添加原生 `title` 属性，以提高用户体验
 - `n-tree` 在 TreeOption 中增加 `prefix` 和 `suffix` 属性
 - `n-carousel` 增加 `dot-placement` 属性
+- `n-auto-complete` 新增 `loading` 属性，关闭 [#241](https://github.com/TuSimple/naive-ui/issues/241)
 - `n-slider` 增加 `tooltip` 属性，关闭 [#362](https://github.com/TuSimple/naive-ui/issues/362)
 
 ### Fixes

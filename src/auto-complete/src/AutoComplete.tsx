@@ -22,9 +22,10 @@ import {
   getFirstSlotVNode
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
+import { NInternalSelectMenu, InternalSelectMenuRef, NBaseLoading } from '../../_internal'
 
 import { NInput } from '../../input'
+
 import type {
   SelectBaseOption,
   SelectGroupOption,
@@ -58,6 +59,7 @@ const autoCompleteProps = {
     type: String as PropType<string | null>,
     default: null
   },
+  loading: Boolean,
   disabled: Boolean,
   placeholder: String,
   value: String,
@@ -257,11 +259,12 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { menuBoxShadow }
+          self: { menuBoxShadow, loadingColor }
         } = themeRef.value
         return {
           '--menu-box-shadow': menuBoxShadow,
-          '--bezier': cubicBezierEaseInOut
+          '--bezier': cubicBezierEaseInOut,
+          '--loading-color': loadingColor
         }
       }),
       mergedBordered: mergedBorderedRef,
@@ -309,7 +312,17 @@ export default defineComponent({
                         onFocus={this.handleFocus}
                         onUpdateValue={this.handleInput}
                         onBlur={this.handleBlur}
-                      />
+                      >
+                        {{
+                          suffix: () =>
+                            this.loading ? (
+                              <NBaseLoading
+                                clsPrefix={mergedClsPrefix}
+                                style={this.cssVars as CSSProperties}
+                              />
+                            ) : null
+                        }}
+                      </NInput>
                     )
                   }
                 }}
