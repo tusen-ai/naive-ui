@@ -363,20 +363,24 @@ export default defineComponent({
             [createKey('feedbackFontSize', size)]: feedbackFontSize,
             [createKey('feedbackHeight', size)]: feedbackHeight,
             [createKey('labelPadding', direction)]: labelPadding,
-            [createKey('labelTextAlign', direction)]: labelDefaultTextAlign,
+            [createKey('labelTextAlign', direction)]: labelTextAlign,
             [createKey(createKey('labelFontSize', labelPlacement), size)]:
               labelFontSize
           }
         } = themeRef.value
 
-        const labelAlign = (labelTextAlignRef.value ??
-          labelDefaultTextAlign) as 'left' | 'right'
+        let mergedLabelTextAlign = labelTextAlignRef.value ?? labelTextAlign
+        if (labelPlacement === 'top') {
+          mergedLabelTextAlign =
+            mergedLabelTextAlign === 'right' ? 'flex-end' : 'flex-start'
+        }
 
         const cssVars = {
           '--bezier': cubicBezierEaseInOut,
           '--line-height': lineHeight,
           '--blank-height': blankHeight,
           '--label-font-size': labelFontSize,
+          '--label-text-align': mergedLabelTextAlign,
           '--label-height': labelHeight,
           '--label-padding': labelPadding,
           '--asterisk-color': asteriskColor,
@@ -388,15 +392,6 @@ export default defineComponent({
           '--feedback-text-color-warning': feedbackTextColorWarning,
           '--feedback-text-color-error': feedbackTextColorError
         }
-        const {
-          self: {
-            [createKey(createKey('labelTextAlign', direction), labelAlign)]:
-              labelTextAlign
-          }
-        } = themeRef.value
-        Object.assign(cssVars, {
-          '--label-text-align': labelTextAlign
-        })
         return cssVars
       })
     }
