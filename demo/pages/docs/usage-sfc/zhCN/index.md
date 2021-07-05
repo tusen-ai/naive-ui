@@ -44,6 +44,8 @@
 
 失去 tree-shaking 的能力，打包有冗余代码。
 
+如果你想全局安装但是不想安装全部组件，请参考[按需引入](import-on-demand)。
+
 ```js
 import { createApp } from 'vue'
 import naive from 'naive-ui'
@@ -53,33 +55,6 @@ app.use(naive)
 ```
 
 安装后，你可以这样在 SFC 中使用全部组件。
-
-```html
-<template>
-  <n-button>naive-ui</n-button>
-</template>
-```
-
-### 按需全局安装组件
-
-```js
-import { createApp } from 'vue'
-import {
-  // create naive ui
-  create,
-  // component
-  NButton
-} from 'naive-ui'
-
-const naive = create({
-  components: [NButton]
-})
-
-const app = createApp()
-app.use(naive)
-```
-
-安装后，你可以这样在 SFC 中使用你安装的组件。
 
 ```html
 <template>

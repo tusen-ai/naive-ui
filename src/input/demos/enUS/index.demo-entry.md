@@ -17,6 +17,7 @@ pair
 input-group
 passively-activated
 count
+focus
 ```
 
 ## Props
@@ -31,7 +32,7 @@ count
 | default-value | `string \| [string, string] \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |
 | input-props | `object` | `undefined` | The props of the input element inside the component. It doesn't work with `pair` input. |
-| show-password-toggle | `boolean` | `false` | Controls the display and hiding of passwords |
+| loading | `boolean` | `undefined` | Whether to show loading indicator. Set to non `undefined` value will take space for loading indicator. |
 | maxlength | `number` | `undefined` |  |
 | minlength | `number` | `undefined` |  |
 | pair | `boolean` | `false` | Whether to input pairwise value. |
@@ -42,6 +43,7 @@ count
 | rows | `number` | `3` |  |
 | separator | `string` | `undefined` | The separator bewteen pairwise inputs. |
 | show-count | `boolean` | `false` | Whether to show word count. |
+| show-password-toggle | `boolean` | `false` | Controls the display and hiding of passwords |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` |  |
 | value | `string \| [string, string] \| null` | `undefined` | Value of input. When `pair` is `true`, `value` is an array. |
@@ -72,3 +74,12 @@ count
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
 | default | `()`       |             |
+
+## Methods
+
+### Input Methods
+
+| Name  | Type       | Description          |
+| ----- | ---------- | -------------------- |
+| blur  | () => void | Blur input element.  |
+| focus | () => void | Focus input element. |
