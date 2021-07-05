@@ -1,6 +1,12 @@
 import { mount } from '@vue/test-utils'
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 import { NMenu } from '../index'
+
+async function sleep (ms: number): Promise<void> {
+  return await new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })
+}
 
 describe('n-menu', () => {
   it('should work with import on demand', () => {
@@ -32,7 +38,7 @@ describe('n-menu', () => {
       }
     })
   })
-  it('should work with `render-label` props', async () => {
+  it('should tooltip work with `render-label` props', async () => {
     const options = [
       {
         label: () =>
@@ -77,5 +83,60 @@ describe('n-menu', () => {
     expect(wrapper.find('[href="test1"]').exists()).toBe(true)
     expect(wrapper.find('[target="_blank"]').exists()).toBe(true)
     expect(wrapper.find('[href="test2"]').exists()).toBe(true)
+  })
+  it('should dropdown work with `render-label` props', async () => {
+    const options = [
+      {
+        label: 'jj',
+        key: 'jj'
+      },
+      {
+        label: 'jay',
+        key: 'jay',
+        children: [
+          {
+            type: 'group',
+            label: 'song-group',
+            key: 'group',
+            children: [
+              {
+                label: 'fantasy',
+                key: 'fantasy'
+              },
+              {
+                label: 'mojito',
+                key: 'mojito'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+    const renderLabel = (option: any): any => {
+      return h(
+        'a',
+        {
+          class: option.key,
+          href: option.key,
+          rel: option.key
+        },
+        { default: () => option.label }
+      )
+    }
+    const wrapper = mount(NMenu, {
+      props: {
+        options: options,
+        collapsed: true,
+        renderLabel: renderLabel
+      }
+    })
+    expect(wrapper.find('.n-submenu').exists()).toBe(true)
+    await wrapper.find('.n-submenu').trigger('mouseenter')
+    await sleep(150) // must add sleep
+    await nextTick(() => {
+      expect(document.body).toMatchSnapshot()
+      expect(document.querySelectorAll('a').length).toEqual(2)
+      expect(document.querySelectorAll('a.fantasy').length).toEqual(1)
+    })
   })
 })
