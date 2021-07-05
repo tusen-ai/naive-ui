@@ -1,12 +1,7 @@
 import { mount } from '@vue/test-utils'
-import { h, nextTick } from 'vue'
+import { h } from 'vue'
+import { sleep } from 'seemly'
 import { NMenu } from '../index'
-
-async function sleep (ms: number): Promise<void> {
-  return await new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
-}
 
 describe('n-menu', () => {
   it('should work with import on demand', () => {
@@ -132,11 +127,10 @@ describe('n-menu', () => {
     })
     expect(wrapper.find('.n-submenu').exists()).toBe(true)
     await wrapper.find('.n-submenu').trigger('mouseenter')
-    await sleep(150) // must add sleep
-    await nextTick(() => {
-      expect(document.body).toMatchSnapshot()
-      expect(document.querySelectorAll('a').length).toEqual(2)
-      expect(document.querySelectorAll('a.fantasy').length).toEqual(1)
-    })
+    // Popover has delay, so we need to wait
+    await sleep(150)
+    expect(document.body.querySelector('.n-dropdown')).not.toEqual(null)
+    expect(document.querySelectorAll('a').length).toEqual(2)
+    expect(document.querySelectorAll('a.fantasy').length).toEqual(1)
   })
 })
