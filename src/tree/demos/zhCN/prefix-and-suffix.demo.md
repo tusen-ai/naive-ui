@@ -1,31 +1,37 @@
 # 前缀与后缀
 
-让这棵树变得更好看。
+放一些操作。
 
 ```html
 <n-tree
   block-line
   :data="data"
   :default-expanded-keys="defaultExpandedKeys"
-  selectable
+  :selectable="false"
 />
 ```
 
 ```js
 import { h, defineComponent } from 'vue'
-import { NIcon } from 'naive-ui'
-import { FitnessOutline, FlashOutline } from '@vicons/ionicons5'
+import { NButton } from 'naive-ui'
 
 function createData (level = 4, baseKey = '') {
   if (!level) return undefined
   return Array.apply(null, { length: 6 - level }).map((_, index) => {
     const key = '' + baseKey + level + index
+    const label = createLabel(level)
     return {
-      label: createLabel(level),
+      label,
       key,
       children: createData(level - 1, key),
-      prefix: () => h(NIcon, null, { default: () => h(FitnessOutline) }),
-      suffix: () => h(NIcon, null, { default: () => h(FlashOutline) })
+      suffix: () =>
+        h(
+          NButton,
+          { text: true, type: 'primary' },
+          { default: () => 'Suffix' }
+        ),
+      prefix: () =>
+        h(NButton, { text: true, type: 'primary' }, { default: () => 'Prefix' })
     }
   })
 }
