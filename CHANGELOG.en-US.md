@@ -18,6 +18,7 @@
 - Fix `n-menu` tooltip's inner `<a />`'s style, closes [#338](https://github.com/TuSimple/naive-ui/issues/338).
 - Fix `n-carousel` doesn't work with `v-for` children.
 - Fix `n-form` `label-align` prop not working, closes [#213](https://github.com/TuSimple/naive-ui/issues/213)
+- Fix `n-data-table` fixed column shadow doesn't work when `max-height` is set, closes [#376](https://github.com/TuSimple/naive-ui/issues/376).
 
 ## 2.15.2 (2021-07-02)
 
