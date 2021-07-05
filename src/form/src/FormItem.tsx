@@ -155,7 +155,10 @@ export default defineComponent({
     const { mergedRequired: mergedRequiredRef, mergedRules: mergedRulesRef } =
       formItemRule(props)
     const { mergedSize: mergedSizeRef } = formItemSizeRefs
-    const { mergedLabelPlacement: labelPlacementRef } = formItemMiscRefs
+    const {
+      mergedLabelPlacement: labelPlacementRef,
+      mergedLabelAlign: labelTextAlignRef
+    } = formItemMiscRefs
     const explainsRef = ref<string[]>([])
     const feedbackIdRef = ref(createId())
     const hasFeedbackRef = computed(() => {
@@ -343,7 +346,8 @@ export default defineComponent({
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const { value: labelPlacement } = labelPlacementRef
-        const direction = labelPlacement === 'top' ? 'vertical' : 'horizontal'
+        const direction: 'vertical' | 'horizontal' =
+          labelPlacement === 'top' ? 'vertical' : 'horizontal'
         const {
           common: { cubicBezierEaseInOut },
           self: {
@@ -359,12 +363,16 @@ export default defineComponent({
             [createKey('feedbackFontSize', size)]: feedbackFontSize,
             [createKey('feedbackHeight', size)]: feedbackHeight,
             [createKey('labelPadding', direction)]: labelPadding,
-            [createKey('labelTextAlign', direction)]: labelTextAlign,
+            [createKey('labelTextAlign', direction)]: labelDefaultTextAlign,
             [createKey(createKey('labelFontSize', labelPlacement), size)]:
               labelFontSize
           }
         } = themeRef.value
-        return {
+
+        const labelAlign = (labelTextAlignRef.value ??
+          labelDefaultTextAlign) as 'left' | 'right'
+
+        const cssVars = {
           '--bezier': cubicBezierEaseInOut,
           '--line-height': lineHeight,
           '--blank-height': blankHeight,
@@ -378,9 +386,18 @@ export default defineComponent({
           '--feedback-height': feedbackHeight,
           '--feedback-text-color': feedbackTextColor,
           '--feedback-text-color-warning': feedbackTextColorWarning,
-          '--feedback-text-color-error': feedbackTextColorError,
-          '--label-text-align': labelTextAlign
+          '--feedback-text-color-error': feedbackTextColorError
         }
+        const {
+          self: {
+            [createKey(createKey('labelTextAlign', direction), labelAlign)]:
+              labelTextAlign
+          }
+        } = themeRef.value
+        Object.assign(cssVars, {
+          '--label-text-align': labelTextAlign
+        })
+        return cssVars
       })
     }
   },

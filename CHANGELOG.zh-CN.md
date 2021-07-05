@@ -16,6 +16,7 @@
 - 修复 `n-dropdown` 中 `<a />` 的样式
 - 修复 `n-menu` tooltip 中 `<a />` 的样式，关闭 [#338](https://github.com/TuSimple/naive-ui/issues/338)
 - 修复 `n-carousel` 无法使用 `v-for` 的子元素
+- 修复 `n-form` `label-align` 属性失效，关闭 [#213](https://github.com/TuSimple/naive-ui/issues/213)
 
 ## 2.15.2 (2021-07-02)
 
