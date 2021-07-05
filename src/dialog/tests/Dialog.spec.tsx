@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { defineComponent, h } from 'vue'
-import { NDialogProvider, useDialog } from '../index'
+import { NDialogProvider, useDialog, NDialog } from '../index'
 
 const Provider = defineComponent({
   render () {
@@ -26,6 +26,37 @@ describe('n-dialog', () => {
         return null
       }
     })
-    mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    const dialogProvider = mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    dialogProvider.unmount()
+  })
+
+  it('can be a component', () => {
+    const dialog = mount(NDialog, {
+      attachTo: document.body,
+      props: {
+        title: 'Test success',
+        content: 'success'
+      }
+    })
+    expect(document.querySelector('.n-dialog__content')?.textContent).toEqual('success')
+    dialog.unmount()
+  })
+
+  it('async', async () => {
+    const Test = defineComponent({
+      setup () {
+        const dialog = useDialog()
+        dialog.success({
+          title: 'Async',
+          content: 'Content',
+          loading: true
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    await mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    expect(document.querySelector('.n-button__icon')).not.toEqual(null)
   })
 })
