@@ -39,8 +39,8 @@ header
 | title | `string` | `undefined` | Popover title. |
 | trigger | `'hover' \| 'click' \| 'manual'` | `'hover'` | The popover trigger type. |
 | width | `number \| 'trigger'` | `undefined` | `'trigger'` means popover's witdh will follow its trigger's width. |
-| x | `number` | `undefined` | The CSS `left` pixel value when popover manually positioned. |
-| y | `number` | `undefined` | The CSS `top` pixel value when popover manually positioned. |
+| x | `number` | `undefined` | The CSS `left` pixel value when popover manually positioned (x, y need to be set together). |
+| y | `number` | `undefined` | The CSS `top` pixel value when popover manually positioned (x, y need to be set together). |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback on show status changes. |
 
 ## Slots
