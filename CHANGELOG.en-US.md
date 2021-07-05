@@ -11,6 +11,7 @@
 - `n-carousel` add `dot-placement` prop.
 - `n-auto-complete` add `loading` prop, closes [#241](https://github.com/TuSimple/naive-ui/issues/241).
 - `n-slider` add `tooltip` prop, closes [#362](https://github.com/TuSimple/naive-ui/issues/362).
+- `n-input` add `loading` prop
 
 ### Fixes
 

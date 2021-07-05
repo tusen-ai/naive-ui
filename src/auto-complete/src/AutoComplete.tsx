@@ -22,8 +22,7 @@ import {
   getFirstSlotVNode
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { NInternalSelectMenu, InternalSelectMenuRef, NBaseLoading } from '../../_internal'
-
+import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
 import { NInput } from '../../input'
 
 import type {
@@ -59,7 +58,10 @@ const autoCompleteProps = {
     type: String as PropType<string | null>,
     default: null
   },
-  loading: Boolean,
+  loading: {
+    type: Boolean,
+    default: undefined
+  },
   disabled: Boolean,
   placeholder: String,
   value: String,
@@ -259,12 +261,11 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { menuBoxShadow, loadingColor }
+          self: { menuBoxShadow }
         } = themeRef.value
         return {
           '--menu-box-shadow': menuBoxShadow,
-          '--bezier': cubicBezierEaseInOut,
-          '--loading-color': loadingColor
+          '--bezier': cubicBezierEaseInOut
         }
       }),
       mergedBordered: mergedBorderedRef,
@@ -308,21 +309,12 @@ export default defineComponent({
                         size={this.mergedSize}
                         disabled={this.disabled}
                         clearable={this.clearable}
+                        loading={this.loading}
                         onClear={this.handleClear}
                         onFocus={this.handleFocus}
                         onUpdateValue={this.handleInput}
                         onBlur={this.handleBlur}
-                      >
-                        {{
-                          suffix: () =>
-                            this.loading ? (
-                              <NBaseLoading
-                                clsPrefix={mergedClsPrefix}
-                                style={this.cssVars as CSSProperties}
-                              />
-                            ) : null
-                        }}
-                      </NInput>
+                      />
                     )
                   }
                 }}
