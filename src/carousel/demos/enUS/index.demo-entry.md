@@ -8,7 +8,7 @@ It's usually used to display good news.
 basic
 autoplay
 hover
-dotPlacement
+dot-placement
 ```
 
 ## API

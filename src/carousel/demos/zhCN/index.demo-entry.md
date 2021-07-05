@@ -8,7 +8,7 @@
 basic
 autoplay
 hover
-dotPlacement
+dot-placement
 ```
 
 ## API
