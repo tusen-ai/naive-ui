@@ -50,7 +50,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme } = this
+    const { mergedTheme, internalExtraClass } = this
     return h(
       NPopover,
       {
@@ -58,7 +58,7 @@ export default defineComponent({
         theme: mergedTheme.peers.Popover,
         themeOverrides: mergedTheme.peerOverrides.Popover,
         builtinThemeOverrides: this.popoverThemeOverrides,
-        internalExtraClass: 'tooltip',
+        internalExtraClass: internalExtraClass.concat('tooltip'),
         ref: 'popoverRef'
       },
       this.$slots

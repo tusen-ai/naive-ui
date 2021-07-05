@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## 2.15.3 (2021-07-05)
+
+### Feats
+
+- `n-loading-bar` export `LoadingBarApi` type.
+- `n-image` add `imgProps` prop.
+- Add native `title` attributes to some components to enhance the experience.
+- `n-tree` add `prefix` and `suffix` in TreeOption.
+- `n-carousel` add `dot-placement` prop.
+- `n-auto-complete` add `loading` prop, closes [#241](https://github.com/TuSimple/naive-ui/issues/241).
+- `n-slider` add `tooltip` prop, closes [#362](https://github.com/TuSimple/naive-ui/issues/362).
+- `n-input` add `loading` prop
+
+### Fixes
+
+- Fix `n-upload` `multiple=false` doesn't work for drag & drop, closes [#363](https://github.com/TuSimple/naive-ui/issues/363).
+- Fix `n-dropdown`'s inner `<a />`'s style.
+- Fix `n-menu` tooltip's inner `<a />`'s style, closes [#338](https://github.com/TuSimple/naive-ui/issues/338).
+- Fix `n-carousel` doesn't work with `v-for` children.
+- Fix `n-form` `label-align` prop not working, closes [#213](https://github.com/TuSimple/naive-ui/issues/213)
+- Fix `n-data-table` fixed column shadow doesn't work when `max-height` is set, closes [#376](https://github.com/TuSimple/naive-ui/issues/376).
+
 ## 2.15.2 (2021-07-02)
 
 ### Feats
@@ -24,6 +46,7 @@
 - Fix `n-modal` still closes when `on-negative-click` returns `false`.
 - Fix `n-collapse` `defaultExpandedNames` does not work in accrodion mode, closes [#350](https://github.com/TuSimple/naive-ui/issues/350).
 - Fix `n-tag` lacks `on-update-checked` prop.
+- Fix `n-menu` `render-label` not working for dropdown in collapsed mode.
 
 ## 2.15.1 (2021-06-30)
 

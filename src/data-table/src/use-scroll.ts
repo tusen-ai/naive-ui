@@ -123,20 +123,24 @@ export function useScroll (
     }
   }
   function syncScrollState (): void {
-    const { scrollX } = props
-    if (!scrollX) return
+    if (!props.scrollX) return
     const { header, body } = getScrollElements()
-    if (!body || !header) return
+    if (!body) return
     const { value: tableWidth } = bodyWidthRef
     if (tableWidth === null) return
     const { value: scrollPart } = scrollPartRef
-    // we need to deal with overscroll
-    if (scrollPart === 'head') {
-      scrollLeft = header.scrollLeft
-      body.scrollLeft = scrollLeft
+    if (props.maxHeight) {
+      if (!header) return
+      // we need to deal with overscroll
+      if (scrollPart === 'head') {
+        scrollLeft = header.scrollLeft
+        body.scrollLeft = scrollLeft
+      } else {
+        scrollLeft = body.scrollLeft
+        header.scrollLeft = scrollLeft
+      }
     } else {
       scrollLeft = body.scrollLeft
-      header.scrollLeft = scrollLeft
     }
     deriveActiveLeftFixedColumn()
     deriveActiveRightFixedColumn()

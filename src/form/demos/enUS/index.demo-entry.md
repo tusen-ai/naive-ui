@@ -24,7 +24,7 @@ async
 | --- | --- | --- | --- |
 | inline | `boolean` | `false` |  |
 | label-width | `number \| string` | `undefined` | The width of label. Can be useful when `label-placement` is `'left'`. |
-| label-align | `'left' \| 'right'` | `'left'` | Text align in label. |
+| label-align | `'left' \| 'right'` | `-` | Text align in label. |
 | label-placement | `'left' \| 'top'` | `'top'` |  |
 | model | `Object` | `{}` | The object to get collected value from form items. |
 | rules | `type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }` | `{}` | The rules to validate form items. |

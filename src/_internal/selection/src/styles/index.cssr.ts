@@ -73,17 +73,18 @@ export default c([
       z-index: 1;
       border-color: #0000;
     `),
-    cE('mark', `
+    cB('base-suffix', `
       cursor: pointer;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       right: 10px;
-    `),
-    cE('arrow', `
-      color: var(--arrow-color);
-      transition: color .3s var(--bezier);
-    `),
+    `, [
+      cE('arrow', `
+        color: var(--arrow-color);
+        transition: color .3s var(--bezier);
+      `)
+    ]),
     cB('base-selection-placeholder', `
       white-space: nowrap;
       overflow: hidden;

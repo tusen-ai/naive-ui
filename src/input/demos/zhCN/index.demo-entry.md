@@ -32,7 +32,7 @@ focus
 | default-value | `string \| [string, string] \| null` | `null` | 输入框默认值 |
 | disabled | `boolean` | `false` | 是否禁用 |
 | input-props | `object` | `undefined` | 组件中 input 元素的属性，对 `pair` 类型不生效 |
-| show-password-toggle | `boolean` | `false` | 控制密码的显示隐藏 |
+| loading | `boolean` | `undefined` | 是否展示加载图标，设为非 `undefined` 会占据空间 |
 | maxlength | `number` | `undefined` | 最大输入长度 |
 | minlength | `number` | `undefined` | 最小输入长度 |
 | pair | `boolean` | `false` | 是否输入成对的值 |
@@ -43,6 +43,7 @@ focus
 | rows | `number` | `3` | 输入框行数，对 type="textarea" 有效 |
 | separator | `string` | `undefined` | 成对输入框中间的分隔符 |
 | show-count | `boolean` | `false` | 是否显示字数统计 |
+| show-password-toggle | `boolean` | `false` | 控制密码的显示隐藏 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框尺寸 |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | 输入框类型 |
 | value | `string \| [string, string] \| null` | `undefined` | 文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组 |

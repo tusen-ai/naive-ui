@@ -4,7 +4,7 @@ Basic usage of dropdown
 
 ```html
 <n-dropdown trigger="hover" @select="handleSelect" :options="options">
-  <n-button :keyboard="false"> Go For a Trip </n-button>
+  <n-button> Go For a Trip </n-button>
 </n-dropdown>
 ```
 

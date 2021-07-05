@@ -23,14 +23,10 @@ export default cB('carousel', `
   ]),
   cE('dots', `
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 16px;
     display: flex;
     flex-wrap: nowrap;
   `),
   cE('dot', `
-    margin-right: 12px;
     height: var(--dot-size);
     width: var(--dot-size);
     background-color: var(--dot-color);
@@ -49,6 +45,54 @@ export default cB('carousel', `
     `),
     c('&:last-child', `
       margin-right: 0;
+    `)
+  ]),
+  cM('left', [
+    cE('slides', `
+      flex-direction: column;
+    `),
+    cE('dots', `
+      transform: translateY(-50%);
+      top: 50%;
+      left: 16px;
+      flex-direction: column;
+    `),
+    cE('dot', `
+      margin-bottom: 12px;
+    `)
+  ]),
+  cM('right', [
+    cE('slides', `
+      flex-direction: column;
+    `),
+    cE('dots', `
+      transform: translateY(-50%);
+      top: 50%;
+      right: 16px;
+      flex-direction: column;
+    `),
+    cE('dot', `
+      margin-bottom: 12px;
+    `)
+  ]),
+  cM('top', [
+    cE('dots', `
+      transform: translateX(-50%);
+      top: 16px;
+      left: 50%;
+    `),
+    cE('dot', `
+      margin-right: 12px;
+    `)
+  ]),
+  cM('bottom', [
+    cE('dots', `
+      transform: translateX(-50%);
+      bottom: 16px;
+      left: 50%;
+    `),
+    cE('dot', `
+      margin-right: 12px;
     `)
   ])
 ])

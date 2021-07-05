@@ -20,7 +20,7 @@ import {
 import { useMergedState } from 'vooks'
 import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
-import { NBaseClear, NBaseIcon } from '../../_internal'
+import { NBaseClear, NBaseIcon, NBaseSuffix } from '../../_internal'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -90,6 +90,10 @@ const inputProps = {
     default: true
   },
   showCount: Boolean,
+  loading: {
+    type: Boolean,
+    default: undefined
+  },
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
   onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
@@ -726,6 +730,9 @@ export default defineComponent({
             countTextColor,
             iconColorHover,
             iconColorPressed,
+            loadingColor,
+            loadingColorError,
+            loadingColorWarning,
             [createKey('padding', size)]: padding,
             [createKey('fontSize', size)]: fontSize,
             [createKey('height', size)]: height
@@ -756,6 +763,7 @@ export default defineComponent({
           '--color-focus': colorFocus,
           '--text-color-disabled': textColorDisabled,
           '--box-shadow-focus': boxShadowFocus,
+          '--loading-color': loadingColor,
           // form warning
           '--caret-color-warning': caretColorWarning,
           '--color-focus-warning': colorFocusWarning,
@@ -763,6 +771,7 @@ export default defineComponent({
           '--border-warning': borderWarning,
           '--border-focus-warning': borderFocusWarning,
           '--border-hover-warning': borderHoverWarning,
+          '--loading-color-warning': loadingColorWarning,
           // form error
           '--caret-color-error': caretColorError,
           '--color-focus-error': colorFocusError,
@@ -770,6 +779,7 @@ export default defineComponent({
           '--border-error': borderError,
           '--border-focus-error': borderFocusError,
           '--border-hover-error': borderHoverError,
+          '--loading-color-error': loadingColorError,
           // clear-button
           '--clear-color': clearColor,
           '--clear-size': clearSize,
@@ -929,7 +939,8 @@ export default defineComponent({
           (this.$slots.suffix ||
             this.clearable ||
             this.showCount ||
-            this.showPasswordToggle) ? (
+            this.showPasswordToggle ||
+            this.loading !== undefined) ? (
             <div class={`${mergedClsPrefix}-input__suffix`}>
               {[
                 renderSlot(this.$slots, 'suffix'),
@@ -941,6 +952,15 @@ export default defineComponent({
                   >
                     {{ default: () => renderSlot(this.$slots, 'clear') }}
                   </NBaseClear>
+                ) : null,
+                this.loading !== undefined ? (
+                  <NBaseSuffix
+                    clsPrefix={mergedClsPrefix}
+                    loading={this.loading}
+                    showArrow={false}
+                    showClear={false}
+                    style={this.cssVars as CSSProperties}
+                  />
                 ) : null,
                 this.showCount && this.type !== 'textarea' ? (
                   <WordCount />

@@ -15,17 +15,17 @@ import {
 } from 'vue'
 import { VOverflow, VOverflowInst } from 'vueuc'
 import type { SelectBaseOption } from '../../../select/src/interface'
+import type { TagRef } from '../../../tag/src/Tag'
 import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
 import { useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
-import { createKey } from '../../../_utils'
+import { createKey, getTitleAttribute } from '../../../_utils'
+import Suffix from '../../suffix'
 import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
-import Suffix from './Suffix'
-import style from './styles/index.cssr'
-import type { TagRef } from '../../../tag/src/Tag'
 import { RenderTag } from './interface'
+import style from './styles/index.cssr'
 
 export interface InternalSelectionInst {
   focus: () => void
@@ -748,6 +748,7 @@ export default defineComponent({
             {this.label !== undefined ? (
               <div
                 class={`${clsPrefix}-base-selection-label__input`}
+                title={getTitleAttribute(this.label)}
                 key="input"
               >
                 {this.label}

@@ -15,7 +15,6 @@
   :rules="rules"
   ref="formRef"
   label-placement="left"
-  label-align="right"
   :size="size"
   :label-width="160"
   :style="{
