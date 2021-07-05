@@ -27,13 +27,13 @@ export const renderSorter: DataTableRenderSorter = ({ order }) => {
         style: {
           ...chevronStyle,
           marginTop: '-4px',
-          fill: order === 'ascend' ? colors.successColor : GRAY_COLOR_4
+          color: order === 'ascend' ? colors.successColor : GRAY_COLOR_4
         }
       }),
       h(CaretDownOutline, {
         style: {
           ...chevronStyle,
-          fill: order === 'descend' ? colors.successColor : GRAY_COLOR_4
+          color: order === 'descend' ? colors.successColor : GRAY_COLOR_4
         }
       })
     ]
