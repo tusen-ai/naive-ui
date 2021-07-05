@@ -5,9 +5,10 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
 
 export function self (vars: ThemeCommonVars) {
-  const { boxShadow2 } = vars
+  const { boxShadow2, primaryColor } = vars
   return {
-    menuBoxShadow: boxShadow2
+    menuBoxShadow: boxShadow2,
+    loadingColor: primaryColor
   }
 }
 
