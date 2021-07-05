@@ -2,20 +2,79 @@
 
 ## Pending
 
+### Feats
+
+- `n-loading-bar` export `LoadingBarApi` type.
+- `n-image` add `imgProps` prop.
+- Add native `title` attributes to some components to enhance the experience.
+- `n-tree` add `prefix` and `suffix` in TreeOption.
+- `n-carousel` add `dot-placement` prop.
+
+### Fixes
+
+- Fix `n-upload` `multiple=false` doesn't work for drag & drop, closes [#363](https://github.com/TuSimple/naive-ui/issues/363).
+- Fix `n-dropdown`'s inner `<a />`'s style.
+- Fix `n-menu` tooltip's inner `<a />`'s style, closes [#338](https://github.com/TuSimple/naive-ui/issues/338).
+- Fix `n-carousel` doesn't work with `v-for` children.
+- Fix `n-form` `label-align` prop not work, closes [#213](https://github.com/TuSimple/naive-ui/issues/213)
+
+## 2.15.2 (2021-07-02)
+
+### Feats
+
+- `n-carousel` add `trigger` prop.
+- `n-menu` add `dropdown-placement` prop.
+- `n-upload` add `before-upload` prop.
+- `n-image` add `alt` prop.
+- Support the enter key on the numeric keypad.
+- `n-spin` support `icon` slot for icon customizing, closes[#260](https://github.com/TuSimple/naive-ui/issues/260).
+- `n-spin` add `rotate` prop fro slot icon to rotate.
+- `n-form` export `FormItemRule` & `FormRules` type.
+- `n-select` add `render-tag` prop.
+
+### Fixes
+
+- Fix `n-log` warn on highlight.js when no language is set, closes [#327](https://github.com/TuSimple/naive-ui/issues/327).
+- Remove `n-calendar`'s useless `console.log`.
+- Fix loading-bar disappears unexpectl, closes [#343](https://github.com/TuSimple/naive-ui/issues/343).
+- Fix `n-select` doesn't scroll to selected item when menu is opened, closes [#346](https://github.com/TuSimple/naive-ui/issues/346).
+- Fix `n-tab-pane` throws error when using v-if.
+- Fix `n-modal` still closes when `on-negative-click` returns `false`.
+- Fix `n-collapse` `defaultExpandedNames` does not work in accrodion mode, closes [#350](https://github.com/TuSimple/naive-ui/issues/350).
+- Fix `n-tag` lacks `on-update-checked` prop.
+- Fix `n-menu` `render-label` not working for dropdown in collapsed mode.
+
+## 2.15.1 (2021-06-30)
+
+- Fix no `web-types.json`.
+
+## 2.15.0 (2021-06-29)
+
 ### Breaking Changes
 
-- Rename `n-select`'s `SelectOption`'s `render` prop to `renderLabel`.
+- `n-select`'s `SelectOption`'s `render` no longer render label but the entire option.
 
 ### Feats
 
 - `n-carousel` supports touch operation, closes [#271](https://github.com/TuSimple/naive-ui/issues/271).
 - `n-input` add `input-props` prop.
+- `n-message` optimize the error message of `useMessage` when there is no `n-message-provider`, add the related document link.
+- Add `web-types.json` for webstorm, however I recommend using VSCode and Volar. `web-types.json` only provides limited information for coding.
+- `n-tree-select` add `leaf-only` prop.
+- `n-tree` add `leaf-only` prop.
+- `n-select`'s `SelectOption`'s `label` supports render function.
+- `n-select` add `render-option` prop.
+- `n-select` export `SelectOption` & `SelectGroupOption` type.
+- `n-popover` add `header` slot.
+- `n-dropdown` add `render-label` prop.
 
 ### Fixes
 
 - Fix `n-date-picker` `n-provider` pass `date-locale` not work, closes [#250](https://github.com/TuSimple/naive-ui/issues/250).
 - Fix `n-input` clear button placeholder prevent clicking on actual component [#288](https://github.com/TuSimple/naive-ui/issues/288)
-- Fix `n-form` `label-align` prop not work, closes [#213](https://github.com/TuSimple/naive-ui/issues/213)
+- Fix `n-carousel` click the at current item button, the component behaves abnormally.
+- Fix `n-menu` `render-label` not working for tooltip in collapsed mode.
+- Fix `n-dropdown` can't render `n-popover` in option.
 
 ## 2.14.0 (2021-06-23)
 

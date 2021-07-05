@@ -22,7 +22,11 @@ import {
 } from 'vueuc'
 import { useIsMounted, useMergedState, useCompitable } from 'vooks'
 import { clickoutside } from 'vdirs'
-import { RenderLabel } from '../../_internal/select-menu/src/interface'
+import {
+  RenderLabel,
+  RenderOption
+} from '../../_internal/select-menu/src/interface'
+import { RenderTag } from '../../_internal/selection/src/interface'
 import { useTheme, useConfig, useLocale, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, call, useAdjustedTo, ExtractPublicPropTypes } from '../../_utils'
@@ -36,9 +40,9 @@ import type { InternalSelectionInst } from '../../_internal'
 import { selectLight, SelectTheme } from '../styles'
 import {
   tmOptions,
-  patternMatched,
   createValOptMap,
-  filterOptions
+  filterOptions,
+  defaultFilter
 } from './utils'
 import style from './styles/index.cssr'
 
@@ -81,15 +85,7 @@ const selectProps = {
     type: Function as PropType<
     (pattern: string, option: SelectBaseOption) => boolean
     >,
-    default: (pattern: string, option: SelectBaseOption) => {
-      if (!option) return false
-      if (typeof option.label === 'string') {
-        return patternMatched(pattern, option.label)
-      } else if (option.value !== undefined) {
-        return patternMatched(pattern, String(option.value))
-      }
-      return false
-    }
+    default: defaultFilter
   },
   placement: {
     type: String as PropType<FollowerPlacement>,
@@ -134,6 +130,8 @@ const selectProps = {
     default: true
   },
   renderLabel: Function as PropType<RenderLabel>,
+  renderOption: Function as PropType<RenderOption>,
+  renderTag: Function as PropType<RenderTag>,
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<OnUpdateValue> | undefined
   >,
@@ -554,6 +552,7 @@ export default defineComponent({
           if (props.filterable) break
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
+        case 'NumpadEnter':
           if (mergedShowRef.value) {
             const menu = menuRef.value
             const pendingOptionData = menu?.getPendingOption()
@@ -690,6 +689,7 @@ export default defineComponent({
                       selectedOption={this.selectedOption}
                       selectedOptions={this.selectedOptions}
                       multiple={this.multiple}
+                      renderTag={this.renderTag}
                       filterable={this.filterable}
                       clearable={this.clearable}
                       disabled={this.disabled}
@@ -751,6 +751,7 @@ export default defineComponent({
                               treeMate={this.treeMate}
                               multiple={this.multiple}
                               size="medium"
+                              renderOption={this.renderOption}
                               renderLabel={this.renderLabel}
                               value={this.mergedValue}
                               style={this.cssVars}

@@ -107,6 +107,7 @@ const treeProps = {
     default: () => []
   },
   remote: Boolean,
+  leafOnly: Boolean,
   multiple: Boolean,
   pattern: {
     type: String,
@@ -494,11 +495,15 @@ export default defineComponent({
       nodeKeyToBeExpanded = null
     }
     function handleCheck (node: TmNode, checked: boolean): void {
-      if (props.disabled || node.disabled) return
+      // We don't guard for leaf only since we have done it in view layer
+      if (props.disabled || node.disabled) {
+        return
+      }
       const { checkedKeys } = dataTreeMateRef.value![
         checked ? 'check' : 'uncheck'
       ](node.key, displayedCheckedKeysRef.value, {
-        cascade: props.cascade
+        cascade: props.cascade,
+        leafOnly: props.leafOnly
       })
       doUpdateCheckedKeys(checkedKeys)
     }
@@ -521,7 +526,14 @@ export default defineComponent({
       toggleExpand(node.key)
     }
     function handleSelect (node: TmNode): void {
-      if (props.disabled || node.disabled || !props.selectable) return
+      if (
+        props.disabled ||
+        node.disabled ||
+        !props.selectable ||
+        (props.leafOnly && !node.isLeaf)
+      ) {
+        return
+      }
       pendingNodeKeyRef.value = node.key
       if (props.internalCheckOnSelect) {
         const {
@@ -941,12 +953,15 @@ export default defineComponent({
       mergedExpandedKeysRef,
       mergedThemeRef: themeRef,
       disabledRef: toRef(props, 'disabled'),
+      checkableRef: toRef(props, 'checkable'),
+      leafOnlyRef: toRef(props, 'leafOnly'),
+      selectableRef: toRef(props, 'selectable'),
       remoteRef: toRef(props, 'remote'),
       onLoadRef: toRef(props, 'onLoad'),
       draggableRef: toRef(props, 'draggable'),
-      checkableRef: toRef(props, 'checkable'),
       blockLineRef: toRef(props, 'blockLine'),
       indentRef: toRef(props, 'indent'),
+      cascadeRef: toRef(props, 'cascade'),
       droppingMouseNodeRef,
       droppingNodeParentRef,
       draggingNodeRef,
@@ -970,6 +985,7 @@ export default defineComponent({
       handleKeydown,
       handleKeyup
     }
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
@@ -1024,7 +1040,6 @@ export default defineComponent({
       blockNode,
       blockLine,
       draggable,
-      selectable,
       disabled,
       internalFocusable,
       handleKeyup,
@@ -1036,11 +1051,10 @@ export default defineComponent({
     const treeClass = [
       `${mergedClsPrefix}-tree`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
-      blockLine && `${mergedClsPrefix}-tree--block-line`,
-      selectable && `${mergedClsPrefix}-tree--selectable`
+      blockLine && `${mergedClsPrefix}-tree--block-line`
     ]
-    const createNode = (tmNode: TmNode | MotionData): VNode =>
-      '__motion' in tmNode ? (
+    const createNode = (tmNode: TmNode | MotionData): VNode => {
+      return '__motion' in tmNode ? (
         <MotionWrapper
           height={tmNode.height}
           nodes={tmNode.nodes}
@@ -1055,6 +1069,8 @@ export default defineComponent({
           clsPrefix={mergedClsPrefix}
         />
       )
+    }
+
     if (this.virtualScroll) {
       const { mergedTheme, internalScrollablePadding } = this
       const padding = getPadding(internalScrollablePadding || '0')

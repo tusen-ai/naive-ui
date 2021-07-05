@@ -51,6 +51,7 @@ export default defineComponent({
       maxIconSize: MenuChild.maxIconSize,
       activeIconSize: MenuChild.activeIconSize,
       mergedTheme: NMenu.mergedThemeRef,
+      menuProps,
       dropdownEnabled: useMemo(() => {
         return (
           props.root &&
@@ -71,7 +72,12 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, tmNode } = this
+    const {
+      mergedClsPrefix,
+      mergedTheme,
+      tmNode,
+      menuProps: { renderLabel }
+    } = this
     return (
       <div
         role="menuitem"
@@ -84,14 +90,16 @@ export default defineComponent({
         ]}
       >
         <NTooltip
-          theme={this.mergedTheme.peers.Tooltip}
-          themeOverrides={this.mergedTheme.peerOverrides.Tooltip}
+          theme={mergedTheme.peers.Tooltip}
+          themeOverrides={mergedTheme.peerOverrides.Tooltip}
           trigger="hover"
           placement={this.dropdownPlacement}
           disabled={!this.dropdownEnabled || this.title === undefined}
+          internalExtraClass={['menu-tooltip']}
         >
           {{
-            default: () => render(this.title),
+            default: () =>
+              renderLabel ? renderLabel(tmNode.rawNode) : render(this.title),
             trigger: () => (
               <NMenuOptionContent
                 tmNode={tmNode}

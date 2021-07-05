@@ -9,9 +9,8 @@ import {
   toRef,
   renderSlot,
   provide,
-  Ref,
-  UnwrapRef,
-  InjectionKey
+  nextTick,
+  watchEffect
 } from 'vue'
 import { TreeNode, createIndexGetter } from 'treemate'
 import { VirtualList, VirtualListInst } from 'vueuc'
@@ -36,32 +35,16 @@ import NSelectOption from './SelectOption'
 import NSelectGroupHeader from './SelectGroupHeader'
 import style from './styles/index.cssr'
 import { internalSelectMenuLight, InternalSelectMenuTheme } from '../styles'
-import { RenderLabel, Size } from './interface'
-
-export interface InternalSelectMenuInjection {
-  handleOptionMouseEnter: (
-    e: MouseEvent,
-    tmNode: TreeNode<SelectBaseOption>
-  ) => void
-  handleOptionClick: (e: MouseEvent, tmNode: TreeNode<SelectBaseOption>) => void
-  valueSetRef: Ref<Set<number | string>>
-  pendingTmNodeRef: Ref<TreeNode<SelectBaseOption> | null>
-  multipleRef: Ref<boolean>
-  valueRef: Ref<string | number | Array<string | number> | null>
-  renderLabelRef: Ref<RenderLabel | undefined>
-}
-
-export const internalSelectionMenuInjectionKey: InjectionKey<InternalSelectMenuInjection> =
-  Symbol('internal-select-menu')
-
-interface InternalExposedProps {
-  selfRef: Ref<HTMLElement | null>
-  getPendingOption: () => SelectBaseOption | null
-  prev: () => void
-  next: () => void
-}
-
-export type InternalSelectMenuRef = UnwrapRef<InternalExposedProps>
+import type {
+  RenderLabel,
+  Size,
+  InternalExposedProps,
+  RenderOption
+} from './interface'
+import {
+  internalSelectionMenuInjectionKey,
+  internalSelectionMenuBodyInjectionKey
+} from './interface'
 
 export default defineComponent({
   name: 'InternalSelectMenu',
@@ -102,6 +85,7 @@ export default defineComponent({
     loading: Boolean,
     focusable: Boolean,
     renderLabel: Function as PropType<RenderLabel>,
+    renderOption: Function as PropType<RenderOption>,
     onMousedown: Function as PropType<(e: MouseEvent) => void>,
     onScroll: Function as PropType<(e: Event) => void>,
     onFocus: Function as PropType<(e: FocusEvent) => void>,
@@ -149,13 +133,15 @@ export default defineComponent({
           : null
       )
     }
-    watch(toRef(props, 'show'), (value) => {
-      if (value) initPendingNode()
-    })
     initPendingNode()
-    const defaultScrollIndex = pendingNodeRef.value
-      ? fIndexGetterRef.value(pendingNodeRef.value.key) ?? undefined
-      : undefined
+    onMounted(() => {
+      watchEffect(() => {
+        if (props.show) {
+          initPendingNode()
+          void nextTick(scrollToPendingNode)
+        }
+      })
+    })
     const itemSizeRef = computed(() => {
       return depx(themeRef.value.self[createKey('optionHeight', props.size)])
     })
@@ -249,17 +235,20 @@ export default defineComponent({
       doScroll = false
     ): void {
       pendingNodeRef.value = tmNode
-      if (doScroll && tmNode) {
-        const fIndex = fIndexGetterRef.value(tmNode.key)
-        if (fIndex === null) return
-        if (props.virtualScroll) {
-          virtualListRef.value?.scrollTo({ index: fIndex })
-        } else {
-          scrollbarRef.value?.scrollTo({
-            index: fIndex,
-            elSize: itemSizeRef.value
-          })
-        }
+      if (doScroll) scrollToPendingNode()
+    }
+    function scrollToPendingNode (): void {
+      const tmNode = pendingNodeRef.value
+      if (!tmNode) return
+      const fIndex = fIndexGetterRef.value(tmNode.key)
+      if (fIndex === null) return
+      if (props.virtualScroll) {
+        virtualListRef.value?.scrollTo({ index: fIndex })
+      } else {
+        scrollbarRef.value?.scrollTo({
+          index: fIndex,
+          elSize: itemSizeRef.value
+        })
       }
     }
     function handleFocusin (e: FocusEvent): void {
@@ -279,8 +268,10 @@ export default defineComponent({
       multipleRef: toRef(props, 'multiple'),
       valueRef: toRef(props, 'value'),
       renderLabelRef: toRef(props, 'renderLabel'),
+      renderOptionRef: toRef(props, 'renderOption'),
       pendingTmNodeRef: pendingNodeRef
     })
+    provide(internalSelectionMenuBodyInjectionKey, selfRef)
     onMounted(() => {
       const { value } = scrollbarRef
       if (value) value.sync()
@@ -343,7 +334,6 @@ export default defineComponent({
       virtualListRef,
       scrollbarRef,
       style: styleRef,
-      defaultScrollIndex,
       itemSize: itemSizeRef,
       padding: paddingRef,
       flattenedNodes: flattenedNodesRef,
@@ -407,7 +397,6 @@ export default defineComponent({
                     items={this.flattenedNodes}
                     itemSize={this.itemSize}
                     showScrollbar={false}
-                    defaultScrollIndex={this.defaultScrollIndex}
                     paddingTop={this.padding.top}
                     paddingBottom={this.padding.bottom}
                     onResize={this.handleVirtualListResize}

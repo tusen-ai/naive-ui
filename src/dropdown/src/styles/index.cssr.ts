@@ -1,4 +1,4 @@
-import { cB, cM, cE, cNotM } from '../../../_utils/cssr'
+import { c, cB, cM, cE, cNotM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
@@ -41,6 +41,19 @@ export default cB('dropdown-menu', `
   cB('dropdown-option', {
     position: 'relative'
   }, [
+    c('a', `
+      text-decoration: none;
+      color: inherit;
+    `, [
+      c('&::before', `
+        content: "",
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      `)
+    ]),
     cB('dropdown-option-body', `
       display: flex;
       cursor: pointer;

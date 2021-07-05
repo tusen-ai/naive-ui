@@ -73,6 +73,7 @@ const props = {
   },
   disabled: Boolean,
   filterable: Boolean,
+  leafOnly: Boolean,
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
   options: {
@@ -436,7 +437,7 @@ export default defineComponent({
       }
     }
     function handleKeyup (e: KeyboardEvent): void {
-      if (e.code === 'Enter') {
+      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
         if (mergedShowRef.value) {
           treeHandleKeyup(e)
           if (!props.multiple) {
@@ -661,6 +662,7 @@ export default defineComponent({
                                   selectedKeys={this.treeSelectedKeys}
                                   checkable={checkable}
                                   cascade={this.mergedCascade}
+                                  leafOnly={this.leafOnly}
                                   multiple={this.multiple}
                                   virtualScroll={
                                     this.consistentMenuWidth &&

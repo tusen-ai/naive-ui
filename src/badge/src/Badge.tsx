@@ -12,7 +12,7 @@ import {
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseSlotMachine, NBaseWave } from '../../_internal'
-import { createKey } from '../../_utils'
+import { createKey, getTitleAttribute } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { badgeLight } from '../styles'
 import type { BadgeTheme } from '../styles'
@@ -124,7 +124,10 @@ export default defineComponent({
           {{
             default: () =>
               this.showBadge ? (
-                <sup class={`${mergedClsPrefix}-badge-sup`}>
+                <sup
+                  class={`${mergedClsPrefix}-badge-sup`}
+                  title={getTitleAttribute(this.value)}
+                >
                   {!this.dot ? (
                     <NBaseSlotMachine
                       clsPrefix={mergedClsPrefix}

@@ -68,7 +68,7 @@ export default defineComponent({
         }
       },
       handleFileListChange (value) {
-        message.info("是的，file-list 的值变了")
+        message.info('是的，file-list 的值变了')
       }
     }
   }

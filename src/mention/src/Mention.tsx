@@ -255,7 +255,8 @@ export default defineComponent({
       } else if (
         e.code === 'ArrowUp' ||
         e.code === 'ArrowDown' ||
-        e.code === 'Enter'
+        e.code === 'Enter' ||
+        e.code === 'NumpadEnter'
       ) {
         if (inputInstRef.value?.isCompositing) return
         const { value: selectMenuInst } = selectMenuInstRef

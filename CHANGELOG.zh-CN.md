@@ -2,20 +2,79 @@
 
 ## Pending
 
+### Feats
+
+- `n-loading-bar` 导出 `LoadingBarApi` 类型
+- `n-image` 增加 `imgProps` 属性
+- 在部分组件上添加原生 `title` 属性，以提高用户体验
+- `n-tree` 在 TreeOption 中新增 `prefix` 和 `suffix`
+- `n-carousel` 增加 `dot-placement` 属性
+
+### Fixes
+
+- 修复 `n-upload` `multiple=false` 对于拖拽不生效，关闭 [#363](https://github.com/TuSimple/naive-ui/issues/363)
+- 修复 `n-dropdown` 中 `<a />` 的样式
+- 修复 `n-menu` tooltip 中 `<a />` 的样式，关闭 [#338](https://github.com/TuSimple/naive-ui/issues/338)
+- 修复 `n-carousel` 无法使用 `v-for` 的子元素
+- 修复 `n-form` `label-align` 属性失效，关闭 [#213](https://github.com/TuSimple/naive-ui/issues/213)
+
+## 2.15.2 (2021-07-02)
+
+### Feats
+
+- `n-carousel` 增加 `trigger` 属性增加触发切换的方式
+- `n-menu` 新增 `dropdown-placement` 属性
+- `n-upload` 新增 `before-upload` 属性
+- `n-image` 新增 `alt` 属性.
+- 支持小键盘的 enter 键
+- `n-spin` 支持 `icon` 插槽为了自定义加载图标，closes[#260](https://github.com/TuSimple/naive-ui/issues/260)
+- `n-spin` 新增 `rotate` 属性控制自定义加载图标是否有旋转动画
+- `n-form` 导出 `FormItemRule` & `FormRules` 类型
+- `n-select` 新增 `render-tag` 属性
+
+### Fixes
+
+- 修复 `n-log` 在未设定语言时仍然对缺少 highlight.js 报错，关闭 [#327](https://github.com/TuSimple/naive-ui/issues/327)
+- 移除 `n-calendar` 无用的 console.log
+- 修复 loading-bar 自动消失，关闭 [#343](https://github.com/TuSimple/naive-ui/issues/343)
+- 修复 `n-select` 打开菜单时没有自动滚动到选中项，关闭 [#346](https://github.com/TuSimple/naive-ui/issues/346)
+- 修复 `n-tab-pane` 在使用 v-if 时报错
+- 修复 `n-modal` `on-negative-click` 返回 false 时 modal 依然关闭
+- 修复 `n-collapse` 在 accordion 模式下默认指定展开属性无效，关闭 [#350](https://github.com/TuSimple/naive-ui/issues/350)
+- 修复 `n-tag` 缺少 `on-update-checked` 属性
+- 修复 `n-menu` 折叠时 `render-label` 对于 dropdown 不生效
+
+## 2.15.1 (2021-06-30)
+
+- 修复缺少 `web-types.json`
+
+## 2.15.0 (2021-06-29)
+
 ### Breaking Changes
 
-- `n-select` 的 `SelectOption` `render` 属性被重命名为 `renderLabel`
+- `n-select` 的 `SelectOption` `render` 属性不再渲染 label 而是整个选项
 
 ### Feats
 
 - `n-carousel` 支持触控操作，关闭 [#271](https://github.com/TuSimple/naive-ui/issues/271)
 - `n-input` 新增 `input-props` 属性
+- `n-message` 优化 `useMessage` 当没有 `n-message-provider` 时的报错信息，增加关联的文档链接
+- 为 webstorm 添加 `web-types.json`，但是我还是推荐使用 VSCode 和 Volar，`web-types.json` 只能为编码提供很有限的信息
+- `n-tree-select` 新增 `leaf-only` 属性
+- `n-tree` 新增 `leaf-only` 属性
+- `n-select` 的 `SelectOption` 的 `label` 属性支持渲染函数
+- `n-select` 新增 `render-option` 属性
+- `n-select` 导出 `SelectOption` & `SelectGroupOption` 类型
+- `n-popover` 支持使用 `header` slot
+- `n-dropdown` 新增 `render-label` 属性
 
 ### Fixes
 
 - 修复 `n-date-picker` `n-provider` 传递 `date-locale` 属性无效，关闭 [#250](https://github.com/TuSimple/naive-ui/issues/250)
 - Fix `n-input` clear button placeholder prevent clicking on actual component [#288](https://github.com/TuSimple/naive-ui/issues/288)
-- 修复 `n-form` `label-align` 属性失效，关闭 [#213](https://github.com/TuSimple/naive-ui/issues/213)
+- 修复 `n-carousel` 点击当前页对应的控制按钮时，组件显示异常
+- 修复 `n-menu` 折叠时 `render-label` 对于 tooltip 不生效
+- 修复 `n-dropdown` 不能在选项中渲染 `n-popover`
 
 ## 2.14.0 (2021-06-23)
 

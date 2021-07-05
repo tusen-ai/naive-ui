@@ -10,7 +10,8 @@ import {
   CSSProperties,
   InjectionKey,
   Ref,
-  mergeProps
+  mergeProps,
+  VNodeChild
 } from 'vue'
 import { createTreeMate, Key, TreeMateOptions, TreeNode } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
@@ -26,7 +27,8 @@ import {
   call,
   createKey,
   MaybeArray,
-  ExtractPublicPropTypes
+  ExtractPublicPropTypes,
+  createRefSetter
 } from '../../_utils'
 import { dropdownLight } from '../styles'
 import type { DropdownTheme } from '../styles'
@@ -57,7 +59,9 @@ DropdownIgnoredOption
   }
 }
 
+export type RenderLabelImpl = (option: DropdownMixedOption) => VNodeChild
 export interface DropdownInjection {
+  renderLabelRef: Ref<RenderLabelImpl | undefined>
   hoverKeyRef: Ref<Key | null>
   keyboardKeyRef: Ref<Key | null>
   lastToggledSubmenuKeyRef: Ref<Key | null>
@@ -96,7 +100,8 @@ const dropdownBaseProps = {
     default: () => []
   },
   // for menu, not documented
-  value: [String, Number] as PropType<Key | null>
+  value: [String, Number] as PropType<Key | null>,
+  renderLabel: Function as PropType<RenderLabelImpl>
 } as const
 
 const popoverPropKeys = Object.keys(popoverBaseProps) as Array<
@@ -196,6 +201,7 @@ export default defineComponent({
     )
 
     provide(dropdownInjectionKey, {
+      renderLabelRef: toRef(props, 'renderLabel'),
       hoverKeyRef: hoverKeyRef,
       keyboardKeyRef: keyboardKeyRef,
       lastToggledSubmenuKeyRef: lastToggledSubmenuKeyRef,
@@ -373,7 +379,7 @@ export default defineComponent({
     ) => {
       const { mergedClsPrefix } = this
       const dropdownProps = {
-        ref,
+        ref: createRefSetter(ref),
         class: [className, `${mergedClsPrefix}-dropdown`],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,

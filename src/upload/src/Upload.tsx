@@ -11,7 +11,13 @@ import {
 import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { ExtractPublicPropTypes, getFirstSlotVNode, warn, MaybeArray, call } from '../../_utils'
+import {
+  ExtractPublicPropTypes,
+  getFirstSlotVNode,
+  warn,
+  MaybeArray,
+  call
+} from '../../_utils'
 import { NFadeInExpandTransition } from '../../_internal'
 import { uploadLight, UploadTheme } from '../styles'
 import NUploadFile from './UploadFile'
@@ -27,7 +33,8 @@ import {
   OnDownload,
   OnChange,
   uploadInjectionKey,
-  OnUpdateFileList
+  OnUpdateFileList,
+  OnBeforeUpload
 } from './interface'
 import { useMergedState } from 'vooks'
 import { uploadDraggerKey } from './UploadDragger'
@@ -186,23 +193,15 @@ const uploadProps = {
     type: String,
     default: 'POST'
   },
-  multiple: {
-    type: Boolean,
-    default: false
-  },
+  multiple: Boolean,
   data: [Object, Function] as PropType<FuncOrRecordOrUndef>,
   headers: [Object, Function] as PropType<FuncOrRecordOrUndef>,
-  withCredentials: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  withCredentials: Boolean,
+  disabled: Boolean,
   onChange: Function as PropType<OnChange>,
   onRemove: Function as PropType<OnRemove>,
   onFinish: Function as PropType<OnFinish>,
+  onBeforeUpload: Function as PropType<OnBeforeUpload>,
   /** currently of no usage */
   onDownload: Function as PropType<OnDownload>,
   defaultUpload: {
@@ -213,9 +212,7 @@ const uploadProps = {
   'onUpdate:fileList': [Function, Array] as PropType<
   MaybeArray<OnUpdateFileList>
   >,
-  onUpdateFileList: [Function, Array] as PropType<
-  MaybeArray<OnUpdateFileList>
-  >,
+  onUpdateFileList: [Function, Array] as PropType<MaybeArray<OnUpdateFileList>>,
   fileListStyle: [String, Object] as PropType<string | CSSProperties>,
   defaultFileList: {
     type: Array as PropType<FileInfo[]>,
@@ -302,32 +299,43 @@ export default defineComponent({
       target.value = ''
     }
     function doUpdateFileList (files: FileInfo[]): void {
-      const {
-        'onUpdate:fileList': _onUpdateFileList,
-        onUpdateFileList,
-      } = props
+      const { 'onUpdate:fileList': _onUpdateFileList, onUpdateFileList } = props
       if (_onUpdateFileList) call(_onUpdateFileList, files)
       if (onUpdateFileList) call(onUpdateFileList, files)
       uncontrolledFileListRef.value = files
     }
     function handleFileAddition (files: FileList | null, e?: Event): void {
-      if (!files) return
-      Array.from(files).forEach((file) => {
-        const fileInfo: FileInfo = {
-          id: createId(),
-          name: file.name,
-          status: 'pending',
-          percentage: 0,
-          file: file,
-          url: null
-        }
-        doChange(fileInfo, e, {
-          append: true
+      if (!files || files.length === 0) return
+      const { onBeforeUpload } = props
+
+      const filesAsArray = props.multiple ? Array.from(files) : [files[0]]
+      void Promise.all(
+        filesAsArray.map(async (file) => {
+          const fileInfo: FileInfo = {
+            id: createId(),
+            name: file.name,
+            status: 'pending',
+            percentage: 0,
+            file: file,
+            url: null
+          }
+          if (
+            !onBeforeUpload ||
+            (await onBeforeUpload({
+              file: fileInfo,
+              fileList: mergedFileListRef.value
+            })) !== false
+          ) {
+            doChange(fileInfo, e, {
+              append: true
+            })
+          }
         })
+      ).then(() => {
+        if (props.defaultUpload) {
+          submit()
+        }
       })
-      if (props.defaultUpload) {
-        submit()
-      }
     }
     function submit (fileId?: string): void {
       const {
@@ -375,7 +383,7 @@ export default defineComponent({
       }
     ) => {
       const { append, remove } = options
-      const fileListAfterChange = mergedFileListRef.value
+      const fileListAfterChange = Array.from(mergedFileListRef.value)
       const fileIndex = fileListAfterChange.findIndex(
         (file) => file.id === fileAfterChange.id
       )

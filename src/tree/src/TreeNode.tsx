@@ -46,6 +46,7 @@ const TreeNode = defineComponent({
     const contentInstRef = ref<null | ComponentPublicInstance>(null)
     // must be non-reactive
     const contentElRef: { value: HTMLElement | null } = { value: null }
+
     onMounted(() => {
       contentElRef.value = contentInstRef.value!.$el as HTMLElement
     })
@@ -173,13 +174,22 @@ const TreeNode = defineComponent({
       expanded: useMemo(() =>
         NTree.mergedExpandedKeysRef.value.includes(props.tmNode.key)
       ),
-      suffix: computed(() => props.tmNode.rawNode.suffix),
       disabled: computed(
         () => NTree.disabledRef.value || props.tmNode.disabled
       ),
+      checkable: computed(
+        () =>
+          NTree.checkableRef.value &&
+          (NTree.cascadeRef.value ||
+            (NTree.leafOnlyRef.value && props.tmNode.isLeaf))
+      ),
       checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
+      selectable: computed(
+        () =>
+          NTree.selectableRef.value &&
+          (NTree.leafOnlyRef.value ? !!props.tmNode.isLeaf : true)
+      ),
       internalScrollable: NTree.internalScrollableRef,
-      checkable: NTree.checkableRef,
       draggable: NTree.draggableRef,
       blockLine: NTree.blockLineRef,
       checkboxFocusable: NTree.internalCheckboxFocusableRef,
@@ -204,6 +214,7 @@ const TreeNode = defineComponent({
       tmNode,
       clsPrefix,
       checkable,
+      selectable,
       selected,
       highlight,
       draggable,
@@ -211,7 +222,6 @@ const TreeNode = defineComponent({
       indent,
       disabled,
       pending,
-      suffix,
       internalScrollable
     } = this
     // drag start not inside
@@ -239,7 +249,8 @@ const TreeNode = defineComponent({
               [`${clsPrefix}-tree-node--checkable`]: checkable,
               [`${clsPrefix}-tree-node--highlight`]: highlight,
               [`${clsPrefix}-tree-node--pending`]: pending,
-              [`${clsPrefix}-tree-node--disabled`]: disabled
+              [`${clsPrefix}-tree-node--disabled`]: disabled,
+              [`${clsPrefix}-tree-node--selectable`]: selectable
             }
           ]}
           data-key={dataKey}
@@ -286,11 +297,8 @@ const TreeNode = defineComponent({
                 ? this.handleDragStart
                 : undefined
             }
-          >
-            {{
-              default: () => [tmNode.rawNode.label, suffix ? suffix() : null]
-            }}
-          </NTreeNodeContent>
+            tmNode={tmNode}
+          />
           {draggable
             ? this.showDropMark
               ? renderDropMark({

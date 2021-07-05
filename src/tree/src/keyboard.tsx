@@ -53,7 +53,7 @@ export function useKeyboard ({
       const { value: fNodes } = fNodesRef
       let fIndex = fNodes.findIndex((tmNode) => tmNode.key === pendingNodeKey)
       if (!~fIndex) return
-      if (e.code === 'Enter') {
+      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
         handleSelect(fNodes[fIndex])
       } else if (e.code === 'ArrowDown') {
         fIndex += 1

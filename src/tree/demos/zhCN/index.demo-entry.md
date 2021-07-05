@@ -15,6 +15,7 @@ drag-drop
 virtual
 async
 disabled
+prefix-and-suffix
 ```
 
 ## API
@@ -39,6 +40,7 @@ disabled
 | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |
 | filter | `(node: TreeOption) => boolean` | 一个简单的字符串过滤算法 |  |
+| leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
 | multiple | `boolean` | `false` |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` |  |
 | pattern | `string` | `''` |  |
@@ -65,3 +67,5 @@ disabled
 | children? | `TreeOption[]` | 节点的子节点 |
 | disabled? | `boolean` | 是否禁用节点 |
 | isLeaf? | `boolean` | 节点是否是叶节点，在 remote 模式下是必须的 |
+| prefix? | `string \| (() => VNodeChild)` | 节点的前缀 |
+| suffix? | `string \| (() => VNodeChild)` | 节点的后缀 |
