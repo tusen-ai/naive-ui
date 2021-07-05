@@ -19,10 +19,7 @@ export default defineComponent({
       type: Boolean,
       default: undefined
     },
-    loading: {
-      type: Boolean,
-      default: false
-    },
+    loading: Boolean,
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {
@@ -31,7 +28,7 @@ export default defineComponent({
       return (
         <NBaseLoading
           clsPrefix={clsPrefix}
-          class={`${clsPrefix}-base-selection__mark`}
+          class={`${clsPrefix}-base-suffix`}
           strokeWidth={24}
           scale={0.85}
           show={props.loading}
@@ -48,7 +45,7 @@ export default defineComponent({
                     default: () => (
                       <NBaseIcon
                         clsPrefix={clsPrefix}
-                        class={`${clsPrefix}-base-selection__arrow`}
+                        class={`${clsPrefix}-base-suffix__arrow`}
                       >
                         {{ default: () => <ChevronDownIcon /> }}
                       </NBaseIcon>
