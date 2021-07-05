@@ -9,6 +9,7 @@
 - Add native `title` attributes to some components to enhance the experience.
 - `n-tree` add `prefix` and `suffix` in TreeOption.
 - `n-carousel` add `dot-placement` prop.
+- `n-slider` add `tooltip` prop, closes [#362](https://github.com/TuSimple/naive-ui/issues/362).
 
 ### Fixes
 
