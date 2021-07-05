@@ -4,13 +4,18 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // vars:
 // --bezier
 // --menu-box-shadow
+// --loading-color
 export default c([
   cB('auto-complete', `
     z-index: auto;
     position: relative;
     display: inline-flex;
     width: 100%;
-  `),
+  `, [
+    cB('base-loading', `
+      color: var(--loading-color);
+    `)
+  ]),
   cB('auto-complete-menu', `
     margin: 4px 0;
     box-shadow: var(--menu-box-shadow);

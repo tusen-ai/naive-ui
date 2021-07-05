@@ -9,7 +9,7 @@ describe('n-tree', () => {
   it('should accept proper options', () => {
     mount(NTree, {
       props: {
-        options: [
+        data: [
           {
             label: '123',
             key: '123',
@@ -25,7 +25,7 @@ describe('n-tree', () => {
     })
     mount(NTree, {
       props: {
-        options: [
+        data: [
           {
             label: '123',
             key: '123',
@@ -39,12 +39,12 @@ describe('n-tree', () => {
   it('should work with `prefix` and `suffix`', async () => {
     const wrapper = mount(NTree, {
       props: {
-        options: [
+        data: [
           {
             label: 'test',
             key: '123',
-            prefix: 'prefix',
-            suffix: 'suffix',
+            prefix: () => 'prefix',
+            suffix: () => 'suffix',
             children: [
               {
                 label: '123',
@@ -55,27 +55,12 @@ describe('n-tree', () => {
         ]
       }
     })
-    async function doTest (): Promise<void> {
-      expect(wrapper.find('.n-tree-node-content__prefix').exists()).toBe(true)
-      expect(wrapper.find('.n-tree-node-content__prefix').text()).toBe('prefix')
-      expect(wrapper.find('.n-tree-node-content__text').exists()).toBe(true)
-      expect(wrapper.find('.n-tree-node-content__text').text()).toBe('test')
-      expect(wrapper.find('.n-tree-node-content__suffix').exists()).toBe(true)
-      expect(wrapper.find('.n-tree-node-content__suffix').text()).toBe('suffix')
 
-      const treeNodeContentWrapper = wrapper.findComponent(
-        '.n-tree-node-content'
-      )
-
-      await treeNodeContentWrapper.trigger('click')
-      expect(treeNodeContentWrapper.emitted()).toHaveProperty('click')
-
-      await treeNodeContentWrapper.trigger('dragstart')
-      expect(treeNodeContentWrapper.emitted()).not.toHaveProperty('dragstart')
-    }
-
-    setTimeout(() => {
-      doTest()
-    }, 100)
+    expect(wrapper.find('.n-tree-node-content__prefix').exists()).toBe(true)
+    expect(wrapper.find('.n-tree-node-content__prefix').text()).toBe('prefix')
+    expect(wrapper.find('.n-tree-node-content__text').exists()).toBe(true)
+    expect(wrapper.find('.n-tree-node-content__text').text()).toBe('test')
+    expect(wrapper.find('.n-tree-node-content__suffix').exists()).toBe(true)
+    expect(wrapper.find('.n-tree-node-content__suffix').text()).toBe('suffix')
   })
 })

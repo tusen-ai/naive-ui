@@ -25,10 +25,7 @@ const formProps = {
     default: false
   },
   labelWidth: [Number, String] as PropType<number | string>,
-  labelAlign: {
-    type: String as PropType<LabelAlign>,
-    default: 'left'
-  },
+  labelAlign: String as PropType<LabelAlign>,
   labelPlacement: {
     type: String as PropType<LabelPlacement>,
     default: 'top'
