@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.15.3 (2021-07-05)
 
 ### Feats
 
