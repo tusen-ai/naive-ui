@@ -18,6 +18,7 @@
 - 修复 `n-menu` tooltip 中 `<a />` 的样式，关闭 [#338](https://github.com/TuSimple/naive-ui/issues/338)
 - 修复 `n-carousel` 无法使用 `v-for` 的子元素
 - 修复 `n-form` `label-align` 属性失效，关闭 [#213](https://github.com/TuSimple/naive-ui/issues/213)
+- 修复 `n-popconfirm` 中 `n-popover` 组件的 `internalExtraClass` 属性传入值类型不正确的问题
 
 ## 2.15.2 (2021-07-02)
 
