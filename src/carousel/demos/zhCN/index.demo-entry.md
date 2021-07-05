@@ -8,17 +8,19 @@
 basic
 autoplay
 hover
+dotPlacement
 ```
 
 ## API
 
 ### Carousel Props
 
-| 名称     | 类型                 | 默认值    | 说明           |
-| -------- | -------------------- | --------- | -------------- |
-| autoplay | `boolean`            | `false`   | 是否自动播放   |
-| interval | `number`             | `5000`    | 自动播放的间隔 |
-| trigger  | `'click' \| 'hover'` | `'click'` | 触发切换的方式 |
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| autoplay | `boolean` | `false` | 是否自动播放 |
+| dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | 轮播指示点位置 |
+| interval | `number` | `5000` | 自动播放的间隔 |
+| trigger | `'click' \| 'hover'` | `'click'` | 触发切换的方式 |
 
 ### Carousel Slots
 
