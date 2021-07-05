@@ -21,9 +21,5 @@ export default {
   labelPaddingVertical: '0 0 8px 2px',
   labelPaddingHorizontal: '0 12px 0 0',
   labelTextAlignVertical: 'left',
-  labelTextAlignHorizontal: 'right',
-  labelTextAlignVerticalLeft: 'flex-start',
-  labelTextAlignVerticalRight: 'flex-end',
-  labelTextAlignHorizontalRight: 'right',
-  labelTextAlignHorizontalLeft: 'left'
+  labelTextAlignHorizontal: 'right'
 }
