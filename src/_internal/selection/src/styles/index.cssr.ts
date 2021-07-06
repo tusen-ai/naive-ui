@@ -85,7 +85,7 @@ export default c([
         transition: color .3s var(--bezier);
       `)
     ]),
-    cB('base-selection-placeholder', `
+    cB('base-selection-render-dom', `
       white-space: nowrap;
       overflow: hidden;
       height: var(--height);
@@ -98,6 +98,8 @@ export default c([
       left: 0;
       padding: var(--padding-single);
       transition: color .3s var(--bezier);
+    `),
+    cB('base-selection-placeholder', `
       color: var(--placeholder-color);
     `),
     cB('base-selection-tags', `
@@ -152,18 +154,6 @@ export default c([
         caret-color: var(--caret-color);
       `),
       cE('render-label', `
-        white-space: nowrap;
-        overflow: hidden;
-        height: var(--height);
-        line-height: var(--height);
-        pointer-events: none;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        padding: var(--padding-single);
-        transition: color .3s var(--bezier);
         color: var(--text-color);
       `)
     ]),

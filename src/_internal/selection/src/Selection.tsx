@@ -117,7 +117,7 @@ export default defineComponent({
     })
     const filterablePlaceholderRef = computed(() => {
       return props.selectedOption
-        ? render(props.selectedOption.label, props.selectedOption, selectedRef)
+        ? render(props.selectedOption.label, props.selectedOption, true)
         : props.placeholder
     })
     const labelRef = computed(() => {
@@ -508,7 +508,7 @@ export default defineComponent({
               {{
                 default: () =>
                   renderLabel
-                    ? render(renderLabel(option, true))
+                    ? renderLabel(option, true)
                     : render(option.label, option, true)
               }}
             </NTag>
@@ -650,7 +650,9 @@ export default defineComponent({
         : null
       const placeholder =
         !this.selected && !this.pattern && !this.isCompositing ? (
-          <div class={`${clsPrefix}-base-selection-placeholder`}>
+          <div
+            class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-render-dom`}
+          >
             {this.placeholder}
           </div>
         ) : null
@@ -737,14 +739,18 @@ export default defineComponent({
             />
             {showPlaceholder ? null : this.patternInputFocused &&
               this.active ? null : (
-              <div class={`${clsPrefix}-base-selection-label__render-label`}>
+              <div
+                class={`${clsPrefix}-base-selection-label__render-label ${clsPrefix}-base-selection-render-dom`}
+              >
                 {renderLabel
                   ? renderLabel(this.selectedOption as SelectBaseOption, true)
                   : render(this.label, this.selectedOption, true)}
               </div>
               )}
             {showPlaceholder ? (
-              <div class={`${clsPrefix}-base-selection-placeholder`}>
+              <div
+                class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-render-dom`}
+              >
                 {this.filterablePlaceholder}
               </div>
             ) : null}
@@ -770,7 +776,7 @@ export default defineComponent({
               </div>
             ) : (
               <div
-                class={`${clsPrefix}-base-selection-placeholder`}
+                class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-render-dom`}
                 key="placeholder"
               >
                 {this.placeholder}
