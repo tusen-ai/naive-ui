@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
+import { sleep } from 'seemly'
 import { NMenu } from '../index'
 
 describe('n-menu', () => {
@@ -32,7 +33,7 @@ describe('n-menu', () => {
       }
     })
   })
-  it('should work with `render-label` props', async () => {
+  it('should tooltip work with `render-label` props', async () => {
     const options = [
       {
         label: () =>
@@ -77,5 +78,59 @@ describe('n-menu', () => {
     expect(wrapper.find('[href="test1"]').exists()).toBe(true)
     expect(wrapper.find('[target="_blank"]').exists()).toBe(true)
     expect(wrapper.find('[href="test2"]').exists()).toBe(true)
+  })
+  it('should dropdown work with `render-label` props', async () => {
+    const options = [
+      {
+        label: 'jj',
+        key: 'jj'
+      },
+      {
+        label: 'jay',
+        key: 'jay',
+        children: [
+          {
+            type: 'group',
+            label: 'song-group',
+            key: 'group',
+            children: [
+              {
+                label: 'fantasy',
+                key: 'fantasy'
+              },
+              {
+                label: 'mojito',
+                key: 'mojito'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+    const renderLabel = (option: any): any => {
+      return h(
+        'a',
+        {
+          class: option.key,
+          href: option.key,
+          rel: option.key
+        },
+        { default: () => option.label }
+      )
+    }
+    const wrapper = mount(NMenu, {
+      props: {
+        options: options,
+        collapsed: true,
+        renderLabel: renderLabel
+      }
+    })
+    expect(wrapper.find('.n-submenu').exists()).toBe(true)
+    await wrapper.find('.n-submenu').trigger('mouseenter')
+    // Popover has delay, so we need to wait
+    await sleep(150)
+    expect(document.body.querySelector('.n-dropdown')).not.toEqual(null)
+    expect(document.querySelectorAll('a').length).toEqual(2)
+    expect(document.querySelectorAll('a.fantasy').length).toEqual(1)
   })
 })
