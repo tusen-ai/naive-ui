@@ -1,6 +1,6 @@
 # 图标
 
-在 empty 上使用图标。
+自定义图标。
 
 ```html
 <n-empty description="是一个飞机">

@@ -1,6 +1,6 @@
 # Icon
 
-Use icon in empty.
+Customize icon in empty.
 
 ```html
 <n-empty description="Custom your icon">
