@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { nextTick } from '@vue/runtime-core'
+import { nextTick } from 'vue'
 import { NEmpty } from '../index'
 import commonThemeVars from '../styles/_common'
 
