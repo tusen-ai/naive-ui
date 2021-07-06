@@ -22,26 +22,28 @@ naive-ui recommends using [xicons](https://www.xicons.org) as icon library.
 
 ## Design Resources
 
-
-<n-card :content-style="{padding: 0}" style="width: 420px; max-width: 100%;">
+<n-card size="small" footer-style="text-align: center;" style="width: 420px; max-width: 100%;">
   <template #cover>
     <img src="https://naive-ui.oss-accelerate.aliyuncs.com/naive-design.png">
   </template>
-  <n-text
-    tag="a"
-    href="https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch" 
-    download
-    strong
-    style="display: flex; align-items: center; justify-content: center; width: 100%; height: 64px; text-decoration: none;"
-  >
-    Naive UI Design
-    <n-icon :size="20" style="margin-left: 8px;">
-      <MdDownload />
-    </n-icon>
-  </n-text>
+  <template #footer>
+    <n-button
+      tag="a"
+      href="https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch"
+      text
+      target="_blank"
+      icon-placement="right"
+    >
+      Naive UI (Sketch)
+      <template #icon>
+        <n-icon >
+          <ArrowDownload16Regular />
+        </n-icon>
+      </template>
+    </n-button>
+  </template>
 </n-card>
 
-
 ```component
-MdDownload: import { MdDownload } from '@vicons/ionicons4'
+ArrowDownload16Regular: import ArrowDownload16Regular from '@vicons/fluent/ArrowDownload16Regular'
 ```
