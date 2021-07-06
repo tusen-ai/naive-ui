@@ -26,7 +26,7 @@ import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
 import { RenderTag } from './interface'
 import style from './styles/index.cssr'
-import { RenderLabel, RenderLabelImpl } from '../../select-menu/src/interface'
+import type { RenderLabel, RenderLabelImpl } from '../../select-menu/src/interface'
 
 export interface InternalSelectionInst {
   focus: () => void
