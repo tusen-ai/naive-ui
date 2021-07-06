@@ -86,13 +86,15 @@ function genScript (demoInfos, components = [], url, forceShowAnchor) {
     .map(({ variable, fileName }) => `import ${variable} from './${fileName}'`)
     .concat(
       components.map(
-        (component) => `import ${camelCase(component)} from './${component}'`
+        ({ importStmt }) => importStmt
       )
     )
     .join('\n')
   const componentStmts = demoInfos
     .map(({ variable }) => variable)
-    .concat(components)
+    .concat(components.map(
+      ({ ids }) => ids
+    ).flat())
     .join(',\n')
   const script = `<script>
 ${importStmts}
@@ -150,8 +152,16 @@ async function convertMd2ComponentDocumentation (
     components = tokens[componentsIndex].text
     components = components
       .split('\n')
-      .map((component) => component.trim())
-      .filter((component) => component.length)
+      .map((component) => {
+        const [ids, importStmt] = component.split(':')
+        if (!ids.trim()) throw new Error('No component id')
+        if (!importStmt.trim()) throw new Error('No component source url')
+        return {
+          ids: ids.split(',').map(id => id.trim()),
+          importStmt: importStmt.trim()
+        }
+      })
+      .filter(({ids, importStmt}) => ids && importStmt)
     tokens.splice(componentsIndex, 1)
   }
   // add edit on github button on title
