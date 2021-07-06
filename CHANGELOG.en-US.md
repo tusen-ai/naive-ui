@@ -2,6 +2,9 @@
 
 ## Pending
 
+
+- Fix `n-select` bug in using custom label, closes [#352](https://github.com/TuSimple/naive-ui/issues/352).
+
 ### Feats
 
 - `n-tree` exports `TreeDragInfo` & `TreeDropInfo` type.

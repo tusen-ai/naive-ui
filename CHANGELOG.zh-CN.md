@@ -2,6 +2,8 @@
 
 ## Pending
 
+- 修复 `n-select` 自定义 label 的显示问题，关闭 [#352](https://github.com/TuSimple/naive-ui/issues/352)
+
 ### Feats
 
 - `n-tree` 导出 `TreeDragInfo` & `TreeDropInfo` 类型
