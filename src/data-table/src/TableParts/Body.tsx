@@ -211,20 +211,27 @@ export default defineComponent({
             )
         ])
     ])
+    let fixedStyleMounted = false
     watchEffect(() => {
       const { value: leftActiveFixedColKey } = leftActiveFixedColKeyRef
       const { value: rightActiveFixedColKey } = rightActiveFixedColKeyRef
-      if (leftActiveFixedColKey !== null || rightActiveFixedColKey !== null) {
-        style.mount({
-          id: `n-${componentId}`,
-          force: true,
-          props: {
-            leftActiveFixedColKey,
-            rightActiveFixedColKey,
-            componentId
-          }
-        })
+      if (
+        !fixedStyleMounted &&
+        leftActiveFixedColKey === null &&
+        rightActiveFixedColKey === null
+      ) {
+        return
       }
+      style.mount({
+        id: `n-${componentId}`,
+        force: true,
+        props: {
+          leftActiveFixedColKey,
+          rightActiveFixedColKey,
+          componentId
+        }
+      })
+      fixedStyleMounted = true
     })
     onUnmounted(() => {
       style.unmount({
