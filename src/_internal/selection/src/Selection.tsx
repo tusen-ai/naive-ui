@@ -651,7 +651,7 @@ export default defineComponent({
       const placeholder =
         !this.selected && !this.pattern && !this.isCompositing ? (
           <div
-            class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-render-dom`}
+            class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-render-dom`}
           >
             {this.placeholder}
           </div>
@@ -740,7 +740,7 @@ export default defineComponent({
             {showPlaceholder ? null : this.patternInputFocused &&
               this.active ? null : (
               <div
-                class={`${clsPrefix}-base-selection-label__render-label ${clsPrefix}-base-selection-render-dom`}
+                class={`${clsPrefix}-base-selection-label__render-label ${clsPrefix}-base-render-dom`}
               >
                 {renderLabel
                   ? renderLabel(this.selectedOption as SelectBaseOption, true)
@@ -749,7 +749,7 @@ export default defineComponent({
               )}
             {showPlaceholder ? (
               <div
-                class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-render-dom`}
+                class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-render-dom`}
               >
                 {this.filterablePlaceholder}
               </div>
@@ -776,7 +776,7 @@ export default defineComponent({
               </div>
             ) : (
               <div
-                class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-render-dom`}
+                class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-render-dom`}
                 key="placeholder"
               >
                 {this.placeholder}

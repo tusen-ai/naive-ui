@@ -85,7 +85,7 @@ export default c([
         transition: color .3s var(--bezier);
       `)
     ]),
-    cB('base-selection-render-dom', `
+    cB('base-render-dom', `
       white-space: nowrap;
       overflow: hidden;
       height: var(--height);
