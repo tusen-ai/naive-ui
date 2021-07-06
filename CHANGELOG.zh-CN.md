@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-tree` 导出 `TreeDragInfo` & `TreeDropInfo` 类型
+
 ## 2.15.3 (2021-07-05)
 
 ### Feats

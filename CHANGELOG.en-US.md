@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-tree` exports `TreeDragInfo` & `TreeDropInfo` type.
+
 ## 2.15.3 (2021-07-05)
 
 ### Feats
