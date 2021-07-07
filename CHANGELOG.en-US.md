@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## Pending
+
+
+- Fix `n-select` bug in using custom label, closes [#352](https://github.com/TuSimple/naive-ui/issues/352).
+
+### Feats
+
+- `n-tree` exports `TreeDragInfo` & `TreeDropInfo` type.
+
+### Fixes
+
+- Fix `n-data-table` fixed column box-shadow doesn't update when there is only on side fixed.
+- Fix `n-data-table` fixed column box-shadow doesn't update when `props.scrollX` is not set but each column's width is set.
+
 ## 2.15.3 (2021-07-05)
 
 ### Feats
@@ -11,7 +25,8 @@
 - `n-carousel` add `dot-placement` prop.
 - `n-auto-complete` add `loading` prop, closes [#241](https://github.com/TuSimple/naive-ui/issues/241).
 - `n-slider` add `tooltip` prop, closes [#362](https://github.com/TuSimple/naive-ui/issues/362).
-- `n-input` add `loading` prop
+- `n-input` add `loading` prop.
+- `n-empty` export `icon` slot.
 
 ### Fixes
 

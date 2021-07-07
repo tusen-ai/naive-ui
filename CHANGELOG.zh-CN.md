@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## Pending
+
+- 修复 `n-select` 自定义 label 的显示问题，关闭 [#352](https://github.com/TuSimple/naive-ui/issues/352)
+
+### Feats
+
+- `n-tree` 导出 `TreeDragInfo` & `TreeDropInfo` 类型
+
+### Fixes
+
+- 修复 `n-data-table` 在只有一侧固定列时固定列阴影不更新
+- 修复 `n-data-table` 在未设定 `props.scrollX` 但为每个列设定宽度后固定列阴影不更新
+
 ## 2.15.3 (2021-07-05)
 
 ### Feats
@@ -12,6 +25,7 @@
 - `n-auto-complete` 新增 `loading` 属性，关闭 [#241](https://github.com/TuSimple/naive-ui/issues/241)
 - `n-slider` 增加 `tooltip` 属性，关闭 [#362](https://github.com/TuSimple/naive-ui/issues/362)
 - `n-input` 新增 `loading` 属性
+- `n-empty` 导出 `icon` slot
 
 ### Fixes
 
@@ -144,7 +158,7 @@
 
 ### Fixes
 
-- 修复 `n-input` 中英文字符切换输入时抖动的问题，关闭[#174](https://github.com/TuSimple/naive-ui/issues/174)
+- 修复 `n-input` 中英文字符切换输入时抖动，关闭[#174](https://github.com/TuSimple/naive-ui/issues/174)
 - 修复 `n-icon` 在使用 setup script 时，`$parent` 默认是一个空对象，访问 `$parent.$options` 会是 `undefined`
 - 修复 `n-notification` 位置不正确
 - 修复 `n-message` 的 content & option 类型不正确

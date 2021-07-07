@@ -123,7 +123,9 @@ export function useScroll (
     }
   }
   function syncScrollState (): void {
-    if (!props.scrollX) return
+    // We can't simply use props.scrollX to determine whether the table has
+    // need to be sync since user may set column width for each column.
+    // Just let it be, the scroll listener won't be triggered for a basic table.
     const { header, body } = getScrollElements()
     if (!body) return
     const { value: tableWidth } = bodyWidthRef

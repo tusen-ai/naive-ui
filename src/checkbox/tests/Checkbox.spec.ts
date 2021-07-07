@@ -1,4 +1,4 @@
-import { nextTick } from '@vue/runtime-core'
+import { nextTick } from 'vue'
 import { mount, VueWrapper } from '@vue/test-utils'
 import { NCheckbox } from '../index'
 
