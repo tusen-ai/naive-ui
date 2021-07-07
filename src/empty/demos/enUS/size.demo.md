@@ -1,6 +1,6 @@
 # Size
 
-Empty can be small, medium, large and huge size.
+Empty can be `small`, `medium`, `large` and `huge` size.
 
 ```html
 <n-empty size="large" description="can be large">
