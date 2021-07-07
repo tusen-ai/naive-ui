@@ -2,6 +2,7 @@
 
 ## Pending
 
+- 修复 `n-dialog` 类型定义错误，关闭 [420](https://github.com/TuSimple/naive-ui/issues/420)
 - 修复 `n-select` 自定义 label 的显示问题，关闭 [#352](https://github.com/TuSimple/naive-ui/issues/352)
 
 ### Feats

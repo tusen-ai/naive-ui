@@ -24,10 +24,6 @@ export default defineComponent({
       type: String,
       required: true
     },
-    maskClosable: {
-      type: Boolean,
-      default: true
-    },
     to: [String, Object] as PropType<string | HTMLElement>,
     // private
     onInternalAfterLeave: {
