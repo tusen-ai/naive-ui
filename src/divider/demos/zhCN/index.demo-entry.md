@@ -12,11 +12,11 @@ vertical
 
 ## Props
 
-| 名称            | 类型                            | 默认值     | 说明 |
-| --------------- | ------------------------------- | ---------- | ---- |
-| dashed          | `boolean`                       | `false`    |      |
-| title-placement | `'left' \| 'right' \| 'center'` | `'center'` |      |
-| vertical        | `boolean`                       | `false`    |      |
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| dashed | `boolean` | `false` | 是否使用虚线分割 |
+| title-placement | `'left' \| 'right' \| 'center'` | `'center'` | title 的位置 |
+| vertical | `boolean` | `false` | 是否垂直分隔 |
 
 ## Slots
 
