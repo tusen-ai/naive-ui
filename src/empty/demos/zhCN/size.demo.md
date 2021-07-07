@@ -1,6 +1,6 @@
 # 尺寸
 
-有 small、medium、large 和 huge 尺寸。
+有 `small`、`medium`、`large` 和 `huge` 尺寸。
 
 ```html
 <n-empty size="large" description="可以是大的">
