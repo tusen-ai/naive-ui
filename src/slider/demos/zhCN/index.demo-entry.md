@@ -8,18 +8,22 @@
 basic
 range
 mark
+disable-tooltip
 ```
 
-## Props
+## API
+
+### Slider Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| default-value | `number \| [number, number] \| null` | `null` |  |
-| disabled | `boolean` | `false` |  |
-| marks | `{ [markValue: number]: string }` | `undefined` |  |
-| max | `number` | `100` |  |
-| min | `number` | `0` |  |
-| range | `boolean` | `false` |  |
-| step | `number` | `1` |  |
-| value | `number \| [number, number] \| null` | `undefined` |
-| on-update:value | `(value: number \| [number, number]) => void` | `undefined` |  |
+| default-value | `number \| [number, number] \| null` | `null` | 默认值 |
+| disabled | `boolean` | `false` | 是否禁用 |
+| marks | `{ [markValue: number]: string }` | `undefined` | Slider 上的标记 |
+| max | `number` | `100` | 最大值 |
+| min | `number` | `0` | 最小值 |
+| range | `boolean` | `false` | 是否选择范围值 |
+| step | `number` | `1` | 步长 |
+| tooltip | `boolean` | `true` | 是否展示 tooltip |
+| value | `number \| [number, number] \| null` | `undefined` | 值 |
+| on-update:value | `(value: number \| [number, number]) => void` | `undefined` | 值更新的回调 |

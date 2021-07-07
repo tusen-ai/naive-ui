@@ -32,6 +32,7 @@ import { cB, c, cE, cM, cNotM, insideFormItem } from '../../../_utils/cssr'
 // --icon-color-pressed
 // --icon-color-disabled
 // --count-text-color
+// --loading-color
 // ...form item vars
 export default c([
   cB('input', `
@@ -305,9 +306,15 @@ export default c([
       justify-content: center;
       color: var(--suffix-text-color);
     `, [
-      cB('base-clear', {
-        fontSize: 'var(--icon-size)'
-      }, [
+      cB('base-loading', `
+        font-size: var(--icon-size);
+        margin-left: 4px;
+        color: var(--loading-color);
+      `),
+      cB('base-clear', `
+        font-size: var(--icon-size);
+        margin-left: 4px;
+      `, [
         cE('placeholder', [
           cB('base-icon', `
             transition: color .3s var(--bezier);
@@ -321,9 +328,9 @@ export default c([
         color: var(--icon-color);
         font-size: var(--icon-size);
       `),
-      cB('base-icon', {
-        fontSize: 'var(--icon-size)'
-      })
+      cB('base-icon', `
+        font-size: var(--icon-size);
+      `)
     ]),
     cB('input-word-count', `
       pointer-events: none;
@@ -338,6 +345,9 @@ export default c([
   ['warning', 'error'].map(status => insideFormItem(status,
     cB('input', [
       cNotM('disabled', [
+        cB('base-loading', `
+          color: var(--loading-color-${status})
+        `),
         cE('input-el, textarea-el', {
           caretColor: `var(--caret-color-${status})`
         }),

@@ -21,6 +21,7 @@ after-select
 | clearable | `boolean` | `false` | Whether autocomplete is clearable. |
 | default-value | `string` | `null` | Default value of auto complete. |
 | disabled | `boolean` | `false` | Whether the auto complete is disabled. |
+| loading | `boolean` | `false` | Whether to show loading status. |
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | Options of the auto complete. |
 | placeholder | `string` | `'Please Input'` | Auto complete's prompt information. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Auto complete size. |

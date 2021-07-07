@@ -80,6 +80,7 @@ export default defineComponent({
       dropdownShowRef.value = value
     }
     return {
+      menuProps,
       doSelect: NMenu.doSelect,
       inverted: NMenu.invertedRef,
       isHorizontal: NMenu.isHorizontalRef,
@@ -113,7 +114,10 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const {
+      mergedClsPrefix,
+      menuProps: { renderLabel }
+    } = this
     const createSubmenuItem = (): VNode => {
       const {
         isHorizontal,
@@ -180,6 +184,7 @@ export default defineComponent({
         options={this.rawNodes}
         onSelect={this.doSelect}
         inverted={this.inverted}
+        renderLabel={renderLabel}
       >
         {{
           default: () => (

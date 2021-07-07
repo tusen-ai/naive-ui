@@ -15,17 +15,21 @@ import {
 } from 'vue'
 import { VOverflow, VOverflowInst } from 'vueuc'
 import type { SelectBaseOption } from '../../../select/src/interface'
+import type { TagRef } from '../../../tag/src/Tag'
 import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
 import { useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
-import { createKey } from '../../../_utils'
+import { createKey, getTitleAttribute, render } from '../../../_utils'
+import Suffix from '../../suffix'
 import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
-import Suffix from './Suffix'
-import style from './styles/index.cssr'
-import type { TagRef } from '../../../tag/src/Tag'
 import { RenderTag } from './interface'
+import style from './styles/index.cssr'
+import type {
+  RenderLabel,
+  RenderLabelImpl
+} from '../../select-menu/src/interface'
 
 export interface InternalSelectionInst {
   focus: () => void
@@ -83,7 +87,8 @@ export default defineComponent({
     onDeleteOption: Function,
     maxTagCount: [String, Number] as PropType<number | 'responsive'>,
     onClear: Function as PropType<(e: MouseEvent) => void>,
-    onPatternInput: Function as PropType<(e: InputEvent) => void>
+    onPatternInput: Function as PropType<(e: InputEvent) => void>,
+    renderLabel: Function as PropType<RenderLabel>
   },
   setup (props) {
     const patternInputMirrorRef = ref<HTMLElement | null>(null)
@@ -115,7 +120,7 @@ export default defineComponent({
     })
     const filterablePlaceholderRef = computed(() => {
       return props.selectedOption
-        ? props.selectedOption.label
+        ? render(props.selectedOption.label, props.selectedOption, true)
         : props.placeholder
     })
     const labelRef = computed(() => {
@@ -354,6 +359,7 @@ export default defineComponent({
       updateCounter,
       getCounter,
       getTail,
+      renderLabel: props.renderLabel as RenderLabelImpl,
       cssVars: computed(() => {
         const { size } = props
         const {
@@ -466,7 +472,8 @@ export default defineComponent({
       maxTagCount,
       bordered,
       clsPrefix,
-      renderTag
+      renderTag,
+      renderLabel
     } = this
     const maxTagCountResponsive = maxTagCount === 'responsive'
     const maxTagCountNumeric = typeof maxTagCount === 'number'
@@ -501,7 +508,12 @@ export default defineComponent({
               internalStopClickPropagation
               onClose={() => this.handleDeleteOption(option)}
             >
-              {{ default: () => option.label }}
+              {{
+                default: () =>
+                  renderLabel
+                    ? renderLabel(option, true)
+                    : render(option.label, option, true)
+              }}
             </NTag>
           )}
         </div>
@@ -641,7 +653,9 @@ export default defineComponent({
         : null
       const placeholder =
         !this.selected && !this.pattern && !this.isCompositing ? (
-          <div class={`${clsPrefix}-base-selection-placeholder`}>
+          <div
+            class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-render-dom`}
+          >
             {this.placeholder}
           </div>
         ) : null
@@ -713,11 +727,7 @@ export default defineComponent({
               ref="patternInputRef"
               class={`${clsPrefix}-base-selection-label__input`}
               value={
-                showPlaceholder
-                  ? ''
-                  : this.patternInputFocused && this.active
-                    ? this.pattern
-                    : String(this.label)
+                this.patternInputFocused && this.active ? this.pattern : ''
               }
               placeholder=""
               readonly={disabled}
@@ -730,8 +740,20 @@ export default defineComponent({
               onCompositionstart={this.handleCompositionStart}
               onCompositionend={this.handleCompositionEnd}
             />
+            {showPlaceholder ? null : this.patternInputFocused &&
+              this.active ? null : (
+              <div
+                class={`${clsPrefix}-base-selection-label__render-label ${clsPrefix}-base-render-dom`}
+              >
+                {renderLabel
+                  ? renderLabel(this.selectedOption as SelectBaseOption, true)
+                  : render(this.label, this.selectedOption, true)}
+              </div>
+              )}
             {showPlaceholder ? (
-              <div class={`${clsPrefix}-base-selection-placeholder`}>
+              <div
+                class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-render-dom`}
+              >
                 {this.filterablePlaceholder}
               </div>
             ) : null}
@@ -748,13 +770,16 @@ export default defineComponent({
             {this.label !== undefined ? (
               <div
                 class={`${clsPrefix}-base-selection-label__input`}
+                title={getTitleAttribute(this.label)}
                 key="input"
               >
-                {this.label}
+                {renderLabel
+                  ? renderLabel(this.selectedOption as SelectBaseOption, true)
+                  : render(this.label, this.selectedOption, true)}
               </div>
             ) : (
               <div
-                class={`${clsPrefix}-base-selection-placeholder`}
+                class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-render-dom`}
                 key="placeholder"
               >
                 {this.placeholder}
