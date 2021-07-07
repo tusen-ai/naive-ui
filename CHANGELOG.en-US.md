@@ -16,6 +16,7 @@
 
 - Fix `n-data-table` fixed column box-shadow doesn't update when there is only on side fixed.
 - Fix `n-data-table` fixed column box-shadow doesn't update when `props.scrollX` is not set but each column's width is set.
+- Fix `n-result` image doesn't show on Safari and mobile phone.
 
 ## 2.15.3 (2021-07-05)
 
