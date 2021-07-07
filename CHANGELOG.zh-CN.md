@@ -4,6 +4,7 @@
 
 - 修复 `n-select` 自定义 label 的显示问题，关闭 [#352](https://github.com/TuSimple/naive-ui/issues/352)
 - 修复 `n-carousel` 设定 `autoplay` 点击后 dot active 状态不正常，关闭 [#434](https://github.com/TuSimple/naive-ui/issues/434)
+- 修复 `n-input` 清空按钮位置引起的样式问题，关闭 [#428](https://github.com/TuSimple/naive-ui/issues/428)
 
 ### Feats
 

@@ -943,7 +943,6 @@ export default defineComponent({
             this.loading !== undefined) ? (
             <div class={`${mergedClsPrefix}-input__suffix`}>
               {[
-                renderSlot(this.$slots, 'suffix'),
                 this.clearable || this.$slots.clear ? (
                   <NBaseClear
                     clsPrefix={mergedClsPrefix}
@@ -953,6 +952,7 @@ export default defineComponent({
                     {{ default: () => renderSlot(this.$slots, 'clear') }}
                   </NBaseClear>
                 ) : null,
+                renderSlot(this.$slots, 'suffix'),
                 this.loading !== undefined ? (
                   <NBaseSuffix
                     clsPrefix={mergedClsPrefix}
@@ -1025,7 +1025,6 @@ export default defineComponent({
             </div>
             <div class={`${mergedClsPrefix}-input__suffix`}>
               {[
-                renderSlot(this.$slots, 'suffix'),
                 this.clearable || this.$slots.clear ? (
                   <NBaseClear
                     clsPrefix={mergedClsPrefix}
@@ -1034,7 +1033,8 @@ export default defineComponent({
                   >
                     {{ default: () => renderSlot(this.$slots, 'clear') }}
                   </NBaseClear>
-                ) : null
+                ) : null,
+                renderSlot(this.$slots, 'suffix')
               ]}
             </div>
           </div>
