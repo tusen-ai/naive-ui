@@ -71,7 +71,9 @@ const inputDark: InputTheme = {
       borderDisabled: '1px solid #0000',
       borderFocus: `1px solid ${primaryColorHover}`,
       boxShadowFocus: `0 0 8px 0 ${changeColor(primaryColor, { alpha: 0.3 })}`,
+      loadingColor: primaryColor,
       // warning
+      loadingColorWarning: warningColor,
       borderWarning: `1px solid ${warningColor}`,
       borderHoverWarning: `1px solid ${warningColorHover}`,
       colorFocusWarning: changeColor(warningColor, { alpha: 0.1 }),
@@ -81,6 +83,7 @@ const inputDark: InputTheme = {
       })}`,
       caretColorWarning: warningColor,
       // error
+      loadingColorError: errorColor,
       borderError: `1px solid ${errorColor}`,
       borderHoverError: `1px solid ${errorColorHover}`,
       colorFocusError: changeColor(errorColor, { alpha: 0.1 }),

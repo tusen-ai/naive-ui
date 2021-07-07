@@ -12,6 +12,7 @@ export interface TreeOptionBase {
   disabled?: boolean
   isLeaf?: boolean
   children?: TreeOption[]
+  prefix?: () => VNodeChild
   suffix?: () => VNodeChild
 }
 
@@ -19,12 +20,12 @@ export type TreeOption = TreeOptionBase & { [k: string]: unknown }
 
 export type TreeOptions = TreeOption[]
 
-export interface DragInfo {
+export interface TreeDragInfo {
   event: DragEvent
   node: TreeOption
 }
 
-export interface DropInfo {
+export interface TreeDropInfo {
   event: DragEvent
   node: TreeOption
   dragNode: TreeOption

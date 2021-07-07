@@ -28,8 +28,8 @@ import NTreeNode from './TreeNode'
 import { keysWithFilter, emptyImage, defaultFilter } from './utils'
 import { useKeyboard } from './keyboard'
 import {
-  DragInfo,
-  DropInfo,
+  TreeDragInfo,
+  TreeDropInfo,
   TreeOptions,
   Key,
   TreeOption,
@@ -132,12 +132,22 @@ const treeProps = {
     default: true
   },
   virtualScroll: Boolean,
-  onDragenter: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
-  onDragleave: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
-  onDragend: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
-  onDragstart: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
-  onDragover: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
-  onDrop: [Function, Array] as PropType<MaybeArray<(e: DragInfo) => void>>,
+  onDragenter: [Function, Array] as PropType<
+  MaybeArray<(e: TreeDragInfo) => void>
+  >,
+  onDragleave: [Function, Array] as PropType<
+  MaybeArray<(e: TreeDragInfo) => void>
+  >,
+  onDragend: [Function, Array] as PropType<
+  MaybeArray<(e: TreeDragInfo) => void>
+  >,
+  onDragstart: [Function, Array] as PropType<
+  MaybeArray<(e: TreeDragInfo) => void>
+  >,
+  onDragover: [Function, Array] as PropType<
+  MaybeArray<(e: TreeDragInfo) => void>
+  >,
+  onDrop: [Function, Array] as PropType<MaybeArray<(e: TreeDragInfo) => void>>,
   onUpdateCheckedKeys: [Function, Array] as PropType<
   MaybeArray<(value: Key[]) => void>
   >,
@@ -449,27 +459,27 @@ export default defineComponent({
       if (_onUpdateSelectedKeys) call(_onUpdateSelectedKeys, value)
     }
     // Drag & Drop
-    function doDragEnter (info: DragInfo): void {
+    function doDragEnter (info: TreeDragInfo): void {
       const { onDragenter } = props
       if (onDragenter) call(onDragenter, info)
     }
-    function doDragLeave (info: DragInfo): void {
+    function doDragLeave (info: TreeDragInfo): void {
       const { onDragleave } = props
       if (onDragleave) call(onDragleave, info)
     }
-    function doDragEnd (info: DragInfo): void {
+    function doDragEnd (info: TreeDragInfo): void {
       const { onDragend } = props
       if (onDragend) call(onDragend, info)
     }
-    function doDragStart (info: DragInfo): void {
+    function doDragStart (info: TreeDragInfo): void {
       const { onDragstart } = props
       if (onDragstart) call(onDragstart, info)
     }
-    function doDragOver (info: DragInfo): void {
+    function doDragOver (info: TreeDragInfo): void {
       const { onDragover } = props
       if (onDragover) call(onDragover, info)
     }
-    function doDrop (info: DropInfo): void {
+    function doDrop (info: TreeDropInfo): void {
       const { onDrop } = props
       if (onDrop) call(onDrop, info)
     }

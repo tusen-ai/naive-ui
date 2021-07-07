@@ -26,7 +26,7 @@ validator-debug
 | --- | --- | --- | --- |
 | inline | `boolean` | `false` |  |
 | label-width | `number \| string` | `undefined` | 标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用 |
-| label-align | `'left' \| 'right'` | `'left'` | 标签的文本对齐方式 |
+| label-align | `'left' \| 'right'` | `-` | 标签的文本对齐方式 |
 | label-placement | `'left' \| 'top'` | `'top'` |  |
 | model | `Object` | `{}` | 获取表项中收集到的值的对象 |
 | rules | `type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }` | `{}` | 验证表项的规则 |

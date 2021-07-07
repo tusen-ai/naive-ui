@@ -9,7 +9,7 @@
   trigger="click"
   @select="handleSelect"
 >
-  <n-button :keyboard="false">里面有组</n-button>
+  <n-button>里面有组</n-button>
 </n-dropdown>
 ```
 

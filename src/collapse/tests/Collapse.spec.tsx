@@ -90,4 +90,42 @@ describe('n-collapse', () => {
     await triggerNodeWrapper.trigger('click')
     expect(onClick).toHaveBeenCalled()
   })
+
+  it('props.defaultExpandedNames', async () => {
+    let wrapper = mount(NCollapse, {
+      props: {
+        defaultExpandedNames: ['1']
+      },
+      slots: {
+        default: () => [
+          <NCollapseItem name="1">
+            {{ default: () => <div class="ci1"></div> }}
+          </NCollapseItem>,
+          <NCollapseItem name="2">
+            {{ default: () => <div class="ci2"></div> }}
+          </NCollapseItem>
+        ]
+      }
+    })
+    expect(wrapper.find('.ci1').isVisible()).toEqual(true)
+    expect(wrapper.find('.ci2').exists()).toEqual(false)
+    wrapper = mount(NCollapse, {
+      props: {
+        accordion: true,
+        defaultExpandedNames: '1'
+      },
+      slots: {
+        default: () => [
+          <NCollapseItem name="1">
+            {{ default: () => <div class="ci1"></div> }}
+          </NCollapseItem>,
+          <NCollapseItem name="2">
+            {{ default: () => <div class="ci2"></div> }}
+          </NCollapseItem>
+        ]
+      }
+    })
+    expect(wrapper.find('.ci1').isVisible()).toEqual(true)
+    expect(wrapper.find('.ci2').exists()).toEqual(false)
+  })
 })

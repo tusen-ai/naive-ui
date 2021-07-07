@@ -2,10 +2,42 @@
 
 ## Pending
 
-### Breaking Changes
-
-- `n-select` 新增 `render-tag` 属性
+- 修复 `n-select` 自定义 label 的显示问题，关闭 [#352](https://github.com/TuSimple/naive-ui/issues/352)
 - 修复 `n-image-group` 当切换图片预览时，初始化缩放比例 [#423](https://github.com/TuSimple/naive-ui/issues/423)
+
+### Feats
+
+- `n-tree` 导出 `TreeDragInfo` & `TreeDropInfo` 类型
+
+### Fixes
+
+- 修复 `n-data-table` 在只有一侧固定列时固定列阴影不更新
+- 修复 `n-data-table` 在未设定 `props.scrollX` 但为每个列设定宽度后固定列阴影不更新
+
+## 2.15.3 (2021-07-05)
+
+### Feats
+
+- `n-loading-bar` 导出 `LoadingBarApi` 类型
+- `n-image` 增加 `imgProps` 属性
+- 在部分组件上添加原生 `title` 属性，以提高用户体验
+- `n-tree` 在 TreeOption 中增加 `prefix` 和 `suffix` 属性
+- `n-carousel` 增加 `dot-placement` 属性
+- `n-auto-complete` 新增 `loading` 属性，关闭 [#241](https://github.com/TuSimple/naive-ui/issues/241)
+- `n-slider` 增加 `tooltip` 属性，关闭 [#362](https://github.com/TuSimple/naive-ui/issues/362)
+- `n-input` 新增 `loading` 属性
+- `n-empty` 导出 `icon` slot
+
+### Fixes
+
+- 修复 `n-upload` `multiple=false` 对于拖拽不生效，关闭 [#363](https://github.com/TuSimple/naive-ui/issues/363)
+- 修复 `n-dropdown` 中 `<a />` 的样式
+- 修复 `n-menu` tooltip 中 `<a />` 的样式，关闭 [#338](https://github.com/TuSimple/naive-ui/issues/338)
+- 修复 `n-carousel` 无法使用 `v-for` 的子元素
+- 修复 `n-form` `label-align` 属性失效，关闭 [#213](https://github.com/TuSimple/naive-ui/issues/213)
+- 修复 `n-data-table` 在不设定 `max-height` 时固定列阴影失效，关闭 [#376](https://github.com/TuSimple/naive-ui/issues/376)
+
+## 2.15.2 (2021-07-02)
 
 ### Feats
 
@@ -17,6 +49,7 @@
 - `n-spin` 支持 `icon` 插槽为了自定义加载图标，closes[#260](https://github.com/TuSimple/naive-ui/issues/260)
 - `n-spin` 新增 `rotate` 属性控制自定义加载图标是否有旋转动画
 - `n-form` 导出 `FormItemRule` & `FormRules` 类型
+- `n-select` 新增 `render-tag` 属性
 
 ### Fixes
 
@@ -25,6 +58,10 @@
 - 修复 loading-bar 自动消失，关闭 [#343](https://github.com/TuSimple/naive-ui/issues/343)
 - 修复 `n-select` 打开菜单时没有自动滚动到选中项，关闭 [#346](https://github.com/TuSimple/naive-ui/issues/346)
 - 修复 `n-tab-pane` 在使用 v-if 时报错
+- 修复 `n-modal` `on-negative-click` 返回 false 时 modal 依然关闭
+- 修复 `n-collapse` 在 accordion 模式下默认指定展开属性无效，关闭 [#350](https://github.com/TuSimple/naive-ui/issues/350)
+- 修复 `n-tag` 缺少 `on-update-checked` 属性
+- 修复 `n-menu` 折叠时 `render-label` 对于 dropdown 不生效
 
 ## 2.15.1 (2021-06-30)
 
@@ -122,7 +159,7 @@
 
 ### Fixes
 
-- 修复 `n-input` 中英文字符切换输入时抖动的问题，关闭[#174](https://github.com/TuSimple/naive-ui/issues/174)
+- 修复 `n-input` 中英文字符切换输入时抖动，关闭[#174](https://github.com/TuSimple/naive-ui/issues/174)
 - 修复 `n-icon` 在使用 setup script 时，`$parent` 默认是一个空对象，访问 `$parent.$options` 会是 `undefined`
 - 修复 `n-notification` 位置不正确
 - 修复 `n-message` 的 content & option 类型不正确

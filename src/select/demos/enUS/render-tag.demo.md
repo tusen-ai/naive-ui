@@ -42,7 +42,10 @@ export default defineComponent({
           {
             type: option.type,
             closable: true,
-            onClose: handleClose
+            onClose: (e) => {
+              e.stopPropagation()
+              handleClose()
+            }
           },
           { default: () => option.label }
         )

@@ -74,7 +74,8 @@ export default cB('form-item', {
     `),
     cB('form-item-label', {
       display: 'flex',
-      alignItems: 'flex-end'
+      alignItems: 'flex-end',
+      justifyContent: 'var(--label-text-align)'
     })
   ]),
   cB('form-item-blank', `

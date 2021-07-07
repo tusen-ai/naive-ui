@@ -23,8 +23,8 @@ import {
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
-
 import { NInput } from '../../input'
+
 import type {
   SelectBaseOption,
   SelectGroupOption,
@@ -57,6 +57,10 @@ const autoCompleteProps = {
   defaultValue: {
     type: String as PropType<string | null>,
     default: null
+  },
+  loading: {
+    type: Boolean,
+    default: undefined
   },
   disabled: Boolean,
   placeholder: String,
@@ -305,6 +309,7 @@ export default defineComponent({
                         size={this.mergedSize}
                         disabled={this.disabled}
                         clearable={this.clearable}
+                        loading={this.loading}
                         onClear={this.handleClear}
                         onFocus={this.handleFocus}
                         onUpdateValue={this.handleInput}

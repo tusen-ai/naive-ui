@@ -6,6 +6,8 @@ Naive UI 支持 tree shaking，组件、语言、主题均可 tree-shaking。
 
 了解更多关于主题设定的信息，参见[调整主题](customize-theme)。
 
+## 直接引入
+
 ```html
 <script>
   import { defineComponent } from 'vue'
@@ -46,4 +48,31 @@ Naive UI 支持 tree shaking，组件、语言、主题均可 tree-shaking。
     background: black;
   }
 </style>
+```
+
+## 按需全局安装组件
+
+```js
+import { createApp } from 'vue'
+import {
+  // create naive ui
+  create,
+  // component
+  NButton
+} from 'naive-ui'
+
+const naive = create({
+  components: [NButton]
+})
+
+const app = createApp()
+app.use(naive)
+```
+
+安装后，你可以这样在 SFC 中使用你安装的组件。
+
+```html
+<template>
+  <n-button>naive-ui</n-button>
+</template>
 ```
