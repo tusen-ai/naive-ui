@@ -47,7 +47,7 @@ const dialogProps = {
     type: Boolean,
     default: true
   },
-  maskClosable: {
+  dialogMaskClosable: {
     type: Boolean,
     default: true
   },

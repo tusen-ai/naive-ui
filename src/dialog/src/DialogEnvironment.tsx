@@ -83,7 +83,7 @@ export default defineComponent({
           appear
           dialog
           to={props.to}
-          maskClosable={props.maskClosable}
+          maskClosable={props.dialogMaskClosable}
           onAfterLeave={handleAfterLeave}
         >
           {{

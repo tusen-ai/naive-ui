@@ -2,7 +2,7 @@
 
 ## Pending
 
-- Fix `n-dialog` fixed `maskClosable` type, closes [420](https://github.com/TuSimple/naive-ui/issues/420).
+- Fix `n-dialog` add `dialog-mask-closable` prop, closes [420](https://github.com/TuSimple/naive-ui/issues/420).
 - Fix `n-select` bug in using custom label, closes [#352](https://github.com/TuSimple/naive-ui/issues/352).
 
 ### Feats
