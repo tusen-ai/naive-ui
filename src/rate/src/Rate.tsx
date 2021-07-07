@@ -21,6 +21,10 @@ import StarIcon from './StarIcon'
 
 const rateProps = {
   ...(useTheme.props as ThemeProps<RateTheme>),
+  allowHalf: {
+    type: Boolean,
+    default: false
+  },
   count: {
     type: Number,
     default: 5
@@ -63,6 +67,17 @@ export default defineComponent({
     const uncontrolledValueRef = ref(props.defaultValue)
     const hoverIndexRef = ref<number | null>(null)
     const formItem = useFormItem(props)
+    const mergedSize = computed(() => {
+      const { size } = props
+      const { self } = themeRef.value
+      let mergedSize: number
+      if (typeof size === 'number') {
+        mergedSize = size
+      } else {
+        mergedSize = Number(self[createKey('size', size)].slice(0, -2))
+      }
+      return mergedSize
+    })
     function doUpdateValue (value: number): void {
       const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
@@ -76,8 +91,17 @@ export default defineComponent({
       nTriggerFormChange()
       nTriggerFormInput()
     }
-    function handleMouseEnter (index: number): void {
-      hoverIndexRef.value = index
+    function handleMouseMove (index: number, offset: number): void {
+      const { value: size } = mergedSize
+      if (props.allowHalf) {
+        if (offset >= Math.floor(size / 2)) {
+          hoverIndexRef.value = index + 1
+        } else {
+          hoverIndexRef.value = index + 0.5
+        }
+      } else {
+        hoverIndexRef.value = index + 1
+      }
     }
     function handleMouseLeave (): void {
       hoverIndexRef.value = null
@@ -85,31 +109,29 @@ export default defineComponent({
     function handleClick (index: number): void {
       doUpdateValue(index + 1)
     }
+    function handleHalfClick (index: number): void {
+      doUpdateValue(index + 0.5)
+    }
     return {
+      allowHalf: toRef(props, 'allowHalf'),
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       hoverIndex: hoverIndexRef,
-      handleMouseEnter,
+      handleMouseMove,
       handleClick,
+      handleHalfClick,
       handleMouseLeave,
       cssVars: computed(() => {
-        const { size } = props
         const {
           common: { cubicBezierEaseInOut },
           self
         } = themeRef.value
         const { itemColor, itemColorActive } = self
-        let mergedSize: string
-        if (typeof size === 'number') {
-          mergedSize = `${size}px`
-        } else {
-          mergedSize = self[createKey('size', size)]
-        }
         return {
           '--bezier': cubicBezierEaseInOut,
           '--item-color': itemColor,
           '--item-color-active': props.color || itemColorActive,
-          '--item-size': mergedSize
+          '--item-size': `${mergedSize.value}px`
         }
       })
     }
@@ -135,12 +157,14 @@ export default defineComponent({
               {
                 [`${mergedClsPrefix}-rate__item--active`]:
                   hoverIndex !== null
-                    ? index <= hoverIndex
-                    : index < mergedValue
+                    ? index + 1 <= hoverIndex
+                    : index + 1 <= mergedValue
               }
             ]}
             onClick={() => this.handleClick(index)}
-            onMouseenter={() => this.handleMouseEnter(index)}
+            onMousemove={(e: MouseEvent) => {
+              this.handleMouseMove(index, e.offsetX)
+            }}
           >
             {defaultSlot ? (
               defaultSlot()
@@ -149,6 +173,31 @@ export default defineComponent({
                 {{ default: () => StarIcon }}
               </NBaseIcon>
             )}
+            {this.allowHalf ? (
+              <div
+                class={[
+                  `${mergedClsPrefix}-rate__item__left`,
+                  {
+                    [`${mergedClsPrefix}-rate__item__left--active`]:
+                      hoverIndex !== null
+                        ? index + 0.5 <= hoverIndex
+                        : index + 0.5 <= mergedValue
+                  }
+                ]}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  this.handleHalfClick(index)
+                }}
+              >
+                {defaultSlot ? (
+                  defaultSlot()
+                ) : (
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
+                    {{ default: () => StarIcon }}
+                  </NBaseIcon>
+                )}
+              </div>
+            ) : null}
           </div>
         ))}
       </div>
