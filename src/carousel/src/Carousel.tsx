@@ -275,6 +275,7 @@ export default defineComponent({
       mergedClsPrefix,
       current,
       lengthRef,
+      autoplay,
       $slots: { default: defaultSlot }
     } = this
     const children = flatten(defaultSlot?.() || [])
@@ -337,6 +338,13 @@ export default defineComponent({
                 ]}
                 onClick={() => this.setCurrent(i + 1)}
                 onMouseenter={() => this.handleMouseenter(i + 1)}
+                onMousedown={
+                  autoplay
+                    ? (e) => {
+                        e.preventDefault()
+                      }
+                    : undefined
+                }
                 onKeydown={(e) => this.handleKeydown(e, i + 1)}
               />
             )
