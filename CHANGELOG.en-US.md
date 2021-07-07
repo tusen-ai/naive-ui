@@ -2,6 +2,9 @@
 
 ## Pending
 
+
+- Fix `n-select` bug in using custom label, closes [#352](https://github.com/TuSimple/naive-ui/issues/352).
+
 ### Feats
 
 - `n-tree` exports `TreeDragInfo` & `TreeDropInfo` type.
@@ -22,7 +25,8 @@
 - `n-carousel` add `dot-placement` prop.
 - `n-auto-complete` add `loading` prop, closes [#241](https://github.com/TuSimple/naive-ui/issues/241).
 - `n-slider` add `tooltip` prop, closes [#362](https://github.com/TuSimple/naive-ui/issues/362).
-- `n-input` add `loading` prop
+- `n-input` add `loading` prop.
+- `n-empty` export `icon` slot.
 
 ### Fixes
 
