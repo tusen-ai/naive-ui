@@ -2,6 +2,8 @@
 
 ## Pending
 
+- Fix `n-image-group` initialize zoom scale when switching a picture [#423](https://github.com/TuSimple/naive-ui/issues/423)
+
 ### Breaking Changes
 
 - `n-select` add `render-tag` prop.

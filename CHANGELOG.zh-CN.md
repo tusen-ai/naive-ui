@@ -2,6 +2,8 @@
 
 ## Pending
 
+- 修复 `n-image-group` 当切换图片预览时，初始化缩放比例 [#423](https://github.com/TuSimple/naive-ui/issues/423)
+
 ### Breaking Changes
 
 - `n-select` 新增 `render-tag` 属性
