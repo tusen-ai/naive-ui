@@ -12,7 +12,8 @@ import {
   datePickerInjectionKey,
   OnPanelUpdateValue,
   OnPanelUpdateValueImpl,
-  OnClose
+  OnClose,
+  Shortcut
 } from '../interface'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
@@ -32,6 +33,7 @@ const usePanelCommonProps = {
     type: [Array, Number] as PropType<Value | null>,
     default: null
   },
+  shortcuts: Array as PropType<Shortcut[]>,
   onConfirm: Function,
   onClose: Function as PropType<OnClose>,
   onTabOut: Function,
@@ -78,6 +80,10 @@ function usePanelCommon (props: UsePanelCommonProps) {
   }
   function handleClearClick (): void {
     doUpdateValue(null, true)
+    doClose(true)
+  }
+  function handleShortcutClick (value: Value): void {
+    doUpdateValue(value, true)
     doClose(true)
   }
   function handleFocusDetectorFocus (): void {
@@ -130,7 +136,8 @@ function usePanelCommon (props: UsePanelCommonProps) {
     handleFocusDetectorFocus,
     disableTransitionOneTick,
     handlePanelKeyDown,
-    handlePanelFocus
+    handlePanelFocus,
+    handleShortcutClick
   }
 }
 

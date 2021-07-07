@@ -13,6 +13,7 @@ size
 disabled
 disabled-time
 actions
+shortcuts
 events
 format
 ranges
@@ -29,11 +30,19 @@ update-on-close
 | clearable | `boolean` | `false` | Whether the date picker is clearable. |
 | default-value | `number \| [number, number] \| null` | `null` | Date picker's default value. |
 | disabled | `boolean` | `false` | Whether the date picker is disabled. |
+| shortcuts | `Array<Shortcut>` | `undefined` | Customize shortcut buttons. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` | Date picker type. |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker in controlled mode. |
 | on-blur | `() => void` | `undefined` | Callback function triggered on blur. |
 | on-focus | `() => void` | `undefined` | Callback function triggered on focus. |
+
+#### Shortcut Type
+
+| 属性 | 类型 | 说明 |
+| --- | --- | --- |
+| label | `string` | Label of shortcut button. |
+| value | `number \| [number, number] \| null` | Value of the date picker after click shortcut button. |
 
 ### Date Type Props
 

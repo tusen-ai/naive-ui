@@ -8,6 +8,7 @@
 ### Feats
 
 - `n-tree` exports `TreeDragInfo` & `TreeDropInfo` type.
+- `n-date-picker` add `shortcuts` props, closes [#280](https://github.com/TuSimple/naive-ui/issues/280).
 
 ### Fixes
 

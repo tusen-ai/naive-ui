@@ -7,6 +7,7 @@
 ### Feats
 
 - `n-tree` 导出 `TreeDragInfo` & `TreeDropInfo` 类型
+- `n-date-picker` 新增 `shortcuts` 属性，关闭 [#280](https://github.com/TuSimple/naive-ui/issues/280)
 
 ### Fixes
 

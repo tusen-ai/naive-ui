@@ -106,11 +106,21 @@ export default defineComponent({
             {renderSlot(this.datePickerSlots, 'footer')}
           </div>
         ) : null}
-        {this.actions?.length ? (
+        {this.actions?.length || this.shortcuts?.length ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}></div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions.includes('clear') ? (
+              {this.shortcuts?.length ? this.shortcuts.map((shortcut) =>
+                 <NButton
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                  size="tiny"
+                  onClick={() => this.handleShortcutClick(shortcut.value)}
+                >
+                  {{ default: () => shortcut.label }}
+                </NButton>
+              ) : null}
+              {this.actions?.includes('clear') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
@@ -120,7 +130,7 @@ export default defineComponent({
                   {{ default: () => this.locale.clear }}
                 </NButton>
               ) : null}
-              {this.actions.includes('now') ? (
+              {this.actions?.includes('now') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}

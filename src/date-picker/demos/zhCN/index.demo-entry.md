@@ -13,6 +13,7 @@ size
 disabled
 disabled-time
 actions
+shortcuts
 events
 format
 ranges
@@ -29,11 +30,19 @@ update-on-close
 | clearable | `boolean` | `false` | 是否支持清除 |
 | default-value | `number \| [number, number] \| null` | `null` | 默认被选中的日期的时间戳 |
 | disabled | `boolean` | `false` | 是否禁用 |
+| shortcuts | `Array<Shortcut>` | `undefined` | 自定义快捷按钮 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` | Date Picker 的类型 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |
 | on-focus | `() => void` | `undefined` | 用户 focus 时执行的回调 |
+
+#### Shortcut Type
+
+| 属性 | 类型 | 说明 |
+| --- | --- | --- |
+| label | `string` | 快捷按钮显示的名称 |
+| value | `number \| [number, number] \| null` | 点击快捷按钮后日期选择器更新为对应的值 |
 
 ### Date 类型的 Props
 

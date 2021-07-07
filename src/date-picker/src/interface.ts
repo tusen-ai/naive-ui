@@ -75,3 +75,8 @@ export type IsRangeTimeDisabled = (
   position: 'start' | 'end',
   value: [number, number] // date must exist to have time validation
 ) => TimeValidator
+
+export interface Shortcut {
+  label: string
+  value: Value
+}
