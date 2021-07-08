@@ -13,6 +13,7 @@
 
 ### Feats
 
+- `n-steps` 新增 `'finish'` 和 `'error'` 状态下的图标定制
 - `n-tree` 导出 `TreeDragInfo` & `TreeDropInfo` 类型
 
 ### Fixes

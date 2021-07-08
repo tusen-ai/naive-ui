@@ -7,7 +7,8 @@ import {
   VNodeChild,
   InjectionKey,
   ExtractPropTypes,
-  Ref
+  Ref,
+  Slots
 } from 'vue'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
 import { useConfig, useTheme } from '../../_mixins'
@@ -53,6 +54,7 @@ export interface StepsInjection {
   props: ExtractPropTypes<typeof stepsProps>
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<StepsTheme>>
+  stepsSlots: Slots
 }
 
 export type StepsProps = ExtractPublicPropTypes<typeof stepsProps>
@@ -62,7 +64,7 @@ export const stepsInjectionKey: InjectionKey<StepsInjection> = Symbol('steps')
 export default defineComponent({
   name: 'Steps',
   props: stepsProps,
-  setup (props) {
+  setup (props, { slots }) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Steps',
@@ -75,7 +77,8 @@ export default defineComponent({
     provide(stepsInjectionKey, {
       props,
       mergedThemeRef: themeRef,
-      mergedClsPrefixRef
+      mergedClsPrefixRef,
+      stepsSlots: slots
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef
