@@ -47,6 +47,42 @@ export default cB('carousel', `
       margin-right: 0;
     `)
   ]),
+  cE('arrowRight', `
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transition: transform .1s var(--bezier);
+    transform: translateY(-50%) scale(1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30%;
+    width: 8%;
+    color: var(--dot-color-active);
+  `, [
+    c('&:hover', {
+      transform: 'translateY(-50%) scale(1.1)'
+    })
+  ]),
+  cE('arrowLeft', `
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transition: transform .1s var(--bezier);
+    transform: translateY(-50%) scale(1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30%;
+    width: 8%;
+    color: var(--dot-color-active);
+  `, [
+    c('&:hover', {
+      transform: 'translateY(-50%) scale(1.1)'
+    })
+  ]),
   cM('left', [
     cE('slides', `
       flex-direction: column;
