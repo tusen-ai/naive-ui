@@ -19,39 +19,39 @@ closable
 | --- | --- | --- | --- |
 | content-style | `string \| Object` | `undefined` | Style of drawer's scrollable content node. |
 | height | `number \| string` | `251` | Works when placement is `top` and `bottom`. |
-| native-scrollbar | `boolean` | `true` |  |
+| native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on drawer. |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |
-| placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` |  |
-| show | `boolean` | `false` |  |
+| placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Drawer placement. |
+| show | `boolean` | `false` | Whether to show drawer. |
 | style | `string \| Object` | `undefined` | Style of the drawer. |
 | to | `string \| HTMLElement` | `'body'` | Container node of the drawer. |
-| width | `number \| string` | `251` |  |
-| on-update:show | `(show: boolean) => void` | `undefined` |  |
+| width | `number \| string` | `251` | Works when placement is `left` and `right`. |
+| on-update:show | `(show: boolean) => void` | `undefined` | The callback triggered when the drawer display status changes. |
 
 ### DrawerContent Props
 
 | Name | Parameters | Default | Description |
 | --- | --- | --- | --- |
-| body-style | `string \| Object` | `undefined` |  |
+| body-style | `string \| Object` | `undefined` | Drawer content's body style. |
 | body-content-style | `string \| Object` | `undefined` | Style of body's scrollable content node. |
 | closable | `boolean` | `false` | Whether the drawer content is closable. |
-| footer-style | `string \| Object` | `undefined` |  |
-| header-style | `string \| Object` | `undefined` |  |
+| footer-style | `string \| Object` | `undefined` | Drawer content's footer style. |
+| header-style | `string \| Object` | `undefined` | Drawer content's header style. |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on body part. |
-| title | `string` | `undefined` |  |
+| title | `string` | `undefined` | Drawer content title. |
 
 ## Slots
 
 ### Drawer Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name    | Parameters | Description                |
+| ------- | ---------- | -------------------------- |
+| default | `()`       | The content of the drawer. |
 
 ### DrawerContent Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
-| header  | `()`       |             |
-| footer  | `()`       |             |
+| Name    | Parameters | Description                        |
+| ------- | ---------- | ---------------------------------- |
+| default | `()`       | The content of the drawer content. |
+| footer  | `()`       | The footer of the drawer content.  |
+| header  | `()`       | The header of the drawer content.  |
