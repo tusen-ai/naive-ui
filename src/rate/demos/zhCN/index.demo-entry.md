@@ -9,12 +9,14 @@ basic
 size
 color
 icon
+allow-half
 ```
 
 ## Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| allow-half | `boolean` | `false` | 允许只激活一半图标 |
 | color | `string` | `undefined` | 已激活图标颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |
 | count | `number` | `5` | 图标个数 |
 | default-value | `number` | `0` | 默认已激活图标个数 |

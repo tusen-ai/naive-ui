@@ -21,10 +21,7 @@ import StarIcon from './StarIcon'
 
 const rateProps = {
   ...(useTheme.props as ThemeProps<RateTheme>),
-  allowHalf: {
-    type: Boolean,
-    default: false
-  },
+  allowHalf: Boolean,
   count: {
     type: Number,
     default: 5
@@ -63,6 +60,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const allowHalfRef = toRef(props, 'allowHalf')
     const controlledValueRef = toRef(props, 'value')
     const uncontrolledValueRef = ref(props.defaultValue)
     const hoverIndexRef = ref<number | null>(null)
@@ -93,7 +91,7 @@ export default defineComponent({
     }
     function handleMouseMove (index: number, offset: number): void {
       const { value: size } = mergedSize
-      if (props.allowHalf) {
+      if (allowHalfRef) {
         if (offset >= Math.floor(size / 2)) {
           hoverIndexRef.value = index + 1
         } else {
@@ -113,7 +111,6 @@ export default defineComponent({
       doUpdateValue(index + 0.5)
     }
     return {
-      allowHalf: toRef(props, 'allowHalf'),
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       hoverIndex: hoverIndexRef,

@@ -40,14 +40,9 @@ export default cB('rate', {
     })
   ]),
   cE('item__left', `
-    display: flex;
-    transition:
-      transform .1s var(--bezier),
-      color .3s var(--bezier);
-    transform: scale(1);
-    font-size: var(--item-size);
-    cursor: pointer;
-    color: var(--item-color);
+    display: inherit;
+    transition: inherit;
+    transform: inherit;
     position: absolute;
     top: 0;
     left: 0;
