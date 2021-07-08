@@ -19,6 +19,7 @@
 - 修复 `n-data-table` 在只有一侧固定列时固定列阴影不更新
 - 修复 `n-data-table` 在未设定 `props.scrollX` 但为每个列设定宽度后固定列阴影不更新
 - 修复 `n-result` 图片在 Safari 和手机端不显示
+- 修复 `n-drawer-content` 的 `header-style` 样式未应用于头部
 
 ## 2.15.3 (2021-07-05)
 
