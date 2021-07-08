@@ -40,7 +40,7 @@ dark-4-debug
 | body-style | `string \| Object` | `undefined` | 主体 body 的样式 |
 | body-content-style | `string \| Object` | `undefined` | 主体可滚动内容节点的样式 |
 | closable | `boolean` | `false` | 是否可关闭 |
-| footer-style | `string \| Object` | `undefined` | 主体　 foot 　的样式 |
+| footer-style | `string \| Object` | `undefined` | 主体 footer 的样式 |
 | header-style | `string \| Object` | `undefined` | 主体 header 的样式 |
 | native-scrollbar | `boolean` | `true` | 主体部分是否使用原生滚动条 |
 | title | `string` | `undefined` | 主体的标题 |
