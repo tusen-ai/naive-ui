@@ -37,7 +37,7 @@ export interface ImagePreviewInst {
 }
 
 export default defineComponent({
-  name: 'Image',
+  name: 'ImagePreview',
   props: {
     showToolbar: Boolean,
     onNext: Function as PropType<() => void>,
@@ -253,25 +253,10 @@ export default defineComponent({
             default: () =>
               this.show || this.displayed
                 ? withDirectives(
-                  <div
-                    class={`${clsPrefix}-image-preview-container`}
-                    style={this.cssVars as CSSProperties}
-                  >
-                    <Transition
-                      name="fade-in-transition"
-                      appear={this.appear}
+                    <div
+                      class={`${clsPrefix}-image-preview-container`}
+                      style={this.cssVars as CSSProperties}
                     >
-                      {{
-                        default: () =>
-                          this.show ? (
-                            <div
-                              class={`${clsPrefix}-image-preview-overlay`}
-                              onClick={this.toggleShow}
-                            />
-                          ) : null
-                      }}
-                    </Transition>
-                    {this.showToolbar ? (
                       <Transition
                         name="fade-in-transition"
                         appear={this.appear}
@@ -280,89 +265,104 @@ export default defineComponent({
                           default: () =>
                             this.show ? (
                               <div
-                                class={`${clsPrefix}-image-preview-toolbar`}
-                              >
-                                {this.onPrev ? (
-                                  <>
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.onPrev}
-                                    >
-                                      {{ default: () => prevIcon }}
-                                    </NBaseIcon>
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.onNext}
-                                    >
-                                      {{ default: () => nextIcon }}
-                                    </NBaseIcon>
-                                  </>
-                                ) : null}
-                                <NBaseIcon
-                                  clsPrefix={clsPrefix}
-                                  onClick={this.rotateCounterclockwise}
-                                >
-                                  {{
-                                    default: () => (
-                                      <RotateCounterclockwiseIcon />
-                                    )
-                                  }}
-                                </NBaseIcon>
-                                <NBaseIcon
-                                  clsPrefix={clsPrefix}
-                                  onClick={this.rotateClockwise}
-                                >
-                                  {{ default: () => <RotateClockwiseIcon /> }}
-                                </NBaseIcon>
-                                <NBaseIcon
-                                  clsPrefix={clsPrefix}
-                                  onClick={this.zoomOut}
-                                >
-                                  {{ default: () => <ZoomOutIcon /> }}
-                                </NBaseIcon>
-                                <NBaseIcon
-                                  clsPrefix={clsPrefix}
-                                  onClick={this.zoomIn}
-                                >
-                                  {{ default: () => <ZoomInIcon /> }}
-                                </NBaseIcon>
-                              </div>
+                                class={`${clsPrefix}-image-preview-overlay`}
+                                onClick={this.toggleShow}
+                              />
                             ) : null
                         }}
                       </Transition>
-                    ) : null}
-                    <Transition
-                      name="fade-in-scale-up-transition"
-                      onAfterLeave={this.handleAfterLeave}
-                      appear={this.appear}
-                      // BUG:
-                      // onEnter will be called twice, I don't know why
-                      // Maybe it is a bug of vue
-                      onEnter={this.syncTransformOrigin}
-                      onBeforeLeave={this.syncTransformOrigin}
-                    >
-                      {{
-                        default: () =>
-                          withDirectives(
-                            <div
-                              class={`${clsPrefix}-image-preview-wrapper`}
-                              ref="previewWrapperRef"
-                            >
-                              <img
-                                draggable={false}
-                                onMousedown={this.handlePreviewMousedown}
-                                class={`${clsPrefix}-image-preview`}
-                                key={this.previewSrc}
-                                src={this.previewSrc}
-                                ref="previewRef"
-                              />
-                            </div>,
-                            [[vShow, this.show]]
-                          )
-                      }}
-                    </Transition>
-                  </div>,
-                  [[zindexable, { enabled: this.show }]]
+                      {this.showToolbar ? (
+                        <Transition
+                          name="fade-in-transition"
+                          appear={this.appear}
+                        >
+                          {{
+                            default: () =>
+                              this.show ? (
+                                <div
+                                  class={`${clsPrefix}-image-preview-toolbar`}
+                                >
+                                  {this.onPrev ? (
+                                    <>
+                                      <NBaseIcon
+                                        clsPrefix={clsPrefix}
+                                        onClick={this.onPrev}
+                                      >
+                                        {{ default: () => prevIcon }}
+                                      </NBaseIcon>
+                                      <NBaseIcon
+                                        clsPrefix={clsPrefix}
+                                        onClick={this.onNext}
+                                      >
+                                        {{ default: () => nextIcon }}
+                                      </NBaseIcon>
+                                    </>
+                                  ) : null}
+                                  <NBaseIcon
+                                    clsPrefix={clsPrefix}
+                                    onClick={this.rotateCounterclockwise}
+                                  >
+                                    {{
+                                      default: () => (
+                                        <RotateCounterclockwiseIcon />
+                                      )
+                                    }}
+                                  </NBaseIcon>
+                                  <NBaseIcon
+                                    clsPrefix={clsPrefix}
+                                    onClick={this.rotateClockwise}
+                                  >
+                                    {{ default: () => <RotateClockwiseIcon /> }}
+                                  </NBaseIcon>
+                                  <NBaseIcon
+                                    clsPrefix={clsPrefix}
+                                    onClick={this.zoomOut}
+                                  >
+                                    {{ default: () => <ZoomOutIcon /> }}
+                                  </NBaseIcon>
+                                  <NBaseIcon
+                                    clsPrefix={clsPrefix}
+                                    onClick={this.zoomIn}
+                                  >
+                                    {{ default: () => <ZoomInIcon /> }}
+                                  </NBaseIcon>
+                                </div>
+                              ) : null
+                          }}
+                        </Transition>
+                      ) : null}
+                      <Transition
+                        name="fade-in-scale-up-transition"
+                        onAfterLeave={this.handleAfterLeave}
+                        appear={this.appear}
+                        // BUG:
+                        // onEnter will be called twice, I don't know why
+                        // Maybe it is a bug of vue
+                        onEnter={this.syncTransformOrigin}
+                        onBeforeLeave={this.syncTransformOrigin}
+                      >
+                        {{
+                          default: () =>
+                            withDirectives(
+                              <div
+                                class={`${clsPrefix}-image-preview-wrapper`}
+                                ref="previewWrapperRef"
+                              >
+                                <img
+                                  draggable={false}
+                                  onMousedown={this.handlePreviewMousedown}
+                                  class={`${clsPrefix}-image-preview`}
+                                  key={this.previewSrc}
+                                  src={this.previewSrc}
+                                  ref="previewRef"
+                                />
+                              </div>,
+                              [[vShow, this.show]]
+                            )
+                        }}
+                      </Transition>
+                    </div>,
+                    [[zindexable, { enabled: this.show }]]
                 )
                 : null
           }}

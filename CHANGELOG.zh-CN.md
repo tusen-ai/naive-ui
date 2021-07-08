@@ -3,6 +3,11 @@
 ## Pending
 
 - 修复 `n-select` 自定义 label 的显示问题，关闭 [#352](https://github.com/TuSimple/naive-ui/issues/352)
+- 修复 `n-carousel` 设定 `autoplay` 点击后 dot active 状态不正常，关闭 [#434](https://github.com/TuSimple/naive-ui/issues/434)
+- 修复 `n-input` 清空按钮位置引起的样式问题，关闭 [#428](https://github.com/TuSimple/naive-ui/issues/428)
+- 修复 `n-image` 不接受 attributes
+- 修复 `n-image` 设定 border-radius 无效，关闭 [#427](https://github.com/TuSimple/naive-ui/issues/427)
+- 修复 `n-tab-pane` 再没有子节点时报错
 
 ### Feats
 
@@ -12,6 +17,7 @@
 
 - 修复 `n-data-table` 在只有一侧固定列时固定列阴影不更新
 - 修复 `n-data-table` 在未设定 `props.scrollX` 但为每个列设定宽度后固定列阴影不更新
+- 修复 `n-result` 图片在 Safari 和手机端不显示
 
 ## 2.15.3 (2021-07-05)
 

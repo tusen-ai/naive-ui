@@ -64,4 +64,13 @@ describe('n-image', () => {
 
     expect(document.querySelector('.n-image-preview-toolbar')).not.toEqual(null)
   })
+
+  it('should inherit attrs', () => {
+    const wrapper = mount(NImage, {
+      attrs: {
+        'data-cool': true
+      }
+    })
+    expect(wrapper.find('[data-cool]').exists()).toEqual(true)
+  })
 })

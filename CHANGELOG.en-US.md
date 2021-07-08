@@ -2,8 +2,12 @@
 
 ## Pending
 
-
 - Fix `n-select` bug in using custom label, closes [#352](https://github.com/TuSimple/naive-ui/issues/352).
+- Fix `n-carousel` when `autoplay` dot active status isn't displayed correctly, closes [#434](https://github.com/TuSimple/naive-ui/issues/434).
+- Fix `n-input` fixed clearable position, closes [#428](https://github.com/TuSimple/naive-ui/issues/428).
+- Fix `n-image` doesn't accept attributes.
+- Fix `n-image` set border-radius not working, closes [#427](https://github.com/TuSimple/naive-ui/issues/427).
+- Fix `n-tab-pane` throws error when there's no children.
 
 ### Feats
 
@@ -13,6 +17,7 @@
 
 - Fix `n-data-table` fixed column box-shadow doesn't update when there is only on side fixed.
 - Fix `n-data-table` fixed column box-shadow doesn't update when `props.scrollX` is not set but each column's width is set.
+- Fix `n-result` image doesn't show on Safari and mobile phone.
 
 ## 2.15.3 (2021-07-05)
 
