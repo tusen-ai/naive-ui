@@ -120,7 +120,9 @@ export default defineComponent({
     })
     const filterablePlaceholderRef = computed(() => {
       return props.selectedOption
-        ? render(props.selectedOption.label, props.selectedOption, true)
+        ? props.renderLabel
+          ? props.renderLabel(props.selectedOption as never, true)
+          : render(props.selectedOption.label, props.selectedOption, true)
         : props.placeholder
     })
     const labelRef = computed(() => {

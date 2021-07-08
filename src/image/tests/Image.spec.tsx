@@ -82,5 +82,12 @@ describe('n-image', () => {
       }
     })
     expect(wrapper.findAll('img').length).toBe(2)
+  it('should inherit attrs', () => {
+    const wrapper = mount(NImage, {
+      attrs: {
+        'data-cool': true
+      }
+    })
+    expect(wrapper.find('[data-cool]').exists()).toEqual(true)
   })
 })

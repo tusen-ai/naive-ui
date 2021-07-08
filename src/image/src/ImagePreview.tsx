@@ -37,7 +37,7 @@ export interface ImagePreviewInst {
 }
 
 export default defineComponent({
-  name: 'Image',
+  name: 'ImagePreview',
   props: {
     showToolbar: Boolean,
     onNext: Function as PropType<() => void>,
