@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
-import { NTabs } from '../index'
+import { h } from 'vue'
+import { NTabPane, NTabs } from '../index'
 
 describe('n-tabs', () => {
   it('should work with import on demand', () => {
@@ -22,6 +23,20 @@ describe('n-tabs', () => {
     mount(NTabs, {
       props: {
         onUpdateValue: onUpdateValue3
+      }
+    })
+  })
+  it('should work with empty tab-pane', () => {
+    mount(NTabs, {
+      props: {
+        defaultValue: 'a'
+      },
+      slots: {
+        default: () =>
+          h(NTabPane, {
+            tab: 'a',
+            name: 'a'
+          })
       }
     })
   })
