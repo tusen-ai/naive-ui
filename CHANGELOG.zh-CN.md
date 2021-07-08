@@ -7,6 +7,7 @@
 - 修复 `n-input` 清空按钮位置引起的样式问题，关闭 [#428](https://github.com/TuSimple/naive-ui/issues/428)
 - 修复 `n-image` 不接受 attributes
 - 修复 `n-image` 设定 border-radius 无效，关闭 [#427](https://github.com/TuSimple/naive-ui/issues/427)
+- 修复 `n-tab-pane` 再没有子节点时报错
 
 ### Feats
 
