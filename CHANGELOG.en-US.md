@@ -11,6 +11,7 @@
 
 ### Feats
 
+- `n-steps` add icon customization in `'finish'` and `'error'` status.
 - `n-tree` exports `TreeDragInfo` & `TreeDropInfo` type.
 
 ### Fixes
