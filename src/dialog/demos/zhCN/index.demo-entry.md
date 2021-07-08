@@ -79,10 +79,10 @@ use-component
 下列属性都可以被动态修改。
 
 | 名称 | 类型 | 说明 |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | bordered | `boolean` | 是否显示 border |
 | closable | `boolean` | 是否显示 close 图标 |
-| mask-closable | `boolean` | `true` | 是否可以通过点击 modal 关闭对话框 |
+| mask-closable | `boolean` | 是否可以通过点击 modal 关闭对话框 |
 | content | `string \| (() => VNodeChild)` | 对话框内容，可以是 render 函数 |
 | icon-placement | `'left' \| 'top'` | 图标的位置 |
 | icon | `() => VNodeChild` | 对话框 icon，需要是 render 函数 |

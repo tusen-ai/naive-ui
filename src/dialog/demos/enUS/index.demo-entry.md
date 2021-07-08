@@ -78,10 +78,10 @@ use-component
 All the properties can be modified dynamically.
 
 | Name | Type | Description |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | bordered | `boolean` | Whether to show border. |
 | closable | `boolean` | Whether to show close icon. |
-| mask-closable | `boolean` | `true` | Whether the Dialog can be closed by clicking the mask. |
+| mask-closable | `boolean` | Whether the Dialog can be closed by clicking the mask. |
 | content | `string \| (() => VNodeChild)` | Content, can be a render function. |
 | icon-placement | `'left' \| 'top'` | Icon placement. |
 | icon | `() => VNodeChild` | Render function of icon. |
