@@ -1,10 +1,20 @@
-# Size
+# 定制图标
 
-Steps has `small`, `medium` size.
+只提供 `'finish'` 和 `'error'` 状态下的图标定制
 
 ```html
 <n-space vertical>
-  <n-steps size="small" :current="current" :status="currentStatus">
+  <n-steps :current="current" :status="currentStatus">
+    <template #finish-icon>
+      <n-icon>
+        <md-happy />
+      </n-icon>
+    </template>
+    <template #error-icon>
+      <n-icon>
+        <md-sad />
+      </n-icon>
+    </template>
     <n-step
       title="I Me Mine"
       description="All through the day, I me mine I me mine, I me mine"
@@ -39,7 +49,7 @@ Steps has `small`, `medium` size.
         </template>
       </n-button>
     </n-button-group>
-    <n-radio-group v-model:value="currentStatus" size="medium" name="size">
+    <n-radio-group v-model:value="currentStatus" size="medium" name="basic">
       <n-radio-button value="error"> Error </n-radio-button>
       <n-radio-button value="process"> Process </n-radio-button>
       <n-radio-button value="wait"> Wait </n-radio-button>
@@ -51,12 +61,19 @@ Steps has `small`, `medium` size.
 
 ```js
 import { defineComponent, ref } from 'vue'
-import { MdArrowRoundBack, MdArrowRoundForward } from '@vicons/ionicons4'
+import {
+  MdArrowRoundBack,
+  MdArrowRoundForward,
+  MdHappy,
+  MdSad
+} from '@vicons/ionicons4'
 
 export default defineComponent({
   components: {
     MdArrowRoundBack,
-    MdArrowRoundForward
+    MdArrowRoundForward,
+    MdHappy,
+    MdSad
   },
   setup () {
     const current = ref(1)
@@ -71,7 +88,7 @@ export default defineComponent({
       else current.value--
     }
     return {
-      currentStatus: ref('process'),
+      currentStatus: ref('finish'),
       current,
       next,
       prev

@@ -45,7 +45,6 @@ import {
   defaultFilter
 } from './utils'
 import style from './styles/index.cssr'
-
 import type {
   SelectMixedOption,
   SelectBaseOption,
@@ -690,6 +689,7 @@ export default defineComponent({
                       selectedOptions={this.selectedOptions}
                       multiple={this.multiple}
                       renderTag={this.renderTag}
+                      renderLabel={this.renderLabel}
                       filterable={this.filterable}
                       clearable={this.clearable}
                       disabled={this.disabled}

@@ -1,5 +1,31 @@
 # CHANGELOG
 
+## 2.15.4 (2021-07-09)
+
+### Feats
+
+- `n-steps` add icon customization in `'finish'` and `'error'` status.
+- `n-tree` exports `TreeDragInfo` & `TreeDropInfo` type.
+- `n-empty` export `icon` slot.
+- `useDialog` option add `maskClosable` prop, closes [#420](https://github.com/TuSimple/naive-ui/issues/420).
+
+### Fixes
+
+- Fix `n-data-table` fixed column box-shadow doesn't update when there is only on side fixed.
+- Fix `n-data-table` fixed column box-shadow doesn't update when `props.scrollX` is not set but each column's width is set.
+- Fix `n-result` image doesn't show on Safari and mobile phone.
+- Fix `n-drawer-content`'s `header-style` style not applied to header.
+- Fix `n-dialog` instance throws error when calling `destroy`.
+- Fix `n-image-group` initialize zoom scale when switching a picture [#423](https://github.com/TuSimple/naive-ui/issues/423).
+- Fix `n-select` bug in using custom label, closes [#352](https://github.com/TuSimple/naive-ui/issues/352).
+- Fix `n-carousel` when `autoplay` dot active status isn't displayed correctly, closes [#434](https://github.com/TuSimple/naive-ui/issues/434).
+- Fix `n-input` fixed clearable position, closes [#428](https://github.com/TuSimple/naive-ui/issues/428).
+- Fix `n-image` doesn't accept attributes.
+- Fix `n-image` set border-radius not working, closes [#427](https://github.com/TuSimple/naive-ui/issues/427).
+- Fix `n-tab-pane` throws error when there's no children.
+- Fix `n-select` clear button is too big in `n-spin`, closes [#454](https://github.com/TuSimple/naive-ui/issues/454).
+- Fix `n-select` options are not updated properly, closes [#441](https://github.com/TuSimple/naive-ui/issues/441).
+
 ## 2.15.3 (2021-07-05)
 
 ### Feats
@@ -11,7 +37,7 @@
 - `n-carousel` add `dot-placement` prop.
 - `n-auto-complete` add `loading` prop, closes [#241](https://github.com/TuSimple/naive-ui/issues/241).
 - `n-slider` add `tooltip` prop, closes [#362](https://github.com/TuSimple/naive-ui/issues/362).
-- `n-input` add `loading` prop
+- `n-input` add `loading` prop.
 
 ### Fixes
 

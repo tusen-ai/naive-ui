@@ -1,4 +1,4 @@
-import { cB, cE } from '../../../_utils/cssr'
+import { c, cB, cE } from '../../../_utils/cssr'
 
 // --bezier
 // --font-size
@@ -25,6 +25,9 @@ export default cB('result', `
   `, [
     cE('status-image', {
       width: '1em'
+    }),
+    c('svg', {
+      height: '1em'
     })
   ]),
   cB('result-content', {
