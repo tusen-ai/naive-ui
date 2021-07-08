@@ -82,6 +82,7 @@ describe('n-image', () => {
       }
     })
     expect(wrapper.findAll('img').length).toBe(2)
+  })
   it('should inherit attrs', () => {
     const wrapper = mount(NImage, {
       attrs: {
