@@ -10,7 +10,7 @@ Tree accept `pattern` and `filter` to do searching.
 ```
 
 ```js
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 function createData (level = 4, baseKey = '') {
   if (!level) return undefined
@@ -35,7 +35,7 @@ export default defineComponent({
   setup () {
     return {
       data: createData(),
-      pattern: ''
+      pattern: ref('')
     }
   }
 })
