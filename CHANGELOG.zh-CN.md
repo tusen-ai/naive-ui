@@ -10,6 +10,7 @@
 - 修复 `n-image` 设定 border-radius 无效，关闭 [#427](https://github.com/TuSimple/naive-ui/issues/427)
 - 修复 `n-tab-pane` 再没有子节点时报错
 - 修复 `n-select` clear 按钮在 `n-spin` 内过大，关闭 [#454](https://github.com/TuSimple/naive-ui/issues/454)
+- 修复 `n-select` 选项没有被正常更新，关闭 [#441](https://github.com/TuSimple/naive-ui/issues/441)
 
 ### Feats
 

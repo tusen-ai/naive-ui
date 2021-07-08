@@ -45,7 +45,6 @@ import {
   defaultFilter
 } from './utils'
 import style from './styles/index.cssr'
-
 import type {
   SelectMixedOption,
   SelectBaseOption,

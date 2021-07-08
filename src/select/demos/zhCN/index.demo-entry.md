@@ -29,6 +29,7 @@ placeholder-debug
 menu-debug
 render-debug
 spin-debug
+options-change-debug
 ```
 
 ## API
