@@ -34,6 +34,7 @@
 - `n-slider` add `tooltip` prop, closes [#362](https://github.com/TuSimple/naive-ui/issues/362).
 - `n-input` add `loading` prop.
 - `n-empty` export `icon` slot.
+- `useDialog` option add `maskClosable` prop, closes [#420](https://github.com/TuSimple/naive-ui/issues/420).
 
 ### Fixes
 

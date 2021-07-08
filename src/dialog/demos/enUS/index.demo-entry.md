@@ -61,6 +61,7 @@ use-component
 | icon-placement | `'left' \| 'top'` | `'left'` | Icon placement. |
 | icon | `() => VNodeChild` | `undefined` | Render function of icon. |
 | loading | `boolean` | `false` | Whether to display loading status. |
+| mask-closable | `boolean` | `true` | Whether the dialog can be closed by clicking the mask. |
 | negative-text | `string` | `undefined` | Corresponding button won't show if not set. |
 | positive-text | `string` | `undefined` | Corresponding button won't show if not set. |
 | show-icon | `boolean` | `true` | Whether to show icon. |
@@ -84,6 +85,7 @@ All the properties can be modified dynamically.
 | icon-placement | `'left' \| 'top'` | Icon placement. |
 | icon | `() => VNodeChild` | Render function of icon. |
 | loading | `boolean` | Whether to display loading status. |
+| mask-closable | `boolean` | Whether the dialog can be closed by clicking the mask. |
 | negative-text | `string` | Corresponding button won't show if not set. |
 | positive-text | `string` | Corresponding button won't show if not set. |
 | show-icon | `boolean` | Whether to show icon. |

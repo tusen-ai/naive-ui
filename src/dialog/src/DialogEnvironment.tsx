@@ -7,6 +7,10 @@ import NDialog, { dialogProps, dialogPropKeys } from './Dialog'
 
 export const exposedDialogEnvProps = {
   ...dialogProps,
+  maskClosable: {
+    type: Boolean,
+    default: true
+  },
   onPositiveClick: Function as PropType<
   (e: MouseEvent) => Promise<boolean> | boolean | unknown
   >,
@@ -23,10 +27,6 @@ export default defineComponent({
     internalKey: {
       type: String,
       required: true
-    },
-    maskClosable: {
-      type: Boolean,
-      default: true
     },
     to: [String, Object] as PropType<string | HTMLElement>,
     // private

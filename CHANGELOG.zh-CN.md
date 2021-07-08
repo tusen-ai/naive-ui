@@ -34,6 +34,7 @@
 - `n-slider` 增加 `tooltip` 属性，关闭 [#362](https://github.com/TuSimple/naive-ui/issues/362)
 - `n-input` 新增 `loading` 属性
 - `n-empty` 导出 `icon` slot
+- `useDialog` 选项增加 `maskClosable` 属性，关闭 [#420](https://github.com/TuSimple/naive-ui/issues/420)
 
 ### Fixes
 
