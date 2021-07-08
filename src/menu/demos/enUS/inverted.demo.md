@@ -5,8 +5,8 @@ Set `inverted` to add contrast. Usually used with `n-layout`.
 ```html
 <n-space vertical>
   <n-space><n-switch v-model:value="inverted" />inverted</n-space>
-  <n-layout has-sider>
-    <n-layout-sider
+  <n-layout has-aside>
+    <n-layout-aside
       bordered
       collapse-mode="width"
       :collapsed-width="64"
@@ -20,7 +20,7 @@ Set `inverted` to add contrast. Usually used with `n-layout`.
         :collapsed-icon-size="22"
         :options="menuOptions"
       />
-    </n-layout-sider>
+    </n-layout-aside>
     <n-layout>
       <span>Content</span>
     </n-layout>

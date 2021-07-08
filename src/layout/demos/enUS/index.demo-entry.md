@@ -19,7 +19,7 @@ absolute
 scrollbar
 collapse
 inverted
-show-sider-content
+show-aside-content
 scroll-to
 ```
 
@@ -31,7 +31,7 @@ scroll-to
 | --- | --- | --- | --- |
 | content-style | `string \| Object` | `undefined` | Style of scrollable content node. |
 | embedded | `boolean` | `false` | Use darker background to show a embedded effect. Only work for light theme. |
-| has-sider | `boolean` | `false` | Whether the component has sider inside. If so it must be `true`. |
+| has-aside | `boolean` | `false` | Whether the component has aside inside. If so it must be `true`. |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, layout will use a naive-ui style scrollbar for content |
 | position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `right`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it display as you expect. |
 
@@ -51,28 +51,28 @@ scroll-to
 | inverted | `boolean` | `false` | Whether to use inverted background. |
 | position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `right`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to ma ke as you expect. |
 
-### Layout Sider Props
+### Layout Aside Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | bordered | `boolean` | `false` |  |
-| collapse-mode | `'transform' \| 'width'` | `'transform'` | If set to `'width'`, the sider's content width will be actually collapsed. If set to `'transform'`, the sider will only move it's position and won't change its content width. |
-| collapsed | `boolean` | `undefined` | Whether the sider is collapsed. It only works for when `position` is `'static'`. |
+| collapse-mode | `'transform' \| 'width'` | `'transform'` | If set to `'width'`, the aside's content width will be actually collapsed. If set to `'transform'`, the aside will only move it's position and won't change its content width. |
+| collapsed | `boolean` | `undefined` | Whether the aside is collapsed. It only works for when `position` is `'static'`. |
 | collapsed-width | `number` | `48` |  |
 | content-style | `string \| Object` | `undefined` | Style of scrollable content node. |
 | default-collapsed | `boolean` | `false` |  |
 | inverted | `boolean` | `false` | Whether to use inverted background. |
-| native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, sider will use a naive-ui style scrollbar for content |
+| native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, aside will use a naive-ui style scrollbar for content |
 | position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it as you expect. |
-| show-collapsed-content | `boolean` | `true` | Whether to show content in sider after it is collapsed. |
-| show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | Whether to show the built-in trigger button on sider. |
+| show-collapsed-content | `boolean` | `true` | Whether to show content in aside after it is collapsed. |
+| show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | Whether to show the built-in trigger button on aside. |
 | trigger-style | `string \| Object` | `undefined` |  |
 | width | `number` | `272` |  |
 | on-update:collapsed | `(collapsed: boolean) => void` | `undefined` |  |
 
 ## Slots
 
-### Layout, Layout Content, Layout Sider, Layout Header, Layout Footer Slots
+### Layout, Layout Content, Layout Aside, Layout Header, Layout Footer Slots
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
@@ -80,7 +80,7 @@ scroll-to
 
 ## Methods
 
-### Layout, Layout Content, Layout Sider Methods
+### Layout, Layout Content, Layout Aside Methods
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -88,18 +88,18 @@ scroll-to
 
 ## Changes After v2.3.0
 
-Due to concerns about performance and SSR, after v2.3.0 you need to specify `has-sider` on the `n-layout` which contains `n-layout-sider`. Collapsing won't work for `n-layout-sider` with `position="absolute"`.
+Due to concerns about performance and SSR, after v2.3.0 you need to specify `has-aside` on the `n-layout` which contains `n-layout-aside`. Collapsing won't work for `n-layout-aside` with `position="absolute"`.
 
 ```html
 Before v2.3.0:
 <n-layout>
-  <n-layout-sider />
+  <n-layout-aside />
   <n-layout />
 </n-layout>
 
 After v2.3.0:
-<n-layout has-sider>
-  <n-layout-sider />
+<n-layout has-aside>
+  <n-layout-aside />
   <n-layout />
 </n-layout>
 ```

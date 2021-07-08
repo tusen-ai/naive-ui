@@ -30,7 +30,7 @@ import {
   OnUpdateValueImpl,
   OnUpdateKeysImpl
 } from './interface'
-import { layoutSiderInjectionKey } from '../../layout/src/interface'
+import { layoutAsideInjectionKey } from '../../layout/src/interface'
 import { FollowerPlacement } from 'vueuc'
 
 const menuProps = {
@@ -181,13 +181,13 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
-    const layoutSider = inject(layoutSiderInjectionKey, null)
+    const layoutAside = inject(layoutAsideInjectionKey, null)
 
     const mergedCollapsedRef = computed(() => {
       const { collapsed } = props
       if (collapsed !== undefined) return collapsed
-      if (layoutSider) {
-        const { collapseModeRef, collapsedRef } = layoutSider
+      if (layoutAside) {
+        const { collapseModeRef, collapsedRef } = layoutAside
         if (collapseModeRef.value === 'width') {
           return collapsedRef.value ?? false
         }

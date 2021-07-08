@@ -5,8 +5,8 @@ The `render-label` can be used to batch render menu options.
 ```html
 <n-space vertical>
   <n-switch v-model:value="collapsed" />
-  <n-layout has-sider>
-    <n-layout-sider
+  <n-layout has-aside>
+    <n-layout-aside
       bordered
       collapse-mode="width"
       :collapsed-width="64"
@@ -23,7 +23,7 @@ The `render-label` can be used to batch render menu options.
         :options="menuOptions"
         :render-label="renderMenuLabel"
       />
-    </n-layout-sider>
+    </n-layout-aside>
     <n-layout>
       <span>Content</span>
     </n-layout>

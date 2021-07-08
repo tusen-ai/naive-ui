@@ -1,11 +1,11 @@
-# Hide Sider Content
+# Hide Aside Content
 
-Sometimes you don't want to see content inside sider after it's collapsed. Set `show-collapsed-content` to `false` on sider.
+Sometimes you don't want to see content inside aside after it's collapsed. Set `show-collapsed-content` to `false` on aside.
 
 ```html
 <n-space vertical size="large">
-  <n-layout has-sider>
-    <n-layout-sider
+  <n-layout has-aside>
+    <n-layout-aside
       collapse-mode="width"
       :collapsed-width="120"
       :width="240"
@@ -15,13 +15,13 @@ Sometimes you don't want to see content inside sider after it's collapsed. Set `
       bordered
     >
       Handian Bridge Handian Bridge Handian Bridge Handian Bridge Handian Bridge
-    </n-layout-sider>
+    </n-layout-aside>
     <n-layout-content content-style="padding: 24px"
       >Pingshan Road</n-layout-content
     >
   </n-layout>
-  <n-layout has-sider>
-    <n-layout-sider
+  <n-layout has-aside>
+    <n-layout-aside
       collapse-mode="transform"
       :collapsed-width="120"
       :width="240"
@@ -30,7 +30,7 @@ Sometimes you don't want to see content inside sider after it's collapsed. Set `
       bordered
     >
       <n-h2>Handian Bridge</n-h2>
-    </n-layout-sider>
+    </n-layout-aside>
     <n-layout-content content-style="padding: 24px"
       >Pingshan Road</n-layout-content
     >

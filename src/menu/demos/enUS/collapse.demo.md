@@ -1,12 +1,12 @@
 # Collapsed Menu
 
-Use collapsable vertical menu with layout sider. Use `collapsed` to control collapse status of menu. You must set `collapsed-width` to make it collapse in a right manner. There are still some other collapse related props you can modify: `icon-size`, `collapsed-icon-size`. For details see API table at the bottom of the page.
+Use collapsable vertical menu with layout aside. Use `collapsed` to control collapse status of menu. You must set `collapsed-width` to make it collapse in a right manner. There are still some other collapse related props you can modify: `icon-size`, `collapsed-icon-size`. For details see API table at the bottom of the page.
 
 ```html
 <n-space vertical>
   <n-switch v-model:value="collapsed" />
-  <n-layout has-sider>
-    <n-layout-sider
+  <n-layout has-aside>
+    <n-layout-aside
       bordered
       collapse-mode="width"
       :collapsed-width="64"
@@ -23,7 +23,7 @@ Use collapsable vertical menu with layout sider. Use `collapsed` to control coll
         :options="menuOptions"
         v-model:value="activeKey"
       />
-    </n-layout-sider>
+    </n-layout-aside>
     <n-layout>
       <span>Content</span>
     </n-layout>

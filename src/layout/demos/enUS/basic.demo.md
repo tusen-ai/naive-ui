@@ -13,9 +13,9 @@ I hope the demo can meet you demand, so that you can have more time to do other 
   </n-layout>
   <n-layout>
     <n-layout-header>Yiheyuan Road</n-layout-header>
-    <n-layout has-sider>
-      <n-layout-sider content-style="padding: 24px"
-        >Handian Bridge</n-layout-sider
+    <n-layout has-aside>
+      <n-layout-aside content-style="padding: 24px"
+        >Handian Bridge</n-layout-aside
       >
       <n-layout-content content-style="padding: 24px"
         >Pingshan Road</n-layout-content
@@ -23,9 +23,9 @@ I hope the demo can meet you demand, so that you can have more time to do other 
     </n-layout>
     <n-layout-footer>Chengfu Road</n-layout-footer>
   </n-layout>
-  <n-layout has-sider>
-    <n-layout-sider content-style="padding: 24px;"
-      >Handian Bridge</n-layout-sider
+  <n-layout has-aside>
+    <n-layout-aside content-style="padding: 24px;"
+      >Handian Bridge</n-layout-aside
     >
     <n-layout>
       <n-layout-header>Yiheyuan Road</n-layout-header>
@@ -45,7 +45,7 @@ I hope the demo can meet you demand, so that you can have more time to do other 
   padding: 24px;
 }
 
-.n-layout-sider {
+.n-layout-aside {
   background: rgba(128, 128, 128, 0.3);
 }
 

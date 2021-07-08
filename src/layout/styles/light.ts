@@ -28,13 +28,13 @@ export const self = (vars: ThemeCommonVars) => {
     headerBorderColorInverted: invertedColor,
     footerBorderColor: dividerColor,
     footerBorderColorInverted: invertedColor,
-    siderBorderColor: dividerColor,
-    siderBorderColorInverted: invertedColor,
-    siderColor: cardColor,
-    siderColorInverted: invertedColor,
-    siderToggleButtonColor: 'rgba(0, 0, 0, .15)',
-    siderToggleBarColor: composite(bodyColor, scrollbarColor),
-    siderToggleBarColorHover: composite(bodyColor, scrollbarColorHover),
+    asideBorderColor: dividerColor,
+    asideBorderColorInverted: invertedColor,
+    asideColor: cardColor,
+    asideColorInverted: invertedColor,
+    asideToggleButtonColor: 'rgba(0, 0, 0, .15)',
+    asideToggleBarColor: composite(bodyColor, scrollbarColor),
+    asideToggleBarColorHover: composite(bodyColor, scrollbarColorHover),
     // hack for inverted background
     __invertScrollbar: 'true'
   }

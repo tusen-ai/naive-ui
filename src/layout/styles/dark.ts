@@ -31,13 +31,13 @@ const layoutDark: LayoutTheme = {
       headerBorderColorInverted: dividerColor,
       footerBorderColor: dividerColor,
       footerBorderColorInverted: dividerColor,
-      siderBorderColor: dividerColor,
-      siderBorderColorInverted: dividerColor,
-      siderColor: cardColor,
-      siderColorInverted: cardColor,
-      siderToggleButtonColor: 'rgba(255, 255, 255, .3)',
-      siderToggleBarColor: composite(bodyColor, scrollbarColor),
-      siderToggleBarColorHover: composite(bodyColor, scrollbarColorHover),
+      asideBorderColor: dividerColor,
+      asideBorderColorInverted: dividerColor,
+      asideColor: cardColor,
+      asideColorInverted: cardColor,
+      asideToggleButtonColor: 'rgba(255, 255, 255, .3)',
+      asideToggleBarColor: composite(bodyColor, scrollbarColor),
+      asideToggleBarColorHover: composite(bodyColor, scrollbarColorHover),
       __invertScrollbar: 'false'
     }
   }

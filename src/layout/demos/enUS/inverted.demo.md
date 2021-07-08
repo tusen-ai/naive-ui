@@ -1,6 +1,6 @@
 # Inverted
 
-Use `inverted` to add contrast. You can set the prop on header, footer and sider. Usually used with menu.
+Use `inverted` to add contrast. You can set the prop on header, footer and aside. Usually used with menu.
 
 ```html
 <n-space vertical>
@@ -10,8 +10,8 @@ Use `inverted` to add contrast. You can set the prop on header, footer and sider
       Header Header Header
       <n-menu mode="horizontal" :inverted="inverted" :options="menuOptions" />
     </n-layout-header>
-    <n-layout has-sider>
-      <n-layout-sider
+    <n-layout has-aside>
+      <n-layout-aside
         bordered
         show-trigger
         collapse-mode="width"
@@ -27,7 +27,7 @@ Use `inverted` to add contrast. You can set the prop on header, footer and sider
           :collapsed-icon-size="22"
           :options="menuOptions"
         />
-      </n-layout-sider>
+      </n-layout-aside>
       <n-layout style="max-height: 320px;" />
     </n-layout>
     <n-layout-footer :inverted="inverted" bordered>

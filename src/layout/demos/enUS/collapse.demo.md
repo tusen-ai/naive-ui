@@ -1,17 +1,17 @@
-# Collapse Sider
+# Collapse Aside
 
-Use `collapsed` prop to control status of sider. (The adjacent `n-layout-sider` and `n-layout-sider` must be `static` positioned.)
+Use `collapsed` prop to control status of aside. (The adjacent `n-layout-aside` and `n-layout-aside` must be `static` positioned.)
 
-Sider has two `collapse-mode`, `width` & `transform`. `width` will actually change width of sider, `transform` will just move sider out of layout.
+Aside has two `collapse-mode`, `width` & `transform`. `width` will actually change width of aside, `transform` will just move aside out of layout.
 
-Use `collapsed-width` and `width` to set sider's width.
+Use `collapsed-width` and `width` to set aside's width.
 
 Use `show-trigger` to use builtin button.
 
 ```html
 <n-space vertical size="large">
-  <n-layout has-sider>
-    <n-layout-sider
+  <n-layout has-aside>
+    <n-layout-aside
       collapse-mode="width"
       :collapsed-width="120"
       :width="240"
@@ -23,13 +23,13 @@ Use `show-trigger` to use builtin button.
         Handian Bridge Handian Bridge Handian Bridge Handian Bridge Handian
         Bridge
       </p>
-    </n-layout-sider>
+    </n-layout-aside>
     <n-layout-content content-style="padding: 24px"
       >Pingshan Road</n-layout-content
     >
   </n-layout>
-  <n-layout has-sider>
-    <n-layout-sider
+  <n-layout has-aside>
+    <n-layout-aside
       collapse-mode="transform"
       :collapsed-width="120"
       :width="240"
@@ -38,7 +38,7 @@ Use `show-trigger` to use builtin button.
       bordered
     >
       <n-h2>Handian Bridge</n-h2>
-    </n-layout-sider>
+    </n-layout-aside>
     <n-layout-content content-style="padding: 24px"
       >Pingshan Road</n-layout-content
     >

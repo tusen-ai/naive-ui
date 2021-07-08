@@ -8,9 +8,9 @@ All layout components can use absolute positioning. It can be used when you want
     <n-layout-header style="height: 64px; padding: 24px;" bordered
       >Yiheyuan Road</n-layout-header
     >
-    <n-layout has-sider position="absolute" style="top: 64px; bottom: 64px;">
-      <n-layout-sider bordered content-style="padding: 24px;"
-        >Handian Bridge</n-layout-sider
+    <n-layout has-aside position="absolute" style="top: 64px; bottom: 64px;">
+      <n-layout-aside bordered content-style="padding: 24px;"
+        >Handian Bridge</n-layout-aside
       >
       <n-layout content-style="padding: 24px;">
         <n-h2>Pingshan Road</n-h2>

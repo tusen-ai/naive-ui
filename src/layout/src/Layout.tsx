@@ -31,14 +31,13 @@ const layoutProps = {
     type: [String, Object] as PropType<string | CSSProperties>,
     default: ''
   },
-  hasSider: Boolean
+  hasAside: Boolean
 } as const
 
 export type LayoutProps = ExtractPublicPropTypes<typeof layoutProps>
 
-export const layoutInjectionKey: InjectionKey<
-ExtractPropTypes<LayoutProps>
-> = Symbol('layout')
+export const layoutInjectionKey: InjectionKey<ExtractPropTypes<LayoutProps>> =
+  Symbol('layout')
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function createLayoutComponent (isContent: boolean) {
@@ -80,7 +79,7 @@ export function createLayoutComponent (isContent: boolean) {
         }
       }
       if (__DEV__) provide(layoutInjectionKey, props)
-      const hasSiderStyle: CSSProperties = {
+      const hasAsideStyle: CSSProperties = {
         display: 'flex',
         flexWrap: 'nowrap',
         width: '100%',
@@ -93,7 +92,7 @@ export function createLayoutComponent (isContent: boolean) {
         mergedClsPrefix: mergedClsPrefixRef,
         scrollableElRef,
         scrollbarInstRef,
-        hasSiderStyle,
+        hasAsideStyle,
         mergedTheme: themeRef,
         cssVars: computed(() => {
           const {
@@ -110,8 +109,8 @@ export function createLayoutComponent (isContent: boolean) {
       }
     },
     render () {
-      const { mergedClsPrefix, hasSider } = this
-      const hasSiderStyle = hasSider ? this.hasSiderStyle : undefined
+      const { mergedClsPrefix, hasAside } = this
+      const hasAsideStyle = hasAside ? this.hasAsideStyle : undefined
       const layoutClass = [
         isContent && `${mergedClsPrefix}-layout-content`,
         `${mergedClsPrefix}-layout`,
@@ -123,7 +122,7 @@ export function createLayoutComponent (isContent: boolean) {
             <div
               ref="scrollableElRef"
               class={`${mergedClsPrefix}-layout-scroll-container`}
-              style={[this.contentStyle, hasSiderStyle] as any}
+              style={[this.contentStyle, hasAsideStyle] as any}
             >
               {this.$slots}
             </div>
@@ -133,7 +132,7 @@ export function createLayoutComponent (isContent: boolean) {
               ref="scrollbarInstRef"
               theme={this.mergedTheme.peers.Scrollbar}
               themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
-              contentStyle={[this.contentStyle, hasSiderStyle] as any}
+              contentStyle={[this.contentStyle, hasAsideStyle] as any}
             >
               {this.$slots}
             </NScrollbar>

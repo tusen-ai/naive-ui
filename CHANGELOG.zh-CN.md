@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Breaking
+
+- 修复 `n-layout-sider` 组件的拼写为 `n-layout-aside`
+
 ## Pending
 
 - 修复 `n-select` 自定义 label 的显示问题，关闭 [#352](https://github.com/TuSimple/naive-ui/issues/352)

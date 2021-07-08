@@ -1,9 +1,9 @@
 import { InjectionKey, PropType, Ref } from 'vue'
 
-export const layoutSiderInjectionKey: InjectionKey<{
+export const layoutAsideInjectionKey: InjectionKey<{
   collapsedRef: Ref<boolean>
   collapseModeRef: Ref<'transform' | 'width'>
-}> = Symbol('layoutSiderInjection')
+}> = Symbol('layoutAsideInjection')
 
 export const positionProp = {
   type: String as PropType<'static' | 'absolute'>,
@@ -15,4 +15,4 @@ export interface LayoutInst {
   ((x: number, y: number) => void)
 }
 
-export type LayoutSiderInst = LayoutInst
+export type LayoutAsideInst = LayoutInst

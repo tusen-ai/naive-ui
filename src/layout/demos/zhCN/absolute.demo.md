@@ -8,9 +8,9 @@
     <n-layout-header style="height: 64px; padding: 24px;" bordered
       >颐和园路</n-layout-header
     >
-    <n-layout has-sider position="absolute" style="top: 64px; bottom: 64px;">
-      <n-layout-sider bordered content-style="padding: 24px;"
-        >海淀桥</n-layout-sider
+    <n-layout has-aside position="absolute" style="top: 64px; bottom: 64px;">
+      <n-layout-aside bordered content-style="padding: 24px;"
+        >海淀桥</n-layout-aside
       >
       <n-layout content-style="padding: 24px;">
         <n-h2>平山道</n-h2>

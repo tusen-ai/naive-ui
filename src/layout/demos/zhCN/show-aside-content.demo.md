@@ -4,8 +4,8 @@
 
 ```html
 <n-space vertical size="large">
-  <n-layout has-sider>
-    <n-layout-sider
+  <n-layout has-aside>
+    <n-layout-aside
       collapse-mode="width"
       :collapsed-width="120"
       :width="240"
@@ -15,11 +15,11 @@
       bordered
     >
       海淀桥 海淀桥 海淀桥 海淀桥 海淀桥
-    </n-layout-sider>
+    </n-layout-aside>
     <n-layout-content content-style="padding: 24px">平山道</n-layout-content>
   </n-layout>
-  <n-layout has-sider>
-    <n-layout-sider
+  <n-layout has-aside>
+    <n-layout-aside
       collapse-mode="transform"
       :collapsed-width="120"
       :width="240"
@@ -28,7 +28,7 @@
       bordered
     >
       <n-h2>海淀桥</n-h2>
-    </n-layout-sider>
+    </n-layout-aside>
     <n-layout-content content-style="padding: 24px">平山道</n-layout-content>
   </n-layout>
 </n-space>

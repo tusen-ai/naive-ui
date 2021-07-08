@@ -1,11 +1,11 @@
 # Border
 
-You can set `bordered` on sider、footer、header.
+You can set `bordered` on aside、footer、header.
 
 ```html
-<n-layout has-sider>
-  <n-layout-sider bordered content-style="padding: 24px;"
-    >Handian Bridge</n-layout-sider
+<n-layout has-aside>
+  <n-layout-aside bordered content-style="padding: 24px;"
+    >Handian Bridge</n-layout-aside
   >
   <n-layout>
     <n-layout-header bordered>Yiheyuan Road</n-layout-header>

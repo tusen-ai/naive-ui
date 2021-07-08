@@ -1,31 +1,31 @@
 <template>
   <n-layout
     id="doc-layout"
-    :has-sider="showSider"
+    :has-aside="showAside"
     :position="isMobile ? 'static' : 'absolute'"
     :style="{
       top: isMobile ? '' : 'var(--header-height)'
     }"
   >
-    <n-layout-sider
+    <n-layout-aside
       :native-scrollbar="false"
       :collapsed-width="0"
       collapse-mode="transform"
       bordered
       show-trigger="bar"
       trigger-style="top: calc(50% - var(--header-height));"
-      v-if="showSider"
+      v-if="showAside"
     >
       <n-menu
         :value="menuValue"
         :options="options"
         :render-label="renderMenuLabel"
       />
-    </n-layout-sider>
+    </n-layout-aside>
     <n-layout
       ref="layoutInstRef"
       :native-scrollbar="false"
-      :position="isMobile || showSider ? 'static' : 'absolute'"
+      :position="isMobile || showAside ? 'static' : 'absolute'"
       content-style="min-height: calc(100vh - var(--header-height)); display: flex; flex-direction: column;"
     >
       <router-view />
@@ -78,7 +78,7 @@ export default {
 
     return {
       renderMenuLabel,
-      showSider: useMemo(() => {
+      showAside: useMemo(() => {
         return !isMobileRef.value && !isTabletRef.value
       }),
       layoutInstRef,

@@ -8,7 +8,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --toggle-button-color
 // --toggle-bar-color
 // --toggle-bar-color-hover
-export default cB('layout-sider', `
+export default cB('layout-aside', `
   flex-shrink: 0;
   box-sizing: border-box;
   position: relative;
@@ -95,7 +95,7 @@ export default cB('layout-sider', `
     width: 1px;
     transition: background-color .3s var(--bezier);
   `),
-  cB('layout-sider-scroll-container', `
+  cB('layout-aside-scroll-container', `
     flex-grow: 1;
     flex-shrink: 0;
     box-sizing: border-box;
@@ -105,7 +105,7 @@ export default cB('layout-sider', `
     max-width: 100%;
   `),
   cM('show-content', [
-    cB('layout-sider-scroll-container', {
+    cB('layout-aside-scroll-container', {
       opacity: 1
     })
   ]),

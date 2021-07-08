@@ -17,18 +17,18 @@ import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarProps, ScrollbarInst } from '../../scrollbar'
 import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
-import style from './styles/layout-sider.cssr'
+import style from './styles/layout-aside.cssr'
 import ToggleButton from './ToggleButton'
 import ToggleBar from './ToggleBar'
 import {
-  layoutSiderInjectionKey,
-  LayoutSiderInst,
+  layoutAsideInjectionKey,
+  LayoutAsideInst,
   positionProp
 } from './interface'
 import { useMergedState } from 'vooks'
 import { layoutInjectionKey } from './Layout'
 
-const layoutSiderProps = {
+const layoutAsideProps = {
   position: positionProp,
   bordered: Boolean,
   collapsedWidth: {
@@ -85,27 +85,27 @@ const layoutSiderProps = {
   onCollapse: [Function, Array] as PropType<MaybeArray<() => void>>
 } as const
 
-export type LayoutSiderProps = ExtractPublicPropTypes<typeof layoutSiderProps>
+export type LayoutAsideProps = ExtractPublicPropTypes<typeof layoutAsideProps>
 
 export default defineComponent({
-  name: 'LayoutSider',
+  name: 'LayoutAside',
   props: {
     ...(useTheme.props as ThemeProps<LayoutTheme>),
-    ...layoutSiderProps
+    ...layoutAsideProps
   },
   setup (props) {
     if (__DEV__) {
       const layoutProps = inject(layoutInjectionKey)
       if (!layoutProps) {
         warn(
-          'layout-sider',
-          'Layout sider is not allowed to be put outside layout.'
+          'layout-aside',
+          'Layout aside is not allowed to be put outside layout.'
         )
       } else {
-        if (!layoutProps.hasSider) {
+        if (!layoutProps.hasAside) {
           warn(
-            'layout-sider',
-            "You are putting `n-layout-sider` in a `n-layout` but haven't set `has-sider` on the `n-layout`."
+            'layout-aside',
+            "You are putting `n-layout-aside` in a `n-layout` but haven't set `has-aside` on the `n-layout`."
           )
         }
       }
@@ -169,21 +169,21 @@ export default defineComponent({
         if (onCollapse) call(onCollapse)
       }
     }
-    provide(layoutSiderInjectionKey, {
+    provide(layoutAsideInjectionKey, {
       collapsedRef: mergedCollapsedRef,
       collapseModeRef: toRef(props, 'collapseMode')
     })
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Layout',
-      'LayoutSider',
+      'LayoutAside',
       style,
       layoutLight,
       props,
       mergedClsPrefixRef
     )
 
-    const exposedMethods: LayoutSiderInst = {
+    const exposedMethods: LayoutAsideInst = {
       scrollTo
     }
     return {
@@ -201,25 +201,25 @@ export default defineComponent({
           self
         } = themeRef.value
         const {
-          siderToggleButtonColor,
-          siderToggleBarColor,
-          siderToggleBarColorHover
+          asideToggleButtonColor,
+          asideToggleBarColor,
+          asideToggleBarColorHover
         } = self
         const vars: any = {
           '--bezier': cubicBezierEaseInOut,
-          '--toggle-button-color': siderToggleButtonColor,
-          '--toggle-bar-color': siderToggleBarColor,
-          '--toggle-bar-color-hover': siderToggleBarColorHover
+          '--toggle-button-color': asideToggleButtonColor,
+          '--toggle-bar-color': asideToggleBarColor,
+          '--toggle-bar-color-hover': asideToggleBarColorHover
         }
         if (props.inverted) {
-          vars['--color'] = self.siderColorInverted
+          vars['--color'] = self.asideColorInverted
           vars['--text-color'] = self.textColorInverted
-          vars['--border-color'] = self.siderBorderColorInverted
+          vars['--border-color'] = self.asideBorderColorInverted
           vars.__invertScrollbar = self.__invertScrollbar
         } else {
-          vars['--color'] = self.siderColor
+          vars['--color'] = self.asideColor
           vars['--text-color'] = self.textColor
-          vars['--border-color'] = self.siderBorderColor
+          vars['--border-color'] = self.asideBorderColor
         }
         return vars
       }),
@@ -231,12 +231,12 @@ export default defineComponent({
     return (
       <aside
         class={[
-          `${mergedClsPrefix}-layout-sider`,
-          `${mergedClsPrefix}-layout-sider--${this.position}-positioned`,
-          this.bordered && `${mergedClsPrefix}-layout-sider--bordered`,
-          mergedCollapsed && `${mergedClsPrefix}-layout-sider--collapsed`,
+          `${mergedClsPrefix}-layout-aside`,
+          `${mergedClsPrefix}-layout-aside--${this.position}-positioned`,
+          this.bordered && `${mergedClsPrefix}-layout-aside--bordered`,
+          mergedCollapsed && `${mergedClsPrefix}-layout-aside--collapsed`,
           (!mergedCollapsed || this.showCollapsedContent) &&
-            `${mergedClsPrefix}-layout-sider--show-content`
+            `${mergedClsPrefix}-layout-aside--show-content`
         ]}
         style={[
           this.cssVars,
@@ -269,7 +269,7 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div
-            class={`${mergedClsPrefix}-layout-sider-scroll-container`}
+            class={`${mergedClsPrefix}-layout-aside-scroll-container`}
             style={[
               this.scrollContainerStyle,
               this.contentStyle,

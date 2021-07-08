@@ -1,11 +1,11 @@
 # 使用边框
 
-sider、footer、header 可以设定 `bordered`。
+aside、footer、header 可以设定 `bordered`。
 
 ```html
-<n-layout has-sider>
-  <n-layout-sider bordered content-style="padding: 24px;"
-    >海淀桥</n-layout-sider
+<n-layout has-aside>
+  <n-layout-aside bordered content-style="padding: 24px;"
+    >海淀桥</n-layout-aside
   >
   <n-layout>
     <n-layout-header bordered>颐和园路</n-layout-header>

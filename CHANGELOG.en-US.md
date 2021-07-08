@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Breaking
+
+- Fix `n-layout-sider` component word to `n-layout-aside`.
+
 ## Pending
 
 - Fix `n-select` bug in using custom label, closes [#352](https://github.com/TuSimple/naive-ui/issues/352).
