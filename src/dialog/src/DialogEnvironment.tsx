@@ -96,6 +96,8 @@ export default defineComponent({
       handleNegativeClick,
       handleCloseClick,
       handleAfterLeave,
+      to,
+      maskClosable,
       show
     } = this
     return (
@@ -104,8 +106,8 @@ export default defineComponent({
         onUpdateShow={handleUpdateShow}
         appear
         dialog
-        to={this.$props.to}
-        maskClosable={this.$props.maskClosable}
+        to={to}
+        maskClosable={maskClosable}
         onAfterLeave={handleAfterLeave}
       >
         {{
