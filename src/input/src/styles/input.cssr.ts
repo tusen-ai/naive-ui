@@ -63,7 +63,7 @@ export default c([
       font-family: inherit;
       border: none;
       outline: none;
-      background-color: #0000;
+      background-color: #000000;
       text-align: inherit;
       transition:
         caret-color .3s var(--bezier),
