@@ -46,13 +46,13 @@ use-component
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
 | destroyAll | `() => void` | 销毁所有弹出的对话框 |
-| create | `(options: DialogOption) => DialogReactive` | 创建对话框 |
-| error | `(options: DialogOption) => DialogReactive` | 调用 error 类型的对话框 |
-| info | `(options: DialogOption) => DialogReactive` | 调用 info 类型的对话框 |
-| success | `(options: DialogOption) => DialogReactive` | 调用 success 类型的对话框 |
-| warning | `(options: DialogOption) => DialogReactive` | 调用 warning 类型的对话框 |
+| create | `(options: DialogOptions) => DialogReactive` | 创建对话框 |
+| error | `(options: DialogOptions) => DialogReactive` | 调用 error 类型的对话框 |
+| info | `(options: DialogOptions) => DialogReactive` | 调用 info 类型的对话框 |
+| success | `(options: DialogOptions) => DialogReactive` | 调用 success 类型的对话框 |
+| warning | `(options: DialogOptions) => DialogReactive` | 调用 warning 类型的对话框 |
 
-### DialogOption Properties
+### DialogOptions Properties
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -83,13 +83,13 @@ use-component
 | bordered | `boolean` | 是否显示 border |
 | closable | `boolean` | 是否显示 close 图标 |
 | content | `string \| (() => VNodeChild)` | 对话框内容，可以是 render 函数 |
-| icon-placement | `'left' \| 'top'` | 图标的位置 |
+| iconPlacement | `'left' \| 'top'` | 图标的位置 |
 | icon | `() => VNodeChild` | 对话框 icon，需要是 render 函数 |
 | loading | `boolean` | 是否显示 loading 状态 |
-| mask-closable | `boolean` | 是否可以通过点击 mask 关闭对话框 |
-| negative-text | `string` | 不填对应的按钮不会出现 |
-| positive-text | `string` | 不填对应的按钮不会出现 |
-| show-icon | `boolean` | 是否显示 icon |
+| maskClosable | `boolean` | 是否可以通过点击 mask 关闭对话框 |
+| negativeText | `string` | 不填对应的按钮不会出现 |
+| positiveText | `string` | 不填对应的按钮不会出现 |
+| showIcon | `boolean` | 是否显示 icon |
 | title | `string \| (() => VNodeChild)` | 可以是 render 函数 |
 | type | `'error \| 'success' \| 'warning'` | 对话框类型 |
 | onClose | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为 |
