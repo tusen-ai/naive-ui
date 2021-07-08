@@ -7,6 +7,10 @@ import NDialog, { dialogProps, dialogPropKeys } from './Dialog'
 
 export const exposedDialogEnvProps = {
   ...dialogProps,
+  maskClosable: {
+    type: Boolean,
+    default: true
+  },
   onPositiveClick: Function as PropType<
   (e: MouseEvent) => Promise<boolean> | boolean | unknown
   >,
@@ -83,7 +87,7 @@ export default defineComponent({
           appear
           dialog
           to={props.to}
-          maskClosable={props.dialogMaskClosable}
+          maskClosable={props.maskClosable}
           onAfterLeave={handleAfterLeave}
         >
           {{

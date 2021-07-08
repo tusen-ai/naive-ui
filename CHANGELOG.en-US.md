@@ -2,7 +2,6 @@
 
 ## Pending
 
-- Fix `n-dialog` add `dialog-mask-closable` prop, closes [420](https://github.com/TuSimple/naive-ui/issues/420).
 - Fix `n-select` bug in using custom label, closes [#352](https://github.com/TuSimple/naive-ui/issues/352).
 
 ### Feats
@@ -27,6 +26,7 @@
 - `n-slider` add `tooltip` prop, closes [#362](https://github.com/TuSimple/naive-ui/issues/362).
 - `n-input` add `loading` prop.
 - `n-empty` export `icon` slot.
+- `n-dialog` add `mask-closable` prop, closes [420](https://github.com/TuSimple/naive-ui/issues/420).
 
 ### Fixes
 

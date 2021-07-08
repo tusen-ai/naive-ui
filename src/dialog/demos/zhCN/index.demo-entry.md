@@ -58,7 +58,7 @@ use-component
 | --- | --- | --- | --- |
 | bordered | `boolean` | `false` | 是否显示 border |
 | closable | `boolean` | `true` | 是否显示 close 图标 |
-| dialog-mask-closable | `boolean` | `true` | 是否可以通过点击 modal 关闭对话框 |
+| mask-closable | `boolean` | `true` | 是否可以通过点击 modal 关闭对话框 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 render 函数 |
 | icon-placement | `'left' \| 'top'` | `'left'` | 图标的位置 |
 | icon | `() => VNodeChild` | `undefined` | 对话框 icon, 需要是 render 函数 |
@@ -82,7 +82,7 @@ use-component
 | --- | --- | --- | --- |
 | bordered | `boolean` | 是否显示 border |
 | closable | `boolean` | 是否显示 close 图标 |
-| dialog-mask-closable | `boolean` | `true` | 是否可以通过点击 modal 关闭对话框 |
+| mask-closable | `boolean` | `true` | 是否可以通过点击 modal 关闭对话框 |
 | content | `string \| (() => VNodeChild)` | 对话框内容，可以是 render 函数 |
 | icon-placement | `'left' \| 'top'` | 图标的位置 |
 | icon | `() => VNodeChild` | 对话框 icon，需要是 render 函数 |

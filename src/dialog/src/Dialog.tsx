@@ -47,10 +47,6 @@ const dialogProps = {
     type: Boolean,
     default: true
   },
-  dialogMaskClosable: {
-    type: Boolean,
-    default: true
-  },
   negativeText: String,
   positiveText: String,
   content: [String, Function] as PropType<string | (() => VNodeChild)>,

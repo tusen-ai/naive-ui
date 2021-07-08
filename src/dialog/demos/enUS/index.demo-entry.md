@@ -57,7 +57,7 @@ use-component
 | --- | --- | --- | --- |
 | bordered | `boolean` | `false` | Whether to show border. |
 | closable | `boolean` | `true` | Whether to show close icon. |
-| dialog-mask-closable | `boolean` | `true` | Whether the Dialog can be closed by clicking the mask. |
+| mask-closable | `boolean` | `true` | Whether the Dialog can be closed by clicking the mask. |
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a render function. |
 | icon-placement | `'left' \| 'top'` | `'left'` | Icon placement. |
 | icon | `() => VNodeChild` | `undefined` | Render function of icon. |
@@ -81,7 +81,7 @@ All the properties can be modified dynamically.
 | --- | --- | --- | --- |
 | bordered | `boolean` | Whether to show border. |
 | closable | `boolean` | Whether to show close icon. |
-| dialog-mask-closable | `boolean` | `true` | Whether the Dialog can be closed by clicking the mask. |
+| mask-closable | `boolean` | `true` | Whether the Dialog can be closed by clicking the mask. |
 | content | `string \| (() => VNodeChild)` | Content, can be a render function. |
 | icon-placement | `'left' \| 'top'` | Icon placement. |
 | icon | `() => VNodeChild` | Render function of icon. |
