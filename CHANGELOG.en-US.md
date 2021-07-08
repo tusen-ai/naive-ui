@@ -8,6 +8,7 @@
 - Fix `n-image` doesn't accept attributes.
 - Fix `n-image` set border-radius not working, closes [#427](https://github.com/TuSimple/naive-ui/issues/427).
 - Fix `n-tab-pane` throws error when there's no children.
+- 修复 `n-select` clear button is too big in `n-spin`, closes [#454](https://github.com/TuSimple/naive-ui/issues/454).
 
 ### Feats
 
