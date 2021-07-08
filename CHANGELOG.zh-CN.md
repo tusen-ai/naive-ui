@@ -2,6 +2,20 @@
 
 ## Pending
 
+### Feats
+
+- `n-steps` 新增 `'finish'` 和 `'error'` 状态下的图标定制
+- `n-tree` 导出 `TreeDragInfo` & `TreeDropInfo` 类型
+- `n-empty` 导出 `icon` slot
+- `useDialog` 选项增加 `maskClosable` 属性，关闭 [#420](https://github.com/TuSimple/naive-ui/issues/420)
+
+### Fixes
+
+- 修复 `n-data-table` 在只有一侧固定列时固定列阴影不更新
+- 修复 `n-data-table` 在未设定 `props.scrollX` 但为每个列设定宽度后固定列阴影不更新
+- 修复 `n-result` 图片在 Safari 和手机端不显示
+- 修复 `n-drawer-content` 的 `header-style` 样式未应用于头部
+- 修复 `n-dialog` 实例调用 `destroy` 函数错误
 - 修复 `n-select` 自定义 label 的显示问题，关闭 [#352](https://github.com/TuSimple/naive-ui/issues/352)
 - 修复 `n-image-group` 当切换图片预览时，初始化缩放比例 [#423](https://github.com/TuSimple/naive-ui/issues/423)
 - 修复 `n-carousel` 设定 `autoplay` 点击后 dot active 状态不正常，关闭 [#434](https://github.com/TuSimple/naive-ui/issues/434)
@@ -11,18 +25,6 @@
 - 修复 `n-tab-pane` 再没有子节点时报错
 - 修复 `n-select` clear 按钮在 `n-spin` 内过大，关闭 [#454](https://github.com/TuSimple/naive-ui/issues/454)
 - 修复 `n-select` 选项没有被正常更新，关闭 [#441](https://github.com/TuSimple/naive-ui/issues/441)
-
-### Feats
-
-- `n-steps` 新增 `'finish'` 和 `'error'` 状态下的图标定制
-- `n-tree` 导出 `TreeDragInfo` & `TreeDropInfo` 类型
-
-### Fixes
-
-- 修复 `n-data-table` 在只有一侧固定列时固定列阴影不更新
-- 修复 `n-data-table` 在未设定 `props.scrollX` 但为每个列设定宽度后固定列阴影不更新
-- 修复 `n-result` 图片在 Safari 和手机端不显示
-- 修复 `n-drawer-content` 的 `header-style` 样式未应用于头部
 
 ## 2.15.3 (2021-07-05)
 
@@ -36,8 +38,6 @@
 - `n-auto-complete` 新增 `loading` 属性，关闭 [#241](https://github.com/TuSimple/naive-ui/issues/241)
 - `n-slider` 增加 `tooltip` 属性，关闭 [#362](https://github.com/TuSimple/naive-ui/issues/362)
 - `n-input` 新增 `loading` 属性
-- `n-empty` 导出 `icon` slot
-- `useDialog` 选项增加 `maskClosable` 属性，关闭 [#420](https://github.com/TuSimple/naive-ui/issues/420)
 
 ### Fixes
 
@@ -47,7 +47,6 @@
 - 修复 `n-carousel` 无法使用 `v-for` 的子元素
 - 修复 `n-form` `label-align` 属性失效，关闭 [#213](https://github.com/TuSimple/naive-ui/issues/213)
 - 修复 `n-data-table` 在不设定 `max-height` 时固定列阴影失效，关闭 [#376](https://github.com/TuSimple/naive-ui/issues/376)
-- 修复 `n-dialog` 实例调用 `destroy` 函数错误
 
 ## 2.15.2 (2021-07-02)
 
