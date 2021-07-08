@@ -32,10 +32,7 @@ function stepsWithIndex (steps: VNodeChild[]): Array<VNode | null> {
 
 const stepsProps = {
   ...(useTheme.props as ThemeProps<StepsTheme>),
-  current: {
-    type: Number,
-    default: undefined
-  },
+  current: Number,
   status: {
     type: String as PropType<'process' | 'finish' | 'error' | 'wait'>,
     default: 'process'
@@ -44,10 +41,7 @@ const stepsProps = {
     type: String as PropType<'small' | 'medium'>,
     default: 'medium'
   },
-  vertical: {
-    type: Boolean,
-    default: false
-  }
+  vertical: Boolean
 }
 
 export interface StepsInjection {
