@@ -355,7 +355,10 @@ export default defineComponent({
         </div>
         {arrow && !vertical && (
           <div
-            class={`${mergedClsPrefix}-carousel__arrowRight`}
+            class={[
+              `${mergedClsPrefix}-carousel__arrow`,
+              `${mergedClsPrefix}-carousel__arrow--right`
+            ]}
             role="button"
             onClick={() => {
               this.next()
@@ -366,7 +369,10 @@ export default defineComponent({
         )}
         {arrow && !vertical && (
           <div
-            class={`${mergedClsPrefix}-carousel__arrowLeft`}
+            class={[
+              `${mergedClsPrefix}-carousel__arrow`,
+              `${mergedClsPrefix}-carousel__arrow--left`
+            ]}
             role="button"
             onClick={() => {
               this.prev()
@@ -377,7 +383,10 @@ export default defineComponent({
         )}
         {arrow && vertical && (
           <div
-            class={`${mergedClsPrefix}-carousel__arrowTop`}
+            class={[
+              `${mergedClsPrefix}-carousel__arrow`,
+              `${mergedClsPrefix}-carousel__arrow--top`
+            ]}
             role="button"
             onClick={() => {
               this.prev()
@@ -388,7 +397,10 @@ export default defineComponent({
         )}
         {arrow && vertical && (
           <div
-            class={`${mergedClsPrefix}-carousel__arrowBottom`}
+            class={[
+              `${mergedClsPrefix}-carousel__arrow`,
+              `${mergedClsPrefix}-carousel__arrow--bottom`
+            ]}
             role="button"
             onClick={() => {
               this.next()

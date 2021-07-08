@@ -47,77 +47,60 @@ export default cB('carousel', `
       margin-right: 0;
     `)
   ]),
-  cE('arrowRight', `
+  cE('arrow', `
     position: absolute;
-    top: 50%;
-    right: 0;
     transition: transform .1s var(--bezier);
-    transform: translateY(-50%) scale(1);
+    transform: scale(1);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 30%;
-    width: 8%;
     color: var(--dot-color-active);
   `, [
-    c('&:hover', {
-      transform: 'translateY(-50%) scale(1.1)'
-    })
-  ]),
-  cE('arrowLeft', `
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transition: transform .1s var(--bezier);
-    transform: translateY(-50%) scale(1);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30%;
-    width: 8%;
-    color: var(--dot-color-active);
-  `, [
-    c('&:hover', {
-      transform: 'translateY(-50%) scale(1.1)'
-    })
-  ]),
-  cE('arrowTop', `
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transition: transform .1s var(--bezier);
-    transform: translateX(-50%) scale(1) rotate(-90deg);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 20%;
-    width: 8%;
-    color: var(--dot-color-active);
-  `, [
-    c('&:hover', {
-      transform: 'translateX(-50%) scale(1.1) rotate(-90deg)'
-    })
-  ]),
-  cE('arrowBottom', `
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transition: transform .1s var(--bezier);
-    transform: translateX(-50%) scale(1) rotate(-90deg);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 20%;
-    width: 8%;
-    color: var(--dot-color-active);
-  `, [
-    c('&:hover', {
-      transform: 'translateX(-50%) scale(1.1) rotate(-90deg)'
-    })
+    cM('right', `
+      transform: translateY(-50%);
+      top: 50%;
+      right: 0;
+      height: 30%;
+      width: 8%;
+    `, [
+      c('&:hover', {
+        transform: 'translateY(-50%) scale(1.1)'
+      })
+    ]),
+    cM('left', `
+      transform: translateY(-50%);
+      top: 50%;
+      left: 0;
+      height: 30%;
+      width: 8%;
+    `, [
+      c('&:hover', {
+        transform: 'translateY(-50%) scale(1.1)'
+      })
+    ]),
+    cM('top', `
+      transform: translateX(-50%) rotate(-90deg);
+      top: 0;
+      left: 50%;
+      height: 20%;
+      width: 8%;
+    `, [
+      c('&:hover', {
+        transform: 'translateX(-50%) scale(1.1) rotate(-90deg)'
+      })
+    ]),
+    cM('bottom', `
+      transform: translateX(-50%) rotate(-90deg);
+      bottom: 0;
+      left: 50%;
+      height: 20%;
+      width: 8%;
+    `, [
+      c('&:hover', {
+        transform: 'translateX(-50%) scale(1.1) rotate(-90deg)'
+      })
+    ])
   ]),
   cM('left', [
     cE('slides', `
