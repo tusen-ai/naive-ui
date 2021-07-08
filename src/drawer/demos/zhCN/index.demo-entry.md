@@ -23,40 +23,40 @@ dark-4-debug
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | content-style | `string \| Object` | `undefined` | 抽屉可滚动内容节点的样式 |
-| height | `number \| string` | `251` | 在位置是 `top` 和 `bottom` 时生效 |
+| height | `number \| string` | `251` | 抽屉的高度，在位置是 `top` 和 `bottom` 时生效 |
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |
-| native-scrollbar | `boolean` | `true` |  |
-| placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` |  |
-| show | `boolean` | `false` |  |
+| native-scrollbar | `boolean` | `true` | 是否使用原生滚动 |
+| placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | 抽屉展示的位置 |
+| show | `boolean` | `false` | 是否展示抽屉 |
 | style | `string \| Object` | `undefined` | 抽屉的样式 |
 | to | `string \| HTMLElement` | `'body'` | 抽屉出现的区域 |
-| width | `number \| string` | `251` |  |
-| on-update:show | `(show: boolean) => void` | `undefined` |  |
+| width | `number \| string` | `251` | 抽屉的宽度，在位置是 `left` 和 `right` 时生效 |
+| on-update:show | `(show: boolean) => void` | `undefined` | 抽屉显示状态改变时执行的回调函数 |
 
 ### DrawerContent Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| body-style | `string \| Object` | `undefined` | 主体的样式 |
+| body-style | `string \| Object` | `undefined` | 主体 body 的样式 |
 | body-content-style | `string \| Object` | `undefined` | 主体可滚动内容节点的样式 |
 | closable | `boolean` | `false` | 是否可关闭 |
-| footer-style | `string \| Object` | `undefined` |  |
-| header-style | `string \| Object` | `undefined` |  |
+| footer-style | `string \| Object` | `undefined` | 主体 footer 的样式 |
+| header-style | `string \| Object` | `undefined` | 主体 header 的样式 |
 | native-scrollbar | `boolean` | `true` | 主体部分是否使用原生滚动条 |
-| title | `string` | `undefined` |  |
+| title | `string` | `undefined` | 主体的标题 |
 
 ## Slots
 
 ### Drawer Slots
 
-| 名称    | 参数 | 说明 |
-| ------- | ---- | ---- |
-| default | `()` |      |
+| 名称    | 参数 | 说明       |
+| ------- | ---- | ---------- |
+| default | `()` | 抽屉的内容 |
 
 ### DrawerContent Slots
 
-| 名称    | 参数 | 说明 |
-| ------- | ---- | ---- |
-| default | `()` |      |
-| header  | `()` |      |
-| footer  | `()` |      |
+| 名称    | 参数 | 说明                     |
+| ------- | ---- | ------------------------ |
+| default | `()` | 抽屉主体的内容           |
+| footer  | `()` | 抽屉主体 footer 的内容   |
+| header  | `()` | 抽屉主体 header 的内容　 |
