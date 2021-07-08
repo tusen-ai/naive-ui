@@ -83,6 +83,42 @@ export default cB('carousel', `
       transform: 'translateY(-50%) scale(1.1)'
     })
   ]),
+  cE('arrowTop', `
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transition: transform .1s var(--bezier);
+    transform: translateX(-50%) scale(1) rotate(-90deg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    width: 8%;
+    color: var(--dot-color-active);
+  `, [
+    c('&:hover', {
+      transform: 'translateX(-50%) scale(1.1) rotate(-90deg)'
+    })
+  ]),
+  cE('arrowBottom', `
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transition: transform .1s var(--bezier);
+    transform: translateX(-50%) scale(1) rotate(-90deg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    width: 8%;
+    color: var(--dot-color-active);
+  `, [
+    c('&:hover', {
+      transform: 'translateX(-50%) scale(1.1) rotate(-90deg)'
+    })
+  ]),
   cM('left', [
     cE('slides', `
       flex-direction: column;

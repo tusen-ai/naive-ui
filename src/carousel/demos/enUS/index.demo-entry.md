@@ -9,6 +9,7 @@ basic
 autoplay
 hover
 dot-placement
+arrow
 ```
 
 ## API
@@ -17,6 +18,7 @@ dot-placement
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| arrow | `boolean` | `false` | Arrow button. |
 | autoplay | `boolean` | `false` | Whether to scroll automatically. |
 | interval | `number` | `5000` | Auto play interval. |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Dot placement in the panel. |

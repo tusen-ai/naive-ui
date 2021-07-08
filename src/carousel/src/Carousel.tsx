@@ -353,7 +353,7 @@ export default defineComponent({
             )
           })}
         </div>
-        {arrow && (
+        {arrow && !vertical && (
           <div
             class={`${mergedClsPrefix}-carousel__arrowRight`}
             role="button"
@@ -364,12 +364,34 @@ export default defineComponent({
             <ForwardIcon />
           </div>
         )}
-        {arrow && (
+        {arrow && !vertical && (
           <div
             class={`${mergedClsPrefix}-carousel__arrowLeft`}
             role="button"
             onClick={() => {
               this.prev()
+            }}
+          >
+            <BackwardIcon />
+          </div>
+        )}
+        {arrow && vertical && (
+          <div
+            class={`${mergedClsPrefix}-carousel__arrowTop`}
+            role="button"
+            onClick={() => {
+              this.prev()
+            }}
+          >
+            <ForwardIcon />
+          </div>
+        )}
+        {arrow && vertical && (
+          <div
+            class={`${mergedClsPrefix}-carousel__arrowBottom`}
+            role="button"
+            onClick={() => {
+              this.next()
             }}
           >
             <BackwardIcon />
