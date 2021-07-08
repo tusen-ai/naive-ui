@@ -1,4 +1,12 @@
-import { defineComponent, h, inject, ref, PropType, toRef } from 'vue'
+import {
+  defineComponent,
+  h,
+  inject,
+  ref,
+  PropType,
+  toRef,
+  mergeProps
+} from 'vue'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
 import { imageGroupInjectionKey } from './ImageGroup'
@@ -31,6 +39,7 @@ export type ImageProps = ExtractPublicPropTypes<typeof imageProps>
 export default defineComponent({
   name: 'Image',
   props: imageProps,
+  inheritAttrs: false,
   setup (props) {
     const imageRef = ref<HTMLImageElement | null>(null)
     const imgPropsRef = toRef(props, 'imgProps')
@@ -61,7 +70,12 @@ export default defineComponent({
   render () {
     const { mergedClsPrefix, imgProps = {} } = this
 
-    const imgNode = (
+    const imgWrapperNode = h(
+      'div',
+      mergeProps(this.$attrs, {
+        role: 'none',
+        class: `${mergedClsPrefix}-image`
+      }),
       <img
         {...imgProps}
         class={this.groupId}
@@ -76,9 +90,7 @@ export default defineComponent({
     )
 
     return this.groupId ? (
-      <div class={`${mergedClsPrefix}-image`} role="none">
-        {imgNode}
-      </div>
+      imgWrapperNode
     ) : (
       <NImagePreview
         clsPrefix={mergedClsPrefix}
@@ -86,13 +98,7 @@ export default defineComponent({
         showToolbar={this.showToolbar}
       >
         {{
-          default: () => {
-            return (
-              <div class={`${mergedClsPrefix}-image`} role="none">
-                {imgNode}
-              </div>
-            )
-          }
+          default: () => imgWrapperNode
         }}
       </NImagePreview>
     )

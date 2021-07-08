@@ -26,7 +26,10 @@ import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
 import { RenderTag } from './interface'
 import style from './styles/index.cssr'
-import type { RenderLabel, RenderLabelImpl } from '../../select-menu/src/interface'
+import type {
+  RenderLabel,
+  RenderLabelImpl
+} from '../../select-menu/src/interface'
 
 export interface InternalSelectionInst {
   focus: () => void
@@ -117,7 +120,9 @@ export default defineComponent({
     })
     const filterablePlaceholderRef = computed(() => {
       return props.selectedOption
-        ? render(props.selectedOption.label, props.selectedOption, true)
+        ? props.renderLabel
+          ? props.renderLabel(props.selectedOption as never, true)
+          : render(props.selectedOption.label, props.selectedOption, true)
         : props.placeholder
     })
     const labelRef = computed(() => {
