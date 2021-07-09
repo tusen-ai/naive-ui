@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-rate` 新增 `allow-half` 属性
+
 ## 2.15.4 (2021-07-09)
 
 ### Feats

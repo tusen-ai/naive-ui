@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-rate` add `allow-half` prop.
+
 ## 2.15.4 (2021-07-09)
 
 ### Feats

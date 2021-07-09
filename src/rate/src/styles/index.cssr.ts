@@ -16,6 +16,7 @@ export default cB('rate', {
     `)
   ]),
   cE('item', `
+    position: relative;
     display: flex;
     transition:
       transform .1s var(--bezier),
@@ -33,6 +34,27 @@ export default cB('rate', {
     }),
     c('&:not(:first-child)', {
       marginLeft: '6px'
+    }),
+    cM('active', {
+      color: 'var(--item-color-active)'
+    })
+  ]),
+  cE('item__left', `
+    display: inherit;
+    transition: inherit;
+    transform: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+`, [
+    c('&:hover', {
+      transform: 'scale(1.05)'
+    }),
+    c('&:active', {
+      transform: 'scale(0.96)'
     }),
     cM('active', {
       color: 'var(--item-color-active)'
