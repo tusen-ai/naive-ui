@@ -12,10 +12,11 @@ export default cB('rate', {
     cE('item', `
       transition:
         transform .1s var(--bezier),
-        color .1s var(--bezier);
+        color .3s var(--bezier);
     `)
   ]),
   cE('item', `
+    position: relative;
     display: flex;
     transition:
       transform .1s var(--bezier),
@@ -34,6 +35,21 @@ export default cB('rate', {
     c('&:not(:first-child)', {
       marginLeft: '6px'
     }),
+    cM('active', {
+      color: 'var(--item-color-active)'
+    })
+  ]),
+  cE('half', `
+    display: flex;
+    transition: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    overflow: hidden;
+    color: var(--item-color);
+`, [
     cM('active', {
       color: 'var(--item-color-active)'
     })

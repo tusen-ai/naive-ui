@@ -1,10 +1,15 @@
 # CHANGELOG
 
-# Pending
+## Pending
+
+### Feats
+
+- `n-rate` 新增 `allow-half` 属性
 
 ### Fixes
 
-- Fix `n-scrollbar` `content-style` 无法覆盖默认样式的宽度
+- 修复 `n-pagination` `item-count` 为 0 时页数不对
+- 修复 `n-scrollbar` `content-style` 无法覆盖默认样式的宽度
 
 ## 2.15.4 (2021-07-09)
 
@@ -14,6 +19,7 @@
 - `n-tree` 导出 `TreeDragInfo` & `TreeDropInfo` 类型
 - `n-empty` 导出 `icon` slot
 - `useDialog` 选项增加 `maskClosable` 属性，关闭 [#420](https://github.com/TuSimple/naive-ui/issues/420)
+- `n-carousel` 新增 `show-arrow` 属性
 
 ### Fixes
 

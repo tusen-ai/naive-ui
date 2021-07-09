@@ -47,6 +47,55 @@ export default cB('carousel', `
       margin-right: 0;
     `)
   ]),
+  cE('arrow', `
+    position: absolute;
+    transition: transform .1s var(--bezier);
+    transform: scale(1);
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dot-color-active);
+  `, [
+    cM('right', `
+      transform: translateY(-50%);
+      top: 50%;
+      right: 0;
+    `, [
+      c('&:hover', {
+        transform: 'translateY(-50%) scale(1.1)'
+      })
+    ]),
+    cM('left', `
+      transform: translateY(-50%);
+      top: 50%;
+      left: 0;
+    `, [
+      c('&:hover', {
+        transform: 'translateY(-50%) scale(1.1)'
+      })
+    ]),
+    cM('top', `
+      transform: translateX(-50%) rotate(90deg);
+      top: 0;
+      left: 50%;
+    `, [
+      c('&:hover', {
+        transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
+      })
+    ]),
+    cM('bottom', `
+      transform: translateX(-50%) rotate(90deg);
+      bottom: 0;
+      left: 50%;
+    `, [
+      c('&:hover', {
+        transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
+      })
+    ])
+  ]),
   cM('left', [
     cE('slides', `
       flex-direction: column;
