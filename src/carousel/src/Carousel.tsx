@@ -18,12 +18,14 @@ import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { flatten } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { BackwardIcon, ForwardIcon } from '../../_internal/icons'
 import { carouselLight } from '../styles'
 import type { CarouselTheme } from '../styles'
 import style from './styles/index.cssr'
 
 const carouselProps = {
   ...(useTheme.props as ThemeProps<CarouselTheme>),
+  showArrow: Boolean,
   autoplay: Boolean,
   dotPlacement: {
     type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
@@ -271,6 +273,7 @@ export default defineComponent({
   },
   render () {
     const {
+      showArrow,
       dotPlacement,
       mergedClsPrefix,
       current,
@@ -350,6 +353,34 @@ export default defineComponent({
             )
           })}
         </div>
+        {showArrow && [
+          <div
+            class={[
+              `${mergedClsPrefix}-carousel__arrow`,
+              `${mergedClsPrefix}-carousel__arrow--${
+                vertical ? 'bottom' : 'right'
+              }`
+            ]}
+            role="button"
+            onClick={() => {
+              this.next()
+            }}
+          >
+            <ForwardIcon />
+          </div>,
+          <div
+            class={[
+              `${mergedClsPrefix}-carousel__arrow`,
+              `${mergedClsPrefix}-carousel__arrow--${vertical ? 'top' : 'left'}`
+            ]}
+            role="button"
+            onClick={() => {
+              this.prev()
+            }}
+          >
+            <BackwardIcon />
+          </div>
+        ]}
       </div>
     )
   }
