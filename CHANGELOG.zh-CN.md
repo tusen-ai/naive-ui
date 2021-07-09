@@ -18,6 +18,7 @@
 - `n-tree` 导出 `TreeDragInfo` & `TreeDropInfo` 类型
 - `n-empty` 导出 `icon` slot
 - `useDialog` 选项增加 `maskClosable` 属性，关闭 [#420](https://github.com/TuSimple/naive-ui/issues/420)
+- `n-carousel` 新增 `show-arrow` 属性
 
 ### Fixes
 
