@@ -7,6 +7,10 @@ import NDialog, { dialogProps, dialogPropKeys } from './Dialog'
 
 export const exposedDialogEnvProps = {
   ...dialogProps,
+  maskClosable: {
+    type: Boolean,
+    default: true
+  },
   onPositiveClick: Function as PropType<
   (e: MouseEvent) => Promise<boolean> | boolean | unknown
   >,
@@ -23,10 +27,6 @@ export default defineComponent({
     internalKey: {
       type: String,
       required: true
-    },
-    maskClosable: {
-      type: Boolean,
-      default: true
     },
     to: [String, Object] as PropType<string | HTMLElement>,
     // private
@@ -79,29 +79,48 @@ export default defineComponent({
     function handleUpdateShow (value: boolean): void {
       showRef.value = value
     }
-    return () => {
-      return (
-        <NModal
-          show={showRef.value}
-          onUpdateShow={handleUpdateShow}
-          appear
-          dialog
-          to={props.to}
-          maskClosable={props.maskClosable}
-          onAfterLeave={handleAfterLeave}
-        >
-          {{
-            default: () => (
-              <NDialog
-                {...keep(props, dialogPropKeys)}
-                onClose={handleCloseClick}
-                onNegativeClick={handleNegativeClick}
-                onPositiveClick={handlePositiveClick}
-              />
-            )
-          }}
-        </NModal>
-      )
+    return {
+      show: showRef,
+      hide,
+      handleUpdateShow,
+      handleAfterLeave,
+      handleCloseClick,
+      handleNegativeClick,
+      handlePositiveClick
     }
+  },
+  render () {
+    const {
+      handlePositiveClick,
+      handleUpdateShow,
+      handleNegativeClick,
+      handleCloseClick,
+      handleAfterLeave,
+      to,
+      maskClosable,
+      show
+    } = this
+    return (
+      <NModal
+        show={show}
+        onUpdateShow={handleUpdateShow}
+        appear
+        dialog
+        to={to}
+        maskClosable={maskClosable}
+        onAfterLeave={handleAfterLeave}
+      >
+        {{
+          default: () => (
+            <NDialog
+              {...keep(this.$props, dialogPropKeys)}
+              onClose={handleCloseClick}
+              onNegativeClick={handleNegativeClick}
+              onPositiveClick={handlePositiveClick}
+            />
+          )
+        }}
+      </NModal>
+    )
   }
 })

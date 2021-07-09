@@ -15,11 +15,12 @@ icon
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| count | `number` | `5` |  |
-| value | `number` | `undefined` |  |
-| default-value | `number` | `0` |  |
-| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` |  |
-| on-update:value | `(value: number) => void` | `undefined` |  |
+| color | `string` | `undefined` | Icon color activated(support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
+| count | `number` | `5` | Icon count. |
+| default-value | `number` | `0` | Value of activated icons by default. |
+| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Icon size. |
+| value | `number` | `undefined` | Value of activated icons. |
+| on-update:value | `(value: number) => void` | `undefined` | Callback when update value. |
 
 ## Slots
 
