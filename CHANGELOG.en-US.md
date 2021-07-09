@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-select` Optimize component animation.
+
 ## 2.15.4 (2021-07-09)
 
 ### Feats

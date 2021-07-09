@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-select` 优化组件动画效果
+
 ## 2.15.4 (2021-07-09)
 
 ### Feats
