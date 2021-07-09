@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# Pending
+
+### Fixes
+
+- Fix `n-scrollbar` `content-style` can not override the default width of style.
+
 ## 2.15.4 (2021-07-09)
 
 ### Feats

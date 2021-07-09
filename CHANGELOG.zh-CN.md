@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# Pending
+
+### Fixes
+
+- Fix `n-scrollbar` `content-style` 无法覆盖默认样式的宽度
+
 ## 2.15.4 (2021-07-09)
 
 ### Feats
