@@ -52,6 +52,8 @@ export default cB('carousel', `
     transition: transform .1s var(--bezier);
     transform: scale(1);
     cursor: pointer;
+    height: 50px;
+    width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,8 +63,6 @@ export default cB('carousel', `
       transform: translateY(-50%);
       top: 50%;
       right: 0;
-      height: 30%;
-      width: 8%;
     `, [
       c('&:hover', {
         transform: 'translateY(-50%) scale(1.1)'
@@ -72,8 +72,6 @@ export default cB('carousel', `
       transform: translateY(-50%);
       top: 50%;
       left: 0;
-      height: 30%;
-      width: 8%;
     `, [
       c('&:hover', {
         transform: 'translateY(-50%) scale(1.1)'
@@ -83,8 +81,6 @@ export default cB('carousel', `
       transform: translateX(-50%) rotate(90deg);
       top: 0;
       left: 50%;
-      height: 20%;
-      width: 8%;
     `, [
       c('&:hover', {
         transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
@@ -94,8 +90,6 @@ export default cB('carousel', `
       transform: translateX(-50%) rotate(90deg);
       bottom: 0;
       left: 50%;
-      height: 20%;
-      width: 8%;
     `, [
       c('&:hover', {
         transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
