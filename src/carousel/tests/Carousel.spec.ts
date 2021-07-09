@@ -1,5 +1,7 @@
+import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NCarousel } from '../index'
+import { sleep } from 'seemly'
 
 describe('n-carousel', () => {
   it('should work with import on demand', () => {
@@ -42,5 +44,48 @@ describe('n-carousel', () => {
         ).toBe(true)
       }
     }
+  })
+
+  it('arrow button should work', async () => {
+    const wrapper = mount(NCarousel, {
+      slots: {
+        default: () => {
+          return [
+            h('img', {
+              style: 'width: 100%; height: 240px; object-fit: cover;',
+              src: 'https://s.anw.red/news/1623152423.jpg!/both/800x450/quality/78/progressive/true/ignore-error/true'
+            }),
+            h('img', {
+              style: 'width: 100%; height: 240px; object-fit: cover;',
+              src: 'https://s.anw.red/news/1623152423.jpg!/both/800x450/quality/78/progressive/true/ignore-error/true'
+            })
+          ]
+        }
+      }
+    })
+
+    await wrapper.setProps({
+      showArrow: true
+    })
+
+    const slidesDOMArray = wrapper.find('.n-carousel__slides').findAll('div')
+
+    expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
+
+    wrapper
+      .find('.n-carousel__arrow--right')
+      .trigger('click')
+      .then(async () => {
+        expect(slidesDOMArray[2].attributes('aria-hidden')).toBe('false')
+        await sleep(1000)
+        nextTick(() => {
+          wrapper
+            .find('.n-carousel__arrow--left')
+            .trigger('click')
+            .then(() => {
+              expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
+            })
+        })
+      })
   })
 })
