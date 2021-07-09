@@ -60,22 +60,10 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const allowHalfRef = toRef(props, 'allowHalf')
     const controlledValueRef = toRef(props, 'value')
     const uncontrolledValueRef = ref(props.defaultValue)
     const hoverIndexRef = ref<number | null>(null)
     const formItem = useFormItem(props)
-    const mergedSize = computed(() => {
-      const { size } = props
-      const { self } = themeRef.value
-      let mergedSize: number
-      if (typeof size === 'number') {
-        mergedSize = size
-      } else {
-        mergedSize = Number(self[createKey('size', size)].slice(0, -2))
-      }
-      return mergedSize
-    })
     function doUpdateValue (value: number): void {
       const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
@@ -89,9 +77,12 @@ export default defineComponent({
       nTriggerFormChange()
       nTriggerFormInput()
     }
-    function handleMouseMove (index: number, offset: number): void {
-      const { value: size } = mergedSize
-      if (allowHalfRef) {
+    function handleMouseMove (
+      index: number,
+      offset: number,
+      size: number
+    ): void {
+      if (props.allowHalf) {
         if (offset >= Math.floor(size / 2)) {
           hoverIndexRef.value = index + 1
         } else {
@@ -119,16 +110,23 @@ export default defineComponent({
       handleHalfClick,
       handleMouseLeave,
       cssVars: computed(() => {
+        const { size } = props
         const {
           common: { cubicBezierEaseInOut },
           self
         } = themeRef.value
         const { itemColor, itemColorActive } = self
+        let mergedSize: string
+        if (typeof size === 'number') {
+          mergedSize = `${size}px`
+        } else {
+          mergedSize = self[createKey('size', size)]
+        }
         return {
           '--bezier': cubicBezierEaseInOut,
           '--item-color': itemColor,
           '--item-color-active': props.color || itemColorActive,
-          '--item-size': `${mergedSize.value}px`
+          '--item-size': mergedSize
         }
       })
     }
@@ -159,8 +157,12 @@ export default defineComponent({
               }
             ]}
             onClick={() => this.handleClick(index)}
-            onMousemove={(e: MouseEvent) => {
-              this.handleMouseMove(index, e.offsetX)
+            onMousemove={(e) => {
+              this.handleMouseMove(
+                index,
+                e.offsetX,
+                (e.currentTarget as HTMLDivElement).offsetWidth
+              )
             }}
           >
             {defaultSlot ? (
