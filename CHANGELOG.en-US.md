@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-rate` add `allow-half` prop.
+- `n-carousel` add `show-arrow` prop.
 
 ### Fixes
 
@@ -19,7 +20,6 @@
 - `n-tree` exports `TreeDragInfo` & `TreeDropInfo` type.
 - `n-empty` export `icon` slot.
 - `useDialog` option add `maskClosable` prop, closes [#420](https://github.com/TuSimple/naive-ui/issues/420).
-- `n-carousel` add `show-arrow` prop.
 
 ### Fixes
 
