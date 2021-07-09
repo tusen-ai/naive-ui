@@ -12,7 +12,7 @@ Add some actions.
 ```
 
 ```js
-import { h, defineComponent } from 'vue'
+import { h, defineComponent, ref } from 'vue'
 import { NButton } from 'naive-ui'
 
 function createData (level = 4, baseKey = '') {
@@ -47,7 +47,7 @@ export default defineComponent({
   setup () {
     return {
       data: createData(),
-      defaultExpandedKeys: ['40', '41']
+      defaultExpandedKeys: ref(['40', '41'])
     }
   }
 })

@@ -45,24 +45,25 @@ use-component
 | Name | Type | Description |
 | --- | --- | --- |
 | destroyAll | `() => void` | Destroy all popup dialogs. |
-| create | `(options: DialogOption) => DialogReactive` | Create a dialog. |
-| error | `(options: DialogOption) => DialogReactive` | Use error type dialog. |
-| info | `(options: DialogOption) => DialogReactive` | Use info type dialog. |
-| success | `(options: DialogOption) => DialogReactive` | Use success type dialog. |
-| warning | `(options: DialogOption) => DialogReactive` | Use warning type dialog. |
+| create | `(options: DialogOptions) => DialogReactive` | Create a dialog. |
+| error | `(options: DialogOptions) => DialogReactive` | Use error type dialog. |
+| info | `(options: DialogOptions) => DialogReactive` | Use info type dialog. |
+| success | `(options: DialogOptions) => DialogReactive` | Use success type dialog. |
+| warning | `(options: DialogOptions) => DialogReactive` | Use warning type dialog. |
 
-### DialogOption Properties
+### DialogOptions Properties
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | bordered | `boolean` | `false` | Whether to show border. |
 | closable | `boolean` | `true` | Whether to show close icon. |
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a render function. |
-| icon-placement | `'left' \| 'top'` | `'left'` | Icon placement. |
+| iconPlacement | `'left' \| 'top'` | `'left'` | Icon placement. |
 | icon | `() => VNodeChild` | `undefined` | Render function of icon. |
 | loading | `boolean` | `false` | Whether to display loading status. |
-| negative-text | `string` | `undefined` | Corresponding button won't show if not set. |
-| positive-text | `string` | `undefined` | Corresponding button won't show if not set. |
+| maskClosable | `boolean` | `true` | Whether the dialog can be closed by clicking the mask. |
+| negativeText | `string` | `undefined` | Corresponding button won't show if not set. |
+| positiveText | `string` | `undefined` | Corresponding button won't show if not set. |
 | show-icon | `boolean` | `true` | Whether to show icon. |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a render function. |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |
@@ -81,11 +82,12 @@ All the properties can be modified dynamically.
 | bordered | `boolean` | Whether to show border. |
 | closable | `boolean` | Whether to show close icon. |
 | content | `string \| (() => VNodeChild)` | Content, can be a render function. |
-| icon-placement | `'left' \| 'top'` | Icon placement. |
+| iconPlacement | `'left' \| 'top'` | Icon placement. |
 | icon | `() => VNodeChild` | Render function of icon. |
 | loading | `boolean` | Whether to display loading status. |
-| negative-text | `string` | Corresponding button won't show if not set. |
-| positive-text | `string` | Corresponding button won't show if not set. |
+| maskClosable | `boolean` | Whether the dialog can be closed by clicking the mask. |
+| negativeText | `string` | Corresponding button won't show if not set. |
+| positiveText | `string` | Corresponding button won't show if not set. |
 | show-icon | `boolean` | Whether to show icon. |
 | title | `string \| (() => VNodeChild)` | Can be a render function. |
 | type | `'error \| 'success' \| 'warning'` | Dialog type. |

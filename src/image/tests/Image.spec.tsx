@@ -1,5 +1,6 @@
+import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NImage } from '../index'
+import { NImage, NImageGroup } from '../index'
 
 describe('n-image', () => {
   it('should work with import on demand', () => {
@@ -65,6 +66,23 @@ describe('n-image', () => {
     expect(document.querySelector('.n-image-preview-toolbar')).not.toEqual(null)
   })
 
+  it('should work with `image group` prop', async () => {
+    const wrapper = mount(NImageGroup, {
+      slots: {
+        default: () => [
+          h(NImage, null, {
+            default: () =>
+              'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+          }),
+          h(NImage, null, {
+            default: () =>
+              'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+          })
+        ]
+      }
+    })
+    expect(wrapper.findAll('img').length).toBe(2)
+  })
   it('should inherit attrs', () => {
     const wrapper = mount(NImage, {
       attrs: {

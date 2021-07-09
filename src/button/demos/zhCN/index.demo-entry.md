@@ -33,7 +33,7 @@ debug
 | block | `boolean` | `false` | 按钮是否显示为块级 |
 | bordered | `boolean` | `true` | 按钮是否显示 border |
 | circle | `boolean` | `false` | 按钮是否为圆形 |
-| color | `string` | `undefined` | 只支持形如 `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` 的颜色 |
+| color | `string` | `undefined` | 按钮颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |
 | dashed | `boolean` | `false` | 按钮 border 是否为虚线 |
 | disabled | `boolean` | `false` | 按钮是否禁用 |
 | ghost | `boolean` | `false` | 按钮是否透明 |
