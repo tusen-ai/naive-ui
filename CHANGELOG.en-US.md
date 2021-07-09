@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-rate` add `allow-half` prop.
+
 ## 2.15.4 (2021-07-09)
 
 ### Feats
@@ -8,7 +14,7 @@
 - `n-tree` exports `TreeDragInfo` & `TreeDropInfo` type.
 - `n-empty` export `icon` slot.
 - `useDialog` option add `maskClosable` prop, closes [#420](https://github.com/TuSimple/naive-ui/issues/420).
-- `n-rate` add `allow-half` prop
+- `n-rate` add `allow-half` prop.
 
 ### Fixes
 

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-rate` 新增 `allow-half` 属性
+
 ## 2.15.4 (2021-07-09)
 
 ### Feats
@@ -8,7 +14,6 @@
 - `n-tree` 导出 `TreeDragInfo` & `TreeDropInfo` 类型
 - `n-empty` 导出 `icon` slot
 - `useDialog` 选项增加 `maskClosable` 属性，关闭 [#420](https://github.com/TuSimple/naive-ui/issues/420)
-- `n-rate` 新增 `allow-half` 属性
 
 ### Fixes
 
