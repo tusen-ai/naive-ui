@@ -2,7 +2,7 @@
 
 ### Pending
 
-- `n-select` Optimize component animation.
+- `n-select` optimize component animation.
 
 ## 2.15.4 (2021-07-09)
 
