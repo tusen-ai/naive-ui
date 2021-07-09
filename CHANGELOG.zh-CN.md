@@ -9,6 +9,7 @@
 ### Fixes
 
 - 修复 `n-pagination` `item-count` 为 0 时页数不对
+- 修复 `n-select` placeholder transition
 
 ## 2.15.4 (2021-07-09)
 
