@@ -5,6 +5,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --dot-color
 // --dot-color-active
 // --dot-size
+// --arrow-color
 export default cB('carousel', `
   overflow: hidden;
   position: relative;
@@ -49,15 +50,15 @@ export default cB('carousel', `
   ]),
   cE('arrow', `
     position: absolute;
-    transition: transform .1s var(--bezier);
+    transition: transform .3s var(--bezier);
     transform: scale(1);
     cursor: pointer;
-    height: 50px;
-    width: 50px;
+    height: 48px;
+    width: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--dot-color-active);
+    color: var(--arrow-color);
   `, [
     cM('right', `
       transform: translateY(-50%);
@@ -66,6 +67,9 @@ export default cB('carousel', `
     `, [
       c('&:hover', {
         transform: 'translateY(-50%) scale(1.1)'
+      }),
+      c('&:active', {
+        transform: 'translateY(-50%) scale(1)'
       })
     ]),
     cM('left', `

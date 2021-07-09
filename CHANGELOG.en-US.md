@@ -5,11 +5,13 @@
 ### Feats
 
 - `n-rate` add `allow-half` prop.
+- `n-carousel` add `show-arrow` prop.
 
 ### Fixes
 
 - Fix `n-pagination` page count is not correct when `item-count` is 0.
 - Fix `n-scrollbar` `content-style` can not override the default width of style.
+- Fix `n-select` placeholder transition.
 
 ## 2.15.4 (2021-07-09)
 
@@ -19,7 +21,6 @@
 - `n-tree` exports `TreeDragInfo` & `TreeDropInfo` type.
 - `n-empty` export `icon` slot.
 - `useDialog` option add `maskClosable` prop, closes [#420](https://github.com/TuSimple/naive-ui/issues/420).
-- `n-carousel` add `show-arrow` prop.
 
 ### Fixes
 

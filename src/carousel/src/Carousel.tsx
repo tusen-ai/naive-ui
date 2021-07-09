@@ -14,11 +14,11 @@ import {
 } from 'vue'
 import { indexMap } from 'seemly'
 import { on, off } from 'evtd'
+import { BackwardIcon, ForwardIcon } from '../../_internal/icons'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { flatten } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { BackwardIcon, ForwardIcon } from '../../_internal/icons'
 import { carouselLight } from '../styles'
 import type { CarouselTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -260,13 +260,14 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { dotColor, dotColorActive, dotSize }
+          self: { dotColor, dotColorActive, dotSize, arrowColor }
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
           '--dot-color': dotColor,
           '--dot-color-active': dotColorActive,
-          '--dot-size': dotSize
+          '--dot-size': dotSize,
+          '--arrow-color': arrowColor
         }
       })
     }
