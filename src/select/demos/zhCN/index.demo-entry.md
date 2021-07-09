@@ -71,11 +71,11 @@ options-change-debug
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| class | `string` |  |
-| disabled | `boolean` |  |
+| class | `string` | 自定义一个选项的类名 |
+| disabled | `boolean` | 是否禁用一个选项 |
 | label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | 选项的标签，注意如果你使用了渲染函数，默认的过滤器将会过滤该选项 |
 | render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | Render the entire option. |
-| style | `string \| object` |  |
+| style | `string \| object` | 自定义一个选项的样式 |
 | value | `string \| number` | 在选项中应该是唯一的 |
 
 ### SelectGroupOption Properties
