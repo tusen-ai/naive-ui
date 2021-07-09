@@ -10,6 +10,7 @@
 ### Fixes
 
 - Fix `n-pagination` page count is not correct when `item-count` is 0.
+- Fix `n-scrollbar` `content-style` can not override the default width of style.
 - Fix `n-select` placeholder transition.
 
 ## 2.15.4 (2021-07-09)
