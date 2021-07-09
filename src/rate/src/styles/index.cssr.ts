@@ -12,7 +12,7 @@ export default cB('rate', {
     cE('item', `
       transition:
         transform .1s var(--bezier),
-        color .1s var(--bezier);
+        color .3s var(--bezier);
     `)
   ]),
   cE('item', `
@@ -39,23 +39,17 @@ export default cB('rate', {
       color: 'var(--item-color-active)'
     })
   ]),
-  cE('item__left', `
-    display: inherit;
+  cE('half', `
+    display: flex;
     transition: inherit;
-    transform: inherit;
     position: absolute;
     top: 0;
     left: 0;
+    bottom: 0;
     width: 50%;
-    height: 100%;
     overflow: hidden;
+    color: var(--item-color);
 `, [
-    c('&:hover', {
-      transform: 'scale(1.05)'
-    }),
-    c('&:active', {
-      transform: 'scale(0.96)'
-    }),
     cM('active', {
       color: 'var(--item-color-active)'
     })
