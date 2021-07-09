@@ -1,7 +1,7 @@
-# 显示箭头按钮
+# Show Arrow Button
 
 ```html
-<n-carousel arrow>
+<n-carousel show-arrow>
   <img
     class="carousel-img"
     src="https://s.anw.red/fav/1623979004.jpg!/fw/600/quality/77/ignore-error/true"

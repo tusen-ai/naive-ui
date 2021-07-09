@@ -80,25 +80,25 @@ export default cB('carousel', `
       })
     ]),
     cM('top', `
-      transform: translateX(-50%) rotate(-90deg);
+      transform: translateX(-50%) rotate(90deg);
       top: 0;
       left: 50%;
       height: 20%;
       width: 8%;
     `, [
       c('&:hover', {
-        transform: 'translateX(-50%) scale(1.1) rotate(-90deg)'
+        transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
       })
     ]),
     cM('bottom', `
-      transform: translateX(-50%) rotate(-90deg);
+      transform: translateX(-50%) rotate(90deg);
       bottom: 0;
       left: 50%;
       height: 20%;
       width: 8%;
     `, [
       c('&:hover', {
-        transform: 'translateX(-50%) scale(1.1) rotate(-90deg)'
+        transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
       })
     ])
   ]),

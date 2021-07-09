@@ -25,7 +25,7 @@ import style from './styles/index.cssr'
 
 const carouselProps = {
   ...(useTheme.props as ThemeProps<CarouselTheme>),
-  arrow: Boolean,
+  showArrow: Boolean,
   autoplay: Boolean,
   dotPlacement: {
     type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
@@ -273,7 +273,7 @@ export default defineComponent({
   },
   render () {
     const {
-      arrow,
+      showArrow,
       dotPlacement,
       mergedClsPrefix,
       current,
@@ -353,11 +353,13 @@ export default defineComponent({
             )
           })}
         </div>
-        {arrow && !vertical && (
+        {showArrow && [
           <div
             class={[
               `${mergedClsPrefix}-carousel__arrow`,
-              `${mergedClsPrefix}-carousel__arrow--right`
+              `${mergedClsPrefix}-carousel__arrow--${
+                vertical ? 'bottom' : 'right'
+              }`
             ]}
             role="button"
             onClick={() => {
@@ -365,13 +367,11 @@ export default defineComponent({
             }}
           >
             <ForwardIcon />
-          </div>
-        )}
-        {arrow && !vertical && (
+          </div>,
           <div
             class={[
               `${mergedClsPrefix}-carousel__arrow`,
-              `${mergedClsPrefix}-carousel__arrow--left`
+              `${mergedClsPrefix}-carousel__arrow--${vertical ? 'top' : 'left'}`
             ]}
             role="button"
             onClick={() => {
@@ -380,35 +380,7 @@ export default defineComponent({
           >
             <BackwardIcon />
           </div>
-        )}
-        {arrow && vertical && (
-          <div
-            class={[
-              `${mergedClsPrefix}-carousel__arrow`,
-              `${mergedClsPrefix}-carousel__arrow--top`
-            ]}
-            role="button"
-            onClick={() => {
-              this.prev()
-            }}
-          >
-            <ForwardIcon />
-          </div>
-        )}
-        {arrow && vertical && (
-          <div
-            class={[
-              `${mergedClsPrefix}-carousel__arrow`,
-              `${mergedClsPrefix}-carousel__arrow--bottom`
-            ]}
-            role="button"
-            onClick={() => {
-              this.next()
-            }}
-          >
-            <BackwardIcon />
-          </div>
-        )}
+        ]}
       </div>
     )
   }
