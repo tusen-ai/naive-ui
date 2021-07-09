@@ -65,11 +65,11 @@ render-tag
 
 | Name | Type | Description |
 | --- | --- | --- |
-| class | `string` |  |
-| disabled | `boolean` |  |
+| class | `string` | Customize the class name of the option. |
+| disabled | `boolean` | Whether to disable the option. |
 | label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | Label of the option. Note that if you are using render function, the default filter will filter the option. |
 | render | `(info: { node: VNode }) => VNodeChild` | Render the entire option. |
-| style | `string` |  |
+| style | `string` | Customize the style of the option. |
 | value | `string \| number` | Should be unique in options. |
 
 ### SelectGroupOption Properties
