@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### Feats
+### Pending
 
 - `n-select` Optimize component animation.
 

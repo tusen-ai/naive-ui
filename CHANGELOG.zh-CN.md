@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### Feats
+### Pending
 
 - `n-select` 优化组件动画效果
 
