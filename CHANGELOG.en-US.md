@@ -6,6 +6,10 @@
 
 - `n-rate` add `allow-half` prop.
 
+### Fixes
+
+- Fix `n-pagination` page count is not correct when `item-count` is 0.
+
 ## 2.15.4 (2021-07-09)
 
 ### Feats

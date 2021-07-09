@@ -6,6 +6,10 @@
 
 - `n-rate` 新增 `allow-half` 属性
 
+### Fixes
+
+- 修复 `n-pagination` `item-count` 为 0 时页数不对
+
 ## 2.15.4 (2021-07-09)
 
 ### Feats
