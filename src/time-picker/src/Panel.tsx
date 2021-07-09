@@ -14,6 +14,10 @@ import PanelCol, { Item } from './PanelCol'
 export default defineComponent({
   name: 'TimePickerPanel',
   props: {
+    actions: {
+      type: Array as PropType<Array<'now'>>,
+      default: () => ['now']
+    },
     showHour: {
       type: Boolean,
       default: true
@@ -156,10 +160,10 @@ export default defineComponent({
               class={[
                 `${mergedClsPrefix}-time-picker-col`,
                 {
-                  [`${mergedClsPrefix}-time-picker-col--invalid`]: this
-                    .isHourInvalid,
-                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]: this
-                    .transitionDisabled
+                  [`${mergedClsPrefix}-time-picker-col--invalid`]:
+                    this.isHourInvalid,
+                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]:
+                    this.transitionDisabled
                 }
               ]}
             >
@@ -189,10 +193,10 @@ export default defineComponent({
               class={[
                 `${mergedClsPrefix}-time-picker-col`,
                 {
-                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]: this
-                    .transitionDisabled,
-                  [`${mergedClsPrefix}-time-picker-col--invalid`]: this
-                    .isMinuteInvalid
+                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]:
+                    this.transitionDisabled,
+                  [`${mergedClsPrefix}-time-picker-col--invalid`]:
+                    this.isMinuteInvalid
                 }
               ]}
             >
@@ -222,10 +226,10 @@ export default defineComponent({
               class={[
                 `${mergedClsPrefix}-time-picker-col`,
                 {
-                  [`${mergedClsPrefix}-time-picker-col--invalid`]: this
-                    .isSecondInvalid,
-                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]: this
-                    .transitionDisabled
+                  [`${mergedClsPrefix}-time-picker-col--invalid`]:
+                    this.isSecondInvalid,
+                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]:
+                    this.transitionDisabled
                 }
               ]}
             >
@@ -252,14 +256,16 @@ export default defineComponent({
           ) : null}
         </div>,
         <div class={`${mergedClsPrefix}-time-picker-actions`}>
-          <NButton
-            size="tiny"
-            theme={mergedTheme.peers.Button}
-            themeOverrides={mergedTheme.peerOverrides.Button}
-            onClick={this.onNowClick}
-          >
-            {{ default: () => this.nowText }}
-          </NButton>
+          {this.actions?.includes('now') ? (
+            <NButton
+              size="tiny"
+              theme={mergedTheme.peers.Button}
+              themeOverrides={mergedTheme.peerOverrides.Button}
+              onClick={this.onNowClick}
+            >
+              {{ default: () => this.nowText }}
+            </NButton>
+          ) : null}
           <NButton
             size="tiny"
             type="primary"

@@ -7,6 +7,7 @@
 - `n-rate` 新增 `allow-half` 属性
 - `n-carousel` 新增 `show-arrow` 属性
 - `n-slider` 新增 `format-tooltip` 属性.
+- `n-time-picker` 增加 `actions` 属性, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401).
 
 ### Fixes
 
