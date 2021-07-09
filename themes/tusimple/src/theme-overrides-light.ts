@@ -316,7 +316,7 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     inputWidth: '80px',
     selectWidth: '100px',
     inputMargin: '0 20px',
-    itemMargin: '0 20px 0 0',
+    itemMargin: '0 0 0 20px',
     itemBorder: '0 solid #0000',
     itemBorderHover: '0 solid #0000',
     itemBorderActive: '0 solid #0000',
