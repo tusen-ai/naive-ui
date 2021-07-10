@@ -3,7 +3,7 @@
 `n-dynamic-input` 并不能作为一个单独的表项检验，如果你需要检验 `n-dynamic-input` 里面的内容，可以在自定义内容中传入 `n-form-item` 来完成数据的检验。下面是一个完整的例子。
 
 ```html
-<n-form :model="model" ref="form">
+<n-form :model="model">
   <n-dynamic-input
     item-style="margin-bottom: 0;"
     v-model:value="model.dynamicInputValue"
@@ -53,8 +53,10 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
       dynamicInputRule: {
         trigger: 'input',
@@ -63,18 +65,16 @@ export default {
           return true
         }
       },
-      model: {
+      model: ref({
         dynamicInputValue: [{ value: '', name: '' }]
-      }
-    }
-  },
-  methods: {
-    onCreate () {
-      return {
-        name: '',
-        value: ''
+      }),
+      onCreate () {
+        return {
+          name: '',
+          value: ''
+        }
       }
     }
   }
-}
+})
 ```
