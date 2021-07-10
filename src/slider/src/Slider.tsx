@@ -788,7 +788,6 @@ export default defineComponent({
   },
   render () {
     const { mergedClsPrefix, formatTooltip } = this
-
     return (
       <div
         class={[
