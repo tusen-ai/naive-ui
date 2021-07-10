@@ -19,6 +19,7 @@ disable-tooltip
 | --- | --- | --- | --- |
 | default-value | `number \| [number, number] \| null` | `null` | 默认值 |
 | disabled | `boolean` | `false` | 是否禁用 |
+| format-tooltip | `(value: number) => string \| number` | `undefined` | 格式化 tooltip |
 | marks | `{ [markValue: number]: string }` | `undefined` | Slider 上的标记 |
 | max | `number` | `100` | 最大值 |
 | min | `number` | `0` | 最小值 |
