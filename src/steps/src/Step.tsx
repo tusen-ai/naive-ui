@@ -37,7 +37,12 @@ export default defineComponent({
 
     if (!NSteps) throwError('step', '`n-step` must be placed inside `n-steps`.')
 
-    const { props: stepsProps, mergedThemeRef, mergedClsPrefixRef } = NSteps
+    const {
+      props: stepsProps,
+      mergedThemeRef,
+      mergedClsPrefixRef,
+      stepsSlots
+    } = NSteps
 
     const verticalRef = computed(() => {
       return stepsProps.vertical
@@ -63,6 +68,7 @@ export default defineComponent({
       }
     )
     return {
+      stepsSlots,
       mergedClsPrefix: mergedClsPrefixRef,
       vertical: verticalRef,
       mergedStatus: mergedStatusRef,
@@ -119,7 +125,7 @@ export default defineComponent({
             <NIconSwitchTransition>
               {{
                 default: () => {
-                  const { mergedStatus } = this
+                  const { mergedStatus, stepsSlots } = this
                   return !(
                     mergedStatus === 'finish' || mergedStatus === 'error'
                   ) ? (
@@ -131,11 +137,27 @@ export default defineComponent({
                     </div>
                       ) : mergedStatus === 'finish' ? (
                     <NBaseIcon clsPrefix={mergedClsPrefix} key="finish">
-                      {{ default: () => <FinishedIcon /> }}
+                      {{
+                        default: () =>
+                          renderSlot(
+                            stepsSlots,
+                            'finish-icon',
+                            undefined,
+                            () => [<FinishedIcon />]
+                          )
+                      }}
                     </NBaseIcon>
                       ) : mergedStatus === 'error' ? (
                     <NBaseIcon clsPrefix={mergedClsPrefix} key="error">
-                      {{ default: () => <ErrorIcon /> }}
+                      {{
+                        default: () =>
+                          renderSlot(
+                            stepsSlots,
+                            'error-icon',
+                            undefined,
+                            () => [<ErrorIcon />]
+                          )
+                      }}
                     </NBaseIcon>
                       ) : null
                 }

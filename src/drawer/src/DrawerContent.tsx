@@ -65,10 +65,9 @@ export default defineComponent({
           nativeScrollbar &&
             `${mergedClsPrefix}-drawer-content--native-scrollbar`
         ]}
-        style={headerStyle}
       >
         {$slots.header || title || closable ? (
-          <div class={`${mergedClsPrefix}-drawer-header`}>
+          <div class={`${mergedClsPrefix}-drawer-header`} style={headerStyle}>
             <div class={`${mergedClsPrefix}-drawer-header__main`}>
               {$slots.header !== undefined ? $slots.header() : title}
             </div>

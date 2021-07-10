@@ -12,11 +12,11 @@ vertical
 
 ## Props
 
-| Name            | Type                            | Default    | Description |
-| --------------- | ------------------------------- | ---------- | ----------- |
-| dashed          | `boolean`                       | `false`    |             |
-| title-placement | `'left' \| 'right' \| 'center'` | `'center'` |             |
-| vertical        | `boolean`                       | `false`    |             |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| dashed | `boolean` | `false` | Whether to show dashed line. |
+| title-placement | `'left' \| 'right' \| 'center'` | `'center'` | Title placement. |
+| vertical | `boolean` | `false` | Whether to show vertical direction. |
 
 ## Slots
 

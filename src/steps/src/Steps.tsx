@@ -7,7 +7,8 @@ import {
   VNodeChild,
   InjectionKey,
   ExtractPropTypes,
-  Ref
+  Ref,
+  Slots
 } from 'vue'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
 import { useConfig, useTheme } from '../../_mixins'
@@ -31,10 +32,7 @@ function stepsWithIndex (steps: VNodeChild[]): Array<VNode | null> {
 
 const stepsProps = {
   ...(useTheme.props as ThemeProps<StepsTheme>),
-  current: {
-    type: Number,
-    default: undefined
-  },
+  current: Number,
   status: {
     type: String as PropType<'process' | 'finish' | 'error' | 'wait'>,
     default: 'process'
@@ -43,16 +41,14 @@ const stepsProps = {
     type: String as PropType<'small' | 'medium'>,
     default: 'medium'
   },
-  vertical: {
-    type: Boolean,
-    default: false
-  }
+  vertical: Boolean
 }
 
 export interface StepsInjection {
   props: ExtractPropTypes<typeof stepsProps>
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<StepsTheme>>
+  stepsSlots: Slots
 }
 
 export type StepsProps = ExtractPublicPropTypes<typeof stepsProps>
@@ -62,7 +58,7 @@ export const stepsInjectionKey: InjectionKey<StepsInjection> = Symbol('steps')
 export default defineComponent({
   name: 'Steps',
   props: stepsProps,
-  setup (props) {
+  setup (props, { slots }) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Steps',
@@ -75,7 +71,8 @@ export default defineComponent({
     provide(stepsInjectionKey, {
       props,
       mergedThemeRef: themeRef,
-      mergedClsPrefixRef
+      mergedClsPrefixRef,
+      stepsSlots: slots
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef

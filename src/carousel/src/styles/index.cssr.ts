@@ -5,6 +5,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --dot-color
 // --dot-color-active
 // --dot-size
+// --arrow-color
 export default cB('carousel', `
   overflow: hidden;
   position: relative;
@@ -46,6 +47,58 @@ export default cB('carousel', `
     c('&:last-child', `
       margin-right: 0;
     `)
+  ]),
+  cE('arrow', `
+    position: absolute;
+    transition: transform .3s var(--bezier);
+    transform: scale(1);
+    cursor: pointer;
+    height: 48px;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--arrow-color);
+  `, [
+    cM('right', `
+      transform: translateY(-50%);
+      top: 50%;
+      right: 0;
+    `, [
+      c('&:hover', {
+        transform: 'translateY(-50%) scale(1.1)'
+      }),
+      c('&:active', {
+        transform: 'translateY(-50%) scale(1)'
+      })
+    ]),
+    cM('left', `
+      transform: translateY(-50%);
+      top: 50%;
+      left: 0;
+    `, [
+      c('&:hover', {
+        transform: 'translateY(-50%) scale(1.1)'
+      })
+    ]),
+    cM('top', `
+      transform: translateX(-50%) rotate(90deg);
+      top: 0;
+      left: 50%;
+    `, [
+      c('&:hover', {
+        transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
+      })
+    ]),
+    cM('bottom', `
+      transform: translateX(-50%) rotate(90deg);
+      bottom: 0;
+      left: 50%;
+    `, [
+      c('&:hover', {
+        transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
+      })
+    ])
   ]),
   cM('left', [
     cE('slides', `

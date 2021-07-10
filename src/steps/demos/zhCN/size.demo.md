@@ -50,30 +50,32 @@
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
 import { MdArrowRoundBack, MdArrowRoundForward } from '@vicons/ionicons4'
 
-export default {
+export default defineComponent({
   components: {
     MdArrowRoundBack,
     MdArrowRoundForward
   },
-  data () {
-    return {
-      current: 1,
-      currentStatus: 'process'
+  setup () {
+    const current = ref(1)
+    function next () {
+      if (current.value === null) current.value = 1
+      else if (current.value >= 4) current.value = null
+      else current.value++
     }
-  },
-  methods: {
-    next () {
-      if (this.current === null) this.current = 1
-      else if (this.current >= 4) this.current = null
-      else this.current++
-    },
-    prev () {
-      if (this.current === 0) this.current = null
-      else if (this.current === null) this.current = 4
-      else this.current--
+    function prev () {
+      if (current.value === 0) current.value = null
+      else if (current.value === null) current.value = 4
+      else current.value--
+    }
+    return {
+      currentStatus: ref('process'),
+      current,
+      next,
+      prev
     }
   }
-}
+})
 ```

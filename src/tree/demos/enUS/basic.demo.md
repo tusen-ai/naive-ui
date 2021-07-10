@@ -12,7 +12,7 @@ Fortunately, the tree is now alive and it's not balanced.
 ```
 
 ```js
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 function createData (level = 4, baseKey = '') {
   if (!level) return undefined
@@ -37,7 +37,7 @@ export default defineComponent({
   setup () {
     return {
       data: createData(),
-      defaultExpandedKeys: ['40', '41']
+      defaultExpandedKeys: ref(['40', '41'])
     }
   }
 })

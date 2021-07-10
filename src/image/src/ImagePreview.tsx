@@ -152,6 +152,14 @@ export default defineComponent({
 
     let scale = 1
     let rotate = 0
+    function handleSwitchPrev (): void {
+      scale = 1
+      props.onPrev?.()
+    }
+    function handleSwitchNext (): void {
+      scale = 1
+      props.onNext?.()
+    }
     function rotateCounterclockwise (): void {
       rotate -= 90
       derivePreviewStyle()
@@ -230,6 +238,8 @@ export default defineComponent({
       zoomOut,
       rotateCounterclockwise,
       rotateClockwise,
+      handleSwitchPrev,
+      handleSwitchNext,
       ...exposedMethods,
       cssVars: computed(() => {
         const {
@@ -286,13 +296,13 @@ export default defineComponent({
                                     <>
                                       <NBaseIcon
                                         clsPrefix={clsPrefix}
-                                        onClick={this.onPrev}
+                                        onClick={this.handleSwitchPrev}
                                       >
                                         {{ default: () => prevIcon }}
                                       </NBaseIcon>
                                       <NBaseIcon
                                         clsPrefix={clsPrefix}
-                                        onClick={this.onNext}
+                                        onClick={this.handleSwitchNext}
                                       >
                                         {{ default: () => nextIcon }}
                                       </NBaseIcon>

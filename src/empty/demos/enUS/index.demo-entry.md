@@ -6,19 +6,22 @@ E<span style="opacity: 0;">mpt</span>y.
 
 ```demo
 basic
+icon
+size
 ```
 
 ## Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| description | `string` | `'No Data'` |  |
-| show-description | `boolean` | `true` |  |
-| size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` |  |
+| description | `string` | `'No Data'` | Description of the empty. |
+| show-description | `boolean` | `true` | Whether to show description of empty. |
+| size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | Empty's size. |
 
 ## Slots
 
 | Name    | Parameters | Description                  |
 | ------- | ---------- | ---------------------------- |
 | default | `()`       | In place of description prop |
-| extra   | `()`       |                              |
+| extra   | `()`       | Extra content.               |
+| icon    | `()`       | Custom icon.                 |
