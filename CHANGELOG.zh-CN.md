@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-rate` 新增 `allow-half` 属性
+- `n-carousel` 新增 `show-arrow` 属性
+
+### Fixes
+
+- 修复 `n-pagination` `item-count` 为 0 时页数不对
+- 修复 `n-scrollbar` `content-style` 无法覆盖默认样式的宽度
+- 修复 `n-select` placeholder transition
+
 ## 2.15.4 (2021-07-09)
 
 ### Feats

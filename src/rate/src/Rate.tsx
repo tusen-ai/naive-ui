@@ -21,6 +21,7 @@ import StarIcon from './StarIcon'
 
 const rateProps = {
   ...(useTheme.props as ThemeProps<RateTheme>),
+  allowHalf: Boolean,
   count: {
     type: Number,
     default: 5
@@ -76,21 +77,39 @@ export default defineComponent({
       nTriggerFormChange()
       nTriggerFormInput()
     }
-    function handleMouseEnter (index: number): void {
-      hoverIndexRef.value = index
+    function getDerivedValue (index: number, e: MouseEvent): number {
+      if (props.allowHalf) {
+        if (
+          e.offsetX >=
+          Math.floor((e.currentTarget as HTMLDivElement).offsetWidth / 2)
+        ) {
+          return index + 1
+        } else {
+          return index + 0.5
+        }
+      } else {
+        return index + 1
+      }
+    }
+    function handleMouseMove (index: number, e: MouseEvent): void {
+      hoverIndexRef.value = getDerivedValue(index, e)
     }
     function handleMouseLeave (): void {
       hoverIndexRef.value = null
     }
-    function handleClick (index: number): void {
-      doUpdateValue(index + 1)
+    function handleClick (index: number, e: MouseEvent): void {
+      doUpdateValue(getDerivedValue(index, e))
+    }
+    function handleHalfClick (index: number): void {
+      doUpdateValue(index + 0.5)
     }
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       hoverIndex: hoverIndexRef,
-      handleMouseEnter,
+      handleMouseMove,
       handleClick,
+      handleHalfClick,
       handleMouseLeave,
       cssVars: computed(() => {
         const { size } = props
@@ -127,30 +146,52 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
         onMouseleave={this.handleMouseLeave}
       >
-        {renderList(this.count, (_, index) => (
-          <div
-            key={index}
-            class={[
-              `${mergedClsPrefix}-rate__item`,
-              {
-                [`${mergedClsPrefix}-rate__item--active`]:
-                  hoverIndex !== null
-                    ? index <= hoverIndex
-                    : index < mergedValue
-              }
-            ]}
-            onClick={() => this.handleClick(index)}
-            onMouseenter={() => this.handleMouseEnter(index)}
-          >
-            {defaultSlot ? (
-              defaultSlot()
-            ) : (
-              <NBaseIcon clsPrefix={mergedClsPrefix}>
-                {{ default: () => StarIcon }}
-              </NBaseIcon>
-            )}
-          </div>
-        ))}
+        {renderList(this.count, (_, index) => {
+          const icon = defaultSlot ? (
+            defaultSlot()
+          ) : (
+            <NBaseIcon clsPrefix={mergedClsPrefix}>
+              {{ default: () => StarIcon }}
+            </NBaseIcon>
+          )
+          return (
+            <div
+              key={index}
+              class={[
+                `${mergedClsPrefix}-rate__item`,
+                {
+                  [`${mergedClsPrefix}-rate__item--active`]:
+                    hoverIndex !== null
+                      ? index + 1 <= hoverIndex
+                      : index + 1 <= mergedValue
+                }
+              ]}
+              onClick={(e) => {
+                this.handleClick(index, e)
+              }}
+              onMousemove={(e) => {
+                this.handleMouseMove(index, e)
+              }}
+            >
+              {icon}
+              {this.allowHalf ? (
+                <div
+                  class={[
+                    `${mergedClsPrefix}-rate__half`,
+                    {
+                      [`${mergedClsPrefix}-rate__half--active`]:
+                        hoverIndex !== null
+                          ? index + 0.5 <= hoverIndex
+                          : index + 0.5 <= mergedValue
+                    }
+                  ]}
+                >
+                  {icon}
+                </div>
+              ) : null}
+            </div>
+          )
+        })}
       </div>
     )
   }

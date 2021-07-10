@@ -9,12 +9,14 @@ basic
 size
 color
 icon
+allow-half
 ```
 
 ## Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| allow-half | `boolean` | `false` | Allow activated half of the icon. |
 | color | `string` | `undefined` | Icon color activated(support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
 | count | `number` | `5` | Icon count. |
 | default-value | `number` | `0` | Value of activated icons by default. |
