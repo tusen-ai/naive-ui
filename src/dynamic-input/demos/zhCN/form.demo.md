@@ -53,28 +53,28 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, reactive } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
       dynamicInputRule: {
         trigger: 'input',
         validator (rule, value) {
-          if (value.length >= 5) return new Error('最多输入四个字符')
+          if (value.length >= 5) return new Error('Input up to 4 characters')
           return true
         }
       },
-      model: {
+      model: reactive({
         dynamicInputValue: [{ value: '', name: '' }]
-      }
-    }
-  },
-  methods: {
-    onCreate () {
-      return {
-        name: '',
-        value: ''
+      }),
+      onCreate () {
+        return {
+          name: '',
+          value: ''
+        }
       }
     }
   }
-}
+})
 ```

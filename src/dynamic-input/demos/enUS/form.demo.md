@@ -55,8 +55,10 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, reactive } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
       dynamicInputRule: {
         trigger: 'input',
@@ -65,18 +67,16 @@ export default {
           return true
         }
       },
-      model: {
+      model: reactive({
         dynamicInputValue: [{ value: '', name: '' }]
-      }
-    }
-  },
-  methods: {
-    onCreate () {
-      return {
-        name: '',
-        value: ''
+      }),
+      onCreate () {
+        return {
+          name: '',
+          value: ''
+        }
       }
     }
   }
-}
+})
 ```
