@@ -10,6 +10,7 @@ size
 color
 icon
 allow-half
+disabled
 ```
 
 ## Props
@@ -19,6 +20,7 @@ allow-half
 | allow-half | `boolean` | `false` | Allow activated half of the icon. |
 | color | `string` | `undefined` | Icon color activated(support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
 | count | `number` | `5` | Icon count. |
+| disabled | `boolean` | `false` | Read only. |
 | default-value | `number` | `0` | Value of activated icons by default. |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Icon size. |
 | value | `number` | `undefined` | Value of activated icons. |

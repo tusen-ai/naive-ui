@@ -37,7 +37,17 @@ export default cB('rate', {
     }),
     cM('active', {
       color: 'var(--item-color-active)'
-    })
+    }),
+    cM('disabled', {
+      cursor: 'default'
+    }, [
+      c('&:hover', {
+        transform: 'none'
+      }),
+      c('&:active', {
+        transform: 'none'
+      })
+    ])
   ]),
   cE('half', `
     display: flex;
@@ -52,6 +62,9 @@ export default cB('rate', {
 `, [
     cM('active', {
       color: 'var(--item-color-active)'
+    }),
+    cM('disabled', {
+      cursor: 'default'
     })
   ])
 ])

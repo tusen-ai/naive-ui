@@ -22,6 +22,7 @@ import StarIcon from './StarIcon'
 const rateProps = {
   ...(useTheme.props as ThemeProps<RateTheme>),
   allowHalf: Boolean,
+  disabled: Boolean,
   count: {
     type: Number,
     default: 5
@@ -100,16 +101,12 @@ export default defineComponent({
     function handleClick (index: number, e: MouseEvent): void {
       doUpdateValue(getDerivedValue(index, e))
     }
-    function handleHalfClick (index: number): void {
-      doUpdateValue(index + 0.5)
-    }
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       hoverIndex: hoverIndexRef,
       handleMouseMove,
       handleClick,
-      handleHalfClick,
       handleMouseLeave,
       cssVars: computed(() => {
         const { size } = props
@@ -135,6 +132,7 @@ export default defineComponent({
   },
   render () {
     const {
+      disabled,
       hoverIndex,
       mergedValue,
       mergedClsPrefix,
@@ -163,14 +161,15 @@ export default defineComponent({
                   [`${mergedClsPrefix}-rate__item--active`]:
                     hoverIndex !== null
                       ? index + 1 <= hoverIndex
-                      : index + 1 <= mergedValue
+                      : index + 1 <= mergedValue,
+                  [`${mergedClsPrefix}-rate__item--disabled`]: disabled
                 }
               ]}
               onClick={(e) => {
-                this.handleClick(index, e)
+                !disabled && this.handleClick(index, e)
               }}
               onMousemove={(e) => {
-                this.handleMouseMove(index, e)
+                !disabled && this.handleMouseMove(index, e)
               }}
             >
               {icon}
@@ -182,7 +181,8 @@ export default defineComponent({
                       [`${mergedClsPrefix}-rate__half--active`]:
                         hoverIndex !== null
                           ? index + 0.5 <= hoverIndex
-                          : index + 0.5 <= mergedValue
+                          : index + 0.5 <= mergedValue,
+                      [`${mergedClsPrefix}-rate__half--disabled`]: disabled
                     }
                   ]}
                 >

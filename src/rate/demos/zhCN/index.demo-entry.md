@@ -10,6 +10,7 @@ size
 color
 icon
 allow-half
+disabled
 ```
 
 ## Props
@@ -19,6 +20,7 @@ allow-half
 | allow-half | `boolean` | `false` | 允许只激活一半图标 |
 | color | `string` | `undefined` | 已激活图标颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |
 | count | `number` | `5` | 图标个数 |
+| disabled | `boolean` | `false` | 只读，交互失效 |
 | default-value | `number` | `0` | 默认已激活图标个数 |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | 图标尺寸 |
 | value | `number` | `undefined` | 绑定已激活图标个数 |
