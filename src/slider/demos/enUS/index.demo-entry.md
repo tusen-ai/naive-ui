@@ -19,6 +19,7 @@ disable-tooltip
 | --- | --- | --- | --- |
 | default-value | `number \| [number, number] \| null` | `null` | Default value. |
 | disabled | `boolean` | `false` | Whether the slider is disabled. |
+| format-tooltip | `(value: number) => string \| number` | `undefined` | Format tooltip. |
 | marks | `{ [markValue: number]: string }` | `undefined` | Marks of the slider. |
 | max | `number` | `100` | Max value of the slider. |
 | min | `number` | `0` | Min value of the slider. |
