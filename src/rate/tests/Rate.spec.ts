@@ -79,4 +79,29 @@ describe('n-rate', () => {
 
     wrapper.unmount()
   })
+
+  it('should work with `disabled` prop', async () => {
+    const wrapper = mount(NRate)
+
+    await wrapper.setProps({ disabled: true })
+    for (const rateItem of wrapper.findAll('.n-rate__item')) {
+      expect(rateItem.classes()).toContain('n-rate__item--disabled')
+    }
+
+    await wrapper.setProps({ disabled: true, allowHalf: true })
+    for (const rateItem of wrapper.findAll('.n-rate__half')) {
+      expect(rateItem.classes()).toContain('n-rate__half--disabled')
+    }
+
+    await wrapper.setProps({ disabled: true, value: 3 })
+    expect(wrapper.findAll('.n-rate__item--active').length).toBe(3)
+
+    await wrapper.findAll('.n-rate__item')[3].trigger('click')
+    expect(wrapper.findAll('.n-rate__item--active').length).toBe(3)
+
+    await wrapper.findAll('.n-rate__item')[3].trigger('mousemove')
+    expect(wrapper.findAll('.n-rate__item--active').length).toBe(3)
+
+    wrapper.unmount()
+  })
 })
