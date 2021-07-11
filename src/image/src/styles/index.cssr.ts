@@ -73,6 +73,9 @@ export default c([
     display: inline-flex;
     cursor: pointer;
   `, [
-    c('img', 'border-radius: inherit;')
+    c('img', `
+      border-radius: inherit;
+      object-fit: var(--object-fit)
+    `)
   ])
 ])

@@ -5,7 +5,8 @@ import {
   ref,
   PropType,
   toRef,
-  mergeProps
+  mergeProps,
+  computed
 } from 'vue'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
@@ -29,9 +30,13 @@ const imageProps = {
   alt: String,
   height: [String, Number] as PropType<string | number>,
   imgProps: Object as PropType<imgProps>,
+  objectFit: String as PropType<
+  'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
+  >,
   width: [String, Number] as PropType<string | number>,
   src: String,
-  showToolbar: { type: Boolean, default: true }
+  showToolbar: { type: Boolean, default: true },
+  onError: Function as PropType<() => void>
 }
 
 export type ImageProps = ExtractPublicPropTypes<typeof imageProps>
@@ -64,7 +69,13 @@ export default defineComponent({
         previewInst.setPreviewSrc(props.src)
         previewInst.setThumbnailEl(imageRef.value)
         previewInst.toggleShow()
-      }
+      },
+      cssVars: computed(() => {
+        const { objectFit = 'none' } = props
+        return {
+          '--object-fit': objectFit
+        }
+      })
     }
   },
   render () {
@@ -74,7 +85,8 @@ export default defineComponent({
       'div',
       mergeProps(this.$attrs, {
         role: 'none',
-        class: `${mergedClsPrefix}-image`
+        class: `${mergedClsPrefix}-image`,
+        style: this.cssVars
       }),
       <img
         {...imgProps}
@@ -86,6 +98,7 @@ export default defineComponent({
         alt={this.alt ? this.alt : imgProps.alt}
         aria-label={this.alt ? this.alt : imgProps.alt}
         onClick={this.handleClick}
+        onError={this.onError}
       />
     )
 

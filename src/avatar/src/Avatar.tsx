@@ -26,11 +26,15 @@ const avatarProps = {
     type: Boolean,
     default: false
   },
+  color: String,
+  objectFit: String as PropType<
+  'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
+  >,
   round: {
     type: Boolean,
     default: false
   },
-  color: String
+  onError: Function as PropType<() => void>
 } as const
 
 export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>
@@ -82,7 +86,7 @@ export default defineComponent({
       selfRef,
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
-        const { size, round, circle } = props
+        const { size, round, circle, objectFit = 'none' } = props
         const {
           self: { borderRadius, fontSize, color },
           common: { cubicBezierEaseInOut }
@@ -98,7 +102,8 @@ export default defineComponent({
           '--border-radius': round || circle ? '50%' : borderRadius,
           '--color': color,
           '--bezier': cubicBezierEaseInOut,
-          '--size': height
+          '--size': height,
+          '--object-fit': objectFit
         }
       })
     }
@@ -112,7 +117,7 @@ export default defineComponent({
         style={this.cssVars as any}
       >
         {!$slots.default && src ? (
-          <img src={src} />
+          <img src={src} onError={this.onError} />
         ) : (
           <span
             ref="textRef"
