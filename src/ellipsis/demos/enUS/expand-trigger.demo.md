@@ -1,4 +1,4 @@
-# Expand More
+# Expand Trigger
 
 Use `expand-trigger="click"` with the `line-clamp` parameter to achieve the function of clicking the abbreviated text to expand the complete text.
 

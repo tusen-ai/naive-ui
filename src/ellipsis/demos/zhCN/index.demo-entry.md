@@ -17,7 +17,7 @@ custom-tooltip
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| expand-trigger | `'click'` | `undefined` | 点击文本缩略内容展开完整文本 | 2.1.0 |
+| expand-trigger | `'click'` | `undefined` | 展开的触发方式 | 2.1.0 |
 | line-clamp | `number \| string` | `undefined` | 最大行数 | 2.1.0 |
 | tooltip | `boolean \| TooltipProps` | `true` | Tooltip 的属性 | 2.1.0 |
 

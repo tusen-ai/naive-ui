@@ -1,4 +1,4 @@
-# 展开更多
+# 展开方式
 
 使用 `expand-trigger="click"` 搭配 `line-clamp` 参数可以实现点击缩略文本展开完整文本的功能。
 
