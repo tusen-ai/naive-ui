@@ -14,9 +14,9 @@ custom
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| gradient | `string \| { from: string, to: string, deg: number \| string }` | `undefined` |  |
-| size | `number \| string` | `undefined` |  |
-| type | `'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` |  |
+| gradient | `string \| { from: string, to: string, deg: number \| string }` | `undefined` | Text gradient color parameters. |
+| size | `number \| string` | `undefined` | Text size (unit: px). |
+| type | `'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` | Text default state. |
 
 ## Slots
 
