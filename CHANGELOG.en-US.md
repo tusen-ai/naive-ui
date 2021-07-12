@@ -21,7 +21,8 @@
 
 - `n-steps` add icon customization in `'finish'` and `'error'` status.
 - `n-tree` exports `TreeDragInfo` & `TreeDropInfo` type.
-- `n-time-picker` add `actions` prop, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
+- `n-empty` export `icon` slot.
+- `useDialog` option add `maskClosable` prop, closes [#420](https://github.com/TuSimple/naive-ui/issues/420).
 
 ### Fixes
 

@@ -9,13 +9,14 @@ basic
 size
 disabled-time
 format
+actions
 ```
 
 ## Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| actions | `Array<'now'> \| null` | `['now']` | Operations supported in Time Picker. |
+| actions | `Array<'now' \| 'confirm'> \| null` | `['now', 'confirm']` | Operations supported in Time Picker. |
 | clearable | `boolean` | `false` |  |
 | default-value | `number \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |

@@ -16,7 +16,7 @@ actions
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| actions | `Array<'now'> \| null` | `['now']` | Time Picker 中支持的操作 |
+| actions | `Array<'now' \| 'confirm'> \| null` | `['now', 'confirm']` | Time Picker 中支持的操作 |
 | clearable | `boolean` | `false` |  |
 | default-value | `number \| null` | `null` |  |
 | disabled | `boolean` | `false` |  |

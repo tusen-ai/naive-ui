@@ -15,8 +15,8 @@ export default defineComponent({
   name: 'TimePickerPanel',
   props: {
     actions: {
-      type: Array as PropType<Array<'now'>>,
-      default: () => ['now']
+      type: Array as PropType<Array<'now' | 'confirm'>>,
+      default: () => ['now', 'confirm']
     },
     showHour: {
       type: Boolean,
@@ -266,17 +266,19 @@ export default defineComponent({
               {{ default: () => this.nowText }}
             </NButton>
           ) : null}
-          <NButton
-            size="tiny"
-            type="primary"
-            class={`${mergedClsPrefix}-time-picker-actions__confirm`}
-            theme={mergedTheme.peers.Button}
-            themeOverrides={mergedTheme.peerOverrides.Button}
-            disabled={this.isValueInvalid}
-            onClick={this.onConfirmClick}
-          >
-            {{ default: () => this.confirmText }}
-          </NButton>
+          {this.actions?.includes('confirm') ? (
+            <NButton
+              size="tiny"
+              type="primary"
+              class={`${mergedClsPrefix}-time-picker-actions__confirm`}
+              theme={mergedTheme.peers.Button}
+              themeOverrides={mergedTheme.peerOverrides.Button}
+              disabled={this.isValueInvalid}
+              onClick={this.onConfirmClick}
+            >
+              {{ default: () => this.confirmText }}
+            </NButton>
+          ) : null}
         </div>,
         <NBaseFocusDetector onFocus={this.onFocusDetectorFocus} />
       ]
