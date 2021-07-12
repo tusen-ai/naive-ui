@@ -8,6 +8,8 @@
 - `n-carousel` add `show-arrow` prop.
 - `n-slider` add `format-tooltip` prop.
 - `n-time-picker` add `actions` prop, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
+- `n-upload` add `event` in `on-finish` callback params.
+- `n-rate` add `readonly` prop.
 
 ### Fixes
 

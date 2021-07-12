@@ -8,6 +8,9 @@
 - `n-carousel` 新增 `show-arrow` 属性
 - `n-slider` 新增 `format-tooltip` 属性.
 - `n-time-picker` 增加 `actions` 属性, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
+- `n-upload` 在 `on-finish` 回调参数中新增 `event`
+- `n-slider` 新增 `format-tooltip` 属性
+- `n-rate` 新增 `readonly` 属性
 
 ### Fixes
 

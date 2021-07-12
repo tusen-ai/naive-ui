@@ -31,6 +31,7 @@ const rateProps = {
     type: Number,
     default: 0
   },
+  readonly: Boolean,
   size: {
     type: [String, Number] as PropType<number | 'small' | 'medium' | 'large'>,
     default: 'medium'
@@ -100,16 +101,12 @@ export default defineComponent({
     function handleClick (index: number, e: MouseEvent): void {
       doUpdateValue(getDerivedValue(index, e))
     }
-    function handleHalfClick (index: number): void {
-      doUpdateValue(index + 0.5)
-    }
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: useMergedState(controlledValueRef, uncontrolledValueRef),
       hoverIndex: hoverIndexRef,
       handleMouseMove,
       handleClick,
-      handleHalfClick,
       handleMouseLeave,
       cssVars: computed(() => {
         const { size } = props
@@ -135,6 +132,7 @@ export default defineComponent({
   },
   render () {
     const {
+      readonly,
       hoverIndex,
       mergedValue,
       mergedClsPrefix,
@@ -142,7 +140,12 @@ export default defineComponent({
     } = this
     return (
       <div
-        class={`${mergedClsPrefix}-rate`}
+        class={[
+          `${mergedClsPrefix}-rate`,
+          {
+            [`${mergedClsPrefix}-rate--readonly`]: readonly
+          }
+        ]}
         style={this.cssVars as CSSProperties}
         onMouseleave={this.handleMouseLeave}
       >
@@ -166,12 +169,20 @@ export default defineComponent({
                       : index + 1 <= mergedValue
                 }
               ]}
-              onClick={(e) => {
-                this.handleClick(index, e)
-              }}
-              onMousemove={(e) => {
-                this.handleMouseMove(index, e)
-              }}
+              onClick={
+                readonly
+                  ? undefined
+                  : (e) => {
+                      this.handleClick(index, e)
+                    }
+              }
+              onMousemove={
+                readonly
+                  ? undefined
+                  : (e) => {
+                      this.handleMouseMove(index, e)
+                    }
+              }
             >
               {icon}
               {this.allowHalf ? (
