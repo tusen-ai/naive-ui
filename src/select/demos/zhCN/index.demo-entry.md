@@ -50,7 +50,7 @@ options-change-debug
 | multiple | `boolean` | `false` | 是否为多选 |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | 配置选项内容，详情见 SelectOption Properties |
 | placeholder | `string` | `'请选择'` |  |
-| remote | `boolean` | `false` | 是否要异步获取选项。注意如果设定了，那么 `fitler` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options` |
+| remote | `boolean` | `false` | 是否要异步获取选项。注意如果设定了，那么 `filter` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options` |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | 选项标签渲染函数 |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean } }` | `undefined` | 选项的渲染函数 |
 | render-tag | `(option: SelectBaseOption, onClose: () => void) => VNodeChild` | `undefined` | 控制标签的渲染 |
@@ -90,6 +90,7 @@ options-change-debug
 
 ### Select Slots
 
-| 名称   | 参数 | 说明 |
-| ------ | ---- | ---- |
-| action | `()` |      |
+| 名称   | 参数 | 说明                |
+| ------ | ---- | ------------------- |
+| action | `()` | 菜单操作区域的 slot |
+| empty  | `()` | 菜单无数据时的 slot |
