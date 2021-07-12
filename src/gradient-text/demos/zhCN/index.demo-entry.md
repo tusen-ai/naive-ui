@@ -15,8 +15,8 @@ custom
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | gradient | `string \| { from: string, to: string, deg: number \| string }` | `undefined` | 文字渐变色参数 |
-| size | `number \| string` | `undefined` | 文字大小（单位： px） |
-| type | `'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` | 文字默认状态 |
+| size | `number \| string` | `undefined` | 文字大小（当不指定单位时，默认单位： px） |
+| type | `'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` | 渐变文字的类型 |
 
 ## Slots
 

@@ -1,6 +1,6 @@
 # 展开更多
 
-使用`expand-trigger="click"`搭配`line-clamp`参数可以实现点击缩略文本展开完整文本的功能。
+使用 `expand-trigger="click"` 搭配 `line-clamp` 参数可以实现点击缩略文本展开完整文本的功能。
 
 ```html
 <n-ellipsis expand-trigger="click" line-clamp="2" :tooltip="false">
