@@ -22,7 +22,6 @@ import StarIcon from './StarIcon'
 const rateProps = {
   ...(useTheme.props as ThemeProps<RateTheme>),
   allowHalf: Boolean,
-  disabled: Boolean,
   count: {
     type: Number,
     default: 5
@@ -32,6 +31,7 @@ const rateProps = {
     type: Number,
     default: 0
   },
+  readonly: Boolean,
   size: {
     type: [String, Number] as PropType<number | 'small' | 'medium' | 'large'>,
     default: 'medium'
@@ -132,7 +132,7 @@ export default defineComponent({
   },
   render () {
     const {
-      disabled,
+      readonly,
       hoverIndex,
       mergedValue,
       mergedClsPrefix,
@@ -140,7 +140,12 @@ export default defineComponent({
     } = this
     return (
       <div
-        class={`${mergedClsPrefix}-rate`}
+        class={[
+          `${mergedClsPrefix}-rate`,
+          {
+            [`${mergedClsPrefix}-rate--readonly`]: readonly
+          }
+        ]}
         style={this.cssVars as CSSProperties}
         onMouseleave={this.handleMouseLeave}
       >
@@ -161,16 +166,23 @@ export default defineComponent({
                   [`${mergedClsPrefix}-rate__item--active`]:
                     hoverIndex !== null
                       ? index + 1 <= hoverIndex
-                      : index + 1 <= mergedValue,
-                  [`${mergedClsPrefix}-rate__item--disabled`]: disabled
+                      : index + 1 <= mergedValue
                 }
               ]}
-              onClick={(e) => {
-                !disabled && this.handleClick(index, e)
-              }}
-              onMousemove={(e) => {
-                !disabled && this.handleMouseMove(index, e)
-              }}
+              onClick={
+                readonly
+                  ? undefined
+                  : (e) => {
+                      this.handleClick(index, e)
+                    }
+              }
+              onMousemove={
+                readonly
+                  ? undefined
+                  : (e) => {
+                      this.handleMouseMove(index, e)
+                    }
+              }
             >
               {icon}
               {this.allowHalf ? (
@@ -181,8 +193,7 @@ export default defineComponent({
                       [`${mergedClsPrefix}-rate__half--active`]:
                         hoverIndex !== null
                           ? index + 0.5 <= hoverIndex
-                          : index + 0.5 <= mergedValue,
-                      [`${mergedClsPrefix}-rate__half--disabled`]: disabled
+                          : index + 0.5 <= mergedValue
                     }
                   ]}
                 >
