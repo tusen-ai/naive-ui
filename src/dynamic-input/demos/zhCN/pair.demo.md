@@ -13,16 +13,18 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: [
+      value: ref([
         {
           key: '',
           value: ''
         }
-      ]
+      ])
     }
   }
-}
+})
 ```
