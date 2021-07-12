@@ -6,7 +6,8 @@
 
 - `n-rate` 新增 `allow-half` 属性
 - `n-carousel` 新增 `show-arrow` 属性
-- `n-slider` 新增 `format-tooltip` 属性.
+- `n-slider` 新增 `format-tooltip` 属性
+- `n-rate` 新增 `readonly` 属性
 
 ### Fixes
 

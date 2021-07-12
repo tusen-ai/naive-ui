@@ -10,6 +10,7 @@ size
 color
 icon
 allow-half
+readonly
 ```
 
 ## Props
@@ -20,6 +21,7 @@ allow-half
 | color | `string` | `undefined` | 已激活图标颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |
 | count | `number` | `5` | 图标个数 |
 | default-value | `number` | `0` | 默认已激活图标个数 |
+| readonly | `boolean` | `false` | 只读，交互失效 |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | 图标尺寸 |
 | value | `number` | `undefined` | 绑定已激活图标个数 |
 | on-update:value | `(value: number) => void` | `undefined` | 激活图标个数改变时触发 |
