@@ -78,12 +78,13 @@ render-tag
 | --- | --- | --- |
 | children | `Array<SelectOption>` |  |
 | label | `string \| ((option: SelectGroupOption) => VNodeChild)` | Label of the group option. |
-| key | `string \| number` | hould be unique in options. |
+| key | `string \| number` | Should be unique in options. |
 | render | `(info: { node: VNode }) => VNodeChild` | Render the entire option. |
 | type | `'group'` |  |
 
 ### Select Slots
 
-| Name   | Parameters | Description |
-| ------ | ---------- | ----------- |
-| action | `()`       |             |
+| Name   | Parameters | Description                  |
+| ------ | ---------- | ---------------------------- |
+| action | `()`       | Slot in menu operation area. |
+| empty  | `()`       | Slot when menu has no data.  |
