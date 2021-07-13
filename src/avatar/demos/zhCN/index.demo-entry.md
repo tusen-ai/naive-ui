@@ -21,7 +21,7 @@ name-size
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | 头像的尺寸 |
 | src | `string` | `undefined` | 头像的地址 |
 | round | `boolean` | `false` | 头像是否圆形 |
-| on-error | `() => void` | `undefined` | 头像的图片加载失败执行的回调 |
+| on-error | `(e: Event) => void` | `undefined` | 头像的图片加载失败执行的回调 |
 
 ## Slots
 

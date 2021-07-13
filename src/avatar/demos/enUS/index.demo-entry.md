@@ -21,7 +21,7 @@ name-size
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar's size. |
 | src | `string` | `undefined` | Avatar's source. |
 | round | `boolean` | `false` | Whether to display a rounded avatar. |
-| on-error | `() => void` | `undefined` | Callback executed when the avatar image fails to load. |
+| on-error | `(e: Event) => void` | `undefined` | Callback executed when the avatar image fails to load. |
 
 ## Slots
 
