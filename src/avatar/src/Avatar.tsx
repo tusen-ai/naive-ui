@@ -86,7 +86,7 @@ export default defineComponent({
       selfRef,
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
-        const { size, round, circle, objectFit = 'none' } = props
+        const { size, round, circle, objectFit = 'fill' } = props
         const {
           self: { borderRadius, fontSize, color },
           common: { cubicBezierEaseInOut }

@@ -71,7 +71,7 @@ export default defineComponent({
         previewInst.toggleShow()
       },
       cssVars: computed(() => {
-        const { objectFit = 'none' } = props
+        const { objectFit = 'fill' } = props
         return {
           '--object-fit': objectFit
         }
