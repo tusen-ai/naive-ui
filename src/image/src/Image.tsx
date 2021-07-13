@@ -30,13 +30,16 @@ const imageProps = {
   alt: String,
   height: [String, Number] as PropType<string | number>,
   imgProps: Object as PropType<imgProps>,
-  objectFit: String as PropType<
-  'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
-  >,
+  objectFit: {
+    type: String as PropType<
+    'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
+    >,
+    default: 'fill'
+  },
   width: [String, Number] as PropType<string | number>,
   src: String,
   showToolbar: { type: Boolean, default: true },
-  onError: Function as PropType<() => void>
+  onError: Function as PropType<(e: Event) => void>
 }
 
 export type ImageProps = ExtractPublicPropTypes<typeof imageProps>
@@ -71,7 +74,7 @@ export default defineComponent({
         previewInst.toggleShow()
       },
       cssVars: computed(() => {
-        const { objectFit = 'fill' } = props
+        const { objectFit } = props
         return {
           '--object-fit': objectFit
         }
@@ -98,7 +101,7 @@ export default defineComponent({
         alt={this.alt ? this.alt : imgProps.alt}
         aria-label={this.alt ? this.alt : imgProps.alt}
         onClick={this.handleClick}
-        onError={this.onError}
+        onError={(e) => this.onError?.(e)}
       />
     )
 
