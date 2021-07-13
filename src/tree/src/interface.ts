@@ -20,6 +20,30 @@ export type TreeOption = TreeOptionBase & { [k: string]: unknown }
 
 export type TreeOptions = TreeOption[]
 
+export interface TreeRenderProps {
+  option: TreeOption
+  checked: boolean
+  selected: boolean
+}
+
+export type RenderLabel = ({
+  option,
+  checked,
+  selected
+}: TreeRenderProps) => VNodeChild
+
+export type RenderPrefix = ({
+  option,
+  checked,
+  selected
+}: TreeRenderProps) => VNodeChild
+
+export type RenderSuffix = ({
+  option,
+  checked,
+  selected
+}: TreeRenderProps) => VNodeChild
+
 export interface TreeDragInfo {
   event: DragEvent
   node: TreeOption
@@ -78,6 +102,9 @@ export interface TreeInjection {
   pendingNodeKeyRef: Ref<null | Key>
   internalScrollableRef: Ref<boolean>
   internalCheckboxFocusableRef: Ref<boolean>
+  renderLabelRef: Ref<RenderLabel | undefined>
+  renderPrefixRef: Ref<RenderPrefix | undefined>
+  renderSuffixRef: Ref<RenderSuffix | undefined>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void

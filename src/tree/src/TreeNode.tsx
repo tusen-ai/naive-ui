@@ -289,6 +289,8 @@ const TreeNode = defineComponent({
           <NTreeNodeContent
             ref="contentInstRef"
             clsPrefix={clsPrefix}
+            checked={this.checked}
+            selected={selected}
             onClick={
               blockLine || disabled ? undefined : this.handleContentClick
             }
