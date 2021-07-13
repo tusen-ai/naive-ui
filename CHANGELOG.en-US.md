@@ -7,6 +7,8 @@
 - `n-rate` add `allow-half` prop.
 - `n-carousel` add `show-arrow` prop.
 - `n-slider` add `format-tooltip` prop.
+- `n-upload` add `event` in `on-finish` callback params.
+- `n-rate` add `readonly` prop.
 
 ### Fixes
 

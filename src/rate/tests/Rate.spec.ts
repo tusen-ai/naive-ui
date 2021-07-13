@@ -79,4 +79,23 @@ describe('n-rate', () => {
 
     wrapper.unmount()
   })
+
+  it('should work with `readonly` prop', async () => {
+    const wrapper = mount(NRate)
+
+    await wrapper.setProps({ readonly: true })
+
+    expect(wrapper.find('.n-rate').classes()).toContain('n-rate--readonly')
+
+    await wrapper.setProps({ readonly: true, value: 3 })
+    expect(wrapper.findAll('.n-rate__item--active').length).toBe(3)
+
+    await wrapper.findAll('.n-rate__item')[3].trigger('click')
+    expect(wrapper.findAll('.n-rate__item--active').length).toBe(3)
+
+    await wrapper.findAll('.n-rate__item')[3].trigger('mousemove')
+    expect(wrapper.findAll('.n-rate__item--active').length).toBe(3)
+
+    wrapper.unmount()
+  })
 })
