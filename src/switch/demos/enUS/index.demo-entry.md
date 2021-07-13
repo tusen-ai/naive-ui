@@ -14,8 +14,8 @@ event
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| default-value | `boolean` | `false` |  |
-| disabled | `boolean` | `false` |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| value | `boolean` | `undefined` |  |
-| on-update:value | `(value: boolean) => void` | `undefined` |  |
+| default-value | `boolean` | `false` | Default value in uncontrolled mode. |
+| disabled | `boolean` | `false` | Whether to disable the switch. |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of switch. |
+| value | `boolean` | `undefined` | Value in controlled mode. |
+| on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |
