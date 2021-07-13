@@ -3,6 +3,7 @@
 ## Pending
 
 - 修复 `n-select` 自定义 label 的显示问题，关闭 [#352](https://github.com/TuSimple/naive-ui/issues/352)
+- `n-message-provider` 新增 `duration` 和 `max-visible` 属性
 
 ### Feats
 

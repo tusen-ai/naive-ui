@@ -8,6 +8,7 @@
 ### Feats
 
 - `n-tree` exports `TreeDragInfo` & `TreeDropInfo` type.
+- `n-message-provider` add `duration` and `max-visible` props.
 
 ### Fixes
 

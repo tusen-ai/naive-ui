@@ -10,7 +10,8 @@ import {
   InjectionKey,
   ExtractPropTypes,
   renderSlot,
-  Ref
+  Ref,
+  toRef
 } from 'vue'
 import { createId } from 'seemly'
 import { ExtractPublicPropTypes, omit } from '../../_utils'
@@ -66,7 +67,12 @@ const messageProviderProps = {
   to: {
     type: [String, Object],
     default: undefined
-  }
+  },
+  duration: {
+    type: Number,
+    default: 3000
+  },
+  maxVisible: Number
 }
 
 export type MessageProviderProps = ExtractPublicPropTypes<
@@ -119,6 +125,10 @@ export default defineComponent({
           messageRefs.value[key].hide()
         }
       })
+      const { maxVisible } = props
+      if (maxVisible && messageListRef.value.length >= maxVisible) {
+        messageListRef.value.shift()
+      }
       messageListRef.value.push(messageReactive)
       return messageReactive
     }
@@ -159,6 +169,7 @@ export default defineComponent({
                     internalKey={message.key}
                     onInternalAfterLeave={this.handleAfterLeave}
                     {...omit(message, ['destroy'], undefined)}
+                    duration={this.duration}
                   />
                 )
               })}
