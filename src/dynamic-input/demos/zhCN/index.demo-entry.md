@@ -23,13 +23,13 @@ form
 | --- | --- | --- | --- |
 | default-value | `Array<any>` | `[]` | 非受控模式下的默认值 |
 | item-style | `string \| Object` | `undefined` | 动态录入中每项的样式 |
-| key-field | `string` | `undefined` | 用户自定义的 `key` 值，如果相同的 `key` 值在数据改变的时候位置不会改变 |
+| key-field | `string` | `undefined` | 每一项的 key 值，会被用于列表渲染中 |
 | min | `number` | `0` | 最少有几项内容 |
 | max | `number` | `undefined` | 最多有几项内容 |
 | preset | `'input' \| 'preset'` | `'input'` | 动态录入使用的预设，在不设定 `$slots.default` 的时候生效。 |
 | value | `Array<any>` | `undefined` | 受控模式下的值 |
 | on-create | `(index: number) => void` | `undefined` | 点击添加按钮时的回调，如果设定则返回值会被用作新添加的初始值。其中 `index` 是创建内容将要被放置到的位置对应的数组索引，从 1 (第二项)开始计算 |
-| on-remove | `(index: number) => void` | `undefined` | 点击减少按钮时的回调，默认会删除 `index` 项 |
+| on-remove | `(index: number) => void` | `undefined` | 点击第 index 项删除按钮的回调 |
 | on-update:value | `(value: any) => void` | `undefined` | 组件值发生变化的回调 |
 
 ### Dynamic Input Props(Input Preset)

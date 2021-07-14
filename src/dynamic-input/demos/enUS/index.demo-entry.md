@@ -23,13 +23,13 @@ form
 | --- | --- | --- | --- |
 | default-value | `Array<any>` | `[]` | Default value in uncontrolled mode. |
 | item-style | `string \| Object` | `undefined` | The style of each item in dynamic input. |
-| key-field | `string` | `undefined` | User-defined `key` value, if the same `key` value will not change when the data changes. |
+| key-field | `string` | `undefined` | The key of each item will be used in the rendering of the list. |
 | min | `number` | `0` | Min number of items. |
 | max | `number` | `undefined` | Max number of items. |
 | preset | `'input' \| 'preset'` | `'input'` | The preset of `n-dynamic-input`, it work when `$slots.default` is not set. |
 | value | `Array<any>` | `undefined` | Value in controlled mode. |
 | on-create | `(index: number) => void` | `undefined` | The callback when click at the add button. If set, the return value will be used as the initial value of the new item. `index` is the the new item's corresponding index in the value array, which starts from 1 (the second item). |
-| on-remove | `(index: number) => void` | `undefined` | The callback when click at the decrease button. If not set, the `index` item will be deleted by default. |
+| on-remove | `(index: number) => void` | `undefined` | Click the index item button of remove triggered callback. |
 | on-update:value | `(value: any) => void` | `undefined` | Callback when the component's value changes. |
 
 ### Dynamic Input Props (Input Preset)

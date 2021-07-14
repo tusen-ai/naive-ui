@@ -3,7 +3,7 @@
 `n-dynamic-input` itself cannot be verified. If you need to verify the input of `n-dynamic-input`, you can pass `n-form-item` in the custom content to complete the verification. Here is a complete example.
 
 ```html
-<n-form :model="model" ref="form">
+<n-form :model="model">
   <n-dynamic-input
     item-style="margin-bottom: 0;"
     v-model:value="model.dynamicInputValue"
@@ -55,7 +55,7 @@
 ```
 
 ```js
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
@@ -67,7 +67,7 @@ export default defineComponent({
           return true
         }
       },
-      model: reactive({
+      model: ref({
         dynamicInputValue: [{ value: '', name: '' }]
       }),
       onCreate () {

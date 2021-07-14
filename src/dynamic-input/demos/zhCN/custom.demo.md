@@ -32,14 +32,14 @@ export default defineComponent({
         {
           isCheck: true,
           num: 1,
-          string: 'A String'
+          string: '一个字符串'
         }
       ]),
       onCreate () {
         return {
           isCheck: false,
           num: 1,
-          string: 'A String'
+          string: '一个字符串'
         }
       }
     }
