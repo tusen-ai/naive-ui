@@ -13,7 +13,6 @@
 - `n-carousel` 新增 `show-arrow` 属性
 - `n-slider` 新增 `format-tooltip` 属性
 - `n-upload` 在 `on-finish` 回调参数中新增 `event`
-- `n-slider` 新增 `format-tooltip` 属性
 - `n-rate` 新增 `readonly` 属性
 - `n-time-picker` 新增 `seconds`、`minutes`、`hours`属性
 - `n-notification` 导出 `NotificationApi`, `NotificationOptions` and `NotificationReactive` 类型
