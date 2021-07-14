@@ -12,10 +12,10 @@ event
 
 ## Props
 
-| 名称            | 类型                             | 默认值      | 说明 |
-| --------------- | -------------------------------- | ----------- | ---- |
-| default-value   | `boolean`                        | `false`     |      |
-| disabled        | `boolean`                        | `false`     |      |
-| size            | `'small' \| 'medium' \| 'large'` | `'medium'`  |      |
-| value           | `boolean`                        | `undefined` |      |
-| on-update:value | `(value: boolean) => void`       | `undefined` |      |
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| default-value | `boolean` | `false` | 非受控模式下的默认值 |
+| disabled | `boolean` | `false` | 是否禁用 |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 开关大小 |
+| value | `boolean` | `undefined` | 受控模式下的值 |
+| on-update:value | `(value: boolean) => void` | `undefined` | 组件值发生变化的回调 |
