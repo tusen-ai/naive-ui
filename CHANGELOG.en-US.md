@@ -9,12 +9,14 @@
 - `n-slider` add `format-tooltip` prop.
 - `n-upload` add `event` in `on-finish` callback params.
 - `n-rate` add `readonly` prop.
+- `n-notification` export `NotificationApi`, `NotificationOptions` and `NotificationReactive` type.
 
 ### Fixes
 
 - Fix `n-pagination` page count is not correct when `item-count` is 0.
 - Fix `n-scrollbar` `content-style` can not override the default width of style.
 - Fix `n-select` placeholder transition.
+- Fix `n-loading-bar`　use `useLoadingBar` the result is undefined.
 
 ## 2.15.4 (2021-07-09)
 
