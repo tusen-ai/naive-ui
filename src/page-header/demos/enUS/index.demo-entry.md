@@ -12,21 +12,21 @@ basic
 
 ## Props
 
-| Name     | Type         | Default     | Description |
-| -------- | ------------ | ----------- | ----------- |
-| extra    | `string`     | `undefined` |             |
-| subtitle | `string`     | `undefined` |             |
-| title    | `string`     | `undefined` |             |
-| on-back  | `() => void` | `undefined` |             |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| extra | `string` | `undefined` | Extra text information, when using the `extra` slot to change the parameter is invalid. |
+| subtitle | `string` | `undefined` | Subtitle. |
+| title | `string` | `undefined` | Title. |
+| on-back | `() => void` | `undefined` | Click the callback of the back button. |
 
 ## Slots
 
-| Name     | Parameters | Description |
-| -------- | ---------- | ----------- |
-| avatar   | `()`       |             |
-| header   | `()`       |             |
-| default  | `()`       |             |
-| extra    | `()`       |             |
-| footer   | `()`       |             |
-| subtitle | `()`       |             |
-| title    | `()`       |             |
+| Name     | Parameters | Description           |
+| -------- | ---------- | --------------------- |
+| avatar   | `()`       | Image information.    |
+| header   | `()`       | Header information.   |
+| default  | `()`       | Content.              |
+| extra    | `()`       | Extra information.    |
+| footer   | `()`       | Footer information.   |
+| subtitle | `()`       | Subtitle information. |
+| title    | `()`       | Title information.    |
