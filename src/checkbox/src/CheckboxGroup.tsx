@@ -85,16 +85,16 @@ export default defineComponent({
 
     const minRef = computed(() => {
       if (props.min && props.max) {
-        return Math.min(props.min, props.max)
+        return Math.floor(Math.min(props.min, props.max))
       } else {
-        return props.min || 0
+        return props.min ? Math.floor(props.min) : 0
       }
     })
     const maxRef = computed(() => {
       if (props.min && props.max) {
-        return Math.max(props.min, props.max)
+        return Math.floor(Math.max(props.min, props.max))
       } else {
-        return props.max || Infinity
+        return props.max ? Math.floor(props.max) : Infinity
       }
     })
 
