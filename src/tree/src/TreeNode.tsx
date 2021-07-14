@@ -216,6 +216,7 @@ const TreeNode = defineComponent({
       checkable,
       selectable,
       selected,
+      checked,
       highlight,
       draggable,
       blockLine,
@@ -289,7 +290,7 @@ const TreeNode = defineComponent({
           <NTreeNodeContent
             ref="contentInstRef"
             clsPrefix={clsPrefix}
-            checked={this.checked}
+            checked={checked}
             selected={selected}
             onClick={
               blockLine || disabled ? undefined : this.handleContentClick

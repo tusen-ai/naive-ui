@@ -15,11 +15,11 @@ export default defineComponent({
     },
     checked: {
       type: Boolean,
-      required: true
+      default: false
     },
     selected: {
       type: Boolean,
-      required: true
+      default: false
     },
     onClick: Function as PropType<(e: MouseEvent) => void>,
     onDragstart: Function as PropType<(e: DragEvent) => void>,

@@ -46,9 +46,9 @@ batch-render
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` |  |
 | pattern | `string` | `''` |  |
 | remote | `boolean` | `false` | 是否异步获取选项，和 onLoad 配合 |
-| render-label | `({ option, checked, selected }: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点内容的渲染函数 |
-| render-prefix | `({ option, checked, selected }: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点前缀的渲染函数 |
-| render-suffix | `({ option, checked, selected }: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点后缀的渲染函数 |
+| render-label | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点内容的渲染函数 |
+| render-prefix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点前缀的渲染函数 |
+| render-suffix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点后缀的渲染函数 |
 | selectable | `boolean` | `true` |  |
 | selected-keys | `Array<string \| number>` | `undefined` | 如果设定则 selected 状态受控 |
 | virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动，启用前你需要设定好树的高度样式 |
