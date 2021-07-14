@@ -7,7 +7,8 @@ import {
   toRef,
   ref,
   InjectionKey,
-  Ref
+  Ref,
+  ComputedRef
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
@@ -16,8 +17,8 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 
 export interface CheckboxGroupInjection {
   checkedCountRef: Ref<number>
-  maxRef: Ref<number>
-  minRef: Ref<number>
+  maxRef: ComputedRef<number>
+  minRef: ComputedRef<number>
   disabledRef: Ref<boolean>
   valueSetRef: Ref<Set<string | number>>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
@@ -28,14 +29,8 @@ export const checkboxGroupInjectionKey: InjectionKey<CheckboxGroupInjection> =
   Symbol('checkboxGroup')
 
 const checkboxGroupProps = {
-  min: {
-    type: Number,
-    default: 1
-  },
-  max: {
-    type: Number,
-    default: 3
-  },
+  min: Number,
+  max: Number,
   size: String as PropType<'small' | 'medium' | 'large'>,
   value: Array as PropType<Array<string | number> | null>,
   defaultValue: {
@@ -80,14 +75,29 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = computed(() => props.value)
-    const minRef = ref(props.min)
-    const maxRef = ref(props.max)
-
     const mergedValueRef = useMergedState(
       controlledValueRef,
       uncontrolledValueRef
     )
-    const checkedCount = ref(mergedValueRef.value?.length || 0)
+    const checkedCount = computed(() => {
+      return mergedValueRef.value?.length || 0
+    })
+
+    const minRef = computed(() => {
+      if (props.min && props.max) {
+        return Math.min(props.min, props.max)
+      } else {
+        return props.min || 0
+      }
+    })
+    const maxRef = computed(() => {
+      if (props.min && props.max) {
+        return Math.max(props.min, props.max)
+      } else {
+        return props.max || Infinity
+      }
+    })
+
     const valueSetRef = computed<Set<string | number>>(() => {
       if (Array.isArray(mergedValueRef.value)) {
         return new Set(mergedValueRef.value)
@@ -110,7 +120,6 @@ export default defineComponent({
         const index = groupValue.findIndex((value) => value === checkboxValue)
         if (checked) {
           if (!~index) {
-            checkedCount.value = checkedCount.value + 1
             groupValue.push(checkboxValue)
             if (onUpdateValue) call(onUpdateValue, groupValue)
             if (_onUpdateValue) call(_onUpdateValue, groupValue)
@@ -122,7 +131,6 @@ export default defineComponent({
           }
         } else {
           if (~index) {
-            checkedCount.value = checkedCount.value - 1
             groupValue.splice(index, 1)
             if (onUpdateValue) call(onUpdateValue, groupValue)
             if (_onUpdateValue) call(_onUpdateValue, groupValue)
@@ -134,7 +142,6 @@ export default defineComponent({
         }
       } else {
         if (checked) {
-          checkedCount.value = checkedCount.value + 1
           if (onUpdateValue) call(onUpdateValue, [checkboxValue])
           if (_onUpdateValue) call(_onUpdateValue, [checkboxValue])
           if (onChange) call(onChange, [checkboxValue]) // deprecated
@@ -142,7 +149,6 @@ export default defineComponent({
           nTriggerFormInput()
           nTriggerFormChange()
         } else {
-          checkedCount.value = checkedCount.value - 1
           if (onUpdateValue) call(onUpdateValue, [])
           if (_onUpdateValue) call(_onUpdateValue, [])
           if (onChange) call(onChange, []) // deprecated

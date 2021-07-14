@@ -94,17 +94,22 @@ export default defineComponent({
       }
     })
     const mergedDisabledRef = computed(() => {
-      return (
-        props.disabled ||
-        NCheckboxGroup?.disabledRef.value ||
-        (NCheckboxGroup &&
-          ((NCheckboxGroup.checkedCountRef.value <=
-            NCheckboxGroup.minRef.value &&
-            renderedCheckedRef.value) ||
-            (NCheckboxGroup.checkedCountRef.value >=
-              NCheckboxGroup.maxRef.value &&
-              !renderedCheckedRef.value)))
-      )
+      let disabledUptoNCheckboxGroup = false
+      if (NCheckboxGroup) {
+        const disabledUptoNCheckboxGroupPropMin =
+          NCheckboxGroup.checkedCountRef.value <= NCheckboxGroup.minRef.value &&
+          renderedCheckedRef.value
+
+        const disabledUptoNCheckboxGroupPropMax =
+          NCheckboxGroup.checkedCountRef.value >= NCheckboxGroup.maxRef.value &&
+          !renderedCheckedRef.value
+
+        disabledUptoNCheckboxGroup =
+          NCheckboxGroup.disabledRef.value ||
+          disabledUptoNCheckboxGroupPropMin ||
+          disabledUptoNCheckboxGroupPropMax
+      }
+      return props.disabled || disabledUptoNCheckboxGroup
     })
     const formItem = useFormItem(props, {
       mergedSize (NFormItem) {
