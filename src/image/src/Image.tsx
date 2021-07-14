@@ -5,8 +5,7 @@ import {
   ref,
   PropType,
   toRef,
-  mergeProps,
-  computed
+  mergeProps
 } from 'vue'
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
@@ -72,13 +71,7 @@ export default defineComponent({
         previewInst.setPreviewSrc(props.src)
         previewInst.setThumbnailEl(imageRef.value)
         previewInst.toggleShow()
-      },
-      cssVars: computed(() => {
-        const { objectFit } = props
-        return {
-          '--object-fit': objectFit
-        }
-      })
+      }
     }
   },
   render () {
@@ -88,8 +81,7 @@ export default defineComponent({
       'div',
       mergeProps(this.$attrs, {
         role: 'none',
-        class: `${mergedClsPrefix}-image`,
-        style: this.cssVars
+        class: `${mergedClsPrefix}-image`
       }),
       <img
         {...imgProps}
@@ -101,7 +93,8 @@ export default defineComponent({
         alt={this.alt ? this.alt : imgProps.alt}
         aria-label={this.alt ? this.alt : imgProps.alt}
         onClick={this.handleClick}
-        onError={(e) => this.onError?.(e)}
+        onError={this.onError}
+        style={{ objectFit: this.objectFit }}
       />
     )
 

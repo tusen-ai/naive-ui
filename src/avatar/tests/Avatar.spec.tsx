@@ -119,18 +119,16 @@ describe('n-avatar', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('image avatar error handle when load failed', () => {
+  it('image avatar error handle when load failed', async () => {
     const onError = jest.fn()
-    try {
-      mount(NAvatar, {
-        props: {
-          src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07.jpeg',
-          onError
-        }
-      })
-    } catch (error) {
-      expect(onError).toHaveBeenCalled()
-    }
+    const wrapper = mount(NAvatar, {
+      props: {
+        src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+        onError
+      }
+    })
+    await wrapper.find('img').trigger('error')
+    expect(onError).toHaveBeenCalled()
   })
 
   it('should work with `objectFit` prop', () => {
@@ -140,8 +138,8 @@ describe('n-avatar', () => {
         objectFit: 'contain'
       }
     })
-    expect(wrapper.find('.n-avatar').attributes('style')).toContain(
-      '--object-fit: contain;'
+    expect(wrapper.find('img').attributes('style')).toContain(
+      'object-fit: contain;'
     )
   })
 })

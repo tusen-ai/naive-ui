@@ -89,7 +89,7 @@ export default defineComponent({
       selfRef,
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
-        const { size, round, circle, objectFit } = props
+        const { size, round, circle } = props
         const {
           self: { borderRadius, fontSize, color },
           common: { cubicBezierEaseInOut }
@@ -105,8 +105,7 @@ export default defineComponent({
           '--border-radius': round || circle ? '50%' : borderRadius,
           '--color': color,
           '--bezier': cubicBezierEaseInOut,
-          '--size': height,
-          '--object-fit': objectFit
+          '--size': height
         }
       })
     }
@@ -120,7 +119,11 @@ export default defineComponent({
         style={this.cssVars as any}
       >
         {!$slots.default && src ? (
-          <img src={src} onError={(e) => this.onError?.(e)} />
+          <img
+            src={src}
+            onError={this.onError}
+            style={{ objectFit: this.objectFit }}
+          />
         ) : (
           <span
             ref="textRef"

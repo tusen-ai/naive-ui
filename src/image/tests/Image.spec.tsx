@@ -92,18 +92,16 @@ describe('n-image', () => {
     expect(wrapper.find('[data-cool]').exists()).toEqual(true)
   })
 
-  it('should work with `onError` prop', () => {
+  it('should work with `onError` prop', async () => {
     const onError = jest.fn()
-    try {
-      mount(NImage, {
-        props: {
-          src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07.jpeg',
-          onError
-        }
-      })
-    } catch (error) {
-      expect(onError).toHaveBeenCalled()
-    }
+    const wrapper = mount(NImage, {
+      props: {
+        src: 'https:// 07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+        onError
+      }
+    })
+    await wrapper.find('img').trigger('error')
+    expect(onError).toHaveBeenCalled()
   })
 
   it('should work with `objectFit` prop', () => {
@@ -113,8 +111,8 @@ describe('n-image', () => {
         objectFit: 'contain'
       }
     })
-    expect(wrapper.find('.n-image').attributes('style')).toContain(
-      '--object-fit: contain;'
+    expect(wrapper.find('img').attributes('style')).toContain(
+      'object-fit: contain;'
     )
   })
 })

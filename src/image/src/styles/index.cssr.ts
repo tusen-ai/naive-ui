@@ -75,7 +75,6 @@ export default c([
   `, [
     c('img', `
       border-radius: inherit;
-      object-fit: var(--object-fit)
     `)
   ])
 ])
