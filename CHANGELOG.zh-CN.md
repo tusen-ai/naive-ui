@@ -305,10 +305,6 @@
 - 修复 `n-menu` 的菜单和子菜单的 `extra` 属性的类型定义
 - 修复 `n-dropdown` 选项鼠标形状不是 pointer
 
-### Feats
-
-- `n-card` 增加 `:target` 的样式
-
 ## 2.11.4
 
 ### Feats
