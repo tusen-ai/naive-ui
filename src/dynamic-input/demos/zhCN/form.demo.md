@@ -61,7 +61,7 @@ export default defineComponent({
       dynamicInputRule: {
         trigger: 'input',
         validator (rule, value) {
-          if (value.length >= 5) return new Error('Input up to 4 characters')
+          if (value.length >= 5) return new Error('最多输入四个字符')
           return true
         }
       },
