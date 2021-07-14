@@ -9,6 +9,7 @@
 - `n-slider` add `format-tooltip` prop.
 - `n-upload` add `event` in `on-finish` callback params.
 - `n-rate` add `readonly` prop.
+- `n-notification` export `NotificationApi`, `NotificationOptions` and `NotificationReactive` type.
 - `n-avatar` add `on-error` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
 - `n-image` add `on-error` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
 - `n-image` add `object-fit` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
@@ -19,6 +20,7 @@
 - Fix `n-pagination` page count is not correct when `item-count` is 0.
 - Fix `n-scrollbar` `content-style` can not override the default width of style.
 - Fix `n-select` placeholder transition.
+- Fix `n-loading-bar` `useLoadingBar`'s return type can be undefined.
 
 ## 2.15.4 (2021-07-09)
 

@@ -10,6 +10,7 @@
 - `n-upload` 在 `on-finish` 回调参数中新增 `event`
 - `n-slider` 新增 `format-tooltip` 属性
 - `n-rate` 新增 `readonly` 属性
+- `n-notification` 导出 `NotificationApi`, `NotificationOptions` and `NotificationReactive` 类型
 - `n-avatar` 新增 `on-error` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
 - `n-image` 新增 `on-error` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
 - `n-image` 新增 `object-fit` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
@@ -20,6 +21,7 @@
 - 修复 `n-pagination` `item-count` 为 0 时页数不对
 - 修复 `n-scrollbar` `content-style` 无法覆盖默认样式的宽度
 - 修复 `n-select` placeholder transition
+- 修复 `n-loading-bar` `useLoadingBar` 返回类型可能为 undefined
 
 ## 2.15.4 (2021-07-09)
 
