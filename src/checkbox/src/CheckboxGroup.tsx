@@ -16,7 +16,7 @@ import { warn, call, MaybeArray } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 export interface CheckboxGroupInjection {
-  checkedCountRef: Ref<number>
+  checkedCountRef: ComputedRef<number>
   maxRef: ComputedRef<number>
   minRef: ComputedRef<number>
   disabledRef: Ref<boolean>

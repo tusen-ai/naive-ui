@@ -1,8 +1,12 @@
 # CHANGELOG
 
-## 2.15.5 (2021-07-16)
+## Pending
 
 ### Feats
+
+- `n-checkbox-group` 新增 `min` 和 `max` 属性.
+
+## 2.15.5 (2021-07-16)
 
 - `n-tree` 新增 `render-label`、`render-prefix` 和 `render-suffix` 属性
 - `n-rate` 新增 `allow-half` 属性
