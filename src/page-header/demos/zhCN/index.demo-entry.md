@@ -14,7 +14,7 @@ basic
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| extra | `string` | `undefined` | 额外的文本信息，当使用 `extra` 插槽时改参数无效 |
+| extra | `string` | `undefined` | 额外的文本信息，当使用 `extra` 插槽时该参数无效 |
 | subtitle | `string` | `undefined` | 副标题 |
 | title | `string` | `undefined` | 主标题 |
 | on-back | `() => void` | `undefined` | 点击返回按钮的回调 |
