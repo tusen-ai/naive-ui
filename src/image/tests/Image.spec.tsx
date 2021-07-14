@@ -91,4 +91,28 @@ describe('n-image', () => {
     })
     expect(wrapper.find('[data-cool]').exists()).toEqual(true)
   })
+
+  it('should work with `onError` prop', async () => {
+    const onError = jest.fn()
+    const wrapper = mount(NImage, {
+      props: {
+        src: 'https:// 07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+        onError
+      }
+    })
+    await wrapper.find('img').trigger('error')
+    expect(onError).toHaveBeenCalled()
+  })
+
+  it('should work with `objectFit` prop', () => {
+    const wrapper = mount(NImage, {
+      props: {
+        src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+        objectFit: 'contain'
+      }
+    })
+    expect(wrapper.find('img').attributes('style')).toContain(
+      'object-fit: contain;'
+    )
+  })
 })
