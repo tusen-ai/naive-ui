@@ -10,6 +10,10 @@
 - `n-upload` add `event` in `on-finish` callback params.
 - `n-rate` add `readonly` prop.
 - `n-notification` export `NotificationApi`, `NotificationOptions` and `NotificationReactive` type.
+- `n-avatar` add `on-error` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
+- `n-image` add `on-error` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
+- `n-image` add `object-fit` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
+- `n-avatar` add `object-fit` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
 
 ### Fixes
 

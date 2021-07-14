@@ -11,6 +11,10 @@
 - `n-slider` 新增 `format-tooltip` 属性
 - `n-rate` 新增 `readonly` 属性
 - `n-notification` 导出 `NotificationApi`, `NotificationOptions` and `NotificationReactive` 类型
+- `n-avatar` 新增 `on-error` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
+- `n-image` 新增 `on-error` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
+- `n-image` 新增 `object-fit` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
+- `n-avatar` 新增 `object-fit` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
 
 ### Fixes
 
