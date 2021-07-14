@@ -32,6 +32,6 @@ shape
 
 ## Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name    | Parameters | Description    |
+| ------- | ---------- | -------------- |
+| default | `()`       | Tag's content. |
