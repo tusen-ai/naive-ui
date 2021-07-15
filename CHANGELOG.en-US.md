@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-tree` add `render-label`, `render-prefix` and `render-suffix` props.
 - `n-rate` add `allow-half` prop.
 - `n-carousel` add `show-arrow` prop.
 - `n-slider` add `format-tooltip` prop.
