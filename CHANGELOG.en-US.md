@@ -5,7 +5,12 @@
 ### Feats
 
 - `n-upload` add `show-file-list` prop.
+- `n-dropdown` add `render-icon` prop.
 - `n-checkbox-group` add `min` and `max` prop.
+
+### Fixes
+
+- Fix `n-dropdown`'s `render-label` prop is invalid for group type option.
 
 ## 2.15.5 (2021-07-16)
 

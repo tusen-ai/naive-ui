@@ -16,14 +16,18 @@ export default defineComponent({
   },
   setup () {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { showIconRef, hasSubmenuRef } = inject(dropdownMenuInjectionKey)!
+    const NDropdownMenu = inject(dropdownMenuInjectionKey)!
+    const { showIconRef, hasSubmenuRef, renderLabelRef, renderIconRef } =
+      NDropdownMenu
     return {
       showIcon: showIconRef,
-      hasSubmenu: hasSubmenuRef
+      hasSubmenu: hasSubmenuRef,
+      renderLabel: renderLabelRef,
+      renderIcon: renderIconRef
     }
   },
   render () {
-    const { clsPrefix, hasSubmenu, showIcon } = this
+    const { clsPrefix, hasSubmenu, showIcon, renderLabel, renderIcon } = this
     const { rawNode } = this.tmNode
     return (
       <div class={`${clsPrefix}-dropdown-option`}>
@@ -34,7 +38,8 @@ export default defineComponent({
             __dropdown-option
             class={[
               `${clsPrefix}-dropdown-option-body__prefix`,
-              showIcon && `${clsPrefix}-dropdown-option-body__prefix--show-icon`
+              (showIcon || renderIcon) &&
+                `${clsPrefix}-dropdown-option-body__prefix--show-icon`
             ]}
           >
             {render(rawNode.icon)}
@@ -43,7 +48,9 @@ export default defineComponent({
             class={`${clsPrefix}-dropdown-option-body__label`}
             __dropdown-option
           >
-            {render(rawNode.label ?? rawNode.title)}
+            {renderLabel
+              ? renderLabel(rawNode)
+              : render(rawNode.label ?? rawNode.title)}
           </div>
           <div
             class={[

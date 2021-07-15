@@ -2,6 +2,7 @@ import {
   computed,
   defineComponent,
   h,
+  inject,
   InjectionKey,
   PropType,
   provide,
@@ -13,6 +14,11 @@ import NDropdownDivider from './DropdownDivider'
 import NDropdownGroup from './DropdownGroup'
 import { isSubmenuNode, isGroupNode, isDividerNode } from './utils'
 import {
+  dropdownInjectionKey,
+  RenderIconImpl,
+  RenderLabelImpl
+} from './Dropdown'
+import {
   DropdownGroupOption,
   DropdownIgnoredOption,
   DropdownOption
@@ -21,11 +27,12 @@ import {
 export interface NDropdownMenuInjection {
   showIconRef: Ref<boolean>
   hasSubmenuRef: Ref<boolean>
+  renderLabelRef: Ref<RenderLabelImpl | undefined>
+  renderIconRef: Ref<RenderIconImpl | undefined>
 }
 
-export const dropdownMenuInjectionKey: InjectionKey<NDropdownMenuInjection> = Symbol(
-  'dropdownMenu'
-)
+export const dropdownMenuInjectionKey: InjectionKey<NDropdownMenuInjection> =
+  Symbol('dropdownMenu')
 
 export default defineComponent({
   name: 'DropdownMenu',
@@ -48,6 +55,8 @@ export default defineComponent({
     }
   },
   setup (props) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const NDropdown = inject(dropdownInjectionKey)!
     provide(dropdownMenuInjectionKey, {
       showIconRef: computed(() => {
         return props.tmNodes.some((tmNode) => {
@@ -70,7 +79,9 @@ export default defineComponent({
           }
           return isSubmenuNode(rawNode)
         })
-      })
+      }),
+      renderLabelRef: NDropdown.renderLabelRef,
+      renderIconRef: NDropdown.renderIconRef
     })
   },
   render () {

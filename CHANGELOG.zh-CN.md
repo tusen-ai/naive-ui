@@ -5,7 +5,12 @@
 ### Feats
 
 - `n-upload` 新增 `show-file-list` 属性
+- `n-dropdown` 新增 `render-icon` 属性
 - `n-checkbox-group` 新增 `min` 和 `max` 属性.
+
+### Fixes
+
+- 修复 `n-dropdown` 的 `render-label` 属性对 group 类型 option 失效
 
 ## 2.15.5 (2021-07-16)
 
