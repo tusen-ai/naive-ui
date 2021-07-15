@@ -7,7 +7,7 @@ A basic calender.
   @update:value="handleUpdateValue"
   #="{ year, month, date }"
   v-model:value="value"
-  :is-date-disabled="disableFunction"
+  :is-date-disabled="isDateDisabled"
 >
   {{ year }}-{{ month }}-{{ date }}
 </n-calendar>
@@ -26,7 +26,7 @@ export default defineComponent({
       handleUpdateValue (_, { year, month, date }) {
         message.success(`${year}-${month}-${date}`)
       },
-      disableFunction (timestamp) {
+      isDateDisabled (timestamp) {
         if (isYesterday(timestamp)) {
           return true
         }
