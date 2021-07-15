@@ -46,7 +46,10 @@ export default defineComponent({
             },
             {
               label: 'Drive My Car',
-              value: 'song1'
+              value: 'song1',
+              style: {
+                color: 'red'
+              }
             },
             {
               label: 'Norwegian Wood',

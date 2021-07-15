@@ -23,26 +23,26 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      customValue: [
+      customValue: ref([
         {
           isCheck: true,
           num: 1,
           string: '一个字符串'
         }
-      ]
-    }
-  },
-  methods: {
-    onCreate () {
-      return {
-        isCheck: false,
-        num: 1,
-        string: '一个字符串'
+      ]),
+      onCreate () {
+        return {
+          isCheck: false,
+          num: 1,
+          string: '一个字符串'
+        }
       }
     }
   }
-}
+})
 ```

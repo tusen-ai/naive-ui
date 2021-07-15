@@ -24,7 +24,7 @@ import NotificationEnvironment, {
 } from './NotificationEnvironment'
 import style from './styles/index.cssr'
 
-type NotificationOptions = Partial<
+export type NotificationOptions = Partial<
 ExtractPropTypes<typeof notificationEnvOptions>
 >
 
@@ -58,7 +58,7 @@ export const notificationApiInjectionKey: InjectionKey<NotificationApiInjection>
   'notificationApi'
 )
 
-type NotificationReactive = {
+export type NotificationReactive = {
   readonly key: string
   readonly destroy: () => void
   /** @deprecated */

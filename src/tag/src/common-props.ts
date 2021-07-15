@@ -3,7 +3,7 @@ import { PropType } from 'vue'
 export default {
   type: {
     type: String as PropType<
-    'default' | 'success' | 'info' | 'warning' | 'error'
+    'default' | 'primary' | 'success' | 'info' | 'warning' | 'error'
     >,
     default: 'default'
   },
