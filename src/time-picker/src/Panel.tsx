@@ -2,7 +2,7 @@ import { h, ref, defineComponent, inject, PropType, computed } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 import { NButton } from '../../button'
 import { NBaseFocusDetector } from '../../_internal'
-import { time } from './utils'
+import { time, getFixValue } from './utils'
 import {
   IsHourDisabled,
   IsMinuteDisabled,
@@ -10,6 +10,7 @@ import {
   timePickerInjectionKey
 } from './interface'
 import PanelCol, { Item } from './PanelCol'
+import { MaybeArray } from '../../_utils'
 
 export default defineComponent({
   name: 'TimePickerPanel',
@@ -84,7 +85,10 @@ export default defineComponent({
     onFocusin: Function as PropType<(e: FocusEvent) => void>,
     onFocusout: Function as PropType<(e: FocusEvent) => void>,
     onFocusDetectorFocus: Function as PropType<() => void>,
-    onKeydown: Function as PropType<(e: KeyboardEvent) => void>
+    onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
+    hours: [Number, Array] as PropType<MaybeArray<number>>,
+    minutes: [Number, Array] as PropType<MaybeArray<number>>,
+    seconds: [Number, Array] as PropType<MaybeArray<number>>
   },
   setup (props) {
     const {
@@ -92,18 +96,34 @@ export default defineComponent({
       mergedClsPrefixRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(timePickerInjectionKey)!
-    const hoursRef = computed<Item[]>(() =>
-      time.hours.map((hour) => {
-        const { isHourDisabled } = props
+
+    function getTimeUnits (
+      defaultValue: string[],
+      stepOrList: MaybeArray<number> | undefined
+    ): string[] {
+      if (Array.isArray(stepOrList)) {
+        return stepOrList.map((v) => Math.floor(v)).map((v) => getFixValue(v))
+      } else if (typeof stepOrList === 'number') {
+        return defaultValue.filter((hour) => Number(hour) % stepOrList === 0)
+      } else {
+        return defaultValue
+      }
+    }
+
+    const hoursRef = computed<Item[]>(() => {
+      const { isHourDisabled, hours } = props
+
+      return getTimeUnits(time.hours, hours).map((hour) => {
         return {
           value: hour,
           disabled: isHourDisabled ? isHourDisabled(Number(hour)) : false
         }
       })
-    )
-    const minutesRef = computed<Item[]>(() =>
-      time.minutes.map((minute) => {
-        const { isMinuteDisabled } = props
+    })
+    const minutesRef = computed<Item[]>(() => {
+      const { isMinuteDisabled, minutes } = props
+
+      return getTimeUnits(time.minutes, minutes).map((minute) => {
         return {
           value: minute,
           disabled: isMinuteDisabled
@@ -111,10 +131,11 @@ export default defineComponent({
             : false
         }
       })
-    )
-    const secondsRef = computed<Item[]>(() =>
-      time.seconds.map((second) => {
-        const { isSecondDisabled } = props
+    })
+    const secondsRef = computed<Item[]>(() => {
+      const { isSecondDisabled, seconds } = props
+
+      return getTimeUnits(time.seconds, seconds).map((second) => {
         return {
           value: second,
           disabled: isSecondDisabled
@@ -126,7 +147,7 @@ export default defineComponent({
             : false
         }
       })
-    )
+    })
     return {
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -156,10 +177,10 @@ export default defineComponent({
               class={[
                 `${mergedClsPrefix}-time-picker-col`,
                 {
-                  [`${mergedClsPrefix}-time-picker-col--invalid`]: this
-                    .isHourInvalid,
-                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]: this
-                    .transitionDisabled
+                  [`${mergedClsPrefix}-time-picker-col--invalid`]:
+                    this.isHourInvalid,
+                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]:
+                    this.transitionDisabled
                 }
               ]}
             >
@@ -189,10 +210,10 @@ export default defineComponent({
               class={[
                 `${mergedClsPrefix}-time-picker-col`,
                 {
-                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]: this
-                    .transitionDisabled,
-                  [`${mergedClsPrefix}-time-picker-col--invalid`]: this
-                    .isMinuteInvalid
+                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]:
+                    this.transitionDisabled,
+                  [`${mergedClsPrefix}-time-picker-col--invalid`]:
+                    this.isMinuteInvalid
                 }
               ]}
             >
@@ -222,10 +243,10 @@ export default defineComponent({
               class={[
                 `${mergedClsPrefix}-time-picker-col`,
                 {
-                  [`${mergedClsPrefix}-time-picker-col--invalid`]: this
-                    .isSecondInvalid,
-                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]: this
-                    .transitionDisabled
+                  [`${mergedClsPrefix}-time-picker-col--invalid`]:
+                    this.isSecondInvalid,
+                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]:
+                    this.transitionDisabled
                 }
               ]}
             >

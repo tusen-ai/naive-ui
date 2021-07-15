@@ -59,6 +59,18 @@ import {
 } from './interface'
 import { happensIn } from 'seemly'
 
+// validate hours,minutes,seconds prop
+function validateUnits (value: MaybeArray<number>, max: number): boolean {
+  if (value === undefined) {
+    return true
+  }
+  if (Array.isArray(value)) {
+    return value.every((v) => v >= 0 && v <= max)
+  } else {
+    return value >= 0 && value <= max
+  }
+}
+
 const timePickerProps = {
   ...(useTheme.props as ThemeProps<TimePickerTheme>),
   to: useAdjustedTo.propTo,
@@ -119,6 +131,18 @@ const timePickerProps = {
       return true
     },
     default: undefined
+  },
+  hours: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: MaybeArray<number>) => validateUnits(value, 23)
+  },
+  minutes: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: MaybeArray<number>) => validateUnits(value, 59)
+  },
+  seconds: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: MaybeArray<number>) => validateUnits(value, 59)
   }
 }
 
@@ -666,6 +690,9 @@ export default defineComponent({
                                 <Panel
                                   ref="panelInstRef"
                                   style={this.cssVars as CSSProperties}
+                                  seconds={this.seconds}
+                                  minutes={this.minutes}
+                                  hours={this.hours}
                                   transitionDisabled={this.transitionDisabled}
                                   hourValue={this.hourValue}
                                   showHour={this.hourInFormat}

@@ -6,6 +6,6 @@ export type {
   DialogProviderInst,
   DialogOptions,
   DialogReactive,
-  DialogApiInjection
+  DialogApiInjection as DialogApi
 } from './src/DialogProvider'
 export { useDialog } from './src/use-dialog'
