@@ -5,11 +5,13 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      tags: ['教师', '程序员']
+      tags: ref(['教师', '程序员'])
     }
   }
-}
+})
 ```
