@@ -10,7 +10,7 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup () {
     return {
-      ['教师', '程序员']
+      tags: ['教师', '程序员']
     }
   }
 })
