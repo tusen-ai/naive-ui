@@ -22,7 +22,7 @@ router-link
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 排印类型 |
 | strong | `boolean` | `false` | 粗体 |
 | italic | `boolean` | `false` | 斜体 |
-| underline | `boolean` | `false` | 文字底线 |
+| underline | `boolean` | `false` | 文字下划线 |
 | delete | `boolean` | `false` | 文字删除线 |
 | code | `boolean` | `false` | 代码模式 |
 | depth | `1 \| 2 \| 3 \| '1' \| '2' \| '3'` | `undefined` | 文字深度 |
