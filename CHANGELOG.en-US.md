@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-time-picker` add `actions` prop, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
+
 ## 2.15.5 (2021-07-16)
 
 ### Feats
@@ -8,7 +14,6 @@
 - `n-rate` add `allow-half` prop.
 - `n-carousel` add `show-arrow` prop.
 - `n-slider` add `format-tooltip` prop.
-- `n-time-picker` add `actions` prop, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
 - `n-upload` add `event` in `on-finish` callback params.
 - `n-rate` add `readonly` prop.
 - `n-time-picker` add `seconds`, `minutes`, `hours` props.
