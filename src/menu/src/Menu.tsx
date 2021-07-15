@@ -71,10 +71,7 @@ const menuProps = {
     default: 32
   },
   defaultExpandAll: Boolean,
-  defaultExpandedKeys: {
-    type: Array as PropType<Key[]>,
-    default: () => []
-  },
+  defaultExpandedKeys: Array as PropType<Key[]>,
   expandedKeys: {
     type: Array as PropType<Key[]>,
     default: undefined
@@ -205,10 +202,22 @@ export default defineComponent({
         }
       )
     )
+
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
+
     const uncontrolledExpandedKeysRef = ref(
       props.defaultExpandAll
         ? treeMateRef.value.getNonLeafKeys()
-        : props.defaultExpandedNames || props.defaultExpandedKeys
+        : props.defaultExpandedNames ||
+            props.defaultExpandedKeys ||
+            treeMateRef.value.getPath(mergedValueRef.value, {
+              includeSelf: false
+            }).keyPath
     )
     const controlledExpandedKeysRef = useCompitable(props, [
       'expandedNames',
@@ -217,12 +226,6 @@ export default defineComponent({
     const mergedExpandedKeysRef = useMergedState(
       controlledExpandedKeysRef,
       uncontrolledExpandedKeysRef
-    )
-    const uncontrolledValueRef = ref(props.defaultValue)
-    const controlledValueRef = toRef(props, 'value')
-    const mergedValueRef = useMergedState(
-      controlledValueRef,
-      uncontrolledValueRef
     )
     const tmNodesRef = computed(() => treeMateRef.value.treeNodes)
     const activePathRef = computed(() => {
