@@ -22,6 +22,8 @@
 - Fix `n-scrollbar` `content-style` can not override the default width of style.
 - Fix `n-select` placeholder transition.
 - Fix `n-loading-bar` `useLoadingBar`'s return type can be undefined.
+- Fix `n-tag`'s `type` prop add `primary` type.
+- Fix `n-dynamic-tag`'s `type` prop add `primary` type.
 
 ## 2.15.4 (2021-07-09)
 
