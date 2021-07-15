@@ -19,6 +19,7 @@
 
 ### Fixes
 
+- 修复 `n-calendar` 的 `default-value` 属性无法使用
 - 修复 `n-pagination` `item-count` 为 0 时页数不对
 - 修复 `n-scrollbar` `content-style` 无法覆盖默认样式的宽度
 - 修复 `n-select` placeholder transition

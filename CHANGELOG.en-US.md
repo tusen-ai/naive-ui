@@ -18,6 +18,7 @@
 
 ### Fixes
 
+- Fix `n-calendar`'s `default-value` prop cannot be used.
 - Fix `n-pagination` page count is not correct when `item-count` is 0.
 - Fix `n-scrollbar` `content-style` can not override the default width of style.
 - Fix `n-select` placeholder transition.
