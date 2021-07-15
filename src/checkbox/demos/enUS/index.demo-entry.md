@@ -35,7 +35,17 @@ event
 | disabled | `boolean` | `false` | Whether the checkbox group is disabled. |
 | default-value | `Array<string \| number>` | `null` | Checkbox group's default selected value. |
 | value | `Array<string \| number> \| null` | `undefined` | Controlled value of checkbox group. |
+| options | `Array<string \| SelectOption> ` | `[]` | For details of configuration options, see CheckboxGroupOption Properties. |
 | on-update:value | `(value: string \| number)` | `undefined` | Callback when checkbox group's value changes. |
+
+### CheckboxGroupOption Properties
+
+| Name | Type | Description |
+| --- | --- | --- |
+| indeterminate | `boolean` | Whether to partially select an option |
+| disabled | `boolean` | Whether to disable an option |
+| label | `string \| (() => VNodeChild)` | Option label |
+| value | `string \| number` | Should be unique among options |
 
 ## Slots
 

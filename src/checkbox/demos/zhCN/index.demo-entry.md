@@ -35,7 +35,17 @@ event
 | disabled | `boolean` | `false` | 选项组是否禁用 |
 | default-value | `Array<string \| number>` | `null` | 选项组非受控模式下的默认值 |
 | value | `Array<string \| number> \| null` | `undefined` | 选项组受控模式下的值 |
+| options | `Array<string \| SelectOption> ` | `[]` | 配置选项内容，详情见 CheckboxGroupOption Properties |
 | on-update:value | `(value: string \| number)` | `undefined` | 选项组的值改变时的回调 |
+
+### CheckboxGroupOption Properties
+
+| 名称          | 类型                           | 说明                 |
+| ------------- | ------------------------------ | -------------------- |
+| indeterminate | `boolean`                      | 是否部分选中一个选项 |
+| disabled      | `boolean`                      | 是否禁用一个选项     |
+| label         | `string \| (() => VNodeChild)` | 选项的标签           |
+| value         | `string \| number`             | 在选项中应该是唯一的 |
 
 ## Slots
 

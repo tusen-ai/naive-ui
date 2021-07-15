@@ -7,7 +7,11 @@
     @update:checked="handleCheckedChange"
     label="事件"
   />
-  <n-checkbox-group :value="cities" @update:value="handleUpdateValue">
+  <n-checkbox-group
+    :defaultValue="defaultValueTest"
+    :value="cities"
+    @update:value="handleUpdateValue"
+  >
     <n-space item-style="display: flex;" align="center">
       <n-checkbox value="Beijing" label="北京" />
       <n-checkbox value="Shanghai" label="上海" />
@@ -30,6 +34,9 @@ export default defineComponent({
     return {
       checked: checkedRef,
       cities: citiesRef,
+      defaultValueTest () {
+        return ['Beijing']
+      },
       handleCheckedChange (checked) {
         checkedRef.value = checked
         message.info(JSON.stringify(checked))
