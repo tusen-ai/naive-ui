@@ -34,7 +34,7 @@ long-label
 | icon-size | `number` | `20` | The icon size when menu is not collapsed. |
 | indent | `number` | `32` | The indent of menu. |
 | inverted | `boolean` | `false` | Use inverted style. |
-| options | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | `[]` | Items data of menu. |
+| options | `Array<MenuOption \| MenuOptionGroup>` | `[]` | Items data of menu. |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | Menu layout. |
 | render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all labels. |
 | root-indent | `number` | `undefined` | The indent of menu's first level children. If not set, menu will use `indent` in place of it. |
@@ -46,28 +46,18 @@ long-label
 
 | Name | Type | Description |
 | --- | --- | --- |
+| children? | `Array<MenuOption \| MenuOptionGroup>` | Child menu options. |
 | disabled? | `boolean` | Whether to disable the menu item. |
 | extra? | `string \| (() => VNodeChild)` | The extra parts of the menu item. |
 | icon? | `() => VNodeChild` | The icon for the menu item. |
 | key | `string` | The indentifier of the menu item. |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |
 
-### Submenu Properties
-
-| Name | Type | Description |
-| --- | --- | --- |
-| children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | Submenu child items. |
-| disabled? | `boolean` | Whether to disable the submenu. |
-| extra? | `string \| (() => VNodeChild)` | The extra parts of the menu item. |
-| icon? | `() => VNodeChild` | The icon for the submenu item. |
-| key | `string` | The indentifier of the submenu. |
-| label | `string \| (() => VNodeChild)` | The label of the menu item. |
-
 ### MenuOptionGroup Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children | `Array<MenuOption \| Submenu \| MenuOptionGroup>` | Group items. **required!** |
+| children | `Array<MenuOption \| MenuOptionGroup>` | Group items. **required!** |
 | key | `string` | The indentifier of the menu group. |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |
 | type | `'group'` | The type of the menu item, **required!** |
