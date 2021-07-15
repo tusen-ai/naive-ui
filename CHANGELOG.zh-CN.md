@@ -1,5 +1,34 @@
 # CHANGELOG
 
+## 2.15.5 (2021-07-16)
+
+### Feats
+
+- `n-tree` 新增 `render-label`、`render-prefix` 和 `render-suffix` 属性
+- `n-rate` 新增 `allow-half` 属性
+- `n-carousel` 新增 `show-arrow` 属性
+- `n-slider` 新增 `format-tooltip` 属性
+- `n-upload` 在 `on-finish` 回调参数中新增 `event`
+- `n-slider` 新增 `format-tooltip` 属性
+- `n-rate` 新增 `readonly` 属性
+- `n-time-picker` 新增 `seconds`、`minutes`、`hours`属性
+- `n-notification` 导出 `NotificationApi`, `NotificationOptions` and `NotificationReactive` 类型
+- `n-avatar` 新增 `on-error` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
+- `n-image` 新增 `on-error` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
+- `n-image` 新增 `object-fit` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
+- `n-avatar` 新增 `object-fit` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
+- `n-menu` 默认展开选中项的全部父级，关闭[#481](https://github.com/TuSimple/naive-ui/issues/481)
+
+### Fixes
+
+- 修复 `n-calendar` 的 `default-value` 属性无法使用
+- 修复 `n-pagination` `item-count` 为 0 时页数不对
+- 修复 `n-scrollbar` `content-style` 无法覆盖默认样式的宽度
+- 修复 `n-select` placeholder transition
+- 修复 `n-loading-bar` `useLoadingBar` 返回类型可能为 undefined
+- 修复 `n-tag` 的 `type` 增加 `primary`　类型
+- 修复 `n-dynamic-tag` 的 `type` 增加 `primary`　类型
+
 ## 2.15.4 (2021-07-09)
 
 ### Feats
@@ -31,7 +60,7 @@
 ### Feats
 
 - `n-loading-bar` 导出 `LoadingBarApi` 类型
-- `n-image` 增加 `imgProps` 属性
+- `n-image` 增加 `img-props` 属性
 - 在部分组件上添加原生 `title` 属性，以提高用户体验
 - `n-tree` 在 TreeOption 中增加 `prefix` 和 `suffix` 属性
 - `n-carousel` 增加 `dot-placement` 属性

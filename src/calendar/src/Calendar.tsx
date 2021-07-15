@@ -55,7 +55,7 @@ export default defineComponent({
     const now = Date.now()
     // ts => timestamp
     const monthTsRef = ref(startOfMonth(now).valueOf())
-    const uncontrolledValueRef = ref<number | null>(null)
+    const uncontrolledValueRef = ref<number | null>(props.defaultValue || null)
     const mergedValueRef = useMergedState(
       toRef(props, 'value'),
       uncontrolledValueRef

@@ -2,6 +2,8 @@
 
 你可以设定 `default-expanded-keys` 让菜单工作在非受控状态下或者使用 `expanded-keys` 和 `@update:expanded-keys` 以受控的方式控制菜单。
 
+如果你不设定 `default-expanded-keys`，菜单会默认展开选中项的全部父级。
+
 ```html
 <n-menu
   :options="menuOptions"

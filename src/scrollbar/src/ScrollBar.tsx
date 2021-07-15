@@ -619,10 +619,10 @@ const Scrollbar = defineComponent({
                       ref="contentRef"
                       style={
                         [
-                          this.contentStyle,
                           {
                             width: this.xScrollable ? 'fit-content' : null
-                          }
+                          },
+                          this.contentStyle
                         ] as any
                       }
                       class={[

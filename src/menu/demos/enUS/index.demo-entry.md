@@ -10,7 +10,7 @@ No Food.
 horizontal
 select
 render-label
-default-expanded-names
+default-expanded-keys
 indent
 collapse
 inverted

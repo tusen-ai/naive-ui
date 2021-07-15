@@ -58,7 +58,7 @@ function createXhrHandlers (
       })
       XhrMap.delete(file.id)
       fileAfterChange =
-        inst.onFinish?.({ file: fileAfterChange }) || fileAfterChange
+        inst.onFinish?.({ file: fileAfterChange, event: e }) || fileAfterChange
       doChange(fileAfterChange, e)
     },
     handleXHRAbort (e) {
