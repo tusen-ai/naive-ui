@@ -1,4 +1,4 @@
-# 可以激活一半星星
+# 允许半颗
 
 ```html
 <n-rate allow-half />

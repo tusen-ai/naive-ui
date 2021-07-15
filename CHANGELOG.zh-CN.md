@@ -59,7 +59,7 @@
 ### Feats
 
 - `n-loading-bar` 导出 `LoadingBarApi` 类型
-- `n-image` 增加 `imgProps` 属性
+- `n-image` 增加 `img-props` 属性
 - 在部分组件上添加原生 `title` 属性，以提高用户体验
 - `n-tree` 在 TreeOption 中增加 `prefix` 和 `suffix` 属性
 - `n-carousel` 增加 `dot-placement` 属性

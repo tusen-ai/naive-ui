@@ -1,4 +1,4 @@
-# Batch Render
+# Batch Rendering
 
 As you can see, prefix, label, and suffix all have render functions.
 
@@ -10,7 +10,7 @@ As you can see, prefix, label, and suffix all have render functions.
   :render-prefix="renderPrefix"
   :render-label="renderLabel"
   :render-suffix="renderSuffix"
-  selectable
+  :selectable="false"
 />
 ```
 
@@ -47,7 +47,7 @@ function renderPrefix ({ option }) {
 }
 
 function renderLabel ({ option }) {
-  return `${option.label} ^_^`
+  return `${option.label} :)`
 }
 
 function renderSuffix ({ option }) {

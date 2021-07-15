@@ -58,7 +58,7 @@
 ### Feats
 
 - `n-loading-bar` export `LoadingBarApi` type.
-- `n-image` add `imgProps` prop.
+- `n-image` add `img-props` prop.
 - Add native `title` attributes to some components to enhance the experience.
 - `n-tree` add `prefix` and `suffix` in TreeOption.
 - `n-carousel` add `dot-placement` prop.

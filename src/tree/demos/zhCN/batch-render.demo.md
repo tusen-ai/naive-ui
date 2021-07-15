@@ -10,7 +10,7 @@
   :render-prefix="renderPrefix"
   :render-label="renderLabel"
   :render-suffix="renderSuffix"
-  selectable
+  :selectable="false"
 />
 ```
 
