@@ -13,13 +13,13 @@ form
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| closable | `boolean` | `true` |  |
-| default-value | `string[]` | `[]` |  |
-| disabled | `boolean` | `false` |  |
-| input-style | `string \| Object` | `undefined` |  |
-| round | `boolean` | `false` |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| tag-style | `string \| Object` | `undefined` |  |
-| type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` |  |
-| value | `string[]` | `undefined` |  |
-| on-update:value | `(value: boolean) => void` | `undefined` |  |
+| closable | `boolean` | `true` | Whether the tag is closable. |
+| default-value | `string[]` | `[]` | Default value in uncontrolled mode. |
+| disabled | `boolean` | `false` | Whether the tag is disabled. |
+| input-style | `string \| Object` | `undefined` | Customize the style of the input. |
+| round | `boolean` | `false` | Whether the tag has round corner. |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |
+| tag-style | `string \| Object` | `undefined` | Customize the style of the tag. |
+| type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |
+| value | `string[]` | `undefined` | Value in controlled mode. |
+| on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |
