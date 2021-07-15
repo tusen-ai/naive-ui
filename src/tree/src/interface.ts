@@ -26,17 +26,17 @@ export interface TreeRenderProps {
   selected: boolean
 }
 
-type RenderFunction = ({
+type RenderTreePart = ({
   option,
   checked,
   selected
 }: TreeRenderProps) => VNodeChild
 
-export type RenderLabel = RenderFunction
+export type RenderLabel = RenderTreePart
 
-export type RenderPrefix = RenderFunction
+export type RenderPrefix = RenderTreePart
 
-export type RenderSuffix = RenderFunction
+export type RenderSuffix = RenderTreePart
 
 export interface TreeDragInfo {
   event: DragEvent

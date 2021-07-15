@@ -13,14 +13,8 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    checked: {
-      type: Boolean,
-      default: false
-    },
-    selected: {
-      type: Boolean,
-      default: false
-    },
+    checked: Boolean,
+    selected: Boolean,
     onClick: Function as PropType<(e: MouseEvent) => void>,
     onDragstart: Function as PropType<(e: DragEvent) => void>,
     tmNode: {
@@ -51,8 +45,8 @@ export default defineComponent({
   render () {
     const {
       clsPrefix,
-      checked,
-      selected,
+      checked = false,
+      selected = false,
       renderLabel,
       renderPrefix,
       renderSuffix,
