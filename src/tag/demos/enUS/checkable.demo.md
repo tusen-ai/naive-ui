@@ -8,9 +8,7 @@ It can be checkable.
   <n-tag checkable v-model:checked="checked"> Yes It Is </n-tag>
   <n-tag checkable v-model:checked="checked"> I'm Down </n-tag>
   <n-tag checkable v-model:checked="checked"> Yesterday </n-tag>
-  <n-tag checkable v-model:checked="checked">
-    I'm Looking Through You
-  </n-tag>
+  <n-tag checkable v-model:checked="checked"> I'm Looking Through You </n-tag>
 </n-space>
 ```
 
