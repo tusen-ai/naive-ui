@@ -22,15 +22,15 @@ You can use CSS variables from it. If you need to use those variables in JS, ple
 ```
 
 ```js
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { darkTheme } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     return {
       darkTheme,
       theme: ref(null)
     }
   }
-}
+})
 ```
