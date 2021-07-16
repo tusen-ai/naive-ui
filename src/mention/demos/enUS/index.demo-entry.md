@@ -20,14 +20,14 @@ Mention is provided after `v2.2.0`.
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | autosize | `boolean \| { maxRows?: number, minRows?: number }` | `false` | Autosize. |
-| options | `MentionOption[]` | `[]` | Options list. |
+| options | `MentionOption[]` | `[]` | Mention Options list. |
 | type | `'input' \| 'textarea'` | `'input'` | Input type. |
 | separator | `string` | `' '` | Char to split mentions whose length must be 1. |
 | bordered | `boolean` | `true` | Whether to display the border of the input box. |
 | disabled | `boolean` | `false` | Whether to set the input box to be disabled. |
 | value | `string \| null` | `undefined` | Input value. |
 | default-value | `string` | `''` | Input default value. |
-| loading | `boolean` | `false` | Whether it is displayed as loading. |
+| loading | `boolean` | `false` | Whether the selection panel of mentions shows the loading status. |
 | prefix | `string \| string[]` | `'@'` | Prefix char to trigger mentions whose length must be 1. |
 | placeholder | `string` | `''` | Input placeholder. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |
@@ -44,6 +44,6 @@ Mention is provided after `v2.2.0`.
 | class | `string` | Option class name. |
 | disabled | `boolean` | Option disabled status. |
 | label | `string` | Option label. |
-| render | `(option: MentionOption) => VNodeChild` | Set options via `render`. |
+| render | `(option: MentionOption) => VNodeChild` | Support custom options via `render` rendering function. |
 | style | `string` | Option style. |
 | value | `string` | Should be unique. |

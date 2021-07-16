@@ -27,23 +27,23 @@ Mention 在 `v2.2.0` 及以后可用。
 | disabled | `boolean` | `false` | 是否设置输入框为禁用状态 |
 | value | `string \| null` | `undefined` | 输入框的值 |
 | default-value | `string` | `''` | 输入框的默认值 |
-| loading | `boolean` | `false` | 是否显示为加载中 |
+| loading | `boolean` | `false` | 选择面板是否显示加载状态 |
 | prefix | `string \| string[]` | `'@'` | 触发提及的前缀，长度必须为 1 |
-| placeholder | `string` | `''` | 输入框的提示信息 |
+| placeholder | `string` | `''` | 输入框的占位符 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框的大小 |
 | on-update:value | `(value: string) => void` | `undefined` | 输入框值发生更新时触发 |
 | on-select | `(option: MentionOption, prefix: string) => void` | `undefined` | 输入框的选中时触发 |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | 输入框获得焦点时触发 |
 | on-search | `(pattern: string, prefix: string) => void` | `undefined` | 输入框搜索时触发 |
-| on-blur | `(e: FocusEvent) => void` | `undefined` | 输入框获失焦点时触发 |
+| on-blur | `(e: FocusEvent) => void` | `undefined` | 输入框失去焦点时触发 |
 
 ### MentionOption Properties
 
-| 名称     | 类型                                    | 说明                   |
-| -------- | --------------------------------------- | ---------------------- |
-| class    | `string`                                | 选项的自定义类名       |
-| disabled | `boolean`                               | 选项是否禁用           |
-| label    | `string`                                | 选项的标签             |
-| render   | `(option: MentionOption) => VNodeChild` | 通过 `render` 设置选项 |
-| style    | `string`                                | 选项的样式             |
-| value    | `string`                                | 在选项中应该是唯一的   |
+| 名称 | 类型 | 说明 |
+| --- | --- | --- |
+| class | `string` | 选项的自定义类名 |
+| disabled | `boolean` | 选项是否禁用 |
+| label | `string` | 选项的标签 |
+| render | `(option: MentionOption) => VNodeChild` | 支持通过 `render` 渲染函数自定义选项 |
+| style | `string` | 选项的样式 |
+| value | `string` | 在选项中应该是唯一的 |
