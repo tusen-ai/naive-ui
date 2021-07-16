@@ -8,6 +8,8 @@
 
 ## 2.15.5 (2021-07-16)
 
+### Feats
+
 - `n-tree` 新增 `render-label`、`render-prefix` 和 `render-suffix` 属性
 - `n-rate` 新增 `allow-half` 属性
 - `n-carousel` 新增 `show-arrow` 属性

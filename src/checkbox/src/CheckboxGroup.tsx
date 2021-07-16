@@ -17,8 +17,8 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 
 export interface CheckboxGroupInjection {
   checkedCountRef: ComputedRef<number>
-  maxRef: ComputedRef<number | undefined>
-  minRef: ComputedRef<number | undefined>
+  maxRef: Ref<number | undefined>
+  minRef: Ref<number | undefined>
   disabledRef: Ref<boolean>
   valueSetRef: Ref<Set<string | number>>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
@@ -83,21 +83,6 @@ export default defineComponent({
       return mergedValueRef.value?.length || 0
     })
 
-    const minRef = computed(() => {
-      if (props.min && props.max) {
-        return Math.floor(Math.min(props.min, props.max))
-      } else {
-        return props.min
-      }
-    })
-    const maxRef = computed(() => {
-      if (props.min && props.max) {
-        return Math.floor(Math.max(props.min, props.max))
-      } else {
-        return props.max
-      }
-    })
-
     const valueSetRef = computed<Set<string | number>>(() => {
       if (Array.isArray(mergedValueRef.value)) {
         return new Set(mergedValueRef.value)
@@ -160,8 +145,8 @@ export default defineComponent({
     }
     provide(checkboxGroupInjectionKey, {
       checkedCountRef: checkedCount,
-      maxRef,
-      minRef,
+      maxRef: toRef(props, 'max'),
+      minRef: toRef(props, 'min'),
       valueSetRef: valueSetRef,
       disabledRef: toRef(props, 'disabled'),
       mergedSizeRef: formItem.mergedSizeRef,

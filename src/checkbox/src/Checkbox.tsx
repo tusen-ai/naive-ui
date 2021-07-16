@@ -97,38 +97,25 @@ export default defineComponent({
       if (props.disabled) return true
       if (NCheckboxGroup) {
         if (NCheckboxGroup.disabledRef.value) return true
-        if (
-          NCheckboxGroup.maxRef.value !== undefined &&
-          NCheckboxGroup.minRef.value === undefined
-        ) {
-          return (
-            NCheckboxGroup.checkedCountRef.value >=
-              NCheckboxGroup.maxRef.value && !renderedCheckedRef.value
-          )
+        const {
+          maxRef: { value: max },
+          minRef: { value: min },
+          checkedCountRef: { value: checkedCount }
+        } = NCheckboxGroup
+        if (max !== undefined && min === undefined) {
+          return checkedCount >= max && !renderedCheckedRef.value
         }
-        if (
-          NCheckboxGroup.maxRef.value === undefined &&
-          NCheckboxGroup.minRef.value !== undefined
-        ) {
-          return (
-            NCheckboxGroup.checkedCountRef.value <=
-              NCheckboxGroup.minRef.value && renderedCheckedRef.value
-          )
+        if (max === undefined && min !== undefined) {
+          return checkedCount <= min && renderedCheckedRef.value
         }
-        if (
-          NCheckboxGroup.maxRef.value !== undefined &&
-          NCheckboxGroup.minRef.value !== undefined
-        ) {
+        if (max !== undefined && min !== undefined) {
           return (
-            (NCheckboxGroup.checkedCountRef.value <=
-              NCheckboxGroup.minRef.value &&
-              renderedCheckedRef.value) ||
-            (NCheckboxGroup.checkedCountRef.value >=
-              NCheckboxGroup.maxRef.value &&
-              !renderedCheckedRef.value)
+            (checkedCount <= min && renderedCheckedRef.value) ||
+            (checkedCount >= max && !renderedCheckedRef.value)
           )
         }
       }
+      return false
     })
     const formItem = useFormItem(props, {
       mergedSize (NFormItem) {
