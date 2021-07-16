@@ -28,6 +28,7 @@ before-upload
 | disabled | `boolean` | `false` |  |
 | file-list-style | `Object` | `undefined` | The style of file list area |
 | file-list | `Array<UploadFile>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |
+| show-file-list | `boolean` | `true` | Whether to show file list. |
 | headers | `Object \| ({ file: UploadFile }) => Object` | `undefined` | The additional HTTP Headers of request. |
 | method | `string` | `'POST'` | The method of HTTP request. |
 | multiple | `boolean` | `false` | If multiple files selection supported. |

@@ -28,6 +28,7 @@ before-upload
 | disabled | `boolean` | `false` |  |
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |
 | file-list | `Array<UploadFile>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |
+| show-file-list | `boolean` | `true` | 是否显示文件列表 |
 | headers | `Object \| ({ file: UploadFile }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |
 | method | `string` | `'POST'` | HTTP 请求的方法 |
 | multiple | `boolean` | `false` | 是否支持多个文件 |
