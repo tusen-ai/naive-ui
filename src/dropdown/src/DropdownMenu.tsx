@@ -13,15 +13,13 @@ import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider'
 import NDropdownGroup from './DropdownGroup'
 import { isSubmenuNode, isGroupNode, isDividerNode } from './utils'
-import {
-  dropdownInjectionKey,
-  RenderIconImpl,
-  RenderLabelImpl
-} from './Dropdown'
+import { dropdownInjectionKey } from './Dropdown'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
-  DropdownOption
+  DropdownOption,
+  RenderIconImpl,
+  RenderLabelImpl
 } from './interface'
 
 export interface NDropdownMenuInjection {
