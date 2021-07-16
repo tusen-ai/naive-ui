@@ -21,31 +21,31 @@ form
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| default-value | `Array<any>` | `[]` |  |
-| item-style | `string \| Object` | `undefined` |  |
-| key-field | `string` | `undefined` |  |
+| default-value | `Array<any>` | `[]` | 非受控模式下的默认值 |
+| item-style | `string \| Object` | `undefined` | 动态录入中每项的样式 |
+| key-field | `string` | `undefined` | 每一项的 key 值，会被用于列表渲染中 |
 | min | `number` | `0` | 最少有几项内容 |
 | max | `number` | `undefined` | 最多有几项内容 |
 | preset | `'input' \| 'preset'` | `'input'` | 动态录入使用的预设，在不设定 `$slots.default` 的时候生效。 |
-| value | `Array<any>` | `undefined` |  |
-| on-create | `(index: number) => void` | `undefined` | 点击添加按钮时的回调，如果设定则返回值会被用作新添加的初始值。其中 `index` 是创建内容将要被放置到的位置对应的数组索引，从 1 (第二项)开始计算。 |
-| on-remove | `(index: number) => void` | `undefined` |  |
-| on-update:value | `(value: any) => void` | `undefined` |  |
+| value | `Array<any>` | `undefined` | 受控模式下的值 |
+| on-create | `(index: number) => void` | `undefined` | 点击添加按钮时的回调，如果设定则返回值会被用作新添加的初始值。其中 `index` 是创建内容将要被放置到的位置对应的数组索引，从 1 (第二项)开始计算 |
+| on-remove | `(index: number) => void` | `undefined` | 点击第 index 项删除按钮的回调 |
+| on-update:value | `(value: any) => void` | `undefined` | 组件值发生变化的回调 |
 
 ### Dynamic Input Props(Input Preset)
 
-| 名称        | 类型            | 默认值   | 说明 |
-| ----------- | --------------- | -------- | ---- |
-| value       | `Array<string>` | required |      |
-| placeholder | `string`        | `''`     |      |
+| 名称        | 类型            | 默认值   | 说明                 |
+| ----------- | --------------- | -------- | -------------------- |
+| value       | `Array<string>` | required | Input 预设模式下的值 |
+| placeholder | `string`        | `''`     | 每项的提示信息       |
 
 ### Dynamic Input Props(Pair Preset)
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| value | `Array<{ key: string, value: string }>` | required |  |
-| key-placeholder | `string` | `''` |  |
-| value-placeholder | `string` | `''` |  |
+| value | `Array<{ key: string, value: string }>` | required | Pair 预设模式下的值 |
+| key-placeholder | `string` | `''` | 每项的 `key` 的提示信息 |
+| value-placeholder | `string` | `''` | 每项的 `value` 的提示信息 |
 
 ## Slots
 

@@ -1,6 +1,6 @@
-import { h, defineComponent, ref, PropType } from 'vue'
+import { h, defineComponent, ref, PropType, inject } from 'vue'
 import { render } from '../../_utils'
-import { TmNode } from './interface'
+import { TmNode, treeInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'TreeNodeContent',
@@ -13,6 +13,8 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    checked: Boolean,
+    selected: Boolean,
     onClick: Function as PropType<(e: MouseEvent) => void>,
     onDragstart: Function as PropType<(e: DragEvent) => void>,
     tmNode: {
@@ -21,6 +23,9 @@ export default defineComponent({
     }
   },
   setup (props) {
+    const { renderLabelRef, renderPrefixRef, renderSuffixRef } =
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      inject(treeInjectionKey)!
     const selfRef = ref<HTMLElement | null>(null)
     function doClick (e: MouseEvent): void {
       const { onClick } = props
@@ -31,15 +36,24 @@ export default defineComponent({
     }
     return {
       selfRef,
+      renderLabel: renderLabelRef,
+      renderPrefix: renderPrefixRef,
+      renderSuffix: renderSuffixRef,
       handleClick
     }
   },
   render () {
     const {
       clsPrefix,
+      checked = false,
+      selected = false,
+      renderLabel,
+      renderPrefix,
+      renderSuffix,
       handleClick,
       onDragstart,
       tmNode: {
+        rawNode,
         rawNode: { prefix, label, suffix }
       }
     } = this
@@ -51,17 +65,35 @@ export default defineComponent({
         draggable={onDragstart === undefined ? undefined : true}
         onDragstart={onDragstart}
       >
-        {prefix ? (
+        {renderPrefix || prefix ? (
           <div class={`${clsPrefix}-tree-node-content__prefix`}>
-            {render(prefix)}
+            {renderPrefix
+              ? renderPrefix({
+                option: rawNode,
+                selected,
+                checked
+              })
+              : render(prefix)}
           </div>
         ) : null}
         <div class={`${clsPrefix}-tree-node-content__text`}>
-          {render(label)}
+          {renderLabel
+            ? renderLabel({
+              option: rawNode,
+              selected,
+              checked
+            })
+            : render(label)}
         </div>
-        {suffix ? (
+        {renderSuffix || suffix ? (
           <div class={`${clsPrefix}-tree-node-content__suffix`}>
-            {render(suffix)}
+            {renderSuffix
+              ? renderSuffix({
+                option: rawNode,
+                selected,
+                checked
+              })
+              : render(suffix)}
           </div>
         ) : null}
       </span>

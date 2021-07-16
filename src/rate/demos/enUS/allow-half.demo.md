@@ -1,4 +1,4 @@
-# Allow Activated Half of the Icon
+# Allow Selecting Half Star
 
 ```html
 <n-rate allow-half />
