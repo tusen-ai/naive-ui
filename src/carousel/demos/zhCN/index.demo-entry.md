@@ -9,6 +9,7 @@ basic
 autoplay
 hover
 dot-placement
+show-arrow
 ```
 
 ## API
@@ -20,6 +21,7 @@ dot-placement
 | autoplay | `boolean` | `false` | 是否自动播放 |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | 轮播指示点位置 |
 | interval | `number` | `5000` | 自动播放的间隔 |
+| show-arrow | `boolean` | `false` | 是否显示箭头按钮 |
 | trigger | `'click' \| 'hover'` | `'click'` | 触发切换的方式 |
 
 ### Carousel Slots

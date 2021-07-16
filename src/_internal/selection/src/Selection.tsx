@@ -746,6 +746,7 @@ export default defineComponent({
               this.active ? null : (
               <div
                 class={`${clsPrefix}-base-selection-label__render-label ${clsPrefix}-base-render-dom`}
+                key="input"
               >
                 {renderLabel
                   ? renderLabel(this.selectedOption as SelectBaseOption, true)
@@ -755,6 +756,7 @@ export default defineComponent({
             {showPlaceholder ? (
               <div
                 class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-render-dom`}
+                key="placeholder"
               >
                 {this.filterablePlaceholder}
               </div>

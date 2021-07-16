@@ -1,5 +1,33 @@
 # CHANGELOG
 
+## 2.15.5 (2021-07-16)
+
+### Feats
+
+- `n-tree` add `render-label`, `render-prefix` and `render-suffix` props.
+- `n-rate` add `allow-half` prop.
+- `n-carousel` add `show-arrow` prop.
+- `n-slider` add `format-tooltip` prop.
+- `n-upload` add `event` in `on-finish` callback params.
+- `n-rate` add `readonly` prop.
+- `n-time-picker` add `seconds`, `minutes`, `hours` props.
+- `n-notification` export `NotificationApi`, `NotificationOptions` and `NotificationReactive` type.
+- `n-avatar` add `on-error` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
+- `n-image` add `on-error` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
+- `n-image` add `object-fit` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
+- `n-avatar` add `object-fit` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
+- `n-menu` expands all the ascendant of selected item by default, closes [#481](https://github.com/TuSimple/naive-ui/issues/481).
+
+### Fixes
+
+- Fix `n-calendar`'s `default-value` prop cannot be used.
+- Fix `n-pagination` page count is not correct when `item-count` is 0.
+- Fix `n-scrollbar` `content-style` can not override the default width of style.
+- Fix `n-select` placeholder transition.
+- Fix `n-loading-bar` `useLoadingBar`'s return type can be undefined.
+- Fix `n-tag`'s `type` prop add `primary` type.
+- Fix `n-dynamic-tag`'s `type` prop add `primary` type.
+
 ## 2.15.4 (2021-07-09)
 
 ### Feats
@@ -31,7 +59,7 @@
 ### Feats
 
 - `n-loading-bar` export `LoadingBarApi` type.
-- `n-image` add `imgProps` prop.
+- `n-image` add `img-props` prop.
 - Add native `title` attributes to some components to enhance the experience.
 - `n-tree` add `prefix` and `suffix` in TreeOption.
 - `n-carousel` add `dot-placement` prop.

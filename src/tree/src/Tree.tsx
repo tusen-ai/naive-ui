@@ -40,7 +40,10 @@ import {
   AllowDrop,
   MotionData,
   treeInjectionKey,
-  InternalTreeInst
+  InternalTreeInst,
+  RenderLabel,
+  RenderPrefix,
+  RenderSuffix
 } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
@@ -132,6 +135,9 @@ const treeProps = {
     default: true
   },
   virtualScroll: Boolean,
+  renderLabel: Function as PropType<RenderLabel>,
+  renderPrefix: Function as PropType<RenderPrefix>,
+  renderSuffix: Function as PropType<RenderSuffix>,
   onDragenter: [Function, Array] as PropType<
   MaybeArray<(e: TreeDragInfo) => void>
   >,
@@ -981,6 +987,9 @@ export default defineComponent({
       pendingNodeKeyRef,
       internalScrollableRef: toRef(props, 'internalScrollable'),
       internalCheckboxFocusableRef: toRef(props, 'internalCheckboxFocusable'),
+      renderLabelRef: toRef(props, 'renderLabel'),
+      renderPrefixRef: toRef(props, 'renderPrefix'),
+      renderSuffixRef: toRef(props, 'renderSuffix'),
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,

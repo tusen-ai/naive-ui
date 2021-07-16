@@ -26,11 +26,18 @@ const avatarProps = {
     type: Boolean,
     default: false
   },
+  color: String,
+  objectFit: {
+    type: String as PropType<
+    'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
+    >,
+    default: 'fill'
+  },
   round: {
     type: Boolean,
     default: false
   },
-  color: String
+  onError: Function as PropType<(e: Event) => void>
 } as const
 
 export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>
@@ -112,7 +119,11 @@ export default defineComponent({
         style={this.cssVars as any}
       >
         {!$slots.default && src ? (
-          <img src={src} />
+          <img
+            src={src}
+            onError={this.onError}
+            style={{ objectFit: this.objectFit }}
+          />
         ) : (
           <span
             ref="textRef"
