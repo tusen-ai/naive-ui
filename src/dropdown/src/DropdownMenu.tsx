@@ -66,9 +66,8 @@ export default defineComponent({
               ) || hasRenderIcon
             )
           }
-          return hasRenderIcon && renderIconRef.value
-            ? renderIconRef.value(rawNode)
-            : rawNode.icon
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return hasRenderIcon ? renderIconRef.value!(rawNode) : rawNode.icon
         })
       }),
       hasSubmenuRef: computed(() => {
