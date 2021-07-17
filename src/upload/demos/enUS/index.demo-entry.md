@@ -28,7 +28,6 @@ before-upload
 | disabled | `boolean` | `false` |  |
 | file-list-style | `Object` | `undefined` | The style of file list area |
 | file-list | `Array<UploadFile>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |
-| show-file-list | `boolean` | `true` | Whether to show file list. |
 | headers | `Object \| ({ file: UploadFile }) => Object` | `undefined` | The additional HTTP Headers of request. |
 | method | `string` | `'POST'` | The method of HTTP request. |
 | multiple | `boolean` | `false` | If multiple files selection supported. |
@@ -36,6 +35,7 @@ before-upload
 | show-cancel-button | `boolean` | `true` | Whether to show remove button (at file pending, uploadin, error status). Click on cancel button will fire `on-remove` callback. |
 | show-remove-button | `boolean` | `true` | Whether to show remove button (at file finished status). Click on remove button will fire `on-remove` callback. |
 | show-retry-button | `boolean` | `true` | Whether to show retry button (at file error status). |
+| show-file-list | `boolean` | `true` | Whether to show file list. |
 | with-credentials | `boolean` | `false` | If cookie attached. |
 | on-change | `(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => void` | `() => {}` | The callback of status change of the component. Any file status change would fire the callback. |
 | on-update:file-list | `(fileList: UploadFile[]) => void` | `undefined` | Callback function triggered on fileList changes. |
