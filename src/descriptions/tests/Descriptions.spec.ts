@@ -13,6 +13,34 @@ describe('n-descriptions', () => {
     mount(NDescriptions)
   })
 
+  it('should work with slots', async () => {
+    let wrapper = mount(NDescriptions, {
+      slots: { default: () => getDescriptionsItemList(), header: () => 'test' }
+    })
+    expect(wrapper.findAll('.n-descriptions-table-header').length).toBe(4)
+    expect(wrapper.findAll('.n-descriptions-table-content').length).toBe(4)
+
+    expect(wrapper.find('.n-descriptions-header').exists()).toBe(true)
+    expect(wrapper.find('.n-descriptions-header').text()).toBe('test')
+
+    wrapper = mount(NDescriptions, {
+      slots: {
+        default: () =>
+          h(NDescriptionsItem, null, {
+            default: () => 'test-default',
+            label: () => 'test-label'
+          })
+      }
+    })
+
+    expect(wrapper.find('.n-descriptions-table-header').text()).toBe(
+      'test-label'
+    )
+    expect(wrapper.find('.n-descriptions-table-content').text()).toBe(
+      'test-default'
+    )
+  })
+
   it('should work with `bordered` prop', async () => {
     const wrapper = mount(NDescriptions)
     expect(wrapper.find('.n-descriptions').classes()).not.toContain(
