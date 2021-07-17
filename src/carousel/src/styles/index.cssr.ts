@@ -79,6 +79,9 @@ export default cB('carousel', `
     `, [
       c('&:hover', {
         transform: 'translateY(-50%) scale(1.1)'
+      }),
+      c('&:active', {
+        transform: 'translateY(-50%) scale(1)'
       })
     ]),
     cM('top', `
@@ -88,6 +91,9 @@ export default cB('carousel', `
     `, [
       c('&:hover', {
         transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
+      }),
+      c('&:active', {
+        transform: 'translateX(-50%) scale(1) rotate(90deg)'
       })
     ]),
     cM('bottom', `
@@ -97,6 +103,9 @@ export default cB('carousel', `
     `, [
       c('&:hover', {
         transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
+      }),
+      c('&:active', {
+        transform: 'translateX(-50%) scale(1) rotate(90deg)'
       })
     ])
   ]),
