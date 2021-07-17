@@ -53,9 +53,9 @@ export default defineComponent({
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { renderLabelRef, renderIconRef } = inject(dropdownInjectionKey)!
-    const renderIcon = renderIconRef.value
     provide(dropdownMenuInjectionKey, {
       showIconRef: computed(() => {
+        const renderIcon = renderIconRef.value
         return props.tmNodes.some((tmNode) => {
           const { rawNode } = tmNode
           const hasRenderIcon = !!renderIcon?.(rawNode)
