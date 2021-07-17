@@ -28,6 +28,7 @@
 #### 注意事项
 
 - `feat(xxx)` 必须是组件，不能加 `n`，`feat(input)` ✅，`feat(n-input)` ❌
+- feat 或者是 fix 的话如果有对应的 issue 的话需要自己增加 comment 如 fix #514 或者 close #514
 
 ## Changelog
 
@@ -55,3 +56,9 @@
 - [ ] 我在英文文档的 API Table description 中增加了句号
 - [ ] 我在中文和英文以及中文和数字之间添加了空格
 - [ ] 我在文档中的 prop 使用了 kebab-case
+- [ ] 文档的 API 表格按照字母顺序
+- [ ] feat 或者 fix 要注意有没有加 CHANGELOG
+- [ ] feat 尽量增加测试
+- [ ] 文档要精简，可读性好，没用的空格删除
+- [ ] 代码要精简，没用的代码删除
+- [ ] 测试代码不要牵扯太多无关代码，测试的方式要准确、灵活

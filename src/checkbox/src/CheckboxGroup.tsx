@@ -7,7 +7,8 @@ import {
   toRef,
   ref,
   InjectionKey,
-  Ref
+  Ref,
+  ComputedRef
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
@@ -15,17 +16,21 @@ import { warn, call, MaybeArray } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 export interface CheckboxGroupInjection {
+  checkedCountRef: ComputedRef<number>
+  maxRef: Ref<number | undefined>
+  minRef: Ref<number | undefined>
   disabledRef: Ref<boolean>
   valueSetRef: Ref<Set<string | number>>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
   toggleCheckbox: (checked: boolean, checkboxValue: string | number) => void
 }
 
-export const checkboxGroupInjectionKey: InjectionKey<CheckboxGroupInjection> = Symbol(
-  'checkboxGroup'
-)
+export const checkboxGroupInjectionKey: InjectionKey<CheckboxGroupInjection> =
+  Symbol('checkboxGroup')
 
 const checkboxGroupProps = {
+  min: Number,
+  max: Number,
   size: String as PropType<'small' | 'medium' | 'large'>,
   value: Array as PropType<Array<string | number> | null>,
   defaultValue: {
@@ -74,6 +79,10 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+    const checkedCount = computed(() => {
+      return mergedValueRef.value?.length || 0
+    })
+
     const valueSetRef = computed<Set<string | number>>(() => {
       if (Array.isArray(mergedValueRef.value)) {
         return new Set(mergedValueRef.value)
@@ -90,6 +99,7 @@ export default defineComponent({
         'onUpdate:value': _onUpdateValue,
         onUpdateValue
       } = props
+
       if (Array.isArray(mergedValueRef.value)) {
         const groupValue = Array.from(mergedValueRef.value)
         const index = groupValue.findIndex((value) => value === checkboxValue)
@@ -134,6 +144,9 @@ export default defineComponent({
       }
     }
     provide(checkboxGroupInjectionKey, {
+      checkedCountRef: checkedCount,
+      maxRef: toRef(props, 'max'),
+      minRef: toRef(props, 'min'),
       valueSetRef: valueSetRef,
       disabledRef: toRef(props, 'disabled'),
       mergedSizeRef: formItem.mergedSizeRef,
