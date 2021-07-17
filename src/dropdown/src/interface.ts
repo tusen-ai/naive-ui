@@ -18,7 +18,7 @@ export type DropdownMixedOption =
   | DropdownGroupOption
   | DropdownIgnoredOption
 
-export type DropdownTotalOption = DropdownOption &
+export type DropdownIntersectionOption = DropdownOption &
 DropdownGroupOption &
 DropdownIgnoredOption
 
@@ -58,8 +58,8 @@ export type OnUpdateKeysImpl = <
 
 export type RenderLabelImpl = (option: DropdownMixedOption) => VNodeChild
 
-export type RenderLabel = (option: DropdownTotalOption) => VNodeChild
+export type RenderLabel = (option: DropdownIntersectionOption) => VNodeChild
 
 export type RenderIconImpl = (option: DropdownMixedOption) => VNodeChild
 
-export type RenderIcon = (option: DropdownTotalOption) => VNodeChild
+export type RenderIcon = (option: DropdownIntersectionOption) => VNodeChild

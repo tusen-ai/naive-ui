@@ -234,7 +234,7 @@ export default defineComponent({
             __dropdown-option
             class={[
               `${clsPrefix}-dropdown-option-body__prefix`,
-              (siblingHasIcon || renderIcon) &&
+              siblingHasIcon &&
                 `${clsPrefix}-dropdown-option-body__prefix--show-icon`
             ]}
           >
