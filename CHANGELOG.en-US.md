@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-checkbox-group` add `min` and `max` prop.
+- `n-checkbox-group` add `options` prop.
 
 ## 2.15.5 (2021-07-16)
 

@@ -14,6 +14,7 @@ import { useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
 import { warn, call, MaybeArray } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import Checkbox from './Checkbox'
 
 export interface CheckboxGroupInjection {
   checkedCountRef: ComputedRef<number>
@@ -23,6 +24,13 @@ export interface CheckboxGroupInjection {
   valueSetRef: Ref<Set<string | number>>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
   toggleCheckbox: (checked: boolean, checkboxValue: string | number) => void
+}
+
+export interface CheckboxGroupOption {
+  value: string | number
+  label: string
+  indeterminate?: boolean
+  disabled?: boolean
 }
 
 export const checkboxGroupInjectionKey: InjectionKey<CheckboxGroupInjection> =
@@ -45,6 +53,10 @@ const checkboxGroupProps = {
   onUpdateValue: [Function, Array] as PropType<
   MaybeArray<(value: Array<string | number>) => void>
   >,
+  options: {
+    type: Array as PropType<Array<CheckboxGroupOption | string>>,
+    default: () => []
+  },
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<
@@ -75,6 +87,19 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = computed(() => props.value)
+    const valOptRef = computed(() => {
+      const { options = [] } = props
+      return options.map((option) => {
+        if (typeof option === 'string') {
+          return {
+            label: option,
+            value: option
+          }
+        }
+        const label = option.label
+        return { ...option, label }
+      })
+    })
     const mergedValueRef = useMergedState(
       controlledValueRef,
       uncontrolledValueRef
@@ -153,12 +178,26 @@ export default defineComponent({
       toggleCheckbox
     })
     return {
-      mergedClsPrefix: mergedClsPrefixRef
+      mergedClsPrefix: mergedClsPrefixRef,
+      valOpt: valOptRef,
+      disabled: toRef(props, 'disabled')
     }
   },
   render () {
+    const { options, $slots, valOpt, disabled } = this
     return (
-      <div class={`${this.mergedClsPrefix}-checkbox-group`}>{this.$slots}</div>
+      <div class={`${this.mergedClsPrefix}-checkbox-group`}>
+        {options && options.length > 0
+          ? valOpt.map((option: CheckboxGroupOption) => (
+              <Checkbox
+                label={option.label}
+                disabled={'disabled' in option ? option.disabled : disabled}
+                indeterminate={option.indeterminate}
+                value={option.value}
+              ></Checkbox>
+          ))
+          : $slots}
+      </div>
     )
   }
 })
