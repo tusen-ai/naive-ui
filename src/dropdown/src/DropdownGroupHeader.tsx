@@ -1,5 +1,6 @@
 import { defineComponent, h, inject } from 'vue'
 import { render } from '../../_utils'
+import { dropdownInjectionKey } from './Dropdown'
 import { dropdownMenuInjectionKey } from './DropdownMenu'
 
 export default defineComponent({
@@ -17,10 +18,12 @@ export default defineComponent({
   setup (props) {
     const {
       showIconRef,
-      hasSubmenuRef,
-      renderLabelRef
+      hasSubmenuRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dropdownMenuInjectionKey)!
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const { renderLabelRef } = inject(dropdownInjectionKey)!
 
     return {
       showIcon: showIconRef,

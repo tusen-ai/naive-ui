@@ -17,14 +17,12 @@ import { dropdownInjectionKey } from './Dropdown'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
-  DropdownOption,
-  RenderLabelImpl
+  DropdownOption
 } from './interface'
 
 export interface NDropdownMenuInjection {
   showIconRef: Ref<boolean>
   hasSubmenuRef: Ref<boolean>
-  renderLabelRef: Ref<RenderLabelImpl | undefined>
 }
 
 export const dropdownMenuInjectionKey: InjectionKey<NDropdownMenuInjection> =
@@ -52,22 +50,18 @@ export default defineComponent({
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { renderLabelRef, renderIconRef } = inject(dropdownInjectionKey)!
+    const { renderIconRef } = inject(dropdownInjectionKey)!
     provide(dropdownMenuInjectionKey, {
       showIconRef: computed(() => {
         const renderIcon = renderIconRef.value
         return props.tmNodes.some((tmNode) => {
           const { rawNode } = tmNode
-          const hasRenderIcon = !!renderIcon?.(rawNode)
           if (isGroupNode(rawNode)) {
-            return (
-              (rawNode as DropdownGroupOption).children.some(
-                (rawChild) => rawChild.icon
-              ) || hasRenderIcon
+            return (rawNode as DropdownGroupOption).children.some((rawChild) =>
+              renderIcon ? renderIcon(rawChild) : rawChild.icon
             )
           }
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          return hasRenderIcon ? renderIconRef.value!(rawNode) : rawNode.icon
+          return renderIcon ? renderIcon(rawNode) : rawNode.icon
         })
       }),
       hasSubmenuRef: computed(() => {
@@ -80,8 +74,7 @@ export default defineComponent({
           }
           return isSubmenuNode(rawNode)
         })
-      }),
-      renderLabelRef: renderLabelRef
+      })
     })
   },
   render () {
