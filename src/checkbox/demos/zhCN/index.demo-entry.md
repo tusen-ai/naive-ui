@@ -36,8 +36,18 @@ event
 | default-value | `Array<string \| number>` | `null` | 选项组非受控模式下的默认值 |
 | max | `number` | `undefined` | 可被勾选的 checkbox 的最大数量 |
 | min | `number` | `undefined` | 可被勾选的 checkbox 的最小数量 |
+| options | `Array<string \| CheckboxGroupOption> ` | `[]` | 配置选项内容，详情见 CheckboxGroupOption 属性 |
 | value | `Array<string \| number> \| null` | `undefined` | 选项组受控模式下的值 |
 | on-update:value | `(value: string \| number)` | `undefined` | 选项组的值改变时的回调 |
+
+### CheckboxGroupOption Properties
+
+| 名称          | 类型                           | 说明                 |
+| ------------- | ------------------------------ | -------------------- |
+| disabled      | `boolean`                      | 是否禁用             |
+| indeterminate | `boolean`                      | 是否部分选中         |
+| label         | `string \| (() => VNodeChild)` | 选项的标签           |
+| value         | `string \| number`             | 在选项中应该是唯一的 |
 
 ## Slots
 
