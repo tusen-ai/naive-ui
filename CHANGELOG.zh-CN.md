@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-upload` 新增 `show-file-list` 属性
 - `n-checkbox-group` 新增 `min` 和 `max` 属性.
 
 ## 2.15.5 (2021-07-16)

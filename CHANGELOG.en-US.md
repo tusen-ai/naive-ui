@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-upload` add `show-file-list` prop.
 - `n-checkbox-group` add `min` and `max` prop.
 
 ## 2.15.5 (2021-07-16)
