@@ -72,4 +72,22 @@ describe('n-color-picker', () => {
       })
     })
   })
+  describe('props.control', () => {
+    it('confirm and cancel button', async () => {
+      const wrapper = mount(NColorPicker, {
+        attachTo: document.body,
+        props: {
+          control: true
+        }
+      })
+      await wrapper.find('.n-color-picker-trigger').trigger('click')
+      expect(document.querySelector('.n-color-picker-panel')).not.toEqual(null)
+      expect(document.querySelector('.n-color-picker-pallete')).not.toEqual(
+        null
+      )
+      expect(document.querySelector('.n-button--disabled')).not.toEqual(null)
+      expect(document.querySelector('.n-button')).not.toEqual(null)
+      wrapper.unmount()
+    })
+  })
 })

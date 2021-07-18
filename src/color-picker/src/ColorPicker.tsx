@@ -59,7 +59,7 @@ import Pallete from './Pallete'
 import ColorInput from './ColorInput'
 import ColorPickerTrigger from './ColorPickerTrigger'
 import { deriveDefaultValue, getModeFromValue } from './utils'
-import type { ColorPickerMode } from './utils'
+import type { ColorPickerMode, ActionType } from './utils'
 import style from './styles/index.cssr'
 import { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import { NButton } from '../../button'
@@ -85,6 +85,10 @@ export const colorPickerPanelProps = {
   showAlpha: {
     type: Boolean,
     default: true
+  },
+  actions: {
+    type: Array as PropType<ActionType[]>,
+    default: null
   },
   internalActions: Array as PropType<ReadonlyArray<'redo' | 'undo'>>,
   size: String as PropType<'small' | 'medium' | 'large'>,
@@ -117,6 +121,7 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const { mergedSizeRef } = formItem
     const { localeRef } = useLocale('global')
+    const { localeRef: buttonlocaleRef } = useLocale('Popconfirm')
     const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
 
     const themeRef = useTheme(
@@ -152,6 +157,7 @@ export default defineComponent({
       toRef(props, 'value'),
       uncontrolledValueRef
     )
+    // const initialValue = props.value && deriveDefaultValue(props.modes, props.showAlpha)
 
     const undoStackRef: Ref<Array<string | null>> = ref([mergedValueRef.value])
     const valueIndexRef = ref(0)
@@ -421,6 +427,12 @@ export default defineComponent({
       handleComplete(false)
       valueIndexRef.value = valueIndex + 1
     }
+
+    function handleConfirm (e: MouseEvent): void {
+      if (selfRef.value?.contains(e.target as Node)) return
+      doUpdateShow(false)
+    }
+
     const undoableRef = computed(() => valueIndexRef.value >= 1)
     const redoableRef = computed(() => {
       const { value: undoStack } = undoStackRef
@@ -481,7 +493,7 @@ export default defineComponent({
     function renderPanel (): VNode {
       const { value: rgba } = rgbaRef
       const { value: displayedHue } = displayedHueRef
-      const { internalActions, modes } = props
+      const { internalActions, modes, actions } = props
       const { value: mergedTheme } = themeRef
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       return (
@@ -527,6 +539,18 @@ export default defineComponent({
               onUpdateValue={handleInputUpdateValue}
             />
           </div>
+          {actions ? (
+            <div class={`${mergedClsPrefix}-color-picker-action`}>
+              <NButton
+                size="small"
+                onClick={handleConfirm}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
+              >
+                {{ default: () => buttonlocaleRef.value.positiveText }}
+              </NButton>
+            </div>
+          ) : null}
           {slots.action ? (
             <div class={`${mergedClsPrefix}-color-picker-action`}>
               {{ default: slots.action }}
@@ -575,8 +599,7 @@ export default defineComponent({
         doUpdateShow(true)
       },
       handleClickOutside (e: MouseEvent) {
-        if (selfRef.value?.contains(e.target as Node)) return
-        doUpdateShow(false)
+        handleConfirm(e)
       },
       renderPanel,
       cssVars: cssVarsRef
