@@ -48,7 +48,7 @@ Mention is provided after `v2.2.0`.
 | style    | `string`                                |                  |
 | value    | `string`                                | Should be unique |
 
-### Select Slots
+### Mention Slots
 
 | Name  | Parameters | Description                 |
 | ----- | ---------- | --------------------------- |

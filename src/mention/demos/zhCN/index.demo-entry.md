@@ -48,7 +48,7 @@ Mention 在 `v2.2.0` 及以后可用。
 | style    | `string`                                |                      |
 | value    | `string`                                | 在选项中应该是唯一的 |
 
-### Select Slots
+### Mention Slots
 
 | 名称  | 参数 | 说明                |
 | ----- | ---- | ------------------- |
