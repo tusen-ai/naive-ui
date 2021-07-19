@@ -8,6 +8,10 @@
 - `n-checkbox-group` 新增 `min` 和 `max` 属性
 - `n-mention` 新增 `empty` slot
 
+### Fixes
+
+- 修复 `n-space` 中 `display: grid` 的元素显示不正确，关闭 `https://github.com/TuSimple/naive-ui/issues/546`
+
 ## 2.15.5 (2021-07-16)
 
 ### Feats
