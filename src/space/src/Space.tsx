@@ -103,7 +103,7 @@ export default defineComponent({
         style={{
           display: inline ? 'inline-flex' : 'flex',
           flexDirection: vertical ? 'column' : 'row',
-          flexWrap: !wrap ? 'nowrap' : 'wrap',
+          flexWrap: !wrap || vertical ? 'nowrap' : 'wrap',
           justifyContent: 'flex-' + justify,
           marginTop: vertical ? '' : `-${semiVerticalMargin}`,
           marginBottom: vertical ? '' : `-${semiVerticalMargin}`,
