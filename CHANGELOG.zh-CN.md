@@ -6,7 +6,7 @@
 
 - `n-upload` 新增 `show-file-list` 属性
 - `n-dropdown` 新增 `render-icon` 属性
-- `n-checkbox-group` 新增 `min` 和 `max` 属性.
+- `n-checkbox-group` 新增 `min` 和 `max` 属性
 - `n-mention` 新增 `empty` slot
 
 ### Fixes
