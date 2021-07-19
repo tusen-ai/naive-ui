@@ -10,24 +10,18 @@
       <n-checkbox value="Shenzen" label="Shenzhen" />
     </n-space>
   </n-checkbox-group>
-  <n-checkbox-group
-    :options="options"
-    :value="optionsCities"
-    @update:value="handleUpdateValue"
-  >
+  <n-checkbox-group :options="options" v-model:value="optionsCities">
   </n-checkbox-group>
 </n-space>
 ```
 
 ```js
 import { defineComponent, ref } from 'vue'
-import { useMessage } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     const citiesRef = ref(null)
     const optionsCitiesRef = ref(null)
-    const message = useMessage()
     const options = [
       { value: 'Apple', indeterminate: true, label: 'Apple' },
       { label: 'Pear', value: 'Pear' },
@@ -36,11 +30,7 @@ export default defineComponent({
     return {
       options,
       cities: citiesRef,
-      optionsCities: optionsCitiesRef,
-      handleUpdateValue (value) {
-        optionsCities.value = value
-        message.info(JSON.stringify(value))
-      }
+      optionsCities: optionsCitiesRef
     }
   }
 })

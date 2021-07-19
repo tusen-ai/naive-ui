@@ -36,18 +36,18 @@ event
 | default-value | `Array<string \| number>` | `null` | Checkbox group's default selected value. |
 | max | `number` | `undefined` | The maximum number of checkboxes that can be checked. |
 | min | `number` | `undefined` | The minimum number of checkboxes that can be checked. |
+| options | `Array<string \| CheckboxGroupOption> ` | `[]` | For details of configuration options, see CheckboxGroupOption Properties. |
 | value | `Array<string \| number> \| null` | `undefined` | Controlled value of checkbox group. |
-| options | `Array<string \| SelectOption> ` | `[]` | For details of configuration options, see CheckboxGroupOption Properties. |
 | on-update:value | `(value: string \| number)` | `undefined` | Callback when checkbox group's value changes. |
 
 ### CheckboxGroupOption Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
-| indeterminate | `boolean` | Whether to partially select an option |
-| disabled | `boolean` | Whether to disable an option |
-| label | `string \| (() => VNodeChild)` | Option label |
-| value | `string \| number` | Should be unique among options |
+| disabled | `boolean` | Whether to disable the option. |
+| indeterminate | `boolean` | Whether partly selected the option. |
+| label | `string \| (() => VNodeChild)` | Option label. |
+| value | `string \| number` | Should be unique among options. |
 
 ## Slots
 

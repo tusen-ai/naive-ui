@@ -8,13 +8,14 @@ import {
   ref,
   InjectionKey,
   Ref,
-  ComputedRef
+  ComputedRef,
+  VNodeChild
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
 import { warn, call, MaybeArray } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import Checkbox from './Checkbox'
+import NCheckbox from './Checkbox'
 
 export interface CheckboxGroupInjection {
   checkedCountRef: ComputedRef<number>
@@ -28,7 +29,7 @@ export interface CheckboxGroupInjection {
 
 export interface CheckboxGroupOption {
   value: string | number
-  label: string
+  label: string | (() => VNodeChild)
   indeterminate?: boolean
   disabled?: boolean
 }
@@ -87,8 +88,8 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = computed(() => props.value)
-    const valOptRef = computed(() => {
-      const { options = [] } = props
+    const optionsValueRef = computed(() => {
+      const { options } = props
       return options.map((option) => {
         if (typeof option === 'string') {
           return {
@@ -96,8 +97,7 @@ export default defineComponent({
             value: option
           }
         }
-        const label = option.label
-        return { ...option, label }
+        return option
       })
     })
     const mergedValueRef = useMergedState(
@@ -179,22 +179,23 @@ export default defineComponent({
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      valOpt: valOptRef,
-      disabled: toRef(props, 'disabled')
+      optionsValue: optionsValueRef
     }
   },
   render () {
-    const { options, $slots, valOpt, disabled } = this
+    const { $slots, optionsValue } = this
     return (
       <div class={`${this.mergedClsPrefix}-checkbox-group`}>
-        {options && options.length > 0
-          ? valOpt.map((option: CheckboxGroupOption) => (
-              <Checkbox
+        {optionsValue.length > 0
+          ? optionsValue.map((option: CheckboxGroupOption) => (
+              <NCheckbox
                 label={option.label}
-                disabled={'disabled' in option ? option.disabled : disabled}
+                disabled={
+                  'disabled' in option ? option.disabled : this.disabled
+                }
                 indeterminate={option.indeterminate}
                 value={option.value}
-              ></Checkbox>
+              />
           ))
           : $slots}
       </div>

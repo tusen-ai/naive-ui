@@ -280,4 +280,18 @@ describe('n-checkbox-group', () => {
       'n-checkbox--disabled'
     )
   })
+
+  it('should work with `options` prop', () => {
+    const options = [
+      { value: 'Apple', indeterminate: true, label: 'Apple' },
+      { label: 'Pear', value: 'Pear' },
+      { label: 'Orange', value: 'Orange' }
+    ]
+    const wrapper = mount(NCheckboxGroup, {
+      props: {
+        options
+      }
+    })
+    expect(wrapper.findAll('.n-checkbox').length).toBe(3)
+  })
 })
