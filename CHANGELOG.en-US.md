@@ -6,6 +6,7 @@
 
 - `n-upload` add `show-file-list` prop.
 - `n-checkbox-group` add `min` and `max` prop.
+- `n-mention` add `empty` slot.
 
 ## 2.15.5 (2021-07-16)
 
