@@ -16,7 +16,7 @@ format
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| clearable | `boolean` | `false` | Can be emptied. |
+| clearable | `boolean` | `false` | Whether the value is clearable. |
 | default-value | `number \| null` | `null` | Default value in uncontrolled mode. |
 | disabled | `boolean` | `false` | Whether to disable. |
 | format | `string` | `'HH:mm:ss'` | Time format. |
