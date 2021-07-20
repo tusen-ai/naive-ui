@@ -5,9 +5,10 @@ import {
   inject,
   ref,
   toRef,
-  renderSlot,
   PropType,
-  CSSProperties
+  CSSProperties,
+  renderSlot,
+  VNodeChild
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { useConfig, useFormItem, useTheme } from '../../_mixins'
@@ -18,7 +19,8 @@ import {
   call,
   createKey,
   MaybeArray,
-  ExtractPublicPropTypes
+  ExtractPublicPropTypes,
+  render
 } from '../../_utils'
 import { checkboxLight } from '../styles'
 import type { CheckboxTheme } from '../styles'
@@ -38,7 +40,7 @@ const checkboxProps = {
   value: [String, Number] as PropType<string | number>,
   disabled: Boolean,
   indeterminate: Boolean,
-  label: String,
+  label: [String, Function] as PropType<string | (() => VNodeChild)>,
   focusable: {
     type: Boolean,
     default: true
@@ -305,7 +307,9 @@ export default defineComponent({
         </div>
         {label !== null || $slots.default ? (
           <span class={`${mergedClsPrefix}-checkbox__label`}>
-            {renderSlot($slots, 'default', undefined, () => [label])}
+            {typeof label === 'string'
+              ? renderSlot($slots, 'default', undefined, () => [label])
+              : render(label)}
           </span>
         ) : null}
       </div>

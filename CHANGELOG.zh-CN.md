@@ -13,6 +13,7 @@
 
 - 修复 `n-space` 中 `display: grid` 的元素显示不正确，关闭 `https://github.com/TuSimple/naive-ui/issues/546`
 - 修复 `n-dropdown` 的 `render-label` 属性对 group 类型 option 失效
+- 修复 `n-checkbox` 的 `label` 属性 不支持 VNodeChild 类型
 
 ## 2.15.5 (2021-07-16)
 
