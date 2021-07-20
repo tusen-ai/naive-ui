@@ -19,9 +19,9 @@ filterable
 | --- | --- | --- | --- |
 | default-value | `Array<string \| number> \| null` | `null` | 非受控模式下的默认值 |
 | disabled | `boolean` | `true` | 是否禁用 |
-| filterable | `boolean` | `false` | 是否显示搜索框 |
+| filterable | `boolean` | `false` | 是否可过滤 |
 | filter | `function` | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | 一个简单的标签字符串匹配函数 |
-| options | `Array<TransferOption>` | `[]` | 选项集合 |
+| options | `Array<TransferOption>` | `[]` | 配置选项内容，详情见 TransferOption Type |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | source-filter-placeholder | `string` | `undefined` | 源项搜索框中的占位符 |
 | source-title | `string` | `'源项'` | 源项标题 |
@@ -29,7 +29,7 @@ filterable
 | target-title | `string` | `'目标项'` | 目标项标题 |
 | value | `Array<string \| number> \| null` | `undefined` | 受控模式下的值 |
 | on-update:value | `(value: Array<string \| number>) => void` | `undefined` | 值发生改变时的回调 |
-| virtual-scroll | `boolean` | `false` | 通过关闭动画效果来处理大量数据 |
+| virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动 |
 
 ### TransferOption Type
 

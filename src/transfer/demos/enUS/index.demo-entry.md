@@ -19,9 +19,9 @@ filterable
 | --- | --- | --- | --- |
 | default-value | `Array<string \| number> \| null` | `null` | Default value in uncontrolled mode. |
 | disabled | `boolean` | `true` | Whether to disable. |
-| filterable | `boolean` | `false` | Whether to show the search box. |
+| filterable | `boolean` | `false` | Whether to filterable. |
 | filter | `function` | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | A basic label string match function. |
-| options | `Array<TransferOption>` | `[]` | Options list. |
+| options | `Array<TransferOption>` | `[]` | For details of configuration options, see TransferOption Type. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 | source-filter-placeholder | `string` | `undefined` | Placeholder in the source item search box. |
 | source-title | `string` | `'Source'` | Source item title. |
@@ -29,7 +29,7 @@ filterable
 | target-title | `string` | `'Target'` | Target item title. |
 | value | `Array<string \| number> \| null` | `undefined` | Value in controlled mode. |
 | on-update:value | `(value: Array<string \| number>) => void` | `undefined` | Callback when the value changes. |
-| virtual-scroll | `boolean` | `false` | Process large amounts of data by turning off animation effects. |
+| virtual-scroll | `boolean` | `false` | Whether to enable virtual scrolling. |
 
 ### TransferOption Type
 
