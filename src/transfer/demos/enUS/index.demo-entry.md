@@ -37,7 +37,7 @@ filterable
 | --- | --- | --- |
 | label | `string` | The name used for the page display in the options. |
 | value | `string \| number` | The only `value` among all options. |
-| disabled | `boolean` | Whether to disable an option. |
+| disabled | `boolean` | Whether to disable the option. |
 
 ## Events
 

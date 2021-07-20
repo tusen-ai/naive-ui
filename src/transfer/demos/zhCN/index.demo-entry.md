@@ -37,7 +37,7 @@ filterable
 | -------- | ------------------ | ------------------------ |
 | label    | `string`           | 选项中用以页面显示的名称 |
 | value    | `string \| number` | 所有选项中唯一的 `value` |
-| disabled | `boolean`          | 是否禁用一个选项         |
+| disabled | `boolean`          | 是否禁用这个选项         |
 
 ## Events
 
