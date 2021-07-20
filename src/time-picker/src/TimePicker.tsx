@@ -58,8 +58,9 @@ import {
   timePickerInjectionKey
 } from './interface'
 import { happensIn } from 'seemly'
+import { isTimeInStep } from './utils'
 
-// validate hours,minutes,seconds prop
+// validate hours, minutes, seconds prop
 function validateUnits (value: MaybeArray<number>, max: number): boolean {
   if (value === undefined) {
     return true
@@ -215,27 +216,30 @@ export default defineComponent({
     })
     const isHourInvalidRef = computed(() => {
       const { isHourDisabled } = props
-      if (!isHourDisabled) return false
       if (hourValueRef.value === null) return false
+      if (!isTimeInStep(hourValueRef.value, 'hours', props.hours)) return true
+      if (!isHourDisabled) return false
       return isHourDisabled(hourValueRef.value)
     })
     const isMinuteInvalidRef = computed(() => {
-      const { isMinuteDisabled } = props
-      if (!isMinuteDisabled) return false
       const { value: minuteValue } = minuteValueRef
       const { value: hourValue } = hourValueRef
       if (minuteValue === null || hourValue === null) return false
+      if (!isTimeInStep(minuteValue, 'minutes', props.minutes)) return true
+      const { isMinuteDisabled } = props
+      if (!isMinuteDisabled) return false
       return isMinuteDisabled(minuteValue, hourValue)
     })
     const isSecondInvalidRef = computed(() => {
-      const { isSecondDisabled } = props
-      if (!isSecondDisabled) return false
       const { value: minuteValue } = minuteValueRef
       const { value: hourValue } = hourValueRef
       const { value: secondValue } = secondValueRef
       if (secondValue === null || minuteValue === null || hourValue === null) {
         return false
       }
+      if (!isTimeInStep(secondValue, 'seconds', props.seconds)) return true
+      const { isSecondDisabled } = props
+      if (!isSecondDisabled) return false
       return isSecondDisabled(secondValue, minuteValue, hourValue)
     })
     const isValueInvalidRef = computed(() => {
