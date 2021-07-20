@@ -17,27 +17,33 @@ filterable
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| default-value | `Array<string \| number> \| null` | `null` |  |
-| disabled | `boolean` | `true` |  |
-| filterable | `boolean` | `false` |  |
-| filter | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | 一个简单的标签字符串匹配函数 |  |
-| options | `Array<TransferOption>` | `[]` |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| source-filter-placeholder | `string` | `undefined` |  |
-| source-title | `string` | `'源项'` |  |
-| target-filter-placeholder | `string` | `undefined` |  |
-| target-title | `string` | `'目标项'` |  |
-| value | `Array<string \| number> \| null` | `undefined` |  |
-| on-update:value | `(value: Array<string \| number>) => void` | `undefined` |  |
-| virtual-scroll | `boolean` | `false` | If use virtual scroll on transfer. If set to `true` it can handles large data (and turn transfer animation off) |
+| default-value | `Array<string \| number> \| null` | `null` | 非受控模式下的默认值 |
+| disabled | `boolean` | `true` | 是否禁用 |
+| filterable | `boolean` | `false` | 是否可过滤 |
+| filter | `function` | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | 一个简单的标签字符串匹配函数 |
+| options | `Array<TransferOption>` | `[]` | 配置选项内容，详情见 TransferOption Type |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
+| source-filter-placeholder | `string` | `undefined` | 源项搜索框中的占位符 |
+| source-title | `string` | `'源项'` | 源项标题 |
+| target-filter-placeholder | `string` | `undefined` | 目标项搜索框中的占位符 |
+| target-title | `string` | `'目标项'` | 目标项标题 |
+| value | `Array<string \| number> \| null` | `undefined` | 受控模式下的值 |
+| on-update:value | `(value: Array<string \| number>) => void` | `undefined` | 值发生改变时的回调 |
+| virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动 |
 
 ### TransferOption Type
 
-| 属性     | 类型               | 说明                   |
-| -------- | ------------------ | ---------------------- |
-| label    | `string`           |                        |
-| value    | `string \| number` | 选项的 value，需要唯一 |
-| disabled | `boolean`          |                        |
+| 属性     | 类型               | 说明                     |
+| -------- | ------------------ | ------------------------ |
+| label    | `string`           | 选项中用以页面显示的名称 |
+| value    | `string \| number` | 所有选项中唯一的 `value` |
+| disabled | `boolean`          | 是否禁用这个选项         |
+
+## Events
+
+| 名称   | 参数                        | 说明             |
+| ------ | --------------------------- | ---------------- |
+| change | `(Array<string \| number>)` | 发生改变时的回调 |
 
 <!-- ## 备注
 当听到同事和我说他要往里面放上千条数据的时候，我是很蛋疼的。贫瘠的想象让我实在难想出为啥非得用这个东西装这么多数据。但是必须承认，大多数情况下还是我考虑得不太周全。
