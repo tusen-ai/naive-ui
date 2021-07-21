@@ -20,7 +20,7 @@ filterable
 | default-value | `Array<string \| number> \| null` | `null` | 非受控模式下的默认值 |
 | disabled | `boolean` | `true` | 是否禁用 |
 | filterable | `boolean` | `false` | 是否可过滤 |
-| filter | `function` | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | 一个简单的标签字符串匹配函数 |
+| filter | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | 一个简单的标签字符串匹配函数 | 搜索时使用的过滤函数 |
 | options | `Array<TransferOption>` | `[]` | 配置选项内容，详情见 TransferOption Type |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | source-filter-placeholder | `string` | `undefined` | 源项搜索框中的占位符 |
