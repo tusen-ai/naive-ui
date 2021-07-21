@@ -101,4 +101,4 @@ About AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-va
 
 | Name  | Parameters | Description |
 | ----- | ---------- | ----------- |
-| label | `()`       | Label content            |
+| label | `()`       | Label content           |
