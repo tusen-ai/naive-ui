@@ -16,11 +16,12 @@ type Align =
   | 'flex-end'
   | 'flex-start'
 
+type Justify = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
 const spaceProps = {
   ...(useTheme.props as ThemeProps<SpaceTheme>),
   align: String as PropType<Align>,
   justify: {
-    type: String as PropType<'start' | 'end'>,
+    type: String as PropType<Justify>,
     default: 'start'
   },
   inline: Boolean,
@@ -93,9 +94,11 @@ export default defineComponent({
     } = this
     const children = flatten(getSlot(this))
     const horizontalMargin = `${margin.horizontal}px`
+    const semiHorizontalMargin = `${margin.horizontal / 2}px`
     const verticalMargin = `${margin.vertical}px`
     const semiVerticalMargin = `${margin.vertical / 2}px`
     const lastIndex = children.length - 1
+    const isJustifySpace = justify.startsWith('space-')
     return (
       <div
         role="none"
@@ -103,6 +106,9 @@ export default defineComponent({
         style={{
           display: inline ? 'inline-flex' : 'flex',
           flexDirection: vertical ? 'column' : 'row',
+          justifyContent: ['start', 'end'].includes(justify)
+            ? 'flex-' + justify
+            : justify,
           flexWrap: !wrap || vertical ? 'nowrap' : 'wrap',
           justifyContent: 'flex-' + justify,
           marginTop: vertical ? '' : `-${semiVerticalMargin}`,
@@ -123,7 +129,18 @@ export default defineComponent({
                     marginBottom: index !== lastIndex ? verticalMargin : ''
                   }
                 : {
-                    marginRight: index !== lastIndex ? horizontalMargin : '',
+                    marginRight: isJustifySpace
+                      ? justify === 'space-between' && index === lastIndex
+                        ? ''
+                        : semiHorizontalMargin
+                      : index !== lastIndex
+                        ? horizontalMargin
+                        : '',
+                    marginLeft: isJustifySpace
+                      ? justify === 'space-between' && index === 0
+                        ? ''
+                        : semiHorizontalMargin
+                      : '',
                     paddingTop: semiVerticalMargin,
                     paddingBottom: semiVerticalMargin
                   }
