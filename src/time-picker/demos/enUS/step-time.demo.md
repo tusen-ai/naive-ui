@@ -1,6 +1,6 @@
 # Step Time
 
-Pass a number as step or use an array to specify the items you want to show, entering values that are outside the set step will display invalid styles.
+Pass a number as step or use an array to specify the items you want to show, inputting values that don't follow step settings will cause displaying invalid status.
 
 ```html
 <n-time-picker

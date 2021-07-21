@@ -179,8 +179,8 @@ export function isTimeInStep (
   if (!stepOrList) {
     return true
   } else if (typeof stepOrList === 'number') {
-    return getTimeUnits(time[type], stepOrList).includes(getFixValue(value))
+    return value % stepOrList === 0
   } else {
-    return getTimeUnits(time[type], stepOrList).includes(getFixValue(value))
+    return stepOrList.includes(value)
   }
 }

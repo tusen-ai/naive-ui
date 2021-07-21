@@ -29,22 +29,10 @@ const timePickerPanelProps = {
     type: Boolean,
     default: true
   },
-  isHourInvalid: {
-    type: Boolean,
-    default: false
-  },
-  isMinuteInvalid: {
-    type: Boolean,
-    default: false
-  },
-  isSecondInvalid: {
-    type: Boolean,
-    default: false
-  },
-  isValueInvalid: {
-    type: Boolean,
-    default: false
-  },
+  isHourInvalid: Boolean,
+  isMinuteInvalid: Boolean,
+  isSecondInvalid: Boolean,
+  isValueInvalid: Boolean,
   hourValue: {
     type: Number as PropType<number | null>,
     default: null
@@ -75,10 +63,7 @@ const timePickerPanelProps = {
   onNowClick: Function as PropType<() => void>,
   nowText: String,
   confirmText: String,
-  transitionDisabled: {
-    type: Boolean,
-    default: false
-  },
+  transitionDisabled: Boolean,
   onConfirmClick: Function as PropType<() => void>,
   onFocusin: Function as PropType<(e: FocusEvent) => void>,
   onFocusout: Function as PropType<(e: FocusEvent) => void>,
