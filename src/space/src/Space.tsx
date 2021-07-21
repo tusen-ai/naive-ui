@@ -110,7 +110,6 @@ export default defineComponent({
             ? 'flex-' + justify
             : justify,
           flexWrap: !wrap || vertical ? 'nowrap' : 'wrap',
-          justifyContent: 'flex-' + justify,
           marginTop: vertical ? '' : `-${semiVerticalMargin}`,
           marginBottom: vertical ? '' : `-${semiVerticalMargin}`,
           alignItems: align
