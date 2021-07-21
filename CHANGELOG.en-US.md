@@ -13,6 +13,7 @@
 
 - Fix `n-space`'s inner `display: grid` element breaks item height, closes `https://github.com/TuSimple/naive-ui/issues/546`.
 - Fix `n-dropdown`'s `render-label` prop is invalid for group type option.
+- Fix `n-descriptions` doesn't work with `v-for` children.
 
 ## 2.15.5 (2021-07-16)
 

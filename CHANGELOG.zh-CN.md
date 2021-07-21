@@ -13,6 +13,7 @@
 
 - 修复 `n-space` 中 `display: grid` 的元素显示不正确，关闭 `https://github.com/TuSimple/naive-ui/issues/546`
 - 修复 `n-dropdown` 的 `render-label` 属性对 group 类型 option 失效
+- 修复 `n-descriptions` 无法使用 `v-for` 的子元素
 
 ## 2.15.5 (2021-07-16)
 
