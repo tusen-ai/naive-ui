@@ -8,6 +8,7 @@
 - `n-dropdown` add `render-icon` prop.
 - `n-checkbox-group` add `min` and `max` prop.
 - `n-mention` add `empty` slot.
+- `n-space` `justify` prop supports `center`, `space-around` and `space-between`.
 
 ### Fixes
 
