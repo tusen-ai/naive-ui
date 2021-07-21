@@ -25,10 +25,7 @@ const formProps = {
     default: false
   },
   labelWidth: [Number, String] as PropType<number | string>,
-  labelAlign: {
-    type: String as PropType<LabelAlign>,
-    default: 'left'
-  },
+  labelAlign: String as PropType<LabelAlign>,
   labelPlacement: {
     type: String as PropType<LabelPlacement>,
     default: 'top'
@@ -40,7 +37,7 @@ const formProps = {
   rules: Object as PropType<FormRules>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   showRequireMark: {
-    type: Boolean as PropType<boolean | undefined>,
+    type: [Boolean, String] as PropType<'left' | 'right' | boolean>,
     default: undefined
   },
   showFeedback: {

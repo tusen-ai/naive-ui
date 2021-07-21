@@ -9,7 +9,7 @@ Dropdown can be cascade.
   trigger="click"
   @select="handleSelect"
 >
-  <n-button :keyboard="false">People and Some Food to Eat</n-button>
+  <n-button>People and Some Food to Eat</n-button>
 </n-dropdown>
 ```
 
@@ -30,8 +30,7 @@ const options = [
         default: () => h(CashIcon)
       })
     },
-    key: 'daisy buchanan',
-    disabled: true
+    key: 'daisy buchanan'
   },
   {
     type: 'divider',

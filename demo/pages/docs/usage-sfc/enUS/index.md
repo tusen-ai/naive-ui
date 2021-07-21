@@ -44,6 +44,8 @@ If you can use vue setup script, you can use it like this.
 
 No tree-shaking. Bundle will have redundant codes.
 
+If you want to install globally but not want all components, please see [Import on Demand](import-on-demand).
+
 ```js
 import { createApp } from 'vue'
 import naive from 'naive-ui'
@@ -53,33 +55,6 @@ app.use(naive)
 ```
 
 After the installation. You can use all the components in you SFC like this.
-
-```html
-<template>
-  <n-button>naive-ui</n-button>
-</template>
-```
-
-### Install on Demand Globally
-
-```js
-import { createApp } from 'vue'
-import {
-  // create naive ui
-  create,
-  // component
-  NButton
-} from 'naive-ui'
-
-const naive = create({
-  components: [NButton]
-})
-
-const app = createApp()
-app.use(naive)
-```
-
-After the installation. You can use the components you installed in SFC like this.
 
 ```html
 <template>

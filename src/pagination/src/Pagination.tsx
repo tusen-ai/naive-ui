@@ -125,7 +125,7 @@ export default defineComponent({
       // item count has high priority, for it can affect prefix slot rendering
       const { itemCount } = props
       if (itemCount !== undefined) {
-        return Math.ceil(itemCount / mergedPageSizeRef.value)
+        return Math.max(1, Math.ceil(itemCount / mergedPageSizeRef.value))
       }
       const { pageCount } = props
       if (pageCount !== undefined) return pageCount
@@ -228,7 +228,7 @@ export default defineComponent({
       doUpdatePageSize(value)
     }
     function handleQuickJumperKeyUp (e: KeyboardEvent): void {
-      if (e.code === 'Enter') {
+      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
         const page = parseInt(jumperValueRef.value)
         if (
           !Number.isNaN(page) &&

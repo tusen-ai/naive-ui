@@ -18,7 +18,7 @@ import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { format, getTime, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
-import { getAlphaString, happensIn, toRgbString } from 'seemly'
+import { happensIn } from 'seemly'
 import { InputInst, InputProps, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
@@ -65,6 +65,10 @@ const datePickerProps = {
     default: undefined
   },
   clearable: {
+    type: Boolean,
+    default: false
+  },
+  updateValueOnClose: {
     type: Boolean,
     default: false
   },
@@ -292,9 +296,10 @@ export default defineComponent({
         })
       }
     }
-    function handlePanelClose (): void {
+    function handlePanelClose (disableUpdateOnClose: boolean): void {
       closeCalendar({
-        returnFocus: true
+        returnFocus: true,
+        disableUpdateOnClose
       })
     }
     // --- Panel update value
@@ -328,7 +333,11 @@ export default defineComponent({
       if (value === null) {
         singleInputValueRef.value = ''
       } else {
-        singleInputValueRef.value = format(value, mergedFormatRef.value)
+        singleInputValueRef.value = format(
+          value,
+          mergedFormatRef.value,
+          dateFnsOptionsRef.value
+        )
       }
     }
     function deriveRangeInputState (values: [number, number] | null): void {
@@ -336,8 +345,17 @@ export default defineComponent({
         rangeStartInputValueRef.value = ''
         rangeEndInputValueRef.value = ''
       } else {
-        rangeStartInputValueRef.value = format(values[0], mergedFormatRef.value)
-        rangeEndInputValueRef.value = format(values[1], mergedFormatRef.value)
+        const dateFnsOptions = dateFnsOptionsRef.value
+        rangeStartInputValueRef.value = format(
+          values[0],
+          mergedFormatRef.value,
+          dateFnsOptions
+        )
+        rangeEndInputValueRef.value = format(
+          values[1],
+          mergedFormatRef.value,
+          dateFnsOptions
+        )
       }
     }
     // --- Input deactivate & blur
@@ -426,9 +444,22 @@ export default defineComponent({
       if (props.disabled || mergedShowRef.value) return
       doUpdateShow(true)
     }
-    function closeCalendar ({ returnFocus }: { returnFocus: boolean }): void {
+    function closeCalendar ({
+      returnFocus,
+      disableUpdateOnClose
+    }: {
+      returnFocus: boolean
+      disableUpdateOnClose?: boolean
+    }): void {
       if (mergedShowRef.value) {
         doUpdateShow(false)
+        if (
+          props.type !== 'date' &&
+          props.updateValueOnClose &&
+          !disableUpdateOnClose
+        ) {
+          handlePanelConfirm()
+        }
         if (returnFocus) {
           inputInstRef.value?.focus()
         }
@@ -613,22 +644,21 @@ export default defineComponent({
           '--arrow-color': arrowColor,
 
           // icon in trigger
-          '--icon-color': toRgbString(iconColor),
-          '--icon-color-disabled': toRgbString(iconColorDisabled),
-          '--icon-alpha': getAlphaString(iconColor),
-          '--icon-alpha-disabled': getAlphaString(iconColorDisabled)
+          '--icon-color': iconColor,
+          '--icon-color-disabled': iconColorDisabled
         }
       })
     }
   },
   render () {
+    const { clearable } = this
     const commonInputProps: InputProps = {
       bordered: this.mergedBordered,
       size: this.mergedSize,
       passivelyActivated: true,
       disabled: this.disabled,
       readonly: this.disabled,
-      clearable: this.clearable,
+      clearable,
       onClear: this.handleClear,
       onClick: this.handleTriggerClick,
       onActivate: this.handleInputActivate,
@@ -695,7 +725,7 @@ export default defineComponent({
                               {{ default: () => <ToIcon /> }}
                             </NBaseIcon>
                           ),
-                          clear: () => (
+                          [clearable ? 'clear' : 'suffix']: () => (
                             <NBaseIcon
                               clsPrefix={mergedClsPrefix}
                               class={`${mergedClsPrefix}-date-picker-icon`}
@@ -723,7 +753,7 @@ export default defineComponent({
                         {...commonInputProps}
                       >
                         {{
-                          clear: () => (
+                          [clearable ? 'clear' : 'suffix']: () => (
                             <NBaseIcon
                               clsPrefix={mergedClsPrefix}
                               class={`${mergedClsPrefix}-date-picker-icon`}
@@ -754,13 +784,13 @@ export default defineComponent({
                           this.mergedShow
                             ? withDirectives(
                               this.type === 'datetime' ? (
-                                <DatetimePanel {...commonPanelProps} />
+                                  <DatetimePanel {...commonPanelProps} />
                               ) : this.type === 'daterange' ? (
-                                <DaterangePanel {...commonPanelProps} />
+                                  <DaterangePanel {...commonPanelProps} />
                               ) : this.type === 'datetimerange' ? (
-                                <DatetimerangePanel {...commonPanelProps} />
+                                  <DatetimerangePanel {...commonPanelProps} />
                               ) : (
-                                <DatePanel {...commonPanelProps} />
+                                  <DatePanel {...commonPanelProps} />
                               ),
                               [[clickoutside, this.handleClickOutside]]
                             )

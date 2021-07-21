@@ -57,6 +57,19 @@ import {
   Size,
   timePickerInjectionKey
 } from './interface'
+import { happensIn } from 'seemly'
+
+// validate hours,minutes,seconds prop
+function validateUnits (value: MaybeArray<number>, max: number): boolean {
+  if (value === undefined) {
+    return true
+  }
+  if (Array.isArray(value)) {
+    return value.every((v) => v >= 0 && v <= max)
+  } else {
+    return value >= 0 && value <= max
+  }
+}
 
 const timePickerProps = {
   ...(useTheme.props as ThemeProps<TimePickerTheme>),
@@ -118,6 +131,18 @@ const timePickerProps = {
       return true
     },
     default: undefined
+  },
+  hours: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: MaybeArray<number>) => validateUnits(value, 23)
+  },
+  minutes: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: MaybeArray<number>) => validateUnits(value, 59)
+  },
+  seconds: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: MaybeArray<number>) => validateUnits(value, 59)
   }
 }
 
@@ -296,6 +321,12 @@ export default defineComponent({
       void nextTick(() => {
         transitionDisabledRef.value = false
       })
+    }
+    function handleTriggerClick (e: MouseEvent): void {
+      if (props.disabled || happensIn(e, 'clear')) return
+      if (!activeRef.value) {
+        openPanel()
+      }
     }
     function handleHourClick (hour: number): void {
       if (mergedValueRef.value === null) {
@@ -533,6 +564,7 @@ export default defineComponent({
       handleTimeInputClear,
       handleFocusDetectorFocus,
       handleMenuKeyDown,
+      handleTriggerClick,
       mergedTheme: themeRef,
       triggerCssVars: computed(() => {
         const {
@@ -618,10 +650,11 @@ export default defineComponent({
                       onClear={this.handleTimeInputClear}
                       internalDeactivateOnEnter
                       internalForceFocus={this.active}
+                      onClick={this.handleTriggerClick}
                     >
                       {this.showIcon
                         ? {
-                            suffix: () => (
+                            [this.clearable ? 'clear' : 'suffix']: () => (
                               <NBaseIcon
                                 clsPrefix={mergedClsPrefix}
                                 class={`${mergedClsPrefix}-time-picker-icon`}
@@ -657,6 +690,9 @@ export default defineComponent({
                                 <Panel
                                   ref="panelInstRef"
                                   style={this.cssVars as CSSProperties}
+                                  seconds={this.seconds}
+                                  minutes={this.minutes}
+                                  hours={this.hours}
                                   transitionDisabled={this.transitionDisabled}
                                   hourValue={this.hourValue}
                                   showHour={this.hourInFormat}

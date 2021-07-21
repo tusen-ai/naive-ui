@@ -16,7 +16,8 @@ import {
   provide,
   CSSProperties,
   VNode,
-  renderSlot
+  renderSlot,
+  Fragment
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerInst } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
@@ -50,9 +51,8 @@ export const popoverBodyProps = {
   placement: String as PropType<FollowerPlacement>,
   width: [Number, String] as PropType<number | 'trigger'>,
   // private
-  shadow: Boolean,
-  padded: Boolean,
   animated: Boolean,
+  onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   /** @deprecated */
   minWidth: Number,
   maxWidth: Number
@@ -77,18 +77,21 @@ export default defineComponent({
     const bodyRef = ref<HTMLElement | null>(null)
     const followerEnabledRef = ref(props.show)
     const directivesRef = computed<DirectiveArguments>(() => {
-      const { trigger } = props
+      const { trigger, onClickoutside } = props
       const directives = []
       const {
         positionManuallyRef: { value: positionManually }
       } = NPopover
       if (!positionManually) {
-        if (trigger === 'click') {
+        if (trigger === 'click' && !onClickoutside) {
           directives.push([clickoutside, handleClickOutside])
         }
         if (trigger === 'hover') {
           directives.push([mousemoveoutside, handleMouseMoveOutside])
         }
+      }
+      if (onClickoutside) {
+        directives.push([clickoutside, handleClickOutside])
       }
       if (props.displayDirective === 'show') {
         directives.push([vShow, props.show])
@@ -114,6 +117,7 @@ export default defineComponent({
           padding,
           fontSize,
           textColor,
+          dividerColor,
           color,
           boxShadow,
           borderRadius,
@@ -130,6 +134,7 @@ export default defineComponent({
         '--font-size': fontSize,
         '--text-color': textColor,
         '--color': color,
+        '--divider-color': dividerColor,
         '--border-radius': borderRadius,
         '--arrow-height': arrowHeight,
         '--arrow-offset': arrowOffset,
@@ -179,8 +184,9 @@ export default defineComponent({
     }
     function handleClickOutside (e: MouseEvent): void {
       if (
-        props.trigger === 'click' &&
-        !getTriggerElement().contains(e.target as Node)
+        (props.trigger === 'click' &&
+          !getTriggerElement().contains(e.target as Node)) ||
+        props.onClickoutside
       ) {
         NPopover.handleClickOutside(e)
       }
@@ -193,50 +199,75 @@ export default defineComponent({
     provide(modalBodyInjectionKey, null)
 
     function renderContentNode (): VNode | null {
-      const mergedClsPrefix = mergedClsPrefixRef.value
-      const extraClass = NPopover.extraClassRef.value
-      return props.displayDirective === 'show' || props.show
-        ? withDirectives(
-          h(
-            'div',
-            mergeProps(
-              {
-                class: [
-                    `${mergedClsPrefix}-popover`,
-                    extraClass && `${mergedClsPrefix}-${extraClass}`,
-                    {
-                      [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
-                      [`${mergedClsPrefix}-popover--no-arrow`]:
-                        !props.showArrow,
-                      [`${mergedClsPrefix}-popover--shadow`]: props.shadow,
-                      [`${mergedClsPrefix}-popover--padded`]: props.padded,
-                      [`${mergedClsPrefix}-popover--raw`]: props.raw
-                    }
-                ],
-                ref: bodyRef,
-                style: styleRef.value,
-                onMouseenter: handleMouseEnter,
-                onMouseleave: handleMouseLeave
-              },
-              attrs
-            ),
-            [
-              renderSlot(slots, 'default'),
-              props.showArrow ? (
-                <div
-                  class={`${mergedClsPrefix}-popover-arrow-wrapper`}
-                  key="__popover-arrow__"
-                >
-                  <div
-                    class={`${mergedClsPrefix}-popover-arrow`}
-                    style={props.arrowStyle}
-                  />
-                </div>
-              ) : null
-            ]
+      let contentNode: VNode
+      const {
+        internalRenderBodyRef: { value: renderBody }
+      } = NPopover
+      const { value: mergedClsPrefix } = mergedClsPrefixRef
+      if (!renderBody) {
+        const { value: extraClass } = NPopover.extraClassRef
+        contentNode = h(
+          'div',
+          mergeProps(
+            {
+              class: [
+                `${mergedClsPrefix}-popover`,
+                extraClass.map((v) => `${mergedClsPrefix}-${v}`),
+                {
+                  [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
+                  [`${mergedClsPrefix}-popover--show-arrow`]: props.showArrow,
+                  [`${mergedClsPrefix}-popover--show-header`]: !!slots.header,
+                  [`${mergedClsPrefix}-popover--raw`]: props.raw
+                }
+              ],
+              ref: bodyRef,
+              style: styleRef.value,
+              onMouseenter: handleMouseEnter,
+              onMouseleave: handleMouseLeave
+            },
+            attrs
           ),
-          directivesRef.value
+          [
+            slots.header ? (
+              <>
+                <div class={`${mergedClsPrefix}-popover__header`}>
+                  {slots.header()}
+                </div>
+                <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
+              </>
+            ) : (
+              renderSlot(slots, 'default')
+            ),
+            props.showArrow ? (
+              <div
+                class={`${mergedClsPrefix}-popover-arrow-wrapper`}
+                key="__popover-arrow__"
+              >
+                <div
+                  class={`${mergedClsPrefix}-popover-arrow`}
+                  style={props.arrowStyle}
+                />
+              </div>
+            ) : null
+          ]
         )
+      } else {
+        contentNode = renderBody(
+          // The popover class and overlap class must exists, they will be used
+          // to place the body & transition animation.
+          // Shadow class exists for reuse box-shadow.
+          [
+            `${mergedClsPrefix}-popover`,
+            props.overlap && `${mergedClsPrefix}-popover--overlap`
+          ],
+          bodyRef,
+          styleRef.value as any,
+          handleMouseEnter,
+          handleMouseLeave
+        )
+      }
+      return props.displayDirective === 'show' || props.show
+        ? withDirectives(contentNode, directivesRef.value)
         : null
     }
 
@@ -283,7 +314,7 @@ export default defineComponent({
                 }
               },
               {
-                default: this.renderContentNode
+                default: () => this.renderContentNode()
               }
             )
             : this.renderContentNode()

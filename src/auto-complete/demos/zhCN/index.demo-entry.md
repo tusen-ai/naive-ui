@@ -21,6 +21,7 @@ after-select
 | clearable | `boolean` | `false` | 自动填充是否支持可清除 |
 | default-value | `string` | `null` | 自动填充的默认值 |
 | disabled | `boolean` | `false` | 自动填充是否禁用 |
+| loading | `boolean` | `false` | 是否展示加载状态 |
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | 自动填充的自定义选项 |
 | placeholder | `string` | `'请输入'` | 自动填充的提示信息 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 自动填充的尺寸大小 |
@@ -32,19 +33,19 @@ after-select
 
 ### AutoCompleteOption Properties
 
-| 名称     | 类型               | 介绍            |
-| -------- | ------------------ | --------------- |
-| disabled | `boolean`          | 是否禁用        |
-| label    | `string`           | 显示的 label 值 |
-| render   | `Function`         | 自定义渲染函数  |
-| value    | `string \| number` | 需要唯一        |
+| 名称     | 类型      | 介绍            |
+| -------- | --------- | --------------- |
+| disabled | `boolean` | 是否禁用        |
+| label    | `string`  | 显示的 label 值 |
+| value    | `string`  | 需要唯一        |
 
 ### AutoCompleteGroupOption Properties
 
 | 名称 | 类型 | 介绍 |
 | --- | --- | --- |
 | children | `Array<string \| AutoCompleteOption>` | AutoCompleteGroup 的 children 项 |
-| name | `string` | AutoCompleteGroup 的名字 |
+| label | `string` | AutoCompleteGroup 的名字 |
+| key | `string \| number` | AutoCompleteGroup 的 key |
 | type | `'group'` | AutoCompleteGroup 的类型 |
 
 ## Slots

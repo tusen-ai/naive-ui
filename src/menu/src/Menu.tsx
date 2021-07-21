@@ -9,7 +9,8 @@ import {
   ExtractPropTypes,
   InjectionKey,
   CSSProperties,
-  inject
+  inject,
+  VNodeChild
 } from 'vue'
 import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
@@ -30,6 +31,7 @@ import {
   OnUpdateKeysImpl
 } from './interface'
 import { layoutSiderInjectionKey } from '../../layout/src/interface'
+import { FollowerPlacement } from 'vueuc'
 
 const menuProps = {
   ...(useTheme.props as ThemeProps<MenuTheme>),
@@ -69,10 +71,7 @@ const menuProps = {
     default: 32
   },
   defaultExpandAll: Boolean,
-  defaultExpandedKeys: {
-    type: Array as PropType<Key[]>,
-    default: () => []
-  },
+  defaultExpandedKeys: Array as PropType<Key[]>,
   expandedKeys: {
     type: Array as PropType<Key[]>,
     default: undefined
@@ -149,6 +148,13 @@ const menuProps = {
       return true
     },
     default: undefined
+  },
+  renderLabel: Function as PropType<
+  (option: MenuOption | MenuGroupOption) => VNodeChild
+  >,
+  dropdownPlacement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'bottom'
   }
 } as const
 
@@ -196,10 +202,22 @@ export default defineComponent({
         }
       )
     )
+
+    const uncontrolledValueRef = ref(props.defaultValue)
+    const controlledValueRef = toRef(props, 'value')
+    const mergedValueRef = useMergedState(
+      controlledValueRef,
+      uncontrolledValueRef
+    )
+
     const uncontrolledExpandedKeysRef = ref(
       props.defaultExpandAll
         ? treeMateRef.value.getNonLeafKeys()
-        : props.defaultExpandedNames || props.defaultExpandedKeys
+        : props.defaultExpandedNames ||
+            props.defaultExpandedKeys ||
+            treeMateRef.value.getPath(mergedValueRef.value, {
+              includeSelf: false
+            }).keyPath
     )
     const controlledExpandedKeysRef = useCompitable(props, [
       'expandedNames',
@@ -208,12 +226,6 @@ export default defineComponent({
     const mergedExpandedKeysRef = useMergedState(
       controlledExpandedKeysRef,
       uncontrolledExpandedKeysRef
-    )
-    const uncontrolledValueRef = ref(props.defaultValue)
-    const controlledValueRef = toRef(props, 'value')
-    const mergedValueRef = useMergedState(
-      controlledValueRef,
-      uncontrolledValueRef
     )
     const tmNodesRef = computed(() => treeMateRef.value.treeNodes)
     const activePathRef = computed(() => {

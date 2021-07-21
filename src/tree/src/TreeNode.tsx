@@ -11,6 +11,7 @@ import {
 } from 'vue'
 import { useMemo } from 'vooks'
 import { happensIn, repeat } from 'seemly'
+import { createDataKey } from '../../_utils'
 import NTreeNodeSwitcher from './TreeNodeSwitcher'
 import NTreeNodeCheckbox from './TreeNodeCheckbox'
 import NTreeNodeContent from './TreeNodeContent'
@@ -45,6 +46,7 @@ const TreeNode = defineComponent({
     const contentInstRef = ref<null | ComponentPublicInstance>(null)
     // must be non-reactive
     const contentElRef: { value: HTMLElement | null } = { value: null }
+
     onMounted(() => {
       contentElRef.value = contentInstRef.value!.$el as HTMLElement
     })
@@ -151,11 +153,14 @@ const TreeNode = defineComponent({
         }
         return false
       }),
+      pending: useMemo(
+        () => NTree.pendingNodeKeyRef.value === props.tmNode.key
+      ),
       loading: useMemo(() =>
         NTree.loadingKeysRef.value.includes(props.tmNode.key)
       ),
       highlight: useMemo(() =>
-        NTree.highlightKeysRef.value.includes(props.tmNode.key)
+        NTree.highlightKeySetRef.value.has(props.tmNode.key)
       ),
       checked: useMemo(() =>
         NTree.displayedCheckedKeysRef.value.includes(props.tmNode.key)
@@ -169,14 +174,25 @@ const TreeNode = defineComponent({
       expanded: useMemo(() =>
         NTree.mergedExpandedKeysRef.value.includes(props.tmNode.key)
       ),
-      suffix: computed(() => props.tmNode.rawNode.suffix),
       disabled: computed(
         () => NTree.disabledRef.value || props.tmNode.disabled
       ),
+      checkable: computed(
+        () =>
+          NTree.checkableRef.value &&
+          (NTree.cascadeRef.value ||
+            (NTree.leafOnlyRef.value && props.tmNode.isLeaf))
+      ),
       checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
-      checkable: NTree.checkableRef,
+      selectable: computed(
+        () =>
+          NTree.selectableRef.value &&
+          (NTree.leafOnlyRef.value ? !!props.tmNode.isLeaf : true)
+      ),
+      internalScrollable: NTree.internalScrollableRef,
       draggable: NTree.draggableRef,
       blockLine: NTree.blockLineRef,
+      checkboxFocusable: NTree.internalCheckboxFocusableRef,
       droppingPosition: droppingPositionRef,
       droppingOffsetLevel: droppingOffsetLevelRef,
       indent: indentRef,
@@ -198,13 +214,16 @@ const TreeNode = defineComponent({
       tmNode,
       clsPrefix,
       checkable,
+      selectable,
       selected,
+      checked,
       highlight,
       draggable,
       blockLine,
       indent,
       disabled,
-      suffix
+      pending,
+      internalScrollable
     } = this
     // drag start not inside
     // it need to be append to node itself, not wrapper
@@ -218,6 +237,9 @@ const TreeNode = defineComponent({
             onDragover: this.handleDragOver
           }
         : undefined
+    // In non virtual mode, there's no evidence that which element should be
+    // scrolled to, so we need data-key to query the target element.
+    const dataKey = internalScrollable ? createDataKey(tmNode.key) : undefined
     return (
       <div class={`${clsPrefix}-tree-node-wrapper`} {...dragEventHandlers}>
         <div
@@ -227,9 +249,12 @@ const TreeNode = defineComponent({
               [`${clsPrefix}-tree-node--selected`]: selected,
               [`${clsPrefix}-tree-node--checkable`]: checkable,
               [`${clsPrefix}-tree-node--highlight`]: highlight,
-              [`${clsPrefix}-tree-node--disabled`]: disabled
+              [`${clsPrefix}-tree-node--pending`]: pending,
+              [`${clsPrefix}-tree-node--disabled`]: disabled,
+              [`${clsPrefix}-tree-node--selectable`]: selectable
             }
           ]}
+          data-key={dataKey}
           draggable={draggable && blockLine}
           onClick={blockLine && !disabled ? this.handleContentClick : undefined}
           onDragstart={
@@ -254,6 +279,7 @@ const TreeNode = defineComponent({
           />
           {checkable ? (
             <NTreeNodeCheckbox
+              focusable={this.checkboxFocusable}
               disabled={disabled || this.checkboxDisabled}
               clsPrefix={clsPrefix}
               checked={this.checked}
@@ -264,6 +290,8 @@ const TreeNode = defineComponent({
           <NTreeNodeContent
             ref="contentInstRef"
             clsPrefix={clsPrefix}
+            checked={checked}
+            selected={selected}
             onClick={
               blockLine || disabled ? undefined : this.handleContentClick
             }
@@ -272,11 +300,8 @@ const TreeNode = defineComponent({
                 ? this.handleDragStart
                 : undefined
             }
-          >
-            {{
-              default: () => [tmNode.rawNode.label, suffix ? suffix() : null]
-            }}
-          </NTreeNodeContent>
+            tmNode={tmNode}
+          />
           {draggable
             ? this.showDropMark
               ? renderDropMark({

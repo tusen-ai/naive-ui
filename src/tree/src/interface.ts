@@ -5,24 +5,45 @@ import type { TreeTheme } from '../styles'
 
 export type Key = string | number
 
-export interface TreeOption {
+export interface TreeOptionBase {
   key: Key
   label: string
   checkboxDisabled?: boolean
   disabled?: boolean
   isLeaf?: boolean
   children?: TreeOption[]
+  prefix?: () => VNodeChild
   suffix?: () => VNodeChild
 }
 
+export type TreeOption = TreeOptionBase & { [k: string]: unknown }
+
 export type TreeOptions = TreeOption[]
 
-export interface DragInfo {
+export interface TreeRenderProps {
+  option: TreeOption
+  checked: boolean
+  selected: boolean
+}
+
+type RenderTreePart = ({
+  option,
+  checked,
+  selected
+}: TreeRenderProps) => VNodeChild
+
+export type RenderLabel = RenderTreePart
+
+export type RenderPrefix = RenderTreePart
+
+export type RenderSuffix = RenderTreePart
+
+export interface TreeDragInfo {
   event: DragEvent
   node: TreeOption
 }
 
-export interface DropInfo {
+export interface TreeDropInfo {
   event: DragEvent
   node: TreeOption
   dragNode: TreeOption
@@ -50,7 +71,7 @@ export interface InternalDropInfo {
 
 export interface TreeInjection {
   loadingKeysRef: Ref<Key[]>
-  highlightKeysRef: Ref<Key[]>
+  highlightKeySetRef: Ref<Set<Key>>
   displayedCheckedKeysRef: Ref<Key[]>
   displayedIndeterminateKeysRef: Ref<Key[]>
   mergedSelectedKeysRef: Ref<Key[]>
@@ -58,7 +79,6 @@ export interface TreeInjection {
   fNodesRef: Ref<Array<TreeNode<TreeOption>>>
   remoteRef: Ref<boolean>
   draggableRef: Ref<boolean>
-  checkableRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<TreeTheme>>
   onLoadRef: Ref<((node: TreeOption) => Promise<void>) | undefined>
   blockLineRef: Ref<boolean>
@@ -69,6 +89,16 @@ export interface TreeInjection {
   droppingPositionRef: Ref<null | DropPosition>
   droppingOffsetLevelRef: Ref<number>
   disabledRef: Ref<boolean>
+  checkableRef: Ref<boolean>
+  cascadeRef: Ref<boolean>
+  leafOnlyRef: Ref<boolean>
+  selectableRef: Ref<boolean>
+  pendingNodeKeyRef: Ref<null | Key>
+  internalScrollableRef: Ref<boolean>
+  internalCheckboxFocusableRef: Ref<boolean>
+  renderLabelRef: Ref<RenderLabel | undefined>
+  renderPrefixRef: Ref<RenderPrefix | undefined>
+  renderSuffixRef: Ref<RenderSuffix | undefined>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void
@@ -89,4 +119,9 @@ export interface MotionData {
   height: number | undefined
   mode: 'expand' | 'collapse'
   nodes: TmNode[]
+}
+
+export interface InternalTreeInst {
+  handleKeyup: (e: KeyboardEvent) => void
+  handleKeydown: (e: KeyboardEvent) => void
 }

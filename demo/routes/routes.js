@@ -445,6 +445,15 @@ export const enComponentRoutes = [
     path: 'color-picker',
     component: () =>
       import('../../src/color-picker/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'tree-select',
+    component: () =>
+      import('../../src/tree-select/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'carousel',
+    component: () => import('../../src/carousel/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -775,6 +784,15 @@ export const zhComponentRoutes = [
     path: 'color-picker',
     component: () =>
       import('../../src/color-picker/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'tree-select',
+    component: () =>
+      import('../../src/tree-select/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'carousel',
+    component: () => import('../../src/carousel/demos/zhCN/index.demo-entry.md')
   }
 ]
 

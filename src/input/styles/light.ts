@@ -33,7 +33,11 @@ const self = (vars: ThemeCommonVars) => {
     clearColorHover,
     clearColorPressed,
     placeholderColor,
-    placeholderColorDisabled
+    placeholderColorDisabled,
+    iconColor,
+    iconColorDisabled,
+    iconColorHover,
+    iconColorPressed
   } = vars
   return {
     ...commonVariables,
@@ -67,7 +71,9 @@ const self = (vars: ThemeCommonVars) => {
     borderDisabled: `1px solid ${borderColor}`,
     borderFocus: `1px solid ${primaryColorHover}`,
     boxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.2 })}`,
+    loadingColor: primaryColor,
     // warning
+    loadingColorWarning: warningColor,
     borderWarning: `1px solid ${warningColor}`,
     borderHoverWarning: `1px solid ${warningColorHover}`,
     colorFocusWarning: inputColor,
@@ -77,6 +83,7 @@ const self = (vars: ThemeCommonVars) => {
     })}`,
     caretColorWarning: warningColor,
     // error
+    loadingColorError: errorColor,
     borderError: `1px solid ${errorColor}`,
     borderHoverError: `1px solid ${errorColorHover}`,
     colorFocusError: inputColor,
@@ -88,8 +95,10 @@ const self = (vars: ThemeCommonVars) => {
     clearColor,
     clearColorHover,
     clearColorPressed,
-    iconColor: placeholderColor,
-    iconColorDisabled: placeholderColorDisabled,
+    iconColor,
+    iconColorDisabled,
+    iconColorHover,
+    iconColorPressed,
     suffixTextColor: textColor2
   }
 }

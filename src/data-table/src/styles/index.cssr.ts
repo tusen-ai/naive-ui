@@ -51,6 +51,7 @@ export default c([
     --merged-th-color-hover: var(--th-color-hover);
     --merged-td-color-hover: var(--td-color-hover);
   `, [
+    cB('data-table-expand-trigger', 'cursor: pointer;'),
     cB('data-table-expand-placeholder', `
       margin-right: 8px;
       display: inline-block;

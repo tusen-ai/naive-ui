@@ -33,21 +33,24 @@ export default defineComponent({
     const loadingBarRef = ref<HTMLElement | null>(null)
     const enteringRef = ref(false)
     const loadingRef = ref(false)
+    const transitionDisabledRef = ref(false)
     let finishing = false
     let erroring = false
-    function init (): void {
+    async function init (): Promise<void> {
       enteringRef.value = false
       loadingRef.value = false
       finishing = false
       erroring = false
+      transitionDisabledRef.value = true
+      await nextTick()
+      transitionDisabledRef.value = false
     }
     async function start (
       fromProgress = 0,
       toProgress = 80,
       status: 'starting' | 'error' = 'starting'
     ): Promise<void> {
-      init()
-      await nextTick()
+      await init()
       loadingRef.value = true
       await nextTick()
       const el = loadingBarRef.value
@@ -107,8 +110,8 @@ export default defineComponent({
     function handleAfterEnter (): void {
       enteringRef.value = false
     }
-    function handleAfterLeave (): void {
-      init()
+    async function handleAfterLeave (): Promise<void> {
+      await init()
     }
     const themeRef = useTheme(
       'LoadingBar',
@@ -123,6 +126,7 @@ export default defineComponent({
       loadingBarRef,
       loading: loadingRef,
       entering: enteringRef,
+      transitionDisabled: transitionDisabledRef,
       start,
       error,
       finish,
@@ -150,6 +154,7 @@ export default defineComponent({
         onEnter={this.handleEnter}
         onAfterEnter={this.handleAfterEnter}
         onAfterLeave={this.handleAfterLeave}
+        css={!this.transitionDisabled}
       >
         {/*
           BUG: need to use v-show nor it will glitch when triggers start, end,

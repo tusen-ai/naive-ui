@@ -106,10 +106,11 @@ export default defineComponent({
         style={{
           display: inline ? 'inline-flex' : 'flex',
           flexDirection: vertical ? 'column' : 'row',
-          flexWrap: !wrap ? 'nowrap' : 'wrap',
           justifyContent: ['start', 'end'].includes(justify)
             ? 'flex-' + justify
             : justify,
+          flexWrap: !wrap || vertical ? 'nowrap' : 'wrap',
+          justifyContent: 'flex-' + justify,
           marginTop: vertical ? '' : `-${semiVerticalMargin}`,
           marginBottom: vertical ? '' : `-${semiVerticalMargin}`,
           alignItems: align

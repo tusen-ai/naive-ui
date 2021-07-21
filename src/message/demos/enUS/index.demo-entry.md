@@ -60,21 +60,22 @@ multiple-line
 
 | Name | Type | Description |
 | --- | --- | --- |
-| error | `(content: string, option?: MessageOption) => MessageReactive` |  |
-| info | `(content: string, option?: MessageOption) => MessageReactive` |  |
-| loading | `(content: string, option?: MessageOption) => MessageReactive` |  |
-| success | `(content: string, option?: MessageOption) => MessageReactive` |  |
-| warning | `(content: string, option?: MessageOption) => MessageReactive` |  |
+| error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
 
 #### MessageOption Properties
 
-| Name | Type | Description |
-| --- | --- | --- |
-| closable | `boolean` |  |
-| content | `string \| number \| boolean \| (() => VNodeChild)` | Message content. |
-| icon | `() => VNode` | Message icon. |
-| onAfterLeave | `Function` | Callback after message disappeared. |
-| onLeave | `Function` | Callback when message start to disappear. |
+| Name         | Type          | Description                               |
+| ------------ | ------------- | ----------------------------------------- |
+| closable     | `boolean`     |                                           |
+| duration     | `number`      |                                           |
+| icon         | `() => VNode` | Message icon.                             |
+| onAfterLeave | `() => void`  | Callback after message disappeared.       |
+| onClose      | `() => void`  | Callback when close icon is clicked.      |
+| onLeave      | `() => void`  | Callback when message start to disappear. |
 
 #### MessageReactive Properties
 
@@ -82,13 +83,58 @@ multiple-line
 | --- | --- | --- |
 | closable | `boolean` |  |
 | content | `string \| (() => VNodeChild)` | Message content. |
+| destory | `() => void` |  |
 | icon | `() => VNode` | Message icon. |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` |  |
-| onAfterLeave | `Function` | Callback after message disappeared. |
-| onLeave | `Function` | Callback when message start to disappear. |
+| onAfterLeave | `() => void` | Callback after message disappeared. |
+| onLeave | `() => void` | Callback when message start to disappear. |
 
 #### MessageReactive Methods
 
 | Name    | Type | Description |
 | ------- | ---- | ----------- |
 | destroy | `()` |             |
+
+## Q & A
+
+### Use Message Outside Setup
+
+<n-space vertical>
+<n-alert type="warning">
+  You need to mount the return value of <n-text code>useMessage</n-text> to the window in the top-level setup and then call it. Before calling it, you need to make sure that message has been mounted successfully.
+</n-alert>
+
+```html
+<!-- App.vue -->
+<n-message-provider>
+  <content />
+</n-message-provider>
+```
+
+```html
+<!-- content.vue -->
+<template>...</template>
+
+<script>
+  import { useMessage } from 'naive-ui'
+
+  // content
+  export default {
+    setup() {
+      window.$message = useMessage()
+    }
+  }
+</script>
+```
+
+```js
+// xxx.js
+export const handler = () => {
+  // You need to ensure that window.$message = message has been executed in setup
+  window.$message.success(
+    'Cause you walked hand in hand With another man in my place'
+  )
+}
+```
+
+</n-space>

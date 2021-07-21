@@ -105,7 +105,7 @@ describe('n-avatar', () => {
       },
       render () {
         const { text } = this as any
-        return <NAvatar size="medium">{text}</NAvatar>
+        return <NAvatar size="medium">{{ default: () => text }}</NAvatar>
       }
     }
     const wrapper = mount(AdjustAvatar)
@@ -117,5 +117,29 @@ describe('n-avatar', () => {
       'transform: translateX(-50%) translateY(-50%) scale(1);'
     )
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('image avatar error handle when load failed', async () => {
+    const onError = jest.fn()
+    const wrapper = mount(NAvatar, {
+      props: {
+        src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+        onError
+      }
+    })
+    await wrapper.find('img').trigger('error')
+    expect(onError).toHaveBeenCalled()
+  })
+
+  it('should work with `objectFit` prop', () => {
+    const wrapper = mount(NAvatar, {
+      props: {
+        src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+        objectFit: 'contain'
+      }
+    })
+    expect(wrapper.find('img').attributes('style')).toContain(
+      'object-fit: contain;'
+    )
   })
 })

@@ -47,3 +47,9 @@ Mention is provided after `v2.2.0`.
 | render   | `(option: MentionOption) => VNodeChild` |                  |
 | style    | `string`                                |                  |
 | value    | `string`                                | Should be unique |
+
+### Mention Slots
+
+| Name  | Parameters | Description                 |
+| ----- | ---------- | --------------------------- |
+| empty | `()`       | Slot when menu has no data. |

@@ -12,11 +12,11 @@ depth
 
 ## Props
 
-| Name  | Type                    | Default     | Description |
-| ----- | ----------------------- | ----------- | ----------- |
-| color | `string`                | `undefined` |             |
-| depth | `1 \| 2 \| 3 \| 4 \| 5` | `undefined` |             |
-| size  | `number \| string`      | `undefined` |             |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| color | `string` | `undefined` | Icon color. |
+| depth | `1 \| 2 \| 3 \| 4 \| 5` | `undefined` | Icon depth. |
+| size | `number \| string` | `undefined` | Icon size (when the unit is not specified, the default unit: `px`). |
 
 ## Slots
 

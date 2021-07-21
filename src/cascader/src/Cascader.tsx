@@ -491,6 +491,7 @@ export default defineComponent({
           if (props.filterable) return
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
+        case 'NumpadEnter':
           if (!mergedShowRef.value) {
             openMenu()
           } else {
@@ -609,16 +610,6 @@ export default defineComponent({
         }
       }
     }
-    function handleDeleteLastOption (): void {
-      if (props.multiple) {
-        const { value: mergedValue } = mergedValueRef
-        if (Array.isArray(mergedValue)) {
-          const newValue = Array.from(mergedValue)
-          newValue.pop()
-          doUpdateValue(newValue)
-        }
-      }
-    }
     function handlePatternInput (e: InputEvent): void {
       patternRef.value = (e.target as HTMLInputElement).value
     }
@@ -716,7 +707,6 @@ export default defineComponent({
       handleTriggerBlur,
       handleTriggerClick,
       handleClear,
-      handleDeleteLastOption,
       handleDeleteOption,
       handlePatternInput,
       handleKeyDown,
@@ -799,7 +789,6 @@ export default defineComponent({
                       onBlur={this.handleTriggerBlur}
                       onClick={this.handleTriggerClick}
                       onClear={this.handleClear}
-                      onDeleteLastOption={this.handleDeleteLastOption}
                       onDeleteOption={this.handleDeleteOption}
                       onPatternInput={this.handlePatternInput}
                       onKeydown={this.handleKeyDown}

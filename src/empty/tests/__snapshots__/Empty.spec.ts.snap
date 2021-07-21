@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`n-empty should work with \`size\` prop 1`] = `"--icon-size: 40px; --font-size: 14px; --bezier: cubic-bezier(.4, 0, .2, 1); --text-color: rgba(194, 194, 194, 1); --icon-color: rgba(194, 194, 194, 1); --extra-text-color: rgb(51, 54, 57);"`;
+
+exports[`n-empty should work with \`size\` prop 2`] = `"--icon-size: 34px; --font-size: 14px; --bezier: cubic-bezier(.4, 0, .2, 1); --text-color: rgba(194, 194, 194, 1); --icon-color: rgba(194, 194, 194, 1); --extra-text-color: rgb(51, 54, 57);"`;
+
+exports[`n-empty should work with \`size\` prop 3`] = `"--icon-size: 46px; --font-size: 15px; --bezier: cubic-bezier(.4, 0, .2, 1); --text-color: rgba(194, 194, 194, 1); --icon-color: rgba(194, 194, 194, 1); --extra-text-color: rgb(51, 54, 57);"`;
+
+exports[`n-empty should work with \`size\` prop 4`] = `"--icon-size: 52px; --font-size: 16px; --bezier: cubic-bezier(.4, 0, .2, 1); --text-color: rgba(194, 194, 194, 1); --icon-color: rgba(194, 194, 194, 1); --extra-text-color: rgb(51, 54, 57);"`;

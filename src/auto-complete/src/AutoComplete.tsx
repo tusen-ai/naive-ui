@@ -23,8 +23,8 @@ import {
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
-
 import { NInput } from '../../input'
+
 import type {
   SelectBaseOption,
   SelectGroupOption,
@@ -38,7 +38,8 @@ import {
   AutoCompleteOptions,
   OnUpdateValue,
   OnSelect,
-  OnUpdateImpl
+  OnUpdateImpl,
+  AutoCompleteOption
 } from './interface'
 import { tmOptions } from '../../select/src/utils'
 
@@ -56,6 +57,10 @@ const autoCompleteProps = {
   defaultValue: {
     type: String as PropType<string | null>,
     default: null
+  },
+  loading: {
+    type: Boolean,
+    default: undefined
   },
   disabled: Boolean,
   placeholder: String,
@@ -174,10 +179,11 @@ export default defineComponent({
     function handleKeyDown (e: KeyboardEvent): void {
       switch (e.code) {
         case 'Enter':
+        case 'NumpadEnter':
           if (!isComposingRef.value) {
             const pendingOptionData = menuInstRef.value?.getPendingOption()
             if (pendingOptionData) {
-              select(pendingOptionData)
+              select(pendingOptionData as AutoCompleteOption)
               e.preventDefault()
             }
           }
@@ -190,7 +196,7 @@ export default defineComponent({
           break
       }
     }
-    function select (option: SelectBaseOption): void {
+    function select (option: AutoCompleteOption): void {
       if (option) {
         if (props.clearAfterSelect) {
           doUpdateValue(null)
@@ -220,7 +226,7 @@ export default defineComponent({
       doUpdateValue(value)
     }
     function handleToggleOption (option: SelectBaseOption): void {
-      select(option)
+      select(option as AutoCompleteOption)
     }
     function handleClickOutsideMenu (e: MouseEvent): void {
       if (!triggerElRef.value?.contains(e.target as Node)) {
@@ -303,6 +309,7 @@ export default defineComponent({
                         size={this.mergedSize}
                         disabled={this.disabled}
                         clearable={this.clearable}
+                        loading={this.loading}
                         onClear={this.handleClear}
                         onFocus={this.handleFocus}
                         onUpdateValue={this.handleInput}

@@ -1,5 +1,21 @@
 // rubbish code here
 
+import { h } from 'vue'
+import { RouterLink } from 'vue-router'
+
+export const renderMenuLabel = (option) => {
+  if (!('path' in option) || option.label === '--Debug') {
+    return option.label
+  }
+  return h(
+    RouterLink,
+    {
+      to: option.path
+    },
+    { default: () => option.label }
+  )
+}
+
 const appendCounts = (item) => {
   if (!item.children) {
     item.count = 1
@@ -171,6 +187,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/card'
         },
         {
+          en: 'Carousel',
+          zh: '轮播图',
+          enSuffix: true,
+          path: '/carousel'
+        },
+        {
           en: 'Collapse',
           zh: '折叠面板',
           enSuffix: true,
@@ -338,6 +360,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '穿梭框',
           enSuffix: true,
           path: '/transfer'
+        },
+        {
+          en: 'Tree Select',
+          zh: '树型选择',
+          enSuffix: true,
+          path: '/tree-select'
         },
         {
           en: 'Upload',

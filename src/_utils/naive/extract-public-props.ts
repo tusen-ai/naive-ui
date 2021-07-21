@@ -7,3 +7,5 @@ export type ExtractPublicPropTypes<T> = Omit<
 Partial<ExtractPropTypes<T>>,
 themePropKeys | Extract<keyof T, `internal${string}`>
 >
+
+export type ExtractInternalPropTypes<T> = Partial<ExtractPropTypes<T>>

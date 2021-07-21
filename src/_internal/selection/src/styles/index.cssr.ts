@@ -73,18 +73,19 @@ export default c([
       z-index: 1;
       border-color: #0000;
     `),
-    cE('mark', `
+    cB('base-suffix', `
       cursor: pointer;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       right: 10px;
-    `),
-    cE('arrow', `
-      color: var(--arrow-color);
-      transition: color .3s var(--bezier);
-    `),
-    cB('base-selection-placeholder', `
+    `, [
+      cE('arrow', `
+        color: var(--arrow-color);
+        transition: color .3s var(--bezier);
+      `)
+    ]),
+    cB('base-render-dom', `
       white-space: nowrap;
       overflow: hidden;
       height: var(--height);
@@ -97,6 +98,8 @@ export default c([
       left: 0;
       padding: var(--padding-single);
       transition: color .3s var(--bezier);
+    `),
+    cB('base-selection-placeholder', `
       color: var(--placeholder-color);
     `),
     cB('base-selection-tags', `
@@ -149,6 +152,9 @@ export default c([
         color: var(--text-color);
         transition: color .3s var(--bezier);
         caret-color: var(--caret-color);
+      `),
+      cE('render-label', `
+        color: var(--text-color);
       `)
     ]),
     cNotM('disabled', [
@@ -205,7 +211,7 @@ export default c([
       height: calc(var(--height) - 6px);
       line-height: calc(var(--height) - 6px);
       outline: none;
-      display: inline-block;
+      display: none;
       position: relative;
       margin-bottom: 3px;
       max-width: 100%;

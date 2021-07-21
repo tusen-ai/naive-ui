@@ -15,12 +15,16 @@ import {
 import { VBinder, VTarget, FollowerPlacement } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
 import { call, keep, warn, getFirstSlotVNode } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type {
+  ExtractPublicPropTypes,
+  ExtractInternalPropTypes,
+  MaybeArray
+} from '../../_utils'
 import { useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
 import type { PopoverTheme } from '../styles'
-import { PopoverTrigger } from './interface'
+import type { PopoverTrigger, InternalRenderBody } from './interface'
 
 const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
 keyof typeof popoverBodyProps
@@ -65,9 +69,10 @@ export interface PopoverInjection {
   handleClickOutside: (e: MouseEvent) => void
   getTriggerElement: () => HTMLElement
   setBodyInstance: (value: BodyInstance | null) => void
+  internalRenderBodyRef: Ref<InternalRenderBody | undefined>
   positionManuallyRef: ComputedRef<boolean>
   isMountedRef: Ref<boolean>
-  extraClassRef: Ref<string | undefined>
+  extraClassRef: Ref<string[]>
 }
 
 export const popoverBaseProps = {
@@ -75,10 +80,7 @@ export const popoverBaseProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  defaultShow: {
-    type: Boolean,
-    default: false
-  },
+  defaultShow: Boolean,
   showArrow: {
     type: Boolean,
     default: true
@@ -95,20 +97,14 @@ export const popoverBaseProps = {
     type: Number,
     default: 100
   },
-  raw: {
-    type: Boolean,
-    default: false
-  },
+  raw: Boolean,
   placement: {
     type: String as PropType<FollowerPlacement>,
     default: 'top'
   },
   x: Number,
   y: Number,
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  disabled: Boolean,
   getDisabled: Function as PropType<() => boolean>,
   displayDirective: {
     type: String as PropType<'if' | 'show'>,
@@ -127,22 +123,13 @@ export const popoverBaseProps = {
     type: [Number, String] as PropType<number | 'trigger'>,
     default: undefined
   },
-  overlap: {
-    type: Boolean,
-    default: false
+  overlap: Boolean,
+  internalExtraClass: {
+    type: Array as PropType<string[]>,
+    default: () => []
   },
-  // private
-  padded: {
-    type: Boolean,
-    default: true
-  },
-  shadow: {
-    type: Boolean,
-    default: true
-  },
-  internalExtraClass: String,
+  onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   // events
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
@@ -188,15 +175,19 @@ export const popoverBaseProps = {
   maxWidth: Number
 }
 
+const popoverProps = {
+  ...(useTheme.props as ThemeProps<PopoverTheme>),
+  ...popoverBaseProps,
+  internalRenderBody: Function as PropType<InternalRenderBody>
+}
+
 export type PopoverProps = ExtractPublicPropTypes<typeof popoverBaseProps>
+export type PopoverInternalProps = ExtractInternalPropTypes<typeof popoverProps>
 
 export default defineComponent({
   name: 'Popover',
   inheritAttrs: false,
-  props: {
-    ...(useTheme.props as ThemeProps<PopoverTheme>),
-    ...popoverBaseProps
-  },
+  props: popoverProps,
   setup (props) {
     const isMountedRef = useIsMounted()
     // setup show
@@ -313,13 +304,14 @@ export default defineComponent({
       handleMouseLeave()
     }
     // will be called in popover-content
-    function handleClickOutside (): void {
+    function handleClickOutside (e: MouseEvent): void {
       if (!getMergedShow()) return
       if (props.trigger === 'click') {
         clearShowTimer()
         clearHideTimer()
         doUpdateShow(false)
       }
+      props.onClickoutside?.(e)
     }
     function handleClick (): void {
       if (props.trigger === 'click' && !getMergedDisabled()) {
@@ -347,7 +339,8 @@ export default defineComponent({
       setBodyInstance,
       positionManuallyRef: positionManuallyRef,
       isMountedRef: isMountedRef,
-      extraClassRef: toRef(props, 'internalExtraClass')
+      extraClassRef: toRef(props, 'internalExtraClass'),
+      internalRenderBodyRef: toRef(props, 'internalRenderBody')
     })
     return {
       positionManually: positionManuallyRef,

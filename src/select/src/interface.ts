@@ -1,36 +1,35 @@
 import { TreeMate } from 'treemate'
-import { CSSProperties, VNodeChild } from 'vue'
+import { CSSProperties, VNodeChild, VNode } from 'vue'
 
 export type SelectMixedOption =
   | SelectBaseOption
   | SelectGroupOption
   | SelectIgnoredOption
-export interface SelectBaseOption<V = string | number> {
+
+export interface SelectBaseOption<
+  V = string | number,
+  L = string | ((option: SelectBaseOption<V>, selected: boolean) => VNodeChild)
+> {
   value: V
-  label: string
+  label: L
   class?: string
   style?: string | CSSProperties
   disabled?: boolean
-  render?: (option: SelectBaseOption, selected: boolean) => VNodeChild
+  render?: (info: {
+    node: VNode
+    option: SelectBaseOption<V>
+    selected: boolean
+  }) => VNodeChild
   [k: string]: unknown
 }
 
 export interface SelectGroupOptionBase {
-  label: string
+  label: string | ((option: SelectGroupOption) => VNodeChild)
   type: 'group'
   children: SelectBaseOption[]
-  render?: (option: SelectGroupOption) => VNodeChild
+  render?: (info: { node: VNode, option: SelectGroupOption }) => VNodeChild
   [k: string]: unknown
 }
-
-export type SelectGroupOption =
-  | (SelectGroupOptionBase & {
-    /** @deprecated should use key and label instead */
-    name?: string
-  })
-  | (SelectGroupOptionBase & {
-    key: string | number
-  })
 
 export interface SelectIgnoredOption {
   type: 'ignored'
@@ -70,3 +69,14 @@ SelectIgnoredOption
 >
 
 export type Size = 'small' | 'medium' | 'large'
+
+// Public interfaces
+export type SelectOption = SelectBaseOption<string | number>
+export type SelectGroupOption =
+  | (SelectGroupOptionBase & {
+    /** @deprecated should use key and label instead */
+    name?: string
+  })
+  | (SelectGroupOptionBase & {
+    key: string | number
+  })

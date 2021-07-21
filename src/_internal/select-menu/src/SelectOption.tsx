@@ -1,18 +1,23 @@
 import {
   h,
   inject,
-  toRef,
   defineComponent,
   Transition,
   PropType,
-  VNode
+  VNode,
+  Ref
 } from 'vue'
-import { internalSelectionMenuInjectionKey } from './SelectMenu'
 import { TreeNode } from 'treemate'
 import { useMemo } from 'vooks'
 import type { SelectBaseOption } from '../../../select/src/interface'
 import { CheckmarkIcon } from '../../icons'
 import NBaseIcon from '../../icon'
+import { render } from '../../../_utils'
+import {
+  RenderLabelImpl,
+  internalSelectionMenuInjectionKey,
+  RenderOptionImpl
+} from './interface'
 
 const checkMarkIcon = h(CheckmarkIcon)
 
@@ -54,11 +59,12 @@ export default defineComponent({
       pendingTmNodeRef,
       multipleRef,
       valueSetRef,
+      renderLabelRef,
+      renderOptionRef,
       handleOptionClick,
       handleOptionMouseEnter
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(internalSelectionMenuInjectionKey)!
-    const rawNodeRef = toRef(props.tmNode, 'rawNode')
     const isPendingRef = useMemo(() => {
       const { value: pendingTmNode } = pendingTmNodeRef
       if (!pendingTmNode) return false
@@ -82,7 +88,6 @@ export default defineComponent({
     }
     return {
       multiple: multipleRef,
-      rawNode: rawNodeRef,
       isGrouped: useMemo(() => {
         const { tmNode } = props
         const { parent } = tmNode
@@ -93,7 +98,7 @@ export default defineComponent({
         const { value } = valueRef
         const { value: multiple } = multipleRef
         if (value === null) return false
-        const optionValue = rawNodeRef.value.value
+        const optionValue = props.tmNode.rawNode.value
         if (multiple) {
           const { value: valueSet } = valueSetRef
           return valueSet.has(optionValue)
@@ -101,6 +106,8 @@ export default defineComponent({
           return value === optionValue
         }
       }),
+      renderLabel: renderLabelRef as Ref<RenderLabelImpl | undefined>,
+      renderOption: renderOptionRef as Ref<RenderOptionImpl | undefined>,
       handleMouseMove,
       handleMouseEnter,
       handleClick
@@ -109,23 +116,23 @@ export default defineComponent({
   render () {
     const {
       clsPrefix,
-      rawNode,
+      tmNode: { rawNode },
       isSelected,
       isPending,
       isGrouped,
       multiple,
+      renderOption,
+      renderLabel,
       handleClick,
       handleMouseEnter,
       handleMouseMove
     } = this
     const showCheckMark = multiple && isSelected
-    const children = rawNode.render
-      ? [
-          rawNode.render(rawNode, isSelected),
-          renderCheckMark(showCheckMark, clsPrefix)
-        ]
-      : [rawNode.label, renderCheckMark(showCheckMark, clsPrefix)]
-    return (
+    const checkmark = renderCheckMark(showCheckMark, clsPrefix)
+    const children = renderLabel
+      ? [renderLabel(rawNode, isSelected), checkmark]
+      : [render(rawNode.label, rawNode, isSelected), checkmark]
+    const node = (
       <div
         class={[
           `${clsPrefix}-base-select-option`,
@@ -145,5 +152,10 @@ export default defineComponent({
         {children}
       </div>
     )
+    return rawNode.render
+      ? rawNode.render({ node, option: rawNode, selected: isSelected })
+      : renderOption
+        ? renderOption({ node, option: rawNode, selected: isSelected })
+        : node
   }
 })

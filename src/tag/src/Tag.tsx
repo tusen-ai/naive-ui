@@ -32,14 +32,11 @@ const tagProps = {
     type: Boolean,
     default: false
   },
-  onClose: [Array, Function] as PropType<MaybeArray<() => void>>,
+  onClose: [Array, Function] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   onMouseenter: Function as PropType<(e: MouseEvent) => void>,
   onMouseleave: Function as PropType<(e: MouseEvent) => void>,
-  // eslint-disable-next-line vue/prop-name-casing
-  'onUpdate:checked': {
-    type: Function,
-    default: undefined
-  },
+  'onUpdate:checked': Function as PropType<(checked: boolean) => void>,
+  onUpdateChecked: Function as PropType<(checked: boolean) => void>,
   // private
   internalStopClickPropagation: {
     type: Boolean,
@@ -84,9 +81,11 @@ export default defineComponent({
           const {
             checked,
             onCheckedChange,
-            'onUpdate:checked': onUpdateChecked
+            onUpdateChecked,
+            'onUpdate:checked': _onUpdateChecked
           } = props
           if (onUpdateChecked) onUpdateChecked(!checked)
+          if (_onUpdateChecked) _onUpdateChecked(!checked)
           // deprecated
           if (onCheckedChange) onCheckedChange(!checked)
         }
@@ -98,7 +97,7 @@ export default defineComponent({
       }
       if (!props.disabled) {
         const { onClose } = props
-        if (onClose) call(onClose)
+        if (onClose) call(onClose, e)
       }
     }
     const tagPublicMethods: TagPublicMethods = {

@@ -6,6 +6,8 @@ By default the component theme is light, locale is enUS, no extra imports is nee
 
 For more info about theming, see [Customizing Theme](customize-theme).
 
+## Import Directly
+
 ```html
 <script>
   import { defineComponent } from 'vue'
@@ -46,4 +48,31 @@ For more info about theming, see [Customizing Theme](customize-theme).
     background: black;
   }
 </style>
+```
+
+## Install on Demand Globally
+
+```js
+import { createApp } from 'vue'
+import {
+  // create naive ui
+  create,
+  // component
+  NButton
+} from 'naive-ui'
+
+const naive = create({
+  components: [NButton]
+})
+
+const app = createApp()
+app.use(naive)
+```
+
+After the installation. You can use the components you installed in SFC like this.
+
+```html
+<template>
+  <n-button>naive-ui</n-button>
+</template>
 ```

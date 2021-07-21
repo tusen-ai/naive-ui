@@ -31,7 +31,7 @@ icon-button
 | block | `boolean` | `false` | Whether the button is displayed as block. |
 | bordered | `boolean` | `true` | Whether the button shows the border. |
 | circle | `boolean` | `false` | Whether the button is round. |
-| color | `string` | `undefined` | Only support `#FFF`, `#FFFFFF`, `rgb(0, 0, 0)` formatted colors. |
+| color | `string` | `undefined` | Button color(support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
 | dashed | `boolean` | `false` | Whether the button border is a dashed line. |
 | disabled | `boolean` | `false` | Whether the button is disabled. |
 | ghost | `boolean` | `false` | Whether the button is ghost. |
@@ -42,6 +42,7 @@ icon-button
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Button size. |
 | text | `boolean` | `false` | Whether to display as a text button. |
 | type | `'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Button type. |
+| tag | `string` | `'button'` | What tag need the button be rendered as. |
 
 ### Button Group Props
 

@@ -1,6 +1,6 @@
 # Long Label
 
-Set `label` to render function that renders `n-ellpisis`.
+Set `label` to render function that renders `n-ellipsis`.
 
 ```html
 <n-menu :options="options" style="width: 180px;" default-value="1" />

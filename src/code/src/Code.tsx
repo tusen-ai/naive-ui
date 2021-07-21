@@ -31,7 +31,9 @@ const codeProps = {
   uri: {
     type: Boolean,
     default: false
-  }
+  },
+  // In n-log, we only need to mount code's style for highlight
+  internalNoHighlight: Boolean
 }
 
 export type CodeProps = ExtractPublicPropTypes<typeof codeProps>
@@ -40,9 +42,10 @@ export default defineComponent({
   name: 'Code',
   props: codeProps,
   setup (props, { slots }) {
+    const { internalNoHighlight } = props
     const { mergedClsPrefixRef } = useConfig()
     const codeRef = ref<HTMLElement | null>(null)
-    const hljsRef = useHljs(props)
+    const hljsRef = internalNoHighlight ? { value: undefined } : useHljs(props)
     const createCodeHtml = (
       language: string,
       code: string,
@@ -79,7 +82,7 @@ export default defineComponent({
     onMounted(setCode)
     watch(toRef(props, 'language'), setCode)
     watch(toRef(props, 'code'), setCode)
-    watch(hljsRef, setCode)
+    if (!internalNoHighlight) watch(hljsRef, setCode)
     const themeRef = useTheme(
       'Code',
       'Code',

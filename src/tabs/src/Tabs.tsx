@@ -378,7 +378,11 @@ export default defineComponent({
       mergedSize,
       $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot }
     } = this
-    const children = defaultSlot ? flatten(defaultSlot()) : []
+    const children = defaultSlot
+      ? flatten(defaultSlot()).filter((v) => {
+        return (v.type as any).__TAB_PANE__ === true
+      })
+      : []
     const prefix = prefixSlot ? prefixSlot() : null
     const suffix = suffixSlot ? suffixSlot() : null
     const isCard = type === 'card'
@@ -427,9 +431,11 @@ export default defineComponent({
                                       index !== 0 && !mergedJustifyContent
                                     }
                                   >
-                                    {{
-                                      default: tabPaneVNode.children.tab
-                                    }}
+                                    {tabPaneVNode.children
+                                      ? {
+                                          default: tabPaneVNode.children.tab
+                                        }
+                                      : undefined}
                                   </Tab>
                                 )
                               }

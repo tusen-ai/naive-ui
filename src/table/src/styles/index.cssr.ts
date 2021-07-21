@@ -38,7 +38,7 @@ export default c([
     --merged-border-color: var(--border-color);
   `, [
     c('th', `
-      white-spac: nowrap;
+      white-space: nowrap;
       transition:
         background-color .3s var(--bezier),
         border-color .3s var(--bezier),

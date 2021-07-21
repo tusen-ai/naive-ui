@@ -11,6 +11,7 @@ submit-manually
 controlled
 on-finish
 default-files
+before-upload
 ```
 
 ## Props
@@ -34,10 +35,13 @@ default-files
 | show-cancel-button | `boolean` | `true` | Whether to show remove button (at file pending, uploadin, error status). Click on cancel button will fire `on-remove` callback. |
 | show-remove-button | `boolean` | `true` | Whether to show remove button (at file finished status). Click on remove button will fire `on-remove` callback. |
 | show-retry-button | `boolean` | `true` | Whether to show retry button (at file error status). |
+| show-file-list | `boolean` | `true` | Whether to show file list. |
 | with-credentials | `boolean` | `false` | If cookie attached. |
 | on-change | `(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => void` | `() => {}` | The callback of status change of the component. Any file status change would fire the callback. |
-| on-finish | `(options: { file: UploadFile }) => UploadFile \| void` | `({ file }) => file` | The callback of file upload finish. You can modify the UploadFile or retun a new UploadFile. |
+| on-update:file-list | `(fileList: UploadFile[]) => void` | `undefined` | Callback function triggered on fileList changes. |
+| on-finish | `(options: { file: UploadFile, event: Event }) => UploadFile \| void` | `({ file }) => file` | The callback of file upload finish. You can modify the UploadFile or retun a new UploadFile. |
 | on-remove | `(options: { file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any` | `() => true` | The callback of file removal. Return false, promise resolve false or promise reject will cancel this removal. |
+| on-before-upload | `(options: { file: UploadFile, fileList: Array<UploadFile> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Callback before file is uploaded, return false or a Promise that resolve false or reject will cancel this upload. |
 
 ### UploadFile Type
 
@@ -48,14 +52,6 @@ default-files
 | status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. **Required** in controlled manner. |
 | percentage | `number` | The progress percentage of file upload. It works when file is uploading. Not required in controlled manner. |
 | file | `File` | The File object of the file in brower. Not required in controlled manner. |
-
-## Events
-
-### Upload Events
-
-| Name   | Parameters                                        | Description |
-| ------ | ------------------------------------------------- | ----------- |
-| change | `(file: UploadFile, fileList: Array<UploadFile>)` |             |
 
 ## Methods
 

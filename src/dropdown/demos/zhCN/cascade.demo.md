@@ -9,7 +9,7 @@
   trigger="click"
   @select="handleSelect"
 >
-  <n-button :keyboard="false">人物和食物</n-button>
+  <n-button>人物和食物</n-button>
 </n-dropdown>
 ```
 
@@ -30,8 +30,7 @@ const options = [
         default: () => h(CashIcon)
       })
     },
-    key: 'daisy buchanan',
-    disabled: true
+    key: 'daisy buchanan'
   },
   {
     type: 'divider',

@@ -2,6 +2,7 @@ import { h, inject, defineComponent } from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
 import { transferInjectionKey } from './interface'
+import { getTitleAttribute } from '../../_utils'
 
 export default defineComponent({
   name: 'NTransferListItem',
@@ -77,7 +78,10 @@ export default defineComponent({
             checked={checked}
           />
         </div>
-        <div class={`${mergedClsPrefix}-transfer-list-item__label`}>
+        <div
+          class={`${mergedClsPrefix}-transfer-list-item__label`}
+          title={getTitleAttribute(label)}
+        >
           {label}
         </div>
       </div>

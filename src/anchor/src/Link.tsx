@@ -14,7 +14,7 @@ import {
   useInjectionCollection,
   useInjectionElementCollection
 } from '../../_utils/composable'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { ExtractPublicPropTypes, getTitleAttribute } from '../../_utils'
 
 export interface AnchorInjection {
   activeHref: Ref<string | null>
@@ -25,9 +25,8 @@ export interface AnchorInjection {
   titleEls: HTMLElement[]
 }
 
-export const anchorInjectionKey: InjectionKey<AnchorInjection> = Symbol(
-  'anchor'
-)
+export const anchorInjectionKey: InjectionKey<AnchorInjection> =
+  Symbol('anchor')
 
 const anchorLinkProps = {
   title: String,
@@ -74,6 +73,7 @@ export default defineComponent({
               activeRef.value && `${mergedClsPrefix}-anchor-link__title--active`
             ]}
             href={props.href}
+            title={getTitleAttribute(props.title)}
             onClick={handleClick}
           >
             {props.title}

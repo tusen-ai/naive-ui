@@ -28,11 +28,13 @@ Remember you can only clear the select which has value. (Select it firstly)
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      selectedValue: null,
-      selectedArray: null,
+      selectedValue: ref(null),
+      selectedArray: ref([]),
       options: [
         {
           label: 'Drive My Car',
@@ -85,5 +87,5 @@ export default {
       ]
     }
   }
-}
+})
 ```

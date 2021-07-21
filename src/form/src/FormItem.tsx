@@ -66,7 +66,7 @@ export const formItemProps = {
     default: false
   },
   showRequireMark: {
-    type: Boolean as PropType<boolean | undefined>,
+    type: [Boolean, String] as PropType<'left' | 'right' | boolean>,
     default: undefined
   },
   showFeedback: {
@@ -155,7 +155,10 @@ export default defineComponent({
     const { mergedRequired: mergedRequiredRef, mergedRules: mergedRulesRef } =
       formItemRule(props)
     const { mergedSize: mergedSizeRef } = formItemSizeRefs
-    const { mergedLabelPlacement: labelPlacementRef } = formItemMiscRefs
+    const {
+      mergedLabelPlacement: labelPlacementRef,
+      mergedLabelAlign: labelTextAlignRef
+    } = formItemMiscRefs
     const explainsRef = ref<string[]>([])
     const feedbackIdRef = ref(createId())
     const hasFeedbackRef = computed(() => {
@@ -343,7 +346,8 @@ export default defineComponent({
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const { value: labelPlacement } = labelPlacementRef
-        const direction = labelPlacement === 'top' ? 'vertical' : 'horizontal'
+        const direction: 'vertical' | 'horizontal' =
+          labelPlacement === 'top' ? 'vertical' : 'horizontal'
         const {
           common: { cubicBezierEaseInOut },
           self: {
@@ -364,11 +368,19 @@ export default defineComponent({
               labelFontSize
           }
         } = themeRef.value
-        return {
+
+        let mergedLabelTextAlign = labelTextAlignRef.value ?? labelTextAlign
+        if (labelPlacement === 'top') {
+          mergedLabelTextAlign =
+            mergedLabelTextAlign === 'right' ? 'flex-end' : 'flex-start'
+        }
+
+        const cssVars = {
           '--bezier': cubicBezierEaseInOut,
           '--line-height': lineHeight,
           '--blank-height': blankHeight,
           '--label-font-size': labelFontSize,
+          '--label-text-align': mergedLabelTextAlign,
           '--label-height': labelHeight,
           '--label-padding': labelPadding,
           '--asterisk-color': asteriskColor,
@@ -378,9 +390,9 @@ export default defineComponent({
           '--feedback-height': feedbackHeight,
           '--feedback-text-color': feedbackTextColor,
           '--feedback-text-color-warning': feedbackTextColorWarning,
-          '--feedback-text-color-error': feedbackTextColorError,
-          '--label-text-align': labelTextAlign
+          '--feedback-text-color-error': feedbackTextColorError
         }
+        return cssVars
       })
     }
   },
@@ -401,16 +413,22 @@ export default defineComponent({
             class={`${mergedClsPrefix}-form-item-label`}
             style={this.mergedLabelStyle as any}
           >
-            {renderSlot($slots, 'label', undefined, () => [this.label])}
+            {/* undefined || 'right' || true || false */}
+            {this.mergedShowRequireMark !== 'left'
+              ? renderSlot($slots, 'label', undefined, () => [this.label])
+              : null}
             {(
               this.mergedShowRequireMark !== undefined
                 ? this.mergedShowRequireMark
                 : this.mergedRequired
             ) ? (
               <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
-                &nbsp;*
+                {this.mergedShowRequireMark !== 'left' ? '\u00A0*' : '*\u00A0'}
               </span>
                 ) : null}
+            {this.mergedShowRequireMark === 'left'
+              ? renderSlot($slots, 'label', undefined, () => [this.label])
+              : null}
           </label>
         ) : null}
         <div

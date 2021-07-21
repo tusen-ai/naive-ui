@@ -34,14 +34,6 @@ export function formItemMisc (props: FormItemSetupProps) {
     }
     return undefined
   })
-  const mergedLabelStyleRef = computed(() => {
-    return [
-      {
-        width: mergedLabelWidthRef.value
-      },
-      props.labelStyle
-    ]
-  })
   const mergedLabelPlacementRef = computed(() => {
     const { labelPlacement } = props
     if (labelPlacement !== undefined) return labelPlacement
@@ -52,15 +44,20 @@ export function formItemMisc (props: FormItemSetupProps) {
     const { labelAlign } = props
     if (labelAlign) return labelAlign
     if (NForm?.labelAlign) return NForm.labelAlign
-    return 'left'
+    return undefined
+  })
+  const mergedLabelStyleRef = computed(() => {
+    return [
+      {
+        width: mergedLabelWidthRef.value
+      },
+      props.labelStyle
+    ]
   })
   const mergedShowRequireMarkRef = computed(() => {
     const { showRequireMark } = props
     if (showRequireMark !== undefined) return showRequireMark
-    if (NForm?.showRequireMark !== undefined) {
-      return NForm.showRequireMark
-    }
-    return undefined
+    return NForm?.showRequireMark
   })
   const validationErroredRef = ref(false)
   const mergedValidationStatusRef = computed(() => {

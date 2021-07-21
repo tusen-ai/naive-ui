@@ -1,6 +1,6 @@
 # 基础
 
-创建特定主题的组件十分管用。
+你可以使用上面的 CSS 变量。如果你需要在 JS 中使用这些变量，请使用 [useThemeVars](../docs/theme#use-theme-vars)。
 
 ```html
 <n-space vertical>

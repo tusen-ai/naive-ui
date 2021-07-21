@@ -1,11 +1,13 @@
 import { VueWrapper } from '@vue/test-utils/dist/vueWrapper'
 import { mount } from '@vue/test-utils'
-import { ComponentPublicInstance, h, nextTick } from 'vue'
+import { ComponentPublicInstance, h, nextTick, VNodeChild } from 'vue'
 import { NIcon } from '../../icon'
+import { DropdownMixedOption } from '../src/interface'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NDropdown, DropdownProps } from '../index'
 
-const pendingOptionClassName = 'n-dropdown-option-body n-dropdown-option-body--pending'
+const pendingOptionClassName =
+  'n-dropdown-option-body n-dropdown-option-body--pending'
 const optionBodySelector = '.n-dropdown-option-body'
 const options = [
   {
@@ -52,7 +54,11 @@ const options = [
 const mountDropdown = ({
   onSelect,
   inverted = false,
-  options: data = options
+  onClickoutside = undefined,
+  options: data = options,
+  show = undefined,
+  renderLabel = undefined,
+  renderIcon = undefined
 }: DropdownProps = {}): VueWrapper<ComponentPublicInstance> => {
   return mount(NDropdown, {
     attachTo: document.body,
@@ -60,7 +66,11 @@ const mountDropdown = ({
       options: data,
       trigger: 'click',
       onSelect,
-      inverted
+      inverted,
+      onClickoutside,
+      show,
+      renderLabel,
+      renderIcon
     },
     slots: {
       default: () => 'star kirby'
@@ -207,6 +217,65 @@ describe('n-dropdown', () => {
 
     expect(onSelect).not.toHaveBeenCalledWith()
 
+    wrapper.unmount()
+  })
+  it('dropdown clickoutside', async () => {
+    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
+    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+
+    const onClickoutside = jest.fn()
+    const wrapper = mountDropdown({ onClickoutside })
+
+    const triggerNodeWrapper = wrapper.find('span')
+    expect(triggerNodeWrapper.exists()).toBe(true)
+    await triggerNodeWrapper.trigger('click')
+    expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
+    document.body.dispatchEvent(mousedownEvent)
+    document.body.dispatchEvent(mouseupEvent)
+    await nextTick(() => {
+      const nextOptions = document.querySelectorAll(optionBodySelector)
+      expect(nextOptions.length).toBe(0)
+    })
+    expect(onClickoutside).toHaveBeenCalled()
+  })
+
+  it('should work with `render-label` props', async () => {
+    const renderDropdownLabel = (option: DropdownMixedOption): VNodeChild => {
+      return h(
+        'a',
+        {
+          href: 'renderLabel'
+        },
+        { default: () => option.label }
+      )
+    }
+    const wrapper = await mountDropdown({
+      renderLabel: renderDropdownLabel
+    })
+    const triggerNodeWrapper = wrapper.find('span')
+    await triggerNodeWrapper.trigger('click')
+    expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
+    expect(
+      document.querySelectorAll('.n-dropdown a[href="renderLabel"]').length
+    ).toBe(4)
+    wrapper.unmount()
+  })
+
+  it('should work with `render-icon` props', async () => {
+    const renderDropdownIcon = (option: DropdownMixedOption): VNodeChild => {
+      return h(NIcon, null, {
+        default: () => h(CashIcon)
+      })
+    }
+    const wrapper = await mountDropdown({
+      renderIcon: renderDropdownIcon
+    })
+    const triggerNodeWrapper = wrapper.find('span')
+    await triggerNodeWrapper.trigger('click')
+    expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
+    expect(
+      document.querySelectorAll('.n-dropdown i[class="n-icon"]').length
+    ).toBe(4)
     wrapper.unmount()
   })
 })

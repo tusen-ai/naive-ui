@@ -135,9 +135,7 @@ export default defineComponent({
             </NIconSwitchTransition>
           </div>
           <div class={`${mergedClsPrefix}-message__content`}>
-            {h(render, {
-              render: content
-            })}
+            {render(content)}
           </div>
           {closable ? (
             <NBaseClose

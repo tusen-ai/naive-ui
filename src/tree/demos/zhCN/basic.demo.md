@@ -12,6 +12,8 @@
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+
 function createData (level = 4, baseKey = '') {
   if (!level) return undefined
   return Array.apply(null, { length: 6 - level }).map((_, index) => {
@@ -31,12 +33,12 @@ function createLabel (level) {
   if (level === 1) return '三生万物'
 }
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
       data: createData(),
-      defaultExpandedKeys: ['40', '41']
+      defaultExpandedKeys: ref(['40', '41'])
     }
   }
-}
+})
 ```

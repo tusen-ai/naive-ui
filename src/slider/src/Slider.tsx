@@ -37,10 +37,8 @@ const sliderProps = {
     default: 0
   },
   marks: Object as PropType<Record<string, string>>,
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  disabled: Boolean,
+  formatTooltip: Function as PropType<(value: number) => string | number>,
   min: {
     type: Number,
     default: 0
@@ -53,10 +51,7 @@ const sliderProps = {
     type: Number,
     default: 1
   },
-  range: {
-    type: Boolean,
-    default: false
-  },
+  range: Boolean,
   value: [Number, Array] as PropType<number | [number, number]>,
   placement: {
     type: String as PropType<FollowerPlacement>,
@@ -66,7 +61,10 @@ const sliderProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  // eslint-disable-next-line vue/prop-name-casing
+  tooltip: {
+    type: Boolean,
+    default: true
+  },
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<<T extends number & [number, number]>(value: T) => void>
   >,
@@ -789,7 +787,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, formatTooltip } = this
     return (
       <div
         class={[
@@ -855,40 +853,44 @@ export default defineComponent({
                   )
                 }}
               </VTarget>,
-              <VFollower
-                ref="followerRef1"
-                show={this.mergedShowTooltip1}
-                to={this.adjustedTo}
-                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                placement={this.placement}
-                containerClass={this.namespace}
-              >
-                {{
-                  default: () => (
-                    <Transition
-                      name="fade-in-scale-up-transition"
-                      appear={this.isMounted}
-                      css={!(this.active && this.prevActive)}
-                    >
-                      {{
-                        default: () =>
-                          this.mergedShowTooltip1 ? (
-                            <div
-                              class={`${mergedClsPrefix}-slider-handle-indicator`}
-                              style={this.indicatorCssVars as CSSProperties}
-                            >
-                              {this.handleValue1}
-                            </div>
-                          ) : null
-                      }}
-                    </Transition>
-                  )
-                }}
-              </VFollower>
+              this.tooltip && (
+                <VFollower
+                  ref="followerRef1"
+                  show={this.mergedShowTooltip1}
+                  to={this.adjustedTo}
+                  teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
+                  placement={this.placement}
+                  containerClass={this.namespace}
+                >
+                  {{
+                    default: () => (
+                      <Transition
+                        name="fade-in-scale-up-transition"
+                        appear={this.isMounted}
+                        css={!(this.active && this.prevActive)}
+                      >
+                        {{
+                          default: () =>
+                            this.mergedShowTooltip1 ? (
+                              <div
+                                class={`${mergedClsPrefix}-slider-handle-indicator`}
+                                style={this.indicatorCssVars as CSSProperties}
+                              >
+                                {typeof formatTooltip === 'function'
+                                  ? formatTooltip(this.handleValue1)
+                                  : this.handleValue1}
+                              </div>
+                            ) : null
+                        }}
+                      </Transition>
+                    )
+                  }}
+                </VFollower>
+              )
             ]
           }}
         </VBinder>
-        {this.range ? (
+        {this.tooltip && this.range ? (
           <VBinder>
             {{
               default: () => [
@@ -932,7 +934,9 @@ export default defineComponent({
                                 class={`${mergedClsPrefix}-slider-handle-indicator`}
                                 style={this.indicatorCssVars as CSSProperties}
                               >
-                                {this.handleValue2}
+                                {typeof formatTooltip === 'function'
+                                  ? formatTooltip(this.handleValue2)
+                                  : this.handleValue2}
                               </div>
                             ) : null
                         }}
