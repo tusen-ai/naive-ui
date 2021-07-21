@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-menu` add `render-icon` prop.
 - `n-upload` add `show-file-list` prop.
 - `n-dropdown` add `render-icon` prop.
 - `n-checkbox-group` add `min` and `max` prop.
