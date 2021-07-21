@@ -95,7 +95,7 @@ About AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-va
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
-| default | `()`       |  Content           |
+| default | `()`       |  Content          |
 
 ### FormItem, FormItemGi Slots
 
