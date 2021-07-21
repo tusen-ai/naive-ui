@@ -47,3 +47,9 @@ Mention is provided after `v2.2.0`.
 | render | `(option: MentionOption) => VNodeChild` | Support custom options via `render` rendering function. |
 | style | `string` | Option style. |
 | value | `string` | Should be unique. |
+
+### Mention Slots
+
+| Name  | Parameters | Description                 |
+| ----- | ---------- | --------------------------- |
+| empty | `()`       | Slot when menu has no data. |

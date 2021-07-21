@@ -152,4 +152,132 @@ describe('n-checkbox-group', () => {
     })
     expect(wrapper.find('.n-checkbox__label').text()).toContain('test')
   })
+
+  it('should work with `min` prop', async () => {
+    const wrapper = mount(NCheckboxGroup, {
+      props: {
+        min: 1,
+        value: ['Shanghai']
+      },
+      slots: {
+        default: () => [
+          h(NCheckbox, { value: 'Shanghai' }, { default: () => 'Shanghai' }),
+          h(NCheckbox, { value: 'Beijing' }, { default: () => 'Beijing' }),
+          h(NCheckbox, { value: 'Shenzhen' }, { default: () => 'Shenzhen' })
+        ]
+      }
+    })
+    expect(wrapper.findAll('.n-checkbox').length).toBe(3)
+
+    expect(wrapper.findAll('.n-checkbox')[0].classes()).toContain(
+      'n-checkbox--disabled'
+    )
+    expect(wrapper.findAll('.n-checkbox')[0].classes()).toContain(
+      'n-checkbox--checked'
+    )
+    expect(wrapper.findAll('.n-checkbox')[1].classes()).not.toContain(
+      'n-checkbox--checked'
+    )
+    expect(wrapper.findAll('.n-checkbox')[1].classes()).not.toContain(
+      'n-checkbox--disabled'
+    )
+  })
+
+  it('should work with `max` prop', async () => {
+    const wrapper = mount(NCheckboxGroup, {
+      props: {
+        max: 2,
+        value: ['Shanghai', 'Beijing']
+      },
+      slots: {
+        default: () => [
+          h(NCheckbox, { value: 'Shanghai' }, { default: () => 'Shanghai' }),
+          h(NCheckbox, { value: 'Beijing' }, { default: () => 'Beijing' }),
+          h(NCheckbox, { value: 'Shenzhen' }, { default: () => 'Shenzhen' })
+        ]
+      }
+    })
+    expect(wrapper.findAll('.n-checkbox').length).toBe(3)
+
+    expect(wrapper.findAll('.n-checkbox')[0].classes()).not.toContain(
+      'n-checkbox--disabled'
+    )
+    expect(wrapper.findAll('.n-checkbox')[0].classes()).toContain(
+      'n-checkbox--checked'
+    )
+    expect(wrapper.findAll('.n-checkbox')[1].classes()).toContain(
+      'n-checkbox--checked'
+    )
+    expect(wrapper.findAll('.n-checkbox')[1].classes()).not.toContain(
+      'n-checkbox--disabled'
+    )
+    expect(wrapper.findAll('.n-checkbox')[2].classes()).not.toContain(
+      'n-checkbox--checked'
+    )
+    expect(wrapper.findAll('.n-checkbox')[2].classes()).toContain(
+      'n-checkbox--disabled'
+    )
+  })
+
+  it('should work with `max` and `min` prop', async () => {
+    const wrapper = mount(NCheckboxGroup, {
+      props: {
+        max: 2,
+        min: 1
+      },
+      slots: {
+        default: () => [
+          h(NCheckbox, { value: 'Shanghai' }, { default: () => 'Shanghai' }),
+          h(NCheckbox, { value: 'Beijing' }, { default: () => 'Beijing' }),
+          h(NCheckbox, { value: 'Shenzhen' }, { default: () => 'Shenzhen' })
+        ]
+      }
+    })
+
+    await wrapper.setProps({
+      value: ['Shanghai']
+    })
+    expect(wrapper.findAll('.n-checkbox').length).toBe(3)
+
+    expect(wrapper.findAll('.n-checkbox')[0].classes()).toContain(
+      'n-checkbox--disabled'
+    )
+    expect(wrapper.findAll('.n-checkbox')[0].classes()).toContain(
+      'n-checkbox--checked'
+    )
+    expect(wrapper.findAll('.n-checkbox')[1].classes()).not.toContain(
+      'n-checkbox--checked'
+    )
+    expect(wrapper.findAll('.n-checkbox')[1].classes()).not.toContain(
+      'n-checkbox--disabled'
+    )
+    expect(wrapper.findAll('.n-checkbox')[2].classes()).not.toContain(
+      'n-checkbox--checked'
+    )
+    expect(wrapper.findAll('.n-checkbox')[2].classes()).not.toContain(
+      'n-checkbox--disabled'
+    )
+    await wrapper.setProps({
+      value: ['Shanghai', 'Beijing']
+    })
+
+    expect(wrapper.findAll('.n-checkbox')[0].classes()).not.toContain(
+      'n-checkbox--disabled'
+    )
+    expect(wrapper.findAll('.n-checkbox')[0].classes()).toContain(
+      'n-checkbox--checked'
+    )
+    expect(wrapper.findAll('.n-checkbox')[1].classes()).toContain(
+      'n-checkbox--checked'
+    )
+    expect(wrapper.findAll('.n-checkbox')[1].classes()).not.toContain(
+      'n-checkbox--disabled'
+    )
+    expect(wrapper.findAll('.n-checkbox')[2].classes()).not.toContain(
+      'n-checkbox--checked'
+    )
+    expect(wrapper.findAll('.n-checkbox')[2].classes()).toContain(
+      'n-checkbox--disabled'
+    )
+  })
 })

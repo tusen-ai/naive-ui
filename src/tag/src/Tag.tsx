@@ -24,24 +24,15 @@ const tagProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  checked: {
-    type: Boolean,
-    default: false
-  },
-  checkable: {
-    type: Boolean,
-    default: false
-  },
+  checked: Boolean,
+  checkable: Boolean,
   onClose: [Array, Function] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   onMouseenter: Function as PropType<(e: MouseEvent) => void>,
   onMouseleave: Function as PropType<(e: MouseEvent) => void>,
   'onUpdate:checked': Function as PropType<(checked: boolean) => void>,
   onUpdateChecked: Function as PropType<(checked: boolean) => void>,
   // private
-  internalStopClickPropagation: {
-    type: Boolean,
-    default: false
-  },
+  internalStopClickPropagation: Boolean,
   // deprecated
   onCheckedChange: {
     type: Function as PropType<(checked: boolean) => void>,

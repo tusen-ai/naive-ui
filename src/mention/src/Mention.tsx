@@ -371,7 +371,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, mergedClsPrefix } = this
+    const { mergedTheme, mergedClsPrefix, $slots } = this
     return (
       <div class={`${mergedClsPrefix}-mention`}>
         <NInput
@@ -443,7 +443,9 @@ export default defineComponent({
                               virtualScroll={false}
                               style={this.cssVars as CSSProperties}
                               onMenuToggleOption={this.handleSelect}
-                            />
+                            >
+                              {$slots}
+                            </NInternalSelectMenu>
                           ) : null
                         }
                       }}

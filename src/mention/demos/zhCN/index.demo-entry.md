@@ -47,3 +47,9 @@ Mention 在 `v2.2.0` 及以后可用。
 | render | `(option: MentionOption) => VNodeChild` | 支持通过 `render` 渲染函数自定义选项 |
 | style | `string` | 选项的样式 |
 | value | `string` | 在选项中应该是唯一的 |
+
+### Mention Slots
+
+| 名称  | 参数 | 说明                |
+| ----- | ---- | ------------------- |
+| empty | `()` | 菜单无数据时的 slot |

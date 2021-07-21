@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-upload` 新增 `show-file-list` 属性
+- `n-dropdown` 新增 `render-icon` 属性
+- `n-checkbox-group` 新增 `min` 和 `max` 属性
+- `n-mention` 新增 `empty` slot
+
+### Fixes
+
+- 修复 `n-space` 中 `display: grid` 的元素显示不正确，关闭 `https://github.com/TuSimple/naive-ui/issues/546`
+- 修复 `n-dropdown` 的 `render-label` 属性对 group 类型 option 失效
+- 修复 `n-descriptions` 无法使用 `v-for` 的子元素
+- 修复 `n-dialog` `positive-text` 为空仍然显示按钮，关闭 [#549](https://github.com/TuSimple/naive-ui/issues/549)
+
 ## 2.15.5 (2021-07-16)
 
 ### Feats
@@ -9,7 +25,6 @@
 - `n-carousel` 新增 `show-arrow` 属性
 - `n-slider` 新增 `format-tooltip` 属性
 - `n-upload` 在 `on-finish` 回调参数中新增 `event`
-- `n-slider` 新增 `format-tooltip` 属性
 - `n-rate` 新增 `readonly` 属性
 - `n-time-picker` 新增 `seconds`、`minutes`、`hours`属性
 - `n-notification` 导出 `NotificationApi`, `NotificationOptions` and `NotificationReactive` 类型
