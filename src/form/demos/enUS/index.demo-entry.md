@@ -39,8 +39,8 @@ async
 | required | `boolean` | Is it required. |
 | validator | `(rule: FormItemRule, value: any) => boolean \| Error` | Validate rule. |
 | asyncValidator | `(rule: FormItemRule, value: any, callback: boolean => void) => void` | Asynchronous validate, support the definition of callback. |
-| trigger | `string \| Array<string>` | Trigger method. |
-| message | `string` | Information displayed when validate fails. |
+| trigger | `string \| Array<string>` | Trigger type. |
+| message | `string` | Information show when validate fails. |
 
 ### Form Item Props
 
@@ -95,10 +95,10 @@ About AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-va
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
-| default | `()`       |  Content          |
+| default | `()`       | Content     |
 
 ### FormItem, FormItemGi Slots
 
-| Name  | Parameters | Description |
-| ----- | ---------- | ----------- |
-| label | `()`       | Label content           |
+| Name  | Parameters | Description   |
+| ----- | ---------- | ------------- |
+| label | `()`       | Label content |
