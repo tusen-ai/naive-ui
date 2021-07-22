@@ -22,10 +22,10 @@ single-line
 
 ### Table Props
 
-| 名称            | 类型                             | 默认值     | 说明 |
-| --------------- | -------------------------------- | ---------- | ---- |
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
 | bottom-bordered | `boolean` | `true` | 表格底部边框，在 `bordered = true` 时该参数无效 |
-| bordered | `boolean` | `true` | 表格边框 |
-| single-column | `boolean` | `false` | 单列模式表格 |
-| single-line | `boolean` | `true` | 表格列的边框 |
+| bordered | `boolean` | `true` | 是否显示边框 |
+| single-column | `boolean` | `false` | 是否展示为一列（`true` 时每一列都有 `border-right`） |
+| single-line | `boolean` | `true` | 是否展示为一行（`true` 时每一行都有 `border-bottom`） |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格尺寸大小 |
