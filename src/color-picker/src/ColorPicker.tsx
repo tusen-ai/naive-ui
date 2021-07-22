@@ -121,7 +121,6 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const { mergedSizeRef } = formItem
     const { localeRef } = useLocale('global')
-    const { localeRef: buttonlocaleRef } = useLocale('Popconfirm')
     const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
 
     const themeRef = useTheme(
@@ -157,7 +156,6 @@ export default defineComponent({
       toRef(props, 'value'),
       uncontrolledValueRef
     )
-    // const initialValue = props.value && deriveDefaultValue(props.modes, props.showAlpha)
 
     const undoStackRef: Ref<Array<string | null>> = ref([mergedValueRef.value])
     const valueIndexRef = ref(0)
@@ -428,8 +426,7 @@ export default defineComponent({
       valueIndexRef.value = valueIndex + 1
     }
 
-    function handleConfirm (e: MouseEvent): void {
-      if (selfRef.value?.contains(e.target as Node)) return
+    function handleConfirm (): void {
       doUpdateShow(false)
     }
 
@@ -539,7 +536,7 @@ export default defineComponent({
               onUpdateValue={handleInputUpdateValue}
             />
           </div>
-          {actions ? (
+          {actions?.length ? (
             <div class={`${mergedClsPrefix}-color-picker-action`}>
               {actions.includes('confirm') && (
                 <NButton
@@ -548,7 +545,7 @@ export default defineComponent({
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
                 >
-                  {{ default: () => buttonlocaleRef.value.positiveText }}
+                  {{ default: () => localeRef.value.confirm }}
                 </NButton>
               )}
             </div>
@@ -601,7 +598,8 @@ export default defineComponent({
         doUpdateShow(true)
       },
       handleClickOutside (e: MouseEvent) {
-        handleConfirm(e)
+        if (selfRef.value?.contains(e.target as Node)) return
+        doUpdateShow(false)
       },
       renderPanel,
       cssVars: cssVarsRef
