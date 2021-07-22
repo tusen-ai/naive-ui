@@ -10,10 +10,10 @@ basic
 
 ## Props
 
-| 名称  | 类型     | 默认值      | 说明 |
-| ----- | -------- | ----------- | ---- |
-| label | `string` | `undefined` |      |
-| value | `string` | `undefined` |      |
+| 名称  | 类型     | 默认值      | 说明               |
+| ----- | -------- | ----------- | ------------------ |
+| label | `string` | `undefined` | 统计数据显示的名称 |
+| value | `string` | `undefined` | 统计数据显示的数值 |
 
 ## Slots
 
