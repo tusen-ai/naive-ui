@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, nextTick } from 'vue'
 import { NDialogProvider, useDialog, NDialog } from '../index'
 
 const Provider = defineComponent({
@@ -51,13 +51,14 @@ describe('n-dialog', () => {
     expect(wrapper.find('button').exists()).toEqual(false)
   })
 
-  it('async', async () => {
+  it('loading', async () => {
     const Test = defineComponent({
       setup () {
         const dialog = useDialog()
         dialog.success({
-          title: 'Async',
+          title: 'Loading',
           content: 'Content',
+          positiveText: '确认',
           loading: true
         })
       },
@@ -67,5 +68,52 @@ describe('n-dialog', () => {
     })
     await mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
     expect(document.querySelector('.n-button__icon')).not.toEqual(null)
+  })
+
+  it('maskClosable', async () => {
+    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
+    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+    const Test = defineComponent({
+      setup () {
+        const dialog = useDialog()
+        dialog.success({
+          title: 'Close by mask',
+          content: 'Content',
+          maskClosable: false
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    document.body.dispatchEvent(mousedownEvent)
+    document.body.dispatchEvent(mouseupEvent)
+    await nextTick(() => {
+      expect(document.querySelector('.n-dialog')).not.toBeNull()
+    })
+  })
+
+  it('onMaskClick', async () => {
+    const onMaskClick = jest.fn()
+    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
+    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+    const Test = defineComponent({
+      setup () {
+        const dialog = useDialog()
+        dialog.success({
+          title: 'Close by mask',
+          content: 'Content',
+          onMaskClick
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    await mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    document.body.dispatchEvent(mousedownEvent)
+    document.body.dispatchEvent(mouseupEvent)
+    expect(onMaskClick).toHaveBeenCalled()
   })
 })

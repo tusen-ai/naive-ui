@@ -37,6 +37,7 @@ basic
 async
 use-component
 slot
+mask
 ```
 
 ## API
@@ -72,6 +73,7 @@ slot
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior. |
 | onNegativeClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior. |
 | onPositiveClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior. |
+| onMaskClick | `() => void` | `undefined` | Callback triggered when click the mask. |
 
 ### DialogReactive API
 

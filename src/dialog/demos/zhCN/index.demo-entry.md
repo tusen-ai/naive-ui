@@ -38,6 +38,7 @@ basic
 async
 use-component
 slot
+mask
 ```
 
 ## API
@@ -73,6 +74,7 @@ slot
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为 |
 | onNegativeClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为 |
 | onPositiveClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为 |
+| onMaskClick | `() => void` | `undefined` | 点击蒙层后执行的回调 |
 
 ### DialogReactive API
 
