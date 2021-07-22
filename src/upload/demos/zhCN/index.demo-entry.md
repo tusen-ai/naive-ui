@@ -35,6 +35,7 @@ before-upload
 | show-cancel-button | `boolean` | `true` | 是否显示取消按钮（在 pending、uploading、error 的时候展示），点击取消按钮会触发 `on-remove` 回调 |
 | show-remove-button | `boolean` | `true` | 是否显示删除按钮（在 finished 的时候展示），点击删除按钮会触发 `on-remove` 回调 |
 | show-retry-button | `boolean` | `true` | 是否显示重新上传按钮（在 error 时展示） |
+| show-file-list | `boolean` | `true` | 是否显示文件列表 |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |
 | on-change | `(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |
 | on-finish | `(options: { file: UploadFile, event: Event }) => UploadFile \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFile 或者返回一个新的 UploadFile |

@@ -76,7 +76,9 @@ export default c([
       font-size: var(--font-size);
       margin: var(--content-margin);
       position: relative;
-    `),
+    `, [
+      c('&:last-child', 'margin-bottom: 0;')
+    ]),
     cE('action', `
       display: flex;
       justify-content: flex-end;

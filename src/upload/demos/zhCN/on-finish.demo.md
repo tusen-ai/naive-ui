@@ -15,7 +15,7 @@
 import { useMessage } from 'naive-ui'
 
 export default {
-  setup() {
+  setup () {
     const message = useMessage()
     const handleFinish = ({ file, event }) => {
       message.success(event.target.response)

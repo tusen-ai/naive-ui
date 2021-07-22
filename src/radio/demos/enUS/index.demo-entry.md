@@ -19,19 +19,20 @@ size
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| checked | `boolean` | `undefined` |  |
-| default-checked | `boolean` | `false` |  |
+| checked | `boolean` | `undefined` | Checked status. |
+| default-checked | `boolean` | `false` | Default checked status. |
+| disabled | `boolean` | `false` | Disabled status. |
 | name | `string` | `undefined` | The name attribute of the radio element. If not set, name of `radio-group` will be used. |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 只用于 `n-radio` |
-| value | `string` | `undefined` |  |
-| on-update:checked | `(check: boolean) => void` | `undefined` |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
+| value | `string` | `undefined` | Checked value. |
+| on-update:checked | `(check: boolean) => void` | `undefined` | Callback method triggered when a change occurs. |
 
 ### RadioGroup Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| disabled | `boolean` | `false` |  |
+| disabled | `boolean` | `false` | Disabled status. |
 | name | `string` | `undefined` | The name attribute of the radio elements inside the group. |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
-| value | `string \| null` | `null` |  |
-| on-update:value | `(value: string) => void` | `undefined` |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
+| value | `string \| null` | `null` | Checked value. |
+| on-update:value | `(value: string) => void` | `undefined` | Callback method triggered when a change occurs. |

@@ -57,7 +57,8 @@ const mountDropdown = ({
   onClickoutside = undefined,
   options: data = options,
   show = undefined,
-  renderLabel = undefined
+  renderLabel = undefined,
+  renderIcon = undefined
 }: DropdownProps = {}): VueWrapper<ComponentPublicInstance> => {
   return mount(NDropdown, {
     attachTo: document.body,
@@ -68,7 +69,8 @@ const mountDropdown = ({
       inverted,
       onClickoutside,
       show,
-      renderLabel
+      renderLabel,
+      renderIcon
     },
     slots: {
       default: () => 'star kirby'
@@ -254,9 +256,26 @@ describe('n-dropdown', () => {
     await triggerNodeWrapper.trigger('click')
     expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
     expect(
-      document
-        .querySelectorAll('.n-dropdown a[href="renderLabel"]').length
-    ).toBe(3)
+      document.querySelectorAll('.n-dropdown a[href="renderLabel"]').length
+    ).toBe(4)
+    wrapper.unmount()
+  })
+
+  it('should work with `render-icon` props', async () => {
+    const renderDropdownIcon = (option: DropdownMixedOption): VNodeChild => {
+      return h(NIcon, null, {
+        default: () => h(CashIcon)
+      })
+    }
+    const wrapper = await mountDropdown({
+      renderIcon: renderDropdownIcon
+    })
+    const triggerNodeWrapper = wrapper.find('span')
+    await triggerNodeWrapper.trigger('click')
+    expect(document.querySelector('.n-dropdown')).toMatchSnapshot()
+    expect(
+      document.querySelectorAll('.n-dropdown i[class="n-icon"]').length
+    ).toBe(4)
     wrapper.unmount()
   })
 })

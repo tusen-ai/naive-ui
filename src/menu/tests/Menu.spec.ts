@@ -130,7 +130,7 @@ describe('n-menu', () => {
     // Popover has delay, so we need to wait
     await sleep(150)
     expect(document.body.querySelector('.n-dropdown')).not.toEqual(null)
-    expect(document.querySelectorAll('a').length).toEqual(2)
+    expect(document.querySelectorAll('a').length).toEqual(3)
     expect(document.querySelectorAll('a.fantasy').length).toEqual(1)
   })
 })
