@@ -26,7 +26,9 @@ describe('n-dialog', () => {
         return null
       }
     })
-    const dialogProvider = mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    const dialogProvider = mount(() => (
+      <Provider>{{ default: () => <Test /> }}</Provider>
+    ))
     dialogProvider.unmount()
   })
 
@@ -38,8 +40,15 @@ describe('n-dialog', () => {
         content: 'success'
       }
     })
-    expect(document.querySelector('.n-dialog__content')?.textContent).toEqual('success')
+    expect(document.querySelector('.n-dialog__content')?.textContent).toEqual(
+      'success'
+    )
     dialog.unmount()
+  })
+
+  it("shouldn't display button if no text is set", () => {
+    const wrapper = mount(NDialog)
+    expect(wrapper.find('button').exists()).toEqual(false)
   })
 
   it('async', async () => {
