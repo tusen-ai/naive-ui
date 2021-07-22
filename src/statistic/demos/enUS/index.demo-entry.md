@@ -10,10 +10,10 @@ basic
 
 ## Props
 
-| Name  | Type     | Default     | Description |
-| ----- | -------- | ----------- | ----------- |
-| label | `string` | `undefined` |             |
-| value | `string` | `undefined` |             |
+| Name  | Type     | Default     | Description              |
+| ----- | -------- | ----------- | ------------------------ |
+| label | `string` | `undefined` | Label of the statistics. |
+| value | `string` | `undefined` | Statistics value.        |
 
 ## Slots
 
@@ -22,4 +22,4 @@ basic
 | default | `()`       | Value slot.   |
 | label   | `()`       | Label slot.   |
 | prefix  | `()`       | Value prefix. |
-| suffix  | `()`       | Valut suffix. |
+| suffix  | `()`       | Value suffix. |
