@@ -10,10 +10,10 @@ basic
 
 ## Props
 
-| Name  | Type     | Default     | Description                         |
-| ----- | -------- | ----------- | ----------------------------------- |
-| label | `string` | `undefined` | The name of the statistics display. |
-| value | `string` | `undefined` | Statistics show the value.          |
+| Name  | Type     | Default     | Description              |
+| ----- | -------- | ----------- | ------------------------ |
+| label | `string` | `undefined` | Label of the statistics. |
+| value | `string` | `undefined` | Statistics value.        |
 
 ## Slots
 
