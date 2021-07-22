@@ -1,10 +1,10 @@
-# 基础用法
+# Custom action
 
-有时候你可能想自定义 `action` 和 `content` 。
+Sometimes you may want to customize `action` and `content` .
 
 ```html
 <n-space>
-  <n-button @click="handleConfirm"> 警告 </n-button>
+  <n-button @click="handleConfirm"> Warning </n-button>
 </n-space>
 ```
 
@@ -22,31 +22,31 @@ export default {
     return {
       handleConfirm () {
         const instance = dialog.warning({
-          title: '警告',
-          content: () => h(NTag, ['你确定?']),
+          title: 'Warning',
+          content: () => h(NTag, ['Are you sure?']),
           action: () =>
             h('div', [
               h(
                 NTag,
                 {
                   onClick: () => {
-                    message.success('确定了！')
+                    message.success('Confirmed!')
                   }
                 },
-                ['确定！']
+                ['Yes!']
               ),
               h(
                 NTag,
                 {
                   onClick: () => {
-                    message.error('没确定！')
+                    message.error('Not sure yet!')
                     instance.destroy()
                   },
                   style: {
                     marginLeft: '20px'
                   }
                 },
-                ['不确定！']
+                ['No!']
               )
             ])
         })
