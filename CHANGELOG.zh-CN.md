@@ -16,6 +16,7 @@
 - 修复 `n-dropdown` 的 `render-label` 属性对 group 类型 option 失效
 - 修复 `n-descriptions` 无法使用 `v-for` 的子元素
 - 修复 `n-dialog` `positive-text` 为空仍然显示按钮，关闭 [#549](https://github.com/TuSimple/naive-ui/issues/549)
+- 修复 `n-data-table` `rowClassName` 的类型是 string 的时候不生效问题，关闭 [#582](https://github.com/TuSimple/naive-ui/issues/582)
 
 ## 2.15.5 (2021-07-16)
 
