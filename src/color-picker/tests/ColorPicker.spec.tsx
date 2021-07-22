@@ -2,6 +2,7 @@ import { nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NColorPicker } from '../index'
 import { ColorPickerMode } from '../src/utils'
+import { NButton } from '../../button'
 
 describe('n-color-picker', () => {
   it('should work with import on demand', () => {
@@ -77,7 +78,7 @@ describe('n-color-picker', () => {
       const wrapper = mount(NColorPicker, {
         attachTo: document.body,
         props: {
-          control: true
+          actions: ['confirm']
         }
       })
       await wrapper.find('.n-color-picker-trigger').trigger('click')
@@ -85,8 +86,10 @@ describe('n-color-picker', () => {
       expect(document.querySelector('.n-color-picker-pallete')).not.toEqual(
         null
       )
-      expect(document.querySelector('.n-button--disabled')).not.toEqual(null)
       expect(document.querySelector('.n-button')).not.toEqual(null)
+      await wrapper.findComponent(NButton).trigger('click')
+      expect(document.querySelector('.n-color-picker-panel')).toEqual(null)
+      expect(document.querySelector('.n-color-picker-pallete')).toEqual(null)
       wrapper.unmount()
     })
   })

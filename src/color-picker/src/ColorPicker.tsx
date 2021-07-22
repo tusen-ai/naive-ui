@@ -541,14 +541,16 @@ export default defineComponent({
           </div>
           {actions ? (
             <div class={`${mergedClsPrefix}-color-picker-action`}>
-              <NButton
-                size="small"
-                onClick={handleConfirm}
-                theme={mergedTheme.peers.Button}
-                themeOverrides={mergedTheme.peerOverrides.Button}
-              >
-                {{ default: () => buttonlocaleRef.value.positiveText }}
-              </NButton>
+              {actions.includes('confirm') && (
+                <NButton
+                  size="small"
+                  onClick={handleConfirm}
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                >
+                  {{ default: () => buttonlocaleRef.value.positiveText }}
+                </NButton>
+              )}
             </div>
           ) : null}
           {slots.action ? (
