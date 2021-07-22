@@ -51,13 +51,14 @@ describe('n-dialog', () => {
     expect(wrapper.find('button').exists()).toEqual(false)
   })
 
-  it('async', async () => {
+  it('loading', async () => {
     const Test = defineComponent({
       setup () {
         const dialog = useDialog()
         dialog.success({
-          title: 'Async',
+          title: 'Loading',
           content: 'Content',
+          positiveText: '确认',
           loading: true
         })
       },
