@@ -149,6 +149,9 @@ const menuProps = {
     },
     default: undefined
   },
+  renderIcon: Function as PropType<
+  (option: MenuOption | MenuGroupOption) => VNodeChild
+  >,
   renderLabel: Function as PropType<
   (option: MenuOption | MenuGroupOption) => VNodeChild
   >,

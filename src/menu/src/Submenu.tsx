@@ -116,7 +116,7 @@ export default defineComponent({
   render () {
     const {
       mergedClsPrefix,
-      menuProps: { renderLabel }
+      menuProps: { renderIcon, renderLabel }
     } = this
     const createSubmenuItem = (): VNode => {
       const {
@@ -184,6 +184,7 @@ export default defineComponent({
         options={this.rawNodes}
         onSelect={this.doSelect}
         inverted={this.inverted}
+        renderIcon={renderIcon}
         renderLabel={renderLabel}
       >
         {{
