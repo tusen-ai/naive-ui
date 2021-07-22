@@ -9,6 +9,7 @@
 - `n-checkbox-group` 新增 `min` 和 `max` 属性
 - `n-mention` 新增 `empty` slot
 - `n-space` `justify` 属性支持 `center`、`space-around` 和 `space-between`
+- `n-date-picker` 新增 `close-on-selected` 属性, 关闭 [#541](https://github.com/TuSimple/naive-ui/issues/541)
 
 ### Fixes
 

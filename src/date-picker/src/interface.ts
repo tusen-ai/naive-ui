@@ -47,6 +47,7 @@ export type DatePickerInjection = {
   dateLocaleRef: Ref<NDateLocale>
   isDateDisabledRef: Ref<IsDateDisabled | undefined>
   rangesRef: Ref<Record<string, [number, number]> | undefined>
+  closeOnSelectedRef: Ref<boolean>
   datePickerSlots: Slots
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>

@@ -107,6 +107,10 @@ const datePickerProps = {
     default: undefined
   },
   ranges: Object as PropType<Record<string, [number, number]>>,
+  closeOnSelected: {
+    type: Boolean,
+    default: false
+  },
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,
@@ -494,6 +498,7 @@ export default defineComponent({
       dateLocaleRef,
       isDateDisabledRef: toRef(props, 'isDateDisabled'),
       rangesRef: toRef(props, 'ranges'),
+      closeOnSelectedRef: toRef(props, 'closeOnSelected'),
       ...uniVaidation,
       ...dualValidation,
       datePickerSlots: slots
