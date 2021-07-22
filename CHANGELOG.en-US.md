@@ -16,6 +16,7 @@
 - Fix `n-dropdown`'s `render-label` prop is invalid for group type option.
 - Fix `n-descriptions` doesn't work with `v-for` children.
 - Fix `n-dialog` display an empty button when `positive-text` is not set, closes [#549](https://github.com/TuSimple/naive-ui/issues/549).
+- Fix `n-data-table` `scroll-x` property set, the container width is not covered by the table content width, closes [#518](https://github.com/TuSimple/naive-ui/issues/518).
 
 ## 2.15.5 (2021-07-16)
 

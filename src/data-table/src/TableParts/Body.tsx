@@ -286,7 +286,8 @@ export default defineComponent({
       setHeaderScrollLeft
     } = this
     const contentStyle = {
-      minWidth: formatLength(scrollX)
+      minWidth: formatLength(scrollX),
+      width: 'auto'
     }
     return (
       <NScrollbar
