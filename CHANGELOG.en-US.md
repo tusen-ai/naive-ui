@@ -9,7 +9,7 @@
 - `n-checkbox-group` add `min` and `max` prop.
 - `n-mention` add `empty` slot.
 - `n-space` `justify` prop supports `center`, `space-around` and `space-between`.
-- `n-dialog` add `action` prop.
+- `n-dialog` add `action` prop, closes [#550](https://github.com/TuSimple/naive-ui/issues/550).
 
 ### Fixes
 

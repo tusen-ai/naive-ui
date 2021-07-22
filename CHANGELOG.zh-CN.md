@@ -9,7 +9,7 @@
 - `n-checkbox-group` 新增 `min` 和 `max` 属性
 - `n-mention` 新增 `empty` slot
 - `n-space` `justify` 属性支持 `center`、`space-around` 和 `space-between`
-- `n-dialog` 新增 `action` 属性
+- `n-dialog` 新增 `action` 属性，关闭 [#550](https://github.com/TuSimple/naive-ui/issues/550)
 
 ### Fixes
 
