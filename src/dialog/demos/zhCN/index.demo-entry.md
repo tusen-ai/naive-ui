@@ -37,6 +37,7 @@ export default {
 basic
 async
 use-component
+slot
 mask
 ```
 
@@ -57,6 +58,7 @@ mask
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| action | `() => VNodeChild` | `undefined` | 操作区域的内容，需要是 render 函数 |
 | bordered | `boolean` | `false` | 是否显示 border |
 | closable | `boolean` | `true` | 是否显示 close 图标 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 render 函数 |

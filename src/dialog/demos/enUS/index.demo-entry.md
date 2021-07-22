@@ -36,6 +36,7 @@ export default {
 basic
 async
 use-component
+slot
 mask
 ```
 
@@ -56,6 +57,7 @@ mask
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a render function. |
 | bordered | `boolean` | `false` | Whether to show border. |
 | closable | `boolean` | `true` | Whether to show close icon. |
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a render function. |

@@ -11,7 +11,8 @@
 - `n-mention` 新增 `empty` slot
 - `useDialog` 选项 新增 `on-mask-click`属性, 关闭 [#419](https://github.com/TuSimple/naive-ui/issues/419)
 - `n-space` `justify` 属性支持 `center`、`space-around` 和 `space-between`
-- `n-mention` 的 `options` 属性中，`label` 支持使用回调函数
+- `n-dialog` DialogReactive Properties 中新增 `action` 属性，关闭 [#550](https://github.com/TuSimple/naive-ui/issues/550)
+- `n-mention` 的 `option.label` 支持使用渲染函数
 
 ### Fixes
 

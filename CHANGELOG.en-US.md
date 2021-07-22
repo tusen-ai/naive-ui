@@ -11,7 +11,8 @@
 - `n-mention` add `empty` slot.
 - `useDialog` option add `on-mask-click` prop, closes [#419](https://github.com/TuSimple/naive-ui/issues/419).
 - `n-space` `justify` prop supports `center`, `space-around` and `space-between`.
-- In `n-mention`’s `options` prop, the `label` prop support callback function.
+- `n-dialog` DialogReactive Properties add `action`, closes [#550](https://github.com/TuSimple/naive-ui/issues/550).
+- `n-mention`’s `option.label` support render function.
 
 ### Fixes
 
