@@ -35,7 +35,7 @@
 ```js
 import { h, ref, defineComponent } from 'vue'
 import { NIcon } from 'naive-ui'
-import { HappyOutline } from '@vicons/ionicons5'
+import { BookmarkOutline } from '@vicons/ionicons5'
 
 const menuOptions = [
   {
@@ -119,7 +119,7 @@ export default defineComponent({
         return option.label
       },
       renderMenuIcon () {
-        return h(NIcon, null, { default: () => h(HappyOutline) })
+        return h(NIcon, null, { default: () => h(BookmarkOutline) })
       }
     }
   }
