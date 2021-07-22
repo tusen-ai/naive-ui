@@ -43,7 +43,7 @@ Mention is provided after `v2.2.0`.
 | --- | --- | --- |
 | class | `string` | Option class name. |
 | disabled | `boolean` | Option disabled status. |
-| label | `string` | Option label. |
+| label | `string \| (option: MentionOption) => VNodeChild` | Option label. |
 | render | `(option: MentionOption) => VNodeChild` | Support custom options via `render` rendering function. |
 | style | `string` | Option style. |
 | value | `string` | Should be unique. |
