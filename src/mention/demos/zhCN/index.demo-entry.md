@@ -43,7 +43,7 @@ Mention 在 `v2.2.0` 及以后可用。
 | --- | --- | --- |
 | class | `string` | 选项的自定义类名 |
 | disabled | `boolean` | 选项是否禁用 |
-| label | `string` | 选项的标签 |
+| label | `string \| (option: MentionOption) => VNodeChild` | 选项的标签 |
 | render | `(option: MentionOption) => VNodeChild` | 支持通过 `render` 渲染函数自定义选项 |
 | style | `string` | 选项的样式 |
 | value | `string` | 在选项中应该是唯一的 |

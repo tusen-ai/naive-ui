@@ -1,21 +1,29 @@
 # CHANGELOG
 
-## Pending
+## 2.15.6 (2021-07-23)
 
 ### Feats
 
+- `n-menu` add `render-icon` prop.
 - `n-upload` add `show-file-list` prop.
 - `n-dropdown` add `render-icon` prop.
 - `n-checkbox-group` add `min` and `max` prop.
 - `n-mention` add `empty` slot.
+- `useDialog` option add `on-mask-click` prop, closes [#419](https://github.com/TuSimple/naive-ui/issues/419).
 - `n-space` `justify` prop supports `center`, `space-around` and `space-between`.
+- `n-dialog` add `action` prop, closes [#550](https://github.com/TuSimple/naive-ui/issues/550).
+- `n-mention`’s `option.label` support render function.
+- `n-color-picker` add `actions` prop, closes [#319](https://github.com/TuSimple/naive-ui/issues/319).
 
 ### Fixes
 
 - Fix `n-space`'s inner `display: grid` element breaks item height, closes `https://github.com/TuSimple/naive-ui/issues/546`.
 - Fix `n-dropdown`'s `render-label` prop is invalid for group type option.
+- Fix `n-datatable`'s `scroll-x` prop is setted, the table content width is not full of the container width, closes [#518](https://github.com/TuSimple/naive-ui/issues/518).
 - Fix `n-descriptions` doesn't work with `v-for` children.
 - Fix `n-dialog` display an empty button when `positive-text` is not set, closes [#549](https://github.com/TuSimple/naive-ui/issues/549).
+- Fix `n-pagination` `PaginationInfo`'s `endIndex` data error, closes [#584](https://github.com/TuSimple/naive-ui/issues/584).
+- Fix `n-data-table` `rowClassName` doesn't work when type is string, closes [#582](https://github.com/TuSimple/naive-ui/issues/582).
 
 ## 2.15.5 (2021-07-16)
 
