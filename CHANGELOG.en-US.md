@@ -13,6 +13,7 @@
 
 - Fix `n-space`'s inner `display: grid` element breaks item height, closes `https://github.com/TuSimple/naive-ui/issues/546`.
 - Fix `n-dropdown`'s `render-label` prop is invalid for group type option.
+- Fix `n-datatable`'s `scroll-x` prop is setted, the table content width is not full of the container width.
 
 ## 2.15.5 (2021-07-16)
 
