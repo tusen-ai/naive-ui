@@ -37,6 +37,7 @@ export default {
 basic
 async
 use-component
+action-slot
 ```
 
 ## API
@@ -59,6 +60,7 @@ use-component
 | bordered | `boolean` | `false` | 是否显示 border |
 | closable | `boolean` | `true` | 是否显示 close 图标 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 render 函数 |
+| action | `() => VNodeChild` | `undefined` | 操作区域的内容，需要是 render 函数 |
 | icon-placement | `'left' \| 'top'` | `'left'` | 图标的位置 |
 | icon | `() => VNodeChild` | `undefined` | 对话框 icon, 需要是 render 函数 |
 | loading | `boolean` | `false` | 是否显示 loading 状态 |

@@ -36,6 +36,7 @@ export default {
 basic
 async
 use-component
+action-slot
 ```
 
 ## API
@@ -58,6 +59,7 @@ use-component
 | bordered | `boolean` | `false` | Whether to show border. |
 | closable | `boolean` | `true` | Whether to show close icon. |
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a render function. |
+| action | `() => VNodeChild` | `undefined` | Content of the operation area, needs to be a render function. |
 | iconPlacement | `'left' \| 'top'` | `'left'` | Icon placement. |
 | icon | `() => VNodeChild` | `undefined` | Render function of icon. |
 | loading | `boolean` | `false` | Whether to display loading status. |
