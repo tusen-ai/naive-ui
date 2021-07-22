@@ -286,6 +286,7 @@ export default defineComponent({
       setHeaderScrollLeft
     } = this
     const contentStyle = {
+      width: '100%',
       minWidth: formatLength(scrollX)
     }
     return (
