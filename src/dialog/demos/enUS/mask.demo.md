@@ -1,12 +1,9 @@
-# Mask
+# Click on Mask
 
-Dialog mask.
+I think user is smart enough that they know if nothing happens after mask is clicked, they should click at confirm or cancel button.
 
 ```html
-<n-space>
-  <n-button @click="handleMask">mask</n-button>
-  <n-button @click="handleClose">cannot close</n-button>
-</n-space>
+<n-button @click="handleButtonClick">Callback on Mask Clicked</n-button>
 ```
 
 ```js
@@ -17,18 +14,7 @@ export default {
     const message = useMessage()
     const dialog = useDialog()
     return {
-      handleMask () {
-        dialog.success({
-          title: 'Close',
-          content: 'Are you sure?',
-          positiveText: 'Sure',
-          negativeText: 'Not Sure',
-          onMaskClick: (e) => {
-            message.success('click mask')
-          }
-        })
-      },
-      handleClose () {
+      handleButtonClick () {
         dialog.success({
           title: 'Close',
           content: 'Are you sure?',

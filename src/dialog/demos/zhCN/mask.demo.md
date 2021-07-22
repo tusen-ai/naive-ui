@@ -1,12 +1,9 @@
-# 蒙层
+# 点击遮罩
 
-对话框有蒙层
+我觉得用户应该聪明到点遮罩没用的时候就去点确认了。
 
 ```html
-<n-space>
-  <n-button @click="handleMask">蒙层</n-button>
-  <n-button @click="handleClose">不可关闭</n-button>
-</n-space>
+<n-button @click="handleButtonClick">点击遮罩的事件</n-button>
 ```
 
 ```js
@@ -17,18 +14,7 @@ export default {
     const message = useMessage()
     const dialog = useDialog()
     return {
-      handleMask () {
-        dialog.success({
-          title: '关闭',
-          content: '你确定？',
-          positiveText: '确定',
-          negativeText: '不确定',
-          onMaskClick: (e) => {
-            message.success('点击蒙层')
-          }
-        })
-      },
-      handleClose () {
+      handleButtonClick () {
         dialog.success({
           title: '关闭',
           content: '你确定？',

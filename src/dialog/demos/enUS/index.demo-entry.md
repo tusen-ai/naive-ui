@@ -36,8 +36,8 @@ export default {
 basic
 async
 use-component
-slot
 mask
+action
 ```
 
 ## API
