@@ -24,8 +24,8 @@ single-line
 
 | 名称            | 类型                             | 默认值     | 说明 |
 | --------------- | -------------------------------- | ---------- | ---- |
-| buttom-bordered | `boolean`                        | `true`     |      |
-| bordered        | `boolean`                        | `true`     |      |
-| single-column   | `boolean`                        | `false`    |      |
-| single-line     | `boolean`                        | `true`     |      |
-| size            | `'small' \| 'medium' \| 'large'` | `'medium'` |      |
+| bottom-bordered | `boolean` | `true` | 表格底部边框，在 `bordered = true` 时该参数无效 |
+| bordered | `boolean` | `true` | 表格边框 |
+| single-column | `boolean` | `false` | 单列模式表格 |
+| single-line | `boolean` | `true` | 表格列的边框 |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格尺寸大小 |
