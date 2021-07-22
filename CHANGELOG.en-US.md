@@ -13,6 +13,7 @@
 - `n-space` `justify` prop supports `center`, `space-around` and `space-between`.
 - `n-dialog` DialogReactive Properties add `action`, closes [#550](https://github.com/TuSimple/naive-ui/issues/550).
 - `n-mention`’s `option.label` support render function.
+- `n-color-picker` add `actions` prop, closes [#319](https://github.com/TuSimple/naive-ui/issues/319).
 
 ### Fixes
 
