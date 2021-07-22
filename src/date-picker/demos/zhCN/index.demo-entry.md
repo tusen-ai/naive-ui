@@ -16,7 +16,6 @@ actions
 shortcuts
 events
 format
-ranges
 footerslot
 update-on-close
 ```
