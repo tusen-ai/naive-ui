@@ -9,11 +9,15 @@
 - `n-checkbox-group` add `min` and `max` prop.
 - `n-mention` add `empty` slot.
 - `useDialog` option add `on-mask-click` prop, closes [#419](https://github.com/TuSimple/naive-ui/issues/419).
+- `n-space` `justify` prop supports `center`, `space-around` and `space-between`.
 
 ### Fixes
 
 - Fix `n-space`'s inner `display: grid` element breaks item height, closes `https://github.com/TuSimple/naive-ui/issues/546`.
 - Fix `n-dropdown`'s `render-label` prop is invalid for group type option.
+- Fix `n-descriptions` doesn't work with `v-for` children.
+- Fix `n-dialog` display an empty button when `positive-text` is not set, closes [#549](https://github.com/TuSimple/naive-ui/issues/549).
+- Fix `n-data-table` `rowClassName` doesn't work when type is string, closes [#582](https://github.com/TuSimple/naive-ui/issues/582).
 
 ## 2.15.5 (2021-07-16)
 

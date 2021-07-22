@@ -9,11 +9,15 @@
 - `n-checkbox-group` 新增 `min` 和 `max` 属性
 - `n-mention` 新增 `empty` slot
 - `useDialog` 选项 新增 `on-mask-click`属性, 关闭 [#419](https://github.com/TuSimple/naive-ui/issues/419)
+- `n-space` `justify` 属性支持 `center`、`space-around` 和 `space-between`
 
 ### Fixes
 
 - 修复 `n-space` 中 `display: grid` 的元素显示不正确，关闭 `https://github.com/TuSimple/naive-ui/issues/546`
 - 修复 `n-dropdown` 的 `render-label` 属性对 group 类型 option 失效
+- 修复 `n-descriptions` 无法使用 `v-for` 的子元素
+- 修复 `n-dialog` `positive-text` 为空仍然显示按钮，关闭 [#549](https://github.com/TuSimple/naive-ui/issues/549)
+- 修复 `n-data-table` `rowClassName` 的类型是 string 的时候不生效问题，关闭 [#582](https://github.com/TuSimple/naive-ui/issues/582)
 
 ## 2.15.5 (2021-07-16)
 

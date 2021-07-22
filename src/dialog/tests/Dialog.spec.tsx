@@ -46,13 +46,19 @@ describe('n-dialog', () => {
     dialog.unmount()
   })
 
-  it('async', async () => {
+  it("shouldn't display button if no text is set", () => {
+    const wrapper = mount(NDialog)
+    expect(wrapper.find('button').exists()).toEqual(false)
+  })
+
+  it('loading', async () => {
     const Test = defineComponent({
       setup () {
         const dialog = useDialog()
         dialog.success({
-          title: 'Async',
+          title: 'Loading',
           content: 'Content',
+          positiveText: '确认',
           loading: true
         })
       },

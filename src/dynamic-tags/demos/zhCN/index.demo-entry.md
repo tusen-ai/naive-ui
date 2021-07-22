@@ -20,6 +20,6 @@ form
 | round | `boolean` | `false` | 是否圆角 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸大小 |
 | tag-style | `string \| Object` | `undefined` | 自定义标签的样式 |
-| type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | 标签类型 |
+| type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | 标签类型 |
 | value | `string[]` | `undefined` | 受控模式下的值 |
 | on-update:value | `(value: boolean) => void` | `undefined` | 组件值发生变化时的回调 |
