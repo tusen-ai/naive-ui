@@ -26,50 +26,50 @@ batch-render
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | 一个不允许 drop 在叶节点内部的函数 | 是否允许 drop |
-| block-line | `boolean` | `false` |  |
-| block-node | `boolean` | `false` |  |
+| block-line | `boolean` | `false` | 节点整行撑开 |
+| block-node | `boolean` | `false` | 节点名称整行撑开 |
 | cancelable | `boolean` | `true` | 选中之后是否允许取消 |
 | cascade | `boolean` | `false` | 是否关联选项 |
-| checkable | `boolean` | `false` |  |
-| checked-keys | `Array<string \| number>` | `undefined` | 如果设定则 checked 状态受控 |
-| data | `Array<TreeOption>` | `[]` | 树的节点数据。重新设置 data 会将一些非受控状态清空，如果你需要在使用中改动 data，最好以受控的方式控制树 |
-| default-checked-keys | `Array<string \| number>` | `[]` |  |
-| default-expand-all | `boolean` | `false` |  |
-| default-expanded-keys | `Array<string \| number>` | `[]` |  |
-| default-selected-keys | `Array<string \| number>` | `[]` |  |
-| draggable | `boolean` | `false` |  |
+| checkable | `boolean` | `false` | 是否显示选择框，需要将 `cascade` 设置为 `true` |
+| checked-keys | `Array<string \| number>` | `undefined` | 如果设定则 `checked` 状态受控 |
+| data | `Array<TreeOption>` | `[]` | 树的节点数据。重新设置 `data` 会将一些非受控状态清空，如果你需要在使用中改动 `data`，最好以受控的方式控制树 |
+| default-checked-keys | `Array<string \| number>` | `[]` | 默认选中的多选项 |
+| default-expand-all | `boolean` | `false` | 展开全部选项 |
+| default-expanded-keys | `Array<string \| number>` | `[]` | 默认展开项 |
+| default-selected-keys | `Array<string \| number>` | `[]` | 默认选中的节点 |
+| draggable | `boolean` | `false` | 是否可拖拽 |
 | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |
-| filter | `(node: TreeOption) => boolean` | 一个简单的字符串过滤算法 |  |
+| filter | `(node: TreeOption) => boolean` | `undefined` | 一个简单的字符串过滤算法 |
 | leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
-| multiple | `boolean` | `false` |  |
-| on-load | `(node: TreeOption) => Promise<void>` | `undefined` |  |
-| pattern | `string` | `''` |  |
-| remote | `boolean` | `false` | 是否异步获取选项，和 onLoad 配合 |
+| multiple | `boolean` | `false` | 是否允许节点多选 |
+| on-load | `(node: TreeOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 |
+| pattern | `string` | `''` | 默认搜索的内容 |
+| remote | `boolean` | `false` | 是否异步获取选项，和 `onLoad` 配合 |
 | render-label | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点内容的渲染函数 |
 | render-prefix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点前缀的渲染函数 |
 | render-suffix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | 节点后缀的渲染函数 |
-| selectable | `boolean` | `true` |  |
-| selected-keys | `Array<string \| number>` | `undefined` | 如果设定则 selected 状态受控 |
+| selectable | `boolean` | `true` | 节点是否可以被选中 |
+| selected-keys | `Array<string \| number>` | `undefined` | 如果设定则 `selected` 状态受控 |
 | virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动，启用前你需要设定好树的高度样式 |
-| on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` |  |
-| on-dragenter | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` |  |
-| on-dragleave | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` |  |
-| on-dragstart | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` |  |
-| on-drop | `(data: { node: TreeOption, dragNode: TreeOption, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` |  |
-| on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
-| on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
-| on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
+| on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 节点完成拖拽动作后的回调函数 |
+| on-dragenter | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 节点拖拽中的回调函数 |
+| on-dragleave | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 拖拽一个节点，该节点离开其它节点后的回调函数 |
+| on-dragstart | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 开始拖拽某一个节点的回调函数 |
+| on-drop | `(data: { node: TreeOption, dragNode: TreeOption, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` | 节点完成拖拽动作后的回调函数 |
+| on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` | 节点多选项发生变化时的回调函数 |
+| on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` | 节点展开项发生变化时的回调函数 |
+| on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` | 节点选中项发生变化时的回调函数 |
 
 ### TreeOption Properties
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| key | `string \| number` | 节点的 key，需要唯一 |
+| key | `string \| number` | 节点的 `key`，需要唯一 |
 | label | `string` | 节点的内容 |
-| checkboxDisabled? | `boolean` | 是否禁用节点的 checkbox |
+| checkboxDisabled? | `boolean` | 是否禁用节点的 `checkbox` |
 | children? | `TreeOption[]` | 节点的子节点 |
 | disabled? | `boolean` | 是否禁用节点 |
-| isLeaf? | `boolean` | 节点是否是叶节点，在 remote 模式下是必须的 |
+| isLeaf? | `boolean` | 节点是否是叶节点，在 `remote` 模式下是必须的 |
 | prefix? | `string \| (() => VNodeChild)` | 节点的前缀 |
 | suffix? | `string \| (() => VNodeChild)` | 节点的后缀 |
