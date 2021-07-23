@@ -25,7 +25,7 @@ batch-render
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | `undefined` | 一个不允许 `drop` 在叶节点内部的函数 |
+| allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | 一个不允许 drop 在叶节点内部的函数 | 是否允许 drop |
 | block-line | `boolean` | `false` | 节点整行撑开 |
 | block-node | `boolean` | `false` | 节点名称整行撑开 |
 | cancelable | `boolean` | `true` | 选中之后是否允许取消 |

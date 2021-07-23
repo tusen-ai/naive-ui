@@ -25,7 +25,7 @@ batch-render
 
 | Name | Type | default | Description |
 | --- | --- | --- | --- |
-| allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | `undefined` | A function that prohibit dropping inside leaf node. |
+| allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | A function that prohibit dropping inside leaf node. | Whether to allow dropping. |
 | block-line | `boolean` | `false` | Nodes spread out the whole row. |
 | block-node | `boolean` | `false` | The node name is spread out in the whole row. |
 | cancelable | `boolean` | `true` | Whether node's select status can be cancelled. |
