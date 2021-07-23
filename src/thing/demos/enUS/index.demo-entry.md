@@ -16,7 +16,7 @@ indent
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | content-indented | `boolean` | `false` | Whether to enable content indentation. |
-| content | `string` | `undefined` | Content information. |
+| content | `string` | `undefined` | Content area. |
 | description | `string` | `undefined` | Description information. |
 | title-extra | `string` | `undefined` | Additional information for the title. |
 | title | `string` | `undefined` | Title information. |
@@ -25,7 +25,7 @@ indent
 
 | Name         | Parameters | Description                           |
 | ------------ | ---------- | ------------------------------------- |
-| action       | `()`       | Action information.                   |
+| action       | `()`       | Operating area slot.                  |
 | default      | `()`       | Content information.                  |
 | description  | `()`       | Description information.              |
 | header-extra | `()`       | Additional information in the header. |
