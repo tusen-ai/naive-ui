@@ -9,6 +9,7 @@
 - `n-checkbox-group` 新增 `min` 和 `max` 属性
 - `n-mention` 新增 `empty` slot
 - `n-space` `justify` 属性支持 `center`、`space-around` 和 `space-between`
+- `n-tabs` 新增指示箭头支持滚动操作
 
 ### Fixes
 
