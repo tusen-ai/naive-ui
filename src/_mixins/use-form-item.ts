@@ -15,7 +15,6 @@ type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge'
 export interface FormItemInjection {
   path: Ref<string | undefined>
   mergedSize: ComputedRef<FormItemSize>
-  mergedDisabled: ComputedRef<boolean | undefined>
   restoreValidation: () => void
   handleContentBlur: () => void
   handleContentFocus: () => void

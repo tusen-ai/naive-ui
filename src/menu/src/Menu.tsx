@@ -218,7 +218,7 @@ export default defineComponent({
         : props.defaultExpandedNames ||
             props.defaultExpandedKeys ||
             treeMateRef.value.getPath(mergedValueRef.value, {
-              includeSelf: false
+              includeGroup: false
             }).keyPath
     )
     const controlledExpandedKeysRef = useCompitable(props, [
