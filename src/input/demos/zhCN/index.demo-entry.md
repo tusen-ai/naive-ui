@@ -26,8 +26,8 @@ focus
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| autofocus | `boolean` | `false` | 自动获取焦点 |
-| autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` | 自适应内容高度，只对 type="textarea" 有效，可传入对象，如，{ minRows: 1, maxRows: 3 } |
+| autofocus | `boolean` | `false` | 是否自动获取焦点 |
+| autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` | 自适应内容高度，只对 type="textarea" 有效，可传入对象，如 { minRows: 1, maxRows: 3 } |
 | clearable | `boolean` | `false` | 是否可清空 |
 | default-value | `string \| [string, string] \| null` | `null` | 输入框默认值 |
 | disabled | `boolean` | `false` | 是否禁用 |
@@ -66,15 +66,15 @@ focus
 
 ### Input Group Slots
 
-| 属性    | 类型 | 说明 |
-| ------- | ---- | ---- |
-| default | `()` |      |
+| 属性    | 类型 | 说明         |
+| ------- | ---- | ------------ |
+| default | `()` | 输入组的内容 |
 
 ### Input Group Label Slots
 
-| 属性    | 类型 | 说明 |
-| ------- | ---- | ---- |
-| default | `()` |      |
+| 属性    | 类型 | 说明             |
+| ------- | ---- | ---------------- |
+| default | `()` | 输入组标签的内容 |
 
 ## Methods
 
