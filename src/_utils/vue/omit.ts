@@ -2,8 +2,7 @@ export function omit<T, K extends keyof T, R extends Record<string, any>> (
   object: T,
   keys: K[] = [],
   rest?: R
-  // eslint-disable-next-line @typescript-eslint/ban-types
-): Pick<T, Exclude<keyof T, K>> & (R extends undefined ? {} : R) {
+): Omit<T, K> & (R extends undefined ? {} : R) {
   const omitedObject: any = {}
   const originalKeys = Object.getOwnPropertyNames(object)
   originalKeys.forEach((originalKey) => {
