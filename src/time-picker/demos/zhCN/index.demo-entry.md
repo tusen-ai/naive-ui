@@ -10,12 +10,14 @@ size
 disabled-time
 step-time
 format
+actions
 ```
 
 ## Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| actions | `Array<'now' \| 'confirm'> \| null` | `['now', 'confirm']` | Time Picker 中支持的操作 |
 | clearable | `boolean` | `false` | 是否可清空 |
 | default-value | `number \| null` | `null` | 非受控模式下的默认值 |
 | disabled | `boolean` | `false` | 是否禁用 |

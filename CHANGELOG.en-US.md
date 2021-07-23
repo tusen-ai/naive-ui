@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-time-picker` add `actions` prop, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
+
 ## 2.15.6 (2021-07-23)
 
 ### Feats
