@@ -20,6 +20,6 @@ depth
 
 ## Slots
 
-| Name    | Parameters | Description              |
-| ------- | ---------- | ------------------------ |
-| default | `()`       | The content of the icon. |
+| Name    | Parameters | Description |
+| ------- | ---------- | ----------- |
+| default | `()`       |             |

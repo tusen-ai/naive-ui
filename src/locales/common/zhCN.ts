@@ -4,8 +4,7 @@ const zhCN: NLocale = {
   name: 'zh-CN',
   global: {
     undo: '撤销',
-    redo: '重做',
-    confirm: '确认'
+    redo: '重做'
   },
   Popconfirm: {
     positiveText: '确认',

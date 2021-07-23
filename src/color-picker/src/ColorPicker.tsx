@@ -59,7 +59,7 @@ import Pallete from './Pallete'
 import ColorInput from './ColorInput'
 import ColorPickerTrigger from './ColorPickerTrigger'
 import { deriveDefaultValue, getModeFromValue } from './utils'
-import type { ColorPickerMode, ActionType } from './utils'
+import type { ColorPickerMode } from './utils'
 import style from './styles/index.cssr'
 import { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import { NButton } from '../../button'
@@ -85,10 +85,6 @@ export const colorPickerPanelProps = {
   showAlpha: {
     type: Boolean,
     default: true
-  },
-  actions: {
-    type: Array as PropType<ActionType[]>,
-    default: null
   },
   internalActions: Array as PropType<ReadonlyArray<'redo' | 'undo'>>,
   size: String as PropType<'small' | 'medium' | 'large'>,
@@ -425,11 +421,6 @@ export default defineComponent({
       handleComplete(false)
       valueIndexRef.value = valueIndex + 1
     }
-
-    function handleConfirm (): void {
-      doUpdateShow(false)
-    }
-
     const undoableRef = computed(() => valueIndexRef.value >= 1)
     const redoableRef = computed(() => {
       const { value: undoStack } = undoStackRef
@@ -490,7 +481,7 @@ export default defineComponent({
     function renderPanel (): VNode {
       const { value: rgba } = rgbaRef
       const { value: displayedHue } = displayedHueRef
-      const { internalActions, modes, actions } = props
+      const { internalActions, modes } = props
       const { value: mergedTheme } = themeRef
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       return (
@@ -536,20 +527,6 @@ export default defineComponent({
               onUpdateValue={handleInputUpdateValue}
             />
           </div>
-          {actions?.length ? (
-            <div class={`${mergedClsPrefix}-color-picker-action`}>
-              {actions.includes('confirm') && (
-                <NButton
-                  size="small"
-                  onClick={handleConfirm}
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                >
-                  {{ default: () => localeRef.value.confirm }}
-                </NButton>
-              )}
-            </div>
-          ) : null}
           {slots.action ? (
             <div class={`${mergedClsPrefix}-color-picker-action`}>
               {{ default: slots.action }}

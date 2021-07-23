@@ -1,6 +1,6 @@
 # 批量处理菜单渲染
 
-使用 `render-label`、`render-icon` 可以批量控制菜单的选项渲染。
+使用 `render-label` 可以批量控制菜单的选项渲染。
 
 ```html
 <n-space vertical>
@@ -22,7 +22,6 @@
         :collapsed-icon-size="22"
         :options="menuOptions"
         :render-label="renderMenuLabel"
-        :render-icon="renderMenuIcon"
       />
     </n-layout-sider>
     <n-layout>
@@ -35,17 +34,27 @@
 ```js
 import { h, ref, defineComponent } from 'vue'
 import { NIcon } from 'naive-ui'
-import { BookmarkOutline } from '@vicons/ionicons5'
+import {
+  BookOutline as BookIcon,
+  PersonOutline as PersonIcon,
+  WineOutline as WineIcon
+} from '@vicons/ionicons5'
+
+function renderIcon (icon) {
+  return () => h(NIcon, null, { default: () => h(icon) })
+}
 
 const menuOptions = [
   {
     label: '且听风吟',
     key: 'hear-the-wind-sing',
+    icon: renderIcon(BookIcon),
     href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F/3199'
   },
   {
     label: '1973年的弹珠玩具',
     key: 'pinball-1973',
+    icon: renderIcon(BookIcon),
     disabled: true,
     children: [
       {
@@ -57,11 +66,13 @@ const menuOptions = [
   {
     label: '寻羊冒险记',
     key: 'a-wild-sheep-chase',
-    disabled: true
+    disabled: true,
+    icon: renderIcon(BookIcon)
   },
   {
     label: '舞，舞，舞',
     key: 'dance-dance-dance',
+    icon: renderIcon(BookIcon),
     children: [
       {
         type: 'group',
@@ -70,17 +81,20 @@ const menuOptions = [
         children: [
           {
             label: '叙事者',
-            key: 'narrator'
+            key: 'narrator',
+            icon: renderIcon(PersonIcon)
           },
           {
             label: '羊男',
-            key: 'sheep-man'
+            key: 'sheep-man',
+            icon: renderIcon(PersonIcon)
           }
         ]
       },
       {
         label: '饮品',
         key: 'beverage',
+        icon: renderIcon(WineIcon),
         children: [
           {
             label: '威士忌',
@@ -117,9 +131,6 @@ export default defineComponent({
           return h('a', { href: option.href, target: '_blank' }, option.label)
         }
         return option.label
-      },
-      renderMenuIcon () {
-        return h(NIcon, null, { default: () => h(BookmarkOutline) })
       }
     }
   }

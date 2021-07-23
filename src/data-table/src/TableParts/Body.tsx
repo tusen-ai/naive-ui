@@ -286,7 +286,6 @@ export default defineComponent({
       setHeaderScrollLeft
     } = this
     const contentStyle = {
-      width: '100%',
       minWidth: formatLength(scrollX)
     }
     return (
@@ -541,10 +540,6 @@ export default defineComponent({
                 )
               })
               const props = rowProps ? rowProps(rowData, rowIndex) : undefined
-              const mergedRowClassName =
-                typeof rowClassName === 'string'
-                  ? rowClassName
-                  : createRowClassName(rowData, rowIndex, rowClassName)
               const row = (
                 <tr
                   onMouseenter={() => {
@@ -553,7 +548,7 @@ export default defineComponent({
                   key={rowKey}
                   class={[
                     `${mergedClsPrefix}-data-table-tr`,
-                    mergedRowClassName
+                    createRowClassName(rowData, rowIndex, rowClassName)
                   ]}
                   {...props}
                 >

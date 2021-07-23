@@ -27,4 +27,3 @@ form
 | on-complete | `(value: string) => void` | `undefined` | Callback once the value is changed completely (not called during mousemove). |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback once panel show status is changed. |
 | on-update:value | `(value: string) => void` | `undefined` | Callback once the value is changed. |
-| actions | `Array<'confirm'> \| null` | `null` | Show the type of button |

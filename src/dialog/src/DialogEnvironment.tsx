@@ -17,8 +17,7 @@ export const exposedDialogEnvProps = {
   onNegativeClick: Function as PropType<
   (e: MouseEvent) => Promise<boolean> | boolean | unknown
   >,
-  onClose: Function as PropType<() => Promise<boolean> | boolean | unknown>,
-  onMaskClick: Function as PropType<(e: MouseEvent) => void>
+  onClose: Function as PropType<() => Promise<boolean> | boolean | unknown>
 }
 
 export default defineComponent({
@@ -74,13 +73,6 @@ export default defineComponent({
         hide()
       }
     }
-    function handleMaskClick (e: MouseEvent): void {
-      const { onMaskClick, maskClosable } = props
-      if (onMaskClick) {
-        onMaskClick(e)
-        maskClosable && hide()
-      }
-    }
     function hide (): void {
       showRef.value = false
     }
@@ -94,8 +86,7 @@ export default defineComponent({
       handleAfterLeave,
       handleCloseClick,
       handleNegativeClick,
-      handlePositiveClick,
-      handleMaskClick
+      handlePositiveClick
     }
   },
   render () {
@@ -105,7 +96,6 @@ export default defineComponent({
       handleNegativeClick,
       handleCloseClick,
       handleAfterLeave,
-      handleMaskClick,
       to,
       maskClosable,
       show
@@ -114,7 +104,6 @@ export default defineComponent({
       <NModal
         show={show}
         onUpdateShow={handleUpdateShow}
-        onMaskClick={handleMaskClick}
         appear
         dialog
         to={to}

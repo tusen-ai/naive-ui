@@ -1,15 +1,11 @@
 # Basic Usage
 
-If `label` is a callback function, input matching will be performed according to `value`.
-
 ```html
 <n-mention :options="options" default-value="@" />
 ```
 
 ```js
-import { defineComponent, h } from 'vue'
-import { NIcon } from 'naive-ui'
-import { HomeOutline as HomeIcon } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup () {
@@ -28,15 +24,7 @@ export default defineComponent({
           value: 'Guandong-Road'
         },
         {
-          label: (option) =>
-            h('span', null, [
-              h(
-                NIcon,
-                { style: 'margin-right: 5px' },
-                { default: () => h(HomeIcon) }
-              ),
-              option.value
-            ]),
+          label: 'No.5-Yiheyuan-Road',
           value: 'No.5-Yiheyuan-Road'
         }
       ]

@@ -126,10 +126,7 @@ export default defineComponent({
       const { value: pattern } = partialPatternRef
       return props.options.filter((option) => {
         if (!pattern) return true
-        if (typeof option.label === 'string') {
-          return option.label.startsWith(pattern)
-        }
-        return option.value.startsWith(pattern)
+        return option.label.startsWith(pattern)
       })
     })
     const treeMateRef = computed(() => {
