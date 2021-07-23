@@ -24,6 +24,7 @@
 - Fix `n-dialog` display an empty button when `positive-text` is not set, closes [#549](https://github.com/TuSimple/naive-ui/issues/549).
 - Fix `n-pagination` `PaginationInfo`'s `endIndex` data error, closes [#584](https://github.com/TuSimple/naive-ui/issues/584).
 - Fix `n-data-table` `rowClassName` doesn't work when type is string, closes [#582](https://github.com/TuSimple/naive-ui/issues/582).
+- Fix `n-tree-select` prop `checkable` doesn't work, closes [#618](https://github.com/TuSimple/naive-ui/issues/618).
 
 ## 2.15.5 (2021-07-16)
 

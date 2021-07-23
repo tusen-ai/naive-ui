@@ -179,9 +179,9 @@ const TreeNode = defineComponent({
       ),
       checkable: computed(
         () =>
-          NTree.checkableRef.value &&
-          (NTree.cascadeRef.value ||
-            (NTree.leafOnlyRef.value && props.tmNode.isLeaf))
+          NTree.checkableRef.value ||
+          NTree.cascadeRef.value ||
+          (NTree.leafOnlyRef.value && props.tmNode.isLeaf)
       ),
       checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
       selectable: computed(

@@ -24,6 +24,7 @@
 - 修复 `n-dialog` `positive-text` 为空仍然显示按钮，关闭 [#549](https://github.com/TuSimple/naive-ui/issues/549)
 - 修复 `n-pagination` `PaginationInfo` 的 `endIndex` 数据错误，关闭 [#584](https://github.com/TuSimple/naive-ui/issues/584)
 - 修复 `n-data-table` `rowClassName` 的类型是 string 的时候不生效问题，关闭 [#582](https://github.com/TuSimple/naive-ui/issues/582)
+- 修复 `n-tree-select` `checkable` 属性不生效，关闭 [#618](https://github.com/TuSimple/naive-ui/issues/618)
 
 ## 2.15.5 (2021-07-16)
 
