@@ -13,6 +13,10 @@ import PanelCol, { Item } from './PanelCol'
 import { MaybeArray } from '../../_utils'
 
 const timePickerPanelProps = {
+  actions: {
+    type: Array as PropType<Array<'now' | 'confirm'>>,
+    default: () => ['now', 'confirm']
+  },
   showHour: {
     type: Boolean,
     default: true
