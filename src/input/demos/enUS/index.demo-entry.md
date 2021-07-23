@@ -27,10 +27,10 @@ focus
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | autofocus | `boolean` | `false` | Whether to autofocus. |
-| autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` | When type is textarea works, example { minRows: 1, maxRows: 3 }. |
+| autosize | `boolean \| { minRows?: number, maxRows?: number }` | `false` | When type is textarea works, for example `{ minRows: 1, maxRows: 3 }`. |
 | clearable | `boolean` | `false` | Whether the input is clearable. |
 | default-value | `string \| [string, string] \| null` | `null` | Default value in uncontrolled mode. |
-| disabled | `boolean` | `false` | Whether to disable. |
+| disabled | `boolean` | `false` | Whether to disable the input. |
 | input-props | `object` | `undefined` | The props of the input element inside the component. It doesn't work with `pair` input. |
 | loading | `boolean` | `undefined` | Whether to show loading indicator. Set to non `undefined` value will take space for loading indicator. |
 | maxlength | `number` | `undefined` | Maximum input length. |
