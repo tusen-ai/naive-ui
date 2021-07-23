@@ -20,18 +20,18 @@ custom-icon
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| current | `number` | `undefined` |  |
-| size | `'small' \| 'medium'` | `'medium'` |  |
-| status | `'process' \| 'finish' \| 'error' \| 'wait'` | `'process'` |  |
-| vertical | `boolean` | `false` |  |
+| current | `number` | `undefined` | Currently selected in the first steps. |
+| size | `'small' \| 'medium'` | `'medium'` | Steps size. |
+| status | `'process' \| 'finish' \| 'error' \| 'wait'` | `'process'` | Steps status. |
+| vertical | `boolean` | `false` | Steps vertical. |
 
 ### Step Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| description | `string` | `undefined` |  |
-| status | `'process' \| 'finish' \| 'error' \| 'wait'` | `undefined` |  |
-| title | `string` | `undefined` |  |
+| description | `string` | `undefined` | Step description. |
+| status | `'process' \| 'finish' \| 'error' \| 'wait'` | `undefined` | Step status. |
+| title | `string` | `undefined` | Step title. |
 
 ## Slots
 
@@ -39,12 +39,12 @@ custom-icon
 
 | Name        | Parameters | Description                      |
 | ----------- | ---------- | -------------------------------- |
-| default     | `()`       |                                  |
+| default     | `()`       | Steps content.                   |
 | finish-icon | `()`       | `'finish'` status button deploy. |
 | error-icon  | `()`       | `'error'` status button deploy.  |
 
 ### Step Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name    | Parameters | Description   |
+| ------- | ---------- | ------------- |
+| default | `()`       | Step content. |
