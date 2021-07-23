@@ -21,30 +21,30 @@ line-debug
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| addable | `boolean \| { disabled?: boolean }` | `false` | Whether to allow adding tags, it only takes effect when the tag's `type` is `card`. |
-| closable | `boolean` | `false` | Whether to allow the tag to be closed, it only takes effect when the tag's `type` is `card`. |
+| addable | `boolean \| { disabled?: boolean }` | `false` | Whether to allow add tag. Only works when the tag's `type` is `card`. |
+| closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |
 | default-value | `string \| number` | `undefined` | Default value in uncontrolled mode. |
-| justify-content | `'space-between' \| 'space-around' \| 'space-evenly'` | `undefined` | `flex` layout. |
+| justify-content | `'space-between' \| 'space-around' \| 'space-evenly'` | `undefined` | Justify-content value of `flex` layout. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of tabs. |
 | show-divider | `boolean` | `false` | Whether to show divider of tabs. Only works when `type` is `line`. |
 | pane-style | `string \| object` | `undefined` | Style of the pane. |
 | tab-style | `string \| object` | `undefined` | Style of the tab. |
 | tabs-padding | `number` | `0` | Left & right `padding` of the group of tabs. |
 | type | `'bar' \| 'line' \| 'card'` | `'bar'` | Tabs type. |
-| value | `string \| number` | `undefined` | Default value in controlled mode. |
-| on-add | `() => void` | `undefined` | Callback function for adding tags. |
-| on-close | `(name: string \| number) => void` | `undefined` | Callback function for deleting tags. |
-| on-update:value | `(value: string \| number) => void` | `undefined` | Callback function when the selection changes. |
+| value | `string \| number` | `undefined` | Value in controlled mode. |
+| on-add | `() => void` | `undefined` | Callback function triggered when add tag. |
+| on-close | `(name: string \| number) => void` | `undefined` | Callback function triggered when close tag. |
+| on-update:value | `(value: string \| number) => void` | `undefined` | Callback function triggered when the value changes. |
 
 ### Tab Pane Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| closable | `boolean` | `false` | Whether to allow the tag to be closed, it only takes effect when the tag's `type` is `card`. |
+| closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |
 | disabled | `boolean` | `false` | Whether to disable. |
 | display-directive | `'if' \| 'show'` | `'if'` | The directive to use in conditionally rendering. `if` will use `v-if` and `show` will use `v-show`. When use show directive, the status of tab won't be reset after tab changes. |
-| tab | `string \| VNode \| () => VNodeChild` | `undefined` | Label display name. |
-| name | `string \| number` | `undefined` | The name of the label. |
+| tab | `string \| VNode \| () => VNodeChild` | `undefined` | Tab label. |
+| name | `string \| number` | `undefined` | Required, the name of the tab. |
 
 ## Slots
 
@@ -58,7 +58,7 @@ line-debug
 
 ### Tab Pane Slots
 
-| Name    | Parameters | Description              |
-| ------- | ---------- | ------------------------ |
-| default | `()`       | Tab content.             |
-| tab     | `()`       | What the tab item shows. |
+| Name    | Parameters | Description        |
+| ------- | ---------- | ------------------ |
+| default | `()`       | Tab content.       |
+| tab     | `()`       | Tab label content. |
