@@ -35,6 +35,7 @@ const formProps = {
     default: () => {}
   },
   rules: Object as PropType<FormRules>,
+  disabled: Boolean,
   size: String as PropType<'small' | 'medium' | 'large'>,
   showRequireMark: {
     type: [Boolean, String] as PropType<'left' | 'right' | boolean>,

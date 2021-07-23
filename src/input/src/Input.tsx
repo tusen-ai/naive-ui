@@ -15,11 +15,13 @@ import {
   WatchStopHandle,
   provide,
   InputHTMLAttributes,
-  TextareaHTMLAttributes
+  TextareaHTMLAttributes,
+  inject
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
+import { formInjectionKey } from '../../form/src/interface'
 import { NBaseClear, NBaseIcon, NBaseSuffix } from '../../_internal'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
@@ -55,7 +57,10 @@ const inputProps = {
     default: null
   },
   value: [String, Array] as PropType<null | string | [string, string]>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   size: String as PropType<Size>,
   rows: {
     type: [Number, String] as PropType<number | string>,
@@ -137,6 +142,7 @@ export default defineComponent({
   props: inputProps,
   setup (props) {
     const { mergedClsPrefixRef, mergedBorderedRef } = useConfig(props)
+    const NForm = inject(formInjectionKey, null)
     const themeRef = useTheme(
       'Input',
       'Input',
@@ -170,6 +176,14 @@ export default defineComponent({
     const isComposingRef = ref(false)
     const activatedRef = ref(false)
     let syncSource: string | null = null
+    // disabled
+    const mergedDisabledRef = computed(() => {
+      if (props.disabled !== undefined) {
+        return props.disabled
+      } else {
+        return NForm?.disabled
+      }
+    })
     // placeholder
     const mergedPlaceholderRef = computed<[string, string] | [string]>(() => {
       const { placeholder, pair } = props
@@ -209,7 +223,7 @@ export default defineComponent({
     // clear
     const showClearButton = computed(() => {
       if (
-        props.disabled ||
+        mergedDisabledRef.value ||
         props.readonly ||
         !props.clearable ||
         (!mergedFocusRef.value && !hoverRef.value)
@@ -508,15 +522,15 @@ export default defineComponent({
       hoverRef.value = false
     }
     function handlePasswordToggleClick (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       passwordVisibleRef.value = !passwordVisibleRef.value
     }
     function handlePasswordToggleMousedown (e: MouseEvent): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       e.preventDefault()
     }
     function handlePasswordToggleMouseup (e: MouseEvent): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       e.preventDefault()
     }
     function handleWrapperKeyDown (e: KeyboardEvent): void {
@@ -557,7 +571,7 @@ export default defineComponent({
       }
     }
     function focus (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (props.passivelyActivated) {
         wrapperElRef.value?.focus()
       } else {
@@ -571,7 +585,7 @@ export default defineComponent({
       }
     }
     function activate (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (textareaElRef.value) textareaElRef.value.focus()
       else if (inputElRef.value) inputElRef.value.focus()
     }
@@ -667,6 +681,7 @@ export default defineComponent({
       textDecorationStyle: textDecorationStyleRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
+      mergedDisabled: mergedDisabledRef,
       // methods
       handleCompositionStart,
       handleCompositionEnd,
@@ -803,7 +818,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-input`,
           {
-            [`${mergedClsPrefix}-input--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-input--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-input--textarea`]: this.type === 'textarea',
             [`${mergedClsPrefix}-input--resizable`]:
               this.resizable && !this.autosize,
@@ -817,7 +832,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
         tabindex={
-          !this.disabled && this.passivelyActivated && !this.activated
+          !this.mergedDisabled && this.passivelyActivated && !this.activated
             ? 0
             : undefined
         }
@@ -851,7 +866,7 @@ export default defineComponent({
                 rows={Number(this.rows)}
                 placeholder={this.placeholder as string | undefined}
                 value={this.mergedValue as string | undefined}
-                disabled={this.disabled}
+                disabled={this.mergedDisabled}
                 maxlength={this.maxlength as any}
                 minlength={this.minlength as any}
                 readonly={this.readonly as any}
@@ -903,7 +918,7 @@ export default defineComponent({
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
                 placeholder={this.mergedPlaceholder[0]}
-                disabled={this.disabled}
+                disabled={this.mergedDisabled}
                 maxlength={this.maxlength as any}
                 minlength={this.minlength as any}
                 value={
@@ -1003,7 +1018,7 @@ export default defineComponent({
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
                 placeholder={this.mergedPlaceholder[1]}
-                disabled={this.disabled}
+                disabled={this.mergedDisabled}
                 maxlength={this.maxlength as any}
                 minlength={this.minlength as any}
                 value={

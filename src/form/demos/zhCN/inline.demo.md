@@ -19,9 +19,14 @@
   :rules="rules"
   :size="size"
   ref="formRef"
+  disabled
 >
   <n-form-item label="姓名" path="user.name">
-    <n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
+    <n-input
+      :disabled="false"
+      v-model:value="formValue.user.name"
+      placeholder="输入姓名"
+    />
   </n-form-item>
   <n-form-item label="年龄" path="user.age">
     <n-input placeholder="输入年龄" v-model:value="formValue.user.age" />
