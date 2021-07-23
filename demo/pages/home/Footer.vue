@@ -9,10 +9,10 @@
     <div class="footer-links">
       <div class="footer-links-col">
         <n-text depth="1" class="col-header">{{ t('resources') }}</n-text>
-        <n-button 
-          text 
-          tag="a" 
-          href="https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch" 
+        <n-button
+          text
+          tag="a"
+          href="https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch"
           download
         >
           {{ t('designResources') }}

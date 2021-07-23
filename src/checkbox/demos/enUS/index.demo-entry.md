@@ -24,7 +24,7 @@ event
 | disabled | `boolean` | `false` | Whether to disable. |
 | focusable | `boolean` | `true` | Whether to focus on selection. |
 | indeterminate | `boolean` | `false` | Whether partly selected. |
-| label | `string \| (() => VNodeChild)` | `undefined` | Checkbox label. |
+| label | `string` | `undefined` | Checkbox label. |
 | value | `string \| number` | `undefined` | The value of the checkbox to be used in checkbox group. |
 | on-update:checked | `(checked: boolean) => void` | `undefined` | Callback function triggered on checked status changes. |
 

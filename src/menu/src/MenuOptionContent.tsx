@@ -63,7 +63,7 @@ export default defineComponent({
     const {
       clsPrefix,
       tmNode,
-      menuProps: { renderLabel }
+      menuProps: { renderIcon, renderLabel }
     } = this
     return (
       <div
@@ -80,13 +80,13 @@ export default defineComponent({
         ]}
         style={this.style}
       >
-        {this.icon ? (
+        {renderIcon || this.icon ? (
           <div
             class={`${clsPrefix}-menu-item-content__icon`}
             style={this.iconStyle}
             role="none"
           >
-            {render(this.icon)}
+            {renderIcon ? renderIcon(tmNode.rawNode) : render(this.icon)}
           </div>
         ) : null}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">

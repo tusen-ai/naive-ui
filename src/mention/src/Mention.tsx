@@ -126,7 +126,10 @@ export default defineComponent({
       const { value: pattern } = partialPatternRef
       return props.options.filter((option) => {
         if (!pattern) return true
-        return option.label.startsWith(pattern)
+        if (typeof option.label === 'string') {
+          return option.label.startsWith(pattern)
+        }
+        return option.value.startsWith(pattern)
       })
     })
     const treeMateRef = computed(() => {
@@ -371,7 +374,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, mergedClsPrefix } = this
+    const { mergedTheme, mergedClsPrefix, $slots } = this
     return (
       <div class={`${mergedClsPrefix}-mention`}>
         <NInput
@@ -443,7 +446,9 @@ export default defineComponent({
                               virtualScroll={false}
                               style={this.cssVars as CSSProperties}
                               onMenuToggleOption={this.handleSelect}
-                            />
+                            >
+                              {$slots}
+                            </NInternalSelectMenu>
                           ) : null
                         }
                       }}

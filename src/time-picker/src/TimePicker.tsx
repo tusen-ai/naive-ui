@@ -79,6 +79,7 @@ const timePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  actions: Array as PropType<Array<'now' | 'confirm'>>,
   defaultValue: {
     type: Number as PropType<number | null>,
     default: null
@@ -687,6 +688,7 @@ export default defineComponent({
                             ? withDirectives(
                                 <Panel
                                   ref="panelInstRef"
+                                  actions={this.actions}
                                   style={this.cssVars as CSSProperties}
                                   seconds={this.seconds}
                                   minutes={this.minutes}

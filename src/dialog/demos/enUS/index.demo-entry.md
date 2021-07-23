@@ -36,6 +36,8 @@ export default {
 basic
 async
 use-component
+mask
+action
 ```
 
 ## API
@@ -55,6 +57,7 @@ use-component
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| action | `() => VNodeChild` | `undefined` | Content of the operation area, must be a render function. |
 | bordered | `boolean` | `false` | Whether to show border. |
 | closable | `boolean` | `true` | Whether to show close icon. |
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a render function. |
@@ -70,6 +73,7 @@ use-component
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior. |
 | onNegativeClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior. |
 | onPositiveClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or Promise rejected will prevent the default behavior. |
+| onMaskClick | `() => void` | `undefined` | Callback triggered when click the mask. |
 
 ### DialogReactive API
 

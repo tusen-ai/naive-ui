@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, nextTick } from 'vue'
 import { NDialogProvider, useDialog, NDialog } from '../index'
 
 const Provider = defineComponent({
@@ -26,7 +26,9 @@ describe('n-dialog', () => {
         return null
       }
     })
-    const dialogProvider = mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    const dialogProvider = mount(() => (
+      <Provider>{{ default: () => <Test /> }}</Provider>
+    ))
     dialogProvider.unmount()
   })
 
@@ -38,17 +40,25 @@ describe('n-dialog', () => {
         content: 'success'
       }
     })
-    expect(document.querySelector('.n-dialog__content')?.textContent).toEqual('success')
+    expect(document.querySelector('.n-dialog__content')?.textContent).toEqual(
+      'success'
+    )
     dialog.unmount()
   })
 
-  it('async', async () => {
+  it("shouldn't display button if no text is set", () => {
+    const wrapper = mount(NDialog)
+    expect(wrapper.find('button').exists()).toEqual(false)
+  })
+
+  it('loading', async () => {
     const Test = defineComponent({
       setup () {
         const dialog = useDialog()
         dialog.success({
-          title: 'Async',
+          title: 'Loading',
           content: 'Content',
+          positiveText: '确认',
           loading: true
         })
       },
@@ -58,5 +68,52 @@ describe('n-dialog', () => {
     })
     await mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
     expect(document.querySelector('.n-button__icon')).not.toEqual(null)
+  })
+
+  it('maskClosable', async () => {
+    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
+    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+    const Test = defineComponent({
+      setup () {
+        const dialog = useDialog()
+        dialog.success({
+          title: 'Close by mask',
+          content: 'Content',
+          maskClosable: false
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    document.body.dispatchEvent(mousedownEvent)
+    document.body.dispatchEvent(mouseupEvent)
+    await nextTick(() => {
+      expect(document.querySelector('.n-dialog')).not.toBeNull()
+    })
+  })
+
+  it('onMaskClick', async () => {
+    const onMaskClick = jest.fn()
+    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
+    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+    const Test = defineComponent({
+      setup () {
+        const dialog = useDialog()
+        dialog.success({
+          title: 'Close by mask',
+          content: 'Content',
+          onMaskClick
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    await mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    document.body.dispatchEvent(mousedownEvent)
+    document.body.dispatchEvent(mouseupEvent)
+    expect(onMaskClick).toHaveBeenCalled()
   })
 })

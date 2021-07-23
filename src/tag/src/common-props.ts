@@ -7,20 +7,11 @@ export default {
     >,
     default: 'default'
   },
-  round: {
-    type: Boolean,
-    default: false
-  },
+  round: Boolean,
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
-  closable: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  }
+  closable: Boolean,
+  disabled: Boolean
 } as const

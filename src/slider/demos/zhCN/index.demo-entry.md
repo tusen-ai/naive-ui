@@ -9,6 +9,7 @@ basic
 range
 mark
 disable-tooltip
+format
 ```
 
 ## API

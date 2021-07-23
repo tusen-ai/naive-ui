@@ -247,25 +247,29 @@ export default defineComponent({
           ) : null}
         </div>,
         <div class={`${mergedClsPrefix}-time-picker-actions`}>
-          <NButton
-            size="tiny"
-            theme={mergedTheme.peers.Button}
-            themeOverrides={mergedTheme.peerOverrides.Button}
-            onClick={this.onNowClick}
-          >
-            {{ default: () => this.nowText }}
-          </NButton>
-          <NButton
-            size="tiny"
-            type="primary"
-            class={`${mergedClsPrefix}-time-picker-actions__confirm`}
-            theme={mergedTheme.peers.Button}
-            themeOverrides={mergedTheme.peerOverrides.Button}
-            disabled={this.isValueInvalid}
-            onClick={this.onConfirmClick}
-          >
-            {{ default: () => this.confirmText }}
-          </NButton>
+          {this.actions?.includes('now') ? (
+            <NButton
+              size="tiny"
+              theme={mergedTheme.peers.Button}
+              themeOverrides={mergedTheme.peerOverrides.Button}
+              onClick={this.onNowClick}
+            >
+              {{ default: () => this.nowText }}
+            </NButton>
+          ) : null}
+          {this.actions?.includes('confirm') ? (
+            <NButton
+              size="tiny"
+              type="primary"
+              class={`${mergedClsPrefix}-time-picker-actions__confirm`}
+              theme={mergedTheme.peers.Button}
+              themeOverrides={mergedTheme.peerOverrides.Button}
+              disabled={this.isValueInvalid}
+              onClick={this.onConfirmClick}
+            >
+              {{ default: () => this.confirmText }}
+            </NButton>
+          ) : null}
         </div>,
         <NBaseFocusDetector onFocus={this.onFocusDetectorFocus} />
       ]

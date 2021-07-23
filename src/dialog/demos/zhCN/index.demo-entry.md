@@ -37,6 +37,8 @@ export default {
 basic
 async
 use-component
+mask
+action
 ```
 
 ## API
@@ -56,6 +58,7 @@ use-component
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| action | `() => VNodeChild` | `undefined` | 操作区域的内容，需要是 render 函数 |
 | bordered | `boolean` | `false` | 是否显示 border |
 | closable | `boolean` | `true` | 是否显示 close 图标 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 render 函数 |
@@ -71,6 +74,7 @@ use-component
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为 |
 | onNegativeClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为 |
 | onPositiveClick | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 Promise 被 reject 会避免默认行为 |
+| onMaskClick | `() => void` | `undefined` | 点击蒙层后执行的回调 |
 
 ### DialogReactive API
 
