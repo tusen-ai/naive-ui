@@ -9,8 +9,7 @@ import {
   watch,
   Transition,
   withDirectives,
-  vShow,
-  inject
+  vShow
 } from 'vue'
 import { happensIn } from 'seemly'
 import { createTreeMate } from 'treemate'
@@ -23,7 +22,6 @@ import {
 } from 'vueuc'
 import { useIsMounted, useMergedState, useCompitable } from 'vooks'
 import { clickoutside } from 'vdirs'
-import { formInjectionKey } from '../../form/src/interface'
 import {
   RenderLabel,
   RenderOption
@@ -193,7 +191,6 @@ export default defineComponent({
   setup (props) {
     const { mergedClsPrefixRef, mergedBorderedRef, namespaceRef } =
       useConfig(props)
-    const NForm = inject(formInjectionKey, null)
     const themeRef = useTheme(
       'Select',
       'Select',
@@ -202,13 +199,6 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const mergedDisabledRef = computed(() => {
-      if (props.disabled !== undefined) {
-        return props.disabled
-      } else {
-        return NForm?.disabled
-      }
-    })
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -322,6 +312,7 @@ export default defineComponent({
     })
 
     const formItem = useFormItem(props)
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     function doUpdateValue (
       value: string | number | Array<string | number> | null
     ): void {
@@ -651,7 +642,7 @@ export default defineComponent({
       localizedPlaceholder: localizedPlaceholderRef,
       selectedOption: selectedOptionRef,
       selectedOptions: selectedOptionsRef,
-      mergedSize: formItem.mergedSizeRef,
+      mergedSize: mergedSizeRef,
       focused: focusedRef,
       handleMenuFocus,
       handleMenuBlur,

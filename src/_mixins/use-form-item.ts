@@ -7,6 +7,7 @@ import {
   InjectionKey,
   Ref
 } from 'vue'
+import { formInjectionKey } from '../form/src/interface'
 
 type FormItemSize = 'small' | 'medium' | 'large'
 type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge'
@@ -14,6 +15,7 @@ type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge'
 export interface FormItemInjection {
   path: Ref<string | undefined>
   mergedSize: ComputedRef<FormItemSize>
+  mergedDisabled: ComputedRef<boolean | undefined>
   restoreValidation: () => void
   handleContentBlur: () => void
   handleContentFocus: () => void
@@ -37,6 +39,7 @@ type UseFormItemProps<T> =
 
 export interface UseFormItem<T> {
   mergedSizeRef: ComputedRef<T>
+  mergedDisabledRef: ComputedRef<boolean | undefined>
   nTriggerFormBlur: () => void
   nTriggerFormChange: () => void
   nTriggerFormFocus: () => void
@@ -47,6 +50,7 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
   props: UseFormItemProps<T>,
   { defaultSize = 'medium', mergedSize }: UseFormItemOptions<T> = {}
 ): UseFormItem<T> {
+  const NForm = inject(formInjectionKey, null)
   const NFormItem = inject(formItemInjectionKey, null)
   provide(formItemInjectionKey, null)
   const mergedSizeRef = computed(
@@ -64,6 +68,14 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
           return defaultSize as T
         }
   )
+  const mergedDisabledRef = computed(() => {
+    const { disabled } = props as any
+    if (disabled !== undefined) {
+      return disabled
+    } else {
+      return NForm?.disabled
+    }
+  })
   onBeforeUnmount(() => {
     if (NFormItem) {
       NFormItem.restoreValidation()
@@ -71,6 +83,7 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
   })
   return {
     mergedSizeRef,
+    mergedDisabledRef,
     nTriggerFormBlur () {
       if (NFormItem) {
         NFormItem.handleContentBlur()

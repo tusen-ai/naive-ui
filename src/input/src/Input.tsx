@@ -15,13 +15,11 @@ import {
   WatchStopHandle,
   provide,
   InputHTMLAttributes,
-  TextareaHTMLAttributes,
-  inject
+  TextareaHTMLAttributes
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
-import { formInjectionKey } from '../../form/src/interface'
 import { NBaseClear, NBaseIcon, NBaseSuffix } from '../../_internal'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
@@ -142,7 +140,6 @@ export default defineComponent({
   props: inputProps,
   setup (props) {
     const { mergedClsPrefixRef, mergedBorderedRef } = useConfig(props)
-    const NForm = inject(formInjectionKey, null)
     const themeRef = useTheme(
       'Input',
       'Input',
@@ -169,21 +166,13 @@ export default defineComponent({
     )
     // form-item
     const formItem = useFormItem(props)
-    const { mergedSizeRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     // states
     const focusedRef = ref(false)
     const hoverRef = ref(false)
     const isComposingRef = ref(false)
     const activatedRef = ref(false)
     let syncSource: string | null = null
-    // disabled
-    const mergedDisabledRef = computed(() => {
-      if (props.disabled !== undefined) {
-        return props.disabled
-      } else {
-        return NForm?.disabled
-      }
-    })
     // placeholder
     const mergedPlaceholderRef = computed<[string, string] | [string]>(() => {
       const { placeholder, pair } = props
