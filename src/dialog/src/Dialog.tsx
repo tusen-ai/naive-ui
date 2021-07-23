@@ -245,7 +245,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-dialog__content`}>
           {renderSlot($slots, 'default', undefined, () => [render(content)])}
         </div>
-        {($slots.action || positiveText || negativeText || action) ? (
+        {$slots.action || positiveText || negativeText || action ? (
           <div class={`${mergedClsPrefix}-dialog__action`}>
             {renderSlot(
               $slots,

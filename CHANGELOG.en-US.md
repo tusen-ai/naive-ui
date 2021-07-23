@@ -17,6 +17,7 @@
 - `n-mention` add `empty` slot.
 - `useDialog` option add `on-mask-click` prop, closes [#419](https://github.com/TuSimple/naive-ui/issues/419).
 - `n-space` `justify` prop supports `center`, `space-around` and `space-between`.
+- `n-date-picker` add `close-on-select` prop, closes [#541](https://github.com/TuSimple/naive-ui/issues/541).
 - `n-dialog` add `action` prop, closes [#550](https://github.com/TuSimple/naive-ui/issues/550).
 - `n-mention`’s `option.label` support render function.
 - `n-color-picker` add `actions` prop, closes [#319](https://github.com/TuSimple/naive-ui/issues/319).

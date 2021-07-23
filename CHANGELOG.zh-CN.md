@@ -17,6 +17,7 @@
 - `n-mention` 新增 `empty` slot
 - `useDialog` 选项新增 `on-mask-click`属性, 关闭 [#419](https://github.com/TuSimple/naive-ui/issues/419)
 - `n-space` `justify` 属性支持 `center`、`space-around` 和 `space-between`
+- `n-date-picker` 新增 `close-on-select` 属性, 关闭 [#541](https://github.com/TuSimple/naive-ui/issues/541)
 - `n-dialog` 新增 `action` 属性，关闭 [#550](https://github.com/TuSimple/naive-ui/issues/550)
 - `n-mention` 的 `option.label` 支持使用渲染函数
 - `n-color-picker` 新增 `actions` 属性，关闭 [#319](https://github.com/TuSimple/naive-ui/issues/319)

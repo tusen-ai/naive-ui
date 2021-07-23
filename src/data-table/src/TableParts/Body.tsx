@@ -541,7 +541,10 @@ export default defineComponent({
                 )
               })
               const props = rowProps ? rowProps(rowData, rowIndex) : undefined
-              const mergedRowClassName = typeof rowClassName === 'string' ? rowClassName : createRowClassName(rowData, rowIndex, rowClassName)
+              const mergedRowClassName =
+                typeof rowClassName === 'string'
+                  ? rowClassName
+                  : createRowClassName(rowData, rowIndex, rowClassName)
               const row = (
                 <tr
                   onMouseenter={() => {
