@@ -10,8 +10,8 @@ export * from './composables'
 
 // component themes
 export * from './styles'
-// composed global theme, createTheme from component themes util
-export { darkTheme, createTheme } from './themes'
+// composed global themes, createTheme from component themes util
+export { lightTheme, darkTheme, createTheme } from './themes'
 
 export { c, cE, cM, cB, cNotM } from './_utils/cssr'
 

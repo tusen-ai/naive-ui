@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- Export `lightTheme` theme object (to match `darkTheme`)
+
 ## 2.15.6 (2021-07-23)
 
 ### Feats
