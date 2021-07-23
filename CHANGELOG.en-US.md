@@ -9,7 +9,7 @@
 - `n-checkbox-group` add `min` and `max` prop.
 - `n-mention` add `empty` slot.
 - `n-space` `justify` prop supports `center`, `space-around` and `space-between`.
-- `n-date-picker` add `close-on-selected` prop, closes [#541](https://github.com/TuSimple/naive-ui/issues/541).
+- `n-date-picker` add `close-on-select` prop, closes [#541](https://github.com/TuSimple/naive-ui/issues/541).
 
 ### Fixes
 
