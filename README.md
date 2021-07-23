@@ -17,6 +17,7 @@
 
 - [Discord](https://discord.gg/Pqv7Mev5Dd)
 - DingTalk Group 33482509
+- [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
 ## Features
 

@@ -84,17 +84,11 @@ function genScript (demoInfos, components = [], url, forceShowAnchor) {
   const showAnchor = !!(demoInfos.length || forceShowAnchor)
   const importStmts = demoInfos
     .map(({ variable, fileName }) => `import ${variable} from './${fileName}'`)
-    .concat(
-      components.map(
-        ({ importStmt }) => importStmt
-      )
-    )
+    .concat(components.map(({ importStmt }) => importStmt))
     .join('\n')
   const componentStmts = demoInfos
     .map(({ variable }) => variable)
-    .concat(components.map(
-      ({ ids }) => ids
-    ).flat())
+    .concat(components.map(({ ids }) => ids).flat())
     .join(',\n')
   const script = `<script>
 ${importStmts}
@@ -157,11 +151,11 @@ async function convertMd2ComponentDocumentation (
         if (!ids.trim()) throw new Error('No component id')
         if (!importStmt.trim()) throw new Error('No component source url')
         return {
-          ids: ids.split(',').map(id => id.trim()),
+          ids: ids.split(',').map((id) => id.trim()),
           importStmt: importStmt.trim()
         }
       })
-      .filter(({ids, importStmt}) => ids && importStmt)
+      .filter(({ ids, importStmt }) => ids && importStmt)
     tokens.splice(componentsIndex, 1)
   }
   // add edit on github button on title

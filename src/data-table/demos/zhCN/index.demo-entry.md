@@ -60,7 +60,7 @@ tree
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |
 | scroll-x | `number \| string` | `undefined` | 表格内容的横向宽度，如果列被水平固定了，则需要设定它 |
-| single-column | `boolean` | `false` | 是否展示为一列（true 时每一列都有 border-bottom） |
+| single-column | `boolean` | `false` | 是否展示为一列（true 时每一列都有 border-right） |
 | single-line | `boolean` | `true` | 是否展示为一行（true 时每一行都有 border-bottom） |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |
 | summary | `CreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#CreateSummary-Type">CreateSummary Type</n-a> |

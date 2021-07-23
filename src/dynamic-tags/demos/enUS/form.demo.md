@@ -9,12 +9,14 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      model: {
+      model: ref({
         tags: ['teacher', 'programmer']
-      },
+      }),
       rules: {
         tags: {
           trigger: ['change'],
@@ -26,5 +28,5 @@ export default {
       }
     }
   }
-}
+})
 ```

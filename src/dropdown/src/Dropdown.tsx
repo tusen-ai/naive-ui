@@ -10,8 +10,7 @@ import {
   CSSProperties,
   InjectionKey,
   Ref,
-  mergeProps,
-  VNodeChild
+  mergeProps
 } from 'vue'
 import { createTreeMate, Key, TreeMateOptions, TreeNode } from 'treemate'
 import { useMergedState, useKeyboard, useMemo } from 'vooks'
@@ -40,7 +39,11 @@ import {
   DropdownOption,
   DropdownMixedOption,
   OnUpdateValue,
-  OnUpdateValueImpl
+  OnUpdateValueImpl,
+  RenderLabel,
+  RenderIcon,
+  RenderLabelImpl,
+  RenderIconImpl
 } from './interface'
 
 const treemateOptions: TreeMateOptions<
@@ -59,9 +62,9 @@ DropdownIgnoredOption
   }
 }
 
-export type RenderLabelImpl = (option: DropdownMixedOption) => VNodeChild
 export interface DropdownInjection {
   renderLabelRef: Ref<RenderLabelImpl | undefined>
+  renderIconRef: Ref<RenderIconImpl | undefined>
   hoverKeyRef: Ref<Key | null>
   keyboardKeyRef: Ref<Key | null>
   lastToggledSubmenuKeyRef: Ref<Key | null>
@@ -101,7 +104,8 @@ const dropdownBaseProps = {
   },
   // for menu, not documented
   value: [String, Number] as PropType<Key | null>,
-  renderLabel: Function as PropType<RenderLabelImpl>
+  renderLabel: Function as PropType<RenderLabel>,
+  renderIcon: Function as PropType<RenderIcon>
 } as const
 
 const popoverPropKeys = Object.keys(popoverBaseProps) as Array<
@@ -201,7 +205,12 @@ export default defineComponent({
     )
 
     provide(dropdownInjectionKey, {
-      renderLabelRef: toRef(props, 'renderLabel'),
+      renderLabelRef: toRef(props, 'renderLabel') as Ref<
+      RenderLabelImpl | undefined
+      >,
+      renderIconRef: toRef(props, 'renderIcon') as Ref<
+      RenderIconImpl | undefined
+      >,
       hoverKeyRef: hoverKeyRef,
       keyboardKeyRef: keyboardKeyRef,
       lastToggledSubmenuKeyRef: lastToggledSubmenuKeyRef,

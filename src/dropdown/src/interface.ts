@@ -1,4 +1,5 @@
 import { TreeNode } from 'treemate'
+import { VNodeChild } from 'vue'
 import { MenuOption, MenuGroupOption } from '../../menu/src/interface'
 
 export type Key = string | number
@@ -11,10 +12,15 @@ export interface DropdownIgnoredOption {
   type: 'ignored' | 'divider'
   [key: string]: unknown
 }
+
 export type DropdownMixedOption =
   | DropdownOption
   | DropdownGroupOption
   | DropdownIgnoredOption
+
+export type DropdownIntersectionOption = DropdownOption &
+DropdownGroupOption &
+DropdownIgnoredOption
 
 export interface DropdownDividerOption {
   key: Key
@@ -43,8 +49,17 @@ export type OnUpdateValueImpl = <T extends string | number | (string | number)>(
   value: T,
   option: DropdownOption
 ) => void
+
 export type OnUpdateKeysImpl = <
   T extends string[] | number[] | Array<string | number>
 >(
   keys: T
 ) => void
+
+export type RenderLabelImpl = (option: DropdownMixedOption) => VNodeChild
+
+export type RenderLabel = (option: DropdownIntersectionOption) => VNodeChild
+
+export type RenderIconImpl = (option: DropdownMixedOption) => VNodeChild
+
+export type RenderIcon = (option: DropdownIntersectionOption) => VNodeChild
