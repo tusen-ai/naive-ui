@@ -105,14 +105,10 @@ export default defineComponent({
         if (slotEl) slotEl.style.transition = 'none'
       }
       const { offsetHeight, offsetWidth } = linkTitleEl
-      const {
-        top: linkTitleClientTop,
-        left: linkTitleClientLeft
-      } = linkTitleEl.getBoundingClientRect()
-      const {
-        top: anchorClientTop,
-        left: anchorClientLeft
-      } = selfEl.getBoundingClientRect()
+      const { top: linkTitleClientTop, left: linkTitleClientLeft } =
+        linkTitleEl.getBoundingClientRect()
+      const { top: anchorClientTop, left: anchorClientLeft } =
+        selfEl.getBoundingClientRect()
       const offsetTop = linkTitleClientTop - anchorClientTop
       const offsetLeft = linkTitleClientLeft - anchorClientLeft
       barEl.style.top = `${offsetTop}px`
@@ -133,10 +129,12 @@ export default defineComponent({
     function setActiveHref (href: string, transition = true): void {
       const idMatchResult = /^#([^#]+)$/.exec(href)
       if (!idMatchResult) return
-      const linkEl = document.getElementById(idMatchResult[1])
-      if (!linkEl) return
+      const linkEls = document.querySelectorAll('#' + idMatchResult[1])
+      if (!linkEls.length) return
       activeHrefRef.value = href
-      linkEl.scrollIntoView()
+      linkEls.forEach((linkEl) => {
+        linkEl.scrollIntoView()
+      })
       if (!transition) {
         disableTransitionOneTick()
       }
@@ -154,13 +152,18 @@ export default defineComponent({
       collectedLinkHrefs.forEach((href) => {
         const idMatchResult = /#([^#]+)$/.exec(href)
         if (!idMatchResult) return
-        const linkEl = document.getElementById(idMatchResult[1])
-        if (linkEl && offsetTarget) {
-          const { top, height } = getOffset(linkEl, offsetTarget)
-          links.push({
-            top,
-            height,
-            href
+        const linkEls = document.querySelectorAll('#' + idMatchResult[1])
+        if (linkEls.length && offsetTarget) {
+          linkEls.forEach((linkEl) => {
+            const { top, height } = getOffset(
+              linkEl as HTMLElement,
+              offsetTarget
+            )
+            links.push({
+              top,
+              height,
+              href
+            })
           })
         }
       })

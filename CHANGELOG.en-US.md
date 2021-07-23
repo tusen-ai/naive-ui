@@ -24,6 +24,7 @@
 - Fix `n-dialog` display an empty button when `positive-text` is not set, closes [#549](https://github.com/TuSimple/naive-ui/issues/549).
 - Fix `n-pagination` `PaginationInfo`'s `endIndex` data error, closes [#584](https://github.com/TuSimple/naive-ui/issues/584).
 - Fix `n-data-table` `rowClassName` doesn't work when type is string, closes [#582](https://github.com/TuSimple/naive-ui/issues/582).
+- Fix when `n-drawer` has the href corresponding to `n-anchor-link` inside and outside, clicking on `n-anchor-link` will navigate to the position of the corresponding element outside `n-drawer`, but will not navigate to the corresponding position of the element inside `n-drawer`, and `n-anchor-link` lose the active style, closes [#599](https://github.com/TuSimple/naive-ui/issues/599).
 
 ## 2.15.5 (2021-07-16)
 

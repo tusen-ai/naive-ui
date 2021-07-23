@@ -24,6 +24,7 @@
 - 修复 `n-dialog` `positive-text` 为空仍然显示按钮，关闭 [#549](https://github.com/TuSimple/naive-ui/issues/549)
 - 修复 `n-pagination` `PaginationInfo` 的 `endIndex` 数据错误，关闭 [#584](https://github.com/TuSimple/naive-ui/issues/584)
 - 修复 `n-data-table` `rowClassName` 的类型是 string 的时候不生效问题，关闭 [#582](https://github.com/TuSimple/naive-ui/issues/582)
+- 修复 当 `n-drawer` 内外都有 `n-anchor-link` 对应的 href 时，点击 `n-anchor-link` 会导航到 `n-drawer` 外对应元素的位置，但不会导航到 `n-drawer` 内元素的对应位置，且`n-anchor-link` 触发样式丢失问题，关闭 [#599](https://github.com/TuSimple/naive-ui/issues/599)
 
 ## 2.15.5 (2021-07-16)
 
