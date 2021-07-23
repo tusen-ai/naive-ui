@@ -14,10 +14,10 @@ unix
 
 ## Props
 
-| Name   | Type                                 | Default      | Description |
-| ------ | ------------------------------------ | ------------ | ----------- |
-| format | `string`                             | `undefined`  |             |
-| time   | `number \| Date`                     | `Date.now()` |             |
-| to     | `number \| Date`                     | `Date.now()` |             |
-| type   | `'relative' \| 'date' \| 'datetime'` | `'datetime'` |             |
-| unix   | `boolean`                            | `false`      |             |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| format | `string` | `undefined` | Time format. |
+| time | `number \| Date` | `Date.now()` | Time. |
+| to | `number \| Date` | `Date.now()` | Target time. |
+| type | `'relative' \| 'date' \| 'datetime'` | `'datetime'` | Time type. |
+| unix | `boolean` | `false` | `unix` timestamp. |
