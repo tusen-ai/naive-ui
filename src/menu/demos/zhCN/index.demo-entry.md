@@ -26,9 +26,9 @@ long-label
 | collapsed-icon-size | `number` | `24` | 菜单折叠时图标的大小，如果为设定则使用 `icon-size` 代替 |
 | collapsed-width | `number` | `48` | 折叠后菜单的宽度 |
 | collapsed | `boolean` | `false` | 菜单是否折叠，值在菜单为垂直时有用 |
-| default-expand-all | `boolean` | `false` |  |
+| default-expand-all | `boolean` | `false` | 是否展开全部菜单 |
 | default-expanded-keys | `Array<string>` | `[]` | 在非受控状态下默认展开的子菜单标识符数组 |
-| default-value | `string \| null` | `null` |  |
+| default-value | `string \| null` | `null` | 非受控模式下的默认值 |
 | dropdown-placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | 仅在 `mode='horizontal'` 模式下生效 |
 | expanded-keys | `Array<string>` | `undefined` | 展开的子菜单标识符数组，如果设定了，菜单的展开将会进入受控状态，`default-expanded-keys` 不会生效 |
 | icon-size | `number` | `20` | 菜单未折叠时图标的大小 |
