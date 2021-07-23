@@ -7,6 +7,7 @@
 ## 演示
 
 ```demo
+disabled
 inline
 custom-rule
 custom-validation

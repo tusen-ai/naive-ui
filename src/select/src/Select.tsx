@@ -9,7 +9,8 @@ import {
   watch,
   Transition,
   withDirectives,
-  vShow
+  vShow,
+  inject
 } from 'vue'
 import { happensIn } from 'seemly'
 import { createTreeMate } from 'treemate'
@@ -22,6 +23,7 @@ import {
 } from 'vueuc'
 import { useIsMounted, useMergedState, useCompitable } from 'vooks'
 import { clickoutside } from 'vdirs'
+import { formInjectionKey } from '../../form/src/interface'
 import {
   RenderLabel,
   RenderOption
@@ -77,7 +79,10 @@ const selectProps = {
   multiple: Boolean,
   size: String as PropType<Size>,
   filterable: Boolean,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   remote: Boolean,
   loading: Boolean,
   filter: {
@@ -188,6 +193,7 @@ export default defineComponent({
   setup (props) {
     const { mergedClsPrefixRef, mergedBorderedRef, namespaceRef } =
       useConfig(props)
+    const NForm = inject(formInjectionKey, null)
     const themeRef = useTheme(
       'Select',
       'Select',
@@ -196,6 +202,13 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const mergedDisabledRef = computed(() => {
+      if (props.disabled !== undefined) {
+        return props.disabled
+      } else {
+        return NForm?.disabled
+      }
+    })
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -364,7 +377,7 @@ export default defineComponent({
     }
     // menu related methods
     function openMenu (): void {
-      if (!props.disabled) {
+      if (!mergedDisabledRef.value) {
         patternRef.value = ''
         uncontrolledShowRef.value = true
         if (props.filterable) {
@@ -379,7 +392,7 @@ export default defineComponent({
       patternRef.value = ''
     }
     function handleTriggerClick (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (!mergedShowRef.value) {
         openMenu()
       } else {
@@ -444,7 +457,7 @@ export default defineComponent({
       }
     }
     function handleToggleOption (option: SelectBaseOption): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       const { tag, remote } = props
       if (tag && !remote) {
         const { value: beingCreatedOptions } = beingCreatedOptionsRef
@@ -628,6 +641,7 @@ export default defineComponent({
       triggerRef,
       menuRef,
       pattern: patternRef,
+      mergedDisabled: mergedDisabledRef,
       uncontrolledShow: uncontrolledShowRef,
       mergedShow: mergedShowRef,
       adjustedTo: useAdjustedTo(props),
@@ -694,7 +708,7 @@ export default defineComponent({
                       renderLabel={this.renderLabel}
                       filterable={this.filterable}
                       clearable={this.clearable}
-                      disabled={this.disabled}
+                      disabled={this.mergedDisabled}
                       size={this.mergedSize}
                       theme={this.mergedTheme.peers.InternalSelection}
                       themeOverrides={
