@@ -1,6 +1,6 @@
 # 使用 Checkbox 选择
 
-想达到 demo 的效果，`checkable`、`cascade`、`multiple` 三兄弟缺一不可
+想达到 demo 的效果，`checkable`、`cascade`、`multiple` 需要同时设定。
 
 ```html
 <n-tree-select
