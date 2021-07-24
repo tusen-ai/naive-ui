@@ -7,10 +7,13 @@ I have a Nintendo Switch, but have no time to play. It always make me recall the
 ```demo
 basic
 size
+content
 event
 ```
 
-## Props
+## API
+
+### Switch Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -19,3 +22,10 @@ event
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of switch. |
 | value | `boolean` | `undefined` | Value in controlled mode. |
 | on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |
+
+### Switch Slots
+
+| Name      | Parameters | Description                             |
+| --------- | ---------- | --------------------------------------- |
+| checked   | `()`       | Content when the switch is checked.     |
+| unchecked | `()`       | Content when the switch is not checked. |

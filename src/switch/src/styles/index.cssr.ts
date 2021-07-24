@@ -18,7 +18,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --box-shadow-focus
 export default cB('switch', `
   height: var(--height);
-  width: var(--width);
+  min-width: var(--width);
   vertical-align: middle;
   user-select: none;
   display: inline-flex;
@@ -26,6 +26,41 @@ export default cB('switch', `
   justify-content: center;
   align-items: center;
 `, [
+  cE('children-placeholder', `
+    height: var(--rail-height);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    pointer-events: none;
+    visibility: hidden;
+  `),
+  cE('rail-placeholder', `
+    display: flex;
+    flex-wrap: none;
+  `),
+  cE('button-placeholder', `
+    width: calc(1.75 * var(--rail-height));
+    height: var(--rail-height);
+  `),
+  cE('checked, unchecked', `
+    color: white;
+    box-sizing: border-box;
+    position: absolute;
+    white-space: nowrap;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+  `),
+  cE('checked', `
+    right: 0;
+    padding-right: calc(1.25 * var(--rail-height) - var(--offset));
+  `),
+  cE('unchecked', `
+    left: 0;
+    justify-content: flex-end;
+    padding-left: calc(1.25 * var(--rail-height) - var(--offset));
+  `),
   c('&:focus', [
     cE('rail', `
       box-shadow: var(--box-shadow-focus);
@@ -35,7 +70,7 @@ export default cB('switch', `
     cE('rail', {
       borderRadius: 'calc(var(--rail-height) / 2)'
     }, [
-      c('&::before', {
+      cE('button', {
         borderRadius: 'calc(var(--button-height) / 2)'
       })
     ])
@@ -43,41 +78,46 @@ export default cB('switch', `
   cNotM('disabled', [
     cM('pressed', [
       cE('rail', [
-        c('&::before', {
+        cE('button', {
           maxWidth: 'var(--button-width-pressed)'
         })
       ])
     ]),
     cE('rail', [
-      c('&:active::before', {
-        maxWidth: 'var(--button-width-pressed)'
-      })
+      c('&:active', [
+        cE('button', {
+          maxWidth: 'var(--button-width-pressed)'
+        })
+      ])
     ]),
     cM('active', [
       cM('pressed', [
         cE('rail', [
-          c('&::before', {
+          cE('button', {
             left: 'calc(100% - var(--offset) - var(--button-width-pressed))'
           })
         ])
       ]),
       cE('rail', [
-        c('&:active::before', {
-          left: 'calc(100% - var(--offset) - var(--button-width-pressed))'
-        })
+        c('&:active', [
+          cE('button', {
+            left: 'calc(100% - var(--offset) - var(--button-width-pressed))'
+          })
+        ])
       ])
     ])
   ]),
   cM('active', [
     cE('rail', [
-      c('&::before', {
+      cE('button', {
         left: 'calc(100% - (var(--rail-height) + var(--button-width)) / 2)'
       })
     ])
   ]),
   cE('rail', `
+    overflow: hidden;
     height: var(--rail-height);
-    width: var(--rail-width);
+    min-width: var(--rail-width);
     border-radius: var(--rail-border-radius);
     cursor: pointer;
     position: relative;
@@ -86,7 +126,7 @@ export default cB('switch', `
       box-shadow .3s var(--bezier);
     background-color: var(--rail-color);
   `, [
-    c('&::before', `
+    cE('button', `
       top: var(--offset);
       left: var(--offset);
       height: var(--button-width);

@@ -7,10 +7,15 @@
 ```demo
 basic
 size
+content
 event
 ```
 
-## Props
+## API
+
+### Props
+
+### Switch Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -19,3 +24,10 @@ event
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 开关大小 |
 | value | `boolean` | `undefined` | 受控模式下的值 |
 | on-update:value | `(value: boolean) => void` | `undefined` | 组件值发生变化的回调 |
+
+### Switch Slots
+
+| 名称      | 参数 | 说明             |
+| --------- | ---- | ---------------- |
+| checked   | `()` | 开关激活时的内容 |
+| unchecked | `()` | 开关关闭时的内容 |

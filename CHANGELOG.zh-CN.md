@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-time-picker` 增加 `actions` 属性, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
+- `n-switch` 增加 `checked`、`unchecked` 插槽
 
 ## 2.15.6 (2021-07-23)
 

@@ -191,7 +191,8 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, mergedValue } = this
+    const { mergedClsPrefix, mergedValue, $slots } = this
+    const { checked: checkedSlot, unchecked: uncheckedSlot } = $slots
     return (
       <div
         role="switch"
@@ -213,7 +214,31 @@ export default defineComponent({
         onKeyup={this.handleKeyup}
         onKeydown={this.handleKeydown}
       >
-        <div class={`${mergedClsPrefix}-switch__rail`} aria-hidden="true" />
+        <div class={`${mergedClsPrefix}-switch__rail`} aria-hidden="true">
+          {(checkedSlot || uncheckedSlot) && (
+            <div
+              aria-hidden
+              class={`${mergedClsPrefix}-switch__children-placeholder`}
+            >
+              <div class={`${mergedClsPrefix}-switch__rail-placeholder`}>
+                <div class={`${mergedClsPrefix}-switch__button-placeholder`} />
+                {checkedSlot?.()}
+              </div>
+              <div class={`${mergedClsPrefix}-switch__rail-placeholder`}>
+                <div class={`${mergedClsPrefix}-switch__button-placeholder`} />
+                {uncheckedSlot?.()}
+              </div>
+            </div>
+          )}
+          <div class={`${mergedClsPrefix}-switch__button`}>
+            <div class={`${mergedClsPrefix}-switch__checked`}>
+              {checkedSlot?.()}
+            </div>
+            <div class={`${mergedClsPrefix}-switch__unchecked`}>
+              {uncheckedSlot?.()}
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

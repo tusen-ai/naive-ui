@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-time-picker` add `actions` prop, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
+- `n-switch` add `checked`, `unchecked` slots.
 
 ## 2.15.6 (2021-07-23)
 
