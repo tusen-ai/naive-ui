@@ -13,7 +13,8 @@ import {
   nextTick,
   withDirectives,
   vShow,
-  watchEffect
+  watchEffect,
+  onMounted
 } from 'vue'
 import { VResizeObserver, VXScroll, VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
@@ -28,6 +29,11 @@ import { Addable, OnClose, OnCloseImpl, tabsInjectionKey } from './interface'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import style from './styles/index.cssr'
 import Tab from './Tab'
+import { NBaseIcon } from '../../_internal'
+import {
+  ChevronRightIcon as RightArrowIcon,
+  ChevronLeftIcon as LeftArrowIcon
+} from '../../_internal/icons'
 
 const tabsProps = {
   ...(useTheme.props as ThemeProps<TabsTheme>),
@@ -147,8 +153,13 @@ export default defineComponent({
       }
     })
 
+    const scrollableRef = ref(false)
+
     watch(mergedValueRef, () => {
       updateCurrentBarStyle()
+    })
+    onMounted(() => {
+      deriveScrollable(xScrollInstRef.value?.$el)
     })
 
     function getCurrentEl (): HTMLElement | null {
@@ -199,6 +210,8 @@ export default defineComponent({
     function handleClose (panelName: string | number): void {
       const { onClose } = props
       if (onClose) call(onClose as OnCloseImpl, panelName)
+
+      deriveScrollable(xScrollInstRef.value?.$el)
     }
 
     let firstTimeUpdatePosition = true
@@ -218,6 +231,7 @@ export default defineComponent({
         // since deriveScrollShadow will force layout
         deriveScrollShadow(xScrollInstRef.value?.$el)
         barEl.classList.remove(disableTransitionClassName)
+        deriveScrollable(xScrollInstRef.value?.$el)
       }
     }, 64)
 
@@ -257,6 +271,7 @@ export default defineComponent({
           behavior: 'smooth'
         })
       })
+      deriveScrollable(xScrollInstRef.value?.$el)
     }
 
     function deriveScrollShadow (el: HTMLElement | null): void {
@@ -264,6 +279,49 @@ export default defineComponent({
       const { scrollLeft, scrollWidth, offsetWidth } = el
       leftReachedRef.value = scrollLeft <= 0
       rightReachedRef.value = scrollLeft + offsetWidth >= scrollWidth
+    }
+
+    function deriveScrollable (el: HTMLElement | null): void {
+      if (!el) return
+      void nextTick(() => {
+        const { scrollWidth, offsetWidth } = el
+        scrollableRef.value = scrollWidth > offsetWidth
+      })
+    }
+
+    function handleScrollPrev (): void {
+      const { value: xScrollInst } = xScrollInstRef
+      const { scrollLeft, offsetWidth } = xScrollInst?.$el
+
+      if (!scrollableRef.value || !xScrollInst || scrollLeft === 0) return
+
+      xScrollInst.scrollTo({
+        left: scrollLeft > offsetWidth ? scrollLeft - offsetWidth : 0,
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
+
+    function handleScrollNext (): void {
+      const { value: xScrollInst } = xScrollInstRef
+      const { scrollLeft, offsetWidth, scrollWidth } = xScrollInst?.$el
+
+      if (
+        !scrollableRef.value ||
+        !xScrollInst ||
+        parseInt(scrollLeft) + parseInt(offsetWidth) === scrollWidth
+      ) {
+        return
+      }
+
+      xScrollInst.scrollTo({
+        left:
+          scrollWidth - scrollLeft > offsetWidth * 2
+            ? parseInt(scrollLeft) + parseInt(offsetWidth)
+            : scrollWidth,
+        top: 0,
+        behavior: 'smooth'
+      })
     }
 
     const handleScroll = throttle((e: Event) => {
@@ -316,6 +374,9 @@ export default defineComponent({
       mergedSize: compitableSizeRef,
       handleScroll,
       handleTabsResize,
+      scrollable: scrollableRef,
+      handleScrollNext,
+      handleScrollPrev,
       cssVars: computed(() => {
         const { value: size } = compitableSizeRef
         const { type } = props
@@ -376,7 +437,8 @@ export default defineComponent({
       addTabFixed,
       addable,
       mergedSize,
-      $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot }
+      $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot },
+      scrollable
     } = this
     const children = defaultSlot
       ? flatten(defaultSlot()).filter((v) => {
@@ -400,6 +462,18 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-tabs-nav`}>
           {prefix ? (
             <div class={`${mergedClsPrefix}-tabs-nav__prefix`}>{prefix}</div>
+          ) : null}
+          {scrollable ? (
+            <span
+              class={`${mergedClsPrefix}-tabs-nav__prev`}
+              onClick={this.handleScrollPrev}
+            >
+              <NBaseIcon clsPrefix={mergedClsPrefix}>
+                {{
+                  default: () => <LeftArrowIcon />
+                }}
+              </NBaseIcon>
+            </span>
           ) : null}
           <VResizeObserver onResize={this.handleNavResize}>
             {{
@@ -485,6 +559,18 @@ export default defineComponent({
               )
             }}
           </VResizeObserver>
+          {scrollable ? (
+            <span
+              class={`${mergedClsPrefix}-tabs-nav__next`}
+              onClick={this.handleScrollNext}
+            >
+              <NBaseIcon clsPrefix={mergedClsPrefix}>
+                {{
+                  default: () => <RightArrowIcon />
+                }}
+              </NBaseIcon>
+            </span>
+          ) : null}
           {addTabFixed && addable && isCard
             ? createAddTag(addable, true)
             : null}

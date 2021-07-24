@@ -50,7 +50,14 @@ export default cB('tabs', `
       align-items: center;
     `),
     cE('prefix', 'padding-right: 16px;'),
-    cE('suffix', 'padding-left: 16px;')
+    cE('suffix', 'padding-left: 16px;'),
+    cE('prev, next', `
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      padding: 0 4px;
+    `)
   ]),
   cB('tabs-nav-scroll-wrapper', `
     flex: 1;
