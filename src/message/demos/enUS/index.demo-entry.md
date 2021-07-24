@@ -60,18 +60,18 @@ multiple-line
 
 | Name | Type | Description |
 | --- | --- | --- |
-| error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
-| info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
-| loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
-| success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
-| warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Error. |
+| info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Information. |
+| loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Loading. |
+| success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Success. |
+| warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Warning |
 
 #### MessageOption Properties
 
 | Name         | Type          | Description                               |
 | ------------ | ------------- | ----------------------------------------- |
-| closable     | `boolean`     |                                           |
-| duration     | `number`      |                                           |
+| closable     | `boolean`     | Is it allowed to close.                   |
+| duration     | `number`      | Message display time.                     |
 | icon         | `() => VNode` | Message icon.                             |
 | onAfterLeave | `() => void`  | Callback after message disappeared.       |
 | onClose      | `() => void`  | Callback when close icon is clicked.      |
@@ -81,19 +81,19 @@ multiple-line
 
 | Name | Type | Description |
 | --- | --- | --- |
-| closable | `boolean` |  |
+| closable | `boolean` | Is it allowed to close. |
 | content | `string \| (() => VNodeChild)` | Message content. |
-| destory | `() => void` |  |
+| destroy | `() => void` | Message destruction. |
 | icon | `() => VNode` | Message icon. |
-| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` |  |
+| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | Type. |
 | onAfterLeave | `() => void` | Callback after message disappeared. |
 | onLeave | `() => void` | Callback when message start to disappear. |
 
 #### MessageReactive Methods
 
-| Name    | Type | Description |
-| ------- | ---- | ----------- |
-| destroy | `()` |             |
+| Name    | Type | Description          |
+| ------- | ---- | -------------------- |
+| destroy | `()` | Message destruction. |
 
 ## Q & A
 

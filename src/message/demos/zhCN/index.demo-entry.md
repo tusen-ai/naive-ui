@@ -50,9 +50,9 @@ multiple-line
 
 ### MessageProvider Props
 
-| 名称 | 类型                    | 默认值   | 说明                   |
-| ---- | ----------------------- | -------- | ---------------------- |
-| to   | `string \| HTMLElement` | `'body'` | Message 容器节点的位置 |
+| 名称 | 类型                    | 默认值   | 说明               |
+| ---- | ----------------------- | -------- | ------------------ |
+| to   | `string \| HTMLElement` | `'body'` | 消息容器节点的位置 |
 
 ### MessageProvider Injection API
 
@@ -60,18 +60,18 @@ multiple-line
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
-| info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
-| loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
-| success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
-| warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 错误 |
+| info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 信息 |
+| loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 加载中 |
+| success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 成功 |
+| warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 警告 |
 
 #### MessageOption Properties
 
 | 名称         | 类型          | 说明                   |
 | ------------ | ------------- | ---------------------- |
-| closable     | `boolean`     |                        |
-| duration     | `number`      |                        |
+| closable     | `boolean`     | 是否允许关闭           |
+| duration     | `number`      | 消息显示时长           |
 | icon         | `() => VNode` | 信息图标               |
 | onAfterLeave | `() => void`  | 信息消失动画结束的回调 |
 | onClose      | `() => void`  | 点击关闭图标的回调     |
@@ -81,19 +81,19 @@ multiple-line
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| closable | `boolean` |  |
+| closable | `boolean` | 是否允许关闭 |
 | content | `string \| (() => VNodeChild)` | 信息内容 |
-| destory | `() => void` |  |
+| destroy | `() => void` | 消息销毁 |
 | icon | `() => VNode` | 信息图标 |
-| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` |  |
+| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | 类型 |
 | onAfterLeave | `() => void` | 信息消失动画结束的回调 |
 | onLeave | `() => void` | 信息开始消失的回调 |
 
 #### MessageReactive Methods
 
-| 名称    | 类型 | 说明 |
-| ------- | ---- | ---- |
-| destroy | `()` |      |
+| 名称    | 类型 | 说明     |
+| ------- | ---- | -------- |
+| destroy | `()` | 消息销毁 |
 
 ## Q & A
 
