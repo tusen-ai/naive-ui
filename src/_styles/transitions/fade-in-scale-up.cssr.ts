@@ -38,11 +38,11 @@ export default function ({
     }),
     c('&.fade-in-scale-up-transition-enter-from, &.fade-in-scale-up-transition-leave-to', {
       opacity: 0,
-      transform: `scale(${enterScale}) ${originalTransform}`
+      transform: `${originalTransform} scale(${enterScale})`
     }),
     c('&.fade-in-scale-up-transition-leave-from, &.fade-in-scale-up-transition-enter-to', {
       opacity: 1,
-      transform: `scale(${transformDebounceScale}) ${originalTransform}`
+      transform: `${originalTransform} scale(${transformDebounceScale})`
     })
   ]
 }
