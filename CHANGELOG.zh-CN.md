@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-time-picker` 增加 `actions` 属性, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
+- `n-mention` 新增 `render-label` 属性
 
 ## 2.15.6 (2021-07-23)
 

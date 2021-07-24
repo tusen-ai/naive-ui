@@ -10,6 +10,7 @@ textarea
 async
 autosize
 form
+render-label
 custom-prefix
 ```
 
@@ -31,6 +32,7 @@ Mention is provided after `v2.2.0`.
 | prefix | `string \| string[]` | `'@'` | Prefix char to trigger mentions whose length must be 1. |
 | placeholder | `string` | `''` | Input placeholder. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |
+| render-label | `undefined \| (option: MentionOption) => VNodeChild` | `undefined` | Render function of all the options' label. |
 | on-update:value | `(value: string) => void` | `undefined` | Triggered when the input box value is updated. |
 | on-select | `(option: MentionOption, prefix: string) => void` | `undefined` | Triggered when the input box is selected. |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Triggered when the input box gets focus. |

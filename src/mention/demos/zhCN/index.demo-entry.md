@@ -10,6 +10,7 @@ textarea
 async
 autosize
 form
+render-label
 custom-prefix
 ```
 
@@ -31,6 +32,7 @@ Mention 在 `v2.2.0` 及以后可用。
 | prefix | `string \| string[]` | `'@'` | 触发提及的前缀，长度必须为 1 |
 | placeholder | `string` | `''` | 输入框的占位符 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框的大小 |
+| render-label | `undefined \| (option: MentionOption) => VNodeChild` | `undefined` | 选项标签渲染函数 |
 | on-update:value | `(value: string) => void` | `undefined` | 输入框值发生更新时触发 |
 | on-select | `(option: MentionOption, prefix: string) => void` | `undefined` | 输入框的选中时触发 |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | 输入框获得焦点时触发 |

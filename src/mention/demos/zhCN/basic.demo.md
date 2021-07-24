@@ -29,7 +29,7 @@ export default defineComponent({
         },
         {
           label: (option) =>
-            h('span', null, [
+            h('div', { style: 'display: flex; align-items: center;' }, [
               h(
                 NIcon,
                 { style: 'margin-right: 5px' },
