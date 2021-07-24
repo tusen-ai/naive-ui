@@ -9,7 +9,13 @@ import {
 import { useCompitable } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, getSlot, getVNodeChildren, createKey, flatten } from '../../_utils'
+import {
+  warn,
+  getSlot,
+  getVNodeChildren,
+  createKey,
+  flatten
+} from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { descriptionsLight } from '../styles'
 import type { DescriptionsTheme } from '../styles'
@@ -82,14 +88,10 @@ export default defineComponent({
             borderRadius,
             lineHeight,
             [createKey('fontSize', size)]: fontSize,
-            [createKey(
-              bordered ? 'thPaddingBordered' : 'thPadding',
-              size
-            )]: thPadding,
-            [createKey(
-              bordered ? 'tdPaddingBordered' : 'tdPadding',
-              size
-            )]: tdPadding
+            [createKey(bordered ? 'thPaddingBordered' : 'thPadding', size)]:
+              thPadding,
+            [createKey(bordered ? 'tdPaddingBordered' : 'tdPadding', size)]:
+              tdPadding
           }
         } = themeRef.value
         return {

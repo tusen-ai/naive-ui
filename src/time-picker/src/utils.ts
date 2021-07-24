@@ -1,3 +1,5 @@
+import { MaybeArray } from '../../_utils'
+
 export const time = {
   hours: [
     '00',
@@ -154,4 +156,31 @@ export const time = {
 
 export function getFixValue (value: number): string {
   return `00${value}`.slice(-2)
+}
+
+export function getTimeUnits (
+  defaultValue: string[],
+  stepOrList: MaybeArray<number> | undefined
+): string[] {
+  if (Array.isArray(stepOrList)) {
+    return stepOrList.map((v) => Math.floor(v)).map((v) => getFixValue(v))
+  } else if (typeof stepOrList === 'number') {
+    return defaultValue.filter((hour) => Number(hour) % stepOrList === 0)
+  } else {
+    return defaultValue
+  }
+}
+
+export function isTimeInStep (
+  value: number,
+  type: 'hours' | 'minutes' | 'seconds',
+  stepOrList: MaybeArray<number> | undefined
+): boolean {
+  if (!stepOrList) {
+    return true
+  } else if (typeof stepOrList === 'number') {
+    return value % stepOrList === 0
+  } else {
+    return stepOrList.includes(value)
+  }
 }

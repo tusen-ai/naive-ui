@@ -2,7 +2,7 @@ import { h, ref, defineComponent, inject, PropType, computed } from 'vue'
 import { NScrollbar } from '../../scrollbar'
 import { NButton } from '../../button'
 import { NBaseFocusDetector } from '../../_internal'
-import { time, getFixValue } from './utils'
+import { getTimeUnits, time } from './utils'
 import {
   IsHourDisabled,
   IsMinuteDisabled,
@@ -12,103 +12,81 @@ import {
 import PanelCol, { Item } from './PanelCol'
 import { MaybeArray } from '../../_utils'
 
+const timePickerPanelProps = {
+  actions: {
+    type: Array as PropType<Array<'now' | 'confirm'>>,
+    default: () => ['now', 'confirm']
+  },
+  showHour: {
+    type: Boolean,
+    default: true
+  },
+  showMinute: {
+    type: Boolean,
+    default: true
+  },
+  showSecond: {
+    type: Boolean,
+    default: true
+  },
+  showPeriod: {
+    type: Boolean,
+    default: true
+  },
+  isHourInvalid: Boolean,
+  isMinuteInvalid: Boolean,
+  isSecondInvalid: Boolean,
+  isValueInvalid: Boolean,
+  hourValue: {
+    type: Number as PropType<number | null>,
+    default: null
+  },
+  minuteValue: {
+    type: Number as PropType<number | null>,
+    default: null
+  },
+  secondValue: {
+    type: Number as PropType<number | null>,
+    default: null
+  },
+  isHourDisabled: Function as PropType<IsHourDisabled>,
+  isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
+  isSecondDisabled: Function as PropType<IsSecondDisabled>,
+  onHourClick: {
+    type: Function as PropType<(value: number) => void>,
+    required: true
+  },
+  onMinuteClick: {
+    type: Function as PropType<(value: number) => void>,
+    required: true
+  },
+  onSecondClick: {
+    type: Function as PropType<(value: number) => void>,
+    required: true
+  },
+  onNowClick: Function as PropType<() => void>,
+  nowText: String,
+  confirmText: String,
+  transitionDisabled: Boolean,
+  onConfirmClick: Function as PropType<() => void>,
+  onFocusin: Function as PropType<(e: FocusEvent) => void>,
+  onFocusout: Function as PropType<(e: FocusEvent) => void>,
+  onFocusDetectorFocus: Function as PropType<() => void>,
+  onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
+  hours: [Number, Array] as PropType<MaybeArray<number>>,
+  minutes: [Number, Array] as PropType<MaybeArray<number>>,
+  seconds: [Number, Array] as PropType<MaybeArray<number>>
+}
+
 export default defineComponent({
   name: 'TimePickerPanel',
-  props: {
-    showHour: {
-      type: Boolean,
-      default: true
-    },
-    showMinute: {
-      type: Boolean,
-      default: true
-    },
-    showSecond: {
-      type: Boolean,
-      default: true
-    },
-    showPeriod: {
-      type: Boolean,
-      default: true
-    },
-    isHourInvalid: {
-      type: Boolean,
-      default: false
-    },
-    isMinuteInvalid: {
-      type: Boolean,
-      default: false
-    },
-    isSecondInvalid: {
-      type: Boolean,
-      default: false
-    },
-    isValueInvalid: {
-      type: Boolean,
-      default: false
-    },
-    hourValue: {
-      type: Number as PropType<number | null>,
-      default: null
-    },
-    minuteValue: {
-      type: Number as PropType<number | null>,
-      default: null
-    },
-    secondValue: {
-      type: Number as PropType<number | null>,
-      default: null
-    },
-    isHourDisabled: Function as PropType<IsHourDisabled>,
-    isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
-    isSecondDisabled: Function as PropType<IsSecondDisabled>,
-    onHourClick: {
-      type: Function as PropType<(value: number) => void>,
-      required: true
-    },
-    onMinuteClick: {
-      type: Function as PropType<(value: number) => void>,
-      required: true
-    },
-    onSecondClick: {
-      type: Function as PropType<(value: number) => void>,
-      required: true
-    },
-    onNowClick: Function as PropType<() => void>,
-    nowText: String,
-    confirmText: String,
-    transitionDisabled: {
-      type: Boolean,
-      default: false
-    },
-    onConfirmClick: Function as PropType<() => void>,
-    onFocusin: Function as PropType<(e: FocusEvent) => void>,
-    onFocusout: Function as PropType<(e: FocusEvent) => void>,
-    onFocusDetectorFocus: Function as PropType<() => void>,
-    onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
-    hours: [Number, Array] as PropType<MaybeArray<number>>,
-    minutes: [Number, Array] as PropType<MaybeArray<number>>,
-    seconds: [Number, Array] as PropType<MaybeArray<number>>
-  },
+  props: timePickerPanelProps,
   setup (props) {
     const {
       mergedThemeRef,
       mergedClsPrefixRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(timePickerInjectionKey)!
-
-    function getTimeUnits (
-      defaultValue: string[],
-      stepOrList: MaybeArray<number> | undefined
-    ): string[] {
-      if (Array.isArray(stepOrList)) {
-        return stepOrList.map((v) => Math.floor(v)).map((v) => getFixValue(v))
-      } else if (typeof stepOrList === 'number') {
-        return defaultValue.filter((hour) => Number(hour) % stepOrList === 0)
-      } else {
-        return defaultValue
-      }
-    }
 
     const hoursRef = computed<Item[]>(() => {
       const { isHourDisabled, hours } = props
@@ -273,25 +251,29 @@ export default defineComponent({
           ) : null}
         </div>,
         <div class={`${mergedClsPrefix}-time-picker-actions`}>
-          <NButton
-            size="tiny"
-            theme={mergedTheme.peers.Button}
-            themeOverrides={mergedTheme.peerOverrides.Button}
-            onClick={this.onNowClick}
-          >
-            {{ default: () => this.nowText }}
-          </NButton>
-          <NButton
-            size="tiny"
-            type="primary"
-            class={`${mergedClsPrefix}-time-picker-actions__confirm`}
-            theme={mergedTheme.peers.Button}
-            themeOverrides={mergedTheme.peerOverrides.Button}
-            disabled={this.isValueInvalid}
-            onClick={this.onConfirmClick}
-          >
-            {{ default: () => this.confirmText }}
-          </NButton>
+          {this.actions?.includes('now') ? (
+            <NButton
+              size="tiny"
+              theme={mergedTheme.peers.Button}
+              themeOverrides={mergedTheme.peerOverrides.Button}
+              onClick={this.onNowClick}
+            >
+              {{ default: () => this.nowText }}
+            </NButton>
+          ) : null}
+          {this.actions?.includes('confirm') ? (
+            <NButton
+              size="tiny"
+              type="primary"
+              class={`${mergedClsPrefix}-time-picker-actions__confirm`}
+              theme={mergedTheme.peers.Button}
+              themeOverrides={mergedTheme.peerOverrides.Button}
+              disabled={this.isValueInvalid}
+              onClick={this.onConfirmClick}
+            >
+              {{ default: () => this.confirmText }}
+            </NButton>
+          ) : null}
         </div>,
         <NBaseFocusDetector onFocus={this.onFocusDetectorFocus} />
       ]

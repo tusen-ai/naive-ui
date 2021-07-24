@@ -67,6 +67,7 @@ update-on-close
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | 时间禁用的校验函数 |
 | ranges | `Record<string, [number, number]>` | `undefined` | 用户自定义的快捷选择范围 |
+| close-on-select | `boolean` | `false` | 用户选择时间范围后是否自动关闭面板 |
 | separator | `string` | `'至'` | start 选框与 end 选框之间的分隔符 |
 | start-placeholder | `string` | `'开始日期'` | DateRange 中 start 选框的提示信息 |
 | update-value-on-close | `boolean` | `false` | 关闭面板时是否更新值 |

@@ -60,7 +60,7 @@ tree
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |
-| single-column | `boolean` | `false` | Whether to display as a column (when true, each column has border-bottom). |
+| single-column | `boolean` | `false` | Whether to display as a column (when true, each column has border-right). |
 | single-line | `boolean` | `true` | Whether to display as a line (when true, each row has border-bottom). |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |
 | summary | `CreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#CreateSummary-Type">CreateSummary Type</n-a>. |
