@@ -8,6 +8,10 @@
 - `n-switch` add `checked`, `unchecked` slots.
 - `n-switch` add `loading` prop, closes [#301](https://github.com/TuSimple/naive-ui/issues/301).
 
+### Fixes
+
+- Fix `n-carousel` arrow buttons cannot be displayed in a specific browser, closes [#625](https://github.com/TuSimple/naive-ui/issues/625).
+
 ## 2.15.6 (2021-07-23)
 
 ### Feats

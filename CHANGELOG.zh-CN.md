@@ -8,6 +8,10 @@
 - `n-switch` 增加 `checked`、`unchecked` 插槽
 - `n-switch` 增加 `loading` 属性，关闭 [#301](https://github.com/TuSimple/naive-ui/issues/301)
 
+### Fixes
+
+- 修复 `n-carousel` 中箭头按钮在特定浏览器下无法显示问题，关闭 `https://github.com/TuSimple/naive-ui/issues/625`
+
 ## 2.15.6 (2021-07-23)
 
 ### Feats
