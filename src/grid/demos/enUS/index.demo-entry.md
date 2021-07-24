@@ -22,8 +22,8 @@ collapse
 | collapsed | `boolean` | `false` | Whether to fold by default. |
 | collapsed-rows | `number` | `1` | The number of rows displayed by default. |
 | responsive | `'self' \| 'screen'` | `'screen'` | `'self'` triggers responsive layout by its own width. `'screen'` triggers responsive layout by viewport's witdh. |
-| x-gap | `number \| ResponsiveDescription` | `0` | Transverse spacing groove. |
-| y-gap | `number \| ResponsiveDescription` | `0` | Longitudinal interval exercise. |
+| x-gap | `number \| ResponsiveDescription` | `0` | Horizontal gap. |
+| y-gap | `number \| ResponsiveDescription` | `0` | Vertical gap. |
 
 ### GridItem Props
 
