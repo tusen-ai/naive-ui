@@ -5,12 +5,11 @@ import {
   onBeforeUnmount,
   ComputedRef,
   InjectionKey,
-  Ref,
-  unref
+  Ref
 } from 'vue'
 
 type FormItemSize = 'small' | 'medium' | 'large'
-type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge'
+type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | number
 
 export interface FormItemInjection {
   path: Ref<string | undefined>
@@ -37,7 +36,6 @@ type UseFormItemProps<T> =
     disabled?: boolean | undefined
   }
   | {
-    size?: T | number
     disabled?: boolean | undefined
   }
 
@@ -76,7 +74,7 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
     if (disabled !== undefined) {
       return disabled
     } else {
-      return unref(NFormItem?.disabled)
+      return NFormItem?.disabled.value
     }
   })
   onBeforeUnmount(() => {
