@@ -6,6 +6,8 @@ Naive-ui provide `n-config-provider` to customize the theme.
 
 By default all the component is light themed, without any configuration.
 
+Learn more about `n-config-provider`, see [Config Provider](../components/config-provider).
+
 ## Use Dark Theme
 
 Set `n-config-provider`'s `theme` prop to `darkTheme` imported from naive-ui to set dark theme inside `n-config-provider`.
