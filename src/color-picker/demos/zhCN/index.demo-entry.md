@@ -27,3 +27,4 @@ form
 | on-complete | `(value: string) => void` | `undefined` | 颜色完成改变后的回调（在鼠标移动时候不会调用） |
 | on-update:show | `(value: boolean) => void` | `undefined` | 面板可见状态改变的回调 |
 | on-update:value | `(value: string) => void` | `undefined` | 颜色改变时的回调 |
+| actions | `Array<'confirm'> \| null` | `null` | 显示按钮 |

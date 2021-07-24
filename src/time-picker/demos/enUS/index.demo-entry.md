@@ -10,12 +10,14 @@ size
 disabled-time
 step-time
 format
+actions
 ```
 
 ## Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| actions | `Array<'now' \| 'confirm'> \| null` | `['now', 'confirm']` | Operations supported in Time Picker. |
 | clearable | `boolean` | `false` | Whether the value is clearable. |
 | default-value | `number \| null` | `null` | Default value in uncontrolled mode. |
 | disabled | `boolean` | `false` | Whether to disable. |

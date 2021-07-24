@@ -157,7 +157,7 @@ export default defineComponent({
       return (mergedPageRef.value - 1) * mergedPageSizeRef.value
     })
     const endIndexRef = computed(() => {
-      const endIndex = mergedPageRef.value * mergedPageSizeRef.value
+      const endIndex = mergedPageRef.value * mergedPageSizeRef.value - 1
       const { itemCount } = props
       if (itemCount !== undefined) {
         return endIndex > itemCount ? itemCount : endIndex

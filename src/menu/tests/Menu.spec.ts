@@ -1,7 +1,9 @@
 import { mount } from '@vue/test-utils'
+import { HappyOutline } from '@vicons/ionicons5'
 import { h } from 'vue'
 import { sleep } from 'seemly'
 import { NMenu } from '../index'
+import { NIcon } from '../../icon'
 
 describe('n-menu', () => {
   it('should work with import on demand', () => {
@@ -132,5 +134,51 @@ describe('n-menu', () => {
     expect(document.body.querySelector('.n-dropdown')).not.toEqual(null)
     expect(document.querySelectorAll('a').length).toEqual(3)
     expect(document.querySelectorAll('a.fantasy').length).toEqual(1)
+  })
+
+  it('should dropdown work with `render-icon` props', async () => {
+    const options = [
+      {
+        label: 'jj',
+        key: 'jj'
+      },
+      {
+        label: 'jay',
+        key: 'jay',
+        children: [
+          {
+            type: 'group',
+            label: 'song-group',
+            key: 'group',
+            children: [
+              {
+                label: 'fantasy',
+                key: 'fantasy'
+              },
+              {
+                label: 'mojito',
+                key: 'mojito'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+    function renderMenuIcon (): any {
+      return h(NIcon, null, { default: () => h(HappyOutline) })
+    }
+    const wrapper = mount(NMenu, {
+      props: {
+        options: options,
+        collapsed: true,
+        renderIcon: renderMenuIcon
+      }
+    })
+    expect(wrapper.find('.n-submenu').exists()).toBe(true)
+    await wrapper.find('.n-submenu').trigger('mouseenter')
+    // Popover has delay, so we need to wait
+    await sleep(150)
+    expect(document.body.querySelector('.n-dropdown')).not.toEqual(null)
+    expect(document.querySelectorAll('.n-icon').length).toEqual(2)
   })
 })
