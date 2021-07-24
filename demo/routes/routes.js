@@ -29,6 +29,10 @@ export const enDocRoutes = [
     component: () => import('../pages/docs/customize-theme/enUS/index.md')
   },
   {
+    path: 'i18n',
+    component: () => import('../pages/docs/i18n/enUS/index.md')
+  },
+  {
     path: 'changelog',
     component: () => import('../pages/docs/changelog/enUS/index.vue')
   },
@@ -83,6 +87,10 @@ export const zhDocRoutes = [
   {
     path: 'customize-theme',
     component: () => import('../pages/docs/customize-theme/zhCN/index.md')
+  },
+  {
+    path: 'i18n',
+    component: () => import('../pages/docs/i18n/zhCN/index.md')
   },
   // {
   //   path: 'experimental-features',
