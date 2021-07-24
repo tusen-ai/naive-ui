@@ -25,6 +25,7 @@
 
 ### Feats
 
+- `n-input-number` 增加 `prefix`、`suffix` slots, 关闭 [#609](https://github.com/TuSimple/naive-ui/issues/609)
 - `n-time-picker` 增加 `actions` 属性, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
 - `n-mention` 新增 `render-label` 属性
 - `n-switch` 增加 `checked`、`unchecked` 插槽

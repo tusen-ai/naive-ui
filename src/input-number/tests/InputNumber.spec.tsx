@@ -55,4 +55,17 @@ describe('n-input-number', () => {
     expect(onBlur).toHaveBeenCalledTimes(1)
     wrapper.unmount()
   })
+
+  it('should work with `prefix` & `suffix` slots', async () => {
+    const wrapper = mount(NInputNumber, {
+      slots: { prefix: () => '$', suffix: () => '%' }
+    })
+    expect(wrapper.find('.n-input__prefix').exists()).toBe(true)
+    expect(wrapper.find('.n-input__prefix').text()).toBe('$')
+    expect(wrapper.find('.n-input__suffix').exists()).toBe(true)
+    expect(wrapper.find('.n-input-number-suffix-has-button').exists()).toBe(
+      true
+    )
+    expect(wrapper.find('.n-input-number-suffix-has-button').text()).toBe('%')
+  })
 })

@@ -1,4 +1,13 @@
-import { h, defineComponent, ref, toRef, watch, computed, PropType } from 'vue'
+import {
+  h,
+  defineComponent,
+  ref,
+  toRef,
+  watch,
+  computed,
+  PropType,
+  renderSlot
+} from 'vue'
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
 import { RemoveIcon, AddIcon } from '../../_internal/icons'
@@ -12,6 +21,7 @@ import { warn, call, MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { inputNumberLight, InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber } from './utils'
 import type { OnUpdateValue } from './interface'
+import style from './styles/input-number.cssr'
 
 const inputNumberProps = {
   ...(useTheme.props as ThemeProps<InputNumberTheme>),
@@ -68,7 +78,7 @@ export default defineComponent({
     const themeRef = useTheme(
       'InputNumber',
       'InputNumber',
-      undefined,
+      style,
       inputNumberLight,
       props,
       mergedClsPrefixRef
@@ -368,9 +378,16 @@ export default defineComponent({
           onKeydown={this.handleKeyDown}
           onMousedown={this.handleMouseDown}
         >
-          {this.showButton
-            ? {
-                suffix: () => [
+          {{
+            prefix: () => renderSlot(this.$slots, 'prefix'),
+            suffix: () =>
+              this.showButton ? (
+                [
+                  <span
+                    class={`${mergedClsPrefix}-input-number-suffix-has-button`}
+                  >
+                    {renderSlot(this.$slots, 'suffix')}
+                  </span>,
                   <NButton
                     text
                     disabled={!this.minusable || this.disabled}
@@ -408,8 +425,14 @@ export default defineComponent({
                     }}
                   </NButton>
                 ]
-              }
-            : null}
+              ) : (
+                <span
+                  class={`${mergedClsPrefix}-input-number-suffix-no-button`}
+                >
+                  {renderSlot(this.$slots, 'suffix')}
+                </span>
+              )
+          }}
         </NInput>
       </div>
     )
