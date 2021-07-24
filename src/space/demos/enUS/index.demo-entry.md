@@ -17,16 +17,16 @@ center
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| align | `'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'` | `undefined` |  |
-| inline | `boolean` | `false` |  |
-| item-style | `string \| object` | `undefined` |  |
-| justify | `'start' \| 'end' \| 'center' \| 'space-around' \| 'space-between'` | `'start'` |  |
-| size | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` |  |
-| vertical | `boolean` | `false` |  |
-| wrap | `boolean` | `true` |  |
+| align | `'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'` | `undefined` | Alignment. |
+| inline | `boolean` | `false` | Whether to enable inline. |
+| item-style | `string \| object` | `undefined` | Node style. |
+| justify | `'start' \| 'end' \| 'center' \| 'space-around' \| 'space-between'` | `'start'` | The arrangement of the main axis under the `flex` layout. |
+| size | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | Size. |
+| vertical | `boolean` | `false` | Whether to lay out vertically. |
+| wrap | `boolean` | `true` | Whether to wrap. |
 
 ## Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name    | Parameters | Description      |
+| ------- | ---------- | ---------------- |
+| default | `()`       | Spacing content. |
