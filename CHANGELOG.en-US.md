@@ -8,7 +8,7 @@
 
 ### Fixes
 
-- Fix `n-carousel` arrow buttons cannot be displayed in a specific browser,closes [#625](https://github.com/TuSimple/naive-ui/issues/625).
+- Fix `n-carousel` arrow buttons cannot be displayed in a specific browser, closes [#625](https://github.com/TuSimple/naive-ui/issues/625).
 
 ## 2.15.6 (2021-07-23)
 
