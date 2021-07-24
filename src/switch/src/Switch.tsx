@@ -5,17 +5,19 @@ import {
   defineComponent,
   computed,
   CSSProperties,
-  PropType
+  PropType,
+  Transition
 } from 'vue'
 import { depx, pxfy } from 'seemly'
 import { useMergedState } from 'vooks'
 import { useConfig, useFormItem, useTheme } from '../../_mixins'
+import { NBaseLoading } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import { call, warn, createKey } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
-import style from './styles/index.cssr'
 import { switchLight } from '../styles'
 import type { SwitchTheme } from '../styles'
+import style from './styles/index.cssr'
 
 const switchProps = {
   ...(useTheme.props as ThemeProps<SwitchTheme>),
@@ -27,14 +29,9 @@ const switchProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  defaultValue: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  loading: Boolean,
+  defaultValue: Boolean,
+  disabled: Boolean,
   round: {
     type: Boolean,
     default: true
@@ -152,6 +149,8 @@ export default defineComponent({
             buttonBoxShadow,
             buttonColor,
             boxShadowFocus,
+            loadingColor,
+            textColor,
             [createKey('buttonHeight', size)]: buttonHeight,
             [createKey('buttonWidth', size)]: buttonWidth,
             [createKey('buttonWidthPressed', size)]: buttonWidthPressed,
@@ -185,7 +184,9 @@ export default defineComponent({
           '--rail-height': railHeight,
           '--rail-width': railWidth,
           '--width': width,
-          '--box-shadow-focus': boxShadowFocus
+          '--box-shadow-focus': boxShadowFocus,
+          '--loading-color': loadingColor,
+          '--text-color': textColor
         }
       })
     }
@@ -231,12 +232,31 @@ export default defineComponent({
             </div>
           )}
           <div class={`${mergedClsPrefix}-switch__button`}>
-            <div class={`${mergedClsPrefix}-switch__checked`}>
-              {checkedSlot?.()}
-            </div>
-            <div class={`${mergedClsPrefix}-switch__unchecked`}>
-              {uncheckedSlot?.()}
-            </div>
+            <Transition name="fade-in-scale-up-transition">
+              {{
+                default: () =>
+                  this.loading ? (
+                    <NBaseLoading
+                      key="loading"
+                      clsPrefix={mergedClsPrefix}
+                      strokeWidth={20}
+                    />
+                  ) : null
+              }}
+            </Transition>
+            {checkedSlot && (
+              <div key="checked" class={`${mergedClsPrefix}-switch__checked`}>
+                {checkedSlot()}
+              </div>
+            )}
+            {uncheckedSlot && (
+              <div
+                key="unchecked"
+                class={`${mergedClsPrefix}-switch__unchecked`}
+              >
+                {uncheckedSlot()}
+              </div>
+            )}
           </div>
         </div>
       </div>

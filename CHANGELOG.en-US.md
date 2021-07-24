@@ -6,6 +6,7 @@
 
 - `n-time-picker` add `actions` prop, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
 - `n-switch` add `checked`, `unchecked` slots.
+- `n-switch` add `loading` prop, closes [#301](https://github.com/TuSimple/naive-ui/issues/301).
 
 ## 2.15.6 (2021-07-23)
 

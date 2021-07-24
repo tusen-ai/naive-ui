@@ -6,6 +6,7 @@
 
 - `n-time-picker` 增加 `actions` 属性, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
 - `n-switch` 增加 `checked`、`unchecked` 插槽
+- `n-switch` 增加 `loading` 属性，关闭 [#301](https://github.com/TuSimple/naive-ui/issues/301)
 
 ## 2.15.6 (2021-07-23)
 

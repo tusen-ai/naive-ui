@@ -1,3 +1,4 @@
+import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
@@ -16,6 +17,8 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --rail-width
 // --width
 // --box-shadow-focus
+// --loading-color
+// --text-color
 export default cB('switch', `
   height: var(--height);
   min-width: var(--width);
@@ -42,8 +45,22 @@ export default cB('switch', `
     width: calc(1.75 * var(--rail-height));
     height: var(--rail-height);
   `),
+  cB('base-loading', `
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: calc(var(--button-width) - 4px);
+    color: var(--loading-color);
+    transition: color .3s var(--bezier);
+  `, [
+    fadeInScaleUpTransition({
+      originalTransform: 'translateX(-50%) translateY(-50%)'
+    })
+  ]),
   cE('checked, unchecked', `
-    color: white;
+    transition: color .3s var(--bezier);
+    color: var(--text-color);
     box-sizing: border-box;
     position: absolute;
     white-space: nowrap;
