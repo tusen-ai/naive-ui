@@ -14,7 +14,11 @@
     }"
   >
     <n-form-item label="Input" path="inputValue">
-      <n-input placeholder="Input" v-model:value="model.inputValue" />
+      <n-input
+        :disabled="true"
+        placeholder="Input"
+        v-model:value="model.inputValue"
+      />
     </n-form-item>
     <n-form-item label="Textarea" path="textareaValue">
       <n-input

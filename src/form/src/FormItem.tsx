@@ -166,6 +166,9 @@ export default defineComponent({
       if (feedback !== undefined && feedback !== null) return true
       return explainsRef.value.length
     })
+    const mergedDisabledRef = computed(() => {
+      return NForm?.disabled
+    })
     const themeRef = useTheme(
       'Form',
       'FormItem',
@@ -322,6 +325,7 @@ export default defineComponent({
     }
     provide(formItemInjectionKey, {
       path: toRef(props, 'path'),
+      disabled: mergedDisabledRef,
       mergedSize: formItemSizeRefs.mergedSize,
       restoreValidation,
       handleContentBlur,
