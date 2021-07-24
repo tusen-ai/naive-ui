@@ -6,6 +6,10 @@
 
 - `n-time-picker` 增加 `actions` 属性, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
 
+### Fixes
+
+- 修复 `n-carousel` 中箭头按钮在特定浏览器下无法显示问题，关闭 `https://github.com/TuSimple/naive-ui/issues/625`
+
 ## 2.15.6 (2021-07-23)
 
 ### Feats
