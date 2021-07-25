@@ -18,13 +18,13 @@ grid-debug
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| align | `'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'` | `undefined` | 对齐方式 |
-| inline | `boolean` | `false` | 是否启用行内 |
+| align | `'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'` | `undefined` | 垂直排列方式 |
+| inline | `boolean` | `false` | 是否为行内元素 |
 | item-style | `string \| object` | `undefined` | 节点样式 |
-| justify | `'start' \| 'end' \| 'center' \| 'space-around' \| 'space-between'` | `'start'` | `flex` 布局下主轴的排列方式 |
+| justify | `'start' \| 'end' \| 'center' \| 'space-around' \| 'space-between'` | `'start'` | 水平排列方式 |
 | size | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | 大小 |
 | vertical | `boolean` | `false` | 是否垂直布局 |
-| wrap | `boolean` | `true` | 是否换行 |
+| wrap | `boolean` | `true` | 是否超出换行 |
 
 ## Slots
 

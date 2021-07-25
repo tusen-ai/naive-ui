@@ -17,13 +17,13 @@ center
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| align | `'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'` | `undefined` | Alignment. |
-| inline | `boolean` | `false` | Whether to enable inline. |
+| align | `'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'` | `undefined` | Vertical arrangement. |
+| inline | `boolean` | `false` | Is it an inline element. |
 | item-style | `string \| object` | `undefined` | Node style. |
-| justify | `'start' \| 'end' \| 'center' \| 'space-around' \| 'space-between'` | `'start'` | The arrangement of the main axis under the `flex` layout. |
+| justify | `'start' \| 'end' \| 'center' \| 'space-around' \| 'space-between'` | `'start'` | Horizontal arrangement. |
 | size | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | Size. |
 | vertical | `boolean` | `false` | Whether to lay out vertically. |
-| wrap | `boolean` | `true` | Whether to wrap. |
+| wrap | `boolean` | `true` | Whether to exceed the line break. |
 
 ## Slots
 
