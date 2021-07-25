@@ -28,7 +28,10 @@ describe('n-message', () => {
     ))
     wrapper.unmount()
   })
-  it('maxVisible work on messageProvider', () => {
+})
+
+describe('message-provider', () => {
+  it('props.maxVisible', (done) => {
     const Test = defineComponent({
       setup () {
         const message = useMessage()
@@ -52,9 +55,10 @@ describe('n-message', () => {
     void nextTick(() => {
       expect(document.querySelectorAll('.n-message').length).toBe(2)
       wrapper.unmount()
+      done()
     })
   })
-  it('duration work on messageProvider', () => {
+  it('props.duration', (done) => {
     const Test = defineComponent({
       setup () {
         const message = useMessage()
@@ -74,12 +78,13 @@ describe('n-message', () => {
     })
     void nextTick(() => {
       setTimeout(() => {
-        expect(document.querySelector('.n-message')).toBe(true)
+        expect(document.querySelector('.n-message')).not.toEqual(null)
       }, 500)
       setTimeout(() => {
-        expect(document.querySelector('.n-message')).toBe(false)
+        expect(document.querySelector('.n-message')).toBe(null)
+        wrapper.unmount()
+        done()
       }, 1200)
-      wrapper.unmount()
     })
   })
 })
