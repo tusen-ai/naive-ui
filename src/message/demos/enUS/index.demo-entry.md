@@ -53,7 +53,7 @@ multiple-line
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | duration | `number` | `3000` | All messages's default duration. |
-| max-visible | `number` | `undefined` | Limit the number of message to display. |
+| max | `number` | `undefined` | Limit the number of message to display. |
 | to | `string \| HTMLElement` | `'body'` | Container node of message container. |
 
 ### MessageProvider Injection API

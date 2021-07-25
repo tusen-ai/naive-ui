@@ -71,7 +71,7 @@ const messageProviderProps = {
     type: Number,
     default: 3000
   },
-  maxVisible: Number
+  max: Number
 }
 
 export type MessageProviderProps = ExtractPublicPropTypes<
@@ -124,8 +124,8 @@ export default defineComponent({
           messageRefs.value[key].hide()
         }
       })
-      const { maxVisible } = props
-      if (maxVisible && messageListRef.value.length >= maxVisible) {
+      const { max } = props
+      if (max && messageListRef.value.length >= max) {
         messageListRef.value.shift()
       }
       messageListRef.value.push(messageReactive)

@@ -4,7 +4,7 @@ import { NMessageProvider, useMessage } from '../index'
 
 const Provider = defineComponent({
   render () {
-    return <NMessageProvider maxVisible={1}>{this.$slots}</NMessageProvider>
+    return <NMessageProvider max={1}>{this.$slots}</NMessageProvider>
   }
 })
 
@@ -31,7 +31,7 @@ describe('n-message', () => {
 })
 
 describe('message-provider', () => {
-  it('props.maxVisible', (done) => {
+  it('props.max', (done) => {
     const Test = defineComponent({
       setup () {
         const message = useMessage()
@@ -46,7 +46,7 @@ describe('message-provider', () => {
     })
     const wrapper = mount(NMessageProvider, {
       props: {
-        maxVisible: 2
+        max: 2
       },
       slots: {
         default: () => <Test />
