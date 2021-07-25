@@ -19,6 +19,7 @@
 - 修复 `n-carousel` 中箭头按钮在特定浏览器下无法显示问题，关闭 [#625](https://github.com/TuSimple/naive-ui/issues/625)
 - 修复 `n-layout-sider` `width` 不能为字符串，关闭 [#607](https://github.com/TuSimple/naive-ui/issues/607)
 - 修复 `n-slider` `disabled` 属性不生效，关闭 [#641](https://github.com/TuSimple/naive-ui/issues/641)
+- 修复 `n-input` 在只读时仍展示清除按钮
 
 ## 2.15.6 (2021-07-23)
 
