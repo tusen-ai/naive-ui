@@ -2,20 +2,8 @@
 
 ```html
 <n-slider
-  v-model:value="value"
+  :default-value="50"
   :step="10"
   :format-tooltip="value => `${value}%`"
 />
-```
-
-```js
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(50)
-    }
-  }
-})
 ```

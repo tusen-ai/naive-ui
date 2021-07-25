@@ -48,10 +48,14 @@ export default c([
         transform: 'translateX(-50%)'
       })
     ]),
-    cM('disabled', {
-      cursor: 'not-allowed !important',
-      opacity: 'var(--opacity-disabled)'
-    }),
+    cM('disabled', `
+      cursor: not-allowed;
+      opacity: var(--opacity-disabled);
+    `, [
+      cB('slider-handle', `
+        cursor: not-allowed;
+      `)
+    ]),
     cM('with-mark', `
       width: 100%;
       margin: 8px 0 32px 0;
