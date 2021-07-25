@@ -43,8 +43,8 @@ basic
 
 ### `loadingBar` Injection Methods
 
-| Name   | Type         | Description |
-| ------ | ------------ | ----------- |
-| error  | `() => void` |             |
-| finish | `() => void` |             |
-| start  | `() => void` |             |
+| Name | Type | Description |
+| --- | --- | --- |
+| error | `() => void` | Callback function for loading bar error. |
+| finish | `() => void` | The callback function when the loading bar finishes loading. |
+| start | `() => void` | Callback function for loading bar to start loading. |

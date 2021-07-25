@@ -18,16 +18,16 @@ grid-debug
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| align | `'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'` | `undefined` |  |
-| inline | `boolean` | `false` |  |
-| item-style | `string \| object` | `undefined` |  |
-| justify | `'start' \| 'end' \| 'center' \| 'space-around' \| 'space-between'` | `'start'` |  |
-| size | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` |  |
-| vertical | `boolean` | `false` |  |
-| wrap | `boolean` | `true` |  |
+| align | `'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'` | `undefined` | 垂直排列方式 |
+| inline | `boolean` | `false` | 是否为行内元素 |
+| item-style | `string \| object` | `undefined` | 节点样式 |
+| justify | `'start' \| 'end' \| 'center' \| 'space-around' \| 'space-between'` | `'start'` | 水平排列方式 |
+| size | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | 大小 |
+| vertical | `boolean` | `false` | 是否垂直布局 |
+| wrap | `boolean` | `true` | 是否超出换行 |
 
 ## Slots
 
-| 名称    | 参数 | 说明 |
-| ------- | ---- | ---- |
-| default | `()` |      |
+| 名称    | 参数 | 说明     |
+| ------- | ---- | -------- |
+| default | `()` | 间距内容 |

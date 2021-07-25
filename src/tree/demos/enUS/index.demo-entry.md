@@ -26,39 +26,40 @@ batch-render
 | Name | Type | default | Description |
 | --- | --- | --- | --- |
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | A function that prohibit dropping inside leaf node. | Whether to allow dropping. |
-| block-line | `boolean` | `false` |  |
-| block-node | `boolean` | `false` |  |
+| block-line | `boolean` | `false` | Nodes spread out the whole row. |
+| block-node | `boolean` | `false` | The node name is spread out in the whole row. |
 | cancelable | `boolean` | `true` | Whether node's select status can be cancelled. |
 | cascade | `boolean` | `false` | Whether to cascade checkboxes. |
-| checkable | `boolean` | `false` |  |
+| checkable | `boolean` | `false` | Whether to display the selection box, you need to set `cascade` to `true`. |
 | checked-keys | `Array<string \| number>` | `undefined` | If set, checked status will work in controlled manner. |
 | data | `Array<TreeOption>` | `[]` | The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner. |
-| default-checked-keys | `Array<string \| number>` | `[]` |  |
-| default-expand-all | `boolean` | `false` |  |
-| default-expanded-keys | `Array<string \| number>` | `[]` |  |
-| default-selected-keys | `Array<string \| number>` | `[]` |  |
-| draggable | `boolean` | `false` |  |
+| default-checked-keys | `Array<string \| number>` | `[]` | Multiple options selected by default. |
+| default-expand-all | `boolean` | `false` | Expand all options. |
+| default-expanded-keys | `Array<string \| number>` | `[]` | Expanded items by default. |
+| default-selected-keys | `Array<string \| number>` | `[]` | Nodes selected by default. |
+| draggable | `boolean` | `false` | Whether it can be dragged. |
 | expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter. |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |
-| filter | `(node: TreeOption) => boolean` | A simple string based filter |  |
-| multiple | `boolean` | `false` |  |
-| on-load | `(node: TreeOption) => Promise<void>` | `undefined` |  |
-| pattern | `string` | `''` |  |
-| remote | `boolean` | `false` | Whether to load nodes async. It should work with `on-load` |
+| filter | `(node: TreeOption) => boolean` | `undefined` | A simple string based filter. |
+| leaf-only | `boolean` | `false` | Whether to open or not, only the bottom tree node is optional. |
+| multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |
+| on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |
+| pattern | `string` | `''` | What to search by default. |
+| remote | `boolean` | `false` | Whether to load nodes async. It should work with `on-load`. |
 | render-label | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' label. |
 | render-prefix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' prefix. |
 | render-suffix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' suffix. |
-| selectable | `boolean` | `true` |  |
+| selectable | `boolean` | `true` | Whether the node can be selected. |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scroll. You need to set proper style height of the tree in advance. |
-| on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` |  |
-| on-dragenter | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` |  |
-| on-dragleave | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` |  |
-| on-dragstart | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` |  |
-| on-drop | `(data: { node: TreeOption, dragNode: TreeOption, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` |  |
-| on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
-| on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
-| on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` |  |
+| on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | The callback function after the node completes the dragging action. |
+| on-dragenter | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | Callback function in node drag and drop. |
+| on-dragleave | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | Drag a node, the callback function after the node leaves other nodes. |
+| on-dragstart | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | Callback function to start dragging a certain node. |
+| on-drop | `(data: { node: TreeOption, dragNode: TreeOption, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` | The callback function after the node completes the dragging action. |
+| on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` | Callback function when node multiple options change. |
+| on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function when the node expansion item changes. |
+| on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function when the selected item of the node changes. |
 
 ### TreeOption Properties
 

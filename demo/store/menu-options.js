@@ -130,6 +130,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/customize-theme'
         },
         {
+          en: 'Internationalization',
+          zh: '国际化',
+          path: '/i18n'
+        },
+        {
           en: 'Create Themed Component',
           zh: '创建适配主题的组件',
           path: '/theme'

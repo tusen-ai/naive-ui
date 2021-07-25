@@ -22,14 +22,14 @@ size
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| description | `string` | `undefined` |  |
-| size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` |  |
-| status | `'info' \| 'success' \| 'error' \| 'warning' \| 404 \| '404' \| 500 \| '500' \| 400 \| '400' \| 418 \| '418'` | `'info'` |  |
-| title | `string` | `undefined` |  |
+| description | `string` | `undefined` | 描述信息 |
+| size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | 大小 |
+| status | `'info' \| 'success' \| 'error' \| 'warning' \| 404 \| '404' \| 500 \| '500' \| 400 \| '400' \| 418 \| '418'` | `'info'` | 状态 |
+| title | `string` | `undefined` | 标题 |
 
 ## Slots
 
-| 名称    | 参数 | 说明 |
-| ------- | ---- | ---- |
-| default | `()` |      |
-| footer  | `()` |      |
+| 名称    | 参数 | 说明           |
+| ------- | ---- | -------------- |
+| default | `()` | 结果页内容信息 |
+| footer  | `()` | 结果页底部信息 |
