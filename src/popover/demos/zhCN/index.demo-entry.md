@@ -38,7 +38,7 @@ header
 | show-arrow | `boolean` | `true` | 是否显示箭头 |
 | show | `boolean` | `undefined` | 是否展示 popover |
 | title | `string` | `undefined` | popover 的 title 信息 |
-| trigger | `'hover' \| 'click' \| 'manual'` | `'hover'` | popover 的触发方式 |
+| trigger | `'hover' \| 'click' \| 'focus' \| 'manual'` | `'hover'` | popover 的触发方式 |
 | width | `number \| 'trigger'` | `undefined` | `'trigger'` 表示 popover 的宽度会和它的触发元素一致 |
 | x | `number` | `undefined` | 手动控制位置时弹出内容的 CSS `left` 的像素值（x，y 都设置才能生效） |
 | y | `number` | `undefined` | 手动控制位置时弹出内容的 CSS `top` 的像素值（x，y 都设置才能生效） |

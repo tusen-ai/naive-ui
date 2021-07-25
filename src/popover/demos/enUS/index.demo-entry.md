@@ -37,7 +37,7 @@ header
 | show-arrow | `boolean` | `true` | Whether to show arrow if set. |
 | show | `boolean` | `undefined` | Whether to show arrow. |
 | title | `string` | `undefined` | Popover title. |
-| trigger | `'hover' \| 'click' \| 'manual'` | `'hover'` | The popover trigger type. |
+| trigger | `'hover' \| 'click' \| 'focus' \| 'manual'` | `'hover'` | The popover trigger type. |
 | width | `number \| 'trigger'` | `undefined` | `'trigger'` means popover's witdh will follow its trigger's width. |
 | x | `number` | `undefined` | The CSS `left` pixel value when popover manually positioned (x, y need to be set together). |
 | y | `number` | `undefined` | The CSS `top` pixel value when popover manually positioned (x, y need to be set together). |
