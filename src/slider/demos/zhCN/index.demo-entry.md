@@ -8,6 +8,7 @@
 basic
 range
 mark
+disabled
 disable-tooltip
 format
 ```
