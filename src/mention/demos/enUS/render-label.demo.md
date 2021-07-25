@@ -1,6 +1,6 @@
 # Render Label
 
-If you use `render-label` batch rendering, input matching will be performed according to `value`.
+If `option.label` is not a string, `option.value` will be used to match option by default.
 
 ```html
 <n-mention :options="options" :render-label="renderLabel" />
@@ -8,8 +8,7 @@ If you use `render-label` batch rendering, input matching will be performed acco
 
 ```js
 import { defineComponent, h } from 'vue'
-import { NIcon } from 'naive-ui'
-import { HappyOutline as HappyIcon } from '@vicons/ionicons5'
+import { NAvatar } from 'naive-ui'
 
 export default defineComponent({
   setup () {
@@ -30,11 +29,12 @@ export default defineComponent({
       ],
       renderLabel: (option) =>
         h('div', { style: 'display: flex; align-items: center;' }, [
-          h(
-            NIcon,
-            { style: 'margin-right: 5px' },
-            { default: () => h(HappyIcon) }
-          ),
+          h(NAvatar, {
+            style: 'margin-right: 8px;',
+            size: 24,
+            round: true,
+            src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+          }),
           option.value
         ])
     }

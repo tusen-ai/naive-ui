@@ -13,6 +13,7 @@ import {
 import { createTreeMate } from 'treemate'
 import { VBinder, VFollower, VTarget, FollowerInst } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
+import { RenderLabel } from '../../_internal/select-menu/src/interface'
 import type { Size as InputSize } from '../../input/src/interface'
 import { NInput } from '../../input'
 import type { InputInst } from '../../input'
@@ -30,10 +31,8 @@ import type { ThemeProps } from '../../_mixins'
 import { mentionLight } from '../styles'
 import type { MentionTheme } from '../styles'
 import { getRelativePosition } from './utils'
-
-import style from './styles/index.cssr'
 import type { MentionOption } from './interface'
-import { RenderLabel } from '../../_internal/select-menu/src/interface'
+import style from './styles/index.cssr'
 
 const mentionProps = {
   ...(useTheme.props as ThemeProps<MentionTheme>),

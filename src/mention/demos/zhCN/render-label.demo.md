@@ -1,6 +1,6 @@
 # 控制菜单渲染
 
-如果使用了 `render-label` 批量渲染，输入匹配则会根据 `value` 进行匹配
+如果选项的 `label` 不是字符串，默认情况下会使用 `value` 进行匹配。
 
 ```html
 <n-mention :options="options" :render-label="renderLabel" />
@@ -8,8 +8,7 @@
 
 ```js
 import { defineComponent, h } from 'vue'
-import { NIcon } from 'naive-ui'
-import { HappyOutline as HappyIcon } from '@vicons/ionicons5'
+import { NAvatar } from 'naive-ui'
 
 export default defineComponent({
   setup () {
@@ -30,11 +29,12 @@ export default defineComponent({
       ],
       renderLabel: (option) =>
         h('div', { style: 'display: flex; align-items: center;' }, [
-          h(
-            NIcon,
-            { style: 'margin-right: 5px' },
-            { default: () => h(HappyIcon) }
-          ),
+          h(NAvatar, {
+            style: 'margin-right: 8px;',
+            size: 24,
+            round: true,
+            src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+          }),
           option.value
         ])
     }
