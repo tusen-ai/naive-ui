@@ -51,7 +51,7 @@ export default defineComponent({
       mergedSortStateRef,
       componentId,
       scrollPartRef,
-      tableLayoutRef,
+      mergedTableLayoutRef,
       handleTableBodyScroll,
       doUpdateSorter,
       doUncheckAll,
@@ -92,7 +92,7 @@ export default defineComponent({
       cols: colsRef,
       mergedTheme: mergedThemeRef,
       checkOptions: checkOptionsRef,
-      tableLayout: tableLayoutRef,
+      mergedTableLayout: mergedTableLayoutRef,
       handleMouseenter,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
@@ -114,6 +114,7 @@ export default defineComponent({
       checkOptions,
       componentId,
       discrete,
+      mergedTableLayout,
       handleColHeaderClick,
       handleCheckboxUpdateChecked
     } = this
@@ -232,7 +233,7 @@ export default defineComponent({
           class={`${mergedClsPrefix}-data-table-table`}
           style={{
             minWidth: formatLength(scrollX),
-            tableLayout: discrete || hasEllipsis ? 'fixed' : this.tableLayout
+            tableLayout: mergedTableLayout
           }}
         >
           <colgroup>
