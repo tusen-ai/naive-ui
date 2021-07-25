@@ -77,7 +77,7 @@
       <n-time-picker v-model:value="model.timePickerValue" />
     </n-form-item>
     <n-form-item label="Slider" path="sliderValue">
-      <n-slider v-model:value="model.sliderValue" :step="5" />
+      <n-slider disabled v-model:value="model.sliderValue" :step="5" />
     </n-form-item>
     <n-form-item label="Transfer" path="transferValue">
       <n-transfer

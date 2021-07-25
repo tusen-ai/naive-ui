@@ -31,7 +31,10 @@ const switchProps = {
   },
   loading: Boolean,
   defaultValue: Boolean,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   round: {
     type: Boolean,
     default: true
@@ -76,7 +79,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
-    const { mergedSizeRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -107,7 +110,7 @@ export default defineComponent({
       nTriggerFormBlur()
     }
     function handleClick (): void {
-      if (!props.disabled) {
+      if (!mergedDisabledRef.value) {
         doUpdateValue(!mergedValueRef.value)
       }
     }
@@ -139,6 +142,7 @@ export default defineComponent({
       pressed: pressedRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
+      mergedDisabled: mergedDisabledRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const {
@@ -202,12 +206,12 @@ export default defineComponent({
           `${mergedClsPrefix}-switch`,
           {
             [`${mergedClsPrefix}-switch--active`]: mergedValue,
-            [`${mergedClsPrefix}-switch--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-switch--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-switch--round`]: this.round,
             [`${mergedClsPrefix}-switch--pressed`]: this.pressed
           }
         ]}
-        tabindex={!this.disabled ? 0 : undefined}
+        tabindex={!this.mergedDisabled ? 0 : undefined}
         style={this.cssVars as CSSProperties}
         onClick={this.handleClick}
         onFocus={this.handleFocus}
