@@ -33,6 +33,7 @@ import { getRelativePosition } from './utils'
 
 import style from './styles/index.cssr'
 import type { MentionOption } from './interface'
+import { RenderLabel } from '../../_internal/select-menu/src/interface'
 
 const mentionProps = {
   ...(useTheme.props as ThemeProps<MentionTheme>),
@@ -82,6 +83,7 @@ const mentionProps = {
   'onUpdate:value': [Array, Function] as PropType<
   MaybeArray<(value: string) => void>
   >,
+  renderLabel: Function as PropType<RenderLabel>,
   onUpdateValue: [Array, Function] as PropType<
   MaybeArray<(value: string) => void>
   >,
@@ -446,6 +448,7 @@ export default defineComponent({
                               virtualScroll={false}
                               style={this.cssVars as CSSProperties}
                               onMenuToggleOption={this.handleSelect}
+                              renderLabel={this.renderLabel}
                             >
                               {$slots}
                             </NInternalSelectMenu>

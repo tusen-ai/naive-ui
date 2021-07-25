@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-time-picker` 增加 `actions` 属性, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
+- `n-mention` 新增 `render-label` 属性
 - `n-switch` 增加 `checked`、`unchecked` 插槽
 - `n-switch` 增加 `loading` 属性，关闭 [#301](https://github.com/TuSimple/naive-ui/issues/301)
 - `n-select` 按下箭头会打开菜单，有关 [#300](https://github.com/TuSimple/naive-ui/issues/300)
