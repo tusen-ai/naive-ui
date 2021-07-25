@@ -19,7 +19,7 @@ export interface CheckboxGroupInjection {
   checkedCountRef: ComputedRef<number>
   maxRef: Ref<number | undefined>
   minRef: Ref<number | undefined>
-  disabledRef: Ref<boolean>
+  disabledRef: Ref<boolean | undefined>
   valueSetRef: Ref<Set<string | number>>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
   toggleCheckbox: (checked: boolean, checkboxValue: string | number) => void
@@ -37,7 +37,10 @@ const checkboxGroupProps = {
     type: Array as PropType<Array<string | number> | null>,
     default: null
   },
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<(value: Array<string | number>) => void>
@@ -73,6 +76,7 @@ export default defineComponent({
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const formItem = useFormItem(props)
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = computed(() => props.value)
     const mergedValueRef = useMergedState(
@@ -148,8 +152,8 @@ export default defineComponent({
       maxRef: toRef(props, 'max'),
       minRef: toRef(props, 'min'),
       valueSetRef: valueSetRef,
-      disabledRef: toRef(props, 'disabled'),
-      mergedSizeRef: formItem.mergedSizeRef,
+      disabledRef: mergedDisabledRef,
+      mergedSizeRef: mergedSizeRef,
       toggleCheckbox
     })
     return {

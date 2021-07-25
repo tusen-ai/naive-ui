@@ -20,17 +20,6 @@
         v-model:value="model.inputValue"
       />
     </n-form-item>
-    <n-form-item label="Textarea" path="textareaValue">
-      <n-input
-        placeholder="Textarea"
-        v-model:value="model.textareaValue"
-        type="textarea"
-        :autosize="{
-          minRows: 3,
-          maxRows: 5
-        }"
-      />
-    </n-form-item>
     <n-form-item label="Select" path="selectValue">
       <n-select
         placeholder="Select"
@@ -41,7 +30,7 @@
     <n-form-item label="Cascader" path="cascaderValue">
       <n-cascader
         :value="model.cascaderValue"
-        placeholder="没啥用的值"
+        placeholder="Cascader"
         :options="options"
         :leaf-only="false"
         size="medium"
@@ -52,6 +41,9 @@
     </n-form-item>
     <n-form-item label="Switch" path="switchValue">
       <n-switch v-model:value="model.switchValue" />
+    </n-form-item>
+    <n-form-item label="Checkbox" path="checkboxValue">
+      <n-checkbox v-model:checked="model.checkboxValue">Checkbox</n-checkbox>
     </n-form-item>
     <n-form-item label="Checkbox Group" path="checkboxGroupValue">
       <n-checkbox-group v-model:value="model.checkboxGroupValue">
@@ -153,7 +145,6 @@ export default defineComponent({
       formRef,
       model: ref({
         inputValue: null,
-        textareaValue: null,
         selectValue: null,
         cascaderValue: null,
         datetimeValue: null,
@@ -162,6 +153,7 @@ export default defineComponent({
           path2: null
         },
         switchValue: false,
+        checkboxValue: null,
         checkboxGroupValue: null,
         radioGroupValue: null,
         radioButtonGroupValue: null,
