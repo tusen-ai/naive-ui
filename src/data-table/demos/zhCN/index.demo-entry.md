@@ -36,9 +36,13 @@ ajax-usage
 virtual
 custom-filter-menu
 tree
+flex-height
+scroll-debug
 ```
 
-## Props
+## API
+
+### DataTable Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -51,6 +55,7 @@ tree
 | data | `Array<object>` | `[]` | 需要展示的数据 |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | 默认选中的 key 值 |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |
+| flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |
 | loading | `boolean` | `false` | 是否显示 loading 状态 |
 | max-height | `number \| string` | `undefined` | 表格内容的最大高度，可以是 CSS 属性值 |
 | min-height | `number \| string` | `undefined` | 表格内容的最低高度，可以是 CSS 属性值 |
@@ -72,29 +77,7 @@ tree
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | page-size 改变时触发的回调函数 |
 | on-update:sorter | `(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => void` | `undefined` | 如果在变动后没有激活的排序，那么 `options` 为 `null` |
 
-## Methods
-
-这些方法可以帮助你在非受控的状态下改变表格，但是，并不推荐在异步的状况下使用这些方法。如果需要异步操作，最好用**受控**的方式使用表格。
-
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| clearFilters | `() => void` | 清空所有的 filter 状态 |
-| clearSorter | `() => void` | 清空所有的 sort 状态 |
-| filters | `(filters: { [string \| number]: Array<string \| number> }) => void` | 设定表格当前的过滤器 |
-| page | `(page: number) => void` | 手动设置 page |
-| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 如果 columnKey 设为 `null`，那它和 clearSorter 效果一致 |
-
-## Slots
-
-### Slots
-
-| 名称  | 参数 | 说明                 |
-| ----- | ---- | -------------------- |
-| empty | `()` | 表格数据为空时的展示 |
-
-## API
-
-### DataTableColumn Properties
+#### DataTableColumn Properties
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -130,7 +113,7 @@ tree
 | type | `'selection' \| 'expand'` | `undefined` | 列的类型 |
 | width | `number \| string` | `undefined` | 列的宽度，在列固定时是**必需**的 |
 
-### CreateSummary Type
+#### CreateSummary Type
 
 ```__ts
 type CreateSummary = (
@@ -151,3 +134,21 @@ type CreateSummary = (
       }
     }
 ```
+
+### DataTable Methods
+
+这些方法可以帮助你在非受控的状态下改变表格，但是，并不推荐在异步的状况下使用这些方法。如果需要异步操作，最好用**受控**的方式使用表格。
+
+| 名称 | 类型 | 说明 |
+| --- | --- | --- |
+| clearFilters | `() => void` | 清空所有的 filter 状态 |
+| clearSorter | `() => void` | 清空所有的 sort 状态 |
+| filters | `(filters: { [string \| number]: Array<string \| number> }) => void` | 设定表格当前的过滤器 |
+| page | `(page: number) => void` | 手动设置 page |
+| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 如果 columnKey 设为 `null`，那它和 clearSorter 效果一致 |
+
+### DataTable Slots
+
+| 名称  | 参数 | 说明                 |
+| ----- | ---- | -------------------- |
+| empty | `()` | 表格数据为空时的展示 |

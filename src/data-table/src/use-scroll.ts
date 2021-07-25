@@ -131,7 +131,7 @@ export function useScroll (
     const { value: tableWidth } = bodyWidthRef
     if (tableWidth === null) return
     const { value: scrollPart } = scrollPartRef
-    if (props.maxHeight) {
+    if (props.maxHeight || props.flexHeight) {
       if (!header) return
       // we need to deal with overscroll
       if (scrollPart === 'head') {

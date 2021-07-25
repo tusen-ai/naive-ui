@@ -15,7 +15,8 @@ const sliderDark: SliderTheme = {
       textColor2,
       cardColor,
       borderRadius,
-      fontSize
+      fontSize,
+      opacityDisabled
     } = vars
     return {
       ...sizeVariables,
@@ -24,6 +25,7 @@ const sliderDark: SliderTheme = {
       railColorHover: railColor,
       fillColor: primaryColorSuppl,
       fillColorHover: primaryColorSuppl,
+      opacityDisabled,
       handleColor: '#FFF',
       dotColor: cardColor,
       dotColorModal: modalColor,

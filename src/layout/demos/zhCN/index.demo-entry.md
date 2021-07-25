@@ -23,7 +23,7 @@ show-sider-content
 scroll-to
 ```
 
-## Props
+## API
 
 ### Layout, Layout Content Props
 
@@ -67,18 +67,14 @@ scroll-to
 | show-collapsed-content | `boolean` | `true` | 是否在 `sider` 折叠后展示内部内容 |
 | show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | 内置的触发按钮是否展示 |
 | trigger-style | `string \| Object` | `undefined` | 触发样式 |
-| width | `number` | `272` | 宽度 |
+| width | `number \| string` | `272` | 宽度的 CSS 值，为数字时会添加 px |
 | on-update:collapsed | `(collapsed: boolean) => void` | `undefined` | 折叠状态发生改变时的回调函数 |
-
-## Slots
 
 ### Layout, Layout Content, Layout Sider, Layout Header, Layout Footer Slots
 
 | 名称    | 参数 | 说明       |
 | ------- | ---- | ---------- |
 | default | `()` | 布局的内容 |
-
-## Methods
 
 ### Layout, Layout Content, Layout Sider Methods
 

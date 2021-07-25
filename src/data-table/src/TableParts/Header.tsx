@@ -51,8 +51,9 @@ export default defineComponent({
       mergedSortStateRef,
       componentId,
       scrollPartRef,
-      tableLayoutRef,
-      handleTableBodyScroll,
+      mergedTableLayoutRef,
+      headerCheckboxDisabledRef,
+      handleTableHeaderScroll,
       doUpdateSorter,
       doUncheckAll,
       doCheckAll
@@ -92,11 +93,12 @@ export default defineComponent({
       cols: colsRef,
       mergedTheme: mergedThemeRef,
       checkOptions: checkOptionsRef,
-      tableLayout: tableLayoutRef,
+      mergedTableLayout: mergedTableLayoutRef,
+      headerCheckboxDisabled: headerCheckboxDisabledRef,
       handleMouseenter,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
-      handleTableBodyScroll
+      handleTableHeaderScroll
     }
   },
   render () {
@@ -114,6 +116,8 @@ export default defineComponent({
       checkOptions,
       componentId,
       discrete,
+      mergedTableLayout,
+      headerCheckboxDisabled,
       handleColHeaderClick,
       handleCheckboxUpdateChecked
     } = this
@@ -176,6 +180,7 @@ export default defineComponent({
                           privateTableHeader
                           checked={allRowsChecked}
                           indeterminate={someRowsChecked}
+                          disabled={headerCheckboxDisabled}
                           onUpdateChecked={handleCheckboxUpdateChecked}
                         />
                         {checkOptions ? (
@@ -220,11 +225,11 @@ export default defineComponent({
     if (!discrete) {
       return theadVNode
     }
-    const { handleTableBodyScroll, handleMouseenter, scrollX } = this
+    const { handleTableHeaderScroll, handleMouseenter, scrollX } = this
     return (
       <div
         class={`${mergedClsPrefix}-data-table-base-table-header`}
-        onScroll={handleTableBodyScroll}
+        onScroll={handleTableHeaderScroll}
         onMouseenter={handleMouseenter}
       >
         <table
@@ -232,7 +237,7 @@ export default defineComponent({
           class={`${mergedClsPrefix}-data-table-table`}
           style={{
             minWidth: formatLength(scrollX),
-            tableLayout: discrete || hasEllipsis ? 'fixed' : this.tableLayout
+            tableLayout: mergedTableLayout
           }}
         >
           <colgroup>

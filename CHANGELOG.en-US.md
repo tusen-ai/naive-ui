@@ -1,5 +1,30 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-time-picker` add `actions` prop, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
+- `n-mention` add `render-label` prop.
+- `n-switch` add `checked`, `unchecked` slots.
+- `n-switch` add `loading` prop, closes [#301](https://github.com/TuSimple/naive-ui/issues/301).
+- `n-select` pressing arrow down can open menu, ref [#300](https://github.com/TuSimple/naive-ui/issues/300).
+- `n-tree-select` pressing arrow down can open menu, ref [#300](https://github.com/TuSimple/naive-ui/issues/300).
+- `n-cascader` pressing arrow down can open menu, ref [#300](https://github.com/TuSimple/naive-ui/issues/300).
+- `n-popover`'s `trigger` prop support `'focus'`, closes [#477](https://github.com/TuSimple/naive-ui/issues/477).
+- `n-message-provider` add `duration` and `max` props.
+- `n-data-table` add `flex-height` prop, closes [#596](https://github.com/TuSimple/naive-ui/issues/596).
+
+### Fixes
+
+- Fix `n-carousel` arrow buttons cannot be displayed in a specific browser, closes [#625](https://github.com/TuSimple/naive-ui/issues/625).
+- Fix `n-layout-sider`'s `width` prop can't be string, closes [#607](https://github.com/TuSimple/naive-ui/issues/607).
+- Fix `n-slider` prop `disabled` doesn't work, closes [#641](https://github.com/TuSimple/naive-ui/issues/641).
+- Fix `n-input` show clear button when readonly.
+- Fix `n-data-table` doesn't show scrollbar when table-layout is auto, closes [#518](https://github.com/TuSimple/naive-ui/issues/518).
+- Fix `n-data-table`'s header checkbox always displays checked when data is empty.
+- Fix `n-data-table` header and body's scrollings are not sync.
+
 ## 2.15.6 (2021-07-23)
 
 ### Feats
@@ -11,6 +36,7 @@
 - `n-mention` add `empty` slot.
 - `useDialog` option add `on-mask-click` prop, closes [#419](https://github.com/TuSimple/naive-ui/issues/419).
 - `n-space` `justify` prop supports `center`, `space-around` and `space-between`.
+- `n-date-picker` add `close-on-select` prop, closes [#541](https://github.com/TuSimple/naive-ui/issues/541).
 - `n-dialog` add `action` prop, closes [#550](https://github.com/TuSimple/naive-ui/issues/550).
 - `n-mention`’s `option.label` support render function.
 - `n-color-picker` add `actions` prop, closes [#319](https://github.com/TuSimple/naive-ui/issues/319).

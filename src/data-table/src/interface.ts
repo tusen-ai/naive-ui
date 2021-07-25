@@ -190,10 +190,12 @@ export interface DataTableInjection {
   virtualScrollRef: Ref<boolean>
   bodyWidthRef: Ref<number | null>
   scrollPartRef: Ref<'head' | 'body'>
-  tableLayoutRef: Ref<'auto' | 'fixed'>
+  mergedTableLayoutRef: Ref<'auto' | 'fixed'>
   maxHeightRef: Ref<string | number | undefined>
   minHeightRef: Ref<string | number | undefined>
   rowPropsRef: Ref<CreateRowProps | undefined>
+  flexHeightRef: Ref<boolean>
+  headerCheckboxDisabledRef: Ref<boolean>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (
     filters: FilterState,

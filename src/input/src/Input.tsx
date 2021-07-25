@@ -210,6 +210,7 @@ export default defineComponent({
     const showClearButton = computed(() => {
       if (
         props.disabled ||
+        props.readonly ||
         !props.clearable ||
         (!mergedFocusRef.value && !hoverRef.value)
       ) {

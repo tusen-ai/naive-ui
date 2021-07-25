@@ -452,7 +452,11 @@ export default defineComponent({
         closeMenu()
         focusSelection()
       } else {
-        treeHandleKeyup(e)
+        if (mergedShowRef.value) {
+          treeHandleKeyup(e)
+        } else if (e.code === 'ArrowDown') {
+          openMenu()
+        }
       }
     }
     function treeHandleKeyup (e: KeyboardEvent): void {

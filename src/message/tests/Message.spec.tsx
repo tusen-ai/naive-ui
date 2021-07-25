@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, nextTick } from 'vue'
 import { NMessageProvider, useMessage } from '../index'
 
 const Provider = defineComponent({
   render () {
-    return <NMessageProvider>{this.$slots}</NMessageProvider>
+    return <NMessageProvider max={1}>{this.$slots}</NMessageProvider>
   }
 })
 
@@ -23,6 +23,68 @@ describe('n-message', () => {
         return null
       }
     })
-    mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    const wrapper = mount(() => (
+      <Provider>{{ default: () => <Test /> }}</Provider>
+    ))
+    wrapper.unmount()
+  })
+})
+
+describe('message-provider', () => {
+  it('props.max', (done) => {
+    const Test = defineComponent({
+      setup () {
+        const message = useMessage()
+        message.info('string')
+        message.info('string1')
+        message.info('string2')
+        message.info('string3')
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = mount(NMessageProvider, {
+      props: {
+        max: 2
+      },
+      slots: {
+        default: () => <Test />
+      }
+    })
+    void nextTick(() => {
+      expect(document.querySelectorAll('.n-message').length).toBe(2)
+      wrapper.unmount()
+      done()
+    })
+  })
+  it('props.duration', (done) => {
+    const Test = defineComponent({
+      setup () {
+        const message = useMessage()
+        message.info('string')
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = mount(NMessageProvider, {
+      props: {
+        duration: 1000
+      },
+      slots: {
+        default: () => <Test />
+      }
+    })
+    void nextTick(() => {
+      setTimeout(() => {
+        expect(document.querySelector('.n-message')).not.toEqual(null)
+      }, 500)
+      setTimeout(() => {
+        expect(document.querySelector('.n-message')).toBe(null)
+        wrapper.unmount()
+        done()
+      }, 1200)
+    })
   })
 })

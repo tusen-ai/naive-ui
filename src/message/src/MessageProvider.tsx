@@ -66,7 +66,12 @@ const messageProviderProps = {
   to: {
     type: [String, Object],
     default: undefined
-  }
+  },
+  duration: {
+    type: Number,
+    default: 3000
+  },
+  max: Number
 }
 
 export type MessageProviderProps = ExtractPublicPropTypes<
@@ -119,6 +124,10 @@ export default defineComponent({
           messageRefs.value[key].hide()
         }
       })
+      const { max } = props
+      if (max && messageListRef.value.length >= max) {
+        messageListRef.value.shift()
+      }
       messageListRef.value.push(messageReactive)
       return messageReactive
     }
@@ -159,6 +168,7 @@ export default defineComponent({
                     internalKey={message.key}
                     onInternalAfterLeave={this.handleAfterLeave}
                     {...omit(message, ['destroy'], undefined)}
+                    duration={this.duration}
                   />
                 )
               })}

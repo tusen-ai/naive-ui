@@ -9,6 +9,7 @@ import {
   inject,
   provide
 } from 'vue'
+import { useMergedState } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formatLength, call, warn } from '../../_utils'
@@ -25,7 +26,6 @@ import {
   LayoutSiderInst,
   positionProp
 } from './interface'
-import { useMergedState } from 'vooks'
 import { layoutInjectionKey } from './Layout'
 
 const layoutSiderProps = {
@@ -36,7 +36,7 @@ const layoutSiderProps = {
     default: 48
   },
   width: {
-    type: Number,
+    type: [Number, String] as PropType<string | number>,
     default: 272
   },
   contentStyle: {

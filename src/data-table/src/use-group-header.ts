@@ -22,15 +22,14 @@ export interface ColItem {
 }
 
 type RowItemMap = WeakMap<TableColumn, RowItem>
-function getRowsAndCols (
-  columns: TableColumns
-): {
-    rows: RowItem[][]
-    cols: ColItem[]
-    dataRelatedCols: Array<
-    TableSelectionColumn | TableBaseColumn | TableExpandColumn
-    >
-  } {
+function getRowsAndCols (columns: TableColumns): {
+  hasEllpisis: boolean
+  rows: RowItem[][]
+  cols: ColItem[]
+  dataRelatedCols: Array<
+  TableSelectionColumn | TableBaseColumn | TableExpandColumn
+  >
+} {
   const rows: RowItem[][] = []
   const cols: ColItem[] = []
   const dataRelatedCols: Array<
@@ -39,6 +38,7 @@ function getRowsAndCols (
   const rowItemMap: RowItemMap = new WeakMap()
   let maxDepth = -1
   let totalRowSpan = 0
+  let hasEllpisis = false
   function ensureMaxDepth (columns: TableColumns, currentDepth: number): void {
     if (currentDepth > maxDepth) {
       rows[currentDepth] = []
@@ -54,6 +54,7 @@ function getRowsAndCols (
           column
         })
         totalRowSpan += 1
+        hasEllpisis = !!column.ellipsis
         dataRelatedCols.push(column)
       }
     }
@@ -110,25 +111,26 @@ function getRowsAndCols (
   ensureColLayout(columns, 0, true)
 
   return {
+    hasEllpisis,
     rows,
     cols,
     dataRelatedCols
   }
 }
 
-export function useGroupHeader (
-  props: DataTableSetupProps
-): {
-    rowsRef: ComputedRef<RowItem[][]>
-    colsRef: ComputedRef<ColItem[]>
-    dataRelatedColsRef: ComputedRef<
-    Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
-    >
-  } {
+export function useGroupHeader (props: DataTableSetupProps): {
+  rowsRef: ComputedRef<RowItem[][]>
+  colsRef: ComputedRef<ColItem[]>
+  hasEllpisisRef: ComputedRef<boolean>
+  dataRelatedColsRef: ComputedRef<
+  Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
+  >
+} {
   const rowsAndCols = computed(() => getRowsAndCols(props.columns))
   return {
     rowsRef: computed(() => rowsAndCols.value.rows),
     colsRef: computed(() => rowsAndCols.value.cols),
+    hasEllpisisRef: computed(() => rowsAndCols.value.hasEllpisis),
     dataRelatedColsRef: computed(() => rowsAndCols.value.dataRelatedCols)
   }
 }

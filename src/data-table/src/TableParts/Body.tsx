@@ -7,7 +7,8 @@ import {
   VNode,
   watchEffect,
   onUnmounted,
-  PropType
+  PropType,
+  CSSProperties
 } from 'vue'
 import { pxfy, repeat } from 'seemly'
 import { VirtualList, VirtualListInst } from 'vueuc'
@@ -120,11 +121,12 @@ export default defineComponent({
       virtualScrollRef,
       componentId,
       scrollPartRef,
-      tableLayoutRef,
+      mergedTableLayoutRef,
       hasChildrenRef,
       firstContentfulColIndexRef,
       indentRef,
       rowPropsRef,
+      maxHeightRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -258,11 +260,12 @@ export default defineComponent({
       hoverKey: hoverKeyRef,
       mergedSortState: mergedSortStateRef,
       virtualScroll: virtualScrollRef,
-      tableLayout: tableLayoutRef,
+      mergedTableLayout: mergedTableLayoutRef,
       hasChildren: hasChildrenRef,
       firstContentfulColIndex: firstContentfulColIndexRef,
       indent: indentRef,
       rowProps: rowPropsRef,
+      maxHeight: maxHeightRef,
       setHeaderScrollLeft,
       handleMouseenterTable,
       handleVirtualListScroll,
@@ -282,16 +285,28 @@ export default defineComponent({
       scrollX,
       mergedClsPrefix,
       virtualScroll,
+      maxHeight,
+      mergedTableLayout,
       onResize,
       setHeaderScrollLeft
     } = this
-    const contentStyle = {
-      width: '100%',
-      minWidth: formatLength(scrollX)
+    const scrollable = scrollX !== undefined || maxHeight !== undefined
+
+    // For a basic table with auto layout whose content may overflow we will
+    // make it scrollable, which differs from browser's native behavior.
+    // For native behavior, see
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
+    const isBasicAutoLayout = !scrollable && mergedTableLayout === 'auto'
+    const xScrollable = scrollX !== undefined || isBasicAutoLayout
+
+    const contentStyle: CSSProperties = {
+      minWidth: formatLength(scrollX) || '100%'
     }
+    if (scrollX) contentStyle.width = '100%'
     return (
       <NScrollbar
         ref="scrollbarInstRef"
+        scrollable={scrollable || isBasicAutoLayout}
         class={`${mergedClsPrefix}-data-table-base-table-body`}
         theme={mergedTheme.peers.Scrollbar}
         themeOverrides={mergedTheme.peerOverrides.Scrollbar}
@@ -300,7 +315,7 @@ export default defineComponent({
         content={virtualScroll ? this.virtualListContent : undefined}
         horizontalRailStyle={{ zIndex: 3 }}
         verticalRailStyle={{ zIndex: 3 }}
-        xScrollable
+        xScrollable={xScrollable}
         onScroll={virtualScroll ? undefined : this.handleTableBodyScroll}
         internalOnUpdateScrollLeft={setHeaderScrollLeft}
         onResize={onResize}
@@ -379,8 +394,6 @@ export default defineComponent({
 
             const { length: rowCount } = mergedData
 
-            let hasEllipsis = false
-
             const indentStyle = hasChildren
               ? { width: pxfy(this.indent) }
               : undefined
@@ -441,7 +454,6 @@ export default defineComponent({
                 }
                 const hoverKey = isCrossRowTd ? this.hoverKey : null
                 const { ellipsis } = column
-                if (!hasEllipsis && ellipsis) hasEllipsis = true
                 return (
                   <td
                     key={colKey}
@@ -541,7 +553,10 @@ export default defineComponent({
                 )
               })
               const props = rowProps ? rowProps(rowData, rowIndex) : undefined
-              const mergedRowClassName = typeof rowClassName === 'string' ? rowClassName : createRowClassName(rowData, rowIndex, rowClassName)
+              const mergedRowClassName =
+                typeof rowClassName === 'string'
+                  ? rowClassName
+                  : createRowClassName(rowData, rowIndex, rowClassName)
               const row = (
                 <tr
                   onMouseenter={() => {
@@ -621,8 +636,7 @@ export default defineComponent({
                 onMouseleave={handleMouseleaveTable}
                 onMouseenter={handleMouseenterTable}
                 style={{
-                  tableLayout:
-                    this.showHeader && !hasEllipsis ? this.tableLayout : 'fixed'
+                  tableLayout: this.mergedTableLayout
                 }}
               >
                 <colgroup>
