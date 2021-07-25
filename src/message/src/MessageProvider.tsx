@@ -10,8 +10,7 @@ import {
   InjectionKey,
   ExtractPropTypes,
   renderSlot,
-  Ref,
-  toRef
+  Ref
 } from 'vue'
 import { createId } from 'seemly'
 import { ExtractPublicPropTypes, omit } from '../../_utils'
