@@ -23,7 +23,7 @@ show-sider-content
 scroll-to
 ```
 
-## Props
+## API
 
 ### Layout, Layout Content Props
 
@@ -67,18 +67,14 @@ scroll-to
 | show-collapsed-content | `boolean` | `true` | Whether to show content in sider after it is collapsed. |
 | show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | Whether to show the built-in trigger button on sider. |
 | trigger-style | `string \| Object` | `undefined` |  |
-| width | `number` | `272` |  |
+| width | `number \| string` | `272` |  |
 | on-update:collapsed | `(collapsed: boolean) => void` | `undefined` |  |
-
-## Slots
 
 ### Layout, Layout Content, Layout Sider, Layout Header, Layout Footer Slots
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
 | default | `()`       |             |
-
-## Methods
 
 ### Layout, Layout Content, Layout Sider Methods
 

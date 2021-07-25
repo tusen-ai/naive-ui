@@ -72,5 +72,9 @@ export default c([
   cB('image', `
     display: inline-flex;
     cursor: pointer;
-  `)
+  `, [
+    c('img', `
+      border-radius: inherit;
+    `)
+  ])
 ])

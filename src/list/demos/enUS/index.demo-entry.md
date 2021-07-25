@@ -15,24 +15,24 @@ border
 
 ### List Props
 
-| Name     | Type      | Default | Description |
-| -------- | --------- | ------- | ----------- |
-| bordered | `boolean` | `false` |             |
+| Name     | Type      | Default | Description                 |
+| -------- | --------- | ------- | --------------------------- |
+| bordered | `boolean` | `false` | Whether to show the border. |
 
 ## Slots
 
 ### List Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
-| footer  | `()`       |             |
-| header  | `()`       |             |
+| Name    | Parameters | Description                           |
+| ------- | ---------- | ------------------------------------- |
+| default | `()`       | The contents of the list.             |
+| footer  | `()`       | Content at the bottom of the list.    |
+| header  | `()`       | The contents of the head of the list. |
 
 ### List Item Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
-| prefix  | `()`       |             |
-| suffix  | `()`       |             |
+| Name    | Parameters | Description                         |
+| ------- | ---------- | ----------------------------------- |
+| default | `()`       | The contents of the list item.      |
+| prefix  | `()`       | The first content of the list item. |
+| suffix  | `()`       | The end of the list item.           |

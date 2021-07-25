@@ -16,6 +16,7 @@ virtual
 async
 disabled
 prefix-and-suffix
+batch-render
 ```
 
 ## API
@@ -44,6 +45,9 @@ prefix-and-suffix
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` |  |
 | pattern | `string` | `''` |  |
 | remote | `boolean` | `false` | Whether to load nodes async. It should work with `on-load` |
+| render-label | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' label. |
+| render-prefix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' prefix. |
+| render-suffix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' suffix. |
 | selectable | `boolean` | `true` |  |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scroll. You need to set proper style height of the tree in advance. |

@@ -30,23 +30,34 @@ const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
 keyof typeof popoverBodyProps
 >
 
+const triggerEventMap = {
+  focus: ['onFocus', 'onBlur'],
+  click: ['onClick'],
+  hover: ['onMouseenter', 'onMouseleave'],
+  manual: []
+} as const
+
 function appendEvents (
   vNode: VNode,
+  trigger: PopoverTrigger,
   events: {
     onClick: (e: MouseEvent) => void
     onMouseenter: (e: MouseEvent) => void
     onMouseleave: (e: MouseEvent) => void
+    onFocus: (e: FocusEvent) => void
+    onBlur: (e: FocusEvent) => void
   }
 ): void {
-  Object.entries(events).forEach(([key, handler]) => {
+  triggerEventMap[trigger].forEach((eventName) => {
     if (!vNode.props) vNode.props = {}
     else {
       vNode.props = Object.assign({}, vNode.props)
     }
-    const originalHandler = vNode.props[key]
-    if (!originalHandler) vNode.props[key] = handler
+    const originalHandler = vNode.props[eventName]
+    const handler = events[eventName]
+    if (!originalHandler) vNode.props[eventName] = handler
     else {
-      vNode.props[key] = (...args: unknown[]) => {
+      vNode.props[eventName] = (...args: unknown[]) => {
         originalHandler(...args)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ;(handler as any)(...args)
@@ -263,6 +274,20 @@ export default defineComponent({
         hideTimerIdRef.value = null
       }
     }
+    function handleFocus (): void {
+      const mergedDisabled = getMergedDisabled()
+      if (props.trigger === 'focus' && !mergedDisabled) {
+        if (getMergedShow()) return
+        doUpdateShow(true)
+      }
+    }
+    function handleBlur (): void {
+      const mergedDisabled = getMergedDisabled()
+      if (props.trigger === 'focus' && !mergedDisabled) {
+        if (!getMergedShow()) return
+        doUpdateShow(false)
+      }
+    }
     function handleMouseEnter (): void {
       const mergedDisabled = getMergedDisabled()
       if (props.trigger === 'hover' && !mergedDisabled) {
@@ -352,6 +377,8 @@ export default defineComponent({
       handleClick,
       handleMouseEnter,
       handleMouseLeave,
+      handleFocus,
+      handleBlur,
       setTriggerVNode (v: VNode | null) {
         triggerVNode = v
       },
@@ -373,11 +400,12 @@ export default defineComponent({
           triggerVNode.type === textVNodeType
             ? h('span', [triggerVNode])
             : triggerVNode
-
-        appendEvents(triggerVNode, {
+        appendEvents(triggerVNode, this.trigger, {
           onClick: this.handleClick,
           onMouseenter: this.handleMouseEnter,
-          onMouseleave: this.handleMouseLeave
+          onMouseleave: this.handleMouseLeave,
+          onFocus: this.handleFocus,
+          onBlur: this.handleBlur
         })
       }
       this.setTriggerVNode(triggerVNode)

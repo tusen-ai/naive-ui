@@ -14,6 +14,7 @@ import {
 } from 'vue'
 import { indexMap } from 'seemly'
 import { on, off } from 'evtd'
+import { BackwardIcon, ForwardIcon } from '../../_internal/icons'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { flatten } from '../../_utils'
@@ -24,6 +25,7 @@ import style from './styles/index.cssr'
 
 const carouselProps = {
   ...(useTheme.props as ThemeProps<CarouselTheme>),
+  showArrow: Boolean,
   autoplay: Boolean,
   dotPlacement: {
     type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
@@ -258,23 +260,26 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { dotColor, dotColorActive, dotSize }
+          self: { dotColor, dotColorActive, dotSize, arrowColor }
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
           '--dot-color': dotColor,
           '--dot-color-active': dotColorActive,
-          '--dot-size': dotSize
+          '--dot-size': dotSize,
+          '--arrow-color': arrowColor
         }
       })
     }
   },
   render () {
     const {
+      showArrow,
       dotPlacement,
       mergedClsPrefix,
       current,
       lengthRef,
+      autoplay,
       $slots: { default: defaultSlot }
     } = this
     const children = flatten(defaultSlot?.() || [])
@@ -337,11 +342,46 @@ export default defineComponent({
                 ]}
                 onClick={() => this.setCurrent(i + 1)}
                 onMouseenter={() => this.handleMouseenter(i + 1)}
+                onMousedown={
+                  autoplay
+                    ? (e) => {
+                        e.preventDefault()
+                      }
+                    : undefined
+                }
                 onKeydown={(e) => this.handleKeydown(e, i + 1)}
               />
             )
           })}
         </div>
+        {showArrow && [
+          <div
+            class={[
+              `${mergedClsPrefix}-carousel__arrow`,
+              `${mergedClsPrefix}-carousel__arrow--${
+                vertical ? 'bottom' : 'right'
+              }`
+            ]}
+            role="button"
+            onClick={() => {
+              this.next()
+            }}
+          >
+            <ForwardIcon />
+          </div>,
+          <div
+            class={[
+              `${mergedClsPrefix}-carousel__arrow`,
+              `${mergedClsPrefix}-carousel__arrow--${vertical ? 'top' : 'left'}`
+            ]}
+            role="button"
+            onClick={() => {
+              this.prev()
+            }}
+          >
+            <BackwardIcon />
+          </div>
+        ]}
       </div>
     )
   }

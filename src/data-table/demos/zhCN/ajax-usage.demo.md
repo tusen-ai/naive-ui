@@ -8,7 +8,6 @@
   :data="data"
   :loading="loading"
   :pagination="pagination"
-  :paging="false"
   :row-key="rowKey"
   @update:sorter="handleSorterChange"
   @update:filters="handleFiltersChange"

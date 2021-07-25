@@ -58,7 +58,7 @@ function createXhrHandlers (
       })
       XhrMap.delete(file.id)
       fileAfterChange =
-        inst.onFinish?.({ file: fileAfterChange }) || fileAfterChange
+        inst.onFinish?.({ file: fileAfterChange, event: e }) || fileAfterChange
       doChange(fileAfterChange, e)
     },
     handleXHRAbort (e) {
@@ -194,6 +194,10 @@ const uploadProps = {
     default: 'POST'
   },
   multiple: Boolean,
+  showFileList: {
+    type: Boolean,
+    default: true
+  },
   data: [Object, Function] as PropType<FuncOrRecordOrUndef>,
   headers: [Object, Function] as PropType<FuncOrRecordOrUndef>,
   withCredentials: Boolean,
@@ -515,23 +519,25 @@ export default defineComponent({
         >
           {this.$slots}
         </div>
-        <div
-          class={`${mergedClsPrefix}-upload-file-list`}
-          style={this.fileListStyle}
-        >
-          <NFadeInExpandTransition group>
-            {{
-              default: () =>
-                this.mergedFileList.map((file) => (
-                  <NUploadFile
-                    clsPrefix={mergedClsPrefix}
-                    key={file.id}
-                    file={file}
-                  />
-                ))
-            }}
-          </NFadeInExpandTransition>
-        </div>
+        {this.showFileList && (
+          <div
+            class={`${mergedClsPrefix}-upload-file-list`}
+            style={this.fileListStyle}
+          >
+            <NFadeInExpandTransition group>
+              {{
+                default: () =>
+                  this.mergedFileList.map((file) => (
+                    <NUploadFile
+                      clsPrefix={mergedClsPrefix}
+                      key={file.id}
+                      file={file}
+                    />
+                  ))
+              }}
+            </NFadeInExpandTransition>
+          </div>
+        )}
       </div>
     )
   }

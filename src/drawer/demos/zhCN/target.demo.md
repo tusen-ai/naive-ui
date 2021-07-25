@@ -37,18 +37,21 @@
 ```
 
 ```js
-export default {
-  data () {
-    return {
-      active: false,
-      placement: 'right'
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const active = ref(false)
+    const placement = ref('right')
+    const activate = (place) => {
+      active.value = true
+      placement.value = place
     }
-  },
-  methods: {
-    activate (placement) {
-      this.active = true
-      this.placement = placement
+    return {
+      active,
+      placement,
+      activate
     }
   }
-}
+})
 ```

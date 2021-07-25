@@ -2,31 +2,114 @@
 
 ## Pending
 
-- 修复 `n-select` 自定义 label 的显示问题，关闭 [#352](https://github.com/TuSimple/naive-ui/issues/352)
+### Feats
+
+- `n-time-picker` 增加 `actions` 属性, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
+- `n-switch` 增加 `checked`、`unchecked` 插槽
+- `n-switch` 增加 `loading` 属性，关闭 [#301](https://github.com/TuSimple/naive-ui/issues/301)
+- `n-select` 按下箭头会打开菜单，有关 [#300](https://github.com/TuSimple/naive-ui/issues/300)
+- `n-tree-select` 按下箭头会打开菜单，有关 [#300](https://github.com/TuSimple/naive-ui/issues/300)
+- `n-cascader` 按下箭头会打开菜单，有关 [#300](https://github.com/TuSimple/naive-ui/issues/300)
+- `n-popover` 的 `trigger` 属性支持 `'focus'`，关闭 [#477](https://github.com/TuSimple/naive-ui/issues/477)
 - `n-message-provider` 新增 `duration` 和 `max-visible` 属性
+
+### Fixes
+
+- 修复 `n-carousel` 中箭头按钮在特定浏览器下无法显示问题，关闭 [#625](https://github.com/TuSimple/naive-ui/issues/625)
+- 修复 `n-layout-sider` `width` 不能为字符串，关闭 [#607](https://github.com/TuSimple/naive-ui/issues/607)
+
+## 2.15.6 (2021-07-23)
 
 ### Feats
 
+- `n-menu` 新增 `render-icon` 属性
+- `n-upload` 新增 `show-file-list` 属性
+- `n-dropdown` 新增 `render-icon` 属性
+- `n-checkbox-group` 新增 `min` 和 `max` 属性
+- `n-mention` 新增 `empty` slot
+- `useDialog` 选项新增 `on-mask-click`属性, 关闭 [#419](https://github.com/TuSimple/naive-ui/issues/419)
+- `n-space` `justify` 属性支持 `center`、`space-around` 和 `space-between`
+- `n-date-picker` 新增 `close-on-select` 属性, 关闭 [#541](https://github.com/TuSimple/naive-ui/issues/541)
+- `n-dialog` 新增 `action` 属性，关闭 [#550](https://github.com/TuSimple/naive-ui/issues/550)
+- `n-mention` 的 `option.label` 支持使用渲染函数
+- `n-color-picker` 新增 `actions` 属性，关闭 [#319](https://github.com/TuSimple/naive-ui/issues/319)
+
+### Fixes
+
+- 修复 `n-space` 中 `display: grid` 的元素显示不正确，关闭 `https://github.com/TuSimple/naive-ui/issues/546`
+- 修复 `n-dropdown` 的 `render-label` 属性对 group 类型 option 失效
+- 修复 `n-datatable` 的 `scroll-x` 属性设置后 table 内容宽度未沾满容器宽度，关闭 [#518](https://github.com/TuSimple/naive-ui/issues/518)
+- 修复 `n-descriptions` 无法使用 `v-for` 的子元素
+- 修复 `n-dialog` `positive-text` 为空仍然显示按钮，关闭 [#549](https://github.com/TuSimple/naive-ui/issues/549)
+- 修复 `n-pagination` `PaginationInfo` 的 `endIndex` 数据错误，关闭 [#584](https://github.com/TuSimple/naive-ui/issues/584)
+- 修复 `n-data-table` `rowClassName` 的类型是 string 的时候不生效问题，关闭 [#582](https://github.com/TuSimple/naive-ui/issues/582)
+
+## 2.15.5 (2021-07-16)
+
+### Feats
+
+- `n-tree` 新增 `render-label`、`render-prefix` 和 `render-suffix` 属性
+- `n-rate` 新增 `allow-half` 属性
+- `n-carousel` 新增 `show-arrow` 属性
+- `n-slider` 新增 `format-tooltip` 属性
+- `n-upload` 在 `on-finish` 回调参数中新增 `event`
+- `n-rate` 新增 `readonly` 属性
+- `n-time-picker` 新增 `seconds`、`minutes`、`hours`属性
+- `n-notification` 导出 `NotificationApi`, `NotificationOptions` and `NotificationReactive` 类型
+- `n-avatar` 新增 `on-error` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
+- `n-image` 新增 `on-error` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
+- `n-image` 新增 `object-fit` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
+- `n-avatar` 新增 `object-fit` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
+- `n-menu` 默认展开选中项的全部父级，关闭[#481](https://github.com/TuSimple/naive-ui/issues/481)
+
+### Fixes
+
+- 修复 `n-calendar` 的 `default-value` 属性无法使用
+- 修复 `n-pagination` `item-count` 为 0 时页数不对
+- 修复 `n-scrollbar` `content-style` 无法覆盖默认样式的宽度
+- 修复 `n-select` placeholder transition
+- 修复 `n-loading-bar` `useLoadingBar` 返回类型可能为 undefined
+- 修复 `n-tag` 的 `type` 增加 `primary`　类型
+- 修复 `n-dynamic-tag` 的 `type` 增加 `primary`　类型
+
+## 2.15.4 (2021-07-09)
+
+### Feats
+
+- `n-steps` 新增 `'finish'` 和 `'error'` 状态下的图标定制
 - `n-tree` 导出 `TreeDragInfo` & `TreeDropInfo` 类型
+- `n-empty` 导出 `icon` slot
+- `useDialog` 选项增加 `maskClosable` 属性，关闭 [#420](https://github.com/TuSimple/naive-ui/issues/420)
 
 ### Fixes
 
 - 修复 `n-data-table` 在只有一侧固定列时固定列阴影不更新
 - 修复 `n-data-table` 在未设定 `props.scrollX` 但为每个列设定宽度后固定列阴影不更新
+- 修复 `n-result` 图片在 Safari 和手机端不显示
+- 修复 `n-drawer-content` 的 `header-style` 样式未应用于头部
+- 修复 `n-dialog` 实例调用 `destroy` 函数错误
+- 修复 `n-select` 自定义 label 的显示问题，关闭 [#352](https://github.com/TuSimple/naive-ui/issues/352)
+- 修复 `n-image-group` 当切换图片预览时，初始化缩放比例 [#423](https://github.com/TuSimple/naive-ui/issues/423)
+- 修复 `n-carousel` 设定 `autoplay` 点击后 dot active 状态不正常，关闭 [#434](https://github.com/TuSimple/naive-ui/issues/434)
+- 修复 `n-input` 清空按钮位置引起的样式问题，关闭 [#428](https://github.com/TuSimple/naive-ui/issues/428)
+- 修复 `n-image` 不接受 attributes
+- 修复 `n-image` 设定 border-radius 无效，关闭 [#427](https://github.com/TuSimple/naive-ui/issues/427)
+- 修复 `n-tab-pane` 再没有子节点时报错
+- 修复 `n-select` clear 按钮在 `n-spin` 内过大，关闭 [#454](https://github.com/TuSimple/naive-ui/issues/454)
+- 修复 `n-select` 选项没有被正常更新，关闭 [#441](https://github.com/TuSimple/naive-ui/issues/441)
 
 ## 2.15.3 (2021-07-05)
 
 ### Feats
 
 - `n-loading-bar` 导出 `LoadingBarApi` 类型
-- `n-image` 增加 `imgProps` 属性
+- `n-image` 增加 `img-props` 属性
 - 在部分组件上添加原生 `title` 属性，以提高用户体验
 - `n-tree` 在 TreeOption 中增加 `prefix` 和 `suffix` 属性
 - `n-carousel` 增加 `dot-placement` 属性
 - `n-auto-complete` 新增 `loading` 属性，关闭 [#241](https://github.com/TuSimple/naive-ui/issues/241)
 - `n-slider` 增加 `tooltip` 属性，关闭 [#362](https://github.com/TuSimple/naive-ui/issues/362)
 - `n-input` 新增 `loading` 属性
-- `n-empty` 导出 `icon` slot
 
 ### Fixes
 

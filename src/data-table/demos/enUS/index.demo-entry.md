@@ -55,12 +55,12 @@ tree
 | max-height | `number \| string` | `undefined` | The max-height of the table content. Can be a CSS value. |
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Props) |
-| paging | `boolean` | `true` | If data-table do automatic paging. You may set it to `false` in async usage. |
+| remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `false` in async usage. |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string \| object` | `undefined` | Class name of each row. |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |
-| single-column | `boolean` | `false` | Whether to display as a column (when true, each column has border-bottom). |
+| single-column | `boolean` | `false` | Whether to display as a column (when true, each column has border-right). |
 | single-line | `boolean` | `true` | Whether to display as a line (when true, each row has border-bottom). |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |
 | summary | `CreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#CreateSummary-Type">CreateSummary Type</n-a>. |

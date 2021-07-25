@@ -65,11 +65,11 @@ render-tag
 
 | Name | Type | Description |
 | --- | --- | --- |
-| class | `string` |  |
-| disabled | `boolean` |  |
+| class | `string` | Customize the class name of the option. |
+| disabled | `boolean` | Whether to disable the option. |
 | label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | Label of the option. Note that if you are using render function, the default filter will filter the option. |
 | render | `(info: { node: VNode }) => VNodeChild` | Render the entire option. |
-| style | `string` |  |
+| style | `string` | Customize the style of the option. |
 | value | `string \| number` | Should be unique in options. |
 
 ### SelectGroupOption Properties
@@ -78,12 +78,13 @@ render-tag
 | --- | --- | --- |
 | children | `Array<SelectOption>` |  |
 | label | `string \| ((option: SelectGroupOption) => VNodeChild)` | Label of the group option. |
-| key | `string \| number` | hould be unique in options. |
+| key | `string \| number` | Should be unique in options. |
 | render | `(info: { node: VNode }) => VNodeChild` | Render the entire option. |
 | type | `'group'` |  |
 
 ### Select Slots
 
-| Name   | Parameters | Description |
-| ------ | ---------- | ----------- |
-| action | `()`       |             |
+| Name   | Parameters | Description                  |
+| ------ | ---------- | ---------------------------- |
+| action | `()`       | Slot in menu operation area. |
+| empty  | `()`       | Slot when menu has no data.  |

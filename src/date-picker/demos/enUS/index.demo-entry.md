@@ -40,7 +40,7 @@ update-on-close
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported in date picker of `date` type. |
-| format | `string` | `'yyyy-MM-dd'` |  Format of the input. |
+| format | `string` | `'yyyy-MM-dd'` | Format of the input. |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |
 | placeholder | `string` | `'Select Date'` | Prompt information. |
 | on-update:value | `(value: number \| null) => void` | `undefined` | Callback when date is selected. |
@@ -50,7 +50,7 @@ update-on-close
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported in date picker of `datetime` type. |
-| format | `string` | `'yyyy-MM-dd HH:mm:ss'` |  Format of the input. |
+| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
 | placeholder | `string` | `'Select Date and Time'` | Prompt information. |
@@ -63,13 +63,14 @@ update-on-close
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported in date picker of `daterange` type. |
 | end-placeholder | `string` | `'End Date'` | The prompt information of the end input. |
-| format | `string` | `'yyyy-MM-dd'` |  Format of the input. |
+| format | `string` | `'yyyy-MM-dd'` | Format of the input. |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
 | ranges | `Record<string, [number, number]>` | `undefined` | Customize ranges. |
+| close-on-select | `boolean` | `false` | Whether to close the panel after the user selected a time range. |
 | separator | `string` | `'to'` | The separator between the start input and the end input. |
 | start-placeholder | `string` | `'Start Date'` | The prompt information of the start input. |
-| update-value-on-close | `boolean` | `false` | Whether to update value on close.  |
+| update-value-on-close | `boolean` | `false` | Whether to update value on close. |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` | Callback when range is changed. |
 
 ### DateTimeRange Type Props
@@ -78,7 +79,7 @@ update-on-close
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported in date picker of `datetimerange` type. |
 | end-placeholder | `string` | `'End Date and Time'` | The prompt information of the end input. |
-| format | `string` | `'yyyy-MM-dd HH:mm:ss'` |  Format of the input. |
+| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
 | ranges | `Record<string, [number, number]>` | `undefined` | Customize ranges. |

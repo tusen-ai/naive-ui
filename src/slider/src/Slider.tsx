@@ -38,6 +38,7 @@ const sliderProps = {
   },
   marks: Object as PropType<Record<string, string>>,
   disabled: Boolean,
+  formatTooltip: Function as PropType<(value: number) => string | number>,
   min: {
     type: Number,
     default: 0
@@ -786,7 +787,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, formatTooltip } = this
     return (
       <div
         class={[
@@ -875,7 +876,9 @@ export default defineComponent({
                                 class={`${mergedClsPrefix}-slider-handle-indicator`}
                                 style={this.indicatorCssVars as CSSProperties}
                               >
-                                {this.handleValue1}
+                                {typeof formatTooltip === 'function'
+                                  ? formatTooltip(this.handleValue1)
+                                  : this.handleValue1}
                               </div>
                             ) : null
                         }}
@@ -931,7 +934,9 @@ export default defineComponent({
                                 class={`${mergedClsPrefix}-slider-handle-indicator`}
                                 style={this.indicatorCssVars as CSSProperties}
                               >
-                                {this.handleValue2}
+                                {typeof formatTooltip === 'function'
+                                  ? formatTooltip(this.handleValue2)
+                                  : this.handleValue2}
                               </div>
                             ) : null
                         }}

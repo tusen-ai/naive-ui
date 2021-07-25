@@ -55,12 +55,12 @@ tree
 | max-height | `number \| string` | `undefined` | 表格内容的最大高度，可以是 CSS 属性值 |
 | min-height | `number \| string` | `undefined` | 表格内容的最低高度，可以是 CSS 属性值 |
 | pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Props) |
-| paging | `boolean` | `true` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `false` |
+| remote | `boolean` | `false` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `true` |
 | row-class-name | `string \| (rowData: object, index : number) => string \| object` | `undefined` | 每一行上的类名 |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |
 | scroll-x | `number \| string` | `undefined` | 表格内容的横向宽度，如果列被水平固定了，则需要设定它 |
-| single-column | `boolean` | `false` | 是否展示为一列（true 时每一列都有 border-bottom） |
+| single-column | `boolean` | `false` | 是否展示为一列（true 时每一列都有 border-right） |
 | single-line | `boolean` | `true` | 是否展示为一行（true 时每一行都有 border-bottom） |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |
 | summary | `CreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#CreateSummary-Type">CreateSummary Type</n-a> |

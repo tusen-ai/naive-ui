@@ -24,7 +24,7 @@ import NotificationEnvironment, {
 } from './NotificationEnvironment'
 import style from './styles/index.cssr'
 
-type NotificationOptions = Partial<
+export type NotificationOptions = Partial<
 ExtractPropTypes<typeof notificationEnvOptions>
 >
 
@@ -33,9 +33,8 @@ export interface NotificationProviderInjection {
   mergedThemeRef: Ref<MergedTheme<NotificationTheme>>
 }
 
-export const notificationProviderInjectionKey: InjectionKey<NotificationProviderInjection> = Symbol(
-  'notificationProvider'
-)
+export const notificationProviderInjectionKey: InjectionKey<NotificationProviderInjection> =
+  Symbol('notificationProvider')
 
 type Create = (options: NotificationOptions) => NotificationReactive
 type TypedCreate = (
@@ -54,11 +53,10 @@ export interface NotificationApiInjection {
 
 export type NotificationProviderInst = NotificationApiInjection
 
-export const notificationApiInjectionKey: InjectionKey<NotificationApiInjection> = Symbol(
-  'notificationApi'
-)
+export const notificationApiInjectionKey: InjectionKey<NotificationApiInjection> =
+  Symbol('notificationApi')
 
-type NotificationReactive = {
+export type NotificationReactive = {
   readonly key: string
   readonly destroy: () => void
   /** @deprecated */

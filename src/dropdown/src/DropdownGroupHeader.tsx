@@ -1,5 +1,6 @@
 import { defineComponent, h, inject } from 'vue'
 import { render } from '../../_utils'
+import { dropdownInjectionKey } from './Dropdown'
 import { dropdownMenuInjectionKey } from './DropdownMenu'
 
 export default defineComponent({
@@ -14,16 +15,24 @@ export default defineComponent({
       required: true
     }
   },
-  setup () {
+  setup (props) {
+    const {
+      showIconRef,
+      hasSubmenuRef
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    } = inject(dropdownMenuInjectionKey)!
+
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { showIconRef, hasSubmenuRef } = inject(dropdownMenuInjectionKey)!
+    const { renderLabelRef } = inject(dropdownInjectionKey)!
+
     return {
       showIcon: showIconRef,
-      hasSubmenu: hasSubmenuRef
+      hasSubmenu: hasSubmenuRef,
+      renderLabel: renderLabelRef
     }
   },
   render () {
-    const { clsPrefix, hasSubmenu, showIcon } = this
+    const { clsPrefix, hasSubmenu, showIcon, renderLabel } = this
     const { rawNode } = this.tmNode
     return (
       <div class={`${clsPrefix}-dropdown-option`}>
@@ -43,7 +52,9 @@ export default defineComponent({
             class={`${clsPrefix}-dropdown-option-body__label`}
             __dropdown-option
           >
-            {render(rawNode.label ?? rawNode.title)}
+            {renderLabel
+              ? renderLabel(rawNode)
+              : render(rawNode.label ?? rawNode.title)}
           </div>
           <div
             class={[

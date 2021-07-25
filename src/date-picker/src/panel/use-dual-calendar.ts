@@ -47,6 +47,8 @@ function useDualCalendar (
     isRangeInvalidRef,
     localeRef,
     rangesRef,
+    closeOnSelectRef,
+    updateValueOnCloseRef,
     datePickerSlots
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
@@ -312,6 +314,13 @@ function useDualCalendar (
       changeStartEndTime(dateItem.ts)
     } else {
       isSelectingRef.value = false
+      if (closeOnSelectRef.value && type === 'daterange') {
+        if (updateValueOnCloseRef.value) {
+          closeCalendar()
+        } else {
+          handleConfirmClick()
+        }
+      }
     }
   }
   function handleDateMouseEnter (dateItem: DateItem): void {

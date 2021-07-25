@@ -11,6 +11,7 @@ basic
 size
 vertical
 content
+custom-icon
 ```
 
 ## Props
@@ -36,9 +37,11 @@ content
 
 ### Steps Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name        | Parameters | Description                      |
+| ----------- | ---------- | -------------------------------- |
+| default     | `()`       |                                  |
+| finish-icon | `()`       | `'finish'` status button deploy. |
+| error-icon  | `()`       | `'error'` status button deploy.  |
 
 ### Step Slots
 

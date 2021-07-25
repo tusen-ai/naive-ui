@@ -9,6 +9,7 @@ basic
 autoplay
 hover
 dot-placement
+show-arrow
 ```
 
 ## API
@@ -20,6 +21,7 @@ dot-placement
 | autoplay | `boolean` | `false` | Whether to scroll automatically. |
 | interval | `number` | `5000` | Auto play interval. |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Dot placement in the panel. |
+| show-arrow | `boolean` | `false` | Whether to show arrow button. |
 | trigger | `'click' \| 'hover'` | `'click'` | The way to trigger the switch. |
 
 ### Carousel Slots

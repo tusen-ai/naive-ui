@@ -2,32 +2,114 @@
 
 ## Pending
 
+### Feats
 
-- Fix `n-select` bug in using custom label, closes [#352](https://github.com/TuSimple/naive-ui/issues/352).
+- `n-time-picker` add `actions` prop, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
+- `n-switch` add `checked`, `unchecked` slots.
+- `n-switch` add `loading` prop, closes [#301](https://github.com/TuSimple/naive-ui/issues/301).
+- `n-select` pressing arrow down can open menu, ref [#300](https://github.com/TuSimple/naive-ui/issues/300).
+- `n-tree-select` pressing arrow down can open menu, ref [#300](https://github.com/TuSimple/naive-ui/issues/300).
+- `n-cascader` pressing arrow down can open menu, ref [#300](https://github.com/TuSimple/naive-ui/issues/300).
+- `n-popover`'s `trigger` prop support `'focus'`, closes [#477](https://github.com/TuSimple/naive-ui/issues/477).
+- `n-message-provider` add `duration` and `max-visible` props.
+
+### Fixes
+
+- Fix `n-carousel` arrow buttons cannot be displayed in a specific browser, closes [#625](https://github.com/TuSimple/naive-ui/issues/625).
+- Fix `n-layout-sider`'s `width` prop can't be string, closes [#607](https://github.com/TuSimple/naive-ui/issues/607).
+
+## 2.15.6 (2021-07-23)
 
 ### Feats
 
+- `n-menu` add `render-icon` prop.
+- `n-upload` add `show-file-list` prop.
+- `n-dropdown` add `render-icon` prop.
+- `n-checkbox-group` add `min` and `max` prop.
+- `n-mention` add `empty` slot.
+- `useDialog` option add `on-mask-click` prop, closes [#419](https://github.com/TuSimple/naive-ui/issues/419).
+- `n-space` `justify` prop supports `center`, `space-around` and `space-between`.
+- `n-date-picker` add `close-on-select` prop, closes [#541](https://github.com/TuSimple/naive-ui/issues/541).
+- `n-dialog` add `action` prop, closes [#550](https://github.com/TuSimple/naive-ui/issues/550).
+- `n-mention`’s `option.label` support render function.
+- `n-color-picker` add `actions` prop, closes [#319](https://github.com/TuSimple/naive-ui/issues/319).
+
+### Fixes
+
+- Fix `n-space`'s inner `display: grid` element breaks item height, closes `https://github.com/TuSimple/naive-ui/issues/546`.
+- Fix `n-dropdown`'s `render-label` prop is invalid for group type option.
+- Fix `n-datatable`'s `scroll-x` prop is setted, the table content width is not full of the container width, closes [#518](https://github.com/TuSimple/naive-ui/issues/518).
+- Fix `n-descriptions` doesn't work with `v-for` children.
+- Fix `n-dialog` display an empty button when `positive-text` is not set, closes [#549](https://github.com/TuSimple/naive-ui/issues/549).
+- Fix `n-pagination` `PaginationInfo`'s `endIndex` data error, closes [#584](https://github.com/TuSimple/naive-ui/issues/584).
+- Fix `n-data-table` `rowClassName` doesn't work when type is string, closes [#582](https://github.com/TuSimple/naive-ui/issues/582).
+
+## 2.15.5 (2021-07-16)
+
+### Feats
+
+- `n-tree` add `render-label`, `render-prefix` and `render-suffix` props.
+- `n-rate` add `allow-half` prop.
+- `n-carousel` add `show-arrow` prop.
+- `n-slider` add `format-tooltip` prop.
+- `n-upload` add `event` in `on-finish` callback params.
+- `n-rate` add `readonly` prop.
+- `n-time-picker` add `seconds`, `minutes`, `hours` props.
+- `n-notification` export `NotificationApi`, `NotificationOptions` and `NotificationReactive` type.
+- `n-avatar` add `on-error` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
+- `n-image` add `on-error` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
+- `n-image` add `object-fit` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
+- `n-avatar` add `object-fit` prop, closes [#394](https://github.com/TuSimple/naive-ui/issues/394).
+- `n-menu` expands all the ascendant of selected item by default, closes [#481](https://github.com/TuSimple/naive-ui/issues/481).
+
+### Fixes
+
+- Fix `n-calendar`'s `default-value` prop cannot be used.
+- Fix `n-pagination` page count is not correct when `item-count` is 0.
+- Fix `n-scrollbar` `content-style` can not override the default width of style.
+- Fix `n-select` placeholder transition.
+- Fix `n-loading-bar` `useLoadingBar`'s return type can be undefined.
+- Fix `n-tag`'s `type` prop add `primary` type.
+- Fix `n-dynamic-tag`'s `type` prop add `primary` type.
+
+## 2.15.4 (2021-07-09)
+
+### Feats
+
+- `n-steps` add icon customization in `'finish'` and `'error'` status.
 - `n-tree` exports `TreeDragInfo` & `TreeDropInfo` type.
-- `n-message-provider` add `duration` and `max-visible` props.
+- `n-empty` export `icon` slot.
+- `useDialog` option add `maskClosable` prop, closes [#420](https://github.com/TuSimple/naive-ui/issues/420).
 
 ### Fixes
 
 - Fix `n-data-table` fixed column box-shadow doesn't update when there is only on side fixed.
 - Fix `n-data-table` fixed column box-shadow doesn't update when `props.scrollX` is not set but each column's width is set.
+- Fix `n-result` image doesn't show on Safari and mobile phone.
+- Fix `n-drawer-content`'s `header-style` style not applied to header.
+- Fix `n-dialog` instance throws error when calling `destroy`.
+- Fix `n-image-group` initialize zoom scale when switching a picture [#423](https://github.com/TuSimple/naive-ui/issues/423).
+- Fix `n-select` bug in using custom label, closes [#352](https://github.com/TuSimple/naive-ui/issues/352).
+- Fix `n-carousel` when `autoplay` dot active status isn't displayed correctly, closes [#434](https://github.com/TuSimple/naive-ui/issues/434).
+- Fix `n-input` fixed clearable position, closes [#428](https://github.com/TuSimple/naive-ui/issues/428).
+- Fix `n-image` doesn't accept attributes.
+- Fix `n-image` set border-radius not working, closes [#427](https://github.com/TuSimple/naive-ui/issues/427).
+- Fix `n-tab-pane` throws error when there's no children.
+- Fix `n-select` clear button is too big in `n-spin`, closes [#454](https://github.com/TuSimple/naive-ui/issues/454).
+- Fix `n-select` options are not updated properly, closes [#441](https://github.com/TuSimple/naive-ui/issues/441).
 
 ## 2.15.3 (2021-07-05)
 
 ### Feats
 
 - `n-loading-bar` export `LoadingBarApi` type.
-- `n-image` add `imgProps` prop.
+- `n-image` add `img-props` prop.
 - Add native `title` attributes to some components to enhance the experience.
 - `n-tree` add `prefix` and `suffix` in TreeOption.
 - `n-carousel` add `dot-placement` prop.
 - `n-auto-complete` add `loading` prop, closes [#241](https://github.com/TuSimple/naive-ui/issues/241).
 - `n-slider` add `tooltip` prop, closes [#362](https://github.com/TuSimple/naive-ui/issues/362).
 - `n-input` add `loading` prop.
-- `n-empty` export `icon` slot.
 
 ### Fixes
 

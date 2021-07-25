@@ -58,6 +58,19 @@ import {
   timePickerInjectionKey
 } from './interface'
 import { happensIn } from 'seemly'
+import { isTimeInStep } from './utils'
+
+// validate hours, minutes, seconds prop
+function validateUnits (value: MaybeArray<number>, max: number): boolean {
+  if (value === undefined) {
+    return true
+  }
+  if (Array.isArray(value)) {
+    return value.every((v) => v >= 0 && v <= max)
+  } else {
+    return value >= 0 && value <= max
+  }
+}
 
 const timePickerProps = {
   ...(useTheme.props as ThemeProps<TimePickerTheme>),
@@ -66,6 +79,7 @@ const timePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  actions: Array as PropType<Array<'now' | 'confirm'>>,
   defaultValue: {
     type: Number as PropType<number | null>,
     default: null
@@ -84,10 +98,7 @@ const timePickerProps = {
   size: String as PropType<Size>,
   isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
   isSecondDisabled: Function as PropType<IsSecondDisabled>,
-  clearable: {
-    type: Boolean,
-    default: false
-  },
+  clearable: Boolean,
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -102,10 +113,7 @@ const timePickerProps = {
     type: Boolean,
     default: true
   },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  disabled: Boolean,
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
@@ -119,6 +127,18 @@ const timePickerProps = {
       return true
     },
     default: undefined
+  },
+  hours: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: MaybeArray<number>) => validateUnits(value, 23)
+  },
+  minutes: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: MaybeArray<number>) => validateUnits(value, 59)
+  },
+  seconds: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: MaybeArray<number>) => validateUnits(value, 59)
   }
 }
 
@@ -191,27 +211,30 @@ export default defineComponent({
     })
     const isHourInvalidRef = computed(() => {
       const { isHourDisabled } = props
-      if (!isHourDisabled) return false
       if (hourValueRef.value === null) return false
+      if (!isTimeInStep(hourValueRef.value, 'hours', props.hours)) return true
+      if (!isHourDisabled) return false
       return isHourDisabled(hourValueRef.value)
     })
     const isMinuteInvalidRef = computed(() => {
-      const { isMinuteDisabled } = props
-      if (!isMinuteDisabled) return false
       const { value: minuteValue } = minuteValueRef
       const { value: hourValue } = hourValueRef
       if (minuteValue === null || hourValue === null) return false
+      if (!isTimeInStep(minuteValue, 'minutes', props.minutes)) return true
+      const { isMinuteDisabled } = props
+      if (!isMinuteDisabled) return false
       return isMinuteDisabled(minuteValue, hourValue)
     })
     const isSecondInvalidRef = computed(() => {
-      const { isSecondDisabled } = props
-      if (!isSecondDisabled) return false
       const { value: minuteValue } = minuteValueRef
       const { value: hourValue } = hourValueRef
       const { value: secondValue } = secondValueRef
       if (secondValue === null || minuteValue === null || hourValue === null) {
         return false
       }
+      if (!isTimeInStep(secondValue, 'seconds', props.seconds)) return true
+      const { isSecondDisabled } = props
+      if (!isSecondDisabled) return false
       return isSecondDisabled(secondValue, minuteValue, hourValue)
     })
     const isValueInvalidRef = computed(() => {
@@ -665,7 +688,11 @@ export default defineComponent({
                             ? withDirectives(
                                 <Panel
                                   ref="panelInstRef"
+                                  actions={this.actions}
                                   style={this.cssVars as CSSProperties}
+                                  seconds={this.seconds}
+                                  minutes={this.minutes}
+                                  hours={this.hours}
                                   transitionDisabled={this.transitionDisabled}
                                   hourValue={this.hourValue}
                                   showHour={this.hourInFormat}

@@ -1,7 +1,6 @@
 import {
   h,
   inject,
-  toRef,
   defineComponent,
   Transition,
   PropType,
@@ -66,7 +65,6 @@ export default defineComponent({
       handleOptionMouseEnter
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(internalSelectionMenuInjectionKey)!
-    const rawNodeRef = toRef(props.tmNode, 'rawNode')
     const isPendingRef = useMemo(() => {
       const { value: pendingTmNode } = pendingTmNodeRef
       if (!pendingTmNode) return false
@@ -90,7 +88,6 @@ export default defineComponent({
     }
     return {
       multiple: multipleRef,
-      rawNode: rawNodeRef,
       isGrouped: useMemo(() => {
         const { tmNode } = props
         const { parent } = tmNode
@@ -101,7 +98,7 @@ export default defineComponent({
         const { value } = valueRef
         const { value: multiple } = multipleRef
         if (value === null) return false
-        const optionValue = rawNodeRef.value.value
+        const optionValue = props.tmNode.rawNode.value
         if (multiple) {
           const { value: valueSet } = valueSetRef
           return valueSet.has(optionValue)
@@ -119,7 +116,7 @@ export default defineComponent({
   render () {
     const {
       clsPrefix,
-      rawNode,
+      tmNode: { rawNode },
       isSelected,
       isPending,
       isGrouped,

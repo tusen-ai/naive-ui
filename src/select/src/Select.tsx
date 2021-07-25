@@ -45,7 +45,6 @@ import {
   defaultFilter
 } from './utils'
 import style from './styles/index.cssr'
-
 import type {
   SelectMixedOption,
   SelectBaseOption,
@@ -577,6 +576,8 @@ export default defineComponent({
           if (props.loading) return
           if (mergedShowRef.value) {
             menuRef.value?.next()
+          } else {
+            openMenu()
           }
           break
         case 'Escape':
