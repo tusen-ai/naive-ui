@@ -1,13 +1,4 @@
-import {
-  h,
-  defineComponent,
-  ref,
-  toRef,
-  watch,
-  computed,
-  PropType,
-  renderSlot
-} from 'vue'
+import { h, defineComponent, ref, toRef, watch, computed, PropType } from 'vue'
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
 import { RemoveIcon, AddIcon } from '../../_internal/icons'
@@ -379,14 +370,14 @@ export default defineComponent({
           onMousedown={this.handleMouseDown}
         >
           {{
-            prefix: () => renderSlot(this.$slots, 'prefix'),
+            prefix: this.$slots.prefix,
             suffix: () =>
               this.showButton ? (
                 [
                   <span
                     class={`${mergedClsPrefix}-input-number-suffix-has-button`}
                   >
-                    {renderSlot(this.$slots, 'suffix')}
+                    {{ default: this.$slots.suffix }}
                   </span>,
                   <NButton
                     text
@@ -429,7 +420,7 @@ export default defineComponent({
                 <span
                   class={`${mergedClsPrefix}-input-number-suffix-no-button`}
                 >
-                  {renderSlot(this.$slots, 'suffix')}
+                  {{ default: this.$slots.suffix }}
                 </span>
               )
           }}
