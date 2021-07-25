@@ -23,6 +23,7 @@
 - 修复 `n-input` 在只读时仍展示清除按钮
 - 修复 `n-data-table` 在 table-layout 为 auto 时不展示滚动条，关闭 [#518](https://github.com/TuSimple/naive-ui/issues/518)
 - 修复 `n-data-table` 无数据时头部 checkbox 显示状态不正确
+- 修复 `n-data-table` header 和 body 滚动不同步
 
 ## 2.15.6 (2021-07-23)
 

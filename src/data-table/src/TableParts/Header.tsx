@@ -53,7 +53,7 @@ export default defineComponent({
       scrollPartRef,
       mergedTableLayoutRef,
       headerCheckboxDisabledRef,
-      handleTableBodyScroll,
+      handleTableHeaderScroll,
       doUpdateSorter,
       doUncheckAll,
       doCheckAll
@@ -98,7 +98,7 @@ export default defineComponent({
       handleMouseenter,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
-      handleTableBodyScroll
+      handleTableHeaderScroll
     }
   },
   render () {
@@ -225,11 +225,11 @@ export default defineComponent({
     if (!discrete) {
       return theadVNode
     }
-    const { handleTableBodyScroll, handleMouseenter, scrollX } = this
+    const { handleTableHeaderScroll, handleMouseenter, scrollX } = this
     return (
       <div
         class={`${mergedClsPrefix}-data-table-base-table-header`}
-        onScroll={handleTableBodyScroll}
+        onScroll={handleTableHeaderScroll}
         onMouseenter={handleMouseenter}
       >
         <table

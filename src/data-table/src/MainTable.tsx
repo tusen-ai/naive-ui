@@ -28,7 +28,6 @@ export default defineComponent({
       maxHeightRef,
       minHeightRef,
       flexHeightRef,
-      handleTableHeaderScroll,
       syncScrollState
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
@@ -92,7 +91,6 @@ export default defineComponent({
       bodyInstRef,
       bodyStyle: bodyStyleRef,
       flexHeight: flexHeightRef,
-      handleTableHeaderScroll,
       handleBodyResize,
       ...exposedMethods
     }

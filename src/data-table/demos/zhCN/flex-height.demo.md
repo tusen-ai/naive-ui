@@ -3,19 +3,28 @@
 如果你想设定表格的整体高度，你可以在设定好表格高度的情况下设定 `flex-height` 属性。
 
 ```html
-<n-data-table
-  ref="table"
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-  :scroll-x="1800"
-  style="height: 20vh;"
-  flex-height
-/>
+<n-space vertical>
+  <n-slider
+    :min="200"
+    :max="500"
+    :step="100"
+    v-model:value="height"
+    style="max-width: 180px;"
+  />
+  <n-data-table
+    ref="table"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    :scroll-x="1800"
+    :style="{ height: `${height}px` }"
+    flex-height
+  />
+</n-space>
 ```
 
 ```js
-import { h, defineComponent } from 'vue'
+import { h, defineComponent, ref } from 'vue'
 
 const columns = [
   {
@@ -75,7 +84,8 @@ export default defineComponent({
         address: `London, Park Lane no. ${index}`
       })),
       columns,
-      pagination: { pageSize: 10 }
+      pagination: { pageSize: 10 },
+      height: ref(200)
     }
   }
 })
