@@ -222,6 +222,7 @@ export default defineComponent({
       }
     })
     function doUpdateValue (value: number | [number, number]): void {
+      if (props.disabled) return
       const {
         onChange,
         'onUpdate:value': _onUpdateValue,
@@ -740,6 +741,7 @@ export default defineComponent({
             fillColor,
             fillColorHover,
             handleColor,
+            opacityDisabled,
             dotColor,
             dotColorModal,
             handleBoxShadow,
@@ -779,6 +781,7 @@ export default defineComponent({
           '--handle-box-shadow-hover': handleBoxShadowHover,
           '--handle-color': handleColor,
           '--handle-size': handleSize,
+          '--opacity-disabled': opacityDisabled,
           '--rail-color': railColor,
           '--rail-color-hover': railColorHover,
           '--rail-height': railHeight

@@ -1,11 +1,9 @@
-# 格式化弹出提示
+# Disabled
 
 ```html
-<n-slider
-  v-model:value="value"
-  :step="10"
-  :format-tooltip="value => `${value}%`"
-/>
+<n-space vertical>
+  <n-slider disabled v-model:value="value" />
+</n-space>
 ```
 
 ```js

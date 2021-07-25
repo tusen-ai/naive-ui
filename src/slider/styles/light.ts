@@ -14,8 +14,10 @@ const self = (vars: ThemeCommonVars) => {
     modalColor,
     popoverColor,
     borderRadius,
-    fontSize
+    fontSize,
+    opacityDisabled
   } = vars
+
   return {
     ...sizeVariables,
     fontSize,
@@ -23,6 +25,7 @@ const self = (vars: ThemeCommonVars) => {
     railColorHover: railColor,
     fillColor: primaryColor,
     fillColorHover: primaryColor,
+    opacityDisabled,
     handleColor: '#FFF',
     dotColor: cardColor,
     dotColorModal: modalColor,

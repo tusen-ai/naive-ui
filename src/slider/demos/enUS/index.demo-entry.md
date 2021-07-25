@@ -8,6 +8,7 @@ As far as I know, it is awalys used as volumn control.
 basic
 range
 mark
+disabled
 disable-tooltip
 format
 ```
