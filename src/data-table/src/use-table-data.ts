@@ -318,7 +318,10 @@ export function useTableData (
       doUpdatePageSize(pageSize)
     }
   }
-
+  const mergedItemCountRef = computed(() => {
+    if (props.remote) return (props.pagination as PaginationProps).itemCount
+    return filteredDataRef.value.length
+  })
   const mergedPaginationRef = computed<PaginationProps>(() => {
     return {
       ...props.pagination,
@@ -332,7 +335,8 @@ export function useTableData (
       // key still exists but value is undefined
       page: mergedCurrentPageRef.value,
       pageSize: mergedPageSizeRef.value,
-      pageCount: mergedPageCountRef.value
+      pageCount: mergedPageCountRef.value,
+      itemCount: mergedItemCountRef.value
     }
   })
 
