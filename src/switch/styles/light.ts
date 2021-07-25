@@ -9,6 +9,8 @@ const self = (vars: ThemeCommonVars) => {
   const railOverlayColor = 'rgba(0, 0, 0, .14)'
   return {
     ...commonVars,
+    textColor: 'white',
+    loadingColor: primaryColor,
     opacityDisabled,
     railColor: railOverlayColor,
     railColorActive: primaryColor,

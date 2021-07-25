@@ -50,9 +50,11 @@ multiple-line
 
 ### MessageProvider Props
 
-| 名称 | 类型                    | 默认值   | 说明                   |
-| ---- | ----------------------- | -------- | ---------------------- |
-| to   | `string \| HTMLElement` | `'body'` | Message 容器节点的位置 |
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| duration | `number` | `3000` | 所有 Message 默认的持续时长 |
+| max | `number` | `undefined` | 限制提示信息显示的个数 |
+| to | `string \| HTMLElement` | `'body'` | Message 容器节点的位置 |
 
 ### MessageProvider Injection API
 

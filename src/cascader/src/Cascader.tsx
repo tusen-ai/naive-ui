@@ -537,6 +537,8 @@ export default defineComponent({
             } else {
               move('next')
             }
+          } else {
+            openMenu()
           }
           break
         case 'ArrowLeft':

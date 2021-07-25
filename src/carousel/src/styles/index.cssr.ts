@@ -107,7 +107,11 @@ export default cB('carousel', `
       c('&:active', {
         transform: 'translateX(-50%) scale(1) rotate(90deg)'
       })
-    ])
+    ]),
+    c('svg', {
+      height: '100%',
+      width: '100%'
+    })
   ]),
   cM('left', [
     cE('slides', `

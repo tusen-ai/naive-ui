@@ -10,6 +10,7 @@ import {
   renderSlot,
   CSSProperties
 } from 'vue'
+import { createId } from 'seemly'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NEmpty } from '../../empty'
@@ -42,7 +43,6 @@ import { dataTableInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import { useGroupHeader } from './use-group-header'
 import { useExpand } from './use-expand'
-import { createId } from 'seemly'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -242,7 +242,8 @@ export default defineComponent({
     const bodyWidthRef = ref<number | null>(null)
     const scrollPartRef = ref<'head' | 'body'>('body')
     const mainTableInstRef = ref<MainTableRef | null>(null)
-    const { rowsRef, colsRef, dataRelatedColsRef } = useGroupHeader(props)
+    const { rowsRef, colsRef, dataRelatedColsRef, hasEllpisisRef } =
+      useGroupHeader(props)
     const {
       treeMateRef,
       mergedCurrentPageRef,
@@ -300,6 +301,17 @@ export default defineComponent({
       mergedCurrentPageRef
     })
     const { localeRef } = useLocale('DataTable')
+    const mergedTableLayoutRef = computed(() => {
+      // Layout
+      // virtual |descrete header | ellpisis => fixed
+      //    = virtual | maxHeight | ellpisis => fixed
+      if (
+        props.virtualScroll ||
+        props.maxHeight !== undefined ||
+        hasEllpisisRef.value
+      ) { return 'fixed' }
+      return props.tableLayout
+    })
     provide(dataTableInjectionKey, {
       indentRef: toRef(props, 'indent'),
       firstContentfulColIndexRef,
@@ -354,7 +366,7 @@ export default defineComponent({
           '--action-divider-color': actionDividerColor
         } as CSSProperties
       }),
-      tableLayoutRef: toRef(props, 'tableLayout'),
+      mergedTableLayoutRef,
       maxHeightRef: toRef(props, 'maxHeight'),
       minHeightRef: toRef(props, 'minHeight'),
       syncScrollState,
