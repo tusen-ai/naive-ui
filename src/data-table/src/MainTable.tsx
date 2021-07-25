@@ -27,6 +27,7 @@ export default defineComponent({
       bodyWidthRef,
       maxHeightRef,
       minHeightRef,
+      flexHeightRef,
       handleTableHeaderScroll,
       syncScrollState
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -90,14 +91,15 @@ export default defineComponent({
       headerInstRef,
       bodyInstRef,
       bodyStyle: bodyStyleRef,
+      flexHeight: flexHeightRef,
       handleTableHeaderScroll,
       handleBodyResize,
       ...exposedMethods
     }
   },
   render () {
-    const { mergedClsPrefix, maxHeight } = this
-    const headerInBody = maxHeight === undefined
+    const { mergedClsPrefix, maxHeight, flexHeight } = this
+    const headerInBody = maxHeight === undefined && !flexHeight
     return (
       <div class={`${mergedClsPrefix}-data-table-base-table`} ref="selfElRef">
         {headerInBody ? null : <TableHeader ref="headerInstRef" />}

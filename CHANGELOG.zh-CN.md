@@ -13,6 +13,7 @@
 - `n-cascader` 按下箭头会打开菜单，有关 [#300](https://github.com/TuSimple/naive-ui/issues/300)
 - `n-popover` 的 `trigger` 属性支持 `'focus'`，关闭 [#477](https://github.com/TuSimple/naive-ui/issues/477)
 - `n-message-provider` 新增 `duration` 和 `max` 属性
+- `n-data-table` 新增 `flex-height` 属性，关闭 [#596](https://github.com/TuSimple/naive-ui/issues/596)
 
 ### Fixes
 
@@ -21,6 +22,7 @@
 - 修复 `n-slider` `disabled` 属性不生效，关闭 [#641](https://github.com/TuSimple/naive-ui/issues/641)
 - 修复 `n-input` 在只读时仍展示清除按钮
 - 修复 `n-data-table` 在 table-layout 为 auto 时不展示滚动条，关闭 [#518](https://github.com/TuSimple/naive-ui/issues/518)
+- 修复 `n-data-table` 无数据时头部 checkbox 显示状态不正确
 
 ## 2.15.6 (2021-07-23)
 

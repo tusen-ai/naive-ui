@@ -194,6 +194,8 @@ export interface DataTableInjection {
   maxHeightRef: Ref<string | number | undefined>
   minHeightRef: Ref<string | number | undefined>
   rowPropsRef: Ref<CreateRowProps | undefined>
+  flexHeightRef: Ref<boolean>
+  headerCheckboxDisabledRef: Ref<boolean>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (
     filters: FilterState,

@@ -1,4 +1,5 @@
 import { CNode } from 'css-render'
+import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 import { c, cB, cE, cM, cNotM, insideModal, insidePopover } from '../../../_utils/cssr'
 
 const fixedColumnStyle = createFixedColumnStyle()
@@ -38,6 +39,9 @@ const fixedColumnStyle = createFixedColumnStyle()
 // --pagination-margin
 // --empty-padding
 // --sorter-size
+// --loading-size
+// --loading-color
+// --opacity-loading
 
 // --box-shadow-before used in Body.tsx
 // --box-shadow-after used in Body.tsx
@@ -45,12 +49,52 @@ export default c([
   cB('data-table', `
     width: 100%;
     font-size: var(--font-size);
+    display: flex;
+    flex-direction: column;
     --merged-th-color: var(--th-color);
     --merged-td-color: var(--td-color);
     --merged-border-color: var(--border-color);
     --merged-th-color-hover: var(--th-color-hover);
     --merged-td-color-hover: var(--td-color-hover);
   `, [
+    cM('flex-height', [
+      c('>', [
+        cB('data-table-wrapper', `
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+        `, [
+          c('>', [
+            cB('data-table-base-table', `
+              display: flex;
+              flex-direction: column;
+              flex-grow: 1;
+            `, [
+              c('>', [
+                cB('data-table-base-table-body', 'flex-basis: 0;', [
+                  // last-child means there is no empty icon
+                  // body is a scrollbar, we need to override height 100%
+                  c('&:last-child', 'flex-grow: 1;')
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    cB('base-loading', `
+      color: var(--loading-color);
+      font-size: var(--loading-size);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      transition: color .3s var(--bezier);
+    `, [
+      fadeInScaleUpTransition({
+        originalTransform: 'translateX(-50%) translateY(-50%)'
+      })
+    ]),
     cB('data-table-expand-trigger', 'cursor: pointer;'),
     cB('data-table-expand-placeholder', `
       margin-right: 8px;
@@ -247,11 +291,15 @@ export default c([
     `),
     cB('data-table-wrapper', `
       position: relative;
-      transition: border-color .3s var(--bezier);
+      opacity: 1;
+      transition: opacity .3s var(--bezier), border-color .3s var(--bezier);
       border-top-left-radius: var(--border-radius);
       border-top-right-radius: var(--border-radius);
       line-height: var(--line-height);
     `),
+    cM('loading', [
+      cB('data-table-wrapper', 'opacity: var(--opacity-loading);')
+    ]),
     cM('single-column', [
       cB('data-table-td', {
         borderBottom: '0 solid var(--merged-border-color)'

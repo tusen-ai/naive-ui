@@ -52,6 +52,7 @@ export default defineComponent({
       componentId,
       scrollPartRef,
       mergedTableLayoutRef,
+      headerCheckboxDisabledRef,
       handleTableBodyScroll,
       doUpdateSorter,
       doUncheckAll,
@@ -93,6 +94,7 @@ export default defineComponent({
       mergedTheme: mergedThemeRef,
       checkOptions: checkOptionsRef,
       mergedTableLayout: mergedTableLayoutRef,
+      headerCheckboxDisabled: headerCheckboxDisabledRef,
       handleMouseenter,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
@@ -115,6 +117,7 @@ export default defineComponent({
       componentId,
       discrete,
       mergedTableLayout,
+      headerCheckboxDisabled,
       handleColHeaderClick,
       handleCheckboxUpdateChecked
     } = this
@@ -177,6 +180,7 @@ export default defineComponent({
                           privateTableHeader
                           checked={allRowsChecked}
                           indeterminate={someRowsChecked}
+                          disabled={headerCheckboxDisabled}
                           onUpdateChecked={handleCheckboxUpdateChecked}
                         />
                         {checkOptions ? (

@@ -63,9 +63,11 @@ export function useCheck (
     )
   })
   const allRowsCheckedRef = computed(() => {
-    return (
-      countOfCurrentPageCheckedRowsRef.value === paginatedDataRef.value.length
-    )
+    const { length } = paginatedDataRef.value
+    return length !== 0 && countOfCurrentPageCheckedRowsRef.value === length
+  })
+  const headerCheckboxDisabledRef = computed(() => {
+    return paginatedDataRef.value.length === 0
   })
   function doUpdateCheckedRowKeys (keys: RowKey[]): void {
     const {
@@ -140,6 +142,7 @@ export function useCheck (
     mergedInderminateRowKeySetRef,
     someRowsCheckedRef,
     allRowsCheckedRef,
+    headerCheckboxDisabledRef,
     doUpdateCheckedRowKeys,
     doCheckAll,
     doUncheckAll,
