@@ -85,8 +85,8 @@ export default {
         pageCount: 1,
         pageSize: 10,
         itemCount: 0,
-        prefix ({ total }) {
-          return `共 ${total} 项`
+        prefix ({ itemCount }) {
+          return `共 ${itemCount} 项`
         }
       },
       loading: true

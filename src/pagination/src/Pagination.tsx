@@ -165,7 +165,7 @@ export default defineComponent({
       return endIndex
     })
 
-    const mergedTotalRef = computed(() => {
+    const mergedItemCountRef = computed(() => {
       const { itemCount } = props
       if (itemCount !== undefined) {
         return itemCount
@@ -322,7 +322,7 @@ export default defineComponent({
       mergedPageCount: mergedPageCountRef,
       startIndex: startIndexRef,
       endIndex: endIndexRef,
-      total: mergedTotalRef,
+      itemCount: mergedItemCountRef,
       handleJumperInput,
       handleBackwardClick: backward,
       handleForwardClick: forward,
@@ -468,7 +468,7 @@ export default defineComponent({
               pageCount: mergedPageCount,
               startIndex: this.startIndex,
               endIndex: this.endIndex,
-              total: this.total
+              itemCount: this.itemCount
             })}
           </div>
         ) : null}
@@ -578,7 +578,7 @@ export default defineComponent({
               pageCount: mergedPageCount,
               startIndex: this.startIndex,
               endIndex: this.endIndex,
-              total: this.total
+              itemCount: this.itemCount
             })}
           </div>
         ) : null}

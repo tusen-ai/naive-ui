@@ -4,8 +4,8 @@
 
 ```html
 <n-pagination :item-count="101">
-  <template #prefix="{ total , startIndex }">
-    从第 {{ startIndex }} 项开始, 共 {{ total }} 项
+  <template #prefix="{ itemCount , startIndex }">
+    从第 {{ startIndex }} 项开始, 共 {{ itemCount }} 项
   </template>
   <template #suffix="{ endIndex }"> 从第 {{ endIndex }} 项结束 </template>
 </n-pagination>
