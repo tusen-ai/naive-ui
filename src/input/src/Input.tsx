@@ -667,10 +667,10 @@ export default defineComponent({
       activated: activatedRef,
       showClearButton,
       mergedSize: mergedSizeRef,
+      mergedDisabled: mergedDisabledRef,
       textDecorationStyle: textDecorationStyleRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
-      mergedDisabled: mergedDisabledRef,
       // methods
       handleCompositionStart,
       handleCompositionEnd,

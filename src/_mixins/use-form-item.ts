@@ -13,7 +13,7 @@ type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | number
 
 export interface FormItemInjection {
   path: Ref<string | undefined>
-  disabled: ComputedRef<boolean | undefined>
+  disabled: Ref<boolean | undefined>
   mergedSize: ComputedRef<FormItemSize>
   restoreValidation: () => void
   handleContentBlur: () => void
@@ -30,14 +30,10 @@ interface UseFormItemOptions<T> {
   mergedSize?: (formItem: FormItemInjection | null) => T
 }
 
-type UseFormItemProps<T> =
-  | {
-    size?: T
-    disabled?: boolean | undefined
-  }
-  | {
-    disabled?: boolean | undefined
-  }
+interface UseFormItemProps<T> {
+  size?: T
+  disabled?: boolean | undefined
+}
 
 export interface UseFormItem<T> {
   mergedSizeRef: ComputedRef<T>

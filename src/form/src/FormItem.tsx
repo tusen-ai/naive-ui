@@ -166,9 +166,7 @@ export default defineComponent({
       if (feedback !== undefined && feedback !== null) return true
       return explainsRef.value.length
     })
-    const mergedDisabledRef = computed(() => {
-      return NForm?.disabled
-    })
+    const mergedDisabledRef = NForm ? toRef(NForm, 'disabled') : ref(false)
     const themeRef = useTheme(
       'Form',
       'FormItem',

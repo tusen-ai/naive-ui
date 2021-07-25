@@ -38,12 +38,13 @@
         v-model:value="model.selectValue"
       />
     </n-form-item>
-    <n-form-item label="Multiple Select" path="multipleSelectValue">
-      <n-select
-        placeholder="Select"
-        :options="generalOptions"
-        v-model:value="model.multipleSelectValue"
-        multiple
+    <n-form-item label="Cascader" path="cascaderValue">
+      <n-cascader
+        :value="model.cascaderValue"
+        placeholder="没啥用的值"
+        :options="options"
+        :leaf-only="false"
+        size="medium"
       />
     </n-form-item>
     <n-form-item label="Datetime" path="datetimeValue">
@@ -116,6 +117,34 @@
 ```js
 import { defineComponent, ref } from 'vue'
 
+function genOptions (depth = 2, iterator = 1, prefix = '') {
+  const length = 12
+  const options = []
+  for (let i = 1; i <= length; ++i) {
+    if (iterator === 1) {
+      options.push({
+        value: `${i}`,
+        label: `${i}`,
+        disabled: i % 5 === 0,
+        children: genOptions(depth, iterator + 1, '' + i)
+      })
+    } else if (iterator === depth) {
+      options.push({
+        value: `${prefix}-${i}`,
+        label: `${prefix}-${i}`,
+        disabled: i % 5 === 0
+      })
+    } else {
+      options.push({
+        value: `${prefix}-${i}`,
+        label: `${prefix}-${i}`,
+        disabled: i % 5 === 0,
+        children: genOptions(depth, iterator + 1, `${prefix}-${i}`)
+      })
+    }
+  }
+  return options
+}
 export default defineComponent({
   setup () {
     const formRef = ref(null)
@@ -126,7 +155,7 @@ export default defineComponent({
         inputValue: null,
         textareaValue: null,
         selectValue: null,
-        multipleSelectValue: null,
+        cascaderValue: null,
         datetimeValue: null,
         nestedValue: {
           path1: null,
@@ -146,7 +175,8 @@ export default defineComponent({
           label: v,
           value: v
         })
-      )
+      ),
+      options: genOptions()
     }
   }
 })
