@@ -39,7 +39,7 @@ npm run build:site
 - Don't add period `。` in any description in Chinese API tables (and any log of changelogs).
 - Add space bewteen Chinese and Latin charactors.
 - Don't use Chinese punctuation in English docs.
-- Don't write changelogs in the released version.
+- Don't write changelogs in a released version.
 - When rebase the branch, pay attention to whether it is placed in the released version.
 
 For Example:
@@ -64,7 +64,8 @@ Chinese Changelog:
 Space bewteen Chinese and Latin charactors:
 星之 star 卡比 kirby
 
-Changelog position
+Changelog position:
+
 # CHANGELOG
 
 ## Pending
@@ -142,7 +143,8 @@ Chinese Changelog:
 中英文之间要加空格：
 星之 star 卡比 kirby
 
-Changelog 位置
+Changelog 位置：
+
 # CHANGELOG
 
 ## Pending
