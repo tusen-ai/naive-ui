@@ -181,4 +181,44 @@ describe('n-menu', () => {
     expect(document.body.querySelector('.n-dropdown')).not.toEqual(null)
     expect(document.querySelectorAll('.n-icon').length).toEqual(2)
   })
+
+  it('should dropdown work with `expand-icon` props', () => {
+    const options = [
+      {
+        label: 'jj',
+        key: 'jj'
+      },
+      {
+        label: 'jay',
+        key: 'jay',
+        children: [
+          {
+            type: 'group',
+            label: 'song-group',
+            key: 'group',
+            children: [
+              {
+                label: 'fantasy',
+                key: 'fantasy'
+              },
+              {
+                label: 'mojito',
+                key: 'mojito'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+    function renderExpandIcon (): any {
+      return h('span', { class: 'expand-icon' }, '1')
+    }
+    const wrapper = mount(NMenu, {
+      props: {
+        options: options,
+        expandIcon: renderExpandIcon
+      }
+    })
+    expect(wrapper.find('.expand-icon').text()).toEqual('1')
+  })
 })
