@@ -115,6 +115,7 @@ action
 | bordered | `boolean` | `false` | 是否显示 `border` |
 | closable | `boolean` | `true` | 是否显示 `close` 图标 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是 `render` 函数 |
+| icon-placement | `'left' \| 'top'` | `'left'` | 图标放置的位置 |
 | icon | `() => VNodeChild` | `undefined` | 需要是 `render` 函数 |
 | loading | `boolean` | `false` | 是否显示 `loading` 状态 |
 | negative-text | `string` | `undefined` | 不填对应的按钮不会出现 |
