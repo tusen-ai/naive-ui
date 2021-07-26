@@ -8,12 +8,14 @@ import {
   ExtractPropTypes,
   toRef,
   renderSlot,
-  CSSProperties
+  CSSProperties,
+  Transition
 } from 'vue'
+import { createId } from 'seemly'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import { NBaseLoading } from '../../_internal'
 import { NEmpty } from '../../empty'
-import { NSpin } from '../../spin'
 import { NPagination } from '../../pagination'
 import { PaginationProps } from '../../pagination/src/Pagination'
 import { warn, createKey } from '../../_utils'
@@ -42,7 +44,6 @@ import { dataTableInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import { useGroupHeader } from './use-group-header'
 import { useExpand } from './use-expand'
-import { createId } from 'seemly'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -114,6 +115,7 @@ export const dataTableProps = {
     type: Number,
     default: 16
   },
+  flexHeight: Boolean,
   'onUpdate:page': [Function, Array] as PropType<
   PaginationProps['onUpdate:page']
   >,
@@ -242,7 +244,8 @@ export default defineComponent({
     const bodyWidthRef = ref<number | null>(null)
     const scrollPartRef = ref<'head' | 'body'>('body')
     const mainTableInstRef = ref<MainTableRef | null>(null)
-    const { rowsRef, colsRef, dataRelatedColsRef } = useGroupHeader(props)
+    const { rowsRef, colsRef, dataRelatedColsRef, hasEllpisisRef } =
+      useGroupHeader(props)
     const {
       treeMateRef,
       mergedCurrentPageRef,
@@ -268,6 +271,7 @@ export default defineComponent({
       doUncheckAll,
       doCheck,
       doUncheck,
+      headerCheckboxDisabledRef,
       someRowsCheckedRef,
       allRowsCheckedRef,
       mergedCheckedRowKeySetRef,
@@ -300,6 +304,20 @@ export default defineComponent({
       mergedCurrentPageRef
     })
     const { localeRef } = useLocale('DataTable')
+    const mergedTableLayoutRef = computed(() => {
+      // Layout
+      // virtual |descrete header | ellpisis => fixed
+      //    = virtual | maxHeight | ellpisis => fixed
+      if (
+        props.virtualScroll ||
+        props.flexHeight ||
+        props.maxHeight !== undefined ||
+        hasEllpisisRef.value
+      ) {
+        return 'fixed'
+      }
+      return props.tableLayout
+    })
     provide(dataTableInjectionKey, {
       indentRef: toRef(props, 'indent'),
       firstContentfulColIndexRef,
@@ -354,9 +372,11 @@ export default defineComponent({
           '--action-divider-color': actionDividerColor
         } as CSSProperties
       }),
-      tableLayoutRef: toRef(props, 'tableLayout'),
+      mergedTableLayoutRef,
       maxHeightRef: toRef(props, 'maxHeight'),
       minHeightRef: toRef(props, 'minHeight'),
+      flexHeightRef: toRef(props, 'flexHeight'),
+      headerCheckboxDisabledRef,
       syncScrollState,
       doUpdateFilters,
       doUpdateSorter,
@@ -420,6 +440,9 @@ export default defineComponent({
             boxShadowAfter,
             boxShadowBefore,
             sorterSize,
+            loadingColor,
+            loadingSize,
+            opacityLoading,
             [createKey('fontSize', size)]: fontSize,
             [createKey('thPadding', size)]: thPadding,
             [createKey('tdPadding', size)]: tdPadding
@@ -458,13 +481,16 @@ export default defineComponent({
           '--empty-padding': emptyPadding,
           '--box-shadow-before': boxShadowBefore,
           '--box-shadow-after': boxShadowAfter,
-          '--sorter-size': sorterSize
+          '--sorter-size': sorterSize,
+          '--loading-size': loadingSize,
+          '--loading-color': loadingColor,
+          '--opacity-loading': opacityLoading
         }
       })
     }
   },
   render () {
-    const { mergedClsPrefix, mergedTheme } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
@@ -474,58 +500,57 @@ export default defineComponent({
             [`${mergedClsPrefix}-data-table--bottom-bordered`]:
               this.mergedBottomBordered,
             [`${mergedClsPrefix}-data-table--single-line`]: this.singleLine,
-            [`${mergedClsPrefix}-data-table--single-column`]: this.singleColumn
+            [`${mergedClsPrefix}-data-table--single-column`]: this.singleColumn,
+            [`${mergedClsPrefix}-data-table--loading`]: this.loading,
+            [`${mergedClsPrefix}-data-table--flex-height`]: this.flexHeight
           }
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <NSpin
-          show={this.loading}
-          theme={mergedTheme.peers.Spin}
-          themeOverrides={mergedTheme.peerOverrides.Spin}
-          size="small"
-        >
+        <div class={`${mergedClsPrefix}-data-table-wrapper`}>
+          <NMainTable ref="mainTableInstRef">
+            {{
+              default: () =>
+                this.paginatedData.length === 0 ? (
+                  <div
+                    class={[
+                      `${mergedClsPrefix}-data-table-empty`,
+                      {
+                        [`${mergedClsPrefix}-data-table-empty--hide`]:
+                          this.loading
+                      }
+                    ]}
+                  >
+                    {renderSlot(this.$slots, 'empty', undefined, () => [
+                      <NEmpty
+                        theme={this.mergedTheme.peers.Empty}
+                        themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                      />
+                    ])}
+                  </div>
+                ) : null
+            }}
+          </NMainTable>
+        </div>
+        {this.pagination ? (
+          <div class={`${mergedClsPrefix}-data-table__pagination`}>
+            <NPagination
+              theme={this.mergedTheme.peers.Pagination}
+              themeOverrides={this.mergedTheme.peerOverrides.Pagination}
+              disabled={this.loading}
+              {...this.mergedPagination}
+            />
+          </div>
+        ) : null}
+        <Transition name="fade-in-scale-up-transition">
           {{
-            default: () => [
-              <div class={`${mergedClsPrefix}-data-table-wrapper`}>
-                <NMainTable ref="mainTableInstRef">
-                  {{
-                    default: () =>
-                      this.paginatedData.length === 0 ? (
-                        <div
-                          class={[
-                            `${mergedClsPrefix}-data-table-empty`,
-                            {
-                              [`${mergedClsPrefix}-data-table-empty--hide`]:
-                                this.loading
-                            }
-                          ]}
-                        >
-                          {renderSlot(this.$slots, 'empty', undefined, () => [
-                            <NEmpty
-                              theme={this.mergedTheme.peers.Empty}
-                              themeOverrides={
-                                this.mergedTheme.peerOverrides.Empty
-                              }
-                            />
-                          ])}
-                        </div>
-                      ) : null
-                  }}
-                </NMainTable>
-              </div>,
-              this.pagination ? (
-                <div class={`${this.mergedClsPrefix}-data-table__pagination`}>
-                  <NPagination
-                    theme={this.mergedTheme.peers.Pagination}
-                    themeOverrides={this.mergedTheme.peerOverrides.Pagination}
-                    {...this.mergedPagination}
-                  />
-                </div>
+            default: () => {
+              return this.loading ? (
+                <NBaseLoading clsPrefix={mergedClsPrefix} strokeWidth={20} />
               ) : null
-            ]
+            }
           }}
-        </NSpin>
+        </Transition>
       </div>
     )
   }

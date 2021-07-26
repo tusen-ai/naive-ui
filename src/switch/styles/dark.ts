@@ -7,11 +7,18 @@ const switchDark: SwitchTheme = {
   name: 'Switch',
   common: commonDark,
   self (vars) {
-    const { primaryColorSuppl, opacityDisabled, borderRadius, primaryColor } =
-      vars
+    const {
+      primaryColorSuppl,
+      opacityDisabled,
+      borderRadius,
+      primaryColor,
+      textColor2
+    } = vars
     const railOverlayColor = 'rgba(255, 255, 255, .20)'
     return {
       ...commonVars,
+      textColor: textColor2,
+      loadingColor: primaryColorSuppl,
       opacityDisabled,
       railColor: railOverlayColor,
       railColorActive: primaryColorSuppl,

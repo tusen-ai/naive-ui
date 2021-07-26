@@ -576,6 +576,8 @@ export default defineComponent({
           if (props.loading) return
           if (mergedShowRef.value) {
             menuRef.value?.next()
+          } else {
+            openMenu()
           }
           break
         case 'Escape':

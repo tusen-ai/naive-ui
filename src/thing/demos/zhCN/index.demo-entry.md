@@ -13,20 +13,20 @@ indent
 
 ## Props
 
-| 名称             | 类型      | 默认值      | 说明 |
-| ---------------- | --------- | ----------- | ---- |
-| content-indented | `boolean` | `false`     |      |
-| content          | `string`  | `undefined` |      |
-| description      | `string`  | `undefined` |      |
-| title-extra      | `string`  | `undefined` |      |
-| title            | `string`  | `undefined` |      |
+| 名称             | 类型      | 默认值      | 说明             |
+| ---------------- | --------- | ----------- | ---------------- |
+| content-indented | `boolean` | `false`     | 是否启用内容缩进 |
+| content          | `string`  | `undefined` | 内容区域         |
+| description      | `string`  | `undefined` | 描述信息         |
+| title-extra      | `string`  | `undefined` | 标题的附加信息   |
+| title            | `string`  | `undefined` | 标题             |
 
 ## Slots
 
-| 名称         | 参数 | 说明 |
-| ------------ | ---- | ---- |
-| action       | `()` |      |
-| default      | `()` |      |
-| description  | `()` |      |
-| header-extra | `()` |      |
-| header       | `()` |      |
+| 名称         | 参数 | 说明           |
+| ------------ | ---- | -------------- |
+| action       | `()` | 操作区域插槽   |
+| default      | `()` | 内容信息       |
+| description  | `()` | 描述信息       |
+| header-extra | `()` | 头部的附加信息 |
+| header       | `()` | 头部信息       |

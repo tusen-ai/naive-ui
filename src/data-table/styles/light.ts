@@ -7,7 +7,6 @@ import { radioLight } from '../../radio/styles'
 import { paginationLight } from '../../pagination/styles'
 import { scrollbarLight } from '../../scrollbar/styles'
 import { popoverLight } from '../../popover/styles'
-import { spinLight } from '../../spin/styles'
 import { emptyLight } from '../../empty/styles'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
@@ -30,7 +29,9 @@ export const self = (vars: ThemeCommonVars) => {
     fontSizeSmall,
     fontSizeMedium,
     fontSizeLarge,
-    dividerColor
+    dividerColor,
+    heightSmall,
+    opacityDisabled
   } = vars
   return {
     ...commonVariables,
@@ -73,7 +74,11 @@ export const self = (vars: ThemeCommonVars) => {
     ),
     tdColorPopover: popoverColor,
     boxShadowBefore: 'inset -12px 0 8px -12px rgba(0, 0, 0, .18)',
-    boxShadowAfter: 'inset 12px 0 8px -12px rgba(0, 0, 0, .18)'
+    boxShadowAfter: 'inset 12px 0 8px -12px rgba(0, 0, 0, .18)',
+    // loading
+    loadingColor: primaryColor,
+    loadingSize: heightSmall,
+    opacityLoading: opacityDisabled
   }
 }
 
@@ -88,7 +93,6 @@ const dataTableLight = createTheme({
     Radio: radioLight,
     Pagination: paginationLight,
     Scrollbar: scrollbarLight,
-    Spin: spinLight,
     Empty: emptyLight,
     Popover: popoverLight,
     Ellipsis: ellipsisLight

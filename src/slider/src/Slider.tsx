@@ -264,6 +264,7 @@ export default defineComponent({
       doUpdateShow(false, false)
     }
     function handleRailClick (e: MouseEvent): void {
+      if (props.disabled) return
       const { value: railEl } = railRef
       if (!railEl) return
       const railRect = railEl.getBoundingClientRect()
@@ -318,6 +319,7 @@ export default defineComponent({
       }
     }
     function handleKeyDown (e: KeyboardEvent): void {
+      if (props.disabled) return
       switch (e.code) {
         case 'ArrowRight':
           handleKeyDownRight()
@@ -466,6 +468,7 @@ export default defineComponent({
       return justifiedValue
     }
     function handleFirstHandleMouseDown (e: MouseEvent | TouchEvent): void {
+      if (props.disabled) return
       if (isTouchEvent(e)) e.preventDefault()
       if (props.range) {
         memoziedOtherValueRef.value = handleValue2Ref.value
@@ -478,6 +481,7 @@ export default defineComponent({
       on('mousemove', document, handleFirstHandleMouseMove)
     }
     function handleSecondHandleMouseDown (e: MouseEvent | TouchEvent): void {
+      if (props.disabled) return
       if (isTouchEvent(e)) e.preventDefault()
       if (props.range) {
         memoziedOtherValueRef.value = handleValue1Ref.value
@@ -740,6 +744,7 @@ export default defineComponent({
             fillColor,
             fillColorHover,
             handleColor,
+            opacityDisabled,
             dotColor,
             dotColorModal,
             handleBoxShadow,
@@ -779,6 +784,7 @@ export default defineComponent({
           '--handle-box-shadow-hover': handleBoxShadowHover,
           '--handle-color': handleColor,
           '--handle-size': handleSize,
+          '--opacity-disabled': opacityDisabled,
           '--rail-color': railColor,
           '--rail-color-hover': railColorHover,
           '--rail-height': railHeight
@@ -841,7 +847,7 @@ export default defineComponent({
                     <div
                       ref="handleRef1"
                       class={`${mergedClsPrefix}-slider-handle`}
-                      tabindex={0}
+                      tabindex={this.disabled ? -1 : 0}
                       style={this.firstHandleStyle}
                       onFocus={this.handleHandleFocus1}
                       onBlur={this.handleHandleBlur1}
@@ -900,7 +906,7 @@ export default defineComponent({
                       <div
                         ref="handleRef2"
                         class={`${mergedClsPrefix}-slider-handle`}
-                        tabindex={0}
+                        tabindex={this.disabled ? -1 : 0}
                         style={this.secondHandleStyle}
                         onFocus={this.handleHandleFocus2}
                         onBlur={this.handleHandleBlur2}

@@ -26,9 +26,9 @@ long-label
 | collapsed-icon-size | `number` | `24` | The icon size when menu is collapsed. If not set, menu will use `icon-size` in place of it. |
 | collapsed-width | `number` | `48` | The menu width after collapsed. |
 | collapsed | `boolean` | `false` | The collapsed status of menu, only works when menu is vertical. |
-| default-expand-all | `boolean` | `false` |  |
+| default-expand-all | `boolean` | `false` | Whether to expand all menus. |
 | default-expanded-keys | `Array<string>` | `[]` | The default expanded submenu keys of menu in uncontrolled manner. |
-| default-value | `string \| null` | `null` |  |
+| default-value | `string \| null` | `null` | Whether selected by default in uncontrolled mode. |
 | dropdown-placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | Only effective in horizontal mode. |
 | expanded-keys | `Array<string>` | `undefined` | The expanded submenu keys. If set, menu will work in controlled manner and `default-expanded-names` won't work. |
 | icon-size | `number` | `20` | The icon size when menu is not collapsed. |

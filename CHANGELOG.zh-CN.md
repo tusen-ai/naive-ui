@@ -1,10 +1,29 @@
 # CHANGELOG
 
-## Pending
+## 2.15.7 (2021-07-25)
 
 ### Feats
 
 - `n-time-picker` 增加 `actions` 属性, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
+- `n-mention` 新增 `render-label` 属性
+- `n-switch` 增加 `checked`、`unchecked` 插槽
+- `n-switch` 增加 `loading` 属性，关闭 [#301](https://github.com/TuSimple/naive-ui/issues/301)
+- `n-select` 按下箭头会打开菜单，有关 [#300](https://github.com/TuSimple/naive-ui/issues/300)
+- `n-tree-select` 按下箭头会打开菜单，有关 [#300](https://github.com/TuSimple/naive-ui/issues/300)
+- `n-cascader` 按下箭头会打开菜单，有关 [#300](https://github.com/TuSimple/naive-ui/issues/300)
+- `n-popover` 的 `trigger` 属性支持 `'focus'`，关闭 [#477](https://github.com/TuSimple/naive-ui/issues/477)
+- `n-message-provider` 新增 `duration` 和 `max` 属性
+- `n-data-table` 新增 `flex-height` 属性，关闭 [#596](https://github.com/TuSimple/naive-ui/issues/596)
+
+### Fixes
+
+- 修复 `n-carousel` 中箭头按钮在特定浏览器下无法显示问题，关闭 [#625](https://github.com/TuSimple/naive-ui/issues/625)
+- 修复 `n-layout-sider` `width` 不能为字符串，关闭 [#607](https://github.com/TuSimple/naive-ui/issues/607)
+- 修复 `n-slider` `disabled` 属性不生效，关闭 [#641](https://github.com/TuSimple/naive-ui/issues/641)
+- 修复 `n-input` 在只读时仍展示清除按钮
+- 修复 `n-data-table` 在 table-layout 为 auto 时不展示滚动条，关闭 [#518](https://github.com/TuSimple/naive-ui/issues/518)
+- 修复 `n-data-table` 无数据时头部 checkbox 显示状态不正确
+- 修复 `n-data-table` header 和 body 滚动不同步
 
 ## 2.15.6 (2021-07-23)
 

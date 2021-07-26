@@ -1,8 +1,11 @@
 # Use Checkbox
 
+If you want to achieve the effect of demo, `checkable`, `cascade` and `multiple` are indispensable.
+
 ```html
 <n-tree-select
   multiple
+  cascade
   checkable
   :options="options"
   :default-value="['Norwegian Wood']"
