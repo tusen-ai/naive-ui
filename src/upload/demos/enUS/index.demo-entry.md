@@ -25,7 +25,7 @@ before-upload
 | data | `Object \| ({ file: UploadFile }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |
 | default-file-list | `Array<UploadFile>` | `[]` | The default file list in uncontrolled manner. |
 | default-upload | `boolean` | `false` | If file uploaded immediatelly after file is selected. |
-| disabled | `boolean` | `false` | Whether to disable. |
+| disabled | `boolean` | `false` | Whether to disable the upload. |
 | file-list-style | `Object` | `undefined` | The style of file list area |
 | file-list | `Array<UploadFile>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |
 | headers | `Object \| ({ file: UploadFile }) => Object` | `undefined` | The additional HTTP Headers of request. |
