@@ -63,7 +63,7 @@ export default defineComponent({
     const {
       clsPrefix,
       tmNode,
-      menuProps: { renderIcon, renderLabel }
+      menuProps: { renderIcon, renderLabel, expandIcon }
     } = this
     return (
       <div
@@ -98,17 +98,19 @@ export default defineComponent({
             </span>
           ) : null}
         </div>
-        {this.showArrow ? (
-          <NBaseIcon
-            ariaHidden={true}
-            class={`${clsPrefix}-menu-item-content__arrow`}
-            clsPrefix={clsPrefix}
-          >
-            {{
-              default: () => <ChevronDownFilledIcon />
-            }}
-          </NBaseIcon>
-        ) : null}
+        {
+          this.showArrow ? (
+            <NBaseIcon
+              ariaHidden={true}
+              class={`${clsPrefix}-menu-item-content__arrow`}
+              clsPrefix={clsPrefix}
+            >
+              {{
+                default: () => expandIcon ? expandIcon(tmNode.rawNode) : <ChevronDownFilledIcon />
+              }}
+            </NBaseIcon>
+          ) : null
+        }
       </div>
     )
   }

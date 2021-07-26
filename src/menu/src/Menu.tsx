@@ -127,6 +127,7 @@ const menuProps = {
     },
     default: undefined
   },
+  expandIcon: Function as PropType<(option: MenuOption) => VNodeChild>,
   expandedNames: {
     type: Array as PropType<Key[]>,
     validator: () => {

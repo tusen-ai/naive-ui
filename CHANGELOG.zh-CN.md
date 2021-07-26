@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-menu` 新增 `expand-icon` 属性, 关闭 [#414](https://github.com/TuSimple/naive-ui/issues/414)
 - `n-descriptions`，`n-descriptions-item` 增加 `label-style` 和 `content-style` 属性，关闭 [#536](https://github.com/TuSimple/naive-ui/issues/536)
 
 ### Fixes
