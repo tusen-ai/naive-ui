@@ -23,6 +23,27 @@
         v-model:value="model.selectValue"
       />
     </n-form-item>
+    <n-form-item label="Popselect" path="popselectValue">
+      <n-popselect
+        disabled
+        :options="popselectOptions"
+        v-model:value="model.popselectValue"
+        trigger="click"
+      >
+        <n-button>{{ model.popselectValue || '弹出选择' }}</n-button>
+      </n-popselect>
+    </n-form-item>
+    <n-form-item label="Upload" path="uploadValue">
+      <n-upload>
+        <n-button>上传文件</n-button>
+      </n-upload>
+    </n-form-item>
+    <n-form-item label="Tree Select" path="treeSelectValue">
+      <n-tree-select
+        :options="treeSelectOptions"
+        default-value="Drive My Car"
+      />
+    </n-form-item>
     <n-form-item label="Cascader" path="cascaderValue">
       <n-cascader
         :value="model.cascaderValue"
@@ -149,6 +170,7 @@ export default defineComponent({
       model: ref({
         inputValue: null,
         selectValue: null,
+        popselectValue: null,
         cascaderValue: null,
         datetimeValue: null,
         nestedValue: {
@@ -172,7 +194,33 @@ export default defineComponent({
           value: v
         })
       ),
-      options: genOptions()
+      options: genOptions(),
+      treeSelectOptions: [
+        {
+          label: 'Rubber Soul',
+          key: 'Rubber Soul',
+          children: [
+            {
+              label: 'Drive My Car',
+              key: 'Drive My Car'
+            },
+            {
+              label: 'Michelle',
+              key: 'Michelle'
+            }
+          ]
+        }
+      ],
+      popselectOptions: [
+        {
+          label: 'Drive My Car',
+          value: 'Drive My Car'
+        },
+        {
+          label: 'Norwegian Wood',
+          value: 'Norwegian Wood'
+        }
+      ]
     }
   }
 })
