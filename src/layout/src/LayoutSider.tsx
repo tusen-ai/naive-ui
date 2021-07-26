@@ -82,7 +82,11 @@ const layoutSiderProps = {
   >,
   // deprecated
   onExpand: [Function, Array] as PropType<MaybeArray<() => void>>,
-  onCollapse: [Function, Array] as PropType<MaybeArray<() => void>>
+  onCollapse: [Function, Array] as PropType<MaybeArray<() => void>>,
+  siderPosition: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'left'
+  }
 } as const
 
 export type LayoutSiderProps = ExtractPublicPropTypes<typeof layoutSiderProps>
@@ -121,6 +125,29 @@ export default defineComponent({
       if (props.collapseMode !== 'transform') return {}
       return {
         minWidth: formatLength(props.width)
+      }
+    })
+    const mergedTriggerStyle = computed(() => [
+      props.triggerStyle,
+      {
+        left: props.siderPosition === 'left' ? 'unset' : 0,
+        right: props.siderPosition === 'right' ? 'unset' : 0,
+        transform:
+          props.siderPosition === 'left'
+            ? 'translateX(50%) translateY(-50%)'
+            : 'translateX(-50%) translateY(-50%) rotate(180deg)'
+      }
+    ])
+    const borderStyle = computed(() => {
+      return {
+        borderRight:
+          props.bordered && props.siderPosition === 'left'
+            ? '1px solid var(--border-color)'
+            : 'none',
+        borderLeft:
+          props.bordered && props.siderPosition === 'right'
+            ? '1px solid var(--border-color)'
+            : 'none'
       }
     })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
@@ -194,6 +221,8 @@ export default defineComponent({
       styleMaxWidth: styleMaxWidthRef,
       mergedCollapsed: mergedCollapsedRef,
       scrollContainerStyle: scrollContainerStyleRef,
+      mergedTriggerStyle,
+      borderStyle,
       handleTriggerClick,
       cssVars: computed(() => {
         const {
@@ -233,6 +262,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-layout-sider`,
           `${mergedClsPrefix}-layout-sider--${this.position}-positioned`,
+          `${mergedClsPrefix}-layout-sider--${this.siderPosition}-positioned`,
           this.bordered && `${mergedClsPrefix}-layout-sider--bordered`,
           mergedCollapsed && `${mergedClsPrefix}-layout-sider--collapsed`,
           (!mergedCollapsed || this.showCollapsedContent) &&
@@ -242,7 +272,8 @@ export default defineComponent({
           this.cssVars,
           {
             maxWidth: this.styleMaxWidth,
-            width: formatLength(this.width)
+            width: formatLength(this.width),
+            ...this.borderStyle
           }
         ]}
       >
@@ -286,14 +317,14 @@ export default defineComponent({
           showTrigger === 'arrow-circle' ? (
             <ToggleButton
               clsPrefix={mergedClsPrefix}
-              style={this.triggerStyle}
+              style={this.mergedTriggerStyle}
               onClick={this.handleTriggerClick}
             />
           ) : (
             <ToggleBar
               clsPrefix={mergedClsPrefix}
               collapsed={mergedCollapsed}
-              style={this.triggerStyle}
+              style={this.mergedTriggerStyle}
               onClick={this.handleTriggerClick}
             />
           )

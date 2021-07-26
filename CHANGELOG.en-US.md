@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-layout` add `sider-positioned` prop, `n-layout-sider` add `sider-position` prop, closes [#566](https://github.com/TuSimple/naive-ui/issues/566).
+
 ## 2.15.7 (2021-07-25)
 
 ### Feats
