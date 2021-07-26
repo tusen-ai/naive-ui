@@ -31,6 +31,7 @@ long-label
 | default-value | `string \| null` | `null` | 非受控模式下的默认值 |
 | dropdown-placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | 仅在 `mode='horizontal'` 模式下生效 |
 | expanded-keys | `Array<string>` | `undefined` | 展开的子菜单标识符数组，如果设定了，菜单的展开将会进入受控状态，`default-expanded-keys` 不会生效 |
+| expand-icon | `(option: MenuOption) => VNodeChild` | `undefined` | 批量处理菜单展开图标的渲染 |
 | icon-size | `number` | `20` | 菜单未折叠时图标的大小 |
 | indent | `number` | `32` | 菜单每级的缩进 |
 | inverted | `boolean` | `false` | 使用反转样式 |
