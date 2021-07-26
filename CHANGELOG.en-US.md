@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Fix `n-data-table` the style penetration of the `n-spin`.
+- Fix `n-data-table` the style penetration of the `n-spin`, closes[#663](https://github.com/TuSimple/naive-ui/issues/663).
 
 ## 2.15.7 (2021-07-25)
 
