@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- 修复 `n-data-table` `n-spin`的样式穿透问题，关闭　[#663](https://github.com/TuSimple/naive-ui/issues/663)
+
 ## 2.15.7 (2021-07-25)
 
 ### Feats
