@@ -14,11 +14,7 @@
     }"
   >
     <n-form-item label="Input" path="inputValue">
-      <n-input
-        :disabled="true"
-        placeholder="Input"
-        v-model:value="model.inputValue"
-      />
+      <n-input placeholder="Input" v-model:value="model.inputValue" />
     </n-form-item>
     <n-form-item label="Select" path="selectValue">
       <n-select
@@ -54,13 +50,20 @@
         </n-space>
       </n-checkbox-group>
     </n-form-item>
+    <n-form-item label="Radio" path="radioValue">
+      <n-radio
+        :checked="model.radioValue === 'Definitely Maybe'"
+        value="Definitely Maybe"
+        name="basic-demo"
+      >
+        Definitely Maybe
+      </n-radio>
+    </n-form-item>
     <n-form-item label="Radio Group" path="radioGroupValue">
-      <n-radio-group v-model:value="model.radioGroupValue" name="radiogroup1">
-        <n-space>
-          <n-radio value="Radio 1">Radio 1</n-radio>
-          <n-radio value="Radio 2">Radio 2</n-radio>
-          <n-radio value="Radio 3">Radio 3</n-radio>
-        </n-space>
+      <n-radio-group v-model:value="model.radioGroupValue" name="radiogroup2">
+        <n-radio value="Radio 1">Radio 1</n-radio>
+        <n-radio value="Radio 2">Radio 2</n-radio>
+        <n-radio value="Radio 3">Radio 3</n-radio>
       </n-radio-group>
     </n-form-item>
     <n-form-item label="Radio Button Group" path="radioGroupValue">
@@ -77,7 +80,7 @@
       <n-time-picker v-model:value="model.timePickerValue" />
     </n-form-item>
     <n-form-item label="Slider" path="sliderValue">
-      <n-slider disabled v-model:value="model.sliderValue" :step="5" />
+      <n-slider v-model:value="model.sliderValue" :step="5" />
     </n-form-item>
     <n-form-item label="Transfer" path="transferValue">
       <n-transfer
@@ -155,6 +158,7 @@ export default defineComponent({
         switchValue: false,
         checkboxValue: null,
         checkboxGroupValue: null,
+        radioValue: 'Definitely Maybe',
         radioGroupValue: null,
         radioButtonGroupValue: null,
         inputNumberValue: null,

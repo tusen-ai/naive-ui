@@ -7,7 +7,7 @@ interface UseTransferDataProps {
   value?: OptionValue[] | null
   options: Option[]
   filterable: boolean
-  disabled: boolean
+  disabled: boolean | undefined
   filter: Filter
 }
 

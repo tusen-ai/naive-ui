@@ -4,7 +4,6 @@ import {
   h,
   provide,
   PropType,
-  toRef,
   CSSProperties
 } from 'vue'
 import { useIsMounted } from 'vooks'
@@ -44,8 +43,8 @@ const transferProps = {
     default: () => []
   },
   disabled: {
-    type: Boolean,
-    default: false
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   },
   virtualScroll: {
     type: Boolean,
@@ -106,7 +105,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
-    const { mergedSizeRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     const itemSizeRef = computed(() => {
       const { value: size } = mergedSizeRef
       const {
@@ -217,7 +216,7 @@ export default defineComponent({
     provide(transferInjectionKey, {
       mergedClsPrefixRef,
       mergedSizeRef,
-      disabledRef: toRef(props, 'disabled'),
+      disabledRef: mergedDisabledRef,
       mergedThemeRef: themeRef,
       srcCheckedValuesRef,
       tgtCheckedValuesRef,
@@ -232,6 +231,7 @@ export default defineComponent({
     return {
       locale: localeRef,
       mergedClsPrefix: mergedClsPrefixRef,
+      mergedDisabled: mergedDisabledRef,
       itemSize: itemSizeRef,
       isMounted: useIsMounted(),
       isInputing: isInputingRef,
@@ -311,7 +311,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-transfer`,
-          this.disabled && `${mergedClsPrefix}-transfer--disabled`,
+          this.mergedDisabled && `${mergedClsPrefix}-transfer--disabled`,
           this.filterable && `${mergedClsPrefix}-transfer--filterable`
         ]}
         style={this.cssVars as CSSProperties}
@@ -327,7 +327,7 @@ export default defineComponent({
               <NTransferFilter
                 onUpdateValue={this.handleSrcFilterUpdateValue}
                 value={this.srcPattern}
-                disabled={this.disabled}
+                disabled={this.mergedDisabled}
                 placeholder={this.sourceFilterPlaceholder}
                 onFocus={this.handleInputFocus}
                 onBlur={this.handleInputBlur}
@@ -337,7 +337,7 @@ export default defineComponent({
               <NTransferList
                 source
                 options={this.filteredSrcOpts}
-                disabled={this.disabled}
+                disabled={this.mergedDisabled}
                 virtualScroll={this.virtualScroll}
                 isMounted={this.isMounted}
                 isInputing={this.isInputing}
@@ -349,7 +349,7 @@ export default defineComponent({
         </div>
         <div class={`${mergedClsPrefix}-transfer-gap`}>
           <NButton
-            disabled={this.toButtonDisabled || this.disabled}
+            disabled={this.toButtonDisabled || this.mergedDisabled}
             theme={this.mergedTheme.peers.Button}
             themeOverrides={this.mergedTheme.peerOverrides.Button}
             onClick={this.handleToTgtClick}
@@ -363,7 +363,7 @@ export default defineComponent({
             }}
           </NButton>
           <NButton
-            disabled={this.fromButtonDisabled || this.disabled}
+            disabled={this.fromButtonDisabled || this.mergedDisabled}
             theme={this.mergedTheme.peers.Button}
             themeOverrides={this.mergedTheme.peerOverrides.Button}
             onClick={this.handleToSrcClick}
@@ -387,7 +387,7 @@ export default defineComponent({
               <NTransferFilter
                 onUpdateValue={this.handleTgtFilterUpdateValue}
                 value={this.tgtPattern}
-                disabled={this.disabled}
+                disabled={this.mergedDisabled}
                 placeholder={this.targetFilterPlaceholder}
                 onFocus={this.handleInputFocus}
                 onBlur={this.handleInputBlur}
@@ -396,7 +396,7 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>
               <NTransferList
                 options={this.filteredTgtOpts}
-                disabled={this.disabled}
+                disabled={this.mergedDisabled}
                 virtualScroll={this.virtualScroll}
                 isMounted={this.isMounted}
                 isInputing={this.isInputing}

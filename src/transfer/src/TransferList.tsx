@@ -30,7 +30,7 @@ export default defineComponent({
       required: true
     },
     disabled: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | undefined>,
       required: true
     },
     isMounted: {
