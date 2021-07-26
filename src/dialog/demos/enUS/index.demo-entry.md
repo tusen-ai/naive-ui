@@ -119,12 +119,12 @@ All the properties can be modified dynamically.
 | loading | `boolean` | `false` | Whether to display loading status. |
 | negative-text | `string` | `undefined` | Corresponding button won't show if not set. |
 | positive-text | `string` | `undefined` | Corresponding button won't show if not set. |
-| show-icon | `boolean` | `true` |  |
+| show-icon | `boolean` | `true` | Whether to display the icon. |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a render function. |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |
-| on-close | `() => void` | Callback function triggered when close dialog, the default behavior is closing the confirm. |
-| on-negative-click | `() => void` | Callback function triggered when click negative text, the default behavior is closing the confirm. |
-| on-positive-click | `() => void` | Callback function triggered when click positive text, the default behavior is closing the confirm. |
+| on-close | `() => void` | `undefined` | Callback function triggered when close dialog, the default behavior is closing the confirm. |
+| on-negative-click | `() => void` | `undefined` | Callback function triggered when click negative text, the default behavior is closing the confirm. |
+| on-positive-click | `() => void` | `undefined` | Callback function triggered when click positive text, the default behavior is closing the confirm. |
 
 ## Slots
 
