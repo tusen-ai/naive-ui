@@ -387,7 +387,7 @@ export default defineComponent({
       }
     ) => {
       const { append, remove } = options
-      const fileListAfterChange = Array.from(mergedFileListRef.value)
+      const { value: fileListAfterChange } = mergedFileListRef
       const fileIndex = fileListAfterChange.findIndex(
         (file) => file.id === fileAfterChange.id
       )
