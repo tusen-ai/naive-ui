@@ -72,6 +72,7 @@ export interface DropdownInjection {
   activeKeyPathRef: Ref<Key[]>
   animatedRef: Ref<boolean>
   mergedShowRef: Ref<boolean>
+  mergedShowArrowRef: Ref<boolean>
   doSelect: OnUpdateValueImpl
   doUpdateShow: (value: boolean) => void
 }
@@ -91,6 +92,10 @@ const dropdownBaseProps = {
   size: {
     type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
     default: 'medium'
+  },
+  showArrow: {
+    type: Boolean,
+    default: false
   },
   inverted: Boolean,
   placement: {
@@ -139,6 +144,10 @@ export default defineComponent({
     })
     const tmNodesRef = computed(() => {
       return treemateRef.value.treeNodes
+    })
+    // setup show-arrow
+    const mergedShowArrowRef = useMemo(() => {
+      return props.showArrow && mergedShowRef.value
     })
 
     const hoverKeyRef = ref<Key | null>(null)
@@ -218,6 +227,7 @@ export default defineComponent({
       activeKeyPathRef: activeKeyPathRef,
       animatedRef: toRef(props, 'animated'),
       mergedShowRef: mergedShowRef,
+      mergedShowArrowRef: mergedShowArrowRef,
       doSelect,
       doUpdateShow
     })
@@ -312,6 +322,8 @@ export default defineComponent({
       tmNodes: tmNodesRef,
       // show
       mergedShow: mergedShowRef,
+      // show arrow
+      mergedShowArrow: mergedShowArrowRef,
       // methods
       doUpdateShow,
       cssVars: computed(() => {
@@ -404,6 +416,7 @@ export default defineComponent({
     const { mergedTheme } = this
     const popoverProps: PopoverInternalProps = {
       show: this.mergedShow,
+      showArrow: this.mergedShowArrow,
       theme: mergedTheme.peers.Popover,
       themeOverrides: mergedTheme.peerOverrides.Popover,
       internalRenderBody: renderPopoverBody,
