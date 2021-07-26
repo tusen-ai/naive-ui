@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-descriptions`, `n-descriptions-item` add `label-style` and `content-style` props, closes [#536](https://github.com/TuSimple/naive-ui/issues/536).
+
 ### Fixes
 
 - Fix `n-data-table` the style penetration of the `n-spin`, closes[#663](https://github.com/TuSimple/naive-ui/issues/663).

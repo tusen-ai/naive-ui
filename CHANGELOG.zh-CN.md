@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-descriptions`，`n-descriptions-item` 增加 `label-style` 和 `content-style` 属性，关闭 [#536](https://github.com/TuSimple/naive-ui/issues/536)
+
 ### Fixes
 
 - 修复 `n-data-table` `n-spin`的样式穿透问题，关闭　[#663](https://github.com/TuSimple/naive-ui/issues/663)
