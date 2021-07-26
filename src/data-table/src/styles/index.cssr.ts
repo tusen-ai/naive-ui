@@ -82,7 +82,8 @@ export default c([
         ])
       ])
     ]),
-    cB('base-loading', `
+    c('>', [
+      cB('base-loading', `
       color: var(--loading-color);
       font-size: var(--loading-size);
       position: absolute;
@@ -91,9 +92,10 @@ export default c([
       transform: translateX(-50%) translateY(-50%);
       transition: color .3s var(--bezier);
     `, [
-      fadeInScaleUpTransition({
-        originalTransform: 'translateX(-50%) translateY(-50%)'
-      })
+        fadeInScaleUpTransition({
+          originalTransform: 'translateX(-50%) translateY(-50%)'
+        })
+      ])
     ]),
     cB('data-table-expand-trigger', 'cursor: pointer;'),
     cB('data-table-expand-placeholder', `
