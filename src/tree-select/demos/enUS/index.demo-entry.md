@@ -31,9 +31,9 @@ debug
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | Filter function. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count to be shown in multiple mode. Set to `'responsive'` will keep all tags in the same row. |
 | multiple | `boolean` | `false` | Whether to support multiple select. |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |
 | options | `TreeSelectOption[]` | `[]` | Options. |
 | placeholder | `string` | `'Please Select'` | Placeholder. |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | Selected key (or keys when multiple). |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scroll. |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Callback on blur. |

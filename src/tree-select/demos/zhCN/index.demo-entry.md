@@ -32,9 +32,9 @@ debug
 | leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选时最多直接显示多少选项，设为 `'responsive'` 会保证最多一行 |
 | multiple | `boolean` | `false` | 是否支持多选 |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |
 | options | `TreeSelectOption[]` | `[]` | 选项 |
 | placeholder | `string` | `'请选择'` | 占位信息 |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | 选中的 key |
 | virtual-scroll | `boolean` | `true` | 是否开启虚拟滚动 |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Blur 时的回调 |
