@@ -24,7 +24,7 @@ processing
 | color | `string \| string[]` | `undefined` | Progress color. |
 | fill-border-radius | `number \| string` | `undefined` | `'line'` typed progress's fill's border-radius. Keep `border-radius` if not passed. |
 | height | `number` | `undefined` | `'line'` typed progress's height. Keep default height if not passed. |
-| indicator-placement | `'inside' \| 'inside-label' \| 'outside'` | `'outside'` | Set indicator. |
+| indicator-placement | `'inside' \| 'inside-label' \| 'outside'` | `'outside'` | Indicator placement. |
 | indicator-text-color | `string` | `undefined` | Indicator text color. |
 | percentage | `number \| Array<number>` | `0` | Percentage value. |
 | processing | `boolean` | `false` | Processing status. |
