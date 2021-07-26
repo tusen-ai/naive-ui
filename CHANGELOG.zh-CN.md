@@ -5,6 +5,11 @@
 ### Feats
 
 - `n-menu` 新增 `expand-icon` 属性, 关闭 [#414](https://github.com/TuSimple/naive-ui/issues/414)
+- `n-descriptions`，`n-descriptions-item` 增加 `label-style` 和 `content-style` 属性，关闭 [#536](https://github.com/TuSimple/naive-ui/issues/536)
+
+### Fixes
+
+- 修复 `n-data-table` `n-spin`的样式穿透问题，关闭　[#663](https://github.com/TuSimple/naive-ui/issues/663)
 
 ## 2.15.7 (2021-07-25)
 

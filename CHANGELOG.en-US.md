@@ -5,6 +5,11 @@
 ### Feats
 
 - `n-menu` add `expand-icon` prop, closes [#414](https://github.com/TuSimple/naive-ui/issues/414).
+- `n-descriptions`, `n-descriptions-item` add `label-style` and `content-style` props, closes [#536](https://github.com/TuSimple/naive-ui/issues/536).
+
+### Fixes
+
+- Fix `n-data-table` the style penetration of the `n-spin`, closes[#663](https://github.com/TuSimple/naive-ui/issues/663).
 
 ## 2.15.7 (2021-07-25)
 
