@@ -332,6 +332,7 @@ export default defineComponent({
       const { nTriggerFormBlur } = formItem
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
+      triggerRef.value?.blurInput()
     }
     function doFocus (e: FocusEvent): void {
       const { onFocus } = props
@@ -419,12 +420,13 @@ export default defineComponent({
       closeMenu()
     }
     function handleMenuClickOutside (e: MouseEvent): void {
-      if (mergedShowRef.value) {
-        if (!triggerRef.value?.$el.contains(e.target as Node)) {
-          // outside select, don't need to return focus
-          closeMenu()
-        }
+      // if (mergedShowRef.value) {
+      if (!triggerRef.value?.$el.contains(e.target as Node)) {
+        // outside select, don't need to return focus
+        handleTriggerBlur(e)
+        closeMenu()
       }
+      // }
     }
     function createClearedMultipleSelectValue (
       value: string | number | Array<string | number> | null
