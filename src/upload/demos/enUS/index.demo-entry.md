@@ -25,7 +25,7 @@ before-upload
 | data | `Object \| ({ file: UploadFile }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |
 | default-file-list | `Array<UploadFile>` | `[]` | The default file list in uncontrolled manner. |
 | default-upload | `boolean` | `false` | If file uploaded immediatelly after file is selected. |
-| disabled | `boolean` | `false` |  |
+| disabled | `boolean` | `false` | Whether to disable. |
 | file-list-style | `Object` | `undefined` | The style of file list area |
 | file-list | `Array<UploadFile>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |
 | headers | `Object \| ({ file: UploadFile }) => Object` | `undefined` | The additional HTTP Headers of request. |
@@ -68,10 +68,10 @@ before-upload
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
-| default | `()`       |             |
+| default | `()`       | The content of the upload.            |
 
 ### Upload Dragger Slots
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
-| default | `()`       |             |
+| default | `()`       | The content of the upload dragger, use can refer to drag.            |
