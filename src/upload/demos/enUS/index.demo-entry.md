@@ -66,12 +66,12 @@ before-upload
 
 ### Upload Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       | The content of the upload.            |
+| Name    | Parameters | Description                |
+| ------- | ---------- | -------------------------- |
+| default | `()`       | The content of the upload. |
 
 ### Upload Dragger Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       | The content of the upload dragger, use can refer to drag.            |
+| Name | Parameters | Description |
+| --- | --- | --- |
+| default | `()` | The content of the upload dragger, use can refer to [Drag to Upload](#drag). |
