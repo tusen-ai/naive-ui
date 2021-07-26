@@ -54,6 +54,7 @@ export type OnUpdateFileList = (fileList: FileInfo[]) => void
 export interface UploadInjection {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<UploadTheme>>
+  disabledRef: Ref<boolean>
   showCancelButtonRef: Ref<boolean>
   showRemoveButtonRef: Ref<boolean>
   showDownloadButtonRef: Ref<boolean>

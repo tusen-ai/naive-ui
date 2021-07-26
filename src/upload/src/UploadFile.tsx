@@ -126,6 +126,7 @@ export default defineComponent({
       progressStatus: progressStatusRef,
       buttonType: buttonTypeRef,
       showProgress: showProgressRef,
+      disabled: NUpload.disabledRef,
       showCancelButton: showCancelButtonRef,
       showRemoveButton: showRemoveButtonRef,
       showDownloadButton: showDownloadButtonRef,
@@ -156,7 +157,8 @@ export default defineComponent({
             {this.file.name}
           </div>
           <div class={`${clsPrefix}-upload-file-info__action`}>
-            {this.showRemoveButton || this.showCancelButton ? (
+            {(this.showRemoveButton || this.showCancelButton) &&
+            !this.disabled ? (
               <NButton
                 key="cancelOrTrash"
                 theme={mergedTheme.peers.Button}
@@ -184,8 +186,8 @@ export default defineComponent({
                   )
                 }}
               </NButton>
-            ) : null}
-            {this.showRetryButton ? (
+                ) : null}
+            {this.showRetryButton && !this.disabled ? (
               <NButton
                 key="retry"
                 text

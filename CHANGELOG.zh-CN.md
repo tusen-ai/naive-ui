@@ -46,6 +46,7 @@
 - 修复 `n-data-table` 在 table-layout 为 auto 时不展示滚动条，关闭 [#518](https://github.com/TuSimple/naive-ui/issues/518)
 - 修复 `n-data-table` 无数据时头部 checkbox 显示状态不正确
 - 修复 `n-data-table` header 和 body 滚动不同步
+- 修复 `n-upload` 拥有 `file-list` & `disabled` 属性时操作按钮仍然显示，关闭 [#668](https://github.com/TuSimple/naive-ui/issues/668)
 
 ## 2.15.6 (2021-07-23)
 

@@ -46,6 +46,7 @@
 - Fix `n-data-table` doesn't show scrollbar when table-layout is auto, closes [#518](https://github.com/TuSimple/naive-ui/issues/518).
 - Fix `n-data-table`'s header checkbox always displays checked when data is empty.
 - Fix `n-data-table` header and body's scrollings are not sync.
+- Fix `n-upload` operation buttons displayed when has `file-list` & `disabled` props, closes [#668](https://github.com/TuSimple/naive-ui/issues/668).
 
 ## 2.15.6 (2021-07-23)
 
