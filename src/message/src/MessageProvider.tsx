@@ -10,7 +10,8 @@ import {
   InjectionKey,
   ExtractPropTypes,
   renderSlot,
-  Ref
+  Ref,
+  PropType
 } from 'vue'
 import { createId } from 'seemly'
 import { ExtractPublicPropTypes, omit } from '../../_utils'
@@ -64,10 +65,7 @@ export type MessageProviderInst = MessageApiInjection
 
 const messageProviderProps = {
   ...(useTheme.props as ThemeProps<MessageTheme>),
-  to: {
-    type: [String, Object],
-    default: undefined
-  },
+  to: [String, Object] as PropType<string | HTMLElement>,
   duration: {
     type: Number,
     default: 3000
@@ -141,7 +139,7 @@ export default defineComponent({
     }
     function destroyAll (): void {
       Object.values(messageRefs.value).forEach((messageInstRef) => {
-        messageInstRef?.hide()
+        messageInstRef.hide()
       })
     }
     return Object.assign(
