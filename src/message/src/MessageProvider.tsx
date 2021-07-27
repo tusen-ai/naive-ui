@@ -36,6 +36,7 @@ export interface MessageApiInjection {
   warning: (content: ContentType, options?: MessageOptions) => MessageReactive
   error: (content: ContentType, options?: MessageOptions) => MessageReactive
   loading: (content: ContentType, options?: MessageOptions) => MessageReactive
+  destroyAll: () => void
 }
 
 export const messageApiInjectionKey: InjectionKey<MessageApiInjection> =
@@ -107,6 +108,9 @@ export default defineComponent({
       },
       loading (content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'loading' })
+      },
+      destroyAll () {
+        destroyAll()
       }
     }
     provide(messageProviderInjectionKey, {
@@ -137,12 +141,18 @@ export default defineComponent({
         1
       )
     }
+    function destroyAll (): void {
+      Object.values(messageRefs).forEach((messageInstRef) =>
+        messageInstRef.hide()
+      )
+    }
     return Object.assign(
       {
         mergedClsPrefix: mergedClsPrefixRef,
         messageRefs,
         messageList: messageListRef,
-        handleAfterLeave
+        handleAfterLeave,
+        destroyAll
       },
       api
     )
