@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- `n-data-table`'s `data-table-column` properties `width` type does not support the string type.
+
 ## 2.15.8 (2021-07-27)
 
 ### Feats

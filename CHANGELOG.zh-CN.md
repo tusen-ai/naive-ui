@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-data-table` 的 `data-table-column` 属性 `width` 类型不支持字符串类型
+
 ## 2.15.8 (2021-07-27)
 
 ### Feats

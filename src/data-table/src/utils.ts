@@ -19,7 +19,7 @@ export function getColWidth (col: TableColumn): number | undefined {
   if (col.type === 'selection') return selectionColWidth
   if (col.type === 'expand') return expandColWidth
   if ('children' in col) return undefined
-  return col.width
+  return parseInt((col.width || 0) as string)
 }
 
 export function getColKey (col: TableColumn): string | number {

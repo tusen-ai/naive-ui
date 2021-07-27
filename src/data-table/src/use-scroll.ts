@@ -46,7 +46,7 @@ export function useScroll (
     let right = 0
     for (const column of rightFixedColumnsRef.value.reverse()) {
       columns[getColKey(column)] = right
-      right += column.width || 0
+      right += parseInt((column.width || 0) as string)
     }
     return columns
   })
