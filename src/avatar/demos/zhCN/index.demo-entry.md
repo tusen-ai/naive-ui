@@ -20,7 +20,7 @@ name-size
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | 头像的图片在容器内的的适应类型 |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | 头像的尺寸 |
 | src | `string` | `undefined` | 头像的地址 |
-| color | `string` | `undefined` | 头像中文字的背景色 |
+| color | `string` | `undefined` | 头像的背景色 |
 | round | `boolean` | `false` | 头像是否圆形 |
 | on-error | `(e: Event) => void` | `undefined` | 头像的图片加载失败执行的回调 |
 
