@@ -8,6 +8,7 @@
 basic
 disabled
 event
+icon
 min-max
 size
 step
@@ -34,3 +35,10 @@ debug
 | on-blur | `(event: FocusEvent) => void` | `undefined` | 移除焦点的回调 |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | 获取焦点的回调 |
 | on-update:value | `(value: number \| null) => void` | `undefined` | 组件值发生变化的回调 |
+
+### Slots
+
+| 属性   | 类型 | 说明               |
+| ------ | ---- | ------------------ |
+| prefix | `()` | 输入框头部内容插槽 |
+| suffix | `()` | 输入框尾部内容插槽 |
