@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+### Fixes
+
+- Fix `n-message` options `duration` invalid configuration.
+
 ## 2.15.8 (2021-07-27)
 
 ### Feats

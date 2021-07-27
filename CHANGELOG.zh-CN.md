@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+### Fixes
+
+- 修复 `n-message` 的 options 中 `duration` 配置无效
+
 ## 2.15.8 (2021-07-27)
 
 ### Feats
