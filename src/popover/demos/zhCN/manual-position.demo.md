@@ -7,7 +7,9 @@
   style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);"
   @click="handleClick"
 ></div>
-<n-popover :show="showPopover" :x="x" :y="y"> 厉害！ </n-popover>
+<n-popover :show="showPopover" :x="x" :y="y" trigger="manual">
+  厉害！</n-popover
+>
 ```
 
 ```js
