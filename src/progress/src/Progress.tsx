@@ -115,6 +115,7 @@ export default defineComponent({
           '--icon-size-circle': iconSizeCircle,
           '--icon-size-line': iconSizeLine,
           '--line-bg-processing': lineBgProcessing,
+          '--circle-bg-processing': 'rgba(255, 255, 255, 0.3)',
           '--rail-color': railColor,
           '--rail-height': railHeight,
           '--text-color-circle': textColorCircle,
@@ -171,6 +172,7 @@ export default defineComponent({
             fillColor={color as any}
             railStyle={railStyle as any}
             percentage={percentage as number}
+            processing={processing}
             viewBoxWidth={viewBoxWidth}
             strokeWidth={strokeWidth}
             unit={unit}
@@ -205,6 +207,7 @@ export default defineComponent({
             railStyle={railStyle as any}
             viewBoxWidth={viewBoxWidth}
             percentage={percentage as number[]}
+            processing={processing}
             showIndicator={showIndicator}
             circleGap={circleGap}
           >

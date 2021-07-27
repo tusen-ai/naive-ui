@@ -1,4 +1,13 @@
-import { h, defineComponent, PropType, computed, CSSProperties } from 'vue'
+import {
+  h,
+  defineComponent,
+  PropType,
+  computed,
+  CSSProperties,
+  ref,
+  onMounted,
+  onUnmounted
+} from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   SuccessIcon,
@@ -37,9 +46,10 @@ export default defineComponent({
       type: Number,
       required: true
     },
+    processing: Boolean,
     showIndicator: {
       type: Boolean,
-      reqiuired: true
+      required: true
     },
     indicatorTextColor: String,
     unit: String,
@@ -51,6 +61,40 @@ export default defineComponent({
   setup (props, { slots }) {
     const strokeDasharrayRef = computed(() => {
       return `${Math.PI * props.percentage}, ${props.viewBoxWidth * 8}`
+    })
+    const processingFillStrokeDasharrayRef = ref<string>('')
+    const timer = ref<number>(0)
+    const setProcessingTimer = (): void => {
+      let speed = 1
+      timer.value = window.setInterval(() => {
+        if (!processingFillStrokeDasharrayRef.value) {
+          processingFillStrokeDasharrayRef.value = `0, ${
+            props.viewBoxWidth * 8
+          }`
+        } else {
+          const strokeDasharrayVal: number = parseFloat(
+            processingFillStrokeDasharrayRef.value.split(',')[0]
+          )
+          let num =
+            strokeDasharrayVal + Math.PI * props.percentage * 0.001 * speed++
+          if (num > Math.PI * props.percentage) {
+            num = 0
+            speed = 1
+          }
+          processingFillStrokeDasharrayRef.value = `${num}, ${
+            props.viewBoxWidth * 8
+          }`
+        }
+      }, 20)
+    }
+    const clearProcessingTimer = (): void => {
+      window.clearInterval(timer.value as any)
+    }
+    onMounted(() => {
+      props.processing && setProcessingTimer()
+    })
+    onUnmounted(() => {
+      props.processing && clearProcessingTimer()
     })
     return () => {
       const {
@@ -106,6 +150,23 @@ export default defineComponent({
                     }}
                   />
                 </g>
+                {props.processing ? (
+                  <g>
+                    <path
+                      class={[
+                        `${clsPrefix}-progress-graph-circle-processing-fill`
+                      ]}
+                      d="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
+                      stroke-width={strokeWidth * 1.1}
+                      stroke-linecap="round"
+                      fill="none"
+                      style={{
+                        strokeDasharray: processingFillStrokeDasharrayRef.value,
+                        strokeDashoffset: 0
+                      }}
+                    />
+                  </g>
+                ) : null}
               </svg>
             </div>
           </div>

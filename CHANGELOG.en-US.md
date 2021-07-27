@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-progress` support `progressing` prop when type is `circle` or `multiple-circle` , closes [#509](https://github.com/TuSimple/naive-ui/issues/509).
+
 ## 2.15.8 (2021-07-27)
 
 ### Feats

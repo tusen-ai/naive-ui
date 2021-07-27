@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-progress` type 为 `circle` 和 `multiple-circle` 时支持 `progressing` 属性，关闭 [#509](https://github.com/TuSimple/naive-ui/issues/509)
+
 ## 2.15.8 (2021-07-27)
 
 ### Feats
