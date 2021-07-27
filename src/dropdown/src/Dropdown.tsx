@@ -93,6 +93,7 @@ const dropdownBaseProps = {
     type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
     default: 'medium'
   },
+  arrowStyle: [String, Object] as PropType<string | CSSProperties>,
   showArrow: {
     type: Boolean,
     default: false
@@ -401,7 +402,13 @@ export default defineComponent({
       const { mergedClsPrefix } = this
       const dropdownProps = {
         ref: createRefSetter(ref),
-        class: [className, `${mergedClsPrefix}-dropdown`],
+        class: [
+          className,
+          `${mergedClsPrefix}-dropdown`,
+          {
+            [`${mergedClsPrefix}-popover--show-arrow`]: this.showArrow
+          }
+        ],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,
         style: [style, this.cssVars as CSSProperties],
@@ -416,6 +423,7 @@ export default defineComponent({
     const { mergedTheme } = this
     const popoverProps: PopoverInternalProps = {
       show: this.mergedShow,
+      arrowStyle: this.arrowStyle,
       showArrow: this.mergedShowArrow,
       theme: mergedTheme.peers.Popover,
       themeOverrides: mergedTheme.peerOverrides.Popover,
