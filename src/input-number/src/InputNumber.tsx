@@ -373,9 +373,11 @@ export default defineComponent({
             prefix: this.$slots.prefix,
             suffix: this.showButton
               ? () => [
-                  <span class={`${mergedClsPrefix}-input-number-suffix`}>
-                    {{ default: this.$slots.suffix }}
-                  </span>,
+                  this.$slots.suffix && (
+                    <span class={`${mergedClsPrefix}-input-number-suffix`}>
+                      {{ default: this.$slots.suffix }}
+                    </span>
+                  ),
                   <NButton
                     text
                     disabled={!this.minusable || this.disabled}
