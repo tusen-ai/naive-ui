@@ -49,7 +49,7 @@ options-change-debug
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |
 | multiple | `boolean` | `false` | 是否为多选 |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | 配置选项内容，详情见 SelectOption Properties |
-| placeholder | `string` | `'请选择'` |  |
+| placeholder | `string` | `'请选择'` | 提示信息 |
 | remote | `boolean` | `false` | 是否要异步获取选项。注意如果设定了，那么 `filter` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options` |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | 选项标签渲染函数 |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean } }` | `undefined` | 选项的渲染函数 |
@@ -60,12 +60,12 @@ options-change-debug
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | 受控模式下的值 |
 | virtual-scroll | `boolean` | `true` | 是否启用虚拟滚动 |
-| on-blur | `() => void` | `undefined` | 选择器 Blur 时发出 |
+| on-blur | `() => void` | `undefined` | `blur` 时执行的回调 |
 | on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | 在输入内容时如何创建一个选项。注意 `filter` 对这个生成的选项同样会生效。同时确保这个选项和其他选项的 `value` 不要有重复 |
-| on-focus | `() => void` | `undefined` | 选择器 Focus 时发出 |
-| on-scroll | `(e: ScrollEvent) => void` | `undefined` | 选择菜单在滚动 |
-| on-search | `(value: string) => void` | `undefined` |  |
-| on-update:value | `(value: Array \| string \| number \| null) => void` | `undefined` | 值更新的回调 |
+| on-focus | `() => void` | `undefined` | `focus` 时执行的回调 |
+| on-scroll | `(e: ScrollEvent) => void` | `undefined` | 滚动时执行的回调 |
+| on-search | `(value: string) => void` | `undefined` | 搜索时执行的回调 |
+| on-update:value | `(value: Array \| string \| number \| null) => void` | `undefined` | 值更新时执行的回调 |
 
 ### SelectOption Properties
 
@@ -74,7 +74,7 @@ options-change-debug
 | class | `string` | 自定义一个选项的类名 |
 | disabled | `boolean` | 是否禁用一个选项 |
 | label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | 选项的标签，注意如果你使用了渲染函数，默认的过滤器将会过滤该选项 |
-| render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | Render the entire option. |
+| render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | 渲染整个选项 |
 | style | `string \| object` | 自定义一个选项的样式 |
 | value | `string \| number` | 在选项中应该是唯一的 |
 
@@ -82,11 +82,11 @@ options-change-debug
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| children | `Array<SelectOption>` |  |
+| children | `Array<SelectOption>` | 子选项组 |
 | label | `string \| ((option: SelectGroupOption) => VNodeChild)` | 选项组的标签 |
 | key | `string \| number` | 在选项中应该是唯一的 |
-| render | `(info: { node: VNode, option: SelectOption, selected: boolean } }) => VNodeChild` | Render the entire option. |
-| type | `'group'` |  |
+| render | `(info: { node: VNode, option: SelectOption, selected: boolean } }) => VNodeChild` | 渲染整个选项 |
+| type | `'group'` | 选项组的类型 |
 
 ### Select Slots
 
