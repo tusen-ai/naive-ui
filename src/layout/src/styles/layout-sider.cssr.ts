@@ -119,5 +119,11 @@ export default cB('layout-sider', `
     left: 0;
     top: 0;
     bottom: 0;
+  `),
+  cM('border-right', `
+    border-right: 1px solid var(--border-color);
+  `),
+  cM('border-left', `
+    border-left: 1px solid var(--border-color);
   `)
 ])

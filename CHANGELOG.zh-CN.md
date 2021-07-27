@@ -2,7 +2,7 @@
 
 ### Feats
 
-- `n-layout` 增加 `sider-positioned` 属性，`n-layout-sider` 增加 `sider-position` 属性，关闭 [#566](https://github.com/TuSimple/naive-ui/issues/566)
+- `n-layout` 增加 `sider-placement` 属性，关闭 [#566](https://github.com/TuSimple/naive-ui/issues/566)
 
 ## 2.15.7 (2021-07-25)
 

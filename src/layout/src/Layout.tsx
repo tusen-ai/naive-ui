@@ -32,7 +32,10 @@ const layoutProps = {
     default: ''
   },
   hasSider: Boolean,
-  siderPositioned: Boolean
+  siderPlacement: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'left'
+  }
 } as const
 
 export type LayoutProps = ExtractPublicPropTypes<typeof layoutProps>
@@ -112,8 +115,9 @@ export function createLayoutComponent (isContent: boolean) {
     render () {
       const { mergedClsPrefix, hasSider } = this
       const hasSiderStyle = hasSider ? this.hasSiderStyle : undefined
-      const siderPositionedStyle = {
-        'flex-direction': this.siderPositioned ? 'row-reverse' : 'unset'
+      const siderPlacementStyle = {
+        'flex-direction':
+          this.siderPlacement === 'right' ? 'row-reverse' : 'unset'
       }
       const layoutClass = [
         isContent && `${mergedClsPrefix}-layout-content`,
@@ -127,7 +131,7 @@ export function createLayoutComponent (isContent: boolean) {
               ref="scrollableElRef"
               class={`${mergedClsPrefix}-layout-scroll-container`}
               style={
-                [this.contentStyle, hasSiderStyle, siderPositionedStyle] as any
+                [this.contentStyle, hasSiderStyle, siderPlacementStyle] as any
               }
             >
               {this.$slots}
@@ -139,7 +143,7 @@ export function createLayoutComponent (isContent: boolean) {
               theme={this.mergedTheme.peers.Scrollbar}
               themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
               contentStyle={
-                [this.contentStyle, hasSiderStyle, siderPositionedStyle] as any
+                [this.contentStyle, hasSiderStyle, siderPlacementStyle] as any
               }
             >
               {this.$slots}

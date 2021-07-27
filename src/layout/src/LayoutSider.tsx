@@ -82,11 +82,7 @@ const layoutSiderProps = {
   >,
   // deprecated
   onExpand: [Function, Array] as PropType<MaybeArray<() => void>>,
-  onCollapse: [Function, Array] as PropType<MaybeArray<() => void>>,
-  siderPosition: {
-    type: String as PropType<'left' | 'right'>,
-    default: 'left'
-  }
+  onCollapse: [Function, Array] as PropType<MaybeArray<() => void>>
 } as const
 
 export type LayoutSiderProps = ExtractPublicPropTypes<typeof layoutSiderProps>
@@ -127,29 +123,20 @@ export default defineComponent({
         minWidth: formatLength(props.width)
       }
     })
+    const siderPlacement = ref<'left' | 'right'>('left')
+    const siderOnLeft = computed(() => {
+      return siderPlacement.value === 'left'
+    })
     const mergedTriggerStyle = computed(() => [
       props.triggerStyle,
       {
-        left: props.siderPosition === 'left' ? 'unset' : 0,
-        right: props.siderPosition === 'right' ? 'unset' : 0,
-        transform:
-          props.siderPosition === 'left'
-            ? 'translateX(50%) translateY(-50%)'
-            : 'translateX(-50%) translateY(-50%) rotate(180deg)'
+        left: siderOnLeft.value ? 'unset' : 0,
+        right: !siderOnLeft.value ? 'unset' : 0,
+        transform: siderOnLeft.value
+          ? 'translateX(50%) translateY(-50%)'
+          : 'translateX(-50%) translateY(-50%) rotate(180deg)'
       }
     ])
-    const borderStyle = computed(() => {
-      return {
-        borderRight:
-          props.bordered && props.siderPosition === 'left'
-            ? '1px solid var(--border-color)'
-            : 'none',
-        borderLeft:
-          props.bordered && props.siderPosition === 'right'
-            ? '1px solid var(--border-color)'
-            : 'none'
-      }
-    })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
     const mergedCollapsedRef = useMergedState(
       toRef(props, 'collapsed'),
@@ -221,8 +208,9 @@ export default defineComponent({
       styleMaxWidth: styleMaxWidthRef,
       mergedCollapsed: mergedCollapsedRef,
       scrollContainerStyle: scrollContainerStyleRef,
+      siderPlacement,
+      siderOnLeft,
       mergedTriggerStyle,
-      borderStyle,
       handleTriggerClick,
       cssVars: computed(() => {
         const {
@@ -256,14 +244,18 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, mergedCollapsed, showTrigger } = this
+    const { mergedClsPrefix, mergedCollapsed, showTrigger, $parent } = this
+    this.siderPlacement = ($parent?.$props as any).siderPlacement
     return (
       <aside
         class={[
           `${mergedClsPrefix}-layout-sider`,
           `${mergedClsPrefix}-layout-sider--${this.position}-positioned`,
-          `${mergedClsPrefix}-layout-sider--${this.siderPosition}-positioned`,
-          this.bordered && `${mergedClsPrefix}-layout-sider--bordered`,
+          `${mergedClsPrefix}-layout-sider--${this.siderPlacement}-positioned`,
+          this.bordered &&
+            `${mergedClsPrefix}-layout-sider--border-${
+              this.siderOnLeft ? 'right' : 'left'
+            }`,
           mergedCollapsed && `${mergedClsPrefix}-layout-sider--collapsed`,
           (!mergedCollapsed || this.showCollapsedContent) &&
             `${mergedClsPrefix}-layout-sider--show-content`
@@ -272,8 +264,7 @@ export default defineComponent({
           this.cssVars,
           {
             maxWidth: this.styleMaxWidth,
-            width: formatLength(this.width),
-            ...this.borderStyle
+            width: formatLength(this.width)
           }
         ]}
       >
