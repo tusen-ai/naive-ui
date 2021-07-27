@@ -6,6 +6,10 @@
 
 - `n-message` add `destroyAll` method.
 
+### Fixes
+
+- Fix `n-message` options' `duration` prop doesn't work.
+
 ## 2.15.8 (2021-07-27)
 
 ### Feats

@@ -173,7 +173,11 @@ export default defineComponent({
                     internalKey={message.key}
                     onInternalAfterLeave={this.handleAfterLeave}
                     {...omit(message, ['destroy'], undefined)}
-                    duration={this.duration}
+                    duration={
+                      message.duration === undefined
+                        ? this.duration
+                        : message.duration
+                    }
                   />
                 )
               })}
