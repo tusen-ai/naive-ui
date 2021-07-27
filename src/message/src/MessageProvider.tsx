@@ -109,9 +109,7 @@ export default defineComponent({
       loading (content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'loading' })
       },
-      destroyAll () {
-        destroyAll()
-      }
+      destroyAll
     }
     provide(messageProviderInjectionKey, {
       props,
@@ -142,17 +140,16 @@ export default defineComponent({
       )
     }
     function destroyAll (): void {
-      Object.values(messageRefs).forEach((messageInstRef) =>
-        messageInstRef.hide()
-      )
+      Object.values(messageRefs.value).forEach((messageInstRef) => {
+        messageInstRef?.hide()
+      })
     }
     return Object.assign(
       {
         mergedClsPrefix: mergedClsPrefixRef,
         messageRefs,
         messageList: messageListRef,
-        handleAfterLeave,
-        destroyAll
+        handleAfterLeave
       },
       api
     )

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-message` add `destroyAll` method.
+
 ## 2.15.8 (2021-07-27)
 
 ### Feats
