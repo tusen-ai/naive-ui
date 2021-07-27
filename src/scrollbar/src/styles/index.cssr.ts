@@ -38,25 +38,31 @@ export default cB('scrollbar', `
       user-select: none;
     `, [
       cM('horizontal', `
-        left: 2px;
-        right: 2px;
-        bottom: 4px;
+        left: var(--scrollbar-left);
+        right: var(--scrollbar-right);
+        bottom: var(--scrollbar-bottom);
+        height: var(--scrollbar-height);
       `, [
         c('>', [
-          cE('scrollbar', {
-            right: 0
-          })
+          cE('scrollbar', `
+            height: var(--scrollbar-height);
+            border-radius: var(--scrollbar-border-radius);
+            right: 0;
+          `)
         ])
       ]),
       cM('vertical', `
-        right: 4px;
-        top: 2px;
-        bottom: 2px;
+        right: var(--scrollbar-right);
+        top: var(--scrollbar-top);
+        bottom: var(--scrollbar-bottom);
+        width: var(--scrollbar-width);
       `, [
         c('>', [
-          cE('scrollbar', {
-            bottom: 0
-          })
+          cE('scrollbar', `
+            width: var(--scrollbar-width);
+            border-radius: var(--scrollbar-border-radius);
+            bottom: 0;
+          `)
         ])
       ]),
       cM('disabled', [

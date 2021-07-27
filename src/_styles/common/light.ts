@@ -153,6 +153,13 @@ const derived = {
 
   scrollbarColor: overlay(base.alphaScrollbar),
   scrollbarColorHover: overlay(base.alphaScrollbarHover),
+  scrollbarWidth: '5px',
+  scrollbarHeight: '5px',
+  scrollbarBorderRadius: '5px',
+  scrollbarTop: '2px',
+  scrollbarRight: '3px',
+  scrollbarBottom: '3px',
+  scrollbarLeft: '2px',
 
   progressRailColor: neutral(base.alphaProgressRail),
   railColor: 'rgb(219, 219, 223)',
