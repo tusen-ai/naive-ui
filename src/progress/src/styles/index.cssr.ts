@@ -10,6 +10,7 @@ import { c, cB, cM } from '../../../_utils/cssr'
 // --icon-size-circle
 // --icon-size-line
 // --line-bg-processing
+// --circle-bg-processing
 // --rail-color
 // --rail-height
 // --text-color-circle
@@ -130,6 +131,9 @@ export default c([
             opacity: 0
           })
         ]),
+        cB('progress-graph-circle-processing-fill', `
+          stroke: var(--circle-bg-processing);
+        `),
         cB('progress-graph-circle-rail', `
           transition: stroke .3s var(--bezier);
           overflow: hidden;
