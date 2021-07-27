@@ -1,6 +1,6 @@
 # 批量处理菜单渲染
 
-使用 `render-label`、`render-icon` 可以批量控制菜单的选项渲染。
+使用 `render-label`、`render-icon`、`expand-icon` 可以批量控制菜单的选项渲染。
 
 ```html
 <n-space vertical>
@@ -23,6 +23,7 @@
         :options="menuOptions"
         :render-label="renderMenuLabel"
         :render-icon="renderMenuIcon"
+        :expand-icon="expandIcon"
       />
     </n-layout-sider>
     <n-layout>
@@ -35,7 +36,7 @@
 ```js
 import { h, ref, defineComponent } from 'vue'
 import { NIcon } from 'naive-ui'
-import { BookmarkOutline } from '@vicons/ionicons5'
+import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
 
 const menuOptions = [
   {
@@ -120,6 +121,9 @@ export default defineComponent({
       },
       renderMenuIcon () {
         return h(NIcon, null, { default: () => h(BookmarkOutline) })
+      },
+      expandIcon () {
+        return h(NIcon, null, { default: () => h(CaretDownOutline) })
       }
     }
   }

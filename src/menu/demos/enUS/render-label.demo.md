@@ -1,6 +1,6 @@
 # Batch Customizing Menu Options
 
-The `render-label`, `render-icon` can be used to batch render menu options.
+The `render-label`, `render-icon`, `expand-icon` can be used to batch render menu options.
 
 ```html
 <n-space vertical>
@@ -23,6 +23,7 @@ The `render-label`, `render-icon` can be used to batch render menu options.
         :options="menuOptions"
         :render-label="renderMenuLabel"
         :render-icon="renderMenuIcon"
+        :expand-icon="expandIcon"
       />
     </n-layout-sider>
     <n-layout>
@@ -35,7 +36,7 @@ The `render-label`, `render-icon` can be used to batch render menu options.
 ```js
 import { h, ref, defineComponent } from 'vue'
 import { NIcon } from 'naive-ui'
-import { BookmarkOutline } from '@vicons/ionicons5'
+import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
 
 const menuOptions = [
   {
@@ -120,6 +121,9 @@ export default defineComponent({
       },
       renderMenuIcon () {
         return h(NIcon, null, { default: () => h(BookmarkOutline) })
+      },
+      expandIcon () {
+        return h(NIcon, null, { default: () => h(CaretDownOutline) })
       }
     }
   }

@@ -39,6 +39,8 @@ npm run build:site
 - Don't add period `。` in any description in Chinese API tables (and any log of changelogs).
 - Add space bewteen Chinese and Latin charactors.
 - Don't use Chinese punctuation in English docs.
+- Don't write changelogs in a released version.
+- When rebase the branch, pay attention to whether it is placed in the released version.
 
 For Example:
 
@@ -61,6 +63,18 @@ Chinese Changelog:
 
 Space bewteen Chinese and Latin charactors:
 星之 star 卡比 kirby
+
+Changelog position:
+
+# CHANGELOG
+
+## Pending
+
+### Feats
+
+your changelog
+
+### Fixes
 ```
 
 # 贡献代码
@@ -104,6 +118,8 @@ npm run build:site
 - 不要在中文 API 表和中文的变更日志中加句号
 - 在每一个中文和拉丁字母（数字）之间要加空格
 - 不要在英文文档中使用中文标点
+- 不要写在已经发布的版本中
+- rebase 分支时注意是否放到已发布的版本中
 
 例如:
 
@@ -126,4 +142,16 @@ Chinese Changelog:
 
 中英文之间要加空格：
 星之 star 卡比 kirby
+
+Changelog 位置：
+
+# CHANGELOG
+
+## Pending
+
+### Feats
+
+你的 changelog
+
+### Fixes
 ```

@@ -48,7 +48,9 @@ const descriptionProps = {
   bordered: {
     type: Boolean,
     default: false
-  }
+  },
+  labelStyle: [Object, String] as PropType<string | CSSProperties>,
+  contentStyle: [Object, String] as PropType<string | CSSProperties>
 } as const
 
 export type DescriptionProps = ExtractPublicPropTypes<typeof descriptionProps>
@@ -162,12 +164,15 @@ export default defineComponent({
       const itemSpan = (props.span as number) || 1
       const memorizedSpan = state.span
       state.span += itemSpan
+      const labelStyle = props.labelStyle || props['label-style'] || this.labelStyle
+      const contentStyle = props.contentStyle || props['content-style'] || this.contentStyle
       if (labelPlacement === 'left') {
         if (bordered) {
           state.row.push(
             <th
               class={`${mergedClsPrefix}-descriptions-table-header`}
               colspan={1}
+              style={labelStyle}
             >
               {itemLabel}
             </th>,
@@ -178,6 +183,7 @@ export default defineComponent({
                   ? (compitableColumn - memorizedSpan) * 2 + 1
                   : itemSpan * 2 - 1
               }
+              style={contentStyle}
             >
               {itemChildren}
             </td>
@@ -194,6 +200,7 @@ export default defineComponent({
             >
               <span
                 class={`${mergedClsPrefix}-descriptions-table-content__label`}
+                style={labelStyle}
               >
                 {[
                   ...itemLabel,
@@ -204,6 +211,7 @@ export default defineComponent({
               </span>
               <span
                 class={`${mergedClsPrefix}-descriptions-table-content__content`}
+                style={contentStyle}
               >
                 {itemChildren}
               </span>
@@ -218,6 +226,7 @@ export default defineComponent({
           <th
             class={`${mergedClsPrefix}-descriptions-table-header`}
             colspan={colspan}
+            style={labelStyle}
           >
             {itemLabel}
           </th>
@@ -226,6 +235,7 @@ export default defineComponent({
           <td
             class={`${mergedClsPrefix}-descriptions-table-content`}
             colspan={colspan}
+            style={contentStyle}
           >
             {itemChildren}
           </td>
