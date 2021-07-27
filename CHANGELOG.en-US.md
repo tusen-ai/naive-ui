@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-message` add `destroyAll` method.
+- `n-input-number` add `prefix`, `suffix` slots, closes [#609](https://github.com/TuSimple/naive-ui/issues/609).
 
 ### Fixes
 
@@ -25,7 +26,6 @@
 
 ### Feats
 
-- `n-input-number` add `prefix`, `suffix` slots, closes [#609](https://github.com/TuSimple/naive-ui/issues/609).
 - `n-time-picker` add `actions` prop, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
 - `n-mention` add `render-label` prop.
 - `n-switch` add `checked`, `unchecked` slots.
