@@ -25,7 +25,7 @@ debug
 | disabled | `boolean` | `false` | 是否禁用 |
 | max | `number` | `undefined` | 最大值 |
 | min | `number` | `undefined` | 最小值 |
-| placeholder | `string` | `'请输入'` |  |
+| placeholder | `string` | `'请输入'` | 提示信息 |
 | show-button | `boolean` | `true` | 是否有按钮 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框大小 |
 | step | `number` | `1` | 每次改变步数，可以为小数 |

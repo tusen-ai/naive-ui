@@ -24,7 +24,7 @@ show-button
 | disabled | `boolean` | `false` | Whether to disable the input. |
 | max | `number` | `undefined` | The max value. |
 | min | `number` | `undefined` | The min value. |
-| placeholder | `string` | `'Please Input'` |  |
+| placeholder | `string` | `'Please Input'` | Placeholder of input number. |
 | show-button | `boolean` | `true` | Whether to show buttons. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of input box. |
 | step | `number` | `1` | The number to which the current value is increased or decreased. It can be an integer or decimal. |
