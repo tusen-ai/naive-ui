@@ -8,6 +8,7 @@ If you want just input number, use it.
 basic
 disabled
 event
+icon
 min-max
 size
 step
@@ -33,3 +34,10 @@ show-button
 | on-blur | `(event: FocusEvent) => void` | `undefined` | Callback when blur. |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | Callback when focused. |
 | on-update:value | `(value: number \| null) => void` | `undefined` | Callback when the component's value changes. |
+
+### Input Slots
+
+| Name   | Parameters | Description                    |
+| ------ | ---------- | ------------------------------ |
+| prefix | `()`       | Input box prefix content slot. |
+| suffix | `()`       | Input box suffix content slot. |

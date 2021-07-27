@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-message` 增加 `destroyAll` 方法
+- `n-input-number` 增加 `prefix`、`suffix` slots, 关闭 [#609](https://github.com/TuSimple/naive-ui/issues/609)
 
 ### Fixes
 
