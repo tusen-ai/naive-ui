@@ -371,12 +371,9 @@ export default defineComponent({
         >
           {{
             prefix: this.$slots.prefix,
-            suffix: () =>
-              this.showButton ? (
-                [
-                  <span
-                    class={`${mergedClsPrefix}-input-number-suffix-has-button`}
-                  >
+            suffix: this.showButton
+              ? () => [
+                  <span class={`${mergedClsPrefix}-input-number-suffix`}>
                     {{ default: this.$slots.suffix }}
                   </span>,
                   <NButton
@@ -416,13 +413,7 @@ export default defineComponent({
                     }}
                   </NButton>
                 ]
-              ) : (
-                <span
-                  class={`${mergedClsPrefix}-input-number-suffix-no-button`}
-                >
-                  {{ default: this.$slots.suffix }}
-                </span>
-              )
+              : this.$slots.suffix
           }}
         </NInput>
       </div>
