@@ -33,7 +33,9 @@ const loadingBarProps = {
   to: {
     type: [String, Object] as PropType<string | HTMLElement>,
     default: undefined
-  }
+  },
+  startColor: String,
+  endColor: String
 }
 
 export type LoadingBarProviderProps = ExtractPublicPropTypes<
@@ -49,9 +51,8 @@ export const loadingBarProviderInjectionKey: InjectionKey<{
   mergedClsPrefixRef: Ref<string>
 }> = Symbol('loadingBar')
 
-export const loadingBarApiInjectionKey: InjectionKey<LoadingBarApiInjection> = Symbol(
-  'loadingBarApi'
-)
+export const loadingBarApiInjectionKey: InjectionKey<LoadingBarApiInjection> =
+  Symbol('loadingBarApi')
 
 export default defineComponent({
   name: 'LoadingBarProvider',
@@ -102,7 +103,11 @@ export default defineComponent({
     return (
       <>
         <Teleport to={this.to ?? 'body'}>
-          <NLoadingBar ref="loadingBarRef" />
+          <NLoadingBar
+            ref="loadingBarRef"
+            startColor={this.startColor}
+            endColor={this.endColor}
+          />
         </Teleport>
         {renderSlot(this.$slots, 'default')}
       </>

@@ -24,7 +24,11 @@ function createClassName (
 
 export default defineComponent({
   name: 'LoadingBar',
-  setup () {
+  props: {
+    startColor: String,
+    endColor: String
+  },
+  setup (props) {
     const {
       props: providerProps,
       mergedClsPrefixRef
@@ -139,7 +143,8 @@ export default defineComponent({
         } = themeRef.value
         return {
           '--height': height,
-          '--color-loading': colorLoading,
+          '--color-start': props.startColor || colorLoading,
+          '--color-end': props.endColor || colorLoading,
           '--color-error': colorError
         }
       })

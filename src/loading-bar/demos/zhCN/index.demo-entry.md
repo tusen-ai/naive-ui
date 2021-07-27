@@ -41,6 +41,13 @@ basic
 
 ## API
 
+### `loadingBar` Props
+
+| 名称        | 类型     | 默认值      | 说明           |
+| ----------- | -------- | ----------- | -------------- |
+| start-color | `string` | `undefined` | 开始位置的颜色 |
+| end-color   | `string` | `undefined` | 结束位置的颜色 |
+
 ### `loadingBar` Injection Methods
 
 | 名称   | 类型         | 说明                     |

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-loading-bar` add `start-color` , `end-color` props, closes [#457](https://github.com/TuSimple/naive-ui/issues/457).
+
 ## 2.15.8 (2021-07-27)
 
 ### Feats
