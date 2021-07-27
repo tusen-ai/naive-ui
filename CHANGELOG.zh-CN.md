@@ -1,7 +1,5 @@
 # CHANGELOG
-
 ## Pending
-
 ### Feats
 
 - `n-scrollbar` 增加一些公共主题变量如 `scrollbarWidth`, 关闭 [#649](https://github.com/TuSimple/naive-ui/issues/649)
