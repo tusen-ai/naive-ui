@@ -8,16 +8,12 @@ describe('n-input-number', () => {
   })
 
   it('should work with `show-button` prop', async () => {
-    const wrapper = mount(NInputNumber, {
-      props: {
-        showButton: false
-      }
-    })
+    // Here is a strange case, we must make input number's slots flag to 2
+    // (dynamic) to make it work.
+    const wrapper = mount(NInputNumber)
+    expect(wrapper.findComponent(NButton).exists()).toBe(true)
+    await wrapper.setProps({ showButton: false })
     expect(wrapper.findComponent(NButton).exists()).toBe(false)
-
-    // expect(wrapper.findComponent(NButton).exists()).toBe(true)
-
-    // await wrapper.setProps({ showButton: false })
   })
 
   it('should work with default value', async () => {

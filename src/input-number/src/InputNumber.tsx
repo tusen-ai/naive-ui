@@ -370,6 +370,7 @@ export default defineComponent({
           onMousedown={this.handleMouseDown}
         >
           {{
+            _: 2, // input number has dynamic slots
             prefix: this.$slots.prefix,
             suffix: this.showButton
               ? () => [
