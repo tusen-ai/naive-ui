@@ -38,12 +38,12 @@ render-tag
 | disabled | `boolean` | `false` | Whether to disable the select. |
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | The option to be created according the value which has no corresponding option in the options of the component. If set to `false`, the fallback option won't be created and displayed and the value has no corresponding option will be viewed as a invalid value and it will be removed in the operations of the component. |
 | filterable | `boolean` | `false` | Whether it can filter options. |
-| filter | `(pattern: string, option: Object) => boolean` | A basic string based search method. |  |
+| filter | `(pattern: string, option: Object) => boolean` | A basic string based search method. | Filter function. |
 | loading | `boolean` | `false` | Whether to show loading status. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple mode. `responsive` will keep all the tags in single line. |
 | multiple | `boolean` | `false` | Whether to select multiple values. |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | For details of configuration options, see SelectOption Properties. |
-| placeholder | `string` | `'Please Select'` |  |
+| placeholder | `string` | `'Please Select'` | Placeholder of select. |
 | remote | `boolean` | `false` | If you want to async get options. Note that if remote is set, `filter` & `tag` won't work on `options`. At that time, you are taking all control of `options`. |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function of all the options' label. |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean } }` | `undefined` | Render function of all the options. |
@@ -54,12 +54,12 @@ render-tag
 | tag | `boolean` | `false` | Whether it can create new option, should be used with `filterable`. |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | Value in controlled mode. |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |
-| on-blur | `() => void` | `undefined` | Selection blur. |
+| on-blur | `() => void` | `undefined` | Callback triggered when selection blur. |
 | on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | How to create a option when you input a string to create a option. Note that `filter` will be applied to the created option too. And make sure the value of the created option is not the same as any other option. |
-| on-focus | `() => void` | `undefined` | Selection focus. |
-| on-scroll | `(e: ScrollEvent) => void` | `undefined` | Menu scroll. |
-| on-search | `(value: string) => void` | `undefined` |  |
-| on-update:value | `(value: Array \| string \| number \| null) => void` | `undefined` | Callback of value updating. |
+| on-focus | `() => void` | `undefined` | Callback triggered when selection focus. |
+| on-scroll | `(e: ScrollEvent) => void` | `undefined` | Callback triggered when　menu scroll. |
+| on-search | `(value: string) => void` | `undefined` | Callback triggered when search. |
+| on-update:value | `(value: Array \| string \| number \| null) => void` | `undefined` | Callback triggered when value updating. |
 
 ### SelectOption Properties
 
@@ -76,11 +76,11 @@ render-tag
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children | `Array<SelectOption>` |  |
+| children | `Array<SelectOption>` | Child select options. |
 | label | `string \| ((option: SelectGroupOption) => VNodeChild)` | Label of the group option. |
 | key | `string \| number` | Should be unique in options. |
 | render | `(info: { node: VNode }) => VNodeChild` | Render the entire option. |
-| type | `'group'` |  |
+| type | `'group'` | Type of the group option. |
 
 ### Select Slots
 
