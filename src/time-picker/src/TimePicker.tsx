@@ -58,7 +58,7 @@ import {
   timePickerInjectionKey
 } from './interface'
 import { happensIn } from 'seemly'
-import { isTimeInStep } from './utils'
+import { findSimilarTime, isTimeInStep } from './utils'
 
 // validate hours, minutes, seconds prop
 function validateUnits (value: MaybeArray<number>, max: number): boolean {
@@ -479,17 +479,29 @@ export default defineComponent({
     }
     function handleNowClick (): void {
       const now = new Date()
-      if (!mergedValueRef.value) doChange(getTime(now))
-      else {
-        const newValue = setSeconds(
-          setMinutes(
-            setHours(mergedValueRef.value, getHours(now)),
-            getMinutes(now)
-          ),
-          getSeconds(now)
-        )
-        doChange(getTime(newValue))
+      const getNowTime = {
+        hours: getHours,
+        minutes: getMinutes,
+        seconds: getSeconds
       }
+      const [mergeHours, mergeMinutes, mergeSeconds] = (
+        ['hours', 'minutes', 'seconds'] as const
+      ).map((i) =>
+        !props[i] || isTimeInStep(getNowTime[i](now), i, props[i])
+          ? getNowTime[i](now)
+          : findSimilarTime(getNowTime[i](now), i, props[i])
+      )
+      const newValue = setSeconds(
+        setMinutes(
+          setHours(
+            mergedValueRef.value ? mergedValueRef.value : getTime(now),
+            mergeHours
+          ),
+          mergeMinutes
+        ),
+        mergeSeconds
+      )
+      doChange(getTime(newValue))
     }
     function handleConfirmClick (): void {
       deriveInputValue()

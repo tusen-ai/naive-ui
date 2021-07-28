@@ -6,6 +6,7 @@ export type RenderPrefix = (info: {
   page: number
   pageSize: number
   pageCount: number
+  itemCount: number | undefined
 }) => VNode
 
 export type RenderSuffix = RenderPrefix

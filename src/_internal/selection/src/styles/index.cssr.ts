@@ -196,6 +196,9 @@ export default c([
         cE('input', `
           cursor: not-allowed;
           color: var(--text-color-disabled);
+        `),
+        cE('render-label', `
+          color: var(--text-color-disabled);
         `)
       ]),
       cB('base-selection-tags', `

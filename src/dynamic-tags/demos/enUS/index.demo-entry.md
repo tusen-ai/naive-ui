@@ -14,6 +14,7 @@ form
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | closable | `boolean` | `true` | Whether the tag is closable. |
+| color | `{ color?: string, borderColor?: string, textColor?: string }` | `undefined` | Color of the tag, it will overrides type's color. |
 | default-value | `string[]` | `[]` | Default value in uncontrolled mode. |
 | disabled | `boolean` | `false` | Whether the tag is disabled. |
 | input-style | `string \| Object` | `undefined` | Customize the style of the input. |
