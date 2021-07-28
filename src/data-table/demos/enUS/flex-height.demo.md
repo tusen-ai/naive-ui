@@ -1,6 +1,6 @@
-# 弹性高度
+# Flex height
 
-如果你想设定表格的整体高度，你可以在设定好表格高度的情况下设定 `flex-height` 属性。
+If you want to set the overall height of the table, you can set the `flex-height` property.
 
 ```html
 <n-space vertical>
