@@ -172,6 +172,17 @@ export default defineComponent({
       return endIndex
     })
 
+    const mergedItemCountRef = computed(() => {
+      const { itemCount } = props
+      if (itemCount !== undefined) {
+        return itemCount
+      }
+      warn(
+        'pagination',
+        '`item-count` should be must have if you want to use total.'
+      )
+    })
+
     const disableTransitionOneTick = (): void => {
       void nextTick(() => {
         const { value: selfEl } = selfRef
@@ -318,6 +329,7 @@ export default defineComponent({
       mergedPageCount: mergedPageCountRef,
       startIndex: startIndexRef,
       endIndex: endIndexRef,
+      itemCount: mergedItemCountRef,
       handleJumperInput,
       handleBackwardClick: backward,
       handleForwardClick: forward,
@@ -464,7 +476,8 @@ export default defineComponent({
               pageSize: mergedPageSize,
               pageCount: mergedPageCount,
               startIndex: this.startIndex,
-              endIndex: this.endIndex
+              endIndex: this.endIndex,
+              itemCount: this.itemCount
             })}
           </div>
         ) : null}
@@ -601,7 +614,8 @@ export default defineComponent({
               pageSize: mergedPageSize,
               pageCount: mergedPageCount,
               startIndex: this.startIndex,
-              endIndex: this.endIndex
+              endIndex: this.endIndex,
+              itemCount: this.itemCount
             })}
           </div>
         ) : null}

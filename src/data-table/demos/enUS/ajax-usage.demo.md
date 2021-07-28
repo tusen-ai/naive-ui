@@ -59,12 +59,14 @@ function query (page, pageSize = 10, order = 'ascend', filterValues = []) {
       ? orderedData.filter((row) => filterValues.includes(row.column2))
       : orderedData
     const pagedData = filteredData.slice((page - 1) * pageSize, page * pageSize)
+    const total = filteredData.length
     const pageCount = Math.ceil(filteredData.length / pageSize)
     setTimeout(
       () =>
         resolve({
           pageCount,
-          data: pagedData
+          data: pagedData,
+          total
         }),
       1500
     )
@@ -81,7 +83,10 @@ export default {
       pagination: {
         page: 1,
         pageCount: 1,
-        pageSize: 10
+        pageSize: 10,
+        prefix ({ itemCount }) {
+          return `Total is ${itemCount}.`
+        }
       },
       loading: true
     }
@@ -95,6 +100,7 @@ export default {
     ).then((data) => {
       this.data = data.data
       this.pagination.pageCount = data.pageCount
+      this.pagination.itemCount = data.total
       this.loading = false
     })
   },
@@ -115,6 +121,7 @@ export default {
             this.Column1.sortOrder = !sorter ? false : sorter.order
             this.data = data.data
             this.pagination.pageCount = data.pageCount
+            this.pagination.itemCount = data.total
             this.loading = false
           })
         }
@@ -133,6 +140,7 @@ export default {
           this.Column2.filterOptionValues = filterValues
           this.data = data.data
           this.pagination.pageCount = data.pageCount
+          this.pagination.itemCount = data.total
           this.loading = false
         })
       }
@@ -151,6 +159,7 @@ export default {
           console.log(data.data)
           this.pagination.page = currentPage
           this.pagination.pageCount = data.pageCount
+          this.pagination.itemCount = data.total
           this.loading = false
         })
       }
