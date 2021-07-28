@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-input-number` 优化此刻按钮逻辑, 关闭 [#609](https://github.com/TuSimple/naive-ui/issues/609)
+
 ## 2.15.9 (2021-07-28)
 
 ### Feats
