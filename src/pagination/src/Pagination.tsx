@@ -30,12 +30,7 @@ import style from './styles/index.cssr'
 import { call, ExtractPublicPropTypes, MaybeArray, warn } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
-import {
-  RenderPrefix,
-  RenderSuffix,
-  RenderFastPrev,
-  RenderFastNext
-} from './interface'
+import { RenderPrefix, RenderSuffix, RenderPrev, RenderNext } from './interface'
 
 const paginationProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme>),
@@ -55,7 +50,9 @@ const paginationProps = {
   defaultPageSize: Number,
   pageSizes: {
     type: Array as PropType<number[]>,
-    default: () => [10]
+    default () {
+      return [10]
+    }
   },
   showQuickJumper: Boolean,
   disabled: Boolean,
@@ -63,8 +60,8 @@ const paginationProps = {
     type: Number,
     default: 9
   },
-  fastPrev: Function as PropType<RenderFastPrev>,
-  fastNext: Function as PropType<RenderFastNext>,
+  prev: Function as PropType<RenderPrev>,
+  next: Function as PropType<RenderNext>,
   prefix: Function as PropType<RenderPrefix>,
   suffix: Function as PropType<RenderSuffix>,
   'onUpdate:page': [Function, Array] as PropType<
@@ -170,17 +167,6 @@ export default defineComponent({
         return endIndex > itemCount ? itemCount : endIndex
       }
       return endIndex
-    })
-
-    const mergedItemCountRef = computed(() => {
-      const { itemCount } = props
-      if (itemCount !== undefined) {
-        return itemCount
-      }
-      warn(
-        'pagination',
-        '`item-count` should be must have if you want to use total.'
-      )
     })
 
     const disableTransitionOneTick = (): void => {
@@ -329,7 +315,6 @@ export default defineComponent({
       mergedPageCount: mergedPageCountRef,
       startIndex: startIndexRef,
       endIndex: endIndexRef,
-      itemCount: mergedItemCountRef,
       handleJumperInput,
       handleBackwardClick: backward,
       handleForwardClick: forward,
@@ -445,8 +430,8 @@ export default defineComponent({
       mergedPageSize,
       pageSizeOptions,
       jumperValue,
-      fastPrev,
-      fastNext,
+      prev,
+      next,
       prefix,
       suffix,
       handleJumperInput,
@@ -458,6 +443,8 @@ export default defineComponent({
       handleForwardClick,
       handleQuickJumperKeyUp
     } = this
+    const renderPrev = prev || $slots.prev
+    const renderNext = next || $slots.next
     return (
       <div
         ref="selfRef"
@@ -484,22 +471,20 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-pagination-item`,
-            !(fastPrev || $slots['fast-prev']) &&
-              `${mergedClsPrefix}-pagination-item--button`,
+            !renderPrev && `${mergedClsPrefix}-pagination-item--button`,
             (mergedPage <= 1 || mergedPage > mergedPageCount || disabled) &&
               `${mergedClsPrefix}-pagination-item--disabled`
           ]}
           onClick={handleBackwardClick}
         >
-          {fastPrev || $slots['fast-prev'] ? (
-            ($slots['fast-prev']
-              ? ($slots['fast-prev'] as unknown as RenderFastPrev)
-              : fastPrev!)({
+          {renderPrev ? (
+            renderPrev({
               page: mergedPage,
               pageSize: mergedPageSize,
               pageCount: mergedPageCount,
               startIndex: this.startIndex,
-              endIndex: this.endIndex
+              endIndex: this.endIndex,
+              itemCount: this.itemCount
             })
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
@@ -552,8 +537,7 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-pagination-item`,
-            !(fastNext || $slots['fast-prev']) &&
-              `${mergedClsPrefix}-pagination-item--button`,
+            !renderNext && `${mergedClsPrefix}-pagination-item--button`,
             {
               [`${mergedClsPrefix}-pagination-item--disabled`]:
                 mergedPage < 1 || mergedPage >= mergedPageCount || disabled
@@ -561,13 +545,12 @@ export default defineComponent({
           ]}
           onClick={handleForwardClick}
         >
-          {fastNext || $slots['fast-next'] ? (
-            ($slots['fast-next']
-              ? ($slots['fast-next'] as unknown as RenderFastPrev)
-              : fastNext!)({
+          {renderNext ? (
+            renderNext({
               page: mergedPage,
               pageSize: mergedPageSize,
               pageCount: mergedPageCount,
+              itemCount: this.itemCount,
               startIndex: this.startIndex,
               endIndex: this.endIndex
             })

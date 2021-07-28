@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-pagination` 新增 `fast-prev`、`fast-next` 插槽，按下箭头会打开菜单，有关 [#648](https://github.com/TuSimple/naive-ui/issues/648)
+- `n-pagination` 新增 `prev`、`next` 插槽，有关 [#648](https://github.com/TuSimple/naive-ui/issues/648)
 - `n-tag` 新增 `color`，关闭 [#693](https://github.com/TuSimple/naive-ui/issues/693)
 - `n-dynamic-tags` 新增 `color`，关闭 [#693](https://github.com/TuSimple/naive-ui/issues/693)
 - `n-time-picker` 优化 now 按钮的逻辑，关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)

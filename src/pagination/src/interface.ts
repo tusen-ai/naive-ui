@@ -10,5 +10,5 @@ export type RenderPrefix = (info: {
 }) => VNodeChild
 
 export type RenderSuffix = RenderPrefix
-export type RenderFastNext = RenderPrefix
-export type RenderFastPrev = RenderPrefix
+export type RenderNext = RenderPrefix
+export type RenderPrev = RenderPrefix

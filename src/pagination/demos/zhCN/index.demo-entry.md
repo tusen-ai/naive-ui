@@ -13,7 +13,7 @@ quick-jumper
 size-picker
 disabled
 item-count
-fast-prev
+prev
 prefix
 ```
 
@@ -23,8 +23,8 @@ prefix
 | --- | --- | --- | --- |
 | default-page | `number` | `1` | 非受控模式下的当前页 |
 | default-page-size | `number` | `10` | 非受控模式下的分页大小 |
-| fast-next | `(info: PaginationInfo) => VNodeChild` | `undefined` | 下一页 |
-| fast-prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | 上一页 |
+| next | `(info: PaginationInfo) => VNodeChild` | `undefined` | 下一页 |
+| prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | 上一页 |
 | item-count | `number` | `undefined` | 总条数 |
 | page-count | `number` | `1` | 总页数 |
 | page-sizes | `Array<number>` | `['10']` | 每页条数 |
@@ -40,12 +40,12 @@ prefix
 
 ## Slots
 
-| 名称      | 参数                     | 说明     |
-| --------- | ------------------------ | -------- |
-| fast-next | `(info: PaginationInfo)` | 下一页   |
-| fast-prev | `(info: PaginationInfo)` | 上一页   |
-| prefix    | `(info: PaginationInfo)` | 分页前缀 |
-| suffix    | `(info: PaginationInfo)` | 分页后缀 |
+| 名称   | 参数                     | 说明     |
+| ------ | ------------------------ | -------- |
+| next   | `(info: PaginationInfo)` | 下一页   |
+| prev   | `(info: PaginationInfo)` | 上一页   |
+| prefix | `(info: PaginationInfo)` | 分页前缀 |
+| suffix | `(info: PaginationInfo)` | 分页后缀 |
 
 ## API
 

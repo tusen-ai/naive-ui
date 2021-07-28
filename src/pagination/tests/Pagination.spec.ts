@@ -18,12 +18,12 @@ describe('n-pagination', () => {
     })
     expect(wrapper.findAll('.n-pagination-item').length).toEqual(4)
   })
-  it('should work with fast-prev slot', async () => {
+  it('should work with prev slot', async () => {
     const wrapper = mount(NPagination, {
       slots: {
-        'fast-prev': () => 'fastPrev'
+        prev: () => 'Prev'
       }
     })
-    expect(wrapper.find('.n-pagination-item').text()).toContain('fastPrev')
+    expect(wrapper.find('.n-pagination-item').text()).toContain('Prev')
   })
 })
