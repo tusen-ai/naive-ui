@@ -90,12 +90,16 @@ describe('n-timeline-item', () => {
       slots: {
         default: () =>
           h(NTimelineItem, null, {
-            default: () => 'test-default',
             header: () => 'test-header',
+            default: () => 'test-default',
             footer: () => 'test-footer'
           })
       }
     })
+    expect(wrapper.find('.n-timeline-item-content__title').exists()).toBe(true)
+    expect(wrapper.find('.n-timeline-item-content__title').text()).toBe(
+      'test-header'
+    )
     expect(wrapper.find('.n-timeline-item-content__content').exists()).toBe(
       true
     )

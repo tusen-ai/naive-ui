@@ -88,7 +88,7 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-timeline-item-timeline__circle`} />
         </div>
         <div class={`${mergedClsPrefix}-timeline-item-content`}>
-          {this.title ? (
+          {this.title || this.$slots.header ? (
             <div class={`${mergedClsPrefix}-timeline-item-content__title`}>
               {renderSlot(this.$slots, 'header', undefined, () => [this.title])}
             </div>

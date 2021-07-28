@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- 修复 `n-timeline` 的 header slot 单独使用无效的问题
+
 ## 2.15.9 (2021-07-28)
 
 ### Feats
