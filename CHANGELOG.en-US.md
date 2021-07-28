@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-pagination` adds `fast-prev` and `fast-next` slots, ref [#648](https://github.com/TuSimple/naive-ui/issues/648).
 - `n-tag` add `color` prop, closes [#693](https://github.com/TuSimple/naive-ui/issues/693).
 - `n-dynamic-tags` add `color`, closes [#693](https://github.com/TuSimple/naive-ui/issues/693).
 - `n-time-picker` optimization the now button logic, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
