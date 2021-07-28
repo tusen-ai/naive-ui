@@ -14,6 +14,7 @@
 - Fix `n-message`'s `destroyAll` method doesn't work.
 - Fix `n-timeline`'s header slot is invalid when using alone.
 - Fix `n-select` incorrect style when props has `disabled` and `filterable`, closes [#698](https://github.com/TuSimple/naive-ui/issues/698).
+- Fix `n-upload` operation buttons displayed when has `file-list` & `disabled` props, closes [#668](https://github.com/TuSimple/naive-ui/issues/668).
 
 ## 2.15.9 (2021-07-28)
 

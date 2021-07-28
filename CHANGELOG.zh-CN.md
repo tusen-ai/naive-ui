@@ -14,6 +14,7 @@
 - 修复 `n-message` 的 `destroyAll` 方法不生效
 - 修复 `n-timeline` 的 header slot 单独使用无效的问题
 - 修复 `n-select` 当属性是 `disabled` 和 `filterable` 时样式错误, 关闭 [#698](https://github.com/TuSimple/naive-ui/issues/698)
+- 修复 `n-upload` 拥有 `file-list` & `disabled` 属性时操作按钮仍然显示，关闭 [#668](https://github.com/TuSimple/naive-ui/issues/668)
 
 ## 2.15.9 (2021-07-28)
 
