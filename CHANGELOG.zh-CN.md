@@ -4,6 +4,17 @@
 
 - `n-progress` type 为 `circle` 和 `multiple-circle` 时支持 `progressing` 属性，关闭 [#509](https://github.com/TuSimple/naive-ui/issues/509)
 
+## 2.15.9 (2021-07-28)
+
+### Feats
+
+- `n-message` 增加 `destroyAll` 方法
+- `n-input-number` 增加 `prefix`、`suffix` slots, 关闭 [#609](https://github.com/TuSimple/naive-ui/issues/609)
+
+### Fixes
+
+- 修复 `n-message` 的 options 中 `duration` 配置无效
+
 ## 2.15.8 (2021-07-27)
 
 ### Feats

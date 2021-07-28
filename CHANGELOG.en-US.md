@@ -4,6 +4,17 @@
 
 - `n-progress` support `progressing` prop when type is `circle` or `multiple-circle` , closes [#509](https://github.com/TuSimple/naive-ui/issues/509).
 
+## 2.15.9 (2021-07-28)
+
+### Feats
+
+- `n-message` add `destroyAll` method.
+- `n-input-number` add `prefix`, `suffix` slots, closes [#609](https://github.com/TuSimple/naive-ui/issues/609).
+
+### Fixes
+
+- Fix `n-message` options' `duration` prop doesn't work.
+
 ## 2.15.8 (2021-07-27)
 
 ### Feats
