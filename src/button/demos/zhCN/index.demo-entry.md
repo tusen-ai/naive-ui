@@ -29,7 +29,7 @@ debug
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| attr-type | `'button' \| 'submit' \| 'reset'` | `'button'` | 按钮的 `DOM type` 属性 |
+| attr-type | `'button' \| 'submit' \| 'reset'` | `'button'` | 按钮的 `DOM` 的 `type` 属性 |
 | block | `boolean` | `false` | 按钮是否显示为块级 |
 | bordered | `boolean` | `true` | 按钮是否显示 `border` |
 | circle | `boolean` | `false` | 按钮是否为圆形 |
@@ -57,10 +57,10 @@ debug
 
 ### Button Slots
 
-| 名称    | 参数 | 说明                   |
-| ------- | ---- | ---------------------- |
-| default | `()` | 按钮的内容             |
-| icon    | `()` | 按钮中 `icon` 填充内容 |
+| 名称    | 参数 | 说明       |
+| ------- | ---- | ---------- |
+| default | `()` | 按钮的内容 |
+| icon    | `()` | 按钮的图标 |
 
 ### Button Group Slots
 

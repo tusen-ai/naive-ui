@@ -19,8 +19,6 @@ loading
 color
 group
 icon-button
-rtl-debug
-debug
 ```
 
 ## Props
@@ -29,7 +27,7 @@ debug
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| attr-type | `'button' \| 'submit' \| 'reset'` | `'button'` | The `DOM type` attribute of the button. |
+| attr-type | `'button' \| 'submit' \| 'reset'` | `'button'` | The `type` attribute of the button's `DOM`. |
 | block | `boolean` | `false` | Whether the button is displayed as block. |
 | bordered | `boolean` | `true` | Whether the button shows the `border`. |
 | circle | `boolean` | `false` | Whether the button is round. |
@@ -60,7 +58,7 @@ debug
 | Name    | Parameters | Description                        |
 | ------- | ---------- | ---------------------------------- |
 | default | `()`       | The default content of the button. |
-| icon    | `()`       | `Icon` fill content in the button. |
+| icon    | `()`       | The default icon of the button.    |
 
 ### Button Group Slots
 
