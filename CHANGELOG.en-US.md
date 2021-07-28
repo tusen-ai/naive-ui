@@ -6,8 +6,14 @@
 
 - `n-tag` add `color` and `text-color` prop, closes [#693](https://github.com/TuSimple/naive-ui/issues/693).
 - `n-dynamic-tags` add `color` and `text-color` prop, closes [#693](https://github.com/TuSimple/naive-ui/issues/693).
+- `n-time-picker` optimization the now button logic, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
+- `n-pagination` `PaginationInfo` add `itemCount` prop, closes [#585](https://github.com/TuSimple/naive-ui/issues/585).
 
 ### Fixes
+
+- Fix `n-message`'s `destroyAll` method doesn't work.
+- Fix `n-timeline`'s header slot is invalid when using alone.
+- Fix `n-select` incorrect style when props has `disabled` and `filterable`, closes [#698](https://github.com/TuSimple/naive-ui/issues/698).
 
 ## 2.15.9 (2021-07-28)
 
