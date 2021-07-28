@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+### Fixes
+
+- 修复 `n-message` 的 `destroyAll` 方法不生效
+
 ## 2.15.9 (2021-07-28)
 
 ### Feats

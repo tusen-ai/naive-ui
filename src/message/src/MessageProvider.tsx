@@ -136,6 +136,8 @@ export default defineComponent({
         messageListRef.value.findIndex((message) => message.key === key),
         1
       )
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete messageRefs.value[key]
     }
     function destroyAll (): void {
       Object.values(messageRefs.value).forEach((messageInstRef) => {
@@ -167,7 +169,9 @@ export default defineComponent({
                   <MessageEnvironment
                     ref={
                       ((inst: PrivateMessageRef) => {
-                        this.messageRefs[message.key] = inst
+                        if (inst) {
+                          this.messageRefs[message.key] = inst
+                        }
                       }) as () => void
                     }
                     internalKey={message.key}
