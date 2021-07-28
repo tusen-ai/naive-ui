@@ -1,4 +1,4 @@
-# 表单禁用
+# Form Disabled
 
 ```html
 <n-space vertical>

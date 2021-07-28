@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-form` add `disabled` prop, closes [#538](https://github.com/TuSimple/naive-ui/issues/538).
+
 ## 2.15.9 (2021-07-28)
 
 ### Feats

@@ -32,7 +32,7 @@ interface UseFormItemOptions<T> {
 
 interface UseFormItemProps<T> {
   size?: T
-  disabled?: boolean | undefined
+  disabled?: boolean
 }
 
 export interface UseFormItem<T> {
