@@ -14,7 +14,7 @@ import {
 } from 'vue'
 import { VBinder, VTarget, FollowerPlacement } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
-import { call, keep, warn, getFirstSlotVNode } from '../../_utils'
+import { call, keep, warn, getFirstSlotVNode, throwError } from '../../_utils'
 import type {
   ExtractPublicPropTypes,
   ExtractInternalPropTypes,
@@ -41,6 +41,7 @@ function appendEvents (
   vNode: VNode,
   trigger: PopoverTrigger,
   events: {
+    [key: string]: (e: MouseEvent) => void
     onClick: (e: MouseEvent) => void
     onMouseenter: (e: MouseEvent) => void
     onMouseleave: (e: MouseEvent) => void
@@ -48,7 +49,7 @@ function appendEvents (
     onBlur: (e: FocusEvent) => void
   }
 ): void {
-  triggerEventMap[trigger].forEach((eventName) => {
+  triggerEventMap[trigger].forEach((eventName: string) => {
     if (!vNode.props) vNode.props = {}
     else {
       vNode.props = Object.assign({}, vNode.props)
@@ -231,6 +232,16 @@ export default defineComponent({
     const showTimerIdRef = ref<number | null>(null)
     const hideTimerIdRef = ref<number | null>(null)
     const positionManuallyRef = useMemo(() => {
+      if (
+        props.x !== undefined &&
+        props.y !== undefined &&
+        props.trigger !== 'manual'
+      ) {
+        throwError(
+          'popover',
+          "Set the 'trigger' prop to 'manual', when you want to manually positioned."
+        )
+      }
       return props.x !== undefined && props.y !== undefined
     })
     // methods
