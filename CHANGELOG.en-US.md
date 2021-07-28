@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-select` incorrect style when props has `disabled` and `filterable`, closes [#698](https://github.com/TuSimple/naive-ui/issues/698).
+
 ## 2.15.9 (2021-07-28)
 
 ### Feats

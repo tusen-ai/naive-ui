@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-select` 当属性是 `disabled` 和 `filterable` 时样式错误, 关闭 [#698](https://github.com/TuSimple/naive-ui/issues/698)
+
 ## 2.15.9 (2021-07-28)
 
 ### Feats
