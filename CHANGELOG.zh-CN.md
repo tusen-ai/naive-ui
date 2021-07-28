@@ -4,11 +4,13 @@
 
 ### Feats
 
-- `n-time-picker` 优化此刻按钮逻辑, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
+- `n-time-picker` 优化 now 按钮的逻辑，关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
+
 ### Fixes
 
 - 修复 `n-message` 的 `destroyAll` 方法不生效
 - 修复 `n-timeline` 的 header slot 单独使用无效的问题
+- 修复 `n-select` 当属性是 `disabled` 和 `filterable` 时样式错误, 关闭 [#698](https://github.com/TuSimple/naive-ui/issues/698)
 
 ## 2.15.9 (2021-07-28)
 
