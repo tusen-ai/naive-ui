@@ -2,6 +2,8 @@
 
 Click it.
 
+Warn: when manually positioned, the `trigger` prop must be `'manual'`.
+
 ```html
 <div
   style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);"
