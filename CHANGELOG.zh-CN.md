@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-time-picker` 优化此刻按钮逻辑, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
 ### Fixes
 
 - 修复 `n-message` 的 `destroyAll` 方法不生效

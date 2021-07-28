@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-time-picker` optimization the now button logic, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
 ### Fixes
 
 - Fix `n-message`'s `destroyAll` method doesn't work.
