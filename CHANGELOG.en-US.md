@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-tag` add `color` and `text-color` prop, closes [#693](https://github.com/TuSimple/naive-ui/issues/693).
+- `n-dynamic-tags` add `color` and `text-color` prop, closes [#693](https://github.com/TuSimple/naive-ui/issues/693).
+
+### Fixes
+
 ## 2.15.9 (2021-07-28)
 
 ### Feats
@@ -99,7 +108,7 @@
 - Fix `n-select` placeholder transition.
 - Fix `n-loading-bar` `useLoadingBar`'s return type can be undefined.
 - Fix `n-tag`'s `type` prop add `primary` type.
-- Fix `n-dynamic-tag`'s `type` prop add `primary` type.
+- Fix `n-dynamic-tags`'s `type` prop add `primary` type.
 
 ## 2.15.4 (2021-07-09)
 

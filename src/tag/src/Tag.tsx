@@ -111,7 +111,7 @@ export default defineComponent({
       handleClick,
       handleCloseClick,
       cssVars: computed(() => {
-        const { type, size } = props
+        const { type, size, color, textColor } = props
         const {
           common: { cubicBezierEaseInOut },
           self: {
@@ -133,8 +133,8 @@ export default defineComponent({
             [createKey('closeSize', size)]: closeSize,
             [createKey('fontSize', size)]: fontSize,
             [createKey('height', size)]: height,
-            [createKey('color', type)]: color,
-            [createKey('textColor', type)]: textColor,
+            [createKey('color', type)]: typeColor,
+            [createKey('textColor', type)]: typeTextColor,
             [createKey('border', type)]: border,
             [createKey('closeColor', type)]: closeColor,
             [createKey('closeColorHover', type)]: closeColorHover,
@@ -151,7 +151,7 @@ export default defineComponent({
           '--close-margin': closeMargin,
           '--close-margin-rtl': closeMarginRtl,
           '--close-size': closeSize,
-          '--color': color,
+          '--color': color || typeColor,
           '--color-checkable': colorCheckable,
           '--color-checked': colorChecked,
           '--color-checked-hover': colorCheckedHover,
@@ -162,7 +162,7 @@ export default defineComponent({
           '--height': height,
           '--opacity-disabled': opacityDisabled,
           '--padding': padding,
-          '--text-color': textColor,
+          '--text-color': textColor || typeTextColor,
           '--text-color-checkable': textColorCheckable,
           '--text-color-checked': textColorChecked,
           '--text-color-hover-checkable': textColorHoverCheckable,

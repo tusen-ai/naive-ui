@@ -1,6 +1,8 @@
 import { PropType } from 'vue'
 
 export default {
+  color: String,
+  textColor: String,
   type: {
     type: String as PropType<
     'default' | 'primary' | 'success' | 'info' | 'warning' | 'error'

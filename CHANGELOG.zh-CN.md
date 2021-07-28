@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-tag` 新增 `color` 和 `text-color` 属性, 关闭 [#693](https://github.com/TuSimple/naive-ui/issues/693)
+- `n-dynamic-tags` 新增 `color` 和 `text-color` 属性, 关闭 [#693](https://github.com/TuSimple/naive-ui/issues/693)
+
+### Fixes
+
 ## 2.15.9 (2021-07-28)
 
 ### Feats
@@ -99,7 +108,7 @@
 - 修复 `n-select` placeholder transition
 - 修复 `n-loading-bar` `useLoadingBar` 返回类型可能为 undefined
 - 修复 `n-tag` 的 `type` 增加 `primary`　类型
-- 修复 `n-dynamic-tag` 的 `type` 增加 `primary`　类型
+- 修复 `n-dynamic-tags` 的 `type` 增加 `primary`　类型
 
 ## 2.15.4 (2021-07-09)
 
