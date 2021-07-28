@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+### Fixes
+
+- Fix `n-message`'s `destroyAll` method doesn't work.
+
 ## 2.15.9 (2021-07-28)
 
 ### Feats
