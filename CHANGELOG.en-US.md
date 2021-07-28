@@ -1,7 +1,12 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
 ### Fixes
 
+- Fix `n-message`'s `destroyAll` method doesn't work.
 - Fix `n-timeline`'s header slot is invalid when using alone.
 
 ## 2.15.9 (2021-07-28)
