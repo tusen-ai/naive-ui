@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-time-picker` 优化 now 按钮的逻辑，关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
+- `n-pagination` `PaginationInfo` 增加 `itemCount` 属性，关闭 [#585](https://github.com/TuSimple/naive-ui/issues/585)
 
 ### Fixes
 
@@ -48,7 +49,6 @@
 - `n-popover` 的 `trigger` 属性支持 `'focus'`，关闭 [#477](https://github.com/TuSimple/naive-ui/issues/477)
 - `n-message-provider` 新增 `duration` 和 `max` 属性
 - `n-data-table` 新增 `flex-height` 属性，关闭 [#596](https://github.com/TuSimple/naive-ui/issues/596)
-- `n-pagination` `PaginationInfo` 增加 `itemCount` 属性，关闭 [#585](https://github.com/TuSimple/naive-ui/issues/585)
 
 ### Fixes
 

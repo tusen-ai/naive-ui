@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-time-picker` optimization the now button logic, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
+- `n-pagination` `PaginationInfo` add `itemCount` prop, closes [#585](https://github.com/TuSimple/naive-ui/issues/585).
 
 ### Fixes
 
@@ -48,7 +49,6 @@
 - `n-popover`'s `trigger` prop support `'focus'`, closes [#477](https://github.com/TuSimple/naive-ui/issues/477).
 - `n-message-provider` add `duration` and `max` props.
 - `n-data-table` add `flex-height` prop, closes [#596](https://github.com/TuSimple/naive-ui/issues/596).
-- `n-pagination` `PaginationInfo` add `itemCount` prop, closes [#585](https://github.com/TuSimple/naive-ui/issues/585).
 
 ### Fixes
 
