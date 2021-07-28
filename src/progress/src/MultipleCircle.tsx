@@ -8,6 +8,7 @@ import {
   onMounted,
   onUnmounted
 } from 'vue'
+import { changeProcessingFillStrokeDasharray } from './utils'
 
 function circlePath (r: number, sw: number, vw: number = 100): string {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${
@@ -71,42 +72,38 @@ export default defineComponent({
       return strokeDasharrays
     })
     const processingFillStrokeDasharrayRef = ref<string[]>([])
-    const timer = ref<number>(0)
+    const timerRef = ref<number>(0)
     const setProcessingTimer = (): void => {
-      let speed = 1
-      timer.value = window.setInterval(() => {
+      const speedRef = ref<number>(1)
+      timerRef.value = window.setInterval(() => {
         if (!processingFillStrokeDasharrayRef.value.length) {
           processingFillStrokeDasharrayRef.value = props.percentage.map(
             () => `0, ${props.viewBoxWidth * 8}`
           )
         } else {
-          processingFillStrokeDasharrayRef.value.forEach(
-            (strokeDasharray, idx) => {
-              const strokeDasharrayVal: number = parseFloat(
-                strokeDasharray.split(',')[0]
-              )
-              const maxStrokeDasharray =
-                ((Math.PI * props.percentage[idx]) / 100) *
-                (props.viewBoxWidth / 2 -
-                  (props.strokeWidth / 2) * (1 + 2 * idx) -
-                  props.circleGap * idx) *
-                2
-              let num =
-                strokeDasharrayVal + maxStrokeDasharray * 0.0005 * speed++
-              if (num > maxStrokeDasharray) {
-                num = 0
-                speed = 1
-              }
-              processingFillStrokeDasharrayRef.value[idx] = `${num}, ${
-                props.viewBoxWidth * 8
-              }`
-            }
-          )
+          processingFillStrokeDasharrayRef.value.forEach((_, idx) => {
+            const maxStrokeDasharray =
+              ((Math.PI * props.percentage[idx]) / 100) *
+              (props.viewBoxWidth / 2 -
+                (props.strokeWidth / 2) * (1 + 2 * idx) -
+                props.circleGap * idx) *
+              2
+            changeProcessingFillStrokeDasharray({
+              processingFillStrokeDasharrayRef:
+                processingFillStrokeDasharrayRef,
+              maxStrokeDasharray,
+              percentage: props.percentage[idx],
+              rate: 0.0003,
+              speedRef,
+              viewBoxWidth: props.viewBoxWidth,
+              idx
+            })
+          })
         }
-      }, 20)
+      }, 30)
     }
     const clearProcessingTimer = (): void => {
-      window.clearInterval(timer.value as any)
+      window.clearInterval(timerRef.value as any)
     }
     onMounted(() => {
       props.processing && setProcessingTimer()
@@ -178,7 +175,7 @@ export default defineComponent({
                           stroke: fillColor[index]
                         }}
                       />
-                      {props.processing ? (
+                      {props.processing && p !== 0 ? (
                         <path
                           class={[
                             `${clsPrefix}-progress-graph-circle-processing-fill`

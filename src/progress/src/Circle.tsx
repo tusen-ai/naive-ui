@@ -16,6 +16,7 @@ import {
   InfoIcon
 } from '../../_internal/icons'
 import { Status } from './interface'
+import { changeProcessingFillStrokeDasharray } from './utils'
 
 const iconMap = {
   success: <SuccessIcon />,
@@ -63,32 +64,29 @@ export default defineComponent({
       return `${Math.PI * props.percentage}, ${props.viewBoxWidth * 8}`
     })
     const processingFillStrokeDasharrayRef = ref<string>('')
-    const timer = ref<number>(0)
+    const timerRef = ref<number>(0)
     const setProcessingTimer = (): void => {
-      let speed = 1
-      timer.value = window.setInterval(() => {
+      const speedRef = ref<number>(1)
+      timerRef.value = window.setInterval(() => {
         if (!processingFillStrokeDasharrayRef.value) {
           processingFillStrokeDasharrayRef.value = `0, ${
             props.viewBoxWidth * 8
           }`
         } else {
-          const strokeDasharrayVal: number = parseFloat(
-            processingFillStrokeDasharrayRef.value.split(',')[0]
-          )
-          let num =
-            strokeDasharrayVal + Math.PI * props.percentage * 0.001 * speed++
-          if (num > Math.PI * props.percentage) {
-            num = 0
-            speed = 1
-          }
-          processingFillStrokeDasharrayRef.value = `${num}, ${
-            props.viewBoxWidth * 8
-          }`
+          const maxStrokeDasharray = Math.PI * props.percentage
+          changeProcessingFillStrokeDasharray({
+            processingFillStrokeDasharrayRef,
+            maxStrokeDasharray,
+            percentage: props.percentage,
+            rate: 0.001,
+            speedRef,
+            viewBoxWidth: props.viewBoxWidth
+          })
         }
-      }, 20)
+      }, 30)
     }
     const clearProcessingTimer = (): void => {
-      window.clearInterval(timer.value as any)
+      window.clearInterval(timerRef.value as any)
     }
     onMounted(() => {
       props.processing && setProcessingTimer()
@@ -150,7 +148,7 @@ export default defineComponent({
                     }}
                   />
                 </g>
-                {props.processing ? (
+                {props.processing && props.percentage ? (
                   <g>
                     <path
                       class={[
