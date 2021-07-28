@@ -60,4 +60,4 @@ router-link
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
-| default | `()`       |             |
+| default | `()`       | The content of typography.           |
