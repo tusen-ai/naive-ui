@@ -111,7 +111,7 @@ export default defineComponent({
       handleClick,
       handleCloseClick,
       cssVars: computed(() => {
-        const { type, size, color, textColor } = props
+        const { type, size, color: { color, textColor } = {} } = props
         const {
           common: { cubicBezierEaseInOut },
           self: {
@@ -133,7 +133,7 @@ export default defineComponent({
             [createKey('closeSize', size)]: closeSize,
             [createKey('fontSize', size)]: fontSize,
             [createKey('height', size)]: height,
-            [createKey('color', type)]: typeColor,
+            [createKey('color', type)]: typedColor,
             [createKey('textColor', type)]: typeTextColor,
             [createKey('border', type)]: border,
             [createKey('closeColor', type)]: closeColor,
@@ -151,7 +151,7 @@ export default defineComponent({
           '--close-margin': closeMargin,
           '--close-margin-rtl': closeMarginRtl,
           '--close-size': closeSize,
-          '--color': color || typeColor,
+          '--color': color || typedColor,
           '--color-checkable': colorCheckable,
           '--color-checked': colorChecked,
           '--color-checked-hover': colorCheckedHover,
@@ -172,7 +172,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, rtlEnabled } = this
+    const { mergedClsPrefix, rtlEnabled, color: { borderColor } = {} } = this
     return (
       <div
         class={[
@@ -202,7 +202,10 @@ export default defineComponent({
           />
         ) : null}
         {!this.checkable && this.mergedBordered ? (
-          <div class={`${mergedClsPrefix}-tag__border`} />
+          <div
+            class={`${mergedClsPrefix}-tag__border`}
+            style={{ borderColor }}
+          />
         ) : null}
       </div>
     )

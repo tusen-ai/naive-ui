@@ -4,8 +4,8 @@
 
 ### Feats
 
-- `n-tag` add `color` and `text-color` prop, closes [#693](https://github.com/TuSimple/naive-ui/issues/693).
-- `n-dynamic-tags` add `color` and `text-color` prop, closes [#693](https://github.com/TuSimple/naive-ui/issues/693).
+- `n-tag` add `color` prop, closes [#693](https://github.com/TuSimple/naive-ui/issues/693).
+- `n-dynamic-tags` add `color`, closes [#693](https://github.com/TuSimple/naive-ui/issues/693).
 - `n-time-picker` optimization the now button logic, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
 - `n-pagination` `PaginationInfo` add `itemCount` prop, closes [#585](https://github.com/TuSimple/naive-ui/issues/585).
 

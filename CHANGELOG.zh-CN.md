@@ -4,8 +4,8 @@
 
 ### Feats
 
-- `n-tag` 新增 `color` 和 `text-color` 属性, 关闭 [#693](https://github.com/TuSimple/naive-ui/issues/693)
-- `n-dynamic-tags` 新增 `color` 和 `text-color` 属性, 关闭 [#693](https://github.com/TuSimple/naive-ui/issues/693)
+- `n-tag` 新增 `color`，关闭 [#693](https://github.com/TuSimple/naive-ui/issues/693)
+- `n-dynamic-tags` 新增 `color`，关闭 [#693](https://github.com/TuSimple/naive-ui/issues/693)
 - `n-time-picker` 优化 now 按钮的逻辑，关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
 - `n-pagination` `PaginationInfo` 增加 `itemCount` 属性，关闭 [#585](https://github.com/TuSimple/naive-ui/issues/585)
 

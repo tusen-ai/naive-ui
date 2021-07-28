@@ -183,7 +183,6 @@ export default defineComponent({
               round,
               size,
               color,
-              textColor,
               closable,
               disabled,
               showInput,
@@ -207,7 +206,6 @@ export default defineComponent({
                   round={round}
                   size={size}
                   color={color}
-                  textColor={textColor}
                   closable={closable}
                   disabled={disabled}
                   onClose={() => handleCloseClick(index)}

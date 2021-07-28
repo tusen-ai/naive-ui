@@ -11,6 +11,7 @@ disabled
 size
 checkable
 shape
+color
 ```
 
 ## Props
@@ -23,11 +24,10 @@ shape
 | checkable | `boolean` | `false` | Whether the tag is checkable, use checkable the type property invalid. |
 | checked | `boolean` | `false` | Whether the tag is checked, use with checkable. |
 | closable | `boolean` | `false` | Whether the tag is closable. |
-| color | `string` | `undefined` | color of the tag, if set `type` is invalid. |
+| color | `{ color?: string, borderColor?: string, textColor?: string }` | `undefined` | Color of the tag, it will overrides type's color. |
 | disabled | `boolean` | `false` | Whether the tag is disabled. |
 | round | `boolean` | `false` | Whether the tag has round corner. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |
-| text-color | `string` | `undefined` | Text color of the tag. |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |
 | on-click | `(e: MouseEvent) => void` | `undefined` | Callback on click. |
 | on-update:checked | `(value: boolean) => void` | `undefined` | Callback on checked status changes. |
