@@ -7,6 +7,7 @@
 ### Fixes
 
 - 修复 `n-message` 的 `destroyAll` 方法不生效
+- 修复 `n-timeline` 的 header slot 单独使用无效的问题
 
 ## 2.15.9 (2021-07-28)
 
