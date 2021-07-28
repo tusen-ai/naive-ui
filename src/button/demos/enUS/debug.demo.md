@@ -1,6 +1,6 @@
 # debug
 
-`Debug` 用的。
+`Debug` used.
 
 ```html
 <div
@@ -295,19 +295,19 @@
       <template #icon>
         <n-icon><log-in-outline /></n-icon>
       </template>
-      活着
+      Alive
     </n-button>
     <n-button type="warning" ghost>
       <template #icon>
         <n-icon><log-in-outline /></n-icon>
       </template>
-      不多
+      Not much
     </n-button>
     <n-button type="error">
       <template #icon>
         <n-icon><log-in-outline /></n-icon>
       </template>
-      不少
+      A lot
     </n-button>
   </n-button-group>
   <n-button-group vertical size="large">
@@ -315,19 +315,19 @@
       <template #icon>
         <n-icon><log-in-outline /></n-icon>
       </template>
-      幸福
+      Happiness
     </n-button>
     <n-button type="info">
       <template #icon>
         <n-icon><log-in-outline /></n-icon>
       </template>
-      刚好
+      Just
     </n-button>
     <n-button type="error" ghost round>
       <template #icon>
         <n-icon><log-in-outline /></n-icon>
       </template>
-      够用
+      Enough
     </n-button>
   </n-button-group>
   <n-button-group size="small">
@@ -335,19 +335,19 @@
       <template #icon>
         <n-icon><log-in-outline /></n-icon>
       </template>
-      活着
+      Alive
     </n-button>
     <n-button type="default">
       <template #icon>
         <n-icon><log-in-outline /></n-icon>
       </template>
-      其实
+      Actually
     </n-button>
     <n-button type="default">
       <template #icon>
         <n-icon><log-in-outline /></n-icon>
       </template>
-      很好
+      Very good
     </n-button>
   </n-button-group>
   <n-button-group>
@@ -355,19 +355,19 @@
       <template #icon>
         <n-icon><log-in-outline /></n-icon>
       </template>
-      再吃
+      Eat again
     </n-button>
     <n-button ghost type="primary">
       <template #icon>
         <n-icon><log-in-outline /></n-icon>
       </template>
-      一颗
+      A
     </n-button>
     <n-button type="info" round>
       <template #icon>
         <n-icon><log-in-outline /></n-icon>
       </template>
-      苹果
+      Apple
     </n-button>
   </n-button-group>
 </div>
