@@ -53,5 +53,6 @@ interface PaginationInfo {
   page: number
   pageSize: number
   pageCount: number
+  itemCount: number | undefined
 }
 ```
