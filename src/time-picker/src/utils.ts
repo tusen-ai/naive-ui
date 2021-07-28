@@ -1,4 +1,4 @@
-import { MaybeArray } from '../../_utils'
+import { MaybeArray, throwError } from '../../_utils'
 
 export const time = {
   hours: [
@@ -203,7 +203,10 @@ export function findSimilarTime (
   }
   if (lowerBound === undefined) {
     if (!upperBound) {
-      throw new Error("Please set 'hours' or 'minutes' or 'seconds' props")
+      throwError(
+        'n-time-picker',
+        "Please set 'hours' or 'minutes' or 'seconds' props"
+      )
     }
     return upperBound
   }
