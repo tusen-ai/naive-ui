@@ -400,7 +400,7 @@ export default defineComponent({
           triggerVNode.type === textVNodeType
             ? h('span', [triggerVNode])
             : triggerVNode
-        appendEvents(triggerVNode, this.trigger, {
+        appendEvents(triggerVNode, positionManually ? 'manual' : this.trigger, {
           onClick: this.handleClick,
           onMouseenter: this.handleMouseEnter,
           onMouseleave: this.handleMouseLeave,
