@@ -41,7 +41,6 @@ function appendEvents (
   vNode: VNode,
   trigger: PopoverTrigger,
   events: {
-    [key: string]: (e: MouseEvent) => void
     onClick: (e: MouseEvent) => void
     onMouseenter: (e: MouseEvent) => void
     onMouseleave: (e: MouseEvent) => void
@@ -49,7 +48,7 @@ function appendEvents (
     onBlur: (e: FocusEvent) => void
   }
 ): void {
-  triggerEventMap[trigger].forEach((eventName: string) => {
+  triggerEventMap[trigger].forEach((eventName) => {
     if (!vNode.props) vNode.props = {}
     else {
       vNode.props = Object.assign({}, vNode.props)
