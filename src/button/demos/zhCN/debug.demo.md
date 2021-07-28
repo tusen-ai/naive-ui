@@ -1,6 +1,6 @@
 # debug
 
-Debug 用的。
+`Debug` 用的。
 
 ```html
 <div
