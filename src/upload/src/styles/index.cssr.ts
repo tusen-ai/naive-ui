@@ -148,6 +148,9 @@ export default cB('upload', [
     cB('upload-file', `
       cursor: not-allowed;
     `),
+    cB('upload-file-list', `
+      cursor: not-allowed;
+    `),
     cB('upload-dragger', `
       cursor: not-allowed;
     `)
