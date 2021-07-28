@@ -204,7 +204,7 @@ export function findSimilarTime (
   if (lowerBound === undefined) {
     if (!upperBound) {
       throwError(
-        'n-time-picker',
+        'time-picker',
         "Please set 'hours' or 'minutes' or 'seconds' props"
       )
     }
