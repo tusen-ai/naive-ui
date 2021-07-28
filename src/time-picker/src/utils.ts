@@ -184,3 +184,31 @@ export function isTimeInStep (
     return stepOrList.includes(value)
   }
 }
+
+export function findSimilarTime (
+  value: number,
+  type: 'hours' | 'minutes' | 'seconds',
+  stepOrList: MaybeArray<number> | undefined
+): number {
+  const list = getTimeUnits(time[type], stepOrList).map(Number)
+  let lowerBound, upperBound
+  for (let i = 0; i < list.length; ++i) {
+    const v = list[i]
+    if (v === value) return v
+    else if (v > value) {
+      upperBound = v
+      break
+    }
+    lowerBound = v
+  }
+  if (lowerBound === undefined) {
+    if (!upperBound) {
+      throw new Error("Please set 'hours' or 'minutes' or 'seconds' props")
+    }
+    return upperBound
+  }
+  if (upperBound === undefined) {
+    return lowerBound
+  }
+  return upperBound - value > value - lowerBound ? lowerBound : upperBound
+}
