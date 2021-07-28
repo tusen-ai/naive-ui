@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-pagination` adds `fast-prev` and `fast-next` slots, ref [#648](https://github.com/TuSimple/naive-ui/issues/648).
+
 ## 2.15.9 (2021-07-28)
 
 ### Feats

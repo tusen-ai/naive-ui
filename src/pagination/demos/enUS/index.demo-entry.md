@@ -13,6 +13,7 @@ quick-jumper
 size-picker
 disabled
 item-count
+fast-prev
 prefix
 ```
 
@@ -22,6 +23,8 @@ prefix
 | --- | --- | --- | --- |
 | default-page | `number` | `1` | Current page in uncontrolled mode. |
 | default-page-size | `number` | `10` | Page size in uncontrolled mode. |
+| fast-next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |
+| fast-prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |
 | item-count | `number` | `undefined` | Total number. |
 | page-count | `number` | `1` | Total pages. |
 | page-sizes | `Array<number>` | `['10']` | Number of items per page. |
@@ -37,10 +40,12 @@ prefix
 
 ## Slots
 
-| Name   | Parameters               | Description  |
-| ------ | ------------------------ | ------------ |
-| prefix | `(info: PaginationInfo)` | Page prefix. |
-| suffix | `(info: PaginationInfo)` | Page suffix. |
+| Name      | Parameters               | Description    |
+| --------- | ------------------------ | -------------- |
+| fast-next | `(info: PaginationInfo)` | Next page.     |
+| fast-prev | `(info: PaginationInfo)` | Previous page. |
+| prefix    | `(info: PaginationInfo)` | Page prefix.   |
+| suffix    | `(info: PaginationInfo)` | Page suffix.   |
 
 ## API
 

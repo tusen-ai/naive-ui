@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-pagination` 新增 `fast-prev`、`fast-next` 插槽，按下箭头会打开菜单，有关 [#648](https://github.com/TuSimple/naive-ui/issues/648)
+
 ## 2.15.9 (2021-07-28)
 
 ### Feats
