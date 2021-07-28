@@ -27,12 +27,12 @@ icon-button
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| attr-type | `'button' \| 'submit' \| 'reset'` | `'button'` | The DOM `type` attribute of the button. |
+| attr-type | `'button' \| 'submit' \| 'reset'` | `'button'` | The `type` attribute of the button's DOM. |
 | block | `boolean` | `false` | Whether the button is displayed as block. |
 | bordered | `boolean` | `true` | Whether the button shows the border. |
 | circle | `boolean` | `false` | Whether the button is round. |
 | color | `string` | `undefined` | Button color(support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
-| dashed | `boolean` | `false` | Whether the button border is a dashed line. |
+| dashed | `boolean` | `false` | Whether the button's border is a dashed line. |
 | disabled | `boolean` | `false` | Whether the button is disabled. |
 | ghost | `boolean` | `false` | Whether the button is ghost. |
 | icon-placement | `'left' \| 'right'` | `'left'` | The position of the icon in the button. |
@@ -58,7 +58,7 @@ icon-button
 | Name    | Parameters | Description                        |
 | ------- | ---------- | ---------------------------------- |
 | default | `()`       | The default content of the button. |
-| icon    | `()`       | Icon fill content in the button.   |
+| icon    | `()`       | The icon of the button.    |
 
 ### Button Group Slots
 
