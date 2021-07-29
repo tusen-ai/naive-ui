@@ -49,8 +49,8 @@ export default c([
     `),
     cB('cascader-submenu', `
       height: var(--menu-height);
+      width: var(--menu-width);
       position: relative;
-      min-width: 180px;
     `, [
       cB('scrollbar-content', {
         position: 'relative'

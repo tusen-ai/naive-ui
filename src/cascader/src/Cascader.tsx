@@ -99,6 +99,10 @@ const cascaderProps = {
     default: undefined
   },
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
+  menuWidth: {
+    type: [Number, String] as PropType<number | string>,
+    default: '180px'
+  },
   virtualScroll: {
     type: Boolean,
     default: true
@@ -353,6 +357,14 @@ export default defineComponent({
     // select option related
     const showSelectMenuRef = computed(() => {
       return !!(props.filterable && patternRef.value)
+    })
+
+    const mergedMenuWidthRef = computed(() => {
+      const { menuWidth } = props
+      if (typeof menuWidth === 'number') {
+        return `${menuWidth}px`
+      }
+      return menuWidth
     })
     // --- methods
     function doBlur (e: FocusEvent): void {
@@ -746,6 +758,7 @@ export default defineComponent({
           '--menu-border-radius': menuBorderRadius,
           '--menu-box-shadow': menuBoxShadow,
           '--menu-height': menuHeight,
+          '--menu-width': mergedMenuWidthRef.value,
           '--menu-color': menuColor,
           '--menu-divider-color': menuDividerColor,
           '--option-height': optionHeight,
