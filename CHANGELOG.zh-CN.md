@@ -2,12 +2,16 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `useLoadingBar` 中 `finish` 方法只有在调用过 `start` 后才生效
+
 ### Feats
 
 - `n-scrollbar` 增加 `scrollbarWidth`、`scrollbarHeight` 和　`scrollbarBorderRadius`　公共主题变量，关闭 [#649](https://github.com/TuSimple/naive-ui/issues/649)
 - `n-menu` 在 `render-icon` 返回 falsy 值的时候不渲染 icon 的占位符，关闭 [#722](https://github.com/TuSimple/naive-ui/issues/722)
 - `n-menu` 新增 `render-extra` 属性
-- 取消 `n-loading-bar` 中 `finish` 方法的兜底逻辑
+- `n-select` 新增 `on-clear` 属性
 
 ## 2.15.11 (2021-07-29)
 
