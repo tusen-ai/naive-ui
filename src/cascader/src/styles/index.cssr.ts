@@ -49,9 +49,12 @@ export default c([
     `),
     cB('cascader-submenu', `
       height: var(--menu-height);
-      width: var(--menu-width);
+      min-width: 180px;
       position: relative;
     `, [
+      c('&.n-cascader-column-submenu', `
+      width: var(--column-width);
+    `),
       cB('scrollbar-content', {
         position: 'relative'
       }),

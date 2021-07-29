@@ -68,7 +68,12 @@ export default defineComponent({
   render () {
     const { mergedClsPrefix, mergedTheme, virtualScroll } = this
     return (
-      <div class={`${mergedClsPrefix}-cascader-submenu`}>
+      <div
+        class={[
+          virtualScroll && `${mergedClsPrefix}-cascader-column-submenu`,
+          `${mergedClsPrefix}-cascader-submenu`
+        ]}
+      >
         <NScrollbar
           ref="scrollbarInstRef"
           theme={mergedTheme.peers.Scrollbar}
