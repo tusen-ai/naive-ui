@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-scrollbar` add common theme variables like `scrollbarWidth`, closes [#649](https://github.com/TuSimple/naive-ui/issues/649).
+- `n-scrollbar` add `scrollbarWidth`, `scrollbarHeight` and `scrollbarBorderRadius` common theme variables, closes [#649](https://github.com/TuSimple/naive-ui/issues/649).
 
 ## 2.15.11 (2021-07-29)
 

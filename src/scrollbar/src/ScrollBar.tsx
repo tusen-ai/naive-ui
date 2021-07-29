@@ -578,11 +578,7 @@ const Scrollbar = defineComponent({
             cubicBezierEaseInOut,
             scrollbarBorderRadius,
             scrollbarHeight,
-            scrollbarWidth,
-            scrollbarLeft,
-            scrollbarRight,
-            scrollbarTop,
-            scrollbarBottom
+            scrollbarWidth
           },
           self: { color, colorHover }
         } = themeRef.value
@@ -592,11 +588,7 @@ const Scrollbar = defineComponent({
           '--scrollbar-color-hover': colorHover,
           '--scrollbar-border-radius': scrollbarBorderRadius,
           '--scrollbar-width': scrollbarWidth,
-          '--scrollbar-height': scrollbarHeight,
-          '--scrollbar-left': scrollbarLeft,
-          '--scrollbar-right': scrollbarRight,
-          '--scrollbar-top': scrollbarTop,
-          '--scrollbar-bottom': scrollbarBottom
+          '--scrollbar-height': scrollbarHeight
         }
       })
     }
