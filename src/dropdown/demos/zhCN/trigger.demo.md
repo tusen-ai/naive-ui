@@ -7,12 +7,7 @@
   <n-dropdown @select="handleSelect" trigger="hover" :options="options">
     <n-button>悬浮！</n-button>
   </n-dropdown>
-  <n-dropdown
-    @select="handleSelect"
-    trigger="click"
-    :options="options"
-    :show-arrow="true"
-  >
+  <n-dropdown @select="handleSelect" trigger="click" :options="options">
     <n-button>点击！</n-button>
   </n-dropdown>
   <n-dropdown @select="handleSelect" :show="showDropdown" :options="options">
