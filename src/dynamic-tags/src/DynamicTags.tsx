@@ -184,6 +184,7 @@ export default defineComponent({
               type,
               round,
               size,
+              color,
               closable,
               mergedDisabled,
               showInput,
@@ -206,6 +207,7 @@ export default defineComponent({
                   type={type}
                   round={round}
                   size={size}
+                  color={color}
                   closable={closable}
                   disabled={mergedDisabled}
                   onClose={() => handleCloseClick(index)}

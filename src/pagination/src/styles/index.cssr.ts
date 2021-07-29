@@ -95,13 +95,15 @@ export default cB('pagination', `
       background-color .3s var(--bezier),
       fill .3s var(--bezier);
   `, [
-
-    cM('button', {
-      background: 'var(--item-color)',
-      color: 'var(--button-icon-color)',
-      border: 'var(--button-border)',
-      fontSize: 'var(--button-icon-size)'
-    }),
+    cM('button', `
+      background: var(--item-color);
+      color: var(--button-icon-color);
+      border: var(--button-border);
+    `, [
+      cB('base-icon', `
+        font-size: var(--button-icon-size);
+      `)
+    ]),
     cNotM('disabled', [
       c('&:hover', {
         background: 'var(--item-color-hover)',

@@ -22,7 +22,7 @@ preset-confirm-slot
 | --- | --- | --- | --- |
 | display-directive | `'if' \| 'show'` | `'if'` | Use which directive to control the rendering of modal body. |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |
-| preset | `'card' \| 'confirm'` | `undefined` |  |
+| preset | `'card' \| 'confirm'` | `undefined` | The preset of `n-modal`. |
 | show | `boolean` | `false` | Whether to show modal. |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback when modal's display status is changed. |
 
@@ -38,9 +38,9 @@ See [Dialog props](dialog#Props)
 
 ### Modal without Preset
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name    | Parameters | Description               |
+| ------- | ---------- | ------------------------- |
+| default | `()`       | The content of the modal. |
 
 ### Modal with Preset Card
 

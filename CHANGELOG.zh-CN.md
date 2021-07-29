@@ -6,6 +6,29 @@
 
 - `n-form` 增加 `disabled` 属性，关闭 [#538](https://github.com/TuSimple/naive-ui/issues/538)
 
+## 2.15.11 (2021-07-29)
+
+### Fixes
+
+- 修复 `n-data-table` pagination 的报错
+
+## 2.15.10 (2021-07-29)
+
+### Feats
+
+- `n-pagination` 新增 `prev`、`next` 插槽，有关 [#648](https://github.com/TuSimple/naive-ui/issues/648)
+- `n-tag` 新增 `color`，关闭 [#693](https://github.com/TuSimple/naive-ui/issues/693)
+- `n-dynamic-tags` 新增 `color`，关闭 [#693](https://github.com/TuSimple/naive-ui/issues/693)
+- `n-time-picker` 优化 now 按钮的逻辑，关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
+- `n-pagination` `PaginationInfo` 增加 `itemCount` 属性，关闭 [#585](https://github.com/TuSimple/naive-ui/issues/585)
+
+### Fixes
+
+- 修复 `n-message` 的 `destroyAll` 方法不生效
+- 修复 `n-timeline` 的 header slot 单独使用无效的问题
+- 修复 `n-select` 当属性是 `disabled` 和 `filterable` 时样式错误, 关闭 [#698](https://github.com/TuSimple/naive-ui/issues/698)
+- 修复 `n-upload` 拥有 `file-list` & `disabled` 属性时操作按钮仍然显示，关闭 [#668](https://github.com/TuSimple/naive-ui/issues/668)
+
 ## 2.15.9 (2021-07-28)
 
 ### Feats
@@ -105,7 +128,7 @@
 - 修复 `n-select` placeholder transition
 - 修复 `n-loading-bar` `useLoadingBar` 返回类型可能为 undefined
 - 修复 `n-tag` 的 `type` 增加 `primary`　类型
-- 修复 `n-dynamic-tag` 的 `type` 增加 `primary`　类型
+- 修复 `n-dynamic-tags` 的 `type` 增加 `primary`　类型
 
 ## 2.15.4 (2021-07-09)
 

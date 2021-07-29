@@ -58,6 +58,6 @@ router-link
 
 ### All Typography Components
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name    | Parameters | Description                |
+| ------- | ---------- | -------------------------- |
+| default | `()`       | The content of typography. |
