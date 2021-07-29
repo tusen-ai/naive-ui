@@ -1,8 +1,11 @@
 # CHANGELOG
+
 ## Pending
+
 ### Feats
 
 - `n-scrollbar` 增加 `scrollbarWidth`、`scrollbarHeight` 和　`scrollbarBorderRadius`　公共主题变量，关闭 [#649](https://github.com/TuSimple/naive-ui/issues/649)
+- `n-menu` 在 `render-icon` 返回 falsy 值的时候不渲染 icon 的占位符，关闭 [#722](https://github.com/TuSimple/naive-ui/issues/722)
 
 ## 2.15.11 (2021-07-29)
 

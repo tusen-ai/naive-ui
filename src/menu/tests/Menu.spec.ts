@@ -49,8 +49,7 @@ describe('n-menu', () => {
       },
       {
         label: 'mojito',
-        key: 'mojito',
-        icon: () => h(NIcon, null, { default: () => h(HappyOutline) })
+        key: 'mojito'
       },
       {
         label: 'initialj',
@@ -59,7 +58,7 @@ describe('n-menu', () => {
     ]
     function renderMenuIcon (option: any): any {
       if (option.key === 'fantasy') return true // render indent
-      if (option.key === 'mojito') return true // keep menu option icon render
+      if (option.key === 'mojito') return true // render indent
       if (option.key === 'initialj') return null // don't render
       return h(NIcon, null, { default: () => h(HappyOutline) }) // render this
     }
@@ -70,7 +69,7 @@ describe('n-menu', () => {
       }
     })
     expect(wrapper.findAll('.n-menu-item-content__icon').length).toBe(3)
-    expect(wrapper.findAll('.n-icon').length).toBe(2)
+    expect(wrapper.findAll('.n-icon').length).toBe(1)
   })
 
   it('should tooltip work with `render-label` props', async () => {
