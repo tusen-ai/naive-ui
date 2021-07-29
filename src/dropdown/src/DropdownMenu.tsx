@@ -80,12 +80,16 @@ export default defineComponent({
   render () {
     const { parentKey, clsPrefix } = this
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { mergedShowArrowRef } = inject(dropdownInjectionKey)!
-    const arrowWrap = mergedShowArrowRef.value ? (
-      <div class={`${clsPrefix}-popover-arrow-wrapper`} key="__popover-arrow__">
-        <div class={`${clsPrefix}-popover-arrow`} />
-      </div>
-    ) : null
+    const { showArrow } = inject(dropdownInjectionKey)!
+    const arrowWrap =
+      showArrow && !parentKey ? (
+        <div
+          class={`${clsPrefix}-popover-arrow-wrapper`}
+          key="__popover-arrow__"
+        >
+          <div class={`${clsPrefix}-popover-arrow`} />
+        </div>
+      ) : null
     return (
       <div class={`${clsPrefix}-dropdown-menu`}>
         {this.tmNodes.map((tmNode) => {

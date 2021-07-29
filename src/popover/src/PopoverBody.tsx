@@ -204,8 +204,8 @@ export default defineComponent({
         internalRenderBodyRef: { value: renderBody }
       } = NPopover
       const { value: mergedClsPrefix } = mergedClsPrefixRef
-      const { value: extraClass } = NPopover.extraClassRef
       if (!renderBody) {
+        const { value: extraClass } = NPopover.extraClassRef
         contentNode = h(
           'div',
           mergeProps(

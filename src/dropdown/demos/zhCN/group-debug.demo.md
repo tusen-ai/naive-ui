@@ -8,6 +8,7 @@
   placement="bottom-start"
   trigger="click"
   @select="handleSelect"
+  :show-arrow="true"
 >
   <n-button>里面有组</n-button>
 </n-dropdown>

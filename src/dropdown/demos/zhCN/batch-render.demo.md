@@ -9,6 +9,7 @@
   :options="options"
   placement="bottom-start"
   trigger="click"
+  :show-arrow="true"
   :render-label="renderDropdownLabel"
   :render-icon="renderDropdownIcon"
 >
