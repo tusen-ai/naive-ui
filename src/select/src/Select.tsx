@@ -332,7 +332,7 @@ export default defineComponent({
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
     }
-    function doClear (e: MouseEvent): void {
+    function doClear (): void {
       const { onClear } = props
       if (onClear) call(onClear)
     }
