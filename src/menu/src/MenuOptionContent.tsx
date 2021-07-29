@@ -81,15 +81,15 @@ export default defineComponent({
         ]}
         style={this.style}
       >
-        {icon ? (
+        {icon && (
           <div
             class={`${clsPrefix}-menu-item-content__icon`}
             style={this.iconStyle}
             role="none"
           >
-            {icon}
+            {icon === true ? render(this.icon) : icon}
           </div>
-        ) : null}
+        )}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">
           {renderLabel ? renderLabel(tmNode.rawNode) : render(this.title)}
           {this.extra ? (
