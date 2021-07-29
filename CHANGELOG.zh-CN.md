@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.15.11 (2021-07-29)
+
+### Fixes
+
+- 修复 `n-data-table` pagination 的报错
+
 ## 2.15.10 (2021-07-29)
 
 ### Feats
