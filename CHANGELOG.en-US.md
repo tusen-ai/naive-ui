@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### Feats
+
+- `n-menu` add `render-extra` prop.
+
+### Fixes
+
 ## 2.15.11 (2021-07-29)
 
 ### Fixes

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### Feats
+
+- `n-menu` 新增 `render-extra` 属性
+
+### Fixes
+
 ## 2.15.11 (2021-07-29)
 
 ### Fixes
