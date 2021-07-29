@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.15.11 (2021-07-29)
+
+### Fixes
+
+- Fix `n-data-table` pagination's error.
+
 ## 2.15.10 (2021-07-29)
 
 ### Feats
