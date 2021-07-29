@@ -58,7 +58,7 @@ render-tag
 | on-clear | `() => void` | `undefined` | Callback triggered when selection clear. |
 | on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | How to create a option when you input a string to create a option. Note that `filter` will be applied to the created option too. And make sure the value of the created option is not the same as any other option. |
 | on-focus | `() => void` | `undefined` | Callback triggered when selection focus. |
-| on-scroll | `(e: ScrollEvent) => void` | `undefined` | Callback triggered when 　 menu scroll. |
+| on-scroll | `(e: ScrollEvent) => void` | `undefined` | Callback triggered when menu scroll. |
 | on-search | `(value: string) => void` | `undefined` | Callback triggered when search. |
 | on-update:value | `(value: Array \| string \| number \| null) => void` | `undefined` | Callback triggered when value updating. |
 

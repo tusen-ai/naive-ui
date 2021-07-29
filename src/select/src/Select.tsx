@@ -141,9 +141,7 @@ const selectProps = {
   onBlur: [Function, Array] as PropType<
   MaybeArray<(e: FocusEvent) => void> | undefined
   >,
-  onClear: [Function, Array] as PropType<
-  MaybeArray<(e: MouseEvent) => void> | undefined
-  >,
+  onClear: [Function, Array] as PropType<MaybeArray<() => void> | undefined>,
   onFocus: [Function, Array] as PropType<
   MaybeArray<(e: FocusEvent) => void> | undefined
   >,
