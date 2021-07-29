@@ -334,7 +334,7 @@ export default defineComponent({
     }
     function doClear (e: MouseEvent): void {
       const { onClear } = props
-      if (onClear) call(onClear, e)
+      if (onClear) call(onClear)
     }
     function doFocus (e: FocusEvent): void {
       const { onFocus } = props
@@ -535,7 +535,7 @@ export default defineComponent({
       if (!multiple && props.filterable) {
         closeMenu()
       }
-      doClear(e)
+      doClear()
       if (multiple) {
         doUpdateValue([])
       } else {
