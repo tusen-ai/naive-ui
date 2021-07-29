@@ -27,8 +27,7 @@ export const changeProcessingFillStrokeDasharray = ({
     num = 0
     speedRef.value = 1
   }
-  // @ts-expect-error
-  idx !== undefined
+  idx !== undefined // @ts-expect-error
     ? (processingFillStrokeDasharrayRef.value[idx] = `${num}, ${
         viewBoxWidth * 8
       }`)
