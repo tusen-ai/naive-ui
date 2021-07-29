@@ -5,6 +5,9 @@ import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 // --scrollbar-bezier
 // --scrollbar-color
 // --scrollbar-color-hover
+// --scrollbar-width
+// --scrollbar-height
+// --scrollbar-border-radius
 export default cB('scrollbar', `
   overflow: hidden;
   position: relative;
@@ -41,22 +44,28 @@ export default cB('scrollbar', `
         left: 2px;
         right: 2px;
         bottom: 4px;
+        height: var(--scrollbar-height);
       `, [
         c('>', [
-          cE('scrollbar', {
-            right: 0
-          })
+          cE('scrollbar', `
+            height: var(--scrollbar-height);
+            border-radius: var(--scrollbar-border-radius);
+            right: 0;
+          `)
         ])
       ]),
       cM('vertical', `
         right: 4px;
         top: 2px;
         bottom: 2px;
+        width: var(--scrollbar-width);
       `, [
         c('>', [
-          cE('scrollbar', {
-            bottom: 0
-          })
+          cE('scrollbar', `
+            width: var(--scrollbar-width);
+            border-radius: var(--scrollbar-border-radius);
+            bottom: 0;
+          `)
         ])
       ]),
       cM('disabled', [
