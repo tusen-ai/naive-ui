@@ -246,6 +246,14 @@ export default defineComponent({
   render () {
     const { mergedClsPrefix, mergedCollapsed, showTrigger, $parent } = this
     this.siderPlacement = ($parent?.$props as any).siderPlacement
+    const siderScrollContainerTransformStyle =
+      this.siderPlacement === 'right'
+        ? 'translateX(' +
+          (
+            parseInt(formatLength(this.width)) - parseInt(this.styleMaxWidth)
+          ).toString() +
+          'px)'
+        : 'unset'
     return (
       <aside
         class={[
@@ -296,7 +304,8 @@ export default defineComponent({
               this.scrollContainerStyle,
               this.contentStyle,
               {
-                overflow: 'auto'
+                overflow: 'auto',
+                transform: siderScrollContainerTransformStyle
               }
             ]}
             ref="scrollableElRef"

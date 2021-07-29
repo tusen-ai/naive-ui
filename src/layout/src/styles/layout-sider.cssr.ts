@@ -101,7 +101,7 @@ export default cB('layout-sider', `
     box-sizing: border-box;
     height: 100%;
     opacity: 0;
-    transition: opacity .3s var(--bezier);
+    transition: transform .3s var(--bezier), opacity .3s var(--bezier);
     max-width: 100%;
   `),
   cM('show-content', [
