@@ -12,6 +12,7 @@ import { warn, call, MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { inputNumberLight, InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber } from './utils'
 import type { OnUpdateValue } from './interface'
+import style from './styles/input-number.cssr'
 
 const inputNumberProps = {
   ...(useTheme.props as ThemeProps<InputNumberTheme>),
@@ -68,7 +69,7 @@ export default defineComponent({
     const themeRef = useTheme(
       'InputNumber',
       'InputNumber',
-      undefined,
+      style,
       inputNumberLight,
       props,
       mergedClsPrefixRef
@@ -368,9 +369,16 @@ export default defineComponent({
           onKeydown={this.handleKeyDown}
           onMousedown={this.handleMouseDown}
         >
-          {this.showButton
-            ? {
-                suffix: () => [
+          {{
+            _: 2, // input number has dynamic slots
+            prefix: this.$slots.prefix,
+            suffix: this.showButton
+              ? () => [
+                  this.$slots.suffix && (
+                    <span class={`${mergedClsPrefix}-input-number-suffix`}>
+                      {{ default: this.$slots.suffix }}
+                    </span>
+                  ),
                   <NButton
                     text
                     disabled={!this.minusable || this.disabled}
@@ -408,8 +416,8 @@ export default defineComponent({
                     }}
                   </NButton>
                 ]
-              }
-            : null}
+              : this.$slots.suffix
+          }}
         </NInput>
       </div>
     )

@@ -10,7 +10,8 @@ import {
   InjectionKey,
   ExtractPropTypes,
   renderSlot,
-  Ref
+  Ref,
+  PropType
 } from 'vue'
 import { createId } from 'seemly'
 import { ExtractPublicPropTypes, omit } from '../../_utils'
@@ -36,6 +37,7 @@ export interface MessageApiInjection {
   warning: (content: ContentType, options?: MessageOptions) => MessageReactive
   error: (content: ContentType, options?: MessageOptions) => MessageReactive
   loading: (content: ContentType, options?: MessageOptions) => MessageReactive
+  destroyAll: () => void
 }
 
 export const messageApiInjectionKey: InjectionKey<MessageApiInjection> =
@@ -63,10 +65,7 @@ export type MessageProviderInst = MessageApiInjection
 
 const messageProviderProps = {
   ...(useTheme.props as ThemeProps<MessageTheme>),
-  to: {
-    type: [String, Object],
-    default: undefined
-  },
+  to: [String, Object] as PropType<string | HTMLElement>,
   duration: {
     type: Number,
     default: 3000
@@ -107,7 +106,8 @@ export default defineComponent({
       },
       loading (content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'loading' })
-      }
+      },
+      destroyAll
     }
     provide(messageProviderInjectionKey, {
       props,
@@ -136,6 +136,13 @@ export default defineComponent({
         messageListRef.value.findIndex((message) => message.key === key),
         1
       )
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete messageRefs.value[key]
+    }
+    function destroyAll (): void {
+      Object.values(messageRefs.value).forEach((messageInstRef) => {
+        messageInstRef.hide()
+      })
     }
     return Object.assign(
       {
@@ -162,13 +169,19 @@ export default defineComponent({
                   <MessageEnvironment
                     ref={
                       ((inst: PrivateMessageRef) => {
-                        this.messageRefs[message.key] = inst
+                        if (inst) {
+                          this.messageRefs[message.key] = inst
+                        }
                       }) as () => void
                     }
                     internalKey={message.key}
                     onInternalAfterLeave={this.handleAfterLeave}
                     {...omit(message, ['destroy'], undefined)}
-                    duration={this.duration}
+                    duration={
+                      message.duration === undefined
+                        ? this.duration
+                        : message.duration
+                    }
                   />
                 )
               })}
