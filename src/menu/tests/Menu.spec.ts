@@ -9,6 +9,7 @@ describe('n-menu', () => {
   it('should work with import on demand', () => {
     mount(NMenu)
   })
+
   it('props.onUpdateValue type', () => {
     const stringCb = (v: string): void => {}
     const numberCb = (v: number): void => {}
@@ -35,6 +36,43 @@ describe('n-menu', () => {
       }
     })
   })
+
+  it('should work with `render-icon` props', async () => {
+    const options = [
+      {
+        label: 'yeh',
+        key: 'yeh'
+      },
+      {
+        label: 'fantasy',
+        key: 'fantasy'
+      },
+      {
+        label: 'mojito',
+        key: 'mojito',
+        icon: () => h(NIcon, null, { default: () => h(HappyOutline) })
+      },
+      {
+        label: 'initialj',
+        key: 'initialj'
+      }
+    ]
+    function renderMenuIcon (option: any): any {
+      if (option.key === 'fantasy') return true // render indent
+      if (option.key === 'mojito') return true // keep menu option icon render
+      if (option.key === 'initialj') return null // don't render
+      return h(NIcon, null, { default: () => h(HappyOutline) }) // render this
+    }
+    const wrapper = mount(NMenu, {
+      props: {
+        options: options,
+        renderIcon: renderMenuIcon
+      }
+    })
+    expect(wrapper.findAll('.n-menu-item-content__icon').length).toBe(3)
+    expect(wrapper.findAll('.n-icon').length).toBe(2)
+  })
+
   it('should tooltip work with `render-label` props', async () => {
     const options = [
       {
@@ -81,6 +119,7 @@ describe('n-menu', () => {
     expect(wrapper.find('[target="_blank"]').exists()).toBe(true)
     expect(wrapper.find('[href="test2"]').exists()).toBe(true)
   })
+
   it('should dropdown work with `render-label` props', async () => {
     const options = [
       {
