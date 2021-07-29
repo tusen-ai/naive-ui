@@ -260,3 +260,46 @@ describe('n-menu', () => {
     expect(wrapper.find('.expand-icon').text()).toEqual('1')
   })
 })
+
+it('should dropdown work with `render-extra` props', async () => {
+  const options = [
+    {
+      label: 'jj',
+      key: 'jj'
+    },
+    {
+      label: 'jay',
+      key: 'jay',
+      children: [
+        {
+          type: 'group',
+          label: 'song-group',
+          key: 'group',
+          children: [
+            {
+              label: 'fantasy',
+              key: 'fantasy'
+            },
+            {
+              label: 'mojito',
+              key: 'mojito'
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  function renderMenuExtra (): any {
+    return 'test'
+  }
+  const wrapper = mount(NMenu, {
+    props: {
+      defaultExpandAll: true,
+      options: options,
+      renderExtra: renderMenuExtra
+    }
+  })
+  expect(wrapper.findAll('.n-menu-item-content-header__extra').length).toEqual(
+    4
+  )
+})
