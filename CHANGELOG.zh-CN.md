@@ -1,4 +1,8 @@
 # CHANGELOG
+## Pending
+### Feats
+
+- `n-scrollbar` 增加 `scrollbarWidth`、`scrollbarHeight` 和　`scrollbarBorderRadius`　公共主题变量，关闭 [#649](https://github.com/TuSimple/naive-ui/issues/649)
 
 ## 2.15.11 (2021-07-29)
 
