@@ -158,13 +158,18 @@ describe('n-menu', () => {
               {
                 label: 'mojito',
                 key: 'mojito'
+              },
+              {
+                label: 'initialj',
+                key: 'initialj'
               }
             ]
           }
         ]
       }
     ]
-    function renderMenuIcon (): any {
+    function renderMenuIcon (option: any): any {
+      if (option.key === 'initialj') return null
       return h(NIcon, null, { default: () => h(HappyOutline) })
     }
     const wrapper = mount(NMenu, {
