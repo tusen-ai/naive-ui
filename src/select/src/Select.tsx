@@ -141,6 +141,7 @@ const selectProps = {
   onBlur: [Function, Array] as PropType<
   MaybeArray<(e: FocusEvent) => void> | undefined
   >,
+  onClear: [Function, Array] as PropType<MaybeArray<() => void> | undefined>,
   onFocus: [Function, Array] as PropType<
   MaybeArray<(e: FocusEvent) => void> | undefined
   >,
@@ -330,6 +331,10 @@ export default defineComponent({
       const { nTriggerFormBlur } = formItem
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
+    }
+    function doClear (): void {
+      const { onClear } = props
+      if (onClear) call(onClear)
     }
     function doFocus (e: FocusEvent): void {
       const { onFocus } = props
@@ -530,6 +535,7 @@ export default defineComponent({
       if (!multiple && props.filterable) {
         closeMenu()
       }
+      doClear()
       if (multiple) {
         doUpdateValue([])
       } else {
