@@ -34,8 +34,13 @@ const loadingBarProps = {
     type: [String, Object] as PropType<string | HTMLElement>,
     default: undefined
   },
-  startColor: String,
-  endColor: String
+  loadingBarStyle: {
+    type: [String, Object, Function] as PropType<
+    | { loading: string, error: string }
+    | string
+    | ((type: 'error' | 'loading') => string)
+    >
+  }
 }
 
 export type LoadingBarProviderProps = ExtractPublicPropTypes<
@@ -103,11 +108,7 @@ export default defineComponent({
     return (
       <>
         <Teleport to={this.to ?? 'body'}>
-          <NLoadingBar
-            ref="loadingBarRef"
-            startColor={this.startColor}
-            endColor={this.endColor}
-          />
+          <NLoadingBar ref="loadingBarRef" />
         </Teleport>
         {renderSlot(this.$slots, 'default')}
       </>

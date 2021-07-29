@@ -43,10 +43,9 @@ basic
 
 ### `loadingBar` Props
 
-| Name        | Type     | Default     | Description            |
-| ----------- | -------- | ----------- | ---------------------- |
-| start-color | `string` | `undefined` | Color of the starting. |
-| end-color   | `string` | `undefined` | Color of the ending.   |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| loading-bar-style | `{loading: string, error: string} \| string \| ((type: ('error' \| 'loading')) => string)` | `undefined` | Style of the loading bar. |
 
 ### `loadingBar` Injection Methods
 

@@ -24,11 +24,7 @@ function createClassName (
 
 export default defineComponent({
   name: 'LoadingBar',
-  props: {
-    startColor: String,
-    endColor: String
-  },
-  setup (props) {
+  setup () {
     const {
       props: providerProps,
       mergedClsPrefixRef
@@ -40,6 +36,28 @@ export default defineComponent({
     const transitionDisabledRef = ref(false)
     let finishing = false
     let erroring = false
+    const loadingBarStyleCssVars = computed(() => {
+      const overrideStyle = providerProps.loadingBarStyle
+      const {
+        self: { colorError, colorLoading }
+      } = themeRef.value
+      if (typeof overrideStyle === 'string') {
+        return {
+          '--color-loading': overrideStyle || colorLoading,
+          '--color-error': overrideStyle || colorLoading
+        }
+      } else if (typeof overrideStyle === 'object') {
+        return {
+          '--color-loading': (overrideStyle as any).loading || colorLoading,
+          '--color-error': (overrideStyle as any).error || colorError
+        }
+      } else if (typeof overrideStyle === 'function') {
+        return {
+          '--color-loading': overrideStyle('loading') || colorLoading,
+          '--color-error': overrideStyle('error') || colorError
+        }
+      }
+    })
     async function init (): Promise<void> {
       enteringRef.value = false
       loadingRef.value = false
@@ -143,9 +161,9 @@ export default defineComponent({
         } = themeRef.value
         return {
           '--height': height,
-          '--color-start': props.startColor || colorLoading,
-          '--color-end': props.endColor || colorLoading,
-          '--color-error': colorError
+          '--color-loading': colorLoading,
+          '--color-error': colorError,
+          ...loadingBarStyleCssVars.value
         }
       })
     }

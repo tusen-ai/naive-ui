@@ -3,8 +3,7 @@ import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 
 // vars:
 // --height
-// --color-start
-// --color-end
+// --color-loading
 // --color-error
 export default cB('loading-bar-container', `
   z-index: 5999;
@@ -22,23 +21,23 @@ export default cB('loading-bar-container', `
     width: 100%;
     transition:
       max-width 4s linear,
-      background-color .2s linear;
+      background .2s linear;
     height: var(--height);
   `, [
     cM('starting', `
-      background-image: linear-gradient(to right, var(--color-start), var(--color-end));
+      background: var(--color-loading);
     `),
     cM('finishing', `
-      background-image: linear-gradient(to right, var(--color-start), var(--color-end));
+      background: var(--color-loading);
       transition:
         max-width .2s linear,
-        background-color .2s linear;
+        background .2s linear;
     `),
     cM('error', `
-      background-color: var(--color-error);
+      background: var(--color-error);
       transition:
         max-width .2s linear,
-        background-color .2s linear;
+        background .2s linear;
     `)
   ])
 ])
