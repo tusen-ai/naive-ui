@@ -34,7 +34,7 @@
 ```
 
 ```js
-import { h, ref, defineComponent } from 'vue'
+import { h, ref, defineComponent, Comment } from 'vue'
 import { NIcon } from 'naive-ui'
 import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
 
@@ -120,8 +120,10 @@ export default defineComponent({
         return option.label
       },
       renderMenuIcon (option) {
-        if (option.key === 'sheep-man') return true
-        if (option.key === 'food') return null // falsy
+        // 返回 comment VNode 时，渲染图标占位符以保持缩进
+        if (option.key === 'sheep-man') return h(Comment)
+        // 返回 falsy 值，不再渲染图标及占位符
+        if (option.key === 'food') return null
         return h(NIcon, null, { default: () => h(BookmarkOutline) })
       },
       expandIcon () {

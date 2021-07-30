@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { HappyOutline } from '@vicons/ionicons5'
-import { h } from 'vue'
+import { h, Comment } from 'vue'
 import { sleep } from 'seemly'
 import { NMenu } from '../index'
 import { NIcon } from '../../icon'
@@ -40,10 +40,6 @@ describe('n-menu', () => {
   it('should work with `render-icon` props', async () => {
     const options = [
       {
-        label: 'yeh',
-        key: 'yeh'
-      },
-      {
         label: 'fantasy',
         key: 'fantasy'
       },
@@ -57,10 +53,12 @@ describe('n-menu', () => {
       }
     ]
     function renderMenuIcon (option: any): any {
-      if (option.key === 'fantasy') return true // render indent
-      if (option.key === 'mojito') return true // render indent
-      if (option.key === 'initialj') return null // don't render
-      return h(NIcon, null, { default: () => h(HappyOutline) }) // render this
+      // return comment vnode, render placeholder for indent
+      if (option.key === 'mojito') return h(Comment)
+      // return falsy, don't render icon placeholder
+      if (option.key === 'initialj') return null
+      // otherwise, render returns vnode
+      return h(NIcon, null, { default: () => h(HappyOutline) })
     }
     const wrapper = mount(NMenu, {
       props: {
@@ -68,7 +66,7 @@ describe('n-menu', () => {
         renderIcon: renderMenuIcon
       }
     })
-    expect(wrapper.findAll('.n-menu-item-content__icon').length).toBe(3)
+    expect(wrapper.findAll('.n-menu-item-content__icon').length).toBe(2)
     expect(wrapper.findAll('.n-icon').length).toBe(1)
   })
 

@@ -34,7 +34,7 @@ The `render-label`, `render-icon`, `expand-icon` can be used to batch render men
 ```
 
 ```js
-import { h, ref, defineComponent } from 'vue'
+import { h, ref, defineComponent, Comment } from 'vue'
 import { NIcon } from 'naive-ui'
 import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
 
@@ -120,8 +120,10 @@ export default defineComponent({
         return option.label
       },
       renderMenuIcon (option) {
-        if (option.key === 'beverage') return true
-        if (option.key === 'food') return null // falsy
+        // return comment vnode, render placeholder for indent
+        if (option.key === 'sheep-man') return h(Comment)
+        // return falsy, don't render icon placeholder
+        if (option.key === 'food') return null
         return h(NIcon, null, { default: () => h(BookmarkOutline) })
       },
       expandIcon () {
