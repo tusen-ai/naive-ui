@@ -1079,6 +1079,8 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
 </div>
 `;
 
+exports[`n-dropdown shows arrow 1`] = `null`;
+
 exports[`n-dropdown shows menu after click 1`] = `
 <div
   class="n-dropdown-menu n-popover n-dropdown"

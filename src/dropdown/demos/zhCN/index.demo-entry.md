@@ -8,6 +8,7 @@
 basic
 trigger
 cascade
+arrow
 placement
 size
 manual-position
@@ -20,6 +21,7 @@ batch-render
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | animated | `boolean` | `true` | 弹出弹窗时使用动画 |
+| showArrow | `boolean` | `false` | 是否显示箭头 |
 | inverted | `boolean` | `false` | 使用反转样式 |
 | keyboard | `boolean` | `true` | 是否支持键盘操作（注意和其他内容键盘操作可能的冲突） |
 | options | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | `[]` | 下拉菜单传入的 options |

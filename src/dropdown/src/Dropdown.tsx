@@ -72,7 +72,6 @@ export interface DropdownInjection {
   activeKeyPathRef: Ref<Key[]>
   animatedRef: Ref<boolean>
   mergedShowRef: Ref<boolean>
-  showArrow: boolean
   doSelect: OnUpdateValueImpl
   doUpdateShow: (value: boolean) => void
 }
@@ -93,10 +92,8 @@ const dropdownBaseProps = {
     type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
     default: 'medium'
   },
-  showArrow: {
-    type: Boolean,
-    default: false
-  },
+  showArrow: Boolean,
+  arrowStyle: [String, Object] as PropType<string | CSSProperties>,
   inverted: Boolean,
   placement: {
     type: String as PropType<FollowerPlacement>,
@@ -223,7 +220,6 @@ export default defineComponent({
       activeKeyPathRef: activeKeyPathRef,
       animatedRef: toRef(props, 'animated'),
       mergedShowRef: mergedShowRef,
-      showArrow: props.showArrow,
       doSelect,
       doUpdateShow
     })
@@ -405,6 +401,8 @@ export default defineComponent({
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,
         style: [style, this.cssVars as CSSProperties],
+        showArrow: this.showArrow,
+        arrowStyle: this.arrowStyle,
         onMouseenter,
         onMouseleave
       }

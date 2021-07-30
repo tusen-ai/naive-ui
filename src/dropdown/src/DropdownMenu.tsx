@@ -6,7 +6,8 @@ import {
   InjectionKey,
   PropType,
   provide,
-  Ref
+  Ref,
+  CSSProperties
 } from 'vue'
 import { TreeNode } from 'treemate'
 import NDropdownOption from './DropdownOption'
@@ -19,6 +20,7 @@ import {
   DropdownIgnoredOption,
   DropdownOption
 } from './interface'
+import { renderArrow } from '../../popover/src/PopoverBody'
 
 export interface NDropdownMenuInjection {
   showIconRef: Ref<boolean>
@@ -31,6 +33,11 @@ export const dropdownMenuInjectionKey: InjectionKey<NDropdownMenuInjection> =
 export default defineComponent({
   name: 'DropdownMenu',
   props: {
+    showArrow: {
+      type: Boolean,
+      required: false
+    },
+    arrowStyle: [String, Object] as PropType<string | CSSProperties>,
     clsPrefix: {
       type: String,
       required: true
@@ -78,18 +85,12 @@ export default defineComponent({
     })
   },
   render () {
-    const { parentKey, clsPrefix } = this
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { showArrow } = inject(dropdownInjectionKey)!
-    const arrowWrap =
-      showArrow && !parentKey ? (
-        <div
-          class={`${clsPrefix}-popover-arrow-wrapper`}
-          key="__popover-arrow__"
-        >
-          <div class={`${clsPrefix}-popover-arrow`} />
-        </div>
-      ) : null
+    const { parentKey, clsPrefix, showArrow, arrowStyle } = this
+    const arrowWrapParams = {
+      clsPrefix,
+      showArrow,
+      arrowStyle
+    }
     return (
       <div class={`${clsPrefix}-dropdown-menu`}>
         {this.tmNodes.map((tmNode) => {
@@ -115,7 +116,7 @@ export default defineComponent({
             />
           )
         })}
-        {arrowWrap}
+        {renderArrow(arrowWrapParams)}
       </div>
     )
   }
