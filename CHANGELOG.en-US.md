@@ -2,8 +2,16 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `useLoadingBar`'s `finish` method won't work if no `start` is called.
+
 ### Feats
 
+- `n-scrollbar` add `scrollbarWidth`, `scrollbarHeight` and `scrollbarBorderRadius` common theme variables, closes [#649](https://github.com/TuSimple/naive-ui/issues/649).
+- `n-menu` doesn't should icon placeholder when `render-icon` returns falsy value, closes [#722](https://github.com/TuSimple/naive-ui/issues/722).
+- `n-menu` add `render-extra` prop.
+- `n-select` add `on-clear` prop.
 - `n-form` add `disabled` prop, closes [#538](https://github.com/TuSimple/naive-ui/issues/538).
 
 ## 2.15.11 (2021-07-29)
@@ -21,6 +29,7 @@
 - `n-dynamic-tags` add `color`, closes [#693](https://github.com/TuSimple/naive-ui/issues/693).
 - `n-time-picker` optimization the now button logic, closes [#401](https://github.com/TuSimple/naive-ui/issues/401).
 - `n-pagination` `PaginationInfo` add `itemCount` prop, closes [#585](https://github.com/TuSimple/naive-ui/issues/585).
+- `n-select` add `on-clear` prop.
 
 ### Fixes
 

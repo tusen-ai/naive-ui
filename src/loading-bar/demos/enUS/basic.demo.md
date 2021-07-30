@@ -3,28 +3,36 @@
 ```html
 <n-space>
   <n-button @click="handleStart"> start </n-button>
-  <n-button @click="handleFinish"> finish </n-button>
+  <n-button @click="handleFinish" :disabled="disabled"> finish </n-button>
   <n-button @click="handleError"> error </n-button>
 </n-space>
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
 import { useLoadingBar } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const loadingBar = useLoadingBar()
+    const disabledRef = ref(true)
+    function handleStart () {
+      loadingBar.start()
+      disabledRef.value = false
+    }
+    function handleFinish () {
+      loadingBar.finish()
+      disabledRef.value = true
+    }
+    function handleError () {
+      loadingBar.error()
+    }
     return {
-      handleStart () {
-        loadingBar.start()
-      },
-      handleFinish () {
-        loadingBar.finish()
-      },
-      handleError () {
-        loadingBar.error()
-      }
+      disabled: disabledRef,
+      handleStart,
+      handleFinish,
+      handleError
     }
   }
-}
+})
 ```
