@@ -93,7 +93,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-markdown": "^2.0.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-standard": "^5.0.0",
     "eslint-plugin-vue": "^7.6.0",
     "express": "^4.17.1",
