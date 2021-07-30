@@ -1,4 +1,4 @@
-import { ref, computed, toRef } from 'vue'
+import { ref, computed, toRef, Ref } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import type { Option, OptionValue, Filter, CheckedStatus } from './interface'
 
@@ -7,12 +7,14 @@ interface UseTransferDataProps {
   value?: OptionValue[] | null
   options: Option[]
   filterable: boolean
-  disabled: boolean
   filter: Filter
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function useTransferData (props: UseTransferDataProps) {
+export function useTransferData (
+  props: UseTransferDataProps,
+  mergedDisabledRef: Ref<boolean>
+) {
   const uncontrolledValueRef = ref(props.defaultValue)
   const controlledValueRef = toRef(props, 'value')
   const mergedValueRef = useMergedState(
@@ -123,11 +125,11 @@ export function useTransferData (props: UseTransferDataProps) {
     }
   })
   const fromButtonDisabledRef = useMemo(() => {
-    if (props.disabled) return true
+    if (mergedDisabledRef.value) return true
     return tgtCheckedValuesRef.value.length === 0
   })
   const toButtonDisabledRef = useMemo(() => {
-    if (props.disabled) return true
+    if (mergedDisabledRef.value) return true
     return srcCheckedValuesRef.value.length === 0
   })
   const isInputingRef = ref(false)

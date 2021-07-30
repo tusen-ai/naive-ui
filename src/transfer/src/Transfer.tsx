@@ -135,7 +135,7 @@ export default defineComponent({
       handleInputBlur,
       handleTgtFilterUpdateValue,
       handleSrcFilterUpdateValue
-    } = useTransferData(props)
+    } = useTransferData(props, mergedDisabledRef)
     function doUpdateValue (value: OptionValue[]): void {
       const {
         onUpdateValue,
