@@ -22,9 +22,9 @@ customize-icon
 | --- | --- | --- | --- |
 | accordion | `boolean` | `false` | Whether to only allow on panel open. |
 | arrow-placement | `'left' \| 'right'` | `'left'` | Arrow placement. |
-| default-expanded-names | `string \| number \| Array<string \| number> \| null` | `null` | Panel expanded in uncontrolled mode. |
+| default-expanded-names | `string \| number \| Array<string \| number> \| null` | `null` | Panel expanded in uncontrolled mode. If `accrodion` is set, it should be a non-array value. |
 | display-directive | `'if' \| 'show'` | `'if'` | The display directive to use when its inner `n-collapse-item` render content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. |
-| expanded-names | `string \| number \| Array<string \| number> \| null` | `undefined` | Expanded panel in controlled mode. |
+| expanded-names | `string \| number \| Array<string \| number> \| null` | `undefined` | Expanded panel in controlled mode. If `accrodion` is set, it should be a non-array value.  |
 | on-update:expanded-names | `(expandedNames: Array<string \| number> \| string \| number \| null) => void` | `undefined` | Callback function triggered when expanded-names changes. |
 | on-item-header-click | `(data: { name: string \| number, expanded: boolean, event: MouseEvent }) => void` | `undefined` | Callback function triggered when the title is clicked. |
 
