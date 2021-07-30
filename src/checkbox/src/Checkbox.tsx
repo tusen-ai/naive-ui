@@ -36,7 +36,10 @@ const checkboxProps = {
   },
   defaultChecked: Boolean,
   value: [String, Number] as PropType<string | number>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   indeterminate: Boolean,
   label: String,
   focusable: {
@@ -75,6 +78,25 @@ export default defineComponent({
   props: checkboxProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
+    const formItem = useFormItem(props, {
+      mergedSize (NFormItem) {
+        const { size } = props
+        if (size !== undefined) return size
+        if (NCheckboxGroup) {
+          const { value: mergedSize } = NCheckboxGroup.mergedSizeRef
+          if (mergedSize !== undefined) {
+            return mergedSize
+          }
+        }
+        if (NFormItem) {
+          const { mergedSize } = NFormItem
+          if (mergedSize !== undefined) return mergedSize.value
+        }
+        return 'medium'
+      }
+    })
+    const { mergedSizeRef, mergedDisabledRef: mergedFormItemDisabledRef } =
+      formItem
     const NCheckboxGroup = inject(checkboxGroupInjectionKey, null)
     const uncontrolledCheckedRef = ref(props.defaultChecked)
     const controlledCheckedRef = toRef(props, 'checked')
@@ -119,26 +141,11 @@ export default defineComponent({
           return true
         }
       }
+      if (formItem) {
+        return mergedFormItemDisabledRef.value
+      }
       return false
     })
-    const formItem = useFormItem(props, {
-      mergedSize (NFormItem) {
-        const { size } = props
-        if (size !== undefined) return size
-        if (NCheckboxGroup) {
-          const { value: mergedSize } = NCheckboxGroup.mergedSizeRef
-          if (mergedSize !== undefined) {
-            return mergedSize
-          }
-        }
-        if (NFormItem) {
-          const { mergedSize } = NFormItem
-          if (mergedSize !== undefined) return mergedSize.value
-        }
-        return 'medium'
-      }
-    })
-    const { mergedSizeRef } = formItem
     const themeRef = useTheme(
       'Checkbox',
       'Checkbox',

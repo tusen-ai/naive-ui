@@ -77,7 +77,10 @@ const selectProps = {
   multiple: Boolean,
   size: String as PropType<Size>,
   filterable: Boolean,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   remote: Boolean,
   loading: Boolean,
   filter: {
@@ -310,6 +313,7 @@ export default defineComponent({
     })
 
     const formItem = useFormItem(props)
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     function doUpdateValue (
       value: string | number | Array<string | number> | null
     ): void {
@@ -369,7 +373,7 @@ export default defineComponent({
     }
     // menu related methods
     function openMenu (): void {
-      if (!props.disabled) {
+      if (!mergedDisabledRef.value) {
         patternRef.value = ''
         uncontrolledShowRef.value = true
         if (props.filterable) {
@@ -384,7 +388,7 @@ export default defineComponent({
       patternRef.value = ''
     }
     function handleTriggerClick (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (!mergedShowRef.value) {
         openMenu()
       } else {
@@ -449,7 +453,7 @@ export default defineComponent({
       }
     }
     function handleToggleOption (option: SelectBaseOption): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       const { tag, remote } = props
       if (tag && !remote) {
         const { value: beingCreatedOptions } = beingCreatedOptionsRef
@@ -643,7 +647,8 @@ export default defineComponent({
       localizedPlaceholder: localizedPlaceholderRef,
       selectedOption: selectedOptionRef,
       selectedOptions: selectedOptionsRef,
-      mergedSize: formItem.mergedSizeRef,
+      mergedSize: mergedSizeRef,
+      mergedDisabled: mergedDisabledRef,
       focused: focusedRef,
       handleMenuFocus,
       handleMenuBlur,
@@ -700,7 +705,7 @@ export default defineComponent({
                       renderLabel={this.renderLabel}
                       filterable={this.filterable}
                       clearable={this.clearable}
-                      disabled={this.disabled}
+                      disabled={this.mergedDisabled}
                       size={this.mergedSize}
                       theme={this.mergedTheme.peers.InternalSelection}
                       themeOverrides={

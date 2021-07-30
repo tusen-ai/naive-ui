@@ -12,6 +12,7 @@
 - `n-menu` 在 `render-icon` 返回 falsy 值的时候不渲染 icon 的占位符，关闭 [#722](https://github.com/TuSimple/naive-ui/issues/722)
 - `n-menu` 新增 `render-extra` 属性
 - `n-select` 新增 `on-clear` 属性
+- `n-form` 增加 `disabled` 属性，关闭 [#538](https://github.com/TuSimple/naive-ui/issues/538)
 
 ### Fixes
 

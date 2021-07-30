@@ -12,6 +12,7 @@
 - `n-menu` doesn't should icon placeholder when `render-icon` returns falsy value, closes [#722](https://github.com/TuSimple/naive-ui/issues/722).
 - `n-menu` add `render-extra` prop.
 - `n-select` add `on-clear` prop.
+- `n-form` add `disabled` prop, closes [#538](https://github.com/TuSimple/naive-ui/issues/538).
 
 ### Fixes
 
