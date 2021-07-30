@@ -13,6 +13,10 @@
 - `n-menu` add `render-extra` prop.
 - `n-select` add `on-clear` prop.
 
+### Fixes
+
+- Fix `n-dropdown` click exception when using v-for.
+
 ## 2.15.11 (2021-07-29)
 
 ### Fixes
