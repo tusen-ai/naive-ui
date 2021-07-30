@@ -77,7 +77,7 @@ const datePickerProps = {
     default: null
   },
   disabled: {
-    type: Boolean,
+    type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
   placement: {
