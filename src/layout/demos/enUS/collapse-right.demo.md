@@ -8,6 +8,7 @@ Sometimes you might want to put the collapsed sidebar on the right.
     <n-layout-sider
       collapse-mode="width"
       :collapsed-width="120"
+      :native-scrollbar="true"
       :width="240"
       show-trigger="arrow-circle"
       content-style="padding: 24px"
@@ -25,6 +26,7 @@ Sometimes you might want to put the collapsed sidebar on the right.
   <n-layout has-sider sider-placement="right">
     <n-layout-sider
       collapse-mode="transform"
+      :native-scrollbar="false"
       :collapsed-width="120"
       :width="240"
       show-trigger="arrow-circle"

@@ -9,6 +9,7 @@
       collapse-mode="width"
       :collapsed-width="120"
       :width="240"
+      :native-scrollbar="true"
       show-trigger="arrow-circle"
       content-style="padding: 24px"
       bordered
@@ -22,6 +23,7 @@
       collapse-mode="transform"
       :collapsed-width="120"
       :width="240"
+      :native-scrollbar="false"
       show-trigger="arrow-circle"
       content-style="padding: 24px"
       bordered

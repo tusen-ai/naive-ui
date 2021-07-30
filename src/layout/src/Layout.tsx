@@ -116,8 +116,7 @@ export function createLayoutComponent (isContent: boolean) {
       const { mergedClsPrefix, hasSider } = this
       const hasSiderStyle = hasSider ? this.hasSiderStyle : undefined
       const siderPlacementStyle = {
-        'flex-direction':
-          this.siderPlacement === 'right' ? 'row-reverse' : 'unset'
+        'flex-direction': this.siderPlacement === 'right' && 'row-reverse'
       }
       const layoutClass = [
         isContent && `${mergedClsPrefix}-layout-content`,
@@ -142,9 +141,8 @@ export function createLayoutComponent (isContent: boolean) {
               ref="scrollbarInstRef"
               theme={this.mergedTheme.peers.Scrollbar}
               themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
-              contentStyle={
-                [this.contentStyle, hasSiderStyle, siderPlacementStyle] as any
-              }
+              style={siderPlacementStyle}
+              contentStyle={[this.contentStyle, hasSiderStyle] as any}
             >
               {this.$slots}
             </NScrollbar>
