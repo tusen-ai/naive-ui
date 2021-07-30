@@ -42,6 +42,7 @@ header
 | width | `number \| 'trigger'` | `undefined` | `'trigger'` 表示 popover 的宽度会和它的触发元素一致 |
 | x | `number` | `undefined` | 手动控制位置时弹出内容的 CSS `left` 的像素值（x，y 都设置才能生效） |
 | y | `number` | `undefined` | 手动控制位置时弹出内容的 CSS `top` 的像素值（x，y 都设置才能生效） |
+| on-clickoutside | `(e: MouseEvent) => void` | `undefined` | clickoutside 时触发的回调函数 |
 | on-update:show | `(value: boolean) => void` | `undefined` | 显示状态改变的回调函数 |
 
 ## Slots

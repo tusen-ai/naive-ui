@@ -41,6 +41,7 @@ header
 | width | `number \| 'trigger'` | `undefined` | `'trigger'` means popover's witdh will follow its trigger's width. |
 | x | `number` | `undefined` | The CSS `left` pixel value when popover manually positioned (x, y need to be set together). |
 | y | `number` | `undefined` | The CSS `top` pixel value when popover manually positioned (x, y need to be set together). |
+| on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when clickoutside. |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback on show status changes. |
 
 ## Slots

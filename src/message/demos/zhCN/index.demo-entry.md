@@ -62,6 +62,7 @@ multiple-line
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
+| destroyAll | `() => void` | 销毁所有弹出的信息 |
 | error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 error 类型的信息 |
 | info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 info 类型的信息 |
 | loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 loading 类型的信息 |

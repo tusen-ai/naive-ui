@@ -37,6 +37,7 @@ long-label
 | inverted | `boolean` | `false` | 使用反转样式 |
 | options | `Array<MenuOption \| MenuOptionGroup>` | `[]` | 菜单的数据 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | 菜单的布局方式 |
+| render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单额外部分渲染 |
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | 批量处理菜单图标渲染 |
 | render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单标签渲染 |
 | root-indent | `number` | `32` | 菜单第一级的缩进，如果没有设定，使用 `indent` 代替 |

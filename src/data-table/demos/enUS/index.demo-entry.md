@@ -110,7 +110,7 @@ flex-height
 | title | `string \| (() => VNodeChild)` | `undefined` | Column title, Can be a render function. |
 | titleRowSpan | `number` | `undefined` | The number of cells occupied by the title row. |
 | type | `'selection' \| 'expand'` | `undefined` | Column type. |
-| width | `number \| string` | `undefined` | Width of the column, **required** when fixed. |
+| width | `number` | `undefined` | Width of the column, **required** when fixed. |
 
 #### CreateSummary Type
 

@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNodeChild } from 'vue'
 
 export type RenderPrefix = (info: {
   startIndex: number
@@ -6,6 +6,9 @@ export type RenderPrefix = (info: {
   page: number
   pageSize: number
   pageCount: number
-}) => VNode
+  itemCount: number | undefined
+}) => VNodeChild
 
 export type RenderSuffix = RenderPrefix
+export type RenderNext = RenderPrefix
+export type RenderPrev = RenderPrefix

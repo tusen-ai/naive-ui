@@ -212,9 +212,6 @@ const Scrollbar = defineComponent({
     const xBarLeftPxRef = computed(() => {
       return `${xBarLeftRef.value}px`
     })
-    const sizePxRef = computed(() => {
-      return `${props.size}px`
-    })
     const needYBarRef = computed(() => {
       const { value: containerHeight } = containerHeightRef
       const { value: contentHeight } = contentHeightRef
@@ -561,7 +558,6 @@ const Scrollbar = defineComponent({
       xRailRef,
       needYBar: needYBarRef,
       needXBar: needXBarRef,
-      sizePx: sizePxRef,
       yBarSizePx: yBarSizePxRef,
       xBarSizePx: xBarSizePxRef,
       yBarTopPx: yBarTopPxRef,
@@ -578,13 +574,21 @@ const Scrollbar = defineComponent({
       handleXScrollMouseDown,
       cssVars: computed(() => {
         const {
-          common: { cubicBezierEaseInOut },
+          common: {
+            cubicBezierEaseInOut,
+            scrollbarBorderRadius,
+            scrollbarHeight,
+            scrollbarWidth
+          },
           self: { color, colorHover }
         } = themeRef.value
         return {
           '--scrollbar-bezier': cubicBezierEaseInOut,
           '--scrollbar-color': color,
-          '--scrollbar-color-hover': colorHover
+          '--scrollbar-color-hover': colorHover,
+          '--scrollbar-border-radius': scrollbarBorderRadius,
+          '--scrollbar-width': scrollbarWidth,
+          '--scrollbar-height': scrollbarHeight
         }
       })
     }
@@ -640,7 +644,7 @@ const Scrollbar = defineComponent({
           <div
             ref="yRailRef"
             class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`}
-            style={[this.horizontalRailStyle, { width: this.sizePx }] as any}
+            style={[this.horizontalRailStyle] as any}
           >
             <Transition name="fade-in-transition">
               {{
@@ -650,9 +654,7 @@ const Scrollbar = defineComponent({
                       class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
                       style={{
                         height: this.yBarSizePx,
-                        top: this.yBarTopPx,
-                        width: this.sizePx,
-                        borderRadius: this.sizePx
+                        top: this.yBarTopPx
                       }}
                       onMousedown={this.handleYScrollMouseDown}
                     />
@@ -663,7 +665,7 @@ const Scrollbar = defineComponent({
           <div
             ref="xRailRef"
             class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`}
-            style={[this.verticalRailStyle, { height: this.sizePx }] as any}
+            style={[this.verticalRailStyle] as any}
           >
             <Transition name="fade-in-transition">
               {{
@@ -672,10 +674,8 @@ const Scrollbar = defineComponent({
                     <div
                       class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
                       style={{
-                        height: this.sizePx,
                         width: this.xBarSizePx,
-                        left: this.xBarLeftPx,
-                        borderRadius: this.sizePx
+                        left: this.xBarLeftPx
                       }}
                       onMousedown={this.handleXScrollMouseDown}
                     />

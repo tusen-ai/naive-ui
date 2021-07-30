@@ -23,10 +23,12 @@ indent
 
 ## Slots
 
-| Name         | Parameters | Description                           |
-| ------------ | ---------- | ------------------------------------- |
-| action       | `()`       | Operating area slot.                  |
-| default      | `()`       | Content information.                  |
-| description  | `()`       | Description information.              |
-| header-extra | `()`       | Additional information in the header. |
-| header       | `()`       | Header information.                   |
+| Name         | Parameters | Description          |
+| ------------ | ---------- | -------------------- |
+| action       | `()`       | Action's slot.       |
+| avatar       | `()`       | Avatar's slot.       |
+| default      | `()`       | Content's slot.      |
+| description  | `()`       | Description's slot.  |
+| footer       | `()`       | Footer's slot.       |
+| header-extra | `()`       | Header extra's slot. |
+| header       | `()`       | Header's slot.       |
