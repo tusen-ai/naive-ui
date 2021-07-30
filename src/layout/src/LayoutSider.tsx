@@ -137,9 +137,6 @@ export default defineComponent({
           : 'translateX(-50%) translateY(-50%) rotate(180deg)'
       }
     ])
-    const siderOnRight = computed(() => {
-      return siderPlacement.value === 'right'
-    })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
     const mergedCollapsedRef = useMergedState(
       toRef(props, 'collapsed'),
@@ -212,7 +209,6 @@ export default defineComponent({
       mergedCollapsed: mergedCollapsedRef,
       scrollContainerStyle: scrollContainerStyleRef,
       siderPlacement,
-      siderOnRight,
       siderOnLeft,
       mergedTriggerStyle,
       handleTriggerClick,
@@ -251,7 +247,7 @@ export default defineComponent({
     const { mergedClsPrefix, mergedCollapsed, showTrigger, $parent } = this
     this.siderPlacement = ($parent?.$props as any).siderPlacement
     const siderScrollContainerTransformStyle =
-      this.siderOnRight && this.collapseMode === 'transform'
+      !this.siderOnLeft && this.collapseMode === 'transform'
         ? 'translateX(' +
           (
             parseInt(formatLength(this.width)) - parseInt(this.styleMaxWidth)
