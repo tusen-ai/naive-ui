@@ -20,7 +20,6 @@ batch-render
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | animated | `boolean` | `true` | Use animation when popping up. |
-| showArrow | `boolean` | `false` | Whether is supports arrow |
 | inverted | `boolean` | `false` | Use inverted style. |
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. (Be careful about the potential conflicts with other components keyboard operations) |
 | options | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | `[]` | Options of the dropdown. |
