@@ -28,6 +28,7 @@ export const formItemInjectionKey: InjectionKey<FormItemInjection> =
 interface UseFormItemOptions<T> {
   defaultSize?: FormItemSize
   mergedSize?: (formItem: FormItemInjection | null) => T
+  mergedDisabled?: (formItem: FormItemInjection | null) => boolean
 }
 
 interface UseFormItemProps<T> {
@@ -46,7 +47,11 @@ export interface UseFormItem<T> {
 
 export default function useFormItem<T extends AllowedSize = FormItemSize> (
   props: UseFormItemProps<T>,
-  { defaultSize = 'medium', mergedSize }: UseFormItemOptions<T> = {}
+  {
+    defaultSize = 'medium',
+    mergedSize,
+    mergedDisabled
+  }: UseFormItemOptions<T> = {}
 ): UseFormItem<T> {
   const NFormItem = inject(formItemInjectionKey, null)
   provide(formItemInjectionKey, null)
@@ -65,16 +70,20 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
           return defaultSize as T
         }
   )
-  const mergedDisabledRef = computed(() => {
-    const { disabled } = props
-    if (disabled !== undefined) {
-      return disabled
-    }
-    if (NFormItem) {
-      return NFormItem.disabled.value
-    }
-    return false
-  })
+  const mergedDisabledRef = computed(
+    mergedDisabled
+      ? () => mergedDisabled(NFormItem)
+      : () => {
+          const { disabled } = props
+          if (disabled !== undefined) {
+            return disabled
+          }
+          if (NFormItem) {
+            return NFormItem.disabled.value
+          }
+          return false
+        }
+  )
   onBeforeUnmount(() => {
     if (NFormItem) {
       NFormItem.restoreValidation()

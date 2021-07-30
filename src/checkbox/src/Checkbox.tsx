@@ -93,10 +93,41 @@ export default defineComponent({
           if (mergedSize !== undefined) return mergedSize.value
         }
         return 'medium'
+      },
+      mergedDisabled (NFormItem) {
+        const { disabled } = props
+        if (disabled !== undefined) return disabled
+        if (NCheckboxGroup) {
+          if (NCheckboxGroup.disabledRef.value) return true
+          const {
+            maxRef: { value: max },
+            checkedCountRef
+          } = NCheckboxGroup
+          if (
+            max !== undefined &&
+            checkedCountRef.value >= max &&
+            !renderedCheckedRef.value
+          ) {
+            return true
+          }
+          const {
+            minRef: { value: min }
+          } = NCheckboxGroup
+          if (
+            min !== undefined &&
+            checkedCountRef.value <= min &&
+            renderedCheckedRef.value
+          ) {
+            return true
+          }
+        }
+        if (NFormItem) {
+          return NFormItem.disabled.value
+        }
+        return false
       }
     })
-    const { mergedSizeRef, mergedDisabledRef: mergedFormItemDisabledRef } =
-      formItem
+    const { mergedDisabledRef, mergedSizeRef } = formItem
     const NCheckboxGroup = inject(checkboxGroupInjectionKey, null)
     const uncontrolledCheckedRef = ref(props.defaultChecked)
     const controlledCheckedRef = toRef(props, 'checked')
@@ -114,37 +145,6 @@ export default defineComponent({
       } else {
         return mergedCheckedRef.value
       }
-    })
-    const mergedDisabledRef = useMemo(() => {
-      if (props.disabled) return true
-      if (NCheckboxGroup) {
-        if (NCheckboxGroup.disabledRef.value) return true
-        const {
-          maxRef: { value: max },
-          checkedCountRef
-        } = NCheckboxGroup
-        if (
-          max !== undefined &&
-          checkedCountRef.value >= max &&
-          !renderedCheckedRef.value
-        ) {
-          return true
-        }
-        const {
-          minRef: { value: min }
-        } = NCheckboxGroup
-        if (
-          min !== undefined &&
-          checkedCountRef.value <= min &&
-          renderedCheckedRef.value
-        ) {
-          return true
-        }
-      }
-      if (formItem) {
-        return mergedFormItemDisabledRef.value
-      }
-      return false
     })
     const themeRef = useTheme(
       'Checkbox',
