@@ -92,8 +92,6 @@ const dropdownBaseProps = {
     type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
     default: 'medium'
   },
-  showArrow: Boolean,
-  arrowStyle: [String, Object] as PropType<string | CSSProperties>,
   inverted: Boolean,
   placement: {
     type: String as PropType<FollowerPlacement>,
@@ -394,9 +392,7 @@ export default defineComponent({
         class: [
           className,
           `${mergedClsPrefix}-dropdown`,
-          {
-            [`${mergedClsPrefix}-popover--show-arrow`]: this.showArrow
-          }
+          this.showArrow && `${mergedClsPrefix}-popover--show-arrow`
         ],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,

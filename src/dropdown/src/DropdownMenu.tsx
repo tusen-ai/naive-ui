@@ -10,6 +10,7 @@ import {
   CSSProperties
 } from 'vue'
 import { TreeNode } from 'treemate'
+import { renderArrow } from '../../popover/src/PopoverBody'
 import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider'
 import NDropdownGroup from './DropdownGroup'
@@ -20,7 +21,6 @@ import {
   DropdownIgnoredOption,
   DropdownOption
 } from './interface'
-import { renderArrow } from '../../popover/src/PopoverBody'
 
 export interface NDropdownMenuInjection {
   showIconRef: Ref<boolean>
@@ -33,10 +33,7 @@ export const dropdownMenuInjectionKey: InjectionKey<NDropdownMenuInjection> =
 export default defineComponent({
   name: 'DropdownMenu',
   props: {
-    showArrow: {
-      type: Boolean,
-      required: false
-    },
+    showArrow: Boolean,
     arrowStyle: [String, Object] as PropType<string | CSSProperties>,
     clsPrefix: {
       type: String,
@@ -85,12 +82,7 @@ export default defineComponent({
     })
   },
   render () {
-    const { parentKey, clsPrefix, showArrow, arrowStyle } = this
-    const arrowWrapParams = {
-      clsPrefix,
-      showArrow,
-      arrowStyle
-    }
+    const { parentKey, clsPrefix } = this
     return (
       <div class={`${clsPrefix}-dropdown-menu`}>
         {this.tmNodes.map((tmNode) => {
@@ -116,7 +108,12 @@ export default defineComponent({
             />
           )
         })}
-        {renderArrow(arrowWrapParams)}
+        {this.showArrow
+          ? renderArrow({
+            clsPrefix,
+            arrowStyle: this.arrowStyle
+          })
+          : null}
       </div>
     )
   }
