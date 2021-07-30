@@ -8,6 +8,7 @@
 basic
 trigger
 cascade
+arrow
 placement
 size
 manual-position

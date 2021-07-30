@@ -8,6 +8,7 @@ When you have some functions to trigger.
 basic
 trigger
 cascade
+arrow
 placement
 size
 manual-position

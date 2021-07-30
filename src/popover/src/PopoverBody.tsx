@@ -58,6 +58,27 @@ export const popoverBodyProps = {
   maxWidth: Number
 }
 
+interface arrowWrapProps {
+  showArrow: boolean
+  arrowStyle?: string | CSSProperties
+  clsPrefix: string
+}
+
+export const renderArrow = ({
+  showArrow,
+  arrowStyle,
+  clsPrefix
+}: arrowWrapProps): VNode | null => {
+  if (showArrow) {
+    return h(
+      'div',
+      { key: '__popover-arrow__', class: `${clsPrefix}-popover-arrow-wrapper` },
+      h('div', { class: `${clsPrefix}-popover-arrow`, style: arrowStyle })
+    )
+  }
+  return null
+}
+
 export default defineComponent({
   name: 'PopoverBody',
   inheritAttrs: false,
@@ -206,6 +227,11 @@ export default defineComponent({
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       if (!renderBody) {
         const { value: extraClass } = NPopover.extraClassRef
+        const arrowWrapParams = {
+          showArrow: props.showArrow,
+          arrowStyle: props.arrowStyle,
+          clsPrefix: mergedClsPrefix
+        }
         contentNode = h(
           'div',
           mergeProps(
@@ -238,17 +264,7 @@ export default defineComponent({
             ) : (
               renderSlot(slots, 'default')
             ),
-            props.showArrow ? (
-              <div
-                class={`${mergedClsPrefix}-popover-arrow-wrapper`}
-                key="__popover-arrow__"
-              >
-                <div
-                  class={`${mergedClsPrefix}-popover-arrow`}
-                  style={props.arrowStyle}
-                />
-              </div>
-            ) : null
+            renderArrow(arrowWrapParams)
           ]
         )
       } else {
