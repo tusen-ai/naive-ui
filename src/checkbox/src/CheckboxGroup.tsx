@@ -19,7 +19,7 @@ export interface CheckboxGroupInjection {
   checkedCountRef: ComputedRef<number>
   maxRef: Ref<number | undefined>
   minRef: Ref<number | undefined>
-  disabledRef: Ref<boolean | undefined>
+  disabledRef: Ref<boolean>
   valueSetRef: Ref<Set<string | number>>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
   toggleCheckbox: (checked: boolean, checkboxValue: string | number) => void

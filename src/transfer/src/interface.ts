@@ -24,7 +24,7 @@ export type Filter = (
 export interface TransferInjection {
   mergedClsPrefixRef: Ref<string>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
-  disabledRef: Ref<boolean | undefined>
+  disabledRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<TransferTheme>>
   srcCheckedValuesRef: Ref<OptionValue[]>
   tgtCheckedValuesRef: Ref<OptionValue[]>

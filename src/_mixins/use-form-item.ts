@@ -13,7 +13,7 @@ type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | number
 
 export interface FormItemInjection {
   path: Ref<string | undefined>
-  disabled: Ref<boolean | undefined>
+  disabled: Ref<boolean>
   mergedSize: ComputedRef<FormItemSize>
   restoreValidation: () => void
   handleContentBlur: () => void
@@ -37,7 +37,7 @@ interface UseFormItemProps<T> {
 
 export interface UseFormItem<T> {
   mergedSizeRef: ComputedRef<T>
-  mergedDisabledRef: ComputedRef<boolean | undefined>
+  mergedDisabledRef: ComputedRef<boolean>
   nTriggerFormBlur: () => void
   nTriggerFormChange: () => void
   nTriggerFormFocus: () => void
@@ -69,9 +69,11 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
     const { disabled } = props
     if (disabled !== undefined) {
       return disabled
-    } else {
-      return NFormItem?.disabled.value
     }
+    if (NFormItem) {
+      return NFormItem.disabled.value
+    }
+    return false
   })
   onBeforeUnmount(() => {
     if (NFormItem) {

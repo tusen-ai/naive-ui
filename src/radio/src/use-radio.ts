@@ -54,7 +54,7 @@ export interface RadioGroupInjection {
   nameRef: Ref<string | undefined>
   valueRef: Ref<string | number | null>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
-  disabledRef: Ref<boolean | undefined>
+  disabledRef: Ref<boolean>
   doUpdateValue: (value: string | number) => void
 }
 
@@ -66,7 +66,7 @@ export interface UseRadio {
   inputRef: Ref<HTMLElement | null>
   labelRef: Ref<HTMLElement | null>
   mergedName: Ref<string | undefined>
-  mergedDisabled: Ref<boolean | undefined>
+  mergedDisabled: Ref<boolean>
   uncontrolledChecked: Ref<boolean>
   renderSafeChecked: Ref<boolean>
   focus: Ref<boolean>

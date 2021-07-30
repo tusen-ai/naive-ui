@@ -420,7 +420,7 @@ export default defineComponent({
     provide(uploadInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
-      disabledRef: toRef(props, 'disabled'),
+      disabledRef: mergedDisabledRef,
       showCancelButtonRef: toRef(props, 'showCancelButton'),
       showDownloadButtonRef: toRef(props, 'showDownloadButton'),
       showRemoveButtonRef: toRef(props, 'showRemoveButton'),
