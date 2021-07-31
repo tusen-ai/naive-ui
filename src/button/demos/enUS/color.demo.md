@@ -57,10 +57,11 @@ The two colors look like toadstool.
 
 ```js
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   components: {
     CashIcon
   }
-}
+})
 ```

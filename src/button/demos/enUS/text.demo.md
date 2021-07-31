@@ -15,10 +15,11 @@ Just look like text.
 
 ```js
 import { TrainOutline as TrainIcon } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   components: {
     TrainIcon
   }
-}
+})
 ```
