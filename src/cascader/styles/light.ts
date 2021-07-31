@@ -18,8 +18,7 @@ export const self = (vars: ThemeCommonVars) => {
     dividerColor,
     hoverColor,
     fontSizeMedium,
-    heightMedium,
-    columnWidth
+    heightMedium
   } = vars
   return {
     menuBorderRadius: borderRadius,
@@ -36,7 +35,7 @@ export const self = (vars: ThemeCommonVars) => {
     optionTextColorDisabled: textColorDisabled,
     optionCheckMarkColor: primaryColor,
     loadingColor: primaryColor,
-    columnWidth
+    columnWidth: '180px'
   }
 }
 

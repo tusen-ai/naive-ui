@@ -27,7 +27,6 @@ virtual
 | filter | `(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean` | A string based filter algorithm. | Filter function of the cascader. |
 | leaf-only | `boolean` | `false` | If only allow value of leaf node to be in `value`. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple mode. `responsive` will keep all the tags in single line. |
-| menu-width | `string \| number` | `180px` | Menu options's width. |
 | multiple | `boolean` | `false` | Whether to support multiple selection. |
 | options | `Array<CascaderOption>` | required | Options of the cascader. |
 | placeholder | `string` | `'Please Select'` | Prompt information. |

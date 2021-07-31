@@ -70,7 +70,7 @@ export default defineComponent({
     return (
       <div
         class={[
-          virtualScroll && `${mergedClsPrefix}-cascader-column-submenu`,
+          virtualScroll && `${mergedClsPrefix}-cascader-submenu--virtual`,
           `${mergedClsPrefix}-cascader-submenu`
         ]}
       >

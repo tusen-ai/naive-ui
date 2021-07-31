@@ -22,8 +22,6 @@ export default {
 
   lineHeight: '1.6',
 
-  columnWidth: '180px',
-
   heightTiny: '22px',
   heightSmall: '28px',
   heightMedium: '34px',

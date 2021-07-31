@@ -52,9 +52,9 @@ export default c([
       min-width: 180px;
       position: relative;
     `, [
-      c('&.n-cascader-column-submenu', `
-      width: var(--column-width);
-    `),
+      c('&.n-cascader-submenu--virtual', `
+        width: var(--column-width);
+      `),
       cB('scrollbar-content', {
         position: 'relative'
       }),

@@ -354,7 +354,6 @@ export default defineComponent({
     const showSelectMenuRef = computed(() => {
       return !!(props.filterable && patternRef.value)
     })
-
     // --- methods
     function doBlur (e: FocusEvent): void {
       const { onBlur } = props

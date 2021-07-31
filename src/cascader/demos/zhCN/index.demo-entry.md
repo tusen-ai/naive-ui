@@ -24,10 +24,9 @@ virtual
 | disabled | `boolean` | `false` | 是否禁用 |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | 在 `remote` 被设定时 `'hover'` 不生效 |
 | filterable | `boolean` | `false` | `remote` 被设定时不生效 |
-| filter | `(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean` | 一个基于字符串的过滤算法 |  过滤选项的函数 |
+| filter | `(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean` | 一个基于字符串的过滤算法 | 过滤选项的函数 |
 | leaf-only | `boolean` | `false` | 是否只允许 `value` 出现叶节点的值 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |
-| menu-width | `string \| number` | `180px` | 菜单栏的宽度 |
 | multiple | `boolean` | `false` | 是否支持多选 |
 | options | `Array<CascaderOption>` | `[]` | 填充的 options 数据 |
 | placeholder | `string` | `'请选择'` | 提示信息 |
