@@ -89,10 +89,11 @@ Button can be grouped.
 
 ```js
 import { LogInOutline as LogInIcon } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   components: {
     LogInIcon
   }
-}
+})
 ```
