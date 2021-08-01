@@ -17,6 +17,7 @@
 ### Fixes
 
 - Fix `n-dropdown` click exception when using v-for.
+- Fix `n-color-picker` `on-complete` callback parameter `value` update error. closes [#748](https://github.com/TuSimple/naive-ui/issues/748).
 
 ## 2.15.11 (2021-07-29)
 

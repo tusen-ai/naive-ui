@@ -17,6 +17,7 @@
 ### Fixes
 
 - 修复 `n-dropdown` 循环渲染时点击异常
+- 修复 `n-color-picker` `on-complete` 回调参数 `value` 更新异常
 
 ## 2.15.11 (2021-07-29)
 
