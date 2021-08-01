@@ -13,11 +13,13 @@ Words' sizing would be auto adjusted in avatar.
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: 'Oasis'
+      value: ref('Oasis')
     }
   }
-}
+})
 ```

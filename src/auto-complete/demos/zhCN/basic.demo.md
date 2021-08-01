@@ -5,22 +5,23 @@
 ```
 
 ```js
-export default {
-  computed: {
-    options () {
-      return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
-        const prefix = this.value.split('@')[0]
-        return {
-          label: prefix + suffix,
-          value: prefix + suffix
-        }
+import { defineComponent, ref, computed } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const valueRef = ref('')
+    return {
+      value: valueRef,
+      options: computed(() => {
+        return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
+          const prefix = valueRef.value.split('@')[0]
+          return {
+            label: prefix + suffix,
+            value: prefix + suffix
+          }
+        })
       })
     }
-  },
-  data () {
-    return {
-      value: ''
-    }
   }
-}
+})
 ```
