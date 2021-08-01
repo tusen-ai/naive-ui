@@ -18,6 +18,7 @@
 ### Fixes
 
 - Fix `n-dropdown` click exception when using v-for.
+- Fix `n-modal` cannot customize classes when use preset, closes [#744](https://github.com/TuSimple/naive-ui/issues/744).
 - Fix `n-cascader` menu width shifts in virtual scroll mode, closes [#728](https://github.com/TuSimple/naive-ui/issues/728).
 - Fix `n-input` type of `type` errors.
 
