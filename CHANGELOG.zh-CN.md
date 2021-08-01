@@ -17,6 +17,7 @@
 ### Fixes
 
 - 修复 `n-dropdown` 循环渲染时点击异常
+- 修复 `n-modal` 使用预设时无法自定义类，关闭 [#744](https://github.com/TuSimple/naive-ui/issues/744)
 
 ## 2.15.11 (2021-07-29)
 

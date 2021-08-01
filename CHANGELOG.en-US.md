@@ -17,6 +17,7 @@
 ### Fixes
 
 - Fix `n-dropdown` click exception when using v-for.
+- Fix `n-modal` cannot customize classes when use preset, closes [#744](https://github.com/TuSimple/naive-ui/issues/744).
 
 ## 2.15.11 (2021-07-29)
 
