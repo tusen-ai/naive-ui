@@ -30,7 +30,7 @@ describe('n-input', () => {
   it('should work with `type` prop', async () => {
     const wrapper = mount(NInput)
     await wrapper.setProps({ type: 'text' })
-    expect(wrapper.find('input').exists().toBe(true))
+    expect(wrapper.find('input').exists()).toBe(true)
 
     await wrapper.setProps({ type: 'textarea' })
     expect(wrapper.find('.n-input').classes()).toContain('n-input--textarea')
