@@ -5,7 +5,7 @@
 ```html
 <n-space vertical>
   <n-input
-    type="input"
+    type="text"
     size="small"
     placeholder="噢！它被禁用了。"
     :disabled="!active"

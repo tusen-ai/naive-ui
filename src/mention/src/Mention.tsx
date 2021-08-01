@@ -45,8 +45,8 @@ const mentionProps = {
     default: []
   },
   type: {
-    type: String as PropType<'input' | 'textarea'>,
-    default: 'input'
+    type: String as PropType<'text' | 'textarea'>,
+    default: 'text'
   },
   separator: {
     type: String,
@@ -181,7 +181,7 @@ export default defineComponent({
       uncontrolledValueRef.value = value
     }
     function getInputEl (): HTMLInputElement | HTMLTextAreaElement {
-      return props.type === 'input'
+      return props.type === 'text'
         ? inputInstRef.value!.inputElRef!
         : inputInstRef.value!.textareaElRef!
     }

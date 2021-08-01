@@ -13,11 +13,14 @@
 - `n-menu` 新增 `render-extra` 属性
 - `n-select` 新增 `on-clear` 属性
 - `n-form` 增加 `disabled` 属性，关闭 [#538](https://github.com/TuSimple/naive-ui/issues/538)
+- `n-dynamic-tags` 新增 `max` 属性
 
 ### Fixes
 
 - 修复 `n-dropdown` 循环渲染时点击异常
 - 修复 `n-modal` 使用预设时无法自定义类，关闭 [#744](https://github.com/TuSimple/naive-ui/issues/744)
+- 修复 `n-cascader` 的菜单虚拟滚动时宽度展示不一致问题，关闭 [#728](https://github.com/TuSimple/naive-ui/issues/728)
+- 修复 `n-input` 的 `type` 类型错误
 
 ## 2.15.11 (2021-07-29)
 
