@@ -49,10 +49,10 @@ export default c([
     `),
     cB('cascader-submenu', `
       height: var(--menu-height);
-      min-width: 180px;
+      min-width: var(--column-width);
       position: relative;
     `, [
-      c('&.n-cascader-submenu--virtual', `
+      cM('virtual', `
         width: var(--column-width);
       `),
       cB('scrollbar-content', {
