@@ -391,7 +391,7 @@ export default defineComponent({
     }
 
     function handleComplete (pushStack: boolean = true): void {
-      const { value } = mergedValueRef
+      const { value } = uncontrolledValueRef
       // no value & only hue changes will complete with no value
       if (value) {
         const { nTriggerFormChange, nTriggerFormInput } = formItem
