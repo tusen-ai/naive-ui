@@ -4,7 +4,7 @@
 
 ```html
 <n-space vertical>
-  <n-input type="input" placeholder="可以清除" clearable />
+  <n-input type="text" placeholder="可以清除" clearable />
   <n-input type="password" placeholder="可以清除" clearable />
   <n-input type="textarea" placeholder="可以清除" round clearable />
 </n-space>

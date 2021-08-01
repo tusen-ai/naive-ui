@@ -17,6 +17,7 @@
 ### Fixes
 
 - Fix `n-dropdown` click exception when using v-for.
+- Fix `n-input` type of `type` errors.
 
 ## 2.15.11 (2021-07-29)
 
