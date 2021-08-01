@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.16.0 (2021-08-02)
 
 ### Breaking Changes
 
