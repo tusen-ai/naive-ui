@@ -13,11 +13,13 @@
 - `n-menu` add `render-extra` prop.
 - `n-select` add `on-clear` prop.
 - `n-form` add `disabled` prop, closes [#538](https://github.com/TuSimple/naive-ui/issues/538).
+- `n-dynamic-tags` add `max` prop.
 
 ### Fixes
 
 - Fix `n-dropdown` click exception when using v-for.
 - Fix `n-cascader` menu width shifts in virtual scroll mode, closes [#728](https://github.com/TuSimple/naive-ui/issues/728).
+- Fix `n-input` type of `type` errors.
 
 ## 2.15.11 (2021-07-29)
 

@@ -39,6 +39,7 @@ const dynamicTagsProps = {
   },
   value: Array as PropType<string[]>,
   inputStyle: [String, Object] as PropType<string | CSSProperties>,
+  max: Number as PropType<number>,
   tagStyle: [String, Object] as PropType<string | CSSProperties>,
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -236,6 +237,7 @@ export default defineComponent({
                 ) : (
                   <NButton
                     dashed
+                    disabled={!!this.max && this.mergedValue.length >= this.max}
                     theme={mergedTheme.peers.Button}
                     themeOverrides={mergedTheme.peerOverrides.Button}
                     size={inputSize}
