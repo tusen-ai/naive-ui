@@ -5,6 +5,7 @@
 ### Breaking Changes
 
 - `useLoadingBar`'s `finish` method won't work if no `start` is called.
+- `n-input`'s `type='input'` is renamed to `type='text'`.
 
 ### Feats
 
@@ -20,7 +21,6 @@
 - Fix `n-dropdown` click exception when using v-for.
 - Fix `n-modal` cannot customize classes when use preset, closes [#744](https://github.com/TuSimple/naive-ui/issues/744).
 - Fix `n-cascader` menu width shifts in virtual scroll mode, closes [#728](https://github.com/TuSimple/naive-ui/issues/728).
-- Fix `n-input` type of `type` errors.
 
 ## 2.15.11 (2021-07-29)
 

@@ -5,6 +5,7 @@
 ### Breaking Changes
 
 - `useLoadingBar` 中 `finish` 方法只有在调用过 `start` 后才生效
+- `n-input` 的 `type='input'` 被重命名为 `type='text'`
 
 ### Feats
 
@@ -20,7 +21,6 @@
 - 修复 `n-dropdown` 循环渲染时点击异常
 - 修复 `n-modal` 使用预设时无法自定义类，关闭 [#744](https://github.com/TuSimple/naive-ui/issues/744)
 - 修复 `n-cascader` 的菜单虚拟滚动时宽度展示不一致问题，关闭 [#728](https://github.com/TuSimple/naive-ui/issues/728)
-- 修复 `n-input` 的 `type` 类型错误
 
 ## 2.15.11 (2021-07-29)
 
