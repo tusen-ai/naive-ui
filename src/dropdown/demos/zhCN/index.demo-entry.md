@@ -8,6 +8,7 @@
 basic
 trigger
 cascade
+arrow
 placement
 size
 manual-position
@@ -29,7 +30,7 @@ batch-render
 | on-clickoutside | `(e: MouseEvent) => void` | `undefined` | clickoutside 的时候触发的回调函数 |
 | on-select | `(key: string \| number) => void` | `undefined` | select 选中时触发的回调函数 |
 
-对于其他 Props，例如 `placement`，请参考 [Popover Props](popover#Props)。注意 `arrow`、`raw` 属性不可用。
+对于其他 Props，例如 `placement`，请参考 [Popover Props](popover#Props)。注意 `raw` 属性不可用。
 
 ### DropdownOption Type
 

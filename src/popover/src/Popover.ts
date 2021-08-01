@@ -10,7 +10,8 @@ import {
   CSSProperties,
   ComputedRef,
   Ref,
-  toRef
+  toRef,
+  cloneVNode
 } from 'vue'
 import { VBinder, VTarget, FollowerPlacement } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
@@ -396,6 +397,7 @@ export default defineComponent({
         triggerVNode = getFirstSlotVNode(slots, 'trigger')
       }
       if (triggerVNode) {
+        triggerVNode = cloneVNode(triggerVNode)
         triggerVNode =
           triggerVNode.type === textVNodeType
             ? h('span', [triggerVNode])

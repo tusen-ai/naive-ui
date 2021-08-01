@@ -36,8 +36,7 @@ export interface TransferInjection {
   handleTgtCheckboxClick: (checked: boolean, value: OptionValue) => void
 }
 
-export const transferInjectionKey: InjectionKey<TransferInjection> = Symbol(
-  'transfer'
-)
+export const transferInjectionKey: InjectionKey<TransferInjection> =
+  Symbol('transfer')
 
 export type OnUpdateValue = (value: OptionValue[]) => void

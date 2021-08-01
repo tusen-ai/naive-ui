@@ -154,6 +154,9 @@ const derived: ThemeCommonVars = {
 
   scrollbarColor: overlay(base.alphaScrollbar),
   scrollbarColorHover: overlay(base.alphaScrollbarHover),
+  scrollbarWidth: '5px',
+  scrollbarHeight: '5px',
+  scrollbarBorderRadius: '5px',
 
   progressRailColor: overlay(base.alphaProgressRail),
   railColor: overlay(base.alphaRail),

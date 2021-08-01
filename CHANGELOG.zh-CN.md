@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## 2.16.0 (2021-08-02)
+
+### Breaking Changes
+
+- `useLoadingBar` 中 `finish` 方法只有在调用过 `start` 后才生效
+- `n-input` 的 `type='input'` 被重命名为 `type='text'`
+
+### Feats
+
+- `n-scrollbar` 增加 `scrollbarWidth`、`scrollbarHeight` 和　`scrollbarBorderRadius`　公共主题变量，关闭 [#649](https://github.com/TuSimple/naive-ui/issues/649)
+- `n-menu` 在 `render-icon` 返回 falsy 值的时候不渲染 icon 的占位符，关闭 [#722](https://github.com/TuSimple/naive-ui/issues/722)
+- `n-menu` 新增 `render-extra` 属性
+- `n-select` 新增 `on-clear` 属性
+- `n-form` 增加 `disabled` 属性，关闭 [#538](https://github.com/TuSimple/naive-ui/issues/538)
+- `n-dynamic-tags` 新增 `max` 属性
+
+### Fixes
+
+- 修复 `n-dropdown` 循环渲染时点击异常
+- 修复 `n-modal` 使用预设时无法自定义类，关闭 [#744](https://github.com/TuSimple/naive-ui/issues/744)
+- 修复 `n-cascader` 的菜单虚拟滚动时宽度展示不一致问题，关闭 [#728](https://github.com/TuSimple/naive-ui/issues/728)
+
 ## 2.15.11 (2021-07-29)
 
 ### Fixes
@@ -49,6 +71,7 @@
 
 ### Feats
 
+- `n-dropdown` 选项新增 `show-arrow`属性，关闭 [#647](https://github.com/TuSimple/naive-ui/issues/647)
 - `n-time-picker` 增加 `actions` 属性, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
 - `n-mention` 新增 `render-label` 属性
 - `n-switch` 增加 `checked`、`unchecked` 插槽

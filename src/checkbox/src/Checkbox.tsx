@@ -36,7 +36,10 @@ const checkboxProps = {
   },
   defaultChecked: Boolean,
   value: [String, Number] as PropType<string | number>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   indeterminate: Boolean,
   label: String,
   focusable: {
@@ -75,6 +78,56 @@ export default defineComponent({
   props: checkboxProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
+    const formItem = useFormItem(props, {
+      mergedSize (NFormItem) {
+        const { size } = props
+        if (size !== undefined) return size
+        if (NCheckboxGroup) {
+          const { value: mergedSize } = NCheckboxGroup.mergedSizeRef
+          if (mergedSize !== undefined) {
+            return mergedSize
+          }
+        }
+        if (NFormItem) {
+          const { mergedSize } = NFormItem
+          if (mergedSize !== undefined) return mergedSize.value
+        }
+        return 'medium'
+      },
+      mergedDisabled (NFormItem) {
+        const { disabled } = props
+        if (disabled !== undefined) return disabled
+        if (NCheckboxGroup) {
+          if (NCheckboxGroup.disabledRef.value) return true
+          const {
+            maxRef: { value: max },
+            checkedCountRef
+          } = NCheckboxGroup
+          if (
+            max !== undefined &&
+            checkedCountRef.value >= max &&
+            !renderedCheckedRef.value
+          ) {
+            return true
+          }
+          const {
+            minRef: { value: min }
+          } = NCheckboxGroup
+          if (
+            min !== undefined &&
+            checkedCountRef.value <= min &&
+            renderedCheckedRef.value
+          ) {
+            return true
+          }
+        }
+        if (NFormItem) {
+          return NFormItem.disabled.value
+        }
+        return false
+      }
+    })
+    const { mergedDisabledRef, mergedSizeRef } = formItem
     const NCheckboxGroup = inject(checkboxGroupInjectionKey, null)
     const uncontrolledCheckedRef = ref(props.defaultChecked)
     const controlledCheckedRef = toRef(props, 'checked')
@@ -93,52 +146,6 @@ export default defineComponent({
         return mergedCheckedRef.value
       }
     })
-    const mergedDisabledRef = useMemo(() => {
-      if (props.disabled) return true
-      if (NCheckboxGroup) {
-        if (NCheckboxGroup.disabledRef.value) return true
-        const {
-          maxRef: { value: max },
-          checkedCountRef
-        } = NCheckboxGroup
-        if (
-          max !== undefined &&
-          checkedCountRef.value >= max &&
-          !renderedCheckedRef.value
-        ) {
-          return true
-        }
-        const {
-          minRef: { value: min }
-        } = NCheckboxGroup
-        if (
-          min !== undefined &&
-          checkedCountRef.value <= min &&
-          renderedCheckedRef.value
-        ) {
-          return true
-        }
-      }
-      return false
-    })
-    const formItem = useFormItem(props, {
-      mergedSize (NFormItem) {
-        const { size } = props
-        if (size !== undefined) return size
-        if (NCheckboxGroup) {
-          const { value: mergedSize } = NCheckboxGroup.mergedSizeRef
-          if (mergedSize !== undefined) {
-            return mergedSize
-          }
-        }
-        if (NFormItem) {
-          const { mergedSize } = NFormItem
-          if (mergedSize !== undefined) return mergedSize.value
-        }
-        return 'medium'
-      }
-    })
-    const { mergedSizeRef } = formItem
     const themeRef = useTheme(
       'Checkbox',
       'Checkbox',
