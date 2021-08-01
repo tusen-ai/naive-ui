@@ -13,6 +13,7 @@
 - `n-menu` add `render-extra` prop.
 - `n-select` add `on-clear` prop.
 - `n-form` add `disabled` prop, closes [#538](https://github.com/TuSimple/naive-ui/issues/538).
+- `n-dynamic-tags` add `max` prop.
 
 ### Fixes
 

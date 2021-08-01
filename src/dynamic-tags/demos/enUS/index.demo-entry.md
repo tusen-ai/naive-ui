@@ -6,6 +6,7 @@ Make tags inputable.
 
 ```demo
 basic
+max
 form
 ```
 
@@ -18,6 +19,7 @@ form
 | default-value | `string[]` | `[]` | Default value in uncontrolled mode. |
 | disabled | `boolean` | `false` | Whether the tag is disabled. |
 | input-style | `string \| Object` | `undefined` | Customize the style of the input. |
+| max | `number` | `undefined` | Maximum number of tags. |
 | round | `boolean` | `false` | Whether the tag has round corner. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |
 | tag-style | `string \| Object` | `undefined` | Customize the style of the tag. |
