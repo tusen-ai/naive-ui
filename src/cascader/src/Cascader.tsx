@@ -737,7 +737,8 @@ export default defineComponent({
             optionColorHover,
             optionHeight,
             optionFontSize,
-            loadingColor
+            loadingColor,
+            columnWidth
           },
           common: { cubicBezierEaseInOut }
         } = themeRef.value
@@ -746,6 +747,7 @@ export default defineComponent({
           '--menu-border-radius': menuBorderRadius,
           '--menu-box-shadow': menuBoxShadow,
           '--menu-height': menuHeight,
+          '--column-width': columnWidth,
           '--menu-color': menuColor,
           '--menu-divider-color': menuDividerColor,
           '--option-height': optionHeight,

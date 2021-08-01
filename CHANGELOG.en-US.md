@@ -18,6 +18,7 @@
 ### Fixes
 
 - Fix `n-dropdown` click exception when using v-for.
+- Fix `n-cascader` menu width shifts in virtual scroll mode, closes [#728](https://github.com/TuSimple/naive-ui/issues/728).
 - Fix `n-input` type of `type` errors.
 
 ## 2.15.11 (2021-07-29)

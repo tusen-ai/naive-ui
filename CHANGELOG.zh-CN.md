@@ -18,6 +18,7 @@
 ### Fixes
 
 - 修复 `n-dropdown` 循环渲染时点击异常
+- 修复 `n-cascader` 的菜单虚拟滚动时宽度展示不一致问题，关闭 [#728](https://github.com/TuSimple/naive-ui/issues/728)
 - 修复 `n-input` 的 `type` 类型错误
 
 ## 2.15.11 (2021-07-29)
