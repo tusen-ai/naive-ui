@@ -102,6 +102,7 @@ const dropdownBaseProps = {
     type: Array as PropType<DropdownMixedOption[]>,
     default: () => []
   },
+  showArrow: Boolean,
   // for menu, not documented
   value: [String, Number] as PropType<Key | null>,
   renderLabel: Function as PropType<RenderLabel>,
