@@ -13,6 +13,7 @@
 - `n-menu` 新增 `render-extra` 属性
 - `n-select` 新增 `on-clear` 属性
 - `n-form` 增加 `disabled` 属性，关闭 [#538](https://github.com/TuSimple/naive-ui/issues/538)
+- `n-dynamic-tags` 新增 `max` 属性
 
 ### Fixes
 
