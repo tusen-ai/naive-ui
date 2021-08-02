@@ -239,12 +239,12 @@ const Button = defineComponent({
           '--text-color-focus': 'initial',
           '--text-color-disabled': 'initial'
         }
-        const getHoverTextColor = textColor
+        const mergedTextColorTextHover = textColor
           ? createHoverColor(textColor)
           : color
             ? createHoverColor(color)
             : null
-        const getPressedTextColor = textColor
+        const mergedTextColorTextPressed = textColor
           ? createPressedColor(textColor)
           : color
             ? createPressedColor(color)
@@ -271,12 +271,14 @@ const Button = defineComponent({
             '--ripple-color': '#0000',
             '--text-color': mergeTextColor,
             '--text-color-hover':
-              getHoverTextColor || self[createKey('textColorTextHover', type)],
+              mergedTextColorTextHover ||
+              self[createKey('textColorTextHover', type)],
             '--text-color-pressed':
-              getPressedTextColor ||
+              mergedTextColorTextPressed ||
               self[createKey('textColorTextPressed', type)],
             '--text-color-focus':
-              getHoverTextColor || self[createKey('textColorTextHover', type)],
+              mergedTextColorTextHover ||
+              self[createKey('textColorTextHover', type)],
             '--text-color-disabled':
               textColor ||
               color ||
@@ -293,12 +295,14 @@ const Button = defineComponent({
             '--text-color':
               textColor || color || self[createKey('textColorGhost', type)],
             '--text-color-hover':
-              getHoverTextColor || self[createKey('textColorGhostHover', type)],
+              mergedTextColorTextHover ||
+              self[createKey('textColorGhostHover', type)],
             '--text-color-pressed':
-              getPressedTextColor ||
+              mergedTextColorTextPressed ||
               self[createKey('textColorGhostPressed', type)],
             '--text-color-focus':
-              getHoverTextColor || self[createKey('textColorGhostHover', type)],
+              mergedTextColorTextHover ||
+              self[createKey('textColorGhostHover', type)],
             '--text-color-disabled':
               textColor ||
               color ||
