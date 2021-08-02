@@ -119,7 +119,7 @@ export default defineComponent({
         const decimal = String(item).split('.')[1]
         return decimal ? decimal.length : 0
       })
-      return Math.max.apply(null, precisions)
+      return Math.max(...precisions)
     })
 
     const uncontrolledValueRef = ref(props.defaultValue)
