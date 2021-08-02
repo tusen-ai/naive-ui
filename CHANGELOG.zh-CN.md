@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-tree-select` 增加 `check-strategy` 属性.
+
 ## 2.16.0 (2021-08-02)
 
 ### Breaking Changes

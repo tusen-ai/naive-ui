@@ -22,6 +22,7 @@ import { call, createDataKey, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NxScrollbar } from '../../scrollbar'
 import type { ScrollbarInst } from '../../scrollbar'
+import { CheckStrategy } from '../../tree-select/src/interface'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
@@ -100,6 +101,7 @@ const treeProps = {
   blockLine: Boolean,
   disabled: Boolean,
   checkedKeys: Array as PropType<Key[]>,
+  checkStrategy: String as PropType<CheckStrategy>,
   defaultCheckedKeys: {
     type: Array as PropType<Key[]>,
     default: () => []
@@ -515,13 +517,63 @@ export default defineComponent({
       if (props.disabled || node.disabled) {
         return
       }
-      const { checkedKeys } = dataTreeMateRef.value![
-        checked ? 'check' : 'uncheck'
-      ](node.key, displayedCheckedKeysRef.value, {
-        cascade: props.cascade,
-        leafOnly: props.leafOnly
-      })
-      doUpdateCheckedKeys(checkedKeys)
+      const res = dataTreeMateRef.value![checked ? 'check' : 'uncheck'](
+        node.key,
+        displayedCheckedKeysRef.value,
+        {
+          cascade: props.cascade,
+          leafOnly: props.leafOnly
+        }
+      )
+      const result = handleCheckStrategy(res)
+      doUpdateCheckedKeys(result)
+    }
+    const handleCheckStrategy = (res: {
+      checkedKeys: Key[]
+      indeterminateKeys: Key[]
+    }): Key[] => {
+      let result: Key[] = []
+      switch (props.checkStrategy) {
+        case 'SHOW_ALL':
+          result = res.checkedKeys
+          break
+        case 'SHOW_CHILD':
+          res.checkedKeys.forEach((v) => {
+            const node = dataTreeMateRef.value!.getNode(v)
+            if (node?.isLeaf) {
+              result.push(v)
+            }
+          })
+          break
+        case 'SHOW_PARENT':
+          res.checkedKeys.forEach((v) => {
+            const node = dataTreeMateRef.value!.getNode(v)
+            if (node !== null) {
+              const flag = isContainChild(node, res.indeterminateKeys)
+              if (node?.parent === null || !flag) {
+                result.push(v)
+              }
+            }
+          })
+          break
+        default:
+          result = res.checkedKeys
+          break
+      }
+      return result
+    }
+    const isContainChild = (
+      node: TmNode,
+      indeterminateKeys: Key[]
+    ): boolean => {
+      const parent = node.parent
+      if (parent !== null) {
+        const flag = indeterminateKeys.includes(parent.key)
+        if (!flag) {
+          return true
+        }
+      }
+      return false
     }
     function toggleExpand (key: Key): void {
       if (props.disabled) return

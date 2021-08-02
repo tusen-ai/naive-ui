@@ -8,6 +8,7 @@ It's said that 99% of the people can't distinguish it from cascader.
 basic
 multiple
 checkbox
+check-strategy
 filterable
 debug
 ```
@@ -20,6 +21,7 @@ debug
 | --- | --- | --- | --- |
 | cascade | `boolean` | `false` | Whether to do cascade check when use checkboxes. |
 | checkable | `boolean` | `false` | Whether to use checkbox to select value. |
+| check-strategy | `string` | `SHOW_ALL` | set Check Strategy to show parent node or children. |
 | clearable | `boolean` | `false` | Whether it's clearable. |
 | consistent-menu-width | `boolean` | `true` | Whether to make menu's width consistent with input. Set to `true` will disable virtual scroll. |
 | default-value | `string \| number \| Array<string \| number> \| null` | `null` | Selected key (or keys when multiple) by default. |

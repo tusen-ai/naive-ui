@@ -47,7 +47,7 @@ import type {
   TreeSelectOption,
   Value
 } from './interface'
-import { treeSelectInjectionKey } from './interface'
+import { treeSelectInjectionKey, CheckStrategy } from './interface'
 import { treeOption2SelectOption, filterTree } from './utils'
 import style from './styles/index.cssr'
 
@@ -77,6 +77,7 @@ const props = {
   },
   filterable: Boolean,
   leafOnly: Boolean,
+  checkStrategy: String as PropType<CheckStrategy>,
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
   options: {
@@ -639,6 +640,7 @@ export default defineComponent({
                             mergedClsPrefix,
                             filteredTreeInfo,
                             checkable,
+                            checkStrategy,
                             multiple
                           } = this
                           return withDirectives(
@@ -670,6 +672,7 @@ export default defineComponent({
                                   checkedKeys={this.treeCheckedKeys}
                                   selectedKeys={this.treeSelectedKeys}
                                   checkable={checkable}
+                                  checkStrategy={checkStrategy}
                                   cascade={this.mergedCascade}
                                   leafOnly={this.leafOnly}
                                   multiple={this.multiple}

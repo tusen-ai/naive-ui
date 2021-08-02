@@ -8,6 +8,7 @@
 basic
 multiple
 checkbox
+check-strategy
 filterable
 debug
 ```
@@ -20,6 +21,7 @@ debug
 | --- | --- | --- | --- |
 | cascade | `boolean` | `false` | 使用 checkbox 进行多选时是否级联 |
 | checkable | `boolean` | `false` | 是否使用 checkbox 进行选择 |
+| check-strategy | `string` | `SHOW_ALL` | 设置勾选策略来指定显示勾选的子节点还是父节点 |
 | clearable | `boolean` | `false` | 是否可清除 |
 | consistent-menu-width | `boolean` | `true` | 是否使菜单宽度和输入框一致，打开会禁用虚拟滚动 |
 | default-value | `string \| number \| Array<string \| number> \| null` | `null` | 默认选中的 key |
