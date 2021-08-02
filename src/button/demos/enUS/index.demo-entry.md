@@ -58,7 +58,7 @@ icon-button
 | Name    | Parameters | Description                        |
 | ------- | ---------- | ---------------------------------- |
 | default | `()`       | The default content of the button. |
-| icon    | `()`       | The icon of the button.    |
+| icon    | `()`       | The icon of the button.            |
 
 ### Button Group Slots
 

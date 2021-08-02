@@ -33,6 +33,13 @@ const loadingBarProps = {
   to: {
     type: [String, Object] as PropType<string | HTMLElement>,
     default: undefined
+  },
+  loadingBarStyle: {
+    type: [String, Object, Function] as PropType<
+    | { loading: string, error: string }
+    | string
+    | ((type: 'error' | 'loading') => string)
+    >
   }
 }
 
@@ -49,9 +56,8 @@ export const loadingBarProviderInjectionKey: InjectionKey<{
   mergedClsPrefixRef: Ref<string>
 }> = Symbol('loadingBar')
 
-export const loadingBarApiInjectionKey: InjectionKey<LoadingBarApiInjection> = Symbol(
-  'loadingBarApi'
-)
+export const loadingBarApiInjectionKey: InjectionKey<LoadingBarApiInjection> =
+  Symbol('loadingBarApi')
 
 export default defineComponent({
   name: 'LoadingBarProvider',

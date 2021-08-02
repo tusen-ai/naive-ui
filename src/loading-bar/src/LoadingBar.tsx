@@ -35,12 +35,25 @@ export default defineComponent({
     const loadingRef = ref(false)
     const transitionDisabledRef = ref(false)
     let finishing = false
-    let erroring = false
+    const erroring = ref<boolean>(false)
+    const mergedLoadingBarStyle = computed(() => {
+      const overrideStyle = providerProps.loadingBarStyle
+      if (typeof overrideStyle === 'string') {
+        return overrideStyle
+      } else if (typeof overrideStyle === 'object') {
+        return erroring.value ? overrideStyle.error : overrideStyle.loading
+      } else if (typeof overrideStyle === 'function') {
+        return erroring.value
+          ? overrideStyle('error')
+          : overrideStyle('loading')
+      }
+      return {}
+    })
     async function init (): Promise<void> {
       enteringRef.value = false
       loadingRef.value = false
       finishing = false
-      erroring = false
+      erroring.value = false
       transitionDisabledRef.value = true
       await nextTick()
       transitionDisabledRef.value = false
@@ -73,10 +86,10 @@ export default defineComponent({
       loadingRef.value = false
     }
     function error (): void {
-      if (finishing || erroring) return
+      if (finishing || erroring.value) return
       if (!loadingRef.value) {
         void start(100, 100, 'error').then(() => {
-          erroring = true
+          erroring.value = true
           const el = loadingBarRef.value
           if (!el) return
           el.className = createClassName('error', mergedClsPrefixRef.value)
@@ -84,7 +97,7 @@ export default defineComponent({
           loadingRef.value = false
         })
       } else {
-        erroring = true
+        erroring.value = true
         const el = loadingBarRef.value
         if (!el) return
         el.className = createClassName('error', mergedClsPrefixRef.value)
@@ -122,6 +135,7 @@ export default defineComponent({
       handleEnter,
       handleAfterEnter,
       handleAfterLeave,
+      mergedLoadingBarStyle,
       cssVars: computed(() => {
         const {
           self: { height, colorError, colorLoading }
@@ -157,7 +171,10 @@ export default defineComponent({
                 <div
                   ref="loadingBarRef"
                   class={`${mergedClsPrefix}-loading-bar`}
-                  style={this.cssVars as CSSProperties}
+                  style={[
+                    this.cssVars as CSSProperties,
+                    this.mergedLoadingBarStyle as CSSProperties
+                  ]}
                 />
               </div>,
               [[vShow, this.loading || (!this.loading && this.entering)]]
