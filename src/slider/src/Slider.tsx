@@ -116,7 +116,7 @@ export default defineComponent({
     const followerRef2 = ref<FollowerInst | null>(null)
     const precision = computed(() => {
       const precisions = [props.min, props.max, props.step].map((item) => {
-        const decimal = String(item).split('.')[1]
+        const fraction = String(item).split('.')[1]
         return decimal ? decimal.length : 0
       })
       return Math.max(...precisions)
