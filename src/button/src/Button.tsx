@@ -33,6 +33,7 @@ import useRtl from '../../_mixins/use-rtl'
 const buttonProps = {
   ...(useTheme.props as ThemeProps<ButtonTheme>),
   color: String,
+  textColor: String,
   text: Boolean,
   block: Boolean,
   loading: Boolean,
@@ -214,7 +215,8 @@ const Button = defineComponent({
           fontWeight
         } = self
         const size = mergedSizeRef.value
-        const { dashed, type, ghost, text, color, round, circle } = props
+        const { dashed, type, ghost, text, color, round, circle, textColor } =
+          props
         // font
         const fontProps = {
           fontWeight: text
@@ -237,9 +239,20 @@ const Button = defineComponent({
           '--text-color-focus': 'initial',
           '--text-color-disabled': 'initial'
         }
+        const getHoverTextColor = textColor
+          ? createHoverColor(textColor)
+          : color
+            ? createHoverColor(color)
+            : null
+        const getPressedTextColor = textColor
+          ? createPressedColor(textColor)
+          : color
+            ? createPressedColor(color)
+            : null
         if (text) {
           const { depth } = props
-          const textColor =
+          const mergeTextColor =
+            textColor ||
             color ||
             (type === 'default' && depth !== undefined
               ? self[
@@ -256,18 +269,18 @@ const Button = defineComponent({
             '--color-focus': '#0000',
             '--color-disabled': '#0000',
             '--ripple-color': '#0000',
-            '--text-color': textColor,
-            '--text-color-hover': color
-              ? createHoverColor(color)
-              : self[createKey('textColorTextHover', type)],
-            '--text-color-pressed': color
-              ? createPressedColor(color)
-              : self[createKey('textColorTextPressed', type)],
-            '--text-color-focus': color
-              ? createHoverColor(color)
-              : self[createKey('textColorTextHover', type)],
+            '--text-color': mergeTextColor,
+            '--text-color-hover':
+              getHoverTextColor || self[createKey('textColorTextHover', type)],
+            '--text-color-pressed':
+              getPressedTextColor ||
+              self[createKey('textColorTextPressed', type)],
+            '--text-color-focus':
+              getHoverTextColor || self[createKey('textColorTextHover', type)],
             '--text-color-disabled':
-              color || self[createKey('textColorTextDisabled', type)]
+              textColor ||
+              color ||
+              self[createKey('textColorTextDisabled', type)]
           }
         } else if (ghost || dashed) {
           colorProps = {
@@ -277,18 +290,19 @@ const Button = defineComponent({
             '--color-focus': '#0000',
             '--color-disabled': '#0000',
             '--ripple-color': color || self[createKey('rippleColor', type)],
-            '--text-color': color || self[createKey('textColorGhost', type)],
-            '--text-color-hover': color
-              ? createHoverColor(color)
-              : self[createKey('textColorGhostHover', type)],
-            '--text-color-pressed': color
-              ? createPressedColor(color)
-              : self[createKey('textColorGhostPressed', type)],
-            '--text-color-focus': color
-              ? createHoverColor(color)
-              : self[createKey('textColorGhostHover', type)],
+            '--text-color':
+              textColor || color || self[createKey('textColorGhost', type)],
+            '--text-color-hover':
+              getHoverTextColor || self[createKey('textColorGhostHover', type)],
+            '--text-color-pressed':
+              getPressedTextColor ||
+              self[createKey('textColorGhostPressed', type)],
+            '--text-color-focus':
+              getHoverTextColor || self[createKey('textColorGhostHover', type)],
             '--text-color-disabled':
-              color || self[createKey('textColorGhostDisabled', type)]
+              textColor ||
+              color ||
+              self[createKey('textColorGhostDisabled', type)]
           }
         } else {
           colorProps = {
@@ -304,21 +318,31 @@ const Button = defineComponent({
               : self[createKey('colorFocus', type)],
             '--color-disabled': color || self[createKey('colorDisabled', type)],
             '--ripple-color': color || self[createKey('rippleColor', type)],
-            '--text-color': color
-              ? self.textColorPrimary
-              : self[createKey('textColor', type)],
-            '--text-color-hover': color
-              ? self.textColorHoverPrimary
-              : self[createKey('textColorHover', type)],
-            '--text-color-pressed': color
-              ? self.textColorPressedPrimary
-              : self[createKey('textColorPressed', type)],
-            '--text-color-focus': color
-              ? self.textColorFocusPrimary
-              : self[createKey('textColorFocus', type)],
-            '--text-color-disabled': color
-              ? self.textColorDisabledPrimary
-              : self[createKey('textColorDisabled', type)]
+            '--text-color':
+              textColor ||
+              (color
+                ? self.textColorPrimary
+                : self[createKey('textColor', type)]),
+            '--text-color-hover': textColor
+              ? createHoverColor(textColor)
+              : color
+                ? self.textColorHoverPrimary
+                : self[createKey('textColorHover', type)],
+            '--text-color-pressed': textColor
+              ? createPressedColor(textColor)
+              : color
+                ? self.textColorPressedPrimary
+                : self[createKey('textColorPressed', type)],
+            '--text-color-focus': textColor
+              ? createHoverColor(textColor)
+              : color
+                ? self.textColorFocusPrimary
+                : self[createKey('textColorFocus', type)],
+            '--text-color-disabled':
+              textColor ||
+              (color
+                ? self.textColorDisabledPrimary
+                : self[createKey('textColorDisabled', type)])
           }
         }
         // border
