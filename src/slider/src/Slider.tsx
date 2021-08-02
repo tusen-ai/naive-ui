@@ -114,7 +114,7 @@ export default defineComponent({
     const railRef = ref<HTMLElement | null>(null)
     const followerRef1 = ref<FollowerInst | null>(null)
     const followerRef2 = ref<FollowerInst | null>(null)
-    const precision = computed(() => {
+    const precisionRef = computed(() => {
       const precisions = [props.min, props.max, props.step].map((item) => {
         const fraction = String(item).split('.')[1]
         return decimal ? decimal.length : 0
