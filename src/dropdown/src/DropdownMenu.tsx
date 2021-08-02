@@ -6,9 +6,11 @@ import {
   InjectionKey,
   PropType,
   provide,
-  Ref
+  Ref,
+  CSSProperties
 } from 'vue'
 import { TreeNode } from 'treemate'
+import { renderArrow } from '../../popover/src/PopoverBody'
 import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider'
 import NDropdownGroup from './DropdownGroup'
@@ -31,6 +33,8 @@ export const dropdownMenuInjectionKey: InjectionKey<NDropdownMenuInjection> =
 export default defineComponent({
   name: 'DropdownMenu',
   props: {
+    showArrow: Boolean,
+    arrowStyle: [String, Object] as PropType<string | CSSProperties>,
     clsPrefix: {
       type: String,
       required: true
@@ -104,6 +108,12 @@ export default defineComponent({
             />
           )
         })}
+        {this.showArrow
+          ? renderArrow({
+            clsPrefix,
+            arrowStyle: this.arrowStyle
+          })
+          : null}
       </div>
     )
   }

@@ -58,6 +58,22 @@ export const popoverBodyProps = {
   maxWidth: Number
 }
 
+interface RenderArrowProps {
+  arrowStyle: string | CSSProperties | undefined
+  clsPrefix: string
+}
+
+export const renderArrow = ({
+  arrowStyle,
+  clsPrefix
+}: RenderArrowProps): VNode | null => {
+  return (
+    <div key="__popover-arrow__" class={`${clsPrefix}-popover-arrow-wrapper`}>
+      <div class={`${clsPrefix}-popover-arrow`} style={arrowStyle} />
+    </div>
+  )
+}
+
 export default defineComponent({
   name: 'PopoverBody',
   inheritAttrs: false,
@@ -238,17 +254,12 @@ export default defineComponent({
             ) : (
               renderSlot(slots, 'default')
             ),
-            props.showArrow ? (
-              <div
-                class={`${mergedClsPrefix}-popover-arrow-wrapper`}
-                key="__popover-arrow__"
-              >
-                <div
-                  class={`${mergedClsPrefix}-popover-arrow`}
-                  style={props.arrowStyle}
-                />
-              </div>
-            ) : null
+            props.showArrow
+              ? renderArrow({
+                arrowStyle: props.arrowStyle,
+                clsPrefix: mergedClsPrefix
+              })
+              : null
           ]
         )
       } else {

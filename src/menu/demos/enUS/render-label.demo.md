@@ -119,7 +119,9 @@ export default defineComponent({
         }
         return option.label
       },
-      renderMenuIcon () {
+      renderMenuIcon (option) {
+        if (option.key === 'beverage') return true
+        if (option.key === 'food') return null // falsy
         return h(NIcon, null, { default: () => h(BookmarkOutline) })
       },
       expandIcon () {

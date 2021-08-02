@@ -37,7 +37,10 @@ const sliderProps = {
     default: 0
   },
   marks: Object as PropType<Record<string, string>>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   formatTooltip: Function as PropType<(value: number) => string | number>,
   min: {
     type: Number,
@@ -105,12 +108,19 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
-
+    const { mergedDisabledRef } = formItem
     const handleRef1 = ref<HTMLElement | null>(null)
     const handleRef2 = ref<HTMLElement | null>(null)
     const railRef = ref<HTMLElement | null>(null)
     const followerRef1 = ref<FollowerInst | null>(null)
     const followerRef2 = ref<FollowerInst | null>(null)
+    const precisionRef = computed(() => {
+      const precisions = [props.min, props.max, props.step].map((item) => {
+        const fraction = String(item).split('.')[1]
+        return fraction ? fraction.length : 0
+      })
+      return Math.max(...precisions)
+    })
 
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -264,7 +274,7 @@ export default defineComponent({
       doUpdateShow(false, false)
     }
     function handleRailClick (e: MouseEvent): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       const { value: railEl } = railRef
       if (!railEl) return
       const railRect = railEl.getBoundingClientRect()
@@ -319,7 +329,7 @@ export default defineComponent({
       }
     }
     function handleKeyDown (e: KeyboardEvent): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       switch (e.code) {
         case 'ArrowRight':
           handleKeyDownRight()
@@ -456,6 +466,7 @@ export default defineComponent({
       justifiedValue = Math.max(min, justifiedValue)
       justifiedValue = Math.min(max, justifiedValue)
       justifiedValue = Math.round((justifiedValue - min) / step) * step + min
+      justifiedValue = parseFloat(justifiedValue.toFixed(precisionRef.value))
       if (marks) {
         const closestMarkValue = getClosestMarkValue(value)
         if (
@@ -468,7 +479,7 @@ export default defineComponent({
       return justifiedValue
     }
     function handleFirstHandleMouseDown (e: MouseEvent | TouchEvent): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (isTouchEvent(e)) e.preventDefault()
       if (props.range) {
         memoziedOtherValueRef.value = handleValue2Ref.value
@@ -481,7 +492,7 @@ export default defineComponent({
       on('mousemove', document, handleFirstHandleMouseMove)
     }
     function handleSecondHandleMouseDown (e: MouseEvent | TouchEvent): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (isTouchEvent(e)) e.preventDefault()
       if (props.range) {
         memoziedOtherValueRef.value = handleValue1Ref.value
@@ -681,6 +692,7 @@ export default defineComponent({
       namespace: namespaceRef,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
+      mergedDisabled: mergedDisabledRef,
       isMounted: useIsMounted(),
       adjustedTo: useAdjustedTo(props),
       handleValue1: handleValue1Ref,
@@ -799,7 +811,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-slider`,
           {
-            [`${mergedClsPrefix}-slider--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-slider--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-slider--active`]: this.active,
             [`${mergedClsPrefix}-slider--with-mark`]: this.marks
           }
@@ -847,7 +859,7 @@ export default defineComponent({
                     <div
                       ref="handleRef1"
                       class={`${mergedClsPrefix}-slider-handle`}
-                      tabindex={this.disabled ? -1 : 0}
+                      tabindex={this.mergedDisabled ? -1 : 0}
                       style={this.firstHandleStyle}
                       onFocus={this.handleHandleFocus1}
                       onBlur={this.handleHandleBlur1}
@@ -906,7 +918,7 @@ export default defineComponent({
                       <div
                         ref="handleRef2"
                         class={`${mergedClsPrefix}-slider-handle`}
-                        tabindex={this.disabled ? -1 : 0}
+                        tabindex={this.mergedDisabled ? -1 : 0}
                         style={this.secondHandleStyle}
                         onFocus={this.handleHandleFocus2}
                         onBlur={this.handleHandleBlur2}

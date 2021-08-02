@@ -76,25 +76,14 @@ export default defineComponent({
       el.style.maxWidth = `${toProgress}%`
     }
     function finish (): void {
-      if (finishing || erroring.value) return
-      if (!loadingRef.value) {
-        void start(100, 100).then(() => {
-          finishing = true
-          const el = loadingBarRef.value
-          if (!el) return
-          el.className = createClassName('finishing', mergedClsPrefixRef.value)
-          void el.offsetWidth
-          loadingRef.value = false
-        })
-      } else {
-        finishing = true
-        const el = loadingBarRef.value
-        if (!el) return
-        el.className = createClassName('finishing', mergedClsPrefixRef.value)
-        el.style.maxWidth = '100%'
-        void el.offsetWidth
-        loadingRef.value = false
-      }
+      if (finishing || erroring) return
+      finishing = true
+      const el = loadingBarRef.value
+      if (!el) return
+      el.className = createClassName('finishing', mergedClsPrefixRef.value)
+      el.style.maxWidth = '100%'
+      void el.offsetWidth
+      loadingRef.value = false
     }
     function error (): void {
       if (finishing || erroring.value) return

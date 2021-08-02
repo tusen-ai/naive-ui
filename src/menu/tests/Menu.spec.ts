@@ -9,6 +9,7 @@ describe('n-menu', () => {
   it('should work with import on demand', () => {
     mount(NMenu)
   })
+
   it('props.onUpdateValue type', () => {
     const stringCb = (v: string): void => {}
     const numberCb = (v: number): void => {}
@@ -35,6 +36,42 @@ describe('n-menu', () => {
       }
     })
   })
+
+  it('should work with `render-icon` props', async () => {
+    const options = [
+      {
+        label: 'yeh',
+        key: 'yeh'
+      },
+      {
+        label: 'fantasy',
+        key: 'fantasy'
+      },
+      {
+        label: 'mojito',
+        key: 'mojito'
+      },
+      {
+        label: 'initialj',
+        key: 'initialj'
+      }
+    ]
+    function renderMenuIcon (option: any): any {
+      if (option.key === 'fantasy') return true // render indent
+      if (option.key === 'mojito') return true // render indent
+      if (option.key === 'initialj') return null // don't render
+      return h(NIcon, null, { default: () => h(HappyOutline) }) // render this
+    }
+    const wrapper = mount(NMenu, {
+      props: {
+        options: options,
+        renderIcon: renderMenuIcon
+      }
+    })
+    expect(wrapper.findAll('.n-menu-item-content__icon').length).toBe(3)
+    expect(wrapper.findAll('.n-icon').length).toBe(1)
+  })
+
   it('should tooltip work with `render-label` props', async () => {
     const options = [
       {
@@ -81,6 +118,7 @@ describe('n-menu', () => {
     expect(wrapper.find('[target="_blank"]').exists()).toBe(true)
     expect(wrapper.find('[href="test2"]').exists()).toBe(true)
   })
+
   it('should dropdown work with `render-label` props', async () => {
     const options = [
       {
@@ -221,4 +259,47 @@ describe('n-menu', () => {
     })
     expect(wrapper.find('.expand-icon').text()).toEqual('1')
   })
+})
+
+it('should dropdown work with `render-extra` props', async () => {
+  const options = [
+    {
+      label: 'jj',
+      key: 'jj'
+    },
+    {
+      label: 'jay',
+      key: 'jay',
+      children: [
+        {
+          type: 'group',
+          label: 'song-group',
+          key: 'group',
+          children: [
+            {
+              label: 'fantasy',
+              key: 'fantasy'
+            },
+            {
+              label: 'mojito',
+              key: 'mojito'
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  function renderMenuExtra (): any {
+    return 'test'
+  }
+  const wrapper = mount(NMenu, {
+    props: {
+      defaultExpandAll: true,
+      options: options,
+      renderExtra: renderMenuExtra
+    }
+  })
+  expect(wrapper.findAll('.n-menu-item-content-header__extra').length).toEqual(
+    4
+  )
 })

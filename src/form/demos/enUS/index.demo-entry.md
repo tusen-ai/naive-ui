@@ -14,6 +14,7 @@ top
 left
 item-only
 async
+disabled
 ```
 
 ## Props
@@ -22,6 +23,7 @@ async
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| disabled | `boolean` | `false` | Whether to disable. |
 | inline | `boolean` | `false` | Whether to display as an inline form. |
 | label-width | `number \| string` | `undefined` | The width of label. Can be useful when `label-placement` is `'left'`. |
 | label-align | `'left' \| 'right'` | `-` | Text align in label. |

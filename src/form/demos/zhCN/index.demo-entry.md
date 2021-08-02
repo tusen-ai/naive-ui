@@ -14,6 +14,7 @@ top
 left
 item-only
 async
+disabled
 height-debug
 validator-debug
 ```
@@ -24,6 +25,7 @@ validator-debug
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| disabled | `boolean` | `false` | 是否禁用 |
 | inline | `boolean` | `false` | 是否展示为行内表单 |
 | label-width | `number \| string` | `undefined` | 标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用 |
 | label-align | `'left' \| 'right'` | `-` | 标签的文本对齐方式 |
