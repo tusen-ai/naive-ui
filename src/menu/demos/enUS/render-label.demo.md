@@ -120,7 +120,7 @@ export default defineComponent({
         return option.label
       },
       renderMenuIcon (option) {
-        // return comment vnode, render placeholder for indent
+        // return render placeholder for indent
         if (option.key === 'sheep-man') return h(() => null)
         // return falsy, don't render icon placeholder
         if (option.key === 'food') return null
