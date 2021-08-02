@@ -127,16 +127,34 @@ export default defineComponent({
     const siderOnLeft = computed(() => {
       return siderPlacement.value === 'left'
     })
-    const mergedTriggerStyle = computed(() => [
-      props.triggerStyle,
-      {
-        left: siderOnLeft.value ? 'unset' : 0,
-        right: !siderOnLeft.value ? 'unset' : 0,
-        transform: siderOnLeft.value
-          ? 'translateX(50%) translateY(-50%)'
-          : 'translateX(-50%) translateY(-50%) rotate(180deg)'
-      }
-    ])
+    const mergedToggleButtonStyle = computed(() => {
+      const translateXAndY = siderOnLeft.value
+        ? 'translateX(50%) translateY(-50%)'
+        : 'translateX(-50%) translateY(-50%)'
+      const translateZ = siderOnLeft.value
+        ? mergedCollapsedRef.value
+          ? 'rotate(180deg)'
+          : 'rotate(0)'
+        : mergedCollapsedRef.value
+          ? 'rotate(0)'
+          : 'rotate(180deg)'
+      return [
+        props.triggerStyle,
+        !siderOnLeft.value && { left: 0 },
+        {
+          transform: `${translateXAndY} ${translateZ}`
+        }
+      ]
+    })
+    const mergedToggleBarStyle = computed(() => {
+      return [
+        props.triggerStyle,
+        !siderOnLeft.value && {
+          left: '-28px',
+          transform: 'rotate(180deg)'
+        }
+      ]
+    })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
     const mergedCollapsedRef = useMergedState(
       toRef(props, 'collapsed'),
@@ -210,7 +228,8 @@ export default defineComponent({
       scrollContainerStyle: scrollContainerStyleRef,
       siderPlacement,
       siderOnLeft,
-      mergedTriggerStyle,
+      mergedToggleButtonStyle,
+      mergedToggleBarStyle,
       handleTriggerClick,
       cssVars: computed(() => {
         const {
@@ -323,14 +342,14 @@ export default defineComponent({
           showTrigger === 'arrow-circle' ? (
             <ToggleButton
               clsPrefix={mergedClsPrefix}
-              style={this.mergedTriggerStyle}
+              style={this.mergedToggleButtonStyle}
               onClick={this.handleTriggerClick}
             />
           ) : (
             <ToggleBar
               clsPrefix={mergedClsPrefix}
               collapsed={mergedCollapsed}
-              style={this.mergedTriggerStyle}
+              style={this.mergedToggleBarStyle}
               onClick={this.handleTriggerClick}
             />
           )

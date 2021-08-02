@@ -35,7 +35,6 @@ export default cB('layout-sider', `
     position: absolute;
     top: 50%;
     right: 0;
-    transform: translateX(50%) translateY(-50%);
     fill: var(--toggle-button-color);
   `),
   cB('layout-toggle-bar', `
@@ -107,11 +106,6 @@ export default cB('layout-sider', `
   cM('show-content', [
     cB('layout-sider-scroll-container', {
       opacity: 1
-    })
-  ]),
-  cM('collapsed', [
-    cB('layout-toggle-button', {
-      transform: 'translateX(50%) translateY(-50%) rotate(180deg)'
     })
   ]),
   cM('absolute-positioned', `
