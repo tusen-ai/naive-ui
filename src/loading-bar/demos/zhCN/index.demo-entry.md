@@ -41,11 +41,11 @@ basic
 
 ## API
 
-### `loadingBar` Props
+### LoadingBarProvider Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| loading-bar-style | `{loading: string, error: string} \| string \| ((type: ('error' \| 'loading')) => string)` | `undefined` | 加载条样式 |
+| loading-bar-style | `{ loading?: string \| object, error?: string \| object }` | `undefined` | 加载条样式 |
 
 ### `loadingBar` Injection Methods
 

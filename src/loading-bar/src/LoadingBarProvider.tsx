@@ -10,7 +10,8 @@ import {
   ExtractPropTypes,
   InjectionKey,
   renderSlot,
-  Ref
+  Ref,
+  CSSProperties
 } from 'vue'
 import { useIsMounted } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
@@ -35,11 +36,10 @@ const loadingBarProps = {
     default: undefined
   },
   loadingBarStyle: {
-    type: [String, Object, Function] as PropType<
-    | { loading: string, error: string }
-    | string
-    | ((type: 'error' | 'loading') => string)
-    >
+    type: [String, Object, Function] as PropType<{
+      loading?: string | CSSProperties
+      error?: string | CSSProperties
+    }>
   }
 }
 

@@ -6,7 +6,6 @@ import {
   inject,
   withDirectives,
   vShow,
-  CSSProperties,
   ref,
   nextTick
 } from 'vue'
@@ -35,25 +34,17 @@ export default defineComponent({
     const loadingRef = ref(false)
     const transitionDisabledRef = ref(false)
     let finishing = false
-    const erroring = ref<boolean>(false)
+    const erroringRef = ref(false)
     const mergedLoadingBarStyle = computed(() => {
-      const overrideStyle = providerProps.loadingBarStyle
-      if (typeof overrideStyle === 'string') {
-        return overrideStyle
-      } else if (typeof overrideStyle === 'object') {
-        return erroring.value ? overrideStyle.error : overrideStyle.loading
-      } else if (typeof overrideStyle === 'function') {
-        return erroring.value
-          ? overrideStyle('error')
-          : overrideStyle('loading')
-      }
-      return {}
+      const { loadingBarStyle } = providerProps
+      if (!loadingBarStyle) return ''
+      return loadingBarStyle[erroringRef.value ? 'error' : 'loading']
     })
     async function init (): Promise<void> {
       enteringRef.value = false
       loadingRef.value = false
       finishing = false
-      erroring.value = false
+      erroringRef.value = false
       transitionDisabledRef.value = true
       await nextTick()
       transitionDisabledRef.value = false
@@ -76,7 +67,7 @@ export default defineComponent({
       el.style.maxWidth = `${toProgress}%`
     }
     function finish (): void {
-      if (finishing || erroring) return
+      if (finishing || erroringRef.value) return
       finishing = true
       const el = loadingBarRef.value
       if (!el) return
@@ -86,10 +77,10 @@ export default defineComponent({
       loadingRef.value = false
     }
     function error (): void {
-      if (finishing || erroring.value) return
+      if (finishing || erroringRef.value) return
       if (!loadingRef.value) {
         void start(100, 100, 'error').then(() => {
-          erroring.value = true
+          erroringRef.value = true
           const el = loadingBarRef.value
           if (!el) return
           el.className = createClassName('error', mergedClsPrefixRef.value)
@@ -97,7 +88,7 @@ export default defineComponent({
           loadingRef.value = false
         })
       } else {
-        erroring.value = true
+        erroringRef.value = true
         const el = loadingBarRef.value
         if (!el) return
         el.className = createClassName('error', mergedClsPrefixRef.value)
@@ -172,8 +163,8 @@ export default defineComponent({
                   ref="loadingBarRef"
                   class={`${mergedClsPrefix}-loading-bar`}
                   style={[
-                    this.cssVars as CSSProperties,
-                    this.mergedLoadingBarStyle as CSSProperties
+                    this.cssVars as any,
+                    this.mergedLoadingBarStyle as any
                   ]}
                 />
               </div>,
