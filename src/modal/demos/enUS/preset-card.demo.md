@@ -5,6 +5,7 @@ Modal has some presets, which means you can use props & slots of the preset afte
 ```html
 <n-button @click="showModal = true"> Start Me up </n-button>
 <n-modal
+  class="custom-card"
   v-model:show="showModal"
   preset="card"
   :style="bodyStyle"

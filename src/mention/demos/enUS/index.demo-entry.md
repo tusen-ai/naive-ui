@@ -22,7 +22,7 @@ Mention is provided after `v2.2.0`.
 | --- | --- | --- | --- |
 | autosize | `boolean \| { maxRows?: number, minRows?: number }` | `false` | Autosize. |
 | options | `MentionOption[]` | `[]` | Mention Options list. |
-| type | `'input' \| 'textarea'` | `'input'` | Input type. |
+| type | `'text' \| 'textarea'` | `'text'` | Input type. |
 | separator | `string` | `' '` | Char to split mentions whose length must be 1. |
 | bordered | `boolean` | `true` | Whether to display the border of the input box. |
 | disabled | `boolean` | `false` | Whether to set the input box to be disabled. |

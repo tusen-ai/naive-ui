@@ -23,11 +23,11 @@ rtl-debug
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| bordered | `boolean` | `true` | 卡片是否显示 border |
-| closable | `boolean` | `false` | 卡片是否显示 close 图标 |
-| content-style | `Object \| string` | `undefined` | 卡片 content 的样式设置 |
-| footer-style | `Object \| string` | `undefined` | 卡片 footer 的样式设置 |
-| header-style | `Object \| string` | `undefined` | 卡片 header 的样式设置 |
+| bordered | `boolean` | `true` | 是否显示卡片边框 |
+| closable | `boolean` | `false` | 是否允许关闭 |
+| content-style | `Object \| string` | `undefined` | 卡片内容区域的样式 |
+| footer-style | `Object \| string` | `undefined` | 卡片底部区域的样式 |
+| header-style | `Object \| string` | `undefined` | 卡片头部区域的样式 |
 | hoverable | `boolean` | `false` | 卡片是否可悬浮 |
 | segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' \| 'hard' }` | `false` | 卡片的分段区域设置 |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | 卡片的尺寸 |
@@ -36,11 +36,11 @@ rtl-debug
 
 ## Slots
 
-| 名称         | 参数 | 说明                        |
-| ------------ | ---- | --------------------------- |
-| cover        | `()` | cover 部分填充的内容        |
-| header       | `()` | header 部分填充的内容       |
-| header-extra | `()` | header-extra 部分填充的内容 |
-| default      | `()` | card 默认填充的内容         |
-| footer       | `()` | footer 部分填充的内容       |
-| action       | `()` | action 部分填充的内容       |
+| 名称         | 参数 | 说明         |
+| ------------ | ---- | ------------ |
+| cover        | `()` | 覆盖内容     |
+| header       | `()` | 头部内容     |
+| header-extra | `()` | 头部额外内容 |
+| default      | `()` | 卡片内容     |
+| footer       | `()` | 底部内容     |
+| action       | `()` | 操作区域内容 |

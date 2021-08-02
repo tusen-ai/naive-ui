@@ -4,7 +4,7 @@
 
 ```html
 <n-space vertical>
-  <n-input v-model:value="value" type="input" placeholder="基本的 Input" />
+  <n-input v-model:value="value" type="text" placeholder="基本的 Input" />
   <n-input
     v-model:value="value"
     type="textarea"

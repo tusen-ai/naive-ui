@@ -98,6 +98,17 @@ describe('n-dropdown', () => {
     wrapper.unmount()
   })
 
+  it('shows arrow', async () => {
+    const wrapper = mountDropdown()
+
+    const triggerNodeWrapper = wrapper.find('span')
+    expect(triggerNodeWrapper.exists()).toBe(true)
+    await triggerNodeWrapper.trigger('click')
+
+    expect(document.querySelector('.n-popover-arrow-wrapper')).toMatchSnapshot()
+    wrapper.unmount()
+  })
+
   it('inverted style', async () => {
     const wrapper = mountDropdown({ inverted: true })
 

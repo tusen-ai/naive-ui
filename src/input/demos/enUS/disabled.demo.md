@@ -5,7 +5,7 @@ Input can be disabled.
 ```html
 <n-space vertical>
   <n-input
-    type="input"
+    type="text"
     size="small"
     placeholder="Oops! It is disabled."
     :disabled="!active"

@@ -206,7 +206,10 @@ export default defineComponent({
                           this.preset === 'dialog' ? (
                             <NDialog
                               {...this.$attrs}
-                              class={`${mergedClsPrefix}-modal`}
+                              class={[
+                                `${mergedClsPrefix}-modal`,
+                                this.$attrs.class
+                              ]}
                               ref="bodyRef"
                               theme={this.mergedTheme.peers.Dialog}
                               themeOverrides={
@@ -220,7 +223,10 @@ export default defineComponent({
                             <NCard
                               {...this.$attrs}
                               ref="bodyRef"
-                              class={`${mergedClsPrefix}-modal`}
+                              class={[
+                                `${mergedClsPrefix}-modal`,
+                                this.$attrs.class
+                              ]}
                               theme={this.mergedTheme.peers.Card}
                               themeOverrides={
                                 this.mergedTheme.peerOverrides.Card

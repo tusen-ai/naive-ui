@@ -20,5 +20,8 @@ export default {
     default: 'medium'
   },
   closable: Boolean,
-  disabled: Boolean
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  }
 } as const

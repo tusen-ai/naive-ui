@@ -9,10 +9,11 @@ import {
 } from 'vue'
 
 type FormItemSize = 'small' | 'medium' | 'large'
-type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge'
+type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | number
 
 export interface FormItemInjection {
   path: Ref<string | undefined>
+  disabled: Ref<boolean>
   mergedSize: ComputedRef<FormItemSize>
   restoreValidation: () => void
   handleContentBlur: () => void
@@ -27,16 +28,17 @@ export const formItemInjectionKey: InjectionKey<FormItemInjection> =
 interface UseFormItemOptions<T> {
   defaultSize?: FormItemSize
   mergedSize?: (formItem: FormItemInjection | null) => T
+  mergedDisabled?: (formItem: FormItemInjection | null) => boolean
 }
 
-type UseFormItemProps<T> =
-  | {
-    size?: T
-  }
-  | {}
+interface UseFormItemProps<T> {
+  size?: T
+  disabled?: boolean
+}
 
 export interface UseFormItem<T> {
   mergedSizeRef: ComputedRef<T>
+  mergedDisabledRef: ComputedRef<boolean>
   nTriggerFormBlur: () => void
   nTriggerFormChange: () => void
   nTriggerFormFocus: () => void
@@ -45,7 +47,11 @@ export interface UseFormItem<T> {
 
 export default function useFormItem<T extends AllowedSize = FormItemSize> (
   props: UseFormItemProps<T>,
-  { defaultSize = 'medium', mergedSize }: UseFormItemOptions<T> = {}
+  {
+    defaultSize = 'medium',
+    mergedSize,
+    mergedDisabled
+  }: UseFormItemOptions<T> = {}
 ): UseFormItem<T> {
   const NFormItem = inject(formItemInjectionKey, null)
   provide(formItemInjectionKey, null)
@@ -64,6 +70,20 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
           return defaultSize as T
         }
   )
+  const mergedDisabledRef = computed(
+    mergedDisabled
+      ? () => mergedDisabled(NFormItem)
+      : () => {
+          const { disabled } = props
+          if (disabled !== undefined) {
+            return disabled
+          }
+          if (NFormItem) {
+            return NFormItem.disabled.value
+          }
+          return false
+        }
+  )
   onBeforeUnmount(() => {
     if (NFormItem) {
       NFormItem.restoreValidation()
@@ -71,6 +91,7 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
   })
   return {
     mergedSizeRef,
+    mergedDisabledRef,
     nTriggerFormBlur () {
       if (NFormItem) {
         NFormItem.handleContentBlur()
