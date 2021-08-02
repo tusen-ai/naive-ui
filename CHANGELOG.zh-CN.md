@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-slider` 丢失浮点数小数精度
+
 ## 2.16.0 (2021-08-02)
 
 ### Breaking Changes

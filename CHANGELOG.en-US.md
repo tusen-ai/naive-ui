@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-slider` loss floating point decimal precision
+
 ## 2.16.0 (2021-08-02)
 
 ### Breaking Changes
