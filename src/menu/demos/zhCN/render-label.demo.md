@@ -120,7 +120,7 @@ export default defineComponent({
         return option.label
       },
       renderMenuIcon (option) {
-        // 返回 comment VNode 时，渲染图标占位符以保持缩进
+        // 渲染图标占位符以保持缩进
         if (option.key === 'sheep-man') return h(() => null)
         // 返回 falsy 值，不再渲染图标及占位符
         if (option.key === 'food') return null
