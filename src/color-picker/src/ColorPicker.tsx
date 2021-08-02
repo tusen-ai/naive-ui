@@ -387,11 +387,13 @@ export default defineComponent({
 
     function handleInputUpdateValue (value: string): void {
       doUpdateValue(value, 'input')
-      handleComplete()
+      setTimeout(() => {
+        handleComplete()
+      }, 0)
     }
 
     function handleComplete (pushStack: boolean = true): void {
-      const { value } = uncontrolledValueRef
+      const { value } = mergedValueRef
       // no value & only hue changes will complete with no value
       if (value) {
         const { nTriggerFormChange, nTriggerFormInput } = formItem
