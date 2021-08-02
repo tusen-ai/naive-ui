@@ -2,9 +2,11 @@
 
 ## Pending
 
+### Feats
+
 ### Fixes
 
-- Fix `n-slider` loss floating point decimal precision
+- Fix `n-slider` loss floating point decimal precision, closes [#751](https://github.com/TuSimple/naive-ui/issues/751).
 
 ## 2.16.0 (2021-08-02)
 
