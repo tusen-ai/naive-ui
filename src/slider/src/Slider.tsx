@@ -117,7 +117,7 @@ export default defineComponent({
     const precisionRef = computed(() => {
       const precisions = [props.min, props.max, props.step].map((item) => {
         const fraction = String(item).split('.')[1]
-        return decimal ? decimal.length : 0
+        return fraction ? fraction.length : 0
       })
       return Math.max(...precisions)
     })
@@ -466,7 +466,7 @@ export default defineComponent({
       justifiedValue = Math.max(min, justifiedValue)
       justifiedValue = Math.min(max, justifiedValue)
       justifiedValue = Math.round((justifiedValue - min) / step) * step + min
-      justifiedValue = parseFloat(justifiedValue.toFixed(precision.value))
+      justifiedValue = parseFloat(justifiedValue.toFixed(precisionRef.value))
       if (marks) {
         const closestMarkValue = getClosestMarkValue(value)
         if (
