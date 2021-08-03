@@ -239,21 +239,11 @@ const Button = defineComponent({
           '--text-color-focus': 'initial',
           '--text-color-disabled': 'initial'
         }
-        const mergedTextColorTextHover = textColor
-          ? createHoverColor(textColor)
-          : color
-            ? createHoverColor(color)
-            : null
-        const mergedTextColorTextPressed = textColor
-          ? createPressedColor(textColor)
-          : color
-            ? createPressedColor(color)
-            : null
+        const mergedTextColor = textColor || color
         if (text) {
           const { depth } = props
-          const mergeTextColor =
-            textColor ||
-            color ||
+          const mergedTextColorPlus =
+            mergedTextColor ||
             (type === 'default' && depth !== undefined
               ? self[
                 createKey(
@@ -269,20 +259,18 @@ const Button = defineComponent({
             '--color-focus': '#0000',
             '--color-disabled': '#0000',
             '--ripple-color': '#0000',
-            '--text-color': mergeTextColor,
-            '--text-color-hover':
-              mergedTextColorTextHover ||
-              self[createKey('textColorTextHover', type)],
-            '--text-color-pressed':
-              mergedTextColorTextPressed ||
-              self[createKey('textColorTextPressed', type)],
-            '--text-color-focus':
-              mergedTextColorTextHover ||
-              self[createKey('textColorTextHover', type)],
+            '--text-color': mergedTextColorPlus,
+            '--text-color-hover': mergedTextColor
+              ? createHoverColor(mergedTextColor)
+              : self[createKey('textColorTextHover', type)],
+            '--text-color-pressed': mergedTextColor
+              ? createPressedColor(mergedTextColor)
+              : self[createKey('textColorTextPressed', type)],
+            '--text-color-focus': mergedTextColor
+              ? createHoverColor(mergedTextColor)
+              : self[createKey('textColorTextHover', type)],
             '--text-color-disabled':
-              textColor ||
-              color ||
-              self[createKey('textColorTextDisabled', type)]
+              mergedTextColor || self[createKey('textColorTextDisabled', type)]
           }
         } else if (ghost || dashed) {
           colorProps = {
@@ -293,20 +281,18 @@ const Button = defineComponent({
             '--color-disabled': '#0000',
             '--ripple-color': color || self[createKey('rippleColor', type)],
             '--text-color':
-              textColor || color || self[createKey('textColorGhost', type)],
-            '--text-color-hover':
-              mergedTextColorTextHover ||
-              self[createKey('textColorGhostHover', type)],
-            '--text-color-pressed':
-              mergedTextColorTextPressed ||
-              self[createKey('textColorGhostPressed', type)],
-            '--text-color-focus':
-              mergedTextColorTextHover ||
-              self[createKey('textColorGhostHover', type)],
+              mergedTextColor || self[createKey('textColorGhost', type)],
+            '--text-color-hover': mergedTextColor
+              ? createHoverColor(mergedTextColor)
+              : self[createKey('textColorGhostHover', type)],
+            '--text-color-pressed': mergedTextColor
+              ? createPressedColor(mergedTextColor)
+              : self[createKey('textColorGhostPressed', type)],
+            '--text-color-focus': mergedTextColor
+              ? createHoverColor(mergedTextColor)
+              : self[createKey('textColorGhostHover', type)],
             '--text-color-disabled':
-              textColor ||
-              color ||
-              self[createKey('textColorGhostDisabled', type)]
+              mergedTextColor || self[createKey('textColorGhostDisabled', type)]
           }
         } else {
           colorProps = {
