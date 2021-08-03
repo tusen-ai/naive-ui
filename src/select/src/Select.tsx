@@ -713,7 +713,7 @@ export default defineComponent({
                       }
                       loading={this.loading}
                       focused={this.focused}
-                      onClick={this.handleTriggerClick}
+                      onMousedown={this.handleTriggerClick}
                       onDeleteOption={this.handleToggleOption}
                       onPatternInput={this.handlePatternInput}
                       onClear={this.handleClear}
