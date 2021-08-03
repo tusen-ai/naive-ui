@@ -5,7 +5,7 @@
   multiple
   cascade
   checkable
-  checkStrategy="SHOW_PARENT"
+  checkStrategy="parent"
   :options="options"
   :default-value="['Across The Universe']"
   @update:value="updateValue"

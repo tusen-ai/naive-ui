@@ -21,7 +21,7 @@ debug
 | --- | --- | --- | --- |
 | cascade | `boolean` | `false` | Whether to do cascade check when use checkboxes. |
 | checkable | `boolean` | `false` | Whether to use checkbox to select value. |
-| check-strategy | `string` | `'SHOW_ALL'` | set Check Strategy to show parent node or children. SHOW_ALL: show all checked node; SHOW_PARENT: show all checked parent node when all child node are checked; SHOW_CHILD: show all child node |
+| check-strategy | `string` | `'all'` | set Check Strategy to show parent node or children. all: show all checked node; parent: show all checked parent node when all child node are checked; child: show all child node |
 | clearable | `boolean` | `false` | Whether it's clearable. |
 | consistent-menu-width | `boolean` | `true` | Whether to make menu's width consistent with input. Set to `true` will disable virtual scroll. |
 | default-value | `string \| number \| Array<string \| number> \| null` | `null` | Selected key (or keys when multiple) by default. |

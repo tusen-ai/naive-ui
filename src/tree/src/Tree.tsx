@@ -522,58 +522,11 @@ export default defineComponent({
         displayedCheckedKeysRef.value,
         {
           cascade: props.cascade,
-          leafOnly: props.leafOnly
+          leafOnly: props.leafOnly,
+          checkStrategy: props.checkStrategy
         }
       )
-      const result = handleCheckStrategy(res)
-      doUpdateCheckedKeys(result)
-    }
-    const handleCheckStrategy = (res: {
-      checkedKeys: Key[]
-      indeterminateKeys: Key[]
-    }): Key[] => {
-      let result: Key[] = []
-      switch (props.checkStrategy) {
-        case 'SHOW_ALL':
-          result = res.checkedKeys
-          break
-        case 'SHOW_CHILD':
-          res.checkedKeys.forEach((v) => {
-            const node = dataTreeMateRef.value!.getNode(v)
-            if (node?.isLeaf) {
-              result.push(v)
-            }
-          })
-          break
-        case 'SHOW_PARENT':
-          res.checkedKeys.forEach((v) => {
-            const node = dataTreeMateRef.value!.getNode(v)
-            if (node !== null) {
-              const flag = isContainChild(node, res.indeterminateKeys)
-              if (node?.parent === null || !flag) {
-                result.push(v)
-              }
-            }
-          })
-          break
-        default:
-          result = res.checkedKeys
-          break
-      }
-      return result
-    }
-    const isContainChild = (
-      node: TmNode,
-      indeterminateKeys: Key[]
-    ): boolean => {
-      const parent = node.parent
-      if (parent !== null) {
-        const flag = indeterminateKeys.includes(parent.key)
-        if (!flag) {
-          return true
-        }
-      }
-      return false
+      doUpdateCheckedKeys(res.checkedKeys)
     }
     function toggleExpand (key: Key): void {
       if (props.disabled) return
