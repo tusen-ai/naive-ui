@@ -167,7 +167,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, cssVars, mergedClsPrefix } = this
+    const { $slots, mergedTheme, cssVars, mergedClsPrefix } = this
     return (
       <NSpace
         class={`${mergedClsPrefix}-dynamic-tags`}
@@ -234,6 +234,8 @@ export default defineComponent({
                     onBlur={handleInputBlur}
                     internalForceFocus={inputForceFocused}
                   />
+                ) : $slots.add ? (
+                  $slots.add({ add: handleAddClick })
                 ) : (
                   <NButton
                     dashed

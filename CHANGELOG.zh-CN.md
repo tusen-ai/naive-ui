@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-loading-bar` 新增 `loading-bar-style` 属性，关闭 [#457](https://github.com/TuSimple/naive-ui/issues/457)
+- `n-dynamic-tags` 新增 `add-tag` 插槽
 
 ### Fixes
 

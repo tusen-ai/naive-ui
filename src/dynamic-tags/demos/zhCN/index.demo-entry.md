@@ -8,6 +8,7 @@
 basic
 max
 form
+slot
 ```
 
 ## Props
@@ -26,3 +27,9 @@ form
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | 标签类型 |
 | value | `string[]` | `undefined` | 受控模式下的值 |
 | on-update:value | `(value: boolean) => void` | `undefined` | 组件值发生变化时的回调 |
+
+## Slots
+
+| 名称 | 参数                          | 说明               |
+| ---- | ----------------------------- | ------------------ |
+| add  | `(info: { add: () => void })` | 自定义添加标签按钮 |
