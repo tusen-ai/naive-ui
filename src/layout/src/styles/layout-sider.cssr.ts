@@ -36,7 +36,20 @@ export default cB('layout-sider', `
     top: 50%;
     right: 0;
     fill: var(--toggle-button-color);
-  `),
+    transform: translateX(50%) translateY(-50%) rotate(0);
+  `, [
+    cM('collapsed', `
+      transform: translateX(50%) translateY(-50%) rotate(180deg);
+    `),
+    cM('right', `
+      transform: translateX(-50%) translateY(-50%) rotate(180deg);
+      left: 0;
+    `, [
+      cM('collapsed', `
+        transform: translateX(-50%) translateY(-50%) rotate(0);
+      `)
+    ])
+  ]),
   cB('layout-toggle-bar', `
     cursor: pointer;
     height: 72px;
@@ -45,6 +58,10 @@ export default cB('layout-sider', `
     top: calc(50% - 36px);
     right: -28px;
   `, [
+    cM('right', `
+      left: -28px;
+      transform: rotate(180deg);
+    `),
     cE('top, bottom', `
       position: absolute;
       width: 4px;

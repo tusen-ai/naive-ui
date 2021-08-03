@@ -127,34 +127,6 @@ export default defineComponent({
     const siderOnLeft = computed(() => {
       return siderPlacement.value === 'left'
     })
-    const mergedToggleButtonStyle = computed(() => {
-      const translateXAndY = siderOnLeft.value
-        ? 'translateX(50%) translateY(-50%)'
-        : 'translateX(-50%) translateY(-50%)'
-      const translateZ = siderOnLeft.value
-        ? mergedCollapsedRef.value
-          ? 'rotate(180deg)'
-          : 'rotate(0)'
-        : mergedCollapsedRef.value
-          ? 'rotate(0)'
-          : 'rotate(180deg)'
-      return [
-        props.triggerStyle,
-        !siderOnLeft.value && { left: 0 },
-        {
-          transform: `${translateXAndY} ${translateZ}`
-        }
-      ]
-    })
-    const mergedToggleBarStyle = computed(() => {
-      return [
-        props.triggerStyle,
-        !siderOnLeft.value && {
-          left: '-28px',
-          transform: 'rotate(180deg)'
-        }
-      ]
-    })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
     const mergedCollapsedRef = useMergedState(
       toRef(props, 'collapsed'),
@@ -228,8 +200,6 @@ export default defineComponent({
       scrollContainerStyle: scrollContainerStyleRef,
       siderPlacement,
       siderOnLeft,
-      mergedToggleButtonStyle,
-      mergedToggleBarStyle,
       handleTriggerClick,
       cssVars: computed(() => {
         const {
@@ -267,11 +237,9 @@ export default defineComponent({
     this.siderPlacement = ($parent?.$props as any).siderPlacement
     const siderScrollContainerTransformStyle =
       !this.siderOnLeft && this.collapseMode === 'transform'
-        ? 'translateX(' +
-          (
+        ? `translateX(${
             parseInt(formatLength(this.width)) - parseInt(this.styleMaxWidth)
-          ).toString() +
-          'px)'
+          }px)`
         : 'unset'
     return (
       <aside
@@ -341,15 +309,25 @@ export default defineComponent({
         {showTrigger ? (
           showTrigger === 'arrow-circle' ? (
             <ToggleButton
+              class={[
+                !this.siderOnLeft &&
+                  `${mergedClsPrefix}-layout-toggle-button--right`,
+                mergedCollapsed &&
+                  `${mergedClsPrefix}-layout-toggle-button--collapsed`
+              ]}
               clsPrefix={mergedClsPrefix}
-              style={this.mergedToggleButtonStyle}
+              style={this.triggerStyle}
               onClick={this.handleTriggerClick}
             />
           ) : (
             <ToggleBar
+              class={[
+                !this.siderOnLeft &&
+                  `${mergedClsPrefix}-layout-toggle-bar--right`
+              ]}
               clsPrefix={mergedClsPrefix}
               collapsed={mergedCollapsed}
-              style={this.mergedToggleBarStyle}
+              style={this.triggerStyle}
               onClick={this.handleTriggerClick}
             />
           )
