@@ -21,23 +21,23 @@ export default cB('loading-bar-container', `
     width: 100%;
     transition:
       max-width 4s linear,
-      background-color .2s linear;
+      background .2s linear;
     height: var(--height);
   `, [
     cM('starting', `
-      background-color: var(--color-loading);
+      background: var(--color-loading);
     `),
     cM('finishing', `
-      background-color: var(--color-loading);
+      background: var(--color-loading);
       transition:
         max-width .2s linear,
-        background-color .2s linear;
+        background .2s linear;
     `),
     cM('error', `
-      background-color: var(--color-error);
+      background: var(--color-error);
       transition:
         max-width .2s linear,
-        background-color .2s linear;
+        background .2s linear;
     `)
   ])
 ])
