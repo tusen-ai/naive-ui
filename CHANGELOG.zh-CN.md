@@ -9,6 +9,7 @@
 ### Fixes
 
 - 修复 `n-slider` 丢失浮点数小数精度，关闭 [#751](https://github.com/TuSimple/naive-ui/issues/751)
+- 修复 `n-data-table` `onUpdatePage` 和 `onUpdatePageSize` 在使用 jsx 时不触发的问题
 
 ## 2.16.0 (2021-08-02)
 

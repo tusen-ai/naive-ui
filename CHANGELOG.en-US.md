@@ -9,6 +9,7 @@
 ### Fixes
 
 - Fix `n-slider` loss floating point decimal precision, closes [#751](https://github.com/TuSimple/naive-ui/issues/751).
+- Fix `n-data-table` `onUpdatePage` and `onUpdatePageSize` not triggered while using jsx.
 
 ## 2.16.0 (2021-08-02)
 
