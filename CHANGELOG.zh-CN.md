@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-select` 可过滤的选择器失效，关闭 [#510](https://github.com/TuSimple/naive-ui/issues/510)
+
 ## 2.16.0 (2021-08-02)
 
 ### Breaking Changes

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-select` filterable select breaks, closes [#510](https://github.com/TuSimple/naive-ui/issues/510).
+
 ## 2.16.0 (2021-08-02)
 
 ### Breaking Changes
