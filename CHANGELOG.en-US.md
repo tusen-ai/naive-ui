@@ -1,8 +1,15 @@
 # CHANGELOG
 
+## Pending
+
 ### Feats
 
+- `n-loading-bar` add `loading-bar-style` props, closes [#457](https://github.com/TuSimple/naive-ui/issues/457).
 - `n-tree-select` add `check-strategy` prop.
+
+### Fixes
+
+- Fix `n-slider` loss floating point decimal precision, closes [#751](https://github.com/TuSimple/naive-ui/issues/751).
 
 ## 2.16.0 (2021-08-02)
 
