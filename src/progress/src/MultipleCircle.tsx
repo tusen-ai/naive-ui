@@ -85,7 +85,6 @@ export default defineComponent({
         return []
       }
       return processingFillStrokeDasharrayRef.value.map((item, id) => {
-        console.log(item, id)
         return parseFloat(item.split(',')[0])
       })
     })
