@@ -115,7 +115,6 @@ export default defineComponent({
           '--icon-size-circle': iconSizeCircle,
           '--icon-size-line': iconSizeLine,
           '--line-bg-processing': lineBgProcessing,
-          '--circle-bg-processing': 'rgba(255, 255, 255, 0.3)',
           '--rail-color': railColor,
           '--rail-height': railHeight,
           '--text-color-circle': textColorCircle,

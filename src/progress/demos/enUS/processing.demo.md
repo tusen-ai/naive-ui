@@ -42,7 +42,7 @@
 export default {
   data () {
     return {
-      percentage: 0
+      percentage: 50
     }
   }
 }

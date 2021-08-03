@@ -8,6 +8,7 @@ import {
   onMounted,
   onUnmounted
 } from 'vue'
+import { createId } from 'seemly'
 import { NBaseIcon } from '../../_internal'
 import {
   SuccessIcon,
@@ -16,7 +17,11 @@ import {
   InfoIcon
 } from '../../_internal/icons'
 import { Status } from './interface'
-import { changeProcessingFillStrokeDasharray } from './utils'
+import {
+  calcLightestCurPointPos,
+  setProcessingTimer,
+  clearProcessingTimer
+} from './utils'
 
 const iconMap = {
   success: <SuccessIcon />,
@@ -65,34 +70,30 @@ export default defineComponent({
     })
     const processingFillStrokeDasharrayRef = ref<string>('')
     const timerRef = ref<number>(0)
-    const setProcessingTimer = (): void => {
-      const speedRef = ref<number>(1)
-      timerRef.value = window.setInterval(() => {
-        if (!processingFillStrokeDasharrayRef.value) {
-          processingFillStrokeDasharrayRef.value = `0, ${
-            props.viewBoxWidth * 8
-          }`
-        } else {
-          const maxStrokeDasharray = Math.PI * props.percentage
-          changeProcessingFillStrokeDasharray({
-            processingFillStrokeDasharrayRef,
-            maxStrokeDasharray,
-            percentage: props.percentage,
-            rate: 0.001,
-            speedRef,
-            viewBoxWidth: props.viewBoxWidth
-          })
-        }
-      }, 30)
-    }
-    const clearProcessingTimer = (): void => {
-      window.clearInterval(timerRef.value as any)
-    }
+    const randomIdRef = ref<string>(createId())
+    const sleepingRef = ref<boolean>(false)
+    const curArcLength = computed(() => {
+      if (!processingFillStrokeDasharrayRef.value) {
+        return 0
+      }
+      return parseFloat(processingFillStrokeDasharrayRef.value.split(',')[0])
+    })
+    const lightestCurPointPos = computed(() => {
+      return calcLightestCurPointPos(50, curArcLength) as number[]
+    })
     onMounted(() => {
-      props.processing && setProcessingTimer()
+      props.processing &&
+        setProcessingTimer({
+          timerRef,
+          sleepingRef,
+          processingFillStrokeDasharrayRef,
+          randomIdRef,
+          percentage: props.percentage,
+          viewBoxWidth: props.viewBoxWidth
+        })
     })
     onUnmounted(() => {
-      props.processing && clearProcessingTimer()
+      props.processing && clearProcessingTimer(timerRef)
     })
     return () => {
       const {
@@ -112,6 +113,18 @@ export default defineComponent({
           <div class={`${clsPrefix}-progress-graph`} aria-hidden>
             <div class={`${clsPrefix}-progress-graph-circle`}>
               <svg viewBox="0 0 110 110">
+                <defs>
+                  <linearGradient
+                    id={`ProgressCircleGradient${randomIdRef.value}`}
+                    x1="0.5"
+                    y1="0"
+                    x2={lightestCurPointPos.value[0]}
+                    y2={lightestCurPointPos.value[1]}
+                  >
+                    <stop offset="0%" stop-color="rgba(255, 255, 255, 0.1)" />
+                    <stop offset="100%" stop-color="rgba(255, 255, 255, 0.5)" />
+                  </linearGradient>
+                </defs>
                 <g>
                   <path
                     class={`${clsPrefix}-progress-graph-circle-rail`}
@@ -148,7 +161,7 @@ export default defineComponent({
                     }}
                   />
                 </g>
-                {props.processing && props.percentage ? (
+                {props.processing && props.percentage && !sleepingRef.value ? (
                   <g>
                     <path
                       class={[
@@ -160,7 +173,8 @@ export default defineComponent({
                       fill="none"
                       style={{
                         strokeDasharray: processingFillStrokeDasharrayRef.value,
-                        strokeDashoffset: 0
+                        strokeDashoffset: 0,
+                        stroke: `url(#ProgressCircleGradient${randomIdRef.value})`
                       }}
                     />
                   </g>
