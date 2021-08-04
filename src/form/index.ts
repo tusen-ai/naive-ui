@@ -15,7 +15,7 @@ export type {
   FormItemInst,
   FormItemRule,
   FormRules,
-  ValidationError
+  FormValidationError
 } from './src/interface'
 
 // deprecated

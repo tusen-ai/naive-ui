@@ -75,7 +75,7 @@ export type FormValidateCallback = (errors?: ErrorList[]) => void
 export type FormValidate = ((callback?: FormValidateCallback) => void) &
 (() => Promise<void>)
 
-export type ValidationError = ErrorList
+export type FormValidationError = ErrorList
 
 export interface FormInst {
   validate: FormValidate
