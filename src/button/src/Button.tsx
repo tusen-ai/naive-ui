@@ -239,11 +239,11 @@ const Button = defineComponent({
           '--text-color-focus': 'initial',
           '--text-color-disabled': 'initial'
         }
-        const mergedTextColor = textColor || color
         if (text) {
           const { depth } = props
-          const mergedTextColorPlus =
-            mergedTextColor ||
+          const propTextColor = textColor || color
+          const mergedTextColor =
+            propTextColor ||
             (type === 'default' && depth !== undefined
               ? self[
                 createKey(
@@ -259,20 +259,21 @@ const Button = defineComponent({
             '--color-focus': '#0000',
             '--color-disabled': '#0000',
             '--ripple-color': '#0000',
-            '--text-color': mergedTextColorPlus,
-            '--text-color-hover': mergedTextColor
-              ? createHoverColor(mergedTextColor)
+            '--text-color': mergedTextColor,
+            '--text-color-hover': propTextColor
+              ? createHoverColor(propTextColor)
               : self[createKey('textColorTextHover', type)],
-            '--text-color-pressed': mergedTextColor
-              ? createPressedColor(mergedTextColor)
+            '--text-color-pressed': propTextColor
+              ? createPressedColor(propTextColor)
               : self[createKey('textColorTextPressed', type)],
-            '--text-color-focus': mergedTextColor
-              ? createHoverColor(mergedTextColor)
+            '--text-color-focus': propTextColor
+              ? createHoverColor(propTextColor)
               : self[createKey('textColorTextHover', type)],
             '--text-color-disabled':
-              mergedTextColor || self[createKey('textColorTextDisabled', type)]
+              propTextColor || self[createKey('textColorTextDisabled', type)]
           }
         } else if (ghost || dashed) {
+          const mergedTextColor = textColor || color
           colorProps = {
             '--color': '#0000',
             '--color-hover': '#0000',
@@ -313,21 +314,21 @@ const Button = defineComponent({
               (color
                 ? self.textColorPrimary
                 : self[createKey('textColor', type)]),
-            '--text-color-hover': textColor
-              ? createHoverColor(textColor)
-              : color
+            '--text-color-hover':
+              textColor ||
+              (color
                 ? self.textColorHoverPrimary
-                : self[createKey('textColorHover', type)],
-            '--text-color-pressed': textColor
-              ? createPressedColor(textColor)
-              : color
+                : self[createKey('textColorHover', type)]),
+            '--text-color-pressed':
+              textColor ||
+              (color
                 ? self.textColorPressedPrimary
-                : self[createKey('textColorPressed', type)],
-            '--text-color-focus': textColor
-              ? createHoverColor(textColor)
-              : color
+                : self[createKey('textColorPressed', type)]),
+            '--text-color-focus':
+              textColor ||
+              (color
                 ? self.textColorFocusPrimary
-                : self[createKey('textColorFocus', type)],
+                : self[createKey('textColorFocus', type)]),
             '--text-color-disabled':
               textColor ||
               (color
