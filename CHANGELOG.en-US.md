@@ -6,6 +6,7 @@
 
 - `n-loading-bar` add `loading-bar-style` props, closes [#457](https://github.com/TuSimple/naive-ui/issues/457).
 - `n-button` add `text-color` prop.
+- `n-form` export `FormValidationError` type.
 
 ### Fixes
 
