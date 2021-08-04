@@ -34,10 +34,7 @@ const progressProps = {
     type: Number,
     default: 7
   },
-  percentage: {
-    type: [Number, Array] as PropType<number | number[]>,
-    default: undefined
-  },
+  percentage: [Number, Array] as PropType<number | number[]>,
   unit: {
     type: String,
     default: '%'
@@ -170,7 +167,7 @@ export default defineComponent({
             railColor={railColor as any}
             fillColor={color as any}
             railStyle={railStyle as any}
-            percentage={(percentage || 0) as number}
+            percentage={percentage as number}
             viewBoxWidth={viewBoxWidth}
             strokeWidth={strokeWidth}
             unit={unit}
@@ -186,7 +183,7 @@ export default defineComponent({
             railColor={railColor as any}
             fillColor={color as any}
             railStyle={railStyle as any}
-            percentage={(percentage || 0) as number}
+            percentage={percentage as number}
             processing={processing}
             indicatorPlacement={mergedIndicatorPlacement}
             unit={unit}
@@ -204,7 +201,7 @@ export default defineComponent({
             fillColor={color as any}
             railStyle={railStyle as any}
             viewBoxWidth={viewBoxWidth}
-            percentage={(percentage || [0]) as number[]}
+            percentage={percentage as number[]}
             showIndicator={showIndicator}
             circleGap={circleGap}
           >
