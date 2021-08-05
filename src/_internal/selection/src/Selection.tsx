@@ -505,7 +505,7 @@ export default defineComponent({
           ) : (
             <NTag
               size={size}
-              closable
+              closable={!option.disabled}
               disabled={disabled}
               internalStopClickPropagation
               onClose={() => this.handleDeleteOption(option)}
