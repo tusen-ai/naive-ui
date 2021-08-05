@@ -58,20 +58,34 @@ export default defineComponent({
           memoedTextHtml = textEl.innerHTML
           const { value: selfEl } = selfRef
           if (selfEl) {
-            const { offsetWidth: elWidth, offsetHeight: elHeight } = selfEl
-            // FIX: use v-show elWidth is 0, need to recompute elWidth while update
-            if (elWidth === 0) {
-              memoedTextHtml = null
-              return
+            const elDisplay = selfEl.style.display
+            if (elDisplay !== 'none') {
+              const { offsetWidth: elWidth, offsetHeight: elHeight } = selfEl
+              const { offsetWidth: textWidth, offsetHeight: textHeight } =
+                textEl
+              const radix = 0.9
+              const ratio = Math.min(
+                (elWidth / textWidth) * radix,
+                (elHeight / textHeight) * radix,
+                1
+              )
+              textEl.style.transform = `translateX(-50%) translateY(-50%) scale(${ratio})`
+            } else {
+              // FIX: use v-show elWidth is 0, need to switch display
+              selfEl.style.display = 'block'
+              const { offsetWidth: elWidth, offsetHeight: elHeight } = selfEl
+              const { offsetWidth: textWidth, offsetHeight: textHeight } =
+                textEl
+              const radix = 0.9
+              const ratio = Math.min(
+                (elWidth / textWidth) * radix,
+                (elHeight / textHeight) * radix,
+                1
+              )
+              textEl.style.transform = `translateX(-50%) translateY(-50%) scale(${ratio})`
+              // restore display
+              selfEl.style.display = elDisplay
             }
-            const { offsetWidth: textWidth, offsetHeight: textHeight } = textEl
-            const radix = 0.9
-            const ratio = Math.min(
-              (elWidth / textWidth) * radix,
-              (elHeight / textHeight) * radix,
-              1
-            )
-            textEl.style.transform = `translateX(-50%) translateY(-50%) scale(${ratio})`
           }
         }
       }
