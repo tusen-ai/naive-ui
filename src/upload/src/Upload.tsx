@@ -6,7 +6,8 @@ import {
   toRef,
   ref,
   PropType,
-  CSSProperties
+  CSSProperties,
+  watchEffect
 } from 'vue'
 import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
@@ -34,11 +35,15 @@ import {
   OnChange,
   uploadInjectionKey,
   OnUpdateFileList,
-  OnBeforeUpload
+  OnBeforeUpload,
+  listType,
+  OnPreview,
+  previewFile
 } from './interface'
 import { useMergedState } from 'vooks'
 import { uploadDraggerKey } from './UploadDragger'
 
+const MEASURE_SIZE = 200
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
  */
@@ -237,7 +242,17 @@ const uploadProps = {
   showRetryButton: {
     type: Boolean,
     default: true
-  }
+  },
+  showPreivewButton: {
+    type: Boolean,
+    default: true
+  },
+  listType: {
+    type: String as PropType<listType>,
+    default: 'text'
+  },
+  onPreview: Function as PropType<OnPreview>,
+  previewFile: Function as PropType<previewFile>
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -311,7 +326,6 @@ export default defineComponent({
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files || files.length === 0) return
       const { onBeforeUpload } = props
-
       const filesAsArray = props.multiple ? Array.from(files) : [files[0]]
       void Promise.all(
         filesAsArray.map(async (file) => {
@@ -321,7 +335,8 @@ export default defineComponent({
             status: 'pending',
             percentage: 0,
             file: file,
-            url: null
+            url: null,
+            type: file.type
           }
           if (
             !onBeforeUpload ||
@@ -412,6 +427,106 @@ export default defineComponent({
         warn('upload', 'File has no corresponding id in current file list.')
       }
     }
+    function getFileThumb (): void {
+      if (props.listType !== 'picture' && props.listType !== 'picture-card') {
+        return
+      }
+
+      const win = window
+      mergedFileListRef.value.forEach((file: FileInfo) => {
+        if (
+          typeof document === 'undefined' ||
+          typeof win === 'undefined' ||
+          !win.FileReader ||
+          !win.File ||
+          !(file.file instanceof File || (file.file as Blob) instanceof Blob) ||
+          file.thumbUrl !== undefined
+        ) {
+          return
+        }
+        const { previewFile } = props
+
+        void Promise.resolve(
+          previewFile
+            ? previewFile(file.file as File)
+            : previewImage(file.file as File)
+        ).then((previewUrl) => {
+          file.thumbUrl = previewUrl || ''
+        })
+      })
+    }
+    watchEffect(() => {
+      getFileThumb()
+    })
+    const isImageFileType = (type: string): boolean => type.includes('image/')
+
+    const extname = (url: string = ''): string => {
+      const temp = url.split('/')
+      const filename = temp[temp.length - 1]
+      const filenameWithoutSuffix = filename.split(/#|\?/)[0]
+      return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0]
+    }
+
+    const isImageUrl = (file: FileInfo): boolean => {
+      if (file.type && !file.thumbUrl) {
+        return isImageFileType(file.type)
+      }
+      const url: string = file.thumbUrl || file.url || ''
+      const extension = extname(url)
+      if (
+        /^data:image\//.test(url) ||
+        /(webp|svg|png|gif|jpg|jpeg|jfif|bmp|dpg|ico)$/i.test(extension)
+      ) {
+        return true
+      }
+      if (/^data:/.test(url)) {
+        return false
+      }
+      if (extension) {
+        return false
+      }
+
+      return true
+    }
+
+    async function previewImage (file: File | Blob): Promise<string> {
+      return await new Promise((resolve) => {
+        if (!file.type || !isImageFileType(file.type)) {
+          resolve('')
+          return
+        }
+
+        const canvas = document.createElement('canvas')
+        canvas.width = MEASURE_SIZE
+        canvas.height = MEASURE_SIZE
+        canvas.style.cssText = `position: fixed; left: 0; top: 0; width: ${MEASURE_SIZE}px; height: ${MEASURE_SIZE}px; z-index: 9999; display: none;`
+        document.body.appendChild(canvas)
+        const ctx = canvas.getContext('2d')
+        const img = new Image()
+        img.onload = () => {
+          const { width, height } = img
+
+          let [drawWidth, drawHeight] = [MEASURE_SIZE, MEASURE_SIZE]
+          let [offsetX, offsetY] = [0, 0]
+
+          if (width > height) {
+            drawHeight = height * (MEASURE_SIZE / width)
+            offsetY = -(drawHeight - drawWidth) / 2
+          } else {
+            drawWidth = width * (MEASURE_SIZE / height)
+            offsetX = -(drawWidth - drawHeight) / 2
+          }
+
+          ctx?.drawImage(img, offsetX, offsetY, drawWidth, drawHeight)
+          const dataURL = canvas.toDataURL()
+          document.body.removeChild(canvas)
+
+          resolve(dataURL)
+        }
+        img.src = window.URL.createObjectURL(file)
+      })
+    }
+
     provide(uploadInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
@@ -424,7 +539,10 @@ export default defineComponent({
       mergedFileListRef: mergedFileListRef,
       XhrMap,
       submit,
-      doChange
+      doChange,
+      isImgUrl: isImageUrl,
+      showPreivewButtonRef: toRef(props, 'showPreivewButton'),
+      onPreviewRef: toRef(props, 'onPreview')
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -457,7 +575,8 @@ export default defineComponent({
             itemDisabledOpacity,
             lineHeight,
             borderRadius,
-            fontSize
+            fontSize,
+            thumbIconErrorColor
           }
         } = themeRef.value
         return {
@@ -474,7 +593,8 @@ export default defineComponent({
           '--item-text-color': itemTextColor,
           '--item-text-color-error': itemTextColorError,
           '--item-text-color-success': itemTextColorSuccess,
-          '--line-height': lineHeight
+          '--line-height': lineHeight,
+          '--thumb-icon-error-color': thumbIconErrorColor
         }
       })
     }
@@ -488,6 +608,23 @@ export default defineComponent({
         draggerInsideRef.value = true
       }
     }
+    const uploadInfo = (
+      <div
+        class={[
+          `${mergedClsPrefix}-upload__trigger`,
+          this.listType === 'picture-card' &&
+            `${mergedClsPrefix}-upload__picture-card`
+        ]}
+        onClick={this.handleTriggerClick}
+        onDrop={this.handleTriggerDrop}
+        onDragover={this.handleTriggerDragOver}
+        onDragenter={this.handleTriggerDragEnter}
+        onDragleave={this.handleTriggerDragLeave}
+      >
+        {this.$slots}
+      </div>
+    )
+
     return (
       <div
         class={[
@@ -509,16 +646,7 @@ export default defineComponent({
           multiple={this.multiple}
           onChange={this.handleFileInputChange}
         />
-        <div
-          class={`${mergedClsPrefix}-upload__trigger`}
-          onClick={this.handleTriggerClick}
-          onDrop={this.handleTriggerDrop}
-          onDragover={this.handleTriggerDragOver}
-          onDragenter={this.handleTriggerDragEnter}
-          onDragleave={this.handleTriggerDragLeave}
-        >
-          {this.$slots}
-        </div>
+        {this.listType !== 'picture-card' && uploadInfo}
         {this.showFileList && (
           <div
             class={`${mergedClsPrefix}-upload-file-list`}
@@ -532,10 +660,12 @@ export default defineComponent({
                       clsPrefix={mergedClsPrefix}
                       key={file.id}
                       file={file}
+                      listType={this.listType}
                     />
                   ))
               }}
             </NFadeInExpandTransition>
+            {this.listType === 'picture-card' && uploadInfo}
           </div>
         )}
       </div>

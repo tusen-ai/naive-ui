@@ -8,7 +8,9 @@ export interface FileInfo {
   url: string | null
   percentage: number
   status: 'pending' | 'uploading' | 'finished' | 'removed' | 'error'
-  file: File | null
+  file: File | null | Blob
+  thumbUrl?: string
+  type?: string
 }
 
 export type FuncOrRecordOrUndef =
@@ -64,6 +66,9 @@ export interface UploadInjection {
   XhrMap: Map<string, XMLHttpRequest>
   submit: (fileId?: string) => void
   doChange: DoChange
+  isImgUrl: (file: FileInfo) => boolean
+  showPreivewButtonRef: Ref<boolean>
+  onPreviewRef: Ref<OnPreview | undefined>
 }
 
 export const uploadInjectionKey: InjectionKey<UploadInjection> =
@@ -84,3 +89,9 @@ export type OnBeforeUpload = (data: {
   file: FileInfo
   fileList: FileInfo[]
 }) => Promise<unknown>
+
+export type listType = 'text' | 'picture' | 'picture-card'
+
+export type OnPreview = (file: FileInfo) => void
+
+export type previewFile = (file: File | Blob) => Promise<string>
