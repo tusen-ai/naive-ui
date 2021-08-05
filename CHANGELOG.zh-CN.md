@@ -15,6 +15,7 @@
 - 修复 `n-progress` 的 `percentage` 属性默认值不能适应多种类型
 - 修复 `n-select` 当选项禁用时未隐藏关闭图标
 - 修复 `n-modal` 使用自定义内容无法正常关闭，关闭 [#788](https://github.com/TuSimple/naive-ui/issues/788)
+- 修复 `n-avatar` 的缩放在使用 `v-show` 时不正确，关闭 [#779](https://github.com/TuSimple/naive-ui/issues/779)
 
 ## 2.16.0 (2021-08-02)
 

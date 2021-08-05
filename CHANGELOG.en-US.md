@@ -15,6 +15,7 @@
 - Fix `n-progress`'s `percentage` prop default value doesn't work with different types.
 - Fix `n-select` hide close icon when option is disabled.
 - Fix `n-modal` can't be closed when using custom content, closes [#788](https://github.com/TuSimple/naive-ui/issues/788).
+- Fix `n-avatar`'s scale value is incorrect while use v-show, closes [#779](https://github.com/TuSimple/naive-ui/issues/779).
 
 ## 2.16.0 (2021-08-02)
 
