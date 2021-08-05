@@ -82,7 +82,6 @@ export default defineComponent({
     onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
     onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
     onClick: Function as PropType<(e: MouseEvent) => void>,
-    onMousedown: Function as PropType<(e: MouseEvent) => void>,
     onBlur: Function as PropType<(e: FocusEvent) => void>,
     onFocus: Function as PropType<(e: FocusEvent) => void>,
     onDeleteOption: Function,
@@ -210,7 +209,6 @@ export default defineComponent({
       hoverRef.value = false
     }
     function handleMouseDown (e: MouseEvent): void {
-      props.onMousedown?.(e)
       if (!props.active || !props.filterable) return
       if (e.target === patternInputRef.value) return
       e.preventDefault()

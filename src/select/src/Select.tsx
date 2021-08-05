@@ -509,6 +509,14 @@ export default defineComponent({
       )
     }
     function handlePatternInput (e: InputEvent): void {
+      if (!mergedShowRef.value) {
+        openMenu()
+      } else {
+        if (!props.filterable) {
+          // already focused, don't need to return focus
+          closeMenu()
+        }
+      }
       const { value } = e.target as unknown as HTMLInputElement
       patternRef.value = value
       const { tag, remote } = props
@@ -713,7 +721,7 @@ export default defineComponent({
                       }
                       loading={this.loading}
                       focused={this.focused}
-                      onMousedown={this.handleTriggerClick}
+                      onClick={this.handleTriggerClick}
                       onDeleteOption={this.handleToggleOption}
                       onPatternInput={this.handlePatternInput}
                       onClear={this.handleClear}
