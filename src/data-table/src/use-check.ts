@@ -53,17 +53,17 @@ export function useCheck (
   })
   const someRowsCheckedRef = computed(() => {
     const { value: mergedInderminateRowKeySet } = mergedInderminateRowKeySetRef
+    const { length } = paginatedDataRef.value.filter((item) => !item.disabled)
     return (
       (countOfCurrentPageCheckedRowsRef.value > 0 &&
-        countOfCurrentPageCheckedRowsRef.value <
-          paginatedDataRef.value.length) ||
+        countOfCurrentPageCheckedRowsRef.value < length) ||
       paginatedDataRef.value.some((rowData) =>
         mergedInderminateRowKeySet.has(rowData.key)
       )
     )
   })
   const allRowsCheckedRef = computed(() => {
-    const { length } = paginatedDataRef.value
+    const { length } = paginatedDataRef.value.filter((item) => !item.disabled)
     return length !== 0 && countOfCurrentPageCheckedRowsRef.value === length
   })
   const headerCheckboxDisabledRef = computed(() => {
