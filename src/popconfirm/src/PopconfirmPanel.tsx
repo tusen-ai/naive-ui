@@ -28,7 +28,8 @@ export const panelProps = {
   onNegativeClick: {
     type: Function as PropType<(e: MouseEvent) => void>,
     required: true
-  }
+  },
+  actions: Array as PropType<Array<'confirm' | 'cancel'>>
 } as const
 
 export const panelPropKeys = keysOf(panelProps)
@@ -89,16 +90,20 @@ export default defineComponent({
         </div>
         <div class={`${mergedClsPrefix}-popconfirm__action`}>
           {renderSlot($slots, 'action', undefined, () => [
-            <NButton size="small" onClick={this.handleNegativeClick}>
-              {{ default: () => this.localizedNegativeText }}
-            </NButton>,
-            <NButton
-              size="small"
-              type="primary"
-              onClick={this.handlePositiveClick}
-            >
-              {{ default: () => this.localizedPositiveText }}
-            </NButton>
+            this.actions?.includes('cancel') && (
+              <NButton size="small" onClick={this.handleNegativeClick}>
+                {{ default: () => this.localizedNegativeText }}
+              </NButton>
+            ),
+            this.actions?.includes('confirm') && (
+              <NButton
+                size="small"
+                type="primary"
+                onClick={this.handlePositiveClick}
+              >
+                {{ default: () => this.localizedPositiveText }}
+              </NButton>
+            )
           ])}
         </div>
       </div>

@@ -10,12 +10,14 @@ custom-action
 custom-icon
 event
 no-icon
+actions
 ```
 
 ## Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| actions | `Array<'confirm' \| 'cancel'> \| null` | `['confirm', 'cancel]` | 支持的操作 |
 | negative-text | `string` | `'取消'` | 取消按钮文字 |
 | positive-text | `string` | `'确认'` | 确定按钮文字 |
 | show-icon | `boolean` | `true` | 是否显示图标 |
