@@ -25,6 +25,20 @@ export default cB('layout-sider', `
   display: flex;
   justify-content: flex-end;
 `, [
+  cM('right-positioned', '', [
+    cB('layout-toggle-button', `
+      transform: translateX(-50%) translateY(-50%) rotate(180deg);
+      left: 0;
+    `, [
+      cM('collapsed', `
+        transform: translateX(-50%) translateY(-50%) rotate(0);
+      `)
+    ]),
+    cB('layout-toggle-bar', `
+      left: -28px;
+      transform: rotate(180deg);
+    `)
+  ]),
   cB('layout-toggle-button', `
     transition:
       transform .3s var(--bezier),
@@ -40,15 +54,7 @@ export default cB('layout-sider', `
   `, [
     cM('collapsed', `
       transform: translateX(50%) translateY(-50%) rotate(180deg);
-    `),
-    cM('right', `
-      transform: translateX(-50%) translateY(-50%) rotate(180deg);
-      left: 0;
-    `, [
-      cM('collapsed', `
-        transform: translateX(-50%) translateY(-50%) rotate(0);
-      `)
-    ])
+    `)
   ]),
   cB('layout-toggle-bar', `
     cursor: pointer;
@@ -58,10 +64,6 @@ export default cB('layout-sider', `
     top: calc(50% - 36px);
     right: -28px;
   `, [
-    cM('right', `
-      left: -28px;
-      transform: rotate(180deg);
-    `),
     cE('top, bottom', `
       position: absolute;
       width: 4px;

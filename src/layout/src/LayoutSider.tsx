@@ -94,8 +94,8 @@ export default defineComponent({
     ...layoutSiderProps
   },
   setup (props) {
+    const layoutProps = inject(layoutInjectionKey)
     if (__DEV__) {
-      const layoutProps = inject(layoutInjectionKey)
       if (!layoutProps) {
         warn(
           'layout-sider',
@@ -123,9 +123,22 @@ export default defineComponent({
         minWidth: formatLength(props.width)
       }
     })
-    const siderPlacement = ref<'left' | 'right'>('left')
+    const siderScrollContainerTransformStyleRef = computed<CSSProperties>(
+      () => {
+        if (!siderOnLeft.value && props.collapseMode === 'transform') {
+          return {
+            transform: `translateX(${
+              parseInt(formatLength(props.width)) -
+              parseInt(styleMaxWidthRef.value)
+            }px)`
+          }
+        }
+        return {}
+      }
+    )
+    const siderPlacement = layoutProps?.siderPlacement || 'left'
     const siderOnLeft = computed(() => {
-      return siderPlacement.value === 'left'
+      return siderPlacement === 'left'
     })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
     const mergedCollapsedRef = useMergedState(
@@ -198,6 +211,7 @@ export default defineComponent({
       styleMaxWidth: styleMaxWidthRef,
       mergedCollapsed: mergedCollapsedRef,
       scrollContainerStyle: scrollContainerStyleRef,
+      siderScrollContainerTransformStyle: siderScrollContainerTransformStyleRef,
       siderPlacement,
       siderOnLeft,
       handleTriggerClick,
@@ -233,14 +247,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, mergedCollapsed, showTrigger, $parent } = this
-    this.siderPlacement = ($parent?.$props as any).siderPlacement
-    const siderScrollContainerTransformStyle =
-      !this.siderOnLeft && this.collapseMode === 'transform'
-        ? `translateX(${
-            parseInt(formatLength(this.width)) - parseInt(this.styleMaxWidth)
-          }px)`
-        : 'unset'
+    const { mergedClsPrefix, mergedCollapsed, showTrigger } = this
     return (
       <aside
         class={[
@@ -269,8 +276,8 @@ export default defineComponent({
             ref="scrollbarInstRef"
             style={[
               this.scrollContainerStyle,
+              this.siderScrollContainerTransformStyle,
               {
-                transform: siderScrollContainerTransformStyle,
                 transition: 'transform .3s var(--bezier)'
               }
             ]}
@@ -296,9 +303,9 @@ export default defineComponent({
             style={[
               this.scrollContainerStyle,
               this.contentStyle,
+              this.siderScrollContainerTransformStyle,
               {
-                overflow: 'auto',
-                transform: siderScrollContainerTransformStyle
+                overflow: 'auto'
               }
             ]}
             ref="scrollableElRef"
@@ -310,8 +317,6 @@ export default defineComponent({
           showTrigger === 'arrow-circle' ? (
             <ToggleButton
               class={[
-                !this.siderOnLeft &&
-                  `${mergedClsPrefix}-layout-toggle-button--right`,
                 mergedCollapsed &&
                   `${mergedClsPrefix}-layout-toggle-button--collapsed`
               ]}
@@ -321,10 +326,6 @@ export default defineComponent({
             />
           ) : (
             <ToggleBar
-              class={[
-                !this.siderOnLeft &&
-                  `${mergedClsPrefix}-layout-toggle-bar--right`
-              ]}
               clsPrefix={mergedClsPrefix}
               collapsed={mergedCollapsed}
               style={this.triggerStyle}
