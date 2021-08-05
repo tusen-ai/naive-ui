@@ -12,40 +12,25 @@
     </template>
     一切都将一去杳然，任何人都无法将其捕获。
   </n-popconfirm>
-  <n-popconfirm
-    @positive-click="handlePositiveClick"
-    @negative-click="handleNegativeClick"
-    :actions="['confirm']"
-  >
+  <n-popconfirm @positive-click="handlePositiveClick" :actions="['confirm']">
     <template #trigger>
       <n-button>只有确认</n-button>
     </template>
     一切都将一去杳然，任何人都无法将其捕获。
   </n-popconfirm>
-  <n-popconfirm
-    @positive-click="handlePositiveClick"
-    @negative-click="handleNegativeClick"
-    :actions="['cancel']"
-  >
+  <n-popconfirm @negative-click="handleNegativeClick" :actions="['cancel']">
     <template #trigger>
       <n-button>只有取消</n-button>
     </template>
     一切都将一去杳然，任何人都无法将其捕获。
   </n-popconfirm>
-  <n-popconfirm
-    @positive-click="handlePositiveClick"
-    @negative-click="handleNegativeClick"
-    :actions="[]"
-  >
+  <n-popconfirm :actions="[]">
     <template #trigger>
       <n-button>什么也没有</n-button>
     </template>
     一切都将一去杳然，任何人都无法将其捕获。
   </n-popconfirm>
-  <n-popconfirm
-    @positive-click="handlePositiveClick"
-    @negative-click="handleNegativeClick"
-  >
+  <n-popconfirm>
     <template #trigger>
       <n-button>自定义 action</n-button>
     </template>

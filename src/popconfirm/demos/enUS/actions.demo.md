@@ -12,40 +12,25 @@
     </template>
     Things pass us by. Nobody can catch them. That's the way we live our lives.
   </n-popconfirm>
-  <n-popconfirm
-    @positive-click="handlePositiveClick"
-    @negative-click="handleNegativeClick"
-    :actions="['confirm']"
-  >
+  <n-popconfirm @positive-click="handlePositiveClick" :actions="['confirm']">
     <template #trigger>
       <n-button>Only confirm</n-button>
     </template>
     Things pass us by. Nobody can catch them. That's the way we live our lives.
   </n-popconfirm>
-  <n-popconfirm
-    @positive-click="handlePositiveClick"
-    @negative-click="handleNegativeClick"
-    :actions="['cancel']"
-  >
+  <n-popconfirm @negative-click="handleNegativeClick" :actions="['cancel']">
     <template #trigger>
       <n-button>Only cancel</n-button>
     </template>
     Things pass us by. Nobody can catch them. That's the way we live our lives.
   </n-popconfirm>
-  <n-popconfirm
-    @positive-click="handlePositiveClick"
-    @negative-click="handleNegativeClick"
-    :actions="[]"
-  >
+  <n-popconfirm :actions="[]">
     <template #trigger>
       <n-button>Nothing</n-button>
     </template>
     Things pass us by. Nobody can catch them. That's the way we live our lives.
   </n-popconfirm>
-  <n-popconfirm
-    @positive-click="handlePositiveClick"
-    @negative-click="handleNegativeClick"
-  >
+  <n-popconfirm>
     <template #trigger>
       <n-button>Custom action</n-button>
     </template>
