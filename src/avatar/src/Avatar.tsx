@@ -59,6 +59,11 @@ export default defineComponent({
           const { value: selfEl } = selfRef
           if (selfEl) {
             const { offsetWidth: elWidth, offsetHeight: elHeight } = selfEl
+            // FIX: use v-show elWidth is 0, need to recompute elWidth while update
+            if (elWidth === 0) {
+              memoedTextHtml = null
+              return
+            }
             const { offsetWidth: textWidth, offsetHeight: textHeight } = textEl
             const radix = 0.9
             const ratio = Math.min(
