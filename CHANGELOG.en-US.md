@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## 2.16.1 (2020-08-06)
+
+### Feats
+
+- `n-loading-bar` add `loading-bar-style` props, closes [#457](https://github.com/TuSimple/naive-ui/issues/457).
+- `n-button` add `text-color` prop.
+- `n-form` export `FormValidationError` type.
+
+### Fixes
+
+- Fix `n-slider` loss floating point decimal precision, closes [#751](https://github.com/TuSimple/naive-ui/issues/751).
+- Fix `n-data-table` `onUpdatePage` and `onUpdatePageSize` not triggered while using jsx.
+- Fix `n-progress`'s `percentage` prop default value doesn't work with different types.
+- Fix `n-select` hide close icon when option is disabled.
+- Fix `n-modal` can't be closed when using custom content, closes [#788](https://github.com/TuSimple/naive-ui/issues/788).
+
 ## 2.16.0 (2021-08-02)
 
 ### Breaking Changes

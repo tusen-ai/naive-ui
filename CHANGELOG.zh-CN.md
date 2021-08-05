@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## 2.16.1 (2020-08-06)
+
+### Feats
+
+- `n-loading-bar` 新增 `loading-bar-style` 属性，关闭 [#457](https://github.com/TuSimple/naive-ui/issues/457)
+- `n-button` 新增 `text-color` 属性
+- `n-form` 导出 `FormValidationError` 类型
+
+### Fixes
+
+- 修复 `n-slider` 丢失浮点数小数精度，关闭 [#751](https://github.com/TuSimple/naive-ui/issues/751)
+- 修复 `n-data-table` `onUpdatePage` 和 `onUpdatePageSize` 在使用 jsx 时不触发的问题
+- 修复 `n-progress` 的 `percentage` 属性默认值不能适应多种类型
+- 修复 `n-select` 当选项禁用时未隐藏关闭图标
+- 修复 `n-modal` 使用自定义内容无法正常关闭，关闭 [#788](https://github.com/TuSimple/naive-ui/issues/788)
+
 ## 2.16.0 (2021-08-02)
 
 ### Breaking Changes

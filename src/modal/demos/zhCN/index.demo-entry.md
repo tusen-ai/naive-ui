@@ -12,6 +12,7 @@ custom-position
 preset-card
 preset-confirm
 preset-confirm-slot
+raw-debug
 dark-1-debug
 dark-2-debug
 dark-3-debug

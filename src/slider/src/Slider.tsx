@@ -114,6 +114,13 @@ export default defineComponent({
     const railRef = ref<HTMLElement | null>(null)
     const followerRef1 = ref<FollowerInst | null>(null)
     const followerRef2 = ref<FollowerInst | null>(null)
+    const precisionRef = computed(() => {
+      const precisions = [props.min, props.max, props.step].map((item) => {
+        const fraction = String(item).split('.')[1]
+        return fraction ? fraction.length : 0
+      })
+      return Math.max(...precisions)
+    })
 
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -459,6 +466,7 @@ export default defineComponent({
       justifiedValue = Math.max(min, justifiedValue)
       justifiedValue = Math.min(max, justifiedValue)
       justifiedValue = Math.round((justifiedValue - min) / step) * step + min
+      justifiedValue = parseFloat(justifiedValue.toFixed(precisionRef.value))
       if (marks) {
         const closestMarkValue = getClosestMarkValue(value)
         if (
