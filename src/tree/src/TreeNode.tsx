@@ -61,13 +61,21 @@ const TreeNode = defineComponent({
           onLoadRef: { value: onLoad }
         } = NTree
         if (onLoad) {
-          void onLoad(tmNode.rawNode).then(() => {
+          const removeFromLoadingKeysRef = (tmNode: TmNode): void => {
             NTree.loadingKeysRef.value.splice(
               NTree.loadingKeysRef.value.findIndex((key) => key === tmNode.key),
               1
             )
-            NTree.handleSwitcherClick(tmNode)
-          })
+          }
+          void onLoad(tmNode.rawNode)
+            .then(() => {
+              removeFromLoadingKeysRef(tmNode)
+              NTree.handleSwitcherClick(tmNode)
+            })
+            .catch((switcherClickError) => {
+              console.error(switcherClickError)
+              removeFromLoadingKeysRef(tmNode)
+            })
         }
       } else {
         NTree.handleSwitcherClick(tmNode)
