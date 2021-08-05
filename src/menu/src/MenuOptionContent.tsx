@@ -63,8 +63,9 @@ export default defineComponent({
     const {
       clsPrefix,
       tmNode,
-      menuProps: { renderIcon, renderLabel, expandIcon }
+      menuProps: { renderIcon, renderLabel, renderExtra, expandIcon }
     } = this
+    const icon = renderIcon ? renderIcon(tmNode.rawNode) : render(this.icon)
     return (
       <div
         onClick={this.onClick}
@@ -80,37 +81,40 @@ export default defineComponent({
         ]}
         style={this.style}
       >
-        {renderIcon || this.icon ? (
+        {icon && (
           <div
             class={`${clsPrefix}-menu-item-content__icon`}
             style={this.iconStyle}
             role="none"
           >
-            {renderIcon ? renderIcon(tmNode.rawNode) : render(this.icon)}
+            {icon}
           </div>
-        ) : null}
+        )}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">
           {renderLabel ? renderLabel(tmNode.rawNode) : render(this.title)}
-          {this.extra ? (
+          {this.extra || renderExtra ? (
             <span class={`${clsPrefix}-menu-item-content-header__extra`}>
               {' '}
-              {render(this.extra)}
+              {renderExtra ? renderExtra(tmNode.rawNode) : render(this.extra)}
             </span>
           ) : null}
         </div>
-        {
-          this.showArrow ? (
-            <NBaseIcon
-              ariaHidden={true}
-              class={`${clsPrefix}-menu-item-content__arrow`}
-              clsPrefix={clsPrefix}
-            >
-              {{
-                default: () => expandIcon ? expandIcon(tmNode.rawNode) : <ChevronDownFilledIcon />
-              }}
-            </NBaseIcon>
-          ) : null
-        }
+        {this.showArrow ? (
+          <NBaseIcon
+            ariaHidden={true}
+            class={`${clsPrefix}-menu-item-content__arrow`}
+            clsPrefix={clsPrefix}
+          >
+            {{
+              default: () =>
+                expandIcon ? (
+                  expandIcon(tmNode.rawNode)
+                ) : (
+                  <ChevronDownFilledIcon />
+                )
+            }}
+          </NBaseIcon>
+        ) : null}
       </div>
     )
   }

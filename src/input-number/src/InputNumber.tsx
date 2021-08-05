@@ -29,7 +29,10 @@ const inputNumberProps = {
   min: [Number, String],
   max: [Number, String],
   size: String as PropType<'small' | 'medium' | 'large'>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   validator: Function as PropType<(value: number) => boolean>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -76,6 +79,7 @@ export default defineComponent({
     )
     const { localeRef } = useLocale('InputNumber')
     const formItem = useFormItem(props)
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     // dom ref
     const inputInstRef = ref<InputInst | null>(null)
     const minusButtonInstRef = ref<{ $el: HTMLElement } | null>(null)
@@ -316,7 +320,8 @@ export default defineComponent({
       mergedValue: mergedValueRef,
       mergedPlaceholder: mergedPlaceholderRef,
       displayedValueInvalid: displayedValueInvalidRef,
-      mergedSize: formItem.mergedSizeRef,
+      mergedSize: mergedSizeRef,
+      mergedDisabled: mergedDisabledRef,
       displayedValue: displayedValueRef,
       addable: addableRef,
       minusable: minusableRef,
@@ -360,7 +365,7 @@ export default defineComponent({
           builtinThemeOverrides={this.inputThemeOverrides}
           size={this.mergedSize}
           placeholder={this.mergedPlaceholder}
-          disabled={this.disabled}
+          disabled={this.mergedDisabled}
           textDecoration={
             this.displayedValueInvalid ? 'line-through' : undefined
           }
@@ -381,7 +386,7 @@ export default defineComponent({
                   ),
                   <NButton
                     text
-                    disabled={!this.minusable || this.disabled}
+                    disabled={!this.minusable || this.mergedDisabled}
                     focusable={false}
                     builtinThemeOverrides={this.buttonThemeOverrides}
                     onClick={this.handleMinusClick}
@@ -399,7 +404,7 @@ export default defineComponent({
                   </NButton>,
                   <NButton
                     text
-                    disabled={!this.addable || this.disabled}
+                    disabled={!this.addable || this.mergedDisabled}
                     focusable={false}
                     builtinThemeOverrides={this.buttonThemeOverrides}
                     onClick={this.handleAddClick}

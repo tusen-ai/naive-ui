@@ -14,6 +14,7 @@ top
 left
 item-only
 async
+disabled
 height-debug
 validator-debug
 ```
@@ -24,6 +25,7 @@ validator-debug
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| disabled | `boolean` | `false` | 是否禁用 |
 | inline | `boolean` | `false` | 是否展示为行内表单 |
 | label-width | `number \| string` | `undefined` | 标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用 |
 | label-align | `'left' \| 'right'` | `-` | 标签的文本对齐方式 |
@@ -78,14 +80,14 @@ validator-debug
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| validate | `(validateCallback?: (errors?: Array<ValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<void>` | 验证表单，Promise rejection 的返回值类型是 `Array<ValidationError>` |
+| validate | `(validateCallback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<void>` | 验证表单，Promise rejection 的返回值类型是 `Array<FormValidationError>` |
 | restoreValidation | `() => void` | 还原到未校验的状态 |
 
 ### FormItem, FormItemGi Methods
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| validate | `(options: { trigger?: string, callback?: (errors?: Array<ValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<void>` | 验证表项，Promise rejection 的返回值类型是 `Array<ValidationError>`。如果设定 `trigger`，这一个表项全部的规则都会被使用。`shouldRuleBeApplied` 可以用来进一步过滤已经经过 `trigger` 筛选的规则 |
+| validate | `(options: { trigger?: string, callback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<void>` | 验证表项，Promise rejection 的返回值类型是 `Array<FormValidationError>`。如果设定 `trigger`，这一个表项全部的规则都会被使用。`shouldRuleBeApplied` 可以用来进一步过滤已经经过 `trigger` 筛选的规则 |
 | restoreValidation | `() => void` | 还原到未校验的状态 |
 
 关于 AsyncValidatorOptions，参考 <n-a href="https://github.com/yiminghe/async-validator">async-validator</n-a>。

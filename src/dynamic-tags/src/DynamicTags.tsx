@@ -39,6 +39,7 @@ const dynamicTagsProps = {
   },
   value: Array as PropType<string[]>,
   inputStyle: [String, Object] as PropType<string | CSSProperties>,
+  max: Number as PropType<number>,
   tagStyle: [String, Object] as PropType<string | CSSProperties>,
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -68,6 +69,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const { localeRef } = useLocale('DynamicTags')
     const formItem = useFormItem(props)
+    const { mergedDisabledRef } = formItem
     const inputValueRef = ref('')
     const showInputRef = ref(false)
     const inputForceFocusedRef = ref(true)
@@ -148,6 +150,7 @@ export default defineComponent({
       showInput: showInputRef,
       inputForceFocused: inputForceFocusedRef,
       mergedValue: mergedValueRef,
+      mergedDisabled: mergedDisabledRef,
       handleInputKeyUp,
       handleAddClick,
       handleInputBlur,
@@ -182,8 +185,9 @@ export default defineComponent({
               type,
               round,
               size,
+              color,
               closable,
-              disabled,
+              mergedDisabled,
               showInput,
               inputValue,
               inputStyle,
@@ -204,8 +208,9 @@ export default defineComponent({
                   type={type}
                   round={round}
                   size={size}
+                  color={color}
                   closable={closable}
-                  disabled={disabled}
+                  disabled={mergedDisabled}
                   onClose={() => handleCloseClick(index)}
                 >
                   {{ default: () => tag }}
@@ -232,6 +237,7 @@ export default defineComponent({
                 ) : (
                   <NButton
                     dashed
+                    disabled={!!this.max && this.mergedValue.length >= this.max}
                     theme={mergedTheme.peers.Button}
                     themeOverrides={mergedTheme.peerOverrides.Button}
                     size={inputSize}

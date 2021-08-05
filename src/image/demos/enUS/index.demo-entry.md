@@ -26,7 +26,7 @@ group
 
 ### ImageGroup Props
 
-| 名称 | 类型 | 默认值 | 说明 |
+| Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |
 

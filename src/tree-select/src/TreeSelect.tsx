@@ -71,7 +71,10 @@ const props = {
     >,
     default: null
   },
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   filterable: Boolean,
   leafOnly: Boolean,
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
@@ -125,6 +128,7 @@ export default defineComponent({
     const { localeRef } = useLocale('Select')
     const {
       mergedSizeRef,
+      mergedDisabledRef,
       nTriggerFormBlur,
       nTriggerFormChange,
       nTriggerFormFocus,
@@ -301,7 +305,7 @@ export default defineComponent({
       doUpdateShow(false)
     }
     function openMenu (): void {
-      if (!props.disabled) {
+      if (!mergedDisabledRef.value) {
         patternRef.value = ''
         doUpdateShow(true)
         if (props.filterable) {
@@ -321,7 +325,7 @@ export default defineComponent({
       }
     }
     function handleTriggerClick (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (!mergedShowRef.value) {
         openMenu()
       } else {
@@ -529,6 +533,7 @@ export default defineComponent({
       treeSelectedKeys: treeSelectedKeysRef,
       treeCheckedKeys: treeCheckedKeysRef,
       mergedSize: mergedSizeRef,
+      mergedDisabled: mergedDisabledRef,
       selectedOption: selectedOptionRef,
       selectedOptions: selectedOptionsRef,
       pattern: patternRef,
@@ -590,7 +595,7 @@ export default defineComponent({
                       size={this.mergedSize}
                       bordered={this.bordered}
                       placeholder={this.mergedPlaceholder}
-                      disabled={this.disabled}
+                      disabled={this.mergedDisabled}
                       active={this.mergedShow}
                       multiple={this.multiple}
                       maxTagCount={this.maxTagCount}

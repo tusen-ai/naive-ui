@@ -11,11 +11,12 @@
 
 ```js
 import { GameControllerOutline, GameController } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   components: {
     GameControllerOutline,
     GameController
   }
-}
+})
 ```

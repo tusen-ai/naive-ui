@@ -102,6 +102,7 @@ const dropdownBaseProps = {
     type: Array as PropType<DropdownMixedOption[]>,
     default: () => []
   },
+  showArrow: Boolean,
   // for menu, not documented
   value: [String, Number] as PropType<Key | null>,
   renderLabel: Function as PropType<RenderLabel>,
@@ -389,10 +390,16 @@ export default defineComponent({
       const { mergedClsPrefix } = this
       const dropdownProps = {
         ref: createRefSetter(ref),
-        class: [className, `${mergedClsPrefix}-dropdown`],
+        class: [
+          className,
+          `${mergedClsPrefix}-dropdown`,
+          this.showArrow && `${mergedClsPrefix}-popover--show-arrow`
+        ],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,
         style: [style, this.cssVars as CSSProperties],
+        showArrow: this.showArrow,
+        arrowStyle: this.arrowStyle,
         onMouseenter,
         onMouseleave
       }

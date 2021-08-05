@@ -27,4 +27,13 @@ describe('n-input', () => {
     expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
     wrapper.unmount()
   })
+  it('should work with `type` prop', async () => {
+    const wrapper = mount(NInput)
+    await wrapper.setProps({ type: 'text' })
+    expect(wrapper.find('input').exists()).toBe(true)
+
+    await wrapper.setProps({ type: 'textarea' })
+    expect(wrapper.find('.n-input').classes()).toContain('n-input--textarea')
+    expect(wrapper.find('textarea').exists()).toBe(true)
+  })
 })

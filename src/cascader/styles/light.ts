@@ -34,7 +34,8 @@ export const self = (vars: ThemeCommonVars) => {
     optionTextColorActive: primaryColor,
     optionTextColorDisabled: textColorDisabled,
     optionCheckMarkColor: primaryColor,
-    loadingColor: primaryColor
+    loadingColor: primaryColor,
+    columnWidth: '180px'
   }
 }
 

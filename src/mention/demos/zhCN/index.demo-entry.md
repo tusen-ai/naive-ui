@@ -22,7 +22,7 @@ Mention 在 `v2.2.0` 及以后可用。
 | --- | --- | --- | --- |
 | autosize | `boolean \| { maxRows?: number, minRows?: number }` | `false` | 自动换行 |
 | options | `MentionOption[]` | `[]` | 选项列表 |
-| type | `'input' \| 'textarea'` | `'input'` | 输入框类型 |
+| type | `'text' \| 'textarea'` | `'text'` | 输入框类型 |
 | separator | `string` | `' '` | 切分提及使用的字符，长度必须为 1 |
 | bordered | `boolean` | `true` | 是否显示输入框边框 |
 | disabled | `boolean` | `false` | 是否设置输入框为禁用状态 |

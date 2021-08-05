@@ -55,7 +55,8 @@ function mapSlot (
       const lastInstanceProps: RadioProps = children[children.length - 1]
         .props as any
       const lastInstanceChecked = value === lastInstanceProps.value
-      const lastInstanceDisabled: boolean = lastInstanceProps.disabled
+      const lastInstanceDisabled: boolean | undefined =
+        lastInstanceProps.disabled
       const currentInstanceChecked = value === instanceProps.value
       const currentInstanceDisabled = instanceProps.disabled
       /**
@@ -109,8 +110,8 @@ const radioGroupProps = {
     default: undefined
   },
   disabled: {
-    type: Boolean,
-    default: false
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': Function as PropType<(value: string | number) => void>,
@@ -142,6 +143,7 @@ export default defineComponent({
     const selfElRef = ref<HTMLDivElement | null>(null)
     const {
       mergedSizeRef,
+      mergedDisabledRef,
       nTriggerFormChange,
       nTriggerFormInput,
       nTriggerFormBlur,
@@ -197,7 +199,7 @@ export default defineComponent({
       mergedClsPrefixRef,
       nameRef: toRef(props, 'name'),
       valueRef: mergedValueRef,
-      disabledRef: toRef(props, 'disabled'),
+      disabledRef: mergedDisabledRef,
       mergedSizeRef,
       doUpdateValue
     })
