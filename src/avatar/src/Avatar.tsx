@@ -60,7 +60,7 @@ export default defineComponent({
           if (selfEl) {
             const { offsetWidth: elWidth, offsetHeight: elHeight } = selfEl
             // FIX: use v-show elWidth is 0, need to recompute elWidth while update
-            if (elWidth === 0) {
+            if (elWidth === 0||elHeight === 0) {
               memoedTextHtml = null
               return
             }
