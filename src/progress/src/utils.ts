@@ -24,7 +24,7 @@ const changeProcessingFillStrokeDasharray = ({
     )
   let num = strokeDasharrayVal + maxStrokeDasharray * rate
   if (num > maxStrokeDasharray) {
-    num = 0
+    num = maxStrokeDasharray
   }
   isArray
     ? ((processingFillStrokeDasharrayRef as Ref<string[]>).value[
@@ -96,17 +96,19 @@ export const setProcessingTimer = ({
   const isArray = Array.isArray(processingFillStrokeDasharrayRef.value)
   timerRef.value = window.setInterval(() => {
     num.value++
-    if (num.value === 62) {
+    if (num.value === 63) {
       clearProcessingTimer(timerRef)
       sleepingRef.value = true
-      initProcessingFillStrokeDasharrayRef({
-        processingFillStrokeDasharrayRef,
-        percentage,
-        viewBoxWidth
-      })
       window.setTimeout(() => {
+        initProcessingFillStrokeDasharrayRef({
+          processingFillStrokeDasharrayRef,
+          percentage,
+          viewBoxWidth
+        })
         randomIdRef.value = createId()
         sleepingRef.value = false
+      }, 700)
+      window.setTimeout(() => {
         setProcessingTimer({
           timerRef,
           sleepingRef,
@@ -142,7 +144,7 @@ export const setProcessingTimer = ({
             changeProcessingFillStrokeDasharray({
               processingFillStrokeDasharrayRef,
               maxStrokeDasharray,
-              rate: 0.014,
+              rate: 1 / 62,
               viewBoxWidth,
               idx
             })
@@ -153,7 +155,7 @@ export const setProcessingTimer = ({
         changeProcessingFillStrokeDasharray({
           processingFillStrokeDasharrayRef,
           maxStrokeDasharray,
-          rate: 0.014,
+          rate: 1 / 62,
           viewBoxWidth: viewBoxWidth
         })
       }
@@ -164,26 +166,30 @@ export const clearProcessingTimer = (timerRef: Ref<number>): void => {
   window.clearInterval(timerRef.value as any)
 }
 
-const calcPointPos = (r: number, arcLength: number): number[] => {
-  const arcAngle = (arcLength / (2 * Math.PI * r)) * 360
-  const angleFromStartPoint =
-    arcAngle < 360 - 45 ? 45 + arcAngle : arcAngle - 315
-  const x = 0.5 + 0.5 * Math.cos((angleFromStartPoint * Math.PI) / 180)
-  const y = 0.5 + Math.sin((angleFromStartPoint * Math.PI) / 180)
+const calcPointPos = (
+  r: number,
+  arcLength: number,
+  curArcRate: number
+): number[] => {
+  const arcAngle = (arcLength / (2 * Math.PI * r)) * 360 * curArcRate
+  const x = 0.5 * (1 + Math.sin((arcAngle * Math.PI) / 180))
+  const y = 0.5 * (1 - Math.cos((arcAngle * Math.PI) / 180))
   return [x, y]
 }
 
-export const calcLightestCurPointPos = (
+export const calcCurPointPos = (
   r: number | number[],
-  curArcLengthRef: ComputedRef<number> | ComputedRef<number[]>
+  curArcLengthRef: ComputedRef<number> | ComputedRef<number[]>,
+  curArcRate: number
 ): number[] | number[][] => {
   if (Array.isArray(curArcLengthRef.value)) {
     return curArcLengthRef.value.map((item, idx) => {
-      return calcPointPos((r as number[])[idx], item)
+      return calcPointPos((r as number[])[idx], item, curArcRate)
     })
   }
   return calcPointPos(
     r as number,
-    (curArcLengthRef as ComputedRef<number>).value
+    (curArcLengthRef as ComputedRef<number>).value,
+    curArcRate
   )
 }

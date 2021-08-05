@@ -16,9 +16,9 @@
       :circle-gap="0.5"
       :percentage="[
         percentage,
-        (percentage + 10) % 100,
-        (percentage + 20) % 100,
-        (percentage + 30) % 100
+        percentage + 10,
+        percentage + 20,
+        percentage + 30
       ]"
       :color="[
         'var(--info-color)',
@@ -42,7 +42,7 @@
 export default {
   data () {
     return {
-      percentage: 50
+      percentage: 70
     }
   }
 }

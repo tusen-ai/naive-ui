@@ -10,7 +10,7 @@ import {
 } from 'vue'
 import { createId } from 'seemly'
 import {
-  calcLightestCurPointPos,
+  calcCurPointPos,
   setProcessingTimer,
   clearProcessingTimer
 } from './utils'
@@ -88,6 +88,21 @@ export default defineComponent({
         return parseFloat(item.split(',')[0])
       })
     })
+    const maxStrokeDasharray = computed(() => {
+      return strokeDasharrayRef.value.map((item) => {
+        return parseInt(item.split(',')[0])
+      })
+    })
+    const darkestPointPos = computed(() => {
+      const rArr = props.percentage.map((_, index) => {
+        return (
+          props.viewBoxWidth / 2 -
+          (props.strokeWidth / 2) * (1 + 2 * index) -
+          props.circleGap * index
+        )
+      })
+      return calcCurPointPos(rArr, maxStrokeDasharray, 1) as number[][]
+    })
     const lightestCurPointPosArr = computed(() => {
       const rArr = props.percentage.map((_, index) => {
         return (
@@ -96,7 +111,7 @@ export default defineComponent({
           props.circleGap * index
         )
       })
-      return calcLightestCurPointPos(rArr, curArcLength) as number[][]
+      return calcCurPointPos(rArr, curArcLength, 0.66) as number[][]
     })
     onMounted(() => {
       props.processing &&
@@ -137,18 +152,18 @@ export default defineComponent({
                       lightestCurPointPosArr.value[index] && (
                         <linearGradient
                           id={`ProgressMultipleCircleGradient${randomIdRef.value}${index}`}
-                          x1="0.5"
-                          y1="0"
+                          x1={darkestPointPos.value[index][0]}
+                          y1={darkestPointPos.value[index][1]}
                           x2={lightestCurPointPosArr.value[index][0]}
                           y2={lightestCurPointPosArr.value[index][1]}
                         >
                           <stop
                             offset="0%"
-                            stop-color="rgba(255, 255, 255, 0.1)"
+                            stop-color="rgba(255, 255, 255, 0)"
                           />
                           <stop
                             offset="100%"
-                            stop-color="rgba(255, 255, 255, 0.5)"
+                            stop-color="rgba(255, 255, 255, 0.3)"
                           />
                         </linearGradient>
                       )
@@ -202,7 +217,7 @@ export default defineComponent({
                           stroke: fillColor[index]
                         }}
                       />
-                      {props.processing && p !== 0 && !sleepingRef.value ? (
+                      {props.processing && p ? (
                         <path
                           class={[
                             `${clsPrefix}-progress-graph-circle-processing-fill`
@@ -218,6 +233,8 @@ export default defineComponent({
                           stroke-linecap="round"
                           fill="none"
                           style={{
+                            opacity: sleepingRef.value ? 0 : 1,
+                            transition: 'opacity .3s ease-in-out',
                             strokeDasharray:
                               processingFillStrokeDasharrayRef.value[index],
                             strokeDashoffset: 0,

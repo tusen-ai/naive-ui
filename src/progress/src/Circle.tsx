@@ -18,7 +18,7 @@ import {
 } from '../../_internal/icons'
 import { Status } from './interface'
 import {
-  calcLightestCurPointPos,
+  calcCurPointPos,
   setProcessingTimer,
   clearProcessingTimer
 } from './utils'
@@ -78,8 +78,14 @@ export default defineComponent({
       }
       return parseFloat(processingFillStrokeDasharrayRef.value.split(',')[0])
     })
+    const maxStrokeDasharray = computed(() => {
+      return parseInt(strokeDasharrayRef.value.split(',')[0])
+    })
+    const darkestPointPos = computed(() => {
+      return calcCurPointPos(50, maxStrokeDasharray, 1) as number[]
+    })
     const lightestCurPointPos = computed(() => {
-      return calcLightestCurPointPos(50, curArcLength) as number[]
+      return calcCurPointPos(50, curArcLength, 0.66) as number[]
     })
     onMounted(() => {
       props.processing &&
@@ -116,13 +122,13 @@ export default defineComponent({
                 <defs>
                   <linearGradient
                     id={`ProgressCircleGradient${randomIdRef.value}`}
-                    x1="0.5"
-                    y1="0"
+                    x1={darkestPointPos.value[0]}
+                    y1={darkestPointPos.value[1]}
                     x2={lightestCurPointPos.value[0]}
                     y2={lightestCurPointPos.value[1]}
                   >
-                    <stop offset="0%" stop-color="rgba(255, 255, 255, 0.1)" />
-                    <stop offset="100%" stop-color="rgba(255, 255, 255, 0.5)" />
+                    <stop offset="0%" stop-color="rgba(255, 255, 255, 0)" />
+                    <stop offset="100%" stop-color="rgba(255, 255, 255, 0.3)" />
                   </linearGradient>
                 </defs>
                 <g>
@@ -161,7 +167,7 @@ export default defineComponent({
                     }}
                   />
                 </g>
-                {props.processing && props.percentage && !sleepingRef.value ? (
+                {props.processing && props.percentage ? (
                   <g>
                     <path
                       class={[
@@ -172,6 +178,8 @@ export default defineComponent({
                       stroke-linecap="round"
                       fill="none"
                       style={{
+                        opacity: sleepingRef.value ? 0 : 1,
+                        transition: 'opacity .3s ease-in-out',
                         strokeDasharray: processingFillStrokeDasharrayRef.value,
                         strokeDashoffset: 0,
                         stroke: `url(#ProgressCircleGradient${randomIdRef.value})`
