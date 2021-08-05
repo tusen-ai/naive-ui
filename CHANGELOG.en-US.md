@@ -6,6 +6,7 @@
 
 - `n-message` add `destroyAll` method.
 - `n-input-number` add `prefix`, `suffix` slots, closes [#609](https://github.com/TuSimple/naive-ui/issues/609).
+- `n-upload` add `list-type`, `show-preview-button`, `on-preview` and `preview-file`.
 
 ### Fixes
 
