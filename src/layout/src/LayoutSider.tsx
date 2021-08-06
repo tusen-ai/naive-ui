@@ -125,20 +125,21 @@ export default defineComponent({
     })
     const siderScrollContainerTransformStyleRef = computed<CSSProperties>(
       () => {
-        if (!siderOnLeft.value && props.collapseMode === 'transform') {
+        if (!siderOnLeftRef.value && props.collapseMode === 'transform') {
           return {
-            transform: `translateX(${
-              parseInt(formatLength(props.width)) -
-              parseInt(styleMaxWidthRef.value)
+            transform: `translateX(calc(${formatLength(props.width)} - ${
+              styleMaxWidthRef.value
             }px)`
           }
         }
         return {}
       }
     )
-    const siderPlacement = layoutProps?.siderPlacement || 'left'
-    const siderOnLeft = computed(() => {
-      return siderPlacement === 'left'
+    const siderPlacementRef = computed(() => {
+      return layoutProps?.siderPlacement || 'left'
+    })
+    const siderOnLeftRef = computed(() => {
+      return siderPlacementRef.value === 'left'
     })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
     const mergedCollapsedRef = useMergedState(
@@ -212,8 +213,8 @@ export default defineComponent({
       mergedCollapsed: mergedCollapsedRef,
       scrollContainerStyle: scrollContainerStyleRef,
       siderScrollContainerTransformStyle: siderScrollContainerTransformStyleRef,
-      siderPlacement,
-      siderOnLeft,
+      siderPlacement: siderPlacementRef,
+      siderOnLeft: siderOnLeftRef,
       handleTriggerClick,
       cssVars: computed(() => {
         const {
@@ -253,11 +254,8 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-layout-sider`,
           `${mergedClsPrefix}-layout-sider--${this.position}-positioned`,
-          `${mergedClsPrefix}-layout-sider--${this.siderPlacement}-positioned`,
-          this.bordered &&
-            `${mergedClsPrefix}-layout-sider--border-${
-              this.siderOnLeft ? 'right' : 'left'
-            }`,
+          `${mergedClsPrefix}-layout-sider--${this.siderPlacement}`,
+          this.bordered && `${mergedClsPrefix}-layout-sider--bordered`,
           mergedCollapsed && `${mergedClsPrefix}-layout-sider--collapsed`,
           (!mergedCollapsed || this.showCollapsedContent) &&
             `${mergedClsPrefix}-layout-sider--show-content`
@@ -276,10 +274,7 @@ export default defineComponent({
             ref="scrollbarInstRef"
             style={[
               this.scrollContainerStyle,
-              this.siderScrollContainerTransformStyle,
-              {
-                transition: 'transform .3s var(--bezier)'
-              }
+              this.siderScrollContainerTransformStyle
             ]}
             contentStyle={this.contentStyle}
             theme={this.mergedTheme.peers.Scrollbar}

@@ -25,7 +25,15 @@ export default cB('layout-sider', `
   display: flex;
   justify-content: flex-end;
 `, [
-  cM('right-positioned', '', [
+  c('>', [
+    cB('scrollbar', `
+      transition: transform .3s var(--bezier);
+    `)
+  ]),
+  cM('right', '', [
+    cM('bordered', `
+      border-left: 1px solid var(--border-color);
+    `),
     cB('layout-toggle-button', `
       transform: translateX(-50%) translateY(-50%) rotate(180deg);
       left: 0;
@@ -133,10 +141,7 @@ export default cB('layout-sider', `
     top: 0;
     bottom: 0;
   `),
-  cM('border-right', `
+  cM('bordered', `
     border-right: 1px solid var(--border-color);
-  `),
-  cM('border-left', `
-    border-left: 1px solid var(--border-color);
   `)
 ])
