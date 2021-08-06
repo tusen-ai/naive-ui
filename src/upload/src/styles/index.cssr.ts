@@ -393,7 +393,6 @@ export default cB('upload', [
     background-color: var(--dragger-color);
     border: var(--dragger-border);
   `, [
-
     c('&:hover', `
       border: var(--dragger-border-hover);
     `)
