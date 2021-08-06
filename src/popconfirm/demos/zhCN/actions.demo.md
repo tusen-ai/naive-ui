@@ -33,9 +33,7 @@
     <template #trigger>
       <n-button>自定义 action</n-button>
     </template>
-    <template #action>
-      <n-tag type="primary">好的</n-tag>
-    </template>
+    <template #action> 自定义 action </template>
     一切都将一去杳然，任何人都无法将其捕获。
   </n-popconfirm>
 </n-space>

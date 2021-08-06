@@ -13,13 +13,13 @@
   </n-popconfirm>
   <n-popconfirm :negative-text="null" @positive-click="handlePositiveClick">
     <template #trigger>
-      <n-button>Only confirm</n-button>
+      <n-button>Only Confirm</n-button>
     </template>
     Things pass us by. Nobody can catch them. That's the way we live our lives.
   </n-popconfirm>
   <n-popconfirm :positive-text="null" @negative-click="handleNegativeClick">
     <template #trigger>
-      <n-button>Only cancel</n-button>
+      <n-button>Only Cancel</n-button>
     </template>
     Things pass us by. Nobody can catch them. That's the way we live our lives.
   </n-popconfirm>
@@ -33,9 +33,7 @@
     <template #trigger>
       <n-button>Custom action</n-button>
     </template>
-    <template #action>
-      <n-tag type="primary">Yes</n-tag>
-    </template>
+    <template #action> Custom Action </template>
     Things pass us by. Nobody can catch them. That's the way we live our lives.
   </n-popconfirm>
 </n-space>

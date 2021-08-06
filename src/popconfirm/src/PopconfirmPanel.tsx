@@ -63,9 +63,6 @@ export default defineComponent({
       localizedNegativeText: computed(() => {
         return props.negativeText || localeRef.value.negativeText
       }),
-      hasNeitherText: computed(() => {
-        return props.positiveText === null && props.negativeText === null
-      }),
       handlePositiveClick (e: MouseEvent) {
         props.onPositiveClick(e)
       },
@@ -76,6 +73,26 @@ export default defineComponent({
   },
   render () {
     const { mergedClsPrefix, $slots } = this
+    const actionContentNode = $slots.action
+      ? $slots.action()
+      : this.negativeText === null && this.positiveText === null
+        ? null
+        : [
+            this.negativeText !== null && (
+            <NButton size="small" onClick={this.handleNegativeClick}>
+              {{ default: () => this.localizedNegativeText }}
+            </NButton>
+            ),
+            this.positiveText !== null && (
+            <NButton
+              size="small"
+              type="primary"
+              onClick={this.handlePositiveClick}
+            >
+              {{ default: () => this.localizedPositiveText }}
+            </NButton>
+            )
+          ]
     return (
       <div style={this.cssVars as CSSProperties}>
         <div class={`${mergedClsPrefix}-popconfirm__body`}>
@@ -90,31 +107,11 @@ export default defineComponent({
           ) : null}
           {renderSlot($slots, 'default')}
         </div>
-        <div class={`${mergedClsPrefix}-popconfirm__action`}>
-          {renderSlot(
-            $slots,
-            'action',
-            undefined,
-            () =>
-              ((!this.hasNeitherText || $slots.action) && [
-                this.negativeText !== null && (
-                  <NButton size="small" onClick={this.handleNegativeClick}>
-                    {{ default: () => this.localizedNegativeText }}
-                  </NButton>
-                ),
-                this.positiveText !== null && (
-                  <NButton
-                    size="small"
-                    type="primary"
-                    onClick={this.handlePositiveClick}
-                  >
-                    {{ default: () => this.localizedPositiveText }}
-                  </NButton>
-                )
-              ]) ||
-              []
-          )}
-        </div>
+        {actionContentNode ? (
+          <div class={`${mergedClsPrefix}-popconfirm__action`}>
+            {actionContentNode}
+          </div>
+        ) : null}
       </div>
     )
   }
