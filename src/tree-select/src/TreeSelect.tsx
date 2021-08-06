@@ -48,7 +48,7 @@ import type {
   Value
 } from './interface'
 import { treeSelectInjectionKey } from './interface'
-import { treeOption2SelectOption, filterTree } from './utils'
+import { treeOption2SelectOption, filterTree, getNodePath } from './utils'
 import style from './styles/index.cssr'
 
 const props = {
@@ -79,6 +79,14 @@ const props = {
   leafOnly: Boolean,
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
+  showPath: {
+    type: Boolean,
+    default: false
+  },
+  separator: {
+    type: String,
+    default: ' / '
+  },
   options: {
     type: Array as PropType<TreeSelectOption[]>,
     default: () => []
@@ -206,6 +214,7 @@ export default defineComponent({
       return localeRef.value.placeholder
     })
     const treeSelectedKeysRef = computed<Key[]>(() => {
+      console.log('hhh')
       if (props.checkable) return []
       const { value: mergedValue } = mergedValueRef
       const { multiple } = props
@@ -231,23 +240,35 @@ export default defineComponent({
       }
     })
     const selectedOptionRef = computed(() => {
-      if (props.multiple) return null
+      const { multiple, showPath, separator } = props
+      if (multiple) return null
       const { value: mergedValue } = mergedValueRef
       if (!Array.isArray(mergedValue) && mergedValue !== null) {
         const tmNode = dataTreeMateRef.value.getNode(mergedValue)
-        if (tmNode !== null) return treeOption2SelectOption(tmNode.rawNode)
+        if (tmNode !== null) {
+          return showPath
+            ? getNodePath(tmNode, separator)
+            : treeOption2SelectOption(tmNode.rawNode)
+        }
       }
       return null
     })
     const selectedOptionsRef = computed(() => {
-      if (!props.multiple) return null
+      const { multiple, showPath, separator } = props
+      if (!multiple) return null
       const { value: mergedValue } = mergedValueRef
       if (Array.isArray(mergedValue)) {
         const res: SelectBaseOption[] = []
         const { value: treeMate } = dataTreeMateRef
         mergedValue.forEach((value) => {
           const tmNode = treeMate.getNode(value)
-          if (tmNode !== null) res.push(treeOption2SelectOption(tmNode.rawNode))
+          if (tmNode !== null) {
+            res.push(
+              showPath
+                ? getNodePath(tmNode, separator)
+                : treeOption2SelectOption(tmNode.rawNode)
+            )
+          }
         })
         return res
       }
