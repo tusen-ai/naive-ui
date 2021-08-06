@@ -511,11 +511,6 @@ export default defineComponent({
     function handlePatternInput (e: InputEvent): void {
       if (!mergedShowRef.value) {
         openMenu()
-      } else {
-        if (!props.filterable) {
-          // already focused, don't need to return focus
-          closeMenu()
-        }
       }
       const { value } = e.target as unknown as HTMLInputElement
       patternRef.value = value
