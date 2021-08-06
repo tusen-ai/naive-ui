@@ -11,7 +11,26 @@ export default cB('upload', [
   `),
   cE('trigger', `
     display: inline-block;
-  `),
+  `, [
+    cM('picture-card', `
+      position: relative;
+      display: inline-block;
+      width: 104px;
+      height: 104px;
+      margin: 0 8px 8px 0;
+      vertical-align: top;
+      padding: 8px;
+      cursor: pointer;
+      box-sizing: border-box;
+      transition: border-color .3s var(--bezier), background-color .3s var(--bezier);
+      background-color: var(--dragger-color);
+      border: var(--dragger-border);
+    `, [
+      c('&:hover', `
+        border: var(--dragger-border-hover);
+      `)
+    ])
+  ]),
   cM('dragger-inside', [
     cE('trigger', `
       display: block;
@@ -231,13 +250,13 @@ export default cB('upload', [
             `),
             cE('image', [
               c('i', `
-                color: var(--thumb-icon-error-color);
+                color: var(--item-icon-error-color);
               `)
             ])
           ])
         ]),
         cM('picture-card-type, picture-type', `
-          border-color: var(--thumb-icon-error-color);
+          border-color: var(--item-icon-error-color);
         `)
       ]),
       cM('success-status', [
@@ -346,12 +365,12 @@ export default cB('upload', [
       ]),
       cM('info-status, pending-status, uploading', [
         cM('picture-card-type', ` 
-        transition:
-          border-color .3s var(--bezier),
-          background-color .3s var(--bezier);
-        background-color: var(--dragger-color);
-        border: var(--dragger-border);
-      `)
+          transition:
+            border-color .3s var(--bezier),
+            background-color .3s var(--bezier);
+          background-color: var(--dragger-color);
+          border: var(--dragger-border);
+        `)
       ])
     ])
   ]),
@@ -376,24 +395,6 @@ export default cB('upload', [
   ]),
   cM('drag-over', [
     cB('upload-dragger', `
-      border: var(--dragger-border-hover);
-    `)
-  ]),
-  cE('picture-card', `
-    position: relative;
-    display: inline-block;
-    width: 104px;
-    height: 104px;
-    margin: 0 8px 8px 0;
-    vertical-align: top;
-    padding: 8px;
-    cursor: pointer;
-    box-sizing: border-box;
-    transition: border-color .3s var(--bezier), background-color .3s var(--bezier);
-    background-color: var(--dragger-color);
-    border: var(--dragger-border);
-  `, [
-    c('&:hover', `
       border: var(--dragger-border-hover);
     `)
   ])

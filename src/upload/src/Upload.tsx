@@ -258,6 +258,37 @@ const uploadProps = {
   previewFile: Function as PropType<previewFile>
 } as const
 
+const isImageFileType = (type: string): boolean => type.includes('image/')
+
+const extname = (url: string = ''): string => {
+  const temp = url.split('/')
+  const filename = temp[temp.length - 1]
+  const filenameWithoutSuffix = filename.split(/#|\?/)[0]
+  return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0]
+}
+
+const isImageUrl = (file: FileInfo): boolean => {
+  if (file.type && !file.thumbnailUrl) {
+    return isImageFileType(file.type)
+  }
+  const url: string = file.thumbnailUrl || file.url || ''
+  const extension = extname(url)
+  if (
+    /^data:image\//.test(url) ||
+    /(webp|svg|png|gif|jpg|jpeg|jfif|bmp|dpg|ico)$/i.test(extension)
+  ) {
+    return true
+  }
+  if (/^data:/.test(url)) {
+    return false
+  }
+  if (extension) {
+    return false
+  }
+
+  return true
+}
+
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
 
 export default defineComponent({
@@ -432,68 +463,34 @@ export default defineComponent({
         warn('upload', 'File has no corresponding id in current file list.')
       }
     }
-    function getFileThumb (): void {
+    function getFileThumbnail (): void {
       if (props.listType !== 'picture' && props.listType !== 'picture-card') {
         return
       }
-
-      const win = window
       mergedFileListRef.value.forEach((file: FileInfo) => {
         if (
           typeof document === 'undefined' ||
-          typeof win === 'undefined' ||
-          !win.FileReader ||
-          !win.File ||
+          typeof window === 'undefined' ||
+          !window.FileReader ||
+          !window.File ||
           !(file.file instanceof File || (file.file as Blob) instanceof Blob) ||
-          file.thumbUrl !== undefined
+          file.thumbnailUrl !== undefined
         ) {
           return
         }
         const { previewFile } = props
-
         void Promise.resolve(
           previewFile
             ? previewFile(file.file as File)
             : previewImage(file.file as File)
         ).then((previewUrl) => {
-          file.thumbUrl = previewUrl || ''
+          file.thumbnailUrl = previewUrl || ''
         })
       })
     }
     watchEffect(() => {
-      getFileThumb()
+      getFileThumbnail()
     })
-    const isImageFileType = (type: string): boolean => type.includes('image/')
-
-    const extname = (url: string = ''): string => {
-      const temp = url.split('/')
-      const filename = temp[temp.length - 1]
-      const filenameWithoutSuffix = filename.split(/#|\?/)[0]
-      return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0]
-    }
-
-    const isImageUrl = (file: FileInfo): boolean => {
-      if (file.type && !file.thumbUrl) {
-        return isImageFileType(file.type)
-      }
-      const url: string = file.thumbUrl || file.url || ''
-      const extension = extname(url)
-      if (
-        /^data:image\//.test(url) ||
-        /(webp|svg|png|gif|jpg|jpeg|jfif|bmp|dpg|ico)$/i.test(extension)
-      ) {
-        return true
-      }
-      if (/^data:/.test(url)) {
-        return false
-      }
-      if (extension) {
-        return false
-      }
-
-      return true
-    }
-
     async function previewImage (file: File | Blob): Promise<string> {
       return await new Promise((resolve) => {
         if (!file.type || !isImageFileType(file.type)) {
@@ -546,7 +543,7 @@ export default defineComponent({
       XhrMap,
       submit,
       doChange,
-      isImgUrl: isImageUrl,
+      isImageUrl,
       showPreivewButtonRef: toRef(props, 'showPreivewButton'),
       onPreviewRef: toRef(props, 'onPreview')
     })
@@ -583,7 +580,7 @@ export default defineComponent({
             lineHeight,
             borderRadius,
             fontSize,
-            thumbIconErrorColor
+            itemIconErrorColor
           }
         } = themeRef.value
         return {
@@ -601,7 +598,7 @@ export default defineComponent({
           '--item-text-color-error': itemTextColorError,
           '--item-text-color-success': itemTextColorSuccess,
           '--line-height': lineHeight,
-          '--thumb-icon-error-color': thumbIconErrorColor
+          '--item-icon-error-color': itemIconErrorColor
         }
       })
     }
@@ -620,7 +617,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-upload__trigger`,
           this.listType === 'picture-card' &&
-            `${mergedClsPrefix}-upload__picture-card`
+            `${mergedClsPrefix}-upload__trigger--picture-card`
         ]}
         onClick={this.handleTriggerClick}
         onDrop={this.handleTriggerDrop}
@@ -653,7 +650,7 @@ export default defineComponent({
           multiple={this.multiple}
           onChange={this.handleFileInputChange}
         />
-        {this.listType !== 'picture-card' && uploadInfo}
+        {this.listType !== 'picture-card' && uploadTrigger}
         {this.showFileList && (
           <div
             class={`${mergedClsPrefix}-upload-file-list`}
@@ -672,7 +669,7 @@ export default defineComponent({
                   ))
               }}
             </NFadeInExpandTransition>
-            {this.listType === 'picture-card' && uploadInfo}
+            {this.listType === 'picture-card' && uploadTrigger}
           </div>
         )}
       </div>

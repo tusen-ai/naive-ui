@@ -9,7 +9,7 @@ export interface FileInfo {
   percentage: number
   status: 'pending' | 'uploading' | 'finished' | 'removed' | 'error'
   file: File | null | Blob
-  thumbUrl?: string
+  thumbnailUrl?: string
   type?: string
 }
 
@@ -67,7 +67,7 @@ export interface UploadInjection {
   XhrMap: Map<string, XMLHttpRequest>
   submit: (fileId?: string) => void
   doChange: DoChange
-  isImgUrl: (file: FileInfo) => boolean
+  isImageUrl: (file: FileInfo) => boolean
   showPreivewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>
 }

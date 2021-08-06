@@ -72,12 +72,12 @@ export default defineComponent({
     const showPreivewButtonRef = computed(() => {
       if (!NUpload.showPreivewButtonRef.value) return false
       const {
-        file: { status, url, thumbUrl },
+        file: { status, url, thumbnailUrl },
         listType
       } = props
       return (
         ['finished'].includes(status) &&
-        (url || thumbUrl) &&
+        (url || thumbnailUrl) &&
         listType === 'picture-card'
       )
     })
@@ -140,8 +140,8 @@ export default defineComponent({
       XHR?.abort()
       handleRemove(Object.assign({}, file))
     }
-    function isImgUrl (file: FileInfo): boolean {
-      return NUpload.isImgUrl(file)
+    function isImageUrl (file: FileInfo): boolean {
+      return NUpload.isImageUrl(file)
     }
     function handlePreviewClick (e: MouseEvent): void {
       const {
@@ -168,7 +168,7 @@ export default defineComponent({
       handleRemoveOrCancelClick,
       handleDownloadClick,
       handleRetryClick,
-      isImgUrl,
+      isImageUrl,
       showPreivewButton: showPreivewButtonRef,
       handlePreviewClick
     }
@@ -206,9 +206,9 @@ export default defineComponent({
             />
           )
       } else {
-        icon = !this.isImgUrl(this.file) ? (
+        icon = !this.isImageUrl(this.file) ? (
           fileIcon(<FileIcon />)
-        ) : (this.file.url || this.file.thumbUrl) &&
+        ) : (this.file.url || this.file.thumbnailUrl) &&
           this.file.status !== 'error' ? (
           <a
             ref="noopener noreferer"
@@ -218,7 +218,7 @@ export default defineComponent({
             onClick={(e) => this.handlePreviewClick(e)}
           >
             <img
-              src={this.file.thumbUrl || this.file.url || undefined}
+              src={this.file.thumbnailUrl || this.file.url || undefined}
               alt={this.file.name}
               ref="imageRef"
             />
