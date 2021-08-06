@@ -47,24 +47,33 @@ export function useCheck (
   const countOfCurrentPageCheckedRowsRef = computed(() => {
     const { value: mergedCheckedRowKeySet } = mergedCheckedRowKeySetRef
     return paginatedDataRef.value.reduce((total, tmNode) => {
-      const { key } = tmNode
-      return total + (mergedCheckedRowKeySet.has(key) ? 1 : 0)
+      const { key, disabled } = tmNode
+      return total + (disabled ? 0 : mergedCheckedRowKeySet.has(key) ? 1 : 0)
     }, 0)
   })
+  const countOfCurrentPageDisabledRowsRef = computed(() => {
+    const { length } = paginatedDataRef.value.filter((item) => item.disabled)
+    return length
+  })
   const someRowsCheckedRef = computed(() => {
+    const { length } = paginatedDataRef.value
     const { value: mergedInderminateRowKeySet } = mergedInderminateRowKeySetRef
-    const { length } = paginatedDataRef.value.filter((item) => !item.disabled)
     return (
       (countOfCurrentPageCheckedRowsRef.value > 0 &&
-        countOfCurrentPageCheckedRowsRef.value < length) ||
+        countOfCurrentPageCheckedRowsRef.value <
+          length - countOfCurrentPageDisabledRowsRef.value) ||
       paginatedDataRef.value.some((rowData) =>
         mergedInderminateRowKeySet.has(rowData.key)
       )
     )
   })
   const allRowsCheckedRef = computed(() => {
-    const { length } = paginatedDataRef.value.filter((item) => !item.disabled)
-    return length !== 0 && countOfCurrentPageCheckedRowsRef.value === length
+    const { length } = paginatedDataRef.value
+    return (
+      countOfCurrentPageCheckedRowsRef.value !== 0 &&
+      countOfCurrentPageCheckedRowsRef.value ===
+        length - countOfCurrentPageDisabledRowsRef.value
+    )
   })
   const headerCheckboxDisabledRef = computed(() => {
     return paginatedDataRef.value.length === 0
