@@ -31,7 +31,7 @@ picture-style
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |
 | file-list | `Array<UploadFile>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |
 | headers | `Object \| ({ file: UploadFile }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |
-| list-type | `string` | `'text'` | 文件列表的内建样式，`text`,`picture` 和 `picture-card` |
+| list-type | `string` | `'text'` | 文件列表的内建样式，`text`、`picture` 和 `picture-card` |
 | method | `string` | `'POST'` | HTTP 请求的方法 |
 | multiple | `boolean` | `false` | 是否支持多个文件 |
 | name | `string` | `'file'` | 文件在提交表单中的字段名 |
