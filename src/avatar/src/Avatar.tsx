@@ -5,7 +5,8 @@ import {
   onUpdated,
   onMounted,
   defineComponent,
-  PropType
+  PropType,
+  nextTick
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -58,20 +59,24 @@ export default defineComponent({
           memoedTextHtml = textEl.innerHTML
           const { value: selfEl } = selfRef
           if (selfEl) {
-            const { offsetWidth: elWidth, offsetHeight: elHeight } = selfEl
             // FIX: use v-show elWidth is 0, need to recompute elWidth while update
-            if (elWidth === 0) {
-              memoedTextHtml = null
-              return
-            }
-            const { offsetWidth: textWidth, offsetHeight: textHeight } = textEl
-            const radix = 0.9
-            const ratio = Math.min(
-              (elWidth / textWidth) * radix,
-              (elHeight / textHeight) * radix,
-              1
-            )
-            textEl.style.transform = `translateX(-50%) translateY(-50%) scale(${ratio})`
+            // reference: https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
+            void nextTick(() => {
+              if (selfEl.offsetParent === null) {
+                memoedTextHtml = null
+                return
+              }
+              const { offsetWidth: elWidth, offsetHeight: elHeight } = selfEl
+              const { offsetWidth: textWidth, offsetHeight: textHeight } =
+                textEl
+              const radix = 0.9
+              const ratio = Math.min(
+                (elWidth / textWidth) * radix,
+                (elHeight / textHeight) * radix,
+                1
+              )
+              textEl.style.transform = `translateX(-50%) translateY(-50%) scale(${ratio})`
+            })
           }
         }
       }
