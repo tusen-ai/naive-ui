@@ -5,26 +5,25 @@
   <n-popconfirm
     @positive-click="handlePositiveClick"
     @negative-click="handleNegativeClick"
-    :actions="['confirm', 'cancel']"
   >
     <template #trigger>
       <n-button>Quote</n-button>
     </template>
     Things pass us by. Nobody can catch them. That's the way we live our lives.
   </n-popconfirm>
-  <n-popconfirm @positive-click="handlePositiveClick" :actions="['confirm']">
+  <n-popconfirm :negative-text="null" @positive-click="handlePositiveClick">
     <template #trigger>
       <n-button>Only confirm</n-button>
     </template>
     Things pass us by. Nobody can catch them. That's the way we live our lives.
   </n-popconfirm>
-  <n-popconfirm @negative-click="handleNegativeClick" :actions="['cancel']">
+  <n-popconfirm :positive-text="null" @negative-click="handleNegativeClick">
     <template #trigger>
       <n-button>Only cancel</n-button>
     </template>
     Things pass us by. Nobody can catch them. That's the way we live our lives.
   </n-popconfirm>
-  <n-popconfirm :actions="[]">
+  <n-popconfirm :positive-text="null" :negative-text="null">
     <template #trigger>
       <n-button>Nothing</n-button>
     </template>

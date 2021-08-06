@@ -24,10 +24,6 @@ const popconfirmProps = {
     type: String as PropType<PopoverTrigger>,
     default: 'click'
   },
-  actions: {
-    type: Array as PropType<Array<'confirm' | 'cancel'>>,
-    default: ['confirm', 'cancel']
-  },
   onPositiveClick: Function as PropType<
   (e: MouseEvent) => Promise<boolean> | boolean | any
   >,

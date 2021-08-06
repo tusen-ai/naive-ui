@@ -17,7 +17,6 @@ actions
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| actions | `Array<'confirm' \| 'cancel'> \| null` | `['confirm', 'cancel]` | Supported actions. |
 | negative-text | `string` | `'Cancel'` | Cancel button text. |
 | positive-text | `string` | `'Confirm'` | Confirm button text. |
 | show-icon | `boolean` | `true` | Whether to show icon. |

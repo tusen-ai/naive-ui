@@ -28,8 +28,7 @@ export const panelProps = {
   onNegativeClick: {
     type: Function as PropType<(e: MouseEvent) => void>,
     required: true
-  },
-  actions: Array as PropType<Array<'confirm' | 'cancel'>>
+  }
 } as const
 
 export const panelPropKeys = keysOf(panelProps)
@@ -64,6 +63,9 @@ export default defineComponent({
       localizedNegativeText: computed(() => {
         return props.negativeText || localeRef.value.negativeText
       }),
+      hasNeitherText: computed(() => {
+        return props.positiveText === null && props.negativeText === null
+      }),
       handlePositiveClick (e: MouseEvent) {
         props.onPositiveClick(e)
       },
@@ -89,22 +91,29 @@ export default defineComponent({
           {renderSlot($slots, 'default')}
         </div>
         <div class={`${mergedClsPrefix}-popconfirm__action`}>
-          {renderSlot($slots, 'action', undefined, () => [
-            this.actions?.includes('cancel') && (
-              <NButton size="small" onClick={this.handleNegativeClick}>
-                {{ default: () => this.localizedNegativeText }}
-              </NButton>
-            ),
-            this.actions?.includes('confirm') && (
-              <NButton
-                size="small"
-                type="primary"
-                onClick={this.handlePositiveClick}
-              >
-                {{ default: () => this.localizedPositiveText }}
-              </NButton>
-            )
-          ])}
+          {renderSlot(
+            $slots,
+            'action',
+            undefined,
+            () =>
+              ((!this.hasNeitherText || $slots.action) && [
+                this.negativeText !== null && (
+                  <NButton size="small" onClick={this.handleNegativeClick}>
+                    {{ default: () => this.localizedNegativeText }}
+                  </NButton>
+                ),
+                this.positiveText !== null && (
+                  <NButton
+                    size="small"
+                    type="primary"
+                    onClick={this.handlePositiveClick}
+                  >
+                    {{ default: () => this.localizedPositiveText }}
+                  </NButton>
+                )
+              ]) ||
+              []
+          )}
         </div>
       </div>
     )
