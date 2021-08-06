@@ -55,10 +55,22 @@ Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔�
 npm i -D naive-ui
 ```
 
+### pnpm
+
+使用 pnpm 安装。
+
+```bash
+pnpm add -D naive-ui
+```
+
 ### 字体
 
 ```bash
 npm i -D vfonts
+```
+
+```bash
+pnpm add -D vfonts
 ```
 
 ### 图标

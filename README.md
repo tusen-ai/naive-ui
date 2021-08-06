@@ -55,10 +55,20 @@ Use npm to install.
 npm i -D naive-ui
 ```
 
+Use pnpm to install.
+
+```bash
+pnpm add -D naive-ui
+```
+
 ### Fonts
 
 ```bash
 npm i -D vfonts
+```
+
+```bash
+pnpm add -D vfonts
 ```
 
 ### Icons
