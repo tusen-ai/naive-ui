@@ -9,41 +9,51 @@
   action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-file-list="fileList"
   list-type="picture"
+  :previewFile="previewFile"
 >
   <n-button>上传文件</n-button>
 </n-upload>
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
+    const fileListRef = ref([
+      {
+        id: 'a',
+        name: '我是上传出错的普通文件.png',
+        status: 'error'
+      },
+      {
+        id: 'b',
+        name: '我是普通文本.doc',
+        status: 'finished',
+        type: 'text/plain'
+      },
+      {
+        id: 'c',
+        name: '我是自带url的图片.png',
+        status: 'finished',
+        url: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+      },
+      {
+        id: 'd',
+        name: '我是上传进度99%的文本.doc',
+        status: 'uploading',
+        percentage: 99
+      }
+    ])
     return {
-      fileList: [
-        {
-          id: 'a',
-          name: '我是上传出错的普通文件.png',
-          status: 'error'
-        },
-        {
-          id: 'b',
-          name: '我是普通文本.doc',
-          status: 'finished',
-          type: 'text/plain'
-        },
-        {
-          id: 'c',
-          name: '我是自带url的图片.png',
-          status: 'finished',
-          url: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-        },
-        {
-          id: 'd',
-          name: '我是上传进度99%的文本.doc',
-          status: 'uploading',
-          percentage: 99
-        }
-      ]
+      fileList: fileListRef,
+      previewFile(file) {
+        message.info('previewFile改变了上传文件的缩略图，让它看起来都是Vue。')
+        return 'https://cn.vuejs.org/images/logo.svg'
+      }
     }
   }
-}
+})
 ```

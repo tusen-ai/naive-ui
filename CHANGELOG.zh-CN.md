@@ -7,7 +7,7 @@
 - `n-loading-bar` 新增 `loading-bar-style` 属性，关闭 [#457](https://github.com/TuSimple/naive-ui/issues/457)
 - `n-button` 新增 `text-color` 属性
 - `n-form` 导出 `FormValidationError` 类型
-- `n-upload` 增加 `list-type`， `show-preview-button` 属性， `on-preview`， `preview-file`方法
+- `n-upload` 增加 `list-type`、 `show-preview-button`、 `on-preview` 和 `preview-file` 属性
 
 ### Fixes
 
