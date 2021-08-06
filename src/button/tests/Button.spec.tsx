@@ -233,6 +233,24 @@ describe('n-button', () => {
     expect(colorStyle.every((i) => buttonStyle.includes(i))).toBe(true)
   })
 
+  it('should work with `text-color` prop', () => {
+    const wrapper = mount(NButton, {
+      props: {
+        'text-color': '#8a2be2'
+      },
+      slots: {
+        default: () => 'test'
+      }
+    })
+
+    const buttonStyle = wrapper.find('button').attributes('style')
+    expect(
+      (
+        ['--text-color: #8a2be2;', '--text-color-disabled: #8a2be2;'] as const
+      ).every((i) => buttonStyle.includes(i))
+    ).toBe(true)
+  })
+
   it('should work with `button group`', async () => {
     const wrapper = mount(NButtonGroup, {
       slots: {

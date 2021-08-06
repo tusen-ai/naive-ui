@@ -6,6 +6,7 @@ When you have some functions to trigger.
 
 ```demo
 basic
+icon
 trigger
 cascade
 arrow

@@ -30,26 +30,18 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value1: null,
-      value2: null,
-      value3: null,
-      value4: null,
-      value5: 'option',
-      value6: null,
-      value7: ['option'],
-      value8: null,
-      value9: null,
-      value10: null,
-      selectOptions: [
+      selectOptions: ref([
         {
           label: 'option',
           value: 'option'
         }
-      ],
-      cascaderOptions: [
+      ]),
+      cascaderOptions: ref([
         {
           label: 'option-1',
           value: 'option-1',
@@ -60,8 +52,8 @@ export default {
             }
           ]
         }
-      ]
+      ])
     }
   }
-}
+})
 ```

@@ -348,15 +348,21 @@ export function useTableData (
   })
 
   function doUpdatePage (page: number): void {
-    const { 'onUpdate:page': onUpdatePage, onPageChange } = props
+    const { 'onUpdate:page': _onUpdatePage, onPageChange, onUpdatePage } = props
     if (onUpdatePage) call(onUpdatePage, page)
     if (onPageChange) call(onPageChange, page)
+    if (_onUpdatePage) call(_onUpdatePage, page)
     uncontrolledCurrentPageRef.value = page
   }
   function doUpdatePageSize (pageSize: number): void {
-    const { 'onUpdate:pageSize': onUpdatePageSize, onPageSizeChange } = props
+    const {
+      'onUpdate:pageSize': _onUpdatePageSize,
+      onPageSizeChange,
+      onUpdatePageSize
+    } = props
     if (onPageSizeChange) call(onPageSizeChange, pageSize)
     if (onUpdatePageSize) call(onUpdatePageSize, pageSize)
+    if (_onUpdatePageSize) call(_onUpdatePageSize, pageSize)
     uncontrolledPageSizeRef.value = pageSize
   }
   function doUpdateSorter (sortState: SortState | null): void {
