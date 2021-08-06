@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+### Fixes
+
+- Fix `n-menu` show a blue background when click the menu on mobile phone, closes [#799](https://github.com/TuSimple/naive-ui/issues/799).
+
 ## 2.16.1 (2020-08-06)
 
 ### Feats
