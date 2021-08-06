@@ -4,6 +4,8 @@
 
 ### Feats
 
+- `n-message-provider` add `closable` props, closes [#795](https://github.com/TuSimple/naive-ui/issues/795).
+
 ### Fixes
 
 - Fix `n-menu` show a blue background when click the menu on mobile phone, closes [#799](https://github.com/TuSimple/naive-ui/issues/799).
@@ -15,6 +17,7 @@
 - `n-loading-bar` add `loading-bar-style` props, closes [#457](https://github.com/TuSimple/naive-ui/issues/457).
 - `n-button` add `text-color` prop.
 - `n-form` export `FormValidationError` type.
+- `n-popconfirm` support not show action components, closes [#770](https://github.com/TuSimple/naive-ui/issues/770).
 
 ### Fixes
 
