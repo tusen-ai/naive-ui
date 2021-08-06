@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-message-provider` 新增 `closable` 属性，关闭 [#795](https://github.com/TuSimple/naive-ui/issues/795)
+- `n-tree-select` 新增 `showPath` 属性，关闭[#625](https://github.com/TuSimple/naive-ui/issues/623)
 
 ### Fixes
 
