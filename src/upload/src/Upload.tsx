@@ -615,7 +615,7 @@ export default defineComponent({
         draggerInsideRef.value = true
       }
     }
-    const uploadInfo = (
+    const uploadTrigger = (
       <div
         class={[
           `${mergedClsPrefix}-upload__trigger`,
