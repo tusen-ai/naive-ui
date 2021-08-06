@@ -1,4 +1,4 @@
-# Thumbnail file list
+# Thumbnail File List
 
 `list-type = 'picture'`
 
