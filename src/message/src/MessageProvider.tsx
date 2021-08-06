@@ -70,7 +70,8 @@ const messageProviderProps = {
     type: Number,
     default: 3000
   },
-  max: Number
+  max: Number,
+  closable: Boolean
 }
 
 export type MessageProviderProps = ExtractPublicPropTypes<
@@ -181,6 +182,11 @@ export default defineComponent({
                       message.duration === undefined
                         ? this.duration
                         : message.duration
+                    }
+                    closable={
+                      message.closable === undefined
+                        ? this.closable
+                        : message.closable
                     }
                   />
                 )

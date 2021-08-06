@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-message-provider` add `closable` props, closes [#795](https://github.com/TuSimple/naive-ui/issues/795).
+
+### Fixes
+
 ## 2.16.1 (2020-08-06)
 
 ### Feats

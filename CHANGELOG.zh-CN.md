@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-message-provider` 新增 `closable` 属性，关闭 [#795](https://github.com/TuSimple/naive-ui/issues/795)
+
+### Fixes
+
 ## 2.16.1 (2020-08-06)
 
 ### Feats
