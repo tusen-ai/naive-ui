@@ -17,9 +17,10 @@ For example:
 
 ```js
 import { useMessage } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 // content
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     return {
@@ -28,7 +29,7 @@ export default {
       }
     }
   }
-}
+})
 ```
 
 </n-space>
@@ -52,6 +53,7 @@ multiple-line
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| closable | `boolean` | All messages whether to show close icon. |
 | duration | `number` | `3000` | All messages's default duration. |
 | max | `number` | `undefined` | Limit the number of message to display. |
 | to | `string \| HTMLElement` | `'body'` | Container node of message container. |
@@ -120,13 +122,14 @@ multiple-line
 
 <script>
   import { useMessage } from 'naive-ui'
+  import { defineComponent } from 'vue'
 
   // content
-  export default {
+  export default defineComponent({
     setup() {
       window.$message = useMessage()
     }
-  }
+  })
 </script>
 ```
 
