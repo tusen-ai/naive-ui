@@ -34,7 +34,7 @@ debug
 | options | `TreeSelectOption[]` | `[]` | Options. |
 | placeholder | `string` | `'Please Select'` | Placeholder. |
 | separator | `string` | `' / '` | Option value separator. |
-| show-path | `boolean` | `true` | Whether to show path in selector. |
+| show-path | `boolean` | `false` | Whether to show path in selector. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | Selected key (or keys when multiple). |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scroll. |
