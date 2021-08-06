@@ -234,6 +234,9 @@ export default defineComponent({
         cascade: props.cascade
       })
     })
+    const mergedCheckStrategyRef = computed(() =>
+      props.leafOnly ? 'child' : props.checkStrategy
+    )
     const displayedCheckedKeysRef = computed(() => {
       return checkedStatusRef.value.checkedKeys
     })
@@ -523,7 +526,7 @@ export default defineComponent({
         {
           cascade: props.cascade,
           leafOnly: props.leafOnly,
-          checkStrategy: props.checkStrategy
+          checkStrategy: mergedCheckStrategyRef.value
         }
       )
       doUpdateCheckedKeys(res.checkedKeys)
