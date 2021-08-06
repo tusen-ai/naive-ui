@@ -33,6 +33,7 @@ export default c([
     box-sizing: border-box;
     font-size: var(--font-size);
     padding-bottom: 6px;
+    -webkit-tap-highlight-color: transparent;
   `, [
     cM('horizontal', {
       display: 'inline-flex',
