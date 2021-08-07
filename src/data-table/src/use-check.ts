@@ -48,12 +48,11 @@ export function useCheck (
     const { value: mergedCheckedRowKeySet } = mergedCheckedRowKeySetRef
     return paginatedDataRef.value.reduce((total, tmNode) => {
       const { key, disabled } = tmNode
-      return total + (disabled ? 0 : mergedCheckedRowKeySet.has(key) ? 1 : 0)
+      return total + (!disabled && mergedCheckedRowKeySet.has(key) ? 1 : 0)
     }, 0)
   })
   const countOfCurrentPageDisabledRowsRef = computed(() => {
-    const { length } = paginatedDataRef.value.filter((item) => item.disabled)
-    return length
+    return paginatedDataRef.value.filter((item) => item.disabled).length
   })
   const someRowsCheckedRef = computed(() => {
     const { length } = paginatedDataRef.value
