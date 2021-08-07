@@ -4,16 +4,29 @@
 
 ### Feats
 
+- `n-message-provider` add `closable` props, closes [#795](https://github.com/TuSimple/naive-ui/issues/795).
+
+### Fixes
+
+- Fix `n-menu` show a blue background when click the menu on mobile phone, closes [#799](https://github.com/TuSimple/naive-ui/issues/799).
+
+## 2.16.1 (2020-08-06)
+
+### Feats
+
 - `n-loading-bar` add `loading-bar-style` props, closes [#457](https://github.com/TuSimple/naive-ui/issues/457).
 - `n-button` add `text-color` prop.
 - `n-form` export `FormValidationError` type.
+- `n-popconfirm` support not show action components, closes [#770](https://github.com/TuSimple/naive-ui/issues/770).
 - `n-upload` add `list-type`， `show-preview-button`， `on-preview` and `preview-file` prop.
 
 ### Fixes
 
 - Fix `n-slider` loss floating point decimal precision, closes [#751](https://github.com/TuSimple/naive-ui/issues/751).
 - Fix `n-data-table` `onUpdatePage` and `onUpdatePageSize` not triggered while using jsx.
-- Fix `n-progress`'s `percentage` prop exception in default.
+- Fix `n-progress`'s `percentage` prop default value doesn't work with different types.
+- Fix `n-select` hide close icon when option is disabled.
+- Fix `n-modal` can't be closed when using custom content, closes [#788](https://github.com/TuSimple/naive-ui/issues/788).
 
 ## 2.16.0 (2021-08-02)
 

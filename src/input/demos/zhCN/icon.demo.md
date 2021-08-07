@@ -26,10 +26,11 @@
 
 ```js
 import { FlashOutline as FlashIcon } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   components: {
     FlashIcon
   }
-}
+})
 ```
