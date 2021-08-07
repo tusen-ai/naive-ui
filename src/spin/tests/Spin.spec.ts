@@ -8,6 +8,21 @@ describe('n-spin', () => {
   it('should work with import on demand', () => {
     mount(NSpin)
   })
+
+  it('should work with `show` prop', async () => {
+    const wrapper = mount(NSpin, {
+      props: {
+        show: true
+      },
+      slots: {
+        default: () => 'test'
+      }
+    })
+    expect(wrapper.find('.n-spin-content').classes()).toContain(
+      'n-spin-content--spinning'
+    )
+  })
+
   it('should work with icon slot', () => {
     const wrapper = mount(NSpin, {
       slots: {
@@ -21,6 +36,7 @@ describe('n-spin', () => {
     expect(wrapper.findComponent(NIcon).exists()).toBe(true)
     expect(wrapper.findComponent(Reload).exists()).toBe(true)
   })
+
   it('rotate should work on icon slot', async () => {
     const wrapper = mount(NSpin, {
       slots: {
@@ -35,5 +51,26 @@ describe('n-spin', () => {
       rotate: false
     })
     expect(wrapper.find('.n-spin--rotate').exists()).toBe(false)
+  })
+
+  it('should work with `size` prop', async () => {
+    ;(['small', 'medium', 'large', 71] as const).forEach((item) => {
+      const wrapper = mount(NSpin, {
+        props: {
+          size: item
+        }
+      })
+      expect(wrapper.find('.n-spin').attributes('style')).toMatchSnapshot()
+    })
+  })
+
+  it('should work with `default` slot', async () => {
+    const wrapper = mount(NSpin, {
+      slots: {
+        default: () => 'test'
+      }
+    })
+    expect(wrapper.find('.n-spin-container').exists()).toBe(true)
+    expect(wrapper.find('.n-spin-content').text()).toBe('test')
   })
 })
