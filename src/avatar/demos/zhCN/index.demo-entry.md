@@ -11,6 +11,7 @@ color
 badge
 icon
 name-size
+v-show-debug
 ```
 
 ## Props

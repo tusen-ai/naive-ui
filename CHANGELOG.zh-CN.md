@@ -8,6 +8,8 @@
 
 ### Fixes
 
+- 修复 `n-avatar` 的缩放在使用 `v-show` 时不正确，关闭 [#779](https://github.com/TuSimple/naive-ui/issues/779)
+
 ## 2.16.1 (2020-08-06)
 
 ### Feats

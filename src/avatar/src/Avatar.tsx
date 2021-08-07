@@ -1,12 +1,4 @@
-import {
-  h,
-  ref,
-  computed,
-  onUpdated,
-  onMounted,
-  defineComponent,
-  PropType
-} from 'vue'
+import { h, ref, computed, defineComponent, PropType } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { avatarLight } from '../styles'
@@ -14,6 +6,7 @@ import type { AvatarTheme } from '../styles'
 import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/index.cssr'
+import { VResizeObserver } from 'vueuc'
 
 const avatarProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme>),
@@ -51,7 +44,7 @@ export default defineComponent({
     let memoedTextHtml: string | null = null
     const textRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
-    const adjustText = (): void => {
+    const fitTextTransform = (): void => {
       const { value: textEl } = textRef
       if (textEl) {
         if (memoedTextHtml === null || memoedTextHtml !== textEl.innerHTML) {
@@ -71,11 +64,6 @@ export default defineComponent({
         }
       }
     }
-    // Not Good Impl
-    onMounted(() => adjustText())
-    onUpdated(() => {
-      adjustText()
-    })
     const themeRef = useTheme(
       'Avatar',
       'Avatar',
@@ -88,6 +76,7 @@ export default defineComponent({
       textRef,
       selfRef,
       mergedClsPrefix: mergedClsPrefixRef,
+      fitTextTransform,
       cssVars: computed(() => {
         const { size, round, circle } = props
         const {
@@ -125,13 +114,19 @@ export default defineComponent({
             style={{ objectFit: this.objectFit }}
           />
         ) : (
-          <span
-            ref="textRef"
-            class={`${mergedClsPrefix}-avatar__text`}
-            style={{ background: this.color }}
-          >
-            {$slots}
-          </span>
+          <VResizeObserver onResize={this.fitTextTransform}>
+            {{
+              default: () => (
+                <span
+                  ref="textRef"
+                  class={`${mergedClsPrefix}-avatar__text`}
+                  style={{ background: this.color }}
+                >
+                  {$slots}
+                </span>
+              )
+            }}
+          </VResizeObserver>
         )}
       </span>
     )

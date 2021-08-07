@@ -8,6 +8,8 @@
 
 ### Fixes
 
+- Fix `n-avatar`'s scale value is incorrect while use v-show, closes [#779](https://github.com/TuSimple/naive-ui/issues/779).
+
 ## 2.16.1 (2020-08-06)
 
 ### Feats
