@@ -246,12 +246,11 @@ export default defineComponent({
       if (!Array.isArray(mergedValue) && mergedValue !== null) {
         const { value: treeMeta } = dataTreeMateRef
         const tmNode = treeMeta.getNode(mergedValue)
-        const tmNodePath = treeMeta.getPath(mergedValue)
         if (tmNode !== null) {
           return showPath
             ? treeOption2SelectOptionWithPath(
               tmNode.rawNode,
-              tmNodePath.keyPath,
+              treeMeta.getPath(mergedValue).keyPath,
               separator
             )
             : treeOption2SelectOption(tmNode.rawNode)
@@ -268,13 +267,12 @@ export default defineComponent({
         const { value: treeMate } = dataTreeMateRef
         mergedValue.forEach((value) => {
           const tmNode = treeMate.getNode(value)
-          const tmNodePath = treeMate.getPath(value)
           if (tmNode !== null) {
             res.push(
               showPath
                 ? treeOption2SelectOptionWithPath(
                   tmNode.rawNode,
-                  tmNodePath.keyPath,
+                  treeMate.getPath(value).keyPath,
                   separator
                 )
                 : treeOption2SelectOption(tmNode.rawNode)

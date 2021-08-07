@@ -17,7 +17,7 @@ export function treeOption2SelectOptionWithPath (
   separator: string
 ): SelectBaseOption {
   return {
-    ...treeOpt,
+    disabled: treeOpt.disabled,
     value: treeOpt.key,
     label: treeNodePath.join(separator)
   }

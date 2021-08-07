@@ -5,7 +5,7 @@
 ### Feats
 
 - `n-message-provider` add `closable` prop, closes [#795](https://github.com/TuSimple/naive-ui/issues/795).
-- `n-tree-select` add `showPath` prop，closes[#625](https://github.com/TuSimple/naive-ui/issues/623)
+- `n-tree-select` add `showPath` prop, closes[#625](https://github.com/TuSimple/naive-ui/issues/623)
 
 ### Fixes
 
