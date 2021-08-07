@@ -87,4 +87,28 @@ describe('message-provider', () => {
       }, 1200)
     })
   })
+  it('props.closable', (done) => {
+    const Test = defineComponent({
+      setup () {
+        const message = useMessage()
+        message.info('string')
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = mount(NMessageProvider, {
+      props: {
+        closable: true
+      },
+      slots: {
+        default: () => <Test />
+      }
+    })
+    void nextTick(() => {
+      expect(document.querySelector('.n-message__close')).not.toBe(null)
+      wrapper.unmount()
+      done()
+    })
+  })
 })
