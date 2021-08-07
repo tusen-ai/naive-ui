@@ -5,13 +5,16 @@ Sometimes you might want to put the collapsed sidebar on the right.
 ```html
 <n-space vertical size="large">
   <n-layout has-sider sider-placement="right">
+    <n-layout-content content-style="padding: 24px;"
+      >Pingshan Road</n-layout-content
+    >
     <n-layout-sider
       collapse-mode="width"
       :collapsed-width="120"
       :native-scrollbar="true"
       :width="240"
       show-trigger="arrow-circle"
-      content-style="padding: 24px"
+      content-style="padding: 24px;"
       bordered
     >
       <p>
@@ -19,27 +22,25 @@ Sometimes you might want to put the collapsed sidebar on the right.
         Bridge
       </p>
     </n-layout-sider>
-    <n-layout-content content-style="padding: 24px"
-      >Pingshan Road</n-layout-content
-    >
   </n-layout>
   <n-layout has-sider sider-placement="right">
+    <n-layout-content content-style="padding: 24px;"
+      >Pingshan Road</n-layout-content
+    >
     <n-layout-sider
       collapse-mode="transform"
       :native-scrollbar="false"
       :collapsed-width="120"
       :width="240"
-      show-trigger="arrow-circle"
-      content-style="padding: 24px"
+      show-trigger="bar"
+      content-style="padding: 24px;"
       bordered
     >
       <n-h2>Handian Bridge</n-h2>
     </n-layout-sider>
-    <n-layout-content content-style="padding: 24px"
-      >Pingshan Road</n-layout-content
-    >
   </n-layout>
   <n-layout has-sider sider-placement="right">
+    <n-layout style="max-height: 320px;" />
     <n-layout-sider
       bordered
       show-trigger
@@ -57,7 +58,6 @@ Sometimes you might want to put the collapsed sidebar on the right.
         :options="menuOptions"
       />
     </n-layout-sider>
-    <n-layout style="max-height: 320px;" />
   </n-layout>
 </n-space>
 ```

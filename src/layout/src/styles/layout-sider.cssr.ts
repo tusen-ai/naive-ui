@@ -25,26 +25,59 @@ export default cB('layout-sider', `
   display: flex;
   justify-content: flex-end;
 `, [
-  c('>', [
-    cB('scrollbar', `
-      transition: transform .3s var(--bezier);
-    `)
-  ]),
-  cM('right', [
+  cM('right-placement', `
+    justify-content: flex-start;
+  `, [
     cM('bordered', `
+      border-right: none;
       border-left: 1px solid var(--border-color);
     `),
+    cM('collapsed', [
+      cB('layout-toggle-button', `
+        transform: translateX(-50%) translateY(-50%) rotate(0);
+      `),
+      cB('layout-toggle-bar', [
+        c('&:hover', [
+          cE('top', {
+            transform: 'rotate(-12deg) scale(1.15) translateY(-2px)'
+          }),
+          cE('bottom', {
+            transform: 'rotate(12deg) scale(1.15) translateY(2px)'
+          })
+        ])
+      ])
+    ]),
     cB('layout-toggle-button', `
       transform: translateX(-50%) translateY(-50%) rotate(180deg);
       left: 0;
-    `, [
-      cM('collapsed', `
-        transform: translateX(-50%) translateY(-50%) rotate(0);
-      `)
-    ]),
+    `),
     cB('layout-toggle-bar', `
       left: -28px;
       transform: rotate(180deg);
+    `, [
+      c('&:hover', [
+        cE('top', {
+          transform: 'rotate(12deg) scale(1.15) translateY(-2px)'
+        }),
+        cE('bottom', {
+          transform: 'rotate(-12deg) scale(1.15) translateY(2px)'
+        })
+      ])
+    ])
+  ]),
+  cM('collapsed', [
+    cB('layout-toggle-bar', [
+      c('&:hover', [
+        cE('top', {
+          transform: 'rotate(-12deg) scale(1.15) translateY(-2px)'
+        }),
+        cE('bottom', {
+          transform: 'rotate(12deg) scale(1.15) translateY(2px)'
+        })
+      ])
+    ]),
+    cB('layout-toggle-button', `
+      transform: translateX(50%) translateY(-50%) rotate(180deg);
     `)
   ]),
   cB('layout-toggle-button', `
@@ -59,11 +92,7 @@ export default cB('layout-sider', `
     right: 0;
     fill: var(--toggle-button-color);
     transform: translateX(50%) translateY(-50%) rotate(0);
-  `, [
-    cM('collapsed', `
-      transform: translateX(50%) translateY(-50%) rotate(180deg);
-    `)
-  ]),
+  `),
   cB('layout-toggle-bar', `
     cursor: pointer;
     height: 72px;
@@ -94,16 +123,6 @@ export default cB('layout-sider', `
         transform: 'rotate(-12deg) scale(1.15) translateY(2px)'
       })
     ]),
-    cM('collapsed', [
-      c('&:hover', [
-        cE('top', {
-          transform: 'rotate(-12deg) scale(1.15) translateY(-2px)'
-        }),
-        cE('bottom', {
-          transform: 'rotate(12deg) scale(1.15) translateY(2px)'
-        })
-      ])
-    ]),
     cE('top, bottom', {
       backgroundColor: 'var(--toggle-bar-color)'
     }),
@@ -127,7 +146,7 @@ export default cB('layout-sider', `
     box-sizing: border-box;
     height: 100%;
     opacity: 0;
-    transition: transform .3s var(--bezier), opacity .3s var(--bezier);
+    transition: opacity .3s var(--bezier);
     max-width: 100%;
   `),
   cM('show-content', [

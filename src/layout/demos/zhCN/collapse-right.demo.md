@@ -5,34 +5,35 @@
 ```html
 <n-space vertical size="large">
   <n-layout has-sider sider-placement="right">
+    <n-layout-content content-style="padding: 24px;">平山道</n-layout-content>
     <n-layout-sider
       collapse-mode="width"
       :collapsed-width="120"
       :width="240"
       :native-scrollbar="true"
       show-trigger="arrow-circle"
-      content-style="padding: 24px"
+      content-style="padding: 24px;"
       bordered
     >
       <p>海淀桥 海淀桥 海淀桥 海淀桥 海淀桥</p>
     </n-layout-sider>
-    <n-layout-content content-style="padding: 24px">平山道</n-layout-content>
   </n-layout>
   <n-layout has-sider sider-placement="right">
+    <n-layout-content content-style="padding: 24px;">平山道</n-layout-content>
     <n-layout-sider
       collapse-mode="transform"
       :collapsed-width="120"
       :width="240"
       :native-scrollbar="false"
-      show-trigger="arrow-circle"
-      content-style="padding: 24px"
+      show-trigger="bar"
+      content-style="padding: 24px;"
       bordered
     >
       <n-h2>海淀桥</n-h2>
     </n-layout-sider>
-    <n-layout-content content-style="padding: 24px">平山道</n-layout-content>
   </n-layout>
   <n-layout has-sider sider-placement="right">
+    <n-layout style="max-height: 320px;" />
     <n-layout-sider
       bordered
       show-trigger
@@ -48,7 +49,6 @@
         :options="menuOptions"
       />
     </n-layout-sider>
-    <n-layout style="max-height: 320px;" />
   </n-layout>
 </n-space>
 ```
