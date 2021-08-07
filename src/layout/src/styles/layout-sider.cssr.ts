@@ -30,7 +30,7 @@ export default cB('layout-sider', `
       transition: transform .3s var(--bezier);
     `)
   ]),
-  cM('right', '', [
+  cM('right', [
     cM('bordered', `
       border-left: 1px solid var(--border-color);
     `),
