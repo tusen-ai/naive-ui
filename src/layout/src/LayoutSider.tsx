@@ -125,7 +125,7 @@ export default defineComponent({
     })
     const siderScrollContainerTransformStyleRef = computed<CSSProperties>(
       () => {
-        if (!siderOnLeftRef.value && props.collapseMode === 'transform') {
+        if (siderPlacementRef.value !== 'left' && props.collapseMode === 'transform') {
           return {
             transform: `translateX(calc(${formatLength(props.width)} - ${
               styleMaxWidthRef.value
@@ -137,9 +137,6 @@ export default defineComponent({
     )
     const siderPlacementRef = computed(() => {
       return layoutProps?.siderPlacement || 'left'
-    })
-    const siderOnLeftRef = computed(() => {
-      return siderPlacementRef.value === 'left'
     })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
     const mergedCollapsedRef = useMergedState(
@@ -214,7 +211,6 @@ export default defineComponent({
       scrollContainerStyle: scrollContainerStyleRef,
       siderScrollContainerTransformStyle: siderScrollContainerTransformStyleRef,
       siderPlacement: siderPlacementRef,
-      siderOnLeft: siderOnLeftRef,
       handleTriggerClick,
       cssVars: computed(() => {
         const {
