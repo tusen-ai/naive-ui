@@ -1,5 +1,5 @@
 import { SelectBaseOption } from '../../select/src/interface'
-import { Key, TmNode } from '../../tree/src/interface'
+import { Key } from '../../tree/src/interface'
 import { TreeSelectOption } from './interface'
 
 export function treeOption2SelectOption (
@@ -11,20 +11,15 @@ export function treeOption2SelectOption (
   }
 }
 
-export function getNodePath (
-  treeNode: TmNode | null,
+export function treeOption2SelectOptionWithPath (
+  treeOpt: TreeSelectOption,
+  treeNodePath: Key[],
   separator: string
 ): SelectBaseOption {
-  const path = []
-  const initialNode = treeNode
-  while (treeNode) {
-    path.push(treeNode.rawNode.label)
-    treeNode = treeNode.parent
-  }
   return {
-    ...(initialNode as TmNode).rawNode,
-    label: path.reverse().join(separator),
-    value: (initialNode as TmNode).rawNode.key
+    ...treeOpt,
+    value: treeOpt.key,
+    label: treeNodePath.join(separator)
   }
 }
 

@@ -48,7 +48,11 @@ import type {
   Value
 } from './interface'
 import { treeSelectInjectionKey } from './interface'
-import { treeOption2SelectOption, filterTree, getNodePath } from './utils'
+import {
+  treeOption2SelectOption,
+  filterTree,
+  treeOption2SelectOptionWithPath
+} from './utils'
 import style from './styles/index.cssr'
 
 const props = {
@@ -214,7 +218,6 @@ export default defineComponent({
       return localeRef.value.placeholder
     })
     const treeSelectedKeysRef = computed<Key[]>(() => {
-      console.log('hhh')
       if (props.checkable) return []
       const { value: mergedValue } = mergedValueRef
       const { multiple } = props
@@ -244,10 +247,16 @@ export default defineComponent({
       if (multiple) return null
       const { value: mergedValue } = mergedValueRef
       if (!Array.isArray(mergedValue) && mergedValue !== null) {
-        const tmNode = dataTreeMateRef.value.getNode(mergedValue)
+        const { value: treeMeta } = dataTreeMateRef
+        const tmNode = treeMeta.getNode(mergedValue)
+        const tmNodePath = treeMeta.getPath(mergedValue)
         if (tmNode !== null) {
           return showPath
-            ? getNodePath(tmNode, separator)
+            ? treeOption2SelectOptionWithPath(
+              tmNode.rawNode,
+              tmNodePath.keyPath,
+              separator
+            )
             : treeOption2SelectOption(tmNode.rawNode)
         }
       }
@@ -262,10 +271,15 @@ export default defineComponent({
         const { value: treeMate } = dataTreeMateRef
         mergedValue.forEach((value) => {
           const tmNode = treeMate.getNode(value)
+          const tmNodePath = treeMate.getPath(value)
           if (tmNode !== null) {
             res.push(
               showPath
-                ? getNodePath(tmNode, separator)
+                ? treeOption2SelectOptionWithPath(
+                  tmNode.rawNode,
+                  tmNodePath.keyPath,
+                  separator
+                )
                 : treeOption2SelectOption(tmNode.rawNode)
             )
           }
