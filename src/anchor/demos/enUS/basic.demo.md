@@ -5,7 +5,7 @@
   <n-switch v-model:value="showRail" /> Show Rail
   <n-switch v-model:value="showBackground" /> Show Background
 </n-space>
-<n-anchor>
+<n-anchor :show-rail="showRail" :show-background="showBackground">
   <n-anchor-link title="Demos" href="#Demos">
     <n-anchor-link title="Basic" href="#basic" />
     <n-anchor-link title="Ignore-Gap" href="#ignore-gap" />

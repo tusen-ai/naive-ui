@@ -9,6 +9,7 @@ basic
 multiple
 target
 closable
+slot
 custom-style-debug
 dark-1-debug
 dark-2-debug

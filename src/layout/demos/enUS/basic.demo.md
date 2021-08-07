@@ -6,7 +6,7 @@ I hope the demo can meet you demand, so that you can have more time to do other 
 <n-space vertical size="large">
   <n-layout>
     <n-layout-header>Yiheyuan Road</n-layout-header>
-    <n-layout-content content-style="padding: 24px"
+    <n-layout-content content-style="padding: 24px;"
       >Pingshan Road</n-layout-content
     >
     <n-layout-footer>Chengfu Road</n-layout-footer>
@@ -14,10 +14,10 @@ I hope the demo can meet you demand, so that you can have more time to do other 
   <n-layout>
     <n-layout-header>Yiheyuan Road</n-layout-header>
     <n-layout has-sider>
-      <n-layout-sider content-style="padding: 24px"
+      <n-layout-sider content-style="padding: 24px;"
         >Handian Bridge</n-layout-sider
       >
-      <n-layout-content content-style="padding: 24px"
+      <n-layout-content content-style="padding: 24px;"
         >Pingshan Road</n-layout-content
       >
     </n-layout>
@@ -29,7 +29,7 @@ I hope the demo can meet you demand, so that you can have more time to do other 
     >
     <n-layout>
       <n-layout-header>Yiheyuan Road</n-layout-header>
-      <n-layout-content content-style="padding: 24px"
+      <n-layout-content content-style="padding: 24px;"
         >Pingshan Road</n-layout-content
       >
       <n-layout-footer>Chengfu Road</n-layout-footer>

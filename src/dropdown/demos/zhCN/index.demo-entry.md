@@ -6,6 +6,7 @@
 
 ```demo
 basic
+icon
 trigger
 cascade
 arrow
