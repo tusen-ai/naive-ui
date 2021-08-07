@@ -1,4 +1,5 @@
 import { h, ref, computed, defineComponent, PropType } from 'vue'
+import { VResizeObserver } from 'vueuc'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { avatarLight } from '../styles'
@@ -6,7 +7,6 @@ import type { AvatarTheme } from '../styles'
 import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/index.cssr'
-import { VResizeObserver } from 'vueuc'
 
 const avatarProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme>),
@@ -15,10 +15,7 @@ const avatarProps = {
     default: 'medium'
   },
   src: String,
-  circle: {
-    type: Boolean,
-    default: false
-  },
+  circle: Boolean,
   color: String,
   objectFit: {
     type: String as PropType<
@@ -26,10 +23,7 @@ const avatarProps = {
     >,
     default: 'fill'
   },
-  round: {
-    type: Boolean,
-    default: false
-  },
+  round: Boolean,
   onError: Function as PropType<(e: Event) => void>
 } as const
 
