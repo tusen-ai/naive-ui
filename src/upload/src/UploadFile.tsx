@@ -211,7 +211,7 @@ export default defineComponent({
         ) : (this.file.url || this.file.thumbnailUrl) &&
           this.file.status !== 'error' ? (
           <a
-            ref="noopener noreferer"
+            rel="noopener noreferer"
             target="_blank"
             href={this.file.url || undefined}
             class={[...thumbnailImageClass]}
@@ -254,7 +254,7 @@ export default defineComponent({
               this.listType !== 'picture-card') ||
             (this.file.url && this.file.status !== 'error') ? (
               <a
-                ref="noopener noreferer"
+                rel="noopener noreferer"
                 target="_blank"
                 href={this.file.url || undefined}
                 class={[
