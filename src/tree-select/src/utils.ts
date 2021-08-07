@@ -11,6 +11,18 @@ export function treeOption2SelectOption (
   }
 }
 
+export function treeOption2SelectOptionWithPath (
+  treeOpt: TreeSelectOption,
+  treeNodePath: Key[],
+  separator: string
+): SelectBaseOption {
+  return {
+    disabled: treeOpt.disabled,
+    value: treeOpt.key,
+    label: treeNodePath.join(separator)
+  }
+}
+
 export function filterTree (
   tree: TreeSelectOption[],
   filter: (pattern: string, v: TreeSelectOption) => boolean,
