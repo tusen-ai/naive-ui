@@ -27,7 +27,7 @@ v-show-debug
 | round | `boolean` | `false` | 头像是否圆形 |
 | on-error | `(e: Event) => void` | `undefined` | 头像的图片加载失败执行的回调 |
 
-## Avatar Slots
+### Avatar Slots
 
 | 名称    | 参数 | 说明             |
 | ------- | ---- | ---------------- |
