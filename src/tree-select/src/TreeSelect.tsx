@@ -83,10 +83,7 @@ const props = {
   leafOnly: Boolean,
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
-  showPath: {
-    type: Boolean,
-    default: false
-  },
+  showPath: Boolean,
   separator: {
     type: String,
     default: ' / '
