@@ -249,13 +249,11 @@ export default defineComponent({
         if (tmNode !== null) {
           return showPath
             ? treeOption2SelectOptionWithPath(
-              tmNode.rawNode,
-              treeMate
-                .getPath(mergedValue)
-                .treeNodePath.map(({ rawNode }) => rawNode.label),
+              tmNode,
+              treeMate.getPath(mergedValue).treeNodePath,
               separator
             )
-            : treeOption2SelectOption(tmNode.rawNode)
+            : treeOption2SelectOption(tmNode)
         }
       }
       return null
@@ -273,13 +271,11 @@ export default defineComponent({
             res.push(
               showPath
                 ? treeOption2SelectOptionWithPath(
-                  tmNode.rawNode,
-                  treeMate
-                    .getPath(value)
-                    .treeNodePath.map(({ rawNode }) => rawNode.label),
+                  tmNode,
+                  treeMate.getPath(value).treeNodePath,
                   separator
                 )
-                : treeOption2SelectOption(tmNode.rawNode)
+                : treeOption2SelectOption(tmNode)
             )
           }
         })
