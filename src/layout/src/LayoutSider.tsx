@@ -94,8 +94,8 @@ export default defineComponent({
     ...layoutSiderProps
   },
   setup (props) {
+    const layoutProps = inject(layoutInjectionKey)
     if (__DEV__) {
-      const layoutProps = inject(layoutInjectionKey)
       if (!layoutProps) {
         warn(
           'layout-sider',
@@ -122,6 +122,21 @@ export default defineComponent({
       return {
         minWidth: formatLength(props.width)
       }
+    })
+    const siderScrollContainerTransformStyleRef = computed<CSSProperties>(
+      () => {
+        if (siderPlacementRef.value !== 'left' && props.collapseMode === 'transform') {
+          return {
+            transform: `translateX(calc(${formatLength(props.width)} - ${
+              styleMaxWidthRef.value
+            }px)`
+          }
+        }
+        return {}
+      }
+    )
+    const siderPlacementRef = computed(() => {
+      return layoutProps?.siderPlacement || 'left'
     })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
     const mergedCollapsedRef = useMergedState(
@@ -194,6 +209,8 @@ export default defineComponent({
       styleMaxWidth: styleMaxWidthRef,
       mergedCollapsed: mergedCollapsedRef,
       scrollContainerStyle: scrollContainerStyleRef,
+      siderScrollContainerTransformStyle: siderScrollContainerTransformStyleRef,
+      siderPlacement: siderPlacementRef,
       handleTriggerClick,
       cssVars: computed(() => {
         const {
@@ -233,6 +250,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-layout-sider`,
           `${mergedClsPrefix}-layout-sider--${this.position}-positioned`,
+          `${mergedClsPrefix}-layout-sider--${this.siderPlacement}`,
           this.bordered && `${mergedClsPrefix}-layout-sider--bordered`,
           mergedCollapsed && `${mergedClsPrefix}-layout-sider--collapsed`,
           (!mergedCollapsed || this.showCollapsedContent) &&
@@ -250,7 +268,10 @@ export default defineComponent({
           <NScrollbar
             {...this.scrollbarProps}
             ref="scrollbarInstRef"
-            style={this.scrollContainerStyle}
+            style={[
+              this.scrollContainerStyle,
+              this.siderScrollContainerTransformStyle
+            ]}
             contentStyle={this.contentStyle}
             theme={this.mergedTheme.peers.Scrollbar}
             themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
@@ -273,6 +294,7 @@ export default defineComponent({
             style={[
               this.scrollContainerStyle,
               this.contentStyle,
+              this.siderScrollContainerTransformStyle,
               {
                 overflow: 'auto'
               }
@@ -285,6 +307,10 @@ export default defineComponent({
         {showTrigger ? (
           showTrigger === 'arrow-circle' ? (
             <ToggleButton
+              class={[
+                mergedCollapsed &&
+                  `${mergedClsPrefix}-layout-toggle-button--collapsed`
+              ]}
               clsPrefix={mergedClsPrefix}
               style={this.triggerStyle}
               onClick={this.handleTriggerClick}

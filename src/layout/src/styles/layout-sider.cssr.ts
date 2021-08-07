@@ -25,6 +25,28 @@ export default cB('layout-sider', `
   display: flex;
   justify-content: flex-end;
 `, [
+  c('>', [
+    cB('scrollbar', `
+      transition: transform .3s var(--bezier);
+    `)
+  ]),
+  cM('right', [
+    cM('bordered', `
+      border-left: 1px solid var(--border-color);
+    `),
+    cB('layout-toggle-button', `
+      transform: translateX(-50%) translateY(-50%) rotate(180deg);
+      left: 0;
+    `, [
+      cM('collapsed', `
+        transform: translateX(-50%) translateY(-50%) rotate(0);
+      `)
+    ]),
+    cB('layout-toggle-bar', `
+      left: -28px;
+      transform: rotate(180deg);
+    `)
+  ]),
   cB('layout-toggle-button', `
     transition:
       transform .3s var(--bezier),
@@ -35,9 +57,13 @@ export default cB('layout-sider', `
     position: absolute;
     top: 50%;
     right: 0;
-    transform: translateX(50%) translateY(-50%);
     fill: var(--toggle-button-color);
-  `),
+    transform: translateX(50%) translateY(-50%) rotate(0);
+  `, [
+    cM('collapsed', `
+      transform: translateX(50%) translateY(-50%) rotate(180deg);
+    `)
+  ]),
   cB('layout-toggle-bar', `
     cursor: pointer;
     height: 72px;
@@ -101,17 +127,12 @@ export default cB('layout-sider', `
     box-sizing: border-box;
     height: 100%;
     opacity: 0;
-    transition: opacity .3s var(--bezier);
+    transition: transform .3s var(--bezier), opacity .3s var(--bezier);
     max-width: 100%;
   `),
   cM('show-content', [
     cB('layout-sider-scroll-container', {
       opacity: 1
-    })
-  ]),
-  cM('collapsed', [
-    cB('layout-toggle-button', {
-      transform: 'translateX(50%) translateY(-50%) rotate(180deg)'
     })
   ]),
   cM('absolute-positioned', `

@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-message-provider` 新增 `closable` 属性，关闭 [#795](https://github.com/TuSimple/naive-ui/issues/795)
+- `n-layout` 增加 `sider-placement` 属性，关闭 [#566](https://github.com/TuSimple/naive-ui/issues/566)
 
 ### Fixes
 

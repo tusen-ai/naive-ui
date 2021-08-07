@@ -31,14 +31,17 @@ const layoutProps = {
     type: [String, Object] as PropType<string | CSSProperties>,
     default: ''
   },
-  hasSider: Boolean
+  hasSider: Boolean,
+  siderPlacement: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'left'
+  }
 } as const
 
 export type LayoutProps = ExtractPublicPropTypes<typeof layoutProps>
 
-export const layoutInjectionKey: InjectionKey<
-ExtractPropTypes<LayoutProps>
-> = Symbol('layout')
+export const layoutInjectionKey: InjectionKey<ExtractPropTypes<LayoutProps>> =
+  Symbol('layout')
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function createLayoutComponent (isContent: boolean) {
@@ -112,6 +115,9 @@ export function createLayoutComponent (isContent: boolean) {
     render () {
       const { mergedClsPrefix, hasSider } = this
       const hasSiderStyle = hasSider ? this.hasSiderStyle : undefined
+      const siderPlacementStyle = {
+        'flex-direction': this.siderPlacement === 'right' && 'row-reverse'
+      }
       const layoutClass = [
         isContent && `${mergedClsPrefix}-layout-content`,
         `${mergedClsPrefix}-layout`,
@@ -123,7 +129,9 @@ export function createLayoutComponent (isContent: boolean) {
             <div
               ref="scrollableElRef"
               class={`${mergedClsPrefix}-layout-scroll-container`}
-              style={[this.contentStyle, hasSiderStyle] as any}
+              style={
+                [this.contentStyle, hasSiderStyle, siderPlacementStyle] as any
+              }
             >
               {this.$slots}
             </div>
@@ -133,6 +141,7 @@ export function createLayoutComponent (isContent: boolean) {
               ref="scrollbarInstRef"
               theme={this.mergedTheme.peers.Scrollbar}
               themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
+              style={siderPlacementStyle}
               contentStyle={[this.contentStyle, hasSiderStyle] as any}
             >
               {this.$slots}

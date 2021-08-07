@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-message-provider` add `closable` props, closes [#795](https://github.com/TuSimple/naive-ui/issues/795).
+- `n-layout` add `sider-placement` prop, closes [#566](https://github.com/TuSimple/naive-ui/issues/566).
 
 ### Fixes
 
