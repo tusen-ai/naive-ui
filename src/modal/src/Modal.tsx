@@ -28,10 +28,7 @@ import style from './styles/index.cssr'
 
 const modalProps = {
   ...(useTheme.props as ThemeProps<ModalTheme>),
-  show: {
-    type: Boolean,
-    default: false
-  },
+  show: Boolean,
   unstableShowMask: {
     type: Boolean,
     default: true

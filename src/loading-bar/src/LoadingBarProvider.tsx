@@ -10,7 +10,8 @@ import {
   ExtractPropTypes,
   InjectionKey,
   renderSlot,
-  Ref
+  Ref,
+  CSSProperties
 } from 'vue'
 import { useIsMounted } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
@@ -33,6 +34,12 @@ const loadingBarProps = {
   to: {
     type: [String, Object] as PropType<string | HTMLElement>,
     default: undefined
+  },
+  loadingBarStyle: {
+    type: [String, Object, Function] as PropType<{
+      loading?: string | CSSProperties
+      error?: string | CSSProperties
+    }>
   }
 }
 
@@ -49,9 +56,8 @@ export const loadingBarProviderInjectionKey: InjectionKey<{
   mergedClsPrefixRef: Ref<string>
 }> = Symbol('loadingBar')
 
-export const loadingBarApiInjectionKey: InjectionKey<LoadingBarApiInjection> = Symbol(
-  'loadingBarApi'
-)
+export const loadingBarApiInjectionKey: InjectionKey<LoadingBarApiInjection> =
+  Symbol('loadingBarApi')
 
 export default defineComponent({
   name: 'LoadingBarProvider',

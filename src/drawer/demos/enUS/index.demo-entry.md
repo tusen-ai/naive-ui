@@ -9,6 +9,7 @@ basic
 multiple
 target
 closable
+slot
 ```
 
 ## Props

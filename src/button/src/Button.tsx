@@ -33,6 +33,7 @@ import useRtl from '../../_mixins/use-rtl'
 const buttonProps = {
   ...(useTheme.props as ThemeProps<ButtonTheme>),
   color: String,
+  textColor: String,
   text: Boolean,
   block: Boolean,
   loading: Boolean,
@@ -214,7 +215,8 @@ const Button = defineComponent({
           fontWeight
         } = self
         const size = mergedSizeRef.value
-        const { dashed, type, ghost, text, color, round, circle } = props
+        const { dashed, type, ghost, text, color, round, circle, textColor } =
+          props
         // font
         const fontProps = {
           fontWeight: text
@@ -239,8 +241,9 @@ const Button = defineComponent({
         }
         if (text) {
           const { depth } = props
-          const textColor =
-            color ||
+          const propTextColor = textColor || color
+          const mergedTextColor =
+            propTextColor ||
             (type === 'default' && depth !== undefined
               ? self[
                 createKey(
@@ -256,20 +259,21 @@ const Button = defineComponent({
             '--color-focus': '#0000',
             '--color-disabled': '#0000',
             '--ripple-color': '#0000',
-            '--text-color': textColor,
-            '--text-color-hover': color
-              ? createHoverColor(color)
+            '--text-color': mergedTextColor,
+            '--text-color-hover': propTextColor
+              ? createHoverColor(propTextColor)
               : self[createKey('textColorTextHover', type)],
-            '--text-color-pressed': color
-              ? createPressedColor(color)
+            '--text-color-pressed': propTextColor
+              ? createPressedColor(propTextColor)
               : self[createKey('textColorTextPressed', type)],
-            '--text-color-focus': color
-              ? createHoverColor(color)
+            '--text-color-focus': propTextColor
+              ? createHoverColor(propTextColor)
               : self[createKey('textColorTextHover', type)],
             '--text-color-disabled':
-              color || self[createKey('textColorTextDisabled', type)]
+              propTextColor || self[createKey('textColorTextDisabled', type)]
           }
         } else if (ghost || dashed) {
+          const mergedTextColor = textColor || color
           colorProps = {
             '--color': '#0000',
             '--color-hover': '#0000',
@@ -277,18 +281,19 @@ const Button = defineComponent({
             '--color-focus': '#0000',
             '--color-disabled': '#0000',
             '--ripple-color': color || self[createKey('rippleColor', type)],
-            '--text-color': color || self[createKey('textColorGhost', type)],
-            '--text-color-hover': color
-              ? createHoverColor(color)
+            '--text-color':
+              mergedTextColor || self[createKey('textColorGhost', type)],
+            '--text-color-hover': mergedTextColor
+              ? createHoverColor(mergedTextColor)
               : self[createKey('textColorGhostHover', type)],
-            '--text-color-pressed': color
-              ? createPressedColor(color)
+            '--text-color-pressed': mergedTextColor
+              ? createPressedColor(mergedTextColor)
               : self[createKey('textColorGhostPressed', type)],
-            '--text-color-focus': color
-              ? createHoverColor(color)
+            '--text-color-focus': mergedTextColor
+              ? createHoverColor(mergedTextColor)
               : self[createKey('textColorGhostHover', type)],
             '--text-color-disabled':
-              color || self[createKey('textColorGhostDisabled', type)]
+              mergedTextColor || self[createKey('textColorGhostDisabled', type)]
           }
         } else {
           colorProps = {
@@ -304,21 +309,31 @@ const Button = defineComponent({
               : self[createKey('colorFocus', type)],
             '--color-disabled': color || self[createKey('colorDisabled', type)],
             '--ripple-color': color || self[createKey('rippleColor', type)],
-            '--text-color': color
-              ? self.textColorPrimary
-              : self[createKey('textColor', type)],
-            '--text-color-hover': color
-              ? self.textColorHoverPrimary
-              : self[createKey('textColorHover', type)],
-            '--text-color-pressed': color
-              ? self.textColorPressedPrimary
-              : self[createKey('textColorPressed', type)],
-            '--text-color-focus': color
-              ? self.textColorFocusPrimary
-              : self[createKey('textColorFocus', type)],
-            '--text-color-disabled': color
-              ? self.textColorDisabledPrimary
-              : self[createKey('textColorDisabled', type)]
+            '--text-color':
+              textColor ||
+              (color
+                ? self.textColorPrimary
+                : self[createKey('textColor', type)]),
+            '--text-color-hover':
+              textColor ||
+              (color
+                ? self.textColorHoverPrimary
+                : self[createKey('textColorHover', type)]),
+            '--text-color-pressed':
+              textColor ||
+              (color
+                ? self.textColorPressedPrimary
+                : self[createKey('textColorPressed', type)]),
+            '--text-color-focus':
+              textColor ||
+              (color
+                ? self.textColorFocusPrimary
+                : self[createKey('textColorFocus', type)]),
+            '--text-color-disabled':
+              textColor ||
+              (color
+                ? self.textColorDisabledPrimary
+                : self[createKey('textColorDisabled', type)])
           }
         }
         // border
