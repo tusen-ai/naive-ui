@@ -111,7 +111,7 @@ scroll-debug
 | title | `string \| (() => VNodeChild)` | `undefined` | 列的 title 信息，可以是渲染函数 |
 | titleRowSpan | `number` | `undefined` | title 行所占的单元格的个数 |
 | type | `'selection' \| 'expand'` | `undefined` | 列的类型 |
-| width | `number \| string` | `undefined` | 列的宽度，在列固定时是**必需**的 |
+| width | `number` | `undefined` | 列的宽度，在列固定时是**必需**的 |
 
 #### CreateSummary Type
 

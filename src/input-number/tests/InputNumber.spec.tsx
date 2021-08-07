@@ -8,9 +8,10 @@ describe('n-input-number', () => {
   })
 
   it('should work with `show-button` prop', async () => {
+    // Here is a strange case, we must make input number's slots flag to 2
+    // (dynamic) to make it work.
     const wrapper = mount(NInputNumber)
     expect(wrapper.findComponent(NButton).exists()).toBe(true)
-
     await wrapper.setProps({ showButton: false })
     expect(wrapper.findComponent(NButton).exists()).toBe(false)
   })
@@ -54,5 +55,16 @@ describe('n-input-number', () => {
     wrapper.find('input').element.blur()
     expect(onBlur).toHaveBeenCalledTimes(1)
     wrapper.unmount()
+  })
+
+  it('should work with `prefix` & `suffix` slots', async () => {
+    const wrapper = mount(NInputNumber, {
+      slots: { prefix: () => '$', suffix: () => '%' }
+    })
+    expect(wrapper.find('.n-input__prefix').exists()).toBe(true)
+    expect(wrapper.find('.n-input__prefix').text()).toBe('$')
+    expect(wrapper.find('.n-input__suffix').exists()).toBe(true)
+    expect(wrapper.find('.n-input-number-suffix').exists()).toBe(true)
+    expect(wrapper.find('.n-input-number-suffix').text()).toBe('%')
   })
 })

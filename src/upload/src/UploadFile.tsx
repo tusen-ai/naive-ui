@@ -126,6 +126,7 @@ export default defineComponent({
       progressStatus: progressStatusRef,
       buttonType: buttonTypeRef,
       showProgress: showProgressRef,
+      disabled: NUpload.disabledRef,
       showCancelButton: showCancelButtonRef,
       showRemoveButton: showRemoveButtonRef,
       showDownloadButton: showDownloadButtonRef,
@@ -156,36 +157,37 @@ export default defineComponent({
             {this.file.name}
           </div>
           <div class={`${clsPrefix}-upload-file-info__action`}>
-            {this.showRemoveButton || this.showCancelButton ? (
-              <NButton
-                key="cancelOrTrash"
-                theme={mergedTheme.peers.Button}
-                themeOverrides={mergedTheme.peerOverrides.Button}
-                text
-                type={this.buttonType}
-                onClick={this.handleRemoveOrCancelClick}
-              >
-                {{
-                  icon: () => (
-                    <NIconSwitchTransition>
-                      {{
-                        default: () =>
-                          this.showRemoveButton ? (
-                            <NBaseIcon clsPrefix={clsPrefix} key="trash">
-                              {{ default: () => <TrashIcon /> }}
-                            </NBaseIcon>
-                          ) : (
-                            <NBaseIcon clsPrefix={clsPrefix} key="cancel">
-                              {{ default: () => <CancelIcon /> }}
-                            </NBaseIcon>
-                          )
-                      }}
-                    </NIconSwitchTransition>
-                  )
-                }}
-              </NButton>
-            ) : null}
-            {this.showRetryButton ? (
+            {(this.showRemoveButton || this.showCancelButton) &&
+              !this.disabled && (
+                <NButton
+                  key="cancelOrTrash"
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                  text
+                  type={this.buttonType}
+                  onClick={this.handleRemoveOrCancelClick}
+                >
+                  {{
+                    icon: () => (
+                      <NIconSwitchTransition>
+                        {{
+                          default: () =>
+                            this.showRemoveButton ? (
+                              <NBaseIcon clsPrefix={clsPrefix} key="trash">
+                                {{ default: () => <TrashIcon /> }}
+                              </NBaseIcon>
+                            ) : (
+                              <NBaseIcon clsPrefix={clsPrefix} key="cancel">
+                                {{ default: () => <CancelIcon /> }}
+                              </NBaseIcon>
+                            )
+                        }}
+                      </NIconSwitchTransition>
+                    )
+                  }}
+                </NButton>
+            )}
+            {this.showRetryButton && !this.disabled && (
               <NButton
                 key="retry"
                 text
@@ -202,7 +204,7 @@ export default defineComponent({
                   )
                 }}
               </NButton>
-            ) : null}
+            )}
             {this.showDownloadButton ? (
               <NButton
                 key="download"

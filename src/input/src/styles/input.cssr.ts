@@ -299,7 +299,7 @@ export default c([
       transition: color .3s var(--bezier);
       flex-wrap: nowrap;
       flex-shrink: 0;
-      line-height: 1.5;
+      line-height: var(--height);
       white-space: nowrap;
       display: inline-flex;
       align-items: center;

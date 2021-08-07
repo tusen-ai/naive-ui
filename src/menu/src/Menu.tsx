@@ -127,6 +127,7 @@ const menuProps = {
     },
     default: undefined
   },
+  expandIcon: Function as PropType<(option: MenuOption) => VNodeChild>,
   expandedNames: {
     type: Array as PropType<Key[]>,
     validator: () => {
@@ -151,6 +152,9 @@ const menuProps = {
   },
   renderIcon: Function as PropType<(option: MenuOption) => VNodeChild>,
   renderLabel: Function as PropType<
+  (option: MenuOption | MenuGroupOption) => VNodeChild
+  >,
+  renderExtra: Function as PropType<
   (option: MenuOption | MenuGroupOption) => VNodeChild
   >,
   dropdownPlacement: {

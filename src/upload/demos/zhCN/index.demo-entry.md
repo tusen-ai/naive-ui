@@ -25,7 +25,7 @@ before-upload
 | data | `Object \| ({ file: UploadFile }) => Object` | `undefined` | 提交表单需要附加的数据 |
 | default-file-list | `Array<UploadFile>` | `[]` | 非受控状态下默认的文件列表 |
 | default-upload | `boolean` | `false` | 选择文件时候是否默认上传 |
-| disabled | `boolean` | `false` |  |
+| disabled | `boolean` | `false` | 是否禁用 |
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |
 | file-list | `Array<UploadFile>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |
 | headers | `Object \| ({ file: UploadFile }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |
@@ -65,12 +65,12 @@ before-upload
 
 ### Upload Slots
 
-| 名称    | 参数 | 说明 |
-| ------- | ---- | ---- |
-| default | `()` |      |
+| 名称    | 参数 | 说明       |
+| ------- | ---- | ---------- |
+| default | `()` | 上传的内容 |
 
 ### Upload Dragger Slots
 
-| 名称    | 参数 | 说明 |
-| ------- | ---- | ---- |
-| default | `()` |      |
+| 名称    | 参数 | 说明                                 |
+| ------- | ---- | ------------------------------------ |
+| default | `()` | 上传拖动器的内容，使用可参考[拖拽上传](#drag) |

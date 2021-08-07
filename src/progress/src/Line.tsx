@@ -25,7 +25,7 @@ export default defineComponent({
     },
     percentage: {
       type: Number,
-      required: true
+      default: 0
     },
     railColor: String,
     railStyle: [String, Object] as PropType<string | CSSProperties>,

@@ -12,6 +12,7 @@ import { warn, call, MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { inputNumberLight, InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber } from './utils'
 import type { OnUpdateValue } from './interface'
+import style from './styles/input-number.cssr'
 
 const inputNumberProps = {
   ...(useTheme.props as ThemeProps<InputNumberTheme>),
@@ -28,7 +29,10 @@ const inputNumberProps = {
   min: [Number, String],
   max: [Number, String],
   size: String as PropType<'small' | 'medium' | 'large'>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   validator: Function as PropType<(value: number) => boolean>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -68,13 +72,14 @@ export default defineComponent({
     const themeRef = useTheme(
       'InputNumber',
       'InputNumber',
-      undefined,
+      style,
       inputNumberLight,
       props,
       mergedClsPrefixRef
     )
     const { localeRef } = useLocale('InputNumber')
     const formItem = useFormItem(props)
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     // dom ref
     const inputInstRef = ref<InputInst | null>(null)
     const minusButtonInstRef = ref<{ $el: HTMLElement } | null>(null)
@@ -315,7 +320,8 @@ export default defineComponent({
       mergedValue: mergedValueRef,
       mergedPlaceholder: mergedPlaceholderRef,
       displayedValueInvalid: displayedValueInvalidRef,
-      mergedSize: formItem.mergedSizeRef,
+      mergedSize: mergedSizeRef,
+      mergedDisabled: mergedDisabledRef,
       displayedValue: displayedValueRef,
       addable: addableRef,
       minusable: minusableRef,
@@ -359,7 +365,7 @@ export default defineComponent({
           builtinThemeOverrides={this.inputThemeOverrides}
           size={this.mergedSize}
           placeholder={this.mergedPlaceholder}
-          disabled={this.disabled}
+          disabled={this.mergedDisabled}
           textDecoration={
             this.displayedValueInvalid ? 'line-through' : undefined
           }
@@ -368,12 +374,19 @@ export default defineComponent({
           onKeydown={this.handleKeyDown}
           onMousedown={this.handleMouseDown}
         >
-          {this.showButton
-            ? {
-                suffix: () => [
+          {{
+            _: 2, // input number has dynamic slots
+            prefix: this.$slots.prefix,
+            suffix: this.showButton
+              ? () => [
+                  this.$slots.suffix && (
+                    <span class={`${mergedClsPrefix}-input-number-suffix`}>
+                      {{ default: this.$slots.suffix }}
+                    </span>
+                  ),
                   <NButton
                     text
-                    disabled={!this.minusable || this.disabled}
+                    disabled={!this.minusable || this.mergedDisabled}
                     focusable={false}
                     builtinThemeOverrides={this.buttonThemeOverrides}
                     onClick={this.handleMinusClick}
@@ -391,7 +404,7 @@ export default defineComponent({
                   </NButton>,
                   <NButton
                     text
-                    disabled={!this.addable || this.disabled}
+                    disabled={!this.addable || this.mergedDisabled}
                     focusable={false}
                     builtinThemeOverrides={this.buttonThemeOverrides}
                     onClick={this.handleAddClick}
@@ -408,8 +421,8 @@ export default defineComponent({
                     }}
                   </NButton>
                 ]
-              }
-            : null}
+              : this.$slots.suffix
+          }}
         </NInput>
       </div>
     )

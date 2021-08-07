@@ -8,6 +8,7 @@
 basic
 disabled
 event
+icon
 min-max
 size
 step
@@ -25,7 +26,7 @@ debug
 | disabled | `boolean` | `false` | 是否禁用 |
 | max | `number` | `undefined` | 最大值 |
 | min | `number` | `undefined` | 最小值 |
-| placeholder | `string` | `'请输入'` |  |
+| placeholder | `string` | `'请输入'` | 提示信息 |
 | show-button | `boolean` | `true` | 是否有按钮 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框大小 |
 | step | `number` | `1` | 每次改变步数，可以为小数 |
@@ -34,3 +35,10 @@ debug
 | on-blur | `(event: FocusEvent) => void` | `undefined` | 移除焦点的回调 |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | 获取焦点的回调 |
 | on-update:value | `(value: number \| null) => void` | `undefined` | 组件值发生变化的回调 |
+
+### Slots
+
+| 属性   | 类型 | 说明               |
+| ------ | ---- | ------------------ |
+| prefix | `()` | 输入框头部内容插槽 |
+| suffix | `()` | 输入框尾部内容插槽 |

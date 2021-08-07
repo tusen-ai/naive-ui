@@ -17,9 +17,10 @@
 
 ```js
 import { useMessage } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 // content
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     return {
@@ -28,7 +29,7 @@ export default {
       }
     }
   }
-}
+})
 ```
 
 </n-space>
@@ -52,6 +53,7 @@ multiple-line
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| closable | `boolean` | 所有 Message 是否显示 close 图标 |
 | duration | `number` | `3000` | 所有 Message 默认的持续时长 |
 | max | `number` | `undefined` | 限制提示信息显示的个数 |
 | to | `string \| HTMLElement` | `'body'` | Message 容器节点的位置 |
@@ -62,6 +64,7 @@ multiple-line
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
+| destroyAll | `() => void` | 销毁所有弹出的信息 |
 | error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 error 类型的信息 |
 | info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 info 类型的信息 |
 | loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 loading 类型的信息 |
@@ -119,13 +122,14 @@ multiple-line
 
 <script>
   import { useMessage } from 'naive-ui'
+  import { defineComponent } from 'vue'
 
   // content
-  export default {
+  export default defineComponent({
     setup() {
       window.$message = useMessage()
     }
-  }
+  })
 </script>
 ```
 

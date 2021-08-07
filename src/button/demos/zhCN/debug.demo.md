@@ -1,6 +1,6 @@
 # debug
 
-Debug 用的。
+`Debug` 用的。
 
 ```html
 <div
@@ -375,13 +375,14 @@ Debug 用的。
 
 ```js
 import { LogInOutline, CashOutline } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   components: {
     CashOutline,
     LogInOutline
   }
-}
+})
 ```
 
 ```css

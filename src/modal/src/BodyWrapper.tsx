@@ -13,7 +13,8 @@ import {
   Transition,
   VNode,
   ComponentPublicInstance,
-  mergeProps
+  mergeProps,
+  cloneVNode
 } from 'vue'
 import { clickoutside } from 'vdirs'
 import { dialogPropKeys } from '../../dialog/src/Dialog'
@@ -173,6 +174,7 @@ export default defineComponent({
         warn('modal', 'default slot is empty')
         return
       }
+      childNode = cloneVNode(childNode)
       childNode.props = mergeProps(
         {
           class: `${mergedClsPrefix}-modal`
@@ -206,7 +208,10 @@ export default defineComponent({
                           this.preset === 'dialog' ? (
                             <NDialog
                               {...this.$attrs}
-                              class={`${mergedClsPrefix}-modal`}
+                              class={[
+                                `${mergedClsPrefix}-modal`,
+                                this.$attrs.class
+                              ]}
                               ref="bodyRef"
                               theme={this.mergedTheme.peers.Dialog}
                               themeOverrides={
@@ -220,7 +225,10 @@ export default defineComponent({
                             <NCard
                               {...this.$attrs}
                               ref="bodyRef"
-                              class={`${mergedClsPrefix}-modal`}
+                              class={[
+                                `${mergedClsPrefix}-modal`,
+                                this.$attrs.class
+                              ]}
                               theme={this.mergedTheme.peers.Card}
                               themeOverrides={
                                 this.mergedTheme.peerOverrides.Card

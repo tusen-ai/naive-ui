@@ -6,6 +6,7 @@
 
 ```demo
 basic
+max
 form
 ```
 
@@ -14,9 +15,11 @@ form
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | closable | `boolean` | `true` | 是否可关闭 |
+| color | `{ color?: string, borderColor?: string, textColor?: string }` | `undefined` | 标签颜色，设置该项后　`type` 无效 |
 | default-value | `string[]` | `[]` | 非受控模式下的默认值 |
 | disabled | `boolean` | `false` | 是否禁用 |
 | input-style | `string \| Object` | `undefined` | 自定义输入框的样式 |
+| max | `number` | `undefined` | tag 的最大数量 |
 | round | `boolean` | `false` | 是否圆角 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸大小 |
 | tag-style | `string \| Object` | `undefined` | 自定义标签的样式 |
