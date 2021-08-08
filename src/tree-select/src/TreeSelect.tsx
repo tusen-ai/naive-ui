@@ -246,9 +246,18 @@ export default defineComponent({
       if (Array.isArray(mergedValue)) {
         const res: SelectBaseOption[] = []
         const { value: treeMate } = dataTreeMateRef
-        mergedValue.forEach((value) => {
+        const { checkedKeys } = treeMate.getCheckedKeys(mergedValue)
+        checkedKeys.forEach((value) => {
           const tmNode = treeMate.getNode(value)
-          if (tmNode !== null) res.push(treeOption2SelectOption(tmNode.rawNode))
+          if (tmNode !== null) {
+            if (
+              props.checkStrategy === 'all' ||
+              (props.checkStrategy === 'parent' && !tmNode.isLeaf) ||
+              (props.checkStrategy === 'child' && tmNode.isLeaf)
+            ) {
+              res.push(treeOption2SelectOption(tmNode.rawNode))
+            }
+          }
         })
         return res
       }
