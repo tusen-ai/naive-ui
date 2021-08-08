@@ -7,6 +7,7 @@
     <n-switch v-model:value="checkable" />Checkable
     <n-switch v-model:value="cascade" />Cascade
     <n-switch v-model:value="filterable" />Filterable
+    <n-switch v-model:value="showPath" />ShowPath
   </n-space>
   <n-tree-select
     default-expand-all
@@ -15,6 +16,7 @@
     :checkable="checkable"
     :cascade="cascade"
     :filterable="filterable"
+    :showPath="showPath"
   />
 </n-space>
 ```
@@ -41,7 +43,8 @@ export default defineComponent({
       checkable: ref(false),
       cascade: ref(false),
       filterable: ref(false),
-      options: createData()
+      options: createData(),
+      showPath: ref(false)
     }
   }
 })

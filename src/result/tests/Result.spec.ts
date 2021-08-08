@@ -42,4 +42,11 @@ describe('n-result', () => {
     expect(wrapper.find('.n-result-footer').exists()).toBe(true)
     expect(wrapper.find('.n-result-footer').text()).toBe('test-footer')
   })
+
+  it('should work with `status` prop', async () => {
+    const wrapper = mount(NResult, {
+      props: { status: 'success' }
+    })
+    expect(wrapper.find('.n-result-icon').exists()).toBe(true)
+  })
 })

@@ -94,8 +94,8 @@ export default defineComponent({
     ...layoutSiderProps
   },
   setup (props) {
+    const layoutProps = inject(layoutInjectionKey)
     if (__DEV__) {
-      const layoutProps = inject(layoutInjectionKey)
       if (!layoutProps) {
         warn(
           'layout-sider',
@@ -122,6 +122,9 @@ export default defineComponent({
       return {
         minWidth: formatLength(props.width)
       }
+    })
+    const siderPlacementRef = computed(() => {
+      return layoutProps ? layoutProps.siderPlacement : 'left'
     })
     const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
     const mergedCollapsedRef = useMergedState(
@@ -194,6 +197,7 @@ export default defineComponent({
       styleMaxWidth: styleMaxWidthRef,
       mergedCollapsed: mergedCollapsedRef,
       scrollContainerStyle: scrollContainerStyleRef,
+      siderPlacement: siderPlacementRef,
       handleTriggerClick,
       cssVars: computed(() => {
         const {
@@ -233,6 +237,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-layout-sider`,
           `${mergedClsPrefix}-layout-sider--${this.position}-positioned`,
+          `${mergedClsPrefix}-layout-sider--${this.siderPlacement}-placement`,
           this.bordered && `${mergedClsPrefix}-layout-sider--bordered`,
           mergedCollapsed && `${mergedClsPrefix}-layout-sider--collapsed`,
           (!mergedCollapsed || this.showCollapsedContent) &&
@@ -292,7 +297,6 @@ export default defineComponent({
           ) : (
             <ToggleBar
               clsPrefix={mergedClsPrefix}
-              collapsed={mergedCollapsed}
               style={this.triggerStyle}
               onClick={this.handleTriggerClick}
             />

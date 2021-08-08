@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`n-spin should work with \`size\` prop 1`] = `"--bezier: cubic-bezier(.4, 0, .2, 1); --opacity-spinning: 0.5; --size: 28px; --color: #18a058;"`;
+
+exports[`n-spin should work with \`size\` prop 2`] = `"--bezier: cubic-bezier(.4, 0, .2, 1); --opacity-spinning: 0.5; --size: 34px; --color: #18a058;"`;
+
+exports[`n-spin should work with \`size\` prop 3`] = `"--bezier: cubic-bezier(.4, 0, .2, 1); --opacity-spinning: 0.5; --size: 40px; --color: #18a058;"`;
+
+exports[`n-spin should work with \`size\` prop 4`] = `"--bezier: cubic-bezier(.4, 0, .2, 1); --opacity-spinning: 0.5; --size: 71px; --color: #18a058;"`;

@@ -48,7 +48,11 @@ import type {
   Value
 } from './interface'
 import { treeSelectInjectionKey } from './interface'
-import { treeOption2SelectOption, filterTree } from './utils'
+import {
+  treeOption2SelectOption,
+  filterTree,
+  treeOption2SelectOptionWithPath
+} from './utils'
 import style from './styles/index.cssr'
 
 const props = {
@@ -79,6 +83,11 @@ const props = {
   leafOnly: Boolean,
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
+  showPath: Boolean,
+  separator: {
+    type: String,
+    default: ' / '
+  },
   options: {
     type: Array as PropType<TreeSelectOption[]>,
     default: () => []
@@ -231,23 +240,44 @@ export default defineComponent({
       }
     })
     const selectedOptionRef = computed(() => {
-      if (props.multiple) return null
+      const { multiple, showPath, separator } = props
+      if (multiple) return null
       const { value: mergedValue } = mergedValueRef
       if (!Array.isArray(mergedValue) && mergedValue !== null) {
-        const tmNode = dataTreeMateRef.value.getNode(mergedValue)
-        if (tmNode !== null) return treeOption2SelectOption(tmNode.rawNode)
+        const { value: treeMate } = dataTreeMateRef
+        const tmNode = treeMate.getNode(mergedValue)
+        if (tmNode !== null) {
+          return showPath
+            ? treeOption2SelectOptionWithPath(
+              tmNode,
+              treeMate.getPath(mergedValue).treeNodePath,
+              separator
+            )
+            : treeOption2SelectOption(tmNode)
+        }
       }
       return null
     })
     const selectedOptionsRef = computed(() => {
-      if (!props.multiple) return null
+      const { multiple, showPath, separator } = props
+      if (!multiple) return null
       const { value: mergedValue } = mergedValueRef
       if (Array.isArray(mergedValue)) {
         const res: SelectBaseOption[] = []
         const { value: treeMate } = dataTreeMateRef
         mergedValue.forEach((value) => {
           const tmNode = treeMate.getNode(value)
-          if (tmNode !== null) res.push(treeOption2SelectOption(tmNode.rawNode))
+          if (tmNode !== null) {
+            res.push(
+              showPath
+                ? treeOption2SelectOptionWithPath(
+                  tmNode,
+                  treeMate.getPath(value).treeNodePath,
+                  separator
+                )
+                : treeOption2SelectOption(tmNode)
+            )
+          }
         })
         return res
       }

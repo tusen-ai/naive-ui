@@ -13,7 +13,9 @@ icon
 name-size
 ```
 
-## Props
+## API
+
+### Avatar Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -24,7 +26,7 @@ name-size
 | round | `boolean` | `false` | Whether to display a rounded avatar. |
 | on-error | `(e: Event) => void` | `undefined` | Callback executed when the avatar image fails to load. |
 
-## Slots
+### Avatar Slots
 
 | Name    | Parameters | Description                       |
 | ------- | ---------- | --------------------------------- |
