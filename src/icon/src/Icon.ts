@@ -11,6 +11,7 @@ export type Depth = 1 | 2 | 3 | 4 | 5 | '1' | '2' | '3' | '4' | '5' | undefined
 export default defineComponent({
   _n_icon__: true,
   name: 'Icon',
+  inheritAttrs: false,
   props: {
     ...(useTheme.props as ThemeProps<IconTheme>),
     depth: [String, Number] as PropType<Depth>,
