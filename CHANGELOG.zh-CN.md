@@ -15,7 +15,6 @@
 - 修复 `n-select` 可过滤的选择器失效，关闭 [#510](https://github.com/TuSimple/naive-ui/issues/510)
 - 修复 `n-data-table` 当全选选中时，全选的状态显示不应该包含被禁用的行，关闭 [#778](https://github.com/TuSimple/naive-ui/issues/778)
 
-
 ## 2.16.1 (2020-08-06)
 
 ### Feats
