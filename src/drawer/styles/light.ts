@@ -23,7 +23,7 @@ export const self = (vars: ThemeCommonVars) => {
     color: modalColor,
     textColor: textColor2,
     titleTextColor: textColor1,
-    titleFontSize: '20px',
+    titleFontSize: '18px',
     titleFontWeight: fontWeightStrong,
     boxShadow: boxShadow3,
     lineHeight,

@@ -13,7 +13,8 @@ import {
   Transition,
   VNode,
   ComponentPublicInstance,
-  mergeProps
+  mergeProps,
+  cloneVNode
 } from 'vue'
 import { clickoutside } from 'vdirs'
 import { dialogPropKeys } from '../../dialog/src/Dialog'
@@ -173,6 +174,7 @@ export default defineComponent({
         warn('modal', 'default slot is empty')
         return
       }
+      childNode = cloneVNode(childNode)
       childNode.props = mergeProps(
         {
           class: `${mergedClsPrefix}-modal`

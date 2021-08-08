@@ -35,7 +35,7 @@ export default defineComponent({
     railStyle: [String, Object] as PropType<string | CSSProperties>,
     percentage: {
       type: Number,
-      required: true
+      default: 0
     },
     showIndicator: {
       type: Boolean,

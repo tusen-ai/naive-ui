@@ -19,7 +19,7 @@ export default defineComponent({
     },
     percentage: {
       type: Array as PropType<number[]>,
-      required: true
+      default: [0]
     },
     strokeWidth: {
       type: Number,

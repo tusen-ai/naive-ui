@@ -15,7 +15,7 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup () {
     return {
-      value: ref(null),
+      value: ref(['song3']),
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
