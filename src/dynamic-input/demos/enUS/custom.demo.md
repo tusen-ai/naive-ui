@@ -13,7 +13,7 @@
         v-model:value="value.num"
         style="margin-right: 12px; width: 160px;"
       />
-      <n-input v-model:value="value.string" type="input" />
+      <n-input v-model:value="value.string" type="text" />
     </div>
   </div>
 </n-dynamic-input>

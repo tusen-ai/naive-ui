@@ -9,7 +9,7 @@ Show Arrow
   :options="options"
   :show-arrow="true"
 >
-  <n-button> Go For a Trip </n-button>
+  <n-button>Go For a Trip</n-button>
 </n-dropdown>
 ```
 

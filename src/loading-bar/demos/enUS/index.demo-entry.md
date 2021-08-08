@@ -41,6 +41,12 @@ basic
 
 ## API
 
+### LoadingBarProvider Props
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| loading-bar-style | `{ loading?: string \| object, error?: string \| object }` | `undefined` | Style of the loading bar. |
+
 ### `loadingBar` Injection Methods
 
 | Name | Type | Description |

@@ -5,6 +5,7 @@
 ```html
 <n-button @click="show"> 来吧 </n-button>
 <n-modal
+  class="custom-card"
   v-model:show="showModal"
   preset="card"
   :style="bodyStyle"

@@ -2,9 +2,42 @@
 
 ## Pending
 
+### Feats
+
+- `n-message-provider` 新增 `closable` 属性，关闭 [#795](https://github.com/TuSimple/naive-ui/issues/795)
+- `n-tree-select` 新增 `showPath` 属性，关闭[#625](https://github.com/TuSimple/naive-ui/issues/623)
+- `n-layout` 增加 `sider-placement` 属性，关闭 [#566](https://github.com/TuSimple/naive-ui/issues/566)
+
+### Fixes
+
+- 修复 `n-avatar` 的缩放在使用 `v-show` 时不正确，关闭 [#779](https://github.com/TuSimple/naive-ui/issues/779)
+- 修复 `n-menu` 在手机端点击菜单的时候出现蓝色背景问题，关闭 [#799](https://github.com/TuSimple/naive-ui/issues/799)
+- 修复 `n-select` 可过滤的选择器失效，关闭 [#510](https://github.com/TuSimple/naive-ui/issues/510)
+- 修复 `n-data-table` 当全选选中时，全选的状态显示不应该包含被禁用的行，关闭 [#778](https://github.com/TuSimple/naive-ui/issues/778)
+
+## 2.16.1 (2020-08-06)
+
+### Feats
+
+- `n-loading-bar` 新增 `loading-bar-style` 属性，关闭 [#457](https://github.com/TuSimple/naive-ui/issues/457)
+- `n-button` 新增 `text-color` 属性
+- `n-form` 导出 `FormValidationError` 类型
+- `n-popconfirm` 支持不显示操作组件，关闭 [#770](https://github.com/TuSimple/naive-ui/issues/770)
+
+### Fixes
+
+- 修复 `n-slider` 丢失浮点数小数精度，关闭 [#751](https://github.com/TuSimple/naive-ui/issues/751)
+- 修复 `n-data-table` `onUpdatePage` 和 `onUpdatePageSize` 在使用 jsx 时不触发的问题
+- 修复 `n-progress` 的 `percentage` 属性默认值不能适应多种类型
+- 修复 `n-select` 当选项禁用时未隐藏关闭图标
+- 修复 `n-modal` 使用自定义内容无法正常关闭，关闭 [#788](https://github.com/TuSimple/naive-ui/issues/788)
+
+## 2.16.0 (2021-08-02)
+
 ### Breaking Changes
 
 - `useLoadingBar` 中 `finish` 方法只有在调用过 `start` 后才生效
+- `n-input` 的 `type='input'` 被重命名为 `type='text'`
 
 ### Feats
 
@@ -13,11 +46,13 @@
 - `n-menu` 新增 `render-extra` 属性
 - `n-select` 新增 `on-clear` 属性
 - `n-form` 增加 `disabled` 属性，关闭 [#538](https://github.com/TuSimple/naive-ui/issues/538)
+- `n-dynamic-tags` 新增 `max` 属性
 
 ### Fixes
 
 - 修复 `n-dropdown` 循环渲染时点击异常
-- 修复 `n-color-picker` `on-complete` 回调参数 `value` 更新异常
+- 修复 `n-modal` 使用预设时无法自定义类，关闭 [#744](https://github.com/TuSimple/naive-ui/issues/744)
+- 修复 `n-cascader` 的菜单虚拟滚动时宽度展示不一致问题，关闭 [#728](https://github.com/TuSimple/naive-ui/issues/728)
 
 ## 2.15.11 (2021-07-29)
 

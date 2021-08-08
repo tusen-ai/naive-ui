@@ -10,6 +10,7 @@ custom-action
 custom-icon
 event
 no-icon
+actions
 ```
 
 ## Props

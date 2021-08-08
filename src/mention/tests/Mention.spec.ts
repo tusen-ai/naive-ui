@@ -64,6 +64,9 @@ describe('n-mention', () => {
     )
     expect(wrapper.find('input').exists()).toBe(true)
 
+    await wrapper.setProps({ type: 'text' })
+    expect(wrapper.find('input').exists()).toBe(true)
+
     await wrapper.setProps({ type: 'textarea' })
     expect(wrapper.find('.n-input').classes()).toContain('n-input--textarea')
     expect(wrapper.find('textarea').exists()).toBe(true)

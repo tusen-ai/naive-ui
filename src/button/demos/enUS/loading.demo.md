@@ -24,15 +24,16 @@ Button has loading status.
 
 ```js
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { defineComponent, ref } from 'vue'
 
-export default {
+export default defineComponent({
   components: {
     CashIcon
   },
-  data () {
+  setup () {
     return {
-      loading: false
+      loading: ref(false)
     }
   }
-}
+})
 ```

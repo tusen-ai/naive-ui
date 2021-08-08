@@ -41,6 +41,12 @@ basic
 
 ## API
 
+### LoadingBarProvider Props
+
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| loading-bar-style | `{ loading?: string \| object, error?: string \| object }` | `undefined` | 加载条样式 |
+
 ### `loadingBar` Injection Methods
 
 | 名称   | 类型         | 说明                     |

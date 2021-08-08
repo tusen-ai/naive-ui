@@ -22,10 +22,11 @@ To match different level text colors, icon provides `depth` prop.
 
 ```js
 import { CashOutline } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   components: {
     CashOutline
   }
-}
+})
 ```

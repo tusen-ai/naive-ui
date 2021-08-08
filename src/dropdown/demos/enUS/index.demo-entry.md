@@ -6,6 +6,7 @@ When you have some functions to trigger.
 
 ```demo
 basic
+icon
 trigger
 cascade
 arrow
@@ -29,7 +30,7 @@ batch-render
 | on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when clickoutside. |
 | on-select | `(key: string \| number) => void` | `undefined` | Callback function triggered on blur. |
 
-For other props, for example `placement`, please see [Popover Props](popover#Props). Note that `arrow`, `raw` is not available.
+For other props, for example `placement`, please see [Popover Props](popover#Props). Note that `raw` is not available.
 
 ### DropdownOption Type
 

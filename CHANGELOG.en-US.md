@@ -2,9 +2,42 @@
 
 ## Pending
 
+### Feats
+
+- `n-message-provider` add `closable` prop, closes [#795](https://github.com/TuSimple/naive-ui/issues/795).
+- `n-tree-select` add `showPath` prop, closes[#625](https://github.com/TuSimple/naive-ui/issues/623).
+- `n-layout` add `sider-placement` prop, closes [#566](https://github.com/TuSimple/naive-ui/issues/566).
+
+### Fixes
+
+- Fix `n-avatar`'s scale value is incorrect while use v-show, closes [#779](https://github.com/TuSimple/naive-ui/issues/779).
+- Fix `n-menu` show a blue background when click the menu on mobile phone, closes [#799](https://github.com/TuSimple/naive-ui/issues/799).
+- Fix `n-select` filterable select breaks, closes [#510](https://github.com/TuSimple/naive-ui/issues/510).
+- Fix `n-data-table` When selectAll is selected, the state display of selectAll should not contain disabled rows, closes [#778](https://github.com/TuSimple/naive-ui/issues/778).
+
+## 2.16.1 (2020-08-06)
+
+### Feats
+
+- `n-loading-bar` add `loading-bar-style` props, closes [#457](https://github.com/TuSimple/naive-ui/issues/457).
+- `n-button` add `text-color` prop.
+- `n-form` export `FormValidationError` type.
+- `n-popconfirm` support not show action components, closes [#770](https://github.com/TuSimple/naive-ui/issues/770).
+
+### Fixes
+
+- Fix `n-slider` loss floating point decimal precision, closes [#751](https://github.com/TuSimple/naive-ui/issues/751).
+- Fix `n-data-table` `onUpdatePage` and `onUpdatePageSize` not triggered while using jsx.
+- Fix `n-progress`'s `percentage` prop default value doesn't work with different types.
+- Fix `n-select` hide close icon when option is disabled.
+- Fix `n-modal` can't be closed when using custom content, closes [#788](https://github.com/TuSimple/naive-ui/issues/788).
+
+## 2.16.0 (2021-08-02)
+
 ### Breaking Changes
 
 - `useLoadingBar`'s `finish` method won't work if no `start` is called.
+- `n-input`'s `type='input'` is renamed to `type='text'`.
 
 ### Feats
 
@@ -13,11 +46,13 @@
 - `n-menu` add `render-extra` prop.
 - `n-select` add `on-clear` prop.
 - `n-form` add `disabled` prop, closes [#538](https://github.com/TuSimple/naive-ui/issues/538).
+- `n-dynamic-tags` add `max` prop.
 
 ### Fixes
 
 - Fix `n-dropdown` click exception when using v-for.
-- Fix `n-color-picker` `on-complete` callback parameter `value` update error. closes [#748](https://github.com/TuSimple/naive-ui/issues/748).
+- Fix `n-modal` cannot customize classes when use preset, closes [#744](https://github.com/TuSimple/naive-ui/issues/744).
+- Fix `n-cascader` menu width shifts in virtual scroll mode, closes [#728](https://github.com/TuSimple/naive-ui/issues/728).
 
 ## 2.15.11 (2021-07-29)
 

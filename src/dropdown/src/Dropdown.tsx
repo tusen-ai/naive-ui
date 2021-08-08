@@ -92,8 +92,6 @@ const dropdownBaseProps = {
     type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
     default: 'medium'
   },
-  showArrow: Boolean,
-  arrowStyle: [String, Object] as PropType<string | CSSProperties>,
   inverted: Boolean,
   placement: {
     type: String as PropType<FollowerPlacement>,
@@ -104,6 +102,7 @@ const dropdownBaseProps = {
     type: Array as PropType<DropdownMixedOption[]>,
     default: () => []
   },
+  showArrow: Boolean,
   // for menu, not documented
   value: [String, Number] as PropType<Key | null>,
   renderLabel: Function as PropType<RenderLabel>,
@@ -394,9 +393,7 @@ export default defineComponent({
         class: [
           className,
           `${mergedClsPrefix}-dropdown`,
-          {
-            [`${mergedClsPrefix}-popover--show-arrow`]: this.showArrow
-          }
+          this.showArrow && `${mergedClsPrefix}-popover--show-arrow`
         ],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,

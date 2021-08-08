@@ -25,6 +25,61 @@ export default cB('layout-sider', `
   display: flex;
   justify-content: flex-end;
 `, [
+  cM('right-placement', `
+    justify-content: flex-start;
+  `, [
+    cM('bordered', `
+      border-right: none;
+      border-left: 1px solid var(--border-color);
+    `),
+    cM('collapsed', [
+      cB('layout-toggle-button', `
+        transform: translateX(-50%) translateY(-50%) rotate(0);
+      `),
+      cB('layout-toggle-bar', [
+        c('&:hover', [
+          cE('top', {
+            transform: 'rotate(-12deg) scale(1.15) translateY(-2px)'
+          }),
+          cE('bottom', {
+            transform: 'rotate(12deg) scale(1.15) translateY(2px)'
+          })
+        ])
+      ])
+    ]),
+    cB('layout-toggle-button', `
+      transform: translateX(-50%) translateY(-50%) rotate(180deg);
+      left: 0;
+    `),
+    cB('layout-toggle-bar', `
+      left: -28px;
+      transform: rotate(180deg);
+    `, [
+      c('&:hover', [
+        cE('top', {
+          transform: 'rotate(12deg) scale(1.15) translateY(-2px)'
+        }),
+        cE('bottom', {
+          transform: 'rotate(-12deg) scale(1.15) translateY(2px)'
+        })
+      ])
+    ])
+  ]),
+  cM('collapsed', [
+    cB('layout-toggle-bar', [
+      c('&:hover', [
+        cE('top', {
+          transform: 'rotate(-12deg) scale(1.15) translateY(-2px)'
+        }),
+        cE('bottom', {
+          transform: 'rotate(12deg) scale(1.15) translateY(2px)'
+        })
+      ])
+    ]),
+    cB('layout-toggle-button', `
+      transform: translateX(50%) translateY(-50%) rotate(180deg);
+    `)
+  ]),
   cB('layout-toggle-button', `
     transition:
       transform .3s var(--bezier),
@@ -35,8 +90,8 @@ export default cB('layout-sider', `
     position: absolute;
     top: 50%;
     right: 0;
-    transform: translateX(50%) translateY(-50%);
     fill: var(--toggle-button-color);
+    transform: translateX(50%) translateY(-50%) rotate(0);
   `),
   cB('layout-toggle-bar', `
     cursor: pointer;
@@ -68,16 +123,6 @@ export default cB('layout-sider', `
         transform: 'rotate(-12deg) scale(1.15) translateY(2px)'
       })
     ]),
-    cM('collapsed', [
-      c('&:hover', [
-        cE('top', {
-          transform: 'rotate(-12deg) scale(1.15) translateY(-2px)'
-        }),
-        cE('bottom', {
-          transform: 'rotate(12deg) scale(1.15) translateY(2px)'
-        })
-      ])
-    ]),
     cE('top, bottom', {
       backgroundColor: 'var(--toggle-bar-color)'
     }),
@@ -107,11 +152,6 @@ export default cB('layout-sider', `
   cM('show-content', [
     cB('layout-sider-scroll-container', {
       opacity: 1
-    })
-  ]),
-  cM('collapsed', [
-    cB('layout-toggle-button', {
-      transform: 'translateX(50%) translateY(-50%) rotate(180deg)'
     })
   ]),
   cM('absolute-positioned', `
