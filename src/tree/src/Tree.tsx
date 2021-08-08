@@ -520,16 +520,14 @@ export default defineComponent({
       if (props.disabled || node.disabled) {
         return
       }
-      const res = dataTreeMateRef.value![checked ? 'check' : 'uncheck'](
-        node.key,
-        displayedCheckedKeysRef.value,
-        {
-          cascade: props.cascade,
-          leafOnly: props.leafOnly,
-          checkStrategy: mergedCheckStrategyRef.value
-        }
-      )
-      doUpdateCheckedKeys(res.checkedKeys)
+      const { checkedKeys } = dataTreeMateRef.value![
+        checked ? 'check' : 'uncheck'
+      ](node.key, displayedCheckedKeysRef.value, {
+        cascade: props.cascade,
+        leafOnly: props.leafOnly,
+        checkStrategy: mergedCheckStrategyRef.value
+      })
+      doUpdateCheckedKeys(checkedKeys)
     }
     function toggleExpand (key: Key): void {
       if (props.disabled) return

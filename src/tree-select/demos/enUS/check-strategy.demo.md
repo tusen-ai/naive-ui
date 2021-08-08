@@ -1,13 +1,16 @@
-# set checkedStrategy
+# Set Check Strategy
+
+# all: show all checked node; parent: show all checked parent node when all child node are checked; child: show all child node
 
 ```html
 <n-tree-select
   multiple
   cascade
   checkable
-  checkStrategy="SHOW_PARENT"
+  checkStrategy="parent"
   :options="options"
-  :default-value="['Norwegian Wood']"
+  :default-value="['Dig It', 'go']"
+  @update:value="updateValue"
 />
 ```
 
@@ -94,47 +97,24 @@ export default defineComponent({
             },
             {
               label: 'Across The Universe',
-              key: 'Across The Universe'
-            },
-            {
-              label: 'I Me Mine',
-              key: 'I Me Mine'
-            },
-            {
-              label: 'Dig It',
-              key: 'Dig It'
-            },
-            {
-              label: 'Let It Be',
-              key: 'Let It Be'
-            },
-            {
-              label: 'Maggie Mae',
-              key: 'Maggie Mae'
-            },
-            {
-              label: "I've Got A Feeling",
-              key: "I've Got A Feeling"
-            },
-            {
-              label: 'One After 909',
-              key: 'One After 909'
-            },
-            {
-              label: 'The Long And Winding Road',
-              key: 'The Long And Winding Road'
-            },
-            {
-              label: 'For You Blue',
-              key: 'For You Blue'
-            },
-            {
-              label: 'Get Back',
-              key: 'Get Back'
+              key: 'Across The Universe',
+              children: [
+                {
+                  label: 'Dig It',
+                  key: 'Dig It'
+                },
+                {
+                  label: 'go',
+                  key: 'go'
+                }
+              ]
             }
           ]
         }
-      ]
+      ],
+      updateValue: (values) => {
+        console.log(values)
+      }
     }
   }
 })

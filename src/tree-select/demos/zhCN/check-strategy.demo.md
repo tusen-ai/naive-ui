@@ -1,4 +1,4 @@
-# 勾选指定策略
+# 指定勾选策略
 
 ```html
 <n-tree-select
@@ -7,7 +7,7 @@
   checkable
   checkStrategy="parent"
   :options="options"
-  :default-value="['Across The Universe']"
+  :default-value="['Dig It', 'go']"
   @update:value="updateValue"
 />
 ```
