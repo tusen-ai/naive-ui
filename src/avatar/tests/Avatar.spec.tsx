@@ -4,6 +4,8 @@ import { h, nextTick } from 'vue'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NIcon } from '../../icon'
 
+// Please note that resize observer doesn't work in JSDOM, so text transfrom
+// can't be tested.
 describe('n-avatar', () => {
   // mock offsetHeight offsetWidth
   const originalOffsetHeight = Object.getOwnPropertyDescriptor(
@@ -113,9 +115,6 @@ describe('n-avatar', () => {
     await wrapper.setData({ text: 'adjust text' })
     await nextTick()
     expect(textNode.exists()).toBe(true)
-    expect(textNode.attributes('style')).toContain(
-      'transform: translateX(-50%) translateY(-50%) scale(1);'
-    )
     expect(wrapper.html()).toMatchSnapshot()
   })
 

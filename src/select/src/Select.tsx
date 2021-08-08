@@ -509,6 +509,9 @@ export default defineComponent({
       )
     }
     function handlePatternInput (e: InputEvent): void {
+      if (!mergedShowRef.value) {
+        openMenu()
+      }
       const { value } = e.target as unknown as HTMLInputElement
       patternRef.value = value
       const { tag, remote } = props
