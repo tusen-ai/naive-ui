@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.16.2 (2021-08-09)
 
 ### Feats
 
@@ -16,7 +16,7 @@
 - 修复 `n-data-table` 当全选选中时，全选的状态显示不应该包含被禁用的行，关闭 [#778](https://github.com/TuSimple/naive-ui/issues/778)
 - 修复 `n-color-picker` 的 `on-complete` 回调参数 `value` 值不正确，关闭 [#748](https://github.com/TuSimple/naive-ui/issues/748)
 
-## 2.16.1 (2020-08-06)
+## 2.16.1 (2021-08-06)
 
 ### Feats
 
