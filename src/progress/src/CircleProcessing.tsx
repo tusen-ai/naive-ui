@@ -1,11 +1,12 @@
 import {
   defineComponent,
-  onMounted,
   ref,
   computed,
   onBeforeUnmount,
   h,
-  Fragment
+  Fragment,
+  watch,
+  toRefs
 } from 'vue'
 import { calcPointPos, setProcessingTimer, clearProcessingTimer } from './utils'
 import { createId } from 'seemly'
@@ -39,6 +40,10 @@ export default defineComponent({
     }
   },
   setup (props) {
+    const {
+      viewBoxWidth: viewBoxWidthRef,
+      maxStrokeDasharray: maxStrokeDasharrayRef
+    } = toRefs(props)
     const processingFillStrokeDasharrayRef = ref<string>('')
     const timer: number = 0
     const randomId: string = createId()
@@ -55,16 +60,23 @@ export default defineComponent({
     const lightestCurPointPosRef = computed(() => {
       return calcPointPos(props.circleRadius, curArcLength.value, 0.66)
     })
-    onMounted(() => {
-      setProcessingTimer({
-        timer,
-        sleepingRef,
-        processingFillStrokeDasharrayRef,
-        randomId,
-        viewBoxWidth: props.viewBoxWidth,
-        maxStrokeDasharray: props.maxStrokeDasharray
-      })
-    })
+    watch(
+      [viewBoxWidthRef, maxStrokeDasharrayRef],
+      () => {
+        clearProcessingTimer(timer)
+        setProcessingTimer({
+          timer,
+          sleepingRef,
+          processingFillStrokeDasharrayRef,
+          randomId,
+          viewBoxWidth: viewBoxWidthRef.value,
+          maxStrokeDasharray: maxStrokeDasharrayRef.value
+        })
+      },
+      {
+        immediate: true
+      }
+    )
     onBeforeUnmount(() => {
       clearProcessingTimer(timer)
     })
