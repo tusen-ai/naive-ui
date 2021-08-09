@@ -1,4 +1,4 @@
-import { Ref, ComputedRef } from 'vue'
+import { Ref } from 'vue'
 import { createId } from 'seemly'
 
 const changeProcessingFillStrokeDasharray = ({
@@ -76,10 +76,10 @@ export const clearProcessingTimer = (timer: number): void => {
 
 export const calcPointPos = (
   r: number,
-  arcLength: ComputedRef<number>,
+  arcLength: number,
   curArcRate: number
 ): number[] => {
-  const arcAngle = (arcLength.value / (2 * Math.PI * r)) * 360 * curArcRate
+  const arcAngle = (arcLength / (2 * Math.PI * r)) * 360 * curArcRate
   const x = 0.5 * (1 + Math.sin((arcAngle * Math.PI) / 180))
   const y = 0.5 * (1 - Math.cos((arcAngle * Math.PI) / 180))
   return [x, y]

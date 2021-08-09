@@ -25,7 +25,6 @@ export default defineComponent({
       type: Number,
       required: true
     },
-    circleGap: Number,
     maxStrokeDasharray: {
       type: Number,
       required: true
@@ -40,10 +39,9 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const maxStrokeDasharray = computed(() => props.maxStrokeDasharray)
     const processingFillStrokeDasharrayRef = ref<string>('')
     const timer: number = 0
-    const randomId = createId()
+    const randomId: string = createId()
     const sleepingRef = ref<boolean>(false)
     const curArcLength = computed(() => {
       if (!processingFillStrokeDasharrayRef.value) {
@@ -52,10 +50,10 @@ export default defineComponent({
       return parseFloat(processingFillStrokeDasharrayRef.value.split(',')[0])
     })
     const darkestPointPosRef = computed(() => {
-      return calcPointPos(props.circleRadius, maxStrokeDasharray, 1)
+      return calcPointPos(props.circleRadius, props.maxStrokeDasharray, 1)
     })
     const lightestCurPointPosRef = computed(() => {
-      return calcPointPos(props.circleRadius, curArcLength, 0.66)
+      return calcPointPos(props.circleRadius, curArcLength.value, 0.66)
     })
     onMounted(() => {
       setProcessingTimer({
@@ -64,7 +62,7 @@ export default defineComponent({
         processingFillStrokeDasharrayRef,
         randomId,
         viewBoxWidth: props.viewBoxWidth,
-        maxStrokeDasharray: maxStrokeDasharray.value
+        maxStrokeDasharray: props.maxStrokeDasharray
       })
     })
     onBeforeUnmount(() => {
@@ -111,7 +109,9 @@ export default defineComponent({
             stroke-linecap="round"
             fill="none"
             style={{
-              transition: 'opacity .3s ease-in-out',
+              animation:
+                'progress-circle-processing-animation 1s var(--bezier)',
+              animationFillMode: 'forwards',
               strokeDasharray: processingFillStrokeDasharray,
               strokeDashoffset: 0,
               stroke: `url(#ProgressCircleGradient${randomId})`
