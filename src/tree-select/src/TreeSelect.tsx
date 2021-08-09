@@ -275,9 +275,7 @@ export default defineComponent({
               (props.checkStrategy === 'parent' && !tmNode.isLeaf) ||
               (props.checkStrategy === 'child' && tmNode.isLeaf)
             ) {
-              res.push(treeOption2SelectOption(tmNode.rawNode))
-            }
-            res.push(
+              res.push(
               showPath
                 ? treeOption2SelectOptionWithPath(
                   tmNode,
@@ -286,6 +284,7 @@ export default defineComponent({
                 )
                 : treeOption2SelectOption(tmNode)
             )
+            }
           }
         })
         return res
