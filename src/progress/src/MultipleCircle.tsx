@@ -1,19 +1,5 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  PropType,
-  CSSProperties,
-  ref,
-  onMounted,
-  onUnmounted
-} from 'vue'
-import { createId } from 'seemly'
-import {
-  calcCurPointPos,
-  setProcessingTimer,
-  clearProcessingTimer
-} from './utils'
+import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
+import CircleProcessing from './CircleProcessing'
 
 function circlePath (r: number, sw: number, vw: number = 100): string {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${
@@ -76,59 +62,23 @@ export default defineComponent({
       )
       return strokeDasharrays
     })
-    const processingFillStrokeDasharrayRef = ref<string[]>([])
-    const timerRef = ref<number>(0)
-    const randomIdRef = ref<string>(createId())
-    const sleepingRef = ref<boolean>(false)
-    const curArcLength = computed(() => {
-      if (!processingFillStrokeDasharrayRef.value.length) {
-        return []
-      }
-      return processingFillStrokeDasharrayRef.value.map((item, id) => {
+    const maxStrokeDasharrayRef = computed(() => {
+      return strokeDasharrayRef.value.map((item) => {
         return parseFloat(item.split(',')[0])
       })
     })
-    const maxStrokeDasharray = computed(() => {
-      return strokeDasharrayRef.value.map((item) => {
-        return parseInt(item.split(',')[0])
-      })
-    })
-    const darkestPointPos = computed(() => {
-      const rArr = props.percentage.map((_, index) => {
-        return (
-          props.viewBoxWidth / 2 -
-          (props.strokeWidth / 2) * (1 + 2 * index) -
-          props.circleGap * index
-        )
-      })
-      return calcCurPointPos(rArr, maxStrokeDasharray, 1) as number[][]
-    })
-    const lightestCurPointPosArr = computed(() => {
-      const rArr = props.percentage.map((_, index) => {
-        return (
-          props.viewBoxWidth / 2 -
-          (props.strokeWidth / 2) * (1 + 2 * index) -
-          props.circleGap * index
-        )
-      })
-      return calcCurPointPos(rArr, curArcLength, 0.66) as number[][]
-    })
-    onMounted(() => {
-      props.processing &&
-        setProcessingTimer({
-          timerRef,
-          sleepingRef,
-          processingFillStrokeDasharrayRef,
-          randomIdRef,
-          percentage: props.percentage,
-          viewBoxWidth: props.viewBoxWidth,
-          strokeWidth: props.strokeWidth,
-          circleGap: props.circleGap
-        })
-    })
-    onUnmounted(() => {
-      props.processing && clearProcessingTimer(timerRef)
-    })
+    const getCircleRadius = (
+      viewBoxWidth: number,
+      strokeWidth: number,
+      index: number,
+      circleGap: number
+    ): number => {
+      return (
+        viewBoxWidth / 2 -
+        (strokeWidth / 2) * (1 + 2 * index) -
+        circleGap * index
+      )
+    }
     return () => {
       const {
         viewBoxWidth,
@@ -139,49 +89,31 @@ export default defineComponent({
         railColor,
         railStyle,
         percentage,
-        clsPrefix
+        clsPrefix,
+        processing
       } = props
       return (
         <div class={`${clsPrefix}-progress-content`} role="none">
           <div class={`${clsPrefix}-progress-graph`} aria-hidden>
             <div class={`${clsPrefix}-progress-graph-circle`}>
               <svg viewBox={`0 0 ${viewBoxWidth} ${viewBoxWidth}`}>
-                <defs>
-                  {percentage.map((_, index) => {
-                    return (
-                      lightestCurPointPosArr.value[index] && (
-                        <linearGradient
-                          id={`ProgressMultipleCircleGradient${randomIdRef.value}${index}`}
-                          x1={darkestPointPos.value[index][0]}
-                          y1={darkestPointPos.value[index][1]}
-                          x2={lightestCurPointPosArr.value[index][0]}
-                          y2={lightestCurPointPosArr.value[index][1]}
-                        >
-                          <stop
-                            offset="0%"
-                            stop-color="rgba(255, 255, 255, 0)"
-                          />
-                          <stop
-                            offset="100%"
-                            stop-color="rgba(255, 255, 255, 0.3)"
-                          />
-                        </linearGradient>
-                      )
-                    )
-                  })}
-                </defs>
                 {percentage.map((p, index) => {
+                  const circleRadius = getCircleRadius(
+                    viewBoxWidth,
+                    strokeWidth,
+                    index,
+                    circleGap
+                  )
+                  const pathD = circlePath(
+                    circleRadius,
+                    strokeWidth,
+                    viewBoxWidth
+                  )
                   return (
                     <g key={index}>
                       <path
                         class={`${clsPrefix}-progress-graph-circle-rail`}
-                        d={circlePath(
-                          viewBoxWidth / 2 -
-                            (strokeWidth / 2) * (1 + 2 * index) -
-                            circleGap * index,
-                          strokeWidth,
-                          viewBoxWidth
-                        )}
+                        d={pathD}
                         stroke-width={strokeWidth}
                         stroke-linecap="round"
                         fill="none"
@@ -201,13 +133,7 @@ export default defineComponent({
                           p === 0 &&
                             `${clsPrefix}-progress-graph-circle-fill--empty`
                         ]}
-                        d={circlePath(
-                          viewBoxWidth / 2 -
-                            (strokeWidth / 2) * (1 + 2 * index) -
-                            circleGap * index,
-                          strokeWidth,
-                          viewBoxWidth
-                        )}
+                        d={pathD}
                         stroke-width={strokeWidth}
                         stroke-linecap="round"
                         fill="none"
@@ -217,31 +143,18 @@ export default defineComponent({
                           stroke: fillColor[index]
                         }}
                       />
-                      {props.processing && p ? (
-                        <path
-                          class={[
-                            `${clsPrefix}-progress-graph-circle-processing-fill`
-                          ]}
-                          d={circlePath(
-                            viewBoxWidth / 2 -
-                              (strokeWidth / 2) * (1 + 2 * index) -
-                              circleGap * index,
-                            strokeWidth,
-                            viewBoxWidth
-                          )}
-                          stroke-width={strokeWidth}
-                          stroke-linecap="round"
-                          fill="none"
-                          style={{
-                            opacity: sleepingRef.value ? 0 : 1,
-                            transition: 'opacity .3s ease-in-out',
-                            strokeDasharray:
-                              processingFillStrokeDasharrayRef.value[index],
-                            strokeDashoffset: 0,
-                            stroke: `url(#ProgressMultipleCircleGradient${randomIdRef.value}${index})`
-                          }}
+                      {processing && p && (
+                        <CircleProcessing
+                          clsPrefix={clsPrefix}
+                          strokeWidth={strokeWidth}
+                          viewBoxWidth={viewBoxWidth}
+                          maxStrokeDasharray={
+                            maxStrokeDasharrayRef.value[index]
+                          }
+                          circleRadius={circleRadius}
+                          pathD={pathD}
                         />
-                      ) : null}
+                      )}
                     </g>
                   )
                 })}

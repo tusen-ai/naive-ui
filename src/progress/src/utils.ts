@@ -1,195 +1,86 @@
-import { Ref, ref, ComputedRef } from 'vue'
+import { Ref, ComputedRef } from 'vue'
 import { createId } from 'seemly'
 
 const changeProcessingFillStrokeDasharray = ({
   processingFillStrokeDasharrayRef,
   maxStrokeDasharray,
   rate,
-  viewBoxWidth,
-  idx
+  strokeDasharrayPercentage
 }: {
-  processingFillStrokeDasharrayRef: Ref<string> | Ref<string[]>
+  processingFillStrokeDasharrayRef: Ref<string>
   maxStrokeDasharray: number
   rate: number
-  viewBoxWidth: number
-  idx?: number
+  strokeDasharrayPercentage: number
 }): void => {
-  const isArray = Array.isArray(processingFillStrokeDasharrayRef.value)
-  const strokeDasharrayVal: number = isArray
-    ? parseFloat(
-      processingFillStrokeDasharrayRef.value[idx as number].split(',')[0]
-    )
-    : parseFloat(
-      (processingFillStrokeDasharrayRef.value as string).split(',')[0]
-    )
+  const strokeDasharrayVal: number = parseFloat(
+    processingFillStrokeDasharrayRef.value.split(',')[0]
+  )
   let num = strokeDasharrayVal + maxStrokeDasharray * rate
   if (num > maxStrokeDasharray) {
     num = maxStrokeDasharray
   }
-  isArray
-    ? ((processingFillStrokeDasharrayRef as Ref<string[]>).value[
-        idx as number
-      ] = `${num}, ${viewBoxWidth * 8}`)
-    : (processingFillStrokeDasharrayRef.value = `${num}, ${viewBoxWidth * 8}`)
-}
-
-const initProcessingFillStrokeDasharrayRef = ({
-  processingFillStrokeDasharrayRef,
-  percentage,
-  viewBoxWidth
-}: {
-  processingFillStrokeDasharrayRef: Ref<string> | Ref<string[]>
-  percentage: number | number[]
-  viewBoxWidth: number
-}): void => {
-  const isArray = Array.isArray(processingFillStrokeDasharrayRef.value)
-  processingFillStrokeDasharrayRef.value = isArray
-    ? (percentage as number[]).map(() => `0, ${viewBoxWidth * 8}`)
-    : `0, ${viewBoxWidth * 8}`
-}
-
-const calcMaxStrokeDasharray = ({
-  percentage,
-  viewBoxWidth,
-  strokeWidth,
-  circleGap,
-  idx
-}: {
-  percentage: number | number[]
-  viewBoxWidth?: number
-  strokeWidth?: number
-  circleGap?: number
-  idx?: number
-}): number => {
-  if (idx === undefined) {
-    return Math.PI * (percentage as number)
-  }
-  return (
-    ((Math.PI * (percentage as number[])[idx]) / 100) *
-    ((viewBoxWidth as number) / 2 -
-      ((strokeWidth as number) / 2) * (1 + 2 * idx) -
-      (circleGap as number) * idx) *
-    2
-  )
+  processingFillStrokeDasharrayRef.value = `${num}, ${strokeDasharrayPercentage}`
 }
 
 export const setProcessingTimer = ({
-  timerRef,
+  timer,
   sleepingRef,
   processingFillStrokeDasharrayRef,
-  randomIdRef,
-  percentage,
+  randomId,
   viewBoxWidth,
-  strokeWidth,
-  circleGap
+  maxStrokeDasharray
 }: {
-  timerRef: Ref<number>
+  timer: number
   sleepingRef: Ref<boolean>
-  processingFillStrokeDasharrayRef: Ref<string> | Ref<string[]>
-  randomIdRef: Ref<string>
-  percentage: number | number[]
+  processingFillStrokeDasharrayRef: Ref<string>
+  randomId: string
   viewBoxWidth: number
-  strokeWidth?: number
-  circleGap?: number
+  maxStrokeDasharray: number
 }): void => {
-  const num = ref<number>(0)
-  const isArray = Array.isArray(processingFillStrokeDasharrayRef.value)
-  timerRef.value = window.setInterval(() => {
-    num.value++
-    if (num.value === 63) {
-      clearProcessingTimer(timerRef)
+  let num = 0
+  timer = window.setInterval(() => {
+    num++
+    const strokeDasharrayPercentage = viewBoxWidth * 8
+    if (num === 63) {
+      clearProcessingTimer(timer)
       sleepingRef.value = true
       window.setTimeout(() => {
-        initProcessingFillStrokeDasharrayRef({
-          processingFillStrokeDasharrayRef,
-          percentage,
-          viewBoxWidth
-        })
-        randomIdRef.value = createId()
+        processingFillStrokeDasharrayRef.value = `0, ${strokeDasharrayPercentage}`
+        randomId = createId()
         sleepingRef.value = false
-      }, 700)
-      window.setTimeout(() => {
         setProcessingTimer({
-          timerRef,
+          timer,
           sleepingRef,
           processingFillStrokeDasharrayRef,
-          randomIdRef,
-          percentage,
+          randomId,
           viewBoxWidth,
-          strokeWidth,
-          circleGap
+          maxStrokeDasharray
         })
       }, 1000)
     }
-    if (
-      !processingFillStrokeDasharrayRef.value ||
-      (isArray && !processingFillStrokeDasharrayRef.value.length)
-    ) {
-      initProcessingFillStrokeDasharrayRef({
-        processingFillStrokeDasharrayRef,
-        percentage,
-        viewBoxWidth
-      })
+    if (!processingFillStrokeDasharrayRef.value) {
+      processingFillStrokeDasharrayRef.value = `0, ${strokeDasharrayPercentage}`
     } else {
-      if (isArray) {
-        ;(processingFillStrokeDasharrayRef as Ref<string[]>).value.forEach(
-          (_, idx) => {
-            const maxStrokeDasharray = calcMaxStrokeDasharray({
-              percentage,
-              viewBoxWidth,
-              strokeWidth,
-              circleGap,
-              idx
-            })
-            changeProcessingFillStrokeDasharray({
-              processingFillStrokeDasharrayRef,
-              maxStrokeDasharray,
-              rate: 1 / 62,
-              viewBoxWidth,
-              idx
-            })
-          }
-        )
-      } else {
-        const maxStrokeDasharray = calcMaxStrokeDasharray({ percentage })
-        changeProcessingFillStrokeDasharray({
-          processingFillStrokeDasharrayRef,
-          maxStrokeDasharray,
-          rate: 1 / 62,
-          viewBoxWidth: viewBoxWidth
-        })
-      }
+      changeProcessingFillStrokeDasharray({
+        processingFillStrokeDasharrayRef,
+        maxStrokeDasharray,
+        rate: 1 / 62,
+        strokeDasharrayPercentage
+      })
     }
   }, 16)
 }
-export const clearProcessingTimer = (timerRef: Ref<number>): void => {
-  window.clearInterval(timerRef.value as any)
+export const clearProcessingTimer = (timer: number): void => {
+  window.clearInterval(timer as any)
 }
 
-const calcPointPos = (
+export const calcPointPos = (
   r: number,
-  arcLength: number,
+  arcLength: ComputedRef<number>,
   curArcRate: number
 ): number[] => {
-  const arcAngle = (arcLength / (2 * Math.PI * r)) * 360 * curArcRate
+  const arcAngle = (arcLength.value / (2 * Math.PI * r)) * 360 * curArcRate
   const x = 0.5 * (1 + Math.sin((arcAngle * Math.PI) / 180))
   const y = 0.5 * (1 - Math.cos((arcAngle * Math.PI) / 180))
   return [x, y]
-}
-
-export const calcCurPointPos = (
-  r: number | number[],
-  curArcLengthRef: ComputedRef<number> | ComputedRef<number[]>,
-  curArcRate: number
-): number[] | number[][] => {
-  if (Array.isArray(curArcLengthRef.value)) {
-    return curArcLengthRef.value.map((item, idx) => {
-      return calcPointPos((r as number[])[idx], item, curArcRate)
-    })
-  }
-  return calcPointPos(
-    r as number,
-    (curArcLengthRef as ComputedRef<number>).value,
-    curArcRate
-  )
 }

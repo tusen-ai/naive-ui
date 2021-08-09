@@ -1,14 +1,4 @@
-import {
-  h,
-  defineComponent,
-  PropType,
-  computed,
-  CSSProperties,
-  ref,
-  onMounted,
-  onUnmounted
-} from 'vue'
-import { createId } from 'seemly'
+import { h, defineComponent, PropType, computed, CSSProperties } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   SuccessIcon,
@@ -17,11 +7,7 @@ import {
   InfoIcon
 } from '../../_internal/icons'
 import { Status } from './interface'
-import {
-  calcCurPointPos,
-  setProcessingTimer,
-  clearProcessingTimer
-} from './utils'
+import CircleProcessing from './CircleProcessing'
 
 const iconMap = {
   success: <SuccessIcon />,
@@ -68,38 +54,8 @@ export default defineComponent({
     const strokeDasharrayRef = computed(() => {
       return `${Math.PI * props.percentage}, ${props.viewBoxWidth * 8}`
     })
-    const processingFillStrokeDasharrayRef = ref<string>('')
-    const timerRef = ref<number>(0)
-    const randomIdRef = ref<string>(createId())
-    const sleepingRef = ref<boolean>(false)
-    const curArcLength = computed(() => {
-      if (!processingFillStrokeDasharrayRef.value) {
-        return 0
-      }
-      return parseFloat(processingFillStrokeDasharrayRef.value.split(',')[0])
-    })
-    const maxStrokeDasharray = computed(() => {
-      return parseInt(strokeDasharrayRef.value.split(',')[0])
-    })
-    const darkestPointPos = computed(() => {
-      return calcCurPointPos(50, maxStrokeDasharray, 1) as number[]
-    })
-    const lightestCurPointPos = computed(() => {
-      return calcCurPointPos(50, curArcLength, 0.66) as number[]
-    })
-    onMounted(() => {
-      props.processing &&
-        setProcessingTimer({
-          timerRef,
-          sleepingRef,
-          processingFillStrokeDasharrayRef,
-          randomIdRef,
-          percentage: props.percentage,
-          viewBoxWidth: props.viewBoxWidth
-        })
-    })
-    onUnmounted(() => {
-      props.processing && clearProcessingTimer(timerRef)
+    const maxStrokeDasharrayRef = computed(() => {
+      return parseFloat(strokeDasharrayRef.value.split(',')[0])
     })
     return () => {
       const {
@@ -112,25 +68,15 @@ export default defineComponent({
         showIndicator,
         indicatorTextColor,
         unit,
-        clsPrefix
+        clsPrefix,
+        processing,
+        viewBoxWidth
       } = props
       return (
         <div class={`${clsPrefix}-progress-content`} role="none">
           <div class={`${clsPrefix}-progress-graph`} aria-hidden>
             <div class={`${clsPrefix}-progress-graph-circle`}>
               <svg viewBox="0 0 110 110">
-                <defs>
-                  <linearGradient
-                    id={`ProgressCircleGradient${randomIdRef.value}`}
-                    x1={darkestPointPos.value[0]}
-                    y1={darkestPointPos.value[1]}
-                    x2={lightestCurPointPos.value[0]}
-                    y2={lightestCurPointPos.value[1]}
-                  >
-                    <stop offset="0%" stop-color="rgba(255, 255, 255, 0)" />
-                    <stop offset="100%" stop-color="rgba(255, 255, 255, 0.3)" />
-                  </linearGradient>
-                </defs>
                 <g>
                   <path
                     class={`${clsPrefix}-progress-graph-circle-rail`}
@@ -167,26 +113,16 @@ export default defineComponent({
                     }}
                   />
                 </g>
-                {props.processing && props.percentage ? (
-                  <g>
-                    <path
-                      class={[
-                        `${clsPrefix}-progress-graph-circle-processing-fill`
-                      ]}
-                      d="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
-                      stroke-width={strokeWidth * 1.1}
-                      stroke-linecap="round"
-                      fill="none"
-                      style={{
-                        opacity: sleepingRef.value ? 0 : 1,
-                        transition: 'opacity .3s ease-in-out',
-                        strokeDasharray: processingFillStrokeDasharrayRef.value,
-                        strokeDashoffset: 0,
-                        stroke: `url(#ProgressCircleGradient${randomIdRef.value})`
-                      }}
-                    />
-                  </g>
-                ) : null}
+                {processing && percentage && (
+                  <CircleProcessing
+                    clsPrefix={clsPrefix}
+                    strokeWidth={strokeWidth * 1.1}
+                    viewBoxWidth={viewBoxWidth}
+                    pathD="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
+                    maxStrokeDasharray={maxStrokeDasharrayRef.value}
+                    circleRadius={50}
+                  />
+                )}
               </svg>
             </div>
           </div>
