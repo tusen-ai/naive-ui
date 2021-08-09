@@ -370,16 +370,10 @@ export default defineComponent({
         )
         if (~expandedNodeIndex) {
           const expandedChildren = flatten(
-            (afNodeRef.value[expandedNodeIndex] as TmNode).children || [],
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            (afNodeRef.value[expandedNodeIndex] as TmNode).children!,
             value
           )
-          if (
-            (afNodeRef.value[expandedNodeIndex] as TmNode).rawNode.children ===
-            undefined
-          ) {
-            ;(afNodeRef.value[expandedNodeIndex] as TmNode).rawNode.children =
-              []
-          }
           afNodeRef.value.splice(expandedNodeIndex + 1, 0, {
             __motion: true,
             mode: 'expand',
@@ -401,19 +395,10 @@ export default defineComponent({
         )
         if (~collapsedNodeIndex) {
           const collapsedChildren = flatten(
-            (afNodeRef.value[collapsedNodeIndex] as TmNode).children || [],
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            (afNodeRef.value[collapsedNodeIndex] as TmNode).children!,
             value
           )
-          if (
-            Array.isArray(
-              (afNodeRef.value[collapsedNodeIndex] as TmNode).rawNode.children
-            ) &&
-            (afNodeRef.value[collapsedNodeIndex] as TmNode).rawNode.children!
-              .length === 0
-          ) {
-            ;(afNodeRef.value[collapsedNodeIndex] as TmNode).rawNode.children =
-              undefined
-          }
           afNodeRef.value.splice(collapsedNodeIndex + 1, 0, {
             __motion: true,
             mode: 'collapse',
@@ -549,6 +534,12 @@ export default defineComponent({
         expandedKeysAfterChange.splice(index, 1)
         doUpdateExpandedKeys(expandedKeysAfterChange)
       } else {
+        const toExpandedNode = displayTreeMateRef
+          .value!.getFlattenedNodes([...mergedExpandedKeys, key])
+          .find((node) => (node as any).key === key)
+        if (!toExpandedNode?.rawNode.children) {
+          return
+        }
         doUpdateExpandedKeys(mergedExpandedKeys.concat(key))
       }
     }
