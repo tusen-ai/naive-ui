@@ -7,6 +7,8 @@ import {
   NLayoutHeader,
   NLayoutSider
 } from '../index'
+import { NH2 } from '../../typography'
+import { NCard } from '../../card'
 
 describe('n-layout', () => {
   it('should work with import on demand', () => {
@@ -27,7 +29,6 @@ describe('n-layout', () => {
         ]
       }
     })
-    console.log(wrapper.html())
 
     expect(
       wrapper.find('.n-layout-scroll-container').element.children.length
@@ -60,5 +61,88 @@ describe('n-layout', () => {
         .element.children[3].getAttribute('class')
     ).toContain('n-layout-footer')
     expect(wrapper.find('.n-layout-footer').text()).toBe('test-footer')
+  })
+
+  it('should work with `content-style` prop', async () => {
+    const wrapper = mount(NLayout, {
+      props: {
+        'has-sider': true
+      },
+      slots: {
+        default: () =>
+          h(
+            NLayoutSider,
+            { 'content-style': 'padding: 24px' },
+            {
+              default: () => [
+                h(NH2, null, { default: () => 'test1' }),
+                h(NH2, null, { default: () => 'test2' })
+              ]
+            }
+          )
+      }
+    })
+    expect(
+      wrapper.find('.n-layout-sider-scroll-container').attributes('style')
+    ).toContain('padding: 24px')
+  })
+
+  it('should work with `embedded` prop', async () => {
+    const wrapper = mount(NLayout, {
+      props: {
+        embedded: true
+      },
+      slots: {
+        default: () =>
+          h(NCard, null, {
+            default: () => 'test'
+          })
+      }
+    })
+    expect(wrapper.find('.n-layout').attributes('style')).toMatchSnapshot()
+  })
+
+  it('should work with `bordered` prop', async () => {
+    const wrapper = mount(NLayout, {
+      props: {
+        'has-sider': true
+      },
+      slots: {
+        default: () => [
+          h(
+            NLayoutHeader,
+            { bordered: true },
+            { default: () => 'test-header' }
+          ),
+          h(NLayoutSider, { bordered: true }, { default: () => 'test-sider' }),
+          h(NLayoutFooter, { bordered: true }, { default: () => 'test-footer' })
+        ]
+      }
+    })
+    expect(wrapper.find('.n-layout-header').classes()).toContain(
+      'n-layout-header--bordered'
+    )
+    expect(wrapper.find('.n-layout-sider').classes()).toContain(
+      'n-layout-sider--bordered'
+    )
+    expect(wrapper.find('.n-layout-footer').classes()).toContain(
+      'n-layout-footer--bordered'
+    )
+  })
+
+  it('should work with `absolute` prop', async () => {
+    const wrapper = mount(NLayout, {
+      props: {
+        position: 'absolute'
+      },
+      slots: {
+        default: () => [
+          h(NLayoutHeader, null, { default: () => 'test-header' })
+        ]
+      }
+    })
+    expect(wrapper.find('.n-layout').classes()).toContain(
+      'n-layout--absolute-positioned'
+    )
   })
 })
