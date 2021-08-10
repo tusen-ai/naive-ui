@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-rate` 在深色模式下显示不符合预期的问题
+
 ## 2.16.2 (2021-08-09)
 
 ### Feats

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-rate` display unexpected issues in dark mode.
+
 ## 2.16.2 (2021-08-09)
 
 ### Feats
