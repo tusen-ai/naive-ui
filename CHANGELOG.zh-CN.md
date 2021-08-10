@@ -1,5 +1,12 @@
 # CHANGELOG
 
+
+## Pending
+
+### Fixes
+
+- 修复 `n-menu` 使用 `render-icon` 渲染错误当返回值为 true 时
+
 ## 2.16.2 (2021-08-09)
 
 ### Feats
