@@ -1,7 +1,10 @@
 # CHANGELOG
 
-
 ## Pending
+
+### Feats
+
+- `n-message-provider` add `container-style` prop
 
 ### Fixes
 
