@@ -87,7 +87,7 @@ export default defineComponent({
             style={this.iconStyle}
             role="none"
           >
-            {icon}
+            {[icon]}
           </div>
         )}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">

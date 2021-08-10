@@ -4,7 +4,8 @@
 
 ### Fixes
 
-- Fix `n-rate` display unexpected issues in dark mode.
+- Fix `n-rate` half star overlays star background in dark mode.
+- Fix `n-menu` use `render-icon` render error when return true.
 
 ## 2.16.2 (2021-08-09)
 
