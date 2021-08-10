@@ -120,8 +120,10 @@ export default defineComponent({
         return option.label
       },
       renderMenuIcon (option) {
-        if (option.key === 'beverage') return true
-        if (option.key === 'food') return null // falsy
+        // return render placeholder for indent
+        if (option.key === 'sheep-man') return h(() => null)
+        // return falsy, don't render icon placeholder
+        if (option.key === 'food') return null
         return h(NIcon, null, { default: () => h(BookmarkOutline) })
       },
       expandIcon () {
