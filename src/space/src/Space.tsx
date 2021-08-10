@@ -1,4 +1,11 @@
-import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  PropType,
+  CSSProperties,
+  VNode
+} from 'vue'
 import { depx, getGap } from 'seemly'
 import { createKey, flatten, getSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -92,7 +99,9 @@ export default defineComponent({
       wrap,
       mergedClsPrefix
     } = this
-    const children = flatten(getSlot(this))
+    const children = flatten(getSlot(this)).filter(
+      (vNode: VNode) => vNode.children !== 'v-if'
+    )
     const horizontalMargin = `${margin.horizontal}px`
     const semiHorizontalMargin = `${margin.horizontal / 2}px`
     const verticalMargin = `${margin.vertical}px`

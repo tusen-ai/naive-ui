@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-space` 在使用 `v-if` 时渲染空的占位，关闭 [#824](https://github.com/TuSimple/naive-ui/issues/824)
+
 ## 2.16.2 (2021-08-09)
 
 ### Feats

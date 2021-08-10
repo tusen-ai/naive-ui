@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-space` render empty placeholder while use `v-if`, closes [#824](https://github.com/TuSimple/naive-ui/issues/824).
+
 ## 2.16.2 (2021-08-09)
 
 ### Feats
