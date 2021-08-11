@@ -1,5 +1,5 @@
 import { h, defineComponent, PropType, provide, ExtractPropTypes } from 'vue'
-import { ErrorList } from 'async-validator'
+import { ValidateError } from 'async-validator'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formLight } from '../styles'
@@ -84,7 +84,7 @@ export default defineComponent({
               .filter((result) => result.errors)
               .map((result) => result.errors)
             if (validateCallback) {
-              validateCallback(errors as ErrorList[])
+              validateCallback(errors as ValidateError[][])
             } else {
               reject(errors)
             }
