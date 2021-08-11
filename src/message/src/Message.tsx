@@ -117,11 +117,12 @@ export default defineComponent({
       content,
       mergedClsPrefix,
       cssVars,
-      handleClose
+      handleClose,
+      cssClassWrapper
     } = this
     return (
       <div
-        class={`${mergedClsPrefix}-message-wrapper`}
+        class={[`${mergedClsPrefix}-message-wrapper`, cssClassWrapper]}
         style={cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-message`}>

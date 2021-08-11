@@ -82,6 +82,7 @@ export default defineComponent({
                 type={this.type}
                 icon={this.icon}
                 closable={this.closable}
+                cssClassWrapper={this.cssClassWrapper}
                 onClose={this.handleClose}
               />
             ) : null
