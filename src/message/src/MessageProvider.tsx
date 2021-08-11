@@ -73,10 +73,7 @@ const messageProviderProps = {
   },
   max: Number,
   closable: Boolean,
-  containerStyle: {
-    type: [String, Object] as PropType<string | CSSProperties>,
-    default: ''
-  }
+  containerStyle: [String, Object] as PropType<string | CSSProperties>
 }
 
 export type MessageProviderProps = ExtractPublicPropTypes<
