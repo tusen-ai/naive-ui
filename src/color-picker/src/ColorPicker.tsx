@@ -14,7 +14,8 @@ import {
   InjectionKey,
   ComputedRef,
   Ref,
-  watch
+  watch,
+  nextTick
 } from 'vue'
 import {
   hsv2rgb,
@@ -387,7 +388,7 @@ export default defineComponent({
 
     function handleInputUpdateValue (value: string): void {
       doUpdateValue(value, 'input')
-      handleComplete()
+      void nextTick(handleComplete)
     }
 
     function handleComplete (pushStack: boolean = true): void {

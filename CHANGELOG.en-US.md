@@ -2,10 +2,17 @@
 
 ## Pending
 
+### Fixes
+
+- Fix `n-rate` half star overlays star background in dark mode.
+- Fix `n-menu` use `render-icon` render error when return true.
+
+## 2.16.2 (2021-08-09)
+
 ### Feats
 
 - `n-message-provider` add `closable` prop, closes [#795](https://github.com/TuSimple/naive-ui/issues/795).
-- `n-tree-select` add `showPath` prop, closes[#625](https://github.com/TuSimple/naive-ui/issues/623).
+- `n-tree-select` add `show-path` prop, closes[#625](https://github.com/TuSimple/naive-ui/issues/623).
 - `n-layout` add `sider-placement` prop, closes [#566](https://github.com/TuSimple/naive-ui/issues/566).
 
 ### Fixes
@@ -14,6 +21,7 @@
 - Fix `n-menu` show a blue background when click the menu on mobile phone, closes [#799](https://github.com/TuSimple/naive-ui/issues/799).
 - Fix `n-select` filterable select breaks, closes [#510](https://github.com/TuSimple/naive-ui/issues/510).
 - Fix `n-data-table` When selectAll is selected, the state display of selectAll should not contain disabled rows, closes [#778](https://github.com/TuSimple/naive-ui/issues/778).
+- Fix `n-color-picker`'s `on-complete` callback's argument `value` is incorrect, closes [#748](https://github.com/TuSimple/naive-ui/issues/748).
 
 ## 2.16.1 (2020-08-06)
 
