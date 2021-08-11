@@ -121,7 +121,7 @@ export default defineComponent({
       },
       renderMenuIcon (option) {
         // return render placeholder for indent
-        if (option.key === 'sheep-man') return h(() => null)
+        if (option.key === 'sheep-man') return true
         // return falsy, don't render icon placeholder
         if (option.key === 'food') return null
         return h(NIcon, null, { default: () => h(BookmarkOutline) })
