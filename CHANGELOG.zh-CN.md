@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-message-provider` add `container-style` prop
+- `n-message-provider` 新增 `container-style` 属性
 
 ### Fixes
 
