@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { NUpload } from '../index'
+import { sleep } from 'seemly'
 
 const getMockFile = (element: Element, files: File[]): void => {
   Object.defineProperty(element, 'files', {
@@ -77,12 +78,12 @@ describe('n-upload', () => {
     expect(wrapper.findAll('.n-upload-file--picture-card-type').length).toBe(1)
   })
 
-  it('should work with `preview-file` prop', async () => {
-    const previewFile = async (): Promise<string> => '/testThumbUrl.png'
+  it('should work with `create-thumbnail-url` prop', async () => {
+    const createThumbnailUrl = async (): Promise<string> => '/testThumbUrl.png'
     const wrapper = mount(NUpload, {
       props: {
         listType: 'picture',
-        previewFile
+        createThumbnailUrl
       }
     })
     const input = wrapper.find('input')
@@ -90,7 +91,7 @@ describe('n-upload', () => {
 
     getMockFile(input.element, fileList)
     await input.trigger('change')
-
+    await sleep(1000)
     expect(
       wrapper.find('.n-upload-file-info-thumbnail__image img').attributes('src')
     ).toEqual('/testThumbUrl.png')

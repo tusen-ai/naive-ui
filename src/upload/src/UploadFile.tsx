@@ -1,4 +1,12 @@
-import { h, defineComponent, PropType, computed, inject } from 'vue'
+import {
+  h,
+  defineComponent,
+  PropType,
+  computed,
+  inject,
+  ref,
+  watchEffect
+} from 'vue'
 import {
   CancelIcon,
   TrashIcon,
@@ -14,6 +22,8 @@ import { NIconSwitchTransition, NBaseIcon, NBaseLoading } from '../../_internal'
 import { warn } from '../../_utils'
 import NUploadProgress from './UploadProgress'
 import { FileInfo, listType, uploadInjectionKey } from './interface'
+import type { ImagePreviewInst } from '../../image/src/ImagePreview'
+import NImagePreview from '../../image/src/ImagePreview'
 
 export default defineComponent({
   name: 'UploadFile',
@@ -72,12 +82,12 @@ export default defineComponent({
     const showPreivewButtonRef = computed(() => {
       if (!NUpload.showPreivewButtonRef.value) return false
       const {
-        file: { status, url, thumbnailUrl },
+        file: { status, url },
         listType
       } = props
       return (
         ['finished'].includes(status) &&
-        (url || thumbnailUrl) &&
+        (url || thumbnailUrl.value) &&
         listType === 'picture-card'
       )
     })
@@ -147,13 +157,42 @@ export default defineComponent({
       const {
         onPreviewRef: { value: onPreview }
       } = NUpload
-      if (!onPreview) {
+
+      if (onPreview) {
+        e.preventDefault()
+        onPreview(props.file)
+      } else if (props.listType === 'picture-card') {
+        const { value: previewInst } = previewInstRef
+        if (!previewInst) return
+        previewInst.setPreviewSrc(props.file.url || thumbnailUrl.value)
+        previewInst.setThumbnailEl(imageRef.value)
+        previewInst.toggleShow()
+      }
+    }
+    const imageRef = ref<HTMLImageElement | null>(null)
+    const previewInstRef = ref<ImagePreviewInst | null>(null)
+    const thumbnailUrl = ref('')
+    const getFileThumbnail = async (): Promise<void> => {
+      if (props.listType !== 'picture' && props.listType !== 'picture-card') {
         return
       }
 
-      e.preventDefault()
-      onPreview(props.file)
+      if (
+        typeof document === 'undefined' ||
+        typeof window === 'undefined' ||
+        !window.FileReader ||
+        !window.File ||
+        !(props.file.file instanceof File)
+      ) {
+        return
+      }
+
+      thumbnailUrl.value = await NUpload.getFileThumbnail(props.file)
     }
+
+    watchEffect(() => {
+      void getFileThumbnail()
+    })
 
     return {
       mergedTheme: NUpload.mergedThemeRef,
@@ -170,7 +209,10 @@ export default defineComponent({
       handleRetryClick,
       isImageUrl,
       showPreivewButton: showPreivewButtonRef,
-      handlePreviewClick
+      handlePreviewClick,
+      thumbnailUrl,
+      previewInstRef,
+      imageRef
     }
   },
   render () {
@@ -208,7 +250,7 @@ export default defineComponent({
       } else {
         icon = !this.isImageUrl(this.file) ? (
           fileIcon(<FileIcon />)
-        ) : (this.file.url || this.file.thumbnailUrl) &&
+        ) : (this.file.url || this.thumbnailUrl) &&
           this.file.status !== 'error' ? (
           <a
             rel="noopener noreferer"
@@ -218,9 +260,8 @@ export default defineComponent({
             onClick={(e) => this.handlePreviewClick(e)}
           >
             <img
-              src={this.file.thumbnailUrl || this.file.url || undefined}
+              src={this.thumbnailUrl || this.file.url || undefined}
               alt={this.file.name}
-              ref="imageRef"
             />
           </a>
             ) : (
@@ -269,7 +310,9 @@ export default defineComponent({
               <span
                 class={[
                   ...thumbnailNameClass,
-                  this.file.status === 'uploading' &&
+                  (this.file.url ||
+                    this.thumbnailUrl ||
+                    this.file.status === 'uploading') &&
                     `${clsPrefix}-upload-file-info-thumbnail__hide`
                 ]}
                 onClick={(e) => this.handlePreviewClick(e)}
@@ -376,6 +419,11 @@ export default defineComponent({
           percentage={this.file.percentage || 0}
           status={this.progressStatus}
         />
+        <NImagePreview
+          clsPrefix={clsPrefix}
+          ref="previewInstRef"
+          showToolbar={true}
+        ></NImagePreview>
       </div>
     )
   }

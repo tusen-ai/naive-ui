@@ -6,8 +6,7 @@ import {
   toRef,
   ref,
   PropType,
-  CSSProperties,
-  watchEffect
+  CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
 import { useConfig, useTheme, useFormItem } from '../../_mixins'
@@ -38,12 +37,11 @@ import {
   OnBeforeUpload,
   listType,
   OnPreview,
-  previewFile
+  CreateThumbnailUrl
 } from './interface'
 import { useMergedState } from 'vooks'
 import { uploadDraggerKey } from './UploadDragger'
 
-const MEASURE_SIZE = 200
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
  */
@@ -255,7 +253,7 @@ const uploadProps = {
     default: 'text'
   },
   onPreview: Function as PropType<OnPreview>,
-  previewFile: Function as PropType<previewFile>
+  createThumbnailUrl: Function as PropType<CreateThumbnailUrl>
 } as const
 
 const isImageFileType = (type: string): boolean => type.includes('image/')
@@ -463,63 +461,32 @@ export default defineComponent({
         warn('upload', 'File has no corresponding id in current file list.')
       }
     }
-    function getFileThumbnail (): void {
-      if (props.listType !== 'picture' && props.listType !== 'picture-card') {
-        return
-      }
-      mergedFileListRef.value.forEach((file: FileInfo) => {
-        if (
-          typeof document === 'undefined' ||
-          typeof window === 'undefined' ||
-          !window.FileReader ||
-          !window.File ||
-          !(file.file instanceof File || (file.file as Blob) instanceof Blob) ||
-          file.thumbnailUrl !== undefined
-        ) {
-          return
-        }
-        const { previewFile } = props
-        void Promise.resolve(
-          previewFile
-            ? previewFile(file.file as File)
-            : previewImage(file.file as File)
-        ).then((previewUrl) => {
-          file.thumbnailUrl = previewUrl || ''
-        })
-      })
+    async function getFileThumbnail (file: FileInfo): Promise<string> {
+      const { createThumbnailUrl } = props
+
+      return createThumbnailUrl
+        ? await createThumbnailUrl(file.file as File)
+        : await previewImage(file.file as File)
     }
-    watchEffect(() => {
-      getFileThumbnail()
-    })
-    async function previewImage (file: File | Blob): Promise<string> {
+
+    async function previewImage (file: File): Promise<string> {
       return await new Promise((resolve) => {
         if (!file.type || !isImageFileType(file.type)) {
           resolve('')
           return
         }
 
-        const canvas = document.createElement('canvas')
-        canvas.width = MEASURE_SIZE
-        canvas.height = MEASURE_SIZE
-        canvas.style.cssText = `position: fixed; left: 0; top: 0; width: ${MEASURE_SIZE}px; height: ${MEASURE_SIZE}px; z-index: 9999; display: none;`
-        document.body.appendChild(canvas)
-        const ctx = canvas.getContext('2d')
         const img = new Image()
         img.onload = () => {
           const { width, height } = img
+          const canvas = document.createElement('canvas')
+          const ctx = canvas.getContext('2d')
+          canvas.width = width
+          canvas.height = height
+          canvas.style.cssText = `position: fixed; left: 0; top: 0; width: ${width}px; height: ${height}px; z-index: 9999; display: none;`
+          document.body.appendChild(canvas)
 
-          let [drawWidth, drawHeight] = [MEASURE_SIZE, MEASURE_SIZE]
-          let [offsetX, offsetY] = [0, 0]
-
-          if (width > height) {
-            drawHeight = height * (MEASURE_SIZE / width)
-            offsetY = -(drawHeight - drawWidth) / 2
-          } else {
-            drawWidth = width * (MEASURE_SIZE / height)
-            offsetX = -(drawWidth - drawHeight) / 2
-          }
-
-          ctx?.drawImage(img, offsetX, offsetY, drawWidth, drawHeight)
+          ctx?.drawImage(img, 0, 0, width, height)
           const dataURL = canvas.toDataURL()
           document.body.removeChild(canvas)
 
@@ -545,7 +512,8 @@ export default defineComponent({
       doChange,
       isImageUrl,
       showPreivewButtonRef: toRef(props, 'showPreivewButton'),
-      onPreviewRef: toRef(props, 'onPreview')
+      onPreviewRef: toRef(props, 'onPreview'),
+      getFileThumbnail
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,

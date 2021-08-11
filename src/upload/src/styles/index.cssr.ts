@@ -150,7 +150,6 @@ export default cB('upload', [
             `, [
               c('img', `
                 width: 48px;
-                height: 48px;
                 display: block;
                 overflow: hidden;
               `),
@@ -195,7 +194,6 @@ export default cB('upload', [
             `, [
               c('img', `
                 width: 100%;
-                height: 100%;
               `),
               c('i', `
                 font-size: 34px;
@@ -336,9 +334,7 @@ export default cB('upload', [
             display: flex;
             justify-content: center;
             align-items: center;
-          `, [
-
-          ])
+          `)
         ]),
         cE('name', `
           display: flex;

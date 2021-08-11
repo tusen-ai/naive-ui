@@ -70,6 +70,7 @@ export interface UploadInjection {
   isImageUrl: (file: FileInfo) => boolean
   showPreivewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>
+  getFileThumbnail: (file: FileInfo) => Promise<string>
 }
 
 export const uploadInjectionKey: InjectionKey<UploadInjection> =
@@ -95,4 +96,4 @@ export type listType = 'text' | 'picture' | 'picture-card'
 
 export type OnPreview = (file: FileInfo) => void
 
-export type previewFile = (file: File | Blob) => Promise<string>
+export type CreateThumbnailUrl = (file: File) => Promise<string>
