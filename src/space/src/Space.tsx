@@ -4,7 +4,8 @@ import {
   computed,
   PropType,
   CSSProperties,
-  VNode
+  VNode,
+  Comment
 } from 'vue'
 import { depx, getGap } from 'seemly'
 import { createKey, flatten, getSlot } from '../../_utils'
@@ -100,8 +101,9 @@ export default defineComponent({
       mergedClsPrefix
     } = this
     const children = flatten(getSlot(this)).filter(
-      (vNode: VNode) => vNode.children !== 'v-if'
+      (vNode: VNode) => vNode.children !== 'v-if' && vNode.type !== Comment
     )
+    console.log(children)
     const horizontalMargin = `${margin.horizontal}px`
     const semiHorizontalMargin = `${margin.horizontal / 2}px`
     const verticalMargin = `${margin.vertical}px`
