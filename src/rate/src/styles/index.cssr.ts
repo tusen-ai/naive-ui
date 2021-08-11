@@ -53,7 +53,7 @@ export default cB('rate', {
     bottom: 0;
     width: 50%;
     overflow: hidden;
-    color: var(--item-color);
+    color: rgba(255, 255, 255, 0);
   `, [
     cM('active', {
       color: 'var(--item-color-active)'

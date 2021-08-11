@@ -108,7 +108,7 @@
     "superagent": "^6.1.0",
     "typescript": "^4.3.2",
     "vite": "^2.1.3",
-    "vue": "^3.1.1",
+    "vue": "^3.2.1",
     "vue-router": "^4.0.5"
   },
   "peerDependencies": {
@@ -119,7 +119,7 @@
     "@css-render/vue3-ssr": "^0.15.4",
     "@types/lodash": "^4.14.170",
     "@types/lodash-es": "^4.17.4",
-    "async-validator": "^3.5.1",
+    "async-validator": "^4.0.1",
     "css-render": "^0.15.4",
     "date-fns": "^2.19.0",
     "evtd": "^0.2.2",
@@ -127,7 +127,7 @@
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "seemly": "^0.3.1",
-    "treemate": "^0.2.12",
+    "treemate": "^0.3.0",
     "vdirs": "^0.1.4",
     "vfonts": "^0.1.0",
     "vooks": "^0.2.6",
