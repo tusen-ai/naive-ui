@@ -56,7 +56,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       margin: computed<{ horizontal: number, vertical: number }>(() => {
-        const { size } = props
+        const { size, vertical } = props
         if (Array.isArray(size)) {
           return {
             horizontal: size[0],
@@ -65,8 +65,8 @@ export default defineComponent({
         }
         if (typeof size === 'number') {
           return {
-            horizontal: size,
-            vertical: size
+            horizontal: vertical ? 0 : size,
+            vertical: vertical ? size : 0
           }
         }
         const {
@@ -74,8 +74,8 @@ export default defineComponent({
         } = themeRef.value
         const { row, col } = getGap(gap)
         return {
-          horizontal: depx(col),
-          vertical: depx(row)
+          horizontal: vertical ? 0 : depx(col),
+          vertical: vertical ? depx(row) : 0
         }
       })
     }
