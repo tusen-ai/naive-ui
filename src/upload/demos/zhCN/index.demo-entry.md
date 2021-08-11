@@ -46,7 +46,7 @@ picture-style
 | on-update:file-list | `(fileList: UploadFile[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |
 | on-before-upload | `(options: { file: UploadFile, fileList: UploadFile[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |
 | on-preview | `(file: FileInfo) => void` | `undefined` | 点击文件链接或预览按钮的回调函数 |
-| preview-file | `(file: File \| Blob) => Promise<thumbUrl: string>` | `undefined` | 自定义文件缩略图 |
+| create-thumbnail-url | `(file: File) => Promise<thumbnailUrl: string>` | `undefined` | 自定义文件缩略图 |
 
 ### UploadFile Type
 

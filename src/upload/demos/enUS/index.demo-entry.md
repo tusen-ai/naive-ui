@@ -47,7 +47,7 @@ picture-style
 | on-remove | `(options: { file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any` | `() => true` | The callback of file removal. Return false, promise resolve false or promise reject will cancel this removal. |
 | on-before-upload | `(options: { file: UploadFile, fileList: Array<UploadFile> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Callback before file is uploaded, return false or a Promise that resolve false or reject will cancel this upload. |
 | on-preview | `(file: FileInfo) => void` | `undefined` | Callback functions for clicking on file links or preview buttons. |
-| preview-file | `(file: File \| Blob) => Promise<thumbUrl: string>` | `undefined` | Customize file thumbnails. |
+| create-thumbnail-url | `(file: File) => Promise<thumbnailUrl: string>` | `undefined` | Customize file thumbnails. |
 
 ### UploadFile Type
 

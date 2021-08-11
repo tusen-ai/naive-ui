@@ -9,7 +9,7 @@
   action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-file-list="fileList"
   list-type="picture"
-  :previewFile="previewFile"
+  :createThumbnailUrl="createThumbnailUrl"
 >
   <n-button>上传文件</n-button>
 </n-upload>
@@ -49,7 +49,7 @@ export default defineComponent({
     ])
     return {
       fileList: fileListRef,
-      previewFile(file) {
+      createThumbnailUrl (file) {
         message.info('previewFile改变了上传文件的缩略图，让它看起来都是Vue。')
         return 'https://cn.vuejs.org/images/logo.svg'
       }

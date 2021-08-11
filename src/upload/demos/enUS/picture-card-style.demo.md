@@ -2,12 +2,25 @@
 
 `list-type = 'picture-card'`
 
-You can use `on-preview` to customize the method of showing uploaded files
+The preview in the photo wall will call the internal component by default, you can also use `on-preview` to customize the method of showing uploaded files.
 
 ```html
 <n-upload
   action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-file-list="fileList"
+  list-type="picture-card"
+>
+  <div :style="style">
+    <n-icon size="30">
+      <Ios-add />
+    </n-icon>
+    <span>Upload</span>
+  </div>
+</n-upload>
+<n-divider />
+<n-upload
+  action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  :default-file-list="previewFileList"
   list-type="picture-card"
   @preview="handlePreview"
 >
@@ -84,6 +97,20 @@ export default {
           name: 'I am uploading a normal file.doc',
           status: 'uploading',
           percentage: 99
+        }
+      ],
+      previewFileList: [
+        {
+          id: 'react',
+          name: 'I am react.png',
+          status: 'finished',
+          url: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+        },
+        {
+          id: 'vue',
+          name: 'I am vue.png',
+          status: 'finished',
+          url: 'https://cn.vuejs.org/images/logo.svg'
         }
       ]
     }
