@@ -146,7 +146,7 @@
 
 - 修复 `n-space` 中 `display: grid` 的元素显示不正确，关闭 `https://github.com/TuSimple/naive-ui/issues/546`
 - 修复 `n-dropdown` 的 `render-label` 属性对 group 类型 option 失效
-- 修复 `n-datatable` 的 `scroll-x` 属性设置后 table 内容宽度未沾满容器宽度，关闭 [#518](https://github.com/TuSimple/naive-ui/issues/518)
+- 修复 `n-datatable` 的 `scroll-x` 属性设置后 table 内容宽度未占满容器宽度，关闭 [#518](https://github.com/TuSimple/naive-ui/issues/518)
 - 修复 `n-descriptions` 无法使用 `v-for` 的子元素
 - 修复 `n-dialog` `positive-text` 为空仍然显示按钮，关闭 [#549](https://github.com/TuSimple/naive-ui/issues/549)
 - 修复 `n-pagination` `PaginationInfo` 的 `endIndex` 数据错误，关闭 [#584](https://github.com/TuSimple/naive-ui/issues/584)
