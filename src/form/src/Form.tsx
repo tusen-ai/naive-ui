@@ -66,7 +66,7 @@ export default defineComponent({
       validateCallback?: FormValidateCallback,
       shouldRuleBeApplied: ApplyRule = () => true
     ): Promise<void> {
-      return new Promise((resolve, reject) => {
+      return await new Promise((resolve, reject) => {
         const formItemValidationPromises = []
         for (const key of keysOf(formItems)) {
           const formItemInstances = formItems[key]
