@@ -13,7 +13,11 @@ import {
   Transition,
   renderSlot
 } from 'vue'
-import Schema, { ErrorList, RuleItem, ValidateOption } from 'async-validator'
+import Schema, {
+  ValidateError,
+  RuleItem,
+  ValidateOption
+} from 'async-validator'
 import { get } from 'lodash-es'
 import { createId } from 'seemly'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
@@ -199,7 +203,7 @@ export default defineComponent({
       void internalValidate('input')
     }
     // Resolve : ()
-    // Reject  : (errors: AsyncValidator.ErrorList)
+    // Reject  : (errors: AsyncValidator.ValidateError[])
     async function validate (options: FormItemValidateOptions): Promise<void>
     async function validate (
       trigger?: string | null,
@@ -252,7 +256,7 @@ export default defineComponent({
       }
     ): Promise<{
       valid: boolean
-      errors?: ErrorList
+      errors?: ValidateError[]
     }> => {
       const { path } = props
       if (!options) {
@@ -305,7 +309,9 @@ export default defineComponent({
           options,
           (errors, fields) => {
             if (errors?.length) {
-              explainsRef.value = errors.map((error) => error.message)
+              explainsRef.value = errors.map(
+                (error: ValidateError) => error?.message ?? ''
+              )
               validationErroredRef.value = true
               resolve({
                 valid: false,
