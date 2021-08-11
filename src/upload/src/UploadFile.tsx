@@ -44,6 +44,11 @@ export default defineComponent({
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NUpload = inject(uploadInjectionKey)!
+
+    const imageRef = ref<HTMLImageElement | null>(null)
+    const previewInstRef = ref<ImagePreviewInst | null>(null)
+    const thumbnailUrl = ref('')
+    
     const progressStatusRef = computed(() => {
       const { file } = props
       if (file.status === 'finished') return 'success'
@@ -169,9 +174,7 @@ export default defineComponent({
         previewInst.toggleShow()
       }
     }
-    const imageRef = ref<HTMLImageElement | null>(null)
-    const previewInstRef = ref<ImagePreviewInst | null>(null)
-    const thumbnailUrl = ref('')
+
     const getFileThumbnail = async (): Promise<void> => {
       if (props.listType !== 'picture' && props.listType !== 'picture-card') {
         return
