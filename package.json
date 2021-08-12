@@ -119,7 +119,7 @@
     "@css-render/vue3-ssr": "^0.15.4",
     "@types/lodash": "^4.14.170",
     "@types/lodash-es": "^4.17.4",
-    "async-validator": "^3.5.1",
+    "async-validator": "^4.0.1",
     "css-render": "^0.15.4",
     "date-fns": "^2.19.0",
     "evtd": "^0.2.2",

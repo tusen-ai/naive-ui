@@ -1,5 +1,5 @@
 import { InjectionKey } from 'vue'
-import { ErrorList, RuleItem, ValidateOption } from 'async-validator'
+import { ValidateError, RuleItem, ValidateOption } from 'async-validator'
 import { FormSetupProps } from './Form'
 
 export interface FormRules {
@@ -38,7 +38,7 @@ export type FormItemInternalValidate = (
   options?: ValidateOption
 ) => Promise<{
   valid: boolean
-  errors?: ErrorList
+  errors?: ValidateError[]
 }>
 
 export type FormItemValidate = ((
@@ -69,13 +69,13 @@ export type Size = 'small' | 'medium' | 'large'
 export type ValidationTrigger = 'input' | 'change' | 'blur' | 'focus'
 
 export type ApplyRule = (rule: FormItemRule) => boolean
-export type ValidateCallback = (errors?: ErrorList) => void
+export type ValidateCallback = (errors?: ValidateError[]) => void
 
-export type FormValidateCallback = (errors?: ErrorList[]) => void
+export type FormValidateCallback = (errors?: ValidateError[][]) => void
 export type FormValidate = ((callback?: FormValidateCallback) => void) &
 (() => Promise<void>)
 
-export type FormValidationError = ErrorList
+export type FormValidationError = ValidateError[]
 
 export interface FormInst {
   validate: FormValidate
