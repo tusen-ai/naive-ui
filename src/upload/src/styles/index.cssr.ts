@@ -149,7 +149,7 @@ export default cB('upload', [
               flex-shrink: 0;
             `, [
               c('img', `
-                width: 48px;
+                width: 100%;
                 display: block;
                 overflow: hidden;
               `),

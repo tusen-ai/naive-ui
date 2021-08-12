@@ -48,7 +48,7 @@ export default defineComponent({
     const imageRef = ref<HTMLImageElement | null>(null)
     const previewInstRef = ref<ImagePreviewInst | null>(null)
     const thumbnailUrl = ref('')
-    
+
     const progressStatusRef = computed(() => {
       const { file } = props
       if (file.status === 'finished') return 'success'
@@ -265,6 +265,7 @@ export default defineComponent({
             <img
               src={this.thumbnailUrl || this.file.url || undefined}
               alt={this.file.name}
+              ref="imageRef"
             />
           </a>
             ) : (
@@ -421,11 +422,13 @@ export default defineComponent({
           percentage={this.file.percentage || 0}
           status={this.progressStatus}
         />
-        <NImagePreview
-          clsPrefix={clsPrefix}
-          ref="previewInstRef"
-          showToolbar={true}
-        ></NImagePreview>
+        {this.listType === 'picture-card' && (
+          <NImagePreview
+            clsPrefix={clsPrefix}
+            ref="previewInstRef"
+            showToolbar={true}
+          ></NImagePreview>
+        )}
       </div>
     )
   }
