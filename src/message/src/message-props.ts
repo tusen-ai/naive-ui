@@ -11,6 +11,7 @@ export const messageProps = {
   content: [String, Number, Function] as PropType<
   string | number | (() => VNodeChild)
   >,
+  raw: Boolean,
   closable: Boolean,
   onClose: Function as PropType<() => void>
 } as const
