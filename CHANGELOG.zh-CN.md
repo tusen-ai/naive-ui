@@ -1,7 +1,10 @@
 # CHANGELOG
 
-
 ## Pending
+
+### Feats
+
+- `n-message-provider` 新增 `container-style` 属性
 
 ### Fixes
 

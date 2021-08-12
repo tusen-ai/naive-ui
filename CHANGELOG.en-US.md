@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-message-provider` add `container-style` prop
+
 ### Fixes
 
 - Fix `n-rate` half star overlays star background in dark mode.

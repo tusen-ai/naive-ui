@@ -11,7 +11,8 @@ import {
   ExtractPropTypes,
   renderSlot,
   Ref,
-  PropType
+  PropType,
+  CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
 import { ExtractPublicPropTypes, omit } from '../../_utils'
@@ -71,7 +72,8 @@ const messageProviderProps = {
     default: 3000
   },
   max: Number,
-  closable: Boolean
+  closable: Boolean,
+  containerStyle: [String, Object] as PropType<string | CSSProperties>
 }
 
 export type MessageProviderProps = ExtractPublicPropTypes<
@@ -164,6 +166,7 @@ export default defineComponent({
             <div
               class={`${this.mergedClsPrefix}-message-container`}
               key="message-container"
+              style={this.containerStyle}
             >
               {this.messageList.map((message) => {
                 return (
