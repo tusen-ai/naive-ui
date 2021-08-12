@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-message-provider` 新增 `container-style` 属性
+- `n-select` 支持可变选项高度，关闭 [#844](https://github.com/TuSimple/naive-ui/issues/844)
 
 ### Fixes
 

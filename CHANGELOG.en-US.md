@@ -6,10 +6,10 @@
 
 - Add ruRU locale [#852](https://github.com/TuSimple/naive-ui/pull/852).
 
-
 ### Feats
 
-- `n-message-provider` add `container-style` prop
+- `n-message-provider` add `container-style` prop.
+- `n-select` support variadic option height, closes [#844](https://github.com/TuSimple/naive-ui/issues/844).
 
 ### Fixes
 

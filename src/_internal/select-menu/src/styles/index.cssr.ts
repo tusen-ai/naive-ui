@@ -20,12 +20,13 @@ export default cB('base-select-menu', `
     max-height: var(--height);
   `),
   cB('base-select-option', `
-    height: var(--option-height);
+    max-height: var(--option-height);
     line-height: var(--option-height);
+    display: flex;
+    align-items: center;
     font-size: var(--option-font-size);
   `),
   cB('base-select-group-header', `
-    height: var(--option-height);
     line-height: var(--option-height);
     font-size: .93em;
   `),
