@@ -46,9 +46,7 @@ describe('n-alert', () => {
     })
 
     expect(wrapper.find('.n-alert-body__content').exists()).toBe(true)
-    expect(wrapper.find('.n-alert-body__content').element.textContent).toBe(
-      'default'
-    )
+    expect(wrapper.find('.n-alert-body__content').text()).toBe('default')
     expect(wrapper.find('.n-alert-body__content').html()).toMatchSnapshot()
   })
 
@@ -62,7 +60,7 @@ describe('n-alert', () => {
       }
     })
 
-    expect(wrapper.find('i').classes('n-icon')).toBe(true)
+    expect(wrapper.findComponent(NIcon).exists()).toBe(true)
   })
 
   it('shouldnt be closable by default', () => {
@@ -92,7 +90,7 @@ describe('n-alert', () => {
     const closeBtn = wrapper.find('.n-base-close.n-alert__close')
     await closeBtn.trigger('click')
 
-    expect(wrapper.find('.n-base-close.n-alert__close').exists()).toBe(true)
+    expect(wrapper.findComponent(NAlert).exists()).toBe(true)
   })
 
   it('should trigger callback when closed', async () => {
