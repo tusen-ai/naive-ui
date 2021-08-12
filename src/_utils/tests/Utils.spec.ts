@@ -1,5 +1,5 @@
 import { createHoverColor, createPressedColor } from '../color'
-import { formatLength, getTitleAttribute } from '..'
+import { formatLength, getTitleAttribute, largerSize, smallerSize } from '..'
 
 describe('color', () => {
   it('should work with createHoverColor', () => {
@@ -37,5 +37,19 @@ describe('naive', () => {
     expect(getTitleAttribute([])).toBe(undefined)
     expect(getTitleAttribute({})).toBe(undefined)
     expect(getTitleAttribute(() => '')).toBe(undefined)
+  })
+
+  it('should work with largerSize', () => {
+    expect(largerSize('tiny')).toBe('small')
+    expect(largerSize('small')).toBe('medium')
+    expect(largerSize('medium')).toBe('large')
+    expect(largerSize('large')).toBe('huge')
+  })
+
+  it('should work with smallerSize', () => {
+    expect(smallerSize('huge')).toBe('large')
+    expect(smallerSize('large')).toBe('medium')
+    expect(smallerSize('medium')).toBe('small')
+    expect(smallerSize('small')).toBe('tiny')
   })
 })
