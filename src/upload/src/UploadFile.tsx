@@ -324,7 +324,6 @@ export default defineComponent({
               </span>
                 )}
           </div>
-
           <div
             class={[
               `${clsPrefix}-upload-file-info__action`,
