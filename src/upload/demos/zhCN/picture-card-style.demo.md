@@ -2,7 +2,7 @@
 
 `list-type = 'picture-card'`
 
-照片墙中的预览会默认调用内部组件，你也可以使用`on-preview`自定义展示上传文件的方法
+照片墙中的预览会默认调用内部组件，你也可以使用 `on-preview` 自定义展示上传文件的方法
 
 ```html
 <n-upload
