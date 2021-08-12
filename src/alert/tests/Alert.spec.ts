@@ -47,7 +47,6 @@ describe('n-alert', () => {
 
     expect(wrapper.find('.n-alert-body__content').exists()).toBe(true)
     expect(wrapper.find('.n-alert-body__content').text()).toBe('default')
-    expect(wrapper.find('.n-alert-body__content').html()).toMatchSnapshot()
   })
 
   it('should work with icon slot', async () => {
@@ -90,7 +89,7 @@ describe('n-alert', () => {
     const closeBtn = wrapper.find('.n-base-close.n-alert__close')
     await closeBtn.trigger('click')
 
-    expect(wrapper.findComponent(NAlert).exists()).toBe(true)
+    expect(wrapper.find('.n-base-close.n-alert__close').exists()).toBe(true)
   })
 
   it('should trigger callback when closed', async () => {
