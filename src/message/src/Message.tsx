@@ -106,7 +106,8 @@ export default defineComponent({
           '--line-height': lineHeight,
           '--border-radius': borderRadius
         }
-      })
+      }),
+      placement: messageProviderProps.placement
     }
   },
   render () {
@@ -122,7 +123,12 @@ export default defineComponent({
     return (
       <div
         class={`${mergedClsPrefix}-message-wrapper`}
-        style={cssVars as CSSProperties}
+        style={{
+          ...(cssVars as CSSProperties),
+          [this.placement.startsWith('top') ? 'top' : 'bottom']: '12px',
+          left: this.placement.endsWith('left') ? '12px' : '',
+          right: this.placement.endsWith('right') ? '12px' : ''
+        }}
       >
         <div class={`${mergedClsPrefix}-message`}>
           <div

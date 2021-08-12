@@ -72,6 +72,17 @@ const messageProviderProps = {
     default: 3000
   },
   max: Number,
+  placement: {
+    type: String as PropType<
+      | 'top'
+      | 'top-left'
+      | 'top-right'
+      | 'bottom'
+      | 'bottom-left'
+      | 'bottom-right'
+    >,
+    default: 'top'
+  },
   closable: Boolean,
   containerStyle: [String, Object] as PropType<string | CSSProperties>
 }
@@ -90,24 +101,24 @@ export const messageProviderInjectionKey: InjectionKey<{
 export default defineComponent({
   name: 'MessageProvider',
   props: messageProviderProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const messageListRef = ref<PrivateMessageReactive[]>([])
     const messageRefs = ref<{ [key: string]: PrivateMessageRef }>({})
     const api: MessageApiInjection = {
-      info (content: ContentType, options?: MessageOptions) {
+      info(content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'info' })
       },
-      success (content: ContentType, options?: MessageOptions) {
+      success(content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'success' })
       },
-      warning (content: ContentType, options?: MessageOptions) {
+      warning(content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'warning' })
       },
-      error (content: ContentType, options?: MessageOptions) {
+      error(content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'error' })
       },
-      loading (content: ContentType, options?: MessageOptions) {
+      loading(content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'loading' })
       },
       destroyAll
@@ -117,7 +128,7 @@ export default defineComponent({
       mergedClsPrefixRef
     })
     provide(messageApiInjectionKey, api)
-    function create (content: ContentType, options = {}): MessageReactive {
+    function create(content: ContentType, options = {}): MessageReactive {
       const key = createId()
       const messageReactive = reactive({
         ...options,
@@ -134,7 +145,7 @@ export default defineComponent({
       messageListRef.value.push(messageReactive)
       return messageReactive
     }
-    function handleAfterLeave (key: string): void {
+    function handleAfterLeave(key: string): void {
       messageListRef.value.splice(
         messageListRef.value.findIndex((message) => message.key === key),
         1
@@ -142,7 +153,7 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete messageRefs.value[key]
     }
-    function destroyAll (): void {
+    function destroyAll(): void {
       Object.values(messageRefs.value).forEach((messageInstRef) => {
         messageInstRef.hide()
       })
@@ -157,7 +168,7 @@ export default defineComponent({
       api
     )
   },
-  render () {
+  render() {
     return (
       <>
         {renderSlot(this.$slots, 'default')}
