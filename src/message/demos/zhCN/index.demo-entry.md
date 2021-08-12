@@ -21,10 +21,10 @@ import { defineComponent } from 'vue'
 
 // content
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
-      warning () {
+      warning() {
         message.warning('...')
       }
     }
@@ -45,6 +45,7 @@ modify-content
 manually-close
 about-theme
 multiple-line
+placement
 ```
 
 ## API
