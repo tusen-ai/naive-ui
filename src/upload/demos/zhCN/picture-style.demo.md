@@ -9,7 +9,7 @@
   action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-file-list="fileList"
   list-type="picture"
-  :createThumbnailUrl="createThumbnailUrl"
+  :create-thumbnail-url="createThumbnailUrl"
 >
   <n-button>上传文件</n-button>
 </n-upload>
