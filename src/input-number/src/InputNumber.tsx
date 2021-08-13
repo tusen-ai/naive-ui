@@ -42,6 +42,7 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  clearable: Boolean,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
@@ -373,6 +374,7 @@ export default defineComponent({
           onBlur={this.handleBlur}
           onKeydown={this.handleKeyDown}
           onMousedown={this.handleMouseDown}
+          clearable={this.clearable}
         >
           {{
             _: 2, // input number has dynamic slots

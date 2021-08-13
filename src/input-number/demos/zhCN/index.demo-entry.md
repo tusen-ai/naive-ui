@@ -22,6 +22,7 @@ debug
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | bordered | `boolean` | `true` | 是否有边框 |
+| clearable | `boolean` | `false` | 是否可清空 |
 | default-value | `number \| null` | `null` | 非受控模式下的默认值 |
 | disabled | `boolean` | `false` | 是否禁用 |
 | max | `number` | `undefined` | 最大值 |

@@ -21,6 +21,7 @@ show-button
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | bordered | `boolean` | `true` | Whether to show the border. |
+| clearable | `boolean` | `false` | Whether the input is clearable. |
 | default-value | `number \| null` | `null` | Default value in uncontrolled mode. |
 | disabled | `boolean` | `false` | Whether to disable the input. |
 | max | `number` | `undefined` | The max value. |
