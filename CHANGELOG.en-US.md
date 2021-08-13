@@ -4,7 +4,12 @@
 
 ### Localization
 
-- Add ruRU for `locale` [#852](https://github.com/TuSimple/naive-ui/pull/852).
+- Add ruRU locale [#852](https://github.com/TuSimple/naive-ui/pull/852).
+
+
+### Feats
+
+- `n-message-provider` add `container-style` prop
 
 ### Fixes
 

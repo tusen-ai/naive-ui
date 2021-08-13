@@ -297,20 +297,20 @@ export default defineComponent({
           return shallowClonedRule
         })
       if (!activeRules.length) {
-        return Promise.resolve({
+        return await Promise.resolve({
           valid: true
         })
       }
       const mergedPath = path ?? '__n_no_path__'
       const validator = new Schema({ [mergedPath]: activeRules as RuleItem[] })
-      return new Promise((resolve) => {
+      return await new Promise((resolve) => {
         void validator.validate(
           { [mergedPath]: value },
           options,
           (errors, fields) => {
             if (errors?.length) {
               explainsRef.value = errors.map(
-                (error: ValidateError) => error?.message ?? ''
+                (error: ValidateError) => error?.message || ''
               )
               validationErroredRef.value = true
               resolve({
