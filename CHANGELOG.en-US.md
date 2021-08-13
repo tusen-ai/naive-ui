@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Localization
+
+- Add ruRU for `locale` [#852](https://github.com/TuSimple/naive-ui/pull/852).
+
 ### Fixes
 
 - Fix `n-rate` half star overlays star background in dark mode.

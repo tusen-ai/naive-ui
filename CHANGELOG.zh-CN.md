@@ -3,6 +3,10 @@
 
 ## Pending
 
+### Localization
+
+- Add ruRU for `locale` [#852](https://github.com/TuSimple/naive-ui/pull/852).
+
 ### Fixes
 
 - 修复 `n-rate` 在深色模式下半个星星重叠
