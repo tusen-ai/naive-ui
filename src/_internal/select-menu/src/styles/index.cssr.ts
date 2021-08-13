@@ -27,6 +27,7 @@ export default cB('base-select-menu', `
     font-size: var(--option-font-size);
   `),
   cB('base-select-group-header', `
+    height: var(--option-height);
     line-height: var(--option-height);
     font-size: .93em;
   `),

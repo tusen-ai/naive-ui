@@ -4,6 +4,7 @@ import { NSelect, SelectProps } from '../index'
 import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
 import { SelectOption, SelectGroupOption } from '../'
 import { NTag } from '../../tag'
+import { NImage } from '../../image'
 import { SelectBaseOption } from '../src/interface'
 
 describe('n-select', () => {
@@ -81,6 +82,7 @@ describe('n-select', () => {
           menuWrapper.text().includes(label)
         )
       ).toEqual(true)
+      wrapper.unmount()
     })
     it('option.render', () => {
       const options: SelectProps['options'] = [
@@ -216,5 +218,36 @@ describe('n-select', () => {
     expect(wrapper.findComponent(NTag).props('type')).toContain('success')
     await wrapper.find('.n-tag__close').trigger('click')
     expect(wrapper.findComponent(NTag).exists()).toBe(false)
+    wrapper.unmount()
+  })
+
+  it('option.maxHeight', () => {
+    const options: SelectProps['options'] = [
+      {
+        label: () => [
+          h(NImage, {
+            width: 40,
+            height: 50,
+            src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+          }),
+          'cool1'
+        ],
+        value: 'cool1'
+      }
+    ]
+    const wrapper = mount(NSelect, {
+      props: {
+        options,
+        show: true,
+        virtualScroll: false
+      }
+    })
+    const menuWrapper = wrapper.findComponent(NInternalSelectMenu)
+    expect(
+      getComputedStyle(menuWrapper.find('.n-base-select-option').element)
+        .maxHeight
+    ).toEqual('var(--option-height)')
+    expect(menuWrapper.find('img').attributes('height')).toEqual('50')
+    wrapper.unmount()
   })
 })
