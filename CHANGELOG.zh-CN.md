@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Localization
+
+- 新增 ruRU locale [#852](https://github.com/TuSimple/naive-ui/pull/852)
+
 ### Feats
 
 - `n-message-provider` 新增 `container-style` 属性
