@@ -106,8 +106,7 @@ export default defineComponent({
           '--line-height': lineHeight,
           '--border-radius': borderRadius
         }
-      }),
-      placement: messageProviderProps.placement
+      })
     }
   },
   render () {
