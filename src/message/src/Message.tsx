@@ -123,12 +123,7 @@ export default defineComponent({
     return (
       <div
         class={`${mergedClsPrefix}-message-wrapper`}
-        style={{
-          ...(cssVars as CSSProperties),
-          [this.placement.startsWith('top') ? 'top' : 'bottom']: '12px',
-          left: this.placement.endsWith('left') ? '12px' : '',
-          right: this.placement.endsWith('right') ? '12px' : ''
-        }}
+        style={cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-message`}>
           <div

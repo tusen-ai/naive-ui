@@ -26,7 +26,6 @@ import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expa
 // --border-radius
 export default c([
   cB('message-wrapper', `
-    position: fixed;
     margin: var(--margin);
     z-index: 0;
     transform-origin: top center;
@@ -109,12 +108,48 @@ export default c([
   cB('message-container', `
     z-index: 6000;
     position: fixed;
-    left: 0;
-    right: 0;
     height: 0;
     overflow: visible;
     display: flex;
     flex-direction: column;
     align-items: center;
-  `)
+  `, [
+    cM('top', `
+      top: 12px;
+      left: 0;
+      right: 0;
+    `),
+    cM('top-left', `
+      top: 12px;
+      left: 12px;
+      right: 0;
+      align-items: flex-start;
+    `),
+    cM('top-right', `
+      top: 12px;
+      left: 0;
+      right: 12px;
+      align-items: flex-end;
+    `),
+    cM('bottom', `
+      bottom: 4px;
+      left: 0;
+      right: 0;
+      justify-content: flex-end;
+    `),
+    cM('bottom-left', `
+      bottom: 4px;
+      left: 12px;
+      right: 0;
+      justify-content: flex-end;
+      align-items: flex-start;
+    `),
+    cM('bottom-right', `
+      bottom: 4px;
+      left: 0;
+      right: 12px;
+      justify-content: flex-end;
+      align-items: flex-end;
+    `)
+  ])
 ])
