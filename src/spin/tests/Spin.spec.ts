@@ -82,6 +82,6 @@ describe('n-spin', () => {
       }
     })
 
-    expect(wrapper.find('circle').attributes('stroke-width')).toMatchSnapshot()
+    expect(wrapper.find('circle').attributes('stroke-width')).toEqual('40')
   })
 })
