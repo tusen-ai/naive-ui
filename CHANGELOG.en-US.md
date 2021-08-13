@@ -5,7 +5,7 @@
 ### Feats
 
 - `n-message-provider` add `container-style` prop
-- `n-form` add `show-label` prop.
+- `n-form` add `show-label` prop, closes [#858](https://github.com/TuSimple/naive-ui/issues/858).
 
 ### Fixes
 
