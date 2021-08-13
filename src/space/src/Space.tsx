@@ -103,7 +103,6 @@ export default defineComponent({
     const children = flatten(getSlot(this)).filter(
       (vNode: VNode) => vNode.children !== 'v-if' && vNode.type !== Comment
     )
-    console.log(children)
     const horizontalMargin = `${margin.horizontal}px`
     const semiHorizontalMargin = `${margin.horizontal / 2}px`
     const verticalMargin = `${margin.vertical}px`

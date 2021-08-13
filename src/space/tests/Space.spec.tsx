@@ -1,5 +1,5 @@
 import { mount, VueWrapper } from '@vue/test-utils'
-import { h, Fragment } from 'vue'
+import { h, Fragment, createCommentVNode } from 'vue'
 import { NSpace } from '../index'
 
 const getChildrenNode = (wrapper: VueWrapper<any>): any[] => {
@@ -124,6 +124,34 @@ describe('n-space', () => {
     expect(childNodes[0].attributes('style')).toContain(
       'background-color: red; color: yellow;'
     )
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should not render while v-if is false', () => {
+    const wrapper = mount({
+      render () {
+        return <NSpace>{{ default: () => false && 'div' }}</NSpace>
+      }
+    })
+    const childNodes = getChildrenNode(wrapper)
+    expect(childNodes.length).toEqual(0)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should not render while slot is Comment', () => {
+    const wrapper = mount({
+      render () {
+        return (
+          <NSpace>
+            {{
+              default: () => createCommentVNode('random comment text')
+            }}
+          </NSpace>
+        )
+      }
+    })
+    const childNodes = getChildrenNode(wrapper)
+    expect(childNodes.length).toEqual(0)
     expect(wrapper.html()).toMatchSnapshot()
   })
 })
