@@ -74,7 +74,7 @@ describe('n-spin', () => {
     expect(wrapper.find('.n-spin-content').text()).toBe('test')
   })
 
-  it('should work with `strokeWidth` prop', async () => {
+  it('should work with `strokeWidth` prop', () => {
     const wrapper = mount(NSpin, {
       props: {
         strokeWidth: 40,
