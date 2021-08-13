@@ -4,8 +4,7 @@
 
 ### Feats
 
-- `n-message-provider` 新增 `container-style` 属性
-- `n-form` 新增 `show-label` 属性
+- `n-form` 新增 `show-label` 属性，关闭 [#858 ](https://github.com/TuSimple/naive-ui/issues/858)
 
 ### Fixes
 
