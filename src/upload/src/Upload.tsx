@@ -41,6 +41,7 @@ import {
 } from './interface'
 import { useMergedState } from 'vooks'
 import { uploadDraggerKey } from './UploadDragger'
+import { NImageGroup } from '../../image'
 
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
@@ -596,6 +597,21 @@ export default defineComponent({
         {this.$slots}
       </div>
     )
+    const uploadFileList = (
+      <NFadeInExpandTransition group>
+        {{
+          default: () =>
+            this.mergedFileList.map((file) => (
+              <NUploadFile
+                clsPrefix={mergedClsPrefix}
+                key={file.id}
+                file={file}
+                listType={this.listType}
+              />
+            ))
+        }}
+      </NFadeInExpandTransition>
+    )
 
     return (
       <div
@@ -624,19 +640,15 @@ export default defineComponent({
             class={`${mergedClsPrefix}-upload-file-list`}
             style={this.fileListStyle}
           >
-            <NFadeInExpandTransition group>
-              {{
-                default: () =>
-                  this.mergedFileList.map((file) => (
-                    <NUploadFile
-                      clsPrefix={mergedClsPrefix}
-                      key={file.id}
-                      file={file}
-                      listType={this.listType}
-                    />
-                  ))
-              }}
-            </NFadeInExpandTransition>
+            {this.listType === 'picture-card' ? (
+              <NImageGroup>
+                {{
+                  default: () => uploadFileList
+                }}
+              </NImageGroup>          
+            ) : (
+              uploadFileList
+            )}
             {this.listType === 'picture-card' && uploadTrigger}
           </div>
         )}

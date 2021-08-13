@@ -5,7 +5,8 @@ import {
   computed,
   inject,
   ref,
-  watchEffect
+  watchEffect,
+  VNode
 } from 'vue'
 import {
   CancelIcon,
@@ -22,8 +23,8 @@ import { NIconSwitchTransition, NBaseIcon, NBaseLoading } from '../../_internal'
 import { warn } from '../../_utils'
 import NUploadProgress from './UploadProgress'
 import { FileInfo, listType, uploadInjectionKey } from './interface'
-import type { ImagePreviewInst } from '../../image/src/ImagePreview'
-import NImagePreview from '../../image/src/ImagePreview'
+import { NImage } from '../../image'
+import { ImageInst } from '../../image/src/Image'
 
 export default defineComponent({
   name: 'UploadFile',
@@ -45,9 +46,8 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NUpload = inject(uploadInjectionKey)!
 
-    const imageRef = ref<HTMLImageElement | null>(null)
-    const previewInstRef = ref<ImagePreviewInst | null>(null)
-    const thumbnailUrl = ref('')
+    const imageRef = ref<ImageInst | null>(null)
+    const thumbnailUrl = ref<string>('')
 
     const progressStatusRef = computed(() => {
       const { file } = props
@@ -167,11 +167,9 @@ export default defineComponent({
         e.preventDefault()
         onPreview(props.file)
       } else if (props.listType === 'picture-card') {
-        const { value: previewInst } = previewInstRef
-        if (!previewInst) return
-        previewInst.setPreviewSrc(props.file.url || thumbnailUrl.value)
-        previewInst.setThumbnailEl(imageRef.value)
-        previewInst.toggleShow()
+        const { value } = imageRef
+        if (!value) return
+        value.handleClick()
       }
     }
 
@@ -214,19 +212,15 @@ export default defineComponent({
       showPreivewButton: showPreivewButtonRef,
       handlePreviewClick,
       thumbnailUrl,
-      previewInstRef,
       imageRef
     }
   },
   render () {
     const { clsPrefix, mergedTheme } = this
 
-    const thumbnailImageClass = [
-      `${clsPrefix}-upload-file-info-thumbnail__image`
-    ]
     const thumbnailNameClass = [`${clsPrefix}-upload-file-info-thumbnail__name`]
-    const fileIcon = (icon: JSX.Element): JSX.Element => (
-      <span class={[...thumbnailImageClass]}>
+    const fileIcon = (icon: VNode): VNode => (
+      <span class={`${clsPrefix}-upload-file-info-thumbnail__image`}>
         <NBaseIcon clsPrefix={clsPrefix}>{{ default: () => icon }}</NBaseIcon>
       </span>
     )
@@ -259,14 +253,21 @@ export default defineComponent({
             rel="noopener noreferer"
             target="_blank"
             href={this.file.url || undefined}
-            class={[...thumbnailImageClass]}
+            class={`${clsPrefix}-upload-file-info-thumbnail__image`}
             onClick={(e) => this.handlePreviewClick(e)}
           >
-            <img
-              src={this.thumbnailUrl || this.file.url || undefined}
-              alt={this.file.name}
-              ref="imageRef"
-            />
+            {this.listType === 'picture-card' ? (
+              <NImage
+                src={this.thumbnailUrl || this.file.url || undefined}
+                alt={this.file.name}
+                ref="imageRef"
+              ></NImage>
+            ) : (
+              <img
+                src={this.thumbnailUrl || this.file.url || undefined}
+                alt={this.file.name}
+              />
+            )}
           </a>
             ) : (
               fileIcon(<PhotoIcon />)
@@ -422,13 +423,6 @@ export default defineComponent({
           percentage={this.file.percentage || 0}
           status={this.progressStatus}
         />
-        {this.listType === 'picture-card' && (
-          <NImagePreview
-            clsPrefix={clsPrefix}
-            ref="previewInstRef"
-            showToolbar={true}
-          ></NImagePreview>
-        )}
       </div>
     )
   }

@@ -24,6 +24,9 @@ interface imgProps {
   usemap?: string
   width?: number
 }
+export interface ImageInst {
+  handleClick: () => void
+}
 
 const imageProps = {
   alt: String,
