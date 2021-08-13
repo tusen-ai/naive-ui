@@ -171,6 +171,7 @@ export default defineComponent({
       return explainsRef.value.length
     })
     const mergedDisabledRef = NForm ? toRef(NForm, 'disabled') : ref(false)
+    const mergedShowLabelRef = NForm ? toRef(NForm, 'showLabel') : ref(true)
     const themeRef = useTheme(
       'Form',
       'FormItem',
@@ -351,6 +352,7 @@ export default defineComponent({
       ...formItemMiscRefs,
       ...formItemSizeRefs,
       ...exposedRef,
+      mergedShowLabel: mergedShowLabelRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const { value: labelPlacement } = labelPlacementRef
@@ -412,11 +414,12 @@ export default defineComponent({
           `${mergedClsPrefix}-form-item`,
           `${mergedClsPrefix}-form-item--${this.mergedSize}-size`,
           `${mergedClsPrefix}-form-item--${this.mergedLabelPlacement}-labelled`,
-          this.label === false && `${mergedClsPrefix}-form-item--no-label`
+          (!this.mergedShowLabel || this.label === false) &&
+            `${mergedClsPrefix}-form-item--no-label`
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {this.label || $slots.label ? (
+        {this.mergedShowLabel && (this.label || $slots.label) ? (
           <label
             class={`${mergedClsPrefix}-form-item-label`}
             style={this.mergedLabelStyle as any}

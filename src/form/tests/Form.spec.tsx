@@ -89,4 +89,24 @@ describe('n-form', () => {
       )
     })
   })
+
+  it('should work with `show-label` prop', async () => {
+    const wrapper = mount(NForm, {
+      props: {
+        showLabel: false
+      },
+      slots: {
+        default: () =>
+          [1, 2, 3].map((num) => (
+            <NFormItem label={`label${num}`}>
+              {{
+                default: () => <NInput />
+              }}
+            </NFormItem>
+          ))
+      }
+    })
+    expect(wrapper.findAll('.n-form-item-label').length).toBe(0)
+    expect(wrapper.findAll('.n-form-item--no-label').length).toBe(3)
+  })
 })
