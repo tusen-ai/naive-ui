@@ -50,8 +50,8 @@ const formProps = {
     default: (e: Event) => e.preventDefault()
   },
   showLabel: {
-    type: Boolean,
-    default: true
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   }
 } as const
 

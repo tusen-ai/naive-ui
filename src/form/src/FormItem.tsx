@@ -84,7 +84,11 @@ export const formItemProps = {
     default: false
   },
   validationStatus: String as PropType<'error' | 'warning' | 'success'>,
-  feedback: String
+  feedback: String,
+  showLabel: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  }
 } as const
 
 export type FormItemSetupProps = ExtractPropTypes<typeof formItemProps>
@@ -171,7 +175,6 @@ export default defineComponent({
       return explainsRef.value.length
     })
     const mergedDisabledRef = NForm ? toRef(NForm, 'disabled') : ref(false)
-    const mergedShowLabelRef = NForm ? toRef(NForm, 'showLabel') : ref(true)
     const themeRef = useTheme(
       'Form',
       'FormItem',
@@ -352,7 +355,6 @@ export default defineComponent({
       ...formItemMiscRefs,
       ...formItemSizeRefs,
       ...exposedRef,
-      mergedShowLabel: mergedShowLabelRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const { value: labelPlacement } = labelPlacementRef
