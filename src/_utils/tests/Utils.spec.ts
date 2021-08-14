@@ -1,5 +1,11 @@
 import { createHoverColor, createPressedColor } from '../color'
-import { formatLength, getTitleAttribute, largerSize, smallerSize } from '..'
+import {
+  call,
+  formatLength,
+  getTitleAttribute,
+  largerSize,
+  smallerSize
+} from '..'
 
 describe('color', () => {
   it('should work with createHoverColor', () => {
@@ -51,5 +57,30 @@ describe('naive', () => {
     expect(smallerSize('large')).toBe('medium')
     expect(smallerSize('medium')).toBe('small')
     expect(smallerSize('small')).toBe('tiny')
+  })
+})
+
+describe('vue', () => {
+  it('should work with call', () => {
+    let testValue = 0
+    let testValue2 = 0
+    function testFunction1 (): void {
+      testValue = testValue + 1
+    }
+    function testFunction2 (v: number): void {
+      testValue = testValue + v + 2
+    }
+    function testFunction3 (v: number): void {
+      testValue2 = testValue2 + v + 3
+    }
+    call(testFunction1)
+    expect(testValue).toBe(1)
+    testValue = 0
+    call(testFunction2, 1)
+    expect(testValue).toBe(3)
+    testValue = 0
+    call([testFunction2, testFunction3], 1)
+    expect(testValue).toBe(3)
+    expect(testValue2).toBe(4)
   })
 })
