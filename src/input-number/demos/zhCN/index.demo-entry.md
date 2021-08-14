@@ -34,7 +34,7 @@ debug
 | validator | `(value) => boolean` | `undefined` | 设置自定义验证 |
 | value | `number \| null` | `undefined` | 受控模式下的值 |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | 移除焦点的回调 |
-| on-clear | `() => void` | `undefined` | 点击清空按钮时触发 |
+| on-clear | `() => void` | `undefined` | 点击清空按钮时的回调 |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | 获取焦点的回调 |
 | on-update:value | `(value: number \| null) => void` | `undefined` | 组件值发生变化的回调 |
 
