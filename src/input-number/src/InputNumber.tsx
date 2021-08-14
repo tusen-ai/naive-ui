@@ -270,6 +270,9 @@ export default defineComponent({
         return 0
       }
     }
+    function handleClear (): void {
+      doUpdateValue(null)
+    }
     function handleMouseDown (e: MouseEvent): void {
       if (addButtonInstRef.value?.$el.contains(e.target as Node)) {
         e.preventDefault()
@@ -328,6 +331,7 @@ export default defineComponent({
       minusable: minusableRef,
       handleFocus,
       handleBlur,
+      handleClear,
       handleMouseDown,
       handleAddClick,
       handleMinusClick,
@@ -374,6 +378,7 @@ export default defineComponent({
           onBlur={this.handleBlur}
           onKeydown={this.handleKeyDown}
           onMousedown={this.handleMouseDown}
+          onClear={this.handleClear}
           clearable={this.clearable}
         >
           {{
