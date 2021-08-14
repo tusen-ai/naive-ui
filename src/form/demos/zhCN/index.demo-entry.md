@@ -17,6 +17,7 @@ async
 disabled
 height-debug
 validator-debug
+show-label
 ```
 
 ## Props
@@ -64,6 +65,7 @@ validator-debug
 | rule-path | `string` | `undefined` | 从外层表单的 `rules` 对象获取规则的路径。如果没有设定，使用表项的 `path` 代替 |
 | show-feedback | `boolean` | `true` | 是否展示校验反馈 |
 | show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | 是否展示必填的星号。如果没有被设定，使用外层 `n-form` 的 `show-require-mark` |
+| show-label | `boolean` | `true` | 是否展示标签。如果没有被设定，使用外层 `n-form` 的 `show-label` |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | 表单的验证状态。不设为 `undefined`时，会覆盖规则验证的结果 |
 

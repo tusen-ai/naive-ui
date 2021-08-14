@@ -15,6 +15,7 @@ left
 item-only
 async
 disabled
+show-label
 ```
 
 ## Props
@@ -63,6 +64,7 @@ disabled
 | rule-path | `string` | `undefined` | The path to get rule from wrapper form's rule object. If not set, use path of the form item instead. |
 | show-feedback | `boolean` | `true` | Whether to show feedback. |
 | show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | Whether to show require mark. If not set, use `show-require-mark` from wrapper form. |
+| show-label | `boolean` | `true` | Whether to show label. If not set, use `show-label` from wrapper form. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | The validation status of the form item. If not set to `undefined`, it will take place of the result of rule-based validation. |
 
