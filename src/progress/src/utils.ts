@@ -24,54 +24,71 @@ const changeProcessingFillStrokeDasharray = ({
 
 export const setProcessingTimer = ({
   timer,
+  timeNow,
   sleepingRef,
   processingFillStrokeDasharrayRef,
   randomId,
   viewBoxWidth,
-  maxStrokeDasharray
+  maxStrokeDasharray,
+  num
 }: {
   timer: number
+  timeNow: number
   sleepingRef: Ref<boolean>
   processingFillStrokeDasharrayRef: Ref<string>
   randomId: string
   viewBoxWidth: number
   maxStrokeDasharray: number
+  num: number
 }): void => {
-  let num = 0
-  timer = window.setInterval(() => {
-    num++
-    const strokeDasharrayPercentage = viewBoxWidth * 8
-    if (num === 63) {
-      clearProcessingTimer(timer)
-      sleepingRef.value = true
-      window.setTimeout(() => {
-        processingFillStrokeDasharrayRef.value = `0, ${strokeDasharrayPercentage}`
-        randomId = createId()
-        sleepingRef.value = false
+  num++
+  const strokeDasharrayPercentage = viewBoxWidth * 8
+  if (num > Math.ceil(2000 / (Date.now() - timeNow))) {
+    clearProcessingTimer(timer)
+    sleepingRef.value = true
+    window.setTimeout(() => {
+      processingFillStrokeDasharrayRef.value = `0, ${strokeDasharrayPercentage}`
+      randomId = createId()
+      sleepingRef.value = false
+      timeNow = Date.now()
+      timer = requestAnimationFrame(() =>
         setProcessingTimer({
           timer,
+          timeNow,
           sleepingRef,
           processingFillStrokeDasharrayRef,
           randomId,
           viewBoxWidth,
-          maxStrokeDasharray
+          maxStrokeDasharray,
+          num: 0
         })
-      }, 1000)
-    }
-    if (!processingFillStrokeDasharrayRef.value) {
-      processingFillStrokeDasharrayRef.value = `0, ${strokeDasharrayPercentage}`
-    } else {
-      changeProcessingFillStrokeDasharray({
+      )
+    }, 1000)
+  } else {
+    changeProcessingFillStrokeDasharray({
+      processingFillStrokeDasharrayRef,
+      maxStrokeDasharray,
+      rate: (Date.now() - timeNow) / 2000,
+      strokeDasharrayPercentage
+    })
+    timeNow = Date.now()
+    timer = requestAnimationFrame(() =>
+      setProcessingTimer({
+        timer,
+        timeNow,
+        sleepingRef,
         processingFillStrokeDasharrayRef,
+        randomId,
+        viewBoxWidth,
         maxStrokeDasharray,
-        rate: 1 / 62,
-        strokeDasharrayPercentage
+        num
       })
-    }
-  }, 16)
+    )
+  }
 }
+
 export const clearProcessingTimer = (timer: number): void => {
-  window.clearInterval(timer as any)
+  cancelAnimationFrame(timer)
 }
 
 export const calcPointPos = (

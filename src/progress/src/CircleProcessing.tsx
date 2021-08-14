@@ -64,13 +64,17 @@ export default defineComponent({
       [viewBoxWidthRef, maxStrokeDasharrayRef],
       () => {
         clearProcessingTimer(timer)
+        processingFillStrokeDasharrayRef.value = `0, ${props.viewBoxWidth * 8}`
+        const timeNow: number = Date.now()
         setProcessingTimer({
           timer,
+          timeNow,
           sleepingRef,
           processingFillStrokeDasharrayRef,
           randomId,
           viewBoxWidth: viewBoxWidthRef.value,
-          maxStrokeDasharray: maxStrokeDasharrayRef.value
+          maxStrokeDasharray: maxStrokeDasharrayRef.value,
+          num: 0
         })
       },
       {
@@ -109,7 +113,7 @@ export default defineComponent({
             x2={lightestCurPointPos[0]}
             y2={lightestCurPointPos[1]}
           >
-            <stop offset="0%" stop-color="rgba(255, 255, 255, 0)" />
+            <stop offset="0%" stop-color="rgba(255, 255, 255, 0.05)" />
             <stop offset="100%" stop-color="rgba(255, 255, 255, 0.3)" />
           </linearGradient>
         </defs>
@@ -121,9 +125,6 @@ export default defineComponent({
             stroke-linecap="round"
             fill="none"
             style={{
-              animation:
-                'progress-circle-processing-animation 1s var(--bezier)',
-              animationFillMode: 'forwards',
               strokeDasharray: processingFillStrokeDasharray,
               strokeDashoffset: 0,
               stroke: `url(#ProgressCircleGradient${randomId})`

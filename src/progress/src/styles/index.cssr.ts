@@ -244,16 +244,5 @@ export default c([
       right: 0;
       opacity: 0;
     }
-  `),
-  c('@keyframes progress-circle-processing-animation', `
-    0% {
-      opacity: 1;
-    }
-    90% {
-      opacity: 0.9;
-    }
-    100% {
-      opacity: 0;
-    }
   `)
 ])
