@@ -35,7 +35,7 @@ const iconMap = {
 export default defineComponent({
   name: 'Message',
   props: messageProps,
-  setup (props) {
+  setup(props) {
     const {
       props: messageProviderProps,
       mergedClsPrefixRef
@@ -51,7 +51,7 @@ export default defineComponent({
     )
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      handleClose () {
+      handleClose() {
         props.onClose?.()
       },
       cssVars: computed(() => {
@@ -106,10 +106,11 @@ export default defineComponent({
           '--line-height': lineHeight,
           '--border-radius': borderRadius
         }
-      })
+      }),
+      placement: messageProviderProps.placement
     }
   },
-  render () {
+  render() {
     const {
       icon,
       type,
@@ -122,7 +123,12 @@ export default defineComponent({
     return (
       <div
         class={`${mergedClsPrefix}-message-wrapper`}
-        style={cssVars as CSSProperties}
+        style={{
+          ...(cssVars as CSSProperties),
+          alignItems: this.placement.startsWith('top')
+            ? 'flex-start'
+            : 'flex-end'
+        }}
       >
         <div class={`${mergedClsPrefix}-message`}>
           <div
@@ -150,7 +156,7 @@ export default defineComponent({
   }
 })
 
-function createIconVNode (
+function createIconVNode(
   icon: undefined | (() => VNodeChild),
   type: MessageType,
   clsPrefix: string

@@ -29,6 +29,7 @@ export default c([
     margin: var(--margin);
     z-index: 0;
     transform-origin: top center;
+    display: flex;
   `, [
     fadeInHeightExpand({
       overflow: 'visible',
