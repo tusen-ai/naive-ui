@@ -47,6 +47,7 @@ const inputNumberProps = {
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
@@ -230,6 +231,10 @@ export default defineComponent({
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
     }
+    function doClear (e: MouseEvent): void {
+      const { onClear } = props
+      if (onClear) call(onClear, e)
+    }
     function doAdd (): void {
       const { value: addable } = addableRef
       if (!addable) return
@@ -270,7 +275,8 @@ export default defineComponent({
         return 0
       }
     }
-    function handleClear (): void {
+    function handleClear (e: MouseEvent): void {
+      doClear(e)
       doUpdateValue(null)
     }
     function handleMouseDown (e: MouseEvent): void {

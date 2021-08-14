@@ -33,6 +33,7 @@ show-button
 | validator | `(value) => boolean` | `undefined` | Setup custom validation. |
 | value | `number \| null` | `undefined` | Value in controlled mode. |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | Callback when blur. |
+| on-clear | `() => void` | `undefined` | Callback triggered when clear. |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | Callback when focused. |
 | on-update:value | `(value: number \| null) => void` | `undefined` | Callback when the component's value changes. |
 
