@@ -12,11 +12,13 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      cities: null
+      cities: ref(null)
     }
   }
-}
+})
 ```

@@ -42,7 +42,7 @@ const dialogProps = {
     >,
     default: 'default'
   },
-  title: String,
+  title: [String, Function] as PropType<string | (() => VNodeChild)>,
   closable: {
     type: Boolean,
     default: true
@@ -50,6 +50,7 @@ const dialogProps = {
   negativeText: String,
   positiveText: String,
   content: [String, Function] as PropType<string | (() => VNodeChild)>,
+  action: Function as PropType<() => VNodeChild>,
   showIcon: {
     type: Boolean,
     default: true
@@ -184,7 +185,9 @@ export default defineComponent({
       showIcon,
       title,
       content,
+      action,
       negativeText,
+      positiveText,
       handlePositiveClick,
       handleNegativeClick,
       mergedTheme,
@@ -242,36 +245,47 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-dialog__content`}>
           {renderSlot($slots, 'default', undefined, () => [render(content)])}
         </div>
-        <div class={`${mergedClsPrefix}-dialog__action`}>
-          {renderSlot($slots, 'action', undefined, () => [
-            negativeText ? (
-              <NButton
-                theme={mergedTheme.peers.Button}
-                themeOverrides={mergedTheme.peerOverrides.Button}
-                ghost
-                size="small"
-                onClick={handleNegativeClick}
-              >
-                {{
-                  default: () => render(this.negativeText)
-                }}
-              </NButton>
-            ) : null,
-            <NButton
-              theme={mergedTheme.peers.Button}
-              themeOverrides={mergedTheme.peerOverrides.Button}
-              disabled={loading}
-              loading={loading}
-              size="small"
-              type={type === 'default' ? 'primary' : type}
-              onClick={handlePositiveClick}
-            >
-              {{
-                default: () => render(this.positiveText)
-              }}
-            </NButton>
-          ])}
-        </div>
+        {$slots.action || positiveText || negativeText || action ? (
+          <div class={`${mergedClsPrefix}-dialog__action`}>
+            {renderSlot(
+              $slots,
+              'action',
+              undefined,
+              action
+                ? () => [render(action)]
+                : () => [
+                    this.negativeText && (
+                      <NButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        ghost
+                        size="small"
+                        onClick={handleNegativeClick}
+                      >
+                        {{
+                          default: () => render(this.negativeText)
+                        }}
+                      </NButton>
+                    ),
+                    this.positiveText && (
+                      <NButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        disabled={loading}
+                        loading={loading}
+                        size="small"
+                        type={type === 'default' ? 'primary' : type}
+                        onClick={handlePositiveClick}
+                      >
+                        {{
+                          default: () => render(this.positiveText)
+                        }}
+                      </NButton>
+                    )
+                  ]
+            )}
+          </div>
+        ) : null}
       </div>
     )
   }

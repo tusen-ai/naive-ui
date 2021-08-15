@@ -63,8 +63,9 @@ export default defineComponent({
     const {
       clsPrefix,
       tmNode,
-      menuProps: { renderLabel }
+      menuProps: { renderIcon, renderLabel, renderExtra, expandIcon }
     } = this
+    const icon = renderIcon ? renderIcon(tmNode.rawNode) : render(this.icon)
     return (
       <div
         onClick={this.onClick}
@@ -80,21 +81,21 @@ export default defineComponent({
         ]}
         style={this.style}
       >
-        {this.icon ? (
+        {icon && (
           <div
             class={`${clsPrefix}-menu-item-content__icon`}
             style={this.iconStyle}
             role="none"
           >
-            {render(this.icon)}
+            {[icon]}
           </div>
-        ) : null}
+        )}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">
           {renderLabel ? renderLabel(tmNode.rawNode) : render(this.title)}
-          {this.extra ? (
+          {this.extra || renderExtra ? (
             <span class={`${clsPrefix}-menu-item-content-header__extra`}>
               {' '}
-              {render(this.extra)}
+              {renderExtra ? renderExtra(tmNode.rawNode) : render(this.extra)}
             </span>
           ) : null}
         </div>
@@ -105,7 +106,12 @@ export default defineComponent({
             clsPrefix={clsPrefix}
           >
             {{
-              default: () => <ChevronDownFilledIcon />
+              default: () =>
+                expandIcon ? (
+                  expandIcon(tmNode.rawNode)
+                ) : (
+                  <ChevronDownFilledIcon />
+                )
             }}
           </NBaseIcon>
         ) : null}

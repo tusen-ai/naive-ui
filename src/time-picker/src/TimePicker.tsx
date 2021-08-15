@@ -58,6 +58,19 @@ import {
   timePickerInjectionKey
 } from './interface'
 import { happensIn } from 'seemly'
+import { findSimilarTime, isTimeInStep } from './utils'
+
+// validate hours, minutes, seconds prop
+function validateUnits (value: MaybeArray<number>, max: number): boolean {
+  if (value === undefined) {
+    return true
+  }
+  if (Array.isArray(value)) {
+    return value.every((v) => v >= 0 && v <= max)
+  } else {
+    return value >= 0 && value <= max
+  }
+}
 
 const timePickerProps = {
   ...(useTheme.props as ThemeProps<TimePickerTheme>),
@@ -66,6 +79,7 @@ const timePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  actions: Array as PropType<Array<'now' | 'confirm'>>,
   defaultValue: {
     type: Number as PropType<number | null>,
     default: null
@@ -84,10 +98,7 @@ const timePickerProps = {
   size: String as PropType<Size>,
   isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
   isSecondDisabled: Function as PropType<IsSecondDisabled>,
-  clearable: {
-    type: Boolean,
-    default: false
-  },
+  clearable: Boolean,
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -103,8 +114,8 @@ const timePickerProps = {
     default: true
   },
   disabled: {
-    type: Boolean,
-    default: false
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   },
   // deprecated
   onChange: {
@@ -119,6 +130,18 @@ const timePickerProps = {
       return true
     },
     default: undefined
+  },
+  hours: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: MaybeArray<number>) => validateUnits(value, 23)
+  },
+  minutes: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: MaybeArray<number>) => validateUnits(value, 59)
+  },
+  seconds: {
+    type: [Number, Array] as PropType<MaybeArray<number>>,
+    validator: (value: MaybeArray<number>) => validateUnits(value, 59)
   }
 }
 
@@ -132,6 +155,7 @@ export default defineComponent({
       useConfig(props)
     const { localeRef, dateLocaleRef } = useLocale('TimePicker')
     const formItem = useFormItem(props)
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     const themeRef = useTheme(
       'TimePicker',
       'TimePicker',
@@ -191,27 +215,30 @@ export default defineComponent({
     })
     const isHourInvalidRef = computed(() => {
       const { isHourDisabled } = props
-      if (!isHourDisabled) return false
       if (hourValueRef.value === null) return false
+      if (!isTimeInStep(hourValueRef.value, 'hours', props.hours)) return true
+      if (!isHourDisabled) return false
       return isHourDisabled(hourValueRef.value)
     })
     const isMinuteInvalidRef = computed(() => {
-      const { isMinuteDisabled } = props
-      if (!isMinuteDisabled) return false
       const { value: minuteValue } = minuteValueRef
       const { value: hourValue } = hourValueRef
       if (minuteValue === null || hourValue === null) return false
+      if (!isTimeInStep(minuteValue, 'minutes', props.minutes)) return true
+      const { isMinuteDisabled } = props
+      if (!isMinuteDisabled) return false
       return isMinuteDisabled(minuteValue, hourValue)
     })
     const isSecondInvalidRef = computed(() => {
-      const { isSecondDisabled } = props
-      if (!isSecondDisabled) return false
       const { value: minuteValue } = minuteValueRef
       const { value: hourValue } = hourValueRef
       const { value: secondValue } = secondValueRef
       if (secondValue === null || minuteValue === null || hourValue === null) {
         return false
       }
+      if (!isTimeInStep(secondValue, 'seconds', props.seconds)) return true
+      const { isSecondDisabled } = props
+      if (!isSecondDisabled) return false
       return isSecondDisabled(secondValue, minuteValue, hourValue)
     })
     const isValueInvalidRef = computed(() => {
@@ -299,7 +326,7 @@ export default defineComponent({
       })
     }
     function handleTriggerClick (e: MouseEvent): void {
-      if (props.disabled || happensIn(e, 'clear')) return
+      if (mergedDisabledRef.value || happensIn(e, 'clear')) return
       if (!activeRef.value) {
         openPanel()
       }
@@ -354,13 +381,13 @@ export default defineComponent({
     }
 
     function handleTimeInputActivate (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (!activeRef.value) {
         openPanel()
       }
     }
     function handleTimeInputDeactivate (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       deriveInputValue()
       closePanel({
         returnFocus: false
@@ -456,17 +483,29 @@ export default defineComponent({
     }
     function handleNowClick (): void {
       const now = new Date()
-      if (!mergedValueRef.value) doChange(getTime(now))
-      else {
-        const newValue = setSeconds(
-          setMinutes(
-            setHours(mergedValueRef.value, getHours(now)),
-            getMinutes(now)
-          ),
-          getSeconds(now)
-        )
-        doChange(getTime(newValue))
+      const getNowTime = {
+        hours: getHours,
+        minutes: getMinutes,
+        seconds: getSeconds
       }
+      const [mergeHours, mergeMinutes, mergeSeconds] = (
+        ['hours', 'minutes', 'seconds'] as const
+      ).map((i) =>
+        !props[i] || isTimeInStep(getNowTime[i](now), i, props[i])
+          ? getNowTime[i](now)
+          : findSimilarTime(getNowTime[i](now), i, props[i])
+      )
+      const newValue = setSeconds(
+        setMinutes(
+          setHours(
+            mergedValueRef.value ? mergedValueRef.value : getTime(now),
+            mergeHours
+          ),
+          mergeMinutes
+        ),
+        mergeSeconds
+      )
+      doChange(getTime(newValue))
     }
     function handleConfirmClick (): void {
       deriveInputValue()
@@ -515,7 +554,8 @@ export default defineComponent({
       secondInFormat: secondInFormatRef,
       mergedAttrSize: mergedAttrSizeRef,
       displayTimeString: displayTimeStringRef,
-      mergedSize: formItem.mergedSizeRef,
+      mergedSize: mergedSizeRef,
+      mergedDisabled: mergedDisabledRef,
       isValueInvalid: isValueInvalidRef,
       isHourInvalid: isHourInvalidRef,
       isMinuteInvalid: isMinuteInvalidRef,
@@ -614,7 +654,7 @@ export default defineComponent({
                       size={this.mergedSize}
                       placeholder={this.localizedPlaceholder}
                       clearable={this.clearable}
-                      disabled={this.disabled}
+                      disabled={this.mergedDisabled}
                       textDecoration={
                         this.isValueInvalid ? 'line-through' : undefined
                       }
@@ -665,7 +705,11 @@ export default defineComponent({
                             ? withDirectives(
                                 <Panel
                                   ref="panelInstRef"
+                                  actions={this.actions}
                                   style={this.cssVars as CSSProperties}
+                                  seconds={this.seconds}
+                                  minutes={this.minutes}
+                                  hours={this.hours}
                                   transitionDisabled={this.transitionDisabled}
                                   hourValue={this.hourValue}
                                   showHour={this.hourInFormat}

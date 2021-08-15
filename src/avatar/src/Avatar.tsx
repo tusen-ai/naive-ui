@@ -1,12 +1,5 @@
-import {
-  h,
-  ref,
-  computed,
-  onUpdated,
-  onMounted,
-  defineComponent,
-  PropType
-} from 'vue'
+import { h, ref, computed, defineComponent, PropType } from 'vue'
+import { VResizeObserver } from 'vueuc'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { avatarLight } from '../styles'
@@ -22,15 +15,16 @@ const avatarProps = {
     default: 'medium'
   },
   src: String,
-  circle: {
-    type: Boolean,
-    default: false
+  circle: Boolean,
+  color: String,
+  objectFit: {
+    type: String as PropType<
+    'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
+    >,
+    default: 'fill'
   },
-  round: {
-    type: Boolean,
-    default: false
-  },
-  color: String
+  round: Boolean,
+  onError: Function as PropType<(e: Event) => void>
 } as const
 
 export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>
@@ -44,7 +38,7 @@ export default defineComponent({
     let memoedTextHtml: string | null = null
     const textRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
-    const adjustText = (): void => {
+    const fitTextTransform = (): void => {
       const { value: textEl } = textRef
       if (textEl) {
         if (memoedTextHtml === null || memoedTextHtml !== textEl.innerHTML) {
@@ -64,11 +58,6 @@ export default defineComponent({
         }
       }
     }
-    // Not Good Impl
-    onMounted(() => adjustText())
-    onUpdated(() => {
-      adjustText()
-    })
     const themeRef = useTheme(
       'Avatar',
       'Avatar',
@@ -81,6 +70,7 @@ export default defineComponent({
       textRef,
       selfRef,
       mergedClsPrefix: mergedClsPrefixRef,
+      fitTextTransform,
       cssVars: computed(() => {
         const { size, round, circle } = props
         const {
@@ -112,15 +102,25 @@ export default defineComponent({
         style={this.cssVars as any}
       >
         {!$slots.default && src ? (
-          <img src={src} />
+          <img
+            src={src}
+            onError={this.onError}
+            style={{ objectFit: this.objectFit }}
+          />
         ) : (
-          <span
-            ref="textRef"
-            class={`${mergedClsPrefix}-avatar__text`}
-            style={{ background: this.color }}
-          >
-            {$slots}
-          </span>
+          <VResizeObserver onResize={this.fitTextTransform}>
+            {{
+              default: () => (
+                <span
+                  ref="textRef"
+                  class={`${mergedClsPrefix}-avatar__text`}
+                  style={{ background: this.color }}
+                >
+                  {$slots}
+                </span>
+              )
+            }}
+          </VResizeObserver>
         )}
       </span>
     )

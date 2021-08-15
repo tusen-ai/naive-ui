@@ -5,17 +5,19 @@ import {
   defineComponent,
   computed,
   CSSProperties,
-  PropType
+  PropType,
+  Transition
 } from 'vue'
 import { depx, pxfy } from 'seemly'
 import { useMergedState } from 'vooks'
 import { useConfig, useFormItem, useTheme } from '../../_mixins'
+import { NBaseLoading } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import { call, warn, createKey } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
-import style from './styles/index.cssr'
 import { switchLight } from '../styles'
 import type { SwitchTheme } from '../styles'
+import style from './styles/index.cssr'
 
 const switchProps = {
   ...(useTheme.props as ThemeProps<SwitchTheme>),
@@ -27,13 +29,11 @@ const switchProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  defaultValue: {
-    type: Boolean,
-    default: false
-  },
+  loading: Boolean,
+  defaultValue: Boolean,
   disabled: {
-    type: Boolean,
-    default: false
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   },
   round: {
     type: Boolean,
@@ -79,7 +79,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
-    const { mergedSizeRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -110,7 +110,7 @@ export default defineComponent({
       nTriggerFormBlur()
     }
     function handleClick (): void {
-      if (!props.disabled) {
+      if (!mergedDisabledRef.value) {
         doUpdateValue(!mergedValueRef.value)
       }
     }
@@ -142,6 +142,7 @@ export default defineComponent({
       pressed: pressedRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
+      mergedDisabled: mergedDisabledRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const {
@@ -152,6 +153,8 @@ export default defineComponent({
             buttonBoxShadow,
             buttonColor,
             boxShadowFocus,
+            loadingColor,
+            textColor,
             [createKey('buttonHeight', size)]: buttonHeight,
             [createKey('buttonWidth', size)]: buttonWidth,
             [createKey('buttonWidthPressed', size)]: buttonWidthPressed,
@@ -185,13 +188,16 @@ export default defineComponent({
           '--rail-height': railHeight,
           '--rail-width': railWidth,
           '--width': width,
-          '--box-shadow-focus': boxShadowFocus
+          '--box-shadow-focus': boxShadowFocus,
+          '--loading-color': loadingColor,
+          '--text-color': textColor
         }
       })
     }
   },
   render () {
-    const { mergedClsPrefix, mergedValue } = this
+    const { mergedClsPrefix, mergedValue, $slots } = this
+    const { checked: checkedSlot, unchecked: uncheckedSlot } = $slots
     return (
       <div
         role="switch"
@@ -200,12 +206,12 @@ export default defineComponent({
           `${mergedClsPrefix}-switch`,
           {
             [`${mergedClsPrefix}-switch--active`]: mergedValue,
-            [`${mergedClsPrefix}-switch--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-switch--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-switch--round`]: this.round,
             [`${mergedClsPrefix}-switch--pressed`]: this.pressed
           }
         ]}
-        tabindex={!this.disabled ? 0 : undefined}
+        tabindex={!this.mergedDisabled ? 0 : undefined}
         style={this.cssVars as CSSProperties}
         onClick={this.handleClick}
         onFocus={this.handleFocus}
@@ -213,7 +219,50 @@ export default defineComponent({
         onKeyup={this.handleKeyup}
         onKeydown={this.handleKeydown}
       >
-        <div class={`${mergedClsPrefix}-switch__rail`} aria-hidden="true" />
+        <div class={`${mergedClsPrefix}-switch__rail`} aria-hidden="true">
+          {(checkedSlot || uncheckedSlot) && (
+            <div
+              aria-hidden
+              class={`${mergedClsPrefix}-switch__children-placeholder`}
+            >
+              <div class={`${mergedClsPrefix}-switch__rail-placeholder`}>
+                <div class={`${mergedClsPrefix}-switch__button-placeholder`} />
+                {checkedSlot?.()}
+              </div>
+              <div class={`${mergedClsPrefix}-switch__rail-placeholder`}>
+                <div class={`${mergedClsPrefix}-switch__button-placeholder`} />
+                {uncheckedSlot?.()}
+              </div>
+            </div>
+          )}
+          <div class={`${mergedClsPrefix}-switch__button`}>
+            <Transition name="fade-in-scale-up-transition">
+              {{
+                default: () =>
+                  this.loading ? (
+                    <NBaseLoading
+                      key="loading"
+                      clsPrefix={mergedClsPrefix}
+                      strokeWidth={20}
+                    />
+                  ) : null
+              }}
+            </Transition>
+            {checkedSlot && (
+              <div key="checked" class={`${mergedClsPrefix}-switch__checked`}>
+                {checkedSlot()}
+              </div>
+            )}
+            {uncheckedSlot && (
+              <div
+                key="unchecked"
+                class={`${mergedClsPrefix}-switch__unchecked`}
+              >
+                {uncheckedSlot()}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     )
   }

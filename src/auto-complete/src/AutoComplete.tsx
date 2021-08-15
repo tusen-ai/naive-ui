@@ -23,8 +23,8 @@ import {
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
-
 import { NInput } from '../../input'
+
 import type {
   SelectBaseOption,
   SelectGroupOption,
@@ -58,7 +58,14 @@ const autoCompleteProps = {
     type: String as PropType<string | null>,
     default: null
   },
-  disabled: Boolean,
+  loading: {
+    type: Boolean,
+    default: undefined
+  },
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   placeholder: String,
   value: String,
   blurAfterSelect: Boolean,
@@ -99,7 +106,7 @@ export default defineComponent({
     const { mergedBorderedRef, namespaceRef, mergedClsPrefixRef } =
       useConfig(props)
     const formItem = useFormItem(props)
-
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     const triggerElRef = ref<HTMLElement | null>(null)
     const menuInstRef = ref<InternalSelectMenuRef | null>(null)
 
@@ -242,7 +249,8 @@ export default defineComponent({
       menuInstRef,
       triggerElRef,
       treeMate: treeMateRef,
-      mergedSize: formItem.mergedSizeRef,
+      mergedSize: mergedSizeRef,
+      mergedDisabled: mergedDisabledRef,
       active: activeRef,
       handleClear,
       handleFocus,
@@ -303,8 +311,9 @@ export default defineComponent({
                         value={this.mergedValue}
                         placeholder={this.placeholder}
                         size={this.mergedSize}
-                        disabled={this.disabled}
+                        disabled={this.mergedDisabled}
                         clearable={this.clearable}
+                        loading={this.loading}
                         onClear={this.handleClear}
                         onFocus={this.handleFocus}
                         onUpdateValue={this.handleInput}

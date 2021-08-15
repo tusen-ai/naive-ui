@@ -6,12 +6,14 @@ When you have some functions to trigger.
 
 ```demo
 basic
+icon
 trigger
 cascade
+arrow
 placement
 size
 manual-position
-render-label
+batch-render
 ```
 
 ## Props
@@ -22,12 +24,13 @@ render-label
 | inverted | `boolean` | `false` | Use inverted style. |
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. (Be careful about the potential conflicts with other components keyboard operations) |
 | options | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | `[]` | Options of the dropdown. |
+| render-icon | `(option: DropdownOption \| DropdownSubmenu) => VNodeChild` | `undefined` | Render function that renders all icons. |
 | render-label | `(option: DropdownOption \| DropdownSubmenu) => VNodeChild` | `undefined` | Render function that renders all labels. |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | Dropdown size. |
 | on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when clickoutside. |
 | on-select | `(key: string \| number) => void` | `undefined` | Callback function triggered on blur. |
 
-For other props, for example `placement`, please see [Popover Props](popover#Props). Note that `arrow`, `raw` is not available.
+For other props, for example `placement`, please see [Popover Props](popover#Props). Note that `raw` is not available.
 
 ### DropdownOption Type
 

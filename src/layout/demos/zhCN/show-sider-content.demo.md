@@ -16,7 +16,7 @@
     >
       海淀桥 海淀桥 海淀桥 海淀桥 海淀桥
     </n-layout-sider>
-    <n-layout-content content-style="padding: 24px">平山道</n-layout-content>
+    <n-layout-content content-style="padding: 24px;">平山道</n-layout-content>
   </n-layout>
   <n-layout has-sider>
     <n-layout-sider
@@ -29,7 +29,7 @@
     >
       <n-h2>海淀桥</n-h2>
     </n-layout-sider>
-    <n-layout-content content-style="padding: 24px">平山道</n-layout-content>
+    <n-layout-content content-style="padding: 24px;">平山道</n-layout-content>
   </n-layout>
 </n-space>
 ```

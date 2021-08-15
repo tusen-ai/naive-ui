@@ -17,9 +17,10 @@ For example:
 
 ```js
 import { useMessage } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 // content
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     return {
@@ -28,7 +29,7 @@ export default {
       }
     }
   }
-}
+})
 ```
 
 </n-space>
@@ -52,6 +53,9 @@ multiple-line
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| closable | `boolean` | All messages whether to show close icon. |
+| duration | `number` | `3000` | All messages's default duration. |
+| max | `number` | `undefined` | Limit the number of message to display. |
 | to | `string \| HTMLElement` | `'body'` | Container node of message container. |
 
 ### MessageProvider Injection API
@@ -60,18 +64,19 @@ multiple-line
 
 | Name | Type | Description |
 | --- | --- | --- |
-| error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
-| info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
-| loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
-| success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
-| warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` |  |
+| destroyAll | `() => void` | Destroy all popup messages. |
+| error | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use error type message. |
+| info | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use info type message. |
+| loading | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use loading type message. |
+| success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use success type message. |
+| warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use warning type message. |
 
 #### MessageOption Properties
 
 | Name         | Type          | Description                               |
 | ------------ | ------------- | ----------------------------------------- |
-| closable     | `boolean`     |                                           |
-| duration     | `number`      |                                           |
+| closable     | `boolean`     | Whether to show close icon.               |
+| duration     | `number`      | The duration of the message.              |
 | icon         | `() => VNode` | Message icon.                             |
 | onAfterLeave | `() => void`  | Callback after message disappeared.       |
 | onClose      | `() => void`  | Callback when close icon is clicked.      |
@@ -81,19 +86,19 @@ multiple-line
 
 | Name | Type | Description |
 | --- | --- | --- |
-| closable | `boolean` |  |
+| closable | `boolean` | Whether to show close icon. |
 | content | `string \| (() => VNodeChild)` | Message content. |
-| destory | `() => void` |  |
+| destory | `() => void` | Message destory method. |
 | icon | `() => VNode` | Message icon. |
-| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` |  |
+| type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | Message type. |
 | onAfterLeave | `() => void` | Callback after message disappeared. |
 | onLeave | `() => void` | Callback when message start to disappear. |
 
 #### MessageReactive Methods
 
-| Name    | Type | Description |
-| ------- | ---- | ----------- |
-| destroy | `()` |             |
+| Name    | Type | Description             |
+| ------- | ---- | ----------------------- |
+| destroy | `()` | Message destory method. |
 
 ## Q & A
 
@@ -117,13 +122,14 @@ multiple-line
 
 <script>
   import { useMessage } from 'naive-ui'
+  import { defineComponent } from 'vue'
 
   // content
-  export default {
+  export default defineComponent({
     setup() {
       window.$message = useMessage()
     }
-  }
+  })
 </script>
 ```
 

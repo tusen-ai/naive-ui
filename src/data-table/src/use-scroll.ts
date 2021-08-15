@@ -123,20 +123,26 @@ export function useScroll (
     }
   }
   function syncScrollState (): void {
-    const { scrollX } = props
-    if (!scrollX) return
+    // We can't simply use props.scrollX to determine whether the table has
+    // need to be sync since user may set column width for each column.
+    // Just let it be, the scroll listener won't be triggered for a basic table.
     const { header, body } = getScrollElements()
-    if (!body || !header) return
+    if (!body) return
     const { value: tableWidth } = bodyWidthRef
     if (tableWidth === null) return
     const { value: scrollPart } = scrollPartRef
-    // we need to deal with overscroll
-    if (scrollPart === 'head') {
-      scrollLeft = header.scrollLeft
-      body.scrollLeft = scrollLeft
+    if (props.maxHeight || props.flexHeight) {
+      if (!header) return
+      // we need to deal with overscroll
+      if (scrollPart === 'head') {
+        scrollLeft = header.scrollLeft
+        body.scrollLeft = scrollLeft
+      } else {
+        scrollLeft = body.scrollLeft
+        header.scrollLeft = scrollLeft
+      }
     } else {
       scrollLeft = body.scrollLeft
-      header.scrollLeft = scrollLeft
     }
     deriveActiveLeftFixedColumn()
     deriveActiveRightFixedColumn()

@@ -86,7 +86,7 @@ export default defineComponent({
       omit(props, panelPropKeys, {
         theme: mergedTheme.peers.Popover,
         themeOverrides: mergedTheme.peerOverrides.Popover,
-        internalExtraClass: 'popconfirm',
+        internalExtraClass: ['popconfirm'],
         ref: 'popoverInstRef'
       }),
       {

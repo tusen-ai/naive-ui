@@ -23,13 +23,10 @@ const radioProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  defaultChecked: {
-    type: Boolean,
-    default: false
-  },
+  defaultChecked: Boolean,
   disabled: {
-    type: Boolean,
-    default: false
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   },
   size: String as PropType<'small' | 'medium' | 'large'>,
   'onUpdate:checked': [Function, Array] as PropType<
@@ -96,8 +93,15 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
         return NFormItem.mergedSize.value
       }
       return 'medium'
+    },
+    mergedDisabled (NFormItem) {
+      if (props.disabled) return true
+      if (NRadioGroup?.disabledRef.value) return true
+      if (NFormItem?.disabled.value) return true
+      return false
     }
   })
+  const { mergedSizeRef, mergedDisabledRef } = formItem
   const inputRef = ref<HTMLElement | null>(null)
   const labelRef = ref<HTMLElement | null>(null)
   const NRadioGroup = inject(radioGroupInjectionKey, null)
@@ -115,9 +119,6 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
     const { name } = props
     if (name !== undefined) return name
     if (NRadioGroup) return NRadioGroup.nameRef.value
-  })
-  const mergedDisabledRef = useMemo(() => {
-    return NRadioGroup?.disabledRef.value || props.disabled
   })
   const focusRef = ref(false)
   function doUpdateChecked (): void {
@@ -178,7 +179,7 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
     uncontrolledChecked: uncontrolledCheckedRef,
     renderSafeChecked: renderSafeCheckedRef,
     focus: focusRef,
-    mergedSize: formItem.mergedSizeRef,
+    mergedSize: mergedSizeRef,
     handleRadioInputChange,
     handleRadioInputBlur,
     handleRadioInputFocus,

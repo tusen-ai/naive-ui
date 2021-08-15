@@ -2,6 +2,8 @@
 
 For some special case, you may want to manually position the dropdown. For example, right click to activate dropdown in some area.
 
+Warn: when manually positioned, the `trigger` prop must be `'manual'`.
+
 ```html
 <div
   style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);"
@@ -12,6 +14,7 @@ For some special case, you may want to manually position the dropdown. For examp
 <n-dropdown
   placement="bottom-start"
   @select="handleSelect"
+  trigger="manual"
   :x="x"
   :y="y"
   :options="options"

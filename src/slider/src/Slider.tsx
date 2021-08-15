@@ -38,9 +38,10 @@ const sliderProps = {
   },
   marks: Object as PropType<Record<string, string>>,
   disabled: {
-    type: Boolean,
-    default: false
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   },
+  formatTooltip: Function as PropType<(value: number) => string | number>,
   min: {
     type: Number,
     default: 0
@@ -53,10 +54,7 @@ const sliderProps = {
     type: Number,
     default: 1
   },
-  range: {
-    type: Boolean,
-    default: false
-  },
+  range: Boolean,
   value: [Number, Array] as PropType<number | [number, number]>,
   placement: {
     type: String as PropType<FollowerPlacement>,
@@ -66,7 +64,10 @@ const sliderProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  // eslint-disable-next-line vue/prop-name-casing
+  tooltip: {
+    type: Boolean,
+    default: true
+  },
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<<T extends number & [number, number]>(value: T) => void>
   >,
@@ -107,12 +108,19 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
-
+    const { mergedDisabledRef } = formItem
     const handleRef1 = ref<HTMLElement | null>(null)
     const handleRef2 = ref<HTMLElement | null>(null)
     const railRef = ref<HTMLElement | null>(null)
     const followerRef1 = ref<FollowerInst | null>(null)
     const followerRef2 = ref<FollowerInst | null>(null)
+    const precisionRef = computed(() => {
+      const precisions = [props.min, props.max, props.step].map((item) => {
+        const fraction = String(item).split('.')[1]
+        return fraction ? fraction.length : 0
+      })
+      return Math.max(...precisions)
+    })
 
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -266,6 +274,7 @@ export default defineComponent({
       doUpdateShow(false, false)
     }
     function handleRailClick (e: MouseEvent): void {
+      if (mergedDisabledRef.value) return
       const { value: railEl } = railRef
       if (!railEl) return
       const railRect = railEl.getBoundingClientRect()
@@ -320,6 +329,7 @@ export default defineComponent({
       }
     }
     function handleKeyDown (e: KeyboardEvent): void {
+      if (mergedDisabledRef.value) return
       switch (e.code) {
         case 'ArrowRight':
           handleKeyDownRight()
@@ -456,6 +466,7 @@ export default defineComponent({
       justifiedValue = Math.max(min, justifiedValue)
       justifiedValue = Math.min(max, justifiedValue)
       justifiedValue = Math.round((justifiedValue - min) / step) * step + min
+      justifiedValue = parseFloat(justifiedValue.toFixed(precisionRef.value))
       if (marks) {
         const closestMarkValue = getClosestMarkValue(value)
         if (
@@ -468,6 +479,7 @@ export default defineComponent({
       return justifiedValue
     }
     function handleFirstHandleMouseDown (e: MouseEvent | TouchEvent): void {
+      if (mergedDisabledRef.value) return
       if (isTouchEvent(e)) e.preventDefault()
       if (props.range) {
         memoziedOtherValueRef.value = handleValue2Ref.value
@@ -480,6 +492,7 @@ export default defineComponent({
       on('mousemove', document, handleFirstHandleMouseMove)
     }
     function handleSecondHandleMouseDown (e: MouseEvent | TouchEvent): void {
+      if (mergedDisabledRef.value) return
       if (isTouchEvent(e)) e.preventDefault()
       if (props.range) {
         memoziedOtherValueRef.value = handleValue1Ref.value
@@ -679,6 +692,7 @@ export default defineComponent({
       namespace: namespaceRef,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
+      mergedDisabled: mergedDisabledRef,
       isMounted: useIsMounted(),
       adjustedTo: useAdjustedTo(props),
       handleValue1: handleValue1Ref,
@@ -742,6 +756,7 @@ export default defineComponent({
             fillColor,
             fillColorHover,
             handleColor,
+            opacityDisabled,
             dotColor,
             dotColorModal,
             handleBoxShadow,
@@ -781,6 +796,7 @@ export default defineComponent({
           '--handle-box-shadow-hover': handleBoxShadowHover,
           '--handle-color': handleColor,
           '--handle-size': handleSize,
+          '--opacity-disabled': opacityDisabled,
           '--rail-color': railColor,
           '--rail-color-hover': railColorHover,
           '--rail-height': railHeight
@@ -789,13 +805,13 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, formatTooltip } = this
     return (
       <div
         class={[
           `${mergedClsPrefix}-slider`,
           {
-            [`${mergedClsPrefix}-slider--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-slider--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-slider--active`]: this.active,
             [`${mergedClsPrefix}-slider--with-mark`]: this.marks
           }
@@ -843,7 +859,7 @@ export default defineComponent({
                     <div
                       ref="handleRef1"
                       class={`${mergedClsPrefix}-slider-handle`}
-                      tabindex={0}
+                      tabindex={this.mergedDisabled ? -1 : 0}
                       style={this.firstHandleStyle}
                       onFocus={this.handleHandleFocus1}
                       onBlur={this.handleHandleBlur1}
@@ -855,40 +871,44 @@ export default defineComponent({
                   )
                 }}
               </VTarget>,
-              <VFollower
-                ref="followerRef1"
-                show={this.mergedShowTooltip1}
-                to={this.adjustedTo}
-                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                placement={this.placement}
-                containerClass={this.namespace}
-              >
-                {{
-                  default: () => (
-                    <Transition
-                      name="fade-in-scale-up-transition"
-                      appear={this.isMounted}
-                      css={!(this.active && this.prevActive)}
-                    >
-                      {{
-                        default: () =>
-                          this.mergedShowTooltip1 ? (
-                            <div
-                              class={`${mergedClsPrefix}-slider-handle-indicator`}
-                              style={this.indicatorCssVars as CSSProperties}
-                            >
-                              {this.handleValue1}
-                            </div>
-                          ) : null
-                      }}
-                    </Transition>
-                  )
-                }}
-              </VFollower>
+              this.tooltip && (
+                <VFollower
+                  ref="followerRef1"
+                  show={this.mergedShowTooltip1}
+                  to={this.adjustedTo}
+                  teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
+                  placement={this.placement}
+                  containerClass={this.namespace}
+                >
+                  {{
+                    default: () => (
+                      <Transition
+                        name="fade-in-scale-up-transition"
+                        appear={this.isMounted}
+                        css={!(this.active && this.prevActive)}
+                      >
+                        {{
+                          default: () =>
+                            this.mergedShowTooltip1 ? (
+                              <div
+                                class={`${mergedClsPrefix}-slider-handle-indicator`}
+                                style={this.indicatorCssVars as CSSProperties}
+                              >
+                                {typeof formatTooltip === 'function'
+                                  ? formatTooltip(this.handleValue1)
+                                  : this.handleValue1}
+                              </div>
+                            ) : null
+                        }}
+                      </Transition>
+                    )
+                  }}
+                </VFollower>
+              )
             ]
           }}
         </VBinder>
-        {this.range ? (
+        {this.tooltip && this.range ? (
           <VBinder>
             {{
               default: () => [
@@ -898,7 +918,7 @@ export default defineComponent({
                       <div
                         ref="handleRef2"
                         class={`${mergedClsPrefix}-slider-handle`}
-                        tabindex={0}
+                        tabindex={this.mergedDisabled ? -1 : 0}
                         style={this.secondHandleStyle}
                         onFocus={this.handleHandleFocus2}
                         onBlur={this.handleHandleBlur2}
@@ -932,7 +952,9 @@ export default defineComponent({
                                 class={`${mergedClsPrefix}-slider-handle-indicator`}
                                 style={this.indicatorCssVars as CSSProperties}
                               >
-                                {this.handleValue2}
+                                {typeof formatTooltip === 'function'
+                                  ? formatTooltip(this.handleValue2)
+                                  : this.handleValue2}
                               </div>
                             ) : null
                         }}

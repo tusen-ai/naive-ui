@@ -41,10 +41,16 @@ basic
 
 ## API
 
+### LoadingBarProvider Props
+
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| loading-bar-style | `{ loading?: string \| object, error?: string \| object }` | `undefined` | 加载条样式 |
+
 ### `loadingBar` Injection Methods
 
-| 名称   | 类型         | 说明 |
-| ------ | ------------ | ---- |
-| error  | `() => void` |      |
-| finish | `() => void` |      |
-| start  | `() => void` |      |
+| 名称   | 类型         | 说明                     |
+| ------ | ------------ | ------------------------ |
+| error  | `() => void` | 加载条出现错误的回调函数 |
+| finish | `() => void` | 加载条结束加载的回调函数 |
+| start  | `() => void` | 加载条开始加载的回调函数 |

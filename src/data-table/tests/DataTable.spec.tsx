@@ -1,4 +1,4 @@
-import { h, HTMLAttributes } from 'vue'
+import { h, HTMLAttributes, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NDataTable } from '../index'
 import type { DataTableColumns } from '../index'
@@ -108,5 +108,67 @@ describe('n-data-table', () => {
         />
       )).unmount()
     })
+  })
+  it('should work with `itemCount` without `remote`', () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    const pagination = {
+      page: 1,
+      pageCount: 1,
+      pageSize: 10,
+      itemCount: 0,
+      prefix ({ itemCount }: {itemCount: number | undefined}) {
+        return itemCount
+      }
+    }
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} pagination={pagination} />
+    ))
+    expect(wrapper.find('.n-pagination-prefix').text()).toEqual('978')
+  })
+
+  it('should work with `itemCount` with `remote`', async () => {
+    const onPageChange = jest.fn((page: number): void => {
+      setTimeout(() => {
+        pagination.page = page
+        pagination.itemCount = data.length
+        data = data.slice((page - 1) * pagination.pageSize, page * pagination.pageSize)
+      }, 1000)
+    })
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    let data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    const pagination = {
+      page: 1,
+      pageSize: 10,
+      itemCount: 978,
+      prefix ({ itemCount }: {itemCount: number | undefined}) {
+        return itemCount
+      }
+    }
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} pagination={pagination} remote onUpdatePage={onPageChange} />
+    ))
+    await void wrapper.findAll('.n-pagination-item')[2].trigger('click')
+    await nextTick()
+    expect(onPageChange).toHaveBeenCalled()
+    expect(wrapper.find('.n-pagination-prefix').text()).toEqual('978')
   })
 })

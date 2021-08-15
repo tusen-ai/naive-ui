@@ -13,7 +13,11 @@ import {
   Transition,
   renderSlot
 } from 'vue'
-import Schema, { ErrorList, RuleItem, ValidateOption } from 'async-validator'
+import Schema, {
+  ValidateError,
+  RuleItem,
+  ValidateOption
+} from 'async-validator'
 import { get } from 'lodash-es'
 import { createId } from 'seemly'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
@@ -155,7 +159,10 @@ export default defineComponent({
     const { mergedRequired: mergedRequiredRef, mergedRules: mergedRulesRef } =
       formItemRule(props)
     const { mergedSize: mergedSizeRef } = formItemSizeRefs
-    const { mergedLabelPlacement: labelPlacementRef } = formItemMiscRefs
+    const {
+      mergedLabelPlacement: labelPlacementRef,
+      mergedLabelAlign: labelTextAlignRef
+    } = formItemMiscRefs
     const explainsRef = ref<string[]>([])
     const feedbackIdRef = ref(createId())
     const hasFeedbackRef = computed(() => {
@@ -163,6 +170,7 @@ export default defineComponent({
       if (feedback !== undefined && feedback !== null) return true
       return explainsRef.value.length
     })
+    const mergedDisabledRef = NForm ? toRef(NForm, 'disabled') : ref(false)
     const themeRef = useTheme(
       'Form',
       'FormItem',
@@ -195,7 +203,7 @@ export default defineComponent({
       void internalValidate('input')
     }
     // Resolve : ()
-    // Reject  : (errors: AsyncValidator.ErrorList)
+    // Reject  : (errors: AsyncValidator.ValidateError[])
     async function validate (options: FormItemValidateOptions): Promise<void>
     async function validate (
       trigger?: string | null,
@@ -248,7 +256,7 @@ export default defineComponent({
       }
     ): Promise<{
       valid: boolean
-      errors?: ErrorList
+      errors?: ValidateError[]
     }> => {
       const { path } = props
       if (!options) {
@@ -289,19 +297,21 @@ export default defineComponent({
           return shallowClonedRule
         })
       if (!activeRules.length) {
-        return Promise.resolve({
+        return await Promise.resolve({
           valid: true
         })
       }
       const mergedPath = path ?? '__n_no_path__'
       const validator = new Schema({ [mergedPath]: activeRules as RuleItem[] })
-      return new Promise((resolve) => {
+      return await new Promise((resolve) => {
         void validator.validate(
           { [mergedPath]: value },
           options,
           (errors, fields) => {
             if (errors?.length) {
-              explainsRef.value = errors.map((error) => error.message)
+              explainsRef.value = errors.map(
+                (error: ValidateError) => error?.message || ''
+              )
               validationErroredRef.value = true
               resolve({
                 valid: false,
@@ -319,6 +329,7 @@ export default defineComponent({
     }
     provide(formItemInjectionKey, {
       path: toRef(props, 'path'),
+      disabled: mergedDisabledRef,
       mergedSize: formItemSizeRefs.mergedSize,
       restoreValidation,
       handleContentBlur,
@@ -343,7 +354,8 @@ export default defineComponent({
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const { value: labelPlacement } = labelPlacementRef
-        const direction = labelPlacement === 'top' ? 'vertical' : 'horizontal'
+        const direction: 'vertical' | 'horizontal' =
+          labelPlacement === 'top' ? 'vertical' : 'horizontal'
         const {
           common: { cubicBezierEaseInOut },
           self: {
@@ -364,11 +376,19 @@ export default defineComponent({
               labelFontSize
           }
         } = themeRef.value
-        return {
+
+        let mergedLabelTextAlign = labelTextAlignRef.value ?? labelTextAlign
+        if (labelPlacement === 'top') {
+          mergedLabelTextAlign =
+            mergedLabelTextAlign === 'right' ? 'flex-end' : 'flex-start'
+        }
+
+        const cssVars = {
           '--bezier': cubicBezierEaseInOut,
           '--line-height': lineHeight,
           '--blank-height': blankHeight,
           '--label-font-size': labelFontSize,
+          '--label-text-align': mergedLabelTextAlign,
           '--label-height': labelHeight,
           '--label-padding': labelPadding,
           '--asterisk-color': asteriskColor,
@@ -378,9 +398,9 @@ export default defineComponent({
           '--feedback-height': feedbackHeight,
           '--feedback-text-color': feedbackTextColor,
           '--feedback-text-color-warning': feedbackTextColorWarning,
-          '--feedback-text-color-error': feedbackTextColorError,
-          '--label-text-align': labelTextAlign
+          '--feedback-text-color-error': feedbackTextColorError
         }
+        return cssVars
       })
     }
   },

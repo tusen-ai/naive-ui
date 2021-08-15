@@ -2,6 +2,8 @@
 
 You can set `default-expanded-keys` to make menu work in an uncontrolled manner or use `expanded-keys` and `@update:expanded-keys` to make it work in a controlled manner.
 
+If you don't set `default-expanded-keys`, menu will expand all the ascendant of selected option by default.
+
 ```html
 <n-menu
   :options="menuOptions"

@@ -24,8 +24,8 @@ You can use `n-table`, `n-thead`, `n-tbody`, `n-tr`, `n-th` and `n-td`. At most 
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| buttom-bordered | `boolean` | `true` |  |
-| bordered | `boolean` | `true` |  |
-| single-column | `boolean` | `false` |  |
-| single-line | `boolean` | `true` |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` |  |
+| bottom-bordered | `boolean` | `true` | The bottom border of the table, this prop is invalid when `bordered` is `true`. |
+| bordered | `boolean` | `true` | Whether to show table border. |
+| single-column | `boolean` | `false` | Whether to display as a column (when `true`, each column has `border-right`). |
+| single-line | `boolean` | `true` | Whether to display as a line (when `true`, each row has `border-bottom`). |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |

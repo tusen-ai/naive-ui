@@ -11,20 +11,12 @@ export type Depth = 1 | 2 | 3 | 4 | 5 | '1' | '2' | '3' | '4' | '5' | undefined
 export default defineComponent({
   _n_icon__: true,
   name: 'Icon',
+  inheritAttrs: false,
   props: {
     ...(useTheme.props as ThemeProps<IconTheme>),
-    depth: {
-      type: [String, Number] as PropType<Depth>,
-      default: undefined
-    },
-    size: {
-      type: [Number, String],
-      default: undefined
-    },
-    color: {
-      type: String,
-      default: undefined
-    }
+    depth: [String, Number] as PropType<Depth>,
+    size: [Number, String],
+    color: String
   },
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)

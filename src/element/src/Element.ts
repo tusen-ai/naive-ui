@@ -44,11 +44,11 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots } = this
-    const { tag, mergedClsPrefix, cssVars } = this
+    const { tag, mergedClsPrefix, cssVars, $slots } = this
     return h(
       tag,
       {
+        role: 'none',
         class: `${mergedClsPrefix}-element`,
         style: cssVars
       },

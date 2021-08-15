@@ -2,16 +2,20 @@ import {
   computed,
   defineComponent,
   h,
+  inject,
   InjectionKey,
   PropType,
   provide,
-  Ref
+  Ref,
+  CSSProperties
 } from 'vue'
 import { TreeNode } from 'treemate'
+import { renderArrow } from '../../popover/src/PopoverBody'
 import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider'
 import NDropdownGroup from './DropdownGroup'
 import { isSubmenuNode, isGroupNode, isDividerNode } from './utils'
+import { dropdownInjectionKey } from './Dropdown'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
@@ -23,13 +27,14 @@ export interface NDropdownMenuInjection {
   hasSubmenuRef: Ref<boolean>
 }
 
-export const dropdownMenuInjectionKey: InjectionKey<NDropdownMenuInjection> = Symbol(
-  'dropdownMenu'
-)
+export const dropdownMenuInjectionKey: InjectionKey<NDropdownMenuInjection> =
+  Symbol('dropdownMenu')
 
 export default defineComponent({
   name: 'DropdownMenu',
   props: {
+    showArrow: Boolean,
+    arrowStyle: [String, Object] as PropType<string | CSSProperties>,
     clsPrefix: {
       type: String,
       required: true
@@ -48,16 +53,19 @@ export default defineComponent({
     }
   },
   setup (props) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const { renderIconRef } = inject(dropdownInjectionKey)!
     provide(dropdownMenuInjectionKey, {
       showIconRef: computed(() => {
+        const renderIcon = renderIconRef.value
         return props.tmNodes.some((tmNode) => {
           const { rawNode } = tmNode
           if (isGroupNode(rawNode)) {
-            return (rawNode as DropdownGroupOption).children.some(
-              (rawChild) => rawChild.icon
+            return (rawNode as DropdownGroupOption).children.some((rawChild) =>
+              renderIcon ? renderIcon(rawChild) : rawChild.icon
             )
           }
-          return rawNode.icon
+          return renderIcon ? renderIcon(rawNode) : rawNode.icon
         })
       }),
       hasSubmenuRef: computed(() => {
@@ -100,6 +108,12 @@ export default defineComponent({
             />
           )
         })}
+        {this.showArrow
+          ? renderArrow({
+            clsPrefix,
+            arrowStyle: this.arrowStyle
+          })
+          : null}
       </div>
     )
   }

@@ -4,7 +4,7 @@
 
 ```html
 <n-space vertical>
-  <n-input v-model:value="value" type="input" placeholder="基本的 Input" />
+  <n-input v-model:value="value" type="text" placeholder="基本的 Input" />
   <n-input
     v-model:value="value"
     type="textarea"
@@ -14,11 +14,13 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: null
+      value: ref(null)
     }
   }
-}
+})
 ```

@@ -2,6 +2,8 @@
 
 在特殊情况下，你可能想手动定位下拉菜单。比如在一块区域右击以弹出下拉菜单。
 
+注意：手动定位时，`trigger` 属性必须为 `'manual'`
+
 ```html
 <div
   style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);"
@@ -12,6 +14,7 @@
 <n-dropdown
   placement="bottom-start"
   @select="handleSelect"
+  trigger="manual"
   :x="x"
   :y="y"
   :options="options"

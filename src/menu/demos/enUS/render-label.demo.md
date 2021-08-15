@@ -1,6 +1,6 @@
-# Render Label
+# Batch Customizing Menu Options
 
-The `render-label` can be used to batch render menu options.
+The `render-label`, `render-icon`, `expand-icon` can be used to batch render menu options.
 
 ```html
 <n-space vertical>
@@ -22,6 +22,8 @@ The `render-label` can be used to batch render menu options.
         :collapsed-icon-size="22"
         :options="menuOptions"
         :render-label="renderMenuLabel"
+        :render-icon="renderMenuIcon"
+        :expand-icon="expandIcon"
       />
     </n-layout-sider>
     <n-layout>
@@ -34,27 +36,17 @@ The `render-label` can be used to batch render menu options.
 ```js
 import { h, ref, defineComponent } from 'vue'
 import { NIcon } from 'naive-ui'
-import {
-  BookOutline as BookIcon,
-  PersonOutline as PersonIcon,
-  WineOutline as WineIcon
-} from '@vicons/ionicons5'
-
-function renderIcon (icon) {
-  return () => h(NIcon, null, { default: () => h(icon) })
-}
+import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
 
 const menuOptions = [
   {
     label: 'Hear the Wind Sing',
     key: 'hear-the-wind-sing',
-    icon: renderIcon(BookIcon),
     href: 'https://en.wikipedia.org/wiki/Hear_the_Wind_Sing'
   },
   {
     label: 'Pinball 1973',
     key: 'pinball-1973',
-    icon: renderIcon(BookIcon),
     disabled: true,
     children: [
       {
@@ -66,13 +58,11 @@ const menuOptions = [
   {
     label: 'A Wild Sheep Chase',
     key: 'a-wild-sheep-chase',
-    disabled: true,
-    icon: renderIcon(BookIcon)
+    disabled: true
   },
   {
     label: 'Dance Dance Dance',
     key: 'Dance Dance Dance',
-    icon: renderIcon(BookIcon),
     children: [
       {
         type: 'group',
@@ -81,20 +71,17 @@ const menuOptions = [
         children: [
           {
             label: 'Narrator',
-            key: 'narrator',
-            icon: renderIcon(PersonIcon)
+            key: 'narrator'
           },
           {
             label: 'Sheep Man',
-            key: 'sheep-man',
-            icon: renderIcon(PersonIcon)
+            key: 'sheep-man'
           }
         ]
       },
       {
         label: 'Beverage',
         key: 'beverage',
-        icon: renderIcon(WineIcon),
         children: [
           {
             label: 'Whisky',
@@ -131,6 +118,16 @@ export default defineComponent({
           return h('a', { href: option.href, target: '_blank' }, option.label)
         }
         return option.label
+      },
+      renderMenuIcon (option) {
+        // return render placeholder for indent
+        if (option.key === 'sheep-man') return true
+        // return falsy, don't render icon placeholder
+        if (option.key === 'food') return null
+        return h(NIcon, null, { default: () => h(BookmarkOutline) })
+      },
+      expandIcon () {
+        return h(NIcon, null, { default: () => h(CaretDownOutline) })
       }
     }
   }

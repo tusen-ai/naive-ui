@@ -1,26 +1,27 @@
 import { PropType } from 'vue'
 
+export interface TagColor {
+  color?: string
+  borderColor?: string
+  textColor?: string
+}
+
 export default {
+  color: Object as PropType<TagColor>,
   type: {
     type: String as PropType<
-    'default' | 'success' | 'info' | 'warning' | 'error'
+    'default' | 'primary' | 'success' | 'info' | 'warning' | 'error'
     >,
     default: 'default'
   },
-  round: {
-    type: Boolean,
-    default: false
-  },
+  round: Boolean,
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
-  closable: {
-    type: Boolean,
-    default: false
-  },
+  closable: Boolean,
   disabled: {
-    type: Boolean,
-    default: false
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   }
 } as const

@@ -174,7 +174,6 @@ const TreeNode = defineComponent({
       expanded: useMemo(() =>
         NTree.mergedExpandedKeysRef.value.includes(props.tmNode.key)
       ),
-      suffix: computed(() => props.tmNode.rawNode.suffix),
       disabled: computed(
         () => NTree.disabledRef.value || props.tmNode.disabled
       ),
@@ -217,13 +216,13 @@ const TreeNode = defineComponent({
       checkable,
       selectable,
       selected,
+      checked,
       highlight,
       draggable,
       blockLine,
       indent,
       disabled,
       pending,
-      suffix,
       internalScrollable
     } = this
     // drag start not inside
@@ -291,6 +290,8 @@ const TreeNode = defineComponent({
           <NTreeNodeContent
             ref="contentInstRef"
             clsPrefix={clsPrefix}
+            checked={checked}
+            selected={selected}
             onClick={
               blockLine || disabled ? undefined : this.handleContentClick
             }
@@ -299,11 +300,8 @@ const TreeNode = defineComponent({
                 ? this.handleDragStart
                 : undefined
             }
-          >
-            {{
-              default: () => [tmNode.rawNode.label, suffix ? suffix() : null]
-            }}
-          </NTreeNodeContent>
+            tmNode={tmNode}
+          />
           {draggable
             ? this.showDropMark
               ? renderDropMark({

@@ -28,10 +28,7 @@ import style from './styles/index.cssr'
 
 const modalProps = {
   ...(useTheme.props as ThemeProps<ModalTheme>),
-  show: {
-    type: Boolean,
-    default: false
-  },
+  show: Boolean,
   unstableShowMask: {
     type: Boolean,
     default: true
@@ -66,6 +63,7 @@ const modalProps = {
   onClose: Function as PropType<() => Promise<boolean> | boolean | any>,
   onPositiveClick: Function as PropType<() => Promise<boolean> | boolean | any>,
   onNegativeClick: Function as PropType<() => Promise<boolean> | boolean | any>,
+  onMaskClick: Function as PropType<(e: MouseEvent) => void>,
   // deprecated
   overlayStyle: {
     type: [String, Object] as PropType<string | CSSProperties | undefined>,
@@ -192,6 +190,10 @@ export default defineComponent({
       if (onAfterHide) onAfterHide()
     }
     function handleClickoutside (e: MouseEvent): void {
+      const { onMaskClick } = props
+      if (onMaskClick) {
+        onMaskClick(e)
+      }
       if (props.maskClosable) {
         if (containerRef.value?.contains(e.target as Node)) {
           doUpdateShow(false)

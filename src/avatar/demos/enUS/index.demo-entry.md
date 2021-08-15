@@ -13,15 +13,20 @@ icon
 name-size
 ```
 
-## Props
+## API
+
+### Avatar Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| color | `string` | `undefined` | The background color of the avatar. |
+| object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | Object-fit type of the image in the container. |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar's size. |
 | src | `string` | `undefined` | Avatar's source. |
 | round | `boolean` | `false` | Whether to display a rounded avatar. |
+| on-error | `(e: Event) => void` | `undefined` | Callback executed when the avatar image fails to load. |
 
-## Slots
+### Avatar Slots
 
 | Name    | Parameters | Description                       |
 | ------- | ---------- | --------------------------------- |

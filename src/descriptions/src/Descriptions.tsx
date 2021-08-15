@@ -9,7 +9,13 @@ import {
 import { useCompitable } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, getSlot, getVNodeChildren, createKey } from '../../_utils'
+import {
+  warn,
+  getSlot,
+  getVNodeChildren,
+  createKey,
+  flatten
+} from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { descriptionsLight } from '../styles'
 import type { DescriptionsTheme } from '../styles'
@@ -42,7 +48,9 @@ const descriptionProps = {
   bordered: {
     type: Boolean,
     default: false
-  }
+  },
+  labelStyle: [Object, String] as PropType<string | CSSProperties>,
+  contentStyle: [Object, String] as PropType<string | CSSProperties>
 } as const
 
 export type DescriptionProps = ExtractPublicPropTypes<typeof descriptionProps>
@@ -82,14 +90,10 @@ export default defineComponent({
             borderRadius,
             lineHeight,
             [createKey('fontSize', size)]: fontSize,
-            [createKey(
-              bordered ? 'thPaddingBordered' : 'thPadding',
-              size
-            )]: thPadding,
-            [createKey(
-              bordered ? 'tdPaddingBordered' : 'tdPadding',
-              size
-            )]: tdPadding
+            [createKey(bordered ? 'thPaddingBordered' : 'thPadding', size)]:
+              thPadding,
+            [createKey(bordered ? 'tdPaddingBordered' : 'tdPadding', size)]:
+              tdPadding
           }
         } = themeRef.value
         return {
@@ -117,7 +121,8 @@ export default defineComponent({
     }
   },
   render () {
-    const children = getSlot(this, 'default', [])
+    const defaultSlots = this.$slots.default
+    const children = defaultSlots ? flatten(defaultSlots()) : []
     const memorizedLength = children.length
     const {
       compitableColumn,
@@ -131,7 +136,7 @@ export default defineComponent({
     } = this
     const filteredChildren: VNode[] = children.filter((child) =>
       isDescriptionsItem(child)
-    ) as VNode[]
+    )
     if (__DEV__ && memorizedLength !== filteredChildren.length) {
       warn(
         'descriptions',
@@ -159,12 +164,15 @@ export default defineComponent({
       const itemSpan = (props.span as number) || 1
       const memorizedSpan = state.span
       state.span += itemSpan
+      const labelStyle = props.labelStyle || props['label-style'] || this.labelStyle
+      const contentStyle = props.contentStyle || props['content-style'] || this.contentStyle
       if (labelPlacement === 'left') {
         if (bordered) {
           state.row.push(
             <th
               class={`${mergedClsPrefix}-descriptions-table-header`}
               colspan={1}
+              style={labelStyle}
             >
               {itemLabel}
             </th>,
@@ -175,6 +183,7 @@ export default defineComponent({
                   ? (compitableColumn - memorizedSpan) * 2 + 1
                   : itemSpan * 2 - 1
               }
+              style={contentStyle}
             >
               {itemChildren}
             </td>
@@ -191,6 +200,7 @@ export default defineComponent({
             >
               <span
                 class={`${mergedClsPrefix}-descriptions-table-content__label`}
+                style={labelStyle}
               >
                 {[
                   ...itemLabel,
@@ -201,6 +211,7 @@ export default defineComponent({
               </span>
               <span
                 class={`${mergedClsPrefix}-descriptions-table-content__content`}
+                style={contentStyle}
               >
                 {itemChildren}
               </span>
@@ -215,6 +226,7 @@ export default defineComponent({
           <th
             class={`${mergedClsPrefix}-descriptions-table-header`}
             colspan={colspan}
+            style={labelStyle}
           >
             {itemLabel}
           </th>
@@ -223,6 +235,7 @@ export default defineComponent({
           <td
             class={`${mergedClsPrefix}-descriptions-table-content`}
             colspan={colspan}
+            style={contentStyle}
           >
             {itemChildren}
           </td>

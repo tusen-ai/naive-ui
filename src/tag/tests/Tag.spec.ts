@@ -6,7 +6,7 @@ describe('n-tag', () => {
     mount(NTag)
   })
 
-  it('should work with bordered prop', () => {
+  it('should work with `bordered` prop', () => {
     const wrapper = mount(NTag, {
       props: {
         bordered: true
@@ -28,7 +28,7 @@ describe('n-tag', () => {
     expect(onClick).toBeCalled()
   })
 
-  it('should be checkable', async () => {
+  it('should be `checkable` prop', async () => {
     const wrapper = mount(NTag, {
       props: {
         checkable: true
@@ -42,7 +42,7 @@ describe('n-tag', () => {
     expect(wrapper.find('.n-tag').classes()).not.toContain('n-tag--checked')
   })
 
-  it('should work with on-update:checked', () => {
+  it('should work with `on-update:checked` prop', () => {
     const onChecked = jest.fn()
     const wrapper = mount(NTag, {
       props: {
@@ -55,7 +55,7 @@ describe('n-tag', () => {
     expect(onChecked).toBeCalled()
   })
 
-  it('should work with closable prop', () => {
+  it('should work with `closable` prop', () => {
     const onClose = jest.fn()
     const wrapper = mount(NTag, {
       props: {
@@ -69,7 +69,7 @@ describe('n-tag', () => {
     expect(onClose).toBeCalled()
   })
 
-  it('should work with disabled prop', async () => {
+  it('should work with `disabled` prop', async () => {
     const onClose = jest.fn()
     const wrapper = mount(NTag, {
       props: {
@@ -84,7 +84,7 @@ describe('n-tag', () => {
     expect(onClose).not.toBeCalled()
   })
 
-  it('should work with round prop', () => {
+  it('should work with `round` prop', () => {
     const wrapper = mount(NTag, {
       props: {
         round: true
@@ -94,7 +94,7 @@ describe('n-tag', () => {
     expect(wrapper.find('.n-tag').classes()).toContain('n-tag--round')
   })
 
-  it('should work with size prop', () => {
+  it('should work with `size` prop', () => {
     const wrapper = mount(NTag)
 
     wrapper.setProps({ size: 'small' })
@@ -107,7 +107,7 @@ describe('n-tag', () => {
     expect(wrapper.find('.n-tag').attributes('style')).toMatchSnapshot()
   })
 
-  it('should work with type prop', () => {
+  it('should work with `type` prop', () => {
     const wrapper = mount(NTag)
 
     wrapper.setProps({ type: 'default' })
@@ -136,5 +136,26 @@ describe('n-tag', () => {
     expect(wrapper.find('.n-tag__content').exists()).toBe(true)
     expect(wrapper.find('.n-tag__content').element.textContent).toBe('default')
     expect(wrapper.find('.n-tag__content').html()).toMatchSnapshot()
+  })
+
+  it('should work with `color` prop', () => {
+    const wrapper = mount(NTag, {
+      props: {
+        color: {
+          color: '#ccc',
+          textColor: '#555',
+          borderColor: 'rgb(85, 85, 85)'
+        }
+      }
+    })
+    expect(wrapper.find('.n-tag').attributes('style')).toContain(
+      '--color: #ccc;'
+    )
+    expect(wrapper.find('.n-tag').attributes('style')).toContain(
+      '--text-color: #555;'
+    )
+    expect(wrapper.find('.n-tag__border').attributes('style')).toContain(
+      'border-color: rgb(85, 85, 85);'
+    )
   })
 })

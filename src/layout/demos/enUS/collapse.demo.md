@@ -15,8 +15,8 @@ Use `show-trigger` to use builtin button.
       collapse-mode="width"
       :collapsed-width="120"
       :width="240"
-      show-trigger="arrow-circle"
-      content-style="padding: 24px"
+      show-trigger="bar"
+      content-style="padding: 24px;"
       bordered
     >
       <p>
@@ -24,7 +24,7 @@ Use `show-trigger` to use builtin button.
         Bridge
       </p>
     </n-layout-sider>
-    <n-layout-content content-style="padding: 24px"
+    <n-layout-content content-style="padding: 24px;"
       >Pingshan Road</n-layout-content
     >
   </n-layout>
@@ -34,12 +34,12 @@ Use `show-trigger` to use builtin button.
       :collapsed-width="120"
       :width="240"
       show-trigger="arrow-circle"
-      content-style="padding: 24px"
+      content-style="padding: 24px;"
       bordered
     >
       <n-h2>Handian Bridge</n-h2>
     </n-layout-sider>
-    <n-layout-content content-style="padding: 24px"
+    <n-layout-content content-style="padding: 24px;"
       >Pingshan Road</n-layout-content
     >
   </n-layout>

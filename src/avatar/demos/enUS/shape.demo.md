@@ -5,22 +5,22 @@ Avatar can be circle shaped.
 ```html
 <n-space align="flex-end">
   <n-avatar
-    circle
+    round
     size="small"
     src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
   />
   <n-avatar
-    circle
+    round
     size="medium"
     src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
   />
   <n-avatar
-    circle
+    round
     size="large"
     src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
   />
   <n-avatar
-    circle
+    round
     :size="48"
     src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
   />

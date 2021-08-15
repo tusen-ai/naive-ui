@@ -15,11 +15,13 @@ By default, the preset of `n-dynamic-input` is `input`.
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: ['', '', '']
+      value: ref(['', '', ''])
     }
   }
-}
+})
 ```

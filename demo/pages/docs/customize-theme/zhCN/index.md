@@ -2,9 +2,11 @@
 
 # 调整主题
 
-naive-ui 通过使用 `n-config-provider` 调整主题。
+Naive UI 通过使用 `n-config-provider` 调整主题。
 
 默认情况下所有组件均为亮色主题，无需任何配置。
+
+了解更多关于 `n-config-provider` 的信息，参见 [全局化配置](../components/config-provider)。
 
 ## 使用暗色主题
 

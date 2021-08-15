@@ -21,7 +21,13 @@ export type OnChange = (data: {
   fileList: FileInfo[]
   event: ProgressEvent | Event | undefined
 }) => void
-export type OnFinish = ({ file }: { file: FileInfo }) => FileInfo | undefined
+export type OnFinish = ({
+  file,
+  event
+}: {
+  file: FileInfo
+  event: Event
+}) => FileInfo | undefined
 export type OnRemove = (data: {
   file: FileInfo
   fileList: FileInfo[]
@@ -48,6 +54,7 @@ export type OnUpdateFileList = (fileList: FileInfo[]) => void
 export interface UploadInjection {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<UploadTheme>>
+  disabledRef: Ref<boolean>
   showCancelButtonRef: Ref<boolean>
   showRemoveButtonRef: Ref<boolean>
   showDownloadButtonRef: Ref<boolean>

@@ -36,9 +36,12 @@ ajax-usage
 virtual
 custom-filter-menu
 tree
+flex-height
 ```
 
-## Props
+## API
+
+### DataTable Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -50,21 +53,22 @@ tree
 | columns | `Array<DataTableColumn>` | `[]` | Columns to display. |
 | data | `Array<object>` | `[]` | Data to display. |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | The key value selected by default. |
+| flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |
 | indent | `number` | `16` | Indent of row content when using tree data. |
 | loading | `boolean` | `false` | Whether to display loading status. |
 | max-height | `number \| string` | `undefined` | The max-height of the table content. Can be a CSS value. |
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Props) |
-| paging | `boolean` | `true` | If data-table do automatic paging. You may set it to `false` in async usage. |
+| remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `false` in async usage. |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string \| object` | `undefined` | Class name of each row. |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |
-| single-column | `boolean` | `false` | Whether to display as a column (when true, each column has border-bottom). |
+| single-column | `boolean` | `false` | Whether to display as a column (when true, each column has border-right). |
 | single-line | `boolean` | `true` | Whether to display as a line (when true, each row has border-bottom). |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |
 | summary | `CreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#CreateSummary-Type">CreateSummary Type</n-a>. |
-| table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellipsis` or `max-height` are set, it will always be `'fixed'` regardless of what you set. |
+| table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellipsis` or `max-height` or `flex-height` are set, it will always be `'fixed'` regardless of what you set. |
 | virtual-scroll | `boolean` | `false` | Whether to use virtual scroll to deal with large data. Make sure `max-height` is set before using it. |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. |
 | on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: DataTableColumn)` | `undefined` | The callback function triggered when the filters data changes. |
@@ -72,29 +76,7 @@ tree
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function triggered when the page-size changes. |
 | on-update:sorter | `(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => void` | `undefined` | If there won't be a active sorter after change, `options` will be `null`. |
 
-## Methods
-
-These methods can help you control table in an uncontrolled manner. However, it's not recommended to use them to implement some async operations. If async operations is needed, use table in a **controlled** manner.
-
-| Name | Type | Description |
-| --- | --- | --- |
-| clearFilters | `() => void` | Clear all filter state. |
-| clearSorter | `() => void` | Clear all sort state. |
-| filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }) => void` | Set the active filters of the table. |
-| page | `(page: number) => void` | Manually set the page. |
-| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | If columnKey set to `null`, it is the same as clearSorter. |
-
-## Slots
-
-### Slots
-
-| Name  | Type | Description                                     |
-| ----- | ---- | ----------------------------------------------- |
-| empty | `()` | Custom description when data of table is empty. |
-
-## API
-
-### DataTableColumn Properties
+#### DataTableColumn Properties
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -128,9 +110,9 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | title | `string \| (() => VNodeChild)` | `undefined` | Column title, Can be a render function. |
 | titleRowSpan | `number` | `undefined` | The number of cells occupied by the title row. |
 | type | `'selection' \| 'expand'` | `undefined` | Column type. |
-| width | `number \| string` | `undefined` | Width of the column, **required** when fixed. |
+| width | `number` | `undefined` | Width of the column, **required** when fixed. |
 
-### CreateSummary Type
+#### CreateSummary Type
 
 ```__ts
 type CreateSummary = (
@@ -151,3 +133,21 @@ type CreateSummary = (
       }
     }
 ```
+
+### DataTable Methods
+
+These methods can help you control table in an uncontrolled manner. However, it's not recommended to use them to implement some async operations. If async operations is needed, use table in a **controlled** manner.
+
+| Name | Type | Description |
+| --- | --- | --- |
+| clearFilters | `() => void` | Clear all filter state. |
+| clearSorter | `() => void` | Clear all sort state. |
+| filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }) => void` | Set the active filters of the table. |
+| page | `(page: number) => void` | Manually set the page. |
+| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | If columnKey set to `null`, it is the same as clearSorter. |
+
+### DataTable Slots
+
+| Name  | Type | Description                                     |
+| ----- | ---- | ----------------------------------------------- |
+| empty | `()` | Custom description when data of table is empty. |

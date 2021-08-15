@@ -15,12 +15,14 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: false,
-      indeterminate: false
+      value: ref(false),
+      indeterminate: ref(false)
     }
   }
-}
+})
 ```

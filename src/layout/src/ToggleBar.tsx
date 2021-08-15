@@ -6,22 +6,12 @@ export default defineComponent({
       type: String,
       required: true
     },
-    onClick: Function as PropType<(e: MouseEvent) => void>,
-    collapsed: {
-      type: Boolean,
-      default: false
-    }
+    onClick: Function as PropType<(e: MouseEvent) => void>
   },
   render () {
     const { clsPrefix } = this
     return (
-      <div
-        onClick={this.onClick}
-        class={[
-          `${clsPrefix}-layout-toggle-bar`,
-          this.collapsed && `${clsPrefix}-layout-toggle-bar--collapsed`
-        ]}
-      >
+      <div onClick={this.onClick} class={`${clsPrefix}-layout-toggle-bar`}>
         <div class={`${clsPrefix}-layout-toggle-bar__top`} />
         <div class={`${clsPrefix}-layout-toggle-bar__bottom`} />
       </div>

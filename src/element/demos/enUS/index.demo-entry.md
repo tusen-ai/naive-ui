@@ -16,6 +16,6 @@ basic
 
 ## Slots
 
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `()`       |             |
+| Name    | Parameters | Description                 |
+| ------- | ---------- | --------------------------- |
+| default | `()`       | The content of the element. |

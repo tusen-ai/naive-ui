@@ -17,6 +17,7 @@
 
 - [Discord](https://discord.gg/Pqv7Mev5Dd)
 - DingTalk Group 33482509
+- [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
 ## Features
 
@@ -66,7 +67,7 @@ Naive UI recommends using [xicons](https://www.xicons.org) as icon library.
 
 ### Design Resources
 
-Working in progress.
+[Naive UI (Sketch)](https://naive-ui.oss-accelerate.aliyuncs.com/NaiveUI-Design-Library%28Square-Corner%29.sketch).
 
 ## Contributing
 

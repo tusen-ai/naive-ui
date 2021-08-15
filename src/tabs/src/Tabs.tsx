@@ -431,9 +431,11 @@ export default defineComponent({
                                       index !== 0 && !mergedJustifyContent
                                     }
                                   >
-                                    {{
-                                      default: tabPaneVNode.children.tab
-                                    }}
+                                    {tabPaneVNode.children
+                                      ? {
+                                          default: tabPaneVNode.children.tab
+                                        }
+                                      : undefined}
                                   </Tab>
                                 )
                               }

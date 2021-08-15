@@ -13,7 +13,7 @@
         v-model:value="value.num"
         style="margin-right: 12px; width: 160px;"
       />
-      <n-input v-model:value="value.string" type="input" />
+      <n-input v-model:value="value.string" type="text" />
     </div>
   </div>
 </n-dynamic-input>
@@ -23,26 +23,26 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      customValue: [
+      customValue: ref([
         {
           isCheck: true,
           num: 1,
           string: '一个字符串'
         }
-      ]
-    }
-  },
-  methods: {
-    onCreate () {
-      return {
-        isCheck: false,
-        num: 1,
-        string: '一个字符串'
+      ]),
+      onCreate () {
+        return {
+          isCheck: false,
+          num: 1,
+          string: '一个字符串'
+        }
       }
     }
   }
-}
+})
 ```

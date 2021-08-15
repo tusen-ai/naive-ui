@@ -20,7 +20,7 @@ import {
 import { useMergedState } from 'vooks'
 import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
-import { NBaseClear, NBaseIcon } from '../../_internal'
+import { NBaseClear, NBaseIcon, NBaseSuffix } from '../../_internal'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -46,8 +46,8 @@ const inputProps = {
     default: undefined
   },
   type: {
-    type: String as PropType<'input' | 'textarea' | 'password'>,
-    default: 'input'
+    type: String as PropType<'text' | 'textarea' | 'password'>,
+    default: 'text'
   },
   placeholder: [Array, String] as PropType<string | [string, string]>,
   defaultValue: {
@@ -55,7 +55,10 @@ const inputProps = {
     default: null
   },
   value: [String, Array] as PropType<null | string | [string, string]>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   size: String as PropType<Size>,
   rows: {
     type: [Number, String] as PropType<number | string>,
@@ -85,12 +88,15 @@ const inputProps = {
   },
   autofocus: Boolean,
   inputProps: Object as PropType<TextareaHTMLAttributes | InputHTMLAttributes>,
-
   resizable: {
     type: Boolean,
     default: true
   },
   showCount: Boolean,
+  loading: {
+    type: Boolean,
+    default: undefined
+  },
   onMousedown: Function as PropType<(e: MouseEvent) => void>,
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
   onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
@@ -160,7 +166,7 @@ export default defineComponent({
     )
     // form-item
     const formItem = useFormItem(props)
-    const { mergedSizeRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     // states
     const focusedRef = ref(false)
     const hoverRef = ref(false)
@@ -206,7 +212,8 @@ export default defineComponent({
     // clear
     const showClearButton = computed(() => {
       if (
-        props.disabled ||
+        mergedDisabledRef.value ||
+        props.readonly ||
         !props.clearable ||
         (!mergedFocusRef.value && !hoverRef.value)
       ) {
@@ -393,7 +400,7 @@ export default defineComponent({
       }
       // force update to sync input's view with value
       // if not set, after input, input value won't sync with dom input value
-      vm.$forceUpdate()
+      (vm.$forceUpdate as any)()
     }
     function handleInputBlur (e: FocusEvent): void {
       doUpdateValueBlur(e)
@@ -504,15 +511,15 @@ export default defineComponent({
       hoverRef.value = false
     }
     function handlePasswordToggleClick (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       passwordVisibleRef.value = !passwordVisibleRef.value
     }
     function handlePasswordToggleMousedown (e: MouseEvent): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       e.preventDefault()
     }
     function handlePasswordToggleMouseup (e: MouseEvent): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       e.preventDefault()
     }
     function handleWrapperKeyDown (e: KeyboardEvent): void {
@@ -553,7 +560,7 @@ export default defineComponent({
       }
     }
     function focus (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (props.passivelyActivated) {
         wrapperElRef.value?.focus()
       } else {
@@ -567,7 +574,7 @@ export default defineComponent({
       }
     }
     function activate (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (textareaElRef.value) textareaElRef.value.focus()
       else if (inputElRef.value) inputElRef.value.focus()
     }
@@ -660,6 +667,7 @@ export default defineComponent({
       activated: activatedRef,
       showClearButton,
       mergedSize: mergedSizeRef,
+      mergedDisabled: mergedDisabledRef,
       textDecorationStyle: textDecorationStyleRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
@@ -727,6 +735,9 @@ export default defineComponent({
             countTextColor,
             iconColorHover,
             iconColorPressed,
+            loadingColor,
+            loadingColorError,
+            loadingColorWarning,
             [createKey('padding', size)]: padding,
             [createKey('fontSize', size)]: fontSize,
             [createKey('height', size)]: height
@@ -757,6 +768,7 @@ export default defineComponent({
           '--color-focus': colorFocus,
           '--text-color-disabled': textColorDisabled,
           '--box-shadow-focus': boxShadowFocus,
+          '--loading-color': loadingColor,
           // form warning
           '--caret-color-warning': caretColorWarning,
           '--color-focus-warning': colorFocusWarning,
@@ -764,6 +776,7 @@ export default defineComponent({
           '--border-warning': borderWarning,
           '--border-focus-warning': borderFocusWarning,
           '--border-hover-warning': borderHoverWarning,
+          '--loading-color-warning': loadingColorWarning,
           // form error
           '--caret-color-error': caretColorError,
           '--color-focus-error': colorFocusError,
@@ -771,6 +784,7 @@ export default defineComponent({
           '--border-error': borderError,
           '--border-focus-error': borderFocusError,
           '--border-hover-error': borderHoverError,
+          '--loading-color-error': loadingColorError,
           // clear-button
           '--clear-color': clearColor,
           '--clear-size': clearSize,
@@ -793,7 +807,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-input`,
           {
-            [`${mergedClsPrefix}-input--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-input--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-input--textarea`]: this.type === 'textarea',
             [`${mergedClsPrefix}-input--resizable`]:
               this.resizable && !this.autosize,
@@ -807,7 +821,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
         tabindex={
-          !this.disabled && this.passivelyActivated && !this.activated
+          !this.mergedDisabled && this.passivelyActivated && !this.activated
             ? 0
             : undefined
         }
@@ -841,7 +855,7 @@ export default defineComponent({
                 rows={Number(this.rows)}
                 placeholder={this.placeholder as string | undefined}
                 value={this.mergedValue as string | undefined}
-                disabled={this.disabled}
+                disabled={this.mergedDisabled}
                 maxlength={this.maxlength as any}
                 minlength={this.minlength as any}
                 readonly={this.readonly as any}
@@ -893,7 +907,7 @@ export default defineComponent({
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
                 placeholder={this.mergedPlaceholder[0]}
-                disabled={this.disabled}
+                disabled={this.mergedDisabled}
                 maxlength={this.maxlength as any}
                 minlength={this.minlength as any}
                 value={
@@ -930,10 +944,10 @@ export default defineComponent({
           (this.$slots.suffix ||
             this.clearable ||
             this.showCount ||
-            this.showPasswordToggle) ? (
+            this.showPasswordToggle ||
+            this.loading !== undefined) ? (
             <div class={`${mergedClsPrefix}-input__suffix`}>
               {[
-                renderSlot(this.$slots, 'suffix'),
                 this.clearable || this.$slots.clear ? (
                   <NBaseClear
                     clsPrefix={mergedClsPrefix}
@@ -942,6 +956,16 @@ export default defineComponent({
                   >
                     {{ default: () => renderSlot(this.$slots, 'clear') }}
                   </NBaseClear>
+                ) : null,
+                renderSlot(this.$slots, 'suffix'),
+                this.loading !== undefined ? (
+                  <NBaseSuffix
+                    clsPrefix={mergedClsPrefix}
+                    loading={this.loading}
+                    showArrow={false}
+                    showClear={false}
+                    style={this.cssVars as CSSProperties}
+                  />
                 ) : null,
                 this.showCount && this.type !== 'textarea' ? (
                   <WordCount />
@@ -983,7 +1007,7 @@ export default defineComponent({
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
                 placeholder={this.mergedPlaceholder[1]}
-                disabled={this.disabled}
+                disabled={this.mergedDisabled}
                 maxlength={this.maxlength as any}
                 minlength={this.minlength as any}
                 value={
@@ -1006,7 +1030,6 @@ export default defineComponent({
             </div>
             <div class={`${mergedClsPrefix}-input__suffix`}>
               {[
-                renderSlot(this.$slots, 'suffix'),
                 this.clearable || this.$slots.clear ? (
                   <NBaseClear
                     clsPrefix={mergedClsPrefix}
@@ -1015,7 +1038,8 @@ export default defineComponent({
                   >
                     {{ default: () => renderSlot(this.$slots, 'clear') }}
                   </NBaseClear>
-                ) : null
+                ) : null,
+                renderSlot(this.$slots, 'suffix')
               ]}
             </div>
           </div>

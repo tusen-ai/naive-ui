@@ -13,20 +13,22 @@ indent
 
 ## Props
 
-| Name             | Type      | Default     | Description |
-| ---------------- | --------- | ----------- | ----------- |
-| content-indented | `boolean` | `false`     |             |
-| content          | `string`  | `undefined` |             |
-| description      | `string`  | `undefined` |             |
-| title-extra      | `string`  | `undefined` |             |
-| title            | `string`  | `undefined` |             |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| content-indented | `boolean` | `false` | Whether to enable content indentation. |
+| content | `string` | `undefined` | Content area. |
+| description | `string` | `undefined` | Description information. |
+| title-extra | `string` | `undefined` | Additional information for the title. |
+| title | `string` | `undefined` | Title information. |
 
 ## Slots
 
-| Name         | Parameters | Description |
-| ------------ | ---------- | ----------- |
-| action       | `()`       |             |
-| default      | `()`       |             |
-| description  | `()`       |             |
-| header-extra | `()`       |             |
-| header       | `()`       |             |
+| Name         | Parameters | Description          |
+| ------------ | ---------- | -------------------- |
+| action       | `()`       | Action's slot.       |
+| avatar       | `()`       | Avatar's slot.       |
+| default      | `()`       | Content's slot.      |
+| description  | `()`       | Description's slot.  |
+| footer       | `()`       | Footer's slot.       |
+| header-extra | `()`       | Header extra's slot. |
+| header       | `()`       | Header's slot.       |

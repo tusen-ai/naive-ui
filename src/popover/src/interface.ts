@@ -1,6 +1,6 @@
 import { Ref, InjectionKey, CSSProperties, VNode } from 'vue'
 
-export type PopoverTrigger = 'click' | 'hover' | 'manual'
+export type PopoverTrigger = 'click' | 'hover' | 'focus' | 'manual'
 
 export interface PopoverInst {
   syncPosition: () => void

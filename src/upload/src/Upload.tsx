@@ -9,7 +9,7 @@ import {
   CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   ExtractPublicPropTypes,
@@ -58,7 +58,7 @@ function createXhrHandlers (
       })
       XhrMap.delete(file.id)
       fileAfterChange =
-        inst.onFinish?.({ file: fileAfterChange }) || fileAfterChange
+        inst.onFinish?.({ file: fileAfterChange, event: e }) || fileAfterChange
       doChange(fileAfterChange, e)
     },
     handleXHRAbort (e) {
@@ -194,10 +194,17 @@ const uploadProps = {
     default: 'POST'
   },
   multiple: Boolean,
+  showFileList: {
+    type: Boolean,
+    default: true
+  },
   data: [Object, Function] as PropType<FuncOrRecordOrUndef>,
   headers: [Object, Function] as PropType<FuncOrRecordOrUndef>,
   withCredentials: Boolean,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   onChange: Function as PropType<OnChange>,
   onRemove: Function as PropType<OnRemove>,
   onFinish: Function as PropType<OnFinish>,
@@ -251,6 +258,8 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const formItem = useFormItem(props)
+    const { mergedDisabledRef } = formItem
     const uncontrolledFileListRef = ref(props.defaultFileList)
     const controlledFileListRef = toRef(props, 'fileList')
     const inputElRef = ref<HTMLInputElement | null>(null)
@@ -267,7 +276,7 @@ export default defineComponent({
       inputElRef.value?.click()
     }
     function handleTriggerClick (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       openFileDialog()
     }
     function handleTriggerDragOver (e: DragEvent): void {
@@ -284,7 +293,7 @@ export default defineComponent({
     }
     function handleTriggerDrop (e: DragEvent): void {
       e.preventDefault()
-      if (!draggerInsideRef.value || props.disabled) return
+      if (!draggerInsideRef.value || mergedDisabledRef.value) return
       const dataTransfer = e.dataTransfer
       const files = dataTransfer?.files
       if (files) {
@@ -411,6 +420,7 @@ export default defineComponent({
     provide(uploadInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
+      disabledRef: mergedDisabledRef,
       showCancelButtonRef: toRef(props, 'showCancelButton'),
       showDownloadButtonRef: toRef(props, 'showDownloadButton'),
       showRemoveButtonRef: toRef(props, 'showRemoveButton'),
@@ -427,6 +437,7 @@ export default defineComponent({
       draggerInsideRef,
       inputElRef,
       mergedFileList: mergedFileListRef,
+      mergedDisabled: mergedDisabledRef,
       mergedTheme: themeRef,
       dragOver: dragOverRef,
       handleTriggerDrop,
@@ -492,7 +503,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-upload--dragger-inside`]:
               draggerInsideRef.value,
             [`${mergedClsPrefix}-upload--drag-over`]: this.dragOver,
-            [`${mergedClsPrefix}-upload--disabled`]: this.disabled
+            [`${mergedClsPrefix}-upload--disabled`]: this.mergedDisabled
           }
         ]}
         style={this.cssVars as CSSProperties}
@@ -515,23 +526,25 @@ export default defineComponent({
         >
           {this.$slots}
         </div>
-        <div
-          class={`${mergedClsPrefix}-upload-file-list`}
-          style={this.fileListStyle}
-        >
-          <NFadeInExpandTransition group>
-            {{
-              default: () =>
-                this.mergedFileList.map((file) => (
-                  <NUploadFile
-                    clsPrefix={mergedClsPrefix}
-                    key={file.id}
-                    file={file}
-                  />
-                ))
-            }}
-          </NFadeInExpandTransition>
-        </div>
+        {this.showFileList && (
+          <div
+            class={`${mergedClsPrefix}-upload-file-list`}
+            style={this.fileListStyle}
+          >
+            <NFadeInExpandTransition group>
+              {{
+                default: () =>
+                  this.mergedFileList.map((file) => (
+                    <NUploadFile
+                      clsPrefix={mergedClsPrefix}
+                      key={file.id}
+                      file={file}
+                    />
+                  ))
+              }}
+            </NFadeInExpandTransition>
+          </div>
+        )}
       </div>
     )
   }
