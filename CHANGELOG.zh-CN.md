@@ -11,6 +11,7 @@
 - `n-message-provider` 新增 `container-style` 属性
 - `n-message-provider` 新增 `placement` 属性
 - `n-message` 增加类用于区分类型
+- `n-date-picker` 新增 `shortcuts` 属性，关闭 [#280](https://github.com/TuSimple/naive-ui/issues/280)
 
 ### Fixes
 
@@ -25,7 +26,6 @@
 - `n-message-provider` 新增 `closable` 属性，关闭 [#795](https://github.com/TuSimple/naive-ui/issues/795)
 - `n-tree-select` 新增 `show-path` 属性，关闭[#625](https://github.com/TuSimple/naive-ui/issues/623)
 - `n-layout` 增加 `sider-placement` 属性，关闭 [#566](https://github.com/TuSimple/naive-ui/issues/566)
-- `n-date-picker` 新增 `shortcuts` 属性，关闭 [#280](https://github.com/TuSimple/naive-ui/issues/280)
 
 ### Fixes
 

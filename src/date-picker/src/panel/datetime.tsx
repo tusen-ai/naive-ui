@@ -140,25 +140,29 @@ export default defineComponent({
         {this.actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
-              {shortcuts && Object.keys(shortcuts).map((key) =>
-                <NxButton
-                  size="tiny"
-                  onMouseenter={() => {
-                    this.cachePendingValue()
-                    this.doUpdateValue(shortcuts[key], false)
-                  }}
-                  onClick={() => {
-                    this.doUpdateValue(shortcuts[key], false)
-                    this.clearPendingValue()
-                    this.handleConfirmClick()
-                  }}
-                  onMouseleave={() => {
-                    this.restorePendingValue()
-                  }}
-                >
-                  {{ default: () => key }}
-                </NxButton>
-              )}
+              {shortcuts &&
+                Object.keys(shortcuts).map((key) => {
+                  const shortcut = shortcuts[key]
+                  return Array.isArray(shortcut) ? null : (
+                    <NxButton
+                      size="tiny"
+                      onMouseenter={() => {
+                        this.cachePendingValue()
+                        this.doUpdateValue(shortcut, false)
+                      }}
+                      onClick={() => {
+                        this.doUpdateValue(shortcut, false)
+                        this.clearPendingValue()
+                        this.handleConfirmClick()
+                      }}
+                      onMouseleave={() => {
+                        this.restorePendingValue()
+                      }}
+                    >
+                      {{ default: () => key }}
+                    </NxButton>
+                  )
+                })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear') ? (
