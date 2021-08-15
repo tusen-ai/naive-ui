@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.16.3 (2021-08-16)
 
 ### i18n
 
@@ -35,7 +35,7 @@
 - Fix `n-data-table` When selectAll is selected, the state display of selectAll should not contain disabled rows, closes [#778](https://github.com/TuSimple/naive-ui/issues/778).
 - Fix `n-color-picker`'s `on-complete` callback's argument `value` is incorrect, closes [#748](https://github.com/TuSimple/naive-ui/issues/748).
 
-## 2.16.1 (2020-08-06)
+## 2.16.1 (2021-08-06)
 
 ### Feats
 
