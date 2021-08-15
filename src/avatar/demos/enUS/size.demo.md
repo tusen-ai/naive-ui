@@ -1,6 +1,6 @@
 # Size
 
-Avatar has `small`, `medium` and `large` size. You could alse custom size by a px number.
+Avatar has `small`, `medium` and `large` size. You could also use a custom size of px number.
 
 ```html
 <n-space align="flex-end">
