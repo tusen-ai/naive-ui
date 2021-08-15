@@ -10,7 +10,6 @@ gap
 offset
 responsive
 collapse
-grid-basic-debug
 ```
 
 ## Props
