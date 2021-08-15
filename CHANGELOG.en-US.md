@@ -2,8 +2,20 @@
 
 ## Pending
 
+### Localization
+
+- Add ruRU locale [#852](https://github.com/TuSimple/naive-ui/pull/852).
+
+
+### Feats
+
+- `n-message-provider` add `container-style` prop.
+- `n-message-provider` add `placement` prop.
+
 ### Fixes
 
+- Fix `n-rate` half star overlays star background in dark mode.
+- Fix `n-menu` use `render-icon` render error when return true.
 - Fix `n-space` render empty placeholder while use `v-if`, closes [#824](https://github.com/TuSimple/naive-ui/issues/824).
 
 ## 2.16.2 (2021-08-09)
