@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-message-provider` 新增 `container-style` 属性
+- `n-message-provider` 新增 `placement` 属性
 
 ### Fixes
 

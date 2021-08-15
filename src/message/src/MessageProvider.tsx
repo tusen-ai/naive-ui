@@ -72,6 +72,17 @@ const messageProviderProps = {
     default: 3000
   },
   max: Number,
+  placement: {
+    type: String as PropType<
+    | 'top'
+    | 'top-left'
+    | 'top-right'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
+    >,
+    default: 'top'
+  },
   closable: Boolean,
   containerStyle: [String, Object] as PropType<string | CSSProperties>
 }
@@ -164,7 +175,10 @@ export default defineComponent({
         {this.messageList.length ? (
           <Teleport to={this.to ?? 'body'}>
             <div
-              class={`${this.mergedClsPrefix}-message-container`}
+              class={[
+                `${this.mergedClsPrefix}-message-container`,
+                `${this.mergedClsPrefix}-message-container--${this.placement}`
+              ]}
               key="message-container"
               style={this.containerStyle}
             >
