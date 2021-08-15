@@ -4,6 +4,7 @@ import {
   createDataKey,
   formatLength,
   getTitleAttribute,
+  keep,
   keysOf,
   largerSize,
   smallerSize
@@ -92,6 +93,18 @@ describe('vue', () => {
   })
 
   it('should work with keep', () => {
+    const test = { c: 3 }
+    const test2 = { a: 1, b: 2, d: test }
+    expect(JSON.stringify(keep(test, ['c']))).toBe(JSON.stringify({ c: 3 }))
+    expect(JSON.stringify(keep(test2, ['a', 'b', 'd']))).toBe(
+      JSON.stringify({ a: 1, b: 2, d: { c: 3 } })
+    )
+    expect(JSON.stringify(keep(test2, ['a', 'b', 'd'], { a: 4, e: 5 }))).toBe(
+      JSON.stringify({ a: 4, b: 2, d: { c: 3 }, e: 5 })
+    )
+  })
+
+  it('should work with keysOf', () => {
     const test = { c: 3 }
     const test2 = { a: 1, b: 2, d: test }
     expect(keysOf(test).toString()).toBe(['c'].toString())
