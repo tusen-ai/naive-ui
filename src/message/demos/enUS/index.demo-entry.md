@@ -88,7 +88,7 @@ multiple-line
 | --- | --- | --- |
 | closable | `boolean` | Whether to show close icon. |
 | content | `string \| (() => VNodeChild)` | Message content. |
-| destory | `() => void` | Message destory method. |
+| destroy | `() => void` | Message destroy method. |
 | icon | `() => VNode` | Message icon. |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | Message type. |
 | onAfterLeave | `() => void` | Callback after message disappeared. |
@@ -98,7 +98,7 @@ multiple-line
 
 | Name    | Type | Description             |
 | ------- | ---- | ----------------------- |
-| destroy | `()` | Message destory method. |
+| destroy | `()` | Message destroy method. |
 
 ## Q & A
 
