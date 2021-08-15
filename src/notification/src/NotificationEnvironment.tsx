@@ -24,7 +24,7 @@ export const notificationEnvOptions = {
   onHide: Function as PropType<() => void>,
   onAfterShow: Function as PropType<() => void>,
   onAfterHide: Function as PropType<() => void>
-} as const
+}
 
 export default defineComponent({
   name: 'NotificationEnvironment',
@@ -79,12 +79,8 @@ export default defineComponent({
       void el.offsetHeight
     }
     function handleAfterLeave (): void {
-      const {
-        onAfterLeave,
-        onInternalAfterLeave,
-        onAfterHide,
-        internalKey
-      } = props
+      const { onAfterLeave, onInternalAfterLeave, onAfterHide, internalKey } =
+        props
       if (onAfterLeave) onAfterLeave()
       onInternalAfterLeave(internalKey)
       // deprecated

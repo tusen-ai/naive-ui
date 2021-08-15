@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-notification` 导出的 `NotificationReactive` 类型不可变，关闭 [#876](https://github.com/TuSimple/naive-ui/issues/876)
+
 ## 2.16.4 (2021-08-16)
 
 ### Fixes
