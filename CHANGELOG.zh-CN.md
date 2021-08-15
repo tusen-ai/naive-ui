@@ -2,7 +2,7 @@
 
 ## Pending
 
-### Localization
+### i18n
 
 - 新增 ruRU locale [#852](https://github.com/TuSimple/naive-ui/pull/852)
 
@@ -16,7 +16,7 @@
 ### Fixes
 
 - 修复 `n-rate` 在深色模式下半个星星重叠
-- 修复 `n-menu` 使用 `render-icon` 渲染错误当返回值为 true 时
+- 修复 `n-menu` 使用 `render-icon` 在返回值为 `true` 时渲染有误
 - 修复 `n-space` 在使用 `v-if` 时渲染空的占位，关闭 [#824](https://github.com/TuSimple/naive-ui/issues/824)
 
 ## 2.16.2 (2021-08-09)

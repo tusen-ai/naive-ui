@@ -2,7 +2,7 @@
 
 ## Pending
 
-### Localization
+### i18n
 
 - Add ruRU locale [#852](https://github.com/TuSimple/naive-ui/pull/852).
 
@@ -16,7 +16,7 @@
 ### Fixes
 
 - Fix `n-rate` half star overlays star background in dark mode.
-- Fix `n-menu` use `render-icon` render error when return true.
+- Fix `n-menu` renders unexpectly when `render-icon` returns `true`.
 - Fix `n-space` render empty placeholder while use `v-if`, closes [#824](https://github.com/TuSimple/naive-ui/issues/824).
 
 ## 2.16.2 (2021-08-09)
