@@ -11,7 +11,8 @@ import {
   ExtractPropTypes,
   renderSlot,
   Ref,
-  PropType
+  PropType,
+  CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
 import { ExtractPublicPropTypes, omit } from '../../_utils'
@@ -71,7 +72,19 @@ const messageProviderProps = {
     default: 3000
   },
   max: Number,
-  closable: Boolean
+  placement: {
+    type: String as PropType<
+    | 'top'
+    | 'top-left'
+    | 'top-right'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
+    >,
+    default: 'top'
+  },
+  closable: Boolean,
+  containerStyle: [String, Object] as PropType<string | CSSProperties>
 }
 
 export type MessageProviderProps = ExtractPublicPropTypes<
@@ -162,8 +175,12 @@ export default defineComponent({
         {this.messageList.length ? (
           <Teleport to={this.to ?? 'body'}>
             <div
-              class={`${this.mergedClsPrefix}-message-container`}
+              class={[
+                `${this.mergedClsPrefix}-message-container`,
+                `${this.mergedClsPrefix}-message-container--${this.placement}`
+              ]}
               key="message-container"
+              style={this.containerStyle}
             >
               {this.messageList.map((message) => {
                 return (

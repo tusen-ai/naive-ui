@@ -10,7 +10,7 @@ const rateDark: RateTheme = {
       itemColor: railColor,
       itemColorActive: '#CCAA33',
       itemSize: '20px',
-      sizeSmall: '14px',
+      sizeSmall: '16px',
       sizeMedium: '20px',
       sizeLarge: '24px'
     }

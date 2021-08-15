@@ -13,9 +13,9 @@ size
 disabled
 disabled-time
 actions
+shortcuts
 events
 format
-ranges
 footerslot
 update-on-close
 ```
@@ -29,6 +29,7 @@ update-on-close
 | clearable | `boolean` | `false` | 是否支持清除 |
 | default-value | `number \| [number, number] \| null` | `null` | 默认被选中的日期的时间戳 |
 | disabled | `boolean` | `false` | 是否禁用 |
+| shortcuts | `Record<string, number \| [number, number]>` | `undefined` | 自定义快捷按钮 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` | Date Picker 的类型 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |
@@ -66,7 +67,6 @@ update-on-close
 | format | `string` | `'yyyy-MM-dd'` | 用户自定义的数据格式化方式 |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | 时间禁用的校验函数 |
-| ranges | `Record<string, [number, number]>` | `undefined` | 用户自定义的快捷选择范围 |
 | close-on-select | `boolean` | `false` | 用户选择时间范围后是否自动关闭面板 |
 | separator | `string` | `'至'` | start 选框与 end 选框之间的分隔符 |
 | start-placeholder | `string` | `'开始日期'` | DateRange 中 start 选框的提示信息 |
@@ -82,7 +82,6 @@ update-on-close
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 用户自定义的数据格式化方式 |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | 时间禁用的校验函数 |
-| ranges | `Record<string, [number, number]>` | `undefined` | 用户自定义 DateTimeRange 范围 |
 | separator | `string` | `'to'` | start 选框与 end 选框之间的分隔符 |
 | start-placeholder | `string` | `'开始日期时间'` | DateTimeRange 中 start 选框的提示信息 |
 | update-value-on-close | `boolean` | `false` | 关闭面板时是否更新值 |

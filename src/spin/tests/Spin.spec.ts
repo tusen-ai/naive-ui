@@ -73,4 +73,15 @@ describe('n-spin', () => {
     expect(wrapper.find('.n-spin-container').exists()).toBe(true)
     expect(wrapper.find('.n-spin-content').text()).toBe('test')
   })
+
+  it('should work with `strokeWidth` prop', () => {
+    const wrapper = mount(NSpin, {
+      props: {
+        strokeWidth: 40,
+        size: 'medium'
+      }
+    })
+
+    expect(wrapper.find('circle').attributes('stroke-width')).toEqual('40')
+  })
 })
