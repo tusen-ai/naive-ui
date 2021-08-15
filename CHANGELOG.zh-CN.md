@@ -10,6 +10,7 @@
 
 - `n-message-provider` 新增 `container-style` 属性
 - `n-message-provider` 新增 `placement` 属性
+- `n-message` 增加类用于区分类型
 
 ### Fixes
 

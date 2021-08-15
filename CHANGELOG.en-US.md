@@ -6,11 +6,11 @@
 
 - Add ruRU locale [#852](https://github.com/TuSimple/naive-ui/pull/852).
 
-
 ### Feats
 
 - `n-message-provider` add `container-style` prop.
 - `n-message-provider` add `placement` prop.
+- `n-message` add class to distinguish type.
 
 ### Fixes
 
