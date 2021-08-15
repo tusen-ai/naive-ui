@@ -1,6 +1,6 @@
 # Icon
 
-Use icon in button.
+Icons can be used in buttons.
 
 ```html
 <n-space>
