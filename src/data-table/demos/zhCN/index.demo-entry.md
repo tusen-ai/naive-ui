@@ -7,7 +7,7 @@
 ## 演示
 
 <n-alert type="warning" title="注意" style="margin-bottom: 16px;">
-  传入 <n-text code>data</n-text> 属性的数组的每一项都代表渲染的一行数据，每一行数据都要有唯一的 key，否则要在 table 上声明 <n-text code>row-key</n-text> 属性；<n-a href="#DataTableColumn-Properties">DataTableColumn</n-a> 的 <n-text code>key</n-text> 属性用于保证每一列数据的唯一性。两者均能确保数据渲染及交互时的准确
+  传入 <n-text code>data</n-text> 属性的数组的每一项都代表渲染的一行数据，每一行数据都要有唯一的 <n-text code>key</n-text>，否则需要在 table 上声明 <n-text code>row-key</n-text> 属性。
 </n-alert>
 
 ```demo
