@@ -1,8 +1,10 @@
 import { createHoverColor, createPressedColor } from '../color'
 import {
   call,
+  createDataKey,
   formatLength,
   getTitleAttribute,
+  keysOf,
   largerSize,
   smallerSize
 } from '..'
@@ -82,5 +84,17 @@ describe('vue', () => {
     call([testFunction2, testFunction3], 1)
     expect(testValue).toBe(3)
     expect(testValue2).toBe(4)
+  })
+
+  it('should work with createDataKey', () => {
+    expect(createDataKey('1')).toBe('s-1')
+    expect(createDataKey(1)).toBe('n-1')
+  })
+
+  it('should work with keep', () => {
+    const test = { c: 3 }
+    const test2 = { a: 1, b: 2, d: test }
+    expect(keysOf(test).toString()).toBe(['c'].toString())
+    expect(keysOf(test2).toString()).toBe(['a', 'b', 'd'].toString())
   })
 })
