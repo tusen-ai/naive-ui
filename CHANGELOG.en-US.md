@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.16.4 (2021-08-16)
+
+### Fixes
+
+- Fix ruRU locale exports.
+
 ## 2.16.3 (2021-08-16)
 
 ### i18n
