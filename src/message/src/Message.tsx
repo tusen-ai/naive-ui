@@ -124,7 +124,9 @@ export default defineComponent({
         class={`${mergedClsPrefix}-message-wrapper`}
         style={cssVars as CSSProperties}
       >
-        <div class={`${mergedClsPrefix}-message`}>
+        <div
+          class={`${mergedClsPrefix}-message ${mergedClsPrefix}-message--${type}-type`}
+        >
           <div
             class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
           >
