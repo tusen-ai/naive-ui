@@ -1,5 +1,5 @@
 import { h, defineComponent, renderSlot } from 'vue'
-import { NButton } from '../../../button'
+import { NButton, NxButton } from '../../../button'
 import {
   BackwardIcon,
   FastBackwardIcon,
@@ -22,7 +22,7 @@ export default defineComponent({
     return useCalendar(props, 'date')
   },
   render () {
-    const { mergedClsPrefix, mergedTheme } = this
+    const { mergedClsPrefix, mergedTheme, shortcuts } = this
     return (
       <div
         ref="selfRef"
@@ -106,11 +106,31 @@ export default defineComponent({
             {renderSlot(this.datePickerSlots, 'footer')}
           </div>
         ) : null}
-        {this.actions?.length ? (
+        {this.actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
-            <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}></div>
+            <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
+              {shortcuts && Object.keys(shortcuts).map((key) =>
+                <NxButton
+                  size="tiny"
+                  onMouseenter={() => {
+                    this.cachePendingValue()
+                    this.doUpdateValue(shortcuts[key], false)
+                  }}
+                  onClick={() => {
+                    this.doUpdateValue(shortcuts[key], false)
+                    this.clearPendingValue()
+                    this.handleConfirmClick()
+                  }}
+                  onMouseleave={() => {
+                    this.restorePendingValue()
+                  }}
+                >
+                  {{ default: () => key }}
+                </NxButton>
+              )}
+            </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions.includes('clear') ? (
+              {this.actions?.includes('clear') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
@@ -120,7 +140,7 @@ export default defineComponent({
                   {{ default: () => this.locale.clear }}
                 </NButton>
               ) : null}
-              {this.actions.includes('now') ? (
+              {this.actions?.includes('now') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
