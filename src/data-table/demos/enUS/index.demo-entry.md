@@ -7,8 +7,8 @@ DataTable is used to displays rows of structured data.
 ## Demos
 
 <n-alert type="warning" title="Caveat" style="margin-bottom: 16px;">
-  Every row data needs a unique key property, otherwise you should specify <n-text code>row-key</n-text>
-</n-alert>
+  Each item of the array passing in the <n-text code>data</n-text> prop represents a row of rendered data, and each row of data must have a unique <n-text code>key</n-text>, otherwise the <n-text code>row-key</n-text> prop must be specified on the table.
+  </n-alert>
 
 ```demo
 basic

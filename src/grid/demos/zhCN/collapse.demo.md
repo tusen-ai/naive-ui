@@ -38,9 +38,9 @@
 ```
 
 ```js
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 
-export default {
+export default defineComponent({
   setup () {
     return {
       gridCollapsed: ref(false),
@@ -49,7 +49,7 @@ export default {
       showSuffix: ref(true)
     }
   }
-}
+})
 ```
 
 ```css

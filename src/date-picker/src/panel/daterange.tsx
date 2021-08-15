@@ -16,7 +16,7 @@ export default defineComponent({
     return useDualCalendar(props, 'daterange')
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, ranges } = this
+    const { mergedClsPrefix, mergedTheme, shortcuts } = this
     return (
       <div
         ref="selfRef"
@@ -194,20 +194,21 @@ export default defineComponent({
             {renderSlot(this.datePickerSlots, 'footer')}
           </div>
         ) : null}
-        {this.actions?.length || ranges ? (
+        {this.actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
-              {ranges &&
-                Object.keys(ranges).map((key) => {
-                  return (
+              {shortcuts &&
+                Object.keys(shortcuts).map((key) => {
+                  const shortcut = shortcuts[key]
+                  return Array.isArray(shortcut) ? (
                     <NxButton
                       size="tiny"
                       onMouseenter={() => {
                         this.cachePendingValue()
-                        this.changeStartEndTime(...ranges[key])
+                        this.changeStartEndTime(...shortcut)
                       }}
                       onClick={() => {
-                        this.changeStartEndTime(...ranges[key])
+                        this.changeStartEndTime(...shortcut)
                         this.clearPendingValue()
                         this.handleConfirmClick()
                       }}
@@ -217,11 +218,11 @@ export default defineComponent({
                     >
                       {{ default: () => key }}
                     </NxButton>
-                  )
+                  ) : null
                 })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions.includes('clear') ? (
+              {this.actions?.includes('clear') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
@@ -231,7 +232,7 @@ export default defineComponent({
                   {{ default: () => this.locale.clear }}
                 </NButton>
               ) : null}
-              {this.actions.includes('confirm') ? (
+              {this.actions?.includes('confirm') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
