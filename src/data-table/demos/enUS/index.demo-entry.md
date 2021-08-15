@@ -97,7 +97,7 @@ flex-height
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | The active filter option values in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when there are multiple filters). |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | Filter options. |
 | fixed | `'left \| 'right' \| false` | `false` | Whether the column needs to be fixed. |
-| key | `string \| number` | `undefined` | Unique key of this column, **required** when table's row-key is not set. |
+| key | `string \| number` | `undefined` | Unique key of this column, this is not repeatable. |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | Options of custom selection. Only work with `type='selection'`. |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of column row cell. |
 | renderExpand | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of the expand area. Only works when `type` is `'expand'`. |
