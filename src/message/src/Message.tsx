@@ -130,7 +130,7 @@ export default defineComponent({
             : 'flex-end'
         }}
       >
-        <div class={`${mergedClsPrefix}-message`}>
+        <div class={`${mergedClsPrefix}-message ${mergedClsPrefix}-message--${type}-type`}>
           <div
             class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
           >
