@@ -6,6 +6,10 @@
 
 - Fix `n-notification`'s exported `NotificationReactive` type is not writable, closes [#876](https://github.com/TuSimple/naive-ui/issues/876).
 
+### Feats
+
+- `n-input-number` add `clearable` prop.
+
 ## 2.16.4 (2021-08-16)
 
 ### Fixes
