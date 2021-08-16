@@ -1,6 +1,6 @@
 # Basic
 
-There are `default`, `primary`, `info`, `success`, `warning` and `error` type of button.
+There are `default`, `primary`, `info`, `success`, `warning` and `error` types of button.
 
 ```html
 <n-space>

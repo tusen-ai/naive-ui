@@ -1,6 +1,6 @@
 # Loading
 
-Button has loading status.
+Buttons can have loading states.
 
 ```html
 <n-space>

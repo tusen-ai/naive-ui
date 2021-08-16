@@ -1,6 +1,6 @@
 # Button Group
 
-Button can be grouped.
+Buttons can be grouped.
 
 ```html
 <n-space>

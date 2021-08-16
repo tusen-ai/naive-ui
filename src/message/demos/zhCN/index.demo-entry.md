@@ -90,7 +90,7 @@ placement
 | --- | --- | --- |
 | closable | `boolean` | 是否显示 close 图标 |
 | content | `string \| (() => VNodeChild)` | 信息内容 |
-| destory | `() => void` | 销毁信息的方法 |
+| destroy | `() => void` | 销毁信息的方法 |
 | icon | `() => VNode` | 信息图标 |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | 信息类型 |
 | onAfterLeave | `() => void` | 信息消失动画结束的回调 |
