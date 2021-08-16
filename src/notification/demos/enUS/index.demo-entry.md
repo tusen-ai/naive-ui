@@ -89,12 +89,13 @@ duration
 Properties of NotificationReactive can be dynamically changed.
 
 | Name | Type | Description |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | action | `string \| (() => VNodeChild)` | Content of the operation area,, can be a render function. |
 | avatar | `() => VNodeChild` | Content of the `avatar`, can be a render function. |
 | closable | `boolean` | Whether to show close icon. |
 | content | `string \| (() => VNodeChild)` | Content, can be a render function. |
 | description | `string \| (() => VNodeChild)` | Content of the `description`, can be a render function. |
+| duration | `number` | `undefined` | If not set, it won't automatically close. Unit is millisecond. |
 | meta | `string \| (() => VNodeChild)` | Content of the `meta`, can be a render function. |
 | title | `string \| (() => VNodeChild)` | Content of the `title`, can be a render function |
 | onAfterEnter | `Function` | Callback triggered after Transition's enter animation executed. |

@@ -89,12 +89,13 @@ duration
 NotificationReactive 实例的属性可以被动态改变。
 
 | 名称 | 类型 | 说明 |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | action | `string \| (() => VNodeChild)` | 操作区域的内容,可以是 render 函数 |
 | avatar | `() => VNodeChild` | 头像区域的内容，可以是 render 函数 |
 | closable | `boolean` | 是否显示 close 图标 |
 | content | `string \| (() => VNodeChild)` | 通知框内容，可以是 render 函数 |
 | description | `string \| (() => VNodeChild)` | 描述的内容，可以是 render 函数 |
+| duration | `number` | `undefined` | 如果没有设定则不会自动关闭，单位毫秒 |
 | meta | `string \| (() => VNodeChild)` | `meta` 信息，可以是 render 函数 |
 | title | `string \| (() => VNodeChild)` | `title` 信息，可以是 render 函数 |
 | onAfterEnter | `Function` | 过渡动画进入执行完后执行的回调 |
