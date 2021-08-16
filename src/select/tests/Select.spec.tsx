@@ -1,9 +1,10 @@
-import { h, VNode } from 'vue'
+import { h, VNode, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NSelect, SelectProps } from '../index'
 import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
 import { SelectOption, SelectGroupOption } from '../'
 import { NTag } from '../../tag'
+import { NImage } from '../../image'
 import { SelectBaseOption } from '../src/interface'
 
 describe('n-select', () => {
@@ -81,6 +82,7 @@ describe('n-select', () => {
           menuWrapper.text().includes(label)
         )
       ).toEqual(true)
+      wrapper.unmount()
     })
     it('option.render', () => {
       const options: SelectProps['options'] = [
@@ -216,5 +218,44 @@ describe('n-select', () => {
     expect(wrapper.findComponent(NTag).props('type')).toContain('success')
     await wrapper.find('.n-tag__close').trigger('click')
     expect(wrapper.findComponent(NTag).exists()).toBe(false)
+    wrapper.unmount()
+  })
+
+  it('should work with when use maxHeight', async () => {
+    const options = [
+      {
+        label: () => ([
+          h(NImage, {
+            width: 40,
+            height: 50,
+            src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+          }),
+          'test'
+        ]),
+        value: 'test',
+        type: 'success'
+      },
+      {
+        label: 'tset1',
+        value: 'test1'
+      }
+    ]
+
+    const wrapper = await mount(NSelect, {
+      props: {
+        defaultValue: ['test'],
+        options: options,
+        multiple: true
+      }
+    })
+    const inputWrapper = wrapper.findComponent(NInternalSelection)
+    await inputWrapper.trigger('click')
+
+    await nextTick()
+    const menuWrapper = wrapper.findComponent(NInternalSelectMenu)
+    // console.log(menuWrapper.findAll('.n-base-select-option')[0].clientHeight)
+    // console.log(document.querySelectorAll('.n-base-select-option')[0].children[0].clientHeight)
+    console.log('menuWrapper', menuWrapper.element.querySelectorAll('.n-base-select-option')[0])
+    expect(menuWrapper.findAll('.n-base-select-option').length).toEqual(1)
   })
 })

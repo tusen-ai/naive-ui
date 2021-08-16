@@ -20,11 +20,13 @@ export const notificationEnvOptions = {
   onLeave: Function as PropType<() => void>,
   onAfterEnter: Function as PropType<() => void>,
   onAfterLeave: Function as PropType<() => void>,
-  // deprecated
+  /** @deprecated */
   onHide: Function as PropType<() => void>,
+  /** @deprecated */
   onAfterShow: Function as PropType<() => void>,
+  /** @deprecated */
   onAfterHide: Function as PropType<() => void>
-}
+} as const
 
 export default defineComponent({
   name: 'NotificationEnvironment',
