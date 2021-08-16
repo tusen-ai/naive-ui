@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-input-number` add `clearable` prop.
+
 ## 2.16.4 (2021-08-16)
 
 ### Fixes
