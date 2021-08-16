@@ -20,7 +20,7 @@ export {
   largerSize,
   getTitleAttribute
 } from './naive'
-export type { ExtractPublicPropTypes, ExtractInternalPropTypes } from './naive'
+export type { ExtractPublicPropTypes, ExtractInternalPropTypes, Mutable } from './naive'
 export { formatLength } from './css'
 export { createKey } from './cssr'
 export * from './composable'
