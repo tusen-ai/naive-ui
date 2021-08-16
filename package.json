@@ -102,7 +102,7 @@
     "inquirer": "^8.1.0",
     "jest": "^27.0.4",
     "lint-staged": "^11.0.0",
-    "marked": "^2.0.1",
+    "marked": "^3.0.0",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "superagent": "^6.1.0",
