@@ -12,6 +12,7 @@ nested
 display-directive
 item-header-click
 customize-icon
+default-expanded
 ```
 
 ## Props
