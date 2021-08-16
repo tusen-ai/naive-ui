@@ -12,7 +12,8 @@ import {
   datePickerInjectionKey,
   OnPanelUpdateValue,
   OnPanelUpdateValueImpl,
-  OnClose
+  OnClose,
+  Shortcuts
 } from '../interface'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
@@ -32,6 +33,7 @@ const usePanelCommonProps = {
     type: [Array, Number] as PropType<Value | null>,
     default: null
   },
+  shortcuts: Object as PropType<Shortcuts>,
   onConfirm: Function,
   onClose: Function as PropType<OnClose>,
   onTabOut: Function,
@@ -115,6 +117,21 @@ function usePanelCommon (props: UsePanelCommonProps) {
       doTabOut()
     }
   }
+  let cachedValue: Value | null = null
+  let cached = false
+  function cachePendingValue (): void {
+    cachedValue = props.value
+    cached = true
+  }
+  function clearPendingValue (): void {
+    cached = false
+  }
+  function restorePendingValue (): void {
+    if (cached) {
+      doUpdateValue(cachedValue, false)
+      cached = false
+    }
+  }
   return {
     mergedTheme: mergedThemeRef,
     mergedClsPrefix: mergedClsPrefixRef,
@@ -130,7 +147,10 @@ function usePanelCommon (props: UsePanelCommonProps) {
     handleFocusDetectorFocus,
     disableTransitionOneTick,
     handlePanelKeyDown,
-    handlePanelFocus
+    handlePanelFocus,
+    cachePendingValue,
+    clearPendingValue,
+    restorePendingValue
   }
 }
 
