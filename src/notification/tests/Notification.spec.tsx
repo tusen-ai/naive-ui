@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, ref, Ref, nextTick } from 'vue'
+import { defineComponent, h, ref, Ref, nextTick } from 'vue'
 import {
   NNotificationProvider,
   useNotification,
