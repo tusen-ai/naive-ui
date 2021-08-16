@@ -1,6 +1,8 @@
 # 默认展开
 
-可以设置哪些面板默认展开。如我们可以设置`红灯`和`黄灯`默认展开，当`绿灯`展开时`闪烁`展开。应当注意的是，即使只打算展开一个面板，`default-expanded-names`也应当传入数组，除非使用了`accordion`。
+可以设置哪些面板默认展开。如我们可以设置“红灯”和“黄灯”默认展开。
+
+应当注意的是，即使只打算展开一个面板，`default-expanded-names`也应当传入数组，除非使用了`accordion`。
 
 ```html
 <n-collapse :default-expanded-names="['2', '3']">

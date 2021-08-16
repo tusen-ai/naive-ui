@@ -1,6 +1,8 @@
 # Default Expanded
 
-You can set which panels are expanded by default. For example, we can set `red light` and `amber light` to be expanded by default, and set `flashing` to be expanded when `green light` is expanded. It should be noted that even if only one panel you want to set to be expanded, `default-expanded-names` should also be passed in an array, unless `accordion` is set to `true`.
+You can set which panels are expanded by default. For example, we can set 'red light' and 'amber light' to be expanded by default.
+
+It should be noted that even if only one panel you want to set to be expanded, `default-expanded-names` should also be passed in an array, unless `accordion` is set to `true`.
 
 ```html
 <n-collapse :default-expanded-names="['2', '3']">
