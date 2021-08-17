@@ -1,3 +1,4 @@
+import { h, isVNode, VNode } from 'vue'
 import { createHoverColor, createPressedColor } from '../color'
 import {
   call,
@@ -7,6 +8,8 @@ import {
   keep,
   keysOf,
   largerSize,
+  omit,
+  render,
   smallerSize
 } from '..'
 
@@ -109,5 +112,33 @@ describe('vue', () => {
     const test2 = { a: 1, b: 2, d: test }
     expect(keysOf(test).toString()).toBe(['c'].toString())
     expect(keysOf(test2).toString()).toBe(['a', 'b', 'd'].toString())
+  })
+
+  it('should work with omit', () => {
+    const test = { c: 3 }
+    const test2 = { a: 1, b: 2, d: test }
+
+    expect(JSON.stringify(omit(test2, ['a']))).toBe(
+      JSON.stringify({ b: 2, d: { c: 3 } })
+    )
+    expect(JSON.stringify(omit(test2, ['a', 'd']))).toBe(
+      JSON.stringify({ b: 2 })
+    )
+    expect(JSON.stringify(omit(test2, ['b'], { a: 4, b: 5 }))).toBe(
+      JSON.stringify({ a: 4, d: { c: 3 }, b: 5 })
+    )
+  })
+
+  it('should work with render', () => {
+    function testFunction (value: string): VNode {
+      return h(value, null, { default: () => 'test' })
+    }
+    expect(isVNode(render('test'))).toBe(true)
+    expect(isVNode(render(123))).toBe(true)
+    expect(isVNode(render(testFunction, 'div'))).toBe(true)
+    expect(isVNode(render({ a: 1 }))).toBe(false)
+    expect(render({ a: 1 })).toBe(null)
+    expect(isVNode(render(['1']))).toBe(false)
+    expect(render(['1'])).toBe(null)
   })
 })
