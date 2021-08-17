@@ -1,6 +1,6 @@
 # Size
 
-Maybe using CSS is a better way.
+`font-size` CSS also works, but can be overridden by setting the size (if just a number is used, it's taken as  pixels).
 
 ```html
 <n-gradient-text type="info"> Live Forever </n-gradient-text>

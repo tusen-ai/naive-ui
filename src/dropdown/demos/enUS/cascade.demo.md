@@ -1,6 +1,6 @@
 # Cascade
 
-Dropdown can be cascade.
+Dropdown options can be cascaded.
 
 ```html
 <n-dropdown
@@ -9,7 +9,7 @@ Dropdown can be cascade.
   trigger="click"
   @select="handleSelect"
 >
-  <n-button>People and Some Food to Eat</n-button>
+  <n-button>The Great Gatsby characters</n-button>
 </n-dropdown>
 ```
 

@@ -1,6 +1,6 @@
 # Trigger
 
-Different trigger of dropdown.
+Different ways to `trigger`/`show` a dropdown.
 
 ```html
 <n-space>

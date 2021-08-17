@@ -1,6 +1,8 @@
 # Custom Icon
 
-Insert custom SVG icon into icon. (Make sure SVG's viewBox attribute is set)
+Insert custom SVG's into the icon content.
+
+(Make sure SVG's viewBox attribute is set)
 
 ```html
 <n-icon size="40">
