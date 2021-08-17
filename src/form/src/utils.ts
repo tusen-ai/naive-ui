@@ -1,4 +1,4 @@
-import { inject, computed, ref, ComputedRef } from 'vue'
+import { inject, computed, ref, ComputedRef, Slots } from 'vue'
 import { get } from 'lodash-es'
 import type { FormItemSetupProps } from './FormItem'
 import { formInjectionKey } from './interface'
@@ -19,7 +19,7 @@ export function formItemSize (props: FormItemSetupProps): {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function formItemMisc (props: FormItemSetupProps) {
+export function formItemMisc (props: FormItemSetupProps, slots: Slots) {
   const NForm = inject(formInjectionKey, null)
   const mergedLabelWidthRef = computed(() => {
     if (mergedLabelPlacementRef.value === 'top') return
@@ -73,10 +73,15 @@ export function formItemMisc (props: FormItemSetupProps) {
     return true
   })
   const mergedShowLabelRef = computed(() => {
-    const { showLabel } = props
-    if (showLabel !== undefined) return showLabel
-    if (NForm?.showLabel !== undefined) return NForm.showLabel
-    return true
+    const { showLabel, label } = props
+    let mergedShowLabel: boolean | undefined = true
+
+    if (NForm?.showLabel !== undefined) mergedShowLabel = NForm.showLabel
+    if (showLabel !== undefined) mergedShowLabel = showLabel
+
+    return label === false
+      ? !mergedShowLabel
+      : mergedShowLabel && (label || slots.label)
   })
   return {
     validationErrored: validationErroredRef,
