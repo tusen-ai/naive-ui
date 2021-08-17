@@ -1,6 +1,6 @@
 # Placement
 
-Use different placement.
+Dropdown options can be aligned using the `placement` property.
 
 ```html
 <n-dropdown
