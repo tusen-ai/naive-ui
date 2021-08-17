@@ -8,6 +8,7 @@
 basic
 max
 form
+slot
 ```
 
 ## Props

@@ -8,6 +8,7 @@ Make tags inputable.
 basic
 max
 form
+slot
 ```
 
 ## Props

@@ -131,6 +131,14 @@ export default defineComponent({
       inputForceFocusedRef.value = true
       inputValueRef.value = ''
     }
+    function handleAddTag (value: string): void {
+      if (value) {
+        const tags = mergedValueRef.value.slice(0)
+        tags.push(value)
+        doChange(tags)
+      }
+      showInputRef.value = false
+    }
     function handleInputBlur (): void {
       handleInputConfirm()
     }
@@ -155,6 +163,7 @@ export default defineComponent({
       handleAddClick,
       handleInputBlur,
       handleCloseClick,
+      handleAddTag,
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
@@ -196,7 +205,9 @@ export default defineComponent({
               handleInputKeyUp,
               handleInputBlur,
               handleAddClick,
-              handleCloseClick
+              handleCloseClick,
+              handleAddTag,
+              $slots
             } = this
             return this.mergedValue
               .map((tag, index) => (
@@ -218,22 +229,28 @@ export default defineComponent({
               ))
               .concat(
                 showInput ? (
-                  <NInput
-                    ref="inputInstRef"
-                    autosize
-                    value={inputValue}
-                    onUpdateValue={(v) => {
-                      this.inputValue = v
-                    }}
-                    theme={mergedTheme.peers.Input}
-                    themeOverrides={mergedTheme.peerOverrides.Input}
-                    style={inputStyle}
-                    size={inputSize}
-                    placeholder=""
-                    onKeyup={handleInputKeyUp}
-                    onBlur={handleInputBlur}
-                    internalForceFocus={inputForceFocused}
-                  />
+                  $slots.input ? (
+                    $slots.input({ addTag: handleAddTag })
+                  ) : (
+                    <NInput
+                      ref="inputInstRef"
+                      autosize
+                      value={inputValue}
+                      onUpdateValue={(v) => {
+                        this.inputValue = v
+                      }}
+                      theme={mergedTheme.peers.Input}
+                      themeOverrides={mergedTheme.peerOverrides.Input}
+                      style={inputStyle}
+                      size={inputSize}
+                      placeholder=""
+                      onKeyup={handleInputKeyUp}
+                      onBlur={handleInputBlur}
+                      internalForceFocus={inputForceFocused}
+                    />
+                  )
+                ) : $slots.add ? (
+                  $slots.add({ add: handleAddClick })
                 ) : (
                   <NButton
                     dashed

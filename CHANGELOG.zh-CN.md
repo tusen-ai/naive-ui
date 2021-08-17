@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-timeline` 新增 `horizontal` 属性，关闭 [#887](https://github.com/TuSimple/naive-ui/issues/887)
+- `n-dynamic-tags` 新增 `input` 和 `add` 插槽，关闭 [#499](https://github.com/TuSimple/naive-ui/issues/499)
 
 ### Fixes
 
@@ -25,6 +26,10 @@
 - 修复 `n-dropdown` 内部的链接点击触发区域不是整个选项，关闭 [#823](https://github.com/TuSimple/naive-ui/issues/823)
 - 修复 `n-popover` 嵌套于不同 placement 的 popover 中箭头位置错乱，关闭 [#916](https://github.com/TuSimple/naive-ui/issues/916)
 - 修复 `n-ellpisis` 在更新内容后失效，关闭 [#776](https://github.com/TuSimple/naive-ui/issues/776)
+
+### Fixes
+
+- 修复 `n-notification` 导出的 `NotificationReactive` 类型不可变，关闭 [#876](https://github.com/TuSimple/naive-ui/issues/876)
 
 ## 2.16.4 (2021-08-16)
 
