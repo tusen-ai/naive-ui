@@ -1,4 +1,6 @@
-const ruRu = {
+import type { NLocale } from './enUS'
+
+const ruRu: NLocale = {
   name: 'ru-RU',
   global: {
     undo: 'Отменить',
@@ -91,5 +93,4 @@ const ruRu = {
   }
 }
 
-export type NLocale = typeof ruRu
 export default ruRu

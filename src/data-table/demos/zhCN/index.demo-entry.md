@@ -7,7 +7,7 @@
 ## 演示
 
 <n-alert type="warning" title="注意" style="margin-bottom: 16px;">
-  每一行数据都要有唯一的 key，否则要在 table 上声明 <n-text code>row-key</n-text> 属性
+  传入 <n-text code>data</n-text> 属性的数组的每一项都代表渲染的一行数据，每一行数据都要有唯一的 <n-text code>key</n-text>，否则需要在 table 上声明 <n-text code>row-key</n-text> 属性。
 </n-alert>
 
 ```demo
@@ -98,7 +98,7 @@ scroll-debug
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值数组。如果不做设定，这一列的过滤行为将是非受控的（过滤器多选时生效） |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | filter 的 options 数据 |
 | fixed | `'left \| 'right' \| false` | `false` | 该列是否需要 fixed |
-| key | `string \| number` | `undefined` | 这一列的 key，在表格未设定 row-key 的时候是**必须**的。 |
+| key | `string \| number` | `undefined` | 这一列的 key，不可重复。 |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | 自定义选择项的选项，只对 `type='selection'` 生效 |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |
 | renderExpand | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 展开区域的渲染函数，仅在 `type` 为 `'expand'` 的时候生效 |

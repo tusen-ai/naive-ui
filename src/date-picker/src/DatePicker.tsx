@@ -46,7 +46,8 @@ import {
   PanelRef,
   IsDateDisabled,
   IsTimeDisabled,
-  datePickerInjectionKey
+  datePickerInjectionKey,
+  Shortcuts
 } from './interface'
 import { Size as TimePickerSize } from '../../time-picker/src/interface'
 
@@ -100,6 +101,7 @@ const datePickerProps = {
   dateFormat: String,
   timeFormat: String,
   actions: Array as PropType<Array<'clear' | 'cancel' | 'confirm'>>,
+  shortcuts: Object as PropType<Shortcuts>,
   isDateDisabled: Function as PropType<IsDateDisabled>,
   isTimeDisabled: Function as PropType<IsTimeDisabled>,
   show: {
@@ -681,6 +683,7 @@ export default defineComponent({
       value: this.pendingValue,
       active: this.mergedShow,
       actions: this.actions,
+      shortcuts: this.shortcuts,
       style: this.cssVars as CSSProperties
     }
     const { mergedClsPrefix } = this

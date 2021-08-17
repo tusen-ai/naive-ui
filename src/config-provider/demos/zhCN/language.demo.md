@@ -13,10 +13,10 @@
 ```
 
 ```js
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { zhCN, dateZhCN } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     return {
       zhCN,
@@ -25,5 +25,5 @@ export default {
       dateLocale: ref(null)
     }
   }
-}
+})
 ```
