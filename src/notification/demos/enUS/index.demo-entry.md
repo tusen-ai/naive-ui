@@ -95,8 +95,9 @@ Properties of NotificationReactive can be dynamically changed.
 | closable | `boolean` | Whether to show close icon. |
 | content | `string \| (() => VNodeChild)` | Content, can be a render function. |
 | description | `string \| (() => VNodeChild)` | Content of the `description`, can be a render function. |
+| duration | `number` | If not set, it won't automatically close. Unit is millisecond. |
 | meta | `string \| (() => VNodeChild)` | Content of the `meta`, can be a render function. |
-| title | `string \| (() => VNodeChild)` | Content of the `title`, can be a render function |
+| title | `string \| (() => VNodeChild)` | Content of the `title`, can be a render function. |
 | onAfterEnter | `Function` | Callback triggered after Transition's enter animation executed. |
 | onAfterLeave | `Function` | Callback triggered after Transition's leave animation executed. |
 | onClose | `() => boolean \| Promise<boolean>` | The callback of notification closing. Returning `false`, promise resolve `false` or promise reject will cancel this closing. |
