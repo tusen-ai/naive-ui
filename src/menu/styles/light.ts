@@ -35,7 +35,8 @@ export const self = (vars: ThemeCommonVars) => {
     textColor2,
     primaryColorHover,
     textColor1,
-    fontSize
+    fontSize,
+    dividerColor
   } = vars
   return {
     borderRadius: borderRadius,
@@ -62,6 +63,7 @@ export const self = (vars: ThemeCommonVars) => {
     itemColorActiveCollapsedInverted: primaryColor,
     borderColorHorizontal: '#0000',
     fontSize,
+    dividerColor,
     ...createPartialInvertedVars('#BBB', '#FFF', '#AAA')
   }
 }
