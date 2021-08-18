@@ -17,21 +17,31 @@
 ```
 
 ```js
-export default {
-  data () {
-    return {
-      percentage: 0
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const percentage = ref(0)
+
+    const add = () => {
+      percentage.value += 10
+      if (percentage.value > 100) {
+        percentage.value = 0
+      }
     }
-  },
-  methods: {
-    add () {
-      this.percentage += 10
-      if (this.percentage > 100) this.percentage = 0
-    },
-    minus () {
-      this.percentage -= 10
-      if (this.percentage < 0) this.percentage = 100
+
+    const minus = () => {
+      percentage.value -= 10
+      if (percentage.value < 0) {
+        percentage.value = 100
+      }
+    }
+
+    return {
+      percentage,
+      add,
+      minus
     }
   }
-}
+})
 ```
