@@ -16,7 +16,6 @@ import NMenuOptionContent from './MenuOptionContent'
 import { itemRenderer } from './utils'
 import { useMenuChild, useMenuChildProps } from './use-menu-child'
 import type { SubmenuInjection } from './use-menu-child'
-// import { TreeNode } from 'treemate'
 import { MenuMixedOption, TmNode } from './interface'
 import { menuItemGroupInjectionKey } from './MenuOptionGroup'
 
