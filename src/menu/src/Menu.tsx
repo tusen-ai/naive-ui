@@ -27,6 +27,8 @@ import style from './styles/index.cssr'
 import {
   MenuOption,
   MenuGroupOption,
+  MenuIgnoredOption,
+  MenuMixedOption,
   OnUpdateValue,
   OnUpdateKeys,
   OnUpdateValueImpl,
@@ -40,7 +42,7 @@ import { DropdownProps } from '../../dropdown'
 const menuProps = {
   ...(useTheme.props as ThemeProps<MenuTheme>),
   options: {
-    type: Array as PropType<Array<MenuOption | MenuGroupOption>>,
+    type: Array as PropType<MenuMixedOption[]>,
     default: () => []
   },
   collapsed: {
@@ -165,7 +167,7 @@ export default defineComponent({
 
     const treeMateRef = computed(() => {
       const { keyField, childrenField } = props
-      return createTreeMate<MenuOption, MenuGroupOption>(
+      return createTreeMate<MenuOption, MenuGroupOption, MenuIgnoredOption>(
         props.items || props.options,
         {
           getChildren (node) {
@@ -381,7 +383,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {this.tmNodes.map((tmNode) => itemRenderer(tmNode, this.$props))}
+        {this.tmNodes.map((tmNode) => itemRenderer(tmNode, this.$props, mergedClsPrefix))}
       </div>
     )
   }

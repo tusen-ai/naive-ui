@@ -1,23 +1,22 @@
 import { TreeNode } from 'treemate'
-import { VNodeChild, HTMLAttributes } from 'vue'
-import { MenuOption, MenuGroupOption } from '../../menu/src/interface'
+import { VNodeChild } from 'vue'
+import {
+  MenuOptionProps,
+  MenuOption,
+  MenuRenderOption,
+  MenuGroupOption,
+  MenuIgnoredOption,
+  MenuDividerOption
+} from '../../menu/src/interface'
 
 export type Key = string | number
 
-export type DropdownOptionProps = HTMLAttributes
+export type DropdownOptionProps = MenuOptionProps
 
 // Aligned with MenuOption props, has some redundant fields
-export type DropdownOption = MenuOption & { props?: HTMLAttributes }
-export type DropdownGroupOption = MenuGroupOption & {
-  props?: HTMLAttributes
-}
-export interface DropdownIgnoredOption {
-  key?: Key
-  type: 'render' | 'divider'
-  props?: HTMLAttributes
-  render?: () => VNodeChild
-  [key: string]: unknown
-}
+export type DropdownOption = MenuOption
+export type DropdownGroupOption = MenuGroupOption
+export type DropdownIgnoredOption = MenuIgnoredOption
 
 export type DropdownMixedOption =
   | DropdownOption
@@ -28,19 +27,9 @@ export type DropdownIntersectionOption = DropdownOption &
 DropdownGroupOption &
 DropdownIgnoredOption
 
-export interface DropdownRenderOption {
-  key?: Key
-  type: 'render'
-  props?: HTMLAttributes
-  render?: () => VNodeChild
-  [key: string]: unknown
-}
+export type DropdownRenderOption = MenuRenderOption
 
-export interface DropdownDividerOption {
-  key?: Key
-  type: 'divider'
-  [key: string]: unknown
-}
+export type DropdownDividerOption = MenuDividerOption
 
 export type TmNode = TreeNode<
 DropdownOption,

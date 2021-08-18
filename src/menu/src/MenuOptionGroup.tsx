@@ -54,7 +54,7 @@ export default defineComponent({
             {props.extra ? <> {render(props.extra)}</> : null}
           </span>
           <div>
-            {props.tmNodes.map((tmNode) => itemRenderer(tmNode, menuProps))}
+            {props.tmNodes.map((tmNode) => itemRenderer(tmNode, menuProps, mergedClsPrefix))}
           </div>
         </div>
       )

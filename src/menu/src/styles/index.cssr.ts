@@ -286,7 +286,13 @@ export default c([
       color: inherit;
       text-decoration: none;
     `)
-  ])
+  ]),
+  cB('menu-item-divider', `
+    transition: background-color .3s var(--bezier);
+    background-color: var(--divider-color);
+    height: 1px;
+    margin: 4px 0;
+  `)
 ])
 
 function hoverStyle (props: CProperties, children: CNodeChildren): CNode[] {
