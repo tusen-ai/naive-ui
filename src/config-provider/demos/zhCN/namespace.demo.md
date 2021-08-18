@@ -14,12 +14,14 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      ns: 'custom-app-namespace1',
-      isActive: false
+      ns: ref('custom-app-namespace1'),
+      isActive: ref(false)
     }
   }
-}
+})
 ```

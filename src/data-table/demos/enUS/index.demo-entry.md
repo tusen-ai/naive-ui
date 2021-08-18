@@ -7,8 +7,8 @@ DataTable is used to displays rows of structured data.
 ## Demos
 
 <n-alert type="warning" title="Caveat" style="margin-bottom: 16px;">
-  Every row data needs a unique key property, otherwise you should specify <n-text code>row-key</n-text>
-</n-alert>
+  Each item of the array passing in the <n-text code>data</n-text> prop represents a row of rendered data, and each row of data must have a unique <n-text code>key</n-text>, otherwise the <n-text code>row-key</n-text> prop must be specified on the table.
+  </n-alert>
 
 ```demo
 basic
@@ -97,7 +97,7 @@ flex-height
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | The active filter option values in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when there are multiple filters). |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | Filter options. |
 | fixed | `'left \| 'right' \| false` | `false` | Whether the column needs to be fixed. |
-| key | `string \| number` | `undefined` | Unique key of this column, **required** when table's row-key is not set. |
+| key | `string \| number` | `undefined` | Unique key of this column, this is not repeatable. |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | Options of custom selection. Only work with `type='selection'`. |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of column row cell. |
 | renderExpand | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of the expand area. Only works when `type` is `'expand'`. |

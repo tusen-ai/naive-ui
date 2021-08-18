@@ -13,9 +13,9 @@ size
 disabled
 disabled-time
 actions
+shortcuts
 events
 format
-ranges
 footerslot
 update-on-close
 ```
@@ -29,6 +29,7 @@ update-on-close
 | clearable | `boolean` | `false` | Whether the date picker is clearable. |
 | default-value | `number \| [number, number] \| null` | `null` | Date picker's default value. |
 | disabled | `boolean` | `false` | Whether the date picker is disabled. |
+| shortcuts | `Record<string, number \| [number, number]>` | `undefined` | Customize shortcut buttons. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` | Date picker type. |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker in controlled mode. |
@@ -66,7 +67,6 @@ update-on-close
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
-| ranges | `Record<string, [number, number]>` | `undefined` | Customize ranges. |
 | close-on-select | `boolean` | `false` | Whether to close the panel after the user selected a time range. |
 | separator | `string` | `'to'` | The separator between the start input and the end input. |
 | start-placeholder | `string` | `'Start Date'` | The prompt information of the start input. |
@@ -82,7 +82,6 @@ update-on-close
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
-| ranges | `Record<string, [number, number]>` | `undefined` | Customize ranges. |
 | separator | `string` | `'to'` | The separator between the start input and the end input. |
 | start-placeholder | `string` | `'Start Date and Time'` | The prompt information of the start input. |
 | update-value-on-close | `boolean` | `false` | Whether to update value on close. |
