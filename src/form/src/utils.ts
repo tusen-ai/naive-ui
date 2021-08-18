@@ -1,4 +1,4 @@
-import { inject, computed, ref, ComputedRef, Slots } from 'vue'
+import { inject, computed, ref, ComputedRef } from 'vue'
 import { get } from 'lodash-es'
 import type { FormItemSetupProps } from './FormItem'
 import { formInjectionKey } from './interface'
