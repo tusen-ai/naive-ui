@@ -16,7 +16,7 @@ import {
 import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
-import { ExtractPublicPropTypes, omit } from '../../_utils'
+import { ExtractPublicPropTypes, omit, Mutable } from '../../_utils'
 import { notificationLight, NotificationTheme } from '../styles'
 import NotificationContainer from './NotificationContainer'
 import NotificationEnvironment, {
@@ -63,7 +63,7 @@ export type NotificationReactive = {
   readonly hide: () => void
   /** @deprecated */
   readonly deactivate: () => void
-} & NotificationOptions
+} & Mutable<NotificationOptions>
 
 interface NotificationRef {
   hide: () => void

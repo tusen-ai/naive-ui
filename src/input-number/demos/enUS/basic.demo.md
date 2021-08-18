@@ -1,7 +1,7 @@
 # Basic
 
 ```html
-<n-input-number v-model:value="value" />
+<n-input-number v-model:value="value" clearable />
 ```
 
 ```js
