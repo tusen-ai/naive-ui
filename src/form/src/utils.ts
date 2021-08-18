@@ -19,7 +19,7 @@ export function formItemSize (props: FormItemSetupProps): {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function formItemMisc (props: FormItemSetupProps, slots: Slots) {
+export function formItemMisc (props: FormItemSetupProps) {
   const NForm = inject(formInjectionKey, null)
   const mergedLabelWidthRef = computed(() => {
     if (mergedLabelPlacementRef.value === 'top') return
@@ -73,15 +73,10 @@ export function formItemMisc (props: FormItemSetupProps, slots: Slots) {
     return true
   })
   const mergedShowLabelRef = computed(() => {
-    const { showLabel, label } = props
-    let mergedShowLabel: boolean | undefined = true
-
-    if (NForm?.showLabel !== undefined) mergedShowLabel = NForm.showLabel
-    if (showLabel !== undefined) mergedShowLabel = showLabel
-
-    return label === false
-      ? !mergedShowLabel
-      : mergedShowLabel && (label || slots.label)
+    const { showLabel } = props
+    if (showLabel !== undefined) return showLabel
+    if (NForm?.showLabel !== undefined) return NForm.showLabel
+    return true
   })
   return {
     validationErrored: validationErroredRef,

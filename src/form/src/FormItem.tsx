@@ -149,7 +149,7 @@ function wrapValidator (
 export default defineComponent({
   name: 'FormItem',
   props: formItemProps,
-  setup (props, context) {
+  setup (props) {
     useInjectionInstanceCollection(
       formItemInstsInjectionKey,
       'formItems',
@@ -158,7 +158,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const NForm = inject(formInjectionKey, null)
     const formItemSizeRefs = formItemSize(props)
-    const formItemMiscRefs = formItemMisc(props, context.slots)
+    const formItemMiscRefs = formItemMisc(props)
     const { validationErrored: validationErroredRef } = formItemMiscRefs
     const { mergedRequired: mergedRequiredRef, mergedRules: mergedRulesRef } =
       formItemRule(props)
@@ -416,11 +416,11 @@ export default defineComponent({
           `${mergedClsPrefix}-form-item`,
           `${mergedClsPrefix}-form-item--${this.mergedSize}-size`,
           `${mergedClsPrefix}-form-item--${this.mergedLabelPlacement}-labelled`,
-          !this.mergedShowLabel && `${mergedClsPrefix}-form-item--no-label`
+          (!this.mergedShowLabel || this.label === false) && `${mergedClsPrefix}-form-item--no-label`
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {this.mergedShowLabel ? (
+        {this.mergedShowLabel && (this.label || $slots.label) ? (
           <label
             class={`${mergedClsPrefix}-form-item-label`}
             style={this.mergedLabelStyle as any}
