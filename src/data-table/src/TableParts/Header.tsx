@@ -72,9 +72,19 @@ export default defineComponent({
     ): void {
       if (happensIn(e, 'dataTableFilter')) return
       if (!isColumnSortable(column)) return
-      const activeSorter = mergedSortStateRef.value
+      const activeSorter =
+        mergedSortStateRef.value.find(
+          (state) => state.columnKey === column.key
+        ) || null
       const nextSorter = createNextSorter(column, activeSorter)
       doUpdateSorter(nextSorter)
+    }
+    function isColumnSorting (column: TableBaseColumn): boolean {
+      return (
+        mergedSortStateRef.value.find(
+          (state) => state.columnKey === column.key && state.order
+        ) !== undefined
+      )
     }
     function handleMouseenter (): void {
       scrollPartRef.value = 'head'
@@ -95,6 +105,7 @@ export default defineComponent({
       checkOptions: checkOptionsRef,
       mergedTableLayout: mergedTableLayoutRef,
       headerCheckboxDisabled: headerCheckboxDisabledRef,
+      isColumnSorting,
       handleMouseenter,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
@@ -109,7 +120,6 @@ export default defineComponent({
       currentPage,
       allRowsChecked,
       someRowsChecked,
-      mergedSortState,
       rows,
       cols,
       mergedTheme,
@@ -118,6 +128,7 @@ export default defineComponent({
       discrete,
       mergedTableLayout,
       headerCheckboxDisabled,
+      isColumnSorting,
       handleColHeaderClick,
       handleCheckboxUpdateChecked
     } = this
@@ -151,8 +162,7 @@ export default defineComponent({
                         `${mergedClsPrefix}-data-table-th--fixed-${column.fixed}`,
                       {
                         [`${mergedClsPrefix}-data-table-th--hover`]:
-                          mergedSortState?.order &&
-                          mergedSortState.columnKey === key,
+                          isColumnSorting(column),
                         [`${mergedClsPrefix}-data-table-th--filterable`]:
                           isColumnFilterable(column),
                         [`${mergedClsPrefix}-data-table-th--sortable`]:

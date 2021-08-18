@@ -19,15 +19,17 @@ export default defineComponent({
     const { mergedSortStateRef, mergedClsPrefixRef } = inject(
       dataTableInjectionKey
     )!
-    const sortStateRef = mergedSortStateRef
+    const sortStateRef = computed(() =>
+      mergedSortStateRef.value.find(
+        (state) => state.columnKey === props.column.key
+      )
+    )
+
     const activeRef = computed(() => {
-      const { value } = sortStateRef
-      if (value) return value.columnKey === props.column.key
-      return false
+      return sortStateRef.value !== undefined
     })
     const mergedSortOrderRef = computed(() => {
-      const { value } = sortStateRef
-      if (value) return activeRef.value ? value.order : false
+      if (sortStateRef.value) { return activeRef.value ? sortStateRef.value.order : false }
       return false
     })
     const mergedRenderSorterRef = computed(() => {
