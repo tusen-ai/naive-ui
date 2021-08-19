@@ -23,11 +23,11 @@ virtual
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | Data selected by default if no value is set. |
 | disabled | `boolean` | `false` | Whether to disable the cascader. |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | If `remote` is set, `'hover'` won't work. |
-| filterable | `boolean` | `false` | Note: If `remote` is set, it won't work. |
+| filterable | `boolean` | `false` | Note: If `remote` is set, this won't have any effect. |
 | filter | `(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean` | A string based filter algorithm. | Filter function of the cascader. |
 | leaf-only | `boolean` | `false` | If only a leaf node can be selected `value`. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple select mode. `responsive` will keep all the tags in single line. |
-| multiple | `boolean` | `false` | Whether to support multiple option selection. |
+| multiple | `boolean` | `false` | Whether to allow multiple options being selected. |
 | options | `Array<CascaderOption>` | required | Options of the cascader. |
 | placeholder | `string` | `'Please Select'` | Placeholder text. |
 | remote | `boolean` | `false` | Whether to obtain data remotely. |
@@ -57,4 +57,4 @@ virtual
 
 | Name   | Parameters | Description                                          |
 | ------ | ---------- | ---------------------------------------------------- |
-| action | `()`       | Action fill content displayed in the cascading menu. |
+| action | `()`       | Action content displayed in the cascading menu. |
