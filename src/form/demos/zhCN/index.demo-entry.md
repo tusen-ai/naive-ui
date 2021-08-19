@@ -34,8 +34,8 @@ show-label
 | model | `Object` | `{}` | 获取表项中收集到的值的对象 |
 | rules | `type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }` | `{}` | 验证表项的规则 |
 | show-feedback | `boolean` | `true` | 是否展示校验反馈 |
-| show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | 是否展示必填的星号 |
 | show-label | `boolean` | `true` | 是否展示标签 |
+| show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | 是否展示必填的星号 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 
 #### FormItemRule Type
@@ -55,7 +55,7 @@ show-label
 | feedback | `string` | `undefined` | 表项的反馈信息。不设为 `undefined` 时，会覆盖规则验证的结果 |
 | first | `boolean` | `false` | 是否只展示首个出错信息 |
 | ingore-path-change | `boolean` | `false` | 通常 `path` 的改变会导致数据来源的变化，所以 naive-ui 会清空验证信息。如果不期望这个行为，可以将其置为 `true` |
-| label | `string \| boolean` | `undefined` | 标签信息, 如果设定为 `false`, 则不会展示标签信息和占位 |
+| label | `string` | `undefined` | 标签信息 |
 | label-align | `'left' \| 'right'` | `undefined` | 标签的文本对齐方式。如果没有被设定，使用外层表单的 `label-align` |
 | label-placement | `'left' \| 'top'` | `undefined` | 如果没有被设定，使用外层表单的 `label-placement` |
 | label-style | `Object` | `{}` | 标签的样式 |
@@ -64,8 +64,8 @@ show-label
 | rule | `FormItemRule \| Array<FormItemRule>` | `undefined` | 验证表项的规则，它会被通过 `rule-path` 从外层表单获取的规则合并来作为表项的验证规则。推荐还是在外层表单设置所有规则 |
 | rule-path | `string` | `undefined` | 从外层表单的 `rules` 对象获取规则的路径。如果没有设定，使用表项的 `path` 代替 |
 | show-feedback | `boolean` | `true` | 是否展示校验反馈 |
-| show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | 是否展示必填的星号。如果没有被设定，使用外层 `n-form` 的 `show-require-mark` |
 | show-label | `boolean` | `true` | 是否展示标签。如果没有被设定，使用外层 `n-form` 的 `show-label` |
+| show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | 是否展示必填的星号。如果没有被设定，使用外层 `n-form` 的 `show-require-mark` |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | 表单的验证状态。不设为 `undefined`时，会覆盖规则验证的结果 |
 
