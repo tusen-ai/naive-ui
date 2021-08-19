@@ -5,3 +5,4 @@ export type {
   ExtractPublicPropTypes,
   ExtractInternalPropTypes
 } from './extract-public-props'
+export type { Mutable } from './mutable'

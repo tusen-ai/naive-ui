@@ -209,6 +209,10 @@ export default defineComponent({
       controlledShowRef,
       uncontrolledShowRef
     )
+    const mergedShowConsideringDisabledPropRef = useMemo(() => {
+      if (props.disabled) return false
+      return mergedShowWithoutDisabledRef.value
+    })
     const getMergedDisabled = (): boolean => {
       if (props.disabled) return true
       const { getDisabled } = props
@@ -370,6 +374,7 @@ export default defineComponent({
     })
     return {
       positionManually: positionManuallyRef,
+      mergedShowConsideringDisabledProp: mergedShowConsideringDisabledPropRef,
       // if to show popover body
       uncontrolledShow: uncontrolledShowRef,
       mergedShowArrow: mergedShowArrowRef,
@@ -387,34 +392,40 @@ export default defineComponent({
     }
   },
   render () {
-    const { positionManually } = this
-    const slots = { ...this.$slots }
-    let triggerVNode: VNode | null
-    if (!positionManually) {
-      if (slots.activator) {
-        triggerVNode = getFirstSlotVNode(slots, 'activator')
-      } else {
-        triggerVNode = getFirstSlotVNode(slots, 'trigger')
-      }
-      if (triggerVNode) {
-        triggerVNode = cloneVNode(triggerVNode)
-        triggerVNode =
-          triggerVNode.type === textVNodeType
-            ? h('span', [triggerVNode])
-            : triggerVNode
-        appendEvents(triggerVNode, positionManually ? 'manual' : this.trigger, {
-          onClick: this.handleClick,
-          onMouseenter: this.handleMouseEnter,
-          onMouseleave: this.handleMouseLeave,
-          onFocus: this.handleFocus,
-          onBlur: this.handleBlur
-        })
-      }
-      this.setTriggerVNode(triggerVNode)
-    }
-
     return h(VBinder, null, {
       default: () => {
+        const { positionManually, $slots: slots } = this
+        let triggerVNode: VNode | null
+        if (!positionManually) {
+          if (slots.activator) {
+            triggerVNode = getFirstSlotVNode(slots, 'activator')
+          } else {
+            triggerVNode = getFirstSlotVNode(slots, 'trigger')
+          }
+          if (triggerVNode) {
+            triggerVNode = cloneVNode(triggerVNode)
+            triggerVNode =
+              triggerVNode.type === textVNodeType
+                ? h('span', [triggerVNode])
+                : triggerVNode
+            appendEvents(
+              triggerVNode,
+              positionManually ? 'manual' : this.trigger,
+              {
+                onClick: this.handleClick,
+                onMouseenter: this.handleMouseEnter,
+                onMouseleave: this.handleMouseLeave,
+                onFocus: this.handleFocus,
+                onBlur: this.handleBlur
+              }
+            )
+          }
+          this.setTriggerVNode(triggerVNode)
+        }
+        // We need to subscribe it. Sometimes rerender won't ge triggered.
+        // `mergedShowConsideringDisabledProp` is not the final disabled status.
+        // In ellpisis it's dynamic.
+        void this.mergedShowConsideringDisabledProp
         const mergedShow = this.getMergedShow()
         return [
           positionManually

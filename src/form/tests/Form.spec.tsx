@@ -89,4 +89,48 @@ describe('n-form', () => {
       )
     })
   })
+
+  it('should work with `show-label` prop', async () => {
+    let wrapper = mount(NForm, {
+      slots: {
+        default: () =>
+          [1, 2, 3].map((num) => (
+            <NFormItem label={`label${num}`}>
+              {{
+                default: () => <NInput />
+              }}
+            </NFormItem>
+          ))
+      }
+    })
+    // show-label default is true in component
+    expect(wrapper.findAll('.n-form-item-label').length).toBe(3)
+    expect(wrapper.findAll('.n-form-item--no-label').length).toBe(0)
+
+    await wrapper.setProps({ showLabel: true })
+    expect(wrapper.findAll('.n-form-item-label').length).toBe(3)
+    expect(wrapper.findAll('.n-form-item--no-label').length).toBe(0)
+
+    await wrapper.setProps({ showLabel: false })
+    expect(wrapper.findAll('.n-form-item-label').length).toBe(0)
+    expect(wrapper.findAll('.n-form-item--no-label').length).toBe(3)
+
+    // The NFormItem show-label has a higher weight than the NForm
+    wrapper = mount(NForm, {
+      props: { showLabel: true },
+      slots: {
+        default: () => (
+          <NFormItem label="label" show-label={false}>
+            {{
+              default: () => <NInput />
+            }}
+          </NFormItem>
+        )
+      }
+    })
+    expect(
+      wrapper.find('.n-form-item').classes().includes('n-form-item--no-label')
+    ).toBe(true)
+    expect(wrapper.findAll('.n-form-item-label').length).toBe(0)
+  })
 })
