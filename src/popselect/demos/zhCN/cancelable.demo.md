@@ -9,10 +9,14 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const valueRef = ref('song1')
+
     return {
-      value: 'song1',
+      value: valueRef,
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
@@ -72,5 +76,5 @@ export default {
       ]
     }
   }
-}
+})
 ```

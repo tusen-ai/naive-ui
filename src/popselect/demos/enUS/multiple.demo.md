@@ -11,10 +11,14 @@ Select multiple value in popselect.
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const valueRef = ref(null)
+
     return {
-      value: null,
+      value: valueRef,
       options: [
         {
           label: 'Go Let It Out',
@@ -36,5 +40,5 @@ export default {
       ]
     }
   }
-}
+})
 ```

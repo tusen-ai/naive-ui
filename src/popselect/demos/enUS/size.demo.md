@@ -10,10 +10,14 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const valueRef = ref('Drive My Car')
+
     return {
-      value: 'Drive My Car',
+      value: valueRef,
       options: [
         {
           label: 'Drive My Car',
@@ -68,5 +72,5 @@ export default {
       ]
     }
   }
-}
+})
 ```
