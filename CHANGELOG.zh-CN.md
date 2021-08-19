@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-input` `placeholder` bug，关闭 [#914](https://github.com/TuSimple/naive-ui/issues/914)
+
 ## 2.16.5 (2021-08-20)
 
 ### Feats
