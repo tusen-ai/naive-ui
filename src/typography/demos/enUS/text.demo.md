@@ -1,6 +1,6 @@
 # Text
 
-Use different type of text to display different kind of info.
+Use different types of text to display different kinds of info.
 
 ```html
 <n-text type="info">Info</n-text>&nbsp;
