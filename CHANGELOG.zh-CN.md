@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-input-number` 新增 `clearable` 属性
+- `n-form` 新增 `show-label` 属性，关闭 [#858](https://github.com/TuSimple/naive-ui/issues/858)
 
 ## 2.16.4 (2021-08-16)
 

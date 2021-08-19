@@ -48,6 +48,10 @@ const formProps = {
   onSubmit: {
     type: Function as PropType<(e: Event) => void>,
     default: (e: Event) => e.preventDefault()
+  },
+  showLabel: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   }
 } as const
 

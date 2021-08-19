@@ -15,6 +15,7 @@ left
 item-only
 async
 disabled
+show-label
 ```
 
 ## Props
@@ -31,6 +32,7 @@ disabled
 | model | `Object` | `{}` | The object to get collected value from form items. |
 | rules | `type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }` | `{}` | The rules to validate form items. |
 | show-feedback | `boolean` | `true` | Whether to show feedback. |
+| show-label | `boolean` | `true` | Whether to show label. |
 | show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | Whether to show require mark when form item is required. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 
@@ -51,7 +53,7 @@ disabled
 | feedback | `string` | `undefined` | The feedback message of the form item. If not set to `undefined`, it will take place of the result of rule-based validation. |
 | first | `boolean` | `false` | Whether only to show the first validation error message. |
 | ingore-path-change | `boolean` | `false` | Usually, the change of `path` will cause the data source's variation. So naive-ui will clear the validation result. If it is not expected, you can set it to `true` |
-| label | `string` | `undefined` | Lbale information. |
+| label | `string` | `undefined` | Label information. |
 | label-align | `'left' \| 'right'` | `undefined` | Text align in label. If not set, use `label-align` from wrapper form. |
 | label-placement | `'left' \| 'top'` | `undefined` | If not set, use `label-placement` from wrapper form. |
 | label-style | `Object` | `{}` | Label style. |
@@ -61,6 +63,7 @@ disabled
 | rule | `FormItemRule \| Array<FormItemRule>` | `undefined` | The rule to validate the form item. It will be merged with the rules acquired by `rule-path` from wrapper form's rules. It's recommend to set all rules on wrapper form. |
 | rule-path | `string` | `undefined` | The path to get rule from wrapper form's rule object. If not set, use path of the form item instead. |
 | show-feedback | `boolean` | `true` | Whether to show feedback. |
+| show-label | `boolean` | `true` | Whether to show label. If not set, use `show-label` from wrapper form. |
 | show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | Whether to show require mark. If not set, use `show-require-mark` from wrapper form. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | The validation status of the form item. If not set to `undefined`, it will take place of the result of rule-based validation. |

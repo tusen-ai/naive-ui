@@ -52,7 +52,7 @@ import {
 export const formItemProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
   label: {
-    type: [String, Boolean] as PropType<string | false | undefined>,
+    type: String as PropType<string | undefined>,
     default: undefined
   },
   labelWidth: [Number, String] as PropType<string | number>,
@@ -84,7 +84,11 @@ export const formItemProps = {
     default: false
   },
   validationStatus: String as PropType<'error' | 'warning' | 'success'>,
-  feedback: String
+  feedback: String,
+  showLabel: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  }
 } as const
 
 export type FormItemSetupProps = ExtractPropTypes<typeof formItemProps>
@@ -412,11 +416,11 @@ export default defineComponent({
           `${mergedClsPrefix}-form-item`,
           `${mergedClsPrefix}-form-item--${this.mergedSize}-size`,
           `${mergedClsPrefix}-form-item--${this.mergedLabelPlacement}-labelled`,
-          this.label === false && `${mergedClsPrefix}-form-item--no-label`
+          !this.mergedShowLabel && `${mergedClsPrefix}-form-item--no-label`
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {this.label || $slots.label ? (
+        {this.mergedShowLabel && (this.label || $slots.label) ? (
           <label
             class={`${mergedClsPrefix}-form-item-label`}
             style={this.mergedLabelStyle as any}

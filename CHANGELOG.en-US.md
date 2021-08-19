@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-input-number` add `clearable` prop.
+- `n-form` add `show-label` prop, closes [#858](https://github.com/TuSimple/naive-ui/issues/858).
 
 ## 2.16.4 (2021-08-16)
 
@@ -24,6 +25,7 @@
 
 ### Feats
 
+- `n-message-provider` add `container-style` prop
 - `n-message-provider` add `container-style` prop.
 - `n-message-provider` add `placement` prop.
 - `n-message` add class to distinguish type.
