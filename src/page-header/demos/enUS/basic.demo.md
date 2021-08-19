@@ -2,7 +2,7 @@
 
 ```html
 <n-page-header
-  subtitle="Hear better than you can see"
+  subtitle="A podcast to improve designs"
   @back="handleBack"
 >
   <n-grid :cols="5">
@@ -13,7 +13,7 @@
       <n-statistic label="Guests" value="22" />
     </n-gi>
     <n-gi>
-      <n-statistic label="Recommendations" value="36" />
+      <n-statistic label="Apologies" value="36" />
     </n-gi>
     <n-gi>
       <n-statistic label="Topics" value="83" />
@@ -69,15 +69,15 @@ export default defineComponent({
       },
       options: [
         {
-          label: 'What?',
+          label: 'More episodes',
           key: '1'
         },
         {
-          label: 'It can also',
+          label: 'More episodes',
           key: '2'
         },
         {
-          label: 'Have a menu?',
+          label: 'More episodes',
           key: '3'
         }
       ]
