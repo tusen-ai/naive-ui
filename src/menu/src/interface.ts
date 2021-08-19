@@ -18,10 +18,12 @@ export interface MenuOptionSharedPart {
 }
 
 export interface MenuIgnoredOption extends MenuOptionSharedPart {
+  key: Key
   type: 'ignored' | 'divider'
 }
 
 export interface MenuDividerOption extends MenuOptionSharedPart {
+  key: Key
   type: 'divider'
 }
 
@@ -50,7 +52,7 @@ export type MenuGroupOption =
   })
   | (MenuGroupOptionBase & { label?: string | (() => VNodeChild) })
 
-export type MenuMixedOption = MenuOption | MenuGroupOption | MenuIgnoredOption
+export type MenuMixedOption = MenuIgnoredOption | MenuOption | MenuGroupOption
 
 export type TmNode = TreeNode<MenuOption, MenuGroupOption, MenuIgnoredOption>
 

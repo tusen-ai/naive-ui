@@ -204,7 +204,6 @@ export default defineComponent({
   render () {
     const {
       animated,
-      rawNode,
       mergedShowSubmenu,
       clsPrefix,
       siblingHasIcon,
@@ -213,6 +212,7 @@ export default defineComponent({
       renderIcon,
       props
     } = this
+    const rawNode = this.rawNode as DropdownOption | DropdownGroupOption
     const submenuVNode = mergedShowSubmenu ? (
       <NDropdownMenu
         clsPrefix={clsPrefix}
@@ -250,7 +250,7 @@ export default defineComponent({
             __dropdown-option
             class={`${clsPrefix}-dropdown-option-body__label`}
           >
-            {/* TODO: Workaround, menu campatible */}
+            {/* TODO: Workaround, menu compatible */}
             {renderLabel
               ? renderLabel(rawNode)
               : render(rawNode[this.labelField] ?? rawNode.title)}
