@@ -18,7 +18,7 @@ virtual
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| cascade | `boolean` | `true` | Whether to cascade the checkbox selection when onto children. |
+| cascade | `boolean` | `true` | Whether to cascade the checkbox selection onto children. |
 | clearable | `boolean` | `false` | Whether the cascader is clearable. |
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | Data selected by default if no value is set. |
 | disabled | `boolean` | `false` | Whether to disable the cascader. |
