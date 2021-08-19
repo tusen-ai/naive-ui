@@ -1,6 +1,6 @@
 # Grid
 
-Use checkbox with grid.
+Use checkboxes with a grid.
 
 ```html
 <n-checkbox-group>
