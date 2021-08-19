@@ -397,7 +397,16 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <div class={`${mergedClsPrefix}-tabs-nav`}>
+        <div
+          class={[
+            // the class should be applied here since it's possible
+            // to make tabs nested in tabs, style may influence each
+            // other. adding a class will make it easy to write the
+            // style.
+            `${mergedClsPrefix}-tabs-nav--${type}-type`,
+            `${mergedClsPrefix}-tabs-nav`
+          ]}
+        >
           {prefix ? (
             <div class={`${mergedClsPrefix}-tabs-nav__prefix`}>{prefix}</div>
           ) : null}

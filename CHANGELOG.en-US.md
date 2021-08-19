@@ -2,14 +2,15 @@
 
 ## Pending
 
-### Fixes
-
-- Fix `n-notification`'s exported `NotificationReactive` type is not writable, closes [#876](https://github.com/TuSimple/naive-ui/issues/876).
-
 ### Feats
 
 - `n-input-number` add `clearable` prop.
 - `n-form` add `show-label` prop, closes [#858](https://github.com/TuSimple/naive-ui/issues/858).
+
+### Fixes
+
+- Fix `n-notification`'s exported `NotificationReactive` type is not writable, closes [#876](https://github.com/TuSimple/naive-ui/issues/876).
+- Fix `n-tabs` style glitches when different types tabs are nested, closes [#850](https://github.com/TuSimple/naive-ui/issues/850).
 
 ## 2.16.4 (2021-08-16)
 

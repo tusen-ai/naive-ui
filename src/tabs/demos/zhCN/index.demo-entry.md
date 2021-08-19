@@ -13,6 +13,7 @@ prefix
 display-directive
 addable
 line-debug
+style-inherit-debug
 ```
 
 ## Props
