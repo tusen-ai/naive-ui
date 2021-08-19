@@ -11,10 +11,8 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const valueRef = ref('Drive My Car')
-
     return {
-      value: valueRef,
+      value: ref('Drive My Car'),
       options: [
         {
           label: 'Drive My Car',

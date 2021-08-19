@@ -13,10 +13,8 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const valueRef = ref('song1')
-
     return {
-      value: valueRef,
+      value: ref('song1'),
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",

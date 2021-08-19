@@ -15,10 +15,8 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const valueRef = ref(null)
-
     return {
-      value: valueRef,
+      value: ref(null),
       options: [
         {
           label: 'Go Let It Out',
