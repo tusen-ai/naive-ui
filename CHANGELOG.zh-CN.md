@@ -13,6 +13,7 @@
 - 修复 `n-tabs` 不同类型嵌套样式错乱，关闭 [#850](https://github.com/TuSimple/naive-ui/issues/850)
 - 修复 `n-dropdown` 内部的链接点击触发区域不是整个选项，关闭 [#823](https://github.com/TuSimple/naive-ui/issues/823)
 - 修复 `n-popover` 嵌套于不同 placement 的 popover 中箭头位置错乱，关闭 [#916](https://github.com/TuSimple/naive-ui/issues/916)
+- 修复 `n-ellpisis` 在更新内容后失效，关闭 [#776](https://github.com/TuSimple/naive-ui/issues/776)
 
 ## 2.16.4 (2021-08-16)
 

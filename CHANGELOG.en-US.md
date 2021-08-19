@@ -13,6 +13,7 @@
 - Fix `n-tabs` style glitches when different types tabs are nested, closes [#850](https://github.com/TuSimple/naive-ui/issues/850).
 - Fix `n-dropdown`'s inner link click trigger area is not the entire option, closes [#823](https://github.com/TuSimple/naive-ui/issues/823).
 - Fix `n-popover` arrow's misplacement when placed in nested popovers with different placement, closes [#916](https://github.com/TuSimple/naive-ui/issues/916).
+- Fix `n-ellpisis` doesn't work after content is updated, closes [#776](https://github.com/TuSimple/naive-ui/issues/776).
 
 ## 2.16.4 (2021-08-16)
 
