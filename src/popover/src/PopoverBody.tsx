@@ -292,7 +292,6 @@ export default defineComponent({
     }
   },
   render () {
-    console.log('render popover body', this.show)
     return h(
       VFollower,
       {
@@ -310,11 +309,6 @@ export default defineComponent({
       },
       {
         default: () => {
-          console.log(
-            'render popover body default slot',
-            this.renderContentNode()
-          )
-
           return this.animated
             ? h(
               Transition,

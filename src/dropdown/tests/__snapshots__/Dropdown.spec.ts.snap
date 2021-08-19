@@ -39,7 +39,9 @@ exports[`n-dropdown dropdown clickoutside 1`] = `
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
-      />
+      >
+        <!---->
+      </div>
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__label"
@@ -177,7 +179,9 @@ exports[`n-dropdown dropdown clickoutside 1`] = `
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
-      />
+      >
+        <!---->
+      </div>
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__label"
@@ -277,7 +281,9 @@ exports[`n-dropdown inverted style 1`] = `
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
-      />
+      >
+        <!---->
+      </div>
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__label"
@@ -415,7 +421,9 @@ exports[`n-dropdown inverted style 1`] = `
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
-      />
+      >
+        <!---->
+      </div>
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__label"
@@ -887,7 +895,9 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
-      />
+      >
+        <!---->
+      </div>
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__label"
@@ -1033,7 +1043,9 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
-      />
+      >
+        <!---->
+      </div>
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__label"
@@ -1120,7 +1132,9 @@ exports[`n-dropdown shows menu after click 1`] = `
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
-      />
+      >
+        <!---->
+      </div>
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__label"
@@ -1258,7 +1272,9 @@ exports[`n-dropdown shows menu after click 1`] = `
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
-      />
+      >
+        <!---->
+      </div>
       <div
         __dropdown-option="true"
         class="n-dropdown-option-body__label"
