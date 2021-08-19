@@ -37,7 +37,7 @@ after-select
 | -------- | --------- | ------------------------------ |
 | disabled | `boolean` | Whether the option is disabled. |
 | label    | `string`  | Option label value.         |
-| value    | `string`  | Options ID (should be unique).   |
+| value    | `string`  | Option ID (should be unique).   |
 
 ### AutoCompleteGroupOption Properties
 
