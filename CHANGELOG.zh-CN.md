@@ -11,6 +11,7 @@
 
 - 修复 `n-notification` 导出的 `NotificationReactive` 类型不可变，关闭 [#876](https://github.com/TuSimple/naive-ui/issues/876)
 - 修复 `n-tabs` 不同类型嵌套样式错乱，关闭 [#850](https://github.com/TuSimple/naive-ui/issues/850)
+- 修复 `n-dropdown` 内部的链接点击触发区域不是整个选项，关闭 [#823](https://github.com/TuSimple/naive-ui/issues/823)
 
 ## 2.16.4 (2021-08-16)
 
