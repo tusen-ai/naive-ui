@@ -9,7 +9,8 @@ import {
   isColumnSortable,
   isColumnFilterable,
   createNextSorter,
-  getColKey
+  getColKey,
+  isColumnSorting
 } from '../utils'
 import {
   TableExpandColumn,
@@ -79,13 +80,6 @@ export default defineComponent({
       const nextSorter = createNextSorter(column, activeSorter)
       doUpdateSorter(nextSorter)
     }
-    function isColumnSorting (column: TableBaseColumn): boolean {
-      return (
-        mergedSortStateRef.value.find(
-          (state) => state.columnKey === column.key && state.order
-        ) !== undefined
-      )
-    }
     function handleMouseenter (): void {
       scrollPartRef.value = 'head'
     }
@@ -128,6 +122,7 @@ export default defineComponent({
       discrete,
       mergedTableLayout,
       headerCheckboxDisabled,
+      mergedSortState,
       isColumnSorting,
       handleColHeaderClick,
       handleCheckboxUpdateChecked
@@ -162,7 +157,10 @@ export default defineComponent({
                         `${mergedClsPrefix}-data-table-th--fixed-${column.fixed}`,
                       {
                         [`${mergedClsPrefix}-data-table-th--hover`]:
-                          isColumnSorting(column),
+                          isColumnSorting(
+                            column as TableBaseColumn,
+                            mergedSortState
+                          ),
                         [`${mergedClsPrefix}-data-table-th--filterable`]:
                           isColumnFilterable(column),
                         [`${mergedClsPrefix}-data-table-th--sortable`]:

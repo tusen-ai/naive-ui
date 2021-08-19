@@ -110,7 +110,7 @@ export default function useSorter (
       )
     if (activeSorters?.length) {
       const filteredData = filteredDataRef.value.slice()
-      filteredData.sort((tmNode1, tmNode2) => {
+      return filteredData.sort((tmNode1, tmNode2) => {
         for (let i = 0; i < activeSorters.length; i += 1) {
           const sorterState = activeSorters[i]
           const { columnKey, sorter, order } = sorterState
@@ -145,7 +145,6 @@ export default function useSorter (
         (state) =>
           sortState?.columnKey && state.columnKey === sortState.columnKey
       )
-      console.log(index)
       if (index !== undefined && index >= 0) {
         uncontrolledSortStateRef.value.push(sortState)
       } else {

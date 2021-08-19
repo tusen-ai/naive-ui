@@ -20,9 +20,10 @@ import {
   RowKey,
   SummaryRowData,
   MainTableBodyRef,
-  TmNode
+  TmNode,
+  TableBaseColumn
 } from '../interface'
-import { createRowClassName, getColKey } from '../utils'
+import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
 import RenderSafeCheckbox from './BodyCheckbox'
@@ -384,10 +385,10 @@ export default defineComponent({
             paginatedData.forEach((tmNode, rowIndex) => {
               rowIndexToKey[rowIndex] = tmNode.key
             })
-            const sorterKey =
-              !!mergedSortState &&
-              mergedSortState.order &&
-              mergedSortState.columnKey
+            // const sorterKey =
+            //   !!mergedSortState &&
+            //   mergedSortState.order &&
+            //   mergedSortState.columnKey
 
             let mergedData: RowRenderInfo[]
 
@@ -503,7 +504,10 @@ export default defineComponent({
                       isSummary && `${mergedClsPrefix}-data-table-td--summary`,
                       ((hoverKey !== null &&
                         cordKey[rowIndex][colIndex].includes(hoverKey)) ||
-                        (sorterKey !== false && sorterKey === colKey)) &&
+                        isColumnSorting(
+                          column as TableBaseColumn,
+                          mergedSortState
+                        )) &&
                         `${mergedClsPrefix}-data-table-td--hover`,
                       column.fixed &&
                         `${mergedClsPrefix}-data-table-td--fixed-${column.fixed}`,

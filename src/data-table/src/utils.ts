@@ -106,3 +106,14 @@ export function createNextSorter (
     }
   }
 }
+
+export function isColumnSorting (
+  column: TableBaseColumn,
+  mergedSortState: SortState[]
+): boolean {
+  return (
+    mergedSortState.find(
+      (state) => state.columnKey === column.key && state.order
+    ) !== undefined
+  )
+}
