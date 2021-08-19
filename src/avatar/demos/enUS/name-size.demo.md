@@ -1,6 +1,6 @@
 # Content Size
 
-Words' sizing would be auto adjusted in avatar.
+Text is resized to fit the avatar.
 
 ```html
 <n-space vertical item-style="line-height: 0;">

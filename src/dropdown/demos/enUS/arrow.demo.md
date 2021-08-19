@@ -1,6 +1,6 @@
-# Basic
+# Arrow
 
-Show Arrow
+Show an arrow with the dropdown.
 
 ```html
 <n-dropdown

@@ -1,6 +1,6 @@
 # Color
 
-You can set it to something related to things you want to eat.
+You can set colors related to things you want to eat.
 
 ```html
 <n-avatar

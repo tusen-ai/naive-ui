@@ -1,6 +1,6 @@
 # Basic
 
-Basic usage of dropdown
+A basic dropdown.
 
 ```html
 <n-dropdown trigger="hover" @select="handleSelect" :options="options">

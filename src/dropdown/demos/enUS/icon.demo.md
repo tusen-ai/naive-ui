@@ -1,5 +1,7 @@
 # Icon
 
+Dropdown options can also have icons!
+
 ```html
 <n-dropdown :options="options">
   <n-button>User profile</n-button>

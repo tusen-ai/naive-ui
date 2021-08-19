@@ -1,6 +1,6 @@
 # Type
 
-It has different type.
+A gradient text component can have different types.
 
 ```html
 <n-gradient-text type="error"> Boom! </n-gradient-text>

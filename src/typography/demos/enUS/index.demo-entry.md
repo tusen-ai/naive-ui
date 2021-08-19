@@ -1,6 +1,6 @@
 # Typography
 
-Naive UI provides some basic styling for common HTML tags. It also provides some components to render text better.
+Naive UI provides some basic styling for common HTML tags; including components to render text better.
 
 Typography is a kind of art.
 
@@ -22,11 +22,11 @@ router-link
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Typography type. |
 | strong | `boolean` | `false` | Strong. |
 | italic | `boolean` | `false` | Italic. |
-| underline | `boolean` | `false` | Text underline. |
-| delete | `boolean` | `false` | Text delete. |
-| code | `boolean` | `false` | Code mode. |
+| underline | `boolean` | `false` | Underline. |
+| delete | `boolean` | `false` | Strikethrough. |
+| code | `boolean` | `false` | Code. |
 | depth | `1 \| 2 \| 3 \| '1' \| '2' \| '3'` | `undefined` | Text depth. |
-| tag | `string` | `undefined` | What tag should be this component be rendered as. Won't work when `code` or `del` is set. |
+| tag | `string` | `undefined` | What tag should be this component be rendered as. Won't work when `code` or `del` is also used. |
 
 ### P Props
 
@@ -40,7 +40,7 @@ router-link
 | --- | --- | --- | --- |
 | align-text | `boolean` | `false` | Text align. |
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Text depth. |
-| prefix | `'bar'` | `undefined` | Show bars at the beginning of the word. |
+| prefix | `'bar'` | `undefined` | Show a bar in front of the heading. |
 
 ### Ul, Ol Props
 
