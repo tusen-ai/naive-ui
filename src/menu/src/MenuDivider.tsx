@@ -1,7 +1,7 @@
 import { h, defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'MenuOptionDivider',
+  name: 'MenuDivider',
   props: {
     clsPrefix: {
       type: String,
