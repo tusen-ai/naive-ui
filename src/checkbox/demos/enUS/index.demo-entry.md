@@ -22,7 +22,7 @@ event
 | checked | `boolean` | `false` | Whether the checkbox is being checked manually. |
 | default-checked | `boolean` | `false` | Whether the checkbox is checked by default. |
 | disabled | `boolean` | `false` | Whether the checkbox is disabled. |
-| focusable | `boolean` | `true` | Whether the checkbox gains focus on being checked. |
+| focusable | `boolean` | `true` | Whether the checkbox gains focus after being checked. |
 | indeterminate | `boolean` | `false` | Whether the checkbox can have a third indeterminate state. |
 | label | `string` | `undefined` | Checkbox label. |
 | value | `string \| number` | `undefined` | The value of the checkbox to be used in a checkbox group. |
