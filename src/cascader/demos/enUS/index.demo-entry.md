@@ -1,6 +1,6 @@
 # Cascader
 
-Cascader can be used to select some tree structured data.
+Cascader can be used to display and select tree structured data.
 
 ## Demos
 
@@ -18,29 +18,29 @@ virtual
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| cascade | `boolean` | `true` | Whether to cascade checkbox when multiple. |
+| cascade | `boolean` | `true` | Whether to cascade the checkbox selection onto children. |
 | clearable | `boolean` | `false` | Whether the cascader is clearable. |
-| default-value | `string \| number \| Array<number \| string> \| null` | `null` | Data selected by default in uncontrolled mode. |
+| default-value | `string \| number \| Array<number \| string> \| null` | `null` | Data selected by default if no value is set. |
 | disabled | `boolean` | `false` | Whether to disable the cascader. |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | If `remote` is set, `'hover'` won't work. |
-| filterable | `boolean` | `false` | If `remote` is set, it won't work. |
+| filterable | `boolean` | `false` | Note: If `remote` is set, this won't have any effect. |
 | filter | `(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean` | A string based filter algorithm. | Filter function of the cascader. |
-| leaf-only | `boolean` | `false` | If only allow value of leaf node to be in `value`. |
-| max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple mode. `responsive` will keep all the tags in single line. |
-| multiple | `boolean` | `false` | Whether to support multiple selection. |
+| leaf-only | `boolean` | `false` | If only a leaf node can be selected `value`. |
+| max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple select mode. `responsive` will keep all the tags in single line. |
+| multiple | `boolean` | `false` | Whether to allow multiple options being selected. |
 | options | `Array<CascaderOption>` | required | Options of the cascader. |
-| placeholder | `string` | `'Please Select'` | Prompt information. |
+| placeholder | `string` | `'Please Select'` | Placeholder text. |
 | remote | `boolean` | `false` | Whether to obtain data remotely. |
-| separator | `string` | `' / '` | Option value separator. |
-| show | `boolean` | `undefined` | Whether to show menu. |
-| show-path | `boolean` | `true` | Whether to show path in selector. |
+| separator | `string` | `' / '` | Selected option path value separator (used with `show-path`). |
+| show | `boolean` | `undefined` | Whether to show the menu. |
+| show-path | `boolean` | `true` | Whether to show the selected options as a path. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Cascader size. |
-| value | `string \| number \| Array<number \| string> \| null` | `undefined` | Value of the cascader in controlled mode. |
+| value | `string \| number \| Array<number \| string> \| null` | `undefined` | Value of the cascader (if being set manually). |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |
 | on-blur | `() => void` | `undefined` | Callback on blurred. |
 | on-focus | `() => void` | `undefined` | Callback on focused. |
-| on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | Callback when click unloaded node. Set `option.children` in the returned promise. Loading is end after the promise is resolved or rejected. |
-| on-update:value | `(value: string \| number \| Array<string \| number> \| null) => void` | `undefined` | Callback executed when value changes. |
+| on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | Callback when a node is loaded. Set `option.children` in the returned promise. Loading will stop after the promise is resolved or rejected. |
+| on-update:value | `(value: string \| number \| Array<string \| number> \| null) => void` | `undefined` | Callback executed when the value changes. |
 
 ## API
 
@@ -50,11 +50,11 @@ virtual
 | --------- | ------------------ | ------------------------------- |
 | label     | `string`           | Label of the option.            |
 | value     | `string \| number` | Value of the option.            |
-| disabled? | `boolean`          | Whether this item is disabled.  |
-| children? | `CascaderOption`   | The children data of this item. |
+| disabled? | `boolean`          | Whether this option is disabled.  |
+| children? | `CascaderOption`   | The children options of this option. |
 
 ## Slots
 
 | Name   | Parameters | Description                                          |
 | ------ | ---------- | ---------------------------------------------------- |
-| action | `()`       | Action fill content displayed in the cascading menu. |
+| action | `()`       | Action content displayed in the cascading menu. |

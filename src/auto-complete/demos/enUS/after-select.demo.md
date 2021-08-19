@@ -1,6 +1,6 @@
 # Actions After Select
 
-Blur after selection or clear after selection.
+Choose whether the element blurs after a selection is made with `blur-after-select`.
 
 ```html
 <n-space vertical>
