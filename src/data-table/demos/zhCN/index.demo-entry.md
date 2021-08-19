@@ -19,6 +19,8 @@ size
 row-props
 merge-cell
 filter-and-sorter
+multiple-sorter
+multiple-sorter-control
 select
 custom-select
 group-header

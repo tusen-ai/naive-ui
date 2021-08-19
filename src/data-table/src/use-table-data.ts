@@ -8,7 +8,6 @@ import {
   FilterOptionValue,
   FilterState,
   SortOrder,
-  SortState,
   TableBaseColumn,
   TableSelectionColumn,
   InternalRowData,
@@ -70,91 +69,9 @@ export function useTableData (
   })
 
   const uncontrolledFilterStateRef = ref<FilterState>({})
-  const uncontrolledSortStateRef = ref<SortState | null>(null)
+  // const uncontrolledSortStateRef = ref<SortState | null>(null)
   const uncontrolledCurrentPageRef = ref(1)
   const uncontrolledPageSizeRef = ref(10)
-
-  dataRelatedColsRef.value.forEach((column) => {
-    if (column.sorter !== undefined) {
-      uncontrolledSortStateRef.value = {
-        columnKey: column.key,
-        sorter: column.sorter,
-        order: column.defaultSortOrder ?? false
-      }
-    }
-    if (column.filter) {
-      const defaultFilterOptionValues = column.defaultFilterOptionValues
-      if (column.filterMultiple) {
-        uncontrolledFilterStateRef.value[column.key] =
-          defaultFilterOptionValues || []
-      } else if (defaultFilterOptionValues !== undefined) {
-        // this branch is for compatibility, someone may use `values` in single filter mode
-        uncontrolledFilterStateRef.value[column.key] =
-          defaultFilterOptionValues === null ? [] : defaultFilterOptionValues
-      } else {
-        uncontrolledFilterStateRef.value[column.key] =
-          column.defaultFilterOptionValue ?? null
-      }
-    }
-  })
-
-  const controlledCurrentPageRef = computed(() => {
-    const { pagination } = props
-    if (pagination === false) return undefined
-    return pagination.page
-  })
-  const controlledPageSizeRef = computed(() => {
-    const { pagination } = props
-    if (pagination === false) return undefined
-    return pagination.pageSize
-  })
-
-  const mergedCurrentPageRef = useMergedState(
-    controlledCurrentPageRef,
-    uncontrolledCurrentPageRef
-  )
-  const mergedPageSizeRef = useMergedState(
-    controlledPageSizeRef,
-    uncontrolledPageSizeRef
-  )
-  const mergedPageCountRef = computed(() => {
-    const { pagination } = props
-    if (pagination) {
-      const { pageCount } = pagination
-      if (pageCount !== undefined) return pageCount
-    }
-    return undefined
-  })
-
-  // const mergedSortStateRef = computed<SortState | null>(() => {
-  //   // If one of the columns's sort order is false or 'ascend' or 'descend',
-  //   // the table's controll functionality should work in controlled manner.
-  //   const columnsWithControlledSortOrder = dataRelatedColsRef.value.filter(
-  //     (column) =>
-  //       column.type !== 'selection' &&
-  //       column.sorter !== undefined &&
-  //       (column.sortOrder === 'ascend' ||
-  //         column.sortOrder === 'descend' ||
-  //         column.sortOrder === false)
-  //   )
-  //   // if multiple column is controlled sortable, then we need to find a column with active sortOrder
-  //   const columnToSort: TableBaseColumn | undefined = (
-  //     columnsWithControlledSortOrder as TableBaseColumn[]
-  //   ).filter((col: TableBaseColumn) => col.sortOrder !== false)[0]
-  //   if (columnToSort) {
-  //     return {
-  //       columnKey: columnToSort.key,
-  //       // column to sort has controlled sorter
-  //       // sorter && sort order won't be undefined
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       order: columnToSort.sortOrder!,
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       sorter: columnToSort.sorter!
-  //     }
-  //   }
-  //   if (columnsWithControlledSortOrder.length) return null
-  //   return uncontrolledSortStateRef.value
-  // })
 
   const mergedFilterStateRef = computed<FilterState>(() => {
     const columnsWithControlledFilter = dataRelatedColsRef.value.filter(
@@ -242,6 +159,93 @@ export function useTableData (
       : []
   })
 
+  const { sortedDataRef, doUpdateSorter, mergedSortStateRef, addSortSate } =
+    useSorter(props, {
+      dataRelatedColsRef,
+      filteredDataRef
+    })
+  dataRelatedColsRef.value.forEach((column) => {
+    if (column.sorter !== undefined) {
+      addSortSate({
+        columnKey: column.key,
+        sorter: column.sorter,
+        order: column.defaultSortOrder ?? false
+      })
+    }
+    if (column.filter) {
+      const defaultFilterOptionValues = column.defaultFilterOptionValues
+      if (column.filterMultiple) {
+        uncontrolledFilterStateRef.value[column.key] =
+          defaultFilterOptionValues || []
+      } else if (defaultFilterOptionValues !== undefined) {
+        // this branch is for compatibility, someone may use `values` in single filter mode
+        uncontrolledFilterStateRef.value[column.key] =
+          defaultFilterOptionValues === null ? [] : defaultFilterOptionValues
+      } else {
+        uncontrolledFilterStateRef.value[column.key] =
+          column.defaultFilterOptionValue ?? null
+      }
+    }
+  })
+
+  const controlledCurrentPageRef = computed(() => {
+    const { pagination } = props
+    if (pagination === false) return undefined
+    return pagination.page
+  })
+  const controlledPageSizeRef = computed(() => {
+    const { pagination } = props
+    if (pagination === false) return undefined
+    return pagination.pageSize
+  })
+
+  const mergedCurrentPageRef = useMergedState(
+    controlledCurrentPageRef,
+    uncontrolledCurrentPageRef
+  )
+  const mergedPageSizeRef = useMergedState(
+    controlledPageSizeRef,
+    uncontrolledPageSizeRef
+  )
+  const mergedPageCountRef = computed(() => {
+    const { pagination } = props
+    if (pagination) {
+      const { pageCount } = pagination
+      if (pageCount !== undefined) return pageCount
+    }
+    return undefined
+  })
+
+  // const mergedSortStateRef = computed<SortState | null>(() => {
+  //   // If one of the columns's sort order is false or 'ascend' or 'descend',
+  //   // the table's controll functionality should work in controlled manner.
+  //   const columnsWithControlledSortOrder = dataRelatedColsRef.value.filter(
+  //     (column) =>
+  //       column.type !== 'selection' &&
+  //       column.sorter !== undefined &&
+  //       (column.sortOrder === 'ascend' ||
+  //         column.sortOrder === 'descend' ||
+  //         column.sortOrder === false)
+  //   )
+  //   // if multiple column is controlled sortable, then we need to find a column with active sortOrder
+  //   const columnToSort: TableBaseColumn | undefined = (
+  //     columnsWithControlledSortOrder as TableBaseColumn[]
+  //   ).filter((col: TableBaseColumn) => col.sortOrder !== false)[0]
+  //   if (columnToSort) {
+  //     return {
+  //       columnKey: columnToSort.key,
+  //       // column to sort has controlled sorter
+  //       // sorter && sort order won't be undefined
+  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  //       order: columnToSort.sortOrder!,
+  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  //       sorter: columnToSort.sorter!
+  //     }
+  //   }
+  //   if (columnsWithControlledSortOrder.length) return null
+  //   return uncontrolledSortStateRef.value
+  // })
+
   // const sortedDataRef = computed<TmNode[]>(() => {
   //   const activeSorter = mergedSortStateRef.value
   //   if (activeSorter) {
@@ -278,13 +282,7 @@ export function useTableData (
   //   }
   //   return filteredDataRef.value
   // })
-  const { sortedDataRef, doUpdateSorter, mergedSortStateRef } = useSorter(
-    props,
-    {
-      dataRelatedColsRef,
-      filteredDataRef
-    }
-  )
+
   const paginatedDataRef = computed<TmNode[]>(() => {
     if (props.remote) return treeMateRef.value.treeNodes
     if (!props.pagination) return sortedDataRef.value

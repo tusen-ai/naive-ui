@@ -141,15 +141,12 @@ export default function useSorter (
       sortState &&
       getMultiplePriority({ sorter: sortState.sorter }) !== false
     ) {
-      const index = uncontrolledSortStateRef.value.findIndex(
-        (state) =>
-          sortState?.columnKey && state.columnKey === sortState.columnKey
+      // clear column is not multiple sort
+      uncontrolledSortStateRef.value = uncontrolledSortStateRef.value.filter(
+        (sortState) =>
+          getMultiplePriority({ sorter: sortState.sorter }) !== false
       )
-      if (index !== undefined && index >= 0) {
-        uncontrolledSortStateRef.value.push(sortState)
-      } else {
-        uncontrolledSortStateRef.value[index] = sortState
-      }
+      addSortSate(sortState)
     } else if (sortState) {
       // single sorter
       uncontrolledSortStateRef.value = [sortState]
@@ -190,11 +187,23 @@ export default function useSorter (
   function clearSorter (): void {
     doUpdateSorter(null)
   }
+  function addSortSate (sortState: SortState): void {
+    const index = uncontrolledSortStateRef.value.findIndex(
+      (state) => sortState?.columnKey && state.columnKey === sortState.columnKey
+    )
+    if (index !== undefined && index >= 0) {
+      uncontrolledSortStateRef.value[index] = sortState
+    } else {
+      uncontrolledSortStateRef.value.push(sortState)
+    }
+  }
   return {
     clearSorter,
     sort,
     sortedDataRef,
     mergedSortStateRef,
-    doUpdateSorter
+    uncontrolledSortStateRef,
+    doUpdateSorter,
+    addSortSate
   }
 }
