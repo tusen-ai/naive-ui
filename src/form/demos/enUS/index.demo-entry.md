@@ -63,7 +63,7 @@ show-label
 | rule | `FormItemRule \| Array<FormItemRule>` | `undefined` | The rule to validate the form item. It will be merged with the rules acquired by `rule-path` from wrapper form's rules. It's recommend to set all rules on wrapper form. |
 | rule-path | `string` | `undefined` | The path to get rule from wrapper form's rule object. If not set, use path of the form item instead. |
 | show-feedback | `boolean` | `true` | Whether to show feedback. |
-| show-label | `boolean` | `true` | Whether to show label. If not set, use `show-label` from wrapper form. |
+| show-label | `boolean` | `true` | Whether to show label. If not set, it will inherit `show-label` from outer form. |
 | show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | Whether to show require mark. If not set, use `show-require-mark` from wrapper form. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | The validation status of the form item. If not set to `undefined`, it will take place of the result of rule-based validation. |

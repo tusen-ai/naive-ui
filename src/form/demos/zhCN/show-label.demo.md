@@ -1,8 +1,8 @@
 # 显示/隐藏标签
 
-`show-label`: 当值为 `false` 时，会隐藏 `n-form-item` 的 `label` 元素和占位。
+当为 `show-label=false` 时，会隐藏 `n-form-item` 的 `label` 元素和占位。
 
-`n-form-item` 若未被设定，则会使用外层 `n-form` 的 `show-label`, 若都未被设定，则默认为 `true`。
+若 `show-label` 在 `n-form-item` 上未被设定，则会继承 `n-form` 的 `show-label`，默认为 `true`。
 
 ```html
 <div :style="switchStyle">
