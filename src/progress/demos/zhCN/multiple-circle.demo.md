@@ -12,10 +12,10 @@
       :stroke-width="6"
       :circle-gap="0.5"
       :percentage="[
-        percentageRef,
-        (percentageRef + 10) % 100,
-        (percentageRef + 20) % 100,
-        (percentageRef + 30) % 100
+        percentage,
+        (percentage + 10) % 100,
+        (percentage + 20) % 100,
+        (percentage + 30) % 100
       ]"
       :color="[
         'var(--info-color)',
@@ -62,7 +62,7 @@ export default defineComponent({
     }
 
     return {
-      percentageRef,
+      percentage: percentageRef,
       add,
       minus
     }

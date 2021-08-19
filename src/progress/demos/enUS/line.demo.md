@@ -4,63 +4,63 @@ In fact, progress of line type don't need four different styles. However, since 
 
 ```html
 <n-space vertical>
-  <n-progress type="line" :percentage="percentageRef" :show-indicator="false" />
-  <n-progress type="line" :percentage="percentageRef" />
+  <n-progress type="line" :percentage="percentage" :show-indicator="false" />
+  <n-progress type="line" :percentage="percentage" />
   <n-progress
     type="line"
-    :percentage="percentageRef"
+    :percentage="percentage"
     :indicator-placement="'inside'"
   />
   <n-progress
     type="line"
     status="info"
-    :percentage="percentageRef"
+    :percentage="percentage"
     :show-indicator="false"
   />
-  <n-progress type="line" status="info" :percentage="percentageRef" />
+  <n-progress type="line" status="info" :percentage="percentage" />
   <n-progress
     type="line"
     status="info"
-    :percentage="percentageRef"
+    :percentage="percentage"
     :indicator-placement="'inside'"
   />
   <n-progress
     type="line"
     status="success"
-    :percentage="percentageRef"
+    :percentage="percentage"
     :show-indicator="false"
   />
-  <n-progress type="line" status="success" :percentage="percentageRef" />
+  <n-progress type="line" status="success" :percentage="percentage" />
   <n-progress
     type="line"
     status="success"
-    :percentage="percentageRef"
+    :percentage="percentage"
     :indicator-placement="'inside'"
   />
   <n-progress
     type="line"
     status="warning"
-    :percentage="percentageRef"
+    :percentage="percentage"
     :show-indicator="false"
   />
-  <n-progress type="line" status="warning" :percentage="percentageRef" />
+  <n-progress type="line" status="warning" :percentage="percentage" />
   <n-progress
     type="line"
     status="warning"
-    :percentage="percentageRef"
+    :percentage="percentage"
     :indicator-placement="'inside'"
   />
   <n-progress
     type="line"
     status="error"
-    :percentage="percentageRef"
+    :percentage="percentage"
     :show-indicator="false"
   />
-  <n-progress type="line" status="error" :percentage="percentageRef" />
+  <n-progress type="line" status="error" :percentage="percentage" />
   <n-progress
     type="line"
     status="error"
-    :percentage="percentageRef"
+    :percentage="percentage"
     :indicator-placement="'inside'"
   />
   <n-space>
@@ -92,7 +92,7 @@ export default defineComponent({
     }
 
     return {
-      percentageRef,
+      percentage: percentageRef,
       add,
       minus
     }
