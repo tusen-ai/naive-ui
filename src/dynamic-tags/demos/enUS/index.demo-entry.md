@@ -27,3 +27,10 @@ slot
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |
 | value | `string[]` | `undefined` | Value in controlled mode. |
 | on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |
+
+## Slots
+
+| Name | Parameters | Description |
+| --- | --- | --- |
+| input | `(options: { submit: (value: any) => void, })` | Custom input elements, supplied by the user. |
+| trigger | `(options: { activate: () => void, disabled: boolean })` | The element or component that triggers input. |

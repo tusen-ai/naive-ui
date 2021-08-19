@@ -1,21 +1,27 @@
 # Slot
 
-Customize Input Or Add
+You can replace dynamic-tags's input or trigger element.
 
 ```html
 <n-dynamic-tags v-model:value="tags">
-  <template #input="{ addTag }">
+  <template #input="{ submit }">
     <n-auto-complete
       size="small"
       :options="options"
       v-model:value="inputValue"
       placeholder="Email"
-      @blur="addTag(inputValue),inputValue=''"
-      @keyup.enter="addTag(inputValue),inputValue=''"
+      @blur="submit(inputValue),inputValue=''"
+      @keyup.enter="submit(inputValue),inputValue=''"
     />
   </template>
-  <template #add="{ add }">
-    <n-button size="small" @click="add()" type="primary" dashed>
+  <template #trigger="{ activate, disabled }">
+    <n-button
+      size="small"
+      @click="activate()"
+      type="primary"
+      dashed
+      :disabled="disabled"
+    >
       <template #icon>
         <n-icon>
           <Add />

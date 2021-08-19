@@ -95,6 +95,9 @@ export default defineComponent({
     const inputSizeRef = computed(() => {
       return smallerSize(props.size)
     })
+    const isMaxNumRef = computed(() => {
+      return !!props.max && mergedValueRef.value.length >= props.max
+    })
     function doChange (value: string[]): void {
       const {
         onChange,
@@ -159,6 +162,7 @@ export default defineComponent({
       inputForceFocused: inputForceFocusedRef,
       mergedValue: mergedValueRef,
       mergedDisabled: mergedDisabledRef,
+      isMaxNum: isMaxNumRef,
       handleInputKeyUp,
       handleAddClick,
       handleInputBlur,
@@ -202,6 +206,7 @@ export default defineComponent({
               inputStyle,
               inputSize,
               inputForceFocused,
+              isMaxNum,
               handleInputKeyUp,
               handleInputBlur,
               handleAddClick,
@@ -230,7 +235,7 @@ export default defineComponent({
               .concat(
                 showInput ? (
                   $slots.input ? (
-                    $slots.input({ addTag: handleAddTag })
+                    $slots.input({ submit: handleAddTag })
                   ) : (
                     <NInput
                       ref="inputInstRef"
@@ -249,12 +254,15 @@ export default defineComponent({
                       internalForceFocus={inputForceFocused}
                     />
                   )
-                ) : $slots.add ? (
-                  $slots.add({ add: handleAddClick })
+                ) : $slots.trigger ? (
+                  $slots.trigger({
+                    activate: handleAddClick,
+                    disabled: isMaxNum
+                  })
                 ) : (
                   <NButton
                     dashed
-                    disabled={!!this.max && this.mergedValue.length >= this.max}
+                    disabled={isMaxNum}
                     theme={mergedTheme.peers.Button}
                     themeOverrides={mergedTheme.peerOverrides.Button}
                     size={inputSize}
