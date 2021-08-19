@@ -133,48 +133,4 @@ describe('n-form', () => {
     ).toBe(true)
     expect(wrapper.findAll('.n-form-item-label').length).toBe(0)
   })
-
-  it('should work with `label` prop in form item', async () => {
-    let wrapper = mount(NForm, {
-      slots: {
-        default: () => (
-          <NFormItem>
-            {{
-              default: () => <NInput />
-            }}
-          </NFormItem>
-        )
-      }
-    })
-    expect(wrapper.findAll('.n-form-item-label').length).toBe(0)
-    expect(wrapper.findAll('.n-form-item--no-label').length).toBe(0)
-
-    wrapper = mount(NForm, {
-      slots: {
-        default: () => (
-          <NFormItem label="label">
-            {{
-              default: () => <NInput />
-            }}
-          </NFormItem>
-        )
-      }
-    })
-    expect(wrapper.findAll('.n-form-item-label').length).toBe(1)
-    expect(wrapper.findAll('.n-form-item--no-label').length).toBe(0)
-
-    wrapper = mount(NForm, {
-      slots: {
-        default: () => (
-          <NFormItem label={false}>
-            {{
-              default: () => <NInput />
-            }}
-          </NFormItem>
-        )
-      }
-    })
-    expect(wrapper.findAll('.n-form-item-label').length).toBe(0)
-    expect(wrapper.findAll('.n-form-item--no-label').length).toBe(1)
-  })
 })
