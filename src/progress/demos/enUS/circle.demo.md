@@ -4,11 +4,11 @@ Progress can be a circle. It can be `default`, `info`, `success`, `warning` or `
 
 ```html
 <n-space>
-  <n-progress type="circle" :percentage="percentage" />
-  <n-progress type="circle" status="info" :percentage="percentage" />
-  <n-progress type="circle" status="success" :percentage="percentage" />
-  <n-progress type="circle" status="warning" :percentage="percentage" />
-  <n-progress type="circle" status="error" :percentage="percentage" />
+  <n-progress type="circle" :percentage="percentageRef" />
+  <n-progress type="circle" status="info" :percentage="percentageRef" />
+  <n-progress type="circle" status="success" :percentage="percentageRef" />
+  <n-progress type="circle" status="warning" :percentage="percentageRef" />
+  <n-progress type="circle" status="error" :percentage="percentageRef" />
 </n-space>
 <n-space>
   <n-button @click="minus"> Minus 10% </n-button>
@@ -21,24 +21,24 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const percentage = ref(0)
+    const percentageRef = ref(0)
 
     const add = () => {
-      percentage.value += 10
-      if (percentage.value > 100) {
-        percentage.value = 0
+      percentageRef.value += 10
+      if (percentageRef.value > 100) {
+        percentageRef.value = 0
       }
     }
 
     const minus = () => {
-      percentage.value -= 10
-      if (percentage.value < 0) {
-        percentage.value = 100
+      percentageRef.value -= 10
+      if (percentageRef.value < 0) {
+        percentageRef.value = 100
       }
     }
 
     return {
-      percentage,
+      percentageRef,
       add,
       minus
     }

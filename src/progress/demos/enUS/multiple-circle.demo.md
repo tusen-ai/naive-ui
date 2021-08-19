@@ -12,10 +12,10 @@ Maybe your product manager will need it.
       :stroke-width="6"
       :circle-gap="0.5"
       :percentage="[
-        percentage,
-        (percentage + 10) % 100,
-        (percentage + 20) % 100,
-        (percentage + 30) % 100
+        percentageRef,
+        (percentageRef + 10) % 100,
+        (percentageRef + 20) % 100,
+        (percentageRef + 30) % 100
       ]"
       :color="[
         'var(--info-color)',
@@ -45,24 +45,24 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const percentage = ref(0)
+    const percentageRef = ref(0)
 
     const add = () => {
-      percentage.value += 10
-      if (percentage.value > 100) {
-        percentage.value = 0
+      percentageRef.value += 10
+      if (percentageRef.value > 100) {
+        percentageRef.value = 0
       }
     }
 
     const minus = () => {
-      percentage.value -= 10
-      if (percentage.value < 0) {
-        percentage.value = 100
+      percentageRef.value -= 10
+      if (percentageRef.value < 0) {
+        percentageRef.value = 100
       }
     }
 
     return {
-      percentage,
+      percentageRef,
       add,
       minus
     }
