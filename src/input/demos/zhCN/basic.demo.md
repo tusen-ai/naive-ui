@@ -19,7 +19,7 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup () {
     return {
-      value: ref(null)
+      value: ref(0)
     }
   }
 })

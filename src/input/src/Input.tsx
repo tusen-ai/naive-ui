@@ -35,7 +35,7 @@ import {
   InputWrappedRef,
   inputInjectionKey
 } from './interface'
-import { len } from './utils'
+import { isEmptyValue, len } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
 
@@ -195,7 +195,8 @@ export default defineComponent({
       const { value: mergedPlaceholder } = mergedPlaceholderRef
       return (
         !isComposing &&
-        (!mergedValue || (Array.isArray(mergedValue) && !mergedValue[0])) &&
+        (isEmptyValue(mergedValue) ||
+          (Array.isArray(mergedValue) && isEmptyValue(mergedValue[0]))) &&
         mergedPlaceholder[0]
       )
     })
@@ -206,7 +207,8 @@ export default defineComponent({
       return (
         !isComposing &&
         mergedPlaceholder[1] &&
-        (!mergedValue || (Array.isArray(mergedValue) && !mergedValue[1]))
+        (isEmptyValue(mergedValue) ||
+          (Array.isArray(mergedValue) && isEmptyValue(mergedValue[1])))
       )
     })
     // clear
