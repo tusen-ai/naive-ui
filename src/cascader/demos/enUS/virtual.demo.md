@@ -1,8 +1,8 @@
 # Large Data
 
-Large data is ok. By default `virtual-scroll` is true, so the demo only wants to show you cascader work with large data.
+Large datasets are ok. By default `virtual-scroll` is true, so here is how cascader works with large data.
 
-In the example there are 5000 \* 2 \* 2 = 20000 entries.
+In this example there are 5000 \* 2 \* 2 = 20000 entries.
 
 ```html
 <n-space vertical>
