@@ -11,7 +11,8 @@ import {
   computed,
   CSSProperties,
   PropType,
-  toRef
+  toRef,
+  nextTick
 } from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
@@ -62,7 +63,9 @@ export default defineComponent({
     const previewSrcRef = ref<string | undefined>(undefined)
     const showRef = ref(false)
     const displayedRef = ref(false)
-
+    const imageStyleCache: {
+      [proppName: string]: any
+    } = {}
     function syncTransformOrigin (): void {
       const { value: previewWrapper } = previewWrapperRef
       if (!thumbnailEl || !previewWrapper) return
@@ -188,10 +191,17 @@ export default defineComponent({
       }
     }
 
-    function derivePreviewStyle (transition: boolean = true): void {
+    function derivePreviewStyle (
+      transition: boolean = true,
+      isUseStyleCache: boolean = false
+    ): void {
       const { value: preview } = previewRef
       if (!preview) return
-      const { style } = preview
+      const { style, currentSrc } = preview
+      imageStyleCache[currentSrc] = { rotate }
+      if (isUseStyleCache) {
+        rotate = imageStyleCache[currentSrc].rotate
+      }
       const transformStyle = `transform-origin: center; transform: translateX(${offsetX}px) translateY(${offsetY}px) rotate(${rotate}deg) scale(${scale});`
       if (dragging) {
         style.cssText = 'cursor: grabbing; transition: none;' + transformStyle
@@ -213,6 +223,11 @@ export default defineComponent({
     const exposedMethods: ImagePreviewInst = {
       setPreviewSrc: (src) => {
         previewSrcRef.value = src
+        if (src && imageStyleCache[src]) {
+          void nextTick(() => {
+            derivePreviewStyle(true, true)
+          })
+        }
       },
       setThumbnailEl: (el) => {
         thumbnailEl = el
