@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-image` 切换图像后没有初始化 `rorate` 的问题，关闭 [#921](https://github.com/TuSimple/naive-ui/issues/921)
+- 修复 `n-data-table`的 loading 不在中间，关闭 [#929](https://github.com/TuSimple/naive-ui/issues/929)
 
 ## 2.16.5 (2021-08-20)
 
