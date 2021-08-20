@@ -21,9 +21,7 @@
 const columns = [
   {
     title: 'Name',
-    key: 'name',
-    defaultSortOrder: 'ascend',
-    sorter: 'default'
+    key: 'name'
   },
   {
     title: 'Age',
@@ -33,7 +31,7 @@ const columns = [
   {
     title: 'Chinese Score',
     key: 'chinese',
-    defaultSortOrder: 'descend',
+    defaultSortOrder: false,
     sorter: {
       compare: (a, b) => a.chinese - b.chinese,
       multiple: 3
@@ -60,7 +58,6 @@ const columns = [
   {
     title: 'Address',
     key: 'address',
-    defaultFilterOptionValues: ['London', 'New York'],
     filterOptions: [
       {
         label: 'London',

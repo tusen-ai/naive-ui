@@ -318,4 +318,124 @@ describe('n-data-table', () => {
     ))
     expect(wrapper.find('tbody .n-data-table-tr').classes()).toContain('0-test')
   })
+  it('should work with multiple sorter uncontrolled', async () => {
+    interface UserData {
+      name: string
+      age: number
+      address: string
+      chinese: number
+      math: number
+      english: number
+    }
+    const columns: DataTableColumns<UserData> = [
+      {
+        title: 'Name',
+        key: 'name'
+      },
+      {
+        title: 'Age',
+        key: 'age'
+      },
+      {
+        title: () => <span id="chinese-title">Chinese Score</span>,
+        key: 'chinese',
+        defaultSortOrder: false,
+        className: 'chinese-col',
+        sorter: {
+          compare: (a, b) => a.chinese - b.chinese,
+          multiple: 3
+        }
+      },
+      {
+        title: () => <span id="math-title">Math Score</span>,
+        defaultSortOrder: false,
+        className: 'math-col',
+        key: 'math',
+        sorter: {
+          compare: (a, b) => a.math - b.math,
+          multiple: 2
+        }
+      },
+      {
+        title: () => <span id="english-title">English Score</span>,
+        className: 'english-col',
+        defaultSortOrder: false,
+        key: 'english',
+        sorter: {
+          compare: (a, b) => a.english - b.english,
+          multiple: 1
+        }
+      }
+    ]
+
+    const data = [
+      {
+        name: 'John Brown',
+        age: 32,
+        address: 'New York No. 1 Lake Park',
+        chinese: 98,
+        math: 60,
+        english: 70
+      },
+      {
+        name: 'Jim Green',
+        age: 42,
+        address: 'London No. 1 Lake Park',
+        chinese: 98,
+        math: 66,
+        english: 89
+      },
+      {
+        name: 'Joe Black',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park',
+        chinese: 98,
+        math: 66,
+        english: 89
+      },
+      {
+        name: 'Jim Red',
+        age: 32,
+        address: 'London No. 2 Lake Park',
+        chinese: 88,
+        math: 99,
+        english: 89
+      }
+    ]
+
+    const wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+
+    const checkIsMatched = async (
+      result: [number[], number[], number[]]
+    ): Promise<void> => {
+      const chineseCol = await wrapper.findAll('.chinese-col')
+      const chineseColNum = chineseCol
+        .slice(1)
+        .map((item) => Number(item.text()))
+
+      const mathCol = await wrapper.findAll('.math-col')
+      const mathColNum = mathCol.slice(1).map((item) => Number(item.text()))
+
+      const englishCol = await wrapper.findAll('.english-col')
+      const englishColNum = englishCol
+        .slice(1)
+        .map((item) => Number(item.text()))
+      expect(chineseColNum).toEqual(result[0])
+      expect(mathColNum).toEqual(result[1])
+      expect(englishColNum).toEqual(result[2])
+    }
+
+    void checkIsMatched([
+      [98, 98, 98, 88],
+      [60, 66, 66, 99],
+      [70, 89, 89, 89]
+    ])
+    void checkIsMatched([
+      [98, 98, 98, 88],
+      [66, 66, 60, 99],
+      [89, 89, 70, 89]
+    ])
+    // await wrapper.find('#english-title').trigger('click')
+    await nextTick()
+  })
 })
