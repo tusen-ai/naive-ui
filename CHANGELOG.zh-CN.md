@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-image` 切换图像后没有初始化 `rorate` 的问题，关闭 [#921](https://github.com/TuSimple/naive-ui/issues/921)
+
 ## 2.16.5 (2021-08-20)
 
 ### Feats
