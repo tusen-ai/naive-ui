@@ -9,10 +9,12 @@ Make single value popselect cancelable.
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: 'song1',
+      value: ref('song1'),
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
@@ -72,5 +74,5 @@ export default {
       ]
     }
   }
-}
+})
 ```

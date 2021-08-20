@@ -1,6 +1,6 @@
 # Size
 
-Button can be `tiny`, `small`, `medium` and `large` size.
+Buttons can be `tiny`, `small`, `medium` and `large` in size.
 
 ```html
 <n-space align="baseline">

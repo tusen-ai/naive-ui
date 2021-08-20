@@ -10,8 +10,9 @@ Change the property will cause all existing notifications to be cleaned, so plea
 
 ```js
 import { useNotification } from 'naive-ui'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   setup () {
     const notification = useNotification()
     return {
@@ -31,5 +32,5 @@ Try to scroll`
       }
     }
   }
-}
+})
 ```

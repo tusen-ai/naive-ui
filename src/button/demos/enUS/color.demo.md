@@ -1,6 +1,6 @@
 # Custom Color
 
-The two colors look like toadstool.
+These two colors look like a toadstool.
 
 ```html
 <n-space align="center">

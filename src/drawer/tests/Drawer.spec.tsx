@@ -22,16 +22,20 @@ function expectDrawerExists (): void {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function mountDrawer ({
   drawerProps,
-  drawerContentProps
+  drawerContentProps,
+  hasOnUpdateShow,
+  show
 }: {
   drawerProps?: DrawerProps
   drawerContentProps?: DrawerContentProps
+  hasOnUpdateShow?: boolean
+  show?: boolean
 }) {
   return mount(
     defineComponent({
       setup () {
         return {
-          show: ref(false)
+          show: ref(!!show)
         }
       },
       render () {
@@ -45,9 +49,13 @@ function mountDrawer ({
           </NButton>,
           <NDrawer
             show={this.show}
-            onUpdateShow={(show) => {
-              this.show = show
-            }}
+            onUpdateShow={
+              hasOnUpdateShow
+                ? drawerProps?.onUpdateShow
+                : (show) => {
+                    this.show = show
+                  }
+            }
             {...drawerProps}
           >
             {{
@@ -115,5 +123,46 @@ describe('n-drawer', () => {
     )
     expectDrawerExists()
     wrapper.unmount()
+  })
+
+  it('should work with `show` prop', async () => {
+    await mountDrawer({
+      show: false
+    })
+    expect(document.querySelector('.n-drawer')).toEqual(null)
+    await mountDrawer({
+      show: true
+    })
+    expect(document.querySelector('.n-drawer')).not.toEqual(null)
+  })
+
+  it('should work with `on-update:show` prop', async () => {
+    const onUpdate = jest.fn()
+    const wrapper = mountDrawer({
+      hasOnUpdateShow: true,
+      drawerProps: { onUpdateShow: onUpdate },
+      drawerContentProps: { closable: true }
+    })
+    await wrapper.find('button').trigger('click')
+    setTimeout(() => {
+      expect(onUpdate).toHaveBeenCalled()
+    }, 300)
+  })
+
+  it('should work with `mask-closable` prop', async () => {
+    const onUpdate = jest.fn()
+    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
+    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+    await mountDrawer({
+      show: true,
+      hasOnUpdateShow: true,
+      drawerProps: { onUpdateShow: onUpdate },
+      drawerContentProps: { closable: true }
+    })
+    document.querySelector('.n-drawer-mask')?.dispatchEvent(mousedownEvent)
+    document.querySelector('.n-drawer-mask')?.dispatchEvent(mouseupEvent)
+    setTimeout(() => {
+      expect(onUpdate).toHaveBeenCalled()
+    }, 300)
   })
 })

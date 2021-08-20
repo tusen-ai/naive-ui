@@ -1,6 +1,6 @@
 # Ghost
 
-Ghost button has transparent background.
+Ghost buttons have transparent backgrounds.
 
 ```html
 <n-space>

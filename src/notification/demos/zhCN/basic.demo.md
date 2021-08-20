@@ -8,10 +8,10 @@
 ```
 
 ```js
-import { h } from 'vue'
+import { h, defineComponent } from 'vue'
 import { useNotification, useMessage, NButton, NAvatar } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     const notification = useNotification()
@@ -76,5 +76,5 @@ I cant get no, I cant get no`,
       }
     }
   }
-}
+})
 ```

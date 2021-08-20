@@ -20,33 +20,33 @@ batch-render
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| animated | `boolean` | `true` | Use animation when popping up. |
-| inverted | `boolean` | `false` | Use inverted style. |
-| keyboard | `boolean` | `true` | Whether is supports keyboard operation. (Be careful about the potential conflicts with other components keyboard operations) |
-| options | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | `[]` | Options of the dropdown. |
-| render-icon | `(option: DropdownOption \| DropdownSubmenu) => VNodeChild` | `undefined` | Render function that renders all icons. |
-| render-label | `(option: DropdownOption \| DropdownSubmenu) => VNodeChild` | `undefined` | Render function that renders all labels. |
+| animated | `boolean` | `true` | Use an animation when showing options. |
+| inverted | `boolean` | `false` | Use the inverted style. |
+| keyboard | `boolean` | `true` | Whether the component supports keyboard operation. (Be careful about the potential conflicts with other components keyboard operations) |
+| options | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | `[]` | Dropdown options. |
+| render-icon | `(option: DropdownOption \| DropdownSubmenu) => VNodeChild` | `undefined` | Render function that renders option icons. |
+| render-label | `(option: DropdownOption \| DropdownSubmenu) => VNodeChild` | `undefined` | Render function that renders option labels. |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | Dropdown size. |
-| on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when clickoutside. |
-| on-select | `(key: string \| number) => void` | `undefined` | Callback function triggered on blur. |
+| on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when there is a click outside of the component. |
+| on-select | `(key: string \| number) => void` | `undefined` | Callback function for after an option is selected. |
 
 For other props, for example `placement`, please see [Popover Props](popover#Props). Note that `raw` is not available.
 
 ### DropdownOption Type
 
-| Property | Type               | Description                     |
-| -------- | ------------------ | ------------------------------- |
-| icon?    | `() => VNodeChild` | Custom render function of icon. |
-| key      | `string \| number` | Should be unique.               |
-| label    | `string`           | Displayed label value.          |
-| disabled | `boolean`          | Whether to disable the option.  |
+| Property | Type               | Description                         |
+| -------- | ------------------ | ----------------------------------- |
+| icon?    | `() => VNodeChild` | Custom render function of an option icon. |
+| key      | `string \| number` | Option ID (should be unique).       |
+| label    | `string`           | Displayed label value.              |
+| disabled | `boolean`          | Whether to disable the option.      |
 
 ### DropdownDivider Type
 
 | Property | Type               | Description                      |
 | -------- | ------------------ | -------------------------------- |
 | type     | `'divider'`        | The type of the DropdownDivider. |
-| key      | `string \| number` | Should be unique.                |
+| key      | `string \| number` | Divider ID (should be unique).   |
 
 ### DropdownSubmenu Type
 
@@ -54,8 +54,8 @@ For other props, for example `placement`, please see [Popover Props](popover#Pro
 | --- | --- | --- |
 | type | `'submenu'` | The type of the DropdownSubmenu. |
 | label | `string` | Displayed label value. |
-| icon? | `() => VNodeChild` | Custom rendering function of icon. |
-| key | `string \| number` | Should be unique. |
+| icon? | `() => VNodeChild` | Custom rendering function of the option icon. |
+| key | `string \| number` | Submenu ID (should be unique). |
 | children | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | Children options of DropdownSubmenu. |
 | disabled | `boolean` | Whether to disable the option. |
 
@@ -64,7 +64,7 @@ For other props, for example `placement`, please see [Popover Props](popover#Pro
 | Property | Type | Description |
 | --- | --- | --- |
 | type | `'group'` | The type of the DropdownGroup. |
-| label | `string` | Displayed label value. |
-| icon? | `() => VNodeChild` | Custom rendering function of icon. |
-| key | `string \| number` | Should be unique. |
+| label | `string` | Group label value. |
+| icon? | `() => VNodeChild` | Custom rendering function of the group icon. |
+| key | `string \| number` | Group ID (should be unique). |
 | children | `Array<DropdownOption \| DropdownDivider \| DropdownSubmenu>` | Children options of DropdownGroup. |

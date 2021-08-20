@@ -27,7 +27,7 @@ function genChildren (option) {
   for (let i = 0; i <= option.depth; ++i) {
     children.push({
       label: option.label + '-' + i,
-      value: option.label + '-' + i,
+      value: option.value + '-' + i,
       depth: option.depth + 1,
       isLeaf: option.depth === 3
     })

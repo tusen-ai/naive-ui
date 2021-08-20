@@ -14,11 +14,13 @@ You can wrap a component inside spin.
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      show: false
+      show: ref(false)
     }
   }
-}
+})
 ```

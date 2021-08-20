@@ -2,7 +2,7 @@
 
 ```html
 <n-page-header
-  subtitle="Make your hearing sense better understand vision."
+  subtitle="A podcast to improve designs"
   @back="handleBack"
 >
   <n-grid :cols="5">
@@ -13,7 +13,7 @@
       <n-statistic label="Guests" value="22" />
     </n-gi>
     <n-gi>
-      <n-statistic label="Applogies" value="36" />
+      <n-statistic label="Apologies" value="36" />
     </n-gi>
     <n-gi>
       <n-statistic label="Topics" value="83" />
@@ -23,9 +23,9 @@
     </n-gi>
   </n-grid>
   <template #title>
-    <a href="https://anyway.fm/" style="text-decoration: none; color: inherit;"
-      >Anyway.FM</a
-    >
+    <a href="https://anyway.fm/" style="text-decoration: none; color: inherit;">
+      Anyway.FM
+    </a>
   </template>
   <template #header>
     <n-breadcrumb>
@@ -42,7 +42,7 @@
   </template>
   <template #extra>
     <n-space>
-      <n-button>Urge Update</n-button>
+      <n-button>Refresh</n-button>
       <n-dropdown :options="options" placement="bottom-start">
         <n-button :bordered="false" style="padding: 0 4px">···</n-button>
       </n-dropdown>
@@ -69,15 +69,15 @@ export default defineComponent({
       },
       options: [
         {
-          label: 'Urge Update',
+          label: 'More episodes',
           key: '1'
         },
         {
-          label: 'Urge Update',
+          label: 'More episodes',
           key: '2'
         },
         {
-          label: 'Urge Update',
+          label: 'More episodes',
           key: '3'
         }
       ]

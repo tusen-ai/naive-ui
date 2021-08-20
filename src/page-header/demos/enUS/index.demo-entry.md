@@ -2,7 +2,7 @@
 
 # PageHeader
 
-I hope this component fits your demand.
+I hope this component has all the slots you need!
 
 ## Demos
 
@@ -14,10 +14,10 @@ basic
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| extra | `string` | `undefined` | Extra text information, when using the `extra` slot to change the parameter is invalid. |
+| extra | `string` | `undefined` | Extra text information. Is overwritten by the `extra` slot so only use one. |
 | subtitle | `string` | `undefined` | Subtitle. |
 | title | `string` | `undefined` | Title. |
-| on-back | `() => void` | `undefined` | Click the callback of the back button. |
+| on-back | `() => void` | `undefined` | Callback for when the back button is pressed. |
 
 ## Slots
 

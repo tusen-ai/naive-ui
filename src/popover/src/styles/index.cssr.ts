@@ -1,6 +1,6 @@
 import { CNode } from 'css-render'
 import { FollowerPlacement } from 'vueuc'
-import { c, cB, cM, cNotM, cE } from '../../../_utils/cssr'
+import { c, cB, cM, cNotM, cE, cCB } from '../../../_utils/cssr'
 
 const oppositePlacement = {
   top: 'bottom',
@@ -164,7 +164,7 @@ function placementStyle (
       cM('overlap', `
         margin: 0;
       `),
-      cB('popover-arrow-wrapper', `
+      cCB('popover-arrow-wrapper', `
         right: 0;
         left: 0;
         top: 0;

@@ -179,72 +179,70 @@ export default cB('tabs', `
       })
     ])
   ]),
-  cM('line-type', [
-    cB('tabs-nav', [
+  cB('tabs-nav', [
+    cM('line-type', [
       cE('prefix, suffix', `
         transition: border-color .3s var(--bezier);
         border-bottom: 1px solid var(--tab-border-color);
-      `)
-    ]),
-    cB('tabs-nav-scroll-content', `
-      transition: border-color .3s var(--bezier);
-      border-bottom: 1px solid var(--tab-border-color);
-    `),
-    cB('tabs-bar', `
-      border-radius: 0;
-      bottom: -1px;
-    `)
-  ]),
-  cM('card-type', [
-    cB('tabs-nav', [
-      cE('prefix, suffix', `
-        transition: border-color .3s var(--bezier);
-        border-bottom: 1px solid var(--tab-border-color);
-      `)
-    ]),
-    cB('tabs-pad', `
-      flex-grow: 1;
-      transition: border-color .3s var(--bezier);
-      border-bottom: 1px solid var(--tab-border-color);
-    `),
-    cB('tabs-tab-pad', `
-      transition: border-color .3s var(--bezier);
-      border-bottom: 1px solid var(--tab-border-color);
-    `),
-    cB('tabs-tab', `
-      font-weight: var(--tab-font-weight);
-      border: 1px solid var(--tab-border-color);
-      border-top-left-radius: var(--tab-border-radius);
-      border-top-right-radius: var(--tab-border-radius);
-      background-color: var(--tab-color);
-      box-sizing: border-box;
-      position: relative;
-      vertical-align: bottom;
-      display: flex;
-      justify-content: space-between;
-      font-size: var(--tab-font-size);
-      color: var(--tab-text-color);
-    `, [
-      cM('addable', `
-        padding-left: 8px;
-        padding-right: 8px;
-        font-size: 16px;
-      `, [
-        cNotM('disabled', [
-          c('&:hover', `
-            color: var(--tab-text-color-active);
-          `)
-        ])
-      ]),
-      cM('closable', 'padding-right: 6px;'),
-      cM('active', `
-        border-bottom: 1px solid #0000;
-        background-color: #0000;
-        font-weight: var(--tab-font-weight-active);
-        color: var(--tab-text-color-active);
       `),
-      cM('disabled', 'color: var(--tab-text-color-disabled);')
+      cB('tabs-nav-scroll-content', `
+        transition: border-color .3s var(--bezier);
+        border-bottom: 1px solid var(--tab-border-color);
+      `),
+      cB('tabs-bar', `
+        border-radius: 0;
+        bottom: -1px;
+      `)
     ]),
-    cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--tab-border-color);')
+    cM('card-type', [
+      cE('prefix, suffix', `
+        transition: border-color .3s var(--bezier);
+        border-bottom: 1px solid var(--tab-border-color);
+      `),
+      cB('tabs-pad', `
+        flex-grow: 1;
+        transition: border-color .3s var(--bezier);
+        border-bottom: 1px solid var(--tab-border-color);
+      `),
+      cB('tabs-tab-pad', `
+        transition: border-color .3s var(--bezier);
+        border-bottom: 1px solid var(--tab-border-color);
+      `),
+      cB('tabs-tab', `
+        font-weight: var(--tab-font-weight);
+        border: 1px solid var(--tab-border-color);
+        border-top-left-radius: var(--tab-border-radius);
+        border-top-right-radius: var(--tab-border-radius);
+        background-color: var(--tab-color);
+        box-sizing: border-box;
+        position: relative;
+        vertical-align: bottom;
+        display: flex;
+        justify-content: space-between;
+        font-size: var(--tab-font-size);
+        color: var(--tab-text-color);
+      `, [
+        cM('addable', `
+          padding-left: 8px;
+          padding-right: 8px;
+          font-size: 16px;
+        `, [
+          cNotM('disabled', [
+            c('&:hover', `
+              color: var(--tab-text-color-active);
+            `)
+          ])
+        ]),
+        cM('closable', 'padding-right: 6px;'),
+        cM('active', `
+          border-bottom: 1px solid #0000;
+          background-color: #0000;
+          font-weight: var(--tab-font-weight-active);
+          color: var(--tab-text-color-active);
+        `),
+        cM('disabled', 'color: var(--tab-text-color-disabled);')
+      ]),
+      cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--tab-border-color);')
+    ])
   ])
 ])
