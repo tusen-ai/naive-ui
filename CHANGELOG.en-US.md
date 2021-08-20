@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Fix `n-input` placeholder bug, closes [#914](https://github.com/TuSimple/naive-ui/issues/914).
+- Fix `n-input` will show placeholder and 0 simultaneously while passing `value=ref(0)` in n-input, closes [#914](https://github.com/TuSimple/naive-ui/issues/914).
 
 ## 2.16.5 (2021-08-20)
 

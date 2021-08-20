@@ -35,7 +35,7 @@ import {
   InputWrappedRef,
   inputInjectionKey
 } from './interface'
-import { isEmptyValue, len } from './utils'
+import { len } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
 
@@ -189,6 +189,11 @@ export default defineComponent({
         return [placeholder] as [string]
       }
     })
+
+    function isEmptyValue (value: any): boolean {
+      return ['', undefined, null].includes(value)
+    }
+
     const showPlaceholder1Ref = computed(() => {
       const { value: isComposing } = isComposingRef
       const { value: mergedValue } = mergedValueRef
@@ -402,7 +407,7 @@ export default defineComponent({
       }
       // force update to sync input's view with value
       // if not set, after input, input value won't sync with dom input value
-      (vm.$forceUpdate as any)()
+      ;(vm.$forceUpdate as any)()
     }
     function handleInputBlur (e: FocusEvent): void {
       doUpdateValueBlur(e)

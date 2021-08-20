@@ -6,6 +6,3 @@ export function len (s: string): number {
   }
   return count
 }
-export function isEmptyValue (value: any): boolean {
-  return ['', undefined, null].includes(value)
-}
