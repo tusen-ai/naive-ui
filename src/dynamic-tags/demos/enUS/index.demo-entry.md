@@ -32,5 +32,5 @@ slot
 
 | Name | Parameters | Description |
 | --- | --- | --- |
-| input | `(options: { submit: (value: any) => void, })` | Custom input elements, supplied by the user. |
-| trigger | `(options: { activate: () => void, disabled: boolean })` | The element or component that triggers input. |
+| input | `(info: { submit: (value: any) => void, })` | Custom input elements, supplied by the user. |
+| trigger | `(info: { activate: () => void, disabled: boolean })` | The element or component that triggers input. |

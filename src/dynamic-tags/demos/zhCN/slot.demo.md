@@ -10,8 +10,8 @@
       :options="options"
       v-model:value="inputValue"
       placeholder="邮箱"
-      @blur="submit(inputValue),inputValue=''"
-      @keyup.enter="submit(inputValue),inputValue=''"
+      :clear-after-select="true"
+      @select="submit($event)"
     />
   </template>
   <template #trigger="{ activate, disabled }">
@@ -43,6 +43,9 @@ export default defineComponent({
   setup () {
     const inputValueRef = ref('')
     const options = computed(() => {
+      if (inputValueRef.value === null) {
+        return []
+      }
       const prefix = inputValueRef.value.split('@')[0]
       const inputSuffix = inputValueRef.value.split('@')[1]
       if (inputSuffix) {
