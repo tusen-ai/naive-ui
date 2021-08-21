@@ -41,21 +41,31 @@ Maybe your product manager will need it.
 ```
 
 ```js
-export default {
-  data () {
-    return {
-      percentage: 0
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const percentageRef = ref(0)
+
+    const add = () => {
+      percentageRef.value += 10
+      if (percentageRef.value > 100) {
+        percentageRef.value = 0
+      }
     }
-  },
-  methods: {
-    add () {
-      this.percentage += 10
-      if (this.percentage > 100) this.percentage = 0
-    },
-    minus () {
-      this.percentage -= 10
-      if (this.percentage < 0) this.percentage = 100
+
+    const minus = () => {
+      percentageRef.value -= 10
+      if (percentageRef.value < 0) {
+        percentageRef.value = 100
+      }
+    }
+
+    return {
+      percentage: percentageRef,
+      add,
+      minus
     }
   }
-}
+})
 ```
