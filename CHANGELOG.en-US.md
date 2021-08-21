@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-image` not initializing `rorate` after switching images, closes [#921](https://github.com/TuSimple/naive-ui/issues/921).
+- Fix `n-data-table`'s loading is not centered, closes [#929](https://github.com/TuSimple/naive-ui/issues/929).
+
 ## 2.16.5 (2021-08-20)
 
 ### Feats
