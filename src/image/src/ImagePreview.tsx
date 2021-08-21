@@ -157,10 +157,12 @@ export default defineComponent({
     let rotate = 0
     function handleSwitchPrev (): void {
       scale = 1
+      rotate = 0
       props.onPrev?.()
     }
     function handleSwitchNext (): void {
       scale = 1
+      rotate = 0
       props.onNext?.()
     }
     function rotateCounterclockwise (): void {
