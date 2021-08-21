@@ -40,6 +40,33 @@ export default cB('timeline', `
       `)
     ])
   ]),
+  cM('horizontal-placement', [
+    cB('timeline-item', `
+      flex-shrink: 0;
+    `, [
+      cB('timeline-item-content', `
+        margin-top: 26px;
+      `, [
+        cE('meta', `
+          margin-top: 6px;
+          margin-bottom: unset;
+          margin-right: 40px;
+        `)
+      ]),
+      cB('timeline-item-timeline', `
+        width: 100%;
+        height: 26px;
+      `, [
+        cE('line', `
+          left: 14px;
+          top: 6px;
+          right: 0px;
+          width: unset;
+          height: 2px;
+        `)
+      ])
+    ])
+  ]),
   cB('timeline-item', `
     position: relative;
   `, [

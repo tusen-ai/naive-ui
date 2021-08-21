@@ -14,10 +14,10 @@ item-placement
 
 ### Timeline Props
 
-| 名称           | 类型                  | 默认值     | 说明 |
-| -------------- | --------------------- | ---------- | ---- |
-| item-placement | `'left' \| 'right'`   | `'left'`   | 方向 |
-| size           | `'medium' \| 'large'` | `'medium'` | 大小 |
+| 名称           | 类型                                | 默认值     | 说明 |
+| -------------- | ----------------------------------- | ---------- | ---- |
+| item-placement | `'left' \| 'right' \| 'horizontal'` | `'left'`   | 方向 |
+| size           | `'medium' \| 'large'`               | `'medium'` | 大小 |
 
 ### Timeline Item Props
 
