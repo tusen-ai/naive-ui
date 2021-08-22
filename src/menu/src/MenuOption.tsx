@@ -36,10 +36,7 @@ export default defineComponent({
     }
     function handleClick (e: MouseEvent): void {
       if (!mergedDisabledRef.value) {
-        NMenu.doSelect(
-          props.internalKey,
-          props.tmNode.rawNode as MenuOption
-        )
+        NMenu.doSelect(props.internalKey, props.tmNode.rawNode as MenuOption)
         doClick(e)
       }
     }
