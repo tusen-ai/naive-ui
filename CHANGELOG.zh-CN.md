@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-timeline` 属性 `item-placement` 新增 `horizontal` 选项，关闭 [#887](https://github.com/TuSimple/naive-ui/issues/887)
+- `n-timeline` 新增 `horizontal` 属性，关闭 [#887](https://github.com/TuSimple/naive-ui/issues/887)
 
 ### Fixes
 

@@ -18,29 +18,9 @@ export default cB('timeline', `
   flex-direction: column;
   line-height: 1.25;
 `, [
-  cM('right-placement', [
-    cB('timeline-item', [
-      cB('timeline-item-content', `
-        text-align: right;
-        margin-right: 26px;
-      `),
-      cB('timeline-item-timeline', `
-        width: 14px;
-        right: 0;
-      `)
-    ])
-  ]),
-  cM('left-placement', [
-    cB('timeline-item', [
-      cB('timeline-item-content', `
-        margin-left: 26px;
-      `),
-      cB('timeline-item-timeline', `
-        left: 0;
-      `)
-    ])
-  ]),
-  cM('horizontal-placement', [
+  cM('horizontal', `
+    flex-direction: row;
+  `, [
     cB('timeline-item', `
       flex-shrink: 0;
     `, [
@@ -65,6 +45,28 @@ export default cB('timeline', `
           height: 2px;
         `)
       ])
+    ])
+  ]),
+  cM('right-placement', [
+    cB('timeline-item', [
+      cB('timeline-item-content', `
+        text-align: right;
+        margin-right: 26px;
+      `),
+      cB('timeline-item-timeline', `
+        width: 14px;
+        right: 0;
+      `)
+    ])
+  ]),
+  cM('left-placement', [
+    cB('timeline-item', [
+      cB('timeline-item-content', `
+        margin-left: 26px;
+      `),
+      cB('timeline-item-timeline', `
+        left: 0;
+      `)
     ])
   ]),
   cB('timeline-item', `

@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-timeline` `item-placement` add `horizontal` prop, closes [#887](https://github.com/TuSimple/naive-ui/issues/887).
+- `n-timeline` add `horizontal` prop, closes [#887](https://github.com/TuSimple/naive-ui/issues/887).
 
 ### Fixes
 

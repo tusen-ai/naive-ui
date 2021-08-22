@@ -16,8 +16,12 @@ import style from './styles/index.cssr'
 
 const timelineProps = {
   ...(useTheme.props as ThemeProps<TimelineTheme>),
+  horizontal: {
+    type: Boolean,
+    default: false
+  },
   itemPlacement: {
-    type: String as PropType<'left' | 'right' | 'horizontal'>,
+    type: String as PropType<'left' | 'right'>,
     default: 'left'
   },
   size: {
@@ -57,14 +61,12 @@ export default defineComponent({
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       return (
         <div
-          style={{
-            flexDirection:
-              props.itemPlacement === 'horizontal' ? 'row' : 'column'
-          }}
           class={[
             `${mergedClsPrefix}-timeline`,
+            props.horizontal && `${mergedClsPrefix}-timeline--horizontal`,
             `${mergedClsPrefix}-timeline--${props.size}-size`,
-            `${mergedClsPrefix}-timeline--${props.itemPlacement}-placement`
+            !props.horizontal &&
+              `${mergedClsPrefix}-timeline--${props.itemPlacement}-placement`
           ]}
         >
           {slots}
