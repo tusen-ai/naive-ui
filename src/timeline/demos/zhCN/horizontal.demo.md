@@ -1,4 +1,4 @@
-# 水平的
+# 水平
 
 ```html
 <div style="overflow: auto;">

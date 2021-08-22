@@ -1,4 +1,4 @@
-# horizontal
+# Horizontal
 
 ```html
 <div style="overflow: auto;">
