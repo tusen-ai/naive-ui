@@ -127,6 +127,10 @@ describe('n-image', () => {
 
     await wrapper.find('img').trigger('click')
 
+    console.log(document.querySelector('.n-image-preview')?.outerHTML)
+    // <img draggable="false" class="n-image-preview">
+    // 为什么没有src属性？
+
     expect(
       document.querySelector('.n-image-preview')?.getAttribute('src')
     ).toEqual(
