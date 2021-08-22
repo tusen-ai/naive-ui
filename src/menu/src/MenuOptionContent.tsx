@@ -3,7 +3,7 @@ import { ChevronDownFilledIcon } from '../../_internal/icons'
 import { render } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
 import { menuInjectionKey } from './Menu'
-import { TmNode } from './interface'
+import { MenuOption, TmNode } from './interface'
 
 export default defineComponent({
   name: 'MenuOptionContent',
@@ -65,7 +65,9 @@ export default defineComponent({
       tmNode,
       menuProps: { renderIcon, renderLabel, renderExtra, expandIcon }
     } = this
-    const icon = renderIcon ? renderIcon(tmNode.rawNode) : render(this.icon)
+    const icon = renderIcon
+      ? renderIcon(tmNode.rawNode as MenuOption)
+      : render(this.icon)
     return (
       <div
         onClick={this.onClick}
@@ -91,11 +93,15 @@ export default defineComponent({
           </div>
         )}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">
-          {renderLabel ? renderLabel(tmNode.rawNode) : render(this.title)}
+          {renderLabel
+            ? renderLabel(tmNode.rawNode as MenuOption)
+            : render(this.title)}
           {this.extra || renderExtra ? (
             <span class={`${clsPrefix}-menu-item-content-header__extra`}>
               {' '}
-              {renderExtra ? renderExtra(tmNode.rawNode) : render(this.extra)}
+              {renderExtra
+                ? renderExtra(tmNode.rawNode as MenuOption)
+                : render(this.extra)}
             </span>
           ) : null}
         </div>
@@ -108,7 +114,7 @@ export default defineComponent({
             {{
               default: () =>
                 expandIcon ? (
-                  expandIcon(tmNode.rawNode)
+                  expandIcon(tmNode.rawNode as MenuOption)
                 ) : (
                   <ChevronDownFilledIcon />
                 )

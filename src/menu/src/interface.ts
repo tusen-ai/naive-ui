@@ -12,6 +12,7 @@ export interface MenuOptionSharedPart {
   children?: Array<MenuOption | MenuGroupOption>
   extra?: string | (() => VNodeChild)
   props?: HTMLAttributes
+  type?: 'group' | 'submenu' | 'ignored' | 'divider' | 'render' | undefined
   [key: string]: unknown
   /** @deprecated */
   titleExtra?: string | (() => VNodeChild)
@@ -33,7 +34,7 @@ export interface MenuRenderOption extends MenuOptionSharedPart {
 }
 
 export interface MenuGroupOptionBase extends MenuOptionSharedPart {
-  type: 'group'
+  type: 'group' | 'submenu'
   children?: Array<MenuOption | MenuGroupOption>
 }
 
@@ -47,10 +48,14 @@ export type MenuOption =
 
 export type MenuGroupOption =
   | (MenuGroupOptionBase & {
+    type: 'group'
     /** @deprecated */
     title?: string | (() => VNodeChild)
   })
-  | (MenuGroupOptionBase & { label?: string | (() => VNodeChild) })
+  | (MenuGroupOptionBase & {
+    type: 'group'
+    label?: string | (() => VNodeChild)
+  })
 
 export type MenuMixedOption = MenuIgnoredOption | MenuOption | MenuGroupOption
 

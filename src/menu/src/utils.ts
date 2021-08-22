@@ -17,12 +17,8 @@ const groupPropKeys = keysOf(menuItemGroupProps)
 const itemPropKeys = keysOf(menuItemProps)
 const submenuPropKeys = keysOf(submenuProps)
 
-export function isDividerNode (rawNode: MenuMixedOption): boolean {
-  return rawNode.type === 'divider'
-}
-
 export function isIgnoredNode (rawNode: MenuMixedOption): boolean {
-  return rawNode.type === 'ignored'
+  return rawNode.type === 'divider' || rawNode.type === 'ignored'
 }
 
 export function itemRenderer (
@@ -30,10 +26,11 @@ export function itemRenderer (
   menuProps: MenuSetupProps,
   mergedClsPrefix: string
 ): VNode | undefined {
+  const nodeType = tmNode.rawNode.type
 
-  if (isIgnoredNode(tmNode.rawNode)) {
+  if (nodeType === 'ignored') {
     return undefined
-  } else if (isDividerNode(tmNode.rawNode)) {
+  } else if (nodeType === 'divider') {
     return h(NMenuDivider, {
       clsPrefix: mergedClsPrefix,
       key: tmNode.key
@@ -43,15 +40,13 @@ export function itemRenderer (
   const { labelField } = menuProps
   const { key, level, isGroup } = tmNode
   const rawNode = tmNode.rawNode as MenuOption | MenuGroupOption
-  const title = (rawNode.title || rawNode[labelField]) as
-    | string
-    | (() => VNodeChild)
-    | undefined
-  const extra = (rawNode.titleExtra || rawNode.extra)
   const props = {
     ...rawNode,
-    title,
-    extra,
+    title: (rawNode.title || rawNode[labelField]) as
+      | string
+      | (() => VNodeChild)
+      | undefined,
+    extra: rawNode.titleExtra || rawNode.extra,
     key,
     internalKey: key, // since key can't be used as a prop
     level,
