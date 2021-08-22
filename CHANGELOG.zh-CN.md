@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-timeline` 新增 `horizontal` 属性，关闭 [#887](https://github.com/TuSimple/naive-ui/issues/887)
+
 ### Fixes
 
 - 修复 `n-image` 切换图像后没有初始化 `rorate` 的问题，关闭 [#921](https://github.com/TuSimple/naive-ui/issues/921)

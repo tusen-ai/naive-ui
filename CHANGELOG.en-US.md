@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-timeline` add `horizontal` prop, closes [#887](https://github.com/TuSimple/naive-ui/issues/887).
+
 ### Fixes
 
 - Fix `n-image` not initializing `rorate` after switching images, closes [#921](https://github.com/TuSimple/naive-ui/issues/921).

@@ -16,6 +16,7 @@ import style from './styles/index.cssr'
 
 const timelineProps = {
   ...(useTheme.props as ThemeProps<TimelineTheme>),
+  horizontal: Boolean,
   itemPlacement: {
     type: String as PropType<'left' | 'right'>,
     default: 'left'
@@ -31,9 +32,8 @@ export interface TimelineInjection {
   mergedThemeRef: Ref<MergedTheme<TimelineTheme>>
   mergedClsPrefixRef: Ref<string>
 }
-export const timelineInjectionKey: InjectionKey<TimelineInjection> = Symbol(
-  'timeline'
-)
+export const timelineInjectionKey: InjectionKey<TimelineInjection> =
+  Symbol('timeline')
 export type TimelineProps = ExtractPublicPropTypes<typeof timelineProps>
 
 export default defineComponent({
@@ -60,8 +60,10 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-timeline`,
+            props.horizontal && `${mergedClsPrefix}-timeline--horizontal`,
             `${mergedClsPrefix}-timeline--${props.size}-size`,
-            `${mergedClsPrefix}-timeline--${props.itemPlacement}-placement`
+            !props.horizontal &&
+              `${mergedClsPrefix}-timeline--${props.itemPlacement}-placement`
           ]}
         >
           {slots}
