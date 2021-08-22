@@ -35,6 +35,7 @@ const imageProps = {
     >,
     default: 'fill'
   },
+  previewSrc: String,
   width: [String, Number] as PropType<string | number>,
   src: String,
   showToolbar: { type: Boolean, default: true },
@@ -61,14 +62,18 @@ export default defineComponent({
       imgProps: imgPropsRef,
       handleClick: () => {
         if (imageGroupHandle) {
-          imageGroupHandle.setPreviewSrc(props.src)
+          imageGroupHandle.setPreviewSrc(
+            props.previewSrc ? props.previewSrc : props.src
+          )
           imageGroupHandle.setThumbnailEl(imageRef.value)
           imageGroupHandle.toggleShow()
           return
         }
         const { value: previewInst } = previewInstRef
         if (!previewInst) return
-        previewInst.setPreviewSrc(props.src)
+        previewInst.setPreviewSrc(
+          props.previewSrc ? props.previewSrc : props.src
+        )
         previewInst.setThumbnailEl(imageRef.value)
         previewInst.toggleShow()
       }

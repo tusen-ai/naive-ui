@@ -115,4 +115,22 @@ describe('n-image', () => {
       'object-fit: contain;'
     )
   })
+
+  it('should work with `preview-src` prop', async () => {
+    const wrapper = mount(NImage)
+
+    await wrapper.setProps({
+      src: 'https://www.naiveui.com/assets/naivelogo.93278402.svg',
+      previewSrc:
+        'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+    })
+
+    await wrapper.find('img').trigger('click')
+
+    expect(
+      document.querySelector('.n-image-preview')?.getAttribute('src')
+    ).toEqual(
+      'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+    )
+  })
 })

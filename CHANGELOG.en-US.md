@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-timeline` add `horizontal` prop, closes [#887](https://github.com/TuSimple/naive-ui/issues/887).
+- `n-image` add `preview-src` prop, closes [#922](https://github.com/TuSimple/naive-ui/issues/922)
 
 ### Fixes
 
