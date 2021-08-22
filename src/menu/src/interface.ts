@@ -35,7 +35,7 @@ export interface MenuRenderOption extends MenuOptionSharedPart {
 
 export interface MenuGroupOptionBase extends MenuOptionSharedPart {
   type: 'group' | 'submenu'
-  children?: Array<MenuOption | MenuGroupOption>
+  children: Array<MenuOption | MenuGroupOption>
 }
 
 export type MenuOption =
@@ -48,12 +48,10 @@ export type MenuOption =
 
 export type MenuGroupOption =
   | (MenuGroupOptionBase & {
-    type: 'group'
     /** @deprecated */
     title?: string | (() => VNodeChild)
   })
   | (MenuGroupOptionBase & {
-    type: 'group'
     label?: string | (() => VNodeChild)
   })
 
