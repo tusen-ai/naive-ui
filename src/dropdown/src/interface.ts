@@ -15,8 +15,8 @@ export type DropdownOptionProps = MenuOptionProps
 
 // Aligned with MenuOption props, has some redundant fields
 export type DropdownOption = MenuOption
-export type DropdownIgnoredOption = MenuIgnoredOption
 export type DropdownGroupOption = MenuGroupOption
+export type DropdownIgnoredOption = MenuIgnoredOption
 
 export type DropdownOptionBase = DropdownOption | DropdownGroupOption
 
