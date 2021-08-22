@@ -16,10 +16,7 @@ import style from './styles/index.cssr'
 
 const timelineProps = {
   ...(useTheme.props as ThemeProps<TimelineTheme>),
-  horizontal: {
-    type: Boolean,
-    default: false
-  },
+  horizontal: Boolean,
   itemPlacement: {
     type: String as PropType<'left' | 'right'>,
     default: 'left'
