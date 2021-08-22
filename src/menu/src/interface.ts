@@ -51,9 +51,7 @@ export type MenuGroupOption =
     /** @deprecated */
     title?: string | (() => VNodeChild)
   })
-  | (MenuGroupOptionBase & {
-    label?: string | (() => VNodeChild)
-  })
+  | (MenuGroupOptionBase & { label?: string | (() => VNodeChild) })
 
 export type MenuMixedOption = MenuIgnoredOption | MenuOption | MenuGroupOption
 
