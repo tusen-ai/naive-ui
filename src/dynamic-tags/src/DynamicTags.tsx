@@ -140,7 +140,7 @@ export default defineComponent({
         tags.push(value)
         doChange(tags)
       }
-      showInputRef.value = false
+      handleInputConfirm()
     }
     function handleInputBlur (): void {
       handleInputConfirm()
