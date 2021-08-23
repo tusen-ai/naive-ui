@@ -62,18 +62,14 @@ export default defineComponent({
       imgProps: imgPropsRef,
       handleClick: () => {
         if (imageGroupHandle) {
-          imageGroupHandle.setPreviewSrc(
-            props.previewSrc ? props.previewSrc : props.src
-          )
+          imageGroupHandle.setPreviewSrc(props.previewSrc ?? props.src)
           imageGroupHandle.setThumbnailEl(imageRef.value)
           imageGroupHandle.toggleShow()
           return
         }
         const { value: previewInst } = previewInstRef
         if (!previewInst) return
-        previewInst.setPreviewSrc(
-          props.previewSrc ? props.previewSrc : props.src
-        )
+        previewInst.setPreviewSrc(props.previewSrc ?? props.src)
         previewInst.setThumbnailEl(imageRef.value)
         previewInst.toggleShow()
       }
