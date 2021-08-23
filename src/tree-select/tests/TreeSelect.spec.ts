@@ -71,4 +71,21 @@ describe('n-tree-select', () => {
       '1 | 1-2'
     )
   })
+
+  it('should work with `multiple` prop', () => {
+    const wrapper = mount(NTreeSelect, {
+      props: {
+        multiple: true,
+        options: [
+          {
+            label: '1',
+            key: '1'
+          }
+        ]
+      }
+    })
+    expect(wrapper.find('.n-base-selection').attributes('class')).toContain(
+      'n-base-selection--multiple'
+    )
+  })
 })
