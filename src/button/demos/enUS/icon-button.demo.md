@@ -1,6 +1,6 @@
-# Use Icon as Button
+# Use Icons as Buttons
 
-Sometimes you may want to use icon as button and customize its size. You can use `text` prop and `font-size` style to set it.
+Sometimes you may want to use an icon as a button and customize its size. You can use the `text` prop and `font-size` style to set it.
 
 ```html
 <n-button text style="font-size: 24px;">

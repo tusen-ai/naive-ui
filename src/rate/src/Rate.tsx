@@ -157,17 +157,16 @@ export default defineComponent({
               {{ default: () => StarIcon }}
             </NBaseIcon>
           )
+          const fullStarActive =
+            hoverIndex !== null
+              ? index + 1 <= hoverIndex
+              : index + 1 <= mergedValue
           return (
             <div
               key={index}
               class={[
                 `${mergedClsPrefix}-rate__item`,
-                {
-                  [`${mergedClsPrefix}-rate__item--active`]:
-                    hoverIndex !== null
-                      ? index + 1 <= hoverIndex
-                      : index + 1 <= mergedValue
-                }
+                fullStarActive && `${mergedClsPrefix}-rate__item--active`
               ]}
               onClick={
                 readonly
@@ -191,7 +190,7 @@ export default defineComponent({
                     `${mergedClsPrefix}-rate__half`,
                     {
                       [`${mergedClsPrefix}-rate__half--active`]:
-                        hoverIndex !== null
+                        !fullStarActive && hoverIndex !== null
                           ? index + 0.5 <= hoverIndex
                           : index + 0.5 <= mergedValue
                     }

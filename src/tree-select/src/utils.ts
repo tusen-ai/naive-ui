@@ -1,13 +1,27 @@
 import { SelectBaseOption } from '../../select/src/interface'
 import { Key } from '../../tree/src/interface'
-import { TreeSelectOption } from './interface'
+import { TreeSelectTmNode, TreeSelectOption } from './interface'
 
 export function treeOption2SelectOption (
-  treeOpt: TreeSelectOption
+  tmNode: TreeSelectTmNode
 ): SelectBaseOption {
+  const { rawNode } = tmNode
   return {
-    ...treeOpt,
-    value: treeOpt.key
+    ...rawNode,
+    value: rawNode.key
+  }
+}
+
+export function treeOption2SelectOptionWithPath (
+  tmNode: TreeSelectTmNode,
+  path: TreeSelectTmNode[],
+  separator: string
+): SelectBaseOption {
+  const { rawNode } = tmNode
+  return {
+    ...rawNode,
+    value: rawNode.key,
+    label: path.map((v) => v.rawNode.label).join(separator)
   }
 }
 

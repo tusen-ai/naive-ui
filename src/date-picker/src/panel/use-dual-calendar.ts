@@ -1,4 +1,10 @@
-import { inject, computed, watch, ref, ExtractPropTypes } from 'vue'
+import {
+  inject,
+  computed,
+  watch,
+  ref,
+  ExtractPropTypes
+} from 'vue'
 import {
   addMonths,
   format,
@@ -15,7 +21,6 @@ import {
 import { dateArray, DateItem, strictParse } from '../utils'
 import { usePanelCommon } from './use-panel-common'
 import { datePickerInjectionKey } from '../interface'
-import type { Value } from '../interface'
 
 const useDualCalendarProps = {
   ...usePanelCommon.props,
@@ -162,6 +167,10 @@ function useDualCalendar (
     const { value } = props
     if (Array.isArray(value)) return value[1]
     return null
+  })
+  const shortcutsRef = computed(() => {
+    const { shortcuts } = props
+    return shortcuts || rangesRef.value
   })
   watch(
     computed(() => props.value),
@@ -366,21 +375,6 @@ function useDualCalendar (
       panelCommon.doUpdateValue([Math.min(props.value[0], time), time], false)
     }
   }
-  let cachedValue: Value | null = null
-  let cached = false
-  function cachePendingValue (): void {
-    cachedValue = props.value
-    cached = true
-  }
-  function clearPendingValue (): void {
-    cached = false
-  }
-  function restorePendingValue (): void {
-    if (cached) {
-      panelCommon.doUpdateValue(cachedValue, false)
-      cached = false
-    }
-  }
   function changeStartEndTime (startTime: number, endTime?: number): void {
     if (endTime === undefined) endTime = startTime
     if (typeof startTime !== 'number') {
@@ -557,9 +551,6 @@ function useDualCalendar (
     endCalendarNextYear,
     mergedIsDateDisabled,
     changeStartEndTime,
-    cachePendingValue,
-    clearPendingValue,
-    restorePendingValue,
     ranges: rangesRef,
     startCalendarMonth: startCalendarMonthRef,
     startCalendarYear: startCalendarYearRef,
@@ -583,7 +574,8 @@ function useDualCalendar (
     handleStartDateInputBlur,
     handleEndDateInput,
     handleEndDateInputBlur,
-    datePickerSlots
+    datePickerSlots,
+    shortcuts: shortcutsRef
   }
 }
 

@@ -1,6 +1,6 @@
 # Depth
 
-To match different level text colors, icon provides `depth` prop.
+To match different text color levels, icon provides a `depth` property.
 
 ```html
 <n-icon size="40" :depth="1">

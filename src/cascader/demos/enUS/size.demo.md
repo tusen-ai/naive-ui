@@ -1,6 +1,6 @@
 # Size
 
-Cascader has `small`, `medium` and `large` size.
+Cascader has `small`, `medium` and `large` sizes.
 
 ```html
 <n-space vertical>

@@ -87,4 +87,55 @@ describe('message-provider', () => {
       }, 1200)
     })
   })
+  it('props.closable', (done) => {
+    const Test = defineComponent({
+      setup () {
+        const message = useMessage()
+        message.info('string')
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = mount(NMessageProvider, {
+      props: {
+        closable: true
+      },
+      slots: {
+        default: () => <Test />
+      }
+    })
+    void nextTick(() => {
+      expect(document.querySelector('.n-message__close')).not.toBe(null)
+      wrapper.unmount()
+      done()
+    })
+  })
+
+  it('props.container-style', (done) => {
+    const Test = defineComponent({
+      setup () {
+        const message = useMessage()
+        message.info('string')
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = mount(NMessageProvider, {
+      props: {
+        'container-style': 'padding: 24px'
+      },
+      slots: {
+        default: () => <Test />
+      }
+    })
+    void nextTick(() => {
+      const container = document.querySelector('.n-message-container')
+      expect(container).not.toBe(null)
+      expect(container.attributes.style.value).toContain('padding: 24px')
+      wrapper.unmount()
+      done()
+    })
+  })
 })

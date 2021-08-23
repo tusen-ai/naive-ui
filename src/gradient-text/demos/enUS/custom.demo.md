@@ -1,6 +1,6 @@
 # Custom Gradient
 
-By yourself.
+Design it yourself.
 
 ```html
 <n-gradient-text

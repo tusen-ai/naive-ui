@@ -40,6 +40,23 @@ describe('n-timeline', () => {
       wrapper.find('.n-timeline').element.children[0].getAttribute('class')
     ).toContain('n-timeline-item')
   })
+
+  it('should work with `horizontal` prop', async () => {
+    const wrapper = mount(NTimeline, {
+      props: {
+        horizontal: true
+      }
+    })
+    expect(wrapper.find('.n-timeline').classes()).toContain(
+      'n-timeline--horizontal'
+    )
+    expect(wrapper.find('.n-timeline').classes()).not.toContain(
+      'n-timeline--left-placement'
+    )
+    expect(wrapper.find('.n-timeline').classes()).not.toContain(
+      'n-timeline--right-placement'
+    )
+  })
 })
 
 describe('n-timeline-item', () => {

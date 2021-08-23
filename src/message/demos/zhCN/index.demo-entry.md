@@ -17,18 +17,19 @@
 
 ```js
 import { useMessage } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 // content
-export default {
-  setup () {
+export default defineComponent({
+  setup() {
     const message = useMessage()
     return {
-      warning () {
+      warning() {
         message.warning('...')
       }
     }
   }
-}
+})
 ```
 
 </n-space>
@@ -44,6 +45,7 @@ modify-content
 manually-close
 about-theme
 multiple-line
+placement
 ```
 
 ## API
@@ -52,8 +54,10 @@ multiple-line
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| closable | `boolean` | 所有 Message 是否显示 close 图标 |
 | duration | `number` | `3000` | 所有 Message 默认的持续时长 |
 | max | `number` | `undefined` | 限制提示信息显示的个数 |
+| placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top` | 所有 Message 显示的位置 |
 | to | `string \| HTMLElement` | `'body'` | Message 容器节点的位置 |
 
 ### MessageProvider Injection API
@@ -86,7 +90,7 @@ multiple-line
 | --- | --- | --- |
 | closable | `boolean` | 是否显示 close 图标 |
 | content | `string \| (() => VNodeChild)` | 信息内容 |
-| destory | `() => void` | 销毁信息的方法 |
+| destroy | `() => void` | 销毁信息的方法 |
 | icon | `() => VNode` | 信息图标 |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | 信息类型 |
 | onAfterLeave | `() => void` | 信息消失动画结束的回调 |
@@ -120,13 +124,14 @@ multiple-line
 
 <script>
   import { useMessage } from 'naive-ui'
+  import { defineComponent } from 'vue'
 
   // content
-  export default {
+  export default defineComponent({
     setup() {
       window.$message = useMessage()
     }
-  }
+  })
 </script>
 ```
 

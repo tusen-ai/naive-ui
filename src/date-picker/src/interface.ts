@@ -14,6 +14,8 @@ import {
 
 export type Value = number | [number, number]
 
+export type Shortcuts = Record<string, number> | Record<string, [number, number]>
+
 export type OnUpdateValue = (
   value: number & (number | null) & [number, number] & ([number, number] | null)
 ) => void

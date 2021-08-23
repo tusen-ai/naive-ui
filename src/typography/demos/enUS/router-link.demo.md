@@ -1,8 +1,8 @@
 # Use NA with Router Link
 
-Sometimes you need `<n-a />` works like router-link.
+You can also use `<n-a />` with a router-link.
 
-If you find the following method is complex, you can create a new component.
+If you find the following method is verbose, you can just put make it a new component.
 
 ```html
 <router-link to="/" #="{ navigate, href }" custom>

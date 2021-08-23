@@ -31,13 +31,17 @@ const layoutProps = {
     type: [String, Object] as PropType<string | CSSProperties>,
     default: ''
   },
-  hasSider: Boolean
+  hasSider: Boolean,
+  siderPlacement: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'left'
+  }
 } as const
 
 export type LayoutProps = ExtractPublicPropTypes<typeof layoutProps>
 
 export const layoutInjectionKey: InjectionKey<
-ExtractPropTypes<LayoutProps>
+ExtractPropTypes<typeof layoutProps>
 > = Symbol('layout')
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

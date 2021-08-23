@@ -238,7 +238,7 @@ export default defineComponent({
                 `${clsPrefix}-dropdown-option-body__prefix--show-icon`
             ]}
           >
-            {renderIcon ? renderIcon(rawNode) : render(rawNode.icon)}
+            {[renderIcon ? renderIcon(rawNode) : render(rawNode.icon)]}
           </div>
           <div
             __dropdown-option
