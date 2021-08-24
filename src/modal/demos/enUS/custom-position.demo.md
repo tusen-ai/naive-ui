@@ -17,11 +17,13 @@ Use fixed position to set the position of the modal.
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      showModal: false
+      showModal: ref(false)
     }
   }
-}
+})
 ```
