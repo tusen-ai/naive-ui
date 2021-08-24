@@ -1,6 +1,6 @@
 # 自定义每项分隔符
 
-使用 separator prop 或 separator slot 自定义每一项的分隔符。
+使用 separator prop 或 separator slot 自定义每一项的分隔符。如果二者均提供，将优先使用 separator slot。
 
 ```html
 <n-breadcrumb>

@@ -1,6 +1,6 @@
 # Custom Separator by Item
 
-Use separator prop or separator slot to custom separator of an item.
+Use separator prop or separator slot to custom separator of an item. When both are present, separator slot will be used.
 
 ```html
 <n-breadcrumb>
