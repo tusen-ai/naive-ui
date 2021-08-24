@@ -1,6 +1,6 @@
 # Tags
 
-Other naive-ui builtin tags.
+Other naive-ui built-in tags.
 
 ```html
 <n-a href="https://en.wikipedia.org/wiki/Hear_the_Wind_Sing" target="_blank">

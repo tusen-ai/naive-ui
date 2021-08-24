@@ -2,7 +2,7 @@
 
 有的时候会需要让 `<n-a />` 具有 router-link 的功能。
 
-如果你觉得写起来很麻烦可以再封装一个组件。
+如果你觉得写起来很麻烦，可以再封装一个组件。
 
 ```html
 <router-link to="/" #="{ navigate, href }" custom>
