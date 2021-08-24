@@ -333,8 +333,10 @@ describe('n-data-table', () => {
         key: 'name'
       },
       {
-        title: 'Age',
-        key: 'age'
+        title: () => h('span', { id: 'age-title' }, 'Age'),
+        className: 'age-col',
+        key: 'age',
+        sorter: (a, b) => a.age - b.age
       },
       {
         title: () => <span id="chinese-title">Chinese Score</span>,
@@ -403,39 +405,144 @@ describe('n-data-table', () => {
       }
     ]
 
-    const wrapper = mount(() => <NDataTable columns={columns} data={data} />)
-
+    const wrapper = mount(() => <NDataTable columns={columns} data={data} />, {
+      attachTo: document.body
+    })
     const checkIsMatched = async (
-      result: [number[], number[], number[]]
-    ): Promise<void> => {
-      const chineseCol = await wrapper.findAll('.chinese-col')
-      const chineseColNum = chineseCol
-        .slice(1)
-        .map((item) => Number(item.text()))
-
-      const mathCol = await wrapper.findAll('.math-col')
-      const mathColNum = mathCol.slice(1).map((item) => Number(item.text()))
-
-      const englishCol = await wrapper.findAll('.english-col')
-      const englishColNum = englishCol
-        .slice(1)
-        .map((item) => Number(item.text()))
-      expect(chineseColNum).toEqual(result[0])
-      expect(mathColNum).toEqual(result[1])
-      expect(englishColNum).toEqual(result[2])
+      colClassName: string,
+      target: number[]
+    ): Promise<boolean> => {
+      const cols = await wrapper.findAll(colClassName)
+      const colNums = cols.slice(1).map((item) => Number(item.text()))
+      const matchResult = String(colNums) === String(target)
+      if (!matchResult) {
+        console.log(colClassName, String(colNums), String(target))
+      }
+      return String(colNums) === String(target)
     }
+    const checkScoreIsMatched = async (
+      targets: [number[], number[], number[]]
+    ): Promise<boolean> => {
+      const matchResult =
+        (await checkIsMatched('.chinese-col', targets[0])) &&
+        (await checkIsMatched('.math-col', targets[1])) &&
+        (await checkIsMatched('.english-col', targets[2]))
 
-    void checkIsMatched([
-      [98, 98, 98, 88],
-      [60, 66, 66, 99],
-      [70, 89, 89, 89]
-    ])
-    void checkIsMatched([
-      [98, 98, 98, 88],
-      [66, 66, 60, 99],
-      [89, 89, 70, 89]
-    ])
-    // await wrapper.find('#english-title').trigger('click')
-    await nextTick()
+      return matchResult
+    }
+    const chineseDom: HTMLElement | null =
+      document.querySelector('#chinese-title')
+    const mathDom: HTMLElement | null = document.querySelector('#math-title')
+    const englishDom: HTMLElement | null =
+      document.querySelector('#english-title')
+    const ageDom: HTMLElement | null = document.querySelector('#age-title')
+
+    it('chinese: descend, math: false, english: false', async () => {
+      chineseDom?.click()
+      await nextTick()
+      expect(
+        await checkScoreIsMatched([
+          [98, 98, 98, 88],
+          [60, 66, 66, 99],
+          [70, 89, 89, 89]
+        ])
+      ).toEqual(true)
+    })
+    it('chinese: descend, math: descend, english: false', async () => {
+      mathDom?.click()
+      await nextTick()
+      expect(
+        await checkScoreIsMatched([
+          [98, 98, 98, 88],
+          [66, 66, 60, 99],
+          [89, 89, 70, 89]
+        ])
+      ).toEqual(true)
+    })
+
+    it('chinese: descend, math: descend, english: descend', async () => {
+      englishDom?.click()
+      await nextTick()
+      expect(
+        await checkScoreIsMatched([
+          [98, 98, 98, 88],
+          [66, 66, 60, 99],
+          [89, 89, 70, 89]
+        ])
+      ).toEqual(true)
+    })
+
+    it('chinese: ascend, math: descend, english: descend', async () => {
+      chineseDom?.click()
+      await nextTick()
+      expect(
+        await checkScoreIsMatched([
+          [88, 98, 98, 98],
+          [99, 66, 66, 60],
+          [89, 89, 89, 70]
+        ])
+      ).toEqual(true)
+    })
+
+    it('chinese: false, math: descend, english: descend', async () => {
+      chineseDom?.click()
+      await nextTick()
+      expect(
+        await checkScoreIsMatched([
+          [88, 98, 98, 98],
+          [99, 66, 66, 60],
+          [89, 89, 89, 70]
+        ])
+      ).toEqual(true)
+    })
+
+    it('chinese: false, math: ascend, english: descend', async () => {
+      mathDom?.click()
+      await nextTick()
+      expect(
+        await checkScoreIsMatched([
+          [98, 98, 98, 88],
+          [60, 66, 66, 99],
+          [70, 89, 89, 89]
+        ])
+      ).toEqual(true)
+    })
+
+    it('chinese: false, math: false, english: descend', async () => {
+      mathDom?.click()
+      await nextTick()
+      expect(
+        await checkScoreIsMatched([
+          [98, 98, 88, 98],
+          [66, 66, 99, 60],
+          [89, 89, 89, 70]
+        ])
+      ).toEqual(true)
+    })
+
+    it('chinese: descend, math: false, english: descend', async () => {
+      chineseDom?.click()
+      await nextTick()
+      expect(
+        await checkScoreIsMatched([
+          [98, 98, 98, 88],
+          [66, 66, 60, 99],
+          [89, 89, 70, 89]
+        ])
+      ).toEqual(true)
+    })
+
+    it('age: descend', async () => {
+      ageDom?.click()
+      await nextTick()
+      const result =
+        (await checkIsMatched('.age-col', [42, 32, 32, 32])) &&
+        (await checkScoreIsMatched([
+          [98, 98, 98, 88],
+          [66, 60, 66, 99],
+          [89, 70, 89, 89]
+        ]))
+      expect(result).toEqual(true)
+    })
   })
 })

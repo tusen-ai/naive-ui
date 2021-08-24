@@ -7,33 +7,37 @@
     :columns="columns"
     :data="data"
     :pagination="pagination"
-    @update:sorter="handleSortChange"
   />
 </n-space>
 ```
 
 ```js
+import { h } from 'vue'
+
 const columns = [
   {
     title: 'Name',
     key: 'name'
   },
   {
-    title: 'Age',
-    key: 'age'
+    title: () => h('span', { id: 'age-title' }, 'Age'),
+    key: 'age',
+    sorter: (a, b) => a.age - b.age
   },
   {
-    title: 'Chinese Score',
+    title: () => h('span', { id: 'chinese-title' }, 'Chinese Score'),
     key: 'chinese',
-    sortOrder: false,
+    defaultSortOrder: false,
+    className: 'chinese-col',
     sorter: {
       compare: (a, b) => a.chinese - b.chinese,
       multiple: 3
     }
   },
   {
-    title: 'Math Score',
-    sortOrder: false,
+    title: () => h('span', { id: 'math-title' }, 'Math Score'),
+    defaultSortOrder: false,
+    className: 'math-col',
     key: 'math',
     sorter: {
       compare: (a, b) => a.math - b.math,
@@ -41,37 +45,19 @@ const columns = [
     }
   },
   {
-    title: 'English Score',
-    sortOrder: false,
+    title: () => h('span', { id: 'english-title' }, 'English Score'),
+    className: 'english-col',
+    defaultSortOrder: false,
     key: 'english',
     sorter: {
       compare: (a, b) => a.english - b.english,
       multiple: 1
-    }
-  },
-  {
-    title: 'Address',
-    key: 'address',
-    defaultFilterOptionValues: ['London', 'New York'],
-    filterOptions: [
-      {
-        label: 'London',
-        value: 'London'
-      },
-      {
-        label: 'New York',
-        value: 'New York'
-      }
-    ],
-    filter (value, row) {
-      return ~row.address.indexOf(value)
     }
   }
 ]
 
 const data = [
   {
-    key: 0,
     name: 'John Brown',
     age: 32,
     address: 'New York No. 1 Lake Park',
@@ -80,7 +66,6 @@ const data = [
     english: 70
   },
   {
-    key: 1,
     name: 'Jim Green',
     age: 42,
     address: 'London No. 1 Lake Park',
@@ -89,7 +74,6 @@ const data = [
     english: 89
   },
   {
-    key: 2,
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park',
@@ -98,7 +82,6 @@ const data = [
     english: 89
   },
   {
-    key: 3,
     name: 'Jim Red',
     age: 32,
     address: 'London No. 2 Lake Park',
