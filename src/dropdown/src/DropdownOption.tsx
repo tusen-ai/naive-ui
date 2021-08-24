@@ -22,7 +22,8 @@ import { TreeNode } from 'treemate'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
-  DropdownOption
+  DropdownOption,
+  DropdownOptionProps
 } from './interface'
 
 interface NDropdownOptionInjection {
@@ -52,6 +53,10 @@ export default defineComponent({
     placement: {
       type: String as PropType<FollowerPlacement>,
       default: 'right-start'
+    },
+    optionProps: {
+      type: Object as PropType<DropdownOptionProps | null>,
+      default: null
     }
   },
   setup (props) {
@@ -147,10 +152,14 @@ export default defineComponent({
       const { tmNode } = props
       if (!mergedShowRef.value) return
       if (!hasSubmenu && !tmNode.disabled) {
-        NDropdown.doSelect(
-          tmNode.key,
-          (tmNode as unknown as TreeNode<DropdownOption>).rawNode
-        )
+        if (props?.optionProps?.onClick) {
+          props.optionProps.onClick()
+        } else {
+          NDropdown.doSelect(
+            tmNode.key,
+            (tmNode as unknown as TreeNode<DropdownOption>).rawNode
+          )
+        }
         NDropdown.doUpdateShow(false)
       }
     }

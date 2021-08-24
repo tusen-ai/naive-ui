@@ -105,6 +105,7 @@ export default defineComponent({
               tmNode={tmNode}
               parentKey={parentKey}
               key={tmNode.key}
+              optionProps={tmNode.rawNode.props}
             />
           )
         })}

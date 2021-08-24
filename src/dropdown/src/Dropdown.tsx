@@ -229,11 +229,7 @@ export default defineComponent({
     // methods
     function doSelect (key: Key, node: DropdownOption): void {
       const { onSelect } = props
-      if (node.onClick) {
-        call(node.onClick as OnUpdateValueImpl, key, node)
-      } else if (onSelect) {
-        call(onSelect as OnUpdateValueImpl, key, node)
-      }
+      if (onSelect) call(onSelect as OnUpdateValueImpl, key, node)
     }
     function doUpdateShow (value: boolean): void {
       const { 'onUpdate:show': onUpdateShow } = props

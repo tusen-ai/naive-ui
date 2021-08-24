@@ -4,12 +4,19 @@ import { MenuOption, MenuGroupOption } from '../../menu/src/interface'
 
 export type Key = string | number
 
+export interface DropdownOptionProps {
+  onClick?: () => void
+}
+
 // Aligned with MenuOption props, has some redundant fields
-export type DropdownOption = MenuOption & { onClick: () => void }
-export type DropdownGroupOption = MenuGroupOption & { onClick: () => void }
+export type DropdownOption = MenuOption & { props?: DropdownOptionProps }
+export type DropdownGroupOption = MenuGroupOption & {
+  props?: DropdownOptionProps
+}
 export interface DropdownIgnoredOption {
   key: Key
   type: 'ignored' | 'divider'
+  props?: DropdownOptionProps
   [key: string]: unknown
 }
 

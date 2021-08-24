@@ -1,10 +1,10 @@
-# 点击事件
+# Customize event handling
 
-可能你想要在选项中自定义点击事件。
+Maybe you want to customize the click event in the options.
 
 ```html
 <n-dropdown trigger="hover" @select="handleSelect" :options="options">
-  <n-button>找个地方休息</n-button>
+  <n-button> Go For a Trip </n-button>
 </n-dropdown>
 ```
 
@@ -18,21 +18,25 @@ export default defineComponent({
     return {
       options: [
         {
-          label: '滨海湾金沙，新加坡',
+          label: 'Marina Bay Sands',
           key: 'marina bay sands',
-          onClick: () => {
-            message.success('Good!')
+          props: {
+            onClick: () => {
+              message.success('Good!')
+            }
           }
         },
         {
-          label: '布朗酒店，伦敦',
+          label: "Brown's Hotel, London",
           key: "brown's hotel, london",
-          onClick: () => {
-            message.info('Okay')
+          props: {
+            onClick: () => {
+              message.info('Okay')
+            }
           }
         },
         {
-          label: '亚特兰蒂斯巴哈马，拿骚',
+          label: 'Atlantis Bahamas, Nassau',
           key: 'atlantis nahamas, nassau'
         }
       ],
