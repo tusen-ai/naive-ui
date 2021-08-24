@@ -124,23 +124,16 @@ export default defineComponent({
           handleInputConfirm()
       }
     }
-    function handleInputConfirm (): void {
-      if (inputValueRef.value) {
+    function handleInputConfirm (externalValue?: string): void {
+      const nextValue = externalValue ?? inputValueRef.value
+      if (nextValue) {
         const tags = mergedValueRef.value.slice(0)
-        tags.push(inputValueRef.value)
+        tags.push(nextValue)
         doChange(tags)
       }
       showInputRef.value = false
       inputForceFocusedRef.value = true
       inputValueRef.value = ''
-    }
-    function handleAddTag (value: string): void {
-      if (value) {
-        const tags = mergedValueRef.value.slice(0)
-        tags.push(value)
-        doChange(tags)
-      }
-      handleInputConfirm()
     }
     function handleInputBlur (): void {
       handleInputConfirm()
@@ -167,7 +160,7 @@ export default defineComponent({
       handleAddClick,
       handleInputBlur,
       handleCloseClick,
-      handleAddTag,
+      handleInputConfirm,
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
@@ -211,7 +204,7 @@ export default defineComponent({
               handleInputBlur,
               handleAddClick,
               handleCloseClick,
-              handleAddTag,
+              handleInputConfirm,
               $slots
             } = this
             return this.mergedValue
@@ -235,7 +228,7 @@ export default defineComponent({
               .concat(
                 showInput ? (
                   $slots.input ? (
-                    $slots.input({ submit: handleAddTag })
+                    $slots.input({ submit: handleInputConfirm })
                   ) : (
                     <NInput
                       ref="inputInstRef"
