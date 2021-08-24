@@ -17,12 +17,13 @@ An example of preset `dialog`.
 ```
 
 ```js
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
+
     return {
       showModal: ref(false),
       cancelCallback () {
@@ -33,5 +34,5 @@ export default {
       }
     }
   }
-}
+})
 ```
