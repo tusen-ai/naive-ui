@@ -51,6 +51,7 @@ export default c([
     font-size: var(--font-size);
     display: flex;
     flex-direction: column;
+    position: relative;
     --merged-th-color: var(--th-color);
     --merged-td-color: var(--td-color);
     --merged-border-color: var(--border-color);

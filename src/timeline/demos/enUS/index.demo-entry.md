@@ -8,6 +8,7 @@ The world is 2 demensioned. One of them is time. The Other is event.
 basic
 size
 item-placement
+horizontal
 ```
 
 ## Props
@@ -16,6 +17,7 @@ item-placement
 
 | Name           | Type                  | Default    | Description |
 | -------------- | --------------------- | ---------- | ----------- |
+| horizontal     | `boolean`             | `'false'`  | Horizontal  |
 | item-placement | `'left' \| 'right'`   | `'left'`   | Direction.  |
 | size           | `'medium' \| 'large'` | `'medium'` | Size.       |
 
