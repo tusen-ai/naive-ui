@@ -1,6 +1,6 @@
-import { h, HTMLAttributes, nextTick } from 'vue'
+import { h, HTMLAttributes, nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NDataTable } from '../index'
+import { DataTableInst, NDataTable } from '../index'
 import type { DataTableColumns } from '../index'
 import { NButton, NButtonGroup } from '../../button'
 
@@ -367,6 +367,27 @@ describe('n-data-table', () => {
           compare: (a, b) => a.english - b.english,
           multiple: 1
         }
+      },
+      {
+        title: 'Address',
+        key: 'address',
+        filterOptions: [
+          {
+            label: 'London',
+            value: 'London'
+          },
+          {
+            label: 'New York',
+            value: 'New York'
+          },
+          {
+            label: 'Sidney',
+            value: 'Sidney'
+          }
+        ],
+        filter (value: any, row) {
+          return row.address.includes(value)
+        }
       }
     ]
 
@@ -404,10 +425,13 @@ describe('n-data-table', () => {
         english: 89
       }
     ]
-
-    const wrapper = mount(() => <NDataTable columns={columns} data={data} />, {
-      attachTo: document.body
-    })
+    const tableRef = ref<DataTableInst | null>(null)
+    const wrapper = mount(
+      () => <NDataTable ref={tableRef} columns={columns} data={data} />,
+      {
+        attachTo: document.body
+      }
+    )
     const checkIsMatched = async (
       colClassName: string,
       target: number[]
@@ -530,6 +554,24 @@ describe('n-data-table', () => {
           [89, 89, 70, 89]
         ])
       ).toEqual(true)
+    })
+
+    it('filter: Sidney and New York', async () => {
+      if (tableRef.value) {
+        tableRef.value.filter({
+          address: ['Sidney', 'New York']
+        })
+      }
+      await nextTick()
+      const result = await checkScoreIsMatched([
+        [98, 98],
+        [66, 60],
+        [89, 70]
+      ])
+      expect(result).toEqual(true)
+      if (tableRef.value) {
+        tableRef.value.filter(null)
+      }
     })
 
     it('age: descend', async () => {
