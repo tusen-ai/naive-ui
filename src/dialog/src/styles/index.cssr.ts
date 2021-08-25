@@ -106,13 +106,13 @@ export default c([
   ]),
   insideModal(
     cB('dialog', `
-      width: 446px;
+      min-width: 446px;
       max-width: calc(100vw - 32px);
     `)
   ),
   cB('dialog', [
     asModal(`
-      width: 446px;
+      min-width: 446px;
       max-width: calc(100vw - 32px);
     `)
   ])

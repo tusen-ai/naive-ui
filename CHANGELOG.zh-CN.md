@@ -2,6 +2,12 @@
 
 ## Pending
 
+## 2.16.5 (2021-08-25)
+
+### Fixes
+
+- `n-dialog` 宽度固定 `width: 446px` 修改为 `min-width: 446px` 宽度可以由内容决定
+
 ### Feats
 
 - `n-timeline` 新增 `horizontal` 属性，关闭 [#887](https://github.com/TuSimple/naive-ui/issues/887)
