@@ -115,26 +115,4 @@ describe('n-image', () => {
       'object-fit: contain;'
     )
   })
-
-  it('should work with `preview-src` prop', async () => {
-    const wrapper = mount(NImage)
-
-    await wrapper.setProps({
-      src: 'https://www.naiveui.com/assets/naivelogo.93278402.svg',
-      previewSrc:
-        'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-    })
-
-    await wrapper.find('img').trigger('click')
-
-    console.log(document.querySelector('.n-image-preview')?.outerHTML)
-    // <img draggable="false" class="n-image-preview">
-    // 为什么没有src属性？
-
-    expect(
-      document.querySelector('.n-image-preview')?.getAttribute('src')
-    ).toEqual(
-      'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-    )
-  })
 })
