@@ -12,6 +12,7 @@
 
 - 修复 `n-image` 切换图像后没有初始化 `rorate` 的问题，关闭 [#921](https://github.com/TuSimple/naive-ui/issues/921)
 - 修复 `n-data-table`的 loading 不在中间，关闭 [#929](https://github.com/TuSimple/naive-ui/issues/929)
+- 修复 `n-tree` 当 onLoad 回调没有添加 children 时抛出错误，关闭 [#772](https://github.com/TuSimple/naive-ui/issues/772)
 - 修复 `n-input` 当传递 `value=ref(0)` 时，同时显示 0 和占位符问题，关闭 [#914](https://github.com/TuSimple/naive-ui/issues/914)
 
 ## 2.16.5 (2021-08-20)

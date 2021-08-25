@@ -61,13 +61,18 @@ const TreeNode = defineComponent({
           onLoadRef: { value: onLoad }
         } = NTree
         if (onLoad) {
-          void onLoad(tmNode.rawNode).then(() => {
-            NTree.loadingKeysRef.value.splice(
-              NTree.loadingKeysRef.value.findIndex((key) => key === tmNode.key),
-              1
-            )
-            NTree.handleSwitcherClick(tmNode)
-          })
+          void onLoad(tmNode.rawNode)
+            .then(() => {
+              NTree.handleSwitcherClick(tmNode)
+            })
+            .finally(() => {
+              NTree.loadingKeysRef.value.splice(
+                NTree.loadingKeysRef.value.findIndex(
+                  (key) => key === tmNode.key
+                ),
+                1
+              )
+            })
         }
       } else {
         NTree.handleSwitcherClick(tmNode)
