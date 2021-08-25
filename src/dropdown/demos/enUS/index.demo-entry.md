@@ -14,7 +14,7 @@ placement
 size
 manual-position
 batch-render
-event-handling
+option-props
 ```
 
 ## Props
@@ -41,7 +41,7 @@ For other props, for example `placement`, please see [Popover Props](popover#Pro
 | key      | `string \| number` | Option ID (should be unique).             |
 | label    | `string`           | Displayed label value.                    |
 | disabled | `boolean`          | Whether to disable the option.            |
-| props    | `HTMLAttributes`   | Customize event handling.                 |
+| props    | `HTMLAttributes`   | Customize option props.                   |
 
 ### DropdownDivider Type
 

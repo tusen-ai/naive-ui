@@ -15,7 +15,7 @@ size
 manual-position
 group-debug
 batch-render
-event-handling
+option-props
 ```
 
 ## Props
@@ -42,7 +42,7 @@ event-handling
 | key      | `string \| number` | 需要唯一                        |
 | label    | `string`           | 显示的 label 值                 |
 | disabled | `boolean`          | 是否禁用                        |
-| props    | `HTMLAttributes`   | 自定义事件处理                  |
+| props    | `HTMLAttributes`   | 自定义选项属性                  |
 
 ### DropdownDivider Type
 
