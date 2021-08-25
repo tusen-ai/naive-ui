@@ -1,34 +1,27 @@
 # Header
 
-More attractive headers. Users love to see a bar before the header; it makes it less boring.
+More attractive headers. Users love to see a bar to the left of the header; it makes it less boring.
 
 ```html
 <div style="padding-left: 24px; position: relative;">
   <div
-    style="
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 24px;
-    background-color: rgba(128, 128, 128, .5);
-  "
+    style="position: absolute; left: 0; top: 0; bottom: 0; width: 24px; background-color: rgba(128, 128, 128, .5);"
   ></div>
   <n-h1><n-text type="primary">sin(x)</n-text></n-h1>
   <n-h1 prefix="bar"><n-text type="primary">sin(x)</n-text></n-h1>
   <n-h1 prefix="bar" align-text><n-text type="primary">sin(x)</n-text></n-h1>
-  <n-h1 prefix="bar" align-text type="success"
-    ><n-text type="success">sin(x)</n-text></n-h1
-  >
-  <n-h1 prefix="bar" align-text type="info"
-    ><n-text type="info">sin(x)</n-text></n-h1
-  >
-  <n-h1 prefix="bar" align-text type="warning"
-    ><n-text type="warning">sin(x)</n-text></n-h1
-  >
-  <n-h1 prefix="bar" align-text type="error"
-    ><n-text type="error">sin(x)</n-text></n-h1
-  >
+  <n-h1 prefix="bar" align-text type="success">
+    <n-text type="success">sin(x)</n-text>
+  </n-h1>
+  <n-h1 prefix="bar" align-text type="info">
+    <n-text type="info">sin(x)</n-text>
+  </n-h1>
+  <n-h1 prefix="bar" align-text type="warning">
+    <n-text type="warning">sin(x)</n-text>
+  </n-h1>
+  <n-h1 prefix="bar" align-text type="error">
+    <n-text type="error">sin(x)</n-text>
+  </n-h1>
   <n-h2>cos(x)</n-h2>
   <n-h2 prefix="bar">cos(x)</n-h2>
   <n-h2 prefix="bar" align-text>cos(x)</n-h2>

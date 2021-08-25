@@ -15,11 +15,12 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { MdHand as HandIcon } from '@vicons/ionicons4'
 
-export default {
+export default defineComponent({
   components: {
     HandIcon
   }
-}
+})
 ```

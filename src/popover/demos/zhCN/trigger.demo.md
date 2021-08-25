@@ -30,11 +30,13 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      showPopover: false
+      showPopover: ref(false)
     }
   }
-}
+})
 ```

@@ -18,19 +18,21 @@ For example:
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useNotification } from 'naive-ui'
 
 // content
-export default {
+export default defineComponent({
   setup () {
     const notification = useNotification()
+
     return {
       warning () {
         notification.warning('...')
       }
     }
   }
-}
+})
 ```
 
 </n-space>

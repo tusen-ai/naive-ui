@@ -2,15 +2,15 @@
 
 ```html
 <n-breadcrumb>
-  <n-breadcrumb-item
-    ><n-icon><md-cash /></n-icon> Home</n-breadcrumb-item
-  >
-  <n-breadcrumb-item
-    ><n-icon><md-cash /></n-icon> Account</n-breadcrumb-item
-  >
-  <n-breadcrumb-item
-    ><n-icon><md-cash /></n-icon> Category</n-breadcrumb-item
-  >
+  <n-breadcrumb-item>
+    <n-icon><md-cash /></n-icon> Home
+  </n-breadcrumb-item>
+  <n-breadcrumb-item>
+    <n-icon><md-cash /></n-icon> Account
+  </n-breadcrumb-item>
+  <n-breadcrumb-item>
+    <n-icon><md-cash /></n-icon> Category
+  </n-breadcrumb-item>
 </n-breadcrumb>
 ```
 
