@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`n-tabs should work with \`justify-content\` prop 1`] = `"display: flex; justify-content: space-between;"`;
+
+exports[`n-tabs should work with \`justify-content\` prop 2`] = `"display: flex; justify-content: space-around;"`;
+
+exports[`n-tabs should work with \`justify-content\` prop 3`] = `"display: flex; justify-content: space-evenly;"`;
