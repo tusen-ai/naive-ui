@@ -189,13 +189,19 @@ export default defineComponent({
         return [placeholder] as [string]
       }
     })
+
+    function isEmptyValue (value: any): boolean {
+      return ['', undefined, null].includes(value)
+    }
+
     const showPlaceholder1Ref = computed(() => {
       const { value: isComposing } = isComposingRef
       const { value: mergedValue } = mergedValueRef
       const { value: mergedPlaceholder } = mergedPlaceholderRef
       return (
         !isComposing &&
-        (!mergedValue || (Array.isArray(mergedValue) && !mergedValue[0])) &&
+        (isEmptyValue(mergedValue) ||
+          (Array.isArray(mergedValue) && isEmptyValue(mergedValue[0]))) &&
         mergedPlaceholder[0]
       )
     })
@@ -206,7 +212,8 @@ export default defineComponent({
       return (
         !isComposing &&
         mergedPlaceholder[1] &&
-        (!mergedValue || (Array.isArray(mergedValue) && !mergedValue[1]))
+        (isEmptyValue(mergedValue) ||
+          (Array.isArray(mergedValue) && isEmptyValue(mergedValue[1])))
       )
     })
     // clear
@@ -400,7 +407,7 @@ export default defineComponent({
       }
       // force update to sync input's view with value
       // if not set, after input, input value won't sync with dom input value
-      (vm.$forceUpdate as any)()
+      ;(vm.$forceUpdate as any)()
     }
     function handleInputBlur (e: FocusEvent): void {
       doUpdateValueBlur(e)

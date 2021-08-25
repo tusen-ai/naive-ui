@@ -8,6 +8,7 @@
 basic
 max
 form
+slot
 ```
 
 ## Props
@@ -26,3 +27,10 @@ form
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | 标签类型 |
 | value | `string[]` | `undefined` | 受控模式下的值 |
 | on-update:value | `(value: boolean) => void` | `undefined` | 组件值发生变化时的回调 |
+
+## Slots
+
+| Name | Parameters | Description |
+| --- | --- | --- |
+| input | `(info: { submit: (value: any) => void, })` | 自定义输入元素，由用户填充 |
+| trigger | `(info: { activate: () => void, disabled: boolean })` | 触发输入标签的组件或元素 |

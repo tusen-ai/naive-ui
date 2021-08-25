@@ -6,11 +6,14 @@
 
 - `n-timeline` 新增 `horizontal` 属性，关闭 [#887](https://github.com/TuSimple/naive-ui/issues/887)
 - `n-dropdown` 选项新增 `props` 属性，关闭 [#813](https://github.com/TuSimple/naive-ui/issues/813)
+- `n-image` 新增 `preview-src` 属性，关闭 [#922](https://github.com/TuSimple/naive-ui/issues/922)
+- `n-dynamic-tags` 新增 `input` 和 `add` 插槽，关闭 [#499](https://github.com/TuSimple/naive-ui/issues/499)
 
 ### Fixes
 
 - 修复 `n-image` 切换图像后没有初始化 `rorate` 的问题，关闭 [#921](https://github.com/TuSimple/naive-ui/issues/921)
 - 修复 `n-data-table`的 loading 不在中间，关闭 [#929](https://github.com/TuSimple/naive-ui/issues/929)
+- 修复 `n-input` 当传递 `value=ref(0)` 时，同时显示 0 和占位符问题，关闭 [#914](https://github.com/TuSimple/naive-ui/issues/914)
 
 ## 2.16.5 (2021-08-20)
 

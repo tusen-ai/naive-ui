@@ -6,11 +6,14 @@
 
 - `n-timeline` add `horizontal` prop, closes [#887](https://github.com/TuSimple/naive-ui/issues/887).
 - `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
+- `n-image` add `preview-src` prop, closes [#922](https://github.com/TuSimple/naive-ui/issues/922)
+- `n-dynamic-tags` add `input` and `add` slot, closes [#499](https://github.com/TuSimple/naive-ui/issues/499).
 
 ### Fixes
 
 - Fix `n-image` not initializing `rorate` after switching images, closes [#921](https://github.com/TuSimple/naive-ui/issues/921).
 - Fix `n-data-table`'s loading is not centered, closes [#929](https://github.com/TuSimple/naive-ui/issues/929).
+- Fix `n-input` will show placeholder and 0 simultaneously while passing `value=ref(0)` in n-input, closes [#914](https://github.com/TuSimple/naive-ui/issues/914).
 
 ## 2.16.5 (2021-08-20)
 

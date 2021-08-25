@@ -35,6 +35,7 @@ const imageProps = {
     >,
     default: 'fill'
   },
+  previewSrc: String,
   width: [String, Number] as PropType<string | number>,
   src: String,
   showToolbar: { type: Boolean, default: true },
@@ -61,14 +62,14 @@ export default defineComponent({
       imgProps: imgPropsRef,
       handleClick: () => {
         if (imageGroupHandle) {
-          imageGroupHandle.setPreviewSrc(props.src)
+          imageGroupHandle.setPreviewSrc(props.previewSrc || props.src)
           imageGroupHandle.setThumbnailEl(imageRef.value)
           imageGroupHandle.toggleShow()
           return
         }
         const { value: previewInst } = previewInstRef
         if (!previewInst) return
-        previewInst.setPreviewSrc(props.src)
+        previewInst.setPreviewSrc(props.previewSrc || props.src)
         previewInst.setThumbnailEl(imageRef.value)
         previewInst.toggleShow()
       }
@@ -87,14 +88,15 @@ export default defineComponent({
         {...imgProps}
         class={this.groupId}
         ref="imageRef"
-        width={this.width ? this.width : imgProps.width}
-        height={this.height ? this.height : imgProps.height}
-        src={this.src ? this.src : imgProps.src}
-        alt={this.alt ? this.alt : imgProps.alt}
-        aria-label={this.alt ? this.alt : imgProps.alt}
+        width={this.width || imgProps.width}
+        height={this.height || imgProps.height}
+        src={this.src || imgProps.src}
+        alt={this.alt || imgProps.alt}
+        aria-label={this.alt || imgProps.alt}
         onClick={this.handleClick}
         onError={this.onError}
         style={{ objectFit: this.objectFit }}
+        data-preview-src={this.previewSrc || this.src}
       />
     )
 
