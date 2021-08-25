@@ -21,7 +21,7 @@ import { PaginationProps } from '../../pagination/src/Pagination'
 import { warn, createKey } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { dataTableLight, DataTableTheme } from '../styles'
-import NMainTable from './MainTable'
+import MainTable from './MainTable'
 import { useCheck } from './use-check'
 import { useTableData } from './use-table-data'
 import { useScroll } from './use-scroll'
@@ -508,7 +508,7 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-data-table-wrapper`}>
-          <NMainTable ref="mainTableInstRef">
+          <MainTable ref="mainTableInstRef">
             {{
               default: () =>
                 this.paginatedData.length === 0 ? (
@@ -530,7 +530,7 @@ export default defineComponent({
                   </div>
                 ) : null
             }}
-          </NMainTable>
+          </MainTable>
         </div>
         {this.pagination ? (
           <div class={`${mergedClsPrefix}-data-table__pagination`}>

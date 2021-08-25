@@ -97,7 +97,8 @@ export default defineComponent({
   name: 'DataTableBody',
   props: {
     onResize: Function as PropType<(e: ResizeObserverEntry) => void>,
-    showHeader: Boolean
+    showHeader: Boolean,
+    flexHeight: Boolean
   },
   setup (props) {
     const {
@@ -287,10 +288,12 @@ export default defineComponent({
       virtualScroll,
       maxHeight,
       mergedTableLayout,
+      flexHeight,
       onResize,
       setHeaderScrollLeft
     } = this
-    const scrollable = scrollX !== undefined || maxHeight !== undefined
+    const scrollable =
+      scrollX !== undefined || maxHeight !== undefined || flexHeight
 
     // For a basic table with auto layout whose content may overflow we will
     // make it scrollable, which differs from browser's native behavior.
