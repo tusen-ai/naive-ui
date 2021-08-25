@@ -16,7 +16,7 @@ line-debug
 style-inherit-debug
 ```
 
-## Props
+## API
 
 ### Tabs Props
 
@@ -36,7 +36,7 @@ style-inherit-debug
 | on-close | `(name: string \| number) => void` | `undefined` | 关闭标签的回调函数 |
 | on-update:value | `(value: string \| number) => void` | `undefined` | 选中发生改变时的回调函数 |
 
-### Tab Pane Props
+### TabPane Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -46,9 +46,7 @@ style-inherit-debug
 | tab | `string \| VNode \| () => VNodeChild` | `undefined` | 标签的 `tab` |
 | name | `string \| number` | `undefined` | 必填，标签的名称 |
 
-## Slots
-
-### Tabs
+### Tabs Slots
 
 | 名称    | 参数 | 说明       |
 | ------- | ---- | ---------- |
@@ -56,7 +54,7 @@ style-inherit-debug
 | prefix  | `()` | 标签的前缀 |
 | suffix  | `()` | 标签的后缀 |
 
-### Tab Pane Slots
+### TabPane Slots
 
 | 名称    | 参数 | 说明                |
 | ------- | ---- | ------------------- |
