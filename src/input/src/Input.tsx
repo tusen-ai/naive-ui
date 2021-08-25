@@ -35,7 +35,7 @@ import {
   InputWrappedRef,
   inputInjectionKey
 } from './interface'
-import { len } from './utils'
+import { len, isEmptyValue } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
 
@@ -189,10 +189,6 @@ export default defineComponent({
         return [placeholder] as [string]
       }
     })
-
-    function isEmptyValue (value: any): boolean {
-      return ['', undefined, null].includes(value)
-    }
 
     const showPlaceholder1Ref = computed(() => {
       const { value: isComposing } = isComposingRef
