@@ -54,11 +54,7 @@ describe('n-tabs', () => {
   })
 
   it('should work with `justify-content` prop', async () => {
-    const wrapper = mount(NTabs, {
-      props: {
-        defaultValue: 'a'
-      }
-    })
+    const wrapper = mount(NTabs)
 
     await wrapper.setProps({ justifyContent: 'space-between' })
     expect(
@@ -73,6 +69,32 @@ describe('n-tabs', () => {
     await wrapper.setProps({ justifyContent: 'space-evenly' })
     expect(
       wrapper.find('.n-tabs-wrapper').attributes('style')
+    ).toMatchSnapshot()
+  })
+
+  it('should work with `size` prop', async () => {
+    const wrapper = mount(NTabs)
+
+    await wrapper.setProps({ size: 'small' })
+    expect(wrapper.find('.n-tabs').attributes('style')).toMatchSnapshot()
+
+    await wrapper.setProps({ size: 'medium' })
+    expect(wrapper.find('.n-tabs').attributes('style')).toMatchSnapshot()
+
+    await wrapper.setProps({ size: 'large' })
+    expect(wrapper.find('.n-tabs').attributes('style')).toMatchSnapshot()
+  })
+
+  it('should work with `tabs-padding` prop', async () => {
+    const wrapper = mount(NTabs)
+
+    expect(
+      wrapper.find('.n-tabs-scroll-padding').attributes('style')
+    ).toMatchSnapshot()
+
+    await wrapper.setProps({ tabsPadding: 100 })
+    expect(
+      wrapper.find('.n-tabs-scroll-padding').attributes('style')
     ).toMatchSnapshot()
   })
 })
