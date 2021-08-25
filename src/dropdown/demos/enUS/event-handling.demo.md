@@ -1,6 +1,6 @@
 # Customize event handling
 
-Maybe you want to customize the click event in the options.
+Maybe you want to customize event handling in options.
 
 ```html
 <n-dropdown trigger="hover" @select="handleSelect" :options="options">
@@ -29,15 +29,31 @@ export default defineComponent({
         {
           label: "Brown's Hotel, London",
           key: "brown's hotel, london",
-          props: {
-            onClick: () => {
-              message.info('Okay')
+          children: [
+            {
+              label: 'Chicken',
+              key: 'chicken',
+              disabled: true,
+              props: {
+                onClick: () => {
+                  message.info('Okay')
+                }
+              }
+            },
+            {
+              label: 'Beef',
+              key: 'beef'
             }
-          }
+          ]
         },
         {
           label: 'Atlantis Bahamas, Nassau',
-          key: 'atlantis nahamas, nassau'
+          key: 'atlantis nahamas, nassau',
+          props: {
+            onMousedown: () => {
+              message.warning('Key down')
+            }
+          }
         }
       ],
       handleSelect (key) {

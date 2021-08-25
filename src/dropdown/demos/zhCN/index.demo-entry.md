@@ -36,13 +36,13 @@ event-handling
 
 ### DropdownOption Type
 
-| 属性     | 类型                    | 说明                            |
-| -------- | ----------------------- | ------------------------------- |
-| icon?    | `() => VNodeChild`      | 支持通过 render 方法自定义 icon |
-| key      | `string \| number`      | 需要唯一                        |
-| label    | `string`                | 显示的 label 值                 |
-| disabled | `boolean`               | 是否禁用                        |
-| props    | `{onClick: () => void}` | 自定义事件处理                  |
+| 属性     | 类型               | 说明                            |
+| -------- | ------------------ | ------------------------------- |
+| icon?    | `() => VNodeChild` | 支持通过 render 方法自定义 icon |
+| key      | `string \| number` | 需要唯一                        |
+| label    | `string`           | 显示的 label 值                 |
+| disabled | `boolean`          | 是否禁用                        |
+| props    | `HTMLAttributes`   | 自定义事件处理                  |
 
 ### DropdownDivider Type
 

@@ -54,9 +54,8 @@ export default defineComponent({
       type: String as PropType<FollowerPlacement>,
       default: 'right-start'
     },
-    optionProps: {
-      type: Object as PropType<DropdownOptionProps | null>,
-      default: null
+    props: {
+      type: Object as PropType<DropdownOptionProps>
     }
   },
   setup (props) {
@@ -152,14 +151,10 @@ export default defineComponent({
       const { tmNode } = props
       if (!mergedShowRef.value) return
       if (!hasSubmenu && !tmNode.disabled) {
-        if (props?.optionProps?.onClick) {
-          props.optionProps.onClick()
-        } else {
-          NDropdown.doSelect(
-            tmNode.key,
-            (tmNode as unknown as TreeNode<DropdownOption>).rawNode
-          )
-        }
+        NDropdown.doSelect(
+          tmNode.key,
+          (tmNode as unknown as TreeNode<DropdownOption>).rawNode
+        )
         NDropdown.doUpdateShow(false)
       }
     }
@@ -211,7 +206,8 @@ export default defineComponent({
       siblingHasIcon,
       siblingHasSubmenu,
       renderLabel,
-      renderIcon
+      renderIcon,
+      props
     } = this
     const submenuVNode = mergedShowSubmenu ? (
       <NDropdownMenu
@@ -220,25 +216,25 @@ export default defineComponent({
         parentKey={this.tmNode.key}
       />
     ) : null
+    const mergedOptionProps = {
+      class: [
+        `${clsPrefix}-dropdown-option-body`,
+        {
+          [`${clsPrefix}-dropdown-option-body--pending`]: this.pending,
+          [`${clsPrefix}-dropdown-option-body--active`]: this.active,
+          [`${clsPrefix}-dropdown-option-body--child-active`]: this.childActive,
+          [`${clsPrefix}-dropdown-option-body--disabled`]: this.mergedDisabled
+        }
+      ],
+      onMousemove: this.handleMouseMove,
+      onMouseenter: this.handleMouseEnter,
+      onMouseleave: this.handleMouseLeave,
+      onClick: this.handleClick,
+      ...props
+    }
     return (
       <div class={`${clsPrefix}-dropdown-option`}>
-        <div
-          class={[
-            `${clsPrefix}-dropdown-option-body`,
-            {
-              [`${clsPrefix}-dropdown-option-body--pending`]: this.pending,
-              [`${clsPrefix}-dropdown-option-body--active`]: this.active,
-              [`${clsPrefix}-dropdown-option-body--child-active`]:
-                this.childActive,
-              [`${clsPrefix}-dropdown-option-body--disabled`]:
-                this.mergedDisabled
-            }
-          ]}
-          onMousemove={this.handleMouseMove}
-          onMouseenter={this.handleMouseEnter}
-          onMouseleave={this.handleMouseLeave}
-          onClick={this.handleClick}
-        >
+        <div {...mergedOptionProps}>
           <div
             __dropdown-option
             class={[

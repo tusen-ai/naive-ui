@@ -1,6 +1,6 @@
 # 自定义事件处理
 
-可能你想要在选项中自定义点击事件。
+可能你想要在选项中自定义事件处理。
 
 ```html
 <n-dropdown trigger="hover" @select="handleSelect" :options="options">
@@ -29,15 +29,31 @@ export default defineComponent({
         {
           label: '布朗酒店，伦敦',
           key: "brown's hotel, london",
-          props: {
-            onClick: () => {
-              message.info('Okay')
+          children: [
+            {
+              label: '鸡肉',
+              key: 'chicken',
+              disabled: true,
+              props: {
+                onClick: () => {
+                  message.info('Okay')
+                }
+              }
+            },
+            {
+              label: '牛肉',
+              key: 'beef'
             }
-          }
+          ]
         },
         {
           label: '亚特兰蒂斯巴哈马，拿骚',
-          key: 'atlantis nahamas, nassau'
+          key: 'atlantis nahamas, nassau',
+          props: {
+            onMousedown: () => {
+              message.warning('Key down')
+            }
+          }
         }
       ],
       handleSelect (key) {
