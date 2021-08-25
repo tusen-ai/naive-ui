@@ -65,9 +65,6 @@ const TreeNode = defineComponent({
             .then(() => {
               NTree.handleSwitcherClick(tmNode)
             })
-            .catch((switcherClickError) => {
-              console.error(switcherClickError)
-            })
             .finally(() => {
               NTree.loadingKeysRef.value.splice(
                 NTree.loadingKeysRef.value.findIndex(
