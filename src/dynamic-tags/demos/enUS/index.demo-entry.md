@@ -11,7 +11,9 @@ form
 slot
 ```
 
-## Props
+## API
+
+### DynamicTags Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -28,7 +30,7 @@ slot
 | value | `string[]` | `undefined` | Value in controlled mode. |
 | on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |
 
-## Slots
+### DynamicTags Slots
 
 | Name | Parameters | Description |
 | --- | --- | --- |

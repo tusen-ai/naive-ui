@@ -11,7 +11,9 @@ form
 slot
 ```
 
-## Props
+## API
+
+### DynamicTags Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -28,9 +30,9 @@ slot
 | value | `string[]` | `undefined` | 受控模式下的值 |
 | on-update:value | `(value: boolean) => void` | `undefined` | 组件值发生变化时的回调 |
 
-## Slots
+### DynamicTags Slots
 
-| Name | Parameters | Description |
+| 名称 | 参数 | 说明 |
 | --- | --- | --- |
 | input | `(info: { submit: (value: any) => void, })` | 自定义输入元素，由用户填充 |
 | trigger | `(info: { activate: () => void, disabled: boolean })` | 触发输入标签的组件或元素 |

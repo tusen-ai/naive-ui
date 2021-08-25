@@ -61,15 +61,16 @@ export default defineComponent({
       imageRef,
       imgProps: imgPropsRef,
       handleClick: () => {
+        const mergedPreviewSrc = props.previewSrc || props.src
         if (imageGroupHandle) {
-          imageGroupHandle.setPreviewSrc(props.previewSrc || props.src)
+          imageGroupHandle.setPreviewSrc(mergedPreviewSrc)
           imageGroupHandle.setThumbnailEl(imageRef.value)
           imageGroupHandle.toggleShow()
           return
         }
         const { value: previewInst } = previewInstRef
         if (!previewInst) return
-        previewInst.setPreviewSrc(props.previewSrc || props.src)
+        previewInst.setPreviewSrc(mergedPreviewSrc)
         previewInst.setThumbnailEl(imageRef.value)
         previewInst.toggleShow()
       }

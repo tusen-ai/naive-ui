@@ -8,6 +8,7 @@ import {
   nextTick,
   toRef
 } from 'vue'
+import { useMergedState } from 'vooks'
 import commonProps from '../../tag/src/common-props'
 import { AddIcon } from '../../_internal/icons'
 import { NButton } from '../../button'
@@ -22,9 +23,7 @@ import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { dynamicTagsLight } from '../styles'
 import type { DynamicTagsTheme } from '../styles'
 import style from './styles/index.cssr'
-
 import type { OnUpdateValue } from './interface'
-import { useMergedState } from 'vooks'
 
 const dynamicTagsProps = {
   ...(useTheme.props as ThemeProps<DynamicTagsTheme>),

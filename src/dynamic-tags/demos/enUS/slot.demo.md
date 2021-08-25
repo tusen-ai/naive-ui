@@ -1,4 +1,4 @@
-# Slot
+# Customizing Input or Trigger Element
 
 You can replace dynamic-tags's input or trigger element.
 
