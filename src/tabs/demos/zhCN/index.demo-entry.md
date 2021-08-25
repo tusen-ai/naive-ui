@@ -27,7 +27,6 @@ style-inherit-debug
 | default-value | `string \| number` | `undefined` | 非受控模式下的默认值 |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly'` | `undefined` | `flex` 布局下主轴的排列方式 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 标签页的尺寸 |
-| show-divider | `boolean` | `false` | 是否显示标签分隔符，仅在 `type` 为 `line` 时有效 |
 | pane-style | `string \| object` | `undefined` | 面板的样式 |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 `padding` |
