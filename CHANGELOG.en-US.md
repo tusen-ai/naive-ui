@@ -5,12 +5,12 @@
 ### Feats
 
 - `n-timeline` add `horizontal` prop, closes [#887](https://github.com/TuSimple/naive-ui/issues/887).
+- `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
 
 ### Fixes
 
 - Fix `n-image` not initializing `rorate` after switching images, closes [#921](https://github.com/TuSimple/naive-ui/issues/921).
 - Fix `n-data-table`'s loading is not centered, closes [#929](https://github.com/TuSimple/naive-ui/issues/929).
-- `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
 
 ## 2.16.5 (2021-08-20)
 
