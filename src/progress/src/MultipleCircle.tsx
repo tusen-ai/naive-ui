@@ -1,4 +1,5 @@
 import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
+import CircleProcessing from './CircleProcessing'
 
 function circlePath (r: number, sw: number, vw: number = 100): string {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${
@@ -21,6 +22,7 @@ export default defineComponent({
       type: Array as PropType<number[]>,
       default: [0]
     },
+    processing: Boolean,
     strokeWidth: {
       type: Number,
       required: true
@@ -60,6 +62,23 @@ export default defineComponent({
       )
       return strokeDasharrays
     })
+    const maxStrokeDasharrayRef = computed(() => {
+      return strokeDasharrayRef.value.map((item) => {
+        return parseFloat(item.split(',')[0])
+      })
+    })
+    const getCircleRadius = (
+      viewBoxWidth: number,
+      strokeWidth: number,
+      index: number,
+      circleGap: number
+    ): number => {
+      return (
+        viewBoxWidth / 2 -
+        (strokeWidth / 2) * (1 + 2 * index) -
+        circleGap * index
+      )
+    }
     return () => {
       const {
         viewBoxWidth,
@@ -70,7 +89,8 @@ export default defineComponent({
         railColor,
         railStyle,
         percentage,
-        clsPrefix
+        clsPrefix,
+        processing
       } = props
       return (
         <div class={`${clsPrefix}-progress-content`} role="none">
@@ -78,17 +98,22 @@ export default defineComponent({
             <div class={`${clsPrefix}-progress-graph-circle`}>
               <svg viewBox={`0 0 ${viewBoxWidth} ${viewBoxWidth}`}>
                 {percentage.map((p, index) => {
+                  const circleRadius = getCircleRadius(
+                    viewBoxWidth,
+                    strokeWidth,
+                    index,
+                    circleGap
+                  )
+                  const pathD = circlePath(
+                    circleRadius,
+                    strokeWidth,
+                    viewBoxWidth
+                  )
                   return (
                     <g key={index}>
                       <path
                         class={`${clsPrefix}-progress-graph-circle-rail`}
-                        d={circlePath(
-                          viewBoxWidth / 2 -
-                            (strokeWidth / 2) * (1 + 2 * index) -
-                            circleGap * index,
-                          strokeWidth,
-                          viewBoxWidth
-                        )}
+                        d={pathD}
                         stroke-width={strokeWidth}
                         stroke-linecap="round"
                         fill="none"
@@ -108,13 +133,7 @@ export default defineComponent({
                           p === 0 &&
                             `${clsPrefix}-progress-graph-circle-fill--empty`
                         ]}
-                        d={circlePath(
-                          viewBoxWidth / 2 -
-                            (strokeWidth / 2) * (1 + 2 * index) -
-                            circleGap * index,
-                          strokeWidth,
-                          viewBoxWidth
-                        )}
+                        d={pathD}
                         stroke-width={strokeWidth}
                         stroke-linecap="round"
                         fill="none"
@@ -124,6 +143,18 @@ export default defineComponent({
                           stroke: fillColor[index]
                         }}
                       />
+                      {processing && p && (
+                        <CircleProcessing
+                          clsPrefix={clsPrefix}
+                          strokeWidth={strokeWidth}
+                          viewBoxWidth={viewBoxWidth}
+                          maxStrokeDasharray={
+                            maxStrokeDasharrayRef.value[index]
+                          }
+                          circleRadius={circleRadius}
+                          pathD={pathD}
+                        />
+                      )}
                     </g>
                   )
                 })}

@@ -168,6 +168,7 @@ export default defineComponent({
             fillColor={color as any}
             railStyle={railStyle as any}
             percentage={percentage as number}
+            processing={processing}
             viewBoxWidth={viewBoxWidth}
             strokeWidth={strokeWidth}
             unit={unit}
@@ -202,6 +203,7 @@ export default defineComponent({
             railStyle={railStyle as any}
             viewBoxWidth={viewBoxWidth}
             percentage={percentage as number[]}
+            processing={processing}
             showIndicator={showIndicator}
             circleGap={circleGap}
           >

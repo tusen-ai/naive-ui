@@ -7,6 +7,7 @@ import {
   InfoIcon
 } from '../../_internal/icons'
 import { Status } from './interface'
+import CircleProcessing from './CircleProcessing'
 
 const iconMap = {
   success: <SuccessIcon />,
@@ -37,9 +38,10 @@ export default defineComponent({
       type: Number,
       default: 0
     },
+    processing: Boolean,
     showIndicator: {
       type: Boolean,
-      reqiuired: true
+      required: true
     },
     indicatorTextColor: String,
     unit: String,
@@ -52,6 +54,9 @@ export default defineComponent({
     const strokeDasharrayRef = computed(() => {
       return `${Math.PI * props.percentage}, ${props.viewBoxWidth * 8}`
     })
+    const maxStrokeDasharrayRef = computed(() => {
+      return parseFloat(strokeDasharrayRef.value.split(',')[0])
+    })
     return () => {
       const {
         fillColor,
@@ -63,7 +68,9 @@ export default defineComponent({
         showIndicator,
         indicatorTextColor,
         unit,
-        clsPrefix
+        clsPrefix,
+        processing,
+        viewBoxWidth
       } = props
       return (
         <div class={`${clsPrefix}-progress-content`} role="none">
@@ -106,6 +113,16 @@ export default defineComponent({
                     }}
                   />
                 </g>
+                {processing && percentage && (
+                  <CircleProcessing
+                    clsPrefix={clsPrefix}
+                    strokeWidth={strokeWidth * 1.1}
+                    viewBoxWidth={viewBoxWidth}
+                    pathD="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
+                    maxStrokeDasharray={maxStrokeDasharrayRef.value}
+                    circleRadius={50}
+                  />
+                )}
               </svg>
             </div>
           </div>
