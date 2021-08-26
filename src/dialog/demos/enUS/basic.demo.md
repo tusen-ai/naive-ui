@@ -3,20 +3,24 @@
 Inject `dialog` to create a dialog.
 
 ```html
-<n-button @click="handleConfirm"> Confirm </n-button>
-<n-button @click="handleSuccess"> Success </n-button>
-<n-button @click="handleError"> Error </n-button>
+<n-space>
+  <n-button @click="handleConfirm"> Confirm </n-button>
+  <n-button @click="handleSuccess"> Success </n-button>
+  <n-button @click="handleError"> Error </n-button>
+</n-space>
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useMessage, useDialog } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     const dialog = useDialog()
+
     return {
-      handleConfirm () {
+      handleConfirm: () => {
         dialog.warning({
           title: 'Confirm',
           content: 'Are you sure?',
@@ -30,7 +34,7 @@ export default {
           }
         })
       },
-      handleSuccess () {
+      handleSuccess: () => {
         dialog.success({
           title: 'Success',
           content: 'Cool',
@@ -40,7 +44,7 @@ export default {
           }
         })
       },
-      handleError () {
+      handleError: () => {
         dialog.error({
           title: 'Error',
           content: 'A mistake.',
@@ -52,5 +56,5 @@ export default {
       }
     }
   }
-}
+})
 ```

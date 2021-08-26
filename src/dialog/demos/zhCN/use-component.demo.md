@@ -15,19 +15,21 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
+
     return {
-      handleNegativeClick () {
+      handleNegativeClick: () => {
         message.warning('取消')
       },
-      handlePositiveClick () {
+      handlePositiveClick: () => {
         message.success('确认')
       }
     }
   }
-}
+})
 ```

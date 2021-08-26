@@ -16,19 +16,21 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useDialog } from 'naive-ui'
 
 // content
-export default {
+export default defineComponent({
   setup () {
     const dialog = useDialog()
+
     return {
-      warning () {
+      warning: () => {
         dialog.warning(options)
       }
     }
   }
-}
+})
 ```
 
 ## 演示

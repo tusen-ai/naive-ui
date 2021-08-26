@@ -7,26 +7,28 @@ I think user is smart enough that they know if nothing happens after mask is cli
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useMessage, useDialog } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     const dialog = useDialog()
+
     return {
-      handleButtonClick () {
+      handleButtonClick: () => {
         dialog.success({
           title: 'Close',
           content: 'Are you sure?',
           positiveText: 'Sure',
           negativeText: 'Not Sure',
           maskClosable: false,
-          onMaskClick: (e) => {
+          onMaskClick: () => {
             message.success('cannot close')
           }
         })
       }
     }
   }
-}
+})
 ```

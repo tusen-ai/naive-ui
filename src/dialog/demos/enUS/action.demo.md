@@ -9,16 +9,18 @@ Sometimes you may want to customize `action` and `content` .
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useDialog, NTag } from 'naive-ui'
 
-export default {
+export default defineComponent({
   components: {
     NTag
   },
   setup () {
     const dialog = useDialog()
+
     return {
-      handleConfirm () {
+      handleConfirm: () => {
         dialog.warning({
           title: 'Use Render Function',
           content: () => 'Content',
@@ -27,5 +29,5 @@ export default {
       }
     }
   }
-}
+})
 ```

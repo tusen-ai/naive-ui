@@ -15,19 +15,21 @@ Sometimes you may want to use a component.
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
+
     return {
-      handleNegativeClick () {
+      handleNegativeClick: () => {
         message.warning('Cancel')
       },
-      handlePositiveClick () {
+      handlePositiveClick: () => {
         message.success('Confirm')
       }
     }
   }
-}
+})
 ```

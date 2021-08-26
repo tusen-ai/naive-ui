@@ -9,16 +9,18 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useDialog, NTag } from 'naive-ui'
 
-export default {
+export default defineComponent({
   components: {
     NTag
   },
   setup () {
     const dialog = useDialog()
+
     return {
-      handleButtonClick () {
+      handleButtonClick: () => {
         dialog.warning({
           title: '使用渲染函数',
           content: () => 'Content',
@@ -27,5 +29,5 @@ export default {
       }
     }
   }
-}
+})
 ```

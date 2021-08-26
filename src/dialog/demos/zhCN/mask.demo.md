@@ -7,26 +7,28 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useMessage, useDialog } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     const dialog = useDialog()
+
     return {
-      handleButtonClick () {
+      handleButtonClick: () => {
         dialog.success({
           title: '关闭',
           content: '你确定？',
           positiveText: '确定',
           negativeText: '不确定',
           maskClosable: false,
-          onMaskClick: (e) => {
+          onMaskClick: () => {
             message.success('不能关闭')
           }
         })
       }
     }
   }
-}
+})
 ```
