@@ -8,15 +8,15 @@
 ```
 
 ```js
-import { onBeforeUnmount } from 'vue'
+import { defineComponent, onBeforeUnmount, reactive } from 'vue'
 import { useMessage } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
-    let messageReactive = null
+    let messageReactive = reactive(null)
 
-    function removeMessage () {
+    const removeMessage = () => {
       if (messageReactive) {
         messageReactive.destroy()
         messageReactive = null
@@ -24,9 +24,10 @@ export default {
     }
 
     onBeforeUnmount(removeMessage)
+
     return {
       removeMessage,
-      createMessage () {
+      createMessage: () => {
         if (!messageReactive) {
           messageReactive = message.info('3 * 3 * 4 * 4 * ?', {
             duration: 0
@@ -35,5 +36,5 @@ export default {
       }
     }
   }
-}
+})
 ```

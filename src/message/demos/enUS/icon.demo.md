@@ -5,20 +5,21 @@
 ```
 
 ```js
-import { h } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NIcon, useMessage } from 'naive-ui'
 import { MdHourglass } from '@vicons/ionicons4'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
+
     return {
-      createMessage () {
+      createMessage: () => {
         message.warning("I never needed anybody's help in any way", {
           icon: () => h(NIcon, null, { default: () => h(MdHourglass) })
         })
       }
     }
   }
-}
+})
 ```

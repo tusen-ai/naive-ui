@@ -7,18 +7,18 @@
 ```
 
 ```js
+import { defineComponent, h, ref } from 'vue'
 import { useMessage, NButton } from 'naive-ui'
-import { h, ref } from 'vue'
 
 const Buttons = {
   emits: ['changePlacement'],
-  setup() {
+  setup () {
     const message = useMessage()
     return {
       message
     }
   },
-  render() {
+  render () {
     return [
       h(
         NButton,
@@ -102,18 +102,19 @@ const Buttons = {
   }
 }
 
-export default {
+export default defineComponent({
   components: {
     Buttons
   },
-  setup() {
-    const placement = ref('top')
+  setup () {
+    const placementRef = ref('top')
+
     return {
-      placement,
+      placement: placementRef,
       changePlacement: (val) => {
-        placement.value = val
+        placementRef.value = val
       }
     }
   }
-}
+})
 ```
