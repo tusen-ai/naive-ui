@@ -1,6 +1,6 @@
 # Spin
 
-It could've been called `loading`, but why is it called `spin`? Because there is another internal component with less props called `loading`.
+It could've been called `loading`, but why is it called `spin`? Because there is another internal component with less props already named `loading`.
 
 ## Demos
 
