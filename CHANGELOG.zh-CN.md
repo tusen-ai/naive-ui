@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- `n-input` 在 `clearable` 为 `true` 时鼠标离开输入框时中文输入法不正确的问题，关闭 [#905](https://github.com/TuSimple/naive-ui/issues/905)
+
 ## 2.16.6 (2021-08-26)
 
 ### Feats

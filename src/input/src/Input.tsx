@@ -511,7 +511,10 @@ export default defineComponent({
       hoverRef.value = true
     }
     function handleMouseLeave (): void {
-      hoverRef.value = false
+      // FIX: https://github.com/TuSimple/naive-ui/issues/905
+      if (!isComposingRef.value) {
+        hoverRef.value = false
+      }
     }
     function handlePasswordToggleClick (): void {
       if (mergedDisabledRef.value) return
