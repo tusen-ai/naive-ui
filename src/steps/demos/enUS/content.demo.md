@@ -92,7 +92,7 @@ export default defineComponent({
     return {
       current: currentRef,
       currentStatus: currentStatusRef,
-      handleButtonClick: () => {
+      handleButtonClick () {
         currentRef.value = (currentRef.value % 4) + 1
       },
       buttonType
