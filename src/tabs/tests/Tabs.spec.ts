@@ -57,28 +57,19 @@ describe('n-tabs', () => {
     const wrapper = mount(NTabs)
 
     await wrapper.setProps({ justifyContent: 'space-between' })
-    expect(
-      wrapper
-        .find('.n-tabs-wrapper')
-        .attributes('style')
-        .includes('justify-content: space-between;')
-    ).toBe(true)
+    expect(wrapper.find('.n-tabs-wrapper').attributes('style')).toContain(
+      'justify-content: space-between;'
+    )
 
     await wrapper.setProps({ justifyContent: 'space-around' })
-    expect(
-      wrapper
-        .find('.n-tabs-wrapper')
-        .attributes('style')
-        .includes('justify-content: space-around;')
-    ).toBe(true)
+    expect(wrapper.find('.n-tabs-wrapper').attributes('style')).toContain(
+      'justify-content: space-around;'
+    )
 
     await wrapper.setProps({ justifyContent: 'space-evenly' })
-    expect(
-      wrapper
-        .find('.n-tabs-wrapper')
-        .attributes('style')
-        .includes('justify-content: space-evenly;')
-    ).toBe(true)
+    expect(wrapper.find('.n-tabs-wrapper').attributes('style')).toContain(
+      'justify-content: space-evenly;'
+    )
   })
 
   it('should work with `size` prop', async () => {
@@ -98,18 +89,12 @@ describe('n-tabs', () => {
     const wrapper = mount(NTabs)
 
     expect(
-      wrapper
-        .find('.n-tabs-scroll-padding')
-        .attributes('style')
-        .includes('width: 0px;')
-    ).toBe(true)
+      wrapper.find('.n-tabs-scroll-padding').attributes('style')
+    ).toContain('width: 0px;')
 
     await wrapper.setProps({ tabsPadding: 100 })
     expect(
-      wrapper
-        .find('.n-tabs-scroll-padding')
-        .attributes('style')
-        .includes('width: 100px;')
-    ).toBe(true)
+      wrapper.find('.n-tabs-scroll-padding').attributes('style')
+    ).toContain('width: 100px;')
   })
 })
