@@ -1,6 +1,6 @@
 # Events
 
-Handle events on button.
+Handle events of buttons.
 
 ```html
 <n-button @click="handleClick">Click Me</n-button>

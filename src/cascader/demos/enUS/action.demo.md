@@ -1,6 +1,6 @@
 # Action Slot
 
-Is there anybody needs action slot on cascader menu?
+Is there anybody who needs an action slot on a cascader menu?
 
 ```html
 <n-cascader

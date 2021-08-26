@@ -19,6 +19,7 @@ group
 | height | `string \| number` | `undefined` | 图片高度 |
 | img-props | `object` | `undefined` | 组件中 img 元素的属性 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `fill` | 图片在容器内的的适应类型 |
+| preview-src | `string` | `undefined` | 预览图片的图片地址 |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |
 | src | `string` | `undefined` | 图片来源 |
 | width | `string \| number` | `undefined` | 图片宽度 |

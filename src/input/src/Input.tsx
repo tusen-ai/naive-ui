@@ -35,7 +35,7 @@ import {
   InputWrappedRef,
   inputInjectionKey
 } from './interface'
-import { len } from './utils'
+import { len, isEmptyValue } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
 
@@ -46,8 +46,8 @@ const inputProps = {
     default: undefined
   },
   type: {
-    type: String as PropType<'input' | 'textarea' | 'password'>,
-    default: 'input'
+    type: String as PropType<'text' | 'textarea' | 'password'>,
+    default: 'text'
   },
   placeholder: [Array, String] as PropType<string | [string, string]>,
   defaultValue: {
@@ -55,7 +55,10 @@ const inputProps = {
     default: null
   },
   value: [String, Array] as PropType<null | string | [string, string]>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   size: String as PropType<Size>,
   rows: {
     type: [Number, String] as PropType<number | string>,
@@ -163,7 +166,7 @@ export default defineComponent({
     )
     // form-item
     const formItem = useFormItem(props)
-    const { mergedSizeRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     // states
     const focusedRef = ref(false)
     const hoverRef = ref(false)
@@ -186,13 +189,15 @@ export default defineComponent({
         return [placeholder] as [string]
       }
     })
+
     const showPlaceholder1Ref = computed(() => {
       const { value: isComposing } = isComposingRef
       const { value: mergedValue } = mergedValueRef
       const { value: mergedPlaceholder } = mergedPlaceholderRef
       return (
         !isComposing &&
-        (!mergedValue || (Array.isArray(mergedValue) && !mergedValue[0])) &&
+        (isEmptyValue(mergedValue) ||
+          (Array.isArray(mergedValue) && isEmptyValue(mergedValue[0]))) &&
         mergedPlaceholder[0]
       )
     })
@@ -203,13 +208,14 @@ export default defineComponent({
       return (
         !isComposing &&
         mergedPlaceholder[1] &&
-        (!mergedValue || (Array.isArray(mergedValue) && !mergedValue[1]))
+        (isEmptyValue(mergedValue) ||
+          (Array.isArray(mergedValue) && isEmptyValue(mergedValue[1])))
       )
     })
     // clear
     const showClearButton = computed(() => {
       if (
-        props.disabled ||
+        mergedDisabledRef.value ||
         props.readonly ||
         !props.clearable ||
         (!mergedFocusRef.value && !hoverRef.value)
@@ -397,7 +403,7 @@ export default defineComponent({
       }
       // force update to sync input's view with value
       // if not set, after input, input value won't sync with dom input value
-      vm.$forceUpdate()
+      ;(vm.$forceUpdate as any)()
     }
     function handleInputBlur (e: FocusEvent): void {
       doUpdateValueBlur(e)
@@ -508,15 +514,15 @@ export default defineComponent({
       hoverRef.value = false
     }
     function handlePasswordToggleClick (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       passwordVisibleRef.value = !passwordVisibleRef.value
     }
     function handlePasswordToggleMousedown (e: MouseEvent): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       e.preventDefault()
     }
     function handlePasswordToggleMouseup (e: MouseEvent): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       e.preventDefault()
     }
     function handleWrapperKeyDown (e: KeyboardEvent): void {
@@ -557,7 +563,7 @@ export default defineComponent({
       }
     }
     function focus (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (props.passivelyActivated) {
         wrapperElRef.value?.focus()
       } else {
@@ -571,7 +577,7 @@ export default defineComponent({
       }
     }
     function activate (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (textareaElRef.value) textareaElRef.value.focus()
       else if (inputElRef.value) inputElRef.value.focus()
     }
@@ -664,6 +670,7 @@ export default defineComponent({
       activated: activatedRef,
       showClearButton,
       mergedSize: mergedSizeRef,
+      mergedDisabled: mergedDisabledRef,
       textDecorationStyle: textDecorationStyleRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
@@ -803,7 +810,7 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-input`,
           {
-            [`${mergedClsPrefix}-input--disabled`]: this.disabled,
+            [`${mergedClsPrefix}-input--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-input--textarea`]: this.type === 'textarea',
             [`${mergedClsPrefix}-input--resizable`]:
               this.resizable && !this.autosize,
@@ -817,7 +824,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
         tabindex={
-          !this.disabled && this.passivelyActivated && !this.activated
+          !this.mergedDisabled && this.passivelyActivated && !this.activated
             ? 0
             : undefined
         }
@@ -851,7 +858,7 @@ export default defineComponent({
                 rows={Number(this.rows)}
                 placeholder={this.placeholder as string | undefined}
                 value={this.mergedValue as string | undefined}
-                disabled={this.disabled}
+                disabled={this.mergedDisabled}
                 maxlength={this.maxlength as any}
                 minlength={this.minlength as any}
                 readonly={this.readonly as any}
@@ -903,7 +910,7 @@ export default defineComponent({
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
                 placeholder={this.mergedPlaceholder[0]}
-                disabled={this.disabled}
+                disabled={this.mergedDisabled}
                 maxlength={this.maxlength as any}
                 minlength={this.minlength as any}
                 value={
@@ -1003,7 +1010,7 @@ export default defineComponent({
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
                 placeholder={this.mergedPlaceholder[1]}
-                disabled={this.disabled}
+                disabled={this.mergedDisabled}
                 maxlength={this.maxlength as any}
                 minlength={this.minlength as any}
                 value={

@@ -38,15 +38,15 @@ export default cB('dropdown-menu', `
     box-shadow .3s var(--bezier);
 `, [
   fadeInScaleUpTransition(),
-  cB('dropdown-option', {
-    position: 'relative'
-  }, [
+  cB('dropdown-option', `
+    position: relative;
+  `, [
     c('a', `
       text-decoration: none;
       color: inherit;
     `, [
       c('&::before', `
-        content: "",
+        content: "";
         position: absolute;
         left: 0;
         right: 0;

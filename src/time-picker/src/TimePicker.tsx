@@ -113,7 +113,10 @@ const timePickerProps = {
     type: Boolean,
     default: true
   },
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
@@ -152,6 +155,7 @@ export default defineComponent({
       useConfig(props)
     const { localeRef, dateLocaleRef } = useLocale('TimePicker')
     const formItem = useFormItem(props)
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     const themeRef = useTheme(
       'TimePicker',
       'TimePicker',
@@ -322,7 +326,7 @@ export default defineComponent({
       })
     }
     function handleTriggerClick (e: MouseEvent): void {
-      if (props.disabled || happensIn(e, 'clear')) return
+      if (mergedDisabledRef.value || happensIn(e, 'clear')) return
       if (!activeRef.value) {
         openPanel()
       }
@@ -377,13 +381,13 @@ export default defineComponent({
     }
 
     function handleTimeInputActivate (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (!activeRef.value) {
         openPanel()
       }
     }
     function handleTimeInputDeactivate (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       deriveInputValue()
       closePanel({
         returnFocus: false
@@ -550,7 +554,8 @@ export default defineComponent({
       secondInFormat: secondInFormatRef,
       mergedAttrSize: mergedAttrSizeRef,
       displayTimeString: displayTimeStringRef,
-      mergedSize: formItem.mergedSizeRef,
+      mergedSize: mergedSizeRef,
+      mergedDisabled: mergedDisabledRef,
       isValueInvalid: isValueInvalidRef,
       isHourInvalid: isHourInvalidRef,
       isMinuteInvalid: isMinuteInvalidRef,
@@ -649,7 +654,7 @@ export default defineComponent({
                       size={this.mergedSize}
                       placeholder={this.localizedPlaceholder}
                       clearable={this.clearable}
-                      disabled={this.disabled}
+                      disabled={this.mergedDisabled}
                       textDecoration={
                         this.isValueInvalid ? 'line-through' : undefined
                       }

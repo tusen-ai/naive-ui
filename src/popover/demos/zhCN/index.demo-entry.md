@@ -17,8 +17,9 @@ raw-content
 style
 trigger-width
 manual-position
-hoist-debug
 header
+hoist-debug
+nested-debug
 ```
 
 ## Props

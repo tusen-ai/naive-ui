@@ -1,3 +1,4 @@
+import { TreeNode } from 'treemate'
 import { InjectionKey, Ref } from 'vue'
 import { TreeOptionBase } from '../../tree/src/interface'
 
@@ -8,6 +9,8 @@ TreeOptionBase,
   children?: TreeSelectOption[]
   [k: string]: unknown
 }
+
+export type TreeSelectTmNode = TreeNode<TreeSelectOption>
 
 export type OnUpdateValue = (
   value: string &

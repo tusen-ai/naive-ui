@@ -1,5 +1,5 @@
 import { h, defineComponent, PropType, provide, ExtractPropTypes } from 'vue'
-import { ErrorList } from 'async-validator'
+import { ValidateError } from 'async-validator'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formLight } from '../styles'
@@ -35,6 +35,7 @@ const formProps = {
     default: () => {}
   },
   rules: Object as PropType<FormRules>,
+  disabled: Boolean,
   size: String as PropType<'small' | 'medium' | 'large'>,
   showRequireMark: {
     type: [Boolean, String] as PropType<'left' | 'right' | boolean>,
@@ -47,6 +48,10 @@ const formProps = {
   onSubmit: {
     type: Function as PropType<(e: Event) => void>,
     default: (e: Event) => e.preventDefault()
+  },
+  showLabel: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   }
 } as const
 
@@ -65,7 +70,7 @@ export default defineComponent({
       validateCallback?: FormValidateCallback,
       shouldRuleBeApplied: ApplyRule = () => true
     ): Promise<void> {
-      return new Promise((resolve, reject) => {
+      return await new Promise((resolve, reject) => {
         const formItemValidationPromises = []
         for (const key of keysOf(formItems)) {
           const formItemInstances = formItems[key]
@@ -83,7 +88,7 @@ export default defineComponent({
               .filter((result) => result.errors)
               .map((result) => result.errors)
             if (validateCallback) {
-              validateCallback(errors as ErrorList[])
+              validateCallback(errors as ValidateError[][])
             } else {
               reject(errors)
             }

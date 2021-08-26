@@ -1,6 +1,6 @@
 # Actions After Select
 
-Blur after selection or clear after selection.
+Choose whether the element blurs after a selection is made with `blur-after-select`.
 
 ```html
 <n-space vertical>
@@ -20,23 +20,24 @@ Blur after selection or clear after selection.
 ```
 
 ```js
-export default {
-  computed: {
-    options () {
-      return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
-        const value = this.value === null ? '' : this.value
-        const prefix = value.split('@')[0]
-        return {
-          label: prefix + suffix,
-          value: prefix + suffix
-        }
+import { defineComponent, ref, computed } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const valueRef = ref('')
+    return {
+      value: valueRef,
+      options: computed(() => {
+        return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
+          const value = valueRef.value === null ? '' : valueRef.value
+          const prefix = value.split('@')[0]
+          return {
+            label: prefix + suffix,
+            value: prefix + suffix
+          }
+        })
       })
     }
-  },
-  data () {
-    return {
-      value: null
-    }
   }
-}
+})
 ```

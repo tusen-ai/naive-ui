@@ -43,6 +43,7 @@ debug
 | round | `boolean` | `false` | 按钮是否显示圆角 |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 按钮的尺寸 |
 | text | `boolean` | `false` | 是否显示为文本按钮 |
+| text-color | `string` | `undefined` | 按钮文字颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |
 | type | `'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 按钮的类型 |
 | tag | `string` | `'button'` | 按钮需要被渲染为什么标签 |
 

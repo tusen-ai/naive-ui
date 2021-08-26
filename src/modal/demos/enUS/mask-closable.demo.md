@@ -18,13 +18,14 @@ Use `mask-closable=false` to make modal not emit the event which may close the m
 ```
 
 ```js
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     const showModalRef = ref(false)
+
     return {
       showModal: showModalRef,
       onPositiveClick () {
@@ -37,5 +38,5 @@ export default {
       }
     }
   }
-}
+})
 ```

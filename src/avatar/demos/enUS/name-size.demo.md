@@ -1,6 +1,6 @@
 # Content Size
 
-Words' sizing would be auto adjusted in avatar.
+Text is resized to fit the avatar.
 
 ```html
 <n-space vertical item-style="line-height: 0;">
@@ -13,11 +13,13 @@ Words' sizing would be auto adjusted in avatar.
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: 'Oasis'
+      value: ref('Oasis')
     }
   }
-}
+})
 ```

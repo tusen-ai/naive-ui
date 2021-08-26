@@ -18,6 +18,35 @@ export default cB('timeline', `
   flex-direction: column;
   line-height: 1.25;
 `, [
+  cM('horizontal', `
+    flex-direction: row;
+  `, [
+    cB('timeline-item', `
+      flex-shrink: 0;
+      padding-right: 40px;
+    `, [
+      cB('timeline-item-content', `
+        margin-top: 26px;
+      `, [
+        cE('meta', `
+          margin-top: 6px;
+          margin-bottom: unset;
+        `)
+      ]),
+      cB('timeline-item-timeline', `
+        width: 100%;
+        height: 26px;
+      `, [
+        cE('line', `
+          left: 14px;
+          top: 6px;
+          right: 0px;
+          width: unset;
+          height: 2px;
+        `)
+      ])
+    ])
+  ]),
   cM('right-placement', [
     cB('timeline-item', [
       cB('timeline-item-content', `

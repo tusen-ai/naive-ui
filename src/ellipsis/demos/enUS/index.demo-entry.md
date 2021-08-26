@@ -2,7 +2,7 @@
 
 Complexity has to live somewhere.
 
-When you hearing somebody talks about subtle concept model, keep alert.
+When you hear somebody talk about a subtle concept, keep alert.
 
 ## Demos
 
@@ -17,13 +17,13 @@ custom-tooltip
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| expand-trigger | `'click'` | `undefined` | Click the text abbreviated content to expand the full text. | 2.1.0 |
-| line-clmap | `number \| string` | `undefined` | Max lines. | 2.1.0 |
-| tooltip | `boolean \| TooltipProps` | `true` | The props of tooltip. | 2.1.0 |
+| expand-trigger | `'click'` | `undefined` | Abbreviated content trigger event to expand to the full text. | 2.1.0 |
+| line-clmap | `number \| string` | `undefined` | Maximum lines. | 2.1.0 |
+| tooltip | `boolean \| TooltipProps` | `true` | Tooltip properties. | 2.1.0 |
 
 ## Slots
 
 | Name    | Parameters | Description                 |
 | ------- | ---------- | --------------------------- |
-| default | `()`       | The content of ellipsis.    |
-| tooltip | `()`       | Ellipsis's tooltip content. |
+| default | `()`       | The content of the ellipsis.    |
+| tooltip | `()`       | The content of the ellipsis' tooltip. |

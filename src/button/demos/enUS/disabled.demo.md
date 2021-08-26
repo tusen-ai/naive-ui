@@ -1,6 +1,6 @@
 # Disabled
 
-Button can be disabled.
+Buttons can be disabled.
 
 ```html
 <n-button disabled> Disabled </n-button>

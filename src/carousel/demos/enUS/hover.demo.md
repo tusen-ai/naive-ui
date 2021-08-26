@@ -1,9 +1,9 @@
 # Mouseover
 
-Set `trigger` to `hover` to trigger the switch.
+Set `trigger` to `hover` to switch when the dot is hovered over.
 
 ```html
-<n-carousel autoplay trigger="hover">
+<n-carousel trigger="hover">
   <img
     class="carousel-img"
     src="https://s.anw.red/fav/1623979004.jpg!/fw/600/quality/77/ignore-error/true"

@@ -1,6 +1,6 @@
 # Use with Form
 
-It seems the example is useless. However since it's a data input component. I just put it here.
+It seems this example is useless, but it's a data input component so I just left it here.
 
 ```html
 <n-form :model="model">

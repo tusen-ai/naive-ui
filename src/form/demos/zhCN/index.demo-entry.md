@@ -14,8 +14,10 @@ top
 left
 item-only
 async
+disabled
 height-debug
 validator-debug
+show-label
 ```
 
 ## Props
@@ -24,6 +26,7 @@ validator-debug
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| disabled | `boolean` | `false` | 是否禁用 |
 | inline | `boolean` | `false` | 是否展示为行内表单 |
 | label-width | `number \| string` | `undefined` | 标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用 |
 | label-align | `'left' \| 'right'` | `-` | 标签的文本对齐方式 |
@@ -31,6 +34,7 @@ validator-debug
 | model | `Object` | `{}` | 获取表项中收集到的值的对象 |
 | rules | `type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }` | `{}` | 验证表项的规则 |
 | show-feedback | `boolean` | `true` | 是否展示校验反馈 |
+| show-label | `boolean` | `true` | 是否展示标签 |
 | show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | 是否展示必填的星号 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 
@@ -60,6 +64,7 @@ validator-debug
 | rule | `FormItemRule \| Array<FormItemRule>` | `undefined` | 验证表项的规则，它会被通过 `rule-path` 从外层表单获取的规则合并来作为表项的验证规则。推荐还是在外层表单设置所有规则 |
 | rule-path | `string` | `undefined` | 从外层表单的 `rules` 对象获取规则的路径。如果没有设定，使用表项的 `path` 代替 |
 | show-feedback | `boolean` | `true` | 是否展示校验反馈 |
+| show-label | `boolean` | `true` | 是否展示标签。如果没有被设定，使用外层 `n-form` 的 `show-label` |
 | show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | 是否展示必填的星号。如果没有被设定，使用外层 `n-form` 的 `show-require-mark` |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | 表单的验证状态。不设为 `undefined`时，会覆盖规则验证的结果 |
@@ -78,14 +83,14 @@ validator-debug
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| validate | `(validateCallback?: (errors?: Array<ValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<void>` | 验证表单，Promise rejection 的返回值类型是 `Array<ValidationError>` |
+| validate | `(validateCallback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<void>` | 验证表单，Promise rejection 的返回值类型是 `Array<FormValidationError>` |
 | restoreValidation | `() => void` | 还原到未校验的状态 |
 
 ### FormItem, FormItemGi Methods
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| validate | `(options: { trigger?: string, callback?: (errors?: Array<ValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<void>` | 验证表项，Promise rejection 的返回值类型是 `Array<ValidationError>`。如果设定 `trigger`，这一个表项全部的规则都会被使用。`shouldRuleBeApplied` 可以用来进一步过滤已经经过 `trigger` 筛选的规则 |
+| validate | `(options: { trigger?: string, callback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<void>` | 验证表项，Promise rejection 的返回值类型是 `Array<FormValidationError>`。如果设定 `trigger`，这一个表项全部的规则都会被使用。`shouldRuleBeApplied` 可以用来进一步过滤已经经过 `trigger` 筛选的规则 |
 | restoreValidation | `() => void` | 还原到未校验的状态 |
 
 关于 AsyncValidatorOptions，参考 <n-a href="https://github.com/yiminghe/async-validator">async-validator</n-a>。

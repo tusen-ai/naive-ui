@@ -34,6 +34,8 @@ debug
 | multiple | `boolean` | `false` | 是否支持多选 |
 | options | `TreeSelectOption[]` | `[]` | 选项 |
 | placeholder | `string` | `'请选择'` | 占位信息 |
+| separator | `string` | `' / '` | 数据分隔符 |
+| show-path | `boolean` | `false` | 是否在选择器中显示选项路径 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | 选中的 key |
 | virtual-scroll | `boolean` | `true` | 是否开启虚拟滚动 |

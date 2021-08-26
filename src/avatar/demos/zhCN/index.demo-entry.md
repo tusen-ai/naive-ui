@@ -11,9 +11,12 @@ color
 badge
 icon
 name-size
+v-show-debug
 ```
 
-## Props
+## API
+
+### Avatar Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -24,7 +27,7 @@ name-size
 | round | `boolean` | `false` | 头像是否圆形 |
 | on-error | `(e: Event) => void` | `undefined` | 头像的图片加载失败执行的回调 |
 
-## Slots
+### Avatar Slots
 
 | 名称    | 参数 | 说明             |
 | ------- | ---- | ---------------- |

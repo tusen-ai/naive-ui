@@ -29,7 +29,10 @@ const inputNumberProps = {
   min: [Number, String],
   max: [Number, String],
   size: String as PropType<'small' | 'medium' | 'large'>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   validator: Function as PropType<(value: number) => boolean>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -39,10 +42,12 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  clearable: Boolean,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
@@ -76,6 +81,7 @@ export default defineComponent({
     )
     const { localeRef } = useLocale('InputNumber')
     const formItem = useFormItem(props)
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     // dom ref
     const inputInstRef = ref<InputInst | null>(null)
     const minusButtonInstRef = ref<{ $el: HTMLElement } | null>(null)
@@ -225,6 +231,10 @@ export default defineComponent({
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
     }
+    function doClear (e: MouseEvent): void {
+      const { onClear } = props
+      if (onClear) call(onClear, e)
+    }
     function doAdd (): void {
       const { value: addable } = addableRef
       if (!addable) return
@@ -264,6 +274,10 @@ export default defineComponent({
       } else {
         return 0
       }
+    }
+    function handleClear (e: MouseEvent): void {
+      doClear(e)
+      doUpdateValue(null)
     }
     function handleMouseDown (e: MouseEvent): void {
       if (addButtonInstRef.value?.$el.contains(e.target as Node)) {
@@ -316,12 +330,14 @@ export default defineComponent({
       mergedValue: mergedValueRef,
       mergedPlaceholder: mergedPlaceholderRef,
       displayedValueInvalid: displayedValueInvalidRef,
-      mergedSize: formItem.mergedSizeRef,
+      mergedSize: mergedSizeRef,
+      mergedDisabled: mergedDisabledRef,
       displayedValue: displayedValueRef,
       addable: addableRef,
       minusable: minusableRef,
       handleFocus,
       handleBlur,
+      handleClear,
       handleMouseDown,
       handleAddClick,
       handleMinusClick,
@@ -360,7 +376,7 @@ export default defineComponent({
           builtinThemeOverrides={this.inputThemeOverrides}
           size={this.mergedSize}
           placeholder={this.mergedPlaceholder}
-          disabled={this.disabled}
+          disabled={this.mergedDisabled}
           textDecoration={
             this.displayedValueInvalid ? 'line-through' : undefined
           }
@@ -368,6 +384,8 @@ export default defineComponent({
           onBlur={this.handleBlur}
           onKeydown={this.handleKeyDown}
           onMousedown={this.handleMouseDown}
+          onClear={this.handleClear}
+          clearable={this.clearable}
         >
           {{
             _: 2, // input number has dynamic slots
@@ -381,7 +399,7 @@ export default defineComponent({
                   ),
                   <NButton
                     text
-                    disabled={!this.minusable || this.disabled}
+                    disabled={!this.minusable || this.mergedDisabled}
                     focusable={false}
                     builtinThemeOverrides={this.buttonThemeOverrides}
                     onClick={this.handleMinusClick}
@@ -399,7 +417,7 @@ export default defineComponent({
                   </NButton>,
                   <NButton
                     text
-                    disabled={!this.addable || this.disabled}
+                    disabled={!this.addable || this.mergedDisabled}
                     focusable={false}
                     builtinThemeOverrides={this.buttonThemeOverrides}
                     onClick={this.handleAddClick}

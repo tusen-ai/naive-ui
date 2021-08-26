@@ -34,10 +34,7 @@ const progressProps = {
     type: Number,
     default: 7
   },
-  percentage: {
-    type: [Number, Array] as PropType<number | number[]>,
-    default: 0
-  },
+  percentage: [Number, Array] as PropType<number | number[]>,
   unit: {
     type: String,
     default: '%'

@@ -46,7 +46,8 @@ import {
   PanelRef,
   IsDateDisabled,
   IsTimeDisabled,
-  datePickerInjectionKey
+  datePickerInjectionKey,
+  Shortcuts
 } from './interface'
 import { Size as TimePickerSize } from '../../time-picker/src/interface'
 
@@ -77,8 +78,8 @@ const datePickerProps = {
     default: null
   },
   disabled: {
-    type: Boolean,
-    default: false
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   },
   placement: {
     type: String as PropType<FollowerPlacement>,
@@ -100,6 +101,7 @@ const datePickerProps = {
   dateFormat: String,
   timeFormat: String,
   actions: Array as PropType<Array<'clear' | 'cancel' | 'confirm'>>,
+  shortcuts: Object as PropType<Shortcuts>,
   isDateDisabled: Function as PropType<IsDateDisabled>,
   isTimeDisabled: Function as PropType<IsTimeDisabled>,
   show: {
@@ -143,6 +145,7 @@ export default defineComponent({
   setup (props, { slots }) {
     const { localeRef, dateLocaleRef } = useLocale('DatePicker')
     const formItem = useFormItem(props)
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     const {
       NConfigProvider,
       mergedClsPrefixRef,
@@ -375,7 +378,7 @@ export default defineComponent({
       }
     }
     function handleInputDeactivate (): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       deriveInputState()
       closeCalendar({
         returnFocus: false
@@ -429,7 +432,7 @@ export default defineComponent({
     }
     // --- Click
     function handleTriggerClick (e: MouseEvent): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       if (happensIn(e, 'clear')) return
       if (!mergedShowRef.value) {
         openCalendar()
@@ -437,12 +440,12 @@ export default defineComponent({
     }
     // --- Focus
     function handleInputFocus (e: FocusEvent): void {
-      if (props.disabled) return
+      if (mergedDisabledRef.value) return
       doFocus(e)
     }
     // --- Calendar
     function openCalendar (): void {
-      if (props.disabled || mergedShowRef.value) return
+      if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
     }
     function closeCalendar ({
@@ -519,7 +522,8 @@ export default defineComponent({
       isRange: isRangeRef,
       localizedStartPlaceholder: localizedStartPlaceholderRef,
       localizedEndPlaceholder: localizedEndPlaceholderRef,
-      mergedSize: formItem.mergedSizeRef,
+      mergedSize: mergedSizeRef,
+      mergedDisabled: mergedDisabledRef,
       localizedPlacehoder: localizedPlacehoderRef,
       isValueInvalid: uniVaidation.isValueInvalidRef,
       isStartValueInvalid: dualValidation.isStartValueInvalidRef,
@@ -659,8 +663,8 @@ export default defineComponent({
       bordered: this.mergedBordered,
       size: this.mergedSize,
       passivelyActivated: true,
-      disabled: this.disabled,
-      readonly: this.disabled,
+      disabled: this.mergedDisabled,
+      readonly: this.mergedDisabled,
       clearable,
       onClear: this.handleClear,
       onClick: this.handleTriggerClick,
@@ -679,6 +683,7 @@ export default defineComponent({
       value: this.pendingValue,
       active: this.mergedShow,
       actions: this.actions,
+      shortcuts: this.shortcuts,
       style: this.cssVars as CSSProperties
     }
     const { mergedClsPrefix } = this
@@ -687,7 +692,7 @@ export default defineComponent({
         ref="triggerElRef"
         class={[
           `${mergedClsPrefix}-date-picker`,
-          this.disabled && `${mergedClsPrefix}-date-picker--disabled`,
+          this.mergedDisabled && `${mergedClsPrefix}-date-picker--disabled`,
           this.isRange && `${mergedClsPrefix}-date-picker--range`
         ]}
         style={this.triggerCssVars as CSSProperties}

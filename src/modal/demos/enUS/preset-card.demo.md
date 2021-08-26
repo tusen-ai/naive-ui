@@ -5,6 +5,7 @@ Modal has some presets, which means you can use props & slots of the preset afte
 ```html
 <n-button @click="showModal = true"> Start Me up </n-button>
 <n-modal
+  class="custom-card"
   v-model:show="showModal"
   preset="card"
   :style="bodyStyle"
@@ -23,14 +24,20 @@ Modal has some presets, which means you can use props & slots of the preset afte
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
       bodyStyle: {
         width: '600px'
       },
-      showModal: false
+      segmented: {
+        content: 'soft',
+        footer: 'soft'
+      },
+      showModal: ref(false)
     }
   }
-}
+})
 ```

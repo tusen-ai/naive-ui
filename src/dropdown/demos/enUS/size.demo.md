@@ -1,6 +1,6 @@
 # Size
 
-Dropdown has different size.
+A dropdown has different sizes.
 
 ```html
 <n-space vertical>
@@ -11,7 +11,7 @@ Dropdown has different size.
     @select="handleSelect"
     :options="options"
   >
-    <n-button>Small Some</n-button>
+    <n-button>Small Size</n-button>
   </n-dropdown>
   <n-dropdown
     placement="bottom-start"
@@ -20,7 +20,7 @@ Dropdown has different size.
     @select="handleSelect"
     :options="options"
   >
-    <n-button>Medium Some</n-button>
+    <n-button>Medium Size</n-button>
   </n-dropdown>
   <n-dropdown
     placement="bottom-start"
@@ -29,7 +29,7 @@ Dropdown has different size.
     @select="handleSelect"
     :options="options"
   >
-    <n-button>Large Some</n-button>
+    <n-button>Large Size</n-button>
   </n-dropdown>
   <n-dropdown
     placement="bottom-start"
@@ -38,7 +38,7 @@ Dropdown has different size.
     @select="handleSelect"
     :options="options"
   >
-    <n-button>Huge Some</n-button>
+    <n-button>Huge Size</n-button>
   </n-dropdown>
 </n-space>
 ```

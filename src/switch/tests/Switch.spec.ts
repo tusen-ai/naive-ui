@@ -42,4 +42,24 @@ describe('n-switch', () => {
     await wrapper.trigger('click')
     expect(onUpdate).toHaveBeenCalled()
   })
+
+  it('should work with `loading` prop', () => {
+    const wrapper = mount(NSwitch, {
+      props: {
+        loading: true
+      }
+    })
+    expect(wrapper.find('.n-base-loading').exists()).toBe(true)
+  })
+
+  it('should work with slot', () => {
+    const wrapper = mount(NSwitch, {
+      slots: {
+        checked: () => 'checked',
+        unchecked: () => 'unchecked'
+      }
+    })
+    expect(wrapper.find('.n-switch__checked').text()).toEqual('checked')
+    expect(wrapper.find('.n-switch__unchecked').text()).toEqual('unchecked')
+  })
 })

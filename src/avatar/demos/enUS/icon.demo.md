@@ -1,6 +1,6 @@
 # Icon
 
-I like using icon in avatar.
+I like using an icon in an avatar.
 
 ```html
 <n-avatar>
@@ -11,13 +11,12 @@ I like using icon in avatar.
 ```
 
 ```js
-import { MdCash, MdContacts, IosContacts } from '@vicons/ionicons4'
+import { MdCash } from '@vicons/ionicons4'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   components: {
-    MdCash,
-    MdContacts,
-    IosContacts
+    MdCash
   }
-}
+})
 ```

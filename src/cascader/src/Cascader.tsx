@@ -65,7 +65,10 @@ const cascaderProps = {
   multiple: Boolean,
   size: String as PropType<'small' | 'medium' | 'large'>,
   filterable: Boolean,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   expandTrigger: {
     type: String as PropType<ExpandTrigger>,
     default: 'click'
@@ -144,6 +147,7 @@ export default defineComponent({
     )
     const patternRef = ref('')
     const formItem = useFormItem(props)
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     const cascaderMenuInstRef = ref<CascaderMenuInstance | null>(null)
     const selectMenuInstRef = ref<SelectMenuInstance | null>(null)
     const triggerInstRef = ref<InternalSelectionInst | null>(null)
@@ -370,7 +374,7 @@ export default defineComponent({
       triggerInstRef.value?.focus()
     }
     function openMenu (): void {
-      if (!props.disabled) {
+      if (!mergedDisabledRef.value) {
         patternRef.value = ''
         uncontrolledShowRef.value = true
         if (props.filterable) {
@@ -694,7 +698,8 @@ export default defineComponent({
       showSelectMenu: showSelectMenuRef,
       pattern: patternRef,
       treeMate: treeMateRef,
-      mergedSize: formItem.mergedSizeRef,
+      mergedSize: mergedSizeRef,
+      mergedDisabled: mergedDisabledRef,
       localizedPlaceholder: localizedPlaceholderRef,
       selectedOption: selectedOptionRef,
       selectedOptions: selectedOptionsRef,
@@ -732,7 +737,8 @@ export default defineComponent({
             optionColorHover,
             optionHeight,
             optionFontSize,
-            loadingColor
+            loadingColor,
+            columnWidth
           },
           common: { cubicBezierEaseInOut }
         } = themeRef.value
@@ -741,6 +747,7 @@ export default defineComponent({
           '--menu-border-radius': menuBorderRadius,
           '--menu-box-shadow': menuBoxShadow,
           '--menu-height': menuHeight,
+          '--column-width': columnWidth,
           '--menu-color': menuColor,
           '--menu-divider-color': menuDividerColor,
           '--option-height': optionHeight,
@@ -785,7 +792,7 @@ export default defineComponent({
                       multiple={this.multiple}
                       filterable={this.filterable}
                       clearable={this.clearable}
-                      disabled={this.disabled}
+                      disabled={this.mergedDisabled}
                       focused={this.focused}
                       onFocus={this.handleTriggerFocus}
                       onBlur={this.handleTriggerBlur}

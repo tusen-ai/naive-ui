@@ -534,6 +534,10 @@ export default defineComponent({
         expandedKeysAfterChange.splice(index, 1)
         doUpdateExpandedKeys(expandedKeysAfterChange)
       } else {
+        const nodeToBeExpanded = displayTreeMateRef.value!.getNode(key)
+        if (!nodeToBeExpanded?.isLeaf) {
+          return
+        }
         doUpdateExpandedKeys(mergedExpandedKeys.concat(key))
       }
     }
