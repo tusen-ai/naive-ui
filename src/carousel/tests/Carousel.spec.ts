@@ -25,40 +25,32 @@ describe('n-carousel', () => {
     await wrapper.setProps({ autoplay: true, interval: 50 })
 
     await nextTick()
-    await wait(10)
 
-    expect(wrapper.find('[data-index="0"]').attributes('aria-hidden')).toBe(
-      'true'
-    )
-    expect(wrapper.find('[data-index="1"]').attributes('aria-hidden')).toBe(
-      'false'
-    )
-    expect(wrapper.find('[data-index="2"]').attributes('aria-hidden')).toBe(
-      'true'
-    )
-    expect(wrapper.find('[data-index="3"]').attributes('aria-hidden')).toBe(
-      'true'
-    )
-    expect(wrapper.find('[data-index="4"]').attributes('aria-hidden')).toBe(
-      'true'
-    )
+    await wait(10)
+    ;([0, 1, 2, 3, 4] as const).forEach((i) => {
+      if (i === 1) {
+        expect(
+          wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
+        ).toBe('false')
+      } else {
+        expect(
+          wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
+        ).toBe('true')
+      }
+    })
 
     await wait(60)
-    expect(wrapper.find('[data-index="0"]').attributes('aria-hidden')).toBe(
-      'true'
-    )
-    expect(wrapper.find('[data-index="1"]').attributes('aria-hidden')).toBe(
-      'true'
-    )
-    expect(wrapper.find('[data-index="2"]').attributes('aria-hidden')).toBe(
-      'false'
-    )
-    expect(wrapper.find('[data-index="3"]').attributes('aria-hidden')).toBe(
-      'true'
-    )
-    expect(wrapper.find('[data-index="4"]').attributes('aria-hidden')).toBe(
-      'true'
-    )
+    ;([0, 1, 2, 3, 4] as const).forEach((i) => {
+      if (i === 2) {
+        expect(
+          wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
+        ).toBe('false')
+      } else {
+        expect(
+          wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
+        ).toBe('true')
+      }
+    })
   })
 
   it('should work with `dotPlacement` prop', async () => {
