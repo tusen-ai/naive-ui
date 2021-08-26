@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# Pending
+
+### Fixes
+
+- Fix `n-tree` 节点无法展开的问题
+
 ## 2.16.6 (2021-08-26)
 
 ### Feats

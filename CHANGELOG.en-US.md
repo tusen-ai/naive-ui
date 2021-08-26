@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# Pending
+
+### Fixes
+
+- Fix `n-tree` node can not expanded.
+
 ## 2.16.6 (2021-08-26)
 
 ### Feats
