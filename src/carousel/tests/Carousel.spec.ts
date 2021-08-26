@@ -3,10 +3,64 @@ import { mount } from '@vue/test-utils'
 import { NCarousel } from '../index'
 import { sleep } from 'seemly'
 
+const wait = async (ms = 100): Promise<number> =>
+  await new Promise((resolve) => setTimeout(() => resolve(0), ms))
+
 describe('n-carousel', () => {
   it('should work with import on demand', () => {
     mount(NCarousel)
   })
+
+  it('should work with `autoplay` and `interval` prop', async () => {
+    const wrapper = mount(NCarousel, {
+      slots: {
+        default: () => {
+          return [...Array(3).keys()].map((i) => {
+            return h('div', {}, i.toString())
+          })
+        }
+      }
+    })
+
+    await wrapper.setProps({ autoplay: true, interval: 50 })
+
+    await nextTick()
+    await wait(10)
+
+    expect(wrapper.find('[data-index="0"]').attributes('aria-hidden')).toBe(
+      'true'
+    )
+    expect(wrapper.find('[data-index="1"]').attributes('aria-hidden')).toBe(
+      'false'
+    )
+    expect(wrapper.find('[data-index="2"]').attributes('aria-hidden')).toBe(
+      'true'
+    )
+    expect(wrapper.find('[data-index="3"]').attributes('aria-hidden')).toBe(
+      'true'
+    )
+    expect(wrapper.find('[data-index="4"]').attributes('aria-hidden')).toBe(
+      'true'
+    )
+
+    await wait(60)
+    expect(wrapper.find('[data-index="0"]').attributes('aria-hidden')).toBe(
+      'true'
+    )
+    expect(wrapper.find('[data-index="1"]').attributes('aria-hidden')).toBe(
+      'true'
+    )
+    expect(wrapper.find('[data-index="2"]').attributes('aria-hidden')).toBe(
+      'false'
+    )
+    expect(wrapper.find('[data-index="3"]').attributes('aria-hidden')).toBe(
+      'true'
+    )
+    expect(wrapper.find('[data-index="4"]').attributes('aria-hidden')).toBe(
+      'true'
+    )
+  })
+
   it('should work with `dotPlacement` prop', async () => {
     const wrapper = mount(NCarousel)
 
