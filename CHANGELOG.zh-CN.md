@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-mention` 新增 `focus`、`blur` 方法
+
 ## 2.16.6 (2021-08-26)
 
 ### Feats

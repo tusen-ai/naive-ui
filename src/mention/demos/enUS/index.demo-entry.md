@@ -12,6 +12,7 @@ autosize
 form
 render-label
 custom-prefix
+manual-trigger
 ```
 
 ## Props
@@ -49,6 +50,13 @@ Mention is provided after `v2.2.0`.
 | render | `(option: MentionOption) => VNodeChild` | Support custom options via `render` rendering function. |
 | style | `string` | Option style. |
 | value | `string` | Should be unique. |
+
+### Mention Methods
+
+| Name  | Type         | Description                   |
+| ----- | ------------ | ----------------------------- |
+| focus | `() => void` | Manually focus the component. |
+| blur  | `() => void` | Manually blur the component.  |
 
 ### Mention Slots
 
