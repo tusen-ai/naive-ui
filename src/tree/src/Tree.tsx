@@ -535,7 +535,7 @@ export default defineComponent({
         doUpdateExpandedKeys(expandedKeysAfterChange)
       } else {
         const nodeToBeExpanded = displayTreeMateRef.value!.getNode(key)
-        if (!nodeToBeExpanded?.isLeaf) {
+        if (!nodeToBeExpanded || nodeToBeExpanded.isLeaf) {
           return
         }
         doUpdateExpandedKeys(mergedExpandedKeys.concat(key))

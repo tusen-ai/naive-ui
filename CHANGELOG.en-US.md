@@ -9,6 +9,7 @@
 ### Fixes
 
 - Fix `n-mention`'s menu is too far from text in input mode.
+- Fix `n-tree` node can not expanded.
 
 ## 2.16.6 (2021-08-26)
 
