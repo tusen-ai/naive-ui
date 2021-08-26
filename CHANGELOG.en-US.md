@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2.16.7 (2021-08-27)
+
+### Feats
+
+- `n-mention` add `focus` and `blur` methods.
+
+### Fixes
+
+- Fix `n-mention`'s menu is too far from text in input mode.
+- Fix `n-tree` node can not expanded.
+
 ## 2.16.6 (2021-08-26)
 
 ### Feats
