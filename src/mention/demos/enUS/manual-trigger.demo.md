@@ -1,6 +1,6 @@
-# Manual trigger
+# Manually Trigger Focus and Blur
 
-Maybe you want to trigger the `focus` and `blur` events manually.
+Maybe you want to trigger `focus` and `blur` manually.
 
 ```html
 <n-space>

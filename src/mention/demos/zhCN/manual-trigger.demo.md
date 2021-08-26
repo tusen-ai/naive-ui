@@ -1,6 +1,6 @@
-# 手动触发
+# 手动 Focus & Blur
 
-可能你想要手动触发 `focus` 和 `blur` 事件。
+可能你想要手动 `focus` 和 `blur`。
 
 ```html
 <n-space>
