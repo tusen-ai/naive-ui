@@ -18,7 +18,7 @@
         -->
       <n-form-item
         ignore-path-change
-        :label="false"
+        :show-label="false"
         :path="`dynamicInputValue[${index}].name`"
         :rule="dynamicInputRule"
       >
@@ -34,7 +34,7 @@
       <div style="height: 34px; line-height: 34px; margin: 0 8px;">=</div>
       <n-form-item
         ignore-path-change
-        :label="false"
+        :show-label="false"
         :path="`dynamicInputValue[${index}].value`"
         :rule="dynamicInputRule"
       >

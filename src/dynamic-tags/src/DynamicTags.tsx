@@ -8,6 +8,7 @@ import {
   nextTick,
   toRef
 } from 'vue'
+import { useMergedState } from 'vooks'
 import commonProps from '../../tag/src/common-props'
 import { AddIcon } from '../../_internal/icons'
 import { NButton } from '../../button'
@@ -22,9 +23,7 @@ import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { dynamicTagsLight } from '../styles'
 import type { DynamicTagsTheme } from '../styles'
 import style from './styles/index.cssr'
-
 import type { OnUpdateValue } from './interface'
-import { useMergedState } from 'vooks'
 
 const dynamicTagsProps = {
   ...(useTheme.props as ThemeProps<DynamicTagsTheme>),
@@ -95,6 +94,9 @@ export default defineComponent({
     const inputSizeRef = computed(() => {
       return smallerSize(props.size)
     })
+    const triggerDisabledRef = computed(() => {
+      return !!props.max && mergedValueRef.value.length >= props.max
+    })
     function doChange (value: string[]): void {
       const {
         onChange,
@@ -121,10 +123,11 @@ export default defineComponent({
           handleInputConfirm()
       }
     }
-    function handleInputConfirm (): void {
-      if (inputValueRef.value) {
+    function handleInputConfirm (externalValue?: string): void {
+      const nextValue = externalValue ?? inputValueRef.value
+      if (nextValue) {
         const tags = mergedValueRef.value.slice(0)
-        tags.push(inputValueRef.value)
+        tags.push(nextValue)
         doChange(tags)
       }
       showInputRef.value = false
@@ -151,10 +154,12 @@ export default defineComponent({
       inputForceFocused: inputForceFocusedRef,
       mergedValue: mergedValueRef,
       mergedDisabled: mergedDisabledRef,
+      triggerDisabled: triggerDisabledRef,
       handleInputKeyUp,
       handleAddClick,
       handleInputBlur,
       handleCloseClick,
+      handleInputConfirm,
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
@@ -193,10 +198,13 @@ export default defineComponent({
               inputStyle,
               inputSize,
               inputForceFocused,
+              triggerDisabled,
               handleInputKeyUp,
               handleInputBlur,
               handleAddClick,
-              handleCloseClick
+              handleCloseClick,
+              handleInputConfirm,
+              $slots
             } = this
             return this.mergedValue
               .map((tag, index) => (
@@ -218,26 +226,35 @@ export default defineComponent({
               ))
               .concat(
                 showInput ? (
-                  <NInput
-                    ref="inputInstRef"
-                    autosize
-                    value={inputValue}
-                    onUpdateValue={(v) => {
-                      this.inputValue = v
-                    }}
-                    theme={mergedTheme.peers.Input}
-                    themeOverrides={mergedTheme.peerOverrides.Input}
-                    style={inputStyle}
-                    size={inputSize}
-                    placeholder=""
-                    onKeyup={handleInputKeyUp}
-                    onBlur={handleInputBlur}
-                    internalForceFocus={inputForceFocused}
-                  />
+                  $slots.input ? (
+                    $slots.input({ submit: handleInputConfirm })
+                  ) : (
+                    <NInput
+                      ref="inputInstRef"
+                      autosize
+                      value={inputValue}
+                      onUpdateValue={(v) => {
+                        this.inputValue = v
+                      }}
+                      theme={mergedTheme.peers.Input}
+                      themeOverrides={mergedTheme.peerOverrides.Input}
+                      style={inputStyle}
+                      size={inputSize}
+                      placeholder=""
+                      onKeyup={handleInputKeyUp}
+                      onBlur={handleInputBlur}
+                      internalForceFocus={inputForceFocused}
+                    />
+                  )
+                ) : $slots.trigger ? (
+                  $slots.trigger({
+                    activate: handleAddClick,
+                    disabled: triggerDisabled
+                  })
                 ) : (
                   <NButton
                     dashed
-                    disabled={!!this.max && this.mergedValue.length >= this.max}
+                    disabled={triggerDisabled}
                     theme={mergedTheme.peers.Button}
                     themeOverrides={mergedTheme.peerOverrides.Button}
                     size={inputSize}

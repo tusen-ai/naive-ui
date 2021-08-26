@@ -23,6 +23,7 @@ export default cB('timeline', `
   `, [
     cB('timeline-item', `
       flex-shrink: 0;
+      padding-right: 40px;
     `, [
       cB('timeline-item-content', `
         margin-top: 26px;
@@ -30,7 +31,6 @@ export default cB('timeline', `
         cE('meta', `
           margin-top: 6px;
           margin-bottom: unset;
-          margin-right: 40px;
         `)
       ]),
       cB('timeline-item-timeline', `

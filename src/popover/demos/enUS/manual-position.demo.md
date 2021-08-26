@@ -15,24 +15,30 @@ Warn: when manually positioned, the `trigger` prop must be `'manual'`.
 ```
 
 ```js
-export default {
-  methods: {
-    handleClick (e) {
-      if (this.showPopover) {
-        this.showPopover = false
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const xRef = ref(0)
+    const yRef = ref(0)
+    const showPopoverRef = ref(false)
+
+    const handleClick = (e) => {
+      if (showPopoverRef.value) {
+        showPopoverRef.value = false
       } else {
-        this.showPopover = true
-        this.x = e.clientX
-        this.y = e.clientY
+        showPopoverRef.value = true
+        xRef.value = e.clientX
+        yRef.value = e.clientY
       }
     }
-  },
-  data () {
+
     return {
-      showPopover: false,
-      x: 0,
-      y: 0
+      x: xRef,
+      y: yRef,
+      showPopover: showPopoverRef,
+      handleClick
     }
   }
-}
+})
 ```

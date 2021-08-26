@@ -8,9 +8,12 @@ Make tags inputable.
 basic
 max
 form
+slot
 ```
 
-## Props
+## API
+
+### DynamicTags Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -26,3 +29,10 @@ form
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |
 | value | `string[]` | `undefined` | Value in controlled mode. |
 | on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |
+
+### DynamicTags Slots
+
+| Name | Parameters | Description |
+| --- | --- | --- |
+| input | `(info: { submit: (value: any) => void, })` | Custom input elements, supplied by the user. |
+| trigger | `(info: { activate: () => void, disabled: boolean })` | The element or component that triggers input. |
