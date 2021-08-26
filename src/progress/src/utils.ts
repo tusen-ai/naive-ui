@@ -43,7 +43,7 @@ export const setProcessingTimer = ({
 }): void => {
   num++
   const strokeDasharrayPercentage = viewBoxWidth * 8
-  if (num > Math.ceil(2000 / (Date.now() - timeNow))) {
+  if (num > Math.max(Math.ceil(1000 / (Date.now() - timeNow)), 60)) {
     clearProcessingTimer(timer)
     sleepingRef.value = true
     window.setTimeout(() => {
@@ -68,7 +68,7 @@ export const setProcessingTimer = ({
     changeProcessingFillStrokeDasharray({
       processingFillStrokeDasharrayRef,
       maxStrokeDasharray,
-      rate: (Date.now() - timeNow) / 2000,
+      rate: Math.min((Date.now() - timeNow) / 1000, 1 / 60),
       strokeDasharrayPercentage
     })
     timeNow = Date.now()

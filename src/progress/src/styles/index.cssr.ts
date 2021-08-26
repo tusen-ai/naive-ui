@@ -244,5 +244,19 @@ export default c([
       right: 0;
       opacity: 0;
     }
+  `),
+  c('@keyframes circle-progress-processing-animation', `
+    0% {
+      opacity: 1;
+    }
+    40% {
+      opacity: 0.1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
   `)
 ])

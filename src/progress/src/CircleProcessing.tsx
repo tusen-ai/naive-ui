@@ -125,6 +125,8 @@ export default defineComponent({
             stroke-linecap="round"
             fill="none"
             style={{
+              animation:
+                'animation: circle-progress-processing-animation 2s var(--bezier) infinite',
               strokeDasharray: processingFillStrokeDasharray,
               strokeDashoffset: 0,
               stroke: `url(#ProgressCircleGradient${randomId})`
