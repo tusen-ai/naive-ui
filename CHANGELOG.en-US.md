@@ -4,7 +4,24 @@
 
 ### Fixes
 
-- `n-input` chinese input method not correct while mouse leave the input in `clearable` is true, closes [#905](https://github.com/TuSimple/naive-ui/issues/905).
+- Fix `n-input` chinese input method not correct while mouse leave the input in `clearable` is true, closes [#905](https://github.com/TuSimple/naive-ui/issues/905).
+- Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
+
+### Feats
+
+- `n-cascader` add `onUpdateValue` prop.
+- `n-auto-complete` add `onUpdateValue` prop.
+
+## 2.16.7 (2021-08-27)
+
+### Feats
+
+- `n-mention` add `focus` and `blur` methods.
+
+### Fixes
+
+- Fix `n-mention`'s menu is too far from text in input mode.
+- Fix `n-tree` node can not expanded.
 
 ## 2.16.6 (2021-08-26)
 
