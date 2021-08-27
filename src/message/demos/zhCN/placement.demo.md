@@ -7,8 +7,8 @@
 ```
 
 ```js
+import { defineComponent, h, ref } from 'vue'
 import { useMessage, NButton } from 'naive-ui'
-import { h, ref } from 'vue'
 
 const Buttons = {
   emits: ['changePlacement'],
@@ -102,18 +102,18 @@ const Buttons = {
   }
 }
 
-export default {
+export default defineComponent({
   components: {
     Buttons
   },
   setup () {
-    const placement = ref('top')
+    const placementRef = ref('top')
     return {
-      placement,
-      changePlacement: (val) => {
-        placement.value = val
+      placement: placementRef,
+      changePlacement (val) {
+        placementRef.value = val
       }
     }
   }
-}
+})
 ```
