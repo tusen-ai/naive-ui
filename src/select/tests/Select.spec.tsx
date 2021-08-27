@@ -1,4 +1,4 @@
-import { h, VNode } from 'vue'
+import { h, nextTick, VNode } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NSelect, SelectProps } from '../index'
 import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
@@ -218,6 +218,36 @@ describe('n-select', () => {
     expect(wrapper.findComponent(NTag).exists()).toBe(false)
   })
 
+  it('should work with `render-label` prop', async () => {
+    const options = [
+      {
+        label: 'test',
+        value: 'test'
+      }
+    ]
+
+    const wrapper = mount(NSelect, {
+      attachTo: document.body,
+      props: {
+        defaultValue: 'test',
+        options: options,
+        virtualScroll: false,
+        renderLabel: (option: SelectOption) => {
+          return 'render-' + String(option.label)
+        }
+      }
+    })
+
+    expect(wrapper.find('.n-base-selection-label__input').text()).toBe(
+      'render-test'
+    )
+    await wrapper.setProps({ show: true })
+    await nextTick()
+    expect(
+      document.querySelector('.n-base-select-option--selected')?.innerHTML
+    ).toContain('render-test')
+  })
+
   it('should work with `disabled` prop', async () => {
     const wrapper = mount(NSelect)
 
@@ -277,5 +307,14 @@ describe('n-select', () => {
       }
     })
     expect(wrapper.find('.n-base-selection-placeholder').text()).toBe('test')
+  })
+
+  it('should work with `size` prop', async () => {
+    ;(['small', 'medium', 'large'] as const).forEach((i) => {
+      const wrapper = mount(NSelect, { props: { size: i } })
+      expect(
+        wrapper.find('.n-base-selection').attributes('style')
+      ).toMatchSnapshot()
+    })
   })
 })
