@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-data-table`'s column's `renderFilterMenu` add actions params.
+
 ## 2.16.7 (2021-08-27)
 
 ### Feats

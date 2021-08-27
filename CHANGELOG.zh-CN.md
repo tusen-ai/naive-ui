@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-data-table` 的列的 `renderFilterMenu` 新增 actions 参数
+
 ## 2.16.7 (2021-08-27)
 
 ### Feats
