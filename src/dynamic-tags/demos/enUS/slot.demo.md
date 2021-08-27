@@ -1,6 +1,6 @@
 # Customizing Input or Trigger Element
 
-You can replace dynamic-tags's input or trigger element.
+You can replace a dynamic-tags's input or trigger element with another component.
 
 ```html
 <n-dynamic-tags v-model:value="tags">
