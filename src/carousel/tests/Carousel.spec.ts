@@ -3,9 +3,6 @@ import { mount } from '@vue/test-utils'
 import { NCarousel } from '../index'
 import { sleep } from 'seemly'
 
-const wait = async (ms = 100): Promise<number> =>
-  await new Promise((resolve) => setTimeout(() => resolve(0), ms))
-
 describe('n-carousel', () => {
   it('should work with import on demand', () => {
     mount(NCarousel)
@@ -26,7 +23,7 @@ describe('n-carousel', () => {
 
     await nextTick()
 
-    await wait(10)
+    await sleep(10)
     ;([0, 1, 2, 3, 4] as const).forEach((i) => {
       if (i === 1) {
         expect(
@@ -39,7 +36,7 @@ describe('n-carousel', () => {
       }
     })
 
-    await wait(60)
+    await sleep(60)
     ;([0, 1, 2, 3, 4] as const).forEach((i) => {
       if (i === 2) {
         expect(
