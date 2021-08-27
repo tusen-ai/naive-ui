@@ -2,6 +2,7 @@ import { cB, c } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // --menu-box-shadow
+// --menu-max-height
 export default c([
   cB('select', `
     z-index: auto;
@@ -13,6 +14,12 @@ export default c([
     margin: 4px 0;
     box-shadow: var(--menu-box-shadow);
   `, [
-    fadeInScaleUpTransition()
+    fadeInScaleUpTransition(),
+    cB('scrollbar', `
+      max-height: var(--menu-max-height);
+    `),
+    cB('virtual-list', `
+      max-height: var(--menu-max-height);
+    `)
   ])
 ])

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-select`' add `maxMenuHeight` theme variable, closes [#923](https://github.com/TuSimple/naive-ui/issues/923).
+
 ## 2.16.7 (2021-08-27)
 
 ### Feats

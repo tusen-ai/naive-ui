@@ -674,10 +674,11 @@ export default defineComponent({
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
-          self: { menuBoxShadow }
+          self: { menuBoxShadow, menuMaxHeight }
         } = themeRef.value
         return {
-          '--menu-box-shadow': menuBoxShadow
+          '--menu-box-shadow': menuBoxShadow,
+          '--menu-max-height': menuMaxHeight
         }
       })
     }

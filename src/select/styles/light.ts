@@ -3,10 +3,12 @@ import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
+import commonVariables from './_common'
 
 export function self (vars: ThemeCommonVars) {
   const { boxShadow2 } = vars
   return {
+    ...commonVariables,
     menuBoxShadow: boxShadow2
   }
 }

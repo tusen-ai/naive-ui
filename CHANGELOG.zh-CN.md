@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-select`' 新增 `maxMenuHeight` 主题变量，关闭 [#923](https://github.com/TuSimple/naive-ui/issues/923)
+
 ## 2.16.7 (2021-08-27)
 
 ### Feats
