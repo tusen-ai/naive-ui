@@ -16,7 +16,6 @@ const countDown = (second) => `倒计时 ${second} 秒`
 export default defineComponent({
   setup () {
     const dialog = useDialog()
-
     return {
       handleClick () {
         const d = dialog.success({

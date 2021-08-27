@@ -23,7 +23,6 @@ import { useDialog } from 'naive-ui'
 export default defineComponent({
   setup () {
     const dialog = useDialog()
-
     return {
       warning () {
         dialog.warning(options)

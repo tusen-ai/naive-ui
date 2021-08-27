@@ -18,7 +18,6 @@ export default defineComponent({
   },
   setup () {
     const dialog = useDialog()
-
     return {
       handleButtonClick () {
         dialog.warning({

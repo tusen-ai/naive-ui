@@ -16,7 +16,6 @@ const countDown = (second) => `Count down ${second} second`
 export default defineComponent({
   setup () {
     const dialog = useDialog()
-
     return {
       handleClick () {
         const d = dialog.success({

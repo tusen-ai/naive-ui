@@ -14,7 +14,6 @@ export default defineComponent({
   setup () {
     const message = useMessage()
     const dialog = useDialog()
-
     return {
       handleButtonClick () {
         dialog.success({

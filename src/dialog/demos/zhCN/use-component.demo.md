@@ -21,7 +21,6 @@ import { useMessage } from 'naive-ui'
 export default defineComponent({
   setup () {
     const message = useMessage()
-
     return {
       handleNegativeClick () {
         message.warning('取消')
