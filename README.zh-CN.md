@@ -18,6 +18,7 @@
 - [Discord](https://discord.gg/Pqv7Mev5Dd)
 - 钉钉群 33482509
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
+- [图森未来 - 一个 955.WLB 的选择](https://github.com/TuSimple/naive-ui/issues/1029)
 
 ## 特性
 
