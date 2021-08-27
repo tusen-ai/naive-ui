@@ -32,6 +32,10 @@ const codeProps = {
     type: Boolean,
     default: false
   },
+  inline: {
+    type: Boolean,
+    default: true
+  },
   // In n-log, we only need to mount code's style for highlight
   internalNoHighlight: Boolean
 }
@@ -134,13 +138,19 @@ export default defineComponent({
   },
   render () {
     const { default: defaultSlot } = this.$slots
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, inline } = this
     return (
       <code
         class={`${mergedClsPrefix}-code`}
         style={this.cssVars as CSSProperties}
       >
-        {defaultSlot ? defaultSlot() : <pre ref="codeRef"></pre>}
+        {defaultSlot ? (
+          defaultSlot()
+        ) : inline ? (
+          <span ref="codeRef"></span>
+        ) : (
+          <pre ref="codeRef"></pre>
+        )}
       </code>
     )
   }
