@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-cascader` add `onUpdateValue` prop.
 - `n-auto-complete` add `onUpdateValue` prop.
 
 ## 2.16.7 (2021-08-27)
