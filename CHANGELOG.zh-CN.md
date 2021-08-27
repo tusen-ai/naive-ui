@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-auto-complete` 新增 `onUpdateValue` 方法
+
 ## 2.16.7 (2021-08-27)
 
 ### Feats
