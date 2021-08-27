@@ -78,7 +78,7 @@ export default defineComponent({
     const currentRef = ref(1)
     const currentStatusRef = ref('process')
 
-    const buttonType = computed(() => {
+    const buttonTypeRef = computed(() => {
       switch (currentStatusRef.value) {
         case 'error':
           return 'error'
@@ -95,7 +95,7 @@ export default defineComponent({
       handleButtonClick () {
         currentRef.value = (currentRef.value % 4) + 1
       },
-      buttonType
+      buttonType: buttonTypeRef
     }
   }
 })
