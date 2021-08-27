@@ -11,7 +11,6 @@ import { useMessage } from 'naive-ui'
 export default defineComponent({
   setup () {
     const message = useMessage()
-
     return {
       info () {
         message.info(

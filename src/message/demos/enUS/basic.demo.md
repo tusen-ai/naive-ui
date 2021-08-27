@@ -17,7 +17,6 @@ import { useMessage } from 'naive-ui'
 export default defineComponent({
   setup () {
     const message = useMessage()
-
     return {
       info () {
         message.info("I don't know why nobody told you how to unfold your love")

@@ -23,7 +23,6 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   setup () {
     const message = useMessage()
-
     return {
       warning () {
         message.warning('...')

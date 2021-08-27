@@ -108,7 +108,6 @@ export default defineComponent({
   },
   setup () {
     const placementRef = ref('top')
-
     return {
       placement: placementRef,
       changePlacement (val) {

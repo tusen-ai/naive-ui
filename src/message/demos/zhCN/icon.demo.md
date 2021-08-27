@@ -12,7 +12,6 @@ import { MdHourglass } from '@vicons/ionicons4'
 export default defineComponent({
   setup () {
     const message = useMessage()
-
     return {
       createMessage () {
         message.warning("I never needed anybody's help in any way", {
