@@ -4,7 +4,13 @@
 
 ### Feats
 
-- `n-data-table`'s column's `renderFilterMenu` add actions params.
+- `n-cascader` add `onUpdateValue` prop.
+- `n-auto-complete` add `onUpdateValue` prop.
+- `n-data-table`'s column's `renderFilterMenu` add `hide` params.
+
+### Fixes
+
+- Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
 
 ## 2.16.7 (2021-08-27)
 
