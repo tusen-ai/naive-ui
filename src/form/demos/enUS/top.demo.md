@@ -1,6 +1,6 @@
 # Label Placement Top
 
-Use `n-grid` and `n-form-item-gi` (grid item) and make form easily.
+Use `n-grid` and `n-form-item-gi` (grid item) to style the form more exactly.
 
 ```html
 <n-radio-group
@@ -120,9 +120,9 @@ Use `n-grid` and `n-form-item-gi` (grid item) and make form easily.
     </n-form-item-gi>
     <n-gi :span="24">
       <div style="display: flex; justify-content: flex-end;">
-        <n-button @click="handleValidateButtonClick" round type="primary"
-          >Validate</n-button
-        >
+        <n-button @click="handleValidateButtonClick" round type="primary">
+          Validate
+        </n-button>
       </div>
     </n-gi>
   </n-grid>

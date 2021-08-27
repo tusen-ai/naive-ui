@@ -1,8 +1,8 @@
 # Show / Hide Label
 
-When `show-label=false` is set, `n-form-item`'s `label` element and its placeholder won't show.
+When `show-label` is set to `false`, `n-form-item`'s `label` element and its placeholder won't show.
 
-If `show-label` is not set on `n-form-item`, it will inherit `n-form`'s `show-label`. By default it's true.
+If `show-label` will default to `true` if not set and inherit `n-form`'s `show-label`.
 
 ```html
 <div :style="switchStyle">
