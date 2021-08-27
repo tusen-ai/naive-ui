@@ -25,7 +25,7 @@ export default defineComponent({
     const message = useMessage()
 
     return {
-      warning: () => {
+      warning () {
         message.warning('...')
       }
     }

@@ -27,7 +27,7 @@ export default defineComponent({
 
     return {
       removeMessage,
-      createMessage: () => {
+      createMessage () {
         if (!messageReactive) {
           messageReactive = message.info('3 * 3 * 4 * 4 * ?', {
             duration: 0

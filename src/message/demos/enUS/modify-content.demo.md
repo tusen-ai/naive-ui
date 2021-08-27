@@ -21,19 +21,19 @@ export default defineComponent({
     let msgReactive = reactive(null)
 
     return {
-      plus: () => {
+      plus () {
         if (msgReactive) {
           countRef.value++
           msgReactive.content = '' + countRef.value
         }
       },
-      changeType: () => {
+      changeType () {
         if (msgReactive) {
           typeIndexRef.value = (typeIndexRef.value + 1) % types.length
           msgReactive.type = types[typeIndexRef.value]
         }
       },
-      createMessage: () => {
+      createMessage () {
         msgReactive = message[types[typeIndexRef.value]]('' + countRef.value, {
           duration: 10000
         })

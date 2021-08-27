@@ -15,7 +15,7 @@ export default defineComponent({
     const message = useMessage()
 
     return {
-      createMessage: () => {
+      createMessage () {
         message.info(
           "I don't know why nobody told you how to unfold your love",
           {

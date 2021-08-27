@@ -17,7 +17,7 @@ export default defineComponent({
     const message = useMessage()
 
     return {
-      info: () => {
+      info () {
         message.info(
           "I don't know why nobody told you how to unfold your love",
           { duration: 5000 }

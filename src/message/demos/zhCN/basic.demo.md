@@ -19,21 +19,21 @@ export default defineComponent({
     const message = useMessage()
 
     return {
-      info: () => {
+      info () {
         message.info("I don't know why nobody told you how to unfold your love")
       },
-      error: () => {
+      error () {
         message.error('Once upon a time you dressed so fine')
       },
-      warning: () => {
+      warning () {
         message.warning('How many roads must a man walk down')
       },
-      success: () => {
+      success () {
         message.success(
           "'Cause you walked hand in hand With another man in my place"
         )
       },
-      loading: () => {
+      loading () {
         message.loading(
           'If I were you, I will realize that I love you more than any other guy'
         )

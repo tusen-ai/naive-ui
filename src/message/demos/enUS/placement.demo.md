@@ -111,7 +111,7 @@ export default defineComponent({
 
     return {
       placement: placementRef,
-      changePlacement: (val) => {
+      changePlacement (val) {
         placementRef.value = val
       }
     }

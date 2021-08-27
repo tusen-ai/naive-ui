@@ -14,7 +14,7 @@ export default defineComponent({
     const message = useMessage()
 
     return {
-      createMessage: () => {
+      createMessage () {
         message.warning("I never needed anybody's help in any way", {
           icon: () => h(NIcon, null, { default: () => h(MdHourglass) })
         })
