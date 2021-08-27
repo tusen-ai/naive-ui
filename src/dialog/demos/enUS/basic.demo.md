@@ -20,7 +20,7 @@ export default defineComponent({
     const dialog = useDialog()
 
     return {
-      handleConfirm: () => {
+      handleConfirm () {
         dialog.warning({
           title: 'Confirm',
           content: 'Are you sure?',
@@ -34,7 +34,7 @@ export default defineComponent({
           }
         })
       },
-      handleSuccess: () => {
+      handleSuccess () {
         dialog.success({
           title: 'Success',
           content: 'Cool',
@@ -44,7 +44,7 @@ export default defineComponent({
           }
         })
       },
-      handleError: () => {
+      handleError () {
         dialog.error({
           title: 'Error',
           content: 'A mistake.',

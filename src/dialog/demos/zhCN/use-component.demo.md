@@ -23,10 +23,10 @@ export default defineComponent({
     const message = useMessage()
 
     return {
-      handleNegativeClick: () => {
+      handleNegativeClick () {
         message.warning('取消')
       },
-      handlePositiveClick: () => {
+      handlePositiveClick () {
         message.success('确认')
       }
     }

@@ -23,10 +23,10 @@ export default defineComponent({
     const message = useMessage()
 
     return {
-      handleNegativeClick: () => {
+      handleNegativeClick () {
         message.warning('Cancel')
       },
-      handlePositiveClick: () => {
+      handlePositiveClick () {
         message.success('Confirm')
       }
     }

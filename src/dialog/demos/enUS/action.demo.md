@@ -20,7 +20,7 @@ export default defineComponent({
     const dialog = useDialog()
 
     return {
-      handleConfirm: () => {
+      handleConfirm () {
         dialog.warning({
           title: 'Use Render Function',
           content: () => 'Content',

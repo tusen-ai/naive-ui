@@ -20,7 +20,7 @@ export default defineComponent({
     const dialog = useDialog()
 
     return {
-      handleButtonClick: () => {
+      handleButtonClick () {
         dialog.warning({
           title: '使用渲染函数',
           content: () => 'Content',

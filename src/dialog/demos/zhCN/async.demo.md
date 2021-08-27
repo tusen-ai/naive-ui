@@ -18,7 +18,7 @@ export default defineComponent({
     const dialog = useDialog()
 
     return {
-      handleClick: () => {
+      handleClick () {
         const d = dialog.success({
           title: '异步',
           content: '点击，倒计时 3 秒',

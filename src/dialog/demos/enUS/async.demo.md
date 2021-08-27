@@ -18,7 +18,7 @@ export default defineComponent({
     const dialog = useDialog()
 
     return {
-      handleClick: () => {
+      handleClick () {
         const d = dialog.success({
           title: 'Async',
           content: 'Click and count down 3 second',

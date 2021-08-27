@@ -20,7 +20,7 @@ export default defineComponent({
     const dialog = useDialog()
 
     return {
-      handleConfirm: () => {
+      handleConfirm () {
         dialog.warning({
           title: '警告',
           content: '你确定？',
@@ -34,7 +34,7 @@ export default defineComponent({
           }
         })
       },
-      handleSuccess: () => {
+      handleSuccess () {
         dialog.success({
           title: '成功',
           content: '厉害',
@@ -44,7 +44,7 @@ export default defineComponent({
           }
         })
       },
-      handleError: () => {
+      handleError () {
         dialog.error({
           title: '错误',
           content: '错了',

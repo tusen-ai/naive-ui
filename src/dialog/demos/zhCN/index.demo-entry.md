@@ -25,7 +25,7 @@ export default defineComponent({
     const dialog = useDialog()
 
     return {
-      warning: () => {
+      warning () {
         dialog.warning(options)
       }
     }

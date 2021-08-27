@@ -16,7 +16,7 @@ export default defineComponent({
     const dialog = useDialog()
 
     return {
-      handleButtonClick: () => {
+      handleButtonClick () {
         dialog.success({
           title: 'Close',
           content: 'Are you sure?',
