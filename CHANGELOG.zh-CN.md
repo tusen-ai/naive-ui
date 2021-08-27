@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-layout` 的 `sider-placement` 属性在打包之后不生效，关闭 [#978](https://github.com/TuSimple/naive-ui/issues/978)
+
 ## 2.16.7 (2021-08-27)
 
 ### Feats

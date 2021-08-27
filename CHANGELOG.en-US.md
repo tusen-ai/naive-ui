@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
+
 ## 2.16.7 (2021-08-27)
 
 ### Feats
