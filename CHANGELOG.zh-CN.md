@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Fixes
+
+- 修复 `n-layout` 的 `sider-placement` 属性在打包之后不生效，关闭 [#978](https://github.com/TuSimple/naive-ui/issues/978)
+
 ### Feats
 
 - `n-cascader` 新增 `onUpdateValue` 方法
