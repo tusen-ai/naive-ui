@@ -7,7 +7,7 @@ TreeOptionBase,
 'checkboxDisabled' | 'isLeaf' | 'children'
 > & {
   children?: TreeSelectOption[]
-  [k: string]: unknown
+  [k: string]: any
 }
 
 export type TreeSelectTmNode = TreeNode<TreeSelectOption>

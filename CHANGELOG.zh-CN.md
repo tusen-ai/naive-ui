@@ -7,6 +7,7 @@
 - `n-cascader` 新增 `onUpdateValue` 方法
 - `n-auto-complete` 新增 `onUpdateValue` 方法
 - `n-data-table` 的列的 `renderFilterMenu` 新增 hide 参数
+- `n-tree` 和 `n-tree-select` 新增 `node-key` 属性
 
 ### Fixes
 

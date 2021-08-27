@@ -16,7 +16,7 @@ export interface TreeOptionBase {
   suffix?: () => VNodeChild
 }
 
-export type TreeOption = TreeOptionBase & { [k: string]: unknown }
+export type TreeOption = TreeOptionBase & { [k: string]: string }
 
 export type TreeOptions = TreeOption[]
 

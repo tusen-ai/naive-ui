@@ -61,6 +61,7 @@ const props = {
     type: Boolean,
     default: true
   },
+  nodeKey: String,
   cascade: Boolean,
   checkable: Boolean,
   clearable: Boolean,
@@ -177,12 +178,15 @@ export default defineComponent({
     })
     // used to resolve selected options
     const dataTreeMateRef = computed(() =>
-      createTreeMate<TreeSelectOption>(props.options, treeMateOptions)
+      createTreeMate<TreeSelectOption>(
+        props.options,
+        treeMateOptions(props.nodeKey)
+      )
     )
     const displayTreeMateRef = computed(() =>
       createTreeMate<TreeSelectOption>(
         filteredTreeInfoRef.value.filteredTree,
-        treeMateOptions
+        treeMateOptions(props.nodeKey)
       )
     )
     const { value: initMergedValue } = mergedValueRef
