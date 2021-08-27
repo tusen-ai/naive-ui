@@ -58,7 +58,6 @@ export default defineComponent({
   },
   setup () {
     const currentRef = ref(1)
-
     return {
       currentStatus: ref('process'),
       current: currentRef,
