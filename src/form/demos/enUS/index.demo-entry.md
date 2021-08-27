@@ -2,7 +2,7 @@
 
 <!--single-column-->
 
-How we collect & validate data.
+The element to collect and validate data.
 
 ## Demos
 
@@ -26,14 +26,14 @@ show-label
 | --- | --- | --- | --- |
 | disabled | `boolean` | `false` | Whether to disable the form. |
 | inline | `boolean` | `false` | Whether to display as an inline form. |
-| label-width | `number \| string` | `undefined` | The width of label. Particularly useful when `label-placement` is `'left'`. |
-| label-align | `'left' \| 'right'` | `-` | Text alignment in label. |
+| label-width | `number \| string` | `undefined` | The width of label. Particularly useful when `label-placement` is set to `'left'`. |
+| label-align | `'left' \| 'right'` | `-` | Label text alignment. |
 | label-placement | `'left' \| 'top'` | `'top'` | Label placement. |
 | model | `Object` | `{}` | The object to get/set form item values. |
 | rules | `type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }` | `{}` | The rules to validate form items. |
 | show-feedback | `boolean` | `true` | Whether to show the feedback area. |
 | show-label | `boolean` | `true` | Whether to show the label. |
-| show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | Whether to show a required mark when a form item is required. |
+| show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | Whether to show a required symbol when a form item is required. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 
 #### FormItemRule Type
@@ -52,7 +52,7 @@ show-label
 | --- | --- | --- | --- |
 | feedback | `string` | `undefined` | The feedback message of the form item. If set, it will replace any result of rule-based validation. |
 | first | `boolean` | `false` | Whether to only show the first validation error message. |
-| ingore-path-change | `boolean` | `false` | Usually, changing `path` will cause a re-render and naive-ui will clear the validation result. This property will disable that behavior if set to `true` |
+| ingore-path-change | `boolean` | `false` | Usually, changing `path` will cause a re-render and naive-ui will clear the validation result. Setting `ingore-path-change` to `true` will disable that behavior. |
 | label | `string` | `undefined` | Label. |
 | label-align | `'left' \| 'right'` | `undefined` | Text alignment inside the label. If not set, it will inherit the parent form's `label-align`. |
 | label-placement | `'left' \| 'top'` | `undefined` | If not set, it will inherit the parent form's `label-placement`. |
@@ -92,7 +92,7 @@ Accept all props from FormItem & [GridItem](grid#GridItem-Props)
 | validate | `(options: { trigger?: string, callback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<void>` | Validate the form item. The rejection value type of returned promise is `Array<FormValidationError>`. If trigger is not set, all rules of the item will be applied. `shouldRuleBeApplied` can filter rules after they are filtered by the trigger. |
 | restoreValidation | `() => void` | Restore validate. |
 
-TO find out more about AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-validator">async-validator</n-a>.
+To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-validator">async-validator</n-a>.
 
 ## Slots
 

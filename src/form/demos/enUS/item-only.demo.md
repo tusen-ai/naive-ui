@@ -1,6 +1,6 @@
 # Use FormItem Alone
 
-You can use `n-form-item` outside of an `n-form` element.
+You can also use `n-form-item` outside of an `n-form` element.
 
 ```html
 <n-form-item label="This is a FormItem" :rule="rule">

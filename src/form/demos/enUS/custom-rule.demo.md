@@ -1,6 +1,6 @@
 # Custom Rules
 
-Sometimes builtin triggers don't meet your needs. You can customize these valiations by setting a custom trigger in the rules and manually trigger the validation.
+Sometimes builtin triggers don't meet your needs. You can customize these validations by setting a custom trigger in the rules and manually triggering the validation.
 
 ```html
 <n-form :model="model" ref="formRef" :rules="rules">
