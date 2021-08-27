@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-cascader` add `onUpdateValue` prop.
+
 ## 2.16.7 (2021-08-27)
 
 ### Feats
