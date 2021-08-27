@@ -9,6 +9,12 @@
 
 <p align="center">English | <a href="README.zh-CN.md">中文</a></p>
 
+## Recruit
+No more 996, no more involution. Join the smartest bunch to create the future, with loads of passion and work life balance.
+
+Free meals and afternoon tea, intern housing accommodation, employee rent subsidy, deluxe Friday meals, and more on: [TuSimple benefits](https://app.mokahr.com/campus_apply/tusenweilai/3232#/?anchorName=5583330542&sourceToken=).
+
+Loads of frontend, backend, algorithm, product positions waiting for you! To learn more: [TuSimple Talent Acquisition](https://app.mokahr.com/campus_apply/tusenweilai/3232#/).
 ## Documentation
 
 [www.naiveui.com](http://www.naiveui.com)

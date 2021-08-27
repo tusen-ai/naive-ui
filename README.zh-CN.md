@@ -9,6 +9,13 @@
 
 <p align="center"><a href="README.md">English</a> | 中文</p>
 
+## 招人
+告别 996，告别内卷。选择图森，选择未来。WLB，我们是认真的。
+
+免费三餐无限量下午茶，外地实习生免费住宿，正式员工就近房补，每周五都有全员超豪华大餐，更多福利详情查看 [图森福利](https://app.mokahr.com/campus_apply/tusenweilai/3232#/?anchorName=5583330542&sourceToken=)
+
+前端、后端、算法、产品等岗位等你来投，更多岗位信息详见 [图森未来招聘](https://app.mokahr.com/campus_apply/tusenweilai/3232#/)
+
 ## 文档
 
 [www.naiveui.com](http://www.naiveui.com)
