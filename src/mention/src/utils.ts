@@ -216,7 +216,9 @@ export function getRelativePosition (
     top: span.offsetTop + parseInt(computed.borderTopWidth),
     left: span.offsetLeft + parseInt(computed.borderLeftWidth),
     absolute: false,
-    height: parseInt(computed.lineHeight)
+    // We don't use line-height since it may be too large for position. Eg. 34px
+    // for input
+    height: parseInt(computed.fontSize) * 1.5
   }
 
   if (debug) {

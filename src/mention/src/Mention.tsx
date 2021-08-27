@@ -293,6 +293,12 @@ export default defineComponent({
       nTriggerFormFocus()
       syncAfterCursorMove()
     }
+    function focus (): void {
+      inputInstRef.value?.focus()
+    }
+    function blur (): void {
+      inputInstRef.value?.blur()
+    }
     function handleInputBlur (e: FocusEvent): void {
       const { onBlur } = props
       onBlur?.(e)
@@ -364,6 +370,8 @@ export default defineComponent({
       handleInputKeyDown,
       handleSelect,
       handleInputMouseDown,
+      focus,
+      blur,
       cssVars: computed(() => {
         const {
           self: { menuBoxShadow }

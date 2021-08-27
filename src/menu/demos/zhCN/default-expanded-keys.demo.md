@@ -13,7 +13,7 @@
 ```
 
 ```js
-import { h } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NIcon, useMessage } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -100,7 +100,7 @@ const menuOptions = [
   }
 ]
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     return {
@@ -111,5 +111,5 @@ export default {
       }
     }
   }
-}
+})
 ```

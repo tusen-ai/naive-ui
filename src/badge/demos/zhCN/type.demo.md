@@ -21,13 +21,3 @@
   </n-badge>
 </n-space>
 ```
-
-```js
-export default {
-  data () {
-    return {
-      value: 10
-    }
-  }
-}
-```

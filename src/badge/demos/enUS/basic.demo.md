@@ -24,17 +24,18 @@
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
 import { MdAdd, MdRemove } from '@vicons/ionicons4'
 
-export default {
+export default defineComponent({
   components: {
     MdAdd,
     MdRemove
   },
-  data () {
+  setup () {
     return {
-      value: 5
+      value: ref(5)
     }
   }
-}
+})
 ```

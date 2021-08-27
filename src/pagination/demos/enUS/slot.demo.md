@@ -11,11 +11,13 @@ The pagination has a property `page-slot`, try it and you will understand. It ai
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      page: 2
+      page: ref(2)
     }
   }
-}
+})
 ```
