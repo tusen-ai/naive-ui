@@ -316,7 +316,11 @@ export default defineComponent({
     const { mergedSizeRef, mergedDisabledRef } = formItem
     function doUpdateValue (
       value: string | number | Array<string | number> | null,
-      option: SelectBaseOption | SelectBaseOption[] | null
+      params:
+      | { option: SelectBaseOption | null }
+      | Array<{
+        option: SelectBaseOption
+      }>
     ): void {
       const {
         onChange,
@@ -324,9 +328,9 @@ export default defineComponent({
         onUpdateValue
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      if (onChange) call(onChange as OnUpdateValueImpl, value, option)
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, option)
-      if (_onUpdateValue) { call(_onUpdateValue as OnUpdateValueImpl, value, option) }
+      if (onChange) call(onChange as OnUpdateValueImpl, value, params)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, params)
+      if (_onUpdateValue) { call(_onUpdateValue as OnUpdateValueImpl, value, params) }
       uncontrolledValueRef.value = value
       nTriggerFormChange()
       nTriggerFormInput()
@@ -489,10 +493,15 @@ export default defineComponent({
           patternRef.value = ''
         }
         focusSelectionInput()
-        const selectOptions = props.options.filter((i) =>
-          changedValue.includes(i.value as string | number)
+        const params = props.options
+          .filter((i) => changedValue.includes(i.value as string | number))
+          .map((i) => {
+            return { option: i }
+          })
+        doUpdateValue(
+          changedValue,
+          params as Array<{ option: SelectBaseOption }>
         )
-        doUpdateValue(changedValue, selectOptions as SelectBaseOption[])
       } else {
         if (tag && !remote) {
           const createdOptionIndex = getCreatedOptionIndex(option.value)
@@ -506,7 +515,7 @@ export default defineComponent({
         }
         focusSelection()
         closeMenu()
-        doUpdateValue(option.value, option)
+        doUpdateValue(option.value, { option })
       }
     }
     function getCreatedOptionIndex (optionValue: string | number): number {
@@ -551,9 +560,9 @@ export default defineComponent({
       }
       doClear()
       if (multiple) {
-        doUpdateValue([], null)
+        doUpdateValue([], { option: null })
       } else {
-        doUpdateValue(null, null)
+        doUpdateValue(null, { option: null })
       }
     }
     function handleMenuMousedown (e: MouseEvent): void {

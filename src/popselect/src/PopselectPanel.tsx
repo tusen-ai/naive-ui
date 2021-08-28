@@ -75,15 +75,22 @@ export default defineComponent({
 
     const { mergedClsPrefixRef } = useConfig(props)
 
-    function doUpdateValue (value: Value | null): void {
+    function doUpdateValue (
+      value: Value | null,
+      params:
+      | { option: SelectBaseOption | null }
+      | Array<{
+        option: SelectBaseOption
+      }>
+    ): void {
       const {
         onUpdateValue,
         'onUpdate:value': _onUpdateValue,
         onChange
       } = props
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
-      if (onChange) call(onChange as OnUpdateValueImpl, value)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, params)
+      if (_onUpdateValue) { call(_onUpdateValue as OnUpdateValueImpl, value, params) }
+      if (onChange) call(onChange as OnUpdateValueImpl, value, params)
     }
     function handleToggle (tmNode: TreeNode<SelectBaseOption>): void {
       toggle(tmNode.key)
@@ -101,15 +108,26 @@ export default defineComponent({
           } else {
             newValue.push(value)
           }
-          doUpdateValue(newValue)
+          const params = props.options
+            .filter((i) => newValue.includes(i.value as string | number))
+            .map((i) => {
+              return { option: i }
+            })
+          doUpdateValue(newValue, params as Array<{ option: SelectBaseOption }>)
         } else {
-          doUpdateValue([value])
+          const params = props.options
+            .filter((i) => i.value === value)
+            .map((i) => {
+              return { option: i }
+            })
+          doUpdateValue([value], params as Array<{ option: SelectBaseOption }>)
         }
       } else {
         if (props.value === value && props.cancelable) {
-          doUpdateValue(null)
+          doUpdateValue(null, { option: null })
         } else {
-          doUpdateValue(value)
+          const params = props.options.find((i) => i.value === value)
+          doUpdateValue(value, { option: (params as SelectBaseOption) || null })
           NPopselect.setShow(false)
         }
       }
