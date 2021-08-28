@@ -46,6 +46,26 @@ describe('n-space', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('render space array size', async () => {
+    const wrapper = mount({
+      render () {
+        return (
+          <NSpace size={[20, 30]}>
+            {{
+              default: () => [<div>1</div>, <div>2</div>]
+            }}
+          </NSpace>
+        )
+      }
+    })
+
+    const childNodes = getChildrenNode(wrapper)
+    expect(childNodes[0].attributes('style')).toContain('margin-right: 20px;')
+
+    await wrapper.setProps({ vertical: true })
+    expect(childNodes[0].attributes('style')).toContain('margin-bottom: 30px;')
+  })
+
   it('render vertical space', () => {
     const wrapper = mount({
       render () {
