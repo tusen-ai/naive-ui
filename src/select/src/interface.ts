@@ -49,7 +49,8 @@ export type OnUpdateValue = (
   (ValueAtom | null) &
   (string[] | null) &
   (number[] | null) &
-  (ValueAtom[] | null)
+  (ValueAtom[] | null),
+  option: SelectBaseOption & SelectBaseOption[] & null
 ) => void
 export type OnUpdateValueImpl = (
   value:
@@ -60,7 +61,8 @@ export type OnUpdateValueImpl = (
   | (ValueAtom | null)
   | (string[] | null)
   | (number[] | null)
-  | (ValueAtom[] | null)
+  | (ValueAtom[] | null),
+  option: SelectBaseOption | SelectBaseOption[] | null
 ) => void
 export type SelectTreeMate = TreeMate<
 SelectBaseOption,

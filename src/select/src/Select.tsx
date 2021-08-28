@@ -315,7 +315,8 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef } = formItem
     function doUpdateValue (
-      value: string | number | Array<string | number> | null
+      value: string | number | Array<string | number> | null,
+      option: SelectBaseOption | SelectBaseOption[] | null
     ): void {
       const {
         onChange,
@@ -323,9 +324,9 @@ export default defineComponent({
         onUpdateValue
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      if (onChange) call(onChange as OnUpdateValueImpl, value)
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (onChange) call(onChange as OnUpdateValueImpl, value, option)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, option)
+      if (_onUpdateValue) { call(_onUpdateValue as OnUpdateValueImpl, value, option) }
       uncontrolledValueRef.value = value
       nTriggerFormChange()
       nTriggerFormInput()
@@ -488,7 +489,10 @@ export default defineComponent({
           patternRef.value = ''
         }
         focusSelectionInput()
-        doUpdateValue(changedValue)
+        const selectOptions = props.options.filter((i) =>
+          changedValue.includes(i.value as string | number)
+        )
+        doUpdateValue(changedValue, selectOptions as SelectBaseOption[])
       } else {
         if (tag && !remote) {
           const createdOptionIndex = getCreatedOptionIndex(option.value)
@@ -502,7 +506,7 @@ export default defineComponent({
         }
         focusSelection()
         closeMenu()
-        doUpdateValue(option.value)
+        doUpdateValue(option.value, option)
       }
     }
     function getCreatedOptionIndex (optionValue: string | number): number {
@@ -547,9 +551,9 @@ export default defineComponent({
       }
       doClear()
       if (multiple) {
-        doUpdateValue([])
+        doUpdateValue([], null)
       } else {
-        doUpdateValue(null)
+        doUpdateValue(null, null)
       }
     }
     function handleMenuMousedown (e: MouseEvent): void {
