@@ -1,6 +1,7 @@
 import { mount, VueWrapper } from '@vue/test-utils'
 import { h, Fragment, createCommentVNode } from 'vue'
 import { NSpace } from '../index'
+import type { Justify } from '../src/Space'
 
 const getChildrenNode = (wrapper: VueWrapper<any>): any[] => {
   return (
@@ -82,6 +83,16 @@ describe('n-space', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should work with `inline` prop', () => {
+    const wrapper = mount(NSpace, {
+      props: {
+        inline: true
+      }
+    })
+
+    expect(wrapper.attributes('style')).toContain('display: inline-flex;')
+  })
+
   it('should render with invalidElement', () => {
     const wrapper = mount({
       render () {
@@ -106,7 +117,13 @@ describe('n-space', () => {
   })
 
   it('render justify space', () => {
-    const justifyList = ['start', 'end'] as Array<'start' | 'end'>
+    const justifyList: Justify[] = [
+      'start',
+      'end',
+      'center',
+      'space-around',
+      'space-between'
+    ]
     justifyList.forEach((pos) => {
       const wrapper = mount({
         render () {
@@ -119,8 +136,11 @@ describe('n-space', () => {
           )
         }
       })
+
       expect(wrapper.attributes('style')).toContain(
-        `justify-content: flex-${pos};`
+        `justify-content: ${
+          ['start', 'end'].includes(pos) ? 'flex-' + pos + ';' : pos
+        }`
       )
       expect(wrapper.html()).toMatchSnapshot()
     })
