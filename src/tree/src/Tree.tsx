@@ -61,15 +61,15 @@ import style from './styles/index.cssr'
 
 const ITEM_SIZE = 30 // 24 + 3 + 3
 
-export function treeMateOptions<T> (
+export function createTreeMateOptions<T> (
   nodeKey: string | undefined
 ): TreeMateOptions<T, T, T> {
   return {
-    getKey (node: any) {
-      return nodeKey ? node[nodeKey] : node.key
+    getKey (node: T) {
+      return nodeKey ? (node as any)[nodeKey] : (node as any).key
     },
-    getDisabled (node: any) {
-      return !!(node.disabled || node.checkboxDisabled)
+    getDisabled (node: T) {
+      return !!((node as any).disabled || (node as any).checkboxDisabled)
     }
   }
 }
@@ -230,7 +230,10 @@ export default defineComponent({
     const displayTreeMateRef = props.internalDisplayTreeMate
       ? toRef(props, 'internalDisplayTreeMate')
       : computed(() =>
-        createTreeMate<TreeOption>(props.data, treeMateOptions(props.nodeKey))
+        createTreeMate<TreeOption>(
+          props.data,
+          createTreeMateOptions(props.nodeKey)
+        )
       )
     const dataTreeMateRef = props.internalDataTreeMate
       ? toRef(props, 'internalDataTreeMate')
