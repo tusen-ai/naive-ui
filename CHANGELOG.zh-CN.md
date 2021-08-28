@@ -9,7 +9,8 @@
 - `n-date-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
 - `n-time-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
 - `n-config-provider` 增加 `Empty` 组件的全局配置，关闭 [#1092](https://github.com/TuSimple/naive-ui/issues/1092)
-- `n-tree-select` 的 `on-update:value` 回调新增 `option` 参数
+- `n-tree-select` 的 `on-update:value` 回调新增选项信息
+
 
 ### Fixes
 
