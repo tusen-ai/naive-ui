@@ -350,11 +350,16 @@ export default defineComponent({
       uncontrolledShowRef.value = value
     }
     function doUpdateValue (
-      value: string | number | Array<string | number> | null
+      value: string | number | Array<string | number> | null,
+      params:
+      | { option: TreeSelectOption | null }
+      | Array<{ option: TreeSelectOption }>
     ): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, params)
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, params)
+      }
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
@@ -417,10 +422,20 @@ export default defineComponent({
       if (props.checkable && props.multiple) {
         return
       }
+      const { value: treeMate } = dataTreeMateRef
       if (props.multiple) {
-        doUpdateValue(keys)
+        doUpdateValue(
+          keys,
+          [...keys]
+            .map((i) => {
+              return { option: treeMate.getNode(i)?.rawNode || null }
+            })
+            .filter((i) => i.option) as Array<{ option: TreeSelectOption }>
+        )
       } else {
-        doUpdateValue(keys[0] ?? null)
+        doUpdateValue(keys[0] ?? null, {
+          option: treeMate.getNode(keys[0])?.rawNode || null
+        })
         closeMenu()
         if (!props.filterable) {
           // Currently it is not necessary. However if there is an action slot,
@@ -436,7 +451,15 @@ export default defineComponent({
     function handleUpdateCheckedKeys (keys: Key[]): void {
       // only in checkable & multiple mode, we use tree's check update
       if (props.checkable && props.multiple) {
-        doUpdateValue(keys)
+        const { value: treeMate } = dataTreeMateRef
+        doUpdateValue(
+          keys,
+          [...keys]
+            .map((i) => {
+              return { option: treeMate.getNode(i)?.rawNode || null }
+            })
+            .filter((i) => i.option) as Array<{ option: TreeSelectOption }>
+        )
         if (props.filterable) {
           focusSelectionInput()
           patternRef.value = ''
@@ -480,9 +503,9 @@ export default defineComponent({
         closeMenu()
       }
       if (multiple) {
-        doUpdateValue([])
+        doUpdateValue([], { option: null })
       } else {
-        doUpdateValue(null)
+        doUpdateValue(null, { option: null })
       }
     }
     function handleDeleteOption (option: SelectBaseOption): void {
@@ -491,6 +514,7 @@ export default defineComponent({
       if (Array.isArray(mergedValue)) {
         const index = mergedValue.findIndex((key) => key === option.value)
         if (~index) {
+          const { value: treeMate } = dataTreeMateRef
           if (props.checkable) {
             const { checkedKeys } = dataTreeMateRef.value.uncheck(
               option.value,
@@ -499,11 +523,25 @@ export default defineComponent({
                 cascade: mergedCascadeRef.value
               }
             )
-            doUpdateValue(checkedKeys)
+            doUpdateValue(
+              checkedKeys,
+              [...checkedKeys]
+                .map((i) => {
+                  return { option: treeMate.getNode(i)?.rawNode || null }
+                })
+                .filter((i) => i.option) as Array<{ option: TreeSelectOption }>
+            )
           } else {
             const nextValue = Array.from(mergedValue)
             nextValue.splice(index, 1)
-            doUpdateValue(nextValue)
+            doUpdateValue(
+              nextValue,
+              [...nextValue]
+                .map((i) => {
+                  return { option: treeMate.getNode(i)?.rawNode || null }
+                })
+                .filter((i) => i.option) as Array<{ option: TreeSelectOption }>
+            )
           }
         }
       }
