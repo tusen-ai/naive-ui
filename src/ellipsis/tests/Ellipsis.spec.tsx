@@ -39,4 +39,25 @@ describe('n-ellipsis', () => {
       'n-ellipsis--line-clamp'
     )
   })
+
+  it('should work with `expand-trigger` prop', async () => {
+    const wrapper = mount(NEllipsis, {
+      props: {
+        style: 'max-width: 10px;',
+        expandTrigger: 'click',
+        tooltip: false
+      },
+      slots: { default: () => 'test n-ellipsis' }
+    })
+
+    await wrapper.trigger('click')
+    expect(wrapper.find('.n-ellipsis').attributes('style')).not.toContain(
+      'text-overflow: ellipsis;'
+    )
+
+    await wrapper.trigger('click')
+    expect(wrapper.find('.n-ellipsis').attributes('style')).toContain(
+      'text-overflow: ellipsis;'
+    )
+  })
 })
