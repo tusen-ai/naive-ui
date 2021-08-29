@@ -5,6 +5,13 @@
 ### Feats
 
 - `n-select`' 新增 `maxMenuHeight` 主题变量，关闭 [#923](https://github.com/TuSimple/naive-ui/issues/923)
+- `n-cascader` 新增 `onUpdateValue` 方法
+- `n-auto-complete` 新增 `onUpdateValue` 方法
+- `n-data-table` 的列的 `renderFilterMenu` 新增 hide 参数
+
+### Fixes
+
+- 修复 `n-layout` 的 `sider-placement` 属性在打包之后不生效，关闭 [#978](https://github.com/TuSimple/naive-ui/issues/978)
 
 ## 2.16.7 (2021-08-27)
 
