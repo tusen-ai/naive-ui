@@ -7,12 +7,14 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useMessage, useDialog } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     const dialog = useDialog()
+
     return {
       handleButtonClick () {
         dialog.success({
@@ -21,12 +23,12 @@ export default {
           positiveText: '确定',
           negativeText: '不确定',
           maskClosable: false,
-          onMaskClick: (e) => {
+          onMaskClick: () => {
             message.success('不能关闭')
           }
         })
       }
     }
   }
-}
+})
 ```

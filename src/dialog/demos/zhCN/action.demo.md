@@ -9,9 +9,10 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useDialog, NTag } from 'naive-ui'
 
-export default {
+export default defineComponent({
   components: {
     NTag
   },
@@ -27,5 +28,5 @@ export default {
       }
     }
   }
-}
+})
 ```
