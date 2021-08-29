@@ -143,7 +143,7 @@ export default defineComponent({
         return null
       }
       if (validator(parsedValue)) {
-        let nextValue = parsedValue + offset
+        let nextValue = parseFloat((parsedValue + offset).toFixed(10))
         if (validator(nextValue)) {
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
