@@ -31,6 +31,7 @@ debug
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | Filter function. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count to be shown in multiple mode. Set to `'responsive'` will keep all tags in the same row. |
 | multiple | `boolean` | `false` | Whether to support multiple select. |
+| node-key | `string` | `undefined` | Replace the key in `TreeSelectOption`. |
 | options | `TreeSelectOption[]` | `[]` | Options. |
 | placeholder | `string` | `'Please Select'` | Placeholder. |
 | separator | `string` | `' / '` | Option value separator. |

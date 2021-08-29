@@ -43,6 +43,7 @@ batch-render
 | filter | `(node: TreeOption) => boolean` | `undefined` | A simple string based filter. |
 | leaf-only | `boolean` | `false` | Whether to open or not, only the bottom tree node is optional. |
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |
+| node-key | `string` | `undefined` | Replace the key in `TreeOption`. |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |
 | pattern | `string` | `''` | What to search by default. |
 | remote | `boolean` | `false` | Whether to load nodes async. It should work with `on-load`. |

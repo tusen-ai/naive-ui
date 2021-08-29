@@ -24,7 +24,7 @@ import { clickoutside } from 'vdirs'
 import { createTreeMate } from 'treemate'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
-import { treeMateOptions, treeSharedProps } from '../../tree/src/Tree'
+import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
 import {
   NInternalSelection,
   InternalSelectionInst,
@@ -61,6 +61,7 @@ const props = {
     type: Boolean,
     default: true
   },
+  nodeKey: String,
   cascade: Boolean,
   checkable: Boolean,
   clearable: Boolean,
@@ -177,12 +178,15 @@ export default defineComponent({
     })
     // used to resolve selected options
     const dataTreeMateRef = computed(() =>
-      createTreeMate<TreeSelectOption>(props.options, treeMateOptions)
+      createTreeMate<TreeSelectOption>(
+        props.options,
+        createTreeMateOptions(props.nodeKey)
+      )
     )
     const displayTreeMateRef = computed(() =>
       createTreeMate<TreeSelectOption>(
         filteredTreeInfoRef.value.filteredTree,
-        treeMateOptions
+        createTreeMateOptions(props.nodeKey)
       )
     )
     const { value: initMergedValue } = mergedValueRef

@@ -12,7 +12,13 @@ import {
   VNode,
   nextTick
 } from 'vue'
-import { createTreeMate, flatten, createIndexGetter, TreeMate } from 'treemate'
+import {
+  createTreeMate,
+  flatten,
+  createIndexGetter,
+  TreeMate,
+  TreeMateOptions
+} from 'treemate'
 import { useMergedState } from 'vooks'
 import { VirtualListInst, VVirtualList } from 'vueuc'
 import { getPadding } from 'seemly'
@@ -55,9 +61,16 @@ import style from './styles/index.cssr'
 
 const ITEM_SIZE = 30 // 24 + 3 + 3
 
-export const treeMateOptions = {
-  getDisabled (node: TreeOption) {
-    return !!(node.disabled || node.checkboxDisabled)
+export function createTreeMateOptions<T> (
+  nodeKey: string | undefined
+): TreeMateOptions<T, T, T> {
+  return {
+    getKey (node: T) {
+      return nodeKey ? (node as any)[nodeKey] : (node as any).key
+    },
+    getDisabled (node: T) {
+      return !!((node as any).disabled || (node as any).checkboxDisabled)
+    }
   }
 }
 
@@ -94,6 +107,7 @@ const treeProps = {
     type: Boolean,
     default: true
   },
+  nodeKey: String,
   checkable: Boolean,
   draggable: Boolean,
   blockNode: Boolean,
@@ -215,7 +229,12 @@ export default defineComponent({
     // We don't expect data source to change so we just determine it once
     const displayTreeMateRef = props.internalDisplayTreeMate
       ? toRef(props, 'internalDisplayTreeMate')
-      : computed(() => createTreeMate(props.data, treeMateOptions))
+      : computed(() =>
+        createTreeMate<TreeOption>(
+          props.data,
+          createTreeMateOptions(props.nodeKey)
+        )
+      )
     const dataTreeMateRef = props.internalDataTreeMate
       ? toRef(props, 'internalDataTreeMate')
       : displayTreeMateRef

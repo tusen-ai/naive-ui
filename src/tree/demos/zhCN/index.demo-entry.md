@@ -43,6 +43,7 @@ batch-render
 | filter | `(node: TreeOption) => boolean` | `undefined` | 一个简单的字符串过滤算法 |
 | leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
 | multiple | `boolean` | `false` | 是否允许节点多选 |
+| node-key | `string` | `undefined` | 替代 `TreeOption` 中的 key |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 |
 | pattern | `string` | `''` | 默认搜索的内容 |
 | remote | `boolean` | `false` | 是否异步获取选项，和 `onLoad` 配合 |

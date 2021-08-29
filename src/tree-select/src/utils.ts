@@ -8,7 +8,7 @@ export function treeOption2SelectOption (
   const { rawNode } = tmNode
   return {
     ...rawNode,
-    value: rawNode.key
+    value: tmNode.key
   }
 }
 
@@ -20,7 +20,7 @@ export function treeOption2SelectOptionWithPath (
   const { rawNode } = tmNode
   return {
     ...rawNode,
-    value: rawNode.key,
+    value: tmNode.key,
     label: path.map((v) => v.rawNode.label).join(separator)
   }
 }
