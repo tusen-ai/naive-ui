@@ -24,7 +24,12 @@ type Align =
   | 'flex-end'
   | 'flex-start'
 
-type Justify = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
+export type Justify =
+  | 'start'
+  | 'end'
+  | 'center'
+  | 'space-around'
+  | 'space-between'
 const spaceProps = {
   ...(useTheme.props as ThemeProps<SpaceTheme>),
   align: String as PropType<Align>,
