@@ -61,7 +61,6 @@ const props = {
     type: Boolean,
     default: true
   },
-  nodeKey: String,
   cascade: Boolean,
   checkable: Boolean,
   clearable: Boolean,
@@ -154,6 +153,17 @@ export default defineComponent({
     const controlledShowRef = toRef(props, 'show')
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
     const patternRef = ref('')
+    const mergedFilterRef = computed(() => {
+      const { filter } = props
+      if (filter) return filter
+      const { labelField } = props
+      return (pattern: string, node: TreeSelectOption): boolean => {
+        if (!pattern.length) return true
+        return ((node as any)[labelField] as string)
+          .toLowerCase()
+          .includes(pattern.toLowerCase())
+      }
+    })
     const filteredTreeInfoRef = computed<{
       filteredTree: TreeSelectOption[]
       highlightKeySet: Set<Key> | undefined
@@ -167,26 +177,31 @@ export default defineComponent({
         }
       }
       const { value: pattern } = patternRef
-      if (!pattern.length || !props.filter) {
+      if (!pattern.length || !mergedFilterRef.value) {
         return {
           filteredTree: props.options,
           highlightKeySet: undefined,
           expandedKeys: undefined
         }
       }
-      return filterTree(props.options, props.filter, pattern)
+      return filterTree(
+        props.options,
+        mergedFilterRef.value,
+        pattern,
+        props.keyField
+      )
     })
     // used to resolve selected options
     const dataTreeMateRef = computed(() =>
       createTreeMate<TreeSelectOption>(
         props.options,
-        createTreeMateOptions(props.nodeKey)
+        createTreeMateOptions(props.keyField)
       )
     )
     const displayTreeMateRef = computed(() =>
       createTreeMate<TreeSelectOption>(
         filteredTreeInfoRef.value.filteredTree,
-        createTreeMateOptions(props.nodeKey)
+        createTreeMateOptions(props.keyField)
       )
     )
     const { value: initMergedValue } = mergedValueRef
@@ -244,7 +259,7 @@ export default defineComponent({
       }
     })
     const selectedOptionRef = computed(() => {
-      const { multiple, showPath, separator } = props
+      const { multiple, showPath, separator, labelField } = props
       if (multiple) return null
       const { value: mergedValue } = mergedValueRef
       if (!Array.isArray(mergedValue) && mergedValue !== null) {
@@ -255,9 +270,10 @@ export default defineComponent({
             ? treeOption2SelectOptionWithPath(
               tmNode,
               treeMate.getPath(mergedValue).treeNodePath,
-              separator
+              separator,
+              labelField
             )
-            : treeOption2SelectOption(tmNode)
+            : treeOption2SelectOption(tmNode, labelField)
         }
       }
       return null
@@ -269,6 +285,7 @@ export default defineComponent({
       if (Array.isArray(mergedValue)) {
         const res: SelectBaseOption[] = []
         const { value: treeMate } = dataTreeMateRef
+        const { keyField, labelField } = props
         mergedValue.forEach((value) => {
           const tmNode = treeMate.getNode(value)
           if (tmNode !== null) {
@@ -277,9 +294,10 @@ export default defineComponent({
                 ? treeOption2SelectOptionWithPath(
                   tmNode,
                   treeMate.getPath(value).treeNodePath,
-                  separator
+                  separator,
+                  keyField
                 )
-                : treeOption2SelectOption(tmNode)
+                : treeOption2SelectOption(tmNode, labelField)
             )
           }
         })
@@ -694,6 +712,7 @@ export default defineComponent({
                                   animated={false}
                                   data={filteredTreeInfo.filteredTree}
                                   cancelable={multiple}
+                                  labelField={this.labelField}
                                   theme={mergedTheme.peers.Tree}
                                   themeOverrides={
                                     mergedTheme.peerOverrides.Tree

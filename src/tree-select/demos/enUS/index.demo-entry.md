@@ -6,6 +6,7 @@ It's said that 99% of the people can't distinguish it from cascader.
 
 ```demo
 basic
+custom-field
 multiple
 checkbox
 filterable
@@ -29,9 +30,10 @@ debug
 | expanded-keys | `Array<string \| number>` | `undefined` | Expanded keys. |
 | filterable | `boolean` | `false` | Whether the tree select is disabled. |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | Filter function. |
+| key-field | `string` | `'key'` | The key field in `TreeOption`. |
+| label-field | `string` | `'label'` | The the label field in `TreeOption`. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count to be shown in multiple mode. Set to `'responsive'` will keep all tags in the same row. |
 | multiple | `boolean` | `false` | Whether to support multiple select. |
-| node-key | `string` | `undefined` | Replace the key in `TreeSelectOption`. |
 | options | `TreeSelectOption[]` | `[]` | Options. |
 | placeholder | `string` | `'Please Select'` | Placeholder. |
 | separator | `string` | `' / '` | Option value separator. |
@@ -46,9 +48,9 @@ debug
 
 ### TreeSelectOption Properties
 
-| Name      | Type                 | Description                          |
-| --------- | -------------------- | ------------------------------------ |
-| key       | `string \| number`   | Key of the option. Should be unique. |
-| label     | `string`             | Displayed content of the option.     |
-| children? | `TreeSelectOption[]` | Child options of the option.         |
-| disabled? | `boolean`            | Whether to disabled the option.      |
+| Name | Type | Description |
+| --- | --- | --- |
+| key | `string \| number` | Key of the option. Should be unique. You can use `key-field` to customize the field name. |
+| label | `string` | Displayed content of the option. You can use `label-field` to customize the field name. |
+| children? | `TreeSelectOption[]` | Child options of the option. |
+| disabled? | `boolean` | Whether to disabled the option. |

@@ -6,6 +6,7 @@
 
 ```demo
 basic
+custom-field
 multiple
 checkbox
 filterable
@@ -29,10 +30,11 @@ debug
 | expanded-keys | `Array<string \| number>` | `undefined` | 展开节点的 key |
 | filterable | `boolean` | `false` | 是否可过滤 |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | 过滤器函数 |
+| key-field | `string` | `'key'` | `TreeOption` 中的 key 字段名 |
+| label-field | `string` | `'label'` | 替代 `TreeOption` 中的 label 字段名 |
 | leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选时最多直接显示多少选项，设为 `'responsive'` 会保证最多一行 |
 | multiple | `boolean` | `false` | 是否支持多选 |
-| node-key | `string` | `undefined` | 替代 `TreeSelectOption` 中的 key |
 | options | `TreeSelectOption[]` | `[]` | 选项 |
 | placeholder | `string` | `'请选择'` | 占位信息 |
 | separator | `string` | `' / '` | 数据分隔符 |
@@ -47,9 +49,9 @@ debug
 
 ### TreeSelectOption Properties
 
-| 名称      | 类型                 | 说明                 |
-| --------- | -------------------- | -------------------- |
-| key       | `string \| number`   | 选项的 key，需要唯一 |
-| label     | `string`             | 选项的显示内容       |
-| children? | `TreeSelectOption[]` | 节点的子选项         |
-| disabled? | `boolean`            | 是否禁用选项         |
+| 名称 | 类型 | 说明 |
+| --- | --- | --- |
+| key | `string \| number` | 选项的 key，需要唯一，可使用 `key-field` 修改字段名 |
+| label | `string` | 选项的显示内容，可使用 `label-field` 修改字段名 |
+| children? | `TreeSelectOption[]` | 节点的子选项 |
+| disabled? | `boolean` | 是否禁用选项 |

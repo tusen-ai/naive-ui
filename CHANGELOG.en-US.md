@@ -7,7 +7,8 @@
 - `n-cascader` add `onUpdateValue` prop.
 - `n-auto-complete` add `onUpdateValue` prop.
 - `n-data-table`'s column's `renderFilterMenu` add `hide` params.
-- `n-tree` & `n-tree-select` add `node-key` prop.
+- `n-tree` & `n-tree-select` add `key-field` prop.
+- `n-tree` & `n-tree-select` add `label-field` prop.
 
 ### Fixes
 
