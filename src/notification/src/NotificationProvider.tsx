@@ -11,8 +11,10 @@ import {
   provide,
   InjectionKey,
   Ref,
-  renderSlot
+  renderSlot,
+  ComputedRef
 } from 'vue'
+import { useMemo } from 'vooks'
 import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
@@ -31,6 +33,9 @@ ExtractPropTypes<typeof notificationEnvOptions>
 export interface NotificationProviderInjection {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<NotificationTheme>>
+  placement: ComputedRef<
+  'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'
+  >
 }
 
 export const notificationProviderInjectionKey: InjectionKey<NotificationProviderInjection> =
@@ -75,6 +80,17 @@ const notificationProviderProps = {
   scrollable: {
     type: Boolean,
     default: true
+  },
+  placement: {
+    type: String as PropType<
+    | 'top'
+    | 'top-left'
+    | 'top-right'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
+    >,
+    default: 'top-right'
   }
 }
 
@@ -133,9 +149,11 @@ export default defineComponent({
       open
     }
     provide(notificationApiInjectionKey, api)
+    const mergedPlacementRef = useMemo(() => props.placement)
     provide(notificationProviderInjectionKey, {
       mergedClsPrefixRef,
-      mergedThemeRef: themeRef
+      mergedThemeRef: themeRef,
+      placement: mergedPlacementRef
     })
     // deprecated
     function open (options: NotificationOptions): NotificationReactive {

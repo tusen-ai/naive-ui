@@ -46,6 +46,7 @@ change-content
 scrollable
 closable
 duration
+placement
 ```
 
 ## API
