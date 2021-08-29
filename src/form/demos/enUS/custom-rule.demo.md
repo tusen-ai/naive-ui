@@ -1,6 +1,6 @@
 # Custom Rules
 
-Sometimes builtin triggers don't meet you demand. You can custom you valiation by setting custom trigger in rules and manually trigger the validation.
+Sometimes builtin triggers don't meet your needs. You can customize these validations by setting a custom trigger in the rules and manually triggering the validation.
 
 ```html
 <n-form :model="model" ref="formRef" :rules="rules">
@@ -103,7 +103,7 @@ export default defineComponent({
         reenteredPassword: [
           {
             required: true,
-            message: 'Re-entered Password is required',
+            message: 'Re-entered password is required',
             trigger: ['input', 'blur']
           },
           {
