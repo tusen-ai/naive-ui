@@ -1,5 +1,8 @@
+import { h } from 'vue'
 import { NAlert } from '../index'
 import { mount } from '@vue/test-utils'
+import { NIcon } from '../../icon'
+import { IosAirplane } from '@vicons/ionicons4'
 
 describe('n-alert', () => {
   it('should work with import on demand', () => {
@@ -17,6 +20,46 @@ describe('n-alert', () => {
       props: { title }
     })
     expect(wrapper.find('.n-alert-body__title').text()).toBe(title)
+  })
+
+  it('should work with type prop', async () => {
+    const wrapper = mount(NAlert)
+
+    await wrapper.setProps({ type: 'info' })
+    expect(wrapper.find('.n-alert').attributes('style')).toMatchSnapshot()
+
+    await wrapper.setProps({ type: 'success' })
+    expect(wrapper.find('.n-alert').attributes('style')).toMatchSnapshot()
+
+    await wrapper.setProps({ type: 'warning' })
+    expect(wrapper.find('.n-alert').attributes('style')).toMatchSnapshot()
+
+    await wrapper.setProps({ type: 'error' })
+    expect(wrapper.find('.n-alert').attributes('style')).toMatchSnapshot()
+  })
+
+  it('should work with default slot', () => {
+    const wrapper = mount(NAlert, {
+      slots: {
+        default: () => 'default'
+      }
+    })
+
+    expect(wrapper.find('.n-alert-body__content').exists()).toBe(true)
+    expect(wrapper.find('.n-alert-body__content').text()).toBe('default')
+  })
+
+  it('should work with icon slot', async () => {
+    const wrapper = mount(NAlert, {
+      slots: {
+        icon: () =>
+          h(NIcon, null, {
+            default: () => h(IosAirplane)
+          })
+      }
+    })
+
+    expect(wrapper.findComponent(NIcon).exists()).toBe(true)
   })
 
   it('shouldnt be closable by default', () => {
@@ -37,6 +80,16 @@ describe('n-alert', () => {
   it('should hide icon when designated', () => {
     const wrapper = mount(NAlert, { props: { showIcon: false } })
     expect(wrapper.find('.n-alert__icon').exists()).toBe(false)
+  })
+
+  it("shouldn't closed when on-close prop returns false", async () => {
+    const wrapper = mount(NAlert, {
+      props: { closable: true, onClose: () => false }
+    })
+    const closeBtn = wrapper.find('.n-base-close.n-alert__close')
+    await closeBtn.trigger('click')
+
+    expect(wrapper.find('.n-base-close.n-alert__close').exists()).toBe(true)
   })
 
   it('should trigger callback when closed', async () => {

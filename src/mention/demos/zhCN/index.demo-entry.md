@@ -12,6 +12,7 @@ autosize
 form
 render-label
 custom-prefix
+manual-trigger
 ```
 
 ## Props
@@ -49,6 +50,13 @@ Mention 在 `v2.2.0` 及以后可用。
 | render | `(option: MentionOption) => VNodeChild` | 支持通过 `render` 渲染函数自定义选项 |
 | style | `string` | 选项的样式 |
 | value | `string` | 在选项中应该是唯一的 |
+
+### Mention Methods
+
+| Name  | Type         | Description                   |
+| ----- | ------------ | ----------------------------- |
+| focus | `() => void` | Manually focus the component. |
+| blur  | `() => void` | Manually blur the component.  |
 
 ### Mention Slots
 

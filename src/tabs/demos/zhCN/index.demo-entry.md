@@ -13,9 +13,10 @@ prefix
 display-directive
 addable
 line-debug
+style-inherit-debug
 ```
 
-## Props
+## API
 
 ### Tabs Props
 
@@ -26,7 +27,6 @@ line-debug
 | default-value | `string \| number` | `undefined` | 非受控模式下的默认值 |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly'` | `undefined` | `flex` 布局下主轴的排列方式 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 标签页的尺寸 |
-| show-divider | `boolean` | `false` | 是否显示标签分隔符，仅在 `type` 为 `line` 时有效 |
 | pane-style | `string \| object` | `undefined` | 面板的样式 |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 `padding` |
@@ -36,7 +36,7 @@ line-debug
 | on-close | `(name: string \| number) => void` | `undefined` | 关闭标签的回调函数 |
 | on-update:value | `(value: string \| number) => void` | `undefined` | 选中发生改变时的回调函数 |
 
-### Tab Pane Props
+### TabPane Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -46,9 +46,7 @@ line-debug
 | tab | `string \| VNode \| () => VNodeChild` | `undefined` | 标签的 `tab` |
 | name | `string \| number` | `undefined` | 必填，标签的名称 |
 
-## Slots
-
-### Tabs
+### Tabs Slots
 
 | 名称    | 参数 | 说明       |
 | ------- | ---- | ---------- |
@@ -56,7 +54,7 @@ line-debug
 | prefix  | `()` | 标签的前缀 |
 | suffix  | `()` | 标签的后缀 |
 
-### Tab Pane Slots
+### TabPane Slots
 
 | 名称    | 参数 | 说明                |
 | ------- | ---- | ------------------- |

@@ -1,6 +1,6 @@
 # Dashed
 
-Use `dashed` to show dashed button.
+Use `dashed` to show a dashed button.
 
 ```html
 <n-space>

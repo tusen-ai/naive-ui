@@ -12,6 +12,7 @@ show-zero
 overflow
 manual
 custom-content
+color
 raw
 ```
 

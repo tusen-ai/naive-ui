@@ -189,4 +189,23 @@ describe('n-mention', () => {
     await wrapper.find('input').element.blur()
     expect(onBlur).toHaveBeenCalled()
   })
+
+  it('should work with `focus` method', async () => {
+    const wrapper = mount(NMention, {
+      attachTo: document.body,
+      props: { options: options }
+    })
+    await wrapper.vm.focus()
+    expect(wrapper.find('.n-input').classes()).toContain('n-input--focus')
+  })
+
+  it('should work with `blur` method', async () => {
+    const wrapper = mount(NMention, {
+      attachTo: document.body,
+      props: { options: options }
+    })
+    await wrapper.vm.focus()
+    await wrapper.vm.blur()
+    expect(wrapper.find('.n-input').classes()).not.toContain('n-input--focus')
+  })
 })

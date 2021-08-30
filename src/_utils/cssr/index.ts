@@ -51,12 +51,18 @@ function asModal (style: CProperties): CNode {
   return c(({ props: { bPrefix } }) => `&${bPrefix || prefix}modal`, style)
 }
 
+// child block
+const cCB: typeof cB = ((...args: any[]) => {
+  return c('>', [(cB as any)(...args)])
+}) as any
+
 export {
   c,
   cB,
   cE,
   cM,
   cNotM,
+  cCB,
   insideFormItem,
   insideModal,
   insidePopover,

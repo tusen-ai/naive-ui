@@ -76,8 +76,8 @@ const autoCompleteProps = {
     default: () => []
   },
   zIndex: Number,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onSelect: [Function, Array] as PropType<MaybeArray<OnSelect>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
@@ -144,9 +144,10 @@ export default defineComponent({
       )
     )
     function doUpdateValue (value: string | null): void {
-      const { 'onUpdate:value': onUpdateValue, onInput } = props
+      const { 'onUpdate:value': _onUpdateValue, onUpdateValue, onInput } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
       if (onUpdateValue) call(onUpdateValue as OnUpdateImpl, value)
+      if (_onUpdateValue) call(_onUpdateValue as OnUpdateImpl, value)
       if (onInput) call(onInput as OnUpdateImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()

@@ -16,11 +16,13 @@ Slots are also related to preset.
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      showModal: false
+      showModal: ref(false)
     }
   }
-}
+})
 ```

@@ -1,6 +1,6 @@
 # Shape
 
-Avatar can be circle shaped.
+Avatar can be `round`.
 
 ```html
 <n-space align="flex-end">

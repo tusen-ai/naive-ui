@@ -11,6 +11,7 @@ basic
 line-clamp
 expand-trigger
 custom-tooltip
+dynamic-debug
 ```
 
 ## Props

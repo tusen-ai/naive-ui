@@ -11,8 +11,9 @@
 
 ```js
 import { useNotification } from 'naive-ui'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   setup () {
     const notification = useNotification()
     return {
@@ -24,5 +25,5 @@ export default {
       }
     }
   }
-}
+})
 ```
