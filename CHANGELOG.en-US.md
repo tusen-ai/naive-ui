@@ -37,6 +37,7 @@
 - `n-code` add `inline` prop, closes [#834](https://github.com/TuSimple/naive-ui/issues/834)
 - `n-collapse` add `header-extra` slot, closes [#1046](https://github.com/TuSimple/naive-ui/issues/1046).
 - `n-input` add `show-password-on` prop.
+- `n-upload` add `list-type`, `show-preview-button`, `on-preview` and `create-thumbnail-url` prop.
 
 ## 2.16.7 (2021-08-27)
 
@@ -130,7 +131,6 @@
 - `n-button` add `text-color` prop.
 - `n-form` export `FormValidationError` type.
 - `n-popconfirm` support not show action components, closes [#770](https://github.com/TuSimple/naive-ui/issues/770).
-- `n-upload` add `list-type`， `show-preview-button`， `on-preview` and `create-thumbnail-url` prop.
 
 ### Fixes
 

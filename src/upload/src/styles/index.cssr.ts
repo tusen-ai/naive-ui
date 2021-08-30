@@ -15,8 +15,8 @@ export default cB('upload', [
     cM('picture-card', `
       position: relative;
       display: inline-block;
-      width: 104px;
-      height: 104px;
+      width: 96px;
+      height: 96px;
       margin: 0 8px 8px 0;
       vertical-align: top;
       padding: 8px;
@@ -25,6 +25,7 @@ export default cB('upload', [
       transition: border-color .3s var(--bezier), background-color .3s var(--bezier);
       background-color: var(--dragger-color);
       border: var(--dragger-border);
+      border-radius: var(--border-radius);
     `, [
       c('&:hover', `
         border: var(--dragger-border-hover);
@@ -85,12 +86,9 @@ export default cB('upload', [
         ])
       ]),
       cM('picture-type', `
-        height: 66px;
-        padding: 8px;
         border: 1px solid;
         border-color: var(--border-color);
         border-radius: var(--border-radius);
-        margin-top: 8px;
         text-decoration: underline;
         text-decoration-color: #0000;
       `, [
@@ -103,68 +101,28 @@ export default cB('upload', [
           justify-content: space-between;
           align-items: center;
         `, [
-          cB('upload-file-info-thumbnail', `
-            height: 100%;
+          cE('thumbnail', `
+            width: 48px;
+            height: 48px;
+            font-size: 36px;
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            min-width:0;
-            flex:1;
-          `,
-          [
-            cE('name', `
-              flex: auto;
-              margin-left: 8px;
-              padding: 0 8px;
-              line-height: 48px;
-              height: 100%;
-              white-space: nowrap;
-              text-overflow: ellipsis;
-              overflow: hidden;
-              text-decoration: underline;
-              text-decoration-color: #0000;
-              font-size: var(--font-size);
-              transition:
-                color .3s var(--bezier),
-                text-decoration-color .3s var(--bezier);
-              color: var(--item-text-color);    
+          `, [
+            cB('base-icon', `
+              font-size: inherit;
             `),
-            cE('spin', `
-              color: var(--loading-color);
-              width: 48px;
-              height: 48px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              font-size: 26px;
-            `),
-            cE('image', `      
-              opacity: .8;
-              width: 48px;
-              height: 48px;
-              display: flex;
-              align-content: center;
-              justify-content: center;
-              align-items: center;
-              flex-shrink: 0;
-            `, [
-              c('img', `
-                width: 100%;
-                display: block;
-                overflow: hidden;
-              `),
-              c('i', `
-                font-size: 34px;
-              `)
-            ])
+            c('img', `
+              width: 100%;
+            `)
           ])
         ])
       ]),
       cM('picture-card-type', `
         position: relative;
         display: inline-block;
-        width: 104px;
-        height: 104px;
+        width: 96px;
+        height: 96px;
         margin: 0 8px 8px 0;
         vertical-align: top;
         padding: 8px;
@@ -177,7 +135,7 @@ export default cB('upload', [
           width: 100%;
           height: 100%;
         `, [
-          cB('upload-file-info-thumbnail', `
+          cE('thumbnail', `
             width: 100%;
             height: 100%;
             display: flex;
@@ -185,33 +143,12 @@ export default cB('upload', [
             align-items: center;
             justify-content: center;
           `, [
-            cE('image', `
-              width: 100%;
-              height: 100%;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            `, [
-              c('img', `
-                width: 100%;
-              `),
-              c('i', `
-                font-size: 34px;
-              `)
-            ]),
-            cE('name', `
-              white-space: nowrap;
-              text-overflow: ellipsis;
-              overflow: hidden;
-              width: 100%;
-              position: relative;
-              bottom: 10px;
-              color: var(--item-text-color);  
-              font-size: var(--font-size);
-              text-align: center;  
-              height: 24px;
+            cB('base-icon', `
+              font-size: 36px;
             `),
-            cE('hide', 'display: none;')
+            c('img', `
+              width: 100%;
+            `)
           ])
         ]),
         c('&::before', `
@@ -238,35 +175,19 @@ export default cB('upload', [
         `),
         cB('upload-file-info', [
           cE('name', [
-            c('a', `
+            c('a, span', `
               color: var(--item-text-color-error);
             `)
           ]),
-          cB('upload-file-info-thumbnail', [
-            cE('name', `
-              color: var(--item-text-color-error);
-            `),
-            cE('image', [
-              c('i', `
-                color: var(--item-icon-error-color);
-              `)
-            ])
+          cE('thumbnail', [
+            cB('base-icon', `
+              color: var(--item-icon-error-color);
+            `)
           ])
         ]),
         cM('picture-card-type, picture-type', `
           border-color: var(--item-icon-error-color);
         `)
-      ]),
-      cM('success-status', [
-        cB('upload-file-info', [
-          cB('upload-file-info-thumbnail', [
-            cE('image', [
-              c('i', `
-                color: #2080f0;
-              `)
-            ])
-          ])
-        ])
       ]),
       cM('with-url', `
         cursor: pointer;
@@ -278,13 +199,6 @@ export default cB('upload', [
               color: var(--item-text-color-success);
               text-decoration-color: var(--item-text-color-success);
             `)
-          ]),
-          cB('upload-file-info-thumbnail', [
-            cE('name', `
-              text-decoration: underline;
-              color: var(--item-text-color-success);
-              text-decoration-color: var(--item-text-color-success);
-            `)
           ])
         ])
       ]),
@@ -292,7 +206,17 @@ export default cB('upload', [
         position: relative;
         padding-top: 6px;
         padding-bottom: 6px;
+        display: flex;
+        flex-wrap: nowrap;
       `, [
+        cE('thumbnail', [
+          cB('base-icon', `
+            font-size: 18px;
+            margin-right: 2px;
+            vertical-align: middle;
+            color: var(--item-icon-color);
+          `)
+        ]),
         cE('action', `
           padding-top: inherit;
           padding-bottom: inherit;
@@ -337,10 +261,12 @@ export default cB('upload', [
           `)
         ]),
         cE('name', `
+          flex: 1;
           display: flex;
-          align-items: center;
+          justify-content: center;
           text-overflow: ellipsis;
           overflow: hidden;
+          flex-direction: column;
         `, [
           c('a', `
             text-decoration: underline;
@@ -350,12 +276,6 @@ export default cB('upload', [
               color .3s var(--bezier),
               text-decoration-color .3s var(--bezier);
             color: var(--item-text-color);    
-          `),
-          cB('base-icon', `
-            font-size: 18px;
-            margin-right: 2px;
-            vertical-align: middle;
-            color: var(--item-icon-color);
           `)
         ])
       ]),
