@@ -12,6 +12,8 @@ controlled
 on-finish
 default-files
 before-upload
+picture-card-style
+picture-style
 ```
 
 ## Props
@@ -29,6 +31,7 @@ before-upload
 | file-list-style | `Object` | `undefined` | The style of file list area |
 | file-list | `Array<UploadFile>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |
 | headers | `Object \| ({ file: UploadFile }) => Object` | `undefined` | The additional HTTP Headers of request. |
+| list-type | `string` | `'text'` | Built-in styles for file lists, `text`, `picture` and `picture-card`. |
 | method | `string` | `'POST'` | The method of HTTP request. |
 | multiple | `boolean` | `false` | If multiple files selection supported. |
 | name | `string` | `'file'` | The field name of file in form data. |
@@ -36,12 +39,15 @@ before-upload
 | show-remove-button | `boolean` | `true` | Whether to show remove button (at file finished status). Click on remove button will fire `on-remove` callback. |
 | show-retry-button | `boolean` | `true` | Whether to show retry button (at file error status). |
 | show-file-list | `boolean` | `true` | Whether to show file list. |
+| show-preview-button | `boolean` | `true` | Whether to show the preview button (shown when `list-type` is `picture-card`). |
 | with-credentials | `boolean` | `false` | If cookie attached. |
 | on-change | `(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => void` | `() => {}` | The callback of status change of the component. Any file status change would fire the callback. |
 | on-update:file-list | `(fileList: UploadFile[]) => void` | `undefined` | Callback function triggered on fileList changes. |
 | on-finish | `(options: { file: UploadFile, event: Event }) => UploadFile \| void` | `({ file }) => file` | The callback of file upload finish. You can modify the UploadFile or retun a new UploadFile. |
 | on-remove | `(options: { file: UploadFile, fileList: Array<UploadFile> }) => boolean \| Promise<boolean> \| any` | `() => true` | The callback of file removal. Return false, promise resolve false or promise reject will cancel this removal. |
 | on-before-upload | `(options: { file: UploadFile, fileList: Array<UploadFile> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Callback before file is uploaded, return false or a Promise that resolve false or reject will cancel this upload. |
+| on-preview | `(file: FileInfo) => void` | `undefined` | Callback functions for clicking on file links or preview buttons. |
+| create-thumbnail-url | `(file: File) => Promise<thumbnailUrl: string>` | `undefined` | Customize file thumbnails. |
 
 ### UploadFile Type
 

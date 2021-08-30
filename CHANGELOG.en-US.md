@@ -106,6 +106,7 @@
 - `n-button` add `text-color` prop.
 - `n-form` export `FormValidationError` type.
 - `n-popconfirm` support not show action components, closes [#770](https://github.com/TuSimple/naive-ui/issues/770).
+- `n-upload` add `list-type`， `show-preview-button`， `on-preview` and `create-thumbnail-url` prop.
 
 ### Fixes
 
