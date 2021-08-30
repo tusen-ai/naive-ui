@@ -31,13 +31,16 @@ export default function createDemoRouter (app, routes) {
         })
       }
       nextTick(() => {
-        window.deriveTitleFromLocale(useLocaleName().value)
+        const titleParts = []
         if (to.name !== 'home') {
           const h1s = document.getElementsByTagName('h1')
           if (h1s.length !== 0) {
-            document.title = h1s[0].textContent + ' - ' + document.title
+            titleParts.push(h1s[0].textContent)
           }
         }
+        // deriveTitleFromLocale is defined in index.html
+        titleParts.push(window.deriveTitleFromLocale(useLocaleName().value))
+        document.title = titleParts.join(' - ')
       })
     }
   })
