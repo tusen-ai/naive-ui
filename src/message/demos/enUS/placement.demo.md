@@ -12,13 +12,13 @@ import { h, ref } from 'vue'
 
 const Buttons = {
   emits: ['changePlacement'],
-  setup() {
+  setup () {
     const message = useMessage()
     return {
       message
     }
   },
-  render() {
+  render () {
     return [
       h(
         NButton,
@@ -106,7 +106,7 @@ export default {
   components: {
     Buttons
   },
-  setup() {
+  setup () {
     const placement = ref('top')
     return {
       placement,

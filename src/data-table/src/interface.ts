@@ -227,7 +227,7 @@ export type RenderFilter = (props: {
 
 export type RenderSorter = (props: { order: SortOrder | false }) => VNodeChild
 
-export type RenderFilterMenu = () => VNodeChild
+export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 
 export type OnUpdateExpandedRowKeys = (keys: RowKey[]) => void
 export type OnUpdateCheckedRowKeys = (keys: RowKey[]) => void

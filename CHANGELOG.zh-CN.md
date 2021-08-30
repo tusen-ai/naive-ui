@@ -1,5 +1,30 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-cascader` 新增 `onUpdateValue` 方法
+- `n-auto-complete` 新增 `onUpdateValue` 方法
+- `n-data-table` 的列的 `renderFilterMenu` 新增 hide 参数
+- `n-tree` 和 `n-tree-select` 新增 `key-field` 属性
+- `n-tree` 和 `n-tree-select` 新增 `label-field` 属性
+
+### Fixes
+
+- 修复 `n-layout` 的 `sider-placement` 属性在打包之后不生效，关闭 [#978](https://github.com/TuSimple/naive-ui/issues/978)
+
+## 2.16.7 (2021-08-27)
+
+### Feats
+
+- `n-mention` 新增 `focus`、`blur` 方法
+
+### Fixes
+
+- 修复 `n-mention` 在 input 模式下菜单距离文字太远
+- 修复 `n-tree` 节点无法展开的问题
+
 ## 2.16.6 (2021-08-26)
 
 ### Feats
@@ -11,7 +36,7 @@
 
 ### Fixes
 
-- 修复 `n-image` 切换图像后没有初始化 `rotate` 的问题，关闭 [#921](https://github.com/TuSimple/naive-ui/issues/921)
+- 修复 `n-image` 切换图像后没有初始化 `rotate`，关闭 [#921](https://github.com/TuSimple/naive-ui/issues/921)
 - 修复 `n-data-table` 的 loading 不在中间，关闭 [#929](https://github.com/TuSimple/naive-ui/issues/929)
 - 修复 `n-tree` 当 onLoad 回调没有添加 children 时抛出错误，关闭 [#772](https://github.com/TuSimple/naive-ui/issues/772)
 - 修复 `n-input` 当传递 `value=ref(0)` 时，同时显示 0 和占位符问题，关闭 [#914](https://github.com/TuSimple/naive-ui/issues/914)

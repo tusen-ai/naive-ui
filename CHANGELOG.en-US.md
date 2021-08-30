@@ -1,5 +1,30 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-cascader` add `onUpdateValue` prop.
+- `n-auto-complete` add `onUpdateValue` prop.
+- `n-data-table`'s column's `renderFilterMenu` add `hide` params.
+- `n-tree` & `n-tree-select` add `key-field` prop.
+- `n-tree` & `n-tree-select` add `label-field` prop.
+
+### Fixes
+
+- Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
+
+## 2.16.7 (2021-08-27)
+
+### Feats
+
+- `n-mention` add `focus` and `blur` methods.
+
+### Fixes
+
+- Fix `n-mention`'s menu is too far from text in input mode.
+- Fix `n-tree` node can not expanded.
+
 ## 2.16.6 (2021-08-26)
 
 ### Feats
