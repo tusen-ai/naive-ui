@@ -1,5 +1,6 @@
 import { nextTick } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import { useLocaleName } from '../store'
 
 export const loadingBarApiRef = {}
 
@@ -30,28 +31,13 @@ export default function createDemoRouter (app, routes) {
         })
       }
       nextTick(() => {
-        const titleParts = []
+        window.deriveTitleFromLocale(useLocaleName().value)
         if (to.name !== 'home') {
           const h1s = document.getElementsByTagName('h1')
           if (h1s.length !== 0) {
-            titleParts.push(h1s[0].textContent)
+            document.title = h1s[0].textContent + ' - ' + document.title
           }
         }
-        const path = window.location.pathname
-        const pathLocale = path.startsWith('/en-US')
-          ? 'en-US'
-          : path.startsWith('/zh-CN')
-            ? 'zh-CN'
-            : undefined
-        function deriveTitleFromLocale (locale = navigator.language) {
-          if (locale === 'zh-CN') {
-            titleParts.push('Naive UI: 一个 Vue 3 组件库')
-          } else {
-            titleParts.push('Naive UI: A Vue 3 Component Library')
-          }
-        }
-        deriveTitleFromLocale(pathLocale)
-        document.title = titleParts.join(' - ')
       })
     }
   })
