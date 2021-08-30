@@ -16,22 +16,19 @@ export default defineComponent({
   setup () {
     const loadingBar = useLoadingBar()
     const disabledRef = ref(true)
-    function handleStart () {
-      loadingBar.start()
-      disabledRef.value = false
-    }
-    function handleFinish () {
-      loadingBar.finish()
-      disabledRef.value = true
-    }
-    function handleError () {
-      loadingBar.error()
-    }
     return {
       disabled: disabledRef,
-      handleStart,
-      handleFinish,
-      handleError
+      handleStart () {
+        loadingBar.start()
+        disabledRef.value = false
+      },
+      handleFinish () {
+        loadingBar.finish()
+        disabledRef.value = true
+      },
+      handleError () {
+        loadingBar.error()
+      }
     }
   }
 })

@@ -16,10 +16,11 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useLoadingBar } from 'naive-ui'
 
 // content
-export default {
+export default defineComponent({
   setup () {
     const loadingBar = useLoadingBar()
     return {
@@ -28,7 +29,7 @@ export default {
       }
     }
   }
-}
+})
 ```
 
 </n-space>
