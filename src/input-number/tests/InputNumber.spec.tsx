@@ -67,4 +67,40 @@ describe('n-input-number', () => {
     expect(wrapper.find('.n-input-number-suffix').exists()).toBe(true)
     expect(wrapper.find('.n-input-number-suffix').text()).toBe('%')
   })
+
+  it('should work with decimal `step`', async () => {
+    const wrapper = mount(NInputNumber, {
+      props: {
+        defaultValue: 0.2,
+        min: -10,
+        step: 0.1
+      }
+    })
+
+    const input = wrapper.find('.n-input__input-el')
+    const inputElement = input.element as HTMLInputElement
+    expect(inputElement.value).toEqual('0.2')
+
+    const buttons = wrapper.findAll('.n-input__suffix > button')
+    expect(buttons.length).toBe(2)
+
+    const minusBtn = buttons[0]
+    const addBtn = buttons[1]
+
+    expect(inputElement.value).toEqual('0.2')
+
+    let arr = [0.1, 0, -0.1]
+
+    for (let i = 0; i < arr.length; i++) {
+      await minusBtn.trigger('click')
+      expect(inputElement.value).toEqual(arr[i].toString())
+    }
+
+    arr = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1]
+
+    for (let i = 0; i < arr.length; i++) {
+      await addBtn.trigger('click')
+      expect(inputElement.value).toEqual(arr[i].toString())
+    }
+  })
 })
