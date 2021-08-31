@@ -21,8 +21,6 @@ describe('n-carousel', () => {
 
     await wrapper.setProps({ autoplay: true, interval: 50 })
 
-    await nextTick()
-
     await sleep(10)
     ;([0, 1, 2, 3, 4] as const).forEach((i) => {
       if (i === 1) {
