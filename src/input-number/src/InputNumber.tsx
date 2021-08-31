@@ -132,6 +132,15 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
+
+    const precisionRef = computed(() => {
+      const precisions = [props.min, props.max, props.step].map((item) => {
+        const fraction = String(item).split('.')[1]
+        return fraction ? fraction.length : 0
+      })
+      return Math.max(...precisions)
+    })
+
     const deriveValueFromDisplayedValue = (
       offset = 0,
       doUpdateIfValid = true
@@ -143,7 +152,12 @@ export default defineComponent({
         return null
       }
       if (validator(parsedValue)) {
-        let nextValue = parsedValue + offset
+        // converting float to integer, to avoid float calculation issue
+        let nextValue =
+          Math.round(
+            parsedValue * Math.pow(10, precisionRef.value) +
+              offset * Math.pow(10, precisionRef.value)
+          ) / Math.pow(10, precisionRef.value)
         if (validator(nextValue)) {
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
