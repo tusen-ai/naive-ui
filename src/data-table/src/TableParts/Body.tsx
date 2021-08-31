@@ -137,10 +137,35 @@ export default defineComponent({
     } = inject(dataTableInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
+    const lastSelectedIndex = ref<number>(0)
     function handleCheckboxUpdateChecked (
-      tmNode: { key: RowKey },
-      checked: boolean
+      tmNode: { key: RowKey, index: number },
+      checked: boolean,
+      shiftKey: boolean
     ): void {
+      const last = lastSelectedIndex.value
+
+      lastSelectedIndex.value = tmNode.index
+
+      if (shiftKey) {
+        const start = Math.min(last, tmNode.index)
+        const end = Math.max(last, tmNode.index)
+        console.log(start, end)
+
+        console.log(paginatedDataRef.value)
+
+        const keys: RowKey[] = []
+
+        paginatedDataRef.value.slice(start, end + 1).forEach((r) => {
+          if (!r.disabled) {
+            keys.push(r.key)
+          }
+        })
+
+        console.log(keys)
+
+        doCheck(keys)
+      }
       if (checked) {
         doCheck(tmNode.key)
       } else {
@@ -527,8 +552,12 @@ export default defineComponent({
                           key={currentPage}
                           rowKey={rowKey}
                           disabled={rowInfo.disabled}
-                          onUpdateChecked={(checked) =>
-                            handleCheckboxUpdateChecked(rowInfo, checked)
+                          onUpdateChecked={(checked: boolean, e) =>
+                            handleCheckboxUpdateChecked(
+                              rowInfo as TmNode,
+                              checked,
+                              e!.shiftKey
+                            )
                           }
                         />
                       ) : null

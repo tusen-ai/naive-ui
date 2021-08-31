@@ -88,7 +88,7 @@ export function useCheck (
     if (onCheckedRowKeysChange) call(onCheckedRowKeysChange, keys)
     uncontrolledCheckedRowKeysRef.value = keys
   }
-  function doCheck (rowKey: RowKey): void {
+  function doCheck (rowKey: RowKey | RowKey[]): void {
     doUpdateCheckedRowKeys(
       treeMateRef.value.check(rowKey, mergedCheckedRowKeysRef.value, {
         cascade: props.cascade

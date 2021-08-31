@@ -51,7 +51,7 @@ const checkboxProps = {
   MaybeArray<(value: boolean) => void>
   >,
   onUpdateChecked: [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+  MaybeArray<(value: boolean, e?: MouseEvent | KeyboardEvent) => void>
   >,
   // private
   privateTableHeader: Boolean,
@@ -154,7 +154,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    function toggle (): void {
+    function toggle (e: MouseEvent | KeyboardEvent): void {
       if (NCheckboxGroup && props.value !== undefined) {
         NCheckboxGroup.toggleCheckbox(!renderedCheckedRef.value, props.value)
       } else {
@@ -166,16 +166,16 @@ export default defineComponent({
         const { nTriggerFormInput, nTriggerFormChange } = formItem
         const nextChecked = !renderedCheckedRef.value
         if (_onUpdateCheck) call(_onUpdateCheck, nextChecked)
-        if (onUpdateChecked) call(onUpdateChecked, nextChecked)
+        if (onUpdateChecked) call(onUpdateChecked, nextChecked, e)
         if (onChange) call(onChange, nextChecked) // deprecated
         nTriggerFormInput()
         nTriggerFormChange()
         uncontrolledCheckedRef.value = nextChecked
       }
     }
-    function handleClick (): void {
+    function handleClick (e: MouseEvent): void {
       if (!mergedDisabledRef.value) {
-        toggle()
+        toggle(e)
       }
     }
     function handleKeyUp (e: KeyboardEvent): void {
@@ -184,7 +184,7 @@ export default defineComponent({
         case 'Space':
         case 'Enter':
         case 'NumpadEnter':
-          toggle()
+          toggle(e)
       }
     }
     function handleKeyDown (e: KeyboardEvent): void {
