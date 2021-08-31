@@ -1,4 +1,4 @@
-# 位置
+# Placement
 
 ```html
 <n-notification-provider :placement="placement">
@@ -36,7 +36,7 @@ const Buttons = {
             marginTop: '10px'
           }
         },
-        { default: () => '顶部' }
+        { default: () => 'Top' }
       ),
       h(
         NButton,
@@ -55,7 +55,7 @@ const Buttons = {
             marginTop: '10px'
           }
         },
-        { default: () => '底部' }
+        { default: () => 'Bottom' }
       ),
       h(
         NButton,
@@ -73,7 +73,7 @@ const Buttons = {
             marginTop: '10px'
           }
         },
-        { default: () => '左上' }
+        { default: () => 'TopLeft' }
       ),
       h(
         NButton,
@@ -91,7 +91,7 @@ const Buttons = {
             marginTop: '10px'
           }
         },
-        { default: () => '右上' }
+        { default: () => 'TopRight' }
       ),
       h(
         NButton,
@@ -109,7 +109,7 @@ const Buttons = {
             marginTop: '10px'
           }
         },
-        { default: () => '左下' }
+        { default: () => 'BottomLeft' }
       ),
       h(
         NButton,
@@ -127,7 +127,7 @@ const Buttons = {
             marginTop: '10px'
           }
         },
-        { default: () => '右下' }
+        { default: () => 'BottomRight' }
       )
     ]
   }

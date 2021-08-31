@@ -13,6 +13,7 @@
 
 - `n-data-table` optimize the logic of underlying rendering and improve component performance.
 - `n-date-picker`'s `shortcuts` prop supports functional value.
+- `n-notification-provider` add `placement` prop, closes [#398](https://github.com/TuSimple/naive-ui/issues/398).
 
 ### i18n
 

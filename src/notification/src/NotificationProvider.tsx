@@ -148,8 +148,8 @@ export default defineComponent({
       error: apis[3],
       open
     }
-    provide(notificationApiInjectionKey, api)
     const mergedPlacementRef = useMemo(() => props.placement)
+    provide(notificationApiInjectionKey, api)
     provide(notificationProviderInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,

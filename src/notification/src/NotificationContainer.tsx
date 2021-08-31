@@ -15,7 +15,6 @@ export default defineComponent({
     const { mergedThemeRef, mergedClsPrefixRef, placement } = inject(
       notificationProviderInjectionKey
     )!
-    console.log('container', placement)
     return {
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
