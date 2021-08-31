@@ -34,10 +34,14 @@ import {
   OnChange,
   uploadInjectionKey,
   OnUpdateFileList,
-  OnBeforeUpload
+  OnBeforeUpload,
+  listType,
+  OnPreview,
+  CreateThumbnailUrl
 } from './interface'
 import { useMergedState } from 'vooks'
 import { uploadDraggerKey } from './UploadDragger'
+import { NImageGroup } from '../../image'
 
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
@@ -240,8 +244,49 @@ const uploadProps = {
   showRetryButton: {
     type: Boolean,
     default: true
-  }
+  },
+  showPreivewButton: {
+    type: Boolean,
+    default: true
+  },
+  listType: {
+    type: String as PropType<listType>,
+    default: 'text'
+  },
+  onPreview: Function as PropType<OnPreview>,
+  createThumbnailUrl: Function as PropType<CreateThumbnailUrl>
 } as const
+
+const isImageFileType = (type: string): boolean => type.includes('image/')
+
+const extname = (url: string = ''): string => {
+  const temp = url.split('/')
+  const filename = temp[temp.length - 1]
+  const filenameWithoutSuffix = filename.split(/#|\?/)[0]
+  return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0]
+}
+
+const isImageUrl = (file: FileInfo): boolean => {
+  if (file.type && !file.thumbnailUrl) {
+    return isImageFileType(file.type)
+  }
+  const url: string = file.thumbnailUrl || file.url || ''
+  const extension = extname(url)
+  if (
+    /^data:image\//.test(url) ||
+    /(webp|svg|png|gif|jpg|jpeg|jfif|bmp|dpg|ico)$/i.test(extension)
+  ) {
+    return true
+  }
+  if (/^data:/.test(url)) {
+    return false
+  }
+  if (extension) {
+    return false
+  }
+
+  return true
+}
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
 
@@ -316,7 +361,6 @@ export default defineComponent({
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files || files.length === 0) return
       const { onBeforeUpload } = props
-
       const filesAsArray = props.multiple ? Array.from(files) : [files[0]]
       void Promise.all(
         filesAsArray.map(async (file) => {
@@ -326,7 +370,8 @@ export default defineComponent({
             status: 'pending',
             percentage: 0,
             file: file,
-            url: null
+            url: null,
+            type: file.type
           }
           if (
             !onBeforeUpload ||
@@ -417,6 +462,41 @@ export default defineComponent({
         warn('upload', 'File has no corresponding id in current file list.')
       }
     }
+    async function getFileThumbnail (file: FileInfo): Promise<string> {
+      const { createThumbnailUrl } = props
+
+      return createThumbnailUrl
+        ? await createThumbnailUrl(file.file as File)
+        : await previewImage(file.file as File)
+    }
+
+    async function previewImage (file: File): Promise<string> {
+      return await new Promise((resolve) => {
+        if (!file.type || !isImageFileType(file.type)) {
+          resolve('')
+          return
+        }
+
+        const img = new Image()
+        img.onload = () => {
+          const { width, height } = img
+          const canvas = document.createElement('canvas')
+          const ctx = canvas.getContext('2d')
+          canvas.width = width
+          canvas.height = height
+          canvas.style.cssText = `position: fixed; left: 0; top: 0; width: ${width}px; height: ${height}px; z-index: 9999; display: none;`
+          document.body.appendChild(canvas)
+
+          ctx?.drawImage(img, 0, 0, width, height)
+          const dataURL = canvas.toDataURL()
+          document.body.removeChild(canvas)
+
+          resolve(dataURL)
+        }
+        img.src = window.URL.createObjectURL(file)
+      })
+    }
+
     provide(uploadInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
@@ -430,7 +510,11 @@ export default defineComponent({
       mergedFileListRef: mergedFileListRef,
       XhrMap,
       submit,
-      doChange
+      doChange,
+      isImageUrl,
+      showPreivewButtonRef: toRef(props, 'showPreivewButton'),
+      onPreviewRef: toRef(props, 'onPreview'),
+      getFileThumbnail
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -464,7 +548,8 @@ export default defineComponent({
             itemDisabledOpacity,
             lineHeight,
             borderRadius,
-            fontSize
+            fontSize,
+            itemIconErrorColor
           }
         } = themeRef.value
         return {
@@ -481,7 +566,8 @@ export default defineComponent({
           '--item-text-color': itemTextColor,
           '--item-text-color-error': itemTextColorError,
           '--item-text-color-success': itemTextColorSuccess,
-          '--line-height': lineHeight
+          '--line-height': lineHeight,
+          '--item-icon-error-color': itemIconErrorColor
         }
       })
     }
@@ -495,6 +581,38 @@ export default defineComponent({
         draggerInsideRef.value = true
       }
     }
+    const uploadTrigger = (
+      <div
+        class={[
+          `${mergedClsPrefix}-upload__trigger`,
+          this.listType === 'picture-card' &&
+            `${mergedClsPrefix}-upload__trigger--picture-card`
+        ]}
+        onClick={this.handleTriggerClick}
+        onDrop={this.handleTriggerDrop}
+        onDragover={this.handleTriggerDragOver}
+        onDragenter={this.handleTriggerDragEnter}
+        onDragleave={this.handleTriggerDragLeave}
+      >
+        {this.$slots}
+      </div>
+    )
+    const uploadFileList = (
+      <NFadeInExpandTransition group>
+        {{
+          default: () =>
+            this.mergedFileList.map((file) => (
+              <NUploadFile
+                clsPrefix={mergedClsPrefix}
+                key={file.id}
+                file={file}
+                listType={this.listType}
+              />
+            ))
+        }}
+      </NFadeInExpandTransition>
+    )
+
     return (
       <div
         class={[
@@ -516,33 +634,22 @@ export default defineComponent({
           multiple={this.multiple}
           onChange={this.handleFileInputChange}
         />
-        <div
-          class={`${mergedClsPrefix}-upload__trigger`}
-          onClick={this.handleTriggerClick}
-          onDrop={this.handleTriggerDrop}
-          onDragover={this.handleTriggerDragOver}
-          onDragenter={this.handleTriggerDragEnter}
-          onDragleave={this.handleTriggerDragLeave}
-        >
-          {this.$slots}
-        </div>
+        {this.listType !== 'picture-card' && uploadTrigger}
         {this.showFileList && (
           <div
             class={`${mergedClsPrefix}-upload-file-list`}
             style={this.fileListStyle}
           >
-            <NFadeInExpandTransition group>
-              {{
-                default: () =>
-                  this.mergedFileList.map((file) => (
-                    <NUploadFile
-                      clsPrefix={mergedClsPrefix}
-                      key={file.id}
-                      file={file}
-                    />
-                  ))
-              }}
-            </NFadeInExpandTransition>
+            {this.listType === 'picture-card' ? (
+              <NImageGroup>
+                {{
+                  default: () => uploadFileList
+                }}
+              </NImageGroup>          
+            ) : (
+              uploadFileList
+            )}
+            {this.listType === 'picture-card' && uploadTrigger}
           </div>
         )}
       </div>

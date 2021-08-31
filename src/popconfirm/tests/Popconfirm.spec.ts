@@ -32,5 +32,23 @@ describe('n-popconfirm', () => {
     expect(document.querySelectorAll('.n-button__content')[2].textContent).toBe(
       'positive'
     )
+    wrapper.unmount()
+  })
+
+  it('should work with `show-icon` prop', async () => {
+    const wrapper = mount(NPopconfirm, {
+      attachTo: document.body,
+      props: {
+        showIcon: false
+      },
+      slots: {
+        default: () => 'test-text',
+        trigger: () => h(NButton, null, { default: () => 'test-button' })
+      }
+    })
+
+    await wrapper.find('button').trigger('click')
+    expect(document.querySelector('.n-popconfirm__icon')).toBe(null)
+    wrapper.unmount()
   })
 })
