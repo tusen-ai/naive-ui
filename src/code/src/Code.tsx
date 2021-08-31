@@ -77,7 +77,7 @@ export default defineComponent({
       if (language) {
         const html = createCodeHtml(language, code, props.trim)
         if (html !== null) {
-          codeEl.innerHTML = html
+          codeEl.innerHTML = props.inline ? html : `<pre>${html}</pre>`
           return
         }
       }
@@ -138,19 +138,14 @@ export default defineComponent({
   },
   render () {
     const { default: defaultSlot } = this.$slots
-    const { mergedClsPrefix, inline } = this
+    const { mergedClsPrefix } = this
     return (
       <code
         class={`${mergedClsPrefix}-code`}
         style={this.cssVars as CSSProperties}
+        ref="codeRef"
       >
-        {defaultSlot ? (
-          defaultSlot()
-        ) : inline ? (
-          <span ref="codeRef"></span>
-        ) : (
-          <pre ref="codeRef"></pre>
-        )}
+        {defaultSlot?.()}
       </code>
     )
   }
