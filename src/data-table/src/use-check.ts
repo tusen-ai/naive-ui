@@ -95,7 +95,7 @@ export function useCheck (
       }).checkedKeys
     )
   }
-  function doUncheck (rowKey: RowKey): void {
+  function doUncheck (rowKey: RowKey | RowKey[]): void {
     doUpdateCheckedRowKeys(
       treeMateRef.value.uncheck(rowKey, mergedCheckedRowKeysRef.value, {
         cascade: props.cascade

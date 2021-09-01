@@ -5,6 +5,7 @@ import {
   defineComponent,
   inject,
   VNode,
+  watch,
   watchEffect,
   onUnmounted,
   PropType,
@@ -138,7 +139,10 @@ export default defineComponent({
     } = inject(dataTableInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
-    const lastSelectedIndex = ref<number>(0)
+    const lastSelectedIndex = ref<number | null>(null)
+    watch(mergedCurrentPageRef, () => {
+      lastSelectedIndex.value = null
+    })
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey, index: number },
       checked: boolean,
@@ -147,7 +151,7 @@ export default defineComponent({
       const lastIndex = lastSelectedIndex.value
       const currentIndex = tmNode.index % mergedPagination.value.pageSize!
       lastSelectedIndex.value = currentIndex
-      if (shiftKey) {
+      if (shiftKey && lastIndex !== null) {
         const start = Math.min(lastIndex, currentIndex)
         const end = Math.max(lastIndex, currentIndex)
         const keys: RowKey[] = []
@@ -156,8 +160,13 @@ export default defineComponent({
             keys.push(r.key)
           }
         })
-        doCheck(keys)
+        if (checked) {
+          doCheck(keys)
+        } else {
+          doUncheck(keys)
+        }
       }
+
       if (checked) {
         doCheck(tmNode.key)
       } else {
