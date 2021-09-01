@@ -48,10 +48,10 @@ const checkboxProps = {
   },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:checked': [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+  MaybeArray<(value: boolean, e: MouseEvent | KeyboardEvent) => void>
   >,
   onUpdateChecked: [Function, Array] as PropType<
-  MaybeArray<(value: boolean, e?: MouseEvent | KeyboardEvent) => void>
+  MaybeArray<(value: boolean, e: MouseEvent | KeyboardEvent) => void>
   >,
   // private
   privateTableHeader: Boolean,
@@ -165,7 +165,7 @@ export default defineComponent({
         } = props
         const { nTriggerFormInput, nTriggerFormChange } = formItem
         const nextChecked = !renderedCheckedRef.value
-        if (_onUpdateCheck) call(_onUpdateCheck, nextChecked)
+        if (_onUpdateCheck) call(_onUpdateCheck, nextChecked, e)
         if (onUpdateChecked) call(onUpdateChecked, nextChecked, e)
         if (onChange) call(onChange, nextChecked) // deprecated
         nTriggerFormInput()

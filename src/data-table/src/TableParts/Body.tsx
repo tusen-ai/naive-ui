@@ -102,6 +102,7 @@ export default defineComponent({
   },
   setup (props) {
     const {
+      mergedPagination,
       mergedExpandedRowKeysRef,
       mergedClsPrefixRef,
       mergedThemeRef,
@@ -143,27 +144,18 @@ export default defineComponent({
       checked: boolean,
       shiftKey: boolean
     ): void {
-      const last = lastSelectedIndex.value
-
-      lastSelectedIndex.value = tmNode.index
-
+      const lastIndex = lastSelectedIndex.value
+      const currentIndex = tmNode.index % mergedPagination.value.pageSize!
+      lastSelectedIndex.value = currentIndex
       if (shiftKey) {
-        const start = Math.min(last, tmNode.index)
-        const end = Math.max(last, tmNode.index)
-        console.log(start, end)
-
-        console.log(paginatedDataRef.value)
-
+        const start = Math.min(lastIndex, currentIndex)
+        const end = Math.max(lastIndex, currentIndex)
         const keys: RowKey[] = []
-
         paginatedDataRef.value.slice(start, end + 1).forEach((r) => {
           if (!r.disabled) {
             keys.push(r.key)
           }
         })
-
-        console.log(keys)
-
         doCheck(keys)
       }
       if (checked) {
@@ -556,7 +548,7 @@ export default defineComponent({
                             handleCheckboxUpdateChecked(
                               rowInfo as TmNode,
                               checked,
-                              e!.shiftKey
+                              e.shiftKey
                             )
                           }
                         />

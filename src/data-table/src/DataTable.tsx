@@ -319,6 +319,7 @@ export default defineComponent({
       return props.tableLayout
     })
     provide(dataTableInjectionKey, {
+      mergedPagination: mergedPaginationRef,
       indentRef: toRef(props, 'indent'),
       firstContentfulColIndexRef,
       bodyWidthRef,

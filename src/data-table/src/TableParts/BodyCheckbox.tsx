@@ -16,7 +16,7 @@ export default defineComponent({
     },
     onUpdateChecked: {
       type: Function as PropType<
-      (checked: boolean, e?: MouseEvent | KeyboardEvent) => void
+      (checked: boolean, e: MouseEvent | KeyboardEvent) => void
       >,
       required: true
     }
