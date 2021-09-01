@@ -2,13 +2,13 @@
 
 ```html
 <n-notification-provider :placement="placement">
-  <Buttons @changePlacement="changePlacement" />
+  <Buttons @change-placement="changePlacement" />
 </n-notification-provider>
 ```
 
 ```js
 import { useNotification, NButton } from 'naive-ui'
-import { h, ref, nextTick } from 'vue'
+import { ref, defineComponent, h } from 'vue'
 
 const Buttons = {
   emits: ['changePlacement'],
@@ -28,7 +28,7 @@ const Buttons = {
             this.notification.info({
               title: "Wouldn't it be Nice",
               description: 'From the Beach Boys',
-              content: 'This is Content'
+              content: 'I can be top'
             })
           },
           style: {
@@ -41,9 +41,8 @@ const Buttons = {
       h(
         NButton,
         {
-          onClick: async () => {
+          onClick: () => {
             this.$emit('changePlacement', 'bottom')
-            await nextTick()
             this.notification.info({
               title: "Wouldn't it be Nice",
               description: 'From the Beach Boys',
@@ -73,7 +72,7 @@ const Buttons = {
             marginTop: '10px'
           }
         },
-        { default: () => 'TopLeft' }
+        { default: () => 'Top Left' }
       ),
       h(
         NButton,
@@ -91,7 +90,7 @@ const Buttons = {
             marginTop: '10px'
           }
         },
-        { default: () => 'TopRight' }
+        { default: () => 'Top Right' }
       ),
       h(
         NButton,
@@ -109,7 +108,7 @@ const Buttons = {
             marginTop: '10px'
           }
         },
-        { default: () => 'BottomLeft' }
+        { default: () => 'Bottom Left' }
       ),
       h(
         NButton,
@@ -127,24 +126,22 @@ const Buttons = {
             marginTop: '10px'
           }
         },
-        { default: () => 'BottomRight' }
+        { default: () => 'Bottom Right' }
       )
     ]
   }
 }
 
-export default {
-  components: {
-    Buttons
-  },
+export default defineComponent({
+  components: { Buttons },
   setup () {
-    const placement = ref('top-right')
+    const placementRef = ref('top-right')
     return {
-      placement,
+      placement: placementRef,
       changePlacement: (val) => {
-        placement.value = val
+        placementRef.value = val
       }
     }
   }
-}
+})
 ```

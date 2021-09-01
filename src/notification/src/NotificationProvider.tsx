@@ -12,9 +12,8 @@ import {
   InjectionKey,
   Ref,
   renderSlot,
-  ComputedRef
+  toRef
 } from 'vue'
-import { useMemo } from 'vooks'
 import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
@@ -25,6 +24,7 @@ import NotificationEnvironment, {
   notificationEnvOptions
 } from './NotificationEnvironment'
 import style from './styles/index.cssr'
+import { Placement } from './interface'
 
 export type NotificationOptions = Partial<
 ExtractPropTypes<typeof notificationEnvOptions>
@@ -33,9 +33,7 @@ ExtractPropTypes<typeof notificationEnvOptions>
 export interface NotificationProviderInjection {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<NotificationTheme>>
-  placement: ComputedRef<
-  'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'
-  >
+  placement: Ref<Placement>
 }
 
 export const notificationProviderInjectionKey: InjectionKey<NotificationProviderInjection> =
@@ -82,14 +80,7 @@ const notificationProviderProps = {
     default: true
   },
   placement: {
-    type: String as PropType<
-    | 'top'
-    | 'top-left'
-    | 'top-right'
-    | 'bottom'
-    | 'bottom-left'
-    | 'bottom-right'
-    >,
+    type: String as PropType<Placement>,
     default: 'top-right'
   }
 }
@@ -148,12 +139,11 @@ export default defineComponent({
       error: apis[3],
       open
     }
-    const mergedPlacementRef = useMemo(() => props.placement)
     provide(notificationApiInjectionKey, api)
     provide(notificationProviderInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
-      placement: mergedPlacementRef
+      placement: toRef(props, 'placement')
     })
     // deprecated
     function open (options: NotificationOptions): NotificationReactive {
