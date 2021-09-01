@@ -2,11 +2,17 @@
 
 ## Pending
 
+## 2.16.5 (2021-09-01)
+
+### Fixes
+
+- `n-cascader` Click tag to delete the sub option in multi selection mode, and the tree option is not updated `handleDeleteOption`
+
 ## 2.16.5 (2021-08-25)
 
 ### Fixes
 
-- `n-dialog` 宽度固定 `width: 446px` is modified to `min-width: 446px`. The width can be determined by the content
+- `n-dialog` `width: 446px` is modified to `min-width: 446px`. The width can be determined by the content
 
 ### Feats
 

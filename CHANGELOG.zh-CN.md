@@ -2,6 +2,12 @@
 
 ## Pending
 
+## 2.16.5 (2021-09-01)
+
+### Fixes
+
+- `n-cascader` 多选模式下点击 tag 删除子选项未更新 tree option `handleDeleteOption`
+
 ## 2.16.5 (2021-08-25)
 
 ### Fixes
