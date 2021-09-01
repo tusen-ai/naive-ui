@@ -123,6 +123,8 @@ export default defineComponent({
     return (
       <div
         class={`${mergedClsPrefix}-message-wrapper`}
+        onMouseenter={this.onMouseenter}
+        onMouseleave={this.onMouseleave}
         style={{
           ...(cssVars as CSSProperties),
           alignItems: this.placement.startsWith('top')
