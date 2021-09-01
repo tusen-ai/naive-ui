@@ -1,5 +1,14 @@
 import { mount } from '@vue/test-utils'
 import { NUpload } from '../index'
+import { sleep } from 'seemly'
+
+const getMockFile = (element: Element, files: File[]): void => {
+  Object.defineProperty(element, 'files', {
+    get () {
+      return files
+    }
+  })
+}
 
 describe('n-upload', () => {
   it('should work with import on demand', () => {
@@ -22,5 +31,156 @@ describe('n-upload', () => {
 
     await wrapper.setProps({ disabled: true })
     expect(wrapper.find('.n-upload').classes()).toContain('n-upload--disabled')
+  })
+
+  it('should work with `on-before-upload` prop', async () => {
+    const onBeforeUpload = jest.fn(async () => true)
+    const onChange = jest.fn()
+    const wrapper = mount(NUpload, {
+      props: {
+        onBeforeUpload,
+        onChange
+      }
+    })
+    const input = wrapper.find('input')
+    const fileList = [new File(['index'], 'file.txt')]
+
+    getMockFile(input.element, fileList)
+    await input.trigger('change')
+
+    expect(onBeforeUpload).toHaveBeenCalled()
+    expect(onChange).toHaveBeenCalled()
+  })
+
+  it('should work with `list-type` prop', async () => {
+    const wrapper = mount(NUpload, {
+      props: {
+        listType: 'text',
+        action: 'http://www.mocky.io/v2/5e4bafc63100007100d8b70f'
+      }
+    })
+    const input = wrapper.find('input')
+    const fileList = [new File(['index'], 'file.txt')]
+
+    getMockFile(input.element, fileList)
+    await input.trigger('change')
+
+    expect(wrapper.findAll('.n-upload-file--text-type').length).toBe(1)
+
+    await wrapper.setProps({
+      listType: 'picture'
+    })
+    expect(wrapper.findAll('.n-upload-file--picture-type').length).toBe(1)
+
+    await wrapper.setProps({
+      listType: 'picture-card'
+    })
+    expect(wrapper.findAll('.n-upload-file--picture-card-type').length).toBe(1)
+  })
+
+  it('should work with `create-thumbnail-url` prop', async () => {
+    const createThumbnailUrl = async (): Promise<string> => '/testThumbUrl.png'
+    const wrapper = mount(NUpload, {
+      props: {
+        listType: 'picture',
+        createThumbnailUrl
+      }
+    })
+    const input = wrapper.find('input')
+    const fileList = [new File(['index'], 'file.txt')]
+
+    getMockFile(input.element, fileList)
+    await input.trigger('change')
+    await sleep(1000)
+    expect(
+      wrapper.find('.n-upload-file-info-thumbnail__image img').attributes('src')
+    ).toEqual('/testThumbUrl.png')
+  })
+
+  it('should work with `on-preview` prop', async () => {
+    const onPreview = jest.fn()
+    const wrapper = mount(NUpload, {
+      props: {
+        defaultFileList: [
+          {
+            name: 'test.png',
+            url: '/testUrl.png',
+            status: 'finished',
+            id: 'test',
+            percentage: 100,
+            file: null
+          }
+        ],
+        onPreview
+      }
+    })
+    const urlName = wrapper.findAll('.n-upload-file-info-thumbnail__name')[0]
+    await urlName.trigger('click')
+
+    expect(onPreview).toHaveBeenCalled()
+  })
+
+  it('should work with `show-remove-button` and `on-remove` prop', async () => {
+    const onRemove = jest.fn()
+    const wrapper = mount(NUpload, {
+      props: {
+        defaultFileList: [
+          {
+            name: 'test.png',
+            url: '/testUrl.png',
+            status: 'finished',
+            id: 'test',
+            percentage: 100,
+            file: null
+          }
+        ],
+        onRemove,
+        showRemoveButton: false
+      }
+    })
+    let button = wrapper.find('.n-button--default-type')
+    expect(button.exists()).not.toBe(true)
+
+    await wrapper.setProps({
+      showRemoveButton: true
+    })
+
+    button = wrapper.find('.n-button--default-type')
+    expect(button.exists()).toBe(true)
+
+    await button.trigger('click')
+    expect(onRemove).toHaveBeenCalled()
+  })
+
+  it('should work with `show-cancel-button` and `on-remove` prop', async () => {
+    const onRemove = jest.fn()
+    const wrapper = mount(NUpload, {
+      props: {
+        defaultFileList: [
+          {
+            name: 'test.png',
+            url: '/testUrl.png',
+            status: 'error',
+            id: 'test',
+            percentage: 0,
+            file: null
+          }
+        ],
+        onRemove,
+        showCancelButton: false
+      }
+    })
+    let button = wrapper.findAll('.n-button--error-type')
+    expect(button.length).toEqual(1)
+
+    await wrapper.setProps({
+      showCancelButton: true
+    })
+
+    button = wrapper.findAll('.n-button--error-type')
+    expect(button.length).toEqual(2)
+
+    await button[0].trigger('click')
+    expect(onRemove).toHaveBeenCalled()
   })
 })

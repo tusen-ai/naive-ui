@@ -11,7 +11,7 @@ item-placement
 horizontal
 ```
 
-## Props
+## API
 
 ### Timeline Props
 
@@ -21,16 +21,15 @@ horizontal
 | item-placement | `'left' \| 'right'`   | `'left'`   | 方向   |
 | size           | `'medium' \| 'large'` | `'medium'` | 大小   |
 
-### Timeline Item Props
+### TimelineItem Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| color | `string` | `undefined` | 选项的颜色 |
 | content | `string` | `undefined` | 选项内容 |
 | time | `string` | `undefined` | 选项时间 |
 | title | `string` | `undefined` | 选项标题 |
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 选项类型 |
-
-## Slots
 
 ### Timeline Slots
 
@@ -38,7 +37,7 @@ horizontal
 | ------- | ---- | ---------- |
 | default | `()` | 时间线内容 |
 
-### Timeline Item Slots
+### TimelineItem Slots
 
 | 名称    | 参数 | 说明               |
 | ------- | ---- | ------------------ |

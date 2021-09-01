@@ -10,13 +10,44 @@
 
 ### Feats
 
-- `n-timeline` add `horizontal` prop, closes [#887](https://github.com/TuSimple/naive-ui/issues/887).
+- `n-cascader` add `onUpdateValue` prop.
+- `n-auto-complete` add `onUpdateValue` prop.
+- `n-data-table`'s column's `renderFilterMenu` add `hide` params.
+- `n-tree` & `n-tree-select` add `key-field` prop.
+- `n-tree` & `n-tree-select` add `label-field` prop.
 
 ### Fixes
 
-- Fix `n-image` not initializing `rorate` after switching images, closes [#921](https://github.com/TuSimple/naive-ui/issues/921).
+- Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
+- Fix `n-input-number`'s `step` calculate error when the value is decimal, closes [#1007](https://github.com/TuSimple/naive-ui/issues/1007).
+
+## 2.16.7 (2021-08-27)
+
+### Feats
+
+- `n-mention` add `focus` and `blur` methods.
+
+### Fixes
+
+- Fix `n-mention`'s menu is too far from text in input mode.
+- Fix `n-tree` node can not expanded.
+
+## 2.16.6 (2021-08-26)
+
+### Feats
+
+- `n-timeline` add `horizontal` prop, closes [#887](https://github.com/TuSimple/naive-ui/issues/887).
+- `n-image` add `preview-src` prop, closes [#922](https://github.com/TuSimple/naive-ui/issues/922)
+- `n-dynamic-tags` add `input` and `add` slot, closes [#499](https://github.com/TuSimple/naive-ui/issues/499).
+- `n-timeline-item` add `color` prop.
+
+### Fixes
+
+- Fix `n-image` not initializing `rotate` after switching images, closes [#921](https://github.com/TuSimple/naive-ui/issues/921).
 - Fix `n-data-table`'s loading is not centered, closes [#929](https://github.com/TuSimple/naive-ui/issues/929).
+- Fix `n-tree` throws an exception when onLoad callback does not add children, closes [#772](https://github.com/TuSimple/naive-ui/issues/772).
 - Fix `n-input` will show placeholder and 0 simultaneously while passing `value=ref(0)` in n-input, closes [#914](https://github.com/TuSimple/naive-ui/issues/914).
+- Fix `n-data-table` `flex-height` not working without `scroll-x`, closes [#952](https://github.com/TuSimple/naive-ui/issues/952).
 
 ## 2.16.5 (2021-08-20)
 
@@ -82,6 +113,7 @@
 - `n-button` add `text-color` prop.
 - `n-form` export `FormValidationError` type.
 - `n-popconfirm` support not show action components, closes [#770](https://github.com/TuSimple/naive-ui/issues/770).
+- `n-upload` add `list-type`， `show-preview-button`， `on-preview` and `create-thumbnail-url` prop.
 
 ### Fixes
 

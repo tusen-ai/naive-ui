@@ -6,6 +6,42 @@ describe('n-slider', () => {
     mount(NSlider)
   })
 
+  it('should work with `defaultValue`', async () => {
+    const wrapper = mount(NSlider, {
+      props: {
+        defaultValue: 23
+      }
+    })
+
+    const sliderRailFill = wrapper.find('.n-slider-rail__fill')
+    expect((sliderRailFill.element as HTMLElement).style.width).toEqual('23%')
+  })
+
+  it('should work with `marks`', async () => {
+    const wrapper = mount(NSlider, {
+      props: {
+        marks: {
+          34: '太棒了',
+          75: '不错'
+        }
+      }
+    })
+
+    const sliderDots = wrapper.findAll('.n-slider-dot')
+    expect(sliderDots.length).toBe(2)
+    expect((sliderDots[0].element as HTMLElement).style.left).toEqual('34%')
+    expect((sliderDots[1].element as HTMLElement).style.left).toEqual('75%')
+
+    const sliderMarks = wrapper.findAll('.n-slider-mark')
+    expect(sliderMarks.length).toBe(2)
+
+    expect((sliderMarks[0].element as HTMLElement).style.left).toEqual('34%')
+    expect(sliderMarks[0].text()).toEqual('太棒了')
+
+    expect((sliderMarks[1].element as HTMLElement).style.left).toEqual('75%')
+    expect(sliderMarks[1].text()).toEqual('不错')
+  })
+
   it('accept correct callback types', () => {
     function onUpdateValue1 (value: number): void {}
     function onUpdateValue2 (value: [number, number]): void {}
@@ -49,10 +85,19 @@ describe('n-slider', () => {
     expect(wrapper.findAll('.n-slider-mark')[1].text()).toContain('test2')
   })
 
-  it('should work with `range` prop', async () => {
-    const wrapper = mount(NSlider)
+  it('should work with `range` & `defaultValue` prop', async () => {
+    const wrapper = mount(NSlider, {
+      props: {
+        range: true,
+        defaultValue: [24, 49]
+      }
+    })
 
-    await wrapper.setProps({ range: true })
     expect(wrapper.findAll('.n-slider-handle').length).toBe(2)
+
+    const sliderRailFill = wrapper.find('.n-slider-rail__fill')
+    const element = sliderRailFill.element as HTMLElement
+    expect(element.style.left).toEqual('24%')
+    expect(element.style.width).toEqual('25%')
   })
 })

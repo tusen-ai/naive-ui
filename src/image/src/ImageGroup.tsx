@@ -43,12 +43,17 @@ export default defineComponent({
       const imgs = container.getElementsByClassName(
         groupId
       ) as HTMLCollectionOf<HTMLImageElement>
+
       if (!imgs.length) return
-      const index = Array.from(imgs).findIndex((img) => img.src === currentSrc)
+      const index = Array.from(imgs).findIndex(
+        (img) => img.dataset.previewSrc === currentSrc
+      )
       if (~index) {
-        setPreviewSrc(imgs[(index + step + imgs.length) % imgs.length].src)
+        setPreviewSrc(
+          imgs[(index + step + imgs.length) % imgs.length].dataset.previewSrc
+        )
       } else {
-        setPreviewSrc(imgs[0].src)
+        setPreviewSrc(imgs[0].dataset.previewSrc)
       }
     }
     provide(imageGroupInjectionKey, {

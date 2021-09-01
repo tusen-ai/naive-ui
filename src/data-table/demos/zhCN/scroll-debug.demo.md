@@ -1,6 +1,14 @@
 # Scroll Debug
 
 ```html
+Flex Height, Auto Layout Overflow, No Max Height
+<n-data-table
+  :columns="columns"
+  :data="data"
+  style="height: 180px;"
+  flex-height
+/>
+
 Auto Layout Overflow, No Max Height
 <n-data-table :columns="columns" :data="data" />
 
