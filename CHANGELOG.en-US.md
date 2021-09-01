@@ -4,7 +4,8 @@
 
 ### Fixes
 
-- `n-cascader` 多选模式下点击 tag 删除子选项未更新 tree option `handleDeleteOption`
+- Fix `n-cascader` click tag to delete the sub option in multi selection mode, and the tree option is not updated.
+- Fix `n-input` chinese input method not correct while mouse leave the input in `clearable` is true, closes [#905](https://github.com/TuSimple/naive-ui/issues/905).
 
 ### Feats
 

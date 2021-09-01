@@ -629,7 +629,7 @@ export default defineComponent({
       const { multiple } = props
       const { value: mergedValue } = mergedValueRef
       if (multiple && Array.isArray(mergedValue)) {
-        doUncheck(option.value);
+        doUncheck(option.value)
       } else {
         doUpdateValue(null)
       }
