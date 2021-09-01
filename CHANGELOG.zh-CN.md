@@ -1,10 +1,10 @@
 # CHANGELOG
 
 ## Pending
-## 2.16.5 (2021-09-01)
 ### Fixes
 
 - `n-cascader` click tag to delete the sub option in multi selection mode, and the tree option is not updated `handleDeleteOption`
+
 ### Feats
 
 - `n-cascader` 新增 `onUpdateValue` 方法
