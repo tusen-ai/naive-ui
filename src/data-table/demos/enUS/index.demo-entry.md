@@ -8,6 +8,7 @@ DataTable is used to displays rows of structured data.
 
 <n-alert type="warning" title="Caveat" style="margin-bottom: 16px;">
   Each item of the array passing in the <n-text code>data</n-text> prop represents a row of rendered data, and each row of data must have a unique <n-text code>key</n-text>, otherwise the <n-text code>row-key</n-text> prop must be specified on the table.
+  <br>If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage">Async</n-a>.
   </n-alert>
 
 ```demo
