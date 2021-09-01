@@ -32,10 +32,10 @@ function createData (level = 4, baseKey = '') {
 }
 
 function createLabel (level) {
-  if (level === 4) return 'Out of Tao, One is born'
-  if (level === 3) return 'Out of One, Two'
-  if (level === 2) return 'Out of Two, Three'
-  if (level === 1) return 'Out of Three, the created universe'
+  if (level === 4) return '道生一'
+  if (level === 3) return '一生二'
+  if (level === 2) return '二生三'
+  if (level === 1) return '三生万物'
 }
 
 function findSiblingsAndIndex (node, nodes) {
