@@ -1,4 +1,4 @@
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NPopconfirm } from '../index'
 import { NButton } from '../../button'
@@ -49,6 +49,50 @@ describe('n-popconfirm', () => {
 
     await wrapper.find('button').trigger('click')
     expect(document.querySelector('.n-popconfirm__icon')).toBe(null)
+    wrapper.unmount()
+  })
+
+  it('should work with `on-positive-click` prop', async () => {
+    const onClick = jest.fn()
+    const wrapper = mount(NPopconfirm, {
+      attachTo: document.body,
+      props: {
+        onPositiveClick: onClick
+      },
+      slots: {
+        default: () => 'test-text',
+        trigger: () => h(NButton, null, { default: () => 'test-button' })
+      }
+    })
+
+    await wrapper.find('button').trigger('click')
+    document
+      .querySelectorAll('.n-button')[2]
+      ?.dispatchEvent(new MouseEvent('click'))
+    await nextTick()
+    expect(onClick).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `on-negative-click` prop', async () => {
+    const onClick = jest.fn()
+    const wrapper = mount(NPopconfirm, {
+      attachTo: document.body,
+      props: {
+        onNegativeClick: onClick
+      },
+      slots: {
+        default: () => 'test-text',
+        trigger: () => h(NButton, null, { default: () => 'test-button' })
+      }
+    })
+
+    await wrapper.find('button').trigger('click')
+    document
+      .querySelectorAll('.n-button')[1]
+      ?.dispatchEvent(new MouseEvent('click'))
+    await nextTick()
+    expect(onClick).toHaveBeenCalled()
     wrapper.unmount()
   })
 })
