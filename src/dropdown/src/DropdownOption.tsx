@@ -8,7 +8,9 @@ import {
   provide,
   PropType,
   InjectionKey,
-  Ref
+  Ref,
+  mergeProps,
+  VNodeProps
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { useMemo } from 'vooks'
@@ -22,7 +24,8 @@ import { TreeNode } from 'treemate'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
-  DropdownOption
+  DropdownOption,
+  DropdownOptionProps
 } from './interface'
 
 interface NDropdownOptionInjection {
@@ -52,6 +55,9 @@ export default defineComponent({
     placement: {
       type: String as PropType<FollowerPlacement>,
       default: 'right-start'
+    },
+    props: {
+      type: Object as PropType<DropdownOptionProps>
     }
   },
   setup (props) {
@@ -202,7 +208,8 @@ export default defineComponent({
       siblingHasIcon,
       siblingHasSubmenu,
       renderLabel,
-      renderIcon
+      renderIcon,
+      props
     } = this
     const submenuVNode = mergedShowSubmenu ? (
       <NDropdownMenu
@@ -211,10 +218,11 @@ export default defineComponent({
         parentKey={this.tmNode.key}
       />
     ) : null
-    return (
-      <div class={`${clsPrefix}-dropdown-option`}>
-        <div
-          class={[
+    const dropDownOptionBody = h(
+      'div',
+      mergeProps(
+        {
+          class: [
             `${clsPrefix}-dropdown-option-body`,
             {
               [`${clsPrefix}-dropdown-option-body--pending`]: this.pending,
@@ -224,48 +232,55 @@ export default defineComponent({
               [`${clsPrefix}-dropdown-option-body--disabled`]:
                 this.mergedDisabled
             }
+          ],
+          onMousemove: this.handleMouseMove,
+          onMouseenter: this.handleMouseEnter,
+          onMouseleave: this.handleMouseLeave,
+          onClick: this.handleClick
+        },
+        props as VNodeProps
+      ),
+      [
+        <div
+          __dropdown-option
+          class={[
+            `${clsPrefix}-dropdown-option-body__prefix`,
+            siblingHasIcon &&
+              `${clsPrefix}-dropdown-option-body__prefix--show-icon`
           ]}
-          onMousemove={this.handleMouseMove}
-          onMouseenter={this.handleMouseEnter}
-          onMouseleave={this.handleMouseLeave}
-          onClick={this.handleClick}
         >
-          <div
-            __dropdown-option
-            class={[
-              `${clsPrefix}-dropdown-option-body__prefix`,
-              siblingHasIcon &&
-                `${clsPrefix}-dropdown-option-body__prefix--show-icon`
-            ]}
-          >
-            {[renderIcon ? renderIcon(rawNode) : render(rawNode.icon)]}
-          </div>
-          <div
-            __dropdown-option
-            class={`${clsPrefix}-dropdown-option-body__label`}
-          >
-            {/* TODO: Workaround, menu campatible */}
-            {renderLabel
-              ? renderLabel(rawNode)
-              : render(rawNode.label ?? rawNode.title)}
-          </div>
-          <div
-            __dropdown-option
-            class={[
-              `${clsPrefix}-dropdown-option-body__suffix`,
-              siblingHasSubmenu &&
-                `${clsPrefix}-dropdown-option-body__suffix--has-submenu`
-            ]}
-          >
-            {this.hasSubmenu ? (
-              <NIcon>
-                {{
-                  default: () => <ChevronRightIcon />
-                }}
-              </NIcon>
-            ) : null}
-          </div>
+          {[renderIcon ? renderIcon(rawNode) : render(rawNode.icon)]}
+        </div>,
+        <div
+          __dropdown-option
+          class={`${clsPrefix}-dropdown-option-body__label`}
+        >
+          {/* TODO: Workaround, menu campatible */}
+          {renderLabel
+            ? renderLabel(rawNode)
+            : render(rawNode.label ?? rawNode.title)}
+        </div>,
+        <div
+          __dropdown-option
+          class={[
+            `${clsPrefix}-dropdown-option-body__suffix`,
+            siblingHasSubmenu &&
+              `${clsPrefix}-dropdown-option-body__suffix--has-submenu`
+          ]}
+        >
+          {this.hasSubmenu ? (
+            <NIcon>
+              {{
+                default: () => <ChevronRightIcon />
+              }}
+            </NIcon>
+          ) : null}
         </div>
+      ]
+    )
+    return (
+      <div class={`${clsPrefix}-dropdown-option`}>
+        {dropDownOptionBody}
         {this.hasSubmenu ? (
           <VBinder>
             {{
