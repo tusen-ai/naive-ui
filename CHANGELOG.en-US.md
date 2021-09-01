@@ -18,10 +18,7 @@
 - `n-data-table`'s column's `renderFilterMenu` add `hide` params.
 - `n-tree` & `n-tree-select` add `key-field` prop.
 - `n-tree` & `n-tree-select` add `label-field` prop.
-- `n-tree` & `n-tree-select` add `children-field` prop.
-- `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
-- `n-data-table` supports multi-selection by holding down `shift`, closes [#554](https://github.com/TuSimple/naive-ui/issues/554).
-- `n-tree-select` add `check-strategy` prop, closes [#624](https://github.com/TuSimple/naive-ui/issues/624).
+- `n-message` When `duration` is set, mouse enter will no longer automatically destroyed, and will be destroyed after mouse is out, closes [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
 
 ### Fixes
 
