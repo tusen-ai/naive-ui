@@ -1,6 +1,7 @@
 import { mount, VueWrapper } from '@vue/test-utils'
 import { h, Fragment, createCommentVNode } from 'vue'
 import { NSpace } from '../index'
+import type { Justify } from '../src/Space'
 
 const getChildrenNode = (wrapper: VueWrapper<any>): any[] => {
   return (
@@ -46,6 +47,26 @@ describe('n-space', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('render space array size', async () => {
+    const wrapper = mount({
+      render () {
+        return (
+          <NSpace size={[20, 30]}>
+            {{
+              default: () => [<div>1</div>, <div>2</div>]
+            }}
+          </NSpace>
+        )
+      }
+    })
+
+    const childNodes = getChildrenNode(wrapper)
+    expect(childNodes[0].attributes('style')).toContain('margin-right: 20px;')
+
+    await wrapper.setProps({ vertical: true })
+    expect(childNodes[0].attributes('style')).toContain('margin-bottom: 30px;')
+  })
+
   it('render vertical space', () => {
     const wrapper = mount({
       render () {
@@ -60,6 +81,16 @@ describe('n-space', () => {
     })
     expect(wrapper.attributes('style')).toContain('flex-direction: column;')
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should work with `inline` prop', () => {
+    const wrapper = mount(NSpace, {
+      props: {
+        inline: true
+      }
+    })
+
+    expect(wrapper.attributes('style')).toContain('display: inline-flex;')
   })
 
   it('should render with invalidElement', () => {
@@ -86,7 +117,13 @@ describe('n-space', () => {
   })
 
   it('render justify space', () => {
-    const justifyList = ['start', 'end'] as Array<'start' | 'end'>
+    const justifyList: Justify[] = [
+      'start',
+      'end',
+      'center',
+      'space-around',
+      'space-between'
+    ]
     justifyList.forEach((pos) => {
       const wrapper = mount({
         render () {
@@ -99,8 +136,11 @@ describe('n-space', () => {
           )
         }
       })
+
       expect(wrapper.attributes('style')).toContain(
-        `justify-content: flex-${pos};`
+        `justify-content: ${
+          ['start', 'end'].includes(pos) ? 'flex-' + pos + ';' : pos
+        }`
       )
       expect(wrapper.html()).toMatchSnapshot()
     })

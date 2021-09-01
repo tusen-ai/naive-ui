@@ -2,15 +2,20 @@
 
 ## Pending
 
-### Fixes
-
-- Fix `n-input` chinese input method not correct while mouse leave the input in `clearable` is true, closes [#905](https://github.com/TuSimple/naive-ui/issues/905).
-- Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
 
 ### Feats
 
 - `n-cascader` add `onUpdateValue` prop.
 - `n-auto-complete` add `onUpdateValue` prop.
+- `n-data-table`'s column's `renderFilterMenu` add `hide` params.
+- `n-tree` & `n-tree-select` add `key-field` prop.
+- `n-tree` & `n-tree-select` add `label-field` prop.
+
+### Fixes
+
+- Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
+- Fix `n-input-number`'s `step` calculate error when the value is decimal, closes [#1007](https://github.com/TuSimple/naive-ui/issues/1007).
+- Fix `n-input` chinese input method not correct while mouse leave the input in `clearable` is true, closes [#905](https://github.com/TuSimple/naive-ui/issues/905).
 
 ## 2.16.7 (2021-08-27)
 
@@ -104,6 +109,7 @@
 - `n-button` add `text-color` prop.
 - `n-form` export `FormValidationError` type.
 - `n-popconfirm` support not show action components, closes [#770](https://github.com/TuSimple/naive-ui/issues/770).
+- `n-upload` add `list-type`， `show-preview-button`， `on-preview` and `create-thumbnail-url` prop.
 
 ### Fixes
 

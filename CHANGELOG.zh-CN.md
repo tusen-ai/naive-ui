@@ -2,15 +2,20 @@
 
 ## Pending
 
-### Fixes
-
-- 修复 `n-input` 在 `clearable` 为 `true` 时鼠标离开输入框时中文输入法不正确的问题，关闭 [#905](https://github.com/TuSimple/naive-ui/issues/905)
-- 修复 `n-layout` 的 `sider-placement` 属性在打包之后不生效，关闭 [#978](https://github.com/TuSimple/naive-ui/issues/978)
 
 ### Feats
 
 - `n-cascader` 新增 `onUpdateValue` 方法
 - `n-auto-complete` 新增 `onUpdateValue` 方法
+- `n-data-table` 的列的 `renderFilterMenu` 新增 hide 参数
+- `n-tree` 和 `n-tree-select` 新增 `key-field` 属性
+- `n-tree` 和 `n-tree-select` 新增 `label-field` 属性
+
+### Fixes
+
+- 修复 `n-layout` 的 `sider-placement` 属性在打包之后不生效，关闭 [#978](https://github.com/TuSimple/naive-ui/issues/978)
+- 修复 `n-input-number` 的 `step` 值为小数时计算错误，关闭 [#1007](https://github.com/TuSimple/naive-ui/issues/1007)
+- 修复 `n-input` 在 `clearable` 为 `true` 时鼠标离开输入框时中文输入法不正确的问题，关闭 [#905](https://github.com/TuSimple/naive-ui/issues/905)
 
 ## 2.16.7 (2021-08-27)
 
@@ -104,6 +109,7 @@
 - `n-button` 新增 `text-color` 属性
 - `n-form` 导出 `FormValidationError` 类型
 - `n-popconfirm` 支持不显示操作组件，关闭 [#770](https://github.com/TuSimple/naive-ui/issues/770)
+- `n-upload` 增加 `list-type`、 `show-preview-button`、 `on-preview` 和 `create-thumbnail-url` 属性
 
 ### Fixes
 

@@ -15,6 +15,7 @@ function traverse (
 export function keysWithFilter (
   nodes: TreeOption[],
   pattern: string,
+  keyField: string,
   filter: (pattern: string, node: TreeOption) => boolean
 ): {
     expandedKeys: Key[]
@@ -28,10 +29,10 @@ export function keysWithFilter (
     (node) => {
       path.push(node)
       if (filter(pattern, node)) {
-        highlightKeySet.add(node.key)
+        highlightKeySet.add((node as any)[keyField])
         for (let i = path.length - 2; i >= 0; --i) {
-          if (!keys.has(path[i].key)) {
-            keys.add(path[i].key)
+          if (!keys.has((path[i] as any)[keyField])) {
+            keys.add((path[i] as any)[keyField])
           } else {
             return
           }
@@ -53,11 +54,6 @@ if (typeof window !== 'undefined') {
   const emptyImage = new Image()
   emptyImage.src =
     'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
-}
-
-export const defaultFilter = (pattern: string, node: TreeOption): boolean => {
-  if (!pattern.length) return true
-  return node.label.toLowerCase().includes(pattern.toLowerCase())
 }
 
 export { emptyImage }

@@ -12,6 +12,8 @@ controlled
 on-finish
 default-files
 before-upload
+picture-card-style
+picture-style
 ```
 
 ## Props
@@ -29,6 +31,7 @@ before-upload
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |
 | file-list | `Array<UploadFile>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |
 | headers | `Object \| ({ file: UploadFile }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |
+| list-type | `string` | `'text'` | 文件列表的内建样式，`text`、`picture` 和 `picture-card` |
 | method | `string` | `'POST'` | HTTP 请求的方法 |
 | multiple | `boolean` | `false` | 是否支持多个文件 |
 | name | `string` | `'file'` | 文件在提交表单中的字段名 |
@@ -36,11 +39,14 @@ before-upload
 | show-remove-button | `boolean` | `true` | 是否显示删除按钮（在 finished 的时候展示），点击删除按钮会触发 `on-remove` 回调 |
 | show-retry-button | `boolean` | `true` | 是否显示重新上传按钮（在 error 时展示） |
 | show-file-list | `boolean` | `true` | 是否显示文件列表 |
+| show-preview-button | `boolean` | `true` | 是否显示预览按钮（在 `list-type` 为 `picture-card` 时展示） |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |
 | on-change | `(options: { file: UploadFile, fileList: Array<UploadFile>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |
 | on-finish | `(options: { file: UploadFile, event: Event }) => UploadFile \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFile 或者返回一个新的 UploadFile |
 | on-update:file-list | `(fileList: UploadFile[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |
 | on-before-upload | `(options: { file: UploadFile, fileList: UploadFile[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |
+| on-preview | `(file: FileInfo) => void` | `undefined` | 点击文件链接或预览按钮的回调函数 |
+| create-thumbnail-url | `(file: File) => Promise<thumbnailUrl: string>` | `undefined` | 自定义文件缩略图 |
 
 ### UploadFile Type
 
@@ -71,6 +77,6 @@ before-upload
 
 ### Upload Dragger Slots
 
-| 名称    | 参数 | 说明                                 |
-| ------- | ---- | ------------------------------------ |
+| 名称    | 参数 | 说明                                          |
+| ------- | ---- | --------------------------------------------- |
 | default | `()` | 上传拖动器的内容，使用可参考[拖拽上传](#drag) |
