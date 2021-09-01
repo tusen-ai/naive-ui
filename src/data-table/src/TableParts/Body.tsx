@@ -385,10 +385,6 @@ export default defineComponent({
             paginatedData.forEach((tmNode, rowIndex) => {
               rowIndexToKey[rowIndex] = tmNode.key
             })
-            // const sorterKey =
-            //   !!mergedSortState &&
-            //   mergedSortState.order &&
-            //   mergedSortState.columnKey
 
             let mergedData: RowRenderInfo[]
 
