@@ -67,4 +67,32 @@ describe('n-input-number', () => {
     expect(wrapper.find('.n-input-number-suffix').exists()).toBe(true)
     expect(wrapper.find('.n-input-number-suffix').text()).toBe('%')
   })
+  it('should work with decimal `step`', async () => {
+    const wrapper = mount(NInputNumber, {
+      props: {
+        defaultValue: 0.2,
+        min: 0,
+        step: 0.1
+      }
+    })
+    const input = wrapper.find('.n-input__input-el')
+    expect((input.element as HTMLInputElement).value).toEqual('0.2')
+    const buttons = wrapper.findAll('.n-input__suffix > button')
+    const minusBtn = buttons[0]
+    const addBtn = buttons[1]
+    let arr = [0.1, 0]
+    for (let i = 0; i < arr.length; i++) {
+      await minusBtn.trigger('click')
+      expect((input.element as HTMLInputElement).value).toEqual(arr[i].toString())
+    }
+    expect(minusBtn.classes()).toContain('n-button--disabled')
+    await wrapper.setProps({ step: 0.2 })
+    await wrapper.setProps({ max: 0.6 })
+    arr = [0.2, 0.4, 0.6]
+    for (let i = 0; i < arr.length; i++) {
+      await addBtn.trigger('click')
+      expect((input.element as HTMLInputElement).value).toEqual(arr[i].toString())
+    }
+    expect(addBtn.classes()).toContain('n-button--disabled')
+  })
 })

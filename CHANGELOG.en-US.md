@@ -13,6 +13,7 @@
 ### Fixes
 
 - Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
+- Fix `n-input-number`'s `step` calculate error when the value is decimal, closes [#1007](https://github.com/TuSimple/naive-ui/issues/1007).
 
 ## 2.16.7 (2021-08-27)
 
