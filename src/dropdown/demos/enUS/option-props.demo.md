@@ -1,6 +1,6 @@
-# Customize option props
+# Customize Option Props
 
-Maybe you want to customize option props.
+Bind whatever you want.
 
 ```html
 <n-dropdown trigger="hover" @select="handleSelect" :options="options">

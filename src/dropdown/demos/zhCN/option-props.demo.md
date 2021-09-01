@@ -1,6 +1,6 @@
 # 自定义选项属性
 
-可能你想要自定义选项属性。
+爱绑啥绑啥。
 
 ```html
 <n-dropdown trigger="hover" @select="handleSelect" :options="options">

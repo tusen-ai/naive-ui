@@ -14,6 +14,7 @@
 - `n-data-table` 的列的 `renderFilterMenu` 新增 hide 参数
 - `n-tree` 和 `n-tree-select` 新增 `key-field` 属性
 - `n-tree` 和 `n-tree-select` 新增 `label-field` 属性
+- `n-dropdown` 选项新增 `props` 属性，关闭 [#813](https://github.com/TuSimple/naive-ui/issues/813)
 
 ### Fixes
 
@@ -36,7 +37,6 @@
 ### Feats
 
 - `n-timeline` 新增 `horizontal` 属性，关闭 [#887](https://github.com/TuSimple/naive-ui/issues/887)
-- `n-dropdown` 选项新增 `props` 属性，关闭 [#813](https://github.com/TuSimple/naive-ui/issues/813)
 - `n-image` 新增 `preview-src` 属性，关闭 [#922](https://github.com/TuSimple/naive-ui/issues/922)
 - `n-dynamic-tags` 新增 `input` 和 `add` 插槽，关闭 [#499](https://github.com/TuSimple/naive-ui/issues/499)
 - `n-timeline-item` 新增 `color` 属性
