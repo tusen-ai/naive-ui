@@ -15,6 +15,7 @@
 - `n-tree` 和 `n-tree-select` 新增 `key-field` 属性
 - `n-tree` 和 `n-tree-select` 新增 `label-field` 属性
 - `n-dropdown` 选项新增 `props` 属性，关闭 [#813](https://github.com/TuSimple/naive-ui/issues/813)
+- `n-data-table` 支持按住 `shift` 进行多选操作
 
 ### Fixes
 
