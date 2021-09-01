@@ -20,13 +20,13 @@ row-props
 merge-cell
 filter-and-sorter
 multiple-sorter
-multiple-sorter-control
 select
 custom-select
 group-header
 controlled-page
 controlled-filter
 controlled-sorter
+controlled-multiple-sorter
 fixed-header
 fixed-header-column
 summary

@@ -1,5 +1,7 @@
 # 多列排序
 
+如果仅想使用多列排序的 UI，`sorter` 不传 `compare` 函数即可。
+
 ```html
 <n-space vertical :size="12">
   <n-space>
