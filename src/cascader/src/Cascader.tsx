@@ -629,12 +629,7 @@ export default defineComponent({
       const { multiple } = props
       const { value: mergedValue } = mergedValueRef
       if (multiple && Array.isArray(mergedValue)) {
-        const index = mergedValue.findIndex((value) => value === option.value)
-        if (~index) {
-          const newValue = Array.from(mergedValue)
-          newValue.splice(index, 1)
-          doUpdateValue(newValue)
-        }
+        doUncheck(option.value);
       } else {
         doUpdateValue(null)
       }

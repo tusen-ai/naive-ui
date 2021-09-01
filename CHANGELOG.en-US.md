@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Fixes
+
+- `n-cascader` 多选模式下点击 tag 删除子选项未更新 tree option `handleDeleteOption`
+
 ### Feats
 
 - `n-cascader` add `onUpdateValue` prop.
