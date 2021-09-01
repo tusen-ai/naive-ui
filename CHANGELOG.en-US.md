@@ -14,6 +14,7 @@
 - `n-data-table`'s column's `renderFilterMenu` add `hide` params.
 - `n-tree` & `n-tree-select` add `key-field` prop.
 - `n-tree` & `n-tree-select` add `label-field` prop.
+- `n-tree` & `n-tree-select` add `children-field` prop.
 - `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
 
 ### Fixes

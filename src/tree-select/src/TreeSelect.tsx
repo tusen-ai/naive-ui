@@ -195,13 +195,13 @@ export default defineComponent({
     const dataTreeMateRef = computed(() =>
       createTreeMate<TreeSelectOption>(
         props.options,
-        createTreeMateOptions(props.keyField)
+        createTreeMateOptions(props.keyField, props.childrenField)
       )
     )
     const displayTreeMateRef = computed(() =>
       createTreeMate<TreeSelectOption>(
         filteredTreeInfoRef.value.filteredTree,
-        createTreeMateOptions(props.keyField)
+        createTreeMateOptions(props.keyField, props.childrenField)
       )
     )
     const { value: initMergedValue } = mergedValueRef

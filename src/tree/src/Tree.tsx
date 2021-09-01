@@ -62,11 +62,15 @@ import style from './styles/index.cssr'
 const ITEM_SIZE = 30 // 24 + 3 + 3
 
 export function createTreeMateOptions<T> (
-  keyField: string
+  keyField: string,
+  childrenField: string
 ): TreeMateOptions<T, T, T> {
   return {
     getKey (node: T) {
       return (node as any)[keyField]
+    },
+    getChildren (node: T) {
+      return (node as any)[childrenField]
     },
     getDisabled (node: T) {
       return !!((node as any).disabled || (node as any).checkboxDisabled)
@@ -85,6 +89,10 @@ export const treeSharedProps = {
   labelField: {
     type: String,
     default: 'label'
+  },
+  childrenField: {
+    type: String,
+    default: 'children'
   },
   defaultExpandedKeys: {
     type: Array as PropType<Key[]>,
@@ -236,7 +244,7 @@ export default defineComponent({
       : computed(() =>
         createTreeMate<TreeOption>(
           props.data,
-          createTreeMateOptions(props.keyField)
+          createTreeMateOptions(props.keyField, props.childrenField)
         )
       )
     const dataTreeMateRef = props.internalDataTreeMate
