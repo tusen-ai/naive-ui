@@ -29,7 +29,7 @@ def say_hello():
 ```js
 import { defineComponent } from 'vue'
 export default defineComponent({
-  data () {
+  setup () {
     return {
       cppCode: `int main () {
   std::cout << "Hello Naive UI";
