@@ -21,14 +21,14 @@ def say_hello():
 `"
       language="python"
     />
-
     <n-code :code="cppCode" language="cpp" />
   </n-space>
 </div>
 ```
 
 ```js
-export default {
+import { defineComponent } from 'vue'
+export default defineComponent({
   data () {
     return {
       cppCode: `int main () {
@@ -37,5 +37,5 @@ export default {
 }`
     }
   }
-}
+})
 ```
