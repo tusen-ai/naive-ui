@@ -95,4 +95,27 @@ describe('n-popconfirm', () => {
     expect(onClick).toHaveBeenCalled()
     wrapper.unmount()
   })
+
+  it('should work with slot', async () => {
+    const wrapper = mount(NPopconfirm, {
+      attachTo: document.body,
+      slots: {
+        default: () => 'test-text',
+        trigger: () => h(NButton, null, { default: () => 'test-button' }),
+        action: () => 'test-action',
+        icon: () => 'test-icon'
+      }
+    })
+
+    await wrapper.find('button').trigger('click')
+    expect(document.querySelector('.n-popconfirm__icon')?.textContent).toBe(
+      'test-icon'
+    )
+    expect(
+      document.querySelector('.n-popconfirm__body')?.textContent
+    ).toContain('test-text')
+    expect(document.querySelector('.n-popconfirm__action')?.textContent).toBe(
+      'test-action'
+    )
+  })
 })
