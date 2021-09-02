@@ -204,8 +204,8 @@ export interface DataTableInjection {
   doUpdateSorter: (sorter: SortState | null) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
-  doCheck: (rowKey: RowKey) => void
-  doUncheck: (rowKey: RowKey) => void
+  doCheck: (rowKey: RowKey | RowKey[]) => void
+  doUncheck: (rowKey: RowKey | RowKey[]) => void
   handleTableHeaderScroll: (e: Event) => void
   handleTableBodyScroll: (e: Event) => void
   syncScrollState: (deltaX?: number, deltaY?: number) => void

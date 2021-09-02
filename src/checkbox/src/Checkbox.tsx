@@ -48,10 +48,10 @@ const checkboxProps = {
   },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:checked': [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+  MaybeArray<(value: boolean, e: MouseEvent | KeyboardEvent) => void>
   >,
   onUpdateChecked: [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+  MaybeArray<(value: boolean, e: MouseEvent | KeyboardEvent) => void>
   >,
   // private
   privateTableHeader: Boolean,
@@ -154,7 +154,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    function toggle (): void {
+    function toggle (e: MouseEvent | KeyboardEvent): void {
       if (NCheckboxGroup && props.value !== undefined) {
         NCheckboxGroup.toggleCheckbox(!renderedCheckedRef.value, props.value)
       } else {
@@ -165,17 +165,17 @@ export default defineComponent({
         } = props
         const { nTriggerFormInput, nTriggerFormChange } = formItem
         const nextChecked = !renderedCheckedRef.value
-        if (_onUpdateCheck) call(_onUpdateCheck, nextChecked)
-        if (onUpdateChecked) call(onUpdateChecked, nextChecked)
+        if (_onUpdateCheck) call(_onUpdateCheck, nextChecked, e)
+        if (onUpdateChecked) call(onUpdateChecked, nextChecked, e)
         if (onChange) call(onChange, nextChecked) // deprecated
         nTriggerFormInput()
         nTriggerFormChange()
         uncontrolledCheckedRef.value = nextChecked
       }
     }
-    function handleClick (): void {
+    function handleClick (e: MouseEvent): void {
       if (!mergedDisabledRef.value) {
-        toggle()
+        toggle(e)
       }
     }
     function handleKeyUp (e: KeyboardEvent): void {
@@ -184,7 +184,7 @@ export default defineComponent({
         case 'Space':
         case 'Enter':
         case 'NumpadEnter':
-          toggle()
+          toggle(e)
       }
     }
     function handleKeyDown (e: KeyboardEvent): void {
@@ -289,6 +289,13 @@ export default defineComponent({
         onKeyup={handleKeyUp}
         onKeydown={handleKeyDown}
         onClick={handleClick}
+        onMousedown={() => {
+          const userCallBack = window.onselectstart
+          window.onselectstart = () => false
+          setTimeout(() => {
+            window.onselectstart = userCallBack
+          }, 0)
+        }}
       >
         <div class={`${mergedClsPrefix}-checkbox-box`}>
           <NIconSwitchTransition>

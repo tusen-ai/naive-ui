@@ -16,6 +16,7 @@
 - `n-tree` & `n-tree-select` add `label-field` prop.
 - `n-tree` & `n-tree-select` add `children-field` prop.
 - `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
+- `n-data-table` supports multi-selection by holding down `shift`, closes [#554](https://github.com/TuSimple/naive-ui/issues/554).
 
 ### Fixes
 
