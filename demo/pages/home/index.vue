@@ -4,50 +4,56 @@
     :position="isMobile ? 'static' : 'absolute'"
     :style="isMobile ? undefined : 'top: var(--header-height);'"
   >
-    <div class="banner" style="overflow: hidden">
-      <right-image class="right-image" v-if="!(isMobile || isTablet)" />
-      <n-h1 :style="titleStyle" class="naive-title">
-        <span
-          @mouseenter="handleTitleMouseEnter"
-          @mouseleave="handleTitleMouseLeave"
-          >Na{{ hover ? 'ï' : 'i' }}ve UI</span
-        >
-      </n-h1>
-      <n-p style="font-size: 16px; margin-top: 0; margin-bottom: 0">
-        {{ t('intro1') }}
-      </n-p>
-      <n-p
-        style="
-          font-size: 16px;
-          margin-bottom: 4px;
-          margin-top: 4px;
-          font-weight: 500;
-        "
-      >
-        {{ t('intro2') }}
-      </n-p>
-      <n-p style="font-size: 16px; margin-top: 0">
-        {{ t('intro3') }}
-      </n-p>
-      <div>
-        <n-button
-          type="default"
-          size="large"
-          style="margin-right: 12px"
-          @click="handleThemeChangeClick"
-        >
-          {{ t('intro4') }}
-        </n-button>
-        <n-button
-          type="primary"
-          :ghost="theme === 'dark'"
-          size="large"
-          @click="handleStartClick"
-        >
-          {{ t('start') }}
-        </n-button>
+    <div class="banner" :class="`banner--${theme}`" style="overflow: hidden">
+      <component class="banner-background" :is="backgroundImage"/>
+      <div class="banner-right">
+        <div class="banner-right__content">
+          <n-h1 :style="titleStyle" class="naive-title">
+            <span
+              @mouseenter="handleTitleMouseEnter"
+              @mouseleave="handleTitleMouseLeave"
+              >Na{{ hover ? 'ï' : 'i' }}ve UI</span
+            >
+          </n-h1>
+          <n-p style="font-size: 16px; margin-top: 0; margin-bottom: 0">
+            {{ t('intro1') }}
+          </n-p>
+          <n-p
+            style="
+              font-size: 16px;
+              margin-bottom: 4px;
+              margin-top: 4px;
+              font-weight: 500;
+            "
+          >
+            {{ t('intro2') }}
+          </n-p>
+          <n-p style="font-size: 16px; margin-top: 0">
+            {{ t('intro3') }}
+          </n-p>
+          <div>
+            <n-button
+              type="default"
+              size="large"
+              style="margin-right: 12px"
+              @click="handleThemeChangeClick"
+            >
+              {{ t('intro4') }}
+            </n-button>
+            <n-button
+              type="primary"
+              :ghost="theme === 'dark'"
+              size="large"
+              @click="handleStartClick"
+            >
+              {{ t('start') }}
+            </n-button>
+          </div>
+        </div>
       </div>
-      <left-image class="left-image" />
+      <div class="banner-left">
+        <div class="banner-left__image"/>
+      </div>
     </div>
     <n-layout-footer>
       <landing-footer centered />
@@ -58,23 +64,28 @@
 <script>
 import { computed } from 'vue'
 import LandingFooter from './Footer.vue'
-import leftImage from './Left.vue'
-import rightImage from './Right.vue'
 import { i18n, useIsMobile, useIsTablet } from '../../utils/composables'
 import { useThemeName } from '../../store'
+import backgroundImageDark from './BackgroundDark.vue'
+import backgroundImageLight from './BackgroundLight.vue'
 
 export default {
   components: {
     LandingFooter,
-    leftImage,
-    rightImage
+    backgroundImageDark,
+    backgroundImageLight
   },
   setup () {
     const isMobileRef = useIsMobile()
+    const themeRef = useThemeName()
+    const backgroundImageRef = computed(() => {
+      return themeRef.value === 'light' ? backgroundImageLight : backgroundImageDark
+    })
     return {
       isMobile: isMobileRef,
       isTablet: useIsTablet(),
-      theme: useThemeName(),
+      theme: themeRef,
+      backgroundImage: backgroundImageRef,
       titleStyle: computed(() => {
         if (isMobileRef.value) {
           return 'margin-top: 0; font-size: 64px !important'
@@ -141,52 +152,51 @@ export default {
   justify-content: center;
 }
 
-.banner::after {
-  content: '';
+.banner-background {
+  position: absolute;
   width: 100%;
-  height: 64px;
+  height: 100%;
+}
+
+.banner-left {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.banner-left__image {
+  width: 80%;
+  background-size: 100% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.banner--light .banner-left__image {
+  background-image: url('../../assets/images/banner/left_image_light.png');
+}
+
+.banner--dark .banner-left__image {
+  background-image: url('../../assets/images/banner/left_image_dark.png');
+}
+
+.banner-right {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.banner-right__content {
+  text-align: left;
 }
 
 .naive-title {
   line-height: 1;
   font-family: Metropolis, sans-serif;
   margin-bottom: 18px !important;
-}
-
-@media only screen and (max-width: 1920px) {
-  .left-image {
-    right: calc(50% + 270px);
-    width: calc(50% - 270px);
-    min-width: 440px;
-  }
-  .right-image {
-    left: calc(50% + 270px);
-    width: calc(50% - 270px);
-    min-width: 440px;
-  }
-}
-
-@media only screen and (min-width: 1920px) {
-  .left-image {
-    left: 0;
-    width: 700px;
-  }
-  .right-image {
-    right: 0;
-    width: 700px;
-  }
-}
-
-.left-image {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.right-image {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 @media only screen and (max-width: 1023px) {
@@ -200,13 +210,37 @@ export default {
     min-height: 550px;
     height: calc(100vh - 124px);
   }
-  .left-image {
+
+  .banner-right {
+    position: static;
+    width: 100%;
+  }
+
+  .banner-background {
+    display: none;
+  }
+
+  .banner-left {
+    width: 100%;
+    height: 100%;
     position: relative;
-    left: -16px;
-    min-width: unset;
-    width: 300px;
-    top: 8px;
-    transform: none;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+  }
+
+  .banner-left__image {
+    width: 100%;
+    background-position: center;
+    background-size: auto 100%;
+  }
+
+  .banner--light .banner-left__image {
+    background-image: url('../../assets/images/banner/image_mobile_light.png');
+  }
+
+  .banner--dark .banner-left__image {
+    background-image: url('../../assets/images/banner/image_mobile_dark.png');
   }
 }
 </style>

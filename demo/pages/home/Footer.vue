@@ -82,12 +82,19 @@
     </div>
     <n-divider class="footer-divider" />
     <div style="text-align: center; padding: 20px">
-      <n-text depth="3">Naive UI {{ version }} · Made by TuSimple</n-text>
+      <span class="footer-logo" :class="`footer-logo--${theme}`" />
+      <div style="margin-top: 8px;">
+        <n-text depth="2">Naive UI {{ version }} · Made by TuSimple</n-text>
+      </div>
+      <div style="margin-top: 8px;">
+        <n-text depth="3">Designed by TuSimple UED  Copyright © 2021 TuSimple Infrastructure</n-text>
+      </div>
     </div>
   </n-layout-footer>
 </template>
 
 <script>
+import { useThemeName } from '../../store'
 import { i18n } from '../../utils/composables'
 import { push } from '../../store'
 import { repoUrl } from '../../utils/github-url'
@@ -98,10 +105,12 @@ export default {
     centered: Boolean
   },
   setup () {
+    const themeRef = useThemeName()
     return {
       version,
       repoUrl,
       push,
+      theme: themeRef,
       ...i18n({
         'zh-CN': {
           resources: '资源',
@@ -175,6 +184,22 @@ export default {
 
 .col-header {
   white-space: nowrap;
+}
+
+.footer-logo {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.footer-logo--dark {
+  background-image: url('../../assets/images/tusimple_logo_dark.png');
+}
+
+.footer-logo--light {
+  background-image: url('../../assets/images/tusimple_logo_light.png');
 }
 
 @media only screen and (min-width: 1024px) {

@@ -45,14 +45,46 @@
       </div>
     </n-popover>
     <div class="nav-end" v-else>
-      <n-button text class="nav-picker" @click="handleLocaleUpdate">
+      <n-button 
+        text
+        icon-placement="right"
+        class="nav-picker" 
+        @click="handleLocaleUpdate" 
+      >
         {{ localeLabelMap[locale] }}
+        <template #icon>
+          <n-icon>
+            <swap-horizontal />
+          </n-icon>
+        </template>
       </n-button>
-      <n-button text class="nav-picker" @click="handleThemeUpdate">
+      <n-button 
+        text
+        icon-placement="right"
+        class="nav-picker" 
+        @click="handleThemeUpdate"
+      >
         {{ themeLabelMap[theme] }}
+        <template #icon>
+          <n-icon>
+            <swap-horizontal />
+          </n-icon>
+        </template>
       </n-button>
-      <n-button tag="a" text class="nav-picker" :href="repoUrl" target="_blank">
+      <n-button 
+        tag="a"
+        icon-placement="right"
+        text
+        class="nav-picker" 
+        :href="repoUrl" 
+        target="_blank"
+      >
         GitHub
+        <template #icon>
+          <n-icon>
+            <logo-github />
+          </n-icon>
+        </template>
       </n-button>
       <n-text class="nav-picker">
         {{ version }}
@@ -80,8 +112,8 @@
 <script>
 import { computed, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useMessage, version } from 'naive-ui'
-import { MenuOutline } from '@vicons/ionicons5'
+import { useMessage, version, useThemeVars } from 'naive-ui'
+import { MenuOutline, SwapHorizontal, LogoGithub } from '@vicons/ionicons5'
 import { repoUrl } from './utils/github-url'
 import { i18n, useIsMobile, useIsTablet } from './utils/composables'
 import { findMenuValue } from './utils/route'
@@ -136,7 +168,9 @@ const locales = {
 export default {
   name: 'SiteHeader',
   components: {
-    MenuOutline
+    MenuOutline,
+    SwapHorizontal,
+    LogoGithub
   },
   setup () {
     const message = useMessage()
@@ -381,7 +415,8 @@ export default {
               'grid-template-columns':
                 'calc(272px - var(--side-padding)) 1fr auto'
             }
-      })
+      }),
+      themeVars: useThemeVars()
     }
   }
 }
