@@ -7,7 +7,7 @@
 ## 演示
 
 <n-alert type="warning" title="注意" style="margin-bottom: 16px;">
-  每一行数据都要有唯一的 key，否则要在 table 上声明 <n-text code>row-key</n-text> 属性
+  传入 <n-text code>data</n-text> 属性的数组的每一项都代表渲染的一行数据，每一行数据都要有唯一的 <n-text code>key</n-text>，否则需要在 table 上声明 <n-text code>row-key</n-text> 属性。
 </n-alert>
 
 ```demo
@@ -65,8 +65,8 @@ scroll-debug
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | 自定义行属性 |
 | scroll-x | `number \| string` | `undefined` | 表格内容的横向宽度，如果列被水平固定了，则需要设定它 |
-| single-column | `boolean` | `false` | 是否展示为一列（true 时每一列都有 border-right） |
-| single-line | `boolean` | `true` | 是否展示为一行（true 时每一行都有 border-bottom） |
+| single-column | `boolean` | `false` | 列内容是否为一个整体，当参数为`true`时，则没有`border-bottom` |
+| single-line | `boolean` | `true` | 行内容是否为一个整体，当参数值为`true`时，则没有`border-right` |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |
 | summary | `CreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#CreateSummary-Type">CreateSummary Type</n-a> |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellipsis` 或 `max-height` 的情况下固定为 `'fixed'` |
@@ -98,11 +98,11 @@ scroll-debug
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值数组。如果不做设定，这一列的过滤行为将是非受控的（过滤器多选时生效） |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | filter 的 options 数据 |
 | fixed | `'left \| 'right' \| false` | `false` | 该列是否需要 fixed |
-| key | `string \| number` | `undefined` | 这一列的 key，在表格未设定 row-key 的时候是**必须**的。 |
+| key | `string \| number` | `undefined` | 这一列的 key，不可重复。 |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | 自定义选择项的选项，只对 `type='selection'` 生效 |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |
 | renderExpand | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 展开区域的渲染函数，仅在 `type` 为 `'expand'` 的时候生效 |
-| renderFilterMenu | `() => VNodeChild` | `undefined` | 渲染函数，渲染这一列的过滤器菜单 |
+| renderFilterMenu | `(actions: { hide: () => void }) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的过滤器菜单 |
 | renderFilterIcon | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | 渲染函数，渲染过滤器图标 |
 | renderFilter | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | 渲染函数，渲染过滤器触发元素 |
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的 row span |

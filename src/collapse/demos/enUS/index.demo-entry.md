@@ -12,6 +12,7 @@ nested
 display-directive
 item-header-click
 customize-icon
+default-expanded
 ```
 
 ## Props
@@ -20,12 +21,12 @@ customize-icon
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| accordion | `boolean` | `false` | Whether to only allow on panel open. |
-| arrow-placement | `'left' \| 'right'` | `'left'` | Arrow placement. |
-| default-expanded-names | `string \| number \| Array<string \| number> \| null` | `null` | Panel expanded in uncontrolled mode. If `accrodion` is set, it should be a non-array value. |
-| display-directive | `'if' \| 'show'` | `'if'` | The display directive to use when its inner `n-collapse-item` render content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. |
-| expanded-names | `string \| number \| Array<string \| number> \| null` | `undefined` | Expanded panel in controlled mode. If `accrodion` is set, it should be a non-array value. |
-| on-update:expanded-names | `(expandedNames: Array<string \| number> \| string \| number \| null) => void` | `undefined` | Callback function triggered when expanded-names changes. |
+| accordion | `boolean` | `false` | Only allow one panel open at a time. |
+| arrow-placement | `'left' \| 'right'` | `'left'` | Arrow placement side of text. |
+| default-expanded-names | `string \| number \| Array<string \| number> \| null` | `null` | Pre-expanded panels that can still be collapsed. If `accordion` mode is set, it should be a non-array value. |
+| display-directive | `'if' \| 'show'` | `'if'` | The display directive to use when `n-collapse-item` renders content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. |
+| expanded-names | `string \| number \| Array<string \| number> \| null` | `undefined` | Expanded panels that cannot be collapsed. If `accordion` mode is set, it should be a non-array value. |
+| on-update:expanded-names | `(expandedNames: Array<string \| number> \| string \| number \| null) => void` | `undefined` | Callback function triggered when the expanded-names array is changed. |
 | on-item-header-click | `(data: { name: string \| number, expanded: boolean, event: MouseEvent }) => void` | `undefined` | Callback function triggered when the title is clicked. |
 
 ### Collapse Item Props
@@ -33,7 +34,7 @@ customize-icon
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | display-directive | `'if' \| 'show'` | `undefined` | The display directive to use when it is rendering its content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. When it is set to `undefined` the value will follow its outer `n-collapse`. |
-| name | `string \| number` | random string | Name. |
+| name | `string \| number` | random string | Item identifier (should be unique). |
 | title | `string` | `undefined` | Title. |
 
 ## Slots

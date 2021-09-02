@@ -7,6 +7,47 @@ describe('n-carousel', () => {
   it('should work with import on demand', () => {
     mount(NCarousel)
   })
+
+  it('should work with `autoplay` and `interval` prop', async () => {
+    const wrapper = mount(NCarousel, {
+      slots: {
+        default: () => {
+          return [...Array(3).keys()].map((i) => {
+            return h('div', {}, i.toString())
+          })
+        }
+      }
+    })
+
+    await wrapper.setProps({ autoplay: true, interval: 50 })
+
+    await sleep(10)
+    ;([0, 1, 2, 3, 4] as const).forEach((i) => {
+      if (i === 1) {
+        expect(
+          wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
+        ).toBe('false')
+      } else {
+        expect(
+          wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
+        ).toBe('true')
+      }
+    })
+
+    await sleep(60)
+    ;([0, 1, 2, 3, 4] as const).forEach((i) => {
+      if (i === 2) {
+        expect(
+          wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
+        ).toBe('false')
+      } else {
+        expect(
+          wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
+        ).toBe('true')
+      }
+    })
+  })
+
   it('should work with `dotPlacement` prop', async () => {
     const wrapper = mount(NCarousel)
 

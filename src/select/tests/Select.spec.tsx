@@ -1,4 +1,4 @@
-import { h, VNode } from 'vue'
+import { h, nextTick, VNode } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NSelect, SelectProps } from '../index'
 import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
@@ -176,7 +176,7 @@ describe('n-select', () => {
     })
   })
 
-  it('should work with `render tag` prop', async () => {
+  it('should work with `render-tag` prop', async () => {
     const options = [
       {
         label: 'test',
@@ -216,5 +216,105 @@ describe('n-select', () => {
     expect(wrapper.findComponent(NTag).props('type')).toContain('success')
     await wrapper.find('.n-tag__close').trigger('click')
     expect(wrapper.findComponent(NTag).exists()).toBe(false)
+  })
+
+  it('should work with `render-label` prop', async () => {
+    const options = [
+      {
+        label: 'test',
+        value: 'test'
+      }
+    ]
+
+    const wrapper = mount(NSelect, {
+      attachTo: document.body,
+      props: {
+        defaultValue: 'test',
+        options: options,
+        virtualScroll: false,
+        renderLabel: (option: SelectOption) => {
+          return 'render-' + String(option.label)
+        }
+      }
+    })
+
+    expect(wrapper.find('.n-base-selection-label__input').text()).toBe(
+      'render-test'
+    )
+    await wrapper.setProps({ show: true })
+    await nextTick()
+    expect(
+      document.querySelector('.n-base-select-option--selected')?.innerHTML
+    ).toContain('render-test')
+  })
+
+  it('should work with `disabled` prop', async () => {
+    const wrapper = mount(NSelect)
+
+    expect(wrapper.find('.n-base-selection').classes()).not.toContain(
+      'n-base-selection--disabled'
+    )
+    await wrapper.setProps({
+      disabled: true
+    })
+    expect(wrapper.find('.n-base-selection').classes()).toContain(
+      'n-base-selection--disabled'
+    )
+  })
+
+  it('should work with `filterable` prop', async () => {
+    const wrapper = mount(NSelect)
+
+    expect(wrapper.find('input').exists()).not.toBe(true)
+    expect(wrapper.find('.n-base-selection-label__input').exists()).not.toBe(
+      true
+    )
+    await wrapper.setProps({
+      filterable: true
+    })
+    expect(wrapper.find('input').exists()).toBe(true)
+    expect(wrapper.find('.n-base-selection-label__input').exists()).toBe(true)
+  })
+
+  it('should work with `loading` prop', async () => {
+    const wrapper = mount(NSelect)
+
+    expect(wrapper.find('.n-base-loading__icon').exists()).not.toBe(true)
+    await wrapper.setProps({
+      loading: true
+    })
+    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
+  })
+
+  it('should work with `multiple` prop', async () => {
+    const wrapper = mount(NSelect)
+
+    expect(wrapper.find('.n-base-selection').classes()).not.toContain(
+      'n-base-selection--multiple'
+    )
+    await wrapper.setProps({
+      multiple: true
+    })
+    expect(wrapper.find('.n-base-selection').classes()).toContain(
+      'n-base-selection--multiple'
+    )
+  })
+
+  it('should work with `placeholder` prop', async () => {
+    const wrapper = mount(NSelect, {
+      props: {
+        placeholder: 'test'
+      }
+    })
+    expect(wrapper.find('.n-base-selection-placeholder').text()).toBe('test')
+  })
+
+  it('should work with `size` prop', async () => {
+    ;(['small', 'medium', 'large'] as const).forEach((i) => {
+      const wrapper = mount(NSelect, { props: { size: i } })
+      expect(
+        wrapper.find('.n-base-selection').attributes('style')
+      ).toMatchSnapshot()
+    })
   })
 })

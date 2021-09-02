@@ -20,6 +20,14 @@
         <n-button text tag="a" target="_blank" href="https://www.xicons.org">{{
           t('icons')
         }}</n-button>
+        <n-button
+          text
+          tag="a"
+          target="_blank"
+          href="https://github.com/jekip/naive-ui-admin"
+        >
+          Naive UI Admin
+        </n-button>
       </div>
       <div class="footer-links-col">
         <n-text depth="1" class="col-header">{{ t('help') }}</n-text>

@@ -1,6 +1,8 @@
 # Line Clamp
 
-Naive-ui provide multiple line ellipsis based on `-webkit-line-clamp`. See [caniuse](https://caniuse.com/?search=line-clamp) for compatibility.
+Naive-ui provides multiple line ellipsis based on `-webkit-line-clamp`.
+
+See [caniuse](https://caniuse.com/?search=line-clamp) for compatibility.
 
 ```html
 <n-ellipsis :line-clamp="2">

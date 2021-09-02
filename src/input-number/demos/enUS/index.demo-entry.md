@@ -21,6 +21,7 @@ show-button
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | bordered | `boolean` | `true` | Whether to show the border. |
+| clearable | `boolean` | `false` | Whether the input is clearable. |
 | default-value | `number \| null` | `null` | Default value in uncontrolled mode. |
 | disabled | `boolean` | `false` | Whether to disable the input. |
 | max | `number` | `undefined` | The max value. |
@@ -32,6 +33,7 @@ show-button
 | validator | `(value) => boolean` | `undefined` | Setup custom validation. |
 | value | `number \| null` | `undefined` | Value in controlled mode. |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | Callback when blur. |
+| on-clear | `() => void` | `undefined` | Callback triggered when clear. |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | Callback when focused. |
 | on-update:value | `(value: number \| null) => void` | `undefined` | Callback when the component's value changes. |
 

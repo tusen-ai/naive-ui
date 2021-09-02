@@ -42,10 +42,12 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  clearable: Boolean,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
@@ -92,6 +94,13 @@ export default defineComponent({
       uncontrolledValueRef
     )
     const displayedValueRef = ref('')
+    const precisionRef = computed(() => {
+      const precisions = [props.min, props.max, props.step].map((item) => {
+        const fraction = String(item).split('.')[1]
+        return fraction ? fraction.length : 0
+      })
+      return Math.max(...precisions)
+    })
     const mergedPlaceholderRef = useMemo(() => {
       const { placeholder } = props
       if (placeholder !== undefined) return placeholder
@@ -141,7 +150,7 @@ export default defineComponent({
         return null
       }
       if (validator(parsedValue)) {
-        let nextValue = parsedValue + offset
+        let nextValue = parseFloat((parsedValue + offset).toFixed(precisionRef.value))
         if (validator(nextValue)) {
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
@@ -229,6 +238,10 @@ export default defineComponent({
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
     }
+    function doClear (e: MouseEvent): void {
+      const { onClear } = props
+      if (onClear) call(onClear, e)
+    }
     function doAdd (): void {
       const { value: addable } = addableRef
       if (!addable) return
@@ -268,6 +281,10 @@ export default defineComponent({
       } else {
         return 0
       }
+    }
+    function handleClear (e: MouseEvent): void {
+      doClear(e)
+      doUpdateValue(null)
     }
     function handleMouseDown (e: MouseEvent): void {
       if (addButtonInstRef.value?.$el.contains(e.target as Node)) {
@@ -327,6 +344,7 @@ export default defineComponent({
       minusable: minusableRef,
       handleFocus,
       handleBlur,
+      handleClear,
       handleMouseDown,
       handleAddClick,
       handleMinusClick,
@@ -373,6 +391,8 @@ export default defineComponent({
           onBlur={this.handleBlur}
           onKeydown={this.handleKeyDown}
           onMousedown={this.handleMouseDown}
+          onClear={this.handleClear}
+          clearable={this.clearable}
         >
           {{
             _: 2, // input number has dynamic slots

@@ -1,6 +1,6 @@
 # Shape
 
-Button has different shapes.
+Buttons can have different shapes.
 
 ```html
 <n-space>

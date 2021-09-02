@@ -10,10 +10,10 @@
 ```
 
 ```js
-import { h, ref } from 'vue'
+import { h, ref, defineComponent } from 'vue'
 import { NAvatar, useNotification } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const notification = useNotification()
     const nRef = ref(null)
@@ -56,5 +56,5 @@ Hold each other close the whole night through`,
       }
     }
   }
-}
+})
 ```

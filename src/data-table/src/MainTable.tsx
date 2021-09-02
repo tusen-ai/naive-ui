@@ -105,6 +105,7 @@ export default defineComponent({
           ref="bodyInstRef"
           style={this.bodyStyle}
           showHeader={headerInBody}
+          flexHeight={flexHeight}
           onResize={this.handleBodyResize}
         />
         {renderSlot(this.$slots, 'default')}

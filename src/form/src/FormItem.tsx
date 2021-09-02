@@ -13,7 +13,11 @@ import {
   Transition,
   renderSlot
 } from 'vue'
-import Schema, { ErrorList, RuleItem, ValidateOption } from 'async-validator'
+import Schema, {
+  ValidateError,
+  RuleItem,
+  ValidateOption
+} from 'async-validator'
 import { get } from 'lodash-es'
 import { createId } from 'seemly'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
@@ -47,24 +51,15 @@ import {
 
 export const formItemProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
-  label: {
-    type: [String, Boolean] as PropType<string | false | undefined>,
-    default: undefined
-  },
+  label: String,
   labelWidth: [Number, String] as PropType<string | number>,
   labelStyle: [String, Object] as PropType<CSSProperties | string>,
   labelAlign: String as PropType<LabelAlign>,
   labelPlacement: String as PropType<LabelPlacement>,
   path: String,
-  first: {
-    type: Boolean,
-    default: false
-  },
+  first: Boolean,
   rulePath: String,
-  required: {
-    type: Boolean,
-    default: false
-  },
+  required: Boolean,
   showRequireMark: {
     type: [Boolean, String] as PropType<'left' | 'right' | boolean>,
     default: undefined
@@ -75,12 +70,13 @@ export const formItemProps = {
   },
   rule: [Object, Array] as PropType<FormItemRule | FormItemRule[]>,
   size: String as PropType<'small' | 'medium' | 'large'>,
-  ignorePathChange: {
-    type: Boolean,
-    default: false
-  },
+  ignorePathChange: Boolean,
   validationStatus: String as PropType<'error' | 'warning' | 'success'>,
-  feedback: String
+  feedback: String,
+  showLabel: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  }
 } as const
 
 export type FormItemSetupProps = ExtractPropTypes<typeof formItemProps>
@@ -199,7 +195,7 @@ export default defineComponent({
       void internalValidate('input')
     }
     // Resolve : ()
-    // Reject  : (errors: AsyncValidator.ErrorList)
+    // Reject  : (errors: AsyncValidator.ValidateError[])
     async function validate (options: FormItemValidateOptions): Promise<void>
     async function validate (
       trigger?: string | null,
@@ -252,7 +248,7 @@ export default defineComponent({
       }
     ): Promise<{
       valid: boolean
-      errors?: ErrorList
+      errors?: ValidateError[]
     }> => {
       const { path } = props
       if (!options) {
@@ -293,19 +289,21 @@ export default defineComponent({
           return shallowClonedRule
         })
       if (!activeRules.length) {
-        return Promise.resolve({
+        return await Promise.resolve({
           valid: true
         })
       }
       const mergedPath = path ?? '__n_no_path__'
       const validator = new Schema({ [mergedPath]: activeRules as RuleItem[] })
-      return new Promise((resolve) => {
+      return await new Promise((resolve) => {
         void validator.validate(
           { [mergedPath]: value },
           options,
           (errors, fields) => {
             if (errors?.length) {
-              explainsRef.value = errors.map((error) => error.message)
+              explainsRef.value = errors.map(
+                (error: ValidateError) => error?.message || ''
+              )
               validationErroredRef.value = true
               resolve({
                 valid: false,
@@ -399,36 +397,37 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
+    const { $slots, mergedClsPrefix, mergedShowLabel, mergedShowRequireMark } =
+      this
     return (
       <div
         class={[
           `${mergedClsPrefix}-form-item`,
           `${mergedClsPrefix}-form-item--${this.mergedSize}-size`,
           `${mergedClsPrefix}-form-item--${this.mergedLabelPlacement}-labelled`,
-          this.label === false && `${mergedClsPrefix}-form-item--no-label`
+          !mergedShowLabel && `${mergedClsPrefix}-form-item--no-label`
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {this.label || $slots.label ? (
+        {mergedShowLabel && (this.label || $slots.label) ? (
           <label
             class={`${mergedClsPrefix}-form-item-label`}
             style={this.mergedLabelStyle as any}
           >
             {/* undefined || 'right' || true || false */}
-            {this.mergedShowRequireMark !== 'left'
+            {mergedShowRequireMark !== 'left'
               ? renderSlot($slots, 'label', undefined, () => [this.label])
               : null}
             {(
-              this.mergedShowRequireMark !== undefined
-                ? this.mergedShowRequireMark
+              mergedShowRequireMark !== undefined
+                ? mergedShowRequireMark
                 : this.mergedRequired
             ) ? (
               <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
-                {this.mergedShowRequireMark !== 'left' ? '\u00A0*' : '*\u00A0'}
+                {mergedShowRequireMark !== 'left' ? '\u00A0*' : '*\u00A0'}
               </span>
                 ) : null}
-            {this.mergedShowRequireMark === 'left'
+            {mergedShowRequireMark === 'left'
               ? renderSlot($slots, 'label', undefined, () => [this.label])
               : null}
           </label>

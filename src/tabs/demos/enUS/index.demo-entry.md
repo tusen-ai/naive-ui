@@ -15,7 +15,7 @@ addable
 line-debug
 ```
 
-## Props
+## API
 
 ### Tabs Props
 
@@ -26,7 +26,6 @@ line-debug
 | default-value | `string \| number` | `undefined` | Default value in uncontrolled mode. |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly'` | `undefined` | Justify-content value of `flex` layout. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of tabs. |
-| show-divider | `boolean` | `false` | Whether to show divider of tabs. Only works when `type` is `line`. |
 | pane-style | `string \| object` | `undefined` | Style of the pane. |
 | tab-style | `string \| object` | `undefined` | Style of the tab. |
 | tabs-padding | `number` | `0` | Left & right `padding` of the group of tabs. |
@@ -36,7 +35,7 @@ line-debug
 | on-close | `(name: string \| number) => void` | `undefined` | Callback function triggered when close tag. |
 | on-update:value | `(value: string \| number) => void` | `undefined` | Callback function triggered when the value changes. |
 
-### Tab Pane Props
+### TabPane Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -46,8 +45,6 @@ line-debug
 | tab | `string \| VNode \| () => VNodeChild` | `undefined` | Tab label. |
 | name | `string \| number` | `undefined` | Required, the name of the tab. |
 
-## Slots
-
 ### Tabs Slots
 
 | Name    | Parameters | Description   |
@@ -56,7 +53,7 @@ line-debug
 | prefix  | `()`       | Tabs prefix.  |
 | suffix  | `()`       | Tabs suffix.  |
 
-### Tab Pane Slots
+### TabPane Slots
 
 | Name    | Parameters | Description        |
 | ------- | ---------- | ------------------ |

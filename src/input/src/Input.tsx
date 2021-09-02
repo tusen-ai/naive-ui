@@ -17,7 +17,7 @@ import {
   InputHTMLAttributes,
   TextareaHTMLAttributes
 } from 'vue'
-import { useMergedState } from 'vooks'
+import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
 import { NBaseClear, NBaseIcon, NBaseSuffix } from '../../_internal'
@@ -35,7 +35,7 @@ import {
   InputWrappedRef,
   inputInjectionKey
 } from './interface'
-import { len } from './utils'
+import { len, isEmptyValue } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
 
@@ -189,13 +189,15 @@ export default defineComponent({
         return [placeholder] as [string]
       }
     })
+
     const showPlaceholder1Ref = computed(() => {
       const { value: isComposing } = isComposingRef
       const { value: mergedValue } = mergedValueRef
       const { value: mergedPlaceholder } = mergedPlaceholderRef
       return (
         !isComposing &&
-        (!mergedValue || (Array.isArray(mergedValue) && !mergedValue[0])) &&
+        (isEmptyValue(mergedValue) ||
+          (Array.isArray(mergedValue) && isEmptyValue(mergedValue[0]))) &&
         mergedPlaceholder[0]
       )
     })
@@ -206,11 +208,16 @@ export default defineComponent({
       return (
         !isComposing &&
         mergedPlaceholder[1] &&
-        (!mergedValue || (Array.isArray(mergedValue) && !mergedValue[1]))
+        (isEmptyValue(mergedValue) ||
+          (Array.isArray(mergedValue) && isEmptyValue(mergedValue[1])))
       )
     })
+    // focus
+    const mergedFocusRef = useMemo(() => {
+      return props.internalForceFocus || focusedRef.value
+    })
     // clear
-    const showClearButton = computed(() => {
+    const showClearButton = useMemo(() => {
       if (
         mergedDisabledRef.value ||
         props.readonly ||
@@ -235,10 +242,6 @@ export default defineComponent({
     })
     // passwordVisible
     const passwordVisibleRef = ref<boolean>(false)
-    // focus
-    const mergedFocusRef = computed(() => {
-      return props.internalForceFocus || focusedRef.value
-    })
     // text-decoration
     const textDecorationStyleRef = computed(() => {
       const { textDecoration } = props
@@ -400,7 +403,7 @@ export default defineComponent({
       }
       // force update to sync input's view with value
       // if not set, after input, input value won't sync with dom input value
-      (vm.$forceUpdate as any)()
+      ;(vm.$forceUpdate as any)()
     }
     function handleInputBlur (e: FocusEvent): void {
       doUpdateValueBlur(e)

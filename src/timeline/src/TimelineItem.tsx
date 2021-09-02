@@ -15,6 +15,7 @@ const timelineItemProps = {
   time: [String, Number] as PropType<string | number>,
   title: String,
   content: String,
+  color: String,
   type: {
     type: String as PropType<
     'default' | 'success' | 'error' | 'warning' | 'info'
@@ -74,7 +75,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, color } = this
     return (
       <div
         class={[
@@ -85,7 +86,10 @@ export default defineComponent({
       >
         <div class={`${mergedClsPrefix}-timeline-item-timeline`}>
           <div class={`${mergedClsPrefix}-timeline-item-timeline__line`} />
-          <div class={`${mergedClsPrefix}-timeline-item-timeline__circle`} />
+          <div
+            class={`${mergedClsPrefix}-timeline-item-timeline__circle`}
+            style={{ borderColor: color }}
+          />
         </div>
         <div class={`${mergedClsPrefix}-timeline-item-content`}>
           {this.title || this.$slots.header ? (

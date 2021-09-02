@@ -1,8 +1,8 @@
 # Manually Positioned
 
-For some special case, you may want to manually position the dropdown. For example, right click to activate dropdown in some area.
+In some cases, you may want to manually position the dropdown. An example is to position the dropdown options where you right click on some area.
 
-Warn: when manually positioned, the `trigger` prop must be `'manual'`.
+Warning: when manually positioned, the `trigger` prop must be set to `'manual'`.
 
 ```html
 <div

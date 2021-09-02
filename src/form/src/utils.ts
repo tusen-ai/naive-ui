@@ -72,6 +72,12 @@ export function formItemMisc (props: FormItemSetupProps) {
     if (NForm?.showFeedback !== undefined) return NForm.showFeedback
     return true
   })
+  const mergedShowLabelRef = computed(() => {
+    const { showLabel } = props
+    if (showLabel !== undefined) return showLabel
+    if (NForm?.showLabel !== undefined) return NForm.showLabel
+    return true
+  })
   return {
     validationErrored: validationErroredRef,
     mergedLabelStyle: mergedLabelStyleRef,
@@ -79,7 +85,8 @@ export function formItemMisc (props: FormItemSetupProps) {
     mergedLabelAlign: mergedLabelAlignRef,
     mergedShowRequireMark: mergedShowRequireMarkRef,
     mergedValidationStatus: mergedValidationStatusRef,
-    mergedShowFeedback: mergedShowFeedbackRef
+    mergedShowFeedback: mergedShowFeedbackRef,
+    mergedShowLabel: mergedShowLabelRef
   }
 }
 

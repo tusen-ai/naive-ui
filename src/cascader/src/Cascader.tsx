@@ -105,6 +105,7 @@ const cascaderProps = {
   },
   // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
@@ -223,9 +224,14 @@ export default defineComponent({
       })
     }
     function doUpdateValue (value: Value | null): void {
-      const { 'onUpdate:value': onUpdateValue, onChange } = props
+      const {
+        onUpdateValue,
+        'onUpdate:value': _onUpdateValue,
+        onChange
+      } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
       if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
+      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
       if (onChange) call(onChange as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
@@ -623,12 +629,7 @@ export default defineComponent({
       const { multiple } = props
       const { value: mergedValue } = mergedValueRef
       if (multiple && Array.isArray(mergedValue)) {
-        const index = mergedValue.findIndex((value) => value === option.value)
-        if (~index) {
-          const newValue = Array.from(mergedValue)
-          newValue.splice(index, 1)
-          doUpdateValue(newValue)
-        }
+        doUncheck(option.value)
       } else {
         doUpdateValue(null)
       }

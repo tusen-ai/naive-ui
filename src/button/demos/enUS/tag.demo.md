@@ -1,6 +1,6 @@
 # Tag
 
-You can render button as different tags. For example `<a />`.
+You can render buttons with different tags. For example `<a />`.
 
 ```html
 <n-button

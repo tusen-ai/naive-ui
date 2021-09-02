@@ -7,8 +7,8 @@ DataTable is used to displays rows of structured data.
 ## Demos
 
 <n-alert type="warning" title="Caveat" style="margin-bottom: 16px;">
-  Every row data needs a unique key property, otherwise you should specify <n-text code>row-key</n-text>
-</n-alert>
+  Each item of the array passing in the <n-text code>data</n-text> prop represents a row of rendered data, and each row of data must have a unique <n-text code>key</n-text>, otherwise the <n-text code>row-key</n-text> prop must be specified on the table.
+  </n-alert>
 
 ```demo
 basic
@@ -64,8 +64,8 @@ flex-height
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |
-| single-column | `boolean` | `false` | Whether to display as a column (when true, each column has border-right). |
-| single-line | `boolean` | `true` | Whether to display as a line (when true, each row has border-bottom). |
+| single-column | `boolean` | `false` | Whether the column content is a whole, when the parameter is `true`, there is no `border-bottom`. |
+| single-line | `boolean` | `true` | Whether the line content is a whole, when the parameter value is `true`, there is no `border-right`. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |
 | summary | `CreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#CreateSummary-Type">CreateSummary Type</n-a>. |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellipsis` or `max-height` or `flex-height` are set, it will always be `'fixed'` regardless of what you set. |
@@ -97,11 +97,11 @@ flex-height
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | The active filter option values in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when there are multiple filters). |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | Filter options. |
 | fixed | `'left \| 'right' \| false` | `false` | Whether the column needs to be fixed. |
-| key | `string \| number` | `undefined` | Unique key of this column, **required** when table's row-key is not set. |
+| key | `string \| number` | `undefined` | Unique key of this column, this is not repeatable. |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | Options of custom selection. Only work with `type='selection'`. |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of column row cell. |
 | renderExpand | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of the expand area. Only works when `type` is `'expand'`. |
-| renderFilterMenu | `() => VNodeChild` | `undefined` | Render function of column filter menu. |
+| renderFilterMenu | `(actions: { hide: () => void }) => VNodeChild` | `undefined` | Render function of column filter menu. |
 | renderFilterIcon | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | Render function of column filter icon. |
 | renderFilter | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | Render function of column filter trigger. |
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The row span of the cell. |

@@ -12,7 +12,13 @@ import {
   VNode,
   nextTick
 } from 'vue'
-import { createTreeMate, flatten, createIndexGetter, TreeMate } from 'treemate'
+import {
+  createTreeMate,
+  flatten,
+  createIndexGetter,
+  TreeMate,
+  TreeMateOptions
+} from 'treemate'
 import { useMergedState } from 'vooks'
 import { VirtualListInst, VVirtualList } from 'vueuc'
 import { getPadding } from 'seemly'
@@ -26,7 +32,7 @@ import { CheckStrategy } from '../../tree-select/src/interface'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
-import { keysWithFilter, emptyImage, defaultFilter } from './utils'
+import { keysWithFilter, emptyImage } from './utils'
 import { useKeyboard } from './keyboard'
 import {
   TreeDragInfo,
@@ -56,19 +62,39 @@ import style from './styles/index.cssr'
 
 const ITEM_SIZE = 30 // 24 + 3 + 3
 
-export const treeMateOptions = {
-  getDisabled (node: TreeOption) {
-    return !!(node.disabled || node.checkboxDisabled)
+export function createTreeMateOptions<T> (
+  keyField: string,
+  childrenField: string
+): TreeMateOptions<T, T, T> {
+  return {
+    getKey (node: T) {
+      return (node as any)[keyField]
+    },
+    getChildren (node: T) {
+      return (node as any)[childrenField]
+    },
+    getDisabled (node: T) {
+      return !!((node as any).disabled || (node as any).checkboxDisabled)
+    }
   }
 }
 
 export const treeSharedProps = {
-  filter: {
-    type: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
-    default: defaultFilter
-  },
+  filter: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
   defaultExpandAll: Boolean,
   expandedKeys: Array as PropType<Key[]>,
+  keyField: {
+    type: String,
+    default: 'key'
+  },
+  labelField: {
+    type: String,
+    default: 'label'
+  },
+  childrenField: {
+    type: String,
+    default: 'children'
+  },
   defaultExpandedKeys: {
     type: Array as PropType<Key[]>,
     default: () => []
@@ -217,7 +243,12 @@ export default defineComponent({
     // We don't expect data source to change so we just determine it once
     const displayTreeMateRef = props.internalDisplayTreeMate
       ? toRef(props, 'internalDisplayTreeMate')
-      : computed(() => createTreeMate(props.data, treeMateOptions))
+      : computed(() =>
+        createTreeMate<TreeOption>(
+          props.data,
+          createTreeMateOptions(props.keyField, props.childrenField)
+        )
+      )
     const dataTreeMateRef = props.internalDataTreeMate
       ? toRef(props, 'internalDataTreeMate')
       : displayTreeMateRef
@@ -300,6 +331,18 @@ export default defineComponent({
       return droppingNode.parent
     })
 
+    const mergedFilterRef = computed(() => {
+      const { filter } = props
+      if (filter) return filter
+      const { labelField } = props
+      return (pattern: string, node: TreeOption): boolean => {
+        if (!pattern.length) return true
+        return ((node as any)[labelField] as string)
+          .toLowerCase()
+          .includes(pattern.toLowerCase())
+      }
+    })
+
     // shallow watch data
     watch(
       toRef(props, 'data'),
@@ -315,7 +358,12 @@ export default defineComponent({
     watch(toRef(props, 'pattern'), (value) => {
       if (value) {
         const { expandedKeys: expandedKeysAfterChange, highlightKeySet } =
-          keysWithFilter(props.data, props.pattern, props.filter)
+          keysWithFilter(
+            props.data,
+            props.pattern,
+            props.keyField,
+            mergedFilterRef.value
+          )
         uncontrolledHighlightKeySetRef.value = highlightKeySet
         doUpdateExpandedKeys(expandedKeysAfterChange)
       } else {
@@ -540,6 +588,10 @@ export default defineComponent({
         expandedKeysAfterChange.splice(index, 1)
         doUpdateExpandedKeys(expandedKeysAfterChange)
       } else {
+        const nodeToBeExpanded = displayTreeMateRef.value!.getNode(key)
+        if (!nodeToBeExpanded || nodeToBeExpanded.isLeaf) {
+          return
+        }
         doUpdateExpandedKeys(mergedExpandedKeys.concat(key))
       }
     }
@@ -996,6 +1048,7 @@ export default defineComponent({
       renderLabelRef: toRef(props, 'renderLabel'),
       renderPrefixRef: toRef(props, 'renderPrefix'),
       renderSuffixRef: toRef(props, 'renderSuffix'),
+      labelFieldRef: toRef(props, 'labelField'),
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,

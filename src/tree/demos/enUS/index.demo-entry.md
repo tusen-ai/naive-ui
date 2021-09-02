@@ -8,6 +8,7 @@ What's more, not only biology, I forget balanced tree everytime after I revise i
 
 ```demo
 basic
+custom-field
 cascade
 multiple
 filter
@@ -31,6 +32,7 @@ batch-render
 | cancelable | `boolean` | `true` | Whether node's select status can be cancelled. |
 | cascade | `boolean` | `false` | Whether to cascade checkboxes. |
 | checkable | `boolean` | `false` | Whether to display the selection box, you need to set `cascade` to `true`. |
+| children-field | `string` | `'children'` | The children field in `TreeOption`. |
 | checked-keys | `Array<string \| number>` | `undefined` | If set, checked status will work in controlled manner. |
 | data | `Array<TreeOption>` | `[]` | The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner. |
 | default-checked-keys | `Array<string \| number>` | `[]` | Multiple options selected by default. |
@@ -41,6 +43,8 @@ batch-render
 | expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter. |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |
 | filter | `(node: TreeOption) => boolean` | `undefined` | A simple string based filter. |
+| key-field | `string` | `'key'` | The key field in `TreeOption`. |
+| label-field | `string` | `'label'` | The label field in `TreeOption`. |
 | leaf-only | `boolean` | `false` | Whether to open or not, only the bottom tree node is optional. |
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |
@@ -65,8 +69,8 @@ batch-render
 
 | Name | Type | Description |
 | --- | --- | --- |
-| key | `string \| number` | Key of the node, should be unique. |
-| label | `string` | Label of the node. |
+| key | `string \| number` | Key of the node, should be unique. You can use `key-field` to customize the field name. |
+| label | `string` | Label of the node. You can use `label-field` to customize the field name. |
 | checkboxDisabled? | `boolean` | Whether the checkbox is disabled. |
 | children? | `TreeOption[]` | Child nodes of the node. |
 | disabled? | `boolean` | Whether the node is disabled. |

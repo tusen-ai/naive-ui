@@ -45,6 +45,7 @@ modify-content
 manually-close
 about-theme
 multiple-line
+placement
 ```
 
 ## API
@@ -56,6 +57,7 @@ multiple-line
 | closable | `boolean` | All messages whether to show close icon. |
 | duration | `number` | `3000` | All messages's default duration. |
 | max | `number` | `undefined` | Limit the number of message to display. |
+| placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top` | All message's placement. |
 | to | `string \| HTMLElement` | `'body'` | Container node of message container. |
 
 ### MessageProvider Injection API
@@ -88,7 +90,7 @@ multiple-line
 | --- | --- | --- |
 | closable | `boolean` | Whether to show close icon. |
 | content | `string \| (() => VNodeChild)` | Message content. |
-| destory | `() => void` | Message destory method. |
+| destroy | `() => void` | Message destroy method. |
 | icon | `() => VNode` | Message icon. |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | Message type. |
 | onAfterLeave | `() => void` | Callback after message disappeared. |
@@ -98,7 +100,7 @@ multiple-line
 
 | Name    | Type | Description             |
 | ------- | ---- | ----------------------- |
-| destroy | `()` | Message destory method. |
+| destroy | `()` | Message destroy method. |
 
 ## Q & A
 

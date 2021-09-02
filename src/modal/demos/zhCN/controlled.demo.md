@@ -12,27 +12,34 @@
 ```
 
 ```js
-export default {
-  data () {
-    return {
-      showModal: false,
-      timeout: 6000
-    }
-  },
-  methods: {
-    handleClick () {
-      this.showModal = true
-      this.timeout = 6000
-      const countdown = () => {
-        if (this.timeout <= 0) {
-          this.showModal = false
-        } else {
-          this.timeout -= 1000
-          setTimeout(countdown, 1000)
-        }
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const showModalRef = ref(false)
+    const timeoutRef = ref(6000)
+
+    const countdown = () => {
+      if (timeoutRef.value <= 0) {
+        showModalRef.value = false
+      } else {
+        timeoutRef.value -= 1000
+        setTimeout(countdown, 1000)
       }
+    }
+
+    const handleClick = () => {
+      showModalRef.value = true
+      timeoutRef.value = 6000
+
       countdown()
     }
+
+    return {
+      showModal: showModalRef,
+      timeout: timeoutRef,
+      handleClick
+    }
   }
-}
+})
 ```

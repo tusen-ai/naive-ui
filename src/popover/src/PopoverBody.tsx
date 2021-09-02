@@ -325,7 +325,7 @@ export default defineComponent({
                 }
               },
               {
-                default: () => this.renderContentNode()
+                default: this.renderContentNode
               }
             )
             : this.renderContentNode()

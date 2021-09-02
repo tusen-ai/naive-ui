@@ -1,11 +1,11 @@
 # Use Preset Input
 
-By default, the preset of `n-dynamic-input` is `input`.
+By default, the preset element of `n-dynamic-input` is `input`.
 
 ```html
 <n-dynamic-input
   v-model:value="value"
-  placeholder="Please input"
+  placeholder="Please type here"
   :min="3"
   :max="6"
 />

@@ -1,6 +1,6 @@
 # Text Button
 
-Just look like text.
+It just looks like text.
 
 ```html
 <n-button text>
@@ -9,7 +9,7 @@ Just look like text.
       <train-icon />
     </n-icon>
   </template>
-  The Engine is Still Spiting Smoke
+  The Engine is Still Spitting Smoke
 </n-button>
 ```
 

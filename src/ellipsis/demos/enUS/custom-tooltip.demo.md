@@ -1,6 +1,6 @@
 # Customize Tooltip Content
 
-Use `tooltip` slot to customize tooltip content.
+Use the `tooltip` slot to customize the tooltip content.
 
 ```html
 <n-ellipsis style="max-width: 240px;">
