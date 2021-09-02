@@ -32,10 +32,7 @@ const codeProps = {
     type: Boolean,
     default: false
   },
-  inline: {
-    type: Boolean,
-    default: false
-  },
+  inline: Boolean,
   // In n-log, we only need to mount code's style for highlight
   internalNoHighlight: Boolean
 }

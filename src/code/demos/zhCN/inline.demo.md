@@ -11,6 +11,7 @@ JavaScript 的例子。
 
 ```js
 import { defineComponent } from 'vue'
+
 export default defineComponent({
   setup () {
     return {

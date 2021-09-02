@@ -28,6 +28,7 @@ def say_hello():
 
 ```js
 import { defineComponent } from 'vue'
+
 export default defineComponent({
   setup () {
     return {
