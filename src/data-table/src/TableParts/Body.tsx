@@ -143,12 +143,9 @@ export default defineComponent({
       checked: boolean,
       shiftKey: boolean
     ): void {
-      const lastKey = lastSelectedKey
-      lastSelectedKey = tmNode.key
-
       if (shiftKey) {
         const lastIndex = paginatedDataRef.value.findIndex(
-          (item) => item.key === lastKey
+          (item) => item.key === lastSelectedKey
         )
         if (lastIndex !== -1) {
           const currentIndex = paginatedDataRef.value.findIndex(
@@ -167,6 +164,8 @@ export default defineComponent({
           } else {
             doUncheck(rowKeysToCheck)
           }
+          lastSelectedKey = tmNode.key
+          return
         }
       }
 
@@ -175,6 +174,7 @@ export default defineComponent({
       } else {
         doUncheck(tmNode.key)
       }
+      lastSelectedKey = tmNode.key
     }
     function getScrollContainer (): HTMLElement | null {
       if (virtualScrollRef.value) {

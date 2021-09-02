@@ -290,10 +290,12 @@ export default defineComponent({
         onKeydown={handleKeyDown}
         onClick={handleClick}
         onMousedown={() => {
-          const userCallBack = window.onselectstart
-          window.onselectstart = () => false
+          const preventDefault = (e: Event): void => {
+            e.preventDefault()
+          }
+          window.addEventListener('selectstart', preventDefault)
           setTimeout(() => {
-            window.onselectstart = userCallBack
+            window.removeEventListener('selectstart', preventDefault)
           }, 0)
         }}
       >
