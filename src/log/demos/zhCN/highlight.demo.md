@@ -14,6 +14,8 @@
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+
 function log () {
   const l = []
   for (let i = 0; i < 40; ++i) {
@@ -22,33 +24,34 @@ function log () {
   return l.join('\n') + '\n'
 }
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
+    const loadingRef = ref(false)
+    const logRef = ref(log())
+
     return {
-      loading: false,
-      log: log()
-    }
-  },
-  methods: {
-    clear () {
-      this.log = ''
-    },
-    handlerequireTop () {
-      if (this.loading) return
-      this.loading = true
-      setTimeout(() => {
-        this.log = log() + this.log
-        this.loading = false
-      }, 1000)
-    },
-    handlerequireBottom () {
-      if (this.loading) return
-      this.loading = true
-      setTimeout(() => {
-        this.log = this.log + log()
-        this.loading = false
-      }, 1000)
+      loading: loadingRef,
+      log: logRef,
+      clear () {
+        logRef.value = ''
+      },
+      handlerequireTop () {
+        if (loadingRef.value) return
+        loadingRef.value = true
+        setTimeout(() => {
+          logRef.value = log() + logRef.value
+          loadingRef.value = false
+        }, 1000)
+      },
+      handlerequireBottom () {
+        if (loadingRef.value) return
+        loadingRef.value = true
+        setTimeout(() => {
+          logRef.value = logRef.value + log()
+          loadingRef.value = false
+        }, 1000)
+      }
     }
   }
-}
+})
 ```
