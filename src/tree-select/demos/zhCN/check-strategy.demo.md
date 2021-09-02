@@ -5,7 +5,7 @@
   multiple
   cascade
   checkable
-  checkStrategy="parent"
+  check-strategy="parent"
   :options="options"
   :default-value="['Dig It', 'go']"
   @update:value="updateValue"
