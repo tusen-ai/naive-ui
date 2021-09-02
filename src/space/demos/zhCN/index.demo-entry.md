@@ -22,7 +22,7 @@ grid-debug
 | inline | `boolean` | `false` | 是否为行内元素 |
 | item-style | `string \| object` | `undefined` | 节点样式 |
 | justify | `'start' \| 'end' \| 'center' \| 'space-around' \| 'space-between'` | `'start'` | 水平排列方式 |
-| size | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | 大小 |
+| size | `'small' \| 'medium' \| 'large' \| number \| [number, number]` | `'medium'` | 垂直排列下为 marginBottom 的值（数组情况下为对应索引1的值），水平排列下为 marginLeft，marginRight（数组情况下为对应索引0的值）以及 paddingTop，paddingBottom（数组情况下为对应索引0的值）的值 |
 | vertical | `boolean` | `false` | 是否垂直布局 |
 | wrap | `boolean` | `true` | 是否超出换行 |
 
