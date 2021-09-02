@@ -55,4 +55,55 @@ describe('n-skeleton', () => {
     })
     expect(wrapper.findAll('.n-skeleton').length).toBe(2)
   })
+
+  it('should work with `size` prop', async () => {
+    const wrapper = mount(NSkeleton)
+
+    await wrapper.setProps({ size: 'small' })
+    expect(wrapper.find('.n-skeleton').attributes('style')).toMatchSnapshot()
+
+    await wrapper.setProps({ size: 'medium' })
+    expect(wrapper.find('.n-skeleton').attributes('style')).toMatchSnapshot()
+
+    await wrapper.setProps({ size: 'large' })
+    expect(wrapper.find('.n-skeleton').attributes('style')).toMatchSnapshot()
+  })
+
+  it('should show correct width', () => {
+    const wrapper = mount(NSkeleton, {
+      props: {
+        circle: false,
+        width: 100
+      }
+    })
+
+    expect(wrapper.find('.n-skeleton').attributes('style')).toContain(
+      'width: 100px;'
+    )
+  })
+
+  it('should show correct height', () => {
+    const wrapper = mount(NSkeleton, {
+      props: {
+        circle: false,
+        height: 100
+      }
+    })
+
+    expect(wrapper.find('.n-skeleton').attributes('style')).toContain(
+      'height: 100px;'
+    )
+  })
+
+  it('should show correct animation', () => {
+    const wrapper = mount(NSkeleton, {
+      props: {
+        animated: false
+      }
+    })
+
+    expect(wrapper.find('.n-skeleton').attributes('style')).toContain(
+      'animation: none;'
+    )
+  })
 })
