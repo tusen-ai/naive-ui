@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { NProgress } from '../index'
+import { SuccessIcon } from '../../_internal/icons'
 
 describe('n-progress', () => {
   it('should work with import on demand', () => {
@@ -85,5 +86,67 @@ describe('n-progress', () => {
     })
     expect(wrapper.find('.n-progress-custom-content').exists()).toBe(true)
     expect(wrapper.find('.n-progress-custom-content').text()).toBe('test')
+
+    await wrapper.setProps({ showIndicator: false, type: 'circle' })
+    expect(wrapper.find('.n-progress-custom-content').exists()).toBe(false)
+
+    await wrapper.setProps({ showIndicator: true })
+    expect(wrapper.find('.n-progress-custom-content').exists()).toBe(true)
+  })
+
+  it('should show icon with `circle` type', () => {
+    const wrapper = mount(NProgress, {
+      props: {
+        type: 'circle',
+        showIndicator: true,
+        status: 'success'
+      }
+    })
+
+    expect(wrapper.findComponent(SuccessIcon).exists()).toBe(true)
+  })
+
+  it('should show icon with `line` type', () => {
+    const wrapper = mount(NProgress, {
+      props: {
+        type: 'line',
+        showIndicator: true,
+        indicatorPlacement: 'outside',
+        status: 'success'
+      }
+    })
+
+    expect(wrapper.findComponent(SuccessIcon).exists()).toBe(true)
+  })
+
+  it('should show correct style with `line` type', async () => {
+    const wrapper = mount(NProgress, {
+      props: {
+        type: 'line',
+        percentage: 50,
+        borderRadius: 50
+      }
+    })
+
+    expect(
+      wrapper.find('.n-progress-graph-line-rail').attributes('style')
+    ).toContain('border-radius: 50px;')
+
+    await wrapper.setProps({ indicatorPlacement: 'inside' })
+    expect(wrapper.find('.n-progress-graph-line-indicator').exists()).toBe(true)
+    expect(wrapper.find('.n-progress-graph-line-indicator').text()).toBe('50%')
+  })
+
+  it('should show correct style with `multiple-circle` type', async () => {
+    const wrapper = mount(NProgress, {
+      props: {
+        type: 'multiple-circle'
+      },
+      slots: {
+        default: () => 'test'
+      }
+    })
+
+    expect(wrapper.find('.n-progress-text').exists()).toBe(true)
   })
 })
