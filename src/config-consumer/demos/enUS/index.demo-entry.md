@@ -16,6 +16,6 @@ basic
 
 ## Slots
 
-| Name | Parameters | Description |
-| --- | --- | --- |
-| default | `(options: { namespace: string })` |  |
+| Name    | Parameters                         | Description |
+| ------- | ---------------------------------- | ----------- |
+| default | `(options: { namespace: string })` |             |

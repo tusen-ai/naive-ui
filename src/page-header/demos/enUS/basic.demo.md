@@ -1,10 +1,7 @@
 # Basic
 
 ```html
-<n-page-header
-  subtitle="A podcast to improve designs"
-  @back="handleBack"
->
+<n-page-header subtitle="A podcast to improve designs" @back="handleBack">
   <n-grid :cols="5">
     <n-gi>
       <n-statistic label="Episodes" value="125" />
