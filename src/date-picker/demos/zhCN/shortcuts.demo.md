@@ -1,11 +1,16 @@
 # 快捷选项
 
 你可以自定义一些快捷按钮.
+
 ```html
 <n-space vertical>
-  <n-date-picker v-model:value="ts1" type="date" :shortcuts="shortcuts"/>
+  <n-date-picker v-model:value="ts1" type="date" :shortcuts="shortcuts" />
   <n-date-picker v-model:value="ts2" type="datetime" :shortcuts="shortcuts" />
-  <n-date-picker v-model:value="range1" type="daterange" :shortcuts="rangeShortcuts" />
+  <n-date-picker
+    v-model:value="range1"
+    type="daterange"
+    :shortcuts="rangeShortcuts"
+  />
   <n-date-picker
     v-model:value="range2"
     type="datetimerange"

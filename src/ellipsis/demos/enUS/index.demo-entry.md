@@ -23,7 +23,7 @@ custom-tooltip
 
 ## Slots
 
-| Name    | Parameters | Description                 |
-| ------- | ---------- | --------------------------- |
-| default | `()`       | The content of the ellipsis.    |
+| Name    | Parameters | Description                           |
+| ------- | ---------- | ------------------------------------- |
+| default | `()`       | The content of the ellipsis.          |
 | tooltip | `()`       | The content of the ellipsis' tooltip. |

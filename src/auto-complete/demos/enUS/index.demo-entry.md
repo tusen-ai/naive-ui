@@ -33,10 +33,10 @@ after-select
 
 ### AutoCompleteOption Properties
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
+| Name     | Type      | Description                     |
+| -------- | --------- | ------------------------------- |
 | disabled | `boolean` | Whether the option is disabled. |
-| label    | `string`  | Option label value.         |
+| label    | `string`  | Option label value.             |
 | value    | `string`  | Option ID (should be unique).   |
 
 ### AutoCompleteGroupOption Properties
