@@ -1,23 +1,35 @@
 # 指定勾选策略
 
+设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点。
+
 ```html
-<n-tree-select
-  multiple
-  cascade
-  checkable
-  check-strategy="parent"
-  :options="options"
-  :default-value="['Dig It', 'go']"
-  @update:value="updateValue"
-/>
+<n-space vertical>
+  <n-space>
+    <n-radio-group v-model:value="checkStrategy">
+      <n-radio-button value="all">All</n-radio-button>
+      <n-radio-button value="parent">Parent</n-radio-button>
+      <n-radio-button value="child">Child</n-radio-button>
+    </n-radio-group>
+  </n-space>
+  <n-tree-select
+    multiple
+    cascade
+    checkable
+    :check-strategy="checkStrategy"
+    :options="options"
+    :default-value="['Dig It', 'go']"
+    @update:value="handleUpdateValue"
+  />
+</n-space>
 ```
 
 ```js
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
+      checkStrategy: ref('all'),
       options: [
         {
           label: 'Rubber Soul',
@@ -110,7 +122,7 @@ export default defineComponent({
           ]
         }
       ],
-      updateValue: (values) => {
+      handleUpdateValue: (values) => {
         console.log(values)
       }
     }

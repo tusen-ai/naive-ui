@@ -127,7 +127,6 @@ const treeProps = {
   blockLine: Boolean,
   disabled: Boolean,
   checkedKeys: Array as PropType<Key[]>,
-  checkStrategy: String as PropType<CheckStrategy>,
   defaultCheckedKeys: {
     type: Array as PropType<Key[]>,
     default: () => []
@@ -213,6 +212,10 @@ const treeProps = {
     // Make tree-select take over keyboard operations
     type: Boolean,
     default: true
+  },
+  internalCheckStrategy: {
+    type: String as PropType<CheckStrategy>,
+    default: 'all'
   }
 } as const
 
@@ -266,7 +269,7 @@ export default defineComponent({
       })
     })
     const mergedCheckStrategyRef = computed(() =>
-      props.leafOnly ? 'child' : props.checkStrategy
+      props.leafOnly ? 'child' : props.internalCheckStrategy
     )
     const displayedCheckedKeysRef = computed(() => {
       return checkedStatusRef.value.checkedKeys

@@ -22,7 +22,7 @@ debug
 | --- | --- | --- | --- |
 | cascade | `boolean` | `false` | Whether to do cascade check when use checkboxes. |
 | checkable | `boolean` | `false` | Whether to use checkbox to select value. |
-| check-strategy | `string` | `'all'` | The way to show checked options. `all`: Show all checked node. `parent`: Show all checked parent node when all child node are checked. `child`: show all child node. |
+| check-strategy | `string` | `'all'` | The way to show checked options. `all` means showing all checked node. `parent` means showing all checked parent node when all child node are checked. `child` means showing all child node. |
 | children-field | `string` | `'children'` | The children field in `TreeSelectOption`. |
 | clearable | `boolean` | `false` | Whether it's clearable. |
 | consistent-menu-width | `boolean` | `true` | Whether to make menu's width consistent with input. Set to `true` will disable virtual scroll. |

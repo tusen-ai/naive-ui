@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-tree-select` 的 `leaf-only` 属性被废弃，请使用 `check-strategy="child"`
+
 ### Fixes
 
 - 修复 `n-cascader` 多选模式下点击 tag 删除子选项未更新选中项
@@ -17,6 +21,7 @@
 - `n-tree` 和 `n-tree-select` 新增 `children-field` 属性
 - `n-dropdown` 选项新增 `props` 属性，关闭 [#813](https://github.com/TuSimple/naive-ui/issues/813)
 - `n-data-table` 支持按住 `shift` 进行多选操作，关闭 [#554](https://github.com/TuSimple/naive-ui/issues/554)
+- `n-tree-select` 增加 `check-strategy` 属性，关闭 [#624](https://github.com/TuSimple/naive-ui/issues/624)
 
 ### Fixes
 
@@ -112,7 +117,6 @@
 ### Feats
 
 - `n-loading-bar` 新增 `loading-bar-style` 属性，关闭 [#457](https://github.com/TuSimple/naive-ui/issues/457)
-- `n-tree-select` 增加 `check-strategy` 属性.
 - `n-button` 新增 `text-color` 属性
 - `n-form` 导出 `FormValidationError` 类型
 - `n-popconfirm` 支持不显示操作组件，关闭 [#770](https://github.com/TuSimple/naive-ui/issues/770)

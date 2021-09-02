@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-tree-select`'s `leaf-only` props is deprecated, please use `check-strategy="child"` instead.
+
 ### Fixes
 
 - Fix `n-cascader` click tag to delete the sub option in multi selection mode, and the tree option is not updated.
@@ -17,6 +21,7 @@
 - `n-tree` & `n-tree-select` add `children-field` prop.
 - `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
 - `n-data-table` supports multi-selection by holding down `shift`, closes [#554](https://github.com/TuSimple/naive-ui/issues/554).
+- `n-tree-select` add `check-strategy` prop, closes [#624](https://github.com/TuSimple/naive-ui/issues/624).
 
 ### Fixes
 
@@ -112,7 +117,6 @@
 ### Feats
 
 - `n-loading-bar` add `loading-bar-style` props, closes [#457](https://github.com/TuSimple/naive-ui/issues/457).
-- `n-tree-select` add `check-strategy` prop.
 - `n-button` add `text-color` prop.
 - `n-form` export `FormValidationError` type.
 - `n-popconfirm` support not show action components, closes [#770](https://github.com/TuSimple/naive-ui/issues/770).

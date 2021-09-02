@@ -1,25 +1,35 @@
 # Set Check Strategy
 
-# all: show all checked node; parent: show all checked parent node when all child node are checked; child: show all child node
+Set the way to show checked options. `all` means showing all checked nodes. `parent` means showing all checked parent nodes when all child node are checked. `child` means showing all child nodes.
 
 ```html
-<n-tree-select
-  multiple
-  cascade
-  checkable
-  checkStrategy="parent"
-  :options="options"
-  :default-value="['Dig It', 'go']"
-  @update:value="updateValue"
-/>
+<n-space vertical>
+  <n-space>
+    <n-radio-group v-model:value="checkStrategy">
+      <n-radio-button value="all">All</n-radio-button>
+      <n-radio-button value="parent">Parent</n-radio-button>
+      <n-radio-button value="child">Child</n-radio-button>
+    </n-radio-group>
+  </n-space>
+  <n-tree-select
+    multiple
+    cascade
+    checkable
+    :check-strategy="checkStrategy"
+    :options="options"
+    :default-value="['Dig It', 'go']"
+    @update:value="handleUpdateValue"
+  />
+</n-space>
 ```
 
 ```js
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
+      checkStrategy: ref('all'),
       options: [
         {
           label: 'Rubber Soul',
@@ -112,7 +122,7 @@ export default defineComponent({
           ]
         }
       ],
-      updateValue: (values) => {
+      handleUpdateValue: (values) => {
         console.log(values)
       }
     }
