@@ -50,8 +50,7 @@ function findSiblingsAndIndex (node, nodes) {
 }
 
 /**
- * The time complexity of the demo can be optimized,
- * but I'm too lazy to optimize it.
+ * 这个例子的时间复杂度确实可以优化 我实在是懒得改了
  */
 export default defineComponent({
   setup () {
