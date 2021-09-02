@@ -72,7 +72,7 @@ const selectProps = {
     type: [String, Number, Array] as PropType<Value | null>,
     default: null
   },
-  value: [String, Number, Array] as PropType<Value>,
+  value: [String, Number, Array] as PropType<Value | null>,
   placeholder: String,
   multiple: Boolean,
   size: String as PropType<Size>,
