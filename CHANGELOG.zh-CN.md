@@ -2,6 +2,11 @@
 
 ## Pending
 
+### Fixes
+
+- 修复 `n-cascader` 多选模式下点击 tag 删除子选项未更新选中项
+- 修复 `n-input` 在 `clearable` 为 `true` 时鼠标离开输入框时中文输入法不正确，关闭 [#905](https://github.com/TuSimple/naive-ui/issues/905)
+
 ### Feats
 
 - `n-cascader` 新增 `onUpdateValue` 方法
@@ -9,6 +14,7 @@
 - `n-data-table` 的列的 `renderFilterMenu` 新增 hide 参数
 - `n-tree` 和 `n-tree-select` 新增 `key-field` 属性
 - `n-tree` 和 `n-tree-select` 新增 `label-field` 属性
+- `n-dropdown` 选项新增 `props` 属性，关闭 [#813](https://github.com/TuSimple/naive-ui/issues/813)
 
 ### Fixes
 

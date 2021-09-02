@@ -2,6 +2,11 @@
 
 ## Pending
 
+### Fixes
+
+- Fix `n-cascader` click tag to delete the sub option in multi selection mode, and the tree option is not updated.
+- Fix `n-input` chinese input method not correct while mouse leave the input in `clearable` is true, closes [#905](https://github.com/TuSimple/naive-ui/issues/905).
+
 ### Feats
 
 - `n-cascader` add `onUpdateValue` prop.
@@ -9,6 +14,7 @@
 - `n-data-table`'s column's `renderFilterMenu` add `hide` params.
 - `n-tree` & `n-tree-select` add `key-field` prop.
 - `n-tree` & `n-tree-select` add `label-field` prop.
+- `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
 
 ### Fixes
 

@@ -17,7 +17,7 @@ import {
   InputHTMLAttributes,
   TextareaHTMLAttributes
 } from 'vue'
-import { useMergedState } from 'vooks'
+import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
 import { NBaseClear, NBaseIcon, NBaseSuffix } from '../../_internal'
@@ -212,8 +212,12 @@ export default defineComponent({
           (Array.isArray(mergedValue) && isEmptyValue(mergedValue[1])))
       )
     })
+    // focus
+    const mergedFocusRef = useMemo(() => {
+      return props.internalForceFocus || focusedRef.value
+    })
     // clear
-    const showClearButton = computed(() => {
+    const showClearButton = useMemo(() => {
       if (
         mergedDisabledRef.value ||
         props.readonly ||
@@ -238,10 +242,6 @@ export default defineComponent({
     })
     // passwordVisible
     const passwordVisibleRef = ref<boolean>(false)
-    // focus
-    const mergedFocusRef = computed(() => {
-      return props.internalForceFocus || focusedRef.value
-    })
     // text-decoration
     const textDecorationStyleRef = computed(() => {
       const { textDecoration } = props
