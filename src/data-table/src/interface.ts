@@ -12,7 +12,6 @@ import { MergedTheme } from '../../_mixins'
 import { DataTableTheme } from '../styles'
 import { RowItem, ColItem } from './use-group-header'
 import { DataTableSelectionOption } from './TableParts/SelectionMenu'
-import { PaginationProps } from '../../pagination/src/Pagination'
 
 export type FilterOptionValue = string | number
 export type ColumnKey = string | number
@@ -154,7 +153,6 @@ export type DataTableSelectionOptions = Array<
 | { label: string, key: string | number, onSelect: () => void }
 >
 export interface DataTableInjection {
-  mergedPagination: Ref<PaginationProps>
   indentRef: Ref<number>
   hasChildrenRef: Ref<boolean>
   firstContentfulColIndexRef: Ref<number>

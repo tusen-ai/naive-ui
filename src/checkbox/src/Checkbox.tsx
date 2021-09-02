@@ -289,7 +289,7 @@ export default defineComponent({
         onKeyup={handleKeyUp}
         onKeydown={handleKeyDown}
         onClick={handleClick}
-        onMousedown={(e) => e.preventDefault()}
+        onMousedown={(e) => e.shiftKey && e.preventDefault()}
       >
         <div class={`${mergedClsPrefix}-checkbox-box`}>
           <NIconSwitchTransition>

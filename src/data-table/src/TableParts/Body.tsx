@@ -5,7 +5,6 @@ import {
   defineComponent,
   inject,
   VNode,
-  watch,
   watchEffect,
   onUnmounted,
   PropType,
@@ -103,7 +102,6 @@ export default defineComponent({
   },
   setup (props) {
     const {
-      mergedPagination,
       mergedExpandedRowKeysRef,
       mergedClsPrefixRef,
       mergedThemeRef,
@@ -139,31 +137,34 @@ export default defineComponent({
     } = inject(dataTableInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
-    const lastSelectedIndex = ref<number | null>(null)
-    watch(mergedCurrentPageRef, () => {
-      lastSelectedIndex.value = null
-    })
+    let lastSelectedKey: string | number = ''
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey, index: number },
       checked: boolean,
       shiftKey: boolean
     ): void {
-      const lastIndex = lastSelectedIndex.value
-      const currentIndex = tmNode.index % mergedPagination.value.pageSize!
-      lastSelectedIndex.value = currentIndex
-      if (shiftKey && lastIndex !== null) {
-        const start = Math.min(lastIndex, currentIndex)
-        const end = Math.max(lastIndex, currentIndex)
-        const keys: RowKey[] = []
-        paginatedDataRef.value.slice(start, end + 1).forEach((r) => {
-          if (!r.disabled) {
-            keys.push(r.key)
+      const lastKey = lastSelectedKey
+      lastSelectedKey = tmNode.key
+
+      if (shiftKey) {
+        const currentIndex = tmNode.index
+        const lastIndex = paginatedDataRef.value.findIndex(
+          (item) => item.key === lastKey
+        )
+        if (lastIndex !== -1) {
+          const start = Math.min(lastIndex, currentIndex)
+          const end = Math.max(lastIndex, currentIndex)
+          const rowKeysToCheck: RowKey[] = []
+          paginatedDataRef.value.slice(start, end + 1).forEach((r) => {
+            if (!r.disabled) {
+              rowKeysToCheck.push(r.key)
+            }
+          })
+          if (checked) {
+            doCheck(rowKeysToCheck)
+          } else {
+            doUncheck(rowKeysToCheck)
           }
-        })
-        if (checked) {
-          doCheck(keys)
-        } else {
-          doUncheck(keys)
         }
       }
 
