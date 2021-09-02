@@ -28,6 +28,7 @@ import { call, createDataKey, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NxScrollbar } from '../../scrollbar'
 import type { ScrollbarInst } from '../../scrollbar'
+import { CheckStrategy } from '../../tree-select/src/interface'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
@@ -126,6 +127,7 @@ const treeProps = {
   blockLine: Boolean,
   disabled: Boolean,
   checkedKeys: Array as PropType<Key[]>,
+  checkStrategy: String as PropType<CheckStrategy>,
   defaultCheckedKeys: {
     type: Array as PropType<Key[]>,
     default: () => []
@@ -263,6 +265,9 @@ export default defineComponent({
         cascade: props.cascade
       })
     })
+    const mergedCheckStrategyRef = computed(() =>
+      props.leafOnly ? 'child' : props.checkStrategy
+    )
     const displayedCheckedKeysRef = computed(() => {
       return checkedStatusRef.value.checkedKeys
     })
@@ -567,7 +572,8 @@ export default defineComponent({
         checked ? 'check' : 'uncheck'
       ](node.key, displayedCheckedKeysRef.value, {
         cascade: props.cascade,
-        leafOnly: props.leafOnly
+        leafOnly: props.leafOnly,
+        checkStrategy: mergedCheckStrategyRef.value
       })
       doUpdateCheckedKeys(checkedKeys)
     }

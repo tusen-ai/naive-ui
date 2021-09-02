@@ -47,7 +47,7 @@ import type {
   TreeSelectOption,
   Value
 } from './interface'
-import { treeSelectInjectionKey } from './interface'
+import { treeSelectInjectionKey, CheckStrategy } from './interface'
 import {
   treeOption2SelectOption,
   filterTree,
@@ -81,6 +81,7 @@ const props = {
   },
   filterable: Boolean,
   leafOnly: Boolean,
+  checkStrategy: String as PropType<CheckStrategy>,
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
   showPath: Boolean,
@@ -285,11 +286,17 @@ export default defineComponent({
       if (Array.isArray(mergedValue)) {
         const res: SelectBaseOption[] = []
         const { value: treeMate } = dataTreeMateRef
+        const { checkedKeys } = treeMate.getCheckedKeys(mergedValue)
         const { keyField, labelField } = props
-        mergedValue.forEach((value) => {
+        checkedKeys.forEach((value) => {
           const tmNode = treeMate.getNode(value)
           if (tmNode !== null) {
-            res.push(
+            if (
+              props.checkStrategy === 'all' ||
+              (props.checkStrategy === 'parent' && !tmNode.isLeaf) ||
+              (props.checkStrategy === 'child' && tmNode.isLeaf)
+            ) {
+              res.push(
               showPath
                 ? treeOption2SelectOptionWithPath(
                   tmNode,
@@ -299,6 +306,7 @@ export default defineComponent({
                 )
                 : treeOption2SelectOption(tmNode, labelField)
             )
+            }
           }
         })
         return res
@@ -691,6 +699,7 @@ export default defineComponent({
                             mergedClsPrefix,
                             filteredTreeInfo,
                             checkable,
+                            checkStrategy,
                             multiple
                           } = this
                           return withDirectives(
@@ -723,6 +732,7 @@ export default defineComponent({
                                   checkedKeys={this.treeCheckedKeys}
                                   selectedKeys={this.treeSelectedKeys}
                                   checkable={checkable}
+                                  checkStrategy={checkStrategy}
                                   cascade={this.mergedCascade}
                                   leafOnly={this.leafOnly}
                                   multiple={this.multiple}

@@ -9,6 +9,7 @@ basic
 custom-field
 multiple
 checkbox
+check-strategy
 filterable
 debug
 ```
@@ -21,6 +22,7 @@ debug
 | --- | --- | --- | --- |
 | cascade | `boolean` | `false` | 使用 checkbox 进行多选时是否级联 |
 | checkable | `boolean` | `false` | 是否使用 checkbox 进行选择 |
+| check-strategy | `string` | `'all'` | 设置勾选策略来指定显示的勾选节点，`all`：显示全部选中节点；`parent`：只显示父节点（当父节点下所有子节点都选中时）；`child`：只显示子节点 |
 | children-field | `string` | `'children'` | 替代 `TreeSelectOption` 中的 children 字段名 |
 | clearable | `boolean` | `false` | 是否可清除 |
 | consistent-menu-width | `boolean` | `true` | 是否使菜单宽度和输入框一致，打开会禁用虚拟滚动 |
