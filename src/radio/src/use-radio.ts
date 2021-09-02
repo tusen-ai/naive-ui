@@ -52,7 +52,7 @@ export interface RadioGroupInjection {
   valueRef: Ref<string | number | null>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
   disabledRef: Ref<boolean>
-  doUpdateValue: (value: string | number) => void
+  doUpdateValue: (value: string & number) => void
 }
 
 export const radioGroupInjectionKey: InjectionKey<RadioGroupInjection> =
@@ -125,7 +125,7 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
     if (NRadioGroup) {
       const { doUpdateValue } = NRadioGroup
       const { value } = props
-      doUpdateValue(value)
+      doUpdateValue(value as never)
     } else {
       const { 'onUpdate:checked': updateChecked } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem

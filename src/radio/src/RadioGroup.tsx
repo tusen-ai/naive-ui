@@ -113,12 +113,13 @@ const radioGroupProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  'onUpdate:value': Function as PropType<(value: string | number) => void>,
-  onUpdateValue: Function as PropType<(value: string | number) => void>,
+  // eslint-disable-next-line vue/prop-name-casing
+  'onUpdate:value': Function as PropType<(value: string & number) => void>,
+  onUpdateValue: Function as PropType<(value: string & number) => void>,
   // deprecated
   onChange: {
     type: Function as unknown as PropType<
-    ((value: string | number) => void) | undefined
+    ((value: string & number) => void) | undefined
     >,
     validator: () => {
       if (__DEV__) {
@@ -163,7 +164,7 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
-    function doUpdateValue (value: string | number): void {
+    function doUpdateValue (value: string & number): void {
       const {
         onChange,
         onUpdateValue,

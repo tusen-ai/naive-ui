@@ -35,4 +35,4 @@ size
 | name | `string` | `undefined` | The name attribute of the radio elements inside the group. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 | value | `string \| null` | `null` | Checked value. |
-| on-update:value | `(value: string) => void` | `undefined` | Callback method triggered when a change occurs. |
+| on-update:value | `(value: never) => void` | `undefined` | Callback method triggered when a change occurs. |

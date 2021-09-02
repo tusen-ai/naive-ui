@@ -3,7 +3,7 @@
 A radio group look elegant.
 
 ```html
-<n-radio-group v-model:value="value" name="radiogroup">
+<n-radio-group :value="groupVal" @update:value='handleValue' name="radiogroup">
   <n-space>
     <n-radio v-for="song in songs" :key="song.value" :value="song.value">
       {{ song.label }}
@@ -13,10 +13,17 @@ A radio group look elegant.
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const groupValRef = ref(null)
+    const handleValue = (updateValue) => {
+      groupValRef.value = updateValue
+    }
     return {
-      value: null,
+      groupVal: groupValRef,
+      handleValue,
       songs: [
         {
           value: "Rock'n'Roll Star",
@@ -44,5 +51,5 @@ export default {
       })
     }
   }
-}
+})
 ```

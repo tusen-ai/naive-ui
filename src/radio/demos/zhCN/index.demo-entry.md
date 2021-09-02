@@ -36,4 +36,4 @@ radio-focus-debug
 | name | `string` | `undefined` | 选项组内部 radio 元素的 name 属性 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 大小 |
 | value | `string \| null` | `null` | 选中的值 |
-| on-update:value | `(value: string) => void` | `undefined` | 发生变化时触发的回调方法 |
+| on-update:value | `(value: never) => void` | `undefined` | 发生变化时触发的回调方法 |
