@@ -21,6 +21,7 @@ debug
 | --- | --- | --- | --- |
 | cascade | `boolean` | `false` | 使用 checkbox 进行多选时是否级联 |
 | checkable | `boolean` | `false` | 是否使用 checkbox 进行选择 |
+| children-field | `string` | `'children'` | 替代 `TreeSelectOption` 中的 children 字段名 |
 | clearable | `boolean` | `false` | 是否可清除 |
 | consistent-menu-width | `boolean` | `true` | 是否使菜单宽度和输入框一致，打开会禁用虚拟滚动 |
 | default-value | `string \| number \| Array<string \| number> \| null` | `null` | 默认选中的 key |
@@ -30,8 +31,8 @@ debug
 | expanded-keys | `Array<string \| number>` | `undefined` | 展开节点的 key |
 | filterable | `boolean` | `false` | 是否可过滤 |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | 过滤器函数 |
-| key-field | `string` | `'key'` | `TreeOption` 中的 key 字段名 |
-| label-field | `string` | `'label'` | 替代 `TreeOption` 中的 label 字段名 |
+| key-field | `string` | `'key'` | 替代 `TreeSelectOption` 中的 key 字段名 |
+| label-field | `string` | `'label'` | 替代 `TreeSelectOption` 中的 label 字段名 |
 | leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选时最多直接显示多少选项，设为 `'responsive'` 会保证最多一行 |
 | multiple | `boolean` | `false` | 是否支持多选 |

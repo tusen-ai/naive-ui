@@ -32,6 +32,7 @@ batch-render
 | cancelable | `boolean` | `true` | Whether node's select status can be cancelled. |
 | cascade | `boolean` | `false` | Whether to cascade checkboxes. |
 | checkable | `boolean` | `false` | Whether to display the selection box, you need to set `cascade` to `true`. |
+| children-field | `string` | `'children'` | The children field in `TreeOption`. |
 | checked-keys | `Array<string \| number>` | `undefined` | If set, checked status will work in controlled manner. |
 | data | `Array<TreeOption>` | `[]` | The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner. |
 | default-checked-keys | `Array<string \| number>` | `[]` | Multiple options selected by default. |
@@ -43,7 +44,7 @@ batch-render
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |
 | filter | `(node: TreeOption) => boolean` | `undefined` | A simple string based filter. |
 | key-field | `string` | `'key'` | The key field in `TreeOption`. |
-| label-field | `string` | `'label'` | The the label field in `TreeOption`. |
+| label-field | `string` | `'label'` | The label field in `TreeOption`. |
 | leaf-only | `boolean` | `false` | Whether to open or not, only the bottom tree node is optional. |
 | multiple | `boolean` | `false` | Whether to allow multiple selection of nodes. |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. |
