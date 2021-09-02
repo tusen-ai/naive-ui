@@ -6,6 +6,7 @@
 
 - Fix `n-cascader` click tag to delete the sub option in multi selection mode, and the tree option is not updated.
 - Fix `n-input` chinese input method not correct while mouse leave the input in `clearable` is true, closes [#905](https://github.com/TuSimple/naive-ui/issues/905).
+- Fix `n-data-table`'s header `border-radius` not correct in Tusimple theme.
 
 ### Feats
 

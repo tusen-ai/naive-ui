@@ -299,6 +299,7 @@ export default c([
       border-top-left-radius: var(--border-radius);
       border-top-right-radius: var(--border-radius);
       line-height: var(--line-height);
+      overflow: hidden;
     `),
     cM('loading', [
       cB('data-table-wrapper', 'opacity: var(--opacity-loading);')
@@ -338,11 +339,7 @@ export default c([
         cM('last-row', {
           borderBottom: '0 solid var(--merged-border-color)'
         })
-      ]),
-      cB('data-table-base-table-body', `
-        border-bottom-left-radius: calc(var(--border-radius) - 1px);
-        border-bottom-right-radius: calc(var(--border-radius) - 1px);
-      `)
+      ])
     ]),
     cB('data-table-base-table', [
       cM('transition-disabled', [
@@ -365,7 +362,7 @@ export default c([
       transition: background-color .3s var(--bezier);
       border-collapse: separate;
       border-spacing: 0;
-      background-color: var(--merged-td-color)
+      background-color: var(--merged-td-color);
     `),
     cB('data-table-base-table-header', `
       border-top-left-radius: calc(var(--border-radius) - 1px);
