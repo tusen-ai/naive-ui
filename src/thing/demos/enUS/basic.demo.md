@@ -81,21 +81,22 @@ Thing provides many slots to custom.
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 
-export default {
+export default defineComponent({
   components: {
     CashIcon
   },
-  data () {
+  setup () {
     return {
-      avatar: true,
-      header: true,
-      headerExtra: true,
-      description: true,
-      footer: true,
-      action: true
+      avatar: ref(true),
+      header: ref(true),
+      headerExtra: ref(true),
+      description: ref(true),
+      footer: ref(true),
+      action: ref(true)
     }
   }
-}
+})
 ```
