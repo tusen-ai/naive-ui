@@ -139,7 +139,7 @@ export default defineComponent({
     const virtualListRef = ref<VirtualListInst | null>(null)
     let lastSelectedKey: string | number = ''
     function handleCheckboxUpdateChecked (
-      tmNode: { key: RowKey, index: number },
+      tmNode: { key: RowKey },
       checked: boolean,
       shiftKey: boolean
     ): void {
@@ -147,11 +147,13 @@ export default defineComponent({
       lastSelectedKey = tmNode.key
 
       if (shiftKey) {
-        const currentIndex = tmNode.index
         const lastIndex = paginatedDataRef.value.findIndex(
           (item) => item.key === lastKey
         )
         if (lastIndex !== -1) {
+          const currentIndex = paginatedDataRef.value.findIndex(
+            (item) => item.key === tmNode.key
+          )
           const start = Math.min(lastIndex, currentIndex)
           const end = Math.max(lastIndex, currentIndex)
           const rowKeysToCheck: RowKey[] = []
@@ -556,7 +558,7 @@ export default defineComponent({
                           disabled={rowInfo.disabled}
                           onUpdateChecked={(checked: boolean, e) =>
                             handleCheckboxUpdateChecked(
-                              rowInfo as TmNode,
+                              rowInfo,
                               checked,
                               e.shiftKey
                             )
