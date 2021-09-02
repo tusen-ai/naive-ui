@@ -227,6 +227,9 @@ export default defineComponent({
       }
     }
     const isCompositingRef = ref(false)
+    // the composition end is later than its input so we can cached the event
+    // and return the input event
+    let cachedInputEvent: InputEvent | null = null
     function handlePatternInputInput (e: InputEvent): void {
       // we should sync mirror width here
       const { value: patternInputMirrorEl } = patternInputMirrorRef
@@ -237,14 +240,17 @@ export default defineComponent({
       }
       if (!isCompositingRef.value) {
         doPatternInput(e)
+      } else {
+        cachedInputEvent = e
       }
     }
     function handleCompositionStart (): void {
       isCompositingRef.value = true
     }
-    function handleCompositionEnd (e: CompositionEvent): void {
+    function handleCompositionEnd (): void {
       isCompositingRef.value = false
-      doPatternInput(e as InputEvent)
+      doPatternInput(cachedInputEvent!)
+      cachedInputEvent = null
     }
     function handlePatternInputFocus (): void {
       patternInputFocusedRef.value = true
@@ -522,7 +528,7 @@ export default defineComponent({
       )
       const originalTags = (
         maxTagCountNumeric
-          ? this.selectedOptions!.slice(0, maxTagCount as number)
+          ? this.selectedOptions!.slice(0, maxTagCount)
           : this.selectedOptions!
       ).map(createTag)
       const input = filterable ? (
@@ -571,7 +577,7 @@ export default defineComponent({
         : undefined
       let counter: JSX.Element | undefined
       if (maxTagCountNumeric) {
-        const rest = this.selectedOptions!.length - (maxTagCount as number)
+        const rest = this.selectedOptions!.length - (maxTagCount)
         if (rest > 0) {
           counter = (
             <div
