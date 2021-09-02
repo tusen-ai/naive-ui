@@ -8,6 +8,7 @@
   default-value="Drive My Car"
   label-field="whateverLabel"
   key-field="whateverKey"
+  children-field="whateverChildren"
 />
 ```
 
@@ -21,7 +22,7 @@ export default defineComponent({
         {
           whateverLabel: 'Rubber Soul',
           whateverKey: 'Rubber Soul',
-          children: [
+          whateverChildren: [
             {
               whateverLabel:
                 "Everybody's Got Something to Hide Except Me and My Monkey",
@@ -84,7 +85,7 @@ export default defineComponent({
         {
           whateverLabel: 'Let It Be',
           whateverKey: 'Let It Be Album',
-          children: [
+          whateverChildren: [
             {
               whateverLabel: 'Two Of Us',
               whateverKey: 'Two Of Us'
