@@ -49,6 +49,7 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     actionColor: '#EBEDF0',
     hoverColor: changeColor(colors.primaryColor, { alpha: 0.1 }),
     clearColor: composite('#FFF', 'rgba(0, 0, 0, .4)'),
+    tableColorHover: colors.primaryColorHover,
     ...colors
   },
   Avatar: {

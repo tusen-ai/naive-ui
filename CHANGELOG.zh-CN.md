@@ -6,7 +6,8 @@
 
 - 修复 `n-cascader` 多选模式下点击 tag 删除子选项未更新选中项
 - 修复 `n-input` 在 `clearable` 为 `true` 时鼠标离开输入框时中文输入法不正确，关闭 [#905](https://github.com/TuSimple/naive-ui/issues/905)
-- 修复 `n-data-table` 表头的 `border-radius` 在图森主题下不正确.
+- 修复 `n-data-table` 表头的 `border-radius` 在图森主题下不正确
+- 修复 `n-data-table` 的 `tr` 在图森主题下的背景颜色不正确当鼠标滑上去的时候
 
 ### Feats
 
