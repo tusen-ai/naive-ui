@@ -17,10 +17,10 @@
 
 <script>
   import hljs from 'highlight.js/lib/core'
-  import cpp from 'highlight.js/lib/languages/cpp'
-
-  hljs.registerLanguage('cpp', cpp)
-
+  import javascript from 'highlight.js/lib/languages/javascript'
+  
+  hljs.registerLanguage('javascript', javascript)
+  
   export default {
     setup() {
       return {
