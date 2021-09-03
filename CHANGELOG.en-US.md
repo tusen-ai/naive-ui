@@ -10,6 +10,7 @@
 
 - Fix `n-cascader` click tag to delete the sub option in multi selection mode, and the tree option is not updated.
 - Fix `n-input` chinese input method not correct while mouse leave the input in `clearable` is true, closes [#905](https://github.com/TuSimple/naive-ui/issues/905).
+- Fix `n-collapse` add 'header-extra' slot, closes [#1046](https://github.com/TuSimple/naive-ui/issues/1046).
 
 ### Feats
 

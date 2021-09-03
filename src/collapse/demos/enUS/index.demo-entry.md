@@ -52,4 +52,5 @@ default-expanded
 | --- | --- | --- |
 | default | `()` | The contents of the collapsible panel node. |
 | header | `()` | The content of the header of the collapsed panel node. |
+| header-extra | `()` | The extra content of the header of the collapsed panel node. |
 | arrow | `(options: { collapsed: boolean })` | The custom icon of the node header of the collapsible panel. |

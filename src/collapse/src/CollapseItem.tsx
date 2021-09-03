@@ -102,28 +102,42 @@ export default defineComponent({
             `${mergedClsPrefix}-collapse-item__header`,
             !collapsed && `${mergedClsPrefix}-collapse-item__header--active`
           ]}
-          onClick={this.handleClick}
         >
-          {arrowPlacement === 'right' && headerNode}
-          <div class={`${mergedClsPrefix}-collapse-item-arrow`}>
+          <div
+            class={`${mergedClsPrefix}-collapse-item__header-main`}
+            onClick={this.handleClick}
+          >
+            {arrowPlacement === 'right' && headerNode}
+            <div class={`${mergedClsPrefix}-collapse-item-arrow`}>
+              {renderSlot(
+                $slots.arrow
+                  ? $slots
+                  : collapseSlots.arrow
+                    ? collapseSlots
+                    : $slots,
+                'arrow',
+                { collapsed: collapsed },
+                () => [
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
+                    {{
+                      default: collapseSlots.expandIcon ?? (() => <ArrowIcon />)
+                    }}
+                  </NBaseIcon>
+                ]
+              )}
+            </div>
+            {arrowPlacement === 'left' && headerNode}
+          </div>
+          <div class={`${mergedClsPrefix}-collapse-item__header-extra`}>
             {renderSlot(
-              $slots.arrow
+              $slots['header-extra']
                 ? $slots
-                : collapseSlots.arrow
+                : collapseSlots['header-extra']
                   ? collapseSlots
                   : $slots,
-              'arrow',
-              { collapsed: collapsed },
-              () => [
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{
-                    default: collapseSlots.expandIcon ?? (() => <ArrowIcon />)
-                  }}
-                </NBaseIcon>
-              ]
+              'header-extra'
             )}
           </div>
-          {arrowPlacement === 'left' && headerNode}
         </div>
         <NCollapseItemContent
           clsPrefix={mergedClsPrefix}
