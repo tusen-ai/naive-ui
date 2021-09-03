@@ -16,18 +16,19 @@ The following code shows how to set hljs of Code. Importing highlight.js on dema
 </template>
 
 <script>
+  import { defineComponent } from 'vue'
   import hljs from 'highlight.js/lib/core'
   import cpp from 'highlight.js/lib/languages/cpp'
 
   hljs.registerLanguage('cpp', cpp)
 
-  export default {
+  export default defineComponent({
     setup() {
       return {
         hljs
       }
     }
-  }
+  })
 </script>
 ```
 
