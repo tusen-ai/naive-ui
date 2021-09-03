@@ -35,6 +35,23 @@ export interface DropdownDividerOption {
 
 export type DropdownDivider = Pick<DropdownDividerOption, 'type' | 'key'>
 
+export interface DropdownSubmenu {
+  type: 'submenu'
+  label: string
+  icon?: () => VNodeChild
+  key: Key
+  children: Array<DropdownOption | DropdownDivider | DropdownSubmenu>
+  disabled: boolean
+}
+
+export interface DropdownGroup {
+  type: 'group'
+  label: string
+  icon?: () => VNodeChild
+  key: Key
+  children: Array<DropdownOption | DropdownDivider | DropdownSubmenu>
+}
+
 export type TmNode = TreeNode<
 DropdownOption,
 DropdownGroupOption,
