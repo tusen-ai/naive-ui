@@ -1,16 +1,30 @@
-import { h, defineComponent, PropType, computed, inject } from 'vue'
+import {
+  h,
+  defineComponent,
+  PropType,
+  computed,
+  inject,
+  ref,
+  watchEffect,
+  VNode
+} from 'vue'
 import {
   CancelIcon,
   TrashIcon,
   AttachIcon,
   RetryIcon,
-  DownloadIcon
+  DownloadIcon,
+  FileIcon,
+  PhotoIcon,
+  EyeIcon
 } from '../../_internal/icons'
 import { NButton } from '../../button'
-import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
+import { NIconSwitchTransition, NBaseIcon, NBaseLoading } from '../../_internal'
 import { warn } from '../../_utils'
 import NUploadProgress from './UploadProgress'
-import { FileInfo, uploadInjectionKey } from './interface'
+import { FileInfo, listType, uploadInjectionKey } from './interface'
+import { NImage } from '../../image'
+import { ImageInst } from '../../image/src/Image'
 
 export default defineComponent({
   name: 'UploadFile',
@@ -22,11 +36,19 @@ export default defineComponent({
     file: {
       type: Object as PropType<FileInfo>,
       required: true
+    },
+    listType: {
+      type: String as PropType<listType>,
+      default: 'text'
     }
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NUpload = inject(uploadInjectionKey)!
+
+    const imageRef = ref<ImageInst | null>(null)
+    const thumbnailUrl = ref<string>('')
+
     const progressStatusRef = computed(() => {
       const { file } = props
       if (file.status === 'finished') return 'success'
@@ -61,6 +83,18 @@ export default defineComponent({
       if (!NUpload.showRetryButtonRef.value) return false
       const { file } = props
       return ['error'].includes(file.status)
+    })
+    const showPreivewButtonRef = computed(() => {
+      if (!NUpload.showPreivewButtonRef.value) return false
+      const {
+        file: { status, url },
+        listType
+      } = props
+      return (
+        ['finished'].includes(status) &&
+        (url || thumbnailUrl.value) &&
+        listType === 'picture-card'
+      )
     })
     function handleRetryClick (): void {
       NUpload.submit(props.file.id)
@@ -121,6 +155,46 @@ export default defineComponent({
       XHR?.abort()
       handleRemove(Object.assign({}, file))
     }
+    function isImageUrl (file: FileInfo): boolean {
+      return NUpload.isImageUrl(file)
+    }
+    function handlePreviewClick (e: MouseEvent): void {
+      const {
+        onPreviewRef: { value: onPreview }
+      } = NUpload
+
+      if (onPreview) {
+        e.preventDefault()
+        onPreview(props.file)
+      } else if (props.listType === 'picture-card') {
+        const { value } = imageRef
+        if (!value) return
+        value.handleClick()
+      }
+    }
+
+    const getFileThumbnail = async (): Promise<void> => {
+      if (props.listType !== 'picture' && props.listType !== 'picture-card') {
+        return
+      }
+
+      if (
+        typeof document === 'undefined' ||
+        typeof window === 'undefined' ||
+        !window.FileReader ||
+        !window.File ||
+        !(props.file.file instanceof File)
+      ) {
+        return
+      }
+
+      thumbnailUrl.value = await NUpload.getFileThumbnail(props.file)
+    }
+
+    watchEffect(() => {
+      void getFileThumbnail()
+    })
+
     return {
       mergedTheme: NUpload.mergedThemeRef,
       progressStatus: progressStatusRef,
@@ -133,30 +207,149 @@ export default defineComponent({
       showRetryButton: showRetryButtonRef,
       handleRemoveOrCancelClick,
       handleDownloadClick,
-      handleRetryClick
+      handleRetryClick,
+      isImageUrl,
+      showPreivewButton: showPreivewButtonRef,
+      handlePreviewClick,
+      thumbnailUrl,
+      imageRef
     }
   },
   render () {
     const { clsPrefix, mergedTheme } = this
+
+    const thumbnailNameClass = [`${clsPrefix}-upload-file-info-thumbnail__name`]
+    const fileIcon = (icon: VNode): VNode => (
+      <span class={`${clsPrefix}-upload-file-info-thumbnail__image`}>
+        <NBaseIcon clsPrefix={clsPrefix}>{{ default: () => icon }}</NBaseIcon>
+      </span>
+    )
+    // if there is text list type, show file icon
+    let icon = (
+      <NBaseIcon clsPrefix={clsPrefix}>
+        {{ default: () => <AttachIcon /> }}
+      </NBaseIcon>
+    )
+
+    if (this.listType === 'picture' || this.listType === 'picture-card') {
+      if (this.file.status === 'uploading') {
+        icon =
+          this.listType === 'picture-card' ? (
+            <span>Upload..</span>
+          ) : (
+            <NBaseLoading
+              key="loading"
+              clsPrefix={clsPrefix}
+              class={`${clsPrefix}-upload-file-info-thumbnail__spin`}
+              strokeWidth={20}
+            />
+          )
+      } else {
+        icon = !this.isImageUrl(this.file) ? (
+          fileIcon(<FileIcon />)
+        ) : (this.file.url || this.thumbnailUrl) &&
+          this.file.status !== 'error' ? (
+          <a
+            rel="noopener noreferer"
+            target="_blank"
+            href={this.file.url || undefined}
+            class={`${clsPrefix}-upload-file-info-thumbnail__image`}
+            onClick={(e) => this.handlePreviewClick(e)}
+          >
+            {this.listType === 'picture-card' ? (
+              <NImage
+                src={this.thumbnailUrl || this.file.url || undefined}
+                alt={this.file.name}
+                ref="imageRef"
+              ></NImage>
+            ) : (
+              <img
+                src={this.thumbnailUrl || this.file.url || undefined}
+                alt={this.file.name}
+              />
+            )}
+          </a>
+            ) : (
+              fileIcon(<PhotoIcon />)
+            )
+      }
+    }
+
     return (
-      <a
-        ref="noopener noreferer"
-        target="_blank"
-        href={this.file.url || undefined}
+      <div
         class={[
           `${clsPrefix}-upload-file`,
           `${clsPrefix}-upload-file--${this.progressStatus}-status`,
-          this.file.url && `${clsPrefix}-upload-file--with-url`
+          this.file.url &&
+            this.file.status !== 'error' &&
+            this.listType !== 'picture-card' &&
+            `${clsPrefix}-upload-file--with-url`,
+          `${clsPrefix}-upload-file--${this.listType}-type`
         ]}
       >
         <div class={`${clsPrefix}-upload-file-info`}>
-          <div class={`${clsPrefix}-upload-file-info__name`}>
-            <NBaseIcon clsPrefix={clsPrefix}>
-              {{ default: () => <AttachIcon /> }}
-            </NBaseIcon>
-            {this.file.name}
+          <div
+            class={
+              this.listType === 'picture' || this.listType === 'picture-card'
+                ? `${clsPrefix}-upload-file-info-thumbnail`
+                : `${clsPrefix}-upload-file-info__name`
+            }
+          >
+            {icon}
+            {(this.listType !== 'picture' &&
+              this.listType !== 'picture-card') ||
+            (this.file.url && this.file.status !== 'error') ? (
+              <a
+                rel="noopener noreferer"
+                target="_blank"
+                href={this.file.url || undefined}
+                class={[
+                  ...thumbnailNameClass,
+                  `${clsPrefix}-upload-file-info-thumbnail__hide`
+                ]}
+                onClick={(e) => this.handlePreviewClick(e)}
+              >
+                {this.file.name}
+              </a>
+                ) : (
+              <span
+                class={[
+                  ...thumbnailNameClass,
+                  (this.file.url ||
+                    this.thumbnailUrl ||
+                    this.file.status === 'uploading') &&
+                    `${clsPrefix}-upload-file-info-thumbnail__hide`
+                ]}
+                onClick={(e) => this.handlePreviewClick(e)}
+              >
+                {this.file.name}
+              </span>
+                )}
           </div>
-          <div class={`${clsPrefix}-upload-file-info__action`}>
+          <div
+            class={[
+              `${clsPrefix}-upload-file-info__action`,
+              `${clsPrefix}-upload-file-info__action--${this.listType}-type`
+            ]}
+          >
+            {this.showPreivewButton ? (
+              <NButton
+                key="preview"
+                text
+                type={this.buttonType}
+                onClick={this.handlePreviewClick}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
+              >
+                {{
+                  icon: () => (
+                    <NBaseIcon clsPrefix={clsPrefix}>
+                      {{ default: () => <EyeIcon /> }}
+                    </NBaseIcon>
+                  )
+                }}
+              </NButton>
+            ) : null}
             {(this.showRemoveButton || this.showCancelButton) &&
               !this.disabled && (
                 <NButton
@@ -230,7 +423,7 @@ export default defineComponent({
           percentage={this.file.percentage || 0}
           status={this.progressStatus}
         />
-      </a>
+      </div>
     )
   }
 })

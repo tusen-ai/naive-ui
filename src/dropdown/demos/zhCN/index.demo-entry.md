@@ -15,6 +15,7 @@ size
 manual-position
 group-debug
 batch-render
+option-props
 ```
 
 ## Props
@@ -41,6 +42,7 @@ batch-render
 | key      | `string \| number` | 需要唯一                        |
 | label    | `string`           | 显示的 label 值                 |
 | disabled | `boolean`          | 是否禁用                        |
+| props    | `HTMLAttributes`   | 自定义选项属性                  |
 
 ### DropdownDivider Type
 

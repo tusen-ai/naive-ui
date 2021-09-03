@@ -6,8 +6,8 @@ import type { TreeTheme } from '../styles'
 export type Key = string | number
 
 export interface TreeOptionBase {
-  key: Key
-  label: string
+  key?: Key
+  label?: string
   checkboxDisabled?: boolean
   disabled?: boolean
   isLeaf?: boolean
@@ -99,6 +99,7 @@ export interface TreeInjection {
   renderLabelRef: Ref<RenderLabel | undefined>
   renderPrefixRef: Ref<RenderPrefix | undefined>
   renderSuffixRef: Ref<RenderSuffix | undefined>
+  labelFieldRef: Ref<string>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void

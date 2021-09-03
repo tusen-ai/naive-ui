@@ -9,10 +9,7 @@ export default defineComponent({
       type: String,
       required: true
     },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
+    disabled: Boolean,
     checked: Boolean,
     selected: Boolean,
     onClick: Function as PropType<(e: MouseEvent) => void>,
@@ -23,7 +20,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { renderLabelRef, renderPrefixRef, renderSuffixRef } =
+    const { renderLabelRef, renderPrefixRef, renderSuffixRef, labelFieldRef } =
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       inject(treeInjectionKey)!
     const selfRef = ref<HTMLElement | null>(null)
@@ -39,12 +36,14 @@ export default defineComponent({
       renderLabel: renderLabelRef,
       renderPrefix: renderPrefixRef,
       renderSuffix: renderSuffixRef,
+      labelField: labelFieldRef,
       handleClick
     }
   },
   render () {
     const {
       clsPrefix,
+      labelField,
       checked = false,
       selected = false,
       renderLabel,
@@ -54,7 +53,7 @@ export default defineComponent({
       onDragstart,
       tmNode: {
         rawNode,
-        rawNode: { prefix, label, suffix }
+        rawNode: { prefix, suffix, [labelField]: label }
       }
     } = this
     return (

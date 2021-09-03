@@ -94,6 +94,13 @@ export default defineComponent({
       uncontrolledValueRef
     )
     const displayedValueRef = ref('')
+    const precisionRef = computed(() => {
+      const precisions = [props.min, props.max, props.step].map((item) => {
+        const fraction = String(item).split('.')[1]
+        return fraction ? fraction.length : 0
+      })
+      return Math.max(...precisions)
+    })
     const mergedPlaceholderRef = useMemo(() => {
       const { placeholder } = props
       if (placeholder !== undefined) return placeholder
@@ -143,7 +150,7 @@ export default defineComponent({
         return null
       }
       if (validator(parsedValue)) {
-        let nextValue = parsedValue + offset
+        let nextValue = parseFloat((parsedValue + offset).toFixed(precisionRef.value))
         if (validator(nextValue)) {
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef

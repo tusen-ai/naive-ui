@@ -83,7 +83,7 @@ export function createLayoutComponent (isContent: boolean) {
           }
         }
       }
-      if (__DEV__) provide(layoutInjectionKey, props)
+      provide(layoutInjectionKey, props)
       const hasSiderStyle: CSSProperties = {
         display: 'flex',
         flexWrap: 'nowrap',

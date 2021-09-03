@@ -46,15 +46,15 @@ virtual
 
 ### CascaderOption Properties
 
-| Name      | Type               | Description                     |
-| --------- | ------------------ | ------------------------------- |
-| label     | `string`           | Label of the option.            |
-| value     | `string \| number` | Value of the option.            |
-| disabled? | `boolean`          | Whether this option is disabled.  |
+| Name      | Type               | Description                          |
+| --------- | ------------------ | ------------------------------------ |
+| label     | `string`           | Label of the option.                 |
+| value     | `string \| number` | Value of the option.                 |
+| disabled? | `boolean`          | Whether this option is disabled.     |
 | children? | `CascaderOption`   | The children options of this option. |
 
 ## Slots
 
-| Name   | Parameters | Description                                          |
-| ------ | ---------- | ---------------------------------------------------- |
+| Name   | Parameters | Description                                     |
+| ------ | ---------- | ----------------------------------------------- |
 | action | `()`       | Action content displayed in the cascading menu. |

@@ -22,6 +22,7 @@
   I'm back in the U.S.S.R.
 </n-alert>
 ```
+
 ```js
 import { IosAirplane } from '@vicons/ionicons4'
 import { defineComponent, ref } from 'vue'

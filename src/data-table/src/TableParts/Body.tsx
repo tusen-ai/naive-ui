@@ -137,15 +137,44 @@ export default defineComponent({
     } = inject(dataTableInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
+    let lastSelectedKey: string | number = ''
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey },
-      checked: boolean
+      checked: boolean,
+      shiftKey: boolean
     ): void {
+      if (shiftKey) {
+        const lastIndex = paginatedDataRef.value.findIndex(
+          (item) => item.key === lastSelectedKey
+        )
+        if (lastIndex !== -1) {
+          const currentIndex = paginatedDataRef.value.findIndex(
+            (item) => item.key === tmNode.key
+          )
+          const start = Math.min(lastIndex, currentIndex)
+          const end = Math.max(lastIndex, currentIndex)
+          const rowKeysToCheck: RowKey[] = []
+          paginatedDataRef.value.slice(start, end + 1).forEach((r) => {
+            if (!r.disabled) {
+              rowKeysToCheck.push(r.key)
+            }
+          })
+          if (checked) {
+            doCheck(rowKeysToCheck)
+          } else {
+            doUncheck(rowKeysToCheck)
+          }
+          lastSelectedKey = tmNode.key
+          return
+        }
+      }
+
       if (checked) {
         doCheck(tmNode.key)
       } else {
         doUncheck(tmNode.key)
       }
+      lastSelectedKey = tmNode.key
     }
     function getScrollContainer (): HTMLElement | null {
       if (virtualScrollRef.value) {
@@ -527,8 +556,12 @@ export default defineComponent({
                           key={currentPage}
                           rowKey={rowKey}
                           disabled={rowInfo.disabled}
-                          onUpdateChecked={(checked) =>
-                            handleCheckboxUpdateChecked(rowInfo, checked)
+                          onUpdateChecked={(checked: boolean, e) =>
+                            handleCheckboxUpdateChecked(
+                              rowInfo,
+                              checked,
+                              e.shiftKey
+                            )
                           }
                         />
                       ) : null

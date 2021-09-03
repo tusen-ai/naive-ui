@@ -14,6 +14,7 @@ placement
 size
 manual-position
 batch-render
+option-props
 ```
 
 ## Props
@@ -34,12 +35,13 @@ For other props, for example `placement`, please see [Popover Props](popover#Pro
 
 ### DropdownOption Type
 
-| Property | Type               | Description                         |
-| -------- | ------------------ | ----------------------------------- |
+| Property | Type               | Description                               |
+| -------- | ------------------ | ----------------------------------------- |
 | icon?    | `() => VNodeChild` | Custom render function of an option icon. |
-| key      | `string \| number` | Option ID (should be unique).       |
-| label    | `string`           | Displayed label value.              |
-| disabled | `boolean`          | Whether to disable the option.      |
+| key      | `string \| number` | Option ID (should be unique).             |
+| label    | `string`           | Displayed label value.                    |
+| disabled | `boolean`          | Whether to disable the option.            |
+| props    | `HTMLAttributes`   | Customize option props.                   |
 
 ### DropdownDivider Type
 
