@@ -14,6 +14,8 @@ Column: Set `className` property on column object to assign a class name to a ce
 ```
 
 ```js
+import { defineComponent } from 'vue'
+
 const data = [
   {
     key: 0,
@@ -35,10 +37,10 @@ const data = [
   }
 ]
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      data: data,
+      data,
       columns: [
         {
           title: 'Name',
@@ -53,18 +55,16 @@ export default {
           title: 'Address',
           key: 'address'
         }
-      ]
-    }
-  },
-  methods: {
-    rowClassName (row, index) {
-      if (row.age > 32) {
-        return 'too-old'
+      ],
+      rowClassName (row, index) {
+        if (row.age > 32) {
+          return 'too-old'
+        }
+        return null
       }
-      return null
     }
   }
-}
+})
 ```
 
 ```css
