@@ -28,6 +28,7 @@
 - `n-mention` export `MentionOption` type.
 - `n-transfer` export `TransferOption` type.
 - `n-pagination` add `PaginationInfo` type.
+- `n-data-table` export `CreateSummary` type.
 
 ### Fixes
 
