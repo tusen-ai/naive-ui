@@ -78,7 +78,13 @@ export default defineComponent({
           return
         }
       }
-      codeEl.textContent = code
+      if (props.inline) {
+        codeEl.textContent = code
+        return
+      }
+      const warp = document.createElement('pre')
+      warp.textContent = code
+      codeEl.appendChild(warp)
     }
     onMounted(setCode)
     watch(toRef(props, 'language'), setCode)
@@ -134,7 +140,6 @@ export default defineComponent({
     }
   },
   render () {
-    const { default: defaultSlot } = this.$slots
     const { mergedClsPrefix } = this
     return (
       <code
@@ -142,7 +147,7 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
         ref="codeRef"
       >
-        {defaultSlot?.()}
+        {this.$slots}
       </code>
     )
   }

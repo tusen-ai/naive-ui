@@ -3,10 +3,10 @@
 For example, JavaScript.
 
 ```html
-<n-space :size="16">
+<div>
   <n-text>JavaScript</n-text>
   <n-code :code="code" language="javascript" inline />
-</n-space>
+</div>
 ```
 
 ```js
