@@ -86,8 +86,8 @@ export default cB('collapse', {
       cE('header-extra', `
         display: flex;
         align-items: center;
-        font-size: 18px;
-        font-weight: var(--title-font-weight);
+        font-size: 14px;
+        font-weight: 400;
         transition: color .3s var(--bezier);
         color: var(--text-color);
       `),

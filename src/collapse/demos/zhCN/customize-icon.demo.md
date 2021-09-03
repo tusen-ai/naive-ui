@@ -2,9 +2,7 @@
 
 ```html
 <n-collapse>
-  <template #header-extra>
-    <n-icon><cash-icon /></n-icon>
-  </template>
+  <template #header-extra> 你好你好 </template>
   <template #arrow>
     <n-icon>
       <cash-icon />
