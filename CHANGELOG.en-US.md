@@ -26,6 +26,7 @@
 - `n-dropdown` add `DropdownDivider` type.
 - `n-cascader` add `CascaderOption` type.
 - `n-mention` export `MentionOption` type.
+- `n-transfer` export `TransferOption` type.
 
 ### Fixes
 
