@@ -23,6 +23,7 @@
 - `n-data-table` 支持按住 `shift` 进行多选操作，关闭 [#554](https://github.com/TuSimple/naive-ui/issues/554)
 - `n-tree-select` 增加 `check-strategy` 属性，关闭 [#624](https://github.com/TuSimple/naive-ui/issues/624)
 - `n-upload` 增加 `UploadFile` 类型
+- `n-dropdown` 增加 `DropdownDivider` 类型
 
 ### Fixes
 

@@ -33,6 +33,8 @@ export interface DropdownDividerOption {
   [key: string]: unknown
 }
 
+export type DropdownDivider = Pick<DropdownDividerOption, 'type' | 'key'>
+
 export type TmNode = TreeNode<
 DropdownOption,
 DropdownGroupOption,

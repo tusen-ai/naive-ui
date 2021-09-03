@@ -23,6 +23,7 @@
 - `n-data-table` supports multi-selection by holding down `shift`, closes [#554](https://github.com/TuSimple/naive-ui/issues/554).
 - `n-tree-select` add `check-strategy` prop, closes [#624](https://github.com/TuSimple/naive-ui/issues/624).
 - `n-upload` add `UploadFile` type.
+- `n-dropdown` add `DropdownDivider` type.
 
 ### Fixes
 
