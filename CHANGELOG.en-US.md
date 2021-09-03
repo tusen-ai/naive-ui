@@ -24,6 +24,7 @@
 - `n-tree-select` add `check-strategy` prop, closes [#624](https://github.com/TuSimple/naive-ui/issues/624).
 - `n-upload` add `UploadFile` type.
 - `n-dropdown` add `DropdownDivider` type.
+- `n-cascader` add `CascaderOption` type.
 
 ### Fixes
 

@@ -24,6 +24,7 @@
 - `n-tree-select` 增加 `check-strategy` 属性，关闭 [#624](https://github.com/TuSimple/naive-ui/issues/624)
 - `n-upload` 增加 `UploadFile` 类型
 - `n-dropdown` 增加 `DropdownDivider` 类型
+- `n-cascader` 增加 `CascaderOption` 类型
 
 ### Fixes
 
