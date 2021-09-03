@@ -39,7 +39,9 @@ const Buttons = {
       h(
         NSpace,
         null,
-        children
+        {
+          default: () => children
+        }
       )
     ]
   }
