@@ -91,6 +91,27 @@ describe('n-collapse', () => {
     expect(onClick).toHaveBeenCalled()
   })
 
+  it('should work with `slots` ', async () => {
+    const wrapper = mount(NCollapse, {
+      slots: {
+        header: () => 'header',
+        'header-extra': () => 'header-extra',
+        default: () => <NCollapseItem name="1"></NCollapseItem>,
+        arrow: () => 'arrow'
+      }
+    })
+    expect(wrapper.find('.n-collapse-item__header-main').exists()).toBe(true)
+    expect(wrapper.find('.n-collapse-item__header-main').text()).toBe('arrow')
+
+    expect(wrapper.find('.n-collapse-item__header-extra').exists()).toBe(true)
+    expect(wrapper.find('.n-collapse-item__header-extra').text()).toBe(
+      'header-extra'
+    )
+
+    expect(wrapper.find('.n-collapse-item-arrow').exists()).toBe(true)
+    expect(wrapper.find('.n-collapse-item-arrow').text()).toBe('arrow')
+  })
+
   it('props.defaultExpandedNames', async () => {
     let wrapper = mount(NCollapse, {
       props: {
