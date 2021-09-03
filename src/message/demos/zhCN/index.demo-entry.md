@@ -80,6 +80,7 @@ placement
 | closable     | `boolean`     | 是否显示 close 图标    |
 | duration     | `number`      | 信息展示的时长         |
 | icon         | `() => VNode` | 信息图标               |
+| style         | `CSSProperties` | 信息样式 |
 | onAfterLeave | `() => void`  | 信息消失动画结束的回调 |
 | onClose      | `() => void`  | 点击关闭图标的回调     |
 | onLeave      | `() => void`  | 信息开始消失的回调     |
@@ -93,6 +94,7 @@ placement
 | destroy | `() => void` | 销毁信息的方法 |
 | icon | `() => VNode` | 信息图标 |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | 信息类型 |
+| style         | `CSSProperties` | 信息样式 |
 | onAfterLeave | `() => void` | 信息消失动画结束的回调 |
 | onLeave | `() => void` | 信息开始消失的回调 |
 

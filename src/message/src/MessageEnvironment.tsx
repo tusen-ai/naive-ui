@@ -81,6 +81,7 @@ export default defineComponent({
                 content={this.content}
                 type={this.type}
                 icon={this.icon}
+                style={this.style}
                 closable={this.closable}
                 onClose={this.handleClose}
               />

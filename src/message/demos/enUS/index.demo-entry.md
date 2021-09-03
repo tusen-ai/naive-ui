@@ -80,6 +80,7 @@ placement
 | closable     | `boolean`     | Whether to show close icon.               |
 | duration     | `number`      | The duration of the message.              |
 | icon         | `() => VNode` | Message icon.                             |
+| style         | `CSSProperties` | Message style.                             |
 | onAfterLeave | `() => void`  | Callback after message disappeared.       |
 | onClose      | `() => void`  | Callback when close icon is clicked.      |
 | onLeave      | `() => void`  | Callback when message start to disappear. |
@@ -93,6 +94,7 @@ placement
 | destroy | `() => void` | Message destroy method. |
 | icon | `() => VNode` | Message icon. |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | Message type. |
+| style         | `CSSProperties` | Message style.                             |
 | onAfterLeave | `() => void` | Callback after message disappeared. |
 | onLeave | `() => void` | Callback when message start to disappear. |
 

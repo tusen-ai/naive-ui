@@ -1,4 +1,4 @@
-import { PropType, VNodeChild } from 'vue'
+import { PropType, VNodeChild, CSSProperties } from 'vue';
 
 export type MessageType = 'info' | 'success' | 'warning' | 'error' | 'loading'
 
@@ -11,6 +11,7 @@ export const messageProps = {
   content: [String, Number, Function] as PropType<
   string | number | (() => VNodeChild)
   >,
+  style: Object as PropType<CSSProperties>,
   closable: Boolean,
   onClose: Function as PropType<() => void>
 } as const

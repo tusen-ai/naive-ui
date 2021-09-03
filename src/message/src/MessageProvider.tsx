@@ -24,6 +24,7 @@ import { MessageTheme } from '../styles'
 export interface MessageOptions {
   duration?: number
   closable?: boolean
+  style?: CSSProperties,
   icon?: () => VNodeChild
   onClose?: () => void
   onLeave?: () => void
@@ -48,6 +49,7 @@ export interface MessageReactive {
   content?: ContentType
   duration?: number
   closable?: boolean
+  style?: CSSProperties
   icon?: () => VNodeChild
   onClose?: () => void
   destroy: () => void
@@ -192,6 +194,7 @@ export default defineComponent({
                         }
                       }) as () => void
                     }
+                    style={message.style}
                     internalKey={message.key}
                     onInternalAfterLeave={this.handleAfterLeave}
                     {...omit(message, ['destroy'], undefined)}

@@ -28,7 +28,12 @@ export default {
       },
       success () {
         message.success(
-          "'Cause you walked hand in hand With another man in my place"
+          "Cause you walked hand in hand With another man in my place",
+          {
+            style: {
+              'color': '#4fb233'
+            }
+          }
         )
       },
       loading () {

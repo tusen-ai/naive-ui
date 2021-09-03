@@ -116,6 +116,7 @@ export default defineComponent({
       type,
       closable,
       content,
+      style: customStyle,
       mergedClsPrefix,
       cssVars,
       handleClose
@@ -132,6 +133,7 @@ export default defineComponent({
       >
         <div
           class={`${mergedClsPrefix}-message ${mergedClsPrefix}-message--${type}-type`}
+          style={customStyle}
         >
           <div
             class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
