@@ -9,6 +9,7 @@
   :default-expanded-keys="defaultExpandedKeys"
   key-field="whateverKey"
   label-field="whateverLabel"
+  children-field="whateverChildren"
   selectable
 />
 ```
@@ -23,7 +24,7 @@ function createData (level = 4, baseKey = '') {
     return {
       whateverLabel: createLabel(level),
       whateverKey: key,
-      children: createData(level - 1, key)
+      whateverChildren: createData(level - 1, key)
     }
   })
 }

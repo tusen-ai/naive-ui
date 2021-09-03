@@ -32,6 +32,7 @@ batch-render
 | cancelable | `boolean` | `true` | 选中之后是否允许取消 |
 | cascade | `boolean` | `false` | 是否关联选项 |
 | checkable | `boolean` | `false` | 是否显示选择框，需要将 `cascade` 设置为 `true` |
+| children-field | `string` | `'children'` | 替代 `TreeOption` 中的 children 字段名 |
 | checked-keys | `Array<string \| number>` | `undefined` | 如果设定则 `checked` 状态受控 |
 | data | `Array<TreeOption>` | `[]` | 树的节点数据。重新设置 `data` 会将一些非受控状态清空，如果你需要在使用中改动 `data`，最好以受控的方式控制树 |
 | default-checked-keys | `Array<string \| number>` | `[]` | 默认选中的多选项 |
@@ -42,7 +43,7 @@ batch-render
 | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |
 | filter | `(node: TreeOption) => boolean` | `undefined` | 一个简单的字符串过滤算法 |
-| key-field | `string` | `'key'` | `TreeOption` 中的 key 字段名 |
+| key-field | `string` | `'key'` | 替代 `TreeOption` 中的 key 字段名 |
 | label-field | `string` | `'label'` | 替代 `TreeOption` 中的 label 字段名 |
 | leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
 | multiple | `boolean` | `false` | 是否允许节点多选 |

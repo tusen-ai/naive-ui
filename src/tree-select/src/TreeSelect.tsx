@@ -10,7 +10,8 @@ import {
   CSSProperties,
   provide,
   watch,
-  nextTick
+  nextTick,
+  watchEffect
 } from 'vue'
 import {
   FollowerPlacement,
@@ -38,7 +39,8 @@ import {
   call,
   ExtractPublicPropTypes,
   MaybeArray,
-  useAdjustedTo
+  useAdjustedTo,
+  warnOnce
 } from '../../_utils'
 import { treeSelectLight, TreeSelectTheme } from '../styles'
 import type {
@@ -47,7 +49,7 @@ import type {
   TreeSelectOption,
   Value
 } from './interface'
-import { treeSelectInjectionKey } from './interface'
+import { treeSelectInjectionKey, CheckStrategy } from './interface'
 import {
   treeOption2SelectOption,
   filterTree,
@@ -80,7 +82,10 @@ const props = {
     default: undefined
   },
   filterable: Boolean,
-  leafOnly: Boolean,
+  checkStrategy: {
+    type: String as PropType<CheckStrategy>,
+    default: 'all'
+  },
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
   showPath: Boolean,
@@ -120,7 +125,14 @@ const props = {
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
-  >
+  >,
+  /**
+   * @deprecated
+   */
+  leafOnly: {
+    type: Boolean,
+    default: undefined
+  }
 } as const
 
 export type TreeSelectProps = ExtractPublicPropTypes<typeof props>
@@ -129,6 +141,16 @@ export default defineComponent({
   name: 'TreeSelect',
   props,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.leafOnly !== undefined) {
+          warnOnce(
+            'tree-select',
+            '`leaf-only` is deprecated, please use `check-strategy="child"` instead.'
+          )
+        }
+      })
+    }
     const followerInstRef = ref<FollowerInst | null>(null)
     const triggerInstRef = ref<InternalSelectionInst | null>(null)
     const treeInstRef = ref<InternalTreeInst | null>(null)
@@ -195,13 +217,13 @@ export default defineComponent({
     const dataTreeMateRef = computed(() =>
       createTreeMate<TreeSelectOption>(
         props.options,
-        createTreeMateOptions(props.keyField)
+        createTreeMateOptions(props.keyField, props.childrenField)
       )
     )
     const displayTreeMateRef = computed(() =>
       createTreeMate<TreeSelectOption>(
         filteredTreeInfoRef.value.filteredTree,
-        createTreeMateOptions(props.keyField)
+        createTreeMateOptions(props.keyField, props.childrenField)
       )
     )
     const { value: initMergedValue } = mergedValueRef
@@ -285,8 +307,12 @@ export default defineComponent({
       if (Array.isArray(mergedValue)) {
         const res: SelectBaseOption[] = []
         const { value: treeMate } = dataTreeMateRef
+        const { checkedKeys } = treeMate.getCheckedKeys(mergedValue, {
+          checkStrategy: props.checkStrategy,
+          cascade: mergedCascadeRef.value
+        })
         const { keyField, labelField } = props
-        mergedValue.forEach((value) => {
+        checkedKeys.forEach((value) => {
           const tmNode = treeMate.getNode(value)
           if (tmNode !== null) {
             res.push(
@@ -723,6 +749,7 @@ export default defineComponent({
                                   checkedKeys={this.treeCheckedKeys}
                                   selectedKeys={this.treeSelectedKeys}
                                   checkable={checkable}
+                                  internalCheckStrategy={this.checkStrategy}
                                   cascade={this.mergedCascade}
                                   leafOnly={this.leafOnly}
                                   multiple={this.multiple}

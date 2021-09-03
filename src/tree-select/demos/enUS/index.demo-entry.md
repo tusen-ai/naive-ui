@@ -9,6 +9,7 @@ basic
 custom-field
 multiple
 checkbox
+check-strategy
 filterable
 debug
 ```
@@ -21,6 +22,8 @@ debug
 | --- | --- | --- | --- |
 | cascade | `boolean` | `false` | Whether to do cascade check when use checkboxes. |
 | checkable | `boolean` | `false` | Whether to use checkbox to select value. |
+| check-strategy | `string` | `'all'` | The way to show checked options. `all` means showing all checked node. `parent` means showing all checked parent node when all child node are checked. `child` means showing all child node. |
+| children-field | `string` | `'children'` | The children field in `TreeSelectOption`. |
 | clearable | `boolean` | `false` | Whether it's clearable. |
 | consistent-menu-width | `boolean` | `true` | Whether to make menu's width consistent with input. Set to `true` will disable virtual scroll. |
 | default-value | `string \| number \| Array<string \| number> \| null` | `null` | Selected key (or keys when multiple) by default. |
@@ -30,8 +33,8 @@ debug
 | expanded-keys | `Array<string \| number>` | `undefined` | Expanded keys. |
 | filterable | `boolean` | `false` | Whether the tree select is disabled. |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | Filter function. |
-| key-field | `string` | `'key'` | The key field in `TreeOption`. |
-| label-field | `string` | `'label'` | The the label field in `TreeOption`. |
+| key-field | `string` | `'key'` | The key field in `TreeSelectOption`. |
+| label-field | `string` | `'label'` | The label field in `TreeSelectOption`. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count to be shown in multiple mode. Set to `'responsive'` will keep all tags in the same row. |
 | multiple | `boolean` | `false` | Whether to support multiple select. |
 | options | `TreeSelectOption[]` | `[]` | Options. |

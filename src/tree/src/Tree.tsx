@@ -28,6 +28,7 @@ import { call, createDataKey, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NxScrollbar } from '../../scrollbar'
 import type { ScrollbarInst } from '../../scrollbar'
+import { CheckStrategy } from '../../tree-select/src/interface'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
@@ -62,11 +63,15 @@ import style from './styles/index.cssr'
 const ITEM_SIZE = 30 // 24 + 3 + 3
 
 export function createTreeMateOptions<T> (
-  keyField: string
+  keyField: string,
+  childrenField: string
 ): TreeMateOptions<T, T, T> {
   return {
     getKey (node: T) {
       return (node as any)[keyField]
+    },
+    getChildren (node: T) {
+      return (node as any)[childrenField]
     },
     getDisabled (node: T) {
       return !!((node as any).disabled || (node as any).checkboxDisabled)
@@ -85,6 +90,10 @@ export const treeSharedProps = {
   labelField: {
     type: String,
     default: 'label'
+  },
+  childrenField: {
+    type: String,
+    default: 'children'
   },
   defaultExpandedKeys: {
     type: Array as PropType<Key[]>,
@@ -203,6 +212,10 @@ const treeProps = {
     // Make tree-select take over keyboard operations
     type: Boolean,
     default: true
+  },
+  internalCheckStrategy: {
+    type: String as PropType<CheckStrategy>,
+    default: 'all'
   }
 } as const
 
@@ -236,7 +249,7 @@ export default defineComponent({
       : computed(() =>
         createTreeMate<TreeOption>(
           props.data,
-          createTreeMateOptions(props.keyField)
+          createTreeMateOptions(props.keyField, props.childrenField)
         )
       )
     const dataTreeMateRef = props.internalDataTreeMate
@@ -255,6 +268,9 @@ export default defineComponent({
         cascade: props.cascade
       })
     })
+    const mergedCheckStrategyRef = computed(() =>
+      props.leafOnly ? 'child' : props.internalCheckStrategy
+    )
     const displayedCheckedKeysRef = computed(() => {
       return checkedStatusRef.value.checkedKeys
     })
@@ -559,7 +575,8 @@ export default defineComponent({
         checked ? 'check' : 'uncheck'
       ](node.key, displayedCheckedKeysRef.value, {
         cascade: props.cascade,
-        leafOnly: props.leafOnly
+        leafOnly: props.leafOnly,
+        checkStrategy: mergedCheckStrategyRef.value
       })
       doUpdateCheckedKeys(checkedKeys)
     }

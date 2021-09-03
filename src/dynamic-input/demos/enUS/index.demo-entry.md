@@ -34,10 +34,10 @@ form
 
 ### Dynamic Input Props (Input Preset)
 
-| Name        | Type            | Default  | Description                 |
-| ----------- | --------------- | -------- | --------------------------- |
+| Name        | Type            | Default  | Description                    |
+| ----------- | --------------- | -------- | ------------------------------ |
 | value       | `Array<string>` | required | Value when being set manually. |
-| placeholder | `string`        | `''`     | Placeholder for each item.  |
+| placeholder | `string`        | `''`     | Placeholder for each item.     |
 
 ### Dynamic Input Props (Pair Preset)
 

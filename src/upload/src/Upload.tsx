@@ -645,7 +645,7 @@ export default defineComponent({
                 {{
                   default: () => uploadFileList
                 }}
-              </NImageGroup>          
+              </NImageGroup>
             ) : (
               uploadFileList
             )}
