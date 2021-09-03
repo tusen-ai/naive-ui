@@ -82,6 +82,10 @@ const inputProps = {
   },
   passivelyActivated: Boolean,
   showPasswordToggle: Boolean,
+  mousePasswordToggle: {
+    type: Boolean,
+    default: false
+  },
   stateful: {
     type: Boolean,
     default: true
@@ -521,6 +525,10 @@ export default defineComponent({
       if (mergedDisabledRef.value) return
       passwordVisibleRef.value = !passwordVisibleRef.value
     }
+    function mousePasswordToggleClick (): void {
+      if (mergedDisabledRef.value) return
+      passwordVisibleRef.value = !passwordVisibleRef.value
+    }
     function handlePasswordToggleMousedown (e: MouseEvent): void {
       if (mergedDisabledRef.value) return
       e.preventDefault()
@@ -697,6 +705,7 @@ export default defineComponent({
       handlePasswordToggleMouseup,
       handleWrapperKeyDown,
       handleTextAreaMirrorResize,
+      mousePasswordToggleClick,
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
@@ -977,7 +986,9 @@ export default defineComponent({
                 this.showCount && this.type !== 'textarea' ? (
                   <WordCount />
                 ) : null,
-                this.showPasswordToggle && this.type === 'password' ? (
+                this.showPasswordToggle &&
+                !this.mousePasswordToggle &&
+                this.type === 'password' ? (
                   <NBaseIcon
                     clsPrefix={mergedClsPrefix}
                     class={`${mergedClsPrefix}-input__eye`}
@@ -990,7 +1001,22 @@ export default defineComponent({
                         this.passwordVisible ? <EyeIcon /> : <EyeOffIcon />
                     }}
                   </NBaseIcon>
-                ) : null
+                    ) : null,
+                this.showPasswordToggle &&
+                this.mousePasswordToggle &&
+                this.type === 'password' ? (
+                  <NBaseIcon
+                    clsPrefix={mergedClsPrefix}
+                    class={`${mergedClsPrefix}-input__eye`}
+                    onMousedown={this.mousePasswordToggleClick}
+                    onMouseup={this.mousePasswordToggleClick}
+                  >
+                    {{
+                      default: () =>
+                        this.passwordVisible ? <EyeIcon /> : <EyeOffIcon />
+                    }}
+                  </NBaseIcon>
+                    ) : null
               ]}
             </div>
               ) : null}
