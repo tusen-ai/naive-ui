@@ -7,7 +7,7 @@
 ```
 
 ```js
-import { useNotification, NButton } from 'naive-ui'
+import { useNotification, NButton, NSpace } from 'naive-ui'
 import { ref, defineComponent, h } from 'vue'
 
 const Buttons = {
@@ -19,114 +19,27 @@ const Buttons = {
     }
   },
   render () {
+    const children = ['top', 'bottom', 'top-left', 'top-right', 'bottom-left', 'bottom-right'].map(placement =>
+      h(
+        NButton,
+        {
+          onClick: () => {
+            this.$emit('changePlacement', placement)
+            this.notification.info({
+              title: "Wouldn't it be Nice",
+              description: 'From the Beach Boys',
+              content: `I can be ${placement}`
+            })
+          },
+        },
+        { default: () => placement }
+      ),
+    )
     return [
       h(
-        NButton,
-        {
-          onClick: () => {
-            this.$emit('changePlacement', 'top')
-            this.notification.info({
-              title: "Wouldn't it be Nice",
-              description: 'From the Beach Boys',
-              content: 'I can be top'
-            })
-          },
-          style: {
-            marginRight: '10px',
-            marginTop: '10px'
-          }
-        },
-        { default: () => '顶部' }
-      ),
-      h(
-        NButton,
-        {
-          onClick: () => {
-            this.$emit('changePlacement', 'bottom')
-            this.notification.info({
-              title: "Wouldn't it be Nice",
-              description: 'From the Beach Boys',
-              content: 'I can be bottom'
-            })
-          },
-          style: {
-            marginRight: '10px',
-            marginTop: '10px'
-          }
-        },
-        { default: () => '底部' }
-      ),
-      h(
-        NButton,
-        {
-          onClick: () => {
-            this.$emit('changePlacement', 'top-left')
-            this.notification.info({
-              title: "Wouldn't it be Nice",
-              description: 'From the Beach Boys',
-              content: 'I can be top left'
-            })
-          },
-          style: {
-            marginRight: '10px',
-            marginTop: '10px'
-          }
-        },
-        { default: () => '左上' }
-      ),
-      h(
-        NButton,
-        {
-          onClick: () => {
-            this.$emit('changePlacement', 'top-right')
-            this.notification.info({
-              title: "Wouldn't it be Nice",
-              description: 'From the Beach Boys',
-              content: 'I can be top right'
-            })
-          },
-          style: {
-            marginRight: '10px',
-            marginTop: '10px'
-          }
-        },
-        { default: () => '右上' }
-      ),
-      h(
-        NButton,
-        {
-          onClick: () => {
-            this.$emit('changePlacement', 'bottom-left')
-            this.notification.info({
-              title: "Wouldn't it be Nice",
-              description: 'From the Beach Boys',
-              content: 'I can be bottom left'
-            })
-          },
-          style: {
-            marginRight: '10px',
-            marginTop: '10px'
-          }
-        },
-        { default: () => '左下' }
-      ),
-      h(
-        NButton,
-        {
-          onClick: () => {
-            this.$emit('changePlacement', 'bottom-right')
-            this.notification.info({
-              title: "Wouldn't it be Nice",
-              description: 'From the Beach Boys',
-              content: 'I can be bottom right'
-            })
-          },
-          style: {
-            marginRight: '10px',
-            marginTop: '10px'
-          }
-        },
-        { default: () => '右下' }
+        NSpace,
+        null,
+        children
       )
     ]
   }
