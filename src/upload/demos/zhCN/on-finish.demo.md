@@ -12,9 +12,10 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     const handleFinish = ({ file, event }) => {
@@ -26,5 +27,5 @@ export default {
       handleFinish
     }
   }
-}
+})
 ```

@@ -17,11 +17,12 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
 
-export default {
+export default defineComponent({
   components: {
     ArchiveIcon
   }
-}
+})
 ```
