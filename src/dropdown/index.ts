@@ -4,5 +4,6 @@ export type {
   DropdownOption,
   DropdownGroupOption,
   DropdownIgnoredOption,
+  DropdownDivider,
   DropdownDividerOption
 } from './src/interface'
