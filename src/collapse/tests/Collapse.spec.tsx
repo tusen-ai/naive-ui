@@ -86,7 +86,7 @@ describe('n-collapse', () => {
         default: () => <NCollapseItem name="1"></NCollapseItem>
       }
     })
-    const triggerNodeWrapper = wrapper.find('.n-collapse-item__header')
+    const triggerNodeWrapper = wrapper.find('.n-collapse-item__header-main')
     await triggerNodeWrapper.trigger('click')
     expect(onClick).toHaveBeenCalled()
   })
