@@ -16,18 +16,19 @@
 </template>
 
 <script>
+  import { defineComponent } from 'vue'
   import hljs from 'highlight.js/lib/core'
   import cpp from 'highlight.js/lib/languages/cpp'
 
   hljs.registerLanguage('cpp', cpp)
 
-  export default {
+  export default defineComponent({
     setup() {
       return {
         hljs
       }
     }
-  }
+  })
 </script>
 ```
 
