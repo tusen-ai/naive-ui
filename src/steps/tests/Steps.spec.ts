@@ -128,7 +128,7 @@ describe('n-steps', () => {
     expect(wrapper.find('.n-icon').text()).toBe('error')
   })
 
-  it('should', () => {
+  it("should show ErrorIcon with 'error' status", () => {
     const wrapper = mount(NSteps, {
       slots: {
         default: () => h(NStep, { internalIndex: 1, status: 'error' })
