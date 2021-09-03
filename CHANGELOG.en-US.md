@@ -25,6 +25,7 @@
 - `n-upload` add `UploadFile` type.
 - `n-dropdown` add `DropdownDivider` type.
 - `n-cascader` add `CascaderOption` type.
+- `n-mention` export `MentionOption` type.
 
 ### Fixes
 

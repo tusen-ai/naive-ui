@@ -25,6 +25,7 @@
 - `n-upload` 增加 `UploadFile` 类型
 - `n-dropdown` 增加 `DropdownDivider` 类型
 - `n-cascader` 增加 `CascaderOption` 类型
+- `n-mention` 导出 `MentionOption` 类型
 
 ### Fixes
 
