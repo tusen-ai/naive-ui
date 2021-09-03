@@ -30,14 +30,14 @@ export default defineComponent({
       setHideTimeout()
     })
     function setHideTimeout (): void {
-      const { duration } = props
-      if (duration) {
+      const { duration, keepAliveOnHover } = props
+      if (duration && (timerIdRef.value === null || keepAliveOnHover)) {
         timerIdRef.value = window.setTimeout(hide, duration)
       }
     }
     function clearHideTimeout (): void {
       const { value: timerId } = timerIdRef
-      if (timerId) {
+      if (timerId && props.keepAliveOnHover) {
         window.clearTimeout(timerId)
       }
     }
@@ -68,6 +68,7 @@ export default defineComponent({
     function deactivate (): void {
       hide()
     }
+
     return {
       show: showRef,
       hide,
