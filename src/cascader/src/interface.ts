@@ -9,6 +9,8 @@ export type Value = ValueAtom | ValueAtom[]
 
 export type Key = ValueAtom
 
+export type CascaderOption = BaseOption
+
 export interface BaseOption {
   label: string
   value: ValueAtom
@@ -99,6 +101,5 @@ export interface SelectMenuInstance {
   enter: () => boolean
 }
 
-export const cascaderInjectionKey: InjectionKey<CascaderInjection> = Symbol(
-  'cascader'
-)
+export const cascaderInjectionKey: InjectionKey<CascaderInjection> =
+  Symbol('cascader')

@@ -17,7 +17,6 @@ import { c, cB } from '../../../_utils/cssr'
 // --hue-6-2
 export default c([
   cB('code', `
-    display: block;
     font-size: var(--font-size);
     font-family: var(--font-family);
   `, [
@@ -25,13 +24,12 @@ export default c([
       margin: 0;
       font-family: inherit;
     `),
-    c('[class^=hljs]', {
-      color: 'var(--text-color)',
-      transition: `
+    c('[class^=hljs]', `
+      color: var(--text-color);
+      transition: 
         color .3s var(--bezier),
-        background-color .3s var(--bezier)
-      `
-    })
+        background-color .3s var(--bezier);
+    `)
   ]), ({ props }) => {
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     const codeClass = `${props.bPrefix}code`

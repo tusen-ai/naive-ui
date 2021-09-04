@@ -35,9 +35,12 @@ The following code shows how to set hljs of Code. Importing highlight.js on dema
 
 ```demo
 basic
+inline
 ```
 
-## Props
+## API
+
+## Code Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -45,9 +48,4 @@ basic
 | hljs | `Object` | `undefined` | If you want to set hljs locally, pass it using this prop. |
 | language | `string` | `undefined` | Code language in highlightjs. |
 | trim | `boolean` | `true` | Whether to display trimmed code. |
-
-## Slots
-
-| Name    | Parameters | Description          |
-| ------- | ---------- | -------------------- |
-| default | `()`       | Content of the code. |
+| inline | `boolean` | `false` | Whether the code is displayed as inline. |
