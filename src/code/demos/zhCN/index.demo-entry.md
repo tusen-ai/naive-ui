@@ -49,9 +49,3 @@ inline
 | language | `string` | `undefined` | 代码在 highlightjs 中的语言 |
 | trim | `boolean` | `true` | 是否显示 trim 后的代码 |
 | inline | `boolean` | `false` | 使用行内样式 |
-
-### Code Slots
-
-| 名称    | 参数 | 说明        |
-| ------- | ---- | ----------- |
-| default | `()` | code 的内容 |
