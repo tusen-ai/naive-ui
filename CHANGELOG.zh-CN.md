@@ -5,6 +5,7 @@
 ### Breaking Changes
 
 - `n-tree-select` 的 `leaf-only` 属性被废弃，请使用 `check-strategy="child"`
+- `n-input` 的 `show-password-toggle` 属性被废弃，请使用 `show-password-on="click"`
 
 ### Fixes
 
@@ -34,7 +35,8 @@
 - `n-pagination` 导出 `PaginationInfo` 类型
 - `n-data-table` 导出 `DataTableCreateSummary` 类型
 - `n-code` 新增 `inline` 属性, 关闭 [#834](https://github.com/TuSimple/naive-ui/issues/834)
-- `n-collapse` 新增 slot: 'header-extra'，关闭 [#1046](https://github.com/TuSimple/naive-ui/issues/1046)
+- `n-collapse` 新增 `header-extra` slot，关闭 [#1046](https://github.com/TuSimple/naive-ui/issues/1046)
+- `n-input` 新增 `show-password-on` 属性
 
 ## 2.16.7 (2021-08-27)
 

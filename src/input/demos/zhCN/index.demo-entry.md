@@ -20,7 +20,7 @@ count
 focus
 ```
 
-## Props
+## API
 
 ### Input Props
 
@@ -43,7 +43,7 @@ focus
 | rows | `number` | `3` | 输入框行数，对 type="textarea" 有效 |
 | separator | `string` | `undefined` | 成对输入框中间的分隔符 |
 | show-count | `boolean` | `false` | 是否显示字数统计 |
-| show-password-toggle | `boolean` | `false` | 控制密码的显示隐藏 |
+| show-password-on | `'click' \| 'mousedown'` | `undefined` | 显示密码的时机 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框尺寸 |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | 输入框类型 |
 | value | `string \| [string, string] \| null` | `undefined` | 文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组 |
@@ -54,8 +54,6 @@ focus
 | on-input | `() => void` | `undefined` | 输入框值 change 时触发 |
 | on-update:value | `(value: string \| [string, string]) => void` | `undefined` | 输入框值 change 时触发 |
 
-## Slots
-
 ### Input Slots
 
 | 属性 | 类型 | 说明 |
@@ -64,19 +62,17 @@ focus
 | suffix | `()` | 输入框尾部内容 |
 | separator | `()` | 成对输入框之间分隔符，仅 `pair` = true 生效且优先级高于 separator 属性 |
 
-### Input Group Slots
+### InputGroup Slots
 
 | 属性    | 类型 | 说明         |
 | ------- | ---- | ------------ |
 | default | `()` | 输入组的内容 |
 
-### Input Group Label Slots
+### InputGroupLabel Slots
 
 | 属性    | 类型 | 说明             |
 | ------- | ---- | ---------------- |
 | default | `()` | 输入组标签的内容 |
-
-## Methods
 
 ### Input Methods
 

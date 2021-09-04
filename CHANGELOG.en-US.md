@@ -5,6 +5,7 @@
 ### Breaking Changes
 
 - `n-tree-select`'s `leaf-only` props is deprecated, please use `check-strategy="child"` instead.
+- `n-input`'s `show-password-toggle` is deprecated, please use `show-password-on="click"` instead.
 
 ### Fixes
 
@@ -34,7 +35,8 @@
 - `n-pagination` export `PaginationInfo` type.
 - `n-data-table` export `DataTableCreateSummary` type.
 - `n-code` add `inline` prop, closes [#834](https://github.com/TuSimple/naive-ui/issues/834)
-- `n-collapse` add 'header-extra' slot, closes [#1046](https://github.com/TuSimple/naive-ui/issues/1046).
+- `n-collapse` add `header-extra` slot, closes [#1046](https://github.com/TuSimple/naive-ui/issues/1046).
+- `n-input` add `show-password-on` prop.
 
 ## 2.16.7 (2021-08-27)
 
