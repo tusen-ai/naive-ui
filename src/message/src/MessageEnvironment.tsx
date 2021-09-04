@@ -27,11 +27,20 @@ export default defineComponent({
     const timerIdRef = ref<number | null>(null)
     const showRef = ref<boolean>(true)
     onMounted(() => {
-      const { duration } = props
-      if (duration) {
+      setHideTimeout()
+    })
+    function setHideTimeout (): void {
+      const { duration, keepAliveOnHover } = props
+      if (duration && (timerIdRef.value === null || keepAliveOnHover)) {
         timerIdRef.value = window.setTimeout(hide, duration)
       }
-    })
+    }
+    function clearHideTimeout (): void {
+      const { value: timerId } = timerIdRef
+      if (timerId && props.keepAliveOnHover) {
+        window.clearTimeout(timerId)
+      }
+    }
     function hide (): void {
       const { value: timerId } = timerIdRef
       const { onHide } = props
@@ -59,11 +68,14 @@ export default defineComponent({
     function deactivate (): void {
       hide()
     }
+
     return {
       show: showRef,
       hide,
       handleClose,
       handleAfterLeave,
+      handleMouseLeave: setHideTimeout,
+      handleMouseEnter: clearHideTimeout,
       deactivate
     }
   },
@@ -83,6 +95,8 @@ export default defineComponent({
                 icon={this.icon}
                 closable={this.closable}
                 onClose={this.handleClose}
+                onMouseenter={this.handleMouseEnter}
+                onMouseleave={this.handleMouseLeave}
               />
             ) : null
           ]

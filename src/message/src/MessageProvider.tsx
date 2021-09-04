@@ -24,6 +24,7 @@ import { MessageTheme } from '../styles'
 export interface MessageOptions {
   duration?: number
   closable?: boolean
+  keepAliveOnHover?: boolean
   icon?: () => VNodeChild
   onClose?: () => void
   onLeave?: () => void
@@ -48,6 +49,7 @@ export interface MessageReactive {
   content?: ContentType
   duration?: number
   closable?: boolean
+  keepAliveOnHover?: boolean
   icon?: () => VNodeChild
   onClose?: () => void
   destroy: () => void
@@ -71,6 +73,7 @@ const messageProviderProps = {
     type: Number,
     default: 3000
   },
+  keepAliveOnHover: Boolean,
   max: Number,
   placement: {
     type: String as PropType<
@@ -199,6 +202,11 @@ export default defineComponent({
                       message.duration === undefined
                         ? this.duration
                         : message.duration
+                    }
+                    keepAliveOnHover={
+                      message.keepAliveOnHover === undefined
+                        ? this.keepAliveOnHover
+                        : message.keepAliveOnHover
                     }
                     closable={
                       message.closable === undefined

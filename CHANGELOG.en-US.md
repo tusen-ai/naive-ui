@@ -23,6 +23,8 @@
 - `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
 - `n-data-table` supports multi-selection by holding down `shift`, closes [#554](https://github.com/TuSimple/naive-ui/issues/554).
 - `n-tree-select` add `check-strategy` prop, closes [#624](https://github.com/TuSimple/naive-ui/issues/624).
+- `n-message` option add `keepAliveOnHover`, closes [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
+- `n-message-provider` add `keep-alive-on-hover` prop, closes [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
 - `n-upload` export `UploadFile` type.
 - `n-cascader` export `CascaderOption` type.
 - `n-mention` export `MentionOption` type.

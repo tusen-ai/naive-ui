@@ -56,6 +56,7 @@ placement
 | --- | --- | --- | --- |
 | closable | `boolean` | All messages whether to show close icon. |
 | duration | `number` | `3000` | All messages's default duration. |
+| keepAliveOnHover | `boolean` | `false` | All messages whether to destroy while hover |
 | max | `number` | `undefined` | Limit the number of message to display. |
 | placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top` | All message's placement. |
 | to | `string \| HTMLElement` | `'body'` | Container node of message container. |
@@ -75,14 +76,15 @@ placement
 
 #### MessageOption Properties
 
-| Name         | Type          | Description                               |
-| ------------ | ------------- | ----------------------------------------- |
-| closable     | `boolean`     | Whether to show close icon.               |
-| duration     | `number`      | The duration of the message.              |
-| icon         | `() => VNode` | Message icon.                             |
-| onAfterLeave | `() => void`  | Callback after message disappeared.       |
-| onClose      | `() => void`  | Callback when close icon is clicked.      |
-| onLeave      | `() => void`  | Callback when message start to disappear. |
+| Name             | Type          | Description                               |
+| ---------------- | ------------- | ----------------------------------------- |
+| closable         | `boolean`     | Whether to show close icon.               |
+| duration         | `number`      | The duration of the message.              |
+| icon             | `() => VNode` | Message icon.                             |
+| keepAliveOnHover | `boolean`     | Messages whether to destroy while hover   |
+| onAfterLeave     | `() => void`  | Callback after message disappeared.       |
+| onClose          | `() => void`  | Callback when close icon is clicked.      |
+| onLeave          | `() => void`  | Callback when message start to disappear. |
 
 #### MessageReactive Properties
 
@@ -92,6 +94,7 @@ placement
 | content | `string \| (() => VNodeChild)` | Message content. |
 | destroy | `() => void` | Message destroy method. |
 | icon | `() => VNode` | Message icon. |
+| keepAliveOnHover | `boolean` | Messages whether to destroy while hover |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | Message type. |
 | onAfterLeave | `() => void` | Callback after message disappeared. |
 | onLeave | `() => void` | Callback when message start to disappear. |

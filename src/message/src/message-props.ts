@@ -12,5 +12,8 @@ export const messageProps = {
   string | number | (() => VNodeChild)
   >,
   closable: Boolean,
-  onClose: Function as PropType<() => void>
+  keepAliveOnHover: Boolean,
+  onClose: Function as PropType<() => void>,
+  onMouseenter: Function as PropType<() => void>,
+  onMouseleave: Function as PropType<() => void>
 } as const
