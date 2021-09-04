@@ -56,7 +56,7 @@ placement
 | --- | --- | --- | --- |
 | closable | `boolean` | All messages whether to show close icon. |
 | duration | `number` | `3000` | All messages's default duration. |
-| keepAliveOnHover | `boolean` | All messages whether to destroy while hover |
+| keepAliveOnHover | `boolean` | `false` | All messages whether to destroy while hover |
 | max | `number` | `undefined` | Limit the number of message to display. |
 | placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top` | All message's placement. |
 | to | `string \| HTMLElement` | `'body'` | Container node of message container. |
