@@ -24,29 +24,34 @@ export default defineComponent({
     onAfterHide: Function
   },
   setup (props) {
-    const timerIdRef = ref<number | null>(null)
+    let timerId: number | null = null
     const showRef = ref<boolean>(true)
     onMounted(() => {
       setHideTimeout()
     })
     function setHideTimeout (): void {
-      const { duration, keepAliveOnHover } = props
-      if (duration && (timerIdRef.value === null || keepAliveOnHover)) {
-        timerIdRef.value = window.setTimeout(hide, duration)
+      const { duration } = props
+      if (duration) {
+        timerId = window.setTimeout(hide, duration)
       }
     }
-    function clearHideTimeout (): void {
-      const { value: timerId } = timerIdRef
-      if (timerId && props.keepAliveOnHover) {
+    function handleMouseenter (e: MouseEvent): void {
+      if (e.currentTarget !== e.target) return
+      if (timerId !== null) {
         window.clearTimeout(timerId)
+        timerId = null
       }
+    }
+    function handleMouseleave (e: MouseEvent): void {
+      if (e.currentTarget !== e.target) return
+      setHideTimeout()
     }
     function hide (): void {
-      const { value: timerId } = timerIdRef
       const { onHide } = props
       showRef.value = false
       if (timerId) {
         window.clearTimeout(timerId)
+        timerId = null
       }
       // deprecated
       if (onHide) onHide()
@@ -74,8 +79,8 @@ export default defineComponent({
       hide,
       handleClose,
       handleAfterLeave,
-      handleMouseLeave: setHideTimeout,
-      handleMouseEnter: clearHideTimeout,
+      handleMouseleave,
+      handleMouseenter,
       deactivate
     }
   },
@@ -95,8 +100,12 @@ export default defineComponent({
                 icon={this.icon}
                 closable={this.closable}
                 onClose={this.handleClose}
-                onMouseenter={this.handleMouseEnter}
-                onMouseleave={this.handleMouseLeave}
+                onMouseenter={
+                  this.keepAliveOnHover ? this.handleMouseenter : undefined
+                }
+                onMouseleave={
+                  this.keepAliveOnHover ? this.handleMouseleave : undefined
+                }
               />
             ) : null
           ]

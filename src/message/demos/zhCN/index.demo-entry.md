@@ -56,7 +56,7 @@ placement
 | --- | --- | --- | --- |
 | closable | `boolean` | 所有 Message 是否显示 close 图标 |
 | duration | `number` | `3000` | 所有 Message 默认的持续时长 |
-| keepAliveOnHover | `boolean` | `false` | 所有 Message 在 Hover 到信息上时是否不销毁 |
+| keep-alive-on-hover | `boolean` | `false` | 所有 Message 在悬浮信息上时是否不销毁 |
 | max | `number` | `undefined` | 限制提示信息显示的个数 |
 | placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top` | 所有 Message 显示的位置 |
 | to | `string \| HTMLElement` | `'body'` | Message 容器节点的位置 |

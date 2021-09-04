@@ -14,6 +14,6 @@ export const messageProps = {
   closable: Boolean,
   keepAliveOnHover: Boolean,
   onClose: Function as PropType<() => void>,
-  onMouseenter: Function as PropType<() => void>,
-  onMouseleave: Function as PropType<() => void>
+  onMouseenter: Function as PropType<(e: MouseEvent) => void>,
+  onMouseleave: Function as PropType<(e: MouseEvent) => void>
 } as const

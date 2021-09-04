@@ -54,11 +54,11 @@ placement
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| closable | `boolean` | All messages whether to show close icon. |
-| duration | `number` | `3000` | All messages's default duration. |
-| keepAliveOnHover | `boolean` | `false` | All messages whether to destroy while hover |
-| max | `number` | `undefined` | Limit the number of message to display. |
-| placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top` | All message's placement. |
+| closable | `boolean` | Whether to show close icon on all messages. |
+| duration | `number` | `3000` | Default duration of on all messages. |
+| keep-alive-on-hover | `boolean` | `false` | Whether to destroy while hovering on all messages. |
+| max | `number` | `undefined` | Limit the number of messages to display. |
+| placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top` | Placement of all messages. |
 | to | `string \| HTMLElement` | `'body'` | Container node of message container. |
 
 ### MessageProvider Injection API
