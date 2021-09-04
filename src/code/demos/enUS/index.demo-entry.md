@@ -18,9 +18,9 @@ The following code shows how to set hljs of Code. Importing highlight.js on dema
 <script>
   import { defineComponent } from 'vue'
   import hljs from 'highlight.js/lib/core'
-  import cpp from 'highlight.js/lib/languages/cpp'
+  import javascript from 'highlight.js/lib/languages/javascript'
 
-  hljs.registerLanguage('cpp', cpp)
+  hljs.registerLanguage('javascript', javascript)
 
   export default defineComponent({
     setup() {
