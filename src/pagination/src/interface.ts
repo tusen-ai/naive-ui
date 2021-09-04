@@ -1,5 +1,7 @@
 import { VNodeChild } from 'vue'
 
+export type PaginationInfo = Parameters<RenderPrefix>[0]
+
 export type RenderPrefix = (info: {
   startIndex: number
   endIndex: number

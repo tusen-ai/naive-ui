@@ -17,7 +17,7 @@ inverted
 long-label
 ```
 
-## Props
+## API
 
 ### Menu Props
 
@@ -35,7 +35,7 @@ long-label
 | icon-size | `number` | `20` | 菜单未折叠时图标的大小 |
 | indent | `number` | `32` | 菜单每级的缩进 |
 | inverted | `boolean` | `false` | 使用反转样式 |
-| options | `Array<MenuOption \| MenuOptionGroup>` | `[]` | 菜单的数据 |
+| options | `Array<MenuOption \| MenuGroupOption>` | `[]` | 菜单的数据 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | 菜单的布局方式 |
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单额外部分渲染 |
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | 批量处理菜单图标渲染 |
@@ -45,22 +45,22 @@ long-label
 | on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` 是展开菜单项的 `key` 的数组 |
 | on-update:value | `(key: string, item: MenuOption) => void` | `undefined` | 选中菜单的回调，`key` 是选中菜单项的 `key`，`item` 是菜单项原始数据 |
 
-### Menu Properties
+### MenuOption Properties
 
 | 名称      | 类型                                   | 说明             |
 | --------- | -------------------------------------- | ---------------- |
-| children? | `Array<MenuOption \| MenuOptionGroup>` | 子选项           |
+| children? | `Array<MenuOption \| MenuGroupOption>` | 子选项           |
 | disabled? | `boolean`                              | 是否禁用菜单项   |
 | extra?    | `string \| (() => VNodeChild)`         | 菜单项的额外部分 |
 | icon?     | `() => VNode`                          | 菜单项的图标     |
 | key       | `string`                               | 菜单项的标识符   |
 | label     | `string \| (() => VNodeChild)`         | 菜单项的内容     |
 
-### MenuOptionGroup Properties
+### MenuGroupOption Properties
 
 | 名称     | 类型                                   | 说明                     |
 | -------- | -------------------------------------- | ------------------------ |
-| children | `Array<MenuOption \| MenuOptionGroup>` | 子菜单，**必填！**       |
+| children | `Array<MenuOption \| MenuGroupOption>` | 子菜单，**必填！**       |
 | key      | `string`                               | 菜单项的标识符           |
 | label    | `string \| (() => VNodeChild)`         | 菜单项的内容             |
 | type     | `'group'`                              | 菜单项的类型，**必填！** |

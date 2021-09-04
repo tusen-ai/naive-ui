@@ -35,9 +35,12 @@
 
 ```demo
 basic
+inline
 ```
 
-## Props
+## API
+
+### Code Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -45,8 +48,9 @@ basic
 | hljs | `Object` | `undefined` | 如果你想局部设定 hljs，可以通过这个属性传给组件 |
 | language | `string` | `undefined` | 代码在 highlightjs 中的语言 |
 | trim | `boolean` | `true` | 是否显示 trim 后的代码 |
+| inline | `boolean` | `false` | 使用行内样式 |
 
-## Slots
+### Code Slots
 
 | 名称    | 参数 | 说明        |
 | ------- | ---- | ----------- |

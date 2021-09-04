@@ -13,6 +13,11 @@ export interface FileInfo {
   type?: string
 }
 
+export type UploadFile = Pick<
+FileInfo,
+'id' | 'name' | 'status' | 'percentage' | 'file'
+>
+
 export type FuncOrRecordOrUndef =
   | Record<string, string>
   | (({ file }: { file: FileInfo }) => Record<string, string>)

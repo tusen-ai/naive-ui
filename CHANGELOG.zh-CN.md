@@ -10,6 +10,7 @@
 
 - 修复 `n-cascader` 多选模式下点击 tag 删除子选项未更新选中项
 - 修复 `n-input` 在 `clearable` 为 `true` 时鼠标离开输入框时中文输入法不正确，关闭 [#905](https://github.com/TuSimple/naive-ui/issues/905)
+- 修复 `n-description` 中因 `v-if` 导致的不该出现的警告，关闭 [#1083](https://github.com/TuSimple/naive-ui/issues/1083)
 
 ### Feats
 
@@ -22,7 +23,15 @@
 - `n-dropdown` 选项新增 `props` 属性，关闭 [#813](https://github.com/TuSimple/naive-ui/issues/813)
 - `n-data-table` 支持按住 `shift` 进行多选操作，关闭 [#554](https://github.com/TuSimple/naive-ui/issues/554)
 - `n-tree-select` 增加 `check-strategy` 属性，关闭 [#624](https://github.com/TuSimple/naive-ui/issues/624)
-- `n-message` 当设置 `duration` 时，鼠标悬停不再自动消失，移出后到期销毁，关闭 [#1036](https://github.com/TuSimple/naive-ui/issues/1036)
+- `n-message` 选项增加 `keepAliveOnHover` 属性，关闭 [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
+- `n-message-provider` 新增 `keep-alive-on-hover` 属性，关闭 [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
+- `n-upload` 导出 `UploadFile` 类型
+- `n-cascader` 导出 `CascaderOption` 类型
+- `n-mention` 导出 `MentionOption` 类型
+- `n-transfer` 导出 `TransferOption` 类型
+- `n-pagination` 导出 `PaginationInfo` 类型
+- `n-data-table` 导出 `DataTableCreateSummary` 类型
+- `n-code` 新增 `inline` 属性, 关闭 [#834](https://github.com/TuSimple/naive-ui/issues/834)
 
 ### Fixes
 
