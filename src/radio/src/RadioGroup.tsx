@@ -20,6 +20,7 @@ import type { RadioTheme } from '../styles'
 import type { RadioProps } from './use-radio'
 import { radioGroupInjectionKey } from './use-radio'
 import style from './styles/radio-group.cssr'
+import { OnUpdateValue } from './interface'
 
 function mapSlot (
   defaultSlot: VNode[],
@@ -114,13 +115,11 @@ const radioGroupProps = {
     default: undefined
   },
   // eslint-disable-next-line vue/prop-name-casing
-  'onUpdate:value': Function as PropType<(value: string & number) => void>,
-  onUpdateValue: Function as PropType<(value: string & number) => void>,
+  'onUpdate:value': Function as PropType<OnUpdateValue>,
+  onUpdateValue: Function as PropType<OnUpdateValue>,
   // deprecated
   onChange: {
-    type: Function as unknown as PropType<
-    ((value: string & number) => void) | undefined
-    >,
+    type: Function as unknown as PropType<OnUpdateValue | undefined>,
     validator: () => {
       if (__DEV__) {
         warn(

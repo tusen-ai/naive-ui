@@ -3,7 +3,7 @@
 一个选项组看起来就挺舒服。
 
 ```html
-<n-radio-group :value="groupVal" @update:value='handleValue' name="radiogroup">
+<n-radio-group v-model:value="groupVal" name="radiogroup">
   <n-space>
     <n-radio v-for="song in songs" :key="song.value" :value="song.value">
       {{ song.label }}
@@ -18,12 +18,8 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup () {
     const groupValRef = ref(null)
-    const handleValue = (updateValue) => {
-      groupValRef.value = updateValue
-    }
     return {
       groupVal: groupValRef,
-      handleValue,
       songs: [
         {
           value: "Rock'n'Roll Star",
