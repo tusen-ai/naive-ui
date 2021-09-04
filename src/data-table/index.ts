@@ -1,3 +1,10 @@
+import type {
+  CreateSummary as InternalCreateSummary,
+  RowData
+} from './src/interface'
+
+export type CreateSummary = InternalCreateSummary<RowData>
+
 export { default as NDataTable } from './src/DataTable'
 export type { DataTableProps } from './src/DataTable'
 export type {
@@ -12,5 +19,7 @@ export type {
   CreateRowClassName as DataTableCreateRowClassName,
   CreateRowKey as DataTableCreateRowKey,
   CreateRowProps as DataTableCreateRowProps,
-  DataTableInst
+  DataTableInst,
+  SummaryRowData,
+  SummaryCell
 } from './src/interface'

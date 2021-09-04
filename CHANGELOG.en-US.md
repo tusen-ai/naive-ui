@@ -23,6 +23,13 @@
 - `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
 - `n-data-table` supports multi-selection by holding down `shift`, closes [#554](https://github.com/TuSimple/naive-ui/issues/554).
 - `n-tree-select` add `check-strategy` prop, closes [#624](https://github.com/TuSimple/naive-ui/issues/624).
+- `n-upload` export `UploadFile` type.
+- `n-dropdown` export `DropdownDivider`, `DropdownSubmenu`, and `DropdownGroup` type.
+- `n-cascader` export `CascaderOption` type.
+- `n-mention` export `MentionOption` type.
+- `n-transfer` export `TransferOption` type.
+- `n-pagination` export `PaginationInfo` type.
+- `n-data-table` export `CreateSummary` type.
 - `n-code` add `inline` prop, closes [#834](https://github.com/TuSimple/naive-ui/issues/834)
 
 ### Fixes

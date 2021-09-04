@@ -1,5 +1,7 @@
 import type { DropdownMixedOption } from './interface'
 
+export type { DropdownDivider } from './interface'
+
 export function isSubmenuNode (rawNode: DropdownMixedOption): boolean {
   return (
     rawNode.type === 'submenu' ||
