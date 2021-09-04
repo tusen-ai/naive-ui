@@ -15,7 +15,7 @@ If you have tons of data, you may need to speed the transfer up! Set `virtual-sc
 import { defineComponent, ref } from 'vue'
 
 function createOptions () {
-  return Array.apply(null, { length: 100 }).map((v, i) => ({
+  return Array.apply(null, { length: 42000 }).map((v, i) => ({
     label: 'Option' + i,
     value: i,
     disabled: i % 5 === 0
