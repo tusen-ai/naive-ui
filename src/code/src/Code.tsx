@@ -28,10 +28,7 @@ const codeProps = {
     default: true
   },
   hljs: Object as PropType<Hljs>,
-  uri: {
-    type: Boolean,
-    default: false
-  },
+  uri: Boolean,
   inline: Boolean,
   // In n-log, we only need to mount code's style for highlight
   internalNoHighlight: Boolean

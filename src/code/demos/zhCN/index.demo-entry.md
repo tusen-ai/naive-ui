@@ -38,7 +38,9 @@ basic
 inline
 ```
 
-## Props
+## API
+
+### Code Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -48,7 +50,7 @@ inline
 | trim | `boolean` | `true` | 是否显示 trim 后的代码 |
 | inline | `boolean` | `false` | 使用行内样式 |
 
-## Slots
+### Code Slots
 
 | 名称    | 参数 | 说明        |
 | ------- | ---- | ----------- |

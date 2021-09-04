@@ -22,16 +22,14 @@ export default c([
   `, [
     c('pre', `
       margin: 0;
-      display: block;
       font-family: inherit;
     `),
-    c('[class^=hljs]', {
-      color: 'var(--text-color)',
-      transition: `
+    c('[class^=hljs]', `
+      color: var(--text-color);
+      transition: 
         color .3s var(--bezier),
-        background-color .3s var(--bezier)
-      `
-    })
+        background-color .3s var(--bezier);
+    `)
   ]), ({ props }) => {
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     const codeClass = `${props.bPrefix}code`

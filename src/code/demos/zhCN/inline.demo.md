@@ -4,7 +4,7 @@ JavaScript 的例子。
 
 ```html
 <div>
-  <n-text>JavaScript</n-text>
+  JavaScript
   <n-code :code="code" language="javascript" inline />
 </div>
 ```
@@ -15,7 +15,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   setup () {
     return {
-      code: 'console.log("Hello Naive UI")'
+      code: 'console.log("工具人的日子不好过")'
     }
   }
 })

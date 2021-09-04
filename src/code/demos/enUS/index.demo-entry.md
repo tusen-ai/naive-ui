@@ -38,7 +38,9 @@ basic
 inline
 ```
 
-## Props
+## API
+
+## Code Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -48,7 +50,7 @@ inline
 | trim | `boolean` | `true` | Whether to display trimmed code. |
 | inline | `boolean` | `false` | Whether the code is displayed as inline. |
 
-## Slots
+## Code Slots
 
 | Name    | Parameters | Description          |
 | ------- | ---------- | -------------------- |
