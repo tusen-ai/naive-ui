@@ -32,6 +32,7 @@ const codeProps = {
     type: Boolean,
     default: false
   },
+  inline: Boolean,
   // In n-log, we only need to mount code's style for highlight
   internalNoHighlight: Boolean
 }
@@ -73,11 +74,17 @@ export default defineComponent({
       if (language) {
         const html = createCodeHtml(language, code, props.trim)
         if (html !== null) {
-          codeEl.innerHTML = html
+          codeEl.innerHTML = props.inline ? html : `<pre>${html}</pre>`
           return
         }
       }
-      codeEl.textContent = code
+      if (props.inline) {
+        codeEl.textContent = code
+        return
+      }
+      const warp = document.createElement('pre')
+      warp.textContent = code
+      codeEl.appendChild(warp)
     }
     onMounted(setCode)
     watch(toRef(props, 'language'), setCode)
@@ -133,14 +140,14 @@ export default defineComponent({
     }
   },
   render () {
-    const { default: defaultSlot } = this.$slots
     const { mergedClsPrefix } = this
     return (
       <code
         class={`${mergedClsPrefix}-code`}
         style={this.cssVars as CSSProperties}
+        ref="codeRef"
       >
-        {defaultSlot ? defaultSlot() : <pre ref="codeRef"></pre>}
+        {this.$slots}
       </code>
     )
   }

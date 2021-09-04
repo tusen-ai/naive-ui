@@ -17,12 +17,12 @@ import { c, cB } from '../../../_utils/cssr'
 // --hue-6-2
 export default c([
   cB('code', `
-    display: block;
     font-size: var(--font-size);
     font-family: var(--font-family);
   `, [
     c('pre', `
       margin: 0;
+      display: block;
       font-family: inherit;
     `),
     c('[class^=hljs]', {
