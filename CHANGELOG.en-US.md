@@ -10,6 +10,9 @@
 
 - Fix `n-cascader` click tag to delete the sub option in multi selection mode, and the tree option is not updated.
 - Fix `n-input` chinese input method not correct while mouse leave the input in `clearable` is true, closes [#905](https://github.com/TuSimple/naive-ui/issues/905).
+- Fix `n-description`'s warning caused by `v-if` that should not appear, closes [#1083](https://github.com/TuSimple/naive-ui/issues/1083).
+- Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
+- Fix `n-input-number`'s `step` calculate error when the value is decimal, closes [#1007](https://github.com/TuSimple/naive-ui/issues/1007).
 
 ### Feats
 
@@ -22,11 +25,16 @@
 - `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
 - `n-data-table` supports multi-selection by holding down `shift`, closes [#554](https://github.com/TuSimple/naive-ui/issues/554).
 - `n-tree-select` add `check-strategy` prop, closes [#624](https://github.com/TuSimple/naive-ui/issues/624).
-
-### Fixes
-
-- Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
-- Fix `n-input-number`'s `step` calculate error when the value is decimal, closes [#1007](https://github.com/TuSimple/naive-ui/issues/1007).
+- `n-message` option add `keepAliveOnHover`, closes [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
+- `n-message-provider` add `keep-alive-on-hover` prop, closes [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
+- `n-upload` export `UploadFile` type.
+- `n-cascader` export `CascaderOption` type.
+- `n-mention` export `MentionOption` type.
+- `n-transfer` export `TransferOption` type.
+- `n-pagination` export `PaginationInfo` type.
+- `n-data-table` export `DataTableCreateSummary` type.
+- `n-code` add `inline` prop, closes [#834](https://github.com/TuSimple/naive-ui/issues/834)
+- `n-collapse` add 'header-extra' slot, closes [#1046](https://github.com/TuSimple/naive-ui/issues/1046).
 
 ## 2.16.7 (2021-08-27)
 

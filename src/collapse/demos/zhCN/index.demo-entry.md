@@ -48,8 +48,9 @@ default-expanded
 
 ### Collapse Item Slots
 
-| 名称    | 参数                                | 说明                         |
-| ------- | ----------------------------------- | ---------------------------- |
-| default | `()`                                | 折叠面板节点的内容           |
-| header  | `()`                                | 折叠面板节点头部的内容       |
-| arrow   | `(options: { collapsed: boolean })` | 折叠面板节点头部的自定义图标 |
+| 名称 | 参数 | 说明 |
+| --- | --- | --- |
+| default | `()` | 折叠面板节点的内容 |
+| header | `()` | 折叠面板节点头部的内容 |
+| header-extra | `()` | 折叠面板节点头部的额外内容 |
+| arrow | `(options: { collapsed: boolean })` | 折叠面板节点头部的自定义图标 |

@@ -74,6 +74,23 @@ export default cB('collapse', {
       padding: 16px 0 0 0;
       color: var(--title-text-color);
     `, [
+      cE('header-main', `
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        font-weight: var(--title-font-weight);
+        transition: color .3s var(--bezier);
+        flex: 1;
+        color: var(--title-text-color);
+      `),
+      cE('header-extra', `
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 400;
+        transition: color .3s var(--bezier);
+        color: var(--text-color);
+      `),
       cB('collapse-item-arrow', `
         display: flex;
         transition:

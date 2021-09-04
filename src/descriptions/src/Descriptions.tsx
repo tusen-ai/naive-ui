@@ -164,8 +164,10 @@ export default defineComponent({
       const itemSpan = (props.span as number) || 1
       const memorizedSpan = state.span
       state.span += itemSpan
-      const labelStyle = props.labelStyle || props['label-style'] || this.labelStyle
-      const contentStyle = props.contentStyle || props['content-style'] || this.contentStyle
+      const labelStyle =
+        props.labelStyle || props['label-style'] || this.labelStyle
+      const contentStyle =
+        props.contentStyle || props['content-style'] || this.contentStyle
       if (labelPlacement === 'left') {
         if (bordered) {
           state.row.push(
