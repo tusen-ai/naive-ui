@@ -22,19 +22,23 @@ You can use `submit` method to submit in uncontrolled manner. Also you can do it
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const fileListLengthRef = ref(0)
+    const uploadRef = ref(null)
+
     return {
-      fileListLength: 0
-    }
-  },
-  methods: {
-    handleChange ({ fileList }) {
-      this.fileListLength = fileList.length
-    },
-    handleClick () {
-      this.$refs.upload.submit()
+      upload: uploadRef,
+      fileListLength: fileListLengthRef,
+      handleChange ({ fileList }) {
+        fileListLengthRef.value = fileList.length
+      },
+      handleClick () {
+        uploadRef.value.submit()
+      }
     }
   }
-}
+})
 ```
