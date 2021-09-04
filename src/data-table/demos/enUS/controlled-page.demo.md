@@ -10,6 +10,8 @@
 ```
 
 ```js
+import { defineComponent, reactive } from 'vue'
+
 const columns = [
   {
     title: 'Name',
@@ -32,25 +34,27 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
   address: `London, Park Lane no. ${index}`
 }))
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
+    const paginationReactive = reactive({
+      page: 2,
+      pageSize: 5,
+      showSizePicker: true,
+      pageSizes: [3, 5, 7],
+      onChange: (page) => {
+        paginationReactive.page = page
+      },
+      onPageSizeChange: (pageSize) => {
+        paginationReactive.pageSize = pageSize
+        paginationReactive.page = 1
+      }
+    })
+
     return {
       data,
       columns,
-      pagination: {
-        page: 2,
-        pageSize: 5,
-        showSizePicker: true,
-        pageSizes: [3, 5, 7],
-        onChange: (page) => {
-          this.pagination.page = page
-        },
-        onPageSizeChange: (pageSize) => {
-          this.pagination.pageSize = pageSize
-          this.pagination.page = 1
-        }
-      }
+      pagination: paginationReactive
     }
   }
-}
+})
 ```

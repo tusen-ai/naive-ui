@@ -5,7 +5,7 @@
 ```
 
 ```js
-import { h, ref, reactive } from 'vue'
+import { defineComponent, h, ref, reactive } from 'vue'
 import { NButton, NSpace, NIcon } from 'naive-ui'
 import { SearchOutline } from '@vicons/ionicons5'
 
@@ -20,11 +20,11 @@ const data = [
   }
 ]
 
-export default {
+export default defineComponent({
   setup () {
     const filterOptionValueRef = ref(null)
 
-    const cols = reactive([
+    const colsReactive = reactive([
       {
         title: 'Left',
         key: 'Left'
@@ -78,9 +78,9 @@ export default {
     ])
 
     return {
-      cols,
+      cols: colsReactive,
       data
     }
   }
-}
+})
 ```
