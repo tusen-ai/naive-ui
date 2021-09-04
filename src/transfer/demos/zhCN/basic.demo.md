@@ -24,7 +24,7 @@ function createValues () {
 export default defineComponent({
   setup () {
     return {
-      options: ref(createOptions()),
+      options: createOptions(),
       value: ref(createValues())
     }
   }
