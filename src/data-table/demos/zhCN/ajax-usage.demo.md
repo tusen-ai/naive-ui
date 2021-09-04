@@ -18,15 +18,15 @@
 ```js
 import { defineComponent, ref, reactive, onMounted } from 'vue'
 
-const Column1 = {
-  title: 'Column1',
+const column1 = {
+  title: 'column1',
   key: 'column1',
   sorter: true,
   sortOrder: false
 }
 
-const Column2 = {
-  title: 'Column2',
+const column2 = {
+  title: 'column2',
   key: 'column2',
   filter: true,
   filterOptionValues: [],
@@ -43,8 +43,8 @@ const Column2 = {
 }
 
 const columns = [
-  Column1,
-  Column2,
+  column1,
+  column2,
   {
     title: 'Column3',
     key: 'column3'
@@ -86,8 +86,8 @@ export default defineComponent({
     const dataRef = ref([])
     const loadingRef = ref(true)
     const columnsRef = ref(columns)
-    const Column1Reactive = reactive(Column1)
-    const Column2Reactive = reactive(Column2)
+    const column1Reactive = reactive(column1)
+    const column2Reactive = reactive(column2)
     const paginationReactive = reactive({
       page: 1,
       pageCount: 1,
@@ -101,8 +101,8 @@ export default defineComponent({
       query(
         paginationReactive.page,
         paginationReactive.pageSize,
-        Column1Reactive.sortOrder,
-        Column2Reactive.filterOptionValues
+        column1Reactive.sortOrder,
+        column2Reactive.filterOptionValues
       ).then((data) => {
         dataRef.value = data.data
         paginationReactive.pageCount = data.pageCount
@@ -114,8 +114,8 @@ export default defineComponent({
     return {
       data: dataRef,
       columns: columnsRef,
-      Column1: Column1Reactive,
-      Column2: Column2Reactive,
+      column1: column1Reactive,
+      column2: column2Reactive,
       pagination: paginationReactive,
       loading: loadingRef,
       rowKey (rowData) {
@@ -129,9 +129,9 @@ export default defineComponent({
               paginationReactive.page,
               paginationReactive.pageSize,
               !sorter ? false : sorter.order,
-              Column2Reactive.filterOptionValues
+              column2Reactive.filterOptionValues
             ).then((data) => {
-              Column1Reactive.sortOrder = !sorter ? false : sorter.order
+              column1Reactive.sortOrder = !sorter ? false : sorter.order
               dataRef.value = data.data
               paginationReactive.pageCount = data.pageCount
               paginationReactive.itemCount = data.total
@@ -147,10 +147,10 @@ export default defineComponent({
           query(
             paginationReactive.page,
             paginationReactive.pageSize,
-            Column1Reactive.sortOrder,
+            column1Reactive.sortOrder,
             filterValues
           ).then((data) => {
-            Column2Reactive.filterOptionValues = filterValues
+            column2Reactive.filterOptionValues = filterValues
             dataRef.value = data.data
             paginationReactive.pageCount = data.pageCount
             paginationReactive.itemCount = data.total
@@ -164,8 +164,8 @@ export default defineComponent({
           query(
             currentPage,
             paginationReactive.pageSize,
-            Column1Reactive.sortOrder,
-            Column2Reactive.filterOptionValues
+            column1Reactive.sortOrder,
+            column2Reactive.filterOptionValues
           ).then((data) => {
             dataRef.value = data.data
             paginationReactive.page = currentPage
