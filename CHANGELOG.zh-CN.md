@@ -10,6 +10,7 @@
 
 - 修复 `n-cascader` 多选模式下点击 tag 删除子选项未更新选中项
 - 修复 `n-input` 在 `clearable` 为 `true` 时鼠标离开输入框时中文输入法不正确，关闭 [#905](https://github.com/TuSimple/naive-ui/issues/905)
+- 修复 `n-description` 中因 `v-if` 导致的不该出现的警告，关闭 [#1083](https://github.com/TuSimple/naive-ui/issues/1083)
 
 ### Feats
 
