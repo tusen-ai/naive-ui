@@ -6,8 +6,11 @@ export const uploadDraggerKey = '__UPLOAD_DRAGGER__'
 
 export default defineComponent({
   name: 'UploadDragger',
+  props: {
+    internalAsImageCard: Boolean
+  },
   [uploadDraggerKey]: true,
-  setup (_, { slots }) {
+  setup (props, { slots }) {
     const NUpload = inject(uploadInjectionKey, null)
     if (!NUpload) {
       throwError(
@@ -16,7 +19,13 @@ export default defineComponent({
       )
     }
     return () => (
-      <div class={`${NUpload.mergedClsPrefixRef.value}-upload-dragger`}>
+      <div
+        class={[
+          `${NUpload.mergedClsPrefixRef.value}-upload-dragger`,
+          props.internalAsImageCard &&
+            `${NUpload.mergedClsPrefixRef.value}-upload-dragger--image-card`
+        ]}
+      >
         {slots}
       </div>
     )

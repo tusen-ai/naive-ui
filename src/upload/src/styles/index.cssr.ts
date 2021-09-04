@@ -11,24 +11,16 @@ export default cB('upload', [
   `),
   cE('trigger', `
     display: inline-block;
+    box-sizing: border-box;
   `, [
-    cM('picture-card', `
-      position: relative;
-      display: inline-block;
-      width: 96px;
-      height: 96px;
-      margin: 0 8px 8px 0;
-      vertical-align: top;
-      padding: 8px;
-      cursor: pointer;
-      box-sizing: border-box;
-      transition: border-color .3s var(--bezier), background-color .3s var(--bezier);
-      background-color: var(--dragger-color);
-      border: var(--dragger-border);
-      border-radius: var(--border-radius);
-    `, [
-      c('&:hover', `
-        border: var(--dragger-border-hover);
+    cM('image-card', [
+      cB('upload-dragger', `
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       `)
     ])
   ]),
@@ -58,6 +50,12 @@ export default cB('upload', [
     margin-top: 8px;
     line-height: var(--line-height);
   `, [
+    cM('grid', `
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 96px);
+      grid-gap: 8px;
+      margin-top: 0;
+    `),
     cB('upload-file', `
       display: block;
       box-sizing: border-box;
@@ -67,11 +65,7 @@ export default cB('upload', [
       border-radius: var(--border-radius);
     `, [
       fadeInHeightExpand(),
-      cB('progress', `
-        box-sizing: border-box;
-        padding-bottom: 6px;
-        margin-bottom: 6px;
-      `, [
+      cB('progress', [
         fadeInHeightExpand({
           foldPadding: true
         })
@@ -85,9 +79,7 @@ export default cB('upload', [
           `)
         ])
       ]),
-      cM('picture-type', `
-        border: 1px solid;
-        border-color: var(--border-color);
+      cM('image-type', `
         border-radius: var(--border-radius);
         text-decoration: underline;
         text-decoration-color: #0000;
@@ -100,36 +92,56 @@ export default cB('upload', [
           display: flex;
           justify-content: space-between;
           align-items: center;
+          padding: 6px 0;
         `, [
+          cB('progress', `
+            padding: 2px 0;
+            margin-bottom: 0;
+          `),
+          cE('name', `
+            padding: 0 8px;
+          `),
           cE('thumbnail', `
-            width: 48px;
-            height: 48px;
-            font-size: 36px;
+            width: 32px;
+            height: 32px;
+            font-size: 28px;
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
           `, [
-            cB('base-icon', `
-              font-size: inherit;
-            `),
             c('img', `
               width: 100%;
             `)
           ])
         ])
       ]),
-      cM('picture-card-type', `
+      cM('text-type', [
+        cB('progress', `
+          box-sizing: border-box;
+          padding-bottom: 6px;
+          margin-bottom: 6px;
+        `)
+      ]),
+      cM('image-card-type', `
         position: relative;
-        display: inline-block;
         width: 96px;
         height: 96px;
-        margin: 0 8px 8px 0;
-        vertical-align: top;
-        padding: 8px;
-        border: 1px solid;
-        border-color: var(--border-color);
+        border: var(--item-border-image-card);
+        border-radius: var(--border-radius);
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border-color .3s var(--bezier), background-color .3s var(--bezier);
         border-radius: var(--border-radius);
       `, [
+        cB('progress', `
+          position: absolute;
+          left: 8px;
+          bottom: 8px;
+          right: 8px;
+          width: unset;
+        `),
         cB('upload-file-info', `
           padding: 0;
           width: 100%;
@@ -142,10 +154,8 @@ export default cB('upload', [
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            font-size: 36px;
           `, [
-            cB('base-icon', `
-              font-size: 36px;
-            `),
             c('img', `
               width: 100%;
             `)
@@ -154,19 +164,20 @@ export default cB('upload', [
         c('&::before', `
           position: absolute;
           z-index: 1;
-          width: calc(100% - 8px);
-          height: calc(100% - 8px);
-          background-color: rgb(243, 243, 245, 0.9);
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          border-radius: inherit;
           opacity: 0;
           transition: opacity .2s var(--bezier);
           content: "";
-          left: 4px;
-          top: 4px;
         `),
-        c('&:hover', `
-          background-color: initial !important;
-        `, [
-          c('&::before', 'opacity: 1;')
+        c('&:hover', [
+          c('&::before', 'opacity: 1;'),
+          cB('upload-file-info', [
+            cE('thumbnail', 'opacity: .12;')
+          ])
         ])
       ]),
       cM('error-status', [
@@ -174,30 +185,23 @@ export default cB('upload', [
           background-color: var(--item-color-hover-error);
         `),
         cB('upload-file-info', [
-          cE('name', [
-            c('a, span', `
-              color: var(--item-text-color-error);
-            `)
-          ]),
-          cE('thumbnail', [
-            cB('base-icon', `
-              color: var(--item-icon-error-color);
-            `)
-          ])
+          cE('name', 'color: var(--item-text-color-error);'),
+          cE('thumbnail', 'color: var(--item-text-color-error);')
         ]),
-        cM('picture-card-type, picture-type', `
-          border-color: var(--item-icon-error-color);
+        cM('image-card-type', `
+          border: var(--item-border-image-card-error);
         `)
       ]),
       cM('with-url', `
         cursor: pointer;
       `, [
         cB('upload-file-info', [
-          cE('name', [
+          cE('name', `
+            color: var(--item-text-color-success);
+            text-decoration-color: var(--item-text-color-success);
+          `, [
             c('a', `
               text-decoration: underline;
-              color: var(--item-text-color-success);
-              text-decoration-color: var(--item-text-color-success);
             `)
           ])
         ])
@@ -209,12 +213,16 @@ export default cB('upload', [
         display: flex;
         flex-wrap: nowrap;
       `, [
-        cE('thumbnail', [
+        cE('thumbnail', `
+          font-size: 18px;
+          opacity: 1;
+          transition: opacity .2s var(--bezier);
+          color: var(--item-icon-color);
+        `, [
           cB('base-icon', `
-            font-size: 18px;
             margin-right: 2px;
             vertical-align: middle;
-            color: var(--item-icon-color);
+            transition: color .3s var(--bezier);
           `)
         ]),
         cE('action', `
@@ -241,12 +249,12 @@ export default cB('upload', [
               ])
             ])
           ]),
-          cM('picture-type', `
+          cM('image-type', `
             position: relative;
             max-width: 80px;
             width: auto;
           `),
-          cM('picture-card-type', `
+          cM('image-card-type', `
             z-index: 2;
             position: absolute;
             width: 100%;
@@ -261,32 +269,24 @@ export default cB('upload', [
           `)
         ]),
         cE('name', `
+          color: var(--item-text-color);
           flex: 1;
           display: flex;
           justify-content: center;
           text-overflow: ellipsis;
           overflow: hidden;
           flex-direction: column;
+          text-decoration-color: #0000;
+          font-size: var(--font-size);
+          transition:
+            color .3s var(--bezier),
+            text-decoration-color .3s var(--bezier); 
         `, [
           c('a', `
+            color: inherit;
             text-decoration: underline;
-            text-decoration-color: #0000;
-            font-size: var(--font-size);
-            transition:
-              color .3s var(--bezier),
-              text-decoration-color .3s var(--bezier);
-            color: var(--item-text-color);    
           `)
         ])
-      ]),
-      cM('info-status, pending-status, uploading', [
-        cM('picture-card-type', ` 
-          transition:
-            border-color .3s var(--bezier),
-            background-color .3s var(--bezier);
-          background-color: var(--dragger-color);
-          border: var(--dragger-border);
-        `)
       ])
     ])
   ]),
@@ -303,9 +303,6 @@ export default cB('upload', [
       cursor: not-allowed;
     `),
     cB('upload-dragger', `
-      cursor: not-allowed;
-    `),
-    cE('picture-card', `
       cursor: not-allowed;
     `)
   ]),
