@@ -27,6 +27,7 @@ event
 | label | `string` | `undefined` | Checkbox label. |
 | value | `string \| number` | `undefined` | The value of the checkbox to be used in a checkbox group. |
 | on-update:checked | `(checked: boolean) => void` | `undefined` | Callback function triggered on a checked status change. |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of Checkbox. |
 
 ### Checkbox Group Props
 
