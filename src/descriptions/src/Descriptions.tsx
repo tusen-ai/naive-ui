@@ -122,11 +122,7 @@ export default defineComponent({
   },
   render () {
     const defaultSlots = this.$slots.default
-    const children = defaultSlots
-      ? flatten(defaultSlots()).filter(
-        (vNode: VNode) => vNode.children !== 'v-if' && vNode.type !== Comment
-      )
-      : []
+    const children = defaultSlots ? flatten(defaultSlots()) : []
     const memorizedLength = children.length
     const {
       compitableColumn,
