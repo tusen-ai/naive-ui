@@ -11,6 +11,8 @@
 - Fix `n-cascader` click tag to delete the sub option in multi selection mode, and the tree option is not updated.
 - Fix `n-input` chinese input method not correct while mouse leave the input in `clearable` is true, closes [#905](https://github.com/TuSimple/naive-ui/issues/905).
 - Fix `n-description`'s warning caused by `v-if` that should not appear, closes [#1083](https://github.com/TuSimple/naive-ui/issues/1083).
+- Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
+- Fix `n-input-number`'s `step` calculate error when the value is decimal, closes [#1007](https://github.com/TuSimple/naive-ui/issues/1007).
 
 ### Feats
 
@@ -32,11 +34,7 @@
 - `n-pagination` export `PaginationInfo` type.
 - `n-data-table` export `DataTableCreateSummary` type.
 - `n-code` add `inline` prop, closes [#834](https://github.com/TuSimple/naive-ui/issues/834)
-
-### Fixes
-
-- Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
-- Fix `n-input-number`'s `step` calculate error when the value is decimal, closes [#1007](https://github.com/TuSimple/naive-ui/issues/1007).
+- `n-collapse` add 'header-extra' slot, closes [#1046](https://github.com/TuSimple/naive-ui/issues/1046).
 
 ## 2.16.7 (2021-08-27)
 
