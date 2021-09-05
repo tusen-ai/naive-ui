@@ -11,13 +11,3 @@
 <br />
 <n-time :time="4320000" format="yyyy-MM-dd hh:mm:ss" unix />
 ```
-
-```js
-export default {
-  data () {
-    return {
-      time: new Date(0)
-    }
-  }
-}
-```

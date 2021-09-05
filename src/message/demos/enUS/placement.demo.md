@@ -7,113 +7,57 @@
 ```
 
 ```js
+import { defineComponent, h, ref } from 'vue'
 import { useMessage, NButton } from 'naive-ui'
-import { h, ref } from 'vue'
 
 const Buttons = {
   emits: ['changePlacement'],
   setup () {
     const message = useMessage()
+    const placementArray = [
+      { placement: 'top', text: 'Top' },
+      { placement: 'bottom', text: 'Bottom' },
+      { placement: 'top-left', text: 'TopLeft' },
+      { placement: 'top-right', text: 'TopRight' },
+      { placement: 'bottom-left', text: 'BottomLeft' },
+      { placement: 'bottom-right', text: 'BottomRight' }
+    ]
     return {
-      message
+      message,
+      placementArray
     }
   },
   render () {
-    return [
+    return this.placementArray.map((item) =>
       h(
         NButton,
         {
           onClick: () => {
-            this.$emit('changePlacement', 'top')
+            this.$emit('changePlacement', item.placement)
             this.message.info('How many roads must a man walk down')
           },
           style: {
             marginRight: '10px'
           }
         },
-        { default: () => 'Top' }
-      ),
-      h(
-        NButton,
-        {
-          onClick: () => {
-            this.$emit('changePlacement', 'bottom')
-            this.message.info('How many roads must a man walk down')
-          },
-          style: {
-            marginRight: '10px'
-          }
-        },
-        { default: () => 'Bottom' }
-      ),
-      h(
-        NButton,
-        {
-          onClick: () => {
-            this.$emit('changePlacement', 'top-left')
-            this.message.info('How many roads must a man walk down')
-          },
-          style: {
-            marginRight: '10px'
-          }
-        },
-        { default: () => 'TopLeft' }
-      ),
-      h(
-        NButton,
-        {
-          onClick: () => {
-            this.$emit('changePlacement', 'top-right')
-            this.message.info('How many roads must a man walk down')
-          },
-          style: {
-            marginRight: '10px'
-          }
-        },
-        { default: () => 'TopRight' }
-      ),
-      h(
-        NButton,
-        {
-          onClick: () => {
-            this.$emit('changePlacement', 'bottom-left')
-            this.message.info('How many roads must a man walk down')
-          },
-          style: {
-            marginRight: '10px'
-          }
-        },
-        { default: () => 'BottomLeft' }
-      ),
-      h(
-        NButton,
-        {
-          onClick: () => {
-            this.$emit('changePlacement', 'bottom-right')
-            this.message.info('How many roads must a man walk down')
-          },
-          style: {
-            marginRight: '10px'
-          }
-        },
-        { default: () => 'BottomRight' }
+        { default: () => item.text }
       )
-    ]
+    )
   }
 }
 
-export default {
+export default defineComponent({
   components: {
     Buttons
   },
   setup () {
-    const placement = ref('top')
+    const placementRef = ref('top')
     return {
-      placement,
-      changePlacement: (val) => {
-        placement.value = val
+      placement: placementRef,
+      changePlacement (val) {
+        placementRef.value = val
       }
     }
   }
-}
+})
 ```

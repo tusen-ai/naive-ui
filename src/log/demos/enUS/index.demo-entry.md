@@ -18,6 +18,7 @@ In highlight demo, we defined a language called `naive-log` which will highlight
 </template>
 
 <script>
+  import { defineComponent } from 'vue'
   import hljs from 'highlight.js/lib/core'
 
   hljs.registerLanguage('naive-log', () => ({
@@ -29,13 +30,13 @@ In highlight demo, we defined a language called `naive-log` which will highlight
     ]
   }))
 
-  export default {
+  export default defineComponent({
     setup() {
       return {
         hljs
       }
     }
-  }
+  })
 </script>
 ```
 

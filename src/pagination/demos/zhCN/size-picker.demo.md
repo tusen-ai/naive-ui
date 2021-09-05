@@ -11,12 +11,14 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      page: 2,
-      pageSize: 20
+      page: ref(2),
+      pageSize: ref(20)
     }
   }
-}
+})
 ```

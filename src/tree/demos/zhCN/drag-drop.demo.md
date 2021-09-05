@@ -17,6 +17,8 @@
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+
 function createData (level = 4, baseKey = '') {
   if (!level) return undefined
   return Array.apply(null, { length: 6 - level }).map((_, index) => {
@@ -50,43 +52,50 @@ function findSiblingsAndIndex (node, nodes) {
 /**
  * 这个例子的时间复杂度确实可以优化 我实在是懒得改了
  */
-export default {
-  data () {
+export default defineComponent({
+  setup () {
+    const expandedKeysRef = ref([])
+    const checkedKeysRef = ref([])
+    const dataRef = ref(createData())
+
     return {
-      data: createData(),
-      expandedKeys: [],
-      checkedKeys: []
-    }
-  },
-  methods: {
-    handleExpandedKeysChange (expandedKeys) {
-      this.expandedKeys = expandedKeys
-    },
-    handleCheckedKeysChange (checkedKeys) {
-      this.checkedKeys = checkedKeys
-    },
-    handleDrop ({ node, dragNode, dropPosition }) {
-      const data = this.data
-      const [dragNodeSiblings, dragNodeIndex] = findSiblingsAndIndex(
-        dragNode,
-        data
-      )
-      dragNodeSiblings.splice(dragNodeIndex, 1)
-      if (dropPosition === 'inside') {
-        if (node.children) {
-          node.children.unshift(dragNode)
-        } else {
-          node.children = [dragNode]
+      data: dataRef,
+      expandedKeys: expandedKeysRef,
+      checkedKeys: checkedKeysRef,
+      handleExpandedKeysChange (expandedKeys) {
+        expandedKeysRef.value = expandedKeys
+      },
+      handleCheckedKeysChange (checkedKeys) {
+        checkedKeysRef.value = checkedKeys
+      },
+      handleDrop ({ node, dragNode, dropPosition }) {
+        const [dragNodeSiblings, dragNodeIndex] = findSiblingsAndIndex(
+          dragNode,
+          dataRef.value
+        )
+        dragNodeSiblings.splice(dragNodeIndex, 1)
+        if (dropPosition === 'inside') {
+          if (node.children) {
+            node.children.unshift(dragNode)
+          } else {
+            node.children = [dragNode]
+          }
+        } else if (dropPosition === 'before') {
+          const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(
+            node,
+            dataRef.value
+          )
+          nodeSiblings.splice(nodeIndex, 0, dragNode)
+        } else if (dropPosition === 'after') {
+          const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(
+            node,
+            dataRef.value
+          )
+          nodeSiblings.splice(nodeIndex + 1, 0, dragNode)
         }
-      } else if (dropPosition === 'before') {
-        const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(node, data)
-        nodeSiblings.splice(nodeIndex, 0, dragNode)
-      } else if (dropPosition === 'after') {
-        const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(node, data)
-        nodeSiblings.splice(nodeIndex + 1, 0, dragNode)
+        dataRef.value = Array.from(dataRef.value)
       }
-      this.data = Array.from(data)
     }
   }
-}
+})
 ```

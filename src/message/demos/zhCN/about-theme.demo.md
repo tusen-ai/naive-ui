@@ -7,9 +7,10 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     return {
@@ -21,5 +22,5 @@ export default {
       }
     }
   }
-}
+})
 ```

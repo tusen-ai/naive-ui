@@ -30,7 +30,7 @@
 ```
 
 ```js
-function genOptions (depth = 3, iterator = 1, prefix = '') {
+function getOptions (depth = 3, iterator = 1, prefix = '') {
   const length = 12
   const options = []
   for (let i = 1; i <= length; ++i) {
@@ -39,7 +39,7 @@ function genOptions (depth = 3, iterator = 1, prefix = '') {
         value: `v-${i}`,
         label: `l-${i}`,
         disabled: i % 5 === 0,
-        children: genOptions(depth, iterator + 1, '' + i)
+        children: getOptions(depth, iterator + 1, '' + String(i))
       })
     } else if (iterator === depth) {
       options.push({
@@ -52,7 +52,7 @@ function genOptions (depth = 3, iterator = 1, prefix = '') {
         value: `v-${prefix}-${i}`,
         label: `l-${prefix}-${i}`,
         disabled: i % 5 === 0,
-        children: genOptions(depth, iterator + 1, `${prefix}-${i}`)
+        children: getOptions(depth, iterator + 1, `${prefix}-${i}`)
       })
     }
   }
@@ -69,7 +69,7 @@ export default {
       value: null,
       filterable: false,
       responsiveMaxTagCount: true,
-      options: genOptions()
+      options: getOptions()
     }
   }
 }

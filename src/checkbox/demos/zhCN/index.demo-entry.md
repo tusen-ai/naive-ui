@@ -25,6 +25,7 @@ event
 | focusable | `boolean` | `true` | 是否可被 focus |
 | indeterminate | `boolean` | `false` | 是否部分选中 |
 | label | `string` | `undefined` | Checkbox 的标签 |
+| size  | `'small' \| 'medium' \| 'large'`  | `'medium'`  | 组件尺寸 |
 | value | `string \| number` | `undefined` | Checkbox 在 checkbox group 中使用的值 |
 | on-update:checked | `(checked: boolean) => void` | `undefined` | 当 checked 改变时触发的回调函数 |
 

@@ -25,11 +25,15 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const scrollContainerRef = ref(null)
     return {
-      target: () => this.$refs.scrollContainer
+      scrollContainer: scrollContainerRef,
+      target: () => scrollContainerRef.value
     }
   }
-}
+})
 ```

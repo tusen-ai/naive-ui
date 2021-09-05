@@ -1,6 +1,6 @@
 # Inline Form
 
-A Example of inline form.
+An example of an inline form.
 
 ```html
 <n-radio-group
