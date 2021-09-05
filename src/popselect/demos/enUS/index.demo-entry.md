@@ -11,7 +11,9 @@ scrollable
 multiple
 ```
 
-## Props
+## API
+
+### Popselect Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |

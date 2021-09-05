@@ -10,7 +10,9 @@ How time flies.
 basic
 ```
 
-## Props
+## API
+
+### Calendar Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -19,7 +21,7 @@ basic
 | value | `number \| null` | `undefined` | Selected date's timestamp. |
 | on-update:value | `(timestamp: number, { year: number, month: number, date: number }) => void` | `undefined` | Callback when date is selected. |
 
-## Slots
+## Calendar Slots
 
 | Name | Parameters | Description |
 | --- | --- | --- |
