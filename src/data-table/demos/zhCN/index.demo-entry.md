@@ -55,6 +55,7 @@ scroll-debug
 | columns | `Array<DataTableColumn>` | `[]` | 需要展示的列 |
 | data | `Array<object>` | `[]` | 需要展示的数据 |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | 默认选中的 key 值 |
+| default-expanded-row-keys | `Array<string \| number>` | `[]` | 默认展开树的 key 值 |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |
 | flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |
 | loading | `boolean` | `false` | 是否显示 loading 状态 |

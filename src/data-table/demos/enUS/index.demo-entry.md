@@ -54,6 +54,7 @@ flex-height
 | columns | `Array<DataTableColumn>` | `[]` | Columns to display. |
 | data | `Array<object>` | `[]` | Data to display. |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | The key value selected by default. |
+| default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |
 | indent | `number` | `16` | Indent of row content when using tree data. |
 | loading | `boolean` | `false` | Whether to display loading status. |
