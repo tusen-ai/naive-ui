@@ -1,4 +1,4 @@
-import { h, nextTick } from 'vue'
+import { h } from 'vue'
 import { mount, VueWrapper } from '@vue/test-utils'
 import { NCheckbox, NCheckboxGroup } from '../index'
 import { NForm, NFormItem } from '../../form'
@@ -16,11 +16,9 @@ describe('n-checkbox', () => {
     it('works', async () => {
       const wrapper = mount(NCheckbox)
       expectChecked(wrapper, false)
-      void wrapper.trigger('click')
-      await nextTick()
+      await wrapper.trigger('click')
       expectChecked(wrapper, true)
-      void wrapper.trigger('click')
-      await nextTick()
+      await wrapper.trigger('click')
       expectChecked(wrapper, false)
     })
     it('props.defaultChecked', () => {
