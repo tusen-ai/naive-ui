@@ -5,6 +5,7 @@
 ### Breaking Changes
 
 - `n-tree-select` 的 `leaf-only` 属性被废弃，请使用 `check-strategy="child"`
+- `n-cascader` 的 `leaf-only` 属性被废弃，请使用 `check-strategy="child"`
 - `n-input` 的 `show-password-toggle` 属性被废弃，请使用 `show-password-on="click"`
 
 ### Fixes
@@ -26,6 +27,7 @@
 - `n-dropdown` 选项新增 `props` 属性，关闭 [#813](https://github.com/TuSimple/naive-ui/issues/813)
 - `n-data-table` 支持按住 `shift` 进行多选操作，关闭 [#554](https://github.com/TuSimple/naive-ui/issues/554)
 - `n-tree-select` 增加 `check-strategy` 属性，关闭 [#624](https://github.com/TuSimple/naive-ui/issues/624)
+- `n-cascader` 增加 `check-strategy` 属性
 - `n-message` 选项增加 `keepAliveOnHover` 属性，关闭 [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
 - `n-message-provider` 新增 `keep-alive-on-hover` 属性，关闭 [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
 - `n-upload` 导出 `UploadFile` 类型

@@ -22,7 +22,7 @@ import {
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
-import { createTreeMate } from 'treemate'
+import { createTreeMate, CheckStrategy } from 'treemate'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
@@ -49,7 +49,7 @@ import type {
   TreeSelectOption,
   Value
 } from './interface'
-import { treeSelectInjectionKey, CheckStrategy } from './interface'
+import { treeSelectInjectionKey } from './interface'
 import {
   treeOption2SelectOption,
   filterTree,

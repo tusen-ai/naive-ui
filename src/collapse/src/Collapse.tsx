@@ -53,7 +53,6 @@ const collapseProps = {
   onItemHeaderClick: [Function, Array] as PropType<
   MaybeArray<OnItemHeaderClick>
   >,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:expandedNames': [Function, Array] as PropType<
   MaybeArray<OnUpdateExpandedNames>
   >,

@@ -4,7 +4,8 @@
 
 ### Breaking Changes
 
-- `n-tree-select`'s `leaf-only` props is deprecated, please use `check-strategy="child"` instead.
+- `n-tree-select`'s `leaf-only` prop is deprecated, please use `check-strategy="child"` instead.
+- `n-cascader`'s `leaf-only` prop is deprecated, please use `check-strategy="child"` instead.
 - `n-input`'s `show-password-toggle` is deprecated, please use `show-password-on="click"` instead.
 
 ### Fixes
@@ -26,6 +27,7 @@
 - `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
 - `n-data-table` supports multi-selection by holding down `shift`, closes [#554](https://github.com/TuSimple/naive-ui/issues/554).
 - `n-tree-select` add `check-strategy` prop, closes [#624](https://github.com/TuSimple/naive-ui/issues/624).
+- `n-cascader` add `check-strategy` prop.
 - `n-message` option add `keepAliveOnHover`, closes [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
 - `n-message-provider` add `keep-alive-on-hover` prop, closes [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
 - `n-upload` export `UploadFile` type.

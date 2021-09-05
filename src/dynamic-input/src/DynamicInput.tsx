@@ -66,7 +66,6 @@ const dynamicInputProps = {
   },
   onCreate: Function as PropType<(index: number) => any>,
   onRemove: Function as PropType<(index: number) => void>,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   // deprecated

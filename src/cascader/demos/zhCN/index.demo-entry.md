@@ -12,6 +12,7 @@ single-lazy
 multiple-lazy
 action
 virtual
+check-strategy
 ```
 
 ## Props
@@ -19,13 +20,13 @@ virtual
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | cascade | `boolean` | `true` | 在多选时是否关联选项 |
+| check-strategy | `string` | `'all'` | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点 |
 | clearable | `boolean` | `false` | 值是否可清除 |
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | 级联菜单默认选中的数据 |
 | disabled | `boolean` | `false` | 是否禁用 |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | 在 `remote` 被设定时 `'hover'` 不生效 |
 | filterable | `boolean` | `false` | `remote` 被设定时不生效 |
 | filter | `(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean` | 一个基于字符串的过滤算法 | 过滤选项的函数 |
-| leaf-only | `boolean` | `false` | 是否只允许 `value` 出现叶节点的值 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |
 | multiple | `boolean` | `false` | 是否支持多选 |
 | options | `Array<CascaderOption>` | `[]` | 填充的 options 数据 |

@@ -8,9 +8,10 @@ import {
   watch,
   toRef,
   CSSProperties,
-  isReactive
+  isReactive,
+  watchEffect
 } from 'vue'
-import { createTreeMate, SubtreeNotLoadedError } from 'treemate'
+import { createTreeMate, SubtreeNotLoadedError, CheckStrategy } from 'treemate'
 import {
   VBinder,
   VTarget,
@@ -23,7 +24,7 @@ import { useIsMounted, useMergedState } from 'vooks'
 import { NInternalSelection, InternalSelectionInst } from '../../_internal'
 import { useLocale, useTheme, useConfig, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, useAdjustedTo } from '../../_utils'
+import { call, useAdjustedTo, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { cascaderLight } from '../styles'
 import type { CascaderTheme } from '../styles'
@@ -103,23 +104,16 @@ const cascaderProps = {
     type: Boolean,
     default: true
   },
-  // eslint-disable-next-line vue/prop-name-casing
+  checkStrategy: {
+    type: String as PropType<CheckStrategy>,
+    default: 'all'
+  },
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
-    validator: () => {
-      warn(
-        'cascader',
-        '`on-change` is deprecated, please use `on-update:value` instead.'
-      )
-      return true
-    },
-    default: undefined
-  },
   onBlur: Function as PropType<(e: FocusEvent) => void>,
-  onFocus: Function as PropType<(e: FocusEvent) => void>
+  onFocus: Function as PropType<(e: FocusEvent) => void>,
+  // deprecated
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
 export type CascaderProps = ExtractPublicPropTypes<typeof cascaderProps>
@@ -129,6 +123,22 @@ export default defineComponent({
   name: 'Cascader',
   props: cascaderProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.leafOnly) {
+          warnOnce(
+            'cascader',
+            '`leaf-only` is deprecated, please use `check-strategy="child"` instead'
+          )
+        }
+        if (props.onChange !== undefined) {
+          warnOnce(
+            'cascader',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
     const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } =
       useConfig(props)
     const themeRef = useTheme(
@@ -176,7 +186,8 @@ export default defineComponent({
       const { cascade, multiple } = props
       if (multiple && Array.isArray(mergedValueRef.value)) {
         return treeMateRef.value.getCheckedKeys(mergedValueRef.value, {
-          cascade
+          cascade,
+          checkStrategy: props.leafOnly ? 'child' : props.checkStrategy
         })
       } else {
         return {
@@ -252,7 +263,7 @@ export default defineComponent({
             mergedKeysRef.value.checkedKeys,
             {
               cascade,
-              leafOnly
+              checkStrategy: leafOnly ? 'child' : props.checkStrategy
             }
           )
           doUpdateValue(checkedKeys)
@@ -291,7 +302,7 @@ export default defineComponent({
           mergedKeysRef.value.checkedKeys,
           {
             cascade,
-            leafOnly
+            checkStrategy: leafOnly ? 'child' : props.checkStrategy
           }
         )
         doUpdateValue(checkedKeys)
@@ -300,7 +311,7 @@ export default defineComponent({
     const selectedOptionsRef = computed(() => {
       if (props.multiple) {
         const { showPath, separator } = props
-        const { value } = mergedValueRef
+        const { value } = checkedKeysRef
         if (Array.isArray(value)) {
           const { getNode } = treeMateRef.value
           return value.map((key) => {

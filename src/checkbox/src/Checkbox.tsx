@@ -46,7 +46,6 @@ const checkboxProps = {
     type: Boolean,
     default: true
   },
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:checked': [Function, Array] as PropType<
   MaybeArray<(value: boolean, e: MouseEvent | KeyboardEvent) => void>
   >,

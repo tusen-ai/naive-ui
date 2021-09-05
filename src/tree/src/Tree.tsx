@@ -17,7 +17,8 @@ import {
   flatten,
   createIndexGetter,
   TreeMate,
-  TreeMateOptions
+  TreeMateOptions,
+  CheckStrategy
 } from 'treemate'
 import { useMergedState } from 'vooks'
 import { VirtualListInst, VVirtualList } from 'vueuc'
@@ -28,7 +29,6 @@ import { call, createDataKey, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NxScrollbar } from '../../scrollbar'
 import type { ScrollbarInst } from '../../scrollbar'
-import { CheckStrategy } from '../../tree-select/src/interface'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'

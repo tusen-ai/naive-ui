@@ -12,6 +12,7 @@ single-lazy
 multiple-lazy
 action
 virtual
+check-strategy
 ```
 
 ## Props
@@ -19,13 +20,13 @@ virtual
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | cascade | `boolean` | `true` | Whether to cascade the checkbox selection onto children. |
+| check-strategy | `string` | `'all'` | The way to show checked options. `all` means showing all checked node. `parent` means showing all checked parent node when all child node are checked. `child` means showing all child node. |
 | clearable | `boolean` | `false` | Whether the cascader is clearable. |
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | Data selected by default if no value is set. |
 | disabled | `boolean` | `false` | Whether to disable the cascader. |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | If `remote` is set, `'hover'` won't work. |
 | filterable | `boolean` | `false` | Note: If `remote` is set, this won't have any effect. |
 | filter | `(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean` | A string based filter algorithm. | Filter function of the cascader. |
-| leaf-only | `boolean` | `false` | If only a leaf node can be selected `value`. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple select mode. `responsive` will keep all the tags in single line. |
 | multiple | `boolean` | `false` | Whether to allow multiple options being selected. |
 | options | `Array<CascaderOption>` | required | Options of the cascader. |
