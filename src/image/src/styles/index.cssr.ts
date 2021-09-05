@@ -72,6 +72,8 @@ export default c([
   cB('image', `
     display: inline-flex;
     cursor: pointer;
+    max-height: 100%;
+    max-width: 100%;
   `, [
     c('img', `
       border-radius: inherit;

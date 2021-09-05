@@ -6,10 +6,7 @@ import { uploadInjectionKey } from './interface'
 export default defineComponent({
   name: 'UploadProgress',
   props: {
-    show: {
-      type: Boolean,
-      default: false
-    },
+    show: Boolean,
     percentage: {
       type: Number,
       required: true

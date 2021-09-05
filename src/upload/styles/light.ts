@@ -36,7 +36,8 @@ export const self = (vars: ThemeCommonVars) => {
     itemTextColorSuccess: successColor,
     itemIconColor: iconColor,
     itemDisabledOpacity: opacityDisabled,
-    itemIconErrorColor: errorColor
+    itemBorderImageCardError: `1px solid ${errorColor}`,
+    itemBorderImageCard: `1px solid ${borderColor}`
   }
 }
 
