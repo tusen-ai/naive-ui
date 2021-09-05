@@ -1,6 +1,7 @@
-import { h, nextTick } from 'vue'
+import { h } from 'vue'
 import { mount, VueWrapper } from '@vue/test-utils'
 import { NCheckbox, NCheckboxGroup } from '../index'
+import { NForm, NFormItem } from '../../form'
 
 function expectChecked (wrapper: VueWrapper<any>, value: boolean): void {
   expect(wrapper.classes().some((c) => c.includes('checked'))).toEqual(value)
@@ -15,11 +16,9 @@ describe('n-checkbox', () => {
     it('works', async () => {
       const wrapper = mount(NCheckbox)
       expectChecked(wrapper, false)
-      wrapper.trigger('click')
-      await nextTick()
+      await wrapper.trigger('click')
       expectChecked(wrapper, true)
-      wrapper.trigger('click')
-      await nextTick()
+      await wrapper.trigger('click')
       expectChecked(wrapper, false)
     })
     it('props.defaultChecked', () => {
@@ -85,19 +84,20 @@ describe('n-checkbox', () => {
     expect(wrapper.find('.n-checkbox__label').text()).toContain('test')
   })
 
-  it('should work with `on-update:checked` prop', async () => {
+  it('should work with `on-update:checked` & `onUpdateChecked` prop', async () => {
     const onClick = jest.fn()
     const wrapper = mount(NCheckbox, {
       props: {
-        'onUpdate:checked': onClick
+        'onUpdate:checked': onClick,
+        onUpdateChecked: onClick
       },
       slots: {
         default: () => 'test'
       }
     })
 
-    wrapper.trigger('click')
-    expect(onClick).toBeCalled()
+    await wrapper.trigger('click')
+    expect(onClick).toHaveBeenCalledTimes(2)
   })
 
   it('should work with default slots', async () => {
@@ -106,7 +106,35 @@ describe('n-checkbox', () => {
         default: () => 'test'
       }
     })
+
     expect(wrapper.find('.n-checkbox__label').text()).toContain('test')
+  })
+
+  it('should work with `size` prop', () => {
+    ;(['small', 'medium', 'large'] as const).forEach((i) => {
+      const wrapper = mount(NCheckbox, { props: { size: i } })
+      expect(wrapper.find('.n-checkbox').attributes('style')).toMatchSnapshot()
+    })
+  })
+
+  it('should show correct style with `NForm` component', () => {
+    const wrapper = mount(() => (
+      <NForm size="medium">
+        {{
+          default: () => {
+            return (
+              <NFormItem>
+                {{
+                  default: () => <NCheckbox />
+                }}
+              </NFormItem>
+            )
+          }
+        }}
+      </NForm>
+    ))
+
+    expect(wrapper.find('.n-checkbox').attributes('style')).toMatchSnapshot()
   })
 })
 
