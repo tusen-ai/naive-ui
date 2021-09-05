@@ -26,7 +26,7 @@ export default cB('timeline', `
       padding-right: 40px;
     `, [
       cB('timeline-item-content', `
-        margin-top: 26px;
+        margin-top: 30px;
       `, [
         cE('meta', `
           margin-top: 6px;
@@ -51,7 +51,7 @@ export default cB('timeline', `
     cB('timeline-item', [
       cB('timeline-item-content', `
         text-align: right;
-        margin-right: 26px;
+        margin-right: 30px;
       `),
       cB('timeline-item-timeline', `
         width: 14px;
@@ -62,7 +62,7 @@ export default cB('timeline', `
   cM('left-placement', [
     cB('timeline-item', [
       cB('timeline-item-content', `
-        margin-left: 26px;
+        margin-left: 30px;
       `),
       cB('timeline-item-timeline', `
         left: 0;
@@ -131,6 +131,14 @@ export default cB('timeline', `
         bottom: 0px;
         width: 2px;
         background-color: var(--line-color);
+      `),
+      cE('icon', `
+        position: absolute;
+        width:22px;
+        height:100%;
+        font-size:22px;
+        top:-4px;
+        left:-4px
       `)
     ])
   ])

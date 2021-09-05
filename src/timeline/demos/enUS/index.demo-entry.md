@@ -44,3 +44,4 @@ horizontal
 | default | `()`       | Timeline item content.                         |
 | footer  | `()`       | Content at the bottom of the timeline options. |
 | header  | `()`       | Content at the top of the timeline options.    |
+| icon    | `()`       | Timeline item icon.                            |

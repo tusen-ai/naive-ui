@@ -86,10 +86,16 @@ export default defineComponent({
       >
         <div class={`${mergedClsPrefix}-timeline-item-timeline`}>
           <div class={`${mergedClsPrefix}-timeline-item-timeline__line`} />
-          <div
-            class={`${mergedClsPrefix}-timeline-item-timeline__circle`}
-            style={{ borderColor: color }}
-          />
+          {this.$slots.icon ? (
+            <div class={`${mergedClsPrefix}-timeline-item-timeline__icon`}>
+              {this.$slots.icon()}
+            </div>
+          ) : (
+            <div
+              class={`${mergedClsPrefix}-timeline-item-timeline__circle`}
+              style={{ borderColor: color }}
+            />
+          )}
         </div>
         <div class={`${mergedClsPrefix}-timeline-item-content`}>
           {this.title || this.$slots.header ? (

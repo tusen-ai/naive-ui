@@ -3,6 +3,11 @@
 ```html
 <n-timeline>
   <n-timeline-item content="Oops" />
+  <n-timeline-item title="Earth">
+    <template #icon>
+      <n-icon><earth /></n-icon>
+    </template>
+  </n-timeline-item>
   <n-timeline-item
     type="success"
     title="Success"
@@ -27,4 +32,15 @@
     time="2018-04-03 20:46"
   />
 </n-timeline>
+```
+
+```js
+import { defineComponent } from 'vue'
+import { Earth } from '@vicons/ionicons5'
+
+export default defineComponent({
+  components: {
+    Earth
+  }
+})
 ```
