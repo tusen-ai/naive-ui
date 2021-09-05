@@ -21,6 +21,7 @@ import {
 } from 'vueuc'
 import { depx, changeColor, happensIn } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
+import { SelectBaseOption } from '../../select/src/interface'
 import { NInternalSelection, InternalSelectionInst } from '../../_internal'
 import { useLocale, useTheme, useConfig, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -654,7 +655,7 @@ export default defineComponent({
     function handlePatternInput (e: InputEvent): void {
       patternRef.value = (e.target as HTMLInputElement).value
     }
-    function handleDeleteOption (option: BaseOption): void {
+    function handleDeleteOption (option: SelectBaseOption): void {
       const { multiple, valueField } = props
       const { value: mergedValue } = mergedValueRef
       if (multiple && Array.isArray(mergedValue)) {

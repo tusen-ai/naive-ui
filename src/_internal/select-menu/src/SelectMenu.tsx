@@ -96,9 +96,7 @@ export default defineComponent({
     onMouseenter: Function as PropType<(e: MouseEvent) => void>,
     onMouseleave: Function as PropType<(e: MouseEvent) => void>,
     // deprecated
-    onMenuToggleOption: Function as PropType<
-    (tmNode: TreeNode<SelectBaseOption>) => void
-    >
+    onToggle: Function as PropType<(tmNode: TreeNode<SelectBaseOption>) => void>
   },
   setup (props) {
     const themeRef = useTheme(
@@ -171,9 +169,9 @@ export default defineComponent({
         setPendingTmNode(null)
       }
     })
-    function doToggleOption (tmNode: TreeNode<SelectBaseOption>): void {
-      const { onMenuToggleOption } = props
-      if (onMenuToggleOption) onMenuToggleOption(tmNode)
+    function doToggle (tmNode: TreeNode<SelectBaseOption>): void {
+      const { onToggle } = props
+      if (onToggle) onToggle(tmNode)
     }
     function doScroll (e: Event): void {
       const { onScroll } = props
@@ -204,7 +202,7 @@ export default defineComponent({
       tmNode: TreeNode<SelectBaseOption>
     ): void {
       if (tmNode.disabled) return
-      doToggleOption(tmNode)
+      doToggle(tmNode)
     }
     // keyboard related methods
     function handleKeyUp (e: KeyboardEvent): void {

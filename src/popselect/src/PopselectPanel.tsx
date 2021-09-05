@@ -85,7 +85,7 @@ export default defineComponent({
       if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
       if (onChange) call(onChange as OnUpdateValueImpl, value)
     }
-    function handleMenuToggleOption (tmNode: TreeNode<SelectBaseOption>): void {
+    function handleToggle (tmNode: TreeNode<SelectBaseOption>): void {
       toggle(tmNode.key)
     }
     function toggle (value: ValueAtom): void {
@@ -132,7 +132,7 @@ export default defineComponent({
         SelectIgnoredOption
         >(props.options, tmOptions)
       }),
-      handleMenuToggleOption
+      handleToggle
     }
   },
   render () {
@@ -149,7 +149,7 @@ export default defineComponent({
         virtualScroll={false}
         scrollable={this.scrollable}
         renderLabel={this.renderLabel}
-        onMenuToggleOption={this.handleMenuToggleOption}
+        onToggle={this.handleToggle}
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseenter}
       />

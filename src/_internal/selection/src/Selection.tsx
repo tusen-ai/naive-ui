@@ -84,7 +84,7 @@ export default defineComponent({
     onClick: Function as PropType<(e: MouseEvent) => void>,
     onBlur: Function as PropType<(e: FocusEvent) => void>,
     onFocus: Function as PropType<(e: FocusEvent) => void>,
-    onDeleteOption: Function,
+    onDeleteOption: Function as PropType<(option: SelectBaseOption) => void>,
     maxTagCount: [String, Number] as PropType<number | 'responsive'>,
     onClear: Function as PropType<(e: MouseEvent) => void>,
     onPatternInput: Function as PropType<(e: InputEvent) => void>,
@@ -577,7 +577,7 @@ export default defineComponent({
         : undefined
       let counter: JSX.Element | undefined
       if (maxTagCountNumeric) {
-        const rest = this.selectedOptions!.length - (maxTagCount)
+        const rest = this.selectedOptions!.length - maxTagCount
         if (rest > 0) {
           counter = (
             <div

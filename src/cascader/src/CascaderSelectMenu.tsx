@@ -103,7 +103,7 @@ export default defineComponent({
         syncSelectMenuPosition()
       })
     })
-    function handleMenuToggleOption (tmNode: TreeNode<SelectBaseOption>): void {
+    function handleToggle (tmNode: TreeNode<SelectBaseOption>): void {
       doCheck(tmNode)
     }
     // We don't care what type the tmNode is, we only care about its key
@@ -156,7 +156,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       menuInstRef,
       selectTreeMate: selectTreeMateRef,
-      handleMenuToggleOption,
+      handleToggle,
       handleClickOutside,
       ...exposedRef
     }
@@ -181,7 +181,7 @@ export default defineComponent({
                     treeMate={this.selectTreeMate}
                     multiple={this.multiple}
                     value={this.value}
-                    onMenuToggleOption={this.handleMenuToggleOption}
+                    onToggle={this.handleToggle}
                   />,
                   [[clickoutside, this.handleClickOutside]]
               )

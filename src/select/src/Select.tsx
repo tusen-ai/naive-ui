@@ -452,7 +452,10 @@ export default defineComponent({
         }
       }
     }
-    function handleMenuToggleOption (tmNode: TreeNode<SelectBaseOption>): void {
+    function handleToggleByTmNode (tmNode: TreeNode<SelectBaseOption>): void {
+      handleToggleByOption(tmNode.rawNode)
+    }
+    function handleToggleByOption (option: SelectBaseOption): void {
       if (mergedDisabledRef.value) return
       const { tag, remote } = props
       if (tag && !remote) {
@@ -463,7 +466,6 @@ export default defineComponent({
           beingCreatedOptionsRef.value = []
         }
       }
-      const { rawNode: option } = tmNode
       if (remote) {
         memoValOptMapRef.value.set(option.value, option)
       }
@@ -570,7 +572,7 @@ export default defineComponent({
             const menu = menuRef.value
             const pendingOptionData = menu?.getPendingTmNode()
             if (pendingOptionData) {
-              handleMenuToggleOption(pendingOptionData)
+              handleToggleByTmNode(pendingOptionData)
             } else {
               closeMenu()
               focusSelection()
@@ -658,7 +660,8 @@ export default defineComponent({
       handleMenuBlur,
       handleMenuTabOut,
       handleTriggerClick,
-      handleMenuToggleOption,
+      handleToggle: handleToggleByTmNode,
+      handleDeleteOption: handleToggleByOption,
       handlePatternInput,
       handleClear,
       handleTriggerBlur,
@@ -718,7 +721,7 @@ export default defineComponent({
                       loading={this.loading}
                       focused={this.focused}
                       onClick={this.handleTriggerClick}
-                      onDeleteOption={this.handleMenuToggleOption}
+                      onDeleteOption={this.handleDeleteOption}
                       onPatternInput={this.handlePatternInput}
                       onClear={this.handleClear}
                       onBlur={this.handleTriggerBlur}
@@ -772,7 +775,7 @@ export default defineComponent({
                               renderLabel={this.renderLabel}
                               value={this.mergedValue}
                               style={this.cssVars}
-                              onMenuToggleOption={this.handleMenuToggleOption}
+                              onToggle={this.handleToggle}
                               onScroll={this.handleMenuScroll}
                               onFocus={this.handleMenuFocus}
                               onBlur={this.handleMenuBlur}

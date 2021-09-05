@@ -229,7 +229,7 @@ export default defineComponent({
       canBeActivatedRef.value = true
       doUpdateValue(value)
     }
-    function handleMenuToggleOption (option: TreeNode<SelectBaseOption>): void {
+    function handleToggle (option: TreeNode<SelectBaseOption>): void {
       select(option.rawNode as AutoCompleteOption)
     }
     function handleClickOutsideMenu (e: MouseEvent): void {
@@ -257,7 +257,7 @@ export default defineComponent({
       handleFocus,
       handleBlur,
       handleInput,
-      handleMenuToggleOption,
+      handleToggle,
       handleClickOutsideMenu,
       handleCompositionStart,
       handleCompositionEnd,
@@ -359,9 +359,7 @@ export default defineComponent({
                                   treeMate={this.treeMate}
                                   multiple={false}
                                   size="medium"
-                                  onMenuToggleOption={
-                                    this.handleMenuToggleOption
-                                  }
+                                  onToggle={this.handleToggle}
                                 />,
                                 [[clickoutside, this.handleClickOutsideMenu]]
                             )

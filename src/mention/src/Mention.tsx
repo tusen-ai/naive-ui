@@ -456,7 +456,7 @@ export default defineComponent({
                               treeMate={this.treeMate}
                               virtualScroll={false}
                               style={this.cssVars as CSSProperties}
-                              onMenuToggleOption={this.handleSelect}
+                              onToggle={this.handleSelect}
                               renderLabel={this.renderLabel}
                             >
                               {$slots}
