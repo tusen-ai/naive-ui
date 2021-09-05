@@ -7,7 +7,7 @@ export const uploadDraggerKey = '__UPLOAD_DRAGGER__'
 export default defineComponent({
   name: 'UploadDragger',
   [uploadDraggerKey]: true,
-  setup (props, { slots }) {
+  setup (_, { slots }) {
     const NUpload = inject(uploadInjectionKey, null)
     if (!NUpload) {
       throwError(
