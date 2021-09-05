@@ -102,14 +102,15 @@ describe('n-timeline-item', () => {
     )
   })
 
-  it('should work with `default`, `footer`, `header` slots', async () => {
+  it('should work with `default`, `footer`, `header`, `icon` slots', async () => {
     const wrapper = mount(NTimeline, {
       slots: {
         default: () =>
           h(NTimelineItem, null, {
             header: () => 'test-header',
             default: () => 'test-default',
-            footer: () => 'test-footer'
+            footer: () => 'test-footer',
+            icon: () => 'test-icon'
           })
       }
     })
@@ -126,6 +127,10 @@ describe('n-timeline-item', () => {
     expect(wrapper.find('.n-timeline-item-content__meta').exists()).toBe(true)
     expect(wrapper.find('.n-timeline-item-content__meta').text()).toBe(
       'test-footer'
+    )
+    expect(wrapper.find('.n-timeline-item-timeline__icon').exists()).toBe(true)
+    expect(wrapper.find('.n-timeline-item-timeline__icon').text()).toBe(
+      'test-icon'
     )
   })
 })
