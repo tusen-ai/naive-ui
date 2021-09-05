@@ -10,6 +10,11 @@ describe('n-gradient-text', () => {
     const wrapper = mount(NGradientText, { slots: { default: () => 'test' } })
     expect(wrapper.find('.n-gradient-text').text()).toContain('test')
 
+    await wrapper.setProps({ type: 'danger' })
+    expect(wrapper.find('.n-gradient-text').classes()).toContain(
+      'n-gradient-text--error-type'
+    )
+
     const typeArray = [
       'error',
       'info',
@@ -44,8 +49,7 @@ describe('n-gradient-text', () => {
     const wrapper = mount(NGradientText, { slots: { default: () => 'test' } })
 
     await wrapper.setProps({
-      gradient:
-        "{ deg: 180, from: 'rgb(85, 85, 85)', to: 'rgb(170, 170, 170)' }"
+      gradient: { from: 'rgb(85, 85, 85)', to: 'rgb(170, 170, 170)' }
     })
     expect(
       wrapper.find('.n-gradient-text').attributes('style')
