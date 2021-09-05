@@ -85,7 +85,7 @@ describe('n-image', () => {
 
     expect(wrapper.findAll('img').length).toBe(2)
 
-    await wrapper.findAllComponents(NImage)[0].trigger('click')
+    await wrapper.findAll('img')[0].trigger('click')
     expect(wrapper.findComponent(NImagePreview).exists()).toBe(true)
   })
   it('should inherit attrs', () => {
