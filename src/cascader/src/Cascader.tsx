@@ -108,6 +108,18 @@ const cascaderProps = {
     type: String as PropType<CheckStrategy>,
     default: 'all'
   },
+  valueField: {
+    type: String,
+    default: 'value'
+  },
+  labelField: {
+    type: String,
+    default: 'label'
+  },
+  childrenField: {
+    type: String,
+    default: 'children'
+  },
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
@@ -176,9 +188,13 @@ export default defineComponent({
       loadingKeySetRef.value.delete(key)
     }
     const treeMateRef = computed(() => {
+      const { valueField, childrenField } = props
       return createTreeMate(props.options, {
         getKey (node) {
-          return node.value
+          return (node as any)[valueField]
+        },
+        getChildren (node) {
+          return (node as any)[childrenField]
         }
       })
     })
@@ -273,7 +289,9 @@ export default defineComponent({
             if (cascaderMenuInstRef.value) {
               const node = treeMateRef.value.getNode(key)
               if (node !== null) {
-                cascaderMenuInstRef.value.showErrorMessage(node.rawNode.label)
+                cascaderMenuInstRef.value.showErrorMessage(
+                  (node.rawNode as any)[props.labelField]
+                )
               }
             }
           } else {
@@ -310,7 +328,7 @@ export default defineComponent({
     }
     const selectedOptionsRef = computed(() => {
       if (props.multiple) {
-        const { showPath, separator } = props
+        const { showPath, separator, labelField } = props
         const { value } = checkedKeysRef
         if (Array.isArray(value)) {
           const { getNode } = treeMateRef.value
@@ -324,9 +342,9 @@ export default defineComponent({
             } else {
               return {
                 label: showPath
-                  ? getPathLabel(node, separator)
-                  : node.rawNode.label,
-                value: node.rawNode.value
+                  ? getPathLabel(node, separator, labelField)
+                  : (node.rawNode as any)[labelField],
+                value: node.key
               }
             }
           })
@@ -336,7 +354,7 @@ export default defineComponent({
       } else return []
     })
     const selectedOptionRef = computed(() => {
-      const { multiple, showPath, separator } = props
+      const { multiple, showPath, separator, labelField } = props
       const { value } = mergedValueRef
       if (!multiple && !Array.isArray(value)) {
         const { getNode } = treeMateRef.value
@@ -352,9 +370,9 @@ export default defineComponent({
         } else {
           return {
             label: showPath
-              ? getPathLabel(node, separator)
-              : node.rawNode.label,
-            value: node.rawNode.value
+              ? getPathLabel(node, separator, labelField)
+              : (node.rawNode as any)[labelField],
+            value: node.key
           }
         }
       } else return null
@@ -637,10 +655,10 @@ export default defineComponent({
       patternRef.value = (e.target as HTMLInputElement).value
     }
     function handleDeleteOption (option: BaseOption): void {
-      const { multiple } = props
+      const { multiple, valueField } = props
       const { value: mergedValue } = mergedValueRef
       if (multiple && Array.isArray(mergedValue)) {
-        doUncheck(option.value)
+        doUncheck((option as any)[valueField])
       } else {
         doUpdateValue(null)
       }
@@ -684,6 +702,7 @@ export default defineComponent({
       virtualScrollRef: toRef(props, 'virtualScroll'),
       optionHeightRef,
       localeRef,
+      labelFieldRef: toRef(props, 'labelField'),
       syncCascaderMenuPosition,
       syncSelectMenuPosition,
       updateKeyboardKey,

@@ -46,7 +46,7 @@ export interface InternalSelectMenuInjection {
 
 export interface InternalExposedProps {
   selfRef: Ref<HTMLElement | null>
-  getPendingOption: () => SelectBaseOption | null
+  getPendingTmNode: () => TreeNode<SelectBaseOption> | null
   prev: () => void
   next: () => void
 }

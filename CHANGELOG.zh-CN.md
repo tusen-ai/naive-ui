@@ -21,9 +21,15 @@
 - `n-cascader` 新增 `onUpdateValue` 方法
 - `n-auto-complete` 新增 `onUpdateValue` 方法
 - `n-data-table` 的列的 `renderFilterMenu` 新增 hide 参数
-- `n-tree` 和 `n-tree-select` 新增 `key-field` 属性
-- `n-tree` 和 `n-tree-select` 新增 `label-field` 属性
-- `n-tree` 和 `n-tree-select` 新增 `children-field` 属性
+- `n-tree` 新增 `key-field` 属性
+- `n-tree` 新增 `label-field` 属性
+- `n-tree` 新增 `children-field` 属性
+- `n-tree-select` 新增 `key-field` 属性
+- `n-tree-select` 新增 `label-field` 属性
+- `n-tree-select` 新增 `children-field` 属性
+- `n-cascader` 新增 `key-field` 属性
+- `n-cascader` 新增 `label-field` 属性
+- `n-cascader` 新增 `children-field` 属性
 - `n-dropdown` 选项新增 `props` 属性，关闭 [#813](https://github.com/TuSimple/naive-ui/issues/813)
 - `n-data-table` 支持按住 `shift` 进行多选操作，关闭 [#554](https://github.com/TuSimple/naive-ui/issues/554)
 - `n-tree-select` 增加 `check-strategy` 属性，关闭 [#624](https://github.com/TuSimple/naive-ui/issues/624)

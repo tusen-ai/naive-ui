@@ -9,7 +9,7 @@ import {
   withDirectives,
   CSSProperties
 } from 'vue'
-import { createTreeMate } from 'treemate'
+import { createTreeMate, TreeNode } from 'treemate'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
@@ -185,9 +185,9 @@ export default defineComponent({
         case 'Enter':
         case 'NumpadEnter':
           if (!isComposingRef.value) {
-            const pendingOptionData = menuInstRef.value?.getPendingOption()
-            if (pendingOptionData) {
-              select(pendingOptionData as AutoCompleteOption)
+            const pendingOptionTmNode = menuInstRef.value?.getPendingTmNode()
+            if (pendingOptionTmNode) {
+              select(pendingOptionTmNode.rawNode as AutoCompleteOption)
               e.preventDefault()
             }
           }
@@ -229,8 +229,8 @@ export default defineComponent({
       canBeActivatedRef.value = true
       doUpdateValue(value)
     }
-    function handleToggleOption (option: SelectBaseOption): void {
-      select(option as AutoCompleteOption)
+    function handleMenuToggleOption (option: TreeNode<SelectBaseOption>): void {
+      select(option.rawNode as AutoCompleteOption)
     }
     function handleClickOutsideMenu (e: MouseEvent): void {
       if (!triggerElRef.value?.contains(e.target as Node)) {
@@ -257,7 +257,7 @@ export default defineComponent({
       handleFocus,
       handleBlur,
       handleInput,
-      handleToggleOption,
+      handleMenuToggleOption,
       handleClickOutsideMenu,
       handleCompositionStart,
       handleCompositionEnd,
@@ -359,7 +359,9 @@ export default defineComponent({
                                   treeMate={this.treeMate}
                                   multiple={false}
                                   size="medium"
-                                  onMenuToggleOption={this.handleToggleOption}
+                                  onMenuToggleOption={
+                                    this.handleMenuToggleOption
+                                  }
                                 />,
                                 [[clickoutside, this.handleClickOutsideMenu]]
                             )

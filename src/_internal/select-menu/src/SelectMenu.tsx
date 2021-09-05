@@ -96,7 +96,9 @@ export default defineComponent({
     onMouseenter: Function as PropType<(e: MouseEvent) => void>,
     onMouseleave: Function as PropType<(e: MouseEvent) => void>,
     // deprecated
-    onMenuToggleOption: Function as PropType<(value: SelectBaseOption) => void>
+    onMenuToggleOption: Function as PropType<
+    (tmNode: TreeNode<SelectBaseOption>) => void
+    >
   },
   setup (props) {
     const themeRef = useTheme(
@@ -169,9 +171,9 @@ export default defineComponent({
         setPendingTmNode(null)
       }
     })
-    function doToggleOption (option: SelectBaseOption): void {
+    function doToggleOption (tmNode: TreeNode<SelectBaseOption>): void {
       const { onMenuToggleOption } = props
-      if (onMenuToggleOption) onMenuToggleOption(option)
+      if (onMenuToggleOption) onMenuToggleOption(tmNode)
     }
     function doScroll (e: Event): void {
       const { onScroll } = props
@@ -185,9 +187,9 @@ export default defineComponent({
     function handleVirtualListResize (): void {
       scrollbarRef.value?.sync()
     }
-    function getPendingOption (): SelectBaseOption | null {
+    function getPendingTmNode (): TreeNode<SelectBaseOption> | null {
       const { value: pendingTmNode } = pendingNodeRef
-      if (pendingTmNode) return pendingTmNode.rawNode
+      if (pendingTmNode) return pendingTmNode
       return null
     }
     function handleOptionMouseEnter (
@@ -202,7 +204,7 @@ export default defineComponent({
       tmNode: TreeNode<SelectBaseOption>
     ): void {
       if (tmNode.disabled) return
-      doToggleOption(tmNode.rawNode)
+      doToggleOption(tmNode)
     }
     // keyboard related methods
     function handleKeyUp (e: KeyboardEvent): void {
@@ -328,7 +330,7 @@ export default defineComponent({
       selfRef,
       next,
       prev,
-      getPendingOption
+      getPendingTmNode
     }
     return {
       virtualListRef,

@@ -30,6 +30,7 @@ export default defineComponent({
       onLoadRef,
       mergedClsPrefixRef,
       mergedThemeRef,
+      labelFieldRef,
       updateHoverKey,
       updateKeyboardKey,
       addLoadingKey,
@@ -39,7 +40,7 @@ export default defineComponent({
       doUncheck
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(cascaderInjectionKey)!
-    const valueRef = computed(() => props.tmNode.rawNode.value)
+    const valueRef = computed(() => props.tmNode.key)
     const useHoverTriggerRef = computed(() => {
       const { value: expandTrigger } = expandTriggerRef
       const { value: remote } = remoteRef
@@ -84,10 +85,11 @@ export default defineComponent({
       if (multipleRef.value && cascadeRef.value) return true
       if (!leafOnlyRef.value) return true
     })
-    const rawNodeRef = computed(() => props.tmNode.rawNode)
     const isLeafRef = computed(() => props.tmNode.isLeaf)
     const disabledRef = computed(() => props.tmNode.disabled)
-    const labelRef = computed(() => props.tmNode.rawNode.label)
+    const labelRef = computed(
+      () => (props.tmNode.rawNode as any)[labelFieldRef.value]
+    )
     const isShallowLoadedRef = computed(() => {
       return props.tmNode.shallowLoaded
     })
@@ -102,7 +104,7 @@ export default defineComponent({
       if (!happensIn(e, 'checkbox')) {
         if (remote && !isShallowLoaded && !loadingKeySet.has(value) && onLoad) {
           addLoadingKey(value)
-          onLoad(rawNodeRef.value)
+          onLoad(props.tmNode.rawNode)
             .then(() => {
               deleteLoadingKey(value)
             })

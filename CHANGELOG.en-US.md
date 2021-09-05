@@ -20,10 +20,16 @@
 
 - `n-cascader` add `onUpdateValue` prop.
 - `n-auto-complete` add `onUpdateValue` prop.
-- `n-data-table`'s column's `renderFilterMenu` add `hide` params.
-- `n-tree` & `n-tree-select` add `key-field` prop.
-- `n-tree` & `n-tree-select` add `label-field` prop.
-- `n-tree` & `n-tree-select` add `children-field` prop.
+- `n-data-table`'s column's `renderFilterMenu` add `hide` param.
+- `n-tree` add `key-field` prop.
+- `n-tree` add `label-field` prop.
+- `n-tree` add `children-field` prop.
+- `n-tree-select` add `key-field` prop.
+- `n-tree-select` add `label-field` prop.
+- `n-tree-select` add `children-field` prop.
+- `n-cascader` add `key-field` prop.
+- `n-cascader`add `label-field` prop.
+- `n-cascader` add `children-field` prop.
 - `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
 - `n-data-table` supports multi-selection by holding down `shift`, closes [#554](https://github.com/TuSimple/naive-ui/issues/554).
 - `n-tree-select` add `check-strategy` prop, closes [#624](https://github.com/TuSimple/naive-ui/issues/624).
