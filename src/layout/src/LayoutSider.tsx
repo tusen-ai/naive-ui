@@ -73,7 +73,6 @@ const layoutSiderProps = {
   Partial<ScrollbarProps> & { style: CSSProperties }
   >,
   triggerStyle: [String, Object] as PropType<string | CSSProperties>,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:collapsed': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,

@@ -89,6 +89,6 @@ update-on-close
 
 ## Slots
 
-| Name   | Parameters | Description          |
-| ------ | ---- | ------------- |
-| footer | `()` | Extra Footer. |
+| Name   | Parameters | Description   |
+| ------ | ---------- | ------------- |
+| footer | `()`       | Extra Footer. |

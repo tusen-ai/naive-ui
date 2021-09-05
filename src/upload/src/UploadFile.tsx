@@ -1,16 +1,30 @@
-import { h, defineComponent, PropType, computed, inject } from 'vue'
+import {
+  h,
+  defineComponent,
+  PropType,
+  computed,
+  inject,
+  ref,
+  watchEffect,
+  VNode
+} from 'vue'
 import {
   CancelIcon,
   TrashIcon,
   AttachIcon,
   RetryIcon,
-  DownloadIcon
+  DownloadIcon,
+  EyeIcon
 } from '../../_internal/icons'
 import { NButton } from '../../button'
 import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
 import { warn } from '../../_utils'
 import NUploadProgress from './UploadProgress'
-import { FileInfo, uploadInjectionKey } from './interface'
+import { FileInfo, listType, uploadInjectionKey } from './interface'
+import { imageIcon, documentIcon } from './icons'
+import { environmentSupportFile, isImageFile } from './utils'
+import { NImage } from '../../image'
+import { ImageInst } from '../../image/src/Image'
 
 export default defineComponent({
   name: 'UploadFile',
@@ -22,11 +36,19 @@ export default defineComponent({
     file: {
       type: Object as PropType<FileInfo>,
       required: true
+    },
+    listType: {
+      type: String as PropType<listType>,
+      required: true
     }
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NUpload = inject(uploadInjectionKey)!
+
+    const imageRef = ref<ImageInst | null>(null)
+    const thumbnailUrlRef = ref<string>('')
+
     const progressStatusRef = computed(() => {
       const { file } = props
       if (file.status === 'finished') return 'success'
@@ -61,6 +83,18 @@ export default defineComponent({
       if (!NUpload.showRetryButtonRef.value) return false
       const { file } = props
       return ['error'].includes(file.status)
+    })
+    const showPreivewButtonRef = computed(() => {
+      if (!NUpload.showPreivewButtonRef.value) return false
+      const {
+        file: { status, url },
+        listType
+      } = props
+      return (
+        ['finished'].includes(status) &&
+        (url || thumbnailUrlRef.value) &&
+        listType === 'image-card'
+      )
     })
     function handleRetryClick (): void {
       NUpload.submit(props.file.id)
@@ -121,6 +155,35 @@ export default defineComponent({
       XHR?.abort()
       handleRemove(Object.assign({}, file))
     }
+    function handlePreviewClick (): void {
+      const {
+        onPreviewRef: { value: onPreview }
+      } = NUpload
+
+      if (onPreview) {
+        onPreview(props.file)
+      } else if (props.listType === 'image-card') {
+        const { value } = imageRef
+        if (!value) return
+        value.click()
+      }
+    }
+
+    const deriveFileThumbnailUrl = async (): Promise<void> => {
+      const { listType } = props
+      if (listType !== 'image' && listType !== 'image-card') {
+        return
+      }
+      if (!environmentSupportFile || !(props.file.file instanceof File)) {
+        return
+      }
+      thumbnailUrlRef.value = await NUpload.getFileThumbnailUrl(props.file)
+    }
+
+    watchEffect(() => {
+      void deriveFileThumbnailUrl()
+    })
+
     return {
       mergedTheme: NUpload.mergedThemeRef,
       progressStatus: progressStatusRef,
@@ -131,32 +194,133 @@ export default defineComponent({
       showRemoveButton: showRemoveButtonRef,
       showDownloadButton: showDownloadButtonRef,
       showRetryButton: showRetryButtonRef,
+      showPreivewButton: showPreivewButtonRef,
+      thumbnailUrl: thumbnailUrlRef,
+      imageRef,
       handleRemoveOrCancelClick,
       handleDownloadClick,
-      handleRetryClick
+      handleRetryClick,
+      handlePreviewClick
     }
   },
   render () {
-    const { clsPrefix, mergedTheme } = this
+    const { clsPrefix, mergedTheme, listType, file } = this
+
+    // if there is text list type, show file icon
+    let icon: VNode
+
+    const isImageType = listType === 'image'
+    const isImageCardType = listType === 'image-card'
+
+    if (isImageType || isImageCardType) {
+      icon = !isImageFile(file) ? (
+        <span class={`${clsPrefix}-upload-file-info__thumbnail`}>
+          <NBaseIcon clsPrefix={clsPrefix}>
+            {{ default: () => documentIcon }}
+          </NBaseIcon>
+        </span>
+      ) : (file.url || this.thumbnailUrl) && file.status !== 'error' ? (
+        <a
+          rel="noopener noreferer"
+          target="_blank"
+          href={file.url || undefined}
+          class={`${clsPrefix}-upload-file-info__thumbnail`}
+          onClick={this.handlePreviewClick}
+        >
+          {listType === 'image-card' ? (
+            <NImage
+              src={this.thumbnailUrl || file.url || undefined}
+              alt={file.name}
+              ref="imageRef"
+            />
+          ) : (
+            <img
+              src={this.thumbnailUrl || file.url || undefined}
+              alt={file.name}
+            />
+          )}
+        </a>
+      ) : (
+        <span class={`${clsPrefix}-upload-file-info__thumbnail`}>
+          <NBaseIcon clsPrefix={clsPrefix}>
+            {{ default: () => imageIcon }}
+          </NBaseIcon>
+        </span>
+      )
+    } else {
+      icon = (
+        <span class={`${clsPrefix}-upload-file-info__thumbnail`}>
+          <NBaseIcon clsPrefix={clsPrefix}>
+            {{ default: () => <AttachIcon /> }}
+          </NBaseIcon>
+        </span>
+      )
+    }
+
+    const progress = (
+      <NUploadProgress
+        show={this.showProgress}
+        percentage={file.percentage || 0}
+        status={this.progressStatus}
+      />
+    )
+
+    const showName = listType === 'text' || listType === 'image'
+
     return (
-      <a
-        ref="noopener noreferer"
-        target="_blank"
-        href={this.file.url || undefined}
+      <div
         class={[
           `${clsPrefix}-upload-file`,
           `${clsPrefix}-upload-file--${this.progressStatus}-status`,
-          this.file.url && `${clsPrefix}-upload-file--with-url`
+          file.url &&
+            file.status !== 'error' &&
+            listType !== 'image-card' &&
+            `${clsPrefix}-upload-file--with-url`,
+          `${clsPrefix}-upload-file--${listType}-type`
         ]}
       >
         <div class={`${clsPrefix}-upload-file-info`}>
+          {icon}
           <div class={`${clsPrefix}-upload-file-info__name`}>
-            <NBaseIcon clsPrefix={clsPrefix}>
-              {{ default: () => <AttachIcon /> }}
-            </NBaseIcon>
-            {this.file.name}
+            {showName &&
+              (file.url && file.status !== 'error' ? (
+                <a
+                  rel="noopener noreferer"
+                  target="_blank"
+                  href={file.url || undefined}
+                  onClick={this.handlePreviewClick}
+                >
+                  {file.name}
+                </a>
+              ) : (
+                <span onClick={this.handlePreviewClick}>{file.name}</span>
+              ))}
+            {isImageType && progress}
           </div>
-          <div class={`${clsPrefix}-upload-file-info__action`}>
+          <div
+            class={[
+              `${clsPrefix}-upload-file-info__action`,
+              `${clsPrefix}-upload-file-info__action--${listType}-type`
+            ]}
+          >
+            {this.showPreivewButton ? (
+              <NButton
+                key="preview"
+                text
+                type={this.buttonType}
+                onClick={this.handlePreviewClick}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
+              >
+                {{
+                  icon: () => (
+                    <NBaseIcon clsPrefix={clsPrefix}>
+                      {{ default: () => <EyeIcon /> }}
+                    </NBaseIcon>
+                  )
+                }}
+              </NButton>
+            ) : null}
             {(this.showRemoveButton || this.showCancelButton) &&
               !this.disabled && (
                 <NButton
@@ -225,12 +389,8 @@ export default defineComponent({
             ) : null}
           </div>
         </div>
-        <NUploadProgress
-          show={this.showProgress}
-          percentage={this.file.percentage || 0}
-          status={this.progressStatus}
-        />
-      </a>
+        {!isImageType && progress}
+      </div>
     )
   }
 })

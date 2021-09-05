@@ -10,7 +10,8 @@ import {
   CSSProperties,
   provide,
   watch,
-  nextTick
+  nextTick,
+  watchEffect
 } from 'vue'
 import {
   FollowerPlacement,
@@ -21,10 +22,10 @@ import {
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
-import { createTreeMate } from 'treemate'
+import { createTreeMate, CheckStrategy } from 'treemate'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
-import { treeMateOptions, treeSharedProps } from '../../tree/src/Tree'
+import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
 import {
   NInternalSelection,
   InternalSelectionInst,
@@ -38,7 +39,8 @@ import {
   call,
   ExtractPublicPropTypes,
   MaybeArray,
-  useAdjustedTo
+  useAdjustedTo,
+  warnOnce
 } from '../../_utils'
 import { treeSelectLight, TreeSelectTheme } from '../styles'
 import type {
@@ -80,7 +82,10 @@ const props = {
     default: undefined
   },
   filterable: Boolean,
-  leafOnly: Boolean,
+  checkStrategy: {
+    type: String as PropType<CheckStrategy>,
+    default: 'all'
+  },
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
   showPath: Boolean,
@@ -120,7 +125,14 @@ const props = {
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
-  >
+  >,
+  /**
+   * @deprecated
+   */
+  leafOnly: {
+    type: Boolean,
+    default: undefined
+  }
 } as const
 
 export type TreeSelectProps = ExtractPublicPropTypes<typeof props>
@@ -129,6 +141,16 @@ export default defineComponent({
   name: 'TreeSelect',
   props,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.leafOnly !== undefined) {
+          warnOnce(
+            'tree-select',
+            '`leaf-only` is deprecated, please use `check-strategy="child"` instead.'
+          )
+        }
+      })
+    }
     const followerInstRef = ref<FollowerInst | null>(null)
     const triggerInstRef = ref<InternalSelectionInst | null>(null)
     const treeInstRef = ref<InternalTreeInst | null>(null)
@@ -153,6 +175,17 @@ export default defineComponent({
     const controlledShowRef = toRef(props, 'show')
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
     const patternRef = ref('')
+    const mergedFilterRef = computed(() => {
+      const { filter } = props
+      if (filter) return filter
+      const { labelField } = props
+      return (pattern: string, node: TreeSelectOption): boolean => {
+        if (!pattern.length) return true
+        return ((node as any)[labelField] as string)
+          .toLowerCase()
+          .includes(pattern.toLowerCase())
+      }
+    })
     const filteredTreeInfoRef = computed<{
       filteredTree: TreeSelectOption[]
       highlightKeySet: Set<Key> | undefined
@@ -166,23 +199,31 @@ export default defineComponent({
         }
       }
       const { value: pattern } = patternRef
-      if (!pattern.length || !props.filter) {
+      if (!pattern.length || !mergedFilterRef.value) {
         return {
           filteredTree: props.options,
           highlightKeySet: undefined,
           expandedKeys: undefined
         }
       }
-      return filterTree(props.options, props.filter, pattern)
+      return filterTree(
+        props.options,
+        mergedFilterRef.value,
+        pattern,
+        props.keyField
+      )
     })
     // used to resolve selected options
     const dataTreeMateRef = computed(() =>
-      createTreeMate<TreeSelectOption>(props.options, treeMateOptions)
+      createTreeMate<TreeSelectOption>(
+        props.options,
+        createTreeMateOptions(props.keyField, props.childrenField)
+      )
     )
     const displayTreeMateRef = computed(() =>
       createTreeMate<TreeSelectOption>(
         filteredTreeInfoRef.value.filteredTree,
-        treeMateOptions
+        createTreeMateOptions(props.keyField, props.childrenField)
       )
     )
     const { value: initMergedValue } = mergedValueRef
@@ -240,7 +281,7 @@ export default defineComponent({
       }
     })
     const selectedOptionRef = computed(() => {
-      const { multiple, showPath, separator } = props
+      const { multiple, showPath, separator, labelField } = props
       if (multiple) return null
       const { value: mergedValue } = mergedValueRef
       if (!Array.isArray(mergedValue) && mergedValue !== null) {
@@ -251,9 +292,10 @@ export default defineComponent({
             ? treeOption2SelectOptionWithPath(
               tmNode,
               treeMate.getPath(mergedValue).treeNodePath,
-              separator
+              separator,
+              labelField
             )
-            : treeOption2SelectOption(tmNode)
+            : treeOption2SelectOption(tmNode, labelField)
         }
       }
       return null
@@ -265,7 +307,12 @@ export default defineComponent({
       if (Array.isArray(mergedValue)) {
         const res: SelectBaseOption[] = []
         const { value: treeMate } = dataTreeMateRef
-        mergedValue.forEach((value) => {
+        const { checkedKeys } = treeMate.getCheckedKeys(mergedValue, {
+          checkStrategy: props.checkStrategy,
+          cascade: mergedCascadeRef.value
+        })
+        const { keyField, labelField } = props
+        checkedKeys.forEach((value) => {
           const tmNode = treeMate.getNode(value)
           if (tmNode !== null) {
             res.push(
@@ -273,9 +320,10 @@ export default defineComponent({
                 ? treeOption2SelectOptionWithPath(
                   tmNode,
                   treeMate.getPath(value).treeNodePath,
-                  separator
+                  separator,
+                  keyField
                 )
-                : treeOption2SelectOption(tmNode)
+                : treeOption2SelectOption(tmNode, labelField)
             )
           }
         })
@@ -690,6 +738,7 @@ export default defineComponent({
                                   animated={false}
                                   data={filteredTreeInfo.filteredTree}
                                   cancelable={multiple}
+                                  labelField={this.labelField}
                                   theme={mergedTheme.peers.Tree}
                                   themeOverrides={
                                     mergedTheme.peerOverrides.Tree
@@ -700,6 +749,7 @@ export default defineComponent({
                                   checkedKeys={this.treeCheckedKeys}
                                   selectedKeys={this.treeSelectedKeys}
                                   checkable={checkable}
+                                  internalCheckStrategy={this.checkStrategy}
                                   cascade={this.mergedCascade}
                                   leafOnly={this.leafOnly}
                                   multiple={this.multiple}

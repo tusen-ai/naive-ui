@@ -12,20 +12,27 @@ single-lazy
 multiple-lazy
 action
 virtual
+check-strategy
+custom-field
 ```
 
-## Props
+## API
+
+### Cascader Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | cascade | `boolean` | `true` | Whether to cascade the checkbox selection onto children. |
+| check-strategy | `string` | `'all'` | The way to show checked options. `all` means showing all checked node. `parent` means showing all checked parent node when all child node are checked. `child` means showing all child node. |
+| children-field | `string` | `'children'` | The children field in `CascaderOption`. |
 | clearable | `boolean` | `false` | Whether the cascader is clearable. |
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | Data selected by default if no value is set. |
 | disabled | `boolean` | `false` | Whether to disable the cascader. |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | If `remote` is set, `'hover'` won't work. |
 | filterable | `boolean` | `false` | Note: If `remote` is set, this won't have any effect. |
 | filter | `(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean` | A string based filter algorithm. | Filter function of the cascader. |
-| leaf-only | `boolean` | `false` | If only a leaf node can be selected `value`. |
+| key-field | `string` | `'key'` | The key field in `CascaderOption`. |
+| label-field | `string` | `'label'` | The label field in `CascaderOption`. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple select mode. `responsive` will keep all the tags in single line. |
 | multiple | `boolean` | `false` | Whether to allow multiple options being selected. |
 | options | `Array<CascaderOption>` | required | Options of the cascader. |
@@ -42,19 +49,17 @@ virtual
 | on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | Callback when a node is loaded. Set `option.children` in the returned promise. Loading will stop after the promise is resolved or rejected. |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null) => void` | `undefined` | Callback executed when the value changes. |
 
-## API
+#### CascaderOption Properties
 
-### CascaderOption Properties
-
-| Name      | Type               | Description                     |
-| --------- | ------------------ | ------------------------------- |
-| label     | `string`           | Label of the option.            |
-| value     | `string \| number` | Value of the option.            |
-| disabled? | `boolean`          | Whether this option is disabled.  |
+| Name      | Type               | Description                          |
+| --------- | ------------------ | ------------------------------------ |
+| label     | `string`           | Label of the option.                 |
+| value     | `string \| number` | Value of the option.                 |
+| disabled? | `boolean`          | Whether this option is disabled.     |
 | children? | `CascaderOption`   | The children options of this option. |
 
-## Slots
+### Cascader Slots
 
-| Name   | Parameters | Description                                          |
-| ------ | ---------- | ---------------------------------------------------- |
+| Name   | Parameters | Description                                     |
+| ------ | ---------- | ----------------------------------------------- |
 | action | `()`       | Action content displayed in the cascading menu. |

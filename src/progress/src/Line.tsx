@@ -39,7 +39,10 @@ export default defineComponent({
       required: true
     },
     indicatorTextColor: String,
-    unit: String,
+    unit: {
+      type: String,
+      default: '%'
+    },
     processing: {
       type: Boolean,
       required: true
@@ -131,7 +134,7 @@ export default defineComponent({
                 >
                   {indicatorPlacement === 'inside' ? (
                     <div class={`${clsPrefix}-progress-graph-line-indicator`}>
-                      {`${percentage}${unit || ''}`}
+                      {`${percentage}${unit}`}
                     </div>
                   ) : null}
                 </div>

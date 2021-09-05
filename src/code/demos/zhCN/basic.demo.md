@@ -21,7 +21,6 @@ def say_hello():
 `"
       language="python"
     />
-
     <n-code :code="cppCode" language="cpp" />
   </n-space>
 </div>

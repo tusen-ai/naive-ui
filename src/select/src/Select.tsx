@@ -12,7 +12,7 @@ import {
   vShow
 } from 'vue'
 import { happensIn } from 'seemly'
-import { createTreeMate } from 'treemate'
+import { createTreeMate, TreeNode } from 'treemate'
 import {
   VBinder,
   VFollower,
@@ -72,7 +72,7 @@ const selectProps = {
     type: [String, Number, Array] as PropType<Value | null>,
     default: null
   },
-  value: [String, Number, Array] as PropType<Value>,
+  value: [String, Number, Array] as PropType<Value | null>,
   placeholder: String,
   multiple: Boolean,
   size: String as PropType<Size>,
@@ -452,7 +452,10 @@ export default defineComponent({
         }
       }
     }
-    function handleToggleOption (option: SelectBaseOption): void {
+    function handleToggleByTmNode (tmNode: TreeNode<SelectBaseOption>): void {
+      handleToggleByOption(tmNode.rawNode)
+    }
+    function handleToggleByOption (option: SelectBaseOption): void {
       if (mergedDisabledRef.value) return
       const { tag, remote } = props
       if (tag && !remote) {
@@ -567,9 +570,9 @@ export default defineComponent({
         case 'NumpadEnter':
           if (mergedShowRef.value) {
             const menu = menuRef.value
-            const pendingOptionData = menu?.getPendingOption()
+            const pendingOptionData = menu?.getPendingTmNode()
             if (pendingOptionData) {
-              handleToggleOption(pendingOptionData)
+              handleToggleByTmNode(pendingOptionData)
             } else {
               closeMenu()
               focusSelection()
@@ -657,7 +660,8 @@ export default defineComponent({
       handleMenuBlur,
       handleMenuTabOut,
       handleTriggerClick,
-      handleToggleOption,
+      handleToggle: handleToggleByTmNode,
+      handleDeleteOption: handleToggleByOption,
       handlePatternInput,
       handleClear,
       handleTriggerBlur,
@@ -717,7 +721,7 @@ export default defineComponent({
                       loading={this.loading}
                       focused={this.focused}
                       onClick={this.handleTriggerClick}
-                      onDeleteOption={this.handleToggleOption}
+                      onDeleteOption={this.handleDeleteOption}
                       onPatternInput={this.handlePatternInput}
                       onClear={this.handleClear}
                       onBlur={this.handleTriggerBlur}
@@ -771,7 +775,7 @@ export default defineComponent({
                               renderLabel={this.renderLabel}
                               value={this.mergedValue}
                               style={this.cssVars}
-                              onMenuToggleOption={this.handleToggleOption}
+                              onToggle={this.handleToggle}
                               onScroll={this.handleMenuScroll}
                               onFocus={this.handleMenuFocus}
                               onBlur={this.handleMenuBlur}

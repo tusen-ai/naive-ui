@@ -8,7 +8,9 @@ import {
   provide,
   PropType,
   InjectionKey,
-  Ref
+  Ref,
+  mergeProps,
+  HTMLAttributes
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { useMemo } from 'vooks'
@@ -22,7 +24,8 @@ import { TreeNode } from 'treemate'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
-  DropdownOption
+  DropdownOption,
+  DropdownOptionProps
 } from './interface'
 
 interface NDropdownOptionInjection {
@@ -52,7 +55,8 @@ export default defineComponent({
     placement: {
       type: String as PropType<FollowerPlacement>,
       default: 'right-start'
-    }
+    },
+    props: Object as PropType<DropdownOptionProps>
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -202,7 +206,8 @@ export default defineComponent({
       siblingHasIcon,
       siblingHasSubmenu,
       renderLabel,
-      renderIcon
+      renderIcon,
+      props
     } = this
     const submenuVNode = mergedShowSubmenu ? (
       <NDropdownMenu
@@ -211,25 +216,24 @@ export default defineComponent({
         parentKey={this.tmNode.key}
       />
     ) : null
+    const builtinProps: HTMLAttributes = {
+      class: [
+        `${clsPrefix}-dropdown-option-body`,
+        {
+          [`${clsPrefix}-dropdown-option-body--pending`]: this.pending,
+          [`${clsPrefix}-dropdown-option-body--active`]: this.active,
+          [`${clsPrefix}-dropdown-option-body--child-active`]: this.childActive,
+          [`${clsPrefix}-dropdown-option-body--disabled`]: this.mergedDisabled
+        }
+      ],
+      onMousemove: this.handleMouseMove,
+      onMouseenter: this.handleMouseEnter,
+      onMouseleave: this.handleMouseLeave,
+      onClick: this.handleClick
+    }
     return (
       <div class={`${clsPrefix}-dropdown-option`}>
-        <div
-          class={[
-            `${clsPrefix}-dropdown-option-body`,
-            {
-              [`${clsPrefix}-dropdown-option-body--pending`]: this.pending,
-              [`${clsPrefix}-dropdown-option-body--active`]: this.active,
-              [`${clsPrefix}-dropdown-option-body--child-active`]:
-                this.childActive,
-              [`${clsPrefix}-dropdown-option-body--disabled`]:
-                this.mergedDisabled
-            }
-          ]}
-          onMousemove={this.handleMouseMove}
-          onMouseenter={this.handleMouseEnter}
-          onMouseleave={this.handleMouseLeave}
-          onClick={this.handleClick}
-        >
+        {h('div', mergeProps(builtinProps as any, props as any), [
           <div
             __dropdown-option
             class={[
@@ -239,7 +243,7 @@ export default defineComponent({
             ]}
           >
             {[renderIcon ? renderIcon(rawNode) : render(rawNode.icon)]}
-          </div>
+          </div>,
           <div
             __dropdown-option
             class={`${clsPrefix}-dropdown-option-body__label`}
@@ -248,7 +252,7 @@ export default defineComponent({
             {renderLabel
               ? renderLabel(rawNode)
               : render(rawNode.label ?? rawNode.title)}
-          </div>
+          </div>,
           <div
             __dropdown-option
             class={[
@@ -265,7 +269,7 @@ export default defineComponent({
               </NIcon>
             ) : null}
           </div>
-        </div>
+        ])}
         {this.hasSubmenu ? (
           <VBinder>
             {{

@@ -104,7 +104,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, mergedClsPrefix } = this
+    const { mergedTheme, mergedClsPrefix, handleFilterMenuCancel } = this
     return (
       <NPopover
         show={this.showPopover}
@@ -158,7 +158,7 @@ export default defineComponent({
           default: () => {
             const { renderFilterMenu } = this.column
             return renderFilterMenu ? (
-              renderFilterMenu()
+              renderFilterMenu({ hide: handleFilterMenuCancel })
             ) : (
               <NDataTableFilterMenu
                 style={this.filterMenuCssVars}

@@ -113,7 +113,6 @@ const radioGroupProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': Function as PropType<(value: string | number) => void>,
   onUpdateValue: Function as PropType<(value: string | number) => void>,
   // deprecated

@@ -8,9 +8,10 @@ import {
   watch,
   toRef,
   CSSProperties,
-  isReactive
+  isReactive,
+  watchEffect
 } from 'vue'
-import { createTreeMate, SubtreeNotLoadedError } from 'treemate'
+import { createTreeMate, SubtreeNotLoadedError, CheckStrategy } from 'treemate'
 import {
   VBinder,
   VTarget,
@@ -20,10 +21,11 @@ import {
 } from 'vueuc'
 import { depx, changeColor, happensIn } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
+import { SelectBaseOption } from '../../select/src/interface'
 import { NInternalSelection, InternalSelectionInst } from '../../_internal'
 import { useLocale, useTheme, useConfig, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, useAdjustedTo } from '../../_utils'
+import { call, useAdjustedTo, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { cascaderLight } from '../styles'
 import type { CascaderTheme } from '../styles'
@@ -103,22 +105,28 @@ const cascaderProps = {
     type: Boolean,
     default: true
   },
-  // eslint-disable-next-line vue/prop-name-casing
-  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
-    validator: () => {
-      warn(
-        'cascader',
-        '`on-change` is deprecated, please use `on-update:value` instead.'
-      )
-      return true
-    },
-    default: undefined
+  checkStrategy: {
+    type: String as PropType<CheckStrategy>,
+    default: 'all'
   },
+  valueField: {
+    type: String,
+    default: 'value'
+  },
+  labelField: {
+    type: String,
+    default: 'label'
+  },
+  childrenField: {
+    type: String,
+    default: 'children'
+  },
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
-  onFocus: Function as PropType<(e: FocusEvent) => void>
+  onFocus: Function as PropType<(e: FocusEvent) => void>,
+  // deprecated
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
 export type CascaderProps = ExtractPublicPropTypes<typeof cascaderProps>
@@ -128,6 +136,22 @@ export default defineComponent({
   name: 'Cascader',
   props: cascaderProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.leafOnly) {
+          warnOnce(
+            'cascader',
+            '`leaf-only` is deprecated, please use `check-strategy="child"` instead'
+          )
+        }
+        if (props.onChange !== undefined) {
+          warnOnce(
+            'cascader',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
     const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } =
       useConfig(props)
     const themeRef = useTheme(
@@ -165,9 +189,13 @@ export default defineComponent({
       loadingKeySetRef.value.delete(key)
     }
     const treeMateRef = computed(() => {
+      const { valueField, childrenField } = props
       return createTreeMate(props.options, {
         getKey (node) {
-          return node.value
+          return (node as any)[valueField]
+        },
+        getChildren (node) {
+          return (node as any)[childrenField]
         }
       })
     })
@@ -175,7 +203,8 @@ export default defineComponent({
       const { cascade, multiple } = props
       if (multiple && Array.isArray(mergedValueRef.value)) {
         return treeMateRef.value.getCheckedKeys(mergedValueRef.value, {
-          cascade
+          cascade,
+          checkStrategy: props.leafOnly ? 'child' : props.checkStrategy
         })
       } else {
         return {
@@ -223,9 +252,14 @@ export default defineComponent({
       })
     }
     function doUpdateValue (value: Value | null): void {
-      const { 'onUpdate:value': onUpdateValue, onChange } = props
+      const {
+        onUpdateValue,
+        'onUpdate:value': _onUpdateValue,
+        onChange
+      } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
       if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
+      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
       if (onChange) call(onChange as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
@@ -246,7 +280,7 @@ export default defineComponent({
             mergedKeysRef.value.checkedKeys,
             {
               cascade,
-              leafOnly
+              checkStrategy: leafOnly ? 'child' : props.checkStrategy
             }
           )
           doUpdateValue(checkedKeys)
@@ -256,7 +290,9 @@ export default defineComponent({
             if (cascaderMenuInstRef.value) {
               const node = treeMateRef.value.getNode(key)
               if (node !== null) {
-                cascaderMenuInstRef.value.showErrorMessage(node.rawNode.label)
+                cascaderMenuInstRef.value.showErrorMessage(
+                  (node.rawNode as any)[props.labelField]
+                )
               }
             }
           } else {
@@ -285,7 +321,7 @@ export default defineComponent({
           mergedKeysRef.value.checkedKeys,
           {
             cascade,
-            leafOnly
+            checkStrategy: leafOnly ? 'child' : props.checkStrategy
           }
         )
         doUpdateValue(checkedKeys)
@@ -293,8 +329,8 @@ export default defineComponent({
     }
     const selectedOptionsRef = computed(() => {
       if (props.multiple) {
-        const { showPath, separator } = props
-        const { value } = mergedValueRef
+        const { showPath, separator, labelField } = props
+        const { value } = checkedKeysRef
         if (Array.isArray(value)) {
           const { getNode } = treeMateRef.value
           return value.map((key) => {
@@ -307,9 +343,9 @@ export default defineComponent({
             } else {
               return {
                 label: showPath
-                  ? getPathLabel(node, separator)
-                  : node.rawNode.label,
-                value: node.rawNode.value
+                  ? getPathLabel(node, separator, labelField)
+                  : (node.rawNode as any)[labelField],
+                value: node.key
               }
             }
           })
@@ -319,7 +355,7 @@ export default defineComponent({
       } else return []
     })
     const selectedOptionRef = computed(() => {
-      const { multiple, showPath, separator } = props
+      const { multiple, showPath, separator, labelField } = props
       const { value } = mergedValueRef
       if (!multiple && !Array.isArray(value)) {
         const { getNode } = treeMateRef.value
@@ -335,9 +371,9 @@ export default defineComponent({
         } else {
           return {
             label: showPath
-              ? getPathLabel(node, separator)
-              : node.rawNode.label,
-            value: node.rawNode.value
+              ? getPathLabel(node, separator, labelField)
+              : (node.rawNode as any)[labelField],
+            value: node.key
           }
         }
       } else return null
@@ -619,16 +655,11 @@ export default defineComponent({
     function handlePatternInput (e: InputEvent): void {
       patternRef.value = (e.target as HTMLInputElement).value
     }
-    function handleDeleteOption (option: BaseOption): void {
-      const { multiple } = props
+    function handleDeleteOption (option: SelectBaseOption): void {
+      const { multiple, valueField } = props
       const { value: mergedValue } = mergedValueRef
       if (multiple && Array.isArray(mergedValue)) {
-        const index = mergedValue.findIndex((value) => value === option.value)
-        if (~index) {
-          const newValue = Array.from(mergedValue)
-          newValue.splice(index, 1)
-          doUpdateValue(newValue)
-        }
+        doUncheck((option as any)[valueField])
       } else {
         doUpdateValue(null)
       }
@@ -672,6 +703,7 @@ export default defineComponent({
       virtualScrollRef: toRef(props, 'virtualScroll'),
       optionHeightRef,
       localeRef,
+      labelFieldRef: toRef(props, 'labelField'),
       syncCascaderMenuPosition,
       syncSelectMenuPosition,
       updateKeyboardKey,

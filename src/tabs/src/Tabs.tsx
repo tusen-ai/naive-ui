@@ -64,7 +64,6 @@ const tabsProps = {
     default: 0
   },
   onAdd: Function as PropType<() => void>,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onClose: [Function, Array] as PropType<MaybeArray<OnClose>>,

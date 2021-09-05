@@ -12,5 +12,6 @@ export type {
   CreateRowClassName as DataTableCreateRowClassName,
   CreateRowKey as DataTableCreateRowKey,
   CreateRowProps as DataTableCreateRowProps,
-  DataTableInst
+  DataTableInst,
+  CreateSummary as DataTableCreateSummary
 } from './src/interface'

@@ -12,7 +12,9 @@ custom-input
 after-select
 ```
 
-## Props
+## API
+
+### AutoComplete Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -31,24 +33,24 @@ after-select
 | on-select | `(value: string) => void` | `undefined` | On select callback function. |
 | on-update:value | `(value: string \| null) => void` | `undefined` | On update callback function. |
 
-### AutoCompleteOption Properties
+#### AutoCompleteOption Properties
 
-| Name     | Type      | Description                    |
-| -------- | --------- | ------------------------------ |
+| Name     | Type      | Description                     |
+| -------- | --------- | ------------------------------- |
 | disabled | `boolean` | Whether the option is disabled. |
-| label    | `string`  | Option label value.         |
+| label    | `string`  | Option label value.             |
 | value    | `string`  | Option ID (should be unique).   |
 
-### AutoCompleteGroupOption Properties
+#### AutoCompleteGroupOption Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children | `Array<string \| AutoCompleteOption>` | Children options of AutoCompleteGroup. |
-| label | `string` | The name of the AutoCompleteGroup. |
-| label | `key` | The key of the AutoCompleteGroup. |
-| type | `'group'` | The type of the AutoCompleteGroup. |
+| children | `Array<string \| AutoCompleteOption>` | Children options of AutoCompleteGroupOption. |
+| label | `string` | The name of the AutoCompleteGroupOption. |
+| label | `key` | The key of the AutoCompleteGroupOption. |
+| type | `'group'` | The type of the AutoCompleteGroupOption. |
 
-## Slots
+### AutoComplete Slots
 
 | Name | Parameters | Description |
 | --- | --- | --- |

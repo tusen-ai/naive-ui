@@ -3,7 +3,7 @@
 ```html
 <n-input
   type="password"
-  show-password-toggle
+  show-password-on="mousedown"
   placeholder="Password"
   :maxlength="8"
 />

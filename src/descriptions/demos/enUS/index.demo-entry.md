@@ -32,12 +32,12 @@ size
 
 ### Description Item Props
 
-| Name  | Type     | Default     | Description              |
-| ----- | -------- | ----------- | ------------------------ |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
 | content-style | `Object \| string` | `undefined` | Style of the item content. |
-| label | `string` | `undefined` | Label of the item.       |
+| label | `string` | `undefined` | Label of the item. |
 | label-style | `Object \| string` | `undefined` | Style of the item label. |
-| span  | `number` | `1`         | Column span of the item. |
+| span | `number` | `1` | Column span of the item. |
 
 ## Slots
 

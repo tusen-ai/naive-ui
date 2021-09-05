@@ -30,6 +30,39 @@ exports[`n-space render justify space 2`] = `
 </div>"
 `;
 
+exports[`n-space render justify space 3`] = `
+"<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: center; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
+  <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 12px; padding-top: 4px; padding-bottom: 4px;\\">
+    <div>1</div>
+  </div>
+  <div role=\\"none\\" style=\\"max-width: 100%; padding-top: 4px; padding-bottom: 4px;\\">
+    <div>2</div>
+  </div>
+</div>"
+`;
+
+exports[`n-space render justify space 4`] = `
+"<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
+  <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 6px; margin-left: 6px; padding-top: 4px; padding-bottom: 4px;\\">
+    <div>1</div>
+  </div>
+  <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 6px; margin-left: 6px; padding-top: 4px; padding-bottom: 4px;\\">
+    <div>2</div>
+  </div>
+</div>"
+`;
+
+exports[`n-space render justify space 5`] = `
+"<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: space-between; flex-wrap: wrap; margin-top: -4px; margin-bottom: -4px;\\">
+  <div role=\\"none\\" style=\\"max-width: 100%; margin-right: 6px; padding-top: 4px; padding-bottom: 4px;\\">
+    <div>1</div>
+  </div>
+  <div role=\\"none\\" style=\\"max-width: 100%; margin-left: 6px; padding-top: 4px; padding-bottom: 4px;\\">
+    <div>2</div>
+  </div>
+</div>"
+`;
+
 exports[`n-space render space number size 1`] = `"<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap; margin-top: -10px; margin-bottom: -10px;\\"></div>"`;
 
 exports[`n-space render space string size 1`] = `"<div role=\\"none\\" class=\\"n-space\\" style=\\"display: flex; flex-direction: row; justify-content: flex-start; flex-wrap: wrap; margin-top: -6px; margin-bottom: -6px;\\"></div>"`;

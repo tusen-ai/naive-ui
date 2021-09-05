@@ -6,9 +6,11 @@ import {
   toRef,
   ref,
   PropType,
-  CSSProperties
+  CSSProperties,
+  VNode
 } from 'vue'
 import { createId } from 'seemly'
+import { useMergedState } from 'vooks'
 import { useConfig, useTheme, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
@@ -21,6 +23,7 @@ import {
 import { NFadeInExpandTransition } from '../../_internal'
 import { uploadLight, UploadTheme } from '../styles'
 import NUploadFile from './UploadFile'
+import NUploadDragger, { uploadDraggerKey } from './UploadDragger'
 import style from './styles/index.cssr'
 import {
   XhrHandlers,
@@ -34,10 +37,13 @@ import {
   OnChange,
   uploadInjectionKey,
   OnUpdateFileList,
-  OnBeforeUpload
+  OnBeforeUpload,
+  listType,
+  OnPreview,
+  CreateThumbnailUrl
 } from './interface'
-import { useMergedState } from 'vooks'
-import { uploadDraggerKey } from './UploadDragger'
+import { createImageDataUrl } from './utils'
+import { NImageGroup } from '../../image'
 
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
@@ -240,7 +246,17 @@ const uploadProps = {
   showRetryButton: {
     type: Boolean,
     default: true
-  }
+  },
+  showPreivewButton: {
+    type: Boolean,
+    default: true
+  },
+  listType: {
+    type: String as PropType<listType>,
+    default: 'text'
+  },
+  onPreview: Function as PropType<OnPreview>,
+  createThumbnailUrl: Function as PropType<CreateThumbnailUrl>
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -316,7 +332,6 @@ export default defineComponent({
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files || files.length === 0) return
       const { onBeforeUpload } = props
-
       const filesAsArray = props.multiple ? Array.from(files) : [files[0]]
       void Promise.all(
         filesAsArray.map(async (file) => {
@@ -326,7 +341,9 @@ export default defineComponent({
             status: 'pending',
             percentage: 0,
             file: file,
-            url: null
+            url: null,
+            type: file.type,
+            thumbnailUrl: null
           }
           if (
             !onBeforeUpload ||
@@ -359,9 +376,10 @@ export default defineComponent({
         fileId !== undefined
           ? mergedFileListRef.value.filter((file) => file.id === fileId)
           : mergedFileListRef.value
+      const shouldReupload = fileId !== undefined
       filesToUpload.forEach((file) => {
         const { status } = file
-        if (status === 'pending' || status === 'error') {
+        if (status === 'pending' || (status === 'error' && shouldReupload)) {
           const formData = new FormData()
           formData.append(fieldName, file.file as File)
           submitImpl(
@@ -417,6 +435,14 @@ export default defineComponent({
         warn('upload', 'File has no corresponding id in current file list.')
       }
     }
+    async function getFileThumbnailUrl (file: FileInfo): Promise<string> {
+      const { createThumbnailUrl } = props
+
+      return createThumbnailUrl
+        ? await createThumbnailUrl(file.file as File)
+        : await createImageDataUrl(file.file as File)
+    }
+
     provide(uploadInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
@@ -430,7 +456,10 @@ export default defineComponent({
       mergedFileListRef: mergedFileListRef,
       XhrMap,
       submit,
-      doChange
+      doChange,
+      showPreivewButtonRef: toRef(props, 'showPreivewButton'),
+      onPreviewRef: toRef(props, 'onPreview'),
+      getFileThumbnailUrl
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -464,7 +493,9 @@ export default defineComponent({
             itemDisabledOpacity,
             lineHeight,
             borderRadius,
-            fontSize
+            fontSize,
+            itemBorderImageCardError,
+            itemBorderImageCard
           }
         } = themeRef.value
         return {
@@ -481,13 +512,15 @@ export default defineComponent({
           '--item-text-color': itemTextColor,
           '--item-text-color-error': itemTextColorError,
           '--item-text-color-success': itemTextColorSuccess,
-          '--line-height': lineHeight
+          '--line-height': lineHeight,
+          '--item-border-image-card-error': itemBorderImageCardError,
+          '--item-border-image-card': itemBorderImageCard
         }
       })
     }
   },
   render () {
-    const { draggerInsideRef, mergedClsPrefix, $slots } = this
+    const { draggerInsideRef, mergedClsPrefix, listType, $slots } = this
     if ($slots.default) {
       const firstChild = getFirstSlotVNode($slots, 'default')
       // @ts-expect-error
@@ -495,6 +528,44 @@ export default defineComponent({
         draggerInsideRef.value = true
       }
     }
+    const isImageCardType = listType === 'image-card'
+    const uploadTrigger = (
+      <div
+        class={[
+          `${mergedClsPrefix}-upload__trigger`,
+          isImageCardType && `${mergedClsPrefix}-upload__trigger--image-card`
+        ]}
+        onClick={this.handleTriggerClick}
+        onDrop={this.handleTriggerDrop}
+        onDragover={this.handleTriggerDragOver}
+        onDragenter={this.handleTriggerDragEnter}
+        onDragleave={this.handleTriggerDragLeave}
+      >
+        {isImageCardType ? (
+          <NUploadDragger>{this.$slots}</NUploadDragger>
+        ) : (
+          this.$slots
+        )}
+      </div>
+    )
+    const createFileList = (): VNode[] =>
+      this.mergedFileList.map((file) => (
+        <NUploadFile
+          clsPrefix={mergedClsPrefix}
+          key={file.id}
+          file={file}
+          listType={listType}
+        />
+      ))
+    const uploadFileList = isImageCardType ? (
+      <NImageGroup>{{ default: createFileList }}</NImageGroup>
+    ) : (
+      <NFadeInExpandTransition group>
+        {{
+          default: createFileList
+        }}
+      </NFadeInExpandTransition>
+    )
     return (
       <div
         class={[
@@ -516,33 +587,17 @@ export default defineComponent({
           multiple={this.multiple}
           onChange={this.handleFileInputChange}
         />
-        <div
-          class={`${mergedClsPrefix}-upload__trigger`}
-          onClick={this.handleTriggerClick}
-          onDrop={this.handleTriggerDrop}
-          onDragover={this.handleTriggerDragOver}
-          onDragenter={this.handleTriggerDragEnter}
-          onDragleave={this.handleTriggerDragLeave}
-        >
-          {this.$slots}
-        </div>
+        {this.listType !== 'image-card' && uploadTrigger}
         {this.showFileList && (
           <div
-            class={`${mergedClsPrefix}-upload-file-list`}
+            class={[
+              `${mergedClsPrefix}-upload-file-list`,
+              isImageCardType && `${mergedClsPrefix}-upload-file-list--grid`
+            ]}
             style={this.fileListStyle}
           >
-            <NFadeInExpandTransition group>
-              {{
-                default: () =>
-                  this.mergedFileList.map((file) => (
-                    <NUploadFile
-                      clsPrefix={mergedClsPrefix}
-                      key={file.id}
-                      file={file}
-                    />
-                  ))
-              }}
-            </NFadeInExpandTransition>
+            {uploadFileList}
+            {isImageCardType && uploadTrigger}
           </div>
         )}
       </div>

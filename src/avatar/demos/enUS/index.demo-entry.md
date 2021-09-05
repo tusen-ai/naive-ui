@@ -28,6 +28,6 @@ name-size
 
 ### Avatar Slots
 
-| Name    | Parameters | Description                       |
-| ------- | ---------- | --------------------------------- |
+| Name    | Parameters | Description                |
+| ------- | ---------- | -------------------------- |
 | default | `()`       | The content of the avatar. |

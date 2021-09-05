@@ -24,6 +24,9 @@ interface imgProps {
   usemap?: string
   width?: number
 }
+export interface ImageInst {
+  click: () => void
+}
 
 const imageProps = {
   alt: String,
@@ -54,13 +57,8 @@ export default defineComponent({
     const previewInstRef = ref<ImagePreviewInst | null>(null)
     const imageGroupHandle = inject(imageGroupInjectionKey, null)
     const { mergedClsPrefixRef } = imageGroupHandle || useConfig(props)
-    return {
-      mergedClsPrefix: mergedClsPrefixRef,
-      groupId: imageGroupHandle?.groupId,
-      previewInstRef,
-      imageRef,
-      imgProps: imgPropsRef,
-      handleClick: () => {
+    const exposedMethods = {
+      click: () => {
         const mergedPreviewSrc = props.previewSrc || props.src
         if (imageGroupHandle) {
           imageGroupHandle.setPreviewSrc(mergedPreviewSrc)
@@ -74,6 +72,14 @@ export default defineComponent({
         previewInst.setThumbnailEl(imageRef.value)
         previewInst.toggleShow()
       }
+    }
+    return {
+      mergedClsPrefix: mergedClsPrefixRef,
+      groupId: imageGroupHandle?.groupId,
+      previewInstRef,
+      imageRef,
+      imgProps: imgPropsRef,
+      ...exposedMethods
     }
   },
   render () {
@@ -94,7 +100,7 @@ export default defineComponent({
         src={this.src || imgProps.src}
         alt={this.alt || imgProps.alt}
         aria-label={this.alt || imgProps.alt}
-        onClick={this.handleClick}
+        onClick={this.click}
         onError={this.onError}
         style={{ objectFit: this.objectFit }}
         data-preview-src={this.previewSrc || this.src}

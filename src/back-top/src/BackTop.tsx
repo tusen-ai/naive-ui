@@ -51,7 +51,6 @@ const backTopProps = {
   listenTo: [String, Object, Function] as PropType<
   string | HTMLElement | (() => HTMLElement)
   >,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:show': {
     type: Function,
     default: () => {}
@@ -69,7 +68,7 @@ const backTopProps = {
     default: undefined
   },
   onShow: {
-    type: (Function as unknown) as PropType<(() => void) | undefined>,
+    type: Function as unknown as PropType<(() => void) | undefined>,
     validator: () => {
       warn(
         'back-top',
@@ -80,7 +79,7 @@ const backTopProps = {
     default: undefined
   },
   onHide: {
-    type: (Function as unknown) as PropType<(() => void) | undefined>,
+    type: Function as unknown as PropType<(() => void) | undefined>,
     validator: () => {
       warn(
         'back-top',
@@ -117,15 +116,17 @@ export default defineComponent({
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
     const transitionDisabledRef = ref(true)
     const placeholderRef = ref<HTMLElement | null>(null)
-    const styleRef = computed((): {
-      right: string
-      bottom: string
-    } => {
-      return {
-        right: formatLength(props.right),
-        bottom: formatLength(props.bottom)
+    const styleRef = computed(
+      (): {
+        right: string
+        bottom: string
+      } => {
+        return {
+          right: formatLength(props.right),
+          bottom: formatLength(props.bottom)
+        }
       }
-    })
+    )
     let scrollElement: HTMLElement
     let scrollListenerRegistered: boolean
     // deprecated
@@ -174,7 +175,7 @@ export default defineComponent({
     }
     function handleClick (e: MouseEvent): void {
       if (scrollElement.nodeName === '#document') {
-        ;((scrollElement as unknown) as Document).documentElement.scrollTo({
+        ;(scrollElement as unknown as Document).documentElement.scrollTo({
           top: 0,
           behavior: 'smooth'
         })
@@ -187,7 +188,9 @@ export default defineComponent({
     }
     function handleScroll (): void {
       if (scrollElement.nodeName === '#document') {
-        scrollTopRef.value = ((scrollElement as unknown) as Document).documentElement.scrollTop
+        scrollTopRef.value = (
+          scrollElement as unknown as Document
+        ).documentElement.scrollTop
       } else {
         scrollTopRef.value = scrollElement.scrollTop
       }
@@ -285,8 +288,8 @@ export default defineComponent({
                           class: [
                               `${mergedClsPrefix}-back-top`,
                               {
-                                [`${mergedClsPrefix}-back-top--transition-disabled`]: this
-                                  .transitionDisabled
+                                [`${mergedClsPrefix}-back-top--transition-disabled`]:
+                                  this.transitionDisabled
                               }
                           ],
                           style: {
@@ -301,9 +304,9 @@ export default defineComponent({
                             'default',
                             undefined,
                             () => [
-                              <NBaseIcon clsPrefix={mergedClsPrefix}>
-                                {{ default: () => BackTopIcon }}
-                              </NBaseIcon>
+                                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                                  {{ default: () => BackTopIcon }}
+                                </NBaseIcon>
                             ]
                           )
                         ]

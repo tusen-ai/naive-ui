@@ -2,7 +2,7 @@
 
 ```html
 <n-space>
-  <n-button @click="info"> 信息 </n-button>
+  <n-button @click="info"> 信息（Hover不消失）</n-button>
   <n-button @click="error"> 错误 </n-button>
   <n-button @click="warning"> 警告 </n-button>
   <n-button @click="success"> 成功 </n-button>
@@ -19,7 +19,12 @@ export default defineComponent({
     const message = useMessage()
     return {
       info () {
-        message.info("I don't know why nobody told you how to unfold your love")
+        message.info(
+          "I don't know why nobody told you how to unfold your love",
+          {
+            keepAliveOnHover: true
+          }
+        )
       },
       error () {
         message.error('Once upon a time you dressed so fine')

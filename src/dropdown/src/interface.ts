@@ -1,15 +1,20 @@
 import { TreeNode } from 'treemate'
-import { VNodeChild } from 'vue'
+import { VNodeChild, HTMLAttributes } from 'vue'
 import { MenuOption, MenuGroupOption } from '../../menu/src/interface'
 
 export type Key = string | number
 
+export type DropdownOptionProps = HTMLAttributes
+
 // Aligned with MenuOption props, has some redundant fields
-export type DropdownOption = MenuOption
-export type DropdownGroupOption = MenuGroupOption
+export type DropdownOption = MenuOption & { props?: HTMLAttributes }
+export type DropdownGroupOption = MenuGroupOption & {
+  props?: HTMLAttributes
+}
 export interface DropdownIgnoredOption {
   key: Key
   type: 'ignored' | 'divider'
+  props?: HTMLAttributes
   [key: string]: unknown
 }
 

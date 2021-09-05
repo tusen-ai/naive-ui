@@ -9,9 +9,11 @@ export type Value = ValueAtom | ValueAtom[]
 
 export type Key = ValueAtom
 
+export type CascaderOption = BaseOption
+
 export interface BaseOption {
-  label: string
-  value: ValueAtom
+  label?: string
+  value?: ValueAtom
   disabled?: boolean
   children?: BaseOption[]
 }
@@ -67,6 +69,7 @@ export interface CascaderInjection {
   localeRef: Ref<NLocale['Cascader']>
   virtualScrollRef: Ref<boolean>
   optionHeightRef: Ref<string>
+  labelFieldRef: Ref<string>
   syncCascaderMenuPosition: () => void
   syncSelectMenuPosition: () => void
   updateKeyboardKey: (value: Key | null) => void
@@ -99,6 +102,5 @@ export interface SelectMenuInstance {
   enter: () => boolean
 }
 
-export const cascaderInjectionKey: InjectionKey<CascaderInjection> = Symbol(
-  'cascader'
-)
+export const cascaderInjectionKey: InjectionKey<CascaderInjection> =
+  Symbol('cascader')

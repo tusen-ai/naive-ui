@@ -8,6 +8,7 @@
 
 ```demo
 basic
+custom-field
 cascade
 multiple
 filter
@@ -31,6 +32,7 @@ batch-render
 | cancelable | `boolean` | `true` | 选中之后是否允许取消 |
 | cascade | `boolean` | `false` | 是否关联选项 |
 | checkable | `boolean` | `false` | 是否显示选择框，需要将 `cascade` 设置为 `true` |
+| children-field | `string` | `'children'` | 替代 `TreeOption` 中的 children 字段名 |
 | checked-keys | `Array<string \| number>` | `undefined` | 如果设定则 `checked` 状态受控 |
 | data | `Array<TreeOption>` | `[]` | 树的节点数据。重新设置 `data` 会将一些非受控状态清空，如果你需要在使用中改动 `data`，最好以受控的方式控制树 |
 | default-checked-keys | `Array<string \| number>` | `[]` | 默认选中的多选项 |
@@ -41,6 +43,8 @@ batch-render
 | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |
 | filter | `(node: TreeOption) => boolean` | `undefined` | 一个简单的字符串过滤算法 |
+| key-field | `string` | `'key'` | 替代 `TreeOption` 中的 key 字段名 |
+| label-field | `string` | `'label'` | 替代 `TreeOption` 中的 label 字段名 |
 | leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
 | multiple | `boolean` | `false` | 是否允许节点多选 |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 |
@@ -65,8 +69,8 @@ batch-render
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| key | `string \| number` | 节点的 `key`，需要唯一 |
-| label | `string` | 节点的内容 |
+| key | `string \| number` | 节点的 `key`，需要唯一，可使用 `key-field` 修改字段名 |
+| label | `string` | 节点的内容，可使用 `label-field` 修改字段名 |
 | checkboxDisabled? | `boolean` | 是否禁用节点的 `checkbox` |
 | children? | `TreeOption[]` | 节点的子节点 |
 | disabled? | `boolean` | 是否禁用节点 |

@@ -33,7 +33,7 @@ export default defineComponent({
         key: 'Right',
         filter: 'default',
         filterOptionValue: filterOptionValueRef,
-        renderFilterMenu: () => {
+        renderFilterMenu: ({ hide }) => {
           return h(
             NSpace,
             { style: { padding: '12px' }, vertical: true },
@@ -62,6 +62,7 @@ export default defineComponent({
                   {
                     onClick: () => {
                       filterOptionValueRef.value = null
+                      hide()
                     }
                   },
                   { default: () => 'clear' }

@@ -2,6 +2,9 @@
 
 ```html
 <n-collapse>
+  <template #header-extra>
+    <n-icon><cash-icon /></n-icon>
+  </template>
   <template #arrow>
     <n-icon>
       <cash-icon />

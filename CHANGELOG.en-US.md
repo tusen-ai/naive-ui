@@ -1,5 +1,54 @@
 # CHANGELOG
 
+## 2.17.0 (2021-09-05)
+
+### Breaking Changes
+
+- `n-tree-select`'s `leaf-only` prop is deprecated, please use `check-strategy="child"` instead.
+- `n-cascader`'s `leaf-only` prop is deprecated, please use `check-strategy="child"` instead.
+- `n-input`'s `show-password-toggle` is deprecated, please use `show-password-on="click"` instead.
+
+### Fixes
+
+- Fix `n-cascader` click tag to delete the sub option in multi selection mode, and the tree option is not updated.
+- Fix `n-input` chinese input method not correct while mouse leave the input in `clearable` is true, closes [#905](https://github.com/TuSimple/naive-ui/issues/905).
+- Fix `n-description`'s warning caused by `v-if` that should not appear, closes [#1083](https://github.com/TuSimple/naive-ui/issues/1083).
+- Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
+- Fix `n-input-number`'s `step` calculate error when the value is decimal, closes [#1007](https://github.com/TuSimple/naive-ui/issues/1007).
+- Fix `n-popselect`' s default placement and padding.
+- Fix `n-calendar`'s text color of disabled date.
+
+### Feats
+
+- `n-cascader` add `onUpdateValue` prop.
+- `n-auto-complete` add `onUpdateValue` prop.
+- `n-data-table`'s column's `renderFilterMenu` add `hide` param.
+- `n-tree` add `key-field` prop.
+- `n-tree` add `label-field` prop.
+- `n-tree` add `children-field` prop.
+- `n-tree-select` add `key-field` prop.
+- `n-tree-select` add `label-field` prop.
+- `n-tree-select` add `children-field` prop.
+- `n-cascader` add `key-field` prop.
+- `n-cascader`add `label-field` prop.
+- `n-cascader` add `children-field` prop.
+- `n-dropdown` option add `props` prop, closes [#813](https://github.com/TuSimple/naive-ui/issues/813).
+- `n-data-table` supports multi-selection by holding down `shift`, closes [#554](https://github.com/TuSimple/naive-ui/issues/554).
+- `n-tree-select` add `check-strategy` prop, closes [#624](https://github.com/TuSimple/naive-ui/issues/624).
+- `n-cascader` add `check-strategy` prop.
+- `n-message` option add `keepAliveOnHover`, closes [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
+- `n-message-provider` add `keep-alive-on-hover` prop, closes [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
+- `n-upload` export `UploadFile` type.
+- `n-cascader` export `CascaderOption` type.
+- `n-mention` export `MentionOption` type.
+- `n-transfer` export `TransferOption` type.
+- `n-pagination` export `PaginationInfo` type.
+- `n-data-table` export `DataTableCreateSummary` type.
+- `n-code` add `inline` prop, closes [#834](https://github.com/TuSimple/naive-ui/issues/834)
+- `n-collapse` add `header-extra` slot, closes [#1046](https://github.com/TuSimple/naive-ui/issues/1046).
+- `n-input` add `show-password-on` prop.
+- `n-upload` add `list-type`, `show-preview-button`, `on-preview` and `create-thumbnail-url` prop.
+
 ## 2.16.7 (2021-08-27)
 
 ### Feats

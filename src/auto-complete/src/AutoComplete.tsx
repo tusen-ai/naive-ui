@@ -9,7 +9,7 @@ import {
   withDirectives,
   CSSProperties
 } from 'vue'
-import { createTreeMate } from 'treemate'
+import { createTreeMate, TreeNode } from 'treemate'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
@@ -76,8 +76,8 @@ const autoCompleteProps = {
     default: () => []
   },
   zIndex: Number,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onSelect: [Function, Array] as PropType<MaybeArray<OnSelect>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
@@ -144,9 +144,10 @@ export default defineComponent({
       )
     )
     function doUpdateValue (value: string | null): void {
-      const { 'onUpdate:value': onUpdateValue, onInput } = props
+      const { 'onUpdate:value': _onUpdateValue, onUpdateValue, onInput } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
       if (onUpdateValue) call(onUpdateValue as OnUpdateImpl, value)
+      if (_onUpdateValue) call(_onUpdateValue as OnUpdateImpl, value)
       if (onInput) call(onInput as OnUpdateImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
@@ -184,9 +185,9 @@ export default defineComponent({
         case 'Enter':
         case 'NumpadEnter':
           if (!isComposingRef.value) {
-            const pendingOptionData = menuInstRef.value?.getPendingOption()
-            if (pendingOptionData) {
-              select(pendingOptionData as AutoCompleteOption)
+            const pendingOptionTmNode = menuInstRef.value?.getPendingTmNode()
+            if (pendingOptionTmNode) {
+              select(pendingOptionTmNode.rawNode as AutoCompleteOption)
               e.preventDefault()
             }
           }
@@ -228,8 +229,8 @@ export default defineComponent({
       canBeActivatedRef.value = true
       doUpdateValue(value)
     }
-    function handleToggleOption (option: SelectBaseOption): void {
-      select(option as AutoCompleteOption)
+    function handleToggle (option: TreeNode<SelectBaseOption>): void {
+      select(option.rawNode as AutoCompleteOption)
     }
     function handleClickOutsideMenu (e: MouseEvent): void {
       if (!triggerElRef.value?.contains(e.target as Node)) {
@@ -256,7 +257,7 @@ export default defineComponent({
       handleFocus,
       handleBlur,
       handleInput,
-      handleToggleOption,
+      handleToggle,
       handleClickOutsideMenu,
       handleCompositionStart,
       handleCompositionEnd,
@@ -358,7 +359,7 @@ export default defineComponent({
                                   treeMate={this.treeMate}
                                   multiple={false}
                                   size="medium"
-                                  onMenuToggleOption={this.handleToggleOption}
+                                  onToggle={this.handleToggle}
                                 />,
                                 [[clickoutside, this.handleClickOutsideMenu]]
                             )
