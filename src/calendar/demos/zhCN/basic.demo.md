@@ -22,7 +22,7 @@ export default defineComponent({
   setup () {
     const message = useMessage()
     return {
-      value: ref(addDays(Date.now(), 1)),
+      value: ref(addDays(Date.now(), 1).valueOf()),
       handleUpdateValue (_, { year, month, date }) {
         message.success(`${year}-${month}-${date}`)
       },

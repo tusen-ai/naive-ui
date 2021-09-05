@@ -16,6 +16,7 @@
 - Fix `n-layout`'s `sider-placement` doesn't work after build, closes [#978](https://github.com/TuSimple/naive-ui/issues/978).
 - Fix `n-input-number`'s `step` calculate error when the value is decimal, closes [#1007](https://github.com/TuSimple/naive-ui/issues/1007).
 - Fix `n-popselect`' s default placement and padding.
+- Fix `n-calendar`'s text color of disabled date.
 
 ### Feats
 

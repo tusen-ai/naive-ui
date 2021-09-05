@@ -6,8 +6,7 @@ import {
   PropType,
   CSSProperties,
   Fragment,
-  toRef,
-  renderSlot
+  toRef
 } from 'vue'
 import { format, getYear, addMonths, startOfDay, startOfMonth } from 'date-fns'
 import { useMergedState } from 'vooks'
@@ -162,6 +161,7 @@ export default defineComponent({
       cssVars,
       mergedValue,
       mergedTheme,
+      $slots,
       locale: { monthBeforeYear, today },
       dateLocale: { locale },
       handleTodayClick,
@@ -289,7 +289,7 @@ export default defineComponent({
                       </div>
                     )}
                   </div>
-                  {renderSlot(this.$slots, 'default', {
+                  {$slots.default?.({
                     year,
                     month: month + 1,
                     date
