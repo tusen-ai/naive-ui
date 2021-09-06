@@ -16,6 +16,7 @@ export interface BaseOption {
   value?: ValueAtom
   disabled?: boolean
   children?: BaseOption[]
+  [key: string]: unknown
 }
 
 export type ExpandTrigger = 'hover' | 'click'
