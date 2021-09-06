@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.17.1 (2021-09-06)
+
+### Fixes
+
+- Fix `n-cascader` menu not showing correct checked keys.
+
 ## 2.17.0 (2021-09-05)
 
 ### Breaking Changes

@@ -203,8 +203,7 @@ export default defineComponent({
       const { cascade, multiple } = props
       if (multiple && Array.isArray(mergedValueRef.value)) {
         return treeMateRef.value.getCheckedKeys(mergedValueRef.value, {
-          cascade,
-          checkStrategy: props.leafOnly ? 'child' : props.checkStrategy
+          cascade
         })
       } else {
         return {
@@ -329,29 +328,35 @@ export default defineComponent({
     }
     const selectedOptionsRef = computed(() => {
       if (props.multiple) {
-        const { showPath, separator, labelField } = props
-        const { value } = checkedKeysRef
-        if (Array.isArray(value)) {
-          const { getNode } = treeMateRef.value
-          return value.map((key) => {
-            const node = getNode(key)
-            if (node === null) {
-              return {
-                label: String(key),
-                value: key
-              }
-            } else {
-              return {
-                label: showPath
-                  ? getPathLabel(node, separator, labelField)
-                  : (node.rawNode as any)[labelField],
-                value: node.key
-              }
+        const {
+          showPath,
+          separator,
+          labelField,
+          cascade,
+          leafOnly,
+          checkStrategy
+        } = props
+        const { getCheckedKeys, getNode } = treeMateRef.value
+        const value = getCheckedKeys(checkedKeysRef.value, {
+          cascade,
+          checkStrategy: leafOnly ? 'child' : checkStrategy
+        }).checkedKeys
+        return value.map((key) => {
+          const node = getNode(key)
+          if (node === null) {
+            return {
+              label: String(key),
+              value: key
             }
-          })
-        } else {
-          return []
-        }
+          } else {
+            return {
+              label: showPath
+                ? getPathLabel(node, separator, labelField)
+                : (node.rawNode as any)[labelField],
+              value: node.key
+            }
+          }
+        })
       } else return []
     })
     const selectedOptionRef = computed(() => {
