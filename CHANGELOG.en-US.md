@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.17.2 (2021-09-06)
+
+### Fixes
+
+- Fix `n-tree-select` shows key not label when `show-path=true`, closes [#1095](https://github.com/TuSimple/naive-ui/issues/1095).
+
 ## 2.17.1 (2021-09-06)
 
 ### Fixes
@@ -23,7 +29,6 @@
 - Fix `n-input-number`'s `step` calculate error when the value is decimal, closes [#1007](https://github.com/TuSimple/naive-ui/issues/1007).
 - Fix `n-popselect`' s default placement and padding.
 - Fix `n-calendar`'s text color of disabled date.
-- Fix `n-tree-select` show-path prop fixed, closes [#1095](https://github.com/TuSimple/naive-ui/issues/1095).
 
 ### Feats
 

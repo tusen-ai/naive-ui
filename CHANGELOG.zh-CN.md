@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.17.2 (2021-09-06)
+
+### Fixes
+
+- 修复 `n-tree-select` 显示路径是展示 key 而不是 label，关闭 [#1095](https://github.com/TuSimple/naive-ui/issues/1095)
+
 ## 2.17.1 (2021-09-06)
 
 ### Fixes
@@ -23,7 +29,6 @@
 - 修复 `n-input-number` 的 `step` 值为小数时计算错误，关闭 [#1007](https://github.com/TuSimple/naive-ui/issues/1007)
 - 修复 `n-popselect` 的默认位置和 padding
 - 修复 `n-calendar` 禁用日期的字体颜色
-- 修复 `n-tree-select` 修复显示路径，关闭 [#1095](https://github.com/TuSimple/naive-ui/issues/1095)
 
 ### Feats
 
