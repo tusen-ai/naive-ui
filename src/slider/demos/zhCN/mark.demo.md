@@ -18,8 +18,8 @@ export default defineComponent({
     return {
       value: ref([50, 70]),
       marks: {
-        34: 'Amazing',
-        75: 'Good'
+        34: '太棒了',
+        75: '不错'
       }
     }
   }
