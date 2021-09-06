@@ -1,3 +1,3 @@
-export type OnUpdateValue = <T extends string & number>(value: T) => void
+export type OnUpdateValue = (value: string & number) => void
 
-export type OnUpdateValueImpl = <T extends string | number>(value: T) => void
+export type OnUpdateValueImpl = (value: string | number) => void

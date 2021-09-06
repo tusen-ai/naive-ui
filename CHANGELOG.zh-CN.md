@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-radio-group` 的 `onUpdateValue` 类型不正确
+
 ## 2.17.1 (2021-09-06)
 
 ### Fixes
