@@ -68,21 +68,21 @@ describe('n-upload', () => {
     expect(wrapper.findAll('.n-upload-file--text-type').length).toBe(1)
 
     await wrapper.setProps({
-      listType: 'picture'
+      listType: 'image'
     })
-    expect(wrapper.findAll('.n-upload-file--picture-type').length).toBe(1)
+    expect(wrapper.findAll('.n-upload-file--image-type').length).toBe(1)
 
     await wrapper.setProps({
-      listType: 'picture-card'
+      listType: 'image-card'
     })
-    expect(wrapper.findAll('.n-upload-file--picture-card-type').length).toBe(1)
+    expect(wrapper.findAll('.n-upload-file--image-card-type').length).toBe(1)
   })
 
   it('should work with `create-thumbnail-url` prop', async () => {
     const createThumbnailUrl = async (): Promise<string> => '/testThumbUrl.png'
     const wrapper = mount(NUpload, {
       props: {
-        listType: 'picture',
+        listType: 'image',
         createThumbnailUrl
       }
     })
@@ -93,7 +93,7 @@ describe('n-upload', () => {
     await input.trigger('change')
     await sleep(1000)
     expect(
-      wrapper.find('.n-upload-file-info-thumbnail__image img').attributes('src')
+      wrapper.find('.n-upload-file-info__thumbnail img').attributes('src')
     ).toEqual('/testThumbUrl.png')
   })
 
@@ -114,7 +114,7 @@ describe('n-upload', () => {
         onPreview
       }
     })
-    const urlName = wrapper.findAll('.n-upload-file-info-thumbnail__name')[0]
+    const urlName = wrapper.findAll('.n-upload-file-info__name > a')[0]
     await urlName.trigger('click')
 
     expect(onPreview).toHaveBeenCalled()

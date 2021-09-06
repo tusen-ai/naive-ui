@@ -20,7 +20,7 @@ count
 focus
 ```
 
-## Props
+## API
 
 ### Input Props
 
@@ -43,7 +43,7 @@ focus
 | rows | `number` | `3` | Input rows, only works when type is `textarea`. |
 | separator | `string` | `undefined` | The separator bewteen pairwise inputs. |
 | show-count | `boolean` | `false` | Whether to show word count. |
-| show-password-toggle | `boolean` | `false` | Controls the display and hiding of passwords |
+| show-password-on | `'click' \| 'mousedown'` | `undefined` | The timing to show the password. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | Input type. |
 | value | `string \| [string, string] \| null` | `undefined` | Value of input. When `pair` is `true`, `value` is an array. |
@@ -53,8 +53,6 @@ focus
 | on-focus | `() => void` | `undefined` | Callback triggered when the input focus. |
 | on-update:value | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input value changes. |
 
-## Slots
-
 ### Input Slots
 
 | Name | Parameters | Description |
@@ -63,19 +61,17 @@ focus
 | suffix | `()` | The suffix content of the input. |
 | separator | `()` | The separator content of the input, only works when `pare` is true and it's priority higher than the separator prop. |
 
-### Input Group Slots
+### InputGroup Slots
 
 | Name    | Parameters | Description                     |
 | ------- | ---------- | ------------------------------- |
 | default | `()`       | The content of the input group. |
 
-### Input Group Label Slots
+### InputGroupLabel Slots
 
 | Name    | Parameters | Description                           |
 | ------- | ---------- | ------------------------------------- |
 | default | `()`       | The content of the input group label. |
-
-## Methods
 
 ### Input Methods
 

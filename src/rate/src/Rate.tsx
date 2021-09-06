@@ -37,7 +37,6 @@ const rateProps = {
     default: 'medium'
   },
   color: String,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<(value: number) => void>
   >,

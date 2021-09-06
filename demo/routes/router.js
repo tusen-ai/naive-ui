@@ -1,5 +1,6 @@
 import { nextTick } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import { useLocaleName } from '../store'
 
 export const loadingBarApiRef = {}
 
@@ -29,6 +30,15 @@ export default function createDemoRouter (app, routes) {
           if (el) el.scrollIntoView()
         })
       }
+      nextTick(() => {
+        const h1s = document.getElementsByTagName('h1')
+        if (to.name !== 'home' && h1s.length !== 0) {
+          document.title = h1s[0].textContent + ' - Naive UI'
+        } else {
+          // defined in index.html
+          window.deriveTitleFromLocale(useLocaleName().value)
+        }
+      })
     }
   })
 

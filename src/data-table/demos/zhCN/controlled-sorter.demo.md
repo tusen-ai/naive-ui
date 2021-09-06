@@ -20,6 +20,8 @@
 ```
 
 ```js
+import { defineComponent, reactive, ref } from 'vue'
+
 const nameColumn = {
   title: 'Name',
   key: 'name',
@@ -86,36 +88,38 @@ const data = [
   }
 ]
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
+    const nameColumnReactive = reactive(nameColumn)
+    const ageColumnReactive = reactive(ageColumn)
+    const columnsRef = ref(columns)
+
     return {
-      data: data,
-      columns,
-      nameColumn,
-      ageColumn,
-      pagination: { pageSize: 5 }
-    }
-  },
-  methods: {
-    sortName (order) {
-      this.nameColumn.sortOrder = order
-    },
-    clearSorter () {
-      this.nameColumn.sortOrder = false
-      this.ageColumn.sortOrder = false
-    },
-    handleSorterChange (sorter) {
-      this.columns.forEach((column) => {
-        /** column.sortOrder !== undefined means it is uncontrolled */
-        if (column.sortOrder === undefined) return
-        if (!sorter) {
-          column.sortOrder = false
-          return
-        }
-        if (column.key === sorter.columnKey) column.sortOrder = sorter.order
-        else column.sortOrder = false
-      })
+      data,
+      columns: columnsRef,
+      nameColumn: nameColumnReactive,
+      ageColumn: ageColumnReactive,
+      pagination: { pageSize: 5 },
+      sortName (order) {
+        nameColumnReactive.sortOrder = order
+      },
+      clearSorter () {
+        nameColumnReactive.sortOrder = false
+        ageColumnReactive.sortOrder = false
+      },
+      handleSorterChange (sorter) {
+        columnsRef.value.forEach((column) => {
+          /** column.sortOrder !== undefined means it is uncontrolled */
+          if (column.sortOrder === undefined) return
+          if (!sorter) {
+            column.sortOrder = false
+            return
+          }
+          if (column.key === sorter.columnKey) column.sortOrder = sorter.order
+          else column.sortOrder = false
+        })
+      }
     }
   }
-}
+})
 ```

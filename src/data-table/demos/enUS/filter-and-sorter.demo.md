@@ -18,6 +18,8 @@
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+
 const columns = [
   {
     title: 'Name',
@@ -77,29 +79,30 @@ const data = [
   }
 ]
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
+    const tableRef = ref(null)
+
     return {
-      data: data,
+      table: tableRef,
+      data,
       columns,
-      pagination: { pageSize: 5 }
-    }
-  },
-  methods: {
-    filterAddress () {
-      this.$refs.table.filter({
-        address: ['London']
-      })
-    },
-    sortName () {
-      this.$refs.table.sort('name', 'ascend')
-    },
-    clearFilters () {
-      this.$refs.table.filter(null)
-    },
-    clearSorter () {
-      this.$refs.table.sort(null)
+      pagination: { pageSize: 5 },
+      filterAddress () {
+        tableRef.value.filter({
+          address: ['London']
+        })
+      },
+      sortName () {
+        tableRef.value.sort('name', 'ascend')
+      },
+      clearFilters () {
+        tableRef.value.filter(null)
+      },
+      clearSorter () {
+        tableRef.value.sort(null)
+      }
     }
   }
-}
+})
 ```

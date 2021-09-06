@@ -18,11 +18,12 @@ Use separator prop or separator slot to custom separator of an item. When both a
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { MdCash } from '@vicons/ionicons4'
 
-export default {
+export default defineComponent({
   components: {
     MdCash
   }
-}
+})
 ```

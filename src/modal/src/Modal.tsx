@@ -45,7 +45,6 @@ const modalProps = {
   },
   ...presetProps,
   // events
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,

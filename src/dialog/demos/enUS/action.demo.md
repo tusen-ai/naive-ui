@@ -9,9 +9,10 @@ Sometimes you may want to customize `action` and `content` .
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useDialog, NTag } from 'naive-ui'
 
-export default {
+export default defineComponent({
   components: {
     NTag
   },
@@ -27,5 +28,5 @@ export default {
       }
     }
   }
-}
+})
 ```

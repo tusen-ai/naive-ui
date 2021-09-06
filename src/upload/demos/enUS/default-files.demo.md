@@ -10,8 +10,10 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
       defaultFileList: [
         {
@@ -32,5 +34,5 @@ export default {
       ]
     }
   }
-}
+})
 ```

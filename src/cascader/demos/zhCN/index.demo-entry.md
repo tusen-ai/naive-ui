@@ -12,20 +12,27 @@ single-lazy
 multiple-lazy
 action
 virtual
+check-strategy
+custom-field
 ```
 
-## Props
+## API
+
+### Cascader Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | cascade | `boolean` | `true` | 在多选时是否关联选项 |
+| check-strategy | `string` | `'all'` | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点 |
+| children-field | `string` | `'children'` | 替代 `CascaderOption` 中的 children 字段名 |
 | clearable | `boolean` | `false` | 值是否可清除 |
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | 级联菜单默认选中的数据 |
 | disabled | `boolean` | `false` | 是否禁用 |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | 在 `remote` 被设定时 `'hover'` 不生效 |
 | filterable | `boolean` | `false` | `remote` 被设定时不生效 |
 | filter | `(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean` | 一个基于字符串的过滤算法 | 过滤选项的函数 |
-| leaf-only | `boolean` | `false` | 是否只允许 `value` 出现叶节点的值 |
+| key-field | `string` | `'key'` | 替代 `CascaderOption` 中的 key 字段名 |
+| label-field | `string` | `'label'` | 替代 `CascaderOption` 中的 label 字段名 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |
 | multiple | `boolean` | `false` | 是否支持多选 |
 | options | `Array<CascaderOption>` | `[]` | 填充的 options 数据 |
@@ -42,9 +49,7 @@ virtual
 | on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | 在点击未加载完成节点时的回调，在返回的 promise 中设定 `option.children`，在返回的 promise resolve 或 reject 之后完成加载 |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null) => void` | `undefined` | 值改变时执行的回调 |
 
-## API
-
-### CascaderOption Properties
+#### CascaderOption Properties
 
 | 名称      | 类型               | 描述                     |
 | --------- | ------------------ | ------------------------ |
@@ -53,7 +58,7 @@ virtual
 | disabled? | `boolean`          | 该项是否禁用             |
 | children? | `CascaderOption`   | 该项的子项数据           |
 
-## Slots
+### Cascader Slots
 
 | 名称   | 参数 | 描述                             |
 | ------ | ---- | -------------------------------- |

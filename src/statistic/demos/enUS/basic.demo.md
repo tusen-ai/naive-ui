@@ -19,11 +19,12 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { MdSave } from '@vicons/ionicons4'
 
-export default {
+export default defineComponent({
   components: {
     MdSave
   }
-}
+})
 ```

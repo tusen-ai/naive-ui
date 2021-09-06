@@ -8,6 +8,7 @@
 
 <n-alert type="warning" title="注意" style="margin-bottom: 16px;">
   传入 <n-text code>data</n-text> 属性的数组的每一项都代表渲染的一行数据，每一行数据都要有唯一的 <n-text code>key</n-text>，否则需要在 table 上声明 <n-text code>row-key</n-text> 属性。
+  <br>如果你想使用服务端返回的数据进行展示，分页，过滤，排序等，请参考<n-a href="#ajax-usage">异步</n-a>。
 </n-alert>
 
 ```demo
@@ -54,6 +55,7 @@ scroll-debug
 | columns | `Array<DataTableColumn>` | `[]` | 需要展示的列 |
 | data | `Array<object>` | `[]` | 需要展示的数据 |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | 默认选中的 key 值 |
+| default-expanded-row-keys | `Array<string \| number>` | `[]` | 默认展开树的 key 值 |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |
 | flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |
 | loading | `boolean` | `false` | 是否显示 loading 状态 |

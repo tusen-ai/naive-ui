@@ -67,14 +67,13 @@ export default cB('collapse', {
       display: flex;
       flex-wrap: nowrap;
       align-items: center;
-      font-weight: var(--title-font-weight);
       transition: color .3s var(--bezier);
       position: relative;
-      cursor: pointer;
       padding: 16px 0 0 0;
       color: var(--title-text-color);
     `, [
       cE('header-main', `
+        cursor: pointer;
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
@@ -84,10 +83,9 @@ export default cB('collapse', {
         color: var(--title-text-color);
       `),
       cE('header-extra', `
+        cursor: pointer;
         display: flex;
         align-items: center;
-        font-size: 14px;
-        font-weight: 400;
         transition: color .3s var(--bezier);
         color: var(--text-color);
       `),

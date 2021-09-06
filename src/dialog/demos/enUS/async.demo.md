@@ -7,16 +7,17 @@ Dialog can be async.
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useDialog } from 'naive-ui'
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000))
 const countDown = (second) => `Count down ${second} second`
 
-export default {
+export default defineComponent({
   setup () {
     const dialog = useDialog()
     return {
-      handleClick (e) {
+      handleClick () {
         const d = dialog.success({
           title: 'Async',
           content: 'Click and count down 3 second',
@@ -43,5 +44,5 @@ export default {
       }
     }
   }
-}
+})
 ```

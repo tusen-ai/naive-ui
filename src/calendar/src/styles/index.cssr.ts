@@ -113,7 +113,7 @@ export default c([
           color: var(--text-color);
         `)
       ]),
-      cM('disabled', [
+      cM('disabled', 'color: var(--day-text-color);', [
         cB('calendar-date', [
           cE('date', `
             color: var(--day-text-color);

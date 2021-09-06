@@ -41,5 +41,3 @@ export interface TreeSelectInjection {
 
 export const treeSelectInjectionKey: InjectionKey<TreeSelectInjection> =
   Symbol('tree-select')
-
-export type CheckStrategy = 'all' | 'parent' | 'child'

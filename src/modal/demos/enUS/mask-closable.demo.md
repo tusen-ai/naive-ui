@@ -29,11 +29,11 @@ export default defineComponent({
     return {
       showModal: showModalRef,
       onPositiveClick () {
-        message.success('Cancel')
+        message.success('Submit')
         showModalRef.value = false
       },
       onNegativeClick () {
-        message.success('Submit')
+        message.success('Cancel')
         showModalRef.value = false
       }
     }

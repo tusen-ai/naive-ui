@@ -1,6 +1,6 @@
 # Async Validation
 
-Support async. Make sure your validator returns a `Promise`.
+Supports async when the provided validator returns a `Promise`.
 
 ```html
 <n-form

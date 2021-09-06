@@ -12,7 +12,9 @@ custom-input
 after-select
 ```
 
-## Props
+## API
+
+### AutoComplete Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -31,7 +33,7 @@ after-select
 | on-select | `(value: string) => void` | `undefined` | select 选中时触发的回调函数 |
 | on-update:value | `(value: string \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 |
 
-### AutoCompleteOption Properties
+#### AutoCompleteOption Properties
 
 | 名称     | 类型      | 介绍            |
 | -------- | --------- | --------------- |
@@ -39,16 +41,16 @@ after-select
 | label    | `string`  | 显示的 label 值 |
 | value    | `string`  | 需要唯一        |
 
-### AutoCompleteGroupOption Properties
+#### AutoCompleteGroupOption Properties
 
 | 名称 | 类型 | 介绍 |
 | --- | --- | --- |
-| children | `Array<string \| AutoCompleteOption>` | AutoCompleteGroup 的 children 项 |
-| label | `string` | AutoCompleteGroup 的名字 |
-| key | `string \| number` | AutoCompleteGroup 的 key |
-| type | `'group'` | AutoCompleteGroup 的类型 |
+| children | `Array<string \| AutoCompleteOption>` | AutoCompleteGroupOption 的 children 项 |
+| label | `string` | AutoCompleteGroupOption 的名字 |
+| key | `string \| number` | AutoCompleteGroupOption 的 key |
+| type | `'group'` | AutoCompleteGroupOption 的类型 |
 
-## Slots
+### AutoComplete Slots
 
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |

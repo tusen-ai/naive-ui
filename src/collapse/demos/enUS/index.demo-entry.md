@@ -13,9 +13,10 @@ display-directive
 item-header-click
 customize-icon
 default-expanded
+header-extra
 ```
 
-## Props
+## API
 
 ### Collapse Props
 
@@ -29,15 +30,13 @@ default-expanded
 | on-update:expanded-names | `(expandedNames: Array<string \| number> \| string \| number \| null) => void` | `undefined` | Callback function triggered when the expanded-names array is changed. |
 | on-item-header-click | `(data: { name: string \| number, expanded: boolean, event: MouseEvent }) => void` | `undefined` | Callback function triggered when the title is clicked. |
 
-### Collapse Item Props
+### CollapseItem Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | display-directive | `'if' \| 'show'` | `undefined` | The display directive to use when it is rendering its content. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. When it is set to `undefined` the value will follow its outer `n-collapse`. |
 | name | `string \| number` | random string | Item identifier (should be unique). |
 | title | `string` | `undefined` | Title. |
-
-## Slots
 
 ### Collapse Slots
 
@@ -46,7 +45,7 @@ default-expanded
 | default | `()` | The contents of the collapsible panel. |
 | arrow | `(options: { collapsed: boolean })` | Custom icons for folding panels. |
 
-### Collapse Item Slots
+### CollapseItem Slots
 
 | Name | Parameters | Description |
 | --- | --- | --- |

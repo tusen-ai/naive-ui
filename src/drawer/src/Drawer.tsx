@@ -55,7 +55,6 @@ const drawerProps = {
   },
   scrollbarProps: Object as PropType<ScrollbarProps>,
   contentStyle: [Object, String] as PropType<string | CSSProperties>,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,

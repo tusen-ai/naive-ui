@@ -32,9 +32,9 @@
   <n-row :gutter="[0, 24]">
     <n-col :span="24">
       <div style="display: flex; justify-content: flex-end;">
-        <n-button @click="handleValidateButtonClick" round type="primary"
-          >Validate</n-button
-        >
+        <n-button @click="handleValidateButtonClick" round type="primary">
+          Validate
+        </n-button>
       </div>
     </n-col>
   </n-row>

@@ -32,7 +32,7 @@ function createSelectOptions (
         path.push(rawNode)
         selectOptions.push({
           label: path.map((rawNodeInPath) => rawNodeInPath.label).join('/'),
-          value: rawNode.value,
+          value: tmNode.key,
           path: Array.from(path)
         })
       }
@@ -44,10 +44,14 @@ function createSelectOptions (
   return selectOptions
 }
 
-function getPathLabel (node: TmNode | null, separator: string): string {
-  const path = []
+function getPathLabel (
+  node: TmNode | null,
+  separator: string,
+  labelField: string
+): string {
+  const path: string[] = []
   while (node) {
-    path.push(node.rawNode.label)
+    path.push((node.rawNode as any)[labelField])
     node = node.parent
   }
   return path.reverse().join(separator)

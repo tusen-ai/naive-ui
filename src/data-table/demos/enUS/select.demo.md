@@ -19,6 +19,8 @@ Rows can be selectable by making first column's type as `selection`.
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+
 const columns = [
   {
     type: 'selection',
@@ -46,21 +48,21 @@ const data = Array.apply(null, { length: 46 }).map((_, index) => ({
   address: `London, Park Lane no. ${index}`
 }))
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
+    const checkedRowKeysRef = ref([])
+
     return {
       data,
       columns,
-      checkedRowKeys: [],
+      checkedRowKeys: checkedRowKeysRef,
       pagination: {
         pageSize: 5
+      },
+      handleCheck (rowKeys) {
+        checkedRowKeysRef.value = rowKeys
       }
     }
-  },
-  methods: {
-    handleCheck (rowKeys) {
-      this.checkedRowKeys = rowKeys
-    }
   }
-}
+})
 ```

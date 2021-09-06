@@ -97,4 +97,33 @@ describe('n-cascader', () => {
     expect(wrapper.find('.n-base-selection-tags').exists()).toBe(true)
     expect(wrapper.find('.n-base-selection-label').exists()).not.toBe(true)
   })
+
+  it('should work with `label-field` `value-field` `children-field` props', async () => {
+    const wrapper = mount(NCascader, {
+      props: {
+        options: [
+          {
+            whateverLabel: 'Rubber Soul',
+            whateverValue: 'Rubber Soul',
+            whateverChildren: [
+              {
+                whateverLabel:
+                  "Everybody's Got Something to Hide Except Me and My Monkey",
+                whateverValue:
+                  "Everybody's Got Something to Hide Except Me and My Monkey"
+              }
+            ]
+          }
+        ],
+        'label-field': 'whateverLabel',
+        'value-field': 'whateverValue',
+        'children-field': 'whateverChildren',
+        'default-value':
+          "Everybody's Got Something to Hide Except Me and My Monkey"
+      }
+    })
+    expect(wrapper.find('.n-base-selection-label').text()).toBe(
+      "Rubber Soul / Everybody's Got Something to Hide Except Me and My Monkey"
+    )
+  })
 })

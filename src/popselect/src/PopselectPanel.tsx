@@ -8,7 +8,7 @@ import {
   watch,
   nextTick
 } from 'vue'
-import { createTreeMate } from 'treemate'
+import { createTreeMate, TreeNode } from 'treemate'
 import { RenderLabel } from '../../_internal/select-menu/src/interface'
 import { tmOptions } from '../../select/src/utils'
 import {
@@ -85,8 +85,8 @@ export default defineComponent({
       if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
       if (onChange) call(onChange as OnUpdateValueImpl, value)
     }
-    function handleMenuToggleOption (option: SelectBaseOption): void {
-      toggle(option.value)
+    function handleToggle (tmNode: TreeNode<SelectBaseOption>): void {
+      toggle(tmNode.key)
     }
     function toggle (value: ValueAtom): void {
       if (props.multiple) {
@@ -132,7 +132,7 @@ export default defineComponent({
         SelectIgnoredOption
         >(props.options, tmOptions)
       }),
-      handleMenuToggleOption
+      handleToggle
     }
   },
   render () {
@@ -149,7 +149,7 @@ export default defineComponent({
         virtualScroll={false}
         scrollable={this.scrollable}
         renderLabel={this.renderLabel}
-        onMenuToggleOption={this.handleMenuToggleOption}
+        onToggle={this.handleToggle}
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseenter}
       />

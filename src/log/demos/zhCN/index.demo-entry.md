@@ -18,6 +18,7 @@
 </template>
 
 <script>
+  import { defineComponent } from 'vue'
   import hljs from 'highlight.js/lib/core'
 
   hljs.registerLanguage('naive-log', () => ({
@@ -29,13 +30,13 @@
     ]
   }))
 
-  export default {
+  export default defineComponent({
     setup() {
       return {
         hljs
       }
     }
-  }
+  })
 </script>
 ```
 

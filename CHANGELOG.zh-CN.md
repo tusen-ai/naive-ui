@@ -1,10 +1,24 @@
 # CHANGELOG
 
-## Pending
+## 2.17.2 (2021-09-06)
+
+### Fixes
+
+- 修复 `n-tree-select` 显示路径是展示 key 而不是 label，关闭 [#1095](https://github.com/TuSimple/naive-ui/issues/1095)
+
+## 2.17.1 (2021-09-06)
+
+### Fixes
+
+- 修复 `n-cascader` 菜单未展示正确的选中 key
+
+## 2.17.0 (2021-09-05)
 
 ### Breaking Changes
 
 - `n-tree-select` 的 `leaf-only` 属性被废弃，请使用 `check-strategy="child"`
+- `n-cascader` 的 `leaf-only` 属性被废弃，请使用 `check-strategy="child"`
+- `n-input` 的 `show-password-toggle` 属性被废弃，请使用 `show-password-on="click"`
 
 ### Fixes
 
@@ -13,18 +27,27 @@
 - 修复 `n-description` 中因 `v-if` 导致的不该出现的警告，关闭 [#1083](https://github.com/TuSimple/naive-ui/issues/1083)
 - 修复 `n-layout` 的 `sider-placement` 属性在打包之后不生效，关闭 [#978](https://github.com/TuSimple/naive-ui/issues/978)
 - 修复 `n-input-number` 的 `step` 值为小数时计算错误，关闭 [#1007](https://github.com/TuSimple/naive-ui/issues/1007)
+- 修复 `n-popselect` 的默认位置和 padding
+- 修复 `n-calendar` 禁用日期的字体颜色
 
 ### Feats
 
 - `n-cascader` 新增 `onUpdateValue` 方法
 - `n-auto-complete` 新增 `onUpdateValue` 方法
 - `n-data-table` 的列的 `renderFilterMenu` 新增 hide 参数
-- `n-tree` 和 `n-tree-select` 新增 `key-field` 属性
-- `n-tree` 和 `n-tree-select` 新增 `label-field` 属性
-- `n-tree` 和 `n-tree-select` 新增 `children-field` 属性
+- `n-tree` 新增 `key-field` 属性
+- `n-tree` 新增 `label-field` 属性
+- `n-tree` 新增 `children-field` 属性
+- `n-tree-select` 新增 `key-field` 属性
+- `n-tree-select` 新增 `label-field` 属性
+- `n-tree-select` 新增 `children-field` 属性
+- `n-cascader` 新增 `key-field` 属性
+- `n-cascader` 新增 `label-field` 属性
+- `n-cascader` 新增 `children-field` 属性
 - `n-dropdown` 选项新增 `props` 属性，关闭 [#813](https://github.com/TuSimple/naive-ui/issues/813)
 - `n-data-table` 支持按住 `shift` 进行多选操作，关闭 [#554](https://github.com/TuSimple/naive-ui/issues/554)
 - `n-tree-select` 增加 `check-strategy` 属性，关闭 [#624](https://github.com/TuSimple/naive-ui/issues/624)
+- `n-cascader` 增加 `check-strategy` 属性
 - `n-message` 选项增加 `keepAliveOnHover` 属性，关闭 [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
 - `n-message-provider` 新增 `keep-alive-on-hover` 属性，关闭 [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
 - `n-upload` 导出 `UploadFile` 类型
@@ -34,7 +57,9 @@
 - `n-pagination` 导出 `PaginationInfo` 类型
 - `n-data-table` 导出 `DataTableCreateSummary` 类型
 - `n-code` 新增 `inline` 属性, 关闭 [#834](https://github.com/TuSimple/naive-ui/issues/834)
-- `n-collapse` 新增 slot: 'header-extra'，关闭 [#1046](https://github.com/TuSimple/naive-ui/issues/1046)
+- `n-collapse` 新增 `header-extra` slot，关闭 [#1046](https://github.com/TuSimple/naive-ui/issues/1046)
+- `n-input` 新增 `show-password-on` 属性
+- `n-upload` 增加 `list-type`、 `show-preview-button`、 `on-preview` 和 `create-thumbnail-url` 属性
 
 ## 2.16.7 (2021-08-27)
 
@@ -128,7 +153,6 @@
 - `n-button` 新增 `text-color` 属性
 - `n-form` 导出 `FormValidationError` 类型
 - `n-popconfirm` 支持不显示操作组件，关闭 [#770](https://github.com/TuSimple/naive-ui/issues/770)
-- `n-upload` 增加 `list-type`、 `show-preview-button`、 `on-preview` 和 `create-thumbnail-url` 属性
 
 ### Fixes
 

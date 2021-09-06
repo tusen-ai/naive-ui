@@ -25,6 +25,7 @@ event
 | focusable | `boolean` | `true` | Whether the checkbox gains focus after being checked. |
 | indeterminate | `boolean` | `false` | Whether the checkbox can have a third indeterminate state. |
 | label | `string` | `undefined` | Checkbox label. |
+| size | `'small' \| 'medium' \| 'large'`  | `'medium'`  | The size of the checkbox. |
 | value | `string \| number` | `undefined` | The value of the checkbox to be used in a checkbox group. |
 | on-update:checked | `(checked: boolean) => void` | `undefined` | Callback function triggered on a checked status change. |
 

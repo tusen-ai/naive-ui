@@ -89,6 +89,8 @@ export default defineComponent({
       mergedClsPrefix
     } = this
     const headerNode = renderSlot($slots, 'header', undefined, () => [title])
+    const headerExtraSlot =
+      $slots['header-extra'] || collapseSlots['header-extra']
     return (
       <div
         class={[
@@ -128,16 +130,14 @@ export default defineComponent({
             </div>
             {arrowPlacement === 'left' && headerNode}
           </div>
-          <div class={`${mergedClsPrefix}-collapse-item__header-extra`}>
-            {renderSlot(
-              $slots['header-extra']
-                ? $slots
-                : collapseSlots['header-extra']
-                  ? collapseSlots
-                  : $slots,
-              'header-extra'
-            )}
-          </div>
+          {headerExtraSlot && (
+            <div
+              class={`${mergedClsPrefix}-collapse-item__header-extra`}
+              onClick={this.handleClick}
+            >
+              {{ default: headerExtraSlot }}
+            </div>
+          )}
         </div>
         <NCollapseItemContent
           clsPrefix={mergedClsPrefix}

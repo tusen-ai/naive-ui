@@ -40,7 +40,6 @@ const dynamicTagsProps = {
   inputStyle: [String, Object] as PropType<string | CSSProperties>,
   max: Number as PropType<number>,
   tagStyle: [String, Object] as PropType<string | CSSProperties>,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   // deprecated

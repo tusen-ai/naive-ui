@@ -29,7 +29,7 @@ Cascader has `small`, `medium` and `large` sizes.
 ```
 
 ```js
-function genOptions (depth = 2, iterator = 1, prefix = '') {
+function getOptions (depth = 2, iterator = 1, prefix = '') {
   const length = 12
   const options = []
   for (let i = 1; i <= length; ++i) {
@@ -38,7 +38,7 @@ function genOptions (depth = 2, iterator = 1, prefix = '') {
         value: `${i}`,
         label: `${i}`,
         disabled: i % 5 === 0,
-        children: genOptions(depth, iterator + 1, '' + i)
+        children: getOptions(depth, iterator + 1, '' + String(i))
       })
     } else if (iterator === depth) {
       options.push({
@@ -51,7 +51,7 @@ function genOptions (depth = 2, iterator = 1, prefix = '') {
         value: `${prefix}-${i}`,
         label: `${prefix}-${i}`,
         disabled: i % 5 === 0,
-        children: genOptions(depth, iterator + 1, `${prefix}-${i}`)
+        children: getOptions(depth, iterator + 1, `${prefix}-${i}`)
       })
     }
   }
@@ -62,7 +62,7 @@ export default {
   data () {
     return {
       value: null,
-      options: genOptions()
+      options: getOptions()
     }
   }
 }

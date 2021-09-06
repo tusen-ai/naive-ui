@@ -22,7 +22,7 @@
 ```
 
 ```js
-function genChildren (option) {
+function getChildren (option) {
   const children = []
   for (let i = 0; i <= option.depth; ++i) {
     children.push({
@@ -56,7 +56,7 @@ export default {
     handleLoad (option) {
       return new Promise((resolve) => {
         window.setTimeout(() => {
-          option.children = genChildren(option)
+          option.children = getChildren(option)
           resolve()
         }, 1000)
       })

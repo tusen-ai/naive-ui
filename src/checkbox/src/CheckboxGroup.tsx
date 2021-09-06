@@ -41,7 +41,6 @@ const checkboxGroupProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<(value: Array<string | number>) => void>
   >,

@@ -57,22 +57,20 @@ export default defineComponent({
     MdArrowRoundForward
   },
   setup () {
-    const current = ref(1)
-    function next () {
-      if (current.value === null) current.value = 1
-      else if (current.value >= 4) current.value = null
-      else current.value++
-    }
-    function prev () {
-      if (current.value === 0) current.value = null
-      else if (current.value === null) current.value = 4
-      else current.value--
-    }
+    const currentRef = ref(1)
     return {
       currentStatus: ref('process'),
-      current,
-      next,
-      prev
+      current: currentRef,
+      next () {
+        if (currentRef.value === null) currentRef.value = 1
+        else if (currentRef.value >= 4) currentRef.value = null
+        else currentRef.value++
+      },
+      prev () {
+        if (currentRef.value === 0) currentRef.value = null
+        else if (currentRef.value === null) currentRef.value = 4
+        else currentRef.value--
+      }
     }
   }
 })

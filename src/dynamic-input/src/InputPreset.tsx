@@ -15,7 +15,6 @@ export default defineComponent({
     },
     parentPath: String,
     path: String,
-    // eslint-disable-next-line vue/prop-name-casing
     onUpdateValue: {
       type: Function as PropType<(value: string) => void>,
       required: true

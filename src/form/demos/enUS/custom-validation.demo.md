@@ -1,25 +1,25 @@
 # Custom Validation
 
-You may need to manually custom the timing and the effect of a validation. Use `validation-status` and `feedback` to control the validation effect of a form item. In this case, there's usually no need for providing a `path` for the form item.
+If you need to customize the timing and effect of a validation, use `validation-status` and `feedback`. In this case, there's usually no need for providing a `path` for the form item.
 
 ```html
 <n-form>
   <n-form-item
-    label="Airport's"
+    label="Airports"
     :validation-status="inputValidationStatus"
     :feedback="inputFeedback"
   >
     <n-input v-model:value="inputValue" clearable />
   </n-form-item>
   <n-form-item
-    label="Airport's"
+    label="Airports"
     :validation-status="inputNumberValidationStatus"
     :feedback="inputNumberFeedback"
   >
     <n-input-number v-model:value="inputNumberValue" />
   </n-form-item>
   <n-form-item
-    label="Airport's"
+    label="Airports"
     :validation-status="selectValidationStatus"
     :feedback="selectFeedback"
   >
@@ -36,9 +36,9 @@ You may need to manually custom the timing and the effect of a validation. Use `
 ```js
 function createStatus (value) {
   switch (value) {
-    case '10: 30':
+    case '10:30':
       return undefined
-    case '10: 29':
+    case '10:29':
       return 'warning'
     default:
       return 'error'
@@ -47,12 +47,12 @@ function createStatus (value) {
 
 function createFeedback (value) {
   switch (value) {
-    case '10: 30':
+    case '10:30':
       return 'The plane of 10:30 has arrived.'
-    case '10: 29':
-      return 'Almost there, please set the time to 10: 30'
+    case '10:29':
+      return 'Almost there, please set the time to 10:30'
     default:
-      return 'Please set the time to 10: 30'
+      return 'Please set the time to 10:30'
   }
 }
 
@@ -83,21 +83,21 @@ export default {
   },
   data () {
     return {
-      inputValue: '10: 29',
+      inputValue: '10:29',
       inputNumberValue: 1029,
-      selectValue: '10: 29',
+      selectValue: '10:29',
       selectOptions: [
         {
-          label: '10: 28',
-          value: '10: 28'
+          label: '10:28',
+          value: '10:28'
         },
         {
-          label: '10: 29',
-          value: '10: 29'
+          label: '10:29',
+          value: '10:29'
         },
         {
-          label: '10: 30',
-          value: '10: 30'
+          label: '10:30',
+          value: '10:30'
         }
       ]
     }

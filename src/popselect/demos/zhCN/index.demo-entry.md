@@ -11,7 +11,9 @@ scrollable
 multiple
 ```
 
-## Props
+## API
+
+### Popselect Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |

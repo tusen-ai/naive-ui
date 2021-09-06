@@ -5,18 +5,13 @@ import type { UploadTheme } from '../styles'
 export interface FileInfo {
   id: string
   name: string
-  url: string | null
   percentage: number
   status: 'pending' | 'uploading' | 'finished' | 'removed' | 'error'
-  file: File | null | Blob
-  thumbnailUrl?: string
-  type?: string
+  url?: string | null
+  file?: File | null
+  thumbnailUrl?: string | null
+  type?: string | null
 }
-
-export type UploadFile = Pick<
-FileInfo,
-'id' | 'name' | 'status' | 'percentage' | 'file'
->
 
 export type FuncOrRecordOrUndef =
   | Record<string, string>
@@ -72,10 +67,9 @@ export interface UploadInjection {
   XhrMap: Map<string, XMLHttpRequest>
   submit: (fileId?: string) => void
   doChange: DoChange
-  isImageUrl: (file: FileInfo) => boolean
   showPreivewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>
-  getFileThumbnail: (file: FileInfo) => Promise<string>
+  getFileThumbnailUrl: (file: FileInfo) => Promise<string>
 }
 
 export const uploadInjectionKey: InjectionKey<UploadInjection> =
@@ -97,7 +91,7 @@ export type OnBeforeUpload = (data: {
   fileList: FileInfo[]
 }) => Promise<unknown>
 
-export type listType = 'text' | 'picture' | 'picture-card'
+export type listType = 'text' | 'image' | 'image-card'
 
 export type OnPreview = (file: FileInfo) => void
 
