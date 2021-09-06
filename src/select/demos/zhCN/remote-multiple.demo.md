@@ -17,6 +17,8 @@
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+
 const options = [
   {
     label: 'Drive My Car',
@@ -68,24 +70,29 @@ const options = [
   }
 ]
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
+    const loadingRef = ref(false)
+    const optionsRef = ref([])
+
     return {
-      selectedValues: null,
-      loading: false,
-      options: [],
+      selectedValues: ref(null),
+      loading: loadingRef,
+      options: optionsRef,
       handleSearch: (query) => {
         if (!query.length) {
-          this.options = []
+          optionsRef.value = []
           return
         }
-        this.loading = true
+        loadingRef.value = true
         window.setTimeout(() => {
-          this.options = options.filter((item) => ~item.label.indexOf(query))
-          this.loading = false
+          optionsRef.value = options.filter(
+            (item) => ~item.label.indexOf(query)
+          )
+          loadingRef.value = false
         }, 1000)
       }
     }
   }
-}
+})
 ```

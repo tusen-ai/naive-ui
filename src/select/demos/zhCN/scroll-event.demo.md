@@ -16,14 +16,19 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const scrollContentHeightRef = ref(null)
+    const scrollContainerHeightRef = ref(null)
+    const scrollContainerScrollTopRef = ref(null)
+
     return {
-      value: null,
-      array: null,
-      scrollContentHeight: null,
-      scrollContainerHeight: null,
-      scrollContainerScrollTop: null,
+      value: ref(null),
+      scrollContentHeight: scrollContentHeightRef,
+      scrollContainerHeight: scrollContainerHeightRef,
+      scrollContainerScrollTop: scrollContainerScrollTopRef,
       options: [
         {
           label: 'Drive My Car',
@@ -73,15 +78,13 @@ export default {
           label: 'Wait',
           value: 'song12'
         }
-      ]
-    }
-  },
-  methods: {
-    handleScroll (e) {
-      this.scrollContentHeight = e.target.firstElementChild.offsetHeight
-      this.scrollContainerScrollTop = e.target.scrollTop
-      this.scrollContainerHeight = e.target.offsetHeight
+      ],
+      handleScroll (e) {
+        scrollContentHeightRef.value = e.target.firstElementChild.offsetHeight
+        scrollContainerScrollTopRef.value = e.target.scrollTop
+        scrollContainerHeightRef.value = e.target.offsetHeight
+      }
     }
   }
-}
+})
 ```
