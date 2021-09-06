@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-step` must be passed with `internal-index`.
+
 ## 2.17.2 (2021-09-06)
 
 ### Fixes

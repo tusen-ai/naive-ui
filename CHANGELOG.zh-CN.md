@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-step` 必须传 `internal-index`
+
 ## 2.17.2 (2021-09-06)
 
 ### Fixes
