@@ -124,12 +124,14 @@ export default cB('timeline', `
         box-sizing: border-box;
       `),
       cE('icon', `
-      color: var(--icon-color);
-      font-size: 16px;
-      transition:
-        background-color .3s var(--bezier),
-        border-color .3s var(--bezier);
-      box-sizing: border-box;
+        color: var(--icon-color);
+        margin: -2px;
+        font-size: 18px;
+        font-weight: 400;
+        transition:
+          background-color .3s var(--bezier),
+          border-color .3s var(--bezier);
+        box-sizing: border-box;
     `),
       cE('line', `
         transition: background-color .3s var(--bezier);
