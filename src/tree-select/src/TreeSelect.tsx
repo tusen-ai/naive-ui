@@ -311,7 +311,7 @@ export default defineComponent({
           checkStrategy: props.checkStrategy,
           cascade: mergedCascadeRef.value
         })
-        const { keyField, labelField } = props
+        const { labelField } = props
         checkedKeys.forEach((value) => {
           const tmNode = treeMate.getNode(value)
           if (tmNode !== null) {
@@ -321,7 +321,7 @@ export default defineComponent({
                   tmNode,
                   treeMate.getPath(value).treeNodePath,
                   separator,
-                  keyField
+                  labelField
                 )
                 : treeOption2SelectOption(tmNode, labelField)
             )
