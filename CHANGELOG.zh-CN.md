@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.17.1 (2021-09-06)
+
+### Fixes
+
+- 修复 `n-cascader` 菜单未展示正确的选中 key
+
 ## 2.17.0 (2021-09-05)
 
 ### Breaking Changes
