@@ -17,6 +17,7 @@
 - Fix `n-input-number`'s `step` calculate error when the value is decimal, closes [#1007](https://github.com/TuSimple/naive-ui/issues/1007).
 - Fix `n-popselect`' s default placement and padding.
 - Fix `n-calendar`'s text color of disabled date.
+- Fix `n-tree-select` show-path prop fixed, closes [#1095](https://github.com/TuSimple/naive-ui/issues/1095).
 
 ### Feats
 
