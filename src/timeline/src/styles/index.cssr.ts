@@ -123,6 +123,14 @@ export default cB('timeline', `
         border-radius: 7px;
         box-sizing: border-box;
       `),
+      cE('icon', `
+      color: var(--icon-color);
+      font-size: 16px;
+      transition:
+        background-color .3s var(--bezier),
+        border-color .3s var(--bezier);
+      box-sizing: border-box;
+    `),
       cE('line', `
         transition: background-color .3s var(--bezier);
         position: absolute;

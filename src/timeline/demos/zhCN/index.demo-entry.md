@@ -9,6 +9,7 @@ basic
 size
 item-placement
 horizontal
+customize-icon
 ```
 
 ## API
@@ -39,8 +40,9 @@ horizontal
 
 ### TimelineItem Slots
 
-| 名称    | 参数 | 说明               |
-| ------- | ---- | ------------------ |
-| default | `()` | 时间线选项内容     |
-| footer  | `()` | 时间线选项底部内容 |
-| header  | `()` | 时间线选项头部内容 |
+| 名称    | 参数 | 说明                 |
+| ------- | ---- | -------------------- |
+| default | `()` | 时间线选项内容       |
+| icon    | `()` | 时间线选项自定义图标 |
+| footer  | `()` | 时间线选项底部内容   |
+| header  | `()` | 时间线选项头部内容   |
