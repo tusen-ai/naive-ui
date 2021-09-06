@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Features
+
+- `n-drawer` add `on-mask-click` prop.
+
 ### Fixes
 
 - Fix `n-step` must be passed with `internal-index`.

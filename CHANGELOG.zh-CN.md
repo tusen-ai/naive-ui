@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Features
+
+- `n-drawer` 新增 `on-mask-click` 属性
+
 ### Fixes
 
 - 修复 `n-step` 必须传 `internal-index`
