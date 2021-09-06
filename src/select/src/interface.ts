@@ -50,7 +50,7 @@ export type OnUpdateValue = (
   (string[] | null) &
   (number[] | null) &
   (ValueAtom[] | null),
-  params: { option: SelectBaseOption | null } & Array<{
+  meta: { option: SelectBaseOption | null } & Array<{
     option: SelectBaseOption
   }>
 ) => void
@@ -64,7 +64,7 @@ export type OnUpdateValueImpl = (
   | (string[] | null)
   | (number[] | null)
   | (ValueAtom[] | null),
-  params:
+  meta:
   | { option: SelectBaseOption | null }
   | Array<{
     option: SelectBaseOption

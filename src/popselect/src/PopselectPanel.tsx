@@ -77,7 +77,7 @@ export default defineComponent({
 
     function doUpdateValue (
       value: Value | null,
-      params:
+      meta:
       | { option: SelectBaseOption | null }
       | Array<{
         option: SelectBaseOption
@@ -88,9 +88,11 @@ export default defineComponent({
         'onUpdate:value': _onUpdateValue,
         onChange
       } = props
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, params)
-      if (_onUpdateValue) { call(_onUpdateValue as OnUpdateValueImpl, value, params) }
-      if (onChange) call(onChange as OnUpdateValueImpl, value, params)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, meta)
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, meta)
+      }
+      if (onChange) call(onChange as OnUpdateValueImpl, value, meta)
     }
     function handleToggle (tmNode: TreeNode<SelectBaseOption>): void {
       toggle(tmNode.key)
@@ -108,26 +110,20 @@ export default defineComponent({
           } else {
             newValue.push(value)
           }
-          const params = props.options
-            .filter((i) => newValue.includes(i.value as string | number))
-            .map((i) => {
-              return { option: i }
-            })
-          doUpdateValue(newValue, params as Array<{ option: SelectBaseOption }>)
+          const meta = props.options.map((option) => {
+            return { option: option }
+          })
+          doUpdateValue(newValue, meta as Array<{ option: SelectBaseOption }>)
         } else {
-          const params = props.options
-            .filter((i) => i.value === value)
-            .map((i) => {
-              return { option: i }
-            })
-          doUpdateValue([value], params as Array<{ option: SelectBaseOption }>)
+          const option = props.options.find((option) => option.value === value)
+          doUpdateValue([value], { option: option as SelectBaseOption })
         }
       } else {
         if (props.value === value && props.cancelable) {
           doUpdateValue(null, { option: null })
         } else {
-          const params = props.options.find((i) => i.value === value)
-          doUpdateValue(value, { option: (params as SelectBaseOption) || null })
+          const option = props.options.find((option) => option.value === value)
+          doUpdateValue(value, { option: option as SelectBaseOption })
           NPopselect.setShow(false)
         }
       }

@@ -53,7 +53,8 @@ import type {
   OnUpdateValue,
   OnUpdateValueImpl,
   Value,
-  Size
+  Size,
+  ValueAtom
 } from './interface'
 
 const selectProps = {
@@ -263,27 +264,30 @@ export default defineComponent({
         }
       }
     })
+    function getMergedOption (value: ValueAtom): SelectBaseOption | undefined {
+      const remote = props.remote
+      const { value: memoValOptMap } = memoValOptMapRef
+      const { value: valOptMap } = valOptMapRef
+      const { value: wrappedFallbackOption } = wrappedFallbackOptionRef
+      if (valOptMap.has(value)) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        return valOptMap.get(value)!
+      } else if (remote && memoValOptMap.has(value)) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        return memoValOptMap.get(value)!
+      } else if (wrappedFallbackOption) {
+        return wrappedFallbackOption(value)
+      }
+    }
     const selectedOptionsRef = computed(() => {
       if (props.multiple) {
         const { value: values } = mergedValueRef
         if (!Array.isArray(values)) return []
-        const remote = props.remote
-        const { value: memoValOptMap } = memoValOptMapRef
-        const { value: valOptMap } = valOptMapRef
-        const { value: wrappedFallbackOption } = wrappedFallbackOptionRef
         const options: SelectBaseOption[] = []
         values.forEach((value) => {
-          if (valOptMap.has(value)) {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            options.push(valOptMap.get(value)!)
-          } else if (remote && memoValOptMap.has(value)) {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            options.push(memoValOptMap.get(value)!)
-          } else if (wrappedFallbackOption) {
-            const option = wrappedFallbackOption(value)
-            if (option) {
-              options.push(option)
-            }
+          const option = getMergedOption(value)
+          if (option) {
+            options.push(option)
           }
         })
         return options
@@ -293,21 +297,9 @@ export default defineComponent({
     const selectedOptionRef = computed<SelectBaseOption | null>(() => {
       const { value: mergedValue } = mergedValueRef
       if (!props.multiple && !Array.isArray(mergedValue)) {
-        const { value: valOptMap } = valOptMapRef
-        const { value: wrappedFallbackOption } = wrappedFallbackOptionRef
         if (mergedValue === null) return null
-        let selectedOption = null
-        if (valOptMap.has(mergedValue as any)) {
-          selectedOption = valOptMap.get(mergedValue)
-        } else if (props.remote) {
-          selectedOption = memoValOptMapRef.value.get(mergedValue)
-        }
-        return (
-          selectedOption ||
-          // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-          (wrappedFallbackOption && wrappedFallbackOption(mergedValue)) ||
-          null
-        )
+        const selectedOption = getMergedOption(mergedValue)
+        return selectedOption || null
       }
       return null
     })
@@ -316,7 +308,7 @@ export default defineComponent({
     const { mergedSizeRef, mergedDisabledRef } = formItem
     function doUpdateValue (
       value: string | number | Array<string | number> | null,
-      params:
+      meta:
       | { option: SelectBaseOption | null }
       | Array<{
         option: SelectBaseOption
@@ -328,9 +320,11 @@ export default defineComponent({
         onUpdateValue
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      if (onChange) call(onChange as OnUpdateValueImpl, value, params)
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, params)
-      if (_onUpdateValue) { call(_onUpdateValue as OnUpdateValueImpl, value, params) }
+      if (onChange) call(onChange as OnUpdateValueImpl, value, meta)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, meta)
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, meta)
+      }
       uncontrolledValueRef.value = value
       nTriggerFormChange()
       nTriggerFormInput()
@@ -493,15 +487,17 @@ export default defineComponent({
           patternRef.value = ''
         }
         focusSelectionInput()
-        const params = props.options
-          .filter((i) => changedValue.includes(i.value as string | number))
-          .map((i) => {
-            return { option: i }
-          })
-        doUpdateValue(
-          changedValue,
-          params as Array<{ option: SelectBaseOption }>
-        )
+        const options: SelectBaseOption[] = []
+        changedValue.forEach((value) => {
+          const option = getMergedOption(value)
+          if (option) {
+            options.push(option)
+          }
+        })
+        const meta = options.map((option) => {
+          return { option: option }
+        })
+        doUpdateValue(changedValue, meta)
       } else {
         if (tag && !remote) {
           const createdOptionIndex = getCreatedOptionIndex(option.value)
