@@ -351,14 +351,14 @@ export default defineComponent({
     }
     function doUpdateValue (
       value: string | number | Array<string | number> | null,
-      params:
+      meta:
       | { option: TreeSelectOption | null }
       | Array<{ option: TreeSelectOption }>
     ): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, params)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, meta)
       if (_onUpdateValue) {
-        call(_onUpdateValue as OnUpdateValueImpl, value, params)
+        call(_onUpdateValue as OnUpdateValueImpl, value, meta)
       }
       uncontrolledValueRef.value = value
       nTriggerFormInput()
@@ -418,23 +418,29 @@ export default defineComponent({
         }
       }
     }
+    function getOptionsAndMergeKeysOfKeys (keys: Key[]): {
+      options: Array<{ option: TreeSelectOption }>
+      mergeKeys: Key[]
+    } {
+      const { value: treeMate } = dataTreeMateRef
+      const options = keys
+        .map((i) => {
+          return { option: treeMate.getNode(i)?.rawNode || null }
+        })
+        .filter((i) => i.option) as Array<{ option: TreeSelectOption }>
+      const mergeKeys = options.map((item) => item.option.key)
+      return { options, mergeKeys }
+    }
     function handleUpdateSelectedKeys (keys: Key[]): void {
       if (props.checkable && props.multiple) {
         return
       }
-      const { value: treeMate } = dataTreeMateRef
+      const { options, mergeKeys } = getOptionsAndMergeKeysOfKeys(keys)
       if (props.multiple) {
-        doUpdateValue(
-          keys,
-          [...keys]
-            .map((i) => {
-              return { option: treeMate.getNode(i)?.rawNode || null }
-            })
-            .filter((i) => i.option) as Array<{ option: TreeSelectOption }>
-        )
+        doUpdateValue(mergeKeys, options)
       } else {
-        doUpdateValue(keys[0] ?? null, {
-          option: treeMate.getNode(keys[0])?.rawNode || null
+        doUpdateValue(mergeKeys[0] ?? null, {
+          option: options[0].option || null
         })
         closeMenu()
         if (!props.filterable) {
@@ -451,15 +457,8 @@ export default defineComponent({
     function handleUpdateCheckedKeys (keys: Key[]): void {
       // only in checkable & multiple mode, we use tree's check update
       if (props.checkable && props.multiple) {
-        const { value: treeMate } = dataTreeMateRef
-        doUpdateValue(
-          keys,
-          [...keys]
-            .map((i) => {
-              return { option: treeMate.getNode(i)?.rawNode || null }
-            })
-            .filter((i) => i.option) as Array<{ option: TreeSelectOption }>
-        )
+        const { options, mergeKeys } = getOptionsAndMergeKeysOfKeys(keys)
+        doUpdateValue(mergeKeys, options)
         if (props.filterable) {
           focusSelectionInput()
           patternRef.value = ''
@@ -514,7 +513,6 @@ export default defineComponent({
       if (Array.isArray(mergedValue)) {
         const index = mergedValue.findIndex((key) => key === option.value)
         if (~index) {
-          const { value: treeMate } = dataTreeMateRef
           if (props.checkable) {
             const { checkedKeys } = dataTreeMateRef.value.uncheck(
               option.value,
@@ -523,25 +521,15 @@ export default defineComponent({
                 cascade: mergedCascadeRef.value
               }
             )
-            doUpdateValue(
-              checkedKeys,
-              [...checkedKeys]
-                .map((i) => {
-                  return { option: treeMate.getNode(i)?.rawNode || null }
-                })
-                .filter((i) => i.option) as Array<{ option: TreeSelectOption }>
-            )
+            const { options, mergeKeys } =
+              getOptionsAndMergeKeysOfKeys(checkedKeys)
+            doUpdateValue(mergeKeys, options)
           } else {
             const nextValue = Array.from(mergedValue)
             nextValue.splice(index, 1)
-            doUpdateValue(
-              nextValue,
-              [...nextValue]
-                .map((i) => {
-                  return { option: treeMate.getNode(i)?.rawNode || null }
-                })
-                .filter((i) => i.option) as Array<{ option: TreeSelectOption }>
-            )
+            const { options, mergeKeys } =
+              getOptionsAndMergeKeysOfKeys(nextValue)
+            doUpdateValue(mergeKeys, options)
           }
         }
       }
