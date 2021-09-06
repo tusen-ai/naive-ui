@@ -11,15 +11,17 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: [50, 70],
+      value: ref([50, 70]),
       marks: {
         34: '太棒了',
         75: '不错'
       }
     }
   }
-}
+})
 ```
