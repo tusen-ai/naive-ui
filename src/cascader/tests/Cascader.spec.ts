@@ -114,7 +114,7 @@ describe('n-cascader', () => {
               }
             ]
           }
-        ] as any,
+        ],
         'label-field': 'whateverLabel',
         'value-field': 'whateverValue',
         'children-field': 'whateverChildren',
