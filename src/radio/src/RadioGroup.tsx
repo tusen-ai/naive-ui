@@ -20,7 +20,7 @@ import type { RadioTheme } from '../styles'
 import type { RadioProps } from './use-radio'
 import { radioGroupInjectionKey } from './use-radio'
 import style from './styles/radio-group.cssr'
-import { OnUpdateValue } from './interface'
+import { OnUpdateValue, OnUpdateValueImpl } from './interface'
 
 function mapSlot (
   defaultSlot: VNode[],
@@ -109,12 +109,8 @@ const radioGroupProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<OnUpdateValue>
-  >,
-  onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<OnUpdateValue>
-  >
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
 export type RadioGroupProps = ExtractPublicPropTypes<typeof radioGroupProps>
@@ -150,10 +146,10 @@ export default defineComponent({
     function doUpdateValue (value: string | number): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
       if (onUpdateValue) {
-        call(onUpdateValue, value)
+        call(onUpdateValue as OnUpdateValueImpl, value)
       }
       if (_onUpdateValue) {
-        call(_onUpdateValue, value)
+        call(_onUpdateValue as OnUpdateValueImpl, value)
       }
       uncontrolledValueRef.value = value
       nTriggerFormChange()
