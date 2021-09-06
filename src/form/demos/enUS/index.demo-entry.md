@@ -34,7 +34,7 @@ show-label
 | show-feedback | `boolean` | `true` | Whether to show the feedback area. |
 | show-label | `boolean` | `true` | Whether to show the label. |
 | show-require-mark | `boolean` | `-` | Whether to show a required symbol when a form item is required. |
-| require-mark-placement | `'left' \| 'right'` | `'right'` | Require Mark placement |
+| require-mark-placement | `'left' \| 'right'` | `'right'` | Require mark placement |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 
 #### FormItemRule Type
@@ -66,7 +66,7 @@ show-label
 | show-feedback | `boolean` | `true` | Whether to show the feedback area. |
 | show-label | `boolean` | `true` | Whether to show a label. If not set, it will inherit `show-label` from the parent form. |
 | show-require-mark | `boolean` | `-` | Whether to show required symbol. If not set, it will use `show-require-mark` from the parent form. |
-| require-mark-placement | `'left' \| 'right'` | `'right'` | Require Mark placement. If not set, it will use `require-mark-placement` from the parent form. |
+| require-mark-placement | `'left' \| 'right'` | `'right'` | Require mark placement. If not set, it will use `require-mark-placement` from the parent form. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | The validation status of the form item. If set, it will replace the result of the rule-based validation. |
 

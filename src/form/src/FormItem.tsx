@@ -61,7 +61,7 @@ export const formItemProps = {
   rulePath: String,
   required: Boolean,
   showRequireMark: {
-    type: Boolean,
+    type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
   requireMarkPlacement: String as PropType<'left' | 'right'>,
