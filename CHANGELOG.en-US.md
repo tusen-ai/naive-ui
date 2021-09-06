@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Breaking Changes
+
+- `n-form` split `show-require-mark` and `require-mark-placement`, closes [#1055](https://github.com/TuSimple/naive-ui/issues/1055).
+
 ## 2.17.2 (2021-09-06)
 
 ### Fixes
