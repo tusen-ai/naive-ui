@@ -126,22 +126,4 @@ describe('n-cascader', () => {
       "Rubber Soul / Everybody's Got Something to Hide Except Me and My Monkey"
     )
   })
-
-  // it('should work with `leaf-only` prop', async () => {
-  //   const wrapper = mount(NCascader, {
-  //     attachTo: document.body,
-  //     props: { options: getOptions(), virtualScroll: false }
-  //   })
-  //   await wrapper.setProps({ show: true })
-  //   await nextTick()
-  //   console.log(
-  //     document.querySelector('.n-cascader-submenu-wrapper')?.innerHTML
-  //   )
-
-  //   expect(document.querySelector('.n-checkbox')).not.toEqual(null)
-
-  //   await wrapper.setProps({ leafOnly: true })
-
-  //   expect(document.querySelector('.n-checkbox')).toEqual(null)
-  // })
 })
