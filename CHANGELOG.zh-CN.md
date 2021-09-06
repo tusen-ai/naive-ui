@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.17.2 (2021-09-06)
+
+### Fixes
+
+- 修复 `n-tree-select` 显示路径是展示 key 而不是 label，关闭 [#1095](https://github.com/TuSimple/naive-ui/issues/1095)
+
 ## 2.17.1 (2021-09-06)
 
 ### Fixes
