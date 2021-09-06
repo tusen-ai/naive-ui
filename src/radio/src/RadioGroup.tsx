@@ -20,6 +20,7 @@ import type { RadioTheme } from '../styles'
 import type { RadioProps } from './use-radio'
 import { radioGroupInjectionKey } from './use-radio'
 import style from './styles/radio-group.cssr'
+import { OnUpdateValue } from './interface'
 
 function mapSlot (
   defaultSlot: VNode[],
@@ -109,10 +110,10 @@ const radioGroupProps = {
     default: undefined
   },
   'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<(value: string | number) => void>
+  MaybeArray<OnUpdateValue>
   >,
   onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<(value: string | number) => void>
+  MaybeArray<OnUpdateValue>
   >
 } as const
 
