@@ -23,7 +23,7 @@ custom-field
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | cascade | `boolean` | `true` | 在多选时是否关联选项 |
-| check-strategy | `string` | `'all'` | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点 |
+| check-strategy | `string` | `'all'` | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时，对于单选无效）；`child` 表示只显示子节点； |
 | children-field | `string` | `'children'` | 替代 `CascaderOption` 中的 children 字段名 |
 | clearable | `boolean` | `false` | 值是否可清除 |
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | 级联菜单默认选中的数据 |

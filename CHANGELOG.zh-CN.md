@@ -6,7 +6,7 @@
 
 - `n-form` & `n-form-item` 拆分 `show-require-mark` 为 `show-require-mark` 和 `require-mark-placement`
 
-### Features
+### Feats
 
 - `n-drawer` 新增 `on-mask-click` 属性
 - `n-form` 新增 `require-mark-placement` 属性，关闭 [#1055](https://github.com/TuSimple/naive-ui/issues/1055)
@@ -16,7 +16,7 @@
 
 - 修复 `n-step` 必须传 `internal-index`
 - 修复 `n-radio-group` 的 `on-update:value` 和 `on-update-value` 类型不能为数组
-
+- 修复 `n-cascader` `check-strategy="child"` 和原有 `leaf-only` 表现不一致
 
 ## 2.17.2 (2021-09-06)
 
@@ -1015,7 +1015,7 @@
 - 修正了嵌套 `n-icon` 没有被打平的问题
 - 修正了 `n-date-picker` 在类型为 `date` 和 `datetime` 时面板不显示年的问题
 
-### Features
+### Feats
 
 - `n-button` 增加 `dashed` 属性
 - 增加 `n-space` 组件
@@ -1061,7 +1061,7 @@
 
 ## 1.5.1 (2020-07-20)
 
-### Features
+### Feats
 
 - 为 `n-time-picker` 增加了 `disabled` 属性
 
@@ -1081,7 +1081,7 @@
 
 ## 1.4.1 (2020-06-23)
 
-### Features
+### Feats
 
 - 为 `n-select` 增加了 `autofocus` 属性
 
@@ -1091,13 +1091,13 @@
 
 - `n-menu` 不再支持 slot API
 
-### Features
+### Feats
 
 - 增加了试验性的设定主色功能
 
 ## 1.3.5 (2020-06-06)
 
-### Features
+### Feats
 
 - 为 `n-button` 增加了 `attr-type` 属性
 
@@ -1114,7 +1114,7 @@
 
 ## 1.3.3 (2020-06-03)
 
-### Features
+### Feats
 
 - 增加了 `$NOs.theme` 来获取当前操作系统的主题
 
@@ -1133,7 +1133,7 @@
 - 修正了 `n-data-table` 表头没 border-color transition 的问题
 - 修正了 `$NConfirm` 的 `show-icon` & `closable` & `bordered` 属性设置无效的问题
 
-### Features
+### Feats
 
 - 增加并调整了一些 `n-config-consumer` 样式方案中的颜色
 
@@ -1143,7 +1143,7 @@
 
 - UI 默认样式不再包含外部字体文件，如果需要使用 UI 提供的字体需要明确引入
 
-### Features
+### Feats
 
 - 为 `n-layout` 增加了 `themed-style` 属性
 
@@ -1166,13 +1166,13 @@
 
 ## 1.2.0 (2020-05-29)
 
-### Features
+### Feats
 
 - 为 `n-form-item` 增加了 `feedback` 和 `validation-status` 属性
 
 ## 1.1.5 (2020-05-28)
 
-### Features
+### Feats
 
 - 为 `n-collapse` 和 `n-collapse-item` 增加了 `display-directive` 属性
 - 为 `n-select` 的 `option` 增加了 `class` 和 `style` 属性
@@ -1204,7 +1204,7 @@
 
 ## 1.1.2 (2020-05-19)
 
-### Features
+### Feats
 
 - 为 `n-step` 增加内容的 slot
 - 为 `n-checkbox` 增加了 `label` prop
@@ -1235,7 +1235,7 @@
 
 ## 1.1.0 (2020-05-16)
 
-### Features
+### Feats
 
 - `n-button` 接受自定义颜色
 
@@ -1266,7 +1266,7 @@
 
 ## 1.0.11 (2020-04-30)
 
-### Features
+### Feats
 
 - 为 `n-select` 增加了 `fallback-option` 属性用于控制无对应选项时的回退选项
 
@@ -1281,7 +1281,7 @@
 
 ## 1.0.10 (2020-04-28)
 
-### Features
+### Feats
 
 - 为 `n-collapse` 增加了 `arrow-placement` 属性
 - 为 `n-collapse-item` 增加了`arrow` slot
@@ -1292,7 +1292,7 @@
 
 ## 1.0.9 (2020-04-23)
 
-### Features
+### Feats
 
 - 为 `n-input` 增加了 `autofocus` 选项
 - 为 `NMessage` 增加了 `closable` 选项
@@ -1305,14 +1305,14 @@
 
 ## 1.0.8 (2020-04-22)
 
-### Features
+### Feats
 
 - 增加 `n-dynamic-tags` 组件
 - `styleScheme` 新增暴露颜色 `tableHeaderOverlayBackgroundColor` & `inputOverlayBackgroundColor`
 
 ## 1.0.7 (2020-04-10)
 
-### Features
+### Feats
 
 - 为 `n-data-table` 的 `column` 增加了 `filter-option-value` 的属性来应对单选的情况
 
@@ -1328,7 +1328,7 @@
 
 ## 1.0.5 (2020-03-27)
 
-### Features
+### Feats
 
 - 改变 `n-data-table` 的 filters 的数据类型从数组改变成对象
 
@@ -1338,13 +1338,13 @@
 
 ## 1.0.4 (2020-03-26)
 
-### Features
+### Feats
 
 - 当选项过多时，`n-data-table` 过滤菜单的内容可以滚动
 
 ## 1.0.3 (2020-03-25)
 
-### Features
+### Feats
 
 - `$NMessage`, `$NNotification`, `$NConfirm` 的获取到的主题会应用到他们的内部组件
 
@@ -1363,7 +1363,7 @@
 
 ## 1.0.1 (2020-03-21)
 
-### Features
+### Feats
 
 - `n-layout-sider` 的 `show-trigger` 增加了 `'bar'` & `'arrow-circle'` 选项
 
@@ -1371,6 +1371,6 @@
 
 - `n-scrollbar` 的轨道会挡住鼠标事件
 
-### Features
+### Feats
 
 - `n-data-table` 增加了 empty 插槽 [#86](https://github.com/TuSimple/naive-ui/issues/86)

@@ -23,7 +23,7 @@ custom-field
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | cascade | `boolean` | `true` | Whether to cascade the checkbox selection onto children. |
-| check-strategy | `string` | `'all'` | The way to show checked options. `all` means showing all checked node. `parent` means showing all checked parent node when all child node are checked. `child` means showing all child node. |
+| check-strategy | `string` | `'all'` | The way to show checked options. `all` means showing all checked node. `parent` means showing all checked parent node when all child node are checked (not working in single select mode). `child` means showing all child node. |
 | children-field | `string` | `'children'` | The children field in `CascaderOption`. |
 | clearable | `boolean` | `false` | Whether the cascader is clearable. |
 | default-value | `string \| number \| Array<number \| string> \| null` | `null` | Data selected by default if no value is set. |

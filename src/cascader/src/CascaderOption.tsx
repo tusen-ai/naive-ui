@@ -26,7 +26,7 @@ export default defineComponent({
       keyboardKeyRef,
       loadingKeySetRef,
       cascadeRef,
-      leafOnlyRef,
+      mergedCheckStrategyRef,
       onLoadRef,
       mergedClsPrefixRef,
       mergedThemeRef,
@@ -83,7 +83,7 @@ export default defineComponent({
     })
     const showCheckboxRef = computed(() => {
       if (multipleRef.value && cascadeRef.value) return true
-      if (!leafOnlyRef.value) return true
+      if (mergedCheckStrategyRef.value !== 'child') return true
     })
     const isLeafRef = computed(() => props.tmNode.isLeaf)
     const disabledRef = computed(() => props.tmNode.disabled)
@@ -148,7 +148,7 @@ export default defineComponent({
       }
     }
     return {
-      leafOnly: leafOnlyRef,
+      checkStrategy: mergedCheckStrategyRef,
       multiple: multipleRef,
       cascade: cascadeRef,
       checked: checkedRef,
@@ -227,7 +227,8 @@ export default defineComponent({
                   )
                 }}
               </NBaseLoading>
-            ) : this.leafOnly && !(this.multiple && this.cascade) ? (
+            ) : this.checkStrategy === 'child' &&
+              !(this.multiple && this.cascade) ? (
               <Transition name="fade-in-scale-up-transition">
                 {{
                   default: () =>
@@ -241,7 +242,7 @@ export default defineComponent({
                     ) : null
                 }}
               </Transition>
-            ) : null}
+                ) : null}
           </div>
         </div>
       </div>

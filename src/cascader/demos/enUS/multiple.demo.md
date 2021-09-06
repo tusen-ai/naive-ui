@@ -3,7 +3,10 @@
 ```html
 <n-space vertical>
   <n-space>
-    <n-space><n-switch v-model:value="leafOnly" />Leaf Only</n-space>
+    <n-space
+      ><n-switch v-model:value="checkStrategyIsChild" />Child Check
+      Strategy</n-space
+    >
     <n-space><n-switch v-model:value="cascade" />Cascade</n-space>
     <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
     <n-space><n-switch v-model:value="hoverTrigger" />Hover Trigger</n-space>
@@ -22,7 +25,7 @@
     :expand-trigger="hoverTrigger ? 'hover' : 'click'"
     :options="options"
     :cascade="cascade"
-    :leaf-only="leafOnly"
+    :check-strategy="checkStrategyIsChild ? 'child' : 'all'"
     :show-path="showPath"
     :filterable="filterable"
   />
@@ -62,7 +65,7 @@ function getOptions (depth = 3, iterator = 1, prefix = '') {
 export default {
   data () {
     return {
-      leafOnly: true,
+      checkStrategyIsChild: true,
       cascade: true,
       showPath: true,
       hoverTrigger: false,
