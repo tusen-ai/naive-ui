@@ -88,6 +88,68 @@ describe('n-form', () => {
         true
       )
     })
+    it('show require mark placement left when set require-mark-placement is "left"', () => {
+      const wrapper = mount(() => (
+        <NForm showRequireMark={true} requireMarkPlacement={'left'}>
+          {{
+            default: () => {
+              return (
+                <NFormItem label="star kirby">
+                  {{
+                    default: () => <NInput />
+                  }}
+                </NFormItem>
+              )
+            }
+          }}
+        </NForm>
+      ))
+      const requireMark = wrapper.find('.n-form-item-label__asterisk')
+      const nextSibling = requireMark.element.nextSibling as Text
+      expect(nextSibling.wholeText).toEqual('star kirby')
+    })
+
+    it('show require mark placement left when set require-mark-placement is "right"', () => {
+      const wrapper = mount(() => (
+        <NForm showRequireMark={true} requireMarkPlacement={'right'}>
+          {{
+            default: () => {
+              return (
+                <NFormItem label="star kirby">
+                  {{
+                    default: () => <NInput />
+                  }}
+                </NFormItem>
+              )
+            }
+          }}
+        </NForm>
+      ))
+      const requireMark = wrapper.find('.n-form-item-label__asterisk')
+      const previousSibling = requireMark.element.previousSibling as Text
+      expect(previousSibling.wholeText).toEqual('star kirby')
+    })
+
+    it('show require mark placement left when set require-mark-placement is "right" in form-item', () => {
+      const wrapper = mount(() => (
+        <NForm showRequireMark={true} requireMarkPlacement={'left'}>
+          {{
+            default: () => {
+              return (
+                <NFormItem label="star kirby" requireMarkPlacement={'right'}>
+                  {{
+                    default: () => <NInput />
+                  }}
+                </NFormItem>
+              )
+            }
+          }}
+        </NForm>
+      ))
+      const requireMark = wrapper.find('.n-form-item-label__asterisk')
+      const previousSibling = requireMark.element.previousSibling as Text
+      expect(previousSibling.wholeText).toEqual('star kirby')
+    })
   })
 
   it('should work with `show-label` prop', async () => {

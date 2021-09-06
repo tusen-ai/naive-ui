@@ -2,9 +2,26 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-form` & `n-form-item` split `show-require-mark` into `show-require-mark` and `require-mark-placement`.
+
+### Features
+
+- `n-drawer` add `on-mask-click` prop.
+- `n-for` add `require-mark-placement` prop, closes [#1055](https://github.com/TuSimple/naive-ui/issues/1055).
+- `n-form-item` add `require-mark-placement` prop, closes [#1055](https://github.com/TuSimple/naive-ui/issues/1055).
+
 ### Fixes
 
-- Fix `n-radio-group`'s `onUpdateValue` type not correct.
+- Fix `n-step` must be passed with `internal-index`.
+- Fix `n-radio-group`'s `on-update:value` and `on-update-value` can't be array.
+
+## 2.17.2 (2021-09-06)
+
+### Fixes
+
+- Fix `n-tree-select` shows key not label when `show-path=true`, closes [#1095](https://github.com/TuSimple/naive-ui/issues/1095).
 
 ## 2.17.1 (2021-09-06)
 
@@ -30,7 +47,6 @@
 - Fix `n-input-number`'s `step` calculate error when the value is decimal, closes [#1007](https://github.com/TuSimple/naive-ui/issues/1007).
 - Fix `n-popselect`' s default placement and padding.
 - Fix `n-calendar`'s text color of disabled date.
-- Fix `n-tree-select` show-path prop fixed, closes [#1095](https://github.com/TuSimple/naive-ui/issues/1095).
 
 ### Feats
 

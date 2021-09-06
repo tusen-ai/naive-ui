@@ -14,7 +14,7 @@ import { useMergedState } from 'vooks'
 import { useTheme, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { getSlot, warn, createKey, call, flatten } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { radioLight } from '../styles'
 import type { RadioTheme } from '../styles'
 import type { RadioProps } from './use-radio'
@@ -99,38 +99,22 @@ function mapSlot (
 const radioGroupProps = {
   ...(useTheme.props as ThemeProps<RadioTheme>),
   name: String,
-  value: {
-    type: [String, Number] as PropType<string | number | undefined | null>
-  },
+  value: [String, Number] as PropType<string | number | null>,
   defaultValue: {
     type: [String, Number] as PropType<string | number | null>,
     default: null
   },
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large' | undefined>,
-    default: undefined
-  },
+  size: String as PropType<'small' | 'medium' | 'large'>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  // eslint-disable-next-line vue/prop-name-casing
-  'onUpdate:value': Function as PropType<OnUpdateValue>,
-  onUpdateValue: Function as PropType<OnUpdateValue>,
-  // deprecated
-  onChange: {
-    type: Function as unknown as PropType<OnUpdateValue | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'radio-group',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  'onUpdate:value': [Function, Array] as PropType<
+  MaybeArray<OnUpdateValue>
+  >,
+  onUpdateValue: [Function, Array] as PropType<
+  MaybeArray<OnUpdateValue>
+  >
 } as const
 
 export type RadioGroupProps = ExtractPublicPropTypes<typeof radioGroupProps>
@@ -163,15 +147,8 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
-    function doUpdateValue (value: string & number): void {
-      const {
-        onChange,
-        onUpdateValue,
-        'onUpdate:value': _onUpdateValue
-      } = props
-      if (onChange) {
-        onChange(value)
-      }
+    function doUpdateValue (value: string | number): void {
+      const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
       if (onUpdateValue) {
         call(onUpdateValue, value)
       }
