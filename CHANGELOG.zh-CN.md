@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-step` 必须传 `internal-index`
+- 修复 `n-radio-group` 的 `on-update:value` 和 `on-update-value` 类型不能为数组
 
 ## 2.17.2 (2021-09-06)
 

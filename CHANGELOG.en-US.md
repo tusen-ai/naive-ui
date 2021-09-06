@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-step` must be passed with `internal-index`.
+- Fix `n-radio-group`'s `on-update:value` and `on-update-value` can't be array.
 
 ## 2.17.2 (2021-09-06)
 
