@@ -12,11 +12,13 @@ Pass a number as step or use an array to specify the items you want to show, inp
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      time: 1183135260000
+      time: ref(1183135260000)
     }
   }
-}
+})
 ```
