@@ -33,7 +33,7 @@ import { getPathLabel } from './utils'
 import CascaderMenu from './CascaderMenu'
 import CascaderSelectMenu from './CascaderSelectMenu'
 import {
-  BaseOption,
+  CascaderOption,
   cascaderInjectionKey,
   CascaderMenuInstance,
   ExpandTrigger,
@@ -55,7 +55,7 @@ const cascaderProps = {
     default: undefined
   },
   options: {
-    type: Array as PropType<BaseOption[]>,
+    type: Array as PropType<CascaderOption[]>,
     default: () => []
   },
   value: [String, Number, Array] as PropType<Value | null>,
@@ -169,6 +169,9 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+    const mergedCheckStrategyRef = computed(() => {
+      return props.leafOnly ? 'child' : props.checkStrategy
+    })
     const patternRef = ref('')
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef } = formItem
@@ -271,7 +274,7 @@ export default defineComponent({
       hoverKeyRef.value = key
     }
     function doCheck (key: Key): boolean {
-      const { cascade, multiple, leafOnly, filterable } = props
+      const { cascade, multiple, filterable } = props
       if (multiple) {
         try {
           const { checkedKeys } = treeMateRef.value.check(
@@ -279,7 +282,7 @@ export default defineComponent({
             mergedKeysRef.value.checkedKeys,
             {
               cascade,
-              checkStrategy: leafOnly ? 'child' : props.checkStrategy
+              checkStrategy: mergedCheckStrategyRef.value
             }
           )
           doUpdateValue(checkedKeys)
@@ -299,7 +302,7 @@ export default defineComponent({
           }
         }
       } else {
-        if (leafOnly) {
+        if (mergedCheckStrategyRef.value === 'child') {
           const node = treeMateRef.value.getNode(key)
           if (node?.isLeaf) {
             doUpdateValue(key)
@@ -313,14 +316,14 @@ export default defineComponent({
       return true
     }
     function doUncheck (key: Key): void {
-      const { cascade, multiple, leafOnly } = props
+      const { cascade, multiple } = props
       if (multiple) {
         const { checkedKeys } = treeMateRef.value.uncheck(
           key,
           mergedKeysRef.value.checkedKeys,
           {
             cascade,
-            checkStrategy: leafOnly ? 'child' : props.checkStrategy
+            checkStrategy: mergedCheckStrategyRef.value
           }
         )
         doUpdateValue(checkedKeys)
@@ -328,18 +331,11 @@ export default defineComponent({
     }
     const selectedOptionsRef = computed(() => {
       if (props.multiple) {
-        const {
-          showPath,
-          separator,
-          labelField,
-          cascade,
-          leafOnly,
-          checkStrategy
-        } = props
+        const { showPath, separator, labelField, cascade } = props
         const { getCheckedKeys, getNode } = treeMateRef.value
         const value = getCheckedKeys(checkedKeysRef.value, {
           cascade,
-          checkStrategy: leafOnly ? 'child' : checkStrategy
+          checkStrategy: mergedCheckStrategyRef.value
         }).checkedKeys
         return value.map((key) => {
           const node = getNode(key)
@@ -695,7 +691,7 @@ export default defineComponent({
       checkedKeysRef,
       indeterminateKeysRef,
       hoverKeyPathRef,
-      leafOnlyRef: toRef(props, 'leafOnly'),
+      mergedCheckStrategyRef,
       cascadeRef: toRef(props, 'cascade'),
       multipleRef: toRef(props, 'multiple'),
       keyboardKeyRef,

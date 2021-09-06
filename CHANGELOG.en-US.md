@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 2.18.0 (2021-09-07)
+
+### Breaking Changes
+
+- `n-form` & `n-form-item` split `show-require-mark` into `show-require-mark` and `require-mark-placement`.
+
+### Feats
+
+- `n-drawer` add `on-mask-click` prop.
+- `n-for` add `require-mark-placement` prop, closes [#1055](https://github.com/TuSimple/naive-ui/issues/1055).
+- `n-form-item` add `require-mark-placement` prop, closes [#1055](https://github.com/TuSimple/naive-ui/issues/1055).
+
+### Fixes
+
+- Fix `n-step` must be passed with `internal-index`.
+- Fix `n-radio-group`'s `on-update:value` and `on-update-value` can't be array.
+- Fix `n-cascader` `check-strategy="child"` doesn't behaves the same as previous `leaf-only`.
+
 ## 2.17.2 (2021-09-06)
 
 ### Fixes
@@ -996,7 +1014,7 @@ See vue3.md
 - Fix the problem that nested `n-icon` is not flattened.
 - Fix the problem that `n-date-picker` has no year in panel when type is `date` and `datetime`.
 
-### Features
+### Feats
 
 - `n-button` add `dashed` props
 - Add `n-space` component.
@@ -1042,7 +1060,7 @@ See vue3.md
 
 ## 1.5.1 (2020-07-20)
 
-### Features
+### Feats
 
 - Add `disabled` for `n-time-picker`.
 
@@ -1062,7 +1080,7 @@ See vue3.md
 
 ## 1.4.1 (2020-06-23)
 
-### Features
+### Feats
 
 - Add `autofocus` for `n-select`.
 
@@ -1072,13 +1090,13 @@ See vue3.md
 
 - `n-menu` doesn't support slot API anymore.
 
-### Features
+### Feats
 
 - Add experimental setting primary color feature.
 
 ## 1.3.5 (2020-06-06)
 
-### Features
+### Feats
 
 - Add `attr-type` for `n-button`
 
@@ -1095,7 +1113,7 @@ See vue3.md
 
 ## 1.3.3 (2020-06-03)
 
-### Features
+### Feats
 
 - Add `$NOs.theme` to get the current theme of the OS.
 
@@ -1114,7 +1132,7 @@ See vue3.md
 - Fix the problem that header of `n-data-table` has no border-color transition.
 - Fix the problem that `show-icon` & `closable` & `bordered` props of `$NConfirm` don't work.
 
-### Features
+### Feats
 
 - Add and adjust some colors in the style scheme of `n-config-consumer`.
 
@@ -1124,7 +1142,7 @@ See vue3.md
 
 - Default UI CSS bundle won't include external font files. If you need using it you should import it explicitly.
 
-### Features
+### Feats
 
 - Add `themed-style` prop on `n-layout`.
 
@@ -1147,13 +1165,13 @@ See vue3.md
 
 ## 1.2.0 (2020-05-29)
 
-### Features
+### Feats
 
 - Add `feedback` and `validation-status` props for `n-form-item`.
 
 ## 1.1.5 (2020-05-28)
 
-### Features
+### Feats
 
 - Add `display-directive` prop for `n-collapse` and `n-collapse-item`.
 - Add `class` and `style` prop for `n-select`'s `option`.
@@ -1185,7 +1203,7 @@ See vue3.md
 
 ## 1.1.2 (2020-05-19)
 
-### Features
+### Feats
 
 - Add content slot for `n-step`.
 - Add `label` prop for `n-checkbox`.
@@ -1216,7 +1234,7 @@ See vue3.md
 
 ## 1.1.0 (2020-05-16)
 
-### Features
+### Feats
 
 - `n-button` now accepts custom color.
 
@@ -1247,7 +1265,7 @@ See vue3.md
 
 ## 1.0.11 (2020-04-30)
 
-### Features
+### Feats
 
 - Add `fallback-option` prop for `n-select` to deal with the value with no corresponding option.
 
@@ -1262,7 +1280,7 @@ See vue3.md
 
 ## 1.0.10 (2020-04-28)
 
-### Features
+### Feats
 
 - Add `arrow-placement` prop on `n-collapse`.
 - Add `arrow` slot on `n-collapse-item`.
@@ -1273,7 +1291,7 @@ See vue3.md
 
 ## 1.0.9 (2020-04-23)
 
-### Features
+### Feats
 
 - Add `autofocus` prop on `n-input`.
 - Add `closable` option on `NMessage`.
@@ -1286,14 +1304,14 @@ See vue3.md
 
 ## 1.0.8 (2020-04-22)
 
-### Features
+### Feats
 
 - Add `n-dynamic-tags`.
 - Add `tableHeaderOverlayBackgroundColor` & `inputOverlayBackgroundColor` to `styleScheme`
 
 ## 1.0.7 (2020-04-10)
 
-### Features
+### Feats
 
 - Add `filter-option-value` prop for `n-data-table`'s `column` to better deal with single filter mode.
 
@@ -1309,7 +1327,7 @@ See vue3.md
 
 ## 1.0.5 (2020-03-27)
 
-### Features
+### Feats
 
 - Change the data type of `n-data-table`'s filters from Array to Object.
 
@@ -1319,13 +1337,13 @@ See vue3.md
 
 ## 1.0.4 (2020-03-26)
 
-### Features
+### Feats
 
 - Filter menu in `n-data-table` is scrollable when there are too many items.
 
 ## 1.0.3 (2020-03-25)
 
-### Features
+### Feats
 
 - `$NMessage`, `$NNotification`, `$NConfirm`'s theme will be applied on their children components.
 
@@ -1344,7 +1362,7 @@ See vue3.md
 
 ## 1.0.1 (2020-03-21)
 
-### Features
+### Feats
 
 - Add `'bar'` & `'arrow-circle'` on `show-trigger` prop of `n-layout-sider`.
 
@@ -1352,6 +1370,6 @@ See vue3.md
 
 - Rails of `n-scrollbar` shadow mouse event.
 
-### Features
+### Feats
 
 - `n-date-table` add `empty` slot. [#86](https://github.com/TuSimple/naive-ui/issues/86)

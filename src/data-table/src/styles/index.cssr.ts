@@ -365,7 +365,7 @@ export default c([
       transition: background-color .3s var(--bezier);
       border-collapse: separate;
       border-spacing: 0;
-      background-color: var(--merged-td-color)
+      background-color: var(--merged-td-color);
     `),
     cB('data-table-base-table-header', `
       border-top-left-radius: calc(var(--border-radius) - 1px);

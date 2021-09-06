@@ -1,4 +1,4 @@
-import { TreeNode } from 'treemate'
+import { CheckStrategy, TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
@@ -9,27 +9,25 @@ export type Value = ValueAtom | ValueAtom[]
 
 export type Key = ValueAtom
 
-export type CascaderOption = BaseOption
-
-export interface BaseOption {
+export interface CascaderOption {
   label?: string
   value?: ValueAtom
   disabled?: boolean
-  children?: BaseOption[]
+  children?: CascaderOption[]
   [key: string]: unknown
 }
 
 export type ExpandTrigger = 'hover' | 'click'
 
-export type TmNode = TreeNode<BaseOption>
+export type TmNode = TreeNode<CascaderOption>
 
 export type Filter = (
   pattern: string,
-  option: BaseOption,
-  path: BaseOption[]
+  option: CascaderOption,
+  path: CascaderOption[]
 ) => boolean
 
-export type OnLoad = (option: BaseOption) => Promise<void>
+export type OnLoad = (option: CascaderOption) => Promise<void>
 
 export type OnUpdateValue = <
   T extends string &
@@ -57,7 +55,7 @@ export interface CascaderInjection {
   checkedKeysRef: Ref<Key[]>
   indeterminateKeysRef: Ref<Key[]>
   hoverKeyPathRef: Ref<Key[]>
-  leafOnlyRef: Ref<boolean>
+  mergedCheckStrategyRef: Ref<CheckStrategy>
   multipleRef: Ref<boolean>
   keyboardKeyRef: Ref<Key | null>
   hoverKeyRef: Ref<Key | null>
@@ -66,7 +64,7 @@ export interface CascaderInjection {
   expandTriggerRef: Ref<ExpandTrigger>
   isMountedRef: Ref<boolean>
   cascadeRef: Ref<boolean>
-  onLoadRef: Ref<((value: BaseOption) => Promise<void>) | undefined>
+  onLoadRef: Ref<((value: CascaderOption) => Promise<void>) | undefined>
   localeRef: Ref<NLocale['Cascader']>
   virtualScrollRef: Ref<boolean>
   optionHeightRef: Ref<string>

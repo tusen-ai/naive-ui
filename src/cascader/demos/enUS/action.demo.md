@@ -7,7 +7,6 @@ Is there anybody who needs an action slot on a cascader menu?
   v-model:value="value"
   placeholder="Meaningless values"
   :options="options"
-  :leaf-only="false"
 >
   <template #action>Standing on a bridge that can divide the world</template>
 </n-cascader>

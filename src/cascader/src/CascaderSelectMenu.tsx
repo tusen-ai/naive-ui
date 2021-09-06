@@ -24,7 +24,7 @@ import {
   TmNode,
   Value,
   Filter,
-  BaseOption,
+  CascaderOption,
   SelectMenuInstance,
   cascaderInjectionKey
 } from './interface'
@@ -49,17 +49,17 @@ export default defineComponent({
     },
     filter: {
       type: Function as PropType<Filter>,
-      default: (pattern: string, _: BaseOption, path: BaseOption[]) =>
+      default: (pattern: string, _: CascaderOption, path: CascaderOption[]) =>
         path.some((option) => option.label && ~option.label.indexOf(pattern))
     }
   },
   setup (props) {
     const {
       isMountedRef,
-      leafOnlyRef,
       mergedValueRef,
       mergedClsPrefixRef,
       mergedThemeRef,
+      mergedCheckStrategyRef,
       syncSelectMenuPosition,
       closeMenu,
       handleSelectMenuClickOutside,
@@ -69,7 +69,10 @@ export default defineComponent({
     } = inject(cascaderInjectionKey)!
     const menuInstRef = ref<InternalSelectMenuRef | null>(null)
     const selectOptionsRef = computed(() => {
-      return createSelectOptions(props.tmNodes, leafOnlyRef.value)
+      return createSelectOptions(
+        props.tmNodes,
+        mergedCheckStrategyRef.value === 'child'
+      )
     })
     const filteredSelectOptionsRef = computed(() => {
       const { filter, pattern } = props
