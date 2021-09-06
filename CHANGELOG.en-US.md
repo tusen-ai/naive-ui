@@ -4,7 +4,18 @@
 
 ### Breaking Changes
 
-- `n-form` split `show-require-mark` and `require-mark-placement`, closes [#1055](https://github.com/TuSimple/naive-ui/issues/1055).
+- `n-form` & `n-form-item` split `show-require-mark` into `show-require-mark` and `require-mark-placement`.
+
+### Features
+
+- `n-drawer` add `on-mask-click` prop.
+- `n-for` add `require-mark-placement` prop, closes [#1055](https://github.com/TuSimple/naive-ui/issues/1055).
+- `n-form-item` add `require-mark-placement` prop, closes [#1055](https://github.com/TuSimple/naive-ui/issues/1055).
+
+### Fixes
+
+- Fix `n-step` must be passed with `internal-index`.
+- Fix `n-radio-group`'s `on-update:value` and `on-update-value` can't be array.
 
 ## 2.17.2 (2021-09-06)
 

@@ -27,7 +27,8 @@ slot
 | style | `string \| Object` | `undefined` | Style of the drawer. |
 | to | `string \| HTMLElement` | `'body'` | Container node of the drawer. |
 | width | `number \| string` | `251` | Works when placement is `left` and `right`. |
-| on-update:show | `(show: boolean) => void` | `undefined` | The callback triggered when the drawer display status changes. |
+| on-mask-click | `(e: MouseEvent) => void` | `undefined` | Callback triggered on mask clicked. |
+| on-update:show | `(show: boolean) => void` | `undefined` | Callback triggered on drawer display status would change. |
 
 ### DrawerContent Props
 

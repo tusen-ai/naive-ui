@@ -23,7 +23,7 @@ const stepProps = {
   // index will be filled by parent steps, not user
   internalIndex: {
     type: Number,
-    required: true
+    default: 0
   }
 } as const
 
