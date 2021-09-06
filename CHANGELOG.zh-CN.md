@@ -2,14 +2,21 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-form` & `n-form-item` 拆分 `show-require-mark` 为 `show-require-mark` 和 `require-mark-placement`
+
 ### Features
 
 - `n-drawer` 新增 `on-mask-click` 属性
+- `n-form` 新增 `require-mark-placement` 属性，关闭 [#1055](https://github.com/TuSimple/naive-ui/issues/1055)
+- `n-form-item` 新增 `require-mark-placement` 属性，关闭 [#1055](https://github.com/TuSimple/naive-ui/issues/1055)
 
 ### Fixes
 
 - 修复 `n-step` 必须传 `internal-index`
 - 修复 `n-radio-group` 的 `on-update:value` 和 `on-update-value` 类型不能为数组
+
 
 ## 2.17.2 (2021-09-06)
 
