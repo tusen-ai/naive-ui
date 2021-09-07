@@ -19,7 +19,7 @@ const Buttons = {
     }
   },
   render () {
-    const children = ['top', 'bottom', 'top-left', 'top-right', 'bottom-left', 'bottom-right'].map(placement =>
+    const children = ['top-left', 'top-right', 'bottom-left', 'bottom-right'].map(placement =>
       h(
         NButton,
         {
@@ -30,10 +30,10 @@ const Buttons = {
               description: 'From the Beach Boys',
               content: `I can be ${placement}`
             })
-          },
+          }
         },
         { default: () => placement }
-      ),
+      )
     )
     return [
       h(

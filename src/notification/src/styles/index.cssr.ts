@@ -58,42 +58,27 @@ export default c([
     cM('scrollable', {
       top: 0
     }),
-    cM('top', `
-      top: 12px;
-      left: 0;
-      right: 0;
-      align-items: center;
-    `),
     cM('top-left', `
       top: 12px;
       left: 12px;
-      right: 0;
       align-items: flex-start;
     `),
     cM('top-right', `
       top: 12px;
-      left: 0;
       right: 12px;
       align-items: flex-end;
-    `),
-    cM('bottom', `
-      bottom: 4px;
-      left: 0;
-      right: 0;
-      justify-content: flex-end;
-      align-items: center;
     `),
     cM('bottom-left', `
       bottom: 4px;
       left: 12px;
-      right: 0;
+      top: unset;
       justify-content: flex-end;
       align-items: flex-start;
     `),
     cM('bottom-right', `
       bottom: 4px;
-      left: 0;
       right: 12px;
+      top: unset;
       justify-content: flex-end;
       align-items: flex-end;
     `),
@@ -159,7 +144,7 @@ export default c([
       cM('show-avatar', [
         cB('notification-main', `
           margin-left: 40px;
-          width: calc(100% - 40px);  
+          width: calc(100% - 40px);
         `)
       ]),
       cM('closable', [
