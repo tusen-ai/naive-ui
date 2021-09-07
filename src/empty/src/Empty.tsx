@@ -4,7 +4,8 @@ import {
   computed,
   PropType,
   CSSProperties,
-  renderSlot
+  renderSlot,
+  inject
 } from 'vue'
 import { EmptyIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
@@ -14,6 +15,7 @@ import { NBaseIcon } from '../../_internal'
 import { emptyLight } from '../styles'
 import type { EmptyTheme } from '../styles'
 import style from './styles/index.cssr'
+import { configProviderInjectionKey } from '../../config-provider/src/ConfigProvider'
 
 const emptyProps = {
   ...(useTheme.props as ThemeProps<EmptyTheme>),
@@ -22,12 +24,12 @@ const emptyProps = {
     default: undefined
   },
   showDescription: {
-    type: Boolean,
-    default: true
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   },
   size: {
-    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
-    default: 'medium'
+    type: String as PropType<'small' | 'medium' | 'large' | 'huge' | undefined>,
+    default: undefined
   }
 }
 
@@ -47,18 +49,40 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const { localeRef } = useLocale('Empty')
+    const NConfigProvider = inject(configProviderInjectionKey, null)
+    const mergedDescriptionRef = computed(() => {
+      return (
+        props.description ??
+        NConfigProvider?.mergedComponentPropsRef.value?.Empty?.description
+      )
+    })
+    const mergedShowDescriptionRef = computed(() => {
+      return (
+        props.showDescription ??
+        NConfigProvider?.mergedComponentPropsRef.value?.Empty
+          ?.showDescription ??
+        true
+      )
+    })
+    const mergedSizeRef = computed(() => {
+      return (
+        props.size ??
+        NConfigProvider?.mergedComponentPropsRef.value?.Empty?.size ??
+        'medium'
+      )
+    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
+      mergedShowDescription: mergedShowDescriptionRef,
       localizedDescription: computed(() => {
-        return props.description || localeRef.value.description
+        return mergedDescriptionRef.value || localeRef.value.description
       }),
       cssVars: computed(() => {
-        const { size } = props
         const {
           common: { cubicBezierEaseInOut },
           self: {
-            [createKey('iconSize', size)]: iconSize,
-            [createKey('fontSize', size)]: fontSize,
+            [createKey('iconSize', mergedSizeRef.value)]: iconSize,
+            [createKey('fontSize', mergedSizeRef.value)]: fontSize,
             textColor,
             iconColor,
             extraTextColor
@@ -89,7 +113,7 @@ export default defineComponent({
             </NBaseIcon>
           ])}
         </div>
-        {this.showDescription ? (
+        {this.mergedShowDescription ? (
           <div class={`${mergedClsPrefix}-empty__description`}>
             {renderSlot($slots, 'default', undefined, () => [
               this.localizedDescription

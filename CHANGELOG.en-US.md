@@ -8,6 +8,7 @@
 - `n-tree` add `check-strategy` prop.
 - `n-date-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
 - `n-time-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
+- `n-config-provider` add golbal config of the `Empty` component, closes [#1092](https://github.com/TuSimple/naive-ui/issues/1092).
 
 ### Fixes
 
