@@ -115,6 +115,12 @@ describe('n-input-number', () => {
     const addBtn = wrapper.findAll('.n-input__suffix > button')[1]
     await addBtn.trigger('click')
     expect(wrapper.find('input').element.value).toEqual('2.3333')
+    await wrapper.setProps({ step: 2.333333 })
+    await addBtn.trigger('click')
+    expect(wrapper.find('input').element.value).toEqual('4.666633')
+    await wrapper.setProps({ step: 2.33 })
+    await addBtn.trigger('click')
+    expect(wrapper.find('input').element.value).toEqual('6.996633')
     wrapper.unmount()
   })
 })
