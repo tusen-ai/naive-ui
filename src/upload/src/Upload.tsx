@@ -409,31 +409,33 @@ export default defineComponent({
         remove: false
       }
     ) => {
-      const { append, remove } = options
-      const fileListAfterChange = Array.from(mergedFileListRef.value)
-      const fileIndex = fileListAfterChange.findIndex(
-        (file) => file.id === fileAfterChange.id
-      )
-      if (append || remove || ~fileIndex) {
-        if (append) {
-          fileListAfterChange.push(fileAfterChange)
-        } else if (remove) {
-          fileListAfterChange.splice(fileIndex, 1)
-        } else {
-          fileListAfterChange.splice(fileIndex, 1, fileAfterChange)
+      setTimeout(() => {
+        const { append, remove } = options
+        const fileListAfterChange = Array.from(mergedFileListRef.value)
+        const fileIndex = fileListAfterChange.findIndex(
+          (file) => file.id === fileAfterChange.id
+        )
+        if (append || remove || ~fileIndex) {
+          if (append) {
+            fileListAfterChange.push(fileAfterChange)
+          } else if (remove) {
+            fileListAfterChange.splice(fileIndex, 1)
+          } else {
+            fileListAfterChange.splice(fileIndex, 1, fileAfterChange)
+          }
+          const { onChange } = props
+          if (onChange) {
+            onChange({
+              file: fileAfterChange,
+              fileList: fileListAfterChange,
+              event
+            })
+          }
+          doUpdateFileList(fileListAfterChange)
+        } else if (__DEV__) {
+          warn('upload', 'File has no corresponding id in current file list.')
         }
-        const { onChange } = props
-        if (onChange) {
-          onChange({
-            file: fileAfterChange,
-            fileList: fileListAfterChange,
-            event
-          })
-        }
-        doUpdateFileList(fileListAfterChange)
-      } else if (__DEV__) {
-        warn('upload', 'File has no corresponding id in current file list.')
-      }
+      })
     }
     async function getFileThumbnailUrl (file: FileInfo): Promise<string> {
       const { createThumbnailUrl } = props

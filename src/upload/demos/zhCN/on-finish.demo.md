@@ -5,7 +5,7 @@
 ```html
 <n-upload
   @finish="handleFinish"
-  action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
 >
   <n-button>上传文件</n-button>
 </n-upload>
@@ -20,7 +20,7 @@ export default defineComponent({
     const message = useMessage()
     const handleFinish = ({ file, event }) => {
       message.success(event.target.response)
-      file.url = 'http://www.mocky.io/v2/5e4bafc63100007100d8b70f'
+      file.url = 'https://www.mocky.io/v2/5e4bafc63100007100d8b70f'
     }
     return {
       message,

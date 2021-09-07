@@ -12,7 +12,7 @@
 </n-button>
 <n-upload
   @change="handleChange"
-  action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-upload="false"
   multiple
   ref="upload"
