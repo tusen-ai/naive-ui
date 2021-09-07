@@ -264,42 +264,54 @@ export default defineComponent({
         }
       }
     })
-    function getMergedOption (value: ValueAtom): SelectBaseOption | undefined {
+    function getMergedOptions (values: ValueAtom[]): SelectBaseOption[] {
       const remote = props.remote
       const { value: memoValOptMap } = memoValOptMapRef
       const { value: valOptMap } = valOptMapRef
       const { value: wrappedFallbackOption } = wrappedFallbackOptionRef
-      if (valOptMap.has(value)) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        return valOptMap.get(value)!
-      } else if (remote && memoValOptMap.has(value)) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        return memoValOptMap.get(value)!
-      } else if (wrappedFallbackOption) {
-        return wrappedFallbackOption(value)
-      }
+      const options: SelectBaseOption[] = []
+      values.forEach((value) => {
+        if (valOptMap.has(value)) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          options.push(valOptMap.get(value)!)
+        } else if (remote && memoValOptMap.has(value)) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          options.push(memoValOptMap.get(value)!)
+        } else if (wrappedFallbackOption) {
+          const option = wrappedFallbackOption(value)
+          if (option) {
+            options.push(option)
+          }
+        }
+      })
+      return options
     }
     const selectedOptionsRef = computed(() => {
       if (props.multiple) {
         const { value: values } = mergedValueRef
         if (!Array.isArray(values)) return []
-        const options: SelectBaseOption[] = []
-        values.forEach((value) => {
-          const option = getMergedOption(value)
-          if (option) {
-            options.push(option)
-          }
-        })
-        return options
+        return getMergedOptions(values)
       }
       return null
     })
     const selectedOptionRef = computed<SelectBaseOption | null>(() => {
       const { value: mergedValue } = mergedValueRef
       if (!props.multiple && !Array.isArray(mergedValue)) {
+        const { value: valOptMap } = valOptMapRef
+        const { value: wrappedFallbackOption } = wrappedFallbackOptionRef
         if (mergedValue === null) return null
-        const selectedOption = getMergedOption(mergedValue)
-        return selectedOption || null
+        let selectedOption = null
+        if (valOptMap.has(mergedValue as any)) {
+          selectedOption = valOptMap.get(mergedValue)
+        } else if (props.remote) {
+          selectedOption = memoValOptMapRef.value.get(mergedValue)
+        }
+        return (
+          selectedOption ||
+          // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
+          (wrappedFallbackOption && wrappedFallbackOption(mergedValue)) ||
+          null
+        )
       }
       return null
     })
@@ -487,14 +499,7 @@ export default defineComponent({
           patternRef.value = ''
         }
         focusSelectionInput()
-        const options: SelectBaseOption[] = []
-        changedValue.forEach((value) => {
-          const option = getMergedOption(value)
-          if (option) {
-            options.push(option)
-          }
-        })
-        const meta = options.map((option) => {
+        const meta = getMergedOptions(changedValue).map((option) => {
           return { option: option }
         })
         doUpdateValue(changedValue, meta)
