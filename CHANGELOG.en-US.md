@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- Fix `n-step` doesn't work with `v-for` children.
+
 ## 2.18.0 (2021-09-07)
 
 ### Breaking Changes

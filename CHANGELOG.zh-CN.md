@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- 修复 `n-step` 无法使用 `v-for` 的子元素
+
 ## 2.18.0 (2021-09-07)
 
 ### Breaking Changes
