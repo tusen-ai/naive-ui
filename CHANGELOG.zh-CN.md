@@ -52,6 +52,7 @@
 - 修复 `n-step` 必须传 `internal-index`
 - 修复 `n-radio-group` 的 `on-update:value` 和 `on-update-value` 类型不能为数组
 - 修复 `n-cascader` `check-strategy="child"` 和原有 `leaf-only` 表现不一致
+- 修复 `n-upload` 的 `v-model:file-list` 属性在 `multiple` 属性设为 `true` 的时候没有正确更新，关闭 [#418](https://github.com/TuSimple/naive-ui/issues/418)
 
 ## 2.17.2 (2021-09-06)
 

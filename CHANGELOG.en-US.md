@@ -52,6 +52,7 @@
 - Fix `n-step` must be passed with `internal-index`.
 - Fix `n-radio-group`'s `on-update:value` and `on-update-value` can't be array.
 - Fix `n-cascader` `check-strategy="child"` doesn't behaves the same as previous `leaf-only`.
+- Fix `n-upload` prop `v-model:file-list` dosen't work well when prop `multiple` is `true`, closes [#418](https://github.com/TuSimple/naive-ui/issues/418).
 
 ## 2.17.2 (2021-09-06)
 
