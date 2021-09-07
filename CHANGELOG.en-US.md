@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Fixes
+
+- Fix `n-step` doesn't work with `v-for` children.
+
 ### Feats
 
 - `useDialog` option add `style` prop, closes [#1054](https://github.com/TuSimple/naive-ui/issues/1054).
