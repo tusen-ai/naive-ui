@@ -353,7 +353,7 @@ export default defineComponent({
       value: string | number | Array<string | number> | null,
       meta:
       | { option: TreeSelectOption | null }
-      | Array<{ option: TreeSelectOption }>
+      | Array<{ option: TreeSelectOption | null }>
     ): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
       if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, meta)
@@ -418,28 +418,23 @@ export default defineComponent({
         }
       }
     }
-    function getOptionsAndMergeKeysOfKeys (keys: Key[]): {
-      options: Array<{ option: TreeSelectOption }>
-      mergeKeys: Key[]
-    } {
+    function getOptionsAndMergeKeysOfKeys (
+      keys: Key[]
+    ): Array<{ option: TreeSelectOption | null }> {
       const { value: treeMate } = dataTreeMateRef
-      const options = keys
-        .map((i) => {
-          return { option: treeMate.getNode(i)?.rawNode || null }
-        })
-        .filter((i) => i.option) as Array<{ option: TreeSelectOption }>
-      const mergeKeys = options.map((item) => item.option.key)
-      return { options, mergeKeys }
+      return keys.map((i) => {
+        return { option: treeMate.getNode(i)?.rawNode || null }
+      })
     }
     function handleUpdateSelectedKeys (keys: Key[]): void {
       if (props.checkable && props.multiple) {
         return
       }
-      const { options, mergeKeys } = getOptionsAndMergeKeysOfKeys(keys)
+      const options = getOptionsAndMergeKeysOfKeys(keys)
       if (props.multiple) {
-        doUpdateValue(mergeKeys, options)
+        doUpdateValue(keys, options)
       } else {
-        doUpdateValue(mergeKeys[0] ?? null, {
+        doUpdateValue(keys[0] ?? null, {
           option: options[0].option || null
         })
         closeMenu()
@@ -457,8 +452,8 @@ export default defineComponent({
     function handleUpdateCheckedKeys (keys: Key[]): void {
       // only in checkable & multiple mode, we use tree's check update
       if (props.checkable && props.multiple) {
-        const { options, mergeKeys } = getOptionsAndMergeKeysOfKeys(keys)
-        doUpdateValue(mergeKeys, options)
+        const options = getOptionsAndMergeKeysOfKeys(keys)
+        doUpdateValue(keys, options)
         if (props.filterable) {
           focusSelectionInput()
           patternRef.value = ''
@@ -521,15 +516,13 @@ export default defineComponent({
                 cascade: mergedCascadeRef.value
               }
             )
-            const { options, mergeKeys } =
-              getOptionsAndMergeKeysOfKeys(checkedKeys)
-            doUpdateValue(mergeKeys, options)
+            const options = getOptionsAndMergeKeysOfKeys(checkedKeys)
+            doUpdateValue(checkedKeys, options)
           } else {
             const nextValue = Array.from(mergedValue)
             nextValue.splice(index, 1)
-            const { options, mergeKeys } =
-              getOptionsAndMergeKeysOfKeys(nextValue)
-            doUpdateValue(mergeKeys, options)
+            const options = getOptionsAndMergeKeysOfKeys(nextValue)
+            doUpdateValue(nextValue, options)
           }
         }
       }
