@@ -9,6 +9,7 @@ basic
 size
 item-placement
 horizontal
+customize-icon
 ```
 
 ## API
@@ -27,6 +28,7 @@ horizontal
 | --- | --- | --- | --- |
 | color | `string` | `undefined` | 选项的颜色 |
 | content | `string` | `undefined` | 选项内容 |
+| icon-size | `number` | `undefined` | 图标大小 |
 | time | `string` | `undefined` | 选项时间 |
 | title | `string` | `undefined` | 选项标题 |
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 选项类型 |
@@ -39,8 +41,9 @@ horizontal
 
 ### TimelineItem Slots
 
-| 名称    | 参数 | 说明               |
-| ------- | ---- | ------------------ |
-| default | `()` | 时间线选项内容     |
-| footer  | `()` | 时间线选项底部内容 |
-| header  | `()` | 时间线选项头部内容 |
+| 名称    | 参数 | 说明                 |
+| ------- | ---- | -------------------- |
+| default | `()` | 时间线选项内容       |
+| icon    | `()` | 时间线选项自定义图标 |
+| footer  | `()` | 时间线选项底部内容   |
+| header  | `()` | 时间线选项头部内容   |

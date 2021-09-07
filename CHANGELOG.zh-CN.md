@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2.18.1 (2021-09-08)
+
+### Feats
+
+- `useDialog` 选项新增 `style` 属性，关闭 [#1054](https://github.com/TuSimple/naive-ui/issues/1054)
+- `n-timeline` 新增 `icon` slot, 关闭 [#1096](https://github.com/TuSimple/naive-ui/issues/1096)
+- `n-timeline` 新增 `icon-size` 属性
+
+### Fixes
+
+- 修复 `n-step` 无法使用 `v-for` 的子元素
+- 修复 `n-step` 在 `step` 不为小数时不能输入小数
+
 ## 2.18.0 (2021-09-07)
 
 ### Breaking Changes

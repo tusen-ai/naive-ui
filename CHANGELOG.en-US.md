@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2.18.1 (2021-09-08)
+
+### Feats
+
+- `useDialog` option add `style` prop, closes [#1054](https://github.com/TuSimple/naive-ui/issues/1054).
+- `n-timeline` add `icon` slot, closes [#1096](https://github.com/TuSimple/naive-ui/issues/1096).
+- `n-timeline` add `icon-size` prop.
+
+### Fixes
+
+- Fix `n-step` doesn't work with `v-for` children.
+- Fix `n-step` cannot enter decimals when `step` is not a decimal.
+
 ## 2.18.0 (2021-09-07)
 
 ### Breaking Changes
