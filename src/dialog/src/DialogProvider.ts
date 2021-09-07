@@ -18,7 +18,9 @@ import { useClicked, useClickPosition } from 'vooks'
 
 export type DialogOptions = Partial<
 ExtractPropTypes<typeof exposedDialogEnvProps>
->
+> & {
+  style?: string | { [x: string]: string}
+}
 
 export type DialogReactive = {
   readonly key: string
