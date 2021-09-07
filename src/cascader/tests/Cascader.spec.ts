@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils'
 import { NCascader } from '../index'
-import { BaseOption } from '../src/interface'
+import { CascaderOption } from '../src/interface'
 
-function getOptions (depth = 3, iterator = 1, prefix = ''): BaseOption[] {
+function getOptions (depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
   const length = 12
   const options = []
   for (let i = 1; i <= length; ++i) {
@@ -125,5 +125,19 @@ describe('n-cascader', () => {
     expect(wrapper.find('.n-base-selection-label').text()).toBe(
       "Rubber Soul / Everybody's Got Something to Hide Except Me and My Monkey"
     )
+  })
+
+  it('should work with `check-strategy=child`', async () => {
+    const wrapper = mount(NCascader, {
+      attachTo: document.body,
+      props: { options: getOptions(), virtualScroll: false }
+    })
+    await wrapper.setProps({ show: true })
+
+    expect(document.querySelector('.n-checkbox')).not.toEqual(null)
+
+    await wrapper.setProps({ checkStrategy: 'child' })
+
+    expect(document.querySelector('.n-checkbox')).toEqual(null)
   })
 })

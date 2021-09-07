@@ -8,7 +8,8 @@ import {
   PropType,
   reactive,
   InjectionKey,
-  Ref
+  Ref,
+  CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
 import { omit } from '../../_utils'
@@ -16,14 +17,24 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import DialogEnvironment, { exposedDialogEnvProps } from './DialogEnvironment'
 import { useClicked, useClickPosition } from 'vooks'
 
-export type DialogOptions = Partial<
-ExtractPropTypes<typeof exposedDialogEnvProps>
->
+export type DialogOptions = Omit<
+Partial<ExtractPropTypes<typeof exposedDialogEnvProps>>,
+'internalStyle'
+> & {
+  style?: string | CSSProperties
+}
 
 export type DialogReactive = {
   readonly key: string
   readonly destroy: () => void
 } & DialogOptions
+
+// FIXME
+// If style is used as CSSProperties, typescript 4.4.2 will throw tons of errors
+// Fxxx
+type TypeSafeDialogReactive = DialogReactive & {
+  style?: any
+}
 
 export interface DialogApiInjection {
   destroyAll: () => void
@@ -64,7 +75,7 @@ export default defineComponent({
   name: 'DialogProvider',
   props: dialogProviderProps,
   setup () {
-    const dialogListRef = ref<DialogReactive[]>([])
+    const dialogListRef = ref<TypeSafeDialogReactive[]>([])
     const dialogInstRefs: Record<string, DialogInst> = {}
     function create (options: DialogOptions = {}): DialogReactive {
       const key = createId()
@@ -125,7 +136,8 @@ export default defineComponent({
       this.dialogList.map((dialog) =>
         h(
           DialogEnvironment,
-          omit(dialog, ['destroy'], {
+          omit(dialog, ['destroy', 'style'], {
+            internalStyle: dialog.style,
             to: this.to,
             ref: ((inst: DialogInst | null) => {
               if (inst === null) {

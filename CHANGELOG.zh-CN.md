@@ -1,8 +1,14 @@
 # CHANGELOG
 
+## Pending
+
 ### Fixes
 
 - 修复 `n-step` 无法使用 `v-for` 的子元素
+
+### Feats
+
+- `useDialog` 选项新增 `style` 属性，关闭 [#1054](https://github.com/TuSimple/naive-ui/issues/1054)
 
 ## 2.18.0 (2021-09-07)
 
