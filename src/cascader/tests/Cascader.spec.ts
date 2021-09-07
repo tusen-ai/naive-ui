@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import { NCascader } from '../index'
 import { BaseOption } from '../src/interface'
 
@@ -125,5 +126,20 @@ describe('n-cascader', () => {
     expect(wrapper.find('.n-base-selection-label').text()).toBe(
       "Rubber Soul / Everybody's Got Something to Hide Except Me and My Monkey"
     )
+  })
+
+  it('should work with `leaf-only` prop', async () => {
+    const wrapper = mount(NCascader, {
+      attachTo: document.body,
+      props: { options: getOptions(), virtualScroll: false }
+    })
+    await wrapper.setProps({ show: true })
+    await nextTick()
+
+    expect(document.querySelector('.n-checkbox')).not.toEqual(null)
+
+    await wrapper.setProps({ leafOnly: true })
+
+    expect(document.querySelector('.n-checkbox')).toEqual(null)
   })
 })
