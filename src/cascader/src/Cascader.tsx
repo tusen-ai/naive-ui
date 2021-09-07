@@ -845,6 +845,7 @@ export default defineComponent({
                 show={this.mergedShow && !this.showSelectMenu}
                 containerClass={this.namespace}
                 placement="bottom-start"
+                width={!this.menuModel[0].length ? 'target' : undefined}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
                 to={this.adjustedTo}
               >
