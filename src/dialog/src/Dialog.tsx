@@ -55,14 +55,8 @@ const dialogProps = {
     type: Boolean,
     default: true
   },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  bordered: {
-    type: Boolean,
-    default: false as boolean
-  },
+  loading: Boolean,
+  bordered: Boolean,
   iconPlacement: String as PropType<IconPlacement>,
   onPositiveClick: Function as PropType<(e: MouseEvent) => void>,
   onNegativeClick: Function as PropType<(e: MouseEvent) => void>,

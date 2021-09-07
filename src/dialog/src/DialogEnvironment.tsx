@@ -1,25 +1,26 @@
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
-import { h, defineComponent, PropType, ref } from 'vue'
+import { h, defineComponent, PropType, ref, CSSProperties } from 'vue'
 import NModal from '../../modal/src/Modal'
 import { keep } from '../../_utils'
 import NDialog, { dialogProps, dialogPropKeys } from './Dialog'
 
 export const exposedDialogEnvProps = {
   ...dialogProps,
+  internalStyle: [String, Object] as PropType<string | CSSProperties>,
   maskClosable: {
     type: Boolean,
     default: true
   },
   onPositiveClick: Function as PropType<
-  (e: MouseEvent) => Promise<boolean> | boolean | unknown
+  (e: MouseEvent) => Promise<unknown> | unknown
   >,
   onNegativeClick: Function as PropType<
-  (e: MouseEvent) => Promise<boolean> | boolean | unknown
+  (e: MouseEvent) => Promise<unknown> | unknown
   >,
-  onClose: Function as PropType<() => Promise<boolean> | boolean | unknown>,
+  onClose: Function as PropType<() => Promise<unknown> | unknown>,
   onMaskClick: Function as PropType<(e: MouseEvent) => void>
-}
+} as const
 
 export default defineComponent({
   name: 'DialogEnvironment',
@@ -125,6 +126,7 @@ export default defineComponent({
           default: () => (
             <NDialog
               {...keep(this.$props, dialogPropKeys)}
+              style={this.internalStyle}
               onClose={handleCloseClick}
               onNegativeClick={handleNegativeClick}
               onPositiveClick={handlePositiveClick}

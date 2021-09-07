@@ -1,9 +1,8 @@
 import { mount } from '@vue/test-utils'
-import { nextTick } from 'vue'
 import { NCascader } from '../index'
-import { BaseOption } from '../src/interface'
+import { CascaderOption } from '../src/interface'
 
-function getOptions (depth = 3, iterator = 1, prefix = ''): BaseOption[] {
+function getOptions (depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
   const length = 12
   const options = []
   for (let i = 1; i <= length; ++i) {
@@ -128,17 +127,16 @@ describe('n-cascader', () => {
     )
   })
 
-  it('should work with `leaf-only` prop', async () => {
+  it('should work with `check-strategy=child`', async () => {
     const wrapper = mount(NCascader, {
       attachTo: document.body,
       props: { options: getOptions(), virtualScroll: false }
     })
     await wrapper.setProps({ show: true })
-    await nextTick()
 
     expect(document.querySelector('.n-checkbox')).not.toEqual(null)
 
-    await wrapper.setProps({ leafOnly: true })
+    await wrapper.setProps({ checkStrategy: 'child' })
 
     expect(document.querySelector('.n-checkbox')).toEqual(null)
   })
