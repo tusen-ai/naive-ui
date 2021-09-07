@@ -23,15 +23,17 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      datetime: null,
-      date: null,
-      datetimerange: null,
-      daterange: null,
-      disabled: true
+      datetime: ref(null),
+      date: ref(null),
+      datetimerange: ref(null),
+      daterange: ref(null),
+      disabled: ref(true)
     }
   }
-}
+})
 ```
