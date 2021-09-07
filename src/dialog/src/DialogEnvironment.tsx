@@ -7,19 +7,20 @@ import NDialog, { dialogProps, dialogPropKeys } from './Dialog'
 
 export const exposedDialogEnvProps = {
   ...dialogProps,
+  internalStyle: [String, Object] as PropType<string | CSSProperties>,
   maskClosable: {
     type: Boolean,
     default: true
   },
   onPositiveClick: Function as PropType<
-  (e: MouseEvent) => Promise<boolean> | boolean | unknown
+  (e: MouseEvent) => Promise<unknown> | unknown
   >,
   onNegativeClick: Function as PropType<
-  (e: MouseEvent) => Promise<boolean> | boolean | unknown
+  (e: MouseEvent) => Promise<unknown> | unknown
   >,
-  onClose: Function as PropType<() => Promise<boolean> | boolean | unknown>,
+  onClose: Function as PropType<() => Promise<unknown> | unknown>,
   onMaskClick: Function as PropType<(e: MouseEvent) => void>
-}
+} as const
 
 export default defineComponent({
   name: 'DialogEnvironment',
@@ -125,7 +126,7 @@ export default defineComponent({
           default: () => (
             <NDialog
               {...keep(this.$props, dialogPropKeys)}
-              style={this.$attrs.style as CSSProperties}
+              style={this.internalStyle}
               onClose={handleCloseClick}
               onNegativeClick={handleNegativeClick}
               onPositiveClick={handlePositiveClick}
