@@ -29,6 +29,8 @@
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+
 function getOptions (depth = 2, iterator = 1, prefix = '') {
   const length = 12
   const options = []
@@ -58,12 +60,12 @@ function getOptions (depth = 2, iterator = 1, prefix = '') {
   return options
 }
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      value: null,
+      value: ref(null),
       options: getOptions()
     }
   }
-}
+})
 ```

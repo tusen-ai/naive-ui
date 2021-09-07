@@ -33,6 +33,8 @@
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+
 function getOptions (depth = 3, iterator = 1, prefix = '') {
   const length = 12
   const options = []
@@ -62,18 +64,18 @@ function getOptions (depth = 3, iterator = 1, prefix = '') {
   return options
 }
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      checkStrategyIsChild: true,
-      cascade: true,
-      showPath: true,
-      hoverTrigger: false,
-      value: null,
-      filterable: false,
-      responsiveMaxTagCount: true,
+      checkStrategyIsChild: ref(true),
+      cascade: ref(true),
+      showPath: ref(true),
+      hoverTrigger: ref(false),
+      value: ref(null),
+      filterable: ref(false),
+      responsiveMaxTagCount: ref(true),
       options: getOptions()
     }
   }
-}
+})
 ```
