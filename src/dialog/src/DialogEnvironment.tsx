@@ -1,6 +1,6 @@
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
-import { h, defineComponent, PropType, ref } from 'vue'
+import { h, defineComponent, PropType, ref, CSSProperties } from 'vue'
 import NModal from '../../modal/src/Modal'
 import { keep } from '../../_utils'
 import NDialog, { dialogProps, dialogPropKeys } from './Dialog'
@@ -125,6 +125,7 @@ export default defineComponent({
           default: () => (
             <NDialog
               {...keep(this.$props, dialogPropKeys)}
+              style={this.$attrs.style as CSSProperties}
               onClose={handleCloseClick}
               onNegativeClick={handleNegativeClick}
               onPositiveClick={handlePositiveClick}
