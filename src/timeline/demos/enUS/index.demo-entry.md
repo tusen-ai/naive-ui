@@ -26,8 +26,9 @@ customize-icon
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| color | `string` | `undefined` | 选项的颜色 |
+| color | `string` | `undefined` | Item color. |
 | content | `string` | `undefined` | Item content. |
+| icon-size | `number` | `undefined` | Size of icon part. |
 | time | `string` | `undefined` | Item time. |
 | title | `string` | `undefined` | Item title. |
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Item type. |

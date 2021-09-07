@@ -2,13 +2,15 @@
 
 ## Pending
 
-### Fixes
-
-- Fix `n-step` doesn't work with `v-for` children.
-
 ### Feats
 
 - `useDialog` option add `style` prop, closes [#1054](https://github.com/TuSimple/naive-ui/issues/1054).
+- `n-timeline` add `icon` slot, closes [#1096](https://github.com/TuSimple/naive-ui/issues/1096).
+- `n-timeline` add `icon-size` prop.
+
+### Fixes
+
+- Fix `n-step` doesn't work with `v-for` children.
 
 ## 2.18.0 (2021-09-07)
 
@@ -88,7 +90,6 @@
 - `n-collapse` add `header-extra` slot, closes [#1046](https://github.com/TuSimple/naive-ui/issues/1046).
 - `n-input` add `show-password-on` prop.
 - `n-upload` add `list-type`, `show-preview-button`, `on-preview` and `create-thumbnail-url` prop.
-- `n-timeline` add `icon` slot, closes [#1096](https://github.com/TuSimple/naive-ui/issues/1096).
 
 ## 2.16.7 (2021-08-27)
 

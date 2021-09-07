@@ -1,5 +1,7 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
+const lineHeight = 1.25
+
 // vars:
 // --bezier
 // --circle-border
@@ -11,12 +13,13 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --title-font-weight
 // --title-margin
 // --title-text-color
+// --icon-size
 export default cB('timeline', `
   position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
-  line-height: 1.25;
+  line-height: ${lineHeight};
 `, [
   cM('horizontal', `
     flex-direction: row;
@@ -26,7 +29,7 @@ export default cB('timeline', `
       padding-right: 40px;
     `, [
       cB('timeline-item-content', `
-        margin-top: 26px;
+        margin-top: calc(var(--icon-size) + 12px);
       `, [
         cE('meta', `
           margin-top: 6px;
@@ -35,11 +38,11 @@ export default cB('timeline', `
       ]),
       cB('timeline-item-timeline', `
         width: 100%;
-        height: 26px;
+        height: calc(var(--icon-size) + 12px);
       `, [
         cE('line', `
-          left: 14px;
-          top: 6px;
+          left: var(--icon-size);
+          top: calc(var(--icon-size) / 2 - 1px);
           right: 0px;
           width: unset;
           height: 2px;
@@ -51,10 +54,10 @@ export default cB('timeline', `
     cB('timeline-item', [
       cB('timeline-item-content', `
         text-align: right;
-        margin-right: 26px;
+        margin-right: calc(var(--icon-size) + 12px);
       `),
       cB('timeline-item-timeline', `
-        width: 14px;
+        width: var(--icon-size);
         right: 0;
       `)
     ])
@@ -62,7 +65,7 @@ export default cB('timeline', `
   cM('left-placement', [
     cB('timeline-item', [
       cB('timeline-item-content', `
-        margin-left: 26px;
+        margin-left: calc(var(--icon-size) + 12px);
       `),
       cB('timeline-item-timeline', `
         left: 0;
@@ -107,10 +110,9 @@ export default cB('timeline', `
       `)
     ]),
     cB('timeline-item-timeline', `
-      width: 26px;
+      width: calc(var(--icon-size) + 12px);
       position: absolute;
-      top: 2px;
-      bottom: 0;
+      top: calc(var(--title-font-size) * ${lineHeight} / 2 - var(--icon-size) / 2);
       height: 100%;
     `, [
       cE('circle', `
@@ -118,24 +120,25 @@ export default cB('timeline', `
         transition:
           background-color .3s var(--bezier),
           border-color .3s var(--bezier);
-        width: 14px;
-        height: 14px;
-        border-radius: 7px;
+        width: var(--icon-size);
+        height: var(--icon-size);
+        border-radius: var(--icon-size);
         box-sizing: border-box;
       `),
       cE('icon', `
         color: var(--icon-color);
-        margin: -1px;
-        font-size: 16px;
-        transition:
-          background-color .3s var(--bezier),
-          border-color .3s var(--bezier);
-    `),
+        font-size: var(--icon-size);
+        height: var(--icon-size);
+        width: var(--icon-size);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `),
       cE('line', `
         transition: background-color .3s var(--bezier);
         position: absolute;
-        top: 14px;
-        left: 6px;
+        top: var(--icon-size);
+        left: calc(var(--icon-size) / 2 - 1px);
         bottom: 0px;
         width: 2px;
         background-color: var(--line-color);
