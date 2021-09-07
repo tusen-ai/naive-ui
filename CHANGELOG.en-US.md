@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-tree` add `check-strategy` document prop.
+
 ## 2.18.0 (2021-09-07)
 
 ### Breaking Changes
