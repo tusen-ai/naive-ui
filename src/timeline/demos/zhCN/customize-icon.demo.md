@@ -2,7 +2,7 @@
 
 ```html
 <n-timeline>
-  <n-timeline-item content="啊">
+  <n-timeline-item color="#ff0000" content="啊">
     <template #icon>
       <n-icon>
         <cash-icon />

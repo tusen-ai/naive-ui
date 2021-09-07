@@ -89,7 +89,10 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-timeline-item-timeline`}>
           <div class={`${mergedClsPrefix}-timeline-item-timeline__line`} />
           {this.$slots.icon ? (
-            <div class={`${mergedClsPrefix}-timeline-item-timeline__icon`}>
+            <div
+              class={`${mergedClsPrefix}-timeline-item-timeline__icon`}
+              style={{ color: color }}
+            >
               {renderSlot(this.$slots, 'icon')}
             </div>
           ) : (

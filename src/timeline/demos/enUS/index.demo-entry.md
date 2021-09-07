@@ -43,6 +43,6 @@ customize-icon
 | Name    | Parameters | Description                                    |
 | ------- | ---------- | ---------------------------------------------- |
 | default | `()`       | Timeline item content.                         |
-| icon    | `()`       | Timeline item cutomize icon                    |
+| icon    | `()`       | Timeline item customize timeline icon.         |
 | footer  | `()`       | Content at the bottom of the timeline options. |
 | header  | `()`       | Content at the top of the timeline options.    |
