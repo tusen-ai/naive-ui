@@ -24,6 +24,8 @@
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+
 function getChildren (option) {
   const children = []
   for (let i = 0; i <= option.depth; ++i) {
@@ -37,32 +39,30 @@ function getChildren (option) {
   return children
 }
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      options: [
+      checkStrategyIsChild: ref(true),
+      cascade: ref(true),
+      showPath: ref(true),
+      value: ref(null),
+      options: ref([
         {
           label: 'l-0',
           value: 'v-0',
           depth: 1,
           isLeaf: false
         }
-      ],
-      checkStrategyIsChild: true,
-      cascade: true,
-      showPath: true,
-      value: null
-    }
-  },
-  methods: {
-    handleLoad (option) {
-      return new Promise((resolve) => {
-        window.setTimeout(() => {
-          option.children = getChildren(option)
-          resolve()
-        }, 1000)
-      })
+      ]),
+      handleLoad (option) {
+        return new Promise((resolve) => {
+          window.setTimeout(() => {
+            option.children = getChildren(option)
+            resolve()
+          }, 1000)
+        })
+      }
     }
   }
-}
+})
 ```

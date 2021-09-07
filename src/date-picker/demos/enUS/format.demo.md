@@ -18,13 +18,15 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      timestamp: null,
-      timestamp2: 1183135260000,
+      timestamp: ref(null),
+      timestamp2: ref(1183135260000),
       format: 'yyyy/MM/dd - HH:mm'
     }
   }
-}
+})
 ```
