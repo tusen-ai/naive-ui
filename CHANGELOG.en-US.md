@@ -15,7 +15,7 @@
 ### Fixes
 
 - Fix `n-step` doesn't work with `v-for` children.
-- Fix `n-step` cannot enter decimals when `step` is not a decimal.
+- Fix `n-input-number` cannot enter decimals when `step` is not a decimal.
 
 ## 2.18.0 (2021-09-07)
 
