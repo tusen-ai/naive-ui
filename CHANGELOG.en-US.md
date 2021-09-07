@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-step` cannot enter decimals when `step` is not a decimal.
+
 ## 2.18.0 (2021-09-07)
 
 ### Breaking Changes

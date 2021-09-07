@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-step` 在 `step` 不为小数时不能输入小数
+
 ## 2.18.0 (2021-09-07)
 
 ### Breaking Changes
