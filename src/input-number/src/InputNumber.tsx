@@ -94,8 +94,8 @@ export default defineComponent({
       uncontrolledValueRef
     )
     const displayedValueRef = ref('')
-    const getMaxPrecision = (parseValue: number): number => {
-      const precisions = [props.min, props.max, props.step, parseValue].map((item) => {
+    const getMaxPrecision = (currentValue: number): number => {
+      const precisions = [props.min, props.max, props.step, currentValue].map((item) => {
         const fraction = String(item).split('.')[1]
         return fraction ? fraction.length : 0
       })
