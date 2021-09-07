@@ -9,6 +9,7 @@ basic
 size
 item-placement
 horizontal
+customize-icon
 ```
 
 ## API
@@ -42,5 +43,6 @@ horizontal
 | Name    | Parameters | Description                                    |
 | ------- | ---------- | ---------------------------------------------- |
 | default | `()`       | Timeline item content.                         |
+| icon    | `()`       | Timeline item customize timeline icon.         |
 | footer  | `()`       | Content at the bottom of the timeline options. |
 | header  | `()`       | Content at the top of the timeline options.    |

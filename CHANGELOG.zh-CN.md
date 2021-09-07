@@ -88,6 +88,7 @@
 - `n-collapse` 新增 `header-extra` slot，关闭 [#1046](https://github.com/TuSimple/naive-ui/issues/1046)
 - `n-input` 新增 `show-password-on` 属性
 - `n-upload` 增加 `list-type`、 `show-preview-button`、 `on-preview` 和 `create-thumbnail-url` 属性
+- `n-timeline` 增加 `icon` slot, 关闭 [#1096](https://github.com/TuSimple/naive-ui/issues/1096)
 
 ## 2.16.7 (2021-08-27)
 

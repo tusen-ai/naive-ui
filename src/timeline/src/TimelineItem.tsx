@@ -55,13 +55,15 @@ export default defineComponent({
             contentFontSize,
             [createKey('titleMargin', size)]: titleMargin,
             [createKey('titleFontSize', size)]: titleFontSize,
-            [createKey('circleBorder', type)]: circleBorder
+            [createKey('circleBorder', type)]: circleBorder,
+            [createKey('iconColor', type)]: iconColor
           },
           common: { cubicBezierEaseInOut }
         } = mergedThemeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
           '--circle-border': circleBorder,
+          '--icon-color': iconColor,
           '--content-font-size': contentFontSize,
           '--content-text-color': contentTextColor,
           '--line-color': lineColor,
@@ -86,10 +88,19 @@ export default defineComponent({
       >
         <div class={`${mergedClsPrefix}-timeline-item-timeline`}>
           <div class={`${mergedClsPrefix}-timeline-item-timeline__line`} />
-          <div
-            class={`${mergedClsPrefix}-timeline-item-timeline__circle`}
-            style={{ borderColor: color }}
-          />
+          {this.$slots.icon ? (
+            <div
+              class={`${mergedClsPrefix}-timeline-item-timeline__icon`}
+              style={{ color: color }}
+            >
+              {renderSlot(this.$slots, 'icon')}
+            </div>
+          ) : (
+            <div
+              class={`${mergedClsPrefix}-timeline-item-timeline__circle`}
+              style={{ borderColor: color }}
+            />
+          )}
         </div>
         <div class={`${mergedClsPrefix}-timeline-item-content`}>
           {this.title || this.$slots.header ? (

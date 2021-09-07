@@ -108,6 +108,7 @@ describe('n-timeline-item', () => {
         default: () =>
           h(NTimelineItem, null, {
             header: () => 'test-header',
+            icon: () => 'icon',
             default: () => 'test-default',
             footer: () => 'test-footer'
           })
@@ -117,6 +118,8 @@ describe('n-timeline-item', () => {
     expect(wrapper.find('.n-timeline-item-content__title').text()).toBe(
       'test-header'
     )
+    expect(wrapper.find('.n-timeline-item-timeline__icon').exists()).toBe(true)
+    expect(wrapper.find('.n-timeline-item-timeline__icon').text()).toBe('icon')
     expect(wrapper.find('.n-timeline-item-content__content').exists()).toBe(
       true
     )
