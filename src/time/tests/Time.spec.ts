@@ -38,7 +38,9 @@ describe('n-time', () => {
   it('should work with `type` prop', async () => {
     Date.now = () => mockedNow
 
-    const wrapper = mount(NTime, { props: { time: date, type: 'date' } })
+    const wrapper = mount(NTime, {
+      props: { time: date, type: 'date', timezone: 'Asia/Shanghai' }
+    })
     expect(wrapper.find('time').text()).toContain('1970-01-01')
     await wrapper.setProps({ time: date, type: 'datetime' })
     expect(wrapper.find('time').text()).toContain('1970-01-01 08:00:00')
