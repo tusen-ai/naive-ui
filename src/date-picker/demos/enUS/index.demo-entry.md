@@ -29,6 +29,7 @@ update-on-close
 | clearable | `boolean` | `false` | Whether the date picker is clearable. |
 | default-value | `number \| [number, number] \| null` | `null` | Date picker's default value. |
 | disabled | `boolean` | `false` | Whether the date picker is disabled. |
+| inputReadonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |
 | shortcuts | `Record<string, number \| [number, number]>` | `undefined` | Shortcut button customizations. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` | Date picker type. |

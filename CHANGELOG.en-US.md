@@ -6,6 +6,7 @@
 
 - `n-cascader` show `Empty` component when `options` prop is empty, closes [#1092](https://github.com/TuSimple/naive-ui/issues/1092).
 - `n-tree` add `check-strategy` prop.
+- `n-date-picker` add `inputReadonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
 
 ## 2.18.1 (2021-09-08)
 
