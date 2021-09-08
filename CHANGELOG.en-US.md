@@ -9,6 +9,10 @@
 - `n-date-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
 - `n-time-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
 
+### Fixes
+
+- Fix `n-p` warns when `depth` is number.
+
 ## 2.18.1 (2021-09-08)
 
 ### Feats

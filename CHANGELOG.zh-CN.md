@@ -9,6 +9,10 @@
 - `n-date-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
 - `n-time-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
 
+### Fixes
+
+- 修复 `n-p` `depth` 传入 number 报错
+
 ## 2.18.1 (2021-09-08)
 
 ### Feats

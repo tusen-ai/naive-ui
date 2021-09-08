@@ -8,10 +8,7 @@ import style from './styles/list.cssr'
 
 const olProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
-  alignText: {
-    type: Boolean,
-    default: false
-  }
+  alignText: Boolean
 }
 
 export type OlProps = ExtractPublicPropTypes<typeof olProps>

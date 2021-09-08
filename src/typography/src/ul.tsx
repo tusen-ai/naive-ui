@@ -8,10 +8,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 
 const ulProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
-  alignText: {
-    type: Boolean,
-    default: false
-  }
+  alignText: Boolean
 } as const
 
 export type UlProps = ExtractPublicPropTypes<typeof ulProps>
