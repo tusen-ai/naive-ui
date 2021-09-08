@@ -123,6 +123,7 @@
     "async-validator": "^4.0.1",
     "css-render": "^0.15.6",
     "date-fns": "^2.19.0",
+    "date-fns-tz": "^1.1.6",
     "evtd": "^0.2.2",
     "highlight.js": "^11.0.1",
     "lodash": "^4.17.21",
