@@ -29,7 +29,7 @@ update-on-close
 | clearable | `boolean` | `false` | 是否支持清除 |
 | default-value | `number \| [number, number] \| null` | `null` | 默认被选中的日期的时间戳 |
 | disabled | `boolean` | `false` | 是否禁用 |
-| inputReadonly | `boolean` | `false` | 设置输入框为只读（避免在移动设备上打开虚拟键盘） |
+| input-readonly | `boolean` | `false` | 设置输入框为只读（避免在移动设备上打开虚拟键盘） |
 | shortcuts | `Record<string, number \| [number, number]>` | `undefined` | 自定义快捷按钮 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` | Date Picker 的类型 |
