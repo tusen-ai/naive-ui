@@ -158,7 +158,9 @@ export default defineComponent({
                             <NCascaderSubmenu
                               ref={
                                 ((instance: CascaderSubmenuInstance) => {
-                                  if (instance) { submenuInstRefs[index] = instance }
+                                  if (instance) {
+                                    submenuInstRefs[index] = instance
+                                  }
                                 }) as any
                               }
                               key={index}
@@ -179,7 +181,6 @@ export default defineComponent({
                         ])}
                       </div>
                     )}
-
                     {$slots.action ? (
                       <div
                         class={`${mergedClsPrefix}-cascader-menu-action`}
