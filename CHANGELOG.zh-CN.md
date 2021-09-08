@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-cascader` 当 `options` 为空时显示 `Empty` 组件，关闭 [#1092](https://github.com/TuSimple/naive-ui/issues/1092)
 - `n-tree` 增加 `check-strategy` 文档属性
 
 ## 2.18.1 (2021-09-08)

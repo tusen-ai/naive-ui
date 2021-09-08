@@ -8,10 +8,12 @@ import {
   inject,
   nextTick,
   Transition,
-  withDirectives
+  withDirectives,
+  renderSlot
 } from 'vue'
 import { FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
+import { NEmpty } from '../../empty'
 import { NBaseMenuMask } from '../../_internal'
 import { MenuMaskRef } from '../../_internal/menu-mask'
 import NCascaderSubmenu from './CascaderSubmenu'
@@ -133,53 +135,65 @@ export default defineComponent({
           default: () =>
             this.show
               ? withDirectives(
-                <div
-                  tabindex="0"
-                  ref="selfElRef"
-                  class={`${mergedClsPrefix}-cascader-menu`}
-                  onMousedown={this.onMousedown}
-                  onFocusin={this.handleFocusin}
-                  onFocusout={this.handleFocusout}
-                  onKeyup={this.onKeyup}
-                  style={
-                    {
-                      '--col-count': this.menuModel.length
-                    } as any
-                  }
-                >
-                  <div class={`${mergedClsPrefix}-cascader-submenu-wrapper`}>
-                    {this.menuModel.map((submenuOptions, index) => {
-                      return (
-                        <NCascaderSubmenu
-                          ref={
-                            ((instance: CascaderSubmenuInstance) => {
-                              if (instance) submenuInstRefs[index] = instance
-                            }) as any
-                          }
-                          key={index}
-                          tmNodes={submenuOptions}
-                          depth={index + 1}
+                  <div
+                    tabindex="0"
+                    ref="selfElRef"
+                    class={`${mergedClsPrefix}-cascader-menu`}
+                    onMousedown={this.onMousedown}
+                    onFocusin={this.handleFocusin}
+                    onFocusout={this.handleFocusout}
+                    onKeyup={this.onKeyup}
+                    style={
+                      {
+                        '--col-count': this.menuModel.length
+                      } as any
+                    }
+                  >
+                    {this.menuModel[0].length ? (
+                      <div
+                        class={`${mergedClsPrefix}-cascader-submenu-wrapper`}
+                      >
+                        {this.menuModel.map((submenuOptions, index) => {
+                          return (
+                            <NCascaderSubmenu
+                              ref={
+                                ((instance: CascaderSubmenuInstance) => {
+                                  if (instance) {
+                                    submenuInstRefs[index] = instance
+                                  }
+                                }) as any
+                              }
+                              key={index}
+                              tmNodes={submenuOptions}
+                              depth={index + 1}
+                            />
+                          )
+                        })}
+                        <NBaseMenuMask
+                          clsPrefix={mergedClsPrefix}
+                          ref="maskInstRef"
                         />
-                      )
-                    })}
-                    <NBaseMenuMask
-                      clsPrefix={mergedClsPrefix}
-                      ref="maskInstRef"
-                    />
-                  </div>
-                  {$slots.action ? (
-                    <div
-                      class={`${mergedClsPrefix}-cascader-menu-action`}
-                      data-action
-                    >
-                      {{
-                        default: $slots.action
-                      }}
-                    </div>
-                  ) : null}
-                  <FocusDetector onFocus={this.onTabout} />
-                </div>,
-                [[clickoutside, this.handleClickOutside]]
+                      </div>
+                    ) : (
+                      <div class={`${mergedClsPrefix}-cascader-menu__empty`}>
+                        {renderSlot($slots, 'empty', undefined, () => [
+                          <NEmpty />
+                        ])}
+                      </div>
+                    )}
+                    {$slots.action ? (
+                      <div
+                        class={`${mergedClsPrefix}-cascader-menu-action`}
+                        data-action
+                      >
+                        {{
+                          default: $slots.action
+                        }}
+                      </div>
+                    ) : null}
+                    <FocusDetector onFocus={this.onTabout} />
+                  </div>,
+                  [[clickoutside, this.handleClickOutside]]
               )
               : null
         }}
