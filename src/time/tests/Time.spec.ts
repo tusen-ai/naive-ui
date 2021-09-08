@@ -12,7 +12,7 @@ describe('n-time', () => {
     const wrapper = mount(NTime, { props: { time: 0, unix: true } })
     expect(wrapper.find('time').text()).toContain('1970-01-01 12:00:00')
     await wrapper.setProps({ time: date })
-    expect(wrapper.find('time').text()).toContain('1970-01-01 08:00:00')
+    expect(wrapper.find('time').text()).toContain('1970-11-30 08:00:00')
   })
 
   it('should work with `format` prop', () => {
