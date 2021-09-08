@@ -144,25 +144,6 @@ describe('n-dynamic-tags', () => {
     wrapper.unmount()
   })
 
-  it('should work with `tag-style` prop', async () => {
-    const wrapper = mount(NDynamicTags, {
-      props: {
-        tagStyle: {
-          color: 'rgb(79, 178, 51)'
-        },
-        defaultValue: ['教师']
-      }
-    })
-    expect(wrapper.find('.n-tag').attributes('style')).toContain(
-      'color: rgb(79, 178, 51);'
-    )
-    await wrapper.setProps({ tagStyle: { width: '100px' } })
-    expect(wrapper.find('.n-tag').attributes('style')).toContain(
-      'width: 100px;'
-    )
-    wrapper.unmount()
-  })
-
   it('should work with `on-update:value` prop', () => {
     const onUpdateValue = jest.fn()
     const wrapper = mount(NDynamicTags, {
