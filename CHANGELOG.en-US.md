@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-cascader` show `Empty` component when `options` prop is empty, closes [#1092](https://github.com/TuSimple/naive-ui/issues/1092).
+
 ## 2.18.1 (2021-09-08)
 
 ### Feats
@@ -7,7 +13,6 @@
 - `useDialog` option add `style` prop, closes [#1054](https://github.com/TuSimple/naive-ui/issues/1054).
 - `n-timeline` add `icon` slot, closes [#1096](https://github.com/TuSimple/naive-ui/issues/1096).
 - `n-timeline` add `icon-size` prop.
-- `n-cascader` show `Empty` component when `options` prop is empty, closes [#1092](https://github.com/TuSimple/naive-ui/issues/1092).
 
 ### Fixes
 
