@@ -1,8 +1,10 @@
 # CHANGELOG
 
+## Pending
+
 ### Feats
 
-- `n-tree` add `check-strategy` document prop.
+- `n-tree` add `check-strategy` prop.
 
 ## 2.18.1 (2021-09-08)
 

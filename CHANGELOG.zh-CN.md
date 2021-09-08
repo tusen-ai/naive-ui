@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## Pending
+
 ### Feats
 
 - `n-tree` 增加 `check-strategy` 文档属性

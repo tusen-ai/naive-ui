@@ -31,7 +31,7 @@ batch-render
 | block-node | `boolean` | `false` | The node name is spread out in the whole row. |
 | cancelable | `boolean` | `true` | Whether node's select status can be cancelled. |
 | cascade | `boolean` | `false` | Whether to cascade checkboxes. |
-| check-strategy | `string` | `'all'` | The way to set the value of callback function. `all` means setting all checked node. `parent` means setting all checked parent node when all child node are checked. `child` means setting all child node. |
+| check-strategy | `string` | `'all'` | The strategy of setting checked callback's keys argument. `all` means setting all checked node. `parent` means setting all checked parent node of whom all child node are checked. `child` means setting all child node. |
 | checkable | `boolean` | `false` | Whether to display the selection box, you need to set `cascade` to `true`. |
 | children-field | `string` | `'children'` | The children field in `TreeOption`. |
 | checked-keys | `Array<string \| number>` | `undefined` | If set, checked status will work in controlled manner. |
