@@ -31,6 +31,12 @@ export default c([
     background-color: var(--menu-color);
   `, [
     fadeInScaleUpTransition({ transformOrigin: 'inherit', duration: '0.2s' }),
+    cE('empty', `
+      display: flex;
+      padding: 12px 32px;
+      flex: 1;
+      justify-content: center;
+    `),
     cB('scrollbar', {
       // if width not set, cascader select menu's inner scroll area's width is
       // not correct, which won't change after select menu width is set
