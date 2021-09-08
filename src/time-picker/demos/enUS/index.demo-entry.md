@@ -25,6 +25,7 @@ actions
 | hours | `number \| number[]` | `undefined` | The hours to be displayed. If it's a number, it'll be viewed as step. |
 | minutes | `number \| number[]` | `undefined` | The minutes to be displayed. If it's a number, it'll be viewed as step. |
 | seconds | `number \| number[]` | `undefined` | The seconds to be displayed. If it's a number, it'll be viewed as step. |
+| input-readonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |
 | is-hour-disabled | `(hour: number) => boolean` | `() => false` | Callback function for disabling hours. |
 | is-minute-disabled | `(minute: number, hour: number) => boolean` | `() => false` | Callback function for disabling minutes. |
 | is-second-disabled | `(second: number, minute: number, hour: number) => boolean` | `() => false` | Callback function for disabling seconds. |
