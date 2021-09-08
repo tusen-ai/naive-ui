@@ -14,14 +14,16 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      ts1: null,
-      ts2: 1183135260000,
-      range1: null,
-      range2: null
+      ts1: ref(null),
+      ts2: ref(1183135260000),
+      range1: ref(null),
+      range2: ref(null)
     }
   }
-}
+})
 ```

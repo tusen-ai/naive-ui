@@ -95,4 +95,32 @@ describe('n-input-number', () => {
     }
     expect(addBtn.classes()).toContain('n-button--disabled')
   })
+
+  it('should work with decimal value', async () => {
+    const wrapper = mount(NInputNumber, {
+      attachTo: document.body,
+      props: {
+        defaultValue: 0
+      }
+    })
+    wrapper.find('input').element.value = '0.22'
+    await wrapper.find('input').trigger('input')
+    await wrapper.find('input').trigger('blur')
+    expect(wrapper.find('input').element.value).toEqual('0.22')
+    await wrapper.setProps({ step: 2 })
+    wrapper.find('input').element.value = '0.3333'
+    await wrapper.find('input').trigger('input')
+    await wrapper.find('input').trigger('blur')
+    expect(wrapper.find('input').element.value).toEqual('0.3333')
+    const addBtn = wrapper.findAll('.n-input__suffix > button')[1]
+    await addBtn.trigger('click')
+    expect(wrapper.find('input').element.value).toEqual('2.3333')
+    await wrapper.setProps({ step: 2.333333 })
+    await addBtn.trigger('click')
+    expect(wrapper.find('input').element.value).toEqual('4.666633')
+    await wrapper.setProps({ step: 2.33 })
+    await addBtn.trigger('click')
+    expect(wrapper.find('input').element.value).toEqual('6.996633')
+    wrapper.unmount()
+  })
 })

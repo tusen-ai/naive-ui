@@ -11,11 +11,13 @@ Date Picker can be `small`, `medium` or `large` sized.
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      timestamp: null
+      timestamp: ref(null)
     }
   }
-}
+})
 ```

@@ -6,11 +6,13 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      range: [1183135260000, Date.now()]
+      range: ref([1183135260000, Date.now()])
     }
   }
-}
+})
 ```

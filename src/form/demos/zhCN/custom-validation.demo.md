@@ -29,11 +29,13 @@
 ```
 
 ```js
+import { defineComponent, computed, ref } from 'vue'
+
 function createStatus (value) {
   switch (value) {
-    case '10: 30':
+    case '10:30':
       return undefined
-    case '10: 29':
+    case '10:29':
       return 'warning'
     default:
       return 'error'
@@ -42,60 +44,62 @@ function createStatus (value) {
 
 function createFeedback (value) {
   switch (value) {
-    case '10: 30':
+    case '10:30':
       return '十点半的飞机已经到了'
-    case '10: 29':
-      return '虽然差不多了，请把时间调到 10: 30'
+    case '10:29':
+      return '虽然差不多了，请把时间调到 10:30'
     default:
-      return '请把时间调到 10: 30'
+      return '请把时间调到 10:30'
   }
 }
 
 function createTimeForNumber (num) {
-  return `${parseInt(num / 100, 10)}: ${num % 100}`
+  return `${parseInt(num / 100, 10)}:${num % 100}`
 }
 
-export default {
-  computed: {
-    inputValidationStatus () {
-      return createStatus(this.inputValue)
-    },
-    inputFeedback () {
-      return createFeedback(this.inputValue)
-    },
-    inputNumberValidationStatus () {
-      return createStatus(createTimeForNumber(this.inputNumberValue))
-    },
-    inputNumberFeedback () {
-      return createFeedback(createTimeForNumber(this.inputNumberValue))
-    },
-    selectValidationStatus () {
-      return createStatus(this.selectValue)
-    },
-    selectFeedback () {
-      return createFeedback(this.selectValue)
-    }
-  },
-  data () {
+export default defineComponent({
+  setup () {
+    const inputValueRef = ref('10:29')
+    const inputNumberValueRef = ref(1029)
+    const selectValueRef = ref('10:29')
+
     return {
-      inputValue: '10: 29',
-      inputNumberValue: 1029,
-      selectValue: '10: 29',
+      inputValue: inputValueRef,
+      inputNumberValue: inputNumberValueRef,
+      selectValue: selectValueRef,
       selectOptions: [
         {
-          label: '10: 28',
-          value: '10: 28'
+          label: '10:28',
+          value: '10:28'
         },
         {
-          label: '10: 29',
-          value: '10: 29'
+          label: '10:29',
+          value: '10:29'
         },
         {
-          label: '10: 30',
-          value: '10: 30'
+          label: '10:30',
+          value: '10:30'
         }
-      ]
+      ],
+      inputValidationStatus: computed(() => {
+        return createStatus(inputValueRef.value)
+      }),
+      inputFeedback: computed(() => {
+        return createFeedback(inputValueRef.value)
+      }),
+      inputNumberValidationStatus: computed(() => {
+        return createStatus(createTimeForNumber(inputNumberValueRef.value))
+      }),
+      inputNumberFeedback: computed(() => {
+        return createFeedback(createTimeForNumber(inputNumberValueRef.value))
+      }),
+      selectValidationStatus: computed(() => {
+        return createStatus(selectValueRef.value)
+      }),
+      selectFeedback: computed(() => {
+        return createFeedback(selectValueRef.value)
+      })
     }
   }
-}
+})
 ```

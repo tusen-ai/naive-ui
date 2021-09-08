@@ -66,8 +66,9 @@ describe('n-dialog', () => {
         return null
       }
     })
-    await mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    const wrapper = await mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
     expect(document.querySelector('.n-button__icon')).not.toEqual(null)
+    wrapper.unmount()
   })
 
   it('maskClosable', async () => {
@@ -86,12 +87,13 @@ describe('n-dialog', () => {
         return null
       }
     })
-    mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    const wrapper = mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
     document.body.dispatchEvent(mousedownEvent)
     document.body.dispatchEvent(mouseupEvent)
     await nextTick(() => {
       expect(document.querySelector('.n-dialog')).not.toBeNull()
     })
+    wrapper.unmount()
   })
 
   it('onMaskClick', async () => {
@@ -111,9 +113,31 @@ describe('n-dialog', () => {
         return null
       }
     })
-    await mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    const wrapper = await mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
     document.body.dispatchEvent(mousedownEvent)
     document.body.dispatchEvent(mouseupEvent)
     expect(onMaskClick).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `style` option', async () => {
+    const Test = defineComponent({
+      setup () {
+        const dialog = useDialog()
+        dialog.warning({
+          title: 'Custom style',
+          content: 'Content',
+          style: {
+            color: 'rgb(79, 178, 51)'
+          }
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = await mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    expect(document.querySelector('.n-dialog')?.getAttribute('style')).toContain('color: rgb(79, 178, 51);')
+    wrapper.unmount()
   })
 })
