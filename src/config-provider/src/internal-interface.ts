@@ -183,7 +183,7 @@ export interface GlobalComponentConfig {
   DynamicInput?: {
     buttonSize?: ButtonSize
   }
-  Empty?: EmptyProps
+  Empty?: Pick<EmptyProps, 'description' | 'renderIcon'>
 }
 
 export interface GlobalIconConfig {

@@ -5,7 +5,9 @@ import {
   PropType,
   CSSProperties,
   renderSlot,
-  inject
+  inject,
+  VNodeChild,
+  isVNode
 } from 'vue'
 import { EmptyIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
@@ -24,13 +26,14 @@ const emptyProps = {
     default: undefined
   },
   showDescription: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
+    type: Boolean,
+    default: true
   },
   size: {
-    type: String as PropType<'small' | 'medium' | 'large' | 'huge' | undefined>,
-    default: undefined
-  }
+    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
+    default: 'medium'
+  },
+  renderIcon: Function as PropType<() => VNodeChild>
 }
 
 export type EmptyProps = ExtractPublicPropTypes<typeof emptyProps>
@@ -56,33 +59,24 @@ export default defineComponent({
         NConfigProvider?.mergedComponentPropsRef.value?.Empty?.description
       )
     })
-    const mergedShowDescriptionRef = computed(() => {
-      return (
-        props.showDescription ??
-        NConfigProvider?.mergedComponentPropsRef.value?.Empty
-          ?.showDescription ??
-        true
-      )
-    })
-    const mergedSizeRef = computed(() => {
-      return (
-        props.size ??
-        NConfigProvider?.mergedComponentPropsRef.value?.Empty?.size ??
-        'medium'
-      )
+    const mergedDefaultIconRef = computed(() => {
+      const defaultIcon =
+        NConfigProvider?.mergedComponentPropsRef.value?.Empty?.renderIcon?.()
+      return isVNode(defaultIcon) ? defaultIcon : <EmptyIcon />
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      mergedShowDescription: mergedShowDescriptionRef,
+      mergedDefaultIcon: mergedDefaultIconRef,
       localizedDescription: computed(() => {
         return mergedDescriptionRef.value || localeRef.value.description
       }),
       cssVars: computed(() => {
+        const { size } = props
         const {
           common: { cubicBezierEaseInOut },
           self: {
-            [createKey('iconSize', mergedSizeRef.value)]: iconSize,
-            [createKey('fontSize', mergedSizeRef.value)]: fontSize,
+            [createKey('iconSize', size)]: iconSize,
+            [createKey('fontSize', size)]: fontSize,
             textColor,
             iconColor,
             extraTextColor
@@ -109,11 +103,11 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-empty__icon`}>
           {renderSlot($slots, 'icon', undefined, () => [
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => <EmptyIcon /> }}
+              {{ default: () => this.mergedDefaultIcon }}
             </NBaseIcon>
           ])}
         </div>
-        {this.mergedShowDescription ? (
+        {this.showDescription ? (
           <div class={`${mergedClsPrefix}-empty__description`}>
             {renderSlot($slots, 'default', undefined, () => [
               this.localizedDescription
