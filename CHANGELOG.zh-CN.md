@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-time-picker` 新增 `inputReadonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
+
 ## 2.18.1 (2021-09-08)
 
 ### Feats

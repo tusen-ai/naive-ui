@@ -98,6 +98,7 @@ const timePickerProps = {
   size: String as PropType<Size>,
   isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
   isSecondDisabled: Function as PropType<IsSecondDisabled>,
+  inputReadonly: Boolean,
   clearable: Boolean,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -665,6 +666,7 @@ export default defineComponent({
                       onClear={this.handleTimeInputClear}
                       internalDeactivateOnEnter
                       internalForceFocus={this.active}
+                      readonly={this.inputReadonly || this.mergedDisabled}
                       onClick={this.handleTriggerClick}
                     >
                       {this.showIcon
