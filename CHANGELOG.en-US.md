@@ -1,8 +1,13 @@
 # CHANGELOG
 
+## Pending
+
 ### Feats
 
-- `n-time-picker` add `inputReadonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
+- `n-cascader` show `Empty` component when `options` prop is empty, closes [#1092](https://github.com/TuSimple/naive-ui/issues/1092).
+- `n-tree` add `check-strategy` prop.
+- `n-date-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
+- `n-time-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
 
 ## 2.18.1 (2021-09-08)
 
@@ -15,7 +20,7 @@
 ### Fixes
 
 - Fix `n-step` doesn't work with `v-for` children.
-- Fix `n-step` cannot enter decimals when `step` is not a decimal.
+- Fix `n-input-number` cannot enter decimals when `step` is not a decimal.
 
 ## 2.18.0 (2021-09-07)
 

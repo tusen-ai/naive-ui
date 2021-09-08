@@ -139,5 +139,26 @@ describe('n-cascader', () => {
     await wrapper.setProps({ checkStrategy: 'child' })
 
     expect(document.querySelector('.n-checkbox')).toEqual(null)
+    wrapper.unmount()
+  })
+
+  it('should work with `on-blur` prop', async () => {
+    const onBlur = jest.fn()
+    const wrapper = mount(NCascader, {
+      props: { options: getOptions(), onBlur: onBlur }
+    })
+    await wrapper.find('.n-base-selection').trigger('focusout')
+    expect(onBlur).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `on-focus` prop', async () => {
+    const onFocus = jest.fn()
+    const wrapper = mount(NCascader, {
+      props: { options: getOptions(), onFocus: onFocus }
+    })
+    await wrapper.find('.n-base-selection').trigger('focusin')
+    expect(onFocus).toHaveBeenCalled()
+    wrapper.unmount()
   })
 })

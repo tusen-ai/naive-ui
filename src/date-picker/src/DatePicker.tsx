@@ -109,6 +109,7 @@ const datePickerProps = {
     default: undefined
   },
   ranges: Object as PropType<Record<string, [number, number]>>,
+  inputReadonly: Boolean,
   closeOnSelect: Boolean,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
@@ -664,7 +665,7 @@ export default defineComponent({
       size: this.mergedSize,
       passivelyActivated: true,
       disabled: this.mergedDisabled,
-      readonly: this.mergedDisabled,
+      readonly: this.inputReadonly || this.mergedDisabled,
       clearable,
       onClear: this.handleClear,
       onClick: this.handleTriggerClick,
