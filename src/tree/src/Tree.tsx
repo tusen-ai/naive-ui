@@ -213,7 +213,7 @@ const treeProps = {
     type: Boolean,
     default: true
   },
-  internalCheckStrategy: {
+  checkStrategy: {
     type: String as PropType<CheckStrategy>,
     default: 'all'
   }
@@ -269,7 +269,7 @@ export default defineComponent({
       })
     })
     const mergedCheckStrategyRef = computed(() =>
-      props.leafOnly ? 'child' : props.internalCheckStrategy
+      props.leafOnly ? 'child' : props.checkStrategy
     )
     const displayedCheckedKeysRef = computed(() => {
       return checkedStatusRef.value.checkedKeys
