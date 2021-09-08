@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-tree` 增加 `check-strategy` 文档属性
+
 ## 2.18.1 (2021-09-08)
 
 ### Feats
