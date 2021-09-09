@@ -58,19 +58,33 @@ export default defineComponent({
   },
   setup () {
     const currentRef = ref(1)
+    const stepsNumber = ref(4)
+    
     return {
       currentStatus: ref('process'),
       current: currentRef,
       next () {
-        if (currentRef.value === null) currentRef.value = 1
-        else if (currentRef.value >= 4) currentRef.value = null
-        else currentRef.value++
+        if (currentRef.value < stepsNumber.value) { // prevent from circling the steps
+          if (currentRef.value === null) {
+            currentRef.value = 1
+          }else if (currentRef.value >= stepsNumber.value) {
+            currentRef.value = null
+          }else {
+            currentRef.value++
+          }
+        }
       },
       prev () {
-        if (currentRef.value === 0) currentRef.value = null
-        else if (currentRef.value === null) currentRef.value = 4
-        else currentRef.value--
-      }
+        if (currentRef.value !== 1) { // prevent from circling the steps
+          if (currentRef.value === 0) {
+            currentRef.value = null
+          }else if (currentRef.value === null) {
+            currentRef.value = 4
+          }else {
+            currentRef.value--
+          }
+        }
+      },
     }
   }
 })
