@@ -68,14 +68,19 @@ describe('n-rate', () => {
 
     const testNumber = 2
 
-    await wrapper.setProps({ onUpdateValue })
+    await wrapper.setProps({ onUpdateValue, 'onUpdate:value': onUpdateValue })
     await wrapper.findAll('.n-rate__item')[testNumber].trigger('click')
     expect(onUpdateValue).toHaveBeenCalledWith(testNumber + 1)
+    expect(onUpdateValue).toHaveBeenCalledTimes(2)
 
-    await wrapper.setProps({ onUpdateValue: [onUpdateValue, onUpdateValue2] })
+    await wrapper.setProps({
+      onUpdateValue: [onUpdateValue, onUpdateValue2],
+      'onUpdate:value': [onUpdateValue, onUpdateValue2]
+    })
     await wrapper.findAll('.n-rate__item')[testNumber].trigger('click')
     expect(onUpdateValue).toHaveBeenCalledWith(testNumber + 1)
     expect(onUpdateValue2).toHaveBeenCalledWith(testNumber + 1)
+    expect(onUpdateValue).toHaveBeenCalledTimes(4)
 
     wrapper.unmount()
   })
