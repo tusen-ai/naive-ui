@@ -65,7 +65,7 @@ export default defineComponent({
     )
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      mergedRenderIconRef,
+      mergedRenderIcon: mergedRenderIconRef,
       localizedDescription: computed(() => {
         return mergedDescriptionRef.value || localeRef.value.description
       }),
@@ -102,7 +102,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-empty__icon`}>
           {renderSlot($slots, 'icon', undefined, () => [
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: this.mergedRenderIconRef }}
+              {{ default: this.mergedRenderIcon }}
             </NBaseIcon>
           ])}
         </div>
