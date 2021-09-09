@@ -68,14 +68,19 @@ describe('n-rate', () => {
 
     const testNumber = 2
 
-    await wrapper.setProps({ onUpdateValue })
+    await wrapper.setProps({ onUpdateValue, 'onUpdate:value': onUpdateValue })
     await wrapper.findAll('.n-rate__item')[testNumber].trigger('click')
     expect(onUpdateValue).toHaveBeenCalledWith(testNumber + 1)
+    expect(onUpdateValue).toHaveBeenCalledTimes(2)
 
-    await wrapper.setProps({ onUpdateValue: [onUpdateValue, onUpdateValue2] })
+    await wrapper.setProps({
+      onUpdateValue: [onUpdateValue, onUpdateValue2],
+      'onUpdate:value': [onUpdateValue, onUpdateValue2]
+    })
     await wrapper.findAll('.n-rate__item')[testNumber].trigger('click')
     expect(onUpdateValue).toHaveBeenCalledWith(testNumber + 1)
     expect(onUpdateValue2).toHaveBeenCalledWith(testNumber + 1)
+    expect(onUpdateValue).toHaveBeenCalledTimes(4)
 
     wrapper.unmount()
   })
@@ -95,6 +100,20 @@ describe('n-rate', () => {
 
     await wrapper.findAll('.n-rate__item')[3].trigger('mousemove')
     expect(wrapper.findAll('.n-rate__item--active').length).toBe(3)
+
+    wrapper.unmount()
+  })
+
+  it('should work with `allowHalf` prop', async () => {
+    const onUpdateValue = jest.fn()
+    const wrapper = mount(NRate)
+    await wrapper.setProps({ allowHalf: true })
+
+    const testNumber = 2
+
+    await wrapper.setProps({ onUpdateValue })
+    await wrapper.findAll('.n-rate__half')[testNumber].trigger('click')
+    expect(onUpdateValue).toHaveBeenCalledWith(testNumber + 0.5)
 
     wrapper.unmount()
   })
