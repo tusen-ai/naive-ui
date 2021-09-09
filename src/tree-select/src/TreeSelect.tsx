@@ -418,25 +418,31 @@ export default defineComponent({
         }
       }
     }
-    function getOptionsAndMergeKeysOfKeys (
+    function getOptionsByKeys (
       keys: Key[]
     ): Array<{ option: TreeSelectOption | null }> {
-      const { value: treeMate } = dataTreeMateRef
+      const {
+        value: { getNode }
+      } = dataTreeMateRef
       return keys.map((i) => {
-        return { option: treeMate.getNode(i)?.rawNode || null }
+        return { option: getNode(i)?.rawNode || null }
       })
     }
     function handleUpdateSelectedKeys (keys: Key[]): void {
       if (props.checkable && props.multiple) {
         return
       }
-      const options = getOptionsAndMergeKeysOfKeys(keys)
+      const options = getOptionsByKeys(keys)
       if (props.multiple) {
         doUpdateValue(keys, options)
       } else {
-        doUpdateValue(keys[0] ?? null, {
-          option: options[0].option || null
-        })
+        keys.length
+          ? doUpdateValue(keys[0], {
+            option: options[0].option
+          })
+          : doUpdateValue(null, {
+            option: null
+          })
         closeMenu()
         if (!props.filterable) {
           // Currently it is not necessary. However if there is an action slot,
@@ -452,7 +458,7 @@ export default defineComponent({
     function handleUpdateCheckedKeys (keys: Key[]): void {
       // only in checkable & multiple mode, we use tree's check update
       if (props.checkable && props.multiple) {
-        const options = getOptionsAndMergeKeysOfKeys(keys)
+        const options = getOptionsByKeys(keys)
         doUpdateValue(keys, options)
         if (props.filterable) {
           focusSelectionInput()
@@ -516,12 +522,12 @@ export default defineComponent({
                 cascade: mergedCascadeRef.value
               }
             )
-            const options = getOptionsAndMergeKeysOfKeys(checkedKeys)
+            const options = getOptionsByKeys(checkedKeys)
             doUpdateValue(checkedKeys, options)
           } else {
             const nextValue = Array.from(mergedValue)
             nextValue.splice(index, 1)
-            const options = getOptionsAndMergeKeysOfKeys(nextValue)
+            const options = getOptionsByKeys(nextValue)
             doUpdateValue(nextValue, options)
           }
         }
