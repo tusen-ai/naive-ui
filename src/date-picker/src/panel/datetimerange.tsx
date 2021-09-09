@@ -16,12 +16,7 @@ export default defineComponent({
   props: useDualCalendar.props,
   setup (props) {
     onMounted(() => {
-      if (props.actions?.includes('cancel')) {
-        warn(
-          'DateTimeRangePanel',
-          'The `cancel` action is not supported for n-date-picker of `datetimerange` type'
-        )
-      } else if (props.actions?.includes('now')) {
+      if (props.actions?.includes('now')) {
         warn(
           'DateTimeRangePanel',
           'The `now` action is not supported for n-date-picker of `datetimerange` type'

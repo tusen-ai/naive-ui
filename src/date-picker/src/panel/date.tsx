@@ -20,12 +20,7 @@ export default defineComponent({
   props: useCalendar.props,
   setup (props) {
     onMounted(() => {
-      if (props.actions?.includes('cancel')) {
-        warn(
-          'DatePanel',
-          'The `cancel` action is not supported for n-date-picker of `date` type'
-        )
-      } else if (props.actions?.includes('confirm')) {
+      if (props.actions?.includes('confirm')) {
         warn(
           'DatePanel',
           'The `confirm` action is not supported for n-date-picker of `date` type'
