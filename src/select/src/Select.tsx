@@ -297,21 +297,9 @@ export default defineComponent({
     const selectedOptionRef = computed<SelectBaseOption | null>(() => {
       const { value: mergedValue } = mergedValueRef
       if (!props.multiple && !Array.isArray(mergedValue)) {
-        const { value: valOptMap } = valOptMapRef
-        const { value: wrappedFallbackOption } = wrappedFallbackOptionRef
         if (mergedValue === null) return null
-        let selectedOption = null
-        if (valOptMap.has(mergedValue as any)) {
-          selectedOption = valOptMap.get(mergedValue)
-        } else if (props.remote) {
-          selectedOption = memoValOptMapRef.value.get(mergedValue)
-        }
-        return (
-          selectedOption ||
-          // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-          (wrappedFallbackOption && wrappedFallbackOption(mergedValue)) ||
-          null
-        )
+        const options = getMergedOptions([mergedValue])
+        return options.length ? options[0] : null
       }
       return null
     })
