@@ -6,8 +6,7 @@ import {
   CSSProperties,
   renderSlot,
   inject,
-  VNodeChild,
-  isVNode
+  VNodeChild
 } from 'vue'
 import { EmptyIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
@@ -59,14 +58,15 @@ export default defineComponent({
         NConfigProvider?.mergedComponentPropsRef.value?.Empty?.description
       )
     })
-    const mergedDefaultIconRef = computed(() => {
-      const defaultIcon =
-        NConfigProvider?.mergedComponentPropsRef.value?.Empty?.renderIcon?.()
-      return isVNode(defaultIcon) ? defaultIcon : <EmptyIcon />
-    })
+    const mergedRenderIconRef = computed(
+      () =>
+        NConfigProvider?.mergedComponentPropsRef.value?.Empty?.renderIcon?.() ?? (
+          <EmptyIcon />
+        )
+    )
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      mergedDefaultIcon: mergedDefaultIconRef,
+      mergedRenderIcon: mergedRenderIconRef,
       localizedDescription: computed(() => {
         return mergedDescriptionRef.value || localeRef.value.description
       }),
@@ -103,7 +103,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-empty__icon`}>
           {renderSlot($slots, 'icon', undefined, () => [
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => this.mergedDefaultIcon }}
+              {{ default: () => this.mergedRenderIcon }}
             </NBaseIcon>
           ])}
         </div>
