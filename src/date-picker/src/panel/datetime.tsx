@@ -1,4 +1,4 @@
-import { h, defineComponent, renderSlot } from 'vue'
+import { h, defineComponent, renderSlot, onMounted } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import { NTimePicker } from '../../../time-picker'
 import { NInput } from '../../../input'
@@ -10,6 +10,7 @@ import {
 } from '../../../_internal/icons'
 import { NBaseFocusDetector } from '../../../_internal'
 import { useCalendar } from './use-calendar'
+import { warn } from '../../../_utils'
 
 /**
  * DateTime Panel
@@ -21,6 +22,14 @@ export default defineComponent({
   name: 'DateTimePanel',
   props: useCalendar.props,
   setup (props) {
+    onMounted(() => {
+      if (props.actions?.includes('cancel')) {
+        warn(
+          'DateTimePanel',
+          'The `cancel` action is not supported for n-date-picker of `datetime` type'
+        )
+      }
+    })
     return useCalendar(props, 'datetime')
   },
   render () {

@@ -13,6 +13,7 @@
 ### Fixes
 
 - 修复 `n-p` `depth` 传入 number 报错
+- 修复 `n-date-picker` 的 `actions` 属性类型
 
 ## 2.18.1 (2021-09-08)
 

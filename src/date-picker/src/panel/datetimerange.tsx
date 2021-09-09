@@ -1,4 +1,4 @@
-import { defineComponent, h, renderSlot } from 'vue'
+import { defineComponent, h, onMounted, renderSlot, warn } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import { NInput } from '../../../input'
 import { NTimePicker } from '../../../time-picker'
@@ -15,6 +15,19 @@ export default defineComponent({
   name: 'DateTimeRangePanel',
   props: useDualCalendar.props,
   setup (props) {
+    onMounted(() => {
+      if (props.actions?.includes('cancel')) {
+        warn(
+          'DateTimeRangePanel',
+          'The `cancel` action is not supported for n-date-picker of `datetimerange` type'
+        )
+      } else if (props.actions?.includes('now')) {
+        warn(
+          'DateTimeRangePanel',
+          'The `now` action is not supported for n-date-picker of `datetimerange` type'
+        )
+      }
+    })
     return useDualCalendar(props, 'datetimerange')
   },
   render () {

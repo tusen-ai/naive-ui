@@ -13,6 +13,7 @@
 ### Fixes
 
 - Fix `n-p` warns when `depth` is number.
+- Fix `n-date-picker`‘s type of `actions` prop.
 
 ## 2.18.1 (2021-09-08)
 

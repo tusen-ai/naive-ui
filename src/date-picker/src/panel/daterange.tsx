@@ -1,4 +1,4 @@
-import { defineComponent, h, renderSlot } from 'vue'
+import { defineComponent, h, onMounted, renderSlot, warn } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import {
   BackwardIcon,
@@ -13,6 +13,19 @@ export default defineComponent({
   name: 'DateRangePanel',
   props: useDualCalendar.props,
   setup (props) {
+    onMounted(() => {
+      if (props.actions?.includes('cancel')) {
+        warn(
+          'DateRangePanel',
+          'The `cancel` action is not supported for n-date-picker of `daterange` type'
+        )
+      } else if (props.actions?.includes('now')) {
+        warn(
+          'DateRangePanel',
+          'The `now` action is not supported for n-date-picker of `daterange` type'
+        )
+      }
+    })
     return useDualCalendar(props, 'daterange')
   },
   render () {

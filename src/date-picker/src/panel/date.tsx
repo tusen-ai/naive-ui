@@ -1,4 +1,4 @@
-import { h, defineComponent, renderSlot } from 'vue'
+import { h, defineComponent, renderSlot, onMounted, warn } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import {
   BackwardIcon,
@@ -19,6 +19,19 @@ export default defineComponent({
   name: 'DatePanel',
   props: useCalendar.props,
   setup (props) {
+    onMounted(() => {
+      if (props.actions?.includes('cancel')) {
+        warn(
+          'DatePanel',
+          'The `cancel` action is not supported for n-date-picker of `date` type'
+        )
+      } else if (props.actions?.includes('confirm')) {
+        warn(
+          'DatePanel',
+          'The `confirm` action is not supported for n-date-picker of `date` type'
+        )
+      }
+    })
     return useCalendar(props, 'date')
   },
   render () {
