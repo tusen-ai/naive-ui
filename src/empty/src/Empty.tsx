@@ -60,13 +60,12 @@ export default defineComponent({
     })
     const mergedRenderIconRef = computed(
       () =>
-        NConfigProvider?.mergedComponentPropsRef.value?.Empty?.renderIcon?.() ?? (
-          <EmptyIcon />
-        )
+        NConfigProvider?.mergedComponentPropsRef.value?.Empty?.renderIcon ||
+        (() => <EmptyIcon />)
     )
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      mergedRenderIcon: mergedRenderIconRef,
+      mergedRenderIconRef,
       localizedDescription: computed(() => {
         return mergedDescriptionRef.value || localeRef.value.description
       }),
@@ -103,7 +102,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-empty__icon`}>
           {renderSlot($slots, 'icon', undefined, () => [
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => this.mergedRenderIcon }}
+              {{ default: this.mergedRenderIconRef }}
             </NBaseIcon>
           ])}
         </div>
