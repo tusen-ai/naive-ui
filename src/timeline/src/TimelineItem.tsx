@@ -7,7 +7,7 @@ import {
   renderSlot,
   CSSProperties
 } from 'vue'
-import { createKey, throwError } from '../../_utils'
+import { createKey, formatLength, throwError } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { timelineInjectionKey } from './Timeline'
 
@@ -41,7 +41,7 @@ export default defineComponent({
       mergedClsPrefix: NTimeline.mergedClsPrefixRef,
       cssVars: computed(() => {
         const {
-          props: { size },
+          props: { size, iconSize: iconSizeProp },
           mergedThemeRef
         } = NTimeline
         const { type } = props
@@ -53,15 +53,18 @@ export default defineComponent({
             lineColor,
             titleFontWeight,
             contentFontSize,
+            [createKey('iconSize', size)]: iconSize,
             [createKey('titleMargin', size)]: titleMargin,
             [createKey('titleFontSize', size)]: titleFontSize,
-            [createKey('circleBorder', type)]: circleBorder
+            [createKey('circleBorder', type)]: circleBorder,
+            [createKey('iconColor', type)]: iconColor
           },
           common: { cubicBezierEaseInOut }
         } = mergedThemeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
           '--circle-border': circleBorder,
+          '--icon-color': iconColor,
           '--content-font-size': contentFontSize,
           '--content-text-color': contentTextColor,
           '--line-color': lineColor,
@@ -69,13 +72,14 @@ export default defineComponent({
           '--title-font-size': titleFontSize,
           '--title-font-weight': titleFontWeight,
           '--title-margin': titleMargin,
-          '--title-text-color': titleTextColor
+          '--title-text-color': titleTextColor,
+          '--icon-size': formatLength(iconSizeProp) || iconSize
         }
       })
     }
   },
   render () {
-    const { mergedClsPrefix, color } = this
+    const { mergedClsPrefix, color, $slots } = this
     return (
       <div
         class={[
@@ -86,24 +90,31 @@ export default defineComponent({
       >
         <div class={`${mergedClsPrefix}-timeline-item-timeline`}>
           <div class={`${mergedClsPrefix}-timeline-item-timeline__line`} />
-          <div
-            class={`${mergedClsPrefix}-timeline-item-timeline__circle`}
-            style={{ borderColor: color }}
-          />
+          {$slots.icon ? (
+            <div
+              class={`${mergedClsPrefix}-timeline-item-timeline__icon`}
+              style={{ color: color }}
+            >
+              {$slots.icon()}
+            </div>
+          ) : (
+            <div
+              class={`${mergedClsPrefix}-timeline-item-timeline__circle`}
+              style={{ borderColor: color }}
+            />
+          )}
         </div>
         <div class={`${mergedClsPrefix}-timeline-item-content`}>
-          {this.title || this.$slots.header ? (
+          {this.title || $slots.header ? (
             <div class={`${mergedClsPrefix}-timeline-item-content__title`}>
-              {renderSlot(this.$slots, 'header', undefined, () => [this.title])}
+              {renderSlot($slots, 'header', undefined, () => [this.title])}
             </div>
           ) : null}
           <div class={`${mergedClsPrefix}-timeline-item-content__content`}>
-            {renderSlot(this.$slots, 'default', undefined, () => [
-              this.content
-            ])}
+            {renderSlot($slots, 'default', undefined, () => [this.content])}
           </div>
           <div class={`${mergedClsPrefix}-timeline-item-content__meta`}>
-            {renderSlot(this.$slots, 'footer', undefined, () => [this.time])}
+            {renderSlot($slots, 'footer', undefined, () => [this.time])}
           </div>
         </div>
       </div>

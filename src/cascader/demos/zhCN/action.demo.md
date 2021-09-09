@@ -3,17 +3,14 @@
 有人要在级联菜单里用这个插槽吗？
 
 ```html
-<n-cascader
-  v-model:value="value"
-  placeholder="没啥用的值"
-  :options="options"
-  :leaf-only="false"
->
+<n-cascader v-model:value="value" placeholder="没啥用的值" :options="options">
   <template #action>站在能分割世界的桥</template>
 </n-cascader>
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+
 function getOptions (depth = 2, iterator = 1, prefix = '') {
   const length = 12
   const options = []
@@ -43,12 +40,12 @@ function getOptions (depth = 2, iterator = 1, prefix = '') {
   return options
 }
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      value: null,
+      value: ref(null),
       options: getOptions()
     }
   }
-}
+})
 ```

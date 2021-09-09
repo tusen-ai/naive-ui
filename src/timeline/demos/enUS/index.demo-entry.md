@@ -9,6 +9,7 @@ basic
 size
 item-placement
 horizontal
+customize-icon
 ```
 
 ## API
@@ -25,8 +26,9 @@ horizontal
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| color | `string` | `undefined` | 选项的颜色 |
+| color | `string` | `undefined` | Item color. |
 | content | `string` | `undefined` | Item content. |
+| icon-size | `number` | `undefined` | Size of icon part. |
 | time | `string` | `undefined` | Item time. |
 | title | `string` | `undefined` | Item title. |
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Item type. |
@@ -42,5 +44,6 @@ horizontal
 | Name    | Parameters | Description                                    |
 | ------- | ---------- | ---------------------------------------------- |
 | default | `()`       | Timeline item content.                         |
+| icon    | `()`       | Timeline item customize timeline icon.         |
 | footer  | `()`       | Content at the bottom of the timeline options. |
 | header  | `()`       | Content at the top of the timeline options.    |

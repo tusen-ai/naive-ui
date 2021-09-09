@@ -17,38 +17,17 @@ import style from './styles/text.cssr'
 
 const textProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
-  code: {
-    type: Boolean,
-    default: false
-  },
+  code: Boolean,
   type: {
     type: String,
     default: 'default'
   },
-  delete: {
-    type: Boolean,
-    default: false
-  },
-  strong: {
-    type: Boolean,
-    default: false
-  },
-  italic: {
-    type: Boolean,
-    default: false
-  },
-  underline: {
-    type: Boolean,
-    default: false
-  },
-  depth: {
-    type: [String, Number] as PropType<1 | 2 | 3 | '1' | '2' | '3' | undefined>,
-    default: undefined
-  },
-  tag: {
-    type: String,
-    default: undefined
-  },
+  delete: Boolean,
+  strong: Boolean,
+  italic: Boolean,
+  underline: Boolean,
+  depth: [String, Number] as PropType<1 | 2 | 3 | '1' | '2' | '3'>,
+  tag: String,
   // deprecated
   as: {
     type: String,

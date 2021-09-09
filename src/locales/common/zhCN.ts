@@ -19,7 +19,7 @@ const zhCN: NLocale = {
   },
   Time: {
     dateFormat: 'yyyy-MM-dd',
-    dateTimeFormat: 'yyyy-MM-dd hh:mm:ss'
+    dateTimeFormat: 'yyyy-MM-dd HH:mm:ss'
   },
   DatePicker: {
     yearFormat: 'yyyy年',

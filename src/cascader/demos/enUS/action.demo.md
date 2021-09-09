@@ -7,13 +7,14 @@ Is there anybody who needs an action slot on a cascader menu?
   v-model:value="value"
   placeholder="Meaningless values"
   :options="options"
-  :leaf-only="false"
 >
   <template #action>Standing on a bridge that can divide the world</template>
 </n-cascader>
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+
 function getOptions (depth = 2, iterator = 1, prefix = '') {
   const length = 12
   const options = []
@@ -43,12 +44,12 @@ function getOptions (depth = 2, iterator = 1, prefix = '') {
   return options
 }
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      value: null,
+      value: ref(null),
       options: getOptions()
     }
   }
-}
+})
 ```

@@ -13,7 +13,7 @@ text
 router-link
 ```
 
-## Props
+## API
 
 ### Text Props
 
@@ -53,8 +53,6 @@ router-link
 | Name       | Type      | Default | Description |
 | ---------- | --------- | ------- | ----------- |
 | align-text | `boolean` | `false` | Text align. |
-
-## Slots
 
 ### All Typography Components
 

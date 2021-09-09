@@ -33,7 +33,8 @@ show-label
 | rules | `type FormRules = { [itemValidatePath: string]: FormItemRule \| Array<FormItemRule> \| FormRules }` | `{}` | The rules to validate form items. |
 | show-feedback | `boolean` | `true` | Whether to show the feedback area. |
 | show-label | `boolean` | `true` | Whether to show the label. |
-| show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | Whether to show a required symbol when a form item is required. |
+| show-require-mark | `boolean` | `-` | Whether to show a required symbol when a form item is required. |
+| require-mark-placement | `'left' \| 'right'` | `'right'` | Require mark placement |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 
 #### FormItemRule Type
@@ -52,7 +53,7 @@ show-label
 | --- | --- | --- | --- |
 | feedback | `string` | `undefined` | The feedback message of the form item. If set, it will replace any result of rule-based validation. |
 | first | `boolean` | `false` | Whether to only show the first validation error message. |
-| ingore-path-change | `boolean` | `false` | Usually, changing `path` will cause a re-render and naive-ui will clear the validation result. Setting `ingore-path-change` to `true` will disable that behavior. |
+| ignore-path-change | `boolean` | `false` | Usually, changing `path` will cause a re-render and naive-ui will clear the validation result. Setting `ignore-path-change` to `true` will disable that behavior. |
 | label | `string` | `undefined` | Label. |
 | label-align | `'left' \| 'right'` | `undefined` | Text alignment inside the label. If not set, it will inherit the parent form's `label-align`. |
 | label-placement | `'left' \| 'top'` | `undefined` | If not set, it will inherit the parent form's `label-placement`. |
@@ -64,7 +65,8 @@ show-label
 | rule-path | `string` | `undefined` | The path to get rules from the parent form's rule object. If not set, it will use the path of the parent form item instead. |
 | show-feedback | `boolean` | `true` | Whether to show the feedback area. |
 | show-label | `boolean` | `true` | Whether to show a label. If not set, it will inherit `show-label` from the parent form. |
-| show-require-mark | `'left' \| 'right' \| 'boolean'` | `'right'` | Whether to show required symbol. If not set, it will use `show-require-mark` from the parent form. |
+| show-require-mark | `boolean` | `-` | Whether to show required symbol. If not set, it will use `show-require-mark` from the parent form. |
+| require-mark-placement | `'left' \| 'right'` | `'right'` | Require mark placement. If not set, it will use `require-mark-placement` from the parent form. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | The validation status of the form item. If set, it will replace the result of the rule-based validation. |
 

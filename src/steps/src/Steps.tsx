@@ -14,7 +14,7 @@ import type { MergedTheme, ThemeProps } from '../../_mixins'
 import { useConfig, useTheme } from '../../_mixins'
 import { stepsLight } from '../styles'
 import style from './styles/index.cssr'
-import { ExtractPublicPropTypes, getSlot } from '../../_utils'
+import { ExtractPublicPropTypes, flatten, getSlot } from '../../_utils'
 import type { StepsTheme } from '../styles'
 
 function stepWithIndex (step: VNodeChild, i: number): VNode | null {
@@ -87,7 +87,7 @@ export default defineComponent({
           this.vertical && `${mergedClsPrefix}-steps--vertical`
         ]}
       >
-        {stepsWithIndex(getSlot(this))}
+        {stepsWithIndex(flatten(getSlot(this)))}
       </div>
     )
   }

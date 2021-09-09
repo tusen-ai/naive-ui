@@ -1,4 +1,4 @@
-import type { TmNode, BaseOption } from './interface'
+import type { TmNode, CascaderOption } from './interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 
 function traverseWithCallback<T extends { children?: T[] }> (
@@ -19,14 +19,14 @@ function traverseWithCallback<T extends { children?: T[] }> (
 
 function createSelectOptions (
   tmNodes: TmNode[],
-  leafOnly: boolean
-): Array<SelectBaseOption & { path: BaseOption[] }> {
-  const selectOptions: Array<SelectBaseOption & { path: BaseOption[] }> = []
-  const path: BaseOption[] = []
+  checkStrategyIsChild: boolean
+): Array<SelectBaseOption & { path: CascaderOption[] }> {
+  const selectOptions: Array<SelectBaseOption & { path: CascaderOption[] }> = []
+  const path: CascaderOption[] = []
   traverseWithCallback(
     tmNodes,
     (tmNode) => {
-      if (tmNode.isLeaf || !leafOnly) {
+      if (tmNode.isLeaf || !checkStrategyIsChild) {
         if (tmNode.disabled) return
         const { rawNode } = tmNode
         path.push(rawNode)
