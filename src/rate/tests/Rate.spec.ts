@@ -98,4 +98,18 @@ describe('n-rate', () => {
 
     wrapper.unmount()
   })
+
+  it('should work with `allowHalf` prop', async () => {
+    const onUpdateValue = jest.fn()
+    const wrapper = mount(NRate)
+    await wrapper.setProps({ allowHalf: true })
+
+    const testNumber = 2
+
+    await wrapper.setProps({ onUpdateValue })
+    await wrapper.findAll('.n-rate__half')[testNumber].trigger('click')
+    expect(onUpdateValue).toHaveBeenCalledWith(testNumber + 0.5)
+
+    wrapper.unmount()
+  })
 })
