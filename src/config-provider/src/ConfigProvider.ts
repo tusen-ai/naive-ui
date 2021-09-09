@@ -38,6 +38,10 @@ export const configProviderProps = {
   },
   clsPrefix: String,
   locale: Object as PropType<NLocale | null>,
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: undefined
+  },
   dateLocale: Object as PropType<NDateLocale | null>,
   namespace: String,
   rtl: Array as PropType<RtlProp>,
@@ -100,6 +104,10 @@ export default defineComponent({
         }
       }
     })
+    const mergedSizeRef = useMemo(() => {
+      const { size } = props
+      return size === undefined ? NConfigProvider?.mergedSizeRef.value : size
+    })
     const mergedNamespaceRef = useMemo(() => {
       const { namespace } = props
       return namespace === undefined
@@ -142,6 +150,7 @@ export default defineComponent({
       mergedRtlRef,
       mergedIconsRef,
       mergedComponentPropsRef,
+      mergedSizeRef,
       mergedBorderedRef,
       mergedNamespaceRef,
       mergedClsPrefixRef,

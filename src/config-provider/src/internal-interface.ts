@@ -219,6 +219,7 @@ Record<keyof GlobalThemeWithoutCommon, RtlItem>
 
 export interface ConfigProviderInjection {
   mergedClsPrefixRef: Ref<string | undefined>
+  mergedSizeRef: Ref<string | undefined>
   mergedBorderedRef: Ref<boolean | undefined>
   mergedNamespaceRef: Ref<string | undefined>
   mergedLocaleRef: Ref<NLocale | undefined>
