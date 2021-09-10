@@ -13,6 +13,7 @@
 ### Fixes
 
 - 修复 `n-p` `depth` 传入 number 报错
+- 修复 `n-dynamic-tags` 禁用时 add 按钮未被禁用
 
 ## 2.18.1 (2021-09-08)
 

@@ -13,6 +13,7 @@
 ### Fixes
 
 - Fix `n-p` warns when `depth` is number.
+- Fix add button is not disabled when `n-dynamic-tags` is disabled.
 
 ## 2.18.1 (2021-09-08)
 
