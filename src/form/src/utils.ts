@@ -4,15 +4,18 @@ import type { FormItemSetupProps } from './FormItem'
 import { formInjectionKey } from './interface'
 import type { Size, FormItemRule } from './interface'
 import { formatLength } from '../../_utils'
+import { configProviderInjectionKey } from '../../config-provider/src/ConfigProvider'
 
 export function formItemSize (props: FormItemSetupProps): {
   mergedSize: ComputedRef<Size>
 } {
   const NForm = inject(formInjectionKey, null)
+  const NConfigProvider = inject(configProviderInjectionKey, null)
   return {
     mergedSize: computed(() => {
       if (props.size !== undefined) return props.size
       if (NForm?.size !== undefined) return NForm.size
+      if (NConfigProvider?.mergedSizeRef.value !== undefined) { return NConfigProvider.mergedSizeRef.value as Size }
       return 'medium'
     })
   }

@@ -105,6 +105,7 @@ const Button = defineComponent({
           if (formItemSize) {
             return formItemSize.value
           }
+          if (NConfigProvider?.mergedSizeRef.value) { return NConfigProvider.mergedSizeRef.value as Exclude<Size, 'tiny'> }
           return 'medium'
         }
       }

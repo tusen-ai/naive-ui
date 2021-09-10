@@ -39,7 +39,7 @@ export const configProviderProps = {
   clsPrefix: String,
   locale: Object as PropType<NLocale | null>,
   size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
+    type: String as PropType<'small' | 'medium' | 'large' | undefined>,
     default: undefined
   },
   dateLocale: Object as PropType<NDateLocale | null>,
