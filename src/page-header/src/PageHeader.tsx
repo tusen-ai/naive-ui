@@ -8,6 +8,7 @@ import style from './styles/index.cssr'
 import { ArrowBackIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import useRtl from '../../_mixins/use-rtl'
 
 const pageHeaderProps = {
   ...(useTheme.props as ThemeProps<PageHeaderTheme>),
@@ -23,7 +24,7 @@ export default defineComponent({
   name: 'PageHeader',
   props: pageHeaderProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
     const themeRef = useTheme(
       'PageHeader',
       'PageHeader',
@@ -32,7 +33,14 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const rtlEnabledRef = useRtl(
+      'PageHeader',
+      NConfigProvider?.mergedRtlRef,
+      mergedClsPrefixRef
+    )
+
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         const {
@@ -65,15 +73,8 @@ export default defineComponent({
     }
   },
   render () {
-    const {
-      onBack,
-      title,
-      subtitle,
-      extra,
-      mergedClsPrefix,
-      cssVars,
-      $slots
-    } = this
+    const { onBack, title, subtitle, extra, mergedClsPrefix, cssVars, $slots } =
+      this
     const {
       title: titleSlot,
       subtitle: subtitleSlot,
@@ -90,11 +91,32 @@ export default defineComponent({
     return (
       <div style={cssVars as CSSProperties}>
         {headerSlot ? (
-          <div class={`${mergedClsPrefix}-page-header-header`} key="breadcrumn">
+          <div
+            class={[
+              `${mergedClsPrefix}-page-header-header`,
+              [
+                {
+                  [`${mergedClsPrefix}-page-header-header--rtl`]:
+                    this.rtlEnabled
+                }
+              ]
+            ]}
+            key="breadcrumn"
+          >
             {headerSlot()}
           </div>
         ) : null}
-        <div class={`${mergedClsPrefix}-page-header`} key="header">
+        <div
+          class={[
+            `${mergedClsPrefix}-page-header`,
+            [
+              {
+                [`${mergedClsPrefix}-page-header--rtl`]: this.rtlEnabled
+              }
+            ]
+          ]}
+          key="header"
+        >
           <div class={`${mergedClsPrefix}-page-header__main`} key="back">
             {showBack ? (
               <div
@@ -134,12 +156,34 @@ export default defineComponent({
           ) : null}
         </div>
         {defaultSlot ? (
-          <div class={`${mergedClsPrefix}-page-header-content`} key="content">
+          <div
+            class={[
+              `${mergedClsPrefix}-page-header-content`,
+              [
+                {
+                  [`${mergedClsPrefix}-page-header-content--rtl`]:
+                    this.rtlEnabled
+                }
+              ]
+            ]}
+            key="content"
+          >
             {defaultSlot()}
           </div>
         ) : null}
         {footerSlot ? (
-          <div class={`${mergedClsPrefix}-page-header-footer`} key="footer">
+          <div
+            class={[
+              `${mergedClsPrefix}-page-header-footer`,
+              [
+                {
+                  [`${mergedClsPrefix}-page-header-footer--rtl`]:
+                    this.rtlEnabled
+                }
+              ]
+            ]}
+            key="footer"
+          >
             {footerSlot()}
           </div>
         ) : null}

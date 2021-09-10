@@ -8,9 +8,10 @@
 - `n-tree` 增加 `check-strategy` 文档属性
 - `n-date-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
 - `n-time-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
-- `n-config-provider` 新增 `Empty` 组件的全局配置，关闭 [#1092](https://github.com/TuSimple/naive-ui/issues/1092)
 - `n-select` 新增 `on-update:show` 属性
 - `n-auto-complete` 导出 `AutoCompleteOption` 以及 `AutoCompleteGroupOption` 类型
+- `n-config-provider` 增加 `Empty` 组件的全局配置，关闭 [#1092](https://github.com/TuSimple/naive-ui/issues/1092)
+- `n-page-header` 添加 `RTL` 支持
 
 ### Fixes
 
