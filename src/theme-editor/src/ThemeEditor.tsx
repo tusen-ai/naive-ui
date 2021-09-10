@@ -6,7 +6,8 @@ import {
   ref,
   Fragment,
   toRaw,
-  watch
+  watch,
+  VNodeChild
 } from 'vue'
 import { cloneDeep, merge } from 'lodash-es'
 import { lightTheme } from '../../themes/light'
@@ -26,6 +27,7 @@ import { NDivider } from '../../divider'
 import { NButton } from '../../button'
 import { NColorPicker } from '../../color-picker'
 import { NEmpty } from '../../empty'
+import { isNullObj, judgePeersHasVarName } from './utils'
 
 const ColorWandIcon = (
   <svg
@@ -53,6 +55,8 @@ const ColorWandIcon = (
   </svg>
 )
 
+type CompObjType = Record<string, object>
+
 export default defineComponent({
   name: 'ThemeEditor',
   inheritAttrs: false,
@@ -77,12 +81,11 @@ export default defineComponent({
       keyof typeof lightTheme
       >) {
         if (key === 'common') continue
-        if (!(overrides as any)[key]) (overrides as any)[key] = {}
-        ;(overrides as any)[key].common = (mergedTheme[key]?.self?.(common) ||
+        ;(overrides as any)[key] = (mergedTheme[key]?.self?.(common) ||
           lightTheme[key].self?.(common)) as any
         // There (last line) we must use as any, nor ts 2590 will be raised since the union
         // is too complex
-        if (mergedTheme[key]?.peers) {
+        if (mergedTheme[key]?.peers && (overrides as any)[key]) {
           for (const peersKey of Object.keys(mergedTheme[key]?.peers) as Array<
           keyof typeof lightTheme
           >) {
@@ -91,7 +94,6 @@ export default defineComponent({
           lightTheme[key]?.peers[peersKey]?.self?.(common))
           }
         }
-
         if (mergedThemeOverrides && (overrides as any)[key]) {
           merge((overrides as any)[key], mergedThemeOverrides[key])
         }
@@ -118,16 +120,33 @@ export default defineComponent({
     function setTempOverrides (
       compName: string,
       varName: string,
-      value: string
+      value: string,
+      isPeers = false,
+      parentComp?: string
     ): void {
       const { value: tempOverrides } = tempOverridesRef
-      if (!(compName in tempOverrides)) tempOverrides[compName] = {}
-      const compOverrides = tempOverrides[compName]
-      if (value) {
-        compOverrides[varName] = value
+      if (parentComp) {
+        tempOverrides[parentComp] = {}
+        tempOverrides[parentComp].peers = {}
       } else {
-        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-        delete compOverrides[varName]
+        if (!(compName in tempOverrides)) tempOverrides[compName] = {}
+      }
+      if (value) {
+        if (isPeers && parentComp) {
+          if (!tempOverrides[parentComp].peers[compName]) tempOverrides[parentComp].peers[compName] = {}
+          tempOverrides[parentComp].peers[compName][varName] = value
+        } else {
+          tempOverrides[compName][varName] = value
+        }
+      } else {
+        if (isPeers && parentComp) {
+          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+          if (tempOverrides[parentComp]?.peers?.[compName]?.[varName]) delete tempOverrides[parentComp].peers[compName][varName]
+          if (tempOverrides[parentComp]?.peers?.[compName] && isNullObj(tempOverrides[parentComp]?.peers?.[compName])) delete tempOverrides[parentComp]?.peers?.[compName]
+        } else {
+          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+          delete tempOverrides[compName][varName]
+        }
       }
     }
     function handleClearAllClick (): void {
@@ -195,229 +214,140 @@ export default defineComponent({
     }
   },
   render () {
-    const {
-      compNamePattern,
-      varNamePattern
-    } = this
-    const compNamePatternLower =
-          compNamePattern.toLowerCase()
-    const varNamePatternLower =
-          varNamePattern.toLowerCase()
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    const renderCollapse = (varKeys: string[], componentTheme: Record<string, string>, themeKey: string) => {
+    const renderCollapse = (varKeys: string[], componentTheme: Record<string, string>, themeKey: string, parentComp: string, isPeers = true): VNodeChild => {
       return (
-        <NCollapse>
+        <NCollapseItem
+          title={themeKey}
+          name={themeKey}
+          style={{ marginLeft: 0 }}
+        >
           {{
             default: () => {
               return (
-                <NCollapseItem
-                  title={themeKey}
-                  name={themeKey}
-                >
+                <NSpace vertical>
                   {{
-                    default: () => {
-                      if (varKeys.includes('common')) {
-                        const innerKeys = varKeys.map(varKey => {
-                          const item = componentTheme?.[varKey]
-                          if (!item) return ''
-                          const keys = Object.keys(
-                            item
-                          ).filter((key) => {
-                            return (
-                              key !== 'name' &&
-                                  key
-                                    .toLowerCase()
-                                    .includes(varNamePatternLower)
-                            )
-                          })
-                          if (varKey === 'peers') {
-                            const peersKeys = Object.keys(componentTheme?.[varKey]).map((peerKey: string) => {
-                              const item = componentTheme?.[varKey]?.[peerKey]
-                              if (!item) return ''
-                              const keys = Object.keys(
-                                item
-                              ).filter((key) => {
-                                return (
-                                  key !== 'name' &&
-                                      key
-                                        .toLowerCase()
-                                        .includes(varNamePatternLower)
-                                )
-                              })
-                              return renderCollapse(keys, item, peerKey)
-                            })
-                            return peersKeys
-                          }
-                          return renderCollapse(keys, item, varKey)
-                        })
-                        return innerKeys
-                      }
-                      return (
-                        <NSpace vertical>
-                          {{
-                            default: () =>
-                              varKeys.map((varKey) => {
-                                return [
-                                  <div
-                                    key={`${varKey}Label`}
-                                  >
-                                    {varKey}
-                                  </div>,
-                                  varKey.includes(
-                                    'color'
-                                  ) ||
-                                  varKey.includes(
-                                    'Color'
-                                  ) ? (
-                                    <NColorPicker
-                                      key={varKey}
-                                      modes={[
-                                        'rgb',
-                                        'hex'
-                                      ]}
-                                      value={
-                                        this
-                                          .tempOverrides?.[
-                                            themeKey
-                                          ]?.[varKey] ||
-                                        componentTheme[
-                                          varKey
-                                        ]
-                                      }
-                                      onComplete={
-                                        this
-                                          .applyTempOverrides
-                                      }
-                                      onUpdateValue={(
-                                        value: string
-                                      ) => {
-                                        this.setTempOverrides(
-                                          themeKey,
-                                          varKey,
-                                          value
-                                        )
-                                      }}
-                                    >
-                                      {{
-                                        action: () => (
-                                          <NButton
-                                            size="small"
-                                            disabled={
-                                              componentTheme[
-                                                varKey
-                                              ] ===
-                                              this
-                                                .tempOverrides?.[
-                                                  themeKey
-                                                ]?.[varKey]
-                                            }
-                                            onClick={() => {
-                                              this.setTempOverrides(
-                                                themeKey,
-                                                varKey,
-                                                componentTheme[
-                                                  varKey
-                                                ]
-                                              )
-                                              this.applyTempOverrides()
-                                            }}
-                                          >
-                                            {{
-                                              default:
-                                                () =>
-                                                  this
-                                                    .locale
-                                                    .restore
-                                            }}
-                                          </NButton>
-                                        )
-                                      }}
-                                    </NColorPicker>
-                                      ) : (
-                                    <NInput
-                                      key={varKey}
-                                      onChange={
-                                        this
-                                          .applyTempOverrides
-                                      }
-                                      onUpdateValue={(
-                                        value: string
-                                      ) => {
-                                        this.setTempOverrides(
-                                          themeKey,
-                                          varKey,
-                                          value
-                                        )
-                                      }}
-                                      value={
-                                        this
-                                          .tempOverrides?.[
-                                            themeKey
-                                          ]?.[varKey] || ''
-                                      }
-                                      placeholder={
-                                        componentTheme[
-                                          varKey
-                                        ]
-                                      }
-                                    />
-                                      )
+                    default: () =>
+                      varKeys.map((varKey) => {
+                        return [
+                          <div
+                            key={`${varKey}Label`}
+                          >
+                            {varKey}
+                          </div>,
+                          varKey.includes(
+                            'color'
+                          ) ||
+                          varKey.includes(
+                            'Color'
+                          ) ? (
+                            <NColorPicker
+                              key={varKey}
+                              modes={[
+                                'rgb',
+                                'hex'
+                              ]}
+                              value={
+                                this
+                                  .tempOverrides?.[parentComp]?.peers[
+                                    themeKey
+                                  ]?.[varKey] ||
+                                componentTheme[
+                                  varKey
                                 ]
-                              })
-                          }}
-                        </NSpace>
-                      )
-                    }
+                              }
+                              onComplete={
+                                this
+                                  .applyTempOverrides
+                              }
+                              onUpdateValue={(
+                                value: string
+                              ) => {
+                                this.setTempOverrides(
+                                  themeKey,
+                                  varKey,
+                                  value,
+                                  isPeers,
+                                  parentComp
+                                )
+                              }}
+                            >
+                              {{
+                                action: () => (
+                                  <NButton
+                                    size="small"
+                                    disabled={
+                                      componentTheme[
+                                        varKey
+                                      ] ===
+                                      this
+                                        .tempOverrides?.[parentComp]?.peers[
+                                          themeKey
+                                        ]?.[varKey]
+                                    }
+                                    onClick={() => {
+                                      this.setTempOverrides(
+                                        themeKey,
+                                        varKey,
+                                        componentTheme[
+                                          varKey
+                                        ],
+                                        isPeers,
+                                        parentComp
+                                      )
+                                      this.applyTempOverrides()
+                                    }}
+                                  >
+                                    {{
+                                      default:
+                                        () =>
+                                          this
+                                            .locale
+                                            .restore
+                                    }}
+                                  </NButton>
+                                )
+                              }}
+                            </NColorPicker>
+                              ) : (
+                            <NInput
+                              key={varKey}
+                              onChange={
+                                this
+                                  .applyTempOverrides
+                              }
+                              onUpdateValue={(
+                                value: string
+                              ) => {
+                                this.setTempOverrides(
+                                  themeKey,
+                                  varKey,
+                                  value,
+                                  isPeers,
+                                  parentComp
+                                )
+                              }}
+                              value={
+                                this
+                                  .tempOverrides?.[parentComp]?.peers[
+                                    themeKey
+                                  ]?.[varKey] || ''
+                              }
+                              placeholder={
+                                componentTheme[
+                                  varKey
+                                ]
+                              }
+                            />
+                              )
+                        ]
+                      })
                   }}
-                </NCollapseItem>
+                </NSpace>
               )
             }
-          // if (!filteredItemsCount) return <NEmpty />
-          // return collapsedItems
           }}
-        </NCollapse>
+        </NCollapseItem>
       )
-    }
-    const parseTheme = (): any[] => {
-      const {
-        theme
-      } = this
-      const themeKeys = Object.keys(theme)
-
-      const filteredItemsCount = 0
-      const collapsedItems = themeKeys
-        .filter((themeKey) => {
-          return themeKey
-            .toLowerCase()
-            .includes(compNamePatternLower)
-        })
-        .map((themeKey) => {
-          const componentTheme:
-          | Record<string, string>
-          | undefined =
-              themeKey === 'common'
-                ? this.themeCommonDefault
-                : (theme as any)[themeKey]
-          if (componentTheme === undefined) {
-            return null
-          }
-          const varKeys = Object.keys(
-            componentTheme
-          ).filter((key) => {
-            return (
-              key !== 'name' &&
-                key
-                  .toLowerCase()
-                  .includes(varNamePatternLower)
-            )
-          })
-          if (!varKeys.length) {
-            return null
-          }
-          // filteredItemsCount += 1
-          return renderCollapse(varKeys, componentTheme, themeKey)
-        })
-      return collapsedItems
     }
     return (
       <NConfigProvider themeOverrides={this.overrides}>
@@ -570,9 +500,192 @@ export default defineComponent({
                             }}
                           </NSpace>
                           <NDivider />
-                            {
-                              parseTheme()
-                            }
+                          <NCollapse>
+                            {{
+                              default: () => {
+                                const {
+                                  theme,
+                                  compNamePattern,
+                                  varNamePattern
+                                } = this
+                                const themeKeys = Object.keys(theme)
+                                const compNamePatternLower =
+                                  compNamePattern.toLowerCase()
+                                const varNamePatternLower =
+                                  varNamePattern.toLowerCase()
+                                let filteredItemsCount = 0
+                                const collapsedItems = themeKeys
+                                  .filter((themeKey) => {
+                                    return themeKey
+                                      .toLowerCase()
+                                      .includes(compNamePatternLower)
+                                  })
+                                  .map((themeKey) => {
+                                    const componentTheme:
+                                    | Record<string, string>
+                                    | undefined =
+                                      themeKey === 'common'
+                                        ? this.themeCommonDefault
+                                        : (theme as any)[themeKey]
+                                    if (componentTheme === undefined) {
+                                      return null
+                                    }
+                                    const varKeys = Object.keys(
+                                      componentTheme
+                                    ).filter((key) => {
+                                      if (key === 'peers') {
+                                        return componentTheme?.[key] && judgePeersHasVarName(componentTheme?.[key] as unknown as CompObjType, varNamePatternLower)
+                                      }
+                                      return (
+                                        (key !== 'name' &&
+                                        key
+                                          .toLowerCase()
+                                          .includes(varNamePatternLower))
+                                      )
+                                    })
+                                    if (!varKeys.length) {
+                                      return null
+                                    }
+                                    filteredItemsCount += 1
+                                    return (
+                                      <NCollapseItem
+                                        title={themeKey}
+                                        name={themeKey}
+                                      >
+                                        {{
+                                          default: () => {
+                                            return (
+                                              <NSpace vertical>
+                                                {{
+                                                  default: () =>
+                                                    varKeys.map((varKey) => {
+                                                      if (varKey === 'peers') {
+                                                        const renderPeers = Object.keys(componentTheme[varKey]).map(key => {
+                                                          return renderCollapse(Object.keys(componentTheme[varKey][key as unknown as number]), componentTheme[varKey][key as unknown as number] as unknown as Record<string, string>, key, themeKey, true)
+                                                        })
+                                                        return renderPeers
+                                                      }
+
+                                                      return [
+                                                        <div
+                                                          key={`${varKey}Label`}
+                                                        >
+                                                          {varKey}
+                                                        </div>,
+                                                        varKey.includes(
+                                                          'color'
+                                                        ) ||
+                                                        varKey.includes(
+                                                          'Color'
+                                                        ) ? (
+                                                          <NColorPicker
+                                                            key={varKey}
+                                                            modes={[
+                                                              'rgb',
+                                                              'hex'
+                                                            ]}
+                                                            value={
+                                                              this
+                                                                .tempOverrides?.[
+                                                                  themeKey
+                                                                ]?.[varKey] ||
+                                                              componentTheme[
+                                                                varKey
+                                                              ]
+                                                            }
+                                                            onComplete={
+                                                              this
+                                                                .applyTempOverrides
+                                                            }
+                                                            onUpdateValue={(
+                                                              value: string
+                                                            ) => {
+                                                              this.setTempOverrides(
+                                                                themeKey,
+                                                                varKey,
+                                                                value
+                                                              )
+                                                            }}
+                                                          >
+                                                            {{
+                                                              action: () => (
+                                                                <NButton
+                                                                  size="small"
+                                                                  disabled={
+                                                                    componentTheme[
+                                                                      varKey
+                                                                    ] ===
+                                                                    this
+                                                                      .tempOverrides?.[
+                                                                        themeKey
+                                                                      ]?.[varKey]
+                                                                  }
+                                                                  onClick={() => {
+                                                                    this.setTempOverrides(
+                                                                      themeKey,
+                                                                      varKey,
+                                                                      componentTheme[
+                                                                        varKey
+                                                                      ]
+                                                                    )
+                                                                    this.applyTempOverrides()
+                                                                  }}
+                                                                >
+                                                                  {{
+                                                                    default:
+                                                                      () =>
+                                                                        this
+                                                                          .locale
+                                                                          .restore
+                                                                  }}
+                                                                </NButton>
+                                                              )
+                                                            }}
+                                                          </NColorPicker>
+                                                            ) : (
+                                                          <NInput
+                                                            key={varKey}
+                                                            onChange={
+                                                              this
+                                                                .applyTempOverrides
+                                                            }
+                                                            onUpdateValue={(
+                                                              value: string
+                                                            ) => {
+                                                              this.setTempOverrides(
+                                                                themeKey,
+                                                                varKey,
+                                                                value
+                                                              )
+                                                            }}
+                                                            value={
+                                                              this
+                                                                .tempOverrides?.[
+                                                                  themeKey
+                                                                ]?.[varKey] || ''
+                                                            }
+                                                            placeholder={
+                                                              componentTheme[
+                                                                varKey
+                                                              ]
+                                                            }
+                                                          />
+                                                            )
+                                                      ]
+                                                    })
+                                                }}
+                                              </NSpace>
+                                            )
+                                          }
+                                        }}
+                                      </NCollapseItem>
+                                    )
+                                  })
+                                if (!filteredItemsCount) return <NEmpty />
+                                return collapsedItems
+                              }
+                            }}
+                          </NCollapse>
                         </>
                       )
                     }}
