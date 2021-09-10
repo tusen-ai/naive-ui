@@ -13,6 +13,7 @@
 ### Fixes
 
 - 修复 `n-p` `depth` 传入 number 报错
+- 修复 `n-select` 无法重写 empty 的主题变量
 
 ## 2.18.1 (2021-09-08)
 

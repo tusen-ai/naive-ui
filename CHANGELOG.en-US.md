@@ -13,6 +13,7 @@
 ### Fixes
 
 - Fix `n-p` warns when `depth` is number.
+- Fix `n-select` unable to override empty theme variable.
 
 ## 2.18.1 (2021-09-08)
 
