@@ -1,4 +1,4 @@
-import { defineComponent, h, onMounted, renderSlot, warn } from 'vue'
+import { defineComponent, h, renderSlot, watchEffect } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import { NInput } from '../../../input'
 import { NTimePicker } from '../../../time-picker'
@@ -10,19 +10,22 @@ import {
 } from '../../../_internal/icons'
 import { NBaseFocusDetector } from '../../../_internal'
 import { useDualCalendar } from './use-dual-calendar'
+import { warnOnce } from '../../../_utils'
 
 export default defineComponent({
   name: 'DateTimeRangePanel',
   props: useDualCalendar.props,
   setup (props) {
-    onMounted(() => {
-      if (props.actions?.includes('now')) {
-        warn(
-          'DateTimeRangePanel',
-          'The `now` action is not supported for n-date-picker of `datetimerange` type'
-        )
-      }
-    })
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.actions?.includes('now')) {
+          warnOnce(
+            'date-picker',
+            'The `now` action is not supported for n-date-picker of `datetimerange` type'
+          )
+        }
+      })
+    }
     return useDualCalendar(props, 'datetimerange')
   },
   render () {
