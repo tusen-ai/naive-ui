@@ -4,7 +4,9 @@ import {
   computed,
   PropType,
   CSSProperties,
-  renderSlot
+  renderSlot,
+  inject,
+  VNodeChild
 } from 'vue'
 import { EmptyIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
@@ -14,6 +16,7 @@ import { NBaseIcon } from '../../_internal'
 import { emptyLight } from '../styles'
 import type { EmptyTheme } from '../styles'
 import style from './styles/index.cssr'
+import { configProviderInjectionKey } from '../../config-provider/src/ConfigProvider'
 
 const emptyProps = {
   ...(useTheme.props as ThemeProps<EmptyTheme>),
@@ -28,7 +31,8 @@ const emptyProps = {
   size: {
     type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
     default: 'medium'
-  }
+  },
+  renderIcon: Function as PropType<() => VNodeChild>
 }
 
 export type EmptyProps = ExtractPublicPropTypes<typeof emptyProps>
@@ -47,10 +51,23 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const { localeRef } = useLocale('Empty')
+    const NConfigProvider = inject(configProviderInjectionKey, null)
+    const mergedDescriptionRef = computed(() => {
+      return (
+        props.description ??
+        NConfigProvider?.mergedComponentPropsRef.value?.Empty?.description
+      )
+    })
+    const mergedRenderIconRef = computed(
+      () =>
+        NConfigProvider?.mergedComponentPropsRef.value?.Empty?.renderIcon ||
+        (() => <EmptyIcon />)
+    )
     return {
       mergedClsPrefix: mergedClsPrefixRef,
+      mergedRenderIcon: mergedRenderIconRef,
       localizedDescription: computed(() => {
-        return props.description || localeRef.value.description
+        return mergedDescriptionRef.value || localeRef.value.description
       }),
       cssVars: computed(() => {
         const { size } = props
@@ -85,7 +102,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-empty__icon`}>
           {renderSlot($slots, 'icon', undefined, () => [
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => <EmptyIcon /> }}
+              {{ default: this.mergedRenderIcon }}
             </NBaseIcon>
           ])}
         </div>
