@@ -58,6 +58,7 @@ describe('n-dynamic-tags', () => {
     expect(wrapper.find('.n-tag').classes()).toContain('n-tag--disabled')
     wrapper.find('.n-tag__close').trigger('click')
     expect(onClose).not.toBeCalled()
+    expect(wrapper.find('.n-button').classes()).toContain('n-button--disabled')
     wrapper.unmount()
   })
 
@@ -69,7 +70,9 @@ describe('n-dynamic-tags', () => {
       }
     })
 
-    expect(wrapper.find('.n-button').classes()).not.toContain('n-button--disabled')
+    expect(wrapper.find('.n-button').classes()).not.toContain(
+      'n-button--disabled'
+    )
     await wrapper.setProps({ value: ['教师', '程序员'] })
     expect(wrapper.find('.n-button').classes()).toContain('n-button--disabled')
   })
@@ -177,9 +180,10 @@ describe('n-dynamic-tags', () => {
         value: ['教师', '程序员']
       },
       slots: {
-        trigger: () => h(NButton, null, {
-          default: () => '添加'
-        })
+        trigger: () =>
+          h(NButton, null, {
+            default: () => '添加'
+          })
       }
     })
     expect(wrapper.find('.n-button__content').text()).toEqual('添加')
