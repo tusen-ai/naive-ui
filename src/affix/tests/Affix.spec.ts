@@ -5,20 +5,22 @@ import { sleep } from 'seemly'
 
 const makeScroll = async (
   dom: Element,
-  name: 'scrollTop' | 'scrollLeft',
+  name: 'scrollTop',
   offset: number
 ): Promise<any> => {
   const eventTarget = dom === document.documentElement ? window : dom
   dom[name] = offset
-  const evt = new CustomEvent('scroll', {
-    detail: {
-      target: {
-        [name]: offset
+  eventTarget.dispatchEvent(
+    new CustomEvent('scroll', {
+      detail: {
+        target: {
+          [name]: offset
+        }
       }
-    }
-  })
-  eventTarget.dispatchEvent(evt)
-  return await sleep(300)
+    })
+  )
+
+  return await sleep(0)
 }
 
 describe('n-affix', () => {
@@ -27,16 +29,14 @@ describe('n-affix', () => {
   })
 
   it('should work with `top` prop', async () => {
-    const value: number = 120
-
     const wrapper = mount(NAffix, {
       attachTo: document.body,
       props: {
-        top: value
+        top: 120
       },
       slots: {
         default: () => {
-          return h('div', {}, `${value}px`)
+          return h('div', {}, 'content')
         }
       }
     })
