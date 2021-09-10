@@ -298,8 +298,7 @@ export default defineComponent({
       const { value: mergedValue } = mergedValueRef
       if (!props.multiple && !Array.isArray(mergedValue)) {
         if (mergedValue === null) return null
-        const options = getMergedOptions([mergedValue])
-        return options.length ? options[0] : null
+        return getMergedOptions([mergedValue])[0] || null
       }
       return null
     })
