@@ -9,10 +9,12 @@
 - `n-date-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
 - `n-time-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
 - `n-config-provider` add golbal config of the `Empty` component, closes [#1092](https://github.com/TuSimple/naive-ui/issues/1092).
+- `n-auto-complete` exports `AutoCompleteOption`, `AutoCompleteOptions`, and `AutoCompleteGroupOption`.
 
 ### Fixes
 
 - Fix `n-p` warns when `depth` is number.
+- Fix `n-auto-complete`'s `children` option to allow `AutoCompleteOption`.
 
 ## 2.18.1 (2021-09-08)
 
