@@ -14,6 +14,7 @@
 ### Fixes
 
 - Fix `n-p` warns when `depth` is number.
+- Fix `n-select` closes menu when enter key is pressed in filterable mode without options data.
 
 ## 2.18.1 (2021-09-08)
 

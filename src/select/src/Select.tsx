@@ -582,11 +582,10 @@ export default defineComponent({
         case 'Enter':
         case 'NumpadEnter':
           if (mergedShowRef.value) {
-            const menu = menuRef.value
-            const pendingOptionData = menu?.getPendingTmNode()
-            if (pendingOptionData) {
-              handleToggleByTmNode(pendingOptionData)
-            } else {
+            const pendingTmNode = menuRef.value?.getPendingTmNode()
+            if (pendingTmNode) {
+              handleToggleByTmNode(pendingTmNode)
+            } else if (!props.filterable) {
               closeMenu()
               focusSelection()
             }

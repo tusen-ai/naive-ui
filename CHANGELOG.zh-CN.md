@@ -14,6 +14,7 @@
 ### Fixes
 
 - 修复 `n-p` `depth` 传入 number 报错
+- 修复 `n-select` 在 filterable 并且菜单无数据是按下 enter 导致菜单关闭
 
 ## 2.18.1 (2021-09-08)
 
