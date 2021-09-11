@@ -359,7 +359,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, virtualScroll, clsPrefix } = this
+    const { $slots, virtualScroll, clsPrefix, mergedTheme } = this
     return (
       <div
         ref="selfRef"
@@ -384,8 +384,8 @@ export default defineComponent({
         ) : !this.empty ? (
           <NScrollbar
             ref="scrollbarRef"
-            theme={this.mergedTheme.peers.Scrollbar}
-            themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
+            theme={mergedTheme.peers.Scrollbar}
+            themeOverrides={mergedTheme.peerOverrides.Scrollbar}
             scrollable={this.scrollable}
             container={virtualScroll ? this.virtualListContainer : undefined}
             content={virtualScroll ? this.virtualListContent : undefined}
@@ -471,8 +471,8 @@ export default defineComponent({
           <div class={`${clsPrefix}-base-select-menu__empty`}>
             {renderSlot($slots, 'empty', undefined, () => [
               <NEmpty
-              theme={this.mergedTheme.peers.Empty}
-              themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                theme={mergedTheme.peers.Empty}
+                themeOverrides={mergedTheme.peerOverrides.Empty}
               />
             ])}
           </div>
