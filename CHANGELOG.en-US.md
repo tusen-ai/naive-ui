@@ -8,12 +8,14 @@
 - `n-tree` add `check-strategy` prop.
 - `n-date-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
 - `n-time-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
-- `n-config-provider` add golbal config of the `Empty` component, closes [#1092](https://github.com/TuSimple/naive-ui/issues/1092).
+- `n-config-provider` add global config of the `Empty` component, closes [#1092](https://github.com/TuSimple/naive-ui/issues/1092).
+- `n-select` add `on-update:show` prop.
 
 ### Fixes
 
 - Fix `n-p` warns when `depth` is number.
-- Fix add button is not disabled when `n-dynamic-tags` is disabled.
+- Fix `n-dynamic-tags` add button is not disabled when it is disabled.
+- Fix `n-select` closes menu when enter key is pressed in filterable mode without options data.
 
 ## 2.18.1 (2021-09-08)
 
