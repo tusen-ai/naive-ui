@@ -3,7 +3,7 @@ import { SelectGroupOption, SelectBaseOption } from '../../select/src/interface'
 export type AutoCompleteOption = SelectBaseOption<string, string>
 export interface AutoCompleteGroupOption
   extends Omit<SelectGroupOption, 'children'> {
-  children: string[]
+  children: AutoCompleteOptions
 }
 
 export type AutoCompleteOptions = Array<

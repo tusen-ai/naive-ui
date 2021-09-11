@@ -25,11 +25,13 @@
 - `useDialog` 选项新增 `style` 属性，关闭 [#1054](https://github.com/TuSimple/naive-ui/issues/1054)
 - `n-timeline` 新增 `icon` slot, 关闭 [#1096](https://github.com/TuSimple/naive-ui/issues/1096)
 - `n-timeline` 新增 `icon-size` 属性
+- `n-auto-complete` 导出 `AutoCompleteOption`，`AutoCompleteOptions`，以及 `AutoCompleteGroupOption`
 
 ### Fixes
 
 - 修复 `n-step` 无法使用 `v-for` 的子元素
 - 修复 `n-input-number` 在 `step` 不为小数时不能输入小数
+- 修复 `n-auto-complete` 的 `children` 选项以允许 `AutoCompleteOption`
 
 ## 2.18.0 (2021-09-07)
 
