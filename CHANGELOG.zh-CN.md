@@ -10,6 +10,7 @@
 - `n-time-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
 - `n-config-provider` 新增 `Empty` 组件的全局配置，关闭 [#1092](https://github.com/TuSimple/naive-ui/issues/1092)
 - `n-select` 新增 `on-update:show` 属性
+- `n-auto-complete` 导出 `AutoCompleteOption` 以及 `AutoCompleteGroupOption`
 
 ### Fixes
 
@@ -18,6 +19,7 @@
 - 修复 `n-select` 无法重写 empty 的主题变量
 - 修复 `n-dynamic-tags` 禁用时 add 按钮未被禁用
 - 修复 `n-select` 在 filterable 并且菜单无数据是按下 enter 导致菜单关闭
+- 修复 `n-auto-complete` 的 `children` 属性不允许使用 `AutoCompleteOption`
 
 ## 2.18.1 (2021-09-08)
 
@@ -26,13 +28,11 @@
 - `useDialog` 选项新增 `style` 属性，关闭 [#1054](https://github.com/TuSimple/naive-ui/issues/1054)
 - `n-timeline` 新增 `icon` slot, 关闭 [#1096](https://github.com/TuSimple/naive-ui/issues/1096)
 - `n-timeline` 新增 `icon-size` 属性
-- `n-auto-complete` 导出 `AutoCompleteOption`，`AutoCompleteOptions`，以及 `AutoCompleteGroupOption`
 
 ### Fixes
 
 - 修复 `n-step` 无法使用 `v-for` 的子元素
 - 修复 `n-input-number` 在 `step` 不为小数时不能输入小数
-- 修复 `n-auto-complete` 的 `children` 选项以允许 `AutoCompleteOption`
 
 ## 2.18.0 (2021-09-07)
 
