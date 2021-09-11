@@ -16,3 +16,12 @@ import 'vfonts/FiraCode.css'
 
 // ...
 ```
+
+Note: Different fonts from vfonts has different font weight, if you want to use `Lato` or `OpenSans` you need to configure the global font weight of naive-ui.
+
+```html
+<!-- configuring the global font weight -->
+<n-config-provider :theme-overrides="{ common: { fontWeightStrong: '600' } }">
+  <app />
+</n-config-provider>
+```
