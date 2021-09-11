@@ -8,12 +8,15 @@
 - `n-tree` 增加 `check-strategy` 文档属性
 - `n-date-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
 - `n-time-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
-- `n-config-provider` 增加 `Empty` 组件的全局配置，关闭 [#1092](https://github.com/TuSimple/naive-ui/issues/1092)
+- `n-config-provider` 新增 `Empty` 组件的全局配置，关闭 [#1092](https://github.com/TuSimple/naive-ui/issues/1092)
+- `n-select` 新增 `on-update:show` 属性
 
 ### Fixes
 
 - 修复 `n-p` `depth` 传入 number 报错
 - 修复 `n-select` 无法重写 empty 的主题变量
+- 修复 `n-dynamic-tags` 禁用时 add 按钮未被禁用
+- 修复 `n-select` 在 filterable 并且菜单无数据是按下 enter 导致菜单关闭
 
 ## 2.18.1 (2021-09-08)
 
