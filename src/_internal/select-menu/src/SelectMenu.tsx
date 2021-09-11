@@ -331,6 +331,7 @@ export default defineComponent({
       getPendingTmNode
     }
     return {
+      mergedTheme: themeRef,
       virtualListRef,
       scrollbarRef,
       style: styleRef,
@@ -358,7 +359,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, virtualScroll, clsPrefix } = this
+    const { $slots, virtualScroll, clsPrefix, mergedTheme } = this
     return (
       <div
         ref="selfRef"
@@ -383,6 +384,8 @@ export default defineComponent({
         ) : !this.empty ? (
           <NScrollbar
             ref="scrollbarRef"
+            theme={mergedTheme.peers.Scrollbar}
+            themeOverrides={mergedTheme.peerOverrides.Scrollbar}
             scrollable={this.scrollable}
             container={virtualScroll ? this.virtualListContainer : undefined}
             content={virtualScroll ? this.virtualListContent : undefined}
@@ -466,7 +469,12 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div class={`${clsPrefix}-base-select-menu__empty`}>
-            {renderSlot($slots, 'empty', undefined, () => [<NEmpty />])}
+            {renderSlot($slots, 'empty', undefined, () => [
+              <NEmpty
+                theme={mergedTheme.peers.Empty}
+                themeOverrides={mergedTheme.peerOverrides.Empty}
+              />
+            ])}
           </div>
         )}
         {$slots.action && (
