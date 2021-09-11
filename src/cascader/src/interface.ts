@@ -41,7 +41,10 @@ export type OnUpdateValue = <
   (number[] | null) &
   (Array<string | number> | null)
 >(
-  value: T
+  value: T,
+  meta: { option: CascaderOption | null } & Array<{
+    option: CascaderOption | null
+  }>
 ) => void
 
 export type OnUpdateValueImpl = (value: Value | null) => void
