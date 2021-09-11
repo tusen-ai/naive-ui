@@ -14,6 +14,7 @@
 ### Fixes
 
 - Fix `n-p` warns when `depth` is number.
+- Fix `n-select` can't override `n-empty`'s theme variables.
 - Fix `n-dynamic-tags` add button is not disabled when it is disabled.
 - Fix `n-select` closes menu when enter key is pressed in filterable mode without options data.
 

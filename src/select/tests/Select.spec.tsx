@@ -317,4 +317,26 @@ describe('n-select', () => {
       ).toMatchSnapshot()
     })
   })
+
+  it('should work with `themeOverrides` prop', async () => {
+    const selectThemeOverrides = {
+      peers: {
+        InternalSelectMenu: {
+          peers: {
+            Empty: {
+              textColor: '#4fb233'
+            }
+          }
+        }
+      }
+    }
+    const wrapper = mount(NSelect, {
+      props: {
+        themeOverrides: selectThemeOverrides,
+        show: true
+      }
+    })
+    const menuWrapper = wrapper.findComponent(NInternalSelectMenu)
+    expect(menuWrapper.find('.n-base-select-menu__empty .n-empty').attributes('style')).toContain('--text-color: #4fb233;')
+  })
 })
