@@ -16,10 +16,10 @@
 
 - Fix `n-p` warns when `depth` is number.
 - Fix `n-date-picker`‘s type of `actions` prop.
-- Fix `n-auto-complete`'s `children` prop can't use `AutoCompleteOption`.
 - Fix `n-select` can't override `n-empty`'s theme variables.
 - Fix `n-dynamic-tags` add button is not disabled when it is disabled.
 - Fix `n-select` closes menu when enter key is pressed in filterable mode without options data.
+- Fix `n-auto-complete`'s `children` prop can't use `AutoCompleteOption` type.
 
 ## 2.18.1 (2021-09-08)
 
