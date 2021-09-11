@@ -15,6 +15,7 @@
 ### Fixes
 
 - Fix `n-p` warns when `depth` is number.
+- Fix `n-date-picker`‘s type of `actions` prop.
 - Fix `n-auto-complete`'s `children` option to allow `AutoCompleteOption`.
 - Fix `n-select` can't override `n-empty`'s theme variables.
 - Fix `n-dynamic-tags` add button is not disabled when it is disabled.
