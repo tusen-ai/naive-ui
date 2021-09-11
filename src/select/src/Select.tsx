@@ -486,9 +486,9 @@ export default defineComponent({
           patternRef.value = ''
         }
         focusSelectionInput()
-        const meta = getMergedOptions(changedValue).map((option) => {
-          return { option: option }
-        })
+        const meta = getMergedOptions(changedValue).map((option) => ({
+          option: option
+        }))
         doUpdateValue(changedValue, meta)
       } else {
         if (tag && !remote) {
