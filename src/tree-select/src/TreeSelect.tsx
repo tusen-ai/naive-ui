@@ -424,9 +424,7 @@ export default defineComponent({
       const {
         value: { getNode }
       } = dataTreeMateRef
-      return keys.map((i) => {
-        return { option: getNode(i)?.rawNode || null }
-      })
+      return keys.map((key) => ({ option: getNode(key)?.rawNode || null }))
     }
     function handleUpdateSelectedKeys (keys: Key[]): void {
       if (props.checkable && props.multiple) {
