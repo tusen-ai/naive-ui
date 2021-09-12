@@ -94,7 +94,10 @@ export default defineComponent({
       return smallerSize(props.size)
     })
     const triggerDisabledRef = computed(() => {
-      return !!props.max && mergedValueRef.value.length >= props.max
+      return (
+        mergedDisabledRef.value ||
+        (!!props.max && mergedValueRef.value.length >= props.max)
+      )
     })
     function doChange (value: string[]): void {
       const {
