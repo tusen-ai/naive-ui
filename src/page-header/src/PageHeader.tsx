@@ -89,34 +89,19 @@ export default defineComponent({
     const showSubtitle = subtitle || subtitleSlot
     const showExtra = extra || extraSlot
     return (
-      <div style={cssVars as CSSProperties}>
+      <div
+        style={cssVars as CSSProperties}
+        class={[
+          `${mergedClsPrefix}-page-header-wrapper`,
+          this.rtlEnabled && `${mergedClsPrefix}-page-header-wrapper--rtl`
+        ]}
+      >
         {headerSlot ? (
-          <div
-            class={[
-              `${mergedClsPrefix}-page-header-header`,
-              [
-                {
-                  [`${mergedClsPrefix}-page-header-header--rtl`]:
-                    this.rtlEnabled
-                }
-              ]
-            ]}
-            key="breadcrumn"
-          >
+          <div class={`${mergedClsPrefix}-page-header-header`} key="breadcrumn">
             {headerSlot()}
           </div>
         ) : null}
-        <div
-          class={[
-            `${mergedClsPrefix}-page-header`,
-            [
-              {
-                [`${mergedClsPrefix}-page-header--rtl`]: this.rtlEnabled
-              }
-            ]
-          ]}
-          key="header"
-        >
+        <div class={`${mergedClsPrefix}-page-header`} key="header">
           <div class={`${mergedClsPrefix}-page-header__main`} key="back">
             {showBack ? (
               <div
@@ -156,34 +141,12 @@ export default defineComponent({
           ) : null}
         </div>
         {defaultSlot ? (
-          <div
-            class={[
-              `${mergedClsPrefix}-page-header-content`,
-              [
-                {
-                  [`${mergedClsPrefix}-page-header-content--rtl`]:
-                    this.rtlEnabled
-                }
-              ]
-            ]}
-            key="content"
-          >
+          <div class={`${mergedClsPrefix}-page-header-content`} key="content">
             {defaultSlot()}
           </div>
         ) : null}
         {footerSlot ? (
-          <div
-            class={[
-              `${mergedClsPrefix}-page-header-footer`,
-              [
-                {
-                  [`${mergedClsPrefix}-page-header-footer--rtl`]:
-                    this.rtlEnabled
-                }
-              ]
-            ]}
-            key="footer"
-          >
+          <div class={`${mergedClsPrefix}-page-header-footer`} key="footer">
             {footerSlot()}
           </div>
         ) : null}

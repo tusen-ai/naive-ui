@@ -8,7 +8,6 @@ I hope this component has all the slots you need!
 
 ```demo
 basic
-rtl-debug
 ```
 
 ## Props
