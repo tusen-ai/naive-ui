@@ -8,6 +8,7 @@ import style from './styles/index.cssr'
 import { ArrowBackIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import useRtl from '../../_mixins/use-rtl'
 
 const pageHeaderProps = {
   ...(useTheme.props as ThemeProps<PageHeaderTheme>),
@@ -23,7 +24,7 @@ export default defineComponent({
   name: 'PageHeader',
   props: pageHeaderProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
     const themeRef = useTheme(
       'PageHeader',
       'PageHeader',
@@ -32,7 +33,14 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const rtlEnabledRef = useRtl(
+      'PageHeader',
+      NConfigProvider?.mergedRtlRef,
+      mergedClsPrefixRef
+    )
+
     return {
+      rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         const {
@@ -65,15 +73,8 @@ export default defineComponent({
     }
   },
   render () {
-    const {
-      onBack,
-      title,
-      subtitle,
-      extra,
-      mergedClsPrefix,
-      cssVars,
-      $slots
-    } = this
+    const { onBack, title, subtitle, extra, mergedClsPrefix, cssVars, $slots } =
+      this
     const {
       title: titleSlot,
       subtitle: subtitleSlot,
@@ -88,7 +89,13 @@ export default defineComponent({
     const showSubtitle = subtitle || subtitleSlot
     const showExtra = extra || extraSlot
     return (
-      <div style={cssVars as CSSProperties}>
+      <div
+        style={cssVars as CSSProperties}
+        class={[
+          `${mergedClsPrefix}-page-header-wrapper`,
+          this.rtlEnabled && `${mergedClsPrefix}-page-header-wrapper--rtl`
+        ]}
+      >
         {headerSlot ? (
           <div class={`${mergedClsPrefix}-page-header-header`} key="breadcrumn">
             {headerSlot()}
