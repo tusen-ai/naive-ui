@@ -294,6 +294,7 @@ export default defineComponent({
           optionCheckColor,
           actionTextColor,
           optionColorPending,
+          optionColorActive,
           loadingColor,
           loadingSize,
           [createKey('optionFontSize', size)]: fontSize,
@@ -312,6 +313,7 @@ export default defineComponent({
         '--group-header-text-color': groupHeaderTextColor,
         '--option-check-color': optionCheckColor,
         '--option-color-pending': optionColorPending,
+        '--option-color-active': optionColorActive,
         '--option-height': optionHeight,
         '--option-opacity-disabled': optionOpacityDisabled,
         '--option-text-color': optionTextColor,
@@ -404,6 +406,7 @@ export default defineComponent({
                     paddingBottom={this.padding.bottom}
                     onResize={this.handleVirtualListResize}
                     onScroll={this.handleVirtualListScroll}
+                    itemResizable
                   >
                     {{
                       default: ({

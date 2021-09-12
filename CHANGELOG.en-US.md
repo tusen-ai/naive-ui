@@ -12,6 +12,7 @@
 - `n-select` add `on-update:show` prop.
 - `n-auto-complete` exports `AutoCompleteOption` and `AutoCompleteGroupOption` types.
 - `n-page-header` add `RTL` support.
+- `n-select` support variadic height option rendering.
 
 ### Fixes
 

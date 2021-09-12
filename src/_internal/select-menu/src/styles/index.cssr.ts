@@ -4,6 +4,7 @@ import fadeInScaleUpTransition from '../../../../_styles/transitions/fade-in-sca
 // --loading-color
 // --loading-size
 export default cB('base-select-menu', `
+  line-height: 1.5;
   outline: none;
   z-index: 0;
   position: relative;
@@ -20,14 +21,22 @@ export default cB('base-select-menu', `
     max-height: var(--height);
   `),
   cB('base-select-option', `
-    height: var(--option-height);
-    line-height: var(--option-height);
+    min-height: var(--option-height);
     font-size: var(--option-font-size);
-  `),
+    display: flex;
+    align-items: center;
+  `, [
+    cE('content', `
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    `)
+  ]),
   cB('base-select-group-header', `
-    height: var(--option-height);
-    line-height: var(--option-height);
+    min-height: var(--option-height);
     font-size: .93em;
+    display: flex;
+    align-items: center;
   `),
   cB('base-select-menu-option-wrapper', `
     position: relative;
@@ -62,44 +71,42 @@ export default cB('base-select-menu', `
     cursor: pointer;
     position: relative;
     padding: var(--option-padding);
-    white-space: nowrap;
     transition:
       background-color .3s var(--bezier),
       color .3s var(--bezier),
       opacity .3s var(--bezier);
-    text-overflow: ellipsis;
-    overflow: hidden;
     box-sizing: border-box;
     color: var(--option-text-color);
     opacity: 1;
   `, [
-    c('&:active', {
-      color: 'var(--option-text-color-pressed)'
-    }),
-    cM('grouped', {
-      paddingLeft: 'calc(var(--option-padding-left) * 1.5)'
-    }),
-    cM('selected', {
-      color: 'var(--option-text-color-active)'
-    }),
-    cM('disabled', {
-      cursor: 'not-allowed'
-    }, [
-      cNotM('selected', {
-        color: 'var(--option-text-color-disabled)'
-      }),
-      cM('selected', {
-        opacity: 'var(--option-opacity-disabled)'
-      })
+    c('&:active', `
+      color: var(--option-text-color-pressed);
+    `),
+    cM('grouped', `
+      padding-left: calc(var(--option-padding-left) * 1.5);
+    `),
+    cM('pending', `
+      background-color: var(--option-color-pending);
+    `),
+    cM('selected', `
+      color: var(--option-text-color-active);
+      background-color: var(--option-color-active);
+    `),
+    cM('disabled', `
+      cursor: not-allowed;
+    `, [
+      cNotM('selected', `
+        color: var(--option-text-color-disabled);
+      `),
+      cM('selected', `
+        opacity: var(--option-opacity-disabled);
+      `)
     ]),
-    cM('pending', {
-      backgroundColor: 'var(--option-color-pending)'
-    }),
     cE('check', `
       font-size: 14px;
       position: absolute;
       right: 8px;
-      top: calc(var(--option-height) / 2 - 7px);
+      top: calc(50% - 7px);
       color: var(--option-check-color);
       transition: color .3s var(--bezier);
     `, [
