@@ -1,9 +1,9 @@
-export function isNullObj (obj: object): boolean {
+export function isEmptyObj (obj: object): boolean {
   return Object.keys(obj).length === 0
 }
 export function judgePeersHasVarName (peers: Record<string, object>, varNamePattern: string): boolean {
   let flag = false
-  if (isNullObj(peers)) return false
+  if (isEmptyObj(peers)) return false
   const peerItems = Object.keys(peers)
   for (let i = 0; i < peerItems.length; i++) {
     const peerItem = peers[peerItems[i]]
