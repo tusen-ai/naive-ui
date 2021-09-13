@@ -33,7 +33,7 @@ ExtractPropTypes<typeof notificationEnvOptions>
 export interface NotificationProviderInjection {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<NotificationTheme>>
-  placement: Ref<Placement>
+  placementRef: Ref<Placement>
 }
 
 export const notificationProviderInjectionKey: InjectionKey<NotificationProviderInjection> =
@@ -143,7 +143,7 @@ export default defineComponent({
     provide(notificationProviderInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
-      placement: toRef(props, 'placement')
+      placementRef: toRef(props, 'placement')
     })
     // deprecated
     function open (options: NotificationOptions): NotificationReactive {

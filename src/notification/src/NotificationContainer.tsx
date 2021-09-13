@@ -12,13 +12,13 @@ export default defineComponent({
   },
   setup () {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { mergedThemeRef, mergedClsPrefixRef, placement } = inject(
+    const { mergedThemeRef, mergedClsPrefixRef, placementRef } = inject(
       notificationProviderInjectionKey
     )!
     return {
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      placement
+      placement: placementRef
     }
   },
   render () {

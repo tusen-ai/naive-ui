@@ -2,7 +2,7 @@
 
 ```html
 <n-notification-provider :placement="placement">
-  <Buttons @change-placement="changePlacement" />
+  <buttons />
 </n-notification-provider>
 ```
 
@@ -10,8 +10,8 @@
 import { useNotification, NButton, NSpace } from 'naive-ui'
 import { ref, defineComponent, h } from 'vue'
 
+const placementRef = ref('top-right')
 const Buttons = {
-  emits: ['changePlacement'],
   setup () {
     const notification = useNotification()
     return {
@@ -24,7 +24,7 @@ const Buttons = {
         NButton,
         {
           onClick: () => {
-            this.$emit('changePlacement', placement)
+            placementRef.value = placement
             this.notification.info({
               title: "Wouldn't it be Nice",
               description: 'From the Beach Boys',
@@ -50,12 +50,8 @@ const Buttons = {
 export default defineComponent({
   components: { Buttons },
   setup () {
-    const placementRef = ref('top-right')
     return {
-      placement: placementRef,
-      changePlacement: (val) => {
-        placementRef.value = val
-      }
+      placement: placementRef
     }
   }
 })

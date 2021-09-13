@@ -57,7 +57,7 @@ placement
 | --- | --- | --- | --- |
 | scrollable | `boolean` | `true` | 通知是否可滚动 |
 | to | `string \| HTMLElement` | `'body'` | `Notification` 容器节点的位置 |
-| placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top-right` | 所有 `Notification` 显示的位置 |
+| placement | `top-left \| top-right \| bottom-left \| bottom-right ` | `top-right` | 所有 `Notification` 显示的位置 |
 
 ### `notification` Injection Methods
 

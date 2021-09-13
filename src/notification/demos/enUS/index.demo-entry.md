@@ -57,7 +57,7 @@ placement
 | --- | --- | --- | --- |
 | scrollable | `boolean` | `true` | Whether notification can be scroll. |
 | to | `string \| HTMLElement` | `'body'` | Container node of notification container. |
-| placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top-right` | All notification's placement. |
+| placement | `top-left \| top-right \| bottom-left \| bottom-right ` | `top-right` | All notification's placement. |
 
 ### `notification` Injection Methods
 

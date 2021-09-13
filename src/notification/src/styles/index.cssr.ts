@@ -61,26 +61,43 @@ export default c([
     cM('top-left', `
       top: 12px;
       left: 12px;
-      align-items: flex-start;
-    `),
+    `,
+    [
+      cB('notification', [
+        c('&.notification-transition-enter-from, &.notification-transition-leave-to', `
+          transform: translateX(-24px);
+        `),
+        c('&.notification-transition-leave-from, &.notification-transition-enter-to', `
+          transform: translateX(0);
+        `)
+      ])
+    ]),
     cM('top-right', `
       top: 12px;
       right: 12px;
-      align-items: flex-end;
     `),
     cM('bottom-left', `
       bottom: 4px;
       left: 12px;
       top: unset;
       justify-content: flex-end;
-      align-items: flex-start;
-    `),
+    `,
+    [
+      cB('notification', [
+        c('&.notification-transition-enter-from, &.notification-transition-leave-to', `
+          transform: translateX(-24px);
+        `),
+        c('&.notification-transition-leave-from, &.notification-transition-enter-to', `
+          transform: translateX(0);
+        `)
+      ])
+    ]
+    ),
     cM('bottom-right', `
       bottom: 4px;
       right: 12px;
       top: unset;
       justify-content: flex-end;
-      align-items: flex-end;
     `),
     cB('notification', [
       c('&.notification-transition-enter-from, &.notification-transition-leave-to', `
