@@ -12,6 +12,7 @@
 - `n-select` 新增 `on-update:show` 属性
 - `n-auto-complete` 导出 `AutoCompleteOption` 以及 `AutoCompleteGroupOption` 类型
 - `n-page-header` 添加 `RTL` 支持
+- `n-theme-editor` 暴露对应组件的 `peers` 主题变量
 
 ### Fixes
 

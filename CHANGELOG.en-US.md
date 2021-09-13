@@ -12,6 +12,7 @@
 - `n-select` add `on-update:show` prop.
 - `n-auto-complete` exports `AutoCompleteOption` and `AutoCompleteGroupOption` types.
 - `n-page-header` add `RTL` support.
+- `n-theme-editor` expose the peers theme variable of the component.
 
 ### Fixes
 
