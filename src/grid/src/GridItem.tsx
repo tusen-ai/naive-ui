@@ -14,7 +14,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 
 export const defaultSpan = 1
 
-interface GridItemVNodeProps {
+export interface GridItemVNodeProps {
   privateOffset?: number
   privateSpan?: number
   privateColStart?: number
@@ -87,9 +87,7 @@ export default defineComponent({
   render () {
     return (
       <div
-        style={
-          ([this.itemStyle, this.deriveStyle()] as unknown) as CSSProperties
-        }
+        style={[this.itemStyle, this.deriveStyle()] as unknown as CSSProperties}
       >
         {renderSlot(this.$slots, 'default', { overflow: this.overflow })}
       </div>

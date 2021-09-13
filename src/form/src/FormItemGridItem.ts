@@ -1,7 +1,7 @@
-import { h, ref, defineComponent } from 'vue'
+import { h, ref, defineComponent, getCurrentInstance } from 'vue'
 import NGridItem, {
   gridItemProps,
-  gridItemPropKeys
+  GridItemVNodeProps
 } from '../../grid/src/GridItem'
 import { keep, keysOf } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -42,7 +42,10 @@ export default defineComponent({
     }
   },
   render () {
-    return h(NGridItem, keep(this.$props, gridItemPropKeys), {
+    const self = getCurrentInstance()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const gridItemProps = self!.vnode.props as GridItemVNodeProps
+    return h(NGridItem, gridItemProps, {
       default: () => {
         const itemProps = keep(this.$props, formItemPropKeys)
         return h(
