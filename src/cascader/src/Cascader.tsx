@@ -616,7 +616,11 @@ export default defineComponent({
     // --- search
     function handleClear (e: MouseEvent): void {
       e.stopPropagation()
-      doUpdateValue(null, null)
+      if (props.multiple) {
+        doUpdateValue([], [])
+      } else {
+        doUpdateValue(null, null)
+      }
     }
     function handleTriggerFocus (e: FocusEvent): void {
       if (!cascaderMenuInstRef.value?.$el.contains(e.relatedTarget as Node)) {
