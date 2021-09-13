@@ -7,7 +7,8 @@ import {
   ref,
   PropType,
   CSSProperties,
-  VNode
+  VNode,
+  nextTick
 } from 'vue'
 import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
@@ -333,6 +334,7 @@ export default defineComponent({
       if (!files || files.length === 0) return
       const { onBeforeUpload } = props
       const filesAsArray = props.multiple ? Array.from(files) : [files[0]]
+
       void Promise.all(
         filesAsArray.map(async (file) => {
           const fileInfo: FileInfo = {
@@ -352,12 +354,24 @@ export default defineComponent({
               fileList: mergedFileListRef.value
             })) !== false
           ) {
-            doChange(fileInfo, e, {
-              append: true
-            })
+            return fileInfo
           }
+          return null
         })
-      ).then(() => {
+      ).then((fileInfos) => {
+        let nextTickChain = Promise.resolve()
+
+        fileInfos.forEach((fileInfo) => {
+          // eslint-disable-next-line @typescript-eslint/promise-function-async
+          nextTickChain = nextTickChain
+            .then(async () => await nextTick())
+            .then(() => {
+              fileInfo &&
+                doChange(fileInfo, e, {
+                  append: true
+                })
+            })
+        })
         if (props.defaultUpload) {
           submit()
         }
@@ -409,33 +423,31 @@ export default defineComponent({
         remove: false
       }
     ) => {
-      setTimeout(() => {
-        const { append, remove } = options
-        const fileListAfterChange = Array.from(mergedFileListRef.value)
-        const fileIndex = fileListAfterChange.findIndex(
-          (file) => file.id === fileAfterChange.id
-        )
-        if (append || remove || ~fileIndex) {
-          if (append) {
-            fileListAfterChange.push(fileAfterChange)
-          } else if (remove) {
-            fileListAfterChange.splice(fileIndex, 1)
-          } else {
-            fileListAfterChange.splice(fileIndex, 1, fileAfterChange)
-          }
-          const { onChange } = props
-          if (onChange) {
-            onChange({
-              file: fileAfterChange,
-              fileList: fileListAfterChange,
-              event
-            })
-          }
-          doUpdateFileList(fileListAfterChange)
-        } else if (__DEV__) {
-          warn('upload', 'File has no corresponding id in current file list.')
+      const { append, remove } = options
+      const fileListAfterChange = Array.from(mergedFileListRef.value)
+      const fileIndex = fileListAfterChange.findIndex(
+        (file) => file.id === fileAfterChange.id
+      )
+      if (append || remove || ~fileIndex) {
+        if (append) {
+          fileListAfterChange.push(fileAfterChange)
+        } else if (remove) {
+          fileListAfterChange.splice(fileIndex, 1)
+        } else {
+          fileListAfterChange.splice(fileIndex, 1, fileAfterChange)
         }
-      })
+        const { onChange } = props
+        if (onChange) {
+          onChange({
+            file: fileAfterChange,
+            fileList: fileListAfterChange,
+            event
+          })
+        }
+        doUpdateFileList(fileListAfterChange)
+      } else if (__DEV__) {
+        warn('upload', 'File has no corresponding id in current file list.')
+      }
     }
     async function getFileThumbnailUrl (file: FileInfo): Promise<string> {
       const { createThumbnailUrl } = props
