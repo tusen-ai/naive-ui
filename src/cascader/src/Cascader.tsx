@@ -255,9 +255,7 @@ export default defineComponent({
     }
     function doUpdateValue (
       value: Value | null,
-      meta:
-      | { option: CascaderOption | null }
-      | Array<{ option: CascaderOption | null }>
+      option: CascaderOption | null | Array<CascaderOption | null>
     ): void {
       const {
         onUpdateValue,
@@ -265,9 +263,11 @@ export default defineComponent({
         onChange
       } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, meta)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value, meta)
-      if (onChange) call(onChange as OnUpdateValueImpl, value, meta)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, option)
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, option)
+      }
+      if (onChange) call(onChange as OnUpdateValueImpl, value, option)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
@@ -291,18 +291,18 @@ export default defineComponent({
           })
           doUpdateValue(
             checkedKeys,
-            checkedKeys.map((checkedKey) => ({
-              option: getNode(checkedKey)?.rawNode || null
-            }))
+            checkedKeys.map(
+              (checkedKey) => getNode(checkedKey)?.rawNode || null
+            )
           )
           if (filterable) focusSelectionInput()
         } catch (err) {
           if (err instanceof SubtreeNotLoadedError) {
             if (cascaderMenuInstRef.value) {
-              const node = getNode(key)
-              if (node !== null) {
+              const tmNode = getNode(key)
+              if (tmNode !== null) {
                 cascaderMenuInstRef.value.showErrorMessage(
-                  (node.rawNode as any)[props.labelField]
+                  (tmNode.rawNode as any)[props.labelField]
                 )
               }
             }
@@ -311,15 +311,16 @@ export default defineComponent({
           }
         }
       } else {
-        const node = getNode(key)?.rawNode || null
         if (mergedCheckStrategyRef.value === 'child') {
-          if (node?.isLeaf) {
-            doUpdateValue(key, { option: node })
+          const tmNode = getNode(key)
+          if (tmNode?.isLeaf) {
+            doUpdateValue(key, tmNode.rawNode)
           } else {
             return false
           }
         } else {
-          doUpdateValue(key, { option: node })
+          const tmNode = getNode(key)
+          doUpdateValue(key, tmNode?.rawNode || null)
         }
       }
       return true
@@ -336,9 +337,7 @@ export default defineComponent({
         })
         doUpdateValue(
           checkedKeys,
-          checkedKeys.map((checkedKey) => ({
-            option: getNode(checkedKey)?.rawNode || null
-          }))
+          checkedKeys.map((checkedKey) => getNode(checkedKey)?.rawNode || null)
         )
       }
     }
@@ -617,7 +616,7 @@ export default defineComponent({
     // --- search
     function handleClear (e: MouseEvent): void {
       e.stopPropagation()
-      doUpdateValue(null, { option: null })
+      doUpdateValue(null, null)
     }
     function handleTriggerFocus (e: FocusEvent): void {
       if (!cascaderMenuInstRef.value?.$el.contains(e.relatedTarget as Node)) {
@@ -675,7 +674,7 @@ export default defineComponent({
       if (multiple && Array.isArray(mergedValue)) {
         doUncheck((option as any)[valueField])
       } else {
-        doUpdateValue(null, { option: null })
+        doUpdateValue(null, null)
       }
     }
     function handleKeyDown (e: KeyboardEvent): void {

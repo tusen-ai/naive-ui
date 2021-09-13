@@ -47,7 +47,7 @@ custom-field
 | on-blur | `() => void` | `undefined` | Callback on blurred. |
 | on-focus | `() => void` | `undefined` | Callback on focused. |
 | on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | Callback when a node is loaded. Set `option.children` in the returned promise. Loading will stop after the promise is resolved or rejected. |
-| on-update:value | `(value: string \| number \| Array<string \| number> \| null, meta: { option: CascaderOption \| null } \| Array<{ option: CascaderOption \| null }>) => void` | `undefined` | Callback executed when the value changes. |
+| on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: CascaderOption \| Array<CascaderOption \| null> \| null) => void` | `undefined` | Callback executed when the value changes. |
 
 #### CascaderOption Properties
 
