@@ -67,7 +67,7 @@ options-change-debug
 | on-focus | `() => void` | `undefined` | `focus` 时执行的回调 |
 | on-scroll | `(e: ScrollEvent) => void` | `undefined` | 滚动时执行的回调 |
 | on-search | `(value: string) => void` | `undefined` | 搜索时执行的回调 |
-| on-update:value | `(value: Array \| string \| number \| null, meta: { option: SelectBaseOption \| null } \| Array<{ option: SelectBaseOption }>) => void` | `undefined` | 值更新时执行的回调 |
+| on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | 值更新时执行的回调 |
 
 ### SelectOption Properties
 

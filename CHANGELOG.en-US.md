@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.18.2 (2021-09-14)
 
 ### Feats
 
@@ -16,6 +16,8 @@
 - `n-select` support variadic height option rendering.
 - `n-tree-select`'s `on-update:value` prop add option info.
 - `n-select`'s `on-update:value` prop add option info.
+- `n-popselect`'s `on-update:value` prop add option info.
+- `n-card` add `embedded` prop.
 
 ### Fixes
 

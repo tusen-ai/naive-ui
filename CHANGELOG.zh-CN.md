@@ -1,11 +1,11 @@
 # CHANGELOG
 
-## Pending
+## 2.18.2 (2021-09-14)
 
 ### Feats
 
 - `n-cascader` 当 `options` 为空时显示 `Empty` 组件，关闭 [#1092](https://github.com/TuSimple/naive-ui/issues/1092)
-- `n-cascader` 的 `on-update:value` 回调新增选项信息
+- `n-cascader` 的 `on-update:value` 属性新增选项参数
 - `n-tree` 增加 `check-strategy` 文档属性
 - `n-date-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
 - `n-time-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
@@ -14,8 +14,10 @@
 - `n-auto-complete` 导出 `AutoCompleteOption` 以及 `AutoCompleteGroupOption` 类型
 - `n-page-header` 添加 `RTL` 支持
 - `n-select` 支持可变高度选项渲染
-- `n-tree-select` 的 `on-update:value` 回调新增选项信息
-- `n-select` 的 `on-update:value` 回调新增选项信息
+- `n-tree-select` 的 `on-update:value` 属性新增选项参数
+- `n-select` 的 `on-update:value` 属性新增选项参数
+- `n-popselect` 的 `on-update:value` 属性新增选项参数
+- `n-card` 新增 `embedded` 属性
 
 ### Fixes
 
