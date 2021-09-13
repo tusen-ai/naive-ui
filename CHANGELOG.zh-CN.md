@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-cascader` 当 `options` 为空时显示 `Empty` 组件，关闭 [#1092](https://github.com/TuSimple/naive-ui/issues/1092)
+- `n-cascader` 的 `on-update:value` 回调新增选项信息
 - `n-tree` 增加 `check-strategy` 文档属性
 - `n-date-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
 - `n-time-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)

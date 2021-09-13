@@ -47,7 +47,7 @@ custom-field
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |
 | on-focus | `() => void` | `undefined` | 用户 focus 时执行的回调 |
 | on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | 在点击未加载完成节点时的回调，在返回的 promise 中设定 `option.children`，在返回的 promise resolve 或 reject 之后完成加载 |
-| on-update:value | `(value: string \| number \| Array<string \| number> \| null) => void` | `undefined` | 值改变时执行的回调 |
+| on-update:value | `(value: string \| number \| Array<string \| number> \| null, meta: { option: CascaderOption \| null } \| Array<{ option: CascaderOption \| null }>) => void` | `undefined` | 值改变时执行的回调 |
 
 #### CascaderOption Properties
 
