@@ -48,7 +48,7 @@ debug
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Blur 时的回调 |
 | on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | 展开节点更新的回调 |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Focus 时的回调 |
-| on-update:value | `(value: string \| number \| Array<string \| number> \| null) => void` | `undefined` | 更新值的回调 |
+| on-update:value | `(value: string \| number \| Array<string \| number> \| null, meta: { option: TreeSelectOption \| null } \| Array<{ option: TreeSelectOption \| null }>) => void` | `undefined` | 更新值的回调 |
 
 ### TreeSelectOption Properties
 
