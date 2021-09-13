@@ -15,6 +15,7 @@
 - `n-page-header` add `RTL` support.
 - `n-select` support variadic height option rendering.
 - `n-tree-select`'s `on-update:value` prop add option info.
+- `n-select`'s `on-update:value` prop add option info.
 
 ### Fixes
 

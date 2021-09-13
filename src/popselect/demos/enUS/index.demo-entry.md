@@ -23,7 +23,7 @@ multiple
 | scrollable | `boolean` | `false` | Whether the select menu is scrollable. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the Popselect. |
 | value | `string \| number \| Array<string \| number> \| null` | `null` | Value in controlled mode. |
-| on-update:value | `(string \| number \| Array<string \| number> \| null) => void` | `undefined` | Callback of value updating. |
+| on-update:value | `(value: string \| number \| Array<string \| number> \| null, meta: { option: SelectBaseOption \| null } \| Array<{ option: SelectBaseOption }>) => void` | `undefined` | Callback of value updating. |
 
 For SelectOption & SelectGroupOption, see [Select](select#SelectOption-Type)
 

@@ -15,6 +15,7 @@
 - `n-page-header` 添加 `RTL` 支持
 - `n-select` 支持可变高度选项渲染
 - `n-tree-select` 的 `on-update:value` 回调新增选项信息
+- `n-select` 的 `on-update:value` 回调新增选项信息
 
 ### Fixes
 
