@@ -1,4 +1,4 @@
-import { h, defineComponent, renderSlot } from 'vue'
+import { h, defineComponent, renderSlot, watchEffect } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import {
   BackwardIcon,
@@ -8,6 +8,7 @@ import {
 } from '../../../_internal/icons'
 import { NBaseFocusDetector } from '../../../_internal'
 import { useCalendar } from './use-calendar'
+import { warnOnce } from '../../../_utils'
 
 /**
  * Date Panel
@@ -19,6 +20,16 @@ export default defineComponent({
   name: 'DatePanel',
   props: useCalendar.props,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.actions?.includes('confirm')) {
+          warnOnce(
+            'date-picker',
+            'The `confirm` action is not supported for n-date-picker of `date` type'
+          )
+        }
+      })
+    }
     return useCalendar(props, 'date')
   },
   render () {
