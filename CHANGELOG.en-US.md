@@ -11,6 +11,7 @@
 - `n-config-provider` add global config of the `Empty` component, closes [#1092](https://github.com/TuSimple/naive-ui/issues/1092).
 - `n-select` add `on-update:show` prop.
 - `n-auto-complete` exports `AutoCompleteOption` and `AutoCompleteGroupOption` types.
+- `n-page-header` add `RTL` support.
 
 ### Fixes
 

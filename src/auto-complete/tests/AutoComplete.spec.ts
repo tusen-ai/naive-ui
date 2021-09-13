@@ -5,27 +5,69 @@ describe('n-auto-complete', () => {
   it('should work with import on demand', () => {
     mount(NAutoComplete)
   })
-})
 
-it('should work with `loading` prop', async () => {
-  const options: AutoCompleteProps['options'] = [
-    '@gmail.com',
-    '@163.com',
-    '@qq.com'
-  ].map((suffix) => {
-    const prefix = 'test'
-    return {
-      label: prefix + suffix,
-      value: prefix + suffix
-    }
+  it('should work with `clearable` prop', async () => {
+    const wrapper = mount(NAutoComplete)
+    expect(wrapper.find('.n-base-clear').exists()).not.toBe(true)
+    await wrapper.setProps({
+      clearable: true
+    })
+    expect(wrapper.find('.n-base-clear').exists()).toBe(true)
+    wrapper.unmount()
   })
-  const wrapper = mount(NAutoComplete, {
-    props: {
-      options: options
-    }
+
+  it('should work with `disabled` prop', async () => {
+    const wrapper = mount(NAutoComplete)
+    expect(wrapper.find('.n-input').classes()).not.toContain(
+      'n-input--disabled'
+    )
+    await wrapper.setProps({
+      disabled: true
+    })
+    expect(wrapper.find('.n-input').classes()).toContain('n-input--disabled')
+    wrapper.unmount()
   })
-  expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
-  await wrapper.setProps({ loading: true })
-  expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
-  wrapper.unmount()
+
+  it('should work with `loading` prop', async () => {
+    const options: AutoCompleteProps['options'] = [
+      '@gmail.com',
+      '@163.com',
+      '@qq.com'
+    ].map((suffix) => {
+      const prefix = 'test'
+      return {
+        label: prefix + suffix,
+        value: prefix + suffix
+      }
+    })
+    const wrapper = mount(NAutoComplete, {
+      props: {
+        options: options
+      }
+    })
+    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
+    await wrapper.setProps({ loading: true })
+    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should work with `placeholder` prop', async () => {
+    const wrapper = mount(NAutoComplete)
+    expect(wrapper.find('input').attributes('placeholder')).toBe('Please Input')
+    await wrapper.setProps({
+      placeholder: 'test-placeholder'
+    })
+    expect(wrapper.find('input').attributes('placeholder')).toBe(
+      'test-placeholder'
+    )
+    wrapper.unmount()
+  })
+
+  it('should work with `size` prop', async () => {
+    ;(['small', 'medium', 'large'] as const).forEach((size) => {
+      const wrapper = mount(NAutoComplete, { props: { size: size } })
+      expect(wrapper.find('.n-input').attributes('style')).toMatchSnapshot()
+      wrapper.unmount()
+    })
+  })
 })
