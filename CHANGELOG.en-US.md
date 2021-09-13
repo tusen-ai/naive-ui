@@ -17,6 +17,7 @@
 - `n-tree-select`'s `on-update:value` prop add option info.
 - `n-select`'s `on-update:value` prop add option info.
 - `n-popselect`'s `on-update:value` prop add option info.
+- `n-card` add `embedded` prop.
 
 ### Fixes
 
