@@ -5,6 +5,7 @@
   multiple
   :options="options"
   :default-value="['Norwegian Wood']"
+  @update:value="handleUpdateValue"
 />
 ```
 
@@ -14,6 +15,9 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   setup () {
     return {
+      handleUpdateValue (...args) {
+        console.log(...args)
+      },
       options: [
         {
           label: 'Rubber Soul',

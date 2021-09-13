@@ -1,5 +1,31 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-cascader` show `Empty` component when `options` prop is empty, closes [#1092](https://github.com/TuSimple/naive-ui/issues/1092).
+- `n-cascader`'s `on-update:value` prop add option info.
+- `n-tree` add `check-strategy` prop.
+- `n-date-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
+- `n-time-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
+- `n-config-provider` add global config of the `Empty` component, closes [#1092](https://github.com/TuSimple/naive-ui/issues/1092).
+- `n-select` add `on-update:show` prop.
+- `n-auto-complete` exports `AutoCompleteOption` and `AutoCompleteGroupOption` types.
+- `n-page-header` add `RTL` support.
+- `n-select` support variadic height option rendering.
+- `n-tree-select`'s `on-update:value` prop add option info.
+- `n-select`'s `on-update:value` prop add option info.
+
+### Fixes
+
+- Fix `n-p` warns when `depth` is number.
+- Fix `n-date-picker`‘s type of `actions` prop.
+- Fix `n-select` can't override `n-empty`'s theme variables.
+- Fix `n-dynamic-tags` add button is not disabled when it is disabled.
+- Fix `n-select` closes menu when enter key is pressed in filterable mode without options data.
+- Fix `n-auto-complete`'s `children` prop can't use `AutoCompleteOption` type.
+
 ## 2.18.1 (2021-09-08)
 
 ### Feats
@@ -11,7 +37,7 @@
 ### Fixes
 
 - Fix `n-step` doesn't work with `v-for` children.
-- Fix `n-step` cannot enter decimals when `step` is not a decimal.
+- Fix `n-input-number` cannot enter decimals when `step` is not a decimal.
 
 ## 2.18.0 (2021-09-07)
 

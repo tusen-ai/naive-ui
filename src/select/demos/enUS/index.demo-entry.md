@@ -24,6 +24,7 @@ fallback-option
 max-tag-count
 add-tooltip
 render-tag
+render-person
 ```
 
 ## API
@@ -60,7 +61,7 @@ render-tag
 | on-focus | `() => void` | `undefined` | Callback triggered when selection focus. |
 | on-scroll | `(e: ScrollEvent) => void` | `undefined` | Callback triggered when menu scroll. |
 | on-search | `(value: string) => void` | `undefined` | Callback triggered when search. |
-| on-update:value | `(value: Array \| string \| number \| null) => void` | `undefined` | Callback triggered when value updating. |
+| on-update:value | `(value: Array \| string \| number \| null, meta: { option: SelectBaseOption \| null } \| Array<{ option: SelectBaseOption }>) => void` | `undefined` | Callback triggered when value updating. |
 
 ### SelectOption Properties
 

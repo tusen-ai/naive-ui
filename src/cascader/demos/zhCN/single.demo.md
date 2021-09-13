@@ -19,6 +19,7 @@
     :check-strategy="checkStrategyIsChild ? 'child' : 'all'"
     :show-path="showPath"
     :filterable="filterable"
+    @update:value="handleUpdateValue"
   />
 </n-space>
 ```
@@ -63,7 +64,10 @@ export default defineComponent({
       hoverTrigger: ref(false),
       filterable: ref(false),
       value: ref(null),
-      options: getOptions()
+      options: getOptions(),
+      handleUpdateValue (...args) {
+        console.log(...args)
+      }
     }
   }
 })

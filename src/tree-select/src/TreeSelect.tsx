@@ -350,11 +350,14 @@ export default defineComponent({
       uncontrolledShowRef.value = value
     }
     function doUpdateValue (
-      value: string | number | Array<string | number> | null
+      value: string | number | Array<string | number> | null,
+      option: TreeSelectOption | null | Array<TreeSelectOption | null>
     ): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, option)
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, option)
+      }
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
@@ -413,14 +416,23 @@ export default defineComponent({
         }
       }
     }
+    function getOptionsByKeys (keys: Key[]): Array<TreeSelectOption | null> {
+      const {
+        value: { getNode }
+      } = dataTreeMateRef
+      return keys.map((key) => getNode(key)?.rawNode || null)
+    }
     function handleUpdateSelectedKeys (keys: Key[]): void {
       if (props.checkable && props.multiple) {
         return
       }
+      const options = getOptionsByKeys(keys)
       if (props.multiple) {
-        doUpdateValue(keys)
+        doUpdateValue(keys, options)
       } else {
-        doUpdateValue(keys[0] ?? null)
+        keys.length
+          ? doUpdateValue(keys[0], options[0] || null)
+          : doUpdateValue(null, null)
         closeMenu()
         if (!props.filterable) {
           // Currently it is not necessary. However if there is an action slot,
@@ -436,7 +448,7 @@ export default defineComponent({
     function handleUpdateCheckedKeys (keys: Key[]): void {
       // only in checkable & multiple mode, we use tree's check update
       if (props.checkable && props.multiple) {
-        doUpdateValue(keys)
+        doUpdateValue(keys, getOptionsByKeys(keys))
         if (props.filterable) {
           focusSelectionInput()
           patternRef.value = ''
@@ -480,9 +492,9 @@ export default defineComponent({
         closeMenu()
       }
       if (multiple) {
-        doUpdateValue([])
+        doUpdateValue([], [])
       } else {
-        doUpdateValue(null)
+        doUpdateValue(null, null)
       }
     }
     function handleDeleteOption (option: SelectBaseOption): void {
@@ -499,11 +511,11 @@ export default defineComponent({
                 cascade: mergedCascadeRef.value
               }
             )
-            doUpdateValue(checkedKeys)
+            doUpdateValue(checkedKeys, getOptionsByKeys(checkedKeys))
           } else {
             const nextValue = Array.from(mergedValue)
             nextValue.splice(index, 1)
-            doUpdateValue(nextValue)
+            doUpdateValue(nextValue, getOptionsByKeys(nextValue))
           }
         }
       }
@@ -749,7 +761,7 @@ export default defineComponent({
                                   checkedKeys={this.treeCheckedKeys}
                                   selectedKeys={this.treeSelectedKeys}
                                   checkable={checkable}
-                                  internalCheckStrategy={this.checkStrategy}
+                                  checkStrategy={this.checkStrategy}
                                   cascade={this.mergedCascade}
                                   leafOnly={this.leafOnly}
                                   multiple={this.multiple}

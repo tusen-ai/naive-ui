@@ -19,7 +19,11 @@ export type OnUpdateValue = (
   string[] &
   number[] &
   Array<string | number> &
-  null
+  null,
+  option: TreeSelectOption &
+  null &
+  TreeSelectOption[] &
+  Array<TreeSelectOption | null>
 ) => void
 
 export type OnUpdateValueImpl = (
@@ -30,7 +34,8 @@ export type OnUpdateValueImpl = (
   | string[]
   | number[]
   | Array<string | number>
-  | null
+  | null,
+  option: TreeSelectOption | null | Array<TreeSelectOption | null>
 ) => void
 
 export type Value = string | number | Array<string | number> | null

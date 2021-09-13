@@ -75,15 +75,24 @@ export default defineComponent({
 
     const { mergedClsPrefixRef } = useConfig(props)
 
-    function doUpdateValue (value: Value | null): void {
+    function doUpdateValue (
+      value: Value | null,
+      meta:
+      | { option: SelectBaseOption | null }
+      | Array<{
+        option: SelectBaseOption
+      }>
+    ): void {
       const {
         onUpdateValue,
         'onUpdate:value': _onUpdateValue,
         onChange
       } = props
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
-      if (onChange) call(onChange as OnUpdateValueImpl, value)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, meta)
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, meta)
+      }
+      if (onChange) call(onChange as OnUpdateValueImpl, value, meta)
     }
     function handleToggle (tmNode: TreeNode<SelectBaseOption>): void {
       toggle(tmNode.key)
@@ -101,15 +110,20 @@ export default defineComponent({
           } else {
             newValue.push(value)
           }
-          doUpdateValue(newValue)
+          const meta = props.options.map((option) => {
+            return { option: option }
+          })
+          doUpdateValue(newValue, meta as Array<{ option: SelectBaseOption }>)
         } else {
-          doUpdateValue([value])
+          const option = props.options.find((option) => option.value === value)
+          doUpdateValue([value], { option: option as SelectBaseOption })
         }
       } else {
         if (props.value === value && props.cancelable) {
-          doUpdateValue(null)
+          doUpdateValue(null, { option: null })
         } else {
-          doUpdateValue(value)
+          const option = props.options.find((option) => option.value === value)
+          doUpdateValue(value, { option: option as SelectBaseOption })
           NPopselect.setShow(false)
         }
       }

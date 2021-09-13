@@ -29,6 +29,7 @@ update-on-close
 | clearable | `boolean` | `false` | Whether the date picker is clearable. |
 | default-value | `number \| [number, number] \| null` | `null` | Date picker's default value. |
 | disabled | `boolean` | `false` | Whether the date picker is disabled. |
+| input-readonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |
 | shortcuts | `Record<string, number \| [number, number]>` | `undefined` | Shortcut button customizations. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` | Date picker type. |
@@ -40,7 +41,7 @@ update-on-close
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported for the `date` type date picker. |
+| actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Operations supported for the `date` type date picker. |
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |
 | placeholder | `string` | `'Select Date'` | Placeholder. |

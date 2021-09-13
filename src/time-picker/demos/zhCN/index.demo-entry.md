@@ -25,6 +25,7 @@ actions
 | hours | `number \| number[]` | `undefined` | 通过数组指定显示的小时。当值为 `number` 时，将被当做时间步进处理 |
 | minutes | `number \| number[]` | `undefined` | 通过数组指定显示的分钟。当值为 `number` 时，将被当做时间步进处理 |
 | seconds | `number \| number[]` | `undefined` | 通过数组指定显示的秒。当值为 `number` 时，将被当做时间步进处理 |
+| input-readonly | `boolean` | `false` | 设置输入框为只读（避免在移动设备上打开虚拟键盘） |
 | is-hour-disabled | `(hour: number) => boolean` | `() => false` | 用于禁用小时的回调函数 |
 | is-minute-disabled | `(minute: number, hour: number) => boolean` | `() => false` | 用于禁用分钟的回调函数 |
 | is-second-disabled | `(second: number, minute: number, hour: number) => boolean` | `() => false` | 用于禁用秒钟的回调函数 |

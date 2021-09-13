@@ -53,7 +53,8 @@ import type {
   OnUpdateValue,
   OnUpdateValueImpl,
   Value,
-  Size
+  Size,
+  ValueAtom
 } from './interface'
 
 const selectProps = {
@@ -153,6 +154,12 @@ const selectProps = {
   >,
   onSearch: [Function, Array] as PropType<
   MaybeArray<(value: string) => void> | undefined
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
+  'onUpdate:show': [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
   >,
   /** deprecated */
   onChange: {
@@ -263,51 +270,41 @@ export default defineComponent({
         }
       }
     })
+    function getMergedOptions (values: ValueAtom[]): SelectBaseOption[] {
+      const remote = props.remote
+      const { value: memoValOptMap } = memoValOptMapRef
+      const { value: valOptMap } = valOptMapRef
+      const { value: wrappedFallbackOption } = wrappedFallbackOptionRef
+      const options: SelectBaseOption[] = []
+      values.forEach((value) => {
+        if (valOptMap.has(value)) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          options.push(valOptMap.get(value)!)
+        } else if (remote && memoValOptMap.has(value)) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          options.push(memoValOptMap.get(value)!)
+        } else if (wrappedFallbackOption) {
+          const option = wrappedFallbackOption(value)
+          if (option) {
+            options.push(option)
+          }
+        }
+      })
+      return options
+    }
     const selectedOptionsRef = computed(() => {
       if (props.multiple) {
         const { value: values } = mergedValueRef
         if (!Array.isArray(values)) return []
-        const remote = props.remote
-        const { value: memoValOptMap } = memoValOptMapRef
-        const { value: valOptMap } = valOptMapRef
-        const { value: wrappedFallbackOption } = wrappedFallbackOptionRef
-        const options: SelectBaseOption[] = []
-        values.forEach((value) => {
-          if (valOptMap.has(value)) {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            options.push(valOptMap.get(value)!)
-          } else if (remote && memoValOptMap.has(value)) {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            options.push(memoValOptMap.get(value)!)
-          } else if (wrappedFallbackOption) {
-            const option = wrappedFallbackOption(value)
-            if (option) {
-              options.push(option)
-            }
-          }
-        })
-        return options
+        return getMergedOptions(values)
       }
       return null
     })
     const selectedOptionRef = computed<SelectBaseOption | null>(() => {
       const { value: mergedValue } = mergedValueRef
       if (!props.multiple && !Array.isArray(mergedValue)) {
-        const { value: valOptMap } = valOptMapRef
-        const { value: wrappedFallbackOption } = wrappedFallbackOptionRef
         if (mergedValue === null) return null
-        let selectedOption = null
-        if (valOptMap.has(mergedValue as any)) {
-          selectedOption = valOptMap.get(mergedValue)
-        } else if (props.remote) {
-          selectedOption = memoValOptMapRef.value.get(mergedValue)
-        }
-        return (
-          selectedOption ||
-          // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-          (wrappedFallbackOption && wrappedFallbackOption(mergedValue)) ||
-          null
-        )
+        return getMergedOptions([mergedValue])[0] || null
       }
       return null
     })
@@ -315,7 +312,12 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef } = formItem
     function doUpdateValue (
-      value: string | number | Array<string | number> | null
+      value: string | number | Array<string | number> | null,
+      meta:
+      | { option: SelectBaseOption | null }
+      | Array<{
+        option: SelectBaseOption
+      }>
     ): void {
       const {
         onChange,
@@ -323,9 +325,11 @@ export default defineComponent({
         onUpdateValue
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      if (onChange) call(onChange as OnUpdateValueImpl, value)
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (onChange) call(onChange as OnUpdateValueImpl, value, meta)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, meta)
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, meta)
+      }
       uncontrolledValueRef.value = value
       nTriggerFormChange()
       nTriggerFormInput()
@@ -372,9 +376,16 @@ export default defineComponent({
       }
     }
     // menu related methods
+    function doUpdateShow (value: boolean): void {
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) call(onUpdateShow, value)
+      if (_onUpdateShow) call(_onUpdateShow, value)
+      uncontrolledShowRef.value = value
+    }
     function openMenu (): void {
       if (!mergedDisabledRef.value) {
         patternRef.value = ''
+        doUpdateShow(true)
         uncontrolledShowRef.value = true
         if (props.filterable) {
           focusSelectionInput()
@@ -382,7 +393,7 @@ export default defineComponent({
       }
     }
     function closeMenu (): void {
-      uncontrolledShowRef.value = false
+      doUpdateShow(false)
     }
     function handleMenuLeave (): void {
       patternRef.value = ''
@@ -488,7 +499,10 @@ export default defineComponent({
           patternRef.value = ''
         }
         focusSelectionInput()
-        doUpdateValue(changedValue)
+        const meta = getMergedOptions(changedValue).map((option) => ({
+          option: option
+        }))
+        doUpdateValue(changedValue, meta)
       } else {
         if (tag && !remote) {
           const createdOptionIndex = getCreatedOptionIndex(option.value)
@@ -502,7 +516,7 @@ export default defineComponent({
         }
         focusSelection()
         closeMenu()
-        doUpdateValue(option.value)
+        doUpdateValue(option.value, { option })
       }
     }
     function getCreatedOptionIndex (optionValue: string | number): number {
@@ -547,9 +561,9 @@ export default defineComponent({
       }
       doClear()
       if (multiple) {
-        doUpdateValue([])
+        doUpdateValue([], { option: null })
       } else {
-        doUpdateValue(null)
+        doUpdateValue(null, { option: null })
       }
     }
     function handleMenuMousedown (e: MouseEvent): void {
@@ -569,11 +583,10 @@ export default defineComponent({
         case 'Enter':
         case 'NumpadEnter':
           if (mergedShowRef.value) {
-            const menu = menuRef.value
-            const pendingOptionData = menu?.getPendingTmNode()
-            if (pendingOptionData) {
-              handleToggleByTmNode(pendingOptionData)
-            } else {
+            const pendingTmNode = menuRef.value?.getPendingTmNode()
+            if (pendingTmNode) {
+              handleToggleByTmNode(pendingTmNode)
+            } else if (!props.filterable) {
               closeMenu()
               focusSelection()
             }

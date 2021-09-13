@@ -100,7 +100,7 @@ const datePickerProps = {
   format: String,
   dateFormat: String,
   timeFormat: String,
-  actions: Array as PropType<Array<'clear' | 'cancel' | 'confirm'>>,
+  actions: Array as PropType<Array<'clear' | 'confirm' | 'now'>>,
   shortcuts: Object as PropType<Shortcuts>,
   isDateDisabled: Function as PropType<IsDateDisabled>,
   isTimeDisabled: Function as PropType<IsTimeDisabled>,
@@ -109,6 +109,7 @@ const datePickerProps = {
     default: undefined
   },
   ranges: Object as PropType<Record<string, [number, number]>>,
+  inputReadonly: Boolean,
   closeOnSelect: Boolean,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
@@ -664,7 +665,7 @@ export default defineComponent({
       size: this.mergedSize,
       passivelyActivated: true,
       disabled: this.mergedDisabled,
-      readonly: this.mergedDisabled,
+      readonly: this.inputReadonly || this.mergedDisabled,
       clearable,
       onClear: this.handleClear,
       onClick: this.handleTriggerClick,
