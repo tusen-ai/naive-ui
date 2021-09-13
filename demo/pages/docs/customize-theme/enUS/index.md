@@ -22,15 +22,16 @@ If `theme` is `undefined` it won't affect the theme of components inside.
 </template>
 
 <script>
+  import { defineComponent } from 'vue'
   import { darkTheme } from 'naive-ui'
 
-  export default {
+  export default defineComponent({
     setup() {
       return {
         darkTheme
       }
     }
-  }
+  })
 </script>
 ```
 
