@@ -238,9 +238,7 @@ describe('n-select', () => {
       }
     })
 
-    expect(wrapper.find('.n-base-selection-label__input').text()).toBe(
-      'render-test'
-    )
+    expect(wrapper.find('.n-base-selection-input').text()).toBe('render-test')
     await wrapper.setProps({ show: true })
     await nextTick()
     expect(
@@ -266,14 +264,12 @@ describe('n-select', () => {
     const wrapper = mount(NSelect)
 
     expect(wrapper.find('input').exists()).not.toBe(true)
-    expect(wrapper.find('.n-base-selection-label__input').exists()).not.toBe(
-      true
-    )
+    expect(wrapper.find('.n-base-selection-input').exists()).not.toBe(true)
     await wrapper.setProps({
       filterable: true
     })
     expect(wrapper.find('input').exists()).toBe(true)
-    expect(wrapper.find('.n-base-selection-label__input').exists()).toBe(true)
+    expect(wrapper.find('.n-base-selection-input').exists()).toBe(true)
   })
 
   it('should work with `loading` prop', async () => {
@@ -337,6 +333,10 @@ describe('n-select', () => {
       }
     })
     const menuWrapper = wrapper.findComponent(NInternalSelectMenu)
-    expect(menuWrapper.find('.n-base-select-menu__empty .n-empty').attributes('style')).toContain('--text-color: #4fb233;')
+    expect(
+      menuWrapper
+        .find('.n-base-select-menu__empty .n-empty')
+        .attributes('style')
+    ).toContain('--text-color: #4fb233;')
   })
 })

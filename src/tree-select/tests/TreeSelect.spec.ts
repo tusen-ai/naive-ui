@@ -52,24 +52,20 @@ describe('n-tree-select', () => {
         defaultValue: '1-2'
       }
     })
-    expect(wrapper.find('.n-base-selection-label__input').exists()).toBe(true)
-    expect(wrapper.find('.n-base-selection-label__input').text()).toBe(
-      '1 / 1-2'
-    )
+    expect(wrapper.find('.n-base-selection-input').exists()).toBe(true)
+    expect(wrapper.find('.n-base-selection-input').text()).toBe('1 / 1-2')
 
     await wrapper.setProps({ showPath: false })
-    expect(wrapper.find('.n-base-selection-label__input').exists()).toBe(true)
-    expect(wrapper.find('.n-base-selection-label__input').text()).toBe('1-2')
+    expect(wrapper.find('.n-base-selection-input').exists()).toBe(true)
+    expect(wrapper.find('.n-base-selection-input').text()).toBe('1-2')
 
     await wrapper.setProps({
       showPath: true,
       defaultValue: '1-1',
       separator: ' | '
     })
-    expect(wrapper.find('.n-base-selection-label__input').exists()).toBe(true)
-    expect(wrapper.find('.n-base-selection-label__input').text()).toBe(
-      '1 | 1-2'
-    )
+    expect(wrapper.find('.n-base-selection-input').exists()).toBe(true)
+    expect(wrapper.find('.n-base-selection-input').text()).toBe('1 | 1-2')
   })
 
   it('should work with `multiple` prop', () => {
