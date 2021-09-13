@@ -21,6 +21,7 @@
 - Fix `n-dynamic-tags` add button is not disabled when it is disabled.
 - Fix `n-select` closes menu when enter key is pressed in filterable mode without options data.
 - Fix `n-auto-complete`'s `children` prop can't use `AutoCompleteOption` type.
+- Fix `n-upload` prop `v-model:file-list` dosen't work well when prop `multiple` is `true`, closes [#418](https://github.com/TuSimple/naive-ui/issues/418).
 
 ## 2.18.1 (2021-09-08)
 
@@ -52,7 +53,6 @@
 - Fix `n-step` must be passed with `internal-index`.
 - Fix `n-radio-group`'s `on-update:value` and `on-update-value` can't be array.
 - Fix `n-cascader` `check-strategy="child"` doesn't behaves the same as previous `leaf-only`.
-- Fix `n-upload` prop `v-model:file-list` dosen't work well when prop `multiple` is `true`, closes [#418](https://github.com/TuSimple/naive-ui/issues/418).
 
 ## 2.17.2 (2021-09-06)
 
