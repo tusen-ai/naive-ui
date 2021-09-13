@@ -100,7 +100,7 @@ const datePickerProps = {
   format: String,
   dateFormat: String,
   timeFormat: String,
-  actions: Array as PropType<Array<'clear' | 'cancel' | 'confirm'>>,
+  actions: Array as PropType<Array<'clear' | 'confirm' | 'now'>>,
   shortcuts: Object as PropType<Shortcuts>,
   isDateDisabled: Function as PropType<IsDateDisabled>,
   isTimeDisabled: Function as PropType<IsTimeDisabled>,

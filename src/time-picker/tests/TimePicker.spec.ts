@@ -84,4 +84,25 @@ describe('n-time-picker', () => {
       wrapper.unmount()
     })
   })
+
+  it('should work with `on-blur` prop', async () => {
+    const onBlur = jest.fn()
+    const wrapper = mount(NTimePicker, {
+      props: { onBlur: onBlur }
+    })
+    await wrapper.find('input').trigger('focus')
+    await wrapper.find('input').trigger('blur')
+    expect(onBlur).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `on-focus` prop', async () => {
+    const onFocus = jest.fn()
+    const wrapper = mount(NTimePicker, {
+      props: { onFocus: onFocus }
+    })
+    await wrapper.find('input').trigger('focus')
+    expect(onFocus).toHaveBeenCalled()
+    wrapper.unmount()
+  })
 })

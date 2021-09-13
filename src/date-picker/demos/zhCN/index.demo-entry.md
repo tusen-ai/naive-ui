@@ -41,7 +41,7 @@ update-on-close
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Date 类型的 Date Picker 中支持的操作 |
+| actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Date 类型的 Date Picker 中支持的操作 |
 | format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串 |
 | is-date-disabled | `(current: number) => boolean` | `undefined` | 日期禁用的校验函数 |
 | placeholder | `string` | `'选择日期'` | 自动填充的提示信息 |

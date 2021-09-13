@@ -155,6 +155,12 @@ const selectProps = {
   onSearch: [Function, Array] as PropType<
   MaybeArray<(value: string) => void> | undefined
   >,
+  onUpdateShow: [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
+  'onUpdate:show': [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void>
+  >,
   /** deprecated */
   onChange: {
     type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
@@ -370,9 +376,16 @@ export default defineComponent({
       }
     }
     // menu related methods
+    function doUpdateShow (value: boolean): void {
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) call(onUpdateShow, value)
+      if (_onUpdateShow) call(_onUpdateShow, value)
+      uncontrolledShowRef.value = value
+    }
     function openMenu (): void {
       if (!mergedDisabledRef.value) {
         patternRef.value = ''
+        doUpdateShow(true)
         uncontrolledShowRef.value = true
         if (props.filterable) {
           focusSelectionInput()
@@ -380,7 +393,7 @@ export default defineComponent({
       }
     }
     function closeMenu (): void {
-      uncontrolledShowRef.value = false
+      doUpdateShow(false)
     }
     function handleMenuLeave (): void {
       patternRef.value = ''
@@ -570,11 +583,10 @@ export default defineComponent({
         case 'Enter':
         case 'NumpadEnter':
           if (mergedShowRef.value) {
-            const menu = menuRef.value
-            const pendingOptionData = menu?.getPendingTmNode()
-            if (pendingOptionData) {
-              handleToggleByTmNode(pendingOptionData)
-            } else {
+            const pendingTmNode = menuRef.value?.getPendingTmNode()
+            if (pendingTmNode) {
+              handleToggleByTmNode(pendingTmNode)
+            } else if (!props.filterable) {
               closeMenu()
               focusSelection()
             }

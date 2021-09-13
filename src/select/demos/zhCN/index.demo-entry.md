@@ -24,6 +24,7 @@ fallback-option
 max-tag-count
 add-tooltip
 render-tag
+render-person
 change-debug
 placeholder-debug
 menu-debug
