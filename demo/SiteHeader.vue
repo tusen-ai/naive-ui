@@ -45,29 +45,48 @@
       </div>
     </n-popover>
     <div class="nav-end" v-else>
-      <n-button text class="nav-picker" @click="handleLocaleUpdate">
+      <n-button
+        size="small"
+        tertiary
+        class="nav-picker"
+        @click="handleLocaleUpdate"
+      >
         {{ localeLabelMap[locale] }}
       </n-button>
-      <n-button text class="nav-picker" @click="handleThemeUpdate">
+      <n-button
+        size="small"
+        tertiary
+        class="nav-picker"
+        @click="handleThemeUpdate"
+      >
         {{ themeLabelMap[theme] }}
       </n-button>
-      <n-button tag="a" text class="nav-picker" :href="repoUrl" target="_blank">
+      <n-button
+        size="small"
+        tag="a"
+        tertiary
+        class="nav-picker"
+        :href="repoUrl"
+        target="_blank"
+      >
         GitHub
       </n-button>
-      <n-text class="nav-picker">
+      <n-text class="nav-picker padded">
         {{ version }}
       </n-text>
       <n-button
+        size="small"
         v-if="dev"
-        text
+        tertiary
         class="nav-picker"
         @click="handleDisplayModeUpdate"
       >
         {{ displayModeLabelMap[displayMode] }}
       </n-button>
       <n-button
+        size="small"
         v-if="tusimple || dev"
-        text
+        tertiary
         class="nav-picker"
         @click="handleConfigProviderUpdate"
       >
@@ -413,7 +432,11 @@ export default {
 }
 
 .nav-picker {
-  margin-right: 24px;
+  margin-right: 4px;
+}
+
+.nav-picker.padded {
+  padding: 0 10px;
 }
 
 .nav-picker:last-child {

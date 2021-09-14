@@ -15,7 +15,6 @@ export const self = (vars: ThemeCommonVars) => {
     fontSizeMedium,
     fontSizeLarge,
     opacityDisabled,
-    textColor1,
     textColor2,
     textColor3,
     primaryColorHover,
@@ -35,7 +34,11 @@ export const self = (vars: ThemeCommonVars) => {
     errorColor,
     errorColorHover,
     errorColorPressed,
-    fontWeight
+    fontWeight,
+    buttonColor,
+    buttonHoverColor,
+    buttonPressedColor,
+    fontWeightStrong
   } = vars
   return {
     ...commonVariables,
@@ -52,6 +55,14 @@ export const self = (vars: ThemeCommonVars) => {
     fontSizeMedium: fontSizeMedium,
     fontSizeLarge: fontSizeLarge,
     opacityDisabled: opacityDisabled,
+    // secondary
+    colorSecondary: buttonColor,
+    colorSecondaryHover: buttonHoverColor,
+    colorSecondaryPressed: buttonPressedColor,
+    // tertiary
+    colorTertiary: '#0000',
+    colorTertiaryHover: buttonHoverColor,
+    colorTertiaryPressed: buttonPressedColor,
     // default type
     color: '#0000',
     colorHover: '#0000',
@@ -59,14 +70,12 @@ export const self = (vars: ThemeCommonVars) => {
     colorFocus: '#0000',
     colorDisabled: '#0000',
     textColor: textColor2,
+    textColorTertiary: textColor3, // tertiary
     textColorHover: primaryColorHover,
     textColorPressed: primaryColorPressed,
     textColorFocus: primaryColorHover,
     textColorDisabled: textColor2,
     textColorText: textColor2,
-    textColorTextDepth1: textColor1,
-    textColorTextDepth2: textColor2,
-    textColorTextDepth3: textColor3,
     textColorTextHover: primaryColorHover,
     textColorTextPressed: primaryColorPressed,
     textColorTextFocus: primaryColorHover,
@@ -218,9 +227,8 @@ export const self = (vars: ThemeCommonVars) => {
     borderDisabledError: `1px solid ${errorColor}`,
     rippleColorError: errorColor,
     waveOpacity: '0.6',
-    fontWeightText: fontWeight,
-    fontWeight: fontWeight,
-    fontWeighGhost: fontWeight
+    fontWeight,
+    fontWeightStrong
   }
 }
 
