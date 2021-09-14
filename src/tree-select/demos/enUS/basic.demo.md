@@ -1,7 +1,11 @@
 # Basic
 
 ```html
-<n-tree-select :options="options" default-value="Drive My Car" />
+<n-tree-select
+  :options="options"
+  default-value="Drive My Car"
+  @update:value="handleUpdateValue"
+/>
 ```
 
 ```js
@@ -10,6 +14,9 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   setup () {
     return {
+      handleUpdateValue (...args) {
+        console.log(...args)
+      },
       options: [
         {
           label: 'Rubber Soul',

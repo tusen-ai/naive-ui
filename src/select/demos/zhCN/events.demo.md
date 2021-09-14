@@ -26,8 +26,9 @@ export default defineComponent({
   setup () {
     const message = useMessage()
     return {
-      handleUpdateValue (value) {
+      handleUpdateValue (value, option) {
         message.info('value: ' + JSON.stringify(value))
+        message.info('option: ' + JSON.stringify(option))
       },
       options: [
         {

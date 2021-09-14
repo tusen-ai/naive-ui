@@ -1,10 +1,11 @@
 # CHANGELOG
 
-## Pending
+## 2.18.2 (2021-09-14)
 
 ### Feats
 
 - `n-cascader` show `Empty` component when `options` prop is empty, closes [#1092](https://github.com/TuSimple/naive-ui/issues/1092).
+- `n-cascader`'s `on-update:value` prop add option info.
 - `n-tree` add `check-strategy` prop.
 - `n-date-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
 - `n-time-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
@@ -12,6 +13,11 @@
 - `n-select` add `on-update:show` prop.
 - `n-auto-complete` exports `AutoCompleteOption` and `AutoCompleteGroupOption` types.
 - `n-page-header` add `RTL` support.
+- `n-select` support variadic height option rendering.
+- `n-tree-select`'s `on-update:value` prop add option info.
+- `n-select`'s `on-update:value` prop add option info.
+- `n-popselect`'s `on-update:value` prop add option info.
+- `n-card` add `embedded` prop.
 
 ### Fixes
 

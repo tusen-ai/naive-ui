@@ -16,13 +16,14 @@ If you want to know how to import themes and locales, please see [Import on Dema
 </template>
 
 <script>
+  import { defineComponent } from 'vue'
   import { NButton } from 'naive-ui'
 
-  export default {
+  export default defineComponent({
     components: {
       NButton
     }
-  }
+  })
 </script>
 ```
 

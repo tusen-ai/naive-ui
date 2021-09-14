@@ -1,4 +1,4 @@
-import rtlStyle from '../src/styles/page-header-rtl.cssr'
+import rtlStyle from '../src/styles/rtl.cssr'
 
 export default {
   name: 'PageHeader',

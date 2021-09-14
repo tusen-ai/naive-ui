@@ -28,6 +28,7 @@
     :check-strategy="checkStrategyIsChild ? 'child' : 'all'"
     :show-path="showPath"
     :filterable="filterable"
+    @update:value="handleUpdateValue"
   />
 </n-space>
 ```
@@ -74,7 +75,10 @@ export default defineComponent({
       value: ref(null),
       filterable: ref(false),
       responsiveMaxTagCount: ref(true),
-      options: getOptions()
+      options: getOptions(),
+      handleUpdateValue (...args) {
+        console.log(...args)
+      }
     }
   }
 })

@@ -80,9 +80,7 @@ describe('n-cascader', () => {
     const wrapper = mount(NCascader, {
       props: { options: getOptions(), defaultValue: 'l-1-1-2' }
     })
-    expect(wrapper.find('.n-base-selection-label__input').text()).toBe(
-      'l-1-1-2'
-    )
+    expect(wrapper.find('.n-base-selection-input').text()).toBe('l-1-1-2')
   })
 
   it('should work with `multiple` prop', async () => {

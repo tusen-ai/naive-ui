@@ -16,6 +16,7 @@ closable
 no-title
 loading
 custom-style
+embedded
 rtl-debug
 ```
 
@@ -26,6 +27,7 @@ rtl-debug
 | bordered | `boolean` | `true` | 是否显示卡片边框 |
 | closable | `boolean` | `false` | 是否允许关闭 |
 | content-style | `Object \| string` | `undefined` | 卡片内容区域的样式 |
+| embedded | `boolean` | `false` | 使用更深的背景色展现嵌入效果，只对亮色主题生效 |
 | footer-style | `Object \| string` | `undefined` | 卡片底部区域的样式 |
 | header-style | `Object \| string` | `undefined` | 卡片头部区域的样式 |
 | hoverable | `boolean` | `false` | 卡片是否可悬浮 |

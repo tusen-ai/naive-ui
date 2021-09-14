@@ -21,7 +21,7 @@ describe('n-carousel', () => {
 
     await wrapper.setProps({ autoplay: true, interval: 50 })
 
-    await sleep(10)
+    await sleep(25)
     ;([0, 1, 2, 3, 4] as const).forEach((i) => {
       if (i === 1) {
         expect(
@@ -34,7 +34,7 @@ describe('n-carousel', () => {
       }
     })
 
-    await sleep(60)
+    await sleep(75)
     ;([0, 1, 2, 3, 4] as const).forEach((i) => {
       if (i === 2) {
         expect(
