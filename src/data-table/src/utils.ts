@@ -108,12 +108,13 @@ export function createNextSorter (
 }
 
 export function isColumnSorting (
-  column: TableBaseColumn,
+  column: TableColumn,
   mergedSortState: SortState[]
 ): boolean {
   return (
     mergedSortState.find(
-      (state) => state.columnKey === column.key && state.order
+      (state) =>
+        state.columnKey === (column as TableBaseColumn).key && state.order
     ) !== undefined
   )
 }

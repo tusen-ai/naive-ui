@@ -123,7 +123,6 @@ export default defineComponent({
       mergedTableLayout,
       headerCheckboxDisabled,
       mergedSortState,
-      isColumnSorting,
       handleColHeaderClick,
       handleCheckboxUpdateChecked
     } = this
@@ -157,10 +156,7 @@ export default defineComponent({
                         `${mergedClsPrefix}-data-table-th--fixed-${column.fixed}`,
                       {
                         [`${mergedClsPrefix}-data-table-th--hover`]:
-                          isColumnSorting(
-                            column as TableBaseColumn,
-                            mergedSortState
-                          ),
+                          isColumnSorting(column, mergedSortState),
                         [`${mergedClsPrefix}-data-table-th--filterable`]:
                           isColumnFilterable(column),
                         [`${mergedClsPrefix}-data-table-th--sortable`]:

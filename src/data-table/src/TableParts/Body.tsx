@@ -20,8 +20,7 @@ import {
   RowKey,
   SummaryRowData,
   MainTableBodyRef,
-  TmNode,
-  TableBaseColumn
+  TmNode
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import Cell from './Cell'
@@ -500,10 +499,7 @@ export default defineComponent({
                       isSummary && `${mergedClsPrefix}-data-table-td--summary`,
                       ((hoverKey !== null &&
                         cordKey[rowIndex][colIndex].includes(hoverKey)) ||
-                        isColumnSorting(
-                          column as TableBaseColumn,
-                          mergedSortState
-                        )) &&
+                        isColumnSorting(column, mergedSortState)) &&
                         `${mergedClsPrefix}-data-table-td--hover`,
                       column.fixed &&
                         `${mergedClsPrefix}-data-table-td--fixed-${column.fixed}`,
@@ -528,13 +524,21 @@ export default defineComponent({
                     {hasChildren && colIndex === firstContentfulColIndex
                       ? [
                           repeat(
+<<<<<<< HEAD
                             isSummary ? 0 : rowInfo.level,
+=======
+                            isSummary ? 0 : (rowInfo).level,
+>>>>>>> optimization
                             <div
                               class={`${mergedClsPrefix}-data-table-indent`}
                               style={indentStyle}
                             />
                           ),
+<<<<<<< HEAD
                           isSummary || !rowInfo.children ? (
+=======
+                          isSummary || !(rowInfo).children ? (
+>>>>>>> optimization
                             <div
                               class={`${mergedClsPrefix}-data-table-expand-placeholder`}
                             />

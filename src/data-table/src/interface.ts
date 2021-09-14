@@ -38,7 +38,7 @@ export type CompareFn<T = InternalRowData> = (row1: T, row2: T) => number
 export type Sorter<T = InternalRowData> = CompareFn<T> | SorterMultiple<T>
 export interface SorterMultiple<T = InternalRowData> {
   multiple: number
-  compare: CompareFn<T>
+  compare?: CompareFn<T> | 'default'
 }
 
 export type Filter<T = InternalRowData> = (

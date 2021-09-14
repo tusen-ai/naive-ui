@@ -28,14 +28,19 @@ function getSortFunction (
   sorter: TableBaseColumn['sorter'],
   columnKey?: ColumnKey
 ): CompareFn | false {
-  if (columnKey && (sorter === undefined || sorter === 'default')) {
+  if (
+    columnKey &&
+    (sorter === undefined ||
+      sorter === 'default' ||
+      (typeof sorter === 'object' && sorter?.compare === 'default'))
+  ) {
     return getDefaultSorterFn(columnKey)
   }
   if (typeof sorter === 'function') {
     return sorter
   }
   if (sorter && typeof sorter === 'object' && sorter.compare) {
-    return sorter.compare
+    return sorter.compare as CompareFn
   }
   return false
 }
@@ -101,31 +106,30 @@ export default function useSorter (
   })
 
   const sortedDataRef = computed<TmNode[]>(() => {
-    const activeSorters = mergedSortStateRef.value
-      .slice()
-      .sort(
-        (a, b) =>
-          (getMultiplePriority(b) as number) -
-          (getMultiplePriority(a) as number)
-      )
-    if (activeSorters?.length) {
+    const activeSorters = mergedSortStateRef.value.slice().sort((a, b) => {
+      const item1Priority = getMultiplePriority(a) || 0
+      const item2Priority = getMultiplePriority(b) || 0
+      return item2Priority - item1Priority
+    })
+    if (activeSorters.length) {
       const filteredData = filteredDataRef.value.slice()
       return filteredData.sort((tmNode1, tmNode2) => {
-        for (let i = 0; i < activeSorters.length; i += 1) {
-          const sorterState = activeSorters[i]
+        let compareResult = 0
+        activeSorters.some((sorterState) => {
           const { columnKey, sorter, order } = sorterState
 
           const compareFn = getSortFunction(sorter, columnKey)
           if (compareFn && order) {
-            const compareResult = compareFn(tmNode1.rawNode, tmNode2.rawNode)
+            compareResult = compareFn(tmNode1.rawNode, tmNode2.rawNode)
 
             if (compareResult !== 0) {
-              return compareResult * getFlagOfOrder(order)
+              compareResult = compareResult * getFlagOfOrder(order)
+              return true
             }
           }
-        }
-
-        return 0
+          return false
+        })
+        return compareResult
       })
     }
     return filteredDataRef.value
@@ -136,26 +140,26 @@ export default function useSorter (
       onUpdateSorter,
       onSorterChange
     } = props
+    let currentSorState = mergedSortStateRef.value.slice()
     // Multiple sorter
     if (
       sortState &&
       getMultiplePriority({ sorter: sortState.sorter }) !== false
     ) {
       // clear column is not multiple sort
-      uncontrolledSortStateRef.value = uncontrolledSortStateRef.value.filter(
+      currentSorState = currentSorState.filter(
         (sortState) =>
           getMultiplePriority({ sorter: sortState.sorter }) !== false
       )
       addSortSate(sortState)
     } else if (sortState) {
       // single sorter
-      uncontrolledSortStateRef.value = [sortState]
+      currentSorState = [sortState]
     } else {
       // no sorter
-      uncontrolledSortStateRef.value = []
+      currentSorState = []
     }
-    let updateSorterState: SortState | SortState[] | null =
-      uncontrolledSortStateRef.value
+    let updateSorterState: SortState | SortState[] | null = currentSorState
     if (updateSorterState.length === 1) {
       updateSorterState = updateSorterState[0]
     } else if (updateSorterState.length === 0) {
@@ -164,6 +168,7 @@ export default function useSorter (
     if (_onUpdateSorter) call(_onUpdateSorter, updateSorterState)
     if (onUpdateSorter) call(onUpdateSorter, updateSorterState)
     if (onSorterChange) call(onSorterChange, updateSorterState)
+    uncontrolledSortStateRef.value = currentSorState
   }
   function sort (columnKey: ColumnKey, order: SortOrder = 'ascend'): void {
     if (!columnKey) {
