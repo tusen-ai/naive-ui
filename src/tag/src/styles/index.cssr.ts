@@ -58,6 +58,10 @@ export default cB('tag', `
     border: var(--border);
     transition: border-color .3s var(--bezier);
   `),
+  cE('avatar', `
+    display: flex;
+    margin-right: 6px;
+  `),
   cE('close', `
     font-size: var(--close-size);
     margin: var(--close-margin);
@@ -67,7 +71,11 @@ export default cB('tag', `
   cM('round', `
     padding: 0 calc(var(--height) / 2);
     border-radius: calc(var(--height) / 2);
-  `),
+  `, [
+    cE('avatar', {
+      marginLeft: '-5px'
+    })
+  ]),
   cM('disabled', {
     cursor: 'not-allowed !important',
     opacity: 'var(--opacity-disabled)'

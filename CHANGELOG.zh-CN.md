@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-tag` 新增 `avatar` 插槽
+
 ## 2.19.7 (2021-10-12)
 
 ### Fixes

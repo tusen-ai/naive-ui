@@ -172,7 +172,13 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, rtlEnabled, color: { borderColor } = {} } = this
+    const {
+      mergedClsPrefix,
+      rtlEnabled,
+      color: { borderColor } = {},
+      $slots
+    } = this
+    const { avatar: avatarSlot } = $slots
     return (
       <div
         class={[
@@ -190,6 +196,14 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
       >
+        {avatarSlot ? (
+          <div class={`${mergedClsPrefix}-tag__avatar`}>
+            {avatarSlot().map((item) => {
+              ;(item.props as any).size = item.props?.size ?? 16
+              return item
+            })}
+          </div>
+        ) : null}
         <span class={`${mergedClsPrefix}-tag__content`} ref="contentRef">
           {this.$slots}
         </span>

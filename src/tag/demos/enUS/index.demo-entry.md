@@ -12,6 +12,7 @@ size
 checkable
 shape
 color
+avatar
 ```
 
 ## API
@@ -34,6 +35,7 @@ color
 
 ### Tag Slots
 
-| Name    | Parameters | Description    |
-| ------- | ---------- | -------------- |
-| default | `()`       | Tag's content. |
+| Name    | Parameters | Description        |
+| ------- | ---------- | ------------------ |
+| avatar  | `()`       | Image information. |
+| default | `()`       | Tag's content.     |

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-tag` add `avatar` slot.
+
 ## 2.19.7 (2021-10-12)
 
 ### Fixes
