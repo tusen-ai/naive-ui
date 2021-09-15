@@ -2,7 +2,7 @@
 
 ### Feats
 
-- `n-avatar-group` 新增
+- `n-avatar` 新增 `n-avatar-group`
 
 ### Fixes
 

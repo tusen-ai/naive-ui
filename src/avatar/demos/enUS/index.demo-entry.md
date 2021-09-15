@@ -31,9 +31,9 @@ group
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| vertical | `boolean` | `false` | Directions of avatars in the group. |
 | maxAvatarCount | `number` | `undefined` | Max avatar count in the group. |
 | maxAvatarStyle | `Object \| string` | `undefined` | The style to trigger the hidden avatars. |
+| vertical | `boolean` | `false` | Whether display a vertical avatar group. |
 
 see [Avatar Props](avatar#Props)
 
