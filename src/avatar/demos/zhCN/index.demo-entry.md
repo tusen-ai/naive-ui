@@ -12,6 +12,7 @@ badge
 icon
 name-size
 v-show-debug
+group
 ```
 
 ## API
@@ -27,8 +28,24 @@ v-show-debug
 | round | `boolean` | `false` | 头像是否圆形 |
 | on-error | `(e: Event) => void` | `undefined` | 头像的图片加载失败执行的回调 |
 
+### Avatar Group Props
+
+| 名称           | 类型               | 默认值      | 说明                   |
+| -------------- | ------------------ | ----------- | ---------------------- |
+| vertical       | `boolean`          | `false`     | 组内头像的排列方式     |
+| maxAvatarCount | `number`           | `undefined` | 组内头像显示的最大个数 |
+| maxAvatarStyle | `Object \| string` | `undefined` | 触发隐藏头像的样式     |
+
+参考 [Avatar Props](avatar#Props)
+
 ### Avatar Slots
 
 | 名称    | 参数 | 说明             |
 | ------- | ---- | ---------------- |
 | default | `()` | 头像内填充的内容 |
+
+### Avatar Group Slots
+
+| 名称    | 参数 | 说明               |
+| ------- | ---- | ------------------ |
+| default | `()` | 头像组内填充的内容 |

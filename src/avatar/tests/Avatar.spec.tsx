@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { NAvatar } from '../index'
+import { NAvatar, NAvatarGroup } from '../index'
 import { h, nextTick } from 'vue'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NIcon } from '../../icon'
@@ -139,6 +139,32 @@ describe('n-avatar', () => {
     })
     expect(wrapper.find('img').attributes('style')).toContain(
       'object-fit: contain;'
+    )
+  })
+
+  it('should work with `avatar group`', async () => {
+    const wrapper = mount(NAvatarGroup, {
+      slots: {
+        default: () => [
+          h(NAvatar, null, {
+            default: () => 'test1'
+          }),
+          h(NAvatar, null, {
+            default: () => 'test2'
+          }),
+          h(NAvatar, null, {
+            default: () => 'test3'
+          })
+        ]
+      }
+    })
+
+    expect(wrapper.find('[role="group"]').classes()).toContain('n-avatar-group')
+    expect(wrapper.findAll('.n-avatar').length).toBe(3)
+
+    await wrapper.setProps({ vertical: true })
+    expect(wrapper.find('[role="group"]').classes()).toContain(
+      'n-avatar-group--vertical'
     )
   })
 })

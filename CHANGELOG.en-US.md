@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-avatar-group` add.
+
 ## 2.18.2 (2021-09-14)
 
 ### Feats
