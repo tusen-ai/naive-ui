@@ -16,7 +16,10 @@ export const avatarProps = {
   src: String,
   circle: Boolean,
   color: String,
-  objectFit: String as PropType<ObjectFit>,
+  objectFit: {
+    type: String as PropType<ObjectFit>,
+    default: 'fill'
+  },
   round: Boolean,
   onError: Function as PropType<(e: Event) => void>
 } as const
