@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Pending
+
+### Breaking Changes
+
+- `n-layout-sider` 的 `arrow-circle` 类型触发按钮采用了新样式
+
+### Feats
+
+- `n-layout-sider` 新增 `collapsed-trigger-style` 属性
+
 ### Fixes
 
 - 修复 `n-select` `filterable` 下关闭标签 input 光标聚焦问题，关闭 [#1170](https://github.com/TuSimple/naive-ui/issues/1170)

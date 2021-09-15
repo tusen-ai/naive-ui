@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Pending
+
+### Breaking Changes
+
+- `n-layout-sider`'s `arrow-circle` trigger is changed into new style.
+
+### Feats
+
+- `n-layout-sider` add `collapsed-trigger-style` prop.
+
 ### Fixes
 
 - Fix `n-select` focus input when closing tag with `filterable` , closes [#1170](https://github.com/TuSimple/naive-ui/issues/1170).
