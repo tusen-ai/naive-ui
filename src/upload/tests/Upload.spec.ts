@@ -47,7 +47,7 @@ describe('n-upload', () => {
 
     getMockFile(input.element, fileList)
     await input.trigger('change')
-
+    await sleep(1000)
     expect(onBeforeUpload).toHaveBeenCalled()
     expect(onChange).toHaveBeenCalled()
   })
@@ -65,6 +65,7 @@ describe('n-upload', () => {
     getMockFile(input.element, fileList)
     await input.trigger('change')
 
+    await sleep(1000)
     expect(wrapper.findAll('.n-upload-file--text-type').length).toBe(1)
 
     await wrapper.setProps({

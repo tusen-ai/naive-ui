@@ -362,9 +362,9 @@ export default defineComponent({
         let nextTickChain = Promise.resolve()
 
         fileInfos.forEach((fileInfo) => {
-          // eslint-disable-next-line @typescript-eslint/promise-function-async
           nextTickChain = nextTickChain
-            .then(async () => await nextTick())
+            // eslint-disable-next-line @typescript-eslint/promise-function-async
+            .then(() => nextTick())
             .then(() => {
               fileInfo &&
                 doChange(fileInfo, e, {
