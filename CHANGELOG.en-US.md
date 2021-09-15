@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending 
+
+### Feats
+
+- `n-avatar` add `n-avatar-group`.
+
 ## 2.23.1 (2021-12-20)
 
 ### Fixes
