@@ -1,7 +1,6 @@
 import {
   h,
   defineComponent,
-  CSSProperties,
   inject,
   renderSlot,
   getCurrentInstance,
@@ -14,7 +13,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 
 export const defaultSpan = 1
 
-export interface GridItemVNodeProps {
+interface GridItemVNodeProps {
   privateOffset?: number
   privateSpan?: number
   privateColStart?: number
@@ -50,7 +49,7 @@ export default defineComponent({
   name: 'GridItem',
   alias: ['Gi'],
   props: gridItemProps,
-  setup (props) {
+  setup () {
     const {
       xGapRef,
       itemStyleRef,
@@ -86,9 +85,7 @@ export default defineComponent({
   },
   render () {
     return (
-      <div
-        style={[this.itemStyle, this.deriveStyle()] as unknown as CSSProperties}
-      >
+      <div style={[this.itemStyle as any, this.deriveStyle()]}>
         {renderSlot(this.$slots, 'default', { overflow: this.overflow })}
       </div>
     )

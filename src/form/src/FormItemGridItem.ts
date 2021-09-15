@@ -1,7 +1,7 @@
-import { h, ref, defineComponent, getCurrentInstance } from 'vue'
+import { h, ref, defineComponent } from 'vue'
 import NGridItem, {
   gridItemProps,
-  GridItemVNodeProps
+  gridItemPropKeys
 } from '../../grid/src/GridItem'
 import { keep, keysOf } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -22,7 +22,7 @@ export default defineComponent({
   name: 'FormItemGridItem',
   alias: ['FormItemGi'],
   props: formItemGiProps,
-  setup (props) {
+  setup () {
     const formItemInstRef = ref<FormItemInst | null>(null)
     const validate: FormItemInst['validate'] = ((...args: any[]) => {
       const { value } = formItemInstRef
@@ -42,10 +42,7 @@ export default defineComponent({
     }
   },
   render () {
-    const self = getCurrentInstance()
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const gridItemProps = self!.vnode.props as GridItemVNodeProps
-    return h(NGridItem, gridItemProps, {
+    return h(NGridItem, keep(this.$.vnode.props || {}, gridItemPropKeys), {
       default: () => {
         const itemProps = keep(this.$props, formItemPropKeys)
         return h(
