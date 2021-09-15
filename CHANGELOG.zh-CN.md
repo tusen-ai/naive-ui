@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-menu` 添加 `accordion` 属性，关闭 [#917](https://github.com/TuSimple/naive-ui/issues/917)
+
 ### Fixes
 
 - 修复 `n-select` `filterable` 下关闭标签 input 光标聚焦问题，关闭 [#1170](https://github.com/TuSimple/naive-ui/issues/1170)

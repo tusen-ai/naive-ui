@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-menu` add `accordion` prop , closes [#917](https://github.com/TuSimple/naive-ui/issues/917).
+
 ### Fixes
 
 - Fix `n-select` focus input when closing tag with `filterable` , closes [#1170](https://github.com/TuSimple/naive-ui/issues/1170).
