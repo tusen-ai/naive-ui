@@ -8,5 +8,6 @@ export default {
   fontSizeMedium: '14px',
   fontSizeLarge: '15px',
   paddingSingle: '0 26px 0 14px',
-  clearSize: '16px'
+  clearSize: '16px',
+  arrowSize: '16px'
 }

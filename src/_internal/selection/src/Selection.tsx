@@ -421,6 +421,8 @@ export default defineComponent({
             clearColorHover,
             clearColorPressed,
             clearSize,
+            // arrow
+            arrowSize,
             [createKey('height', size)]: height,
             [createKey('fontSize', size)]: fontSize
           }
@@ -471,7 +473,9 @@ export default defineComponent({
           '--clear-size': clearSize,
           '--clear-color': clearColor,
           '--clear-color-hover': clearColorHover,
-          '--clear-color-pressed': clearColorPressed
+          '--clear-color-pressed': clearColorPressed,
+          // arrow-size
+          '--arrow-size': arrowSize
         }
       })
     }
