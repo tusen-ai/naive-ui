@@ -37,6 +37,7 @@ import DatetimePanel from './panel/datetime'
 import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
+import MonthPanel from './panel/month'
 import style from './styles/index.cssr'
 import { DatePickerTheme } from '../styles/light'
 import {
@@ -55,7 +56,8 @@ const DATE_FORMAT = {
   date: 'yyyy-MM-dd',
   datetime: 'yyyy-MM-dd HH:mm:ss',
   daterange: 'yyyy-MM-dd',
-  datetimerange: 'yyyy-MM-dd HH:mm:ss'
+  datetimerange: 'yyyy-MM-dd HH:mm:ss',
+  month: 'yyyy-MM'
 }
 
 const datePickerProps = {
@@ -89,7 +91,7 @@ const datePickerProps = {
   size: String as PropType<'small' | 'medium' | 'large'>,
   type: {
     type: String as PropType<
-    'date' | 'datetime' | 'daterange' | 'datetimerange'
+    'date' | 'datetime' | 'daterange' | 'datetimerange' | 'month'
     >,
     default: 'date'
   },
@@ -586,6 +588,8 @@ export default defineComponent({
             itemSize,
             itemCellWidth,
             itemCellHeight,
+            itemMonthCellWidth,
+            itemMonthCellHeight,
             calendarTitlePadding,
             calendarTitleHeight,
             calendarDaysHeight,
@@ -639,6 +643,8 @@ export default defineComponent({
           '--item-size': itemSize,
           '--item-cell-width': itemCellWidth,
           '--item-cell-height': itemCellHeight,
+          '--item-month-cell-width': itemMonthCellWidth,
+          '--item-month-cell-height': itemMonthCellHeight,
           '--item-text-color': itemTextColor,
           '--item-color-included': itemColorIncluded,
           '--item-color-disabled': itemColorDisabled,
@@ -798,9 +804,12 @@ export default defineComponent({
                                   <DaterangePanel {...commonPanelProps} />
                               ) : this.type === 'datetimerange' ? (
                                   <DatetimerangePanel {...commonPanelProps} />
+                              ) : this.type === 'month' ? (
+                                  <MonthPanel {...commonPanelProps} />
                               ) : (
                                   <DatePanel {...commonPanelProps} />
                               ),
+
                               [[clickoutside, this.handleClickOutside]]
                             )
                             : null

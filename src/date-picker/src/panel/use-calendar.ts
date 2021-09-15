@@ -13,7 +13,7 @@ import {
   startOfDay,
   startOfSecond
 } from 'date-fns'
-import { dateArray, strictParse } from '../utils'
+import { dateArray, monthArray, strictParse } from '../utils'
 import { usePanelCommon } from './use-panel-common'
 import { IsSingleDateDisabled, datePickerInjectionKey } from '../interface'
 import type { DateItem } from '../utils'
@@ -73,6 +73,9 @@ function useCalendar (
       nowRef.value,
       localeRef.value.firstDayOfWeek
     )
+  })
+  const monthArrayRef = computed(() => {
+    return monthArray(calendarValueRef.value, props.value, nowRef.value)
   })
   const weekdaysRef = computed(() => {
     return dateArrayRef.value.slice(0, 7).map((dateItem) => {
@@ -250,6 +253,7 @@ function useCalendar (
   }
   return {
     dateArray: dateArrayRef,
+    monthArray: monthArrayRef,
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
     weekdays: weekdaysRef,

@@ -8,6 +8,7 @@ import {
   getTime,
   startOfMonth,
   addDays,
+  addMonths,
   getDay,
   parse,
   format,
@@ -44,6 +45,17 @@ function matchDate (
   }
 }
 
+function matchMonth (
+  sourceTime: number[] | number,
+  patternTime: number | Date
+): boolean {
+  if (Array.isArray(sourceTime)) {
+    return sourceTime.some((time) => isSameMonth(time, patternTime))
+  } else {
+    return isSameMonth(sourceTime, patternTime)
+  }
+}
+
 export interface DateItem {
   dateObject: {
     date: number
@@ -52,6 +64,19 @@ export interface DateItem {
   }
   inCurrentMonth: boolean
   isCurrentDate: boolean
+  inSpan: boolean
+  startOfSpan: boolean
+  endOfSpan: boolean
+  selected: boolean
+  ts: number
+}
+
+export interface MonthItem {
+  dateObject: {
+    month: number
+    year: number
+  }
+  inCurrentMonth: boolean
   inSpan: boolean
   startOfSpan: boolean
   endOfSpan: boolean
@@ -88,6 +113,35 @@ function dateItem (
     endOfSpan,
     selected: valueTs !== null && matchDate(valueTs, time),
     ts: getTime(time)
+  }
+}
+
+function monthItem (
+  monthTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): MonthItem {
+  let inSpan = false
+  let startOfSpan = false
+  let endOfSpan = false
+  if (Array.isArray(valueTs)) {
+    if (valueTs[0] < monthTs && monthTs < valueTs[1]) {
+      inSpan = true
+    }
+    if (matchMonth(valueTs[0], monthTs)) startOfSpan = true
+    if (matchMonth(valueTs[1], monthTs)) endOfSpan = true
+  }
+  return {
+    dateObject: {
+      month: getMonth(monthTs),
+      year: getYear(monthTs)
+    },
+    inCurrentMonth: isSameMonth(currentTs, monthTs),
+    inSpan,
+    startOfSpan,
+    endOfSpan,
+    selected: valueTs !== null && matchMonth(valueTs, monthTs),
+    ts: getTime(monthTs)
   }
 }
 
@@ -141,6 +195,26 @@ function dateArray (
   return calendarDays
 }
 
+function monthArray (
+  monthTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): MonthItem[] {
+  const calendarDays = []
+  const cachedMonth = getMonth(monthTs)
+
+  for (let i = 0; i < 11; i++) {
+    calendarDays.push(
+      monthItem(
+        getTime(addMonths(monthTs, i - cachedMonth)),
+        valueTs,
+        currentTs
+      )
+    )
+  }
+  return calendarDays
+}
+
 function strictParse (
   string: string,
   pattern: string,
@@ -155,4 +229,4 @@ function strictParse (
   else return new Date(NaN)
 }
 
-export { dateArray, strictParse, getDerivedTimeFromKeyboardEvent }
+export { dateArray, monthArray, strictParse, getDerivedTimeFromKeyboardEvent }
