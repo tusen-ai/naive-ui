@@ -41,6 +41,7 @@
 - 修复 `n-dynamic-tags` 禁用时 add 按钮未被禁用
 - 修复 `n-select` 在 filterable 并且菜单无数据是按下 enter 导致菜单关闭
 - 修复 `n-auto-complete` 的 `children` 属性不允许使用 `AutoCompleteOption` 类型
+- 修复 `n-gi` 的 `collapsed` 在 `n-form-item-gi` 中切换无法生效问题，关闭 [#1160](https://github.com/TuSimple/naive-ui/issues/1160)
 
 ## 2.18.1 (2021-09-08)
 
