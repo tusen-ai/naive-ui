@@ -161,10 +161,7 @@ const menuProps = {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom'
   },
-  accordion: {
-    type: Boolean as PropType<Boolean>,
-    default: false
-  }
+  accordion: Boolean
 } as const
 
 export type MenuSetupProps = ExtractPropTypes<typeof menuProps>
@@ -293,7 +290,7 @@ export default defineComponent({
       uncontrolledExpandedKeysRef.value = value
     }
     function toggleExpand (key: Key): void {
-      let currentExpandedKeys = Array.from(mergedExpandedKeysRef.value)
+      const currentExpandedKeys = Array.from(mergedExpandedKeysRef.value)
       const index = currentExpandedKeys.findIndex(
         (expanededKey) => expanededKey === key
       )
@@ -301,10 +298,12 @@ export default defineComponent({
         currentExpandedKeys.splice(index, 1)
       } else {
         if (props.accordion) {
-          currentExpandedKeys = treeMateRef.value.getPath(key).keyPath
-        } else {
-          currentExpandedKeys.push(key)
+          const isLevelFirst = treeMateRef.value.treeNodes.findIndex(e => e.key === key) > -1
+          if (isLevelFirst) {
+            currentExpandedKeys.splice(0, currentExpandedKeys.length)
+          }
         }
+        currentExpandedKeys.push(key)
       }
       doUpdateExpandedKeys(currentExpandedKeys)
     }
