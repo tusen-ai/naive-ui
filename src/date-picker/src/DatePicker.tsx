@@ -12,7 +12,8 @@ import {
   CSSProperties,
   toRef,
   Ref,
-  watchEffect
+  watchEffect,
+  nextTick
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
@@ -309,6 +310,26 @@ export default defineComponent({
         disableUpdateOnClose
       })
     }
+    function scrollTimer (): void {
+      if (!panelInstRef.value) return
+      const { monthScrollRef, yearScrollRef } = panelInstRef.value
+      if (monthScrollRef) {
+        const month = monthScrollRef.contentRef?.querySelector(
+          '[data-selected]'
+        ) as HTMLElement
+        if (month) {
+          monthScrollRef.scrollTo({ top: month.offsetTop })
+        }
+      }
+      if (yearScrollRef) {
+        const year = yearScrollRef.contentRef?.querySelector(
+          '[data-selected]'
+        ) as HTMLElement
+        if (year) {
+          yearScrollRef.scrollTo({ top: year.offsetTop })
+        }
+      }
+    }
     // --- Panel update value
     function handlePanelUpdateValue (
       value: Value | null,
@@ -450,6 +471,7 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
+      void nextTick(scrollTimer)
     }
     function closeCalendar ({
       returnFocus,

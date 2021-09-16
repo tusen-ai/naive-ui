@@ -25,7 +25,7 @@ export default defineComponent({
         }
       })
     }
-    return useCalendar(props, 'date')
+    return useCalendar(props, 'month')
   },
   render () {
     const { mergedClsPrefix, mergedTheme, shortcuts } = this
@@ -48,32 +48,35 @@ export default defineComponent({
             >
               {{
                 default: () => [
-                  ...this.monthArray.map((monthItem, i) => (
+                  ...this.yearArray.map((yearItem, i) => (
                     <div
                       data-n-date
                       key={i}
+                      data-selected={yearItem.selected ? '' : null}
                       class={[
                         `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
                         {
                           [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`]:
-                            monthItem.inCurrentMonth,
+                            yearItem.inCurrentYear,
                           [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
-                            monthItem.selected,
+                            yearItem.selected,
                           [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
-                            this.mergedIsDateDisabled(monthItem.ts)
+                            this.mergedIsDateDisabled(yearItem.ts)
                         }
                       ]}
-                      onClick={() => this.handleDateClick(monthItem)}
+                      onClick={() => this.handleDateClick(yearItem)}
                     >
-                      {monthItem.dateObject.month}
-                      {monthItem.inCurrentMonth ? (
+                      {yearItem.dateObject.year}
+                      {yearItem.inCurrentYear ? (
                         <div
                           class={`${mergedClsPrefix}-date-panel-month-calendar__sup`}
                         />
                       ) : null}
                     </div>
                   )),
-                  <div class={`${mergedClsPrefix}-time-picker-col__padding`} />
+                  <div
+                    class={`${mergedClsPrefix}-date-panel-month-calendar__padding`}
+                  />
                 ]
               }}
             </NScrollbar>
@@ -92,20 +95,21 @@ export default defineComponent({
                     <div
                       data-n-date
                       key={i}
+                      data-selected={monthItem.selected ? '' : null}
                       class={[
                         `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
                         {
-                          [`${mergedClsPrefix}-date-panel-date--current`]:
+                          [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`]:
                             monthItem.inCurrentMonth,
-                          [`${mergedClsPrefix}-date-panel-date--selected`]:
+                          [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
                             monthItem.selected,
-                          [`${mergedClsPrefix}-date-panel-date--disabled`]:
+                          [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
                             this.mergedIsDateDisabled(monthItem.ts)
                         }
                       ]}
                       onClick={() => this.handleDateClick(monthItem)}
                     >
-                      {monthItem.dateObject.month}
+                      {monthItem.showText}
                       {monthItem.inCurrentMonth ? (
                         <div
                           class={`${mergedClsPrefix}-date-panel-month-calendar__sup`}
@@ -113,7 +117,9 @@ export default defineComponent({
                       ) : null}
                     </div>
                   )),
-                  <div class={`${mergedClsPrefix}-time-picker-col__padding`} />
+                  <div
+                    class={`${mergedClsPrefix}-date-panel-month-calendar__padding`}
+                  />
                 ]
               }}
             </NScrollbar>

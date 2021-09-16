@@ -99,7 +99,11 @@ export default c([
       cE('picker-col', `
         min-width: var(--item-month-cell-width);
         height: calc(var(--item-month-cell-height) * 7);;
-      `),
+      `, [
+        cE('padding', `
+          height: calc(var(--item-month-cell-height) * 6)
+        `)
+      ]),
       cE('picker-col-item', `
         cursor: pointer;
         height: var(--item-month-cell-height);

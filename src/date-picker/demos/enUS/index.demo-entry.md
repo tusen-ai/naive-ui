@@ -9,6 +9,7 @@ date
 datetime
 daterange
 datetimerange
+month
 size
 disabled
 disabled-time

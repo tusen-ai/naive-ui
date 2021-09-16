@@ -11,12 +11,13 @@ import {
   getDate,
   isValid,
   startOfDay,
-  startOfSecond
+  startOfSecond,
+  startOfMonth
 } from 'date-fns'
-import { dateArray, monthArray, strictParse } from '../utils'
+import { dateArray, monthArray, strictParse, yearArray } from '../utils'
 import { usePanelCommon } from './use-panel-common'
 import { IsSingleDateDisabled, datePickerInjectionKey } from '../interface'
-import type { DateItem } from '../utils'
+import type { DateItem, MonthItem, YearItem } from '../utils'
 
 const useCalendarProps = {
   ...usePanelCommon.props,
@@ -29,7 +30,7 @@ const useCalendarProps = {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useCalendar (
   props: ExtractPropTypes<typeof useCalendarProps>,
-  type: 'date' | 'datetime'
+  type: 'date' | 'datetime' | 'month'
 ) {
   const panelCommon = usePanelCommon(props)
   const {
@@ -75,7 +76,19 @@ function useCalendar (
     )
   })
   const monthArrayRef = computed(() => {
-    return monthArray(calendarValueRef.value, props.value, nowRef.value)
+    return monthArray(calendarValueRef.value, props.value, nowRef.value).map(
+      (item) => {
+        item.showText = format(
+          item.ts,
+          localeRef.value.monthFormat,
+          panelCommon.dateFnsOptions.value
+        )
+        return item
+      }
+    )
+  })
+  const yearArrayRef = computed(() => {
+    return yearArray(calendarValueRef.value, props.value, nowRef.value)
   })
   const weekdaysRef = computed(() => {
     return dateArrayRef.value.slice(0, 7).map((dateItem) => {
@@ -123,6 +136,7 @@ function useCalendar (
   )
   function sanitizeValue (value: number): number {
     if (type === 'datetime') return getTime(startOfSecond(value))
+    if (type === 'month') return getTime(startOfMonth(value))
     return getTime(startOfDay(value))
   }
   function mergedIsDateDisabled (ts: number): boolean {
@@ -192,7 +206,7 @@ function useCalendar (
     calendarValueRef.value = Date.now()
     panelCommon.doClose(true)
   }
-  function handleDateClick (dateItem: DateItem): void {
+  function handleDateClick (dateItem: DateItem | MonthItem | YearItem): void {
     if (mergedIsDateDisabled(dateItem.ts)) {
       return
     }
@@ -203,8 +217,11 @@ function useCalendar (
       newValue = Date.now()
     }
     newValue = getTime(set(newValue, dateItem.dateObject))
-    panelCommon.doUpdateValue(getTime(sanitizeValue(newValue)), type === 'date')
-    if (type === 'date') {
+    panelCommon.doUpdateValue(
+      getTime(sanitizeValue(newValue)),
+      type === 'month'
+    )
+    if (type === 'date' || (type === 'month' && dateItem.type === 'month')) {
       panelCommon.doClose()
     }
   }
@@ -254,6 +271,7 @@ function useCalendar (
   return {
     dateArray: dateArrayRef,
     monthArray: monthArrayRef,
+    yearArray: yearArrayRef,
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
     weekdays: weekdaysRef,
@@ -274,7 +292,9 @@ function useCalendar (
     clearSelectedDateTime,
     timePickerSize: panelCommon.timePickerSize,
     dateInputValue: dateInputValueRef,
-    datePickerSlots
+    datePickerSlots,
+    monthScrollRef: ref(null),
+    yearScrollRef: ref(null)
   }
 }
 
