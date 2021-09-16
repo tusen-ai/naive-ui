@@ -137,13 +137,7 @@ export default defineComponent({
                 }
               },
               [
-                h(
-                  NText,
-                  { depth: 2, tag: 'div' },
-                  {
-                    default: () => option.label
-                  }
-                ),
+                h('div', null, [option.label]),
                 h(
                   NText,
                   { depth: 3, tag: 'div' },

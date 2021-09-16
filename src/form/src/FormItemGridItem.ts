@@ -22,7 +22,7 @@ export default defineComponent({
   name: 'FormItemGridItem',
   alias: ['FormItemGi'],
   props: formItemGiProps,
-  setup (props) {
+  setup () {
     const formItemInstRef = ref<FormItemInst | null>(null)
     const validate: FormItemInst['validate'] = ((...args: any[]) => {
       const { value } = formItemInstRef
@@ -42,7 +42,7 @@ export default defineComponent({
     }
   },
   render () {
-    return h(NGridItem, keep(this.$props, gridItemPropKeys), {
+    return h(NGridItem, keep(this.$.vnode.props || {}, gridItemPropKeys), {
       default: () => {
         const itemProps = keep(this.$props, formItemPropKeys)
         return h(

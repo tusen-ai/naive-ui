@@ -73,6 +73,7 @@ const layoutSiderProps = {
   Partial<ScrollbarProps> & { style: CSSProperties }
   >,
   triggerStyle: [String, Object] as PropType<string | CSSProperties>,
+  collapsedTriggerStyle: [String, Object] as PropType<string | CSSProperties>,
   'onUpdate:collapsed': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
@@ -205,12 +206,14 @@ export default defineComponent({
         } = themeRef.value
         const {
           siderToggleButtonColor,
+          siderToggleButtonBorder,
           siderToggleBarColor,
           siderToggleBarColorHover
         } = self
         const vars: any = {
           '--bezier': cubicBezierEaseInOut,
           '--toggle-button-color': siderToggleButtonColor,
+          '--toggle-button-border': siderToggleButtonBorder,
           '--toggle-bar-color': siderToggleBarColor,
           '--toggle-bar-color-hover': siderToggleBarColorHover
         }
@@ -287,16 +290,20 @@ export default defineComponent({
           </div>
         )}
         {showTrigger ? (
-          showTrigger === 'arrow-circle' ? (
-            <ToggleButton
+          showTrigger === 'bar' ? (
+            <ToggleBar
               clsPrefix={mergedClsPrefix}
-              style={this.triggerStyle}
+              style={
+                mergedCollapsed ? this.collapsedTriggerStyle : this.triggerStyle
+              }
               onClick={this.handleTriggerClick}
             />
           ) : (
-            <ToggleBar
+            <ToggleButton
               clsPrefix={mergedClsPrefix}
-              style={this.triggerStyle}
+              style={
+                mergedCollapsed ? this.collapsedTriggerStyle : this.triggerStyle
+              }
               onClick={this.handleTriggerClick}
             />
           )
