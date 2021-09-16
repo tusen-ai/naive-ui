@@ -17,7 +17,7 @@ import {
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { format, getTime, isValid } from 'date-fns'
+import { format, getTime, isValid, getYear } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
 import { happensIn } from 'seemly'
 import { InputInst, InputProps, NInput } from '../../input'
@@ -322,11 +322,9 @@ export default defineComponent({
         }
       }
       if (yearScrollRef) {
-        const year = yearScrollRef.contentRef?.querySelector(
-          '[data-selected]'
-        ) as HTMLElement
-        if (year) {
-          yearScrollRef.scrollTo({ top: year.offsetTop })
+        if (mergedValueRef.value) {
+          const yearIndex = getYear(mergedValueRef.value as number) - 1900
+          yearScrollRef.scrollTo({ top: yearIndex * 40 })
         }
       }
     }
