@@ -3,6 +3,15 @@
 ### Feats
 
 - `n-menu` add `accordion` prop , closes [#917](https://github.com/TuSimple/naive-ui/issues/917).
+## Pending
+
+### Breaking Changes
+
+- `n-layout-sider`'s `arrow-circle` trigger is changed into new style.
+
+### Feats
+
+- `n-layout-sider` add `collapsed-trigger-style` prop.
 
 ### Fixes
 
@@ -35,6 +44,7 @@
 - Fix `n-dynamic-tags` add button is not disabled when it is disabled.
 - Fix `n-select` closes menu when enter key is pressed in filterable mode without options data.
 - Fix `n-auto-complete`'s `children` prop can't use `AutoCompleteOption` type.
+- Fix `n-gi`'s `collapsed` does not work in `n-form-item-gi`, closes [#1160](https://github.com/TuSimple/naive-ui/issues/1160).
 
 ## 2.18.1 (2021-09-08)
 

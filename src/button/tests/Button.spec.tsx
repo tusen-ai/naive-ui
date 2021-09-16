@@ -37,22 +37,15 @@ describe('n-button', () => {
   })
 
   it('should work with `type` prop', async () => {
-    const wrapper = mount(NButton)
-
-    await wrapper.setProps({ type: 'primary' })
-    expect(wrapper.find('button').classes()).toContain('n-button--primary-type')
-
-    await wrapper.setProps({ type: 'info' })
-    expect(wrapper.find('button').classes()).toContain('n-button--info-type')
-
-    await wrapper.setProps({ type: 'success' })
-    expect(wrapper.find('button').classes()).toContain('n-button--success-type')
-
-    await wrapper.setProps({ type: 'warning' })
-    expect(wrapper.find('button').classes()).toContain('n-button--warning-type')
-
-    await wrapper.setProps({ type: 'error' })
-    expect(wrapper.find('button').classes()).toContain('n-button--error-type')
+    ;(['primary', 'info', 'success', 'warning', 'error'] as const).forEach(
+      (type) => {
+        const wrapper = mount(NButton, { props: { type: type } })
+        expect(wrapper.find('button').classes()).toContain(
+          `n-button--${type}-type`
+        )
+        wrapper.unmount()
+      }
+    )
   })
 
   it('should work with `dashed` prop', async () => {
@@ -70,19 +63,11 @@ describe('n-button', () => {
   })
 
   it('should work with `size` prop', async () => {
-    const wrapper = mount(NButton)
-
-    await wrapper.setProps({ size: 'tiny' })
-    expect(wrapper.find('button').attributes('style')).toMatchSnapshot()
-
-    await wrapper.setProps({ size: 'small' })
-    expect(wrapper.find('button').attributes('style')).toMatchSnapshot()
-
-    await wrapper.setProps({ size: 'medium' })
-    expect(wrapper.find('button').attributes('style')).toMatchSnapshot()
-
-    await wrapper.setProps({ size: 'large' })
-    expect(wrapper.find('button').attributes('style')).toMatchSnapshot()
+    ;(['tiny', 'small', 'medium', 'large'] as const).forEach((size) => {
+      const wrapper = mount(NButton, { props: { size: size } })
+      expect(wrapper.find('button').attributes('style')).toMatchSnapshot()
+      wrapper.unmount()
+    })
   })
 
   it('should work with `text` prop', () => {
