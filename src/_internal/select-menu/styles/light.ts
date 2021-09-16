@@ -4,7 +4,6 @@ import { commonLight } from '../../../_styles/common'
 import type { ThemeCommonVars } from '../../../_styles/common'
 import commonVariables from './_common'
 import { createTheme } from '../../../_mixins'
-import { changeColor } from 'seemly'
 
 export const self = (vars: ThemeCommonVars) => {
   const {
@@ -48,7 +47,7 @@ export const self = (vars: ThemeCommonVars) => {
     optionOpacityDisabled: opacityDisabled,
     optionCheckColor: primaryColor,
     optionColorPending: hoverColor,
-    optionColorActive: changeColor(primaryColor, { alpha: 0.1 }),
+    optionColorActive: hoverColor,
     actionTextColor: textColor2,
     loadingColor: primaryColor
   }

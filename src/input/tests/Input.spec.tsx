@@ -99,4 +99,59 @@ describe('n-input', () => {
     expect(wrapper.find('.n-input').classes()).toContain('n-input--textarea')
     expect(wrapper.find('textarea').exists()).toBe(true)
   })
+
+  it('should work with `on-blur` prop', async () => {
+    const onBlur = jest.fn()
+    const wrapper = mount(NInput, {
+      props: { onBlur: onBlur }
+    })
+    await wrapper.find('input').trigger('focus')
+    await wrapper.find('input').trigger('blur')
+    expect(onBlur).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `on-change` prop', async () => {
+    const onChange = jest.fn()
+    const wrapper = mount(NInput, {
+      props: { onChange: onChange }
+    })
+    wrapper.find('input').element.focus()
+    await wrapper.find('input').setValue('test')
+    await wrapper.find('input').trigger('blur')
+    expect(onChange).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `on-focus` prop', async () => {
+    const onFocus = jest.fn()
+    const wrapper = mount(NInput, {
+      props: { onFocus: onFocus }
+    })
+    await wrapper.find('input').trigger('focus')
+    expect(onFocus).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `on-input` prop', async () => {
+    const onInput = jest.fn()
+    const wrapper = mount(NInput, {
+      props: { onInput: onInput }
+    })
+    wrapper.find('input').element.focus()
+    await wrapper.find('input').setValue('test')
+    expect(onInput).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `on-update:value` prop', async () => {
+    const onUpdateValue = jest.fn()
+    const wrapper = mount(NInput, {
+      props: { onUpdateValue: onUpdateValue }
+    })
+    wrapper.find('input').element.focus()
+    await wrapper.find('input').setValue('test')
+    expect(onUpdateValue).toHaveBeenCalled()
+    wrapper.unmount()
+  })
 })

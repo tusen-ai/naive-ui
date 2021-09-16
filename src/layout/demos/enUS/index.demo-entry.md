@@ -60,6 +60,7 @@ scroll-to
 | bordered | `boolean` | `false` | Whether to show the border. |
 | collapse-mode | `'transform' \| 'width'` | `'transform'` | If set to `'width'`, the sider's content width will be actually collapsed. If set to `'transform'`, the sider will only move it's position and won't change its content width. |
 | collapsed | `boolean` | `undefined` | Whether the sider is collapsed. It only works for when `position` is `'static'`. |
+| collapsed-trigger-style | `string \| Object` | `undefined` | Trigger style when collapsed. |
 | collapsed-width | `number` | `48` | Folded width. |
 | content-style | `string \| Object` | `undefined` | Style of scrollable content node. |
 | default-collapsed | `boolean` | `false` | Default collapsed state in uncontrolled mode. |
