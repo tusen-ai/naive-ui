@@ -1,6 +1,6 @@
 # Accordion
 
-Like an accordion. You can use `accordion` prop to switch this mode for the first-level menu。
+Like an accordion. You can use `accordion` prop to switch this mode for the first-level menu.
 
 ```html
 <n-menu
@@ -13,7 +13,11 @@ Like an accordion. You can use `accordion` prop to switch this mode for the firs
 ```js
 import { defineComponent, h } from 'vue'
 import { NIcon } from 'naive-ui'
-import { FishOutline as FishIcon, PawOutline as PawIcon, BagOutline as BagOutlineIcon } from '@vicons/ionicons5'
+import {
+  FishOutline as FishIcon,
+  PawOutline as PawIcon,
+  BagOutline as BagOutlineIcon
+} from '@vicons/ionicons5'
 
 function renderIcon (icon) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -28,18 +32,22 @@ const menuOptions = [
       {
         label: 'Braise',
         key: 'braise',
-        children: [{
-          label: 'Spicy',
-          key: 'spicy'
-        }]
+        children: [
+          {
+            label: 'Spicy',
+            key: 'spicy'
+          }
+        ]
       },
       {
         label: 'Steamed',
         key: 'steamed',
-        children: [{
-          label: 'No Green Onion',
-          key: 'no-green-onion'
-        }]
+        children: [
+          {
+            label: 'No Green Onion',
+            key: 'no-green-onion'
+          }
+        ]
       }
     ]
   },
@@ -71,7 +79,7 @@ export default defineComponent({
   setup () {
     return {
       menuOptions,
-      defaultExpandedKeys: ['fish', 'spicy']
+      defaultExpandedKeys: ['fish', 'braise']
     }
   }
 })

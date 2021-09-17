@@ -298,9 +298,11 @@ export default defineComponent({
         currentExpandedKeys.splice(index, 1)
       } else {
         if (props.accordion) {
-          const isLevelFirst = treeMateRef.value.treeNodes.findIndex(e => e.key === key) > -1
-          if (isLevelFirst) {
-            currentExpandedKeys.splice(0, currentExpandedKeys.length)
+          const treeKeysLevelOne: Record<Key, 1> = {}
+          treeMateRef.value.treeNodes.forEach(e => { treeKeysLevelOne[e.key] = 1 })
+          if (key in treeKeysLevelOne) {
+            const closeKeyIndex = currentExpandedKeys.findIndex(e => e in treeKeysLevelOne)
+            if (closeKeyIndex > -1) { currentExpandedKeys.splice(closeKeyIndex, 1) }
           }
         }
         currentExpandedKeys.push(key)

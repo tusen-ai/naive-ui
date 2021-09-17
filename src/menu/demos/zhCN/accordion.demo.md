@@ -13,7 +13,11 @@
 ```js
 import { defineComponent, h } from 'vue'
 import { NIcon } from 'naive-ui'
-import { FishOutline as FishIcon, PawOutline as PawIcon, BagOutline as BagOutlineIcon } from '@vicons/ionicons5'
+import {
+  FishOutline as FishIcon,
+  PawOutline as PawIcon,
+  BagOutline as BagOutlineIcon
+} from '@vicons/ionicons5'
 
 function renderIcon (icon) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -28,18 +32,22 @@ const menuOptions = [
       {
         label: '红烧',
         key: 'braise',
-        children: [{
-          label: '加辣',
-          key: 'spicy'
-        }]
+        children: [
+          {
+            label: '加辣',
+            key: 'spicy'
+          }
+        ]
       },
       {
         label: '清蒸',
         key: 'steamed',
-        children: [{
-          label: '不要葱',
-          key: 'no-green-onion'
-        }]
+        children: [
+          {
+            label: '不要葱',
+            key: 'no-green-onion'
+          }
+        ]
       }
     ]
   },
@@ -71,7 +79,7 @@ export default defineComponent({
   setup () {
     return {
       menuOptions,
-      defaultExpandedKeys: ['fish', 'spicy']
+      defaultExpandedKeys: ['fish', 'braise']
     }
   }
 })
