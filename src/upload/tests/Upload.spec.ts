@@ -1,6 +1,9 @@
 import { mount } from '@vue/test-utils'
-import { NUpload } from '../index'
+import { NUpload, NUploadFileList, NUploadTrigger } from '../index'
 import { sleep } from 'seemly'
+import { NButtonGroup, NButton } from '../../button'
+import { h } from 'vue'
+import { NCard } from '../../card'
 
 const getMockFile = (element: Element, files: File[]): void => {
   Object.defineProperty(element, 'files', {
@@ -182,5 +185,39 @@ describe('n-upload', () => {
 
     await button[0].trigger('click')
     expect(onRemove).toHaveBeenCalled()
+  })
+  it('should work with `abstract` prop', async () => {
+    const wrapper = mount(NUpload, {
+      props: { abstract: true },
+      slots: {
+        default: () => [
+          h(NButtonGroup, null, {
+            default: () => [
+              h(NButton, null, { default: () => 'button1' }),
+              h(
+                NUploadTrigger,
+                { abstract: true },
+                {
+                  default: () =>
+                    h(
+                      NButton,
+                      { class: 'upload-button' },
+                      { default: () => 'upload button' }
+                    )
+                }
+              )
+            ]
+          }),
+          h(NCard, null, { default: () => h(NUploadFileList, null) })
+        ]
+      }
+    })
+    const uploadWrapperDom = wrapper.find('.n-upload')
+    const uploadTriggerDom = wrapper.find('.upload-button')
+    const uploadFileLIstDom = wrapper.find('.n-upload-file-list')
+
+    expect(uploadWrapperDom.exists()).toBe(false)
+    expect(uploadTriggerDom.exists()).toBe(true)
+    expect(uploadFileLIstDom.exists()).toBe(true)
   })
 })
