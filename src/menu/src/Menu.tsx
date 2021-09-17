@@ -208,9 +208,9 @@ export default defineComponent({
         }
       )
     )
-    const treeKeysLevelOneRef = computed(() => {
-      const treeKeysLevelOne: Record<Key, 1> = {}
-      treeMateRef.value.treeNodes.forEach(e => { treeKeysLevelOne[e.key] = 1 })
+    const treeKeysLevelOneRef = computed((): Map<Key, 1> => {
+      const treeKeysLevelOne = new Map()
+      treeMateRef.value.treeNodes.forEach(e => { treeKeysLevelOne.set(e.key, 1) })
       return treeKeysLevelOne
     })
 
@@ -303,8 +303,8 @@ export default defineComponent({
         currentExpandedKeys.splice(index, 1)
       } else {
         if (props.accordion) {
-          if (key in treeKeysLevelOneRef.value) {
-            const closeKeyIndex = currentExpandedKeys.findIndex(e => e in treeKeysLevelOneRef.value)
+          if (treeKeysLevelOneRef.value.has(key)) {
+            const closeKeyIndex = currentExpandedKeys.findIndex(e => treeKeysLevelOneRef.value.has(e))
             if (closeKeyIndex > -1) { currentExpandedKeys.splice(closeKeyIndex, 1) }
           }
         }
