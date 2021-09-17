@@ -160,7 +160,8 @@ const menuProps = {
   dropdownPlacement: {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom'
-  }
+  },
+  accordion: Boolean
 } as const
 
 export type MenuSetupProps = ExtractPropTypes<typeof menuProps>
@@ -207,6 +208,7 @@ export default defineComponent({
         }
       )
     )
+    const treeKeysLevelOneRef = computed(() => new Set(treeMateRef.value.treeNodes.map(e => e.key)))
 
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -296,6 +298,12 @@ export default defineComponent({
       if (~index) {
         currentExpandedKeys.splice(index, 1)
       } else {
+        if (props.accordion) {
+          if (treeKeysLevelOneRef.value.has(key)) {
+            const closeKeyIndex = currentExpandedKeys.findIndex(e => treeKeysLevelOneRef.value.has(e))
+            if (closeKeyIndex > -1) { currentExpandedKeys.splice(closeKeyIndex, 1) }
+          }
+        }
         currentExpandedKeys.push(key)
       }
       doUpdateExpandedKeys(currentExpandedKeys)
