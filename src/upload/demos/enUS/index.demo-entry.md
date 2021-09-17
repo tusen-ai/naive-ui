@@ -14,6 +14,7 @@ default-files
 before-upload
 image-style
 image-card-style
+abstract
 ```
 
 ## API
@@ -22,6 +23,7 @@ image-card-style
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| abstract | `boolean` | `false` | Whether or not DOM wrapping does not exist. |
 | accept | `string` | `undefined` | The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>. |
 | action | `string` | `undefined` | The URL to submit data to. |
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | Customize file thumbnails. |
@@ -48,6 +50,12 @@ image-card-style
 | on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => boolean \| Promise<boolean> \| any` | `() => true` | The callback of file removal. Return false, promise resolve false or promise reject will cancel this removal. |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Callback before file is uploaded, return false or a Promise that resolve false or reject will cancel this upload. |
 | on-preview | `(file: FileInfo) => void` | `undefined` | Callback functions for clicking on file links or preview buttons. |
+
+### UploadTrigger Props
+
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| abstract | `boolean` | `false` | Whether there is no DOM wrapper, to be used together with the parent component `Upload.abstract`. |
 
 #### UploadFileInfo Type
 
@@ -80,3 +88,9 @@ image-card-style
 | Name | Parameters | Description |
 | --- | --- | --- |
 | default | `()` | The content of the upload dragger, use can refer to [Drag to Upload](#drag). |
+
+### UploadTrigger Slots
+
+| 名称 | 参数 | 说明 |
+| --- | --- | --- |
+| default | `(options: { handleTriggerClick: () => void, handleTriggerDragOver: (e: DragEvent) => void, handleTriggerDragEnter: (e: DragEvent) => void, handleTriggerDragLeave: (e: DragEvent) => void, handleTriggerDrop: (e: DragEvent) => void})` | `handleTriggerClick` is the click upload function, `handleTriggerDrop` is the drag and drop upload function, `handleTriggerDragEnter`, `handleTriggerDragOver` and `handleTriggerDragLeave` are the drag and drop event functions. |
