@@ -183,4 +183,24 @@ describe('n-upload', () => {
     await button[0].trigger('click')
     expect(onRemove).toHaveBeenCalled()
   })
+
+  it('should work with `accept` prop', async () => {
+    const wrapper = mount(NUpload)
+    expect(wrapper.find('input').attributes('accept')).not.toBe('.doc')
+
+    await wrapper.setProps({
+      accept: '.doc'
+    })
+    expect(wrapper.find('input').attributes('accept')).toBe('.doc')
+  })
+
+  it('should work with `multiple` prop', async () => {
+    const wrapper = mount(NUpload)
+    expect(wrapper.find('input').attributes('multiple')).not.toBe('')
+
+    await wrapper.setProps({
+      multiple: true
+    })
+    expect(wrapper.find('input').attributes('multiple')).toBe('')
+  })
 })
