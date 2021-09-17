@@ -11,9 +11,10 @@
       :native-scrollbar="false"
       :collapsed-width="0"
       collapse-mode="transform"
+      trigger-style="top: 240px;"
+      collapsed-trigger-style="top: 240px; right: -20px;"
       bordered
-      show-trigger="bar"
-      trigger-style="top: calc(50% - var(--header-height));"
+      show-trigger="arrow-circle"
       v-if="showSider"
     >
       <n-menu

@@ -1,8 +1,15 @@
 # CHANGELOG
 
+## Pending
+
+### Breaking Changes
+
+- `n-layout-sider` 的 `arrow-circle` 类型触发按钮采用了新样式
+- `n-upload` 新增 `abstract` 属性，新增 `n-upload-trigger` 和 `n-upload-file-list` 组件，关闭 [#1102](https://github.com/TuSimple/naive-ui/issues/1102)
+
 ### Feats
 
-- `n-upload` 新增 `abstract` 属性，新增 `n-upload-trigger` 和 `n-upload-file-list` 组件，关闭 [#1102](https://github.com/TuSimple/naive-ui/issues/1102)
+- `n-layout-sider` 新增 `collapsed-trigger-style` 属性
 
 ### Fixes
 
@@ -35,6 +42,7 @@
 - 修复 `n-dynamic-tags` 禁用时 add 按钮未被禁用
 - 修复 `n-select` 在 filterable 并且菜单无数据是按下 enter 导致菜单关闭
 - 修复 `n-auto-complete` 的 `children` 属性不允许使用 `AutoCompleteOption` 类型
+- 修复 `n-gi` 的 `collapsed` 在 `n-form-item-gi` 中切换无法生效问题，关闭 [#1160](https://github.com/TuSimple/naive-ui/issues/1160)
 
 ## 2.18.1 (2021-09-08)
 

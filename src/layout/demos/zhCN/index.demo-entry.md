@@ -60,6 +60,7 @@ scroll-to
 | bordered | `boolean` | `false` | 是否显示边框 |
 | collapse-mode | `'transform' \| 'width'` | `'transform'` | 如果设定为 `'width'`，Sider 的内容宽度将会被实际改变；如果设定为 `'transform'`，边栏将只会移动它的位置而不会改变宽度 |
 | collapsed | `boolean` | `undefined` | 边栏是否折叠。只在 `position` 为 `'static'` 时生效 |
+| collapsed-trigger-style | `string \| Object` | `undefined` | 折叠时触发器样式 |
 | collapsed-width | `number` | `48` | 折叠宽度 |
 | content-style | `string \| Object` | `undefined` | 可滚动内容节点的样式 |
 | default-collapsed | `boolean` | `false` | 非受控模式下的默认折叠状态 |
@@ -68,7 +69,7 @@ scroll-to
 | position | `'static' \| 'absolute'` | `'static'` | `static` 模式将会把 CSS `position` 设为 `static`， `absolute` 模式将会把 CSS `position` 设为 `absolute`，还将 `left`、`top`、`bottom` 设为 `0`。`absolute` 模式在你想将内容在一个固定容器或者将这个页面的布局设为固定位置的时候很有用。你可能需要修改一些 style 来确保它按照你预想的方式展示 |
 | show-collapsed-content | `boolean` | `true` | 是否在 `sider` 折叠后展示内部内容 |
 | show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | 内置的触发按钮是否展示 |
-| trigger-style | `string \| Object` | `undefined` | 触发样式 |
+| trigger-style | `string \| Object` | `undefined` | 触发器样式 |
 | width | `number \| string` | `272` | 宽度的 CSS 值，为数字时会添加 px |
 | on-update:collapsed | `(collapsed: boolean) => void` | `undefined` | 折叠状态发生改变时的回调函数 |
 

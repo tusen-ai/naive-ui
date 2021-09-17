@@ -1,4 +1,3 @@
-import { changeColor } from 'seemly'
 import { emptyDark } from '../../../empty/styles'
 import { scrollbarDark } from '../../../scrollbar/styles'
 import { commonDark } from '../../../_styles/common'
@@ -12,12 +11,7 @@ const internalSelectMenuDark: InternalSelectMenuTheme = {
     Scrollbar: scrollbarDark,
     Empty: emptyDark
   },
-  self (vars) {
-    const { primaryColor } = vars
-    const commonSelf = self(vars)
-    commonSelf.optionColorActive = changeColor(primaryColor, { alpha: 0.15 })
-    return commonSelf
-  }
+  self
 }
 
 export default internalSelectMenuDark
