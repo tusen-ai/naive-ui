@@ -208,11 +208,7 @@ export default defineComponent({
         }
       )
     )
-    const treeKeysLevelOneRef = computed((): Map<Key, 1> => {
-      const treeKeysLevelOne = new Map()
-      treeMateRef.value.treeNodes.forEach(e => { treeKeysLevelOne.set(e.key, 1) })
-      return treeKeysLevelOne
-    })
+    const treeKeysLevelOneRef = computed(() => new Set(treeMateRef.value.treeNodes.map(e => e.key)))
 
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
