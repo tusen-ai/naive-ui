@@ -35,8 +35,8 @@ customized-group
 
 ### Avatar Group Props
 
-| 名称           | 类型               | 默认值      | 说明                   |
-| -------------- | ------------------ | ----------- | ---------------------- |
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
 | maxAvatarCount | `number` | `undefined` | 组内头像显示的最大个数 |
 | maxAvatarStyle | `Object \| string` | `undefined` | 触发隐藏头像的样式 |
 | options | `Array<AvatarOption>` | `[]` | 头像组传入的 options |

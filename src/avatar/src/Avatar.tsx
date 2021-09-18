@@ -24,7 +24,10 @@ export const avatarProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme>),
   size: [String, Number] as PropType<Size>,
   src: String,
-  circle: Boolean,
+  circle: {
+    type: Boolean,
+    default: undefined
+  },
   objectFit: String as PropType<ObjectFit>,
   round: {
     type: Boolean,
@@ -90,7 +93,7 @@ export default defineComponent({
     const TagInjection = inject(tagInjectionKey, null)
     const mergedRoundRef = computed(() => {
       const { round, circle } = props
-      if (round || circle) return true
+      if (round !== undefined || circle !== undefined) return round || circle
       const { round: avatarGroupRound, circle: avatarGroupCircle } =
         NAvatarGroup
       if (avatarGroupRound || avatarGroupCircle) return true

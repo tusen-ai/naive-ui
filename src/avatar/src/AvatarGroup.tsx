@@ -76,7 +76,7 @@ export default defineComponent({
           <NPopover>
             {{
               trigger: () => (
-                <NAvatar style={maxAvatarStyle}></NAvatar>
+                <NAvatar style={maxAvatarStyle}>
                   {{ default: () => `+${children.length - maxAvatarCount}` }}
                 </NAvatar>
               ),
@@ -97,9 +97,9 @@ export default defineComponent({
             default: () => v.name
           }}
           </NTooltip>
-        ))
-        if (maxAvatarCount && options?.length > maxAvatarCount) {
-          childrenShown.push(
+      ))
+      if (maxAvatarCount && options?.length > maxAvatarCount) {
+        childrenShown.push(
             <NDropdown
               options={options
                 .slice(maxAvatarCount, options.length)
@@ -119,10 +119,10 @@ export default defineComponent({
                 )
               }}
             </NDropdown>
-          )
-        }
+        )
       }
-      return (
+    }
+    return (
         <div
           class={[
             `${mergedClsPrefix}-avatar-group`,
@@ -132,6 +132,6 @@ export default defineComponent({
         >
           {childrenShown}
         </div>
-      )
-    }
-  })
+    )
+  }
+})

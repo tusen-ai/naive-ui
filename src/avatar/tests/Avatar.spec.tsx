@@ -72,7 +72,7 @@ describe('n-avatar', () => {
 
   it('bordered avatar', () => {
     const wrapper = mount(NAvatar, { props: { bordered: true } })
-    expect(wrapper.attributes('style')).toContain('--border: 2px solid #fff;')
+    expect(wrapper.attributes('style')).toContain('--n-border: 2px solid #fff;')
     expect(wrapper.html()).toMatchSnapshot()
   })
 

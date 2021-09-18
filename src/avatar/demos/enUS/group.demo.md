@@ -1,42 +1,7 @@
 # Avatar Group
 
 ```html
-<n-avatar-group
-  round
-  :size="40"
-  :max-avatar-count="2"
-  :max-avatar-style="{color: 'white', backgroundColor: '#f56a00'}"
->
-  <n-avatar>
-    <n-icon>
-      <md-cash />
-    </n-icon>
-  </n-avatar>
-  <n-tooltip>
-    <template #trigger>
-      <n-avatar
-        src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
-      />
-    </template>
-    summer`s wind
-  </n-tooltip>
-  <n-avatar
-    :style="{
-      color: 'yellow',
-      backgroundColor: 'red'
-    }"
-  >
-    1
-  </n-avatar>
-  <n-avatar
-    :style="{
-      color: 'white',
-      backgroundColor: 'green'
-    }"
-  >
-    2
-  </n-avatar>
-</n-avatar-group>
+<n-avatar-group round :options="options" :size="40" :max-avatar-count="2" />
 ```
 
 ```js
@@ -46,6 +11,32 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   components: {
     MdCash
+  },
+  setup () {
+    return {
+      options: [
+        {
+          name: 'Leonardo DiCaprio',
+          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+        },
+        {
+          name: 'Jennifer Lawrence',
+          src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+        },
+        {
+          name: 'Audrey Hepburn',
+          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+        },
+        {
+          name: 'Anne Hathaway',
+          src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+        },
+        {
+          name: 'Taylor Swift',
+          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+        }
+      ]
+    }
   }
 })
 ```

@@ -1,4 +1,4 @@
-# Customized Group
+# 自定义头像组
 
 ```html
 <n-avatar-group
@@ -48,6 +48,7 @@
 ```js
 import { MdCash } from '@vicons/ionicons4'
 import { defineComponent } from 'vue'
+
 export default defineComponent({
   components: {
     MdCash
