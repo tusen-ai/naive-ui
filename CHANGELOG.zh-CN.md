@@ -14,6 +14,7 @@
 
 - `n-layout-sider` 新增 `collapsed-trigger-style` 属性
 - `n-avatar` 新增 `n-avatar-group`
+- `n-input-number` 新增 `readonly` 属性，关闭 [#1198](https://github.com/TuSimple/naive-ui/issues/1198)
 
 ### Fixes
 
