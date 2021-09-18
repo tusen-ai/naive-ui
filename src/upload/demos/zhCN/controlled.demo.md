@@ -4,7 +4,7 @@
 
 ```html
 <n-upload
-  action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   v-model:file-list="fileList"
   @change="handleUploadChange"
   @remove="handleRemove"
@@ -25,7 +25,7 @@ export default defineComponent({
       {
         id: 'url-test',
         name: 'URL 测试',
-        url: 'http://www.mocky.io/v2/5e4bafc63100007100d8b70f',
+        url: 'https://www.mocky.io/v2/5e4bafc63100007100d8b70f',
         status: 'finished'
       },
       {

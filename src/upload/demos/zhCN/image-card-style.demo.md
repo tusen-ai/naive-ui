@@ -6,7 +6,7 @@
 
 ```html
 <n-upload
-  action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-file-list="fileList"
   list-type="image-card"
 >
@@ -14,7 +14,7 @@
 </n-upload>
 <n-divider />
 <n-upload
-  action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-file-list="previewFileList"
   list-type="image-card"
   @preview="handlePreview"

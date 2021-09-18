@@ -9,7 +9,8 @@ import {
   CSSProperties,
   renderSlot,
   Fragment,
-  Teleport
+  Teleport,
+  nextTick
 } from 'vue'
 import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
@@ -315,6 +316,7 @@ export default defineComponent({
       if (!files || files.length === 0) return
       const { onBeforeUpload } = props
       const filesAsArray = props.multiple ? Array.from(files) : [files[0]]
+
       void Promise.all(
         filesAsArray.map(async (file) => {
           const fileInfo: FileInfo = {
@@ -334,12 +336,24 @@ export default defineComponent({
               fileList: mergedFileListRef.value
             })) !== false
           ) {
-            doChange(fileInfo, e, {
-              append: true
-            })
+            return fileInfo
           }
+          return null
         })
-      ).then(() => {
+      ).then((fileInfos) => {
+        let nextTickChain = Promise.resolve()
+
+        fileInfos.forEach((fileInfo) => {
+          nextTickChain = nextTickChain
+            // eslint-disable-next-line @typescript-eslint/promise-function-async
+            .then(() => nextTick())
+            .then(() => {
+              fileInfo &&
+                doChange(fileInfo, e, {
+                  append: true
+                })
+            })
+        })
         if (props.defaultUpload) {
           submit()
         }
