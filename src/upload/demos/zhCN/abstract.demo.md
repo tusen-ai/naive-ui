@@ -1,6 +1,6 @@
 # 不需要包裹 DOM
 
-`n-upload` 和 `n-upload-trigger` 设置 `abstract`。
+`n-upload` 设置 `abstract`。
 
 `n-upload-trigger`和 `n-upload-file-list` 需在 `n-upload` 内调用。
 
@@ -14,8 +14,8 @@
     <n-button-group>
       <n-button> Eat </n-button>
       <n-button> Sleep </n-button>
-      <n-upload-trigger abstract #="{handleTriggerClick}">
-        <n-button @click="handleTriggerClick">Upload</n-button>
+      <n-upload-trigger #="{handleClick}">
+        <n-button @click="handleClick">Upload</n-button>
       </n-upload-trigger>
     </n-button-group>
 

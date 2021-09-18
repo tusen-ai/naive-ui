@@ -1,6 +1,6 @@
 # No Wrapper DOM
 
-`n-upload` and `n-upload-trigger` set `abstract`.
+`n-upload` set `abstract`.
 
 `n-upload-trigger` and `n-upload-file-list` need to be called from within `n-upload`.
 
@@ -14,8 +14,8 @@
     <n-button-group>
       <n-button> Eat </n-button>
       <n-button> Sleep </n-button>
-      <n-upload-trigger abstract #="{handleTriggerClick}">
-        <n-button @click="handleTriggerClick">Upload</n-button>
+      <n-upload-trigger #="{handleClick}">
+        <n-button @click="handleClick">Upload</n-button>
       </n-upload-trigger>
     </n-button-group>
 

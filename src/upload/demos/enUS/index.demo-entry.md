@@ -51,12 +51,6 @@ abstract
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Callback before file is uploaded, return false or a Promise that resolve false or reject will cancel this upload. |
 | on-preview | `(file: FileInfo) => void` | `undefined` | Callback functions for clicking on file links or preview buttons. |
 
-### UploadTrigger Props
-
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| abstract | `boolean` | `false` | Whether there is no DOM wrapper, to be used together with the parent component `Upload.abstract`. |
-
 #### UploadFileInfo Type
 
 | Property | Type | Description |
@@ -93,4 +87,4 @@ abstract
 
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |
-| default | `(options: { handleTriggerClick: () => void, handleTriggerDragOver: (e: DragEvent) => void, handleTriggerDragEnter: (e: DragEvent) => void, handleTriggerDragLeave: (e: DragEvent) => void, handleTriggerDrop: (e: DragEvent) => void})` | `handleTriggerClick` is the click upload function, `handleTriggerDrop` is the drag and drop upload function, `handleTriggerDragEnter`, `handleTriggerDragOver` and `handleTriggerDragLeave` are the drag and drop event functions. |
+| default | `(options: { handleClick: () => void, handleDragOver: (e: DragEvent) => void, handleDragEnter: (e: DragEvent) => void, handleDragLeave: (e: DragEvent) => void, handleDrop: (e: DragEvent) => void})` | `handleClick` is the click upload function, `handleDrop` is the drag and drop upload function, `handleDragEnter`, `handleDragOver` and `handleDragLeave` are the drag and drop event functions. |

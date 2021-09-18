@@ -50,12 +50,6 @@ abstract
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: UploadFileInfo[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |
 | on-preview | `(file: FileInfo) => void` | `undefined` | 点击文件链接或预览按钮的回调函数 |
 
-### UploadTrigger Props
-
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| abstract | `boolean` | `false` | 是否不存在 DOM 包裹，需与父级 `Upload.abstract` 同时使用 |
-
 #### UploadFileInfo Type
 
 | 属性 | 类型 | 说明 |
@@ -92,4 +86,4 @@ abstract
 
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |
-| default | `(options: { handleTriggerClick: () => void, handleTriggerDragOver: (e: DragEvent) => void, handleTriggerDragEnter: (e: DragEvent) => void, handleTriggerDragLeave: (e: DragEvent) => void, handleTriggerDrop: (e: DragEvent) => void})` | `handleTriggerClick` 为点击上传函数，`handleTriggerDrop` 为拖拽上传函数，`handleTriggerDragEnter`、`handleTriggerDragOver` 和 `handleTriggerDragLeave` 为拖拽事件函数 |
+| default | `(options: { handleClick: () => void, handleDragOver: (e: DragEvent) => void, handleDragEnter: (e: DragEvent) => void, handleDragLeave: (e: DragEvent) => void, handleDrop: (e: DragEvent) => void})` | `handleClick` 为点击上传函数，`handleDrop` 为拖拽上传函数，`handleDragEnter`、`handleDragOver` 和 `handleDragLeave` 为拖拽事件函数 |
