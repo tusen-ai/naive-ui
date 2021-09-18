@@ -47,7 +47,7 @@ describe('n-upload', () => {
 
     getMockFile(input.element, fileList)
     await input.trigger('change')
-    await sleep(1000)
+    await sleep(0)
     expect(onBeforeUpload).toHaveBeenCalled()
     expect(onChange).toHaveBeenCalled()
   })
@@ -65,7 +65,7 @@ describe('n-upload', () => {
     getMockFile(input.element, fileList)
     await input.trigger('change')
 
-    await sleep(1000)
+    await sleep(0)
     expect(wrapper.findAll('.n-upload-file--text-type').length).toBe(1)
 
     await wrapper.setProps({
@@ -92,7 +92,7 @@ describe('n-upload', () => {
 
     getMockFile(input.element, fileList)
     await input.trigger('change')
-    await sleep(1000)
+    await sleep(0)
     expect(
       wrapper.find('.n-upload-file-info__thumbnail img').attributes('src')
     ).toEqual('/testThumbUrl.png')
