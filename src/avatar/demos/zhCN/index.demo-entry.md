@@ -13,6 +13,7 @@ icon
 name-size
 v-show-debug
 group
+customized-group
 ```
 
 ## API
@@ -21,6 +22,7 @@ group
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| bordered | `boolean` | `false` | 头像是否带边框 |
 | color | `string` | `undefined` | 头像的背景色 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | 头像的图片在容器内的的适应类型 |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | 头像的尺寸 |
@@ -30,11 +32,12 @@ group
 
 ### Avatar Group Props
 
-| 名称           | 类型               | 默认值      | 说明                   |
-| -------------- | ------------------ | ----------- | ---------------------- |
-| maxAvatarCount | `number`           | `undefined` | 组内头像显示的最大个数 |
-| maxAvatarStyle | `Object \| string` | `undefined` | 触发隐藏头像的样式     |
-| vertical       | `boolean`          | `false`     | 组内头像是否垂直       |
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| maxAvatarCount | `number` | `undefined` | 组内头像显示的最大个数 |
+| maxAvatarStyle | `Object \| string` | `undefined` | 触发隐藏头像的样式 |
+| options | `Array<AvatarOption>` | `[]` | 头像组传入的 options |
+| vertical | `boolean` | `false` | 组内头像是否垂直排列 |
 
 参考 [Avatar Props](avatar#Props)
 

@@ -3,6 +3,7 @@
 ### Feats
 
 - `n-menu` add `accordion` prop , closes [#917](https://github.com/TuSimple/naive-ui/issues/917).
+
 ## Pending
 
 ### Breaking Changes

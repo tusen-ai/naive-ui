@@ -2,7 +2,7 @@ import { h, ref, computed, defineComponent, PropType, inject } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { avatarGroupInjectionKey } from './AvatarGroup'
 import type { Size, ObjectFit } from './interface'
-import { useConfig, useTheme, useFormItem } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { avatarLight } from '../styles'
 import type { AvatarTheme } from '../styles'
@@ -14,13 +14,23 @@ export const avatarProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme>),
   size: [String, Number] as PropType<Size>,
   src: String,
-  circle: Boolean,
+  circle: {
+    type: Boolean,
+    default: undefined
+  },
   color: String,
   objectFit: {
     type: String as PropType<ObjectFit>,
     default: 'fill'
   },
-  round: Boolean,
+  round: {
+    type: Boolean,
+    default: undefined
+  },
+  bordered: {
+    type: Boolean,
+    default: undefined
+  },
   onError: Function as PropType<(e: Event) => void>
 } as const
 
@@ -56,29 +66,26 @@ export default defineComponent({
       }
     }
     const NAvatarGroup = inject(avatarGroupInjectionKey, {})
-    const { mergedSizeRef } = useFormItem(
-      {},
-      {
-        defaultSize: 'medium',
-        mergedSize: (NFormItem) => {
-          const { size } = props
-          if (size) return size
-          const { size: avatarGroupSize } = NAvatarGroup
-          if (avatarGroupSize) return avatarGroupSize
-          const { mergedSize: formItemSize } = NFormItem || {}
-          if (formItemSize) {
-            return formItemSize.value
-          }
-          return 'medium'
-        }
-      }
-    )
+    const mergedSizeRef = computed(() => {
+      const { size } = props
+      if (size) return size
+      const { size: avatarGroupSize } = NAvatarGroup
+      if (avatarGroupSize) return avatarGroupSize
+      return 'medium'
+    })
     const mergedRoundRef = computed(() => {
       const { round, circle } = props
-      if (round || circle) return true
+      if (round !== undefined || circle !== undefined) return round || circle
       const { round: avatarGroupRound, circle: avatarGroupCircle } =
         NAvatarGroup
       if (avatarGroupRound || avatarGroupCircle) return true
+      return false
+    })
+    const mergedBorderedRef = computed(() => {
+      const { bordered } = props
+      if (bordered !== undefined) return bordered
+      const { bordered: avatarGroupBordered } = NAvatarGroup
+      if (avatarGroupBordered) return avatarGroupBordered
       return false
     })
     const themeRef = useTheme(
@@ -97,8 +104,9 @@ export default defineComponent({
       cssVars: computed(() => {
         const size = mergedSizeRef.value
         const round = mergedRoundRef.value
+        const bordered = mergedBorderedRef.value
         const {
-          self: { borderRadius, fontSize, color },
+          self: { borderRadius, fontSize, color, border },
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         let height: string
@@ -109,6 +117,7 @@ export default defineComponent({
         }
         return {
           '--font-size': fontSize,
+          '--border': bordered ? border : 'none',
           '--border-radius': round ? '50%' : borderRadius,
           '--color': color,
           '--bezier': cubicBezierEaseInOut,

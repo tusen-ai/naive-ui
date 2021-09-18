@@ -12,6 +12,7 @@ badge
 icon
 name-size
 group
+customized-group
 ```
 
 ## API
@@ -20,6 +21,7 @@ group
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| bordered | `boolean` | `false` | Whether to display a avatar with border. |
 | color | `string` | `undefined` | The background color of the avatar. |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | Object-fit type of the image in the container. |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar's size. |
@@ -33,6 +35,7 @@ group
 | --- | --- | --- | --- |
 | maxAvatarCount | `number` | `undefined` | Max avatar count in the group. |
 | maxAvatarStyle | `Object \| string` | `undefined` | The style to trigger the hidden avatars. |
+| options | `Array<AvatarOption>` | `[]` | avatar group options |
 | vertical | `boolean` | `false` | Whether display a vertical avatar group. |
 
 see [Avatar Props](avatar#Props)

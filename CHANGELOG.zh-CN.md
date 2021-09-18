@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-menu` 添加 `accordion` 属性，关闭 [#917](https://github.com/TuSimple/naive-ui/issues/917)
+
 ## Pending
 
 ### Breaking Changes
@@ -10,7 +14,6 @@
 
 - `n-layout-sider` 新增 `collapsed-trigger-style` 属性
 - `n-avatar` 新增 `n-avatar-group`
-- `n-menu` 添加 `accordion` 属性，关闭 [#917](https://github.com/TuSimple/naive-ui/issues/917)
 
 ### Fixes
 

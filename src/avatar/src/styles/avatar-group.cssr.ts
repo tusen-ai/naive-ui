@@ -10,7 +10,7 @@ export default cB('avatar-group', `
   }, [
     cB('avatar', [
       c('&:not(:first-child)', `
-         margin-left: -8px;
+         margin-left: -12px;
       `)
     ])
   ]),
@@ -19,7 +19,7 @@ export default cB('avatar-group', `
   }, [
     cB('avatar', [
       c('&:not(:first-child)', `
-         margin-top: -8px;
+         margin-top: -12px;
       `)
     ])
   ])

@@ -15,6 +15,7 @@ export default cB('avatar', `
   position: relative;
   overflow: hidden;
   text-align: center;
+  border: var(--border);
   border-radius: var(--border-radius);
   background-color: var(--color);
   transition:

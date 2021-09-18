@@ -6,6 +6,7 @@ export const self = (vars: ThemeCommonVars) => {
   const {
     borderRadius,
     avatarColor,
+    cardColor,
     fontSize,
     heightTiny,
     heightSmall,
@@ -16,6 +17,7 @@ export const self = (vars: ThemeCommonVars) => {
   return {
     borderRadius,
     fontSize,
+    border: `2px solid ${cardColor}`,
     heightTiny,
     heightSmall,
     heightMedium,
