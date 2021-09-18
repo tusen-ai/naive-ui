@@ -16,6 +16,7 @@
 
 - Fix `n-select` focus input when closing tag with `filterable` , closes [#1170](https://github.com/TuSimple/naive-ui/issues/1170).
 - Fix `n-button` border on hover conflicts with `n-badge`, closes [#1195](https://github.com/TuSimple/naive-ui/issues/1195).
+- Fix `n-upload` prop `v-model:file-list` dosen't work well when prop `multiple` is `true`, closes [#418](https://github.com/TuSimple/naive-ui/issues/418).
 
 ## 2.18.2 (2021-09-14)
 

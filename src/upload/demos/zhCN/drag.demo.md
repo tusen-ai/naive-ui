@@ -1,7 +1,7 @@
 # 拖拽上传
 
 ```html
-<n-upload action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f">
+<n-upload action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f">
   <n-upload-dragger>
     <div style="margin-bottom: 12px;">
       <n-icon size="48" :depth="3">
