@@ -3,6 +3,7 @@
 ### Feats
 
 - `n-menu` add `accordion` prop , closes [#917](https://github.com/TuSimple/naive-ui/issues/917).
+
 ## Pending
 
 ### Breaking Changes
@@ -12,6 +13,7 @@
 ### Feats
 
 - `n-layout-sider` add `collapsed-trigger-style` prop.
+- `n-input-number` add `readonly` prop , closes [#1198](https://github.com/TuSimple/naive-ui/issues/1198).
 
 ### Fixes
 
