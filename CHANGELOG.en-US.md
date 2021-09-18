@@ -11,6 +11,7 @@
 - `n-layout-sider` add `collapsed-trigger-style` prop.
 - `n-menu` add `accordion` prop , closes [#917](https://github.com/TuSimple/naive-ui/issues/917).
 - `n-input-number` add `readonly` prop , closes [#1198](https://github.com/TuSimple/naive-ui/issues/1198).
+- `n-spin` add `description` prop and slot.
 
 ### Fixes
 
