@@ -97,7 +97,7 @@ export interface MonthItem {
   endOfSpan: boolean
   selected: boolean
   ts: number
-  showText: string
+  showText?: string
 }
 
 export interface YearItem {
