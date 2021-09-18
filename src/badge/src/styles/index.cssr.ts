@@ -69,6 +69,7 @@ export default c([
       left: 100%;
       bottom: calc(100% - 9px);
       font-variant-numeric: tabular-nums;
+      z-index: 1;
     `,
     [
       fadeInScaleUpTransition({

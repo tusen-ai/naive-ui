@@ -1,9 +1,5 @@
 # CHANGELOG
 
-### Feats
-
-- `n-menu` 添加 `accordion` 属性，关闭 [#917](https://github.com/TuSimple/naive-ui/issues/917)
-
 ## Pending
 
 ### Breaking Changes
@@ -13,11 +9,13 @@
 ### Feats
 
 - `n-layout-sider` 新增 `collapsed-trigger-style` 属性
+- `n-menu` 添加 `accordion` 属性，关闭 [#917](https://github.com/TuSimple/naive-ui/issues/917)
 - `n-input-number` 新增 `readonly` 属性，关闭 [#1198](https://github.com/TuSimple/naive-ui/issues/1198)
 
 ### Fixes
 
 - 修复 `n-select` `filterable` 下关闭标签 input 光标聚焦问题，关闭 [#1170](https://github.com/TuSimple/naive-ui/issues/1170)
+- 修复 `n-button` 在 hover 状态下边框与 `n-badge` 冲突，关闭 [#1195](https://github.com/TuSimple/naive-ui/issues/1195)
 
 ## 2.18.2 (2021-09-14)
 
