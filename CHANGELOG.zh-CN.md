@@ -12,6 +12,7 @@
 - `n-menu` 添加 `accordion` 属性，关闭 [#917](https://github.com/TuSimple/naive-ui/issues/917)
 - `n-input-number` 新增 `readonly` 属性，关闭 [#1198](https://github.com/TuSimple/naive-ui/issues/1198)
 - `n-spin` 新增 `description` prop 和 slot
+- `n-anchor` 新增 `variant` 属性
 
 ### Fixes
 
