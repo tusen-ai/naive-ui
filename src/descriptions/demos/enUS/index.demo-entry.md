@@ -15,7 +15,7 @@ bordered
 size
 ```
 
-## Props
+## API
 
 ### Descriptions Props
 
@@ -30,7 +30,7 @@ size
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the description. |
 | title | `string` | `undefined` | Title of the description. |
 
-### Description Item Props
+### DescriptionItem Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -39,8 +39,6 @@ size
 | label-style | `Object \| string` | `undefined` | Style of the item label. |
 | span | `number` | `1` | Column span of the item. |
 
-## Slots
-
 ### Descriptions Slots
 
 | Name    | Parameters | Description     |
@@ -48,7 +46,7 @@ size
 | default | `()`       | Content.        |
 | header  | `()`       | Header content. |
 
-### Description Item Slots
+### DescriptionItem Slots
 
 | Name    | Parameters | Description   |
 | ------- | ---------- | ------------- |

@@ -15,7 +15,7 @@ bordered
 size
 ```
 
-## Props
+## API
 
 ### Descriptions Props
 
@@ -30,7 +30,7 @@ size
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | title | `string` | `undefined` | 标题 |
 
-### Description Item Props
+### DescriptionItem Props
 
 | 名称          | 类型               | 默认值      | 说明            |
 | ------------- | ------------------ | ----------- | --------------- |
@@ -39,8 +39,6 @@ size
 | label-style   | `Object \| string` | `undefined` | label 的样式    |
 | span          | `number`           | `1`         | 所占的单元格数  |
 
-## Slots
-
 ### Descriptions Slots
 
 | 名称    | 参数 | 说明        |
@@ -48,7 +46,7 @@ size
 | default | `()` | 描述的内容  |
 | header  | `()` | header 内容 |
 
-### Description Item Slots
+### DescriptionItem Slots
 
 | 名称    | 参数 | 说明                |
 | ------- | ---- | ------------------- |
