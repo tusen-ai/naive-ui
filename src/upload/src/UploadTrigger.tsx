@@ -1,22 +1,11 @@
-import { h, defineComponent, inject, computed, renderSlot } from 'vue'
-import { ExtractPublicPropTypes, throwError } from '../../_utils'
+import { h, defineComponent, inject, renderSlot, computed } from 'vue'
+import { throwError } from '../../_utils'
 import { uploadInjectionKey } from './interface'
 import NUploadDragger from './UploadDragger'
 
-const uploadTriggerProps = {
-  abstract: {
-    type: Boolean,
-    default: false
-  }
-} as const
-export type UploadTriggerProps = ExtractPublicPropTypes<
-  typeof uploadTriggerProps
->
-
 export default defineComponent({
   name: 'UploadTrigger',
-  props: uploadTriggerProps,
-  setup (props, { slots }) {
+  setup (_, { slots }) {
     const NUpload = inject(uploadInjectionKey, null)
     if (!NUpload) {
       throwError(
@@ -33,12 +22,11 @@ export default defineComponent({
       openFileDialog,
       draggerInsideRef,
       handleFileAddition,
-      abstractRef: parentAbstract
+      abstractRef
     } = NUpload
 
-    const isImageCardType = listTypeRef.value === 'image-card'
-    const mergedAbstractRef = computed(
-      () => parentAbstract.value && props.abstract
+    const isImageCardTypeRef = computed(
+      () => listTypeRef.value === 'image-card'
     )
 
     function handleTriggerClick (): void {
@@ -69,19 +57,19 @@ export default defineComponent({
     }
 
     return () =>
-      mergedAbstractRef.value ? (
+      abstractRef.value ? (
         renderSlot(slots, 'default', {
-          handleTriggerClick,
-          handleTriggerDrop,
-          handleTriggerDragOver,
-          handleTriggerDragEnter,
-          handleTriggerDragLeave
+          handleClick: handleTriggerClick,
+          handleDrop: handleTriggerDrop,
+          handleDragOver: handleTriggerDragOver,
+          handleDragEnter: handleTriggerDragEnter,
+          handleDragLeave: handleTriggerDragLeave
         })
       ) : (
         <div
           class={[
             `${mergedClsPrefixRef.value}-upload__trigger`,
-            isImageCardType &&
+            isImageCardTypeRef.value &&
               `${mergedClsPrefixRef.value}-upload__trigger--image-card`
           ]}
           onClick={handleTriggerClick}
@@ -90,7 +78,11 @@ export default defineComponent({
           onDragenter={handleTriggerDragEnter}
           onDragleave={handleTriggerDragLeave}
         >
-          {isImageCardType ? <NUploadDragger>{slots}</NUploadDragger> : slots}
+          {isImageCardTypeRef.value ? (
+            <NUploadDragger>{slots}</NUploadDragger>
+          ) : (
+            slots
+          )}
         </div>
       )
   }

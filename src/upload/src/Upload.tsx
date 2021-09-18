@@ -258,10 +258,7 @@ const uploadProps = {
   },
   onPreview: Function as PropType<OnPreview>,
   createThumbnailUrl: Function as PropType<CreateThumbnailUrl>,
-  abstract: {
-    type: Boolean,
-    default: false
-  }
+  abstract: Boolean
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -551,12 +548,10 @@ export default defineComponent({
           multiple={this.multiple}
           onChange={this.handleFileInputChange}
         />
-        {this.listType !== 'image-card' ? (
+        {this.listType !== 'image-card' && (
           <NUploadTrigger>{this.$slots}</NUploadTrigger>
-        ) : null}
-        {this.showFileList ? (
-          <NUploadFileList>{this.$slots}</NUploadFileList>
-        ) : null}
+        )}
+        {this.showFileList && <NUploadFileList>{this.$slots}</NUploadFileList>}
       </div>
     )
   }
