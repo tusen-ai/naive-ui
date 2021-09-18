@@ -94,7 +94,7 @@ export default defineComponent({
         <NTooltip>
           {{
             trigger: () => <NAvatar src={v.src} />,
-            default: v.name
+            default: () => v.name
           }}
         </NTooltip>
       ))
@@ -109,9 +109,15 @@ export default defineComponent({
                 key: `${v.name}${i}`
               }))}
           >
-            <NAvatar style={maxAvatarStyle}>{`+${
-              options.length - maxAvatarCount
-            }`}</NAvatar>
+            {{
+              default: () => (
+                <NAvatar style={maxAvatarStyle}>
+                  {{
+                    default: () => `+${options.length - maxAvatarCount}`
+                  }}
+                </NAvatar>
+              )
+            }}
           </NDropdown>
         )
       }
