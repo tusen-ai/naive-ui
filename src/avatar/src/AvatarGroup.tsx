@@ -46,7 +46,7 @@ const avatarGroupProps = {
   round: Boolean,
   vertical: Boolean,
   size: {
-    type: String as PropType<Size | undefined>,
+    type: [String, Number] as PropType<Size | undefined>,
     default: undefined
   }
 } as const
@@ -76,9 +76,11 @@ export default defineComponent({
           <NPopover>
             {{
               trigger: () => (
-                <NAvatar style={maxAvatarStyle}>{`+${
-                  children.length - maxAvatarCount
-                }`}</NAvatar>
+                <NAvatar style={maxAvatarStyle}>
+                  {{
+                    default: () => `+${children.length - maxAvatarCount}`
+                  }}
+                </NAvatar>
               ),
               default: () => (
                 <div class={`${mergedClsPrefix}-avatar-group`}>
