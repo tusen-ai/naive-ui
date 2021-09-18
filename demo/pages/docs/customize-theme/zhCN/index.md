@@ -22,15 +22,16 @@ Naive UI 通过使用 `n-config-provider` 调整主题。
 </template>
 
 <script>
+  import { defineComponent } from 'vue'
   import { darkTheme } from 'naive-ui'
 
-  export default {
+  export default defineComponent({
     setup() {
       return {
         darkTheme
       }
     }
-  }
+  })
 </script>
 ```
 

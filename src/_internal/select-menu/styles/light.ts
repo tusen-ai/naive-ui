@@ -47,6 +47,7 @@ export const self = (vars: ThemeCommonVars) => {
     optionOpacityDisabled: opacityDisabled,
     optionCheckColor: primaryColor,
     optionColorPending: hoverColor,
+    optionColorActive: hoverColor,
     actionTextColor: textColor2,
     loadingColor: primaryColor
   }

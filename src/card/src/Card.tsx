@@ -28,6 +28,7 @@ export const cardBaseProps = {
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
   footerStyle: [Object, String] as PropType<CSSProperties | string>,
+  embedded: Boolean,
   segmented: {
     type: [Boolean, Object] as PropType<boolean | Segmented>,
     default: false
@@ -104,6 +105,7 @@ export default defineComponent({
             closeSize,
             boxShadow,
             colorPopover,
+            colorEmbedded,
             [createKey('padding', size)]: padding,
             [createKey('fontSize', size)]: fontSize,
             [createKey('titleFontSize', size)]: titleFontSize
@@ -118,7 +120,7 @@ export default defineComponent({
         return {
           '--bezier': cubicBezierEaseInOut,
           '--border-radius': borderRadius,
-          '--color': color,
+          '--color': props.embedded ? colorEmbedded : color,
           '--color-modal': colorModal,
           '--color-popover': colorPopover,
           '--color-target': colorTarget,

@@ -42,7 +42,7 @@ update-on-close
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Date 类型的 Date Picker 中支持的操作 |
-| format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串 |
+| format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
 | is-date-disabled | `(current: number) => boolean` | `undefined` | 日期禁用的校验函数 |
 | placeholder | `string` | `'选择日期'` | 自动填充的提示信息 |
 | on-update:value | `(value: number \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 |
@@ -52,7 +52,7 @@ update-on-close
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | DateTime 类型的 Date Picker 中支持的操作 |
-| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 用户自定义的数据格式化方式 |
+| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
 | is-date-disabled | `(current: number) => boolean` | `undefined` | 日期禁用的校验函数 |
 | is-time-disabled | `(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }` | `undefined` | 时间禁用的校验函数 |
 | placeholder | `string` | `'选择日期时间'` | 提示信息 |
@@ -65,7 +65,7 @@ update-on-close
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | DateRange 类型的 Date Picker 中支持的用户操作 |
 | end-placeholder | `string` | `'结束日期'` | DateRange 中 end 选框的提示信息 |
-| format | `string` | `'yyyy-MM-dd'` | 用户自定义的数据格式化方式 |
+| format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | 时间禁用的校验函数 |
 | close-on-select | `boolean` | `false` | 用户选择时间范围后是否自动关闭面板 |
@@ -80,7 +80,7 @@ update-on-close
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | DateTimeRange 类型的 Date Picker 中支持的用户操作 |
 | end-placeholder | `string` | `'结束日期时间'` | DateTimeRange 中 end 选框的提示信息 |
-| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 用户自定义的数据格式化方式 |
+| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | 时间禁用的校验函数 |
 | separator | `string` | `'to'` | start 选框与 end 选框之间的分隔符 |

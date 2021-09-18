@@ -13,14 +13,14 @@ export const self = (vars: ThemeCommonVars) => {
     textColor2,
     textColor1,
     dividerColor,
-    actionColor,
     fontWeightStrong,
     closeColor,
     closeColorHover,
     closeColorPressed,
     modalColor,
     boxShadow1,
-    popoverColor
+    popoverColor,
+    actionColor
   } = vars
   return {
     ...commonVariables,
@@ -29,6 +29,7 @@ export const self = (vars: ThemeCommonVars) => {
     colorModal: modalColor,
     colorPopover: popoverColor,
     colorTarget: primaryColor,
+    colorEmbedded: actionColor,
     textColor: textColor2,
     titleTextColor: textColor1,
     borderColor: dividerColor,

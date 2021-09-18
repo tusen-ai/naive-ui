@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   h,
   computed,
@@ -75,41 +76,71 @@ export default defineComponent({
 
     const { mergedClsPrefixRef } = useConfig(props)
 
-    function doUpdateValue (value: Value | null): void {
+    const treeMateRef = computed(() => {
+      return createTreeMate<
+      SelectBaseOption,
+      SelectGroupOption,
+      SelectIgnoredOption
+      >(props.options, tmOptions)
+    })
+
+    function doUpdateValue (
+      value: Value | null,
+      option: SelectBaseOption | null | SelectBaseOption[]
+    ): void {
       const {
         onUpdateValue,
         'onUpdate:value': _onUpdateValue,
         onChange
       } = props
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
-      if (onChange) call(onChange as OnUpdateValueImpl, value)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, option)
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, option)
+      }
+      if (onChange) call(onChange as OnUpdateValueImpl, value, option)
     }
     function handleToggle (tmNode: TreeNode<SelectBaseOption>): void {
       toggle(tmNode.key)
     }
     function toggle (value: ValueAtom): void {
+      const {
+        value: { getNode }
+      } = treeMateRef
       if (props.multiple) {
         if (Array.isArray(props.value)) {
-          const validValues = new Set(
-            props.options.map((option) => option.value)
-          )
-          const newValue = props.value.filter((v) => validValues.has(v))
-          const index = newValue.findIndex((v) => v === value)
-          if (~index) {
-            newValue.splice(index, 1)
-          } else {
+          const newValue: ValueAtom[] = []
+          const newOptions: SelectBaseOption[] = []
+          let shouldAddValue = true
+          props.value.forEach((v) => {
+            if (v === value) {
+              shouldAddValue = false
+              return
+            }
+            const tmNode = getNode(v)
+            if (tmNode) {
+              newValue.push(tmNode.key)
+              newOptions.push(tmNode.rawNode)
+            }
+          })
+          if (shouldAddValue) {
             newValue.push(value)
+            newOptions.push(getNode(value)!.rawNode)
           }
-          doUpdateValue(newValue)
+          doUpdateValue(newValue, newOptions)
         } else {
-          doUpdateValue([value])
+          const tmNode = getNode(value)
+          if (tmNode) {
+            doUpdateValue([value], [tmNode.rawNode])
+          }
         }
       } else {
         if (props.value === value && props.cancelable) {
-          doUpdateValue(null)
+          doUpdateValue(null, null)
         } else {
-          doUpdateValue(value)
+          const tmNode = getNode(value)
+          if (tmNode) {
+            doUpdateValue(value, tmNode.rawNode)
+          }
           NPopselect.setShow(false)
         }
       }
@@ -125,13 +156,7 @@ export default defineComponent({
     return {
       mergedTheme: NPopselect.mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      treeMate: computed(() => {
-        return createTreeMate<
-        SelectBaseOption,
-        SelectGroupOption,
-        SelectIgnoredOption
-        >(props.options, tmOptions)
-      }),
+      treeMate: treeMateRef,
       handleToggle
     }
   },

@@ -29,8 +29,8 @@ export type Filter = (
 
 export type OnLoad = (option: CascaderOption) => Promise<void>
 
-export type OnUpdateValue = <
-  T extends string &
+export type OnUpdateValue = (
+  value: string &
   number &
   string[] &
   number[] &
@@ -39,12 +39,17 @@ export type OnUpdateValue = <
   (number | null) &
   (string[] | null) &
   (number[] | null) &
-  (Array<string | number> | null)
->(
-  value: T
+  (Array<string | number> | null),
+  option: CascaderOption &
+  null &
+  CascaderOption[] &
+  Array<CascaderOption | null>
 ) => void
 
-export type OnUpdateValueImpl = (value: Value | null) => void
+export type OnUpdateValueImpl = (
+  value: Value | null,
+  option: CascaderOption | null | Array<CascaderOption | null>
+) => void
 
 export type MenuModel = TmNode[][]
 

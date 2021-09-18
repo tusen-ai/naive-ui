@@ -47,7 +47,7 @@ debug
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Callback on blur. |
 | on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | Callback on expanded keys updated. |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Callback on focus. |
-| on-update:value | `(value: string \| number \| Array<string \| number> \| null) => void` | `undefined` | Callback on value updated. |
+| on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>) => void` | `undefined` | Callback on value updated. |
 
 ### TreeSelectOption Properties
 

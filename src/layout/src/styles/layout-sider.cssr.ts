@@ -33,9 +33,11 @@ export default cB('layout-sider', `
       border-left: 1px solid var(--border-color);
     `),
     cM('collapsed', [
-      cB('layout-toggle-button', `
-        transform: translateX(-50%) translateY(-50%) rotate(0);
-      `),
+      cB('layout-toggle-button', [
+        cB('base-icon', `
+          transform: rotate(180deg);
+        `)
+      ]),
       cB('layout-toggle-bar', [
         c('&:hover', [
           cE('top', {
@@ -48,9 +50,13 @@ export default cB('layout-sider', `
       ])
     ]),
     cB('layout-toggle-button', `
-      transform: translateX(-50%) translateY(-50%) rotate(180deg);
       left: 0;
-    `),
+      transform: translateX(-50%) translateY(-50%);
+    `, [
+      cB('base-icon', `
+        transform: rotate(0);
+      `)
+    ]),
     cB('layout-toggle-bar', `
       left: -28px;
       transform: rotate(180deg);
@@ -76,23 +82,41 @@ export default cB('layout-sider', `
         })
       ])
     ]),
-    cB('layout-toggle-button', `
-      transform: translateX(50%) translateY(-50%) rotate(180deg);
-    `)
+    cB('layout-toggle-button', [
+      cB('base-icon', `
+        transform: rotate(0);
+      `)
+    ])
   ]),
   cB('layout-toggle-button', `
     transition:
-      transform .3s var(--bezier),
-      fill .3s var(--bezier);
+      color .3s var(--bezier),
+      right .3s var(--bezier),
+      left .3s var(--bezier),
+      border-color .3s var(--bezier),
+      background-color .3s var(--bezier);
     cursor: pointer;
-    width: 36px;
-    height: 36px;
+    width: 24px;
+    height: 24px;
     position: absolute;
     top: 50%;
     right: 0;
-    fill: var(--toggle-button-color);
-    transform: translateX(50%) translateY(-50%) rotate(0);
-  `),
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--text-color);
+    border: var(--toggle-button-border);
+    background-color: var(--toggle-button-color);
+    box-shadow: 0 2px 4px 0px rgba(0, 0, 0, .06);
+    transform: translateX(50%) translateY(-50%);
+  `, [
+    cB('base-icon', `
+      transition: transform .3s var(--bezier);
+      transform: rotate(180deg);
+    `)
+  ]),
   cB('layout-toggle-bar', `
     cursor: pointer;
     height: 72px;

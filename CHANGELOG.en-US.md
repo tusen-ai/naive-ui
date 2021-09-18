@@ -2,9 +2,28 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-layout-sider`'s `arrow-circle` trigger is changed into new style.
+
+### Feats
+
+- `n-layout-sider` add `collapsed-trigger-style` prop.
+- `n-menu` add `accordion` prop , closes [#917](https://github.com/TuSimple/naive-ui/issues/917).
+- `n-input-number` add `readonly` prop , closes [#1198](https://github.com/TuSimple/naive-ui/issues/1198).
+
+### Fixes
+
+- Fix `n-select` focus input when closing tag with `filterable` , closes [#1170](https://github.com/TuSimple/naive-ui/issues/1170).
+- Fix `n-button` border on hover conflicts with `n-badge`, closes [#1195](https://github.com/TuSimple/naive-ui/issues/1195).
+- Fix `n-upload` prop `v-model:file-list` dosen't work well when prop `multiple` is `true`, closes [#418](https://github.com/TuSimple/naive-ui/issues/418).
+
+## 2.18.2 (2021-09-14)
+
 ### Feats
 
 - `n-cascader` show `Empty` component when `options` prop is empty, closes [#1092](https://github.com/TuSimple/naive-ui/issues/1092).
+- `n-cascader`'s `on-update:value` prop add option info.
 - `n-tree` add `check-strategy` prop.
 - `n-date-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
 - `n-time-picker` add `input-readonly` prop, closes [#1120](https://github.com/TuSimple/naive-ui/issues/1120).
@@ -12,6 +31,11 @@
 - `n-select` add `on-update:show` prop.
 - `n-auto-complete` exports `AutoCompleteOption` and `AutoCompleteGroupOption` types.
 - `n-page-header` add `RTL` support.
+- `n-select` support variadic height option rendering.
+- `n-tree-select`'s `on-update:value` prop add option info.
+- `n-select`'s `on-update:value` prop add option info.
+- `n-popselect`'s `on-update:value` prop add option info.
+- `n-card` add `embedded` prop.
 
 ### Fixes
 
@@ -21,7 +45,7 @@
 - Fix `n-dynamic-tags` add button is not disabled when it is disabled.
 - Fix `n-select` closes menu when enter key is pressed in filterable mode without options data.
 - Fix `n-auto-complete`'s `children` prop can't use `AutoCompleteOption` type.
-- Fix `n-upload` prop `v-model:file-list` dosen't work well when prop `multiple` is `true`, closes [#418](https://github.com/TuSimple/naive-ui/issues/418).
+- Fix `n-gi`'s `collapsed` does not work in `n-form-item-gi`, closes [#1160](https://github.com/TuSimple/naive-ui/issues/1160).
 
 ## 2.18.1 (2021-09-08)
 

@@ -29,6 +29,7 @@ import {
 // --text-color
 // --text-color-disabled
 // --arrow-color
+// --arrow-size
 // --loading-color
 // ...clear vars
 // ...form item vars
@@ -43,15 +44,11 @@ export default c([
     vertical-align: bottom;
     border-radius: var(--border-radius);
     min-height: var(--height);
-    line-height: var(--height);
+    line-height: 1.5;
     font-size: var(--font-size);
   `, [
     cB('base-loading', `
       color: var(--loading-color);
-    `),
-    cB('base-selection-label', `
-      height: var(--height);
-      line-height: var(--height);
     `),
     cB('base-selection-tags', {
       minHeight: 'var(--height)'
@@ -81,15 +78,16 @@ export default c([
       right: 10px;
     `, [
       cE('arrow', `
+        font-size: var(--arrow-size);
         color: var(--arrow-color);
         transition: color .3s var(--bezier);
       `)
     ]),
-    cB('base-render-dom', `
+    cB('base-selection-overlay', `
+      display: flex;
+      align-items: center;
       white-space: nowrap;
       overflow: hidden;
-      height: var(--height);
-      line-height: var(--height);
       pointer-events: none;
       position: absolute;
       top: 0;
@@ -122,7 +120,8 @@ export default c([
         background-color .3s var(--bezier);
     `),
     cB('base-selection-label', `
-      display: inline-block;
+      height: var(--height);
+      display: inline-flex;
       width: 100%;
       vertical-align: bottom;
       cursor: pointer;
@@ -136,23 +135,27 @@ export default c([
       background-color .3s var(--bezier);
       border-radius: inherit;
       background-color: var(--color);
+      align-items: center;
     `, [
-      cE('input', `
+      cB('base-selection-input', `
         line-height: inherit;
         outline: none;
         cursor: pointer;
         box-sizing: border-box;
-        text-overflow: ellipsis;
-        overflow: hidden;
         border:none;
         width: 100%;
-        white-space: nowrap;
         padding: var(--padding-single);
         background-color: #0000;
         color: var(--text-color);
         transition: color .3s var(--bezier);
         caret-color: var(--caret-color);
-      `),
+      `, [
+        cE('content', `
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;  
+        `)
+      ]),
       cE('render-label', `
         color: var(--text-color);
       `)
@@ -193,7 +196,7 @@ export default c([
         cursor: not-allowed;
         background-color: var(--color-disabled);
       `, [
-        cE('input', `
+        cB('base-selection-input', `
           cursor: not-allowed;
           color: var(--text-color-disabled);
         `),

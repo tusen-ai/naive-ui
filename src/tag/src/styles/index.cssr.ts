@@ -43,9 +43,9 @@ export default cB('tag', `
     color .3s var(--bezier),
     box-shadow .3s var(--bezier),
     opacity .3s var(--bezier);
-    line-height: var(--height);
-    height: var(--height);
-    font-size: var(--font-size);
+  line-height: 1.5;
+  height: var(--height);
+  font-size: var(--font-size);
 `, [
   cE('border', `
     pointer-events: none;
