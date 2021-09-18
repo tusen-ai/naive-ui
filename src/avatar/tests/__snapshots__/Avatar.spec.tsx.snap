@@ -12,10 +12,6 @@ exports[`n-avatar image avatar 1`] = `"<span class=\\"n-avatar\\" style=\\"--fon
 
 exports[`n-avatar round avatar 1`] = `"<span class=\\"n-avatar\\" style=\\"--font-size: 14px; --border: none; --border-radius: 50%; --color: rgba(204, 204, 204, 1); --bezier: cubic-bezier(.4, 0, .2, 1); --size: 34px;\\"><span class=\\"n-avatar__text\\"></span></span>"`;
 
-exports[`n-avatar should work with \`avatar group\` 1`] = `null`;
-
-exports[`n-avatar should work with \`options\` prop in \`avatar group\` 1`] = `null`;
-
 exports[`n-avatar size is number 1`] = `"<span class=\\"n-avatar\\" style=\\"--font-size: 14px; --border: none; --border-radius: 3px; --color: rgba(204, 204, 204, 1); --bezier: cubic-bezier(.4, 0, .2, 1); --size: 50px;\\"><span class=\\"n-avatar__text\\"></span></span>"`;
 
 exports[`n-avatar size is string 1`] = `"<span class=\\"n-avatar\\" style=\\"--font-size: 14px; --border: none; --border-radius: 3px; --color: rgba(204, 204, 204, 1); --bezier: cubic-bezier(.4, 0, .2, 1); --size: 34px;\\"><span class=\\"n-avatar__text\\"></span></span>"`;
