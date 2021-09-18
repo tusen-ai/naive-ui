@@ -3,6 +3,7 @@
 ### Feats
 
 - `n-menu` 添加 `accordion` 属性，关闭 [#917](https://github.com/TuSimple/naive-ui/issues/917)
+
 ## Pending
 
 ### Breaking Changes
@@ -12,6 +13,7 @@
 ### Feats
 
 - `n-layout-sider` 新增 `collapsed-trigger-style` 属性
+- `n-input-number` 新增 `readonly` 属性，关闭 [#1198](https://github.com/TuSimple/naive-ui/issues/1198)
 
 ### Fixes
 
