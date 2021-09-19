@@ -19,6 +19,7 @@
 - `n-tree` add `on-update:indeterminate-keys` prop.
 - `n-tree-select` add `on-update:indeterminate-keys` prop.
 - `n-tabs` `type` prop add `'segment'` option, closes [#1133](https://github.com/TuSimple/naive-ui/issues/1133).
+- `n-popover` add `z-index` prop, closes [#764](https://github.com/TuSimple/naive-ui/issues/764).
 
 ### Fixes
 

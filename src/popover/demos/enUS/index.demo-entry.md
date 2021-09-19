@@ -20,7 +20,9 @@ manual-position
 header
 ```
 
-## Props
+## API
+
+### Popover Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -41,10 +43,11 @@ header
 | width | `number \| 'trigger'` | `undefined` | `'trigger'` means popover's witdh will follow its trigger's width. |
 | x | `number` | `undefined` | The CSS `left` pixel value when popover manually positioned (x, y need to be set together). |
 | y | `number` | `undefined` | The CSS `top` pixel value when popover manually positioned (x, y need to be set together). |
+| z-index | `number` | `undefined` | The z-index of the popover. |
 | on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when clickoutside. |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback on show status changes. |
 
-## Slots
+## Popover Slots
 
 | Name    | Parameters | Description                                     |
 | ------- | ---------- | ----------------------------------------------- |
@@ -52,7 +55,7 @@ header
 | header  | `()`       | The header content of the popover.              |
 | default | `()`       | The content inside popover.                     |
 
-## Methods
+## Popover Methods
 
 | Name         | Parameters        | Description                           |
 | ------------ | ----------------- | ------------------------------------- |
