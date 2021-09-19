@@ -46,9 +46,7 @@ export default defineComponent({
         />
       ))
 
-    const createUploadFileList = (
-      isImageCardTypeRef: ComputedRef<boolean>
-    ): VNode =>
+    const createUploadFileList = (): VNode =>
       isImageCardTypeRef.value ? (
         <NImageGroup>{{ default: createFileList }}</NImageGroup>
       ) : (
@@ -68,7 +66,7 @@ export default defineComponent({
         ]}
         style={[cssVarsRef.value, fileListStyle as CSSProperties]}
       >
-        {createUploadFileList(isImageCardTypeRef)}
+        {createUploadFileList()}
         {isImageCardTypeRef.value && <NUploadTrigger>{slots}</NUploadTrigger>}
       </div>
     )
