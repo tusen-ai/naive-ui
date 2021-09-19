@@ -362,6 +362,21 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
+    function doUpdateIndeterminateKeys (
+      value: string | number | Array<string | number> | null,
+      option: TreeSelectOption | null | Array<TreeSelectOption | null>
+    ): void {
+      const {
+        onUpdateIndeterminateKeys,
+        'onUpdate:indeterminateKeys': _onUpdateIndeterminateKeys
+      } = props
+      if (onUpdateIndeterminateKeys) {
+        call(onUpdateIndeterminateKeys as OnUpdateValueImpl, value, option)
+      }
+      if (_onUpdateIndeterminateKeys) {
+        call(_onUpdateIndeterminateKeys as OnUpdateValueImpl, value, option)
+      }
+    }
     function doUpdateExpandedKeys (keys: Key[]): void {
       const {
         onUpdateExpandedKeys,
@@ -453,6 +468,11 @@ export default defineComponent({
           focusSelectionInput()
           patternRef.value = ''
         }
+      }
+    }
+    function handleUpdateIndeterminateKeys (keys: Key[]): void {
+      if (props.checkable && props.multiple) {
+        doUpdateIndeterminateKeys(keys, getOptionsByKeys(keys))
       }
     }
     function handleTriggerFocus (e: FocusEvent): void {
@@ -635,6 +655,7 @@ export default defineComponent({
       handleMenuClickoutside,
       handleUpdateSelectedKeys,
       handleUpdateCheckedKeys,
+      handleUpdateIndeterminateKeys,
       handleTriggerFocus,
       handleTriggerBlur,
       handleMenuFocusin,
@@ -781,6 +802,9 @@ export default defineComponent({
                                   internalCheckboxFocusable={false}
                                   onUpdateCheckedKeys={
                                     this.handleUpdateCheckedKeys
+                                  }
+                                  onUpdateIndeterminateKeys={
+                                    this.handleUpdateIndeterminateKeys
                                   }
                                   onUpdateExpandedKeys={
                                     this.doUpdateExpandedKeys

@@ -99,6 +99,13 @@ export const treeSharedProps = {
     type: Array as PropType<Key[]>,
     default: () => []
   },
+  indeterminateKeys: Array as PropType<Key[]>,
+  onUpdateIndeterminateKeys: [Function, Array] as PropType<
+  MaybeArray<(value: Key[]) => void>
+  >,
+  'onUpdate:indeterminateKeys': [Function, Array] as PropType<
+  MaybeArray<(value: Key[]) => void>
+  >,
   onUpdateExpandedKeys: [Function, Array] as PropType<
   MaybeArray<(value: Key[]) => void>
   >,
@@ -275,6 +282,8 @@ export default defineComponent({
       return checkedStatusRef.value.checkedKeys
     })
     const displayedIndeterminateKeysRef = computed(() => {
+      const { indeterminateKeys } = props
+      if (indeterminateKeys !== undefined) return indeterminateKeys
       return checkedStatusRef.value.indeterminateKeys
     })
     const uncontrolledSelectedKeysRef = ref(
@@ -511,6 +520,15 @@ export default defineComponent({
       if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, value)
       if (_onUpdateCheckedKeys) call(_onUpdateCheckedKeys, value)
     }
+    function doUpdateIndeterminateKeys (value: Key[]): void {
+      const {
+        'onUpdate:indeterminateKeys': _onUpdateIndeterminateKeys,
+        onUpdateIndeterminateKeys
+      } = props
+      uncontrolledCheckedKeysRef.value = value
+      if (_onUpdateIndeterminateKeys) call(_onUpdateIndeterminateKeys, value)
+      if (onUpdateIndeterminateKeys) call(onUpdateIndeterminateKeys, value)
+    }
     function doUpdateSelectedKeys (value: Key[]): void {
       const {
         'onUpdate:selectedKeys': _onUpdateSelectedKeys,
@@ -571,7 +589,7 @@ export default defineComponent({
       if (props.disabled || node.disabled) {
         return
       }
-      const { checkedKeys } = dataTreeMateRef.value![
+      const { checkedKeys, indeterminateKeys } = dataTreeMateRef.value![
         checked ? 'check' : 'uncheck'
       ](node.key, displayedCheckedKeysRef.value, {
         cascade: props.cascade,
@@ -579,6 +597,7 @@ export default defineComponent({
         checkStrategy: mergedCheckStrategyRef.value
       })
       doUpdateCheckedKeys(checkedKeys)
+      doUpdateIndeterminateKeys(indeterminateKeys)
     }
     function toggleExpand (key: Key): void {
       if (props.disabled) return

@@ -31,6 +31,7 @@ debug
 | default-expanded-keys | `Array<string \| number>` | `[]` | Expanded keys by default. |
 | disabled | `boolean` | `false` | Whether to disable the tree select. |
 | expanded-keys | `Array<string \| number>` | `undefined` | Expanded keys. |
+| indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |
 | filterable | `boolean` | `false` | Whether the tree select is disabled. |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | Filter function. |
 | key-field | `string` | `'key'` | The key field in `TreeSelectOption`. |
@@ -45,8 +46,9 @@ debug
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | Selected key (or keys when multiple). |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scroll. |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Callback on blur. |
-| on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | Callback on expanded keys updated. |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Callback on focus. |
+| on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | Callback on expanded keys updated. |
+| on-update:indeterminate-keys | `(keys: Array<string \| number>) => void` | `undefined` | Callback function when node indeterminate options change. |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>) => void` | `undefined` | Callback on value updated. |
 
 ### TreeSelectOption Properties

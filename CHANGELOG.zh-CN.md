@@ -14,6 +14,10 @@
 - `n-spin` 新增 `description` prop 和 slot
 - `n-anchor` 新增 `variant` 属性
 - `n-upload` 新增 `abstract` 属性，新增 `n-upload-trigger` 和 `n-upload-file-list` 组件，关闭 [#1102](https://github.com/TuSimple/naive-ui/issues/1102)
+- `n-tree` 新增 `indeterminate-keys` 属性
+- `n-tree-select` 新增 `indeterminate-keys` 属性
+- `n-tree` 新增 `on-update:indeterminate-keys` 属性
+- `n-tree-select` 新增 `on-update:indeterminate-keys` 属性
 
 ### Fixes
 

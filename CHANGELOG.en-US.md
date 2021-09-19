@@ -14,6 +14,10 @@
 - `n-spin` add `description` prop and slot.
 - `n-anchor` add `variant` prop.
 - `n-upload` add `abstract` prop, add `n-upload-trigger` 和 `n-upload-file-list` component, closes [#1102](https://github.com/TuSimple/naive-ui/issues/1102).
+- `n-tree` add `indeterminate-keys` prop.
+- `n-tree-select` add `indeterminate-keys` prop.
+- `n-tree` add `on-update:indeterminate-keys` prop.
+- `n-tree-select` add `on-update:indeterminate-keys` prop.
 
 ### Fixes
 
