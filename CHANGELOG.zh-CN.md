@@ -12,7 +12,7 @@
 - `n-menu` 添加 `accordion` 属性，关闭 [#917](https://github.com/TuSimple/naive-ui/issues/917)
 - `n-input-number` 新增 `readonly` 属性，关闭 [#1198](https://github.com/TuSimple/naive-ui/issues/1198)
 - `n-spin` 新增 `description` prop 和 slot
-- `n-anchor` 新增 `variant` 属性
+- `n-anchor` 新增 `type` 属性
 - `n-upload` 新增 `abstract` 属性，新增 `n-upload-trigger` 和 `n-upload-file-list` 组件，关闭 [#1102](https://github.com/TuSimple/naive-ui/issues/1102)
 - `n-tree` 新增 `indeterminate-keys` 属性
 - `n-tree-select` 新增 `indeterminate-keys` 属性

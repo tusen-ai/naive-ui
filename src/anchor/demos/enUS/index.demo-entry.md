@@ -23,7 +23,7 @@ scrollto
 | offset-target | `string \| HTMLElement \| Window \| Document \| (() => HTMLElement)` | `document` | The element or selector used to calc offset of link elements. If you are not scrolling the entire document but only a part of it, you may need to set this. |
 | show-rail | `boolean` | `true` | Whether to show the sider rail. |
 | show-background | `boolean` | `true` | Whether to show background of links. |
-| variant | `'rail' \| 'block'` | `'rail'` | The variant to use. |
+| type | `'rail' \| 'block'` | `'rail'` | The type to use. |
 
 ## Methods
 

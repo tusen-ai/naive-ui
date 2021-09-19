@@ -12,7 +12,7 @@
 - `n-menu` add `accordion` prop , closes [#917](https://github.com/TuSimple/naive-ui/issues/917).
 - `n-input-number` add `readonly` prop , closes [#1198](https://github.com/TuSimple/naive-ui/issues/1198).
 - `n-spin` add `description` prop and slot.
-- `n-anchor` add `variant` prop.
+- `n-anchor` add `type` prop.
 - `n-upload` add `abstract` prop, add `n-upload-trigger` 和 `n-upload-file-list` component, closes [#1102](https://github.com/TuSimple/naive-ui/issues/1102).
 - `n-tree` add `indeterminate-keys` prop.
 - `n-tree-select` add `indeterminate-keys` prop.

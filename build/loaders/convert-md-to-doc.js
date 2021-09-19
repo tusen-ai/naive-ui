@@ -49,7 +49,7 @@ function genAnchorTemplate (children, options = {}) {
   return `
     <n-anchor
       :bound="16"
-      variant="block"
+      type="block"
       style="width: 128px; position: sticky; top: 32px;"
       offset-target="#doc-layout"
       :ignore-gap="${options.ignoreGap}"

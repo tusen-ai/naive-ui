@@ -24,7 +24,7 @@ export interface BaseAnchorInst {
 }
 
 export const baseAnchorProps = {
-  variant: {
+  type: {
     type: String as PropType<'block' | 'rail'>,
     default: 'rail'
   },
@@ -64,11 +64,11 @@ export default defineComponent({
     const slotRef = ref<HTMLElement | null>(null)
     const barRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
-    const isBlockVariantRef = computed(() => {
-      return props.variant === 'block'
+    const isBlockTypeRef = computed(() => {
+      return props.type === 'block'
     })
     const mergedShowRailRef = computed(() => {
-      return !isBlockVariantRef.value && props.showRail
+      return !isBlockTypeRef.value && props.showRail
     })
     function disableTransitionOneTick (): void {
       const { value: barEl } = barRef
@@ -236,7 +236,7 @@ export default defineComponent({
     watch(activeHrefRef, (value) => {
       if (value === null) {
         const { value: slotEl } = slotRef
-        if (slotEl && !isBlockVariantRef.value) {
+        if (slotEl && !isBlockTypeRef.value) {
           slotEl.style.maxWidth = '0'
         }
       }
@@ -247,7 +247,7 @@ export default defineComponent({
       slotRef,
       setActiveHref,
       activeHref: activeHrefRef,
-      isBlockType: isBlockVariantRef,
+      isBlockType: isBlockTypeRef,
       mergedShowRail: mergedShowRailRef
     }
   },
