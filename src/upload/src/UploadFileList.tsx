@@ -1,12 +1,4 @@
-import {
-  h,
-  defineComponent,
-  inject,
-  VNode,
-  CSSProperties,
-  computed,
-  ComputedRef
-} from 'vue'
+import { h, defineComponent, inject, VNode, CSSProperties, computed } from 'vue'
 import { throwError } from '../../_utils'
 import { uploadInjectionKey } from './interface'
 import NUploadFile from './UploadFile'
