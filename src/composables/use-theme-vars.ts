@@ -8,13 +8,14 @@ export function useThemeVars (): ComputedRef<ThemeCommonVars> {
     const configProviderInjection = inject(configProviderInjectionKey, null)
     if (configProviderInjection === null) return commonLight
     const {
-      mergedThemeRef: { value: mergedTheme }
+      mergedThemeRef: { value: mergedTheme },
+      mergedThemeOverridesRef: { value: mergedThemeOverrides }
     } = configProviderInjection
-    if (mergedTheme) {
-      const { common } = mergedTheme
-      return common || commonLight
+    const currentThemeVars = mergedTheme?.common || commonLight
+    if (mergedThemeOverrides?.common) {
+      return Object.assign({}, currentThemeVars, mergedThemeOverrides.common)
     } else {
-      return commonLight
+      return currentThemeVars
     }
   })
 }
