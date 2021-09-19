@@ -171,7 +171,7 @@ const derived = {
 
   inputColor: neutral(base.alphaInput),
   codeColor: 'rgb(244, 244, 248)',
-  tabColor: 'rgb(250, 250, 252)',
+  tabColor: 'rgb(247, 247, 250)',
   actionColor: 'rgb(250, 250, 252)',
   tableHeaderColor: 'rgb(250, 250, 252)',
 

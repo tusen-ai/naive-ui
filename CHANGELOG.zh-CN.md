@@ -18,6 +18,7 @@
 - `n-tree-select` 新增 `indeterminate-keys` 属性
 - `n-tree` 新增 `on-update:indeterminate-keys` 属性
 - `n-tree-select` 新增 `on-update:indeterminate-keys` 属性
+- `n-tabs` `type` 属性新增 `'segment'` 选项，关闭 [#1133](https://github.com/TuSimple/naive-ui/issues/1133)
 
 ### Fixes
 
