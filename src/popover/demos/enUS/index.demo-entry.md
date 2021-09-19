@@ -47,7 +47,7 @@ header
 | on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when clickoutside. |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback on show status changes. |
 
-## Popover Slots
+### Popover Slots
 
 | Name    | Parameters | Description                                     |
 | ------- | ---------- | ----------------------------------------------- |
@@ -55,7 +55,7 @@ header
 | header  | `()`       | The header content of the popover.              |
 | default | `()`       | The content inside popover.                     |
 
-## Popover Methods
+### Popover Methods
 
 | Name         | Parameters        | Description                           |
 | ------------ | ----------------- | ------------------------------------- |
