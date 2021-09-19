@@ -31,10 +31,19 @@ describe('n-upload', () => {
 
   it('should work with `disabled` prop', async () => {
     const wrapper = mount(NUpload)
-    expect(wrapper.find('.n-upload--disabled').exists()).not.toBe(true)
-
+    const disabledClasses = [
+      'n-upload-trigger--disabled',
+      'n-upload-file-list--disabled'
+    ]
+    for (const disabledClass of disabledClasses) {
+      expect(wrapper.find(disabledClass).exists()).not.toBe(true)
+    }
     await wrapper.setProps({ disabled: true })
-    expect(wrapper.find('.n-upload').classes()).toContain('n-upload--disabled')
+    for (const disabledClass of disabledClasses) {
+      expect(
+        wrapper.find('.' + disabledClass.split('--')[0]).classes()
+      ).toContain(disabledClass)
+    }
   })
 
   it('should work with `on-before-upload` prop', async () => {
@@ -347,7 +356,7 @@ describe('n-upload-trigger', () => {
         default: () => h(NButton, null, { default: () => 'button1' })
       }
     })
-    const triggerItem = wrapper.find('.n-upload__trigger')
+    const triggerItem = wrapper.find('.n-upload-trigger')
     await triggerItem.trigger('click')
     await triggerItem.trigger('drop')
 

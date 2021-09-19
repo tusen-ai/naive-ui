@@ -1,29 +1,25 @@
-# No Wrapper DOM
+# Split Trigger and List
 
-`n-upload` set `abstract`.
+Set `abstract` on `n-upload`.
 
 `n-upload-trigger` and `n-upload-file-list` need to be called from within `n-upload`.
 
 ```html
-<div>
-  <n-upload
-    abstract
-    :default-file-list="fileList"
-    action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-  >
-    <n-button-group>
-      <n-button> Eat </n-button>
-      <n-button> Sleep </n-button>
-      <n-upload-trigger #="{handleClick}">
-        <n-button @click="handleClick">Upload</n-button>
-      </n-upload-trigger>
-    </n-button-group>
-
-    <n-card style="margin-top: 12px;" title="File List">
-      <n-upload-file-list />
-    </n-card>
-  </n-upload>
-</div>
+<n-upload
+  abstract
+  :default-file-list="fileList"
+  action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+>
+  <n-button-group>
+    <n-button>Useless</n-button>
+    <n-upload-trigger #="{handleClick}" abstract>
+      <n-button @click="handleClick">Upload</n-button>
+    </n-upload-trigger>
+  </n-button-group>
+  <n-card style="margin-top: 12px;" title="File List">
+    <n-upload-file-list />
+  </n-card>
+</n-upload>
 ```
 
 ```js

@@ -5,7 +5,6 @@
 ### Breaking Changes
 
 - `n-layout-sider` 的 `arrow-circle` 类型触发按钮采用了新样式
-- `n-upload` 新增 `abstract` 属性，新增 `n-upload-trigger` 和 `n-upload-file-list` 组件，关闭 [#1102](https://github.com/TuSimple/naive-ui/issues/1102)
 
 ### Feats
 
@@ -14,6 +13,7 @@
 - `n-input-number` 新增 `readonly` 属性，关闭 [#1198](https://github.com/TuSimple/naive-ui/issues/1198)
 - `n-spin` 新增 `description` prop 和 slot
 - `n-anchor` 新增 `variant` 属性
+- `n-upload` 新增 `abstract` 属性，新增 `n-upload-trigger` 和 `n-upload-file-list` 组件，关闭 [#1102](https://github.com/TuSimple/naive-ui/issues/1102)
 
 ### Fixes
 

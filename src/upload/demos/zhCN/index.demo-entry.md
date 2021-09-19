@@ -23,7 +23,7 @@ abstract
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| abstract | `boolean` | `false` | 是否不存在 DOM 包裹 |
+| abstract | `boolean` | `false` | 是否不存在 DOM 包裹，不支持 `image-card` 类型的 Upload |
 | accept | `string` | `undefined` | 接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a> |
 | action | `string` | `undefined` | 请求提交的地址 |
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | 自定义文件缩略图 |
@@ -62,6 +62,12 @@ abstract
 | thumbnailUrl? | `string \| null` | 缩略图 URL |
 | type? | `string \| null` | MIME 类型 |
 | url? | `string \| null` | 文件下载 URL |
+
+### UploadTrigger Props
+
+| 名称     | 类型      | 默认值  | 说明                |
+| -------- | --------- | ------- | ------------------- |
+| abstract | `boolean` | `false` | 是否不存在 DOM 包裹 |
 
 ### Upload Methods
 

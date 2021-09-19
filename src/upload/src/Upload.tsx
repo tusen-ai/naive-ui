@@ -7,7 +7,6 @@ import {
   ref,
   PropType,
   CSSProperties,
-  renderSlot,
   Fragment,
   Teleport,
   nextTick
@@ -18,7 +17,6 @@ import { useConfig, useTheme, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   ExtractPublicPropTypes,
-  getFirstSlotVNode,
   warn,
   MaybeArray,
   call,
@@ -501,7 +499,8 @@ export default defineComponent({
       openFileDialog,
       draggerInsideRef,
       handleFileAddition,
-      fileListStyle: props.fileListStyle,
+      mergedDisabledRef,
+      fileListStyleRef: toRef(props, 'fileListStyle'),
       abstractRef: toRef(props, 'abstract'),
       cssVarsRef
     })
@@ -509,7 +508,6 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       draggerInsideRef,
       inputElRef,
-      mergedDisabled: mergedDisabledRef,
       mergedTheme: themeRef,
       dragOver: dragOverRef,
       handleFileInputChange,
@@ -519,53 +517,44 @@ export default defineComponent({
   },
   render () {
     const { draggerInsideRef, mergedClsPrefix, $slots } = this
+
     if ($slots.default && !this.abstract) {
-      const firstChild = getFirstSlotVNode($slots, 'default')
-      // @ts-expect-error
-      if (firstChild?.type?.[uploadDraggerKey]) {
+      const firstChild = $slots.default()[0]
+      if ((firstChild as any)?.type?.[uploadDraggerKey]) {
         draggerInsideRef.value = true
       }
     }
 
+    const inputNode = (
+      <input
+        ref="inputElRef"
+        type="file"
+        class={`${mergedClsPrefix}-upload-file-input`}
+        accept={this.accept}
+        multiple={this.multiple}
+        onChange={this.handleFileInputChange}
+      />
+    )
+
     return this.abstract ? (
       <>
-        {renderSlot(this.$slots, 'default')}
-        <Teleport to="body">
-          <input
-            ref="inputElRef"
-            type="file"
-            class={`${mergedClsPrefix}-upload__file-input`}
-            accept={this.accept}
-            multiple={this.multiple}
-            onChange={this.handleFileInputChange}
-          />
-        </Teleport>
+        {$slots.default?.()}
+        <Teleport to="body">{inputNode}</Teleport>
       </>
     ) : (
       <div
         class={[
           `${mergedClsPrefix}-upload`,
-          {
-            [`${mergedClsPrefix}-upload--dragger-inside`]:
-              draggerInsideRef.value,
-            [`${mergedClsPrefix}-upload--drag-over`]: this.dragOver,
-            [`${mergedClsPrefix}-upload--disabled`]: this.mergedDisabled
-          }
+          draggerInsideRef.value && `${mergedClsPrefix}-upload--dragger-inside`,
+          this.dragOver && `${mergedClsPrefix}-upload--drag-over`
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <input
-          ref="inputElRef"
-          type="file"
-          class={`${mergedClsPrefix}-upload__file-input`}
-          accept={this.accept}
-          multiple={this.multiple}
-          onChange={this.handleFileInputChange}
-        />
+        {inputNode}
         {this.listType !== 'image-card' && (
-          <NUploadTrigger>{this.$slots}</NUploadTrigger>
+          <NUploadTrigger>{$slots}</NUploadTrigger>
         )}
-        {this.showFileList && <NUploadFileList>{this.$slots}</NUploadFileList>}
+        {this.showFileList && <NUploadFileList>{$slots}</NUploadFileList>}
       </div>
     )
   }

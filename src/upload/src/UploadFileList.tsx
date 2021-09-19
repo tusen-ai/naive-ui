@@ -21,14 +21,16 @@ export default defineComponent({
       mergedClsPrefixRef,
       listTypeRef,
       mergedFileListRef,
-      fileListStyle,
-      cssVarsRef
+      fileListStyleRef,
+      cssVarsRef,
+      mergedDisabledRef
     } = NUpload
+
     const isImageCardTypeRef = computed(
       () => listTypeRef.value === 'image-card'
     )
 
-    const createFileList = (): VNode[] =>
+    const renderFileList = (): VNode[] =>
       mergedFileListRef.value.map((file) => (
         <NUploadFile
           clsPrefix={mergedClsPrefixRef.value}
@@ -38,29 +40,34 @@ export default defineComponent({
         />
       ))
 
-    const createUploadFileList = (): VNode =>
+    const renderUploadFileList = (): VNode =>
       isImageCardTypeRef.value ? (
-        <NImageGroup>{{ default: createFileList }}</NImageGroup>
+        <NImageGroup>{{ default: renderFileList }}</NImageGroup>
       ) : (
         <NFadeInExpandTransition group>
           {{
-            default: createFileList
+            default: renderFileList
           }}
         </NFadeInExpandTransition>
       )
 
-    return () => (
-      <div
-        class={[
-          `${mergedClsPrefixRef.value}-upload-file-list`,
-          isImageCardTypeRef.value &&
-            `${mergedClsPrefixRef.value}-upload-file-list--grid`
-        ]}
-        style={[cssVarsRef.value, fileListStyle as CSSProperties]}
-      >
-        {createUploadFileList()}
-        {isImageCardTypeRef.value && <NUploadTrigger>{slots}</NUploadTrigger>}
-      </div>
-    )
+    return () => {
+      const { value: mergedClsPrefix } = mergedClsPrefixRef
+      return (
+        <div
+          class={[
+            `${mergedClsPrefix}-upload-file-list`,
+            mergedDisabledRef.value &&
+              `${mergedClsPrefix}-upload-file-list--disabled`,
+            isImageCardTypeRef.value &&
+              `${mergedClsPrefix}-upload-file-list--grid`
+          ]}
+          style={[cssVarsRef.value, fileListStyleRef.value as CSSProperties]}
+        >
+          {renderUploadFileList()}
+          {isImageCardTypeRef.value && <NUploadTrigger>{slots}</NUploadTrigger>}
+        </div>
+      )
+    }
   }
 })

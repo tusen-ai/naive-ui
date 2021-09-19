@@ -1,11 +1,14 @@
-import { h, defineComponent, inject, renderSlot, computed } from 'vue'
+import { h, defineComponent, inject, computed } from 'vue'
 import { throwError } from '../../_utils'
 import { uploadInjectionKey } from './interface'
 import NUploadDragger from './UploadDragger'
 
 export default defineComponent({
   name: 'UploadTrigger',
-  setup (_, { slots }) {
+  props: {
+    abstract: Boolean
+  },
+  setup (props, { slots }) {
     const NUpload = inject(uploadInjectionKey, null)
     if (!NUpload) {
       throwError(
@@ -16,13 +19,13 @@ export default defineComponent({
 
     const {
       mergedClsPrefixRef,
+      mergedDisabledRef,
       listTypeRef,
       disabledRef,
       dragOverRef,
       openFileDialog,
       draggerInsideRef,
-      handleFileAddition,
-      abstractRef
+      handleFileAddition
     } = NUpload
 
     const isImageCardTypeRef = computed(
@@ -56,9 +59,10 @@ export default defineComponent({
       dragOverRef.value = false
     }
 
-    return () =>
-      abstractRef.value ? (
-        renderSlot(slots, 'default', {
+    return () => {
+      const { value: mergedClsPrefix } = mergedClsPrefixRef
+      return props.abstract ? (
+        slots.default?.({
           handleClick: handleTriggerClick,
           handleDrop: handleTriggerDrop,
           handleDragOver: handleTriggerDragOver,
@@ -68,9 +72,11 @@ export default defineComponent({
       ) : (
         <div
           class={[
-            `${mergedClsPrefixRef.value}-upload__trigger`,
+            `${mergedClsPrefix}-upload-trigger`,
+            mergedDisabledRef.value &&
+              `${mergedClsPrefix}-upload-trigger--disabled`,
             isImageCardTypeRef.value &&
-              `${mergedClsPrefixRef.value}-upload__trigger--image-card`
+              `${mergedClsPrefix}-upload-trigger--image-card`
           ]}
           onClick={handleTriggerClick}
           onDrop={handleTriggerDrop}
@@ -85,5 +91,6 @@ export default defineComponent({
           )}
         </div>
       )
+    }
   }
 })

@@ -23,7 +23,7 @@ abstract
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| abstract | `boolean` | `false` | Whether or not DOM wrapping does not exist. |
+| abstract | `boolean` | `false` | Whether or not DOM wrapping does not exist. Not supported for `image-card` type. |
 | accept | `string` | `undefined` | The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>. |
 | action | `string` | `undefined` | The URL to submit data to. |
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | Customize file thumbnails. |
@@ -63,6 +63,12 @@ abstract
 | thumbnailUrl? | `string \| null` | Thumbnail URL. |
 | type? | `string \| null` | MIME type. |
 | url? | `string \| null` | File URL. |
+
+### UploadTrigger Props
+
+| Name     | Type      | Default | Description                                 |
+| -------- | --------- | ------- | ------------------------------------------- |
+| abstract | `boolean` | `false` | Whether or not DOM wrapping does not exist. |
 
 ### Upload Methods
 
