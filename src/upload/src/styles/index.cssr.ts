@@ -2,49 +2,66 @@ import { c, cM, cB, cE } from '../../../_utils/cssr'
 import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expand.cssr'
 import createIconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 
-export default cB('upload', [
-  cE('file-input', `
-    display: block;
-    width: 0;
-    height: 0;
-    opacity: 0;
-  `),
-  cE('trigger', `
-    display: inline-block;
-    box-sizing: border-box;
-  `, [
-    cM('image-card', [
+export default c([
+  cB('upload', [
+    cE('trigger', `
+      display: inline-block;
+      box-sizing: border-box;
+    `, [
+      cM('image-card', [
+        cB('upload-dragger', `
+          padding: 0;
+          height: 100%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        `)
+      ])
+    ]),
+    cM('dragger-inside', [
+      cE('trigger', `
+        display: block;
+      `)
+    ]),
+    cB('upload-dragger', `
+      cursor: pointer;
+      box-sizing: border-box;
+      width: 100%;
+      text-align: center;
+      border-radius: var(--border-radius);
+      padding: 24px;
+      transition:
+        border-color .3s var(--bezier),
+        background-color .3s var(--bezier);
+      background-color: var(--dragger-color);
+      border: var(--dragger-border);
+    `, [
+      c('&:hover', `
+        border: var(--dragger-border-hover);
+      `)
+    ]),
+    cM('disabled', `
+      opacity: var(--item-disabled-opacity);
+    `, [
+      cE('trigger', `
+        cursor: not-allowed;
+      `),
+      cB('upload-file', `
+        cursor: not-allowed;
+      `),
+      cB('upload-file-list', `
+        cursor: not-allowed;
+      `),
       cB('upload-dragger', `
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        cursor: not-allowed;
+      `)
+    ]),
+    cM('drag-over', [
+      cB('upload-dragger', `
+        border: var(--dragger-border-hover);
       `)
     ])
-  ]),
-  cM('dragger-inside', [
-    cE('trigger', `
-      display: block;
-    `)
-  ]),
-  cB('upload-dragger', `
-    cursor: pointer;
-    box-sizing: border-box;
-    width: 100%;
-    text-align: center;
-    border-radius: var(--border-radius);
-    padding: 24px;
-    transition:
-      border-color .3s var(--bezier),
-      background-color .3s var(--bezier);
-    background-color: var(--dragger-color);
-    border: var(--dragger-border);
-  `, [
-    c('&:hover', `
-      border: var(--dragger-border-hover);
-    `)
   ]),
   cB('upload-file-list', `
     margin-top: 8px;
@@ -71,7 +88,7 @@ export default cB('upload', [
         })
       ]),
       c('&:hover', `
-        background-color: var(--item-color-hover);
+          background-color: var(--item-color-hover);
       `, [
         cB('upload-file-info', [
           cE('action', `
@@ -290,25 +307,10 @@ export default cB('upload', [
       ])
     ])
   ]),
-  cM('disabled', `
-    opacity: var(--item-disabled-opacity);
-  `, [
-    cE('trigger', `
-      cursor: not-allowed;
-    `),
-    cB('upload-file', `
-      cursor: not-allowed;
-    `),
-    cB('upload-file-list', `
-      cursor: not-allowed;
-    `),
-    cB('upload-dragger', `
-      cursor: not-allowed;
-    `)
-  ]),
-  cM('drag-over', [
-    cB('upload-dragger', `
-      border: var(--dragger-border-hover);
-    `)
-  ])
+  cB('upload__file-input', `
+    display: block;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  `)
 ])

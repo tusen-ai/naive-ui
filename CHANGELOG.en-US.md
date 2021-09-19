@@ -5,6 +5,7 @@
 ### Breaking Changes
 
 - `n-layout-sider`'s `arrow-circle` trigger is changed into new style.
+- `n-upload` add `abstract` prop, add `n-upload-trigger` 和 `n-upload-file-list` component, closes [#1102](https://github.com/TuSimple/naive-ui/issues/1102).
 
 ### Feats
 

@@ -1,4 +1,4 @@
-import { Ref, InjectionKey } from 'vue'
+import { Ref, InjectionKey, CSSProperties } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { UploadTheme } from '../styles'
 
@@ -70,6 +70,14 @@ export interface UploadInjection {
   showPreivewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>
   getFileThumbnailUrl: (file: FileInfo) => Promise<string>
+  listTypeRef: Ref<listType>
+  dragOverRef: Ref<boolean>
+  draggerInsideRef: { value: boolean }
+  handleFileAddition: (files: FileList | null, e?: Event) => void
+  fileListStyle: string | CSSProperties | undefined
+  openFileDialog: () => void
+  abstractRef: Ref<boolean>
+  cssVarsRef: Ref<CSSProperties>
 }
 
 export const uploadInjectionKey: InjectionKey<UploadInjection> =
