@@ -25,6 +25,8 @@ preset-confirm-slot
 | preset | `'card' \| 'confirm'` | `undefined` | The preset of `n-modal`. |
 | show | `boolean` | `false` | Whether to show modal. |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback when modal's display status is changed. |
+| on-after-enter | `() => void` | `undefined` | Callback after modal is opened. |
+| on-after-leave | `() => void` | `undefined` | Callback after modal is closed. |
 
 ### Modal with Preset Card
 
