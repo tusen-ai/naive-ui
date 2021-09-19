@@ -31,6 +31,7 @@ debug
 | default-expanded-keys | `Array<string \| number>` | `[]` | 默认展开节点的 key |
 | disabled | `boolean` | `false` | 是否禁用 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 展开节点的 key |
+| indeterminate-keys | `string \| number` | `undefined` | 部分选中选项的 key |
 | filterable | `boolean` | `false` | 是否可过滤 |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | 过滤器函数 |
 | key-field | `string` | `'key'` | 替代 `TreeSelectOption` 中的 key 字段名 |
@@ -46,8 +47,9 @@ debug
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | 选中的 key |
 | virtual-scroll | `boolean` | `true` | 是否开启虚拟滚动 |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Blur 时的回调 |
-| on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | 展开节点更新的回调 |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Focus 时的回调 |
+| on-update:expanded-keys | `(value: Array<string \| number>) => void` | `undefined` | 展开节点更新的回调 |
+| on-update:indeterminate-keys | `(keys: Array<string \| number>) => void` | `undefined` | 节点部分勾选项发生变化时的回调函数 |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: TreeSelectOption \| null \| Array<TreeSelectOption \| null>) => void` | `undefined` | 更新值的回调 |
 
 ### TreeSelectOption Properties

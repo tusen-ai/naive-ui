@@ -10,9 +10,12 @@ export const self = (vars: ThemeCommonVars) => {
     heightMedium,
     heightLarge,
     heightHuge,
-    primaryColor
+    primaryColor,
+    fontSize
   } = vars
   return {
+    fontSize,
+    textColor: primaryColor,
     sizeTiny: heightTiny,
     sizeSmall: heightSmall,
     sizeMedium: heightMedium,

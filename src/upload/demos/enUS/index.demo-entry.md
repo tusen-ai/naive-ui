@@ -14,6 +14,7 @@ default-files
 before-upload
 image-style
 image-card-style
+abstract
 ```
 
 ## API
@@ -22,6 +23,7 @@ image-card-style
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| abstract | `boolean` | `false` | Whether or not DOM wrapping does not exist. Not supported for `image-card` type. |
 | accept | `string` | `undefined` | The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>. |
 | action | `string` | `undefined` | The URL to submit data to. |
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | Customize file thumbnails. |
@@ -62,6 +64,12 @@ image-card-style
 | type? | `string \| null` | MIME type. |
 | url? | `string \| null` | File URL. |
 
+### UploadTrigger Props
+
+| Name     | Type      | Default | Description                                 |
+| -------- | --------- | ------- | ------------------------------------------- |
+| abstract | `boolean` | `false` | Whether or not DOM wrapping does not exist. |
+
 ### Upload Methods
 
 | Name | Type | Description |
@@ -80,3 +88,9 @@ image-card-style
 | Name | Parameters | Description |
 | --- | --- | --- |
 | default | `()` | The content of the upload dragger, use can refer to [Drag to Upload](#drag). |
+
+### UploadTrigger Slots
+
+| 名称 | 参数 | 说明 |
+| --- | --- | --- |
+| default | `(options: { handleClick: () => void, handleDragOver: (e: DragEvent) => void, handleDragEnter: (e: DragEvent) => void, handleDragLeave: (e: DragEvent) => void, handleDrop: (e: DragEvent) => void})` | `handleClick` is the click upload function, `handleDrop` is the drag and drop upload function, `handleDragEnter`, `handleDragOver` and `handleDragLeave` are the drag and drop event functions. |

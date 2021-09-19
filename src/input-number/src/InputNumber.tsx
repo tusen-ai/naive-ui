@@ -42,6 +42,7 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  readonly: Boolean,
   clearable: Boolean,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -95,10 +96,12 @@ export default defineComponent({
     )
     const displayedValueRef = ref('')
     const getMaxPrecision = (currentValue: number): number => {
-      const precisions = [props.min, props.max, props.step, currentValue].map((item) => {
-        const fraction = String(item).split('.')[1]
-        return fraction ? fraction.length : 0
-      })
+      const precisions = [props.min, props.max, props.step, currentValue].map(
+        (item) => {
+          const fraction = String(item).split('.')[1]
+          return fraction ? fraction.length : 0
+        }
+      )
       return Math.max(...precisions)
     }
     const mergedPlaceholderRef = useMemo(() => {
@@ -385,6 +388,7 @@ export default defineComponent({
           size={this.mergedSize}
           placeholder={this.mergedPlaceholder}
           disabled={this.mergedDisabled}
+          readonly={this.readonly as any}
           textDecoration={
             this.displayedValueInvalid ? 'line-through' : undefined
           }
@@ -407,7 +411,9 @@ export default defineComponent({
                   ),
                   <NButton
                     text
-                    disabled={!this.minusable || this.mergedDisabled}
+                    disabled={
+                      !this.minusable || this.mergedDisabled || this.readonly
+                    }
                     focusable={false}
                     builtinThemeOverrides={this.buttonThemeOverrides}
                     onClick={this.handleMinusClick}
@@ -425,7 +431,9 @@ export default defineComponent({
                   </NButton>,
                   <NButton
                     text
-                    disabled={!this.addable || this.mergedDisabled}
+                    disabled={
+                      !this.addable || this.mergedDisabled || this.readonly
+                    }
                     focusable={false}
                     builtinThemeOverrides={this.buttonThemeOverrides}
                     onClick={this.handleAddClick}

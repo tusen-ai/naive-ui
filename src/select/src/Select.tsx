@@ -494,7 +494,6 @@ export default defineComponent({
           changedValue.push(option.value)
           patternRef.value = ''
         }
-        focusSelectionInput()
         doUpdateValue(changedValue, getMergedOptions(changedValue))
       } else {
         if (tag && !remote) {

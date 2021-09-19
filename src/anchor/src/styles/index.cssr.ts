@@ -12,17 +12,48 @@ import { c, cE, cB, cM, cNotM } from '../../../_utils/cssr'
 // --rail-color-active
 // --rail-width
 // --link-padding
+// --link-border-radius
 export default cB('anchor', `
-  padding-left: var(--rail-width);
   position: relative;
 `, [
+  cNotM('block', `
+    padding-left: var(--rail-width);
+  `, [
+    cB('anchor-link', [
+      c('+, >', [
+        cB('anchor-link', `
+          margin-top: .5em;
+        `)
+      ])
+    ]),
+    cB('anchor-link-background', `
+      max-width: 0;
+      border-top-right-radius: 10.5px;
+      border-bottom-right-radius: 10.5px;
+    `),
+    cNotM('show-rail', [
+      c('>', [
+        cB('anchor-link', 'padding-left: 0;')
+      ])
+    ])
+  ]),
+  cM('block', [
+    cB('anchor-link', `
+      margin-bottom: 4px;
+      padding: 2px 8px;
+      transition: background-color .3s var(--bezier);
+      background-color: transparent;
+      border-radius: var(--link-border-radius);
+    `, [
+      cM('active', `
+        background-color: var(--link-color);
+      `)
+    ])
+  ]),
   cB('anchor-link-background', `
     position: absolute;
     left: calc(var(--rail-width) / 2);
     width: 100%;
-    max-width: 0;
-    border-top-right-radius: 10.5px;
-    border-bottom-right-radius: 10.5px;
     background-color: var(--link-color);
     transition:
       top .15s var(--bezier),
@@ -55,13 +86,6 @@ export default cB('anchor', `
       })
     ])
   ]),
-  cNotM('show-rail', [
-    c('>', [
-      cB('anchor-link', {
-        paddingLeft: 0
-      })
-    ])
-  ]),
   cB('anchor-link', `
     padding: var(--link-padding);
     position: relative;
@@ -71,9 +95,19 @@ export default cB('anchor', `
     display: flex;
     flex-direction: column;
   `, [
-    c('+, >', [
-      cB('anchor-link', `
-        margin-top: .5em;
+    cM('active', [
+      cE('title', `
+        color: var(--link-text-color-active);
+      `)
+    ]),
+    c('&:hover, &:focus', [
+      cE('title', `
+        color: var(--link-text-color-hover);
+      `)
+    ]),
+    c('&:active', [
+      cE('title', `
+        color: var(--link-text-color-pressed);
       `)
     ]),
     cE('title', `
@@ -88,16 +122,6 @@ export default cB('anchor', `
       padding-right: 16px;
       transition: color .3s var(--bezier);
       color: var(--link-text-color);
-    `, [
-      c('&:hover, &:focus', {
-        color: 'var(--link-text-color-hover)'
-      }),
-      c('&:active', {
-        color: 'var(--link-text-color-pressed)'
-      }),
-      cM('active', {
-        color: 'var(--link-text-color-active)'
-      })
-    ])
+    `)
   ])
 ])

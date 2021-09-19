@@ -5,4 +5,21 @@ describe('n-back-top', () => {
   it('should work with import on demand', () => {
     mount(NBackTop)
   })
+
+  it('should work with `show` prop', async () => {
+    document.body.innerHTML = `
+      <div id="test" style="height: 3000px; width: 100%;"></div>
+    `
+
+    const wrapper = mount(NBackTop, {
+      attachTo: document.getElementById('test'),
+      props: {
+        show: true
+      }
+    })
+
+    wrapper.element.scrollTop = 1000
+    await wrapper.trigger('scroll')
+    expect(wrapper.html()).toContain('teleport start')
+  })
 })

@@ -2,17 +2,52 @@ import { c, cM, cB, cE } from '../../../_utils/cssr'
 import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expand.cssr'
 import createIconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 
-export default cB('upload', [
-  cE('file-input', `
-    display: block;
-    width: 0;
-    height: 0;
-    opacity: 0;
-  `),
-  cE('trigger', `
+export default c([
+  cB('upload', [
+    cM('dragger-inside', [
+      cE('trigger', `
+        display: block;
+      `)
+    ]),
+    cM('drag-over', [
+      cB('upload-dragger', `
+        border: var(--dragger-border-hover);
+      `)
+    ])
+  ]),
+  cB('upload-dragger', `
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    border-radius: var(--border-radius);
+    padding: 24px;
+    opacity: 1;
+    transition:
+      opacity: .3s var(--bezier),
+      border-color .3s var(--bezier),
+      background-color .3s var(--bezier);
+    background-color: var(--dragger-color);
+    border: var(--dragger-border);
+  `, [
+    c('&:hover', `
+      border: var(--dragger-border-hover);
+    `),
+    cM('disabled', `
+      opacity: var(--item-disabled-opacity);
+      cursor: not-allowed;
+    `)
+  ]),
+  cB('upload-trigger', `
     display: inline-block;
     box-sizing: border-box;
+    opacity: 1;
+    transition: opacity .3s var(--bezier);
   `, [
+    cM('disabled', `
+      opacity: var(--item-disabled-opacity);
+      cursor: not-allowed;
+    `),
     cM('image-card', [
       cB('upload-dragger', `
         padding: 0;
@@ -24,32 +59,18 @@ export default cB('upload', [
       `)
     ])
   ]),
-  cM('dragger-inside', [
-    cE('trigger', `
-      display: block;
-    `)
-  ]),
-  cB('upload-dragger', `
-    cursor: pointer;
-    box-sizing: border-box;
-    width: 100%;
-    text-align: center;
-    border-radius: var(--border-radius);
-    padding: 24px;
-    transition:
-      border-color .3s var(--bezier),
-      background-color .3s var(--bezier);
-    background-color: var(--dragger-color);
-    border: var(--dragger-border);
-  `, [
-    c('&:hover', `
-      border: var(--dragger-border-hover);
-    `)
-  ]),
   cB('upload-file-list', `
     margin-top: 8px;
     line-height: var(--line-height);
+    opacity: 1;
+    transition: opacity .3s var(--bezier);
   `, [
+    cM('disabled', `
+      opacity: var(--item-disabled-opacity);
+      cursor: not-allowed;
+    `, [
+      cB('upload-file', 'cursor: not-allowed;')
+    ]),
     cM('grid', `
       display: grid;
       grid-template-columns: repeat(auto-fill, 96px);
@@ -290,25 +311,10 @@ export default cB('upload', [
       ])
     ])
   ]),
-  cM('disabled', `
-    opacity: var(--item-disabled-opacity);
-  `, [
-    cE('trigger', `
-      cursor: not-allowed;
-    `),
-    cB('upload-file', `
-      cursor: not-allowed;
-    `),
-    cB('upload-file-list', `
-      cursor: not-allowed;
-    `),
-    cB('upload-dragger', `
-      cursor: not-allowed;
-    `)
-  ]),
-  cM('drag-over', [
-    cB('upload-dragger', `
-      border: var(--dragger-border-hover);
-    `)
-  ])
+  cB('upload-file-input', `
+    display: block;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  `)
 ])

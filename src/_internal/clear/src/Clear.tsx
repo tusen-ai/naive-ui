@@ -12,10 +12,7 @@ export default defineComponent({
       type: String,
       required: true
     },
-    show: {
-      type: Boolean,
-      default: false
-    },
+    show: Boolean,
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {

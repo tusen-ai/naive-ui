@@ -103,7 +103,7 @@ export default cB('base-select-menu', `
       `)
     ]),
     cE('check', `
-      font-size: 14px;
+      font-size: 16px;
       position: absolute;
       right: 8px;
       top: calc(50% - 7px);
@@ -113,12 +113,11 @@ export default cB('base-select-menu', `
       fadeInScaleUpTransition({
         enterScale: '0.5'
       })
+    ]),
+    cM('multiple', [
+      cB('base-select-option', `
+        padding-right: 28px;
+      `)
     ])
-  ]),
-  cM('multiple', [
-    cB('base-select-option', `
-      position: relative;
-      padding-right: 28px;
-    `)
   ])
 ])

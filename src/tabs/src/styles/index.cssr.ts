@@ -20,12 +20,47 @@ import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
 // --tab-gap
 // --tab-padding
 // --pane-padding
+// --color-segment
+// --font-weight-strong
+// --tab-color-segment
 export default cB('tabs', `
   width: 100%;
   transition:
     background-color .3s var(--bezier),
     border-color .3s var(--bezier);
 `, [
+  cB('tabs-rail', `
+    padding: 3px;
+    border-radius: var(--tab-border-radius);
+    width: 100%;
+    background-color: var(--color-segment);
+    transition: background-color .3s var(--bezier);
+    display: flex;
+    align-items: center;
+  `, [
+    cB('tabs-tab-wrapper', `
+      flex-basis: 0;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    `, [
+      cB('tabs-tab', `
+        overflow: hidden;
+        border-radius: var(--tab-border-radius);
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `, [
+        cM('active', `
+          font-weight: var(--font-weight-strong);
+          background-color: var(--tab-color-segment);
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
+        `)
+      ])
+    ])
+  ]),
   cM('flex', [
     cB('tabs-nav', {
       width: '100%'
@@ -67,25 +102,21 @@ export default cB('tabs', `
         box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, .12);
       `)
     ]),
-    c('&::before', `
+    c('&::before, &::after', `
       transition: box-shadow .3s var(--bezier);
       pointer-events: none;
       content: "";
       position: absolute;
-      left: 0;
       top: 0;
       bottom: 0;
       width: 20px;
+      z-index: 1;
+    `),
+    c('&::before', `
+      left: 0;
     `),
     c('&::after', `
-      transition: box-shadow .3s var(--bezier);
-      pointer-events: none;
-      content: "";
-      position: absolute;
       right: 0;
-      top: 0;
-      bottom: 0;
-      width: 20px;
     `)
   ]),
   cB('tabs-nav-scroll-content', `
@@ -114,6 +145,7 @@ export default cB('tabs', `
     background-clip: padding-box;
     padding: var(--tab-padding);
     transition:
+      box-shadow .3s var(--bezier),
       color .3s var(--bezier),
       background-color .3s var(--bezier),
       border-color .3s var(--bezier);

@@ -29,6 +29,7 @@ import {
 // --text-color
 // --text-color-disabled
 // --arrow-color
+// --arrow-size
 // --loading-color
 // ...clear vars
 // ...form item vars
@@ -77,6 +78,7 @@ export default c([
       right: 10px;
     `, [
       cE('arrow', `
+        font-size: var(--arrow-size);
         color: var(--arrow-color);
         transition: color .3s var(--bezier);
       `)

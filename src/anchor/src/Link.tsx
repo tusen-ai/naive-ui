@@ -65,13 +65,15 @@ export default defineComponent({
     return () => {
       const { value: mergedClsPrefix } = NAnchor.mergedClsPrefix
       return (
-        <div class={`${mergedClsPrefix}-anchor-link`}>
+        <div
+          class={[
+            `${mergedClsPrefix}-anchor-link`,
+            activeRef.value && `${mergedClsPrefix}-anchor-link--active`
+          ]}
+        >
           <a
             ref={titleRef}
-            class={[
-              `${mergedClsPrefix}-anchor-link__title`,
-              activeRef.value && `${mergedClsPrefix}-anchor-link__title--active`
-            ]}
+            class={[`${mergedClsPrefix}-anchor-link__title`]}
             href={props.href}
             title={getTitleAttribute(props.title)}
             onClick={handleClick}

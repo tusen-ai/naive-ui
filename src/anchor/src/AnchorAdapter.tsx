@@ -17,10 +17,7 @@ export interface AnchorInst {
 
 const anchorProps = {
   ...(useTheme.props as ThemeProps<AnchorTheme>),
-  affix: {
-    type: Boolean,
-    default: false
-  },
+  affix: Boolean,
   ...affixProps,
   ...baseAnchorProps
 } as const
@@ -53,11 +50,13 @@ export default defineComponent({
           linkTextColorActive,
           linkFontSize,
           railWidth,
-          linkPadding
+          linkPadding,
+          borderRadius
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
       return {
+        '--link-border-radius': borderRadius,
         '--link-color': linkColor,
         '--link-font-size': linkFontSize,
         '--link-text-color': linkTextColor,

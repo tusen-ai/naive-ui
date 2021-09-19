@@ -17,8 +17,8 @@ import { VLazyTeleport } from 'vueuc'
 import { dialogProviderInjectionKey } from '../../dialog/src/DialogProvider'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, keep, call, ExtractPublicPropTypes } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
+import { keep, call, warnOnce } from '../../_utils'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { modalLight } from '../styles'
 import type { ModalTheme } from '../styles'
 import { presetProps, presetPropsKeys } from './presetProps'
@@ -51,66 +51,23 @@ const modalProps = {
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
-  // private
-  dialog: Boolean,
-  appear: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
   onBeforeLeave: Function as PropType<() => void>,
   onAfterLeave: Function as PropType<() => void>,
   onClose: Function as PropType<() => Promise<boolean> | boolean | any>,
   onPositiveClick: Function as PropType<() => Promise<boolean> | boolean | any>,
   onNegativeClick: Function as PropType<() => Promise<boolean> | boolean | any>,
   onMaskClick: Function as PropType<(e: MouseEvent) => void>,
+  // private
+  dialog: Boolean,
+  appear: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   // deprecated
-  overlayStyle: {
-    type: [String, Object] as PropType<string | CSSProperties | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'modal',
-          '`overlay-style` is deprecated, please use `style` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  },
-  onBeforeHide: {
-    type: Function as unknown as PropType<(() => void) | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'modal',
-          '`on-before-hide` is deprecated, please use `on-before-leave` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  },
-  onAfterHide: {
-    type: Function as unknown as PropType<(() => void) | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'modal',
-          '`on-after-hide` is deprecated, please use `on-after-leave` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  },
-  onHide: {
-    type: Function as unknown as PropType<((value: false) => void) | undefined>,
-    validator: () => {
-      if (__DEV__) warn('modal', '`on-hide` is deprecated.')
-      return true
-    },
-    default: undefined
-  }
+  overlayStyle: [String, Object] as PropType<string | CSSProperties>,
+  onBeforeHide: Function as PropType<() => void>,
+  onAfterHide: Function as PropType<() => void>,
+  onHide: Function as PropType<(value: false) => void>
 }
 
 export type ModalProps = ExtractPublicPropTypes<typeof modalProps>
@@ -120,6 +77,29 @@ export default defineComponent({
   inheritAttrs: false,
   props: modalProps,
   setup (props) {
+    if (__DEV__) {
+      if (props.onHide) {
+        warnOnce('modal', '`on-hide` is deprecated.')
+      }
+      if (props.onAfterHide) {
+        warnOnce(
+          'modal',
+          '`on-after-hide` is deprecated, please use `on-after-leave` instead.'
+        )
+      }
+      if (props.onBeforeHide) {
+        warnOnce(
+          'modal',
+          '`on-before-hide` is deprecated, please use `on-before-leave` instead.'
+        )
+      }
+      if (props.overlayStyle) {
+        warnOnce(
+          'modal',
+          '`overlay-style` is deprecated, please use `style` instead.'
+        )
+      }
+    }
     const containerRef = ref<HTMLElement | null>(null)
     const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
     const themeRef = useTheme(

@@ -29,10 +29,7 @@ const descriptionProps = {
     type: Number,
     default: 3
   },
-  columns: {
-    type: Number,
-    default: undefined
-  },
+  columns: Number,
   labelPlacement: {
     type: String as PropType<'left' | 'top'>,
     default: 'top'
@@ -45,10 +42,7 @@ const descriptionProps = {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
-  bordered: {
-    type: Boolean,
-    default: false
-  },
+  bordered: Boolean,
   labelStyle: [Object, String] as PropType<string | CSSProperties>,
   contentStyle: [Object, String] as PropType<string | CSSProperties>
 } as const

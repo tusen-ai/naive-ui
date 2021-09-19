@@ -34,7 +34,7 @@ batch-render
 | check-strategy | `string` | `'all'` | The strategy of setting checked callback's keys argument. `all` means setting all checked node. `parent` means setting all checked parent node of whom all child node are checked. `child` means setting all child node. |
 | checkable | `boolean` | `false` | Whether to display the selection box, you need to set `cascade` to `true`. |
 | children-field | `string` | `'children'` | The children field in `TreeOption`. |
-| checked-keys | `Array<string \| number>` | `undefined` | If set, checked status will work in controlled manner. |
+| checked-keys | `Array<string \| number>` | `undefined` | Checked keys of the tree. |
 | data | `Array<TreeOption>` | `[]` | The node data of the tree. Reset `data` will cause clearing of some uncontrolled status. If you need to modify data, you'd better make tree work in a controlled manner. |
 | default-checked-keys | `Array<string \| number>` | `[]` | Multiple options selected by default. |
 | default-expand-all | `boolean` | `false` | Expand all options. |
@@ -44,6 +44,7 @@ batch-render
 | expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter. |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |
 | filter | `(node: TreeOption) => boolean` | `undefined` | A simple string based filter. |
+| indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |
 | key-field | `string` | `'key'` | The key field in `TreeOption`. |
 | label-field | `string` | `'label'` | The label field in `TreeOption`. |
 | leaf-only | `boolean` | `false` | Whether to open or not, only the bottom tree node is optional. |
@@ -62,7 +63,8 @@ batch-render
 | on-dragleave | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | Drag a node, the callback function after the node leaves other nodes. |
 | on-dragstart | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | Callback function to start dragging a certain node. |
 | on-drop | `(data: { node: TreeOption, dragNode: TreeOption, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` | The callback function after the node completes the dragging action. |
-| on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` | Callback function when node multiple options change. |
+| on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` | Callback function when node checked options change. |
+| on-update:indeterminate-keys | `(keys: Array<string \| number>) => void` | `undefined` | Callback function when node indeterminate options change. |
 | on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function when the node expansion item changes. |
 | on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function when the selected item of the node changes. |
 

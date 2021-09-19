@@ -7,7 +7,9 @@ import {
   ref,
   PropType,
   CSSProperties,
-  VNode
+  Fragment,
+  Teleport,
+  nextTick
 } from 'vue'
 import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
@@ -15,15 +17,13 @@ import { useConfig, useTheme, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   ExtractPublicPropTypes,
-  getFirstSlotVNode,
   warn,
   MaybeArray,
-  call
+  call,
+  throwError
 } from '../../_utils'
-import { NFadeInExpandTransition } from '../../_internal'
 import { uploadLight, UploadTheme } from '../styles'
-import NUploadFile from './UploadFile'
-import NUploadDragger, { uploadDraggerKey } from './UploadDragger'
+import { uploadDraggerKey } from './UploadDragger'
 import style from './styles/index.cssr'
 import {
   XhrHandlers,
@@ -43,8 +43,8 @@ import {
   CreateThumbnailUrl
 } from './interface'
 import { createImageDataUrl } from './utils'
-import { NImageGroup } from '../../image'
-
+import NUploadTrigger from './UploadTrigger'
+import NUploadFileList from './UploadFileList'
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
  */
@@ -256,7 +256,8 @@ const uploadProps = {
     default: 'text'
   },
   onPreview: Function as PropType<OnPreview>,
-  createThumbnailUrl: Function as PropType<CreateThumbnailUrl>
+  createThumbnailUrl: Function as PropType<CreateThumbnailUrl>,
+  abstract: Boolean
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -265,6 +266,12 @@ export default defineComponent({
   name: 'Upload',
   props: uploadProps,
   setup (props) {
+    if (props.abstract && props.listType === 'image-card') {
+      throwError(
+        'upload',
+        'when the list-type is image-card, abstract is not supported.'
+      )
+    }
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Upload',
@@ -291,32 +298,6 @@ export default defineComponent({
     function openFileDialog (): void {
       inputElRef.value?.click()
     }
-    function handleTriggerClick (): void {
-      if (mergedDisabledRef.value) return
-      openFileDialog()
-    }
-    function handleTriggerDragOver (e: DragEvent): void {
-      e.preventDefault()
-      dragOverRef.value = true
-    }
-    function handleTriggerDragEnter (e: DragEvent): void {
-      e.preventDefault()
-      dragOverRef.value = true
-    }
-    function handleTriggerDragLeave (e: DragEvent): void {
-      e.preventDefault()
-      dragOverRef.value = false
-    }
-    function handleTriggerDrop (e: DragEvent): void {
-      e.preventDefault()
-      if (!draggerInsideRef.value || mergedDisabledRef.value) return
-      const dataTransfer = e.dataTransfer
-      const files = dataTransfer?.files
-      if (files) {
-        handleFileAddition(files)
-      }
-      dragOverRef.value = false
-    }
     function handleFileInputChange (e: Event): void {
       const target = e.target as HTMLInputElement
       handleFileAddition(target.files, e)
@@ -333,6 +314,7 @@ export default defineComponent({
       if (!files || files.length === 0) return
       const { onBeforeUpload } = props
       const filesAsArray = props.multiple ? Array.from(files) : [files[0]]
+
       void Promise.all(
         filesAsArray.map(async (file) => {
           const fileInfo: FileInfo = {
@@ -352,12 +334,24 @@ export default defineComponent({
               fileList: mergedFileListRef.value
             })) !== false
           ) {
-            doChange(fileInfo, e, {
-              append: true
-            })
+            return fileInfo
           }
+          return null
         })
-      ).then(() => {
+      ).then((fileInfos) => {
+        let nextTickChain = Promise.resolve()
+
+        fileInfos.forEach((fileInfo) => {
+          nextTickChain = nextTickChain
+            // eslint-disable-next-line @typescript-eslint/promise-function-async
+            .then(() => nextTick())
+            .then(() => {
+              fileInfo &&
+                doChange(fileInfo, e, {
+                  append: true
+                })
+            })
+        })
         if (props.defaultUpload) {
           submit()
         }
@@ -442,6 +436,46 @@ export default defineComponent({
         ? await createThumbnailUrl(file.file as File)
         : await createImageDataUrl(file.file as File)
     }
+    const cssVarsRef = computed(() => {
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          draggerColor,
+          draggerBorder,
+          draggerBorderHover,
+          itemColorHover,
+          itemColorHoverError,
+          itemTextColorError,
+          itemTextColorSuccess,
+          itemTextColor,
+          itemIconColor,
+          itemDisabledOpacity,
+          lineHeight,
+          borderRadius,
+          fontSize,
+          itemBorderImageCardError,
+          itemBorderImageCard
+        }
+      } = themeRef.value
+      return {
+        '--bezier': cubicBezierEaseInOut,
+        '--border-radius': borderRadius,
+        '--dragger-border': draggerBorder,
+        '--dragger-border-hover': draggerBorderHover,
+        '--dragger-color': draggerColor,
+        '--font-size': fontSize,
+        '--item-color-hover': itemColorHover,
+        '--item-color-hover-error': itemColorHoverError,
+        '--item-disabled-opacity': itemDisabledOpacity,
+        '--item-icon-color': itemIconColor,
+        '--item-text-color': itemTextColor,
+        '--item-text-color-error': itemTextColorError,
+        '--item-text-color-success': itemTextColorSuccess,
+        '--line-height': lineHeight,
+        '--item-border-image-card-error': itemBorderImageCardError,
+        '--item-border-image-card': itemBorderImageCard
+      } as any
+    })
 
     provide(uploadInjectionKey, {
       mergedClsPrefixRef,
@@ -459,147 +493,68 @@ export default defineComponent({
       doChange,
       showPreivewButtonRef: toRef(props, 'showPreivewButton'),
       onPreviewRef: toRef(props, 'onPreview'),
-      getFileThumbnailUrl
+      getFileThumbnailUrl,
+      listTypeRef: toRef(props, 'listType'),
+      dragOverRef,
+      openFileDialog,
+      draggerInsideRef,
+      handleFileAddition,
+      mergedDisabledRef,
+      fileListStyleRef: toRef(props, 'fileListStyle'),
+      abstractRef: toRef(props, 'abstract'),
+      cssVarsRef
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       draggerInsideRef,
       inputElRef,
-      mergedFileList: mergedFileListRef,
-      mergedDisabled: mergedDisabledRef,
       mergedTheme: themeRef,
       dragOver: dragOverRef,
-      handleTriggerDrop,
-      handleTriggerDragLeave,
-      handleTriggerDragEnter,
-      handleTriggerDragOver,
-      handleTriggerClick,
       handleFileInputChange,
       submit,
-      openFileDialog,
-      cssVars: computed(() => {
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            draggerColor,
-            draggerBorder,
-            draggerBorderHover,
-            itemColorHover,
-            itemColorHoverError,
-            itemTextColorError,
-            itemTextColorSuccess,
-            itemTextColor,
-            itemIconColor,
-            itemDisabledOpacity,
-            lineHeight,
-            borderRadius,
-            fontSize,
-            itemBorderImageCardError,
-            itemBorderImageCard
-          }
-        } = themeRef.value
-        return {
-          '--bezier': cubicBezierEaseInOut,
-          '--border-radius': borderRadius,
-          '--dragger-border': draggerBorder,
-          '--dragger-border-hover': draggerBorderHover,
-          '--dragger-color': draggerColor,
-          '--font-size': fontSize,
-          '--item-color-hover': itemColorHover,
-          '--item-color-hover-error': itemColorHoverError,
-          '--item-disabled-opacity': itemDisabledOpacity,
-          '--item-icon-color': itemIconColor,
-          '--item-text-color': itemTextColor,
-          '--item-text-color-error': itemTextColorError,
-          '--item-text-color-success': itemTextColorSuccess,
-          '--line-height': lineHeight,
-          '--item-border-image-card-error': itemBorderImageCardError,
-          '--item-border-image-card': itemBorderImageCard
-        }
-      })
+      cssVars: cssVarsRef
     }
   },
   render () {
-    const { draggerInsideRef, mergedClsPrefix, listType, $slots } = this
-    if ($slots.default) {
-      const firstChild = getFirstSlotVNode($slots, 'default')
-      // @ts-expect-error
-      if (firstChild?.type?.[uploadDraggerKey]) {
+    const { draggerInsideRef, mergedClsPrefix, $slots } = this
+
+    if ($slots.default && !this.abstract) {
+      const firstChild = $slots.default()[0]
+      if ((firstChild as any)?.type?.[uploadDraggerKey]) {
         draggerInsideRef.value = true
       }
     }
-    const isImageCardType = listType === 'image-card'
-    const uploadTrigger = (
-      <div
-        class={[
-          `${mergedClsPrefix}-upload__trigger`,
-          isImageCardType && `${mergedClsPrefix}-upload__trigger--image-card`
-        ]}
-        onClick={this.handleTriggerClick}
-        onDrop={this.handleTriggerDrop}
-        onDragover={this.handleTriggerDragOver}
-        onDragenter={this.handleTriggerDragEnter}
-        onDragleave={this.handleTriggerDragLeave}
-      >
-        {isImageCardType ? (
-          <NUploadDragger>{this.$slots}</NUploadDragger>
-        ) : (
-          this.$slots
-        )}
-      </div>
+
+    const inputNode = (
+      <input
+        ref="inputElRef"
+        type="file"
+        class={`${mergedClsPrefix}-upload-file-input`}
+        accept={this.accept}
+        multiple={this.multiple}
+        onChange={this.handleFileInputChange}
+      />
     )
-    const createFileList = (): VNode[] =>
-      this.mergedFileList.map((file) => (
-        <NUploadFile
-          clsPrefix={mergedClsPrefix}
-          key={file.id}
-          file={file}
-          listType={listType}
-        />
-      ))
-    const uploadFileList = isImageCardType ? (
-      <NImageGroup>{{ default: createFileList }}</NImageGroup>
+
+    return this.abstract ? (
+      <>
+        {$slots.default?.()}
+        <Teleport to="body">{inputNode}</Teleport>
+      </>
     ) : (
-      <NFadeInExpandTransition group>
-        {{
-          default: createFileList
-        }}
-      </NFadeInExpandTransition>
-    )
-    return (
       <div
         class={[
           `${mergedClsPrefix}-upload`,
-          {
-            [`${mergedClsPrefix}-upload--dragger-inside`]:
-              draggerInsideRef.value,
-            [`${mergedClsPrefix}-upload--drag-over`]: this.dragOver,
-            [`${mergedClsPrefix}-upload--disabled`]: this.mergedDisabled
-          }
+          draggerInsideRef.value && `${mergedClsPrefix}-upload--dragger-inside`,
+          this.dragOver && `${mergedClsPrefix}-upload--drag-over`
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <input
-          ref="inputElRef"
-          type="file"
-          class={`${mergedClsPrefix}-upload__file-input`}
-          accept={this.accept}
-          multiple={this.multiple}
-          onChange={this.handleFileInputChange}
-        />
-        {this.listType !== 'image-card' && uploadTrigger}
-        {this.showFileList && (
-          <div
-            class={[
-              `${mergedClsPrefix}-upload-file-list`,
-              isImageCardType && `${mergedClsPrefix}-upload-file-list--grid`
-            ]}
-            style={this.fileListStyle}
-          >
-            {uploadFileList}
-            {isImageCardType && uploadTrigger}
-          </div>
+        {inputNode}
+        {this.listType !== 'image-card' && (
+          <NUploadTrigger>{$slots}</NUploadTrigger>
         )}
+        {this.showFileList && <NUploadFileList>{$slots}</NUploadFileList>}
       </div>
     )
   }
