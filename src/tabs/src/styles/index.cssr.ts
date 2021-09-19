@@ -67,25 +67,21 @@ export default cB('tabs', `
         box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, .12);
       `)
     ]),
-    c('&::before', `
+    c('&::before, &::after', `
       transition: box-shadow .3s var(--bezier);
       pointer-events: none;
       content: "";
       position: absolute;
-      left: 0;
       top: 0;
       bottom: 0;
       width: 20px;
+      z-index: 1;
+    `),
+    c('&::before', `
+      left: 0;
     `),
     c('&::after', `
-      transition: box-shadow .3s var(--bezier);
-      pointer-events: none;
-      content: "";
-      position: absolute;
       right: 0;
-      top: 0;
-      bottom: 0;
-      width: 20px;
     `)
   ]),
   cB('tabs-nav-scroll-content', `
