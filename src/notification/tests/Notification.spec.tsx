@@ -23,9 +23,10 @@ describe('n-notification', () => {
         notification.info({
           title: 'info'
         })
-        notification.success({
+        const notificationReactive = notification.success({
           title: 'success'
         })
+        notificationReactive.title = 'cool'
       },
       render () {
         return null

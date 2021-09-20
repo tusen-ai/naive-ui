@@ -17,7 +17,8 @@ describe('n-message', () => {
       setup () {
         const message = useMessage()
         message.info('string')
-        message.info(() => 'string')
+        const messageReactive = message.info(() => 'string')
+        messageReactive.content = '123'
       },
       render () {
         return null
@@ -133,7 +134,9 @@ describe('message-provider', () => {
     void nextTick(() => {
       const container = document.querySelector('.n-message-container')
       expect(container).not.toBe(null)
-      expect(container.attributes.style.value).toContain('padding: 24px')
+      expect((container as HTMLElement).style.cssText).toContain(
+        'padding: 24px'
+      )
       wrapper.unmount()
       done()
     })
