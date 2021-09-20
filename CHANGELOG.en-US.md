@@ -4,12 +4,13 @@
 
 ### Fixes
 
-- Fix `n-tree` check node does not work when setting `cascade` is false and `checkable` prop.
 - Fix `DialogReactive` props are readonly.
 - Fix `n-tree-select` sets `check-strategy='child'` not working in single select mode.
 - Fix `n-upload`'s trigger is compressed in `image-card` mode when it's the only item in the row.
 - Fix `n-upload-dragger` has no border transition.
 - Fix `n-upload` can't upload files.
+- Fix `n-tree`'s `checkable` prop doesn't work when `cascade` is `false`.
+- Fix `n-tree-select`'s `checkable` prop doesn't work when `cascade` or `multiple` is `false`.
 
 ## 2.19.0 (2021-09-19)
 

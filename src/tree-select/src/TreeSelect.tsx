@@ -235,7 +235,7 @@ export default defineComponent({
           : null
     )
     const mergedCascadeRef = computed(() => {
-      return props.multiple && props.cascade
+      return props.multiple && props.cascade && props.checkable
     })
     // The same logic as tree, now it's not that complex so I don't extract a
     // function to reuse it.
@@ -257,20 +257,9 @@ export default defineComponent({
     })
     const treeSelectedKeysRef = computed<Key[]>(() => {
       if (props.checkable) return []
-      const { value: mergedValue } = mergedValueRef
-      const { multiple } = props
-      return Array.isArray(mergedValue)
-        ? multiple
-          ? mergedValue
-          : []
-        : multiple
-          ? []
-          : mergedValue === null
-            ? []
-            : [mergedValue]
+      return treeCheckedKeysRef.value
     })
     const treeCheckedKeysRef = computed<Key[]>(() => {
-      if (!props.checkable) return []
       const { value: mergedValue } = mergedValueRef
       if (props.multiple) {
         if (Array.isArray(mergedValue)) return mergedValue
@@ -437,10 +426,7 @@ export default defineComponent({
       } = dataTreeMateRef
       return keys.map((key) => getNode(key)?.rawNode || null)
     }
-    function handleUpdateSelectedKeys (keys: Key[]): void {
-      if (props.checkable && props.multiple) {
-        return
-      }
+    function handleUpdateCheckedKeys (keys: Key[]): void {
       const options = getOptionsByKeys(keys)
       if (props.multiple) {
         doUpdateValue(keys, options)
@@ -460,18 +446,8 @@ export default defineComponent({
         patternRef.value = ''
       }
     }
-    function handleUpdateCheckedKeys (keys: Key[]): void {
-      // only in checkable & multiple mode, we use tree's check update
-      if (props.checkable && props.multiple) {
-        doUpdateValue(keys, getOptionsByKeys(keys))
-        if (props.filterable) {
-          focusSelectionInput()
-          patternRef.value = ''
-        }
-      }
-    }
     function handleUpdateIndeterminateKeys (keys: Key[]): void {
-      if (props.checkable && props.multiple) {
+      if (props.checkable) {
         doUpdateIndeterminateKeys(keys, getOptionsByKeys(keys))
       }
     }
@@ -653,7 +629,6 @@ export default defineComponent({
       handleMenuLeave,
       handleTriggerClick,
       handleMenuClickoutside,
-      handleUpdateSelectedKeys,
       handleUpdateCheckedKeys,
       handleUpdateIndeterminateKeys,
       handleTriggerFocus,
@@ -795,7 +770,7 @@ export default defineComponent({
                                   internalHighlightKeySet={
                                     filteredTreeInfo.highlightKeySet
                                   }
-                                  internalCheckOnSelect
+                                  internalUnifySelectCheck
                                   internalScrollable
                                   internalScrollablePadding={this.menuPadding}
                                   internalFocusable={false}
@@ -808,9 +783,6 @@ export default defineComponent({
                                   }
                                   onUpdateExpandedKeys={
                                     this.doUpdateExpandedKeys
-                                  }
-                                  onUpdateSelectedKeys={
-                                    this.handleUpdateSelectedKeys
                                   }
                                 />
                               ) : (

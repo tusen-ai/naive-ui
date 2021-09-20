@@ -209,7 +209,7 @@ const treeProps = {
   // use it to display
   internalDisplayTreeMate: Object as PropType<TreeMate<TreeOption>>,
   internalHighlightKeySet: Object as PropType<Set<Key>>,
-  internalCheckOnSelect: Boolean,
+  internalUnifySelectCheck: Boolean,
   internalHideFilteredNode: Boolean, // I'm sure this won't work with draggable
   internalCheckboxFocusable: {
     type: Boolean,
@@ -592,6 +592,10 @@ export default defineComponent({
       if (props.disabled || node.disabled) {
         return
       }
+      if (props.internalUnifySelectCheck && !props.multiple) {
+        handleSelect(node)
+        return
+      }
       const { checkedKeys, indeterminateKeys } = dataTreeMateRef.value![
         checked ? 'check' : 'uncheck'
       ](node.key, displayedCheckedKeysRef.value, {
@@ -633,17 +637,21 @@ export default defineComponent({
         return
       }
       pendingNodeKeyRef.value = node.key
-      if (props.internalCheckOnSelect) {
+      if (props.internalUnifySelectCheck) {
         const {
           value: { checkedKeys, indeterminateKeys }
         } = checkedStatusRef
-        handleCheck(
-          node,
-          !(
-            checkedKeys.includes(node.key) ||
-            indeterminateKeys.includes(node.key)
+        if (props.multiple) {
+          handleCheck(
+            node,
+            !(
+              checkedKeys.includes(node.key) ||
+              indeterminateKeys.includes(node.key)
+            )
           )
-        )
+        } else {
+          doUpdateCheckedKeys([node.key])
+        }
       }
       if (props.multiple) {
         const selectedKeys = Array.from(mergedSelectedKeysRef.value)

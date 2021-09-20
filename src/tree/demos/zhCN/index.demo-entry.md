@@ -18,6 +18,7 @@ async
 disabled
 prefix-and-suffix
 batch-render
+check-strategy-debug
 ```
 
 ## API
