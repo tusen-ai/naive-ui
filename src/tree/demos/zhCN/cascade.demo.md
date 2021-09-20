@@ -1,6 +1,6 @@
 # 级联选择
 
-设定 `cascade` 为 false 进行非级联选择。
+设定 `cascade` 进行级联选择。
 
 ```html
 <n-tree

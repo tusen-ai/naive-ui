@@ -1,6 +1,6 @@
 # Cascade Check
 
-Set `cascade` is false to use noncascade check.
+Set `cascade` to use cascade check.
 
 ```html
 <n-tree
