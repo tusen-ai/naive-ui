@@ -3,6 +3,7 @@
 ### Fixes
 
 - Fix `n-tree` check node does not work when setting `cascade` is false and `checkable` prop.
+- Fix `DialogReactive` props are readonly.
 
 ## 2.19.0 (2021-09-19)
 
