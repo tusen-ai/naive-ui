@@ -5,7 +5,7 @@
 ### Fixes
 
 - 修复 `DialogReactive` 属性只读
-- 修复 `n-tree` 的 `checkStrategy` 属性单选替换 `leafOnly` 属性
+- 修复 `n-tree-select` 设定 `check-strategy='child'` 在单选时不生效
 - 修复 `n-upload` 在 `image-card` 模式下触发区域作为一行唯一元素时被压缩
 - 修复 `n-upload-dragger` 边框缺乏过渡
 - 修复 `n-upload` 无法上传文件

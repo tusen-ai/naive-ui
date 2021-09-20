@@ -5,7 +5,7 @@
 ### Fixes
 
 - Fix `DialogReactive` props are readonly.
-- Fix `n-tree` replace `leafOnly` prop to `checkStrategy` prop in single check.
+- Fix `n-tree-select` sets `check-strategy='child'` not working in single select mode.
 - Fix `n-upload`'s trigger is compressed in `image-card` mode when it's the only item in the row.
 - Fix `n-upload-dragger` has no border transition.
 - Fix `n-upload` can't upload files.

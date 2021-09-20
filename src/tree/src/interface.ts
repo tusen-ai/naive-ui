@@ -1,4 +1,4 @@
-import { TreeNode } from 'treemate'
+import { CheckStrategy, TreeNode } from 'treemate'
 import { InjectionKey, Ref, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { TreeTheme } from '../styles'
@@ -91,7 +91,7 @@ export interface TreeInjection {
   disabledRef: Ref<boolean>
   checkableRef: Ref<boolean>
   cascadeRef: Ref<boolean>
-  leafOnlyRef: Ref<boolean>
+  mergedCheckStrategyRef: Ref<CheckStrategy>
   selectableRef: Ref<boolean>
   pendingNodeKeyRef: Ref<null | Key>
   internalScrollableRef: Ref<boolean>
