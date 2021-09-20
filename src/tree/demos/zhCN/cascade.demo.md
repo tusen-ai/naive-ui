@@ -9,6 +9,7 @@
   checkable
   :data="data"
   :default-expanded-keys="defaultExpandedKeys"
+  :default-checked-keys="defaultCheckedKeys"
   @update:checked-keys="updateCheckedKeys"
 />
 ```
@@ -39,7 +40,8 @@ export default defineComponent({
   setup () {
     return {
       data: createData(),
-      defaultExpandedKeys: ref([]),
+      defaultExpandedKeys: ref(['40', '4030', '403020']),
+      defaultCheckedKeys: ref(['40302010']),
       updateCheckedKeys: (v) => {
         console.log('updateCheckedKeys', v)
       }
