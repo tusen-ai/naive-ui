@@ -4,6 +4,8 @@ const path = require('path')
 const createRenderer = require('./md-renderer')
 const mdRenderer = createRenderer()
 
+const __HTTP__ = process.env.NODE_ENV !== 'production' ? 'http' : 'https'
+
 const demoBlock = fs
   .readFileSync(path.resolve(__dirname, 'ComponentDemoTemplate.vue'))
   .toString()
@@ -136,6 +138,9 @@ function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
   }
   if (parts.template) {
     src = src.replace(demoReg, parts.template)
+  }
+  if (/__HTTP__/.test(src)) {
+    src = src.replace(/__HTTP__/g, __HTTP__)
   }
   return src.trim()
 }

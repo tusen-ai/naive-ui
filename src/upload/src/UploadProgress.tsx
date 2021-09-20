@@ -14,13 +14,9 @@ export default defineComponent({
     status: {
       type: String as PropType<'info' | 'error' | 'success'>,
       required: true
-    },
-    delay: {
-      type: Number,
-      default: 900
     }
   },
-  setup (props) {
+  setup () {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NUpload = inject(uploadInjectionKey)!
     return {

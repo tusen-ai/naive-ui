@@ -24,7 +24,7 @@ export default c([
     padding: 24px;
     opacity: 1;
     transition:
-      opacity: .3s var(--bezier),
+      opacity .3s var(--bezier),
       border-color .3s var(--bezier),
       background-color .3s var(--bezier);
     background-color: var(--dragger-color);
@@ -48,7 +48,10 @@ export default c([
       opacity: var(--item-disabled-opacity);
       cursor: not-allowed;
     `),
-    cM('image-card', [
+    cM('image-card', `
+      width: 96px;
+      height: 96px;
+    `, [
       cB('upload-dragger', `
         padding: 0;
         height: 100%;

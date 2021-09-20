@@ -6,7 +6,7 @@ The preview in the photo wall will call the internal preview component by defaul
 
 ```html
 <n-upload
-  action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-file-list="fileList"
   list-type="image-card"
 >
@@ -14,7 +14,7 @@ The preview in the photo wall will call the internal preview component by defaul
 </n-upload>
 <n-divider />
 <n-upload
-  action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-file-list="previewFileList"
   list-type="image-card"
   @preview="handlePreview"
@@ -64,7 +64,7 @@ export default defineComponent({
           id: 'c',
           name: '我是自带url的图片.png',
           status: 'finished',
-          url: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+          url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
         },
         {
           id: 'd',
@@ -78,13 +78,13 @@ export default defineComponent({
           id: 'react',
           name: '我是react.png',
           status: 'finished',
-          url: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+          url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
         },
         {
           id: 'vue',
           name: '我是vue.png',
           status: 'finished',
-          url: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+          url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
         }
       ])
     }

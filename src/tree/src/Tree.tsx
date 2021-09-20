@@ -596,7 +596,6 @@ export default defineComponent({
         checked ? 'check' : 'uncheck'
       ](node.key, displayedCheckedKeysRef.value, {
         cascade: props.cascade,
-        leafOnly: props.leafOnly,
         checkStrategy: mergedCheckStrategyRef.value
       })
       doUpdateCheckedKeys(checkedKeys)
@@ -629,7 +628,7 @@ export default defineComponent({
         props.disabled ||
         node.disabled ||
         !props.selectable ||
-        (props.leafOnly && !node.isLeaf)
+        (mergedCheckStrategyRef.value === 'child' && !node.isLeaf)
       ) {
         return
       }
@@ -1051,9 +1050,9 @@ export default defineComponent({
       mergedSelectedKeysRef,
       mergedExpandedKeysRef,
       mergedThemeRef: themeRef,
+      mergedCheckStrategyRef,
       disabledRef: toRef(props, 'disabled'),
       checkableRef: toRef(props, 'checkable'),
-      leafOnlyRef: toRef(props, 'leafOnly'),
       selectableRef: toRef(props, 'selectable'),
       remoteRef: toRef(props, 'remote'),
       onLoadRef: toRef(props, 'onLoad'),
