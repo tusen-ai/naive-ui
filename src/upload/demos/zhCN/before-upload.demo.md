@@ -4,7 +4,7 @@
 
 ```html
 <n-upload
-  action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   @before-upload="beforeUpload"
 >
   <n-button>上传 PNG 文件</n-button>

@@ -338,24 +338,25 @@ export default defineComponent({
           }
           return null
         })
-      ).then((fileInfos) => {
-        let nextTickChain = Promise.resolve()
+      )
+        .then(async (fileInfos) => {
+          let nextTickChain = Promise.resolve()
 
-        fileInfos.forEach((fileInfo) => {
-          nextTickChain = nextTickChain
-            // eslint-disable-next-line @typescript-eslint/promise-function-async
-            .then(() => nextTick())
-            .then(() => {
+          fileInfos.forEach((fileInfo) => {
+            nextTickChain = nextTickChain.then(nextTick as any).then(() => {
               fileInfo &&
                 doChange(fileInfo, e, {
                   append: true
                 })
             })
+          })
+          return await nextTickChain
         })
-        if (props.defaultUpload) {
-          submit()
-        }
-      })
+        .then(() => {
+          if (props.defaultUpload) {
+            submit()
+          }
+        })
     }
     function submit (fileId?: string): void {
       const {

@@ -12,7 +12,7 @@ You can use `submit` method to submit in uncontrolled manner. Also you can do it
 </n-button>
 <n-upload
   @change="handleChange"
-  action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-upload="false"
   multiple
   ref="upload"
