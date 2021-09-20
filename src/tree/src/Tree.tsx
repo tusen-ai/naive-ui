@@ -271,9 +271,13 @@ export default defineComponent({
       uncontrolledCheckedKeysRef
     )
     const checkedStatusRef = computed(() => {
-      return dataTreeMateRef.value!.getCheckedKeys(mergedCheckedKeysRef.value, {
-        cascade: props.cascade
-      })
+      const value = dataTreeMateRef.value!.getCheckedKeys(
+        mergedCheckedKeysRef.value,
+        {
+          cascade: props.cascade
+        }
+      )
+      return value
     })
     const mergedCheckStrategyRef = computed(() =>
       props.leafOnly ? 'child' : props.checkStrategy
@@ -525,7 +529,6 @@ export default defineComponent({
         'onUpdate:indeterminateKeys': _onUpdateIndeterminateKeys,
         onUpdateIndeterminateKeys
       } = props
-      uncontrolledCheckedKeysRef.value = value
       if (_onUpdateIndeterminateKeys) call(_onUpdateIndeterminateKeys, value)
       if (onUpdateIndeterminateKeys) call(onUpdateIndeterminateKeys, value)
     }
