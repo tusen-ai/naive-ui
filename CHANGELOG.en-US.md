@@ -6,6 +6,8 @@
 
 - Fix `DialogReactive` props are readonly.
 - Fix `n-tree` replace `leafOnly` prop to `checkStrategy` prop in single check.
+- Fix `n-upload`'s trigger is compressed in `image-card` mode when it's the only item in the row.
+- Fix `n-upload-dragger` has no border transition.
 
 ## 2.19.0 (2021-09-19)
 

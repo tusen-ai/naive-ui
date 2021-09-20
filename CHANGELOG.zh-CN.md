@@ -4,8 +4,10 @@
 
 ### Fixes
 
-- 修复 `DialogReactive` 属性只读。
+- 修复 `DialogReactive` 属性只读
 - 修复 `n-tree` 的 `checkStrategy` 属性单选替换 `leafOnly` 属性
+- 修复 `n-upload` 在 `image-card` 模式下触发区域作为一行唯一元素时被压缩
+- 修复 `n-upload-dragger` 边框缺乏过渡
 
 ## 2.19.0 (2021-09-19)
 
