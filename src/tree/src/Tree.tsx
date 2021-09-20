@@ -529,7 +529,6 @@ export default defineComponent({
         'onUpdate:indeterminateKeys': _onUpdateIndeterminateKeys,
         onUpdateIndeterminateKeys
       } = props
-      // uncontrolledCheckedKeysRef.value = value
       if (_onUpdateIndeterminateKeys) call(_onUpdateIndeterminateKeys, value)
       if (onUpdateIndeterminateKeys) call(onUpdateIndeterminateKeys, value)
     }

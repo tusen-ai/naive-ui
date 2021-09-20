@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## Pending
+
 ### Fixes
 
 - Fix `n-tree` check node does not work when setting `cascade` is false and `checkable` prop.
