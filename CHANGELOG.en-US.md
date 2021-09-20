@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `DialogReactive` props are readonly.
+- Fix `n-tree` replace `leafOnly` prop to `checkStrategy` prop in single check.
 
 ## 2.19.0 (2021-09-19)
 

@@ -626,6 +626,8 @@ export default defineComponent({
         props.disabled ||
         node.disabled ||
         !props.selectable ||
+        (props.checkStrategy === 'child' && !node.isLeaf) ||
+        (props.checkStrategy === 'parent' && node.isLeaf) ||
         (props.leafOnly && !node.isLeaf)
       ) {
         return
