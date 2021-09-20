@@ -17,10 +17,11 @@ describe('n-dialog', () => {
     const Test = defineComponent({
       setup () {
         const dialog = useDialog()
-        dialog.success({
+        const dialogReactive = dialog.success({
           title: 'Test success',
           content: 'Content'
         })
+        dialogReactive.style = 'color: red;'
       },
       render () {
         return null
@@ -66,7 +67,9 @@ describe('n-dialog', () => {
         return null
       }
     })
-    const wrapper = await mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    const wrapper = await mount(() => (
+      <Provider>{{ default: () => <Test /> }}</Provider>
+    ))
     expect(document.querySelector('.n-button__icon')).not.toEqual(null)
     wrapper.unmount()
   })
@@ -87,7 +90,9 @@ describe('n-dialog', () => {
         return null
       }
     })
-    const wrapper = mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    const wrapper = mount(() => (
+      <Provider>{{ default: () => <Test /> }}</Provider>
+    ))
     document.body.dispatchEvent(mousedownEvent)
     document.body.dispatchEvent(mouseupEvent)
     await nextTick(() => {
@@ -113,7 +118,9 @@ describe('n-dialog', () => {
         return null
       }
     })
-    const wrapper = await mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
+    const wrapper = await mount(() => (
+      <Provider>{{ default: () => <Test /> }}</Provider>
+    ))
     document.body.dispatchEvent(mousedownEvent)
     document.body.dispatchEvent(mouseupEvent)
     expect(onMaskClick).toHaveBeenCalled()
@@ -136,8 +143,12 @@ describe('n-dialog', () => {
         return null
       }
     })
-    const wrapper = await mount(() => <Provider>{{ default: () => <Test /> }}</Provider>)
-    expect(document.querySelector('.n-dialog')?.getAttribute('style')).toContain('color: rgb(79, 178, 51);')
+    const wrapper = await mount(() => (
+      <Provider>{{ default: () => <Test /> }}</Provider>
+    ))
+    expect(
+      document.querySelector('.n-dialog')?.getAttribute('style')
+    ).toContain('color: rgb(79, 178, 51);')
     wrapper.unmount()
   })
 })

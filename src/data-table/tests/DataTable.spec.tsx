@@ -126,7 +126,7 @@ describe('n-data-table', () => {
       pageCount: 1,
       pageSize: 10,
       itemCount: 0,
-      prefix ({ itemCount }: {itemCount: number | undefined}) {
+      prefix ({ itemCount }: { itemCount: number | undefined }) {
         return itemCount
       }
     }
@@ -141,7 +141,10 @@ describe('n-data-table', () => {
       setTimeout(() => {
         pagination.page = page
         pagination.itemCount = data.length
-        data = data.slice((page - 1) * pagination.pageSize, page * pagination.pageSize)
+        data = data.slice(
+          (page - 1) * pagination.pageSize,
+          page * pagination.pageSize
+        )
       }, 1000)
     })
     const columns = [
@@ -159,16 +162,47 @@ describe('n-data-table', () => {
       page: 1,
       pageSize: 10,
       itemCount: 978,
-      prefix ({ itemCount }: {itemCount: number | undefined}) {
+      prefix ({ itemCount }: { itemCount: number | undefined }) {
         return itemCount
       }
     }
     const wrapper = mount(() => (
-      <NDataTable columns={columns} data={data} pagination={pagination} remote onUpdatePage={onPageChange} />
+      <NDataTable
+        columns={columns}
+        data={data}
+        pagination={pagination}
+        remote
+        onUpdatePage={onPageChange}
+      />
     ))
     await void wrapper.findAll('.n-pagination-item')[2].trigger('click')
     await nextTick()
     expect(onPageChange).toHaveBeenCalled()
     expect(wrapper.find('.n-pagination-prefix').text()).toEqual('978')
+  })
+
+  it('should work with `bordered` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('.n-data-table').classes()).toContain(
+      'n-data-table--bordered'
+    )
+
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} bordered={false} />
+    ))
+    expect(wrapper.find('.n-data-table').classes()).not.toContain(
+      'n-data-table--bordered'
+    )
   })
 })

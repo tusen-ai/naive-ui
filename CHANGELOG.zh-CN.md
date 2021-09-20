@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 2.19.1 (2021-09-21)
+
+### Fixes
+
+- 修复 `DialogReactive` 属性不可修改
+- 修复 `n-tree-select` 设定 `check-strategy='child'` 在单选时不生效
+- 修复 `n-upload` 在 `image-card` 模式下触发区域作为一行唯一元素时被压缩
+- 修复 `n-upload-dragger` 边框缺乏过渡
+- 修复 `n-upload` 无法上传文件
+- 修复 `n-tree` 在 `cascade` 设置为 `false` 时 `checkable` 无法显示勾选框
+- 修复 `n-tree-select` 在 `cascade` 或 `multiple` 设置为 `false` 时 `checkable` 无法显示勾选框
+
 ## 2.19.0 (2021-09-19)
 
 ### Breaking Changes

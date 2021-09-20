@@ -209,7 +209,7 @@ const treeProps = {
   // use it to display
   internalDisplayTreeMate: Object as PropType<TreeMate<TreeOption>>,
   internalHighlightKeySet: Object as PropType<Set<Key>>,
-  internalCheckOnSelect: Boolean,
+  internalUnifySelectCheck: Boolean,
   internalHideFilteredNode: Boolean, // I'm sure this won't work with draggable
   internalCheckboxFocusable: {
     type: Boolean,
@@ -271,9 +271,13 @@ export default defineComponent({
       uncontrolledCheckedKeysRef
     )
     const checkedStatusRef = computed(() => {
-      return dataTreeMateRef.value!.getCheckedKeys(mergedCheckedKeysRef.value, {
-        cascade: props.cascade
-      })
+      const value = dataTreeMateRef.value!.getCheckedKeys(
+        mergedCheckedKeysRef.value,
+        {
+          cascade: props.cascade
+        }
+      )
+      return value
     })
     const mergedCheckStrategyRef = computed(() =>
       props.leafOnly ? 'child' : props.checkStrategy
@@ -525,7 +529,6 @@ export default defineComponent({
         'onUpdate:indeterminateKeys': _onUpdateIndeterminateKeys,
         onUpdateIndeterminateKeys
       } = props
-      uncontrolledCheckedKeysRef.value = value
       if (_onUpdateIndeterminateKeys) call(_onUpdateIndeterminateKeys, value)
       if (onUpdateIndeterminateKeys) call(onUpdateIndeterminateKeys, value)
     }
@@ -589,11 +592,14 @@ export default defineComponent({
       if (props.disabled || node.disabled) {
         return
       }
+      if (props.internalUnifySelectCheck && !props.multiple) {
+        handleSelect(node)
+        return
+      }
       const { checkedKeys, indeterminateKeys } = dataTreeMateRef.value![
         checked ? 'check' : 'uncheck'
       ](node.key, displayedCheckedKeysRef.value, {
         cascade: props.cascade,
-        leafOnly: props.leafOnly,
         checkStrategy: mergedCheckStrategyRef.value
       })
       doUpdateCheckedKeys(checkedKeys)
@@ -626,22 +632,26 @@ export default defineComponent({
         props.disabled ||
         node.disabled ||
         !props.selectable ||
-        (props.leafOnly && !node.isLeaf)
+        (mergedCheckStrategyRef.value === 'child' && !node.isLeaf)
       ) {
         return
       }
       pendingNodeKeyRef.value = node.key
-      if (props.internalCheckOnSelect) {
+      if (props.internalUnifySelectCheck) {
         const {
           value: { checkedKeys, indeterminateKeys }
         } = checkedStatusRef
-        handleCheck(
-          node,
-          !(
-            checkedKeys.includes(node.key) ||
-            indeterminateKeys.includes(node.key)
+        if (props.multiple) {
+          handleCheck(
+            node,
+            !(
+              checkedKeys.includes(node.key) ||
+              indeterminateKeys.includes(node.key)
+            )
           )
-        )
+        } else {
+          doUpdateCheckedKeys([node.key])
+        }
       }
       if (props.multiple) {
         const selectedKeys = Array.from(mergedSelectedKeysRef.value)
@@ -1048,9 +1058,9 @@ export default defineComponent({
       mergedSelectedKeysRef,
       mergedExpandedKeysRef,
       mergedThemeRef: themeRef,
+      mergedCheckStrategyRef,
       disabledRef: toRef(props, 'disabled'),
       checkableRef: toRef(props, 'checkable'),
-      leafOnlyRef: toRef(props, 'leafOnly'),
       selectableRef: toRef(props, 'selectable'),
       remoteRef: toRef(props, 'remote'),
       onLoadRef: toRef(props, 'onLoad'),

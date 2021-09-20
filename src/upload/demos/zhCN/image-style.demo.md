@@ -6,7 +6,7 @@
 
 ```html
 <n-upload
-  action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-file-list="fileList"
   list-type="image"
   :create-thumbnail-url="createThumbnailUrl"
@@ -38,7 +38,7 @@ export default defineComponent({
         id: 'c',
         name: '图片.png',
         status: 'finished',
-        url: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+        url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
       },
       {
         id: 'd',
@@ -53,7 +53,7 @@ export default defineComponent({
         message.info(
           'createThumbnailUrl 产生了图片的 URL，你传什么都会变成 07akioni'
         )
-        return 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+        return '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
       }
     }
   }

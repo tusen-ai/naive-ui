@@ -6,7 +6,7 @@ You can use `preview-file` to customize the thumbnails of the file.
 
 ```html
 <n-upload
-  action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-file-list="fileList"
   list-type="image"
   :createThumbnailUrl="createThumbnailUrl"
@@ -38,7 +38,7 @@ export default defineComponent({
         id: 'c',
         name: 'image.png',
         status: 'finished',
-        url: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+        url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
       },
       {
         id: 'd',
@@ -55,7 +55,7 @@ export default defineComponent({
           h('br'),
           'It will be 07akioni whatever you upload.'
         ])
-        return 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+        return '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
       }
     }
   }
