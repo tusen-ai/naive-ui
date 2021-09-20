@@ -1,14 +1,15 @@
 # Cascade Check
 
-Set `cascade` to use cascade check.
+Set `cascade` is false to use noncascade check.
 
 ```html
 <n-tree
   block-line
   cascade
-  checkable
+  :cascade="false"
   :data="data"
   :default-expanded-keys="defaultExpandedKeys"
+  @update:checked-keys="updateCheckedKeys"
 />
 ```
 
@@ -38,7 +39,10 @@ export default defineComponent({
   setup () {
     return {
       data: createData(),
-      defaultExpandedKeys: ref(['40', '41'])
+      defaultExpandedKeys: ref(['40', '41']),
+      updateCheckedKeys: (v) => {
+        console.log('updateCheckedKeys', v)
+      }
     }
   }
 })

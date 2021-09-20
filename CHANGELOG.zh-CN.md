@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- 修复 `n-tree` 在 `cascade` 设置为 false, `checkable` 的时候无法进行非级联
+
 ## 2.19.0 (2021-09-19)
 
 ### Breaking Changes

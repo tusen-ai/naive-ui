@@ -1,14 +1,15 @@
 # 级联选择
 
-设定 `cascade` 进行级联选择。
+设定 `cascade` 为 false 进行非级联选择。
 
 ```html
 <n-tree
   block-line
-  cascade
+  :cascade="false"
   checkable
   :data="data"
   :default-expanded-keys="defaultExpandedKeys"
+  @update:checked-keys="updateCheckedKeys"
 />
 ```
 
@@ -38,7 +39,10 @@ export default defineComponent({
   setup () {
     return {
       data: createData(),
-      defaultExpandedKeys: ref(['40', '41'])
+      defaultExpandedKeys: ref([]),
+      updateCheckedKeys: (v) => {
+        console.log('updateCheckedKeys', v)
+      }
     }
   }
 })
