@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `DialogReactive` 属性只读。
+- 修复 `n-tree` 的 `checkStrategy` 属性单选替换 `leafOnly` 属性
 
 ## 2.19.0 (2021-09-19)
 
