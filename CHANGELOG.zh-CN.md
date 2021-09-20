@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `DialogReactive` 属性只读。
+
 ## 2.19.0 (2021-09-19)
 
 ### Breaking Changes

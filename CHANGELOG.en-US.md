@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `DialogReactive` props are readonly.
+
 ## 2.19.0 (2021-09-19)
 
 ### Breaking Changes
