@@ -5,7 +5,7 @@
 ```html
 <n-tree
   block-line
-  :cascade="false"
+  cascade
   checkable
   :data="data"
   :default-expanded-keys="defaultExpandedKeys"

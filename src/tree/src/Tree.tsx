@@ -151,10 +151,7 @@ const treeProps = {
     default: ''
   },
   onLoad: Function as PropType<(node: TreeOption) => Promise<void>>,
-  cascade: {
-    type: Boolean,
-    default: true
-  },
+  cascade: Boolean,
   selectable: {
     type: Boolean,
     default: true

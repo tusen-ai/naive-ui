@@ -6,7 +6,6 @@ Set `cascade` is false to use noncascade check.
 <n-tree
   block-line
   cascade
-  :cascade="false"
   :data="data"
   :default-expanded-keys="defaultExpandedKeys"
   :default-checked-keys="defaultCheckedKeys"

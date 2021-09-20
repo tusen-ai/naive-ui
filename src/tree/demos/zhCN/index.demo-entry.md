@@ -30,7 +30,7 @@ batch-render
 | block-line | `boolean` | `false` | 节点整行撑开 |
 | block-node | `boolean` | `false` | 节点名称整行撑开 |
 | cancelable | `boolean` | `true` | 选中之后是否允许取消 |
-| cascade | `boolean` | `true` | 是否关联选项 |
+| cascade | `boolean` | `false` | 是否关联选项 |
 | check-strategy | `string` | `'all'` | 设置勾选策略来指定勾选回调返回的值，`all` 表示回调函数值为全部选中节点；`parent` 表示回调函数值为父节点（当父节点下所有子节点都选中时）；`child` 表示回调函数值为子节点 |
 | checkable | `boolean` | `false` | 是否显示选择框，需要将 `cascade` 设置为 `true` |
 | children-field | `string` | `'children'` | 替代 `TreeOption` 中的 children 字段名 |
