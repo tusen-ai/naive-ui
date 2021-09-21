@@ -205,4 +205,36 @@ describe('n-data-table', () => {
       'n-data-table--bordered'
     )
   })
+
+  it('should work with `bottom-bordered` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} bordered={false} />
+    ))
+    expect(wrapper.find('.n-data-table').classes()).toContain(
+      'n-data-table--bottom-bordered'
+    )
+
+    wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        bordered={false}
+        bottom-bordered={false}
+      />
+    ))
+    expect(wrapper.find('.n-data-table').classes()).not.toContain(
+      'n-data-table--bottom-bordered'
+    )
+  })
 })
