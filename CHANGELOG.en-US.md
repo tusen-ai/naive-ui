@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-global-style` applies style transition on first mount.
+
 ## 2.19.1 (2021-09-21)
 
 ### Fixes
