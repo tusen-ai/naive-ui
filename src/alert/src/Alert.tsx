@@ -165,56 +165,60 @@ export default defineComponent({
                         [`${mergedClsPrefix}-alert--show-icon`]: this.showIcon
                       }
                   ],
-                  style: this.cssVars
+                  style: this.cssVars,
+                  role: 'alert'
                 }),
                 [
                   this.closable ? (
-                    <NBaseClose
-                      clsPrefix={mergedClsPrefix}
-                      class={`${mergedClsPrefix}-alert__close`}
-                      onClick={this.handleCloseClick}
-                    />
+                      <NBaseClose
+                        clsPrefix={mergedClsPrefix}
+                        class={`${mergedClsPrefix}-alert__close`}
+                        onClick={this.handleCloseClick}
+                      />
                   ) : null,
                   this.showIcon ? (
-                    <div class={`${mergedClsPrefix}-alert__icon`}>
-                      {this.$slots.icon ? (
-                        renderSlot(this.$slots, 'icon')
-                      ) : (
-                        <NBaseIcon clsPrefix={mergedClsPrefix}>
-                          {{
-                            default: () => {
-                              switch (this.type) {
-                                case 'success':
-                                  return <SuccessIcon />
-                                case 'info':
-                                  return <InfoIcon />
-                                case 'warning':
-                                  return <WarningIcon />
-                                case 'error':
-                                  return <ErrorIcon />
-                                default:
-                                  return null
+                      <div
+                        class={`${mergedClsPrefix}-alert__icon`}
+                        aria-hidden="true"
+                      >
+                        {this.$slots.icon ? (
+                          renderSlot(this.$slots, 'icon')
+                        ) : (
+                          <NBaseIcon clsPrefix={mergedClsPrefix}>
+                            {{
+                              default: () => {
+                                switch (this.type) {
+                                  case 'success':
+                                    return <SuccessIcon />
+                                  case 'info':
+                                    return <InfoIcon />
+                                  case 'warning':
+                                    return <WarningIcon />
+                                  case 'error':
+                                    return <ErrorIcon />
+                                  default:
+                                    return null
+                                }
                               }
-                            }
-                          }}
-                        </NBaseIcon>
-                      )}
-                    </div>
+                            }}
+                          </NBaseIcon>
+                        )}
+                      </div>
                   ) : null,
-                  <div class={`${mergedClsPrefix}-alert-body`}>
-                    {this.title !== undefined ? (
-                      <div class={`${mergedClsPrefix}-alert-body__title`}>
-                        {renderSlot(this.$slots, 'header', undefined, () => [
-                          this.title
-                        ])}
-                      </div>
-                    ) : null}
-                    {this.$slots.default ? (
-                      <div class={`${mergedClsPrefix}-alert-body__content`}>
-                        {this.$slots}
-                      </div>
-                    ) : null}
-                  </div>
+                    <div class={`${mergedClsPrefix}-alert-body`}>
+                      {this.title !== undefined ? (
+                        <div class={`${mergedClsPrefix}-alert-body__title`}>
+                          {renderSlot(this.$slots, 'header', undefined, () => [
+                            this.title
+                          ])}
+                        </div>
+                      ) : null}
+                      {this.$slots.default ? (
+                        <div class={`${mergedClsPrefix}-alert-body__content`}>
+                          {this.$slots}
+                        </div>
+                      ) : null}
+                    </div>
                 ] as any
               )
               : null
