@@ -77,12 +77,10 @@ export default defineComponent({
           data-disabled={disabled ? true : undefined}
           class={[
             `${clsPrefix}-tabs-tab`,
-            {
-              [`${clsPrefix}-tabs-tab--active`]: value === name,
-              [`${clsPrefix}-tabs-tab--disabled`]: disabled,
-              [`${clsPrefix}-tabs-tab--closable`]: mergedClosable,
-              [`${clsPrefix}-tabs-tab--addable`]: addable
-            }
+            value === name && `${clsPrefix}-tabs-tab--active`,
+            disabled && `${clsPrefix}-tabs-tab--disabled`,
+            mergedClosable && `${clsPrefix}-tabs-tab--closable`,
+            addable && `${clsPrefix}-tabs-tab--addable`
           ]}
           onClick={this.handleClick}
           style={addable ? undefined : style}

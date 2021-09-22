@@ -1,9 +1,24 @@
 # CHANGELOG
 
-### Feats
-
-- `n-menu` 添加 `accordion` 属性，关闭 [#917](https://github.com/TuSimple/naive-ui/issues/917)
 ## Pending
+
+### Fixes
+
+- 修复 `n-global-style` 在首次挂载时应用样式过渡
+
+## 2.19.1 (2021-09-21)
+
+### Fixes
+
+- 修复 `DialogReactive` 属性不可修改
+- 修复 `n-tree-select` 设定 `check-strategy='child'` 在单选时不生效
+- 修复 `n-upload` 在 `image-card` 模式下触发区域作为一行唯一元素时被压缩
+- 修复 `n-upload-dragger` 边框缺乏过渡
+- 修复 `n-upload` 无法上传文件
+- 修复 `n-tree` 在 `cascade` 设置为 `false` 时 `checkable` 无法显示勾选框
+- 修复 `n-tree-select` 在 `cascade` 或 `multiple` 设置为 `false` 时 `checkable` 无法显示勾选框
+
+## 2.19.0 (2021-09-19)
 
 ### Breaking Changes
 
@@ -12,10 +27,27 @@
 ### Feats
 
 - `n-layout-sider` 新增 `collapsed-trigger-style` 属性
+- `n-menu` 添加 `accordion` 属性，关闭 [#917](https://github.com/TuSimple/naive-ui/issues/917)
+- `n-input-number` 新增 `readonly` 属性，关闭 [#1198](https://github.com/TuSimple/naive-ui/issues/1198)
+- `n-spin` 新增 `description` prop 和 slot
+- `n-anchor` 新增 `type` 属性
+- `n-upload` 新增 `abstract` 属性，新增 `n-upload-trigger` 和 `n-upload-file-list` 组件，关闭 [#1102](https://github.com/TuSimple/naive-ui/issues/1102)
+- `n-tree` 新增 `indeterminate-keys` 属性
+- `n-tree-select` 新增 `indeterminate-keys` 属性
+- `n-tree` 新增 `on-update:indeterminate-keys` 属性
+- `n-tree-select` 新增 `on-update:indeterminate-keys` 属性
+- `n-tabs` 的 `type` 属性新增 `'segment'` 选项，关闭 [#1133](https://github.com/TuSimple/naive-ui/issues/1133)
+- `n-popover` 新增 `z-index` 属性，关闭 [#764](https://github.com/TuSimple/naive-ui/issues/764).
+- `n-modal` 新增 `on-after-enter` 属性
+- `n-modal` 新增 `on-after-leave` 属性
 
 ### Fixes
 
 - 修复 `n-select` `filterable` 下关闭标签 input 光标聚焦问题，关闭 [#1170](https://github.com/TuSimple/naive-ui/issues/1170)
+- 修复 `n-button` 在 hover 状态下边框与 `n-badge` 冲突，关闭 [#1195](https://github.com/TuSimple/naive-ui/issues/1195)
+- 修复 `n-upload` 的 `v-model:file-list` 属性在 `multiple` 属性设为 `true` 的时候没有正确更新，关闭 [#418](https://github.com/TuSimple/naive-ui/issues/418)
+- 修复 `useThemeVars` 未应用覆盖的变量值，关闭 [#1194](https://github.com/TuSimple/naive-ui/issues/1194), [#1176](https://github.com/TuSimple/naive-ui/issues/1176)
+- Fix `n-tabs` 在 card 类型时左侧滚动的阴影不显示
 
 ## 2.18.2 (2021-09-14)
 

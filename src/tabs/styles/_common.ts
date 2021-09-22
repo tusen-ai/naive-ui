@@ -20,6 +20,12 @@ export default {
   tabPaddingSmallCard: '6px 10px',
   tabPaddingMediumCard: '8px 12px',
   tabPaddingLargeCard: '8px 16px',
+  tabPaddingSmallSegment: '4px 0',
+  tabPaddingMediumSegment: '6px 0',
+  tabPaddingLargeSegment: '8px 0',
+  tabGapSmallSegment: '0',
+  tabGapMediumSegment: '0',
+  tabGapLargeSegment: '0',
   panePaddingSmall: '8px 0 0 0',
   panePaddingMedium: '12px 0 0 0',
   panePaddingLarge: '16px 0 0 0'

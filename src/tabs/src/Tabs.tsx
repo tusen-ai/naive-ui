@@ -20,11 +20,17 @@ import { throttle } from 'lodash-es'
 import { useCompitable, onFontsReady, useMergedState } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, createKey, call, flatten } from '../../_utils'
+import { createKey, call, flatten, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { tabsLight } from '../styles'
 import type { TabsTheme } from '../styles'
-import { Addable, OnClose, OnCloseImpl, tabsInjectionKey } from './interface'
+import {
+  Addable,
+  OnClose,
+  OnCloseImpl,
+  tabsInjectionKey,
+  TabsType
+} from './interface'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import style from './styles/index.cssr'
 import Tab from './Tab'
@@ -34,24 +40,13 @@ const tabsProps = {
   value: [String, Number] as PropType<string | number>,
   defaultValue: [String, Number] as PropType<string | number>,
   type: {
-    type: String as PropType<'bar' | 'line' | 'card'>,
+    type: String as PropType<TabsType>,
     default: 'bar'
   },
   closable: Boolean,
   justifyContent: String as PropType<
   'space-between' | 'space-around' | 'space-evenly'
   >,
-  /** deprecated */
-  labelSize: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
-    validator: () => {
-      if (__DEV__) {
-        warn('tabs', '`label-size` is deprecated, please use `size` instead.')
-      }
-      return true
-    },
-    default: undefined
-  },
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
@@ -68,31 +63,11 @@ const tabsProps = {
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onClose: [Function, Array] as PropType<MaybeArray<OnClose>>,
   // deprecated
-  activeName: {
-    type: [String, Number] as PropType<string | number | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn('tabs', '`active-name` is deprecated, please use `value` instead.')
-      }
-      return true
-    },
-    default: undefined
-  },
-  onActiveNameChange: {
-    type: [Function, Array] as PropType<
-    MaybeArray<(value: string & number) => void> | undefined
-    >,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'tabs',
-          '`on-active-name-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  labelSize: String as PropType<'small' | 'medium' | 'large'>,
+  activeName: [String, Number] as PropType<string | number>,
+  onActiveNameChange: [Function, Array] as PropType<
+  MaybeArray<(value: string & number) => void>
+  >
 } as const
 
 export type TabsProps = ExtractPublicPropTypes<typeof tabsProps>
@@ -101,6 +76,29 @@ export default defineComponent({
   name: 'Tabs',
   props: tabsProps,
   setup (props, { slots }) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.labelSize !== undefined) {
+          warnOnce(
+            'tabs',
+            '`label-size` is deprecated, please use `size` instead.'
+          )
+        }
+        if (props.activeName !== undefined) {
+          warnOnce(
+            'tabs',
+            '`active-name` is deprecated, please use `value` instead.'
+          )
+        }
+        if (props.onActiveNameChange !== undefined) {
+          warnOnce(
+            'tabs',
+            '`on-active-name-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
+
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Tabs',
@@ -318,8 +316,14 @@ export default defineComponent({
       cssVars: computed(() => {
         const { value: size } = compitableSizeRef
         const { type } = props
-        const typeSuffix =
-          type === 'card' ? 'Card' : type === 'bar' ? 'Bar' : 'Line'
+        const typeSuffix = (
+          {
+            card: 'Card',
+            bar: 'Bar',
+            line: 'Line',
+            segment: 'Segment'
+          } as const
+        )[type]
         const sizeType = `${size}${typeSuffix}` as const
         const {
           self: {
@@ -333,6 +337,9 @@ export default defineComponent({
             tabFontWeight,
             tabBorderRadius,
             tabFontWeightActive,
+            colorSegment,
+            fontWeightStrong,
+            tabColorSegment,
             [createKey('panePadding', size)]: panePadding,
             [createKey('tabPadding', sizeType)]: tabPadding,
             [createKey('tabGap', sizeType)]: tabGap,
@@ -346,6 +353,7 @@ export default defineComponent({
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
+          '--color-segment': colorSegment,
           '--bar-color': barColor,
           '--tab-font-size': tabFontSize,
           '--tab-text-color': tabTextColor,
@@ -363,7 +371,9 @@ export default defineComponent({
           '--tab-font-weight-active': tabFontWeightActive,
           '--tab-padding': tabPadding,
           '--tab-gap': tabGap,
-          '--pane-padding': panePadding
+          '--pane-padding': panePadding,
+          '--font-weight-strong': fontWeightStrong,
+          '--tab-color-segment': tabColorSegment
         }
       })
     }
@@ -385,7 +395,8 @@ export default defineComponent({
     const prefix = prefixSlot ? prefixSlot() : null
     const suffix = suffixSlot ? suffixSlot() : null
     const isCard = type === 'card'
-    const mergedJustifyContent = !isCard && this.justifyContent
+    const isSegment = type === 'segment'
+    const mergedJustifyContent = !isCard && !isSegment && this.justifyContent
     return (
       <div
         class={[
@@ -409,90 +420,106 @@ export default defineComponent({
           {prefix ? (
             <div class={`${mergedClsPrefix}-tabs-nav__prefix`}>{prefix}</div>
           ) : null}
-          <VResizeObserver onResize={this.handleNavResize}>
-            {{
-              default: () => (
-                <div
-                  class={`${mergedClsPrefix}-tabs-nav-scroll-wrapper`}
-                  ref="scrollWrapperElRef"
-                >
-                  <VXScroll ref="xScrollInstRef" onScroll={this.handleScroll}>
-                    {{
-                      default: () => {
-                        const rawWrappedTabs = (
-                          <div
-                            style={this.tabWrapperStyle}
-                            class={`${mergedClsPrefix}-tabs-wrapper`}
-                          >
-                            {mergedJustifyContent ? null : (
-                              <div
-                                class={`${mergedClsPrefix}-tabs-scroll-padding`}
-                                style={{ width: `${this.tabsPadding}px` }}
-                              />
-                            )}
-                            {children.map(
-                              (tabPaneVNode: any, index: number) => {
-                                return (
-                                  <Tab
-                                    {...tabPaneVNode.props}
-                                    leftPadded={
-                                      index !== 0 && !mergedJustifyContent
-                                    }
-                                  >
-                                    {tabPaneVNode.children
-                                      ? {
-                                          default: tabPaneVNode.children.tab
-                                        }
-                                      : undefined}
-                                  </Tab>
-                                )
-                              }
-                            )}
-                            {!addTabFixed && addable && isCard
-                              ? createAddTag(addable, children.length !== 0)
-                              : null}
-                            {mergedJustifyContent ? null : (
-                              <div
-                                class={`${mergedClsPrefix}-tabs-scroll-padding`}
-                                style={{ width: `${this.tabsPadding}px` }}
-                              />
-                            )}
-                          </div>
-                        )
-                        let wrappedTabs = rawWrappedTabs
-                        if (isCard && addable) {
-                          wrappedTabs = (
-                            <VResizeObserver onResize={this.handleTabsResize}>
-                              {{
-                                default: () => rawWrappedTabs
-                              }}
-                            </VResizeObserver>
+          {isSegment ? (
+            <div class={`${mergedClsPrefix}-tabs-rail`}>
+              {children.map((tabPaneVNode: any, index: number) => {
+                return (
+                  <Tab {...tabPaneVNode.props} leftPadded={index !== 0}>
+                    {tabPaneVNode.children
+                      ? {
+                          default: tabPaneVNode.children.tab
+                        }
+                      : undefined}
+                  </Tab>
+                )
+              })}
+            </div>
+          ) : (
+            <VResizeObserver onResize={this.handleNavResize}>
+              {{
+                default: () => (
+                  <div
+                    class={`${mergedClsPrefix}-tabs-nav-scroll-wrapper`}
+                    ref="scrollWrapperElRef"
+                  >
+                    <VXScroll ref="xScrollInstRef" onScroll={this.handleScroll}>
+                      {{
+                        default: () => {
+                          const rawWrappedTabs = (
+                            <div
+                              style={this.tabWrapperStyle}
+                              class={`${mergedClsPrefix}-tabs-wrapper`}
+                            >
+                              {mergedJustifyContent ? null : (
+                                <div
+                                  class={`${mergedClsPrefix}-tabs-scroll-padding`}
+                                  style={{ width: `${this.tabsPadding}px` }}
+                                />
+                              )}
+                              {children.map(
+                                (tabPaneVNode: any, index: number) => {
+                                  return (
+                                    <Tab
+                                      {...tabPaneVNode.props}
+                                      leftPadded={
+                                        index !== 0 && !mergedJustifyContent
+                                      }
+                                    >
+                                      {tabPaneVNode.children
+                                        ? {
+                                            default: tabPaneVNode.children.tab
+                                          }
+                                        : undefined}
+                                    </Tab>
+                                  )
+                                }
+                              )}
+                              {!addTabFixed && addable && isCard
+                                ? createAddTag(addable, children.length !== 0)
+                                : null}
+                              {mergedJustifyContent ? null : (
+                                <div
+                                  class={`${mergedClsPrefix}-tabs-scroll-padding`}
+                                  style={{ width: `${this.tabsPadding}px` }}
+                                />
+                              )}
+                            </div>
+                          )
+                          let wrappedTabs = rawWrappedTabs
+                          if (isCard && addable) {
+                            wrappedTabs = (
+                              <VResizeObserver onResize={this.handleTabsResize}>
+                                {{
+                                  default: () => rawWrappedTabs
+                                }}
+                              </VResizeObserver>
+                            )
+                          }
+                          return (
+                            <div
+                              ref="tabsElRef"
+                              class={`${mergedClsPrefix}-tabs-nav-scroll-content`}
+                            >
+                              {wrappedTabs}
+                              {isCard ? (
+                                <div class={`${mergedClsPrefix}-tabs-pad`} />
+                              ) : null}
+                              {isCard ? null : (
+                                <div
+                                  ref="barElRef"
+                                  class={`${mergedClsPrefix}-tabs-bar`}
+                                />
+                              )}
+                            </div>
                           )
                         }
-                        return (
-                          <div
-                            ref="tabsElRef"
-                            class={`${mergedClsPrefix}-tabs-nav-scroll-content`}
-                          >
-                            {wrappedTabs}
-                            {isCard ? (
-                              <div class={`${mergedClsPrefix}-tabs-pad`} />
-                            ) : null}
-                            {isCard ? null : (
-                              <div
-                                ref="barElRef"
-                                class={`${mergedClsPrefix}-tabs-bar`}
-                              />
-                            )}
-                          </div>
-                        )
-                      }
-                    }}
-                  </VXScroll>
-                </div>
-              )
-            }}
-          </VResizeObserver>
+                      }}
+                    </VXScroll>
+                  </div>
+                )
+              }}
+            </VResizeObserver>
+          )}
           {addTabFixed && addable && isCard
             ? createAddTag(addable, true)
             : null}

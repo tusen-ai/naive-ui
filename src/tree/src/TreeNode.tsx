@@ -186,13 +186,16 @@ const TreeNode = defineComponent({
         () =>
           NTree.checkableRef.value &&
           (NTree.cascadeRef.value ||
-            (NTree.leafOnlyRef.value && props.tmNode.isLeaf))
+            NTree.mergedCheckStrategyRef.value !== 'child' ||
+            props.tmNode.isLeaf)
       ),
       checkboxDisabled: computed(() => !!props.tmNode.rawNode.checkboxDisabled),
       selectable: computed(
         () =>
           NTree.selectableRef.value &&
-          (NTree.leafOnlyRef.value ? !!props.tmNode.isLeaf : true)
+          (NTree.mergedCheckStrategyRef.value === 'child'
+            ? props.tmNode.isLeaf
+            : true)
       ),
       internalScrollable: NTree.internalScrollableRef,
       draggable: NTree.draggableRef,

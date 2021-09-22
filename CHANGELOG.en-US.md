@@ -1,9 +1,24 @@
 # CHANGELOG
 
-### Feats
-
-- `n-menu` add `accordion` prop , closes [#917](https://github.com/TuSimple/naive-ui/issues/917).
 ## Pending
+
+### Fixes
+
+- Fix `n-global-style` applies style transition on first mount.
+
+## 2.19.1 (2021-09-21)
+
+### Fixes
+
+- Fix `DialogReactive` props are readonly.
+- Fix `n-tree-select` sets `check-strategy='child'` not working in single select mode.
+- Fix `n-upload`'s trigger is compressed in `image-card` mode when it's the only item in the row.
+- Fix `n-upload-dragger` has no border transition.
+- Fix `n-upload` can't upload files.
+- Fix `n-tree`'s `checkable` prop doesn't work when `cascade` is `false`.
+- Fix `n-tree-select`'s `checkable` prop doesn't work when `cascade` or `multiple` is `false`.
+
+## 2.19.0 (2021-09-19)
 
 ### Breaking Changes
 
@@ -12,10 +27,27 @@
 ### Feats
 
 - `n-layout-sider` add `collapsed-trigger-style` prop.
+- `n-menu` add `accordion` prop , closes [#917](https://github.com/TuSimple/naive-ui/issues/917).
+- `n-input-number` add `readonly` prop , closes [#1198](https://github.com/TuSimple/naive-ui/issues/1198).
+- `n-spin` add `description` prop and slot.
+- `n-anchor` add `type` prop.
+- `n-upload` add `abstract` prop, add `n-upload-trigger` 和 `n-upload-file-list` component, closes [#1102](https://github.com/TuSimple/naive-ui/issues/1102).
+- `n-tree` add `indeterminate-keys` prop.
+- `n-tree-select` add `indeterminate-keys` prop.
+- `n-tree` add `on-update:indeterminate-keys` prop.
+- `n-tree-select` add `on-update:indeterminate-keys` prop.
+- `n-tabs` `type` prop add `'segment'` option, closes [#1133](https://github.com/TuSimple/naive-ui/issues/1133).
+- `n-popover` add `z-index` prop, closes [#764](https://github.com/TuSimple/naive-ui/issues/764).
+- `n-modal` add `on-after-enter` prop.
+- `n-modal` add `on-after-leave` prop.
 
 ### Fixes
 
 - Fix `n-select` focus input when closing tag with `filterable` , closes [#1170](https://github.com/TuSimple/naive-ui/issues/1170).
+- Fix `n-button` border on hover conflicts with `n-badge`, closes [#1195](https://github.com/TuSimple/naive-ui/issues/1195).
+- Fix `n-upload` prop `v-model:file-list` dosen't work well when prop `multiple` is `true`, closes [#418](https://github.com/TuSimple/naive-ui/issues/418).
+- Fix `useThemeVars` doesn't apply theme overrides, closes [#1194](https://github.com/TuSimple/naive-ui/issues/1194), [#1176](https://github.com/TuSimple/naive-ui/issues/1176).
+- Fix `n-tabs`'s left shadow isn't displayed in card type.
 
 ## 2.18.2 (2021-09-14)
 

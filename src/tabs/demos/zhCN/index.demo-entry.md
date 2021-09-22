@@ -6,6 +6,7 @@
 
 ```demo
 basic
+segment
 flex-label
 card
 size
@@ -30,7 +31,7 @@ style-inherit-debug
 | pane-style | `string \| object` | `undefined` | 面板的样式 |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 `padding` |
-| type | `'bar' \| 'line' \| 'card'` | `'bar'` | 标签类型 |
+| type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | 标签类型 |
 | value | `string \| number` | `undefined` | 受控模式下的值 |
 | on-add | `() => void` | `undefined` | 添加标签的回调函数 |
 | on-close | `(name: string \| number) => void` | `undefined` | 关闭标签的回调函数 |

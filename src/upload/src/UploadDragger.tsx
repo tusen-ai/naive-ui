@@ -15,10 +15,21 @@ export default defineComponent({
         '`n-upload-dragger` must be placed inside `n-upload`.'
       )
     }
-    return () => (
-      <div class={`${NUpload.mergedClsPrefixRef.value}-upload-dragger`}>
-        {slots}
-      </div>
-    )
+    return () => {
+      const {
+        mergedClsPrefixRef: { value: mergedClsPrefix },
+        mergedDisabledRef: { value: mergedDisabled }
+      } = NUpload
+      return (
+        <div
+          class={[
+            `${mergedClsPrefix}-upload-dragger`,
+            mergedDisabled && `${mergedClsPrefix}-upload-dragger--disabled`
+          ]}
+        >
+          {slots}
+        </div>
+      )
+    }
   }
 })

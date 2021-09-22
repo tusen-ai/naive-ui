@@ -14,6 +14,7 @@ default-files
 before-upload
 image-style
 image-card-style
+abstract
 ```
 
 ## API
@@ -22,6 +23,7 @@ image-card-style
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| abstract | `boolean` | `false` | 是否不存在 DOM 包裹，不支持 `image-card` 类型的 Upload |
 | accept | `string` | `undefined` | 接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a> |
 | action | `string` | `undefined` | 请求提交的地址 |
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | 自定义文件缩略图 |
@@ -61,6 +63,12 @@ image-card-style
 | type? | `string \| null` | MIME 类型 |
 | url? | `string \| null` | 文件下载 URL |
 
+### UploadTrigger Props
+
+| 名称     | 类型      | 默认值  | 说明                |
+| -------- | --------- | ------- | ------------------- |
+| abstract | `boolean` | `false` | 是否不存在 DOM 包裹 |
+
 ### Upload Methods
 
 | 名称 | 类型 | 说明 |
@@ -79,3 +87,9 @@ image-card-style
 | 名称    | 参数 | 说明                                          |
 | ------- | ---- | --------------------------------------------- |
 | default | `()` | 上传拖动器的内容，使用可参考[拖拽上传](#drag) |
+
+### UploadTrigger Slots
+
+| 名称 | 参数 | 说明 |
+| --- | --- | --- |
+| default | `(options: { handleClick: () => void, handleDragOver: (e: DragEvent) => void, handleDragEnter: (e: DragEvent) => void, handleDragLeave: (e: DragEvent) => void, handleDrop: (e: DragEvent) => void})` | `handleClick` 为点击上传函数，`handleDrop` 为拖拽上传函数，`handleDragEnter`、`handleDragOver` 和 `handleDragLeave` 为拖拽事件函数 |

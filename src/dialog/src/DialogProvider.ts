@@ -13,16 +13,18 @@ import {
 } from 'vue'
 import { createId } from 'seemly'
 import { omit } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
 import DialogEnvironment, { exposedDialogEnvProps } from './DialogEnvironment'
 import { useClicked, useClickPosition } from 'vooks'
 
-export type DialogOptions = Omit<
+export type DialogOptions = Mutable<
+Omit<
 Partial<ExtractPropTypes<typeof exposedDialogEnvProps>>,
 'internalStyle'
 > & {
   style?: string | CSSProperties
 }
+>
 
 export type DialogReactive = {
   readonly key: string

@@ -284,7 +284,8 @@ export default defineComponent({
 
     return {
       namespace: namespaceRef,
-      NPopover,
+      isMounted: NPopover.isMountedRef,
+      zIndex: NPopover.zIndexRef,
       followerRef,
       adjustedTo: useAdjustedTo(props),
       followerEnabled: followerEnabledRef,
@@ -295,6 +296,7 @@ export default defineComponent({
     return h(
       VFollower,
       {
+        zIndex: this.zIndex,
         show: this.show,
         enabled: this.followerEnabled,
         to: this.adjustedTo,
@@ -314,7 +316,7 @@ export default defineComponent({
               Transition,
               {
                 name: 'popover-transition',
-                appear: this.NPopover.isMountedRef.value,
+                appear: this.isMounted,
                 // Don't use watch to enable follower, since the transition may
                 // make position sync timing very subtle and buggy.
                 onEnter: () => {

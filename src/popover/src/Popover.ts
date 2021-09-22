@@ -11,11 +11,12 @@ import {
   ComputedRef,
   Ref,
   toRef,
-  cloneVNode
+  cloneVNode,
+  watchEffect
 } from 'vue'
 import { VBinder, VTarget, FollowerPlacement } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
-import { call, keep, warn, getFirstSlotVNode } from '../../_utils'
+import { call, keep, getFirstSlotVNode, warnOnce } from '../../_utils'
 import type {
   ExtractPublicPropTypes,
   ExtractInternalPropTypes,
@@ -81,6 +82,7 @@ export interface PopoverInjection {
   handleClickOutside: (e: MouseEvent) => void
   getTriggerElement: () => HTMLElement
   setBodyInstance: (value: BodyInstance | null) => void
+  zIndexRef: Ref<number | undefined>
   internalRenderBodyRef: Ref<InternalRenderBody | undefined>
   positionManuallyRef: ComputedRef<boolean>
   isMountedRef: Ref<boolean>
@@ -148,34 +150,15 @@ export const popoverBaseProps = {
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
+  zIndex: Number,
   /** @deprecated */
-  onShow: {
-    type: [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void> | undefined
-    >,
-    validator: (): boolean => {
-      warn(
-        'popover',
-        '`on-show` is deprecated, please use `on-update:show` instead.'
-      )
-      return true
-    },
-    default: undefined
-  },
+  onShow: [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void> | undefined
+  >,
   /** @deprecated */
-  onHide: {
-    type: [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void> | undefined
-    >,
-    validator: (): boolean => {
-      warn(
-        'popover',
-        '`on-hide` is deprecated, please use `on-update:show` instead.'
-      )
-      return true
-    },
-    default: undefined
-  },
+  onHide: [Function, Array] as PropType<
+  MaybeArray<(value: boolean) => void> | undefined
+  >,
   /** @deprecated */
   arrow: {
     type: Boolean as PropType<boolean | undefined>,
@@ -201,6 +184,40 @@ export default defineComponent({
   inheritAttrs: false,
   props: popoverProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.maxWidth !== undefined) {
+          warnOnce(
+            'popover',
+            '`max-width` is deprecated, please use `style` instead.'
+          )
+        }
+        if (props.minWidth !== undefined) {
+          warnOnce(
+            'popover',
+            '`max-width` is deprecated, please use `style` instead.'
+          )
+        }
+        if (props.arrow !== undefined) {
+          warnOnce(
+            'popover',
+            '`arrow` is deprecated, please use `showArrow` instead.'
+          )
+        }
+        if (props.onHide !== undefined) {
+          warnOnce(
+            'popover',
+            '`on-hide` is deprecated, please use `on-update:show` instead.'
+          )
+        }
+        if (props.onShow !== undefined) {
+          warnOnce(
+            'popover',
+            '`on-show` is deprecated, please use `on-update:show` instead.'
+          )
+        }
+      })
+    }
     const isMountedRef = useIsMounted()
     // setup show
     const controlledShowRef = computed(() => props.show)
@@ -369,6 +386,7 @@ export default defineComponent({
       setBodyInstance,
       positionManuallyRef: positionManuallyRef,
       isMountedRef: isMountedRef,
+      zIndexRef: toRef(props, 'zIndex'),
       extraClassRef: toRef(props, 'internalExtraClass'),
       internalRenderBodyRef: toRef(props, 'internalRenderBody')
     })
