@@ -237,4 +237,25 @@ describe('n-data-table', () => {
       'n-data-table--bottom-bordered'
     )
   })
+
+  it('should work with `loading` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('.n-base-loading').exists()).not.toBe(true)
+
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} loading={true} />
+    ))
+    expect(wrapper.find('.n-base-loading').exists()).toBe(true)
+  })
 })
