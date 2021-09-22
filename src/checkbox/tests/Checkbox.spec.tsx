@@ -12,6 +12,11 @@ describe('n-checkbox', () => {
     mount(NCheckbox)
   })
 
+  it('should have a role of "checkbox"', () => {
+    const wrapper = mount(NCheckbox)
+    expect(wrapper.find('.n-checkbox').attributes('role')).toBe('checkbox')
+  })
+
   describe('uncontrolled mode', () => {
     it('works', async () => {
       const wrapper = mount(NCheckbox)
