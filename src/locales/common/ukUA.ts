@@ -93,4 +93,4 @@ const ukUA: NLocale = {
   }
 }
 
-export default ruRu
+export default ukUA
