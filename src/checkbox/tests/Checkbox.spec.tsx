@@ -5,6 +5,9 @@ import { NForm, NFormItem } from '../../form'
 
 function expectChecked (wrapper: VueWrapper<any>, value: boolean): void {
   expect(wrapper.classes().some((c) => c.includes('checked'))).toEqual(value)
+  expect(wrapper.find('.n-checkbox').attributes('aria-checked')).toBe(
+    value.toString()
+  )
 }
 
 describe('n-checkbox', () => {
