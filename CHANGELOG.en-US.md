@@ -5,6 +5,9 @@
 ### Localization
 
 - Add ukUA locale.
+### Feats
+
+- `n-date-picker`'s `type` prop support `month` option.
 
 ### Fixes
 
