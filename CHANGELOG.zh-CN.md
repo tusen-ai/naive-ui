@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Localization
+
+- 新增 ukUA locale
+
 ### Fixes
 
 - 修复 `n-global-style` 在首次挂载时应用样式过渡

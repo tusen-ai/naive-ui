@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Localization
+
+- Add ukUA locale.
+
 ### Fixes
 
 - Fix `n-global-style` applies style transition on first mount.
