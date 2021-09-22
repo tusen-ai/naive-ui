@@ -1,6 +1,6 @@
 import type { NLocale } from './enUS'
 
-const ruRu: NLocale = {
+const ukUA: NLocale = {
   name: 'uk-UA',
   global: {
     undo: 'Відмінити',
