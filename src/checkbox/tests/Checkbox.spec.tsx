@@ -51,6 +51,7 @@ describe('n-checkbox', () => {
     expect(wrapper.find('.n-checkbox').classes()).toContain(
       'n-checkbox--indeterminate'
     )
+    expect(wrapper.find('.n-checkbox').attributes('aria-checked')).toBe('mixed')
   })
 
   it('should work with `disabled` prop', () => {

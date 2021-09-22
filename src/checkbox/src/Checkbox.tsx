@@ -285,7 +285,7 @@ export default defineComponent({
         ]}
         tabindex={mergedDisabled || !focusable ? undefined : 0}
         role="checkbox"
-        aria-checked={renderedChecked}
+        aria-checked={indeterminate ? 'mixed' : renderedChecked}
         style={cssVars as CSSProperties}
         onKeyup={handleKeyUp}
         onKeydown={handleKeyDown}
