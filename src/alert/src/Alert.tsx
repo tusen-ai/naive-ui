@@ -177,7 +177,10 @@ export default defineComponent({
                       />
                   ) : null,
                   this.showIcon ? (
-                      <div class={`${mergedClsPrefix}-alert__icon`}>
+                      <div
+                        class={`${mergedClsPrefix}-alert__icon`}
+                        aria-hidden="true"
+                      >
                         {this.$slots.icon ? (
                           renderSlot(this.$slots, 'icon')
                         ) : (
