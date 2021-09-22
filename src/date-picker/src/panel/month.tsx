@@ -39,8 +39,16 @@ export default defineComponent({
         onKeydown={this.handlePanelKeyDown}
       >
         <div class={`${mergedClsPrefix}-date-panel-month-calendar`}>
-          <div
+          <NScrollbar
+            ref="scrollbarInstRef"
             class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
+            // theme={mergedTheme.peers.Scrollbar}
+            // themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+            container={this.virtualListContainer}
+            content={this.virtualListContent}
+            horizontalRailStyle={{ zIndex: 3 }}
+            verticalRailStyle={{ zIndex: 3 }}
+            // internalOnUpdateScrollLeft={setHeaderScrollLeft}
           >
             <VirtualList
               ref="yearScrollRef"
@@ -72,6 +80,7 @@ export default defineComponent({
               ))}
               itemSize={40}
               showScrollbar={false}
+              onScroll={this.handleVirtualListScroll}
             >
               {{
                 default: ({ item }: { item: VNode }) => {
@@ -79,7 +88,8 @@ export default defineComponent({
                 }
               }}
             </VirtualList>
-          </div>
+          </NScrollbar>
+
           <div
             class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
           >

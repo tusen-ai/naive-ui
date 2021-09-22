@@ -18,6 +18,8 @@ import { dateArray, monthArray, strictParse, yearArray } from '../utils'
 import { usePanelCommon } from './use-panel-common'
 import { IsSingleDateDisabled, datePickerInjectionKey } from '../interface'
 import type { DateItem, MonthItem, YearItem } from '../utils'
+import { VirtualListInst } from 'vueuc'
+import { ScrollbarInst } from '../../../scrollbar'
 
 const useCalendarProps = {
   ...usePanelCommon.props,
@@ -66,6 +68,8 @@ function useCalendar (
       ? Date.now()
       : props.value
   )
+  const yearScrollRef = ref<VirtualListInst | null>(null)
+  const scrollbarInstRef = ref<ScrollbarInst | null>(null)
   const nowRef = ref(Date.now())
   const dateArrayRef = computed(() => {
     return dateArray(
@@ -265,6 +269,17 @@ function useCalendar (
   function prevMonth (): void {
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, -1))
   }
+  function virtualListContainer (): HTMLElement {
+    const { value } = yearScrollRef
+    return value?.listElRef as HTMLElement
+  }
+  function virtualListContent (): HTMLElement {
+    const { value } = yearScrollRef
+    return value?.itemsElRef as HTMLElement
+  }
+  function handleVirtualListScroll (e: Event): void {
+    scrollbarInstRef.value?.sync()
+  }
   function handleTimePickerChange (value: number): void {
     panelCommon.doUpdateValue(value, false)
   }
@@ -290,11 +305,15 @@ function useCalendar (
     handleDateInput,
     handleTimePickerChange,
     clearSelectedDateTime,
+    virtualListContainer,
+    virtualListContent,
+    handleVirtualListScroll,
     timePickerSize: panelCommon.timePickerSize,
     dateInputValue: dateInputValueRef,
     datePickerSlots,
     monthScrollRef: ref(null),
-    yearScrollRef: ref(null)
+    yearScrollRef,
+    scrollbarInstRef
   }
 }
 
