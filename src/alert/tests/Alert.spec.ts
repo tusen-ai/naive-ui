@@ -9,6 +9,11 @@ describe('n-alert', () => {
     mount(NAlert)
   })
 
+  it('should have a role of "alert"', () => {
+    const wrapper = mount(NAlert)
+    expect(wrapper.find('.n-alert').attributes('role')).toBe('alert')
+  })
+
   it('shouldnt have default title', () => {
     const wrapper = mount(NAlert)
     expect(wrapper.find('.n-alert-body__title').exists()).toBe(false)
