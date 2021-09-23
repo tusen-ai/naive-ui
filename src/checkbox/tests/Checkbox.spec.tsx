@@ -170,6 +170,11 @@ describe('n-checkbox-group', () => {
     mount(NCheckboxGroup)
   })
 
+  it('should have a role of "group"', () => {
+    const wrapper = mount(NCheckboxGroup)
+    expect(wrapper.find('.n-checkbox-group').attributes('role')).toBe('group')
+  })
+
   it('should work with `disabled` prop', () => {
     const wrapper = mount(NCheckboxGroup, {
       props: {
