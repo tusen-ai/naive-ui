@@ -15,11 +15,6 @@ describe('n-checkbox', () => {
     mount(NCheckbox)
   })
 
-  it('should have a role of "checkbox"', () => {
-    const wrapper = mount(NCheckbox)
-    expect(wrapper.find('.n-checkbox').attributes('role')).toBe('checkbox')
-  })
-
   describe('uncontrolled mode', () => {
     it('works', async () => {
       const wrapper = mount(NCheckbox)
@@ -144,6 +139,29 @@ describe('n-checkbox', () => {
     ))
 
     expect(wrapper.find('.n-checkbox').attributes('style')).toMatchSnapshot()
+  })
+
+  describe('accessibility', () => {
+    it('should have a role of "checkbox"', () => {
+      const wrapper = mount(NCheckbox)
+      expect(wrapper.find('.n-checkbox').attributes('role')).toBe('checkbox')
+    })
+
+    it('should set a default aria-labelledby', () => {
+      const labelId = 'custom-id'
+      const wrapper = mount(() => <NCheckbox aria-labelledby={labelId} />)
+      expect(wrapper.find('.n-checkbox').attributes('aria-labelledby')).toMatch(
+        labelId
+      )
+    })
+
+    it('should allow to set aria-labelledby from outside', () => {
+      const wrapper = mount(NCheckbox)
+      const labelId = wrapper.find('.n-checkbox__label').attributes('id')
+      expect(wrapper.find('.n-checkbox').attributes('aria-labelledby')).toBe(
+        labelId
+      )
+    })
   })
 })
 
