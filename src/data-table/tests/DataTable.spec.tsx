@@ -258,4 +258,29 @@ describe('n-data-table', () => {
     ))
     expect(wrapper.find('.n-base-loading').exists()).toBe(true)
   })
+
+  it('should work with `flex-height` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('.n-data-table').classes()).not.toContain(
+      'n-data-table--flex-height'
+    )
+
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} flexHeight={true} />
+    ))
+    expect(wrapper.find('.n-data-table').classes()).toContain(
+      'n-data-table--flex-height'
+    )
+  })
 })
