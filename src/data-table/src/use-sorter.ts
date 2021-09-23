@@ -134,12 +134,9 @@ export default function useSorter (
     }
     return filteredDataRef.value
   })
-  function doUpdateSorter (sortState: SortState | null): void {
-    const {
-      'onUpdate:sorter': _onUpdateSorter,
-      onUpdateSorter,
-      onSorterChange
-    } = props
+  function getUpdatedSorterState (
+    sortState: SortState | null
+  ): SortState | null | SortState[] {
     let currentSorState = mergedSortStateRef.value.slice()
     // Multiple sorter
     if (
@@ -151,24 +148,35 @@ export default function useSorter (
         (sortState) =>
           getMultiplePriority({ sorter: sortState.sorter }) !== false
       )
-      addSortSate(sortState)
+      updateSortInSortStates(currentSorState, sortState)
+      return currentSorState
     } else if (sortState) {
       // single sorter
-      currentSorState = [sortState]
-    } else {
-      // no sorter
-      currentSorState = []
+      return sortState
     }
-    let updateSorterState: SortState | SortState[] | null = currentSorState
-    if (updateSorterState.length === 1) {
-      updateSorterState = updateSorterState[0]
-    } else if (updateSorterState.length === 0) {
-      updateSorterState = null
-    }
+    // no sorter
+    return null
+  }
+  function doUpdateSorter (sortState: SortState | null): void {
+    const {
+      'onUpdate:sorter': _onUpdateSorter,
+      onUpdateSorter,
+      onSorterChange
+    } = props
+
+    const updateSorterState: SortState | SortState[] | null =
+      getUpdatedSorterState(sortState)
+
     if (_onUpdateSorter) call(_onUpdateSorter, updateSorterState)
     if (onUpdateSorter) call(onUpdateSorter, updateSorterState)
     if (onSorterChange) call(onSorterChange, updateSorterState)
-    uncontrolledSortStateRef.value = currentSorState
+    if (Array.isArray(updateSorterState)) {
+      uncontrolledSortStateRef.value = updateSorterState
+    } else if (updateSorterState) {
+      uncontrolledSortStateRef.value = [updateSorterState]
+    } else {
+      uncontrolledSortStateRef.value = []
+    }
   }
   function sort (columnKey: ColumnKey, order: SortOrder = 'ascend'): void {
     if (!columnKey) {
@@ -192,15 +200,21 @@ export default function useSorter (
   function clearSorter (): void {
     doUpdateSorter(null)
   }
-  function addSortSate (sortState: SortState): void {
-    const index = uncontrolledSortStateRef.value.findIndex(
+  function updateSortInSortStates (
+    sortStates: SortState[],
+    sortState: SortState
+  ): void {
+    const index = sortStates.findIndex(
       (state) => sortState?.columnKey && state.columnKey === sortState.columnKey
     )
     if (index !== undefined && index >= 0) {
-      uncontrolledSortStateRef.value[index] = sortState
+      sortStates[index] = sortState
     } else {
-      uncontrolledSortStateRef.value.push(sortState)
+      sortStates.push(sortState)
     }
+  }
+  function addSortSate (sortState: SortState): void {
+    updateSortInSortStates(uncontrolledSortStateRef.value, sortState)
   }
   return {
     clearSorter,

@@ -81,7 +81,7 @@ export default {
       {
         title: 'Age',
         key: 'age',
-        sortOrder: sortKeyMapOrderRef.value.age,
+        sortOrder: sortKeyMapOrderRef.value.age || false,
         sorter (rowA, rowB) {
           return rowA.age - rowB.age
         }
@@ -89,7 +89,7 @@ export default {
       {
         title: 'Chinese Score',
         key: 'chinese',
-        sortOrder: sortKeyMapOrderRef.value.chinese,
+        sortOrder: sortKeyMapOrderRef.value.chinese || false,
         sorter: {
           compare: (a, b) => a.chinese - b.chinese,
           multiple: 3
@@ -98,7 +98,7 @@ export default {
       {
         title: 'Math Score',
         key: 'math',
-        sortOrder: sortKeyMapOrderRef.value.math,
+        sortOrder: sortKeyMapOrderRef.value.math || false,
         sorter: {
           compare: (a, b) => a.math - b.math,
           multiple: 2
@@ -106,7 +106,7 @@ export default {
       },
       {
         title: 'English Score',
-        sortOrder: sortKeyMapOrderRef.value.english,
+        sortOrder: sortKeyMapOrderRef.value.english || false,
         key: 'english',
         sorter: {
           compare: (a, b) => a.english - b.english,
