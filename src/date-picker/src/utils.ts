@@ -92,9 +92,6 @@ export interface MonthItem {
     year: number
   }
   inCurrentMonth: boolean
-  inSpan: boolean
-  startOfSpan: boolean
-  endOfSpan: boolean
   selected: boolean
   ts: number
   showText?: string
@@ -106,9 +103,6 @@ export interface YearItem {
     year: number
   }
   inCurrentYear: boolean
-  inSpan: boolean
-  startOfSpan: boolean
-  endOfSpan: boolean
   selected: boolean
   ts: number
 }
@@ -151,16 +145,6 @@ function monthItem (
   valueTs: number | [number, number] | null,
   currentTs: number
 ): MonthItem {
-  let inSpan = false
-  let startOfSpan = false
-  let endOfSpan = false
-  if (Array.isArray(valueTs)) {
-    if (valueTs[0] < monthTs && monthTs < valueTs[1]) {
-      inSpan = true
-    }
-    if (matchMonth(valueTs[0], monthTs)) startOfSpan = true
-    if (matchMonth(valueTs[1], monthTs)) endOfSpan = true
-  }
   return {
     type: 'month',
     dateObject: {
@@ -168,9 +152,6 @@ function monthItem (
       year: getYear(monthTs)
     },
     inCurrentMonth: isSameMonth(currentTs, monthTs),
-    inSpan,
-    startOfSpan,
-    endOfSpan,
     selected: valueTs !== null && matchMonth(valueTs, monthTs),
     ts: getTime(monthTs)
   }
@@ -181,25 +162,12 @@ function yearItem (
   valueTs: number | [number, number] | null,
   currentTs: number
 ): YearItem {
-  let inSpan = false
-  let startOfSpan = false
-  let endOfSpan = false
-  if (Array.isArray(valueTs)) {
-    if (valueTs[0] < yearTs && yearTs < valueTs[1]) {
-      inSpan = true
-    }
-    if (matchMonth(valueTs[0], yearTs)) startOfSpan = true
-    if (matchMonth(valueTs[1], yearTs)) endOfSpan = true
-  }
   return {
     type: 'year',
     dateObject: {
       year: getYear(yearTs)
     },
     inCurrentYear: isSameYear(currentTs, yearTs),
-    inSpan,
-    startOfSpan,
-    endOfSpan,
     selected: valueTs !== null && matchYear(valueTs, yearTs),
     ts: getTime(yearTs)
   }

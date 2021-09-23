@@ -5,6 +5,7 @@ import { useCalendar } from './use-calendar'
 import { warnOnce } from '../../../_utils'
 import { NScrollbar } from '../../../scrollbar'
 import { VirtualList } from 'vueuc'
+import { MonthItem, YearItem } from '../utils'
 
 /**
  * Month Panel
@@ -30,6 +31,40 @@ export default defineComponent({
   },
   render () {
     const { mergedClsPrefix, mergedTheme, shortcuts } = this
+    const itemRenderer = (item: YearItem | MonthItem, i: number): VNode => {
+      return (
+        <div
+          data-n-date
+          key={i}
+          data-selected={item.selected ? '' : null}
+          class={[
+            `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
+            {
+              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`]:
+                item.type === 'month'
+                  ? (item as MonthItem).inCurrentMonth
+                  : (item as YearItem).inCurrentYear,
+              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
+                item.selected,
+              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
+                this.mergedIsDateDisabled(item.ts)
+            }
+          ]}
+          onClick={() => this.handleDateClick(item)}
+        >
+          {item.type === 'month'
+            ? (item as MonthItem).showText
+            : (item as YearItem).dateObject.year}
+          {(
+            item.type === 'month'
+              ? (item as MonthItem).inCurrentMonth
+              : (item as YearItem).inCurrentYear
+          ) ? (
+            <div class={`${mergedClsPrefix}-date-panel-month-calendar__sup`} />
+              ) : null}
+        </div>
+      )
+    }
     return (
       <div
         ref="selfRef"
@@ -52,32 +87,9 @@ export default defineComponent({
           >
             <VirtualList
               ref="yearScrollRef"
-              items={this.yearArray.map((yearItem, i) => (
-                <div
-                  data-n-date
-                  key={i}
-                  data-selected={yearItem.selected ? '' : null}
-                  class={[
-                    `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
-                    {
-                      [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`]:
-                        yearItem.inCurrentYear,
-                      [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
-                        yearItem.selected,
-                      [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
-                        this.mergedIsDateDisabled(yearItem.ts)
-                    }
-                  ]}
-                  onClick={() => this.handleDateClick(yearItem)}
-                >
-                  {yearItem.dateObject.year}
-                  {yearItem.inCurrentYear ? (
-                    <div
-                      class={`${mergedClsPrefix}-date-panel-month-calendar__sup`}
-                    />
-                  ) : null}
-                </div>
-              ))}
+              items={this.yearArray.map((yearItem, i) =>
+                itemRenderer(yearItem, i)
+              )}
               itemSize={40}
               showScrollbar={false}
               onScroll={this.handleVirtualListScroll}
@@ -100,32 +112,9 @@ export default defineComponent({
             >
               {{
                 default: () => [
-                  ...this.monthArray.map((monthItem, i) => (
-                    <div
-                      data-n-date
-                      key={i}
-                      data-selected={monthItem.selected ? '' : null}
-                      class={[
-                        `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
-                        {
-                          [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`]:
-                            monthItem.inCurrentMonth,
-                          [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
-                            monthItem.selected,
-                          [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
-                            this.mergedIsDateDisabled(monthItem.ts)
-                        }
-                      ]}
-                      onClick={() => this.handleDateClick(monthItem)}
-                    >
-                      {monthItem.showText}
-                      {monthItem.inCurrentMonth ? (
-                        <div
-                          class={`${mergedClsPrefix}-date-panel-month-calendar__sup`}
-                        />
-                      ) : null}
-                    </div>
-                  )),
+                  ...this.monthArray.map((monthItem, i) =>
+                    itemRenderer(monthItem, i)
+                  ),
                   <div
                     class={`${mergedClsPrefix}-date-panel-month-calendar__padding`}
                   />
