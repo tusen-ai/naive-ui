@@ -59,3 +59,23 @@ exports[`locale works 3`] = `
   </div>
 </div>"
 `;
+
+exports[`locale works 4`] = `
+"<div class=\\"n-config-provider\\">
+  <div class=\\"n-input n-input--resizable n-input--stateful\\" style=\\"--bezier: cubic-bezier(.4, 0, .2, 1); --count-text-color: rgb(158, 164, 170); --color: rgba(255, 255, 255, 1); --font-size: 14px; --border-radius: 3px; --height: 34px; --padding-left: 12px; --padding-right: 12px; --text-color: rgb(51, 54, 57); --caret-color: #18a058; --text-decoration-color: rgb(51, 54, 57); --border: 1px solid rgb(224, 224, 230); --border-disabled: 1px solid rgb(224, 224, 230); --border-hover: 1px solid #36ad6a; --border-focus: 1px solid #36ad6a; --placeholder-color: rgba(194, 194, 194, 1); --placeholder-color-disabled: rgba(209, 209, 209, 1); --icon-size: 16px; --line-height-textarea: 1.6; --color-disabled: rgb(250, 250, 252); --color-focus: rgba(255, 255, 255, 1); --text-color-disabled: rgba(194, 194, 194, 1); --box-shadow-focus: 0 0 0 2px rgba(24, 160, 88, 0.2); --loading-color: #18a058; --caret-color-warning: #f0a020; --color-focus-warning: rgba(255, 255, 255, 1); --box-shadow-focus-warning: 0 0 0 2px rgba(240, 160, 32, 0.2); --border-warning: 1px solid #f0a020; --border-focus-warning: 1px solid #fcb040; --border-hover-warning: 1px solid #fcb040; --loading-color-warning: #f0a020; --caret-color-error: #d03050; --color-focus-error: rgba(255, 255, 255, 1); --box-shadow-focus-error: 0 0 0 2px rgba(208, 48, 80, 0.2); --border-error: 1px solid #d03050; --border-focus-error: 1px solid #de576d; --border-hover-error: 1px solid #de576d; --loading-color-error: #d03050; --clear-color: rgba(194, 194, 194, 1); --clear-size: 16px; --clear-color-hover: rgba(146, 146, 146, 1); --clear-color-pressed: rgba(175, 175, 175, 1); --icon-color: rgba(194, 194, 194, 1); --icon-color-hover: rgba(146, 146, 146, 1); --icon-color-pressed: rgba(175, 175, 175, 1); --icon-color-disabled: rgba(209, 209, 209, 1); --suffix-text-color: rgb(51, 54, 57);\\">
+    <div class=\\"n-input-wrapper\\">
+      <!---->
+      <div class=\\"n-input__input\\"><input type=\\"text\\" class=\\"n-input__input-el\\" placeholder=\\"Ввести\\" size=\\"20\\">
+        <div class=\\"n-input__placeholder\\"><span>Ввести</span></div>
+        <!---->
+      </div>
+      <!---->
+    </div>
+    <!---->
+    <!---->
+    <div class=\\"n-input__border\\"></div>
+    <div class=\\"n-input__state-border\\"></div>
+    <!---->
+  </div>
+</div>"
+`;
