@@ -9,9 +9,13 @@
 ### Fixes
 
 - Fix `n-global-style` applies style transition on first mount.
-- Fix `n-drawer` border transition [#1211].
-- Fix `n-alert` aria support.
-- Fix `n-checkbox` aria support.
+- Fix `n-drawer` border transition, closes[#1211].
+- Fix `n-input-number`'s `value` prop can't be `null` type.
+
+### Feats
+
+- `n-checkbox` add aria support.
+- `n-alert` aria support.
 
 ## 2.19.1 (2021-09-21)
 
