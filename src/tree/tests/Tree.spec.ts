@@ -172,7 +172,6 @@ describe('n-tree', () => {
     })
 
     expect(wrapper.html()).toContain('n-tree-node--checkable')
-    expect(wrapper.find('.n-tree-node-content__text').html()).toContain('test')
   })
 
   it('should work with `draggable`', () => {
