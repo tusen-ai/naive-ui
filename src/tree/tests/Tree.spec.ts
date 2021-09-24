@@ -150,4 +150,117 @@ describe('n-tree', () => {
       .find((el) => el.text() === 'test2-1')
     expect(test2Child).toBeDefined()
   })
+
+  it('should work with `checkable` and `defaultCheckedKeys`', () => {
+    const wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: 'test',
+            key: '123',
+            children: [
+              {
+                label: '1231',
+                key: '1231'
+              }
+            ]
+          }
+        ],
+        checkable: true,
+        defaultCheckedKeys: ['1231']
+      }
+    })
+
+    expect(wrapper.html()).toContain('n-tree-node--checkable')
+  })
+
+  it('should work with `draggable`', () => {
+    const wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: 'test',
+            key: '123',
+            children: [
+              {
+                label: '1231',
+                key: '1231'
+              }
+            ]
+          }
+        ],
+        draggable: true
+      }
+    })
+
+    expect(wrapper.find('.n-tree-node-content').html()).toContain(
+      'draggable="true"'
+    )
+  })
+
+  it('should work with `blockNode`', () => {
+    const wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: 'test',
+            key: '123',
+            children: [
+              {
+                label: '1231',
+                key: '1231'
+              }
+            ]
+          }
+        ],
+        blockNode: true
+      }
+    })
+
+    expect(wrapper.find('.n-tree--block-node').exists()).toBe(true)
+  })
+
+  it('should work with `blockLine`', () => {
+    const wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: 'test',
+            key: '123',
+            children: [
+              {
+                label: '1231',
+                key: '1231'
+              }
+            ]
+          }
+        ],
+        blockLine: true
+      }
+    })
+
+    expect(wrapper.find('.n-tree--block-line').exists()).toBe(true)
+  })
+
+  it('should work with `disabled`', () => {
+    const wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: 'test',
+            key: '123',
+            disabled: true,
+            children: [
+              {
+                label: '1231',
+                key: '1231'
+              }
+            ]
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.find('.n-tree-node--disabled').exists()).toBe(true)
+  })
 })
