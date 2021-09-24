@@ -283,4 +283,39 @@ describe('n-data-table', () => {
       'n-data-table--flex-height'
     )
   })
+
+  it('should work with `row-class-name` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    const getRowClassName = (rowData: any, index: number): string => {
+      return `${index}-test`
+    }
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('tbody .n-data-table-tr').classes()).not.toContain(
+      'test'
+    )
+
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} rowClassName="test" />
+    ))
+    expect(wrapper.find('tbody .n-data-table-tr').classes()).toContain('test')
+
+    wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        rowClassName={getRowClassName}
+      />
+    ))
+    expect(wrapper.find('tbody .n-data-table-tr').classes()).toContain('0-test')
+  })
 })
