@@ -22,5 +22,14 @@ export default c('body', `
   c('input', `
     font-family: inherit;
     font-size: inherit;
+  `),
+  c('ul', `
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  `),
+  c('a', `
+    color: inherit;
+    text-decoration: inherit;
   `)
 ])

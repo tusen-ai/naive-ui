@@ -18,9 +18,9 @@ describe('n-breadcrumb', () => {
       }
     })
 
-    expect(wrapper.find('.n-breadcrumb').element.children.length).toBe(2)
+    expect(wrapper.find('ul').element.children.length).toBe(2)
     expect(
-      wrapper.find('.n-breadcrumb').element.children[0].getAttribute('class')
+      wrapper.find('ul').element.children[0].getAttribute('class')
     ).toContain('n-breadcrumb-item')
     const itemList = wrapper.findAll('.n-breadcrumb-item__link')
     expect(itemList[0].text()).toBe('test-item1')
@@ -61,6 +61,31 @@ describe('n-breadcrumb', () => {
 
     expect(wrapper.findAll('.n-breadcrumb-item__separator')[0].text()).toBe('@')
     expect(wrapper.findAll('.n-breadcrumb-item__separator')[1].text()).toBe('/')
+  })
+
+  it('should be possible to pass `href` props to NBreadcrumbItem', () => {
+    const wrapper = mount(NBreadcrumb, {
+      slots: {
+        default: () => [
+          h(NBreadcrumbItem, null, { default: () => 'Home' }),
+          h(
+            NBreadcrumbItem,
+            { href: '/path1', isCurrent: true },
+            { default: () => 'Path1' }
+          )
+        ]
+      }
+    })
+
+    const firstBreadcrumbItem = wrapper.find('span.n-breadcrumb-item__link')
+    const secondBreadcrumbItem = wrapper.find(
+      'a.n-breadcrumb-item__link[aria-current="location"]'
+    )
+
+    expect(firstBreadcrumbItem.exists()).toBe(true)
+    expect(firstBreadcrumbItem.text()).toMatch('Home')
+    expect(secondBreadcrumbItem.exists()).toBe(true)
+    expect(secondBreadcrumbItem.text()).toMatch('Path1')
   })
 
   describe('accessibility', () => {

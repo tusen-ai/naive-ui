@@ -85,7 +85,7 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
         aria-label="Breadcrumb"
       >
-        {this.$slots}
+        <ul>{this.$slots}</ul>
       </nav>
     )
   }

@@ -1,9 +1,18 @@
-import { h, defineComponent, inject, ExtractPropTypes } from 'vue'
+import {
+  h,
+  defineComponent,
+  inject,
+  ExtractPropTypes,
+  PropType,
+  computed
+} from 'vue'
 import { warn } from '../../_utils'
 import { breadcrumbInjectionKey } from './Breadcrumb'
 
 const breadcrumbItemProps = {
-  separator: String
+  separator: String,
+  href: String as PropType<string | undefined>,
+  isCurrent: Boolean as PropType<boolean>
 } as const
 
 export type BreadcrumbItemProps = Partial<
@@ -13,7 +22,7 @@ ExtractPropTypes<typeof breadcrumbItemProps>
 export default defineComponent({
   name: 'BreadcrumbItem',
   props: breadcrumbItemProps,
-  setup (props, { slots }) {
+  setup ({ separator, href, isCurrent = false }, { slots }) {
     const NBreadcrumb = inject(breadcrumbInjectionKey, null)
     if (!NBreadcrumb) {
       if (__DEV__) {
@@ -25,20 +34,31 @@ export default defineComponent({
       return () => null
     }
     const { separatorRef, mergedClsPrefixRef } = NBreadcrumb
+    const htmlTag = computed(() => (href ? 'a' : 'span'))
+    const ariaCurrent = computed(() => (href && isCurrent ? 'location' : null))
+
     return () => {
       const { value: mergedClsPrefix } = mergedClsPrefixRef
-      return (
-        <span class={`${mergedClsPrefix}-breadcrumb-item`}>
-          <span class={`${mergedClsPrefix}-breadcrumb-item__link`}>
-            {slots}
-          </span>
-          <span class={`${mergedClsPrefix}-breadcrumb-item__separator`}>
-            {slots.separator
-              ? slots.separator()
-              : props.separator ?? separatorRef.value}
-          </span>
-        </span>
-      )
+
+      return h('li', { class: `${mergedClsPrefix}-breadcrumb-item` }, [
+        h(
+          htmlTag.value,
+          {
+            class: `${mergedClsPrefix}-breadcrumb-item__link`,
+            'aria-current': ariaCurrent.value,
+            href
+          },
+          slots
+        ),
+        h(
+          'span',
+          {
+            class: `${mergedClsPrefix}-breadcrumb-item__separator`,
+            'aria-hidden': true
+          },
+          slots.separator ? slots.separator() : separator ?? separatorRef.value
+        )
+      ])
     }
   }
 })
