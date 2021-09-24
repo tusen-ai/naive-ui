@@ -1,6 +1,7 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NBreadcrumb, NBreadcrumbItem } from '../index'
+import Breadcrumb from '../src/Breadcrumb'
 
 describe('n-breadcrumb', () => {
   it('should work with import on demand', () => {
@@ -60,5 +61,14 @@ describe('n-breadcrumb', () => {
 
     expect(wrapper.findAll('.n-breadcrumb-item__separator')[0].text()).toBe('@')
     expect(wrapper.findAll('.n-breadcrumb-item__separator')[1].text()).toBe('/')
+  })
+
+  describe('accessibility', () => {
+    it('should labelled the landmark region', () => {
+      const wrapper = mount(Breadcrumb)
+      expect(wrapper.find('.n-breadcrumb').attributes('aria-label')).toBe(
+        'Breadcrumb'
+      )
+    })
   })
 })
