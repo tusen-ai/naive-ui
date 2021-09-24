@@ -32,15 +32,20 @@ function getSortFunction (
     columnKey &&
     (sorter === undefined ||
       sorter === 'default' ||
-      (typeof sorter === 'object' && sorter?.compare === 'default'))
+      (typeof sorter === 'object' && sorter.compare === 'default'))
   ) {
     return getDefaultSorterFn(columnKey)
   }
   if (typeof sorter === 'function') {
     return sorter
   }
-  if (sorter && typeof sorter === 'object' && sorter.compare) {
-    return sorter.compare as CompareFn
+  if (
+    sorter &&
+    typeof sorter === 'object' &&
+    sorter.compare &&
+    sorter.compare !== 'default'
+  ) {
+    return sorter.compare
   }
   return false
 }
@@ -137,19 +142,19 @@ export default function useSorter (
   function getUpdatedSorterState (
     sortState: SortState | null
   ): SortState | null | SortState[] {
-    let currentSorState = mergedSortStateRef.value.slice()
+    let currentSortState = mergedSortStateRef.value.slice()
     // Multiple sorter
     if (
       sortState &&
       getMultiplePriority({ sorter: sortState.sorter }) !== false
     ) {
       // clear column is not multiple sort
-      currentSorState = currentSorState.filter(
+      currentSortState = currentSortState.filter(
         (sortState) =>
           getMultiplePriority({ sorter: sortState.sorter }) !== false
       )
-      updateSortInSortStates(currentSorState, sortState)
-      return currentSorState
+      updateSortInSortStates(currentSortState, sortState)
+      return currentSortState
     } else if (sortState) {
       // single sorter
       return sortState

@@ -524,21 +524,13 @@ export default defineComponent({
                     {hasChildren && colIndex === firstContentfulColIndex
                       ? [
                           repeat(
-<<<<<<< HEAD
                             isSummary ? 0 : rowInfo.level,
-=======
-                            isSummary ? 0 : (rowInfo).level,
->>>>>>> optimization
                             <div
                               class={`${mergedClsPrefix}-data-table-indent`}
                               style={indentStyle}
                             />
                           ),
-<<<<<<< HEAD
                           isSummary || !rowInfo.children ? (
-=======
-                          isSummary || !(rowInfo).children ? (
->>>>>>> optimization
                             <div
                               class={`${mergedClsPrefix}-data-table-expand-placeholder`}
                             />
