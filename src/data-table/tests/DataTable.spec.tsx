@@ -318,7 +318,7 @@ describe('n-data-table', () => {
     ))
     expect(wrapper.find('tbody .n-data-table-tr').classes()).toContain('0-test')
   })
-  it('should work with multiple sorter uncontrolled', async () => {
+  describe('should work with multiple sorter', () => {
     interface UserData {
       name: string
       age: number
@@ -462,8 +462,7 @@ describe('n-data-table', () => {
     const ageDom: HTMLElement | null = document.querySelector('#age-title')
 
     it('chinese: descend, math: false, english: false', async () => {
-      chineseDom?.click()
-      await nextTick()
+      await chineseDom?.click()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -473,8 +472,7 @@ describe('n-data-table', () => {
       ).toEqual(true)
     })
     it('chinese: descend, math: descend, english: false', async () => {
-      mathDom?.click()
-      await nextTick()
+      await mathDom?.click()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -485,8 +483,7 @@ describe('n-data-table', () => {
     })
 
     it('chinese: descend, math: descend, english: descend', async () => {
-      englishDom?.click()
-      await nextTick()
+      await englishDom?.click()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -497,8 +494,7 @@ describe('n-data-table', () => {
     })
 
     it('chinese: ascend, math: descend, english: descend', async () => {
-      chineseDom?.click()
-      await nextTick()
+      await chineseDom?.click()
       expect(
         await checkScoreIsMatched([
           [88, 98, 98, 98],
@@ -509,8 +505,7 @@ describe('n-data-table', () => {
     })
 
     it('chinese: false, math: descend, english: descend', async () => {
-      chineseDom?.click()
-      await nextTick()
+      await chineseDom?.click()
       expect(
         await checkScoreIsMatched([
           [88, 98, 98, 98],
@@ -521,8 +516,7 @@ describe('n-data-table', () => {
     })
 
     it('chinese: false, math: ascend, english: descend', async () => {
-      mathDom?.click()
-      await nextTick()
+      await mathDom?.click()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -533,8 +527,7 @@ describe('n-data-table', () => {
     })
 
     it('chinese: false, math: false, english: descend', async () => {
-      mathDom?.click()
-      await nextTick()
+      await mathDom?.click()
       expect(
         await checkScoreIsMatched([
           [98, 98, 88, 98],
@@ -545,8 +538,7 @@ describe('n-data-table', () => {
     })
 
     it('chinese: descend, math: false, english: descend', async () => {
-      chineseDom?.click()
-      await nextTick()
+      await chineseDom?.click()
       expect(
         await checkScoreIsMatched([
           [98, 98, 98, 88],
@@ -575,8 +567,7 @@ describe('n-data-table', () => {
     })
 
     it('age: descend', async () => {
-      ageDom?.click()
-      await nextTick()
+      await ageDom?.click()
       const result =
         (await checkIsMatched('.age-col', [42, 32, 32, 32])) &&
         (await checkScoreIsMatched([
