@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-breadcrumb-item` add `href` prop.
+- `n-breadcrumb-item` add `isCurrent` prop.
+
 ## 2.19.2 (2021-09-26)
 
 ### i18n
