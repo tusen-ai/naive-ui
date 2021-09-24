@@ -27,11 +27,13 @@ export default defineComponent({
         }
       })
     }
-    return useCalendar(props, 'month')
-  },
-  render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts } = this
-    const itemRenderer = (item: YearItem | MonthItem, i: number): VNode => {
+    const useCalendarRef = useCalendar(props, 'month')
+    const itemRenderer = (
+      item: YearItem | MonthItem,
+      i: number,
+      mergedClsPrefix: string
+    ): VNode => {
+      const { mergedIsDateDisabled, handleDateClick } = useCalendarRef
       return (
         <div
           data-n-date
@@ -42,29 +44,30 @@ export default defineComponent({
             {
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`]:
                 item.type === 'month'
-                  ? (item as MonthItem).inCurrentMonth
-                  : (item as YearItem).inCurrentYear,
+                  ? item.inCurrentMonth
+                  : item.inCurrentYear,
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
                 item.selected,
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
-                this.mergedIsDateDisabled(item.ts)
+                mergedIsDateDisabled(item.ts)
             }
           ]}
-          onClick={() => this.handleDateClick(item)}
+          onClick={() => handleDateClick(item)}
         >
-          {item.type === 'month'
-            ? (item as MonthItem).showText
-            : (item as YearItem).dateObject.year}
+          {item.type === 'month' ? item.formattedText : item.dateObject.year}
           {(
-            item.type === 'month'
-              ? (item as MonthItem).inCurrentMonth
-              : (item as YearItem).inCurrentYear
+            item.type === 'month' ? item.inCurrentMonth : item.inCurrentYear
           ) ? (
             <div class={`${mergedClsPrefix}-date-panel-month-calendar__sup`} />
               ) : null}
         </div>
       )
     }
+    return { ...useCalendarRef, itemRenderer }
+  },
+  render () {
+    const { mergedClsPrefix, mergedTheme, shortcuts, itemRenderer } = this
+
     return (
       <div
         ref="selfRef"
@@ -88,7 +91,7 @@ export default defineComponent({
             <VirtualList
               ref="yearScrollRef"
               items={this.yearArray.map((yearItem, i) =>
-                itemRenderer(yearItem, i)
+                itemRenderer(yearItem, i, mergedClsPrefix)
               )}
               itemSize={40}
               showScrollbar={false}
@@ -113,7 +116,7 @@ export default defineComponent({
               {{
                 default: () => [
                   ...this.monthArray.map((monthItem, i) =>
-                    itemRenderer(monthItem, i)
+                    itemRenderer(monthItem, i, mergedClsPrefix)
                   ),
                   <div
                     class={`${mergedClsPrefix}-date-panel-month-calendar__padding`}

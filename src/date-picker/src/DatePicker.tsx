@@ -469,7 +469,9 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
-      void nextTick(scrollTimer)
+      if (props.type === 'month') {
+        void nextTick(scrollTimer)
+      }
     }
     function closeCalendar ({
       returnFocus,
@@ -829,7 +831,6 @@ export default defineComponent({
                               ) : (
                                   <DatePanel {...commonPanelProps} />
                               ),
-
                               [[clickoutside, this.handleClickOutside]]
                             )
                             : null

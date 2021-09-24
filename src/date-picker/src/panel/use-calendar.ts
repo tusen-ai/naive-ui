@@ -82,7 +82,7 @@ function useCalendar (
   const monthArrayRef = computed(() => {
     return monthArray(calendarValueRef.value, props.value, nowRef.value).map(
       (item) => {
-        item.showText = format(
+        item.formattedText = format(
           item.ts,
           localeRef.value.monthFormat,
           panelCommon.dateFnsOptions.value

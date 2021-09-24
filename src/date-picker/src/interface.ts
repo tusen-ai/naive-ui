@@ -43,8 +43,8 @@ export type OnClose = (disableUpdateOnClose: boolean) => void
 
 export interface PanelRef {
   $el: HTMLElement
-  monthScrollRef?: ScrollbarInst
-  yearScrollRef?: VirtualListInst
+  monthScrollRef: ScrollbarInst | null
+  yearScrollRef: VirtualListInst | null
 }
 
 export type DatePickerInjection = {

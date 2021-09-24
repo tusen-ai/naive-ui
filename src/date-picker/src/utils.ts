@@ -70,7 +70,7 @@ function matchYear (
 }
 
 export interface DateItem {
-  type: string
+  type: 'day'
   dateObject: {
     date: number
     month: number
@@ -86,7 +86,7 @@ export interface DateItem {
 }
 
 export interface MonthItem {
-  type: string
+  type: 'month'
   dateObject: {
     month: number
     year: number
@@ -94,11 +94,11 @@ export interface MonthItem {
   inCurrentMonth: boolean
   selected: boolean
   ts: number
-  showText?: string
+  formattedText?: string
 }
 
 export interface YearItem {
-  type: string
+  type: 'year'
   dateObject: {
     year: number
   }
