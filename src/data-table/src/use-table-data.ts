@@ -18,7 +18,7 @@ import {
 import { createShallowClonedObject } from './utils'
 import { PaginationProps } from '../../pagination/src/Pagination'
 import { call, warn } from '../../_utils'
-import useSorter from './use-sorter'
+import { useSorter } from './use-sorter'
 // useTableData combines filter, sorter and pagination
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -69,7 +69,6 @@ export function useTableData (
   })
 
   const uncontrolledFilterStateRef = ref<FilterState>({})
-  // const uncontrolledSortStateRef = ref<SortState | null>(null)
   const uncontrolledCurrentPageRef = ref(1)
   const uncontrolledPageSizeRef = ref(10)
 
@@ -159,19 +158,14 @@ export function useTableData (
       : []
   })
 
-  const { sortedDataRef, doUpdateSorter, mergedSortStateRef, addSortSate } =
-    useSorter(props, {
+  const { sortedDataRef, doUpdateSorter, mergedSortStateRef } = useSorter(
+    props,
+    {
       dataRelatedColsRef,
       filteredDataRef
-    })
-  dataRelatedColsRef.value.forEach((column) => {
-    if (column.sorter !== undefined) {
-      addSortSate({
-        columnKey: column.key,
-        sorter: column.sorter,
-        order: column.defaultSortOrder ?? false
-      })
     }
+  )
+  dataRelatedColsRef.value.forEach((column) => {
     if (column.filter) {
       const defaultFilterOptionValues = column.defaultFilterOptionValues
       if (column.filterMultiple) {
@@ -302,18 +296,7 @@ export function useTableData (
     if (_onUpdatePageSize) call(_onUpdatePageSize, pageSize)
     uncontrolledPageSizeRef.value = pageSize
   }
-  // // TODO: 处理
-  // function doUpdateSorter (sortState: SortState | null): void {
-  //   const {
-  //     'onUpdate:sorter': _onUpdateSorter,
-  //     onUpdateSorter,
-  //     onSorterChange
-  //   } = props
-  //   if (_onUpdateSorter) call(_onUpdateSorter, sortState)
-  //   if (onUpdateSorter) call(onUpdateSorter, sortState)
-  //   if (onSorterChange) call(onSorterChange, sortState)
-  //   uncontrolledSortStateRef.value = sortState
-  // }
+
   function doUpdateFilters (
     filters: FilterState,
     sourceColumn?: TableBaseColumn

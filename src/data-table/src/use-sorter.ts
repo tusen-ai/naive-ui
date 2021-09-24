@@ -24,9 +24,10 @@ function getMultiplePriority ({
   }
   return false
 }
+
 function getSortFunction (
   sorter: TableBaseColumn['sorter'],
-  columnKey?: ColumnKey
+  columnKey: ColumnKey
 ): CompareFn | false {
   if (
     columnKey &&
@@ -49,11 +50,13 @@ function getSortFunction (
   }
   return false
 }
+
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function getDefaultSorterFn (columnKey: ColumnKey) {
   return (row1: InternalRowData, row2: InternalRowData) => {
     const value1 = row1[columnKey]
     const value2 = row2[columnKey]
+
     if (typeof value1 === 'number' && typeof value2 === 'number') {
       return value1 - value2
     } else if (typeof value1 === 'string' && typeof value2 === 'string') {
@@ -64,7 +67,7 @@ function getDefaultSorterFn (columnKey: ColumnKey) {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export default function useSorter (
+export function useSorter (
   props: DataTableSetupProps,
   {
     dataRelatedColsRef,
@@ -77,7 +80,6 @@ export default function useSorter (
   }
 ) {
   const uncontrolledSortStateRef = ref<SortState[]>([])
-
   const mergedSortStateRef = computed(() => {
     // If one of the columns's sort order is false or 'ascend' or 'descend',
     // the table's controll functionality should work in controlled manner.
@@ -89,7 +91,7 @@ export default function useSorter (
           column.sortOrder === 'descend' ||
           column.sortOrder === false)
     )
-    // if multiple column is controlled sortable, then we need to find a column with active sortOrder
+    // if multiple columns are controlled sortable, then we need to find columns with active sortOrder
     const columnToSort: TableBaseColumn[] | undefined = (
       columnsWithControlledSortOrder as TableBaseColumn[]
     ).filter((col: TableBaseColumn) => col.sortOrder !== false)
@@ -109,7 +111,6 @@ export default function useSorter (
     if (columnsWithControlledSortOrder.length) return []
     return uncontrolledSortStateRef.value
   })
-
   const sortedDataRef = computed<TmNode[]>(() => {
     const activeSorters = mergedSortStateRef.value.slice().sort((a, b) => {
       const item1Priority = getMultiplePriority(a) || 0
@@ -139,6 +140,17 @@ export default function useSorter (
     }
     return filteredDataRef.value
   })
+
+  dataRelatedColsRef.value.forEach((column) => {
+    if (column.sorter !== undefined) {
+      addSortSate({
+        columnKey: column.key,
+        sorter: column.sorter,
+        order: column.defaultSortOrder ?? false
+      })
+    }
+  })
+
   function getUpdatedSorterState (
     sortState: SortState | null
   ): SortState | null | SortState[] {
@@ -162,6 +174,7 @@ export default function useSorter (
     // no sorter
     return null
   }
+
   function doUpdateSorter (sortState: SortState | null): void {
     const {
       'onUpdate:sorter': _onUpdateSorter,
@@ -183,6 +196,7 @@ export default function useSorter (
       uncontrolledSortStateRef.value = []
     }
   }
+
   function sort (columnKey: ColumnKey, order: SortOrder = 'ascend'): void {
     if (!columnKey) {
       clearSorter()
@@ -202,9 +216,11 @@ export default function useSorter (
       })
     }
   }
+
   function clearSorter (): void {
     doUpdateSorter(null)
   }
+
   function updateSortInSortStates (
     sortStates: SortState[],
     sortState: SortState
@@ -218,16 +234,17 @@ export default function useSorter (
       sortStates.push(sortState)
     }
   }
+
   function addSortSate (sortState: SortState): void {
     updateSortInSortStates(uncontrolledSortStateRef.value, sortState)
   }
+
   return {
     clearSorter,
     sort,
     sortedDataRef,
     mergedSortStateRef,
     uncontrolledSortStateRef,
-    doUpdateSorter,
-    addSortSate
+    doUpdateSorter
   }
 }

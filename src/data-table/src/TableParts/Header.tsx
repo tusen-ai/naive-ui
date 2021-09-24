@@ -99,7 +99,6 @@ export default defineComponent({
       checkOptions: checkOptionsRef,
       mergedTableLayout: mergedTableLayoutRef,
       headerCheckboxDisabled: headerCheckboxDisabledRef,
-      isColumnSorting,
       handleMouseenter,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
