@@ -11,6 +11,7 @@
 - Fix `n-global-style` applies style transition on first mount.
 - Fix `n-drawer` border transition, closes[#1211].
 - Fix `n-input-number`'s `value` prop can't be `null` type.
+- Fix components with rtl support throws error in SSR.
 
 ### Feats
 

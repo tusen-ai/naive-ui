@@ -11,6 +11,7 @@
 - 修复 `n-global-style` 在首次挂载时应用样式过渡
 - 修复 `n-drawer` 边界缺少 transition，关闭 [#1211]
 - 修复 `n-input-number` 的 `value` 属性不能为 null 类型
+- 修复支持 rtl 的组件 SSR 报错
 
 ### Feats
 
