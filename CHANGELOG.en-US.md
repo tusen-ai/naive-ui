@@ -2,17 +2,18 @@
 
 ## Pending
 
-### Localization
+### i18n
 
 - Add ukUA locale.
 
 ### Fixes
 
 - Fix `n-global-style` applies style transition on first mount.
-- Fix `n-drawer` border transition, closes[#1211].
+- Fix `n-drawer` border transition, closes [#1211](https://github.com/TuSimple/naive-ui/issues/1211).
 - Fix `n-input-number`'s `value` prop can't be `null` type.
 - Fix components with rtl support throws error in SSR.
 - Fix components with popover throws error in SSR.
+- Fix global theme overrides not working for `n-select` trigger, closes [#1229](https://github.com/TuSimple/naive-ui/issues/1229).
 
 ### Feats
 
@@ -1124,7 +1125,7 @@ See vue3.md
 - Add `n-space` component.
 - Make `n-drawer` content scrollable.
 
-### Localization
+### i18n
 
 - Add zhCN for `n-log`
 

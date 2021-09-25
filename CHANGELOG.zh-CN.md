@@ -2,17 +2,18 @@
 
 ## Pending
 
-### Localization
+### i18n
 
 - 新增 ukUA locale
 
 ### Fixes
 
 - 修复 `n-global-style` 在首次挂载时应用样式过渡
-- 修复 `n-drawer` 边界缺少 transition，关闭 [#1211]
+- 修复 `n-drawer` 边界缺少 transition，关闭 [#1211](https://github.com/TuSimple/naive-ui/issues/1211)
 - 修复 `n-input-number` 的 `value` 属性不能为 null 类型
 - 修复支持 rtl 的组件 SSR 报错
 - 修复有弹出层组件的 SSR 报错
+- 修复全局样式覆盖对 select 触发器不生效，关闭 [#1229](https://github.com/TuSimple/naive-ui/issues/1229)
 
 ### Feats
 
@@ -1125,7 +1126,7 @@
 - 增加 `n-space` 组件
 - `n-drawer` 内容可滚动
 
-### Localization
+### i18n
 
 - `n-log` 添加 zhCN 本地化
 
