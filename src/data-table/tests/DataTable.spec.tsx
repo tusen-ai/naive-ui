@@ -205,4 +205,177 @@ describe('n-data-table', () => {
       'n-data-table--bordered'
     )
   })
+
+  it('should work with `bottom-bordered` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} bordered={false} />
+    ))
+    expect(wrapper.find('.n-data-table').classes()).toContain(
+      'n-data-table--bottom-bordered'
+    )
+
+    wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        bordered={false}
+        bottom-bordered={false}
+      />
+    ))
+    expect(wrapper.find('.n-data-table').classes()).not.toContain(
+      'n-data-table--bottom-bordered'
+    )
+  })
+
+  it('should work with `loading` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('.n-base-loading').exists()).not.toBe(true)
+
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} loading={true} />
+    ))
+    expect(wrapper.find('.n-base-loading').exists()).toBe(true)
+  })
+
+  it('should work with `flex-height` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('.n-data-table').classes()).not.toContain(
+      'n-data-table--flex-height'
+    )
+
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} flexHeight={true} />
+    ))
+    expect(wrapper.find('.n-data-table').classes()).toContain(
+      'n-data-table--flex-height'
+    )
+  })
+
+  it('should work with `row-class-name` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    const getRowClassName = (rowData: any, index: number): string => {
+      return `${index}-test`
+    }
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('tbody .n-data-table-tr').classes()).not.toContain(
+      'test'
+    )
+
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} rowClassName="test" />
+    ))
+    expect(wrapper.find('tbody .n-data-table-tr').classes()).toContain('test')
+
+    wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        rowClassName={getRowClassName}
+      />
+    ))
+    expect(wrapper.find('tbody .n-data-table-tr').classes()).toContain('0-test')
+  })
+
+  it('should work with `indent` prop', async () => {
+    const columns = [
+      {
+        title: 'name',
+        key: 'name'
+      },
+      {
+        title: 'index',
+        key: 'index'
+      }
+    ]
+    const data = [
+      {
+        name: '07akioni',
+        index: '07',
+        children: [
+          {
+            name: '08akioni',
+            index: '08',
+            children: [
+              {
+                name: '09akioni',
+                index: '09'
+              },
+              {
+                name: '10akioni',
+                index: '10'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+    const rowKey = (row: any): number => row.index
+    let wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        row-key={rowKey}
+        default-expanded-row-keys={['07']}
+      />
+    ))
+    expect(wrapper.find('.n-data-table-indent').attributes('style')).toContain(
+      'width: 16px'
+    )
+
+    wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        row-key={rowKey}
+        default-expanded-row-keys={['07']}
+        indent={20}
+      />
+    ))
+    expect(wrapper.find('.n-data-table-indent').attributes('style')).toContain(
+      'width: 20px'
+    )
+  })
 })

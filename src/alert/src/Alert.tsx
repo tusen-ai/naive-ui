@@ -5,7 +5,8 @@ import {
   defineComponent,
   PropType,
   mergeProps,
-  renderSlot
+  renderSlot,
+  HTMLAttributes
 } from 'vue'
 import { getMargin } from 'seemly'
 import {
@@ -150,74 +151,74 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
     return (
       <NFadeInExpandTransition onAfterLeave={this.handleAfterLeave}>
         {{
-          default: () =>
-            this.visible
-              ? h(
-                'div',
-                mergeProps(this.$attrs, {
-                  class: [
-                      `${mergedClsPrefix}-alert`,
-                      {
-                        [`${mergedClsPrefix}-alert--show-icon`]: this.showIcon
-                      }
-                  ],
-                  style: this.cssVars
-                }),
-                [
-                  this.closable ? (
-                    <NBaseClose
-                      clsPrefix={mergedClsPrefix}
-                      class={`${mergedClsPrefix}-alert__close`}
-                      onClick={this.handleCloseClick}
-                    />
-                  ) : null,
-                  this.showIcon ? (
-                    <div class={`${mergedClsPrefix}-alert__icon`}>
-                      {this.$slots.icon ? (
-                        renderSlot(this.$slots, 'icon')
-                      ) : (
-                        <NBaseIcon clsPrefix={mergedClsPrefix}>
-                          {{
-                            default: () => {
-                              switch (this.type) {
-                                case 'success':
-                                  return <SuccessIcon />
-                                case 'info':
-                                  return <InfoIcon />
-                                case 'warning':
-                                  return <WarningIcon />
-                                case 'error':
-                                  return <ErrorIcon />
-                                default:
-                                  return null
-                              }
+          default: () => {
+            const { mergedClsPrefix, $slots } = this
+            const attrs: HTMLAttributes = {
+              class: [
+                `${mergedClsPrefix}-alert`,
+                this.showIcon && `${mergedClsPrefix}-alert--show-icon`
+              ],
+              style: this.cssVars as any,
+              role: 'alert'
+            }
+            return this.visible ? (
+              <div {...mergeProps(this.$attrs, attrs as any)}>
+                {this.closable && (
+                  <NBaseClose
+                    clsPrefix={mergedClsPrefix}
+                    class={`${mergedClsPrefix}-alert__close`}
+                    onClick={this.handleCloseClick}
+                  />
+                )}
+                {this.showIcon && (
+                  <div
+                    class={`${mergedClsPrefix}-alert__icon`}
+                    aria-hidden="true"
+                  >
+                    {$slots.icon ? (
+                      $slots.icon()
+                    ) : (
+                      <NBaseIcon clsPrefix={mergedClsPrefix}>
+                        {{
+                          default: () => {
+                            switch (this.type) {
+                              case 'success':
+                                return <SuccessIcon />
+                              case 'info':
+                                return <InfoIcon />
+                              case 'warning':
+                                return <WarningIcon />
+                              case 'error':
+                                return <ErrorIcon />
+                              default:
+                                return null
                             }
-                          }}
-                        </NBaseIcon>
-                      )}
-                    </div>
-                  ) : null,
-                  <div class={`${mergedClsPrefix}-alert-body`}>
-                    {this.title !== undefined ? (
-                      <div class={`${mergedClsPrefix}-alert-body__title`}>
-                        {renderSlot(this.$slots, 'header', undefined, () => [
-                          this.title
-                        ])}
-                      </div>
-                    ) : null}
-                    {this.$slots.default ? (
-                      <div class={`${mergedClsPrefix}-alert-body__content`}>
-                        {this.$slots}
-                      </div>
-                    ) : null}
+                          }
+                        }}
+                      </NBaseIcon>
+                    )}
                   </div>
-                ] as any
-              )
-              : null
+                )}
+                <div class={`${mergedClsPrefix}-alert-body`}>
+                  {this.title !== undefined && (
+                    <div class={`${mergedClsPrefix}-alert-body__title`}>
+                      {renderSlot($slots, 'header', undefined, () => [
+                        this.title
+                      ])}
+                    </div>
+                  )}
+                  {$slots.default && (
+                    <div class={`${mergedClsPrefix}-alert-body__content`}>
+                      {$slots}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : null
+          }
         }}
       </NFadeInExpandTransition>
     )

@@ -5,6 +5,9 @@ import { NForm, NFormItem } from '../../form'
 
 function expectChecked (wrapper: VueWrapper<any>, value: boolean): void {
   expect(wrapper.classes().some((c) => c.includes('checked'))).toEqual(value)
+  expect(wrapper.find('.n-checkbox').attributes('aria-checked')).toBe(
+    value.toString()
+  )
 }
 
 describe('n-checkbox', () => {
@@ -43,6 +46,7 @@ describe('n-checkbox', () => {
     expect(wrapper.find('.n-checkbox').classes()).toContain(
       'n-checkbox--indeterminate'
     )
+    expect(wrapper.find('.n-checkbox').attributes('aria-checked')).toBe('mixed')
   })
 
   it('should work with `disabled` prop', () => {
@@ -136,11 +140,39 @@ describe('n-checkbox', () => {
 
     expect(wrapper.find('.n-checkbox').attributes('style')).toMatchSnapshot()
   })
+
+  describe('accessibility', () => {
+    it('should have a role of "checkbox"', () => {
+      const wrapper = mount(NCheckbox)
+      expect(wrapper.find('.n-checkbox').attributes('role')).toBe('checkbox')
+    })
+
+    it('should set a default aria-labelledby', () => {
+      const labelId = 'custom-id'
+      const wrapper = mount(() => <NCheckbox aria-labelledby={labelId} />)
+      expect(wrapper.find('.n-checkbox').attributes('aria-labelledby')).toMatch(
+        labelId
+      )
+    })
+
+    it('should allow to set aria-labelledby from outside', () => {
+      const wrapper = mount(NCheckbox)
+      const labelId = wrapper.find('.n-checkbox__label').attributes('id')
+      expect(wrapper.find('.n-checkbox').attributes('aria-labelledby')).toBe(
+        labelId
+      )
+    })
+  })
 })
 
 describe('n-checkbox-group', () => {
   it('should work with import on demand', () => {
     mount(NCheckboxGroup)
+  })
+
+  it('should have a role of "group"', () => {
+    const wrapper = mount(NCheckboxGroup)
+    expect(wrapper.find('.n-checkbox-group').attributes('role')).toBe('group')
   })
 
   it('should work with `disabled` prop', () => {

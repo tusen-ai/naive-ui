@@ -1,3 +1,4 @@
+import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NInputNumber } from '../index'
 import { NButton } from '../../button'
@@ -5,6 +6,10 @@ import { NButton } from '../../button'
 describe('n-input-number', () => {
   it('should work with import on demand', () => {
     mount(NInputNumber)
+  })
+
+  it('props.value can be null', () => {
+    ;<NInputNumber value={null} />
   })
 
   it('should work with `show-button` prop', async () => {
@@ -83,7 +88,9 @@ describe('n-input-number', () => {
     let arr = [0.1, 0]
     for (let i = 0; i < arr.length; i++) {
       await minusBtn.trigger('click')
-      expect((input.element as HTMLInputElement).value).toEqual(arr[i].toString())
+      expect((input.element as HTMLInputElement).value).toEqual(
+        arr[i].toString()
+      )
     }
     expect(minusBtn.classes()).toContain('n-button--disabled')
     await wrapper.setProps({ step: 0.2 })
@@ -91,7 +98,9 @@ describe('n-input-number', () => {
     arr = [0.2, 0.4, 0.6]
     for (let i = 0; i < arr.length; i++) {
       await addBtn.trigger('click')
-      expect((input.element as HTMLInputElement).value).toEqual(arr[i].toString())
+      expect((input.element as HTMLInputElement).value).toEqual(
+        arr[i].toString()
+      )
     }
     expect(addBtn.classes()).toContain('n-button--disabled')
   })

@@ -10,6 +10,7 @@ import {
   CSSProperties
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
+import { createId } from 'seemly'
 import { useConfig, useFormItem, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NIconSwitchTransition } from '../../_internal'
@@ -153,6 +154,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
     function toggle (e: MouseEvent | KeyboardEvent): void {
       if (NCheckboxGroup && props.value !== undefined) {
         NCheckboxGroup.toggleCheckbox(!renderedCheckedRef.value, props.value)
@@ -197,6 +199,7 @@ export default defineComponent({
       mergedDisabled: mergedDisabledRef,
       renderedChecked: renderedCheckedRef,
       mergedTheme: themeRef,
+      labelId: createId(),
       handleClick,
       handleKeyUp,
       handleKeyDown,
@@ -265,6 +268,7 @@ export default defineComponent({
       indeterminate,
       privateTableHeader,
       cssVars,
+      labelId,
       label,
       mergedClsPrefix,
       focusable,
@@ -284,6 +288,9 @@ export default defineComponent({
           }
         ]}
         tabindex={mergedDisabled || !focusable ? undefined : 0}
+        role="checkbox"
+        aria-checked={indeterminate ? 'mixed' : renderedChecked}
+        aria-labelledby={labelId}
         style={cssVars as CSSProperties}
         onKeyup={handleKeyUp}
         onKeydown={handleKeyDown}
@@ -319,7 +326,7 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-checkbox-box__border`} />
         </div>
         {label !== null || $slots.default ? (
-          <span class={`${mergedClsPrefix}-checkbox__label`}>
+          <span class={`${mergedClsPrefix}-checkbox__label`} id={labelId}>
             {renderSlot($slots, 'default', undefined, () => [label])}
           </span>
         ) : null}
