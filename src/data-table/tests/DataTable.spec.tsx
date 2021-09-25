@@ -318,4 +318,64 @@ describe('n-data-table', () => {
     ))
     expect(wrapper.find('tbody .n-data-table-tr').classes()).toContain('0-test')
   })
+
+  it('should work with `indent` prop', async () => {
+    const columns = [
+      {
+        title: 'name',
+        key: 'name'
+      },
+      {
+        title: 'index',
+        key: 'index'
+      }
+    ]
+    const data = [
+      {
+        name: '07akioni',
+        index: '07',
+        children: [
+          {
+            name: '08akioni',
+            index: '08',
+            children: [
+              {
+                name: '09akioni',
+                index: '09'
+              },
+              {
+                name: '10akioni',
+                index: '10'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+    const rowKey = (row: any): number => row.index
+    let wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        row-key={rowKey}
+        default-expanded-row-keys={['07']}
+      />
+    ))
+    expect(wrapper.find('.n-data-table-indent').attributes('style')).toContain(
+      'width: 16px'
+    )
+
+    wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        row-key={rowKey}
+        default-expanded-row-keys={['07']}
+        indent={20}
+      />
+    ))
+    expect(wrapper.find('.n-data-table-indent').attributes('style')).toContain(
+      'width: 20px'
+    )
+  })
 })
