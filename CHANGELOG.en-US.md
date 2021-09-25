@@ -12,6 +12,7 @@
 - Fix `n-drawer` border transition, closes[#1211].
 - Fix `n-input-number`'s `value` prop can't be `null` type.
 - Fix components with rtl support throws error in SSR.
+- Fix components with popover throws error in SSR.
 
 ### Feats
 

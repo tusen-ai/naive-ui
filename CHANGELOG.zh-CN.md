@@ -12,6 +12,7 @@
 - 修复 `n-drawer` 边界缺少 transition，关闭 [#1211]
 - 修复 `n-input-number` 的 `value` 属性不能为 null 类型
 - 修复支持 rtl 的组件 SSR 报错
+- 修复有弹出层组件的 SSR 报错
 
 ### Feats
 
