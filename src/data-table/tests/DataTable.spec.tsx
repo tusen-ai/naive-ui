@@ -378,4 +378,32 @@ describe('n-data-table', () => {
       'width: 20px'
     )
   })
+
+  it('should work with `row-props` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    const rowProps = (): any => ({
+      style: 'cursor: pointer;'
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('tbody .n-data-table-tr').attributes('style')).toBe(
+      undefined
+    )
+
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} row-props={rowProps} />
+    ))
+    expect(
+      wrapper.find('tbody .n-data-table-tr').attributes('style')
+    ).toContain('cursor: pointer')
+  })
 })
