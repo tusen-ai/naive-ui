@@ -23,7 +23,7 @@ export interface ColItem {
 
 type RowItemMap = WeakMap<TableColumn, RowItem>
 function getRowsAndCols (columns: TableColumns): {
-  hasEllpisis: boolean
+  hasEllipsis: boolean
   rows: RowItem[][]
   cols: ColItem[]
   dataRelatedCols: Array<
@@ -113,7 +113,7 @@ function getRowsAndCols (columns: TableColumns): {
   ensureColLayout(columns, 0, true)
 
   return {
-    hasEllpisis: hasEllipsis,
+    hasEllipsis: hasEllipsis,
     rows,
     cols,
     dataRelatedCols
@@ -123,7 +123,7 @@ function getRowsAndCols (columns: TableColumns): {
 export function useGroupHeader (props: DataTableSetupProps): {
   rowsRef: ComputedRef<RowItem[][]>
   colsRef: ComputedRef<ColItem[]>
-  hasEllpisisRef: ComputedRef<boolean>
+  hasEllipsisRef: ComputedRef<boolean>
   dataRelatedColsRef: ComputedRef<
   Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
   >
@@ -132,7 +132,7 @@ export function useGroupHeader (props: DataTableSetupProps): {
   return {
     rowsRef: computed(() => rowsAndCols.value.rows),
     colsRef: computed(() => rowsAndCols.value.cols),
-    hasEllpisisRef: computed(() => rowsAndCols.value.hasEllpisis),
+    hasEllipsisRef: computed(() => rowsAndCols.value.hasEllipsis),
     dataRelatedColsRef: computed(() => rowsAndCols.value.dataRelatedCols)
   }
 }
