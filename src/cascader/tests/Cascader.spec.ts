@@ -162,12 +162,8 @@ describe('n-cascader', () => {
 
   it('should work with `click` event', async () => {
     const wrapper = mount(NCascader, {
-      attachTo: document.body,
       props: {
-        options: [
-          { label: 'aaa', value: 'aaa', disabled: true },
-          { label: 'bbb', value: 'bbb' }
-        ]
+        options: getOptions()
       }
     })
 
