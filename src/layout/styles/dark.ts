@@ -38,6 +38,7 @@ const layoutDark: LayoutTheme = {
       siderColorInverted: cardColor,
       siderToggleButtonBorder: '1px solid transparent',
       siderToggleButtonColor: popoverColor,
+      siderToggleButtonTextColor: textColor2,
       siderToggleBarColor: composite(bodyColor, scrollbarColor),
       siderToggleBarColorHover: composite(bodyColor, scrollbarColorHover),
       __invertScrollbar: 'false'

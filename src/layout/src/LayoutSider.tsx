@@ -207,6 +207,7 @@ export default defineComponent({
         const {
           siderToggleButtonColor,
           siderToggleButtonBorder,
+          siderToggleButtonTextColor,
           siderToggleBarColor,
           siderToggleBarColorHover
         } = self
@@ -214,6 +215,7 @@ export default defineComponent({
           '--bezier': cubicBezierEaseInOut,
           '--toggle-button-color': siderToggleButtonColor,
           '--toggle-button-border': siderToggleButtonBorder,
+          '--toggle-button-text-color': siderToggleButtonTextColor,
           '--toggle-bar-color': siderToggleBarColor,
           '--toggle-bar-color-hover': siderToggleBarColorHover
         }
