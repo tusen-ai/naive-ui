@@ -113,7 +113,7 @@ function getRowsAndCols (columns: TableColumns): {
   ensureColLayout(columns, 0, true)
 
   return {
-    hasEllipsis: hasEllipsis,
+    hasEllipsis,
     rows,
     cols,
     dataRelatedCols
