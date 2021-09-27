@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- Fix `n-layout-sider`'s `arrow-circle`'s font style.
+
 ## 2.19.2 (2021-09-26)
 
 ### i18n

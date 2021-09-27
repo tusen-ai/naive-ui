@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- 修复 `n-layout-sider` 中 `arrow-circle` 的字体样式
+
 ## 2.19.2 (2021-09-26)
 
 ### i18n
