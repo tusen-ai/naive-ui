@@ -159,4 +159,19 @@ describe('n-cascader', () => {
     expect(onFocus).toHaveBeenCalled()
     wrapper.unmount()
   })
+
+  it('should work with `click` event', async () => {
+    const wrapper = mount(NCascader, {
+      attachTo: document.body,
+      props: {
+        options: [
+          { label: 'aaa', value: 'aaa', disabled: true },
+          { label: 'bbb', value: 'bbb' }
+        ]
+      }
+    })
+
+    await wrapper.find('.n-base-selection').trigger('click')
+    expect(wrapper.find('.n-base-selection--active').exists()).toBe(true)
+  })
 })
