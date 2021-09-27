@@ -23,7 +23,7 @@ export interface ColItem {
 
 type RowItemMap = WeakMap<TableColumn, RowItem>
 function getRowsAndCols (columns: TableColumns): {
-  hasEllpisis: boolean
+  hasEllipsis: boolean
   rows: RowItem[][]
   cols: ColItem[]
   dataRelatedCols: Array<
@@ -38,7 +38,7 @@ function getRowsAndCols (columns: TableColumns): {
   const rowItemMap: RowItemMap = new WeakMap()
   let maxDepth = -1
   let totalRowSpan = 0
-  let hasEllpisis = false
+  let hasEllipsis = false
   function ensureMaxDepth (columns: TableColumns, currentDepth: number): void {
     if (currentDepth > maxDepth) {
       rows[currentDepth] = []
@@ -54,7 +54,9 @@ function getRowsAndCols (columns: TableColumns): {
           column
         })
         totalRowSpan += 1
-        hasEllpisis = !!column.ellipsis
+        if (!hasEllipsis) {
+          hasEllipsis = !!column.ellipsis
+        }
         dataRelatedCols.push(column)
       }
     }
@@ -111,7 +113,7 @@ function getRowsAndCols (columns: TableColumns): {
   ensureColLayout(columns, 0, true)
 
   return {
-    hasEllpisis,
+    hasEllipsis,
     rows,
     cols,
     dataRelatedCols
@@ -121,7 +123,7 @@ function getRowsAndCols (columns: TableColumns): {
 export function useGroupHeader (props: DataTableSetupProps): {
   rowsRef: ComputedRef<RowItem[][]>
   colsRef: ComputedRef<ColItem[]>
-  hasEllpisisRef: ComputedRef<boolean>
+  hasEllipsisRef: ComputedRef<boolean>
   dataRelatedColsRef: ComputedRef<
   Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
   >
@@ -130,7 +132,7 @@ export function useGroupHeader (props: DataTableSetupProps): {
   return {
     rowsRef: computed(() => rowsAndCols.value.rows),
     colsRef: computed(() => rowsAndCols.value.cols),
-    hasEllpisisRef: computed(() => rowsAndCols.value.hasEllpisis),
+    hasEllipsisRef: computed(() => rowsAndCols.value.hasEllipsis),
     dataRelatedColsRef: computed(() => rowsAndCols.value.dataRelatedCols)
   }
 }
