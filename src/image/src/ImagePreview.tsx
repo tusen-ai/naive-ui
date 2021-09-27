@@ -81,6 +81,9 @@ export default defineComponent({
         case 'ArrowRight':
           props.onNext?.()
           break
+        case 'Escape':
+          toggleShow
+          break
       }
     }
 
