@@ -4,8 +4,9 @@
 
 ### Fixes
 
-- Fix `n-data-table` 当最后一列未设置 `ellipsis` 时省略失效，关闭 [#934](https://github.com/TuSimple/naive-ui/issues/934)
-- Fix `n-grid-item` 响应式不生效
+- 修复 `n-data-table` 当最后一列未设置 `ellipsis` 时省略失效，关闭 [#934](https://github.com/TuSimple/naive-ui/issues/934)
+- 修复 `n-grid-item` 响应式不生效
+- 修复 `n-tabs` 在尺寸改变后没有更新滚动阴影状态，关闭 [#1224](https://github.com/TuSimple/naive-ui/issues/1224)
 
 ### Feats
 

@@ -6,6 +6,7 @@
 
 - Fix `n-data-table` ellipsis not show when last column not set ellipsis, closes [#934](https://github.com/TuSimple/naive-ui/issues/934).
 - Fix `n-grid-item` won't work with responsive config.
+- Fix `n-tabs`'s scroll shadow is not updated when it's resized, closes [#1224](https://github.com/TuSimple/naive-ui/issues/1224).
 
 ### Feats
 
