@@ -64,10 +64,6 @@ const layoutSiderProps = {
     type: Boolean,
     default: true
   },
-  duration: {
-    type: Number,
-    default: 300
-  },
   inverted: Boolean,
   scrollbarProps: Object as PropType<
   Partial<ScrollbarProps> & { style: CSSProperties }
@@ -80,6 +76,8 @@ const layoutSiderProps = {
   onUpdateCollapsed: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
+  onAfterEnter: Function as PropType<() => void>,
+  onAfterLeave: Function as PropType<() => void>,
   // deprecated
   onExpand: [Function, Array] as PropType<MaybeArray<() => void>>,
   onCollapse: [Function, Array] as PropType<MaybeArray<() => void>>
@@ -186,6 +184,16 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
+    function handleTransitionend (e: TransitionEvent): void {
+      if (e.propertyName === 'max-width') {
+        if (mergedCollapsedRef.value) {
+          props.onAfterLeave?.()
+        } else {
+          props.onAfterEnter?.()
+        }
+      }
+    }
+
     const exposedMethods: LayoutSiderInst = {
       scrollTo
     }
@@ -198,6 +206,7 @@ export default defineComponent({
       mergedCollapsed: mergedCollapsedRef,
       scrollContainerStyle: scrollContainerStyleRef,
       siderPlacement: siderPlacementRef,
+      handleTransitionend,
       handleTriggerClick,
       cssVars: computed(() => {
         const {
@@ -248,6 +257,7 @@ export default defineComponent({
           (!mergedCollapsed || this.showCollapsedContent) &&
             `${mergedClsPrefix}-layout-sider--show-content`
         ]}
+        onTransitionend={this.handleTransitionend}
         style={[
           this.cssVars,
           {
