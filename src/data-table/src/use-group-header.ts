@@ -38,7 +38,7 @@ function getRowsAndCols (columns: TableColumns): {
   const rowItemMap: RowItemMap = new WeakMap()
   let maxDepth = -1
   let totalRowSpan = 0
-  let hasEllpisis = false
+  let hasEllipsis = false
   function ensureMaxDepth (columns: TableColumns, currentDepth: number): void {
     if (currentDepth > maxDepth) {
       rows[currentDepth] = []
@@ -54,7 +54,9 @@ function getRowsAndCols (columns: TableColumns): {
           column
         })
         totalRowSpan += 1
-        hasEllpisis = !!column.ellipsis
+        if (!hasEllipsis) {
+          hasEllipsis = !!column.ellipsis
+        }
         dataRelatedCols.push(column)
       }
     }
@@ -111,7 +113,7 @@ function getRowsAndCols (columns: TableColumns): {
   ensureColLayout(columns, 0, true)
 
   return {
-    hasEllpisis,
+    hasEllpisis: hasEllipsis,
     rows,
     cols,
     dataRelatedCols
