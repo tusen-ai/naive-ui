@@ -5,6 +5,12 @@
 ### Fixes
 
 - Fix `n-data-table` 当最后一列未设置 `ellipsis` 时省略失效，关闭 [#934](https://github.com/TuSimple/naive-ui/issues/934)
+- Fix `n-grid-item` 响应式不生效
+
+### Feats
+
+- `n-grid-item` 在 `span` 为 0 的时候隐藏，关闭 [#1220](https://github.com/TuSimple/naive-ui/issues/1220)
+- `n-grid` 新增 `item-responsive` 属性
 
 ## 2.19.2 (2021-09-26)
 
