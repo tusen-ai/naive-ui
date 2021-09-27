@@ -237,6 +237,7 @@ export default defineComponent({
       appear: useIsMounted(),
       displayed: displayedRef,
       handlePreviewMousedown,
+      handlePreviewDbclick,
       syncTransformOrigin,
       handleAfterLeave: () => {
         rotate = 0
