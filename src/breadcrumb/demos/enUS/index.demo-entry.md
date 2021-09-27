@@ -21,11 +21,11 @@ separator-per-item
 
 ### BreadcrumbItem Props
 
-| Name      | Type      | Default     | Description                    |
-| --------- | --------- | ----------- | ------------------------------ |
-| separator | `string`  | `undefined` | BreadcrumbItem separator.      |
-| href      | `string`  | `undefined` | BreadcrumbItem link.           |
-| isCurrent | `boolean` | `false`     | Tell if it's the current page. |
+| Name      | Type      | Default     | Description                         |
+| --------- | --------- | ----------- | ----------------------------------- |
+| separator | `string`  | `undefined` | BreadcrumbItem separator.           |
+| href      | `string`  | `undefined` | BreadcrumbItem link.                |
+| isCurrent | `boolean` | `false`     | Tells if it's the current location. |
 
 ## Slots
 
