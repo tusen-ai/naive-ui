@@ -199,7 +199,7 @@ export default defineComponent({
       mergedDisabled: mergedDisabledRef,
       renderedChecked: renderedCheckedRef,
       mergedTheme: themeRef,
-      labelId: `n-checkbox-label-${createId(4)}`,
+      labelId: createId(),
       handleClick,
       handleKeyUp,
       handleKeyDown,

@@ -318,4 +318,116 @@ describe('n-data-table', () => {
     ))
     expect(wrapper.find('tbody .n-data-table-tr').classes()).toContain('0-test')
   })
+
+  it('should work with `indent` prop', async () => {
+    const columns = [
+      {
+        title: 'name',
+        key: 'name'
+      },
+      {
+        title: 'index',
+        key: 'index'
+      }
+    ]
+    const data = [
+      {
+        name: '07akioni',
+        index: '07',
+        children: [
+          {
+            name: '08akioni',
+            index: '08',
+            children: [
+              {
+                name: '09akioni',
+                index: '09'
+              },
+              {
+                name: '10akioni',
+                index: '10'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+    const rowKey = (row: any): number => row.index
+    let wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        row-key={rowKey}
+        default-expanded-row-keys={['07']}
+      />
+    ))
+    expect(wrapper.find('.n-data-table-indent').attributes('style')).toContain(
+      'width: 16px'
+    )
+
+    wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        row-key={rowKey}
+        default-expanded-row-keys={['07']}
+        indent={20}
+      />
+    ))
+    expect(wrapper.find('.n-data-table-indent').attributes('style')).toContain(
+      'width: 20px'
+    )
+  })
+
+  it('should work with `row-props` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    const rowProps = (): any => ({
+      style: 'cursor: pointer;'
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('tbody .n-data-table-tr').attributes('style')).toBe(
+      undefined
+    )
+
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} row-props={rowProps} />
+    ))
+    expect(
+      wrapper.find('tbody .n-data-table-tr').attributes('style')
+    ).toContain('cursor: pointer')
+  })
+
+  it('should work with `single-column` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('.n-data-table').classes()).not.toContain(
+      'n-data-table--single-column'
+    )
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} single-column={true} />
+    ))
+    expect(wrapper.find('.n-data-table').classes()).toContain(
+      'n-data-table--single-column'
+    )
+  })
 })
