@@ -152,6 +152,10 @@ export default defineComponent({
       on('mousemove', document, handleMouseMove)
       on('mouseup', document, handleMouseUp)
     }
+    function handlePreviewDbclick (): void {
+      scale = scale === 1 ? 2 : 1
+      derivePreviewStyle()
+    }
 
     let scale = 1
     let rotate = 0
@@ -366,6 +370,7 @@ export default defineComponent({
                                 <img
                                   draggable={false}
                                   onMousedown={this.handlePreviewMousedown}
+                                  onDbclick={this.handlePreviewDbclick}
                                   class={`${clsPrefix}-image-preview`}
                                   key={this.previewSrc}
                                   src={this.previewSrc}
