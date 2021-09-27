@@ -82,7 +82,7 @@ export default defineComponent({
           props.onNext?.()
           break
         case 'Escape':
-          toggleShow
+          toggleShow()
           break
       }
     }
