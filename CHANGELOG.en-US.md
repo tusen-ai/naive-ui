@@ -1,10 +1,17 @@
 # CHANGELOG
 
-## Pending
+## 2.19.3 (2021-09-28)
 
 ### Fixes
 
 - Fix `n-data-table` ellipsis not show when last column not set ellipsis, closes [#934](https://github.com/TuSimple/naive-ui/issues/934).
+- Fix `n-grid-item` won't work with responsive config.
+- Fix `n-tabs`'s scroll shadow is not updated when it's resized, closes [#1224](https://github.com/TuSimple/naive-ui/issues/1224).
+
+### Feats
+
+- `n-grid-item` won't display when `span` is 0, closes [#1220](https://github.com/TuSimple/naive-ui/issues/1220).
+- `n-grid` add `item-responsive` prop.
 
 ## 2.19.2 (2021-09-26)
 
