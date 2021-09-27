@@ -68,24 +68,18 @@ describe('n-breadcrumb', () => {
       slots: {
         default: () => [
           h(NBreadcrumbItem, null, { default: () => 'Home' }),
-          h(
-            NBreadcrumbItem,
-            { href: '/path1', isCurrent: true },
-            { default: () => 'Path1' }
-          )
+          h(NBreadcrumbItem, { href: '/path1' }, { default: () => 'Path1' })
         ]
       }
     })
 
     const firstBreadcrumbItem = wrapper.find('span.n-breadcrumb-item__link')
-    const secondBreadcrumbItem = wrapper.find(
-      'a.n-breadcrumb-item__link[aria-current="location"]'
-    )
+    const secondBreadcrumbItem = wrapper.find('a.n-breadcrumb-item__link')
 
     expect(firstBreadcrumbItem.exists()).toBe(true)
     expect(firstBreadcrumbItem.text()).toMatch('Home')
     expect(secondBreadcrumbItem.exists()).toBe(true)
-    expect(secondBreadcrumbItem.text()).toMatch('Path1')
+    expect(secondBreadcrumbItem.attributes('href')).toMatch('/path1')
   })
 
   describe('accessibility', () => {
@@ -94,6 +88,65 @@ describe('n-breadcrumb', () => {
       expect(wrapper.find('.n-breadcrumb').attributes('aria-label')).toBe(
         'Breadcrumb'
       )
+    })
+
+    it('should add `aria-current` if the item is the current location', () => {
+      const wrapper = mount(NBreadcrumb, {
+        slots: {
+          default: () => [
+            h(NBreadcrumbItem, { isCurrent: true }, { default: () => 'Home' }),
+            h(
+              NBreadcrumbItem,
+              {
+                href: '/path1',
+                isCurrent: false
+              },
+              { default: () => 'Path1' }
+            ),
+            h(
+              NBreadcrumbItem,
+              {
+                href: '/path2',
+                isCurrent: true
+              },
+              { default: () => 'Path2' }
+            )
+          ]
+        }
+      })
+
+      expect(
+        wrapper.find('span.n-breadcrumb-item__link').attributes('aria-current')
+      ).toBe(undefined)
+      expect(
+        wrapper
+          .find('a.n-breadcrumb-item__link[href="/path1"]')
+          .attributes('aria-current')
+      ).toBe(undefined)
+      expect(
+        wrapper
+          .find('a.n-breadcrumb-item__link[href="/path2"]')
+          .attributes('aria-current')
+      ).toBe('location')
+    })
+
+    it('should add `aria-hidden` to the separator', () => {
+      const wrapper = mount(NBreadcrumb, {
+        slots: {
+          default: () => [
+            h(NBreadcrumbItem, { default: () => 'Home' }),
+            h(
+              NBreadcrumbItem,
+              { href: '/path1', isCurrent: true },
+              { default: () => 'Path1' }
+            )
+          ]
+        }
+      })
+
+      expect(
+        wrapper.find('.n-breadcrumb-item__separator').attributes('aria-hidden')
+      ).toBe('true')
     })
   })
 })
