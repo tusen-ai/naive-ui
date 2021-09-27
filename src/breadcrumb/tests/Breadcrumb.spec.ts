@@ -8,6 +8,16 @@ describe('n-breadcrumb', () => {
     mount(NBreadcrumb)
   })
 
+  it('should raise an error if breadcrumbItem is not inside a BreadCrumb', () => {
+    const mockErrorLogger = jest.spyOn(console, 'error').mockImplementation()
+    const wrapper = mount(NBreadcrumbItem)
+
+    expect(wrapper.isVisible()).toBe(false)
+    expect(mockErrorLogger).toBeCalledWith(
+      '[naive/breadcrumb]: `n-breadcrumb-item` must be placed inside `n-breadcrumb`.'
+    )
+  })
+
   it('should work with Breadcrumb, BreadcrumbItem slots', async () => {
     const wrapper = mount(NBreadcrumb, {
       slots: {
