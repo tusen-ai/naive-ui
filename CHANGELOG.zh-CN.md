@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-data-table` 当最后一列未设置 `ellipsis` 时省略失效，关闭 [#934](https://github.com/TuSimple/naive-ui/issues/934)
+
 ## 2.19.2 (2021-09-26)
 
 ### i18n

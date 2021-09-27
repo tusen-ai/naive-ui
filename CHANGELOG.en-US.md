@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-data-table` ellipsis not show when last column not set ellipsis, closes [#934](https://github.com/TuSimple/naive-ui/issues/934).
+
 ## 2.19.2 (2021-09-26)
 
 ### i18n
