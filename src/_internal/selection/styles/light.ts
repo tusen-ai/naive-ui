@@ -25,11 +25,27 @@ const self = (vars: ThemeCommonVars) => {
     clearColorHover,
     clearColorPressed,
     placeholderColor,
-    placeholderColorDisabled
+    placeholderColorDisabled,
+    fontSizeTiny,
+    fontSizeSmall,
+    fontSizeMedium,
+    fontSizeLarge,
+    heightTiny,
+    heightSmall,
+    heightMedium,
+    heightLarge
   } = vars
   return {
     ...commonVariables,
-    borderRadius: borderRadius,
+    fontSizeTiny,
+    fontSizeSmall,
+    fontSizeMedium,
+    fontSizeLarge,
+    heightTiny,
+    heightSmall,
+    heightMedium,
+    heightLarge,
+    borderRadius,
     // default
     textColor: textColor2,
     textColorDisabled,

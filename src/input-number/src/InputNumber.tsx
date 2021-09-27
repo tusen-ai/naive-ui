@@ -21,7 +21,7 @@ const inputNumberProps = {
     type: Number as PropType<number | null>,
     default: null
   },
-  value: Number,
+  value: Number as PropType<number | null>,
   step: {
     type: [Number, String],
     default: 1
