@@ -169,7 +169,7 @@ export default defineComponent({
 
       let suffixSpan = 0
       const maybeSuffixNode =
-        childrenAndRawSpan[childrenAndRawSpan.length - 1].child
+        childrenAndRawSpan[childrenAndRawSpan.length - 1]?.child
       if (maybeSuffixNode?.props) {
         const suffixPropValue = maybeSuffixNode.props?.suffix
         if (suffixPropValue !== undefined && suffixPropValue !== false) {
