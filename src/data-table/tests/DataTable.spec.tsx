@@ -430,4 +430,28 @@ describe('n-data-table', () => {
       'n-data-table--single-column'
     )
   })
+
+  it('should work with `single-line` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('.n-data-table').classes()).toContain(
+      'n-data-table--single-line'
+    )
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} single-line={false} />
+    ))
+    expect(wrapper.find('.n-data-table').classes()).not.toContain(
+      'n-data-table--single-line'
+    )
+  })
 })
