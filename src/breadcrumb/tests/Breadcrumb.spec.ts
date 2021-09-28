@@ -1,7 +1,6 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NBreadcrumb, NBreadcrumbItem } from '../index'
-import Breadcrumb from '../src/Breadcrumb'
 
 describe('n-breadcrumb', () => {
   it('should work with import on demand', () => {
@@ -94,30 +93,37 @@ describe('n-breadcrumb', () => {
 
   describe('accessibility', () => {
     it('should labelled the landmark region', () => {
-      const wrapper = mount(Breadcrumb)
+      const wrapper = mount(NBreadcrumb)
       expect(wrapper.find('.n-breadcrumb').attributes('aria-label')).toBe(
         'Breadcrumb'
       )
     })
 
     it('should add `aria-current` if the item is the current location', () => {
+      global.window = Object.create(window)
+      const currentUrl = 'http://some-domaine/path2'
+      const url = 'http://some-domaine/path1'
+      Object.defineProperty(window, 'location', {
+        value: {
+          href: currentUrl
+        }
+      })
+
       const wrapper = mount(NBreadcrumb, {
         slots: {
           default: () => [
-            h(NBreadcrumbItem, { isCurrent: true }, { default: () => 'Home' }),
+            h(NBreadcrumbItem, { default: () => 'Home' }),
             h(
               NBreadcrumbItem,
               {
-                href: '/path1',
-                isCurrent: false
+                href: url
               },
               { default: () => 'Path1' }
             ),
             h(
               NBreadcrumbItem,
               {
-                href: '/path2',
-                isCurrent: true
+                href: currentUrl
               },
               { default: () => 'Path2' }
             )
@@ -130,12 +136,12 @@ describe('n-breadcrumb', () => {
       ).toBe(undefined)
       expect(
         wrapper
-          .find('a.n-breadcrumb-item__link[href="/path1"]')
+          .find(`a.n-breadcrumb-item__link[href="${url}"]`)
           .attributes('aria-current')
       ).toBe(undefined)
       expect(
         wrapper
-          .find('a.n-breadcrumb-item__link[href="/path2"]')
+          .find(`a.n-breadcrumb-item__link[href="${currentUrl}"]`)
           .attributes('aria-current')
       ).toBe('location')
     })
