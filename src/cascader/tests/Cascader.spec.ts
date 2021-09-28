@@ -159,4 +159,42 @@ describe('n-cascader', () => {
     expect(onFocus).toHaveBeenCalled()
     wrapper.unmount()
   })
+
+  it('should be active after clicked', async () => {
+    const wrapper = mount(NCascader, {
+      attachTo: document.body,
+      props: {
+        options: getOptions()
+      }
+    })
+
+    await wrapper.find('.n-base-selection').trigger('click')
+    expect(wrapper.find('.n-base-selection--active').exists()).toBe(true)
+    expect(document.querySelector('.n-cascader-menu')).not.toEqual(null)
+
+    await wrapper.find('.n-base-selection').trigger('click')
+    expect(wrapper.find('.n-base-selection--active').exists()).toBe(false)
+    expect(document.querySelector('.n-cascader-menu')).toEqual(null)
+    wrapper.unmount()
+  })
+
+  it('should be active after click outside', async () => {
+    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
+    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+    const wrapper = mount(NCascader, {
+      attachTo: document.body,
+      props: {
+        options: getOptions()
+      }
+    })
+
+    await wrapper.find('.n-base-selection').trigger('click')
+    expect(document.querySelector('.n-cascader-menu')).not.toEqual(null)
+    await document.body.click()
+    await document.body.dispatchEvent(mousedownEvent)
+    await document.body.dispatchEvent(mouseupEvent)
+    expect(document.querySelector('.n-cascader-menu')).toEqual(null)
+
+    wrapper.unmount()
+  })
 })
