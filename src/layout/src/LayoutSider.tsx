@@ -207,7 +207,6 @@ export default defineComponent({
         const {
           siderToggleButtonColor,
           siderToggleButtonBorder,
-          siderToggleButtonTextColor,
           siderToggleBarColor,
           siderToggleBarColorHover
         } = self
@@ -215,7 +214,6 @@ export default defineComponent({
           '--bezier': cubicBezierEaseInOut,
           '--toggle-button-color': siderToggleButtonColor,
           '--toggle-button-border': siderToggleButtonBorder,
-          '--toggle-button-text-color': siderToggleButtonTextColor,
           '--toggle-bar-color': siderToggleBarColor,
           '--toggle-bar-color-hover': siderToggleBarColorHover
         }
@@ -223,11 +221,13 @@ export default defineComponent({
           vars['--color'] = self.siderColorInverted
           vars['--text-color'] = self.textColorInverted
           vars['--border-color'] = self.siderBorderColorInverted
+          vars['--toggle-button-icon-color'] = self.siderToggleButtonIconColorInverted
           vars.__invertScrollbar = self.__invertScrollbar
         } else {
           vars['--color'] = self.siderColor
           vars['--text-color'] = self.textColor
           vars['--border-color'] = self.siderBorderColor
+          vars['--toggle-button-icon-color'] = self.siderToggleButtonIconColor
         }
         return vars
       }),
