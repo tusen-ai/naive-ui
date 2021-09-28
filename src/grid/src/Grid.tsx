@@ -10,9 +10,10 @@ import {
   mergeProps,
   ref,
   VNode,
-  Ref
+  Ref,
+  cloneVNode
 } from 'vue'
-import { useBreakpoint, useMemo } from 'vooks'
+import { useBreakpoints, useMemo } from 'vooks'
 import { VResizeObserver, VResizeObserverOnResize } from 'vueuc'
 import { pxfy, parseResponsivePropValue, beforeNextFrameOnce } from 'seemly'
 import { getSlot, flatten, ExtractPublicPropTypes } from '../../_utils'
@@ -30,6 +31,7 @@ const gridProps = {
     type: [Number, String] as PropType<number | string>,
     default: defaultCols
   },
+  itemResponsive: Boolean,
   collapsed: Boolean,
   // may create grid rows < collapsedRows since a item may take all the row
   collapsedRows: {
@@ -65,8 +67,9 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const numRegex = /^\d+$/
     const widthRef = ref<number | undefined>(undefined)
-    const breakpointRef = useBreakpoint()
+    const breakpointsRef = useBreakpoints()
     const isResponsiveRef = useMemo(() => {
+      if (props.itemResponsive) return true
       if (!numRegex.test(props.cols.toString())) return true
       if (!numRegex.test(props.xGap.toString())) return true
       if (!numRegex.test(props.yGap.toString())) return true
@@ -74,7 +77,7 @@ export default defineComponent({
     })
     const responsiveQueryRef = computed(() => {
       if (!isResponsiveRef.value) return undefined
-      return props.responsive === 'self' ? widthRef.value : breakpointRef.value
+      return props.responsive === 'self' ? widthRef.value : breakpointsRef.value
     })
     const responsiveColsRef = useMemo(() => {
       return (
@@ -123,6 +126,7 @@ export default defineComponent({
           rowGap: pxfy(responsiveYGapRef.value)
         }
       }),
+      isResponsive: isResponsiveRef,
       responsiveQuery: responsiveQueryRef,
       responsiveCols: responsiveColsRef,
       handleResize: handleResizeRef,
@@ -135,12 +139,37 @@ export default defineComponent({
 
       // render will be called twice when mounted, I can't figure out why
       // 2 jobs will be pushed into job queues with same id, and then be flushed
-      const children = flatten(getSlot(this))
+      const rawChildren = flatten(getSlot(this))
+
+      const childrenAndRawSpan: Array<{
+        child: VNode
+        rawChildSpan: number
+      }> = []
 
       const { collapsed, collapsedRows, responsiveCols, responsiveQuery } = this
 
+      rawChildren.forEach((child) => {
+        if ((child?.type as any)?.__GRID_ITEM__ !== true) return
+        const clonedChild = cloneVNode(child)
+
+        const rawChildSpan = Number(
+          parseResponsivePropValue(
+            clonedChild.props?.span as string | number | undefined,
+            responsiveQuery
+          ) ?? defaultSpan
+        )
+
+        if (rawChildSpan === 0) return
+
+        childrenAndRawSpan.push({
+          child: clonedChild,
+          rawChildSpan
+        })
+      })
+
       let suffixSpan = 0
-      const maybeSuffixNode = children[children.length - 1]
+      const maybeSuffixNode =
+        childrenAndRawSpan[childrenAndRawSpan.length - 1]?.child
       if (maybeSuffixNode?.props) {
         const suffixPropValue = maybeSuffixNode.props?.suffix
         if (suffixPropValue !== undefined && suffixPropValue !== false) {
@@ -153,12 +182,11 @@ export default defineComponent({
 
       let spanCounter = 0
       let done = false
-      for (const child of children) {
-        // @ts-expect-error
-        if (child?.type?.__GRID_ITEM__ !== true) continue
+      for (const { child, rawChildSpan } of childrenAndRawSpan) {
         if (done) {
           this.overflow = true
         }
+
         if (!done) {
           const childOffset = Number(
             parseResponsivePropValue(
@@ -166,16 +194,9 @@ export default defineComponent({
               responsiveQuery
             ) ?? 0
           )
+
           const childSpan =
-            Math.min(
-              Number(
-                parseResponsivePropValue(
-                  child.props?.span as string | number | undefined,
-                  responsiveQuery
-                ) ?? defaultSpan
-              ) + childOffset,
-              responsiveCols
-            ) || 1
+            Math.min(rawChildSpan + childOffset, responsiveCols) || 1
 
           if (!child.props) {
             child.props = {
@@ -223,10 +244,10 @@ export default defineComponent({
           },
           this.$attrs
         ),
-        children
+        childrenAndRawSpan.map(({ child }) => child)
       )
     }
-    return this.responsive === 'self' ? (
+    return this.isResponsive && this.responsive === 'self' ? (
       <VResizeObserver onResize={this.handleResize}>
         {{
           default: renderContent

@@ -213,8 +213,10 @@ export default defineComponent({
         updateCurrentBarStyle()
         // here we don't need to force layout after update bar style
         // since deriveScrollShadow will force layout
-        deriveScrollShadow(xScrollInstRef.value?.$el)
         barEl.classList.remove(disableTransitionClassName)
+      }
+      if (type !== 'segment') {
+        deriveScrollShadow(xScrollInstRef.value?.$el)
       }
     }, 64)
 
