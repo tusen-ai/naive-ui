@@ -106,7 +106,7 @@ export default cB('layout-sider', `
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    color: var(--text-color);
+    color: var(--toggle-button-icon-color);
     border: var(--toggle-button-border);
     background-color: var(--toggle-button-color);
     box-shadow: 0 2px 4px 0px rgba(0, 0, 0, .06);

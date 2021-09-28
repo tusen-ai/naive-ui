@@ -221,11 +221,13 @@ export default defineComponent({
           vars['--color'] = self.siderColorInverted
           vars['--text-color'] = self.textColorInverted
           vars['--border-color'] = self.siderBorderColorInverted
+          vars['--toggle-button-icon-color'] = self.siderToggleButtonIconColorInverted
           vars.__invertScrollbar = self.__invertScrollbar
         } else {
           vars['--color'] = self.siderColor
           vars['--text-color'] = self.textColor
           vars['--border-color'] = self.siderBorderColor
+          vars['--toggle-button-icon-color'] = self.siderToggleButtonIconColor
         }
         return vars
       }),

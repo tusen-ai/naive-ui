@@ -35,6 +35,8 @@ export const self = (vars: ThemeCommonVars) => {
     siderColorInverted: invertedColor,
     siderToggleButtonBorder: `1px solid ${dividerColor}`,
     siderToggleButtonColor: baseColor,
+    siderToggleButtonIconColor: textColor2,
+    siderToggleButtonIconColorInverted: invertedColor,
     siderToggleBarColor: composite(bodyColor, scrollbarColor),
     siderToggleBarColorHover: composite(bodyColor, scrollbarColorHover),
     // hack for inverted background

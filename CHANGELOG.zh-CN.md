@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- 修复 `n-layout-sider` 中 `arrow-circle` 的icon样式
 - 修复 `n-upload` 的 `show-preview-button` 属性失效，关闭 [#1238](https://github.com/TuSimple/naive-ui/issues/1238)
 
 ## 2.19.3 (2021-09-28)
