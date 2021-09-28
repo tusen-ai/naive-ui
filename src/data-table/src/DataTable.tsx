@@ -244,7 +244,7 @@ export default defineComponent({
     const bodyWidthRef = ref<number | null>(null)
     const scrollPartRef = ref<'head' | 'body'>('body')
     const mainTableInstRef = ref<MainTableRef | null>(null)
-    const { rowsRef, colsRef, dataRelatedColsRef, hasEllpisisRef } =
+    const { rowsRef, colsRef, dataRelatedColsRef, hasEllipsisRef } =
       useGroupHeader(props)
     const {
       treeMateRef,
@@ -312,7 +312,7 @@ export default defineComponent({
         props.virtualScroll ||
         props.flexHeight ||
         props.maxHeight !== undefined ||
-        hasEllpisisRef.value
+        hasEllipsisRef.value
       ) {
         return 'fixed'
       }
