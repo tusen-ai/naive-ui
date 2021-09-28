@@ -8,7 +8,7 @@
   <n-breadcrumb-item href="#">
     <n-icon><md-cash /></n-icon> 天津分行
   </n-breadcrumb-item>
-  <n-breadcrumb-item href="#" isCurrent>
+  <n-breadcrumb-item href="#">
     <n-icon><md-cash /></n-icon> 平山道支行
   </n-breadcrumb-item>
 </n-breadcrumb>
