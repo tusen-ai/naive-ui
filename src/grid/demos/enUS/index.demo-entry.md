@@ -9,6 +9,7 @@ basic
 gap
 offset
 responsive
+responsive-item
 collapse
 ```
 
@@ -22,6 +23,7 @@ collapse
 | collapsed | `boolean` | `false` | Whether to fold by default. |
 | collapsed-rows | `number` | `1` | The number of rows displayed by default. |
 | responsive | `'self' \| 'screen'` | `'screen'` | `'self'` triggers responsive layout by its own width. `'screen'` triggers responsive layout by viewport's witdh. |
+| item-responsive | `boolean` | `false` | Whether the grid item is responsive. |
 | x-gap | `number \| ResponsiveDescription` | `0` | Horizontal gap. |
 | y-gap | `number \| ResponsiveDescription` | `0` | Vertical gap. |
 
@@ -29,8 +31,8 @@ collapse
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| offset | `number` | `0` | The number of intervals to the left of the grid. |
-| span | `number` | `1` | The number of columns occupied by the grid. |
+| offset | `number \| ResponsiveDescription` | `0` | The number of intervals to the left of the grid. |
+| span | `number \| ResponsiveDescription` | `1` | The number of columns occupied by the grid. The grid item would be hidden if it's 0. |
 | suffix | `boolean` | `false` | Grid suffix. |
 
 ## Slots

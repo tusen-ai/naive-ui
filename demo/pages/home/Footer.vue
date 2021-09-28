@@ -63,7 +63,9 @@
           <template #trigger>
             <n-button text>{{ t('dingTalk') }}</n-button>
           </template>
-          {{ t('dingTalkGroupChat') }} 33482509
+          {{ t('dingTalkGroupChat') }} 1
+          {{ t('memberLimitReached') }} 33482509<br />
+          {{ t('dingTalkGroupChat') }} 2 35886835
         </n-tooltip>
       </div>
       <div class="footer-links-col footer-links-col--last">
@@ -116,6 +118,7 @@ export default {
           icons: '图标库',
           dingTalk: '钉钉',
           dingTalkGroupChat: '钉钉交流群',
+          memberLimitReached: '（已满）',
           reportBug: '报告 Bug',
           joinUsLink: 'https://app.mokahr.com/campus_apply/tusenweilai/3232#/'
         },
@@ -132,6 +135,7 @@ export default {
           icons: 'Icon Library',
           dingTalk: 'DingTalk',
           dingTalkGroupChat: 'DingTalk Group Chat',
+          memberLimitReached: '(Member limit reached)',
           reportBug: 'Report Bug',
           joinUsLink:
             'https://boards.greenhouse.io/tusimplerelocationjobs/jobs/5137805002?gh_src=7908a9242us'
