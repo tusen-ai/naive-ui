@@ -129,4 +129,16 @@ describe('n-descriptions', () => {
     expect(wrapper.find('.n-descriptions-header').exists()).toBe(true)
     expect(wrapper.find('.n-descriptions-header').text()).toBe('test')
   })
+  it('should work with `separator` prop', async () => {
+    const wrapper = mount(NDescriptions, {
+      props: {
+        labelPlacement: 'left'
+      },
+      slots: { default: () => getDescriptionsItemList() }
+    })
+    expect(wrapper.find('.n-descriptions-separator').text()).toEqual(':')
+
+    await wrapper.setProps({ separator: '/' })
+    expect(wrapper.find('.n-descriptions-separator').text()).toEqual('/')
+  })
 })
