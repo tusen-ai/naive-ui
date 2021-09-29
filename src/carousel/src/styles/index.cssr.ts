@@ -160,5 +160,14 @@ export default cB('carousel', `
     cE('dot', `
       margin-right: 12px;
     `)
-  ])
+  ]),
+  cE('arrow-hover-show', `
+    display: none
+  `),
+  c('.arrow-hover-show', {
+    display: 'none'
+  }),
+  c('&:hover > .arrow-hover-show', {
+    display: 'inline-block'
+  })
 ])

@@ -38,6 +38,10 @@ const carouselProps = {
   trigger: {
     type: String as PropType<'click' | 'hover'>,
     default: 'click'
+  },
+  showArrowMode: {
+    type: String as PropType<'always' | 'hover'>,
+    default: 'always'
   }
 }
 
@@ -280,6 +284,7 @@ export default defineComponent({
       current,
       lengthRef,
       autoplay,
+      showArrowMode,
       $slots: { default: defaultSlot }
     } = this
     const children = flatten(defaultSlot?.() || [])
@@ -360,7 +365,8 @@ export default defineComponent({
               `${mergedClsPrefix}-carousel__arrow`,
               `${mergedClsPrefix}-carousel__arrow--${
                 vertical ? 'bottom' : 'right'
-              }`
+              }`,
+              `${showArrowMode === 'hover' ? 'arrow-hover-show' : ''}`
             ]}
             role="button"
             onClick={() => {
@@ -372,7 +378,10 @@ export default defineComponent({
           <div
             class={[
               `${mergedClsPrefix}-carousel__arrow`,
-              `${mergedClsPrefix}-carousel__arrow--${vertical ? 'top' : 'left'}`
+              `${mergedClsPrefix}-carousel__arrow--${
+                vertical ? 'top' : 'left'
+              }`,
+              `${showArrowMode === 'hover' ? 'arrow-hover-show' : ''}`
             ]}
             role="button"
             onClick={() => {
