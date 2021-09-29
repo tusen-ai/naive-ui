@@ -1,6 +1,6 @@
 import { onMounted, onUnmounted, Ref, ref } from 'vue'
+import { hasWindow } from '../naive'
 
-const hasWindow = typeof window !== 'undefined'
 const defaultWindow = hasWindow ? window : null
 
 export interface IWindowLocation {
@@ -16,7 +16,7 @@ export interface IWindowLocation {
 }
 
 export const useBrowserLocation = (
-  window = defaultWindow
+  customWindow = defaultWindow
 ): Ref<IWindowLocation> => {
   const getWindowLocation = (): IWindowLocation => {
     const {
@@ -29,7 +29,7 @@ export const useBrowserLocation = (
       port,
       protocol,
       search
-    } = window?.location || {}
+    } = customWindow?.location || {}
 
     return {
       hash,
@@ -50,16 +50,16 @@ export const useBrowserLocation = (
   const locationState = ref(getWindowLocation())
 
   onMounted(() => {
-    if (window) {
-      window.addEventListener('popstate', updateLocation)
-      window.addEventListener('hashchange', updateLocation)
+    if (customWindow) {
+      customWindow.addEventListener('popstate', updateLocation)
+      customWindow.addEventListener('hashchange', updateLocation)
     }
   })
 
   onUnmounted(() => {
-    if (window) {
-      window.removeEventListener('popstate', updateLocation)
-      window.removeEventListener('hashchange', updateLocation)
+    if (customWindow) {
+      customWindow.removeEventListener('popstate', updateLocation)
+      customWindow.removeEventListener('hashchange', updateLocation)
     }
   })
 
