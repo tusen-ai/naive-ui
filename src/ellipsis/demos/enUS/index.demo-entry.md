@@ -18,7 +18,7 @@ custom-tooltip
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | expand-trigger | `'click'` | `undefined` | Abbreviated content trigger event to expand to the full text. | 2.1.0 |
-| line-clmap | `number \| string` | `undefined` | Maximum lines. | 2.1.0 |
+| line-clamp | `number \| string` | `undefined` | Maximum lines. | 2.1.0 |
 | tooltip | `boolean \| TooltipProps` | `true` | Tooltip properties. | 2.1.0 |
 
 ## Slots
