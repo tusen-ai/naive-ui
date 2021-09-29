@@ -32,5 +32,7 @@ describe('n-popselect', () => {
 
     await wrapper.find('.test-btn').trigger('click')
     expect(document.querySelector('.n-base-select-menu')).toEqual(null)
+
+    wrapper.unmount()
   })
 })
