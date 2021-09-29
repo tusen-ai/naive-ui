@@ -66,7 +66,7 @@ export interface UploadInjection {
   onDownloadRef: Ref<OnDownload | undefined>
   XhrMap: Map<string, XMLHttpRequest>
   doChange: DoChange
-  showPreivewButtonRef: Ref<boolean>
+  showPreviewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>
   listTypeRef: Ref<listType>
   dragOverRef: Ref<boolean>
