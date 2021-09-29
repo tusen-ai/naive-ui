@@ -9,14 +9,6 @@ import {
 import { NBaseFocusDetector } from '../../../_internal'
 import { useCalendar } from './use-calendar'
 import { warnOnce } from '../../../_utils'
-
-const DateProps = {
-  ...useCalendar.props,
-  actions: {
-    type: Array,
-    default: () => ['clear', 'now']
-  }
-}
 /**
  * Date Panel
  * Update picker value on:
@@ -25,7 +17,7 @@ const DateProps = {
  */
 export default defineComponent({
   name: 'DatePanel',
-  props: DateProps,
+  props: useCalendar.props,
   setup (props) {
     if (__DEV__) {
       watchEffect(() => {
