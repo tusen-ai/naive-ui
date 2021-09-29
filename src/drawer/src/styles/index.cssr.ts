@@ -76,6 +76,7 @@ export default c([
         font-size: var(--title-font-size);
         color: var(--title-text-color);
         padding: var(--header-padding);
+        transition: border .3s var(--bezier);
         border-bottom: 1px solid var(--divider-color);
         border-bottom: var(--header-border-bottom);
         display: flex;
@@ -91,6 +92,7 @@ export default c([
         display: flex;
         justify-content: flex-end;
         border-top: var(--footer-border-top);
+        transition: border .3s var(--bezier);
         padding: var(--footer-padding);
       `)
     ]),

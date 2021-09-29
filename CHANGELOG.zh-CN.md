@@ -2,31 +2,207 @@
 
 ## Pending
 
+### Fixes
+
+- 修复 `n-layout-sider` 中 `arrow-circle` 的 icon 样式
+- 修复 `n-upload` 的 `show-preview-button` 属性失效，关闭 [#1238](https://github.com/TuSimple/naive-ui/issues/1238)
+
+## 2.19.3 (2021-09-28)
+
+### Fixes
+
+- 修复 `n-data-table` 当最后一列未设置 `ellipsis` 时省略失效，关闭 [#934](https://github.com/TuSimple/naive-ui/issues/934)
+- 修复 `n-grid-item` 响应式不生效
+- 修复 `n-tabs` 在尺寸改变后没有更新滚动阴影状态，关闭 [#1224](https://github.com/TuSimple/naive-ui/issues/1224)
+
+### Feats
+
+- `n-grid-item` 在 `span` 为 0 的时候隐藏，关闭 [#1220](https://github.com/TuSimple/naive-ui/issues/1220)
+- `n-grid` 新增 `item-responsive` 属性
+
+## 2.19.2 (2021-09-26)
+
+### i18n
+
+- 新增 ukUA locale
+
+### Fixes
+
+- 修复 `n-global-style` 在首次挂载时应用样式过渡
+- 修复 `n-drawer` 边界缺少 transition，关闭 [#1211](https://github.com/TuSimple/naive-ui/issues/1211)
+- 修复 `n-input-number` 的 `value` 属性不能为 null 类型
+- 修复支持 rtl 的组件 SSR 报错
+- 修复有弹出层组件的 SSR 报错
+- 修复全局样式覆盖对 select 触发器不生效，关闭 [#1229](https://github.com/TuSimple/naive-ui/issues/1229)
+
+### Feats
+
+- `n-checkbox` 增加 aria 支持
+- `n-alert` 增加 aria 支持
+
+## 2.19.1 (2021-09-21)
+
+### Fixes
+
+- 修复 `DialogReactive` 属性不可修改
+- 修复 `n-tree-select` 设定 `check-strategy='child'` 在单选时不生效
+- 修复 `n-upload` 在 `image-card` 模式下触发区域作为一行唯一元素时被压缩
+- 修复 `n-upload-dragger` 边框缺乏过渡
+- 修复 `n-upload` 无法上传文件
+- 修复 `n-tree` 在 `cascade` 设置为 `false` 时 `checkable` 无法显示勾选框
+- 修复 `n-tree-select` 在 `cascade` 或 `multiple` 设置为 `false` 时 `checkable` 无法显示勾选框
+
+## 2.19.0 (2021-09-19)
+
+### Breaking Changes
+
+- `n-layout-sider` 的 `arrow-circle` 类型触发按钮采用了新样式
+
+### Feats
+
+- `n-layout-sider` 新增 `collapsed-trigger-style` 属性
+- `n-menu` 添加 `accordion` 属性，关闭 [#917](https://github.com/TuSimple/naive-ui/issues/917)
+- `n-input-number` 新增 `readonly` 属性，关闭 [#1198](https://github.com/TuSimple/naive-ui/issues/1198)
+- `n-spin` 新增 `description` prop 和 slot
+- `n-anchor` 新增 `type` 属性
+- `n-upload` 新增 `abstract` 属性，新增 `n-upload-trigger` 和 `n-upload-file-list` 组件，关闭 [#1102](https://github.com/TuSimple/naive-ui/issues/1102)
+- `n-tree` 新增 `indeterminate-keys` 属性
+- `n-tree-select` 新增 `indeterminate-keys` 属性
+- `n-tree` 新增 `on-update:indeterminate-keys` 属性
+- `n-tree-select` 新增 `on-update:indeterminate-keys` 属性
+- `n-tabs` 的 `type` 属性新增 `'segment'` 选项，关闭 [#1133](https://github.com/TuSimple/naive-ui/issues/1133)
+- `n-popover` 新增 `z-index` 属性，关闭 [#764](https://github.com/TuSimple/naive-ui/issues/764).
+- `n-modal` 新增 `on-after-enter` 属性
+- `n-modal` 新增 `on-after-leave` 属性
+
+### Fixes
+
+- 修复 `n-select` `filterable` 下关闭标签 input 光标聚焦问题，关闭 [#1170](https://github.com/TuSimple/naive-ui/issues/1170)
+- 修复 `n-button` 在 hover 状态下边框与 `n-badge` 冲突，关闭 [#1195](https://github.com/TuSimple/naive-ui/issues/1195)
+- 修复 `n-upload` 的 `v-model:file-list` 属性在 `multiple` 属性设为 `true` 的时候没有正确更新，关闭 [#418](https://github.com/TuSimple/naive-ui/issues/418)
+- 修复 `useThemeVars` 未应用覆盖的变量值，关闭 [#1194](https://github.com/TuSimple/naive-ui/issues/1194), [#1176](https://github.com/TuSimple/naive-ui/issues/1176)
+- Fix `n-tabs` 在 card 类型时左侧滚动的阴影不显示
+
+## 2.18.2 (2021-09-14)
+
+### Feats
+
+- `n-cascader` 当 `options` 为空时显示 `Empty` 组件，关闭 [#1092](https://github.com/TuSimple/naive-ui/issues/1092)
+- `n-cascader` 的 `on-update:value` 属性新增选项参数
+- `n-tree` 增加 `check-strategy` 文档属性
+- `n-date-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
+- `n-time-picker` 新增 `input-readonly` 属性，关闭 [#1120](https://github.com/TuSimple/naive-ui/issues/1120)
+- `n-config-provider` 新增 `Empty` 组件的全局配置，关闭 [#1092](https://github.com/TuSimple/naive-ui/issues/1092)
+- `n-select` 新增 `on-update:show` 属性
+- `n-auto-complete` 导出 `AutoCompleteOption` 以及 `AutoCompleteGroupOption` 类型
+- `n-page-header` 添加 `RTL` 支持
+- `n-select` 支持可变高度选项渲染
+- `n-tree-select` 的 `on-update:value` 属性新增选项参数
+- `n-select` 的 `on-update:value` 属性新增选项参数
+- `n-popselect` 的 `on-update:value` 属性新增选项参数
+- `n-card` 新增 `embedded` 属性
+
+### Fixes
+
+- 修复 `n-p` `depth` 传入 number 报错
+- 修复 `n-date-picker` 的 `actions` 属性类型
+- 修复 `n-select` 无法重写 empty 的主题变量
+- 修复 `n-dynamic-tags` 禁用时 add 按钮未被禁用
+- 修复 `n-select` 在 filterable 并且菜单无数据是按下 enter 导致菜单关闭
+- 修复 `n-auto-complete` 的 `children` 属性不允许使用 `AutoCompleteOption` 类型
+- 修复 `n-gi` 的 `collapsed` 在 `n-form-item-gi` 中切换无法生效问题，关闭 [#1160](https://github.com/TuSimple/naive-ui/issues/1160)
+
+## 2.18.1 (2021-09-08)
+
+### Feats
+
+- `useDialog` 选项新增 `style` 属性，关闭 [#1054](https://github.com/TuSimple/naive-ui/issues/1054)
+- `n-timeline` 新增 `icon` slot, 关闭 [#1096](https://github.com/TuSimple/naive-ui/issues/1096)
+- `n-timeline` 新增 `icon-size` 属性
+
+### Fixes
+
+- 修复 `n-step` 无法使用 `v-for` 的子元素
+- 修复 `n-input-number` 在 `step` 不为小数时不能输入小数
+
+## 2.18.0 (2021-09-07)
+
+### Breaking Changes
+
+- `n-form` & `n-form-item` 拆分 `show-require-mark` 为 `show-require-mark` 和 `require-mark-placement`
+
+### Feats
+
+- `n-drawer` 新增 `on-mask-click` 属性
+- `n-form` 新增 `require-mark-placement` 属性，关闭 [#1055](https://github.com/TuSimple/naive-ui/issues/1055)
+- `n-form-item` 新增 `require-mark-placement` 属性，关闭 [#1055](https://github.com/TuSimple/naive-ui/issues/1055)
+
+### Fixes
+
+- 修复 `n-step` 必须传 `internal-index`
+- 修复 `n-radio-group` 的 `on-update:value` 和 `on-update-value` 类型不能为数组
+- 修复 `n-cascader` `check-strategy="child"` 和原有 `leaf-only` 表现不一致
+
+## 2.17.2 (2021-09-06)
+
+### Fixes
+
+- 修复 `n-tree-select` 显示路径是展示 key 而不是 label，关闭 [#1095](https://github.com/TuSimple/naive-ui/issues/1095)
+
+## 2.17.1 (2021-09-06)
+
+### Fixes
+
+- 修复 `n-cascader` 菜单未展示正确的选中 key
+
+## 2.17.0 (2021-09-05)
+
 ### Breaking Changes
 
 - `n-tree-select` 的 `leaf-only` 属性被废弃，请使用 `check-strategy="child"`
+- `n-cascader` 的 `leaf-only` 属性被废弃，请使用 `check-strategy="child"`
+- `n-input` 的 `show-password-toggle` 属性被废弃，请使用 `show-password-on="click"`
 
 ### Fixes
 
 - 修复 `n-cascader` 多选模式下点击 tag 删除子选项未更新选中项
 - 修复 `n-input` 在 `clearable` 为 `true` 时鼠标离开输入框时中文输入法不正确，关闭 [#905](https://github.com/TuSimple/naive-ui/issues/905)
+- 修复 `n-description` 中因 `v-if` 导致的不该出现的警告，关闭 [#1083](https://github.com/TuSimple/naive-ui/issues/1083)
+- 修复 `n-layout` 的 `sider-placement` 属性在打包之后不生效，关闭 [#978](https://github.com/TuSimple/naive-ui/issues/978)
+- 修复 `n-input-number` 的 `step` 值为小数时计算错误，关闭 [#1007](https://github.com/TuSimple/naive-ui/issues/1007)
+- 修复 `n-popselect` 的默认位置和 padding
+- 修复 `n-calendar` 禁用日期的字体颜色
 
 ### Feats
 
 - `n-cascader` 新增 `onUpdateValue` 方法
 - `n-auto-complete` 新增 `onUpdateValue` 方法
 - `n-data-table` 的列的 `renderFilterMenu` 新增 hide 参数
-- `n-tree` 和 `n-tree-select` 新增 `key-field` 属性
-- `n-tree` 和 `n-tree-select` 新增 `label-field` 属性
-- `n-tree` 和 `n-tree-select` 新增 `children-field` 属性
+- `n-tree` 新增 `key-field` 属性
+- `n-tree` 新增 `label-field` 属性
+- `n-tree` 新增 `children-field` 属性
+- `n-tree-select` 新增 `key-field` 属性
+- `n-tree-select` 新增 `label-field` 属性
+- `n-tree-select` 新增 `children-field` 属性
+- `n-cascader` 新增 `key-field` 属性
+- `n-cascader` 新增 `label-field` 属性
+- `n-cascader` 新增 `children-field` 属性
 - `n-dropdown` 选项新增 `props` 属性，关闭 [#813](https://github.com/TuSimple/naive-ui/issues/813)
 - `n-data-table` 支持按住 `shift` 进行多选操作，关闭 [#554](https://github.com/TuSimple/naive-ui/issues/554)
 - `n-tree-select` 增加 `check-strategy` 属性，关闭 [#624](https://github.com/TuSimple/naive-ui/issues/624)
-
-### Fixes
-
-- 修复 `n-layout` 的 `sider-placement` 属性在打包之后不生效，关闭 [#978](https://github.com/TuSimple/naive-ui/issues/978)
-- 修复 `n-input-number` 的 `step` 值为小数时计算错误，关闭 [#1007](https://github.com/TuSimple/naive-ui/issues/1007)
+- `n-cascader` 增加 `check-strategy` 属性
+- `n-message` 选项增加 `keepAliveOnHover` 属性，关闭 [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
+- `n-message-provider` 新增 `keep-alive-on-hover` 属性，关闭 [#1036](https://github.com/TuSimple/naive-ui/issues/1036).
+- `n-upload` 导出 `UploadFile` 类型
+- `n-cascader` 导出 `CascaderOption` 类型
+- `n-mention` 导出 `MentionOption` 类型
+- `n-transfer` 导出 `TransferOption` 类型
+- `n-pagination` 导出 `PaginationInfo` 类型
+- `n-data-table` 导出 `DataTableCreateSummary` 类型
+- `n-code` 新增 `inline` 属性, 关闭 [#834](https://github.com/TuSimple/naive-ui/issues/834)
+- `n-collapse` 新增 `header-extra` slot，关闭 [#1046](https://github.com/TuSimple/naive-ui/issues/1046)
+- `n-input` 新增 `show-password-on` 属性
+- `n-upload` 增加 `list-type`、 `show-preview-button`、 `on-preview` 和 `create-thumbnail-url` 属性
 
 ## 2.16.7 (2021-08-27)
 
@@ -120,7 +296,6 @@
 - `n-button` 新增 `text-color` 属性
 - `n-form` 导出 `FormValidationError` 类型
 - `n-popconfirm` 支持不显示操作组件，关闭 [#770](https://github.com/TuSimple/naive-ui/issues/770)
-- `n-upload` 增加 `list-type`、 `show-preview-button`、 `on-preview` 和 `create-thumbnail-url` 属性
 
 ### Fixes
 
@@ -965,13 +1140,13 @@
 - 修正了嵌套 `n-icon` 没有被打平的问题
 - 修正了 `n-date-picker` 在类型为 `date` 和 `datetime` 时面板不显示年的问题
 
-### Features
+### Feats
 
 - `n-button` 增加 `dashed` 属性
 - 增加 `n-space` 组件
 - `n-drawer` 内容可滚动
 
-### Localization
+### i18n
 
 - `n-log` 添加 zhCN 本地化
 
@@ -1011,7 +1186,7 @@
 
 ## 1.5.1 (2020-07-20)
 
-### Features
+### Feats
 
 - 为 `n-time-picker` 增加了 `disabled` 属性
 
@@ -1031,7 +1206,7 @@
 
 ## 1.4.1 (2020-06-23)
 
-### Features
+### Feats
 
 - 为 `n-select` 增加了 `autofocus` 属性
 
@@ -1041,13 +1216,13 @@
 
 - `n-menu` 不再支持 slot API
 
-### Features
+### Feats
 
 - 增加了试验性的设定主色功能
 
 ## 1.3.5 (2020-06-06)
 
-### Features
+### Feats
 
 - 为 `n-button` 增加了 `attr-type` 属性
 
@@ -1064,7 +1239,7 @@
 
 ## 1.3.3 (2020-06-03)
 
-### Features
+### Feats
 
 - 增加了 `$NOs.theme` 来获取当前操作系统的主题
 
@@ -1083,7 +1258,7 @@
 - 修正了 `n-data-table` 表头没 border-color transition 的问题
 - 修正了 `$NConfirm` 的 `show-icon` & `closable` & `bordered` 属性设置无效的问题
 
-### Features
+### Feats
 
 - 增加并调整了一些 `n-config-consumer` 样式方案中的颜色
 
@@ -1093,7 +1268,7 @@
 
 - UI 默认样式不再包含外部字体文件，如果需要使用 UI 提供的字体需要明确引入
 
-### Features
+### Feats
 
 - 为 `n-layout` 增加了 `themed-style` 属性
 
@@ -1116,13 +1291,13 @@
 
 ## 1.2.0 (2020-05-29)
 
-### Features
+### Feats
 
 - 为 `n-form-item` 增加了 `feedback` 和 `validation-status` 属性
 
 ## 1.1.5 (2020-05-28)
 
-### Features
+### Feats
 
 - 为 `n-collapse` 和 `n-collapse-item` 增加了 `display-directive` 属性
 - 为 `n-select` 的 `option` 增加了 `class` 和 `style` 属性
@@ -1154,7 +1329,7 @@
 
 ## 1.1.2 (2020-05-19)
 
-### Features
+### Feats
 
 - 为 `n-step` 增加内容的 slot
 - 为 `n-checkbox` 增加了 `label` prop
@@ -1185,7 +1360,7 @@
 
 ## 1.1.0 (2020-05-16)
 
-### Features
+### Feats
 
 - `n-button` 接受自定义颜色
 
@@ -1216,7 +1391,7 @@
 
 ## 1.0.11 (2020-04-30)
 
-### Features
+### Feats
 
 - 为 `n-select` 增加了 `fallback-option` 属性用于控制无对应选项时的回退选项
 
@@ -1231,7 +1406,7 @@
 
 ## 1.0.10 (2020-04-28)
 
-### Features
+### Feats
 
 - 为 `n-collapse` 增加了 `arrow-placement` 属性
 - 为 `n-collapse-item` 增加了`arrow` slot
@@ -1242,7 +1417,7 @@
 
 ## 1.0.9 (2020-04-23)
 
-### Features
+### Feats
 
 - 为 `n-input` 增加了 `autofocus` 选项
 - 为 `NMessage` 增加了 `closable` 选项
@@ -1255,14 +1430,14 @@
 
 ## 1.0.8 (2020-04-22)
 
-### Features
+### Feats
 
 - 增加 `n-dynamic-tags` 组件
 - `styleScheme` 新增暴露颜色 `tableHeaderOverlayBackgroundColor` & `inputOverlayBackgroundColor`
 
 ## 1.0.7 (2020-04-10)
 
-### Features
+### Feats
 
 - 为 `n-data-table` 的 `column` 增加了 `filter-option-value` 的属性来应对单选的情况
 
@@ -1278,7 +1453,7 @@
 
 ## 1.0.5 (2020-03-27)
 
-### Features
+### Feats
 
 - 改变 `n-data-table` 的 filters 的数据类型从数组改变成对象
 
@@ -1288,13 +1463,13 @@
 
 ## 1.0.4 (2020-03-26)
 
-### Features
+### Feats
 
 - 当选项过多时，`n-data-table` 过滤菜单的内容可以滚动
 
 ## 1.0.3 (2020-03-25)
 
-### Features
+### Feats
 
 - `$NMessage`, `$NNotification`, `$NConfirm` 的获取到的主题会应用到他们的内部组件
 
@@ -1313,7 +1488,7 @@
 
 ## 1.0.1 (2020-03-21)
 
-### Features
+### Feats
 
 - `n-layout-sider` 的 `show-trigger` 增加了 `'bar'` & `'arrow-circle'` 选项
 
@@ -1321,6 +1496,6 @@
 
 - `n-scrollbar` 的轨道会挡住鼠标事件
 
-### Features
+### Feats
 
 - `n-data-table` 增加了 empty 插槽 [#86](https://github.com/TuSimple/naive-ui/issues/86)

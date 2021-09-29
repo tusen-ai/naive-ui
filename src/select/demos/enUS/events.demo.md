@@ -28,6 +28,7 @@ export default defineComponent({
     return {
       handleUpdateValue (value) {
         message.info('value: ' + JSON.stringify(value))
+        message.info('option: ' + JSON.stringify(option))
       },
       options: [
         {

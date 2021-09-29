@@ -89,6 +89,8 @@ export default defineComponent({
       mergedClsPrefix
     } = this
     const headerNode = renderSlot($slots, 'header', undefined, () => [title])
+    const headerExtraSlot =
+      $slots['header-extra'] || collapseSlots['header-extra']
     return (
       <div
         class={[
@@ -102,28 +104,40 @@ export default defineComponent({
             `${mergedClsPrefix}-collapse-item__header`,
             !collapsed && `${mergedClsPrefix}-collapse-item__header--active`
           ]}
-          onClick={this.handleClick}
         >
-          {arrowPlacement === 'right' && headerNode}
-          <div class={`${mergedClsPrefix}-collapse-item-arrow`}>
-            {renderSlot(
-              $slots.arrow
-                ? $slots
-                : collapseSlots.arrow
-                  ? collapseSlots
-                  : $slots,
-              'arrow',
-              { collapsed: collapsed },
-              () => [
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{
-                    default: collapseSlots.expandIcon ?? (() => <ArrowIcon />)
-                  }}
-                </NBaseIcon>
-              ]
-            )}
+          <div
+            class={`${mergedClsPrefix}-collapse-item__header-main`}
+            onClick={this.handleClick}
+          >
+            {arrowPlacement === 'right' && headerNode}
+            <div class={`${mergedClsPrefix}-collapse-item-arrow`}>
+              {renderSlot(
+                $slots.arrow
+                  ? $slots
+                  : collapseSlots.arrow
+                    ? collapseSlots
+                    : $slots,
+                'arrow',
+                { collapsed: collapsed },
+                () => [
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
+                    {{
+                      default: collapseSlots.expandIcon ?? (() => <ArrowIcon />)
+                    }}
+                  </NBaseIcon>
+                ]
+              )}
+            </div>
+            {arrowPlacement === 'left' && headerNode}
           </div>
-          {arrowPlacement === 'left' && headerNode}
+          {headerExtraSlot && (
+            <div
+              class={`${mergedClsPrefix}-collapse-item__header-extra`}
+              onClick={this.handleClick}
+            >
+              {{ default: headerExtraSlot }}
+            </div>
+          )}
         </div>
         <NCollapseItemContent
           clsPrefix={mergedClsPrefix}

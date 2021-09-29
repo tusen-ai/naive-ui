@@ -19,6 +19,8 @@
 ```
 
 ```js
+import { defineComponent, reactive } from 'vue'
+
 const addressColumn = {
   title: 'Address',
   key: 'address',
@@ -85,25 +87,25 @@ const data = [
   }
 ]
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
+    const addressColumnReactive = reactive(addressColumn)
+
     return {
-      data: data,
+      data,
       columns,
-      addressColumn,
-      pagination: { pageSize: 5 }
-    }
-  },
-  methods: {
-    filterAddress () {
-      this.addressColumn.filterOptionValue = 'London'
-    },
-    unfilterAddress () {
-      this.addressColumn.filterOptionValue = null
-    },
-    handleFiltersChange (filters, sourceColumn) {
-      this.addressColumn.filterOptionValue = filters[sourceColumn.key]
+      addressColumn: addressColumnReactive,
+      pagination: { pageSize: 5 },
+      filterAddress () {
+        addressColumnReactive.filterOptionValue = 'London'
+      },
+      unfilterAddress () {
+        addressColumnReactive.filterOptionValue = null
+      },
+      handleFiltersChange (filters, sourceColumn) {
+        addressColumnReactive.filterOptionValue = filters[sourceColumn.key]
+      }
     }
   }
-}
+})
 ```

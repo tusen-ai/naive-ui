@@ -2,6 +2,7 @@ import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NStep, NSteps } from '../index'
 import { NIcon } from '../../icon'
+import { CloseIcon as ErrorIcon } from '../../_internal/icons'
 
 describe('n-steps', () => {
   it('should work with import on demand', () => {
@@ -16,9 +17,6 @@ describe('n-steps', () => {
     const finishStyle =
       ' --description-text-color: rgba(194, 194, 194, 1); --header-text-color: rgba(194, 194, 194, 1); --indicator-border-color: #18a058; --indicator-color: #0000;'
     const wrapper = mount(NSteps, {
-      props: {
-        current: 1
-      },
       slots: {
         default: () => [
           h(NStep, { title: 'test1', description: 'test1', internalIndex: 1 }),
@@ -27,6 +25,12 @@ describe('n-steps', () => {
         ]
       }
     })
+
+    wrapper
+      .findAll('.n-step')
+      .map((item) => expect(item.attributes('style')).toContain(processStyle))
+
+    await wrapper.setProps({ current: 1 })
     expect(wrapper.findAll('.n-step')[0].attributes('style')).toContain(
       processStyle
     )
@@ -122,5 +126,15 @@ describe('n-steps', () => {
     await wrapper.setProps({ status: 'error' })
     expect(wrapper.find('.n-icon').exists()).toBe(true)
     expect(wrapper.find('.n-icon').text()).toBe('error')
+  })
+
+  it("should show ErrorIcon with 'error' status", () => {
+    const wrapper = mount(NSteps, {
+      slots: {
+        default: () => h(NStep, { internalIndex: 1, status: 'error' })
+      }
+    })
+
+    expect(wrapper.findComponent(ErrorIcon).exists()).toBe(true)
   })
 })

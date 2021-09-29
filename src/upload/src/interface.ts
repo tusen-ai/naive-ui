@@ -1,16 +1,16 @@
-import { Ref, InjectionKey } from 'vue'
+import { Ref, InjectionKey, CSSProperties } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { UploadTheme } from '../styles'
 
 export interface FileInfo {
   id: string
   name: string
-  url: string | null
   percentage: number
   status: 'pending' | 'uploading' | 'finished' | 'removed' | 'error'
-  file: File | null | Blob
-  thumbnailUrl?: string
-  type?: string
+  url?: string | null
+  file?: File | null
+  thumbnailUrl?: string | null
+  type?: string | null
 }
 
 export type FuncOrRecordOrUndef =
@@ -65,12 +65,20 @@ export interface UploadInjection {
   onRemoveRef: Ref<OnRemove | undefined>
   onDownloadRef: Ref<OnDownload | undefined>
   XhrMap: Map<string, XMLHttpRequest>
-  submit: (fileId?: string) => void
   doChange: DoChange
-  isImageUrl: (file: FileInfo) => boolean
-  showPreivewButtonRef: Ref<boolean>
+  showPreviewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>
-  getFileThumbnail: (file: FileInfo) => Promise<string>
+  listTypeRef: Ref<listType>
+  dragOverRef: Ref<boolean>
+  draggerInsideRef: { value: boolean }
+  fileListStyleRef: Ref<string | CSSProperties | undefined>
+  mergedDisabledRef: Ref<boolean>
+  abstractRef: Ref<boolean>
+  cssVarsRef: Ref<CSSProperties>
+  submit: (fileId?: string) => void
+  getFileThumbnailUrl: (file: FileInfo) => Promise<string>
+  handleFileAddition: (files: FileList | null, e?: Event) => void
+  openFileDialog: () => void
 }
 
 export const uploadInjectionKey: InjectionKey<UploadInjection> =
@@ -92,7 +100,7 @@ export type OnBeforeUpload = (data: {
   fileList: FileInfo[]
 }) => Promise<unknown>
 
-export type listType = 'text' | 'picture' | 'picture-card'
+export type listType = 'text' | 'image' | 'image-card'
 
 export type OnPreview = (file: FileInfo) => void
 

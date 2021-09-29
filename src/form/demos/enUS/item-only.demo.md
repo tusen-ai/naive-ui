@@ -1,6 +1,6 @@
 # Use FormItem Alone
 
-You can use `n-form-item` alone, without `n-form`.
+You can also use `n-form-item` outside of an `n-form` element.
 
 ```html
 <n-form-item label="This is a FormItem" :rule="rule">
@@ -11,7 +11,7 @@ You can use `n-form-item` alone, without `n-form`.
 ```js
 import { defineComponent, ref } from 'vue'
 
-const message = 'It is not in Form'
+const message = 'It is not in a Form'
 
 export default defineComponent({
   setup () {

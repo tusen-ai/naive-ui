@@ -15,6 +15,10 @@ import { popselectInjectionKey } from './interface'
 const popselectProps = {
   ...(useTheme.props as ThemeProps<PopselectTheme>),
   ...popoverBaseProps,
+  placement: {
+    ...popoverBaseProps.placement,
+    default: 'bottom'
+  },
   trigger: {
     type: String as PropType<PopoverTrigger>,
     default: 'hover'
@@ -58,6 +62,9 @@ export default defineComponent({
     const popoverProps: PopoverInternalProps & { ref: string } = {
       theme: mergedTheme.peers.Popover,
       themeOverrides: mergedTheme.peerOverrides.Popover,
+      builtinThemeOverrides: {
+        padding: '0'
+      },
       ref: 'popoverInstRef',
       internalRenderBody: (
         className,

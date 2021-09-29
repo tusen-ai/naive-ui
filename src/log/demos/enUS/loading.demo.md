@@ -5,6 +5,8 @@
 ```
 
 ```js
+import { defineComponent, ref } from 'vue'
+
 function log () {
   const l = []
   for (let i = 0; i < 40; ++i) {
@@ -13,12 +15,12 @@ function log () {
   return l.join('\n') + '\n'
 }
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      loading: false,
-      log: log()
+      loading: ref(false),
+      log: ref(log())
     }
   }
-}
+})
 ```

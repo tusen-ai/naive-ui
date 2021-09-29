@@ -9,6 +9,18 @@ describe('n-alert', () => {
     mount(NAlert)
   })
 
+  it('should have a role of "alert"', () => {
+    const wrapper = mount(NAlert)
+    expect(wrapper.find('.n-alert').attributes('role')).toBe('alert')
+  })
+
+  it('should add the right aria', () => {
+    const wrapper = mount(NAlert)
+    expect(wrapper.find('.n-alert__icon').attributes('aria-hidden')).toBe(
+      'true'
+    )
+  })
+
   it('shouldnt have default title', () => {
     const wrapper = mount(NAlert)
     expect(wrapper.find('.n-alert-body__title').exists()).toBe(false)

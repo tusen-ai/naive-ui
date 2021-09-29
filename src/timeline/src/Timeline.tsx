@@ -24,7 +24,8 @@ const timelineProps = {
   size: {
     type: String as PropType<'medium' | 'large'>,
     default: 'medium'
-  }
+  },
+  iconSize: Number
 } as const
 
 export interface TimelineInjection {

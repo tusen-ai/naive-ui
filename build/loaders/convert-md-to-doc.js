@@ -49,7 +49,8 @@ function genAnchorTemplate (children, options = {}) {
   return `
     <n-anchor
       :bound="16"
-      style="width: 144px; position: sticky; top: 32px;"
+      type="block"
+      style="width: 128px; position: sticky; top: 32px;"
       offset-target="#doc-layout"
       :ignore-gap="${options.ignoreGap}"
     >
@@ -118,7 +119,7 @@ export default {
       }),
       contentStyle: computed(() => {
         return showAnchorRef.value
-          ? 'width: calc(100% - 180px); margin-right: 36px;'
+          ? 'width: calc(100% - 164px); margin-right: 36px;'
           : 'width: 100%; padding-right: 12px;'; 
       }),
       url: ${JSON.stringify(url)}
@@ -198,7 +199,7 @@ async function convertMd2ComponentDocumentation (
     <div :style="contentStyle">
       ${docMainTemplate}
     </div>
-    <div style="width: 144px;" v-if="showAnchor">
+    <div style="width: 128px;" v-if="showAnchor">
       ${
         demoInfos.length
           ? genDemosAnchorTemplate(demoInfos)

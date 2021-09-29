@@ -34,12 +34,14 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      value: null,
-      disabled2: false,
-      disabled1: false,
+      value: ref(null),
+      disabled2: ref(false),
+      disabled1: ref(false),
       songs: [
         {
           value: "Rock'n'Roll Star",
@@ -67,5 +69,5 @@ export default {
       })
     }
   }
-}
+})
 ```

@@ -31,7 +31,7 @@ export default function useRtl (
       // if it already exists, we only need to watch clsPrefix, although in most
       // of time it's unnecessary... However we can at least listen less
       // handlers, which is great.
-      if (exists(id)) return
+      if (exists(id, ssrAdapter)) return
       const { value: componentRtlState } = componentRtlStateRef
       if (!componentRtlState) return
       componentRtlState.style.mount({

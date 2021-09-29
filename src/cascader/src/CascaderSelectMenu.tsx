@@ -12,7 +12,7 @@ import {
   withDirectives
 } from 'vue'
 import { clickoutside } from 'vdirs'
-import { createTreeMate } from 'treemate'
+import { createTreeMate, TreeNode } from 'treemate'
 import type {
   SelectBaseOption,
   SelectGroupOption,
@@ -24,7 +24,7 @@ import {
   TmNode,
   Value,
   Filter,
-  BaseOption,
+  CascaderOption,
   SelectMenuInstance,
   cascaderInjectionKey
 } from './interface'
@@ -49,17 +49,17 @@ export default defineComponent({
     },
     filter: {
       type: Function as PropType<Filter>,
-      default: (pattern: string, _: BaseOption, path: BaseOption[]) =>
+      default: (pattern: string, _: CascaderOption, path: CascaderOption[]) =>
         path.some((option) => option.label && ~option.label.indexOf(pattern))
     }
   },
   setup (props) {
     const {
       isMountedRef,
-      leafOnlyRef,
       mergedValueRef,
       mergedClsPrefixRef,
       mergedThemeRef,
+      mergedCheckStrategyRef,
       syncSelectMenuPosition,
       closeMenu,
       handleSelectMenuClickOutside,
@@ -69,7 +69,10 @@ export default defineComponent({
     } = inject(cascaderInjectionKey)!
     const menuInstRef = ref<InternalSelectMenuRef | null>(null)
     const selectOptionsRef = computed(() => {
-      return createSelectOptions(props.tmNodes, leafOnlyRef.value)
+      return createSelectOptions(
+        props.tmNodes,
+        mergedCheckStrategyRef.value === 'child'
+      )
     })
     const filteredSelectOptionsRef = computed(() => {
       const { filter, pattern } = props
@@ -103,23 +106,24 @@ export default defineComponent({
         syncSelectMenuPosition()
       })
     })
-    function handleToggleOption (option: SelectBaseOption): void {
-      doCheck(option as BaseOption)
+    function handleToggle (tmNode: TreeNode<SelectBaseOption>): void {
+      doCheck(tmNode)
     }
-    function doCheck (option: BaseOption): void {
+    // We don't care what type the tmNode is, we only care about its key
+    function doCheck (tmNode: TreeNode<SelectBaseOption>): void {
       if (props.multiple) {
         const { value: mergedValue } = mergedValueRef
         if (Array.isArray(mergedValue)) {
-          if (!mergedValue.includes(option.value)) {
-            cascaderDoCheck(option.value)
+          if (!mergedValue.includes(tmNode.key)) {
+            cascaderDoCheck(tmNode.key)
           } else {
-            cascaderDoUncheck(option.value)
+            cascaderDoUncheck(tmNode.key)
           }
         } else if (mergedValue === null) {
-          cascaderDoCheck(option.value)
+          cascaderDoCheck(tmNode.key)
         }
       } else {
-        cascaderDoCheck(option.value)
+        cascaderDoCheck(tmNode.key)
         // currently the select menu is set to focusable
         // however just leave it here
         closeMenu(true)
@@ -133,9 +137,9 @@ export default defineComponent({
     }
     function enter (): boolean {
       if (menuInstRef) {
-        const pendingOptionData = menuInstRef.value?.getPendingOption()
-        if (pendingOptionData) {
-          doCheck(pendingOptionData as BaseOption)
+        const pendingOptionTmNode = menuInstRef.value?.getPendingTmNode()
+        if (pendingOptionTmNode) {
+          doCheck(pendingOptionTmNode)
         }
         return true
       }
@@ -155,7 +159,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       menuInstRef,
       selectTreeMate: selectTreeMateRef,
-      handleToggleOption,
+      handleToggle,
       handleClickOutside,
       ...exposedRef
     }
@@ -180,7 +184,7 @@ export default defineComponent({
                     treeMate={this.selectTreeMate}
                     multiple={this.multiple}
                     value={this.value}
-                    onMenuToggleOption={this.handleToggleOption}
+                    onToggle={this.handleToggle}
                   />,
                   [[clickoutside, this.handleClickOutside]]
               )

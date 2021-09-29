@@ -18,6 +18,7 @@ async
 disabled
 prefix-and-suffix
 batch-render
+check-strategy-debug
 ```
 
 ## API
@@ -31,6 +32,7 @@ batch-render
 | block-node | `boolean` | `false` | 节点名称整行撑开 |
 | cancelable | `boolean` | `true` | 选中之后是否允许取消 |
 | cascade | `boolean` | `false` | 是否关联选项 |
+| check-strategy | `string` | `'all'` | 设置勾选策略来指定勾选回调返回的值，`all` 表示回调函数值为全部选中节点；`parent` 表示回调函数值为父节点（当父节点下所有子节点都选中时）；`child` 表示回调函数值为子节点 |
 | checkable | `boolean` | `false` | 是否显示选择框，需要将 `cascade` 设置为 `true` |
 | children-field | `string` | `'children'` | 替代 `TreeOption` 中的 children 字段名 |
 | checked-keys | `Array<string \| number>` | `undefined` | 如果设定则 `checked` 状态受控 |
@@ -43,6 +45,7 @@ batch-render
 | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |
 | filter | `(node: TreeOption) => boolean` | `undefined` | 一个简单的字符串过滤算法 |
+| indeterminate-keys | `string \| number` | `undefined` | 部分选中选项的 key |
 | key-field | `string` | `'key'` | 替代 `TreeOption` 中的 key 字段名 |
 | label-field | `string` | `'label'` | 替代 `TreeOption` 中的 label 字段名 |
 | leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
@@ -61,7 +64,8 @@ batch-render
 | on-dragleave | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 拖拽一个节点，该节点离开其它节点后的回调函数 |
 | on-dragstart | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 开始拖拽某一个节点的回调函数 |
 | on-drop | `(data: { node: TreeOption, dragNode: TreeOption, dropPosition: 'before' \| 'inside' \| 'after', event: DragEvent }) => void` | `undefined` | 节点完成拖拽动作后的回调函数 |
-| on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` | 节点多选项发生变化时的回调函数 |
+| on-update:checked-keys | `(keys: Array<string \| number>) => void` | `undefined` | 节点勾选项发生变化时的回调函数 |
+| on-update:indeterminate-keys | `(keys: Array<string \| number>) => void` | `undefined` | 节点部分勾选项发生变化时的回调函数 |
 | on-update:expanded-keys | `(keys: Array<string \| number>) => void` | `undefined` | 节点展开项发生变化时的回调函数 |
 | on-update:selected-keys | `(keys: Array<string \| number>) => void` | `undefined` | 节点选中项发生变化时的回调函数 |
 

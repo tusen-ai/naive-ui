@@ -84,6 +84,7 @@ import { Size as ButtonSize } from '../../button/src/interface'
 import { DataTableRenderFilter, DataTableRenderSorter } from '../../data-table'
 import { IconPlacement } from '../../dialog/src/interface'
 import type { GlobalTheme, GlobalThemeOverrides } from './interface'
+import type { EmptyProps } from '../../empty'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -182,6 +183,7 @@ export interface GlobalComponentConfig {
   DynamicInput?: {
     buttonSize?: ButtonSize
   }
+  Empty?: Pick<EmptyProps, 'description' | 'renderIcon'>
 }
 
 export interface GlobalIconConfig {

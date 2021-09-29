@@ -15,14 +15,16 @@ indent
 collapse
 inverted
 long-label
+accordion
 ```
 
-## Props
+## API
 
 ### Menu Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| accordion | `boolean` | `false` | Whether to use accordion mode |
 | collapsed-icon-size | `number` | `24` | The icon size when menu is collapsed. If not set, menu will use `icon-size` in place of it. |
 | collapsed-width | `number` | `48` | The menu width after collapsed. |
 | collapsed | `boolean` | `false` | The collapsed status of menu, only works when menu is vertical. |
@@ -35,7 +37,7 @@ long-label
 | icon-size | `number` | `20` | The icon size when menu is not collapsed. |
 | indent | `number` | `32` | The indent of menu. |
 | inverted | `boolean` | `false` | Use inverted style. |
-| options | `Array<MenuOption \| MenuOptionGroup>` | `[]` | Items data of menu. |
+| options | `Array<MenuOption \| MenuGroupOption>` | `[]` | Items data of menu. |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | Menu layout. |
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all extras. |
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | Render function that renders all icons. |
@@ -49,18 +51,18 @@ long-label
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children? | `Array<MenuOption \| MenuOptionGroup>` | Child menu options. |
+| children? | `Array<MenuOption \| MenuGroupOption>` | Child menu options. |
 | disabled? | `boolean` | Whether to disable the menu item. |
 | extra? | `string \| (() => VNodeChild)` | The extra parts of the menu item. |
 | icon? | `() => VNodeChild` | The icon for the menu item. |
 | key | `string` | The indentifier of the menu item. |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |
 
-### MenuOptionGroup Properties
+### MenuGroupOption Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children | `Array<MenuOption \| MenuOptionGroup>` | Group items. **required!** |
+| children | `Array<MenuOption \| MenuGroupOption>` | Group items. **required!** |
 | key | `string` | The indentifier of the menu group. |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |
 | type | `'group'` | The type of the menu item, **required!** |

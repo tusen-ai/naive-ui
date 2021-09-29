@@ -98,8 +98,8 @@ const timePickerProps = {
   size: String as PropType<Size>,
   isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
   isSecondDisabled: Function as PropType<IsSecondDisabled>,
+  inputReadonly: Boolean,
   clearable: Boolean,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
@@ -666,6 +666,7 @@ export default defineComponent({
                       onClear={this.handleTimeInputClear}
                       internalDeactivateOnEnter
                       internalForceFocus={this.active}
+                      readonly={this.inputReadonly || this.mergedDisabled}
                       onClick={this.handleTriggerClick}
                     >
                       {this.showIcon

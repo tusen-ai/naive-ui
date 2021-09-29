@@ -10,7 +10,7 @@
 ```
 
 ```js
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 function createCols () {
   return [
@@ -62,7 +62,7 @@ function createData () {
   })
 }
 
-export default {
+export default defineComponent({
   setup () {
     return {
       data: ref(createData()),
@@ -72,5 +72,5 @@ export default {
       })
     }
   }
-}
+})
 ```

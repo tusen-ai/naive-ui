@@ -38,6 +38,7 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { startOfDay } from 'date-fns'
 
 const d = 86400000
@@ -45,7 +46,7 @@ const h = 3600000
 const m = 60000
 const s = 1000
 
-export default {
+export default defineComponent({
   setup () {
     return {
       dateDisabled (ts) {
@@ -136,5 +137,5 @@ export default {
       }
     }
   }
-}
+})
 ```

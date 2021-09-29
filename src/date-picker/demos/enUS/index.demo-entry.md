@@ -29,6 +29,7 @@ update-on-close
 | clearable | `boolean` | `false` | Whether the date picker is clearable. |
 | default-value | `number \| [number, number] \| null` | `null` | Date picker's default value. |
 | disabled | `boolean` | `false` | Whether the date picker is disabled. |
+| input-readonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |
 | shortcuts | `Record<string, number \| [number, number]>` | `undefined` | Shortcut button customizations. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` | Date picker type. |
@@ -40,8 +41,8 @@ update-on-close
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported for the `date` type date picker. |
-| format | `string` | `'yyyy-MM-dd'` | Format of the input. |
+| actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Operations supported for the `date` type date picker. |
+| format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |
 | placeholder | `string` | `'Select Date'` | Placeholder. |
 | on-update:value | `(value: number \| null) => void` | `undefined` | Date selected callback. |
@@ -51,7 +52,7 @@ update-on-close
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported for the `datetime` type date picker. |
-| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. |
+| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
 | placeholder | `string` | `'Select Date and Time'` | Placeholder. |
@@ -64,7 +65,7 @@ update-on-close
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported for the `daterange` type date picker. |
 | end-placeholder | `string` | `'End Date'` | Placeholder at the end of the input. |
-| format | `string` | `'yyyy-MM-dd'` | Format of the input. |
+| format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
 | close-on-select | `boolean` | `false` | Whether to close the panel after the user has selected a time range. |
@@ -79,7 +80,7 @@ update-on-close
 | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported for the `datetimerange` type. |
 | end-placeholder | `string` | `'End Date and Time'` | Placeholder at the end of the input. |
-| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. |
+| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
 | separator | `string` | `'to'` | The separator between the start input and the end input. |

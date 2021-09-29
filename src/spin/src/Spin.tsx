@@ -4,14 +4,15 @@ import {
   h,
   Transition,
   PropType,
-  CSSProperties
+  CSSProperties,
+  watchEffect
 } from 'vue'
 import { useCompitable } from 'vooks'
 import { pxfy } from 'seemly'
 import { NBaseLoading } from '../../_internal'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, ExtractPublicPropTypes, warn } from '../../_utils'
+import { createKey, ExtractPublicPropTypes, warnOnce } from '../../_utils'
 import { spinLight } from '../styles'
 import type { SpinTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -24,10 +25,8 @@ const STROKE_WIDTH = {
 
 const spinProps = {
   ...(useTheme.props as ThemeProps<SpinTheme>),
-  stroke: {
-    type: String,
-    default: undefined
-  },
+  description: String,
+  stroke: String,
   size: {
     type: [String, Number] as PropType<'small' | 'medium' | 'large' | number>,
     default: 'medium'
@@ -36,21 +35,17 @@ const spinProps = {
     type: Boolean,
     default: true
   },
-  strokeWidth: {
-    type: Number,
-    default: undefined
+  strokeWidth: Number,
+  rotate: {
+    type: Boolean,
+    default: true
   },
   spinning: {
     type: Boolean,
     validator: () => {
-      warn('spin', '`spinning` is deprecated, please use `show` instead.')
       return true
     },
     default: undefined
-  },
-  rotate: {
-    type: Boolean,
-    default: true
   }
 }
 
@@ -60,6 +55,16 @@ export default defineComponent({
   name: 'Spin',
   props: spinProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.spinning !== undefined) {
+          warnOnce(
+            'spin',
+            '`spinning` is deprecated, please use `show` instead.'
+          )
+        }
+      })
+    }
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Spin',
@@ -84,7 +89,7 @@ export default defineComponent({
           common: { cubicBezierEaseInOut },
           self
         } = themeRef.value
-        const { opacitySpinning, color } = self
+        const { opacitySpinning, color, textColor } = self
         const size =
           typeof spinSize === 'number'
             ? pxfy(spinSize)
@@ -93,32 +98,44 @@ export default defineComponent({
           '--bezier': cubicBezierEaseInOut,
           '--opacity-spinning': opacitySpinning,
           '--size': size,
-          '--color': color
+          '--color': color,
+          '--text-color': textColor
         }
       })
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
+    const { $slots, mergedClsPrefix, description } = this
     const rotate = $slots.icon && this.rotate
+    const descriptionNode = (description || $slots.description) && (
+      <div class={`${mergedClsPrefix}-spin-description`}>
+        {description || $slots.description?.()}
+      </div>
+    )
     const icon = $slots.icon ? (
-      <div
-        class={[
-          `${mergedClsPrefix}-spin`,
-          rotate && `${mergedClsPrefix}-spin--rotate`
-        ]}
-        style={$slots.default ? '' : (this.cssVars as CSSProperties)}
-      >
-        {$slots.icon()}
+      <div class={`${mergedClsPrefix}-spin-body`}>
+        <div
+          class={[
+            `${mergedClsPrefix}-spin`,
+            rotate && `${mergedClsPrefix}-spin--rotate`
+          ]}
+          style={$slots.default ? '' : (this.cssVars as CSSProperties)}
+        >
+          {$slots.icon()}
+        </div>
+        {descriptionNode}
       </div>
     ) : (
-      <NBaseLoading
-        clsPrefix={mergedClsPrefix}
-        style={$slots.default ? '' : (this.cssVars as CSSProperties)}
-        stroke={this.stroke}
-        stroke-width={this.mergedStrokeWidth}
-        class={`${mergedClsPrefix}-spin`}
-      />
+      <div class={`${mergedClsPrefix}-spin-body`}>
+        <NBaseLoading
+          clsPrefix={mergedClsPrefix}
+          style={$slots.default ? '' : (this.cssVars as CSSProperties)}
+          stroke={this.stroke}
+          stroke-width={this.mergedStrokeWidth}
+          class={`${mergedClsPrefix}-spin`}
+        />
+        {descriptionNode}
+      </div>
     )
     return $slots.default ? (
       <div

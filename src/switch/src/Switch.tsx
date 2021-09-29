@@ -39,7 +39,6 @@ const switchProps = {
     type: Boolean,
     default: true
   },
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,

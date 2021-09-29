@@ -21,7 +21,7 @@ const inputNumberProps = {
     type: Number as PropType<number | null>,
     default: null
   },
-  value: Number,
+  value: Number as PropType<number | null>,
   step: {
     type: [Number, String],
     default: 1
@@ -42,6 +42,7 @@ const inputNumberProps = {
     type: Boolean,
     default: true
   },
+  readonly: Boolean,
   clearable: Boolean,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -94,13 +95,15 @@ export default defineComponent({
       uncontrolledValueRef
     )
     const displayedValueRef = ref('')
-    const precisionRef = computed(() => {
-      const precisions = [props.min, props.max, props.step].map((item) => {
-        const fraction = String(item).split('.')[1]
-        return fraction ? fraction.length : 0
-      })
+    const getMaxPrecision = (currentValue: number): number => {
+      const precisions = [props.min, props.max, props.step, currentValue].map(
+        (item) => {
+          const fraction = String(item).split('.')[1]
+          return fraction ? fraction.length : 0
+        }
+      )
       return Math.max(...precisions)
-    })
+    }
     const mergedPlaceholderRef = useMemo(() => {
       const { placeholder } = props
       if (placeholder !== undefined) return placeholder
@@ -150,7 +153,8 @@ export default defineComponent({
         return null
       }
       if (validator(parsedValue)) {
-        let nextValue = parseFloat((parsedValue + offset).toFixed(precisionRef.value))
+        const precision = getMaxPrecision(parsedValue)
+        let nextValue = parseFloat((parsedValue + offset).toFixed(precision))
         if (validator(nextValue)) {
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
@@ -384,6 +388,7 @@ export default defineComponent({
           size={this.mergedSize}
           placeholder={this.mergedPlaceholder}
           disabled={this.mergedDisabled}
+          readonly={this.readonly as any}
           textDecoration={
             this.displayedValueInvalid ? 'line-through' : undefined
           }
@@ -406,7 +411,9 @@ export default defineComponent({
                   ),
                   <NButton
                     text
-                    disabled={!this.minusable || this.mergedDisabled}
+                    disabled={
+                      !this.minusable || this.mergedDisabled || this.readonly
+                    }
                     focusable={false}
                     builtinThemeOverrides={this.buttonThemeOverrides}
                     onClick={this.handleMinusClick}
@@ -424,7 +431,9 @@ export default defineComponent({
                   </NButton>,
                   <NButton
                     text
-                    disabled={!this.addable || this.mergedDisabled}
+                    disabled={
+                      !this.addable || this.mergedDisabled || this.readonly
+                    }
                     focusable={false}
                     builtinThemeOverrides={this.buttonThemeOverrides}
                     onClick={this.handleAddClick}

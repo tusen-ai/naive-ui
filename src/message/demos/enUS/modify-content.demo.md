@@ -9,32 +9,36 @@
 ```
 
 ```js
+import { defineComponent, ref, reactive } from 'vue'
 import { useMessage } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
-    let count = 0
-    let typeIndex = 0
     const types = ['success', 'info', 'warning', 'error', 'loading']
-    let msg = null
+    const countRef = ref(0)
+    const typeIndexRef = ref(0)
+    let msgReactive = reactive(null)
+
     return {
       plus () {
-        if (msg) {
-          count++
-          msg.content = '' + count
+        if (msgReactive) {
+          countRef.value++
+          msgReactive.content = '' + countRef.value
         }
       },
       changeType () {
-        if (msg) {
-          typeIndex = (typeIndex + 1) % types.length
-          msg.type = types[typeIndex]
+        if (msgReactive) {
+          typeIndexRef.value = (typeIndexRef.value + 1) % types.length
+          msgReactive.type = types[typeIndexRef.value]
         }
       },
       createMessage () {
-        msg = message[types[typeIndex]]('' + count, { duration: 10000 })
+        msgReactive = message[types[typeIndexRef.value]]('' + countRef.value, {
+          duration: 10000
+        })
       }
     }
   }
-}
+})
 ```

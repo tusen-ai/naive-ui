@@ -22,7 +22,7 @@ import {
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
-import { createTreeMate } from 'treemate'
+import { createTreeMate, CheckStrategy } from 'treemate'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
@@ -49,7 +49,7 @@ import type {
   TreeSelectOption,
   Value
 } from './interface'
-import { treeSelectInjectionKey, CheckStrategy } from './interface'
+import { treeSelectInjectionKey } from './interface'
 import {
   treeOption2SelectOption,
   filterTree,
@@ -235,7 +235,7 @@ export default defineComponent({
           : null
     )
     const mergedCascadeRef = computed(() => {
-      return props.multiple && props.cascade
+      return props.multiple && props.cascade && props.checkable
     })
     // The same logic as tree, now it's not that complex so I don't extract a
     // function to reuse it.
@@ -257,20 +257,9 @@ export default defineComponent({
     })
     const treeSelectedKeysRef = computed<Key[]>(() => {
       if (props.checkable) return []
-      const { value: mergedValue } = mergedValueRef
-      const { multiple } = props
-      return Array.isArray(mergedValue)
-        ? multiple
-          ? mergedValue
-          : []
-        : multiple
-          ? []
-          : mergedValue === null
-            ? []
-            : [mergedValue]
+      return treeCheckedKeysRef.value
     })
     const treeCheckedKeysRef = computed<Key[]>(() => {
-      if (!props.checkable) return []
       const { value: mergedValue } = mergedValueRef
       if (props.multiple) {
         if (Array.isArray(mergedValue)) return mergedValue
@@ -311,7 +300,7 @@ export default defineComponent({
           checkStrategy: props.checkStrategy,
           cascade: mergedCascadeRef.value
         })
-        const { keyField, labelField } = props
+        const { labelField } = props
         checkedKeys.forEach((value) => {
           const tmNode = treeMate.getNode(value)
           if (tmNode !== null) {
@@ -321,7 +310,7 @@ export default defineComponent({
                   tmNode,
                   treeMate.getPath(value).treeNodePath,
                   separator,
-                  keyField
+                  labelField
                 )
                 : treeOption2SelectOption(tmNode, labelField)
             )
@@ -350,14 +339,32 @@ export default defineComponent({
       uncontrolledShowRef.value = value
     }
     function doUpdateValue (
-      value: string | number | Array<string | number> | null
+      value: string | number | Array<string | number> | null,
+      option: TreeSelectOption | null | Array<TreeSelectOption | null>
     ): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, option)
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, option)
+      }
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
+    }
+    function doUpdateIndeterminateKeys (
+      value: string | number | Array<string | number> | null,
+      option: TreeSelectOption | null | Array<TreeSelectOption | null>
+    ): void {
+      const {
+        onUpdateIndeterminateKeys,
+        'onUpdate:indeterminateKeys': _onUpdateIndeterminateKeys
+      } = props
+      if (onUpdateIndeterminateKeys) {
+        call(onUpdateIndeterminateKeys as OnUpdateValueImpl, value, option)
+      }
+      if (_onUpdateIndeterminateKeys) {
+        call(_onUpdateIndeterminateKeys as OnUpdateValueImpl, value, option)
+      }
     }
     function doUpdateExpandedKeys (keys: Key[]): void {
       const {
@@ -413,14 +420,20 @@ export default defineComponent({
         }
       }
     }
-    function handleUpdateSelectedKeys (keys: Key[]): void {
-      if (props.checkable && props.multiple) {
-        return
-      }
+    function getOptionsByKeys (keys: Key[]): Array<TreeSelectOption | null> {
+      const {
+        value: { getNode }
+      } = dataTreeMateRef
+      return keys.map((key) => getNode(key)?.rawNode || null)
+    }
+    function handleUpdateCheckedKeys (keys: Key[]): void {
+      const options = getOptionsByKeys(keys)
       if (props.multiple) {
-        doUpdateValue(keys)
+        doUpdateValue(keys, options)
       } else {
-        doUpdateValue(keys[0] ?? null)
+        keys.length
+          ? doUpdateValue(keys[0], options[0] || null)
+          : doUpdateValue(null, null)
         closeMenu()
         if (!props.filterable) {
           // Currently it is not necessary. However if there is an action slot,
@@ -433,14 +446,9 @@ export default defineComponent({
         patternRef.value = ''
       }
     }
-    function handleUpdateCheckedKeys (keys: Key[]): void {
-      // only in checkable & multiple mode, we use tree's check update
-      if (props.checkable && props.multiple) {
-        doUpdateValue(keys)
-        if (props.filterable) {
-          focusSelectionInput()
-          patternRef.value = ''
-        }
+    function handleUpdateIndeterminateKeys (keys: Key[]): void {
+      if (props.checkable) {
+        doUpdateIndeterminateKeys(keys, getOptionsByKeys(keys))
       }
     }
     function handleTriggerFocus (e: FocusEvent): void {
@@ -480,9 +488,9 @@ export default defineComponent({
         closeMenu()
       }
       if (multiple) {
-        doUpdateValue([])
+        doUpdateValue([], [])
       } else {
-        doUpdateValue(null)
+        doUpdateValue(null, null)
       }
     }
     function handleDeleteOption (option: SelectBaseOption): void {
@@ -499,11 +507,11 @@ export default defineComponent({
                 cascade: mergedCascadeRef.value
               }
             )
-            doUpdateValue(checkedKeys)
+            doUpdateValue(checkedKeys, getOptionsByKeys(checkedKeys))
           } else {
             const nextValue = Array.from(mergedValue)
             nextValue.splice(index, 1)
-            doUpdateValue(nextValue)
+            doUpdateValue(nextValue, getOptionsByKeys(nextValue))
           }
         }
       }
@@ -621,8 +629,8 @@ export default defineComponent({
       handleMenuLeave,
       handleTriggerClick,
       handleMenuClickoutside,
-      handleUpdateSelectedKeys,
       handleUpdateCheckedKeys,
+      handleUpdateIndeterminateKeys,
       handleTriggerFocus,
       handleTriggerBlur,
       handleMenuFocusin,
@@ -749,7 +757,7 @@ export default defineComponent({
                                   checkedKeys={this.treeCheckedKeys}
                                   selectedKeys={this.treeSelectedKeys}
                                   checkable={checkable}
-                                  internalCheckStrategy={this.checkStrategy}
+                                  checkStrategy={this.checkStrategy}
                                   cascade={this.mergedCascade}
                                   leafOnly={this.leafOnly}
                                   multiple={this.multiple}
@@ -762,7 +770,7 @@ export default defineComponent({
                                   internalHighlightKeySet={
                                     filteredTreeInfo.highlightKeySet
                                   }
-                                  internalCheckOnSelect
+                                  internalUnifySelectCheck
                                   internalScrollable
                                   internalScrollablePadding={this.menuPadding}
                                   internalFocusable={false}
@@ -770,11 +778,11 @@ export default defineComponent({
                                   onUpdateCheckedKeys={
                                     this.handleUpdateCheckedKeys
                                   }
+                                  onUpdateIndeterminateKeys={
+                                    this.handleUpdateIndeterminateKeys
+                                  }
                                   onUpdateExpandedKeys={
                                     this.doUpdateExpandedKeys
-                                  }
-                                  onUpdateSelectedKeys={
-                                    this.handleUpdateSelectedKeys
                                   }
                                 />
                               ) : (

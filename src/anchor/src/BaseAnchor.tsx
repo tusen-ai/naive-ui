@@ -8,7 +8,8 @@ import {
   watch,
   onBeforeUnmount,
   onMounted,
-  toRef
+  toRef,
+  computed
 } from 'vue'
 import { unwrapElement } from 'seemly'
 import { onFontsReady } from 'vooks'
@@ -23,6 +24,10 @@ export interface BaseAnchorInst {
 }
 
 export const baseAnchorProps = {
+  type: {
+    type: String as PropType<'block' | 'rail'>,
+    default: 'rail'
+  },
   showRail: {
     type: Boolean,
     default: true
@@ -59,6 +64,12 @@ export default defineComponent({
     const slotRef = ref<HTMLElement | null>(null)
     const barRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
+    const isBlockTypeRef = computed(() => {
+      return props.type === 'block'
+    })
+    const mergedShowRailRef = computed(() => {
+      return !isBlockTypeRef.value && props.showRail
+    })
     function disableTransitionOneTick (): void {
       const { value: barEl } = barRef
       const { value: slotEl } = slotRef
@@ -105,14 +116,10 @@ export default defineComponent({
         if (slotEl) slotEl.style.transition = 'none'
       }
       const { offsetHeight, offsetWidth } = linkTitleEl
-      const {
-        top: linkTitleClientTop,
-        left: linkTitleClientLeft
-      } = linkTitleEl.getBoundingClientRect()
-      const {
-        top: anchorClientTop,
-        left: anchorClientLeft
-      } = selfEl.getBoundingClientRect()
+      const { top: linkTitleClientTop, left: linkTitleClientLeft } =
+        linkTitleEl.getBoundingClientRect()
+      const { top: anchorClientTop, left: anchorClientLeft } =
+        selfEl.getBoundingClientRect()
       const offsetTop = linkTitleClientTop - anchorClientTop
       const offsetLeft = linkTitleClientLeft - anchorClientLeft
       barEl.style.top = `${offsetTop}px`
@@ -229,7 +236,7 @@ export default defineComponent({
     watch(activeHrefRef, (value) => {
       if (value === null) {
         const { value: slotEl } = slotRef
-        if (slotEl) {
+        if (slotEl && !isBlockTypeRef.value) {
           slotEl.style.maxWidth = '0'
         }
       }
@@ -239,26 +246,29 @@ export default defineComponent({
       barRef,
       slotRef,
       setActiveHref,
-      activeHref: activeHrefRef
+      activeHref: activeHrefRef,
+      isBlockType: isBlockTypeRef,
+      mergedShowRail: mergedShowRailRef
     }
   },
   render () {
-    const { mergedClsPrefix, $slots } = this
+    const { mergedClsPrefix, mergedShowRail, isBlockType, $slots } = this
     return (
       <div
         class={[
           `${mergedClsPrefix}-anchor`,
-          this.showRail && `${mergedClsPrefix}-anchor--show-rail`
+          isBlockType && `${mergedClsPrefix}-anchor--block`,
+          mergedShowRail && `${mergedClsPrefix}-anchor--show-rail`
         ]}
         ref="selfRef"
       >
-        {this.showRail && this.showBackground ? (
+        {mergedShowRail && this.showBackground ? (
           <div
             ref="slotRef"
             class={`${mergedClsPrefix}-anchor-link-background`}
           />
         ) : null}
-        {this.showRail ? (
+        {mergedShowRail ? (
           <div class={`${mergedClsPrefix}-anchor-rail`}>
             <div
               ref="barRef"

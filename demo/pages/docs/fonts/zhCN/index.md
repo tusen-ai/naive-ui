@@ -18,3 +18,12 @@ app.use(naive)
 
 // ...
 ```
+
+注意：不同 vfonts 字体提供的字重不同，在使用 `Lato`、`OpenSans` 的时候你需要全局调整 naive-ui 的字重配置。
+
+```html
+<!-- 调整 naive-ui 的字重配置 -->
+<n-config-provider :theme-overrides="{ common: { fontWeightStrong: '600' } }">
+  <app />
+</n-config-provider>
+```

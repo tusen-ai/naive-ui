@@ -13,7 +13,7 @@ If you don't set `default-expanded-keys`, menu will expand all the ascendant of 
 ```
 
 ```js
-import { h } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NIcon, useMessage } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -100,9 +100,10 @@ const menuOptions = [
   }
 ]
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
+
     return {
       menuOptions,
       defaultExpandedKeys: ['dance-dance-dance', 'food'],
@@ -111,5 +112,5 @@ export default {
       }
     }
   }
-}
+})
 ```

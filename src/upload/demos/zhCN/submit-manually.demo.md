@@ -12,7 +12,7 @@
 </n-button>
 <n-upload
   @change="handleChange"
-  action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-upload="false"
   multiple
   ref="upload"
@@ -22,19 +22,23 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const fileListLengthRef = ref(0)
+    const uploadRef = ref(null)
+
     return {
-      fileListLength: 0
-    }
-  },
-  methods: {
-    handleChange ({ fileList }) {
-      this.fileListLength = fileList.length
-    },
-    handleClick () {
-      this.$refs.upload.submit()
+      upload: uploadRef,
+      fileListLength: fileListLengthRef,
+      handleChange ({ fileList }) {
+        fileListLengthRef.value = fileList.length
+      },
+      handleClick () {
+        uploadRef.value.submit()
+      }
     }
   }
-}
+})
 ```

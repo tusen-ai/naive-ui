@@ -16,18 +16,19 @@
 </template>
 
 <script>
+  import { defineComponent } from 'vue'
   import hljs from 'highlight.js/lib/core'
   import javascript from 'highlight.js/lib/languages/javascript'
 
   hljs.registerLanguage('javascript', javascript)
 
-  export default {
+  export default defineComponent({
     setup() {
       return {
         hljs
       }
     }
-  }
+  })
 </script>
 ```
 
@@ -35,9 +36,12 @@
 
 ```demo
 basic
+inline
 ```
 
-## Props
+## API
+
+### Code Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -45,9 +49,4 @@ basic
 | hljs | `Object` | `undefined` | 如果你想局部设定 hljs，可以通过这个属性传给组件 |
 | language | `string` | `undefined` | 代码在 highlightjs 中的语言 |
 | trim | `boolean` | `true` | 是否显示 trim 后的代码 |
-
-## Slots
-
-| 名称    | 参数 | 说明        |
-| ------- | ---- | ----------- |
-| default | `()` | code 的内容 |
+| inline | `boolean` | `false` | 使用行内样式 |

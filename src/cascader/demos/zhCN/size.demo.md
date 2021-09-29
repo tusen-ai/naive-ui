@@ -29,7 +29,9 @@
 ```
 
 ```js
-function genOptions (depth = 2, iterator = 1, prefix = '') {
+import { defineComponent, ref } from 'vue'
+
+function getOptions (depth = 2, iterator = 1, prefix = '') {
   const length = 12
   const options = []
   for (let i = 1; i <= length; ++i) {
@@ -38,7 +40,7 @@ function genOptions (depth = 2, iterator = 1, prefix = '') {
         value: `${i}`,
         label: `${i}`,
         disabled: i % 5 === 0,
-        children: genOptions(depth, iterator + 1, '' + i)
+        children: getOptions(depth, iterator + 1, '' + String(i))
       })
     } else if (iterator === depth) {
       options.push({
@@ -51,19 +53,19 @@ function genOptions (depth = 2, iterator = 1, prefix = '') {
         value: `${prefix}-${i}`,
         label: `${prefix}-${i}`,
         disabled: i % 5 === 0,
-        children: genOptions(depth, iterator + 1, `${prefix}-${i}`)
+        children: getOptions(depth, iterator + 1, `${prefix}-${i}`)
       })
     }
   }
   return options
 }
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      value: null,
-      options: genOptions()
+      value: ref(null),
+      options: getOptions()
     }
   }
-}
+})
 ```

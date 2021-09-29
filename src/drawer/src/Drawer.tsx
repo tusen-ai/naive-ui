@@ -24,10 +24,7 @@ import style from './styles/index.cssr'
 
 const drawerProps = {
   ...(useTheme.props as ThemeProps<DrawerTheme>),
-  show: {
-    type: Boolean,
-    default: false
-  },
+  show: Boolean,
   width: {
     type: [Number, String] as PropType<string | number>,
     default: 251
@@ -53,9 +50,9 @@ const drawerProps = {
     type: Boolean,
     default: true
   },
+  onMaskClick: Function as PropType<(e: MouseEvent) => void>,
   scrollbarProps: Object as PropType<ScrollbarProps>,
   contentStyle: [Object, String] as PropType<string | CSSProperties>,
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
@@ -165,10 +162,12 @@ export default defineComponent({
         props.drawerStyle
       ]
     })
-    function handleMaskClick (): void {
-      if (props.maskClosable) {
+    function handleMaskClick (e: MouseEvent): void {
+      const { onMaskClick, maskClosable } = props
+      if (maskClosable) {
         doUpdateShow(false)
       }
+      if (onMaskClick) onMaskClick(e)
     }
     function doUpdateShow (show: boolean): void {
       const { onHide, onUpdateShow, 'onUpdate:show': _onUpdateShow } = props

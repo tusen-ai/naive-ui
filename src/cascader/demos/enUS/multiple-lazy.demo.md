@@ -3,7 +3,10 @@
 ```html
 <n-space vertical>
   <n-space>
-    <n-space><n-switch v-model:value="leafOnly" />Leaf Only</n-space>
+    <n-space
+      ><n-switch v-model:value="checkStrategyIsChild" />Child Check
+      Strategy</n-space
+    >
     <n-space><n-switch v-model:value="cascade" />Cascade</n-space>
     <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
   </n-space>
@@ -13,7 +16,7 @@
     placeholder="Meaningless values"
     :options="options"
     :cascade="cascade"
-    :leaf-only="leafOnly"
+    :check-strategy="checkStrategyIsChild ? 'child' : 'all'"
     :show-path="showPath"
     remote
     :on-load="handleLoad"
@@ -22,7 +25,9 @@
 ```
 
 ```js
-function genChildren (option) {
+import { defineComponent, ref } from 'vue'
+
+function getChildren (option) {
   const children = []
   for (let i = 0; i <= option.depth; ++i) {
     children.push({
@@ -35,32 +40,30 @@ function genChildren (option) {
   return children
 }
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      leafOnly: true,
-      cascade: true,
-      showPath: true,
-      value: null,
-      options: [
+      checkStrategyIsChild: ref(true),
+      cascade: ref(true),
+      showPath: ref(true),
+      value: ref(null),
+      options: ref([
         {
           label: 'l-0',
           value: 'v-0',
           depth: 1,
           isLeaf: false
         }
-      ]
-    }
-  },
-  methods: {
-    handleLoad (option) {
-      return new Promise((resolve) => {
-        window.setTimeout(() => {
-          option.children = genChildren(option)
-          resolve()
-        }, 1000)
-      })
+      ]),
+      handleLoad (option) {
+        return new Promise((resolve) => {
+          window.setTimeout(() => {
+            option.children = getChildren(option)
+            resolve()
+          }, 1000)
+        })
+      }
     }
   }
-}
+})
 ```

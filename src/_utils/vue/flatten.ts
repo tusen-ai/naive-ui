@@ -1,7 +1,11 @@
-import { Fragment, VNodeChild, createTextVNode, VNode } from 'vue'
+import { Fragment, VNodeChild, createTextVNode, VNode, Comment } from 'vue'
 
 // o(n) flatten
-export function flatten (vNodes: VNodeChild[], result: VNode[] = []): VNode[] {
+export function flatten (
+  vNodes: VNodeChild[],
+  filterCommentNode: boolean = true,
+  result: VNode[] = []
+): VNode[] {
   vNodes.forEach((vNode) => {
     if (vNode === null) return
     if (typeof vNode !== 'object') {
@@ -11,16 +15,16 @@ export function flatten (vNodes: VNodeChild[], result: VNode[] = []): VNode[] {
       return
     }
     if (Array.isArray(vNode)) {
-      flatten(vNode, result)
+      flatten(vNode, filterCommentNode, result)
       return
     }
     if (vNode.type === Fragment) {
       if (vNode.children === null) return
       if (Array.isArray(vNode.children)) {
-        flatten(vNode.children, result)
+        flatten(vNode.children, filterCommentNode, result)
       }
       // rawSlot
-    } else {
+    } else if (vNode.type !== Comment) {
       result.push(vNode)
     }
   })

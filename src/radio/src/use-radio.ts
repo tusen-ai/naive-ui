@@ -12,6 +12,7 @@ import { useMemo, useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
 import { warn, call } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
+import { OnUpdateValue, OnUpdateValueImpl } from './interface'
 
 const radioProps = {
   name: String,
@@ -52,7 +53,7 @@ export interface RadioGroupInjection {
   valueRef: Ref<string | number | null>
   mergedSizeRef: Ref<'small' | 'medium' | 'large'>
   disabledRef: Ref<boolean>
-  doUpdateValue: (value: string | number) => void
+  doUpdateValue: OnUpdateValue
 }
 
 export const radioGroupInjectionKey: InjectionKey<RadioGroupInjection> =
@@ -125,7 +126,7 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
     if (NRadioGroup) {
       const { doUpdateValue } = NRadioGroup
       const { value } = props
-      doUpdateValue(value)
+      call(doUpdateValue as OnUpdateValueImpl, value)
     } else {
       const { 'onUpdate:checked': updateChecked } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem

@@ -1,9 +1,13 @@
-import { h, nextTick } from 'vue'
+import { h } from 'vue'
 import { mount, VueWrapper } from '@vue/test-utils'
 import { NCheckbox, NCheckboxGroup } from '../index'
+import { NForm, NFormItem } from '../../form'
 
 function expectChecked (wrapper: VueWrapper<any>, value: boolean): void {
   expect(wrapper.classes().some((c) => c.includes('checked'))).toEqual(value)
+  expect(wrapper.find('.n-checkbox').attributes('aria-checked')).toBe(
+    value.toString()
+  )
 }
 
 describe('n-checkbox', () => {
@@ -15,11 +19,9 @@ describe('n-checkbox', () => {
     it('works', async () => {
       const wrapper = mount(NCheckbox)
       expectChecked(wrapper, false)
-      wrapper.trigger('click')
-      await nextTick()
+      await wrapper.trigger('click')
       expectChecked(wrapper, true)
-      wrapper.trigger('click')
-      await nextTick()
+      await wrapper.trigger('click')
       expectChecked(wrapper, false)
     })
     it('props.defaultChecked', () => {
@@ -44,6 +46,7 @@ describe('n-checkbox', () => {
     expect(wrapper.find('.n-checkbox').classes()).toContain(
       'n-checkbox--indeterminate'
     )
+    expect(wrapper.find('.n-checkbox').attributes('aria-checked')).toBe('mixed')
   })
 
   it('should work with `disabled` prop', () => {
@@ -85,19 +88,20 @@ describe('n-checkbox', () => {
     expect(wrapper.find('.n-checkbox__label').text()).toContain('test')
   })
 
-  it('should work with `on-update:checked` prop', async () => {
+  it('should work with `on-update:checked` & `onUpdateChecked` prop', async () => {
     const onClick = jest.fn()
     const wrapper = mount(NCheckbox, {
       props: {
-        'onUpdate:checked': onClick
+        'onUpdate:checked': onClick,
+        onUpdateChecked: onClick
       },
       slots: {
         default: () => 'test'
       }
     })
 
-    wrapper.trigger('click')
-    expect(onClick).toBeCalled()
+    await wrapper.trigger('click')
+    expect(onClick).toHaveBeenCalledTimes(2)
   })
 
   it('should work with default slots', async () => {
@@ -106,13 +110,69 @@ describe('n-checkbox', () => {
         default: () => 'test'
       }
     })
+
     expect(wrapper.find('.n-checkbox__label').text()).toContain('test')
+  })
+
+  it('should work with `size` prop', () => {
+    ;(['small', 'medium', 'large'] as const).forEach((i) => {
+      const wrapper = mount(NCheckbox, { props: { size: i } })
+      expect(wrapper.find('.n-checkbox').attributes('style')).toMatchSnapshot()
+    })
+  })
+
+  it('should show correct style with `NForm` component', () => {
+    const wrapper = mount(() => (
+      <NForm size="medium">
+        {{
+          default: () => {
+            return (
+              <NFormItem>
+                {{
+                  default: () => <NCheckbox />
+                }}
+              </NFormItem>
+            )
+          }
+        }}
+      </NForm>
+    ))
+
+    expect(wrapper.find('.n-checkbox').attributes('style')).toMatchSnapshot()
+  })
+
+  describe('accessibility', () => {
+    it('should have a role of "checkbox"', () => {
+      const wrapper = mount(NCheckbox)
+      expect(wrapper.find('.n-checkbox').attributes('role')).toBe('checkbox')
+    })
+
+    it('should set a default aria-labelledby', () => {
+      const labelId = 'custom-id'
+      const wrapper = mount(() => <NCheckbox aria-labelledby={labelId} />)
+      expect(wrapper.find('.n-checkbox').attributes('aria-labelledby')).toMatch(
+        labelId
+      )
+    })
+
+    it('should allow to set aria-labelledby from outside', () => {
+      const wrapper = mount(NCheckbox)
+      const labelId = wrapper.find('.n-checkbox__label').attributes('id')
+      expect(wrapper.find('.n-checkbox').attributes('aria-labelledby')).toBe(
+        labelId
+      )
+    })
   })
 })
 
 describe('n-checkbox-group', () => {
   it('should work with import on demand', () => {
     mount(NCheckboxGroup)
+  })
+
+  it('should have a role of "group"', () => {
+    const wrapper = mount(NCheckboxGroup)
+    expect(wrapper.find('.n-checkbox-group').attributes('role')).toBe('group')
   })
 
   it('should work with `disabled` prop', () => {

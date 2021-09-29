@@ -26,9 +26,9 @@ dark-9-debug
 dark-10-debug
 ```
 
-## Props
+## API
 
-### Modal
+### Modal Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -37,27 +37,29 @@ dark-10-debug
 | preset | `'card' \| 'dialog'` | `undefined` | 模态框使用何种预设 |
 | show | `boolean` | `false` | 是否展示 Modal |
 | on-update:show | `(value: boolean) => void` | `undefined` | 模态框更新是否展示状态的回调 |
+| on-after-enter | `() => void` | `undefined` | Modal 出现后的回调 |
+| on-after-leave | `() => void` | `undefined` | Modal 关闭后的回调 |
 
-### Modal（Card 预设）
+### Modal（Card 预设）Props
 
 参考 [Card props](card#Props)
 
-### Modal（Dialog 预设）
+### Modal（Dialog 预设）Props
 
 参考 [Dialog props](dialog#Props)
 
-## Slots
+### Modal Slots
 
-### Modal（无预设）
+### Modal（无预设）Slots
 
 | 名称    | 参数 | 说明         |
 | ------- | ---- | ------------ |
 | default | `()` | 模态框的内容 |
 
-### Modal（Card 预设）
+### Modal（Card 预设）Slots
 
 参考 [Card slots](card#Slots)
 
-### Modal（Dialog 预设）
+### Modal（Dialog 预设）Slots
 
 参考 [Dialog slots](dialog#Slots)

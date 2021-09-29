@@ -6,6 +6,7 @@ Switch contents in same area.
 
 ```demo
 basic
+segment
 flex-label
 card
 size
@@ -29,7 +30,7 @@ line-debug
 | pane-style | `string \| object` | `undefined` | Style of the pane. |
 | tab-style | `string \| object` | `undefined` | Style of the tab. |
 | tabs-padding | `number` | `0` | Left & right `padding` of the group of tabs. |
-| type | `'bar' \| 'line' \| 'card'` | `'bar'` | Tabs type. |
+| type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | Tabs type. |
 | value | `string \| number` | `undefined` | Value in controlled mode. |
 | on-add | `() => void` | `undefined` | Callback function triggered when add tag. |
 | on-close | `(name: string \| number) => void` | `undefined` | Callback function triggered when close tag. |

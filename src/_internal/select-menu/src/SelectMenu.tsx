@@ -96,7 +96,7 @@ export default defineComponent({
     onMouseenter: Function as PropType<(e: MouseEvent) => void>,
     onMouseleave: Function as PropType<(e: MouseEvent) => void>,
     // deprecated
-    onMenuToggleOption: Function as PropType<(value: SelectBaseOption) => void>
+    onToggle: Function as PropType<(tmNode: TreeNode<SelectBaseOption>) => void>
   },
   setup (props) {
     const themeRef = useTheme(
@@ -169,9 +169,9 @@ export default defineComponent({
         setPendingTmNode(null)
       }
     })
-    function doToggleOption (option: SelectBaseOption): void {
-      const { onMenuToggleOption } = props
-      if (onMenuToggleOption) onMenuToggleOption(option)
+    function doToggle (tmNode: TreeNode<SelectBaseOption>): void {
+      const { onToggle } = props
+      if (onToggle) onToggle(tmNode)
     }
     function doScroll (e: Event): void {
       const { onScroll } = props
@@ -185,9 +185,9 @@ export default defineComponent({
     function handleVirtualListResize (): void {
       scrollbarRef.value?.sync()
     }
-    function getPendingOption (): SelectBaseOption | null {
+    function getPendingTmNode (): TreeNode<SelectBaseOption> | null {
       const { value: pendingTmNode } = pendingNodeRef
-      if (pendingTmNode) return pendingTmNode.rawNode
+      if (pendingTmNode) return pendingTmNode
       return null
     }
     function handleOptionMouseEnter (
@@ -202,7 +202,7 @@ export default defineComponent({
       tmNode: TreeNode<SelectBaseOption>
     ): void {
       if (tmNode.disabled) return
-      doToggleOption(tmNode.rawNode)
+      doToggle(tmNode)
     }
     // keyboard related methods
     function handleKeyUp (e: KeyboardEvent): void {
@@ -294,6 +294,7 @@ export default defineComponent({
           optionCheckColor,
           actionTextColor,
           optionColorPending,
+          optionColorActive,
           loadingColor,
           loadingSize,
           [createKey('optionFontSize', size)]: fontSize,
@@ -312,6 +313,7 @@ export default defineComponent({
         '--group-header-text-color': groupHeaderTextColor,
         '--option-check-color': optionCheckColor,
         '--option-color-pending': optionColorPending,
+        '--option-color-active': optionColorActive,
         '--option-height': optionHeight,
         '--option-opacity-disabled': optionOpacityDisabled,
         '--option-text-color': optionTextColor,
@@ -328,9 +330,10 @@ export default defineComponent({
       selfRef,
       next,
       prev,
-      getPendingOption
+      getPendingTmNode
     }
     return {
+      mergedTheme: themeRef,
       virtualListRef,
       scrollbarRef,
       style: styleRef,
@@ -358,7 +361,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, virtualScroll, clsPrefix } = this
+    const { $slots, virtualScroll, clsPrefix, mergedTheme } = this
     return (
       <div
         ref="selfRef"
@@ -383,6 +386,8 @@ export default defineComponent({
         ) : !this.empty ? (
           <NScrollbar
             ref="scrollbarRef"
+            theme={mergedTheme.peers.Scrollbar}
+            themeOverrides={mergedTheme.peerOverrides.Scrollbar}
             scrollable={this.scrollable}
             container={virtualScroll ? this.virtualListContainer : undefined}
             content={virtualScroll ? this.virtualListContent : undefined}
@@ -401,6 +406,7 @@ export default defineComponent({
                     paddingBottom={this.padding.bottom}
                     onResize={this.handleVirtualListResize}
                     onScroll={this.handleVirtualListScroll}
+                    itemResizable
                   >
                     {{
                       default: ({
@@ -466,7 +472,12 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div class={`${clsPrefix}-base-select-menu__empty`}>
-            {renderSlot($slots, 'empty', undefined, () => [<NEmpty />])}
+            {renderSlot($slots, 'empty', undefined, () => [
+              <NEmpty
+                theme={mergedTheme.peers.Empty}
+                themeOverrides={mergedTheme.peerOverrides.Empty}
+              />
+            ])}
           </div>
         )}
         {$slots.action && (

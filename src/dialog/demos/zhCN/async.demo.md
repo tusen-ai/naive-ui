@@ -7,12 +7,13 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useDialog } from 'naive-ui'
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000))
 const countDown = (second) => `倒计时 ${second} 秒`
 
-export default {
+export default defineComponent({
   setup () {
     const dialog = useDialog()
     return {
@@ -43,5 +44,5 @@ export default {
       }
     }
   }
-}
+})
 ```

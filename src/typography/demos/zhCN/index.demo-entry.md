@@ -13,7 +13,7 @@ text
 router-link
 ```
 
-## Props
+## API
 
 ### Text Props
 
@@ -54,9 +54,7 @@ router-link
 | ---------- | --------- | ------- | -------- |
 | align-text | `boolean` | `false` | 文本对齐 |
 
-## Slots
-
-### All Typography Components
+### All Typography Components Slots
 
 | 名称    | 参数 | 说明       |
 | ------- | ---- | ---------- |

@@ -84,7 +84,7 @@ export default defineComponent({
     onClick: Function as PropType<(e: MouseEvent) => void>,
     onBlur: Function as PropType<(e: FocusEvent) => void>,
     onFocus: Function as PropType<(e: FocusEvent) => void>,
-    onDeleteOption: Function,
+    onDeleteOption: Function as PropType<(option: SelectBaseOption) => void>,
     maxTagCount: [String, Number] as PropType<number | 'responsive'>,
     onClear: Function as PropType<(e: MouseEvent) => void>,
     onPatternInput: Function as PropType<(e: InputEvent) => void>,
@@ -120,9 +120,14 @@ export default defineComponent({
     })
     const filterablePlaceholderRef = computed(() => {
       return props.selectedOption
-        ? props.renderLabel
-          ? props.renderLabel(props.selectedOption as never, true)
-          : render(props.selectedOption.label, props.selectedOption, true)
+        ? props.renderTag
+          ? props.renderTag({
+            option: props.selectedOption,
+            handleClose: () => {}
+          })
+          : props.renderLabel
+            ? props.renderLabel(props.selectedOption as never, true)
+            : render(props.selectedOption.label, props.selectedOption, true)
         : props.placeholder
     })
     const labelRef = computed(() => {
@@ -416,6 +421,8 @@ export default defineComponent({
             clearColorHover,
             clearColorPressed,
             clearSize,
+            // arrow
+            arrowSize,
             [createKey('height', size)]: height,
             [createKey('fontSize', size)]: fontSize
           }
@@ -466,7 +473,9 @@ export default defineComponent({
           '--clear-size': clearSize,
           '--clear-color': clearColor,
           '--clear-color-hover': clearColorHover,
-          '--clear-color-pressed': clearColorPressed
+          '--clear-color-pressed': clearColorPressed,
+          // arrow-size
+          '--arrow-size': arrowSize
         }
       })
     }
@@ -577,7 +586,7 @@ export default defineComponent({
         : undefined
       let counter: JSX.Element | undefined
       if (maxTagCountNumeric) {
-        const rest = this.selectedOptions!.length - (maxTagCount)
+        const rest = this.selectedOptions!.length - maxTagCount
         if (rest > 0) {
           counter = (
             <div
@@ -662,7 +671,7 @@ export default defineComponent({
       const placeholder =
         !this.selected && !this.pattern && !this.isCompositing ? (
           <div
-            class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-render-dom`}
+            class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
           >
             {this.placeholder}
           </div>
@@ -733,7 +742,7 @@ export default defineComponent({
           >
             <input
               ref="patternInputRef"
-              class={`${clsPrefix}-base-selection-label__input`}
+              class={`${clsPrefix}-base-selection-input`}
               value={
                 this.patternInputFocused && this.active ? this.pattern : ''
               }
@@ -751,17 +760,22 @@ export default defineComponent({
             {showPlaceholder ? null : this.patternInputFocused &&
               this.active ? null : (
               <div
-                class={`${clsPrefix}-base-selection-label__render-label ${clsPrefix}-base-render-dom`}
+                class={`${clsPrefix}-base-selection-label__render-label ${clsPrefix}-base-selection-overlay`}
                 key="input"
               >
-                {renderLabel
-                  ? renderLabel(this.selectedOption as SelectBaseOption, true)
-                  : render(this.label, this.selectedOption, true)}
+                {renderTag
+                  ? renderTag({
+                    option: this.selectedOption!,
+                    handleClose: () => {}
+                  })
+                  : renderLabel
+                    ? renderLabel(this.selectedOption!, true)
+                    : render(this.label, this.selectedOption, true)}
               </div>
               )}
             {showPlaceholder ? (
               <div
-                class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-render-dom`}
+                class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
                 key="placeholder"
               >
                 {this.filterablePlaceholder}
@@ -779,17 +793,24 @@ export default defineComponent({
           >
             {this.label !== undefined ? (
               <div
-                class={`${clsPrefix}-base-selection-label__input`}
+                class={`${clsPrefix}-base-selection-input`}
                 title={getTitleAttribute(this.label)}
                 key="input"
               >
-                {renderLabel
-                  ? renderLabel(this.selectedOption as SelectBaseOption, true)
-                  : render(this.label, this.selectedOption, true)}
+                <div class={`${clsPrefix}-base-selection-input__content`}>
+                  {renderTag
+                    ? renderTag({
+                      option: this.selectedOption as SelectBaseOption,
+                      handleClose: () => {}
+                    })
+                    : renderLabel
+                      ? renderLabel(this.selectedOption as SelectBaseOption, true)
+                      : render(this.label, this.selectedOption, true)}
+                </div>
               </div>
             ) : (
               <div
-                class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-render-dom`}
+                class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
                 key="placeholder"
               >
                 {this.placeholder}

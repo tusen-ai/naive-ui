@@ -7,22 +7,27 @@
 ```demo
 basic
 wrap
+description
 customize-icon
 ```
 
-## Props
+## API
+
+### Spin Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| description | `string` | `undefined` | Spin 的文字信息 |
 | rotate | `boolean` | `true` | 自定义的加载图标是否有旋转动画 |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Spin 的尺寸 |
 | show | `boolean` | `true` | 在填入内容时 Spin 是否激活 |
 | stroke-width | `number` | `undefined` | Spin 边缘的相对宽度，假定 Spin 的外侧半径是 100 |
 | stroke | `string` | `undefined` | Spin 的颜色 |
 
-## Slots
+### Spin Slots
 
-| 名称    | 参数 | 说明                            |
-| ------- | ---- | ------------------------------- |
-| default | `()` | 如果填入，Spin 会包裹填入的内容 |
-| icon    | `()` | 自定义的加载图标                |
+| 名称        | 参数 | 说明                            |
+| ----------- | ---- | ------------------------------- |
+| default     | `()` | 如果填入，Spin 会包裹填入的内容 |
+| description | `()` | Spin 的文字信息                 |
+| icon        | `()` | 自定义的加载图标                |

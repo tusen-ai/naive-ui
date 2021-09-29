@@ -46,16 +46,10 @@ const transferProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  virtualScroll: {
-    type: Boolean,
-    default: false
-  },
+  virtualScroll: Boolean,
   sourceTitle: String,
   targetTitle: String,
-  filterable: {
-    type: Boolean,
-    default: false
-  },
+  filterable: Boolean,
   sourceFilterPlaceholder: String,
   targetFilterPlaceholder: String,
   filter: {
@@ -67,11 +61,7 @@ const transferProps = {
         .indexOf(('' + pattern).toLowerCase())
     }
   },
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large' | undefined>,
-    default: undefined
-  },
-  // eslint-disable-next-line vue/prop-name-casing
+  size: String as PropType<'small' | 'medium' | 'large'>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onChange: {

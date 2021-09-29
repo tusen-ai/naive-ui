@@ -32,17 +32,19 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const checkedValueRef = ref(null)
+
     return {
-      disabled: true,
-      checkedValue: null
-    }
-  },
-  methods: {
-    handleChange (e) {
-      this.checkedValue = e.target.value
+      disabled: ref(true),
+      checkedValue: checkedValueRef,
+      handleChange (e) {
+        checkedValueRef.value = e.target.value
+      }
     }
   }
-}
+})
 ```

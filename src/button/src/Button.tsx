@@ -413,15 +413,14 @@ const Button = defineComponent({
         class={[
           `${mergedClsPrefix}-button`,
           `${mergedClsPrefix}-button--${this.type}-type`,
-          {
-            [`${mergedClsPrefix}-button--rtl`]: this.rtlEnabled,
-            [`${mergedClsPrefix}-button--disabled`]: this.disabled,
-            [`${mergedClsPrefix}-button--block`]: this.block,
-            [`${mergedClsPrefix}-button--pressed`]: this.enterPressed,
-            [`${mergedClsPrefix}-button--dashed`]: !this.text && this.dashed,
-            [`${mergedClsPrefix}-button--color`]: this.color,
-            [`${mergedClsPrefix}-button--ghost`]: this.ghost // required for button group border collapse
-          }
+          `${mergedClsPrefix}-button--${this.mergedSize}-type`,
+          this.rtlEnabled && `${mergedClsPrefix}-button--rtl`,
+          this.disabled && `${mergedClsPrefix}-button--disabled`,
+          this.block && `${mergedClsPrefix}-button--block`,
+          this.enterPressed && `${mergedClsPrefix}-button--pressed`,
+          !this.text && this.dashed && `${mergedClsPrefix}-button--dashed`,
+          this.color && `${mergedClsPrefix}-button--color`,
+          this.ghost && `${mergedClsPrefix}-button--ghost` // required for button group border collapse
         ]}
         tabindex={this.mergedFocusable ? 0 : -1}
         type={this.attrType}

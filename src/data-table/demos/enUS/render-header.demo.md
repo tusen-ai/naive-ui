@@ -10,7 +10,7 @@
 ```
 
 ```js
-import { h } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NTooltip, NGradientText } from 'naive-ui'
 
 const renderTooltip = (trigger, content) => {
@@ -88,15 +88,15 @@ const data = [
   }
 ]
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      data: data,
+      data,
       columns: createColumns(this),
       pagination: {
         pageSize: 10
       }
     }
   }
-}
+})
 ```

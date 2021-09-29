@@ -11,9 +11,10 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useMessage, useDialog } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     const dialog = useDialog()
@@ -54,5 +55,5 @@ export default {
       }
     }
   }
-}
+})
 ```

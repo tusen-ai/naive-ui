@@ -10,7 +10,7 @@ import {
   Transition,
   CSSProperties
 } from 'vue'
-import { createTreeMate } from 'treemate'
+import { createTreeMate, TreeNode } from 'treemate'
 import { VBinder, VFollower, VTarget, FollowerInst } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { RenderLabel } from '../../_internal/select-menu/src/interface'
@@ -273,9 +273,9 @@ export default defineComponent({
               selectMenuInst.next()
             } else {
               // Enter
-              const option = selectMenuInst.getPendingOption()
-              if (option) {
-                handleSelect(option)
+              const pendingOptionTmNode = selectMenuInst.getPendingTmNode()
+              if (pendingOptionTmNode) {
+                handleSelect(pendingOptionTmNode)
               } else {
                 doUpdateShowMenu(false)
               }
@@ -306,7 +306,7 @@ export default defineComponent({
       nTriggerFormBlur()
       doUpdateShowMenu(false)
     }
-    function handleSelect (option: SelectBaseOption): void {
+    function handleSelect (tmNode: TreeNode<SelectBaseOption>): void {
       if (
         cachedPrefix === null ||
         cachedPartialPatternStart === null ||
@@ -320,7 +320,9 @@ export default defineComponent({
         }
         return
       }
-      const { value } = option
+      const {
+        rawNode: { value }
+      } = tmNode
       const inputEl = getInputEl()
       const inputValue = inputEl.value
       const { separator } = props
@@ -332,7 +334,7 @@ export default defineComponent({
           nextMiddlePart +
           nextEndPart
       )
-      props.onSelect?.(option as MentionOption, cachedPrefix)
+      props.onSelect?.(tmNode.rawNode as MentionOption, cachedPrefix)
       const nextSelectionEnd =
         cachedPartialPatternStart +
         nextMiddlePart.length +
@@ -454,7 +456,7 @@ export default defineComponent({
                               treeMate={this.treeMate}
                               virtualScroll={false}
                               style={this.cssVars as CSSProperties}
-                              onMenuToggleOption={this.handleSelect}
+                              onToggle={this.handleSelect}
                               renderLabel={this.renderLabel}
                             >
                               {$slots}

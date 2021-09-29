@@ -66,22 +66,20 @@
 ```
 
 ```js
+import { defineComponent, ref, computed } from 'vue'
 import { MdArrowRoundBack, MdArrowRoundForward } from '@vicons/ionicons4'
 
-export default {
+export default defineComponent({
   components: {
     MdArrowRoundBack,
     MdArrowRoundForward
   },
-  data () {
-    return {
-      current: 1,
-      currentStatus: 'process'
-    }
-  },
-  computed: {
-    buttonType () {
-      switch (this.currentStatus) {
+  setup () {
+    const currentRef = ref(1)
+    const currentStatusRef = ref('process')
+
+    const buttonTypeRef = computed(() => {
+      switch (currentStatusRef.value) {
         case 'error':
           return 'error'
         case 'finish':
@@ -89,12 +87,16 @@ export default {
         default:
           return 'default'
       }
-    }
-  },
-  methods: {
-    handleButtonClick () {
-      this.current = (this.current % 4) + 1
+    })
+
+    return {
+      current: currentRef,
+      currentStatus: currentStatusRef,
+      handleButtonClick () {
+        currentRef.value = (currentRef.value % 4) + 1
+      },
+      buttonType: buttonTypeRef
     }
   }
-}
+})
 ```

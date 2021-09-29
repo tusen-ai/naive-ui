@@ -12,19 +12,26 @@ export const self = (vars: ThemeCommonVars) => {
     closeColorHover,
     closeColorPressed,
     tabColor,
+    baseColor,
     dividerColor,
     fontWeight,
     textColor1,
     borderRadius,
-    fontSize
+    fontSize,
+    fontWeightStrong
   } = vars
   return {
     ...sizeVariables,
+    colorSegment: tabColor,
     tabFontSizeCard: fontSize,
     tabTextColorLine: textColor1,
     tabTextColorActiveLine: primaryColor,
     tabTextColorHoverLine: primaryColor,
     tabTextColorDisabledLine: textColorDisabled,
+    tabTextColorSegment: textColor1,
+    tabTextColorActiveSegment: primaryColor,
+    tabTextColorHoverSegment: primaryColor,
+    tabTextColorDisabledSegment: textColorDisabled,
     tabTextColorBar: textColor1,
     tabTextColorActiveBar: primaryColor,
     tabTextColorHoverBar: primaryColor,
@@ -38,11 +45,13 @@ export const self = (vars: ThemeCommonVars) => {
     closeColorHover,
     closeColorPressed,
     tabColor,
+    tabColorSegment: baseColor,
     tabBorderColor: dividerColor,
     tabFontWeightActive: fontWeight,
     tabFontWeight: fontWeight,
     tabBorderRadius: borderRadius,
-    paneTextColor: textColor2
+    paneTextColor: textColor2,
+    fontWeightStrong
   }
 }
 

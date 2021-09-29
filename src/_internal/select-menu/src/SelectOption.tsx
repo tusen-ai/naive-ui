@@ -149,7 +149,7 @@ export default defineComponent({
         onMouseenter={handleMouseEnter}
         onMousemove={handleMouseMove}
       >
-        {children}
+        <div class={`${clsPrefix}-base-select-option__content`}>{children}</div>
       </div>
     )
     return rawNode.render

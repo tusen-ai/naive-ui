@@ -17,6 +17,7 @@ export default defineComponent({
     const { body } = document
     const { style } = body
     let styleApplied = false
+    let firstApply = true
     onBeforeMount(() => {
       watchEffect(() => {
         const {
@@ -34,14 +35,22 @@ export default defineComponent({
           )
           : commonLight
         if (styleApplied || !body.hasAttribute('n-styled')) {
-          body.setAttribute('n-styled', '')
-          styleApplied = true
           style.backgroundColor = bodyColor
           style.color = textColor2
           style.fontSize = fontSize
           style.fontFamily = fontFamily
           style.lineHeight = lineHeight
-          style.transition = `color .3s ${cubicBezierEaseInOut}, background-color .3s ${cubicBezierEaseInOut}`
+          const transition = `color .3s ${cubicBezierEaseInOut}, background-color .3s ${cubicBezierEaseInOut}`
+          if (firstApply) {
+            setTimeout(() => {
+              style.transition = transition
+            }, 0)
+          } else {
+            style.transition = transition
+          }
+          body.setAttribute('n-styled', '')
+          styleApplied = true
+          firstApply = false
         } else if (__DEV__) {
           warn(
             'global-style',

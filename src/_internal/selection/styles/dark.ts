@@ -29,11 +29,27 @@ const internalSelectionDark: InternalSelectionTheme = {
       clearColorHover,
       clearColorPressed,
       placeholderColor,
-      placeholderColorDisabled
+      placeholderColorDisabled,
+      fontSizeTiny,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
+      heightTiny,
+      heightSmall,
+      heightMedium,
+      heightLarge
     } = vars
     return {
       ...commonVars,
-      borderRadius: borderRadius,
+      fontSizeTiny,
+      fontSizeSmall,
+      fontSizeMedium,
+      fontSizeLarge,
+      heightTiny,
+      heightSmall,
+      heightMedium,
+      heightLarge,
+      borderRadius,
       // default
       textColor: textColor2,
       textColorDisabled,

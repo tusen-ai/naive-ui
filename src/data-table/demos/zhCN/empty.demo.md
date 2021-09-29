@@ -5,7 +5,7 @@
 ```
 
 ```js
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 const createColumns = () => {
   return [
@@ -32,13 +32,12 @@ const createColumns = () => {
   ]
 }
 
-export default {
+export default defineComponent({
   setup () {
-    const data = ref([])
     return {
-      data,
+      data: ref([]),
       columns: createColumns()
     }
   }
-}
+})
 ```

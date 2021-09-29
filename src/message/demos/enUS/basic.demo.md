@@ -2,7 +2,7 @@
 
 ```html
 <n-space>
-  <n-button @click="info"> Info </n-button>
+  <n-button @click="info"> Info(Hover will keep alive) </n-button>
   <n-button @click="error"> Error </n-button>
   <n-button @click="warning"> Warning </n-button>
   <n-button @click="success"> Success </n-button>
@@ -11,14 +11,20 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     return {
       info () {
-        message.info("I don't know why nobody told you how to unfold your love")
+        message.info(
+          "I don't know why nobody told you how to unfold your love",
+          {
+            keepAliveOnHover: true
+          }
+        )
       },
       error () {
         message.error('Once upon a time you dressed so fine')
@@ -38,5 +44,5 @@ export default {
       }
     }
   }
-}
+})
 ```

@@ -1,14 +1,14 @@
 # Thumbnail File List
 
-`list-type = 'picture'`
+`list-type = "image"`.
 
 You can use `preview-file` to customize the thumbnails of the file.
 
 ```html
 <n-upload
-  action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-file-list="fileList"
-  list-type="picture"
+  list-type="image"
   :createThumbnailUrl="createThumbnailUrl"
 >
   <n-button>Upload</n-button>
@@ -16,7 +16,7 @@ You can use `preview-file` to customize the thumbnails of the file.
 ```
 
 ```js
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, h } from 'vue'
 import { useMessage } from 'naive-ui'
 
 export default defineComponent({
@@ -25,35 +25,37 @@ export default defineComponent({
     const fileListRef = ref([
       {
         id: 'a',
-        name: 'I am a regular file with errors.png',
+        name: 'My Fault.png',
         status: 'error'
       },
       {
         id: 'b',
-        name: 'I am a regular file.doc',
+        name: 'regular text.doc',
         status: 'finished',
         type: 'text/plain'
       },
       {
         id: 'c',
-        name: 'I am a regular file with url.png',
+        name: 'image.png',
         status: 'finished',
-        url: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+        url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
       },
       {
         id: 'd',
-        name: 'I am uploading a normal file.doc',
+        name: 'Not Finished Yet.doc',
         status: 'uploading',
-        percentage: 99
+        percentage: 50
       }
     ])
     return {
       fileList: fileListRef,
       createThumbnailUrl (file) {
-        message.info(
-          'previewFile changes the thumbnail image of the uploaded file so that it looks all Vue.'
-        )
-        return 'https://cn.vuejs.org/images/logo.svg'
+        message.info(() => [
+          '`createThumbnailUrl` changes the thumbnail image of the uploaded file.',
+          h('br'),
+          'It will be 07akioni whatever you upload.'
+        ])
+        return '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
       }
     }
   }

@@ -1,7 +1,7 @@
 # Drag to Upload
 
 ```html
-<n-upload action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f">
+<n-upload action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f">
   <n-upload-dragger>
     <div style="margin-bottom: 12px;">
       <n-icon size="48" :depth="3">
@@ -21,11 +21,12 @@
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
 
-export default {
+export default defineComponent({
   components: {
     ArchiveIcon
   }
-}
+})
 ```

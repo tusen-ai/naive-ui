@@ -6,6 +6,7 @@ import { createTheme } from '../../_mixins'
 
 export const self = (vars: ThemeCommonVars) => {
   const {
+    baseColor,
     textColor2,
     bodyColor,
     cardColor,
@@ -32,7 +33,10 @@ export const self = (vars: ThemeCommonVars) => {
     siderBorderColorInverted: invertedColor,
     siderColor: cardColor,
     siderColorInverted: invertedColor,
-    siderToggleButtonColor: 'rgba(0, 0, 0, .15)',
+    siderToggleButtonBorder: `1px solid ${dividerColor}`,
+    siderToggleButtonColor: baseColor,
+    siderToggleButtonIconColor: textColor2,
+    siderToggleButtonIconColorInverted: textColor2,
     siderToggleBarColor: composite(bodyColor, scrollbarColor),
     siderToggleBarColorHover: composite(bodyColor, scrollbarColorHover),
     // hack for inverted background

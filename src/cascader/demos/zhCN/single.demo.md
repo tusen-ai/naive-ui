@@ -3,8 +3,10 @@
 ```html
 <n-space vertical>
   <n-space>
-    <n-space><n-switch v-model:value="leafOnly" />Leaf Only</n-space>
-    <n-space><n-switch v-model:value="cascade" />Cascade</n-space>
+    <n-space
+      ><n-switch v-model:value="checkStrategyIsChild" />Child Check
+      Strategy</n-space
+    >
     <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
     <n-space><n-switch v-model:value="hoverTrigger" />Hover Trigger</n-space>
     <n-space><n-switch v-model:value="filterable" />Filterable</n-space>
@@ -14,16 +16,18 @@
     placeholder="没啥用的值"
     :expand-trigger="hoverTrigger ? 'hover' : 'click'"
     :options="options"
-    :cascade="cascade"
-    :leaf-only="leafOnly"
+    :check-strategy="checkStrategyIsChild ? 'child' : 'all'"
     :show-path="showPath"
     :filterable="filterable"
+    @update:value="handleUpdateValue"
   />
 </n-space>
 ```
 
 ```js
-function genOptions (depth = 3, iterator = 1, prefix = '') {
+import { defineComponent, ref } from 'vue'
+
+function getOptions (depth = 3, iterator = 1, prefix = '') {
   const length = 12
   const options = []
   for (let i = 1; i <= length; ++i) {
@@ -32,7 +36,7 @@ function genOptions (depth = 3, iterator = 1, prefix = '') {
         value: `v-${i}`,
         label: `l-${i}`,
         disabled: i % 5 === 0,
-        children: genOptions(depth, iterator + 1, '' + i)
+        children: getOptions(depth, iterator + 1, '' + String(i))
       })
     } else if (iterator === depth) {
       options.push({
@@ -45,24 +49,26 @@ function genOptions (depth = 3, iterator = 1, prefix = '') {
         value: `v-${prefix}-${i}`,
         label: `l-${prefix}-${i}`,
         disabled: i % 5 === 0,
-        children: genOptions(depth, iterator + 1, `${prefix}-${i}`)
+        children: getOptions(depth, iterator + 1, `${prefix}-${i}`)
       })
     }
   }
   return options
 }
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      leafOnly: true,
-      cascade: true,
-      showPath: true,
-      hoverTrigger: false,
-      filterable: false,
-      value: null,
-      options: genOptions()
+      checkStrategyIsChild: ref(true),
+      showPath: ref(true),
+      hoverTrigger: ref(false),
+      filterable: ref(false),
+      value: ref(null),
+      options: getOptions(),
+      handleUpdateValue (...args) {
+        console.log(...args)
+      }
     }
   }
-}
+})
 ```

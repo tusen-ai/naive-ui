@@ -8,7 +8,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 
 const pProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
-  depth: String as PropType<1 | 2 | 3 | '1' | '2' | '3' | undefined>
+  depth: [String, Number] as PropType<1 | 2 | 3 | '1' | '2' | '3'>
 }
 
 export type PProps = ExtractPublicPropTypes<typeof pProps>

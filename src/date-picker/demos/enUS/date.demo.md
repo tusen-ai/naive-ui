@@ -6,11 +6,13 @@
 ```
 
 ```js
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
     return {
-      timestamp: 1183135260000
+      timestamp: ref(1183135260000)
     }
   }
-}
+})
 ```

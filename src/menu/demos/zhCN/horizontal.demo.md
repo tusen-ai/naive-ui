@@ -7,7 +7,7 @@
 ```
 
 ```js
-import { h } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -103,12 +103,12 @@ const menuOptions = [
   }
 ]
 
-export default {
-  data () {
+export default defineComponent({
+  setup () {
     return {
-      activeKey: null,
+      activeKey: ref(null),
       menuOptions
     }
   }
-}
+})
 ```

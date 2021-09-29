@@ -16,18 +16,19 @@ The following code shows how to set hljs of Code. Importing highlight.js on dema
 </template>
 
 <script>
+  import { defineComponent } from 'vue'
   import hljs from 'highlight.js/lib/core'
   import javascript from 'highlight.js/lib/languages/javascript'
 
   hljs.registerLanguage('javascript', javascript)
 
-  export default {
+  export default defineComponent({
     setup() {
       return {
         hljs
       }
     }
-  }
+  })
 </script>
 ```
 
@@ -35,9 +36,12 @@ The following code shows how to set hljs of Code. Importing highlight.js on dema
 
 ```demo
 basic
+inline
 ```
 
-## Props
+## API
+
+## Code Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -45,9 +49,4 @@ basic
 | hljs | `Object` | `undefined` | If you want to set hljs locally, pass it using this prop. |
 | language | `string` | `undefined` | Code language in highlightjs. |
 | trim | `boolean` | `true` | Whether to display trimmed code. |
-
-## Slots
-
-| Name    | Parameters | Description          |
-| ------- | ---------- | -------------------- |
-| default | `()`       | Content of the code. |
+| inline | `boolean` | `false` | Whether the code is displayed as inline. |

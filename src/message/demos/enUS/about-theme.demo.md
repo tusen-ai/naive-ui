@@ -9,9 +9,10 @@ If you don't specified the theme, the theme of created message will be the same 
 ```
 
 ```js
+import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
-export default {
+export default defineComponent({
   setup () {
     const message = useMessage()
     return {
@@ -23,5 +24,5 @@ export default {
       }
     }
   }
-}
+})
 ```

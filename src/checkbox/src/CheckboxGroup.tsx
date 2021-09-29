@@ -41,7 +41,6 @@ const checkboxGroupProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  // eslint-disable-next-line vue/prop-name-casing
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<(value: Array<string | number>) => void>
   >,
@@ -162,7 +161,9 @@ export default defineComponent({
   },
   render () {
     return (
-      <div class={`${this.mergedClsPrefix}-checkbox-group`}>{this.$slots}</div>
+      <div class={`${this.mergedClsPrefix}-checkbox-group`} role="group">
+        {this.$slots}
+      </div>
     )
   }
 })
