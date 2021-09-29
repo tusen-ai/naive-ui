@@ -1,18 +1,11 @@
-import {
-  h,
-  defineComponent,
-  inject,
-  ExtractPropTypes,
-  PropType,
-  computed
-} from 'vue'
+import { h, defineComponent, inject, ExtractPropTypes, computed } from 'vue'
 import { warn } from '../../_utils'
 import { useBrowserLocation } from '../../_utils/composable/use-browser-location'
 import { breadcrumbInjectionKey } from './Breadcrumb'
 
 const breadcrumbItemProps = {
   separator: String,
-  href: String as PropType<string | undefined>
+  href: String
 } as const
 
 export type BreadcrumbItemProps = Partial<
@@ -34,11 +27,11 @@ export default defineComponent({
       return () => null
     }
     const { separatorRef, mergedClsPrefixRef } = NBreadcrumb
-    const browserLocation = useBrowserLocation()
+    const browserLocationRef = useBrowserLocation()
 
-    const htmlTag = computed(() => (props.href ? 'a' : 'span'))
-    const ariaCurrent = computed(() =>
-      browserLocation.value.href === props.href ? 'location' : null
+    const htmlTagRef = computed(() => (props.href ? 'a' : 'span'))
+    const ariaCurrentRef = computed(() =>
+      browserLocationRef.value.href === props.href ? 'location' : null
     )
 
     return () => {
@@ -47,10 +40,10 @@ export default defineComponent({
       return (
         <li class={`${mergedClsPrefix}-breadcrumb-item`}>
           {h(
-            htmlTag.value,
+            htmlTagRef.value,
             {
               class: `${mergedClsPrefix}-breadcrumb-item__link`,
-              'aria-current': ariaCurrent.value,
+              'aria-current': ariaCurrentRef.value,
               href: props.href
             },
             slots
