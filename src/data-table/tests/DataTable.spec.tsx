@@ -454,4 +454,26 @@ describe('n-data-table', () => {
       'n-data-table--single-line'
     )
   })
+
+  it('should work with `size` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    ;(['small', 'medium', 'large'] as const).forEach((size) => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={data} size={size} />
+      ))
+      expect(
+        wrapper.find('.n-data-table').attributes('style')
+      ).toMatchSnapshot()
+    })
+  })
 })
