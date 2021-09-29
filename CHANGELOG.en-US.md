@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-breadcrumb-item` add `href` prop.
+
 ### Fixes
 
 - Fix `n-layout-sider`'s `arrow-circle`'s icon style.

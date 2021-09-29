@@ -6,7 +6,7 @@
 
 ```demo
 basic
-dropdown
+custom
 separator
 separator-per-item
 ```
