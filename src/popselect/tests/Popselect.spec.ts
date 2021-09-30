@@ -1,6 +1,7 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NPopselect } from '../index'
+import { NScrollbar } from '../../scrollbar'
 
 describe('n-popselect', () => {
   it('should work with import on demand', () => {
@@ -64,7 +65,7 @@ describe('n-popselect', () => {
     )
 
     await wrapper.setProps({ scrollable: true })
-    expect(document.querySelector('.n-scrollbar')).not.toEqual(null)
+    expect(wrapper.findComponent(NScrollbar).exists()).not.toEqual(null)
 
     wrapper.unmount()
   })
