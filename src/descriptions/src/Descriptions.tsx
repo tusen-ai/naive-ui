@@ -205,6 +205,7 @@ export default defineComponent({
               >
                 {[
                   ...itemLabel,
+                  separator &&
                   <span class={`${mergedClsPrefix}-descriptions-separator`}>
                     {separator}
                   </span>
