@@ -253,7 +253,7 @@ export default defineComponent({
         default: {
           warn(
             'data-picker',
-            '`type` is error, please use the correct type.'
+            "The type is wrong, n-date-picker's type only supports `date`, `datetime`, `daterange` and `datetimerange`."
           )
           break
         }
