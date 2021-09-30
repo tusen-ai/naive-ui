@@ -476,4 +476,66 @@ describe('n-data-table', () => {
       ).toMatchSnapshot()
     })
   })
+
+  it('should work with `summary` prop', async () => {
+    interface Data {
+      name: number
+      age: number
+    }
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      },
+      {
+        title: 'Age',
+        key: 'age'
+      }
+    ]
+    const data = new Array(10).fill(0).map((_, index) => {
+      return {
+        name: index,
+        age: index
+      }
+    })
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    const summary = (pageData: Data[]) => {
+      return {
+        name: {
+          value: pageData.reduce((prevValue, row) => prevValue + row.age, 0),
+          colSpan: 1,
+          rowSpan: 2
+        },
+        age: {
+          value: pageData.reduce((prevValue, row) => prevValue + row.age, 0),
+          colSpan: 2,
+          rowSpan: 1
+        }
+      }
+    }
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} summary={summary} />
+    ))
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[0].attributes('data-col-key')
+    ).toBe('name')
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[0].attributes('colspan')
+    ).toBe('1')
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[0].attributes('rowspan')
+    ).toBe('2')
+    expect(wrapper.findAll('.n-data-table-td--summary')[0].text()).toBe('45')
+
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[1].attributes('data-col-key')
+    ).toBe('age')
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[1].attributes('colspan')
+    ).toBe('2')
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[1].attributes('rowspan')
+    ).toBe('1')
+    expect(wrapper.findAll('.n-data-table-td--summary')[1].text()).toBe('45')
+  })
 })
