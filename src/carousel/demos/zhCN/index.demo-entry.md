@@ -10,7 +10,7 @@ autoplay
 hover
 dot-placement
 show-arrow
-hover-show-arrow
+show-arrow-mode
 ```
 
 ## API

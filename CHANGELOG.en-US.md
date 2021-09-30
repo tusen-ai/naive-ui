@@ -7,6 +7,10 @@
 - Fix `n-layout-sider`'s `arrow-circle`'s icon style.
 - Fix `n-upload`'s `show-preview-button` prop not working，closes [#1238](https://github.com/TuSimple/naive-ui/issues/1238).
 
+### Feats
+
+- `n-carousel` add Display arrow mode support
+
 ## 2.19.3 (2021-09-28)
 
 ### Fixes

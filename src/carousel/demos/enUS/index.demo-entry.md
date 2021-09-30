@@ -10,7 +10,7 @@ autoplay
 hover
 dot-placement
 show-arrow
-hover-show-arrow
+show-arrow-mode
 ```
 
 ## API
@@ -23,7 +23,7 @@ hover-show-arrow
 | interval | `number` | `5000` | Auto play interval (ms). |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Dot placement in the panel. |
 | show-arrow | `boolean` | `false` | Whether to show arrow buttons. |
-| show-arrow-mode | `'always' \| 'hover'` | `always` | Display arrow way always always display，hover mouse move into display |
+| show-arrow-mode | `'always' \| 'hover'` | `always` | Display arrow way always always display hover mouse move into display |
 | trigger | `'click' \| 'hover'` | `'click'` | The method of manual switching. |
 
 ### Carousel Slots
