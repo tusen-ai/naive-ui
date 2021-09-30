@@ -7,8 +7,9 @@
 ```
 
 ```js
-import { defineComponent, h, resolveComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NIcon } from 'naive-ui'
+import { RouterLink } from 'vue-router'
 import {
   DesktopOutline as WorkIcon,
   LogOutOutline as HomeIcon
@@ -22,7 +23,7 @@ const menuOptions = [
   {
     label: () =>
       h(
-        resolveComponent('router-link'),
+        RouterLink,
         {
           to: {
             name: 'home',
@@ -39,7 +40,7 @@ const menuOptions = [
   {
     label: () =>
       h(
-        resolveComponent('router-link'),
+        RouterLink,
         {
           to: {
             path: '/zh-CN/os-theme/components/code'
