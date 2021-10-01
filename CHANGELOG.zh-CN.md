@@ -6,6 +6,7 @@
 - 修复 `n-form-item` 中组件内容过长影响 `n-form-item` 宽度
 - 修复 `n-layout-sider` 中 `arrow-circle` 的 icon 样式
 - 修复 `n-upload` 的 `show-preview-button` 属性失效，关闭 [#1238](https://github.com/TuSimple/naive-ui/issues/1238)
+- 修复 `n-date-picker` 的 `date` 类型的 `action` 验证错误
 
 ## 2.19.3 (2021-09-28)
 
