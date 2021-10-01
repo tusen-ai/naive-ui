@@ -538,4 +538,24 @@ describe('n-data-table', () => {
     ).toBe('1')
     expect(wrapper.findAll('.n-data-table-td--summary')[1].text()).toBe('45')
   })
+
+  it('should work with `virtual-scroll` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('tbody').element.children.length).not.toBe(0)
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} virtual-scroll={true} />
+    ))
+    expect(wrapper.find('tbody').element.children.length).toBe(0)
+  })
 })
