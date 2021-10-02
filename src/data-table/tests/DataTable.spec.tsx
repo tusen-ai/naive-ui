@@ -558,4 +558,33 @@ describe('n-data-table', () => {
     ))
     expect(wrapper.find('tbody').element.children.length).toBe(0)
   })
+
+  it('should work with `on-update:checked-row-keys` prop', async () => {
+    const handleCheck = jest.fn()
+    const columns: DataTableColumns = [
+      {
+        type: 'selection'
+      },
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(2).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        row-key={rowKey}
+        onUpdateCheckedRowKeys={handleCheck}
+      />
+    ))
+    await wrapper.find('.n-checkbox').trigger('click')
+    expect(handleCheck).toHaveBeenCalled()
+  })
 })
