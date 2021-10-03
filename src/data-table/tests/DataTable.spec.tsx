@@ -587,4 +587,35 @@ describe('n-data-table', () => {
     await wrapper.find('.n-checkbox').trigger('click')
     expect(handleCheck).toHaveBeenCalled()
   })
+
+  it('should work with `rowSpan` `colSpan` prop', async () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        rowSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1),
+        colSpan: (rowData, rowIndex) => (rowIndex === 0 ? 3 : 1)
+      },
+      {
+        title: 'Age',
+        key: 'age'
+      }
+    ]
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: index,
+        age: index + 1
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} row-key={rowKey} />
+    ))
+    expect(wrapper.find('tbody .n-data-table-td').attributes('colspan')).toBe(
+      '3'
+    )
+    expect(wrapper.find('tbody .n-data-table-td').attributes('rowspan')).toBe(
+      '2'
+    )
+  })
 })
