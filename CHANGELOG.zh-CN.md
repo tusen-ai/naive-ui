@@ -6,11 +6,21 @@
 
 - `n-breadcrumb-item` 新增 `href` 属性
 - `n-descriptions` 新增 `separator` 属性，关闭 [#1263](https://github.com/TuSimple/naive-ui/issues/1263)
+- `n-dropdown` 新增 `key-field` 属性
+- `n-dropdown` 新增 `label-field` 属性
+- `n-dropdown` 新增 `children-field` 属性
+- `n-menu` 新增 `key-field` 属性
+- `n-menu` 新增 `label-field` 属性
+- `n-menu` 新增 `children-field` 属性
+- `n-data-table` 支持使用访问属性路径作为列的 key，关闭 [#1271](https://github.com/TuSimple/naive-ui/issues/1271)
 
 ### Fixes
 
+- 修复 `n-form-item` 中组件内容过长影响 `n-form-item` 宽度
 - 修复 `n-layout-sider` 中 `arrow-circle` 的 icon 样式
 - 修复 `n-upload` 的 `show-preview-button` 属性失效，关闭 [#1238](https://github.com/TuSimple/naive-ui/issues/1238)
+- 修复 `n-date-picker` 的 `date` 类型的 `action` 验证错误
+- 修复 `n-data-table` 在 `selection` 和 `summary` 一起使用时报错，关闭 [#1276](https://github.com/TuSimple/naive-ui/issues/1276)
 
 ## 2.19.3 (2021-09-28)
 

@@ -1,9 +1,12 @@
 import type { DropdownMixedOption } from './interface'
 
-export function isSubmenuNode (rawNode: DropdownMixedOption): boolean {
+export function isSubmenuNode (
+  rawNode: DropdownMixedOption,
+  childrenField: string
+): boolean {
   return (
     rawNode.type === 'submenu' ||
-    (rawNode.type === undefined && rawNode.children !== undefined)
+    (rawNode.type === undefined && rawNode[childrenField] !== undefined)
   )
 }
 

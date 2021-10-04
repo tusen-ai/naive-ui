@@ -24,7 +24,8 @@ accordion
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| accordion | `boolean` | `false` | Whether to use accordion mode |
+| accordion | `boolean` | `false` | Whether to use accordion mode. |
+| children-field | `string` | `'children'` | Field name of children. |
 | collapsed-icon-size | `number` | `24` | The icon size when menu is collapsed. If not set, menu will use `icon-size` in place of it. |
 | collapsed-width | `number` | `48` | The menu width after collapsed. |
 | collapsed | `boolean` | `false` | The collapsed status of menu, only works when menu is vertical. |
@@ -37,6 +38,8 @@ accordion
 | icon-size | `number` | `20` | The icon size when menu is not collapsed. |
 | indent | `number` | `32` | The indent of menu. |
 | inverted | `boolean` | `false` | Use inverted style. |
+| key-field | `string` | `'key'` | Field name of key. |
+| label-field | `string` | `'label'` | Field name of label. |
 | options | `Array<MenuOption \| MenuGroupOption>` | `[]` | Items data of menu. |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | Menu layout. |
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all extras. |

@@ -25,8 +25,11 @@ option-props
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | animated | `boolean` | `true` | 弹出弹窗时使用动画 |
+| children-field | `string` | `'key'` | key 的字段名 |
 | inverted | `boolean` | `false` | 使用反转样式 |
 | keyboard | `boolean` | `true` | 是否支持键盘操作（注意和其他内容键盘操作可能的冲突） |
+| key-field | `string` | `'key'` | key 的字段名 |
+| label-field | `string` | `'label'` | label 的字段名 |
 | options | `Array<DropdownOption \| DropdownDividerOption>` | `[]` | 下拉菜单传入的 options |
 | render-icon | `(option: DropdownOption) => VNodeChild` | `undefined` | 批量处理下拉菜单图标渲染 |
 | render-label | `(option: DropdownOption) => VNodeChild` | `undefined` | 批量处理下拉菜单渲染 |

@@ -452,12 +452,12 @@ export default defineComponent({
                 // virtual list should have a fast path
                 const { rowSpan, colSpan } = column
                 const mergedColSpan = isSummary
-                  ? rowInfo.rawNode[colKey].colSpan || 1
+                  ? rowInfo.rawNode[colKey]?.colSpan || 1 // optional for #1276
                   : colSpan
                     ? colSpan(rowData, rowIndex)
                     : 1
                 const mergedRowSpan = isSummary
-                  ? rowInfo.rawNode[colKey].rowSpan || 1
+                  ? rowInfo.rawNode[colKey]?.rowSpan || 1 // optional for #1276
                   : rowSpan
                     ? rowSpan(rowData, rowIndex)
                     : 1

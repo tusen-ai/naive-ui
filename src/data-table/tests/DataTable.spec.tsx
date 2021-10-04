@@ -476,4 +476,146 @@ describe('n-data-table', () => {
       ).toMatchSnapshot()
     })
   })
+
+  it('should work with `summary` prop', async () => {
+    interface Data {
+      name: number
+      age: number
+    }
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      },
+      {
+        title: 'Age',
+        key: 'age'
+      }
+    ]
+    const data = new Array(10).fill(0).map((_, index) => {
+      return {
+        name: index,
+        age: index
+      }
+    })
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    const summary = (pageData: Data[]) => {
+      return {
+        name: {
+          value: pageData.reduce((prevValue, row) => prevValue + row.age, 0),
+          colSpan: 1,
+          rowSpan: 2
+        },
+        age: {
+          value: pageData.reduce((prevValue, row) => prevValue + row.age, 0),
+          colSpan: 2,
+          rowSpan: 1
+        }
+      }
+    }
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} summary={summary} />
+    ))
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[0].attributes('data-col-key')
+    ).toBe('name')
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[0].attributes('colspan')
+    ).toBe('1')
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[0].attributes('rowspan')
+    ).toBe('2')
+    expect(wrapper.findAll('.n-data-table-td--summary')[0].text()).toBe('45')
+
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[1].attributes('data-col-key')
+    ).toBe('age')
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[1].attributes('colspan')
+    ).toBe('2')
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[1].attributes('rowspan')
+    ).toBe('1')
+    expect(wrapper.findAll('.n-data-table-td--summary')[1].text()).toBe('45')
+  })
+
+  it('should work with `virtual-scroll` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('tbody').element.children.length).not.toBe(0)
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} virtual-scroll={true} />
+    ))
+    expect(wrapper.find('tbody').element.children.length).toBe(0)
+  })
+
+  it('should work with `on-update:checked-row-keys` prop', async () => {
+    const handleCheck = jest.fn()
+    const columns: DataTableColumns = [
+      {
+        type: 'selection'
+      },
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(2).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        row-key={rowKey}
+        onUpdateCheckedRowKeys={handleCheck}
+      />
+    ))
+    await wrapper.find('.n-checkbox').trigger('click')
+    expect(handleCheck).toHaveBeenCalled()
+  })
+
+  it('should work with `rowSpan` `colSpan` prop', async () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        rowSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1),
+        colSpan: (rowData, rowIndex) => (rowIndex === 0 ? 3 : 1)
+      },
+      {
+        title: 'Age',
+        key: 'age'
+      }
+    ]
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: index,
+        age: index + 1
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} row-key={rowKey} />
+    ))
+    expect(wrapper.find('tbody .n-data-table-td').attributes('colspan')).toBe(
+      '3'
+    )
+    expect(wrapper.find('tbody .n-data-table-td').attributes('rowspan')).toBe(
+      '2'
+    )
+  })
 })
