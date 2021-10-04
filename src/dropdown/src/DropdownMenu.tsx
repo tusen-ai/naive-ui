@@ -14,12 +14,19 @@ import { renderArrow } from '../../popover/src/PopoverBody'
 import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider'
 import NDropdownGroup from './DropdownGroup'
-import { isSubmenuNode, isGroupNode, isDividerNode } from './utils'
+import NDropdownRenderOption from './DropdownRenderOption'
+import {
+  isSubmenuNode,
+  isGroupNode,
+  isDividerNode,
+  isRenderNode
+} from './utils'
 import { dropdownInjectionKey } from './Dropdown'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
-  DropdownOption
+  DropdownOption,
+  DropdownRenderOption
 } from './interface'
 
 export interface NDropdownMenuInjection {
@@ -87,6 +94,14 @@ export default defineComponent({
     return (
       <div class={`${clsPrefix}-dropdown-menu`}>
         {this.tmNodes.map((tmNode) => {
+          if (isRenderNode(tmNode.rawNode)) {
+            return (
+              <NDropdownRenderOption
+                tmNode={tmNode as unknown as TreeNode<DropdownRenderOption>}
+                key={tmNode.key}
+              />
+            )
+          }
           if (isDividerNode(tmNode.rawNode)) {
             return <NDropdownDivider clsPrefix={clsPrefix} key={tmNode.key} />
           }

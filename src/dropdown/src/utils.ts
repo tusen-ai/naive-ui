@@ -1,4 +1,4 @@
-import type { DropdownMixedOption } from './interface'
+import type { DropdownMixedOption, DropdownRenderOption } from './interface'
 
 export function isSubmenuNode (
   rawNode: DropdownMixedOption,
@@ -16,4 +16,10 @@ export function isGroupNode (rawNode: DropdownMixedOption): boolean {
 
 export function isDividerNode (rawNode: DropdownMixedOption): boolean {
   return rawNode.type === 'divider'
+}
+
+export function isRenderNode (
+  rawNode: DropdownMixedOption
+): rawNode is DropdownRenderOption {
+  return rawNode.type === 'render'
 }

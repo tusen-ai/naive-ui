@@ -19,6 +19,7 @@
 - `n-checkbox` add `unchecked-value` prop, closes [#1234](https://github.com/TuSimple/naive-ui/issues/1234).
 - Add `n-collapse-transition` component, closes [#829](https://github.com/TuSimple/naive-ui/issues/829).
 - Add `n-scrollbar` component.
+- `n-dropdown` support options with `type='render'`.
 
 ### Fixes
 

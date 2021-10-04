@@ -143,7 +143,7 @@ export default defineComponent({
           return node.disabled === true
         },
         getIgnored (node) {
-          return node.type === 'divider'
+          return node.type === 'divider' || node.type === 'render'
         },
         getChildren (node) {
           return node[childrenField] as any
