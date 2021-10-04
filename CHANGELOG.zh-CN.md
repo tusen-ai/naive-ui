@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-breadcrumb-item` 新增 `href` 属性
+- `n-descriptions` 新增 `separator` 属性，关闭 [#1263](https://github.com/TuSimple/naive-ui/issues/1263)
 - `n-dropdown` 新增 `key-field` 属性
 - `n-dropdown` 新增 `label-field` 属性
 - `n-dropdown` 新增 `children-field` 属性

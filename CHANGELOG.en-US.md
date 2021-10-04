@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-breadcrumb-item` add `href` prop.
+- `n-descriptions` add `separator` prop，closes [#1263](https://github.com/TuSimple/naive-ui/issues/1263).
 - `n-dropdown` add `key-field` prop.
 - `n-dropdown` add `label-field` prop.
 - `n-dropdown` add `children-field` prop.

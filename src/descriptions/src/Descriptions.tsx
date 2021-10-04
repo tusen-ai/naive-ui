@@ -38,6 +38,10 @@ const descriptionProps = {
     type: String as PropType<'left' | 'right' | 'center'>,
     default: 'left'
   },
+  separator: {
+    type: String,
+    default: ':'
+  },
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
@@ -126,7 +130,8 @@ export default defineComponent({
       bordered,
       title,
       cssVars,
-      mergedClsPrefix
+      mergedClsPrefix,
+      separator
     } = this
     const filteredChildren: VNode[] = children.filter((child) =>
       isDescriptionsItem(child)
@@ -200,8 +205,9 @@ export default defineComponent({
               >
                 {[
                   ...itemLabel,
+                  separator &&
                   <span class={`${mergedClsPrefix}-descriptions-separator`}>
-                    :
+                    {separator}
                   </span>
                 ]}
               </span>
