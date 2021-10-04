@@ -45,8 +45,10 @@ export function getFlagOfOrder (order: SortOrder): SortOrderFlag {
 export function createCustomWidthStyle (
   column: TableBaseColumn | TableSelectionColumn | TableExpandColumn
 ): CSSProperties {
+  const width = pxfy(getColWidth(column))
   return {
-    width: pxfy(getColWidth(column))
+    width,
+    minWidth: width
   }
 }
 
