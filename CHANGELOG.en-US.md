@@ -13,6 +13,10 @@
 - `n-menu` add `label-field` prop.
 - `n-menu` add `children-field` prop.
 - `n-data-table` supports using path of the property to get as column key, closes [#1271](https://github.com/TuSimple/naive-ui/issues/1271).
+- `n-switch` add `checked-value` prop, closes [#1234](https://github.com/TuSimple/naive-ui/issues/1234).
+- `n-switch` add `unchecked-value` prop, closes [#1234](https://github.com/TuSimple/naive-ui/issues/1234).
+- `n-checkbox` add `checked-value` prop, closes [#1234](https://github.com/TuSimple/naive-ui/issues/1234).
+- `n-checkbox` add `unchecked-value` prop, closes [#1234](https://github.com/TuSimple/naive-ui/issues/1234).
 
 ### Fixes
 

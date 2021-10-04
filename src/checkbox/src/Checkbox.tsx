@@ -7,7 +7,8 @@ import {
   toRef,
   renderSlot,
   PropType,
-  CSSProperties
+  CSSProperties,
+  watchEffect
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { createId } from 'seemly'
@@ -15,27 +16,33 @@ import { useConfig, useFormItem, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NIconSwitchTransition } from '../../_internal'
 import {
-  warn,
   call,
   createKey,
   MaybeArray,
-  ExtractPublicPropTypes
+  ExtractPublicPropTypes,
+  warnOnce
 } from '../../_utils'
 import { checkboxLight } from '../styles'
 import type { CheckboxTheme } from '../styles'
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
 import { checkboxGroupInjectionKey } from './CheckboxGroup'
+import type { OnUpdateChecked, OnUpdateCheckedImpl } from './interface'
 import style from './styles/index.cssr'
 
 const checkboxProps = {
   ...(useTheme.props as ThemeProps<CheckboxTheme>),
   size: String as PropType<'small' | 'medium' | 'large'>,
   checked: {
-    type: Boolean as PropType<boolean | undefined>,
+    type: [Boolean, String, Number] as PropType<
+    boolean | string | number | undefined
+    >,
     default: undefined
   },
-  defaultChecked: Boolean,
+  defaultChecked: {
+    type: [Boolean, String, Number] as PropType<boolean | string | number>,
+    default: false
+  },
   value: [String, Number] as PropType<string | number>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
@@ -47,28 +54,22 @@ const checkboxProps = {
     type: Boolean,
     default: true
   },
+  checkedValue: {
+    type: [Boolean, String, Number],
+    default: true
+  },
+  uncheckedValue: {
+    type: [Boolean, String, Number],
+    default: false
+  },
   'onUpdate:checked': [Function, Array] as PropType<
-  MaybeArray<(value: boolean, e: MouseEvent | KeyboardEvent) => void>
+  MaybeArray<OnUpdateChecked>
   >,
-  onUpdateChecked: [Function, Array] as PropType<
-  MaybeArray<(value: boolean, e: MouseEvent | KeyboardEvent) => void>
-  >,
+  onUpdateChecked: [Function, Array] as PropType<MaybeArray<OnUpdateChecked>>,
   // private
   privateTableHeader: Boolean,
   // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<
-    undefined | MaybeArray<(value: boolean) => void>
-    >,
-    validator: () => {
-      warn(
-        'checkbox',
-        '`on-change` is deprecated, please use `on-update:checked` instead.'
-      )
-      return true
-    },
-    default: undefined
-  }
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateChecked>>
 }
 
 export type CheckboxProps = ExtractPublicPropTypes<typeof checkboxProps>
@@ -77,6 +78,16 @@ export default defineComponent({
   name: 'Checkbox',
   props: checkboxProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange) {
+          warnOnce(
+            'checkbox',
+            '`on-change` is deprecated, please use `on-update:checked` instead.'
+          )
+        }
+      })
+    }
     const { mergedClsPrefixRef } = useConfig(props)
     const formItem = useFormItem(props, {
       mergedSize (NFormItem) {
@@ -143,7 +154,7 @@ export default defineComponent({
         }
         return false
       } else {
-        return mergedCheckedRef.value
+        return mergedCheckedRef.value === props.checkedValue
       }
     })
     const themeRef = useTheme(
@@ -154,7 +165,6 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-
     function toggle (e: MouseEvent | KeyboardEvent): void {
       if (NCheckboxGroup && props.value !== undefined) {
         NCheckboxGroup.toggleCheckbox(!renderedCheckedRef.value, props.value)
@@ -165,10 +175,16 @@ export default defineComponent({
           onUpdateChecked
         } = props
         const { nTriggerFormInput, nTriggerFormChange } = formItem
-        const nextChecked = !renderedCheckedRef.value
-        if (_onUpdateCheck) call(_onUpdateCheck, nextChecked, e)
-        if (onUpdateChecked) call(onUpdateChecked, nextChecked, e)
-        if (onChange) call(onChange, nextChecked) // deprecated
+        const nextChecked = renderedCheckedRef.value
+          ? props.uncheckedValue
+          : props.checkedValue
+        if (_onUpdateCheck) {
+          call(_onUpdateCheck as OnUpdateCheckedImpl, nextChecked, e)
+        }
+        if (onUpdateChecked) {
+          call(onUpdateChecked as OnUpdateCheckedImpl, nextChecked, e)
+        }
+        if (onChange) call(onChange as OnUpdateCheckedImpl, nextChecked, e) // deprecated
         nTriggerFormInput()
         nTriggerFormChange()
         uncontrolledCheckedRef.value = nextChecked
@@ -280,12 +296,10 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-checkbox`,
-          {
-            [`${mergedClsPrefix}-checkbox--checked`]: renderedChecked,
-            [`${mergedClsPrefix}-checkbox--disabled`]: mergedDisabled,
-            [`${mergedClsPrefix}-checkbox--indeterminate`]: indeterminate,
-            [`${mergedClsPrefix}-checkbox--table-header`]: privateTableHeader
-          }
+          renderedChecked && `${mergedClsPrefix}-checkbox--checked`,
+          mergedDisabled && `${mergedClsPrefix}-checkbox--disabled`,
+          indeterminate && `${mergedClsPrefix}-checkbox--indeterminate`,
+          privateTableHeader && `${mergedClsPrefix}-checkbox--table-header`
         ]}
         tabindex={mergedDisabled || !focusable ? undefined : 0}
         role="checkbox"

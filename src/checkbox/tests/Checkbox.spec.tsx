@@ -34,6 +34,51 @@ describe('n-checkbox', () => {
     })
   })
 
+  it('should work with `checked-value` prop', async () => {
+    const onUpdateChecked = jest.fn()
+    const wrapper = mount(NCheckbox, {
+      props: {
+        checkedValue: 'fooo',
+        uncheckedValue: 'barr',
+        onUpdateChecked
+      }
+    })
+    await wrapper.trigger('click')
+    expect(onUpdateChecked.mock.calls[0][0]).toEqual('fooo')
+    await wrapper.trigger('click')
+    expect(onUpdateChecked.mock.calls[1][0]).toEqual('barr')
+    await wrapper.trigger('click')
+    expect(onUpdateChecked.mock.calls[2][0]).toEqual('fooo')
+  })
+
+  it('should work with `checked-value` prop in type layer', () => {
+    const onUpdateChecked1: (value: string) => void = () => {}
+    const onUpdateChecked2: (value: number) => void = () => {}
+    const onUpdateChecked3: (value: boolean) => void = () => {}
+    let _ = (
+      <NCheckbox
+        onUpdateChecked={onUpdateChecked1}
+        checked={'123'}
+        defaultChecked={'123'}
+      />
+    )
+    _ = (
+      <NCheckbox
+        onUpdateChecked={onUpdateChecked2}
+        checked={123}
+        defaultChecked={123}
+      />
+    )
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _ = (
+      <NCheckbox
+        onUpdateChecked={onUpdateChecked3}
+        checked={true}
+        defaultChecked={false}
+      />
+    )
+  })
+
   it('should work with `indeterminate` prop', () => {
     const wrapper = mount(NCheckbox, {
       props: {
