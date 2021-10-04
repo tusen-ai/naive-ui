@@ -5,8 +5,15 @@
 ### Feats
 
 - `n-breadcrumb-item` add `href` prop.
+- `n-dropdown` add `key-field` prop.
+- `n-dropdown` add `label-field` prop.
+- `n-dropdown` add `children-field` prop.
+- `n-menu` add `key-field` prop.
+- `n-menu` add `label-field` prop.
+- `n-menu` add `children-field` prop.
 
 ### Fixes
+
 - Fix `n-form-item`'s content is too long and the width is incorrect
 - Fix `n-layout-sider`'s `arrow-circle`'s icon style.
 - Fix `n-upload`'s `show-preview-button` prop not working，closes [#1238](https://github.com/TuSimple/naive-ui/issues/1238).

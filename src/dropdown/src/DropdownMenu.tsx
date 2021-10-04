@@ -54,29 +54,30 @@ export default defineComponent({
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { renderIconRef } = inject(dropdownInjectionKey)!
+    const { renderIconRef, childrenFieldRef } = inject(dropdownInjectionKey)!
     provide(dropdownMenuInjectionKey, {
       showIconRef: computed(() => {
         const renderIcon = renderIconRef.value
         return props.tmNodes.some((tmNode) => {
-          const { rawNode } = tmNode
-          if (isGroupNode(rawNode)) {
-            return (rawNode as DropdownGroupOption).children.some((rawChild) =>
+          if (tmNode.isGroup) {
+            return tmNode.children?.some(({ rawNode: rawChild }) =>
               renderIcon ? renderIcon(rawChild) : rawChild.icon
             )
           }
+          const { rawNode } = tmNode
           return renderIcon ? renderIcon(rawNode) : rawNode.icon
         })
       }),
       hasSubmenuRef: computed(() => {
+        const { value: childrenField } = childrenFieldRef
         return props.tmNodes.some((tmNode) => {
-          const { rawNode } = tmNode
-          if (isGroupNode(rawNode)) {
-            return (rawNode as DropdownGroupOption).children.some((rawChild) =>
-              isSubmenuNode(rawChild)
+          if (tmNode.isGroup) {
+            return tmNode.children?.some(({ rawNode: rawChild }) =>
+              isSubmenuNode(rawChild, childrenField)
             )
           }
-          return isSubmenuNode(rawNode)
+          const { rawNode } = tmNode
+          return isSubmenuNode(rawNode, childrenField)
         })
       })
     })

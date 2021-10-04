@@ -12,7 +12,7 @@ export type DropdownGroupOption = MenuGroupOption & {
   props?: HTMLAttributes
 }
 export interface DropdownIgnoredOption {
-  key: Key
+  key?: Key
   type: 'ignored' | 'divider'
   props?: HTMLAttributes
   [key: string]: unknown
@@ -28,7 +28,7 @@ DropdownGroupOption &
 DropdownIgnoredOption
 
 export interface DropdownDividerOption {
-  key: Key
+  key?: Key
   type: 'divider'
   [key: string]: unknown
 }

@@ -25,7 +25,10 @@ option-props
 | --- | --- | --- | --- |
 | animated | `boolean` | `true` | Use an animation when showing options. |
 | inverted | `boolean` | `false` | Use the inverted style. |
+| children-field | `string` | `'children'` | Field name of children. |
 | keyboard | `boolean` | `true` | Whether the component supports keyboard operation. (Be careful about the potential conflicts with other components keyboard operations) |
+| key-field | `string` | `'key'` | Field name of key. |
+| label-field | `string` | `'label'` | Field name of label. |
 | options | `Array<DropdownOption \| DropdownDividerOption>` | `[]` | Dropdown options. |
 | render-icon | `(option: DropdownOption) => VNodeChild` | `undefined` | Render function that renders option icons. |
 | render-label | `(option: DropdownOption) => VNodeChild` | `undefined` | Render function that renders option labels. |
