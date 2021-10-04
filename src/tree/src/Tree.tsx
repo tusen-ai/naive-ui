@@ -79,10 +79,7 @@ export function createTreeMateOptions<T> (
   }
 }
 
-type OnUpdateCallback = (
-  value: Key[],
-  option: Array<TreeOption | null> | null
-) => void
+type OnUpdateCallback = (value: Key[], option: Array<TreeOption | null>) => void
 
 export const treeSharedProps = {
   filter: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
@@ -521,7 +518,7 @@ export default defineComponent({
 
     function doUpdateExpandedKeys (
       value: Key[],
-      option: Array<TreeOption | null> | null
+      option: Array<TreeOption | null>
     ): void {
       const {
         'onUpdate:expandedKeys': _onUpdateExpandedKeys,
@@ -533,7 +530,7 @@ export default defineComponent({
     }
     function doUpdateCheckedKeys (
       value: Key[],
-      option: Array<TreeOption | null> | null
+      option: Array<TreeOption | null>
     ): void {
       const {
         'onUpdate:checkedKeys': _onUpdateCheckedKeys,
@@ -545,7 +542,7 @@ export default defineComponent({
     }
     function doUpdateIndeterminateKeys (
       value: Key[],
-      option: Array<TreeOption | null> | null
+      option: Array<TreeOption | null>
     ): void {
       const {
         'onUpdate:indeterminateKeys': _onUpdateIndeterminateKeys,
@@ -560,7 +557,7 @@ export default defineComponent({
     }
     function doUpdateSelectedKeys (
       value: Key[],
-      option: Array<TreeOption | null> | null
+      option: Array<TreeOption | null>
     ): void {
       const {
         'onUpdate:selectedKeys': _onUpdateSelectedKeys,

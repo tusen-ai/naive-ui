@@ -368,7 +368,7 @@ export default defineComponent({
     }
     function doUpdateExpandedKeys (
       keys: Key[],
-      option: null | Array<TreeSelectOption | null>
+      option: Array<TreeSelectOption | null>
     ): void {
       const {
         onUpdateExpandedKeys,
