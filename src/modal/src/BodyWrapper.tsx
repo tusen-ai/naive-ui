@@ -19,7 +19,7 @@ import {
 import { clickoutside } from 'vdirs'
 import { dialogPropKeys } from '../../dialog/src/Dialog'
 import { cardBasePropKeys } from '../../card/src/Card'
-import { NScrollbar, ScrollbarInst } from '../../scrollbar'
+import { NScrollbar, ScrollbarInst } from '../../_internal'
 import { NDialog } from '../../dialog'
 import { NCard } from '../../card'
 import { getFirstSlotVNode, keep, warn } from '../../_utils'

@@ -9,8 +9,8 @@ import {
   provide,
   ExtractPropTypes
 } from 'vue'
-import { NScrollbar } from '../../scrollbar'
-import type { ScrollbarProps, ScrollbarInst } from '../../scrollbar'
+import { NScrollbar } from '../../_internal'
+import type { ScrollbarProps, ScrollbarInst } from '../../_internal'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'

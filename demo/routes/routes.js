@@ -467,6 +467,11 @@ export const enComponentRoutes = [
     path: 'collapse-transition',
     component: () =>
       import('../../src/collapse-transition/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'scrollbar',
+    component: () =>
+      import('../../src/scrollbar/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -811,6 +816,11 @@ export const zhComponentRoutes = [
     path: 'collapse-transition',
     component: () =>
       import('../../src/collapse-transition/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'scrollbar',
+    component: () =>
+      import('../../src/scrollbar/demos/zhCN/index.demo-entry.md')
   }
 ]
 

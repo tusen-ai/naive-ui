@@ -664,6 +664,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '折叠动画',
           enSuffix: true,
           path: '/collapse-transition'
+        },
+        {
+          en: 'Scrollbar',
+          zh: '滚动条',
+          enSuffix: true,
+          path: '/scrollbar'
         }
       ]
     }),

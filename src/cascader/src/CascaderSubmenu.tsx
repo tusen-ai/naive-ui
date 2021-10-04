@@ -1,8 +1,8 @@
 import { h, ref, defineComponent, inject, PropType, computed } from 'vue'
 import { VirtualList, VirtualListInst } from 'vueuc'
 import NCascaderOption from './CascaderOption'
-import { NScrollbar } from '../../scrollbar'
-import type { ScrollbarInst } from '../../scrollbar'
+import { NScrollbar } from '../../_internal'
+import type { ScrollbarInst } from '../../_internal'
 import {
   TmNode,
   CascaderSubmenuInstance,

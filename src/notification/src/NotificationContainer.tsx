@@ -1,5 +1,5 @@
 import { h, defineComponent, inject } from 'vue'
-import { NScrollbar } from '../../scrollbar'
+import { NScrollbar } from '../../_internal'
 import { notificationProviderInjectionKey } from './NotificationProvider'
 
 export default defineComponent({

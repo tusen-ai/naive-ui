@@ -1,5 +1,5 @@
 import { InjectionKey, Ref } from 'vue'
-import { ScrollbarInst } from '../../scrollbar'
+import { ScrollbarInst } from '../../_internal'
 import type { MergedTheme } from '../../_mixins'
 import type { TimePickerTheme } from '../styles'
 
@@ -8,9 +8,8 @@ export interface TimePickerInjection {
   mergedClsPrefixRef: Ref<string>
 }
 
-export const timePickerInjectionKey: InjectionKey<TimePickerInjection> = Symbol(
-  'timePicker'
-)
+export const timePickerInjectionKey: InjectionKey<TimePickerInjection> =
+  Symbol('timePicker')
 
 export interface PanelRef {
   $el: HTMLElement

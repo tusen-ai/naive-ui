@@ -1,7 +1,7 @@
 import { composite } from 'seemly'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
-import { scrollbarLight } from '../../scrollbar/styles'
+import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
 
 export const self = (vars: ThemeCommonVars) => {

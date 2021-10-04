@@ -1,5 +1,5 @@
 import { commonDark } from '../../_styles/common'
-import { scrollbarDark } from '../../scrollbar/styles'
+import { scrollbarDark } from '../../_internal/scrollbar/styles'
 import type { LayoutTheme } from './light'
 import { composite } from 'seemly'
 

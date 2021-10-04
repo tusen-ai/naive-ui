@@ -1,4 +1,4 @@
-import { scrollbarLight } from '../../scrollbar/styles'
+import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'

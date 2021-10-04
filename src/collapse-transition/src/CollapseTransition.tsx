@@ -13,7 +13,9 @@ const collapseProps = {
   appear: Boolean
 } as const
 
-export type CollapseProps = ExtractPublicPropTypes<typeof collapseProps>
+export type CollapseTransitionProps = ExtractPublicPropTypes<
+  typeof collapseProps
+>
 
 export default defineComponent({
   name: 'CollapseTransition',

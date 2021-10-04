@@ -1,7 +1,7 @@
 import commonVariables from './_common'
 import { composite } from 'seemly'
 import { checkboxLight } from '../../checkbox/styles'
-import { scrollbarLight } from '../../scrollbar/styles'
+import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { inputLight } from '../../input/styles'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'

@@ -1,5 +1,5 @@
 import { emptyDark } from '../../../empty/styles'
-import { scrollbarDark } from '../../../scrollbar/styles'
+import { scrollbarDark } from '../../scrollbar/styles'
 import { commonDark } from '../../../_styles/common'
 import type { InternalSelectMenuTheme } from './light'
 import { self } from './light'
