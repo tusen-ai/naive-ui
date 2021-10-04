@@ -85,6 +85,7 @@ import { DataTableRenderFilter, DataTableRenderSorter } from '../../data-table'
 import { IconPlacement } from '../../dialog/src/interface'
 import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { EmptyProps } from '../../empty'
+import { CollapseTransitionTheme } from '../../collapse-transition/styles'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -102,6 +103,7 @@ export interface GlobalThemeWithoutCommon {
   Checkbox?: CheckboxTheme
   Code?: CodeTheme
   Collapse?: CollapseTheme
+  CollapseTransition?: CollapseTransitionTheme
   ColorPicker?: ColorPickerTheme
   DataTable?: DataTableTheme
   DatePicker?: DatePickerTheme

@@ -462,6 +462,11 @@ export const enComponentRoutes = [
   {
     path: 'carousel',
     component: () => import('../../src/carousel/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'collapse-transition',
+    component: () =>
+      import('../../src/collapse-transition/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -801,6 +806,11 @@ export const zhComponentRoutes = [
   {
     path: 'carousel',
     component: () => import('../../src/carousel/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'collapse-transition',
+    component: () =>
+      import('../../src/collapse-transition/demos/zhCN/index.demo-entry.md')
   }
 ]
 

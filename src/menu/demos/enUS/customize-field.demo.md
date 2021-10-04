@@ -1,6 +1,6 @@
-# 自定义字段
+# Customizing Field
 
-后端会传来各种各样的数据，你可以自定义 `key`、`label` 和 `children` 的字段。
+Various data would come from backend, you can customize `key`, `label` and `children`'s field name.
 
 ```html
 <n-layout has-sider>
@@ -43,73 +43,73 @@ function renderIcon (icon) {
 
 const menuOptions = [
   {
-    whateverLabel: '且听风吟',
+    whateverLabel: 'Hear the Wind Sing',
     whateverKey: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon)
   },
   {
-    whateverLabel: '1973年的弹珠玩具',
+    whateverLabel: 'Pinball 1973',
     whateverKey: 'pinball-1973',
     icon: renderIcon(BookIcon),
     disabled: true,
     whateverChildren: [
       {
-        whateverLabel: '鼠',
+        whateverLabel: 'Rat',
         whateverKey: 'rat'
       }
     ]
   },
   {
-    whateverLabel: '寻羊冒险记',
+    whateverLabel: 'A Wild Sheep Chase',
     whateverKey: 'a-wild-sheep-chase',
     disabled: true,
     icon: renderIcon(BookIcon)
   },
   {
-    whateverLabel: '舞，舞，舞',
-    whateverKey: 'dance-dance-dance',
+    whateverLabel: 'Dance Dance Dance',
+    whateverKey: 'Dance Dance Dance',
     icon: renderIcon(BookIcon),
     whateverChildren: [
       {
         type: 'group',
-        whateverLabel: '人物',
+        whateverLabel: 'People',
         whateverKey: 'people',
         whateverChildren: [
           {
-            whateverLabel: '叙事者',
+            whateverLabel: 'Narrator',
             whateverKey: 'narrator',
             icon: renderIcon(PersonIcon)
           },
           {
-            whateverLabel: '羊男',
+            whateverLabel: 'Sheep Man',
             whateverKey: 'sheep-man',
             icon: renderIcon(PersonIcon)
           }
         ]
       },
       {
-        whateverLabel: '饮品',
+        whateverLabel: 'Beverage',
         whateverKey: 'beverage',
         icon: renderIcon(WineIcon),
         whateverChildren: [
           {
-            whateverLabel: '威士忌',
+            whateverLabel: 'Whisky',
             whateverKey: 'whisky'
           }
         ]
       },
       {
-        whateverLabel: '食物',
+        whateverLabel: 'Food',
         whateverKey: 'food',
         whateverChildren: [
           {
-            whateverLabel: '三明治',
+            whateverLabel: 'Sandwich',
             whateverKey: 'sandwich'
           }
         ]
       },
       {
-        whateverLabel: '过去增多，未来减少',
+        whateverLabel: 'The past increases. The future recedes.',
         whateverKey: 'the-past-increases-the-future-recedes'
       }
     ]

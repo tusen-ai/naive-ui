@@ -655,6 +655,19 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
       ]
     }),
     appendCounts({
+      zh: '工具组件',
+      en: 'Utility Components',
+      type: 'group',
+      children: [
+        {
+          en: 'Collapse Transition',
+          zh: '折叠动画',
+          enSuffix: true,
+          path: '/collapse-transition'
+        }
+      ]
+    }),
+    appendCounts({
       zh: '配置组件',
       en: 'Config Components',
       type: 'group',

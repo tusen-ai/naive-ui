@@ -16,6 +16,7 @@ collapse
 inverted
 long-label
 accordion
+customize-field
 ```
 
 ## API
