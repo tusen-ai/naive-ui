@@ -11,6 +11,7 @@
 - `n-menu` add `key-field` prop.
 - `n-menu` add `label-field` prop.
 - `n-menu` add `children-field` prop.
+- `n-data-table` supports using path of the property to get as column key, closes [#1271](https://github.com/TuSimple/naive-ui/issues/1271).
 
 ### Fixes
 

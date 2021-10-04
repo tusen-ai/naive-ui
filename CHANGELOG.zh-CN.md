@@ -11,6 +11,7 @@
 - `n-menu` 新增 `key-field` 属性
 - `n-menu` 新增 `label-field` 属性
 - `n-menu` 新增 `children-field` 属性
+- `n-data-table` 支持使用访问属性路径作为列的 key，关闭 [#1271](https://github.com/TuSimple/naive-ui/issues/1271)
 
 ### Fixes
 
