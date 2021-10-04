@@ -79,6 +79,11 @@ export function createTreeMateOptions<T> (
   }
 }
 
+type OnUpdateCallback = (
+  value: Key[],
+  option: Array<TreeOption | null> | null
+) => void
+
 export const treeSharedProps = {
   filter: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
   defaultExpandAll: Boolean,
@@ -101,16 +106,16 @@ export const treeSharedProps = {
   },
   indeterminateKeys: Array as PropType<Key[]>,
   onUpdateIndeterminateKeys: [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
+  MaybeArray<OnUpdateCallback>
   >,
   'onUpdate:indeterminateKeys': [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
+  MaybeArray<OnUpdateCallback>
   >,
   onUpdateExpandedKeys: [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
+  MaybeArray<OnUpdateCallback>
   >,
   'onUpdate:expandedKeys': [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
+  MaybeArray<OnUpdateCallback>
   >
 } as const
 
@@ -189,16 +194,16 @@ const treeProps = {
   >,
   onDrop: [Function, Array] as PropType<MaybeArray<(e: TreeDragInfo) => void>>,
   onUpdateCheckedKeys: [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
+  MaybeArray<OnUpdateCallback>
   >,
   'onUpdate:checkedKeys': [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
+  MaybeArray<OnUpdateCallback>
   >,
   onUpdateSelectedKeys: [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
+  MaybeArray<OnUpdateCallback>
   >,
   'onUpdate:selectedKeys': [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
+  MaybeArray<OnUpdateCallback>
   >,
   ...treeSharedProps,
   // internal props for tree-select
@@ -381,7 +386,10 @@ export default defineComponent({
             mergedFilterRef.value
           )
         uncontrolledHighlightKeySetRef.value = highlightKeySet
-        doUpdateExpandedKeys(expandedKeysAfterChange)
+        doUpdateExpandedKeys(
+          expandedKeysAfterChange,
+          getOptionsByKeys(expandedKeysAfterChange)
+        )
       } else {
         uncontrolledHighlightKeySetRef.value = new Set()
       }
@@ -506,40 +514,61 @@ export default defineComponent({
       }
     }
 
-    function doUpdateExpandedKeys (value: Key[]): void {
+    function getOptionsByKeys (keys: Key[]): Array<TreeOption | null> {
+      const getNode = dataTreeMateRef.value!.getNode
+      return keys.map((key) => getNode(key)?.rawNode || null)
+    }
+
+    function doUpdateExpandedKeys (
+      value: Key[],
+      option: Array<TreeOption | null> | null
+    ): void {
       const {
         'onUpdate:expandedKeys': _onUpdateExpandedKeys,
         onUpdateExpandedKeys
       } = props
       uncontrolledExpandedKeysRef.value = value
-      if (_onUpdateExpandedKeys) call(_onUpdateExpandedKeys, value)
-      if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, value)
+      if (_onUpdateExpandedKeys) call(_onUpdateExpandedKeys, value, option)
+      if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, value, option)
     }
-    function doUpdateCheckedKeys (value: Key[]): void {
+    function doUpdateCheckedKeys (
+      value: Key[],
+      option: Array<TreeOption | null> | null
+    ): void {
       const {
         'onUpdate:checkedKeys': _onUpdateCheckedKeys,
         onUpdateCheckedKeys
       } = props
       uncontrolledCheckedKeysRef.value = value
-      if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, value)
-      if (_onUpdateCheckedKeys) call(_onUpdateCheckedKeys, value)
+      if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, value, option)
+      if (_onUpdateCheckedKeys) call(_onUpdateCheckedKeys, value, option)
     }
-    function doUpdateIndeterminateKeys (value: Key[]): void {
+    function doUpdateIndeterminateKeys (
+      value: Key[],
+      option: Array<TreeOption | null> | null
+    ): void {
       const {
         'onUpdate:indeterminateKeys': _onUpdateIndeterminateKeys,
         onUpdateIndeterminateKeys
       } = props
-      if (_onUpdateIndeterminateKeys) call(_onUpdateIndeterminateKeys, value)
-      if (onUpdateIndeterminateKeys) call(onUpdateIndeterminateKeys, value)
+      if (_onUpdateIndeterminateKeys) {
+        call(_onUpdateIndeterminateKeys, value, option)
+      }
+      if (onUpdateIndeterminateKeys) {
+        call(onUpdateIndeterminateKeys, value, option)
+      }
     }
-    function doUpdateSelectedKeys (value: Key[]): void {
+    function doUpdateSelectedKeys (
+      value: Key[],
+      option: Array<TreeOption | null> | null
+    ): void {
       const {
         'onUpdate:selectedKeys': _onUpdateSelectedKeys,
         onUpdateSelectedKeys
       } = props
       uncontrolledSelectedKeysRef.value = value
-      if (onUpdateSelectedKeys) call(onUpdateSelectedKeys, value)
-      if (_onUpdateSelectedKeys) call(_onUpdateSelectedKeys, value)
+      if (onUpdateSelectedKeys) call(onUpdateSelectedKeys, value, option)
+      if (_onUpdateSelectedKeys) call(_onUpdateSelectedKeys, value, option)
     }
     // Drag & Drop
     function doDragEnter (info: TreeDragInfo): void {
@@ -602,8 +631,11 @@ export default defineComponent({
         cascade: props.cascade,
         checkStrategy: mergedCheckStrategyRef.value
       })
-      doUpdateCheckedKeys(checkedKeys)
-      doUpdateIndeterminateKeys(indeterminateKeys)
+      doUpdateCheckedKeys(checkedKeys, getOptionsByKeys(checkedKeys))
+      doUpdateIndeterminateKeys(
+        indeterminateKeys,
+        getOptionsByKeys(indeterminateKeys)
+      )
     }
     function toggleExpand (key: Key): void {
       if (props.disabled) return
@@ -614,13 +646,17 @@ export default defineComponent({
       if (~index) {
         const expandedKeysAfterChange = Array.from(mergedExpandedKeys)
         expandedKeysAfterChange.splice(index, 1)
-        doUpdateExpandedKeys(expandedKeysAfterChange)
+        doUpdateExpandedKeys(
+          expandedKeysAfterChange,
+          getOptionsByKeys(expandedKeysAfterChange)
+        )
       } else {
         const nodeToBeExpanded = displayTreeMateRef.value!.getNode(key)
         if (!nodeToBeExpanded || nodeToBeExpanded.isLeaf) {
           return
         }
-        doUpdateExpandedKeys(mergedExpandedKeys.concat(key))
+        const newKeys = mergedExpandedKeys.concat(key)
+        doUpdateExpandedKeys(newKeys, getOptionsByKeys(newKeys))
       }
     }
     function handleSwitcherClick (node: TmNode): void {
@@ -650,7 +686,7 @@ export default defineComponent({
             )
           )
         } else {
-          doUpdateCheckedKeys([node.key])
+          doUpdateCheckedKeys([node.key], getOptionsByKeys([node.key]))
         }
       }
       if (props.multiple) {
@@ -663,15 +699,15 @@ export default defineComponent({
         } else if (!~index) {
           selectedKeys.push(node.key)
         }
-        doUpdateSelectedKeys(selectedKeys)
+        doUpdateSelectedKeys(selectedKeys, getOptionsByKeys(selectedKeys))
       } else {
         const selectedKeys = mergedSelectedKeysRef.value
         if (selectedKeys.includes(node.key)) {
           if (props.cancelable) {
-            doUpdateSelectedKeys([])
+            doUpdateSelectedKeys([], [])
           }
         } else {
-          doUpdateSelectedKeys([node.key])
+          doUpdateSelectedKeys([node.key], getOptionsByKeys([node.key]))
         }
       }
     }
@@ -692,7 +728,8 @@ export default defineComponent({
           droppingMouseNode.key === node.key &&
           !mergedExpandedKeysRef.value.includes(node.key)
         ) {
-          doUpdateExpandedKeys(mergedExpandedKeysRef.value.concat(node.key))
+          const newKeys = mergedExpandedKeysRef.value.concat(node.key)
+          doUpdateExpandedKeys(newKeys, getOptionsByKeys(newKeys))
         }
         expandTimerId = null
         nodeKeyToBeExpanded = null
