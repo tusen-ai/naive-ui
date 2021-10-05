@@ -55,7 +55,7 @@ export default defineComponent({
       mergedTableLayoutRef,
       headerCheckboxDisabledRef,
       handleTableHeaderScroll,
-      doUpdateSorter,
+      deriveNextSorter,
       doUncheckAll,
       doCheckAll
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -78,7 +78,7 @@ export default defineComponent({
           (state) => state.columnKey === column.key
         ) || null
       const nextSorter = createNextSorter(column, activeSorter)
-      doUpdateSorter(nextSorter)
+      deriveNextSorter(nextSorter)
     }
     function handleMouseenter (): void {
       scrollPartRef.value = 'head'

@@ -1,8 +1,8 @@
-# 受控的多列排序
+# Controlled Multi-col Sorting
 
-如果列对象的 `sortOrder` 属性被设为 `'ascend'`、`'descend'` 或者 `false`，表格的排序将为受控状态。
+If column object's `sortOrder` is set to `'ascend'`, `'descend'` or `false`, the data table would be in controlled state.
 
-如果你只需要 UI 显示多列排序的状态，那么不传 `compare` 即可。
+If you only want UI to display multiple sort state, you can leave `compare` empty.
 
 ```html
 <n-data-table

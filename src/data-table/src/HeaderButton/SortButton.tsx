@@ -29,8 +29,9 @@ export default defineComponent({
       return sortStateRef.value !== undefined
     })
     const mergedSortOrderRef = computed(() => {
-      if (sortStateRef.value && activeRef.value) {
-        return sortStateRef.value.order
+      const { value: sortState } = sortStateRef
+      if (sortState && activeRef.value) {
+        return sortState.order
       }
       return false
     })

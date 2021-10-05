@@ -7,7 +7,6 @@ import {
   Filter,
   FilterOptionValue,
   FilterState,
-  SortOrder,
   TableBaseColumn,
   TableSelectionColumn,
   InternalRowData,
@@ -158,13 +157,18 @@ export function useTableData (
       : []
   })
 
-  const { sortedDataRef, doUpdateSorter, mergedSortStateRef } = useSorter(
-    props,
-    {
-      dataRelatedColsRef,
-      filteredDataRef
-    }
-  )
+  const {
+    sortedDataRef,
+    deriveNextSorter,
+    mergedSortStateRef,
+    sort,
+    clearSorter
+  } = useSorter(props, {
+    dataRelatedColsRef,
+    filteredDataRef
+  })
+
+  // initialize
   dataRelatedColsRef.value.forEach((column) => {
     if (column.filter) {
       const defaultFilterOptionValues = column.defaultFilterOptionValues
@@ -314,29 +318,6 @@ export function useTableData (
   function page (page: number): void {
     doUpdatePage(page)
   }
-  function sort (columnKey: ColumnKey, order: SortOrder = 'ascend'): void {
-    if (!columnKey) {
-      clearSorter()
-    } else {
-      // TODO:
-      const columnToSort = dataRelatedColsRef.value.find(
-        (column) =>
-          column.type !== 'selection' &&
-          column.type !== 'expand' &&
-          column.key === columnKey
-      )
-      if (!columnToSort || !columnToSort.sorter) return
-      const sorter = columnToSort.sorter
-      doUpdateSorter({
-        columnKey,
-        sorter,
-        order: order
-      })
-    }
-  }
-  function clearSorter (): void {
-    doUpdateSorter(null)
-  }
   function clearFilter (): void {
     clearFilters()
   }
@@ -367,7 +348,7 @@ export function useTableData (
     selectionColumnRef,
     firstContentfulColIndexRef,
     doUpdateFilters,
-    doUpdateSorter,
+    deriveNextSorter,
     doUpdatePageSize,
     doUpdatePage,
     // exported methods
@@ -375,6 +356,7 @@ export function useTableData (
     filters,
     clearFilter,
     clearFilters,
+    clearSorter,
     page,
     sort
   }

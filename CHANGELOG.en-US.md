@@ -20,6 +20,7 @@
 - Add `n-collapse-transition` component, closes [#829](https://github.com/TuSimple/naive-ui/issues/829).
 - Add `n-scrollbar` component.
 - `n-dropdown` support options with `type='render'`.
+- `n-data-table` supports multiple column sorting.
 
 ### Fixes
 

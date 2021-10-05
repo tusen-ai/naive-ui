@@ -1,6 +1,6 @@
-# 多列排序
+# Multiple Column Sorting
 
-为 `sorter` 设定 `multiple` 和 `compare` 来开启多列排序，其中 `multiple` 为多列排序的优先级，越高优先级越高。
+Set `multiple` and `compare` on `sorter` to enable multiple column sorting. `multiple` is the priority of sorting (larger value means higher priority).
 
 ```html
 <n-space vertical :size="12">

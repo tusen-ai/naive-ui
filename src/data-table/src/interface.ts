@@ -34,6 +34,7 @@ export type CreateRowProps<T = InternalRowData> = (
   row: T,
   index: number
 ) => HTMLAttributes
+
 export type CompareFn<T = InternalRowData> = (row1: T, row2: T) => number
 export type Sorter<T = InternalRowData> = CompareFn<T> | SorterMultiple<T>
 export interface SorterMultiple<T = InternalRowData> {
@@ -206,7 +207,7 @@ export interface DataTableInjection {
     filters: FilterState,
     sourceColumn?: TableBaseColumn
   ) => void
-  doUpdateSorter: (sorter: SortState | null) => void
+  deriveNextSorter: (sorter: SortState | null) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
   doCheck: (rowKey: RowKey | RowKey[]) => void
@@ -236,7 +237,11 @@ export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 
 export type OnUpdateExpandedRowKeys = (keys: RowKey[]) => void
 export type OnUpdateCheckedRowKeys = (keys: RowKey[]) => void
-export type OnUpdateSorter = (sortState: SortState | SortState[] | null) => void
+// `null` only occurs when clearSorter is called
+export type OnUpdateSorter = (sortState: SortState & SortState[] & null) => void
+export type OnUpdateSorterImpl = (
+  sortState: SortState | SortState[] | null
+) => void
 export type OnUpdateFilters = (
   filterState: FilterState,
   sourceColumn?: TableBaseColumn
