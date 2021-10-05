@@ -1,10 +1,4 @@
-import {
-  inject,
-  computed,
-  watch,
-  ref,
-  ExtractPropTypes
-} from 'vue'
+import { inject, computed, watch, ref, ExtractPropTypes } from 'vue'
 import {
   addMonths,
   format,
@@ -54,6 +48,7 @@ function useDualCalendar (
     rangesRef,
     closeOnSelectRef,
     updateValueOnCloseRef,
+    firstDayOfWeekRef,
     datePickerSlots
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
@@ -109,7 +104,7 @@ function useDualCalendar (
       startCalendarDateTimeRef.value,
       props.value,
       nowRef.value,
-      localeRef.value.firstDayOfWeek
+      firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek
     )
   })
   const endDateArrayRef = computed(() => {
@@ -117,7 +112,7 @@ function useDualCalendar (
       endCalendarDateTimeRef.value,
       props.value,
       nowRef.value,
-      localeRef.value.firstDayOfWeek
+      firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek
     )
   })
   const weekdaysRef = computed(() => {

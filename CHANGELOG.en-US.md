@@ -21,6 +21,7 @@
 - Add `n-scrollbar` component.
 - `n-dropdown` support options with `type='render'`.
 - `n-data-table` supports multiple column sorting.
+- `n-date-picker` add `first-day-of-week` prop.
 
 ### Fixes
 

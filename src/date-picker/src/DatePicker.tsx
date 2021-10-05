@@ -47,7 +47,8 @@ import {
   IsDateDisabled,
   IsTimeDisabled,
   datePickerInjectionKey,
-  Shortcuts
+  Shortcuts,
+  FirstDayOfWeek
 } from './interface'
 import { Size as TimePickerSize } from '../../time-picker/src/interface'
 
@@ -109,6 +110,7 @@ const datePickerProps = {
     default: undefined
   },
   ranges: Object as PropType<Record<string, [number, number]>>,
+  firstDayOfWeek: Number as PropType<FirstDayOfWeek>,
   inputReadonly: Boolean,
   closeOnSelect: Boolean,
   'onUpdate:show': [Function, Array] as PropType<
@@ -523,6 +525,7 @@ export default defineComponent({
       timePickerSizeRef,
       localeRef,
       dateLocaleRef,
+      firstDayOfWeekRef: toRef(props, 'firstDayOfWeek'),
       isDateDisabledRef: toRef(props, 'isDateDisabled'),
       rangesRef: toRef(props, 'ranges'),
       closeOnSelectRef: toRef(props, 'closeOnSelect'),

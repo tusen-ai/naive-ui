@@ -21,6 +21,7 @@
 - 新增 `n-scrollbar` 组件
 - `n-dropdown` 支持 `type='render'` 的选项
 - `n-data-table` 支持多列排序
+- `n-date-picker` 新增 `first-day-of-week` 属性
 
 ### Fixes
 

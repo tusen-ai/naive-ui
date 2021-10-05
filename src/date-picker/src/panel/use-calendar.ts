@@ -42,6 +42,7 @@ function useCalendar (
     isMinuteDisabledRef,
     isSecondDisabledRef,
     localeRef,
+    firstDayOfWeekRef,
     datePickerSlots
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
@@ -71,7 +72,7 @@ function useCalendar (
       calendarValueRef.value,
       props.value,
       nowRef.value,
-      localeRef.value.firstDayOfWeek
+      firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek
     )
   })
   const weekdaysRef = computed(() => {

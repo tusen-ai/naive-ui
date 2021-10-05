@@ -14,7 +14,9 @@ import {
 
 export type Value = number | [number, number]
 
-export type Shortcuts = Record<string, number> | Record<string, [number, number]>
+export type Shortcuts =
+  | Record<string, number>
+  | Record<string, [number, number]>
 
 export type OnUpdateValue = (
   value: number & (number | null) & [number, number] & ([number, number] | null)
@@ -41,6 +43,9 @@ export interface PanelRef {
   $el: HTMLElement
 }
 
+// 0 is Monday
+export type FirstDayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6
+
 export type DatePickerInjection = {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<DatePickerTheme>>
@@ -51,6 +56,7 @@ export type DatePickerInjection = {
   rangesRef: Ref<Record<string, [number, number]> | undefined>
   closeOnSelectRef: Ref<boolean>
   updateValueOnCloseRef: Ref<boolean>
+  firstDayOfWeekRef: Ref<FirstDayOfWeek | undefined>
   datePickerSlots: Slots
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
