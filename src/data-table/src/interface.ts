@@ -34,8 +34,13 @@ export type CreateRowProps<T = InternalRowData> = (
   row: T,
   index: number
 ) => HTMLAttributes
+export type CompareFn<T = InternalRowData> = (row1: T, row2: T) => number
+export type Sorter<T = InternalRowData> = CompareFn<T> | SorterMultiple<T>
+export interface SorterMultiple<T = InternalRowData> {
+  multiple: number
+  compare?: CompareFn<T> | 'default'
+}
 
-export type Sorter<T = InternalRowData> = (row1: T, row2: T) => number
 export type Filter<T = InternalRowData> = (
   filterOptionValue: FilterOptionValue,
   row: T
@@ -174,7 +179,7 @@ export interface DataTableInjection {
   mergedCurrentPageRef: Ref<number>
   someRowsCheckedRef: Ref<boolean>
   allRowsCheckedRef: Ref<boolean>
-  mergedSortStateRef: Ref<SortState | null>
+  mergedSortStateRef: Ref<SortState[]>
   mergedFilterStateRef: Ref<FilterState>
   loadingRef: Ref<boolean>
   rowClassNameRef: Ref<string | CreateRowClassName | undefined>
@@ -231,7 +236,7 @@ export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 
 export type OnUpdateExpandedRowKeys = (keys: RowKey[]) => void
 export type OnUpdateCheckedRowKeys = (keys: RowKey[]) => void
-export type OnUpdateSorter = (sortState: SortState | null) => void
+export type OnUpdateSorter = (sortState: SortState | SortState[] | null) => void
 export type OnUpdateFilters = (
   filterState: FilterState,
   sourceColumn?: TableBaseColumn

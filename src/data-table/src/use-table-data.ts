@@ -8,7 +8,6 @@ import {
   FilterOptionValue,
   FilterState,
   SortOrder,
-  SortState,
   TableBaseColumn,
   TableSelectionColumn,
   InternalRowData,
@@ -16,10 +15,10 @@ import {
   TableExpandColumn,
   RowKey
 } from './interface'
-import { createShallowClonedObject, getFlagOfOrder } from './utils'
+import { createShallowClonedObject } from './utils'
 import { PaginationProps } from '../../pagination/src/Pagination'
 import { call, warn } from '../../_utils'
-
+import { useSorter } from './use-sorter'
 // useTableData combines filter, sorter and pagination
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -70,91 +69,8 @@ export function useTableData (
   })
 
   const uncontrolledFilterStateRef = ref<FilterState>({})
-  const uncontrolledSortStateRef = ref<SortState | null>(null)
   const uncontrolledCurrentPageRef = ref(1)
   const uncontrolledPageSizeRef = ref(10)
-
-  dataRelatedColsRef.value.forEach((column) => {
-    if (column.sorter !== undefined) {
-      uncontrolledSortStateRef.value = {
-        columnKey: column.key,
-        sorter: column.sorter,
-        order: column.defaultSortOrder ?? false
-      }
-    }
-    if (column.filter) {
-      const defaultFilterOptionValues = column.defaultFilterOptionValues
-      if (column.filterMultiple) {
-        uncontrolledFilterStateRef.value[column.key] =
-          defaultFilterOptionValues || []
-      } else if (defaultFilterOptionValues !== undefined) {
-        // this branch is for compatibility, someone may use `values` in single filter mode
-        uncontrolledFilterStateRef.value[column.key] =
-          defaultFilterOptionValues === null ? [] : defaultFilterOptionValues
-      } else {
-        uncontrolledFilterStateRef.value[column.key] =
-          column.defaultFilterOptionValue ?? null
-      }
-    }
-  })
-
-  const controlledCurrentPageRef = computed(() => {
-    const { pagination } = props
-    if (pagination === false) return undefined
-    return pagination.page
-  })
-  const controlledPageSizeRef = computed(() => {
-    const { pagination } = props
-    if (pagination === false) return undefined
-    return pagination.pageSize
-  })
-
-  const mergedCurrentPageRef = useMergedState(
-    controlledCurrentPageRef,
-    uncontrolledCurrentPageRef
-  )
-  const mergedPageSizeRef = useMergedState(
-    controlledPageSizeRef,
-    uncontrolledPageSizeRef
-  )
-  const mergedPageCountRef = computed(() => {
-    const { pagination } = props
-    if (pagination) {
-      const { pageCount } = pagination
-      if (pageCount !== undefined) return pageCount
-    }
-    return undefined
-  })
-
-  const mergedSortStateRef = computed<SortState | null>(() => {
-    // If one of the columns's sort order is false or 'ascend' or 'descend',
-    // the table's controll functionality should work in controlled manner.
-    const columnsWithControlledSortOrder = dataRelatedColsRef.value.filter(
-      (column) =>
-        column.type !== 'selection' &&
-        column.sorter !== undefined &&
-        (column.sortOrder === 'ascend' ||
-          column.sortOrder === 'descend' ||
-          column.sortOrder === false)
-    )
-    // if multiple column is controlled sortable, then we need to find a column with active sortOrder
-    const columnToSort: TableBaseColumn | undefined = (
-      columnsWithControlledSortOrder as TableBaseColumn[]
-    ).filter((col: TableBaseColumn) => col.sortOrder !== false)[0]
-    if (columnToSort) {
-      return {
-        columnKey: columnToSort.key,
-        // column to sort has controlled sorter
-        // sorter && sort order won't be undefined
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        order: columnToSort.sortOrder!,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        sorter: columnToSort.sorter!
-      }
-    }
-    if (columnsWithControlledSortOrder.length) return null
-    return uncontrolledSortStateRef.value
-  })
 
   const mergedFilterStateRef = computed<FilterState>(() => {
     const columnsWithControlledFilter = dataRelatedColsRef.value.filter(
@@ -242,41 +158,56 @@ export function useTableData (
       : []
   })
 
-  const sortedDataRef = computed<TmNode[]>(() => {
-    const activeSorter = mergedSortStateRef.value
-    if (activeSorter) {
-      // When async, mergedSortState.sorter should be true
-      // and we sort nothing, just return the filtered data
-      if (activeSorter.sorter === true || activeSorter.sorter === false) {
-        return filteredDataRef.value
-      }
-      const filteredData = filteredDataRef.value.slice(0)
-      const columnKey = activeSorter.columnKey
-      // 1 for asc
-      // -1 for desc
-      const order = activeSorter.order
-      const sorter =
-        activeSorter.sorter === undefined || activeSorter.sorter === 'default'
-          ? (row1: InternalRowData, row2: InternalRowData) => {
-              const value1 = row1[columnKey]
-              const value2 = row2[columnKey]
-              if (typeof value1 === 'number' && typeof value2 === 'number') {
-                return value1 - value2
-              } else if (
-                typeof value1 === 'string' &&
-                typeof value2 === 'string'
-              ) {
-                return value1.localeCompare(value2)
-              }
-              return 0
-            }
-          : activeSorter.sorter
-      return filteredData.sort(
-        (tmNode1, tmNode2) =>
-          getFlagOfOrder(order) * sorter(tmNode1.rawNode, tmNode2.rawNode)
-      )
+  const { sortedDataRef, doUpdateSorter, mergedSortStateRef } = useSorter(
+    props,
+    {
+      dataRelatedColsRef,
+      filteredDataRef
     }
-    return filteredDataRef.value
+  )
+  dataRelatedColsRef.value.forEach((column) => {
+    if (column.filter) {
+      const defaultFilterOptionValues = column.defaultFilterOptionValues
+      if (column.filterMultiple) {
+        uncontrolledFilterStateRef.value[column.key] =
+          defaultFilterOptionValues || []
+      } else if (defaultFilterOptionValues !== undefined) {
+        // this branch is for compatibility, someone may use `values` in single filter mode
+        uncontrolledFilterStateRef.value[column.key] =
+          defaultFilterOptionValues === null ? [] : defaultFilterOptionValues
+      } else {
+        uncontrolledFilterStateRef.value[column.key] =
+          column.defaultFilterOptionValue ?? null
+      }
+    }
+  })
+
+  const controlledCurrentPageRef = computed(() => {
+    const { pagination } = props
+    if (pagination === false) return undefined
+    return pagination.page
+  })
+  const controlledPageSizeRef = computed(() => {
+    const { pagination } = props
+    if (pagination === false) return undefined
+    return pagination.pageSize
+  })
+
+  const mergedCurrentPageRef = useMergedState(
+    controlledCurrentPageRef,
+    uncontrolledCurrentPageRef
+  )
+  const mergedPageSizeRef = useMergedState(
+    controlledPageSizeRef,
+    uncontrolledPageSizeRef
+  )
+  const mergedPageCountRef = computed(() => {
+    const { pagination } = props
+    if (pagination) {
+      const { pageCount } = pagination
+      if (pageCount !== undefined) return pageCount
+    }
+    return undefined
   })
 
   const paginatedDataRef = computed<TmNode[]>(() => {
@@ -365,17 +296,7 @@ export function useTableData (
     if (_onUpdatePageSize) call(_onUpdatePageSize, pageSize)
     uncontrolledPageSizeRef.value = pageSize
   }
-  function doUpdateSorter (sortState: SortState | null): void {
-    const {
-      'onUpdate:sorter': _onUpdateSorter,
-      onUpdateSorter,
-      onSorterChange
-    } = props
-    if (_onUpdateSorter) call(_onUpdateSorter, sortState)
-    if (onUpdateSorter) call(onUpdateSorter, sortState)
-    if (onSorterChange) call(onSorterChange, sortState)
-    uncontrolledSortStateRef.value = sortState
-  }
+
   function doUpdateFilters (
     filters: FilterState,
     sourceColumn?: TableBaseColumn
@@ -397,6 +318,7 @@ export function useTableData (
     if (!columnKey) {
       clearSorter()
     } else {
+      // TODO:
       const columnToSort = dataRelatedColsRef.value.find(
         (column) =>
           column.type !== 'selection' &&
