@@ -12,7 +12,8 @@ const createColumns = ({ sendMail }) => {
   return [
     {
       title: 'Name',
-      key: 'name'
+      key: 'name',
+      align: 'center'
     },
     {
       title: 'Age',
