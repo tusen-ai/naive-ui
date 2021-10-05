@@ -618,4 +618,36 @@ describe('n-data-table', () => {
       '2'
     )
   })
+
+  it('should work with `align` prop', async () => {
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: index,
+        age: index + 1
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    ;(['left', 'right', 'center'] as const).forEach((align) => {
+      const columns: DataTableColumns = [
+        {
+          title: 'Name',
+          key: 'name',
+          align: align
+        },
+        {
+          title: 'Age',
+          key: 'age'
+        }
+      ]
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={data} row-key={rowKey} />
+      ))
+      expect(wrapper.find('tbody .n-data-table-td').classes()).toContain(
+        `n-data-table-td--${align}-align`
+      )
+      expect(
+        wrapper.find('tbody .n-data-table-td').attributes('style')
+      ).toContain(`text-align: ${align}`)
+    })
+  })
 })
