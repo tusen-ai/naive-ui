@@ -14,7 +14,7 @@ import {
   cloneVNode,
   watchEffect
 } from 'vue'
-import { VBinder, VTarget, FollowerPlacement } from 'vueuc'
+import { VBinder, VTarget, FollowerPlacement, BinderInst } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
 import { call, keep, getFirstSlotVNode, warnOnce } from '../../_utils'
 import type {
@@ -36,19 +36,22 @@ const triggerEventMap = {
   focus: ['onFocus', 'onBlur'],
   click: ['onClick'],
   hover: ['onMouseenter', 'onMouseleave'],
-  manual: []
+  manual: [],
+  nested: ['onFocus', 'onBlur', 'onMouseenter', 'onMouseleave', 'onClick']
 } as const
+
+export interface TriggerEventHandlers {
+  onClick: (e: MouseEvent) => void
+  onMouseenter: (e: MouseEvent) => void
+  onMouseleave: (e: MouseEvent) => void
+  onFocus: (e: FocusEvent) => void
+  onBlur: (e: FocusEvent) => void
+}
 
 function appendEvents (
   vNode: VNode,
-  trigger: PopoverTrigger,
-  events: {
-    onClick: (e: MouseEvent) => void
-    onMouseenter: (e: MouseEvent) => void
-    onMouseleave: (e: MouseEvent) => void
-    onFocus: (e: FocusEvent) => void
-    onBlur: (e: FocusEvent) => void
-  }
+  trigger: PopoverTrigger | 'nested',
+  events: TriggerEventHandlers
 ): void {
   triggerEventMap[trigger].forEach((eventName) => {
     if (!vNode.props) vNode.props = {}
@@ -151,6 +154,11 @@ export const popoverBaseProps = {
   MaybeArray<(value: boolean) => void>
   >,
   zIndex: Number,
+  internalSyncTargetWithParent: Boolean,
+  internalInheritedEventHandlers: {
+    type: Array as PropType<TriggerEventHandlers[]>,
+    default: () => []
+  },
   /** @deprecated */
   onShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void> | undefined
@@ -183,6 +191,7 @@ export default defineComponent({
   name: 'Popover',
   inheritAttrs: false,
   props: popoverProps,
+  __popover__: true,
   setup (props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -219,6 +228,7 @@ export default defineComponent({
       })
     }
     const isMountedRef = useIsMounted()
+    const binderInstRef = ref<BinderInst | null>(null)
     // setup show
     const controlledShowRef = computed(() => props.show)
     const uncontrolledShowRef = ref(props.defaultShow)
@@ -246,8 +256,6 @@ export default defineComponent({
       if (props.overlap) return false
       return compatibleShowArrowRef.value
     })
-    // trigger
-    let triggerVNode: VNode | null = null
     // bodyInstance
     let bodyInstance: BodyInstance | null = null
     const showTimerIdRef = ref<number | null>(null)
@@ -372,7 +380,7 @@ export default defineComponent({
       uncontrolledShowRef.value = value
     }
     function getTriggerElement (): HTMLElement {
-      return triggerVNode?.el as HTMLElement
+      return binderInstRef.value?.targetRef as HTMLElement
     }
     function setBodyInstance (value: BodyInstance | null): void {
       bodyInstance = value
@@ -391,6 +399,7 @@ export default defineComponent({
       internalRenderBodyRef: toRef(props, 'internalRenderBody')
     })
     return {
+      binderInstRef,
       positionManually: positionManuallyRef,
       mergedShowConsideringDisabledProp: mergedShowConsideringDisabledPropRef,
       // if to show popover body
@@ -403,65 +412,127 @@ export default defineComponent({
       handleMouseLeave,
       handleFocus,
       handleBlur,
-      setTriggerVNode (v: VNode | null) {
-        triggerVNode = v
-      },
       syncPosition
     }
   },
   render () {
-    return h(VBinder, null, {
-      default: () => {
-        const { positionManually, $slots: slots } = this
-        let triggerVNode: VNode | null
-        if (!positionManually) {
-          if (slots.activator) {
-            triggerVNode = getFirstSlotVNode(slots, 'activator')
-          } else {
-            triggerVNode = getFirstSlotVNode(slots, 'trigger')
-          }
-          if (triggerVNode) {
-            triggerVNode = cloneVNode(triggerVNode)
-            triggerVNode =
-              triggerVNode.type === textVNodeType
-                ? h('span', [triggerVNode])
-                : triggerVNode
-            appendEvents(
-              triggerVNode,
-              positionManually ? 'manual' : this.trigger,
-              {
-                onClick: this.handleClick,
-                onMouseenter: this.handleMouseEnter,
-                onMouseleave: this.handleMouseLeave,
-                onFocus: this.handleFocus,
-                onBlur: this.handleBlur
-              }
-            )
-          }
-          this.setTriggerVNode(triggerVNode)
-        }
-        // We need to subscribe it. Sometimes rerender won't ge triggered.
-        // `mergedShowConsideringDisabledProp` is not the final disabled status.
-        // In ellpisis it's dynamic.
-        void this.mergedShowConsideringDisabledProp
-        const mergedShow = this.getMergedShow()
-        return [
-          positionManually
-            ? null
-            : h(VTarget, null, {
-              default: () => triggerVNode
-            }),
-          h(
-            NPopoverBody,
-            keep(this.$props, bodyPropKeys, {
-              ...this.$attrs,
-              showArrow: this.mergedShowArrow,
-              show: mergedShow
-            }),
-            slots
-          )
-        ]
+    const { positionManually, $slots: slots } = this
+    let triggerVNode: VNode | null
+    let popoverInside = false
+    if (!positionManually) {
+      if (slots.activator) {
+        triggerVNode = getFirstSlotVNode(slots, 'activator')
+      } else {
+        triggerVNode = getFirstSlotVNode(slots, 'trigger')
       }
-    })
+      if (triggerVNode) {
+        triggerVNode = cloneVNode(triggerVNode)
+        triggerVNode =
+          triggerVNode.type === textVNodeType
+            ? h('span', [triggerVNode])
+            : triggerVNode
+        const handlers = {
+          onClick: this.handleClick,
+          onMouseenter: this.handleMouseEnter,
+          onMouseleave: this.handleMouseLeave,
+          onFocus: this.handleFocus,
+          onBlur: this.handleBlur
+        }
+        if ((triggerVNode.type as any)?.__popover__) {
+          popoverInside = true
+          // We assume that there's no DOM event handlers on popover element
+          if (!triggerVNode.props) {
+            triggerVNode.props = {
+              internalSyncTargetWithParent: true,
+              internalInheritedEventHandlers: []
+            }
+          }
+          triggerVNode.props.internalSyncTargetWithParent = true
+          if (!triggerVNode.props.internalInheritedEventHandlers) {
+            triggerVNode.props.internalInheritedEventHandlers = [handlers]
+          } else {
+            triggerVNode.props.internalInheritedEventHandlers = [
+              handlers,
+              ...triggerVNode.props.internalInheritedEventHandlers
+            ]
+          }
+        } else {
+          const { internalInheritedEventHandlers } = this
+          const ascendantAndCurrentHandlers: TriggerEventHandlers[] = [
+            handlers,
+            ...internalInheritedEventHandlers
+          ]
+          const mergedHandlers: TriggerEventHandlers = {
+            onBlur: (e: FocusEvent) => {
+              ascendantAndCurrentHandlers.forEach((_handlers) => {
+                _handlers.onBlur(e)
+              })
+            },
+            onFocus: (e: FocusEvent) => {
+              ascendantAndCurrentHandlers.forEach((_handlers) => {
+                _handlers.onBlur(e)
+              })
+            },
+            onClick: (e: MouseEvent) => {
+              ascendantAndCurrentHandlers.forEach((_handlers) => {
+                _handlers.onClick(e)
+              })
+            },
+            onMouseenter: (e: MouseEvent) => {
+              ascendantAndCurrentHandlers.forEach((_handlers) => {
+                _handlers.onMouseenter(e)
+              })
+            },
+            onMouseleave: (e: MouseEvent) => {
+              ascendantAndCurrentHandlers.forEach((_handlers) => {
+                _handlers.onMouseleave(e)
+              })
+            }
+          }
+          appendEvents(
+            triggerVNode,
+            internalInheritedEventHandlers
+              ? 'nested'
+              : positionManually
+                ? 'manual'
+                : this.trigger,
+            mergedHandlers
+          )
+        }
+      }
+    }
+    return (
+      <VBinder
+        ref="binderInstRef"
+        syncTarget={!popoverInside}
+        syncTargetWithParent={this.internalSyncTargetWithParent}
+      >
+        {{
+          default: () => {
+            // We need to subscribe it. Sometimes rerender won't ge triggered.
+            // `mergedShowConsideringDisabledProp` is not the final disabled status.
+            // In ellpisis it's dynamic.
+            void this.mergedShowConsideringDisabledProp
+            const mergedShow = this.getMergedShow()
+            return [
+              positionManually
+                ? null
+                : h(VTarget, null, {
+                  default: () => triggerVNode
+                }),
+              h(
+                NPopoverBody,
+                keep(this.$props, bodyPropKeys, {
+                  ...this.$attrs,
+                  showArrow: this.mergedShowArrow,
+                  show: mergedShow
+                }),
+                slots
+              )
+            ]
+          }
+        }}
+      </VBinder>
+    )
   }
 })

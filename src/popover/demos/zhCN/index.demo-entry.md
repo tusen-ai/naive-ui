@@ -20,6 +20,7 @@ manual-position
 header
 hoist-debug
 nested-debug
+nested2-debug
 ```
 
 ## API

@@ -21,6 +21,7 @@ export type TooltipProps = ExtractPublicPropTypes<typeof tooltipProps>
 export default defineComponent({
   name: 'Tooltip',
   props: tooltipProps,
+  __popover__: true,
   setup (props) {
     const themeRef = useTheme(
       'Tooltip',
