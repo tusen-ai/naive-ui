@@ -11,6 +11,7 @@ grid
 indeterminate
 controlled
 event
+customize-value
 ```
 
 ## Props

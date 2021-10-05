@@ -14,7 +14,8 @@ export default cB('breadcrumb', `
 `, [
   cB('breadcrumb-item', {
     fontSize: 'var(--font-size)',
-    transition: 'color .3s var(--bezier)'
+    transition: 'color .3s var(--bezier)',
+    display: 'inline-block'
   }, [
     cB('icon', `
       font-size: 18px;

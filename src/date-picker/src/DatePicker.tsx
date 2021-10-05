@@ -234,6 +234,32 @@ export default defineComponent({
     const mergedFormatRef = computed(() => {
       return props.format || DATE_FORMAT[props.type]
     })
+    const mergedActionsRef = computed(() => {
+      const { actions, type } = props
+      if (actions !== undefined) return actions
+      switch (type) {
+        case 'date': {
+          return ['clear', 'now']
+        }
+        case 'datetime': {
+          return ['clear', 'now', 'confirm']
+        }
+        case 'daterange': {
+          return ['clear', 'confirm']
+        }
+        case 'datetimerange': {
+          return ['clear', 'confirm']
+        }
+        default: {
+          warn(
+            'data-picker',
+            "The type is wrong, n-date-picker's type only supports `date`, `datetime`, `daterange` and `datetimerange`."
+          )
+          break
+        }
+      }
+    })
+
     function doUpdatePendingValue (value: Value | null): void {
       pendingValueRef.value = value
     }
@@ -544,6 +570,7 @@ export default defineComponent({
       handlePanelUpdateValue,
       handlePanelConfirm,
       mergedTheme: themeRef,
+      actions: mergedActionsRef,
       triggerCssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },

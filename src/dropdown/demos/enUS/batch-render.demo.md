@@ -2,7 +2,7 @@
 
 The `render-label` and `render-icon` properties can be used to pre-process dropdown options.
 
-**Note: the `render-label` will take effect for group type labels, which can be set through `option.type`.**
+Note: the `render-label` will take effect for group type labels, which can be set through `option.type`.
 
 ```html
 <n-dropdown

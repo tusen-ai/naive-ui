@@ -12,10 +12,7 @@ export const menuItemProps = {
     type: Object as PropType<TmNode>,
     required: true
   },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  disabled: Boolean,
   icon: Function,
   onClick: Function
 } as const
@@ -83,10 +80,8 @@ export default defineComponent({
         role="menuitem"
         class={[
           `${mergedClsPrefix}-menu-item`,
-          {
-            [`${mergedClsPrefix}-menu-item--selected`]: this.selected,
-            [`${mergedClsPrefix}-menu-item--disabled`]: this.mergedDisabled
-          }
+          this.selected && `${mergedClsPrefix}-menu-item--selected`,
+          this.mergedDisabled && `${mergedClsPrefix}-menu-item--disabled`
         ]}
       >
         <NTooltip

@@ -2,13 +2,68 @@
 
 ## Pending
 
-### Localization
+### Feats
+
+- `n-breadcrumb-item` 新增 `href` 属性
+- `n-descriptions` 新增 `separator` 属性，关闭 [#1263](https://github.com/TuSimple/naive-ui/issues/1263)
+- `n-dropdown` 新增 `key-field` 属性
+- `n-dropdown` 新增 `label-field` 属性
+- `n-dropdown` 新增 `children-field` 属性
+- `n-menu` 新增 `key-field` 属性
+- `n-menu` 新增 `label-field` 属性
+- `n-menu` 新增 `children-field` 属性
+- `n-data-table` 支持使用访问属性路径作为列的 key，关闭 [#1271](https://github.com/TuSimple/naive-ui/issues/1271)
+- `n-switch` 新增 `checked-value` 属性，关闭 [#1234](https://github.com/TuSimple/naive-ui/issues/1234)
+- `n-switch` 新增 `unchecked-value` 属性，关闭 [#1234](https://github.com/TuSimple/naive-ui/issues/1234)
+- `n-checkbox` 新增 `checked-value` 属性，关闭 [#1234](https://github.com/TuSimple/naive-ui/issues/1234)
+- `n-checkbox` 新增 `unchecked-value` 属性，关闭 [#1234](https://github.com/TuSimple/naive-ui/issues/1234)
+- 新增 `n-collapse-transition` 组件，关闭 [#829](https://github.com/TuSimple/naive-ui/issues/829).
+- 新增 `n-scrollbar` 组件
+- `n-dropdown` 支持 `type='render'` 的选项
+
+### Fixes
+
+- 修复 `n-form-item` 中组件内容过长影响 `n-form-item` 宽度
+- 修复 `n-layout-sider` 中 `arrow-circle` 的 icon 样式
+- 修复 `n-upload` 的 `show-preview-button` 属性失效，关闭 [#1238](https://github.com/TuSimple/naive-ui/issues/1238)
+- 修复 `n-date-picker` 的 `date` 类型的 `action` 验证错误
+- 修复 `n-data-table` 在 `selection` 和 `summary` 一起使用时报错，关闭 [#1276](https://github.com/TuSimple/naive-ui/issues/1276)
+- 修复 `n-data-table` 勾选列的宽度在设为 fixed 时候塌陷，关闭 [#1283](https://github.com/TuSimple/naive-ui/issues/1283)
+- 修复 `n-popconfirm` 不能被嵌套于 `n-tooltip` 内，关闭 [#872](https://github.com/TuSimple/naive-ui/issues/872).
+- 修复 `n-popselect` 勾选图标覆盖了文本，关闭 [#1282](https://github.com/TuSimple/naive-ui/issues/1282)
+
+## 2.19.3 (2021-09-28)
+
+### Fixes
+
+- 修复 `n-data-table` 当最后一列未设置 `ellipsis` 时省略失效，关闭 [#934](https://github.com/TuSimple/naive-ui/issues/934)
+- 修复 `n-grid-item` 响应式不生效
+- 修复 `n-tabs` 在尺寸改变后没有更新滚动阴影状态，关闭 [#1224](https://github.com/TuSimple/naive-ui/issues/1224)
+
+### Feats
+
+- `n-grid-item` 在 `span` 为 0 的时候隐藏，关闭 [#1220](https://github.com/TuSimple/naive-ui/issues/1220)
+- `n-grid` 新增 `item-responsive` 属性
+
+## 2.19.2 (2021-09-26)
+
+### i18n
 
 - 新增 ukUA locale
 
 ### Fixes
 
 - 修复 `n-global-style` 在首次挂载时应用样式过渡
+- 修复 `n-drawer` 边界缺少 transition，关闭 [#1211](https://github.com/TuSimple/naive-ui/issues/1211)
+- 修复 `n-input-number` 的 `value` 属性不能为 null 类型
+- 修复支持 rtl 的组件 SSR 报错
+- 修复有弹出层组件的 SSR 报错
+- 修复全局样式覆盖对 select 触发器不生效，关闭 [#1229](https://github.com/TuSimple/naive-ui/issues/1229)
+
+### Feats
+
+- `n-checkbox` 增加 aria 支持
+- `n-alert` 增加 aria 支持
 
 ## 2.19.1 (2021-09-21)
 
@@ -1116,7 +1171,7 @@
 - 增加 `n-space` 组件
 - `n-drawer` 内容可滚动
 
-### Localization
+### i18n
 
 - `n-log` 添加 zhCN 本地化
 

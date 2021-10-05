@@ -12,8 +12,14 @@
   <n-grid-item span="10">
     <div class="light-green">0</div>
   </n-grid-item>
+  <n-grid-item span="0">
+    <div class="light-green">0.5</div>
+  </n-grid-item>
   <n-grid-item :span="2" offset="0 400:1 500:2 600:3">
     <div class="green">1</div>
+  </n-grid-item>
+  <n-grid-item span="0">
+    <div class="light-green">1.5</div>
   </n-grid-item>
   <n-grid-item :span="2">
     <div class="light-green">2</div>

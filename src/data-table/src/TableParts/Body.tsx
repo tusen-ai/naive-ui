@@ -13,7 +13,7 @@ import {
 import { pxfy, repeat } from 'seemly'
 import { VirtualList, VirtualListInst } from 'vueuc'
 import { c } from '../../../_utils/cssr'
-import { NScrollbar, ScrollbarInst } from '../../../scrollbar'
+import { NScrollbar, ScrollbarInst } from '../../../_internal'
 import { formatLength } from '../../../_utils'
 import {
   dataTableInjectionKey,
@@ -448,12 +448,12 @@ export default defineComponent({
                 // virtual list should have a fast path
                 const { rowSpan, colSpan } = column
                 const mergedColSpan = isSummary
-                  ? rowInfo.rawNode[colKey].colSpan || 1
+                  ? rowInfo.rawNode[colKey]?.colSpan || 1 // optional for #1276
                   : colSpan
                     ? colSpan(rowData, rowIndex)
                     : 1
                 const mergedRowSpan = isSummary
-                  ? rowInfo.rawNode[colKey].rowSpan || 1
+                  ? rowInfo.rawNode[colKey]?.rowSpan || 1 // optional for #1276
                   : rowSpan
                     ? rowSpan(rowData, rowIndex)
                     : 1

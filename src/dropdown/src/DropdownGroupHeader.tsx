@@ -15,7 +15,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup () {
     const {
       showIconRef,
       hasSubmenuRef
@@ -23,9 +23,10 @@ export default defineComponent({
     } = inject(dropdownMenuInjectionKey)!
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { renderLabelRef } = inject(dropdownInjectionKey)!
+    const { renderLabelRef, labelFieldRef } = inject(dropdownInjectionKey)!
 
     return {
+      labelField: labelFieldRef,
       showIcon: showIconRef,
       hasSubmenu: hasSubmenuRef,
       renderLabel: renderLabelRef
@@ -54,7 +55,7 @@ export default defineComponent({
           >
             {renderLabel
               ? renderLabel(rawNode)
-              : render(rawNode.label ?? rawNode.title)}
+              : render(rawNode.title ?? rawNode[this.labelField])}
           </div>
           <div
             class={[

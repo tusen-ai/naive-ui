@@ -6,17 +6,19 @@ import {
   computed,
   CSSProperties,
   PropType,
-  Transition
+  Transition,
+  watchEffect
 } from 'vue'
 import { depx, pxfy } from 'seemly'
 import { useMergedState } from 'vooks'
 import { useConfig, useFormItem, useTheme } from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
-import { call, warn, createKey } from '../../_utils'
+import { call, createKey, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { switchLight } from '../styles'
 import type { SwitchTheme } from '../styles'
+import type { OnUpdateValueImpl, OnUpdateValue } from './interface'
 import style from './styles/index.cssr'
 
 const switchProps = {
@@ -26,11 +28,16 @@ const switchProps = {
     default: 'medium'
   },
   value: {
-    type: Boolean as PropType<boolean | undefined>,
+    type: [String, Number, Boolean] as PropType<
+    string | number | boolean | undefined
+    >,
     default: undefined
   },
   loading: Boolean,
-  defaultValue: Boolean,
+  defaultValue: {
+    type: [String, Number, Boolean] as PropType<string | number | boolean>,
+    default: false
+  },
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -39,27 +46,18 @@ const switchProps = {
     type: Boolean,
     default: true
   },
-  'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
-  >,
-  onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
-  >,
-  onChange: {
-    type: [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void> | undefined
-    >,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'switch',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  checkedValue: {
+    type: [String, Number, Boolean] as PropType<string | number | boolean>,
+    default: true
+  },
+  uncheckedValue: {
+    type: [String, Number, Boolean] as PropType<string | number | boolean>,
+    default: false
+  },
+  /** @deprecated */
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
 export type SwitchProps = ExtractPublicPropTypes<typeof switchProps>
@@ -68,6 +66,16 @@ export default defineComponent({
   name: 'Switch',
   props: switchProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange) {
+          warnOnce(
+            'switch',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Switch',
@@ -86,16 +94,16 @@ export default defineComponent({
       uncontrolledValueRef
     )
     const pressedRef = ref(false)
-    function doUpdateValue (value: boolean): void {
+    function doUpdateValue (value: string | number | boolean): void {
       const {
         'onUpdate:value': _onUpdateValue,
         onChange,
         onUpdateValue
       } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (_onUpdateValue) call(_onUpdateValue, value)
-      if (onUpdateValue) call(onUpdateValue, value)
-      if (onChange) call(onChange, value)
+      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
+      if (onChange) call(onChange as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
@@ -110,7 +118,11 @@ export default defineComponent({
     }
     function handleClick (): void {
       if (!mergedDisabledRef.value) {
-        doUpdateValue(!mergedValueRef.value)
+        if (mergedValueRef.value !== props.checkedValue) {
+          doUpdateValue(props.checkedValue)
+        } else {
+          doUpdateValue(props.uncheckedValue)
+        }
       }
     }
     function handleFocus (): void {
@@ -195,20 +207,25 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, mergedValue, $slots } = this
+    const {
+      mergedClsPrefix,
+      mergedValue,
+      mergedDisabled,
+      checkedValue,
+      $slots
+    } = this
+    const checked = mergedValue === checkedValue
     const { checked: checkedSlot, unchecked: uncheckedSlot } = $slots
     return (
       <div
         role="switch"
-        aria-checked={mergedValue}
+        aria-checked={checked}
         class={[
           `${mergedClsPrefix}-switch`,
-          {
-            [`${mergedClsPrefix}-switch--active`]: mergedValue,
-            [`${mergedClsPrefix}-switch--disabled`]: this.mergedDisabled,
-            [`${mergedClsPrefix}-switch--round`]: this.round,
-            [`${mergedClsPrefix}-switch--pressed`]: this.pressed
-          }
+          checked && `${mergedClsPrefix}-switch--active`,
+          mergedDisabled && `${mergedClsPrefix}-switch--disabled`,
+          this.round && `${mergedClsPrefix}-switch--round`,
+          this.pressed && `${mergedClsPrefix}-switch--pressed`
         ]}
         tabindex={!this.mergedDisabled ? 0 : undefined}
         style={this.cssVars as CSSProperties}

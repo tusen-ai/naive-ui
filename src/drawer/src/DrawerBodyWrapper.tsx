@@ -13,8 +13,8 @@ import {
   mergeProps,
   CSSProperties
 } from 'vue'
-import { NScrollbar } from '../../scrollbar'
-import type { ScrollbarProps } from '../../scrollbar'
+import { NScrollbar } from '../../_internal'
+import type { ScrollbarProps } from '../../_internal'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { drawerBodyInjectionKey, drawerInjectionKey } from './interface'
@@ -79,62 +79,62 @@ export default defineComponent({
     const { $slots, mergedClsPrefix } = this
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-        <div>
-          {/* Keep the wrapper dom. Make sure the drawer has a host.
+          <div>
+            {/* Keep the wrapper dom. Make sure the drawer has a host.
             Nor the detached content will disappear without transition */}
-          <Transition
-            name={this.transitionName}
-            appear={this.isMounted}
-            onAfterLeave={this.handleAfterLeave}
-          >
-            {{
-              default: () =>
-                withDirectives(
-                  h(
-                    'div',
-                    mergeProps(this.$attrs, {
-                      ref: 'bodyRef',
-                      class: [
+            <Transition
+              name={this.transitionName}
+              appear={this.isMounted}
+              onAfterLeave={this.handleAfterLeave}
+            >
+              {{
+                default: () =>
+                  withDirectives(
+                    h(
+                      'div',
+                      mergeProps(this.$attrs, {
+                        ref: 'bodyRef',
+                        class: [
                           `${mergedClsPrefix}-drawer`,
                           `${mergedClsPrefix}-drawer--${this.placement}-placement`,
                           this.nativeScrollbar &&
                             `${mergedClsPrefix}-drawer--native-scrollbar`
+                        ]
+                      }),
+                      [
+                        this.nativeScrollbar ? (
+                          <div
+                            class={`${mergedClsPrefix}-drawer-content-wrapper`}
+                            style={this.contentStyle}
+                          >
+                            {$slots}
+                          </div>
+                        ) : (
+                          <NScrollbar
+                            {...this.scrollbarProps}
+                            contentStyle={this.contentStyle}
+                            contentClass={`${mergedClsPrefix}-drawer-content-wrapper`}
+                            theme={this.mergedTheme.peers.Scrollbar}
+                            themeOverrides={
+                              this.mergedTheme.peerOverrides.Scrollbar
+                            }
+                          >
+                            {$slots}
+                          </NScrollbar>
+                        )
                       ]
-                    }),
-                    [
-                      this.nativeScrollbar ? (
-                        <div
-                          class={`${mergedClsPrefix}-drawer-content-wrapper`}
-                          style={this.contentStyle}
-                        >
-                          {$slots}
-                        </div>
-                      ) : (
-                        <NScrollbar
-                          {...this.scrollbarProps}
-                          contentStyle={this.contentStyle}
-                          contentClass={`${mergedClsPrefix}-drawer-content-wrapper`}
-                          theme={this.mergedTheme.peers.Scrollbar}
-                          themeOverrides={
-                            this.mergedTheme.peerOverrides.Scrollbar
-                          }
-                        >
-                          {$slots}
-                        </NScrollbar>
-                      )
-                    ]
-                  ),
-                  [[vShow, this.show]]
-                )
-            }}
-          </Transition>
-        </div>,
-        [
+                    ),
+                    [[vShow, this.show]]
+                  )
+              }}
+            </Transition>
+          </div>,
           [
-            vShow,
-            this.displayDirective === 'if' || this.displayed || this.show
+            [
+              vShow,
+              this.displayDirective === 'if' || this.displayed || this.show
+            ]
           ]
-        ]
       )
       : null
   }

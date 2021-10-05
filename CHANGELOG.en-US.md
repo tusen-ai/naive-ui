@@ -2,16 +2,68 @@
 
 ## Pending
 
-### Localization
+### Feats
+
+- `n-breadcrumb-item` add `href` prop.
+- `n-descriptions` add `separator` prop，closes [#1263](https://github.com/TuSimple/naive-ui/issues/1263).
+- `n-dropdown` add `key-field` prop.
+- `n-dropdown` add `label-field` prop.
+- `n-dropdown` add `children-field` prop.
+- `n-menu` add `key-field` prop.
+- `n-menu` add `label-field` prop.
+- `n-menu` add `children-field` prop.
+- `n-data-table` supports using path of the property to get as column key, closes [#1271](https://github.com/TuSimple/naive-ui/issues/1271).
+- `n-switch` add `checked-value` prop, closes [#1234](https://github.com/TuSimple/naive-ui/issues/1234).
+- `n-switch` add `unchecked-value` prop, closes [#1234](https://github.com/TuSimple/naive-ui/issues/1234).
+- `n-checkbox` add `checked-value` prop, closes [#1234](https://github.com/TuSimple/naive-ui/issues/1234).
+- `n-checkbox` add `unchecked-value` prop, closes [#1234](https://github.com/TuSimple/naive-ui/issues/1234).
+- Add `n-collapse-transition` component, closes [#829](https://github.com/TuSimple/naive-ui/issues/829).
+- Add `n-scrollbar` component.
+- `n-dropdown` support options with `type='render'`.
+
+### Fixes
+
+- Fix `n-form-item`'s content is too long and the width is incorrect
+- Fix `n-layout-sider`'s `arrow-circle`'s icon style.
+- Fix `n-upload`'s `show-preview-button` prop not working，closes [#1238](https://github.com/TuSimple/naive-ui/issues/1238).
+- Fix `n-date-picker`'s `date` type of `action` validate error.
+- Fix `n-data-table` throws error when using `selection` and `summary` together, closes [#1276](https://github.com/TuSimple/naive-ui/issues/1276).
+- Fix `n-data-table` selection column's width is collapsed when it is set to fixed, closes [#1283](https://github.com/TuSimple/naive-ui/issues/1283).
+- Fix `n-popconfirm` can't be nested in `n-tooltip`, closes [#872](https://github.com/TuSimple/naive-ui/issues/872).
+- Fix `n-popselect` checkmark overlays on option text, closes [#1282](https://github.com/TuSimple/naive-ui/issues/1282).
+
+## 2.19.3 (2021-09-28)
+
+### Fixes
+
+- Fix `n-data-table` ellipsis not show when last column not set ellipsis, closes [#934](https://github.com/TuSimple/naive-ui/issues/934).
+- Fix `n-grid-item` won't work with responsive config.
+- Fix `n-tabs`'s scroll shadow is not updated when it's resized, closes [#1224](https://github.com/TuSimple/naive-ui/issues/1224).
+
+### Feats
+
+- `n-grid-item` won't display when `span` is 0, closes [#1220](https://github.com/TuSimple/naive-ui/issues/1220).
+- `n-grid` add `item-responsive` prop.
+
+## 2.19.2 (2021-09-26)
+
+### i18n
 
 - Add ukUA locale.
 
 ### Fixes
 
 - Fix `n-global-style` applies style transition on first mount.
-- Fix `n-drawer` border transition [#1211].
-- Fix `n-alert` aria support.
-- Fix `n-checkbox` aria support.
+- Fix `n-drawer` border transition, closes [#1211](https://github.com/TuSimple/naive-ui/issues/1211).
+- Fix `n-input-number`'s `value` prop can't be `null` type.
+- Fix components with rtl support throws error in SSR.
+- Fix components with popover throws error in SSR.
+- Fix global theme overrides not working for `n-select` trigger, closes [#1229](https://github.com/TuSimple/naive-ui/issues/1229).
+
+### Feats
+
+- `n-checkbox` add aria support.
+- `n-alert` aria support.
 
 ## 2.19.1 (2021-09-21)
 
@@ -1118,7 +1170,7 @@ See vue3.md
 - Add `n-space` component.
 - Make `n-drawer` content scrollable.
 
-### Localization
+### i18n
 
 - Add zhCN for `n-log`
 

@@ -2,7 +2,7 @@ import { h, defineComponent, PropType, ref, computed, inject } from 'vue'
 import { NCheckbox, NCheckboxGroup } from '../../../checkbox'
 import { NRadio, NRadioGroup } from '../../../radio'
 import { NButton } from '../../../button'
-import { NScrollbar } from '../../../scrollbar'
+import { NScrollbar } from '../../../_internal'
 import { shouldUseArrayInSingleMode } from '../utils'
 import {
   dataTableInjectionKey,

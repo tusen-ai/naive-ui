@@ -6,7 +6,7 @@ It doesn't look like what it calls.
 
 ```demo
 basic
-dropdown
+custom
 separator
 separator-per-item
 ```
@@ -24,6 +24,7 @@ separator-per-item
 | Name      | Type     | Default     | Description               |
 | --------- | -------- | ----------- | ------------------------- |
 | separator | `string` | `undefined` | BreadcrumbItem separator. |
+| href      | `string` | `undefined` | BreadcrumbItem link.      |
 
 ## Slots
 
