@@ -40,7 +40,7 @@ prefix
 | on-update:page | `(page: number) => void` | `undefined` | 当前页发生改变时的回调函数 |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | 当前分页大小发生改变时的回调函数 |
 
-## Pagination Slots
+### Pagination Slots
 
 | 名称   | 参数                     | 说明     |
 | ------ | ------------------------ | -------- |
