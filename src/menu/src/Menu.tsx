@@ -292,12 +292,14 @@ export default defineComponent({
           common: { cubicBezierEaseInOut },
           self
         } = themeRef.value
-        const { borderRadius, borderColorHorizontal, fontSize } = self
+        const { borderRadius, borderColorHorizontal, fontSize, itemHeight } =
+          self
         const vars: any = {
           '--bezier': cubicBezierEaseInOut,
           '--font-size': fontSize,
           '--border-color-horizontal': borderColorHorizontal,
-          '--border-radius': borderRadius
+          '--border-radius': borderRadius,
+          '--item-height': itemHeight
         }
         if (inverted) {
           vars['--group-text-color'] = self.groupTextColorInverted
