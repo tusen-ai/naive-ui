@@ -1,5 +1,7 @@
 import { InjectionKey, Ref, Slots } from 'vue'
+import { VirtualListInst } from 'vueuc'
 import { NLocale, NDateLocale } from '../../locales'
+import type { ScrollbarInst } from '../../_internal'
 import {
   IsHourDisabled,
   IsMinuteDisabled,
@@ -41,6 +43,8 @@ export type OnClose = (disableUpdateOnClose: boolean) => void
 
 export interface PanelRef {
   $el: HTMLElement
+  monthScrollRef: ScrollbarInst | null
+  yearScrollRef: VirtualListInst | null
 }
 
 // 0 is Monday
@@ -58,6 +62,7 @@ export type DatePickerInjection = {
   updateValueOnCloseRef: Ref<boolean>
   firstDayOfWeekRef: Ref<FirstDayOfWeek | undefined>
   datePickerSlots: Slots
+  scrollYearMonth: (value?: number) => void
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 
