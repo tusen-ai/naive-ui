@@ -22,6 +22,7 @@
 - `n-dropdown` 支持 `type='render'` 的选项
 - `n-data-table` 支持多列排序
 - `n-date-picker` 新增 `first-day-of-week` 属性
+- `n-date-picker` 属性 `type` 支持 `month` 选项
 
 ### Fixes
 
@@ -52,9 +53,6 @@
 ### i18n
 
 - 新增 ukUA locale
-### Feats
-
-- `n-date-picker` 属性 `type` 支持 `month` 选项
 
 ### Fixes
 

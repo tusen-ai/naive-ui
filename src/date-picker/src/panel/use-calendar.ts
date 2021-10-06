@@ -19,7 +19,7 @@ import { usePanelCommon } from './use-panel-common'
 import { IsSingleDateDisabled, datePickerInjectionKey } from '../interface'
 import type { DateItem, MonthItem, YearItem } from '../utils'
 import { VirtualListInst } from 'vueuc'
-import { ScrollbarInst } from '../../../scrollbar'
+import { ScrollbarInst } from '../../../_internal'
 
 const useCalendarProps = {
   ...usePanelCommon.props,
@@ -46,7 +46,8 @@ function useCalendar (
     isSecondDisabledRef,
     localeRef,
     firstDayOfWeekRef,
-    datePickerSlots
+    datePickerSlots,
+    scrollYearMonth
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -222,12 +223,12 @@ function useCalendar (
       newValue = Date.now()
     }
     newValue = getTime(set(newValue, dateItem.dateObject))
-    panelCommon.doUpdateValue(
-      getTime(sanitizeValue(newValue)),
-      type === 'month' || type === 'date'
-    )
-    if (type === 'date' || (type === 'month' && dateItem.type === 'month')) {
+    panelCommon.doUpdateValue(getTime(sanitizeValue(newValue)), type === 'date')
+    if (type === 'date') {
       panelCommon.doClose()
+    } else if (type === 'month') {
+      panelCommon.disableTransitionOneTick()
+      scrollYearMonth(newValue)
     }
   }
   function deriveDateInputValue (time?: number): void {

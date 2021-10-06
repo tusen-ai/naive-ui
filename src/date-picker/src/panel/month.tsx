@@ -1,11 +1,9 @@
-import { h, defineComponent, renderSlot, watchEffect, VNode } from 'vue'
-import { NButton, NxButton } from '../../../button'
-import { NBaseFocusDetector } from '../../../_internal'
-import { useCalendar } from './use-calendar'
-import { warnOnce } from '../../../_utils'
-import { NScrollbar } from '../../../scrollbar'
+import { h, defineComponent, renderSlot, VNode } from 'vue'
 import { VirtualList } from 'vueuc'
-import { MonthItem, YearItem } from '../utils'
+import { NButton, NxButton } from '../../../button'
+import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
+import { useCalendar } from './use-calendar'
+import type { MonthItem, YearItem } from '../utils'
 
 /**
  * Month Panel
@@ -17,18 +15,8 @@ export default defineComponent({
   name: 'MonthPanel',
   props: useCalendar.props,
   setup (props) {
-    if (__DEV__) {
-      watchEffect(() => {
-        if (props.actions?.includes('confirm')) {
-          warnOnce(
-            'date-picker',
-            'The `confirm` action is not supported for n-date-picker of `date` type'
-          )
-        }
-      })
-    }
     const useCalendarRef = useCalendar(props, 'month')
-    const itemRenderer = (
+    const renderItem = (
       item: YearItem | MonthItem,
       i: number,
       mergedClsPrefix: string
@@ -38,7 +26,6 @@ export default defineComponent({
         <div
           data-n-date
           key={i}
-          data-selected={item.selected ? '' : null}
           class={[
             `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
             {
@@ -55,19 +42,13 @@ export default defineComponent({
           onClick={() => handleDateClick(item)}
         >
           {item.type === 'month' ? item.formattedText : item.dateObject.year}
-          {(
-            item.type === 'month' ? item.inCurrentMonth : item.inCurrentYear
-          ) ? (
-            <div class={`${mergedClsPrefix}-date-panel-month-calendar__sup`} />
-              ) : null}
         </div>
       )
     }
-    return { ...useCalendarRef, itemRenderer }
+    return { ...useCalendarRef, renderItem }
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts, itemRenderer } = this
-
+    const { mergedClsPrefix, mergedTheme, shortcuts, renderItem } = this
     return (
       <div
         ref="selfRef"
@@ -80,43 +61,45 @@ export default defineComponent({
           <NScrollbar
             ref="scrollbarInstRef"
             class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
-            // theme={mergedTheme.peers.Scrollbar}
-            // themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+            theme={mergedTheme.peers.Scrollbar}
+            themeOverrides={mergedTheme.peerOverrides.Scrollbar}
             container={this.virtualListContainer}
             content={this.virtualListContent}
             horizontalRailStyle={{ zIndex: 3 }}
             verticalRailStyle={{ zIndex: 3 }}
-            // internalOnUpdateScrollLeft={setHeaderScrollLeft}
           >
-            <VirtualList
-              ref="yearScrollRef"
-              items={this.yearArray.map((yearItem, i) =>
-                itemRenderer(yearItem, i, mergedClsPrefix)
-              )}
-              itemSize={40}
-              showScrollbar={false}
-              onScroll={this.handleVirtualListScroll}
-            >
-              {{
-                default: ({ item }: { item: VNode }) => {
-                  return item
-                }
-              }}
-            </VirtualList>
+            {{
+              default: () => (
+                <VirtualList
+                  ref="yearScrollRef"
+                  items={this.yearArray.map((yearItem, i) =>
+                    renderItem(yearItem, i, mergedClsPrefix)
+                  )}
+                  itemSize={40}
+                  showScrollbar={false}
+                  onScroll={this.handleVirtualListScroll}
+                >
+                  {{
+                    default: ({ item }: { item: VNode }) => {
+                      return item
+                    }
+                  }}
+                </VirtualList>
+              )
+            }}
           </NScrollbar>
-
           <div
             class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
           >
             <NScrollbar
               ref="monthScrollRef"
-              // theme={mergedTheme.peers.Scrollbar}
-              // themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+              theme={mergedTheme.peers.Scrollbar}
+              themeOverrides={mergedTheme.peerOverrides.Scrollbar}
             >
               {{
                 default: () => [
                   ...this.monthArray.map((monthItem, i) =>
-                    itemRenderer(monthItem, i, mergedClsPrefix)
+                    renderItem(monthItem, i, mergedClsPrefix)
                   ),
                   <div
                     class={`${mergedClsPrefix}-date-panel-month-calendar__padding`}
@@ -179,7 +162,18 @@ export default defineComponent({
                   {{ default: () => this.locale.now }}
                 </NButton>
               ) : null}
-              {/** we don't need a confirm button for date picking */}
+              {this.actions?.includes('confirm') ? (
+                <NButton
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
+                  size="tiny"
+                  type="primary"
+                  disabled={this.isDateInvalid}
+                  onClick={this.handleConfirmClick}
+                >
+                  {{ default: () => this.locale.confirm }}
+                </NButton>
+              ) : null}
             </div>
           </div>
         ) : null}

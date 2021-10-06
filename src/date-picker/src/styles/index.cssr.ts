@@ -92,54 +92,65 @@ export default c([
       })
     ]),
     cB('date-panel-month-calendar', {
-      padding: 'var(--calendar-left-padding)',
       display: 'flex',
       gridArea: 'left-calendar'
     }, [
       cE('picker-col', `
         min-width: var(--item-month-cell-width);
-        height: calc(var(--item-month-cell-height) * 7);;
+        height: calc(var(--item-month-cell-height) * 7);
       `, [
+        c('&:first-child', [
+          cE('picker-col-item', [
+            c('&::before', 'left: 4px;')
+          ])
+        ]),
+        c('&:last-child', [
+          cE('picker-col-item', [
+            c('&::before', 'right: 4px;')
+          ])
+        ]),
         cE('padding', `
           height: calc(var(--item-month-cell-height) * 6)
         `)
       ]),
       cE('picker-col-item', `
+        z-index: 0;
         cursor: pointer;
         height: var(--item-month-cell-height);
+        box-sizing: border-box;
+        padding-top: 4px;
         display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
         transition: 
           color .3s var(--bezier),
-          background-color .3s var(--bezier),
+          background-color .3s var(--bezier);
         background: #0000;
         color: var(--item-text-color);
       `, [
-        cNotM('disabled', [
-          c('&:hover', {
-            backgroundColor: 'var(--item-color-hover)'
-          })
-        ]),
-        cM('current', [
-          cE('sup', `
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            content: "";
-            height: 4px;
-            width: 4px;
-            border-radius: 2px;
-            background-color: var(--item-color-active);
-            transition:
-              background-color .2s var(--bezier);
-          `)
-        ]),
-        cM('selected', `
-          background-color: var(--item-color-hover);
-          color: var(--item-color-active);
+        c('&::before', `
+          z-index: -1;
+          content: "";
+          position: absolute;
+          left: 2px;
+          right: 2px;
+          top: 4px;
+          bottom: 0;
+          border-radius: var(--panel-border-radius);
+          transition: 
+            background-color .3s var(--bezier);
         `),
+        cNotM('disabled', [
+          c('&:hover::before', `
+            background-color: var(--item-color-hover);
+          `),
+          cM('selected', `
+            color: var(--item-color-active);
+          `, [
+            c('&::before', 'background-color: var(--item-color-hover);')
+          ])
+        ]),
         cM('disabled', `
           background-color: var(--item-color-disabled);
           cursor: not-allowed;
@@ -284,13 +295,6 @@ export default c([
           background-color .2s var(--bezier),
           color .2s var(--bezier);
       `, [
-        c('&.transition-disabled', {
-          transition: 'none !important'
-        }, [
-          c('&::before, &::after', {
-            transition: 'none !important'
-          })
-        ]),
         cNotM('disabled', [
           cNotM('selected', [
             c('&:hover', {
@@ -430,5 +434,12 @@ export default c([
         `)
       ])
     ])
+  ]),
+  c('[data-n-date].transition-disabled', {
+    transition: 'none !important'
+  }, [
+    c('&::before, &::after', {
+      transition: 'none !important'
+    })
   ])
 ])

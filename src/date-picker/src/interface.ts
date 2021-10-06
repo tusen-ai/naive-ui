@@ -1,7 +1,7 @@
 import { InjectionKey, Ref, Slots } from 'vue'
 import { VirtualListInst } from 'vueuc'
 import { NLocale, NDateLocale } from '../../locales'
-import { ScrollbarInst } from '../../scrollbar'
+import type { ScrollbarInst } from '../../_internal'
 import {
   IsHourDisabled,
   IsMinuteDisabled,
@@ -62,6 +62,7 @@ export type DatePickerInjection = {
   updateValueOnCloseRef: Ref<boolean>
   firstDayOfWeekRef: Ref<FirstDayOfWeek | undefined>
   datePickerSlots: Slots
+  scrollYearMonth: (value?: number) => void
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 

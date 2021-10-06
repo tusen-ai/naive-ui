@@ -22,6 +22,7 @@
 - `n-dropdown` support options with `type='render'`.
 - `n-data-table` supports multiple column sorting.
 - `n-date-picker` add `first-day-of-week` prop.
+- `n-date-picker`'s `type` prop support `month` option.
 
 ### Fixes
 
@@ -52,9 +53,6 @@
 ### i18n
 
 - Add ukUA locale.
-### Feats
-
-- `n-date-picker`'s `type` prop support `month` option.
 
 ### Fixes
 
