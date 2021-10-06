@@ -661,7 +661,7 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
       children: [
         {
           en: 'Collapse Transition',
-          zh: '折叠动画',
+          zh: '折叠渐变',
           enSuffix: true,
           path: '/collapse-transition'
         },
