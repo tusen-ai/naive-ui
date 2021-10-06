@@ -20,7 +20,7 @@ validator-debug
 show-label
 ```
 
-## Props
+## API
 
 ### Form Props
 
@@ -40,6 +40,10 @@ show-label
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 
 #### FormItemRule Type
+
+<n-alert title="注意" type="warning" style="margin-bottom: 16px;">
+  以下并不是规则的全部用法，如果你想了解更多的用法，请参考 <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>。
+</n-alert>
 
 | 属性 | 类型 | 说明 |
 | --- | --- | --- |
@@ -75,8 +79,6 @@ show-label
 
 接受 FormItem & [GridItem](grid#GridItem-Props) 所有的 Props。
 
-## Methods
-
 ### Form Methods
 
 <n-alert type="warning" title="Validate 方法的注意事项" style="margin-bottom: 16px;">
@@ -96,8 +98,6 @@ show-label
 | restoreValidation | `() => void` | 还原到未校验的状态 |
 
 关于 AsyncValidatorOptions，参考 <n-a href="https://github.com/yiminghe/async-validator">async-validator</n-a>。
-
-## Slots
 
 ### Form, FormItem, FormItemGi Slots
 
