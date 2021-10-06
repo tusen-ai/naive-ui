@@ -1,6 +1,18 @@
 # CHANGELOG
 
-## Pending
+## 2.19.5 (2021-10-07)
+
+### Fixes
+
+- 修复 `n-form-item` 中组件内容过长影响 `n-form-item` 宽度
+- 修复 `n-layout-sider` 中 `arrow-circle` 的 icon 样式
+- 修复 `n-upload` 的 `show-preview-button` 属性失效，关闭 [#1238](https://github.com/TuSimple/naive-ui/issues/1238)
+- 修复 `n-date-picker` 的 `date` 类型的 `action` 验证错误
+- 修复 `n-data-table` 在 `selection` 和 `summary` 一起使用时报错，关闭 [#1276](https://github.com/TuSimple/naive-ui/issues/1276)
+- 修复 `n-data-table` 勾选列的宽度在设为 fixed 时候塌陷，关闭 [#1283](https://github.com/TuSimple/naive-ui/issues/1283)
+- 修复 `n-popconfirm` 不能被嵌套于 `n-tooltip` 内，关闭 [#872](https://github.com/TuSimple/naive-ui/issues/872).
+- 修复 `n-popselect` 勾选图标覆盖了文本，关闭 [#1282](https://github.com/TuSimple/naive-ui/issues/1282)
+- 修复 `n-pagination` `buttonColor` 主题变量不生效
 
 ### Feats
 
@@ -24,18 +36,6 @@
 - `n-date-picker` 新增 `first-day-of-week` 属性
 - `n-date-picker` 属性 `type` 支持 `month` 选项
 - `n-popover` 新增 `to` 属性
-
-### Fixes
-
-- 修复 `n-form-item` 中组件内容过长影响 `n-form-item` 宽度
-- 修复 `n-layout-sider` 中 `arrow-circle` 的 icon 样式
-- 修复 `n-upload` 的 `show-preview-button` 属性失效，关闭 [#1238](https://github.com/TuSimple/naive-ui/issues/1238)
-- 修复 `n-date-picker` 的 `date` 类型的 `action` 验证错误
-- 修复 `n-data-table` 在 `selection` 和 `summary` 一起使用时报错，关闭 [#1276](https://github.com/TuSimple/naive-ui/issues/1276)
-- 修复 `n-data-table` 勾选列的宽度在设为 fixed 时候塌陷，关闭 [#1283](https://github.com/TuSimple/naive-ui/issues/1283)
-- 修复 `n-popconfirm` 不能被嵌套于 `n-tooltip` 内，关闭 [#872](https://github.com/TuSimple/naive-ui/issues/872).
-- 修复 `n-popselect` 勾选图标覆盖了文本，关闭 [#1282](https://github.com/TuSimple/naive-ui/issues/1282)
-- 修复 `n-pagination` `buttonColor` 主题变量不生效
 - `n-tree` 的 `on-update:indeterminateKeys` 回调新增选项信息
 - `n-tree` 的 `on-update:expandedKeys` 回调新增选项信息
 - `n-tree` 的 `on-update:checkedKeys` 回调新增选项信息
