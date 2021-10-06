@@ -18,10 +18,6 @@
 
 - `n-breadcrumb-item` add `href` prop.
 - `n-descriptions` add `separator` prop，closes [#1263](https://github.com/TuSimple/naive-ui/issues/1263).
-- `n-tree`'s `on-update:indeterminateKeys` prop add option info.
-- `n-tree`'s `on-update:expandedKeys` prop add option info.
-- `n-tree`'s `on-update:checkedKeys` prop add option info.
-- `n-tree`'s `on-update:selectedKeys` prop add option info.
 - `n-dropdown` add `key-field` prop.
 - `n-dropdown` add `label-field` prop.
 - `n-dropdown` add `children-field` prop.
@@ -40,6 +36,10 @@
 - `n-date-picker` add `first-day-of-week` prop.
 - `n-date-picker`'s `type` prop support `month` option.
 - `n-popover` add `to` prop.
+- `n-tree`'s `on-update:indeterminateKeys` prop add option info.
+- `n-tree`'s `on-update:expandedKeys` prop add option info.
+- `n-tree`'s `on-update:checkedKeys` prop add option info.
+- `n-tree`'s `on-update:selectedKeys` prop add option info.
 
 ## 2.19.3 (2021-09-28)
 
