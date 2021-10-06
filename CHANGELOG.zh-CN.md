@@ -35,6 +35,7 @@
 - 修复 `n-data-table` 勾选列的宽度在设为 fixed 时候塌陷，关闭 [#1283](https://github.com/TuSimple/naive-ui/issues/1283)
 - 修复 `n-popconfirm` 不能被嵌套于 `n-tooltip` 内，关闭 [#872](https://github.com/TuSimple/naive-ui/issues/872).
 - 修复 `n-popselect` 勾选图标覆盖了文本，关闭 [#1282](https://github.com/TuSimple/naive-ui/issues/1282)
+- 修复 `n-pagination` `buttonColor` 主题变量不生效
 
 ## 2.19.3 (2021-09-28)
 
