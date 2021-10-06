@@ -13,7 +13,9 @@ format
 actions
 ```
 
-## Props
+## API
+
+### TimePicker Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |

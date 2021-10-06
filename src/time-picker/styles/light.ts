@@ -28,6 +28,7 @@ export const self = (vars: ThemeCommonVars) => {
     itemTextColorActive: primaryColor,
     itemColorHover: hoverColor,
     itemOpacityDisabled: opacityDisabled,
+    itemBorderRadius: borderRadius,
     borderRadius,
     iconColor,
     iconColorDisabled
