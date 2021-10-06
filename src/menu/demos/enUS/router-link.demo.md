@@ -11,7 +11,7 @@ import { defineComponent, h } from 'vue'
 import { NIcon } from 'naive-ui'
 import { RouterLink } from 'vue-router'
 import {
-  DesktopOutline as WorkIcon,
+  LaptopOutline as WorkIcon,
   LogOutOutline as HomeIcon
 } from '@vicons/ionicons5'
 
