@@ -11,7 +11,7 @@ separator
 separator-per-item
 ```
 
-## Props
+## API
 
 ### Breadcrumb Props
 
@@ -25,8 +25,6 @@ separator-per-item
 | --------- | -------- | ----------- | ------------------------- |
 | separator | `string` | `undefined` | BreadcrumbItem separator. |
 | href      | `string` | `undefined` | BreadcrumbItem link.      |
-
-## Slots
 
 ### Breadcrumb Slots
 

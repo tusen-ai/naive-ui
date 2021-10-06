@@ -13,7 +13,7 @@ button-group
 size
 ```
 
-## Props
+## API
 
 ### Radio Props, RadioButton Props
 

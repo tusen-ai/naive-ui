@@ -21,7 +21,7 @@ footerslot
 update-on-close
 ```
 
-## Props
+## API
 
 ### General Props
 
@@ -90,7 +90,7 @@ update-on-close
 | update-value-on-close | `boolean` | `false` | Whether to update value on close. |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` | Value changed callback. |
 
-## Slots
+### DatePicker Slots
 
 | Name   | Parameters | Description   |
 | ------ | ---------- | ------------- |

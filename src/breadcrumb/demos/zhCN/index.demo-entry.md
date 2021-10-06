@@ -11,7 +11,7 @@ separator
 separator-per-item
 ```
 
-## Props
+## API
 
 ### Breadcrumb Props
 
@@ -24,8 +24,6 @@ separator-per-item
 | 名称      | 类型     | 默认值 | 说明                   |
 | --------- | -------- | ------ | ---------------------- |
 | separator | `string` | `'/'`  | 面包屑子项之间的分隔符 |
-
-## Slots
 
 ### Breadcrumb Slots
 

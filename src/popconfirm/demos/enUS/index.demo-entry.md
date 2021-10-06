@@ -13,7 +13,9 @@ no-icon
 actions
 ```
 
-## Props
+## API
+
+### Popconfirm Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -25,7 +27,7 @@ actions
 
 For more props, see [popover](popover#Props).
 
-## Slots
+### Popconfirm Slots
 
 | Name    | Parameters | Description         |
 | ------- | ---------- | ------------------- |

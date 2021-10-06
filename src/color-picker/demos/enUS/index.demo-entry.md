@@ -12,7 +12,9 @@ modes
 form
 ```
 
-## Props
+## API
+
+### ColorPicker Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |

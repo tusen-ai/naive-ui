@@ -9,7 +9,9 @@ basic
 position
 ```
 
-## Props
+## API
+
+### Affix Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |

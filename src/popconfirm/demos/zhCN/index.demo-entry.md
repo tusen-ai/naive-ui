@@ -13,7 +13,9 @@ no-icon
 actions
 ```
 
-## Props
+## API
+
+### Popconfirm Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -25,7 +27,7 @@ actions
 
 更多 props 请参考 [Popover](popover#Props).
 
-## Slots
+### Popconfirm Slots
 
 | 名称    | 参数 | 说明           |
 | ------- | ---- | -------------- |

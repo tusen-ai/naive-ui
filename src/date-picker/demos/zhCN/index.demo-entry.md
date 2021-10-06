@@ -21,7 +21,7 @@ footerslot
 update-on-close
 ```
 
-## Props
+## API
 
 ### 通用的 Props
 
@@ -90,7 +90,7 @@ update-on-close
 | update-value-on-close | `boolean` | `false` | 关闭面板时是否更新值 |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` | 数据更新时触发的回调函数 |
 
-## Slots
+### DatePicker Slots
 
 | 名称   | 参数 | 说明           |
 | ------ | ---- | -------------- |

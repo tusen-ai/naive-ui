@@ -50,7 +50,9 @@ highlight
 loading
 ```
 
-## Props
+## API
+
+### Log Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -67,7 +69,7 @@ loading
 | on-reach-top | `() => void` | `undefined` | 滚动到顶部的回调函数 |
 | on-reach-bottom | `() => void` | `undefined` | 滚动到底部的回调函数 |
 
-## Methods
+### Log Methods
 
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |

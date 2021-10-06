@@ -15,7 +15,9 @@ custom-prefix
 manual-trigger
 ```
 
-## Props
+## API
+
+### Mention Props
 
 Mention is provided after `v2.2.0`.
 
