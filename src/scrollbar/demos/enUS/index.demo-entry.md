@@ -1,6 +1,8 @@
 # Scrollbar
 
-## Demo
+It looks better but I'm sure it's not as reliable as native scrollbar.
+
+## Demos
 
 ```demo
 basic
