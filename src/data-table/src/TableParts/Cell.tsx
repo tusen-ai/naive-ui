@@ -1,5 +1,5 @@
 import { defineComponent, PropType, VNodeChild, h } from 'vue'
-import { get } from 'lodash'
+import { get } from 'lodash-es'
 import type { MergedTheme } from '../../../_mixins'
 import { NEllipsis } from '../../../ellipsis'
 import { TableBaseColumn, InternalRowData, SummaryCell } from '../interface'
