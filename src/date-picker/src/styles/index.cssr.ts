@@ -99,14 +99,11 @@ export default c([
         min-width: var(--item-month-cell-width);
         height: calc(var(--item-month-cell-height) * 7);
       `, [
-        c('&:first-child', [
+        c('&:first-child', `
+          min-width: calc(var(--item-month-cell-width) + 4px);
+        `, [
           cE('picker-col-item', [
             c('&::before', 'left: 4px;')
-          ])
-        ]),
-        c('&:last-child', [
-          cE('picker-col-item', [
-            c('&::before', 'right: 4px;')
           ])
         ]),
         cE('padding', `
@@ -133,8 +130,8 @@ export default c([
           z-index: -1;
           content: "";
           position: absolute;
-          left: 2px;
-          right: 2px;
+          left: 0;
+          right: 4px;
           top: 4px;
           bottom: 0;
           border-radius: var(--panel-border-radius);
