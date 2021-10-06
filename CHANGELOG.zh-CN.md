@@ -52,6 +52,9 @@
 ### i18n
 
 - 新增 ukUA locale
+### Feats
+
+- `n-date-picker` 属性 `type` 支持 `month` 选项
 
 ### Fixes
 

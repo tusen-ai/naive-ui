@@ -40,6 +40,8 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --item-size
 // --item-cell-width
 // --item-cell-height
+// --item-month-cell-width
+// --item-month-cell-height
 // --item-text-color
 // --item-color-included
 // --item-color-disabled
@@ -89,6 +91,65 @@ export default c([
         gridArea: 'right-calendar'
       })
     ]),
+    cB('date-panel-month-calendar', {
+      padding: 'var(--calendar-left-padding)',
+      display: 'flex',
+      gridArea: 'left-calendar'
+    }, [
+      cE('picker-col', `
+        min-width: var(--item-month-cell-width);
+        height: calc(var(--item-month-cell-height) * 7);;
+      `, [
+        cE('padding', `
+          height: calc(var(--item-month-cell-height) * 6)
+        `)
+      ]),
+      cE('picker-col-item', `
+        cursor: pointer;
+        height: var(--item-month-cell-height);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transition: 
+          color .3s var(--bezier),
+          background-color .3s var(--bezier),
+        background: #0000;
+        color: var(--item-text-color);
+      `, [
+        cNotM('disabled', [
+          c('&:hover', {
+            backgroundColor: 'var(--item-color-hover)'
+          })
+        ]),
+        cM('current', [
+          cE('sup', `
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            content: "";
+            height: 4px;
+            width: 4px;
+            border-radius: 2px;
+            background-color: var(--item-color-active);
+            transition:
+              background-color .2s var(--bezier);
+          `)
+        ]),
+        cM('selected', `
+          background-color: var(--item-color-hover);
+          color: var(--item-color-active);
+        `),
+        cM('disabled', `
+          background-color: var(--item-color-disabled);
+          cursor: not-allowed;
+        `)
+      ]),
+      cM('end', {
+        padding: 'var(--calendar-right-padding)',
+        gridArea: 'right-calendar'
+      })
+    ]),
     cM('date', {
       gridTemplateAreas: `
         "left-calendar"
@@ -117,6 +178,13 @@ export default c([
         "left-calendar divider right-calendar"
         "footer footer footer"
         "action action action"
+      `
+    }),
+    cM('month', {
+      gridTemplateAreas: `
+        "left-calendar"
+        "footer"
+        "action"
       `
     }),
     cB('date-panel-footer', {

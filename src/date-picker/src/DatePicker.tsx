@@ -12,11 +12,12 @@ import {
   CSSProperties,
   toRef,
   Ref,
-  watchEffect
+  watchEffect,
+  nextTick
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { format, getTime, isValid } from 'date-fns'
+import { format, getTime, isValid, getYear } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
 import { happensIn } from 'seemly'
 import { InputInst, InputProps, NInput } from '../../input'
@@ -37,6 +38,7 @@ import DatetimePanel from './panel/datetime'
 import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
+import MonthPanel from './panel/month'
 import style from './styles/index.cssr'
 import { DatePickerTheme } from '../styles/light'
 import {
@@ -56,7 +58,8 @@ const DATE_FORMAT = {
   date: 'yyyy-MM-dd',
   datetime: 'yyyy-MM-dd HH:mm:ss',
   daterange: 'yyyy-MM-dd',
-  datetimerange: 'yyyy-MM-dd HH:mm:ss'
+  datetimerange: 'yyyy-MM-dd HH:mm:ss',
+  month: 'yyyy-MM'
 }
 
 const datePickerProps = {
@@ -90,7 +93,7 @@ const datePickerProps = {
   size: String as PropType<'small' | 'medium' | 'large'>,
   type: {
     type: String as PropType<
-    'date' | 'datetime' | 'daterange' | 'datetimerange'
+    'date' | 'datetime' | 'daterange' | 'datetimerange' | 'month'
     >,
     default: 'date'
   },
@@ -335,6 +338,24 @@ export default defineComponent({
         disableUpdateOnClose
       })
     }
+    function scrollTimer (): void {
+      if (!panelInstRef.value) return
+      const { monthScrollRef, yearScrollRef } = panelInstRef.value
+      if (monthScrollRef) {
+        const month = monthScrollRef.contentRef?.querySelector(
+          '[data-selected]'
+        ) as HTMLElement
+        if (month) {
+          monthScrollRef.scrollTo({ top: month.offsetTop })
+        }
+      }
+      if (yearScrollRef) {
+        if (mergedValueRef.value) {
+          const yearIndex = getYear(mergedValueRef.value as number) - 1900
+          yearScrollRef.scrollTo({ top: yearIndex * 40 })
+        }
+      }
+    }
     // --- Panel update value
     function handlePanelUpdateValue (
       value: Value | null,
@@ -476,6 +497,9 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
+      if (props.type === 'month') {
+        void nextTick(scrollTimer)
+      }
     }
     function closeCalendar ({
       returnFocus,
@@ -616,6 +640,8 @@ export default defineComponent({
             itemSize,
             itemCellWidth,
             itemCellHeight,
+            itemMonthCellWidth,
+            itemMonthCellHeight,
             calendarTitlePadding,
             calendarTitleHeight,
             calendarDaysHeight,
@@ -669,6 +695,8 @@ export default defineComponent({
           '--item-size': itemSize,
           '--item-cell-width': itemCellWidth,
           '--item-cell-height': itemCellHeight,
+          '--item-month-cell-width': itemMonthCellWidth,
+          '--item-month-cell-height': itemMonthCellHeight,
           '--item-text-color': itemTextColor,
           '--item-color-included': itemColorIncluded,
           '--item-color-disabled': itemColorDisabled,
@@ -828,6 +856,8 @@ export default defineComponent({
                                   <DaterangePanel {...commonPanelProps} />
                               ) : this.type === 'datetimerange' ? (
                                   <DatetimerangePanel {...commonPanelProps} />
+                              ) : this.type === 'month' ? (
+                                  <MonthPanel {...commonPanelProps} />
                               ) : (
                                   <DatePanel {...commonPanelProps} />
                               ),

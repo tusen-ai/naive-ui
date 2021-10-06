@@ -5,9 +5,12 @@ import {
   getMonth,
   getYear,
   isSameMonth,
+  isSameYear,
   getTime,
   startOfMonth,
   addDays,
+  addMonths,
+  addYears,
   getDay,
   parse,
   format,
@@ -44,7 +47,30 @@ function matchDate (
   }
 }
 
+function matchMonth (
+  sourceTime: number[] | number,
+  patternTime: number | Date
+): boolean {
+  if (Array.isArray(sourceTime)) {
+    return sourceTime.some((time) => isSameMonth(time, patternTime))
+  } else {
+    return isSameMonth(sourceTime, patternTime)
+  }
+}
+
+function matchYear (
+  sourceTime: number[] | number,
+  patternTime: number | Date
+): boolean {
+  if (Array.isArray(sourceTime)) {
+    return sourceTime.some((time) => isSameYear(time, patternTime))
+  } else {
+    return isSameYear(sourceTime, patternTime)
+  }
+}
+
 export interface DateItem {
+  type: 'day'
   dateObject: {
     date: number
     month: number
@@ -55,6 +81,28 @@ export interface DateItem {
   inSpan: boolean
   startOfSpan: boolean
   endOfSpan: boolean
+  selected: boolean
+  ts: number
+}
+
+export interface MonthItem {
+  type: 'month'
+  dateObject: {
+    month: number
+    year: number
+  }
+  inCurrentMonth: boolean
+  selected: boolean
+  ts: number
+  formattedText?: string
+}
+
+export interface YearItem {
+  type: 'year'
+  dateObject: {
+    year: number
+  }
+  inCurrentYear: boolean
   selected: boolean
   ts: number
 }
@@ -76,6 +124,7 @@ function dateItem (
     if (matchDate(valueTs[1], time)) endOfSpan = true
   }
   return {
+    type: 'day',
     dateObject: {
       date: getDate(time),
       month: getMonth(time),
@@ -88,6 +137,39 @@ function dateItem (
     endOfSpan,
     selected: valueTs !== null && matchDate(valueTs, time),
     ts: getTime(time)
+  }
+}
+
+function monthItem (
+  monthTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): MonthItem {
+  return {
+    type: 'month',
+    dateObject: {
+      month: getMonth(monthTs),
+      year: getYear(monthTs)
+    },
+    inCurrentMonth: isSameMonth(currentTs, monthTs),
+    selected: valueTs !== null && matchMonth(valueTs, monthTs),
+    ts: getTime(monthTs)
+  }
+}
+
+function yearItem (
+  yearTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): YearItem {
+  return {
+    type: 'year',
+    dateObject: {
+      year: getYear(yearTs)
+    },
+    inCurrentYear: isSameYear(currentTs, yearTs),
+    selected: valueTs !== null && matchYear(valueTs, yearTs),
+    ts: getTime(yearTs)
   }
 }
 
@@ -141,6 +223,42 @@ function dateArray (
   return calendarDays
 }
 
+function monthArray (
+  monthTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): MonthItem[] {
+  const calendarMonths = []
+  const cachedMonth = getMonth(monthTs)
+
+  for (let i = 0; i < 12; i++) {
+    calendarMonths.push(
+      monthItem(
+        getTime(addMonths(monthTs, i - cachedMonth)),
+        valueTs,
+        currentTs
+      )
+    )
+  }
+  return calendarMonths
+}
+
+function yearArray (
+  yearTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): YearItem[] {
+  const calendarYears = []
+  const cachedYear = getYear(yearTs)
+
+  for (let i = 1900; i < 2100; i++) {
+    calendarYears.push(
+      yearItem(getTime(addYears(yearTs, i - cachedYear)), valueTs, currentTs)
+    )
+  }
+  return calendarYears
+}
+
 function strictParse (
   string: string,
   pattern: string,
@@ -155,4 +273,10 @@ function strictParse (
   else return new Date(NaN)
 }
 
-export { dateArray, strictParse, getDerivedTimeFromKeyboardEvent }
+export {
+  dateArray,
+  monthArray,
+  yearArray,
+  strictParse,
+  getDerivedTimeFromKeyboardEvent
+}
