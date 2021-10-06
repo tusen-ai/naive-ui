@@ -23,6 +23,7 @@
 - `n-data-table` supports multiple column sorting.
 - `n-date-picker` add `first-day-of-week` prop.
 - `n-date-picker`'s `type` prop support `month` option.
+- `n-popover` add `to` prop.
 
 ### Fixes
 

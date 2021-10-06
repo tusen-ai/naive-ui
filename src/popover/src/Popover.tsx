@@ -16,7 +16,13 @@ import {
 } from 'vue'
 import { VBinder, VTarget, FollowerPlacement, BinderInst } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
-import { call, keep, getFirstSlotVNode, warnOnce } from '../../_utils'
+import {
+  call,
+  keep,
+  getFirstSlotVNode,
+  warnOnce,
+  useAdjustedTo
+} from '../../_utils'
 import type {
   ExtractPublicPropTypes,
   ExtractInternalPropTypes,
@@ -154,6 +160,7 @@ export const popoverBaseProps = {
   MaybeArray<(value: boolean) => void>
   >,
   zIndex: Number,
+  to: useAdjustedTo.propTo,
   internalSyncTargetWithParent: Boolean,
   internalInheritedEventHandlers: {
     type: Array as PropType<TriggerEventHandlers[]>,
