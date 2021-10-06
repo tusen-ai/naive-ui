@@ -14,8 +14,8 @@ import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formatLength, call, warn } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
-import { NScrollbar } from '../../scrollbar'
-import type { ScrollbarProps, ScrollbarInst } from '../../scrollbar'
+import { NScrollbar } from '../../_internal'
+import type { ScrollbarProps, ScrollbarInst } from '../../_internal'
 import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
 import style from './styles/layout-sider.cssr'
@@ -221,11 +221,14 @@ export default defineComponent({
           vars['--color'] = self.siderColorInverted
           vars['--text-color'] = self.textColorInverted
           vars['--border-color'] = self.siderBorderColorInverted
+          vars['--toggle-button-icon-color'] =
+            self.siderToggleButtonIconColorInverted
           vars.__invertScrollbar = self.__invertScrollbar
         } else {
           vars['--color'] = self.siderColor
           vars['--text-color'] = self.textColor
           vars['--border-color'] = self.siderBorderColor
+          vars['--toggle-button-icon-color'] = self.siderToggleButtonIconColor
         }
         return vars
       }),

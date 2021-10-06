@@ -52,6 +52,7 @@ export const self = (vars: ThemeCommonVars) => {
     itemIconColorActive: primaryColor,
     itemIconColorChildActive: primaryColor,
     itemIconColorCollapsed: textColor1,
+    itemHeight: '42px',
     arrowColor: primaryColor,
     arrowColorHover: primaryColorHover,
     arrowColorChildActive: primaryColor,

@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NSwitch } from '../index'
 
 describe('n-switch', () => {
@@ -12,6 +13,47 @@ describe('n-switch', () => {
 
     await wrapper.setProps({ disabled: true })
     expect(wrapper.find('.n-switch').classes()).toContain('n-switch--disabled')
+  })
+
+  it('should work with `checked-value` prop', async () => {
+    const onUpdateValue = jest.fn()
+    const wrapper = mount(NSwitch, {
+      props: {
+        checkedValue: 'fooo',
+        uncheckedValue: 'barr',
+        onUpdateValue
+      }
+    })
+    await wrapper.trigger('click')
+    expect(onUpdateValue).toHaveBeenCalledWith('fooo')
+    await wrapper.trigger('click')
+    expect(onUpdateValue).toHaveBeenCalledWith('barr')
+    await wrapper.trigger('click')
+    expect(onUpdateValue).toHaveBeenCalledWith('fooo')
+  })
+
+  it('should work with `checked-value` prop in type layer', () => {
+    const onUpdateValue1: (value: string) => void = () => {}
+    const onUpdateValue2: (value: number) => void = () => {}
+    const onUpdateValue3: (value: boolean) => void = () => {}
+    let _ = (
+      <NSwitch
+        onUpdateValue={onUpdateValue1}
+        value={'123'}
+        defaultValue={'123'}
+      />
+    )
+    _ = (
+      <NSwitch onUpdateValue={onUpdateValue2} value={123} defaultValue={123} />
+    )
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _ = (
+      <NSwitch
+        onUpdateValue={onUpdateValue3}
+        value={true}
+        defaultValue={false}
+      />
+    )
   })
 
   it('should work with `size` prop', async () => {

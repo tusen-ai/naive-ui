@@ -24,6 +24,7 @@ import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-h
 // --item-icon-color-active
 // --item-icon-color-collapsed
 // --item-icon-color-child-active
+// --item-height
 export default c([
   cB('menu', `
     background-color: var(--color);
@@ -91,12 +92,12 @@ export default c([
         })
       ])
     ]),
-    cB('menu-item', {
-      transition: 'background-color .3s var(--bezier)',
-      height: '42px',
-      marginTop: '6px',
-      position: 'relative'
-    }, [
+    cB('menu-item', `
+      transition: background-color .3s var(--bezier);
+      height: var(--item-height);
+      margin-top: 6px;
+      position: relative;
+    `, [
       c('&::before', `
         z-index: auto;
         content: "";
@@ -253,9 +254,9 @@ export default c([
       position: 'relative',
       marginTop: '6px'
     }, [
-      cB('menu-item-content', {
-        height: '42px'
-      }),
+      cB('menu-item-content', `
+        height: var(--item-height);
+      `),
       cB('submenu-children', {
         overflow: 'hidden',
         padding: 0

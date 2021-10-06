@@ -13,7 +13,9 @@ expand-trigger
 custom-tooltip
 ```
 
-## Props
+## API
+
+### Ellipsis Props
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
@@ -21,7 +23,7 @@ custom-tooltip
 | line-clamp | `number \| string` | `undefined` | Maximum lines. | 2.1.0 |
 | tooltip | `boolean \| TooltipProps` | `true` | Tooltip properties. | 2.1.0 |
 
-## Slots
+### Ellipsis Slots
 
 | Name    | Parameters | Description                           |
 | ------- | ---------- | ------------------------------------- |

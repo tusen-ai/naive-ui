@@ -16,7 +16,7 @@ import {
   NConfigProvider
 } from '../../config-provider'
 import { NPopover } from '../../popover'
-import { NScrollbar } from '../../scrollbar'
+import { NScrollbar } from '../../_internal'
 import { NCollapse, NCollapseItem } from '../../collapse'
 import { NInput } from '../../input'
 import { NSpace } from '../../space'

@@ -15,7 +15,9 @@ height
 processing
 ```
 
-## Props
+## API
+
+### Progress Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -36,7 +38,7 @@ processing
 | type | `'line' \| 'circle' \| 'multiple-circle'` | `line` | Progress type. |
 | unit | `string` | `%` | Progress unit. |
 
-## Slots
+### Progress Slots
 
 | Name    | Parameters | Description                                     |
 | ------- | ---------- | ----------------------------------------------- |

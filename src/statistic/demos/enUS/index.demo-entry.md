@@ -8,14 +8,16 @@ As simple as it looks.
 basic
 ```
 
-## Props
+## API
+
+### Statistic Props
 
 | Name  | Type     | Default     | Description              |
 | ----- | -------- | ----------- | ------------------------ |
 | label | `string` | `undefined` | Label of the statistics. |
 | value | `string` | `undefined` | Statistics value.        |
 
-## Slots
+### Statistic Slots
 
 | Name    | Parameters | Description   |
 | ------- | ---------- | ------------- |

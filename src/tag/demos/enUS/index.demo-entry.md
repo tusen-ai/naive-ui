@@ -14,9 +14,9 @@ shape
 color
 ```
 
-## Props
+## API
 
-### Tag
+### Tag Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -32,7 +32,7 @@ color
 | on-click | `(e: MouseEvent) => void` | `undefined` | Click callback. |
 | on-update:checked | `(value: boolean) => void` | `undefined` | Checked status change callback. |
 
-## Slots
+### Tag Slots
 
 | Name    | Parameters | Description    |
 | ------- | ---------- | -------------- |

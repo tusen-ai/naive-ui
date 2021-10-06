@@ -247,7 +247,7 @@ const uploadProps = {
     type: Boolean,
     default: true
   },
-  showPreivewButton: {
+  showPreviewButton: {
     type: Boolean,
     default: true
   },
@@ -492,7 +492,7 @@ export default defineComponent({
       XhrMap,
       submit,
       doChange,
-      showPreivewButtonRef: toRef(props, 'showPreivewButton'),
+      showPreviewButtonRef: toRef(props, 'showPreviewButton'),
       onPreviewRef: toRef(props, 'onPreview'),
       getFileThumbnailUrl,
       listTypeRef: toRef(props, 'listType'),

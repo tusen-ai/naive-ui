@@ -16,7 +16,9 @@ validator
 show-button
 ```
 
-## Props
+## API
+
+### InputNumber Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -37,7 +39,7 @@ show-button
 | on-focus | `(event: FocusEvent) => void` | `undefined` | Callback when focused. |
 | on-update:value | `(value: number \| null) => void` | `undefined` | Callback when the component's value changes. |
 
-### Input Slots
+### InputNumber Slots
 
 | Name   | Parameters | Description                    |
 | ------ | ---------- | ------------------------------ |

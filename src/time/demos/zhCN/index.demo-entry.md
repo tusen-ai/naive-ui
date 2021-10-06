@@ -12,7 +12,9 @@ relative
 unix
 ```
 
-## Props
+## API
+
+### Time Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |

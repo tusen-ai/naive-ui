@@ -1,4 +1,5 @@
 import { defineComponent, PropType, VNodeChild, h } from 'vue'
+import { get } from 'lodash'
 import type { MergedTheme } from '../../../_mixins'
 import { NEllipsis } from '../../../ellipsis'
 import { TableBaseColumn, InternalRowData, SummaryCell } from '../interface'
@@ -38,7 +39,7 @@ export default defineComponent({
       if (isSummary) {
         cell = (row[key] as SummaryCell).value
       } else {
-        cell = row[key] as any
+        cell = get(row, key) as any
       }
     }
     const tooltip = typeof ellipsis === 'object' ? ellipsis.tooltip : undefined

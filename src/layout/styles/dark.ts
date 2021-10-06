@@ -1,5 +1,5 @@
 import { commonDark } from '../../_styles/common'
-import { scrollbarDark } from '../../scrollbar/styles'
+import { scrollbarDark } from '../../_internal/scrollbar/styles'
 import type { LayoutTheme } from './light'
 import { composite } from 'seemly'
 
@@ -38,6 +38,8 @@ const layoutDark: LayoutTheme = {
       siderColorInverted: cardColor,
       siderToggleButtonBorder: '1px solid transparent',
       siderToggleButtonColor: popoverColor,
+      siderToggleButtonIconColor: textColor2,
+      siderToggleButtonIconColorInverted: textColor2,
       siderToggleBarColor: composite(bodyColor, scrollbarColor),
       siderToggleBarColorHover: composite(bodyColor, scrollbarColorHover),
       __invertScrollbar: 'false'

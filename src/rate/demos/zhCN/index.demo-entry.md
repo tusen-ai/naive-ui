@@ -13,7 +13,9 @@ allow-half
 readonly
 ```
 
-## Props
+## API
+
+### Rate Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -26,7 +28,7 @@ readonly
 | value | `number` | `undefined` | 绑定已激活图标个数 |
 | on-update:value | `(value: number) => void` | `undefined` | 激活图标个数改变时触发 |
 
-## Slots
+### Rate Slots
 
 | 名称    | 参数 | 说明       |
 | ------- | ---- | ---------- |

@@ -9,7 +9,7 @@ basic
 group
 ```
 
-## Props
+## API
 
 ### Image Props
 
@@ -30,8 +30,6 @@ group
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |
-
-## Slots
 
 ### ImageGroup Slots
 

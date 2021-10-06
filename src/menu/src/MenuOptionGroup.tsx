@@ -36,7 +36,7 @@ export default defineComponent({
       paddingLeftRef: MenuChild.paddingLeft
     })
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { mergedClsPrefixRef } = inject(menuInjectionKey)!
+    const { mergedClsPrefixRef, props: menuProps } = inject(menuInjectionKey)!
     return function () {
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       const paddingLeft = MenuChild.paddingLeft.value
@@ -53,7 +53,9 @@ export default defineComponent({
             {render(props.title)}
             {props.extra ? <> {render(props.extra)}</> : null}
           </span>
-          <div>{props.tmNodes.map((tmNode) => itemRenderer(tmNode))}</div>
+          <div>
+            {props.tmNodes.map((tmNode) => itemRenderer(tmNode, menuProps))}
+          </div>
         </div>
       )
     }

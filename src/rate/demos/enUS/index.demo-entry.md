@@ -13,9 +13,11 @@ allow-half
 readonly
 ```
 
-## Props
+## API
 
-| 名称 | 类型 | 默认值 | 说明 |
+### Rate Props
+
+| Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | allow-half | `boolean` | `false` | Allow activated half of the icon. |
 | color | `string` | `undefined` | Icon color activated(support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
@@ -26,7 +28,7 @@ readonly
 | value | `number` | `undefined` | Value of activated icons. |
 | on-update:value | `(value: number) => void` | `undefined` | Callback when update value. |
 
-## Slots
+### Rate Slots
 
 | Name    | Parameters | Description           |
 | ------- | ---------- | --------------------- |

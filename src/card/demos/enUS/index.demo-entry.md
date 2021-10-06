@@ -19,7 +19,9 @@ custom-style
 embedded
 ```
 
-## Props
+## Card
+
+### Card Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -34,7 +36,7 @@ embedded
 | title | `string` | `undefined` | Card title. |
 | on-close | `() => void` | `undefined` | Callback function triggered upon closing the card. |
 
-## Slots
+### Card Slots
 
 | Name         | Parameters | Description             |
 | ------------ | ---------- | ----------------------- |

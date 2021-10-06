@@ -27,6 +27,7 @@ size
 | label-align | `'center' \| 'left' \| 'right'` | `'left'` | label 对齐方式 |
 | label-placement | `'top' \| 'left'` | `'top'` | label 显示位置 |
 | label-style | `Object \| string` | `undefined` | label 的样式 |
+| separator | `string` | `':'` | 分隔符，`label-placement` 为 `left` 并且　`bordered`　为 `false`　时生效 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | title | `string` | `undefined` | 标题 |
 

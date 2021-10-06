@@ -17,7 +17,7 @@ dark-3-debug
 dark-4-debug
 ```
 
-## Props
+## API
 
 ### Drawer Props
 
@@ -46,8 +46,6 @@ dark-4-debug
 | header-style | `string \| Object` | `undefined` | 主体 header 的样式 |
 | native-scrollbar | `boolean` | `true` | 主体部分是否使用原生滚动条 |
 | title | `string` | `undefined` | 主体的标题 |
-
-## Slots
 
 ### Drawer Slots
 

@@ -14,6 +14,11 @@ export default cB('base-select-menu', `
     box-shadow .3s var(--bezier);
   background-color: var(--color);
 `, [
+  cM('multiple', [
+    cB('base-select-option', `
+      padding-right: 28px;
+    `)
+  ]),
   cB('scrollbar', `
     max-height: var(--height);
   `),
@@ -113,11 +118,6 @@ export default cB('base-select-menu', `
       fadeInScaleUpTransition({
         enterScale: '0.5'
       })
-    ]),
-    cM('multiple', [
-      cB('base-select-option', `
-        padding-right: 28px;
-      `)
     ])
   ])
 ])

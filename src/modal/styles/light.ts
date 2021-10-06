@@ -1,4 +1,4 @@
-import { scrollbarLight } from '../../scrollbar/styles'
+import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { dialogLight } from '../../dialog/styles'
 import { cardLight } from '../../card/styles'
 import { commonLight } from '../../_styles/common'

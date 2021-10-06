@@ -107,8 +107,6 @@ All the properties can be modified dynamically.
 | ------- | ---- | --------------- |
 | destroy | `()` | Close `dialog`. |
 
-## Props
-
 ### Dialog Props
 
 | Name | Type | Default | Description |
@@ -127,8 +125,6 @@ All the properties can be modified dynamically.
 | on-close | `() => void` | `undefined` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |
 | on-negative-click | `() => void` | `undefined` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |
 | on-positive-click | `() => void` | `undefined` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |
-
-## Slots
 
 ### Dialog Slots
 

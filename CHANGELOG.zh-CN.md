@@ -1,5 +1,46 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-breadcrumb-item` 新增 `href` 属性
+- `n-descriptions` 新增 `separator` 属性，关闭 [#1263](https://github.com/TuSimple/naive-ui/issues/1263)
+- `n-dropdown` 新增 `key-field` 属性
+- `n-dropdown` 新增 `label-field` 属性
+- `n-dropdown` 新增 `children-field` 属性
+- `n-menu` 新增 `key-field` 属性
+- `n-menu` 新增 `label-field` 属性
+- `n-menu` 新增 `children-field` 属性
+- `n-data-table` 支持使用访问属性路径作为列的 key，关闭 [#1271](https://github.com/TuSimple/naive-ui/issues/1271)
+- `n-switch` 新增 `checked-value` 属性，关闭 [#1234](https://github.com/TuSimple/naive-ui/issues/1234)
+- `n-switch` 新增 `unchecked-value` 属性，关闭 [#1234](https://github.com/TuSimple/naive-ui/issues/1234)
+- `n-checkbox` 新增 `checked-value` 属性，关闭 [#1234](https://github.com/TuSimple/naive-ui/issues/1234)
+- `n-checkbox` 新增 `unchecked-value` 属性，关闭 [#1234](https://github.com/TuSimple/naive-ui/issues/1234)
+- 新增 `n-collapse-transition` 组件，关闭 [#829](https://github.com/TuSimple/naive-ui/issues/829).
+- 新增 `n-scrollbar` 组件
+- `n-dropdown` 支持 `type='render'` 的选项
+- `n-data-table` 支持多列排序
+- `n-date-picker` 新增 `first-day-of-week` 属性
+- `n-date-picker` 属性 `type` 支持 `month` 选项
+- `n-popover` 新增 `to` 属性
+
+### Fixes
+
+- 修复 `n-form-item` 中组件内容过长影响 `n-form-item` 宽度
+- 修复 `n-layout-sider` 中 `arrow-circle` 的 icon 样式
+- 修复 `n-upload` 的 `show-preview-button` 属性失效，关闭 [#1238](https://github.com/TuSimple/naive-ui/issues/1238)
+- 修复 `n-date-picker` 的 `date` 类型的 `action` 验证错误
+- 修复 `n-data-table` 在 `selection` 和 `summary` 一起使用时报错，关闭 [#1276](https://github.com/TuSimple/naive-ui/issues/1276)
+- 修复 `n-data-table` 勾选列的宽度在设为 fixed 时候塌陷，关闭 [#1283](https://github.com/TuSimple/naive-ui/issues/1283)
+- 修复 `n-popconfirm` 不能被嵌套于 `n-tooltip` 内，关闭 [#872](https://github.com/TuSimple/naive-ui/issues/872).
+- 修复 `n-popselect` 勾选图标覆盖了文本，关闭 [#1282](https://github.com/TuSimple/naive-ui/issues/1282)
+- 修复 `n-pagination` `buttonColor` 主题变量不生效
+- `n-tree` 的 `on-update:indeterminateKeys` 回调新增选项信息
+- `n-tree` 的 `on-update:expandedKeys` 回调新增选项信息
+- `n-tree` 的 `on-update:checkedKeys` 回调新增选项信息
+- `n-tree` 的 `on-update:selectedKeys` 回调新增选项信息
+
 ## 2.19.3 (2021-09-28)
 
 ### Fixes

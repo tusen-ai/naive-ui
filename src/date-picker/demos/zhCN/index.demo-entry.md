@@ -9,6 +9,7 @@ date
 datetime
 daterange
 datetimerange
+month
 size
 disabled
 disabled-time
@@ -20,7 +21,7 @@ footerslot
 update-on-close
 ```
 
-## Props
+## API
 
 ### 通用的 Props
 
@@ -29,10 +30,11 @@ update-on-close
 | clearable | `boolean` | `false` | 是否支持清除 |
 | default-value | `number \| [number, number] \| null` | `null` | 默认被选中的日期的时间戳 |
 | disabled | `boolean` | `false` | 是否禁用 |
+| first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | 日历上一周的开始，0 代表周一 |
 | input-readonly | `boolean` | `false` | 设置输入框为只读（避免在移动设备上打开虚拟键盘） |
 | shortcuts | `Record<string, number \| [number, number]>` | `undefined` | 自定义快捷按钮 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
-| type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange'` | `'date'` | Date Picker 的类型 |
+| type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange' \|'month'` | `'date'` | Date Picker 的类型 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |
 | on-focus | `() => void` | `undefined` | 用户 focus 时执行的回调 |
@@ -88,7 +90,7 @@ update-on-close
 | update-value-on-close | `boolean` | `false` | 关闭面板时是否更新值 |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` | 数据更新时触发的回调函数 |
 
-## Slots
+### DatePicker Slots
 
 | 名称   | 参数 | 说明           |
 | ------ | ---- | -------------- |

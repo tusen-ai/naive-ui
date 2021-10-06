@@ -10,7 +10,9 @@ content
 vertical
 ```
 
-## Props
+## API
+
+### Divider Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -18,7 +20,7 @@ vertical
 | title-placement | `'left' \| 'right' \| 'center'` | `'center'` | Title placement. |
 | vertical | `boolean` | `false` | Whether to show vertical direction. |
 
-## Slots
+### Divider Slots
 
 | Name    | Parameters | Description           |
 | ------- | ---------- | --------------------- |

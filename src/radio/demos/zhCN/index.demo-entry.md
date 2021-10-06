@@ -14,7 +14,7 @@ size
 radio-focus-debug
 ```
 
-## Props
+## API
 
 ### Radio Props, RadioButton Props
 

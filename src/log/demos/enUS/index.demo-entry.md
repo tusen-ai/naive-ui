@@ -50,7 +50,9 @@ highlight
 loading
 ```
 
-## Props
+## API
+
+### Log Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -67,7 +69,7 @@ loading
 | on-reach-top | `() => void` | `undefined` | Scroll to the top callback function. |
 | on-reach-bottom | `() => void` | `undefined` | Scroll to the bottom callback function. |
 
-## Methods
+### Log Methods
 
 | Name | Parameters | Description |
 | --- | --- | --- |

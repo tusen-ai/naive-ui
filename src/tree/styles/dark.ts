@@ -1,6 +1,6 @@
 import { changeColor } from 'seemly'
 import { checkboxDark } from '../../checkbox/styles'
-import { scrollbarDark } from '../../scrollbar/styles'
+import { scrollbarDark } from '../../_internal/scrollbar/styles'
 import { commonDark } from '../../_styles/common'
 import type { TreeTheme } from './light'
 import { self } from './light'

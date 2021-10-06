@@ -10,7 +10,9 @@ custom-icon
 depth
 ```
 
-## Props
+## API
+
+### Icon Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -18,7 +20,7 @@ depth
 | depth | `1 \| 2 \| 3 \| 4 \| 5` | `undefined` | 图标深度 |
 | size | `number \| string` | `undefined` | 图标大小（当不指定单位时，默认单位: `px`） |
 
-## Slots
+### Icon Slots
 
 | 名称    | 参数 | 说明       |
 | ------- | ---- | ---------- |

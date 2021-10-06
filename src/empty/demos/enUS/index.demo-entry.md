@@ -10,7 +10,9 @@ icon
 size
 ```
 
-## Props
+## API
+
+### Empty Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -18,7 +20,7 @@ size
 | show-description | `boolean` | `true` | Whether to show description of empty. |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | Empty's size. |
 
-## Slots
+### Empty Slots
 
 | Name    | Parameters | Description                  |
 | ------- | ---------- | ---------------------------- |

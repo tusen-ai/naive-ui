@@ -13,7 +13,7 @@ responsive-item
 collapse
 ```
 
-## Props
+## API
 
 ### Grid Props
 
@@ -34,8 +34,6 @@ collapse
 | offset | `number \| ResponsiveDescription` | `0` | The number of intervals to the left of the grid. |
 | span | `number \| ResponsiveDescription` | `1` | The number of columns occupied by the grid. The grid item would be hidden if it's 0. |
 | suffix | `boolean` | `false` | Grid suffix. |
-
-## Slots
 
 ### Grid Slots
 
