@@ -51,6 +51,7 @@ export const self = (vars: ThemeCommonVars) => {
     panelBoxShadow: boxShadow2,
     panelBorderRadius: borderRadius,
     calendarTitleFontWeight: fontWeightStrong,
+    scrollItemBorderRadius: borderRadius,
     iconColor,
     iconColorDisabled
   }

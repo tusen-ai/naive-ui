@@ -1,9 +1,10 @@
-import { h, defineComponent, renderSlot, VNode } from 'vue'
+import { h, defineComponent, VNode } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import { useCalendar } from './use-calendar'
 import type { MonthItem, YearItem } from '../utils'
+import { MONTH_ITEM_HEIGHT } from '../config'
 
 /**
  * Month Panel
@@ -31,8 +32,8 @@ export default defineComponent({
             {
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`]:
                 item.type === 'month'
-                  ? item.inCurrentMonth
-                  : item.inCurrentYear,
+                  ? item.isCurrentMonth
+                  : item.isCurrentYear,
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
                 item.selected,
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
@@ -41,14 +42,17 @@ export default defineComponent({
           ]}
           onClick={() => handleDateClick(item)}
         >
-          {item.type === 'month' ? item.formattedText : item.dateObject.year}
+          {item.type === 'month'
+            ? item.dateObject.month + 1
+            : item.dateObject.year}
         </div>
       )
     }
     return { ...useCalendarRef, renderItem }
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts, renderItem } = this
+    const { mergedClsPrefix, mergedTheme, shortcuts, actions, renderItem } =
+      this
     return (
       <div
         ref="selfRef"
@@ -65,23 +69,28 @@ export default defineComponent({
             themeOverrides={mergedTheme.peerOverrides.Scrollbar}
             container={this.virtualListContainer}
             content={this.virtualListContent}
-            horizontalRailStyle={{ zIndex: 3 }}
-            verticalRailStyle={{ zIndex: 3 }}
+            horizontalRailStyle={{ zIndex: 1 }}
+            verticalRailStyle={{ zIndex: 1 }}
           >
             {{
               default: () => (
                 <VirtualList
                   ref="yearScrollRef"
-                  items={this.yearArray.map((yearItem, i) =>
-                    renderItem(yearItem, i, mergedClsPrefix)
-                  )}
-                  itemSize={40}
+                  items={this.yearArray}
+                  itemSize={MONTH_ITEM_HEIGHT}
                   showScrollbar={false}
+                  keyField="ts"
                   onScroll={this.handleVirtualListScroll}
                 >
                   {{
-                    default: ({ item }: { item: VNode }) => {
-                      return item
+                    default: ({
+                      item,
+                      index
+                    }: {
+                      item: YearItem
+                      index: number
+                    }) => {
+                      return renderItem(item, index, mergedClsPrefix)
                     }
                   }}
                 </VirtualList>
@@ -98,7 +107,7 @@ export default defineComponent({
             >
               {{
                 default: () => [
-                  ...this.monthArray.map((monthItem, i) =>
+                  this.monthArray.map((monthItem, i) =>
                     renderItem(monthItem, i, mergedClsPrefix)
                   ),
                   <div
@@ -111,10 +120,12 @@ export default defineComponent({
         </div>
         {this.datePickerSlots.footer ? (
           <div class={`${mergedClsPrefix}-date-panel-footer`}>
-            {renderSlot(this.datePickerSlots, 'footer')}
+            {{
+              default: this.datePickerSlots.footer
+            }}
           </div>
         ) : null}
-        {this.actions?.length || shortcuts ? (
+        {actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
               {shortcuts &&
@@ -142,7 +153,7 @@ export default defineComponent({
                 })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions?.includes('clear') ? (
+              {actions?.includes('clear') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
@@ -152,7 +163,7 @@ export default defineComponent({
                   {{ default: () => this.locale.clear }}
                 </NButton>
               ) : null}
-              {this.actions?.includes('now') ? (
+              {actions?.includes('now') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}
@@ -162,7 +173,7 @@ export default defineComponent({
                   {{ default: () => this.locale.now }}
                 </NButton>
               ) : null}
-              {this.actions?.includes('confirm') ? (
+              {actions?.includes('confirm') ? (
                 <NButton
                   theme={mergedTheme.peers.Button}
                   themeOverrides={mergedTheme.peerOverrides.Button}

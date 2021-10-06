@@ -14,8 +14,10 @@ import {
   getDay,
   parse,
   format,
-  Locale
+  Locale,
+  startOfYear
 } from 'date-fns'
+import { START_YEAR } from './config'
 
 function getDerivedTimeFromKeyboardEvent (
   prevValue: number | null,
@@ -36,41 +38,27 @@ function getDerivedTimeFromKeyboardEvent (
   return now
 }
 
+const matcherMap = {
+  date: isSameDay,
+  month: isSameMonth,
+  year: isSameYear
+} as const
+
 function matchDate (
   sourceTime: number[] | number,
-  patternTime: number | Date
+  patternTime: number | Date,
+  type: 'date' | 'month' | 'year' = 'date'
 ): boolean {
+  const matcher = matcherMap[type]
   if (Array.isArray(sourceTime)) {
-    return sourceTime.some((time) => isSameDay(time, patternTime))
+    return sourceTime.some((time) => matcher(time, patternTime))
   } else {
-    return isSameDay(sourceTime, patternTime)
-  }
-}
-
-function matchMonth (
-  sourceTime: number[] | number,
-  patternTime: number | Date
-): boolean {
-  if (Array.isArray(sourceTime)) {
-    return sourceTime.some((time) => isSameMonth(time, patternTime))
-  } else {
-    return isSameMonth(sourceTime, patternTime)
-  }
-}
-
-function matchYear (
-  sourceTime: number[] | number,
-  patternTime: number | Date
-): boolean {
-  if (Array.isArray(sourceTime)) {
-    return sourceTime.some((time) => isSameYear(time, patternTime))
-  } else {
-    return isSameYear(sourceTime, patternTime)
+    return matcher(sourceTime, patternTime)
   }
 }
 
 export interface DateItem {
-  type: 'day'
+  type: 'date'
   dateObject: {
     date: number
     month: number
@@ -91,10 +79,9 @@ export interface MonthItem {
     month: number
     year: number
   }
-  inCurrentMonth: boolean
+  isCurrentMonth: boolean
   selected: boolean
   ts: number
-  formattedText?: string
 }
 
 export interface YearItem {
@@ -102,7 +89,7 @@ export interface YearItem {
   dateObject: {
     year: number
   }
-  inCurrentYear: boolean
+  isCurrentYear: boolean
   selected: boolean
   ts: number
 }
@@ -124,7 +111,7 @@ function dateItem (
     if (matchDate(valueTs[1], time)) endOfSpan = true
   }
   return {
-    type: 'day',
+    type: 'date',
     dateObject: {
       date: getDate(time),
       month: getMonth(time),
@@ -151,8 +138,8 @@ function monthItem (
       month: getMonth(monthTs),
       year: getYear(monthTs)
     },
-    inCurrentMonth: isSameMonth(currentTs, monthTs),
-    selected: valueTs !== null && matchMonth(valueTs, monthTs),
+    isCurrentMonth: isSameMonth(currentTs, monthTs),
+    selected: valueTs !== null && matchDate(valueTs, monthTs, 'month'),
     ts: getTime(monthTs)
   }
 }
@@ -167,8 +154,8 @@ function yearItem (
     dateObject: {
       year: getYear(yearTs)
     },
-    inCurrentYear: isSameYear(currentTs, yearTs),
-    selected: valueTs !== null && matchYear(valueTs, yearTs),
+    isCurrentYear: isSameYear(currentTs, yearTs),
+    selected: valueTs !== null && matchDate(valueTs, yearTs, 'year'),
     ts: getTime(yearTs)
   }
 }
@@ -229,15 +216,10 @@ function monthArray (
   currentTs: number
 ): MonthItem[] {
   const calendarMonths = []
-  const cachedMonth = getMonth(monthTs)
-
+  const yearStart = startOfYear(monthTs)
   for (let i = 0; i < 12; i++) {
     calendarMonths.push(
-      monthItem(
-        getTime(addMonths(monthTs, i - cachedMonth)),
-        valueTs,
-        currentTs
-      )
+      monthItem(getTime(addMonths(yearStart, i)), valueTs, currentTs)
     )
   }
   return calendarMonths
@@ -249,11 +231,13 @@ function yearArray (
   currentTs: number
 ): YearItem[] {
   const calendarYears = []
-  const cachedYear = getYear(yearTs)
-
-  for (let i = 1900; i < 2100; i++) {
+  const time1900 = new Date(START_YEAR, 0, 1)
+  // 1900 is not a round time, so we use 1911 as start...
+  // new Date(1900, 0, 1)
+  // 1899-12-31T15:54:17.000Z
+  for (let i = 0; i < 200; i++) {
     calendarYears.push(
-      yearItem(getTime(addYears(yearTs, i - cachedYear)), valueTs, currentTs)
+      yearItem(getTime(addYears(time1900, i)), valueTs, currentTs)
     )
   }
   return calendarYears

@@ -71,6 +71,7 @@ function useCalendar (
       : props.value
   )
   const yearScrollRef = ref<VirtualListInst | null>(null)
+  const monthScrollRef = ref<ScrollbarInst | null>(null)
   const scrollbarInstRef = ref<ScrollbarInst | null>(null)
   const nowRef = ref(Date.now())
   const dateArrayRef = computed(() => {
@@ -82,16 +83,7 @@ function useCalendar (
     )
   })
   const monthArrayRef = computed(() => {
-    return monthArray(calendarValueRef.value, props.value, nowRef.value).map(
-      (item) => {
-        item.formattedText = format(
-          item.ts,
-          localeRef.value.monthFormat,
-          panelCommon.dateFnsOptions.value
-        )
-        return item
-      }
-    )
+    return monthArray(calendarValueRef.value, props.value, nowRef.value)
   })
   const yearArrayRef = computed(() => {
     return yearArray(calendarValueRef.value, props.value, nowRef.value)
@@ -223,7 +215,7 @@ function useCalendar (
       newValue = Date.now()
     }
     newValue = getTime(set(newValue, dateItem.dateObject))
-    panelCommon.doUpdateValue(getTime(sanitizeValue(newValue)), type === 'date')
+    panelCommon.doUpdateValue(sanitizeValue(newValue), type === 'date')
     if (type === 'date') {
       panelCommon.doClose()
     } else if (type === 'month') {
@@ -271,14 +263,17 @@ function useCalendar (
   function prevMonth (): void {
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, -1))
   }
+  // For month type
   function virtualListContainer (): HTMLElement {
     const { value } = yearScrollRef
     return value?.listElRef as HTMLElement
   }
+  // For month type
   function virtualListContent (): HTMLElement {
     const { value } = yearScrollRef
     return value?.itemsElRef as HTMLElement
   }
+  // For month type
   function handleVirtualListScroll (e: Event): void {
     scrollbarInstRef.value?.sync()
   }
@@ -313,7 +308,7 @@ function useCalendar (
     timePickerSize: panelCommon.timePickerSize,
     dateInputValue: dateInputValueRef,
     datePickerSlots,
-    monthScrollRef: ref(null),
+    monthScrollRef,
     yearScrollRef,
     scrollbarInstRef
   }

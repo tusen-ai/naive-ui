@@ -20,6 +20,7 @@ import { clickoutside } from 'vdirs'
 import { format, getTime, isValid, getYear, getMonth } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
 import { happensIn } from 'seemly'
+import type { Size as TimePickerSize } from '../../time-picker/src/interface'
 import { InputInst, InputProps, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
@@ -29,11 +30,22 @@ import { warn, call, useAdjustedTo, createKey } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { datePickerLight } from '../styles'
 import { strictParse } from './utils'
-// import { getDerivedTimeFromKeyboardEvent } from './utils'
 import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
+import { MONTH_ITEM_HEIGHT, START_YEAR } from './config'
+import type {
+  OnUpdateValue,
+  OnUpdateValueImpl,
+  Value,
+  PanelRef,
+  IsDateDisabled,
+  IsTimeDisabled,
+  Shortcuts,
+  FirstDayOfWeek
+} from './interface'
+import { datePickerInjectionKey } from './interface'
 import DatetimePanel from './panel/datetime'
 import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
@@ -41,18 +53,6 @@ import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
 import style from './styles/index.cssr'
 import { DatePickerTheme } from '../styles/light'
-import {
-  OnUpdateValue,
-  OnUpdateValueImpl,
-  Value,
-  PanelRef,
-  IsDateDisabled,
-  IsTimeDisabled,
-  datePickerInjectionKey,
-  Shortcuts,
-  FirstDayOfWeek
-} from './interface'
-import { Size as TimePickerSize } from '../../time-picker/src/interface'
 
 const DATE_FORMAT = {
   date: 'yyyy-MM-dd',
@@ -352,7 +352,7 @@ export default defineComponent({
               ? getMonth(Date.now())
               : getMonth(mergedValue as number)
             : getMonth(value)
-        monthScrollRef.scrollTo({ top: monthIndex * 40 })
+        monthScrollRef.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
       }
       if (yearScrollRef) {
         const yearIndex =
@@ -360,8 +360,8 @@ export default defineComponent({
             ? mergedValue === null
               ? getYear(Date.now())
               : getYear(mergedValue as number)
-            : getYear(value)) - 1900
-        yearScrollRef.scrollTo({ top: yearIndex * 40 })
+            : getYear(value)) - START_YEAR
+        yearScrollRef.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
       }
     }
     // --- Panel update value
@@ -649,8 +649,8 @@ export default defineComponent({
             itemSize,
             itemCellWidth,
             itemCellHeight,
-            itemMonthCellWidth,
-            itemMonthCellHeight,
+            scrollItemWidth,
+            scrollItemHeight,
             calendarTitlePadding,
             calendarTitleHeight,
             calendarDaysHeight,
@@ -661,6 +661,7 @@ export default defineComponent({
             calendarTitleGridTempateColumns,
             iconColor,
             iconColorDisabled,
+            scrollItemBorderRadius,
             [createKey('calendarLeftPadding', type)]: calendarLeftPadding,
             [createKey('calendarRightPadding', type)]: calendarRightPadding
           }
@@ -704,8 +705,6 @@ export default defineComponent({
           '--item-size': itemSize,
           '--item-cell-width': itemCellWidth,
           '--item-cell-height': itemCellHeight,
-          '--item-month-cell-width': itemMonthCellWidth,
-          '--item-month-cell-height': itemMonthCellHeight,
           '--item-text-color': itemTextColor,
           '--item-color-included': itemColorIncluded,
           '--item-color-disabled': itemColorDisabled,
@@ -713,6 +712,11 @@ export default defineComponent({
           '--item-color-active': itemColorActive,
           '--item-text-color-disabled': itemTextColorDisabled,
           '--item-text-color-active': itemTextColorActive,
+
+          // scroll item
+          '--scroll-item-width': scrollItemWidth,
+          '--scroll-item-height': scrollItemHeight,
+          '--scroll-item-border-radius': scrollItemBorderRadius,
 
           // panel arrow
           '--arrow-size': arrowSize,

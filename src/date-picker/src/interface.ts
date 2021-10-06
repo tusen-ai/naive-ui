@@ -43,8 +43,9 @@ export type OnClose = (disableUpdateOnClose: boolean) => void
 
 export interface PanelRef {
   $el: HTMLElement
-  monthScrollRef: ScrollbarInst | null
-  yearScrollRef: VirtualListInst | null
+  // Only exists when type is month
+  monthScrollRef?: ScrollbarInst | null
+  yearScrollRef?: VirtualListInst | null
 }
 
 // 0 is Monday

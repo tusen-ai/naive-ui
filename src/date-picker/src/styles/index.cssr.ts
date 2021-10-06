@@ -40,8 +40,6 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --item-size
 // --item-cell-width
 // --item-cell-height
-// --item-month-cell-width
-// --item-month-cell-height
 // --item-text-color
 // --item-color-included
 // --item-color-disabled
@@ -50,6 +48,11 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --item-font-size
 // --item-text-color-disabled
 // --item-text-color-active
+
+// scroll item
+// --scroll-item-width
+// --scroll-item-height
+// --scroll-item-border-radius
 
 // panel arrow
 // --arrow-size
@@ -96,24 +99,25 @@ export default c([
       gridArea: 'left-calendar'
     }, [
       cE('picker-col', `
-        min-width: var(--item-month-cell-width);
-        height: calc(var(--item-month-cell-height) * 7);
+        min-width: var(--scroll-item-width);
+        height: calc(var(--scroll-item-height) * 6);
+        user-select: none;
       `, [
         c('&:first-child', `
-          min-width: calc(var(--item-month-cell-width) + 4px);
+          min-width: calc(var(--scroll-item-width) + 4px);
         `, [
           cE('picker-col-item', [
             c('&::before', 'left: 4px;')
           ])
         ]),
         cE('padding', `
-          height: calc(var(--item-month-cell-height) * 6)
+          height: calc(var(--scroll-item-height) * 5)
         `)
       ]),
       cE('picker-col-item', `
         z-index: 0;
         cursor: pointer;
-        height: var(--item-month-cell-height);
+        height: var(--scroll-item-height);
         box-sizing: border-box;
         padding-top: 4px;
         display: flex;
@@ -134,7 +138,7 @@ export default c([
           right: 4px;
           top: 4px;
           bottom: 0;
-          border-radius: var(--panel-border-radius);
+          border-radius: var(--scroll-item-border-radius);
           transition: 
             background-color .3s var(--bezier);
         `),
@@ -152,11 +156,7 @@ export default c([
           background-color: var(--item-color-disabled);
           cursor: not-allowed;
         `)
-      ]),
-      cM('end', {
-        padding: 'var(--calendar-right-padding)',
-        gridArea: 'right-calendar'
-      })
+      ])
     ]),
     cM('date', {
       gridTemplateAreas: `
