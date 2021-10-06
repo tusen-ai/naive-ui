@@ -37,6 +37,14 @@
 - 修复 `n-popselect` 勾选图标覆盖了文本，关闭 [#1282](https://github.com/TuSimple/naive-ui/issues/1282)
 - 修复 `n-pagination` `buttonColor` 主题变量不生效
 
+### Feats
+
+- `n-breadcrumb-item` 新增 `href` 属性
+- `n-tree` 的 `on-update:indeterminateKeys` 回调新增选项信息
+- `n-tree` 的 `on-update:expandedKeys` 回调新增选项信息
+- `n-tree` 的 `on-update:checkedKeys` 回调新增选项信息
+- `n-tree` 的 `on-update:selectedKeys` 回调新增选项信息
+
 ## 2.19.3 (2021-09-28)
 
 ### Fixes

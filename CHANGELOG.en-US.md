@@ -2,10 +2,26 @@
 
 ## Pending
 
+### Fixes
+
+- Fix `n-form-item`'s content is too long and the width is incorrect
+- Fix `n-layout-sider`'s `arrow-circle`'s icon style.
+- Fix `n-upload`'s `show-preview-button` prop not working，closes [#1238](https://github.com/TuSimple/naive-ui/issues/1238).
+- Fix `n-date-picker`'s `date` type of `action` validate error.
+- Fix `n-data-table` throws error when using `selection` and `summary` together, closes [#1276](https://github.com/TuSimple/naive-ui/issues/1276).
+- Fix `n-data-table` selection column's width is collapsed when it is set to fixed, closes [#1283](https://github.com/TuSimple/naive-ui/issues/1283).
+- Fix `n-popconfirm` can't be nested in `n-tooltip`, closes [#872](https://github.com/TuSimple/naive-ui/issues/872).
+- Fix `n-popselect` checkmark overlays on option text, closes [#1282](https://github.com/TuSimple/naive-ui/issues/1282).
+- Fix `n-pagination` `buttonColor` theme variable not working.
+
 ### Feats
 
 - `n-breadcrumb-item` add `href` prop.
 - `n-descriptions` add `separator` prop，closes [#1263](https://github.com/TuSimple/naive-ui/issues/1263).
+- `n-tree`'s `on-update:indeterminateKeys` prop add option info.
+- `n-tree`'s `on-update:expandedKeys` prop add option info.
+- `n-tree`'s `on-update:checkedKeys` prop add option info.
+- `n-tree`'s `on-update:selectedKeys` prop add option info.
 - `n-dropdown` add `key-field` prop.
 - `n-dropdown` add `label-field` prop.
 - `n-dropdown` add `children-field` prop.
@@ -24,18 +40,6 @@
 - `n-date-picker` add `first-day-of-week` prop.
 - `n-date-picker`'s `type` prop support `month` option.
 - `n-popover` add `to` prop.
-
-### Fixes
-
-- Fix `n-form-item`'s content is too long and the width is incorrect
-- Fix `n-layout-sider`'s `arrow-circle`'s icon style.
-- Fix `n-upload`'s `show-preview-button` prop not working，closes [#1238](https://github.com/TuSimple/naive-ui/issues/1238).
-- Fix `n-date-picker`'s `date` type of `action` validate error.
-- Fix `n-data-table` throws error when using `selection` and `summary` together, closes [#1276](https://github.com/TuSimple/naive-ui/issues/1276).
-- Fix `n-data-table` selection column's width is collapsed when it is set to fixed, closes [#1283](https://github.com/TuSimple/naive-ui/issues/1283).
-- Fix `n-popconfirm` can't be nested in `n-tooltip`, closes [#872](https://github.com/TuSimple/naive-ui/issues/872).
-- Fix `n-popselect` checkmark overlays on option text, closes [#1282](https://github.com/TuSimple/naive-ui/issues/1282).
-- Fix `n-pagination` `buttonColor` theme variable not working.
 
 ## 2.19.3 (2021-09-28)
 
