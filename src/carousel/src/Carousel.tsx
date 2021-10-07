@@ -55,6 +55,7 @@ export default defineComponent({
     const currentRef = ref(1)
     const lengthRef = { value: 1 }
     const touchingRef = ref(false)
+    const isArrowIcon = ref<boolean>(props.showArrowMode === 'always')
     const dragOffsetRef = ref(0)
     const selfElRef = ref<HTMLDivElement | null>(null)
     const dotPlacementRef = toRef(props, 'dotPlacement')
@@ -211,6 +212,16 @@ export default defineComponent({
       off('touchend', document, handleTouchend)
       off('touchcancel', document, handleTouchend)
     }
+    function carouselMouseenter (): void {
+      if (props.showArrowMode === 'hover') {
+        isArrowIcon.value = true
+      }
+    }
+    function carouselMouseleave (): void {
+      if (props.showArrowMode === 'hover') {
+        isArrowIcon.value = false
+      }
+    }
     function handleMouseenter (current: number): void {
       if (props.trigger === 'hover') {
         setCurrent(current)
@@ -254,6 +265,7 @@ export default defineComponent({
       lengthRef,
       touching: touchingRef,
       dragOffset: dragOffsetRef,
+      isArrowIcon,
       prev,
       next,
       setCurrent,
@@ -261,6 +273,8 @@ export default defineComponent({
       handleTouchstart,
       handleTransitionEnd,
       handleMouseenter,
+      carouselMouseenter,
+      carouselMouseleave,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -284,7 +298,6 @@ export default defineComponent({
       current,
       lengthRef,
       autoplay,
-      showArrowMode,
       $slots: { default: defaultSlot }
     } = this
     const children = flatten(defaultSlot?.() || [])
@@ -294,6 +307,7 @@ export default defineComponent({
     const rightOverflowVNode = length ? cloneVNode(children[0]) : null
     const total = length + 2
     const vertical = dotPlacement === 'left' || dotPlacement === 'right'
+
     return (
       <div
         class={[
@@ -301,6 +315,8 @@ export default defineComponent({
           `${mergedClsPrefix}-carousel--${this.dotPlacement}`
         ]}
         style={this.cssVars as CSSProperties}
+        onMouseenter={() => this.carouselMouseenter()}
+        onMouseleave={() => this.carouselMouseleave()}
         ref="selfElRef"
       >
         <div
@@ -359,37 +375,36 @@ export default defineComponent({
             )
           })}
         </div>
-        {showArrow && [
-          <div
-            class={[
-              `${mergedClsPrefix}-carousel__arrow`,
-              `${mergedClsPrefix}-carousel__arrow--${
-                vertical ? 'bottom' : 'right'
-              }`,
-              `${showArrowMode === 'hover' ? 'arrow-hover-show' : ''}`
-            ]}
-            role="button"
-            onClick={() => {
-              this.next()
-            }}
-          >
-            <ForwardIcon />
-          </div>,
-          <div
-            class={[
-              `${mergedClsPrefix}-carousel__arrow`,
-              `${mergedClsPrefix}-carousel__arrow--${
-                vertical ? 'top' : 'left'
-              }`,
-              `${showArrowMode === 'hover' ? 'arrow-hover-show' : ''}`
-            ]}
-            role="button"
-            onClick={() => {
-              this.prev()
-            }}
-          >
-            <BackwardIcon />
-          </div>
+        {showArrow &&
+          this.isArrowIcon && [
+            <div
+              class={[
+                `${mergedClsPrefix}-carousel__arrow`,
+                `${mergedClsPrefix}-carousel__arrow--${
+                  vertical ? 'bottom' : 'right'
+                }`
+              ]}
+              role="button"
+              onClick={() => {
+                this.next()
+              }}
+            >
+              <ForwardIcon />
+            </div>,
+            <div
+              class={[
+                `${mergedClsPrefix}-carousel__arrow`,
+                `${mergedClsPrefix}-carousel__arrow--${
+                  vertical ? 'top' : 'left'
+                }`
+              ]}
+              role="button"
+              onClick={() => {
+                this.prev()
+              }}
+            >
+              <BackwardIcon />
+            </div>
         ]}
       </div>
     )
