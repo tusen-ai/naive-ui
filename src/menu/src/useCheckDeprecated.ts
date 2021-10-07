@@ -31,7 +31,7 @@ export function useCheckDeprecated (props: MenuSetupProps): void {
         '`expanded-names` is deprecated, please use `expanded-keys` instead.'
       )
     }
-    if (props.defaultExpandedKeys) {
+    if (props.defaultExpandedNames) {
       warnOnce(
         'menu',
         '`default-expanded-names` is deprecated, please use `default-expanded-keys` instead.'

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-menu`'s incorrect warning on `default-expanded-keys`.
+
 ## 2.19.5 (2021-10-07)
 
 ### Fixes

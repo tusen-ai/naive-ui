@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-menu` 对于 `default-expanded-keys` 的错误警报
+
 ## 2.19.5 (2021-10-07)
 
 ### Fixes
