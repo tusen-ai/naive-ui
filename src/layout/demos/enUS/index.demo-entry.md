@@ -34,6 +34,7 @@ scroll-to
 | embedded | `boolean` | `false` | Use darker background to show a embedded effect. Only work for light theme. |
 | has-sider | `boolean` | `false` | Whether the component has sider inside. If so it must be `true`. |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, layout will use a naive-ui style scrollbar for content. |
+| on-scroll | `(e: Event) => void` | `undefined` | Callback function when the content scroll. |
 | position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `right`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it display as you expect. |
 | sider-placement | `'left' \| 'right'` | `left` | The sidebar is displayed on the left or the right side. |
 
@@ -72,6 +73,7 @@ scroll-to
 | trigger-style | `string \| Object` | `undefined` | Trigger style. |
 | width | `number \| string` | `272` | Width CSS value. When it is number, px will be added. |
 | on-update:collapsed | `(collapsed: boolean) => void` | `undefined` | Callback function when the folding state changes. |
+| on-scroll | `(e: Event) => void` | `undefined` | Callback function when the content scroll. |
 
 ### Layout, Layout Content, Layout Sider, Layout Header, Layout Footer Slots
 
