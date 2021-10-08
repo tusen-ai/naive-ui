@@ -12,7 +12,8 @@ import {
   isValid,
   startOfDay,
   startOfSecond,
-  startOfMonth
+  startOfMonth,
+  startOfYear
 } from 'date-fns'
 import { dateArray, monthArray, strictParse, yearArray } from '../utils'
 import { usePanelCommon } from './use-panel-common'
@@ -36,7 +37,7 @@ const useCalendarProps = {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useCalendar (
   props: ExtractPropTypes<typeof useCalendarProps>,
-  type: 'date' | 'datetime' | 'month'
+  type: 'date' | 'datetime' | 'month' | 'year'
 ) {
   const panelCommon = usePanelCommon(props)
   const {
@@ -51,7 +52,8 @@ function useCalendar (
     localeRef,
     firstDayOfWeekRef,
     datePickerSlots,
-    scrollYearMonth
+    scrollYearMonth,
+    scrollYear
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -139,6 +141,7 @@ function useCalendar (
   function sanitizeValue (value: number): number {
     if (type === 'datetime') return getTime(startOfSecond(value))
     if (type === 'month') return getTime(startOfMonth(value))
+    if (type === 'year') return getTime(startOfYear(value))
     return getTime(startOfDay(value))
   }
   function mergedIsDateDisabled (ts: number): boolean {
@@ -225,6 +228,9 @@ function useCalendar (
     } else if (type === 'month') {
       panelCommon.disableTransitionOneTick()
       scrollYearMonth(newValue)
+    } else if (type === 'year') {
+      panelCommon.disableTransitionOneTick()
+      scrollYear(newValue)
     }
   }
   function deriveDateInputValue (time?: number): void {

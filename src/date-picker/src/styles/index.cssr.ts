@@ -158,6 +158,58 @@ export default c([
         `)
       ])
     ]),
+    cB('date-panel-year-calendar', {
+      gridArea: 'left-calendar'
+    }, [
+      cE('picker-col', `
+        min-width: var(--scroll-item-width);
+        height: calc(var(--scroll-item-height) * 6);
+        user-select: none;
+      `),
+      cE('picker-col-item', `
+        z-index: 0;
+        cursor: pointer;
+        height: var(--scroll-item-height);
+        box-sizing: border-box;
+        padding-top: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transition: 
+          color .3s var(--bezier),
+          background-color .3s var(--bezier);
+        background: #0000;
+        color: var(--item-text-color);
+      `, [
+        c('&::before', `
+          z-index: -1;
+          content: "";
+          position: absolute;
+          left: 4px;
+          right: 4px;
+          top: 4px;
+          bottom: 0;
+          border-radius: var(--scroll-item-border-radius);
+          transition: 
+            background-color .3s var(--bezier);
+        `),
+        cNotM('disabled', [
+          c('&:hover::before', `
+            background-color: var(--item-color-hover);
+          `),
+          cM('selected', `
+            color: var(--item-color-active);
+          `, [
+            c('&::before', 'background-color: var(--item-color-hover);')
+          ])
+        ]),
+        cM('disabled', `
+          background-color: var(--item-color-disabled);
+          cursor: not-allowed;
+        `)
+      ])
+    ]),
     cM('date', {
       gridTemplateAreas: `
         "left-calendar"
@@ -189,6 +241,13 @@ export default c([
       `
     }),
     cM('month', {
+      gridTemplateAreas: `
+        "left-calendar"
+        "footer"
+        "action"
+      `
+    }),
+    cM('year', {
       gridTemplateAreas: `
         "left-calendar"
         "footer"

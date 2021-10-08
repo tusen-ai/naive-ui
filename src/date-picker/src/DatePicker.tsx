@@ -51,6 +51,7 @@ import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
+import YearPanel from './panel/year'
 import style from './styles/index.cssr'
 import { DatePickerTheme } from '../styles/light'
 
@@ -59,7 +60,8 @@ const DATE_FORMAT = {
   datetime: 'yyyy-MM-dd HH:mm:ss',
   daterange: 'yyyy-MM-dd',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
-  month: 'yyyy-MM'
+  month: 'yyyy-MM',
+  year: 'yyyy'
 }
 
 const datePickerProps = {
@@ -93,7 +95,7 @@ const datePickerProps = {
   size: String as PropType<'small' | 'medium' | 'large'>,
   type: {
     type: String as PropType<
-    'date' | 'datetime' | 'daterange' | 'datetimerange' | 'month'
+    'date' | 'datetime' | 'daterange' | 'datetimerange' | 'month' | 'year'
     >,
     default: 'date'
   },
@@ -260,6 +262,9 @@ export default defineComponent({
         case 'month': {
           return ['clear', 'now', 'confirm']
         }
+        case 'year': {
+          return ['clear', 'now', 'confirm']
+        }
         default: {
           warn(
             'data-picker',
@@ -356,6 +361,20 @@ export default defineComponent({
             : getMonth(value)
         monthScrollRef.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
       }
+      if (yearScrollRef) {
+        const yearIndex =
+          (value === undefined
+            ? mergedValue === null
+              ? getYear(Date.now())
+              : getYear(mergedValue as number)
+            : getYear(value)) - START_YEAR
+        yearScrollRef.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
+      }
+    }
+    function scrollYear (value?: number): void {
+      if (!panelInstRef.value) return
+      const { yearScrollRef } = panelInstRef.value
+      const { value: mergedValue } = mergedValueRef
       if (yearScrollRef) {
         const yearIndex =
           (value === undefined
@@ -509,6 +528,8 @@ export default defineComponent({
       doUpdateShow(true)
       if (props.type === 'month') {
         void nextTick(scrollYearMonth)
+      } else if (props.type === 'year') {
+        void nextTick(scrollYear)
       }
     }
     function closeCalendar ({
@@ -555,6 +576,7 @@ export default defineComponent({
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
       scrollYearMonth,
+      scrollYear,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       timePickerSizeRef,
@@ -876,6 +898,8 @@ export default defineComponent({
                                   <DatetimerangePanel {...commonPanelProps} />
                               ) : this.type === 'month' ? (
                                   <MonthPanel {...commonPanelProps} />
+                              ) : this.type === 'year' ? (
+                                  <YearPanel {...commonPanelProps} />
                               ) : (
                                   <DatePanel {...commonPanelProps} />
                               ),
