@@ -350,7 +350,7 @@ export default defineComponent({
     }
     function scrollYearMonth (value?: number): void {
       if (!panelInstRef.value) return
-      const { monthScrollRef, yearScrollRef } = panelInstRef.value
+      const { monthScrollRef } = panelInstRef.value
       const { value: mergedValue } = mergedValueRef
       if (monthScrollRef) {
         const monthIndex =
@@ -361,15 +361,7 @@ export default defineComponent({
             : getMonth(value)
         monthScrollRef.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
       }
-      if (yearScrollRef) {
-        const yearIndex =
-          (value === undefined
-            ? mergedValue === null
-              ? getYear(Date.now())
-              : getYear(mergedValue as number)
-            : getYear(value)) - START_YEAR
-        yearScrollRef.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
-      }
+      scrollYear(value)
     }
     function scrollYear (value?: number): void {
       if (!panelInstRef.value) return
