@@ -107,8 +107,6 @@ action
 | ------- | ---- | ------------- |
 | destroy | `()` | 关闭 `Dialog` |
 
-## Props
-
 ### Dialog Props
 
 | 名称 | 类型 | 默认值 | 说明 |
@@ -127,8 +125,6 @@ action
 | on-close | `() => void` | `undefined` | 关闭时执行的回调函数,默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |
 | on-negative-click | `() => void` | `undefined` | 执行 `negative` 时执行的回调函数，默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |
 | on-positive-click | `() => void` | `undefined` | 执行 `positive` 时执行的回调函数，默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |
-
-## Slots
 
 ### Dialog Slots
 

@@ -1,12 +1,14 @@
-# Responsive
+# Responsive Columns
 
-`n-grid`'s `cols`, `x-gap`, `y-gap` and `n-grid-item`'s `span`, `offset` support responsive config.
+`n-grid`'s `cols`, `x-gap`, `y-gap` support responsive config.
 
 `n-grid` has 2 responsive mode. The inner `n-grid-item` follows its parent's mode.
 
 Responsive props in `self`(default) mode are controlled by `n-grid`'s own width. A responsive `cols` looks like `'2 400:4 600:6'`. When < 400px there are 2 columns. When 400px <= && < 600px there are 4 columns. When > 600px there are 6 columns.
 
 Responsive props in `screen`(default) mode are controlled by viewport width of the browser. There are `xs` `s` `m` `l` `xl` `2xl` screen width to choose. A responsive `cols` looks like `2 s:3 m:4 l:5 xl:6 2xl:7`.
+
+The default screen config is `xs < 640 <= s < 1024 <= m < 1280 <= l < 1536 <= xl < 1920 <= xxl`.
 
 ```html
 <n-divider>Self Responsive</n-divider>

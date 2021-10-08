@@ -70,14 +70,17 @@ export default defineComponent({
       animatedRef,
       mergedShowRef,
       renderLabelRef,
-      renderIconRef
+      renderIconRef,
+      labelFieldRef,
+      childrenFieldRef
     } = NDropdown
     const NDropdownOption = inject(dropdownOptionInjectionKey, null)
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDropdownMenu = inject(dropdownMenuInjectionKey)!
     const rawNodeRef = computed(() => props.tmNode.rawNode)
     const hasSubmenuRef = computed(() => {
-      return isSubmenuNode(props.tmNode.rawNode)
+      const { value: childrenField } = childrenFieldRef
+      return isSubmenuNode(props.tmNode.rawNode, childrenField)
     })
     const mergedDisabledRef = computed(() => {
       const { disabled } = props.tmNode
@@ -159,6 +162,7 @@ export default defineComponent({
       }
     }
     return {
+      labelField: labelFieldRef,
       renderLabel: renderLabelRef,
       renderIcon: renderIconRef,
       siblingHasIcon: NDropdownMenu.showIconRef,
@@ -219,12 +223,10 @@ export default defineComponent({
     const builtinProps: HTMLAttributes = {
       class: [
         `${clsPrefix}-dropdown-option-body`,
-        {
-          [`${clsPrefix}-dropdown-option-body--pending`]: this.pending,
-          [`${clsPrefix}-dropdown-option-body--active`]: this.active,
-          [`${clsPrefix}-dropdown-option-body--child-active`]: this.childActive,
-          [`${clsPrefix}-dropdown-option-body--disabled`]: this.mergedDisabled
-        }
+        this.pending && `${clsPrefix}-dropdown-option-body--pending`,
+        this.active && `${clsPrefix}-dropdown-option-body--active`,
+        this.childActive && `${clsPrefix}-dropdown-option-body--child-active`,
+        this.mergedDisabled && `${clsPrefix}-dropdown-option-body--disabled`
       ],
       onMousemove: this.handleMouseMove,
       onMouseenter: this.handleMouseEnter,
@@ -251,7 +253,7 @@ export default defineComponent({
             {/* TODO: Workaround, menu campatible */}
             {renderLabel
               ? renderLabel(rawNode)
-              : render(rawNode.label ?? rawNode.title)}
+              : render(rawNode[this.labelField] ?? rawNode.title)}
           </div>,
           <div
             __dropdown-option

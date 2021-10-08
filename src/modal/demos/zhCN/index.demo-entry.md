@@ -48,8 +48,6 @@ dark-10-debug
 
 参考 [Dialog props](dialog#Props)
 
-### Modal Slots
-
 ### Modal（无预设）Slots
 
 | 名称    | 参数 | 说明         |

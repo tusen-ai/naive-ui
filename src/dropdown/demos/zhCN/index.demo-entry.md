@@ -12,9 +12,10 @@ cascade
 arrow
 placement
 size
-manual-position
 group-debug
+manual-position
 batch-render
+render
 option-props
 ```
 
@@ -25,9 +26,12 @@ option-props
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | animated | `boolean` | `true` | 弹出弹窗时使用动画 |
+| children-field | `string` | `'key'` | key 的字段名 |
 | inverted | `boolean` | `false` | 使用反转样式 |
 | keyboard | `boolean` | `true` | 是否支持键盘操作（注意和其他内容键盘操作可能的冲突） |
-| options | `Array<DropdownOption \| DropdownDividerOption>` | `[]` | 下拉菜单传入的 options |
+| key-field | `string` | `'key'` | key 的字段名 |
+| label-field | `string` | `'label'` | label 的字段名 |
+| options | `Array<DropdownOption \| DropdownGroupOption \| DropdownDividerOption \| DropdownRenderOption>` | `[]` | 下拉菜单传入的 options |
 | render-icon | `(option: DropdownOption) => VNodeChild` | `undefined` | 批量处理下拉菜单图标渲染 |
 | render-label | `(option: DropdownOption) => VNodeChild` | `undefined` | 批量处理下拉菜单渲染 |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | 下拉菜单的尺寸大小 |
@@ -63,3 +67,11 @@ option-props
 | icon? | `() => VNodeChild` | 支持通过 render 方法自定义 icon |
 | key | `string \| number` | 需要唯一 |
 | children | `Array<DropdownOption \| DropdownDividerOption>` | DropdownGroupOption 的 children 项 |
+
+#### DropdownRenderOption Type
+
+| 属性   | 类型               | 说明                                   |
+| ------ | ------------------ | -------------------------------------- |
+| type   | `'render'`         | The type of the DropdownRenderOption.  |
+| key    | `string \| number` | Render option ID (should be unique).   |
+| render | `() => VNodeChild` | Render function of the option content. |

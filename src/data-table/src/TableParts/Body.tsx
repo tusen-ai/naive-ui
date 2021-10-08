@@ -13,7 +13,7 @@ import {
 import { pxfy, repeat } from 'seemly'
 import { VirtualList, VirtualListInst } from 'vueuc'
 import { c } from '../../../_utils/cssr'
-import { NScrollbar, ScrollbarInst } from '../../../scrollbar'
+import { NScrollbar, ScrollbarInst } from '../../../_internal'
 import { formatLength } from '../../../_utils'
 import {
   dataTableInjectionKey,
@@ -22,7 +22,7 @@ import {
   MainTableBodyRef,
   TmNode
 } from '../interface'
-import { createRowClassName, getColKey } from '../utils'
+import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
 import RenderSafeCheckbox from './BodyCheckbox'
@@ -384,10 +384,6 @@ export default defineComponent({
             paginatedData.forEach((tmNode, rowIndex) => {
               rowIndexToKey[rowIndex] = tmNode.key
             })
-            const sorterKey =
-              !!mergedSortState &&
-              mergedSortState.order &&
-              mergedSortState.columnKey
 
             let mergedData: RowRenderInfo[]
 
@@ -452,12 +448,12 @@ export default defineComponent({
                 // virtual list should have a fast path
                 const { rowSpan, colSpan } = column
                 const mergedColSpan = isSummary
-                  ? rowInfo.rawNode[colKey].colSpan || 1
+                  ? rowInfo.rawNode[colKey]?.colSpan || 1 // optional for #1276
                   : colSpan
                     ? colSpan(rowData, rowIndex)
                     : 1
                 const mergedRowSpan = isSummary
-                  ? rowInfo.rawNode[colKey].rowSpan || 1
+                  ? rowInfo.rawNode[colKey]?.rowSpan || 1 // optional for #1276
                   : rowSpan
                     ? rowSpan(rowData, rowIndex)
                     : 1
@@ -503,7 +499,7 @@ export default defineComponent({
                       isSummary && `${mergedClsPrefix}-data-table-td--summary`,
                       ((hoverKey !== null &&
                         cordKey[rowIndex][colIndex].includes(hoverKey)) ||
-                        (sorterKey !== false && sorterKey === colKey)) &&
+                        isColumnSorting(column, mergedSortState)) &&
                         `${mergedClsPrefix}-data-table-td--hover`,
                       column.fixed &&
                         `${mergedClsPrefix}-data-table-td--fixed-${column.fixed}`,

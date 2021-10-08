@@ -3,9 +3,9 @@ const fs = require('fs')
 const path = require('path')
 const inquirer = require('inquirer')
 
-const { DINGTALK_TOKEN } = process.env
+const { DINGTALK_TOKEN, DINGTALK_TOKEN_2 } = process.env
 
-if (!DINGTALK_TOKEN) {
+if (!DINGTALK_TOKEN || !DINGTALK_TOKEN_2) {
   console.log('No DINGTALK_TOKEN in your env.')
   process.exit(0)
 }
@@ -34,23 +34,25 @@ async function releaseChangelogToDingTalk () {
         message: `发布以下变更日志到钉钉群：\n\n${message}`
       }
     ])
-    .then((ans) => {
+    .then(async (ans) => {
       if (ans['release-changelog']) {
-        request
-          .post('https://oapi.dingtalk.com/robot/send')
-          .query({
-            access_token: DINGTALK_TOKEN
-          })
-          .type('application/json')
-          .send({
-            msgtype: 'text',
-            text: {
-              content: message
-            }
-          })
-          .then((res) => {
-            console.log(res.text)
-          })
+        for (const token of [DINGTALK_TOKEN, DINGTALK_TOKEN_2]) {
+          await request
+            .post('https://oapi.dingtalk.com/robot/send')
+            .query({
+              access_token: token
+            })
+            .type('application/json')
+            .send({
+              msgtype: 'text',
+              text: {
+                content: message
+              }
+            })
+            .then((res) => {
+              console.log(res.text)
+            })
+        }
       }
     })
 }

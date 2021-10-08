@@ -16,7 +16,8 @@
 ## 社区
 
 - [Discord](https://discord.gg/Pqv7Mev5Dd)
-- 钉钉群 33482509
+- 钉钉一群 33482509 (已满)
+- 钉钉二群 35886835
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
 ## 特性

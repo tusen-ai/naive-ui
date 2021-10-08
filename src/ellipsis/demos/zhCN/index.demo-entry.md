@@ -14,7 +14,9 @@ custom-tooltip
 dynamic-debug
 ```
 
-## Props
+## API
+
+### Ellipsis Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
@@ -22,7 +24,7 @@ dynamic-debug
 | line-clamp | `number \| string` | `undefined` | 最大行数 | 2.1.0 |
 | tooltip | `boolean \| TooltipProps` | `true` | Tooltip 的属性 | 2.1.0 |
 
-## Slots
+### Ellipsis Slots
 
 | 名称    | 参数 | 说明           |
 | ------- | ---- | -------------- |

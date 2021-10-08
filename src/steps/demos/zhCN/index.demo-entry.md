@@ -14,7 +14,7 @@ content
 custom-icon
 ```
 
-## Props
+## API
 
 ### Steps Props
 
@@ -32,8 +32,6 @@ custom-icon
 | description | `string` | `undefined` | 节点描述 |
 | status | `'process' \| 'finish' \| 'error' \| 'wait'` | `undefined` | 节点状态 |
 | title | `string` | `undefined` | 节点标题 |
-
-## Slots
 
 ### Steps Slots
 

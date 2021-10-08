@@ -15,7 +15,9 @@ change-position
 target-container-selector
 ```
 
-## Props
+## API
+
+### BackTop Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |

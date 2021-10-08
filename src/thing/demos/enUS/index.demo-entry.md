@@ -11,7 +11,9 @@ basic
 indent
 ```
 
-## Props
+## API
+
+### Thing Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -21,7 +23,7 @@ indent
 | title-extra | `string` | `undefined` | Additional information for the title. |
 | title | `string` | `undefined` | Title information. |
 
-## Slots
+### Thing Slots
 
 | Name         | Parameters | Description          |
 | ------------ | ---------- | -------------------- |

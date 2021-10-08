@@ -14,6 +14,7 @@ import { cascaderDark } from '../cascader/styles'
 import { checkboxDark } from '../checkbox/styles'
 import { codeDark } from '../code/styles'
 import { collapseDark } from '../collapse/styles'
+import { collapseTransitionDark } from '../collapse-transition/styles'
 import { colorPickerDark } from '../color-picker/styles'
 import { dataTableDark } from '../data-table/styles'
 import { datePickerDark } from '../date-picker/styles'
@@ -51,7 +52,7 @@ import { progressDark } from '../progress/styles'
 import { radioDark } from '../radio/styles'
 import { rateDark } from '../rate/styles'
 import { resultDark } from '../result/styles'
-import { scrollbarDark } from '../scrollbar/styles'
+import { scrollbarDark } from '../_internal/scrollbar/styles'
 import { selectDark } from '../select/styles'
 import { skeletonDark } from '../skeleton/styles'
 import { sliderDark } from '../slider/styles'
@@ -91,6 +92,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Checkbox: checkboxDark,
   Code: codeDark,
   Collapse: collapseDark,
+  CollapseTransition: collapseTransitionDark,
   ColorPicker: colorPickerDark,
   DataTable: dataTableDark,
   DatePicker: datePickerDark,

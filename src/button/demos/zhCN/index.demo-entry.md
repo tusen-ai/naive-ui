@@ -23,7 +23,7 @@ rtl-debug
 debug
 ```
 
-## Props
+## API
 
 ### Button Props
 
@@ -47,14 +47,12 @@ debug
 | type | `'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 按钮的类型 |
 | tag | `string` | `'button'` | 按钮需要被渲染为什么标签 |
 
-### Button Group Props
+### ButtonGroup Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `undefined` | 在组内的按钮的尺寸。如果设定，内部的按钮尺寸将不生效 |
 | vertical | `boolean` | `false` | 组内按钮的排列方式 |
-
-## Slots
 
 ### Button Slots
 
@@ -63,7 +61,7 @@ debug
 | default | `()` | 按钮的内容 |
 | icon    | `()` | 按钮的图标 |
 
-### Button Group Slots
+### ButtonGroup Slots
 
 | 名称    | 参数 | 说明         |
 | ------- | ---- | ------------ |

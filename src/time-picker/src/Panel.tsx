@@ -1,7 +1,6 @@
 import { h, ref, defineComponent, inject, PropType, computed } from 'vue'
-import { NScrollbar } from '../../scrollbar'
+import { NScrollbar, NBaseFocusDetector } from '../../_internal'
 import { NButton } from '../../button'
-import { NBaseFocusDetector } from '../../_internal'
 import { getTimeUnits, time } from './utils'
 import {
   IsHourDisabled,

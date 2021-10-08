@@ -15,9 +15,9 @@ color
 rtl-debug
 ```
 
-## Props
+## API
 
-### Tag
+### Tag Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ rtl-debug
 | on-click | `(e: MouseEvent) => void` | `undefined` | 点击关闭时的回调 |
 | on-update:checked | `(value: boolean) => void` | `undefined` | 选择状态更改时的回调 |
 
-## Slots
+### Tag Slots
 
 | 名称    | 参数 | 说明     |
 | ------- | ---- | -------- |

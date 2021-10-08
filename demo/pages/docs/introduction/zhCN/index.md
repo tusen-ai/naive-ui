@@ -35,7 +35,8 @@ Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔�
 ## 社区
 
 - [Discord](https://discord.gg/Pqv7Mev5Dd)
-- 钉钉群 33482509
+- 钉钉一群 33482509 (已满)
+- 钉钉二群 35886835
 
 ## 贡献
 

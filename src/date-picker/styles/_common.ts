@@ -2,6 +2,8 @@ export default {
   itemSize: '24px',
   itemCellWidth: '38px',
   itemCellHeight: '32px',
+  scrollItemWidth: '80px',
+  scrollItemHeight: '40px',
   panelExtraFooterPadding: '8px 12px',
   panelActionPadding: '8px 12px',
   calendarTitlePadding: '0',
@@ -15,8 +17,10 @@ export default {
   calendarLeftPaddingDatetime: '4px 12px',
   calendarLeftPaddingDaterange: '6px 12px 4px 12px',
   calendarLeftPaddingDatetimerange: '4px 12px',
+  calendarLeftPaddingMonth: '0',
   calendarRightPaddingDate: '6px 12px 4px 12px',
   calendarRightPaddingDatetime: '4px 12px',
   calendarRightPaddingDaterange: '6px 12px 4px 12px',
-  calendarRightPaddingDatetimerange: '4px 12px'
+  calendarRightPaddingDatetimerange: '4px 12px',
+  calendarRightPaddingMonth: '0'
 }

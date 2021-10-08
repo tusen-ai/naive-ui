@@ -1,6 +1,6 @@
-import { h, HTMLAttributes, nextTick } from 'vue'
+import { h, HTMLAttributes, nextTick, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NDataTable } from '../index'
+import { DataTableInst, NDataTable } from '../index'
 import type { DataTableColumns } from '../index'
 import { NButton, NButtonGroup } from '../../button'
 
@@ -319,6 +319,267 @@ describe('n-data-table', () => {
     expect(wrapper.find('tbody .n-data-table-tr').classes()).toContain('0-test')
   })
 
+  describe('should work with multiple sorter', () => {
+    interface UserData {
+      name: string
+      age: number
+      address: string
+      chinese: number
+      math: number
+      english: number
+    }
+    const columns: DataTableColumns<UserData> = [
+      {
+        title: 'Name',
+        key: 'name'
+      },
+      {
+        title: () => h('span', { id: 'age-title' }, 'Age'),
+        className: 'age-col',
+        key: 'age',
+        sorter: (a, b) => a.age - b.age
+      },
+      {
+        title: () => <span id="chinese-title">Chinese Score</span>,
+        key: 'chinese',
+        defaultSortOrder: false,
+        className: 'chinese-col',
+        sorter: {
+          compare: (a, b) => a.chinese - b.chinese,
+          multiple: 3
+        }
+      },
+      {
+        title: () => <span id="math-title">Math Score</span>,
+        defaultSortOrder: false,
+        className: 'math-col',
+        key: 'math',
+        sorter: {
+          compare: (a, b) => a.math - b.math,
+          multiple: 2
+        }
+      },
+      {
+        title: () => <span id="english-title">English Score</span>,
+        className: 'english-col',
+        defaultSortOrder: false,
+        key: 'english',
+        sorter: {
+          compare: (a, b) => a.english - b.english,
+          multiple: 1
+        }
+      },
+      {
+        title: 'Address',
+        key: 'address',
+        filterOptions: [
+          {
+            label: 'London',
+            value: 'London'
+          },
+          {
+            label: 'New York',
+            value: 'New York'
+          },
+          {
+            label: 'Sidney',
+            value: 'Sidney'
+          }
+        ],
+        filter (value: any, row) {
+          return row.address.includes(value)
+        }
+      }
+    ]
+
+    const data = [
+      {
+        name: 'John Brown',
+        age: 32,
+        address: 'New York No. 1 Lake Park',
+        chinese: 98,
+        math: 60,
+        english: 70
+      },
+      {
+        name: 'Jim Green',
+        age: 42,
+        address: 'London No. 1 Lake Park',
+        chinese: 98,
+        math: 66,
+        english: 89
+      },
+      {
+        name: 'Joe Black',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park',
+        chinese: 98,
+        math: 66,
+        english: 89
+      },
+      {
+        name: 'Jim Red',
+        age: 32,
+        address: 'London No. 2 Lake Park',
+        chinese: 88,
+        math: 99,
+        english: 89
+      }
+    ]
+    const tableRef = ref<DataTableInst | null>(null)
+    const wrapper = mount(
+      () => <NDataTable ref={tableRef} columns={columns} data={data} />,
+      {
+        attachTo: document.body
+      }
+    )
+    const checkIsMatched = async (
+      colClassName: string,
+      target: number[]
+    ): Promise<boolean> => {
+      const cols = await wrapper.findAll(colClassName)
+      const colNums = cols.slice(1).map((item) => Number(item.text()))
+      const matchResult = String(colNums) === String(target)
+      if (!matchResult) {
+        console.log(colClassName, String(colNums), String(target))
+      }
+      return String(colNums) === String(target)
+    }
+    const checkScoreIsMatched = async (
+      targets: [number[], number[], number[]]
+    ): Promise<boolean> => {
+      const matchResult =
+        (await checkIsMatched('.chinese-col', targets[0])) &&
+        (await checkIsMatched('.math-col', targets[1])) &&
+        (await checkIsMatched('.english-col', targets[2]))
+
+      return matchResult
+    }
+    const chineseDom: HTMLElement | null =
+      document.querySelector('#chinese-title')
+    const mathDom: HTMLElement | null = document.querySelector('#math-title')
+    const englishDom: HTMLElement | null =
+      document.querySelector('#english-title')
+    const ageDom: HTMLElement | null = document.querySelector('#age-title')
+
+    it('chinese: descend, math: false, english: false', async () => {
+      await chineseDom?.click()
+      expect(
+        await checkScoreIsMatched([
+          [98, 98, 98, 88],
+          [60, 66, 66, 99],
+          [70, 89, 89, 89]
+        ])
+      ).toEqual(true)
+    })
+    it('chinese: descend, math: descend, english: false', async () => {
+      await mathDom?.click()
+      expect(
+        await checkScoreIsMatched([
+          [98, 98, 98, 88],
+          [66, 66, 60, 99],
+          [89, 89, 70, 89]
+        ])
+      ).toEqual(true)
+    })
+
+    it('chinese: descend, math: descend, english: descend', async () => {
+      await englishDom?.click()
+      expect(
+        await checkScoreIsMatched([
+          [98, 98, 98, 88],
+          [66, 66, 60, 99],
+          [89, 89, 70, 89]
+        ])
+      ).toEqual(true)
+    })
+
+    it('chinese: ascend, math: descend, english: descend', async () => {
+      await chineseDom?.click()
+      expect(
+        await checkScoreIsMatched([
+          [88, 98, 98, 98],
+          [99, 66, 66, 60],
+          [89, 89, 89, 70]
+        ])
+      ).toEqual(true)
+    })
+
+    it('chinese: false, math: descend, english: descend', async () => {
+      await chineseDom?.click()
+      expect(
+        await checkScoreIsMatched([
+          [88, 98, 98, 98],
+          [99, 66, 66, 60],
+          [89, 89, 89, 70]
+        ])
+      ).toEqual(true)
+    })
+
+    it('chinese: false, math: ascend, english: descend', async () => {
+      await mathDom?.click()
+      expect(
+        await checkScoreIsMatched([
+          [98, 98, 98, 88],
+          [60, 66, 66, 99],
+          [70, 89, 89, 89]
+        ])
+      ).toEqual(true)
+    })
+
+    it('chinese: false, math: false, english: descend', async () => {
+      await mathDom?.click()
+      expect(
+        await checkScoreIsMatched([
+          [98, 98, 88, 98],
+          [66, 66, 99, 60],
+          [89, 89, 89, 70]
+        ])
+      ).toEqual(true)
+    })
+
+    it('chinese: descend, math: false, english: descend', async () => {
+      await chineseDom?.click()
+      expect(
+        await checkScoreIsMatched([
+          [98, 98, 98, 88],
+          [66, 66, 60, 99],
+          [89, 89, 70, 89]
+        ])
+      ).toEqual(true)
+    })
+
+    it('filter: Sidney and New York', async () => {
+      if (tableRef.value) {
+        tableRef.value.filter({
+          address: ['Sidney', 'New York']
+        })
+      }
+      await nextTick()
+      const result = await checkScoreIsMatched([
+        [98, 98],
+        [66, 60],
+        [89, 70]
+      ])
+      expect(result).toEqual(true)
+      if (tableRef.value) {
+        tableRef.value.filter(null)
+      }
+    })
+
+    it('age: descend', async () => {
+      await ageDom?.click()
+      const result =
+        (await checkIsMatched('.age-col', [42, 32, 32, 32])) &&
+        (await checkScoreIsMatched([
+          [98, 98, 98, 88],
+          [66, 60, 66, 99],
+          [89, 70, 89, 89]
+        ]))
+      expect(result).toEqual(true)
+    })
+  })
+
   it('should work with `indent` prop', async () => {
     const columns = [
       {
@@ -429,5 +690,225 @@ describe('n-data-table', () => {
     expect(wrapper.find('.n-data-table').classes()).toContain(
       'n-data-table--single-column'
     )
+  })
+
+  it('should work with `single-line` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('.n-data-table').classes()).toContain(
+      'n-data-table--single-line'
+    )
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} single-line={false} />
+    ))
+    expect(wrapper.find('.n-data-table').classes()).not.toContain(
+      'n-data-table--single-line'
+    )
+  })
+
+  it('should work with `size` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    ;(['small', 'medium', 'large'] as const).forEach((size) => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={data} size={size} />
+      ))
+      expect(
+        wrapper.find('.n-data-table').attributes('style')
+      ).toMatchSnapshot()
+    })
+  })
+
+  it('should work with `summary` prop', async () => {
+    interface Data {
+      name: number
+      age: number
+    }
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      },
+      {
+        title: 'Age',
+        key: 'age'
+      }
+    ]
+    const data = new Array(10).fill(0).map((_, index) => {
+      return {
+        name: index,
+        age: index
+      }
+    })
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    const summary = (pageData: Data[]) => {
+      return {
+        name: {
+          value: pageData.reduce((prevValue, row) => prevValue + row.age, 0),
+          colSpan: 1,
+          rowSpan: 2
+        },
+        age: {
+          value: pageData.reduce((prevValue, row) => prevValue + row.age, 0),
+          colSpan: 2,
+          rowSpan: 1
+        }
+      }
+    }
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} summary={summary} />
+    ))
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[0].attributes('data-col-key')
+    ).toBe('name')
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[0].attributes('colspan')
+    ).toBe('1')
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[0].attributes('rowspan')
+    ).toBe('2')
+    expect(wrapper.findAll('.n-data-table-td--summary')[0].text()).toBe('45')
+
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[1].attributes('data-col-key')
+    ).toBe('age')
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[1].attributes('colspan')
+    ).toBe('2')
+    expect(
+      wrapper.findAll('.n-data-table-td--summary')[1].attributes('rowspan')
+    ).toBe('1')
+    expect(wrapper.findAll('.n-data-table-td--summary')[1].text()).toBe('45')
+  })
+
+  it('should work with `virtual-scroll` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('tbody').element.children.length).not.toBe(0)
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} virtual-scroll={true} />
+    ))
+    expect(wrapper.find('tbody').element.children.length).toBe(0)
+  })
+
+  it('should work with `on-update:checked-row-keys` prop', async () => {
+    const handleCheck = jest.fn()
+    const columns: DataTableColumns = [
+      {
+        type: 'selection'
+      },
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(2).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        row-key={rowKey}
+        onUpdateCheckedRowKeys={handleCheck}
+      />
+    ))
+    await wrapper.find('.n-checkbox').trigger('click')
+    expect(handleCheck).toHaveBeenCalled()
+  })
+
+  it('should work with `rowSpan` `colSpan` prop', async () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        rowSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1),
+        colSpan: (rowData, rowIndex) => (rowIndex === 0 ? 3 : 1)
+      },
+      {
+        title: 'Age',
+        key: 'age'
+      }
+    ]
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: index,
+        age: index + 1
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} row-key={rowKey} />
+    ))
+    expect(wrapper.find('tbody .n-data-table-td').attributes('colspan')).toBe(
+      '3'
+    )
+    expect(wrapper.find('tbody .n-data-table-td').attributes('rowspan')).toBe(
+      '2'
+    )
+  })
+
+  it('should work with `align` prop', async () => {
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: index,
+        age: index + 1
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    ;(['left', 'right', 'center'] as const).forEach((align) => {
+      const columns: DataTableColumns = [
+        {
+          title: 'Name',
+          key: 'name',
+          align: align
+        },
+        {
+          title: 'Age',
+          key: 'age'
+        }
+      ]
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={data} row-key={rowKey} />
+      ))
+      expect(wrapper.find('tbody .n-data-table-td').classes()).toContain(
+        `n-data-table-td--${align}-align`
+      )
+      expect(
+        wrapper.find('tbody .n-data-table-td').attributes('style')
+      ).toContain(`text-align: ${align}`)
+    })
   })
 })

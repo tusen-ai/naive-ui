@@ -47,7 +47,7 @@ export default cB('form-item', {
     grid-template-areas:
       "label blank"
       "label feedback";
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
   `, [
     cB('form-item-label', `
       height: var(--blank-height);

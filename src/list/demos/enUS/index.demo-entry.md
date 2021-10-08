@@ -11,15 +11,13 @@ basic
 border
 ```
 
-## Props
+## API
 
 ### List Props
 
 | Name     | Type      | Default | Description                 |
 | -------- | --------- | ------- | --------------------------- |
 | bordered | `boolean` | `false` | Whether to show the border. |
-
-## Slots
 
 ### List Slots
 
@@ -29,7 +27,7 @@ border
 | footer  | `()`       | Content at the bottom of the list.    |
 | header  | `()`       | The contents of the head of the list. |
 
-### List Item Slots
+### ListItem Slots
 
 | Name    | Parameters | Description                         |
 | ------- | ---------- | ----------------------------------- |

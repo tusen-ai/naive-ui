@@ -45,8 +45,10 @@ export function getFlagOfOrder (order: SortOrder): SortOrderFlag {
 export function createCustomWidthStyle (
   column: TableBaseColumn | TableSelectionColumn | TableExpandColumn
 ): CSSProperties {
+  const width = pxfy(getColWidth(column))
   return {
-    width: pxfy(getColWidth(column))
+    width,
+    minWidth: width
   }
 }
 
@@ -105,4 +107,16 @@ export function createNextSorter (
       order: getNextOrderOf(currentSortState.order)
     }
   }
+}
+
+export function isColumnSorting (
+  column: TableColumn,
+  mergedSortState: SortState[]
+): boolean {
+  return (
+    mergedSortState.find(
+      (state) =>
+        state.columnKey === (column as TableBaseColumn).key && state.order
+    ) !== undefined
+  )
 }

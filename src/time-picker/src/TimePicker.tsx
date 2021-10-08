@@ -117,6 +117,10 @@ const timePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  show: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
@@ -187,7 +191,9 @@ export default defineComponent({
         ? ''
         : format(mergedValue, props.format, dateFnsOptionsRef.value)
     )
-    const activeRef = ref(false)
+    const uncontrolledShowRef = ref(false)
+    const controlledShowRef = toRef(props, 'show')
+    const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
     const memorizedValueRef = ref(mergedValue)
     const transitionDisabledRef = ref(false)
 
@@ -327,7 +333,7 @@ export default defineComponent({
     }
     function handleTriggerClick (e: MouseEvent): void {
       if (mergedDisabledRef.value || happensIn(e, 'clear')) return
-      if (!activeRef.value) {
+      if (!mergedShowRef.value) {
         openPanel()
       }
     }
@@ -369,7 +375,7 @@ export default defineComponent({
     }
     function handleTimeInputBlur (e: FocusEvent): void {
       if (isInternalFocusSwitch(e)) return
-      if (activeRef.value) {
+      if (mergedShowRef.value) {
         const panelEl = panelInstRef.value?.$el
         if (!panelEl?.contains(e.relatedTarget as Node)) {
           doBlur(e)
@@ -382,7 +388,7 @@ export default defineComponent({
 
     function handleTimeInputActivate (): void {
       if (mergedDisabledRef.value) return
-      if (!activeRef.value) {
+      if (!mergedShowRef.value) {
         openPanel()
       }
     }
@@ -422,6 +428,9 @@ export default defineComponent({
         }
       }
     }
+    function doUpdateShow (value: boolean): void {
+      uncontrolledShowRef.value = value
+    }
     function isInternalFocusSwitch (e: FocusEvent): boolean {
       return !!(
         inputInstRef.value?.wrapperElRef?.contains(e.relatedTarget as Node) ||
@@ -430,12 +439,12 @@ export default defineComponent({
     }
     function openPanel (): void {
       memorizedValueRef.value = mergedValueRef.value
-      activeRef.value = true
+      doUpdateShow(true)
       void nextTick(scrollTimer)
     }
     function handleClickOutside (e: MouseEvent): void {
       if (
-        activeRef.value &&
+        mergedShowRef.value &&
         !inputInstRef.value?.wrapperElRef?.contains(e.target as Node)
       ) {
         closePanel({
@@ -444,8 +453,8 @@ export default defineComponent({
       }
     }
     function closePanel ({ returnFocus }: { returnFocus: boolean }): void {
-      if (activeRef.value) {
-        activeRef.value = false
+      if (mergedShowRef.value) {
+        doUpdateShow(false)
         if (returnFocus) {
           inputInstRef.value?.focus()
         }
@@ -479,7 +488,7 @@ export default defineComponent({
     }
     function handleCancelClick (): void {
       doChange(memorizedValueRef.value)
-      activeRef.value = false
+      doUpdateShow(false)
     }
     function handleNowClick (): void {
       const now = new Date()
@@ -525,7 +534,7 @@ export default defineComponent({
       disableTransitionOneTick()
       void nextTick(scrollTimer)
     })
-    watch(activeRef, () => {
+    watch(mergedShowRef, () => {
       if (isValueInvalidRef.value) {
         doChange(memorizedValueRef.value)
       }
@@ -544,7 +553,7 @@ export default defineComponent({
       inputInstRef,
       panelInstRef,
       adjustedTo: useAdjustedTo(props),
-      active: activeRef,
+      mergedShow: mergedShowRef,
       localizedNow: localizedNowRef,
       localizedPlaceholder: localizedPlaceholderRef,
       localizedNegativeText: localizedNegativeTextRef,
@@ -607,7 +616,8 @@ export default defineComponent({
             itemFontSize,
             itemWidth,
             itemHeight,
-            panelActionPadding
+            panelActionPadding,
+            itemBorderRadius
           },
           common: { cubicBezierEaseInOut }
         } = themeRef.value
@@ -624,7 +634,8 @@ export default defineComponent({
           '--panel-action-padding': panelActionPadding,
           '--panel-box-shadow': panelBoxShadow,
           '--panel-color': panelColor,
-          '--panel-divider-color': panelDividerColor
+          '--panel-divider-color': panelDividerColor,
+          '--item-border-radius': itemBorderRadius
         }
       })
     }
@@ -665,7 +676,7 @@ export default defineComponent({
                       onUpdateValue={this.handleTimeInputUpdateValue}
                       onClear={this.handleTimeInputClear}
                       internalDeactivateOnEnter
-                      internalForceFocus={this.active}
+                      internalForceFocus={this.mergedShow}
                       readonly={this.inputReadonly || this.mergedDisabled}
                       onClick={this.handleTriggerClick}
                     >
@@ -689,7 +700,7 @@ export default defineComponent({
               </VTarget>,
               <VFollower
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                show={this.active}
+                show={this.mergedShow}
                 to={this.adjustedTo}
                 containerClass={this.namespace}
                 placement="bottom-start"
@@ -702,7 +713,7 @@ export default defineComponent({
                     >
                       {{
                         default: () =>
-                          this.active
+                          this.mergedShow
                             ? withDirectives(
                                 <Panel
                                   ref="panelInstRef"

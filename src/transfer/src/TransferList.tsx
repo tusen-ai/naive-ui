@@ -10,7 +10,7 @@ import {
 } from 'vue'
 import { VirtualList, VirtualListInst } from 'vueuc'
 import { NEmpty } from '../../empty'
-import { NScrollbar, ScrollbarInst } from '../../scrollbar'
+import { NScrollbar, ScrollbarInst } from '../../_internal'
 import { Option, transferInjectionKey } from './interface'
 import NTransferListItem from './TransferListItem'
 

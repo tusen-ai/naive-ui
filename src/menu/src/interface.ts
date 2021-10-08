@@ -3,8 +3,8 @@ import { VNodeChild } from 'vue'
 
 export type Key = string | number
 
-export interface MenuOptionBase {
-  key: Key
+export interface MenuOptionSharedPart {
+  key?: Key
   disabled?: boolean
   icon?: () => VNodeChild
   children?: Array<MenuOption | MenuGroupOption>
@@ -14,22 +14,22 @@ export interface MenuOptionBase {
   titleExtra?: string | (() => VNodeChild)
 }
 
-export interface MenuGroupOptionBase extends MenuOptionBase {
+export interface MenuGroupOptionBase extends MenuOptionSharedPart {
   type: 'group'
-  children: Array<MenuOption | MenuGroupOption>
+  children?: Array<MenuOption | MenuGroupOption>
 }
 
 export type MenuOption =
-  | (MenuOptionBase & {
+  | (MenuOptionSharedPart & {
     /** @deprecated */
-    title: string | (() => VNodeChild)
+    title?: string | (() => VNodeChild)
   })
-  | (MenuOptionBase & { label?: string | (() => VNodeChild) })
+  | (MenuOptionSharedPart & { label?: string | (() => VNodeChild) })
 
 export type MenuGroupOption =
   | (MenuGroupOptionBase & {
     /** @deprecated */
-    title: string | (() => VNodeChild)
+    title?: string | (() => VNodeChild)
   })
   | (MenuGroupOptionBase & { label?: string | (() => VNodeChild) })
 
@@ -48,6 +48,7 @@ export type OnUpdateValueImpl = (
   value: string | number | (string | number),
   item: MenuOption
 ) => void
+
 export type OnUpdateKeysImpl = (
   keys: string[] | number[] | Array<string | number>
 ) => void

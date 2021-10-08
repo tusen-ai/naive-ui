@@ -45,7 +45,12 @@ function genDemosTemplate (demoInfos, colSpan) {
     .join('\n')}</component-demos>`
 }
 
-function genAnchorTemplate (children, options = {}) {
+function genAnchorTemplate (
+  children,
+  options = {
+    ignoreGap: false
+  }
+) {
   return `
     <n-anchor
       :bound="16"
@@ -59,15 +64,25 @@ function genAnchorTemplate (children, options = {}) {
   `
 }
 
-function genDemosAnchorTemplate (demoInfos) {
-  const links = demoInfos.map(
+function genDemosAnchorTemplate (demoInfos, hasApi) {
+  const links = (
+    hasApi
+      ? demoInfos.concat({
+        id: 'API',
+        title: 'API',
+        debug: false
+      })
+      : demoInfos
+  ).map(
     ({ id, title, debug }) => `<n-anchor-link
     v-if="(displayMode === 'debug') || ${!debug}"
     title="${title}"
     href="#${id}"
   />`
   )
-  return genAnchorTemplate(links.join('\n'))
+  return genAnchorTemplate(links.join('\n'), {
+    ignoreGap: hasApi
+  })
 }
 
 function genPageAnchorTemplate (tokens) {
@@ -137,6 +152,7 @@ async function convertMd2ComponentDocumentation (
 ) {
   const forceShowAnchor = !!~text.search('<!--anchor:on-->')
   const colSpan = ~text.search('<!--single-column-->') ? 1 : 2
+  const hasApi = !!~text.search('## API')
   const tokens = marked.lexer(text)
   // resolve external components
   const componentsIndex = tokens.findIndex(
@@ -202,7 +218,7 @@ async function convertMd2ComponentDocumentation (
     <div style="width: 128px;" v-if="showAnchor">
       ${
         demoInfos.length
-          ? genDemosAnchorTemplate(demoInfos)
+          ? genDemosAnchorTemplate(demoInfos, hasApi)
           : genPageAnchorTemplate(tokens)
       }
     </div>

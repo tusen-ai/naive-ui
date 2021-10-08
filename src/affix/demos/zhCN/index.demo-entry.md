@@ -9,7 +9,9 @@ basic
 position
 ```
 
-## Props
+## API
+
+### Affix Props
 
 | 名称 | 类型 | 默认值 | 描述 |
 | --- | --- | --- | --- |

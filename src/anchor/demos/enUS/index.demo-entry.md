@@ -13,7 +13,9 @@ affix
 scrollto
 ```
 
-## Props
+## API
+
+### Anchor Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -25,7 +27,7 @@ scrollto
 | show-background | `boolean` | `true` | Whether to show background of links. |
 | type | `'rail' \| 'block'` | `'rail'` | The type to use. |
 
-## Methods
+### Anchor Methods
 
 | Name | Type | Description |
 | --- | --- | --- |

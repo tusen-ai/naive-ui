@@ -7,6 +7,16 @@ describe('n-breadcrumb', () => {
     mount(NBreadcrumb)
   })
 
+  it('should raise an error if breadcrumbItem is not inside a BreadCrumb', () => {
+    const mockErrorLogger = jest.spyOn(console, 'error').mockImplementation()
+    const wrapper = mount(NBreadcrumbItem)
+
+    expect(wrapper.isVisible()).toBe(false)
+    expect(mockErrorLogger).toBeCalledWith(
+      '[naive/breadcrumb]: `n-breadcrumb-item` must be placed inside `n-breadcrumb`.'
+    )
+  })
+
   it('should work with Breadcrumb, BreadcrumbItem slots', async () => {
     const wrapper = mount(NBreadcrumb, {
       slots: {
@@ -17,9 +27,9 @@ describe('n-breadcrumb', () => {
       }
     })
 
-    expect(wrapper.find('.n-breadcrumb').element.children.length).toBe(2)
+    expect(wrapper.find('ul').element.children.length).toBe(2)
     expect(
-      wrapper.find('.n-breadcrumb').element.children[0].getAttribute('class')
+      wrapper.find('ul').element.children[0].getAttribute('class')
     ).toContain('n-breadcrumb-item')
     const itemList = wrapper.findAll('.n-breadcrumb-item__link')
     expect(itemList[0].text()).toBe('test-item1')
@@ -60,5 +70,99 @@ describe('n-breadcrumb', () => {
 
     expect(wrapper.findAll('.n-breadcrumb-item__separator')[0].text()).toBe('@')
     expect(wrapper.findAll('.n-breadcrumb-item__separator')[1].text()).toBe('/')
+  })
+
+  it('should be possible to pass `href` props to NBreadcrumbItem', () => {
+    const wrapper = mount(NBreadcrumb, {
+      slots: {
+        default: () => [
+          h(NBreadcrumbItem, null, { default: () => 'Home' }),
+          h(NBreadcrumbItem, { href: '/path1' }, { default: () => 'Path1' })
+        ]
+      }
+    })
+
+    const firstBreadcrumbItem = wrapper.find('span.n-breadcrumb-item__link')
+    const secondBreadcrumbItem = wrapper.find('a.n-breadcrumb-item__link')
+
+    expect(firstBreadcrumbItem.exists()).toBe(true)
+    expect(firstBreadcrumbItem.text()).toMatch('Home')
+    expect(secondBreadcrumbItem.exists()).toBe(true)
+    expect(secondBreadcrumbItem.attributes('href')).toMatch('/path1')
+  })
+
+  describe('accessibility', () => {
+    it('should labelled the landmark region', () => {
+      const wrapper = mount(NBreadcrumb)
+      expect(wrapper.find('.n-breadcrumb').attributes('aria-label')).toBe(
+        'Breadcrumb'
+      )
+    })
+
+    it('should add `aria-current` if the item is the current location', () => {
+      global.window = Object.create(window)
+      const currentUrl = 'http://some-domaine/path2'
+      const url = 'http://some-domaine/path1'
+      Object.defineProperty(window, 'location', {
+        value: {
+          href: currentUrl
+        }
+      })
+
+      const wrapper = mount(NBreadcrumb, {
+        slots: {
+          default: () => [
+            h(NBreadcrumbItem, { default: () => 'Home' }),
+            h(
+              NBreadcrumbItem,
+              {
+                href: url
+              },
+              { default: () => 'Path1' }
+            ),
+            h(
+              NBreadcrumbItem,
+              {
+                href: currentUrl
+              },
+              { default: () => 'Path2' }
+            )
+          ]
+        }
+      })
+
+      expect(
+        wrapper.find('span.n-breadcrumb-item__link').attributes('aria-current')
+      ).toBe(undefined)
+      expect(
+        wrapper
+          .find(`a.n-breadcrumb-item__link[href="${url}"]`)
+          .attributes('aria-current')
+      ).toBe(undefined)
+      expect(
+        wrapper
+          .find(`a.n-breadcrumb-item__link[href="${currentUrl}"]`)
+          .attributes('aria-current')
+      ).toBe('location')
+    })
+
+    it('should add `aria-hidden` to the separator', () => {
+      const wrapper = mount(NBreadcrumb, {
+        slots: {
+          default: () => [
+            h(NBreadcrumbItem, { default: () => 'Home' }),
+            h(
+              NBreadcrumbItem,
+              { href: '/path1', isCurrent: true },
+              { default: () => 'Path1' }
+            )
+          ]
+        }
+      })
+
+      expect(
+        wrapper.find('.n-breadcrumb-item__separator').attributes('aria-hidden')
+      ).toBe('true')
+    })
   })
 })
