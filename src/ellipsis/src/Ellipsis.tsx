@@ -68,14 +68,15 @@ export default defineComponent({
       const { value: trigger } = triggerRef
       if (trigger) {
         const { lineClamp } = props
+        // we need to apply style here, since the dom may be updated in
+        // nextTick, measure dom size will derive wrong result
+        syncEllipsisStyle(trigger)
         if (lineClamp !== undefined) {
           tooltipDisabled = trigger.scrollHeight <= trigger.offsetHeight
         } else {
           tooltipDisabled = trigger.scrollWidth <= trigger.offsetWidth
         }
-        // we need to apply style here, since the dom may be updated in
-        // nextTick, measure dom size will derive wrong result
-        syncEllipsisStyle(trigger, tooltipDisabled)
+        syncCursorStyle(trigger, tooltipDisabled)
       }
       return tooltipDisabled
     }
@@ -110,10 +111,7 @@ export default defineComponent({
         {slots}
       </span>
     )
-    function syncEllipsisStyle (
-      trigger: HTMLElement,
-      tooltipDisabled: boolean
-    ): void {
+    function syncEllipsisStyle (trigger: HTMLElement): void {
       if (!trigger) return
       const latestStyle = ellipsisStyleRef.value
       const lineClampClass = createLineClampClass(mergedClsPrefixRef.value)
@@ -126,6 +124,17 @@ export default defineComponent({
           trigger.classList.remove(lineClampClass)
         }
       }
+      for (const key in latestStyle) {
+        // guard can make it a little faster
+        if ((trigger.style as any)[key] !== (latestStyle as any)[key]) {
+          ;(trigger.style as any)[key] = (latestStyle as any)[key]
+        }
+      }
+    }
+    function syncCursorStyle (
+      trigger: HTMLElement,
+      tooltipDisabled: boolean
+    ): void {
       const cursorClass = createCursorClass(mergedClsPrefixRef.value, 'pointer')
       if (props.expandTrigger === 'click' && !tooltipDisabled) {
         if (!trigger.classList.contains(cursorClass)) {
@@ -134,12 +143,6 @@ export default defineComponent({
       } else {
         if (trigger.classList.contains(cursorClass)) {
           trigger.classList.remove(cursorClass)
-        }
-      }
-      for (const key in latestStyle) {
-        // guard can make it a little faster
-        if ((trigger.style as any)[key] !== (latestStyle as any)[key]) {
-          ;(trigger.style as any)[key] = (latestStyle as any)[key]
         }
       }
     }
