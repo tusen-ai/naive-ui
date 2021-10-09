@@ -72,7 +72,7 @@ describe('n-badge', () => {
         }
       })
 
-      expect(wrapper.html()).toContain(item.color)
+      expect(wrapper.find('.n-badge').attributes('style')).toContain(item.color)
     })
   })
 })
