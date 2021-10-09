@@ -4,8 +4,8 @@ import { commonLight } from '../_styles/common'
 import type { ThemeCommonVars } from '../_styles/common'
 
 export function useThemeVars (): ComputedRef<ThemeCommonVars> {
+  const configProviderInjection = inject(configProviderInjectionKey, null)
   return computed(() => {
-    const configProviderInjection = inject(configProviderInjectionKey, null)
     if (configProviderInjection === null) return commonLight
     const {
       mergedThemeRef: { value: mergedTheme },

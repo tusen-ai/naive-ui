@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-menu` 对于 `default-expanded-keys` 的错误警报
+- 修复 `useThemeVars` 有时无法使用，关闭 [#1309](https://github.com/TuSimple/naive-ui/issues/1309)
 
 ### Feats
 
