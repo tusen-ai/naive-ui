@@ -1,6 +1,5 @@
 import type { TmNode, CascaderOption } from './interface'
 import type { SelectBaseOption } from '../../select/src/interface'
-import { Key } from './interface'
 
 function traverseWithCallback<T extends { children?: T[] }> (
   options: T[],
@@ -58,18 +57,4 @@ function getPathLabel (
   return path.reverse().join(separator)
 }
 
-function getPathValues (node: TmNode | null, valueField: string): Key[] {
-  const pathNode: Key[] = []
-  while (node) {
-    pathNode.push((node.rawNode as any)[valueField])
-    node = node.parent
-  }
-  return pathNode.reverse()
-}
-
-export {
-  traverseWithCallback,
-  createSelectOptions,
-  getPathLabel,
-  getPathValues
-}
+export { traverseWithCallback, createSelectOptions, getPathLabel }

@@ -29,7 +29,7 @@ import { call, useAdjustedTo, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { cascaderLight } from '../styles'
 import type { CascaderTheme } from '../styles'
-import { getPathLabel, getPathValues } from './utils'
+import { getPathLabel } from './utils'
 import CascaderMenu from './CascaderMenu'
 import CascaderSelectMenu from './CascaderSelectMenu'
 import {
@@ -256,7 +256,10 @@ export default defineComponent({
     function doUpdateValue (
       value: Value | null,
       option: CascaderOption | null | Array<CascaderOption | null>,
-      pathValues: null | Array<Value | null> | Array<Array<Value | null>>
+      optionPath:
+      | null
+      | Array<CascaderOption | null>
+      | Array<Array<CascaderOption | null>>
     ): void {
       const {
         onUpdateValue,
@@ -264,11 +267,15 @@ export default defineComponent({
         onChange
       } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onUpdateValue) { call(onUpdateValue as OnUpdateValueImpl, value, option, pathValues) }
-      if (_onUpdateValue) {
-        call(_onUpdateValue as OnUpdateValueImpl, value, option, pathValues)
+      if (onUpdateValue) {
+        call(onUpdateValue as OnUpdateValueImpl, value, option, optionPath)
       }
-      if (onChange) { call(onChange as OnUpdateValueImpl, value, option, pathValues) }
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, option, optionPath)
+      }
+      if (onChange) {
+        call(onChange as OnUpdateValueImpl, value, option, optionPath)
+      }
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
@@ -280,9 +287,9 @@ export default defineComponent({
       hoverKeyRef.value = key
     }
     function doCheck (key: Key): boolean {
-      const { cascade, multiple, filterable, valueField } = props
+      const { cascade, multiple, filterable } = props
       const {
-        value: { check, getNode }
+        value: { check, getNode, getPath }
       } = treeMateRef
       if (multiple) {
         try {
@@ -295,9 +302,8 @@ export default defineComponent({
             checkedKeys.map(
               (checkedKey) => getNode(checkedKey)?.rawNode || null
             ),
-            checkedKeys.map(
-              (checkedKey) =>
-                getPathValues(getNode(checkedKey), valueField) || null
+            checkedKeys.map((checkedKey) =>
+              getPath(checkedKey).treeNodePath.map((v) => v.rawNode)
             )
           )
           if (filterable) focusSelectionInput()
@@ -318,11 +324,12 @@ export default defineComponent({
       } else {
         if (mergedCheckStrategyRef.value === 'child') {
           const tmNode = getNode(key)
+          console.log('%%%%%%', getPath(key))
           if (tmNode?.isLeaf) {
             doUpdateValue(
               key,
               tmNode.rawNode,
-              getPathValues(tmNode, valueField)
+              getPath(key).treeNodePath.map((v) => v.rawNode)
             )
           } else {
             return false
@@ -332,17 +339,17 @@ export default defineComponent({
           doUpdateValue(
             key,
             tmNode?.rawNode || null,
-            getPathValues(tmNode, valueField)
+            getPath(key).treeNodePath.map((v) => v.rawNode)
           )
         }
       }
       return true
     }
     function doUncheck (key: Key): void {
-      const { cascade, multiple, valueField } = props
+      const { cascade, multiple } = props
       if (multiple) {
         const {
-          value: { uncheck, getNode }
+          value: { uncheck, getNode, getPath }
         } = treeMateRef
         const { checkedKeys } = uncheck(key, mergedKeysRef.value.checkedKeys, {
           cascade,
@@ -351,9 +358,8 @@ export default defineComponent({
         doUpdateValue(
           checkedKeys,
           checkedKeys.map((checkedKey) => getNode(checkedKey)?.rawNode || null),
-          checkedKeys.map(
-            (checkedKey) =>
-              getPathValues(getNode(checkedKey), valueField) || null
+          checkedKeys.map((checkedKey) =>
+            getPath(checkedKey).treeNodePath.map((v) => v.rawNode)
           )
         )
       }
