@@ -226,11 +226,7 @@ function useCalendar (
     if (type === 'date') {
       panelCommon.doClose()
     } else if (type === 'month') {
-      console.log(11)
-
       if (typeRef.value === 'year') {
-        console.log(22)
-
         panelCommon.doClose()
       } else {
         panelCommon.disableTransitionOneTick()
