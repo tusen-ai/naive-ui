@@ -81,6 +81,9 @@ export default defineComponent({
         case 'ArrowRight':
           props.onNext?.()
           break
+        case 'Escape':
+          toggleShow()
+          break
       }
     }
 
@@ -148,6 +151,10 @@ export default defineComponent({
       derivePreviewStyle()
       on('mousemove', document, handleMouseMove)
       on('mouseup', document, handleMouseUp)
+    }
+    function handlePreviewDblclick (): void {
+      scale = scale === 1 ? 2 : 1
+      derivePreviewStyle()
     }
 
     let scale = 1
@@ -230,6 +237,7 @@ export default defineComponent({
       appear: useIsMounted(),
       displayed: displayedRef,
       handlePreviewMousedown,
+      handlePreviewDblclick,
       syncTransformOrigin,
       handleAfterLeave: () => {
         rotate = 0
@@ -363,6 +371,7 @@ export default defineComponent({
                                 <img
                                   draggable={false}
                                   onMousedown={this.handlePreviewMousedown}
+                                  onDblclick={this.handlePreviewDblclick}
                                   class={`${clsPrefix}-image-preview`}
                                   key={this.previewSrc}
                                   src={this.previewSrc}
