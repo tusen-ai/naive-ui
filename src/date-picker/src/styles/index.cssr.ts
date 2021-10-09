@@ -195,13 +195,6 @@ export default c([
         "action"
       `
     }),
-    cM('year', {
-      gridTemplateAreas: `
-        "left-calendar"
-        "footer"
-        "action"
-      `
-    }),
     cB('date-panel-footer', {
       gridArea: 'footer'
     }),
