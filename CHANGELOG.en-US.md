@@ -10,6 +10,10 @@
 
 - Fix `n-menu`'s incorrect warning on `default-expanded-keys`.
 
+### Feats
+
+- `n-cascader` provide all top Key values in `update:value` callback function，closes [#1235](https://github.com/TuSimple/naive-ui/issues/1235).
+
 ## 2.19.5 (2021-10-07)
 
 ### Fixes

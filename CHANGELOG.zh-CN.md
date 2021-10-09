@@ -10,6 +10,10 @@
 
 - 修复 `n-menu` 对于 `default-expanded-keys` 的错误警报
 
+### Feats
+
+- `n-cascader` 值改变时回调函数提供上层节点的全部 key 值，关闭 [#1235](https://github.com/TuSimple/naive-ui/issues/1235)
+
 ## 2.19.5 (2021-10-07)
 
 ### Fixes
