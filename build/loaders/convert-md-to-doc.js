@@ -52,6 +52,7 @@ function genAnchorTemplate (
   }
 ) {
   return `
+  <n-scrollbar style="max-height: calc(100vh - 10rem);position: fixed;">
     <n-anchor
       :bound="16"
       type="block"
@@ -61,6 +62,7 @@ function genAnchorTemplate (
     >
       ${children}
     </n-anchor>
+  </n-scrollbar>
   `
 }
 
