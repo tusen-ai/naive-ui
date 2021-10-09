@@ -82,7 +82,8 @@ const layoutSiderProps = {
   >,
   // deprecated
   onExpand: [Function, Array] as PropType<MaybeArray<() => void>>,
-  onCollapse: [Function, Array] as PropType<MaybeArray<() => void>>
+  onCollapse: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onScroll: Function as PropType<(e: Event) => void>
 } as const
 
 export type LayoutSiderProps = ExtractPublicPropTypes<typeof layoutSiderProps>
@@ -259,6 +260,7 @@ export default defineComponent({
         {!this.nativeScrollbar ? (
           <NScrollbar
             {...this.scrollbarProps}
+            onScroll={this.onScroll}
             ref="scrollbarInstRef"
             style={this.scrollContainerStyle}
             contentStyle={this.contentStyle}
@@ -280,6 +282,7 @@ export default defineComponent({
         ) : (
           <div
             class={`${mergedClsPrefix}-layout-sider-scroll-container`}
+            onScroll={this.onScroll}
             style={[
               this.scrollContainerStyle,
               this.contentStyle,
