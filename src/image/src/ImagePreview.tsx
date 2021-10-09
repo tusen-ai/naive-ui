@@ -152,7 +152,7 @@ export default defineComponent({
       on('mousemove', document, handleMouseMove)
       on('mouseup', document, handleMouseUp)
     }
-    function handlePreviewDbclick (): void {
+    function handlePreviewDblclick (): void {
       scale = scale === 1 ? 2 : 1
       derivePreviewStyle()
     }
@@ -237,7 +237,7 @@ export default defineComponent({
       appear: useIsMounted(),
       displayed: displayedRef,
       handlePreviewMousedown,
-      handlePreviewDbclick,
+      handlePreviewDblclick,
       syncTransformOrigin,
       handleAfterLeave: () => {
         rotate = 0
@@ -371,7 +371,7 @@ export default defineComponent({
                                 <img
                                   draggable={false}
                                   onMousedown={this.handlePreviewMousedown}
-                                  onDbclick={this.handlePreviewDbclick}
+                                  onDblclick={this.handlePreviewDblclick}
                                   class={`${clsPrefix}-image-preview`}
                                   key={this.previewSrc}
                                   src={this.previewSrc}
