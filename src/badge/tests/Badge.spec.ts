@@ -64,7 +64,7 @@ describe('n-badge', () => {
       { type: 'warning', color: '#f0a020' }
     ] as const
 
-    data.forEach((item, index) => {
+    data.forEach((item) => {
       const wrapper = mount(NBadge, {
         props: {
           type: item.type,
