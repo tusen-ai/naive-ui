@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-menu` 对于 `default-expanded-keys` 的错误警报
+- 修复 `n-ellipisis` 的 `expand-trigger` 属性在内容不显示提示的时候禁用鼠标样式的问题，关闭 [#1299](https://github.com/TuSimple/naive-ui/issues/1299)
 
 ## 2.19.5 (2021-10-07)
 

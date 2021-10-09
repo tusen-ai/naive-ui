@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-menu`'s incorrect warning on `default-expanded-keys`.
+- Fix `n-ellipisis`'s `expand-trigger` prop not show `pointer` cursor when content is short，closes [#1299](https://github.com/TuSimple/naive-ui/issues/1299).
 
 ## 2.19.5 (2021-10-07)
 

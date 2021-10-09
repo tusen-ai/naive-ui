@@ -45,7 +45,10 @@ export default defineComponent({
     const ellipsisStyleRef = computed(() => {
       const { lineClamp } = props
       const { value: expanded } = expandedRef
-      const cursor = props.expandTrigger === 'click' ? 'pointer' : ''
+      const cursor =
+        props.expandTrigger === 'click' && !getTooltipDisabled()
+          ? 'pointer'
+          : ''
       if (lineClamp !== undefined) {
         return {
           cursor,
