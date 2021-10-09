@@ -29,7 +29,7 @@ import { call, useAdjustedTo, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { cascaderLight } from '../styles'
 import type { CascaderTheme } from '../styles'
-import { getPathLabel } from './utils'
+import { getPathLabel, getRawNodePath } from './utils'
 import CascaderMenu from './CascaderMenu'
 import CascaderSelectMenu from './CascaderSelectMenu'
 import {
@@ -256,10 +256,7 @@ export default defineComponent({
     function doUpdateValue (
       value: Value | null,
       option: CascaderOption | null | Array<CascaderOption | null>,
-      optionPath:
-      | null
-      | Array<CascaderOption | null>
-      | Array<Array<CascaderOption | null>>
+      optionPath: null | CascaderOption[] | Array<CascaderOption[] | null>
     ): void {
       const {
         onUpdateValue,
@@ -302,9 +299,8 @@ export default defineComponent({
             checkedKeys.map(
               (checkedKey) => getNode(checkedKey)?.rawNode || null
             ),
-            checkedKeys.map(
-              (checkedKey) =>
-                getPath(checkedKey)?.treeNodePath?.map((v) => v.rawNode) || null
+            checkedKeys.map((checkedKey) =>
+              getRawNodePath(getPath(checkedKey)?.treeNodePath)
             )
           )
           if (filterable) focusSelectionInput()
@@ -329,7 +325,7 @@ export default defineComponent({
             doUpdateValue(
               key,
               tmNode.rawNode,
-              getPath(key).treeNodePath.map((v) => v.rawNode)
+              getRawNodePath(getPath(key).treeNodePath)
             )
           } else {
             return false
@@ -339,7 +335,7 @@ export default defineComponent({
           doUpdateValue(
             key,
             tmNode?.rawNode || null,
-            getPath(key)?.treeNodePath?.map((v) => v.rawNode) || null
+            getRawNodePath(getPath(key)?.treeNodePath)
           )
         }
       }
@@ -358,9 +354,8 @@ export default defineComponent({
         doUpdateValue(
           checkedKeys,
           checkedKeys.map((checkedKey) => getNode(checkedKey)?.rawNode || null),
-          checkedKeys.map(
-            (checkedKey) =>
-              getPath(checkedKey)?.treeNodePath?.map((v) => v.rawNode) || null
+          checkedKeys.map((checkedKey) =>
+            getRawNodePath(getPath(checkedKey)?.treeNodePath)
           )
         )
       }

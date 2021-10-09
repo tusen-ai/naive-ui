@@ -1,6 +1,15 @@
 import type { TmNode, CascaderOption } from './interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 
+function getRawNodePath (tmNodes: TmNode[]): CascaderOption[]
+function getRawNodePath (tmNodes: TmNode[] | undefined): CascaderOption[] | null
+function getRawNodePath (
+  tmNodes: TmNode[] | undefined
+): CascaderOption[] | null {
+  if (!tmNodes) return null
+  return tmNodes.map((tmNode) => tmNode.rawNode)
+}
+
 function traverseWithCallback<T extends { children?: T[] }> (
   options: T[],
   beforeCallback: (node: T) => void,
@@ -16,6 +25,8 @@ function traverseWithCallback<T extends { children?: T[] }> (
     }
   }
 }
+
+export { getRawNodePath }
 
 function createSelectOptions (
   tmNodes: TmNode[],
