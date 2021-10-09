@@ -1,6 +1,6 @@
 # Min and Max
 
-You can set min & max of it.
+You can set minimum and maximum values too.
 
 ```html
 <n-space vertical>
