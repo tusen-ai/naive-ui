@@ -302,8 +302,9 @@ export default defineComponent({
             checkedKeys.map(
               (checkedKey) => getNode(checkedKey)?.rawNode || null
             ),
-            checkedKeys.map((checkedKey) =>
-              getPath(checkedKey).treeNodePath.map((v) => v.rawNode)
+            checkedKeys.map(
+              (checkedKey) =>
+                getPath(checkedKey)?.treeNodePath?.map((v) => v.rawNode) || null
             )
           )
           if (filterable) focusSelectionInput()
@@ -324,7 +325,6 @@ export default defineComponent({
       } else {
         if (mergedCheckStrategyRef.value === 'child') {
           const tmNode = getNode(key)
-          console.log('%%%%%%', getPath(key))
           if (tmNode?.isLeaf) {
             doUpdateValue(
               key,
@@ -339,7 +339,7 @@ export default defineComponent({
           doUpdateValue(
             key,
             tmNode?.rawNode || null,
-            getPath(key).treeNodePath.map((v) => v.rawNode)
+            getPath(key)?.treeNodePath?.map((v) => v.rawNode) || null
           )
         }
       }
@@ -358,8 +358,9 @@ export default defineComponent({
         doUpdateValue(
           checkedKeys,
           checkedKeys.map((checkedKey) => getNode(checkedKey)?.rawNode || null),
-          checkedKeys.map((checkedKey) =>
-            getPath(checkedKey).treeNodePath.map((v) => v.rawNode)
+          checkedKeys.map(
+            (checkedKey) =>
+              getPath(checkedKey)?.treeNodePath?.map((v) => v.rawNode) || null
           )
         )
       }
