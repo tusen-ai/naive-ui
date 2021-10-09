@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-layout` 和 `n-layout-sider` 增加 `on-scroll` 属性，关闭 [#1232](https://github.com/TuSimple/naive-ui/issues/1232)
+
+### Fixes
+
+- 修复 `n-menu` 对于 `default-expanded-keys` 的错误警报
+
 ## 2.19.5 (2021-10-07)
 
 ### Fixes
