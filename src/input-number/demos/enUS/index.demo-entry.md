@@ -1,6 +1,6 @@
 # Input Number
 
-If you want just input number, use it.
+If you just want a number, this is for you.
 
 ## Demos
 
@@ -22,26 +22,26 @@ show-button
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| bordered | `boolean` | `true` | Whether to show the border. |
+| bordered | `boolean` | `true` | Whether to show a border. |
 | clearable | `boolean` | `false` | Whether the input is clearable. |
-| default-value | `number \| null` | `null` | Default value in uncontrolled mode. |
+| default-value | `number \| null` | `null` | Default value when not manually set. |
 | disabled | `boolean` | `false` | Whether to disable the input. |
 | max | `number` | `undefined` | The max value. |
 | min | `number` | `undefined` | The min value. |
-| placeholder | `string` | `'Please Input'` | Placeholder of input number. |
-| show-button | `boolean` | `true` | Whether to show buttons. |
+| placeholder | `string` | `'Please Input'` | Placeholder. |
+| show-button | `boolean` | `true` | Whether to show increase/decrease buttons. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of input box. |
-| step | `number` | `1` | The number to which the current value is increased or decreased. It can be an integer or decimal. |
+| step | `number` | `1` | The number which the current value is increased or decreased on key or button press. It can be an integer or a decimal. |
 | validator | `(value) => boolean` | `undefined` | Setup custom validation. |
-| value | `number \| null` | `undefined` | Value in controlled mode. |
-| on-blur | `(event: FocusEvent) => void` | `undefined` | Callback when blur. |
-| on-clear | `() => void` | `undefined` | Callback triggered when clear. |
-| on-focus | `(event: FocusEvent) => void` | `undefined` | Callback when focused. |
-| on-update:value | `(value: number \| null) => void` | `undefined` | Callback when the component's value changes. |
+| value | `number \| null` | `undefined` | Manually set the input value. |
+| on-blur | `(event: FocusEvent) => void` | `undefined` | Callback triggered when the input is blurred. |
+| on-clear | `() => void` | `undefined` | Callback triggered when the input is cleared. |
+| on-focus | `(event: FocusEvent) => void` | `undefined` | Callback triggered when the input is focussed on. |
+| on-update:value | `(value: number \| null) => void` | `undefined` | Callback triggered when the input value changes. |
 
 ### InputNumber Slots
 
 | Name   | Parameters | Description                    |
 | ------ | ---------- | ------------------------------ |
-| prefix | `()`       | Input box prefix content slot. |
-| suffix | `()`       | Input box suffix content slot. |
+| prefix | `()`       | Prefix content slot. |
+| suffix | `()`       | Suffix content slot. |
