@@ -51,8 +51,14 @@ export default defineComponent({
     return { ...useCalendarRef, renderItem }
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts, actions, renderItem } =
-      this
+    const {
+      mergedClsPrefix,
+      mergedTheme,
+      shortcuts,
+      actions,
+      renderItem,
+      typeRef
+    } = this
     return (
       <div
         ref="selfRef"
@@ -97,26 +103,28 @@ export default defineComponent({
               )
             }}
           </NScrollbar>
-          <div
-            class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
-          >
-            <NScrollbar
-              ref="monthScrollRef"
-              theme={mergedTheme.peers.Scrollbar}
-              themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+          {typeRef === 'month' ? (
+            <div
+              class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
             >
-              {{
-                default: () => [
-                  this.monthArray.map((monthItem, i) =>
-                    renderItem(monthItem, i, mergedClsPrefix)
-                  ),
-                  <div
-                    class={`${mergedClsPrefix}-date-panel-month-calendar__padding`}
-                  />
-                ]
-              }}
-            </NScrollbar>
-          </div>
+              <NScrollbar
+                ref="monthScrollRef"
+                theme={mergedTheme.peers.Scrollbar}
+                themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+              >
+                {{
+                  default: () => [
+                    this.monthArray.map((monthItem, i) =>
+                      renderItem(monthItem, i, mergedClsPrefix)
+                    ),
+                    <div
+                      class={`${mergedClsPrefix}-date-panel-month-calendar__padding`}
+                    />
+                  ]
+                }}
+              </NScrollbar>
+            </div>
+          ) : null}
         </div>
         {this.datePickerSlots.footer ? (
           <div class={`${mergedClsPrefix}-date-panel-footer`}>

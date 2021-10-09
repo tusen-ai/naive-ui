@@ -47,6 +47,10 @@
 - `n-image`'s `toolbar` add close icon, closes [#1412](https://github.com/TuSimple/naive-ui/issues/1412).
 - `n-tree`'s `on-load` prop is triggered when the `expanded-keys` prop changes in `remote` mode, closes [#1339](https://github.com/TuSimple/naive-ui/issues/1339).
 
+### Feats
+
+- `n-date-picker`'s `type` prop support `year` option.
+
 ## 2.20.0 (2021-10-28)
 
 ### Breaking Changes
@@ -142,10 +146,6 @@
 
 - `n-cascader` provide all options paths in `update:value` callback function, closes [#1235](https://github.com/TuSimple/naive-ui/issues/1235).
 - `n-layout` and `n-layout-sider` add `on-scroll` prop, closes [#1232](https://github.com/TuSimple/naive-ui/issues/1232).
-
-### Feats
-
-- `n-date-picker`'s `type` prop support `year` option.
 
 ## 2.19.5 (2021-10-07)
 

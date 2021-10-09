@@ -47,6 +47,10 @@
 - `n-image` 的 `toolbar` 增加关闭图标，关闭 [#1412](https://github.com/TuSimple/naive-ui/issues/1412)
 - `n-tree` 的 `on-load` 属性在 `remote` 模式下 `expanded-keys` 属性改变时被触发，关闭 [#1339](https://github.com/TuSimple/naive-ui/issues/1339)
 
+### Feats
+
+- `n-date-picker` 属性 `type` 支持 `year` 选项
+
 ## 2.20.0 (2021-10-28)
 
 ### Breaking Changes
@@ -141,10 +145,6 @@
 
 - `n-cascader` 值改变时回调函数提供上层节点的全部 options 值，关闭 [#1235](https://github.com/TuSimple/naive-ui/issues/1235)
 - `n-layout` 和 `n-layout-sider` 增加 `on-scroll` 属性，关闭 [#1232](https://github.com/TuSimple/naive-ui/issues/1232)
-
-### Feats
-
-- `n-date-picker` 属性 `type` 支持 `year` 选项
 
 ## 2.19.5 (2021-10-07)
 

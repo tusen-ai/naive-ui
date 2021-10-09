@@ -51,7 +51,6 @@ import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
-import YearPanel from './panel/year'
 import style from './styles/index.cssr'
 import { DatePickerTheme } from '../styles/light'
 
@@ -263,7 +262,7 @@ export default defineComponent({
           return ['clear', 'now', 'confirm']
         }
         case 'year': {
-          return ['clear', 'now', 'confirm']
+          return ['clear', 'now']
         }
         default: {
           warn(
@@ -350,7 +349,7 @@ export default defineComponent({
     }
     function scrollYearMonth (value?: number): void {
       if (!panelInstRef.value) return
-      const { monthScrollRef } = panelInstRef.value
+      const { monthScrollRef, yearScrollRef } = panelInstRef.value
       const { value: mergedValue } = mergedValueRef
       if (monthScrollRef) {
         const monthIndex =
@@ -361,12 +360,6 @@ export default defineComponent({
             : getMonth(value)
         monthScrollRef.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
       }
-      scrollYear(value)
-    }
-    function scrollYear (value?: number): void {
-      if (!panelInstRef.value) return
-      const { yearScrollRef } = panelInstRef.value
-      const { value: mergedValue } = mergedValueRef
       if (yearScrollRef) {
         const yearIndex =
           (value === undefined
@@ -377,6 +370,7 @@ export default defineComponent({
         yearScrollRef.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
       }
     }
+
     // --- Panel update value
     function handlePanelUpdateValue (
       value: Value | null,
@@ -518,10 +512,8 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
-      if (props.type === 'month') {
+      if (props.type === 'month' || props.type === 'year') {
         void nextTick(scrollYearMonth)
-      } else if (props.type === 'year') {
-        void nextTick(scrollYear)
       }
     }
     function closeCalendar ({
@@ -567,8 +559,8 @@ export default defineComponent({
     const uniVaidation = uniCalendarValidation(props, pendingValueRef)
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
+      typeRef: toRef(props, 'type'),
       scrollYearMonth,
-      scrollYear,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       timePickerSizeRef,
@@ -888,13 +880,12 @@ export default defineComponent({
                                   <DaterangePanel {...commonPanelProps} />
                               ) : this.type === 'datetimerange' ? (
                                   <DatetimerangePanel {...commonPanelProps} />
-                              ) : this.type === 'month' ? (
+                              ) : this.type === 'month' ||
+                                  this.type === 'year' ? (
                                   <MonthPanel {...commonPanelProps} />
-                              ) : this.type === 'year' ? (
-                                  <YearPanel {...commonPanelProps} />
-                              ) : (
+                                  ) : (
                                   <DatePanel {...commonPanelProps} />
-                              ),
+                                  ),
                               [[clickoutside, this.handleClickOutside]]
                             )
                             : null

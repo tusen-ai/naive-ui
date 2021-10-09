@@ -52,6 +52,9 @@ export interface PanelRef {
 export type FirstDayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6
 
 export type DatePickerInjection = {
+  typeRef: Ref<
+  'date' | 'datetime' | 'daterange' | 'datetimerange' | 'month' | 'year'
+  >
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<DatePickerTheme>>
   timePickerSizeRef: Ref<'small' | 'medium' | 'large'>
@@ -64,7 +67,6 @@ export type DatePickerInjection = {
   firstDayOfWeekRef: Ref<FirstDayOfWeek | undefined>
   datePickerSlots: Slots
   scrollYearMonth: (value?: number) => void
-  scrollYear: (value?: number) => void
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 
