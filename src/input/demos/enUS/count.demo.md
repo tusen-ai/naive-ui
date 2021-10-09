@@ -1,6 +1,6 @@
 # Word Limit
 
-No waste words.
+Don't waste words.
 
 ```html
 <n-space vertical>
