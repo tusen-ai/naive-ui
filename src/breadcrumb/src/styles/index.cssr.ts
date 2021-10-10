@@ -12,6 +12,15 @@ import { c, cB, cE } from '../../../_utils/cssr'
 export default cB('breadcrumb', `
   white-space: nowrap;
 `, [
+  c('ul', `
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  `),
+  c('a', `
+    color: inherit;
+    text-decoration: inherit;
+  `),
   cB('breadcrumb-item', {
     fontSize: 'var(--font-size)',
     transition: 'color .3s var(--bezier)',

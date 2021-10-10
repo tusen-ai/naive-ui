@@ -40,15 +40,17 @@ export type OnUpdateValue = (
   (string[] | null) &
   (number[] | null) &
   (Array<string | number> | null),
-  option: CascaderOption &
-  null &
+  option: null &
+  CascaderOption &
   CascaderOption[] &
-  Array<CascaderOption | null>
+  Array<CascaderOption | null>,
+  path: null & CascaderOption[] & Array<CascaderOption[] | null>
 ) => void
 
 export type OnUpdateValueImpl = (
   value: Value | null,
-  option: CascaderOption | null | Array<CascaderOption | null>
+  option: CascaderOption | null | Array<CascaderOption | null>,
+  path: Array<CascaderOption[] | null> | CascaderOption[] | null
 ) => void
 
 export type MenuModel = TmNode[][]

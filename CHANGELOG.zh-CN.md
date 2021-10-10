@@ -1,14 +1,17 @@
 # CHANGELOG
 
-## Pending
-
-### Feats
-
-- `n-layout` 和 `n-layout-sider` 增加 `on-scroll` 属性，关闭 [#1232](https://github.com/TuSimple/naive-ui/issues/1232)
+## 2.19.6 (2021-10-10)
 
 ### Fixes
 
 - 修复 `n-menu` 对于 `default-expanded-keys` 的错误警报
+- 修复 `useThemeVars` 有时无法使用，关闭 [#1309](https://github.com/TuSimple/naive-ui/issues/1309)
+- 修复 `<ul>` 元素的 `list-style` 样式
+
+### Feats
+
+- `n-cascader` 值改变时回调函数提供上层节点的全部 options 值，关闭 [#1235](https://github.com/TuSimple/naive-ui/issues/1235)
+- `n-layout` 和 `n-layout-sider` 增加 `on-scroll` 属性，关闭 [#1232](https://github.com/TuSimple/naive-ui/issues/1232)
 
 ## 2.19.5 (2021-10-07)
 
@@ -124,7 +127,7 @@
 - 修复 `n-select` `filterable` 下关闭标签 input 光标聚焦问题，关闭 [#1170](https://github.com/TuSimple/naive-ui/issues/1170)
 - 修复 `n-button` 在 hover 状态下边框与 `n-badge` 冲突，关闭 [#1195](https://github.com/TuSimple/naive-ui/issues/1195)
 - 修复 `n-upload` 的 `v-model:file-list` 属性在 `multiple` 属性设为 `true` 的时候没有正确更新，关闭 [#418](https://github.com/TuSimple/naive-ui/issues/418)
-- 修复 `useThemeVars` 未应用覆盖的变量值，关闭 [#1194](https://github.com/TuSimple/naive-ui/issues/1194), [#1176](https://github.com/TuSimple/naive-ui/issues/1176)
+- 修复 `useThemeVars` 未应用覆盖的变量值，关闭 [#1194](https://github.com/TuSimple/naive-ui/issues/1194)、[#1176](https://github.com/TuSimple/naive-ui/issues/1176)
 - Fix `n-tabs` 在 card 类型时左侧滚动的阴影不显示
 
 ## 2.18.2 (2021-09-14)
@@ -161,7 +164,7 @@
 ### Feats
 
 - `useDialog` 选项新增 `style` 属性，关闭 [#1054](https://github.com/TuSimple/naive-ui/issues/1054)
-- `n-timeline` 新增 `icon` slot, 关闭 [#1096](https://github.com/TuSimple/naive-ui/issues/1096)
+- `n-timeline` 新增 `icon` slot，关闭 [#1096](https://github.com/TuSimple/naive-ui/issues/1096)
 - `n-timeline` 新增 `icon-size` 属性
 
 ### Fixes
@@ -243,7 +246,7 @@
 - `n-transfer` 导出 `TransferOption` 类型
 - `n-pagination` 导出 `PaginationInfo` 类型
 - `n-data-table` 导出 `DataTableCreateSummary` 类型
-- `n-code` 新增 `inline` 属性, 关闭 [#834](https://github.com/TuSimple/naive-ui/issues/834)
+- `n-code` 新增 `inline` 属性，关闭 [#834](https://github.com/TuSimple/naive-ui/issues/834)
 - `n-collapse` 新增 `header-extra` slot，关闭 [#1046](https://github.com/TuSimple/naive-ui/issues/1046)
 - `n-input` 新增 `show-password-on` 属性
 - `n-upload` 增加 `list-type`、 `show-preview-button`、 `on-preview` 和 `create-thumbnail-url` 属性
@@ -391,7 +394,7 @@
 
 - 修复 `n-message` 的 `destroyAll` 方法不生效
 - 修复 `n-timeline` 的 header slot 单独使用无效的问题
-- 修复 `n-select` 当属性是 `disabled` 和 `filterable` 时样式错误, 关闭 [#698](https://github.com/TuSimple/naive-ui/issues/698)
+- 修复 `n-select` 当属性是 `disabled` 和 `filterable` 时样式错误，关闭 [#698](https://github.com/TuSimple/naive-ui/issues/698)
 - 修复 `n-upload` 拥有 `file-list` & `disabled` 属性时操作按钮仍然显示，关闭 [#668](https://github.com/TuSimple/naive-ui/issues/668)
 
 ## 2.15.9 (2021-07-28)
@@ -399,7 +402,7 @@
 ### Feats
 
 - `n-message` 增加 `destroyAll` 方法
-- `n-input-number` 增加 `prefix`、`suffix` slots, 关闭 [#609](https://github.com/TuSimple/naive-ui/issues/609)
+- `n-input-number` 增加 `prefix`、`suffix` slots，关闭 [#609](https://github.com/TuSimple/naive-ui/issues/609)
 
 ### Fixes
 
@@ -409,7 +412,7 @@
 
 ### Feats
 
-- `n-menu` 新增 `expand-icon` 属性, 关闭 [#414](https://github.com/TuSimple/naive-ui/issues/414)
+- `n-menu` 新增 `expand-icon` 属性，关闭 [#414](https://github.com/TuSimple/naive-ui/issues/414)
 - `n-descriptions`，`n-descriptions-item` 增加 `label-style` 和 `content-style` 属性，关闭 [#536](https://github.com/TuSimple/naive-ui/issues/536)
 
 ### Fixes
@@ -421,7 +424,7 @@
 ### Feats
 
 - `n-dropdown` 选项新增 `show-arrow`属性，关闭 [#647](https://github.com/TuSimple/naive-ui/issues/647)
-- `n-time-picker` 增加 `actions` 属性, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
+- `n-time-picker` 增加 `actions` 属性，关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
 - `n-mention` 新增 `render-label` 属性
 - `n-switch` 增加 `checked`、`unchecked` 插槽
 - `n-switch` 增加 `loading` 属性，关闭 [#301](https://github.com/TuSimple/naive-ui/issues/301)
@@ -451,9 +454,9 @@
 - `n-dropdown` 新增 `render-icon` 属性
 - `n-checkbox-group` 新增 `min` 和 `max` 属性
 - `n-mention` 新增 `empty` slot
-- `useDialog` 选项新增 `on-mask-click`属性, 关闭 [#419](https://github.com/TuSimple/naive-ui/issues/419)
+- `useDialog` 选项新增 `on-mask-click`属性，关闭 [#419](https://github.com/TuSimple/naive-ui/issues/419)
 - `n-space` `justify` 属性支持 `center`、`space-around` 和 `space-between`
-- `n-date-picker` 新增 `close-on-select` 属性, 关闭 [#541](https://github.com/TuSimple/naive-ui/issues/541)
+- `n-date-picker` 新增 `close-on-select` 属性，关闭 [#541](https://github.com/TuSimple/naive-ui/issues/541)
 - `n-dialog` 新增 `action` 属性，关闭 [#550](https://github.com/TuSimple/naive-ui/issues/550)
 - `n-mention` 的 `option.label` 支持使用渲染函数
 - `n-color-picker` 新增 `actions` 属性，关闭 [#319](https://github.com/TuSimple/naive-ui/issues/319)
@@ -479,7 +482,7 @@
 - `n-upload` 在 `on-finish` 回调参数中新增 `event`
 - `n-rate` 新增 `readonly` 属性
 - `n-time-picker` 新增 `seconds`、`minutes`、`hours`属性
-- `n-notification` 导出 `NotificationApi`, `NotificationOptions` and `NotificationReactive` 类型
+- `n-notification` 导出 `NotificationApi`、`NotificationOptions` 和 `NotificationReactive` 类型
 - `n-avatar` 新增 `on-error` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
 - `n-image` 新增 `on-error` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
 - `n-image` 新增 `object-fit` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
@@ -657,7 +660,7 @@
 
 ### Feats
 
-- `n-form`, `n-form-item` 增强 `show-require-mark` 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-form`、`n-form-item` 增强 `show-require-mark` 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
 - `n-dropdown` 支持 class 属性，关闭 [#180](https://github.com/TuSimple/naive-ui/issues/180)
 - `n-input` 新增 `show-password-toggle` 属性
 - `n-popselect` 支持 class 属性
@@ -739,7 +742,7 @@
 
 - 修复 `n-calendar` 的 `on-update:value` 属性类型
 - 修复 `n-form-item` 的 `grid-template-columns` 样式属性对子元素布局的影响 [#93](https://github.com/TuSimple/naive-ui/pull/93)
-- 修复 `n-data-table` 的 `rowKey`, `rowClassName`, `rowProps`, `summary` 属性类型和期望值不兼容
+- 修复 `n-data-table` 的 `rowKey`、`rowClassName`、`rowProps`、`summary` 属性类型和期望值不兼容
 
 ## 2.11.7 (2021-06-12)
 
@@ -1515,7 +1518,7 @@
 
 ### Feats
 
-- `$NMessage`, `$NNotification`, `$NConfirm` 的获取到的主题会应用到他们的内部组件
+- `$NMessage`、`$NNotification`、`$NConfirm` 的获取到的主题会应用到他们的内部组件
 
 ### Fixes
 
