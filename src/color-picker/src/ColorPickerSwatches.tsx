@@ -17,6 +17,7 @@ import {
   toRgbaString
 } from 'seemly'
 import { ColorPickerMode, getModeFromValue } from './utils'
+import { throwError } from '../../_utils'
 
 interface ParseColorAction<V extends number[]> {
   values: V
@@ -49,7 +50,7 @@ class ParseColor {
     }
 
     if (!_hsva) {
-      throw new Error(`[seemly/hsla]: Invalid color value ${color}.`)
+      throwError('color-picker-swatches', `Invalid color value ${color}.`)
     }
 
     this.h = _hsva[0]
