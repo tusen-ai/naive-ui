@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.19.6 (2021-10-10)
 
 ### Fixes
 
