@@ -11,7 +11,7 @@
 ### Feats
 
 - `n-cascader` provide all options paths in `update:value` callback function, closes [#1235](https://github.com/TuSimple/naive-ui/issues/1235).
-- `n-layout` and `n-layout-sider` add `on-scroll` prop，closes [#1232](https://github.com/TuSimple/naive-ui/issues/1232).
+- `n-layout` and `n-layout-sider` add `on-scroll` prop, closes [#1232](https://github.com/TuSimple/naive-ui/issues/1232).
 
 ## 2.19.5 (2021-10-07)
 
@@ -19,7 +19,7 @@
 
 - Fix `n-form-item`'s content is too long and the width is incorrect
 - Fix `n-layout-sider`'s `arrow-circle`'s icon style.
-- Fix `n-upload`'s `show-preview-button` prop not working，closes [#1238](https://github.com/TuSimple/naive-ui/issues/1238).
+- Fix `n-upload`'s `show-preview-button` prop not working, closes [#1238](https://github.com/TuSimple/naive-ui/issues/1238).
 - Fix `n-date-picker`'s `date` type of `action` validate error.
 - Fix `n-data-table` throws error when using `selection` and `summary` together, closes [#1276](https://github.com/TuSimple/naive-ui/issues/1276).
 - Fix `n-data-table` selection column's width is collapsed when it is set to fixed, closes [#1283](https://github.com/TuSimple/naive-ui/issues/1283).
@@ -30,7 +30,7 @@
 ### Feats
 
 - `n-breadcrumb-item` add `href` prop.
-- `n-descriptions` add `separator` prop，closes [#1263](https://github.com/TuSimple/naive-ui/issues/1263).
+- `n-descriptions` add `separator` prop, closes [#1263](https://github.com/TuSimple/naive-ui/issues/1263).
 - `n-dropdown` add `key-field` prop.
 - `n-dropdown` add `label-field` prop.
 - `n-dropdown` add `children-field` prop.
@@ -661,7 +661,7 @@
 
 ### Feats
 
-- `n-form`, `n-form-item` enhance `show-require-mark` prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-form`, `n-form-item` enhance `show-require-mark` prop, closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
 - `n-dropdown` support class attr, closes [#180](https://github.com/TuSimple/naive-ui/issues/180).
 - `n-input` add `show-password-toggle` prop.
 - `n-popselect` support class attr.
