@@ -559,7 +559,6 @@ export default defineComponent({
     const uniVaidation = uniCalendarValidation(props, pendingValueRef)
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
-      typeRef: toRef(props, 'type'),
       scrollYearMonth,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
@@ -764,7 +763,8 @@ export default defineComponent({
       active: this.mergedShow,
       actions: this.actions,
       shortcuts: this.shortcuts,
-      style: this.cssVars as CSSProperties
+      style: this.cssVars as CSSProperties,
+      type: this.type
     }
     const { mergedClsPrefix } = this
     return (

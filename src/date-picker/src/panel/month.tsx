@@ -16,7 +16,7 @@ export default defineComponent({
   name: 'MonthPanel',
   props: useCalendar.props,
   setup (props) {
-    const useCalendarRef = useCalendar(props, 'month')
+    const useCalendarRef = useCalendar(props, props.type)
     const renderItem = (
       item: YearItem | MonthItem,
       i: number,
@@ -57,7 +57,7 @@ export default defineComponent({
       shortcuts,
       actions,
       renderItem,
-      typeRef
+      type
     } = this
     return (
       <div
@@ -103,7 +103,7 @@ export default defineComponent({
               )
             }}
           </NScrollbar>
-          {typeRef === 'month' ? (
+          {type === 'month' ? (
             <div
               class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
             >

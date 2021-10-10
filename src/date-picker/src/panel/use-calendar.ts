@@ -1,4 +1,4 @@
-import { ref, computed, inject, watch, ExtractPropTypes } from 'vue'
+import { ref, computed, inject, watch, ExtractPropTypes, PropType } from 'vue'
 import {
   addMonths,
   addYears,
@@ -31,13 +31,17 @@ const useCalendarProps = {
   actions: {
     type: Array,
     default: () => ['now', 'clear', 'confirm']
+  },
+  type: {
+    type: String as PropType<'date' | 'datetime' | 'month' | 'year'>,
+    default: 'date'
   }
 } as const
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useCalendar (
   props: ExtractPropTypes<typeof useCalendarProps>,
-  type: 'date' | 'datetime' | 'month'
+  type: 'date' | 'datetime' | 'month' | 'year'
 ) {
   const panelCommon = usePanelCommon(props)
   const {
@@ -52,8 +56,7 @@ function useCalendar (
     localeRef,
     firstDayOfWeekRef,
     datePickerSlots,
-    scrollYearMonth,
-    typeRef
+    scrollYearMonth
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -140,13 +143,8 @@ function useCalendar (
   )
   function sanitizeValue (value: number): number {
     if (type === 'datetime') return getTime(startOfSecond(value))
-    if (type === 'month') {
-      if (typeRef.value === 'year') {
-        return getTime(startOfYear(value))
-      } else {
-        return getTime(startOfMonth(value))
-      }
-    }
+    if (type === 'month') return getTime(startOfMonth(value))
+    if (type === 'year') return getTime(startOfYear(value))
     return getTime(startOfDay(value))
   }
   function mergedIsDateDisabled (ts: number): boolean {
@@ -231,12 +229,10 @@ function useCalendar (
     if (type === 'date') {
       panelCommon.doClose()
     } else if (type === 'month') {
-      if (typeRef.value === 'year') {
-        panelCommon.doClose()
-      } else {
-        panelCommon.disableTransitionOneTick()
-        scrollYearMonth(newValue)
-      }
+      panelCommon.disableTransitionOneTick()
+      scrollYearMonth(newValue)
+    } else if (type === 'year') {
+      panelCommon.doClose()
     }
   }
   function deriveDateInputValue (time?: number): void {
@@ -341,8 +337,7 @@ function useCalendar (
     datePickerSlots,
     monthScrollRef,
     yearScrollRef,
-    scrollbarInstRef,
-    typeRef
+    scrollbarInstRef
   }
 }
 
