@@ -6,6 +6,7 @@
 
 - Fix `n-menu`'s incorrect warning on `default-expanded-keys`.
 - Fix `useThemeVars` is sometimes unusable, closes [#1309](https://github.com/TuSimple/naive-ui/issues/1309).
+- Fix the `list-style` style of the `<ul>` element.
 
 ### Feats
 
