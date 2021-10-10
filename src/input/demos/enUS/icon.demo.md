@@ -1,6 +1,6 @@
 # Prefix & Suffix
 
-Fill content in prefix or suffix of the input.
+Set a prefix and/or suffix for the input.
 
 ```html
 <n-space vertical>

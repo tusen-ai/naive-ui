@@ -1,4 +1,4 @@
-# Event
+# Events
 
 ```html
 <n-space vertical>
@@ -8,7 +8,7 @@
     @change="handleChange"
     @keyup="handleKeyUp"
     @input="handleInput"
-    placeholder="Operate to trigger events"
+    placeholder="Interact to trigger events"
   />
   <n-input
     type="textarea"
@@ -17,7 +17,7 @@
     @change="handleChange"
     @keyup="handleKeyUp"
     @input="handleInput"
-    placeholder="Operate to trigger events"
+    placeholder="Interact to trigger events"
   />
 </n-space>
 ```
