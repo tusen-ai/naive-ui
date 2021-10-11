@@ -10,6 +10,7 @@ alpha
 size
 modes
 form
+swatches
 ```
 
 ## API
