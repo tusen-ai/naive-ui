@@ -13,6 +13,10 @@ function createLineClampClass (clsPrefix: string): string {
   return `${clsPrefix}-ellipsis--line-clamp`
 }
 
+function createCursorClass (clsPrefix: string, cursor: string): string {
+  return `${clsPrefix}-ellipsis--cursor-${cursor}`
+}
+
 const ellipsisProps = {
   ...(useTheme.props as ThemeProps<EllipsisTheme>),
   expandTrigger: String as PropType<'click'>,
@@ -45,22 +49,20 @@ export default defineComponent({
     const ellipsisStyleRef = computed(() => {
       const { lineClamp } = props
       const { value: expanded } = expandedRef
-      const cursor = props.expandTrigger === 'click' ? 'pointer' : ''
       if (lineClamp !== undefined) {
         return {
-          cursor,
           textOverflow: '',
           '-webkit-line-clamp': expanded ? '' : lineClamp
         }
       } else {
         return {
-          cursor,
           textOverflow: expanded ? '' : 'ellipsis',
           '-webkit-line-clamp': ''
         }
       }
     })
     function getTooltipDisabled (): boolean {
+      let tooltipDisabled = false
       const { value: expanded } = expandedRef
       if (expanded) return true
       const { value: trigger } = triggerRef
@@ -70,11 +72,13 @@ export default defineComponent({
         // nextTick, measure dom size will derive wrong result
         syncEllipsisStyle(trigger)
         if (lineClamp !== undefined) {
-          return trigger.scrollHeight <= trigger.offsetHeight
+          tooltipDisabled = trigger.scrollHeight <= trigger.offsetHeight
+        } else {
+          tooltipDisabled = trigger.scrollWidth <= trigger.offsetWidth
         }
-        return trigger.scrollWidth <= trigger.offsetWidth
+        syncCursorStyle(trigger, tooltipDisabled)
       }
-      return false
+      return tooltipDisabled
     }
     const handleClickRef = computed(() => {
       return props.expandTrigger === 'click'
@@ -94,6 +98,9 @@ export default defineComponent({
             `${mergedClsPrefixRef.value}-ellipsis`,
             props.lineClamp !== undefined
               ? createLineClampClass(mergedClsPrefixRef.value)
+              : undefined,
+            props.expandTrigger === 'click'
+              ? createCursorClass(mergedClsPrefixRef.value, 'pointer')
               : undefined
           ],
           style: ellipsisStyleRef.value
@@ -109,18 +116,40 @@ export default defineComponent({
       const latestStyle = ellipsisStyleRef.value
       const lineClampClass = createLineClampClass(mergedClsPrefixRef.value)
       if (props.lineClamp !== undefined) {
-        if (!trigger.classList.contains(lineClampClass)) {
-          trigger.classList.add(lineClampClass)
-        }
+        syncTriggerClass(trigger, lineClampClass, 'add')
       } else {
-        if (trigger.classList.contains(lineClampClass)) {
-          trigger.classList.remove(lineClampClass)
-        }
+        syncTriggerClass(trigger, lineClampClass, 'remove')
       }
       for (const key in latestStyle) {
         // guard can make it a little faster
         if ((trigger.style as any)[key] !== (latestStyle as any)[key]) {
           ;(trigger.style as any)[key] = (latestStyle as any)[key]
+        }
+      }
+    }
+    function syncCursorStyle (
+      trigger: HTMLElement,
+      tooltipDisabled: boolean
+    ): void {
+      const cursorClass = createCursorClass(mergedClsPrefixRef.value, 'pointer')
+      if (props.expandTrigger === 'click' && !tooltipDisabled) {
+        syncTriggerClass(trigger, cursorClass, 'add')
+      } else {
+        syncTriggerClass(trigger, cursorClass, 'remove')
+      }
+    }
+    function syncTriggerClass (
+      trigger: HTMLElement,
+      styleClass: string,
+      action: 'add' | 'remove'
+    ): void {
+      if (action === 'add') {
+        if (!trigger.classList.contains(styleClass)) {
+          trigger.classList.add(styleClass)
+        }
+      } else {
+        if (trigger.classList.contains(styleClass)) {
+          trigger.classList.remove(styleClass)
         }
       }
     }
