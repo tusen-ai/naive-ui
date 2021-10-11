@@ -1,6 +1,6 @@
 # Group
 
-A radio group look elegant.
+A radio group looks elegant.
 
 ```html
 <n-radio-group v-model:value="value" name="radiogroup">

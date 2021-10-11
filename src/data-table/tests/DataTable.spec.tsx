@@ -946,4 +946,65 @@ describe('props.columns', () => {
       'text-overflow: ellipsis'
     )
   })
+
+  it('should work with `ellipsis` prop', async () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        width: 100
+      },
+      {
+        title: 'Age',
+        key: 'age',
+        width: 100,
+        children: [
+          {
+            title: 'test1',
+            key: 'test1'
+          },
+          {
+            title: 'test2',
+            key: 'test2'
+          }
+        ]
+      }
+    ]
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: index,
+        age: index,
+        test1: index,
+        test2: index
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} row-key={rowKey} />
+    ))
+    expect(
+      wrapper.find('thead [data-col-key="name"]').attributes('colspan')
+    ).toBe('1')
+    expect(
+      wrapper.find('thead [data-col-key="name"]').attributes('rowspan')
+    ).toBe('2')
+    expect(
+      wrapper.find('thead [data-col-key="age"]').attributes('colspan')
+    ).toBe('2')
+    expect(
+      wrapper.find('thead [data-col-key="age"]').attributes('rowspan')
+    ).toBe('1')
+    expect(
+      wrapper.find('thead [data-col-key="test1"]').attributes('colspan')
+    ).toBe('1')
+    expect(
+      wrapper.find('thead [data-col-key="test1"]').attributes('rowspan')
+    ).toBe('1')
+    expect(
+      wrapper.find('thead [data-col-key="test2"]').attributes('colspan')
+    ).toBe('1')
+    expect(
+      wrapper.find('thead [data-col-key="test2"]').attributes('rowspan')
+    ).toBe('1')
+  })
 })
