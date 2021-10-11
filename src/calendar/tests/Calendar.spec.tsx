@@ -1,7 +1,7 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NCalendar } from '../index'
-import { isYesterday, format } from 'date-fns'
+import { isYesterday, format, addMonths, getYear } from 'date-fns'
 import { NButton } from '../../button'
 
 describe('n-calendar', () => {
@@ -53,16 +53,16 @@ describe('n-calendar', () => {
   })
 
   it('should work with clicked `prev` and `next`', async () => {
-    const wrapper = mount(NCalendar, {
-      props: {
-        defaultValue: now
-      }
-    })
+    const wrapper = mount(NCalendar, { props: { defaultValue: now } })
 
     const nowDate = wrapper.find('.n-calendar-header__title').text()
     const buttons = wrapper.findAllComponents(NButton)
 
     await buttons[0].trigger('click')
+    const prevDate = addMonths(now, -1)
+    expect(wrapper.find('.n-calendar-header__title').text()).toBe(
+      `${format(prevDate, 'MMMM')} ${getYear(prevDate)}`
+    )
 
     await buttons[1].trigger('click')
     expect(wrapper.find('.n-calendar-header__title').text()).toBe(nowDate)
@@ -74,5 +74,9 @@ describe('n-calendar', () => {
     ).toBe(format(now, 'yyyy-MM-dd'))
 
     await buttons[2].trigger('click')
+    const nextDate = addMonths(now, 1)
+    expect(wrapper.find('.n-calendar-header__title').text()).toBe(
+      `${format(nextDate, 'MMMM')} ${getYear(nextDate)}`
+    )
   })
 })
