@@ -1,4 +1,14 @@
-import { h, defineComponent, computed, PropType, CSSProperties, ref } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  PropType,
+  CSSProperties,
+  ref,
+  InjectionKey,
+  Ref,
+  provide
+} from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_internal'
@@ -49,6 +59,12 @@ const tagProps = {
   }
 }
 
+interface TagInjection {
+  roundRef: Ref<boolean>
+}
+
+export const tagInjectionKey: InjectionKey<TagInjection> = Symbol('tag')
+
 export type TagProps = ExtractPublicPropTypes<typeof tagProps>
 
 export default defineComponent({
@@ -66,6 +82,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    provide(tagInjectionKey, {
+      roundRef: ref(props.round)
+    })
     function handleClick (e: MouseEvent): void {
       if (!props.disabled) {
         if (props.checkable) {
@@ -142,6 +161,7 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
+          '--avatar-size-override': `calc(${height} - 8px)`,
           '--bezier': cubicBezierEaseInOut,
           '--border-radius': borderRadius,
           '--border': border,
