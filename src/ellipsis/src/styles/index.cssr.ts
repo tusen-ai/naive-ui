@@ -14,6 +14,6 @@ export default cB('ellipsis', {
     -webkit-box-orient: vertical;
   `),
   cM('cursor-pointer', `
-    cursor: pointer
+    cursor: pointer;
   `)
 ])

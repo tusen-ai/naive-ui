@@ -116,13 +116,9 @@ export default defineComponent({
       const latestStyle = ellipsisStyleRef.value
       const lineClampClass = createLineClampClass(mergedClsPrefixRef.value)
       if (props.lineClamp !== undefined) {
-        if (!trigger.classList.contains(lineClampClass)) {
-          trigger.classList.add(lineClampClass)
-        }
+        calTriggerClass(trigger, lineClampClass, true)
       } else {
-        if (trigger.classList.contains(lineClampClass)) {
-          trigger.classList.remove(lineClampClass)
-        }
+        calTriggerClass(trigger, lineClampClass)
       }
       for (const key in latestStyle) {
         // guard can make it a little faster
@@ -137,12 +133,23 @@ export default defineComponent({
     ): void {
       const cursorClass = createCursorClass(mergedClsPrefixRef.value, 'pointer')
       if (props.expandTrigger === 'click' && !tooltipDisabled) {
-        if (!trigger.classList.contains(cursorClass)) {
-          trigger.classList.add(cursorClass)
+        calTriggerClass(trigger, cursorClass, true)
+      } else {
+        calTriggerClass(trigger, cursorClass)
+      }
+    }
+    function calTriggerClass (
+      trigger: HTMLElement,
+      styleClass: string,
+      isAdd: boolean = false
+    ): void {
+      if (isAdd) {
+        if (!trigger.classList.contains(styleClass)) {
+          trigger.classList.add(styleClass)
         }
       } else {
-        if (trigger.classList.contains(cursorClass)) {
-          trigger.classList.remove(cursorClass)
+        if (trigger.classList.contains(styleClass)) {
+          trigger.classList.remove(styleClass)
         }
       }
     }
