@@ -1,6 +1,6 @@
 # Basic Usage
 
-If `label` is a callback function, input matching will be performed according to `value`.
+If `label` is a render function, the `value` property will be used for matching.
 
 ```html
 <n-mention :options="options" default-value="@" />
