@@ -522,7 +522,7 @@ export default defineComponent({
                           right: pxfy(fixedColumnRightMap[colKey])
                         }}
                         colspan={mergedColSpan}
-                        rowspan={isVirtual ? mergedRowSpan : undefined}
+                        rowspan={isVirtual ? undefined : mergedRowSpan}
                         data-col-key={colKey}
                         class={[
                           `${mergedClsPrefix}-data-table-td`,
