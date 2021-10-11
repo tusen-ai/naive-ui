@@ -52,7 +52,7 @@ event
 | on-change | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when native change event is fired. |
 | on-clear | `() => void` | `undefined` | Callback triggered when the input is cleared. |
 | on-focus | `() => void` | `undefined` | Callback triggered when the input is focussed on. |
-| on-input | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input value changes. |
+| on-input | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input gets user input. |
 | on-update:value | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input value changes. |
 
 ### Input Slots
@@ -78,7 +78,14 @@ event
 
 ### Input Methods
 
+<<<<<<< HEAD
 | Name  | Type         | Description              |
 | ----- | ------------ | ------------------------ |
 | blur  | `() => void` | Blur the input element.  |
 | focus | `() => void` | Focus the input element. |
+=======
+| Name  | Type       | Description              |
+| ----- | ---------- | ------------------------ |
+| blur  | () => void | Blur the input element.  |
+| focus | () => void | Focus the input element. |
+>>>>>>> docs(input): update on-input desc
