@@ -10,7 +10,7 @@ export interface ScrollbarInst {
   scrollTo: ScrollTo
 }
 
-const scrollbarProps = {
+export const scrollbarProps = {
   ...(useTheme.props as ThemeProps<ScrollbarTheme>),
   xScrollable: Boolean,
   onScroll: Function as PropType<(e: Event) => void>

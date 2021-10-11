@@ -53,9 +53,10 @@ function genAnchorTemplate (
 ) {
   return `
     <n-anchor
+      native-scrollbar
       :bound="16"
       type="block"
-      style="width: 128px; position: sticky; top: 32px;"
+      style="width: 128px; position: sticky; top: 32px; max-height: calc(100vh - 10rem)"
       offset-target="#doc-layout"
       :ignore-gap="${options.ignoreGap}"
     >

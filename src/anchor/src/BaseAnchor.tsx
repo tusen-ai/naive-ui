@@ -1,23 +1,25 @@
-import {
-  h,
-  nextTick,
-  ref,
-  provide,
-  defineComponent,
-  PropType,
-  watch,
-  onBeforeUnmount,
-  onMounted,
-  toRef,
-  computed
-} from 'vue'
+import { throttle } from 'lodash-es'
+import { NScrollbar } from 'naive-ui'
 import { unwrapElement } from 'seemly'
 import { onFontsReady } from 'vooks'
-import { keysOf } from '../../_utils'
+import {
+  computed,
+  defineComponent,
+  h,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  PropType,
+  provide,
+  ref,
+  toRef,
+  watch
+} from 'vue'
+import { scrollbarProps } from '../../scrollbar/src/ScrollBar'
+import { keep, keysOf } from '../../_utils'
 import { anchorInjectionKey } from './Link'
-import { throttle } from 'lodash-es'
-import { getOffset } from './utils'
 import type { OffsetTarget } from './utils'
+import { getOffset } from './utils'
 
 export interface BaseAnchorInst {
   setActiveHref: (href: string) => void
@@ -39,6 +41,10 @@ export const baseAnchorProps = {
   bound: {
     type: Number,
     default: 12
+  },
+  nativeScrollbar: {
+    type: Boolean,
+    default: false
   },
   ignoreGap: Boolean,
   offsetTarget: [String, Object, Function] as PropType<
@@ -252,8 +258,16 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, mergedShowRail, isBlockType, $slots } = this
-    return (
+    const {
+      mergedClsPrefix,
+      mergedShowRail,
+      isBlockType,
+      $slots,
+      nativeScrollbar,
+      ...rest
+    } = this
+
+    const Inner = (
       <div
         class={[
           `${mergedClsPrefix}-anchor`,
@@ -282,6 +296,12 @@ export default defineComponent({
         ) : null}
         {$slots.default?.()}
       </div>
+    )
+
+    return nativeScrollbar ? (
+      <NScrollbar {...keep(rest, keysOf(scrollbarProps))}>{Inner}</NScrollbar>
+    ) : (
+      Inner
     )
   }
 })
