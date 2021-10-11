@@ -116,9 +116,9 @@ export default defineComponent({
       const latestStyle = ellipsisStyleRef.value
       const lineClampClass = createLineClampClass(mergedClsPrefixRef.value)
       if (props.lineClamp !== undefined) {
-        calTriggerClass(trigger, lineClampClass, true)
+        syncTriggerClass(trigger, lineClampClass, 'add')
       } else {
-        calTriggerClass(trigger, lineClampClass)
+        syncTriggerClass(trigger, lineClampClass, 'remove')
       }
       for (const key in latestStyle) {
         // guard can make it a little faster
@@ -138,12 +138,12 @@ export default defineComponent({
         calTriggerClass(trigger, cursorClass)
       }
     }
-    function calTriggerClass (
+    function syncTriggerClass (
       trigger: HTMLElement,
       styleClass: string,
-      isAdd: boolean = false
+      action: 'add' | 'remove'
     ): void {
-      if (isAdd) {
+      if (action === 'add') {
         if (!trigger.classList.contains(styleClass)) {
           trigger.classList.add(styleClass)
         }
