@@ -133,9 +133,9 @@ export default defineComponent({
     ): void {
       const cursorClass = createCursorClass(mergedClsPrefixRef.value, 'pointer')
       if (props.expandTrigger === 'click' && !tooltipDisabled) {
-        calTriggerClass(trigger, cursorClass, true)
+        syncTriggerClass(trigger, cursorClass, 'add')
       } else {
-        calTriggerClass(trigger, cursorClass)
+        syncTriggerClass(trigger, cursorClass, 'remove')
       }
     }
     function syncTriggerClass (
