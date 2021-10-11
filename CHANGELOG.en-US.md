@@ -6,6 +6,7 @@
 
 - Fix `n-ellipisis`'s `expand-trigger` prop not show `pointer` cursor when content is short，closes [#1299](https://github.com/TuSimple/naive-ui/issues/1299).
 - Fix `n-select`'s `fallback-option` prop's type, closes [#1327](https://github.com/TuSimple/naive-ui/issues/1327).
+- Fix `n-modal`'s `on-after-enter` prop not working.
 
 ## 2.19.6 (2021-10-10)
 
