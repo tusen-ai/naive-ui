@@ -1,7 +1,7 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NCalendar } from '../index'
-import { isYesterday, format, addMonths, getYear } from 'date-fns'
+import { isYesterday, format } from 'date-fns'
 import { NButton } from '../../button'
 
 describe('n-calendar', () => {
@@ -63,10 +63,6 @@ describe('n-calendar', () => {
     const buttons = wrapper.findAllComponents(NButton)
 
     await buttons[0].trigger('click')
-    console.log(wrapper.find('.n-calendar-header__title').text())
-    console.log(addMonths(now, -1))
-    console.log(getYear(now))
-    console.log(format(now, 'MMMM'))
 
     await buttons[1].trigger('click')
     expect(wrapper.find('.n-calendar-header__title').text()).toBe(nowDate)
@@ -78,6 +74,5 @@ describe('n-calendar', () => {
     ).toBe(format(now, 'yyyy-MM-dd'))
 
     await buttons[2].trigger('click')
-    console.log(wrapper.find('.n-calendar-header__title').text())
   })
 })
