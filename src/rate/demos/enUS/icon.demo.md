@@ -1,6 +1,6 @@
 # Icon
 
-The content in default slot will be used as icon.
+The content of the default slot will be used as the icon.
 
 ```html
 <n-rate>

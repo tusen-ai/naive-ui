@@ -1,6 +1,6 @@
 # Textarea
 
-Set `type` to `'textarea'`.
+The input `type` can be set to `'textarea'`.
 
 ```html
 <n-mention type="textarea" :options="options" />
