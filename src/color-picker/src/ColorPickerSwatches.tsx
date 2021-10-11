@@ -92,6 +92,12 @@ class ParseColor {
   }
 }
 
+function getDistanceToWhite (color: string): number {
+  const parsed = new ParseColor(color)
+  const [, s, l] = parsed.toHsla().values
+  return Math.sqrt(Math.pow(100 - l, 2) + Math.pow(s, 2))
+}
+
 export default defineComponent({
   name: 'ColorPickerSwatches',
   props: {
@@ -141,16 +147,9 @@ export default defineComponent({
       }
     }
 
-    function isLightColor (color: string): boolean {
-      const parsed = new ParseColor(color)
-      const _hsla = parsed.toHsla().values
-      return _hsla[2] > 50 || _hsla[3] < 0.5
-    }
-
     return {
       currentColorRef,
-      normalizedSwatchesRef,
-      isLightColor
+      normalizedSwatchesRef
     }
   },
   render () {
@@ -165,7 +164,7 @@ export default defineComponent({
                 [`${clsPrefix}-color-picker-swatches__color--selected`]:
                   this.currentColorRef === swatch,
                 [`${clsPrefix}-color-picker-swatches__color--light`]:
-                this.isLightColor(swatch)
+                getDistanceToWhite(swatch) < 3
               }
             ]}
             onClick={() => this.onUpdateColor(swatch)}
