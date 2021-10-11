@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-auto-complete` add `show-on-focus` prop, closes [#1292](https://github.com/TuSimple/naive-ui/issues/1292).
+
 ## 2.19.6 (2021-10-10)
 
 ### Fixes

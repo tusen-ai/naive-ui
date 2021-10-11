@@ -10,6 +10,7 @@ size
 group
 custom-input
 after-select
+show-on-focus
 ```
 
 ## API
@@ -27,6 +28,7 @@ after-select
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | 自动填充的自定义选项 |
 | placeholder | `string` | `'请输入'` | 自动填充的提示信息 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 自动填充的尺寸大小 |
+| showOnFocus | `boolean` | `false` | focus 时是否显示所有选项 |
 | value | `string` | `undefined` | 自动填充的数据用户可控 |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | blur 时触发的回调函数 |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | focus 时触发的回调函数 |

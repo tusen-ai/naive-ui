@@ -70,6 +70,7 @@ const autoCompleteProps = {
   value: String,
   blurAfterSelect: Boolean,
   clearAfterSelect: Boolean,
+  showOnFocus: Boolean,
   size: String as PropType<'small' | 'medium' | 'large'>,
   options: {
     type: Array as PropType<AutoCompleteOptions>,
@@ -132,7 +133,7 @@ export default defineComponent({
     })
     const activeRef = computed(() => {
       return (
-        !!mergedValueRef.value &&
+        (props.showOnFocus || !!mergedValueRef.value) &&
         canBeActivatedRef.value &&
         !!selectOptionsRef.value.length
       )

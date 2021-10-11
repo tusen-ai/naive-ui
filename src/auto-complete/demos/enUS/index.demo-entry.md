@@ -10,6 +10,7 @@ size
 group
 custom-input
 after-select
+show-on-focus
 ```
 
 ## API
@@ -27,6 +28,7 @@ after-select
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | Auto complete options. |
 | placeholder | `string` | `'Please Input'` | Auto complete's placeholder. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Auto complete size. |
+| showOnFocus | `boolean` | `false` | Whether to show all options when focus. |
 | value | `string` | `undefined` | Value of auto complete if being manually set. |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | On blur callback function. |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | On focus callback function. |
