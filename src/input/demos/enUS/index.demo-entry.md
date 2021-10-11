@@ -77,7 +77,7 @@ event
 
 ### Input Methods
 
-| Name  | Type       | Description              |
-| ----- | ---------- | ------------------------ |
-| blur  | () => void | Blur the input element.  |
-| focus | () => void | Focus the input element. |
+| Name  | Type         | Description              |
+| ----- | ------------ | ------------------------ |
+| blur  | `() => void` | Blur the input element.  |
+| focus | `() => void` | Focus the input element. |

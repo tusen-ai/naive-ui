@@ -76,7 +76,7 @@ focus
 
 ### Input Methods
 
-| 名称  | 类型       | 说明             |
-| ----- | ---------- | ---------------- |
-| blur  | () => void | Blur input 元素  |
-| focus | () => void | Focus input 元素 |
+| 名称  | 类型         | 说明             |
+| ----- | ------------ | ---------------- |
+| blur  | `() => void` | Blur input 元素  |
+| focus | `() => void` | Focus input 元素 |
