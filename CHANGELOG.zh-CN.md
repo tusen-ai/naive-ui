@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Un-released
+
+### Feats
+
+- `n-anchor` 增加 `n-scrollbar` 支持
+
 ## 2.19.6 (2021-10-10)
 
 ### Fixes

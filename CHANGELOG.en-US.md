@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-anchor` add `n-scrollbar` prop.
+
 ## 2.19.6 (2021-10-10)
 
 ### Fixes
