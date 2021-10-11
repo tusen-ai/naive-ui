@@ -64,6 +64,7 @@ import type { ColorPickerMode, ActionType } from './utils'
 import style from './styles/index.cssr'
 import { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import { NButton } from '../../button'
+import ColorPickerSwatches from './ColorPickerSwatches'
 
 export const colorPickerPanelProps = {
   ...(useTheme.props as ThemeProps<ColorPickerTheme>),
@@ -86,6 +87,14 @@ export const colorPickerPanelProps = {
   showAlpha: {
     type: Boolean,
     default: true
+  },
+  showSwatches: {
+    type: Boolean,
+    default: false
+  },
+  swatches: {
+    type: Array as PropType<string[]>,
+    default: null
   },
   actions: {
     type: Array as PropType<ActionType[]>,
@@ -536,6 +545,15 @@ export default defineComponent({
               valueArr={mergedValueArrRef.value}
               onUpdateValue={handleInputUpdateValue}
             />
+            {props.showSwatches && props.swatches?.length && (
+              <ColorPickerSwatches
+                clsPrefix={mergedClsPrefix}
+                color={mergedValueRef.value}
+                mode={displayedModeRef.value}
+                swatches={props.swatches}
+                onUpdateColor={(color) => doUpdateValue(color, 'input')}
+              />
+            )}
           </div>
           {actions?.length ? (
             <div class={`${mergedClsPrefix}-color-picker-action`}>
