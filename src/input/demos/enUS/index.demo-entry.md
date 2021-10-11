@@ -49,17 +49,18 @@ event
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | Input type. |
 | value | `string \| [string, string] \| null` | `undefined` | Manually set the input value. When `pair` is `true`, this is an array. |
 | on-blur | `() => void` | `undefined` | Callback triggered when the input is blurred. |
-| on-change | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input blurred and the value has been changed. |
+| on-change | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when native change event is fired. |
 | on-clear | `() => void` | `undefined` | Callback triggered when the input is cleared. |
 | on-focus | `() => void` | `undefined` | Callback triggered when the input is focussed on. |
+| on-input | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input value changes. |
 | on-update:value | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input value changes. |
 
 ### Input Slots
 
 | Name | Parameters | Description |
 | --- | --- | --- |
-| prefix | `()`       | Prefix content slot. |
-| suffix | `()`       | Suffix content slot. |
+| prefix | `()` | Prefix content slot. |
+| suffix | `()` | Suffix content slot. |
 | separator | `()` | The separator content of the input, only works when `pair` is true. This will take priority over the separator property. |
 
 ### InputGroup Slots
@@ -76,7 +77,7 @@ event
 
 ### Input Methods
 
-| Name  | Type       | Description          |
-| ----- | ---------- | -------------------- |
+| Name  | Type       | Description              |
+| ----- | ---------- | ------------------------ |
 | blur  | () => void | Blur the input element.  |
 | focus | () => void | Focus the input element. |
