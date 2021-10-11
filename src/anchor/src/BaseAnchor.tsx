@@ -1,5 +1,5 @@
 import { throttle } from 'lodash-es'
-import { NScrollbar } from 'naive-ui'
+import { NScrollbar } from '../../scrollbar'
 import { unwrapElement } from 'seemly'
 import { onFontsReady } from 'vooks'
 import {
