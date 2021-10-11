@@ -1,6 +1,6 @@
 # Mention
 
-A year ago, my product manager asked me if I could implement this feature. Back then, I told recommended just using multiple selects as a workaround.
+A year ago, my product manager asked me if I could implement this feature. Back then, I recommended just using multiple selects as a workaround.
 
 ## Demos
 
@@ -31,8 +31,8 @@ Mention requires `v2.2.0` and above.
 | disabled | `boolean` | `false` | Whether to disable the input element. |
 | value | `string \| null` | `undefined` | Manually set input value. |
 | default-value | `string` | `''` | Default value when the value is not manually set. |
-| loading | `boolean` | `false` | Whether the selection panel of mentions shows is in a loading state. |
-| prefix | `string \| string[]` | `'@'` | Prefix characters to trigger mentions. The string lengths must be exactly 1. |
+| loading | `boolean` | `false` | Whether the selection panel of mentions is in a loading state. |
+| prefix | `string \| string[]` | `'@'` | Prefix character(s) to trigger mentions. The string length(s) must be exactly 1. |
 | placeholder | `string` | `''` | Placeholder. |
 | render-label | `undefined \| (option: MentionOption) => VNodeChild` | `undefined` | Options' labels render function. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |
