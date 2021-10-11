@@ -1,6 +1,6 @@
 # Basic
 
-Basic usage of input.
+Basic use of `n-input`.
 
 ```html
 <n-space vertical>

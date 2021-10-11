@@ -29,7 +29,7 @@ import { call, useAdjustedTo, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { cascaderLight } from '../styles'
 import type { CascaderTheme } from '../styles'
-import { getPathLabel } from './utils'
+import { getPathLabel, getRawNodePath } from './utils'
 import CascaderMenu from './CascaderMenu'
 import CascaderSelectMenu from './CascaderSelectMenu'
 import {
@@ -255,7 +255,8 @@ export default defineComponent({
     }
     function doUpdateValue (
       value: Value | null,
-      option: CascaderOption | null | Array<CascaderOption | null>
+      option: CascaderOption | null | Array<CascaderOption | null>,
+      optionPath: null | CascaderOption[] | Array<CascaderOption[] | null>
     ): void {
       const {
         onUpdateValue,
@@ -263,11 +264,15 @@ export default defineComponent({
         onChange
       } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, option)
-      if (_onUpdateValue) {
-        call(_onUpdateValue as OnUpdateValueImpl, value, option)
+      if (onUpdateValue) {
+        call(onUpdateValue as OnUpdateValueImpl, value, option, optionPath)
       }
-      if (onChange) call(onChange as OnUpdateValueImpl, value, option)
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, option, optionPath)
+      }
+      if (onChange) {
+        call(onChange as OnUpdateValueImpl, value, option, optionPath)
+      }
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
@@ -281,7 +286,7 @@ export default defineComponent({
     function doCheck (key: Key): boolean {
       const { cascade, multiple, filterable } = props
       const {
-        value: { check, getNode }
+        value: { check, getNode, getPath }
       } = treeMateRef
       if (multiple) {
         try {
@@ -293,6 +298,9 @@ export default defineComponent({
             checkedKeys,
             checkedKeys.map(
               (checkedKey) => getNode(checkedKey)?.rawNode || null
+            ),
+            checkedKeys.map((checkedKey) =>
+              getRawNodePath(getPath(checkedKey)?.treeNodePath)
             )
           )
           if (filterable) focusSelectionInput()
@@ -314,13 +322,21 @@ export default defineComponent({
         if (mergedCheckStrategyRef.value === 'child') {
           const tmNode = getNode(key)
           if (tmNode?.isLeaf) {
-            doUpdateValue(key, tmNode.rawNode)
+            doUpdateValue(
+              key,
+              tmNode.rawNode,
+              getRawNodePath(getPath(key).treeNodePath)
+            )
           } else {
             return false
           }
         } else {
           const tmNode = getNode(key)
-          doUpdateValue(key, tmNode?.rawNode || null)
+          doUpdateValue(
+            key,
+            tmNode?.rawNode || null,
+            getRawNodePath(getPath(key)?.treeNodePath)
+          )
         }
       }
       return true
@@ -329,7 +345,7 @@ export default defineComponent({
       const { cascade, multiple } = props
       if (multiple) {
         const {
-          value: { uncheck, getNode }
+          value: { uncheck, getNode, getPath }
         } = treeMateRef
         const { checkedKeys } = uncheck(key, mergedKeysRef.value.checkedKeys, {
           cascade,
@@ -337,7 +353,10 @@ export default defineComponent({
         })
         doUpdateValue(
           checkedKeys,
-          checkedKeys.map((checkedKey) => getNode(checkedKey)?.rawNode || null)
+          checkedKeys.map((checkedKey) => getNode(checkedKey)?.rawNode || null),
+          checkedKeys.map((checkedKey) =>
+            getRawNodePath(getPath(checkedKey)?.treeNodePath)
+          )
         )
       }
     }
@@ -617,9 +636,9 @@ export default defineComponent({
     function handleClear (e: MouseEvent): void {
       e.stopPropagation()
       if (props.multiple) {
-        doUpdateValue([], [])
+        doUpdateValue([], [], [])
       } else {
-        doUpdateValue(null, null)
+        doUpdateValue(null, null, null)
       }
     }
     function handleTriggerFocus (e: FocusEvent): void {
@@ -678,7 +697,7 @@ export default defineComponent({
       if (multiple && Array.isArray(mergedValue)) {
         doUncheck((option as any)[valueField])
       } else {
-        doUpdateValue(null, null)
+        doUpdateValue(null, null, null)
       }
     }
     function handleKeyDown (e: KeyboardEvent): void {

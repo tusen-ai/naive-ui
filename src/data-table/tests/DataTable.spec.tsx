@@ -24,91 +24,6 @@ describe('n-data-table', () => {
     ))
     expect(wrapper.find('.empty-info').exists()).toEqual(true)
   })
-  describe('props.columns', () => {
-    it('has correct type', () => {
-      interface Data {
-        collegeID: number
-        collegeName: string
-      }
-      const data: Data[] = [
-        {
-          collegeID: 1,
-          collegeName: 'Peking University'
-        }
-      ]
-      const createRowKey = (row: Data): number => row.collegeID
-      const createRowClassName = (row: Data): string => 'star kirby'
-      const createRowProps = (row: Data): HTMLAttributes => ({
-        style: { color: 'red' }
-      })
-      // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-      const createSummary = (pageData: Data[]) => {
-        return {
-          collegeID: {
-            value: pageData.reduce(
-              (prevValue, row) => prevValue + row.collegeID,
-              0
-            ),
-            colSpan: 3
-          }
-        }
-      }
-      const columns: DataTableColumns<Data> = [
-        {
-          title: 'collegeID',
-          key: 'collegeID',
-          align: 'center',
-          sorter: (row1, row2) => row1.collegeID - row2.collegeID
-        },
-        {
-          title: 'collegeName',
-          key: 'collegeName',
-          align: 'center',
-          defaultSortOrder: 'ascend'
-        },
-        {
-          title: '操作',
-          key: 'actions',
-          render (row) {
-            return (
-              <NButtonGroup>
-                {{
-                  default: () => {
-                    return (
-                      [
-                        {
-                          text: '修改',
-                          type: 'warning'
-                        },
-                        {
-                          text: '删除',
-                          type: 'error'
-                        }
-                      ] as const
-                    ).map(({ type, text }) => (
-                      <NButton type={type} round dashed>
-                        {{ default: () => text }}
-                      </NButton>
-                    ))
-                  }
-                }}
-              </NButtonGroup>
-            )
-          }
-        }
-      ]
-      mount(() => (
-        <NDataTable
-          columns={columns}
-          data={data}
-          rowKey={createRowKey}
-          rowClassName={createRowClassName}
-          rowProps={createRowProps}
-          summary={createSummary}
-        />
-      )).unmount()
-    })
-  })
   it('should work with `itemCount` without `remote`', () => {
     const columns = [
       {
@@ -848,36 +763,91 @@ describe('n-data-table', () => {
     await wrapper.find('.n-checkbox').trigger('click')
     expect(handleCheck).toHaveBeenCalled()
   })
+})
 
-  it('should work with `rowSpan` `colSpan` prop', async () => {
-    const columns: DataTableColumns = [
+describe('props.columns', () => {
+  it('has correct type', () => {
+    interface Data {
+      collegeID: number
+      collegeName: string
+    }
+    const data: Data[] = [
       {
-        title: 'Name',
-        key: 'name',
-        rowSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1),
-        colSpan: (rowData, rowIndex) => (rowIndex === 0 ? 3 : 1)
-      },
-      {
-        title: 'Age',
-        key: 'age'
+        collegeID: 1,
+        collegeName: 'Peking University'
       }
     ]
-    const data = new Array(5).fill(0).map((_, index) => {
-      return {
-        name: index,
-        age: index + 1
-      }
+    const createRowKey = (row: Data): number => row.collegeID
+    const createRowClassName = (row: Data): string => 'star kirby'
+    const createRowProps = (row: Data): HTMLAttributes => ({
+      style: { color: 'red' }
     })
-    const rowKey = (row: any): number => row.name
-    const wrapper = mount(() => (
-      <NDataTable columns={columns} data={data} row-key={rowKey} />
-    ))
-    expect(wrapper.find('tbody .n-data-table-td').attributes('colspan')).toBe(
-      '3'
-    )
-    expect(wrapper.find('tbody .n-data-table-td').attributes('rowspan')).toBe(
-      '2'
-    )
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    const createSummary = (pageData: Data[]) => {
+      return {
+        collegeID: {
+          value: pageData.reduce(
+            (prevValue, row) => prevValue + row.collegeID,
+            0
+          ),
+          colSpan: 3
+        }
+      }
+    }
+    const columns: DataTableColumns<Data> = [
+      {
+        title: 'collegeID',
+        key: 'collegeID',
+        align: 'center',
+        sorter: (row1, row2) => row1.collegeID - row2.collegeID
+      },
+      {
+        title: 'collegeName',
+        key: 'collegeName',
+        align: 'center',
+        defaultSortOrder: 'ascend'
+      },
+      {
+        title: '操作',
+        key: 'actions',
+        render (row) {
+          return (
+            <NButtonGroup>
+              {{
+                default: () => {
+                  return (
+                    [
+                      {
+                        text: '修改',
+                        type: 'warning'
+                      },
+                      {
+                        text: '删除',
+                        type: 'error'
+                      }
+                    ] as const
+                  ).map(({ type, text }) => (
+                    <NButton type={type} round dashed>
+                      {{ default: () => text }}
+                    </NButton>
+                  ))
+                }
+              }}
+            </NButtonGroup>
+          )
+        }
+      }
+    ]
+    mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        rowKey={createRowKey}
+        rowClassName={createRowClassName}
+        rowProps={createRowProps}
+        summary={createSummary}
+      />
+    )).unmount()
   })
 
   it('should work with `align` prop', async () => {
@@ -910,5 +880,70 @@ describe('n-data-table', () => {
         wrapper.find('tbody .n-data-table-td').attributes('style')
       ).toContain(`text-align: ${align}`)
     })
+  })
+
+  it('should work with `rowSpan` `colSpan` prop', async () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        rowSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1),
+        colSpan: (rowData, rowIndex) => (rowIndex === 0 ? 3 : 1)
+      },
+      {
+        title: 'Age',
+        key: 'age'
+      }
+    ]
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: index,
+        age: index + 1
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} row-key={rowKey} />
+    ))
+    expect(wrapper.find('tbody .n-data-table-td').attributes('colspan')).toBe(
+      '3'
+    )
+    expect(wrapper.find('tbody .n-data-table-td').attributes('rowspan')).toBe(
+      '2'
+    )
+  })
+
+  it('should work with `ellipsis` prop', async () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        width: 100,
+        ellipsis: true
+      },
+      {
+        title: 'Age',
+        key: 'age',
+        width: 100,
+        ellipsis: {
+          tooltip: true
+        }
+      }
+    ]
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: `testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest${index}`,
+        age: `testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest${index}`
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} row-key={rowKey} />
+    ))
+    expect(wrapper.find('tbody .n-data-table-td--ellipsis').exists()).toBe(true)
+    expect(wrapper.find('tbody .n-ellipsis').exists()).toBe(true)
+    expect(wrapper.find('tbody .n-ellipsis').attributes('style')).toContain(
+      'text-overflow: ellipsis'
+    )
   })
 })
