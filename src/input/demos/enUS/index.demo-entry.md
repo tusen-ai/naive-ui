@@ -78,14 +78,7 @@ event
 
 ### Input Methods
 
-<<<<<<< HEAD
 | Name  | Type         | Description              |
 | ----- | ------------ | ------------------------ |
 | blur  | `() => void` | Blur the input element.  |
 | focus | `() => void` | Focus the input element. |
-=======
-| Name  | Type       | Description              |
-| ----- | ---------- | ------------------------ |
-| blur  | () => void | Blur the input element.  |
-| focus | () => void | Focus the input element. |
->>>>>>> docs(input): update on-input desc
