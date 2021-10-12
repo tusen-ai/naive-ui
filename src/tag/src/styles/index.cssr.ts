@@ -73,7 +73,7 @@ export default cB('tag', `
     border-radius: calc(var(--height) / 2);
   `, [
     cE('avatar', {
-      marginLeft: 'calc(var(--height) / -4)'
+      marginLeft: 'calc((var(--height) - 8px) / -2)'
     })
   ]),
   cM('disabled', {
