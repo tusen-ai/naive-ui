@@ -143,20 +143,18 @@ describe('n-carousel', () => {
 
     expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
 
-    await wrapper
-      .find('.n-carousel__arrow--right')
-      .trigger('click')
-      .then(async () => {
-        expect(slidesDOMArray[2].attributes('aria-hidden')).toBe('false')
-        await sleep(1000)
-        await nextTick(() => {
-          void wrapper
-            .find('.n-carousel__arrow--left')
-            .trigger('click')
-            .then(() => {
-              expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
-            })
+    await wrapper.find('.n-carousel__arrow--right').trigger('click')
+
+    expect(slidesDOMArray[2].attributes('aria-hidden')).toBe('false')
+
+    await sleep(1000)
+    await nextTick(() => {
+      void wrapper
+        .find('.n-carousel__arrow--left')
+        .trigger('click')
+        .then(() => {
+          expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
         })
-      })
+    })
   })
 })
