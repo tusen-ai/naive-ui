@@ -6,6 +6,7 @@ import {
   cloneVNode,
   nextTick,
   computed,
+  Transition,
   CSSProperties,
   onMounted,
   watchEffect,
@@ -25,7 +26,6 @@ import style from './styles/index.cssr'
 
 const carouselProps = {
   ...(useTheme.props as ThemeProps<CarouselTheme>),
-  showArrow: Boolean,
   autoplay: Boolean,
   dotPlacement: {
     type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
@@ -39,9 +39,9 @@ const carouselProps = {
     type: String as PropType<'click' | 'hover'>,
     default: 'click'
   },
-  showArrowMode: {
-    type: String as PropType<'always' | 'hover'>,
-    default: 'always'
+  showArrow: {
+    type: [Boolean, String] as PropType<boolean | 'hover'>,
+    default: false
   }
 }
 
@@ -55,7 +55,7 @@ export default defineComponent({
     const currentRef = ref(1)
     const lengthRef = { value: 1 }
     const touchingRef = ref(false)
-    const isArrowIcon = ref<boolean>(props.showArrowMode === 'always')
+    const isArrowIcon = ref<boolean>(props.showArrow === true)
     const dragOffsetRef = ref(0)
     const selfElRef = ref<HTMLDivElement | null>(null)
     const dotPlacementRef = toRef(props, 'dotPlacement')
@@ -213,12 +213,12 @@ export default defineComponent({
       off('touchcancel', document, handleTouchend)
     }
     function carouselMouseenter (): void {
-      if (props.showArrowMode === 'hover') {
+      if (props.showArrow === 'hover') {
         isArrowIcon.value = true
       }
     }
     function carouselMouseleave (): void {
-      if (props.showArrowMode === 'hover') {
+      if (props.showArrow === 'hover') {
         isArrowIcon.value = false
       }
     }
@@ -315,8 +315,8 @@ export default defineComponent({
           `${mergedClsPrefix}-carousel--${this.dotPlacement}`
         ]}
         style={this.cssVars as CSSProperties}
-        onMouseenter={() => this.carouselMouseenter()}
-        onMouseleave={() => this.carouselMouseleave()}
+        onMouseenter={this.carouselMouseenter}
+        onMouseleave={this.carouselMouseleave}
         ref="selfElRef"
       >
         <div
@@ -389,7 +389,11 @@ export default defineComponent({
                 this.next()
               }}
             >
-              <ForwardIcon />
+              <Transition name="fade-in-transition">
+                {{
+                  default: () => (this.isArrowIcon ? <ForwardIcon /> : null)
+                }}
+              </Transition>
             </div>,
             <div
               class={[
@@ -403,7 +407,11 @@ export default defineComponent({
                 this.prev()
               }}
             >
-              <BackwardIcon />
+              <Transition name="fade-in-transition">
+                {{
+                  default: () => (this.isArrowIcon ? <BackwardIcon /> : null)
+                }}
+              </Transition>
             </div>
         ]}
       </div>

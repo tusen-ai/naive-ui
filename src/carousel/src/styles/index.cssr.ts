@@ -1,4 +1,5 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
+import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 // vars:
 // --bezier
 // --dot-color
@@ -64,6 +65,7 @@ export default cB('carousel', `
       top: 50%;
       right: 0;
     `, [
+      fadeInTransition(),
       c('&:hover', {
         transform: 'translateY(-50%) scale(1.1)'
       }),
@@ -76,6 +78,7 @@ export default cB('carousel', `
       top: 50%;
       left: 0;
     `, [
+      fadeInTransition(),
       c('&:hover', {
         transform: 'translateY(-50%) scale(1.1)'
       }),
