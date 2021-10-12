@@ -59,6 +59,36 @@ describe('n-carousel', () => {
     }
   })
 
+  it('should work with `interval` prop', async () => {
+    const wrapper = mount(NCarousel, {
+      props: {
+        interval: 100,
+        autoplay: true
+      },
+      slots: {
+        default: () => {
+          return [...Array(3).keys()].map((i) => {
+            return h('div', {}, i.toString())
+          })
+        }
+      }
+    })
+
+    await sleep(100)
+    expect(
+      wrapper
+        .find('.n-carousel__slides')
+        .find('[data-index="2"]')
+        .attributes('aria-hidden')
+    ).toBe('false')
+    expect(
+      wrapper
+        .find('.n-carousel__dots')
+        .findAll('.n-carousel__dot')[1]
+        .attributes('aria-selected')
+    ).toBe('true')
+  })
+
   it('should work with `showArrow` prop', async () => {
     const wrapper = mount(NCarousel)
 
