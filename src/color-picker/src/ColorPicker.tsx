@@ -541,7 +541,6 @@ export default defineComponent({
             {props.swatches?.length && (
               <ColorPickerSwatches
                 clsPrefix={mergedClsPrefix}
-                color={mergedValueRef.value}
                 mode={displayedModeRef.value}
                 swatches={props.swatches}
                 onUpdateColor={(color) => doUpdateValue(color, 'input')}
