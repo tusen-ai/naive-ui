@@ -143,14 +143,14 @@ describe('n-carousel', () => {
 
     expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
 
-    wrapper
+    await wrapper
       .find('.n-carousel__arrow--right')
       .trigger('click')
       .then(async () => {
         expect(slidesDOMArray[2].attributes('aria-hidden')).toBe('false')
         await sleep(1000)
-        nextTick(() => {
-          wrapper
+        await nextTick(() => {
+          void wrapper
             .find('.n-carousel__arrow--left')
             .trigger('click')
             .then(() => {
