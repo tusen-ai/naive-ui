@@ -1,6 +1,6 @@
 # Upload
 
-If latency doesn't matters, I'd like to use trucks with many hard disks.
+If latency doesn't matter, I'd like to use trucks with many hard disks.
 
 ## Demos
 
@@ -56,10 +56,10 @@ abstract
 | Property | Type | Description |
 | --- | --- | --- |
 | id | `string \| number` | The id of the file. Need to be unique. |
-| name | `string` | File name. |
+| name | `string` | Filename. |
 | status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |
-| percentage | `number` | The progress percentage of file upload. It works when file is uploading. |
-| file? | `File \| null` | The File object of the file in brower. |
+| percentage | `number` | The progress percentage of file upload. It works when the file is uploading. |
+| file? | `File \| null` | The File object of the file in browser. |
 | thumbnailUrl? | `string \| null` | Thumbnail URL. |
 | type? | `string \| null` | MIME type. |
 | url? | `string \| null` | File URL. |
@@ -74,7 +74,7 @@ abstract
 
 | Name | Type | Description |
 | --- | --- | --- |
-| submit | `(fileId?: string \| number)` | Submit all files in pending statis. |
+| submit | `(fileId?: string \| number)` | Submit all files in pending status. |
 | openFileDialog | `() => void` | Open file dialog. |
 
 ### Upload Slots
