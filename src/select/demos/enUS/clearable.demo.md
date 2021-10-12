@@ -1,6 +1,6 @@
 # Clearable
 
-Remember you can only clear the select which has value. (Select it firstly)
+Make the select clearable. Remember you can only clear a select that has value.
 
 ```html
 <n-space vertical>
