@@ -27,8 +27,7 @@ swatches
 | show-alpha | `boolean` | `true` | 是否可调节 alpha 通道 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 颜色选择器的尺寸 |
 | value | `string \| null` | `undefined` | 颜色选择器的值 |
-| show-swatches | `boolean` | `false` | 是否展示色板 |
-| swatches | `Array<string> \| null` | `null` | 色板的值 |
+| swatches | `string[]` | `undefined` | 色板的值 |
 | on-complete | `(value: string) => void` | `undefined` | 颜色完成改变后的回调（在鼠标移动时候不会调用） |
 | on-update:show | `(value: boolean) => void` | `undefined` | 面板可见状态改变的回调 |
 | on-update:value | `(value: string) => void` | `undefined` | 颜色改变时的回调 |

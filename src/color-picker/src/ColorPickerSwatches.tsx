@@ -1,13 +1,14 @@
 import { defineComponent, h, PropType, computed } from 'vue'
 import {
-  hsl2hsv,
+  HSL,
   HSLA,
   hsla,
+  HSV,
   hsv2hsl,
   hsv2rgb,
-  HSVA,
   hsva,
-  RGB,
+  HSVA,
+  rgb2hsl,
   rgb2hsv,
   RGBA,
   rgba,
@@ -17,85 +18,105 @@ import {
   toRgbaString
 } from 'seemly'
 import { ColorPickerMode, getModeFromValue } from './utils'
-import { throwError } from '../../_utils'
+import { makeMap } from '@vue/shared'
 
-interface ParseColorAction<V extends number[]> {
-  values: V
-  toString: () => string
+interface ParsedColor {
+  value: string
+  rawMode: ColorPickerMode | null
+  legalValue: string
 }
 
-class ParseColor {
-  h: number
-  s: number
-  v: number
-  a: number
-  constructor (color: string) {
-    const rawMode = getModeFromValue(color)
+// http://www.w3big.com/cssref/css-colors-legal.html
+const isCSSLegalColorMode: (mode: ColorPickerMode) => boolean =
+  makeMap(`rgb,hsl,hex`)
 
-    let _hsva: HSVA | null, _rgba: RGBA, _hsla: HSLA
-    _hsva = null
-    switch (rawMode) {
-      case 'hex':
-      case 'rgb':
-        _rgba = rgba(color)
-        _hsva = [...rgb2hsv(...(_rgba.slice(0, 3) as RGB)), _rgba[3]]
-        break
-      case 'hsv':
-        _hsva = hsva(color)
-        break
-      case 'hsl':
-        _hsla = hsla(color)
-        _hsva = [...hsl2hsv(...(_hsla.slice(0, 3) as RGB)), _hsla[3]]
-        break
-    }
-
-    if (!_hsva) {
-      throwError('color-picker-swatches', `Invalid color value ${color}.`)
-    }
-
-    this.h = _hsva[0]
-    this.s = _hsva[1]
-    this.v = _hsva[2]
-    this.a = _hsva[3]
+/** Try to normalize the color values to ensure that they are legal to CSS */
+function normalizeColor (color: string, rawMode?: ColorPickerMode | null) {
+  if (rawMode === undefined) {
+    rawMode = getModeFromValue(color)
   }
-
-  toRgba (): ParseColorAction<RGBA> {
-    const values = [...hsv2rgb(this.h, this.s, this.v), this.a] as RGBA
-    return {
-      values,
-      toString: () => toRgbaString(values)
-    }
-  }
-
-  toHexa (): ParseColorAction<RGBA> {
-    const values = [...hsv2rgb(this.h, this.s, this.v), this.a] as RGBA
-    return {
-      values,
-      toString: () => toHexaString(values)
-    }
-  }
-
-  toHsva (): ParseColorAction<HSVA> {
-    const values = [this.h, this.s, this.v, this.a] as HSVA
-    return {
-      values,
-      toString: () => toHsvaString(values)
-    }
-  }
-
-  toHsla (): ParseColorAction<HSLA> {
-    const values = [...hsv2hsl(this.h, this.s, this.v), this.a] as HSLA
-    return {
-      values,
-      toString: () => toHslaString(values)
-    }
+  if (!rawMode || isCSSLegalColorMode(rawMode)) return color
+  switch (rawMode) {
+    case 'hsv':
+      const _hsva = hsva(color)
+      const _rgb = hsv2rgb(...(_hsva.slice(0, 3) as HSV))
+      return toRgbaString([..._rgb, _hsva[3]])
+    default:
+      // For the mode that is not preset, we keep the original value.
+      // For Color names, they are legal to CSS, so we don’t deal with them,
+      // and only standardize them when outputting.
+      return color
   }
 }
 
-function getDistanceToWhite (color: string | ParseColor): number {
-  const parsed = typeof color === 'string' ? new ParseColor(color) : color
-  const [, s, l] = parsed.toHsla().values
-  return Math.sqrt(Math.pow(100 - l, 2) + Math.pow(s, 2))
+function standardizeColor (color: string) {
+  if (color.toLowerCase() === 'black') {
+    return '#000'
+  }
+
+  const ctx = document.createElement('canvas').getContext('2d')!
+  ctx.fillStyle = color
+  return ctx.fillStyle === '#000' ? null : ctx.fillStyle
+}
+
+type Conversion = {
+  parse(str: string): RGBA
+} & Partial<Record<ColorPickerMode, (colors: RGBA) => string>>
+
+const covert: Record<ColorPickerMode, Conversion> = {
+  rgb: {
+    parse (str: string) {
+      return rgba(str)
+    },
+    hex (rgba: RGBA): string {
+      return toHexaString(rgba)
+    },
+    hsl (rgba: RGBA): string {
+      return toHslaString([...rgb2hsl(...(rgba.slice(0, 3) as HSL)), rgba[3]])
+    },
+    hsv (rgba: RGBA): string {
+      return toHsvaString([...rgb2hsv(...(rgba.slice(0, 3) as HSL)), rgba[3]])
+    }
+  },
+  hex: {
+    parse (str: string) {
+      return rgba(str)
+    },
+    rgb (rgba: RGBA): string {
+      return toRgbaString(rgba)
+    },
+    hsl (rgba: RGBA): string {
+      return covert.rgb.hsl!(rgba)
+    },
+    hsv (rgba: RGBA): string {
+      return covert.rgb.hsv!(rgba)
+    }
+  },
+  hsl: {
+    parse (str: string) {
+      return hsla(str)
+    },
+    hex (hsla: HSLA): string {
+      return toHexaString([...hsv2rgb(...(hsla.slice(0, 3) as HSL)), hsla[3]])
+    },
+    rgb (hsla: HSLA): string {
+      return toRgbaString([...hsv2rgb(...(hsla.slice(0, 3) as HSL)), hsla[3]])
+    },
+    hsl (hsla: HSLA): string {
+      return toHslaString([...hsv2hsl(...(hsla.slice(0, 3) as HSL)), hsla[3]])
+    }
+  },
+  hsv: {
+    parse (str: string) {
+      return hsva(str)
+    },
+    hex (hsva: HSVA): string {
+      return toHexaString([...hsv2rgb(...(hsva.slice(0, 3) as HSV)), hsva[3]])
+    },
+    hsl (hsva: HSVA): string {
+      return toHslaString([...hsv2hsl(...(hsva.slice(0, 3) as HSV)), hsva[3]])
+    }
+  }
 }
 
 export default defineComponent({
@@ -104,10 +125,6 @@ export default defineComponent({
     clsPrefix: {
       type: String,
       required: true
-    },
-    color: {
-      type: String as PropType<string | null>,
-      default: null
     },
     mode: {
       type: String as PropType<ColorPickerMode>,
@@ -124,67 +141,68 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const currentColorRef = computed(() =>
-      props.color ? normalizeColor(props.color, props.mode) : null
-    )
-
-    const parsedSwatchesRef = computed(() =>
+    const parsedSwatchesRef = computed<ParsedColor[]>(() =>
       props.swatches.map((swatch) => {
-        const parsed = new ParseColor(swatch)
-        const normalized = normalizeColor(parsed, props.mode)
+        const rawMode = getModeFromValue(swatch)
         return {
-          parsed,
-          normalized,
-          rgba: ['hex', 'rgb'].includes(props.mode)
-            ? normalized
-            : normalizeColor(parsed, 'rgb'),
-          isSelected: currentColorRef.value === normalized,
-          isNearWhite: getDistanceToWhite(parsed) < 3
+          value: swatch,
+          rawMode,
+          legalValue: normalizeColor(swatch)
         }
       })
     )
 
-    function normalizeColor (
-      color: string | ParseColor,
-      mode: ColorPickerMode
-    ): string {
-      if (!mode) mode = props.mode
-      const parsed = typeof color === 'string' ? new ParseColor(color) : color
-      switch (mode) {
-        case 'rgb':
-          return parsed.toRgba().toString()
-        case 'hex':
-          return parsed.toHexa().toString()
-        case 'hsv':
-          return parsed.toHsva().toString()
-        case 'hsl':
-          return parsed.toHsla().toString()
+    function handleSwatchSelected (parsed: ParsedColor) {
+      props.onUpdateColor(normalizeOutput(parsed))
+    }
+
+    function normalizeOutput (parsed: ParsedColor) {
+      const { mode } = props
+      let { value, rawMode, legalValue } = parsed
+      if (rawMode === mode) return value
+      // Illegal preset mode colors are converted to rgb uniformly
+      if (
+        mode === 'rgb' &&
+        rawMode &&
+        !isCSSLegalColorMode(rawMode) &&
+        value !== legalValue
+      ) {
+        return legalValue
       }
+
+      if (!rawMode) {
+        const maybeColorName = value.match(/^[a-zA-Z]+$/)
+        const standardized = maybeColorName && standardizeColor(value)
+        if (!standardized) {
+          return value
+        }
+
+        rawMode = 'hex'
+        value = standardized
+        if (mode === rawMode) return value
+      }
+
+      const conversions = covert[rawMode]
+      return !conversions || !(mode in conversions)
+        ? value
+        : conversions[mode]!(conversions.parse(value))
     }
 
     return {
-      currentColorRef,
-      parsedSwatchesRef
+      parsedSwatchesRef,
+      handleSwatchSelected
     }
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <div class={`${clsPrefix}-color-picker-swatches`}>
         {this.parsedSwatchesRef.map((swatch) => (
           <div
-            class={[
-              `${clsPrefix}-color-picker-swatches__color`,
-              {
-                [`${clsPrefix}-color-picker-swatches__color--selected`]:
-                  swatch.isSelected,
-                [`${clsPrefix}-color-picker-swatches__color--light`]:
-                  swatch.isNearWhite
-              }
-            ]}
-            onClick={() => this.onUpdateColor(swatch.normalized)}
+            class={`${clsPrefix}-color-picker-swatches__color`}
+            onClick={() => this.handleSwatchSelected(swatch)}
           >
-            <div style={{ background: swatch.rgba }} />
+            <div style={{ background: swatch.legalValue }} />
           </div>
         ))}
       </div>

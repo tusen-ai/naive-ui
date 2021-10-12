@@ -88,14 +88,7 @@ export const colorPickerPanelProps = {
     type: Boolean,
     default: true
   },
-  showSwatches: {
-    type: Boolean,
-    default: false
-  },
-  swatches: {
-    type: Array as PropType<string[]>,
-    default: null
-  },
+  swatches: Array as PropType<string[]>,
   actions: {
     type: Array as PropType<ActionType[]>,
     default: null
@@ -545,7 +538,7 @@ export default defineComponent({
               valueArr={mergedValueArrRef.value}
               onUpdateValue={handleInputUpdateValue}
             />
-            {props.showSwatches && props.swatches?.length && (
+            {props.swatches?.length && (
               <ColorPickerSwatches
                 clsPrefix={mergedClsPrefix}
                 color={mergedValueRef.value}

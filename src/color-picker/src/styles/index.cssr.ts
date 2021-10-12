@@ -176,7 +176,7 @@ export default c([
     margin: 0px -10px -10px 0;
     padding-top: 10px;
   `, [
-    cB('color-picker-swatches__color', `
+    cE('color', `
       position: relative;
       width: 18px;
       height: 18px;
@@ -190,12 +190,9 @@ export default c([
         position: relative;
         width: 100%;
         height: 100%;
-        border: 1px solid transparent;
         border-radius: var(--border-radius);
+        box-shadow: rgb(0 0 0 / 15%) 0px 0px 0px 1px inset;
         cursor: pointer;
-      `),
-      c('&--light > div', `
-        border: var(--border);
       `)
     ])
   ])
