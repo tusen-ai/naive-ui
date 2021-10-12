@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-auto-complete` 新增 `show-on-focus` 属性，关闭 [#1292](https://github.com/TuSimple/naive-ui/issues/1292)
+- `n-auto-complete` 新增 `get-derived-show-from-value` 属性，关闭 [#1292](https://github.com/TuSimple/naive-ui/issues/1292)
 
 ## 2.19.7 (2021-10-12)
 

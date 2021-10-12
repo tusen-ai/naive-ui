@@ -4,7 +4,7 @@
 
 ### Feats
 
-- `n-auto-complete` add `show-on-focus` prop, closes [#1292](https://github.com/TuSimple/naive-ui/issues/1292).
+- `n-auto-complete` add `get-derived-show-from-value` prop, closes [#1292](https://github.com/TuSimple/naive-ui/issues/1292).
 
 ## 2.19.7 (2021-10-12)
 

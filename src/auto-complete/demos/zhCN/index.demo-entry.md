@@ -10,7 +10,7 @@ size
 group
 custom-input
 after-select
-show-on-focus
+show-options-by-value
 ```
 
 ## API
@@ -24,11 +24,11 @@ show-on-focus
 | clearable | `boolean` | `false` | 自动填充是否支持可清除 |
 | default-value | `string` | `null` | 自动填充的默认值 |
 | disabled | `boolean` | `false` | 自动填充是否禁用 |
+| getDerivedShowFromValue | `(inputValue: string \| null) => boolean` | `undefined` | 根据输入值决定是否显示所有选项 |
 | loading | `boolean` | `false` | 是否展示加载状态 |
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | 自动填充的自定义选项 |
 | placeholder | `string` | `'请输入'` | 自动填充的提示信息 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 自动填充的尺寸大小 |
-| showOnFocus | `boolean` | `false` | focus 时是否显示所有选项 |
 | value | `string` | `undefined` | 自动填充的数据用户可控 |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | blur 时触发的回调函数 |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | focus 时触发的回调函数 |

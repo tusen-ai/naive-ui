@@ -10,7 +10,7 @@ size
 group
 custom-input
 after-select
-show-on-focus
+show-options-by-value
 ```
 
 ## API
@@ -24,11 +24,11 @@ show-on-focus
 | clearable | `boolean` | `false` | Whether auto complete is clearable. |
 | default-value | `string` | `null` | Default value of auto complete. |
 | disabled | `boolean` | `false` | Whether the auto complete is disabled. |
+| getDerivedShowFromValue | `(inputValue: string \| null) => boolean` | `undefined` | Based on value to determine is Whether to show all options when focusing. |
 | loading | `boolean` | `false` | Whether to show a loading status. |
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | Auto complete options. |
 | placeholder | `string` | `'Please Input'` | Auto complete's placeholder. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Auto complete size. |
-| showOnFocus | `boolean` | `false` | Whether to show all options when focus. |
 | value | `string` | `undefined` | Value of auto complete if being manually set. |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | On blur callback function. |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | On focus callback function. |

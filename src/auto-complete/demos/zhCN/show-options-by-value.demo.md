@@ -1,15 +1,14 @@
-# 聚焦后显示所有选项
+# 是否显示所有选项
+
+你可以根据输入的值来决定是否显示所有选项
 
 ```html
-<n-space vertical>
-  <n-space><n-switch v-model:value="showOnFocus" />showOnFocus</n-space>
-  <n-auto-complete
-    :options="options"
-    v-model:value="value"
-    placeholder="邮箱"
-    :show-on-focus="showOnFocus"
-  />
-</n-space>
+<n-auto-complete
+  :options="options"
+  v-model:value="value"
+  placeholder="输入空或者非`a`显示所有选项"
+  :get-derived-show-from-value="getDerivedShowFromValue"
+/>
 ```
 
 ```js
@@ -30,7 +29,13 @@ export default defineComponent({
           }
         })
       }),
-      showOnFocus: showOnFocusRef
+      showOnFocus: showOnFocusRef,
+      getDerivedShowFromValue: (value) => {
+        if (!value || value !== 'a') {
+          return true
+        }
+        return false
+      }
     }
   }
 })

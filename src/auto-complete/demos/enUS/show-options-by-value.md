@@ -1,15 +1,14 @@
-# Show all options when focusing
+# Whether to show all options
+
+Your can determine is whether to show all options based on value when it is focused.
 
 ```html
-<n-space vertical>
-  <n-space><n-switch v-model:value="showOnFocus" />showOnFocus</n-space>
-  <n-auto-complete
-    :options="options"
-    v-model:value="value"
-    placeholder="Email"
-    :show-on-focus="showOnFocus"
-  />
-</n-space>
+<n-auto-complete
+  :options="options"
+  v-model:value="value"
+  placeholder="input empty or not `a` value to show all options"
+  :get-derived-show-from-value="getDerivedShowFromValue"
+/>
 ```
 
 ```js
@@ -30,7 +29,13 @@ export default defineComponent({
           }
         })
       }),
-      showOnFocus: showOnFocusRef
+      showOnFocus: showOnFocusRef,
+      getDerivedShowFromValue: (value) => {
+        if (!value || value !== 'a') {
+          return true
+        }
+        return false
+      }
     }
   }
 })
