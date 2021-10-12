@@ -1,6 +1,6 @@
 # Hide Button
 
-Use `show-button` prop to control whether to show buttons.
+Use `show-button` prop to control whether to show control buttons.
 
 ```html
 <n-space align="center">

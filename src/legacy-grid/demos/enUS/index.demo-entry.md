@@ -17,7 +17,7 @@ offset
 push-pull
 ```
 
-## Props
+## API
 
 ### Row Props
 

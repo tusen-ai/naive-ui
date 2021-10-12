@@ -48,11 +48,11 @@ focus
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | 输入框类型 |
 | value | `string \| [string, string] \| null` | `undefined` | 文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组 |
 | on-blur | `() => void` | `undefined` | 输入框失去焦点时触发 |
-| on-change | `(value: string \| [string, string]) => void` | `undefined` | 输入框失去焦点且值 change 时触发 |
+| on-change | `(value: string \| [string, string]) => void` | `undefined` | 原生 change 事件触发时触发 |
 | on-clear | `() => void` | `undefined` | 输入框点击清空按钮时触发 |
 | on-focus | `() => void` | `undefined` | 输入框获得焦点时触发 |
-| on-input | `() => void` | `undefined` | 输入框值 change 时触发 |
-| on-update:value | `(value: string \| [string, string]) => void` | `undefined` | 输入框值 change 时触发 |
+| on-input | `(value: string \| [string, string]) => void` | `undefined` | 输入框值改变时触发 |
+| on-update:value | `(value: string \| [string, string]) => void` | `undefined` | 输入框值改变时触发 |
 
 ### Input Slots
 
@@ -76,7 +76,7 @@ focus
 
 ### Input Methods
 
-| 名称  | 类型       | 说明             |
-| ----- | ---------- | ---------------- |
-| blur  | () => void | Blur input 元素  |
-| focus | () => void | Focus input 元素 |
+| 名称  | 类型         | 说明             |
+| ----- | ------------ | ---------------- |
+| blur  | `() => void` | Blur input 元素  |
+| focus | `() => void` | Focus input 元素 |

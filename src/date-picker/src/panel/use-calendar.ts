@@ -11,12 +11,15 @@ import {
   getDate,
   isValid,
   startOfDay,
-  startOfSecond
+  startOfSecond,
+  startOfMonth
 } from 'date-fns'
-import { dateArray, strictParse } from '../utils'
+import { dateArray, monthArray, strictParse, yearArray } from '../utils'
 import { usePanelCommon } from './use-panel-common'
 import { IsSingleDateDisabled, datePickerInjectionKey } from '../interface'
-import type { DateItem } from '../utils'
+import type { DateItem, MonthItem, YearItem } from '../utils'
+import { VirtualListInst } from 'vueuc'
+import { ScrollbarInst } from '../../../_internal'
 
 const useCalendarProps = {
   ...usePanelCommon.props,
@@ -29,7 +32,7 @@ const useCalendarProps = {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useCalendar (
   props: ExtractPropTypes<typeof useCalendarProps>,
-  type: 'date' | 'datetime'
+  type: 'date' | 'datetime' | 'month'
 ) {
   const panelCommon = usePanelCommon(props)
   const {
@@ -42,7 +45,9 @@ function useCalendar (
     isMinuteDisabledRef,
     isSecondDisabledRef,
     localeRef,
-    datePickerSlots
+    firstDayOfWeekRef,
+    datePickerSlots,
+    scrollYearMonth
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -65,14 +70,23 @@ function useCalendar (
       ? Date.now()
       : props.value
   )
+  const yearScrollRef = ref<VirtualListInst | null>(null)
+  const monthScrollRef = ref<ScrollbarInst | null>(null)
+  const scrollbarInstRef = ref<ScrollbarInst | null>(null)
   const nowRef = ref(Date.now())
   const dateArrayRef = computed(() => {
     return dateArray(
       calendarValueRef.value,
       props.value,
       nowRef.value,
-      localeRef.value.firstDayOfWeek
+      firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek
     )
+  })
+  const monthArrayRef = computed(() => {
+    return monthArray(calendarValueRef.value, props.value, nowRef.value)
+  })
+  const yearArrayRef = computed(() => {
+    return yearArray(calendarValueRef.value, props.value, nowRef.value)
   })
   const weekdaysRef = computed(() => {
     return dateArrayRef.value.slice(0, 7).map((dateItem) => {
@@ -120,6 +134,7 @@ function useCalendar (
   )
   function sanitizeValue (value: number): number {
     if (type === 'datetime') return getTime(startOfSecond(value))
+    if (type === 'month') return getTime(startOfMonth(value))
     return getTime(startOfDay(value))
   }
   function mergedIsDateDisabled (ts: number): boolean {
@@ -189,7 +204,7 @@ function useCalendar (
     calendarValueRef.value = Date.now()
     panelCommon.doClose(true)
   }
-  function handleDateClick (dateItem: DateItem): void {
+  function handleDateClick (dateItem: DateItem | MonthItem | YearItem): void {
     if (mergedIsDateDisabled(dateItem.ts)) {
       return
     }
@@ -200,9 +215,12 @@ function useCalendar (
       newValue = Date.now()
     }
     newValue = getTime(set(newValue, dateItem.dateObject))
-    panelCommon.doUpdateValue(getTime(sanitizeValue(newValue)), type === 'date')
+    panelCommon.doUpdateValue(sanitizeValue(newValue), type === 'date')
     if (type === 'date') {
       panelCommon.doClose()
+    } else if (type === 'month') {
+      panelCommon.disableTransitionOneTick()
+      scrollYearMonth(newValue)
     }
   }
   function deriveDateInputValue (time?: number): void {
@@ -245,11 +263,27 @@ function useCalendar (
   function prevMonth (): void {
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, -1))
   }
+  // For month type
+  function virtualListContainer (): HTMLElement {
+    const { value } = yearScrollRef
+    return value?.listElRef as HTMLElement
+  }
+  // For month type
+  function virtualListContent (): HTMLElement {
+    const { value } = yearScrollRef
+    return value?.itemsElRef as HTMLElement
+  }
+  // For month type
+  function handleVirtualListScroll (e: Event): void {
+    scrollbarInstRef.value?.sync()
+  }
   function handleTimePickerChange (value: number): void {
     panelCommon.doUpdateValue(value, false)
   }
   return {
     dateArray: dateArrayRef,
+    monthArray: monthArrayRef,
+    yearArray: yearArrayRef,
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
     weekdays: weekdaysRef,
@@ -268,9 +302,15 @@ function useCalendar (
     handleDateInput,
     handleTimePickerChange,
     clearSelectedDateTime,
+    virtualListContainer,
+    virtualListContent,
+    handleVirtualListScroll,
     timePickerSize: panelCommon.timePickerSize,
     dateInputValue: dateInputValueRef,
-    datePickerSlots
+    datePickerSlots,
+    monthScrollRef,
+    yearScrollRef,
+    scrollbarInstRef
   }
 }
 

@@ -16,6 +16,7 @@ import { cascaderLight } from '../cascader/styles'
 import { checkboxLight } from '../checkbox/styles'
 import { codeLight } from '../code/styles'
 import { collapseLight } from '../collapse/styles'
+import { collapseTransitionLight } from '../collapse-transition/styles'
 import { colorPickerLight } from '../color-picker/styles'
 import { dataTableLight } from '../data-table/styles'
 import { datePickerLight } from '../date-picker/styles'
@@ -53,7 +54,7 @@ import { progressLight } from '../progress/styles'
 import { radioLight } from '../radio/styles'
 import { rateLight } from '../rate/styles'
 import { resultLight } from '../result/styles'
-import { scrollbarLight } from '../scrollbar/styles'
+import { scrollbarLight } from '../_internal/scrollbar/styles'
 import { selectLight } from '../select/styles'
 import { skeletonLight } from '../skeleton/styles'
 import { sliderLight } from '../slider/styles'
@@ -93,6 +94,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Checkbox: checkboxLight,
   Code: codeLight,
   Collapse: collapseLight,
+  CollapseTransition: collapseTransitionLight,
   ColorPicker: colorPickerLight,
   DataTable: dataTableLight,
   DatePicker: datePickerLight,

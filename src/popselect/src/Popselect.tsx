@@ -32,6 +32,7 @@ export type PopselectProps = ExtractPublicPropTypes<typeof popselectProps>
 export default defineComponent({
   name: 'Popselect',
   props: popselectProps,
+  __popover__: true,
   setup (props) {
     const themeRef = useTheme(
       'Popselect',

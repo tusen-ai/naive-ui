@@ -11,9 +11,10 @@ grid
 indeterminate
 controlled
 event
+customize-value
 ```
 
-## Props
+## API
 
 ### Checkbox Props
 
@@ -29,7 +30,7 @@ event
 | value | `string \| number` | `undefined` | The value of the checkbox to be used in a checkbox group. |
 | on-update:checked | `(checked: boolean) => void` | `undefined` | Callback function triggered on a checked status change. |
 
-### Checkbox Group Props
+### CheckboxGroup Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -40,15 +41,13 @@ event
 | value | `Array<string \| number> \| null` | `undefined` | Manually set values of a checkbox group. |
 | on-update:value | `(value: string \| number)` | `undefined` | Callback when the checkbox group's value changes. |
 
-## Slots
-
 ### Checkbox Slots
 
 | Name    | Parameters | Description              |
 | ------- | ---------- | ------------------------ |
 | default | `()`       | Content of the checkbox. |
 
-### Checkbox Group Slots
+### CheckboxGroup Slots
 
 | Name    | Parameters | Description                    |
 | ------- | ---------- | ------------------------------ |

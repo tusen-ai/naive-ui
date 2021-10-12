@@ -257,47 +257,52 @@ describe('n-menu', () => {
     })
     expect(wrapper.find('.expand-icon').text()).toEqual('1')
   })
-})
 
-it('should dropdown work with `render-extra` props', async () => {
-  const options = [
-    {
-      label: 'jj',
-      key: 'jj'
-    },
-    {
-      label: 'jay',
-      key: 'jay',
-      children: [
-        {
-          type: 'group',
-          label: 'song-group',
-          key: 'group',
-          children: [
-            {
-              label: 'fantasy',
-              key: 'fantasy'
-            },
-            {
-              label: 'mojito',
-              key: 'mojito'
-            }
-          ]
-        }
-      ]
+  it('should dropdown work with `render-extra` props', async () => {
+    const options = [
+      {
+        label: 'jj',
+        key: 'jj'
+      },
+      {
+        label: 'jay',
+        key: 'jay',
+        children: [
+          {
+            type: 'group',
+            label: 'song-group',
+            key: 'group',
+            children: [
+              {
+                label: 'fantasy',
+                key: 'fantasy'
+              },
+              {
+                label: 'mojito',
+                key: 'mojito'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+    function renderMenuExtra (): any {
+      return 'test'
     }
-  ]
-  function renderMenuExtra (): any {
-    return 'test'
-  }
-  const wrapper = mount(NMenu, {
-    props: {
-      defaultExpandAll: true,
-      options: options,
-      renderExtra: renderMenuExtra
-    }
+    const wrapper = mount(NMenu, {
+      props: {
+        defaultExpandAll: true,
+        options: options,
+        renderExtra: renderMenuExtra
+      }
+    })
+    expect(
+      wrapper.findAll('.n-menu-item-content-header__extra').length
+    ).toEqual(4)
   })
-  expect(wrapper.findAll('.n-menu-item-content-header__extra').length).toEqual(
-    4
-  )
+
+  it('should accept empty object in type-checking phase', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const menu = <NMenu options={[{}]} />
+  })
 })

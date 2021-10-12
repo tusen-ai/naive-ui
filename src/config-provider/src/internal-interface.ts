@@ -52,7 +52,7 @@ import type { ProgressTheme } from '../../progress/styles'
 import type { RadioTheme } from '../../radio/styles'
 import type { RateTheme } from '../../rate/styles'
 import type { ResultTheme } from '../../result/styles'
-import type { ScrollbarTheme } from '../../scrollbar/styles'
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
 import type { SelectTheme } from '../../select/styles'
 import type { SkeletonTheme } from '../../skeleton/styles'
 import type { SliderTheme } from '../../slider/styles'
@@ -85,6 +85,7 @@ import { DataTableRenderFilter, DataTableRenderSorter } from '../../data-table'
 import { IconPlacement } from '../../dialog/src/interface'
 import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { EmptyProps } from '../../empty'
+import { CollapseTransitionTheme } from '../../collapse-transition/styles'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -102,6 +103,7 @@ export interface GlobalThemeWithoutCommon {
   Checkbox?: CheckboxTheme
   Code?: CodeTheme
   Collapse?: CollapseTheme
+  CollapseTransition?: CollapseTransitionTheme
   ColorPicker?: ColorPickerTheme
   DataTable?: DataTableTheme
   DatePicker?: DatePickerTheme

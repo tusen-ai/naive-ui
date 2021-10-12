@@ -1,11 +1,66 @@
 # CHANGELOG
 
-## Pending
+## 2.19.7 (2021-10-12)
 
 ### Fixes
 
+- Fix `n-ellipisis`'s `expand-trigger` prop not show `pointer` cursor when content is short，closes [#1299](https://github.com/TuSimple/naive-ui/issues/1299).
+- Fix `n-select`'s `fallback-option` prop's type, closes [#1327](https://github.com/TuSimple/naive-ui/issues/1327).
+- Fix `n-modal`'s `on-after-enter` prop not working.
+
+## 2.19.6 (2021-10-10)
+
+### Fixes
+
+- Fix `n-menu`'s incorrect warning on `default-expanded-keys`.
+- Fix `useThemeVars` is sometimes unusable, closes [#1309](https://github.com/TuSimple/naive-ui/issues/1309).
+- Fix the `list-style` style of the `<ul>` element.
+
+### Feats
+
+- `n-cascader` provide all options paths in `update:value` callback function, closes [#1235](https://github.com/TuSimple/naive-ui/issues/1235).
+- `n-layout` and `n-layout-sider` add `on-scroll` prop, closes [#1232](https://github.com/TuSimple/naive-ui/issues/1232).
+
+## 2.19.5 (2021-10-07)
+
+### Fixes
+
+- Fix `n-form-item`'s content is too long and the width is incorrect
 - Fix `n-layout-sider`'s `arrow-circle`'s icon style.
-- Fix `n-upload`'s `show-preview-button` prop not working，closes [#1238](https://github.com/TuSimple/naive-ui/issues/1238).
+- Fix `n-upload`'s `show-preview-button` prop not working, closes [#1238](https://github.com/TuSimple/naive-ui/issues/1238).
+- Fix `n-date-picker`'s `date` type of `action` validate error.
+- Fix `n-data-table` throws error when using `selection` and `summary` together, closes [#1276](https://github.com/TuSimple/naive-ui/issues/1276).
+- Fix `n-data-table` selection column's width is collapsed when it is set to fixed, closes [#1283](https://github.com/TuSimple/naive-ui/issues/1283).
+- Fix `n-popconfirm` can't be nested in `n-tooltip`, closes [#872](https://github.com/TuSimple/naive-ui/issues/872).
+- Fix `n-popselect` checkmark overlays on option text, closes [#1282](https://github.com/TuSimple/naive-ui/issues/1282).
+- Fix `n-pagination` `buttonColor` theme variable not working.
+
+### Feats
+
+- `n-breadcrumb-item` add `href` prop.
+- `n-descriptions` add `separator` prop, closes [#1263](https://github.com/TuSimple/naive-ui/issues/1263).
+- `n-dropdown` add `key-field` prop.
+- `n-dropdown` add `label-field` prop.
+- `n-dropdown` add `children-field` prop.
+- `n-menu` add `key-field` prop.
+- `n-menu` add `label-field` prop.
+- `n-menu` add `children-field` prop.
+- `n-data-table` supports using path of the property to get as column key, closes [#1271](https://github.com/TuSimple/naive-ui/issues/1271).
+- `n-switch` add `checked-value` prop, closes [#1234](https://github.com/TuSimple/naive-ui/issues/1234).
+- `n-switch` add `unchecked-value` prop, closes [#1234](https://github.com/TuSimple/naive-ui/issues/1234).
+- `n-checkbox` add `checked-value` prop, closes [#1234](https://github.com/TuSimple/naive-ui/issues/1234).
+- `n-checkbox` add `unchecked-value` prop, closes [#1234](https://github.com/TuSimple/naive-ui/issues/1234).
+- Add `n-collapse-transition` component, closes [#829](https://github.com/TuSimple/naive-ui/issues/829).
+- Add `n-scrollbar` component.
+- `n-dropdown` support options with `type='render'`.
+- `n-data-table` supports multiple column sorting.
+- `n-date-picker` add `first-day-of-week` prop.
+- `n-date-picker`'s `type` prop support `month` option.
+- `n-popover` add `to` prop.
+- `n-tree`'s `on-update:indeterminateKeys` prop add option info.
+- `n-tree`'s `on-update:expandedKeys` prop add option info.
+- `n-tree`'s `on-update:checkedKeys` prop add option info.
+- `n-tree`'s `on-update:selectedKeys` prop add option info.
 
 ### Feats
 
@@ -618,7 +673,7 @@
 
 ### Feats
 
-- `n-form`, `n-form-item` enhance `show-require-mark` prop，closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-form`, `n-form-item` enhance `show-require-mark` prop, closes [#171](https://github.com/TuSimple/naive-ui/issues/171)
 - `n-dropdown` support class attr, closes [#180](https://github.com/TuSimple/naive-ui/issues/180).
 - `n-input` add `show-password-toggle` prop.
 - `n-popselect` support class attr.

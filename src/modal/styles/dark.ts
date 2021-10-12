@@ -1,4 +1,4 @@
-import { scrollbarDark } from '../../scrollbar/styles'
+import { scrollbarDark } from '../../_internal/scrollbar/styles'
 import { dialogDark } from '../../dialog/styles'
 import { cardDark } from '../../card/styles'
 import { commonDark } from '../../_styles/common'

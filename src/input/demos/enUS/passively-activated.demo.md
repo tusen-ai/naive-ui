@@ -1,6 +1,6 @@
 # Passively Activateds
 
-If you want to activate input by pressing enter after focused, use `passively-activated`. (Use tab key to focus on the inputs)
+If you want to activate the input by pressing enter after it's focused, use `passively-activated`. Use Tab to focus on the next input(s).
 
 ```html
 <n-space vertical>
@@ -10,7 +10,7 @@ If you want to activate input by pressing enter after focused, use `passively-ac
     @change="handleChange"
     @keyup="handleKeyUp"
     @input="handleInput"
-    placeholder="Operate to trigger events"
+    placeholder="Interact to trigger events"
     :passively-activated="true"
   />
   <n-input
@@ -20,7 +20,7 @@ If you want to activate input by pressing enter after focused, use `passively-ac
     @change="handleChange"
     @keyup="handleKeyUp"
     @input="handleInput"
-    placeholder="Operate to trigger events"
+    placeholder="Interact to trigger events"
     :passively-activated="true"
   />
   <n-input

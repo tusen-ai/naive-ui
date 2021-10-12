@@ -1,6 +1,6 @@
 # Clearable
 
-Make input clearable when value is set.
+Make the input clearable after a value is set.
 
 ```html
 <n-space vertical>

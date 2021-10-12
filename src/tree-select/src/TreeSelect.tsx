@@ -366,13 +366,16 @@ export default defineComponent({
         call(_onUpdateIndeterminateKeys as OnUpdateValueImpl, value, option)
       }
     }
-    function doUpdateExpandedKeys (keys: Key[]): void {
+    function doUpdateExpandedKeys (
+      keys: Key[],
+      option: Array<TreeSelectOption | null>
+    ): void {
       const {
         onUpdateExpandedKeys,
         'onUpdate:expandedKeys': _onUpdateExpandedKeys
       } = props
-      if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, keys)
-      if (_onUpdateExpandedKeys) call(_onUpdateExpandedKeys, keys)
+      if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, keys, option)
+      if (_onUpdateExpandedKeys) call(_onUpdateExpandedKeys, keys, option)
       uncontrolledExpandedKeysRef.value = keys
     }
     function doFocus (e: FocusEvent): void {
@@ -578,7 +581,10 @@ export default defineComponent({
     watch(patternRef, (value, oldValue) => {
       if (!value.length) {
         if (memorizedExpandedKeys !== undefined) {
-          doUpdateExpandedKeys(memorizedExpandedKeys)
+          doUpdateExpandedKeys(
+            memorizedExpandedKeys,
+            getOptionsByKeys(memorizedExpandedKeys)
+          )
         }
       } else {
         if (!oldValue.length) {
@@ -586,7 +592,7 @@ export default defineComponent({
         }
         const { expandedKeys } = filteredTreeInfoRef.value
         if (expandedKeys !== undefined) {
-          doUpdateExpandedKeys(expandedKeys)
+          doUpdateExpandedKeys(expandedKeys, getOptionsByKeys(expandedKeys))
         }
       }
     })

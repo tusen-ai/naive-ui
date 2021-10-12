@@ -11,9 +11,10 @@ grid
 indeterminate
 controlled
 event
+customize-value
 ```
 
-## Props
+## API
 
 ### Checkbox Props
 
@@ -29,7 +30,7 @@ event
 | value | `string \| number` | `undefined` | Checkbox 在 checkbox group 中使用的值 |
 | on-update:checked | `(checked: boolean) => void` | `undefined` | 当 checked 改变时触发的回调函数 |
 
-### Checkbox Group Props
+### CheckboxGroup Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -40,15 +41,13 @@ event
 | value | `Array<string \| number> \| null` | `undefined` | 选项组受控模式下的值 |
 | on-update:value | `(value: string \| number)` | `undefined` | 选项组的值改变时的回调 |
 
-## Slots
-
 ### Checkbox Slots
 
 | 名称    | 参数 | 说明                |
 | ------- | ---- | ------------------- |
 | default | `()` | Checkbox 的标签内容 |
 
-### Checkbox Group Slots
+### CheckboxGroup Slots
 
 | 名称    | 参数 | 说明                 |
 | ------- | ---- | -------------------- |

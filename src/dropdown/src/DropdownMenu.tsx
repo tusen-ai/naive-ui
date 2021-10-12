@@ -14,12 +14,19 @@ import { renderArrow } from '../../popover/src/PopoverBody'
 import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider'
 import NDropdownGroup from './DropdownGroup'
-import { isSubmenuNode, isGroupNode, isDividerNode } from './utils'
+import NDropdownRenderOption from './DropdownRenderOption'
+import {
+  isSubmenuNode,
+  isGroupNode,
+  isDividerNode,
+  isRenderNode
+} from './utils'
 import { dropdownInjectionKey } from './Dropdown'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
-  DropdownOption
+  DropdownOption,
+  DropdownRenderOption
 } from './interface'
 
 export interface NDropdownMenuInjection {
@@ -54,29 +61,30 @@ export default defineComponent({
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { renderIconRef } = inject(dropdownInjectionKey)!
+    const { renderIconRef, childrenFieldRef } = inject(dropdownInjectionKey)!
     provide(dropdownMenuInjectionKey, {
       showIconRef: computed(() => {
         const renderIcon = renderIconRef.value
         return props.tmNodes.some((tmNode) => {
-          const { rawNode } = tmNode
-          if (isGroupNode(rawNode)) {
-            return (rawNode as DropdownGroupOption).children.some((rawChild) =>
+          if (tmNode.isGroup) {
+            return tmNode.children?.some(({ rawNode: rawChild }) =>
               renderIcon ? renderIcon(rawChild) : rawChild.icon
             )
           }
+          const { rawNode } = tmNode
           return renderIcon ? renderIcon(rawNode) : rawNode.icon
         })
       }),
       hasSubmenuRef: computed(() => {
+        const { value: childrenField } = childrenFieldRef
         return props.tmNodes.some((tmNode) => {
-          const { rawNode } = tmNode
-          if (isGroupNode(rawNode)) {
-            return (rawNode as DropdownGroupOption).children.some((rawChild) =>
-              isSubmenuNode(rawChild)
+          if (tmNode.isGroup) {
+            return tmNode.children?.some(({ rawNode: rawChild }) =>
+              isSubmenuNode(rawChild, childrenField)
             )
           }
-          return isSubmenuNode(rawNode)
+          const { rawNode } = tmNode
+          return isSubmenuNode(rawNode, childrenField)
         })
       })
     })
@@ -86,6 +94,14 @@ export default defineComponent({
     return (
       <div class={`${clsPrefix}-dropdown-menu`}>
         {this.tmNodes.map((tmNode) => {
+          if (isRenderNode(tmNode.rawNode)) {
+            return (
+              <NDropdownRenderOption
+                tmNode={tmNode as unknown as TreeNode<DropdownRenderOption>}
+                key={tmNode.key}
+              />
+            )
+          }
           if (isDividerNode(tmNode.rawNode)) {
             return <NDropdownDivider clsPrefix={clsPrefix} key={tmNode.key} />
           }

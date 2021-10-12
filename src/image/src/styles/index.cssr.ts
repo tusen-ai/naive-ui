@@ -10,7 +10,7 @@ export default c([
     cB('image-container', 'position: fixed;')
   ]),
   cB('image-preview-container', `
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
     top: 0;

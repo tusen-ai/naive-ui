@@ -6,12 +6,12 @@ It doesn't look like what it calls.
 
 ```demo
 basic
-dropdown
+custom
 separator
 separator-per-item
 ```
 
-## Props
+## API
 
 ### Breadcrumb Props
 
@@ -24,8 +24,7 @@ separator-per-item
 | Name      | Type     | Default     | Description               |
 | --------- | -------- | ----------- | ------------------------- |
 | separator | `string` | `undefined` | BreadcrumbItem separator. |
-
-## Slots
+| href      | `string` | `undefined` | BreadcrumbItem link.      |
 
 ### Breadcrumb Slots
 

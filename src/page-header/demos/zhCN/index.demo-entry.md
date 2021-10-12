@@ -11,7 +11,9 @@ basic
 rtl-debug
 ```
 
-## Props
+## API
+
+### PageHeader Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -20,7 +22,7 @@ rtl-debug
 | title | `string` | `undefined` | 主标题 |
 | on-back | `() => void` | `undefined` | 点击返回按钮的回调 |
 
-## Slots
+### PageHeader Slots
 
 | 名称     | 参数 | 说明       |
 | -------- | ---- | ---------- |

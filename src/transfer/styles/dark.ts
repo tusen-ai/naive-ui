@@ -1,6 +1,6 @@
 import commonVariables from './_common'
 import { checkboxDark } from '../../checkbox/styles'
-import { scrollbarDark } from '../../scrollbar/styles'
+import { scrollbarDark } from '../../_internal/scrollbar/styles'
 import { inputDark } from '../../input/styles'
 import { commonDark } from '../../_styles/common'
 import { emptyDark } from '../../empty/styles'

@@ -14,7 +14,7 @@ collapse
 grid-basic-debug
 ```
 
-## Props
+## API
 
 ### Grid Props
 
@@ -35,8 +35,6 @@ grid-basic-debug
 | offset | `number \| ResponsiveDescription` | `0` | 栅格左侧的间隔格数， |
 | span | `number \| ResponsiveDescription` | `1` | 栅格占据的列数，为 0 的时候会隐藏 |
 | suffix | `boolean` | `false` | 栅格后缀 |
-
-## Slots
 
 ### Grid Slots
 

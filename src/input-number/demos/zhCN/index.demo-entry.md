@@ -17,7 +17,9 @@ show-button
 debug
 ```
 
-## Props
+## API
+
+### InputNumber Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -38,7 +40,7 @@ debug
 | on-focus | `(event: FocusEvent) => void` | `undefined` | 获取焦点的回调 |
 | on-update:value | `(value: number \| null) => void` | `undefined` | 组件值发生变化的回调 |
 
-### Slots
+### InputNumber Slots
 
 | 属性   | 类型 | 说明               |
 | ------ | ---- | ------------------ |

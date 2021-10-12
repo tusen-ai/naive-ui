@@ -18,7 +18,9 @@ error
 size
 ```
 
-## Props
+## API
+
+### Result Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -27,7 +29,7 @@ size
 | status | `'info' \| 'success' \| 'error' \| 'warning' \| 404 \| '404' \| 500 \| '500' \| 400 \| '400' \| 418 \| '418'` | `'info'` | Status. |
 | title | `string` | `undefined` | Title. |
 
-## Slots
+### Result Slots
 
 | Name    | Parameters | Description                                    |
 | ------- | ---------- | ---------------------------------------------- |

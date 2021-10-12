@@ -16,7 +16,9 @@ color
 raw
 ```
 
-## Props
+## API
+
+### Badge Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -29,7 +31,7 @@ raw
 | type | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | 标记显示类型 |
 | value | `string \| number` | `undefined` | 标记数量 |
 
-## Slots
+### Badge Slots
 
 | 名称    | 参数 | 说明             |
 | ------- | ---- | ---------------- |

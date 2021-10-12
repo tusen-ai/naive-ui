@@ -11,7 +11,9 @@ icon
 no-icon
 ```
 
-## Props
+## API
+
+### Alert Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -22,7 +24,7 @@ no-icon
 | on-after-leave | `Function` | `undefined` | Callback function executed when the alert disappears. |
 | on-close | `() => boolean \| Promise<boolean> \| any` | `() => true` | The callback function executed when the close icon is clicked. |
 
-## Slots
+### Alert Slots
 
 | Name    | Parameters | Description                             |
 | ------- | ---------- | --------------------------------------- |

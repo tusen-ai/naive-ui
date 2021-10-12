@@ -15,9 +15,9 @@ custom
 form
 ```
 
-## Props
+## API
 
-### Dynamic Input Props
+### DynamicInput Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -32,14 +32,14 @@ form
 | on-remove | `(index: number) => void` | `undefined` | Remove button (-) callback. |
 | on-update:value | `(value: any) => void` | `undefined` | On value changed callback. |
 
-### Dynamic Input Props (Input Preset)
+### DynamicInput Props (Input Preset)
 
 | Name        | Type            | Default  | Description                    |
 | ----------- | --------------- | -------- | ------------------------------ |
 | value       | `Array<string>` | required | Value when being set manually. |
 | placeholder | `string`        | `''`     | Placeholder for each item.     |
 
-### Dynamic Input Props (Pair Preset)
+### DynamicInput Props (Pair Preset)
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -47,7 +47,7 @@ form
 | key-placeholder | `string` | `''` | The placeholder of each item's key. |
 | value-placeholder | `string` | `''` | The placeholder of each item's value. |
 
-## Slots
+### DynamicInput Slots
 
 | Name | Parameters | Description |
 | --- | --- | --- |

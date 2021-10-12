@@ -30,7 +30,6 @@ exports.genWebTypes = function genWebTypes () {
   Object.entries(components).forEach(([exportName, component]) => {
     if (exportName[0] !== 'N') return
     if (exportName.startsWith('Nx')) return
-    if (exportName === 'NScrollbar') return
     const { props } = component
     const name = kebabCase(exportName)
     const slots = []

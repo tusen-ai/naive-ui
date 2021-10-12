@@ -13,7 +13,9 @@ format
 actions
 ```
 
-## Props
+## API
+
+### TimePicker Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |

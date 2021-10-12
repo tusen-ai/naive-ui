@@ -15,7 +15,9 @@ language
 transparent
 ```
 
-## Props
+## API
+
+### ConfigProvider Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |

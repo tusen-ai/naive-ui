@@ -33,6 +33,9 @@ import { cB, c, cM, cNotM } from '../../../_utils/cssr'
 // --button-icon-color-pressed
 // --prefix-margin
 // --suffix-margin
+// --button-color
+// --button-color-hover
+// --button-color-pressed
 export default cB('pagination', `
   display: flex;
   vertical-align: middle;
@@ -96,7 +99,7 @@ export default cB('pagination', `
       fill .3s var(--bezier);
   `, [
     cM('button', `
-      background: var(--item-color);
+      background: var(--button-color);
       color: var(--button-icon-color);
       border: var(--button-border);
     `, [

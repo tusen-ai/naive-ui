@@ -16,8 +16,8 @@ import { TreeNode, createIndexGetter } from 'treemate'
 import { VirtualList, VirtualListInst } from 'vueuc'
 import { depx, getPadding, happensIn } from 'seemly'
 import { NEmpty } from '../../../empty'
-import { NScrollbar } from '../../../scrollbar'
-import type { ScrollbarInst } from '../../../scrollbar'
+import { NScrollbar } from '../../scrollbar'
+import type { ScrollbarInst } from '../../scrollbar'
 import type {
   SelectBaseOption,
   SelectGroupOption,

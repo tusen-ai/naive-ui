@@ -161,7 +161,7 @@ export default defineComponent({
               const { tmNodes, collapsed } = this
               return !collapsed ? (
                 <div class={`${mergedClsPrefix}-submenu-children`} role="menu">
-                  {tmNodes.map((item) => itemRenderer(item))}
+                  {tmNodes.map((item) => itemRenderer(item, this.menuProps))}
                 </div>
               ) : null
             }
@@ -180,6 +180,9 @@ export default defineComponent({
         trigger="hover"
         disabled={!this.dropdownEnabled}
         placement={this.dropdownPlacement}
+        keyField={this.menuProps.keyField}
+        labelField={this.menuProps.labelField}
+        childrenField={this.menuProps.childrenField}
         onUpdateShow={this.handlePopoverShowChange}
         options={this.rawNodes}
         onSelect={this.doSelect}

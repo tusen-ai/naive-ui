@@ -12,9 +12,10 @@ export type DropdownGroupOption = MenuGroupOption & {
   props?: HTMLAttributes
 }
 export interface DropdownIgnoredOption {
-  key: Key
-  type: 'ignored' | 'divider'
+  key?: Key
+  type: 'render' | 'divider'
   props?: HTMLAttributes
+  render?: () => VNodeChild
   [key: string]: unknown
 }
 
@@ -27,8 +28,16 @@ export type DropdownIntersectionOption = DropdownOption &
 DropdownGroupOption &
 DropdownIgnoredOption
 
+export interface DropdownRenderOption {
+  key?: Key
+  type: 'render'
+  props?: HTMLAttributes
+  render?: () => VNodeChild
+  [key: string]: unknown
+}
+
 export interface DropdownDividerOption {
-  key: Key
+  key?: Key
   type: 'divider'
   [key: string]: unknown
 }

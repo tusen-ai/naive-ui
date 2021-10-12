@@ -9,12 +9,13 @@
 ```
 
 ```js
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, resolveComponent } from 'vue'
 import { NIcon, useMessage } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
-  WineOutline as WineIcon
+  WineOutline as WineIcon,
+  HomeOutline as HomeIcon
 } from '@vicons/ionicons5'
 
 function renderIcon (icon) {
@@ -22,6 +23,23 @@ function renderIcon (icon) {
 }
 
 const menuOptions = [
+  {
+    label: () =>
+      h(
+        resolveComponent('router-link'),
+        {
+          to: {
+            name: 'home',
+            params: {
+              lang: 'zh-CN'
+            }
+          }
+        },
+        { default: () => '回家' }
+      ),
+    key: 'go-back-home',
+    icon: renderIcon(HomeIcon)
+  },
   {
     label: () =>
       h(

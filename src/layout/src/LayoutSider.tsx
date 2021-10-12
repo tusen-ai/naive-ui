@@ -14,8 +14,8 @@ import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formatLength, call, warn } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
-import { NScrollbar } from '../../scrollbar'
-import type { ScrollbarProps, ScrollbarInst } from '../../scrollbar'
+import { NScrollbar } from '../../_internal'
+import type { ScrollbarProps, ScrollbarInst } from '../../_internal'
 import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
 import style from './styles/layout-sider.cssr'
@@ -64,10 +64,6 @@ const layoutSiderProps = {
     type: Boolean,
     default: true
   },
-  duration: {
-    type: Number,
-    default: 300
-  },
   inverted: Boolean,
   scrollbarProps: Object as PropType<
   Partial<ScrollbarProps> & { style: CSSProperties }
@@ -80,9 +76,12 @@ const layoutSiderProps = {
   onUpdateCollapsed: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
+  onAfterEnter: Function as PropType<() => void>,
+  onAfterLeave: Function as PropType<() => void>,
   // deprecated
   onExpand: [Function, Array] as PropType<MaybeArray<() => void>>,
-  onCollapse: [Function, Array] as PropType<MaybeArray<() => void>>
+  onCollapse: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onScroll: Function as PropType<(e: Event) => void>
 } as const
 
 export type LayoutSiderProps = ExtractPublicPropTypes<typeof layoutSiderProps>
@@ -186,6 +185,16 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
+    function handleTransitionend (e: TransitionEvent): void {
+      if (e.propertyName === 'max-width') {
+        if (mergedCollapsedRef.value) {
+          props.onAfterLeave?.()
+        } else {
+          props.onAfterEnter?.()
+        }
+      }
+    }
+
     const exposedMethods: LayoutSiderInst = {
       scrollTo
     }
@@ -198,6 +207,7 @@ export default defineComponent({
       mergedCollapsed: mergedCollapsedRef,
       scrollContainerStyle: scrollContainerStyleRef,
       siderPlacement: siderPlacementRef,
+      handleTransitionend,
       handleTriggerClick,
       cssVars: computed(() => {
         const {
@@ -221,7 +231,8 @@ export default defineComponent({
           vars['--color'] = self.siderColorInverted
           vars['--text-color'] = self.textColorInverted
           vars['--border-color'] = self.siderBorderColorInverted
-          vars['--toggle-button-icon-color'] = self.siderToggleButtonIconColorInverted
+          vars['--toggle-button-icon-color'] =
+            self.siderToggleButtonIconColorInverted
           vars.__invertScrollbar = self.__invertScrollbar
         } else {
           vars['--color'] = self.siderColor
@@ -247,6 +258,7 @@ export default defineComponent({
           (!mergedCollapsed || this.showCollapsedContent) &&
             `${mergedClsPrefix}-layout-sider--show-content`
         ]}
+        onTransitionend={this.handleTransitionend}
         style={[
           this.cssVars,
           {
@@ -258,6 +270,7 @@ export default defineComponent({
         {!this.nativeScrollbar ? (
           <NScrollbar
             {...this.scrollbarProps}
+            onScroll={this.onScroll}
             ref="scrollbarInstRef"
             style={this.scrollContainerStyle}
             contentStyle={this.contentStyle}
@@ -279,6 +292,7 @@ export default defineComponent({
         ) : (
           <div
             class={`${mergedClsPrefix}-layout-sider-scroll-container`}
+            onScroll={this.onScroll}
             style={[
               this.scrollContainerStyle,
               this.contentStyle,

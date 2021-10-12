@@ -14,9 +14,9 @@ preset-confirm
 preset-confirm-slot
 ```
 
-## Props
+## API
 
-### Modal
+### Modal Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -28,26 +28,24 @@ preset-confirm-slot
 | on-after-enter | `() => void` | `undefined` | Callback after modal is opened. |
 | on-after-leave | `() => void` | `undefined` | Callback after modal is closed. |
 
-### Modal with Preset Card
+### Modal with Preset Card Props
 
 See [Card props](card#Props)
 
-### Modal with Preset Dialog
+### Modal with Preset Dialog Props
 
 See [Dialog props](dialog#Props)
 
-## Slots
-
-### Modal without Preset
+### Modal without Preset Slots
 
 | Name    | Parameters | Description               |
 | ------- | ---------- | ------------------------- |
 | default | `()`       | The content of the modal. |
 
-### Modal with Preset Card
+### Modal with Preset Card Slots
 
 See [Card slots](card#Slots)
 
-### Modal with Preset Dialog
+### Modal with Preset Dialog Slots
 
 See [Dialog slots](dialog#Slots)

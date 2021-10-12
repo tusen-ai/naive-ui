@@ -1,11 +1,66 @@
 # CHANGELOG
 
-## Pending
+## 2.19.7 (2021-10-12)
 
 ### Fixes
 
+- 修复 `n-ellipisis` 的 `expand-trigger` 属性在内容不显示提示的时候禁用鼠标样式的问题，关闭 [#1299](https://github.com/TuSimple/naive-ui/issues/1299)
+- 修复 `n-select` `fallback-option` 属性类型，关闭 [#1327](https://github.com/TuSimple/naive-ui/issues/1327)
+- 修复 `n-modal` `on-after-enter` 不生效
+
+## 2.19.6 (2021-10-10)
+
+### Fixes
+
+- 修复 `n-menu` 对于 `default-expanded-keys` 的错误警报
+- 修复 `useThemeVars` 有时无法使用，关闭 [#1309](https://github.com/TuSimple/naive-ui/issues/1309)
+- 修复 `<ul>` 元素的 `list-style` 样式
+
+### Feats
+
+- `n-cascader` 值改变时回调函数提供上层节点的全部 options 值，关闭 [#1235](https://github.com/TuSimple/naive-ui/issues/1235)
+- `n-layout` 和 `n-layout-sider` 增加 `on-scroll` 属性，关闭 [#1232](https://github.com/TuSimple/naive-ui/issues/1232)
+
+## 2.19.5 (2021-10-07)
+
+### Fixes
+
+- 修复 `n-form-item` 中组件内容过长影响 `n-form-item` 宽度
 - 修复 `n-layout-sider` 中 `arrow-circle` 的 icon 样式
 - 修复 `n-upload` 的 `show-preview-button` 属性失效，关闭 [#1238](https://github.com/TuSimple/naive-ui/issues/1238)
+- 修复 `n-date-picker` 的 `date` 类型的 `action` 验证错误
+- 修复 `n-data-table` 在 `selection` 和 `summary` 一起使用时报错，关闭 [#1276](https://github.com/TuSimple/naive-ui/issues/1276)
+- 修复 `n-data-table` 勾选列的宽度在设为 fixed 时候塌陷，关闭 [#1283](https://github.com/TuSimple/naive-ui/issues/1283)
+- 修复 `n-popconfirm` 不能被嵌套于 `n-tooltip` 内，关闭 [#872](https://github.com/TuSimple/naive-ui/issues/872).
+- 修复 `n-popselect` 勾选图标覆盖了文本，关闭 [#1282](https://github.com/TuSimple/naive-ui/issues/1282)
+- 修复 `n-pagination` `buttonColor` 主题变量不生效
+
+### Feats
+
+- `n-breadcrumb-item` 新增 `href` 属性
+- `n-descriptions` 新增 `separator` 属性，关闭 [#1263](https://github.com/TuSimple/naive-ui/issues/1263)
+- `n-dropdown` 新增 `key-field` 属性
+- `n-dropdown` 新增 `label-field` 属性
+- `n-dropdown` 新增 `children-field` 属性
+- `n-menu` 新增 `key-field` 属性
+- `n-menu` 新增 `label-field` 属性
+- `n-menu` 新增 `children-field` 属性
+- `n-data-table` 支持使用访问属性路径作为列的 key，关闭 [#1271](https://github.com/TuSimple/naive-ui/issues/1271)
+- `n-switch` 新增 `checked-value` 属性，关闭 [#1234](https://github.com/TuSimple/naive-ui/issues/1234)
+- `n-switch` 新增 `unchecked-value` 属性，关闭 [#1234](https://github.com/TuSimple/naive-ui/issues/1234)
+- `n-checkbox` 新增 `checked-value` 属性，关闭 [#1234](https://github.com/TuSimple/naive-ui/issues/1234)
+- `n-checkbox` 新增 `unchecked-value` 属性，关闭 [#1234](https://github.com/TuSimple/naive-ui/issues/1234)
+- 新增 `n-collapse-transition` 组件，关闭 [#829](https://github.com/TuSimple/naive-ui/issues/829)
+- 新增 `n-scrollbar` 组件
+- `n-dropdown` 支持 `type='render'` 的选项
+- `n-data-table` 支持多列排序
+- `n-date-picker` 新增 `first-day-of-week` 属性
+- `n-date-picker` 属性 `type` 支持 `month` 选项
+- `n-popover` 新增 `to` 属性
+- `n-tree` 的 `on-update:indeterminateKeys` 回调新增选项信息
+- `n-tree` 的 `on-update:expandedKeys` 回调新增选项信息
+- `n-tree` 的 `on-update:checkedKeys` 回调新增选项信息
+- `n-tree` 的 `on-update:selectedKeys` 回调新增选项信息
 
 ### Feats
 
@@ -83,7 +138,7 @@
 - 修复 `n-select` `filterable` 下关闭标签 input 光标聚焦问题，关闭 [#1170](https://github.com/TuSimple/naive-ui/issues/1170)
 - 修复 `n-button` 在 hover 状态下边框与 `n-badge` 冲突，关闭 [#1195](https://github.com/TuSimple/naive-ui/issues/1195)
 - 修复 `n-upload` 的 `v-model:file-list` 属性在 `multiple` 属性设为 `true` 的时候没有正确更新，关闭 [#418](https://github.com/TuSimple/naive-ui/issues/418)
-- 修复 `useThemeVars` 未应用覆盖的变量值，关闭 [#1194](https://github.com/TuSimple/naive-ui/issues/1194), [#1176](https://github.com/TuSimple/naive-ui/issues/1176)
+- 修复 `useThemeVars` 未应用覆盖的变量值，关闭 [#1194](https://github.com/TuSimple/naive-ui/issues/1194)、[#1176](https://github.com/TuSimple/naive-ui/issues/1176)
 - Fix `n-tabs` 在 card 类型时左侧滚动的阴影不显示
 
 ## 2.18.2 (2021-09-14)
@@ -120,7 +175,7 @@
 ### Feats
 
 - `useDialog` 选项新增 `style` 属性，关闭 [#1054](https://github.com/TuSimple/naive-ui/issues/1054)
-- `n-timeline` 新增 `icon` slot, 关闭 [#1096](https://github.com/TuSimple/naive-ui/issues/1096)
+- `n-timeline` 新增 `icon` slot，关闭 [#1096](https://github.com/TuSimple/naive-ui/issues/1096)
 - `n-timeline` 新增 `icon-size` 属性
 
 ### Fixes
@@ -202,7 +257,7 @@
 - `n-transfer` 导出 `TransferOption` 类型
 - `n-pagination` 导出 `PaginationInfo` 类型
 - `n-data-table` 导出 `DataTableCreateSummary` 类型
-- `n-code` 新增 `inline` 属性, 关闭 [#834](https://github.com/TuSimple/naive-ui/issues/834)
+- `n-code` 新增 `inline` 属性，关闭 [#834](https://github.com/TuSimple/naive-ui/issues/834)
 - `n-collapse` 新增 `header-extra` slot，关闭 [#1046](https://github.com/TuSimple/naive-ui/issues/1046)
 - `n-input` 新增 `show-password-on` 属性
 - `n-upload` 增加 `list-type`、 `show-preview-button`、 `on-preview` 和 `create-thumbnail-url` 属性
@@ -350,7 +405,7 @@
 
 - 修复 `n-message` 的 `destroyAll` 方法不生效
 - 修复 `n-timeline` 的 header slot 单独使用无效的问题
-- 修复 `n-select` 当属性是 `disabled` 和 `filterable` 时样式错误, 关闭 [#698](https://github.com/TuSimple/naive-ui/issues/698)
+- 修复 `n-select` 当属性是 `disabled` 和 `filterable` 时样式错误，关闭 [#698](https://github.com/TuSimple/naive-ui/issues/698)
 - 修复 `n-upload` 拥有 `file-list` & `disabled` 属性时操作按钮仍然显示，关闭 [#668](https://github.com/TuSimple/naive-ui/issues/668)
 
 ## 2.15.9 (2021-07-28)
@@ -358,7 +413,7 @@
 ### Feats
 
 - `n-message` 增加 `destroyAll` 方法
-- `n-input-number` 增加 `prefix`、`suffix` slots, 关闭 [#609](https://github.com/TuSimple/naive-ui/issues/609)
+- `n-input-number` 增加 `prefix`、`suffix` slots，关闭 [#609](https://github.com/TuSimple/naive-ui/issues/609)
 
 ### Fixes
 
@@ -368,7 +423,7 @@
 
 ### Feats
 
-- `n-menu` 新增 `expand-icon` 属性, 关闭 [#414](https://github.com/TuSimple/naive-ui/issues/414)
+- `n-menu` 新增 `expand-icon` 属性，关闭 [#414](https://github.com/TuSimple/naive-ui/issues/414)
 - `n-descriptions`，`n-descriptions-item` 增加 `label-style` 和 `content-style` 属性，关闭 [#536](https://github.com/TuSimple/naive-ui/issues/536)
 
 ### Fixes
@@ -380,7 +435,7 @@
 ### Feats
 
 - `n-dropdown` 选项新增 `show-arrow`属性，关闭 [#647](https://github.com/TuSimple/naive-ui/issues/647)
-- `n-time-picker` 增加 `actions` 属性, 关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
+- `n-time-picker` 增加 `actions` 属性，关闭 [#401](https://github.com/TuSimple/naive-ui/issues/401)
 - `n-mention` 新增 `render-label` 属性
 - `n-switch` 增加 `checked`、`unchecked` 插槽
 - `n-switch` 增加 `loading` 属性，关闭 [#301](https://github.com/TuSimple/naive-ui/issues/301)
@@ -410,9 +465,9 @@
 - `n-dropdown` 新增 `render-icon` 属性
 - `n-checkbox-group` 新增 `min` 和 `max` 属性
 - `n-mention` 新增 `empty` slot
-- `useDialog` 选项新增 `on-mask-click`属性, 关闭 [#419](https://github.com/TuSimple/naive-ui/issues/419)
+- `useDialog` 选项新增 `on-mask-click`属性，关闭 [#419](https://github.com/TuSimple/naive-ui/issues/419)
 - `n-space` `justify` 属性支持 `center`、`space-around` 和 `space-between`
-- `n-date-picker` 新增 `close-on-select` 属性, 关闭 [#541](https://github.com/TuSimple/naive-ui/issues/541)
+- `n-date-picker` 新增 `close-on-select` 属性，关闭 [#541](https://github.com/TuSimple/naive-ui/issues/541)
 - `n-dialog` 新增 `action` 属性，关闭 [#550](https://github.com/TuSimple/naive-ui/issues/550)
 - `n-mention` 的 `option.label` 支持使用渲染函数
 - `n-color-picker` 新增 `actions` 属性，关闭 [#319](https://github.com/TuSimple/naive-ui/issues/319)
@@ -438,7 +493,7 @@
 - `n-upload` 在 `on-finish` 回调参数中新增 `event`
 - `n-rate` 新增 `readonly` 属性
 - `n-time-picker` 新增 `seconds`、`minutes`、`hours`属性
-- `n-notification` 导出 `NotificationApi`, `NotificationOptions` and `NotificationReactive` 类型
+- `n-notification` 导出 `NotificationApi`、`NotificationOptions` 和 `NotificationReactive` 类型
 - `n-avatar` 新增 `on-error` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
 - `n-image` 新增 `on-error` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
 - `n-image` 新增 `object-fit` 属性，关闭[#394](https://github.com/TuSimple/naive-ui/issues/394)
@@ -616,7 +671,7 @@
 
 ### Feats
 
-- `n-form`, `n-form-item` 增强 `show-require-mark` 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
+- `n-form`、`n-form-item` 增强 `show-require-mark` 属性，关闭 [#171](https://github.com/TuSimple/naive-ui/issues/171)
 - `n-dropdown` 支持 class 属性，关闭 [#180](https://github.com/TuSimple/naive-ui/issues/180)
 - `n-input` 新增 `show-password-toggle` 属性
 - `n-popselect` 支持 class 属性
@@ -698,7 +753,7 @@
 
 - 修复 `n-calendar` 的 `on-update:value` 属性类型
 - 修复 `n-form-item` 的 `grid-template-columns` 样式属性对子元素布局的影响 [#93](https://github.com/TuSimple/naive-ui/pull/93)
-- 修复 `n-data-table` 的 `rowKey`, `rowClassName`, `rowProps`, `summary` 属性类型和期望值不兼容
+- 修复 `n-data-table` 的 `rowKey`、`rowClassName`、`rowProps`、`summary` 属性类型和期望值不兼容
 
 ## 2.11.7 (2021-06-12)
 
@@ -1474,7 +1529,7 @@
 
 ### Feats
 
-- `$NMessage`, `$NNotification`, `$NConfirm` 的获取到的主题会应用到他们的内部组件
+- `$NMessage`、`$NNotification`、`$NConfirm` 的获取到的主题会应用到他们的内部组件
 
 ### Fixes
 
