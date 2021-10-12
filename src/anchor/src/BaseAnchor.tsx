@@ -42,10 +42,7 @@ export const baseAnchorProps = {
     type: Number,
     default: 12
   },
-  nativeScrollbar: {
-    type: Boolean,
-    default: false
-  },
+  nativeScrollbar: Boolean,
   ignoreGap: Boolean,
   offsetTarget: [String, Object, Function] as PropType<
   string | OffsetTarget | (() => HTMLElement)
@@ -299,7 +296,13 @@ export default defineComponent({
     )
 
     return nativeScrollbar ? (
-      <NScrollbar {...keep(rest, keysOf(scrollbarProps))}>{Inner}</NScrollbar>
+      <NScrollbar {...keep(rest, keysOf(scrollbarProps))}>
+        {{
+          default () {
+            return Inner
+          }
+        }}
+      </NScrollbar>
     ) : (
       Inner
     )
