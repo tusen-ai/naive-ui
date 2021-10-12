@@ -1,6 +1,6 @@
 # Button Group
 
-Sometimes a radio button group looks more elegant.
+Sometimes a radio button group can look more elegant.
 
 ```html
 <n-space vertical>

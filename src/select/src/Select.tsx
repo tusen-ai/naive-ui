@@ -108,7 +108,7 @@ const selectProps = {
   },
   fallbackOption: {
     type: [Function, Boolean] as PropType<
-    (value: string | number) => SelectBaseOption | false
+    ((value: string | number) => SelectBaseOption) | false
     >,
     default: () => (value: string | number) => ({
       label: String(value),

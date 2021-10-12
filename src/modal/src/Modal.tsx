@@ -51,6 +51,7 @@ const modalProps = {
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
+  onAfterEnter: Function as PropType<() => void>,
   onBeforeLeave: Function as PropType<() => void>,
   onAfterLeave: Function as PropType<() => void>,
   onClose: Function as PropType<() => Promise<boolean> | boolean | any>,
@@ -269,6 +270,7 @@ export default defineComponent({
                   onNegativeClick={this.handleNegativeClick}
                   onPositiveClick={this.handlePositiveClick}
                   onBeforeLeave={this.handleBeforeLeave}
+                  onAfterEnter={this.onAfterEnter}
                   onAfterLeave={this.handleAfterLeave}
                   onClickoutside={this.handleClickoutside}
                 >

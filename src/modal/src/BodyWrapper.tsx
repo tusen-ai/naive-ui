@@ -66,7 +66,8 @@ export default defineComponent({
     onClose: {
       type: Function,
       required: true
-    }
+    },
+    onAfterEnter: Function as PropType<() => void>
   },
   setup (props) {
     const bodyRef = ref<HTMLElement | ComponentPublicInstance | null>(null)
@@ -198,6 +199,7 @@ export default defineComponent({
                     name="fade-in-scale-up-transition"
                     appear={this.appear ?? this.isMounted}
                     onEnter={handleEnter as any}
+                    onAfterEnter={this.onAfterEnter}
                     onAfterLeave={handleAfterLeave}
                     onBeforeLeave={handleBeforeLeave as any}
                   >
