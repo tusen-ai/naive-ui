@@ -21,10 +21,7 @@ const tableProps = {
     type: Boolean,
     default: true
   },
-  singleColumn: {
-    type: Boolean,
-    default: false
-  },
+  singleColumn: Boolean,
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'

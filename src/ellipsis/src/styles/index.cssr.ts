@@ -12,5 +12,8 @@ export default cB('ellipsis', {
   cM('line-clamp', `
     display: -webkit-inline-box;
     -webkit-box-orient: vertical;
+  `),
+  cM('cursor-pointer', `
+    cursor: pointer;
   `)
 ])
