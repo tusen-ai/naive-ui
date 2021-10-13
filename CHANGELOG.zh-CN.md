@@ -6,6 +6,7 @@
 
 - 修复 `n-data-table` `fixed` 样式在表头分组不生效的问题，关闭 [#1341](https://github.com/TuSimple/naive-ui/issues/1341)
 - 修复 `n-data-table` 多级表头右侧边框重复
+- 修复 `n-scrollbar` 不支持 `scrollTo`，关闭 [#1346](https://github.com/TuSimple/naive-ui/issues/1346)
 
 ### Feats
 
