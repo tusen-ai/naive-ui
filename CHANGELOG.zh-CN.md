@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Localization
+
+- 新增 jaJP locale
+
 ## 2.19.7 (2021-10-12)
 
 ### Fixes
