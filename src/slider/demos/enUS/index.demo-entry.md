@@ -1,6 +1,6 @@
 # Slider
 
-As far as I know, it is awalys used as volumn control.
+As far as I know, it is always used as a volume control.
 
 ## Demos
 
