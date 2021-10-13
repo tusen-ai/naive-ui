@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- Fix `n-data-table` fixed style does not work in group header table，closes [#1341](https://github.com/TuSimple/naive-ui/issues/1341).
+
 ## 2.19.7 (2021-10-12)
 
 ### Fixes
