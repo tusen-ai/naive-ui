@@ -1,6 +1,6 @@
 # Customize Checked Value
 
-Use `checked-value` and `unchecked-value` to customize value.
+Use `checked-value` and `unchecked-value` to customize respective values.
 
 ```html
 <n-switch
