@@ -10,6 +10,7 @@ alpha
 size
 modes
 form
+swatches
 ```
 
 ## API
@@ -26,6 +27,7 @@ form
 | show-alpha | `boolean` | `true` | Whether the alpha channel can be adjusted. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the picker. |
 | value | `string \| null` | `undefined` | Value of the picker. |
+| swatches | `string[]` | `undefined` | Value of the swatches. |
 | on-complete | `(value: string) => void` | `undefined` | Callback once the value is changed completely (not called during mousemove). |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback once panel the show status is changed. |
 | on-update:value | `(value: string) => void` | `undefined` | Callback once the value is changed. |
