@@ -583,6 +583,31 @@ describe('n-data-table', () => {
     ).toContain('cursor: pointer')
   })
 
+  it('should work with `scroll-x` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(
+      wrapper.find('.n-scrollbar-content').attributes('style')
+    ).not.toContain('min-width: 1800px')
+
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} scroll-x={1800} />
+    ))
+    expect(wrapper.find('.n-scrollbar-content').attributes('style')).toContain(
+      'min-width: 1800px'
+    )
+  })
+
   it('should work with `single-column` prop', async () => {
     const columns = [
       {
