@@ -31,7 +31,7 @@ focus
 | clearable | `boolean` | `false` | 是否可清空 |
 | default-value | `string \| [string, string] \| null` | `null` | 输入框默认值 |
 | disabled | `boolean` | `false` | 是否禁用 |
-| input-props | `object` | `undefined` | 组件中 input 元素的属性，对 `pair` 类型不生效 |
+| input-props | `HTMLInputAttributes` | `undefined` | 组件中 input 元素的属性，对 `pair` 类型不生效 |
 | loading | `boolean` | `undefined` | 是否展示加载图标，设为非 `undefined` 会占据空间 |
 | maxlength | `number` | `undefined` | 最大输入长度 |
 | minlength | `number` | `undefined` | 最小输入长度 |

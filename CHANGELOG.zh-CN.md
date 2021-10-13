@@ -1,10 +1,29 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-data-table` `fixed` 样式在表头分组不生效的问题，关闭 [#1341](https://github.com/TuSimple/naive-ui/issues/1341)
+- 修复 `n-data-table` 多级表头右侧边框重复
+- 修复 `n-scrollbar` 不支持 `scrollTo`，关闭 [#1346](https://github.com/TuSimple/naive-ui/issues/1346)
+- 修复 `n-ellipsis` 的 `expand-trigger` 属性在内容不显示提示并且 `tooltip = false` 的时候禁用鼠标样式的问题，关闭 [#1299](https://github.com/TuSimple/naive-ui/issues/1299)
+
+### Feats
+
+- `n-auto-complete` 新增 `get-derived-show-from-value` 属性，关闭 [#1292](https://github.com/TuSimple/naive-ui/issues/1292)
+- `n-select` 新增 `input-props` 属性，关闭 [#1351](https://github.com/TuSimple/naive-ui/issues/1351)
+- `n-color-picker` 新增 `swatches` 属性，有关 [#1281](https://github.com/TuSimple/naive-ui/issues/1281)
+
+### i18n
+
+- 新增 jaJP locale
+
 ## 2.19.7 (2021-10-12)
 
 ### Fixes
 
-- 修复 `n-ellipisis` 的 `expand-trigger` 属性在内容不显示提示的时候禁用鼠标样式的问题，关闭 [#1299](https://github.com/TuSimple/naive-ui/issues/1299)
+- 修复 `n-ellipsis` 的 `expand-trigger` 属性在内容不显示提示的时候禁用鼠标样式的问题，关闭 [#1299](https://github.com/TuSimple/naive-ui/issues/1299)
 - 修复 `n-select` `fallback-option` 属性类型，关闭 [#1327](https://github.com/TuSimple/naive-ui/issues/1327)
 - 修复 `n-modal` `on-after-enter` 不生效
 

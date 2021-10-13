@@ -11,6 +11,7 @@ basic
 ignore-gap
 affix
 scrollto
+max-height-debug
 ```
 
 ## API

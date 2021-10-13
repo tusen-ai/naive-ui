@@ -93,4 +93,56 @@ describe('n-color-picker', () => {
       wrapper.unmount()
     })
   })
+  describe('props.swatches', () => {
+    it('make the colors legal', async () => {
+      const wrapper = mount(NColorPicker, {
+        attachTo: document.body,
+        props: {
+          swatches: ['hsva(0, 0%, 0%, 1)']
+        }
+      })
+      await wrapper.find('.n-color-picker-trigger').trigger('click')
+      expect(
+        document
+          .querySelector('.n-color-picker-swatch__fill')
+          ?.getAttribute('style')
+      ).toContain('background: rgb(0, 0, 0);')
+    })
+    it('output according to mode', async () => {
+      const onUpdateValue = jest.fn()
+      const output = {
+        RGBA: 'rgba(0, 0, 0, 1)',
+        HSLA: 'hsla(0, 0%, 0%, 1)',
+        HSVA: 'hsva(0, 0%, 0%, 1)'
+      }
+      const modes = Object.keys(output) as ColorPickerMode[]
+      const wrapper = mount(NColorPicker, {
+        attachTo: document.body,
+        props: {
+          swatches: ['#000000'],
+          modes,
+          onUpdateValue
+        }
+      })
+      await wrapper.find('.n-color-picker-trigger').trigger('click')
+      const swatch = document.querySelector('.n-color-picker-swatch')
+      const modeDom = document.querySelector('.n-color-picker-input__mode')
+      let length = modes.length - 1
+      let currentMode: string | null | undefined = null
+      while (length) {
+        ;(swatch as HTMLElement).click()
+        await nextTick()
+        const actualOutput =
+          currentMode && output[currentMode as keyof typeof output]
+        if (actualOutput) {
+          expect(onUpdateValue).toHaveBeenCalledWith(actualOutput)
+        }
+        ;(modeDom as HTMLElement).click()
+        await nextTick()
+        currentMode = modeDom?.textContent
+        length--
+      }
+      wrapper.unmount()
+    })
+  })
 })

@@ -9,7 +9,8 @@ import {
   watch,
   Transition,
   withDirectives,
-  vShow
+  vShow,
+  InputHTMLAttributes
 } from 'vue'
 import { happensIn } from 'seemly'
 import { createTreeMate, TreeNode } from 'treemate'
@@ -138,6 +139,7 @@ const selectProps = {
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<OnUpdateValue> | undefined
   >,
+  inputProps: Object as PropType<InputHTMLAttributes>,
   // for jsx
   onUpdateValue: [Function, Array] as PropType<
   MaybeArray<OnUpdateValue> | undefined
@@ -703,6 +705,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerRef"
+                      inputProps={this.inputProps}
                       clsPrefix={mergedClsPrefix}
                       showArrow={this.showArrow}
                       maxTagCount={this.maxTagCount}

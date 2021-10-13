@@ -107,6 +107,10 @@ export default defineComponent({
         })}
         ref="triggerRef"
         onClick={handleClickRef.value}
+        onMouseenter={
+          // get tooltip disabled will derive cursor style
+          props.expandTrigger === 'click' ? getTooltipDisabled : undefined
+        }
       >
         {slots}
       </span>
