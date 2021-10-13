@@ -5,10 +5,12 @@ import {
   zhCN,
   enUS,
   ukUA,
+  jaJP,
   dateEnUS,
   dateZhCN,
   dateRuRU,
   dateUkUA,
+  dateJaJP,
   NConfigProvider,
   NDateLocale,
   NLocale,
@@ -59,6 +61,14 @@ describe('locale', () => {
         props: {
           dateLocale: dateUkUA,
           locale: ukUA
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateJaJP,
+          locale: jaJP
         }
       }).html()
     ).toMatchSnapshot()
