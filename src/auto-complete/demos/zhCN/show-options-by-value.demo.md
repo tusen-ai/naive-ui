@@ -1,13 +1,13 @@
-# 是否显示所有选项
+# 是否显示菜单
 
-你可以根据输入的值来决定是否显示所有选项
+你可以根据输入的值来决定是否显示菜单
 
 ```html
 <n-auto-complete
   :options="options"
   v-model:value="value"
-  placeholder="输入空或者非`a`显示所有选项"
-  :get-derived-show-from-value="getDerivedShowFromValue"
+  placeholder="输入 a 显示菜单"
+  :get-show="getShow"
 />
 ```
 
@@ -30,8 +30,8 @@ export default defineComponent({
         })
       }),
       showOnFocus: showOnFocusRef,
-      getDerivedShowFromValue: (value) => {
-        if (!value || value !== 'a') {
+      getShow: (value) => {
+        if (value === 'a') {
           return true
         }
         return false

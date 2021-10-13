@@ -70,9 +70,7 @@ const autoCompleteProps = {
   value: String,
   blurAfterSelect: Boolean,
   clearAfterSelect: Boolean,
-  getDerivedShowFromValue: Function as PropType<
-  (inputValue: string | null) => boolean
-  >,
+  getShow: Function as PropType<(inputValue: string | null) => boolean>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   options: {
     type: Array as PropType<AutoCompleteOptions>,
@@ -134,8 +132,10 @@ export default defineComponent({
       return mapAutoCompleteOptionsToSelectOptions(props.options)
     })
     const mergedShowOptionsRef = computed(() => {
-      const { getDerivedShowFromValue } = props
-      if (getDerivedShowFromValue) { return getDerivedShowFromValue(mergedValueRef.value) }
+      const { getShow } = props
+      if (getShow) {
+        return getShow(mergedValueRef.value)
+      }
       return !!mergedValueRef.value
     })
     const activeRef = computed(() => {

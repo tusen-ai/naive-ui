@@ -11,7 +11,7 @@
 
 ### Feats
 
-- `n-auto-complete` add `get-derived-show-from-value` prop, closes [#1292](https://github.com/TuSimple/naive-ui/issues/1292).
+- `n-auto-complete` add `get-show` prop, closes [#1292](https://github.com/TuSimple/naive-ui/issues/1292).
 - `n-select` add `input-props` prop, closes [#1351](https://github.com/TuSimple/naive-ui/issues/1351).
 - `n-color-picker` add `swatches` prop, ref [#1281](https://github.com/TuSimple/naive-ui/issues/1281).
 
