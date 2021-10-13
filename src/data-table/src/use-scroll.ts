@@ -2,7 +2,7 @@ import { beforeNextFrameOnce } from 'seemly'
 import { computed, ComputedRef, watch, Ref, ref } from 'vue'
 import { formatLength } from '../../_utils'
 import { DataTableSetupProps } from './DataTable'
-import type { ColumnKey, MainTableRef } from './interface'
+import type { ColumnKey, MainTableRef, TableColumns } from './interface'
 import { getColWidth, getColKey } from './utils'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -27,11 +27,27 @@ export function useScroll (
     return formatLength(props.scrollX)
   })
   const leftFixedColumnsRef = computed(() => {
-    return props.columns.filter((column) => column.fixed === 'left')
+    const tableColumns: TableColumns = []
+    getFixedColumn(tableColumns, props.columns, 'left')
+    return tableColumns
   })
   const rightFixedColumnsRef = computed(() => {
-    return props.columns.filter((column) => column.fixed === 'right')
+    const tableColumns: TableColumns = []
+    getFixedColumn(tableColumns, props.columns, 'right')
+    return tableColumns
   })
+  const getFixedColumn = (
+    tableColumns: TableColumns,
+    columns: TableColumns,
+    direction: 'left' | 'right'
+  ): void => {
+    columns.forEach((column) => {
+      column.fixed === direction && tableColumns.push(column)
+      if ('children' in column) {
+        getFixedColumn(tableColumns, column.children, direction)
+      }
+    })
+  }
   const fixedColumnLeftMapRef = computed(() => {
     const columns: Record<ColumnKey, number | undefined> = {}
     let left = 0

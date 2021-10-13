@@ -6,6 +6,14 @@
 
 - `n-auto-complete` add `get-derived-show-from-value` prop, closes [#1292](https://github.com/TuSimple/naive-ui/issues/1292).
 
+### Fixes
+
+- Fix `n-data-table` fixed style does not work in group header table，closes [#1341](https://github.com/TuSimple/naive-ui/issues/1341).
+
+### Localization
+
+- Add jaJP locale.
+
 ## 2.19.7 (2021-10-12)
 
 ### Fixes
