@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-auto-complete` 新增 `get-derived-show-from-value` 属性，关闭 [#1292](https://github.com/TuSimple/naive-ui/issues/1292)
+
 ### Fixes
 
 - 修复 `n-data-table` `fixed` 样式在表头分组不生效的问题，关闭 [#1341](https://github.com/TuSimple/naive-ui/issues/1341)

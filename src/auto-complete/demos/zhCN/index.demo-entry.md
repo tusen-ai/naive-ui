@@ -10,6 +10,7 @@ size
 group
 custom-input
 after-select
+show-options-by-value
 ```
 
 ## API
@@ -23,6 +24,7 @@ after-select
 | clearable | `boolean` | `false` | 自动填充是否支持可清除 |
 | default-value | `string` | `null` | 自动填充的默认值 |
 | disabled | `boolean` | `false` | 自动填充是否禁用 |
+| getDerivedShowFromValue | `(inputValue: string \| null) => boolean` | `undefined` | 根据输入值决定是否显示所有选项 |
 | loading | `boolean` | `false` | 是否展示加载状态 |
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | 自动填充的自定义选项 |
 | placeholder | `string` | `'请输入'` | 自动填充的提示信息 |
