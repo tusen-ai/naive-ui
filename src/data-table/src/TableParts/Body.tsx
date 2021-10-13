@@ -487,8 +487,8 @@ export default defineComponent({
                     key={colKey}
                     style={{
                       textAlign: column.align || undefined,
-                      left: pxfy(fixedColumnLeftMap[colKey]),
-                      right: pxfy(fixedColumnRightMap[colKey])
+                      left: pxfy(fixedColumnLeftMap[colKey]?.start),
+                      right: pxfy(fixedColumnRightMap[colKey]?.start)
                     }}
                     colspan={mergedColSpan}
                     rowspan={mergedRowSpan}
