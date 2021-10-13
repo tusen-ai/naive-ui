@@ -40,7 +40,7 @@ render-person
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | The option to be created using the value which has no corresponding option value. If set to `false`, the fallback option won't be created and displayed. |
 | filterable | `boolean` | `false` | Whether options can be filtered. |
 | filter | `(pattern: string, option: Object) => boolean` | String search method. | Filter function. |
-| input-props | `HTMLInputAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the select is filter. |
+| input-props | `HTMLInputAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the select is filterable. |
 | loading | `boolean` | `false` | Whether to show a loading state. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum selected values to display while in `multiple` mode. `responsive` will keep all the tags in single line. |
 | multiple | `boolean` | `false` | Whether to allow selecting multiple values. |
@@ -77,13 +77,13 @@ render-person
 
 ### SelectGroupOption Properties
 
-| Name     | Type                                                    | Description                       |
-| -------- | ------------------------------------------------------- | --------------------------------- |
-| children | `Array<SelectOption>`                                   | Child select options.             |
-| label    | `string \| ((option: SelectGroupOption) => VNodeChild)` | Label of the group.               |
-| key      | `string \| number`                                      | Should be unique for each option. |
-| render   | `(info: { node: VNode }) => VNodeChild`                 | Render the entire option.         |
-| type     | `'group'`                                               | Type of the group option.         |
+| Name | Type | Description |
+| --- | --- | --- |
+| children | `Array<SelectOption>` | Child select options. |
+| label | `string \| ((option: SelectGroupOption) => VNodeChild)` | Label of the group. |
+| key | `string \| number` | Should be unique for each option. |
+| render | `(info: { node: VNode }) => VNodeChild` | Render the entire option. |
+| type | `'group'` | Type of the group option. |
 
 ### Select Slots
 

@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.19.8 (2021-10-14)
 
 ### Fixes
 
@@ -11,7 +11,7 @@
 
 ### Feats
 
-- `n-auto-complete` 新增 `get-derived-show-from-value` 属性，关闭 [#1292](https://github.com/TuSimple/naive-ui/issues/1292)
+- `n-auto-complete` 新增 `get-show` 属性，关闭 [#1292](https://github.com/TuSimple/naive-ui/issues/1292)
 - `n-select` 新增 `input-props` 属性，关闭 [#1351](https://github.com/TuSimple/naive-ui/issues/1351)
 - `n-color-picker` 新增 `swatches` 属性，有关 [#1281](https://github.com/TuSimple/naive-ui/issues/1281)
 

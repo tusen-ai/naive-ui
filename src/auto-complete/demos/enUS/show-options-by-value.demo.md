@@ -1,13 +1,13 @@
-# Whether to show all options
+# Whether to show menu
 
-Your can determine is whether to show all options based on value when it is focused.
+Your can determine is whether to show menu based on value when it is focused.
 
 ```html
 <n-auto-complete
   :options="options"
   v-model:value="value"
-  placeholder="input empty or not `a` value to show all options"
-  :get-derived-show-from-value="getDerivedShowFromValue"
+  placeholder="Input 'a' to show menu"
+  :get-show="getShow"
 />
 ```
 
@@ -30,8 +30,8 @@ export default defineComponent({
         })
       }),
       showOnFocus: showOnFocusRef,
-      getDerivedShowFromValue: (value) => {
-        if (!value || value !== 'a') {
+      getShow: (value) => {
+        if (value === 'a') {
           return true
         }
         return false

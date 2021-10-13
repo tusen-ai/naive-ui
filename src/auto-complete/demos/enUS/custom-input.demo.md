@@ -1,4 +1,4 @@
-# Custom Input Element
+# Custom input element
 
 You can also replace the input element of the auto-complete component.
 

@@ -1,4 +1,4 @@
-# Actions After Select
+# Actions after select
 
 Choose whether the element blurs after a selection is made with `blur-after-select`.
 
