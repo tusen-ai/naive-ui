@@ -23,7 +23,6 @@ scrollto
 | bound | `number` | `12` | The height of the border when scrolling. |
 | ignore-gap | `boolean` | `false` | If set to `true`, it will be displayed on the exact href. |
 | offset-target | `string \| HTMLElement \| Window \| Document \| (() => HTMLElement)` | `document` | The element or selector used to calc offset of link elements. If you are not scrolling the entire document but only a part of it, you may need to set this. |
-| native-scrollbar | `boolean` | `false` | When set `max-height`, the style of scrollbar, If set to `true`. |
 | show-rail | `boolean` | `true` | Whether to show the sider rail. |
 | show-background | `boolean` | `true` | Whether to show background of links. |
 | type | `'rail' \| 'block'` | `'rail'` | The type to use. |

@@ -1,7 +1,3 @@
-import { throttle } from 'lodash-es'
-import { NScrollbar } from '../../scrollbar'
-import { unwrapElement } from 'seemly'
-import { onFontsReady } from 'vooks'
 import {
   computed,
   defineComponent,
@@ -15,6 +11,10 @@ import {
   toRef,
   watch
 } from 'vue'
+import { throttle } from 'lodash-es'
+import { unwrapElement } from 'seemly'
+import { onFontsReady } from 'vooks'
+import { NScrollbar } from '../../_internal'
 import { keysOf } from '../../_utils'
 import { anchorInjectionKey } from './Link'
 import type { OffsetTarget } from './utils'
@@ -41,7 +41,7 @@ export const baseAnchorProps = {
     type: Number,
     default: 12
   },
-  nativeScrollbar: Boolean,
+  internalScrollable: Boolean,
   ignoreGap: Boolean,
   offsetTarget: [String, Object, Function] as PropType<
   string | OffsetTarget | (() => HTMLElement)
@@ -254,13 +254,7 @@ export default defineComponent({
     }
   },
   render () {
-    const {
-      mergedClsPrefix,
-      mergedShowRail,
-      isBlockType,
-      $slots,
-      nativeScrollbar
-    } = this
+    const { mergedClsPrefix, mergedShowRail, isBlockType, $slots } = this
 
     const Anchor = (
       <div
@@ -293,12 +287,10 @@ export default defineComponent({
       </div>
     )
 
-    return nativeScrollbar ? (
+    return this.internalScrollable ? (
       <NScrollbar>
         {{
-          default () {
-            return Anchor
-          }
+          default: () => Anchor
         }}
       </NScrollbar>
     ) : (
