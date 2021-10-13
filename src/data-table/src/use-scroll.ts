@@ -27,23 +27,23 @@ export function useScroll (
     return formatLength(props.scrollX)
   })
   const leftFixedColumnsRef = computed(() => {
-    const tableColumns: TableColumns<any> = []
+    const tableColumns: TableColumns = []
     getFixedColumn(tableColumns, props.columns, 'left')
     return tableColumns
   })
   const rightFixedColumnsRef = computed(() => {
-    const tableColumns: TableColumns<any> = []
+    const tableColumns: TableColumns = []
     getFixedColumn(tableColumns, props.columns, 'right')
     return tableColumns
   })
   const getFixedColumn = (
-    tableColumns: TableColumns<any>,
-    columns: TableColumns<any>,
+    tableColumns: TableColumns,
+    columns: TableColumns,
     direction: 'left' | 'right'
   ): void => {
-    columns.forEach((column: any) => {
+    columns.forEach((column) => {
       column.fixed === direction && tableColumns.push(column)
-      if (column.children) {
+      if ('children' in column) {
         getFixedColumn(tableColumns, column.children, direction)
       }
     })
