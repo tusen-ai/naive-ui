@@ -43,22 +43,22 @@ render-person
 | loading | `boolean` | `false` | Whether to show a loading state. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum selected values to display while in `multiple` mode. `responsive` will keep all the tags in single line. |
 | multiple | `boolean` | `false` | Whether to allow selecting multiple values. |
-| options | `Array<SelectOption \| SelectGroupOption>` | `[]` | Options that can be selected. For more details SelectOption Properties (below). |
+| options | `Array<SelectOption \| SelectGroupOption>` | `[]` | Options that can be selected. For more details see SelectOption Properties (below). |
 | placeholder | `string` | `'Please Select'` | Placeholder. |
-| remote | `boolean` | `false` | If you want to fetch options asynchronously. Note that if `remote` is set, `filter` & `tag` won't work on `options`. |
+| remote | `boolean` | `false` | Allows options to be fetched asynchronously. Note that if `remote` is set, `filter` & `tag` won't work on `options`. |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function for each option label. |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean } }` | `undefined` | Render function for each option. |
 | render-tag | `(option: SelectBaseOption, onClose: () => void) => VNodeChild` | `undefined` | Render function for each option tag. |
-| show | `boolean` | `undefined` | Whether to open the option menu. |
+| show | `boolean` | `undefined` | Whether to show/open the option menu. |
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |
 | tag | `boolean` | `false` | Whether users can create new options. This should be used with `filterable`. |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | Value when being manually set. |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |
-| on-blur | `() => void` | `undefined` | Callback triggered when selection blurred. |
-| on-clear | `() => void` | `undefined` | Callback triggered when selection cleared. |
-| on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | How to create an option when you enter a new option. Note that `filter` will be applied to the created option too. And better make sure that the value of the created option is not the same as any other option. |
-| on-focus | `() => void` | `undefined` | Callback triggered when selection focussed on. |
+| on-blur | `() => void` | `undefined` | Callback triggered when the selection element is blurred. |
+| on-clear | `() => void` | `undefined` | Callback triggered when the selection element is cleared. |
+| on-create | `(label: string) => SelectOption` | `label => ({ label, value: label })` | How to create an option when you type in a custom option. Note that `filter` will be applied to the created option too. And you'd better make sure that the value of the created option is not the same as any other option. |
+| on-focus | `() => void` | `undefined` | Callback triggered when the selection element is focussed on. |
 | on-scroll | `(e: ScrollEvent) => void` | `undefined` | Callback triggered when the options menu is scrolled. |
 | on-search | `(value: string) => void` | `undefined` | Callback triggered when a search is conducted. |
 | on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | Callback triggered when the selected value is updated. |
@@ -78,7 +78,7 @@ render-person
 
 | Name     | Type                                                    | Description                       |
 | -------- | ------------------------------------------------------- | --------------------------------- |
-| children | `Array<SelectOption>`                                   | Group select options.             |
+| children | `Array<SelectOption>`                                   | Child select options.             |
 | label    | `string \| ((option: SelectGroupOption) => VNodeChild)` | Label of the group.               |
 | key      | `string \| number`                                      | Should be unique for each option. |
 | render   | `(info: { node: VNode }) => VNodeChild`                 | Render the entire option.         |
@@ -86,7 +86,7 @@ render-person
 
 ### Select Slots
 
-| Name   | Parameters | Description                        |
-| ------ | ---------- | ---------------------------------- |
-| action | `()`       | Options menu slot.                 |
-| empty  | `()`       | Empty state slot for options menu. |
+| Name   | Parameters | Description                            |
+| ------ | ---------- | -------------------------------------- |
+| action | `()`       | Options menu slot.                     |
+| empty  | `()`       | Empty state slot for the options menu. |

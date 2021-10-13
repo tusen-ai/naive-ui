@@ -1,6 +1,6 @@
 # Custom Option Render
 
-After considerable consideration, I decided to drop the slot API for rendering. However, using `render-label`, `style`, and/or `class` properties you can do almost anything.
+After much deliberation, I decided to drop the slot API for rendering options; however, using `render-label`, `style`, and/or `class` properties you can do almost anything.
 
 ```html
 <n-select :options="options" :render-label="renderLabel" />

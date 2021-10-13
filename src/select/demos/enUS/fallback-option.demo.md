@@ -2,7 +2,7 @@
 
 In some rare cases, you may want to define initial selected option(s) not present in the options array (e.g.  async loading cases, or default values). The `fallback-option` property provides control in creating an option using a value.
 
-If you don't need fallback options, setting `fallback-option` to `false` ensures that only an option with a matching value will be displayed. If no option has that value, the selected value will be empty.
+If you don't need fallback options, setting `fallback-option` to `false` ensures that only an option with a matching value will be displayed. If no option has that value, the selected value will be cleared.
 
 ```html
 <n-space vertical>
