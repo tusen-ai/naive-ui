@@ -947,7 +947,7 @@ describe('props.columns', () => {
     )
   })
 
-  it('should work with `ellipsis` prop', async () => {
+  it('should work with `children` prop', async () => {
     const columns: DataTableColumns = [
       {
         title: 'Name',
@@ -1006,5 +1006,36 @@ describe('props.columns', () => {
     expect(
       wrapper.find('thead [data-col-key="test2"]').attributes('rowspan')
     ).toBe('1')
+  })
+
+  it('should work with `className` prop', async () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        className: 'test-name'
+      },
+      {
+        title: 'Age',
+        key: 'age',
+        className: 'test-age'
+      }
+    ]
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: index,
+        age: index
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} row-key={rowKey} />
+    ))
+    expect(wrapper.find('thead [data-col-key="name"]').classes()).toContain(
+      'test-name'
+    )
+    expect(wrapper.find('thead [data-col-key="age"]').classes()).toContain(
+      'test-age'
+    )
   })
 })
