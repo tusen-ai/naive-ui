@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- 修复 `n-cascader` 在自定义字段和 `multiple` 一起使用时无法删除选项
+
 ## 2.19.8 (2021-10-14)
 
 ### Fixes
