@@ -2,17 +2,18 @@
 
 ## Pending
 
-### Feats
-
-- `n-auto-complete` add `get-derived-show-from-value` prop, closes [#1292](https://github.com/TuSimple/naive-ui/issues/1292).
-- `n-select` add `input-props` prop, closes [#1351](https://github.com/TuSimple/naive-ui/issues/1351).
-
 ### Fixes
 
 - Fix `n-data-table` fixed style does not work in group header table，closes [#1341](https://github.com/TuSimple/naive-ui/issues/1341).
 - Fix `n-data-table` has duplicate right border when it has multiple level headers.
 
-### Localization
+### Feats
+
+- `n-auto-complete` add `get-derived-show-from-value` prop, closes [#1292](https://github.com/TuSimple/naive-ui/issues/1292).
+- `n-select` add `input-props` prop, closes [#1351](https://github.com/TuSimple/naive-ui/issues/1351).
+- `n-color-picker` add `swatches` prop, ref [#1281](https://github.com/TuSimple/naive-ui/issues/1281).
+
+### i18n
 
 - Add jaJP locale.
 
@@ -34,7 +35,6 @@
 
 ### Feats
 
-- `n-color-picker` Add color swatches API.
 - `n-cascader` provide all options paths in `update:value` callback function, closes [#1235](https://github.com/TuSimple/naive-ui/issues/1235).
 - `n-layout` and `n-layout-sider` add `on-scroll` prop, closes [#1232](https://github.com/TuSimple/naive-ui/issues/1232).
 

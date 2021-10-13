@@ -2,17 +2,18 @@
 
 ## Pending
 
-### Feats
-
-- `n-auto-complete` 新增 `get-derived-show-from-value` 属性，关闭 [#1292](https://github.com/TuSimple/naive-ui/issues/1292)
-- `n-select` 新增 `input-props` 属性，关闭 [#1351](https://github.com/TuSimple/naive-ui/issues/1351)
-
 ### Fixes
 
 - 修复 `n-data-table` `fixed` 样式在表头分组不生效的问题，关闭 [#1341](https://github.com/TuSimple/naive-ui/issues/1341)
 - 修复 `n-data-table` 多级表头右侧边框重复
 
-### Localization
+### Feats
+
+- `n-auto-complete` 新增 `get-derived-show-from-value` 属性，关闭 [#1292](https://github.com/TuSimple/naive-ui/issues/1292)
+- `n-select` 新增 `input-props` 属性，关闭 [#1351](https://github.com/TuSimple/naive-ui/issues/1351)
+- `n-color-picker` 新增 `swatches` 属性，有关 [#1281](https://github.com/TuSimple/naive-ui/issues/1281)
+
+### i18n
 
 - 新增 jaJP locale
 
@@ -34,7 +35,6 @@
 
 ### Feats
 
-- `n-color-picker` 新增颜色色板 API
 - `n-cascader` 值改变时回调函数提供上层节点的全部 options 值，关闭 [#1235](https://github.com/TuSimple/naive-ui/issues/1235)
 - `n-layout` 和 `n-layout-sider` 增加 `on-scroll` 属性，关闭 [#1232](https://github.com/TuSimple/naive-ui/issues/1232)
 
