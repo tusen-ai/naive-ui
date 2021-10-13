@@ -15,8 +15,7 @@ import {
   toRef,
   watch
 } from 'vue'
-import { scrollbarProps } from '../../scrollbar/src/ScrollBar'
-import { keep, keysOf } from '../../_utils'
+import { keysOf } from '../../_utils'
 import { anchorInjectionKey } from './Link'
 import type { OffsetTarget } from './utils'
 import { getOffset } from './utils'
@@ -260,11 +259,10 @@ export default defineComponent({
       mergedShowRail,
       isBlockType,
       $slots,
-      nativeScrollbar,
-      ...rest
+      nativeScrollbar
     } = this
 
-    const Inner = (
+    const Anchor = (
       <div
         class={[
           `${mergedClsPrefix}-anchor`,
@@ -296,15 +294,15 @@ export default defineComponent({
     )
 
     return nativeScrollbar ? (
-      <NScrollbar {...keep(rest, keysOf(scrollbarProps))}>
+      <NScrollbar>
         {{
           default () {
-            return Inner
+            return Anchor
           }
         }}
       </NScrollbar>
     ) : (
-      Inner
+      Anchor
     )
   }
 })
