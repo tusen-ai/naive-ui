@@ -62,33 +62,32 @@ function getRowsAndCols (columns: TableColumns): {
     }
   }
   ensureMaxDepth(columns, 0)
-  function ensureColLayout (
-    columns: TableColumns,
-    currentDepth: number,
-    parentIsLast: boolean
-  ): void {
-    let currentLeafIndex = -1
+  let currentLeafIndex = 0
+  function ensureColLayout (columns: TableColumns, currentDepth: number): void {
     let hideUntilIndex = 0
-    const lastIndex = columns.length - 1
     columns.forEach((column, index) => {
       if ('children' in column) {
         // do not allow colSpan > 1 for non-leaf th
-        const isLast = parentIsLast && index === lastIndex
+        // we will execute the calculation logic
+        const cachedCurrentLeafIndex = currentLeafIndex
         const rowItem: RowItem = {
           column,
           colSpan: 0,
           rowSpan: 1,
-          isLast
+          isLast: false
         }
-        ensureColLayout(column.children, currentDepth + 1, isLast)
+        ensureColLayout(column.children, currentDepth + 1)
         column.children.forEach((childColumn) => {
           rowItem.colSpan += rowItemMap.get(childColumn)?.colSpan ?? 0
         })
+        if (cachedCurrentLeafIndex + rowItem.colSpan === totalRowSpan) {
+          rowItem.isLast = true
+        }
         rowItemMap.set(column, rowItem)
         rows[currentDepth].push(rowItem)
       } else {
-        currentLeafIndex += 1
         if (currentLeafIndex < hideUntilIndex) {
+          currentLeafIndex += 1
           return
         }
         let colSpan: number = 1
@@ -107,10 +106,11 @@ function getRowsAndCols (columns: TableColumns): {
         }
         rowItemMap.set(column, rowItem)
         rows[currentDepth].push(rowItem)
+        currentLeafIndex += 1
       }
     })
   }
-  ensureColLayout(columns, 0, true)
+  ensureColLayout(columns, 0)
 
   return {
     hasEllipsis,
