@@ -40,6 +40,7 @@ render-person
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | The option to be created according the value which has no corresponding option in the options of the component. If set to `false`, the fallback option won't be created and displayed and the value has no corresponding option will be viewed as a invalid value and it will be removed in the operations of the component. |
 | filterable | `boolean` | `false` | Whether it can filter options. |
 | filter | `(pattern: string, option: Object) => boolean` | A basic string based search method. | Filter function. |
+| input-props | `HTMLInputAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the select is filter. |
 | loading | `boolean` | `false` | Whether to show loading status. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple mode. `responsive` will keep all the tags in single line. |
 | multiple | `boolean` | `false` | Whether to select multiple values. |

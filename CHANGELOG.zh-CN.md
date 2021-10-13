@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-auto-complete` 新增 `get-derived-show-from-value` 属性，关闭 [#1292](https://github.com/TuSimple/naive-ui/issues/1292)
+- `n-select` 新增 `input-props` 属性，关闭 [#1351](https://github.com/TuSimple/naive-ui/issues/1351)
 
 ### Fixes
 
