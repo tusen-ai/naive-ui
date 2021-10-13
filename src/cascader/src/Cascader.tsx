@@ -692,10 +692,10 @@ export default defineComponent({
       patternRef.value = (e.target as HTMLInputElement).value
     }
     function handleDeleteOption (option: SelectBaseOption): void {
-      const { multiple, valueField } = props
+      const { multiple } = props
       const { value: mergedValue } = mergedValueRef
       if (multiple && Array.isArray(mergedValue)) {
-        doUncheck((option as any)[valueField])
+        doUncheck(option.value)
       } else {
         doUpdateValue(null, null, null)
       }
