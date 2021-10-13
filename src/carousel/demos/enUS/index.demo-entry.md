@@ -22,8 +22,7 @@ show-arrow-mode
 | autoplay | `boolean` | `false` | Whether to scroll automatically. |
 | interval | `number` | `5000` | Auto play interval (ms). |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Dot placement in the panel. |
-| show-arrow | `'boolean' \| 'string'` | `false` | Whether to show arrow buttons. |
-| show-arrow-mode | `'always' \| 'hover'` | `false` | Display arrow way true always display hover mouse move into display |
+| show-arrow-mode | `'always' \| 'hover'` | `false` | Display arrow way always always display hover mouse move into display |
 | trigger | `'click' \| 'hover'` | `'click'` | The method of manual switching. |
 
 ### Carousel Slots

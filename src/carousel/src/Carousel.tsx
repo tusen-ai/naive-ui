@@ -39,7 +39,7 @@ const carouselProps = {
     type: String as PropType<'click' | 'hover'>,
     default: 'click'
   },
-  showArrow: {
+  showArrowMode: {
     type: [Boolean, String] as PropType<boolean | 'hover'>,
     default: false
   }
@@ -55,7 +55,9 @@ export default defineComponent({
     const currentRef = ref(1)
     const lengthRef = { value: 1 }
     const touchingRef = ref(false)
-    const isArrowIcon = ref<boolean>(props.showArrow === true)
+    const isArrowIcon = ref<boolean>(
+      (props.showArrowMode as string) === 'always'
+    )
     const dragOffsetRef = ref(0)
     const selfElRef = ref<HTMLDivElement | null>(null)
     const dotPlacementRef = toRef(props, 'dotPlacement')
@@ -213,12 +215,12 @@ export default defineComponent({
       off('touchcancel', document, handleTouchend)
     }
     function carouselMouseenter (): void {
-      if (props.showArrow === 'hover') {
+      if (props.showArrowMode === 'hover') {
         isArrowIcon.value = true
       }
     }
     function carouselMouseleave (): void {
-      if (props.showArrow === 'hover') {
+      if (props.showArrowMode === 'hover') {
         isArrowIcon.value = false
       }
     }
@@ -292,7 +294,7 @@ export default defineComponent({
   },
   render () {
     const {
-      showArrow,
+      showArrowMode,
       dotPlacement,
       mergedClsPrefix,
       current,
@@ -307,7 +309,6 @@ export default defineComponent({
     const rightOverflowVNode = length ? cloneVNode(children[0]) : null
     const total = length + 2
     const vertical = dotPlacement === 'left' || dotPlacement === 'right'
-
     return (
       <div
         class={[
@@ -375,7 +376,7 @@ export default defineComponent({
             )
           })}
         </div>
-        {showArrow &&
+        {['always', 'hover'].includes(showArrowMode as string) &&
           this.isArrowIcon && [
             <div
               class={[
