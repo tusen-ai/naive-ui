@@ -1,6 +1,8 @@
 import { defineComponent, h, PropType, computed } from 'vue'
 import {
   HSL,
+  hsl2hsv,
+  hsl2rgb,
   HSLA,
   hsla,
   HSV,
@@ -20,12 +22,6 @@ import {
 import { ColorPickerMode, getModeFromValue } from './utils'
 import { makeMap } from '@vue/shared'
 
-interface ParsedColor {
-  value: string
-  rawMode: ColorPickerMode | null
-  legalValue: string
-}
-
 // http://www.w3big.com/cssref/css-colors-legal.html
 const isCSSLegalColorMode: (mode: ColorPickerMode) => boolean =
   makeMap('rgb,hsl,hex')
@@ -41,9 +37,8 @@ function normalizeColor (
   if (!rawMode || isCSSLegalColorMode(rawMode)) return color
   switch (rawMode) {
     case 'hsv': {
-      const _hsva = hsva(color)
-      const _rgb = hsv2rgb(...(_hsva.slice(0, 3) as HSV))
-      return toRgbaString([..._rgb, _hsva[3]])
+      const [h, s, v, a] = hsva(color)
+      return toRgbaString([...hsv2rgb(h, s, v), a])
     }
     default:
       // For the mode that is not preset, we keep the original value.
@@ -57,10 +52,10 @@ function standardizeColor (color: string): string | null {
   if (color.toLowerCase() === 'black') {
     return '#000'
   }
-
   const ctx = document
     .createElement('canvas')
     .getContext('2d') as CanvasRenderingContext2D
+
   ctx.fillStyle = color
   return ctx.fillStyle === '#000' ? null : ctx.fillStyle
 }
@@ -103,13 +98,13 @@ const covert: Record<ColorPickerMode, Conversion> = {
       return hsla(str)
     },
     hex (hsla: HSLA): string {
-      return toHexaString([...hsv2rgb(...(hsla.slice(0, 3) as HSL)), hsla[3]])
+      return toHexaString([...hsl2rgb(...(hsla.slice(0, 3) as HSL)), hsla[3]])
     },
     rgb (hsla: HSLA): string {
-      return toRgbaString([...hsv2rgb(...(hsla.slice(0, 3) as HSL)), hsla[3]])
+      return toRgbaString([...hsl2rgb(...(hsla.slice(0, 3) as HSL)), hsla[3]])
     },
-    hsl (hsla: HSLA): string {
-      return toHslaString([...hsv2hsl(...(hsla.slice(0, 3) as HSL)), hsla[3]])
+    hsv (hsla: HSLA): string {
+      return toHsvaString([...hsl2hsv(...(hsla.slice(0, 3) as HSL)), hsla[3]])
     }
   },
   hsv: {
@@ -119,10 +114,19 @@ const covert: Record<ColorPickerMode, Conversion> = {
     hex (hsva: HSVA): string {
       return toHexaString([...hsv2rgb(...(hsva.slice(0, 3) as HSV)), hsva[3]])
     },
+    rgb (hsva: HSVA) {
+      return toRgbaString([...hsv2rgb(...(hsva.slice(0, 3) as HSV)), hsva[3]])
+    },
     hsl (hsva: HSVA): string {
       return toHslaString([...hsv2hsl(...(hsva.slice(0, 3) as HSV)), hsva[3]])
     }
   }
+} as const
+
+interface ParsedColor {
+  value: string
+  rawMode: ColorPickerMode | null
+  legalValue: string
 }
 
 export default defineComponent({
@@ -138,8 +142,7 @@ export default defineComponent({
     },
     swatches: {
       type: Array as PropType<string[]>,
-      required: true,
-      default: () => []
+      required: true
     },
     onUpdateColor: {
       type: Function as PropType<(value: string) => void>,
@@ -153,14 +156,10 @@ export default defineComponent({
         return {
           value: swatch,
           rawMode,
-          legalValue: normalizeColor(swatch)
+          legalValue: normalizeColor(swatch, rawMode)
         }
       })
     )
-
-    function handleSwatchSelected (parsed: ParsedColor): void {
-      props.onUpdateColor(normalizeOutput(parsed))
-    }
 
     function normalizeOutput (parsed: ParsedColor): string {
       const { mode } = props
@@ -196,9 +195,13 @@ export default defineComponent({
           )
     }
 
+    function handleSwatchSelect (parsed: ParsedColor): void {
+      props.onUpdateColor(normalizeOutput(parsed))
+    }
+
     return {
       parsedSwatchesRef,
-      handleSwatchSelected
+      handleSwatchSelect
     }
   },
   render () {
@@ -208,7 +211,7 @@ export default defineComponent({
         {this.parsedSwatchesRef.map((swatch) => (
           <div
             class={`${clsPrefix}-color-picker-swatches__color`}
-            onClick={() => this.handleSwatchSelected(swatch)}
+            onClick={() => this.handleSwatchSelect(swatch)}
           >
             <div style={{ background: swatch.legalValue }} />
           </div>
