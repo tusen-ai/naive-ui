@@ -103,13 +103,9 @@ describe('n-color-picker', () => {
       })
       await wrapper.find('.n-color-picker-trigger').trigger('click')
       expect(
-<<<<<<< HEAD
-        document.querySelector('.n-color-picker-swatches__color > div')?.getAttribute('style')
-=======
         document
           .querySelector('.n-color-picker-swatch__fill')
           ?.getAttribute('style')
->>>>>>> 6a22570057dd8fae20a0c4c5ae56ff79be9affc6
       ).toContain('background: rgb(0, 0, 0);')
     })
     it('output according to mode', async () => {
@@ -129,11 +125,7 @@ describe('n-color-picker', () => {
         }
       })
       await wrapper.find('.n-color-picker-trigger').trigger('click')
-<<<<<<< HEAD
-      const swatch = document.querySelector('.n-color-picker-swatches__color > div')
-=======
       const swatch = document.querySelector('.n-color-picker-swatch')
->>>>>>> 6a22570057dd8fae20a0c4c5ae56ff79be9affc6
       const modeDom = document.querySelector('.n-color-picker-input__mode')
       let length = modes.length - 1
       let currentMode: string | null | undefined = null
