@@ -103,11 +103,14 @@ describe('n-collapse', () => {
       'n-collapse-item__header--active'
     )
     await wrapper
-      .find('transition-stub')
+      .find('.n-collapse-item__content-wrapper')
       .find('.n-collapse-item__header-main')
       .trigger('click')
     expect(
-      wrapper.find('transition-stub').find('.n-collapse-item__header').classes()
+      wrapper
+        .find('.n-collapse-item__content-wrapper')
+        .find('.n-collapse-item__header')
+        .classes()
     ).toContain('n-collapse-item__header--active')
   })
 
@@ -129,10 +132,7 @@ describe('n-collapse', () => {
     await wrapper.find('.n-collapse-item__header-main').trigger('click')
     await wrapper.find('.n-collapse-item__header-main').trigger('click')
     expect(
-      wrapper
-        .find('transition-stub')
-        .find('.n-collapse-item__content-wrapper')
-        .attributes('style')
+      wrapper.find('.n-collapse-item__content-wrapper').attributes('style')
     ).toBe('display: none;')
 
     await wrapper.setProps({
@@ -141,12 +141,9 @@ describe('n-collapse', () => {
 
     await wrapper.find('.n-collapse-item__header-main').trigger('click')
     await wrapper.find('.n-collapse-item__header-main').trigger('click')
-    expect(
-      wrapper
-        .find('transition-stub')
-        .find('.n-collapse-item__content-wrapper')
-        .exists()
-    ).toBe(false)
+    expect(wrapper.find('.n-collapse-item__content-wrapper').exists()).toBe(
+      false
+    )
   })
 
   it('should work with `on-item-header-click` prop', async () => {
