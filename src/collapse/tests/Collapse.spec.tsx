@@ -21,6 +21,50 @@ describe('n-collapse', () => {
     expect(wrapper.find('.my-icon').exists()).toEqual(true)
   })
 
+  it('should work with `accordion` prop', async () => {
+    const wrapper = mount(NCollapse, {
+      slots: {
+        default: () => [
+          <NCollapseItem name="1">
+            {{ default: () => <div class="ci1">ci1</div> }}
+          </NCollapseItem>,
+          <NCollapseItem name="2">
+            {{ default: () => <div class="ci2">ci2</div> }}
+          </NCollapseItem>,
+          <NCollapseItem name="3">
+            {{ default: () => <div class="ci3">ci3</div> }}
+          </NCollapseItem>
+        ]
+      }
+    })
+
+    const headerMains = wrapper.findAll('.n-collapse-item__header-main')
+    await headerMains[0].trigger('click')
+    await headerMains[1].trigger('click')
+
+    expect(wrapper.findAll('.n-collapse-item__header')[0].classes()).toContain(
+      'n-collapse-item__header--active'
+    )
+    expect(wrapper.findAll('.n-collapse-item__header')[1].classes()).toContain(
+      'n-collapse-item__header--active'
+    )
+
+    await wrapper.setProps({
+      accordion: true
+    })
+
+    await headerMains[2].trigger('click')
+    expect(
+      wrapper.findAll('.n-collapse-item__header')[0].classes()
+    ).not.toContain('n-collapse-item__header--active')
+    expect(
+      wrapper.findAll('.n-collapse-item__header')[1].classes()
+    ).not.toContain('n-collapse-item__header--active')
+    expect(wrapper.findAll('.n-collapse-item__header')[2].classes()).toContain(
+      'n-collapse-item__header--active'
+    )
+  })
+
   it('should work with `arrow-placement` prop', async () => {
     const wrapper = mount(NCollapse, {
       slots: {
