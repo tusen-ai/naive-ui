@@ -1,6 +1,6 @@
 # Max Tag Count
 
-You can use a fixed number or use `responsive` to set a responsive max count.
+Maximum selected options to display. This can be a fixed number or the string `responsive` to set a responsive max count.
 
 ```html
 <n-space vertical>

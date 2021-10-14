@@ -583,6 +583,31 @@ describe('n-data-table', () => {
     ).toContain('cursor: pointer')
   })
 
+  it('should work with `scroll-x` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(
+      wrapper.find('.n-scrollbar-content').attributes('style')
+    ).not.toContain('min-width: 1800px')
+
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} scroll-x={1800} />
+    ))
+    expect(wrapper.find('.n-scrollbar-content').attributes('style')).toContain(
+      'min-width: 1800px'
+    )
+  })
+
   it('should work with `single-column` prop', async () => {
     const columns = [
       {
@@ -713,6 +738,30 @@ describe('n-data-table', () => {
       wrapper.findAll('.n-data-table-td--summary')[1].attributes('rowspan')
     ).toBe('1')
     expect(wrapper.findAll('.n-data-table-td--summary')[1].text()).toBe('45')
+  })
+
+  it('should work with `table-layout` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('table').attributes('style')).toContain(
+      'table-layout: auto'
+    )
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} table-layout="fixed" />
+    ))
+    expect(wrapper.find('table').attributes('style')).toContain(
+      'table-layout: fixed'
+    )
   })
 
   it('should work with `virtual-scroll` prop', async () => {
@@ -947,7 +996,7 @@ describe('props.columns', () => {
     )
   })
 
-  it('should work with `ellipsis` prop', async () => {
+  it('should work with `children` prop', async () => {
     const columns: DataTableColumns = [
       {
         title: 'Name',
@@ -1006,5 +1055,36 @@ describe('props.columns', () => {
     expect(
       wrapper.find('thead [data-col-key="test2"]').attributes('rowspan')
     ).toBe('1')
+  })
+
+  it('should work with `className` prop', async () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        className: 'test-name'
+      },
+      {
+        title: 'Age',
+        key: 'age',
+        className: 'test-age'
+      }
+    ]
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: index,
+        age: index
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} row-key={rowKey} />
+    ))
+    expect(wrapper.find('thead [data-col-key="name"]').classes()).toContain(
+      'test-name'
+    )
+    expect(wrapper.find('thead [data-col-key="age"]').classes()).toContain(
+      'test-age'
+    )
   })
 })

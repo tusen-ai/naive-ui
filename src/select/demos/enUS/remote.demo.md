@@ -1,6 +1,6 @@
 # Remote(Single)
 
-Async example for single select.
+Asynchronous example for a single select case.
 
 ```html
 <n-select

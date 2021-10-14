@@ -26,6 +26,7 @@ swatches
 | show | `boolean` | `undefined` | Whether the color panel is shown. |
 | show-alpha | `boolean` | `true` | Whether the alpha channel can be adjusted. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the picker. |
+| swatches | `string[]` | `undefined` | Value of the swatches. |
 | value | `string \| null` | `undefined` | Value of the picker. |
 | swatches | `string[]` | `undefined` | Value of the swatches. |
 | on-complete | `(value: string) => void` | `undefined` | Callback once the value is changed completely (not called during mousemove). |

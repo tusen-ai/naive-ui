@@ -1,6 +1,6 @@
 # Load Remote Options
 
-Load options async.
+Load options asynchronously.
 
 ```html
 <n-mention

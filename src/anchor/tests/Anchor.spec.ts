@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
-import { NAnchor, NAnchorLink } from '../index'
 import { h } from 'vue'
+import { NAnchor, NAnchorLink } from '../index'
 
 describe('n-anchor', () => {
   it('should work with import on demand', () => {
@@ -66,5 +66,26 @@ describe('n-anchor', () => {
     expect(wrapper.find('.n-anchor-link__title').attributes('title')).toBe(
       'testTitle'
     )
+  })
+
+  it('should work with `naive-scrollbar` and `max-height` prop', async () => {
+    const wrapper = mount(NAnchor, {
+      props: {
+        naiveScrollbar: true,
+        style: {
+          maxHeight: '100px'
+        }
+      },
+      slots: {
+        default () {
+          return h(NAnchorLink, {
+            title: 'testTitle',
+            href: '#testHref'
+          })
+        }
+      }
+    })
+
+    expect(wrapper.find('.n-scrollbar')).toBeTruthy()
   })
 })

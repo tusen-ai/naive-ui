@@ -1,5 +1,6 @@
 import { defineComponent, h, PropType, computed } from 'vue'
 import {
+<<<<<<< HEAD
   HSL,
   hsl2hsv,
   hsl2rgb,
@@ -13,6 +14,16 @@ import {
   rgb2hsl,
   rgb2hsv,
   RGBA,
+=======
+  hsl2hsv,
+  hsl2rgb,
+  hsla,
+  hsv2hsl,
+  hsv2rgb,
+  hsva,
+  rgb2hsl,
+  rgb2hsv,
+>>>>>>> 6a22570057dd8fae20a0c4c5ae56ff79be9affc6
   rgba,
   toHexaString,
   toHslaString,
@@ -20,6 +31,7 @@ import {
   toRgbaString
 } from 'seemly'
 import { ColorPickerMode, getModeFromValue } from './utils'
+<<<<<<< HEAD
 import { makeMap } from '@vue/shared'
 
 // http://www.w3big.com/cssref/css-colors-legal.html
@@ -119,13 +131,94 @@ const covert: Record<ColorPickerMode, Conversion> = {
     },
     hsl (hsva: HSVA): string {
       return toHslaString([...hsv2hsl(...(hsva.slice(0, 3) as HSV)), hsva[3]])
+=======
+import { warn } from '../../_utils'
+
+// Try to normalize the color values to ensure that they are valid CSS colors
+function normalizeColor (color: string, mode: ColorPickerMode | null): string {
+  if (mode === 'hsv') {
+    const [h, s, v, a] = hsva(color)
+    return toRgbaString([...hsv2rgb(h, s, v), a])
+  }
+  // For the mode that is not in preset, we keep the original value.
+  // For color names, they are legal to CSS, so we don’t deal with them,
+  // and only standardize them when outputting.
+  return color
+}
+
+function getHexFromName (color: string): string {
+  const ctx = document
+    .createElement('canvas')
+    .getContext('2d') as CanvasRenderingContext2D
+  ctx.fillStyle = color
+  return ctx.fillStyle
+}
+
+const covert = {
+  rgb: {
+    hex (swatchValue: string): string {
+      return toHexaString(rgba(swatchValue))
+    },
+    hsl (swatchValue: string): string {
+      const [r, g, b, a] = rgba(swatchValue)
+      return toHslaString([...rgb2hsl(r, g, b), a])
+    },
+    hsv (swatchValue: string): string {
+      const [r, g, b, a] = rgba(swatchValue)
+      return toHsvaString([...rgb2hsv(r, g, b), a])
+    }
+  },
+  hex: {
+    rgb (swatchValue: string): string {
+      return toRgbaString(rgba(swatchValue))
+    },
+    hsl (swatchValue: string): string {
+      const [r, g, b, a] = rgba(swatchValue)
+      return toHslaString([...rgb2hsl(r, g, b), a])
+    },
+    hsv (swatchValue: string): string {
+      const [r, g, b, a] = rgba(swatchValue)
+      return toHsvaString([...rgb2hsv(r, g, b), a])
+    }
+  },
+  hsl: {
+    hex (swatchValue: string): string {
+      const [h, s, l, a] = hsla(swatchValue)
+      return toHexaString([...hsl2rgb(h, s, l), a])
+    },
+    rgb (swatchValue: string): string {
+      const [h, s, l, a] = hsla(swatchValue)
+      return toRgbaString([...hsl2rgb(h, s, l), a])
+    },
+    hsv (swatchValue: string): string {
+      const [h, s, l, a] = hsla(swatchValue)
+      return toHsvaString([...hsl2hsv(h, s, l), a])
+    }
+  },
+  hsv: {
+    hex (swatchValue: string): string {
+      const [h, s, v, a] = hsva(swatchValue)
+      return toHexaString([...hsv2rgb(h, s, v), a])
+    },
+    rgb (swatchValue: string) {
+      const [h, s, v, a] = hsva(swatchValue)
+      return toRgbaString([...hsv2rgb(h, s, v), a])
+    },
+    hsl (swatchValue: string): string {
+      const [h, s, v, a] = hsva(swatchValue)
+      return toHslaString([...hsv2hsl(h, s, v), a])
+>>>>>>> 6a22570057dd8fae20a0c4c5ae56ff79be9affc6
     }
   }
 } as const
 
 interface ParsedColor {
   value: string
+<<<<<<< HEAD
   rawMode: ColorPickerMode | null
+=======
+  mode: ColorPickerMode | null
+>>>>>>> 6a22570057dd8fae20a0c4c5ae56ff79be9affc6
   legalValue: string
 }
 
@@ -151,17 +244,27 @@ export default defineComponent({
   },
   setup (props) {
     const parsedSwatchesRef = computed<ParsedColor[]>(() =>
+<<<<<<< HEAD
       props.swatches.map((swatch) => {
         const rawMode = getModeFromValue(swatch)
         return {
           value: swatch,
           rawMode,
           legalValue: normalizeColor(swatch, rawMode)
+=======
+      props.swatches.map((value) => {
+        const mode = getModeFromValue(value)
+        return {
+          value,
+          mode,
+          legalValue: normalizeColor(value, mode)
+>>>>>>> 6a22570057dd8fae20a0c4c5ae56ff79be9affc6
         }
       })
     )
 
     function normalizeOutput (parsed: ParsedColor): string {
+<<<<<<< HEAD
       const { mode } = props
       let { value, rawMode, legalValue } = parsed
       if (rawMode === mode) return value
@@ -193,6 +296,26 @@ export default defineComponent({
         : (conversions[mode] as (colors: RGBA) => string)(
             conversions.parse(value)
           )
+=======
+      const { mode: modeProp } = props
+      let { value, mode: swatchColorMode } = parsed
+      if (swatchColorMode === modeProp) return value
+      // color name is converted to hex
+      if (!swatchColorMode) {
+        swatchColorMode = 'hex'
+        if (/^[a-zA-Z]+$/.test(value)) {
+          value = getHexFromName(value)
+        } else {
+          // for invalid color, we make it black
+          warn('color-picker', `color ${value} in swatches is invalid.`)
+          value = '#000000'
+        }
+      }
+
+      // swatch value to current mode value
+      const conversions = covert[swatchColorMode]
+      return (conversions as any)[modeProp](value)
+>>>>>>> 6a22570057dd8fae20a0c4c5ae56ff79be9affc6
     }
 
     function handleSwatchSelect (parsed: ParsedColor): void {
@@ -210,10 +333,20 @@ export default defineComponent({
       <div class={`${clsPrefix}-color-picker-swatches`}>
         {this.parsedSwatchesRef.map((swatch) => (
           <div
+<<<<<<< HEAD
             class={`${clsPrefix}-color-picker-swatches__color`}
             onClick={() => this.handleSwatchSelect(swatch)}
           >
             <div style={{ background: swatch.legalValue }} />
+=======
+            class={`${clsPrefix}-color-picker-swatch`}
+            onClick={() => this.handleSwatchSelect(swatch)}
+          >
+            <div
+              class={`${clsPrefix}-color-picker-swatch__fill`}
+              style={{ background: swatch.legalValue }}
+            />
+>>>>>>> 6a22570057dd8fae20a0c4c5ae56ff79be9affc6
           </div>
         ))}
       </div>

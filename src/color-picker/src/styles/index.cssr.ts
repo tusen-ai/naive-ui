@@ -170,6 +170,7 @@ export default c([
     ])
   ]),
   cB('color-picker-swatches', `
+<<<<<<< HEAD
     display: flex;
     flex-wrap: wrap;
     position: relative;
@@ -181,17 +182,37 @@ export default c([
       width: 18px;
       height: 18px;
       margin: 0px 10px 10px 0px;
+=======
+    display: grid;
+    grid-gap: 8px;
+    flex-wrap: wrap;
+    position: relative;
+    grid-template-columns: repeat(auto-fill, 18px);
+    margin-top: 10px;
+  `, [
+    cB('color-picker-swatch', `
+      width: 18px;
+      height: 18px;
+>>>>>>> 6a22570057dd8fae20a0c4c5ae56ff79be9affc6
       background-image: linear-gradient(45deg, #DDD 25%, #0000 25%), linear-gradient(-45deg, #DDD 25%, #0000 25%), linear-gradient(45deg, #0000 75%, #DDD 75%), linear-gradient(-45deg, #0000 75%, #DDD 75%);
       background-size: 8px 8px;
       background-position: 0px 0, 0px 4px, 4px -4px, -4px 0px;
       background-repeat: repeat;
     `, [
+<<<<<<< HEAD
       c('& > div', `
         position: relative;
         width: 100%;
         height: 100%;
         border-radius: var(--border-radius);
         box-shadow: rgb(0 0 0 / 15%) 0px 0px 0px 1px inset;
+=======
+      cE('fill', `
+        width: 100%;
+        height: 100%;
+        border-radius: 3px;
+        box-shadow: rgba(0, 0, 0, .15) 0px 0px 0px 1px inset;
+>>>>>>> 6a22570057dd8fae20a0c4c5ae56ff79be9affc6
         cursor: pointer;
       `)
     ])

@@ -1,6 +1,6 @@
 # Size
 
-Choose whatever you want.
+Choose the size you want.
 
 ```html
 <n-space vertical>

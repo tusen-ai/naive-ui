@@ -175,8 +175,12 @@ export interface DataTableInjection {
   rightFixedColumnsRef: Ref<TableColumns>
   leftActiveFixedColKeyRef: Ref<ColumnKey | null>
   rightActiveFixedColKeyRef: Ref<ColumnKey | null>
-  fixedColumnLeftMapRef: Ref<Record<ColumnKey, number | undefined>>
-  fixedColumnRightMapRef: Ref<Record<ColumnKey, number | undefined>>
+  fixedColumnLeftMapRef: Ref<
+  Record<ColumnKey, { start: number, end: number } | undefined>
+  >
+  fixedColumnRightMapRef: Ref<
+  Record<ColumnKey, { start: number, end: number } | undefined>
+  >
   mergedCurrentPageRef: Ref<number>
   someRowsCheckedRef: Ref<boolean>
   allRowsCheckedRef: Ref<boolean>
