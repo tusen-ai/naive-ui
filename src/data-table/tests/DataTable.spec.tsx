@@ -740,6 +740,30 @@ describe('n-data-table', () => {
     expect(wrapper.findAll('.n-data-table-td--summary')[1].text()).toBe('45')
   })
 
+  it('should work with `table-layout` prop', async () => {
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name'
+      }
+    ]
+    const data = new Array(978).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    expect(wrapper.find('table').attributes('style')).toContain(
+      'table-layout: auto'
+    )
+    wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} table-layout="fixed" />
+    ))
+    expect(wrapper.find('table').attributes('style')).toContain(
+      'table-layout: fixed'
+    )
+  })
+
   it('should work with `virtual-scroll` prop', async () => {
     const columns = [
       {
