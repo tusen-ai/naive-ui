@@ -433,6 +433,8 @@ export default defineComponent({
               : undefined
             // 缩进样式 ----------------------------------------- end ---->
 
+            const { length: rowCount } = mergedData
+
             const renderRow = (
               rowInfo: RowRenderInfo,
               rowIndex: number,
@@ -654,8 +656,6 @@ export default defineComponent({
 
               return row
             }
-
-            const { length: rowCount } = mergedData
 
             // 展开行数据化 ----------------------------------------- start ---->
             const newMergedData: RowRenderInfo[] = []
