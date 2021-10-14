@@ -308,3 +308,13 @@ export interface SummaryCell {
 export interface SummaryRowData {
   [key: string]: SummaryCell
 }
+
+// 这两个类型如果不继承，会出现很多vscode的报错
+export interface ExpandedRow extends TreeNode<InternalRowData> {
+  isExpandedRow: true
+}
+
+export interface BeforeExpandedRow extends TreeNode<InternalRowData> {
+  isBeforeExpandedRow: true
+  expanded: boolean
+}

@@ -20,7 +20,9 @@ import {
   RowKey,
   SummaryRowData,
   MainTableBodyRef,
-  TmNode
+  TmNode,
+  ExpandedRow,
+  BeforeExpandedRow
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import Cell from './Cell'
@@ -37,6 +39,8 @@ type RowRenderInfo =
     disabled: boolean
   }
   | TmNode
+  | ExpandedRow
+  | BeforeExpandedRow
 
 function flatten (rows: TmNode[], expandedRowKeys: RowKey[]): TmNode[] {
   const fRows: TmNode[] = []
@@ -421,16 +425,45 @@ export default defineComponent({
             } else {
               mergedData = mergedPaginationData
             }
+            // 表格总结栏处理 ----------------------------------------- end ---->
+
+            // 缩进样式 ----------------------------------------- start ---->
+            const indentStyle = hasChildren
+              ? { width: pxfy(this.indent) }
+              : undefined
+            // 缩进样式 ----------------------------------------- end ---->
 
             const renderRow = (
               rowInfo: RowRenderInfo,
               rowIndex: number,
               isVirtual: boolean
             ): VNode => {
+              const isExpandedRow = 'isExpandedRow' in rowInfo
               const { rawNode: rowData, key: rowKey } = rowInfo
+              // 如果此行是展开行，直接返回展开行的结构
+              if (isExpandedRow) {
+                return (
+                  <tr
+                    class={`${mergedClsPrefix}-data-table-tr`}
+                    key={`${rowKey}__expand`}
+                  >
+                    <td
+                      class={[
+                        `${mergedClsPrefix}-data-table-td`,
+                        `${mergedClsPrefix}-data-table-td--last-col`,
+                        rowIndex + 1 === rowCount &&
+                          `${mergedClsPrefix}-data-table-td--last-row`
+                      ]}
+                      colspan={colCount}
+                    >
+                      {renderExpand!(rowData, rowIndex)}
+                    </td>
+                  </tr>
+                )
+              }
               const isSummary = 'summary' in rowInfo
-              const expanded = mergedExpandedRowKeys.includes(rowKey)
-              const showExpandContent = renderExpand && expanded
+              const expanded = 'expanded' in rowInfo
+              const isBeforeExpandedRow = 'isBeforeExpandedRow' in rowInfo
               const props = rowProps ? rowProps(rowData, rowIndex) : undefined
               const mergedRowClassName =
                 typeof rowClassName === 'string'
@@ -450,7 +483,7 @@ export default defineComponent({
                 >
                   {cols.map((col, colIndex) => {
                     // 检查当前单元格是否因为合并单元格而需要跳过
-                    if (rowIndex in cordToPass) {
+                    if (!isVirtual && rowIndex in cordToPass) {
                       const cordOfRowToPass = cordToPass[rowIndex]
                       const indexInCordOfRowToPass =
                         cordOfRowToPass.indexOf(colIndex)
@@ -518,8 +551,8 @@ export default defineComponent({
                         key={colKey}
                         style={{
                           textAlign: column.align || undefined,
-                          left: pxfy(fixedColumnLeftMap[colKey]),
-                          right: pxfy(fixedColumnRightMap[colKey])
+                          left: pxfy(fixedColumnLeftMap[colKey]?.start),
+                          right: pxfy(fixedColumnRightMap[colKey]?.start)
                         }}
                         colspan={mergedColSpan}
                         rowspan={isVirtual ? undefined : mergedRowSpan}
@@ -549,7 +582,7 @@ export default defineComponent({
                             [`${mergedClsPrefix}-data-table-td--last-col`]:
                               isLastCol,
                             [`${mergedClsPrefix}-data-table-td--last-row`]:
-                              isLastRow && !showExpandContent
+                              isLastRow && !isBeforeExpandedRow
                           }
                         ]}
                       >
@@ -622,53 +655,38 @@ export default defineComponent({
               return row
             }
 
-            // 表格总结栏处理 ----------------------------------------- end ---->
-
             const { length: rowCount } = mergedData
 
-            // 缩进样式 ----------------------------------------- start ---->
-            const indentStyle = hasChildren
-              ? { width: pxfy(this.indent) }
-              : undefined
-            // 缩进样式 ----------------------------------------- end ---->
+            // 展开行数据化 ----------------------------------------- start ---->
+            const newMergedData: RowRenderInfo[] = []
+            mergedData.forEach((rowInfo, index) => {
+              const expanded = mergedExpandedRowKeys.includes(rowInfo.key)
+              if (renderExpand && expanded) {
+                // 单独赋值的都是不可枚举的参数
+                newMergedData.push(
+                  {
+                    ...rowInfo,
+                    isBeforeExpandedRow: true,
+                    expanded: expanded,
+                    disabled: rowInfo.disabled,
+                    key: rowInfo.key
+                  },
+                  {
+                    ...rowInfo,
+                    isExpandedRow: true,
+                    disabled: rowInfo.disabled,
+                    key: rowInfo.key
+                  }
+                )
+              } else {
+                newMergedData.push(rowInfo)
+              }
+            })
+            // 展开行数据化 ----------------------------------------- end ---->
             if (!virtualScroll) {
-              const rows: VNode[] = []
-              // 计算 VNode ----------------------------------------- start ---->
-              // 遍历行
-              mergedData.forEach((rowInfo, rowIndex) => {
-                // todo: 将这几个参数与renderRow的耦合了
-                const { rawNode: rowData, key: rowKey } = rowInfo
-                const expanded = mergedExpandedRowKeys.includes(rowKey)
-                const showExpandContent = renderExpand && expanded
-
-                const row = renderRow(rowInfo, rowIndex, false)
-                // 设置树形表格的展开
-                if (showExpandContent) {
-                  rows.push(
-                    row,
-                    <tr
-                      class={`${mergedClsPrefix}-data-table-tr`}
-                      key={`${rowKey}__expand`}
-                    >
-                      <td
-                        class={[
-                          `${mergedClsPrefix}-data-table-td`,
-                          `${mergedClsPrefix}-data-table-td--last-col`,
-                          rowIndex + 1 === rowCount &&
-                            `${mergedClsPrefix}-data-table-td--last-row`
-                        ]}
-                        colspan={colCount}
-                      >
-                        {renderExpand(rowData, rowIndex)}
-                      </td>
-                    </tr>
-                  )
-                } else {
-                  rows.push(row)
-                }
+              const rows = newMergedData.map((rowInfo, rowIndex) => {
+                return renderRow(rowInfo, rowIndex, false)
               })
-              // 计算 VNode ----------------------------------------- end ---->
-
               return (
                 <table
                   class={`${mergedClsPrefix}-data-table-table`}
@@ -697,11 +715,10 @@ export default defineComponent({
               // not very performant, since it supports all the feature of table.
               // If we can bailout some path it will be much faster. Since it
               // need to generate all vnodes before using the virtual list.
-
               return (
                 <VirtualList
                   ref="virtualListRef"
-                  items={mergedData}
+                  items={newMergedData}
                   itemSize={28}
                   visibleItemsTag={VirtualListItemWrapper}
                   visibleItemsProps={{
@@ -724,9 +741,7 @@ export default defineComponent({
                     }: {
                       item: RowRenderInfo
                       index: number
-                    }) => {
-                      renderRow(item, index, true)
-                    }
+                    }) => renderRow(item, index, true)
                   }}
                 </VirtualList>
               )
