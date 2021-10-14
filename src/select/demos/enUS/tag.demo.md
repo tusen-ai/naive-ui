@@ -1,6 +1,6 @@
 # Create Option Dynamically
 
-Use `tag` & `filterable` to create option dynamically.
+Use `tag` & `filterable` properties to create options dynamically.
 
 ```html
 <n-space vertical>

@@ -1,22 +1,14 @@
-# Custom input element
+# Whether to show menu
 
-You can also replace the input element of the auto-complete component.
+Your can determine is whether to show menu based on value when it is focused.
 
 ```html
 <n-auto-complete
   :options="options"
   v-model:value="value"
-  #="{ handleInput, handleBlur, handleFocus, value }"
->
-  <n-input
-    type="textarea"
-    @input="handleInput"
-    @focus="handleFocus"
-    @blur="handleBlur"
-    :value="value"
-    placeholder="Email"
-  />
-</n-auto-complete>
+  placeholder="Input 'a' to show menu"
+  :get-show="getShow"
+/>
 ```
 
 ```js
@@ -25,6 +17,7 @@ import { defineComponent, ref, computed } from 'vue'
 export default defineComponent({
   setup () {
     const valueRef = ref('')
+    const showOnFocusRef = ref(true)
     return {
       value: valueRef,
       options: computed(() => {
@@ -35,7 +28,14 @@ export default defineComponent({
             value: prefix + suffix
           }
         })
-      })
+      }),
+      showOnFocus: showOnFocusRef,
+      getShow: (value) => {
+        if (value === 'a') {
+          return true
+        }
+        return false
+      }
     }
   }
 })

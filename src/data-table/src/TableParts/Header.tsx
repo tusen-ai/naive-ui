@@ -138,21 +138,25 @@ export default defineComponent({
                 const key = getColKey(column)
                 const { ellipsis } = column
                 if (!hasEllipsis && ellipsis) hasEllipsis = true
+                const leftFixed = key in fixedColumnLeftMap
+                const rightFixed = key in fixedColumnRightMap
                 return (
                   <th
                     key={key}
                     style={{
                       textAlign: column.align,
-                      left: pxfy(fixedColumnLeftMap[key]),
-                      right: pxfy(fixedColumnRightMap[key])
+                      left: pxfy(fixedColumnLeftMap[key]?.start),
+                      right: pxfy(fixedColumnRightMap[key]?.start)
                     }}
                     colspan={colSpan}
                     rowspan={rowSpan}
                     data-col-key={key}
                     class={[
                       `${mergedClsPrefix}-data-table-th`,
-                      column.fixed &&
-                        `${mergedClsPrefix}-data-table-th--fixed-${column.fixed}`,
+                      (leftFixed || rightFixed) &&
+                        `${mergedClsPrefix}-data-table-th--fixed-${
+                          leftFixed ? 'left' : 'right'
+                        }`,
                       {
                         [`${mergedClsPrefix}-data-table-th--hover`]:
                           isColumnSorting(column, mergedSortState),

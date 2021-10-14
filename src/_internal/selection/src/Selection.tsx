@@ -11,7 +11,8 @@ import {
   nextTick,
   CSSProperties,
   watchEffect,
-  onMounted
+  onMounted,
+  InputHTMLAttributes
 } from 'vue'
 import { VOverflow, VOverflowInst } from 'vueuc'
 import type { SelectBaseOption } from '../../../select/src/interface'
@@ -77,6 +78,7 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    inputProps: Object as PropType<InputHTMLAttributes>,
     focused: Boolean,
     renderTag: Function as PropType<RenderTag>,
     onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
@@ -547,6 +549,7 @@ export default defineComponent({
           key="__input-tag__"
         >
           <input
+            {...this.inputProps}
             ref="patternInputRef"
             tabindex={-1}
             disabled={disabled}
@@ -741,6 +744,7 @@ export default defineComponent({
             class={`${clsPrefix}-base-selection-label`}
           >
             <input
+              {...this.inputProps}
               ref="patternInputRef"
               class={`${clsPrefix}-base-selection-input`}
               value={
