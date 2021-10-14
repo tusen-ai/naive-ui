@@ -19,7 +19,6 @@ export default defineComponent({
 
     const {
       mergedClsPrefixRef,
-      mergedDisabledRef,
       listTypeRef,
       disabledRef,
       dragOverRef,
@@ -73,7 +72,8 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-upload-trigger`,
-            mergedDisabledRef.value &&
+            disabledRef.value &&
+              !isImageCardTypeRef.value &&
               `${mergedClsPrefix}-upload-trigger--disabled`,
             isImageCardTypeRef.value &&
               `${mergedClsPrefix}-upload-trigger--image-card`

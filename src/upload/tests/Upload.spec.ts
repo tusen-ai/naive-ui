@@ -31,10 +31,7 @@ describe('n-upload', () => {
 
   it('should work with `disabled` prop', async () => {
     const wrapper = mount(NUpload)
-    const disabledClasses = [
-      'n-upload-trigger--disabled',
-      'n-upload-file-list--disabled'
-    ]
+    const disabledClasses = ['n-upload-trigger--disabled']
     for (const disabledClass of disabledClasses) {
       expect(wrapper.find(disabledClass).exists()).not.toBe(true)
     }

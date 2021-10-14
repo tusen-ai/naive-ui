@@ -7,6 +7,11 @@
 - 修复 `n-ellipisis` 的 `expand-trigger` 属性在内容不显示提示的时候禁用鼠标样式的问题，关闭 [#1299](https://github.com/TuSimple/naive-ui/issues/1299)
 - 修复 `n-select` `fallback-option` 属性类型，关闭 [#1327](https://github.com/TuSimple/naive-ui/issues/1327)
 - 修复 `n-modal` `on-after-enter` 不生效
+- 修复 `n-upload` 的 `disabled` 属性的样式问题，关闭 [#1237](https://github.com/TuSimple/naive-ui/issues/1237)
+
+### Feats
+
+- `n-upload` 新增 `max` 属性
 
 ## 2.19.6 (2021-10-10)
 
