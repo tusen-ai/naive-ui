@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils'
 import { NDatePicker } from '../index'
 import { Value } from '../src/interface'
 import { format } from 'date-fns'
+import { useLocale } from '../../_mixins'
 
 describe('n-date-picker', () => {
   it('should work with import on demand', () => {
@@ -129,6 +130,7 @@ describe('n-date-picker', () => {
   })
 
   it('should work with `defaultValue` prop', async () => {
+    const { dateLocaleRef } = useLocale('Time')
     const wrapper = mount(NDatePicker, {
       props: {
         defaultValue: 1183135260000
@@ -137,7 +139,9 @@ describe('n-date-picker', () => {
 
     const inputEl = await wrapper.find('.n-input__input').find('input')
     expect(inputEl.element.value).toEqual(
-      format(1183135260000, 'yyyy-MM-dd', { timeZone: 'Asia/Shanghai' })
+      format(1183135260000, 'yyyy-MM-dd', {
+        locale: dateLocaleRef.value.locale
+      })
     )
   })
 
