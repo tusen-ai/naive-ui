@@ -1,3 +1,5 @@
+<!--anchor:on-->
+
 # 国际化
 
 Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有组件均为英语。
@@ -42,4 +44,12 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 </style>
 ```
 
-目前 Naive-ui 只支持中文和英文，其他语言暂不支持。
+## 支持语言
+
+| 语言     | 配置 | 日期配置 |
+| -------- | ---- | -------- |
+| 英语     | enUS | dateEnUS |
+| 日语     | jaJP | dateJaJP |
+| 俄罗斯语 | ruRU | dateRuRU |
+| 乌克兰语 | ukUA | dateUkUA |
+| 简体中文 | zhCN | dateZhCN |
