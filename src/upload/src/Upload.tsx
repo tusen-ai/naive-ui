@@ -285,8 +285,11 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const mergedDisabledRef = computed(() => {
       const { max } = props
-      if (max !== undefined) return mergedFileListRef.value.length >= max
-      return formItem.mergedDisabledRef.value
+      const { mergedDisabledRef } = formItem
+      if (max !== undefined) {
+        return mergedFileListRef.value.length >= max || mergedDisabledRef.value
+      }
+      return mergedDisabledRef.value
     })
     const uncontrolledFileListRef = ref(props.defaultFileList)
     const controlledFileListRef = toRef(props, 'fileList')
