@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-menu` add `dropdown-props` prop, closes [#1345](https://github.com/TuSimple/naive-ui/issues/1345).
+
 ## 2.19.8 (2021-10-14)
 
 ### Fixes
