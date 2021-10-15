@@ -22,3 +22,9 @@ x
 | 名称    | 参数 | 说明     |
 | ------- | ---- | -------- |
 | default | `()` | 滚动内容 |
+
+### Scrollbar Methods
+
+| 名称 | 类型 | 说明 |
+| --- | --- | --- |
+| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 |

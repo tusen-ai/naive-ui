@@ -54,4 +54,25 @@ describe('n-badge', () => {
     await wrapper.setProps({ 'show-zero': true })
     expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
   })
+
+  it('should work with `type` prop', () => {
+    const data = [
+      { type: 'default', color: '#d03050' },
+      { type: 'error', color: '#d03050' },
+      { type: 'info', color: '#2080f0' },
+      { type: 'success', color: '#18a058' },
+      { type: 'warning', color: '#f0a020' }
+    ] as const
+
+    data.forEach((item) => {
+      const wrapper = mount(NBadge, {
+        props: {
+          type: item.type,
+          value: 5
+        }
+      })
+
+      expect(wrapper.find('.n-badge').attributes('style')).toContain(item.color)
+    })
+  })
 })

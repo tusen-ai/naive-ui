@@ -1,5 +1,7 @@
 # Step
 
+Set how much the buttons change the value.
+
 ```html
 <n-input-number v-model:value="value" :step="2" />
 ```

@@ -22,3 +22,9 @@ x
 | Name    | Parameters | Description     |
 | ------- | ---------- | --------------- |
 | default | `()`       | Scroll content. |
+
+### Scrollbar Methods
+
+| Name | Type | Description |
+| --- | --- | --- |
+| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scrolling content. |

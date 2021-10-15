@@ -1,6 +1,6 @@
 # Mention
 
-A year ago, product manager ask me if I could implement the feature. At that time, I told them to use multiple select as a workaround.
+A year ago, my product manager asked me if I could implement this feature. Back then, I recommended just using multiple selects as a workaround.
 
 ## Demos
 
@@ -19,26 +19,26 @@ manual-trigger
 
 ### Mention Props
 
-Mention is provided after `v2.2.0`.
+Mention requires `v2.2.0` and above.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | autosize | `boolean \| { maxRows?: number, minRows?: number }` | `false` | Autosize. |
-| options | `MentionOption[]` | `[]` | Mention Options list. |
+| options | `MentionOption[]` | `[]` | Mention options list. |
 | type | `'text' \| 'textarea'` | `'text'` | Input type. |
-| separator | `string` | `' '` | Char to split mentions whose length must be 1. |
-| bordered | `boolean` | `true` | Whether to display the border of the input box. |
-| disabled | `boolean` | `false` | Whether to set the input box to be disabled. |
-| value | `string \| null` | `undefined` | Input value. |
-| default-value | `string` | `''` | Input default value. |
-| loading | `boolean` | `false` | Whether the selection panel of mentions shows the loading status. |
-| prefix | `string \| string[]` | `'@'` | Prefix char to trigger mentions whose length must be 1. |
-| placeholder | `string` | `''` | Input placeholder. |
-| render-label | `undefined \| (option: MentionOption) => VNodeChild` | `undefined` | Render function of all the options' label. |
+| separator | `string` | `' '` | Character to split mentions. The string length must be exactly 1. |
+| bordered | `boolean` | `true` | Whether to display the border of the input element. |
+| disabled | `boolean` | `false` | Whether to disable the input element. |
+| value | `string \| null` | `undefined` | Manually set input value. |
+| default-value | `string` | `''` | Default value when the value is not manually set. |
+| loading | `boolean` | `false` | Whether the selection panel of mentions is in a loading state. |
+| prefix | `string \| string[]` | `'@'` | Prefix character(s) to trigger mentions. The string length(s) must be exactly 1. |
+| placeholder | `string` | `''` | Placeholder. |
+| render-label | `undefined \| (option: MentionOption) => VNodeChild` | `undefined` | Options' labels render function. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |
 | on-update:value | `(value: string) => void` | `undefined` | Triggered when the input box value is updated. |
 | on-select | `(option: MentionOption, prefix: string) => void` | `undefined` | Triggered when the input box is selected. |
-| on-focus | `(e: FocusEvent) => void` | `undefined` | Triggered when the input box gets focus. |
+| on-focus | `(e: FocusEvent) => void` | `undefined` | Triggered when the input box is focussed on. |
 | on-search | `(pattern: string, prefix: string) => void` | `undefined` | Triggered when searching in the input box. |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Triggered when the input box loses focus. |
 
@@ -46,18 +46,18 @@ Mention is provided after `v2.2.0`.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| class | `string` | Option class name. |
-| disabled | `boolean` | Option disabled status. |
+| class | `string` | Option class property. |
+| disabled | `boolean` | Option disabled state. |
 | label | `string \| (option: MentionOption) => VNodeChild` | Option label. |
 | render | `(option: MentionOption) => VNodeChild` | Support custom options via `render` rendering function. |
-| style | `string` | Option style. |
-| value | `string` | Should be unique. |
+| style | `string` | Option style property. |
+| value | `string` | Option value. Must be unique. |
 
 ### Mention Methods
 
 | Name  | Type         | Description                   |
 | ----- | ------------ | ----------------------------- |
-| focus | `() => void` | Manually focus the component. |
+| focus | `() => void` | Manually focus on the component. |
 | blur  | `() => void` | Manually blur the component.  |
 
 ### Mention Slots

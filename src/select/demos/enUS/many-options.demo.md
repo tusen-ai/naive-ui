@@ -1,6 +1,6 @@
 # Lots of Options
 
-1000 times of the ultimate answer.
+1000 times the answer to everything.
 
 ```html
 <n-space vertical>

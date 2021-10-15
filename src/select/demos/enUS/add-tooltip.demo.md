@@ -1,6 +1,6 @@
 # Add Tooltip to Option
 
-Use `render-option` to control the rendering of entire option.
+Use the `render-option` property to control rendering of the entire option.
 
 ```html
 <n-select :options="options" :render-option="renderOption" />
