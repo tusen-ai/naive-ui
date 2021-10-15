@@ -94,7 +94,7 @@ const datePickerProps = {
   size: String as PropType<'small' | 'medium' | 'large'>,
   type: {
     type: String as PropType<
-    'date' | 'datetime' | 'daterange' | 'datetimerange' | 'month' | 'year'
+   keyof typeof DATE_FORMAT
     >,
     default: 'date'
   },
