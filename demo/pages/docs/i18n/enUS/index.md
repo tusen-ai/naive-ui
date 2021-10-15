@@ -1,3 +1,5 @@
+<!--anchor:on-->
+
 # Internationalization
 
 Naive-ui provide `n-config-provider` to customize the internationalization. By default, all components are in English.
@@ -42,4 +44,12 @@ Set `n-config-provider`'s `date-locale` prop to `dateZhCN` imported from naive-u
 </style>
 ```
 
-At present, Naive-ui only supports Chinese and English, and other languages don't support it temporarily.
+## Supported languages
+
+| Language             | Config | Date config |
+| -------------------- | ------ | ----------- |
+| English              | enUS   | dateEnUS    |
+| Japanese             | jaJP   | dateJaJP    |
+| Russian              | ruRU   | dateRuRU    |
+| Ukrainian            | ukUA   | dateUkUA    |
+| Chinese (Simplified) | zhCN   | dateZhCN    |
