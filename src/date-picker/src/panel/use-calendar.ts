@@ -227,7 +227,10 @@ function useCalendar (
       newValue = Date.now()
     }
     newValue = getTime(set(newValue, dateItem.dateObject))
-    panelCommon.doUpdateValue(sanitizeValue(newValue), type === 'date')
+    panelCommon.doUpdateValue(
+      sanitizeValue(newValue),
+      type === 'date' || type === 'year'
+    )
     if (type === 'date') {
       panelCommon.doClose()
     } else if (type === 'month') {
