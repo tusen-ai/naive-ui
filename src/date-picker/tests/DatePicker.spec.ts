@@ -216,13 +216,3 @@ describe('n-date-picker', () => {
     wrapper.unmount()
   })
 })
-
-describe('date', () => {})
-
-describe('date-time', () => {})
-
-describe('date-range', () => {})
-
-describe('date-range', () => {})
-
-describe('date-time-range', () => {})
