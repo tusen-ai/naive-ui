@@ -33,7 +33,9 @@ const useCalendarProps = {
     default: () => ['now', 'clear', 'confirm']
   },
   type: {
-    type: String as PropType<'date' | 'datetime' | 'month' | 'year'>,
+    type: String as PropType<
+    'date' | 'datetime' | 'daterange' | 'datetimerange' | 'month' | 'year'
+    >,
     default: 'date'
   }
 } as const

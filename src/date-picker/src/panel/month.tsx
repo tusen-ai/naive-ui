@@ -16,7 +16,7 @@ export default defineComponent({
   name: 'MonthPanel',
   props: useCalendar.props,
   setup (props) {
-    const useCalendarRef = useCalendar(props, props.type)
+    const useCalendarRef = useCalendar(props, props.type as 'month' | 'year')
     const renderItem = (
       item: YearItem | MonthItem,
       i: number,
