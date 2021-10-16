@@ -37,7 +37,7 @@ option-props
 | on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when there is a click outside of the component. |
 | on-select | `(key: string \| number) => void` | `undefined` | Callback function for after an option is selected. |
 
-For other props, for example `placement`, please see [Popover Props](popover#Props). Note that `raw` is not available.
+For other props, for example `placement`, please see [Popover Props](popover#Popover-Props). Note that `raw` is not available.
 
 #### DropdownOption Type
 

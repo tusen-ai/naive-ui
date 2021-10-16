@@ -62,7 +62,7 @@ flex-height
 | loading | `boolean` | `false` | Whether to display loading status. |
 | max-height | `number \| string` | `undefined` | The max-height of the table content. Can be a CSS value. |
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |
-| pagination | `false \| object` | `false` | See [Pagination props](pagination#Props) |
+| pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `false` in async usage. |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string \| object` | `undefined` | Class name of each row. |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |
