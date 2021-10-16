@@ -30,11 +30,11 @@ preset-confirm-slot
 
 ### Modal with Preset Card Props
 
-See [Card props](card#Props)
+See [Card props](card#Card-Props)
 
 ### Modal with Preset Dialog Props
 
-See [Dialog props](dialog#Props)
+See [Dialog props](dialog#Dialog-Props)
 
 ### Modal without Preset Slots
 
@@ -44,8 +44,8 @@ See [Dialog props](dialog#Props)
 
 ### Modal with Preset Card Slots
 
-See [Card slots](card#Slots)
+See [Card slots](card#Card-Slots)
 
 ### Modal with Preset Dialog Slots
 
-See [Dialog slots](dialog#Slots)
+See [Dialog slots](dialog#Dialog-Slots)
