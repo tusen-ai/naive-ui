@@ -511,6 +511,7 @@ export default defineComponent({
       openFileDialog,
       draggerInsideRef,
       handleFileAddition,
+      mergedDisabledRef,
       fileListStyleRef: toRef(props, 'fileListStyle'),
       abstractRef: toRef(props, 'abstract'),
       cssVarsRef

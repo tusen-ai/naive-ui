@@ -18,7 +18,7 @@ export default defineComponent({
     return () => {
       const {
         mergedClsPrefixRef: { value: mergedClsPrefix },
-        disabledRef: { value: mergedDisabled }
+        mergedDisabledRef: { value: mergedDisabled }
       } = NUpload
       return (
         <div

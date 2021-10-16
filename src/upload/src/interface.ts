@@ -72,6 +72,7 @@ export interface UploadInjection {
   dragOverRef: Ref<boolean>
   draggerInsideRef: { value: boolean }
   fileListStyleRef: Ref<string | CSSProperties | undefined>
+  mergedDisabledRef: Ref<boolean>
   abstractRef: Ref<boolean>
   cssVarsRef: Ref<CSSProperties>
   submit: (fileId?: string) => void
