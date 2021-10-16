@@ -30,7 +30,8 @@ export { getRawNodePath }
 
 function createSelectOptions (
   tmNodes: TmNode[],
-  checkStrategyIsChild: boolean
+  checkStrategyIsChild: boolean,
+  labelField: string
 ): Array<SelectBaseOption & { path: CascaderOption[] }> {
   const selectOptions: Array<SelectBaseOption & { path: CascaderOption[] }> = []
   const path: CascaderOption[] = []
@@ -42,7 +43,9 @@ function createSelectOptions (
         const { rawNode } = tmNode
         path.push(rawNode)
         selectOptions.push({
-          label: path.map((rawNodeInPath) => rawNodeInPath.label).join('/'),
+          label: path
+            .map((rawNodeInPath) => rawNodeInPath[labelField])
+            .join('/'),
           value: tmNode.key,
           path: Array.from(path)
         })

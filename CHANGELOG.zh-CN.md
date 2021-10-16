@@ -4,6 +4,10 @@
 
 - `n-menu` 新增 `dropdown-props` 属性，关闭 [#1345](https://github.com/TuSimple/naive-ui/issues/1345)
 
+### Fixes
+
+- 修复 `n-cascader` 的 `filter` 属性使用时失效
+
 ## 2.19.8 (2021-10-14)
 
 ### Fixes

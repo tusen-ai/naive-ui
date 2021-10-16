@@ -51,6 +51,10 @@ export default defineComponent({
       type: Function as PropType<Filter>,
       default: (pattern: string, _: CascaderOption, path: CascaderOption[]) =>
         path.some((option) => option.label && ~option.label.indexOf(pattern))
+    },
+    labelField: {
+      type: String,
+      default: 'label'
     }
   },
   setup (props) {
@@ -71,23 +75,27 @@ export default defineComponent({
     const selectOptionsRef = computed(() => {
       return createSelectOptions(
         props.tmNodes,
-        mergedCheckStrategyRef.value === 'child'
+        mergedCheckStrategyRef.value === 'child',
+        props.labelField
       )
     })
     const filteredSelectOptionsRef = computed(() => {
       const { filter, pattern } = props
-      return selectOptionsRef.value
-        .filter((option) => {
-          return filter(
-            pattern,
-            { label: option.label as string, value: option.value },
-            option.path
-          )
-        })
-        .map((option) => ({
-          value: option.value,
-          label: option.label
-        }))
+      if (pattern) {
+        return selectOptionsRef.value
+          .filter((option) => {
+            return filter(
+              pattern,
+              { label: option.label as string, value: option.value },
+              option.path
+            )
+          })
+          .map((option) => ({
+            value: option.value,
+            label: option.label
+          }))
+      }
+      return []
     })
     const selectTreeMateRef = computed(() => {
       return createTreeMate<
