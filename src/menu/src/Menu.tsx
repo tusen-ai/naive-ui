@@ -34,6 +34,7 @@ import {
 import { layoutSiderInjectionKey } from '../../layout/src/interface'
 import { FollowerPlacement } from 'vueuc'
 import { useCheckDeprecated } from './useCheckDeprecated'
+import { DropdownProps } from '../../dropdown'
 
 const menuProps = {
   ...(useTheme.props as ThemeProps<MenuTheme>),
@@ -106,6 +107,7 @@ const menuProps = {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom'
   },
+  dropdownProps: Object as PropType<DropdownProps>,
   accordion: Boolean,
   // deprecated
   items: Array as PropType<Array<MenuOption | MenuGroupOption>>,
