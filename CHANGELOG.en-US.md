@@ -16,6 +16,7 @@
 - `n-menu` add `dropdown-props` prop, closes [#1345](https://github.com/TuSimple/naive-ui/issues/1345).
 - `n-input` add `count` slot, closes [#1314](https://github.com/TuSimple/naive-ui/issues/1314).
 - `n-time-picker` add `use-12-hours` prop, closes [#547](https://github.com/TuSimple/naive-ui/issues/547).
+- `n-input-number` add `focus` & `blur` methods.
 
 ## 2.19.8 (2021-10-14)
 
