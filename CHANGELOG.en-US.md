@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-collapse`'s expanded status is lost when using `v-if` with `n-collapse-item`, closes [#1387](https://github.com/TuSimple/naive-ui/issues/1387).
+
 ### Feats
 
 - `n-menu` add `dropdown-props` prop, closes [#1345](https://github.com/TuSimple/naive-ui/issues/1345).

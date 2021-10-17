@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-collapse` 在 `n-collapse-item` 使用 `v-if` 是展开状态丢失，关闭 [#1387](https://github.com/TuSimple/naive-ui/issues/1387)
+
 ### Feats
 
 - `n-menu` 新增 `dropdown-props` 属性，关闭 [#1345](https://github.com/TuSimple/naive-ui/issues/1345)

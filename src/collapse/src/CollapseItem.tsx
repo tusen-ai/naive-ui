@@ -2,7 +2,6 @@ import { h, defineComponent, PropType, inject, computed, renderSlot } from 'vue'
 import { createId } from 'seemly'
 import { useMemo } from 'vooks'
 import { ChevronRightIcon as ArrowIcon } from '../../_internal/icons'
-import { useInjectionCollection } from '../../_utils/composable'
 import { NBaseIcon } from '../../_internal'
 import { ExtractPublicPropTypes, throwError } from '../../_utils'
 import { collapseInjectionKey } from './Collapse'
@@ -37,11 +36,7 @@ export default defineComponent({
       mergedClsPrefixRef,
       slots: collapseSlots
     } = NCollapse
-    useInjectionCollection(
-      collapseInjectionKey,
-      'collectedItemNames',
-      mergedNameRef
-    )
+
     const collapsedRef = computed<boolean>(() => {
       const { value: expandedNames } = expandedNamesRef
       if (Array.isArray(expandedNames)) {

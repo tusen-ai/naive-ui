@@ -11,14 +11,13 @@ import {
   CSSProperties,
   Slots
 } from 'vue'
-import { intersection } from 'lodash-es'
+import { useMergedState } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, ExtractPublicPropTypes, warn } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { collapseLight, CollapseTheme } from '../styles'
 import style from './styles/index.cssr'
-import { useMergedState } from 'vooks'
 import {
   OnItemHeaderClick,
   OnUpdateExpandedNames,
@@ -83,7 +82,6 @@ export interface NCollapseInjection {
   props: ExtractPropTypes<typeof collapseProps>
   expandedNamesRef: Ref<string | number | Array<string | number> | null>
   mergedClsPrefixRef: Ref<string>
-  collectedItemNames: Array<string | number>
   slots: Slots
   toggleItem: (
     collapse: boolean,
@@ -108,7 +106,6 @@ export default defineComponent({
       controlledExpandedNamesRef,
       uncontrolledExpandedNamesRef
     )
-    const collectedItemNames: string[] = []
     const themeRef = useTheme(
       'Collapse',
       'Collapse',
@@ -164,7 +161,7 @@ export default defineComponent({
           doUpdateExpandedNames([name])
           doItemHeaderClick({ name, expanded: true, event })
         } else {
-          const activeNames = intersection(expandedNames, collectedItemNames)
+          const activeNames = expandedNames
           const index = activeNames.findIndex(
             (activeName) => name === activeName
           )
@@ -184,7 +181,6 @@ export default defineComponent({
       props,
       mergedClsPrefixRef,
       expandedNamesRef: mergedExpandedNamesRef,
-      collectedItemNames,
       slots,
       toggleItem
     })
