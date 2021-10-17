@@ -189,7 +189,7 @@ export default defineComponent({
       progressStatus: progressStatusRef,
       buttonType: buttonTypeRef,
       showProgress: showProgressRef,
-      disabled: NUpload.disabledRef,
+      disabled: NUpload.mergedDisabledRef,
       showCancelButton: showCancelButtonRef,
       showRemoveButton: showRemoveButtonRef,
       showDownloadButton: showDownloadButtonRef,
