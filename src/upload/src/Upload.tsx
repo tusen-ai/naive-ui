@@ -79,8 +79,7 @@ function createXhrHandlers (
     handleXHRError (e) {
       const fileAfterChange: FileInfo = Object.assign({}, file, {
         status: 'error',
-        percentage,
-        file: null
+        percentage
       })
       XhrMap.delete(file.id)
       doChange(fileAfterChange, e)

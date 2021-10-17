@@ -1,4 +1,4 @@
-# Pictures Wall
+# Pictures wall
 
 `list-type = "image-card"`.
 

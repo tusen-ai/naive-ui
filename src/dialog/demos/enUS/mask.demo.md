@@ -1,4 +1,4 @@
-# Click on Mask
+# Click on mask
 
 I think user is smart enough that they know if nothing happens after mask is clicked, they should click at confirm or cancel button.
 

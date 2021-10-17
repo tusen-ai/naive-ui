@@ -6,6 +6,7 @@
 
 - 修复 `n-collapse` 在 `n-collapse-item` 使用 `v-if` 是展开状态丢失，关闭 [#1387](https://github.com/TuSimple/naive-ui/issues/1387)
 - 修复 `n-dialog` 的关闭按钮会被内容遮盖，关闭 [#1381](https://github.com/TuSimple/naive-ui/issues/1381)
+- 修复 `n-upload` 上传失败后重试时文件为 `null`，关闭 [#1316](https://github.com/TuSimple/naive-ui/issues/1316)
 
 ### Feats
 

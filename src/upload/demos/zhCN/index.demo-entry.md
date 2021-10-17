@@ -15,6 +15,7 @@ before-upload
 image-style
 image-card-style
 abstract
+retry-debug
 ```
 
 ## API
