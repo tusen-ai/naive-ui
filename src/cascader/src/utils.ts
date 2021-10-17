@@ -32,8 +32,12 @@ function createSelectOptions (
   tmNodes: TmNode[],
   checkStrategyIsChild: boolean,
   labelField: string
-): Array<SelectBaseOption & { path: CascaderOption[] }> {
-  const selectOptions: Array<SelectBaseOption & { path: CascaderOption[] }> = []
+): Array<
+  SelectBaseOption & { rawNode: CascaderOption, path: CascaderOption[] }
+  > {
+  const selectOptions: Array<
+  SelectBaseOption & { rawNode: CascaderOption, path: CascaderOption[] }
+  > = []
   const path: CascaderOption[] = []
   traverseWithCallback(
     tmNodes,
@@ -47,6 +51,7 @@ function createSelectOptions (
             .map((rawNodeInPath) => rawNodeInPath[labelField])
             .join('/'),
           value: tmNode.key,
+          rawNode: tmNode.rawNode,
           path: Array.from(path)
         })
       }

@@ -7,16 +7,14 @@
 - 修复 `n-collapse` 在 `n-collapse-item` 使用 `v-if` 是展开状态丢失，关闭 [#1387](https://github.com/TuSimple/naive-ui/issues/1387)
 - 修复 `n-dialog` 的关闭按钮会被内容遮盖，关闭 [#1381](https://github.com/TuSimple/naive-ui/issues/1381)
 - 修复 `n-upload` 上传失败后重试时文件为 `null`，关闭 [#1316](https://github.com/TuSimple/naive-ui/issues/1316)
+- 修复 `n-cascader` 的 `filter` 属性不生效
+- 修复 `n-cascader` 的 `label-field` 属性使 `filter` 失效
 
 ### Feats
 
 - `n-menu` 新增 `dropdown-props` 属性，关闭 [#1345](https://github.com/TuSimple/naive-ui/issues/1345)
 - `n-input` 新增 `count` slot，关闭 [#1314](https://github.com/TuSimple/naive-ui/issues/1314)
 - `n-time-picker` 新增 `use-12-hours` 属性，关闭 [#547](https://github.com/TuSimple/naive-ui/issues/547)
-
-### Fixes
-
-- 修复 `n-cascader` 的 `filter` 属性使用时失效
 
 ## 2.19.8 (2021-10-14)
 

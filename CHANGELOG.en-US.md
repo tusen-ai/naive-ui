@@ -7,16 +7,14 @@
 - Fix `n-collapse`'s expanded status is lost when using `v-if` with `n-collapse-item`, closes [#1387](https://github.com/TuSimple/naive-ui/issues/1387).
 - Fix `n-dialog`'s close button will be overlayed with content, closes [#1381](https://github.com/TuSimple/naive-ui/issues/1381).
 - Fix `n-upload` file is set to `null` after upload failure, closes [#1316](https://github.com/TuSimple/naive-ui/issues/1316).
+- Fix `n-cascader`'s `filter` prop not working.
+- Fix `n-cascader`'s `label-field` prop breaks filter.
 
 ### Feats
 
 - `n-menu` add `dropdown-props` prop, closes [#1345](https://github.com/TuSimple/naive-ui/issues/1345).
 - `n-input` add `count` slot, closes [#1314](https://github.com/TuSimple/naive-ui/issues/1314).
 - `n-time-picker` add `use-12-hours` prop, closes [#547](https://github.com/TuSimple/naive-ui/issues/547).
-
-### Fixes
-
-- Fix `n-cascader`'s `filter` prop lose efficacy.
 
 ## 2.19.8 (2021-10-14)
 

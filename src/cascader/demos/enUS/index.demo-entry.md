@@ -30,12 +30,12 @@ custom-field
 | disabled | `boolean` | `false` | Whether to disable the cascader. |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | If `remote` is set, `'hover'` won't work. |
 | filterable | `boolean` | `false` | Note: If `remote` is set, this won't have any effect. |
-| filter | `(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean` | A string based filter algorithm. | Filter function of the cascader. |
+| filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | A string based filter algorithm. | Filter function of the cascader. |
 | value-field | `string` | `'value'` | The value field in `CascaderOption`. |
 | label-field | `string` | `'label'` | The label field in `CascaderOption`. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple select mode. `responsive` will keep all the tags in single line. |
 | multiple | `boolean` | `false` | Whether to allow multiple options being selected. |
-| options | `Array<CascaderOption>` | required | Options of the cascader. |
+| options | `CascaderOption[]` | required | Options of the cascader. |
 | placeholder | `string` | `'Please Select'` | Placeholder text. |
 | remote | `boolean` | `false` | Whether to obtain data remotely. |
 | separator | `string` | `' / '` | Selected option path value separator (used with `show-path`). |

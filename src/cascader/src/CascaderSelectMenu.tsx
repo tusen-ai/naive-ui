@@ -54,7 +54,7 @@ export default defineComponent({
     },
     labelField: {
       type: String,
-      default: 'label'
+      required: true
     }
   },
   setup (props) {
@@ -81,21 +81,16 @@ export default defineComponent({
     })
     const filteredSelectOptionsRef = computed(() => {
       const { filter, pattern } = props
-      if (pattern) {
-        return selectOptionsRef.value
-          .filter((option) => {
-            return filter(
-              pattern,
-              { label: option.label as string, value: option.value },
-              option.path
-            )
+      return (
+        pattern
+          ? selectOptionsRef.value
+          : selectOptionsRef.value.filter((option) => {
+            return filter(pattern, option.rawNode, option.path)
           })
-          .map((option) => ({
-            value: option.value,
-            label: option.label
-          }))
-      }
-      return []
+      ).map((option) => ({
+        value: option.value,
+        label: option.label
+      }))
     })
     const selectTreeMateRef = computed(() => {
       return createTreeMate<
