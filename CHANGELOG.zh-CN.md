@@ -10,6 +10,7 @@
 ### Feats
 
 - `n-menu` 新增 `dropdown-props` 属性，关闭 [#1345](https://github.com/TuSimple/naive-ui/issues/1345)
+- `n-input` 新增 `count` slot，关闭 [#1314](https://github.com/TuSimple/naive-ui/issues/1314)
 
 ## 2.19.8 (2021-10-14)
 
