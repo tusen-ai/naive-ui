@@ -36,6 +36,7 @@ retry-debug
 | file-list | `Array<UploadFileInfo>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |
 | list-type | `string` | `'text'` | 文件列表的内建样式，`text`、`image` 和 `image-card` |
+| max | `number` | `undefined` | 限制上传文件数量 |
 | method | `string` | `'POST'` | HTTP 请求的方法 |
 | multiple | `boolean` | `false` | 是否支持多个文件 |
 | name | `string` | `'file'` | 文件在提交表单中的字段名 |

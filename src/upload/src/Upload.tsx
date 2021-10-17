@@ -256,7 +256,8 @@ const uploadProps = {
   },
   onPreview: Function as PropType<OnPreview>,
   createThumbnailUrl: Function as PropType<CreateThumbnailUrl>,
-  abstract: Boolean
+  abstract: Boolean,
+  max: Number
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -281,7 +282,17 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
-    const { mergedDisabledRef } = formItem
+    const mergedDisabledRef = computed(() => {
+      const { max } = props
+      const { mergedDisabledRef } = formItem
+      if (mergedDisabledRef.value) {
+        return true
+      }
+      if (max !== undefined) {
+        return mergedFileListRef.value.length >= max
+      }
+      return false
+    })
     const uncontrolledFileListRef = ref(props.defaultFileList)
     const controlledFileListRef = toRef(props, 'fileList')
     const inputElRef = ref<HTMLInputElement | null>(null)

@@ -24,12 +24,14 @@
 - Fix `n-data-table` has duplicate right border when it has multiple level headers.
 - Fix `n-scrollbar` doesn't support `scrollTo`, closes [#1346](https://github.com/TuSimple/naive-ui/issues/1346).
 - Fix `n-ellipsis`'s `expand-trigger` prop not show `pointer` cursor when content is short when `tooltip = false`, closes [#1299](https://github.com/TuSimple/naive-ui/issues/1299).
+- Fix `n-upload`'s `disabled` prop's style not working, closes [#1237](https://github.com/TuSimple/naive-ui/issues/1237).
 
 ### Feats
 
 - `n-auto-complete` add `get-show` prop, closes [#1292](https://github.com/TuSimple/naive-ui/issues/1292).
 - `n-select` add `input-props` prop, closes [#1351](https://github.com/TuSimple/naive-ui/issues/1351).
 - `n-color-picker` add `swatches` prop, ref [#1281](https://github.com/TuSimple/naive-ui/issues/1281).
+- `n-upload` add `max` prop.
 
 ### i18n
 
