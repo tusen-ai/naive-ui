@@ -284,8 +284,7 @@ export default defineComponent({
     const formItem = useFormItem(props)
     const mergedDisabledRef = computed(() => {
       const { max } = props
-      const { mergedDisabledRef } = formItem
-      if (mergedDisabledRef.value) {
+      if (formItem.mergedDisabledRef.value) {
         return true
       }
       if (max !== undefined) {
@@ -323,7 +322,14 @@ export default defineComponent({
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files || files.length === 0) return
       const { onBeforeUpload } = props
-      const filesAsArray = props.multiple ? Array.from(files) : [files[0]]
+      let filesAsArray = props.multiple ? Array.from(files) : [files[0]]
+      const { max } = props
+      if (max) {
+        filesAsArray = filesAsArray.slice(
+          0,
+          max - mergedFileListRef.value.length
+        )
+      }
 
       void Promise.all(
         filesAsArray.map(async (file) => {
@@ -491,7 +497,6 @@ export default defineComponent({
     provide(uploadInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
-      disabledRef: mergedDisabledRef,
       showCancelButtonRef: toRef(props, 'showCancelButton'),
       showDownloadButtonRef: toRef(props, 'showDownloadButton'),
       showRemoveButtonRef: toRef(props, 'showRemoveButton'),

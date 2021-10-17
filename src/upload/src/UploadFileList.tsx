@@ -62,9 +62,7 @@ export default defineComponent({
           style={[cssVarsRef.value, fileListStyleRef.value as CSSProperties]}
         >
           {renderUploadFileList()}
-          {isImageCardTypeRef.value && slots.default && (
-            <NUploadTrigger>{slots}</NUploadTrigger>
-          )}
+          {isImageCardTypeRef.value && <NUploadTrigger>{slots}</NUploadTrigger>}
         </div>
       )
     }

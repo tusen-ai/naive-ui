@@ -103,6 +103,7 @@ const menuProps = {
   renderExtra: Function as PropType<
   (option: MenuOption | MenuGroupOption) => VNodeChild
   >,
+  /** TODO: deprecate it */
   dropdownPlacement: {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom'
