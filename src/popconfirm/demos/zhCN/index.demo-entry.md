@@ -25,7 +25,7 @@ actions
 | on-positive-click | `() => boolean \| Promise<boolean> \| any` | `undefined` | 点击确定的回调函数 |
 | on-negative-click | `() => boolean \| Promise<boolean> \| any` | `undefined` | 点击取消的回调函数 |
 
-更多 props 请参考 [Popover](popover#Props).
+更多 props 请参考 [Popover](popover#Popover-Props).
 
 ### Popconfirm Slots
 

@@ -25,7 +25,7 @@ actions
 | on-positive-click | `() => boolean \| Promise<boolean> \| any` | `undefined` | Callback of confirmation. |
 | on-negative-click | `() => boolean \| Promise<boolean> \| any` | `undefined` | Callback of cancel. |
 
-For more props, see [popover](popover#Props).
+For more props, see [popover](popover#Popover-Props).
 
 ### Popconfirm Slots
 
