@@ -17,6 +17,7 @@
 - `n-input` 新增 `count` slot，关闭 [#1314](https://github.com/TuSimple/naive-ui/issues/1314)
 - `n-time-picker` 新增 `use-12-hours` 属性，关闭 [#547](https://github.com/TuSimple/naive-ui/issues/547)
 - `n-input-number` 新增 `focus` 和 `blur` 方法
+- `n-config-provider` 新增 `breakpoints` 属性，关闭 [#1379](https://github.com/TuSimple/naive-ui/issues/1379)
 
 ## 2.19.8 (2021-10-14)
 

@@ -27,6 +27,7 @@
 - Fix `n-scrollbar` doesn't support `scrollTo`, closes [#1346](https://github.com/TuSimple/naive-ui/issues/1346).
 - Fix `n-ellipsis`'s `expand-trigger` prop not show `pointer` cursor when content is short when `tooltip = false`, closes [#1299](https://github.com/TuSimple/naive-ui/issues/1299).
 - Fix `n-upload`'s `disabled` prop's style not working, closes [#1237](https://github.com/TuSimple/naive-ui/issues/1237).
+- `n-config-provider` add `breakpoints` prop, closes [#1379](https://github.com/TuSimple/naive-ui/issues/1379).
 
 ### Feats
 

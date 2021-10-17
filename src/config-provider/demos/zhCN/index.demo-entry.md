@@ -22,6 +22,7 @@ transparent
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | abstract | `boolean` | `false` | 是否不存在 DOM 包裹 |
+| breakpoints | `{ [k: string]: number }` | `{ xs: 0, s: 640, m: 1024, l: 1280, xl: 1536, xxl: 1920 }` | 屏幕响应式断点，对 `n-grid` 生效。这个属性不是响应式的，你需要在组件第一次挂载时就设定好 |
 | cls-prefix | `string` | `n` | 内部所有组件的类的前缀，仅首次设定会生效 |
 | date-locale | `DateLocale \| null` | `undefined` | 对后代组件生效的日期语言对象，为 `null` 时会使用默认 `enUS`，为 `undefined` 时会继承上级 `n-config-provider` |
 | tag | `string` | `'div'` | `n-config-provider` 被渲染成的元素 |

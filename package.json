@@ -134,7 +134,7 @@
     "treemate": "^0.3.8",
     "vdirs": "^0.1.4",
     "vfonts": "^0.1.0",
-    "vooks": "^0.2.6",
+    "vooks": "^0.2.10",
     "vueuc": "^0.4.13"
   },
   "sideEffects": false,
