@@ -14,6 +14,10 @@
 - `n-input` 新增 `count` slot，关闭 [#1314](https://github.com/TuSimple/naive-ui/issues/1314)
 - `n-time-picker` 新增 `use-12-hours` 属性，关闭 [#547](https://github.com/TuSimple/naive-ui/issues/547)
 
+### Fixes
+
+- 修复 `n-cascader` 的 `filter` 属性使用时失效
+
 ## 2.19.8 (2021-10-14)
 
 ### Fixes

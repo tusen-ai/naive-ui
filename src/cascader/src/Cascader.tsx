@@ -924,6 +924,8 @@ export default defineComponent({
                       pattern={this.pattern}
                       multiple={this.multiple}
                       tmNodes={this.treeMate.treeNodes}
+                      filter={this.filter}
+                      labelField={this.labelField}
                       style={this.cssVars as CSSProperties}
                     />
                   )
