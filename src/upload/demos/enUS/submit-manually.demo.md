@@ -1,4 +1,4 @@
-# Uncontrolled Manually Submit
+# Uncontrolled manually submit
 
 You can use `submit` method to submit in uncontrolled manner. Also you can do it in controlled manner in another way.
 

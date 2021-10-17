@@ -79,8 +79,7 @@ function createXhrHandlers (
     handleXHRError (e) {
       const fileAfterChange: FileInfo = Object.assign({}, file, {
         status: 'error',
-        percentage,
-        file: null
+        percentage
       })
       XhrMap.delete(file.id)
       doChange(fileAfterChange, e)
@@ -257,7 +256,8 @@ const uploadProps = {
   },
   onPreview: Function as PropType<OnPreview>,
   createThumbnailUrl: Function as PropType<CreateThumbnailUrl>,
-  abstract: Boolean
+  abstract: Boolean,
+  max: Number
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -282,7 +282,16 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
-    const { mergedDisabledRef } = formItem
+    const mergedDisabledRef = computed(() => {
+      const { max } = props
+      if (formItem.mergedDisabledRef.value) {
+        return true
+      }
+      if (max !== undefined) {
+        return mergedFileListRef.value.length >= max
+      }
+      return false
+    })
     const uncontrolledFileListRef = ref(props.defaultFileList)
     const controlledFileListRef = toRef(props, 'fileList')
     const inputElRef = ref<HTMLInputElement | null>(null)
@@ -313,7 +322,14 @@ export default defineComponent({
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files || files.length === 0) return
       const { onBeforeUpload } = props
-      const filesAsArray = props.multiple ? Array.from(files) : [files[0]]
+      let filesAsArray = props.multiple ? Array.from(files) : [files[0]]
+      const { max } = props
+      if (max) {
+        filesAsArray = filesAsArray.slice(
+          0,
+          max - mergedFileListRef.value.length
+        )
+      }
 
       void Promise.all(
         filesAsArray.map(async (file) => {
@@ -481,7 +497,6 @@ export default defineComponent({
     provide(uploadInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
-      disabledRef: mergedDisabledRef,
       showCancelButtonRef: toRef(props, 'showCancelButton'),
       showDownloadButtonRef: toRef(props, 'showDownloadButton'),
       showRemoveButtonRef: toRef(props, 'showRemoveButton'),

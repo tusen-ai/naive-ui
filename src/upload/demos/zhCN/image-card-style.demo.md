@@ -18,10 +18,7 @@
   :default-file-list="previewFileList"
   list-type="image-card"
   @preview="handlePreview"
->
-  点击上传
-</n-upload>
-
+/>
 <n-modal
   v-model:show="showModal"
   preset="card"

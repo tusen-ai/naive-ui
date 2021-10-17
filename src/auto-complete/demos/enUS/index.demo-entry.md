@@ -24,7 +24,7 @@ show-options-by-value
 | clearable | `boolean` | `false` | Whether auto complete is clearable. |
 | default-value | `string` | `null` | Default value of auto complete. |
 | disabled | `boolean` | `false` | Whether the auto complete is disabled. |
-| get-show | `(value: string \| null) => boolean` | `undefined` | Based on value to determine whether to show menu when focusing. |
+| get-show | `(value: string) => boolean` | `undefined` | Based on value to determine whether to show menu when focusing. |
 | loading | `boolean` | `false` | Whether to show a loading status. |
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | Auto complete options. |
 | placeholder | `string` | `'Please Input'` | Auto complete's placeholder. |

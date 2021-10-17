@@ -1,4 +1,4 @@
-# Before Upload Hook
+# Before upload hook
 
 Use `before-upload` to prevent uploading.
 

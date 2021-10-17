@@ -41,7 +41,14 @@ show-button
 
 ### InputNumber Slots
 
-| Name   | Parameters | Description                    |
-| ------ | ---------- | ------------------------------ |
+| Name   | Parameters | Description          |
+| ------ | ---------- | -------------------- |
 | prefix | `()`       | Prefix content slot. |
 | suffix | `()`       | Suffix content slot. |
+
+### InputNumber Methods
+
+| Name   | Type         | Description             |
+| ------ | ------------ | ----------------------- |
+| prefix | `() => void` | Focus the input number. |
+| suffix | `() => void` | Blur the input number.  |

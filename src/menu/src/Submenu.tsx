@@ -171,6 +171,7 @@ export default defineComponent({
     }
     return this.root ? (
       <NDropdown
+        {...this.menuProps?.dropdownProps}
         builtinThemeOverrides={{
           fontSizeLarge: '14px',
           optionIconSizeLarge: '18px'

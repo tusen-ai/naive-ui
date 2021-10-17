@@ -11,6 +11,7 @@ disabled-time
 step-time
 format
 actions
+hours12
 ```
 
 ## API
@@ -33,6 +34,7 @@ actions
 | is-second-disabled | `(second: number, minute: number, hour: number) => boolean` | `() => false` | Callback function for disabling seconds. |
 | placeholder | `string` | `'Select Time'` | Placeholder. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
+| use-12-hours | `boolean` | `false` | Whether to use 12-hour clock panel. |
 | value | `number \| null` | `undefined` | Value in controlled mode. |
 | on-blur | `() => void` | `undefined` | Callback when the selection box loses focus. |
 | on-focus | `() => void` | `undefined` | Callback when the selection box gets focus. |

@@ -1,4 +1,4 @@
-# Split Trigger and List
+# Split trigger and list
 
 Set `abstract` on `n-upload`.
 

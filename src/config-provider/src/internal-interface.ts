@@ -219,7 +219,10 @@ export type RtlEnabledState = Partial<
 Record<keyof GlobalThemeWithoutCommon, RtlItem>
 >
 
+export type Breakpoints = { [k: string]: number } | undefined
+
 export interface ConfigProviderInjection {
+  mergedBreakpointsRef: Ref<Breakpoints | undefined>
   mergedClsPrefixRef: Ref<string | undefined>
   mergedBorderedRef: Ref<boolean | undefined>
   mergedNamespaceRef: Ref<string | undefined>

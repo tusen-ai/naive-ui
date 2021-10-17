@@ -135,7 +135,6 @@ export default defineComponent({
     function normalizeOutput (parsed: ParsedColor): string {
       const { mode: modeProp } = props
       let { value, mode: swatchColorMode } = parsed
-      if (swatchColorMode === modeProp) return value
       // color name is converted to hex
       if (!swatchColorMode) {
         swatchColorMode = 'hex'
@@ -147,6 +146,7 @@ export default defineComponent({
           value = '#000000'
         }
       }
+      if (swatchColorMode === modeProp) return value
 
       // swatch value to current mode value
       const conversions = covert[swatchColorMode]

@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## 2.19.9 (2021-10-18)
+
+### Fixes
+
+- 修复 `n-collapse` 在 `n-collapse-item` 使用 `v-if` 是展开状态丢失，关闭 [#1387](https://github.com/TuSimple/naive-ui/issues/1387)
+- 修复 `n-dialog` 的关闭按钮会被内容遮盖，关闭 [#1381](https://github.com/TuSimple/naive-ui/issues/1381)
+- 修复 `n-upload` 上传失败后重试时文件为 `null`，关闭 [#1316](https://github.com/TuSimple/naive-ui/issues/1316)
+- 修复 `n-cascader` 的 `filter` 属性不生效
+- 修复 `n-cascader` 的 `label-field` 属性使 `filter` 失效
+- 修复 `n-cascader` 的 `separator` 属性对于过滤菜单无效
+
+### Feats
+
+- `n-menu` 新增 `dropdown-props` 属性，关闭 [#1345](https://github.com/TuSimple/naive-ui/issues/1345)
+- `n-input` 新增 `count` slot，关闭 [#1314](https://github.com/TuSimple/naive-ui/issues/1314)
+- `n-time-picker` 新增 `use-12-hours` 属性，关闭 [#547](https://github.com/TuSimple/naive-ui/issues/547)
+- `n-input-number` 新增 `focus` 和 `blur` 方法
+- `n-config-provider` 新增 `breakpoints` 属性，关闭 [#1379](https://github.com/TuSimple/naive-ui/issues/1379)
+
 ## 2.19.8 (2021-10-14)
 
 ### Fixes
@@ -8,12 +27,14 @@
 - 修复 `n-data-table` 多级表头右侧边框重复
 - 修复 `n-scrollbar` 不支持 `scrollTo`，关闭 [#1346](https://github.com/TuSimple/naive-ui/issues/1346)
 - 修复 `n-ellipsis` 的 `expand-trigger` 属性在内容不显示提示并且 `tooltip = false` 的时候禁用鼠标样式的问题，关闭 [#1299](https://github.com/TuSimple/naive-ui/issues/1299)
+- 修复 `n-upload` 的 `disabled` 属性的样式问题，关闭 [#1237](https://github.com/TuSimple/naive-ui/issues/1237)
 
 ### Feats
 
 - `n-auto-complete` 新增 `get-show` 属性，关闭 [#1292](https://github.com/TuSimple/naive-ui/issues/1292)
 - `n-select` 新增 `input-props` 属性，关闭 [#1351](https://github.com/TuSimple/naive-ui/issues/1351)
 - `n-color-picker` 新增 `swatches` 属性，有关 [#1281](https://github.com/TuSimple/naive-ui/issues/1281)
+- `n-upload` 新增 `max` 属性
 
 ### i18n
 

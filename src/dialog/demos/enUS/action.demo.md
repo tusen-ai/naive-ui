@@ -1,4 +1,4 @@
-# Custom Action
+# Customize action
 
 Sometimes you may want to customize `action` and `content` .
 
