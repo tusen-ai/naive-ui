@@ -161,7 +161,7 @@ export default defineComponent({
           doUpdateExpandedNames([name])
           doItemHeaderClick({ name, expanded: true, event })
         } else {
-          const activeNames = expandedNames
+          const activeNames = expandedNames.slice()
           const index = activeNames.findIndex(
             (activeName) => name === activeName
           )
