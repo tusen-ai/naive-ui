@@ -9,6 +9,7 @@
 - 修复 `n-upload` 上传失败后重试时文件为 `null`，关闭 [#1316](https://github.com/TuSimple/naive-ui/issues/1316)
 - 修复 `n-cascader` 的 `filter` 属性不生效
 - 修复 `n-cascader` 的 `label-field` 属性使 `filter` 失效
+- 修复 `n-cascader` 的 `separator` 属性对于过滤菜单无效
 
 ### Feats
 

@@ -9,6 +9,7 @@
 - Fix `n-upload` file is set to `null` after upload failure, closes [#1316](https://github.com/TuSimple/naive-ui/issues/1316).
 - Fix `n-cascader`'s `filter` prop not working.
 - Fix `n-cascader`'s `label-field` prop breaks filter.
+- Fix `n-cascader`'s `separator` prop isn't appiled to filter select menu.
 
 ### Feats
 

@@ -47,12 +47,12 @@ export default defineComponent({
       type: Array as PropType<TmNode[]>,
       default: () => []
     },
-    filter: {
-      type: Function as PropType<Filter>,
-      default: (pattern: string, _: CascaderOption, path: CascaderOption[]) =>
-        path.some((option) => option.label && ~option.label.indexOf(pattern))
-    },
+    filter: Function as PropType<Filter>,
     labelField: {
+      type: String,
+      required: true
+    },
+    separator: {
       type: String,
       required: true
     }
@@ -76,17 +76,29 @@ export default defineComponent({
       return createSelectOptions(
         props.tmNodes,
         mergedCheckStrategyRef.value === 'child',
-        props.labelField
+        props.labelField,
+        props.separator
       )
     })
+    const mergedFilterRef = computed(() => {
+      const { filter } = props
+      if (filter) return filter
+      const { labelField } = props
+      return (pattern: string, _: CascaderOption, path: CascaderOption[]) =>
+        path.some(
+          (option) =>
+            option[labelField] && ~(option[labelField] as any).indexOf(pattern)
+        )
+    })
     const filteredSelectOptionsRef = computed(() => {
-      const { filter, pattern } = props
+      const { pattern } = props
+      const { value: mergedFilter } = mergedFilterRef
       return (
         pattern
-          ? selectOptionsRef.value
-          : selectOptionsRef.value.filter((option) => {
-            return filter(pattern, option.rawNode, option.path)
+          ? selectOptionsRef.value.filter((option) => {
+            return mergedFilter(pattern, option.rawNode, option.path)
           })
+          : selectOptionsRef.value
       ).map((option) => ({
         value: option.value,
         label: option.label
