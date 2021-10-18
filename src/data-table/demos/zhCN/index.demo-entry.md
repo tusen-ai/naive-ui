@@ -80,7 +80,7 @@ scroll-debug
 | on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: DataTableColumn)` | `undefined` | filters 数据改变时触发的回调函数 |
 | on-update:page | `(page: number)` | `undefined` | page 改变时触发的回调函数 |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | page-size 改变时触发的回调函数 |
-| on-update:sorter | type Option = { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } <br/> `(options: Option \| Option[] \| null) => void` | `undefined` | 如果变动列为多列排序则返回 `Option[] \| null` 否则返回 `Option \| null` |
+| on-update:sorter | `(options: SortState \| SortState[] \| null) => void` | `undefined` | 如果变动列为多列排序则返回 `SortState[] \| null` 否则返回 `SortState \| null`，类型见 <n-a href="#SortState-Type">SortState Type</n-a> |
 
 #### DataTableColumn Properties
 
@@ -138,6 +138,16 @@ type DataTableCreateSummary = (
         rowSpan?: number
       }
     }
+```
+
+#### SortState Type
+
+```__ts
+type SortState = {
+  columnKey: string | number,
+  sorter: 'default' | function | boolean,
+  order: 'ascend' | 'descend' \ false
+}
 ```
 
 ### DataTable Methods
