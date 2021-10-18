@@ -181,7 +181,10 @@ export default defineComponent({
             // @ts-expect-error
             style={{ '--swatch-valid-color': swatch.legalValue }}
           >
-            <div class={`${clsPrefix}-color-picker-swatch__fill`} />
+            <div
+              class={`${clsPrefix}-color-picker-swatch__fill`}
+              style={{ background: swatch.legalValue }}
+            />
           </div>
         ))}
       </div>
