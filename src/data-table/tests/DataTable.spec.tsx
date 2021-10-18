@@ -1087,4 +1087,26 @@ describe('props.columns', () => {
       'test-age'
     )
   })
+
+  it('should work with `render` prop', async () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        render (rowData: any, rowIndex: number) {
+          return `${String(rowData.name)}-${rowIndex}`
+        }
+      }
+    ]
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} row-key={rowKey} />
+    ))
+    expect(wrapper.find('tbody [data-col-key="name"]').text()).toContain('0-0')
+  })
 })
