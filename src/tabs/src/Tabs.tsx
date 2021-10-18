@@ -28,6 +28,8 @@ import {
   Addable,
   OnClose,
   OnCloseImpl,
+  BeforeLeave,
+  BeforeLeaveImpl,
   tabsInjectionKey,
   TabsType
 } from './interface'
@@ -58,6 +60,7 @@ const tabsProps = {
     type: Number,
     default: 0
   },
+  onBeforeLeave: [Function, Array] as PropType<MaybeArray<BeforeLeave>>,
   onAdd: Function as PropType<() => void>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -177,6 +180,14 @@ export default defineComponent({
         updateBarStyle(tabEl)
       }
     }
+    function handleBeforeLeave (
+      activeName: string | number,
+      oldActiveName: string | number | null
+    ): boolean | Promise<boolean> {
+      const { onBeforeLeave } = props
+      if (!onBeforeLeave) return true
+      return (onBeforeLeave as BeforeLeaveImpl)(activeName, oldActiveName)
+    }
     function handleTabClick (panelName: string | number): void {
       doUpdateValue(panelName)
     }
@@ -275,6 +286,7 @@ export default defineComponent({
       typeRef: toRef(props, 'type'),
       closableRef: toRef(props, 'closable'),
       valueRef: mergedValueRef,
+      handleBeforeLeave,
       handleTabClick,
       handleClose,
       handleAdd

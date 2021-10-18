@@ -22,6 +22,7 @@ export default defineComponent({
       closableRef,
       tabStyleRef,
       handleAdd,
+      handleBeforeLeave,
       handleTabClick,
       handleClose
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -48,7 +49,21 @@ export default defineComponent({
           handleAdd()
           return
         }
-        handleTabClick(props.name)
+        if (props.name !== valueRef.value) {
+          const result = handleBeforeLeave(props.name, valueRef.value)
+          if (typeof result === 'boolean') {
+            if (result) handleTabClick(props.name)
+          } else {
+            result.then(
+              () => {
+                handleTabClick(props.name)
+              },
+              () => {
+                // not allowed to change tab
+              }
+            )
+          }
+        }
       }
     }
   },
