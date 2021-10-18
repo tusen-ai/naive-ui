@@ -22,7 +22,7 @@ import {
   MainTableBodyRef,
   TmNode,
   ExpandedRow,
-  BeforeExpandedRow
+  ExpandableRow
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import Cell from './Cell'
@@ -40,7 +40,7 @@ type RowRenderInfo =
   }
   | TmNode
   | ExpandedRow
-  | BeforeExpandedRow
+  | ExpandableRow
 
 function flatten (rows: TmNode[], expandedRowKeys: RowKey[]): TmNode[] {
   const fRows: TmNode[] = []
@@ -465,7 +465,6 @@ export default defineComponent({
               }
               const isSummary = 'summary' in rowInfo
               const expanded = 'expanded' in rowInfo
-              const isBeforeExpandedRow = 'isBeforeExpandedRow' in rowInfo
               const props = rowProps ? rowProps(rowData, rowIndex) : undefined
               const mergedRowClassName =
                 typeof rowClassName === 'string'
@@ -584,7 +583,7 @@ export default defineComponent({
                             [`${mergedClsPrefix}-data-table-td--last-col`]:
                               isLastCol,
                             [`${mergedClsPrefix}-data-table-td--last-row`]:
-                              isLastRow && !isBeforeExpandedRow
+                              isLastRow
                           }
                         ]}
                       >
@@ -666,7 +665,6 @@ export default defineComponent({
                 newMergedData.push(
                   {
                     ...rowInfo,
-                    isBeforeExpandedRow: true,
                     expanded: expanded,
                     disabled: rowInfo.disabled,
                     key: rowInfo.key

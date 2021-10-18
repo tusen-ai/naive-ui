@@ -314,7 +314,6 @@ export interface ExpandedRow extends TreeNode<InternalRowData> {
   isExpandedRow: true
 }
 
-export interface BeforeExpandedRow extends TreeNode<InternalRowData> {
-  isBeforeExpandedRow: true
+export interface ExpandableRow extends TreeNode<InternalRowData> {
   expanded: boolean
 }
