@@ -1,4 +1,6 @@
 import { h, defineComponent, inject, computed } from 'vue'
+import { AddIcon } from '../../_internal/icons'
+import { NBaseIcon } from '../../_internal'
 import { throwError } from '../../_utils'
 import { uploadInjectionKey } from './interface'
 import NUploadDragger from './UploadDragger'
@@ -21,7 +23,6 @@ export default defineComponent({
       mergedClsPrefixRef,
       mergedDisabledRef,
       listTypeRef,
-      disabledRef,
       dragOverRef,
       openFileDialog,
       draggerInsideRef,
@@ -33,7 +34,7 @@ export default defineComponent({
     )
 
     function handleTriggerClick (): void {
-      if (disabledRef.value) return
+      if (mergedDisabledRef.value) return
       openFileDialog()
     }
     function handleTriggerDragOver (e: DragEvent): void {
@@ -50,7 +51,7 @@ export default defineComponent({
     }
     function handleTriggerDrop (e: DragEvent): void {
       e.preventDefault()
-      if (!draggerInsideRef.value || disabledRef.value) return
+      if (!draggerInsideRef.value || mergedDisabledRef.value) return
       const dataTransfer = e.dataTransfer
       const files = dataTransfer?.files
       if (files) {
@@ -85,7 +86,17 @@ export default defineComponent({
           onDragleave={handleTriggerDragLeave}
         >
           {isImageCardTypeRef.value ? (
-            <NUploadDragger>{slots}</NUploadDragger>
+            <NUploadDragger>
+              {{
+                default:
+                  slots.default ||
+                  (() => (
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
+                      {{ default: () => <AddIcon /> }}
+                    </NBaseIcon>
+                  ))
+              }}
+            </NUploadDragger>
           ) : (
             slots
           )}

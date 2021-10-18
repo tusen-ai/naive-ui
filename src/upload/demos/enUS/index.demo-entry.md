@@ -24,7 +24,7 @@ abstract
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | abstract | `boolean` | `false` | Whether or not DOM wrapping does not exist. Not supported for `image-card` type. |
-| accept | `string` | `undefined` | The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a>. |
+| accept | `string` | `undefined` | The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a>. |
 | action | `string` | `undefined` | The URL to submit data to. |
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | Customize file thumbnails. |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |
@@ -35,6 +35,7 @@ abstract
 | file-list | `Array<UploadFileInfo>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional HTTP Headers of request. |
 | list-type | `string` | `'text'` | Built-in styles for file lists, `text`, `image` and `image-card`. |
+| max | `number` | `undefined` | Limit the number of uploaded files. |
 | method | `string` | `'POST'` | The method of HTTP request. |
 | multiple | `boolean` | `false` | If multiple files selection supported. |
 | name | `string` | `'file'` | The field name of file in form data. |
@@ -87,7 +88,7 @@ abstract
 
 | Name | Parameters | Description |
 | --- | --- | --- |
-| default | `()` | The content of the upload dragger, use can refer to [Drag to Upload](#drag). |
+| default | `()` | The content of the upload dragger, use can refer to <n-a href="#drag">Drag to Upload</n-a>. |
 
 ### UploadTrigger Slots
 

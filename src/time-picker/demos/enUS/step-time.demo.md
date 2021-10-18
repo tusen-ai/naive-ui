@@ -1,4 +1,4 @@
-# Step Time
+# Step time
 
 Pass a number as step or use an array to specify the items you want to show, inputting values that don't follow step settings will cause displaying invalid status.
 

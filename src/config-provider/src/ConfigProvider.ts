@@ -23,7 +23,8 @@ import type {
 import type {
   ConfigProviderInjection,
   RtlProp,
-  RtlEnabledState
+  RtlEnabledState,
+  Breakpoints
 } from './internal-interface'
 import { NDateLocale, NLocale } from '../../locales'
 
@@ -50,6 +51,7 @@ export const configProviderProps = {
   themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
   componentOptions: Object as PropType<GlobalComponentConfig>,
   icons: Object as PropType<GlobalIconConfig>,
+  breakpoints: Object as PropType<Breakpoints>,
   // deprecated
   as: {
     type: String as PropType<string | undefined>,
@@ -123,7 +125,8 @@ export default defineComponent({
     })
     const mergedClsPrefixRef = computed(() => {
       const { clsPrefix } = props
-      return NConfigProvider?.mergedClsPrefixRef.value ?? clsPrefix
+      if (clsPrefix !== undefined) return clsPrefix
+      return NConfigProvider?.mergedClsPrefixRef.value
     })
     const mergedRtlRef: ComputedRef<RtlEnabledState | undefined> = computed(
       () => {
@@ -138,7 +141,11 @@ export default defineComponent({
         return rtlEnabledState
       }
     )
+    const mergedBreakpointsRef = computed(() => {
+      return props.breakpoints || NConfigProvider?.mergedBreakpointsRef.value
+    })
     provide(configProviderInjectionKey, {
+      mergedBreakpointsRef,
       mergedRtlRef,
       mergedIconsRef,
       mergedComponentPropsRef,

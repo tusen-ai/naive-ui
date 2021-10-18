@@ -59,9 +59,10 @@ event
 
 | Name | Parameters | Description |
 | --- | --- | --- |
+| count | `(value: string)` | Word count. |
 | prefix | `()` | Prefix content slot. |
-| suffix | `()` | Suffix content slot. |
 | separator | `()` | The separator content of the input, only works when `pair` is true. This will take priority over the separator property. |
+| suffix | `()` | Suffix content slot. |
 
 ### InputGroup Slots
 

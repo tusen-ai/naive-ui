@@ -1,4 +1,4 @@
-# Pictures Wall
+# Pictures wall
 
 `list-type = "image-card"`.
 
@@ -18,10 +18,7 @@ The preview in the photo wall will call the internal preview component by defaul
   :default-file-list="previewFileList"
   list-type="image-card"
   @preview="handlePreview"
->
-  Click to Upload
-</n-upload>
-
+/>
 <n-modal
   v-model:show="showModal"
   preset="card"

@@ -30,7 +30,7 @@ rtl-debug
 | round | `boolean` | `false` | 是否圆角 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | 类型 |
-| on-click | `(e: MouseEvent) => void` | `undefined` | 点击关闭时的回调 |
+| on-close | `(e: MouseEvent) => void` | `undefined` | 点击关闭时的回调 |
 | on-update:checked | `(value: boolean) => void` | `undefined` | 选择状态更改时的回调 |
 
 ### Tag Slots

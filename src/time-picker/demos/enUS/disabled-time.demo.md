@@ -1,4 +1,4 @@
-# Disable Time
+# Disable time
 
 You can disable some time.
 

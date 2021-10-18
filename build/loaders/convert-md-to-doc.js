@@ -56,7 +56,7 @@ function genAnchorTemplate (
       internal-scrollable
       :bound="16"
       type="block"
-      style="width: 128px; position: sticky; top: 32px; max-height: calc(100vh - 32px - 64px);"
+      style="width: 128px; position: sticky; top: 32px; max-height: calc(100vh - 32px - 64px); height: auto;"
       offset-target="#doc-layout"
       :ignore-gap="${options.ignoreGap}"
     >

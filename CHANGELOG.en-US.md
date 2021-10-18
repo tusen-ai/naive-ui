@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 2.19.9 (2021-10-18)
+
+### Fixes
+
+- Fix `n-collapse`'s expanded status is lost when using `v-if` with `n-collapse-item`, closes [#1387](https://github.com/TuSimple/naive-ui/issues/1387).
+- Fix `n-dialog`'s close button will be overlayed with content, closes [#1381](https://github.com/TuSimple/naive-ui/issues/1381).
+- Fix `n-upload` file is set to `null` after upload failure, closes [#1316](https://github.com/TuSimple/naive-ui/issues/1316).
+- Fix `n-cascader`'s `filter` prop not working.
+- Fix `n-cascader`'s `label-field` prop breaks filter.
+- Fix `n-cascader`'s `separator` prop isn't appiled to filter select menu.
+
+### Feats
+
+- `n-menu` add `dropdown-props` prop, closes [#1345](https://github.com/TuSimple/naive-ui/issues/1345).
+- `n-input` add `count` slot, closes [#1314](https://github.com/TuSimple/naive-ui/issues/1314).
+- `n-time-picker` add `use-12-hours` prop, closes [#547](https://github.com/TuSimple/naive-ui/issues/547).
+- `n-input-number` add `focus` & `blur` methods.
+
 ## 2.19.8 (2021-10-14)
 
 ### Fixes
@@ -8,12 +26,15 @@
 - Fix `n-data-table` has duplicate right border when it has multiple level headers.
 - Fix `n-scrollbar` doesn't support `scrollTo`, closes [#1346](https://github.com/TuSimple/naive-ui/issues/1346).
 - Fix `n-ellipsis`'s `expand-trigger` prop not show `pointer` cursor when content is short when `tooltip = false`, closes [#1299](https://github.com/TuSimple/naive-ui/issues/1299).
+- Fix `n-upload`'s `disabled` prop's style not working, closes [#1237](https://github.com/TuSimple/naive-ui/issues/1237).
+- `n-config-provider` add `breakpoints` prop, closes [#1379](https://github.com/TuSimple/naive-ui/issues/1379).
 
 ### Feats
 
 - `n-auto-complete` add `get-show` prop, closes [#1292](https://github.com/TuSimple/naive-ui/issues/1292).
 - `n-select` add `input-props` prop, closes [#1351](https://github.com/TuSimple/naive-ui/issues/1351).
 - `n-color-picker` add `swatches` prop, ref [#1281](https://github.com/TuSimple/naive-ui/issues/1281).
+- `n-upload` add `max` prop.
 
 ### i18n
 

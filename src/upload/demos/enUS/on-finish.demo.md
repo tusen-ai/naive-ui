@@ -1,4 +1,4 @@
-# Change File on Finish
+# Change file on finish
 
 You can change file's property when upload finishes.
 

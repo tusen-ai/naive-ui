@@ -10,11 +10,13 @@ import {
   provide,
   nextTick,
   watch,
-  CSSProperties
+  CSSProperties,
+  watchEffect
 } from 'vue'
 import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
+import { happensIn } from 'seemly'
 import {
   isValid,
   startOfSecond,
@@ -37,28 +39,28 @@ import { NBaseIcon } from '../../_internal'
 import { useConfig, useTheme, useLocale, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
-  warn,
   call,
   useAdjustedTo,
   MaybeArray,
-  ExtractPublicPropTypes
+  ExtractPublicPropTypes,
+  warnOnce
 } from '../../_utils'
 import { timePickerLight } from '../styles'
 import type { TimePickerTheme } from '../styles'
 import Panel from './Panel'
-import style from './styles/index.cssr'
 import {
   IsHourDisabled,
   IsMinuteDisabled,
   IsSecondDisabled,
+  ItemValue,
   OnUpdateValue,
   OnUpdateValueImpl,
   PanelRef,
   Size,
   timePickerInjectionKey
 } from './interface'
-import { happensIn } from 'seemly'
 import { findSimilarTime, isTimeInStep } from './utils'
+import style from './styles/index.cssr'
 
 // validate hours, minutes, seconds prop
 function validateUnits (value: MaybeArray<number>, max: number): boolean {
@@ -121,20 +123,6 @@ const timePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'time-picker',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  },
   hours: {
     type: [Number, Array] as PropType<MaybeArray<number>>,
     validator: (value: MaybeArray<number>) => validateUnits(value, 23)
@@ -146,7 +134,10 @@ const timePickerProps = {
   seconds: {
     type: [Number, Array] as PropType<MaybeArray<number>>,
     validator: (value: MaybeArray<number>) => validateUnits(value, 59)
-  }
+  },
+  use12Hours: Boolean,
+  // deprecated
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 }
 
 export type TimePickerProps = ExtractPublicPropTypes<typeof timePickerProps>
@@ -155,6 +146,17 @@ export default defineComponent({
   name: 'TimePicker',
   props: timePickerProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange !== undefined) {
+          warnOnce(
+            'time-picker',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
+
     const { mergedBorderedRef, mergedClsPrefixRef, namespaceRef } =
       useConfig(props)
     const { localeRef, dateLocaleRef } = useLocale('TimePicker')
@@ -257,6 +259,11 @@ export default defineComponent({
     const mergedAttrSizeRef = computed(() => {
       return props.format.length + 4
     })
+    const amPmValueRef = computed(() => {
+      const { value } = mergedValueRef
+      if (value === null) return null
+      return getHours(value) < 12 ? 'am' : 'pm'
+    })
     const hourValueRef = computed(() => {
       const { value } = mergedValueRef
       if (value === null) return null
@@ -337,25 +344,48 @@ export default defineComponent({
         openPanel()
       }
     }
-    function handleHourClick (hour: number): void {
+    function handleHourClick (hour: ItemValue): void {
+      if (typeof hour === 'string') return
       if (mergedValueRef.value === null) {
         doChange(getTime(setHours(startOfHour(new Date()), hour)))
       } else {
         doChange(getTime(setHours(mergedValueRef.value, hour)))
       }
     }
-    function handleMinuteClick (minute: number): void {
+    function handleMinuteClick (minute: ItemValue): void {
+      if (typeof minute === 'string') return
       if (mergedValueRef.value === null) {
         doChange(getTime(setMinutes(startOfMinute(new Date()), minute)))
       } else {
         doChange(getTime(setMinutes(mergedValueRef.value, minute)))
       }
     }
-    function handleSecondClick (second: number): void {
+    function handleSecondClick (second: ItemValue): void {
+      if (typeof second === 'string') return
       if (mergedValueRef.value === null) {
         doChange(getTime(setSeconds(startOfSecond(new Date()), second)))
       } else {
         doChange(getTime(setSeconds(mergedValueRef.value, second)))
+      }
+    }
+    function handleAmPmClick (amPm: ItemValue): void {
+      const { value: mergedValue } = mergedValueRef
+      if (mergedValue === null) {
+        const now = new Date()
+        const hours = getHours(now)
+        if (amPm === 'pm' && hours < 12) {
+          doChange(getTime(setHours(now, hours + 12)))
+        } else if (amPm === 'am' && hours >= 12) {
+          doChange(getTime(setHours(now, hours - 12)))
+        }
+        doChange(getTime(now))
+      } else {
+        const hours = getHours(mergedValue)
+        if (amPm === 'pm' && hours < 12) {
+          doChange(getTime(setHours(mergedValue, hours + 12)))
+        } else if (amPm === 'am' && hours >= 12) {
+          doChange(getTime(setHours(mergedValue, hours - 12)))
+        }
       }
     }
     function deriveInputValue (time?: null | number): void {
@@ -401,32 +431,20 @@ export default defineComponent({
     }
     function scrollTimer (): void {
       if (!panelInstRef.value) return
-      const { hourScrollRef, minuteScrollRef, secondScrollRef } =
+      const { hourScrollRef, minuteScrollRef, secondScrollRef, amPmScrollRef } =
         panelInstRef.value
-      if (hourScrollRef) {
-        const hour = hourScrollRef.contentRef?.querySelector(
-          '[data-active]'
-        ) as HTMLElement
-        if (hour) {
-          hourScrollRef.scrollTo({ top: hour.offsetTop })
+      ;[hourScrollRef, minuteScrollRef, secondScrollRef, amPmScrollRef].forEach(
+        (itemScrollRef) => {
+          if (!itemScrollRef) return
+          const activeItemEl =
+            itemScrollRef.contentRef?.querySelector('[data-active]')
+          if (activeItemEl) {
+            itemScrollRef.scrollTo({
+              top: (activeItemEl as HTMLElement).offsetTop
+            })
+          }
         }
-      }
-      if (minuteScrollRef) {
-        const minute = minuteScrollRef.contentRef?.querySelector(
-          '[data-active]'
-        ) as HTMLElement
-        if (minute) {
-          minuteScrollRef.scrollTo({ top: minute.offsetTop })
-        }
-      }
-      if (secondScrollRef) {
-        const second = secondScrollRef.contentRef?.querySelector(
-          '[data-active]'
-        ) as HTMLElement
-        if (second) {
-          secondScrollRef.scrollTo({ top: second.offsetTop })
-        }
-      }
+      )
     }
     function doUpdateShow (value: boolean): void {
       uncontrolledShowRef.value = value
@@ -573,6 +591,7 @@ export default defineComponent({
       hourValue: hourValueRef,
       minuteValue: minuteValueRef,
       secondValue: secondValueRef,
+      amPmValue: amPmValueRef,
       handleTimeInputFocus,
       handleTimeInputBlur,
       handleNowClick,
@@ -586,6 +605,7 @@ export default defineComponent({
       handleHourClick,
       handleMinuteClick,
       handleSecondClick,
+      handleAmPmClick,
       handleTimeInputClear,
       handleFocusDetectorFocus,
       handleMenuKeyDown,
@@ -732,17 +752,20 @@ export default defineComponent({
                                   isMinuteInvalid={this.isMinuteInvalid}
                                   isMinuteDisabled={this.isMinuteDisabled}
                                   secondValue={this.secondValue}
+                                  amPmValue={this.amPmValue}
                                   showSecond={this.secondInFormat}
                                   isSecondInvalid={this.isSecondInvalid}
                                   isSecondDisabled={this.isSecondDisabled}
                                   isValueInvalid={this.isValueInvalid}
                                   nowText={this.localizedNow}
                                   confirmText={this.localizedPositiveText}
+                                  use12Hours={this.use12Hours}
                                   onFocusout={this.handleMenuFocusOut}
                                   onKeydown={this.handleMenuKeyDown}
                                   onHourClick={this.handleHourClick}
                                   onMinuteClick={this.handleMinuteClick}
                                   onSecondClick={this.handleSecondClick}
+                                  onAmPmClick={this.handleAmPmClick}
                                   onNowClick={this.handleNowClick}
                                   onConfirmClick={this.handleConfirmClick}
                                   onFocusDetectorFocus={
