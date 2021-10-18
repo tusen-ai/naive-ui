@@ -123,6 +123,7 @@ export default c([
       width: 30px;
       margin: 0 0 8px 6px;
       border-radius: 50%;
+      box-shadow: rgba(0, 0, 0, .15) 0px 0px 0px 1px inset;
       overflow: hidden;
     `),
     cE('fill', `
@@ -217,10 +218,18 @@ export default c([
       cE('fill', `
         width: 100%;
         height: 100%;
+        background: var(--swatch-valid-color);
         border-radius: 3px;
         box-shadow: rgba(0, 0, 0, .15) 0px 0px 0px 1px inset;
         cursor: pointer;
-      `)
+      `),
+      c('&:focus', `
+        outline: none;
+      `, [
+        cE('fill', `
+          box-shadow: rgba(0, 0, 0, .15) 0px 0px 0px 1px inset, 0 0 4px var(--swatch-valid-color);
+        `)
+      ])
     ])
   ])
 ])

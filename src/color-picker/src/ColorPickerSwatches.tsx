@@ -146,6 +146,7 @@ export default defineComponent({
           value = '#000000'
         }
       }
+
       if (swatchColorMode === modeProp) return value
 
       // swatch value to current mode value
@@ -157,9 +158,14 @@ export default defineComponent({
       props.onUpdateColor(normalizeOutput(parsed))
     }
 
+    function handleSwatchKeyDown (e: KeyboardEvent, parsed: ParsedColor): void {
+      if (e.key === 'Enter') handleSwatchSelect(parsed)
+    }
+
     return {
       parsedSwatchesRef,
-      handleSwatchSelect
+      handleSwatchSelect,
+      handleSwatchKeyDown
     }
   },
   render () {
@@ -169,12 +175,13 @@ export default defineComponent({
         {this.parsedSwatchesRef.map((swatch) => (
           <div
             class={`${clsPrefix}-color-picker-swatch`}
+            tabindex={0}
             onClick={() => this.handleSwatchSelect(swatch)}
+            onKeydown={e => this.handleSwatchKeyDown(e, swatch)}
+            // @ts-expect-error
+            style={{ '--swatch-valid-color': swatch.legalValue }}
           >
-            <div
-              class={`${clsPrefix}-color-picker-swatch__fill`}
-              style={{ background: swatch.legalValue }}
-            />
+            <div class={`${clsPrefix}-color-picker-swatch__fill`} />
           </div>
         ))}
       </div>

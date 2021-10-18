@@ -2,7 +2,7 @@ import { defineComponent, h, PropType } from 'vue'
 import { getModeFromValue } from './utils'
 
 export default defineComponent({
-  name: 'InputColorTrigger',
+  name: 'ColorPreview',
   props: {
     clsPrefix: {
       type: String,
