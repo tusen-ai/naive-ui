@@ -25,7 +25,7 @@ export default defineComponent({
     function handleChange (e: Event): void {
       // hex
       const value = (e.target as HTMLInputElement).value
-      props.onUpdateColor?.(value.toLocaleUpperCase())
+      props.onUpdateColor?.(value.toUpperCase())
       e.stopPropagation()
     }
 
