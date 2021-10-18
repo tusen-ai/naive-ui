@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- Add `n-color-preview` component，closes [#1281](https://github.com/TuSimple/naive-ui/issues/1281).
+
 ## 2.19.9 (2021-10-18)
 
 ### Fixes
