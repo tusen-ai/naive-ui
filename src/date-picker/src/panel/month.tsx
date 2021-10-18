@@ -1,4 +1,4 @@
-import { h, defineComponent, VNode } from 'vue'
+import { h, defineComponent, VNode, PropType } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
@@ -14,9 +14,15 @@ import { MONTH_ITEM_HEIGHT } from '../config'
  */
 export default defineComponent({
   name: 'MonthPanel',
-  props: useCalendar.props,
+  props: {
+    ...useCalendar.props,
+    type: {
+      type: String as PropType<'month' | 'year'>,
+      default: 'date'
+    }
+  },
   setup (props) {
-    const useCalendarRef = useCalendar(props, props.type as 'month' | 'year')
+    const useCalendarRef = useCalendar(props, props.type)
     const renderItem = (
       item: YearItem | MonthItem,
       i: number,

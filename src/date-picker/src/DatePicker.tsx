@@ -93,9 +93,7 @@ const datePickerProps = {
   value: [Number, Array] as PropType<Value | null>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   type: {
-    type: String as PropType<
-    keyof typeof DATE_FORMAT
-    >,
+    type: String as PropType<keyof typeof DATE_FORMAT>,
     default: 'date'
   },
   separator: String,
@@ -763,8 +761,7 @@ export default defineComponent({
       active: this.mergedShow,
       actions: this.actions,
       shortcuts: this.shortcuts,
-      style: this.cssVars as CSSProperties,
-      type: this.type
+      style: this.cssVars as CSSProperties
     }
     const { mergedClsPrefix } = this
     return (
@@ -880,12 +877,21 @@ export default defineComponent({
                                   <DaterangePanel {...commonPanelProps} />
                               ) : this.type === 'datetimerange' ? (
                                   <DatetimerangePanel {...commonPanelProps} />
-                              ) : this.type === 'month' ||
-                                  this.type === 'year' ? (
-                                  <MonthPanel {...commonPanelProps} />
-                                  ) : (
+                              ) : this.type === 'month' ? (
+                                  <MonthPanel
+                                    {...commonPanelProps}
+                                    type="month"
+                                    key="month"
+                                  />
+                              ) : this.type === 'year' ? (
+                                  <MonthPanel
+                                    {...commonPanelProps}
+                                    type="year"
+                                    key="year"
+                                  />
+                              ) : (
                                   <DatePanel {...commonPanelProps} />
-                                  ),
+                              ),
                               [[clickoutside, this.handleClickOutside]]
                             )
                             : null

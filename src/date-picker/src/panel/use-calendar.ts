@@ -1,4 +1,4 @@
-import { ref, computed, inject, watch, ExtractPropTypes, PropType } from 'vue'
+import { ref, computed, inject, watch, ExtractPropTypes } from 'vue'
 import {
   addMonths,
   addYears,
@@ -31,12 +31,6 @@ const useCalendarProps = {
   actions: {
     type: Array,
     default: () => ['now', 'clear', 'confirm']
-  },
-  type: {
-    type: String as PropType<
-    'date' | 'datetime' | 'daterange' | 'datetimerange' | 'month' | 'year'
-    >,
-    default: 'date'
   }
 } as const
 
