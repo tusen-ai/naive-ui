@@ -29,7 +29,9 @@ export default defineComponent({
     function handleChange (e: Event): void {
       // hex
       const value = (e.target as HTMLInputElement).value
-      props.onUpdateColor?.(convertColor(value, props.mode, 'hex'))
+      props.onUpdateColor?.(
+        convertColor(value.toUpperCase(), props.mode, 'hex')
+      )
       e.stopPropagation()
     }
 
