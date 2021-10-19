@@ -206,6 +206,8 @@ export default defineComponent({
           return localeRef.value.datePlaceholder
         } else if (props.type === 'datetime') {
           return localeRef.value.datetimePlaceholder
+        } else if (props.type === 'month') {
+          return localeRef.value.monthPlaceholder
         }
         return props.placeholder
       } else {
