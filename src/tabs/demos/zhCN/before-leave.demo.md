@@ -3,7 +3,7 @@
 ```html
 <n-tabs
   type="line"
-  :on-before-leave="handleBeforeLeave"
+  @before-leave="handleBeforeLeave"
   @update:value="handleUpdateValue"
 >
   <n-tab-pane name="oasis" tab="Oasis">Wonderwall</n-tab-pane>

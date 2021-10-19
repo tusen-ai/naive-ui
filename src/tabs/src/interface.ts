@@ -24,10 +24,7 @@ export interface TabsInjection {
   closableRef: Ref<boolean>
   tabStyleRef: Ref<string | CSSProperties | undefined>
   paneStyleRef: Ref<string | CSSProperties | undefined>
-  handleBeforeLeave: (
-    activeName: string | number,
-    oldActiveName: string | number | null
-  ) => boolean | Promise<boolean>
+  handleBeforeLeave: BeforeLeaveImpl
   handleTabClick: (panelName: string | number) => void
   handleClose: (panelName: string | number) => void
   handleAdd: () => void
