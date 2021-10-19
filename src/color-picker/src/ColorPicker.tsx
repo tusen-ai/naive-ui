@@ -539,6 +539,7 @@ export default defineComponent({
               {props.showPreview ? (
                 <ColorPreview
                   clsPrefix={mergedClsPrefix}
+                  mode={displayedModeRef.value}
                   color={rgbaRef.value && toHexString(rgbaRef.value)}
                   onUpdateColor={(color) => doUpdateValue(color, 'input')}
                 />

@@ -1,11 +1,15 @@
 import { defineComponent, h, PropType } from 'vue'
-import { getModeFromValue } from './utils'
+import { ColorPickerMode, convertColor, getModeFromValue } from './utils'
 
 export default defineComponent({
   name: 'ColorPreview',
   props: {
     clsPrefix: {
       type: String,
+      required: true
+    },
+    mode: {
+      type: String as PropType<ColorPickerMode>,
       required: true
     },
     color: {
@@ -25,7 +29,7 @@ export default defineComponent({
     function handleChange (e: Event): void {
       // hex
       const value = (e.target as HTMLInputElement).value
-      props.onUpdateColor?.(value.toUpperCase())
+      props.onUpdateColor?.(convertColor(value, props.mode, 'hex'))
       e.stopPropagation()
     }
 
