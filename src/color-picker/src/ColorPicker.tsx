@@ -89,6 +89,10 @@ export const colorPickerPanelProps = {
     type: Boolean,
     default: true
   },
+  showPreview: {
+    type: Boolean,
+    default: false
+  },
   swatches: Array as PropType<string[]>,
   actions: {
     type: Array as PropType<ActionType[]>,
@@ -532,11 +536,13 @@ export default defineComponent({
                   />
                 ) : null}
               </div>
-              <ColorPreview
-                clsPrefix={mergedClsPrefix}
-                color={rgbaRef.value && toHexString(rgbaRef.value)}
-                onUpdateColor={(color) => doUpdateValue(color, 'input')}
-              />
+              {props.showPreview ? (
+                <ColorPreview
+                  clsPrefix={mergedClsPrefix}
+                  color={rgbaRef.value && toHexString(rgbaRef.value)}
+                  onUpdateColor={(color) => doUpdateValue(color, 'input')}
+                />
+              ) : null}
             </div>
             <ColorInput
               clsPrefix={mergedClsPrefix}
