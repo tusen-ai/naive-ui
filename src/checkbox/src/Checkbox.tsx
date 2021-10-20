@@ -310,13 +310,15 @@ export default defineComponent({
         onKeydown={handleKeyDown}
         onClick={handleClick}
         onMousedown={() => {
-          const preventDefault = (e: Event): void => {
-            e.preventDefault()
-          }
-          window.addEventListener('selectstart', preventDefault)
-          setTimeout(() => {
-            window.removeEventListener('selectstart', preventDefault)
-          }, 0)
+          window.addEventListener(
+            'selectstart',
+            (e: Event): void => {
+              e.preventDefault()
+            },
+            {
+              once: true
+            }
+          )
         }}
       >
         <div class={`${mergedClsPrefix}-checkbox-box`}>
