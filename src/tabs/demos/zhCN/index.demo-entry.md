@@ -36,7 +36,7 @@ before-leave
 | type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | 标签类型 |
 | value | `string \| number` | `undefined` | 受控模式下的值 |
 | on-add | `() => void` | `undefined` | 添加标签的回调函数 |
-| on-before-leave | `(activeName: string \| number, oldActiveName: string \| number \| null) => boolean \| Promise<boolean>` | `undefined` | 切换标签之前的钩子函数 |
+| on-before-leave | `(name: string \| number, oldName: string \| number \| null) => boolean \| Promise<boolean>` | `undefined` | 切换标签之前的钩子函数，返回 `false` 或 promise resolve `false` 或 promise reject 会组织切换 |
 | on-close | `(name: string \| number) => void` | `undefined` | 关闭标签的回调函数 |
 | on-update:value | `(value: string \| number) => void` | `undefined` | 选中发生改变时的回调函数 |
 

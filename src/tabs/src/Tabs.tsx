@@ -28,8 +28,7 @@ import {
   Addable,
   OnClose,
   OnCloseImpl,
-  BeforeLeave,
-  BeforeLeaveImpl,
+  OnBeforeLeave,
   tabsInjectionKey,
   TabsType
 } from './interface'
@@ -60,7 +59,7 @@ const tabsProps = {
     type: Number,
     default: 0
   },
-  onBeforeLeave: [Function, Array] as PropType<MaybeArray<BeforeLeave>>,
+  onBeforeLeave: Function as PropType<OnBeforeLeave>,
   onAdd: Function as PropType<() => void>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -138,10 +137,8 @@ export default defineComponent({
       compitableValueRef,
       uncontrolledValueRef
     )
-    const tabIdRef = ref<{ tab: string | number | null, id: number }>({
-      tab: mergedValueRef.value,
-      id: 0
-    })
+
+    const nextTabNameRef = { value: mergedValueRef.value }
 
     const tabWrapperStyleRef = computed(() => {
       if (!props.justifyContent || props.type === 'card') return undefined
@@ -184,19 +181,8 @@ export default defineComponent({
         updateBarStyle(tabEl)
       }
     }
-    function handleBeforeLeave (
-      activeName: string | number,
-      oldActiveName: string | number | null
-    ): boolean | Promise<boolean> {
-      const { onBeforeLeave } = props
-      if (!onBeforeLeave) return true
-      return (onBeforeLeave as BeforeLeaveImpl)(activeName, oldActiveName)
-    }
     function handleTabClick (panelName: string | number): void {
       doUpdateValue(panelName)
-    }
-    function setTabId (tab: string | number, id: number): void {
-      tabIdRef.value = { tab, id }
     }
     function doUpdateValue (panelName: string | number): void {
       const {
@@ -293,10 +279,9 @@ export default defineComponent({
       typeRef: toRef(props, 'type'),
       closableRef: toRef(props, 'closable'),
       valueRef: mergedValueRef,
-      tabIdRef,
-      handleBeforeLeave,
+      nextTabNameRef,
+      onBeforeLeaveRef: toRef(props, 'onBeforeLeave'),
       handleTabClick,
-      setTabId,
       handleClose,
       handleAdd
     })

@@ -8,13 +8,13 @@ export type OnUpdateValueImpl = (value: string | number) => void
 export type OnClose = (name: string & number) => void
 export type OnCloseImpl = (name: string | number) => void
 
-export type BeforeLeave = (
-  activeName: string & number,
-  oldActiveName: string & number & null
+export type OnBeforeLeave = (
+  Name: string & number,
+  oldName: string & number & null
 ) => boolean | Promise<boolean>
-export type BeforeLeaveImpl = (
-  activeName: string | number,
-  oldActiveName: string | number | null
+export type OnBeforeLeaveImpl = (
+  name: string | number,
+  oldName: string | number | null
 ) => boolean | Promise<boolean>
 
 export interface TabsInjection {
@@ -24,10 +24,9 @@ export interface TabsInjection {
   closableRef: Ref<boolean>
   tabStyleRef: Ref<string | CSSProperties | undefined>
   paneStyleRef: Ref<string | CSSProperties | undefined>
-  tabIdRef: Ref<{ tab: string | number | null, id: number }>
-  handleBeforeLeave: BeforeLeaveImpl
+  nextTabNameRef: { value: string | number | null }
+  onBeforeLeaveRef: Ref<OnBeforeLeave | undefined>
   handleTabClick: (panelName: string | number) => void
-  setTabId: (tab: string | number, id: number) => void
   handleClose: (panelName: string | number) => void
   handleAdd: () => void
 }
