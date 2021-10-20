@@ -24,7 +24,7 @@ export interface TabsInjection {
   closableRef: Ref<boolean>
   tabStyleRef: Ref<string | CSSProperties | undefined>
   paneStyleRef: Ref<string | CSSProperties | undefined>
-  tabIdRef: Ref<Array<{ tab: string | number, id: number }>>
+  tabIdRef: Ref<{ tab: string | number | null, id: number }>
   handleBeforeLeave: BeforeLeaveImpl
   handleTabClick: (panelName: string | number) => void
   setTabId: (tab: string | number, id: number) => void

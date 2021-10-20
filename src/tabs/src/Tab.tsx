@@ -51,8 +51,7 @@ export default defineComponent({
           handleAdd()
           return
         }
-        const tabId = tabIdRef.value.filter((item) => item.tab === props.name)
-        const id = tabId.length > 0 ? tabId[0].id + 1 : 1
+        const id = tabIdRef.value ? tabIdRef.value.id + 1 : 1
         setTabId(props.name, id)
         if (props.name !== valueRef.value) {
           const result = handleBeforeLeave(props.name, valueRef.value)
@@ -62,8 +61,8 @@ export default defineComponent({
             result.then(
               () => {
                 if (
-                  tabIdRef.value[0].tab === props.name &&
-                  tabIdRef.value[0].id === id
+                  tabIdRef.value.tab === props.name &&
+                  tabIdRef.value.id === id
                 ) {
                   handleTabClick(props.name)
                 }

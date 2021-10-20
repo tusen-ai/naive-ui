@@ -113,7 +113,6 @@ export default defineComponent({
     )
 
     const tabsElRef = ref<HTMLElement | null>(null)
-    const tabIdRef = ref<Array<{ tab: string | number, id: number }>>([])
     const barElRef = ref<HTMLElement | null>(null)
     const scrollWrapperElRef = ref<HTMLElement | null>(null)
     const addTabInstRef = ref<ComponentPublicInstance | null>(null)
@@ -139,6 +138,10 @@ export default defineComponent({
       compitableValueRef,
       uncontrolledValueRef
     )
+    const tabIdRef = ref<{ tab: string | number | null, id: number }>({
+      tab: mergedValueRef.value,
+      id: 0
+    })
 
     const tabWrapperStyleRef = computed(() => {
       if (!props.justifyContent || props.type === 'card') return undefined
@@ -191,23 +194,9 @@ export default defineComponent({
     }
     function handleTabClick (panelName: string | number): void {
       doUpdateValue(panelName)
-      tabIdRef.value = []
     }
     function setTabId (tab: string | number, id: number): void {
-      if (tabIdRef.value.some((item) => item.tab === tab)) {
-        let index: number = -1
-        tabIdRef.value = tabIdRef.value.map((v, i) => {
-          if (v.tab === tab) {
-            index = i
-          }
-          return {
-            ...v,
-            id: v.tab === tab ? id : v.id
-          }
-        })
-        tabIdRef.value.splice(index, 1)
-      }
-      tabIdRef.value.unshift({ tab, id })
+      tabIdRef.value = { tab, id }
     }
     function doUpdateValue (panelName: string | number): void {
       const {
