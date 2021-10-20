@@ -21,8 +21,11 @@ export default defineComponent({
       typeRef,
       closableRef,
       tabStyleRef,
+      tabIdRef,
       handleAdd,
+      handleBeforeLeave,
       handleTabClick,
+      setTabId,
       handleClose
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(tabsInjectionKey)!
@@ -48,7 +51,28 @@ export default defineComponent({
           handleAdd()
           return
         }
-        handleTabClick(props.name)
+        const id = tabIdRef.value ? tabIdRef.value.id + 1 : 1
+        setTabId(props.name, id)
+        if (props.name !== valueRef.value) {
+          const result = handleBeforeLeave(props.name, valueRef.value)
+          if (typeof result === 'boolean') {
+            if (result) handleTabClick(props.name)
+          } else {
+            result.then(
+              () => {
+                if (
+                  tabIdRef.value.tab === props.name &&
+                  tabIdRef.value.id === id
+                ) {
+                  handleTabClick(props.name)
+                }
+              },
+              () => {
+                // not allowed to change tab
+              }
+            )
+          }
+        }
       }
     }
   },

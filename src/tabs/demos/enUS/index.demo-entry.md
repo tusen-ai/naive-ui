@@ -14,6 +14,7 @@ prefix
 display-directive
 addable
 line-debug
+before-leave
 ```
 
 ## API
@@ -33,6 +34,7 @@ line-debug
 | type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | Tabs type. |
 | value | `string \| number` | `undefined` | Value in controlled mode. |
 | on-add | `() => void` | `undefined` | Callback function triggered when add tag. |
+| on-before-leave | `(activeName: string \| number, oldActiveName: string \| number \| null) => boolean \| Promise<boolean>` | `undefined` | hook function before switching tab. |
 | on-close | `(name: string \| number) => void` | `undefined` | Callback function triggered when close tag. |
 | on-update:value | `(value: string \| number) => void` | `undefined` | Callback function triggered when the value changes. |
 
