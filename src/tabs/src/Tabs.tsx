@@ -28,6 +28,7 @@ import {
   Addable,
   OnClose,
   OnCloseImpl,
+  OnBeforeLeave,
   tabsInjectionKey,
   TabsType
 } from './interface'
@@ -58,6 +59,7 @@ const tabsProps = {
     type: Number,
     default: 0
   },
+  onBeforeLeave: Function as PropType<OnBeforeLeave>,
   onAdd: Function as PropType<() => void>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -135,6 +137,8 @@ export default defineComponent({
       compitableValueRef,
       uncontrolledValueRef
     )
+
+    const nextTabNameRef = { value: mergedValueRef.value }
 
     const tabWrapperStyleRef = computed(() => {
       if (!props.justifyContent || props.type === 'card') return undefined
@@ -275,6 +279,8 @@ export default defineComponent({
       typeRef: toRef(props, 'type'),
       closableRef: toRef(props, 'closable'),
       valueRef: mergedValueRef,
+      nextTabNameRef,
+      onBeforeLeaveRef: toRef(props, 'onBeforeLeave'),
       handleTabClick,
       handleClose,
       handleAdd

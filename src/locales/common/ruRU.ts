@@ -32,6 +32,7 @@ const ruRu: NLocale = {
     selectDate: 'Выбрать дату',
     datePlaceholder: 'Выбрать дату',
     datetimePlaceholder: 'Выбрать дату и время',
+    monthPlaceholder: 'Выберите месяц',
     startDatePlaceholder: 'Дата начала',
     endDatePlaceholder: 'Дата окончания',
     startDatetimePlaceholder: 'Дата и время начала',
