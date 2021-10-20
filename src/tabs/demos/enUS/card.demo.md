@@ -1,4 +1,4 @@
-# Card Type
+# Card type
 
 Set `type='card'`.
 

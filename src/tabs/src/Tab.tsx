@@ -2,7 +2,7 @@ import { h, defineComponent, inject, computed } from 'vue'
 import { AddIcon } from '../../_internal/icons'
 import { NBaseClose, NBaseIcon } from '../../_internal'
 import { render } from '../../_utils'
-import { tabsInjectionKey } from './interface'
+import { OnBeforeLeaveImpl, tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
 
 export default defineComponent({
@@ -21,11 +21,10 @@ export default defineComponent({
       typeRef,
       closableRef,
       tabStyleRef,
-      tabIdRef,
+      nextTabNameRef,
+      onBeforeLeaveRef,
       handleAdd,
-      handleBeforeLeave,
       handleTabClick,
-      setTabId,
       handleClose
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(tabsInjectionKey)!
@@ -51,26 +50,21 @@ export default defineComponent({
           handleAdd()
           return
         }
-        const id = tabIdRef.value ? tabIdRef.value.id + 1 : 1
-        setTabId(props.name, id)
-        if (props.name !== valueRef.value) {
-          const result = handleBeforeLeave(props.name, valueRef.value)
-          if (typeof result === 'boolean') {
-            if (result) handleTabClick(props.name)
+        const { name: nameProp } = props
+        if (nameProp !== valueRef.value) {
+          if (nameProp === nextTabNameRef.value) return
+          nextTabNameRef.value = nameProp
+          const { value: onBeforeLeave } = onBeforeLeaveRef
+          if (!onBeforeLeave) {
+            handleTabClick(nameProp)
           } else {
-            result.then(
-              () => {
-                if (
-                  tabIdRef.value.tab === props.name &&
-                  tabIdRef.value.id === id
-                ) {
-                  handleTabClick(props.name)
-                }
-              },
-              () => {
-                // not allowed to change tab
+            void Promise.resolve(
+              (onBeforeLeave as OnBeforeLeaveImpl)(props.name, valueRef.value)
+            ).then((allowLeave) => {
+              if (allowLeave) {
+                handleTabClick(nameProp)
               }
-            )
+            })
           }
         }
       }
