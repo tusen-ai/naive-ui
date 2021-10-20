@@ -64,56 +64,56 @@ export function normalizeAlpha (alpha: number): number {
 
 const convert = {
   rgb: {
-    hex (swatchValue: string): string {
-      return toHexaString(rgba(swatchValue))
+    hex (value: string): string {
+      return toHexaString(rgba(value))
     },
-    hsl (swatchValue: string): string {
-      const [r, g, b, a] = rgba(swatchValue)
+    hsl (value: string): string {
+      const [r, g, b, a] = rgba(value)
       return toHslaString([...rgb2hsl(r, g, b), a])
     },
-    hsv (swatchValue: string): string {
-      const [r, g, b, a] = rgba(swatchValue)
+    hsv (value: string): string {
+      const [r, g, b, a] = rgba(value)
       return toHsvaString([...rgb2hsv(r, g, b), a])
     }
   },
   hex: {
-    rgb (swatchValue: string): string {
-      return toRgbaString(rgba(swatchValue))
+    rgb (value: string): string {
+      return toRgbaString(rgba(value))
     },
-    hsl (swatchValue: string): string {
-      const [r, g, b, a] = rgba(swatchValue)
+    hsl (value: string): string {
+      const [r, g, b, a] = rgba(value)
       return toHslaString([...rgb2hsl(r, g, b), a])
     },
-    hsv (swatchValue: string): string {
-      const [r, g, b, a] = rgba(swatchValue)
+    hsv (value: string): string {
+      const [r, g, b, a] = rgba(value)
       return toHsvaString([...rgb2hsv(r, g, b), a])
     }
   },
   hsl: {
-    hex (swatchValue: string): string {
-      const [h, s, l, a] = hsla(swatchValue)
+    hex (value: string): string {
+      const [h, s, l, a] = hsla(value)
       return toHexaString([...hsl2rgb(h, s, l), a])
     },
-    rgb (swatchValue: string): string {
-      const [h, s, l, a] = hsla(swatchValue)
+    rgb (value: string): string {
+      const [h, s, l, a] = hsla(value)
       return toRgbaString([...hsl2rgb(h, s, l), a])
     },
-    hsv (swatchValue: string): string {
-      const [h, s, l, a] = hsla(swatchValue)
+    hsv (value: string): string {
+      const [h, s, l, a] = hsla(value)
       return toHsvaString([...hsl2hsv(h, s, l), a])
     }
   },
   hsv: {
-    hex (swatchValue: string): string {
-      const [h, s, v, a] = hsva(swatchValue)
+    hex (value: string): string {
+      const [h, s, v, a] = hsva(value)
       return toHexaString([...hsv2rgb(h, s, v), a])
     },
-    rgb (swatchValue: string) {
-      const [h, s, v, a] = hsva(swatchValue)
+    rgb (value: string) {
+      const [h, s, v, a] = hsva(value)
       return toRgbaString([...hsv2rgb(h, s, v), a])
     },
-    hsl (swatchValue: string): string {
-      const [h, s, v, a] = hsva(swatchValue)
+    hsl (value: string): string {
+      const [h, s, v, a] = hsva(value)
       return toHslaString([...hsv2hsl(h, s, v), a])
     }
   }
