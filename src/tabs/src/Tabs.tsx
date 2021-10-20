@@ -191,6 +191,7 @@ export default defineComponent({
     }
     function handleTabClick (panelName: string | number): void {
       doUpdateValue(panelName)
+      tabIdRef.value = []
     }
     function setTabId (tab: string | number, id: number): void {
       if (tabIdRef.value.some((item) => item.tab === tab)) {
