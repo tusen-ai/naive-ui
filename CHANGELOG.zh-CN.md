@@ -2,7 +2,7 @@
 
 ### Feats
 
--  新增 `n-color-preview` 组件，关闭 [#1281](https://github.com/TuSimple/naive-ui/issues/1281)
+- `n-color-picker` 新增 `show-preview` 属性，关闭 [#1281](https://github.com/TuSimple/naive-ui/issues/1281)
 
 ## 2.19.9 (2021-10-18)
 
