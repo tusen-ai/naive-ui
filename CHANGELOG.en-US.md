@@ -2,6 +2,10 @@
 
 ## Pending
 
+## Fixes
+
+- Fix `n-upload`'s file can't be removed when file count limit is reached, closes [#1401](https://github.com/TuSimple/naive-ui/issues/1401).
+
 ### Feats
 
 - `n-tabs` add `on-before-leave` prop, closes [#1337](https://github.com/TuSimple/naive-ui/issues/1337).
