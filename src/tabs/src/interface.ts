@@ -9,7 +9,7 @@ export type OnClose = (name: string & number) => void
 export type OnCloseImpl = (name: string | number) => void
 
 export type OnBeforeLeave = (
-  Name: string & number,
+  name: string & number,
   oldName: string & number & null
 ) => boolean | Promise<boolean>
 export type OnBeforeLeaveImpl = (
