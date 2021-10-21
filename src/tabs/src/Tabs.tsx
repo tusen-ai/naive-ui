@@ -138,7 +138,7 @@ export default defineComponent({
       uncontrolledValueRef
     )
 
-    const nextTabNameRef = { value: mergedValueRef.value }
+    const nextTabNameRef = { value: mergedValueRef.value, id: 0 }
 
     const tabWrapperStyleRef = computed(() => {
       if (!props.justifyContent || props.type === 'card') return undefined

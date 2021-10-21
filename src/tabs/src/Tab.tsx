@@ -51,9 +51,11 @@ export default defineComponent({
           return
         }
         const { name: nameProp } = props
+        if (nameProp === nextTabNameRef.value) return
+        nextTabNameRef.value = nameProp
+        nextTabNameRef.id++
+        const id = nextTabNameRef.id
         if (nameProp !== valueRef.value) {
-          if (nameProp === nextTabNameRef.value) return
-          nextTabNameRef.value = nameProp
           const { value: onBeforeLeave } = onBeforeLeaveRef
           if (!onBeforeLeave) {
             handleTabClick(nameProp)
@@ -61,7 +63,11 @@ export default defineComponent({
             void Promise.resolve(
               (onBeforeLeave as OnBeforeLeaveImpl)(props.name, valueRef.value)
             ).then((allowLeave) => {
-              if (allowLeave) {
+              if (
+                allowLeave &&
+                nextTabNameRef.value === nameProp &&
+                nextTabNameRef.id === id
+              ) {
                 handleTabClick(nameProp)
               }
             })
