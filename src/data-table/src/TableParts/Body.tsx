@@ -21,8 +21,7 @@ import {
   SummaryRowData,
   MainTableBodyRef,
   TmNode,
-  ExpandedRow,
-  ExpandableRow
+  InternalRowData
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import Cell from './Cell'
@@ -39,8 +38,22 @@ type RowRenderInfo =
     disabled: boolean
   }
   | TmNode
-  | ExpandedRow
-  | ExpandableRow
+  | {
+    isExpandedRow: true
+    rawNode: InternalRowData
+    key: RowKey
+    disabled: boolean
+    level: number
+    children: TmNode[]
+  }
+  | {
+    expanded: boolean
+    rawNode: InternalRowData
+    key: RowKey
+    disabled: boolean
+    level: number
+    children: TmNode[]
+  }
 
 function flatten (rows: TmNode[], expandedRowKeys: RowKey[]): TmNode[] {
   const fRows: TmNode[] = []
@@ -658,8 +671,9 @@ export default defineComponent({
 
             // 展开行数据化 ----------------------------------------- start ---->
             const newMergedData: RowRenderInfo[] = []
+            const mergedExpandedRowKeysSet = new Set(mergedExpandedRowKeys)
             mergedData.forEach((rowInfo, index) => {
-              const expanded = mergedExpandedRowKeys.includes(rowInfo.key)
+              const expanded = mergedExpandedRowKeysSet.has(rowInfo.key)
               if (renderExpand && expanded) {
                 // 单独赋值的都是不可枚举的参数
                 newMergedData.push(
@@ -682,9 +696,6 @@ export default defineComponent({
             })
             // 展开行数据化 ----------------------------------------- end ---->
             if (!virtualScroll) {
-              const rows = newMergedData.map((rowInfo, rowIndex) => {
-                return renderRow(rowInfo, rowIndex, false)
-              })
               return (
                 <table
                   class={`${mergedClsPrefix}-data-table-table`}
@@ -704,15 +715,13 @@ export default defineComponent({
                     data-n-id={componentId}
                     class={`${mergedClsPrefix}-data-table-tbody`}
                   >
-                    {rows}
+                    {newMergedData.map((rowInfo, rowIndex) => {
+                      return renderRow(rowInfo, rowIndex, false)
+                    })}
                   </tbody>
                 </table>
               )
             } else {
-              // Please note that the current virtual scroll mode impl
-              // not very performant, since it supports all the feature of table.
-              // If we can bailout some path it will be much faster. Since it
-              // need to generate all vnodes before using the virtual list.
               return (
                 <VirtualList
                   ref="virtualListRef"
