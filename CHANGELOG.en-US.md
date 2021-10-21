@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+## Fixes
+
+- Fix `n-collapse-transition`'s `collapsed` prop set opposite value, closes [#1407](https://github.com/TuSimple/naive-ui/issues/1407).
+
 ## 2.19.11 (2021-10-21)
 
 ## Fixes

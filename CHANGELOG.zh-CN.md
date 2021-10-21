@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+## Fixes
+
+- 修复 `n-collapse-transition` 的 `collapsed` 属性取值相反，关闭 [#1407](https://github.com/TuSimple/naive-ui/issues/1407)
+
 ## 2.19.11 (2021-10-21)
 
 ## Fixes

@@ -47,7 +47,7 @@ export default defineComponent({
       <NFadeInExpandTransition appear={this.appear}>
         {{
           default: () =>
-            this.collapsed
+            !this.collapsed
               ? h(
                 'div', // Don't use jsx since it would cause useless spread in each rendering
                 mergeProps(

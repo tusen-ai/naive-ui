@@ -3,8 +3,8 @@
 ```html
 <n-space vertical>
   <n-switch v-model:value="collapsed">
-    <template #checked>Collapsed</template>
-    <template #unchecked>Expanded</template>
+    <template #checked>Expanded</template>
+    <template #unchecked>Collapsed</template>
   </n-switch>
   <n-collapse-transition :collapsed="collapsed">
     "There is no single development, in either technology or management
