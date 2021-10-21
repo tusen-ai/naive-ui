@@ -13,6 +13,7 @@
 ### Feats
 
 - `n-tabs` 新增 `on-before-leave` 属性，关闭 [#1337](https://github.com/TuSimple/naive-ui/issues/1337)
+- `n-color-picker` 新增 `show-preview` 属性，关闭 [#1281](https://github.com/TuSimple/naive-ui/issues/1281)
 
 ## 2.19.9 (2021-10-18)
 
