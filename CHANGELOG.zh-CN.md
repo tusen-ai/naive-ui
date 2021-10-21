@@ -1,8 +1,12 @@
 # CHANGELOG
 
+### Breaking Changes
+
+- `n-collapsed-transition` 的 `collapsed` 属性被废弃，请使用 `show` 属性代替，关闭 [#1407](https://github.com/TuSimple/naive-ui/issues/1407)
+
 ## 2.19.11 (2021-10-21)
 
-## Fixes
+### Fixes
 
 - 修复 `n-upload` 在达到最大文件数量后无法删除文件，关闭 [#1401](https://github.com/TuSimple/naive-ui/issues/1401)
 

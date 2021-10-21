@@ -1,8 +1,12 @@
 # CHANGELOG
 
+### Breaking Changes
+
+- `n-collapsed-transition`'s `collapsed` prop is deprecated, please use `show` instead, closes [#1407](https://github.com/TuSimple/naive-ui/issues/1407).
+
 ## 2.19.11 (2021-10-21)
 
-## Fixes
+### Fixes
 
 - Fix `n-upload`'s file can't be removed when file count limit is reached, closes [#1401](https://github.com/TuSimple/naive-ui/issues/1401).
 
