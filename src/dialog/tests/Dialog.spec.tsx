@@ -8,16 +8,16 @@ const Provider = defineComponent({
   }
 })
 
-const RenderTestComponent = (
+const createTestComponent = (
   type: 'create' | 'error' | 'info' | 'success' | 'warning',
-  obj?: DialogProps
+  dialogProps?: DialogProps
 ): any => {
   return defineComponent({
     setup () {
       const dialog = useDialog()
       dialog[type]({
         title: 'test dialog type',
-        ...obj
+        ...dialogProps
       })
     },
     render () {
@@ -171,11 +171,11 @@ describe('n-dialog', () => {
   })
 
   it('dialog type', async () => {
-    const TestCreate = RenderTestComponent('create')
-    const TestError = RenderTestComponent('error')
-    const TestInfo = RenderTestComponent('info')
-    const TestSuccess = RenderTestComponent('success')
-    const TestWarning = RenderTestComponent('warning')
+    const TestCreate = createTestComponent('create')
+    const TestError = createTestComponent('error')
+    const TestInfo = createTestComponent('info')
+    const TestSuccess = createTestComponent('success')
+    const TestWarning = createTestComponent('warning')
 
     const wrapperCreate = await mount(() => (
       <Provider>{{ default: () => <TestCreate /> }}</Provider>
@@ -219,7 +219,7 @@ describe('n-dialog', () => {
   })
 
   it('should work with `bordered` option', async () => {
-    const Test = RenderTestComponent('info', { bordered: true })
+    const Test = createTestComponent('info', { bordered: true })
     const wrapper = await mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
@@ -228,7 +228,7 @@ describe('n-dialog', () => {
   })
 
   it('should work with `closable` option', async () => {
-    const Test = RenderTestComponent('info', { closable: false })
+    const Test = createTestComponent('info', { closable: false })
     const wrapper = await mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
@@ -237,8 +237,8 @@ describe('n-dialog', () => {
   })
 
   it('should work with `icon-placement` option', async () => {
-    const TestLeft = RenderTestComponent('info', { iconPlacement: 'left' })
-    const TestTop = RenderTestComponent('info', { iconPlacement: 'top' })
+    const TestLeft = createTestComponent('info', { iconPlacement: 'left' })
+    const TestTop = createTestComponent('info', { iconPlacement: 'top' })
 
     const wrapperLeft = await mount(() => (
       <Provider>{{ default: () => <TestLeft /> }}</Provider>
@@ -254,7 +254,7 @@ describe('n-dialog', () => {
   })
 
   it('should work with `negative-text` option', async () => {
-    const Test = RenderTestComponent('info', { negativeText: 'test' })
+    const Test = createTestComponent('info', { negativeText: 'test' })
     const wrapper = await mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
@@ -265,7 +265,7 @@ describe('n-dialog', () => {
   })
 
   it('should work with `positive-text` option', async () => {
-    const Test = RenderTestComponent('info', { positiveText: 'test' })
+    const Test = createTestComponent('info', { positiveText: 'test' })
     const wrapper = await mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
