@@ -136,7 +136,7 @@ export function convertColor (
 export function convertColor (
   value: string,
   mode: ColorPickerMode,
-  originalMode?: ColorPickerMode | null
+  originalMode?: null
 ): string | null
 // implementation
 export function convertColor (

@@ -106,8 +106,6 @@ export default defineComponent({
             tabindex={0}
             onClick={() => this.handleSwatchSelect(swatch)}
             onKeydown={e => this.handleSwatchKeyDown(e, swatch)}
-            // @ts-expect-error
-            style={{ '--swatch-valid-color': swatch.legalValue }}
           >
             <div
               class={`${clsPrefix}-color-picker-swatch__fill`}
