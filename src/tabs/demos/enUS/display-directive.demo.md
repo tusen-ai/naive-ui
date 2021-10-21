@@ -1,4 +1,4 @@
-# Display Directive
+# Display directive
 
 You can set tab-panel's display directive to `if` or `show`. When use show, the tab-panel's content won't be reset after tab changes.
 
