@@ -22,6 +22,7 @@ export default defineComponent({
     const {
       mergedClsPrefixRef,
       mergedDisabledRef,
+      maxReachedRef,
       listTypeRef,
       dragOverRef,
       openFileDialog,
@@ -34,7 +35,7 @@ export default defineComponent({
     )
 
     function handleTriggerClick (): void {
-      if (mergedDisabledRef.value) return
+      if (mergedDisabledRef.value || maxReachedRef.value) return
       openFileDialog()
     }
     function handleTriggerDragOver (e: DragEvent): void {
@@ -51,7 +52,13 @@ export default defineComponent({
     }
     function handleTriggerDrop (e: DragEvent): void {
       e.preventDefault()
-      if (!draggerInsideRef.value || mergedDisabledRef.value) return
+      if (
+        !draggerInsideRef.value ||
+        mergedDisabledRef.value ||
+        maxReachedRef.value
+      ) {
+        return
+      }
       const dataTransfer = e.dataTransfer
       const files = dataTransfer?.files
       if (files) {
@@ -74,7 +81,7 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-upload-trigger`,
-            mergedDisabledRef.value &&
+            (mergedDisabledRef.value || maxReachedRef.value) &&
               `${mergedClsPrefix}-upload-trigger--disabled`,
             isImageCardTypeRef.value &&
               `${mergedClsPrefix}-upload-trigger--image-card`

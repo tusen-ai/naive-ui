@@ -2,7 +2,7 @@ import { h, defineComponent, inject, computed } from 'vue'
 import { AddIcon } from '../../_internal/icons'
 import { NBaseClose, NBaseIcon } from '../../_internal'
 import { render } from '../../_utils'
-import { tabsInjectionKey } from './interface'
+import { OnBeforeLeaveImpl, tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
 
 export default defineComponent({
@@ -21,6 +21,8 @@ export default defineComponent({
       typeRef,
       closableRef,
       tabStyleRef,
+      nextTabNameRef,
+      onBeforeLeaveRef,
       handleAdd,
       handleTabClick,
       handleClose
@@ -48,7 +50,23 @@ export default defineComponent({
           handleAdd()
           return
         }
-        handleTabClick(props.name)
+        const { name: nameProp } = props
+        if (nameProp !== valueRef.value) {
+          if (nameProp === nextTabNameRef.value) return
+          nextTabNameRef.value = nameProp
+          const { value: onBeforeLeave } = onBeforeLeaveRef
+          if (!onBeforeLeave) {
+            handleTabClick(nameProp)
+          } else {
+            void Promise.resolve(
+              (onBeforeLeave as OnBeforeLeaveImpl)(props.name, valueRef.value)
+            ).then((allowLeave) => {
+              if (allowLeave) {
+                handleTabClick(nameProp)
+              }
+            })
+          }
+        }
       }
     }
   },
