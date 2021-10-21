@@ -10,6 +10,7 @@
     v-model:value="range1"
     type="daterange"
     :shortcuts="rangeShortcuts"
+    :update-value-on-close="true"
   />
   <n-date-picker
     v-model:value="range2"
@@ -31,10 +32,22 @@ export default defineComponent({
       range2: ref(null),
       shortcuts: {
         亲爱的生日: 1631203200000,
-        派对日: 1629216000000
+        派对日: 1629216000000,
+        往前一天: (date) => {
+          date = date ?? new Date().getTime()
+          return date - 24 * 60 * 60 * 1000
+        }
       },
       rangeShortcuts: {
-        快乐假期: [1629216000000, 1631203200000]
+        快乐假期: [1629216000000, 1631203200000],
+        喜加一: (date) =>
+          Array.isArray(date)
+            ? [date[0], date[1] + 24 * 60 * 60 * 1000]
+            : Array(2).fill(new Date().getTime()),
+        近2小时: () => {
+          const cur = new Date().getTime()
+          return [cur - 2 * 60 * 60 * 1000, cur]
+        }
       }
     }
   }

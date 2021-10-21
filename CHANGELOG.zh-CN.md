@@ -4,6 +4,10 @@
 
 - `n-collapsed-transition` 的 `collapsed` 属性被废弃，请使用 `show` 属性代替，关闭 [#1407](https://github.com/TuSimple/naive-ui/issues/1407)
 
+### Feats
+
+- `n-date-picker` 修改 `shortcuts` 属性支持传入回调函数
+
 ## 2.19.11 (2021-10-21)
 
 ### Fixes

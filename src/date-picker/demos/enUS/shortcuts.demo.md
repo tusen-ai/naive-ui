@@ -31,10 +31,17 @@ export default defineComponent({
       range2: ref(null),
       shortcuts: {
         'Honey birthday': 1631203200000,
-        'Party day': 1629216000000
+        'Party day': 1629216000000,
+        'The day before': (date) => (date ? date - 24 * 60 * 60 * 1000 : null)
       },
       rangeShortcuts: {
-        'Happy holiday': [1629216000000, 1631203200000]
+        'Happy holiday': [1629216000000, 1631203200000],
+        'One more day': (date) =>
+          Array.isArray(date) ? [date[0], date[1] + 24 * 60 * 60 * 1000] : null,
+        'Last 2 hours': () => {
+          const cur = new Date().getTime()
+          return [cur - 2 * 60 * 60 * 1000, cur]
+        }
       }
     }
   }

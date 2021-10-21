@@ -4,6 +4,10 @@
 
 - `n-collapsed-transition`'s `collapsed` prop is deprecated, please use `show` instead, closes [#1407](https://github.com/TuSimple/naive-ui/issues/1407).
 
+### Feats
+
+- `n-date-picker` modify `shortcuts` prop to support function value
+
 ## 2.19.11 (2021-10-21)
 
 ### Fixes
