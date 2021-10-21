@@ -15,6 +15,7 @@ basic
 | Name   | Type      | Default | Description                                 |
 | ------ | --------- | ------- | ------------------------------------------- |
 | appear | `boolean` | `false` | Whether to play animation on first mounted. |
+| show   | `boolean` | `true`  | Whether to show content.                    |
 
 ### CollapseTransition Slots
 
