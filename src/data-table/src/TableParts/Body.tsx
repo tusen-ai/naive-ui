@@ -8,7 +8,8 @@ import {
   watchEffect,
   onUnmounted,
   PropType,
-  CSSProperties
+  CSSProperties,
+  computed
 } from 'vue'
 import { pxfy, repeat } from 'seemly'
 import { VirtualList, VirtualListInst } from 'vueuc'
@@ -155,6 +156,9 @@ export default defineComponent({
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
     let lastSelectedKey: string | number = ''
+    const mergedExpandedRowKeysSetRef = computed(() => {
+      return new Set(mergedExpandedRowKeysRef.value)
+    })
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey },
       checked: boolean,
@@ -304,6 +308,7 @@ export default defineComponent({
       rowClassName: rowClassNameRef,
       renderExpand: renderExpandRef,
       mergedExpandedRowKeys: mergedExpandedRowKeysRef,
+      mergedExpandedRowKeysSet: mergedExpandedRowKeysSetRef,
       hoverKey: hoverKeyRef,
       mergedSortState: mergedSortStateRef,
       virtualScroll: virtualScrollRef,
@@ -385,6 +390,7 @@ export default defineComponent({
               rowClassName,
               mergedSortState,
               mergedExpandedRowKeys,
+              mergedExpandedRowKeysSet,
               componentId,
               showHeader,
               hasChildren,
@@ -671,8 +677,7 @@ export default defineComponent({
 
             // 展开行数据化 ----------------------------------------- start ---->
             const newMergedData: RowRenderInfo[] = []
-            const mergedExpandedRowKeysSet = new Set(mergedExpandedRowKeys)
-            mergedData.forEach((rowInfo, index) => {
+            mergedData.forEach((rowInfo) => {
               const expanded = mergedExpandedRowKeysSet.has(rowInfo.key)
               if (renderExpand && expanded) {
                 // 单独赋值的都是不可枚举的参数
