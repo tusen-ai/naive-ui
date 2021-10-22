@@ -1109,4 +1109,47 @@ describe('props.columns', () => {
     ))
     expect(wrapper.find('tbody [data-col-key="name"]').text()).toContain('0-0')
   })
+
+  it('should work with `renderExpand` `expandable` prop', async () => {
+    const columns: DataTableColumns = [
+      {
+        type: 'expand',
+        expandable: (_, index) => index === 0,
+        renderExpand: (rowData: any) => {
+          return `${String(rowData.name)} is a good guy.`
+        }
+      },
+      {
+        title: 'Name',
+        key: 'name',
+        render (rowData: any, rowIndex: number) {
+          return `${String(rowData.name)}-${rowIndex}`
+        }
+      }
+    ]
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: index
+      }
+    })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} row-key={rowKey} />
+    ))
+    expect(wrapper.findAll('tbody .n-data-table-td--expand').length).toBe(5)
+    expect(wrapper.findAll('tbody td')[0].attributes('data-col-key')).toContain(
+      '__n_expand__'
+    )
+    expect(wrapper.findAll('tbody td')[0].attributes('class')).toContain(
+      'n-data-table-td--expand'
+    )
+    await void wrapper
+      .findAll('tbody .n-data-table-expand-trigger')[0]
+      .trigger('click')
+    await nextTick()
+    expect(wrapper.findAll('tbody tr').length).toBe(6)
+    expect(wrapper.find('tbody [colspan="2"]').text()).toContain(
+      '0 is a good guy.'
+    )
+  })
 })
