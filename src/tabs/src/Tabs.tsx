@@ -11,8 +11,6 @@ import {
   ComponentPublicInstance,
   VNode,
   nextTick,
-  withDirectives,
-  vShow,
   watchEffect
 } from 'vue'
 import { VResizeObserver, VXScroll, VXScrollInst } from 'vueuc'
@@ -535,39 +533,27 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-tabs-nav__suffix`}>{suffix}</div>
           ) : null}
         </div>
-        {filterMapTabPanes(children, this.mergedValue)}
+        {normalizeTabPanes(children, this.mergedValue)}
       </div>
     )
   }
 })
 
-function filterMapTabPanes (
+function normalizeTabPanes (
   tabPaneVNodes: VNode[],
   value: string | number | null
 ): VNode[] {
-  const children: VNode[] = []
-  tabPaneVNodes.forEach((vNode) => {
-    const {
-      name,
-      displayDirective,
-      'display-directive': _displayDirective
-    } = vNode.props as {
+  return tabPaneVNodes.map((vNode) => {
+    const props = vNode.props as {
       name: string | number
-      displayDirective: 'show' | 'if' | undefined
-      'display-directive': 'show' | 'if' | undefined
+      active: boolean
     }
-    const useVShow = displayDirective === 'show' || _displayDirective === 'show'
-    const show = value === name
+    props.active = props.name === value
     if (vNode.key !== undefined) {
-      vNode.key = name
+      vNode.key = props.name
     }
-    if (useVShow) {
-      children.push(withDirectives(vNode, [[vShow, show]]))
-    } else if (show) {
-      children.push(vNode)
-    }
+    return vNode
   })
-  return children
 }
 
 function createAddTag (addable: Addable, leftPadded: boolean): VNode {
