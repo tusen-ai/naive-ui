@@ -165,4 +165,19 @@ describe('n-drawer', () => {
       expect(onUpdate).toHaveBeenCalled()
     }, 300)
   })
+
+  it('should work with `header-style` prop', async () => {
+    const wrapper = await mountDrawer({
+      drawerContentProps: {
+        title: 'test',
+        headerStyle: { backgroundColor: 'red' }
+      },
+      show: true
+    })
+
+    expect(
+      document.querySelector('[style="background-color: red;"]')
+    ).not.toEqual(null)
+    wrapper.unmount()
+  })
 })
