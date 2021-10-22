@@ -41,7 +41,6 @@ export const tabPaneProps = {
     type: String as PropType<'if' | 'show' | 'lazyload'>,
     default: 'if'
   },
-  /** @private */
   active: Boolean,
   closable: {
     type: Boolean as PropType<boolean | undefined>,
@@ -76,7 +75,7 @@ export default defineComponent({
       }
     )
 
-    const genTabPanel = (): VNode => (
+    const genTabPane = (): VNode => (
       <div
         class={`${NTab.mergedClsPrefixRef.value}-tab-pane`}
         style={NTab.paneStyleRef.value}
@@ -87,12 +86,12 @@ export default defineComponent({
 
     return {
       shouldRender: shouldRenderRef,
-      genTabPanel
+      genTabPane
     }
   },
   render () {
     return this.shouldRender
-      ? withDirectives(this.genTabPanel(), [[vShow, this.active]])
+      ? withDirectives(this.genTabPane(), [[vShow, this.active]])
       : null
   }
 })
