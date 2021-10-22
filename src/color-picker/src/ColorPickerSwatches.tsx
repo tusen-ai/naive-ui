@@ -1,20 +1,6 @@
 import { defineComponent, h, PropType, computed } from 'vue'
-import {
-  hsl2hsv,
-  hsl2rgb,
-  hsla,
-  hsv2hsl,
-  hsv2rgb,
-  hsva,
-  rgb2hsl,
-  rgb2hsv,
-  rgba,
-  toHexaString,
-  toHslaString,
-  toHsvaString,
-  toRgbaString
-} from 'seemly'
-import { ColorPickerMode, getModeFromValue } from './utils'
+import { hsv2rgb, hsva, toRgbaString } from 'seemly'
+import { ColorPickerMode, convertColor, getModeFromValue } from './utils'
 import { warn } from '../../_utils'
 
 // Try to normalize the color values to ensure that they are valid CSS colors
@@ -36,63 +22,6 @@ function getHexFromName (color: string): string {
   ctx.fillStyle = color
   return ctx.fillStyle
 }
-
-const covert = {
-  rgb: {
-    hex (swatchValue: string): string {
-      return toHexaString(rgba(swatchValue))
-    },
-    hsl (swatchValue: string): string {
-      const [r, g, b, a] = rgba(swatchValue)
-      return toHslaString([...rgb2hsl(r, g, b), a])
-    },
-    hsv (swatchValue: string): string {
-      const [r, g, b, a] = rgba(swatchValue)
-      return toHsvaString([...rgb2hsv(r, g, b), a])
-    }
-  },
-  hex: {
-    rgb (swatchValue: string): string {
-      return toRgbaString(rgba(swatchValue))
-    },
-    hsl (swatchValue: string): string {
-      const [r, g, b, a] = rgba(swatchValue)
-      return toHslaString([...rgb2hsl(r, g, b), a])
-    },
-    hsv (swatchValue: string): string {
-      const [r, g, b, a] = rgba(swatchValue)
-      return toHsvaString([...rgb2hsv(r, g, b), a])
-    }
-  },
-  hsl: {
-    hex (swatchValue: string): string {
-      const [h, s, l, a] = hsla(swatchValue)
-      return toHexaString([...hsl2rgb(h, s, l), a])
-    },
-    rgb (swatchValue: string): string {
-      const [h, s, l, a] = hsla(swatchValue)
-      return toRgbaString([...hsl2rgb(h, s, l), a])
-    },
-    hsv (swatchValue: string): string {
-      const [h, s, l, a] = hsla(swatchValue)
-      return toHsvaString([...hsl2hsv(h, s, l), a])
-    }
-  },
-  hsv: {
-    hex (swatchValue: string): string {
-      const [h, s, v, a] = hsva(swatchValue)
-      return toHexaString([...hsv2rgb(h, s, v), a])
-    },
-    rgb (swatchValue: string) {
-      const [h, s, v, a] = hsva(swatchValue)
-      return toRgbaString([...hsv2rgb(h, s, v), a])
-    },
-    hsl (swatchValue: string): string {
-      const [h, s, v, a] = hsva(swatchValue)
-      return toHslaString([...hsv2hsl(h, s, v), a])
-    }
-  }
-} as const
 
 interface ParsedColor {
   value: string
@@ -146,20 +75,25 @@ export default defineComponent({
           value = '#000000'
         }
       }
+
       if (swatchColorMode === modeProp) return value
 
       // swatch value to current mode value
-      const conversions = covert[swatchColorMode]
-      return (conversions as any)[modeProp](value)
+      return convertColor(value, modeProp, swatchColorMode)
     }
 
     function handleSwatchSelect (parsed: ParsedColor): void {
       props.onUpdateColor(normalizeOutput(parsed))
     }
 
+    function handleSwatchKeyDown (e: KeyboardEvent, parsed: ParsedColor): void {
+      if (e.key === 'Enter') handleSwatchSelect(parsed)
+    }
+
     return {
       parsedSwatchesRef,
-      handleSwatchSelect
+      handleSwatchSelect,
+      handleSwatchKeyDown
     }
   },
   render () {
@@ -169,7 +103,9 @@ export default defineComponent({
         {this.parsedSwatchesRef.map((swatch) => (
           <div
             class={`${clsPrefix}-color-picker-swatch`}
+            tabindex={0}
             onClick={() => this.handleSwatchSelect(swatch)}
+            onKeydown={e => this.handleSwatchKeyDown(e, swatch)}
           >
             <div
               class={`${clsPrefix}-color-picker-swatch__fill`}
