@@ -1,14 +1,19 @@
 # CHANGELOG
 
+### Breaking Changes
+
+- `n-collapsed-transition`'s `collapsed` prop is deprecated, please use `show` instead, closes [#1407](https://github.com/TuSimple/naive-ui/issues/1407).
+
 ## 2.19.11 (2021-10-21)
 
-## Fixes
+### Fixes
 
 - Fix `n-upload`'s file can't be removed when file count limit is reached, closes [#1401](https://github.com/TuSimple/naive-ui/issues/1401).
 
 ### Feats
 
 - `n-tabs` add `on-before-leave` prop, closes [#1337](https://github.com/TuSimple/naive-ui/issues/1337).
+- `n-color-picker` add `show-preview` prop, closes [#1281](https://github.com/TuSimple/naive-ui/issues/1281).
 
 ## 2.19.9 (2021-10-18)
 
