@@ -1,4 +1,4 @@
-# Line Debug
+# Line debug
 
 ```html
 <n-button @click="name = 'the beatles'">Set Name to the Beatles</n-button>
