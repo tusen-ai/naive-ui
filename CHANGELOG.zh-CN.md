@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-image` 的 `toolbar` 增加关闭图标, 关闭 [#1412](https://github.com/TuSimple/naive-ui/issues/1412)
+
 ## 2.20.0 (2021-10-28)
 
 ### Breaking Changes

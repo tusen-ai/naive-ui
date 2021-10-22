@@ -22,7 +22,8 @@ import {
   RotateClockwiseIcon,
   RotateCounterclockwiseIcon,
   ZoomInIcon,
-  ZoomOutIcon
+  ZoomOutIcon,
+  CloseIcon
 } from '../../_internal/icons'
 import { useTheme } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
@@ -345,6 +346,12 @@ export default defineComponent({
                                     onClick={this.zoomIn}
                                   >
                                     {{ default: () => <ZoomInIcon /> }}
+                                  </NBaseIcon>
+                                  <NBaseIcon
+                                    clsPrefix={clsPrefix}
+                                    onClick={this.toggleShow}
+                                  >
+                                    {{ default: () => <CloseIcon /> }}
                                   </NBaseIcon>
                                 </div>
                               ) : null
