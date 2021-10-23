@@ -33,6 +33,7 @@ import {
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import style from './styles/index.cssr'
 import Tab from './Tab'
+import { TabPaneProps } from './TabPane'
 
 const tabsProps = {
   ...(useTheme.props as ThemeProps<TabsTheme>),
@@ -533,26 +534,31 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-tabs-nav__suffix`}>{suffix}</div>
           ) : null}
         </div>
-        {normalizeTabPanes(children, this.mergedValue)}
+        {filterMapTabPanes(children, this.mergedValue)}
       </div>
     )
   }
 })
 
-function normalizeTabPanes (
+function filterMapTabPanes (
   tabPaneVNodes: VNode[],
   value: string | number | null
 ): VNode[] {
-  return tabPaneVNodes.map((vNode) => {
+  return tabPaneVNodes.filter((vNode) => {
     const props = vNode.props as {
       name: string | number
       active: boolean
+      displayDirective: TabPaneProps['displayDirective']
+      'display-directive': TabPaneProps['displayDirective']
     }
-    props.active = props.name === value
+    const active = (props.active = props.name === value)
     if (vNode.key !== undefined) {
       vNode.key = props.name
     }
-    return vNode
+    return (
+      active ||
+      (props.displayDirective !== 'if' && props['display-directive'] !== 'if')
+    )
   })
 }
 

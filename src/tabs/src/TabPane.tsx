@@ -64,8 +64,7 @@ export default defineComponent({
     const isRenderedRef = ref(false)
     const shouldRenderRef = computed(
       () =>
-        props.active ||
-        (isRenderedRef.value && props.displayDirective !== 'if')
+        props.active || (isRenderedRef.value && props.displayDirective !== 'if')
     )
     watch(
       () => props.active,
