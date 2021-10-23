@@ -1,6 +1,6 @@
 # Use Checkbox
 
-If you want to achieve the effect of demo, `checkable`, `cascade` and `multiple` are indispensable.
+If you want to have the same effect of this demo, you will need `checkable`, `cascade` and `multiple` properties.
 
 ```html
 <n-tree-select
