@@ -4,6 +4,10 @@
 
 - `n-collapsed-transition`'s `collapsed` prop is deprecated, please use `show` instead, closes [#1407](https://github.com/TuSimple/naive-ui/issues/1407).
 
+### Fixes
+
+- Fix `n-log` `font-size` prop not working, closes [#1416](https://github.com/TuSimple/naive-ui/issues/1416).
+
 ## 2.19.11 (2021-10-21)
 
 ### Fixes
