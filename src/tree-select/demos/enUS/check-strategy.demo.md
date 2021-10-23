@@ -1,6 +1,6 @@
 # Set Check Strategy
 
-Set the way to show checked options. `all` means showing all checked nodes. `parent` means showing all checked parent nodes when all child node are checked. `child` means showing all child nodes.
+Set the way to display selected nodes when parents and children are selected. `all` will display both the parent and the children when all the children are selected. `parent` will only show the parent option if all of the children are selected. `child` will only ever show leaf nodes (nodes with no children).
 
 ```html
 <n-space vertical>
