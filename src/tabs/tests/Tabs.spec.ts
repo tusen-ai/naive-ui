@@ -97,4 +97,62 @@ describe('n-tabs', () => {
       wrapper.find('.n-tabs-scroll-padding').attributes('style')
     ).toContain('width: 100px;')
   })
+
+  it('should work with `display-directive` prop', async () => {
+    const wrapper = mount(NTabs, {
+      props: { value: 'show' },
+      slots: {
+        default: () => [
+          h(
+            NTabPane,
+            {
+              displayDirective: 'show',
+              tab: 'show',
+              name: 'show'
+            },
+            {
+              default: () =>
+                h('span', { class: 'test-show' })
+            }
+          ),
+          h(
+            NTabPane,
+            {
+              displayDirective: 'if',
+              tab: 'if',
+              name: 'if'
+            },
+            {
+              default: () =>
+                h('span', { class: 'test-if' })
+            }
+          ),
+          h(
+            NTabPane,
+            {
+              displayDirective: 'lazyload',
+              tab: 'lazyload',
+              name: 'lazyload'
+            },
+            {
+              default: () =>
+                h('span', { class: 'test-lazyload' })
+            }
+          )
+        ]
+      }
+    })
+    await wrapper.setProps({ value: 'if' })
+    expect(wrapper.find('.test-show').exists()).toEqual(true)
+    expect(wrapper.find('.test-if').exists()).toEqual(true)
+    expect(wrapper.find('.test-lazyload').exists()).toEqual(false)
+    await wrapper.setProps({ value: 'lazyload' })
+    expect(wrapper.find('.test-show').exists()).toEqual(true)
+    expect(wrapper.find('.test-if').exists()).toEqual(false)
+    expect(wrapper.find('.test-lazyload').exists()).toEqual(true)
+    await wrapper.setProps({ value: 'show' })
+    expect(wrapper.find('.test-show').exists()).toEqual(true)
+    expect(wrapper.find('.test-if').exists()).toEqual(false)
+    expect(wrapper.find('.test-lazyload').exists()).toEqual(true)
+  })
 })
