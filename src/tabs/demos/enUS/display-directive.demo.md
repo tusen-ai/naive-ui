@@ -10,7 +10,7 @@ You can set tab-panel's display directive to `if` or `show`. When use `show`, th
   <n-tab-pane name="if" display-directive="if" tab="if">
     <if-input />
   </n-tab-pane>
-  <n-tab-pane name="lazyLoad" display-directive="lazyload" tab="lazyload">
+  <n-tab-pane name="lazyload" display-directive="lazyload" tab="lazyload">
     <lazyload-input />
   </n-tab-pane>
 </n-tabs>
