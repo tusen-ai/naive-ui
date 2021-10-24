@@ -6,6 +6,10 @@
 
 - 修复 `n-tabs` 在新增 tab 后切换 tab 无法生效，关闭 [#1417]https://github.com/TuSimple/naive-ui/issues/1417)
 
+### Feats
+
+- `n-tree` 的 `on-load` 属性在 `remote` 模式下 `expanded-keys` 属性改变时被触发, closes [#1339](https://github.com/TuSimple/naive-ui/issues/1339).
+
 ## 2.20.0 (2021-10-28)
 
 ### Breaking Changes

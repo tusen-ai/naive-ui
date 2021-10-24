@@ -6,6 +6,10 @@
 
 - Fix `n-tabs` switch tab does not work when adding a new tab, closes [#1417](https://github.com/TuSimple/naive-ui/issues/1417).
 
+### Feats
+
+- `n-tree`'s `on-load` prop is triggered when the `expanded-keys` prop changes in `remote` mode, closes [#1339](https://github.com/TuSimple/naive-ui/issues/1339).
+
 ## 2.20.0 (2021-10-28)
 
 ### Breaking Changes

@@ -385,7 +385,34 @@ export default defineComponent({
         uncontrolledHighlightKeySetRef.value = new Set()
       }
     })
-
+    watch(controlledExpandedKeysRef, (value, oldValue) => {
+      if (value) {
+        const newValues = oldValue
+          ? value.filter((key) => !oldValue.includes(key))
+          : value
+        // console.log(newValues)
+        newValues.forEach((key) => {
+          const node = displayTreeMateRef.value?.getNode(key)
+          const { onLoad } = props
+          if (node && !node.children?.length && onLoad) {
+            if (!loadingKeysRef.value.includes(key)) {
+              loadingKeysRef.value.push(key)
+              onLoad(node.rawNode)
+                .then(() => {
+                  loadingKeysRef.value.splice(
+                    loadingKeysRef.value.findIndex((k) => k === node.key),
+                    1
+                  )
+                })
+                .catch((loadError) => {
+                  console.error(loadError)
+                  resetDragExpandState()
+                })
+            }
+          }
+        })
+      }
+    })
     // animation in progress
     const aipRef = ref(false)
     // animation flattened nodes
