@@ -26,7 +26,7 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm i pnpm@latest -g
+    - run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
     - run: pnpm install
     - run: pnpm run lint
     - run: pnpm run test:cov

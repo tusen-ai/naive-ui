@@ -1,6 +1,15 @@
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
+const fs = require('fs-extra')
+const esModules = ['lodash-es'].map((pkg) => {
+  if (fs.pathExistsSync('node_modules/.pnpm')) {
+    return `.pnpm/${pkg}`
+  } else {
+    return pkg
+  }
+})
+
 module.exports = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -158,7 +167,7 @@ module.exports = {
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  transformIgnorePatterns: ['<rootDir>/node_modules/.pnpm/(?!lodash-es)'],
+  transformIgnorePatterns: [`<rootDir>/node_modules/(?!${esModules})`],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,
