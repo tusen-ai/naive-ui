@@ -21,8 +21,7 @@ import {
   RowKey,
   SummaryRowData,
   MainTableBodyRef,
-  TmNode,
-  InternalRowData
+  TmNode
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import Cell from './Cell'
@@ -41,19 +40,8 @@ type RowRenderInfo =
   | TmNode
   | {
     isExpandedRow: true
-    rawNode: InternalRowData
+    tmNode: TmNode
     key: RowKey
-    disabled: boolean
-    level: number
-    children: TmNode[]
-  }
-  | {
-    expanded: boolean
-    rawNode: InternalRowData
-    key: RowKey
-    disabled: boolean
-    level: number
-    children: TmNode[]
   }
 
 function flatten (rows: TmNode[], expandedRowKeys: RowKey[]): TmNode[] {
@@ -459,14 +447,15 @@ export default defineComponent({
               rowIndex: number,
               isVirtual: boolean
             ): VNode => {
-              const isExpandedRow = 'isExpandedRow' in rowInfo
-              const { rawNode: rowData, key: rowKey } = rowInfo
-              // 如果此行是展开行，直接返回展开行的结构
-              if (isExpandedRow) {
+              /* 如果行类型是展开行，直接返回展开行的结构 */
+              if ('isExpandedRow' in rowInfo) {
+                const {
+                  tmNode: { key, rawNode }
+                } = rowInfo
                 return (
                   <tr
                     class={`${mergedClsPrefix}-data-table-tr`}
-                    key={`${rowKey}__expand`}
+                    key={`${key}__expand`}
                   >
                     <td
                       class={[
@@ -477,13 +466,15 @@ export default defineComponent({
                       ]}
                       colspan={colCount}
                     >
-                      {renderExpand!(rowData, rowIndex)}
+                      {renderExpand!(rawNode, rowIndex)}
                     </td>
                   </tr>
                 )
               }
+              /* 从这里开始行类型就只有两种了 */
+              const { rawNode: rowData, key: rowKey } = rowInfo
               const isSummary = 'summary' in rowInfo
-              const expanded = 'expanded' in rowInfo
+              const expanded = mergedExpandedRowKeysSet.has(rowInfo.key)
               const props = rowProps ? rowProps(rowData, rowIndex) : undefined
               const mergedRowClassName =
                 typeof rowClassName === 'string'
@@ -678,23 +669,13 @@ export default defineComponent({
             // 展开行数据化 ----------------------------------------- start ---->
             const newMergedData: RowRenderInfo[] = []
             mergedData.forEach((rowInfo) => {
-              const expanded = mergedExpandedRowKeysSet.has(rowInfo.key)
-              if (renderExpand && expanded) {
+              if (renderExpand && mergedExpandedRowKeysSet.has(rowInfo.key)) {
                 // 单独赋值的都是不可枚举的参数
-                newMergedData.push(
-                  {
-                    ...rowInfo,
-                    expanded: expanded,
-                    disabled: rowInfo.disabled,
-                    key: rowInfo.key
-                  },
-                  {
-                    ...rowInfo,
-                    isExpandedRow: true,
-                    disabled: rowInfo.disabled,
-                    key: rowInfo.key
-                  }
-                )
+                newMergedData.push(rowInfo, {
+                  isExpandedRow: true,
+                  key: rowInfo.key,
+                  tmNode: rowInfo as TmNode
+                })
               } else {
                 newMergedData.push(rowInfo)
               }
