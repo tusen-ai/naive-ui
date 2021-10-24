@@ -4,6 +4,10 @@
 
 - `n-collapsed-transition` 的 `collapsed` 属性被废弃，请使用 `show` 属性代替，关闭 [#1407](https://github.com/TuSimple/naive-ui/issues/1407)
 
+### Fixes
+
+- 修复 `n-log` `font-size` 属性不生效，关闭 [#1416](https://github.com/TuSimple/naive-ui/issues/1416)
+
 ## 2.19.11 (2021-10-21)
 
 ### Fixes
