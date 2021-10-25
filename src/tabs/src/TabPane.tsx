@@ -1,16 +1,4 @@
-import {
-  h,
-  defineComponent,
-  inject,
-  PropType,
-  VNodeChild,
-  VNode,
-  ref,
-  watch,
-  computed,
-  withDirectives,
-  vShow
-} from 'vue'
+import { h, defineComponent, inject, PropType, VNodeChild, VNode } from 'vue'
 import { throwError, warn } from '../../_utils'
 import { tabsInjectionKey } from './interface'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -41,7 +29,6 @@ export const tabPaneProps = {
     type: String as PropType<'if' | 'show' | 'lazyload'>,
     default: 'if'
   },
-  active: Boolean,
   closable: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -55,42 +42,21 @@ export default defineComponent({
   name: 'TabPane',
   alias: ['TabPanel'],
   props: tabPaneProps,
-  setup (props, { slots }) {
+  setup () {
     const NTab = inject(tabsInjectionKey, null)
     if (!NTab) {
       throwError('tab-pane', '`n-tab-pane` must be placed inside `n-tabs`.')
     }
-
-    const isRenderedRef = ref(false)
-    const shouldRenderRef = computed(
-      () =>
-        props.active || (isRenderedRef.value && props.displayDirective !== 'if')
-    )
-    watch(
-      () => props.active,
-      (value) => value && (isRenderedRef.value = value),
-      {
-        immediate: true
-      }
-    )
-
-    const genTabPane = (): VNode => (
-      <div
-        class={`${NTab.mergedClsPrefixRef.value}-tab-pane`}
-        style={NTab.paneStyleRef.value}
-      >
-        {slots}
-      </div>
-    )
-
     return {
-      shouldRender: shouldRenderRef,
-      genTabPane
+      style: NTab.paneStyleRef,
+      mergedClsPrefix: NTab.mergedClsPrefixRef
     }
   },
   render () {
-    return this.shouldRender
-      ? withDirectives(this.genTabPane(), [[vShow, this.active]])
-      : null
+    return (
+      <div class={`${this.mergedClsPrefix}-tab-pane`} style={this.style}>
+        {this.$slots}
+      </div>
+    )
   }
 })

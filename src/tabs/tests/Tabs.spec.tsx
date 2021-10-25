@@ -99,47 +99,24 @@ describe('n-tabs', () => {
   })
 
   it('should work with `display-directive` prop', async () => {
+    const displayDirectives: Array<'show' | 'if' | 'lazyload'> = [
+      'show',
+      'if',
+      'lazyload'
+    ]
     const wrapper = mount(NTabs, {
       props: { value: 'show' },
       slots: {
-        default: () => [
-          h(
-            NTabPane,
-            {
-              displayDirective: 'show',
-              tab: 'show',
-              name: 'show'
-            },
-            {
-              default: () =>
-                h('span', { class: 'test-show' })
-            }
-          ),
-          h(
-            NTabPane,
-            {
-              displayDirective: 'if',
-              tab: 'if',
-              name: 'if'
-            },
-            {
-              default: () =>
-                h('span', { class: 'test-if' })
-            }
-          ),
-          h(
-            NTabPane,
-            {
-              displayDirective: 'lazyload',
-              tab: 'lazyload',
-              name: 'lazyload'
-            },
-            {
-              default: () =>
-                h('span', { class: 'test-lazyload' })
-            }
-          )
-        ]
+        default: () =>
+          displayDirectives.map((directive) => (
+            <NTabPane
+              displayDirective={directive}
+              tab={directive}
+              name={directive}
+            >
+              {{ default: () => <span class={`test-${directive}`} /> }}
+            </NTabPane>
+          ))
       }
     })
     await wrapper.setProps({ value: 'if' })
