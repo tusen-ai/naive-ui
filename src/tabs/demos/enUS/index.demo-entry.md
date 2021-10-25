@@ -15,6 +15,7 @@ display-directive
 addable
 line-debug
 before-leave
+addable-debug
 ```
 
 ## API
