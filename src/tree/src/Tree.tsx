@@ -10,7 +10,8 @@ import {
   watch,
   CSSProperties,
   VNode,
-  nextTick
+  nextTick,
+  watchEffect
 } from 'vue'
 import {
   createTreeMate,
@@ -80,6 +81,7 @@ export function createTreeMateOptions<T> (
 }
 
 type OnUpdateKeys = (value: Key[], option: Array<TreeOption | null>) => void
+type OnLoadType = (node: TreeOption) => Promise<void>
 
 export const treeSharedProps = {
   filter: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
@@ -150,7 +152,7 @@ const treeProps = {
     type: String,
     default: ''
   },
-  onLoad: Function as PropType<(node: TreeOption) => Promise<void>>,
+  onLoad: Function as PropType<OnLoadType>,
   cascade: Boolean,
   selectable: {
     type: Boolean,
@@ -325,7 +327,7 @@ export default defineComponent({
       controlledHighlightKeySetRef,
       uncontrolledHighlightKeySetRef
     )
-    const loadingKeysRef = ref<Key[]>([])
+    const loadingKeysRef = ref<Set<Key>>(new Set())
 
     let dragStartX: number = 0
     const draggingNodeRef = ref<TmNode | null>(null)
@@ -359,7 +361,7 @@ export default defineComponent({
     watch(
       toRef(props, 'data'),
       () => {
-        loadingKeysRef.value = []
+        loadingKeysRef.value.clear()
         pendingNodeKeyRef.value = null
         resetDndState()
       },
@@ -385,30 +387,36 @@ export default defineComponent({
         uncontrolledHighlightKeySetRef.value = new Set()
       }
     })
-    watch(controlledExpandedKeysRef, (value, oldValue) => {
-      if (value) {
-        const newValues = oldValue
-          ? value.filter((key) => !oldValue.includes(key))
-          : value
-        // console.log(newValues)
-        newValues.forEach((key) => {
+    async function triggerLoading (node: TmNode): Promise<void> {
+      return await new Promise((resolve) => {
+        const { onLoad } = props
+        if (onLoad) {
+          if (!loadingKeysRef.value.has(node.key)) {
+            loadingKeysRef.value.add(node.key)
+            onLoad(node.rawNode)
+              .then(() => {
+                loadingKeysRef.value.delete(node.key)
+                resolve()
+              })
+              .catch((loadError) => {
+                console.error(loadError)
+                resetDragExpandState()
+              })
+          }
+        } else if (__DEV__) {
+          warn(
+            'tree',
+            'There is unloaded node in data but props.onLoad is not specified.'
+          )
+        }
+      })
+    }
+    watchEffect(() => {
+      if (controlledExpandedKeysRef.value?.length) {
+        controlledExpandedKeysRef.value.forEach((key) => {
           const node = displayTreeMateRef.value?.getNode(key)
-          const { onLoad } = props
-          if (node && !node.children?.length && onLoad) {
-            if (!loadingKeysRef.value.includes(key)) {
-              loadingKeysRef.value.push(key)
-              onLoad(node.rawNode)
-                .then(() => {
-                  loadingKeysRef.value.splice(
-                    loadingKeysRef.value.findIndex((k) => k === node.key),
-                    1
-                  )
-                })
-                .catch((loadError) => {
-                  console.error(loadError)
-                  resetDragExpandState()
-                })
-            }
+          if (node && !node.children?.length) {
+            void triggerLoading(node)
           }
         })
       }
@@ -754,29 +762,9 @@ export default defineComponent({
       }
       if (!node.shallowLoaded) {
         expandTimerId = window.setTimeout(() => {
-          const { onLoad } = props
-          if (onLoad) {
-            if (!loadingKeysRef.value.includes(node.key)) {
-              loadingKeysRef.value.push(node.key)
-              onLoad(node.rawNode)
-                .then(() => {
-                  loadingKeysRef.value.splice(
-                    loadingKeysRef.value.findIndex((key) => key === node.key),
-                    1
-                  )
-                  expand()
-                })
-                .catch((loadError) => {
-                  console.error(loadError)
-                  resetDragExpandState()
-                })
-            }
-          } else if (__DEV__) {
-            warn(
-              'tree',
-              'There is unloaded node in data but props.onLoad is not specified.'
-            )
-          }
+          void triggerLoading(node).then(() => {
+            expand()
+          })
         }, 1000)
       } else {
         expandTimerId = window.setTimeout(() => {
