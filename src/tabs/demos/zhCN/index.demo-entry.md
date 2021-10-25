@@ -17,6 +17,7 @@ line-debug
 style-inherit-debug
 shadow-debug
 before-leave
+addable-debug
 ```
 
 ## API
