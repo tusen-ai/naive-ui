@@ -1,6 +1,6 @@
 # Uncontrolled manually submit
 
-You can use `submit` method to submit in uncontrolled manner. Also you can do it in controlled manner in another way.
+You can use a `ref` to get a handle on files uploaded, and the `submit` method to submit them when you're ready.
 
 ```html
 <n-button
