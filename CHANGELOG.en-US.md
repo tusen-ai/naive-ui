@@ -9,6 +9,10 @@
 - Fix `n-log` `font-size` prop not working, closes [#1416](https://github.com/TuSimple/naive-ui/issues/1416).
 - Fix `n-loading-bar` will show once even if `start` is not called when `loading-bar-style` is set.
 
+### Feats
+
+- `n-data-table` optimize the logic of underlying rendering and improve component performance.
+
 ## 2.19.11 (2021-10-21)
 
 ### Fixes

@@ -44,11 +44,11 @@ type RowRenderInfo =
     key: RowKey
   }
 
-function flatten (rows: TmNode[], expandedRowKeys: RowKey[]): TmNode[] {
+function flatten (rows: TmNode[], expandedRowKeys: Set<RowKey>): TmNode[] {
   const fRows: TmNode[] = []
   function traverse (rs: TmNode[]): void {
     rs.forEach((r) => {
-      if (r.children && expandedRowKeys.includes(r.key)) {
+      if (r.children && expandedRowKeys.has(r.key)) {
         fRows.push(r)
         traverse(r.children)
       } else {
@@ -144,7 +144,7 @@ export default defineComponent({
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
     let lastSelectedKey: string | number = ''
-    const mergedExpandedRowKeysSetRef = computed(() => {
+    const mergedExpandedRowKeySetRef = computed(() => {
       return new Set(mergedExpandedRowKeysRef.value)
     })
     function handleCheckboxUpdateChecked (
@@ -295,8 +295,7 @@ export default defineComponent({
       currentPage: mergedCurrentPageRef,
       rowClassName: rowClassNameRef,
       renderExpand: renderExpandRef,
-      mergedExpandedRowKeys: mergedExpandedRowKeysRef,
-      mergedExpandedRowKeysSet: mergedExpandedRowKeysSetRef,
+      mergedExpandedRowKeySet: mergedExpandedRowKeySetRef,
       hoverKey: hoverKeyRef,
       mergedSortState: mergedSortStateRef,
       virtualScroll: virtualScrollRef,
@@ -377,8 +376,7 @@ export default defineComponent({
               currentPage,
               rowClassName,
               mergedSortState,
-              mergedExpandedRowKeys,
-              mergedExpandedRowKeysSet,
+              mergedExpandedRowKeySet,
               componentId,
               showHeader,
               hasChildren,
@@ -402,10 +400,9 @@ export default defineComponent({
             // if there is children in data, we should expand mergedData first
 
             const mergedPaginationData = hasChildren
-              ? flatten(paginatedData, mergedExpandedRowKeys)
+              ? flatten(paginatedData, mergedExpandedRowKeySet)
               : paginatedData
 
-            // 表格总结栏处理 ----------------------------------------- start ---->
             if (summary) {
               const summaryRows = summary(this.rawPaginatedData)
               if (Array.isArray(summaryRows)) {
@@ -432,13 +429,10 @@ export default defineComponent({
             } else {
               mergedData = mergedPaginationData
             }
-            // 表格总结栏处理 ----------------------------------------- end ---->
 
-            // 缩进样式 ----------------------------------------- start ---->
             const indentStyle = hasChildren
               ? { width: pxfy(this.indent) }
               : undefined
-            // 缩进样式 ----------------------------------------- end ---->
 
             const { length: rowCount } = mergedData
 
@@ -447,7 +441,6 @@ export default defineComponent({
               rowIndex: number,
               isVirtual: boolean
             ): VNode => {
-              /* 如果行类型是展开行，直接返回展开行的结构 */
               if ('isExpandedRow' in rowInfo) {
                 const {
                   tmNode: { key, rawNode }
@@ -471,10 +464,9 @@ export default defineComponent({
                   </tr>
                 )
               }
-              /* 从这里开始行类型就只有两种了 */
               const { rawNode: rowData, key: rowKey } = rowInfo
               const isSummary = 'summary' in rowInfo
-              const expanded = mergedExpandedRowKeysSet.has(rowInfo.key)
+              const expanded = mergedExpandedRowKeySet.has(rowInfo.key)
               const props = rowProps ? rowProps(rowData, rowIndex) : undefined
               const mergedRowClassName =
                 typeof rowClassName === 'string'
@@ -493,7 +485,6 @@ export default defineComponent({
                   {...props}
                 >
                   {cols.map((col, colIndex) => {
-                    // 检查当前单元格是否因为合并单元格而需要跳过
                     if (!isVirtual && rowIndex in cordToPass) {
                       const cordOfRowToPass = cordToPass[rowIndex]
                       const indexInCordOfRowToPass =
@@ -504,27 +495,21 @@ export default defineComponent({
                       }
                     }
 
-                    // 这里是 跨列、跨行 操作，优化后的虚拟滚动支持跨列，不支持跨行
+                    // TODO: Simplify row calculation
                     const { column } = col
                     const colKey = getColKey(col)
-                    // If there is no rowSpan
-                    // virtual list should have a fast path
                     const { rowSpan, colSpan } = column
-                    // 计算当前单元格的跨列
                     const mergedColSpan = isSummary
                       ? rowInfo.rawNode[colKey]?.colSpan || 1 // optional for #1276
                       : colSpan
                         ? colSpan(rowData, rowIndex)
                         : 1
-                    // 计算当前单元格的跨行
                     const mergedRowSpan = isSummary
                       ? rowInfo.rawNode[colKey]?.rowSpan || 1 // optional for #1276
                       : rowSpan
                         ? rowSpan(rowData, rowIndex)
                         : 1
-                    // 是否为最后一个单元格
                     const isLastCol = colIndex + mergedColSpan === colCount
-                    // 是否为最后一行
                     const isLastRow = rowIndex + mergedRowSpan === rowCount
                     const isCrossRowTd = mergedRowSpan > 1
                     if (isCrossRowTd) {
@@ -666,21 +651,20 @@ export default defineComponent({
               return row
             }
 
-            // 展开行数据化 ----------------------------------------- start ---->
-            const newMergedData: RowRenderInfo[] = []
+            // Tile the data of the expanded row
+            const displayedData: RowRenderInfo[] = []
             mergedData.forEach((rowInfo) => {
-              if (renderExpand && mergedExpandedRowKeysSet.has(rowInfo.key)) {
-                // 单独赋值的都是不可枚举的参数
-                newMergedData.push(rowInfo, {
+              if (renderExpand && mergedExpandedRowKeySet.has(rowInfo.key)) {
+                displayedData.push(rowInfo, {
                   isExpandedRow: true,
                   key: rowInfo.key,
                   tmNode: rowInfo as TmNode
                 })
               } else {
-                newMergedData.push(rowInfo)
+                displayedData.push(rowInfo)
               }
             })
-            // 展开行数据化 ----------------------------------------- end ---->
+
             if (!virtualScroll) {
               return (
                 <table
@@ -701,7 +685,7 @@ export default defineComponent({
                     data-n-id={componentId}
                     class={`${mergedClsPrefix}-data-table-tbody`}
                   >
-                    {newMergedData.map((rowInfo, rowIndex) => {
+                    {displayedData.map((rowInfo, rowIndex) => {
                       return renderRow(rowInfo, rowIndex, false)
                     })}
                   </tbody>
@@ -711,7 +695,7 @@ export default defineComponent({
               return (
                 <VirtualList
                   ref="virtualListRef"
-                  items={newMergedData}
+                  items={displayedData}
                   itemSize={28}
                   visibleItemsTag={VirtualListItemWrapper}
                   visibleItemsProps={{
