@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.19.12 (2021-10-26)
+
+### Fixes
+
+- 增加 `n-input`  autocomplete 属性
+
 ### Breaking Changes
 
 - `n-collapsed-transition` 的 `collapsed` 属性被废弃，请使用 `show` 属性代替，关闭 [#1407](https://github.com/TuSimple/naive-ui/issues/1407)
@@ -8,12 +14,6 @@
 
 - 修复 `n-log` `font-size` 属性不生效，关闭 [#1416](https://github.com/TuSimple/naive-ui/issues/1416)
 - 修复 `n-loading-bar` 设定 `loading-bar-style` 后不调用 `start` 也会显示一次
-
-## 2.19.12 (2021-10-26)
-
-### Fixes
-
-- 增加 `n-input`  autocomplete 属性
 
 ## 2.19.11 (2021-10-21)
 
