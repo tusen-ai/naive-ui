@@ -1,6 +1,6 @@
 # Display directive
 
-You can set tab-panel's display directive to `if` or `show`. When use show, the tab-panel's content won't be reset after tab changes.
+You can set tab-panel's display directive to `if` or `show`. When use `show`, the tab-panel's content won't be reset after tab changes. When use `lazyload`, the display effect is the same as `show`, but the content will be lazily loaded.
 
 ```html
 <n-tabs default-value="show">
@@ -9,6 +9,9 @@ You can set tab-panel's display directive to `if` or `show`. When use show, the 
   </n-tab-pane>
   <n-tab-pane name="if" display-directive="if" tab="if">
     <if-input />
+  </n-tab-pane>
+  <n-tab-pane name="lazyload" display-directive="lazyload" tab="lazyload">
+    <lazyload-input />
   </n-tab-pane>
 </n-tabs>
 ```
@@ -33,10 +36,19 @@ const ifInput = defineComponent({
   }
 })
 
+const lazyloadInput = defineComponent({
+  render () {
+    return h(NInput, {
+      placeholder: 'I will delay loading, and my content will not be reset afterwards'
+    })
+  }
+})
+
 export default defineComponent({
   components: {
     showInput,
-    ifInput
+    ifInput,
+    lazyloadInput
   }
 })
 ```

@@ -23,6 +23,7 @@
 
 - `n-tabs` add `on-before-leave` prop, closes [#1337](https://github.com/TuSimple/naive-ui/issues/1337).
 - `n-color-picker` add `show-preview` prop, closes [#1281](https://github.com/TuSimple/naive-ui/issues/1281).
+- `n-tab-pane`'s `display-directive` prop support `lazyload` option, closes [#1374](https://github.com/TuSimple/naive-ui/issues/1374).
 
 ## 2.19.9 (2021-10-18)
 
