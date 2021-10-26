@@ -87,6 +87,10 @@ const inputProps = {
     type: Boolean,
     default: true
   },
+  autocomplete: {
+    type: String,
+    default: 'off'
+  },
   autofocus: Boolean,
   inputProps: Object as PropType<TextareaHTMLAttributes | InputHTMLAttributes>,
   resizable: {
@@ -945,6 +949,7 @@ export default defineComponent({
                 }
                 readonly={this.readonly as any}
                 autofocus={this.autofocus}
+                autocomplete={this.autocomplete}
                 size={this.attrSize}
                 style={this.textDecorationStyle[0] as any}
                 onBlur={this.handleInputBlur}
