@@ -4,6 +4,11 @@
 
 - `n-collapsed-transition` 的 `collapsed` 属性被废弃，请使用 `show` 属性代替，关闭 [#1407](https://github.com/TuSimple/naive-ui/issues/1407)
 
+### Fixes
+
+- 修复 `n-log` `font-size` 属性不生效，关闭 [#1416](https://github.com/TuSimple/naive-ui/issues/1416)
+- 修复 `n-loading-bar` 设定 `loading-bar-style` 后不调用 `start` 也会显示一次
+
 ### Feats
 
 - `n-date-picker` 修改 `shortcuts` 属性支持传入回调函数
@@ -406,7 +411,7 @@
 
 ### Feats
 
-- `n-loading-bar` 新增 `loading-bar-style` 属性，关闭 [#457](https://github.com/TuSimple/naive-ui/issues/457)
+- `n-loading-bar-provider` 新增 `loading-bar-style` 属性，关闭 [#457](https://github.com/TuSimple/naive-ui/issues/457)
 - `n-button` 新增 `text-color` 属性
 - `n-form` 导出 `FormValidationError` 类型
 - `n-popconfirm` 支持不显示操作组件，关闭 [#770](https://github.com/TuSimple/naive-ui/issues/770)
