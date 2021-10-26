@@ -110,16 +110,17 @@ describe('n-date-picker', () => {
   })
 
   it('range type should work with shortcuts prop with function value', async () => {
-    const test = ref<Value>(0)
+    const test = ref<[number, number]>([0, 0])
     const wrapper = mount(NDatePicker, {
       props: {
         value: test.value,
         type: 'daterange',
-        onUpdateValue: (value: Value) => {
+        onUpdateValue: (value: [number, number]) => {
           test.value = value
         },
         shortcuts: {
-          'Honey birthday': () => [1629216000000, 1631203200000]
+          Good: [123, 456] as const,
+          'Honey birthday': () => [1629216000000, 1631203200000] as const
         }
       }
     })
@@ -129,7 +130,7 @@ describe('n-date-picker', () => {
       ?.querySelector('.n-button') as HTMLElement
     button.click()
     expect(test.value).toEqual([1629216000000, 1631203200000])
-    test.value = 0
+    test.value = [0, 0]
     wrapper.setProps({
       type: 'datetimerange'
     })
