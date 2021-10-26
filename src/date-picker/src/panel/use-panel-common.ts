@@ -134,9 +134,9 @@ function usePanelCommon (props: UsePanelCommonProps) {
   }
   function getShortcutValue (
     shortcut: Shortcuts[string]
-  ): number | [number, number] | null {
+  ): number | [number, number] {
     if (typeof shortcut === 'function') {
-      return shortcut(cached ? cachedValue : props.value)
+      return shortcut()
     }
     return shortcut
   }
