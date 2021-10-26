@@ -11,6 +11,7 @@
 
 ### Feats
 
+- `n-data-table` 优化底层渲染的逻辑，提升组件性能
 - `n-date-picker` 的 `shortcuts` 属性支持传入回调函数
 
 ## 2.19.11 (2021-10-21)
