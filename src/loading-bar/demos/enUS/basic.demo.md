@@ -27,6 +27,7 @@ export default defineComponent({
         disabledRef.value = true
       },
       handleError () {
+        disabledRef.value = true
         loadingBar.error()
       }
     }
