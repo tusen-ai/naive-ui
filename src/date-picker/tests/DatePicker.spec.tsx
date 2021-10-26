@@ -11,12 +11,12 @@ describe('n-date-picker', () => {
   })
 
   it('date type should work with shortcuts prop', async () => {
-    const test = ref<Value>(0)
+    const test = ref<[number, number]>([0, 0])
     const wrapper = mount(NDatePicker, {
       props: {
         value: test.value,
         type: 'date',
-        onUpdateValue: (value: Value) => {
+        onUpdateValue: (value: [number, number]) => {
           test.value = value
         },
         shortcuts: {
@@ -30,8 +30,8 @@ describe('n-date-picker', () => {
       ?.querySelector('.n-button') as HTMLElement
     button.click()
     expect(test.value).toEqual(1631203200000)
-    test.value = 0
-    wrapper.setProps({
+    test.value = [0, 0]
+    await wrapper.setProps({
       type: 'datetime'
     })
     await wrapper.find('.n-input').trigger('click')
@@ -64,7 +64,7 @@ describe('n-date-picker', () => {
     button.click()
     expect(test.value).toEqual([1629216000000, 1631203200000])
     test.value = 0
-    wrapper.setProps({
+    await wrapper.setProps({
       type: 'datetimerange'
     })
     await wrapper.find('.n-input').trigger('click')
@@ -97,7 +97,7 @@ describe('n-date-picker', () => {
     button.click()
     expect(test.value).toEqual(1631203200000)
     test.value = 0
-    wrapper.setProps({
+    await wrapper.setProps({
       type: 'datetime'
     })
     await wrapper.find('.n-input').trigger('click')
@@ -111,6 +111,7 @@ describe('n-date-picker', () => {
 
   it('range type should work with shortcuts prop with function value', async () => {
     const test = ref<[number, number]>([0, 0])
+
     const wrapper = mount(NDatePicker, {
       props: {
         value: test.value,
@@ -119,8 +120,8 @@ describe('n-date-picker', () => {
           test.value = value
         },
         shortcuts: {
-          Good: [123, 456] as const,
-          'Honey birthday': () => [1629216000000, 1631203200000] as const
+          'Honey birthday': () =>
+            [1629216000000, 1631203200000] as [number, number]
         }
       }
     })
@@ -131,7 +132,7 @@ describe('n-date-picker', () => {
     button.click()
     expect(test.value).toEqual([1629216000000, 1631203200000])
     test.value = [0, 0]
-    wrapper.setProps({
+    await wrapper.setProps({
       type: 'datetimerange'
     })
     await wrapper.find('.n-input').trigger('click')
