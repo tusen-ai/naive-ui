@@ -14,8 +14,7 @@ import {
   withDirectives,
   vShow,
   watchEffect,
-  ExtractPropTypes,
-  markRaw
+  ExtractPropTypes
 } from 'vue'
 import { VResizeObserver, VXScroll, VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
@@ -317,7 +316,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
-      renderedNames: markRaw(new Set<NonNullable<TabPaneProps['name']>>()),
+      renderedNames: new Set<NonNullable<TabPaneProps['name']>>(),
       tabsElRef,
       barElRef,
       addTabInstRef,
