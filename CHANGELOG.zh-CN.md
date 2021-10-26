@@ -11,7 +11,7 @@
 
 ### Feats
 
-- `n-date-picker` 修改 `shortcuts` 属性支持传入回调函数
+- `n-date-picker` 的 `shortcuts` 属性支持传入回调函数
 
 ## 2.19.11 (2021-10-21)
 

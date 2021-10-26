@@ -11,7 +11,7 @@
 
 ### Feats
 
-- `n-date-picker` modify `shortcuts` prop to support function value
+- `n-date-picker`'s `shortcuts` prop supports functional value.
 
 ## 2.19.11 (2021-10-21)
 
