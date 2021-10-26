@@ -14,6 +14,10 @@
 - `n-data-table` optimize the logic of underlying rendering and improve component performance.
 - `n-date-picker`'s `shortcuts` prop supports functional value.
 
+### i18n
+
+- Add idID locale.
+
 ## 2.19.11 (2021-10-21)
 
 ### Fixes
