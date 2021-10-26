@@ -180,4 +180,19 @@ describe('n-drawer', () => {
     ).not.toEqual(null)
     wrapper.unmount()
   })
+
+  it('should work with `body-style` prop', async () => {
+    const wrapper = await mountDrawer({
+      drawerContentProps: {
+        title: 'test',
+        bodyStyle: { backgroundColor: 'red' }
+      },
+      show: true
+    })
+
+    expect(
+      document.querySelector('[style="background-color: red;"]')
+    ).not.toEqual(null)
+    wrapper.unmount()
+  })
 })
