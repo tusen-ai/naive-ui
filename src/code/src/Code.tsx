@@ -31,6 +31,7 @@ const codeProps = {
   uri: Boolean,
   inline: Boolean,
   // In n-log, we only need to mount code's style for highlight
+  internalFontSize: Number,
   internalNoHighlight: Boolean
 }
 
@@ -117,8 +118,9 @@ export default defineComponent({
             'hue-6-2': $9
           }
         } = themeRef.value
+        const { internalFontSize } = props
         return {
-          '--font-size': fontSize,
+          '--font-size': internalFontSize ? `${internalFontSize}px` : fontSize,
           '--font-family': fontFamilyMono,
           '--font-weight-strong': fontWeightStrong,
           '--bezier': cubicBezierEaseInOut,
