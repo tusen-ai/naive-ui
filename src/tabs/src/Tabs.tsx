@@ -39,7 +39,7 @@ import Tab from './Tab'
 import { tabPaneProps } from './TabPane'
 
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
-  'display-directive': 'if' | 'show' | 'lazyload'
+  'display-directive': 'if' | 'show' | 'show:lazy'
 }
 
 const tabsProps = {
@@ -571,7 +571,7 @@ function filterMapTabPanes (
     if (
       show ||
       matchDisplayDirective('show') ||
-      (matchDisplayDirective('lazyload') && renderedNames.has(name))
+      (matchDisplayDirective('show:lazy') && renderedNames.has(name))
     ) {
       if (!renderedNames.has(name)) {
         renderedNames.add(name)
