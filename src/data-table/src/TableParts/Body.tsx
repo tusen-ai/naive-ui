@@ -363,7 +363,7 @@ export default defineComponent({
       >
         {{
           default: () => {
-            // 用于记录合并行时需要忽略的行内单元格
+            // coordinate to pass if there are cells that cross row & col
             const cordToPass: Record<number, number[]> = {}
             // coordinate to related hover keys
             const cordKey: Record<number, Record<number, RowKey[]>> = {}
