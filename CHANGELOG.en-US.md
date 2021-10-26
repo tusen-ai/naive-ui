@@ -4,6 +4,12 @@
 
 - `n-collapsed-transition`'s `collapsed` prop is deprecated, please use `show` instead, closes [#1407](https://github.com/TuSimple/naive-ui/issues/1407).
 
+## 2.19.12 (2021-10-26)
+
+### Fixes
+
+- 增加 `n-input`  autocomplete 属性
+
 ### Fixes
 
 - Fix `n-log` `font-size` prop not working, closes [#1416](https://github.com/TuSimple/naive-ui/issues/1416).
