@@ -14,8 +14,8 @@ import {
   withDirectives,
   vShow,
   watchEffect,
-  reactive,
-  ExtractPropTypes
+  ExtractPropTypes,
+  markRaw
 } from 'vue'
 import { VResizeObserver, VXScroll, VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
@@ -144,7 +144,6 @@ export default defineComponent({
       compitableValueRef,
       uncontrolledValueRef
     )
-    const renderedNames = reactive(new Set<NonNullable<TabPaneProps['name']>>())
 
     const nextTabNameRef = { value: mergedValueRef.value }
 
@@ -318,7 +317,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
-      renderedNames,
+      renderedNames: markRaw(new Set<NonNullable<TabPaneProps['name']>>()),
       tabsElRef,
       barElRef,
       addTabInstRef,
