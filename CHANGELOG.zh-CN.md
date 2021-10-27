@@ -8,6 +8,7 @@
 
 - 修复 `n-log` `font-size` 属性不生效，关闭 [#1416](https://github.com/TuSimple/naive-ui/issues/1416)
 - 修复 `n-loading-bar` 设定 `loading-bar-style` 后不调用 `start` 也会显示一次
+- 修复 `n-input` 设定 `text`与`password`类型都支持 `count` slot.
 
 ### Feats
 

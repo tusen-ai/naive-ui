@@ -8,6 +8,7 @@
 
 - Fix `n-log` `font-size` prop not working, closes [#1416](https://github.com/TuSimple/naive-ui/issues/1416).
 - Fix `n-loading-bar` will show once even if `start` is not called when `loading-bar-style` is set.
+- 修复 `n-input` 设定 `text`与`password`类型都支持 `count` slot.
 
 ### Feats
 
