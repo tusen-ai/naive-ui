@@ -30,7 +30,7 @@ retry-debug
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | 自定义文件缩略图 |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | 提交表单需要附加的数据 |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | 非受控状态下默认的文件列表 |
-| default-upload | `boolean` | `false` | 选择文件时候是否默认上传 |
+| default-upload | `boolean` | `true` | 选择文件时候是否默认上传 |
 | disabled | `boolean` | `false` | 是否禁用 |
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |
 | file-list | `Array<UploadFileInfo>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |

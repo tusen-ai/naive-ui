@@ -29,7 +29,7 @@ abstract
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | Thumbnail generation function. |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | `data` field of the HTTP request's form data. |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | The default file list. |
-| default-upload | `boolean` | `false` | Whether the file is uploaded immediately after it is selected. |
+| default-upload | `boolean` | `true` | Whether the file is uploaded immediately after it is selected. |
 | disabled | `boolean` | `false` | Disabled state. |
 | file-list-style | `Object` | `undefined` | File list area style. |
 | file-list | `Array<UploadFileInfo>` | `undefined` | The uploaded file list. |
@@ -54,29 +54,29 @@ abstract
 
 #### UploadFileInfo Type
 
-| Property      | Type                                                             | Description                                         |
-| ------------- | ---------------------------------------------------------------- | --------------------------------------------------- |
-| id            | `string \| number`                                               | Unique file ID.                                     |
-| name          | `string`                                                         | Filename.                                           |
-| status        | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file.                                 |
-| percentage    | `number`                                                         | The progress percentage of the file being uploaded. |
-| file?         | `File \| null`                                                   | The object of the file stored in the browser.       |
-| thumbnailUrl? | `string \| null`                                                 | Thumbnail URL.                                      |
-| type?         | `string \| null`                                                 | MIME type.                                          |
-| url?          | `string \| null`                                                 | File URL.                                           |
+| Property | Type | Description |
+| --- | --- | --- |
+| id | `string \| number` | Unique file ID. |
+| name | `string` | Filename. |
+| status | `'pending' \| 'uploading' \| 'error' \| 'finished' \| 'removed'` | The status of file. |
+| percentage | `number` | The progress percentage of the file being uploaded. |
+| file? | `File \| null` | The object of the file stored in the browser. |
+| thumbnailUrl? | `string \| null` | Thumbnail URL. |
+| type? | `string \| null` | MIME type. |
+| url? | `string \| null` | File URL. |
 
 ### UploadTrigger Props
 
-| Name     | Type      | Default | Description                                 |
-| -------- | --------- | ------- | ------------------------------------------- |
-| abstract | `boolean` | `false` | Whether or not to use the `abstract` mode.  |
+| Name     | Type      | Default | Description                                |
+| -------- | --------- | ------- | ------------------------------------------ |
+| abstract | `boolean` | `false` | Whether or not to use the `abstract` mode. |
 
 ### Upload Methods
 
-| Name           | Type                          | Description                           |
-| -------------- | ----------------------------- | ------------------------------------- |
-| submit         | `(fileId?: string \| number)` | Submit all files with pending status. |
-| openFileDialog | `() => void`                  | Open the file dialog window.          |
+| Name | Type | Description |
+| --- | --- | --- |
+| submit | `(fileId?: string \| number)` | Submit all files with pending status. |
+| openFileDialog | `() => void` | Open the file dialog window. |
 
 ### Upload Slots
 
@@ -86,14 +86,12 @@ abstract
 
 ### UploadDragger Slots
 
-| Name    | Parameters | Description                                                                                            |
-| ------- | ---------- | ------------------------------------------------------------------------------------------------------ |
-| default | `()`       | The placeholder of the upload dragger; For an example see <n-a href="#drag">Drag to Upload Demo</n-a>. |
+| Name | Parameters | Description |
+| --- | --- | --- |
+| default | `()` | The placeholder of the upload dragger; For an example see <n-a href="#drag">Drag to Upload Demo</n-a>. |
 
 ### UploadTrigger Slots
 
-
-| Name    | Parameters | Description |
-| ------- | ---------- | ----------- |
-| default | `(options: { handleClick: () => void, handleDragOver: (e: DragEvent) => void, handleDragEnter: (e: DragEvent) => void, handleDragLeave: (e: DragEvent) => void, handleDrop: (e: DragEvent) => void})` | `handleClick` is the click upload function, `handleDrop` is the drag and drop upload function, `handleDragEnter`, `handleDragOver` and `handleDragLeave` are the drag and drop event functions.  |
-
+| Name | Parameters | Description |
+| --- | --- | --- |
+| default | `(options: { handleClick: () => void, handleDragOver: (e: DragEvent) => void, handleDragEnter: (e: DragEvent) => void, handleDragLeave: (e: DragEvent) => void, handleDrop: (e: DragEvent) => void})` | `handleClick` is the click upload function, `handleDrop` is the drag and drop upload function, `handleDragEnter`, `handleDragOver` and `handleDragLeave` are the drag and drop event functions. |
