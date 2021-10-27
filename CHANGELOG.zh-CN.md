@@ -9,6 +9,16 @@
 - 修复 `n-log` `font-size` 属性不生效，关闭 [#1416](https://github.com/TuSimple/naive-ui/issues/1416)
 - 修复 `n-loading-bar` 设定 `loading-bar-style` 后不调用 `start` 也会显示一次
 
+### Feats
+
+- `n-data-table` 优化底层渲染的逻辑，提升组件性能
+- `n-date-picker` 的 `shortcuts` 属性支持传入回调函数
+- `n-tab-pane` 属性 `display-directive` 支持 `show:lazy` 选项，关闭 [#1374](https://github.com/TuSimple/naive-ui/issues/1374)
+
+### i18n
+
+- 新增 idID locale
+
 ## 2.19.11 (2021-10-21)
 
 ### Fixes

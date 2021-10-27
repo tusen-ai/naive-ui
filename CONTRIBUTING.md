@@ -9,28 +9,28 @@
 # open the dev server, please note that hot module reload doesn't work well
 # if you find anything doesn't work, just refresh the page
 # if you aren't able to open the page at the first time, try to refresh a couple of times
-npm run dev
+pnpm run dev
 
 # testing
-npm run test
+pnpm run test
 
 # testing some component
-npm run test -- src/xxx
+pnpm run test -- src/xxx
 
 # testing with coverage
-npm run test:cov
+pnpm run test:cov
 
 # lint code
-npm run lint:code
+pnpm run lint:code
 
 # check type
-npm run lint:type
+pnpm run lint:type
 
 # lint code & type
-npm run lint
+pnpm run lint
 
 # build site (if vercel preview failed, you might need to run `git clean -fdx` first)
-npm run build:site
+pnpm run build:site
 ```
 
 ## About Docs and Changelog Format
@@ -88,28 +88,28 @@ your changelog
 # 开启开发服务器，注意热更新不是很好用
 # 如果你觉得哪里有问题，刷新页面即可
 # 第一次运行打不开时，你可以试试刷新几次浏览器
-npm run dev
+pnpm run dev
 
 # 测试
-npm run test
+pnpm run test
 
 # 测试某个组件
-npm run test -- src/xxx
+pnpm run test -- src/xxx
 
 # 生成覆盖率报告
-npm run test:cov
+pnpm run test:cov
 
 # 检查代码风格
-npm run lint:code
+pnpm run lint:code
 
 # 检查类型
-npm run lint:type
+pnpm run lint:type
 
 # 上面俩个都检查
-npm run lint
+pnpm run lint
 
 # 构建文档网站（如果 vercel 的预览挂掉了，你可能需要先运行一下 `git clean -fdx`）
-npm run build:site
+pnpm run build:site
 ```
 
 ## 关于文档和变更日志的格式

@@ -31,10 +31,14 @@ export default defineComponent({
       range2: ref(null),
       shortcuts: {
         'Honey birthday': 1631203200000,
-        'Party day': 1629216000000
+        Yesterday: () => new Date().getTime() - 24 * 60 * 60 * 1000
       },
       rangeShortcuts: {
-        'Happy holiday': [1629216000000, 1631203200000]
+        'Happy holiday': [1629216000000, 1631203200000],
+        'Last 2 hours': () => {
+          const cur = new Date().getTime()
+          return [cur - 2 * 60 * 60 * 1000, cur]
+        }
       }
     }
   }

@@ -44,7 +44,7 @@ before-leave
 | --- | --- | --- | --- |
 | closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |
 | disabled | `boolean` | `false` | Whether to disable. |
-| display-directive | `'if' \| 'show'` | `'if'` | The directive to use in conditionally rendering. `if` will use `v-if` and `show` will use `v-show`. When use show directive, the status of tab won't be reset after tab changes. |
+| display-directive | `'if' \| 'show'` \| 'show:lazy' | `'if'` | The directive to use in conditionally rendering. `if` will use `v-if` and `show` will use `v-show`. When use `show` directive, the status of tab won't be reset after tab changes. When use `show:lazy`, the display effect is the same as `show`, but the content will be lazily loaded. |
 | tab | `string \| VNode \| () => VNodeChild` | `undefined` | Tab label. |
 | name | `string \| number` | `undefined` | Required, the name of the tab. |
 

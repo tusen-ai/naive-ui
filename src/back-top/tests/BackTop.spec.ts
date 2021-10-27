@@ -12,7 +12,7 @@ describe('n-back-top', () => {
     `
 
     const wrapper = mount(NBackTop, {
-      attachTo: document.getElementById('test'),
+      attachTo: document.getElementById('test') ?? undefined,
       props: {
         show: true
       }

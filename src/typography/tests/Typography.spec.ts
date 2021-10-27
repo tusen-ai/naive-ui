@@ -1,4 +1,4 @@
-import { h } from '@vue/runtime-core'
+import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import {
   NA,

@@ -32,7 +32,7 @@ update-on-close
 | disabled | `boolean` | `false` | Whether the date picker is disabled. |
 | first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | The first day of a week on calendar, 0 means Monday. |
 | input-readonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |
-| shortcuts | `Record<string, number \| [number, number]>` | `undefined` | Shortcut button customizations. |
+| shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | Shortcut button customizations. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |
 | type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange' \|'month'` | `'date'` | Date picker type. |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |
