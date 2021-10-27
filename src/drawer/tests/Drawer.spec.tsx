@@ -175,9 +175,11 @@ describe('n-drawer', () => {
       show: true
     })
 
+    if (document.querySelector('.n-drawer-header') !== null) return
     expect(
-      document.querySelector('[style="background-color: red;"]')
-    ).not.toEqual(null)
+      (document.querySelector('.n-drawer-header') as HTMLElement).style
+        .backgroundColor
+    ).toEqual('red')
     wrapper.unmount()
   })
 
@@ -190,9 +192,11 @@ describe('n-drawer', () => {
       show: true
     })
 
+    if (document.querySelector('.n-drawer-body') !== null) return
     expect(
-      document.querySelector('[style="background-color: red;"]')
-    ).not.toEqual(null)
+      (document.querySelector('.n-drawer-body') as HTMLElement).style
+        .backgroundColor
+    ).toEqual('red')
     wrapper.unmount()
   })
 })
