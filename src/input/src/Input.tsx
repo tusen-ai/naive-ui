@@ -995,8 +995,8 @@ export default defineComponent({
                     style={this.cssVars as CSSProperties}
                   />
                 ) : null,
-                this.showCount && this.type !== 'textarea' ? (
-                  <WordCount />
+                this.showCount ? (
+                  <WordCount>{{ default: this.$slots.count }}</WordCount>
                 ) : null,
                 this.mergedShowPasswordOn && this.type === 'password' ? (
                   <NBaseIcon
@@ -1078,7 +1078,7 @@ export default defineComponent({
         {this.mergedBordered ? (
           <div class={`${mergedClsPrefix}-input__state-border`} />
         ) : null}
-        {this.showCount && this.type === 'textarea' ? (
+        {this.showCount ? (
           <WordCount>{{ default: this.$slots.count }}</WordCount>
         ) : null}
       </div>
