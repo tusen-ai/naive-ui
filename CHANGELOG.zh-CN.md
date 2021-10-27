@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## 2.20.0 (2021-10-28)
+
 ### Breaking Changes
 
 - `n-collapsed-transition` 的 `collapsed` 属性被废弃，请使用 `show` 属性代替，关闭 [#1407](https://github.com/TuSimple/naive-ui/issues/1407)
@@ -15,7 +17,7 @@
 - `n-data-table` 优化底层渲染的逻辑，提升组件性能
 - `n-date-picker` 的 `shortcuts` 属性支持传入回调函数
 - `n-tab-pane` 属性 `display-directive` 支持 `show:lazy` 选项，关闭 [#1374](https://github.com/TuSimple/naive-ui/issues/1374)
-- `n-input` 新增 `count` slots 支持的类型，关闭 [#1440](https://github.com/TuSimple/naive-ui/issues/1440)
+- `n-input` 的 `count` slots 支持 text 类型，关闭 [#1440](https://github.com/TuSimple/naive-ui/issues/1440)
 
 ### i18n
 
