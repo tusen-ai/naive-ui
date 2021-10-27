@@ -8,6 +8,7 @@
 
 - Fix `n-log` `font-size` prop not working, closes [#1416](https://github.com/TuSimple/naive-ui/issues/1416).
 - Fix `n-loading-bar` will show once even if `start` is not called when `loading-bar-style` is set.
+- Fix `n-date-picker` `separator` prop not working, closes [#1456](https://github.com/TuSimple/naive-ui/issues/1456)
 
 ### Feats
 
