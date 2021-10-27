@@ -75,7 +75,12 @@ export default c([
     cM('top-right', `
       top: 12px;
       right: 12px;
-    `),
+    `, [
+      cB('notification', `
+        margin-left: 16px;
+        margin-right: 28px;
+      `)
+    ]),
     cM('bottom-left', `
       bottom: 4px;
       left: 12px;
@@ -99,7 +104,10 @@ export default c([
       top: unset;
       justify-content: flex-end;
     `),
-    cB('notification', [
+    cB('notification', `
+      margin-left: 16px;
+      margin-right: 28px;
+    `, [
       c('&.notification-transition-enter-from, &.notification-transition-leave-to', `
         opacity: 0;
         margin-bottom: 0 !important;
