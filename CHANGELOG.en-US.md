@@ -15,6 +15,7 @@
 - `n-data-table` optimize the logic of underlying rendering and improve component performance.
 - `n-date-picker`'s `shortcuts` prop supports functional value.
 - `n-tab-pane`'s `display-directive` props supports the `show:lazy` option, closes [#1374](https://github.com/TuSimple/naive-ui/issues/1374).
+- `n-input` add categories supported by `const` slots, closes [#1440](https://github.com/TuSimple/naive-ui/issues/1440).
 
 ### i18n
 
