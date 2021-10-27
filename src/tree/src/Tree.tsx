@@ -81,7 +81,7 @@ export function createTreeMateOptions<T> (
 }
 
 type OnUpdateKeys = (value: Key[], option: Array<TreeOption | null>) => void
-type OnLoadType = (node: TreeOption) => Promise<void>
+type OnLoad = (node: TreeOption) => Promise<void>
 
 export const treeSharedProps = {
   filter: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
@@ -152,7 +152,7 @@ const treeProps = {
     type: String,
     default: ''
   },
-  onLoad: Function as PropType<OnLoadType>,
+  onLoad: Function as PropType<OnLoad>,
   cascade: Boolean,
   selectable: {
     type: Boolean,
@@ -321,13 +321,18 @@ export default defineComponent({
 
     let expandTimerId: number | null = null
     let nodeKeyToBeExpanded: Key | null = null
-    const uncontrolledHighlightKeySetRef = ref<Set<Key>>(new Set())
+    const uncontrolledHighlightKeySetRef = ref(new Set<Key>())
     const controlledHighlightKeySetRef = toRef(props, 'internalHighlightKeySet')
     const mergedHighlightKeySetRef = useMergedState(
       controlledHighlightKeySetRef,
       uncontrolledHighlightKeySetRef
     )
-    const loadingKeysRef = ref<Set<Key>>(new Set())
+    const loadingKeysRef = ref(new Set<Key>())
+    const expandedNonLoadingKeys = computed(() => {
+      return mergedExpandedKeysRef.value.filter(
+        (i) => !loadingKeysRef.value.has(i)
+      )
+    })
 
     let dragStartX: number = 0
     const draggingNodeRef = ref<TmNode | null>(null)
@@ -412,10 +417,10 @@ export default defineComponent({
       })
     }
     watchEffect(() => {
-      if (controlledExpandedKeysRef.value?.length) {
-        controlledExpandedKeysRef.value.forEach((key) => {
+      if (mergedExpandedKeysRef.value?.length) {
+        mergedExpandedKeysRef.value.forEach((key) => {
           const node = displayTreeMateRef.value?.getNode(key)
-          if (node && !node.children?.length) {
+          if (node && !node.shallowLoaded) {
             void triggerLoading(node)
           }
         })
@@ -430,7 +435,7 @@ export default defineComponent({
     // during animation. This will seldom cause wired scrollbar status. It is
     // fixable and need some changes in vueuc, I've no time so I just leave it
     // here. Maybe the bug won't be fixed during the life time of the project.
-    watch(mergedExpandedKeysRef, (value, prevValue) => {
+    watch(expandedNonLoadingKeys, (value, prevValue) => {
       if (!props.animated) {
         void nextTick(syncScrollbar)
         return
