@@ -1,14 +1,37 @@
 # CHANGELOG
 
+### Breaking Changes
+
+- `n-collapsed-transition`'s `collapsed` prop is deprecated, please use `show` instead, closes [#1407](https://github.com/TuSimple/naive-ui/issues/1407).
+
+### Fixes
+
+- Fix `n-log` `font-size` prop not working, closes [#1416](https://github.com/TuSimple/naive-ui/issues/1416).
+- Fix `n-loading-bar` will show once even if `start` is not called when `loading-bar-style` is set.
+- Fix `n-date-picker` `separator` prop not working, closes [#1456](https://github.com/TuSimple/naive-ui/issues/1456)
+
+### Feats
+
+- `n-data-table` optimize the logic of underlying rendering and improve component performance.
+- `n-date-picker`'s `shortcuts` prop supports functional value.
+- `n-tab-pane`'s `display-directive` props supports the `show:lazy` option, closes [#1374](https://github.com/TuSimple/naive-ui/issues/1374).
+- `n-input` add categories supported by `const` slots, closes [#1440](https://github.com/TuSimple/naive-ui/issues/1440).
+
+### i18n
+
+- Add idID locale.
+
 ## 2.19.11 (2021-10-21)
 
-## Fixes
+### Fixes
 
 - Fix `n-upload`'s file can't be removed when file count limit is reached, closes [#1401](https://github.com/TuSimple/naive-ui/issues/1401).
 
 ### Feats
 
 - `n-tabs` add `on-before-leave` prop, closes [#1337](https://github.com/TuSimple/naive-ui/issues/1337).
+- `n-color-picker` add `show-preview` prop, closes [#1281](https://github.com/TuSimple/naive-ui/issues/1281).
+- `n-tab-pane`'s `display-directive` prop support `show:lazy` option, closes [#1374](https://github.com/TuSimple/naive-ui/issues/1374).
 
 ## 2.19.9 (2021-10-18)
 
@@ -397,7 +420,7 @@
 
 ### Feats
 
-- `n-loading-bar` add `loading-bar-style` props, closes [#457](https://github.com/TuSimple/naive-ui/issues/457).
+- `n-loading-bar-provider` add `loading-bar-style` props, closes [#457](https://github.com/TuSimple/naive-ui/issues/457).
 - `n-button` add `text-color` prop.
 - `n-form` export `FormValidationError` type.
 - `n-popconfirm` support not show action components, closes [#770](https://github.com/TuSimple/naive-ui/issues/770).

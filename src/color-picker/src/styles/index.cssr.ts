@@ -111,6 +111,36 @@ export default c([
       `)
     ])
   ]),
+  cB('color-picker-preview', `
+    display: flex;
+  `, [
+    cE('sliders', `
+      flex: 1 0 auto;
+    `),
+    cE('preview', `
+      position: relative;
+      height: 30px;
+      width: 30px;
+      margin: 0 0 8px 6px;
+      border-radius: 50%;
+      box-shadow: rgba(0, 0, 0, .15) 0px 0px 0px 1px inset;
+      overflow: hidden;
+    `),
+    cE('fill', `
+      display: block;
+      width: 30px;
+      height: 30px;
+    `),
+    cE('input', `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 30px;
+      height: 30px;
+      opacity: 0;
+      z-index: 1;
+    `)
+  ]),
   cB('color-picker-input', `
     display: flex;
     align-items: center;
@@ -186,12 +216,29 @@ export default c([
       background-repeat: repeat;
     `, [
       cE('fill', `
+        position: relative;
         width: 100%;
         height: 100%;
         border-radius: 3px;
         box-shadow: rgba(0, 0, 0, .15) 0px 0px 0px 1px inset;
         cursor: pointer;
-      `)
+      `),
+      c('&:focus', `
+        outline: none;
+      `, [
+        cE('fill', [
+          c('&::after', `
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: inherit;
+            filter: blur(2px);
+            content: "";
+          `)
+        ])
+      ])
     ])
   ])
 ])

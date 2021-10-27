@@ -1,14 +1,36 @@
 # CHANGELOG
 
+### Breaking Changes
+
+- `n-collapsed-transition` 的 `collapsed` 属性被废弃，请使用 `show` 属性代替，关闭 [#1407](https://github.com/TuSimple/naive-ui/issues/1407)
+
+### Fixes
+
+- 修复 `n-log` `font-size` 属性不生效，关闭 [#1416](https://github.com/TuSimple/naive-ui/issues/1416)
+- 修复 `n-loading-bar` 设定 `loading-bar-style` 后不调用 `start` 也会显示一次
+- 修复 `n-date-picker` `separator` 不生效，关闭 [#1456](https://github.com/TuSimple/naive-ui/issues/1456)
+
+### Feats
+
+- `n-data-table` 优化底层渲染的逻辑，提升组件性能
+- `n-date-picker` 的 `shortcuts` 属性支持传入回调函数
+- `n-tab-pane` 属性 `display-directive` 支持 `show:lazy` 选项，关闭 [#1374](https://github.com/TuSimple/naive-ui/issues/1374)
+- `n-input` 新增 `count` slots 支持的类型，关闭 [#1440](https://github.com/TuSimple/naive-ui/issues/1440)
+
+### i18n
+
+- 新增 idID locale
+
 ## 2.19.11 (2021-10-21)
 
-## Fixes
+### Fixes
 
 - 修复 `n-upload` 在达到最大文件数量后无法删除文件，关闭 [#1401](https://github.com/TuSimple/naive-ui/issues/1401)
 
 ### Feats
 
 - `n-tabs` 新增 `on-before-leave` 属性，关闭 [#1337](https://github.com/TuSimple/naive-ui/issues/1337)
+- `n-color-picker` 新增 `show-preview` 属性，关闭 [#1281](https://github.com/TuSimple/naive-ui/issues/1281)
 
 ## 2.19.9 (2021-10-18)
 
@@ -397,7 +419,7 @@
 
 ### Feats
 
-- `n-loading-bar` 新增 `loading-bar-style` 属性，关闭 [#457](https://github.com/TuSimple/naive-ui/issues/457)
+- `n-loading-bar-provider` 新增 `loading-bar-style` 属性，关闭 [#457](https://github.com/TuSimple/naive-ui/issues/457)
 - `n-button` 新增 `text-color` 属性
 - `n-form` 导出 `FormValidationError` 类型
 - `n-popconfirm` 支持不显示操作组件，关闭 [#770](https://github.com/TuSimple/naive-ui/issues/770)

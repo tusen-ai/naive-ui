@@ -16,7 +16,7 @@
 7. 把改动提交到 release 分支，git commit -m "x.x.x"
 8. 将 release 分支合并到 main（发起一个 PR，CI 过了就合并）
 9. 回到 main 分支拉回最新的代码
-10. git clean -fdx && npm i && npm run release:package
+10. git clean -fdx && pnpm i && npm run release:package
 11. 将 main 合并到 docs（发起一个 PR，CI 过了就合并）
 
 ## 提交信息

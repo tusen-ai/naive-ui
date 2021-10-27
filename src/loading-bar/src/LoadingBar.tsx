@@ -31,6 +31,7 @@ export default defineComponent({
     } = inject(loadingBarProviderInjectionKey)!
     const loadingBarRef = ref<HTMLElement | null>(null)
     const enteringRef = ref(false)
+    const startedRef = ref(false)
     const loadingRef = ref(false)
     const transitionDisabledRef = ref(false)
     let finishing = false
@@ -56,6 +57,7 @@ export default defineComponent({
     ): Promise<void> {
       await init()
       loadingRef.value = true
+      startedRef.value = true
       await nextTick()
       const el = loadingBarRef.value
       if (!el) return
@@ -67,7 +69,7 @@ export default defineComponent({
       el.style.maxWidth = `${toProgress}%`
     }
     function finish (): void {
-      if (finishing || erroringRef.value) return
+      if (finishing || erroringRef.value || !loadingRef.value) return
       finishing = true
       const el = loadingBarRef.value
       if (!el) return
@@ -117,6 +119,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       loadingBarRef,
+      started: startedRef,
       loading: loadingRef,
       entering: enteringRef,
       transitionDisabled: transitionDisabledRef,
@@ -140,6 +143,7 @@ export default defineComponent({
     }
   },
   render () {
+    if (!this.started) return null
     const { mergedClsPrefix } = this
     return (
       <Transition
