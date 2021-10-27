@@ -53,8 +53,7 @@ export default defineComponent({
         const { name: nameProp } = props
         if (nameProp === nextTabNameRef.value) return
         nextTabNameRef.value = nameProp
-        nextTabNameRef.id++
-        const id = nextTabNameRef.id
+        const id = ++nextTabNameRef.id
         if (nameProp !== valueRef.value) {
           const { value: onBeforeLeave } = onBeforeLeaveRef
           if (!onBeforeLeave) {

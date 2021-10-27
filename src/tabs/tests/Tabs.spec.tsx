@@ -148,8 +148,8 @@ describe('n-tabs', () => {
       props: {
         type: 'card',
         defaultValue: '3',
-        onBeforeLeave: (tabName: string) => {
-          switch (tabName) {
+        onBeforeLeave: (name: string) => {
+          switch (name) {
             case '1':
               return false
             case '2':
