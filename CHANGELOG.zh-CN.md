@@ -1,10 +1,20 @@
 # CHANGELOG
 
+## 2.19.11 (2021-10-21)
+
+## Fixes
+
+- 修复 `n-upload` 在达到最大文件数量后无法删除文件，关闭 [#1401](https://github.com/TuSimple/naive-ui/issues/1401)
+
+### Feats
+
+- `n-tabs` 新增 `on-before-leave` 属性，关闭 [#1337](https://github.com/TuSimple/naive-ui/issues/1337)
+
 ## 2.19.9 (2021-10-18)
 
 ### Fixes
 
-- 修复 `n-collapse` 在 `n-collapse-item` 使用 `v-if` 是展开状态丢失，关闭 [#1387](https://github.com/TuSimple/naive-ui/issues/1387)
+- 修复 `n-collapse` 在 `n-collapse-item` 使用 `v-if` 时展开状态丢失，关闭 [#1387](https://github.com/TuSimple/naive-ui/issues/1387)
 - 修复 `n-dialog` 的关闭按钮会被内容遮盖，关闭 [#1381](https://github.com/TuSimple/naive-ui/issues/1381)
 - 修复 `n-upload` 上传失败后重试时文件为 `null`，关闭 [#1316](https://github.com/TuSimple/naive-ui/issues/1316)
 - 修复 `n-cascader` 的 `filter` 属性不生效

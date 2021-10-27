@@ -282,11 +282,8 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
-    const mergedDisabledRef = computed(() => {
+    const maxReachedRef = computed(() => {
       const { max } = props
-      if (formItem.mergedDisabledRef.value) {
-        return true
-      }
       if (max !== undefined) {
         return mergedFileListRef.value.length >= max
       }
@@ -515,7 +512,8 @@ export default defineComponent({
       openFileDialog,
       draggerInsideRef,
       handleFileAddition,
-      mergedDisabledRef,
+      mergedDisabledRef: formItem.mergedDisabledRef,
+      maxReachedRef,
       fileListStyleRef: toRef(props, 'fileListStyle'),
       abstractRef: toRef(props, 'abstract'),
       cssVarsRef
