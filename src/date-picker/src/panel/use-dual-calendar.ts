@@ -14,7 +14,7 @@ import {
 } from 'date-fns'
 import { dateArray, DateItem, strictParse } from '../utils'
 import { usePanelCommon } from './use-panel-common'
-import { datePickerInjectionKey } from '../interface'
+import { datePickerInjectionKey, Shortcuts } from '../interface'
 
 const useDualCalendarProps = {
   ...usePanelCommon.props,
@@ -529,6 +529,19 @@ function useDualCalendar (
   function handleEndTimePickerChange (value: number): void {
     changeEndDateTime(value)
   }
+  function handleRangeShortcutMouseenter (shortcut: Shortcuts[string]): void {
+    panelCommon.cachePendingValue()
+    const shortcutValue = panelCommon.getShortcutValue(shortcut)
+    if (!Array.isArray(shortcutValue)) return
+    changeStartEndTime(...shortcutValue)
+  }
+  function handleRangeShortcutClick (shortcut: Shortcuts[string]): void {
+    const shortcutValue = panelCommon.getShortcutValue(shortcut)
+    if (!Array.isArray(shortcutValue)) return
+    changeStartEndTime(...shortcutValue)
+    panelCommon.clearPendingValue()
+    handleConfirmClick()
+  }
   return {
     startDatesElRef,
     endDatesElRef,
@@ -554,6 +567,8 @@ function useDualCalendar (
     weekdays: weekdaysRef,
     startDateArray: startDateArrayRef,
     endDateArray: endDateArrayRef,
+    handleRangeShortcutMouseenter,
+    handleRangeShortcutClick,
     ...panelCommon,
     ...validation,
     // datetimerangeonly

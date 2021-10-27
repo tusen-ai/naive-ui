@@ -211,25 +211,23 @@ export default defineComponent({
               {shortcuts &&
                 Object.keys(shortcuts).map((key) => {
                   const shortcut = shortcuts[key]
-                  return Array.isArray(shortcut) ? (
+                  return Array.isArray(shortcut) ||
+                    typeof shortcut === 'function' ? (
                     <NxButton
                       size="tiny"
                       onMouseenter={() => {
-                        this.cachePendingValue()
-                        this.changeStartEndTime(...shortcut)
+                        this.handleRangeShortcutMouseenter(shortcut)
                       }}
                       onClick={() => {
-                        this.changeStartEndTime(...shortcut)
-                        this.clearPendingValue()
-                        this.handleConfirmClick()
+                        this.handleRangeShortcutClick(shortcut)
                       }}
                       onMouseleave={() => {
-                        this.restorePendingValue()
+                        this.handleShortcutMouseleave()
                       }}
                     >
                       {{ default: () => key }}
                     </NxButton>
-                  ) : null
+                      ) : null
                 })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>

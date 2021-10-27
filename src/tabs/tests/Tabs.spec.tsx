@@ -97,4 +97,43 @@ describe('n-tabs', () => {
       wrapper.find('.n-tabs-scroll-padding').attributes('style')
     ).toContain('width: 100px;')
   })
+
+  it('should work with `display-directive` prop', async () => {
+    const displayDirectives: Array<'show' | 'if' | 'show:lazy'> = [
+      'show',
+      'if',
+      'show:lazy'
+    ]
+    const wrapper = mount(NTabs, {
+      props: { value: 'show' },
+      slots: {
+        default: () =>
+          displayDirectives.map((directive) => (
+            <NTabPane
+              displayDirective={directive}
+              tab={directive}
+              name={directive}
+            >
+              {{
+                default: () => (
+                  <span class={`test-${directive.replace(':', '-')}`} />
+                )
+              }}
+            </NTabPane>
+          ))
+      }
+    })
+    await wrapper.setProps({ value: 'if' })
+    expect(wrapper.find('.test-show').exists()).toEqual(true)
+    expect(wrapper.find('.test-if').exists()).toEqual(true)
+    expect(wrapper.find('.test-show-lazy').exists()).toEqual(false)
+    await wrapper.setProps({ value: 'show:lazy' })
+    expect(wrapper.find('.test-show').exists()).toEqual(true)
+    expect(wrapper.find('.test-if').exists()).toEqual(false)
+    expect(wrapper.find('.test-show-lazy').exists()).toEqual(true)
+    await wrapper.setProps({ value: 'show' })
+    expect(wrapper.find('.test-show').exists()).toEqual(true)
+    expect(wrapper.find('.test-if').exists()).toEqual(false)
+    expect(wrapper.find('.test-show-lazy').exists()).toEqual(true)
+  })
 })

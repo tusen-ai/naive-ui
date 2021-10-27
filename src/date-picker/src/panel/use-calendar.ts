@@ -16,7 +16,11 @@ import {
 } from 'date-fns'
 import { dateArray, monthArray, strictParse, yearArray } from '../utils'
 import { usePanelCommon } from './use-panel-common'
-import { IsSingleDateDisabled, datePickerInjectionKey } from '../interface'
+import {
+  IsSingleDateDisabled,
+  datePickerInjectionKey,
+  Shortcuts
+} from '../interface'
 import type { DateItem, MonthItem, YearItem } from '../utils'
 import { VirtualListInst } from 'vueuc'
 import { ScrollbarInst } from '../../../_internal'
@@ -280,6 +284,19 @@ function useCalendar (
   function handleTimePickerChange (value: number): void {
     panelCommon.doUpdateValue(value, false)
   }
+  function handleSingleShortcutMouseenter (shortcut: Shortcuts[string]): void {
+    panelCommon.cachePendingValue()
+    const shortcutValue = panelCommon.getShortcutValue(shortcut)
+    if (typeof shortcutValue !== 'number') return
+    panelCommon.doUpdateValue(shortcutValue, false)
+  }
+  function handleSingleShortcutClick (shortcut: Shortcuts[string]): void {
+    const shortcutValue = panelCommon.getShortcutValue(shortcut)
+    if (typeof shortcutValue !== 'number') return
+    panelCommon.doUpdateValue(shortcutValue, false)
+    panelCommon.clearPendingValue()
+    handleConfirmClick()
+  }
   return {
     dateArray: dateArrayRef,
     monthArray: monthArrayRef,
@@ -294,6 +311,8 @@ function useCalendar (
     prevMonth,
     handleNowClick,
     handleConfirmClick,
+    handleSingleShortcutMouseenter,
+    handleSingleShortcutClick,
     ...validation,
     ...panelCommon,
     // datetime only
