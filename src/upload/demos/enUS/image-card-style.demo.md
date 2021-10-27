@@ -1,8 +1,8 @@
 # Pictures wall
 
-`list-type = "image-card"`.
+Uploaded files can be displayed as a wall of thumbnails using `list-type = "image-card"`.
 
-The preview in the photo wall will call the internal preview component by default, you can also use `on-preview` to customize the method of showing uploaded files.
+By default, this will use Naive UI's internal preview component. You can also use `on-preview` to customize what to do when previewing a file.
 
 ```html
 <n-upload

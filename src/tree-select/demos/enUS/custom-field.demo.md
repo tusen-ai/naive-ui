@@ -1,6 +1,6 @@
 # Customize Fields
 
-Various data would come from backend.
+You can also target difference label and key properties of the objects you are using as nodes.
 
 ```html
 <n-tree-select

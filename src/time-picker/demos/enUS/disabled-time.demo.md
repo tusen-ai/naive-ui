@@ -1,6 +1,6 @@
 # Disable time
 
-You can disable some time.
+If you can't stop time, at least disable it.
 
 ```html
 <n-time-picker
