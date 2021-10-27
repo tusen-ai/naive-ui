@@ -22,13 +22,12 @@ import {
   RotateClockwiseIcon,
   RotateCounterclockwiseIcon,
   ZoomInIcon,
-  ZoomOutIcon,
-  CloseIcon
+  ZoomOutIcon
 } from '../../_internal/icons'
 import { useTheme } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import { imageLight } from '../styles'
-import { prevIcon, nextIcon } from './icons'
+import { prevIcon, nextIcon, closeIcon } from './icons'
 import style from './styles/index.cssr'
 
 export interface ImagePreviewInst {
@@ -351,7 +350,7 @@ export default defineComponent({
                                     clsPrefix={clsPrefix}
                                     onClick={this.toggleShow}
                                   >
-                                    {{ default: () => <CloseIcon /> }}
+                                    {{ default: () => closeIcon }}
                                   </NBaseIcon>
                                 </div>
                               ) : null
