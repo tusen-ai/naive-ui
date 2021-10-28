@@ -106,3 +106,17 @@ export type listType = 'text' | 'image' | 'image-card'
 export type OnPreview = (file: FileInfo) => void
 
 export type CreateThumbnailUrl = (file: File) => Promise<string>
+
+export interface CustomRequestOptions {
+  file: FileInfo
+  action?: string
+  method?: string
+  data?: FuncOrRecordOrUndef
+  withCredentials?: boolean
+  headers?: FuncOrRecordOrUndef
+  onProgress?: (e: ProgressEvent, file: FileInfo) => void
+  onFinish?: (e: ProgressEvent, file: FileInfo) => void
+  onError?: (e: ProgressEvent, file: FileInfo) => void
+}
+
+export type CustomRequest = (options: CustomRequestOptions) => void

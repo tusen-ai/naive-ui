@@ -16,6 +16,7 @@ image-style
 image-card-style
 abstract
 retry-debug
+custom-request
 ```
 
 ## API
