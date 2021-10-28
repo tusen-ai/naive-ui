@@ -53,3 +53,4 @@ Set `n-config-provider`'s `date-locale` prop to `dateZhCN` imported from naive-u
 | Russian              | ruRU   | dateRuRU    |
 | Ukrainian            | ukUA   | dateUkUA    |
 | Chinese (Simplified) | zhCN   | dateZhCN    |
+| Indonesian           | idID   | dateIdID    |

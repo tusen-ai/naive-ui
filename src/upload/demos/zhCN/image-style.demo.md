@@ -2,7 +2,7 @@
 
 `list-type="image"`。
 
-你可以使用 `preview-file`自定义文件的缩略图。
+你可以使用 `create-thumbnail-url` 自定义文件的缩略图。
 
 ```html
 <n-upload

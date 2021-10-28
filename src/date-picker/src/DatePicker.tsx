@@ -799,14 +799,17 @@ export default defineComponent({
                         {...commonInputProps}
                       >
                         {{
-                          separator: () => (
-                            <NBaseIcon
-                              clsPrefix={mergedClsPrefix}
-                              class={`${mergedClsPrefix}-date-picker-icon`}
-                            >
-                              {{ default: () => <ToIcon /> }}
-                            </NBaseIcon>
-                          ),
+                          separator: () =>
+                            this.separator === undefined ? (
+                              <NBaseIcon
+                                clsPrefix={mergedClsPrefix}
+                                class={`${mergedClsPrefix}-date-picker-icon`}
+                              >
+                                {{ default: () => <ToIcon /> }}
+                              </NBaseIcon>
+                            ) : (
+                              this.separator
+                            ),
                           [clearable ? 'clear' : 'suffix']: () => (
                             <NBaseIcon
                               clsPrefix={mergedClsPrefix}

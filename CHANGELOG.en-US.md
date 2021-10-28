@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## 2.20.0 (2021-10-28)
+
 ### Breaking Changes
 
 - `n-collapsed-transition`'s `collapsed` prop is deprecated, please use `show` instead, closes [#1407](https://github.com/TuSimple/naive-ui/issues/1407).
@@ -8,12 +10,14 @@
 
 - Fix `n-log` `font-size` prop not working, closes [#1416](https://github.com/TuSimple/naive-ui/issues/1416).
 - Fix `n-loading-bar` will show once even if `start` is not called when `loading-bar-style` is set.
+- Fix `n-date-picker` `separator` prop not working, closes [#1456](https://github.com/TuSimple/naive-ui/issues/1456)
 
 ### Feats
 
 - `n-data-table` optimize the logic of underlying rendering and improve component performance.
 - `n-date-picker`'s `shortcuts` prop supports functional value.
 - `n-tab-pane`'s `display-directive` props supports the `show:lazy` option, closes [#1374](https://github.com/TuSimple/naive-ui/issues/1374).
+- `n-input` of text type supports `count` slots, closes [#1440](https://github.com/TuSimple/naive-ui/issues/1440).
 
 ### i18n
 

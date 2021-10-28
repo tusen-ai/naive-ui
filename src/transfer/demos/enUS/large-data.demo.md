@@ -1,6 +1,6 @@
 # Large Data
 
-If you have tons of data, you may need to speed the transfer up! Set `virtual-scroll` on transfer to use a blazing fast transfer (which turns ridiculous animation off).
+If you have tons of data, you may need to speed the transfer up! Set `virtual-scroll` on transfer to use a blazing fast transfer (which turns the ridiculous animation off).
 
 ```html
 <n-transfer
