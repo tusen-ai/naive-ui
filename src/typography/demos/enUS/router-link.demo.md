@@ -1,8 +1,8 @@
 # Use NA with Router Link
 
-You can also use `<n-a />` within a router-link.
+You can use `<n-a />` for links and routes.
 
-If you think the following method is verbose, you can just make it a new component.
+If you think the following method is a little verbose for routes, you can always make it a new component.
 
 ```html
 <router-link to="/" #="{ navigate, href }" custom>

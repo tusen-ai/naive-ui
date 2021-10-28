@@ -1,6 +1,6 @@
 # Size
 
-Time Picker can be `small`, `medium` or `large` sized.
+The Time Picker can be a `small`, `medium` or `large` size.
 
 ```html
 <n-space vertical>

@@ -1,6 +1,6 @@
 # Custom input element
 
-You can also replace the input element of the auto-complete component.
+You can also replace the input element of the auto-complete component (e.g. using a textarea).
 
 ```html
 <n-auto-complete

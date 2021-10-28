@@ -1,6 +1,6 @@
 # Step time
 
-Pass a number as step or use an array to specify the items you want to show, inputting values that don't follow step settings will cause displaying invalid status.
+Pass a number as an incremental step, or use an array to specify the values you want to show. If inputs do not adhere to these parameters, an invalid status will be shown (strikethrough text).
 
 ```html
 <n-time-picker
