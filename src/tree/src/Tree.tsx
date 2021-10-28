@@ -393,14 +393,15 @@ export default defineComponent({
       }
     })
     async function triggerLoading (node: TmNode): Promise<void> {
+      const { onLoad } = props
+      const { value: loadingKeys } = loadingKeysRef
       return await new Promise((resolve) => {
-        const { onLoad } = props
         if (onLoad) {
-          if (!loadingKeysRef.value.has(node.key)) {
-            loadingKeysRef.value.add(node.key)
+          if (!loadingKeys.has(node.key)) {
+            loadingKeys.add(node.key)
             onLoad(node.rawNode)
               .then(() => {
-                loadingKeysRef.value.delete(node.key)
+                loadingKeys.delete(node.key)
                 resolve()
               })
               .catch((loadError) => {
@@ -417,14 +418,14 @@ export default defineComponent({
       })
     }
     watchEffect(() => {
-      if (mergedExpandedKeysRef.value?.length) {
-        mergedExpandedKeysRef.value.forEach((key) => {
-          const node = displayTreeMateRef.value?.getNode(key)
+      const { value: displayTreeMate } = displayTreeMateRef
+      displayTreeMate &&
+        mergedExpandedKeysRef.value?.forEach((key) => {
+          const node = displayTreeMate.getNode(key)
           if (node && !node.shallowLoaded) {
             void triggerLoading(node)
           }
         })
-      }
     })
     // animation in progress
     const aipRef = ref(false)
