@@ -21,7 +21,7 @@ export default defineComponent({
       typeRef,
       closableRef,
       tabStyleRef,
-      nextTabNameRef,
+      tabChangeIdRef,
       onBeforeLeaveRef,
       handleAdd,
       handleTabClick,
@@ -51,7 +51,7 @@ export default defineComponent({
           return
         }
         const { name: nameProp } = props
-        const id = ++nextTabNameRef.id
+        const id = ++tabChangeIdRef.id
         if (nameProp !== valueRef.value) {
           const { value: onBeforeLeave } = onBeforeLeaveRef
           if (!onBeforeLeave) {
@@ -60,7 +60,7 @@ export default defineComponent({
             void Promise.resolve(
               (onBeforeLeave as OnBeforeLeaveImpl)(props.name, valueRef.value)
             ).then((allowLeave) => {
-              if (allowLeave && nextTabNameRef.id === id) {
+              if (allowLeave && tabChangeIdRef.id === id) {
                 handleTabClick(nameProp)
               }
             })

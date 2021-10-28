@@ -144,9 +144,9 @@ export default defineComponent({
       uncontrolledValueRef
     )
 
-    const nextTabNameRef = { id: 0 }
+    const tabChangeIdRef = { id: 0 }
     watch(mergedValueRef, () => {
-      nextTabNameRef.id = 0
+      tabChangeIdRef.id = 0
     })
 
     const tabWrapperStyleRef = computed(() => {
@@ -288,7 +288,7 @@ export default defineComponent({
       typeRef: toRef(props, 'type'),
       closableRef: toRef(props, 'closable'),
       valueRef: mergedValueRef,
-      nextTabNameRef,
+      tabChangeIdRef,
       onBeforeLeaveRef: toRef(props, 'onBeforeLeave'),
       handleTabClick,
       handleClose,
