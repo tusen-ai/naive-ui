@@ -144,9 +144,8 @@ export default defineComponent({
       uncontrolledValueRef
     )
 
-    const nextTabNameRef = { value: mergedValueRef.value, id: 0 }
-    watch(mergedValueRef, (v) => {
-      nextTabNameRef.value = mergedValueRef.value
+    const nextTabNameRef = { id: 0 }
+    watch(mergedValueRef, () => {
       nextTabNameRef.id = 0
     })
 
