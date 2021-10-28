@@ -2,7 +2,7 @@
 
 <!--single-column-->
 
-Left, right, left, right... As a boring guy, I can play it all day.
+Left, right, right, left... I'm a simple man, and I can play this all day.
 
 ## Demos
 
@@ -19,24 +19,24 @@ filterable
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| default-value | `Array<string \| number> \| null` | `null` | Default value in uncontrolled mode. |
-| disabled | `boolean` | `true` | Whether to disable. |
-| filterable | `boolean` | `false` | Whether to filterable. |
+| default-value | `Array<string \| number> \| null` | `null` | Default value. |
+| disabled | `boolean` | `true` | Disabled state. |
+| filterable | `boolean` | `false` | Filterable state. |
 | filter | `function` | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | A basic label string match function. |
-| options | `Array<TransferOption>` | `[]` | For details of configuration options, see TransferOption Type. |
+| options | `Array<TransferOption>` | `[]` | For configuration options, see the TransferOption Type below. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |
-| source-filter-placeholder | `string` | `undefined` | Placeholder in the source item search box. |
-| source-title | `string` | `'Source'` | Source item title. |
-| target-filter-placeholder | `string` | `undefined` | Placeholder in the target item search box. |
-| target-title | `string` | `'Target'` | Target item title. |
-| value | `Array<string \| number> \| null` | `undefined` | Value in controlled mode. |
+| source-filter-placeholder | `string` | `undefined` | Placeholder for the source items search box. |
+| source-title | `string` | `'Source'` | Source items title. |
+| target-filter-placeholder | `string` | `undefined` | Placeholder for the target items search box. |
+| target-title | `string` | `'Target'` | Target items title. |
+| value | `Array<string \| number> \| null` | `undefined` | Value when being set manually. |
 | on-update:value | `(value: Array<string \| number>) => void` | `undefined` | Callback when the value changes. |
-| virtual-scroll | `boolean` | `false` | Whether to enable virtual scrolling. |
+| virtual-scroll | `boolean` | `false` | Enable virtual scrolling. |
 
 #### TransferOption Type
 
-| Property | Type | Description |
-| --- | --- | --- |
-| label | `string` | The name used for the page display in the options. |
-| value | `string \| number` | The only `value` among all options. |
-| disabled | `boolean` | Whether to disable the option. |
+| Property | Type               | Description                    |
+| -------- | ------------------ | ------------------------------ |
+| label    | `string`           | The option's label to display. |
+| value    | `string \| number` | The option's unique value.     |
+| disabled | `boolean`          | The option's disabled state.   |
