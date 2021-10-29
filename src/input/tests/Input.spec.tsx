@@ -120,6 +120,19 @@ describe('n-input', () => {
     wrapper.unmount()
   })
 
+  it('should work with `pair` `separator` `placeholder` prop', async () => {
+    const wrapper = mount(NInput, {
+      props: { pair: true, separator: '-', placeholder: ['从', '到'] }
+    })
+
+    expect(wrapper.find('.n-input').classes()).toContain('n-input--pair')
+    expect(wrapper.find('.n-input__separator').text()).toBe('-')
+    expect(wrapper.findAll('input')[0].attributes('placeholder')).toBe('从')
+    expect(wrapper.findAll('input')[1].attributes('placeholder')).toBe('到')
+
+    wrapper.unmount()
+  })
+
   it('should work with `on-blur` prop', async () => {
     const onBlur = jest.fn()
     const wrapper = mount(NInput, {
