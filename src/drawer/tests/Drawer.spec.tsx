@@ -125,6 +125,51 @@ describe('n-drawer', () => {
     wrapper.unmount()
   })
 
+  it('should work with `show` prop', async () => {
+    const wrapper1 = await mountDrawer({
+      show: false
+    })
+    expect(document.querySelector('.n-drawer')).toEqual(null)
+    wrapper1.unmount()
+    const wrapper2 = await mountDrawer({
+      show: true
+    })
+    expect(document.querySelector('.n-drawer')).not.toEqual(null)
+    wrapper2.unmount()
+  })
+
+  it('should work with `on-update:show` prop', async () => {
+    const onUpdate = jest.fn()
+    const wrapper = mountDrawer({
+      hasOnUpdateShow: true,
+      drawerProps: { onUpdateShow: onUpdate },
+      drawerContentProps: { closable: true }
+    })
+    await wrapper.find('button').trigger('click')
+    setTimeout(() => {
+      expect(onUpdate).toHaveBeenCalled()
+    }, 300)
+    wrapper.unmount()
+  })
+
+  it('should work with `mask-closable` prop', async () => {
+    const onUpdate = jest.fn()
+    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
+    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+    const wrapper = await mountDrawer({
+      show: true,
+      hasOnUpdateShow: true,
+      drawerProps: { onUpdateShow: onUpdate },
+      drawerContentProps: { closable: true }
+    })
+    document.querySelector('.n-drawer-mask')?.dispatchEvent(mousedownEvent)
+    document.querySelector('.n-drawer-mask')?.dispatchEvent(mouseupEvent)
+    setTimeout(() => {
+      expect(onUpdate).toHaveBeenCalled()
+    }, 300)
+    wrapper.unmount()
+  })
+
   it('should work with `header-style` prop', async () => {
     const wrapper = await mountDrawer({
       drawerContentProps: {
@@ -157,46 +202,5 @@ describe('n-drawer', () => {
     ).toEqual('red')
 
     wrapper.unmount()
-  })
-
-  it('should work with `show` prop', async () => {
-    await mountDrawer({
-      show: false
-    })
-    expect(document.querySelector('.n-drawer')).toEqual(null)
-    await mountDrawer({
-      show: true
-    })
-    expect(document.querySelector('.n-drawer')).not.toEqual(null)
-  })
-
-  it('should work with `on-update:show` prop', async () => {
-    const onUpdate = jest.fn()
-    const wrapper = mountDrawer({
-      hasOnUpdateShow: true,
-      drawerProps: { onUpdateShow: onUpdate },
-      drawerContentProps: { closable: true }
-    })
-    await wrapper.find('button').trigger('click')
-    setTimeout(() => {
-      expect(onUpdate).toHaveBeenCalled()
-    }, 300)
-  })
-
-  it('should work with `mask-closable` prop', async () => {
-    const onUpdate = jest.fn()
-    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
-    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
-    await mountDrawer({
-      show: true,
-      hasOnUpdateShow: true,
-      drawerProps: { onUpdateShow: onUpdate },
-      drawerContentProps: { closable: true }
-    })
-    document.querySelector('.n-drawer-mask')?.dispatchEvent(mousedownEvent)
-    document.querySelector('.n-drawer-mask')?.dispatchEvent(mouseupEvent)
-    setTimeout(() => {
-      expect(onUpdate).toHaveBeenCalled()
-    }, 300)
   })
 })
