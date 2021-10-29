@@ -1,8 +1,8 @@
 # Split trigger and list
 
-Set `abstract` on `n-upload`.
+Set `abstract` on `n-upload` to split the upload button (trigger) and file list as child components (`<n-upload-trigger />` and `<n-upload-file-list />`).
 
-`n-upload-trigger` and `n-upload-file-list` need to be called from within `n-upload`.
+Note: `n-upload-trigger` and `n-upload-file-list` must be children of `<n-upload />`.
 
 ```html
 <n-upload

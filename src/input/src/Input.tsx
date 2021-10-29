@@ -996,7 +996,7 @@ export default defineComponent({
                   />
                 ) : null,
                 this.showCount && this.type !== 'textarea' ? (
-                  <WordCount />
+                  <WordCount>{{ default: this.$slots.count }}</WordCount>
                 ) : null,
                 this.mergedShowPasswordOn && this.type === 'password' ? (
                   <NBaseIcon

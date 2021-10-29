@@ -1,8 +1,8 @@
 # Thumbnail file list
 
-`list-type = "image"`.
+Uploaded files can be listed with types, such as `list-type = "image"`.
 
-You can use `preview-file` to customize the thumbnails of the file.
+Thumbnails can be created using your own custom method via the `create-thumbnail-url` property.
 
 ```html
 <n-upload

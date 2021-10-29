@@ -15,7 +15,7 @@ let prefix = null
 function genOptions () {
   prefix = Math.random().toString(36).slice(2, 5)
   return Array.apply(null, { length: 200 }).map((v, i) => ({
-    label: prefix + 'Option' + i,
+    label: prefix + 'Option ' + i,
     value: prefix + i,
     disabled: i % 5 === 0
   }))

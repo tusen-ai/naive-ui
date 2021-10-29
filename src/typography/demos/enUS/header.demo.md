@@ -1,6 +1,6 @@
 # Header
 
-More attractive headers. Users love to see a bar to the left of the header; it makes it less boring.
+Make your headers pop with a little bar to the left. Much less boring.
 
 ```html
 <div style="padding-left: 24px; position: relative;">

@@ -271,6 +271,7 @@ export default defineComponent({
             default: () => (
               <NCode
                 internalNoHighlight
+                internalFontSize={this.fontSize}
                 theme={mergedTheme.peers.Code}
                 themeOverrides={mergedTheme.peerOverrides.Code}
               >

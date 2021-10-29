@@ -13,7 +13,8 @@ import {
   nextTick,
   withDirectives,
   vShow,
-  watchEffect
+  watchEffect,
+  ExtractPropTypes
 } from 'vue'
 import { VResizeObserver, VXScroll, VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
@@ -35,6 +36,11 @@ import {
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import style from './styles/index.cssr'
 import Tab from './Tab'
+import { tabPaneProps } from './TabPane'
+
+type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
+  'display-directive': 'if' | 'show' | 'show:lazy'
+}
 
 const tabsProps = {
   ...(useTheme.props as ThemeProps<TabsTheme>),
@@ -138,7 +144,10 @@ export default defineComponent({
       uncontrolledValueRef
     )
 
-    const nextTabNameRef = { value: mergedValueRef.value }
+    const tabChangeIdRef = { id: 0 }
+    watch(mergedValueRef, () => {
+      tabChangeIdRef.id = 0
+    })
 
     const tabWrapperStyleRef = computed(() => {
       if (!props.justifyContent || props.type === 'card') return undefined
@@ -279,7 +288,7 @@ export default defineComponent({
       typeRef: toRef(props, 'type'),
       closableRef: toRef(props, 'closable'),
       valueRef: mergedValueRef,
-      nextTabNameRef,
+      tabChangeIdRef,
       onBeforeLeaveRef: toRef(props, 'onBeforeLeave'),
       handleTabClick,
       handleClose,
@@ -310,6 +319,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
+      renderedNames: new Set<NonNullable<TabPaneProps['name']>>(),
       tabsElRef,
       barElRef,
       addTabInstRef,
@@ -535,7 +545,7 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-tabs-nav__suffix`}>{suffix}</div>
           ) : null}
         </div>
-        {filterMapTabPanes(children, this.mergedValue)}
+        {filterMapTabPanes(children, this.mergedValue, this.renderedNames)}
       </div>
     )
   }
@@ -543,7 +553,8 @@ export default defineComponent({
 
 function filterMapTabPanes (
   tabPaneVNodes: VNode[],
-  value: string | number | null
+  value: string | number | null,
+  renderedNames: Set<string | number>
 ): VNode[] {
   const children: VNode[] = []
   tabPaneVNodes.forEach((vNode) => {
@@ -551,20 +562,25 @@ function filterMapTabPanes (
       name,
       displayDirective,
       'display-directive': _displayDirective
-    } = vNode.props as {
-      name: string | number
-      displayDirective: 'show' | 'if' | undefined
-      'display-directive': 'show' | 'if' | undefined
-    }
-    const useVShow = displayDirective === 'show' || _displayDirective === 'show'
+    } = vNode.props as TabPaneProps
+    const matchDisplayDirective = (
+      directive: TabPaneProps['displayDirective']
+    ): boolean =>
+      displayDirective === directive || _displayDirective === directive
     const show = value === name
     if (vNode.key !== undefined) {
       vNode.key = name
     }
-    if (useVShow) {
-      children.push(withDirectives(vNode, [[vShow, show]]))
-    } else if (show) {
-      children.push(vNode)
+    if (
+      show ||
+      matchDisplayDirective('show') ||
+      (matchDisplayDirective('show:lazy') && renderedNames.has(name))
+    ) {
+      if (!renderedNames.has(name)) {
+        renderedNames.add(name)
+      }
+      const useVShow = !matchDisplayDirective('if')
+      children.push(useVShow ? withDirectives(vNode, [[vShow, show]]) : vNode)
     }
   })
   return children

@@ -48,7 +48,7 @@ show-button
 
 ### InputNumber Methods
 
-| Name   | Type         | Description             |
-| ------ | ------------ | ----------------------- |
-| prefix | `() => void` | Focus the input number. |
-| suffix | `() => void` | Blur the input number.  |
+| Name  | Type         | Description             |
+| ----- | ------------ | ----------------------- |
+| blur  | `() => void` | Blur the input number.  |
+| focus | `() => void` | Focus the input number. |

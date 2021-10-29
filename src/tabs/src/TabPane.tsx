@@ -26,7 +26,7 @@ export const tabPaneProps = {
   },
   disabled: Boolean,
   displayDirective: {
-    type: String as PropType<'if' | 'show'>,
+    type: String as PropType<'if' | 'show' | 'show:lazy'>,
     default: 'if'
   },
   closable: {
