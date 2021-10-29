@@ -328,7 +328,7 @@ export default defineComponent({
       uncontrolledHighlightKeySetRef
     )
     const loadingKeysRef = ref(new Set<Key>())
-    const expandedNonLoadingKeys = computed(() => {
+    const expandedNonLoadingKeysRef = computed(() => {
       return mergedExpandedKeysRef.value.filter(
         (i) => !loadingKeysRef.value.has(i)
       )
@@ -394,26 +394,28 @@ export default defineComponent({
     })
     async function triggerLoading (node: TmNode): Promise<void> {
       const { onLoad } = props
-      const { value: loadingKeys } = loadingKeysRef
-      return await new Promise((resolve) => {
-        if (onLoad) {
-          if (!loadingKeys.has(node.key)) {
-            loadingKeys.add(node.key)
-            onLoad(node.rawNode)
-              .then(() => {
-                loadingKeys.delete(node.key)
-                resolve()
-              })
-              .catch((loadError) => {
-                console.error(loadError)
-                resetDragExpandState()
-              })
-          }
-        } else if (__DEV__) {
+      if (!onLoad) {
+        if (__DEV__) {
           warn(
             'tree',
             'There is unloaded node in data but props.onLoad is not specified.'
           )
+        }
+        return await Promise.resolve()
+      }
+      const { value: loadingKeys } = loadingKeysRef
+      return await new Promise((resolve) => {
+        if (!loadingKeys.has(node.key)) {
+          loadingKeys.add(node.key)
+          onLoad(node.rawNode)
+            .then(() => {
+              loadingKeys.delete(node.key)
+              resolve()
+            })
+            .catch((loadError) => {
+              console.error(loadError)
+              resetDragExpandState()
+            })
         }
       })
     }
@@ -436,7 +438,7 @@ export default defineComponent({
     // during animation. This will seldom cause wired scrollbar status. It is
     // fixable and need some changes in vueuc, I've no time so I just leave it
     // here. Maybe the bug won't be fixed during the life time of the project.
-    watch(expandedNonLoadingKeys, (value, prevValue) => {
+    watch(expandedNonLoadingKeysRef, (value, prevValue) => {
       if (!props.animated) {
         void nextTick(syncScrollbar)
         return
