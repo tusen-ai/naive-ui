@@ -340,7 +340,7 @@ describe('n-select', () => {
     ).toContain('--text-color: #4fb233;')
   })
 
-  it('should work with `menuProps` prop', async () => {
+  it('should work with `menuProps` prop', () => {
     const menuProps = {
       class: 'menu-test',
       style: {
