@@ -125,6 +125,40 @@ describe('n-drawer', () => {
     wrapper.unmount()
   })
 
+  it('should work with `header-style` prop', async () => {
+    const wrapper = await mountDrawer({
+      drawerContentProps: {
+        title: 'test',
+        headerStyle: { backgroundColor: 'red' }
+      },
+      show: true
+    })
+
+    expect(
+      (document.querySelector('.n-drawer-header') as HTMLElement).style
+        .backgroundColor
+    ).toEqual('red')
+
+    wrapper.unmount()
+  })
+
+  it('should work with `body-style` prop', async () => {
+    const wrapper = await mountDrawer({
+      drawerContentProps: {
+        title: 'test',
+        bodyStyle: { backgroundColor: 'red' }
+      },
+      show: true
+    })
+
+    expect(
+      (document.querySelector('.n-drawer-body') as HTMLElement).style
+        .backgroundColor
+    ).toEqual('red')
+
+    wrapper.unmount()
+  })
+
   it('should work with `show` prop', async () => {
     await mountDrawer({
       show: false
@@ -164,43 +198,5 @@ describe('n-drawer', () => {
     setTimeout(() => {
       expect(onUpdate).toHaveBeenCalled()
     }, 300)
-  })
-
-  it('should work with `header-style` prop', async () => {
-    const wrapper = await mountDrawer({
-      drawerContentProps: {
-        title: 'test',
-        headerStyle: { backgroundColor: 'red' }
-      },
-      show: true
-    })
-
-    if (document.querySelector('.n-drawer-header') === null) {
-      expect(
-        (document.querySelector('.n-drawer-header') as HTMLElement).style
-          .backgroundColor
-      ).toEqual('red')
-    }
-
-    wrapper.unmount()
-  })
-
-  it('should work with `body-style` prop', async () => {
-    const wrapper = await mountDrawer({
-      drawerContentProps: {
-        title: 'test',
-        bodyStyle: { backgroundColor: 'red' }
-      },
-      show: true
-    })
-
-    if (document.querySelector('.n-drawer-body') === null) {
-      expect(
-        (document.querySelector('.n-drawer-body') as HTMLElement).style
-          .backgroundColor
-      ).toEqual('red')
-    }
-
-    wrapper.unmount()
   })
 })
