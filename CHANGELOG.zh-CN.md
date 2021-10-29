@@ -2,9 +2,13 @@
 
 ## Pending
 
-## Fixes
+### Fixes
 
 - 修复 `n-tabs` 在新增 tab 后切换 tab 无法生效，关闭 [#1417]https://github.com/TuSimple/naive-ui/issues/1417)
+
+### Feats
+
+- `n-select` 新增 `menu-props` 属性，关闭 [#1475](https://github.com/TuSimple/naive-ui/issues/1475)
 
 ## 2.20.0 (2021-10-28)
 
