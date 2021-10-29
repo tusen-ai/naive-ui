@@ -93,6 +93,7 @@ export default defineComponent({
                   showScrollbar={false}
                   keyField="ts"
                   onScroll={this.handleVirtualListScroll}
+                  paddingBottom={4}
                 >
                   {{
                     default: ({
