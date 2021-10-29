@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { NInput } from '../index'
+import WordCount from '../src/WordCount'
 
 describe('n-input', () => {
   it('should work with import on demand', () => {
@@ -98,6 +99,25 @@ describe('n-input', () => {
     await wrapper.setProps({ type: 'textarea' })
     expect(wrapper.find('.n-input').classes()).toContain('n-input--textarea')
     expect(wrapper.find('textarea').exists()).toBe(true)
+  })
+
+  it('should work with `show-count` prop', async () => {
+    const maxlength = 30
+    const wrapper = mount(NInput)
+    expect(wrapper.findComponent(WordCount).exists()).not.toBe(true)
+
+    await wrapper.setProps({ showCount: true, maxlength })
+    expect(
+      wrapper.find('.n-input__suffix').findComponent(WordCount).exists()
+    ).toBe(true)
+    expect(wrapper.find('.n-input-word-count').text()).toBe(`0 / ${maxlength}`)
+
+    await wrapper.setProps({ showCount: true, maxlength, type: 'textarea' })
+    expect(
+      wrapper.find('.n-input--textarea').findComponent(WordCount).exists()
+    ).toBe(true)
+    expect(wrapper.find('.n-input-word-count').text()).toBe(`0 / ${maxlength}`)
+    wrapper.unmount()
   })
 
   it('should work with `on-blur` prop', async () => {
