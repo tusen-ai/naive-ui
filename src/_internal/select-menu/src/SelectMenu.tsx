@@ -24,7 +24,7 @@ import type {
   SelectIgnoredOption,
   Value,
   SelectTreeMate,
-  MenuProps
+  SelectMenuProps
 } from '../../../select/src/interface'
 import { formatLength } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
@@ -64,7 +64,7 @@ export default defineComponent({
       required: true
     },
     multiple: Boolean,
-    menuProps: Object as PropType<MenuProps>,
+    menuProps: Object as PropType<SelectMenuProps>,
     size: {
       type: String as PropType<Size>,
       default: 'medium'

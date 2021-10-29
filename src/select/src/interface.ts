@@ -83,7 +83,7 @@ export type SelectGroupOption =
     key: string | number
   })
 
-export interface MenuProps {
+export interface SelectMenuProps {
   class?: string
   style?: string | CSSProperties
   size?: Size

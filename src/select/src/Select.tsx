@@ -56,7 +56,7 @@ import type {
   Value,
   Size,
   ValueAtom,
-  MenuProps
+  SelectMenuProps
 } from './interface'
 
 const selectProps = {
@@ -77,7 +77,7 @@ const selectProps = {
   },
   value: [String, Number, Array] as PropType<Value | null>,
   placeholder: String,
-  menuProps: Object as PropType<MenuProps>,
+  menuProps: Object as PropType<SelectMenuProps>,
   multiple: Boolean,
   size: String as PropType<Size>,
   filterable: Boolean,
