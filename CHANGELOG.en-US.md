@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+## Fixes
+
+- Fix `n-tabs` switch tab does not work when adding a new tab, closes [#1417](https://github.com/TuSimple/naive-ui/issues/1417).
+
 ## 2.20.0 (2021-10-28)
 
 ### Breaking Changes
