@@ -5,6 +5,7 @@
 ## Fixes
 
 - Fix `n-tabs` switch tab does not work when adding a new tab, closes [#1417](https://github.com/TuSimple/naive-ui/issues/1417).
+- Fix `n-tree`'s `filter` prop does not work when assigned `children-field` , closes [#1477](https://github.com/TuSimple/naive-ui/issues/1477).
 
 ## 2.20.0 (2021-10-28)
 
