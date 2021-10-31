@@ -2,8 +2,15 @@
 
 ## Pending
 
+### Fixes
+
+- 修复 `n-tabs` 在新增 tab 后切换 tab 无法生效，关闭 [#1417](https://github.com/TuSimple/naive-ui/issues/1417)
+- 修复 `n-tree` 当指定`children-field`时过滤不生效，关闭 [#1477](https://github.com/TuSimple/naive-ui/issues/1477)
+- 修复 `n-cascader` 在自定义字段和 `multiple` 一起使用时无法删除选项
+
 ### Feats
 
+- `n-select` 新增 `menu-props` 属性，关闭 [#1475](https://github.com/TuSimple/naive-ui/issues/1475)
 - `n-image` 的 `toolbar` 增加关闭图标, 关闭 [#1412](https://github.com/TuSimple/naive-ui/issues/1412)
 
 ## 2.20.0 (2021-10-28)

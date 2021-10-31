@@ -2,8 +2,15 @@
 
 ## Pending
 
+### Fixes
+
+- Fix `n-tabs` switch tab does not work when adding a new tab, closes [#1417](https://github.com/TuSimple/naive-ui/issues/1417).
+- Fix `n-tree`'s `filter` prop does not work when assigned `children-field` , closes [#1477](https://github.com/TuSimple/naive-ui/issues/1477).
+- Fix `n-cascader` can't remove options when using customized fields in multiple mode.
+
 ### Feats
 
+- `n-select` add `menu-props` prop, closes [#1475](https://github.com/TuSimple/naive-ui/issues/1475).
 - `n-image`'s `toolbar` add close icon, closes [#1412](https://github.com/TuSimple/naive-ui/issues/1412).
 
 ## 2.20.0 (2021-10-28)
