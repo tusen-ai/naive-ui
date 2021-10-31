@@ -422,13 +422,14 @@ export default defineComponent({
     }
     watchEffect(() => {
       const { value: displayTreeMate } = displayTreeMateRef
-      displayTreeMate &&
-        mergedExpandedKeysRef.value?.forEach((key) => {
-          const node = displayTreeMate.getNode(key)
-          if (node && !node.shallowLoaded) {
-            void triggerLoading(node)
-          }
-        })
+      if (!displayTreeMate) return
+      const { getNode } = displayTreeMate
+      mergedExpandedKeysRef.value?.forEach((key) => {
+        const node = getNode(key)
+        if (node && !node.shallowLoaded) {
+          void triggerLoading(node)
+        }
+      })
     })
     // animation in progress
     const aipRef = ref(false)
