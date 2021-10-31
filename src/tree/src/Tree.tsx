@@ -374,6 +374,7 @@ export default defineComponent({
             props.data,
             props.pattern,
             props.keyField,
+            props.childrenField,
             mergedFilterRef.value
           )
         uncontrolledHighlightKeySetRef.value = highlightKeySet
