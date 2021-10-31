@@ -55,7 +55,8 @@ import type {
   OnUpdateValueImpl,
   Value,
   Size,
-  ValueAtom
+  ValueAtom,
+  SelectMenuProps
 } from './interface'
 
 const selectProps = {
@@ -76,6 +77,7 @@ const selectProps = {
   },
   value: [String, Number, Array] as PropType<Value | null>,
   placeholder: String,
+  menuProps: Object as PropType<SelectMenuProps>,
   multiple: Boolean,
   size: String as PropType<Size>,
   filterable: Boolean,
@@ -778,7 +780,7 @@ export default defineComponent({
                               }
                               treeMate={this.treeMate}
                               multiple={this.multiple}
-                              size="medium"
+                              size={this.menuProps?.size ?? 'medium'}
                               renderOption={this.renderOption}
                               renderLabel={this.renderLabel}
                               value={this.mergedValue}
@@ -792,6 +794,7 @@ export default defineComponent({
                               onTabOut={this.handleMenuTabOut}
                               onMousedown={this.handleMenuMousedown}
                               show={this.mergedShow}
+                              menuProps={this.menuProps}
                             >
                               {$slots}
                             </NInternalSelectMenu>,

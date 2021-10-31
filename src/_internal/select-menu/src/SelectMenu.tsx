@@ -23,7 +23,8 @@ import type {
   SelectGroupOption,
   SelectIgnoredOption,
   Value,
-  SelectTreeMate
+  SelectTreeMate,
+  SelectMenuProps
 } from '../../../select/src/interface'
 import { formatLength } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
@@ -63,6 +64,7 @@ export default defineComponent({
       required: true
     },
     multiple: Boolean,
+    menuProps: Object as PropType<SelectMenuProps>,
     size: {
       type: String as PropType<Size>,
       default: 'medium'
@@ -159,7 +161,7 @@ export default defineComponent({
       return tmNodes && tmNodes.length === 0
     })
     const styleRef = computed(() => {
-      return [{ width: formatLength(props.width) }, cssVarsRef.value]
+      return [{ width: formatLength(props.width) }, cssVarsRef.value, props.menuProps?.style]
     })
     watch(toRef(props, 'treeMate'), () => {
       if (props.autoPending) {
@@ -368,7 +370,8 @@ export default defineComponent({
         tabindex={this.focusable ? 0 : -1}
         class={[
           `${clsPrefix}-base-select-menu`,
-          this.multiple && `${clsPrefix}-base-select-menu--multiple`
+          this.multiple && `${clsPrefix}-base-select-menu--multiple`,
+          this.menuProps?.class
         ]}
         style={this.style as any}
         onFocusin={this.handleFocusin}

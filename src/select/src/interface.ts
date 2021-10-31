@@ -82,3 +82,9 @@ export type SelectGroupOption =
   | (SelectGroupOptionBase & {
     key: string | number
   })
+
+export interface SelectMenuProps {
+  class?: string
+  style?: string | CSSProperties
+  size?: Size
+}
