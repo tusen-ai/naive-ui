@@ -73,7 +73,7 @@
 
 ### Fixes
 
-- Fix `n-data-table` fixed style does not work in group header table，closes [#1341](https://github.com/TuSimple/naive-ui/issues/1341).
+- Fix `n-data-table` fixed style does not work in group header table, closes [#1341](https://github.com/TuSimple/naive-ui/issues/1341).
 - Fix `n-data-table` has duplicate right border when it has multiple level headers.
 - Fix `n-scrollbar` doesn't support `scrollTo`, closes [#1346](https://github.com/TuSimple/naive-ui/issues/1346).
 - Fix `n-ellipsis`'s `expand-trigger` prop not show `pointer` cursor when content is short when `tooltip = false`, closes [#1299](https://github.com/TuSimple/naive-ui/issues/1299).

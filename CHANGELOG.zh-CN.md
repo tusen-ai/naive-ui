@@ -13,8 +13,8 @@
 ### Feats
 
 - `n-select` 新增 `menu-props` 属性，关闭 [#1475](https://github.com/TuSimple/naive-ui/issues/1475)
-- `n-image` 的 `toolbar` 增加关闭图标, 关闭 [#1412](https://github.com/TuSimple/naive-ui/issues/1412)
-- `n-tree` 的 `on-load` 属性在 `remote` 模式下 `expanded-keys` 属性改变时被触发, closes [#1339](https://github.com/TuSimple/naive-ui/issues/1339).
+- `n-image` 的 `toolbar` 增加关闭图标，关闭 [#1412](https://github.com/TuSimple/naive-ui/issues/1412)
+- `n-tree` 的 `on-load` 属性在 `remote` 模式下 `expanded-keys` 属性改变时被触发，关闭 [#1339](https://github.com/TuSimple/naive-ui/issues/1339)
 
 ## 2.20.0 (2021-10-28)
 
