@@ -330,7 +330,7 @@ export default defineComponent({
     const loadingKeysRef = ref(new Set<Key>())
     const expandedNonLoadingKeysRef = computed(() => {
       return mergedExpandedKeysRef.value.filter(
-        (i) => !loadingKeysRef.value.has(i)
+        (key) => !loadingKeysRef.value.has(key)
       )
     })
 
