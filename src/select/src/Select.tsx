@@ -770,7 +770,10 @@ export default defineComponent({
                               virtualScroll={
                                 this.consistentMenuWidth && this.virtualScroll
                               }
-                              class={[`${mergedClsPrefix}-select-menu`]}
+                              class={[
+                                `${mergedClsPrefix}-select-menu`,
+                                this.menuProps?.class
+                              ]}
                               clsPrefix={mergedClsPrefix}
                               focusable
                               autoPending={true}
