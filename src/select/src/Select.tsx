@@ -395,7 +395,7 @@ export default defineComponent({
     function closeMenu (): void {
       doUpdateShow(false)
     }
-    function handleMenuLeave (): void {
+    function handleMenuAfterLeave (): void {
       patternRef.value = ''
     }
     function handleTriggerClick (): void {
@@ -678,7 +678,7 @@ export default defineComponent({
       handleKeyDown,
       handleKeyUp,
       syncPosition,
-      handleMenuLeave,
+      handleMenuAfterLeave,
       handleMenuClickOutside,
       handleMenuScroll,
       handleMenuKeyup: handleKeyUp,
@@ -757,7 +757,7 @@ export default defineComponent({
                     <Transition
                       name="fade-in-scale-up-transition"
                       appear={this.isMounted}
-                      onLeave={this.handleMenuLeave}
+                      onAfterLeave={this.handleMenuAfterLeave}
                     >
                       {{
                         default: () =>
