@@ -126,14 +126,16 @@ describe('n-drawer', () => {
   })
 
   it('should work with `show` prop', async () => {
-    await mountDrawer({
+    const wrapper1 = await mountDrawer({
       show: false
     })
     expect(document.querySelector('.n-drawer')).toEqual(null)
-    await mountDrawer({
+    wrapper1.unmount()
+    const wrapper2 = await mountDrawer({
       show: true
     })
     expect(document.querySelector('.n-drawer')).not.toEqual(null)
+    wrapper2.unmount()
   })
 
   it('should work with `on-update:show` prop', async () => {
@@ -147,13 +149,14 @@ describe('n-drawer', () => {
     setTimeout(() => {
       expect(onUpdate).toHaveBeenCalled()
     }, 300)
+    wrapper.unmount()
   })
 
   it('should work with `mask-closable` prop', async () => {
     const onUpdate = jest.fn()
     const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
     const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
-    await mountDrawer({
+    const wrapper = await mountDrawer({
       show: true,
       hasOnUpdateShow: true,
       drawerProps: { onUpdateShow: onUpdate },
@@ -164,6 +167,7 @@ describe('n-drawer', () => {
     setTimeout(() => {
       expect(onUpdate).toHaveBeenCalled()
     }, 300)
+    wrapper.unmount()
   })
 
   it('should work with `header-style` prop', async () => {
@@ -176,8 +180,27 @@ describe('n-drawer', () => {
     })
 
     expect(
-      document.querySelector('[style="background-color: red;"]')
-    ).not.toEqual(null)
+      (document.querySelector('.n-drawer-header') as HTMLElement).style
+        .backgroundColor
+    ).toEqual('red')
+
+    wrapper.unmount()
+  })
+
+  it('should work with `body-style` prop', async () => {
+    const wrapper = await mountDrawer({
+      drawerContentProps: {
+        title: 'test',
+        bodyStyle: { backgroundColor: 'red' }
+      },
+      show: true
+    })
+
+    expect(
+      (document.querySelector('.n-drawer-body') as HTMLElement).style
+        .backgroundColor
+    ).toEqual('red')
+
     wrapper.unmount()
   })
 })

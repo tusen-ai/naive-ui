@@ -25,7 +25,7 @@ debug
 | check-strategy | `string` | `'all'` | How to display selected nodes when parents and children are selected. |
 | children-field | `string` | `'children'` | The children property to use for `TreeSelectOption`'s. |
 | clearable | `boolean` | `false` | Whether the selection is clearable. |
-| consistent-menu-width | `boolean` | `true` | Force the widths of selection input and menu to be equal. *This will disable virtual scrolling. |
+| consistent-menu-width | `boolean` | `true` | Force the widths of selection input and menu to be equal. \*This will disable virtual scrolling. |
 | default-value | `string \| number \| Array<string \| number> \| null` | `null` | Selected key (or keys when `multiple`) by default. |
 | default-expand-all | `boolean` | `false` | Expand all nodes by default. |
 | default-expanded-keys | `Array<string \| number>` | `[]` | Expand specific keys by default. |
@@ -53,9 +53,9 @@ debug
 
 ### TreeSelectOption Properties
 
-| Name      | Type                 | Description                                                                     |
-| --------- | -------------------- | ------------------------------------------------------------------------------- |
-| key       | `string \| number`   | Unique option key. The field used can be set using `key-field`.                 |
-| label     | `string`             | Displayed content of the option. The field used can be set using `label-field`. |
-| children? | `TreeSelectOption[]` | Child options of the option. The field used can be set using `children-field`   |
-| disabled? | `boolean`            | Option disabled state.                                                          |
+| Name | Type | Description |
+| --- | --- | --- |
+| key | `string \| number` | Unique option key. The field used can be set using `key-field`. |
+| label | `string` | Displayed content of the option. The field used can be set using `label-field`. |
+| children? | `TreeSelectOption[]` | Child options of the option. The field used can be set using `children-field` |
+| disabled? | `boolean` | Option disabled state. |

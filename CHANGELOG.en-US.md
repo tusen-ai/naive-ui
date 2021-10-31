@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## 2.20.1 (2021-11-01)
+
+### Fixes
+
+- Fix `n-tabs` switch tab does not work when adding a new tab, closes [#1417](https://github.com/TuSimple/naive-ui/issues/1417).
+- Fix `n-tree`'s `filter` prop does not work when assigned `children-field` , closes [#1477](https://github.com/TuSimple/naive-ui/issues/1477).
+- Fix `n-cascader` can't remove options when using customized fields in multiple mode.
+- Fix `n-select`'s option created by `on-create` doesn't show correct label in trigger, closes [#1482](https://github.com/TuSimple/naive-ui/issues/1482)
+- Fix `n-select` menu height shifts on close in `filterable` mode.
+
+### Feats
+
+- `n-select` add `menu-props` prop, closes [#1475](https://github.com/TuSimple/naive-ui/issues/1475).
+- `n-image`'s `toolbar` add close icon, closes [#1412](https://github.com/TuSimple/naive-ui/issues/1412).
+- `n-tree`'s `on-load` prop is triggered when the `expanded-keys` prop changes in `remote` mode, closes [#1339](https://github.com/TuSimple/naive-ui/issues/1339).
+
 ## 2.20.0 (2021-10-28)
 
 ### Breaking Changes

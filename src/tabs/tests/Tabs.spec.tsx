@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils'
 import { h } from 'vue'
 import { NTabPane, NTabs } from '../index'
 import { AddIcon } from '../../_internal/icons'
+import { sleep } from 'seemly'
 
 describe('n-tabs', () => {
   it('should work with import on demand', () => {
@@ -42,15 +43,20 @@ describe('n-tabs', () => {
     })
   })
 
-  it('should show AddIcon with `addable` prop', () => {
+  it('should show AddIcon with `addable` prop', async () => {
+    const onAdd = jest.fn()
     const wrapper = mount(NTabs, {
       props: {
         type: 'card',
-        addable: true
+        addable: true,
+        onAdd
       }
     })
 
     expect(wrapper.findComponent(AddIcon).exists()).toBe(true)
+    const addIcon = wrapper.find('.n-tabs-tab--addable')
+    await addIcon.trigger('click')
+    expect(onAdd).toHaveBeenCalled()
   })
 
   it('should work with `justify-content` prop', async () => {
@@ -135,5 +141,53 @@ describe('n-tabs', () => {
     expect(wrapper.find('.test-show').exists()).toEqual(true)
     expect(wrapper.find('.test-if').exists()).toEqual(false)
     expect(wrapper.find('.test-show-lazy').exists()).toEqual(true)
+  })
+
+  it('should work with `on-before-leave` prop', async () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        type: 'card',
+        defaultValue: '3',
+        onBeforeLeave: (name: string) => {
+          switch (name) {
+            case '1':
+              return false
+            case '2':
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+              return new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve(true)
+                }, 1000)
+              }) as Promise<boolean>
+            default:
+              return true
+          }
+        }
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          }),
+          h(NTabPane, {
+            tab: '2',
+            name: '2'
+          }),
+          h(NTabPane, {
+            tab: '3',
+            name: '3'
+          })
+        ]
+      }
+    })
+    const tabs = wrapper.findAll('.n-tabs-tab')
+    expect(tabs[2].classes()).toContain('n-tabs-tab--active')
+    await tabs[0].trigger('click')
+    expect(tabs[2].classes()).toContain('n-tabs-tab--active')
+    await tabs[1].trigger('click')
+    expect(tabs[2].classes()).toContain('n-tabs-tab--active')
+    await sleep(1000)
+    expect(tabs[1].classes()).toContain('n-tabs-tab--active')
   })
 })
