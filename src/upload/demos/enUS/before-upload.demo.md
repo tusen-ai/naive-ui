@@ -1,6 +1,6 @@
-# Before Upload Hook
+# Before upload hook
 
-Use `before-upload` to prevent uploading.
+Use `before-upload` to perform a function before the upload starts (e.g. cancel the upload).
 
 ```html
 <n-upload

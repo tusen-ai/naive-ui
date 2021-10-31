@@ -59,6 +59,36 @@ describe('n-carousel', () => {
     }
   })
 
+  it('should work with `interval` prop', async () => {
+    const wrapper = mount(NCarousel, {
+      props: {
+        interval: 100,
+        autoplay: true
+      },
+      slots: {
+        default: () => {
+          return [...Array(3).keys()].map((i) => {
+            return h('div', {}, i.toString())
+          })
+        }
+      }
+    })
+
+    await sleep(100)
+    expect(
+      wrapper
+        .find('.n-carousel__slides')
+        .find('[data-index="2"]')
+        .attributes('aria-hidden')
+    ).toBe('false')
+    expect(
+      wrapper
+        .find('.n-carousel__dots')
+        .findAll('.n-carousel__dot')[1]
+        .attributes('aria-selected')
+    ).toBe('true')
+  })
+
   it('should work with `showArrow` prop', async () => {
     const wrapper = mount(NCarousel)
 
@@ -113,20 +143,18 @@ describe('n-carousel', () => {
 
     expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
 
-    wrapper
-      .find('.n-carousel__arrow--right')
+    await wrapper.find('.n-carousel__arrow--right').trigger('click')
+
+    expect(slidesDOMArray[2].attributes('aria-hidden')).toBe('false')
+
+    await sleep(1000)
+    await nextTick()
+
+    void wrapper
+      .find('.n-carousel__arrow--left')
       .trigger('click')
-      .then(async () => {
-        expect(slidesDOMArray[2].attributes('aria-hidden')).toBe('false')
-        await sleep(1000)
-        nextTick(() => {
-          wrapper
-            .find('.n-carousel__arrow--left')
-            .trigger('click')
-            .then(() => {
-              expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
-            })
-        })
+      .then(() => {
+        expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
       })
   })
 })

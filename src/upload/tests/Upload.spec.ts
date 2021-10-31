@@ -1,5 +1,10 @@
 import { mount } from '@vue/test-utils'
-import { NUpload, NUploadFileList, NUploadTrigger } from '../index'
+import {
+  NUpload,
+  NUploadDragger,
+  NUploadFileList,
+  NUploadTrigger
+} from '../index'
 import { sleep } from 'seemly'
 import { NButtonGroup, NButton } from '../../button'
 import { h } from 'vue'
@@ -31,10 +36,7 @@ describe('n-upload', () => {
 
   it('should work with `disabled` prop', async () => {
     const wrapper = mount(NUpload)
-    const disabledClasses = [
-      'n-upload-trigger--disabled',
-      'n-upload-file-list--disabled'
-    ]
+    const disabledClasses = ['n-upload-trigger--disabled']
     for (const disabledClass of disabledClasses) {
       expect(wrapper.find(disabledClass).exists()).not.toBe(true)
     }
@@ -70,6 +72,9 @@ describe('n-upload', () => {
       props: {
         listType: 'text',
         action: 'https://www.mocky.io/v2/5e4bafc63100007100d8b70f'
+      },
+      slots: {
+        default: () => 'test'
       }
     })
     const input = wrapper.find('input')
@@ -90,6 +95,8 @@ describe('n-upload', () => {
       listType: 'image-card'
     })
     expect(wrapper.findAll('.n-upload-file--image-card-type').length).toBe(1)
+    expect(wrapper.findAll('.n-upload-trigger--image-card').length).toBe(1)
+    expect(wrapper.findAll('.n-upload-dragger').length).toBe(1)
   })
 
   it('should work with `create-thumbnail-url` prop', async () => {
@@ -251,6 +258,40 @@ describe('n-upload', () => {
     })
     expect(wrapper.find('input').attributes('multiple')).toBe('')
   })
+  it('should work with `abstract`prop when `list-type` is not image-card', async () => {
+    try {
+      mount(NUpload, {
+        props: {
+          abstract: true,
+          listType: 'image-card'
+        }
+      })
+    } catch (error) {
+      expect(String(error)).toBe(
+        'Error: [naive/upload]: when the list-type is image-card, abstract is not supported.'
+      )
+    }
+  })
+  it('should work with `max` prop', async () => {
+    const wrapper = mount(NUpload, {
+      props: {
+        defaultFileList: [
+          {
+            name: 'test.png',
+            url: '/testUrl.png',
+            status: 'finished',
+            id: 'test',
+            percentage: 100,
+            file: null
+          }
+        ],
+        max: 1
+      }
+    })
+    const triggerDisabledElement = wrapper.find('.n-upload-trigger--disabled')
+
+    expect(triggerDisabledElement.exists()).toBe(true)
+  })
 })
 
 describe('n-upload-file-list', () => {
@@ -370,5 +411,24 @@ describe('n-upload-trigger', () => {
 
     await triggerItem.trigger('dragover')
     expect(wrapper.vm.dragOver).toBe(true)
+  })
+})
+
+describe('n-upload-dragger', () => {
+  it('should work', () => {
+    mount(NUpload, {
+      slots: {
+        default: () => h(NUploadDragger, null)
+      }
+    })
+  })
+  it('should work inside `n-upload`', async () => {
+    try {
+      mount(NUploadDragger)
+    } catch (error) {
+      expect(String(error)).toBe(
+        'Error: [naive/upload-dragger]: `n-upload-dragger` must be placed inside `n-upload`.'
+      )
+    }
   })
 })

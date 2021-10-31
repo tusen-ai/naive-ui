@@ -14,6 +14,7 @@ prefix
 display-directive
 addable
 line-debug
+before-leave
 ```
 
 ## API
@@ -33,6 +34,7 @@ line-debug
 | type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | Tabs type. |
 | value | `string \| number` | `undefined` | Value in controlled mode. |
 | on-add | `() => void` | `undefined` | Callback function triggered when add tag. |
+| on-before-leave | `(activeName: string \| number, oldActiveName: string \| number \| null) => boolean \| Promise<boolean>` | `undefined` | Hook function before switching tab. Returning `false` or promise resolving `false` or promise rejection will prevent tab switching. |
 | on-close | `(name: string \| number) => void` | `undefined` | Callback function triggered when close tag. |
 | on-update:value | `(value: string \| number) => void` | `undefined` | Callback function triggered when the value changes. |
 
@@ -42,7 +44,7 @@ line-debug
 | --- | --- | --- | --- |
 | closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |
 | disabled | `boolean` | `false` | Whether to disable. |
-| display-directive | `'if' \| 'show'` | `'if'` | The directive to use in conditionally rendering. `if` will use `v-if` and `show` will use `v-show`. When use show directive, the status of tab won't be reset after tab changes. |
+| display-directive | `'if' \| 'show'` \| 'show:lazy' | `'if'` | The directive to use in conditionally rendering. `if` will use `v-if` and `show` will use `v-show`. When use `show` directive, the status of tab won't be reset after tab changes. When use `show:lazy`, the display effect is the same as `show`, but the content will be lazily loaded. |
 | tab | `string \| VNode \| () => VNodeChild` | `undefined` | Tab label. |
 | name | `string \| number` | `undefined` | Required, the name of the tab. |
 

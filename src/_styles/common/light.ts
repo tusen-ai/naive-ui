@@ -119,7 +119,7 @@ const derived = {
   textColorBase: base.neutralTextBase,
   textColor1: 'rgb(31, 34, 37)',
   textColor2: 'rgb(51, 54, 57)',
-  textColor3: 'rgb(158, 164, 170)',
+  textColor3: 'rgb(158, 164, 170)', // description text & icon
   // textColor4: neutral(base.alpha4), // disabled, placeholder, icon
   // textColor5: neutral(base.alpha5),
 

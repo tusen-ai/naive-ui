@@ -1,5 +1,69 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-tabs` switch tab does not work when adding a new tab, closes [#1417](https://github.com/TuSimple/naive-ui/issues/1417).
+- Fix `n-tree`'s `filter` prop does not work when assigned `children-field` , closes [#1477](https://github.com/TuSimple/naive-ui/issues/1477).
+
+### Feats
+
+- `n-select` add `menu-props` prop, closes [#1475](https://github.com/TuSimple/naive-ui/issues/1475).
+
+## 2.20.0 (2021-10-28)
+
+### Breaking Changes
+
+- `n-collapsed-transition`'s `collapsed` prop is deprecated, please use `show` instead, closes [#1407](https://github.com/TuSimple/naive-ui/issues/1407).
+
+### Fixes
+
+- Fix `n-log` `font-size` prop not working, closes [#1416](https://github.com/TuSimple/naive-ui/issues/1416).
+- Fix `n-loading-bar` will show once even if `start` is not called when `loading-bar-style` is set.
+- Fix `n-date-picker` `separator` prop not working, closes [#1456](https://github.com/TuSimple/naive-ui/issues/1456)
+
+### Feats
+
+- `n-data-table` optimize the logic of underlying rendering and improve component performance.
+- `n-date-picker`'s `shortcuts` prop supports functional value.
+- `n-tab-pane`'s `display-directive` props supports the `show:lazy` option, closes [#1374](https://github.com/TuSimple/naive-ui/issues/1374).
+- `n-input` of text type supports `count` slots, closes [#1440](https://github.com/TuSimple/naive-ui/issues/1440).
+
+### i18n
+
+- Add idID locale.
+
+## 2.19.11 (2021-10-21)
+
+### Fixes
+
+- Fix `n-upload`'s file can't be removed when file count limit is reached, closes [#1401](https://github.com/TuSimple/naive-ui/issues/1401).
+
+### Feats
+
+- `n-tabs` add `on-before-leave` prop, closes [#1337](https://github.com/TuSimple/naive-ui/issues/1337).
+- `n-color-picker` add `show-preview` prop, closes [#1281](https://github.com/TuSimple/naive-ui/issues/1281).
+- `n-tab-pane`'s `display-directive` prop support `show:lazy` option, closes [#1374](https://github.com/TuSimple/naive-ui/issues/1374).
+
+## 2.19.9 (2021-10-18)
+
+### Fixes
+
+- Fix `n-collapse`'s expanded status is lost when using `v-if` with `n-collapse-item`, closes [#1387](https://github.com/TuSimple/naive-ui/issues/1387).
+- Fix `n-dialog`'s close button will be overlayed with content, closes [#1381](https://github.com/TuSimple/naive-ui/issues/1381).
+- Fix `n-upload` file is set to `null` after upload failure, closes [#1316](https://github.com/TuSimple/naive-ui/issues/1316).
+- Fix `n-cascader`'s `filter` prop not working.
+- Fix `n-cascader`'s `label-field` prop breaks filter.
+- Fix `n-cascader`'s `separator` prop isn't appiled to filter select menu.
+
+### Feats
+
+- `n-menu` add `dropdown-props` prop, closes [#1345](https://github.com/TuSimple/naive-ui/issues/1345).
+- `n-input` add `count` slot, closes [#1314](https://github.com/TuSimple/naive-ui/issues/1314).
+- `n-time-picker` add `use-12-hours` prop, closes [#547](https://github.com/TuSimple/naive-ui/issues/547).
+- `n-input-number` add `focus` & `blur` methods.
+
 ## 2.19.8 (2021-10-14)
 
 ### Fixes
@@ -8,12 +72,15 @@
 - Fix `n-data-table` has duplicate right border when it has multiple level headers.
 - Fix `n-scrollbar` doesn't support `scrollTo`, closes [#1346](https://github.com/TuSimple/naive-ui/issues/1346).
 - Fix `n-ellipsis`'s `expand-trigger` prop not show `pointer` cursor when content is short when `tooltip = false`, closes [#1299](https://github.com/TuSimple/naive-ui/issues/1299).
+- Fix `n-upload`'s `disabled` prop's style not working, closes [#1237](https://github.com/TuSimple/naive-ui/issues/1237).
+- `n-config-provider` add `breakpoints` prop, closes [#1379](https://github.com/TuSimple/naive-ui/issues/1379).
 
 ### Feats
 
 - `n-auto-complete` add `get-show` prop, closes [#1292](https://github.com/TuSimple/naive-ui/issues/1292).
 - `n-select` add `input-props` prop, closes [#1351](https://github.com/TuSimple/naive-ui/issues/1351).
 - `n-color-picker` add `swatches` prop, ref [#1281](https://github.com/TuSimple/naive-ui/issues/1281).
+- `n-upload` add `max` prop.
 
 ### i18n
 
@@ -366,7 +433,7 @@
 
 ### Feats
 
-- `n-loading-bar` add `loading-bar-style` props, closes [#457](https://github.com/TuSimple/naive-ui/issues/457).
+- `n-loading-bar-provider` add `loading-bar-style` props, closes [#457](https://github.com/TuSimple/naive-ui/issues/457).
 - `n-button` add `text-color` prop.
 - `n-form` export `FormValidationError` type.
 - `n-popconfirm` support not show action components, closes [#770](https://github.com/TuSimple/naive-ui/issues/770).

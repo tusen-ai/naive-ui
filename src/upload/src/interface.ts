@@ -56,7 +56,6 @@ export type OnUpdateFileList = (fileList: FileInfo[]) => void
 export interface UploadInjection {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<UploadTheme>>
-  disabledRef: Ref<boolean>
   showCancelButtonRef: Ref<boolean>
   showRemoveButtonRef: Ref<boolean>
   showDownloadButtonRef: Ref<boolean>
@@ -73,6 +72,7 @@ export interface UploadInjection {
   draggerInsideRef: { value: boolean }
   fileListStyleRef: Ref<string | CSSProperties | undefined>
   mergedDisabledRef: Ref<boolean>
+  maxReachedRef: Ref<boolean>
   abstractRef: Ref<boolean>
   cssVarsRef: Ref<CSSProperties>
   submit: (fileId?: string) => void

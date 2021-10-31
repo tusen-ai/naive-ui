@@ -10,6 +10,8 @@
 
 默认的屏幕配置为 `xs < 640 <= s < 1024 <= m < 1280 <= l < 1536 <= xl < 1920 <= xxl`。
 
+你可以在 `n-config-provider` 定制 [breakpoints](config-provider#API)。
+
 ```html
 <n-divider>Self 响应式</n-divider>
 <n-grid cols="2 400:4 600:6">

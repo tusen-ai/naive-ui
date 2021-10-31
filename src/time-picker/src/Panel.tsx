@@ -1,14 +1,16 @@
 import { h, ref, defineComponent, inject, PropType, computed } from 'vue'
 import { NScrollbar, NBaseFocusDetector } from '../../_internal'
 import { NButton } from '../../button'
-import { getTimeUnits, time } from './utils'
+import { getTimeUnits, time, getAmPm } from './utils'
 import {
   IsHourDisabled,
   IsMinuteDisabled,
   IsSecondDisabled,
+  ItemValue,
+  Item,
   timePickerInjectionKey
 } from './interface'
-import PanelCol, { Item } from './PanelCol'
+import PanelCol from './PanelCol'
 import { MaybeArray } from '../../_utils'
 
 const timePickerPanelProps = {
@@ -35,6 +37,7 @@ const timePickerPanelProps = {
   isHourInvalid: Boolean,
   isMinuteInvalid: Boolean,
   isSecondInvalid: Boolean,
+  isAmPmInvalid: Boolean,
   isValueInvalid: Boolean,
   hourValue: {
     type: Number as PropType<number | null>,
@@ -48,19 +51,27 @@ const timePickerPanelProps = {
     type: Number as PropType<number | null>,
     default: null
   },
+  amPmValue: {
+    type: String as PropType<'am' | 'pm' | null>,
+    default: null
+  },
   isHourDisabled: Function as PropType<IsHourDisabled>,
   isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
   isSecondDisabled: Function as PropType<IsSecondDisabled>,
   onHourClick: {
-    type: Function as PropType<(value: number) => void>,
+    type: Function as PropType<(value: ItemValue) => void>,
     required: true
   },
   onMinuteClick: {
-    type: Function as PropType<(value: number) => void>,
+    type: Function as PropType<(value: ItemValue) => void>,
     required: true
   },
   onSecondClick: {
-    type: Function as PropType<(value: number) => void>,
+    type: Function as PropType<(value: ItemValue) => void>,
+    required: true
+  },
+  onAmPmClick: {
+    type: Function as PropType<(value: ItemValue) => void>,
     required: true
   },
   onNowClick: Function as PropType<() => void>,
@@ -74,7 +85,8 @@ const timePickerPanelProps = {
   onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
   hours: [Number, Array] as PropType<MaybeArray<number>>,
   minutes: [Number, Array] as PropType<MaybeArray<number>>,
-  seconds: [Number, Array] as PropType<MaybeArray<number>>
+  seconds: [Number, Array] as PropType<MaybeArray<number>>,
+  use12Hours: Boolean
 }
 
 export default defineComponent({
@@ -88,21 +100,39 @@ export default defineComponent({
     } = inject(timePickerInjectionKey)!
 
     const hoursRef = computed<Item[]>(() => {
-      const { isHourDisabled, hours } = props
-
-      return getTimeUnits(time.hours, hours).map((hour) => {
-        return {
-          value: hour,
-          disabled: isHourDisabled ? isHourDisabled(Number(hour)) : false
-        }
-      })
+      const { isHourDisabled, hours, use12Hours, amPmValue } = props
+      if (!use12Hours) {
+        return getTimeUnits(time.hours, hours).map((hour) => {
+          return {
+            label: hour,
+            value: Number(hour),
+            disabled: isHourDisabled ? isHourDisabled(Number(hour)) : false
+          }
+        })
+      } else {
+        const mergedAmPmValue = amPmValue ?? getAmPm(Date.now())
+        return getTimeUnits(time.hours, hours, mergedAmPmValue).map((hour) => {
+          const hourAs12FormattedNumber = Number(hour)
+          const hourAs24FormattedNumber =
+            mergedAmPmValue === 'pm' && hourAs12FormattedNumber !== 12
+              ? hourAs12FormattedNumber + 12
+              : hourAs12FormattedNumber
+          return {
+            label: hour,
+            value: hourAs24FormattedNumber,
+            disabled: isHourDisabled
+              ? isHourDisabled(hourAs24FormattedNumber)
+              : false
+          }
+        })
+      }
     })
     const minutesRef = computed<Item[]>(() => {
       const { isMinuteDisabled, minutes } = props
-
       return getTimeUnits(time.minutes, minutes).map((minute) => {
         return {
-          value: minute,
+          label: minute,
+          value: Number(minute),
           disabled: isMinuteDisabled
             ? isMinuteDisabled(Number(minute), props.hourValue)
             : false
@@ -111,10 +141,10 @@ export default defineComponent({
     })
     const secondsRef = computed<Item[]>(() => {
       const { isSecondDisabled, seconds } = props
-
       return getTimeUnits(time.seconds, seconds).map((second) => {
         return {
-          value: second,
+          label: second,
+          value: Number(second),
           disabled: isSecondDisabled
             ? isSecondDisabled(
               Number(second),
@@ -125,40 +155,67 @@ export default defineComponent({
         }
       })
     })
+    const amPmRef = computed<Item[]>(() => {
+      const { isHourDisabled } = props
+      let amDisabled = true
+      let pmDisabled = true
+      for (let i = 0; i < 12; ++i) {
+        if (!isHourDisabled?.(i)) {
+          amDisabled = false
+          break
+        }
+      }
+      for (let i = 12; i < 24; ++i) {
+        if (!isHourDisabled?.(i)) {
+          pmDisabled = false
+          break
+        }
+      }
+      return [
+        {
+          label: 'AM',
+          value: 'am',
+          disabled: amDisabled
+        },
+        {
+          label: 'PM',
+          value: 'pm',
+          disabled: pmDisabled
+        }
+      ]
+    })
     return {
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       hours: hoursRef,
       minutes: minutesRef,
       seconds: secondsRef,
+      amPm: amPmRef,
       hourScrollRef: ref(null),
       minuteScrollRef: ref(null),
-      secondScrollRef: ref(null)
+      secondScrollRef: ref(null),
+      amPmScrollRef: ref(null)
     }
   },
   render () {
     const { mergedClsPrefix, mergedTheme } = this
-    return h(
-      'div',
-      {
-        tabindex: 0,
-        class: `${mergedClsPrefix}-time-picker-panel`,
-        onFocusin: this.onFocusin,
-        onFocusout: this.onFocusout,
-        onKeydown: this.onKeydown
-      },
-      [
+    return (
+      <div
+        tabindex={0}
+        class={`${mergedClsPrefix}-time-picker-panel`}
+        onFocusin={this.onFocusin}
+        onFocusout={this.onFocusout}
+        onKeydown={this.onKeydown}
+      >
         <div class={`${mergedClsPrefix}-time-picker-cols`}>
           {this.showHour ? (
             <div
               class={[
                 `${mergedClsPrefix}-time-picker-col`,
-                {
-                  [`${mergedClsPrefix}-time-picker-col--invalid`]:
-                    this.isHourInvalid,
-                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]:
-                    this.transitionDisabled
-                }
+                this.isHourInvalid &&
+                  `${mergedClsPrefix}-time-picker-col--invalid`,
+                this.transitionDisabled &&
+                  `${mergedClsPrefix}-time-picker-col--transition-disabled`
               ]}
             >
               <NScrollbar
@@ -186,12 +243,10 @@ export default defineComponent({
             <div
               class={[
                 `${mergedClsPrefix}-time-picker-col`,
-                {
-                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]:
-                    this.transitionDisabled,
-                  [`${mergedClsPrefix}-time-picker-col--invalid`]:
-                    this.isMinuteInvalid
-                }
+                this.transitionDisabled &&
+                  `${mergedClsPrefix}-time-picker-col--transition-disabled`,
+                this.isMinuteInvalid &&
+                  `${mergedClsPrefix}-time-picker-col--invalid`
               ]}
             >
               <NScrollbar
@@ -219,12 +274,10 @@ export default defineComponent({
             <div
               class={[
                 `${mergedClsPrefix}-time-picker-col`,
-                {
-                  [`${mergedClsPrefix}-time-picker-col--invalid`]:
-                    this.isSecondInvalid,
-                  [`${mergedClsPrefix}-time-picker-col--transition-disabled`]:
-                    this.transitionDisabled
-                }
+                this.isSecondInvalid &&
+                  `${mergedClsPrefix}-time-picker-col--invalid`,
+                this.transitionDisabled &&
+                  `${mergedClsPrefix}-time-picker-col--transition-disabled`
               ]}
             >
               <NScrollbar
@@ -248,7 +301,38 @@ export default defineComponent({
               </NScrollbar>
             </div>
           ) : null}
-        </div>,
+          {this.use12Hours ? (
+            <div
+              class={[
+                `${mergedClsPrefix}-time-picker-col`,
+                this.isAmPmInvalid &&
+                  `${mergedClsPrefix}-time-picker-col--invalid`,
+                this.transitionDisabled &&
+                  `${mergedClsPrefix}-time-picker-col--transition-disabled`
+              ]}
+            >
+              <NScrollbar
+                ref="amPmScrollRef"
+                theme={mergedTheme.peers.Scrollbar}
+                themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+              >
+                {{
+                  default: () => [
+                    <PanelCol
+                      clsPrefix={mergedClsPrefix}
+                      data={this.amPm}
+                      activeValue={this.amPmValue}
+                      onItemClick={this.onAmPmClick}
+                    />,
+                    <div
+                      class={`${mergedClsPrefix}-time-picker-col__padding`}
+                    />
+                  ]
+                }}
+              </NScrollbar>
+            </div>
+          ) : null}
+        </div>
         <div class={`${mergedClsPrefix}-time-picker-actions`}>
           {this.actions?.includes('now') ? (
             <NButton
@@ -273,9 +357,9 @@ export default defineComponent({
               {{ default: () => this.confirmText }}
             </NButton>
           ) : null}
-        </div>,
+        </div>
         <NBaseFocusDetector onFocus={this.onFocusDetectorFocus} />
-      ]
+      </div>
     )
   }
 })

@@ -56,21 +56,22 @@ focus
 
 ### Input Slots
 
-| 属性 | 类型 | 说明 |
+| 属性 | 参数 | 说明 |
 | --- | --- | --- |
+| count | `(value: string)` | 字数统计 |
 | prefix | `()` | 输入框头部内容 |
-| suffix | `()` | 输入框尾部内容 |
 | separator | `()` | 成对输入框之间分隔符，仅 `pair` = true 生效且优先级高于 separator 属性 |
+| suffix | `()` | 输入框尾部内容 |
 
 ### InputGroup Slots
 
-| 属性    | 类型 | 说明         |
+| 属性    | 参数 | 说明         |
 | ------- | ---- | ------------ |
 | default | `()` | 输入组的内容 |
 
 ### InputGroupLabel Slots
 
-| 属性    | 类型 | 说明             |
+| 属性    | 参数 | 说明             |
 | ------- | ---- | ---------------- |
 | default | `()` | 输入组标签的内容 |
 

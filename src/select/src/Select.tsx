@@ -10,7 +10,8 @@ import {
   Transition,
   withDirectives,
   vShow,
-  InputHTMLAttributes
+  InputHTMLAttributes,
+  HTMLAttributes
 } from 'vue'
 import { happensIn } from 'seemly'
 import { createTreeMate, TreeNode } from 'treemate'
@@ -76,6 +77,7 @@ const selectProps = {
   },
   value: [String, Number, Array] as PropType<Value | null>,
   placeholder: String,
+  menuProps: Object as PropType<HTMLAttributes>,
   multiple: Boolean,
   size: String as PropType<Size>,
   filterable: Boolean,
@@ -763,11 +765,12 @@ export default defineComponent({
                             this.displayDirective === 'show') &&
                           withDirectives(
                             <NInternalSelectMenu
+                              {...this.menuProps}
                               ref="menuRef"
                               virtualScroll={
                                 this.consistentMenuWidth && this.virtualScroll
                               }
-                              class={`${mergedClsPrefix}-select-menu`}
+                              class={[`${mergedClsPrefix}-select-menu`]}
                               clsPrefix={mergedClsPrefix}
                               focusable
                               autoPending={true}
@@ -778,11 +781,11 @@ export default defineComponent({
                               }
                               treeMate={this.treeMate}
                               multiple={this.multiple}
-                              size="medium"
+                              size={'medium'}
                               renderOption={this.renderOption}
                               renderLabel={this.renderLabel}
                               value={this.mergedValue}
-                              style={this.cssVars}
+                              style={[this.menuProps?.style, this.cssVars]}
                               onToggle={this.handleToggle}
                               onScroll={this.handleMenuScroll}
                               onFocus={this.handleMenuFocus}

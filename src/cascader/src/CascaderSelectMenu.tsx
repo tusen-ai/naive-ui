@@ -47,10 +47,14 @@ export default defineComponent({
       type: Array as PropType<TmNode[]>,
       default: () => []
     },
-    filter: {
-      type: Function as PropType<Filter>,
-      default: (pattern: string, _: CascaderOption, path: CascaderOption[]) =>
-        path.some((option) => option.label && ~option.label.indexOf(pattern))
+    filter: Function as PropType<Filter>,
+    labelField: {
+      type: String,
+      required: true
+    },
+    separator: {
+      type: String,
+      required: true
     }
   },
   setup (props) {
@@ -71,23 +75,34 @@ export default defineComponent({
     const selectOptionsRef = computed(() => {
       return createSelectOptions(
         props.tmNodes,
-        mergedCheckStrategyRef.value === 'child'
+        mergedCheckStrategyRef.value === 'child',
+        props.labelField,
+        props.separator
       )
     })
+    const mergedFilterRef = computed(() => {
+      const { filter } = props
+      if (filter) return filter
+      const { labelField } = props
+      return (pattern: string, _: CascaderOption, path: CascaderOption[]) =>
+        path.some(
+          (option) =>
+            option[labelField] && ~(option[labelField] as any).indexOf(pattern)
+        )
+    })
     const filteredSelectOptionsRef = computed(() => {
-      const { filter, pattern } = props
-      return selectOptionsRef.value
-        .filter((option) => {
-          return filter(
-            pattern,
-            { label: option.label as string, value: option.value },
-            option.path
-          )
-        })
-        .map((option) => ({
-          value: option.value,
-          label: option.label
-        }))
+      const { pattern } = props
+      const { value: mergedFilter } = mergedFilterRef
+      return (
+        pattern
+          ? selectOptionsRef.value.filter((option) => {
+            return mergedFilter(pattern, option.rawNode, option.path)
+          })
+          : selectOptionsRef.value
+      ).map((option) => ({
+        value: option.value,
+        label: option.label
+      }))
     })
     const selectTreeMateRef = computed(() => {
       return createTreeMate<

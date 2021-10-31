@@ -132,6 +132,15 @@ function usePanelCommon (props: UsePanelCommonProps) {
       cached = false
     }
   }
+  function getShortcutValue (
+    shortcut: Shortcuts[string]
+  ): number | [number, number] {
+    if (typeof shortcut === 'function') {
+      return shortcut()
+    }
+    return shortcut
+  }
+
   return {
     mergedTheme: mergedThemeRef,
     mergedClsPrefix: mergedClsPrefixRef,
@@ -150,7 +159,9 @@ function usePanelCommon (props: UsePanelCommonProps) {
     handlePanelFocus,
     cachePendingValue,
     clearPendingValue,
-    restorePendingValue
+    restorePendingValue,
+    getShortcutValue,
+    handleShortcutMouseleave: restorePendingValue
   }
 }
 

@@ -1,4 +1,4 @@
-# Default File List
+# Default file list
 
 ```html
 <n-upload

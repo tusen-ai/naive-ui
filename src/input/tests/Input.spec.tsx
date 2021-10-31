@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { NInput } from '../index'
+import WordCount from '../src/WordCount'
 
 describe('n-input', () => {
   it('should work with import on demand', () => {
@@ -82,6 +83,15 @@ describe('n-input', () => {
     wrapper.unmount()
   })
 
+  it('should work with `rows` prop', async () => {
+    const wrapper = mount(NInput, { props: { type: 'textarea' } })
+    expect(wrapper.find('textarea').attributes('rows')).toBe('3')
+
+    await wrapper.setProps({ type: 'textarea', rows: 5 })
+    expect(wrapper.find('textarea').attributes('rows')).toBe('5')
+    wrapper.unmount()
+  })
+
   it('should work with `size` prop', async () => {
     ;(['small', 'medium', 'large'] as const).forEach((size) => {
       const wrapper = mount(NInput, { props: { size: size } })
@@ -98,6 +108,38 @@ describe('n-input', () => {
     await wrapper.setProps({ type: 'textarea' })
     expect(wrapper.find('.n-input').classes()).toContain('n-input--textarea')
     expect(wrapper.find('textarea').exists()).toBe(true)
+  })
+
+  it('should work with `show-count` prop', async () => {
+    const maxlength = 30
+    const wrapper = mount(NInput)
+    expect(wrapper.findComponent(WordCount).exists()).not.toBe(true)
+
+    await wrapper.setProps({ showCount: true, maxlength })
+    expect(
+      wrapper.find('.n-input__suffix').findComponent(WordCount).exists()
+    ).toBe(true)
+    expect(wrapper.find('.n-input-word-count').text()).toBe(`0 / ${maxlength}`)
+
+    await wrapper.setProps({ showCount: true, maxlength, type: 'textarea' })
+    expect(
+      wrapper.find('.n-input--textarea').findComponent(WordCount).exists()
+    ).toBe(true)
+    expect(wrapper.find('.n-input-word-count').text()).toBe(`0 / ${maxlength}`)
+    wrapper.unmount()
+  })
+
+  it('should work with `pair` `separator` `placeholder` prop', async () => {
+    const wrapper = mount(NInput, {
+      props: { pair: true, separator: '-', placeholder: ['从', '到'] }
+    })
+
+    expect(wrapper.find('.n-input').classes()).toContain('n-input--pair')
+    expect(wrapper.find('.n-input__separator').text()).toBe('-')
+    expect(wrapper.findAll('input')[0].attributes('placeholder')).toBe('从')
+    expect(wrapper.findAll('input')[1].attributes('placeholder')).toBe('到')
+
+    wrapper.unmount()
   })
 
   it('should work with `on-blur` prop', async () => {

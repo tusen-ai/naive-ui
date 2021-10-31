@@ -20,6 +20,8 @@ export default defineComponent({
     const message = useMessage()
     const handleFinish = ({ file, event }) => {
       message.success(event.target.response)
+      const ext = file.name.split('.')[1]
+      file.name = `更名.${ext}`
       file.url = '__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f'
     }
     return {
