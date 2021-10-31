@@ -10,8 +10,8 @@ range
 mark
 disabled
 disable-tooltip
-vertical
 format
+vertical
 ```
 
 ## API

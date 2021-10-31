@@ -207,13 +207,44 @@ export default c([
   cB('slider-handle-indicator', `
     font-size: var(--font-size);
     padding: 6px 10px;
-    margin-bottom: 12px;
     border-radius: var(--indicator-border-radius);
     color: var(--indicator-text-color);
     background-color: var(--indicator-color);
     box-shadow: var(--indicator-box-shadow);
   `, [
     fadeInScaleUpTransition()
+  ]),
+  c('.v-binder-follower-content', [
+    cB('slider-handle-indicator', `
+      font-size: var(--font-size);
+      padding: 6px 10px;
+      border-radius: var(--indicator-border-radius);
+      color: var(--indicator-text-color);
+      background-color: var(--indicator-color);
+      box-shadow: var(--indicator-box-shadow);
+    `, [
+      fadeInScaleUpTransition()
+    ]),
+    c('&[v-placement="top"]', [
+      cB('slider-handle-indicator', `
+        margin-bottom: 12px;
+      `)
+    ]),
+    c('&[v-placement="right"]', [
+      cB('slider-handle-indicator', `
+        margin-left: 12px;
+      `)
+    ]),
+    c('&[v-placement="bottom"]', [
+      cB('slider-handle-indicator', `
+        margin-top: 12px;
+      `)
+    ]),
+    c('&[v-placement="left"]', [
+      cB('slider-handle-indicator', `
+        margin-right: 12px;
+      `)
+    ])
   ]),
   insideModal(
     cB('slider', [

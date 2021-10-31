@@ -56,10 +56,7 @@ const sliderProps = {
   },
   range: Boolean,
   value: [Number, Array] as PropType<number | [number, number]>,
-  placement: {
-    type: String as PropType<FollowerPlacement>,
-    default: 'top'
-  },
+  placement: String as PropType<FollowerPlacement>,
   showTooltip: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -129,6 +126,14 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+
+    const wittyPlacementRef = computed(() => {
+      return props.placement === undefined
+        ? props.vertical
+          ? 'right'
+          : 'top'
+        : props.placement
+    })
 
     const memoziedOtherValueRef = ref<number>(0)
     const changeSourceRef = ref<'click' | 'keyboard' | null>(null)
@@ -306,7 +311,7 @@ export default defineComponent({
       if (!railEl) return
       const railRect = railEl.getBoundingClientRect()
       const offsetRatio = props.vertical
-        ? 1 - (e.clientY - railRect.top) / railRect.height
+        ? (railRect.bottom - e.clientY) / railRect.height
         : (e.clientX - railRect.left) / railRect.width
       const newValue = props.min + (props.max - props.min) * offsetRatio
       if (!props.range) {
@@ -348,9 +353,8 @@ export default defineComponent({
       let offsetRatio: number
       if (props.vertical) {
         offsetRatio =
-          (touchOffset.clientY - railRect.top - rect.height / 2) /
+          (railRect.bottom - touchOffset.clientY - rect.height / 2) /
           (railRect.height - rect.height)
-        offsetRatio = 1 - offsetRatio
       } else {
         offsetRatio =
           (touchOffset.clientX - railRect.left - rect.width / 2) /
@@ -739,6 +743,7 @@ export default defineComponent({
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       mergedDisabled: mergedDisabledRef,
+      wittyPlacement: wittyPlacementRef,
       isMounted: useIsMounted(),
       adjustedTo: useAdjustedTo(props),
       handleValue1: handleValue1Ref,
@@ -929,7 +934,7 @@ export default defineComponent({
                   show={this.mergedShowTooltip1}
                   to={this.adjustedTo}
                   teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                  placement={this.placement}
+                  placement={this.wittyPlacement}
                   containerClass={this.namespace}
                 >
                   {{
@@ -986,7 +991,7 @@ export default defineComponent({
                   ref="followerRef2"
                   show={this.mergedShowTooltip2}
                   to={this.adjustedTo}
-                  placement={this.placement}
+                  placement={this.wittyPlacement}
                   containerClass={this.namespace}
                   teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
                 >
