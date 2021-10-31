@@ -28,7 +28,7 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --rail-color
 // --rail-color-hover
 // --rail-height
-// --vertical-rail-width
+// --rail-width-vertical
 export default c([
   cB('slider', `
     display: block;
@@ -52,7 +52,7 @@ export default c([
     ]),
     cM('vertical', `
       padding: 0 calc((var(--handle-size) - var(--rail-height)) / 2);
-      width: var(--vertical-rail-width);
+      width: var(--rail-width-vertical);
       height: 100%;
     `, [
       cB('slider-rail', `
@@ -70,7 +70,7 @@ export default c([
         left: 0;
       `),
       cM('with-mark', `
-        width: var(--vertical-rail-width);
+        width: var(--rail-width-vertical);
         margin: 0 32px 0 8px;
       `),
       cB('slider-marks', `
@@ -214,37 +214,27 @@ export default c([
   `, [
     fadeInScaleUpTransition()
   ]),
-  c('.v-binder-follower-content', [
-    cB('slider-handle-indicator', `
-      font-size: var(--font-size);
-      padding: 6px 10px;
-      border-radius: var(--indicator-border-radius);
-      color: var(--indicator-text-color);
-      background-color: var(--indicator-color);
-      box-shadow: var(--indicator-box-shadow);
-    `, [
-      fadeInScaleUpTransition()
-    ]),
-    c('&[v-placement="top"]', [
-      cB('slider-handle-indicator', `
-        margin-bottom: 12px;
-      `)
-    ]),
-    c('&[v-placement="right"]', [
-      cB('slider-handle-indicator', `
-        margin-left: 12px;
-      `)
-    ]),
-    c('&[v-placement="bottom"]', [
-      cB('slider-handle-indicator', `
-        margin-top: 12px;
-      `)
-    ]),
-    c('&[v-placement="left"]', [
-      cB('slider-handle-indicator', `
-        margin-right: 12px;
-      `)
-    ])
+  cB('slider-handle-indicator', `
+    font-size: var(--font-size);
+    padding: 6px 10px;
+    border-radius: var(--indicator-border-radius);
+    color: var(--indicator-text-color);
+    background-color: var(--indicator-color);
+    box-shadow: var(--indicator-box-shadow);
+  `, [
+    cM('top', `
+      margin-bottom: 12px;
+    `),
+    cM('right', `
+      margin-left: 12px;
+    `),
+    cM('bottom', `
+      margin-top: 12px;
+    `),
+    cM('left', `
+      margin-right: 12px;
+    `),
+    fadeInScaleUpTransition()
   ]),
   insideModal(
     cB('slider', [

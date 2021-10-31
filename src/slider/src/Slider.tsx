@@ -127,7 +127,7 @@ export default defineComponent({
       uncontrolledValueRef
     )
 
-    const wittyPlacementRef = computed(() => {
+    const mergedPlacementRef = computed(() => {
       return props.placement === undefined
         ? props.vertical
           ? 'right'
@@ -142,7 +142,7 @@ export default defineComponent({
     const handleActive2Ref = ref(false)
     const handleClicked1Ref = ref(false)
     const handleClicked2Ref = ref(false)
-    const handleClickedRailRef = ref(false)
+    const draggingRef = ref(false)
 
     const controlledShowTooltipRef = toRef(props, 'showTooltip')
     const mergedShowTooltip1Ref = useMergedState(
@@ -306,7 +306,7 @@ export default defineComponent({
       doUpdateShow(false, false)
     }
     function handleRailClick (e: MouseEvent): void {
-      if (mergedDisabledRef.value || !handleClickedRailRef.value) return
+      if (mergedDisabledRef.value || draggingRef.value) return
       const { value: railEl } = railRef
       if (!railEl) return
       const railRect = railEl.getBoundingClientRect()
@@ -340,7 +340,8 @@ export default defineComponent({
       }
     }
     function handleRailMouseDown (): void {
-      handleClickedRailRef.value = true
+      // capture, It is earlier than handle
+      draggingRef.value = false
     }
     function handleHandleMouseMove (
       e: MouseEvent | TouchEvent,
@@ -532,7 +533,7 @@ export default defineComponent({
       if (props.range) {
         memoziedOtherValueRef.value = handleValue2Ref.value
       }
-      handleClickedRailRef.value = false
+      draggingRef.value = true
       doUpdateShow(true, false)
       handleClicked1Ref.value = true
       on('touchend', document, handleHandleMouseUp)
@@ -546,7 +547,7 @@ export default defineComponent({
       if (props.range) {
         memoziedOtherValueRef.value = handleValue1Ref.value
       }
-      handleClickedRailRef.value = false
+      draggingRef.value = true
       doUpdateShow(false, true)
       handleClicked2Ref.value = true
       on('touchend', document, handleHandleMouseUp)
@@ -743,7 +744,7 @@ export default defineComponent({
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       mergedDisabled: mergedDisabledRef,
-      wittyPlacement: wittyPlacementRef,
+      mergedPlacement: mergedPlacementRef,
       isMounted: useIsMounted(),
       adjustedTo: useAdjustedTo(props),
       handleValue1: handleValue1Ref,
@@ -818,7 +819,7 @@ export default defineComponent({
             dotBorder,
             dotBoxShadow,
             railHeight,
-            verticalRailWidth,
+            railWidthVertical,
             handleSize,
             dotHeight,
             dotWidth,
@@ -853,7 +854,7 @@ export default defineComponent({
           '--rail-color': railColor,
           '--rail-color-hover': railColorHover,
           '--rail-height': railHeight,
-          '--vertical-rail-width': verticalRailWidth
+          '--rail-width-vertical': railWidthVertical
         }
       })
     }
@@ -934,7 +935,7 @@ export default defineComponent({
                   show={this.mergedShowTooltip1}
                   to={this.adjustedTo}
                   teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                  placement={this.wittyPlacement}
+                  placement={this.mergedPlacement}
                   containerClass={this.namespace}
                 >
                   {{
@@ -948,7 +949,10 @@ export default defineComponent({
                           default: () =>
                             this.mergedShowTooltip1 ? (
                               <div
-                                class={`${mergedClsPrefix}-slider-handle-indicator`}
+                                class={[
+                                  `${mergedClsPrefix}-slider-handle-indicator`,
+                                  `${mergedClsPrefix}-slider-handle-indicator--${this.mergedPlacement}`
+                                ]}
                                 style={this.indicatorCssVars as CSSProperties}
                               >
                                 {typeof formatTooltip === 'function'
@@ -991,7 +995,7 @@ export default defineComponent({
                   ref="followerRef2"
                   show={this.mergedShowTooltip2}
                   to={this.adjustedTo}
-                  placement={this.wittyPlacement}
+                  placement={this.mergedPlacement}
                   containerClass={this.namespace}
                   teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
                 >
@@ -1006,7 +1010,10 @@ export default defineComponent({
                           default: () =>
                             this.mergedShowTooltip2 ? (
                               <div
-                                class={`${mergedClsPrefix}-slider-handle-indicator`}
+                                class={[
+                                  `${mergedClsPrefix}-slider-handle-indicator`,
+                                  `${mergedClsPrefix}-slider-handle-indicator--${this.mergedPlacement}`
+                                ]}
                                 style={this.indicatorCssVars as CSSProperties}
                               >
                                 {typeof formatTooltip === 'function'
