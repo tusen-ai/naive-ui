@@ -1,6 +1,5 @@
 # CHANGELOG
 
-
 ## Pending
 
 ### Fixes
