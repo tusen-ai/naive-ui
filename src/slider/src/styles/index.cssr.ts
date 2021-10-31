@@ -56,8 +56,8 @@ export default c([
       height: 100%;
     `, [
       cB('slider-rail', `
-      height: 100%;
-    `, [
+        height: 100%;
+      `, [
         cE('fill', `
           top: unset;
           right: 0;
@@ -68,7 +68,32 @@ export default c([
       cB('slider-handle', `
         top: unset;
         left: 0;
-      `)
+      `),
+      cM('with-mark', `
+        width: var(--vertical-rail-width);
+        margin: 0 32px 0 8px;
+      `),
+      cB('slider-marks', `
+        top: calc(var(--handle-size) / 2);
+        right: unset;
+        bottom: calc(var(--handle-size) / 2);
+        left: 22px;
+      `, [
+        cB('slider-mark', `
+          transform: translateY(50%);
+          white-space: nowrap;
+        `)
+      ]),
+      cB('slider-dots', `
+        top: calc(var(--handle-size) / 2);
+        right: unset;
+        bottom: calc(var(--handle-size) / 2);
+        left: 50%;
+      `, [
+        cB('slider-dot', `
+          transform: translateX(-50%) translateY(50%);
+        `)
+      ])
     ]),
     cM('disabled', `
       cursor: not-allowed;

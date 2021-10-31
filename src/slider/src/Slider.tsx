@@ -172,7 +172,9 @@ export default defineComponent({
                 : false,
             label: marks[key],
             style: {
-              left: `${((num - min) / (max - min)) * 100}%`
+              [props.vertical ? 'bottom' : 'left']: `${
+                ((num - min) / (max - min)) * 100
+              }%`
             }
           })
         }
