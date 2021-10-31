@@ -13,6 +13,10 @@
 - `n-select` add `menu-props` prop, closes [#1475](https://github.com/TuSimple/naive-ui/issues/1475).
 - `n-image`'s `toolbar` add close icon, closes [#1412](https://github.com/TuSimple/naive-ui/issues/1412).
 
+### Feats
+
+- `n-tree`'s `on-load` prop is triggered when the `expanded-keys` prop changes in `remote` mode, closes [#1339](https://github.com/TuSimple/naive-ui/issues/1339).
+
 ## 2.20.0 (2021-10-28)
 
 ### Breaking Changes

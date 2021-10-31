@@ -70,7 +70,7 @@ export interface InternalDropInfo {
 }
 
 export interface TreeInjection {
-  loadingKeysRef: Ref<Key[]>
+  loadingKeysRef: Ref<Set<Key>>
   highlightKeySetRef: Ref<Set<Key>>
   displayedCheckedKeysRef: Ref<Key[]>
   displayedIndeterminateKeysRef: Ref<Key[]>
