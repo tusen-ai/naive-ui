@@ -68,6 +68,7 @@ const sliderProps = {
     type: Boolean,
     default: true
   },
+  vertical: Boolean,
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<<T extends number & [number, number]>(value: T) => void>
   >,
@@ -136,6 +137,7 @@ export default defineComponent({
     const handleActive2Ref = ref(false)
     const handleClicked1Ref = ref(false)
     const handleClicked2Ref = ref(false)
+    const handleClickedRailRef = ref(false)
 
     const controlledShowTooltipRef = toRef(props, 'showTooltip')
     const mergedShowTooltip1Ref = useMergedState(
@@ -179,18 +181,25 @@ export default defineComponent({
     })
     const fillStyleRef = computed(() => {
       const { max, min, range } = props
+      const isVertical = props.vertical
+      const positionPropName = isVertical ? 'bottom' : 'left'
+      const lengthPropName = isVertical ? 'height' : 'width'
       if (range) {
         return {
-          left: `${((handleValue1Ref.value - min) / (max - min)) * 100}%`,
-          width: `${
+          [positionPropName]: `${
+            ((handleValue1Ref.value - min) / (max - min)) * 100
+          }%`,
+          [lengthPropName]: `${
             ((handleValue2Ref.value - handleValue1Ref.value) / (max - min)) *
             100
           }%`
         }
       } else {
         return {
-          left: 0,
-          width: `${((handleValue1Ref.value - min) / (max - min)) * 100}%`
+          [positionPropName]: 0,
+          [lengthPropName]: `${
+            ((handleValue1Ref.value - min) / (max - min)) * 100
+          }%`
         }
       }
     })
@@ -214,10 +223,18 @@ export default defineComponent({
       const { value: handleClicked1 } = handleClicked1Ref
       const { max, min } = props
       const percentage = ((handleValue1 - min) / (max - min)) * 100
-      return {
-        left: `${percentage}%`,
-        transform: `translateX(${-percentage}%)`,
-        zIndex: handleClicked1 ? 1 : 0
+      if (props.vertical) {
+        return {
+          bottom: `${percentage}%`,
+          transform: `translateY(${percentage}%)`,
+          zIndex: handleClicked1 ? 1 : 0
+        }
+      } else {
+        return {
+          left: `${percentage}%`,
+          transform: `translateX(${-percentage}%)`,
+          zIndex: handleClicked1 ? 1 : 0
+        }
       }
     })
     const secondHandleStyleRef = computed(() => {
@@ -225,10 +242,18 @@ export default defineComponent({
       const { value: handleClicked2 } = handleClicked2Ref
       const { max, min } = props
       const percentage = ((handleValue2 - min) / (max - min)) * 100
-      return {
-        left: `${percentage}%`,
-        transform: `translateX(${-percentage}%)`,
-        zIndex: handleClicked2 ? 1 : 0
+      if (props.vertical) {
+        return {
+          bottom: `${percentage}%`,
+          transform: `translateY(${percentage}%)`,
+          zIndex: handleClicked2 ? 1 : 0
+        }
+      } else {
+        return {
+          left: `${percentage}%`,
+          transform: `translateX(${-percentage}%)`,
+          zIndex: handleClicked2 ? 1 : 0
+        }
       }
     })
     function doUpdateValue (value: number | [number, number]): void {
@@ -274,11 +299,13 @@ export default defineComponent({
       doUpdateShow(false, false)
     }
     function handleRailClick (e: MouseEvent): void {
-      if (mergedDisabledRef.value) return
+      if (mergedDisabledRef.value || !handleClickedRailRef.value) return
       const { value: railEl } = railRef
       if (!railEl) return
       const railRect = railEl.getBoundingClientRect()
-      const offsetRatio = (e.clientX - railRect.left) / railRect.width
+      const offsetRatio = props.vertical
+        ? 1 - (e.clientY - railRect.top) / railRect.height
+        : (e.clientX - railRect.left) / railRect.width
       const newValue = props.min + (props.max - props.min) * offsetRatio
       if (!props.range) {
         dispatchValueUpdate(newValue, { source: 'click' })
@@ -305,18 +332,29 @@ export default defineComponent({
         }
       }
     }
+    function handleRailMouseDown (): void {
+      handleClickedRailRef.value = true
+    }
     function handleHandleMouseMove (
       e: MouseEvent | TouchEvent,
       handleIndex: 0 | 1
     ): void {
       if (!handleRef1.value || !railRef.value) return
-      const x = 'touches' in e ? e.touches[0].clientX : e.clientX
-      const { width: handleWidth } = handleRef1.value.getBoundingClientRect()
-      const { width: railWidth, left: railLeft } =
-        railRef.value.getBoundingClientRect()
+      const touchOffset = 'touches' in e ? e.touches[0] : e
+      const rect = handleRef1.value.getBoundingClientRect()
+      const railRect = railRef.value.getBoundingClientRect()
+      let offsetRatio: number
+      if (props.vertical) {
+        offsetRatio =
+          (touchOffset.clientY - railRect.top - rect.height / 2) /
+          (railRect.height - rect.height)
+        offsetRatio = 1 - offsetRatio
+      } else {
+        offsetRatio =
+          (touchOffset.clientX - railRect.left - rect.width / 2) /
+          (railRect.width - rect.width)
+      }
       const { min, max, range } = props
-      const offsetRatio =
-        (x - railLeft - handleWidth / 2) / (railWidth - handleWidth)
       const newValue = min + (max - min) * offsetRatio
       if (range) {
         if (handleIndex === 0) {
@@ -331,10 +369,14 @@ export default defineComponent({
     function handleKeyDown (e: KeyboardEvent): void {
       if (mergedDisabledRef.value) return
       switch (e.code) {
+        case 'ArrowUp':
         case 'ArrowRight':
+          e.preventDefault()
           handleKeyDownRight()
           break
+        case 'ArrowDown':
         case 'ArrowLeft':
+          e.preventDefault()
           handleKeyDownLeft()
           break
       }
@@ -484,6 +526,7 @@ export default defineComponent({
       if (props.range) {
         memoziedOtherValueRef.value = handleValue2Ref.value
       }
+      handleClickedRailRef.value = false
       doUpdateShow(true, false)
       handleClicked1Ref.value = true
       on('touchend', document, handleHandleMouseUp)
@@ -497,6 +540,7 @@ export default defineComponent({
       if (props.range) {
         memoziedOtherValueRef.value = handleValue1Ref.value
       }
+      handleClickedRailRef.value = false
       doUpdateShow(false, true)
       handleClicked2Ref.value = true
       on('touchend', document, handleHandleMouseUp)
@@ -720,6 +764,7 @@ export default defineComponent({
       fillStyle: fillStyleRef,
       handleKeyDown,
       handleRailClick,
+      handleRailMouseDown,
       handleHandleFocus1,
       handleHandleBlur1,
       handleFirstHandleMouseDown,
@@ -766,6 +811,7 @@ export default defineComponent({
             dotBorder,
             dotBoxShadow,
             railHeight,
+            verticalRailWidth,
             handleSize,
             dotHeight,
             dotWidth,
@@ -799,7 +845,8 @@ export default defineComponent({
           '--opacity-disabled': opacityDisabled,
           '--rail-color': railColor,
           '--rail-color-hover': railColorHover,
-          '--rail-height': railHeight
+          '--rail-height': railHeight,
+          '--vertical-rail-width': verticalRailWidth
         }
       })
     }
@@ -813,11 +860,14 @@ export default defineComponent({
           {
             [`${mergedClsPrefix}-slider--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-slider--active`]: this.active,
-            [`${mergedClsPrefix}-slider--with-mark`]: this.marks
+            [`${mergedClsPrefix}-slider--with-mark`]: this.marks,
+            [`${mergedClsPrefix}-slider--vertical`]: this.vertical
           }
         ]}
         style={this.cssVars as CSSProperties}
         onKeydown={this.handleKeyDown}
+        // @ts-expect-error
+        onMousedownCapture={this.handleRailMouseDown}
         onClick={this.handleRailClick}
       >
         <div ref="railRef" class={`${mergedClsPrefix}-slider-rail`}>

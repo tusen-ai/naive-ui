@@ -28,6 +28,7 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --rail-color
 // --rail-color-hover
 // --rail-height
+// --vertical-rail-width
 export default c([
   cB('slider', `
     display: block;
@@ -36,6 +37,7 @@ export default c([
     z-index: 0;
     width: 100%;
     cursor: pointer;
+    user-select: none;
   `, [
     cB('slider-marks', `
       position: absolute;
@@ -47,6 +49,26 @@ export default c([
         position: 'absolute',
         transform: 'translateX(-50%)'
       })
+    ]),
+    cM('vertical', `
+      padding: 0 calc((var(--handle-size) - var(--rail-height)) / 2);
+      width: var(--vertical-rail-width);
+      height: 100%;
+    `, [
+      cB('slider-rail', `
+      height: 100%;
+    `, [
+        cE('fill', `
+          top: unset;
+          right: 0;
+          bottom: unset;
+          left: 0;
+        `)
+      ]),
+      cB('slider-handle', `
+        top: unset;
+        left: 0;
+      `)
     ]),
     cM('disabled', `
       cursor: not-allowed;

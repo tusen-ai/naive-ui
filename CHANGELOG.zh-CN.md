@@ -6,6 +6,10 @@
 
 - 修复 `n-tabs` 在新增 tab 后切换 tab 无法生效，关闭 [#1417]https://github.com/TuSimple/naive-ui/issues/1417)
 
+### Feats
+
+- `n-slider` 新增 `vertical` 属性，关闭 [#1468](https://github.com/TuSimple/naive-ui/issues/1468)
+
 ## 2.20.0 (2021-10-28)
 
 ### Breaking Changes
