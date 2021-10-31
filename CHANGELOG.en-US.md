@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.20.1 (2021-11-01)
 
 ### Fixes
 
