@@ -7,6 +7,7 @@
 - 修复 `n-tabs` 在新增 tab 后切换 tab 无法生效，关闭 [#1417](https://github.com/TuSimple/naive-ui/issues/1417)
 - 修复 `n-tree` 当指定`children-field`时过滤不生效，关闭 [#1477](https://github.com/TuSimple/naive-ui/issues/1477)
 - 修复 `n-cascader` 在自定义字段和 `multiple` 一起使用时无法删除选项
+- 修复 `n-select` 使用 `on-create` 创建的选项字段不正确，关闭 [#1482](https://github.com/TuSimple/naive-ui/issues/1482)
 
 ### Feats
 

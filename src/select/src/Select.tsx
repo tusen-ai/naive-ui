@@ -225,7 +225,7 @@ export default defineComponent({
         tmOptions
       )
     )
-    const valOptMapRef = computed(() => createValOptMap(props.options))
+    const valOptMapRef = computed(() => createValOptMap(localOptionsRef.value))
     const uncontrolledShowRef = ref(false)
     const mergedShowRef = useMergedState(
       toRef(props, 'show'),

@@ -7,6 +7,7 @@
 - Fix `n-tabs` switch tab does not work when adding a new tab, closes [#1417](https://github.com/TuSimple/naive-ui/issues/1417).
 - Fix `n-tree`'s `filter` prop does not work when assigned `children-field` , closes [#1477](https://github.com/TuSimple/naive-ui/issues/1477).
 - Fix `n-cascader` can't remove options when using customized fields in multiple mode.
+- Fix `n-select`'s option created by `on-create` doesn't show correct label in trigger, closes [#1482](https://github.com/TuSimple/naive-ui/issues/1482)
 
 ### Feats
 
