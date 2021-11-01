@@ -10,7 +10,8 @@ import {
   watch,
   CSSProperties,
   VNode,
-  nextTick
+  nextTick,
+  watchEffect
 } from 'vue'
 import {
   createTreeMate,
@@ -80,6 +81,7 @@ export function createTreeMateOptions<T> (
 }
 
 type OnUpdateKeys = (value: Key[], option: Array<TreeOption | null>) => void
+type OnLoad = (node: TreeOption) => Promise<void>
 
 export const treeSharedProps = {
   filter: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
@@ -150,7 +152,7 @@ const treeProps = {
     type: String,
     default: ''
   },
-  onLoad: Function as PropType<(node: TreeOption) => Promise<void>>,
+  onLoad: Function as PropType<OnLoad>,
   cascade: Boolean,
   selectable: {
     type: Boolean,
@@ -319,13 +321,18 @@ export default defineComponent({
 
     let expandTimerId: number | null = null
     let nodeKeyToBeExpanded: Key | null = null
-    const uncontrolledHighlightKeySetRef = ref<Set<Key>>(new Set())
+    const uncontrolledHighlightKeySetRef = ref(new Set<Key>())
     const controlledHighlightKeySetRef = toRef(props, 'internalHighlightKeySet')
     const mergedHighlightKeySetRef = useMergedState(
       controlledHighlightKeySetRef,
       uncontrolledHighlightKeySetRef
     )
-    const loadingKeysRef = ref<Key[]>([])
+    const loadingKeysRef = ref(new Set<Key>())
+    const expandedNonLoadingKeysRef = computed(() => {
+      return mergedExpandedKeysRef.value.filter(
+        (key) => !loadingKeysRef.value.has(key)
+      )
+    })
 
     let dragStartX: number = 0
     const draggingNodeRef = ref<TmNode | null>(null)
@@ -359,7 +366,7 @@ export default defineComponent({
     watch(
       toRef(props, 'data'),
       () => {
-        loadingKeysRef.value = []
+        loadingKeysRef.value.clear()
         pendingNodeKeyRef.value = null
         resetDndState()
       },
@@ -374,6 +381,7 @@ export default defineComponent({
             props.data,
             props.pattern,
             props.keyField,
+            props.childrenField,
             mergedFilterRef.value
           )
         uncontrolledHighlightKeySetRef.value = highlightKeySet
@@ -385,7 +393,44 @@ export default defineComponent({
         uncontrolledHighlightKeySetRef.value = new Set()
       }
     })
-
+    async function triggerLoading (node: TmNode): Promise<void> {
+      const { onLoad } = props
+      if (!onLoad) {
+        if (__DEV__) {
+          warn(
+            'tree',
+            'There is unloaded node in data but props.onLoad is not specified.'
+          )
+        }
+        return await Promise.resolve()
+      }
+      const { value: loadingKeys } = loadingKeysRef
+      return await new Promise((resolve) => {
+        if (!loadingKeys.has(node.key)) {
+          loadingKeys.add(node.key)
+          onLoad(node.rawNode)
+            .then(() => {
+              loadingKeys.delete(node.key)
+              resolve()
+            })
+            .catch((loadError) => {
+              console.error(loadError)
+              resetDragExpandState()
+            })
+        }
+      })
+    }
+    watchEffect(() => {
+      const { value: displayTreeMate } = displayTreeMateRef
+      if (!displayTreeMate) return
+      const { getNode } = displayTreeMate
+      mergedExpandedKeysRef.value?.forEach((key) => {
+        const node = getNode(key)
+        if (node && !node.shallowLoaded) {
+          void triggerLoading(node)
+        }
+      })
+    })
     // animation in progress
     const aipRef = ref(false)
     // animation flattened nodes
@@ -395,7 +440,7 @@ export default defineComponent({
     // during animation. This will seldom cause wired scrollbar status. It is
     // fixable and need some changes in vueuc, I've no time so I just leave it
     // here. Maybe the bug won't be fixed during the life time of the project.
-    watch(mergedExpandedKeysRef, (value, prevValue) => {
+    watch(expandedNonLoadingKeysRef, (value, prevValue) => {
       if (!props.animated) {
         void nextTick(syncScrollbar)
         return
@@ -727,29 +772,9 @@ export default defineComponent({
       }
       if (!node.shallowLoaded) {
         expandTimerId = window.setTimeout(() => {
-          const { onLoad } = props
-          if (onLoad) {
-            if (!loadingKeysRef.value.includes(node.key)) {
-              loadingKeysRef.value.push(node.key)
-              onLoad(node.rawNode)
-                .then(() => {
-                  loadingKeysRef.value.splice(
-                    loadingKeysRef.value.findIndex((key) => key === node.key),
-                    1
-                  )
-                  expand()
-                })
-                .catch((loadError) => {
-                  console.error(loadError)
-                  resetDragExpandState()
-                })
-            }
-          } else if (__DEV__) {
-            warn(
-              'tree',
-              'There is unloaded node in data but props.onLoad is not specified.'
-            )
-          }
+          void triggerLoading(node).then(() => {
+            expand()
+          })
         }, 1000)
       } else {
         expandTimerId = window.setTimeout(() => {

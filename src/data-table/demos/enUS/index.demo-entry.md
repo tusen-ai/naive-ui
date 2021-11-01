@@ -78,7 +78,7 @@ flex-height
 | on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: DataTableColumn)` | `undefined` | The callback function triggered when the filters data changes. |
 | on-update:page | `(page: number)` | `undefined` | Callback function triggered when the page changes. |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function triggered when the page-size changes. |
-| on-update:sorter | `(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => void` | `undefined` | If there won't be a active sorter after change, `options` will be `null`. |
+| on-update:sorter | `(options: SortState \| SortState[] \| null) => void` | `undefined` | If the change column is sorted by multiple columns, will return `SortState[] \| null`, otherwise return `SortState \| null`. For types, see <n-a href="#SortState-Type">SorterState Type</n-a>. |
 
 #### DataTableColumn Properties
 
@@ -136,6 +136,16 @@ type DataTableCreateSummary = (
         rowSpan?: number
       }
     }
+```
+
+#### SortState Type
+
+```__ts
+type SortState = {
+  columnKey: string | number,
+  sorter: 'default' | function | boolean,
+  order: 'ascend' | 'descend' \ false
+}
 ```
 
 ### DataTable Methods

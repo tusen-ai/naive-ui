@@ -83,6 +83,15 @@ describe('n-input', () => {
     wrapper.unmount()
   })
 
+  it('should work with `rows` prop', async () => {
+    const wrapper = mount(NInput, { props: { type: 'textarea' } })
+    expect(wrapper.find('textarea').attributes('rows')).toBe('3')
+
+    await wrapper.setProps({ type: 'textarea', rows: 5 })
+    expect(wrapper.find('textarea').attributes('rows')).toBe('5')
+    wrapper.unmount()
+  })
+
   it('should work with `size` prop', async () => {
     ;(['small', 'medium', 'large'] as const).forEach((size) => {
       const wrapper = mount(NInput, { props: { size: size } })
@@ -117,6 +126,19 @@ describe('n-input', () => {
       wrapper.find('.n-input--textarea').findComponent(WordCount).exists()
     ).toBe(true)
     expect(wrapper.find('.n-input-word-count').text()).toBe(`0 / ${maxlength}`)
+    wrapper.unmount()
+  })
+
+  it('should work with `pair` `separator` `placeholder` prop', async () => {
+    const wrapper = mount(NInput, {
+      props: { pair: true, separator: '-', placeholder: ['从', '到'] }
+    })
+
+    expect(wrapper.find('.n-input').classes()).toContain('n-input--pair')
+    expect(wrapper.find('.n-input__separator').text()).toBe('-')
+    expect(wrapper.findAll('input')[0].attributes('placeholder')).toBe('从')
+    expect(wrapper.findAll('input')[1].attributes('placeholder')).toBe('到')
+
     wrapper.unmount()
   })
 
