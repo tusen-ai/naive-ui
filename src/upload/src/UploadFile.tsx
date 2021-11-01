@@ -229,14 +229,18 @@ export default defineComponent({
         >
           {listType === 'image-card' ? (
             <NImage
-              src={this.thumbnailUrl || file.thumbnailUrl || file.url || undefined}
-              previewSrc={file.url}
+              src={
+                this.thumbnailUrl || file.thumbnailUrl || file.url || undefined
+              }
+              previewSrc={file.url || undefined}
               alt={file.name}
               ref="imageRef"
             />
           ) : (
             <img
-              src={this.thumbnailUrl || file.thumbnailUrl || file.url || undefined}
+              src={
+                this.thumbnailUrl || file.thumbnailUrl || file.url || undefined
+              }
               alt={file.name}
             />
           )}
