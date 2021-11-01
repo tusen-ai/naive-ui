@@ -104,4 +104,4 @@ export type listType = 'text' | 'image' | 'image-card'
 
 export type OnPreview = (file: FileInfo) => void
 
-export type CreateThumbnailUrl = (file: File) => Promise<string>
+export type CreateThumbnailUrl = (file: File, fileInfo: FileInfo) => Promise<string>
