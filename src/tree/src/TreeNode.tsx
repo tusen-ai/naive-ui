@@ -54,8 +54,8 @@ const TreeNode = defineComponent({
     function handleSwitcherClick (): void {
       const { tmNode } = props
       if (NTree.remoteRef.value && !tmNode.isLeaf && !tmNode.shallowLoaded) {
-        if (!NTree.loadingKeysRef.value.includes(tmNode.key)) {
-          NTree.loadingKeysRef.value.push(tmNode.key)
+        if (!NTree.loadingKeysRef.value.has(tmNode.key)) {
+          NTree.loadingKeysRef.value.add(tmNode.key)
         }
         const {
           onLoadRef: { value: onLoad }
@@ -66,12 +66,7 @@ const TreeNode = defineComponent({
               NTree.handleSwitcherClick(tmNode)
             })
             .finally(() => {
-              NTree.loadingKeysRef.value.splice(
-                NTree.loadingKeysRef.value.findIndex(
-                  (key) => key === tmNode.key
-                ),
-                1
-              )
+              NTree.loadingKeysRef.value.delete(tmNode.key)
             })
         }
       } else {
@@ -161,9 +156,7 @@ const TreeNode = defineComponent({
       pending: useMemo(
         () => NTree.pendingNodeKeyRef.value === props.tmNode.key
       ),
-      loading: useMemo(() =>
-        NTree.loadingKeysRef.value.includes(props.tmNode.key)
-      ),
+      loading: useMemo(() => NTree.loadingKeysRef.value.has(props.tmNode.key)),
       highlight: useMemo(() =>
         NTree.highlightKeySetRef.value.has(props.tmNode.key)
       ),

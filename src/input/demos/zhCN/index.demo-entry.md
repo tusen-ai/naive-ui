@@ -51,8 +51,8 @@ focus
 | on-change | `(value: string \| [string, string]) => void` | `undefined` | 原生 change 事件触发时触发 |
 | on-clear | `() => void` | `undefined` | 输入框点击清空按钮时触发 |
 | on-focus | `() => void` | `undefined` | 输入框获得焦点时触发 |
-| on-input | `(value: string \| [string, string]) => void` | `undefined` | 输入框值改变时触发 |
-| on-update:value | `(value: string \| [string, string]) => void` | `undefined` | 输入框值改变时触发 |
+| on-input | `(value: string \| [string, string]) => void` | `undefined` | 输入框在用户输入时触发 |
+| on-update:value | `(value: string \| [string, string]) => void` | `undefined` | 输入框值 change 时触发 |
 
 ### Input Slots
 

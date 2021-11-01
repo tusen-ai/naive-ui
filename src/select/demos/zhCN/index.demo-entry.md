@@ -49,6 +49,7 @@ options-change-debug
 | input-props | `HTMLInputAttributes` | `undefined` | 触发器中 input 元素的属性，只在可过滤时有意义 |
 | loading | `boolean` | `false` | 是否为加载状态 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |
+| menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 |
 | multiple | `boolean` | `false` | 是否为多选 |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | 配置选项内容，详情见 SelectOption Properties |
 | placeholder | `string` | `'请选择'` | 提示信息 |

@@ -83,6 +83,15 @@ describe('n-input', () => {
     wrapper.unmount()
   })
 
+  it('should work with `rows` prop', async () => {
+    const wrapper = mount(NInput, { props: { type: 'textarea' } })
+    expect(wrapper.find('textarea').attributes('rows')).toBe('3')
+
+    await wrapper.setProps({ type: 'textarea', rows: 5 })
+    expect(wrapper.find('textarea').attributes('rows')).toBe('5')
+    wrapper.unmount()
+  })
+
   it('should work with `size` prop', async () => {
     ;(['small', 'medium', 'large'] as const).forEach((size) => {
       const wrapper = mount(NInput, { props: { size: size } })
@@ -185,6 +194,15 @@ describe('n-input', () => {
     wrapper.find('input').element.focus()
     await wrapper.find('input').setValue('test')
     expect(onUpdateValue).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `prefix` slots', async () => {
+    const wrapper = mount(NInput, {
+      slots: { prefix: '#' }
+    })
+    expect(wrapper.find('.n-input__prefix').exists()).toBe(true)
+    expect(wrapper.find('.n-input__prefix').text()).toBe('#')
     wrapper.unmount()
   })
 })

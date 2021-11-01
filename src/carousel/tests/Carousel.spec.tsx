@@ -124,11 +124,11 @@ describe('n-carousel', () => {
           return [
             h('img', {
               style: 'width: 100%; height: 240px; object-fit: cover;',
-              src: 'https://s.anw.red/news/1623152423.jpg!/both/800x450/quality/78/progressive/true/ignore-error/true'
+              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
             }),
             h('img', {
               style: 'width: 100%; height: 240px; object-fit: cover;',
-              src: 'https://s.anw.red/news/1623152423.jpg!/both/800x450/quality/78/progressive/true/ignore-error/true'
+              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
             })
           ]
         }
