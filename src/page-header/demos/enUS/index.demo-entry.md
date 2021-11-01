@@ -10,7 +10,9 @@ I hope this component has all the slots you need!
 basic
 ```
 
-## Props
+## API
+
+### PageHeader Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -19,7 +21,7 @@ basic
 | title | `string` | `undefined` | Title. |
 | on-back | `() => void` | `undefined` | Callback for when the back button is pressed. |
 
-## Slots
+### PageHeader Slots
 
 | Name     | Parameters | Description           |
 | -------- | ---------- | --------------------- |

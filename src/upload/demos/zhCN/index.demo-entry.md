@@ -15,6 +15,7 @@ before-upload
 image-style
 image-card-style
 abstract
+retry-debug
 ```
 
 ## API
@@ -24,17 +25,18 @@ abstract
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | abstract | `boolean` | `false` | 是否不存在 DOM 包裹，不支持 `image-card` 类型的 Upload |
-| accept | `string` | `undefined` | 接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">accept</n-a> |
+| accept | `string` | `undefined` | 接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a> |
 | action | `string` | `undefined` | 请求提交的地址 |
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | 自定义文件缩略图 |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | 提交表单需要附加的数据 |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | 非受控状态下默认的文件列表 |
-| default-upload | `boolean` | `false` | 选择文件时候是否默认上传 |
+| default-upload | `boolean` | `true` | 选择文件时候是否默认上传 |
 | disabled | `boolean` | `false` | 是否禁用 |
 | file-list-style | `Object` | `undefined` | 文件列表区域的样式 |
 | file-list | `Array<UploadFileInfo>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |
 | list-type | `string` | `'text'` | 文件列表的内建样式，`text`、`image` 和 `image-card` |
+| max | `number` | `undefined` | 限制上传文件数量 |
 | method | `string` | `'POST'` | HTTP 请求的方法 |
 | multiple | `boolean` | `false` | 是否支持多个文件 |
 | name | `string` | `'file'` | 文件在提交表单中的字段名 |
@@ -84,9 +86,9 @@ abstract
 
 ### UploadDragger Slots
 
-| 名称    | 参数 | 说明                                          |
-| ------- | ---- | --------------------------------------------- |
-| default | `()` | 上传拖动器的内容，使用可参考[拖拽上传](#drag) |
+| 名称 | 参数 | 说明 |
+| --- | --- | --- |
+| default | `()` | 上传拖动器的内容，使用可参考<n-a href="#drag">拖拽上传</n-a> |
 
 ### UploadTrigger Slots
 

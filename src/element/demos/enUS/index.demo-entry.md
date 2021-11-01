@@ -8,13 +8,15 @@ Element has many theme variables provided by Naive UI.
 basic
 ```
 
-## Props
+## API
+
+### Element Props
 
 | Name | Type     | Default | Description                                |
 | ---- | -------- | ------- | ------------------------------------------ |
 | tag  | `string` | `'div'` | The tag `n-element` should be rendered as. |
 
-## Slots
+### Element Slots
 
 | Name    | Parameters | Description                 |
 | ------- | ---------- | --------------------------- |

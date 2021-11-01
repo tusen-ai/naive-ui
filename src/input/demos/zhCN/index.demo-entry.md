@@ -31,7 +31,7 @@ focus
 | clearable | `boolean` | `false` | 是否可清空 |
 | default-value | `string \| [string, string] \| null` | `null` | 输入框默认值 |
 | disabled | `boolean` | `false` | 是否禁用 |
-| input-props | `object` | `undefined` | 组件中 input 元素的属性，对 `pair` 类型不生效 |
+| input-props | `HTMLInputAttributes` | `undefined` | 组件中 input 元素的属性，对 `pair` 类型不生效 |
 | loading | `boolean` | `undefined` | 是否展示加载图标，设为非 `undefined` 会占据空间 |
 | maxlength | `number` | `undefined` | 最大输入长度 |
 | minlength | `number` | `undefined` | 最小输入长度 |
@@ -48,35 +48,36 @@ focus
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | 输入框类型 |
 | value | `string \| [string, string] \| null` | `undefined` | 文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组 |
 | on-blur | `() => void` | `undefined` | 输入框失去焦点时触发 |
-| on-change | `(value: string \| [string, string]) => void` | `undefined` | 输入框失去焦点且值 change 时触发 |
+| on-change | `(value: string \| [string, string]) => void` | `undefined` | 原生 change 事件触发时触发 |
 | on-clear | `() => void` | `undefined` | 输入框点击清空按钮时触发 |
 | on-focus | `() => void` | `undefined` | 输入框获得焦点时触发 |
-| on-input | `() => void` | `undefined` | 输入框值 change 时触发 |
+| on-input | `(value: string \| [string, string]) => void` | `undefined` | 输入框在用户输入时触发 |
 | on-update:value | `(value: string \| [string, string]) => void` | `undefined` | 输入框值 change 时触发 |
 
 ### Input Slots
 
-| 属性 | 类型 | 说明 |
+| 属性 | 参数 | 说明 |
 | --- | --- | --- |
+| count | `(value: string)` | 字数统计 |
 | prefix | `()` | 输入框头部内容 |
-| suffix | `()` | 输入框尾部内容 |
 | separator | `()` | 成对输入框之间分隔符，仅 `pair` = true 生效且优先级高于 separator 属性 |
+| suffix | `()` | 输入框尾部内容 |
 
 ### InputGroup Slots
 
-| 属性    | 类型 | 说明         |
+| 属性    | 参数 | 说明         |
 | ------- | ---- | ------------ |
 | default | `()` | 输入组的内容 |
 
 ### InputGroupLabel Slots
 
-| 属性    | 类型 | 说明             |
+| 属性    | 参数 | 说明             |
 | ------- | ---- | ---------------- |
 | default | `()` | 输入组标签的内容 |
 
 ### Input Methods
 
-| 名称  | 类型       | 说明             |
-| ----- | ---------- | ---------------- |
-| blur  | () => void | Blur input 元素  |
-| focus | () => void | Focus input 元素 |
+| 名称  | 类型         | 说明             |
+| ----- | ------------ | ---------------- |
+| blur  | `() => void` | Blur input 元素  |
+| focus | `() => void` | Focus input 元素 |

@@ -2,10 +2,8 @@
 
 ```html
 <n-space>
-  <n-space>
-    <n-time-picker v-model:value="time0" />
-    <n-time-picker v-model:value="time1" />
-  </n-space>
+  <n-time-picker v-model:value="time0" />
+  <n-time-picker v-model:value="time1" />
 </n-space>
 ```
 

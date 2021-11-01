@@ -1,4 +1,4 @@
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NImage, NImageGroup } from '../index'
 import NImagePreview from '../src/ImagePreview'
@@ -65,6 +65,7 @@ describe('n-image', () => {
     await wrapper.find('img').trigger('click')
 
     expect(document.querySelector('.n-image-preview-toolbar')).not.toEqual(null)
+    wrapper.unmount()
   })
 
   it('should work with `image group` prop', async () => {
@@ -87,6 +88,7 @@ describe('n-image', () => {
 
     await wrapper.findAll('img')[0].trigger('click')
     expect(wrapper.findComponent(NImagePreview).exists()).toBe(true)
+    wrapper.unmount()
   })
   it('should inherit attrs', () => {
     const wrapper = mount(NImage, {
@@ -119,5 +121,19 @@ describe('n-image', () => {
     expect(wrapper.find('img').attributes('style')).toContain(
       'object-fit: contain;'
     )
+  })
+  it('should work with `showToolbar close` prop', async () => {
+    const wrapper = mount(NImage, {
+      props: {
+        src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+      }
+    })
+    await wrapper.find('img').trigger('click')
+    expect(document.querySelector('.n-image-preview-toolbar')).not.toEqual(null)
+    expect(wrapper.findComponent(NImagePreview).exists()).toBe(true)
+    const toolbars = document.querySelector('.n-image-preview-toolbar')
+    toolbars?.children[toolbars?.children.length - 1].dispatchEvent(new MouseEvent('click'))
+    await nextTick()
+    expect(document.querySelector('.n-image-preview-toolbar')).toEqual(null)
   })
 })

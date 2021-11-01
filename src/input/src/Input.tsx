@@ -35,7 +35,7 @@ import {
   InputWrappedRef,
   inputInjectionKey
 } from './interface'
-import { len, isEmptyValue } from './utils'
+import { isEmptyValue } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
 import { off, on } from 'evtd'
@@ -658,11 +658,7 @@ export default defineComponent({
     })
 
     provide(inputInjectionKey, {
-      wordCountRef: computed(() => {
-        const { value: mergedValue } = mergedValueRef
-        if (mergedValue === null || Array.isArray(mergedValue)) return 0
-        return len(mergedValue)
-      }),
+      mergedValueRef,
       maxlengthRef,
       mergedClsPrefixRef
     })
@@ -1000,7 +996,7 @@ export default defineComponent({
                   />
                 ) : null,
                 this.showCount && this.type !== 'textarea' ? (
-                  <WordCount />
+                  <WordCount>{{ default: this.$slots.count }}</WordCount>
                 ) : null,
                 this.mergedShowPasswordOn && this.type === 'password' ? (
                   <NBaseIcon
@@ -1082,7 +1078,9 @@ export default defineComponent({
         {this.mergedBordered ? (
           <div class={`${mergedClsPrefix}-input__state-border`} />
         ) : null}
-        {this.showCount && this.type === 'textarea' ? <WordCount /> : null}
+        {this.showCount && this.type === 'textarea' ? (
+          <WordCount>{{ default: this.$slots.count }}</WordCount>
+        ) : null}
       </div>
     )
   }

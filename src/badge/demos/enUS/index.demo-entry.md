@@ -16,7 +16,9 @@ color
 raw
 ```
 
-## Props
+## API
+
+### Badge Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -29,7 +31,7 @@ raw
 | type | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | Type of the badge. |
 | value | `string \| number` | `undefined` | Badge's value. |
 
-## Slots
+### Badge Slots
 
 | Name    | Parameters | Description      |
 | ------- | ---------- | ---------------- |

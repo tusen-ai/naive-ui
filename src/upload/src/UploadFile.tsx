@@ -84,8 +84,8 @@ export default defineComponent({
       const { file } = props
       return ['error'].includes(file.status)
     })
-    const showPreivewButtonRef = computed(() => {
-      if (!NUpload.showPreivewButtonRef.value) return false
+    const showPreviewButtonRef = computed(() => {
+      if (!NUpload.showPreviewButtonRef.value) return false
       const {
         file: { status, url },
         listType
@@ -189,12 +189,12 @@ export default defineComponent({
       progressStatus: progressStatusRef,
       buttonType: buttonTypeRef,
       showProgress: showProgressRef,
-      disabled: NUpload.disabledRef,
+      disabled: NUpload.mergedDisabledRef,
       showCancelButton: showCancelButtonRef,
       showRemoveButton: showRemoveButtonRef,
       showDownloadButton: showDownloadButtonRef,
       showRetryButton: showRetryButtonRef,
-      showPreivewButton: showPreivewButtonRef,
+      showPreviewButton: showPreviewButtonRef,
       thumbnailUrl: thumbnailUrlRef,
       imageRef,
       handleRemoveOrCancelClick,
@@ -304,7 +304,7 @@ export default defineComponent({
               `${clsPrefix}-upload-file-info__action--${listType}-type`
             ]}
           >
-            {this.showPreivewButton ? (
+            {this.showPreviewButton ? (
               <NButton
                 key="preview"
                 text

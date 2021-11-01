@@ -1,6 +1,6 @@
 # Disabled
 
-Input can be disabled.
+Inputs can also be disabled.
 
 ```html
 <n-space vertical>

@@ -1,7 +1,8 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NCalendar } from '../index'
-import { isYesterday } from 'date-fns'
+import { isYesterday, format, addMonths, getYear } from 'date-fns'
+import { NButton } from '../../button'
 
 describe('n-calendar', () => {
   const now = Date.now()
@@ -9,6 +10,7 @@ describe('n-calendar', () => {
   it('should work with import on demand', () => {
     mount(NCalendar)
   })
+
   it('props.onUpdate has correct type', () => {
     ;<NCalendar
       onUpdateValue={(
@@ -34,10 +36,7 @@ describe('n-calendar', () => {
 
   it('should work with `is-date-disabled` prop', async () => {
     function disableFunction (timestamp: number): boolean {
-      if (isYesterday(timestamp)) {
-        return true
-      }
-      return false
+      return isYesterday(timestamp)
     }
     const wrapper = mount(NCalendar, {
       props: { 'is-date-disabled': disableFunction }
@@ -51,5 +50,33 @@ describe('n-calendar', () => {
 
     await wrapper.findAll('.n-calendar-date')[1].trigger('click')
     expect(onUpdate).toHaveBeenCalled()
+  })
+
+  it('should work with clicked `prev` and `next`', async () => {
+    const wrapper = mount(NCalendar, { props: { defaultValue: now } })
+
+    const nowDate = wrapper.find('.n-calendar-header__title').text()
+    const buttons = wrapper.findAllComponents(NButton)
+
+    await buttons[0].trigger('click')
+    const prevDate = addMonths(now, -1)
+    expect(wrapper.find('.n-calendar-header__title').text()).toBe(
+      `${format(prevDate, 'MMMM')} ${getYear(prevDate)}`
+    )
+
+    await buttons[1].trigger('click')
+    expect(wrapper.find('.n-calendar-header__title').text()).toBe(nowDate)
+    expect(
+      wrapper
+        .find('.n-calendar-cell--current')
+        .find('.n-calendar-date__date')
+        .attributes('title')
+    ).toBe(format(now, 'yyyy-MM-dd'))
+
+    await buttons[2].trigger('click')
+    const nextDate = addMonths(now, 1)
+    expect(wrapper.find('.n-calendar-header__title').text()).toBe(
+      `${format(nextDate, 'MMMM')} ${getYear(nextDate)}`
+    )
   })
 })

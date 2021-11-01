@@ -19,12 +19,14 @@ size
 row-props
 merge-cell
 filter-and-sorter
+multiple-sorter
 select
 custom-select
 group-header
 controlled-page
 controlled-filter
 controlled-sorter
+controlled-multiple-sorter
 fixed-header
 fixed-header-column
 summary
@@ -38,6 +40,7 @@ virtual
 custom-filter-menu
 tree
 flex-height
+fixed-column-debug
 scroll-debug
 ```
 
@@ -61,7 +64,7 @@ scroll-debug
 | loading | `boolean` | `false` | 是否显示 loading 状态 |
 | max-height | `number \| string` | `undefined` | 表格内容的最大高度，可以是 CSS 属性值 |
 | min-height | `number \| string` | `undefined` | 表格内容的最低高度，可以是 CSS 属性值 |
-| pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Props) |
+| pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Pagination-Props) |
 | remote | `boolean` | `false` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `true` |
 | row-class-name | `string \| (rowData: object, index : number) => string \| object` | `undefined` | 每一行上的类名 |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |
@@ -77,7 +80,7 @@ scroll-debug
 | on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: DataTableColumn)` | `undefined` | filters 数据改变时触发的回调函数 |
 | on-update:page | `(page: number)` | `undefined` | page 改变时触发的回调函数 |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | page-size 改变时触发的回调函数 |
-| on-update:sorter | `(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => void` | `undefined` | 如果在变动后没有激活的排序，那么 `options` 为 `null` |
+| on-update:sorter | `(options: SortState \| SortState[] \| null) => void` | `undefined` | 如果变动列为多列排序则返回 `SortState[] \| null` 否则返回 `SortState \| null`，类型见 <n-a href="#SortState-Type">SortState Type</n-a> |
 
 #### DataTableColumn Properties
 
@@ -135,6 +138,16 @@ type DataTableCreateSummary = (
         rowSpan?: number
       }
     }
+```
+
+#### SortState Type
+
+```__ts
+type SortState = {
+  columnKey: string | number,
+  sorter: 'default' | function | boolean,
+  order: 'ascend' | 'descend' \ false
+}
 ```
 
 ### DataTable Methods

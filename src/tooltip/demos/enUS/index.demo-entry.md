@@ -13,10 +13,12 @@ body-style
 arrow
 ```
 
-## Props
+## API
 
-See [Popover Props](popover#Props)
+### Tooltip Props
 
-## Slots
+See [Popover Props](popover#Popover-Props)
 
-See [Popover Slots](popover#Slots)
+### Tooltip Slots
+
+See [Popover Slots](popover#Popover-Slots)

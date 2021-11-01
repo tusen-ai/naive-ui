@@ -1,6 +1,6 @@
 # Remote(Multiple)
 
-Async example for multiple select.
+Asynchronous options example for a multiple select case.
 
 ```html
 <n-select

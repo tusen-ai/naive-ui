@@ -1,6 +1,6 @@
 # Basic
 
-Basic usage for select
+Basic usage of `n-select`.
 
 ```html
 <n-space vertical>

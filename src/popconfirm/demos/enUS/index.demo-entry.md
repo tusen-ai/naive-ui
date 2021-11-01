@@ -13,7 +13,9 @@ no-icon
 actions
 ```
 
-## Props
+## API
+
+### Popconfirm Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -23,9 +25,9 @@ actions
 | on-positive-click | `() => boolean \| Promise<boolean> \| any` | `undefined` | Callback of confirmation. |
 | on-negative-click | `() => boolean \| Promise<boolean> \| any` | `undefined` | Callback of cancel. |
 
-For more props, see [popover](popover#Props).
+For more props, see [popover](popover#Popover-Props).
 
-## Slots
+### Popconfirm Slots
 
 | Name    | Parameters | Description         |
 | ------- | ---------- | ------------------- |

@@ -19,12 +19,14 @@ size
 row-props
 merge-cell
 filter-and-sorter
+multiple-sorter
 select
 custom-select
 group-header
 controlled-page
 controlled-filter
 controlled-sorter
+controlled-multiple-sorter
 fixed-header
 fixed-header-column
 summary
@@ -60,7 +62,7 @@ flex-height
 | loading | `boolean` | `false` | Whether to display loading status. |
 | max-height | `number \| string` | `undefined` | The max-height of the table content. Can be a CSS value. |
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |
-| pagination | `false \| object` | `false` | See [Pagination props](pagination#Props) |
+| pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `false` in async usage. |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string \| object` | `undefined` | Class name of each row. |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |
@@ -76,7 +78,7 @@ flex-height
 | on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: DataTableColumn)` | `undefined` | The callback function triggered when the filters data changes. |
 | on-update:page | `(page: number)` | `undefined` | Callback function triggered when the page changes. |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function triggered when the page-size changes. |
-| on-update:sorter | `(options: { columnKey: string \| number, sorter: 'default' \| function \| boolean, order: 'ascend' \| 'descend' \| false } \| null) => void` | `undefined` | If there won't be a active sorter after change, `options` will be `null`. |
+| on-update:sorter | `(options: SortState \| SortState[] \| null) => void` | `undefined` | If the change column is sorted by multiple columns, will return `SortState[] \| null`, otherwise return `SortState \| null`. For types, see <n-a href="#SortState-Type">SorterState Type</n-a>. |
 
 #### DataTableColumn Properties
 
@@ -134,6 +136,16 @@ type DataTableCreateSummary = (
         rowSpan?: number
       }
     }
+```
+
+#### SortState Type
+
+```__ts
+type SortState = {
+  columnKey: string | number,
+  sorter: 'default' | function | boolean,
+  order: 'ascend' | 'descend' \ false
+}
 ```
 
 ### DataTable Methods

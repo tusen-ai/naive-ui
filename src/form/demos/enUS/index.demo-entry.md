@@ -18,7 +18,7 @@ disabled
 show-label
 ```
 
-## Props
+## API
 
 ### Form Props
 
@@ -39,6 +39,10 @@ show-label
 
 #### FormItemRule Type
 
+<n-alert title="Caveat" type="warning" style="margin-bottom: 16px;">
+  The follow table doesn't demostrate all props of rules. If you want to know all the usages, please see <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>.
+</n-alert>
+
 | Property | Type | Description |
 | --- | --- | --- |
 | required | `boolean` | Is it required. |
@@ -47,7 +51,7 @@ show-label
 | trigger | `string \| Array<string>` | Trigger type. |
 | message | `string` | Text to show when validation fails. |
 
-### Form Item Props
+### FormItem Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -74,8 +78,6 @@ show-label
 
 Accept all props from FormItem & [GridItem](grid#GridItem-Props)
 
-## Methods
-
 ### Form Methods
 
 <n-alert type="warning" title="Caveat on Validate Method" style="margin-bottom: 16px;">
@@ -94,9 +96,7 @@ Accept all props from FormItem & [GridItem](grid#GridItem-Props)
 | validate | `(options: { trigger?: string, callback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<void>` | Validate the form item. The rejection value type of returned promise is `Array<FormValidationError>`. If trigger is not set, all rules of the item will be applied. `shouldRuleBeApplied` can filter rules after they are filtered by the trigger. |
 | restoreValidation | `() => void` | Restore validate. |
 
-To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-validator">async-validator</n-a>.
-
-## Slots
+To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>.
 
 ### Form, FormItem, FormItemGi Slots
 

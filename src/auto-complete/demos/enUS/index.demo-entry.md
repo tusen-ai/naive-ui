@@ -1,6 +1,6 @@
-# Auto Complete
+# AutoComplete
 
-Use as a search hint or something similar.
+Offer a search hint or maybe guess some likely options?
 
 ## Demos
 
@@ -10,6 +10,7 @@ size
 group
 custom-input
 after-select
+show-options-by-value
 ```
 
 ## API
@@ -20,14 +21,15 @@ after-select
 | --- | --- | --- | --- |
 | blur-after-select | `boolean` | `false` | Whether to blur after selection. |
 | clear-after-select | `boolean` | `false` | Whether to clear after selection. |
-| clearable | `boolean` | `false` | Whether auto complete is clearable. |
-| default-value | `string` | `null` | Default value of auto complete. |
-| disabled | `boolean` | `false` | Whether the auto complete is disabled. |
+| clearable | `boolean` | `false` | Whether autocomplete is clearable. |
+| default-value | `string` | `null` | Default value of autocomplete. |
+| disabled | `boolean` | `false` | Whether the autocomplete is disabled. |
+| get-show | `(value: string) => boolean` | `undefined` | Use the input to determine whether to show options on focus. |
 | loading | `boolean` | `false` | Whether to show a loading status. |
-| options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | Auto complete options. |
-| placeholder | `string` | `'Please Input'` | Auto complete's placeholder. |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Auto complete size. |
-| value | `string` | `undefined` | Value of auto complete if being manually set. |
+| options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | Options to autocomplete from. |
+| placeholder | `string` | `'Please Input'` | Autocomplete's placeholder. |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Autocomplete size. |
+| value | `string` | `undefined` | Input of autocomplete. |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | On blur callback function. |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | On focus callback function. |
 | on-select | `(value: string) => void` | `undefined` | On select callback function. |
@@ -43,12 +45,12 @@ after-select
 
 #### AutoCompleteGroupOption Properties
 
-| Name | Type | Description |
-| --- | --- | --- |
-| children | `Array<string \| AutoCompleteOption>` | Children options of AutoCompleteGroupOption. |
-| label | `string` | The name of the AutoCompleteGroupOption. |
-| label | `key` | The key of the AutoCompleteGroupOption. |
-| type | `'group'` | The type of the AutoCompleteGroupOption. |
+| Name     | Type                                  | Description             |
+| -------- | ------------------------------------- | ----------------------- |
+| children | `Array<string \| AutoCompleteOption>` | Group children options. |
+| label    | `string`                              | Group label.            |
+| key      | `key`                                 | Unique group key.       |
+| type     | `'group'`                             | Required group type.    |
 
 ### AutoComplete Slots
 

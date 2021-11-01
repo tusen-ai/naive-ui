@@ -37,6 +37,7 @@ export type PopconfirmProps = ExtractPublicPropTypes<typeof popconfirmProps>
 export default defineComponent({
   name: 'Popconfirm',
   props: popconfirmProps,
+  __popover__: true,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig()
     const themeRef = useTheme(

@@ -68,6 +68,7 @@ export default cB('switch', `
     bottom: 0;
     display: flex;
     align-items: center;
+    line-height: 1;
   `),
   cE('checked', `
     right: 0;

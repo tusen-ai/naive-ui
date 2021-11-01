@@ -20,7 +20,9 @@ embedded
 rtl-debug
 ```
 
-## Props
+## API
+
+### Card Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -36,7 +38,7 @@ rtl-debug
 | title | `string` | `undefined` | 卡片的标题 |
 | on-close | `() => void` | `undefined` | 点击卡片关闭图标时的回调 |
 
-## Slots
+### Card Slots
 
 | 名称         | 参数 | 说明         |
 | ------------ | ---- | ------------ |

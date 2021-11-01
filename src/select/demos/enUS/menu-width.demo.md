@@ -1,6 +1,6 @@
 # Menu Width
 
-Menu width can fit its content. (In the situation virtual scroll will be disabled.)
+The options menu width can be made to fit its content. Using this disables virtual scrolling.
 
 ```html
 <n-space vertical>

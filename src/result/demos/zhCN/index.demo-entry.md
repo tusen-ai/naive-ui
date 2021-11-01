@@ -18,7 +18,9 @@ error
 size
 ```
 
-## Props
+## API
+
+### Result Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -27,7 +29,7 @@ size
 | status | `'info' \| 'success' \| 'error' \| 'warning' \| 404 \| '404' \| 500 \| '500' \| 400 \| '400' \| 418 \| '418'` | `'info'` | 状态 |
 | title | `string` | `undefined` | 标题 |
 
-## Slots
+### Result Slots
 
 | 名称    | 参数 | 说明           |
 | ------- | ---- | -------------- |

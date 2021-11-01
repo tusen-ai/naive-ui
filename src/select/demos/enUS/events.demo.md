@@ -1,6 +1,6 @@
 # UpdateValue Event
 
-Why `update:value` event is an example? Because at first there isn't much to write.
+Why make the `update:value` event an example? Because there's so little to write.
 
 ```html
 <n-space vertical>

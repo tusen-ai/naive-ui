@@ -64,6 +64,8 @@ import type { ColorPickerMode, ActionType } from './utils'
 import style from './styles/index.cssr'
 import { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import { NButton } from '../../button'
+import ColorPickerSwatches from './ColorPickerSwatches'
+import ColorPreview from './ColorPreview'
 
 export const colorPickerPanelProps = {
   ...(useTheme.props as ThemeProps<ColorPickerTheme>),
@@ -87,6 +89,8 @@ export const colorPickerPanelProps = {
     type: Boolean,
     default: true
   },
+  showPreview: Boolean,
+  swatches: Array as PropType<string[]>,
   actions: {
     type: Array as PropType<ActionType[]>,
     default: null
@@ -511,21 +515,33 @@ export default defineComponent({
               onUpdateSV={handleUpdateSv}
               onComplete={handleComplete}
             />
-            <HueSlider
-              clsPrefix={mergedClsPrefix}
-              hue={displayedHue}
-              onUpdateHue={handleUpdateHue}
-              onComplete={handleComplete}
-            />
-            {props.showAlpha ? (
-              <AlphaSlider
-                clsPrefix={mergedClsPrefix}
-                rgba={rgba}
-                alpha={displayedAlphaRef.value}
-                onUpdateAlpha={handleUpdateAlpha}
-                onComplete={handleComplete}
-              />
-            ) : null}
+            <div class={`${mergedClsPrefix}-color-picker-preview`}>
+              <div class={`${mergedClsPrefix}-color-picker-preview__sliders`}>
+                <HueSlider
+                  clsPrefix={mergedClsPrefix}
+                  hue={displayedHue}
+                  onUpdateHue={handleUpdateHue}
+                  onComplete={handleComplete}
+                />
+                {props.showAlpha ? (
+                  <AlphaSlider
+                    clsPrefix={mergedClsPrefix}
+                    rgba={rgba}
+                    alpha={displayedAlphaRef.value}
+                    onUpdateAlpha={handleUpdateAlpha}
+                    onComplete={handleComplete}
+                  />
+                ) : null}
+              </div>
+              {props.showPreview ? (
+                <ColorPreview
+                  clsPrefix={mergedClsPrefix}
+                  mode={displayedModeRef.value}
+                  color={rgbaRef.value && toHexString(rgbaRef.value)}
+                  onUpdateColor={(color) => doUpdateValue(color, 'input')}
+                />
+              ) : null}
+            </div>
             <ColorInput
               clsPrefix={mergedClsPrefix}
               showAlpha={props.showAlpha}
@@ -536,6 +552,14 @@ export default defineComponent({
               valueArr={mergedValueArrRef.value}
               onUpdateValue={handleInputUpdateValue}
             />
+            {props.swatches?.length && (
+              <ColorPickerSwatches
+                clsPrefix={mergedClsPrefix}
+                mode={displayedModeRef.value}
+                swatches={props.swatches}
+                onUpdateColor={(color) => doUpdateValue(color, 'input')}
+              />
+            )}
           </div>
           {actions?.length ? (
             <div class={`${mergedClsPrefix}-color-picker-action`}>

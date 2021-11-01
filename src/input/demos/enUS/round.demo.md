@@ -1,6 +1,6 @@
 # Round corner
 
-Input can have round corner.
+Inputs can have rounded corners.
 
 ```html
 <n-space vertical>

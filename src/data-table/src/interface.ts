@@ -35,7 +35,13 @@ export type CreateRowProps<T = InternalRowData> = (
   index: number
 ) => HTMLAttributes
 
-export type Sorter<T = InternalRowData> = (row1: T, row2: T) => number
+export type CompareFn<T = InternalRowData> = (row1: T, row2: T) => number
+export type Sorter<T = InternalRowData> = CompareFn<T> | SorterMultiple<T>
+export interface SorterMultiple<T = InternalRowData> {
+  multiple: number
+  compare?: CompareFn<T> | 'default'
+}
+
 export type Filter<T = InternalRowData> = (
   filterOptionValue: FilterOptionValue,
   row: T
@@ -169,12 +175,16 @@ export interface DataTableInjection {
   rightFixedColumnsRef: Ref<TableColumns>
   leftActiveFixedColKeyRef: Ref<ColumnKey | null>
   rightActiveFixedColKeyRef: Ref<ColumnKey | null>
-  fixedColumnLeftMapRef: Ref<Record<ColumnKey, number | undefined>>
-  fixedColumnRightMapRef: Ref<Record<ColumnKey, number | undefined>>
+  fixedColumnLeftMapRef: Ref<
+  Record<ColumnKey, { start: number, end: number } | undefined>
+  >
+  fixedColumnRightMapRef: Ref<
+  Record<ColumnKey, { start: number, end: number } | undefined>
+  >
   mergedCurrentPageRef: Ref<number>
   someRowsCheckedRef: Ref<boolean>
   allRowsCheckedRef: Ref<boolean>
-  mergedSortStateRef: Ref<SortState | null>
+  mergedSortStateRef: Ref<SortState[]>
   mergedFilterStateRef: Ref<FilterState>
   loadingRef: Ref<boolean>
   rowClassNameRef: Ref<string | CreateRowClassName | undefined>
@@ -201,7 +211,7 @@ export interface DataTableInjection {
     filters: FilterState,
     sourceColumn?: TableBaseColumn
   ) => void
-  doUpdateSorter: (sorter: SortState | null) => void
+  deriveNextSorter: (sorter: SortState | null) => void
   doUncheckAll: (checkWholeTable?: boolean) => void
   doCheckAll: (checkWholeTable?: boolean) => void
   doCheck: (rowKey: RowKey | RowKey[]) => void
@@ -231,7 +241,11 @@ export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 
 export type OnUpdateExpandedRowKeys = (keys: RowKey[]) => void
 export type OnUpdateCheckedRowKeys = (keys: RowKey[]) => void
-export type OnUpdateSorter = (sortState: SortState | null) => void
+// `null` only occurs when clearSorter is called
+export type OnUpdateSorter = (sortState: SortState & SortState[] & null) => void
+export type OnUpdateSorterImpl = (
+  sortState: SortState | SortState[] | null
+) => void
 export type OnUpdateFilters = (
   filterState: FilterState,
   sourceColumn?: TableBaseColumn

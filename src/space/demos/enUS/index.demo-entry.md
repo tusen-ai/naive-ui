@@ -13,7 +13,9 @@ space-around
 center
 ```
 
-## Props
+## API
+
+### Space Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -25,7 +27,7 @@ center
 | vertical | `boolean` | `false` | Whether to lay out vertically. |
 | wrap | `boolean` | `true` | Whether to exceed the line break. |
 
-## Slots
+### Space Slots
 
 | Name    | Parameters | Description      |
 | ------- | ---------- | ---------------- |

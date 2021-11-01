@@ -1,6 +1,6 @@
-# Prefix & Suffix
+# Prefix & suffix
 
-Add content to prefix and suffix.
+Add prefix and suffix contents.
 
 ```html
 <n-space vertical>

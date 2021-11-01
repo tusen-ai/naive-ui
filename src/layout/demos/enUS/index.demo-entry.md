@@ -36,6 +36,7 @@ scroll-to
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, layout will use a naive-ui style scrollbar for content. |
 | position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `right`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it display as you expect. |
 | sider-placement | `'left' \| 'right'` | `left` | The sidebar is displayed on the left or the right side. |
+| on-scroll | `(e: Event) => void` | `undefined` | Callback function when the content scroll. |
 
 ### Layout Footer Props
 
@@ -71,6 +72,7 @@ scroll-to
 | show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | Whether to show the built-in trigger button on sider. |
 | trigger-style | `string \| Object` | `undefined` | Trigger style. |
 | width | `number \| string` | `272` | Width CSS value. When it is number, px will be added. |
+| on-scroll | `(e: Event) => void` | `undefined` | Callback function when the content scroll. |
 | on-update:collapsed | `(collapsed: boolean) => void` | `undefined` | Callback function when the folding state changes. |
 
 ### Layout, Layout Content, Layout Sider, Layout Header, Layout Footer Slots
