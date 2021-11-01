@@ -196,4 +196,13 @@ describe('n-input', () => {
     expect(onUpdateValue).toHaveBeenCalled()
     wrapper.unmount()
   })
+
+  it('should work with `prefix` slots', async () => {
+    const wrapper = mount(NInput, {
+      slots: { prefix: '#' }
+    })
+    expect(wrapper.find('.n-input__prefix').exists()).toBe(true)
+    expect(wrapper.find('.n-input__prefix').text()).toBe('#')
+    wrapper.unmount()
+  })
 })
