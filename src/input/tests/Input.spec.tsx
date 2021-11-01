@@ -199,10 +199,19 @@ describe('n-input', () => {
 
   it('should work with `prefix` slots', async () => {
     const wrapper = mount(NInput, {
-      slots: { prefix: '#' }
+      slots: { prefix: '￥' }
     })
     expect(wrapper.find('.n-input__prefix').exists()).toBe(true)
-    expect(wrapper.find('.n-input__prefix').text()).toBe('#')
+    expect(wrapper.find('.n-input__prefix').text()).toBe('￥')
+    wrapper.unmount()
+  })
+
+  it('should work with `suffix` slots', async () => {
+    const wrapper = mount(NInput, {
+      slots: { suffix: '元' }
+    })
+    expect(wrapper.find('.n-input__suffix').exists()).toBe(true)
+    expect(wrapper.find('.n-input__suffix').text()).toBe('元')
     wrapper.unmount()
   })
 })
