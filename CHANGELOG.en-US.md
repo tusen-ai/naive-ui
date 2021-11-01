@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-modal` add `transform-origin` prop, closes [#1498](https://github.com/TuSimple/naive-ui/issues/1498).
+
 ## 2.20.1 (2021-11-01)
 
 ### Fixes
