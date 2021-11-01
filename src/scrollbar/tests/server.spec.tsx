@@ -4,7 +4,7 @@
 import { h, createSSRApp } from 'vue'
 import { renderToString } from '@vue/server-renderer'
 import { setup } from '@css-render/vue3-ssr'
-import { NScrollbar } from '../..'
+import { NScrollbar } from '../'
 
 describe('SSR', () => {
   it('works', async () => {

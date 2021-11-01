@@ -1,6 +1,6 @@
 # Custom Option Render
 
-After a long time of consideration, I decide to drop slot API. However, there is still a way to render options as you like. (The example uses `render-label` prop, but you can also use the `style` or `class` prop on an `option`.)
+After much deliberation, I decided to drop the slot API for rendering options; however, using `render-label`, `style`, and/or `class` properties you can do almost anything.
 
 ```html
 <n-select :options="options" :render-label="renderLabel" />

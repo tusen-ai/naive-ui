@@ -10,7 +10,8 @@ import {
   watch,
   CSSProperties,
   VNode,
-  nextTick
+  nextTick,
+  watchEffect
 } from 'vue'
 import {
   createTreeMate,
@@ -27,8 +28,8 @@ import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createDataKey, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { NxScrollbar } from '../../scrollbar'
-import type { ScrollbarInst } from '../../scrollbar'
+import { NxScrollbar } from '../../_internal'
+import type { ScrollbarInst } from '../../_internal'
 import { treeLight } from '../styles'
 import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
@@ -79,6 +80,9 @@ export function createTreeMateOptions<T> (
   }
 }
 
+type OnUpdateKeys = (value: Key[], option: Array<TreeOption | null>) => void
+type OnLoad = (node: TreeOption) => Promise<void>
+
 export const treeSharedProps = {
   filter: Function as PropType<(pattern: string, node: TreeOption) => boolean>,
   defaultExpandAll: Boolean,
@@ -101,16 +105,14 @@ export const treeSharedProps = {
   },
   indeterminateKeys: Array as PropType<Key[]>,
   onUpdateIndeterminateKeys: [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
+  MaybeArray<OnUpdateKeys>
   >,
   'onUpdate:indeterminateKeys': [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
+  MaybeArray<OnUpdateKeys>
   >,
-  onUpdateExpandedKeys: [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
-  >,
+  onUpdateExpandedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
   'onUpdate:expandedKeys': [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
+  MaybeArray<OnUpdateKeys>
   >
 } as const
 
@@ -150,7 +152,7 @@ const treeProps = {
     type: String,
     default: ''
   },
-  onLoad: Function as PropType<(node: TreeOption) => Promise<void>>,
+  onLoad: Function as PropType<OnLoad>,
   cascade: Boolean,
   selectable: {
     type: Boolean,
@@ -188,17 +190,13 @@ const treeProps = {
   MaybeArray<(e: TreeDragInfo) => void>
   >,
   onDrop: [Function, Array] as PropType<MaybeArray<(e: TreeDragInfo) => void>>,
-  onUpdateCheckedKeys: [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
-  >,
+  onUpdateCheckedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
   'onUpdate:checkedKeys': [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
+  MaybeArray<OnUpdateKeys>
   >,
-  onUpdateSelectedKeys: [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
-  >,
+  onUpdateSelectedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
   'onUpdate:selectedKeys': [Function, Array] as PropType<
-  MaybeArray<(value: Key[]) => void>
+  MaybeArray<OnUpdateKeys>
   >,
   ...treeSharedProps,
   // internal props for tree-select
@@ -323,13 +321,18 @@ export default defineComponent({
 
     let expandTimerId: number | null = null
     let nodeKeyToBeExpanded: Key | null = null
-    const uncontrolledHighlightKeySetRef = ref<Set<Key>>(new Set())
+    const uncontrolledHighlightKeySetRef = ref(new Set<Key>())
     const controlledHighlightKeySetRef = toRef(props, 'internalHighlightKeySet')
     const mergedHighlightKeySetRef = useMergedState(
       controlledHighlightKeySetRef,
       uncontrolledHighlightKeySetRef
     )
-    const loadingKeysRef = ref<Key[]>([])
+    const loadingKeysRef = ref(new Set<Key>())
+    const expandedNonLoadingKeysRef = computed(() => {
+      return mergedExpandedKeysRef.value.filter(
+        (key) => !loadingKeysRef.value.has(key)
+      )
+    })
 
     let dragStartX: number = 0
     const draggingNodeRef = ref<TmNode | null>(null)
@@ -363,7 +366,7 @@ export default defineComponent({
     watch(
       toRef(props, 'data'),
       () => {
-        loadingKeysRef.value = []
+        loadingKeysRef.value.clear()
         pendingNodeKeyRef.value = null
         resetDndState()
       },
@@ -378,15 +381,56 @@ export default defineComponent({
             props.data,
             props.pattern,
             props.keyField,
+            props.childrenField,
             mergedFilterRef.value
           )
         uncontrolledHighlightKeySetRef.value = highlightKeySet
-        doUpdateExpandedKeys(expandedKeysAfterChange)
+        doUpdateExpandedKeys(
+          expandedKeysAfterChange,
+          getOptionsByKeys(expandedKeysAfterChange)
+        )
       } else {
         uncontrolledHighlightKeySetRef.value = new Set()
       }
     })
-
+    async function triggerLoading (node: TmNode): Promise<void> {
+      const { onLoad } = props
+      if (!onLoad) {
+        if (__DEV__) {
+          warn(
+            'tree',
+            'There is unloaded node in data but props.onLoad is not specified.'
+          )
+        }
+        return await Promise.resolve()
+      }
+      const { value: loadingKeys } = loadingKeysRef
+      return await new Promise((resolve) => {
+        if (!loadingKeys.has(node.key)) {
+          loadingKeys.add(node.key)
+          onLoad(node.rawNode)
+            .then(() => {
+              loadingKeys.delete(node.key)
+              resolve()
+            })
+            .catch((loadError) => {
+              console.error(loadError)
+              resetDragExpandState()
+            })
+        }
+      })
+    }
+    watchEffect(() => {
+      const { value: displayTreeMate } = displayTreeMateRef
+      if (!displayTreeMate) return
+      const { getNode } = displayTreeMate
+      mergedExpandedKeysRef.value?.forEach((key) => {
+        const node = getNode(key)
+        if (node && !node.shallowLoaded) {
+          void triggerLoading(node)
+        }
+      })
+    })
     // animation in progress
     const aipRef = ref(false)
     // animation flattened nodes
@@ -396,7 +440,7 @@ export default defineComponent({
     // during animation. This will seldom cause wired scrollbar status. It is
     // fixable and need some changes in vueuc, I've no time so I just leave it
     // here. Maybe the bug won't be fixed during the life time of the project.
-    watch(mergedExpandedKeysRef, (value, prevValue) => {
+    watch(expandedNonLoadingKeysRef, (value, prevValue) => {
       if (!props.animated) {
         void nextTick(syncScrollbar)
         return
@@ -506,40 +550,61 @@ export default defineComponent({
       }
     }
 
-    function doUpdateExpandedKeys (value: Key[]): void {
+    function getOptionsByKeys (keys: Key[]): Array<TreeOption | null> {
+      const { getNode } = dataTreeMateRef.value!
+      return keys.map((key) => getNode(key)?.rawNode || null)
+    }
+
+    function doUpdateExpandedKeys (
+      value: Key[],
+      option: Array<TreeOption | null>
+    ): void {
       const {
         'onUpdate:expandedKeys': _onUpdateExpandedKeys,
         onUpdateExpandedKeys
       } = props
       uncontrolledExpandedKeysRef.value = value
-      if (_onUpdateExpandedKeys) call(_onUpdateExpandedKeys, value)
-      if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, value)
+      if (_onUpdateExpandedKeys) call(_onUpdateExpandedKeys, value, option)
+      if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, value, option)
     }
-    function doUpdateCheckedKeys (value: Key[]): void {
+    function doUpdateCheckedKeys (
+      value: Key[],
+      option: Array<TreeOption | null>
+    ): void {
       const {
         'onUpdate:checkedKeys': _onUpdateCheckedKeys,
         onUpdateCheckedKeys
       } = props
       uncontrolledCheckedKeysRef.value = value
-      if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, value)
-      if (_onUpdateCheckedKeys) call(_onUpdateCheckedKeys, value)
+      if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, value, option)
+      if (_onUpdateCheckedKeys) call(_onUpdateCheckedKeys, value, option)
     }
-    function doUpdateIndeterminateKeys (value: Key[]): void {
+    function doUpdateIndeterminateKeys (
+      value: Key[],
+      option: Array<TreeOption | null>
+    ): void {
       const {
         'onUpdate:indeterminateKeys': _onUpdateIndeterminateKeys,
         onUpdateIndeterminateKeys
       } = props
-      if (_onUpdateIndeterminateKeys) call(_onUpdateIndeterminateKeys, value)
-      if (onUpdateIndeterminateKeys) call(onUpdateIndeterminateKeys, value)
+      if (_onUpdateIndeterminateKeys) {
+        call(_onUpdateIndeterminateKeys, value, option)
+      }
+      if (onUpdateIndeterminateKeys) {
+        call(onUpdateIndeterminateKeys, value, option)
+      }
     }
-    function doUpdateSelectedKeys (value: Key[]): void {
+    function doUpdateSelectedKeys (
+      value: Key[],
+      option: Array<TreeOption | null>
+    ): void {
       const {
         'onUpdate:selectedKeys': _onUpdateSelectedKeys,
         onUpdateSelectedKeys
       } = props
       uncontrolledSelectedKeysRef.value = value
-      if (onUpdateSelectedKeys) call(onUpdateSelectedKeys, value)
-      if (_onUpdateSelectedKeys) call(_onUpdateSelectedKeys, value)
+      if (onUpdateSelectedKeys) call(onUpdateSelectedKeys, value, option)
+      if (_onUpdateSelectedKeys) call(_onUpdateSelectedKeys, value, option)
     }
     // Drag & Drop
     function doDragEnter (info: TreeDragInfo): void {
@@ -602,8 +667,11 @@ export default defineComponent({
         cascade: props.cascade,
         checkStrategy: mergedCheckStrategyRef.value
       })
-      doUpdateCheckedKeys(checkedKeys)
-      doUpdateIndeterminateKeys(indeterminateKeys)
+      doUpdateCheckedKeys(checkedKeys, getOptionsByKeys(checkedKeys))
+      doUpdateIndeterminateKeys(
+        indeterminateKeys,
+        getOptionsByKeys(indeterminateKeys)
+      )
     }
     function toggleExpand (key: Key): void {
       if (props.disabled) return
@@ -614,13 +682,17 @@ export default defineComponent({
       if (~index) {
         const expandedKeysAfterChange = Array.from(mergedExpandedKeys)
         expandedKeysAfterChange.splice(index, 1)
-        doUpdateExpandedKeys(expandedKeysAfterChange)
+        doUpdateExpandedKeys(
+          expandedKeysAfterChange,
+          getOptionsByKeys(expandedKeysAfterChange)
+        )
       } else {
         const nodeToBeExpanded = displayTreeMateRef.value!.getNode(key)
         if (!nodeToBeExpanded || nodeToBeExpanded.isLeaf) {
           return
         }
-        doUpdateExpandedKeys(mergedExpandedKeys.concat(key))
+        const nextKeys = mergedExpandedKeys.concat(key)
+        doUpdateExpandedKeys(nextKeys, getOptionsByKeys(nextKeys))
       }
     }
     function handleSwitcherClick (node: TmNode): void {
@@ -650,7 +722,7 @@ export default defineComponent({
             )
           )
         } else {
-          doUpdateCheckedKeys([node.key])
+          doUpdateCheckedKeys([node.key], getOptionsByKeys([node.key]))
         }
       }
       if (props.multiple) {
@@ -663,15 +735,15 @@ export default defineComponent({
         } else if (!~index) {
           selectedKeys.push(node.key)
         }
-        doUpdateSelectedKeys(selectedKeys)
+        doUpdateSelectedKeys(selectedKeys, getOptionsByKeys(selectedKeys))
       } else {
         const selectedKeys = mergedSelectedKeysRef.value
         if (selectedKeys.includes(node.key)) {
           if (props.cancelable) {
-            doUpdateSelectedKeys([])
+            doUpdateSelectedKeys([], [])
           }
         } else {
-          doUpdateSelectedKeys([node.key])
+          doUpdateSelectedKeys([node.key], getOptionsByKeys([node.key]))
         }
       }
     }
@@ -692,36 +764,17 @@ export default defineComponent({
           droppingMouseNode.key === node.key &&
           !mergedExpandedKeysRef.value.includes(node.key)
         ) {
-          doUpdateExpandedKeys(mergedExpandedKeysRef.value.concat(node.key))
+          const nextKeys = mergedExpandedKeysRef.value.concat(node.key)
+          doUpdateExpandedKeys(nextKeys, getOptionsByKeys(nextKeys))
         }
         expandTimerId = null
         nodeKeyToBeExpanded = null
       }
       if (!node.shallowLoaded) {
         expandTimerId = window.setTimeout(() => {
-          const { onLoad } = props
-          if (onLoad) {
-            if (!loadingKeysRef.value.includes(node.key)) {
-              loadingKeysRef.value.push(node.key)
-              onLoad(node.rawNode)
-                .then(() => {
-                  loadingKeysRef.value.splice(
-                    loadingKeysRef.value.findIndex((key) => key === node.key),
-                    1
-                  )
-                  expand()
-                })
-                .catch((loadError) => {
-                  console.error(loadError)
-                  resetDragExpandState()
-                })
-            }
-          } else if (__DEV__) {
-            warn(
-              'tree',
-              'There is unloaded node in data but props.onLoad is not specified.'
-            )
-          }
+          void triggerLoading(node).then(() => {
+            expand()
+          })
         }, 1000)
       } else {
         expandTimerId = window.setTimeout(() => {

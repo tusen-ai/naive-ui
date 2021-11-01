@@ -10,7 +10,9 @@ box
 size
 ```
 
-## Props
+## API
+
+### Skeleton Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |

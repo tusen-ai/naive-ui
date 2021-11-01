@@ -65,20 +65,20 @@ export default cB('dropdown-menu', `
         background-color .3s var(--bezier),
         color .3s var(--bezier);
     `, [
-      cM('pending', {
-        color: 'var(--option-text-color-hover)'
-      }, [
+      cM('pending', [
         cNotM('disabled', {
+          color: 'var(--option-text-color-hover)',
           backgroundColor: 'var(--option-color-hover)'
         }),
         cE('prefix, suffix', {
           color: 'var(--option-text-color-hover)'
         })
       ]),
-      cM('active', {
-        color: 'var(--option-text-color-active)',
-        backgroundColor: 'var(--option-color-active)'
-      }, [
+      cM('active', [
+        cNotM('disabled', {
+          color: 'var(--option-text-color-active)',
+          backgroundColor: 'var(--option-color-active)'
+        }),
         cE('prefix, suffix', {
           color: 'var(--option-text-color-active)'
         })

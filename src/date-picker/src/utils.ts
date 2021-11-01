@@ -5,14 +5,19 @@ import {
   getMonth,
   getYear,
   isSameMonth,
+  isSameYear,
   getTime,
   startOfMonth,
   addDays,
+  addMonths,
+  addYears,
   getDay,
   parse,
   format,
-  Locale
+  Locale,
+  startOfYear
 } from 'date-fns'
+import { START_YEAR } from './config'
 
 function getDerivedTimeFromKeyboardEvent (
   prevValue: number | null,
@@ -33,18 +38,27 @@ function getDerivedTimeFromKeyboardEvent (
   return now
 }
 
+const matcherMap = {
+  date: isSameDay,
+  month: isSameMonth,
+  year: isSameYear
+} as const
+
 function matchDate (
   sourceTime: number[] | number,
-  patternTime: number | Date
+  patternTime: number | Date,
+  type: 'date' | 'month' | 'year' = 'date'
 ): boolean {
+  const matcher = matcherMap[type]
   if (Array.isArray(sourceTime)) {
-    return sourceTime.some((time) => isSameDay(time, patternTime))
+    return sourceTime.some((time) => matcher(time, patternTime))
   } else {
-    return isSameDay(sourceTime, patternTime)
+    return matcher(sourceTime, patternTime)
   }
 }
 
 export interface DateItem {
+  type: 'date'
   dateObject: {
     date: number
     month: number
@@ -55,6 +69,27 @@ export interface DateItem {
   inSpan: boolean
   startOfSpan: boolean
   endOfSpan: boolean
+  selected: boolean
+  ts: number
+}
+
+export interface MonthItem {
+  type: 'month'
+  dateObject: {
+    month: number
+    year: number
+  }
+  isCurrentMonth: boolean
+  selected: boolean
+  ts: number
+}
+
+export interface YearItem {
+  type: 'year'
+  dateObject: {
+    year: number
+  }
+  isCurrentYear: boolean
   selected: boolean
   ts: number
 }
@@ -76,6 +111,7 @@ function dateItem (
     if (matchDate(valueTs[1], time)) endOfSpan = true
   }
   return {
+    type: 'date',
     dateObject: {
       date: getDate(time),
       month: getMonth(time),
@@ -88,6 +124,39 @@ function dateItem (
     endOfSpan,
     selected: valueTs !== null && matchDate(valueTs, time),
     ts: getTime(time)
+  }
+}
+
+function monthItem (
+  monthTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): MonthItem {
+  return {
+    type: 'month',
+    dateObject: {
+      month: getMonth(monthTs),
+      year: getYear(monthTs)
+    },
+    isCurrentMonth: isSameMonth(currentTs, monthTs),
+    selected: valueTs !== null && matchDate(valueTs, monthTs, 'month'),
+    ts: getTime(monthTs)
+  }
+}
+
+function yearItem (
+  yearTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): YearItem {
+  return {
+    type: 'year',
+    dateObject: {
+      year: getYear(yearTs)
+    },
+    isCurrentYear: isSameYear(currentTs, yearTs),
+    selected: valueTs !== null && matchDate(valueTs, yearTs, 'year'),
+    ts: getTime(yearTs)
   }
 }
 
@@ -141,6 +210,39 @@ function dateArray (
   return calendarDays
 }
 
+function monthArray (
+  monthTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): MonthItem[] {
+  const calendarMonths = []
+  const yearStart = startOfYear(monthTs)
+  for (let i = 0; i < 12; i++) {
+    calendarMonths.push(
+      monthItem(getTime(addMonths(yearStart, i)), valueTs, currentTs)
+    )
+  }
+  return calendarMonths
+}
+
+function yearArray (
+  yearTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): YearItem[] {
+  const calendarYears = []
+  const time1900 = new Date(START_YEAR, 0, 1)
+  // 1900 is not a round time, so we use 1911 as start...
+  // new Date(1900, 0, 1)
+  // 1899-12-31T15:54:17.000Z
+  for (let i = 0; i < 200; i++) {
+    calendarYears.push(
+      yearItem(getTime(addYears(time1900, i)), valueTs, currentTs)
+    )
+  }
+  return calendarYears
+}
+
 function strictParse (
   string: string,
   pattern: string,
@@ -155,4 +257,10 @@ function strictParse (
   else return new Date(NaN)
 }
 
-export { dateArray, strictParse, getDerivedTimeFromKeyboardEvent }
+export {
+  dateArray,
+  monthArray,
+  yearArray,
+  strictParse,
+  getDerivedTimeFromKeyboardEvent
+}

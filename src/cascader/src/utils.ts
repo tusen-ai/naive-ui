@@ -1,6 +1,15 @@
 import type { TmNode, CascaderOption } from './interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 
+function getRawNodePath (tmNodes: TmNode[]): CascaderOption[]
+function getRawNodePath (tmNodes: TmNode[] | undefined): CascaderOption[] | null
+function getRawNodePath (
+  tmNodes: TmNode[] | undefined
+): CascaderOption[] | null {
+  if (!tmNodes) return null
+  return tmNodes.map((tmNode) => tmNode.rawNode)
+}
+
 function traverseWithCallback<T extends { children?: T[] }> (
   options: T[],
   beforeCallback: (node: T) => void,
@@ -17,11 +26,19 @@ function traverseWithCallback<T extends { children?: T[] }> (
   }
 }
 
+export { getRawNodePath }
+
 function createSelectOptions (
   tmNodes: TmNode[],
-  checkStrategyIsChild: boolean
-): Array<SelectBaseOption & { path: CascaderOption[] }> {
-  const selectOptions: Array<SelectBaseOption & { path: CascaderOption[] }> = []
+  checkStrategyIsChild: boolean,
+  labelField: string,
+  separator: string
+): Array<
+  SelectBaseOption & { rawNode: CascaderOption, path: CascaderOption[] }
+  > {
+  const selectOptions: Array<
+  SelectBaseOption & { rawNode: CascaderOption, path: CascaderOption[] }
+  > = []
   const path: CascaderOption[] = []
   traverseWithCallback(
     tmNodes,
@@ -31,8 +48,11 @@ function createSelectOptions (
         const { rawNode } = tmNode
         path.push(rawNode)
         selectOptions.push({
-          label: path.map((rawNodeInPath) => rawNodeInPath.label).join('/'),
+          label: path
+            .map((rawNodeInPath) => rawNodeInPath[labelField])
+            .join(separator),
           value: tmNode.key,
+          rawNode: tmNode.rawNode,
           path: Array.from(path)
         })
       }

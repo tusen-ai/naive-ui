@@ -2,7 +2,7 @@
 
 使用 `render-label`、`render-icon` 可以批量控制下拉菜单的选项渲染。
 
-**注意：`render-label` 会对 group 类型的标签生效，可通过 `option.type` 进行设置**
+注意：`render-label` 会对 group 类型的标签生效，可通过 `option.type` 进行设置。
 
 ```html
 <n-dropdown

@@ -13,7 +13,9 @@ icon
 no-icon
 ```
 
-## Props
+## API
+
+### Alert Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -24,7 +26,7 @@ no-icon
 | on-after-leave | `Function` | `undefined` | alert 消失时执行的回调函数 |
 | on-close | `() => boolean \| Promise<boolean> \| any` | `() => true` | 点击 close icon 时执行的回调函数 |
 
-## Slots
+### Alert Slots
 
 | 名称    | 参数 | 说明                           |
 | ------- | ---- | ------------------------------ |

@@ -23,7 +23,7 @@ export interface ColItem {
 
 type RowItemMap = WeakMap<TableColumn, RowItem>
 function getRowsAndCols (columns: TableColumns): {
-  hasEllpisis: boolean
+  hasEllipsis: boolean
   rows: RowItem[][]
   cols: ColItem[]
   dataRelatedCols: Array<
@@ -38,7 +38,7 @@ function getRowsAndCols (columns: TableColumns): {
   const rowItemMap: RowItemMap = new WeakMap()
   let maxDepth = -1
   let totalRowSpan = 0
-  let hasEllpisis = false
+  let hasEllipsis = false
   function ensureMaxDepth (columns: TableColumns, currentDepth: number): void {
     if (currentDepth > maxDepth) {
       rows[currentDepth] = []
@@ -54,39 +54,40 @@ function getRowsAndCols (columns: TableColumns): {
           column
         })
         totalRowSpan += 1
-        hasEllpisis = !!column.ellipsis
+        if (!hasEllipsis) {
+          hasEllipsis = !!column.ellipsis
+        }
         dataRelatedCols.push(column)
       }
     }
   }
   ensureMaxDepth(columns, 0)
-  function ensureColLayout (
-    columns: TableColumns,
-    currentDepth: number,
-    parentIsLast: boolean
-  ): void {
-    let currentLeafIndex = -1
+  let currentLeafIndex = 0
+  function ensureColLayout (columns: TableColumns, currentDepth: number): void {
     let hideUntilIndex = 0
-    const lastIndex = columns.length - 1
     columns.forEach((column, index) => {
       if ('children' in column) {
         // do not allow colSpan > 1 for non-leaf th
-        const isLast = parentIsLast && index === lastIndex
+        // we will execute the calculation logic
+        const cachedCurrentLeafIndex = currentLeafIndex
         const rowItem: RowItem = {
           column,
           colSpan: 0,
           rowSpan: 1,
-          isLast
+          isLast: false
         }
-        ensureColLayout(column.children, currentDepth + 1, isLast)
+        ensureColLayout(column.children, currentDepth + 1)
         column.children.forEach((childColumn) => {
           rowItem.colSpan += rowItemMap.get(childColumn)?.colSpan ?? 0
         })
+        if (cachedCurrentLeafIndex + rowItem.colSpan === totalRowSpan) {
+          rowItem.isLast = true
+        }
         rowItemMap.set(column, rowItem)
         rows[currentDepth].push(rowItem)
       } else {
-        currentLeafIndex += 1
         if (currentLeafIndex < hideUntilIndex) {
+          currentLeafIndex += 1
           return
         }
         let colSpan: number = 1
@@ -105,13 +106,14 @@ function getRowsAndCols (columns: TableColumns): {
         }
         rowItemMap.set(column, rowItem)
         rows[currentDepth].push(rowItem)
+        currentLeafIndex += 1
       }
     })
   }
-  ensureColLayout(columns, 0, true)
+  ensureColLayout(columns, 0)
 
   return {
-    hasEllpisis,
+    hasEllipsis,
     rows,
     cols,
     dataRelatedCols
@@ -121,7 +123,7 @@ function getRowsAndCols (columns: TableColumns): {
 export function useGroupHeader (props: DataTableSetupProps): {
   rowsRef: ComputedRef<RowItem[][]>
   colsRef: ComputedRef<ColItem[]>
-  hasEllpisisRef: ComputedRef<boolean>
+  hasEllipsisRef: ComputedRef<boolean>
   dataRelatedColsRef: ComputedRef<
   Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
   >
@@ -130,7 +132,7 @@ export function useGroupHeader (props: DataTableSetupProps): {
   return {
     rowsRef: computed(() => rowsAndCols.value.rows),
     colsRef: computed(() => rowsAndCols.value.cols),
-    hasEllpisisRef: computed(() => rowsAndCols.value.hasEllpisis),
+    hasEllipsisRef: computed(() => rowsAndCols.value.hasEllipsis),
     dataRelatedColsRef: computed(() => rowsAndCols.value.dataRelatedCols)
   }
 }

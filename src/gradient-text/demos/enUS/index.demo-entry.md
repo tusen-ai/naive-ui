@@ -10,7 +10,9 @@ size
 custom
 ```
 
-## Props
+## API
+
+### GradientText Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -18,7 +20,7 @@ custom
 | size | `number \| string` | `undefined` | Text size (when the unit is not specified the default unit will be `px`). |
 | type | `'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` | Gradient Text type. |
 
-## Slots
+### GradientText Slots
 
 | Name    | Parameters | Description                       |
 | ------- | ---------- | --------------------------------- |

@@ -21,7 +21,7 @@ group
 icon-button
 ```
 
-## Props
+## API
 
 ### Button Props
 
@@ -45,14 +45,12 @@ icon-button
 | type | `'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Button type. |
 | tag | `string` | `'button'` | What tag need the button be rendered as. |
 
-### Button Group Props
+### ButtonGroup Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `undefined` | The buttons' size in button group. If set, the button's size prop inner group won't work. |
 | vertical | `boolean` | `false` | Directions of buttons in the group. |
-
-## Slots
 
 ### Button Slots
 
@@ -61,7 +59,7 @@ icon-button
 | default | `()`       | The default content of the button. |
 | icon    | `()`       | The icon of the button.            |
 
-### Button Group Slots
+### ButtonGroup Slots
 
 | Name    | Parameters | Description                            |
 | ------- | ---------- | -------------------------------------- |

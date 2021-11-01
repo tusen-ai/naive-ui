@@ -1,6 +1,6 @@
 # Multiple Select
 
-Select multiple value.
+Allow the selection of multiple values.
 
 ```html
 <n-space vertical>

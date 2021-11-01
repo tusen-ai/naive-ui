@@ -15,9 +15,9 @@ custom
 form
 ```
 
-## Props
+## API
 
-### Dynamic Input Props
+### DynamicInput Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -32,14 +32,14 @@ form
 | on-remove | `(index: number) => void` | `undefined` | 点击第 index 项删除按钮的回调 |
 | on-update:value | `(value: any) => void` | `undefined` | 组件值发生变化的回调 |
 
-### Dynamic Input Props(Input Preset)
+### DynamicInput Props(Input Preset)
 
 | 名称        | 类型            | 默认值   | 说明                 |
 | ----------- | --------------- | -------- | -------------------- |
 | value       | `Array<string>` | required | Input 预设模式下的值 |
 | placeholder | `string`        | `''`     | 每项的提示信息       |
 
-### Dynamic Input Props(Pair Preset)
+### DynamicInput Props(Pair Preset)
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -47,7 +47,7 @@ form
 | key-placeholder | `string` | `''` | 每项的 `key` 的提示信息 |
 | value-placeholder | `string` | `''` | 每项的 `value` 的提示信息 |
 
-## Slots
+### DynamicInput Slots
 
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |

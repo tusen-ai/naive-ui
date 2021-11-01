@@ -362,7 +362,10 @@ export default defineComponent({
             jumperTextColor,
             jumperTextColorDisabled,
             prefixMargin,
-            suffixMargin
+            suffixMargin,
+            buttonColor,
+            buttonColorHover,
+            buttonColorPressed
           },
           common: { cubicBezierEaseInOut }
         } = themeRef.value
@@ -402,6 +405,9 @@ export default defineComponent({
           '--button-icon-color': buttonIconColor,
           '--button-icon-color-hover': buttonIconColorHover,
           '--button-icon-color-pressed': buttonIconColorPressed,
+          '--button-color-hover': buttonColorHover,
+          '--button-color': buttonColor,
+          '--button-color-pressed': buttonColorPressed,
           '--button-border': buttonBorder,
           '--button-border-hover': buttonBorderHover,
           '--button-border-pressed': buttonBorderPressed

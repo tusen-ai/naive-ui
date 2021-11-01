@@ -30,12 +30,12 @@ custom-field
 | disabled | `boolean` | `false` | Whether to disable the cascader. |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | If `remote` is set, `'hover'` won't work. |
 | filterable | `boolean` | `false` | Note: If `remote` is set, this won't have any effect. |
-| filter | `(pattern: string, option: CascaderOption, path: Array<CascaderOption>) => boolean` | A string based filter algorithm. | Filter function of the cascader. |
-| key-field | `string` | `'key'` | The key field in `CascaderOption`. |
+| filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | A string based filter algorithm. | Filter function of the cascader. |
+| value-field | `string` | `'value'` | The value field in `CascaderOption`. |
 | label-field | `string` | `'label'` | The label field in `CascaderOption`. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple select mode. `responsive` will keep all the tags in single line. |
 | multiple | `boolean` | `false` | Whether to allow multiple options being selected. |
-| options | `Array<CascaderOption>` | required | Options of the cascader. |
+| options | `CascaderOption[]` | required | Options of the cascader. |
 | placeholder | `string` | `'Please Select'` | Placeholder text. |
 | remote | `boolean` | `false` | Whether to obtain data remotely. |
 | separator | `string` | `' / '` | Selected option path value separator (used with `show-path`). |
@@ -47,7 +47,7 @@ custom-field
 | on-blur | `() => void` | `undefined` | Callback on blurred. |
 | on-focus | `() => void` | `undefined` | Callback on focused. |
 | on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | Callback when a node is loaded. Set `option.children` in the returned promise. Loading will stop after the promise is resolved or rejected. |
-| on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: CascaderOption \| Array<CascaderOption \| null> \| null) => void` | `undefined` | Callback executed when the value changes. |
+| on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: CascaderOption \| Array<CascaderOption \| null> \| null, pathValues: Array<CascaderOption \| null> \| Array<CascaderOption[] \| null> \| null) => void` | `undefined` | Callback executed when the value changes. |
 
 #### CascaderOption Properties
 

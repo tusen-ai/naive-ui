@@ -9,7 +9,7 @@ basic
 group
 ```
 
-## Props
+## API
 
 ### Image Props
 
@@ -30,8 +30,6 @@ group
 | 名称         | 类型      | 默认值 | 说明                         |
 | ------------ | --------- | ------ | ---------------------------- |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |
-
-## Slots
 
 ### ImageGroup Slots
 

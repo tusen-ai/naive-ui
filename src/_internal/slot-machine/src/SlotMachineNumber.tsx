@@ -6,8 +6,7 @@ import {
   computed,
   PropType,
   watch,
-  toRef,
-  Ref
+  toRef
 } from 'vue'
 
 export default defineComponent({
@@ -48,7 +47,7 @@ export default defineComponent({
         : null
     })
     // BUG: may be typescript bug
-    watch(toRef(props, 'value') as Ref<string | number>, (value, oldValue) => {
+    watch(toRef(props, 'value'), (value, oldValue) => {
       oldNumberRef.value = oldValue
       newNumberRef.value = value
       void nextTick(scroll)

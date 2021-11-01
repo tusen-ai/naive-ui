@@ -9,7 +9,9 @@ import {
   watch,
   Transition,
   withDirectives,
-  vShow
+  vShow,
+  InputHTMLAttributes,
+  HTMLAttributes
 } from 'vue'
 import { happensIn } from 'seemly'
 import { createTreeMate, TreeNode } from 'treemate'
@@ -75,6 +77,7 @@ const selectProps = {
   },
   value: [String, Number, Array] as PropType<Value | null>,
   placeholder: String,
+  menuProps: Object as PropType<HTMLAttributes>,
   multiple: Boolean,
   size: String as PropType<Size>,
   filterable: Boolean,
@@ -108,7 +111,7 @@ const selectProps = {
   },
   fallbackOption: {
     type: [Function, Boolean] as PropType<
-    (value: string | number) => SelectBaseOption | false
+    ((value: string | number) => SelectBaseOption) | false
     >,
     default: () => (value: string | number) => ({
       label: String(value),
@@ -138,6 +141,7 @@ const selectProps = {
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<OnUpdateValue> | undefined
   >,
+  inputProps: Object as PropType<InputHTMLAttributes>,
   // for jsx
   onUpdateValue: [Function, Array] as PropType<
   MaybeArray<OnUpdateValue> | undefined
@@ -221,7 +225,7 @@ export default defineComponent({
         tmOptions
       )
     )
-    const valOptMapRef = computed(() => createValOptMap(props.options))
+    const valOptMapRef = computed(() => createValOptMap(localOptionsRef.value))
     const uncontrolledShowRef = ref(false)
     const mergedShowRef = useMergedState(
       toRef(props, 'show'),
@@ -391,7 +395,7 @@ export default defineComponent({
     function closeMenu (): void {
       doUpdateShow(false)
     }
-    function handleMenuLeave (): void {
+    function handleMenuAfterLeave (): void {
       patternRef.value = ''
     }
     function handleTriggerClick (): void {
@@ -674,7 +678,7 @@ export default defineComponent({
       handleKeyDown,
       handleKeyUp,
       syncPosition,
-      handleMenuLeave,
+      handleMenuAfterLeave,
       handleMenuClickOutside,
       handleMenuScroll,
       handleMenuKeyup: handleKeyUp,
@@ -703,6 +707,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerRef"
+                      inputProps={this.inputProps}
                       clsPrefix={mergedClsPrefix}
                       showArrow={this.showArrow}
                       maxTagCount={this.maxTagCount}
@@ -752,7 +757,7 @@ export default defineComponent({
                     <Transition
                       name="fade-in-scale-up-transition"
                       appear={this.isMounted}
-                      onLeave={this.handleMenuLeave}
+                      onAfterLeave={this.handleMenuAfterLeave}
                     >
                       {{
                         default: () =>
@@ -760,11 +765,15 @@ export default defineComponent({
                             this.displayDirective === 'show') &&
                           withDirectives(
                             <NInternalSelectMenu
+                              {...this.menuProps}
                               ref="menuRef"
                               virtualScroll={
                                 this.consistentMenuWidth && this.virtualScroll
                               }
-                              class={`${mergedClsPrefix}-select-menu`}
+                              class={[
+                                `${mergedClsPrefix}-select-menu`,
+                                this.menuProps?.class
+                              ]}
                               clsPrefix={mergedClsPrefix}
                               focusable
                               autoPending={true}
@@ -775,11 +784,11 @@ export default defineComponent({
                               }
                               treeMate={this.treeMate}
                               multiple={this.multiple}
-                              size="medium"
+                              size={'medium'}
                               renderOption={this.renderOption}
                               renderLabel={this.renderLabel}
                               value={this.mergedValue}
-                              style={this.cssVars}
+                              style={[this.menuProps?.style, this.cssVars]}
                               onToggle={this.handleToggle}
                               onScroll={this.handleMenuScroll}
                               onFocus={this.handleMenuFocus}

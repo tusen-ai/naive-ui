@@ -20,10 +20,7 @@ import { ExtractPublicPropTypes, keysOf } from '../../_utils'
 
 const formProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
-  inline: {
-    type: Boolean,
-    default: false
-  },
+  inline: Boolean,
   labelWidth: [Number, String] as PropType<number | string>,
   labelAlign: String as PropType<LabelAlign>,
   labelPlacement: {

@@ -1,6 +1,6 @@
 # Custom Trigger Prefix
 
-Use `prefix` to set trigger char.
+Use `prefix` to set the trigger character(s).
 
 ```html
 <n-mention :options="options" :prefix="['@', '#']" @search="handleSearch" />

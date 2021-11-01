@@ -36,7 +36,7 @@ const loadingBarProps = {
     default: undefined
   },
   loadingBarStyle: {
-    type: [String, Object, Function] as PropType<{
+    type: Object as PropType<{
       loading?: string | CSSProperties
       error?: string | CSSProperties
     }>

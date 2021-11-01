@@ -20,9 +20,8 @@ export interface BreadcrumbInjection {
   mergedClsPrefixRef: Ref<string>
 }
 
-export const breadcrumbInjectionKey: InjectionKey<BreadcrumbInjection> = Symbol(
-  'breadcrumb'
-)
+export const breadcrumbInjectionKey: InjectionKey<BreadcrumbInjection> =
+  Symbol('breadcrumb')
 
 const breadcrumbProps = {
   ...(useTheme.props as ThemeProps<BreadcrumbTheme>),
@@ -81,12 +80,13 @@ export default defineComponent({
   },
   render () {
     return (
-      <div
+      <nav
         class={`${this.mergedClsPrefix}-breadcrumb`}
         style={this.cssVars as CSSProperties}
+        aria-label="Breadcrumb"
       >
-        {this.$slots}
-      </div>
+        <ul>{this.$slots}</ul>
+      </nav>
     )
   }
 })

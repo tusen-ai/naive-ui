@@ -5,8 +5,7 @@ import {
   computed,
   ref,
   watch,
-  toRef,
-  Ref
+  toRef
 } from 'vue'
 import NFadeInExpandTransition from '../../fade-in-expand-transition'
 import { useStyle } from '../../../_mixins'
@@ -53,7 +52,7 @@ export default defineComponent({
       numbers.reverse()
       return numbers
     })
-    watch(toRef(props, 'value') as Ref<string | number>, (value, oldValue) => {
+    watch(toRef(props, 'value'), (value, oldValue) => {
       if (typeof value === 'string') {
         newValueRef.value = undefined
         oldValueRef.value = undefined

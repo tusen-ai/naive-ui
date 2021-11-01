@@ -1,9 +1,5 @@
 import { h, defineComponent, PropType } from 'vue'
-
-export interface Item {
-  value: string
-  disabled: boolean
-}
+import { Item } from './interface'
 
 export default defineComponent({
   name: 'TimePickerPanelCol',
@@ -17,33 +13,31 @@ export default defineComponent({
       required: true
     },
     activeValue: {
-      type: Number as PropType<number | null>,
+      type: Number as PropType<number | null | 'am' | 'pm'>,
       default: null
     },
-    onItemClick: Function as PropType<(value: number) => void>
+    // It should be required but vue's type seems to have bugs
+    onItemClick: Function as PropType<(value: number | 'am' | 'pm') => void>
   },
   render () {
     const { activeValue, onItemClick, clsPrefix } = this
     return this.data.map((item) => {
-      const { value, disabled } = item
-      const numValue = Number(value)
-      const active = activeValue === numValue
+      const { label, disabled, value } = item
+      const active = activeValue === value
       return (
         <div
-          key={value}
+          key={label}
           data-active={active ? '' : null}
           class={[
             `${clsPrefix}-time-picker-col__item`,
-            {
-              [`${clsPrefix}-time-picker-col__item--active`]: active,
-              [`${clsPrefix}-time-picker-col__item--disabled`]: disabled
-            }
+            active && `${clsPrefix}-time-picker-col__item--active`,
+            disabled && `${clsPrefix}-time-picker-col__item--disabled`
           ]}
           onClick={
-            onItemClick && !disabled ? () => onItemClick(numValue) : undefined
+            onItemClick && !disabled ? () => onItemClick(value) : undefined
           }
         >
-          {value}
+          {label}
         </div>
       )
     })

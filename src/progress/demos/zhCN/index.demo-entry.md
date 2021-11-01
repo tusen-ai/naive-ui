@@ -15,7 +15,9 @@ height
 processing
 ```
 
-## Props
+## API
+
+### Progress Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -36,7 +38,7 @@ processing
 | type | `'line' \| 'circle' \| 'multiple-circle'` | `line` | 进度条类型 |
 | unit | `string` | `%` | 进度条单位 |
 
-## Slots
+### Progress Slots
 
 | 名称    | 参数 | 说明           |
 | ------- | ---- | -------------- |

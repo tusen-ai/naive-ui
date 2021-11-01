@@ -79,8 +79,7 @@ function createXhrHandlers (
     handleXHRError (e) {
       const fileAfterChange: FileInfo = Object.assign({}, file, {
         status: 'error',
-        percentage,
-        file: null
+        percentage
       })
       XhrMap.delete(file.id)
       doChange(fileAfterChange, e)
@@ -247,7 +246,7 @@ const uploadProps = {
     type: Boolean,
     default: true
   },
-  showPreivewButton: {
+  showPreviewButton: {
     type: Boolean,
     default: true
   },
@@ -257,7 +256,8 @@ const uploadProps = {
   },
   onPreview: Function as PropType<OnPreview>,
   createThumbnailUrl: Function as PropType<CreateThumbnailUrl>,
-  abstract: Boolean
+  abstract: Boolean,
+  max: Number
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -282,7 +282,13 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const formItem = useFormItem(props)
-    const { mergedDisabledRef } = formItem
+    const maxReachedRef = computed(() => {
+      const { max } = props
+      if (max !== undefined) {
+        return mergedFileListRef.value.length >= max
+      }
+      return false
+    })
     const uncontrolledFileListRef = ref(props.defaultFileList)
     const controlledFileListRef = toRef(props, 'fileList')
     const inputElRef = ref<HTMLInputElement | null>(null)
@@ -313,7 +319,14 @@ export default defineComponent({
     function handleFileAddition (files: FileList | null, e?: Event): void {
       if (!files || files.length === 0) return
       const { onBeforeUpload } = props
-      const filesAsArray = props.multiple ? Array.from(files) : [files[0]]
+      let filesAsArray = props.multiple ? Array.from(files) : [files[0]]
+      const { max } = props
+      if (max) {
+        filesAsArray = filesAsArray.slice(
+          0,
+          max - mergedFileListRef.value.length
+        )
+      }
 
       void Promise.all(
         filesAsArray.map(async (file) => {
@@ -434,7 +447,7 @@ export default defineComponent({
       const { createThumbnailUrl } = props
 
       return createThumbnailUrl
-        ? await createThumbnailUrl(file.file as File)
+        ? await createThumbnailUrl(file.file as File, file)
         : await createImageDataUrl(file.file as File)
     }
     const cssVarsRef = computed(() => {
@@ -481,7 +494,6 @@ export default defineComponent({
     provide(uploadInjectionKey, {
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
-      disabledRef: mergedDisabledRef,
       showCancelButtonRef: toRef(props, 'showCancelButton'),
       showDownloadButtonRef: toRef(props, 'showDownloadButton'),
       showRemoveButtonRef: toRef(props, 'showRemoveButton'),
@@ -492,7 +504,7 @@ export default defineComponent({
       XhrMap,
       submit,
       doChange,
-      showPreivewButtonRef: toRef(props, 'showPreivewButton'),
+      showPreviewButtonRef: toRef(props, 'showPreviewButton'),
       onPreviewRef: toRef(props, 'onPreview'),
       getFileThumbnailUrl,
       listTypeRef: toRef(props, 'listType'),
@@ -500,7 +512,8 @@ export default defineComponent({
       openFileDialog,
       draggerInsideRef,
       handleFileAddition,
-      mergedDisabledRef,
+      mergedDisabledRef: formItem.mergedDisabledRef,
+      maxReachedRef,
       fileListStyleRef: toRef(props, 'fileListStyle'),
       abstractRef: toRef(props, 'abstract'),
       cssVarsRef

@@ -1,6 +1,6 @@
 # Content
 
-Add content into switch.
+Add switch content.
 
 ```html
 <n-switch>

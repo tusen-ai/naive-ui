@@ -1,4 +1,4 @@
-# Prefix & Suffix
+# Prefix & suffix
 
 Use `prefix` & `suffix` slot to add prefix & suffix.
 

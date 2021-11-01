@@ -1,6 +1,6 @@
 # Autosize
 
-Make input autosizable.
+Autosize the input.
 
 ```html
 <n-space vertical>

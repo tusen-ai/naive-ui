@@ -52,6 +52,9 @@ export default c([
       width: 96px;
       height: 96px;
     `, [
+      cB('base-icon', `
+        font-size: 24px;
+      `),
       cB('upload-dragger', `
         padding: 0;
         height: 100%;

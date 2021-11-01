@@ -56,7 +56,6 @@ export type OnUpdateFileList = (fileList: FileInfo[]) => void
 export interface UploadInjection {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<UploadTheme>>
-  disabledRef: Ref<boolean>
   showCancelButtonRef: Ref<boolean>
   showRemoveButtonRef: Ref<boolean>
   showDownloadButtonRef: Ref<boolean>
@@ -66,13 +65,14 @@ export interface UploadInjection {
   onDownloadRef: Ref<OnDownload | undefined>
   XhrMap: Map<string, XMLHttpRequest>
   doChange: DoChange
-  showPreivewButtonRef: Ref<boolean>
+  showPreviewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>
   listTypeRef: Ref<listType>
   dragOverRef: Ref<boolean>
   draggerInsideRef: { value: boolean }
   fileListStyleRef: Ref<string | CSSProperties | undefined>
   mergedDisabledRef: Ref<boolean>
+  maxReachedRef: Ref<boolean>
   abstractRef: Ref<boolean>
   cssVarsRef: Ref<CSSProperties>
   submit: (fileId?: string) => void
@@ -104,4 +104,4 @@ export type listType = 'text' | 'image' | 'image-card'
 
 export type OnPreview = (file: FileInfo) => void
 
-export type CreateThumbnailUrl = (file: File) => Promise<string>
+export type CreateThumbnailUrl = (file: File, fileInfo: FileInfo) => Promise<string>

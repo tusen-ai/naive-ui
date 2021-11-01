@@ -27,7 +27,7 @@ import {
 import { useTheme } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import { imageLight } from '../styles'
-import { prevIcon, nextIcon } from './icons'
+import { prevIcon, nextIcon, closeIcon } from './icons'
 import style from './styles/index.cssr'
 
 export interface ImagePreviewInst {
@@ -345,6 +345,12 @@ export default defineComponent({
                                     onClick={this.zoomIn}
                                   >
                                     {{ default: () => <ZoomInIcon /> }}
+                                  </NBaseIcon>
+                                  <NBaseIcon
+                                    clsPrefix={clsPrefix}
+                                    onClick={this.toggleShow}
+                                  >
+                                    {{ default: () => closeIcon }}
                                   </NBaseIcon>
                                 </div>
                               ) : null

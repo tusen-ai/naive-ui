@@ -147,16 +147,13 @@ export default defineComponent({
                     <NxButton
                       size="tiny"
                       onMouseenter={() => {
-                        this.cachePendingValue()
-                        this.doUpdateValue(shortcut, false)
+                        this.handleSingleShortcutMouseenter(shortcut)
                       }}
                       onClick={() => {
-                        this.doUpdateValue(shortcut, false)
-                        this.clearPendingValue()
-                        this.handleConfirmClick()
+                        this.handleSingleShortcutClick(shortcut)
                       }}
                       onMouseleave={() => {
-                        this.restorePendingValue()
+                        this.handleShortcutMouseleave()
                       }}
                     >
                       {{ default: () => key }}

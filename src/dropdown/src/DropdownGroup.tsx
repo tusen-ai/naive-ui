@@ -4,7 +4,7 @@ import { warn } from '../../_utils'
 import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider'
 import NDropdownGroupHeader from './DropdownGroupHeader'
-import { isDividerNode, isGroupNode } from './utils'
+import { isDividerNode } from './utils'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
@@ -46,7 +46,7 @@ export default defineComponent({
               key: child.key
             })
           }
-          if (isGroupNode(child.rawNode)) {
+          if (child.isGroup) {
             warn(
               'dropdown',
               '`group` node is not allowed to be put in `group` node.'

@@ -10,7 +10,9 @@ content
 vertical
 ```
 
-## Props
+## API
+
+### Divider Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -18,7 +20,7 @@ vertical
 | title-placement | `'left' \| 'right' \| 'center'` | `'center'` | 标题的位置 |
 | vertical | `boolean` | `false` | 是否垂直分隔 |
 
-## Slots
+### Divider Slots
 
 | 名称    | 参数 | 说明         |
 | ------- | ---- | ------------ |

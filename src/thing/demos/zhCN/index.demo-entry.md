@@ -11,7 +11,9 @@ basic
 indent
 ```
 
-## Props
+## API
+
+### Thing Props
 
 | 名称             | 类型      | 默认值      | 说明             |
 | ---------------- | --------- | ----------- | ---------------- |
@@ -21,7 +23,7 @@ indent
 | title-extra      | `string`  | `undefined` | 标题的附加信息   |
 | title            | `string`  | `undefined` | 标题             |
 
-## Slots
+### Thing Slots
 
 | 名称         | 参数 | 说明             |
 | ------------ | ---- | ---------------- |

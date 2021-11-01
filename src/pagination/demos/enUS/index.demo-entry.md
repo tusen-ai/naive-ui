@@ -17,7 +17,9 @@ prev
 prefix
 ```
 
-## Props
+## API
+
+### Pagination Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -38,7 +40,7 @@ prefix
 | on-update:page | `(page: number) => void` | `undefined` | Callback function when the current page changes. |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function when the current page size changes. |
 
-## Slots
+### Pagination Slots
 
 | Name   | Parameters               | Description    |
 | ------ | ------------------------ | -------------- |
@@ -46,8 +48,6 @@ prefix
 | prev   | `(info: PaginationInfo)` | Previous page. |
 | prefix | `(info: PaginationInfo)` | Page prefix.   |
 | suffix | `(info: PaginationInfo)` | Page suffix.   |
-
-## API
 
 ### PaginationInfo Type
 

@@ -1,6 +1,6 @@
 # Select Person
 
-I find in many scenes people want to make select a people picker. Here is an example that shows you how to customize the select.
+I've found that people often want to make a people picker. Here is an example that shows you how that can be done with a select.
 
 ```html
 <n-space vertical>

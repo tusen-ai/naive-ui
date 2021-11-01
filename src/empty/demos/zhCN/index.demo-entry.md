@@ -10,7 +10,9 @@ icon
 size
 ```
 
-## Props
+## API
+
+### Empty Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -18,7 +20,7 @@ size
 | show-description | `boolean` | `true` | 是否展示描述信息 |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | 尺寸大小 |
 
-## Slots
+### Empty Slots
 
 | 名称    | 参数 | 说明             |
 | ------- | ---- | ---------------- |

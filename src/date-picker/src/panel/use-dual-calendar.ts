@@ -1,10 +1,4 @@
-import {
-  inject,
-  computed,
-  watch,
-  ref,
-  ExtractPropTypes
-} from 'vue'
+import { inject, computed, watch, ref, ExtractPropTypes } from 'vue'
 import {
   addMonths,
   format,
@@ -20,7 +14,7 @@ import {
 } from 'date-fns'
 import { dateArray, DateItem, strictParse } from '../utils'
 import { usePanelCommon } from './use-panel-common'
-import { datePickerInjectionKey } from '../interface'
+import { datePickerInjectionKey, Shortcuts } from '../interface'
 
 const useDualCalendarProps = {
   ...usePanelCommon.props,
@@ -54,6 +48,7 @@ function useDualCalendar (
     rangesRef,
     closeOnSelectRef,
     updateValueOnCloseRef,
+    firstDayOfWeekRef,
     datePickerSlots
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
@@ -109,7 +104,7 @@ function useDualCalendar (
       startCalendarDateTimeRef.value,
       props.value,
       nowRef.value,
-      localeRef.value.firstDayOfWeek
+      firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek
     )
   })
   const endDateArrayRef = computed(() => {
@@ -117,7 +112,7 @@ function useDualCalendar (
       endCalendarDateTimeRef.value,
       props.value,
       nowRef.value,
-      localeRef.value.firstDayOfWeek
+      firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek
     )
   })
   const weekdaysRef = computed(() => {
@@ -534,6 +529,19 @@ function useDualCalendar (
   function handleEndTimePickerChange (value: number): void {
     changeEndDateTime(value)
   }
+  function handleRangeShortcutMouseenter (shortcut: Shortcuts[string]): void {
+    panelCommon.cachePendingValue()
+    const shortcutValue = panelCommon.getShortcutValue(shortcut)
+    if (!Array.isArray(shortcutValue)) return
+    changeStartEndTime(...shortcutValue)
+  }
+  function handleRangeShortcutClick (shortcut: Shortcuts[string]): void {
+    const shortcutValue = panelCommon.getShortcutValue(shortcut)
+    if (!Array.isArray(shortcutValue)) return
+    changeStartEndTime(...shortcutValue)
+    panelCommon.clearPendingValue()
+    handleConfirmClick()
+  }
   return {
     startDatesElRef,
     endDatesElRef,
@@ -559,6 +567,8 @@ function useDualCalendar (
     weekdays: weekdaysRef,
     startDateArray: startDateArrayRef,
     endDateArray: endDateArrayRef,
+    handleRangeShortcutMouseenter,
+    handleRangeShortcutClick,
     ...panelCommon,
     ...validation,
     // datetimerangeonly

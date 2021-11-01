@@ -11,7 +11,7 @@ import type { ThemeProps } from '../../_mixins'
 import { warn, call, MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { inputNumberLight, InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber } from './utils'
-import type { OnUpdateValue } from './interface'
+import type { OnUpdateValue, InputNumberInst } from './interface'
 import style from './styles/input-number.cssr'
 
 const inputNumberProps = {
@@ -331,7 +331,12 @@ export default defineComponent({
     watch(mergedValueRef, () => {
       deriveDisplayedValueFromValue()
     })
+    const exposedMethods: InputNumberInst = {
+      focus: () => inputInstRef.value?.focus(),
+      blur: () => inputInstRef.value?.blur()
+    }
     return {
+      ...exposedMethods,
       inputInstRef,
       minusButtonInstRef,
       addButtonInstRef,

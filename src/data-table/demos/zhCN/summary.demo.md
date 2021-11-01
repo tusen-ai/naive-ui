@@ -12,6 +12,9 @@ import { defineComponent } from 'vue'
 const createColumns = () => {
   return [
     {
+      type: 'selection'
+    },
+    {
       title: 'Name',
       key: 'name'
     },

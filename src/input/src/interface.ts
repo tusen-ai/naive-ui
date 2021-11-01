@@ -22,7 +22,7 @@ export interface InputWrappedRef {
 export type InputInst = UnwrapRef<InputWrappedRef>
 
 export const inputInjectionKey: InjectionKey<{
-  wordCountRef: Ref<number>
+  mergedValueRef: Ref<string | [string, string] | null>
   maxlengthRef: Ref<number | undefined>
   mergedClsPrefixRef: Ref<string>
 }> = Symbol('input')

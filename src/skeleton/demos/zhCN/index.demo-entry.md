@@ -10,7 +10,9 @@ box
 size
 ```
 
-## Props
+## API
+
+### Skeleton Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |

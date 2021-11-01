@@ -12,7 +12,9 @@ relative
 unix
 ```
 
-## Props
+## API
+
+### Time Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |

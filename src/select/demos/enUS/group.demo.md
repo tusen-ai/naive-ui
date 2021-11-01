@@ -1,6 +1,6 @@
 # Group
 
-Group options together.
+Options can also be grouped together.
 
 ```html
 <n-select filterable v-model:value="value" :options="options" />

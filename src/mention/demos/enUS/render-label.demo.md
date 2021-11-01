@@ -1,6 +1,6 @@
 # Render Label
 
-If `option.label` is not a string, `option.value` will be used to match option by default.
+If the `option.label` property is not a string, the `option.value` property will be used for matching by default.
 
 ```html
 <n-mention :options="options" :render-label="renderLabel" />

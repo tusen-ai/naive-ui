@@ -1,8 +1,8 @@
 # Typography
 
-Naive UI provides some basic styling for common HTML tags; including components to render text better.
+Naive UI provides some HTML text styling.
 
-Typography is a kind of art.
+Typography is an art.
 
 ## Demos
 
@@ -23,38 +23,38 @@ router-link
 | strong | `boolean` | `false` | Strong. |
 | italic | `boolean` | `false` | Italic. |
 | underline | `boolean` | `false` | Underline. |
-| delete | `boolean` | `false` | Strikethrough. |
-| code | `boolean` | `false` | Code. |
-| depth | `1 \| 2 \| 3 \| '1' \| '2' \| '3'` | `undefined` | Text depth. |
-| tag | `string` | `undefined` | What tag should be this component be rendered as. Won't work when `code` or `del` is also used. |
+| delete | `boolean` | `false` | Use the `del` tag and strikethrough style. |
+| code | `boolean` | `false` | Use the `code` tag and style. |
+| depth | `1 \| 2 \| 3 \| '1' \| '2' \| '3'` | `undefined` | Text depth (shade of text). |
+| tag | `string` | `undefined` | Tag to use. `code` or `delete` properties will override this. |
 
 ### P Props
 
-| Name  | Type                               | Default     | Description |
-| ----- | ---------------------------------- | ----------- | ----------- |
-| depth | `1 \| 2 \| 3 \| '1' \| '2' \| '3'` | `undefined` | Text depth. |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| depth | `1 \| 2 \| 3 \| '1' \| '2' \| '3'` | `undefined` | Text depth (shade of text). |
 
 ### H1, H2, H3, H4, H5, H6 Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| align-text | `boolean` | `false` | Text align. |
-| type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Text depth. |
+| align-text | `boolean` | `false` | Text alignment. |
+| type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Text color style. |
 | prefix | `'bar'` | `undefined` | Show a bar in front of the heading. |
 
 ### Ul, Ol Props
 
-| Name       | Type      | Default | Description |
-| ---------- | --------- | ------- | ----------- |
-| align-text | `boolean` | `false` | Text align. |
+| Name       | Type      | Default | Description     |
+| ---------- | --------- | ------- | --------------- |
+| align-text | `boolean` | `false` | Text alignment. |
 
 ### Blockquote Props
 
-| Name       | Type      | Default | Description |
-| ---------- | --------- | ------- | ----------- |
-| align-text | `boolean` | `false` | Text align. |
+| Name       | Type      | Default | Description     |
+| ---------- | --------- | ------- | --------------- |
+| align-text | `boolean` | `false` | Text alignment. |
 
-### All Typography Components
+### All Typography Components Slots
 
 | Name    | Parameters | Description                |
 | ------- | ---------- | -------------------------- |

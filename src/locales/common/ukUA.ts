@@ -32,6 +32,7 @@ const ukUA: NLocale = {
     selectDate: 'Обрати дату',
     datePlaceholder: 'Обрати дату',
     datetimePlaceholder: 'Обрати дату і час',
+    monthPlaceholder: 'Виберіть місяць',
     startDatePlaceholder: 'Дата початку',
     endDatePlaceholder: 'Дата завершення',
     startDatetimePlaceholder: 'Дата і час початку',
