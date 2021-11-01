@@ -46,15 +46,15 @@ export default defineComponent({
           withCredentials,
           headers,
           onUploadProgress: ({ loaded, total }) => {
-            onProgress({ loaded, total }, file)
+            onProgress(Math.ceil((loaded / total) * 100))
           }
         })
         .then((e) => {
           message.success(e.data)
-          onFinish(e, file)
+          onFinish(e.data)
         })
         .catch((error) => {
-          onError(error, file)
+          onError(error)
         })
     }
     return {

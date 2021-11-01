@@ -129,27 +129,30 @@ function customSubmitImpl (options: {
     withCredentials,
     action,
     method,
-    onProgress (e: ProgressEvent, file: FileInfo) {
+    onProgress (event) {
       const fileAfterChange: FileInfo = Object.assign({}, file, {
         status: 'uploading'
       })
-      const progress = Math.ceil((e.loaded / e.total) * 100)
+      const progress = event.percent
       fileAfterChange.percentage = progress
       percentage = progress
-      doChange(fileAfterChange, e)
+      doChange(fileAfterChange, event)
     },
-    onFinish (e: ProgressEvent, file: FileInfo) {
+    onFinish (body) {
       let fileAfterChange: FileInfo = Object.assign({}, file, {
         status: 'finished',
         percentage,
         file: null
       })
       XhrMap.delete(file.id)
+      const event = {
+        body
+      }
       fileAfterChange =
-        inst.onFinish?.({ file: fileAfterChange, event: e }) || fileAfterChange
-      doChange(fileAfterChange, e)
+        inst.onFinish?.({ file: fileAfterChange, event }) || fileAfterChange
+      doChange(fileAfterChange, event)
     },
-    onError (e: ProgressEvent, file: FileInfo) {
+    onError (e) {
       const fileAfterChange: FileInfo = Object.assign({}, file, {
         status: 'error',
         percentage

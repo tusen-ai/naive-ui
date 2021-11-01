@@ -21,14 +21,14 @@ export type FuncOrRecordOrUndef =
 export type OnChange = (data: {
   file: FileInfo
   fileList: FileInfo[]
-  event: ProgressEvent | Event | undefined
+  event: ProgressEvent | Event | undefined | { body: any }
 }) => void
 export type OnFinish = ({
   file,
   event
 }: {
   file: FileInfo
-  event: Event
+  event: Event | { body: any }
 }) => FileInfo | undefined
 export type OnRemove = (data: {
   file: FileInfo
@@ -44,7 +44,7 @@ export interface UploadInternalInst {
 
 export type DoChange = (
   fileAfterChange: FileInfo,
-  event?: ProgressEvent | Event,
+  event?: ProgressEvent | Event | { body: any },
   options?: {
     append?: boolean
     remove?: boolean
@@ -107,16 +107,20 @@ export type OnPreview = (file: FileInfo) => void
 
 export type CreateThumbnailUrl = (file: File) => Promise<string>
 
-export interface CustomRequestOptions {
+export interface CustomUploadProgressEvent extends ProgressEvent {
+  percent: number
+}
+
+export interface CustomRequestOptions<T = any> {
   file: FileInfo
   action?: string
   method?: string
   data?: FuncOrRecordOrUndef
   withCredentials?: boolean
   headers?: FuncOrRecordOrUndef
-  onProgress?: (e: ProgressEvent, file: FileInfo) => void
-  onFinish?: (e: ProgressEvent, file: FileInfo) => void
-  onError?: (e: ProgressEvent, file: FileInfo) => void
+  onProgress: (e: CustomUploadProgressEvent) => void
+  onFinish: (body?: T) => void
+  onError: (error: ProgressEvent) => void
 }
 
 export type CustomRequest = (options: CustomRequestOptions) => void
