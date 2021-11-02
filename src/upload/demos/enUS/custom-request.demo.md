@@ -1,4 +1,4 @@
-# 自定义上传
+# Custom Request
 
 ```html
 <n-upload
@@ -11,7 +11,7 @@
   }"
   :customRequest="customRequest"
 >
-  <n-button>上传文件</n-button>
+  <n-button>Upload</n-button>
 </n-upload>
 ```
 

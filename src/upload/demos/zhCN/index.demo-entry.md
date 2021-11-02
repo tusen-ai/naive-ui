@@ -29,6 +29,7 @@ custom-request
 | accept | `string` | `undefined` | 接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a> |
 | action | `string` | `undefined` | 请求提交的地址 |
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | 自定义文件缩略图 |
+| custom-request | `(CustomRequestOptions) => void` | `undefined` | 自定义上传方法，类型参考 <n-a href="#CustomRequestOptions">CustomRequestOptions</n-a> |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | 提交表单需要附加的数据 |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | 非受控状态下默认的文件列表 |
 | default-upload | `boolean` | `true` | 选择文件时候是否默认上传 |
@@ -71,6 +72,22 @@ custom-request
 | 名称     | 类型      | 默认值  | 说明                |
 | -------- | --------- | ------- | ------------------- |
 | abstract | `boolean` | `false` | 是否不存在 DOM 包裹 |
+
+#### CustomRequestOptions Type
+
+```__ts
+interface CustomRequestOptions<T = any> {
+  file: FileInfo
+  action?: string
+  method?: string
+  data?: FuncOrRecordOrUndef
+  withCredentials?: boolean
+  headers?: FuncOrRecordOrUndef
+  onProgress: (e: CustomUploadProgressEvent) => void
+  onFinish: (body?: T) => void
+  onError: (error: ProgressEvent) => void
+}
+```
 
 ### Upload Methods
 
