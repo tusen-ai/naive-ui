@@ -81,6 +81,9 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NModal = inject(modalInjectionKey)!
     function styleTransformOrigin (): string {
+      if (NModal.transformOriginRef.value === 'center') {
+        return ''
+      }
       const { value: transformOriginX } = transformOriginXRef
       const { value: transformOriginY } = transformOriginYRef
       if (transformOriginX === null || transformOriginY === null) {
@@ -92,6 +95,9 @@ export default defineComponent({
       return ''
     }
     function syncTransformOrigin (el: HTMLElement): void {
+      if (NModal.transformOriginRef.value === 'center') {
+        return
+      }
       const mousePosition = NModal.getMousePosition()
       if (!mousePosition) {
         return
