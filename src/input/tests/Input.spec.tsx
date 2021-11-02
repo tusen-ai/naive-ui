@@ -214,4 +214,15 @@ describe('n-input', () => {
     expect(wrapper.find('.n-input__suffix').text()).toBe('元')
     wrapper.unmount()
   })
+
+  it('should work with `separator` slot', async () => {
+    const wrapper = mount(NInput, {
+      props: { pair: true },
+      slots: { separator: '-' }
+    })
+
+    expect(wrapper.find('.n-input').classes()).toContain('n-input--pair')
+    expect(wrapper.find('.n-input__separator').text()).toBe('-')
+    wrapper.unmount()
+  })
 })
