@@ -28,7 +28,7 @@ custom-request
 | accept | `string` | `undefined` | The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a>. |
 | action | `string` | `undefined` | The URL to submit data to. |
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | Customize file thumbnails. |
-| custom-request | `(CustomRequestOptions) => void` | `undefined` | Customize upload request. For types, see <n-a href="#CustomRequestOptions">CustomRequestOptions</n-a> |
+| custom-request | `(CustomRequestOptions) => void` | `undefined` | Customize upload request. For types, see <n-a href="#CustomRequestOptions-Type">CustomRequestOptions</n-a> |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | The default file list in uncontrolled manner. |
 | default-upload | `boolean` | `false` | If file uploaded immediatelly after file is selected. |
