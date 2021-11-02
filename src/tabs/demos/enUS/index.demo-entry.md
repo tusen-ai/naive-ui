@@ -28,6 +28,7 @@ before-leave
 | default-value | `string \| number` | `undefined` | Default value in uncontrolled mode. |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly'` | `undefined` | Justify-content value of `flex` layout. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of tabs. |
+| pane-class | `string` | `undefined` | Class of the pane. |
 | pane-style | `string \| object` | `undefined` | Style of the pane. |
 | tab-style | `string \| object` | `undefined` | Style of the tab. |
 | tabs-padding | `number` | `0` | Left & right `padding` of the group of tabs. |
