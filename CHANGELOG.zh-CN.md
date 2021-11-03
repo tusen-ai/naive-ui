@@ -11,6 +11,10 @@
 
 - 修复 `n-alert` `contentTextColor` 和 `titleTextColor` 的类型主题变量不起作用，关闭 [#1495](https://github.com/TuSimple/naive-ui/issues/1495)
 
+### i18n
+
+- 新增 deDE locale
+
 ## 2.20.1 (2021-11-01)
 
 ### Fixes
