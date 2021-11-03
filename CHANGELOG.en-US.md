@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-modal` add `transform-origin` prop, closes [#1498](https://github.com/TuSimple/naive-ui/issues/1498).
+- `n-tabs` add `pane-class` prop, closes [#1500](https://github.com/TuSimple/naive-ui/issues/1500).
+
+### Fixes
+
+- Fix `n-alert` `contentTextColor` and `titleTextColor` type theme variable not working, closes [#1495](https://github.com/TuSimple/naive-ui/issues/1495).
+
 ## 2.20.1 (2021-11-01)
 
 ### Fixes
