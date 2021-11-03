@@ -526,6 +526,7 @@ export default defineComponent({
       dragOver: dragOverRef,
       handleFileInputChange,
       submit,
+      openFileDialog,
       cssVars: cssVarsRef
     }
   },
