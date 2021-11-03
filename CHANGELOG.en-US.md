@@ -10,6 +10,7 @@
 ### Fixes
 
 - Fix `n-alert` `contentTextColor` and `titleTextColor` type theme variable not working, closes [#1495](https://github.com/TuSimple/naive-ui/issues/1495).
+- Fix `n-time-picker` not trigger blur event when the panel is closed by ok button, closes [#1499](https://github.com/TuSimple/naive-ui/issues/1499).
 
 ### Fixes
 
