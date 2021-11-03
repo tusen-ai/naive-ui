@@ -21,14 +21,14 @@ export type FuncOrRecordOrUndef =
 export type OnChange = (data: {
   file: FileInfo
   fileList: FileInfo[]
-  event: ProgressEvent | Event | undefined | { body: any }
+  event: ProgressEvent | Event | undefined
 }) => void
 export type OnFinish = ({
   file,
   event
 }: {
   file: FileInfo
-  event: Event | { body: any }
+  event?: Event
 }) => FileInfo | undefined
 export type OnRemove = (data: {
   file: FileInfo
@@ -44,7 +44,7 @@ export interface UploadInternalInst {
 
 export type DoChange = (
   fileAfterChange: FileInfo,
-  event?: ProgressEvent | Event | { body: any },
+  event?: ProgressEvent | Event,
   options?: {
     append?: boolean
     remove?: boolean
@@ -111,7 +111,7 @@ export interface CustomUploadProgressEvent extends ProgressEvent {
   percent: number
 }
 
-export interface CustomRequestOptions<T = any> {
+export interface CustomRequestOptions {
   file: FileInfo
   action?: string
   method?: string
@@ -119,7 +119,7 @@ export interface CustomRequestOptions<T = any> {
   withCredentials?: boolean
   headers?: FuncOrRecordOrUndef
   onProgress: (e: CustomUploadProgressEvent) => void
-  onFinish: (body?: T) => void
+  onFinish: () => void
   onError: (error: ProgressEvent) => void
 }
 

@@ -49,7 +49,7 @@ custom-request
 | show-preview-button | `boolean` | `true` | 是否允许显示预览按钮（在 `list-type` 为 `image-card` 时生效） |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |
-| on-finish | `(options: { file: UploadFileInfo, event: Event }) => UploadFileInfo \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo |
+| on-finish | `(options: { file: UploadFileInfo, event: Event }) => UploadFileInfo \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意： file 将会下一次事件循环中置为 null |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: UploadFileInfo[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |
 | on-preview | `(file: FileInfo) => void` | `undefined` | 点击文件链接或预览按钮的回调函数 |
@@ -76,15 +76,15 @@ custom-request
 #### CustomRequestOptions Type
 
 ```__ts
-interface CustomRequestOptions<T = any> {
+interface CustomRequestOptions {
   file: FileInfo
   action?: string
   method?: string
   data?: FuncOrRecordOrUndef
   withCredentials?: boolean
   headers?: FuncOrRecordOrUndef
-  onProgress: (e: CustomUploadProgressEvent) => void
-  onFinish: (body?: T) => void
+  onProgress: (e: {percent: number}) => void
+  onFinish: () => void
   onError: (error: ProgressEvent) => void
 }
 ```

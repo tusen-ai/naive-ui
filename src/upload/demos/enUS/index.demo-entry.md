@@ -49,7 +49,7 @@ custom-request
 | with-credentials | `boolean` | `false` | Any credentials to be sent with the request (e.g. cookie). |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | Uploaded file(s) status change callback. |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | Callback function triggered on file-list changes. |
-| on-finish | `(options: { file: UploadFileInfo, event: Event }) => UploadFileInfo \| void` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`. |
+| on-finish | `(options: { file: UploadFileInfo, event: Event }) => UploadFileInfo \| void` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`.Note: file will be null in next event-loop |
 | on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => boolean \| Promise<boolean> \| any` | `() => true` | File removed callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel this removal. |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Upload ready to start callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel the upload. |
 | on-preview | `(file: FileInfo) => void` | `undefined` | Callback for clicking file links or preview buttons. |
@@ -83,8 +83,8 @@ interface CustomRequestOptions<T = any> {
   data?: FuncOrRecordOrUndef
   withCredentials?: boolean
   headers?: FuncOrRecordOrUndef
-  onProgress: (e: CustomUploadProgressEvent) => void
-  onFinish: (body?: T) => void
+  onProgress: (e: {percent: number}) => void
+  onFinish: () => void
   onError: (error: ProgressEvent) => void
 }
 ```
