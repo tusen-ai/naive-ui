@@ -10,6 +10,7 @@
 ### Fixes
 
 - Fix `n-alert` `contentTextColor` and `titleTextColor` type theme variable not working, closes [#1495](https://github.com/TuSimple/naive-ui/issues/1495).
+- Fix `n-upload` export `openFileDialog` method.
 
 ### i18n
 
