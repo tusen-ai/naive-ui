@@ -26,7 +26,7 @@ abstract
 | abstract | `boolean` | `false` | Split the upload button (trigger) and file list as child components (`<n-upload-trigger />` and `<n-upload-file-list />`). Not supported for a `list-type` property of `image-card`. |
 | accept | `string` | `undefined` | The upload accept attribute. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a>. |
 | action | `string` | `undefined` | The URL to upload to. |
-| create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | Thumbnail generation function. |
+| create-thumbnail-url | `(file: File, fileInfo: FileInfo) => Promise<string>` | `undefined` | Thumbnail generation function. |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | `data` field of the HTTP request's form data. |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | The default file list. |
 | default-upload | `boolean` | `true` | Whether the file is uploaded immediately after it is selected. |

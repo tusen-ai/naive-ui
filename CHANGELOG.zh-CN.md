@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-modal` 新增 `transform-origin` 属性，关闭 [#1498](https://github.com/TuSimple/naive-ui/issues/1498)
+- `n-tabs` 新增 `pane-class` 属性，关闭 [#1500](https://github.com/TuSimple/naive-ui/issues/1500)
+
+### Fixes
+
+- 修复 `n-alert` `contentTextColor` 和 `titleTextColor` 的类型主题变量不起作用，关闭 [#1495](https://github.com/TuSimple/naive-ui/issues/1495)
+- 修复 `n-upload` `UploadFileInfo` 的 `thumbnailUrl` 字段不起作用，关闭 [#1495](https://github.com/TuSimple/naive-ui/issues/1245)
+
 ## 2.20.1 (2021-11-01)
 
 ### Fixes
