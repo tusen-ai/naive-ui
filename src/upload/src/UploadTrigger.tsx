@@ -25,7 +25,7 @@ export default defineComponent({
       maxReachedRef,
       listTypeRef,
       dragOverRef,
-      openFileDialog,
+      openOpenFileDialog,
       draggerInsideRef,
       handleFileAddition
     } = NUpload
@@ -36,7 +36,7 @@ export default defineComponent({
 
     function handleTriggerClick (): void {
       if (mergedDisabledRef.value || maxReachedRef.value) return
-      openFileDialog()
+      openOpenFileDialog()
     }
     function handleTriggerDragOver (e: DragEvent): void {
       e.preventDefault()

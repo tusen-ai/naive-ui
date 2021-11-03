@@ -10,7 +10,7 @@
 ### Fixes
 
 - 修复 `n-alert` `contentTextColor` 和 `titleTextColor` 的类型主题变量不起作用，关闭 [#1495](https://github.com/TuSimple/naive-ui/issues/1495)
-- 修复 `n-upload` 未导出 `openFileDialog` 方法
+- 修复 `n-upload` 实例缺少 `openOpenFileDialog` 方法
 
 ### i18n
 
