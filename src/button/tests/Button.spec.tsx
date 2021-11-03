@@ -18,6 +18,21 @@ describe('n-button', () => {
     await inst.trigger('click')
     expect(onClick).toHaveBeenCalled()
   })
+  it('keyboard', async () => {
+    const onClick = jest.fn()
+    const inst = mount(NButton, {
+      props: {
+        keyboard: false,
+        onClick
+      }
+    })
+    await inst.trigger('click')
+    expect(onClick).toBeCalledTimes(1)
+    await inst.trigger('keydown.space')
+    expect(onClick).toBeCalledTimes(1)
+    await inst.trigger('keydown.enter')
+    expect(onClick).toBeCalledTimes(1)
+  })
   it('disabled', async () => {
     const onClick = jest.fn()
     const inst = mount(NButton, {
