@@ -11,6 +11,11 @@
 
 - Fix `n-alert` `contentTextColor` and `titleTextColor` type theme variable not working, closes [#1495](https://github.com/TuSimple/naive-ui/issues/1495).
 - Fix `n-button` `keyboard` prop does not work, closes [#1508](https://github.com/TuSimple/naive-ui/issues/1508).
+- Fix `n-upload` instance misses `openOpenFileDialog` method.
+
+### i18n
+
+- Add deDE locale.
 
 ## 2.20.1 (2021-11-01)
 
