@@ -27,7 +27,7 @@ retry-debug
 | abstract | `boolean` | `false` | 是否不存在 DOM 包裹，不支持 `image-card` 类型的 Upload |
 | accept | `string` | `undefined` | 接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a> |
 | action | `string` | `undefined` | 请求提交的地址 |
-| create-thumbnail-url | `(file: File, fileInfo: FileInfo) => Promise<string>` | `undefined` | 自定义文件缩略图 |
+| create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | 自定义文件缩略图 |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | 提交表单需要附加的数据 |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | 非受控状态下默认的文件列表 |
 | default-upload | `boolean` | `true` | 选择文件时候是否默认上传 |

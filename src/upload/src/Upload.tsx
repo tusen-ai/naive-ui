@@ -447,7 +447,7 @@ export default defineComponent({
       const { createThumbnailUrl } = props
 
       return createThumbnailUrl
-        ? await createThumbnailUrl(file.file as File, file)
+        ? await createThumbnailUrl(file.file as File)
         : await createImageDataUrl(file.file as File)
     }
     const cssVarsRef = computed(() => {
