@@ -55,6 +55,18 @@ describe('n-image', () => {
     )
   })
 
+  it('should work with `previewSrc` prop', async () => {
+    const wrapper = mount(NImage)
+
+    await wrapper.setProps({
+      previewSrc: 'https://www.naiveui.com/assets/naivelogo.93278402.svg'
+    })
+
+    expect(wrapper.find('img').attributes('data-preview-src')).toBe(
+      'https://www.naiveui.com/assets/naivelogo.93278402.svg'
+    )
+  })
+
   it('should work with `showToolbar` prop', async () => {
     const wrapper = mount(NImage)
 
