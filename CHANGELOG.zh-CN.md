@@ -17,6 +17,7 @@
 ### i18n
 
 - 新增 deDE locale
+- 新增 nbNO locale
 
 ## 2.20.1 (2021-11-01)
 

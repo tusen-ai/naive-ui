@@ -17,6 +17,7 @@
 ### i18n
 
 - Add deDE locale.
+- Add nbNO locale.
 
 ## 2.20.1 (2021-11-01)
 
