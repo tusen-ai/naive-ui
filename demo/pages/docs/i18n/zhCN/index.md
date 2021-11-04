@@ -54,3 +54,5 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 乌克兰语   | ukUA | dateUkUA |
 | 简体中文   | zhCN | dateZhCN |
 | 印度尼西亚 | idID | dateIdID |
+| 德语       | deDE | dateDeDe |
+| 书面挪威语 | nbNO | dateNbNO |
