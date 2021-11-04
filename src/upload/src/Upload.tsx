@@ -29,6 +29,7 @@ import {
   XhrHandlers,
   FileInfo,
   DoChange,
+  UploadInst,
   UploadInternalInst,
   FuncOrRecordOrUndef,
   OnFinish,
@@ -301,7 +302,7 @@ export default defineComponent({
       controlledFileListRef,
       uncontrolledFileListRef
     )
-    function openFileDialog (): void {
+    function openOpenFileDialog (): void {
       inputElRef.value?.click()
     }
     function handleFileInputChange (e: Event): void {
@@ -509,7 +510,7 @@ export default defineComponent({
       getFileThumbnailUrl,
       listTypeRef: toRef(props, 'listType'),
       dragOverRef,
-      openFileDialog,
+      openOpenFileDialog,
       draggerInsideRef,
       handleFileAddition,
       mergedDisabledRef: formItem.mergedDisabledRef,
@@ -518,6 +519,12 @@ export default defineComponent({
       abstractRef: toRef(props, 'abstract'),
       cssVarsRef
     })
+
+    const exposedMethods: UploadInst = {
+      submit,
+      openOpenFileDialog
+    }
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       draggerInsideRef,
@@ -525,8 +532,8 @@ export default defineComponent({
       mergedTheme: themeRef,
       dragOver: dragOverRef,
       handleFileInputChange,
-      submit,
-      cssVars: cssVarsRef
+      cssVars: cssVarsRef,
+      ...exposedMethods
     }
   },
   render () {

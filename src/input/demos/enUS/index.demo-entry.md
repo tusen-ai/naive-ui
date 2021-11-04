@@ -52,7 +52,7 @@ event
 | on-change | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when native change event is fired. |
 | on-clear | `() => void` | `undefined` | Callback triggered when the input is cleared. |
 | on-focus | `() => void` | `undefined` | Callback triggered when the input is focussed on. |
-| on-input | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input value changes. |
+| on-input | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input gets user input. |
 | on-update:value | `(value: string \| [string, string]) => void` | `undefined` | Callback triggered when the input value changes. |
 
 ### Input Slots
