@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## 2.20.2 (2021-11-05)
+
+### Feats
+
+- `n-modal` 新增 `transform-origin` 属性，关闭 [#1498](https://github.com/TuSimple/naive-ui/issues/1498)
+- `n-tabs` 新增 `pane-class` 属性，关闭 [#1500](https://github.com/TuSimple/naive-ui/issues/1500)
+
+### Fixes
+
+- 修复 `n-alert` `contentTextColor` 和 `titleTextColor` 的类型主题变量不起作用，关闭 [#1495](https://github.com/TuSimple/naive-ui/issues/1495)
+- 修复 `n-upload` `UploadFileInfo` 的 `thumbnailUrl` 字段不起作用，关闭 [#1495](https://github.com/TuSimple/naive-ui/issues/1245)
+- 修复 `n-button` `keyboard` 属性不起作用，关闭 [#1508](https://github.com/TuSimple/naive-ui/issues/1508)
+- 修复 `n-upload` 实例缺少 `openOpenFileDialog` 方法
+
+### i18n
+
+- 新增 deDE locale
+- 新增 nbNO locale
+
 ## 2.20.1 (2021-11-01)
 
 ### Fixes
@@ -13,8 +32,8 @@
 ### Feats
 
 - `n-select` 新增 `menu-props` 属性，关闭 [#1475](https://github.com/TuSimple/naive-ui/issues/1475)
-- `n-image` 的 `toolbar` 增加关闭图标, 关闭 [#1412](https://github.com/TuSimple/naive-ui/issues/1412)
-- `n-tree` 的 `on-load` 属性在 `remote` 模式下 `expanded-keys` 属性改变时被触发, closes [#1339](https://github.com/TuSimple/naive-ui/issues/1339).
+- `n-image` 的 `toolbar` 增加关闭图标，关闭 [#1412](https://github.com/TuSimple/naive-ui/issues/1412)
+- `n-tree` 的 `on-load` 属性在 `remote` 模式下 `expanded-keys` 属性改变时被触发，关闭 [#1339](https://github.com/TuSimple/naive-ui/issues/1339)
 
 ## 2.20.0 (2021-10-28)
 

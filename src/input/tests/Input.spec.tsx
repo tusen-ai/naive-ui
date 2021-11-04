@@ -1,5 +1,8 @@
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NInput } from '../index'
+import InputGroup from '../src/InputGroup'
+import InputGroupLabel from '../src/InputGroupLabel'
 import WordCount from '../src/WordCount'
 
 describe('n-input', () => {
@@ -194,6 +197,66 @@ describe('n-input', () => {
     wrapper.find('input').element.focus()
     await wrapper.find('input').setValue('test')
     expect(onUpdateValue).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `prefix` slots', async () => {
+    const wrapper = mount(NInput, {
+      slots: { prefix: '￥' }
+    })
+    expect(wrapper.find('.n-input__prefix').exists()).toBe(true)
+    expect(wrapper.find('.n-input__prefix').text()).toBe('￥')
+    wrapper.unmount()
+  })
+
+  it('should work with `suffix` slots', async () => {
+    const wrapper = mount(NInput, {
+      slots: { suffix: '元' }
+    })
+    expect(wrapper.find('.n-input__suffix').exists()).toBe(true)
+    expect(wrapper.find('.n-input__suffix').text()).toBe('元')
+    wrapper.unmount()
+  })
+
+  it('should work with `separator` slot', async () => {
+    const wrapper = mount(NInput, {
+      props: { pair: true },
+      slots: { separator: '-' }
+    })
+
+    expect(wrapper.find('.n-input').classes()).toContain('n-input--pair')
+    expect(wrapper.find('.n-input__separator').text()).toBe('-')
+    wrapper.unmount()
+  })
+
+  it('should work with `InputGroup` `InputGroupLabel` slot', async () => {
+    const wrapper = mount(InputGroup, {
+      slots: {
+        default: () => [
+          h(InputGroupLabel, null, { default: () => 'test1' }),
+          h(NInput),
+          h(InputGroupLabel, null, { default: () => 'test2' })
+        ]
+      }
+    })
+
+    expect(wrapper.find('.n-input-group').exists()).toBe(true)
+    expect(wrapper.find('.n-input-group').element.children.length).toBe(3)
+    expect(
+      wrapper.find('.n-input-group').element.children[0].getAttribute('class')
+    ).toContain('n-input-group-label')
+    expect(wrapper.find('.n-input-group').element.children[0].textContent).toBe(
+      'test1'
+    )
+    expect(
+      wrapper.find('.n-input-group').element.children[1].getAttribute('class')
+    ).toContain('n-input')
+    expect(
+      wrapper.find('.n-input-group').element.children[2].getAttribute('class')
+    ).toContain('n-input-group-label')
+    expect(wrapper.find('.n-input-group').element.children[2].textContent).toBe(
+      'test2'
+    )
     wrapper.unmount()
   })
 })

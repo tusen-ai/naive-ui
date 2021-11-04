@@ -7,12 +7,16 @@ import {
   ukUA,
   jaJP,
   idID,
+  deDE,
+  nbNO,
   dateEnUS,
   dateZhCN,
   dateRuRU,
   dateUkUA,
   dateJaJP,
   dateIdID,
+  dateDeDE,
+  dateNbNO,
   NConfigProvider,
   NDateLocale,
   NLocale,
@@ -79,6 +83,22 @@ describe('locale', () => {
         props: {
           dateLocale: dateIdID,
           locale: idID
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateDeDE,
+          locale: deDE
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateNbNO,
+          locale: nbNO
         }
       }).html()
     ).toMatchSnapshot()
