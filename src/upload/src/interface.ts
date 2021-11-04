@@ -78,7 +78,7 @@ export interface UploadInjection {
   submit: (fileId?: string) => void
   getFileThumbnailUrl: (file: FileInfo) => Promise<string>
   handleFileAddition: (files: FileList | null, e?: Event) => void
-  openFileDialog: () => void
+  openOpenFileDialog: () => void
 }
 
 export const uploadInjectionKey: InjectionKey<UploadInjection> =
@@ -92,6 +92,7 @@ export interface XhrHandlers {
 }
 
 export interface UploadInst {
+  openOpenFileDialog: () => void
   submit: () => void
 }
 

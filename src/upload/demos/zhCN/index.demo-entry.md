@@ -76,7 +76,7 @@ retry-debug
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
 | submit | `(fileId?: string \| number)` | 提交当前所有处于 pending 状态的文件 |
-| openFileDialog | `() => void` | 打开文件选择对话框 |
+| openOpenFileDialog | `() => void` | 打开文件选择对话框 |
 
 ### Upload Slots
 
