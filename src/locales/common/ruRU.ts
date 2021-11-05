@@ -91,6 +91,15 @@ const ruRu: NLocale = {
     import: 'Импорт',
     export: 'Экспорт',
     restore: 'Сбросить'
+  },
+  Image: {
+    toolbarPrevious: 'previous picture',
+    toolbarNext: 'next picture',
+    toolbarCounterclockwise: 'counterclockwise',
+    toolbarClockwise: 'clockwise',
+    toolbarZoomOut: 'zoom out',
+    toolbarZoomIn: 'zoom in',
+    toolbarClose: 'close'
   }
 }
 

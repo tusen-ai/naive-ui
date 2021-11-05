@@ -91,6 +91,15 @@ const jaJP: NLocale = {
     import: 'インポート',
     export: 'エクスポート',
     restore: 'デフォルト'
+  },
+  Image: {
+    toolbarPrevious: 'previous picture',
+    toolbarNext: 'next picture',
+    toolbarCounterclockwise: 'counterclockwise',
+    toolbarClockwise: 'clockwise',
+    toolbarZoomOut: 'zoom out',
+    toolbarZoomIn: 'zoom in',
+    toolbarClose: 'close'
   }
 }
 

@@ -91,6 +91,15 @@ const deDE: NLocale = {
     import: 'Importieren',
     export: 'Exportieren',
     restore: 'Auf Standard zurücksetzen'
+  },
+  Image: {
+    toolbarPrevious: 'previous picture',
+    toolbarNext: 'next picture',
+    toolbarCounterclockwise: 'counterclockwise',
+    toolbarClockwise: 'clockwise',
+    toolbarZoomOut: 'zoom out',
+    toolbarZoomIn: 'zoom in',
+    toolbarClose: 'close'
   }
 }
 

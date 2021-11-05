@@ -89,6 +89,15 @@ const idID = {
     import: 'Impor',
     export: 'Ekspor',
     restore: 'Setel ulang ke awal'
+  },
+  Image: {
+    toolbarPrevious: 'previous picture',
+    toolbarNext: 'next picture',
+    toolbarCounterclockwise: 'counterclockwise',
+    toolbarClockwise: 'clockwise',
+    toolbarZoomOut: 'zoom out',
+    toolbarZoomIn: 'zoom in',
+    toolbarClose: 'close'
   }
 }
 

@@ -91,6 +91,15 @@ const ukUA: NLocale = {
     import: 'Імпорт',
     export: 'Експорт',
     restore: 'Скинути'
+  },
+  Image: {
+    toolbarPrevious: 'previous picture',
+    toolbarNext: 'next picture',
+    toolbarCounterclockwise: 'counterclockwise',
+    toolbarClockwise: 'clockwise',
+    toolbarZoomOut: 'zoom out',
+    toolbarZoomIn: 'zoom in',
+    toolbarClose: 'close'
   }
 }
 
