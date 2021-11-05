@@ -80,19 +80,6 @@ describe('n-image', () => {
     wrapper.unmount()
   })
 
-  it('should work with `showToolbar` prop `custom` value', async () => {
-    const wrapper = mount(NImage)
-
-    await wrapper.setProps({
-      showToolbar: 'custom'
-    })
-
-    await wrapper.find('img').trigger('click')
-
-    expect(document.querySelector('.n-image-preview-custom-toolbar')).not.toEqual(null)
-    wrapper.unmount()
-  })
-
   it('should work with `image group` prop', async () => {
     const wrapper = mount(NImageGroup, {
       slots: {
@@ -160,5 +147,17 @@ describe('n-image', () => {
     toolbars?.children[toolbars?.children.length - 1].dispatchEvent(new MouseEvent('click'))
     await nextTick()
     expect(document.querySelector('.n-image-preview-toolbar')).toEqual(null)
+  })
+  it('should work with `showToolbar custom` prop', async () => {
+    const wrapper = mount(NImage, {
+      props: {
+        showToolbar: 'custom'
+      }
+    })
+
+    await wrapper.find('img').trigger('click')
+
+    expect(document.querySelector('.n-image-preview-custom-toolbar')).not.toEqual(null)
+    wrapper.unmount()
   })
 })
