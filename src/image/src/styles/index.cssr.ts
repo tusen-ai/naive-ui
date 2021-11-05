@@ -71,10 +71,10 @@ export default c([
     font-size: 28px;
     cursor: pointer;
   `, [
-    c('&:hover',`
-      color: var(--text-color-hover);
-    `)
-  ]),
+      c('&:hover', `
+        color: var(--text-color-hover);
+      `)
+    ]),
     fadeInTransition()
   ]),
   cB('image-preview-wrapper', `

@@ -40,8 +40,7 @@ export interface ImagePreviewInst {
 export default defineComponent({
   name: 'ImagePreview',
   props: {
-    showToolbar: [Boolean,String]as PropType<boolean | 'native' | 'custom'>,
-    // toolbarStyle: String as PropType<'native' | 'custom'>,
+    showToolbar: [Boolean,String] as PropType<boolean | 'native' | 'custom'>,
     onNext: Function as PropType<() => void>,
     onPrev: Function as PropType<() => void>,
     clsPrefix: {
@@ -259,14 +258,14 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { 
+          self: {
             iconColor,
             color,
             textColor,
             textColorHover,
             borderRadius,
             boxShadow
-           }
+          }
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
@@ -318,7 +317,7 @@ export default defineComponent({
                               this.show ? (
                                 <div
                                   class={
-                                    this.showToolbar === 'custom' 
+                                    this.showToolbar === 'custom'
                                       ? `${clsPrefix}-image-preview-custom-toolbar`
                                       : `${clsPrefix}-image-preview-toolbar`
                                   }
