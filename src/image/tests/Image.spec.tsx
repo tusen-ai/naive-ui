@@ -80,6 +80,19 @@ describe('n-image', () => {
     wrapper.unmount()
   })
 
+  it('should work with `showToolbar` prop `custom` value', async () => {
+    const wrapper = mount(NImage)
+
+    await wrapper.setProps({
+      showToolbar: 'custom'
+    })
+
+    await wrapper.find('img').trigger('click')
+
+    expect(document.querySelector('.n-image-preview-custom-toolbar')).not.toEqual(null)
+    wrapper.unmount()
+  })
+
   it('should work with `image group` prop', async () => {
     const wrapper = mount(NImageGroup, {
       slots: {
