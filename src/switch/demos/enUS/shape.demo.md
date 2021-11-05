@@ -4,7 +4,7 @@ Switch can have square shape.
 
 ```html
 <n-space>
-    <n-switch v-model:value="active" :round="false" />  
+  <n-switch v-model:value="active" :round="false" />  
   <n-switch v-model:value="active" />
 </n-space>
 ```
