@@ -2,6 +2,7 @@ import { Ref, InjectionKey, CSSProperties } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { UploadTheme } from '../styles'
 import type { ImageProps } from '../../image/src/Image'
+
 export interface FileInfo {
   id: string
   name: string
@@ -78,7 +79,7 @@ export interface UploadInjection {
   submit: (fileId?: string) => void
   getFileThumbnailUrl: (file: FileInfo) => Promise<string>
   handleFileAddition: (files: FileList | null, e?: Event) => void
-  openOpenFileDialog: () => void,
+  openOpenFileDialog: () => void
   image: Ref<ImageProps | undefined>
 }
 
