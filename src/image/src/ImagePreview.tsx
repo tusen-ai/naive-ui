@@ -40,7 +40,7 @@ export interface ImagePreviewInst {
 export default defineComponent({
   name: 'ImagePreview',
   props: {
-    showToolbar: [Boolean,String] as PropType<boolean | 'native' | 'custom'>,
+    showToolbar: [Boolean, String] as PropType<boolean | 'native' | 'custom'>,
     onNext: Function as PropType<() => void>,
     onPrev: Function as PropType<() => void>,
     clsPrefix: {
