@@ -6,9 +6,8 @@ export type ModalBodyInjection = Ref<
 HTMLElement | ComponentPublicInstance | null
 > | null
 
-export const modalBodyInjectionKey: InjectionKey<ModalBodyInjection> = Symbol(
-  'modalBody'
-)
+export const modalBodyInjectionKey: InjectionKey<ModalBodyInjection> =
+  Symbol('modalBody')
 
 export interface ModalInjection {
   getMousePosition: () => {
@@ -19,6 +18,7 @@ export interface ModalInjection {
   mergedThemeRef: Ref<MergedTheme<ModalTheme>>
   isMountedRef: Ref<boolean>
   appearRef: Ref<boolean | undefined>
+  transformOriginRef: Ref<'mouse' | 'center'>
 }
 
 export const modalInjectionKey: InjectionKey<ModalInjection> = Symbol('modal')

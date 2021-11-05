@@ -23,6 +23,7 @@ export interface TabsInjection {
   typeRef: Ref<TabsType>
   closableRef: Ref<boolean>
   tabStyleRef: Ref<string | CSSProperties | undefined>
+  paneClassRef: Ref<string | undefined>
   paneStyleRef: Ref<string | CSSProperties | undefined>
   tabChangeIdRef: { id: number }
   onBeforeLeaveRef: Ref<OnBeforeLeave | undefined>

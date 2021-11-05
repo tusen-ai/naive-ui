@@ -45,4 +45,21 @@ describe('n-affix', () => {
     await makeScroll(document.documentElement, 'scrollTop', 200)
     expect(wrapper.attributes('style')).toContain('top: 120px;')
   })
+
+  it('should work with `position` prop', async () => {
+    const wrapper = mount(NAffix, {
+      props: {
+        position: 'absolute'
+      },
+      slots: {
+        default: () => {
+          return h('div', {}, 'content')
+        }
+      }
+    })
+
+    expect(wrapper.find('.n-affix--absolute-positioned').exists()).not.toBe(
+      null
+    )
+  })
 })
