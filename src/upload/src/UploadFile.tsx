@@ -197,6 +197,7 @@ export default defineComponent({
       showPreviewButton: showPreviewButtonRef,
       thumbnailUrl: thumbnailUrlRef,
       imageRef,
+      imageProps: NUpload.image,
       handleRemoveOrCancelClick,
       handleDownloadClick,
       handleRetryClick,
@@ -232,6 +233,7 @@ export default defineComponent({
               src={this.thumbnailUrl || file.thumbnailUrl || file.url || undefined}
               previewSrc={file.url || undefined}
               alt={file.name}
+              {...this.imageProps}
               ref="imageRef"
             />
           ) : (

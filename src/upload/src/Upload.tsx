@@ -15,6 +15,7 @@ import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
 import { useConfig, useTheme, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import type { ImageProps } from '../../image/src/Image'
 import {
   ExtractPublicPropTypes,
   warn,
@@ -184,6 +185,7 @@ function submitImpl (
 
 const uploadProps = {
   ...(useTheme.props as ThemeProps<UploadTheme>),
+  image: Object as PropType<ImageProps>,
   name: {
     type: String,
     default: 'file'
@@ -517,7 +519,8 @@ export default defineComponent({
       maxReachedRef,
       fileListStyleRef: toRef(props, 'fileListStyle'),
       abstractRef: toRef(props, 'abstract'),
-      cssVarsRef
+      cssVarsRef,
+      image: toRef(props, 'image')
     })
 
     const exposedMethods: UploadInst = {
