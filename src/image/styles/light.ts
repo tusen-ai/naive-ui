@@ -22,11 +22,10 @@ export const self = (vars: ThemeCommonVars) => {
 
 export type ImageThemeVars = ReturnType<typeof self>
 
-const imageLight: Theme<'Image', ImageThemeVars> = {
+export const imageLight: Theme<'Image', ImageThemeVars> = {
   name: 'Image',
   common: commonLight,
   self
 }
 
-export default imageLight
 export type ImageTheme = typeof imageLight

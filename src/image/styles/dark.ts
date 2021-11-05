@@ -2,7 +2,7 @@ import { commonDark } from '../../_styles/common'
 import { self } from './light'
 import type { ImageTheme } from './light'
 
-const imageDark: ImageTheme = {
+export const imageDark: ImageTheme = {
   name: 'Image',
   common: commonDark,
   self: (vars) => {
@@ -13,5 +13,3 @@ const imageDark: ImageTheme = {
     }
   }
 }
-
-export default imageDark
