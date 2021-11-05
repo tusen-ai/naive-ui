@@ -1,7 +1,7 @@
 # 成组使用
 
 ```html
-<n-image-group>
+<n-image-group show-toolbar="custom">
   <n-space>
     <n-image
       width="100"
