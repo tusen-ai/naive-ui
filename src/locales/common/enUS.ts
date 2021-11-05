@@ -89,6 +89,15 @@ const enUS = {
     import: 'Import',
     export: 'Export',
     restore: 'Reset to Default'
+  },
+  Image: {
+    toolbarPrevious: 'previous picture',
+    toolbarNext: 'next picture',
+    toolbarCounterclockwise: 'counterclockwise:',
+    toolbarClockwise: 'clockwise:',
+    toolbarZoomOut: 'zoom out',
+    toolbarZoomIn: 'zoom in',
+    toolbarClose: 'close'
   }
 }
 

@@ -91,6 +91,15 @@ const zhCN: NLocale = {
     import: '导入',
     export: '导出',
     restore: '恢复默认'
+  },
+  Image: {
+    toolbarPrevious: '上一张',
+    toolbarNext: '下一张',
+    toolbarCounterclockwise: '向左旋转',
+    toolbarClockwise: '向右旋转',
+    toolbarZoomOut: '缩小',
+    toolbarZoomIn: '放大',
+    toolbarClose: '关闭'
   }
 }
 
