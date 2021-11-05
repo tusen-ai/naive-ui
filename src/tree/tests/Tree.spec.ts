@@ -242,6 +242,59 @@ describe('n-tree', () => {
     expect(wrapper.find('.n-tree--block-line').exists()).toBe(true)
   })
 
+  it('should work witch `selectable`', async () => {
+    const wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: 'test',
+            key: '123',
+            children: [
+              {
+                label: '1231',
+                key: '1231'
+              }
+            ]
+          }
+        ]
+      }
+    })
+    expect(wrapper.find('.n-tree-node--selectable').exists()).toBe(true)
+    await wrapper.setProps({ selectable: false })
+    expect(wrapper.find('.n-tree-node--selectable').exists()).not.toBe(true)
+  })
+
+  it('should work witch `cancelable`', async () => {
+    const wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: 'test',
+            key: '123',
+            children: [
+              {
+                label: '1231',
+                key: '1231'
+              }
+            ]
+          }
+        ]
+      }
+    })
+
+    const node = wrapper.findAll('.n-tree-node-content')
+    await node[0].trigger('click')
+    expect(wrapper.find('.n-tree-node--selected').exists()).toBe(true)
+    await node[0].trigger('click')
+    expect(wrapper.find('.n-tree-node--selected').exists()).not.toBe(true)
+
+    await wrapper.setProps({ cancelable: false })
+    await node[0].trigger('click')
+    expect(wrapper.find('.n-tree-node--selected').exists()).toBe(true)
+    await node[0].trigger('click')
+    expect(wrapper.find('.n-tree-node--selected').exists()).toBe(true)
+  })
+
   it('should work with `disabled`', () => {
     const wrapper = mount(NTree, {
       props: {
@@ -303,5 +356,33 @@ describe('n-tree', () => {
         expect(onLoad).toHaveBeenCalled()
       })
     }, 0)
+  })
+
+  it('should work witch `multiple`', async () => {
+    const wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: '1',
+            key: '1'
+          },
+          {
+            label: '2',
+            key: '2'
+          },
+          {
+            label: '3',
+            key: '3'
+          }
+        ]
+      }
+    })
+    const node = wrapper.findAll('.n-tree-node-content')
+    await node[0].trigger('click')
+    await node[1].trigger('click')
+    expect(wrapper.findAll('.n-tree-node--selected').length).toBe(1)
+    await wrapper.setProps({ multiple: true })
+    await node[0].trigger('click')
+    expect(wrapper.findAll('.n-tree-node--selected').length).toBe(2)
   })
 })
