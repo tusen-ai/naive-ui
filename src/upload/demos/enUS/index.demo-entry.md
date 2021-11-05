@@ -45,6 +45,7 @@ abstract
 | show-file-list | `boolean` | `true` | Show a file list. |
 | show-preview-button | `boolean` | `true` | Show a preview button (when `list-type` is `image-card`). Use the `on-preview` callback for this event. |
 | with-credentials | `boolean` | `false` | Any credentials to be sent with the request (e.g. cookie). |
+| image | `object` | `undefined` | See [Image props](image#Image-Props) |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | Uploaded file(s) status change callback. |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | Callback function triggered on file-list changes. |
 | on-finish | `(options: { file: UploadFileInfo, event: Event }) => UploadFileInfo \| void` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`. |
