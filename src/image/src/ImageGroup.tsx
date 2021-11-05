@@ -6,6 +6,7 @@ import {
   InjectionKey,
   renderSlot,
   getCurrentInstance,
+  PropType,
   Ref
 } from 'vue'
 import { createId } from 'seemly'
@@ -19,7 +20,10 @@ ImagePreviewInst & { groupId: string, mergedClsPrefixRef: Ref<string> }
 > = Symbol('image-group')
 
 const imageGroupProps = {
-  showToolbar: { type: Boolean, default: true }
+  showToolbar: {
+    type: [Boolean, String] as PropType<boolean | 'native' | 'custom'>,
+    default: true
+  }
 }
 
 export type ImageGroupProps = ExtractPublicPropTypes<typeof imageGroupProps>
