@@ -15,6 +15,13 @@
 <n-divider />
 <n-upload
   action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+  :default-file-list="customFileList"
+  list-type="image-card"
+  :image="image"
+/>
+<n-divider />
+<n-upload
+  action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-file-list="previewFileList"
   list-type="image-card"
   @preview="handlePreview"
@@ -70,6 +77,14 @@ export default defineComponent({
           percentage: 99
         }
       ]),
+      customFileList: ref([
+        {
+          id: 'react',
+          name: '我是react.png',
+          status: 'finished',
+          url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+        }
+      ]),
       previewFileList: ref([
         {
           id: 'react',
@@ -83,7 +98,10 @@ export default defineComponent({
           status: 'finished',
           url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
         }
-      ])
+      ]),
+      image: {
+        showToolbar: 'custom'
+      }
     }
   }
 })
