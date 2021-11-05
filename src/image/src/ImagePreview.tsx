@@ -475,6 +475,12 @@ export default defineComponent({
                                     >
                                       {{ default: () => <ZoomInIcon /> }}
                                     </NBaseIcon>
+                                    <NBaseIcon
+                                      clsPrefix={clsPrefix}
+                                      onClick={this.toggleShow}
+                                    >
+                                      {{ default: () => closeIcon }}
+                                    </NBaseIcon>
                                   </div>
                                 )
                               ) : null
