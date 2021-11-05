@@ -41,7 +41,7 @@ export default defineComponent({
 
     const renderUploadFileList = (): VNode =>
       isImageCardTypeRef.value ? (
-        <NImageGroup>{{ default: renderFileList }}</NImageGroup>
+        <NImageGroup {...NUpload.image.value}>{{ default: renderFileList }}</NImageGroup>
       ) : (
         <NFadeInExpandTransition group>
           {{
