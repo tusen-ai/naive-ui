@@ -41,7 +41,10 @@ const imageProps = {
   previewSrc: String,
   width: [String, Number] as PropType<string | number>,
   src: String,
-  showToolbar: { type: Boolean, default: true },
+  showToolbar: {
+    type: [Boolean, String] as PropType<boolean | 'native' | 'custom'>,
+    default: true
+  },
   onError: Function as PropType<(e: Event) => void>
 }
 
