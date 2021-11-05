@@ -1,3 +1,3 @@
-export { imageLight } from './light'
-export { imageDark } from './dark'
+export { default as imageLight } from './light'
+export { default as imageDark } from './dark'
 export type { ImageTheme, ImageThemeVars } from './light'

@@ -50,6 +50,33 @@ export default c([
     `),
     fadeInTransition()
   ]),
+  cB('image-preview-custom-toolbar', `
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: var(--border-radius);
+    height: 48px;
+    bottom: 40px;
+    padding: 2px 12px;
+    background-color: var(--color);
+    color: var(--text-color);
+    transition: color .3s var(--bezier);
+    display: flex;
+    align-items: center;
+    box-shadow: var(--box-shadow)
+  `, [
+    cB('base-icon', `
+    padding: 8px;
+    font-size: 28px;
+    cursor: pointer;
+  `, [
+    c('&:hover',`
+      color: var(--text-color-hover);
+    `)
+  ]),
+    fadeInTransition()
+  ]),
   cB('image-preview-wrapper', `
     position: absolute;
     left: 0;

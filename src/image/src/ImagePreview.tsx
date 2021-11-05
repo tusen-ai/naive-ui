@@ -24,7 +24,8 @@ import {
   ZoomInIcon,
   ZoomOutIcon
 } from '../../_internal/icons'
-import { useTheme } from '../../_mixins'
+import { NTooltip } from '../../tooltip'
+import { useLocale, useTheme } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import { imageLight } from '../styles'
 import { prevIcon, nextIcon, closeIcon } from './icons'
@@ -39,7 +40,8 @@ export interface ImagePreviewInst {
 export default defineComponent({
   name: 'ImagePreview',
   props: {
-    showToolbar: Boolean,
+    showToolbar: [Boolean,String]as PropType<boolean | 'native' | 'custom'>,
+    // toolbarStyle: String as PropType<'native' | 'custom'>,
     onNext: Function as PropType<() => void>,
     onPrev: Function as PropType<() => void>,
     clsPrefix: {
@@ -229,7 +231,10 @@ export default defineComponent({
       toggleShow
     }
 
+    const { localeRef } = useLocale('Image')
+
     return {
+      locale: localeRef,
       previewRef,
       previewWrapperRef,
       previewSrc: previewSrcRef,
@@ -254,11 +259,23 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { iconColor }
+          self: { 
+            iconColor,
+            color,
+            textColor,
+            textColorHover,
+            borderRadius,
+            boxShadow
+           }
         } = themeRef.value
         return {
           '--bezier': cubicBezierEaseInOut,
-          '--icon-color': iconColor
+          '--icon-color': iconColor,
+          '--color': color,
+          '--text-color': textColor,
+          '--text-color-hover': textColorHover,
+          '--border-radius': borderRadius,
+          '--box-shadow': boxShadow
         }
       })
     }
@@ -300,58 +317,123 @@ export default defineComponent({
                             default: () =>
                               this.show ? (
                                 <div
-                                  class={`${clsPrefix}-image-preview-toolbar`}
+                                  class={
+                                    this.showToolbar === 'custom' 
+                                      ? `${clsPrefix}-image-preview-custom-toolbar`
+                                      : `${clsPrefix}-image-preview-toolbar`
+                                  }
                                 >
                                   {this.onPrev ? (
                                     <>
-                                      <NBaseIcon
-                                        clsPrefix={clsPrefix}
-                                        onClick={this.handleSwitchPrev}
-                                      >
-                                        {{ default: () => prevIcon }}
-                                      </NBaseIcon>
-                                      <NBaseIcon
-                                        clsPrefix={clsPrefix}
-                                        onClick={this.handleSwitchNext}
-                                      >
-                                        {{ default: () => nextIcon }}
-                                      </NBaseIcon>
+                                      <NTooltip>
+                                        {{
+                                          default: () => `${this.locale.toolbarPrevious}(←)`,
+                                          trigger: () => (
+                                            <NBaseIcon
+                                              clsPrefix={clsPrefix}
+                                              onClick={this.handleSwitchPrev}
+                                            >
+                                              {{ default: () => prevIcon }}
+                                            </NBaseIcon>
+                                          )
+                                        }}
+                                      </NTooltip>
+                                      <NTooltip>
+                                        {{
+                                          default: () => `${this.locale.toolbarNext}(→)`,
+                                          trigger: () => (
+                                            <NBaseIcon
+                                              clsPrefix={clsPrefix}
+                                              onClick={this.handleSwitchNext}
+                                            >
+                                              {{ default: () => nextIcon }}
+                                            </NBaseIcon>
+                                          )
+                                        }}
+                                      </NTooltip>
                                     </>
                                   ) : null}
-                                  <NBaseIcon
-                                    clsPrefix={clsPrefix}
-                                    onClick={this.rotateCounterclockwise}
-                                  >
+                                  <NTooltip>
                                     {{
-                                      default: () => (
-                                        <RotateCounterclockwiseIcon />
+                                      default: () => this.locale.toolbarCounterclockwise,
+                                      trigger: () => (
+                                        <NBaseIcon
+                                          clsPrefix={clsPrefix}
+                                          onClick={this.rotateCounterclockwise}
+                                        >
+                                          {{
+                                            default: () => (
+                                              <RotateCounterclockwiseIcon />
+                                            )
+                                          }}
+                                        </NBaseIcon>
                                       )
                                     }}
-                                  </NBaseIcon>
-                                  <NBaseIcon
-                                    clsPrefix={clsPrefix}
-                                    onClick={this.rotateClockwise}
-                                  >
-                                    {{ default: () => <RotateClockwiseIcon /> }}
-                                  </NBaseIcon>
-                                  <NBaseIcon
-                                    clsPrefix={clsPrefix}
-                                    onClick={this.zoomOut}
-                                  >
-                                    {{ default: () => <ZoomOutIcon /> }}
-                                  </NBaseIcon>
-                                  <NBaseIcon
-                                    clsPrefix={clsPrefix}
-                                    onClick={this.zoomIn}
-                                  >
-                                    {{ default: () => <ZoomInIcon /> }}
-                                  </NBaseIcon>
-                                  <NBaseIcon
-                                    clsPrefix={clsPrefix}
-                                    onClick={this.toggleShow}
-                                  >
-                                    {{ default: () => closeIcon }}
-                                  </NBaseIcon>
+                                  </NTooltip>
+                                  <NTooltip>
+                                    {{
+                                      default: () => this.locale.toolbarClockwise,
+                                      trigger: () => (
+                                        <NBaseIcon
+                                          clsPrefix={clsPrefix}
+                                          onClick={this.rotateClockwise}
+                                        >
+                                          {{
+                                            default: () => (
+                                              <RotateClockwiseIcon />
+                                            )
+                                          }}
+                                        </NBaseIcon>
+                                      )
+                                    }}
+                                  </NTooltip>
+                                  <NTooltip>
+                                    {{
+                                      default: () => this.locale.toolbarZoomOut,
+                                      trigger: () => (
+                                        <NBaseIcon
+                                          clsPrefix={clsPrefix}
+                                          onClick={this.zoomOut}
+                                        >
+                                          {{
+                                            default: () => (
+                                              <ZoomOutIcon />
+                                            )
+                                          }}
+                                        </NBaseIcon>
+                                      )
+                                    }}
+                                  </NTooltip>
+                                  <NTooltip>
+                                    {{
+                                      default: () => this.locale.toolbarZoomIn,
+                                      trigger: () => (
+                                        <NBaseIcon
+                                          clsPrefix={clsPrefix}
+                                          onClick={this.zoomIn}
+                                        >
+                                          {{
+                                            default: () => (
+                                              <ZoomInIcon />
+                                            )
+                                          }}
+                                        </NBaseIcon>
+                                      )
+                                    }}
+                                  </NTooltip>
+                                  <NTooltip>
+                                    {{
+                                      default: () => `${this.locale.toolbarClose}(Esc)`,
+                                      trigger: () => (
+                                        <NBaseIcon
+                                          clsPrefix={clsPrefix}
+                                          onClick={this.toggleShow}
+                                        >
+                                          {{ default: () => closeIcon }}
+                                        </NBaseIcon>
+                                      )
+                                    }}
+                                  </NTooltip>
                                 </div>
                               ) : null
                           }}
