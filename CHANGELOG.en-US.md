@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-image` add `showToolbar` prop supports `native` and `custom` value，closes [#1531](https://github.com/TuSimple/naive-ui/issues/1531)
+
 ## 2.20.2 (2021-11-05)
 
 ### Feats

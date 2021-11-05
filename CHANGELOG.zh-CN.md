@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-image` 新增 `showToolbar` 属性支持 `native` 和 `custom` 值，关闭 [#1531](https://github.com/TuSimple/naive-ui/issues/1531)
+
 ## 2.20.2 (2021-11-05)
 
 ### Feats
