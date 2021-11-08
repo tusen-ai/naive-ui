@@ -6,6 +6,10 @@
 
 - 修复 `n-menu` 的 `defaultExpandedKeys` 使用 watchEffect 初始化，关闭 [#1536](https://github.com/TuSimple/naive-ui/issues/1536)
 
+### Feats
+
+- `n-menu` 添加箭头颜色区分选中未选中，关闭 [#1535](https://github.com/TuSimple/naive-ui/issues/1535)
+
 ## 2.20.2 (2021-11-05)
 
 ### Feats
