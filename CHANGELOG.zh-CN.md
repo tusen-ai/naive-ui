@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- `n-menu` 添加箭头颜色区分选中未选中，关闭 [#1535](https://github.com/TuSimple/naive-ui/issues/1535)
+
 ## 2.20.2 (2021-11-05)
 
 ### Feats
