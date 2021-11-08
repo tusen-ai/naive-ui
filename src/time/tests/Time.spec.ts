@@ -32,7 +32,7 @@ describe('n-time', () => {
     await wrapper.setProps({
       timezone: 'America/New_York'
     })
-    expect(wrapper.find('time').text()).toContain('1969/12/31 20:00:00')
+    expect(wrapper.find('time').text()).toContain('1969/12/31 19:00:00')
   })
 
   it('should work with `type` prop', async () => {
