@@ -208,10 +208,6 @@ export default defineComponent({
         mouseDownClientX,
         mouseDownClientY
       })
-      console.log(
-        '🚀 ~ file: ImagePreview.tsx ~ line 174 ~ handleMouseUp ~ moveStrategy',
-        moveStrategy
-      )
       const offset = getDerivedOffset(moveStrategy)
       offsetX = offset.offsetX
       offsetY = offset.offsetY
