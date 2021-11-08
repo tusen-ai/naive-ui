@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-menu` 's `defaultExpandedKeys` use watchEffect initialize, closes [#1536](https://github.com/TuSimple/naive-ui/issues/1536).
+
 ## 2.20.2 (2021-11-05)
 
 ### Feats
