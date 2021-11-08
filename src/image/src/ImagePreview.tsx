@@ -35,6 +35,11 @@ export interface ImagePreviewInst {
   setPreviewSrc: (src?: string) => void
   toggleShow: () => void
 }
+type MoveStrategy =
+  | 'verticalTop'
+  | 'verticalBottom'
+  | 'horizontalLeft'
+  | 'horizontalRight'
 
 export default defineComponent({
   name: 'ImagePreview',
@@ -98,6 +103,9 @@ export default defineComponent({
     let startY = 0
     let offsetX = 0
     let offsetY = 0
+    let mouseDownClientX = 0
+    let mouseDownClientY = 0
+
     let dragging = false
     function handleMouseMove (e: MouseEvent): void {
       const { clientX, clientY } = e
@@ -105,14 +113,47 @@ export default defineComponent({
       offsetY = clientY - startY
       beforeNextFrameOnce(derivePreviewStyle)
     }
+    function getMoveDirection (opts: {
+      mouseUpClientX: number
+      mouseUpClientY: number
+      mouseDownClientX: number
+      mouseDownClientY: number
+    }):
+      | 'verticalTop'
+      | 'verticalBottom'
+      | 'horizontalLeft'
+      | 'horizontalRight' {
+      const {
+        mouseUpClientX,
+        mouseUpClientY,
+        mouseDownClientX,
+        mouseDownClientY
+      } = opts
+      const deltaHorizontal = mouseDownClientX - mouseUpClientX
+      const deltaVertical = mouseDownClientY - mouseUpClientY
+      const direction =
+        Math.abs(deltaVertical) - Math.abs(deltaHorizontal) > 0
+          ? 'vertical'
+          : 'horizontal'
+      if (direction === 'vertical') {
+        return (direction + (deltaVertical > 0 ? 'Top' : 'Bottom')) as
+          | 'verticalTop'
+          | 'verticalBottom'
+      } else {
+        return (direction + (deltaHorizontal > 0 ? 'Left' : 'Right')) as
+          | 'horizontalLeft'
+          | 'horizontalRight'
+      }
+    }
     // avoid image move outside viewport
-    function getDerivedOffset (): {
+    function getDerivedOffset (moveStrategy?: MoveStrategy): {
       offsetX: number
       offsetY: number
     } {
       const { value: preview } = previewRef
       if (!preview) return { offsetX: 0, offsetY: 0 }
       const pbox = preview.getBoundingClientRect()
+
       let nextOffsetX = 0
       let nextOffsetY = 0
       if (pbox.width <= window.innerWidth) {
@@ -121,24 +162,57 @@ export default defineComponent({
         nextOffsetX = (pbox.width - window.innerWidth) / 2
       } else if (pbox.right < window.innerWidth) {
         nextOffsetX = -(pbox.width - window.innerWidth) / 2
+      } else if (moveStrategy === 'horizontalRight') {
+        nextOffsetX = Math.min(
+          (pbox.width - window.innerWidth) / 2,
+          offsetX + window.innerWidth / 2
+        )
+      } else if (moveStrategy === 'horizontalLeft') {
+        nextOffsetX = Math.max(
+          -((pbox.width - window.innerWidth) / 2),
+          offsetX - window.innerWidth / 2
+        )
       }
+
       if (pbox.height <= window.innerHeight) {
         nextOffsetY = 0
       } else if (pbox.top > 0) {
         nextOffsetY = (pbox.height - window.innerHeight) / 2
       } else if (pbox.bottom < window.innerHeight) {
         nextOffsetY = -(pbox.height - window.innerHeight) / 2
+      } else if (moveStrategy === 'verticalBottom') {
+        nextOffsetY = Math.min(
+          (pbox.height - window.innerHeight) / 2,
+          offsetY + window.innerHeight / 2
+        )
+      } else if (moveStrategy === 'verticalTop') {
+        nextOffsetY = Math.max(
+          -((pbox.height - window.innerHeight) / 2),
+          offsetY - window.innerHeight / 2
+        )
       }
+
       return {
         offsetX: nextOffsetX,
         offsetY: nextOffsetY
       }
     }
-    function handleMouseUp (): void {
+    function handleMouseUp (e: MouseEvent): void {
       off('mousemove', document, handleMouseMove)
       off('mouseup', document, handleMouseUp)
+      const { clientX: mouseUpClientX, clientY: mouseUpClientY } = e
       dragging = false
-      const offset = getDerivedOffset()
+      const moveStrategy = getMoveDirection({
+        mouseUpClientX,
+        mouseUpClientY,
+        mouseDownClientX,
+        mouseDownClientY
+      })
+      console.log(
+        '🚀 ~ file: ImagePreview.tsx ~ line 174 ~ handleMouseUp ~ moveStrategy',
+        moveStrategy
+      )
+      const offset = getDerivedOffset(moveStrategy)
       offsetX = offset.offsetX
       offsetY = offset.offsetY
       derivePreviewStyle()
@@ -148,6 +222,9 @@ export default defineComponent({
       dragging = true
       startX = clientX - offsetX
       startY = clientY - offsetY
+      mouseDownClientX = clientX
+      mouseDownClientY = clientY
+
       derivePreviewStyle()
       on('mousemove', document, handleMouseMove)
       on('mouseup', document, handleMouseUp)
@@ -243,6 +320,9 @@ export default defineComponent({
         rotate = 0
         scale = 1
         displayedRef.value = false
+      },
+      handleDragStart: (e: Event) => {
+        e.preventDefault()
       },
       zoomIn,
       zoomOut,
@@ -382,6 +462,7 @@ export default defineComponent({
                                   key={this.previewSrc}
                                   src={this.previewSrc}
                                   ref="previewRef"
+                                  onDragstart={this.handleDragStart}
                                 />
                               </div>,
                               [[vShow, this.show]]
