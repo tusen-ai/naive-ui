@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.20.2 (2021-11-05)
 
 ### Feats
 
@@ -11,6 +11,14 @@
 
 - Fix `n-alert` `contentTextColor` and `titleTextColor` type theme variable not working, closes [#1495](https://github.com/TuSimple/naive-ui/issues/1495).
 - Fix `n-time-picker` not trigger blur event when the panel is closed by ok button, closes [#1499](https://github.com/TuSimple/naive-ui/issues/1499).
+- Fix `n-upload` `UploadFileInfo`'s `thumbnailUrl` field not working, closes [#1495](https://github.com/TuSimple/naive-ui/issues/1245).
+- Fix `n-button` `keyboard` prop does not work, closes [#1508](https://github.com/TuSimple/naive-ui/issues/1508).
+- Fix `n-upload` instance misses `openOpenFileDialog` method.
+
+### i18n
+
+- Add deDE locale.
+- Add nbNO locale.
 
 ## 2.20.1 (2021-11-01)
 
