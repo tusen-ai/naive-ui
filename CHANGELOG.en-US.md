@@ -70,6 +70,7 @@
 - Fix `n-upload` `UploadFileInfo`'s `thumbnailUrl` field not working, closes [#1495](https://github.com/TuSimple/naive-ui/issues/1245).
 - Fix `n-button` `keyboard` prop does not work, closes [#1508](https://github.com/TuSimple/naive-ui/issues/1508).
 - Fix `n-upload` instance misses `openOpenFileDialog` method.
+- Fix `n-image` drag the picture to move the position incorrectly when the zoom is large.
 
 ### i18n
 

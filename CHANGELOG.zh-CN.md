@@ -70,6 +70,7 @@
 - 修复 `n-upload` `UploadFileInfo` 的 `thumbnailUrl` 字段不起作用，关闭 [#1495](https://github.com/TuSimple/naive-ui/issues/1245)
 - 修复 `n-button` `keyboard` 属性不起作用，关闭 [#1508](https://github.com/TuSimple/naive-ui/issues/1508)
 - 修复 `n-upload` 实例缺少 `openOpenFileDialog` 方法
+- 修复 `n-image` 当放大很大的时候拖动图片移动位置不正确
 
 ### i18n
 
