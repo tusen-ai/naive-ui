@@ -189,7 +189,7 @@ const treeProps = {
   onDragover: [Function, Array] as PropType<
   MaybeArray<(e: TreeDragInfo) => void>
   >,
-  onDrop: [Function, Array] as PropType<MaybeArray<(e: TreeDragInfo) => void>>,
+  onDrop: [Function, Array] as PropType<MaybeArray<(e: TreeDropInfo) => void>>,
   onUpdateCheckedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
   'onUpdate:checkedKeys': [Function, Array] as PropType<
   MaybeArray<OnUpdateKeys>
