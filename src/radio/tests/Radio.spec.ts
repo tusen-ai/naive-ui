@@ -1,5 +1,6 @@
+import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NRadio } from '../index'
+import { NRadio, NRadioGroup } from '../index'
 
 describe('n-radio', () => {
   it('should work with import on demand', () => {
@@ -51,5 +52,18 @@ describe('n-radio', () => {
 
     await wrapper.setProps({ size: 'large' })
     expect(wrapper.find('.n-radio').attributes('style')).toMatchSnapshot()
+  })
+})
+
+describe('n-radio-group', () => {
+  it('should work with import on demand', () => {
+    mount(NRadioGroup, {
+      slots: {
+        default: () => [
+          h(NRadio, null, { default: () => 'test-item1' }),
+          h(NRadio, null, { default: () => 'test-item2' })
+        ]
+      }
+    })
   })
 })
