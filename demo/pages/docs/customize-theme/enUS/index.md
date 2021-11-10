@@ -39,9 +39,15 @@ If `theme` is `undefined` it won't affect the theme of components inside.
 
 No CSS (Scss, Less) needed.
 
+The configured global theme variables will overwrite the theme variables that take effect on descendant components.
+
 Set `n-config-provider`'s `theme-overrides` to customize theme vars. Naive-ui exports type `GlobalThemeOverrides` to help you define `theme-overrides`.
 
 For available vars please follow the type hint of `GlobalThemeOverrides`.
+
+If you want to view more theme variables, you can view them in the edit button at the bottom right corner of the Naive UI homepage.
+
+You can modify the corresponding theme variable, you can get the themeOverrides object after export.
 
 ```html
 <script>
@@ -77,9 +83,73 @@ For available vars please follow the type hint of `GlobalThemeOverrides`.
 </template>
 ```
 
+## Customizing Component Theme Vars
+
+The use of component theme variables is the same as the use of global theme variables, and the component theme variables will override the global theme variables.
+
+```html
+<script>
+
+  /**
+   * @type import('naive-ui').GlobalThemeOverrides
+   */
+  const themeOverrides = {
+    Button: {
+      textColor: '#FF0000'，
+      border: '1px solid #FF0000'
+    }
+  }
+
+  // ...
+</script>
+
+<template>
+  <n-button :theme-overrides="themeOverrides"> theme </n-button>
+</template>
+```
+
+## Customizing Theme Vars Under Different Theme
+
+If you want to use different theme variables on light and dark theme at the same time, you can take a look at this.
+
+```html
+<script>
+  import { NConfigProvider, darkTheme } from 'naive-ui'
+
+  /**
+   * @type import('naive-ui').GlobalThemeOverrides
+   */
+  const lightThemeOverrides = {
+    common: {
+      primaryColor: '#000000'
+    }
+    // ...
+  }
+
+  const darkThemeOverrides = {
+    common: {
+      primaryColor: '#FFFFFF'
+    }
+    // ...
+  }
+
+  const theme = null
+  // ...
+</script>
+
+<template>
+  <n-config-provider
+    :theme="theme"
+    :theme-overrides="theme === null ? lightThemeOverrides : darkThemeOverrides"
+  >
+    <my-app />
+  </n-config-provider>
+</template>
+```
+
 ## Sync Style of the Body Element
 
-For the following reasons, you may need to set some styles on `document.body`
+For the following reasons, you may need to set some styles on `document.body`.
 
 1. Naive-ui will mount some global style that is unresponsive (to theme, not media query). For example `font-family`. The style works fine by default, however they won't change when theme is changed.
 2. `n-config-provider` can't sync global style (for example, body's background color) outside it.
@@ -99,7 +169,7 @@ You can use `n-global-style` to sync common global style to the body element. In
 
 Naive-ui provides theme editor to help you edit theme and export the corresponding configuration. It can be placed inside `n-config-provider`.
 
-The theme editor is not included in global installation (`app.use(naive)`). You need to import it explicitly to use it
+The theme editor is not included in global installation (`app.use(naive)`). You need to import it explicitly to use it.
 
 ```html
 <template>

@@ -39,9 +39,15 @@ Naive UI 通过使用 `n-config-provider` 调整主题。
 
 你不需要写任何 CSS（Scss、Less...）。
 
+配置的全局主题变量会对后代组件生效的主题变量覆盖。
+
 通过设定 `n-config-provider` 的 `theme-overrides` 来调整主题变量。naive-ui 导出了 `GlobalThemeOverrides` 类型帮助你定义主题。
 
 具体可使用变量请参考 `GlobalThemeOverrides` 类型提示。
+
+如果想要查看更多的主题变量，可在 Naive UI 主页的右下角的 edit 按钮查看。
+
+可以修改对应的主题变量，导出后可以拿到 themeOverrides 对象。
 
 ```html
 <script>
@@ -72,6 +78,70 @@ Naive UI 通过使用 `n-config-provider` 调整主题。
 
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
+    <my-app />
+  </n-config-provider>
+</template>
+```
+
+## 调整组件主题变量
+
+组件主题变量使用方法同全局主题变量使用方法，并且组件主题变量会覆盖全局主题变量。
+
+```html
+<script>
+
+  /**
+   * @type import('naive-ui').GlobalThemeOverrides
+   */
+  const themeOverrides = {
+    Button: {
+      textColor: '#FF0000'，
+      border: '1px solid #FF0000'
+    }
+  }
+
+  // ...
+</script>
+
+<template>
+  <n-button :theme-overrides="themeOverrides"> theme </n-button>
+</template>
+```
+
+## 不同主题下调整主题变量
+
+如果你想要在亮色和暗色上同时使用不同的主题变量，可以来看看这个。
+
+```html
+<script>
+  import { NConfigProvider, darkTheme } from 'naive-ui'
+
+  /**
+   * @type import('naive-ui').GlobalThemeOverrides
+   */
+  const lightThemeOverrides = {
+    common: {
+      primaryColor: '#000000'
+    }
+    // ...
+  }
+
+  const darkThemeOverrides = {
+    common: {
+      primaryColor: '#FFFFFF'
+    }
+    // ...
+  }
+
+  const theme = null
+  // ...
+</script>
+
+<template>
+  <n-config-provider
+    :theme="theme"
+    :theme-overrides="theme === null ? lightThemeOverrides : darkThemeOverrides"
+  >
     <my-app />
   </n-config-provider>
 </template>
