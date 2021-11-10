@@ -5,6 +5,7 @@
 ### Feats
 
 `n-popover` 新增 `shift` 属性
+- `n-carousel` 新增 `dotShape` 和 `dotPlacement` 属性，关闭 [#1462](https://github.com/TuSimple/naive-ui/issues/1462)
 
 ## 2.23.2 (2021-12-29)
 

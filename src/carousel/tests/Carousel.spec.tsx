@@ -49,14 +49,42 @@ describe('n-carousel', () => {
   })
 
   it('should work with `dotPlacement` prop', async () => {
-    const wrapper = mount(NCarousel)
+    const wrapper = mount(NCarousel, {
+      slots: {
+        default: () => {
+          return [...Array(3).keys()].map((i) => {
+            return h('div', {}, i.toString())
+          })
+        }
+      }
+    })
 
-    for (const placement of ['top', 'bottom', 'left', 'right'] as const) {
+    for (const placement of [
+      'top',
+      'bottom',
+      'left',
+      'right',
+      'outer'
+    ] as const) {
       await wrapper.setProps({ dotPlacement: placement })
       expect(wrapper.find('.n-carousel').classes()).toContain(
         `n-carousel--${placement}`
       )
     }
+  })
+
+  it('should work with `dotShape` prop', async () => {
+    const wrapper = mount(NCarousel, {
+      slots: {
+        default: () => {
+          return [...Array(3).keys()].map((i) => {
+            return h('div', {}, i.toString())
+          })
+        }
+      }
+    })
+    await wrapper.setProps({ dotShape: 'slider' })
+    expect(wrapper.find('.n-carousel__dots--slider').exists()).toBe(true)
   })
 
   it('should work with `interval` prop', async () => {

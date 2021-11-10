@@ -28,8 +28,12 @@ const carouselProps = {
   showArrow: Boolean,
   autoplay: Boolean,
   dotPlacement: {
-    type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
+    type: String as PropType<'top' | 'bottom' | 'left' | 'right' | 'outer'>,
     default: 'bottom'
+  },
+  dotShape: {
+    type: String as PropType<'dot' | 'line' | 'slider'>,
+    default: 'dot'
   },
   interval: {
     type: Number,
@@ -260,13 +264,35 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { dotColor, dotColorActive, dotSize, arrowColor }
+          self: {
+            dotsSliderWidth,
+            dotsSliderHeight,
+            dotColor,
+            dotColorActive,
+            outerDotColor,
+            outerDotColorActive,
+            dotSize,
+            dotRadius,
+            dotMargin,
+            lineWidth,
+            lineHeight,
+            lineRadius,
+            arrowColor
+          }
         } = themeRef.value
         return {
           '--n-bezier': cubicBezierEaseInOut,
+          '--n-dots-slider-width': dotsSliderWidth,
+          '--n-dots-slider-height': dotsSliderHeight,
+          '--n-dots-slider-radius': lineRadius,
           '--n-dot-color': dotColor,
           '--n-dot-color-active': dotColorActive,
-          '--n-dot-size': dotSize,
+          '--n-outer-dot-color': outerDotColor,
+          '--n-outer-dot-color-active': outerDotColorActive,
+          '--n-dot-width': props.dotShape === 'dot' ? dotSize : lineWidth,
+          '--n-dot-height': props.dotShape === 'dot' ? dotSize : lineHeight,
+          '--n-dot-radius': props.dotShape === 'dot' ? dotRadius : lineRadius,
+          '--n-dot-margin': props.dotShape === 'slider' ? 0 : dotMargin,
           '--n-arrow-color': arrowColor
         }
       })
@@ -275,6 +301,7 @@ export default defineComponent({
   render () {
     const {
       showArrow,
+      dotShape,
       dotPlacement,
       mergedClsPrefix,
       current,
@@ -328,7 +355,13 @@ export default defineComponent({
             )
           )}
         </div>
-        <div class={`${mergedClsPrefix}-carousel__dots`} role="tablist">
+        <div
+          class={[
+            `${mergedClsPrefix}-carousel__dots`,
+            dotShape === 'slider' && `${mergedClsPrefix}-carousel__dots--slider`
+          ]}
+          role="tablist"
+        >
           {indexMap(length, (i) => {
             const selected = i + 1 === current
             return (
@@ -338,7 +371,9 @@ export default defineComponent({
                 tabindex="0"
                 class={[
                   `${mergedClsPrefix}-carousel__dot`,
-                  selected && `${mergedClsPrefix}-carousel__dot--active`
+                  selected && `${mergedClsPrefix}-carousel__dot--active`,
+                  dotShape === 'slider' &&
+                    `${mergedClsPrefix}-carousel__dot--slider`
                 ]}
                 onClick={() => this.setCurrent(i + 1)}
                 onMouseenter={() => this.handleMouseenter(i + 1)}

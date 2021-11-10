@@ -1,17 +1,15 @@
-# 更改指示点位置
+# 更改指示点形状
 
-设定 `dot-placement` 来更改指示器位置。
+设定 `dot-shape` 来更改指示器形状。
 
 ```html
 <n-space>
-  <n-radio-group v-model:value="dotPlacement">
-    <n-radio-button value="bottom">bottom</n-radio-button>
-    <n-radio-button value="top">top</n-radio-button>
-    <n-radio-button value="left">left</n-radio-button>
-    <n-radio-button value="right">right</n-radio-button>
-    <n-radio-button value="outer">outer</n-radio-button>
+  <n-radio-group v-model:value="dotShape">
+    <n-radio-button value="dot">dot</n-radio-button>
+    <n-radio-button value="line">line</n-radio-button>
+    <n-radio-button value="slider">slider</n-radio-button>
   </n-radio-group>
-  <n-carousel :dot-placement="dotPlacement" style="height: 240px;">
+  <n-carousel :dot-shape="dotShape" style="height: 240px;">
     <img
       class="carousel-img"
       src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
@@ -37,9 +35,9 @@ import { ref } from 'vue'
 
 export default {
   setup () {
-    const dotPlacementRef = ref('bottom')
+    const dotShapeRef = ref('dot')
     return {
-      dotPlacement: dotPlacementRef
+      dotShape: dotShapeRef
     }
   }
 }

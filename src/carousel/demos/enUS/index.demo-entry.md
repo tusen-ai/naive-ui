@@ -10,6 +10,7 @@ autoplay
 hover
 dot-placement
 show-arrow
+dot-shape
 ```
 
 ## API
@@ -20,7 +21,8 @@ show-arrow
 | --- | --- | --- | --- |
 | autoplay | `boolean` | `false` | Whether to scroll automatically. |
 | interval | `number` | `5000` | Auto play interval (ms). |
-| dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Dot placement in the panel. |
+| dot-placement | `'top' \| 'bottom' \| 'left' \| 'right' \| 'outer'` | `'bottom'` | Dot placement in the panel. |
+| dot-shape | `'dot' \| 'line' \| 'slider'` | `'dot'` | Indicator shape. |
 | show-arrow | `boolean` | `false` | Whether to show arrow buttons. |
 | trigger | `'click' \| 'hover'` | `'click'` | The method of manual switching. |
 

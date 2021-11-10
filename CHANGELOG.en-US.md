@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-popover` add `shift` prop.
+- `n-carousel` add `dotShape` and `dotPlacement` prop, closes [#1462](https://github.com/TuSimple/naive-ui/issues/1462).
 
 ## 2.23.2 (2021-12-29)
 

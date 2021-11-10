@@ -1,11 +1,19 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
-// --bezier
-// --dot-color
-// --dot-color-active
-// --dot-size
-// --arrow-color
+// --n-bezier
+// --n-dots-slider-radius
+// --n-dots-slider-width
+// --n-dots-slider-height
+// --n-dot-color
+// --n-dot-color-active
+// --n-outer-dot-color
+// --n-outer-dot-color-active
+// --n-dot-width
+// --n-dot-height
+// --n-dot-radius
+// --n-dot-margin
+// --n-arrow-color
 export default cB('carousel', `
   overflow: hidden;
   position: relative;
@@ -26,12 +34,19 @@ export default cB('carousel', `
     position: absolute;
     display: flex;
     flex-wrap: nowrap;
-  `),
+  `, [
+    cM('slider', `
+      width: var(--dots-slider-width);
+      height: var(--dots-slider-height);
+      background-color: var(--dot-color);
+      border-radius: var(--dots-slider-radius);
+    `)
+  ]),
   cE('dot', `
-    height: var(--n-dot-size);
-    width: var(--n-dot-size);
+    width: var(--n-dot-width);
+    height: var(--n-dot-height);
     background-color: var(--n-dot-color);
-    border-radius: 50%;
+    border-radius: var(--n-dot-radius);
     cursor: pointer;
     transition:
       box-shadow .3s var(--n-bezier),
@@ -40,6 +55,9 @@ export default cB('carousel', `
   `, [
     c('&:focus', `
       background-color: var(--n-dot-color-active);
+    `),
+    cM('slider', `
+      background-color: transparent;
     `),
     cM('active', `
       background-color: var(--n-dot-color-active);
@@ -108,6 +126,18 @@ export default cB('carousel', `
         transform: 'translateX(-50%) scale(1) rotate(90deg)'
       })
     ]),
+    cM('outer', `
+      transform: translateX(-50%) rotate(90deg);
+      bottom: 0;
+      left: 50%;
+    `, [
+      c('&:hover', {
+        transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
+      }),
+      c('&:active', {
+        transform: 'translateX(-50%) scale(1) rotate(90deg)'
+      })
+    ]),
     c('svg', {
       height: '100%',
       width: '100%'
@@ -122,9 +152,16 @@ export default cB('carousel', `
       top: 50%;
       left: 16px;
       flex-direction: column;
-    `),
+    `, [
+      cM('slider', `
+        width: var(--dots-slider-height);
+        height: var(--dots-slider-width);
+      `)
+    ]),
     cE('dot', `
-      margin-bottom: 12px;
+      margin-bottom: var(--dot-margin);
+      height: var(--dot-width);
+      width: var(--dot-height);
     `)
   ]),
   cM('right', [
@@ -136,9 +173,16 @@ export default cB('carousel', `
       top: 50%;
       right: 16px;
       flex-direction: column;
-    `),
+    `, [
+      cM('slider', `
+        width: var(--dots-slider-height);
+        height: var(--dots-slider-width);
+      `)
+    ]),
     cE('dot', `
-      margin-bottom: 12px;
+      margin-bottom: var(--dot-margin);
+      height: var(--dot-width);
+      width: var(--dot-height);
     `)
   ]),
   cM('top', [
@@ -148,7 +192,7 @@ export default cB('carousel', `
       left: 50%;
     `),
     cE('dot', `
-      margin-right: 12px;
+      margin-right: var(--dot-margin);
     `)
   ]),
   cM('bottom', [
@@ -158,7 +202,31 @@ export default cB('carousel', `
       left: 50%;
     `),
     cE('dot', `
-      margin-right: 12px;
+      margin-right: var(--dot-margin);
     `)
+  ]),
+  cM('outer', `
+  padding-bottom: 20px;
+  `, [
+    cE('dots', `
+      transform: translateX(-50%);
+      bottom: 0;
+      left: 50%;
+    `, [
+      cM('slider', `
+        background-color: var(--outer-dot-color);
+      `)
+    ]),
+    cE('dot', `
+      margin-right: var(--dot-margin);
+      background-color: var(--outer-dot-color);
+    `, [
+      c('&:focus', `
+        background-color: var(--outer-dot-color-active);
+      `),
+      cM('active', `
+        background-color: var(--outer-dot-color-active);
+      `)
+    ])
   ])
 ])
