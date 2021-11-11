@@ -3,7 +3,7 @@
 一个选项组看起来就挺舒服。
 
 ```html
-<n-radio-group v-model:value="value" name="radiogroup">
+<n-radio-group v-model:value="value" name="radiogroup" disabled>
   <n-space>
     <n-radio v-for="song in songs" :key="song.value" :value="song.value">
       {{ song.label }}
