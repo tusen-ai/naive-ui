@@ -98,17 +98,7 @@ export default defineComponent({
       const { value: current } = currentRef
       if (value === current) return
       inTransition = true
-      if (current === 1 && value === lengthRef.value && value - current > 1) {
-        currentRef.value--
-      } else if (
-        value === 1 &&
-        current === lengthRef.value &&
-        current - value > 1
-      ) {
-        currentRef.value++
-      } else {
-        currentRef.value = value
-      }
+      currentRef.value = value
       if (props.autoplay) {
         resetInterval()
       }
