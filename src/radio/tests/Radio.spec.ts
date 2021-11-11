@@ -1,5 +1,6 @@
+import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NRadio } from '../index'
+import { NRadio, NRadioGroup } from '../index'
 
 describe('n-radio', () => {
   it('should work with import on demand', () => {
@@ -51,5 +52,38 @@ describe('n-radio', () => {
 
     await wrapper.setProps({ size: 'large' })
     expect(wrapper.find('.n-radio').attributes('style')).toMatchSnapshot()
+  })
+})
+
+describe('n-radio-group', () => {
+  it('should work with import on demand', () => {
+    mount(NRadioGroup, {
+      slots: {
+        default: () => [
+          h(NRadio, null, { default: () => 'test-item1' }),
+          h(NRadio, null, { default: () => 'test-item2' })
+        ]
+      }
+    })
+  })
+
+  it('should work with `disabled` prop', async () => {
+    const wrapper = mount(NRadioGroup, {
+      slots: {
+        default: () => [
+          h(NRadio, null, { default: () => 'test-item1' }),
+          h(NRadio, null, { default: () => 'test-item2' })
+        ]
+      }
+    })
+    expect(wrapper.find('.n-radio--disabled').exists()).not.toBe(true)
+
+    await wrapper.setProps({ disabled: true })
+    expect(wrapper.findAll('.n-radio')[0].classes()).toContain(
+      'n-radio--disabled'
+    )
+    expect(wrapper.findAll('.n-radio')[1].classes()).toContain(
+      'n-radio--disabled'
+    )
   })
 })

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { h } from 'vue'
+import { defineComponent, h, onMounted, ref } from 'vue'
 import { NInput } from '../index'
 import InputGroup from '../src/InputGroup'
 import InputGroupLabel from '../src/InputGroupLabel'
@@ -257,6 +257,31 @@ describe('n-input', () => {
     expect(wrapper.find('.n-input-group').element.children[2].textContent).toBe(
       'test2'
     )
+    wrapper.unmount()
+  })
+
+  it('should work with `blur` `focus` methods', async () => {
+    const onBlur = jest.fn()
+    const onFocus = jest.fn()
+    const Mock = defineComponent({
+      setup () {
+        const inputInstRef: any = ref(null)
+        onMounted(() => {
+          inputInstRef.value?.focus()
+          inputInstRef.value?.blur()
+        })
+        return () => {
+          ;<n-input ref={inputInstRef} onBlur={onBlur} onFocus={onFocus} />
+        }
+      }
+    })
+
+    const wrapper = mount(() => <Mock />)
+    setTimeout(() => {
+      expect(onBlur).toHaveBeenCalled()
+      expect(onFocus).toHaveBeenCalled()
+    }, 0)
+
     wrapper.unmount()
   })
 })
