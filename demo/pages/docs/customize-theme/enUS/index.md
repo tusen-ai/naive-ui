@@ -83,6 +83,35 @@ You can modify the corresponding theme variable, you can get the themeOverrides 
 </template>
 ```
 
+## Customizing Theme Vars Under TS
+
+If you are using ts to write code, this one is more suitable for you.
+
+
+```html
+
+<script lang="ts">
+  import { NConfigProvider,  GlobalThemeOverrides } from 'naive-ui'
+
+  const themeOverrides: GlobalThemeOverrides = {
+    common: {
+      primaryColor: '#FF0000'
+    },
+    Button: {
+      textColor: '#FF0000'
+    }
+  }
+
+  // ...
+</script>
+
+<template>
+  <n-config-provider :theme-overrides="themeOverrides">
+    <my-app />
+  </n-config-provider>
+</template>
+```
+
 ## Customizing Component Theme Vars
 
 The use of component theme variables is the same as the use of global theme variables, and the component theme variables will override the global theme variables.
@@ -141,6 +170,54 @@ If you want to use different theme variables on light and dark theme at the same
   <n-config-provider
     :theme="theme"
     :theme-overrides="theme === null ? lightThemeOverrides : darkThemeOverrides"
+  >
+    <my-app />
+  </n-config-provider>
+</template>
+```
+
+## Use The Peers Vars
+
+In many cases, another component will be reused inside a component, so the theme variable of peers appears.
+
+The theme variables related to peers have not been exposed yet. Use `GlobalThemeOverrides` to view the peers variables of the corresponding component.
+
+The specific available peers will be updated later.
+
+```html
+<script lang="ts">
+  import { NConfigProvider, GlobalThemeOverrides } from 'naive-ui'
+
+  const themeOverrides: GlobalThemeOverrides = {
+    Select: {
+      peers: {
+        InternalSelection: {
+          textColor: '#FF0000'
+        },
+        InternalSelectMenu: {
+          borderRadius: '6px',
+        }
+      },
+    },
+    DataTable: {
+      paginationMargin: '40px 0 0 0',
+      peers: {
+        Empty: {
+          textColor: '#ccc'
+        },
+        Pagination: {
+          itemTextColor: '#ccc'
+        }
+      }
+    },
+    // ...
+  }
+  // ...
+</script>
+
+<template>
+  <n-config-provider
+    :theme-overrides="themeOverrides"
   >
     <my-app />
   </n-config-provider>

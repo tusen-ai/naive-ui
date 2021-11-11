@@ -54,6 +54,7 @@ Naive UI 通过使用 `n-config-provider` 调整主题。
   import { NConfigProvider } from 'naive-ui'
 
   /**
+   * 主题变量类型提示作用
    * @type import('naive-ui').GlobalThemeOverrides
    */
   const themeOverrides = {
@@ -71,6 +72,34 @@ Naive UI 通过使用 `n-config-provider` 调整主题。
       }
     }
     // ...
+  }
+
+  // ...
+</script>
+
+<template>
+  <n-config-provider :theme-overrides="themeOverrides">
+    <my-app />
+  </n-config-provider>
+</template>
+```
+
+## TS 下使用主题变量
+
+如果你正在使用 ts 写代码，这块比较适合你。
+
+```html
+
+<script lang="ts">
+  import { NConfigProvider,  GlobalThemeOverrides } from 'naive-ui'
+
+  const themeOverrides: GlobalThemeOverrides = {
+    common: {
+      primaryColor: '#FF0000'
+    },
+    Button: {
+      textColor: '#FF0000'
+    }
   }
 
   // ...
@@ -141,6 +170,54 @@ Naive UI 通过使用 `n-config-provider` 调整主题。
   <n-config-provider
     :theme="theme"
     :theme-overrides="theme === null ? lightThemeOverrides : darkThemeOverrides"
+  >
+    <my-app />
+  </n-config-provider>
+</template>
+```
+
+## 使用 peers 主题变量
+
+很多时候组件内部都会复用另一个组件，因此出现了 peers 的主题变量。
+
+peers 相关的主题变量还没有暴露，使用 `GlobalThemeOverrides` 可以查看对应组件的 peers 变量。
+
+具体哪些可使用的 peers 后续会更新。
+
+```html
+<script lang="ts">
+  import { NConfigProvider, GlobalThemeOverrides } from 'naive-ui'
+
+  const themeOverrides: GlobalThemeOverrides = {
+    Select: {
+      peers: {
+        InternalSelection: {
+          textColor: '#FF0000'
+        },
+        InternalSelectMenu: {
+          borderRadius: '6px',
+        }
+      },
+    },
+    DataTable: {
+      paginationMargin: '40px 0 0 0',
+      peers: {
+        Empty: {
+          textColor: '#ccc'
+        },
+        Pagination: {
+          itemTextColor: '#ccc'
+        }
+      }
+    },
+    // ...
+  }
+  // ...
+</script>
+
+<template>
+  <n-config-provider
+    :theme-overrides="themeOverrides"
   >
     <my-app />
   </n-config-provider>
