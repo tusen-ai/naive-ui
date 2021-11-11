@@ -10,6 +10,7 @@
 
 - `n-menu` 添加箭头颜色区分选中未选中，关闭 [#1535](https://github.com/TuSimple/naive-ui/issues/1535)
 - `n-menu` 的 `defaultExpandedKeys` 使用 watchEffect 初始化，关闭 [#1536](https://github.com/TuSimple/naive-ui/issues/1536)
+- `n-date-picker` 属性 `type` 支持 `year` 选项
 
 ## 2.20.2 (2021-11-05)
 
@@ -46,10 +47,6 @@
 - `n-select` 新增 `menu-props` 属性，关闭 [#1475](https://github.com/TuSimple/naive-ui/issues/1475)
 - `n-image` 的 `toolbar` 增加关闭图标，关闭 [#1412](https://github.com/TuSimple/naive-ui/issues/1412)
 - `n-tree` 的 `on-load` 属性在 `remote` 模式下 `expanded-keys` 属性改变时被触发，关闭 [#1339](https://github.com/TuSimple/naive-ui/issues/1339)
-
-### Feats
-
-- `n-date-picker` 属性 `type` 支持 `year` 选项
 
 ## 2.20.0 (2021-10-28)
 
