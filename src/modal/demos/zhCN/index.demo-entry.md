@@ -36,6 +36,7 @@ dark-10-debug
 | display-directive | `'if' \| 'show'` | `'if'` | 使用何种指令控制模态框主体的条件渲染 |
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |
 | preset | `'card' \| 'dialog'` | `undefined` | 模态框使用何种预设 |
+| to | `'string' \| 'HTMLElement'` | `undefined` | 将模态框挂载在某一个节点下 |
 | show | `boolean` | `false` | 是否展示 Modal |
 | transform-origin | `'mouse' \| 'center'` | `'mouse'` | 模态框动画出现的位置 |
 | on-update:show | `(value: boolean) => void` | `undefined` | 模态框更新是否展示状态的回调 |

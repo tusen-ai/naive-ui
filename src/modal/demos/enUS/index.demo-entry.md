@@ -24,6 +24,7 @@ transform-origin
 | display-directive | `'if' \| 'show'` | `'if'` | Use which directive to control the rendering of modal body. |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |
 | preset | `'card' \| 'confirm'` | `undefined` | The preset of `n-modal`. |
+| to | `'string' \| 'HTMLElement'` | `undefined` | Mount the modal box under a certain node. |
 | show | `boolean` | `false` | Whether to show modal. |
 | transform-origin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the modal's display animation. |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback when modal's display status is changed. |
