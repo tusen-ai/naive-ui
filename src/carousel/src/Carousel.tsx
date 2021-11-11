@@ -9,6 +9,7 @@ import {
   CSSProperties,
   onMounted,
   watchEffect,
+  watch,
   onBeforeUnmount,
   PropType
 } from 'vue'
@@ -57,9 +58,13 @@ export default defineComponent({
     const touchingRef = ref(false)
     const dragOffsetRef = ref(0)
     const selfElRef = ref<HTMLDivElement | null>(null)
+    const sliderElRef = ref<HTMLElement | null>(null)
     const dotPlacementRef = toRef(props, 'dotPlacement')
     let timerId: number | null = null
     let inTransition = false
+    watch(currentRef, () => {
+      props.dotShape === 'slider' && updateSliderStyle()
+    })
     // current from 0 to length + 1
     function next (): void {
       if (lengthRef.value <= 1) return
@@ -74,6 +79,18 @@ export default defineComponent({
       inTransition = true
       // no need for reset since transitionend handler will handle it
       currentRef.value--
+    }
+    function updateSliderStyle (): void {
+      const { value } = currentRef
+      if (!value || value === lengthRef.value + 1) return
+      const { lineWidth } = themeRef.value.self
+      const { value: sliderEl } = sliderElRef
+      if (!sliderEl) return
+      if (props.dotPlacement === 'bottom' || props.dotPlacement === 'top') {
+        sliderEl.style.left = `${lineWidth * (value - 1)}px`
+      } else {
+        sliderEl.style.top = `${lineWidth * (value - 1)}px`
+      }
     }
     function setCurrent (value: number): void {
       if (lengthRef.value <= 1) return
@@ -249,6 +266,7 @@ export default defineComponent({
     )
     return {
       selfElRef,
+      sliderElRef,
       mergedClsPrefix: mergedClsPrefixRef,
       current: currentRef,
       lengthRef,
@@ -261,12 +279,12 @@ export default defineComponent({
       handleTouchstart,
       handleTransitionEnd,
       handleMouseenter,
+      sliderWidth: themeRef.value.self.lineWidth,
+      sliderHeight: themeRef.value.self.lineHeight,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
           self: {
-            dotsSliderWidth,
-            dotsSliderHeight,
             dotColor,
             dotColorActive,
             outerDotColor,
@@ -274,23 +292,22 @@ export default defineComponent({
             dotSize,
             dotRadius,
             dotMargin,
+            lineRadius,
             lineWidth,
             lineHeight,
-            lineRadius,
             arrowColor
           }
         } = themeRef.value
         return {
           '--n-bezier': cubicBezierEaseInOut,
-          '--n-dots-slider-width': dotsSliderWidth,
-          '--n-dots-slider-height': dotsSliderHeight,
           '--n-dots-slider-radius': lineRadius,
           '--n-dot-color': dotColor,
           '--n-dot-color-active': dotColorActive,
           '--n-outer-dot-color': outerDotColor,
           '--n-outer-dot-color-active': outerDotColorActive,
-          '--n-dot-width': props.dotShape === 'dot' ? dotSize : lineWidth,
-          '--n-dot-height': props.dotShape === 'dot' ? dotSize : lineHeight,
+          '--n-dot-width': props.dotShape === 'dot' ? dotSize : `${lineWidth}px`,
+          '--n-dot-height':
+            props.dotShape === 'dot' ? dotSize : `${lineHeight}px`,
           '--n-dot-radius': props.dotShape === 'dot' ? dotRadius : lineRadius,
           '--n-dot-margin': props.dotShape === 'slider' ? 0 : dotMargin,
           '--n-arrow-color': arrowColor
@@ -307,6 +324,8 @@ export default defineComponent({
       current,
       lengthRef,
       autoplay,
+      sliderWidth,
+      sliderHeight,
       $slots: { default: defaultSlot }
     } = this
     const children = flatten(defaultSlot?.() || [])
@@ -360,6 +379,14 @@ export default defineComponent({
             `${mergedClsPrefix}-carousel__dots`,
             dotShape === 'slider' && `${mergedClsPrefix}-carousel__dots--slider`
           ]}
+          style={
+            dotShape === 'slider'
+              ? {
+                  [vertical ? 'height' : 'width']: `${sliderWidth * length}px`,
+                  [vertical ? 'width' : 'height']: `${sliderHeight}px`
+                }
+              : {}
+          }
           role="tablist"
         >
           {indexMap(length, (i) => {
@@ -388,6 +415,12 @@ export default defineComponent({
               />
             )
           })}
+          {dotShape === 'slider' ? (
+            <div
+              ref="sliderElRef"
+              class={`${mergedClsPrefix}-carousel__slider`}
+            />
+          ) : null}
         </div>
         {showArrow && [
           <div

@@ -31,16 +31,16 @@ Set `dot-shape` to change the indicator shape.
 ```
 
 ```js
-import { ref } from 'vue'
+import { ref, defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   setup () {
     const dotShapeRef = ref('dot')
     return {
       dotShape: dotShapeRef
     }
   }
-}
+})
 ```
 
 ```css

@@ -36,8 +36,6 @@ export default cB('carousel', `
     flex-wrap: nowrap;
   `, [
     cM('slider', `
-      width: var(--dots-slider-width);
-      height: var(--dots-slider-height);
       background-color: var(--dot-color);
       border-radius: var(--dots-slider-radius);
     `)
@@ -56,16 +54,26 @@ export default cB('carousel', `
     c('&:focus', `
       background-color: var(--n-dot-color-active);
     `),
-    cM('slider', `
-      background-color: transparent;
-    `),
     cM('active', `
       background-color: var(--n-dot-color-active);
+    `),
+    cM('slider', `
+      background-color: transparent;
     `),
     c('&:last-child', `
       margin-right: 0;
     `)
   ]),
+  cE('slider', `
+    position: absolute;
+    border-radius: var(--dot-radius);
+    background-color: var(--dot-color-active);
+    cursor: pointer;
+    transition:
+      left .2s var(--bezier),
+      max-width .2s var(--bezier),
+      background-color .3s var(--bezier);
+  `),
   cE('arrow', `
     position: absolute;
     transition: transform .3s var(--n-bezier);
@@ -152,14 +160,13 @@ export default cB('carousel', `
       top: 50%;
       left: 16px;
       flex-direction: column;
-    `, [
-      cM('slider', `
-        width: var(--dots-slider-height);
-        height: var(--dots-slider-width);
-      `)
-    ]),
+    `),
     cE('dot', `
       margin-bottom: var(--dot-margin);
+      height: var(--dot-width);
+      width: var(--dot-height);
+    `),
+    cE('slider', `
       height: var(--dot-width);
       width: var(--dot-height);
     `)
@@ -173,14 +180,13 @@ export default cB('carousel', `
       top: 50%;
       right: 16px;
       flex-direction: column;
-    `, [
-      cM('slider', `
-        width: var(--dots-slider-height);
-        height: var(--dots-slider-width);
-      `)
-    ]),
+    `),
     cE('dot', `
       margin-bottom: var(--dot-margin);
+      height: var(--dot-width);
+      width: var(--dot-height);
+    `),
+    cE('slider', `
       height: var(--dot-width);
       width: var(--dot-height);
     `)
@@ -193,6 +199,10 @@ export default cB('carousel', `
     `),
     cE('dot', `
       margin-right: var(--dot-margin);
+    `),
+    cE('slider', `
+      width: var(--dot-width);
+      height: var(--dot-height);
     `)
   ]),
   cM('bottom', [
@@ -203,10 +213,14 @@ export default cB('carousel', `
     `),
     cE('dot', `
       margin-right: var(--dot-margin);
+    `),
+    cE('slider', `
+      width: var(--dot-width);
+      height: var(--dot-height);
     `)
   ]),
   cM('outer', `
-  padding-bottom: 20px;
+    padding-bottom: 20px;
   `, [
     cE('dots', `
       transform: translateX(-50%);
@@ -227,6 +241,10 @@ export default cB('carousel', `
       cM('active', `
         background-color: var(--outer-dot-color-active);
       `)
-    ])
+    ]),
+    cE('slider', `
+      width: var(--dot-width);
+      height: var(--dot-height);
+    `)
   ])
 ])

@@ -33,16 +33,16 @@
 ```
 
 ```js
-import { ref } from 'vue'
+import { ref, defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   setup () {
     const dotPlacementRef = ref('bottom')
     return {
       dotPlacement: dotPlacementRef
     }
   }
-}
+})
 ```
 
 ```css

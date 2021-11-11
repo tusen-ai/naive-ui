@@ -3,15 +3,11 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { Theme } from '../../_mixins'
 
 export const self = (vars: ThemeCommonVars) => {
-  const lineWidth = 12
-  const lineHeight = 4
   return {
     dotSize: '8px',
-    dotsSliderWidth: `${lineWidth * 4}px`,
-    dotsSliderHeight: `${lineHeight}px`,
     dotRadius: '50%',
-    lineWidth: `${lineWidth}px`,
-    lineHeight: `${lineHeight}px`,
+    lineWidth: 12,
+    lineHeight: 4,
     lineRadius: '3px',
     dotMargin: '12px',
     dotColor: 'rgba(255, 255, 255, .3)',
