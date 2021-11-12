@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- 修复 `input-props` 无法生效的问题，关闭 [##1553](https://github.com/TuSimple/naive-ui/issues/1553)
+- 修复 `input-props` 无法生效的问题，关闭 [#1553](https://github.com/TuSimple/naive-ui/issues/1553)
 
 ### Fixes
 

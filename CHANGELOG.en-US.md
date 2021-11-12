@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Fix `input-props` does not set the right props, closes [##1553](https://github.com/TuSimple/naive-ui/issues/1553)
+- Fix `input-props` does not set the right props, closes [#1553](https://github.com/TuSimple/naive-ui/issues/1553)
 
 ### Fixes
 
