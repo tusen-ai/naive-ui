@@ -54,7 +54,7 @@ Naive UI 通过使用 `n-config-provider` 调整主题。
   import { NConfigProvider } from 'naive-ui'
 
   /**
-   * 主题变量类型提示作用
+   * js 文件下使用这个做类型提示
    * @type import('naive-ui').GlobalThemeOverrides
    */
   const themeOverrides = {
@@ -117,23 +117,32 @@ Naive UI 通过使用 `n-config-provider` 调整主题。
 组件主题变量使用方法同全局主题变量使用方法，并且组件主题变量会覆盖全局主题变量。
 
 ```html
-<script>
+<script lang="ts">
+  import { SelectProps, ButtonProps } from 'naive-ui'
 
-  /**
-   * @type import('naive-ui').GlobalThemeOverrides
-   */
-  const themeOverrides = {
-    Button: {
-      textColor: '#FF0000'，
-      border: '1px solid #FF0000'
+  type SelectThemeOverrides = NonNullable<SelectProps['themeOverrides']>
+  type ButtonThemeOverrides = NonNullable<ButtonProps['themeOverrides']>
+
+  const selectThemeOverrides: SelectThemeOverrides = {
+    menuBoxShadow: '0 6px 16px -9px rgba(0, 0, 0, .08), 0 9px 28px 0 rgba(0, 0, 0, .05), 0 12px 48px 16px rgba(0, 0, 0, .03)',
+    peers: {
+      InternalSelection: {
+        textColor: '#FF0000',
+        heightMedium: '42px'
+      }
     }
+  }
+  const buttonThemeOverrides: ButtonThemeOverrides = {
+    heightMedium: '40px',
+    textColor: 'rgba(24, 127, 231, 1)'
   }
 
   // ...
 </script>
 
 <template>
-  <n-button :theme-overrides="themeOverrides"> theme </n-button>
+  <n-select v-model:value="value" :options="options" :theme-overrides="selectThemeOverrides" />
+  <n-button :theme-overrides="buttonThemeOverrides">theme</n-button>
 </template>
 ```
 
