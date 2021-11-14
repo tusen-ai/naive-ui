@@ -309,7 +309,7 @@ export default defineComponent({
           const distance = Math.abs(diff)
           if (
             (buffer === undefined || diff * buffer > 0) &&
-            (closestMark === null || distance <= closestMark.distance)
+            (closestMark === null || distance < closestMark.distance)
           ) {
             closestMark = {
               value: markValues[index],
@@ -333,7 +333,8 @@ export default defineComponent({
         stepBuffer = value - currentValue > 0 ? 1 : -1
       }
       const markValues = propMarkValues.value || []
-      if (!props.step) {
+      const { min, max, step } = props
+      if (!step) {
         const closestMark = getClosestMark(
           value,
           markValues.concat(currentValue),
@@ -342,12 +343,15 @@ export default defineComponent({
         return closestMark.value
       }
       const roundValue = getRoundValue(value)
-      const marks = markValues.concat(roundValue)
+      // ensure accurate step
+      const stepValue = new Array(Math.ceil((max - min) / step))
+        .fill('')
+        .map((_, index) => step * index + min)
       // If it is a stepping, priority will be given to the marks
       // on the rail，otherwise take the nearest one
       const closestMark = (stepping
-        ? getClosestMark(currentValue, marks, stepBuffer)
-        : getClosestMark(value, marks)) as ClosestMark
+        ? getClosestMark(currentValue, stepValue.concat(markValues), stepBuffer)
+        : getClosestMark(value, markValues.concat(roundValue))) as ClosestMark
       return clampValue(closestMark.value)
     }
 
@@ -400,7 +404,7 @@ export default defineComponent({
       switch (e.code) {
         case 'ArrowUp':
           e.preventDefault()
-          handleStepValue((vertical && inverted) ? -1 : 1)
+          handleStepValue(vertical && inverted ? -1 : 1)
           break
         case 'ArrowRight':
           e.preventDefault()
@@ -408,7 +412,7 @@ export default defineComponent({
           break
         case 'ArrowDown':
           e.preventDefault()
-          handleStepValue((vertical && inverted) ? 1 : -1)
+          handleStepValue(vertical && inverted ? 1 : -1)
           break
         case 'ArrowLeft':
           e.preventDefault()
@@ -492,9 +496,7 @@ export default defineComponent({
       }
     }
 
-    watch(activeIndexRef, (active, previous) => {
-      previousIndexRef.value = previous
-    })
+    watch(activeIndexRef, (_, previous) => (previousIndexRef.value = previous))
 
     watch(mergedValueRef, () => {
       if (props.marks) {
