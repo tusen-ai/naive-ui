@@ -344,7 +344,7 @@ export default defineComponent({
       }
       const roundValue = getRoundValue(value)
       // ensure accurate step
-      const stepValue = new Array(Math.ceil((max - min) / step))
+      const stepValue = new Array(Math.floor((max - min) / step) + 1)
         .fill('')
         .map((_, index) => step * index + min)
       // If it is a stepping, priority will be given to the marks
