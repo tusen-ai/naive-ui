@@ -2,12 +2,18 @@ import { Key, TreeOption } from './interface'
 
 function traverse (
   nodes: TreeOption[] | undefined,
+  childrenField: string,
   callback: (node: TreeOption) => void,
   callbackAfter: (node: TreeOption) => void
 ): void {
   nodes?.forEach((node) => {
     callback(node)
-    traverse(node.children, callback, callbackAfter)
+    traverse(
+      (node as any)[childrenField],
+      childrenField,
+      callback,
+      callbackAfter
+    )
     callbackAfter(node)
   })
 }
@@ -16,6 +22,7 @@ export function keysWithFilter (
   nodes: TreeOption[],
   pattern: string,
   keyField: string,
+  childrenField: string,
   filter: (pattern: string, node: TreeOption) => boolean
 ): {
     expandedKeys: Key[]
@@ -26,6 +33,7 @@ export function keysWithFilter (
   const path: TreeOption[] = []
   traverse(
     nodes,
+    childrenField,
     (node) => {
       path.push(node)
       if (filter(pattern, node)) {

@@ -76,7 +76,7 @@ abstract
 | Name | Type | Description |
 | --- | --- | --- |
 | submit | `(fileId?: string \| number)` | Submit all files with pending status. |
-| openFileDialog | `() => void` | Open the file dialog window. |
+| openOpenFileDialog | `() => void` | Open the file dialog window. |
 
 ### Upload Slots
 

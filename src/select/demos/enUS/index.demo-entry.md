@@ -43,6 +43,7 @@ render-person
 | input-props | `HTMLInputAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the select is filterable. |
 | loading | `boolean` | `false` | Whether to show a loading state. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum selected values to display while in `multiple` mode. `responsive` will keep all the tags in single line. |
+| menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. |
 | multiple | `boolean` | `false` | Whether to allow selecting multiple values. |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | Options that can be selected. For more details see SelectOption Properties (below). |
 | placeholder | `string` | `'Please Select'` | Placeholder. |

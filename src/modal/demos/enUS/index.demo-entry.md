@@ -12,6 +12,7 @@ custom-position
 preset-card
 preset-confirm
 preset-confirm-slot
+transform-origin
 ```
 
 ## API
@@ -24,6 +25,8 @@ preset-confirm-slot
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |
 | preset | `'card' \| 'confirm'` | `undefined` | The preset of `n-modal`. |
 | show | `boolean` | `false` | Whether to show modal. |
+| to | `string \| HTMLElement` | `body` | Container node of the modal content. |
+| transform-origin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the modal's display animation. |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback when modal's display status is changed. |
 | on-after-enter | `() => void` | `undefined` | Callback after modal is opened. |
 | on-after-leave | `() => void` | `undefined` | Callback after modal is closed. |

@@ -43,6 +43,10 @@ const modalProps = {
     type: String as PropType<'if' | 'show'>,
     default: 'if'
   },
+  transformOrigin: {
+    type: String as PropType<'center' | 'mouse'>,
+    default: 'mouse'
+  },
   ...presetProps,
   // events
   'onUpdate:show': [Function, Array] as PropType<
@@ -196,7 +200,8 @@ export default defineComponent({
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       isMountedRef,
-      appearRef: toRef(props, 'appear')
+      appearRef: toRef(props, 'appear'),
+      transformOriginRef: toRef(props, 'transformOrigin')
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,

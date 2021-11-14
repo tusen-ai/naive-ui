@@ -8,6 +8,7 @@ describe('n-tabs', () => {
   it('should work with import on demand', () => {
     mount(NTabs)
   })
+
   it('should work with callback types', () => {
     function onUpdateValue1 (name: number): void {}
     function onUpdateValue2 (name: string): void {}
@@ -28,6 +29,7 @@ describe('n-tabs', () => {
       }
     })
   })
+
   it('should work with empty tab-pane', () => {
     mount(NTabs, {
       props: {
@@ -189,5 +191,72 @@ describe('n-tabs', () => {
     expect(tabs[2].classes()).toContain('n-tabs-tab--active')
     await sleep(1000)
     expect(tabs[1].classes()).toContain('n-tabs-tab--active')
+  })
+
+  it('should work with `pane-class` prop', () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        paneClass: 'test'
+      },
+      slots: {
+        default: () =>
+          h(
+            NTabPane,
+            {
+              tab: 'Oasis',
+              name: 'oasis'
+            },
+            'Wonderwall'
+          )
+      }
+    })
+
+    expect(wrapper.find('.n-tab-pane').classes('test')).toBe(true)
+  })
+
+  it('should work with `pane-style` prop', () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        paneStyle: {
+          color: 'red'
+        }
+      },
+      slots: {
+        default: () =>
+          h(
+            NTabPane,
+            {
+              tab: 'Oasis',
+              name: 'oasis'
+            },
+            'Wonderwall'
+          )
+      }
+    })
+
+    expect(wrapper.find('.n-tab-pane').attributes('style')).toBe('color: red;')
+  })
+
+  it('should work with `tab-style` prop', () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        tabStyle: {
+          color: 'red'
+        }
+      },
+      slots: {
+        default: () =>
+          h(
+            NTabPane,
+            {
+              tab: 'Oasis',
+              name: 'oasis'
+            },
+            'Wonderwall'
+          )
+      }
+    })
+
+    expect(wrapper.find('.n-tabs-tab').attributes('style')).toBe('color: red;')
   })
 })

@@ -7,14 +7,12 @@
       ><n-switch v-model:value="checkStrategyIsChild" />Child Check
       Strategy</n-space
     >
-    <n-space><n-switch v-model:value="cascade" />Cascade</n-space>
     <n-space><n-switch v-model:value="showPath" />Show Path</n-space>
   </n-space>
   <n-cascader
     v-model:value="value"
     placeholder="没啥用的值"
     :options="options"
-    :cascade="cascade"
     :check-strategy="checkStrategyIsChild ? 'child' : 'all'"
     :show-path="showPath"
     remote
@@ -43,7 +41,6 @@ export default defineComponent({
   setup () {
     return {
       checkStrategyIsChild: ref(true),
-      cascade: ref(true),
       showPath: ref(true),
       value: ref(null),
       options: ref([

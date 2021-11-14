@@ -30,7 +30,13 @@ import style from './styles/index.cssr'
 import { call, ExtractPublicPropTypes, MaybeArray, warn } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
-import { RenderPrefix, RenderSuffix, RenderPrev, RenderNext } from './interface'
+import {
+  RenderPrefix,
+  RenderSuffix,
+  RenderPrev,
+  RenderNext,
+  PaginationSizeOption
+} from './interface'
 
 const paginationProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme>),
@@ -47,9 +53,12 @@ const paginationProps = {
   },
   showSizePicker: Boolean,
   pageSize: Number as PropType<number>,
-  defaultPageSize: Number,
+  defaultPageSize: {
+    type: Number,
+    default: 10
+  },
   pageSizes: {
-    type: Array as PropType<number[]>,
+    type: Array as PropType<Array<number | PaginationSizeOption>>,
     default () {
       return [10]
     }
@@ -114,9 +123,7 @@ export default defineComponent({
     const jumperRef = ref<InputInst | null>(null)
     const jumperValueRef = ref('')
     const uncontrolledPageRef = ref(props.defaultPage)
-    const uncontrolledPageSizeRef = ref(
-      props.defaultPageSize || props.pageSizes[0]
-    )
+    const uncontrolledPageSizeRef = ref(props.defaultPageSize)
     const mergedPageRef = useMergedState(
       toRef(props, 'page'),
       uncontrolledPageRef
@@ -140,10 +147,16 @@ export default defineComponent({
 
     const pageSizeOptionsRef = computed(() => {
       const suffix = localeRef.value.selectionSuffix
-      return props.pageSizes.map((size) => ({
-        label: `${size} / ${suffix}`,
-        value: size
-      }))
+      return props.pageSizes.map((size) => {
+        if (typeof size === 'number') {
+          return {
+            label: `${size} / ${suffix}`,
+            value: size
+          }
+        } else {
+          return size
+        }
+      })
     })
     const inputSizeRef = computed<InputSize>(() => {
       return (
