@@ -39,7 +39,7 @@ export default c([
     cursor: pointer;
     user-select: none;
   `, [
-    cM('inverted', [
+    cM('reverse', [
       cB('slider-handles', [
         cB('slider-handle', `
           transform: translate(50%, -50%);

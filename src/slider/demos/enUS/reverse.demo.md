@@ -1,10 +1,10 @@
-# Inverted
+# Reverse
 
-Set `inverted` to invert the track.
+Set `reverse` to invert the track.
 
 ```html
 <n-space vertical>
-  <n-slider v-model:value="value" :step="10" inverted />
+  <n-slider v-model:value="value" :step="10" reverse />
   <n-input-number size="small" v-model:value="value" />
 </n-space>
 ```

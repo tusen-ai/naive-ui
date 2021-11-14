@@ -80,7 +80,7 @@ const sliderProps = {
     default: true
   },
   vertical: Boolean,
-  inverted: Boolean,
+  reverse: Boolean,
   'onUpdate:value': [Function, Array] as PropType<
   MaybeArray<<T extends number & number[]>(value: T) => void>
   >,
@@ -167,9 +167,9 @@ export default defineComponent({
     const draggingRef = ref(false)
 
     const styleDirectionRef = computed(() => {
-      const { vertical, inverted } = props
-      const left = inverted ? 'right' : 'left'
-      const bottom = inverted ? 'top' : 'bottom'
+      const { vertical, reverse } = props
+      const left = reverse ? 'right' : 'left'
+      const bottom = reverse ? 'top' : 'bottom'
       return vertical ? bottom : left
     })
 
@@ -391,7 +391,7 @@ export default defineComponent({
         percentage = (touchEvent.clientX - railRect.left) / railRect.width
       }
 
-      if (props.inverted) {
+      if (props.reverse) {
         percentage = 1 - percentage
       }
 
@@ -400,23 +400,23 @@ export default defineComponent({
 
     function handleRailKeyDown (e: KeyboardEvent): void {
       if (mergedDisabledRef.value) return
-      const { vertical, inverted } = props
+      const { vertical, reverse } = props
       switch (e.code) {
         case 'ArrowUp':
           e.preventDefault()
-          handleStepValue(vertical && inverted ? -1 : 1)
+          handleStepValue(vertical && reverse ? -1 : 1)
           break
         case 'ArrowRight':
           e.preventDefault()
-          handleStepValue(!vertical && inverted ? -1 : 1)
+          handleStepValue(!vertical && reverse ? -1 : 1)
           break
         case 'ArrowDown':
           e.preventDefault()
-          handleStepValue(vertical && inverted ? 1 : -1)
+          handleStepValue(vertical && reverse ? 1 : -1)
           break
         case 'ArrowLeft':
           e.preventDefault()
-          handleStepValue(!vertical && inverted ? 1 : -1)
+          handleStepValue(!vertical && reverse ? 1 : -1)
           break
       }
     }
@@ -639,7 +639,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-slider--active`]: this.activeIndex !== -1,
             [`${mergedClsPrefix}-slider--with-mark`]: this.marks,
             [`${mergedClsPrefix}-slider--vertical`]: this.vertical,
-            [`${mergedClsPrefix}-slider--inverted`]: this.inverted
+            [`${mergedClsPrefix}-slider--reverse`]: this.reverse
           }
         ]}
         style={this.cssVars as CSSProperties}
