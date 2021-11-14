@@ -1,6 +1,6 @@
 <!--anchor:on-->
 
-# Customizing Theme
+# Customizing theme
 
 Naive-ui provide `n-config-provider` to customize the theme.
 
@@ -8,7 +8,7 @@ By default all the component is light themed, without any configuration.
 
 Learn more about `n-config-provider`, see [Config Provider](../components/config-provider).
 
-## Use Dark Theme
+## Use dark theme
 
 Set `n-config-provider`'s `theme` prop to `darkTheme` imported from naive-ui to set dark theme inside `n-config-provider`.
 
@@ -35,7 +35,7 @@ If `theme` is `undefined` it won't affect the theme of components inside.
 </script>
 ```
 
-## Customizing Theme Vars (Design Tokens)
+## Customizing theme vars (design tokens)
 
 No CSS (Scss, Less) needed.
 
@@ -84,14 +84,13 @@ You can modify the corresponding theme variable, you can get the themeOverrides 
 </template>
 ```
 
-## Customizing Theme Vars Under TS
+## Customizing theme vars in TypeScript
 
 If you are using ts to write code, this one is more suitable for you.
 
 ```html
-
 <script lang="ts">
-  import { NConfigProvider,  GlobalThemeOverrides } from 'naive-ui'
+  import { NConfigProvider, GlobalThemeOverrides } from 'naive-ui'
 
   const themeOverrides: GlobalThemeOverrides = {
     common: {
@@ -112,7 +111,7 @@ If you are using ts to write code, this one is more suitable for you.
 </template>
 ```
 
-## Customizing Component Theme Vars
+## Customizing component theme vars
 
 The use of component theme variables is the same as the use of global theme variables, and the component theme variables will override the global theme variables.
 
@@ -124,7 +123,8 @@ The use of component theme variables is the same as the use of global theme vari
   type ButtonThemeOverrides = NonNullable<ButtonProps['themeOverrides']>
 
   const selectThemeOverrides: SelectThemeOverrides = {
-    menuBoxShadow: '0 6px 16px -9px rgba(0, 0, 0, .08), 0 9px 28px 0 rgba(0, 0, 0, .05), 0 12px 48px 16px rgba(0, 0, 0, .03)',
+    menuBoxShadow:
+      '0 6px 16px -9px rgba(0, 0, 0, .08), 0 9px 28px 0 rgba(0, 0, 0, .05), 0 12px 48px 16px rgba(0, 0, 0, .03)',
     peers: {
       InternalSelection: {
         textColor: '#FF0000',
@@ -141,12 +141,16 @@ The use of component theme variables is the same as the use of global theme vari
 </script>
 
 <template>
-  <n-select v-model:value="value" :options="options" :theme-overrides="selectThemeOverrides" />
+  <n-select
+    v-model:value="value"
+    :options="options"
+    :theme-overrides="selectThemeOverrides"
+  />
   <n-button :theme-overrides="buttonThemeOverrides">theme</n-button>
 </template>
 ```
 
-## Customizing Theme Vars Under Different Theme
+## Customizing theme vars under different themes
 
 If you want to use different theme variables on light and dark theme at the same time, you can take a look at this.
 
@@ -185,7 +189,7 @@ If you want to use different theme variables on light and dark theme at the same
 </template>
 ```
 
-## Use The Peers Vars
+## Use the peers vars
 
 In many cases, another component will be reused inside a component, so the theme variable of peers appears.
 
@@ -204,9 +208,9 @@ The specific available peers will be updated later.
           textColor: '#FF0000'
         },
         InternalSelectMenu: {
-          borderRadius: '6px',
+          borderRadius: '6px'
         }
-      },
+      }
     },
     DataTable: {
       paginationMargin: '40px 0 0 0',
@@ -218,22 +222,20 @@ The specific available peers will be updated later.
           itemTextColor: '#ccc'
         }
       }
-    },
+    }
     // ...
   }
   // ...
 </script>
 
 <template>
-  <n-config-provider
-    :theme-overrides="themeOverrides"
-  >
+  <n-config-provider :theme-overrides="themeOverrides">
     <my-app />
   </n-config-provider>
 </template>
 ```
 
-## Sync Style of the Body Element
+## Sync style of the body element
 
 For the following reasons, you may need to set some styles on `document.body`.
 
@@ -251,7 +253,7 @@ You can use `n-global-style` to sync common global style to the body element. In
 </template>
 ```
 
-## Theme Editor
+## Theme editor
 
 Naive-ui provides theme editor to help you edit theme and export the corresponding configuration. It can be placed inside `n-config-provider`.
 
