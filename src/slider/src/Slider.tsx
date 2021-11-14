@@ -449,9 +449,9 @@ export default defineComponent({
       activeIndexRef.value = activeIndex
 
       if (activeIndex !== -1) {
+        // avoid triggering scrolling on touch
+        event.preventDefault()
         draggingRef.value = true
-
-        if (!isTouchEvent(event)) event.preventDefault()
         focusActiveHandle(activeIndex)
         doDispatchValue(
           sanitizeValue(pointValue, mergedValuesRef.value[activeIndex]),
