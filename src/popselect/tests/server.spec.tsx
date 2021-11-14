@@ -11,7 +11,7 @@ describe('SSR', () => {
     const app = createSSRApp(() => (
       <NPopselect>
         {{
-          trigger: () => 'kirby'
+          default: () => 'kirby'
         }}
       </NPopselect>
     ))

@@ -46,11 +46,12 @@ Set `n-config-provider`'s `date-locale` prop to `dateZhCN` imported from naive-u
 
 ## Supported languages
 
-| Language             | Config | Date config |
-| -------------------- | ------ | ----------- |
-| English              | enUS   | dateEnUS    |
-| Japanese             | jaJP   | dateJaJP    |
-| Russian              | ruRU   | dateRuRU    |
-| Ukrainian            | ukUA   | dateUkUA    |
-| Chinese (Simplified) | zhCN   | dateZhCN    |
-| Indonesian           | idID   | dateIdID    |
+| Language                  | Config | Date config |
+| ------------------------- | ------ | ----------- |
+| English                   | enUS   | dateEnUS    |
+| Japanese                  | jaJP   | dateJaJP    |
+| Russian                   | ruRU   | dateRuRU    |
+| Ukrainian                 | ukUA   | dateUkUA    |
+| Chinese (Simplified)      | zhCN   | dateZhCN    |
+| German - Germany          | deDE   | dateDeDe    |
+| Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |
