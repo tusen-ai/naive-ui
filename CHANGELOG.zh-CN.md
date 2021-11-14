@@ -12,6 +12,7 @@
 
 - `n-menu` 添加箭头颜色区分选中未选中，关闭 [#1535](https://github.com/TuSimple/naive-ui/issues/1535)
 - `n-menu` 的 `defaultExpandedKeys` 使用 watchEffect 初始化，关闭 [#1536](https://github.com/TuSimple/naive-ui/issues/1536)
+- `n-date-picker` 属性 `type` 支持 `year` 选项
 
 ## 2.20.2 (2021-11-05)
 

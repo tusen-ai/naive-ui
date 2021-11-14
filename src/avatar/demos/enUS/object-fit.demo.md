@@ -1,6 +1,6 @@
 # Object-fit
 
-contain, cover, fill, none, scale-down
+You can set `object-fit` to `'contain'`, `'cover'`, `'fill'`, `'none'`, `'scale-down'`.
 
 ```html
 <n-space align="flex-end">

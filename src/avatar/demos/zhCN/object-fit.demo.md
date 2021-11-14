@@ -1,6 +1,6 @@
 # 图片如何适应容器
 
-分别是 contain, cover, fill, none, scale-down
+将 `object-fit` 设为 `'contain'`、`'cover'`、`'fill'`、`'none'`、`'scale-down'` 来设定适应容器的方式。
 
 ```html
 <n-space align="flex-end">

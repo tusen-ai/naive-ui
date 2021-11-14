@@ -29,6 +29,7 @@ import LineMark from './LineMark'
 import { checkboxGroupInjectionKey } from './CheckboxGroup'
 import type { OnUpdateChecked, OnUpdateCheckedImpl } from './interface'
 import style from './styles/index.cssr'
+import { on } from 'evtd'
 
 const checkboxProps = {
   ...(useTheme.props as ThemeProps<CheckboxTheme>),
@@ -310,13 +311,16 @@ export default defineComponent({
         onKeydown={handleKeyDown}
         onClick={handleClick}
         onMousedown={() => {
-          const preventDefault = (e: Event): void => {
-            e.preventDefault()
-          }
-          window.addEventListener('selectstart', preventDefault)
-          setTimeout(() => {
-            window.removeEventListener('selectstart', preventDefault)
-          }, 0)
+          on(
+            'selectstart',
+            window,
+            (e: Event): void => {
+              e.preventDefault()
+            },
+            {
+              once: true
+            }
+          )
         }}
       >
         <div class={`${mergedClsPrefix}-checkbox-box`}>
