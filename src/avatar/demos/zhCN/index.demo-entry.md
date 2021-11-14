@@ -12,6 +12,7 @@ badge
 icon
 name-size
 v-show-debug
+object-fit
 ```
 
 ## API
