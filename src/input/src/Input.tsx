@@ -201,7 +201,6 @@ export default defineComponent({
         return [placeholder] as [string]
       }
     })
-
     const showPlaceholder1Ref = computed(() => {
       const { value: isComposing } = isComposingRef
       const { value: mergedValue } = mergedValueRef
@@ -921,8 +920,6 @@ export default defineComponent({
           ) : (
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
-                {...this.inputProps}
-                ref="inputElRef"
                 type={
                   this.type === 'password' &&
                   this.mergedShowPasswordOn &&
@@ -930,7 +927,10 @@ export default defineComponent({
                     ? 'text'
                     : this.type
                 }
+                {...this.inputProps}
+                ref="inputElRef"
                 class={`${mergedClsPrefix}-input__input-el`}
+                style={this.textDecorationStyle[0] as any}
                 tabindex={
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
@@ -946,7 +946,6 @@ export default defineComponent({
                 readonly={this.readonly as any}
                 autofocus={this.autofocus}
                 size={this.attrSize}
-                style={this.textDecorationStyle[0] as any}
                 onBlur={this.handleInputBlur}
                 onFocus={this.handleInputFocus}
                 onInput={(e) => this.handleInput(e, 0)}

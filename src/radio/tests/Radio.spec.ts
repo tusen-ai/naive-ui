@@ -34,7 +34,7 @@ describe('n-radio', () => {
   it('should work with `name` prop', async () => {
     const wrapper = mount(NRadio, { props: { name: 'randomName111' } })
 
-    const radio = wrapper.find('input[type=radio')
+    const radio = wrapper.find('input[type=radio]')
 
     expect(radio.attributes('name')).toEqual('randomName111')
 
@@ -85,5 +85,30 @@ describe('n-radio-group', () => {
     expect(wrapper.findAll('.n-radio')[1].classes()).toContain(
       'n-radio--disabled'
     )
+  })
+
+  it('should work with `name` prop', async () => {
+    const wrapper = mount(NRadioGroup, {
+      props: {
+        name: 'randomName111'
+      },
+      slots: {
+        default: () => [
+          h(NRadio, null, { default: () => 'test-item1' }),
+          h(NRadio, null, { default: () => 'test-item2' })
+        ]
+      }
+    })
+
+    const radio1 = wrapper.findAll('input[type=radio]')[0]
+    const radio2 = wrapper.findAll('input[type=radio]')[1]
+
+    expect(radio1.attributes('name')).toEqual('randomName111')
+    expect(radio2.attributes('name')).toEqual('randomName111')
+
+    await wrapper.setProps({ name: 'randomName222' })
+
+    expect(radio1.attributes('name')).toEqual('randomName222')
+    expect(radio2.attributes('name')).toEqual('randomName222')
   })
 })

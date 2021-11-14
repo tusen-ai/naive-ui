@@ -5,11 +5,18 @@
 ### Fixes
 
 - Fix `n-grid` suffix NGridItem does not set right span when collapsed, closes [#1530](https://github.com/TuSimple/naive-ui/issues/1530).
+- Fix `n-button` to shrink abnormally in certain scenarios when using the `circle` prop, closes [#1557](https://github.com/TuSimple/naive-ui/issues/1557).
+- Fix `input-props` does affect `type` prop, closes [#1553](https://github.com/TuSimple/naive-ui/issues/1553)
 
 ### Feats
 
 - `n-menu` add a color distinction between selected and unselected arrow, closes [#1535](https://github.com/TuSimple/naive-ui/issues/1535).
 - `n-menu` 's `defaultExpandedKeys` use watchEffect initialize, closes [#1536](https://github.com/TuSimple/naive-ui/issues/1536).
+- `n-date-picker`'s `type` prop support `year` option.
+
+### i18n
+
+- Add `createLocale` to make locale customizable, closes [#1525](https://github.com/TuSimple/naive-ui/issues/1525).
 
 ## 2.20.2 (2021-11-05)
 
