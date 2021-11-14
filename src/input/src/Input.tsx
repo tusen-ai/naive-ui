@@ -875,6 +875,7 @@ export default defineComponent({
           {this.type === 'textarea' ? (
             <div class={`${mergedClsPrefix}-input__textarea`}>
               <textarea
+                {...this.inputProps}
                 ref="textareaElRef"
                 class={`${mergedClsPrefix}-input__textarea-el`}
                 autofocus={this.autofocus}
@@ -893,7 +894,6 @@ export default defineComponent({
                 onFocus={this.handleInputFocus}
                 onInput={this.handleInput}
                 onChange={this.handleChange}
-                {...this.inputProps}
               />
               {this.showPlaceholder1 ? (
                 <div
@@ -920,7 +920,6 @@ export default defineComponent({
           ) : (
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
-                ref="inputElRef"
                 type={
                   this.type === 'password' &&
                   this.mergedShowPasswordOn &&
@@ -928,7 +927,10 @@ export default defineComponent({
                     ? 'text'
                     : this.type
                 }
+                {...this.inputProps}
+                ref="inputElRef"
                 class={`${mergedClsPrefix}-input__input-el`}
+                style={this.textDecorationStyle[0] as any}
                 tabindex={
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
@@ -944,12 +946,10 @@ export default defineComponent({
                 readonly={this.readonly as any}
                 autofocus={this.autofocus}
                 size={this.attrSize}
-                style={this.textDecorationStyle[0] as any}
                 onBlur={this.handleInputBlur}
                 onFocus={this.handleInputFocus}
                 onInput={(e) => this.handleInput(e, 0)}
                 onChange={(e) => this.handleChange(e, 0)}
-                {...this.inputProps}
               />
               {this.showPlaceholder1 ? (
                 <div class={`${mergedClsPrefix}-input__placeholder`}>
