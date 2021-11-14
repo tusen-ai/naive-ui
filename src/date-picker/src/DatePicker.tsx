@@ -34,7 +34,12 @@ import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
-import { MONTH_ITEM_HEIGHT, START_YEAR } from './config'
+import {
+  MONTH_ITEM_HEIGHT,
+  START_YEAR,
+  DATE_FORMAT,
+  DatePickerType
+} from './config'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -54,15 +59,6 @@ import MonthPanel from './panel/month'
 import style from './styles/index.cssr'
 import { DatePickerTheme } from '../styles/light'
 
-const DATE_FORMAT = {
-  date: 'yyyy-MM-dd',
-  datetime: 'yyyy-MM-dd HH:mm:ss',
-  daterange: 'yyyy-MM-dd',
-  datetimerange: 'yyyy-MM-dd HH:mm:ss',
-  month: 'yyyy-MM',
-  year: 'yyyy'
-}
-
 const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),
   to: useAdjustedTo.propTo,
@@ -70,14 +66,8 @@ const datePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  clearable: {
-    type: Boolean,
-    default: false
-  },
-  updateValueOnClose: {
-    type: Boolean,
-    default: false
-  },
+  clearable: Boolean,
+  updateValueOnClose: Boolean,
   defaultValue: {
     type: [Number, Array] as PropType<Value | null>,
     default: null
@@ -93,7 +83,7 @@ const datePickerProps = {
   value: [Number, Array] as PropType<Value | null>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   type: {
-    type: String as PropType<keyof typeof DATE_FORMAT>,
+    type: String as PropType<DatePickerType>,
     default: 'date'
   },
   separator: String,

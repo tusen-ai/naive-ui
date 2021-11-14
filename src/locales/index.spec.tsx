@@ -22,6 +22,7 @@ import {
   NLocale,
   NInput
 } from '../index'
+import { createLocale } from '.'
 
 const Wrapper = (props: {
   dateLocale: NDateLocale
@@ -37,6 +38,21 @@ const Wrapper = (props: {
 }
 
 describe('locale', () => {
+  it('works with createLocale', () => {
+    const locale1: NLocale = createLocale(
+      {
+        Select: {
+          placeholder: '???'
+        }
+      },
+      enUS
+    )
+    expect(locale1.Select.placeholder).toEqual('???')
+    locale1.Select.placeholder = enUS.Select.placeholder
+    expect(locale1).toEqual(enUS)
+    const locale2: NLocale = createLocale(enUS)
+    expect(locale2).toEqual(enUS)
+  })
   it('works', () => {
     expect(
       mount(Wrapper, {

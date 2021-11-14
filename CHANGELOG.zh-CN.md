@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.20.3 (2021-11-15)
 
 ### Fixes
 
@@ -11,8 +11,12 @@
 ### Feats
 
 - `n-menu` 添加箭头颜色区分选中未选中，关闭 [#1535](https://github.com/TuSimple/naive-ui/issues/1535)
-- `n-menu` 的 `defaultExpandedKeys` 使用 watchEffect 初始化，关闭 [#1536](https://github.com/TuSimple/naive-ui/issues/1536)
+- `n-menu` 新增 `watch-props` 属性，关闭 [#1536](https://github.com/TuSimple/naive-ui/issues/1536)
 - `n-date-picker` 属性 `type` 支持 `year` 选项
+
+### i18n
+
+- 新增 `createLocale` 方法允许用户自定义国际化，关闭 [#1525](https://github.com/TuSimple/naive-ui/issues/1525)
 
 ## 2.20.2 (2021-11-05)
 
