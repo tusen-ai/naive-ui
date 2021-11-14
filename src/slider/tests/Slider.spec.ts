@@ -44,7 +44,7 @@ describe('n-slider', () => {
 
   it('accept correct callback types', () => {
     function onUpdateValue1 (value: number): void {}
-    function onUpdateValue2 (value: [number, number]): void {}
+    function onUpdateValue2 (value: number[]): void {}
     mount(NSlider, {
       props: {
         onUpdateValue: onUpdateValue1

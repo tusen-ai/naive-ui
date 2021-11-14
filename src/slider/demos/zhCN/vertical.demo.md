@@ -5,6 +5,7 @@
 ```html
 <n-space style="height: 300px; justify-content: center;">
   <n-slider :default-value="77" vertical />
+  <n-slider :default-value="20" vertical inverted />
   <n-slider :default-value="30" vertical disabled />
   <n-slider v-model:value="value" :marks="marks" vertical range />
 </n-space>
