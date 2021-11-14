@@ -12,7 +12,7 @@ export type RenderPrefix = (info: {
   itemCount: number | undefined
 }) => VNodeChild
 
-export type PaginationSizeOption = SelectBaseOption<string, string>
+export type PaginationSizeOption = SelectBaseOption<number, string>
 export type RenderSuffix = RenderPrefix
 export type RenderNext = RenderPrefix
 export type RenderPrev = RenderPrefix

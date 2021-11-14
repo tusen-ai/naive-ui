@@ -30,7 +30,13 @@ import style from './styles/index.cssr'
 import { call, ExtractPublicPropTypes, MaybeArray, warn } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
-import { RenderPrefix, RenderSuffix, RenderPrev, RenderNext, PaginationSizeOption } from './interface'
+import {
+  RenderPrefix,
+  RenderSuffix,
+  RenderPrev,
+  RenderNext,
+  PaginationSizeOption
+} from './interface'
 
 const paginationProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme>),
@@ -52,7 +58,7 @@ const paginationProps = {
     default: 10
   },
   pageSizes: {
-    type: Array as PropType<number[] | PaginationSizeOption[]>,
+    type: Array as PropType<Array<number | PaginationSizeOption>>,
     default () {
       return [10]
     }

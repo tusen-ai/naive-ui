@@ -1,4 +1,4 @@
-# Custom PageSizes option
+# Custom page size options
 
 ```html
 <n-pagination
