@@ -11,8 +11,8 @@ color
 badge
 icon
 name-size
-v-show-debug
 object-fit
+v-show-debug
 ```
 
 ## API
