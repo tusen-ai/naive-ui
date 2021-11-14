@@ -1,4 +1,4 @@
-import { ref, computed, inject, watch, ExtractPropTypes } from 'vue'
+import { ref, computed, inject, watch, ExtractPropTypes, PropType } from 'vue'
 import {
   addMonths,
   addYears,
@@ -29,7 +29,7 @@ import { ScrollbarInst } from '../../../_internal'
 const useCalendarProps = {
   ...usePanelCommon.props,
   actions: {
-    type: Array,
+    type: Array as PropType<string[]>,
     default: () => ['now', 'clear', 'confirm']
   }
 } as const
