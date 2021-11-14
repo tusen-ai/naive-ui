@@ -143,9 +143,9 @@ export default defineComponent({
       uncontrolledValueRef
     )
     const mergedValuesRef = computed(() => {
-      return (props.range
+      return ((props.range
         ? mergedValueRef.value
-        : [mergedValueRef.value]) as number[]
+        : [mergedValueRef.value]) as number[]).map(clampValue)
     })
 
     const mergedPlacementRef = computed(() => {
@@ -273,13 +273,13 @@ export default defineComponent({
       const { range } = props
       if (range) {
         if (Array.isArray(value)) {
-          const { value: oldValue } = mergedValueRef
-          if (!Array.isArray(oldValue) || value.join() !== oldValue.join()) {
+          const { value: oldValues } = mergedValuesRef
+          if (value.join() !== oldValues.join()) {
             doUpdateValue(value)
           }
         }
       } else if (!Array.isArray(value)) {
-        const { value: oldValue } = mergedValueRef
+        const oldValue = mergedValuesRef.value[0]
         if (oldValue !== value) {
           doUpdateValue(value)
         }
