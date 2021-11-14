@@ -13,6 +13,8 @@
 - `n-menu` add a color distinction between selected and unselected arrow, closes [#1535](https://github.com/TuSimple/naive-ui/issues/1535).
 - `n-menu` 's `defaultExpandedKeys` use watchEffect initialize, closes [#1536](https://github.com/TuSimple/naive-ui/issues/1536).
 - `n-date-picker`'s `type` prop support `year` option.
+- `n-slider` add `vertical` prop, closes [#1468](https://github.com/TuSimple/naive-ui/issues/1468).
+- `n-slider` add `reverse` prop.
 
 ### i18n
 

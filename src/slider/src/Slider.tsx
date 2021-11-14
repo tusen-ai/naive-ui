@@ -349,10 +349,10 @@ export default defineComponent({
         .map((_, index) => step * index + min)
       // If it is a stepping, priority will be given to the marks
       // on the rail，otherwise take the nearest one
-      const closestMark = (stepping
+      const closestMark = stepping
         ? getClosestMark(currentValue, stepValue.concat(markValues), stepBuffer)
-        : getClosestMark(value, markValues.concat(roundValue))) as ClosestMark
-      return clampValue(closestMark.value)
+        : getClosestMark(value, markValues.concat(roundValue))
+      return closestMark ? clampValue(closestMark.value) : currentValue
     }
 
     function clampValue (value: number): number {
