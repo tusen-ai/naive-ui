@@ -177,6 +177,7 @@ export default defineComponent({
         const suffixPropValue = maybeSuffixNode.props?.suffix
         if (suffixPropValue !== undefined && suffixPropValue !== false) {
           suffixSpan = maybeSuffixNode.props?.span ?? defaultSpan
+          maybeSuffixNode.props.privateSpan = suffixSpan
           maybeSuffixNode.props.privateColStart =
             responsiveCols + 1 - suffixSpan
           maybeSuffixNode.props.privateShow = true

@@ -53,6 +53,7 @@ export default c([
     border: none;
     display: inline-flex;
     flex-wrap: nowrap;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
     user-select: none;

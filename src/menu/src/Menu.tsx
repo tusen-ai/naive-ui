@@ -10,7 +10,8 @@ import {
   InjectionKey,
   CSSProperties,
   inject,
-  VNodeChild
+  VNodeChild,
+  watchEffect
 } from 'vue'
 import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
@@ -182,16 +183,16 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
-
-    const uncontrolledExpandedKeysRef = ref(
-      props.defaultExpandAll
+    const uncontrolledExpandedKeysRef = ref<Key[]>([])
+    watchEffect(() => {
+      uncontrolledExpandedKeysRef.value = props.defaultExpandAll
         ? treeMateRef.value.getNonLeafKeys()
         : props.defaultExpandedNames ||
             props.defaultExpandedKeys ||
             treeMateRef.value.getPath(mergedValueRef.value, {
               includeSelf: false
             }).keyPath
-    )
+    })
     const controlledExpandedKeysRef = useCompitable(props, [
       'expandedNames',
       'expandedKeys'
