@@ -111,4 +111,23 @@ describe('n-radio-group', () => {
     expect(radio1.attributes('name')).toEqual('randomName222')
     expect(radio2.attributes('name')).toEqual('randomName222')
   })
+
+  it('should work with `size` prop', async () => {
+    ;(['small', 'medium', 'large'] as const).forEach((size) => {
+      const wrapper = mount(NRadioGroup, {
+        props: {
+          size: size
+        },
+        slots: {
+          default: () => [
+            h(NRadio, null, { default: () => 'test-item1' }),
+            h(NRadio, null, { default: () => 'test-item2' })
+          ]
+        }
+      })
+      expect(
+        wrapper.find('.n-radio-group').attributes('style')
+      ).toMatchSnapshot()
+    })
+  })
 })
