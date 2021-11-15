@@ -82,15 +82,15 @@ const sliderProps = {
   vertical: Boolean,
   reverse: Boolean,
   'onUpdate:value': [Function, Array] as PropType<
-    MaybeArray<<T extends number & number[]>(value: T) => void>
+  MaybeArray<<T extends number & number[]>(value: T) => void>
   >,
   onUpdateValue: [Function, Array] as PropType<
-    MaybeArray<<T extends number & number[]>(value: T) => void>
+  MaybeArray<<T extends number & number[]>(value: T) => void>
   >,
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<
-      MaybeArray<<T extends number & number[]>(value: T) => void>
+    MaybeArray<<T extends number & number[]>(value: T) => void>
     >,
     validator: () => {
       if (__DEV__) {
