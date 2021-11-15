@@ -443,6 +443,7 @@ export default c([
     --merged-td-color: var(--td-color-popover);
     --merged-border-color: var(--border-color-popover);
     --merged-th-color-hover: var(--th-color-hover-popover);
+    --merged-td-color-hover: var(--td-color-hover-popover);
     --merged-td-color-striped: var(--td-color-striped-popover);
   `))
 ])
