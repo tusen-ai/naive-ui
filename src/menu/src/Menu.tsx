@@ -10,7 +10,8 @@ import {
   InjectionKey,
   CSSProperties,
   inject,
-  VNodeChild
+  VNodeChild,
+  watchEffect
 } from 'vue'
 import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
@@ -86,6 +87,10 @@ const menuProps = {
   mode: {
     type: String as PropType<'vertical' | 'horizontal'>,
     default: 'vertical'
+  },
+  watchProps: {
+    type: Array as PropType<Array<'defaultExpandedKeys' | 'defaultValue'>>,
+    default: undefined
   },
   disabled: Boolean,
   inverted: Boolean,
@@ -176,22 +181,36 @@ export default defineComponent({
       () => new Set(treeMateRef.value.treeNodes.map((e) => e.key))
     )
 
-    const uncontrolledValueRef = ref(props.defaultValue)
+    const { watchProps } = props
+
+    const uncontrolledValueRef = ref<Key | null>(null)
+    if (watchProps?.includes('defaultValue')) {
+      watchEffect(() => {
+        uncontrolledValueRef.value = props.defaultValue
+      })
+    } else {
+      uncontrolledValueRef.value = props.defaultValue
+    }
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
       controlledValueRef,
       uncontrolledValueRef
     )
-
-    const uncontrolledExpandedKeysRef = ref(
-      props.defaultExpandAll
+    const uncontrolledExpandedKeysRef = ref<Key[]>([])
+    const initUncontrolledExpandedKeys = (): void => {
+      uncontrolledExpandedKeysRef.value = props.defaultExpandAll
         ? treeMateRef.value.getNonLeafKeys()
         : props.defaultExpandedNames ||
-            props.defaultExpandedKeys ||
-            treeMateRef.value.getPath(mergedValueRef.value, {
-              includeSelf: false
-            }).keyPath
-    )
+          props.defaultExpandedKeys ||
+          treeMateRef.value.getPath(mergedValueRef.value, {
+            includeSelf: false
+          }).keyPath
+    }
+    if (watchProps?.includes('defaultExpandedKeys')) {
+      watchEffect(initUncontrolledExpandedKeys)
+    } else {
+      initUncontrolledExpandedKeys()
+    }
     const controlledExpandedKeysRef = useCompitable(props, [
       'expandedNames',
       'expandedKeys'

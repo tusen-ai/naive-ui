@@ -413,6 +413,8 @@ export default defineComponent({
             returnFocus: false
           })
         }
+      } else {
+        doBlur(e)
       }
     }
 

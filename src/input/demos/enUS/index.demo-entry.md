@@ -19,6 +19,7 @@ passively-activated
 count
 focus
 event
+input-props
 ```
 
 ## API
@@ -32,7 +33,7 @@ event
 | clearable | `boolean` | `false` | Whether the input is clearable. |
 | default-value | `string \| [string, string] \| null` | `null` | Default value when not manually set. |
 | disabled | `boolean` | `false` | Whether to disable the input. |
-| input-props | `HTMLInputAttributes` | `undefined` | The props of the input element inside the component. This is disabled if the `pair` property is true. |
+| input-props | `HTMLInputAttributes` | `undefined` | The dom props of the input element inside the component. This is disabled if the `pair` property is true. For avaiable attributes, [see here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input). Warning：It won't override internal props with the same name (except `type`). |
 | loading | `boolean` | `undefined` | Set loading state. If set (true/false), the element will always take up enough space for the loading indicator. |
 | maxlength | `number` | `undefined` | Maximum input length. |
 | minlength | `number` | `undefined` | Minimum input length. |
