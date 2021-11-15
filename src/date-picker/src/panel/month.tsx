@@ -97,7 +97,9 @@ export default defineComponent({
       <div
         ref="selfRef"
         tabindex={0}
-        class={`${mergedClsPrefix}-date-panel ${mergedClsPrefix}-date-panel--month ${mergedClsPrefix}-date-panel--${type === 'quarter' ? 'quarter' : 'month'}`}
+        class={`${mergedClsPrefix}-date-panel ${mergedClsPrefix}-date-panel--month ${mergedClsPrefix}-date-panel--${
+          type === 'quarter' ? 'quarter' : 'month'
+        }`}
         onFocus={this.handlePanelFocus}
         onKeydown={this.handlePanelKeyDown}
       >
@@ -162,23 +164,23 @@ export default defineComponent({
           ) : null}
           {type === 'quarter' ? (
             <div
-              class={`${mergedClsPrefix}-date-panel-quarter-calendar__picker-col`}
+              class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
             >
               <NScrollbar
                 ref="monthScrollRef"
                 theme={mergedTheme.peers.Scrollbar}
                 themeOverrides={mergedTheme.peerOverrides.Scrollbar}
               >
-              {{
-                default: () => [
-                  this.quarterArray.map((quarterItem, i) =>
-                    renderQuarterItem(quarterItem, i, mergedClsPrefix)
-                  ),
-                  <div
-                    class={`${mergedClsPrefix}-date-panel-quarter-calendar__padding`}
-                  />
-                ]
-              }}
+                {{
+                  default: () => [
+                    this.quarterArray.map((quarterItem, i) =>
+                      renderQuarterItem(quarterItem, i, mergedClsPrefix)
+                    ),
+                    <div
+                      class={`${mergedClsPrefix}-date-panel-quarter-calendar__padding`}
+                    />
+                  ]
+                }}
               </NScrollbar>
             </div>
           ) : null}

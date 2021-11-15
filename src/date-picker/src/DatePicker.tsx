@@ -197,6 +197,8 @@ export default defineComponent({
             return localeRef.value.monthPlaceholder
           case 'year':
             return localeRef.value.yearPlaceholder
+          case 'quarter':
+            return localeRef.value.quarterPlaceholder
           default:
             return ''
         }
@@ -242,6 +244,8 @@ export default defineComponent({
           return localeRef.value.yearTypeFormat
         case 'month':
           return localeRef.value.monthTypeFormat
+        case 'quarter':
+          return localeRef.value.quarterFormat
       }
     })
     const mergedActionsRef = computed(() => {
@@ -265,6 +269,9 @@ export default defineComponent({
         }
         case 'year': {
           return ['clear', 'now']
+        }
+        case 'quarter': {
+          return ['clear', 'now', 'confirm']
         }
         default: {
           warn(
@@ -378,7 +385,6 @@ export default defineComponent({
       value: Value | null,
       doUpdate: boolean
     ): void {
-      console.log('2222')
       if (doUpdate) {
         doUpdateValue(value)
       } else {
@@ -405,13 +411,11 @@ export default defineComponent({
       if (value === null) {
         singleInputValueRef.value = ''
       } else {
-        console.log('merged', value, mergedFormatRef.value)
         singleInputValueRef.value = format(
           value,
           mergedFormatRef.value,
           dateFnsOptionsRef.value
         )
-        console.log('xxxx', singleInputValueRef.value)
       }
     }
     function deriveRangeInputState (values: [number, number] | null): void {
@@ -517,7 +521,11 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
-      if (props.type === 'month' || props.type === 'year' || props.type === 'quarter') {
+      if (
+        props.type === 'month' ||
+        props.type === 'year' ||
+        props.type === 'quarter'
+      ) {
         void nextTick(scrollYearMonth)
       }
     }
@@ -545,7 +553,6 @@ export default defineComponent({
     // If new value is valid, set calendarTime and refresh display strings.
     // If new value is invalid, do nothing.
     watch(pendingValueRef, () => {
-      console.log('updtaeinput')
       deriveInputState()
     })
     // init
@@ -898,11 +905,11 @@ export default defineComponent({
                                     key="year"
                                   />
                               ) : this.type === 'quarter' ? (
-                                <MonthPanel
-                                  {...commonPanelProps}
-                                  type="quarter"
-                                  key="quarter"
-                                />
+                                  <MonthPanel
+                                    {...commonPanelProps}
+                                    type="quarter"
+                                    key="quarter"
+                                  />
                               ) : (
                                   <DatePanel {...commonPanelProps} />
                               ),

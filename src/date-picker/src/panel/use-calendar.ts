@@ -14,9 +14,17 @@ import {
   startOfSecond,
   startOfMonth,
   startOfYear,
-  startOfQuarter
+  startOfQuarter,
+  setQuarter
 } from 'date-fns'
-import { dateArray, monthArray, strictParse, yearArray, quarterArray, QuarterItem } from '../utils'
+import {
+  dateArray,
+  monthArray,
+  strictParse,
+  yearArray,
+  quarterArray,
+  QuarterItem
+} from '../utils'
 import { usePanelCommon } from './use-panel-common'
 import {
   IsSingleDateDisabled,
@@ -215,7 +223,9 @@ function useCalendar (
     calendarValueRef.value = Date.now()
     panelCommon.doClose(true)
   }
-  function handleDateClick (dateItem: DateItem | MonthItem | YearItem | QuarterItem): void {
+  function handleDateClick (
+    dateItem: DateItem | MonthItem | YearItem | QuarterItem
+  ): void {
     if (mergedIsDateDisabled(dateItem.ts)) {
       return
     }
@@ -225,7 +235,15 @@ function useCalendar (
     } else {
       newValue = Date.now()
     }
-    newValue = getTime(set(newValue, dateItem.dateObject))
+    newValue = getTime(
+      type === 'quarter' &&
+        (dateItem.dateObject as { year: number, quarter: number }).quarter
+        ? setQuarter(
+          new Date(`${dateItem.dateObject.year}`),
+          (dateItem.dateObject as { year: number, quarter: number }).quarter
+        )
+        : set(newValue, dateItem.dateObject)
+    )
     panelCommon.doUpdateValue(
       sanitizeValue(newValue),
       type === 'date' || type === 'year'

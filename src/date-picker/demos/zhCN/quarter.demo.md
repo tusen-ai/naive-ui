@@ -1,7 +1,7 @@
-# 月份
+# 季度
 
 ```html
-<n-date-picker v-model:value="timestamp" type="month" clearable />
+<n-date-picker v-model:value="timestamp" type="quarter" clearable />
 <pre>{{ JSON.stringify(timestamp) }}</pre>
 ```
 
