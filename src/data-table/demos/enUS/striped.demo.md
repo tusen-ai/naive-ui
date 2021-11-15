@@ -3,7 +3,7 @@
 Using `striped` prop to make it easier to distinguish rows.
 
 ```html
-<n-data-table :columns="columns" :data="data" :striped="true" />
+<n-data-table :columns="columns" :data="data" striped />
 ```
 
 ```js

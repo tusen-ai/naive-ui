@@ -77,10 +77,7 @@ export const dataTableProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  striped: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: false
-  },
+  striped: Boolean,
   scrollX: [Number, String] as PropType<string | number>,
   defaultCheckedRowKeys: {
     type: Array as PropType<RowKey[]>,
@@ -357,6 +354,7 @@ export default defineComponent({
       summaryRef: toRef(props, 'summary'),
       virtualScrollRef: toRef(props, 'virtualScroll'),
       rowPropsRef: toRef(props, 'rowProps'),
+      stripedRef: toRef(props, 'striped'),
       checkOptionsRef: computed(() => {
         const { value: selectionColumn } = selectionColumnRef
         return selectionColumn?.options
@@ -447,6 +445,9 @@ export default defineComponent({
             loadingColor,
             loadingSize,
             opacityLoading,
+            tdColorStriped,
+            tdColorStripedModal,
+            tdColorStripedPopover,
             [createKey('fontSize', size)]: fontSize,
             [createKey('thPadding', size)]: thPadding,
             [createKey('tdPadding', size)]: tdPadding
@@ -488,7 +489,10 @@ export default defineComponent({
           '--sorter-size': sorterSize,
           '--loading-size': loadingSize,
           '--loading-color': loadingColor,
-          '--opacity-loading': opacityLoading
+          '--opacity-loading': opacityLoading,
+          '--td-color-striped': tdColorStriped,
+          '--td-color-striped-modal': tdColorStripedModal,
+          '--td-color-striped-popover': tdColorStripedPopover
         }
       })
     }
@@ -506,8 +510,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-data-table--single-line`]: this.singleLine,
             [`${mergedClsPrefix}-data-table--single-column`]: this.singleColumn,
             [`${mergedClsPrefix}-data-table--loading`]: this.loading,
-            [`${mergedClsPrefix}-data-table--flex-height`]: this.flexHeight,
-            [`${mergedClsPrefix}-data-table--striped`]: this.striped
+            [`${mergedClsPrefix}-data-table--flex-height`]: this.flexHeight
           }
         ]}
         style={this.cssVars as CSSProperties}

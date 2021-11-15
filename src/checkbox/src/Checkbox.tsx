@@ -68,7 +68,7 @@ const checkboxProps = {
   >,
   onUpdateChecked: [Function, Array] as PropType<MaybeArray<OnUpdateChecked>>,
   // private
-  privateTableHeader: Boolean,
+  privateInsideTable: Boolean,
   // deprecated
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateChecked>>
 }
@@ -283,7 +283,7 @@ export default defineComponent({
       renderedChecked,
       mergedDisabled,
       indeterminate,
-      privateTableHeader,
+      privateInsideTable,
       cssVars,
       labelId,
       label,
@@ -300,7 +300,7 @@ export default defineComponent({
           renderedChecked && `${mergedClsPrefix}-checkbox--checked`,
           mergedDisabled && `${mergedClsPrefix}-checkbox--disabled`,
           indeterminate && `${mergedClsPrefix}-checkbox--indeterminate`,
-          privateTableHeader && `${mergedClsPrefix}-checkbox--table-header`
+          privateInsideTable && `${mergedClsPrefix}-checkbox--table-header`
         ]}
         tabindex={mergedDisabled || !focusable ? undefined : 0}
         role="checkbox"

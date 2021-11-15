@@ -184,7 +184,7 @@ export default defineComponent({
                       <>
                         <NCheckbox
                           key={currentPage}
-                          privateTableHeader
+                          privateInsideTable
                           checked={allRowsChecked}
                           indeterminate={someRowsChecked}
                           disabled={headerCheckboxDisabled}

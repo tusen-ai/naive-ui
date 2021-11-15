@@ -3,7 +3,7 @@
 使用 `striped` 属性渲染条纹，使得表格明暗交替。
 
 ```html
-<n-data-table :columns="columns" :data="data" :striped="true" />
+<n-data-table :columns="columns" :data="data" striped />
 ```
 
 ```js
