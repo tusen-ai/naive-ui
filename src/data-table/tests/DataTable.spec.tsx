@@ -1204,10 +1204,16 @@ describe('props.columns', () => {
       }
     })
     const wrapper = mount(() => (
-      <NDataTable columns={columns} data={data} striped={true} />
+      <NDataTable columns={columns} data={data} striped />
     ))
-    expect(wrapper.findAll('.n-data-table')[0].attributes('class')).toContain(
-      'n-data-table--striped'
+
+    const trList = wrapper.find('tbody').findAll('.n-data-table-tr')
+    expect(trList[1].attributes('class')).toContain('n-data-table-tr--striped')
+    expect(trList[0].attributes('class')).not.toContain(
+      'n-data-table-tr--striped'
+    )
+    expect(trList[2].attributes('class')).not.toContain(
+      'n-data-table-tr--striped'
     )
   })
 })
