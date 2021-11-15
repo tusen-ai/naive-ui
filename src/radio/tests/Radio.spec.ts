@@ -44,14 +44,10 @@ describe('n-radio', () => {
   })
 
   it('should work with `size` prop', async () => {
-    const wrapper = mount(NRadio, { props: { size: 'small' } })
-    expect(wrapper.find('.n-radio').attributes('style')).toMatchSnapshot()
-
-    await wrapper.setProps({ size: 'medium' })
-    expect(wrapper.find('.n-radio').attributes('style')).toMatchSnapshot()
-
-    await wrapper.setProps({ size: 'large' })
-    expect(wrapper.find('.n-radio').attributes('style')).toMatchSnapshot()
+    ;(['small', 'medium', 'large'] as const).forEach((size) => {
+      const wrapper = mount(NRadio, { props: { size: size } })
+      expect(wrapper.find('.n-radio').attributes('style')).toMatchSnapshot()
+    })
   })
 })
 
