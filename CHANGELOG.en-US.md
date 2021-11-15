@@ -1,5 +1,10 @@
 # CHANGELOG
 
+### Feats
+
+- `n-slider` add `vertical` prop, closes [#1468](https://github.com/TuSimple/naive-ui/issues/1468).
+- `n-slider` add `reverse` prop.
+
 ## 2.20.3 (2021-11-15)
 
 ### Fixes

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+### Feats
+
+- `n-slider` 新增 `vertical` 属性，关闭 [#1468](https://github.com/TuSimple/naive-ui/issues/1468)
+- `n-slider` 新增 `reverse` 属性
+
 ## 2.20.3 (2021-11-15)
 
 ### Fixes

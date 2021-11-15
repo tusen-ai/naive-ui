@@ -11,6 +11,8 @@ mark
 disabled
 disable-tooltip
 format
+reverse
+vertical
 ```
 
 ## API
@@ -28,5 +30,7 @@ format
 | range           | `boolean`                                     | `false`     | Whether the slider uses range value. |
 | step            | `number`                                      | `1`         | Step of the slider.                  |
 | tooltip         | `boolean`                                     | `true`      | Whether to show tooltip.             |
+| reverse         | `boolean`                                     | `false`     | Whether to reverse the track.        |
+| vertical        | `boolean`                                     | `false`     | Whether to enable vertical mode.     |
 | value           | `number \| [number, number] \| null`          | `undefined` | Value of the slider.                 |
 | on-update:value | `(value: number \| [number, number]) => void` | `undefined` | Callback on value update.            |
