@@ -3,7 +3,7 @@ import { VirtualList } from 'vueuc'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import { useCalendar } from './use-calendar'
-import type { MonthItem, YearItem } from '../utils'
+import type { MonthItem, YearItem, QuarterItem } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 
 /**
@@ -17,7 +17,7 @@ export default defineComponent({
   props: {
     ...useCalendar.props,
     type: {
-      type: String as PropType<'month' | 'year'>,
+      type: String as PropType<'month' | 'year' | 'quarter'>,
       required: true
     }
   },
@@ -54,7 +54,34 @@ export default defineComponent({
         </div>
       )
     }
-    return { ...useCalendarRef, renderItem }
+    const renderQuarterItem = (
+      item: QuarterItem,
+      i: number,
+      mergedClsPrefix: string
+    ): VNode => {
+      const { mergedIsDateDisabled, handleDateClick } = useCalendarRef
+      return (
+        <div
+          data-n-date
+          key={i}
+          class={[
+            `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
+            {
+              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`]:
+                item.isCurrentQuarter,
+              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
+                item.selected,
+              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
+                mergedIsDateDisabled(item.ts)
+            }
+          ]}
+          onClick={() => handleDateClick(item)}
+        >
+          Q {item.dateObject.quarter}
+        </div>
+      )
+    }
+    return { ...useCalendarRef, renderItem, renderQuarterItem }
   },
   render () {
     const {
@@ -63,13 +90,14 @@ export default defineComponent({
       shortcuts,
       actions,
       renderItem,
+      renderQuarterItem,
       type
     } = this
     return (
       <div
         ref="selfRef"
         tabindex={0}
-        class={`${mergedClsPrefix}-date-panel ${mergedClsPrefix}-date-panel--month`}
+        class={`${mergedClsPrefix}-date-panel ${mergedClsPrefix}-date-panel--month ${mergedClsPrefix}-date-panel--${type === 'quarter' ? 'quarter' : 'month'}`}
         onFocus={this.handlePanelFocus}
         onKeydown={this.handlePanelKeyDown}
       >
@@ -129,6 +157,28 @@ export default defineComponent({
                     />
                   ]
                 }}
+              </NScrollbar>
+            </div>
+          ) : null}
+          {type === 'quarter' ? (
+            <div
+              class={`${mergedClsPrefix}-date-panel-quarter-calendar__picker-col`}
+            >
+              <NScrollbar
+                ref="monthScrollRef"
+                theme={mergedTheme.peers.Scrollbar}
+                themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+              >
+              {{
+                default: () => [
+                  this.quarterArray.map((quarterItem, i) =>
+                    renderQuarterItem(quarterItem, i, mergedClsPrefix)
+                  ),
+                  <div
+                    class={`${mergedClsPrefix}-date-panel-quarter-calendar__padding`}
+                  />
+                ]
+              }}
               </NScrollbar>
             </div>
           ) : null}

@@ -68,6 +68,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
   }
   function doUpdateValue (value: Value | null, doUpdate: boolean): void {
     const { onUpdateValue } = props
+    console.log('11111')
     ;(onUpdateValue as OnPanelUpdateValueImpl)(value, doUpdate)
   }
   function doClose (disableUpdateOnClose: boolean = false): void {

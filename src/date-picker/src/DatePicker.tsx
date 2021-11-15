@@ -378,6 +378,7 @@ export default defineComponent({
       value: Value | null,
       doUpdate: boolean
     ): void {
+      console.log('2222')
       if (doUpdate) {
         doUpdateValue(value)
       } else {
@@ -404,11 +405,13 @@ export default defineComponent({
       if (value === null) {
         singleInputValueRef.value = ''
       } else {
+        console.log('merged', value, mergedFormatRef.value)
         singleInputValueRef.value = format(
           value,
           mergedFormatRef.value,
           dateFnsOptionsRef.value
         )
+        console.log('xxxx', singleInputValueRef.value)
       }
     }
     function deriveRangeInputState (values: [number, number] | null): void {
@@ -514,7 +517,7 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
-      if (props.type === 'month' || props.type === 'year') {
+      if (props.type === 'month' || props.type === 'year' || props.type === 'quarter') {
         void nextTick(scrollYearMonth)
       }
     }
@@ -542,6 +545,7 @@ export default defineComponent({
     // If new value is valid, set calendarTime and refresh display strings.
     // If new value is invalid, do nothing.
     watch(pendingValueRef, () => {
+      console.log('updtaeinput')
       deriveInputState()
     })
     // init
@@ -893,6 +897,12 @@ export default defineComponent({
                                     type="year"
                                     key="year"
                                   />
+                              ) : this.type === 'quarter' ? (
+                                <MonthPanel
+                                  {...commonPanelProps}
+                                  type="quarter"
+                                  key="quarter"
+                                />
                               ) : (
                                   <DatePanel {...commonPanelProps} />
                               ),

@@ -11,11 +11,14 @@ import {
   addDays,
   addMonths,
   addYears,
+  addQuarters,
   getDay,
   parse,
   format,
   Locale,
-  startOfYear
+  startOfYear,
+  getQuarter,
+  isSameQuarter
 } from 'date-fns'
 import { START_YEAR } from './config'
 
@@ -41,13 +44,14 @@ function getDerivedTimeFromKeyboardEvent (
 const matcherMap = {
   date: isSameDay,
   month: isSameMonth,
-  year: isSameYear
+  year: isSameYear,
+  quarter: isSameQuarter
 } as const
 
 function matchDate (
   sourceTime: number[] | number,
   patternTime: number | Date,
-  type: 'date' | 'month' | 'year' = 'date'
+  type: 'date' | 'month' | 'year' | 'quarter' = 'date'
 ): boolean {
   const matcher = matcherMap[type]
   if (Array.isArray(sourceTime)) {
@@ -90,6 +94,17 @@ export interface YearItem {
     year: number
   }
   isCurrentYear: boolean
+  selected: boolean
+  ts: number
+}
+
+export interface QuarterItem {
+  type: 'quarter'
+  dateObject: {
+    quarter: number
+    year: number
+  }
+  isCurrentQuarter: boolean
   selected: boolean
   ts: number
 }
@@ -160,6 +175,23 @@ function yearItem (
   }
 }
 
+function quarterItem (
+  quarterTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): QuarterItem {
+  return {
+    type: 'quarter',
+    dateObject: {
+      quarter: getQuarter(quarterTs),
+      year: getYear(quarterTs)
+    },
+    isCurrentQuarter: isSameQuarter(currentTs, quarterTs),
+    selected: valueTs !== null && matchDate(valueTs, quarterTs, 'quarter'),
+    ts: getTime(quarterTs)
+  }
+}
+
 /**
  * Given time to display calendar, given the selected time, given current time,
  * return the date array of display time's month.
@@ -225,6 +257,21 @@ function monthArray (
   return calendarMonths
 }
 
+function quarterArray (
+  quarterTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): QuarterItem[] {
+  const calendarQuarters = []
+  const yearStart = startOfYear(quarterTs)
+  for (let i = 0; i < 4; i++) {
+    calendarQuarters.push(
+      quarterItem(getTime(addQuarters(yearStart, i)), valueTs, currentTs)
+    )
+  }
+  return calendarQuarters
+}
+
 function yearArray (
   yearTs: number,
   valueTs: number | [number, number] | null,
@@ -261,6 +308,7 @@ export {
   dateArray,
   monthArray,
   yearArray,
+  quarterArray,
   strictParse,
   getDerivedTimeFromKeyboardEvent
 }
