@@ -82,15 +82,15 @@ const sliderProps = {
   vertical: Boolean,
   reverse: Boolean,
   'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<<T extends number & number[]>(value: T) => void>
+    MaybeArray<<T extends number & number[]>(value: T) => void>
   >,
   onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<<T extends number & number[]>(value: T) => void>
+    MaybeArray<<T extends number & number[]>(value: T) => void>
   >,
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<
-    MaybeArray<<T extends number & number[]>(value: T) => void>
+      MaybeArray<<T extends number & number[]>(value: T) => void>
     >,
     validator: () => {
       if (__DEV__) {
@@ -148,6 +148,8 @@ export default defineComponent({
         : [mergedValueRef.value]) as number[]).map(clampValue)
     })
 
+    const isOverflowHandleRef = computed(() => mergedValuesRef.value.length > 2)
+
     const mergedPlacementRef = computed(() => {
       return props.placement === undefined
         ? props.vertical
@@ -174,6 +176,7 @@ export default defineComponent({
     })
 
     const fillStyleRef = computed(() => {
+      if (isOverflowHandleRef.value) return
       const values = mergedValuesRef.value
       const start = props.range ? Math.min.apply(null, values) : props.min
       const end = props.range ? Math.max.apply(null, values) : values[0]
@@ -198,14 +201,19 @@ export default defineComponent({
         const orderValues = mergedValuesRef.value.slice()
         orderValues.sort((a, b) => a - b)
         const { value: styleDirection } = styleDirectionRef
+        const { value: overflowHandle } = isOverflowHandleRef
         const { range } = props
+        const isActive = overflowHandle
+          ? () => false
+          : (num: number): boolean =>
+              range
+                ? num >= orderValues[0] &&
+                  num <= orderValues[orderValues.length - 1]
+                : num >= orderValues[0]
         for (const key of Object.keys(marks)) {
           const num = Number(key)
           mergedMarks.push({
-            active: range
-              ? num >= orderValues[0] &&
-                num <= orderValues[orderValues.length - 1]
-              : num >= orderValues[0],
+            active: isActive(num),
             label: marks[key],
             style: {
               [styleDirection]: `${valueToPercentage(num)}%`
