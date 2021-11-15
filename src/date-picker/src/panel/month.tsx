@@ -18,7 +18,7 @@ export default defineComponent({
     ...useCalendar.props,
     type: {
       type: String as PropType<'month' | 'year'>,
-      default: 'date'
+      required: true
     }
   },
   setup (props) {
