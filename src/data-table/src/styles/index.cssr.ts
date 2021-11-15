@@ -303,6 +303,9 @@ export default c([
     cM('loading', [
       cB('data-table-wrapper', 'opacity: var(--opacity-loading);')
     ]),
+    cM('striped', [
+      cB('data-table-tr:nth-child(even)', [cB('data-table-td', 'background-color: var(--td-color-hover);')])
+    ]),
     cM('single-column', [
       cB('data-table-td', {
         borderBottom: '0 solid var(--merged-border-color)'

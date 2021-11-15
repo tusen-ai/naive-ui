@@ -42,6 +42,7 @@ tree
 flex-height
 fixed-column-debug
 scroll-debug
+striped
 ```
 
 ## API

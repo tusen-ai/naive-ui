@@ -40,6 +40,7 @@ virtual
 custom-filter-menu
 tree
 flex-height
+striped
 ```
 
 ## API

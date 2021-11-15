@@ -77,6 +77,10 @@ export const dataTableProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  striped: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: false
+  },
   scrollX: [Number, String] as PropType<string | number>,
   defaultCheckedRowKeys: {
     type: Array as PropType<RowKey[]>,
@@ -502,7 +506,8 @@ export default defineComponent({
             [`${mergedClsPrefix}-data-table--single-line`]: this.singleLine,
             [`${mergedClsPrefix}-data-table--single-column`]: this.singleColumn,
             [`${mergedClsPrefix}-data-table--loading`]: this.loading,
-            [`${mergedClsPrefix}-data-table--flex-height`]: this.flexHeight
+            [`${mergedClsPrefix}-data-table--flex-height`]: this.flexHeight,
+            [`${mergedClsPrefix}-data-table--striped`]: this.striped
           }
         ]}
         style={this.cssVars as CSSProperties}
