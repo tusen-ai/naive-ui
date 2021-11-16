@@ -126,4 +126,32 @@ describe('n-radio-group', () => {
       ).toMatchSnapshot()
     })
   })
+
+  it('should work with `value` prop', async () => {
+    const wrapper = mount(NRadioGroup, {
+      props: {
+        value: 'test1'
+      },
+      slots: {
+        default: () => [
+          h(NRadio, { value: 'test1' }, { default: () => 'test-item1' }),
+          h(NRadio, { value: 'test2' }, { default: () => 'test-item2' })
+        ]
+      }
+    })
+    expect(wrapper.findAll('.n-radio')[0].classes()).toContain(
+      'n-radio--checked'
+    )
+    expect(wrapper.findAll('.n-radio')[1].classes()).not.toContain(
+      'n-radio--checked'
+    )
+
+    await wrapper.setProps({ value: 'test2' })
+    expect(wrapper.findAll('.n-radio')[1].classes()).toContain(
+      'n-radio--checked'
+    )
+    expect(wrapper.findAll('.n-radio')[0].classes()).not.toContain(
+      'n-radio--checked'
+    )
+  })
 })
