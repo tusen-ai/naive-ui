@@ -6,6 +6,10 @@
 
 - `n-data-table` 新增 `striped` 属性，关闭 [#1552](https://github.com/TuSimple/naive-ui/issues/1552)
 
+### Fixes
+
+- 修复 `suffix` 内部组件 `loading` 属性的默认值
+
 ## 2.20.3 (2021-11-15)
 
 ### Fixes
