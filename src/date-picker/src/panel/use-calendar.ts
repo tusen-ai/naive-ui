@@ -237,10 +237,10 @@ function useCalendar (
     }
     newValue = getTime(
       type === 'quarter' &&
-        (dateItem.dateObject as { year: number, quarter: number }).quarter
+        (dateItem.dateObject as QuarterItem['dateObject']).quarter
         ? setQuarter(
           new Date(`${dateItem.dateObject.year}`),
-          (dateItem.dateObject as { year: number, quarter: number }).quarter
+          (dateItem.dateObject as QuarterItem['dateObject']).quarter
         )
         : set(newValue, dateItem.dateObject)
     )
@@ -256,7 +256,7 @@ function useCalendar (
     } else if (type === 'year') {
       panelCommon.doClose()
     } else if (type === 'quarter') {
-      panelCommon.disableTransitionOneTick()
+      scrollYearMonth(newValue)
     }
   }
   function deriveDateInputValue (time?: number): void {

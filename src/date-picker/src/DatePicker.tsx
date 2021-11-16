@@ -53,6 +53,7 @@ import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
 import style from './styles/index.cssr'
 import { DatePickerTheme } from '../styles/light'
+import { dateEnUS } from '../../locales'
 
 const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),
@@ -411,6 +412,12 @@ export default defineComponent({
       if (value === null) {
         singleInputValueRef.value = ''
       } else {
+        // maybe date-fns/locale problem When the local language is zh-CN, the quarter will be translated into the second moment
+        if (dateFnsOptionsRef.value.locale.code === 'zh-CN') {
+          dateFnsOptionsRef.value.locale.localize &&
+          dateEnUS.locale.localize &&
+          (dateFnsOptionsRef.value.locale.localize.quarter = dateEnUS.locale.localize?.quarter)
+        }
         singleInputValueRef.value = format(
           value,
           mergedFormatRef.value,
@@ -521,10 +528,11 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
+      const { type } = props
       if (
-        props.type === 'month' ||
-        props.type === 'year' ||
-        props.type === 'quarter'
+        type === 'month' ||
+        type === 'year' ||
+        type === 'quarter'
       ) {
         void nextTick(scrollYearMonth)
       }
