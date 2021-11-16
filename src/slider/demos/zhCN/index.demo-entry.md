@@ -11,6 +11,8 @@ mark
 disabled
 disable-tooltip
 format
+reverse
+vertical
 ```
 
 ## API
@@ -28,5 +30,7 @@ format
 | range | `boolean` | `false` | 是否选择范围值 |
 | step | `number` | `1` | 步长 |
 | tooltip | `boolean` | `true` | 是否展示 tooltip |
+| reverse | `boolean` | `false` | 是否倒转轨道 |
+| vertical | `boolean` | `false` | 是否启用垂直模式 |
 | value | `number \| [number, number] \| null` | `undefined` | 值 |
 | on-update:value | `(value: number \| [number, number]) => void` | `undefined` | 值更新的回调 |
