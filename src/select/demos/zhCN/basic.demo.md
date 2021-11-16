@@ -4,7 +4,7 @@
 
 ```html
 <n-space vertical>
-  <n-select v-model:value="value" :options="options" :loading="undefined" />
+  <n-select v-model:value="value" :options="options" />
   <n-select v-model:value="value" disabled :options="options" />
 </n-space>
 ```
