@@ -1,4 +1,4 @@
-# Disable Tooltip
+# Disable tooltip
 
 Set `:tooltip="false"` to disabled the tooltip.
 

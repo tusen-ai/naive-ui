@@ -22,7 +22,6 @@ import { useIsMounted, useMergedState } from 'vooks'
 import { on, off } from 'evtd'
 import { useTheme, useFormItem, useConfig, ThemeProps } from '../../_mixins'
 import {
-  warn,
   call,
   useAdjustedTo,
   MaybeArray,
@@ -87,23 +86,7 @@ const sliderProps = {
   >,
   onUpdateValue: [Function, Array] as PropType<
   MaybeArray<(value: number & number[]) => void>
-  >,
-  // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<
-    MaybeArray<(value: number & number[]) => void>
-    >,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'slider',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  >
 } as const
 
 export type SliderProps = ExtractPublicPropTypes<typeof sliderProps>
@@ -255,10 +238,7 @@ export default defineComponent({
       })
     }
 
-    function getHandleStyle (
-      value: number,
-      index: number
-    ): Record<string, any> {
+    function getHandleStyle (value: number, index: number): Record<string, any> {
       const percentage = valueToPercentage(value)
       const { value: styleDirection } = styleDirectionRef
       return {
@@ -268,13 +248,8 @@ export default defineComponent({
     }
 
     function doUpdateValue (value: number | number[]): void {
-      const {
-        onChange,
-        'onUpdate:value': _onUpdateValue,
-        onUpdateValue
-      } = props
+      const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onChange) call(onChange as OnUpdateValueImpl, value)
       if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
       if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
@@ -389,9 +364,7 @@ export default defineComponent({
       return Number(newValue.toFixed(precisionRef.value))
     }
 
-    function getPointValue (
-      event: MouseEvent | TouchEvent
-    ): number | undefined {
+    function getPointValue (event: MouseEvent | TouchEvent): number | undefined {
       const railEl = handleRailRef.value
       if (!railEl) return
 
@@ -685,12 +658,12 @@ export default defineComponent({
               class={[
                 `${mergedClsPrefix}-slider-dots`,
                 {
-                  [`${mergedClsPrefix}-slider-dots--transition-disabled`]: this
-                    .dotTransitionDisabled
+                  [`${mergedClsPrefix}-slider-dots--transition-disabled`]:
+                    this.dotTransitionDisabled
                 }
               ]}
             >
-              {this.markInfos.map(mark => (
+              {this.markInfos.map((mark) => (
                 <div
                   key={mark.label}
                   class={[
@@ -704,7 +677,7 @@ export default defineComponent({
               ))}
             </div>
           ) : null}
-          <div ref='handleRailRef' class={`${mergedClsPrefix}-slider-handles`}>
+          <div ref="handleRailRef" class={`${mergedClsPrefix}-slider-handles`}>
             {this.arrifiedValues.map((value, index) => {
               const showTooltip = this.isShowTooltip(index)
               return (
@@ -745,7 +718,7 @@ export default defineComponent({
                           {{
                             default: () => (
                               <Transition
-                                name='fade-in-scale-up-transition'
+                                name="fade-in-scale-up-transition"
                                 appear={this.isMounted}
                                 css={this.isSkipCSSDetection(index)}
                               >
@@ -780,7 +753,7 @@ export default defineComponent({
           </div>
           {this.marks ? (
             <div class={`${mergedClsPrefix}-slider-marks`}>
-              {this.markInfos.map(mark => (
+              {this.markInfos.map((mark) => (
                 <div
                   key={mark.label}
                   class={`${mergedClsPrefix}-slider-mark`}
