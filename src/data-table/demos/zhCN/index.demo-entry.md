@@ -42,6 +42,7 @@ tree
 flex-height
 fixed-column-debug
 scroll-debug
+striped
 ```
 
 ## API
@@ -73,6 +74,7 @@ scroll-debug
 | single-column | `boolean` | `false` | 列内容是否为一个整体，当参数为`true`时，则没有`border-bottom` |
 | single-line | `boolean` | `true` | 行内容是否为一个整体，当参数值为`true`时，则没有`border-right` |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |
+| striped | `boolean` | `false` | 是否使用斑马线条纹 |
 | summary | `DataTableCreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a> |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellipsis` 或 `max-height` 的情况下固定为 `'fixed'` |
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height` |

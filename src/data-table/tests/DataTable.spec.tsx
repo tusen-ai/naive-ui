@@ -1183,4 +1183,37 @@ describe('props.columns', () => {
       'width: 200px; min-width: 200px'
     )
   })
+
+  it('should work with `striped` prop', async () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        width: 100
+      },
+      {
+        title: 'Age',
+        key: 'age',
+        width: 200
+      }
+    ]
+    const data = new Array(5).fill(0).map((_, index) => {
+      return {
+        name: index,
+        age: index
+      }
+    })
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} striped />
+    ))
+
+    const trList = wrapper.find('tbody').findAll('.n-data-table-tr')
+    expect(trList[1].attributes('class')).toContain('n-data-table-tr--striped')
+    expect(trList[0].attributes('class')).not.toContain(
+      'n-data-table-tr--striped'
+    )
+    expect(trList[2].attributes('class')).not.toContain(
+      'n-data-table-tr--striped'
+    )
+  })
 })
