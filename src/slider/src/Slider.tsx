@@ -41,7 +41,8 @@ export interface ClosestMark {
   index: number
 }
 
-const MouseButtonLeft = 0
+// ref: https://developer.mozilla.org/zh-CN/docs/Web/API/MouseEvent/button
+const eventButtonLeft = 0
 
 const sliderProps = {
   ...(useTheme.props as ThemeProps<SliderTheme>),
@@ -82,15 +83,15 @@ const sliderProps = {
   vertical: Boolean,
   reverse: Boolean,
   'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<<T extends number & number[]>(value: T) => void>
+  MaybeArray<(value: number & number[]) => void>
   >,
   onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<<T extends number & number[]>(value: T) => void>
+  MaybeArray<(value: number & number[]) => void>
   >,
   // deprecated
   onChange: {
     type: [Function, Array] as PropType<
-    MaybeArray<<T extends number & number[]>(value: T) => void>
+    MaybeArray<(value: number & number[]) => void>
     >,
     validator: () => {
       if (__DEV__) {
@@ -142,13 +143,16 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
-    const mergedValuesRef = computed(() => {
-      return ((props.range
-        ? mergedValueRef.value
-        : [mergedValueRef.value]) as number[]).map(clampValue)
+    const arrifiedValueRef = computed(() => {
+      const { value: mergedValue } = mergedValueRef
+      return ((props.range ? mergedValue : [mergedValue]) as number[]).map(
+        clampValue
+      )
     })
 
-    const isOverflowHandleRef = computed(() => mergedValuesRef.value.length > 2)
+    const handleCountExceeds2Ref = computed(
+      () => arrifiedValueRef.value.length > 2
+    )
 
     const mergedPlacementRef = computed(() => {
       return props.placement === undefined
@@ -176,8 +180,8 @@ export default defineComponent({
     })
 
     const fillStyleRef = computed(() => {
-      if (isOverflowHandleRef.value) return
-      const values = mergedValuesRef.value
+      if (handleCountExceeds2Ref.value) return
+      const values = arrifiedValueRef.value
       const start = props.range ? Math.min.apply(null, values) : props.min
       const end = props.range ? Math.max.apply(null, values) : values[0]
       const { value: styleDirection } = styleDirectionRef
@@ -198,12 +202,12 @@ export default defineComponent({
       const mergedMarks = []
       const { marks } = props
       if (marks) {
-        const orderValues = mergedValuesRef.value.slice()
+        const orderValues = arrifiedValueRef.value.slice()
         orderValues.sort((a, b) => a - b)
         const { value: styleDirection } = styleDirectionRef
-        const { value: overflowHandle } = isOverflowHandleRef
+        const { value: handleCountExceeds2 } = handleCountExceeds2Ref
         const { range } = props
-        const isActive = overflowHandle
+        const isActive = handleCountExceeds2
           ? () => false
           : (num: number): boolean =>
               range
@@ -282,13 +286,13 @@ export default defineComponent({
       const { range } = props
       if (range) {
         if (Array.isArray(value)) {
-          const { value: oldValues } = mergedValuesRef
+          const { value: oldValues } = arrifiedValueRef
           if (value.join() !== oldValues.join()) {
             doUpdateValue(value)
           }
         }
       } else if (!Array.isArray(value)) {
-        const oldValue = mergedValuesRef.value[0]
+        const oldValue = arrifiedValueRef.value[0]
         if (oldValue !== value) {
           doUpdateValue(value)
         }
@@ -297,7 +301,7 @@ export default defineComponent({
 
     function doDispatchValue (value: number, index: number): void {
       if (props.range) {
-        const values = mergedValuesRef.value.slice()
+        const values = arrifiedValueRef.value.slice()
         values.splice(index, 1, value)
         dispatchValueUpdate(values)
       } else {
@@ -435,7 +439,7 @@ export default defineComponent({
       const activeIndex = activeIndexRef.value
       if (activeIndex === -1) return
       const { step } = props
-      const currentValue = mergedValuesRef.value[activeIndex]
+      const currentValue = arrifiedValueRef.value[activeIndex]
       const nextValue = currentValue + step * ratio
       doDispatchValue(
         // Avoid the number of value does not change when `step` is null
@@ -446,13 +450,13 @@ export default defineComponent({
 
     function handleRailMouseDown (event: MouseEvent | TouchEvent): void {
       if (mergedDisabledRef.value) return
-      if (!isTouchEvent(event) && event.button !== MouseButtonLeft) {
+      if (!isTouchEvent(event) && event.button !== eventButtonLeft) {
         return
       }
       const pointValue = getPointValue(event)
       if (pointValue === undefined) return
 
-      const values = mergedValuesRef.value.slice()
+      const values = arrifiedValueRef.value.slice()
       const activeIndex = props.range
         ? getClosestMark(pointValue, values)?.index ?? -1
         : 0
@@ -463,7 +467,7 @@ export default defineComponent({
         focusActiveHandle(activeIndex)
         startDragging()
         doDispatchValue(
-          sanitizeValue(pointValue, mergedValuesRef.value[activeIndex]),
+          sanitizeValue(pointValue, arrifiedValueRef.value[activeIndex]),
           activeIndex
         )
       }
@@ -500,7 +504,7 @@ export default defineComponent({
 
       const pointValue = getPointValue(event) as number
       doDispatchValue(
-        sanitizeValue(pointValue, mergedValuesRef.value[activeIndex]),
+        sanitizeValue(pointValue, arrifiedValueRef.value[activeIndex]),
         activeIndex
       )
     }
@@ -569,7 +573,7 @@ export default defineComponent({
       fillStyle: fillStyleRef,
       getHandleStyle,
       activeIndex: activeIndexRef,
-      mergedValues: mergedValuesRef,
+      arrifiedValues: arrifiedValueRef,
       handleRailMouseDown,
       handleHandleFocus,
       handleHandleBlur,
@@ -701,7 +705,7 @@ export default defineComponent({
             </div>
           ) : null}
           <div ref='handleRailRef' class={`${mergedClsPrefix}-slider-handles`}>
-            {this.mergedValues.map((value, index) => {
+            {this.arrifiedValues.map((value, index) => {
               const showTooltip = this.isShowTooltip(index)
               return (
                 <VBinder>
