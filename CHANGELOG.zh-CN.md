@@ -4,10 +4,15 @@
 
 ### Feats
 
-- `n-data-table` 和 `n-table` 新增 `striped` 属性，关闭 [#1552](https://github.com/TuSimple/naive-ui/issues/1552)
+- `n-data-table` 新增 `striped` 属性，关闭 [#1552](https://github.com/TuSimple/naive-ui/issues/1552)
+- `n-table` 新增 `striped` 属性，关闭 [#1552](https://github.com/TuSimple/naive-ui/issues/1552)
 - `n-slider` 新增 `vertical` 属性，关闭 [#1468](https://github.com/TuSimple/naive-ui/issues/1468)
 - `n-slider` 新增 `reverse` 属性
-- Bypass Vitejs bug on string extrapolation, [#636](https://github.com/TuSimple/naive-ui/issues/636).
+- 绕过 Vitejs SSR 渲染问题，关于 [#636](https://github.com/TuSimple/naive-ui/issues/636)
+- `n-button` 新增 `strong` 属性
+- `n-button` 新增 `secondary` 属性
+- `n-button` 新增 `tertiary` 属性
+- `n-button` 新增 `quaternary` 属性
 
 ### Fixes
 

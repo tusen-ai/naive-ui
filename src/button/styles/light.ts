@@ -56,13 +56,20 @@ export const self = (vars: ThemeCommonVars) => {
     fontSizeLarge: fontSizeLarge,
     opacityDisabled: opacityDisabled,
     // secondary
+    colorOpacitySecondary: 0.16,
+    colorOpacitySecondaryHover: 0.2,
+    colorOpacitySecondaryPressed: 0.24,
     colorSecondary: buttonColor,
     colorSecondaryHover: buttonHoverColor,
     colorSecondaryPressed: buttonPressedColor,
     // tertiary
-    colorTertiary: '#0000',
+    colorTertiary: buttonColor,
     colorTertiaryHover: buttonHoverColor,
     colorTertiaryPressed: buttonPressedColor,
+    // quaternary
+    colorQuaternary: '#0000',
+    colorQuaternaryHover: buttonHoverColor,
+    colorQuaternaryPressed: buttonPressedColor,
     // default type
     color: '#0000',
     colorHover: '#0000',

@@ -47,7 +47,7 @@
     <div class="nav-end" v-else>
       <n-button
         size="small"
-        tertiary
+        quaternary
         class="nav-picker"
         @click="handleLocaleUpdate"
       >
@@ -55,7 +55,7 @@
       </n-button>
       <n-button
         size="small"
-        tertiary
+        quaternary
         class="nav-picker"
         @click="handleThemeUpdate"
       >
@@ -64,7 +64,7 @@
       <n-button
         size="small"
         tag="a"
-        tertiary
+        quaternary
         class="nav-picker"
         :href="repoUrl"
         target="_blank"
@@ -77,7 +77,7 @@
       <n-button
         size="small"
         v-if="dev"
-        tertiary
+        quaternary
         class="nav-picker"
         @click="handleDisplayModeUpdate"
       >
@@ -86,7 +86,7 @@
       <n-button
         size="small"
         v-if="tusimple || dev"
-        tertiary
+        quaternary
         class="nav-picker"
         @click="handleConfigProviderUpdate"
       >
