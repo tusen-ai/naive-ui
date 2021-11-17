@@ -30,33 +30,58 @@ import RenderSafeCheckbox from './BodyCheckbox'
 import TableHeader from './Header'
 import type { ColItem } from '../use-group-header'
 
+interface NormalRowRenderInfo {
+  striped: boolean
+  tmNode: TmNode
+  key: RowKey
+}
+
 type RowRenderInfo =
   | {
-    summary: true
-    rawNode: SummaryRowData
+    isSummaryRow: true
     key: RowKey
-    disabled: boolean
+    tmNode: {
+      rawNode: SummaryRowData
+      disabled: boolean
+    }
   }
-  | TmNode
+  | NormalRowRenderInfo
   | {
     isExpandedRow: true
     tmNode: TmNode
     key: RowKey
   }
 
-function flatten (rows: TmNode[], expandedRowKeys: Set<RowKey>): TmNode[] {
-  const fRows: TmNode[] = []
+function flatten (
+  rowInfos: NormalRowRenderInfo[],
+  expandedRowKeys: Set<RowKey>
+): NormalRowRenderInfo[] {
+  const fRows: NormalRowRenderInfo[] = []
   function traverse (rs: TmNode[]): void {
     rs.forEach((r) => {
       if (r.children && expandedRowKeys.has(r.key)) {
-        fRows.push(r)
+        fRows.push({
+          tmNode: r,
+          striped: false,
+          key: r.key
+        })
         traverse(r.children)
       } else {
-        fRows.push(r)
+        fRows.push({
+          key: r.key,
+          tmNode: r,
+          striped: false
+        })
       }
     })
   }
-  traverse(rows)
+  rowInfos.forEach((rowInfo) => {
+    fRows.push(rowInfo)
+    const { children } = rowInfo.tmNode
+    if (children) {
+      traverse(children)
+    }
+  })
   return fRows
 }
 
@@ -134,6 +159,7 @@ export default defineComponent({
       indentRef,
       rowPropsRef,
       maxHeightRef,
+      stripedRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -288,7 +314,26 @@ export default defineComponent({
       mergedTheme: mergedThemeRef,
       scrollX: scrollXRef,
       cols: colsRef,
-      paginatedData: paginatedDataRef,
+      paginatedData: computed(() => {
+        const { value: striped } = stripedRef
+        return paginatedDataRef.value.map(
+          striped
+            ? (tmNode, index) => {
+                return {
+                  tmNode,
+                  key: tmNode.key,
+                  striped: index % 2 === 1
+                }
+              }
+            : (tmNode) => {
+                return {
+                  tmNode,
+                  key: tmNode.key,
+                  striped: false
+                }
+              }
+        )
+      }),
       rawPaginatedData: rawPaginatedDataRef,
       fixedColumnLeftMap: fixedColumnLeftMapRef,
       fixedColumnRightMap: fixedColumnRightMapRef,
@@ -391,7 +436,7 @@ export default defineComponent({
             } = this
             const { length: colCount } = cols
             const rowIndexToKey: Record<number, RowKey> = {}
-            paginatedData.forEach((tmNode, rowIndex) => {
+            paginatedData.forEach(({ tmNode }, rowIndex) => {
               rowIndexToKey[rowIndex] = tmNode.key
             })
 
@@ -409,20 +454,24 @@ export default defineComponent({
                 mergedData = [
                   ...mergedPaginationData,
                   ...summaryRows.map((row, i) => ({
-                    summary: true as const,
-                    rawNode: row,
+                    isSummaryRow: true as const,
                     key: `__n_summary__${i}`,
-                    disabled: true
+                    tmNode: {
+                      rawNode: row,
+                      disabled: true
+                    }
                   }))
                 ]
               } else {
                 mergedData = [
                   ...mergedPaginationData,
                   {
-                    summary: true,
-                    rawNode: summaryRows,
+                    isSummaryRow: true,
                     key: '__n_summary__',
-                    disabled: true
+                    tmNode: {
+                      rawNode: summaryRows,
+                      disabled: true
+                    }
                   }
                 ]
               }
@@ -464,9 +513,11 @@ export default defineComponent({
                   </tr>
                 )
               }
-              const { rawNode: rowData, key: rowKey } = rowInfo
-              const isSummary = 'summary' in rowInfo
-              const expanded = mergedExpandedRowKeySet.has(rowInfo.key)
+              const isSummary = 'isSummaryRow' in rowInfo
+              const striped = !isSummary && rowInfo.striped
+              const { tmNode, key: rowKey } = rowInfo
+              const { rawNode: rowData } = tmNode
+              const expanded = mergedExpandedRowKeySet.has(rowKey)
               const props = rowProps ? rowProps(rowData, rowIndex) : undefined
               const mergedRowClassName =
                 typeof rowClassName === 'string'
@@ -480,6 +531,7 @@ export default defineComponent({
                   key={rowKey}
                   class={[
                     `${mergedClsPrefix}-data-table-tr`,
+                    striped && `${mergedClsPrefix}-data-table-tr--striped`,
                     mergedRowClassName
                   ]}
                   {...props}
@@ -500,12 +552,12 @@ export default defineComponent({
                     const colKey = getColKey(col)
                     const { rowSpan, colSpan } = column
                     const mergedColSpan = isSummary
-                      ? rowInfo.rawNode[colKey]?.colSpan || 1 // optional for #1276
+                      ? rowInfo.tmNode.rawNode[colKey]?.colSpan || 1 // optional for #1276
                       : colSpan
                         ? colSpan(rowData, rowIndex)
                         : 1
                     const mergedRowSpan = isSummary
-                      ? rowInfo.rawNode[colKey]?.rowSpan || 1 // optional for #1276
+                      ? rowInfo.tmNode.rawNode[colKey]?.rowSpan || 1 // optional for #1276
                       : rowSpan
                         ? rowSpan(rowData, rowIndex)
                         : 1
@@ -585,13 +637,13 @@ export default defineComponent({
                         {hasChildren && colIndex === firstContentfulColIndex
                           ? [
                               repeat(
-                                isSummary ? 0 : rowInfo.level,
+                                isSummary ? 0 : rowInfo.tmNode.level,
                                 <div
                                   class={`${mergedClsPrefix}-data-table-indent`}
                                   style={indentStyle}
                                 />
                               ),
-                              isSummary || !rowInfo.children ? (
+                              isSummary || !rowInfo.tmNode.children ? (
                                 <div
                                   class={`${mergedClsPrefix}-data-table-expand-placeholder`}
                                 />
@@ -612,10 +664,10 @@ export default defineComponent({
                             <RenderSafeCheckbox
                               key={currentPage}
                               rowKey={rowKey}
-                              disabled={rowInfo.disabled}
+                              disabled={rowInfo.tmNode.disabled}
                               onUpdateChecked={(checked: boolean, e) =>
                                 handleCheckboxUpdateChecked(
-                                  rowInfo,
+                                  rowInfo.tmNode,
                                   checked,
                                   e.shiftKey
                                 )
@@ -658,7 +710,7 @@ export default defineComponent({
                 displayedData.push(rowInfo, {
                   isExpandedRow: true,
                   key: rowInfo.key,
-                  tmNode: rowInfo as TmNode
+                  tmNode: rowInfo.tmNode as TmNode
                 })
               } else {
                 displayedData.push(rowInfo)

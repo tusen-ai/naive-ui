@@ -8,32 +8,46 @@ import {
   defineComponent,
   Transition,
   PropType,
-  onBeforeUnmount,
-  CSSProperties
+  CSSProperties,
+  ComponentPublicInstance
 } from 'vue'
 import {
   VBinder,
   VTarget,
   VFollower,
   FollowerPlacement,
-  FollowerInst
+  FollowerInst as _FollowerInst
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { on, off } from 'evtd'
-import { useTheme, useFormItem, useConfig } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { warn, call, useAdjustedTo } from '../../_utils'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
+import { useTheme, useFormItem, useConfig, ThemeProps } from '../../_mixins'
+import {
+  call,
+  useAdjustedTo,
+  MaybeArray,
+  ExtractPublicPropTypes
+} from '../../_utils'
 import { sliderLight, SliderTheme } from '../styles'
-import style from './styles/index.cssr'
 import { OnUpdateValueImpl } from './interface'
-import { isTouchEvent } from './utils'
+import { isTouchEvent, useRefs } from './utils'
+import style from './styles/index.cssr'
+
+interface FollowerInst extends _FollowerInst, ComponentPublicInstance {}
+
+export interface ClosestMark {
+  value: number
+  distance: number
+  index: number
+}
+
+// ref: https://developer.mozilla.org/zh-CN/docs/Web/API/MouseEvent/button
+const eventButtonLeft = 0
 
 const sliderProps = {
   ...(useTheme.props as ThemeProps<SliderTheme>),
   to: useAdjustedTo.propTo,
   defaultValue: {
-    type: [Number, Array] as PropType<number | [number, number]>,
+    type: [Number, Array] as PropType<number | number[]>,
     default: 0
   },
   marks: Object as PropType<Record<string, string>>,
@@ -55,11 +69,8 @@ const sliderProps = {
     default: 1
   },
   range: Boolean,
-  value: [Number, Array] as PropType<number | [number, number]>,
-  placement: {
-    type: String as PropType<FollowerPlacement>,
-    default: 'top'
-  },
+  value: [Number, Array] as PropType<number | number[]>,
+  placement: String as PropType<FollowerPlacement>,
   showTooltip: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -68,28 +79,14 @@ const sliderProps = {
     type: Boolean,
     default: true
   },
+  vertical: Boolean,
+  reverse: Boolean,
   'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<<T extends number & [number, number]>(value: T) => void>
+  MaybeArray<(value: number & number[]) => void>
   >,
   onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<<T extends number & [number, number]>(value: T) => void>
-  >,
-  // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<
-    MaybeArray<<T extends number & [number, number]>(value: T) => void>
-    >,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'slider',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  MaybeArray<(value: number & number[]) => void>
+  >
 } as const
 
 export type SliderProps = ExtractPublicPropTypes<typeof sliderProps>
@@ -109,18 +106,19 @@ export default defineComponent({
     )
     const formItem = useFormItem(props)
     const { mergedDisabledRef } = formItem
-    const handleRef1 = ref<HTMLElement | null>(null)
-    const handleRef2 = ref<HTMLElement | null>(null)
-    const railRef = ref<HTMLElement | null>(null)
-    const followerRef1 = ref<FollowerInst | null>(null)
-    const followerRef2 = ref<FollowerInst | null>(null)
+    const handleRailRef = ref<HTMLElement | null>(null)
     const precisionRef = computed(() => {
-      const precisions = [props.min, props.max, props.step].map((item) => {
-        const fraction = String(item).split('.')[1]
-        return fraction ? fraction.length : 0
-      })
-      return Math.max(...precisions)
+      const { step } = props
+      if (!step) return 0
+      const stepString = step.toString()
+      let precision = 0
+      if (stepString.includes('.')) {
+        precision = stepString.length - stepString.indexOf('.') - 1
+      }
+      return precision
     })
+    const [handleRefs, setHandleRefs] = useRefs<HTMLElement>()
+    const [followerRefs, setFollowerRefs] = useRefs<FollowerInst>()
 
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -128,509 +126,397 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+    const arrifiedValueRef = computed(() => {
+      const { value: mergedValue } = mergedValueRef
+      return ((props.range ? mergedValue : [mergedValue]) as number[]).map(
+        clampValue
+      )
+    })
 
-    const memoziedOtherValueRef = ref<number>(0)
-    const changeSourceRef = ref<'click' | 'keyboard' | null>(null)
-
-    const handleActive1Ref = ref(false)
-    const handleActive2Ref = ref(false)
-    const handleClicked1Ref = ref(false)
-    const handleClicked2Ref = ref(false)
-
-    const controlledShowTooltipRef = toRef(props, 'showTooltip')
-    const mergedShowTooltip1Ref = useMergedState(
-      controlledShowTooltipRef,
-      handleActive1Ref
+    const handleCountExceeds2Ref = computed(
+      () => arrifiedValueRef.value.length > 2
     )
-    const mergedShowTooltip2Ref = useMergedState(
-      controlledShowTooltipRef,
-      handleActive2Ref
-    )
+
+    const mergedPlacementRef = computed(() => {
+      return props.placement === undefined
+        ? props.vertical
+          ? 'right'
+          : 'top'
+        : props.placement
+    })
+
+    const markValuesRef = computed(() => {
+      const { marks } = props
+      return marks ? Object.keys(marks).map(parseFloat) : null
+    })
+
+    const activeIndexRef = ref(-1)
+    const previousIndexRef = ref(-1)
+    const hoverIndexRef = ref(-1)
+    const draggingRef = ref(false)
+
+    const styleDirectionRef = computed(() => {
+      const { vertical, reverse } = props
+      const left = reverse ? 'right' : 'left'
+      const bottom = reverse ? 'top' : 'bottom'
+      return vertical ? bottom : left
+    })
+
+    const fillStyleRef = computed(() => {
+      if (handleCountExceeds2Ref.value) return
+      const values = arrifiedValueRef.value
+      const start = props.range ? Math.min.apply(null, values) : props.min
+      const end = props.range ? Math.max.apply(null, values) : values[0]
+      const { value: styleDirection } = styleDirectionRef
+      return props.vertical
+        ? {
+            [styleDirection]: `${valueToPercentage(start)}%`,
+            height: `${valueToPercentage(end - start)}%`
+          }
+        : {
+            [styleDirection]: `${valueToPercentage(start)}%`,
+            width: `${valueToPercentage(end - start)}%`
+          }
+    })
+
     const dotTransitionDisabledRef = ref(false)
 
-    const activeRef = computed(() => {
-      return handleActive1Ref.value || handleActive2Ref.value
-    })
-    const prevActiveRef = ref(activeRef.value)
-    const clickedRef = computed(() => {
-      return handleClicked1Ref.value || handleClicked2Ref.value
-    })
     const markInfosRef = computed(() => {
       const mergedMarks = []
-      const { marks, max, min } = props
+      const { marks } = props
       if (marks) {
-        const { value: mergedValue } = mergedValueRef
+        const orderValues = arrifiedValueRef.value.slice()
+        orderValues.sort((a, b) => a - b)
+        const { value: styleDirection } = styleDirectionRef
+        const { value: handleCountExceeds2 } = handleCountExceeds2Ref
+        const { range } = props
+        const isActive = handleCountExceeds2
+          ? () => false
+          : (num: number): boolean =>
+              range
+                ? num >= orderValues[0] &&
+                  num <= orderValues[orderValues.length - 1]
+                : num >= orderValues[0]
         for (const key of Object.keys(marks)) {
           const num = Number(key)
           mergedMarks.push({
-            active: Array.isArray(mergedValue)
-              ? mergedValue[0] <= num && mergedValue[1] >= num
-              : mergedValue !== null
-                ? mergedValue >= num
-                : false,
+            active: isActive(num),
             label: marks[key],
             style: {
-              left: `${((num - min) / (max - min)) * 100}%`
+              [styleDirection]: `${valueToPercentage(num)}%`
             }
           })
         }
       }
       return mergedMarks
     })
-    const fillStyleRef = computed(() => {
-      const { max, min, range } = props
-      if (range) {
-        return {
-          left: `${((handleValue1Ref.value - min) / (max - min)) * 100}%`,
-          width: `${
-            ((handleValue2Ref.value - handleValue1Ref.value) / (max - min)) *
-            100
-          }%`
-        }
-      } else {
-        return {
-          left: 0,
-          width: `${((handleValue1Ref.value - min) / (max - min)) * 100}%`
-        }
+
+    function isShowTooltip (index: number): boolean {
+      return (
+        props.showTooltip ||
+        hoverIndexRef.value === index ||
+        (activeIndexRef.value === index && draggingRef.value)
+      )
+    }
+
+    function isSkipCSSDetection (index: number): boolean {
+      return !(
+        activeIndexRef.value === index && previousIndexRef.value === index
+      )
+    }
+
+    function focusActiveHandle (index: number): void {
+      if (~index) {
+        activeIndexRef.value = index
+        handleRefs.value.get(index)?.focus()
       }
-    })
-    const handleValue1Ref = computed(() => {
-      const { value: mergedValue } = mergedValueRef
-      if (Array.isArray(mergedValue)) {
-        return sanitizeValue(mergedValue[0])
-      } else {
-        return sanitizeValue(mergedValue)
-      }
-    })
-    const handleValue2Ref = computed(() => {
-      const { value: mergedValue } = mergedValueRef
-      if (Array.isArray(mergedValue)) {
-        return sanitizeValue(mergedValue[1])
-      }
-      return 0
-    })
-    const firstHandleStyleRef = computed(() => {
-      const { value: handleValue1 } = handleValue1Ref
-      const { value: handleClicked1 } = handleClicked1Ref
-      const { max, min } = props
-      const percentage = ((handleValue1 - min) / (max - min)) * 100
+    }
+
+    function syncPosition (): void {
+      followerRefs.value.forEach((inst, index) => {
+        if (isShowTooltip(index)) inst.syncPosition()
+      })
+    }
+
+    function getHandleStyle (value: number, index: number): Record<string, any> {
+      const percentage = valueToPercentage(value)
+      const { value: styleDirection } = styleDirectionRef
       return {
-        left: `${percentage}%`,
-        transform: `translateX(${-percentage}%)`,
-        zIndex: handleClicked1 ? 1 : 0
+        [styleDirection]: `${percentage}%`,
+        zIndex: index === activeIndexRef.value ? 1 : 0
       }
-    })
-    const secondHandleStyleRef = computed(() => {
-      const { value: handleValue2 } = handleValue2Ref
-      const { value: handleClicked2 } = handleClicked2Ref
-      const { max, min } = props
-      const percentage = ((handleValue2 - min) / (max - min)) * 100
-      return {
-        left: `${percentage}%`,
-        transform: `translateX(${-percentage}%)`,
-        zIndex: handleClicked2 ? 1 : 0
-      }
-    })
-    function doUpdateValue (value: number | [number, number]): void {
-      const {
-        onChange,
-        'onUpdate:value': _onUpdateValue,
-        onUpdateValue
-      } = props
+    }
+
+    function doUpdateValue (value: number | number[]): void {
+      const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onChange) call(onChange as OnUpdateValueImpl, value)
       if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
       if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function doUpdateShow (show1?: boolean, show2?: boolean): void {
-      if (show1 !== undefined) {
-        handleActive1Ref.value = show1
-      }
-      if (show2 !== undefined) {
-        handleActive2Ref.value = show2
-      }
-    }
-    function syncPosition (): void {
-      followerRef1.value?.syncPosition()
-      followerRef2.value?.syncPosition()
-    }
-    function handleHandleFocus1 (): void {
-      if (clickedRef.value) return
-      doUpdateShow(true, false)
-    }
-    function handleHandleFocus2 (): void {
-      if (clickedRef.value) return
-      doUpdateShow(false, true)
-    }
-    function handleHandleBlur1 (): void {
-      if (clickedRef.value) return
-      doUpdateShow(false, false)
-    }
-    function handleHandleBlur2 (): void {
-      if (clickedRef.value) return
-      doUpdateShow(false, false)
-    }
-    function handleRailClick (e: MouseEvent): void {
-      if (mergedDisabledRef.value) return
-      const { value: railEl } = railRef
-      if (!railEl) return
-      const railRect = railEl.getBoundingClientRect()
-      const offsetRatio = (e.clientX - railRect.left) / railRect.width
-      const newValue = props.min + (props.max - props.min) * offsetRatio
-      if (!props.range) {
-        dispatchValueUpdate(newValue, { source: 'click' })
-        handleRef1.value?.focus()
-      } else {
-        if (Array.isArray(mergedValueRef.value)) {
-          if (
-            Math.abs(handleValue1Ref.value - newValue) <
-            Math.abs(handleValue2Ref.value - newValue)
-          ) {
-            dispatchValueUpdate([newValue, handleValue2Ref.value], {
-              source: 'click'
-            })
-            handleRef1.value?.focus()
-          } else {
-            dispatchValueUpdate([handleValue1Ref.value, newValue], {
-              source: 'click'
-            })
-            handleRef2.value?.focus()
-          }
-        } else {
-          dispatchValueUpdate([newValue, newValue], { source: 'click' })
-          handleRef1.value?.focus()
-        }
-      }
-    }
-    function handleHandleMouseMove (
-      e: MouseEvent | TouchEvent,
-      handleIndex: 0 | 1
-    ): void {
-      if (!handleRef1.value || !railRef.value) return
-      const x = 'touches' in e ? e.touches[0].clientX : e.clientX
-      const { width: handleWidth } = handleRef1.value.getBoundingClientRect()
-      const { width: railWidth, left: railLeft } =
-        railRef.value.getBoundingClientRect()
-      const { min, max, range } = props
-      const offsetRatio =
-        (x - railLeft - handleWidth / 2) / (railWidth - handleWidth)
-      const newValue = min + (max - min) * offsetRatio
-      if (range) {
-        if (handleIndex === 0) {
-          dispatchValueUpdate([memoziedOtherValueRef.value, newValue])
-        } else {
-          dispatchValueUpdate([newValue, memoziedOtherValueRef.value])
-        }
-      } else {
-        dispatchValueUpdate(newValue)
-      }
-    }
-    function handleKeyDown (e: KeyboardEvent): void {
-      if (mergedDisabledRef.value) return
-      switch (e.code) {
-        case 'ArrowRight':
-          handleKeyDownRight()
-          break
-        case 'ArrowLeft':
-          handleKeyDownLeft()
-          break
-      }
-    }
-    function handleKeyDownRight (): void {
-      if (clickedRef.value) return
-      let firstHandleFocused = false
-      let handleValue = null
-      if (document.activeElement === handleRef1.value) {
-        firstHandleFocused = true
-        handleValue = handleValue1Ref.value
-      } else {
-        handleValue = handleValue2Ref.value
-      }
-      const { step, marks } = props
-      let nextValue = Math.floor(handleValue / step) * step + step
-      if (marks) {
-        for (const key of Object.keys(marks)) {
-          const numberKey = Number(key)
-          if (numberKey > handleValue && numberKey < nextValue) {
-            nextValue = numberKey
-          }
-        }
-      }
-      if (props.range) {
-        if (firstHandleFocused) {
-          dispatchValueUpdate([nextValue, handleValue2Ref.value], {
-            source: 'keyboard'
-          })
-        } else {
-          dispatchValueUpdate([handleValue1Ref.value, nextValue], {
-            source: 'keyboard'
-          })
-        }
-      } else {
-        dispatchValueUpdate(nextValue, { source: 'keyboard' })
-      }
-    }
-    function handleKeyDownLeft (): void {
-      if (clickedRef.value) return
-      let firstHandleFocused = false
-      let handleValue = null
-      if (document.activeElement === handleRef1.value) {
-        firstHandleFocused = true
-        handleValue = handleValue1Ref.value
-      } else if (document.activeElement === handleRef2.value) {
-        handleValue = handleValue2Ref.value
-      } else {
-        return
-      }
-      const { step, marks } = props
-      let nextValue = Math.ceil(handleValue / step) * step - step
-      if (marks) {
-        for (const key of Object.keys(marks)) {
-          const numberKey = Number(key)
-          if (numberKey < handleValue && numberKey > nextValue) {
-            nextValue = numberKey
-          }
-        }
-      }
-      if (props.range) {
-        if (firstHandleFocused) {
-          dispatchValueUpdate([nextValue, handleValue2Ref.value], {
-            source: 'keyboard'
-          })
-        } else {
-          dispatchValueUpdate([handleValue1Ref.value, nextValue], {
-            source: 'keyboard'
-          })
-        }
-      } else {
-        dispatchValueUpdate(nextValue, { source: 'keyboard' })
-      }
-    }
-    function switchFocus (): void {
-      if (props.range) {
-        const firstHandle = handleRef1.value
-        const secondHandle = handleRef2.value
-        if (firstHandle && secondHandle) {
-          if (
-            handleActive1Ref.value &&
-            document.activeElement === secondHandle
-          ) {
-            disableTransitionOneTick()
-            firstHandle.focus()
-            if (handleClicked2Ref.value) {
-              handleClicked2Ref.value = false
-              handleClicked1Ref.value = true
-            }
-          } else if (
-            handleActive2Ref.value &&
-            document.activeElement === firstHandle
-          ) {
-            disableTransitionOneTick()
-            secondHandle.focus()
-            if (handleClicked1Ref.value) {
-              handleClicked1Ref.value = false
-              handleClicked2Ref.value = true
-            }
-          }
-        }
-      }
-    }
-    function getClosestMarkValue (currentValue: number): number | null {
-      const { marks } = props
-      if (marks) {
-        const markValues = Object.keys(marks).map((key) => Number(key))
-        let diff: number | null = null
-        let closestValue: number | null = null
-        for (const value of markValues) {
-          if (closestValue === null) {
-            closestValue = value
-            diff = Math.abs(value - currentValue)
-          } else {
-            const newDiff = Math.abs(value - currentValue)
-            if (newDiff < (diff as number)) {
-              closestValue = value
-              diff = newDiff
-            }
-          }
-        }
-        return closestValue
-      }
-      return null
-    }
-    function sanitizeValue (value: number): number {
-      let justifiedValue = value
-      const { min, max, marks, step } = props
-      justifiedValue = Math.max(min, justifiedValue)
-      justifiedValue = Math.min(max, justifiedValue)
-      justifiedValue = Math.round((justifiedValue - min) / step) * step + min
-      justifiedValue = parseFloat(justifiedValue.toFixed(precisionRef.value))
-      if (marks) {
-        const closestMarkValue = getClosestMarkValue(value)
-        if (
-          closestMarkValue !== null &&
-          Math.abs(justifiedValue - value) > Math.abs(closestMarkValue - value)
-        ) {
-          justifiedValue = closestMarkValue
-        }
-      }
-      return justifiedValue
-    }
-    function handleFirstHandleMouseDown (e: MouseEvent | TouchEvent): void {
-      if (mergedDisabledRef.value) return
-      if (isTouchEvent(e)) e.preventDefault()
-      if (props.range) {
-        memoziedOtherValueRef.value = handleValue2Ref.value
-      }
-      doUpdateShow(true, false)
-      handleClicked1Ref.value = true
-      on('touchend', document, handleHandleMouseUp)
-      on('mouseup', document, handleHandleMouseUp)
-      on('touchmove', document, handleFirstHandleMouseMove)
-      on('mousemove', document, handleFirstHandleMouseMove)
-    }
-    function handleSecondHandleMouseDown (e: MouseEvent | TouchEvent): void {
-      if (mergedDisabledRef.value) return
-      if (isTouchEvent(e)) e.preventDefault()
-      if (props.range) {
-        memoziedOtherValueRef.value = handleValue1Ref.value
-      }
-      doUpdateShow(false, true)
-      handleClicked2Ref.value = true
-      on('touchend', document, handleHandleMouseUp)
-      on('mouseup', document, handleHandleMouseUp)
-      on('touchmove', document, handleSecondHandleMouseMove)
-      on('mousemove', document, handleSecondHandleMouseMove)
-    }
-    function handleHandleMouseUp (e: MouseEvent | TouchEvent): void {
-      if (
-        isTouchEvent(e) ||
-        (!handleRef1.value?.contains(e.target as Node) &&
-          (props.range ? !handleRef2.value?.contains(e.target as Node) : true))
-      ) {
-        doUpdateShow(false, false)
-      }
-      handleClicked2Ref.value = false
-      handleClicked1Ref.value = false
-      off('touchend', document, handleHandleMouseUp)
-      off('mouseup', document, handleHandleMouseUp)
-      off('touchmove', document, handleFirstHandleMouseMove)
-      off('touchmove', document, handleSecondHandleMouseMove)
-      off('mousemove', document, handleFirstHandleMouseMove)
-      off('mousemove', document, handleSecondHandleMouseMove)
-    }
-    function dispatchValueUpdate (
-      value: number | [number, number],
-      options: { source: 'keyboard' | 'click' | null } = { source: null }
-    ): void {
-      const { source } = options
+
+    function dispatchValueUpdate (value: number | number[]): void {
       const { range } = props
       if (range) {
         if (Array.isArray(value)) {
-          if (value[0] > value[1]) {
-            value = [sanitizeValue(value[1]), sanitizeValue(value[0])]
-          } else {
-            value = [sanitizeValue(value[0]), sanitizeValue(value[1])]
-          }
-          const { value: oldValue } = mergedValueRef
-          if (
-            !Array.isArray(oldValue) ||
-            oldValue[0] !== value[0] ||
-            oldValue[1] !== value[1]
-          ) {
-            changeSourceRef.value = source
+          const { value: oldValues } = arrifiedValueRef
+          if (value.join() !== oldValues.join()) {
             doUpdateValue(value)
           }
         }
-      } else {
-        if (!Array.isArray(value)) {
-          const { max, min } = props
-          const { value: oldValue } = mergedValueRef
-          if (value > max) {
-            if (oldValue !== max) {
-              changeSourceRef.value = source
-              doUpdateValue(max)
-            }
-          } else if (value < min) {
-            if (oldValue !== min) {
-              changeSourceRef.value = source
-              doUpdateValue(min)
-            }
-          } else {
-            const newValue = sanitizeValue(value)
-            if (oldValue !== newValue) {
-              changeSourceRef.value = source
-              doUpdateValue(newValue)
-            }
-          }
+      } else if (!Array.isArray(value)) {
+        const oldValue = arrifiedValueRef.value[0]
+        if (oldValue !== value) {
+          doUpdateValue(value)
         }
       }
     }
-    function handleFirstHandleMouseMove (e: MouseEvent | TouchEvent): void {
-      handleHandleMouseMove(e, 0)
-    }
-    function handleSecondHandleMouseMove (e: MouseEvent | TouchEvent): void {
-      handleHandleMouseMove(e, 1)
-    }
-    function handleFirstHandleMouseEnter (): void {
-      if (!activeRef.value) {
-        doUpdateShow(true, undefined)
-        void nextTick(() => {
-          syncPosition()
-        })
+
+    function doDispatchValue (value: number, index: number): void {
+      if (props.range) {
+        const values = arrifiedValueRef.value.slice()
+        values.splice(index, 1, value)
+        dispatchValueUpdate(values)
+      } else {
+        dispatchValueUpdate(value)
       }
     }
-    function handleFirstHandleMouseLeave (): void {
-      if (changeSourceRef.value === 'keyboard') return
-      if (!activeRef.value) {
-        doUpdateShow(false, false)
-      } else if (!clickedRef.value) {
-        doUpdateShow(false, false)
-      }
-    }
-    function handleSecondHandleMouseEnter (): void {
-      if (!activeRef.value) {
-        doUpdateShow(undefined, true)
-        void nextTick(() => {
-          syncPosition()
-        })
-      }
-    }
-    function handleSecondHandleMouseLeave (): void {
-      if (changeSourceRef.value === 'keyboard') return
-      if (!activeRef.value) {
-        doUpdateShow(false, false)
-      } else if (!clickedRef.value) {
-        doUpdateShow(false, false)
-      }
-    }
-    function disableTransitionOneTick (): void {
-      if (handleRef1.value) {
-        handleRef1.value.style.transition = 'none'
-        void nextTick(() => {
-          if (handleRef1.value) {
-            handleRef1.value.style.transition = ''
+
+    function getClosestMark (
+      currentValue: number,
+      markValues = markValuesRef.value,
+      buffer?: number
+    ): ClosestMark | null {
+      if (markValues) {
+        let closestMark = null
+        let index = -1
+        while (++index < markValues.length) {
+          const diff = markValues[index] - currentValue
+          const distance = Math.abs(diff)
+          if (
+            // find marks in the same direction
+            (buffer === undefined || diff * buffer > 0) &&
+            (closestMark === null || distance < closestMark.distance)
+          ) {
+            closestMark = {
+              value: markValues[index],
+              distance,
+              index
+            }
           }
-        })
+        }
+        return closestMark
       }
-      if (handleRef2.value) {
-        handleRef2.value.style.transition = 'none'
-        void nextTick(() => {
-          if (handleRef2.value) {
-            handleRef2.value.style.transition = ''
-          }
-        })
+      return null
+    }
+
+    function sanitizeValue (
+      value: number,
+      currentValue: number,
+      stepBuffer?: number
+    ): number {
+      const stepping = stepBuffer !== undefined
+      if (!stepBuffer) {
+        stepBuffer = value - currentValue > 0 ? 1 : -1
+      }
+      const markValues = markValuesRef.value || []
+      const { min, max, step } = props
+      if (!step) {
+        const closestMark = getClosestMark(
+          value,
+          markValues.concat(currentValue),
+          stepBuffer
+        ) as ClosestMark
+        return closestMark.value
+      }
+      const roundValue = getRoundValue(value)
+      // ensure accurate step
+      const stepValue = new Array(Math.floor((max - min) / step) + 1)
+        .fill('')
+        .map((_, index) => step * index + min)
+      // If it is a stepping, priority will be given to the marks
+      // on the rail，otherwise take the nearest one
+      const closestMark = stepping
+        ? getClosestMark(currentValue, stepValue.concat(markValues), stepBuffer)
+        : getClosestMark(value, markValues.concat(roundValue))
+      return closestMark ? clampValue(closestMark.value) : currentValue
+    }
+
+    function clampValue (value: number): number {
+      return Math.min(props.max, Math.max(props.min, value))
+    }
+
+    function valueToPercentage (value: number): number {
+      const { max, min } = props
+      return ((value - min) / (max - min)) * 100
+    }
+
+    function percentageToValue (percentage: number): number {
+      const { max, min } = props
+      return min + (max - min) * percentage
+    }
+
+    function getRoundValue (value: number): number {
+      const { step, min } = props
+      const newValue = Math.round((value - min) / step) * step + min
+      return Number(newValue.toFixed(precisionRef.value))
+    }
+
+    function getPointValue (event: MouseEvent | TouchEvent): number | undefined {
+      const railEl = handleRailRef.value
+      if (!railEl) return
+
+      const touchEvent = isTouchEvent(event) ? event.touches[0] : event
+      const railRect = railEl.getBoundingClientRect()
+
+      let percentage: number
+      if (props.vertical) {
+        percentage = (railRect.bottom - touchEvent.clientY) / railRect.height
+      } else {
+        percentage = (touchEvent.clientX - railRect.left) / railRect.width
+      }
+
+      if (props.reverse) {
+        percentage = 1 - percentage
+      }
+
+      return percentageToValue(percentage)
+    }
+
+    function handleRailKeyDown (e: KeyboardEvent): void {
+      if (mergedDisabledRef.value) return
+      const { vertical, reverse } = props
+      switch (e.code) {
+        case 'ArrowUp':
+          e.preventDefault()
+          handleStepValue(vertical && reverse ? -1 : 1)
+          break
+        case 'ArrowRight':
+          e.preventDefault()
+          handleStepValue(!vertical && reverse ? -1 : 1)
+          break
+        case 'ArrowDown':
+          e.preventDefault()
+          handleStepValue(vertical && reverse ? 1 : -1)
+          break
+        case 'ArrowLeft':
+          e.preventDefault()
+          handleStepValue(!vertical && reverse ? 1 : -1)
+          break
       }
     }
-    watch(activeRef, (value) => {
-      void nextTick(() => {
-        prevActiveRef.value = value
-      })
-    })
-    watch(mergedValueRef, (newValue, oldValue) => {
-      const { value: changeSource } = changeSourceRef
+
+    function handleStepValue (ratio: number): void {
+      const activeIndex = activeIndexRef.value
+      if (activeIndex === -1) return
+      const { step } = props
+      const currentValue = arrifiedValueRef.value[activeIndex]
+      const nextValue = currentValue + step * ratio
+      doDispatchValue(
+        // Avoid the number of value does not change when `step` is null
+        sanitizeValue(nextValue, currentValue, ratio > 0 ? 1 : -1),
+        activeIndex
+      )
+    }
+
+    function handleRailMouseDown (event: MouseEvent | TouchEvent): void {
+      if (mergedDisabledRef.value) return
+      if (!isTouchEvent(event) && event.button !== eventButtonLeft) {
+        return
+      }
+      const pointValue = getPointValue(event)
+      if (pointValue === undefined) return
+
+      const values = arrifiedValueRef.value.slice()
+      const activeIndex = props.range
+        ? getClosestMark(pointValue, values)?.index ?? -1
+        : 0
+
+      if (activeIndex !== -1) {
+        // avoid triggering scrolling on touch
+        event.preventDefault()
+        focusActiveHandle(activeIndex)
+        startDragging()
+        doDispatchValue(
+          sanitizeValue(pointValue, arrifiedValueRef.value[activeIndex]),
+          activeIndex
+        )
+      }
+    }
+
+    function startDragging (): void {
+      if (!draggingRef.value) {
+        draggingRef.value = true
+
+        on('touchend', document, handleMouseUp)
+        on('mouseup', document, handleMouseUp)
+        on('touchmove', document, handleMouseMove)
+        on('mousemove', document, handleMouseMove)
+      }
+    }
+
+    function stopDragging (): void {
+      if (draggingRef.value) {
+        draggingRef.value = false
+
+        off('touchend', document, handleMouseUp)
+        off('mouseup', document, handleMouseUp)
+        off('touchmove', document, handleMouseMove)
+        off('mousemove', document, handleMouseMove)
+      }
+    }
+
+    function handleMouseMove (event: MouseEvent | TouchEvent): void {
+      const { value: activeIndex } = activeIndexRef
+      if (!draggingRef.value || activeIndex === -1) {
+        stopDragging()
+        return
+      }
+
+      const pointValue = getPointValue(event) as number
+      doDispatchValue(
+        sanitizeValue(pointValue, arrifiedValueRef.value[activeIndex]),
+        activeIndex
+      )
+    }
+
+    function handleMouseUp (): void {
+      stopDragging()
+    }
+
+    function handleHandleFocus (index: number): void {
+      activeIndexRef.value = index
+      // Wake focus style
+      if (!mergedDisabledRef.value) {
+        hoverIndexRef.value = index
+      }
+    }
+
+    function handleHandleBlur (index: number): void {
+      if (activeIndexRef.value === index) {
+        activeIndexRef.value = -1
+        stopDragging()
+      }
+      if (hoverIndexRef.value === index) {
+        hoverIndexRef.value = -1
+      }
+    }
+
+    function handleHandleMouseEnter (index: number): void {
+      hoverIndexRef.value = index
+    }
+
+    function handleHandleMouseLeave (index: number): void {
+      if (hoverIndexRef.value === index) {
+        hoverIndexRef.value = -1
+      }
+    }
+
+    watch(activeIndexRef, (_, previous) => (previousIndexRef.value = previous))
+
+    watch(mergedValueRef, () => {
       if (props.marks) {
         if (dotTransitionDisabledRef.value) return
         dotTransitionDisabledRef.value = true
@@ -638,98 +524,35 @@ export default defineComponent({
           dotTransitionDisabledRef.value = false
         })
       }
-      if (props.range && Array.isArray(newValue) && Array.isArray(oldValue)) {
-        if (oldValue && oldValue[1] !== newValue[1]) {
-          void nextTick(() => {
-            if (!(changeSource === 'click')) {
-              doUpdateShow(false, true)
-            }
-            switchFocus()
-          })
-        } else if (oldValue && oldValue[0] !== newValue[0]) {
-          void nextTick(() => {
-            if (!(changeSource === 'click')) {
-              doUpdateShow(true, false)
-            }
-            switchFocus()
-          })
-        } else if (newValue[0] === newValue[1]) {
-          void nextTick(() => {
-            if (!(changeSource === 'click')) {
-              doUpdateShow(false, true)
-            }
-            switchFocus()
-          })
-        }
-      }
-      void nextTick(() => {
-        // dom has changed but event is not fired, use marco task to make sure
-        // relevant event handler is called
-        setTimeout(() => {
-          changeSourceRef.value = null
-        }, 0)
-        if (props.range) {
-          if (Array.isArray(newValue) && Array.isArray(oldValue)) {
-            if (newValue[0] !== oldValue[0] || newValue[1] !== oldValue[1]) {
-              syncPosition()
-            }
-          }
-        } else {
-          syncPosition()
-        }
-      })
+      void nextTick(syncPosition)
     })
-    onBeforeUnmount(() => {
-      off('touchmove', document, handleFirstHandleMouseMove)
-      off('touchmove', document, handleSecondHandleMouseMove)
-      off('mousemove', document, handleFirstHandleMouseMove)
-      off('mousemove', document, handleSecondHandleMouseMove)
-      off('touchend', document, handleHandleMouseUp)
-      off('mouseup', document, handleHandleMouseUp)
-    })
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       mergedDisabled: mergedDisabledRef,
+      mergedPlacement: mergedPlacementRef,
       isMounted: useIsMounted(),
       adjustedTo: useAdjustedTo(props),
-      handleValue1: handleValue1Ref,
-      handleValue2: handleValue2Ref,
-      mergedShowTooltip1: mergedShowTooltip1Ref,
-      mergedShowTooltip2: mergedShowTooltip2Ref,
-      handleActive1: handleActive1Ref,
-      handleActive2: handleActive2Ref,
-      handleClicked1: handleClicked1Ref,
-      handleClicked2: handleClicked2Ref,
-      memoziedOtherValue: memoziedOtherValueRef,
-      active: activeRef,
-      prevActive: prevActiveRef,
-      clicked: clickedRef,
       dotTransitionDisabled: dotTransitionDisabledRef,
       markInfos: markInfosRef,
-      // https://github.com/vuejs/vue-next/issues/2283
-      handleRef1,
-      handleRef2,
-      railRef,
-      followerRef1,
-      followerRef2,
-      firstHandleStyle: firstHandleStyleRef,
-      secondHandleStyle: secondHandleStyleRef,
+      isShowTooltip,
+      isSkipCSSDetection,
+      handleRailRef,
+      setHandleRefs,
+      setFollowerRefs,
       fillStyle: fillStyleRef,
-      handleKeyDown,
-      handleRailClick,
-      handleHandleFocus1,
-      handleHandleBlur1,
-      handleFirstHandleMouseDown,
-      handleFirstHandleMouseEnter,
-      handleFirstHandleMouseLeave,
-      handleHandleFocus2,
-      handleHandleBlur2,
-      handleSecondHandleMouseDown,
-      handleSecondHandleMouseEnter,
-      handleSecondHandleMouseLeave,
+      getHandleStyle,
+      activeIndex: activeIndexRef,
+      arrifiedValues: arrifiedValueRef,
+      handleRailMouseDown,
+      handleHandleFocus,
+      handleHandleBlur,
+      handleHandleMouseEnter,
+      handleHandleMouseLeave,
+      handleRailKeyDown,
       indicatorCssVars: computed(() => {
         const {
           self: {
@@ -766,6 +589,7 @@ export default defineComponent({
             dotBorder,
             dotBoxShadow,
             railHeight,
+            railWidthVertical,
             handleSize,
             dotHeight,
             dotWidth,
@@ -799,7 +623,8 @@ export default defineComponent({
           '--opacity-disabled': opacityDisabled,
           '--rail-color': railColor,
           '--rail-color-hover': railColorHover,
-          '--rail-height': railHeight
+          '--rail-height': railHeight,
+          '--rail-width-vertical': railWidthVertical
         }
       })
     }
@@ -812,15 +637,18 @@ export default defineComponent({
           `${mergedClsPrefix}-slider`,
           {
             [`${mergedClsPrefix}-slider--disabled`]: this.mergedDisabled,
-            [`${mergedClsPrefix}-slider--active`]: this.active,
-            [`${mergedClsPrefix}-slider--with-mark`]: this.marks
+            [`${mergedClsPrefix}-slider--active`]: this.activeIndex !== -1,
+            [`${mergedClsPrefix}-slider--with-mark`]: this.marks,
+            [`${mergedClsPrefix}-slider--vertical`]: this.vertical,
+            [`${mergedClsPrefix}-slider--reverse`]: this.reverse
           }
         ]}
         style={this.cssVars as CSSProperties}
-        onKeydown={this.handleKeyDown}
-        onClick={this.handleRailClick}
+        onKeydown={this.handleRailKeyDown}
+        onMousedown={this.handleRailMouseDown}
+        onTouchstart={this.handleRailMouseDown}
       >
-        <div ref="railRef" class={`${mergedClsPrefix}-slider-rail`}>
+        <div class={`${mergedClsPrefix}-slider-rail`}>
           <div
             class={`${mergedClsPrefix}-slider-rail__fill`}
             style={this.fillStyle}
@@ -849,136 +677,94 @@ export default defineComponent({
               ))}
             </div>
           ) : null}
-        </div>
-        <VBinder>
-          {{
-            default: () => [
-              <VTarget>
-                {{
-                  default: () => (
-                    <div
-                      ref="handleRef1"
-                      class={`${mergedClsPrefix}-slider-handle`}
-                      tabindex={this.mergedDisabled ? -1 : 0}
-                      style={this.firstHandleStyle}
-                      onFocus={this.handleHandleFocus1}
-                      onBlur={this.handleHandleBlur1}
-                      onTouchstart={this.handleFirstHandleMouseDown}
-                      onMousedown={this.handleFirstHandleMouseDown}
-                      onMouseenter={this.handleFirstHandleMouseEnter}
-                      onMouseleave={this.handleFirstHandleMouseLeave}
-                    />
-                  )
-                }}
-              </VTarget>,
-              this.tooltip && (
-                <VFollower
-                  ref="followerRef1"
-                  show={this.mergedShowTooltip1}
-                  to={this.adjustedTo}
-                  teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                  placement={this.placement}
-                  containerClass={this.namespace}
-                >
+          <div ref="handleRailRef" class={`${mergedClsPrefix}-slider-handles`}>
+            {this.arrifiedValues.map((value, index) => {
+              const showTooltip = this.isShowTooltip(index)
+              return (
+                <VBinder>
                   {{
-                    default: () => (
-                      <Transition
-                        name="fade-in-scale-up-transition"
-                        appear={this.isMounted}
-                        css={!(this.active && this.prevActive)}
-                      >
+                    default: () => [
+                      <VTarget>
                         {{
-                          default: () =>
-                            this.mergedShowTooltip1 ? (
-                              <div
-                                class={`${mergedClsPrefix}-slider-handle-indicator`}
-                                style={this.indicatorCssVars as CSSProperties}
-                              >
-                                {typeof formatTooltip === 'function'
-                                  ? formatTooltip(this.handleValue1)
-                                  : this.handleValue1}
-                              </div>
-                            ) : null
+                          default: () => (
+                            <div
+                              ref={this.setHandleRefs(index)}
+                              class={`${mergedClsPrefix}-slider-handle`}
+                              tabindex={this.mergedDisabled ? -1 : 0}
+                              style={this.getHandleStyle(value, index)}
+                              onFocus={() => this.handleHandleFocus(index)}
+                              onBlur={() => this.handleHandleBlur(index)}
+                              onMouseenter={() =>
+                                this.handleHandleMouseEnter(index)
+                              }
+                              onMouseleave={() =>
+                                this.handleHandleMouseLeave(index)
+                              }
+                            />
+                          )
                         }}
-                      </Transition>
-                    )
+                      </VTarget>,
+                      this.tooltip && (
+                        <VFollower
+                          ref={this.setFollowerRefs(index)}
+                          show={showTooltip}
+                          to={this.adjustedTo}
+                          teleportDisabled={
+                            this.adjustedTo === useAdjustedTo.tdkey
+                          }
+                          placement={this.mergedPlacement}
+                          containerClass={this.namespace}
+                        >
+                          {{
+                            default: () => (
+                              <Transition
+                                name="fade-in-scale-up-transition"
+                                appear={this.isMounted}
+                                css={this.isSkipCSSDetection(index)}
+                              >
+                                {{
+                                  default: () =>
+                                    showTooltip ? (
+                                      <div
+                                        class={[
+                                          `${mergedClsPrefix}-slider-handle-indicator`,
+                                          `${mergedClsPrefix}-slider-handle-indicator--${this.mergedPlacement}`
+                                        ]}
+                                        style={
+                                          this.indicatorCssVars as CSSProperties
+                                        }
+                                      >
+                                        {typeof formatTooltip === 'function'
+                                          ? formatTooltip(value)
+                                          : value}
+                                      </div>
+                                    ) : null
+                                }}
+                              </Transition>
+                            )
+                          }}
+                        </VFollower>
+                      )
+                    ]
                   }}
-                </VFollower>
+                </VBinder>
               )
-            ]
-          }}
-        </VBinder>
-        {this.tooltip && this.range ? (
-          <VBinder>
-            {{
-              default: () => [
-                <VTarget>
-                  {{
-                    default: () => (
-                      <div
-                        ref="handleRef2"
-                        class={`${mergedClsPrefix}-slider-handle`}
-                        tabindex={this.mergedDisabled ? -1 : 0}
-                        style={this.secondHandleStyle}
-                        onFocus={this.handleHandleFocus2}
-                        onBlur={this.handleHandleBlur2}
-                        onTouchstart={this.handleSecondHandleMouseDown}
-                        onMousedown={this.handleSecondHandleMouseDown}
-                        onMouseenter={this.handleSecondHandleMouseEnter}
-                        onMouseleave={this.handleSecondHandleMouseLeave}
-                      />
-                    )
-                  }}
-                </VTarget>,
-                <VFollower
-                  ref="followerRef2"
-                  show={this.mergedShowTooltip2}
-                  to={this.adjustedTo}
-                  placement={this.placement}
-                  containerClass={this.namespace}
-                  teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                >
-                  {{
-                    default: () => (
-                      <Transition
-                        name="fade-in-scale-up-transition"
-                        appear={this.isMounted}
-                        css={!(this.active && this.prevActive)}
-                      >
-                        {{
-                          default: () =>
-                            this.mergedShowTooltip2 ? (
-                              <div
-                                class={`${mergedClsPrefix}-slider-handle-indicator`}
-                                style={this.indicatorCssVars as CSSProperties}
-                              >
-                                {typeof formatTooltip === 'function'
-                                  ? formatTooltip(this.handleValue2)
-                                  : this.handleValue2}
-                              </div>
-                            ) : null
-                        }}
-                      </Transition>
-                    )
-                  }}
-                </VFollower>
-              ]
-            }}
-          </VBinder>
-        ) : null}
-        {this.marks ? (
-          <div class={`${mergedClsPrefix}-slider-marks`}>
-            {this.markInfos.map((mark) => (
-              <div
-                key={mark.label}
-                class={`${mergedClsPrefix}-slider-mark`}
-                style={mark.style}
-              >
-                {mark.label}
-              </div>
-            ))}
+            })}
           </div>
-        ) : null}
+          {this.marks ? (
+            <div class={`${mergedClsPrefix}-slider-marks`}>
+              {this.markInfos.map((mark) => (
+                <div
+                  key={mark.label}
+                  class={`${mergedClsPrefix}-slider-mark`}
+                  style={mark.style}
+                >
+                  {mark.label}
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </div>
       </div>
     )
   }

@@ -57,6 +57,7 @@ export default c([
     --merged-border-color: var(--border-color);
     --merged-th-color-hover: var(--th-color-hover);
     --merged-td-color-hover: var(--td-color-hover);
+    --merged-td-color-striped: var(--td-color-striped);
   `, [
     cM('flex-height', [
       c('>', [
@@ -119,17 +120,16 @@ export default c([
       transition: 'background-color .3s var(--bezier)',
       backgroundColor: 'var(--merged-th-color)'
     }),
-    cB('data-table-tr', {
-      boxSizing: 'border-box',
-      backgroundClip: 'padding-box',
-      transition: 'background-color .3s var(--bezier)'
-    }, [
-      c('&:hover', {
-        backgroundColor: 'var(--merged-td-color-hover)'
-      }, [
-        cB('data-table-td', {
-          backgroundColor: 'var(--merged-td-color-hover)'
-        })
+    cB('data-table-tr', `
+      box-sizing: border-box;
+      background-clip: padding-box;
+      transition: background-color .3s var(--bezier);
+    `, [
+      c('&:hover', 'background-color: var(--merged-td-color-hover);', [
+        cB('data-table-td', 'background-color: var(--merged-td-color-hover);')
+      ]),
+      cM('striped', 'background-color: var(--merged-td-color-striped);', [
+        cB('data-table-td', 'background-color: var(--merged-td-color-striped);')
       ])
     ]),
     cB('data-table-th', `
@@ -436,6 +436,7 @@ export default c([
     --merged-border-color: var(--border-color-modal);
     --merged-th-color-hover: var(--th-color-hover-modal);
     --merged-td-color-hover: var(--td-color-hover-modal);
+    --merged-td-color-striped: var(--td-color-striped-modal);
   `)),
   insidePopover(cB('data-table', `
     --merged-th-color: var(--th-color-popover);
@@ -443,6 +444,7 @@ export default c([
     --merged-border-color: var(--border-color-popover);
     --merged-th-color-hover: var(--th-color-hover-popover);
     --merged-td-color-hover: var(--td-color-hover-popover);
+    --merged-td-color-striped: var(--td-color-striped-popover);
   `))
 ])
 

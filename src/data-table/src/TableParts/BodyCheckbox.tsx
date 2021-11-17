@@ -31,6 +31,7 @@ export default defineComponent({
       const { rowKey } = props
       return (
         <NCheckbox
+          privateInsideTable
           disabled={props.disabled}
           indeterminate={mergedInderminateRowKeySetRef.value.has(rowKey)}
           checked={mergedCheckedRowKeySetRef.value.has(rowKey)}
