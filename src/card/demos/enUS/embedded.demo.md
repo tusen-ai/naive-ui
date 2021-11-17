@@ -1,4 +1,4 @@
-# Embedded Effect
+# Embedded effect
 
 In light mode, sometimes you may need to make background a bit darker to distinguish card from white background.
 
