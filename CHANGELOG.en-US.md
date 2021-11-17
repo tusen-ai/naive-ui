@@ -9,6 +9,10 @@
 - `n-slider` add `reverse` prop.
 - Bypass Vitejs bug on string extrapolation, [#636](https://github.com/TuSimple/naive-ui/issues/636).
 
+### Fixes
+
+- Fix the default value of the `suffix` internal component's `loading` property.
+
 ## 2.20.3 (2021-11-15)
 
 ### Fixes

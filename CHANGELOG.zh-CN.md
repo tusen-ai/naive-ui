@@ -9,6 +9,10 @@
 - `n-slider` 新增 `reverse` 属性
 - Bypass Vitejs bug on string extrapolation, [#636](https://github.com/TuSimple/naive-ui/issues/636).
 
+### Fixes
+
+- 修复 `suffix` 内部组件 `loading` 属性的默认值
+
 ## 2.20.3 (2021-11-15)
 
 ### Fixes
