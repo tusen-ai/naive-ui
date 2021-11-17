@@ -2,6 +2,11 @@ import { CNode } from 'css-render'
 import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
+const {
+  cubicBezierEaseInOut,
+  transformDebounceScale
+} = commonVariables
+
 interface IconSwitchTransitionOptions {
   originalTransform?: string
   left?: string | number
@@ -13,7 +18,7 @@ export default function ({
   originalTransform = '',
   left = 0,
   top = 0,
-  transition = `all .3s ${commonVariables.cubicBezierEaseInOut} !important`
+  transition = `all .3s ${cubicBezierEaseInOut} !important`
 }: IconSwitchTransitionOptions = {}): CNode[] {
   return [
     c('&.icon-switch-transition-enter-from, &.icon-switch-transition-leave-to', {
@@ -23,7 +28,7 @@ export default function ({
       opacity: 0
     }),
     c('&.icon-switch-transition-enter-to, &.icon-switch-transition-leave-from', {
-      transform: `${commonVariables.transformDebounceScale} ${originalTransform}`,
+      transform: `${transformDebounceScale} ${originalTransform}`,
       left,
       top,
       opacity: 1
