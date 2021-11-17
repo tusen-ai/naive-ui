@@ -228,6 +228,10 @@ export default c([
     cM('disabled', {
       cursor: 'not-allowed',
       opacity: 'var(--opacity-disabled)'
+    }),
+    cM('loading', {
+      cursor: 'default',
+      opacity: 'var(--opacity-disabled)'
     })
   ]),
   c('@keyframes button-wave-spread', {

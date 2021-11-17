@@ -110,11 +110,11 @@ const Button = defineComponent({
       }
     )
     const mergedFocusableRef = computed(() => {
-      return props.focusable && !props.disabled
+      return props.focusable && !props.disabled && !props.loading
     })
     const handleMouseDown = (e: MouseEvent): void => {
       e.preventDefault()
-      if (props.disabled) {
+      if (props.disabled || props.loading) {
         return
       }
       if (mergedFocusableRef.value) {
@@ -122,7 +122,7 @@ const Button = defineComponent({
       }
     }
     const handleClick = (e: MouseEvent): void => {
-      if (!props.disabled) {
+      if (!props.disabled && !props.loading) {
         const { onClick } = props
         if (onClick) call(onClick, e)
         if (!props.text) {
@@ -143,7 +143,7 @@ const Button = defineComponent({
           }
           enterPressedRef.value = false
           void nextTick(() => {
-            if (!props.disabled) {
+            if (!props.disabled && !props.loading) {
               selfRef.value?.click()
             }
           })
@@ -418,6 +418,7 @@ const Button = defineComponent({
           `${mergedClsPrefix}-button--${this.mergedSize}-type`,
           this.rtlEnabled && `${mergedClsPrefix}-button--rtl`,
           this.disabled && `${mergedClsPrefix}-button--disabled`,
+          this.loading && `${mergedClsPrefix}-button--loading`,
           this.block && `${mergedClsPrefix}-button--block`,
           this.enterPressed && `${mergedClsPrefix}-button--pressed`,
           !this.text && this.dashed && `${mergedClsPrefix}-button--dashed`,

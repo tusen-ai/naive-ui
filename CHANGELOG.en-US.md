@@ -8,6 +8,10 @@
 - `n-slider` add `vertical` prop, closes [#1468](https://github.com/TuSimple/naive-ui/issues/1468).
 - `n-slider` add `reverse` prop.
 
+### Fixes
+
+- Fix `n-button` can trigger click event when loading, closes [#1601](https://github.com/TuSimple/naive-ui/issues/1601).
+
 ## 2.20.3 (2021-11-15)
 
 ### Fixes
