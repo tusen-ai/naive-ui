@@ -154,4 +154,24 @@ describe('n-radio-group', () => {
       'n-radio--checked'
     )
   })
+
+  it('should work with `on-update:value` prop', async () => {
+    const onUpdate = jest.fn()
+    const wrapper = mount(NRadioGroup, {
+      props: {
+        onUpdateValue: onUpdate
+      },
+      slots: {
+        default: () => [
+          h(NRadio, { value: 'test1' }, { default: () => 'test-item1' }),
+          h(NRadio, { value: 'test2' }, { default: () => 'test-item2' })
+        ]
+      }
+    })
+
+    await wrapper.findAll('.n-radio')[1].trigger('click')
+    setTimeout(() => {
+      expect(onUpdate).toHaveBeenCalled()
+    }, 0)
+  })
 })
