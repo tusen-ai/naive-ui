@@ -41,6 +41,7 @@ custom-filter-menu
 tree
 flex-height
 striped
+simple-editable
 fixed-column-debug
 fixed-column2-debug
 scroll-debug
