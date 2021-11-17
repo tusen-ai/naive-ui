@@ -17,6 +17,7 @@ function getPartsOfDemo (tokens) {
   let title = null
   const contentTokens = []
   contentTokens.links = tokens.links
+  let languageType = 'JS'
   for (const token of tokens) {
     if (token.type === 'heading' && token.depth === 1) {
       title = token.text
@@ -27,8 +28,9 @@ function getPartsOfDemo (tokens) {
       template = token.text
     } else if (
       token.type === 'code' &&
-      (token.lang === 'script' || token.lang === 'js')
+      (token.lang === 'script' || token.lang === 'js' || token.lang === 'ts')
     ) {
+      languageType = token.lang
       script = token.text
     } else if (
       token.type === 'code' &&
@@ -46,7 +48,8 @@ function getPartsOfDemo (tokens) {
     title: title,
     content: marked.parser(contentTokens, {
       renderer: mdRenderer
-    })
+    }),
+    language: languageType
   }
 }
 
@@ -65,7 +68,8 @@ function mergeParts (parts) {
   }
   if (parts.script) {
     if (parts.template) mergedParts.code += '\n\n'
-    mergedParts.code += `<script>
+    const startScriptTag = parts.language === 'ts' ? '<script lang="ts">' : '<script>'
+    mergedParts.code += `${startScriptTag}
 ${parts.script}
 </script>`
   }
@@ -128,7 +132,8 @@ function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
     src = src.replace(codeReg, parts.code)
   }
   if (parts.script && !noRunning) {
-    src = src.replace(scriptReg, '<script>\n' + parts.script + '\n</script>')
+    const startScriptTag = parts.language === 'ts' ? '<script lang="ts">\n' : '<script>\n'
+    src = src.replace(scriptReg, startScriptTag + parts.script + '\n</script>')
   }
   if (parts.style) {
     const style = genStyle(parts.style)

@@ -47,6 +47,20 @@
         </template>
         {{ t('copyCode') }}
       </n-tooltip>
+      <n-tooltip v-if="sfcCodeInitType !== 'JS'">
+        <template #trigger>
+          <n-button
+            style="padding: 0; margin-right: 6px"
+            size="tiny"
+            text
+            depth="3"
+            @click="toggleLanguageChange"
+          >
+          {{showLanguage}}
+          </n-button>
+        </template>
+        {{ t(showLanguage) }}
+      </n-tooltip>
       <n-tooltip ref="expandCodeButtonRef">
         <template #trigger>
           <n-button
@@ -84,6 +98,7 @@ import { i18n } from '../utils/composables'
 import EditOnGithubButton from './EditOnGithubButton.vue'
 import EditInCodeSandboxButton from './EditInCodeSandboxButton.vue'
 import CopyCodeButton from './CopyCodeButton.vue'
+import tsToJs from './tsToJs'
 
 export default {
   components: {
@@ -117,22 +132,39 @@ export default {
       return !(isDebugDemo && displayModeRef.value !== 'debug')
     })
     const showCodeRef = ref(false)
+    const showLanguageRef = ref('JS')
     const expandCodeButtonRef = ref(null)
     watch(showCodeRef, () => {
       nextTick(() => {
         expandCodeButtonRef.value.syncPosition()
       })
     })
+    const getTypeCode = (language) => {
+      const code = decodeURIComponent(props.code)
+      const type = code.includes('<script lang="ts">') ? 'TS' : 'JS'
+      if (type === language) return code
+      if (type === 'TS' && language === 'JS') {
+        return tsToJs(code.replace('<script lang="ts">', '<script>'))
+      }
+    }
+    const sfcCodeRef = ref(getTypeCode(showLanguageRef.value))
+    const sfcCodeInitType = decodeURIComponent(props.code).includes('<script lang="ts">') ? 'TS' : 'JS'
     return {
       expandCodeButtonRef,
       showDemo: showDemoRef,
       showCode: showCodeRef,
-      sfcCode: decodeURIComponent(props.code),
+      showLanguage: showLanguageRef,
+      sfcCode: sfcCodeRef,
+      sfcCodeInitType,
       toggleCodeDisplay () {
         showCodeRef.value = !showCodeRef.value
       },
       handleTitleClick: () => {
         window.location.hash = `#${props.demoFileName}`
+      },
+      toggleLanguageChange () {
+        showLanguageRef.value = showLanguageRef.value === 'JS' ? 'TS' : 'JS'
+        sfcCodeRef.value = getTypeCode(showLanguageRef.value)
       },
       ...i18n({
         'zh-CN': {
@@ -141,7 +173,9 @@ export default {
           editOnGithub: '在 GitHub 中编辑',
           editInCodeSandbox: '在 CodeSandbox 中编辑',
           copyCode: '复制代码',
-          copySuccess: '复制成功'
+          copySuccess: '复制成功',
+          JS: '切换到 JavaScript',
+          TS: '切换到 TypeScript'
         },
         'en-US': {
           show: 'Show Code',
@@ -149,7 +183,9 @@ export default {
           editOnGithub: 'Edit on GitHub',
           editInCodeSandbox: 'Edit in CodeSandbox',
           copyCode: 'Copy Code',
-          copySuccess: 'Successfully Copied'
+          copySuccess: 'Successfully Copied',
+          JS: 'Switch to JavaScript',
+          TS: 'Switch to TypeScript'
         }
       })
     }

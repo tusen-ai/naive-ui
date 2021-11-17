@@ -9,7 +9,7 @@ JavaScript 的例子。
 </div>
 ```
 
-```js
+```ts
 import { defineComponent } from 'vue'
 
 export default defineComponent({
