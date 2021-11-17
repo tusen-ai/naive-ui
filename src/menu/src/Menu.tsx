@@ -122,6 +122,8 @@ const menuProps = {
   onExpandedNamesChange: [Function, Array] as PropType<
   MaybeArray<OnUpdateKeys>
   >,
+  onAfterShow: Function as PropType<() => void>,
+  onAfterCollapse: Function as PropType<() => void>,
   expandedNames: Array as PropType<Key[]>,
   defaultExpandedNames: Array as PropType<Key[]>
 } as const

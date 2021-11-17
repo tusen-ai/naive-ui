@@ -53,6 +53,8 @@ customize-field
 | watch-props | `Array<'defaultValue' \| 'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 |
 | on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` 是展开菜单项的 `key` 的数组 |
 | on-update:value | `(key: string, item: MenuOption) => void` | `undefined` | 选中菜单的回调，`key` 是选中菜单项的 `key`，`item` 是菜单项原始数据 |
+| on-after-show | `() => void` | `undefined` | Menu 展开后的回调 |
+| on-after-collapse | `() => void` | `undefined` | Menu 收缩后的回调 |
 
 ### MenuOption Properties
 

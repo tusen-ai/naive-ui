@@ -13,6 +13,7 @@
 - `n-button` 新增 `secondary` 属性
 - `n-button` 新增 `tertiary` 属性
 - `n-button` 新增 `quaternary` 属性
+- `n-menu` 新增 `on-after-show` 和 `on-after-collapse` 属性，关闭 [#1241](https://github.com/TuSimple/naive-ui/issues/1241)
 
 ### Fixes
 

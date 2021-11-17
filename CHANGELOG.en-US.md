@@ -13,6 +13,7 @@
 - `n-button` add `secondary` prop.
 - `n-button` add `tertiary` prop.
 - `n-button` add `quaternary` prop.
+- `n-menu` add `on-after-show` and `on-after-collapse` prop, closes [#1241](https://github.com/TuSimple/naive-ui/issues/1241).
 
 ### Fixes
 

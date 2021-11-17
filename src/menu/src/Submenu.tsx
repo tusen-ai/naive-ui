@@ -116,7 +116,7 @@ export default defineComponent({
   render () {
     const {
       mergedClsPrefix,
-      menuProps: { renderIcon, renderLabel }
+      menuProps: { renderIcon, renderLabel, onAfterCollapse, onAfterShow }
     } = this
     const createSubmenuItem = (): VNode => {
       const {
@@ -155,7 +155,10 @@ export default defineComponent({
     }
     const createSubmenuChildren = (): VNode => {
       return (
-        <NFadeInExpandTransition>
+        <NFadeInExpandTransition
+          onAfterLeave={onAfterCollapse}
+          onAfterEnter={onAfterShow}
+        >
           {{
             default: () => {
               const { tmNodes, collapsed } = this
