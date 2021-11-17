@@ -103,6 +103,9 @@ export default c([
         ])
       ])
     ]),
+    cM('striped', [
+      c('tr:nth-of-type(even)', [c('td', 'background-color: var(--td-color-striped)')])
+    ]),
     cNotM('bottom-bordered', [
       c('tr', [
         c('&:last-child', [
