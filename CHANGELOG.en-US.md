@@ -13,11 +13,13 @@
 - `n-button` add `secondary` prop.
 - `n-button` add `tertiary` prop.
 - `n-button` add `quaternary` prop.
-- `n-radio` add `onUpdateChecked` prop.
+- `n-auto-complete` add `input-props` prop, closes [#1610](https://github.com/TuSimple/naive-ui/issues/1610).
 
 ### Fixes
 
 - Fix the default value of the `suffix` internal component's `loading` property.
+- Fix `n-space` is shown when it has no children, closes [#1605](https://github.com/TuSimple/naive-ui/issues/1605).
+- Fix `n-radio` has no `onUpdateChecked` prop.
 
 ## 2.20.3 (2021-11-15)
 

@@ -13,11 +13,13 @@
 - `n-button` 新增 `secondary` 属性
 - `n-button` 新增 `tertiary` 属性
 - `n-button` 新增 `quaternary` 属性
-- `n-radio` 新增 `onUpdateChecked` 属性
+- `n-auto-complete` 新增 `input-props` 属性，关闭 [#1610](https://github.com/TuSimple/naive-ui/issues/1610)
 
 ### Fixes
 
 - 修复 `suffix` 内部组件 `loading` 属性的默认值
+- 修复 `n-space` 没有子节点的时候还被展示，关闭 [#1605](https://github.com/TuSimple/naive-ui/issues/1605).
+- 修复 `n-radio` 缺少 `onUpdateChecked` 属性
 
 ## 2.20.3 (2021-11-15)
 
