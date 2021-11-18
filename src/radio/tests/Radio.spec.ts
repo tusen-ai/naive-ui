@@ -50,7 +50,7 @@ describe('n-radio', () => {
     })
   })
 
-  it('should work with `on-update:checked-value` prop', async () => {
+  it('should work with `onUpdate:checked` prop', async () => {
     const onUpdate = jest.fn()
     const wrapper = mount(NRadio, { props: { 'onUpdate:checked': onUpdate } })
 
