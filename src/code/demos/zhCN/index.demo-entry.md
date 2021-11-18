@@ -35,6 +35,7 @@
 ## 演示
 
 ```demo
+basic
 inline
 ```
 

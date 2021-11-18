@@ -2,6 +2,7 @@ const { marked } = require('marked')
 const fs = require('fs')
 const path = require('path')
 const createRenderer = require('./md-renderer')
+const tsToJs = require('../utils/tsToJs')
 const mdRenderer = createRenderer()
 
 const __HTTP__ = process.env.NODE_ENV !== 'production' ? 'http' : 'https'
@@ -60,26 +61,46 @@ function mergeParts (parts) {
   mergedParts.title = parts.title
   mergedParts.content = parts.content
   mergedParts.code = ''
+  mergedParts.jsCode = ''
+  let jsCode = ''
   if (parts.template) {
     mergedParts.code += `<template>\n${parts.template
       .split('\n')
       .map((line) => (line.length ? '  ' + line : line))
       .join('\n')}\n</template>`
+    mergedParts.jsCode = mergedParts.code
   }
   if (parts.script) {
-    if (parts.template) mergedParts.code += '\n\n'
+    if (parts.template) {
+      mergedParts.code += '\n\n'
+      mergedParts.jsCode += '\n\n'
+    }
     const startScriptTag = parts.language === 'ts' ? '<script lang="ts">' : '<script>'
     mergedParts.code += `${startScriptTag}
 ${parts.script}
 </script>`
+    if (parts.language === 'ts') {
+      jsCode = tsToJs(parts.script)
+      mergedParts.jsCode += `<script>
+${jsCode}
+</script>`
+    } else {
+      mergedParts.jsCode = mergedParts.code
+    }
   }
   if (parts.style) {
-    if (parts.template || parts.script) mergedParts.code += '\n\n'
-    mergedParts.code += `<style>
+    if (parts.template || parts.script) {
+      mergedParts.code += '\n\n'
+      mergedParts.jsCode += '\n\n'
+    }
+    const style = `<style>
 ${parts.style}
 </style>`
+    mergedParts.code += style
+    mergedParts.jsCode += style
   }
   mergedParts.code = encodeURIComponent(mergedParts.code)
+  mergedParts.jsCode = encodeURIComponent(mergedParts.jsCode)
   return mergedParts
 }
 
@@ -116,6 +137,7 @@ function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
   const titleReg = /<!--TITLE_SLOT-->/g
   const contentReg = /<!--CONTENT_SLOT-->/
   const codeReg = /<!--CODE_SLOT-->/
+  const jsCodeReg = /<!--JS_CODE_SLOT-->/
   const scriptReg = /<!--SCRIPT_SLOT-->/
   const styleReg = /<!--STYLE_SLOT-->/
   const demoReg = /<!--DEMO_SLOT-->/
@@ -130,6 +152,9 @@ function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
   }
   if (parts.code) {
     src = src.replace(codeReg, parts.code)
+  }
+  if (parts.jsCode) {
+    src = src.replace(jsCodeReg, parts.jsCode)
   }
   if (parts.script && !noRunning) {
     const startScriptTag = parts.language === 'ts' ? '<script lang="ts">\n' : '<script>\n'

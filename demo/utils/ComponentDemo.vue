@@ -19,7 +19,7 @@
           <edit-in-code-sandbox-button
             style="padding: 0; margin-right: 6px"
             size="tiny"
-            :code="sfcCode"
+            :code="showLanguage === 'TS' ? sfcTsCode : sfcJsCode"
           />
         </template>
         {{ t('editInCodeSandbox') }}
@@ -41,13 +41,13 @@
             depth="3"
             style="padding: 0; margin-right: 6px"
             size="tiny"
-            :code="sfcCode"
+            :code="showLanguage === 'TS' ? sfcTsCode : sfcJsCode"
             :success-text="t('copySuccess')"
           />
         </template>
         {{ t('copyCode') }}
       </n-tooltip>
-      <n-tooltip v-if="sfcCodeInitType !== 'JS'">
+      <n-tooltip v-if="sfcCodeIsTsType">
         <template #trigger>
           <n-button
             style="padding: 0; margin-right: 6px"
@@ -84,7 +84,8 @@
     <slot name="demo" />
     <template v-if="showCode" #footer>
       <n-scrollbar x-scrollable content-style="padding: 20px 24px;">
-        <n-code language="html" :code="sfcCode" />
+        <n-code v-if='showLanguage === "TS"' language="html" :code="sfcTsCode" />
+        <n-code v-else language="html" :code="sfcJsCode" />
       </n-scrollbar>
     </template>
   </n-card>
@@ -98,7 +99,6 @@ import { i18n } from '../utils/composables'
 import EditOnGithubButton from './EditOnGithubButton.vue'
 import EditInCodeSandboxButton from './EditInCodeSandboxButton.vue'
 import CopyCodeButton from './CopyCodeButton.vue'
-import tsToJs from './tsToJs'
 
 export default {
   components: {
@@ -123,6 +123,10 @@ export default {
     relativeUrl: {
       type: String,
       required: true
+    },
+    jsCode: {
+      type: String,
+      required: false
     }
   },
   setup (props) {
@@ -139,23 +143,15 @@ export default {
         expandCodeButtonRef.value.syncPosition()
       })
     })
-    const getTypeCode = (language) => {
-      const code = decodeURIComponent(props.code)
-      const type = code.includes('<script lang="ts">') ? 'TS' : 'JS'
-      if (type === language) return code
-      if (type === 'TS' && language === 'JS') {
-        return tsToJs(code.replace('<script lang="ts">', '<script>'))
-      }
-    }
-    const sfcCodeRef = ref(getTypeCode(showLanguageRef.value))
-    const sfcCodeInitType = decodeURIComponent(props.code).includes('<script lang="ts">') ? 'TS' : 'JS'
+    const sfcCodeIsTsType = decodeURIComponent(props.code).includes('<script lang="ts">')
     return {
       expandCodeButtonRef,
       showDemo: showDemoRef,
       showCode: showCodeRef,
       showLanguage: showLanguageRef,
-      sfcCode: sfcCodeRef,
-      sfcCodeInitType,
+      sfcTsCode: decodeURIComponent(props.code),
+      sfcJsCode: decodeURIComponent(props.jsCode),
+      sfcCodeIsTsType,
       toggleCodeDisplay () {
         showCodeRef.value = !showCodeRef.value
       },
@@ -164,7 +160,6 @@ export default {
       },
       toggleLanguageChange () {
         showLanguageRef.value = showLanguageRef.value === 'JS' ? 'TS' : 'JS'
-        sfcCodeRef.value = getTypeCode(showLanguageRef.value)
       },
       ...i18n({
         'zh-CN': {
