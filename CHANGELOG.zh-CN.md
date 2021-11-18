@@ -13,6 +13,7 @@
 - `n-button` 新增 `secondary` 属性
 - `n-button` 新增 `tertiary` 属性
 - `n-button` 新增 `quaternary` 属性
+- `n-auto-complete` 新增 `input-props` 属性，关闭 [#1610](https://github.com/TuSimple/naive-ui/issues/1610)
 
 ### Fixes
 

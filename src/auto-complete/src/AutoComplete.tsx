@@ -7,7 +7,8 @@ import {
   Transition,
   PropType,
   withDirectives,
-  CSSProperties
+  CSSProperties,
+  InputHTMLAttributes
 } from 'vue'
 import { createTreeMate, TreeNode } from 'treemate'
 import { VBinder, VTarget, VFollower } from 'vueuc'
@@ -71,6 +72,7 @@ const autoCompleteProps = {
   blurAfterSelect: Boolean,
   clearAfterSelect: Boolean,
   getShow: Function as PropType<(inputValue: string) => boolean>,
+  inputProps: Object as PropType<InputHTMLAttributes>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   options: {
     type: Array as PropType<AutoCompleteOptions>,
@@ -323,6 +325,7 @@ export default defineComponent({
                         disabled={this.mergedDisabled}
                         clearable={this.clearable}
                         loading={this.loading}
+                        inputProps={this.inputProps}
                         onClear={this.handleClear}
                         onFocus={this.handleFocus}
                         onUpdateValue={this.handleInput}
