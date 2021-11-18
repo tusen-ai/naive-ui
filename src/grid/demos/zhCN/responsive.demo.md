@@ -6,7 +6,7 @@
 
 `self` （默认）模式由 `n-grid` 自己的宽度控制响应式属性。一个响应式 `cols` 形如 `'2 400:4 600:6'`，即在小于 400px 的时候有 2 列，400px <= 并且 < 600px 的时候有 4 列，大于 600px 的时候有 6 列。
 
-`screen` 模式由浏览器视口的宽度控制响应式属性，有 `xs` `s` `m` `l` `xl` `2xl` 几个屏幕尺寸可供选择。一个响应式 `cols` 形如 `2 s:3 m:4 l:5 xl:6 2xl:7`。
+`screen` 模式由浏览器视口的宽度控制响应式属性，有 `xs` `s` `m` `l` `xl` `xxl` 几个屏幕尺寸可供选择。一个响应式 `cols` 形如 `2 s:3 m:4 l:5 xl:6 xxl:7`。
 
 默认的屏幕配置为 `xs < 640 <= s < 1024 <= m < 1280 <= l < 1536 <= xl < 1920 <= xxl`。
 
@@ -35,7 +35,7 @@
   </n-grid-item>
 </n-grid>
 <n-divider>Screen 响应式</n-divider>
-<n-grid cols="2 s:3 m:4 l:5 xl:6 2xl:7" responsive="screen">
+<n-grid cols="2 s:3 m:4 l:5 xl:6 xxl:7" responsive="screen">
   <n-grid-item>
     <div class="light-green">1</div>
   </n-grid-item>

@@ -6,7 +6,7 @@
 
 Responsive props in `self`(default) mode are controlled by `n-grid`'s own width. A responsive `cols` looks like `'2 400:4 600:6'`. When < 400px there are 2 columns. When 400px <= && < 600px there are 4 columns. When > 600px there are 6 columns.
 
-Responsive props in `screen`(default) mode are controlled by viewport width of the browser. There are `xs` `s` `m` `l` `xl` `2xl` screen width to choose. A responsive `cols` looks like `2 s:3 m:4 l:5 xl:6 2xl:7`.
+Responsive props in `screen`(default) mode are controlled by viewport width of the browser. There are `xs` `s` `m` `l` `xl` `xxl` screen width to choose. A responsive `cols` looks like `2 s:3 m:4 l:5 xl:6 xxl:7`.
 
 The default screen config is `xs < 640 <= s < 1024 <= m < 1280 <= l < 1536 <= xl < 1920 <= xxl`.
 
@@ -35,7 +35,7 @@ You can customize [breakpoints](config-provider#API) in `n-config-provider`.
   </n-grid-item>
 </n-grid>
 <n-divider>Screen Responsive</n-divider>
-<n-grid cols="2 s:3 m:4 l:5 xl:6 2xl:7" responsive="screen">
+<n-grid cols="2 s:3 m:4 l:5 xl:6 xxl:7" responsive="screen">
   <n-grid-item>
     <div class="light-green">1</div>
   </n-grid-item>
