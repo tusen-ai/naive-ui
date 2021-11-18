@@ -18,6 +18,7 @@
 ### Fixes
 
 - Fix the default value of the `suffix` internal component's `loading` property.
+- Fix `n-space` is shown when it has no children, closes [#1605](https://github.com/TuSimple/naive-ui/issues/1605).
 
 ## 2.20.3 (2021-11-15)
 
