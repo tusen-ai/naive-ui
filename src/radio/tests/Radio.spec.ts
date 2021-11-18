@@ -49,6 +49,16 @@ describe('n-radio', () => {
       expect(wrapper.find('.n-radio').attributes('style')).toMatchSnapshot()
     })
   })
+
+  it('should work with `on-update:checked-value` prop', async () => {
+    const onUpdate = jest.fn()
+    const wrapper = mount(NRadio, { props: { 'onUpdate:checked': onUpdate } })
+
+    await wrapper.find('.n-radio').trigger('click')
+    setTimeout(() => {
+      expect(onUpdate).toHaveBeenCalled()
+    }, 0)
+  })
 })
 
 describe('n-radio-group', () => {
