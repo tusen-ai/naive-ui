@@ -26,7 +26,7 @@ radio-focus-debug
 | name | `string` | `undefined` | 单选按钮 radio 元素的 name 属性。如果没有设定会使用 `n-radio-group` 的 `name` |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 大小 |
 | value | `string` | `undefined` | 选中的值 |
-| on-update:checked-value | `(checked: boolean) => void` | `undefined` | 发生变化时触发的回调方法 |
+| on-update:checked | `(checked: boolean) => void` | `undefined` | 发生变化时触发的回调方法 |
 
 ### RadioGroup Props
 
