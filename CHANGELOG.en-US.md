@@ -13,6 +13,7 @@
 - `n-button` add `secondary` prop.
 - `n-button` add `tertiary` prop.
 - `n-button` add `quaternary` prop.
+- `n-radio` add `onUpdateChecked` prop.
 
 ### Fixes
 

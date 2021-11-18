@@ -13,6 +13,7 @@
 - `n-button` 新增 `secondary` 属性
 - `n-button` 新增 `tertiary` 属性
 - `n-button` 新增 `quaternary` 属性
+- `n-radio` 新增 `onUpdateChecked` 属性
 
 ### Fixes
 
