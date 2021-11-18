@@ -43,7 +43,7 @@ batch-render
 | draggable | `boolean` | `false` | Whether it can be dragged. |
 | expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter. |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |
-| filter | `(node: TreeOption) => boolean` | `undefined` | A simple string based filter. |
+| filter | `(pattern: string, node: TreeOption) => boolean` | A simple string based filter | The function that filter tree nodes based on pattern. |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |
 | key-field | `string` | `'key'` | The key field in `TreeOption`. |
 | label-field | `string` | `'label'` | The label field in `TreeOption`. |

@@ -107,7 +107,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     itemTextColor: '#ADADAD'
   },
   Button: {
-    fontWeightText: commonDark.fontWeightStrong,
+    fontWeightStrong: commonDark.fontWeightStrong,
     textColor: '#FFFFFF',
     textColorWarning: '#333',
     textColorSuccess: '#333',

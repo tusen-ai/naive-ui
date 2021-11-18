@@ -1,4 +1,4 @@
-# Embedded Effect
+# Embedded effect
 
 Sometimes you may want the background to be darker to highlight the content (especially card like things).
 

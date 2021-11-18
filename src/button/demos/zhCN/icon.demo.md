@@ -4,7 +4,7 @@
 
 ```html
 <n-space>
-  <n-button>
+  <n-button secondary strong>
     <template #icon>
       <n-icon>
         <cash-icon />
@@ -12,7 +12,7 @@
     </template>
     +100 元
   </n-button>
-  <n-button icon-placement="right">
+  <n-button icon-placement="right" secondary strong>
     <template #icon>
       <n-icon>
         <cash-icon />

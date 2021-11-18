@@ -5,8 +5,18 @@
 ### Feats
 
 - `n-data-table` add `striped` prop, closes [#1552](https://github.com/TuSimple/naive-ui/issues/1552).
+- `n-table` add `striped` prop, closes [#1552](https://github.com/TuSimple/naive-ui/issues/1552).
 - `n-slider` add `vertical` prop, closes [#1468](https://github.com/TuSimple/naive-ui/issues/1468).
 - `n-slider` add `reverse` prop.
+- Bypass Vitejs bug on string extrapolation, ref [#636](https://github.com/TuSimple/naive-ui/issues/636).
+- `n-button` add `strong` prop.
+- `n-button` add `secondary` prop.
+- `n-button` add `tertiary` prop.
+- `n-button` add `quaternary` prop.
+
+### Fixes
+
+- Fix the default value of the `suffix` internal component's `loading` property.
 
 ## 2.20.3 (2021-11-15)
 
