@@ -98,6 +98,7 @@ export default defineComponent({
       mergedClsPrefix
     } = this
     const children = flatten(getSlot(this))
+    if (!children.length) return null
     const horizontalMargin = `${margin.horizontal}px`
     const semiHorizontalMargin = `${margin.horizontal / 2}px`
     const verticalMargin = `${margin.vertical}px`
