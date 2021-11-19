@@ -14,6 +14,7 @@
 - `n-button` add `tertiary` prop.
 - `n-button` add `quaternary` prop.
 - `n-auto-complete` add `input-props` prop, closes [#1610](https://github.com/TuSimple/naive-ui/issues/1610).
+- `n-input` add `select` methods, closes [#1328](https://github.com/TuSimple/naive-ui/issues/1328)
 
 ### Fixes
 
