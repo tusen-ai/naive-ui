@@ -142,7 +142,6 @@ export default defineComponent({
     function handleMouseLeave (e: MouseEvent): void {
       if (!mergedShowRef.value) return
       const { relatedTarget } = e
-
       if (
         relatedTarget &&
         !isDropdownOptionRelatedTarget(relatedTarget as HTMLElement)
