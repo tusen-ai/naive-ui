@@ -1,4 +1,4 @@
-# Custom Color
+# Custom color
 
 These two colors look like a toadstool.
 

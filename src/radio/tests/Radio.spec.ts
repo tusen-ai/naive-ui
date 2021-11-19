@@ -49,6 +49,16 @@ describe('n-radio', () => {
       expect(wrapper.find('.n-radio').attributes('style')).toMatchSnapshot()
     })
   })
+
+  it('should work with `onUpdate:checked` prop', async () => {
+    const onUpdate = jest.fn()
+    const wrapper = mount(NRadio, { props: { 'onUpdate:checked': onUpdate } })
+
+    await wrapper.find('.n-radio').trigger('click')
+    setTimeout(() => {
+      expect(onUpdate).toHaveBeenCalled()
+    }, 0)
+  })
 })
 
 describe('n-radio-group', () => {
@@ -153,5 +163,25 @@ describe('n-radio-group', () => {
     expect(wrapper.findAll('.n-radio')[0].classes()).not.toContain(
       'n-radio--checked'
     )
+  })
+
+  it('should work with `on-update:value` prop', async () => {
+    const onUpdate = jest.fn()
+    const wrapper = mount(NRadioGroup, {
+      props: {
+        onUpdateValue: onUpdate
+      },
+      slots: {
+        default: () => [
+          h(NRadio, { value: 'test1' }, { default: () => 'test-item1' }),
+          h(NRadio, { value: 'test2' }, { default: () => 'test-item2' })
+        ]
+      }
+    })
+
+    await wrapper.findAll('.n-radio')[1].trigger('click')
+    setTimeout(() => {
+      expect(onUpdate).toHaveBeenCalled()
+    }, 0)
   })
 })
