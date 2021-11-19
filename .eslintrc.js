@@ -71,5 +71,6 @@ module.exports = {
         __DEV__: 'readonly'
       }
     }
-  ]
+  ],
+  parser: '@typescript-eslint/parser'
 }
