@@ -253,6 +253,7 @@ export default defineComponent({
                         theme={mergedTheme.peers.Button}
                         themeOverrides={mergedTheme.peerOverrides.Button}
                         ghost
+                        internalAutoFocus
                         size="small"
                         onClick={handleNegativeClick}
                       >
@@ -267,6 +268,7 @@ export default defineComponent({
                         themeOverrides={mergedTheme.peerOverrides.Button}
                         disabled={loading}
                         loading={loading}
+                        internalAutoFocus={!this.negativeText}
                         size="small"
                         type={type === 'default' ? 'primary' : type}
                         onClick={handlePositiveClick}
