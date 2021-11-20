@@ -1,4 +1,4 @@
-import { h, ref, computed, defineComponent, PropType } from 'vue'
+import { h, ref, computed, defineComponent, PropType, watch } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -7,6 +7,7 @@ import type { AvatarTheme } from '../styles'
 import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/index.cssr'
+import FallbackImage from '../../_internal/fallback-image'
 
 const avatarProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme>),
@@ -24,7 +25,11 @@ const avatarProps = {
     default: 'fill'
   },
   round: Boolean,
-  onError: Function as PropType<(e: Event) => void>
+  onError: Function as PropType<(e: Event) => void>,
+  fallbackImageUrl: {
+    type: String,
+    default: ''
+  }
 } as const
 
 export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>
@@ -34,7 +39,7 @@ export default defineComponent({
   props: avatarProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-
+    const hasLoadError = ref(false)
     let memoedTextHtml: string | null = null
     const textRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
@@ -66,6 +71,17 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const haddleError = (e: Event): void => {
+      hasLoadError.value = true
+      const { onError } = props
+      if (onError) {
+        onError(e)
+      }
+    }
+    watch(
+      () => props.src,
+      () => (hasLoadError.value = false)
+    )
     return {
       textRef,
       selfRef,
@@ -90,38 +106,51 @@ export default defineComponent({
           '--bezier': cubicBezierEaseInOut,
           '--size': height
         }
-      })
+      }),
+      hasLoadError,
+      haddleError
     }
   },
   render () {
     const { $slots, src, mergedClsPrefix } = this
+    let child
+    if (!$slots.default && src) {
+      child = (
+        <img
+          ref="imageRef"
+          src={src}
+          onError={this.haddleError}
+          style={{ objectFit: this.objectFit }}
+        />
+      )
+    }
+    if (this.hasLoadError) {
+      child = <FallbackImage fallbackImageUrl={this.fallbackImageUrl} />
+    } else if ($slots.default) {
+      child = (
+        <VResizeObserver onResize={this.fitTextTransform}>
+          {{
+            default: () => (
+              <span
+                ref="textRef"
+                class={`${mergedClsPrefix}-avatar__text`}
+                style={{ background: this.color }}
+              >
+                {$slots}
+              </span>
+            )
+          }}
+        </VResizeObserver>
+      )
+    }
+
     return (
       <span
         ref="selfRef"
         class={`${mergedClsPrefix}-avatar`}
         style={this.cssVars as any}
       >
-        {!$slots.default && src ? (
-          <img
-            src={src}
-            onError={this.onError}
-            style={{ objectFit: this.objectFit }}
-          />
-        ) : (
-          <VResizeObserver onResize={this.fitTextTransform}>
-            {{
-              default: () => (
-                <span
-                  ref="textRef"
-                  class={`${mergedClsPrefix}-avatar__text`}
-                  style={{ background: this.color }}
-                >
-                  {$slots}
-                </span>
-              )
-            }}
-          </VResizeObserver>
-        )}
+        {child}
       </span>
     )
   }
