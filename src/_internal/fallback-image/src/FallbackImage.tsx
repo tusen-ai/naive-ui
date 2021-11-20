@@ -3,14 +3,14 @@ import { h, defineComponent } from 'vue'
 export default defineComponent({
   name: 'FallbackImage',
   props: {
-    fallbackImageUrl: {
+    fallbackSrc: {
       type: String,
-      default: ''
+      default: undefined
     }
   },
   setup () {},
   render () {
-    const { fallbackImageUrl } = this
-    return <img src={fallbackImageUrl} />
+    const { fallbackSrc } = this
+    return <img src={fallbackSrc} />
   }
 })

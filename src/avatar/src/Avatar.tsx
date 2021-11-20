@@ -26,20 +26,26 @@ const avatarProps = {
   },
   round: Boolean,
   onError: Function as PropType<(e: Event) => void>,
-  fallbackImageUrl: {
+  fallbackSrc: {
     type: String,
-    default: ''
+    default: undefined
   }
 } as const
+
+export const avatarEmits = {
+  error: (evt: Event) => evt instanceof Event
+}
+export type AvatarEmits = typeof avatarEmits
 
 export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>
 
 export default defineComponent({
   name: 'Avatar',
   props: avatarProps,
-  setup (props) {
+  emits: avatarEmits,
+  setup (props, { emit }) {
     const { mergedClsPrefixRef } = useConfig(props)
-    const hasLoadError = ref(false)
+    const hasloadErrorRef = ref(false)
     let memoedTextHtml: string | null = null
     const textRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
@@ -71,16 +77,17 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const haddleError = (e: Event): void => {
-      hasLoadError.value = true
+    const handleError = (e: Event): void => {
+      hasloadErrorRef.value = true
       const { onError } = props
       if (onError) {
         onError(e)
       }
+      emit('error', e)
     }
     watch(
       () => props.src,
-      () => (hasLoadError.value = false)
+      () => (hasloadErrorRef.value = false)
     )
     return {
       textRef,
@@ -107,26 +114,23 @@ export default defineComponent({
           '--size': height
         }
       }),
-      hasLoadError,
-      haddleError
+      hasloadErrorRef,
+      handleError
     }
   },
   render () {
     const { $slots, src, mergedClsPrefix } = this
-    let child
-    if (!$slots.default && src) {
-      child = (
-        <img
-          ref="imageRef"
-          src={src}
-          onError={this.haddleError}
-          style={{ objectFit: this.objectFit }}
-        />
-      )
-    }
-    if (this.hasLoadError) {
-      child = <FallbackImage fallbackImageUrl={this.fallbackImageUrl} />
-    } else if ($slots.default) {
+    let child = (
+      <img
+        ref="imageRef"
+        src={src}
+        onError={this.handleError}
+        style={{ objectFit: this.objectFit }}
+      />
+    )
+    if (this.hasloadErrorRef) {
+      child = <FallbackImage fallbackSrc={this.fallbackSrc} />
+    } else if (!(!$slots.default && src)) {
       child = (
         <VResizeObserver onResize={this.fitTextTransform}>
           {{
