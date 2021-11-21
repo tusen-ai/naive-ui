@@ -196,7 +196,7 @@ export default defineComponent({
               range
                 ? num >= orderValues[0] &&
                   num <= orderValues[orderValues.length - 1]
-                : num >= orderValues[0]
+                : num <= orderValues[0]
         for (const key of Object.keys(marks)) {
           const num = Number(key)
           mergedMarks.push({
@@ -327,7 +327,7 @@ export default defineComponent({
         const closestMark = getClosestMark(
           value,
           markValues.concat(currentValue),
-          stepBuffer
+          stepping ? stepBuffer : undefined
         ) as ClosestMark
         return closestMark.value
       }
