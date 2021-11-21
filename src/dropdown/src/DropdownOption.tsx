@@ -24,8 +24,7 @@ import { TreeNode } from 'treemate'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
-  DropdownOption,
-  DropdownOptionProps
+  DropdownOption
 } from './interface'
 
 interface NDropdownOptionInjection {
@@ -56,7 +55,7 @@ export default defineComponent({
       type: String as PropType<FollowerPlacement>,
       default: 'right-start'
     },
-    props: Object as PropType<DropdownOptionProps>
+    props: Object as PropType<HTMLAttributes>
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -250,7 +249,7 @@ export default defineComponent({
             __dropdown-option
             class={`${clsPrefix}-dropdown-option-body__label`}
           >
-            {/* TODO: Workaround, menu campatible */}
+            {/* TODO: Workaround, menu compatible */}
             {renderLabel
               ? renderLabel(rawNode)
               : render(rawNode[this.labelField] ?? rawNode.title)}
