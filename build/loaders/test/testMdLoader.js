@@ -1,8 +1,10 @@
 // const mdLoader = require('./NaiveUIMdLoader')
-// const marked = require('marked')
+// const { marked } = require('marked')
 const fs = require('fs')
 const path = require('path')
-const content = fs.readFileSync(path.resolve(__dirname, '../../../CHANGELOG.zh-CN.md')).toString()
+const content = fs
+  .readFileSync(path.resolve(__dirname, '../../../CHANGELOG.zh-CN.md'))
+  .toString()
 // console.log('rendered', mdLoader(content))
 
 const mdLoader = require('../NaiveUIMdLoader')

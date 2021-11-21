@@ -18,7 +18,7 @@ exports[`n-p should work with \`depth\` prop 1`] = `"--bezier: cubic-bezier(.4, 
 
 exports[`n-p should work with \`depth\` prop 2`] = `"--bezier: cubic-bezier(.4, 0, .2, 1); --font-size: 14px; --line-height: 1.6; --margin: 16px 0 16px 0; --text-color: rgb(51, 54, 57);"`;
 
-exports[`n-p should work with \`depth\` prop 3`] = `"--bezier: cubic-bezier(.4, 0, .2, 1); --font-size: 14px; --line-height: 1.6; --margin: 16px 0 16px 0; --text-color: rgb(158, 164, 170);"`;
+exports[`n-p should work with \`depth\` prop 3`] = `"--bezier: cubic-bezier(.4, 0, .2, 1); --font-size: 14px; --line-height: 1.6; --margin: 16px 0 16px 0; --text-color: rgb(118, 124, 130);"`;
 
 exports[`n-text should work with \`depth\` prop 1`] = `"--text-color: rgb(51, 54, 57); --font-weight-strong: 500; --font-famliy-mono: v-mono, SFMono-Regular, Menlo, Consolas, Courier, monospace; --code-border-radius: 2px; --code-text-color: rgb(51, 54, 57); --code-color: rgb(244, 244, 248); --code-border: 1px solid #0000;"`;
 
@@ -26,7 +26,7 @@ exports[`n-text should work with \`depth\` prop 2`] = `"--text-color: rgb(31, 34
 
 exports[`n-text should work with \`depth\` prop 3`] = `"--text-color: rgb(51, 54, 57); --font-weight-strong: 500; --font-famliy-mono: v-mono, SFMono-Regular, Menlo, Consolas, Courier, monospace; --code-border-radius: 2px; --code-text-color: rgb(51, 54, 57); --code-color: rgb(244, 244, 248); --code-border: 1px solid #0000;"`;
 
-exports[`n-text should work with \`depth\` prop 4`] = `"--text-color: rgb(158, 164, 170); --font-weight-strong: 500; --font-famliy-mono: v-mono, SFMono-Regular, Menlo, Consolas, Courier, monospace; --code-border-radius: 2px; --code-text-color: rgb(51, 54, 57); --code-color: rgb(244, 244, 248); --code-border: 1px solid #0000;"`;
+exports[`n-text should work with \`depth\` prop 4`] = `"--text-color: rgb(118, 124, 130); --font-weight-strong: 500; --font-famliy-mono: v-mono, SFMono-Regular, Menlo, Consolas, Courier, monospace; --code-border-radius: 2px; --code-text-color: rgb(51, 54, 57); --code-color: rgb(244, 244, 248); --code-border: 1px solid #0000;"`;
 
 exports[`n-text should work with \`type\` prop 1`] = `"--text-color: rgb(51, 54, 57); --font-weight-strong: 500; --font-famliy-mono: v-mono, SFMono-Regular, Menlo, Consolas, Courier, monospace; --code-border-radius: 2px; --code-text-color: rgb(51, 54, 57); --code-color: rgb(244, 244, 248); --code-border: 1px solid #0000;"`;
 

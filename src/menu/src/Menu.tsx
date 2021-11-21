@@ -27,6 +27,8 @@ import style from './styles/index.cssr'
 import {
   MenuOption,
   MenuGroupOption,
+  MenuIgnoredOption,
+  MenuMixedOption,
   OnUpdateValue,
   OnUpdateKeys,
   OnUpdateValueImpl,
@@ -40,7 +42,7 @@ import { DropdownProps } from '../../dropdown'
 const menuProps = {
   ...(useTheme.props as ThemeProps<MenuTheme>),
   options: {
-    type: Array as PropType<Array<MenuOption | MenuGroupOption>>,
+    type: Array as PropType<MenuMixedOption[]>,
     default: () => []
   },
   collapsed: {
@@ -165,11 +167,11 @@ export default defineComponent({
 
     const treeMateRef = computed(() => {
       const { keyField, childrenField } = props
-      return createTreeMate<MenuOption, MenuGroupOption>(
+      return createTreeMate<MenuOption, MenuGroupOption, MenuIgnoredOption>(
         props.items || props.options,
         {
           getChildren (node) {
-            return node[childrenField] as any
+            return node[childrenField]
           },
           getKey (node) {
             return (node[keyField] as Key) ?? node.name
@@ -314,9 +316,15 @@ export default defineComponent({
           common: { cubicBezierEaseInOut },
           self
         } = themeRef.value
-        const { borderRadius, borderColorHorizontal, fontSize, itemHeight } =
-          self
+        const {
+          borderRadius,
+          borderColorHorizontal,
+          fontSize,
+          itemHeight,
+          dividerColor
+        } = self
         const vars: any = {
+          '--divider-color': dividerColor,
           '--bezier': cubicBezierEaseInOut,
           '--font-size': fontSize,
           '--border-color-horizontal': borderColorHorizontal,

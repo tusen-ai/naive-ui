@@ -99,4 +99,17 @@ describe('n-auto-complete', () => {
     expect(document.querySelector('.n-auto-complete-menu')).not.toEqual(null)
     wrapper.unmount()
   })
+
+  it('should work with `input-props` prop', async () => {
+    const wrapper = mount(NAutoComplete, {
+      props: {
+        inputProps: {
+          id: 'input',
+          max: '10'
+        }
+      }
+    })
+    expect(wrapper.find('input').attributes('max')).toEqual('10')
+    wrapper.unmount()
+  })
 })

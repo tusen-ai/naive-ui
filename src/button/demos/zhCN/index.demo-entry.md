@@ -6,6 +6,9 @@
 
 ```demo
 basic
+secondary
+tertiary
+quaternary
 dashed
 size
 text
@@ -40,8 +43,12 @@ debug
 | icon-placement | `'left' \| 'right'` | `'left'` | 按钮中图标的位置 |
 | keyboard | `boolean` | `true` | 是否支持键盘操作 |
 | loading | `boolean` | `false` | 按钮是否显示加载状态 |
+| quaternary | `boolean` | `false` | 是否是四级按钮 |
 | round | `boolean` | `false` | 按钮是否显示圆角 |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 按钮的尺寸 |
+| secondary | `boolean` | `false` | 是否是次要按钮 |
+| strong | `boolean` | `false` | 按钮文字是否加粗 |
+| tertiary | `boolean` | `false` | 是否是三级按钮 |
 | text | `boolean` | `false` | 是否显示为文本按钮 |
 | text-color | `string` | `undefined` | 按钮文字颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |
 | type | `'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 按钮的类型 |

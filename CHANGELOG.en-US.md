@@ -1,5 +1,43 @@
 # CHANGELOG
 
+## 2.21.0 (2021-11-21)
+
+### Breaking Changes
+
+- `NButton.fontWeightText` & `NButton.fontWeightGhost` theme vars are removed. If you want to change font weight, you can use `strong` prop of `n-button` instead.
+
+### Feats
+
+- `n-tag` add `avatar` slot.
+- `n-data-table` add `striped` prop, closes [#1552](https://github.com/TuSimple/naive-ui/issues/1552).
+- `n-table` add `striped` prop, closes [#1552](https://github.com/TuSimple/naive-ui/issues/1552).
+- `n-slider` add `vertical` prop, closes [#1468](https://github.com/TuSimple/naive-ui/issues/1468).
+- `n-slider` add `reverse` prop.
+- `n-slider`'s `step` prop support `mark` option.
+- Bypass Vitejs bug on string extrapolation, ref [#636](https://github.com/TuSimple/naive-ui/issues/636).
+- `n-button` add `strong` prop.
+- `n-button` add `secondary` prop.
+- `n-button` add `tertiary` prop.
+- `n-button` add `quaternary` prop.
+- `n-auto-complete` add `input-props` prop, closes [#1610](https://github.com/TuSimple/naive-ui/issues/1610).
+- `n-avatar` add `fallback-src` prop, closes [#702](https://github.com/TuSimple/naive-ui/issues/702).
+- `n-avatar` add `on-error` prop.
+- `n-input` add `select` methods, closes [#1328](https://github.com/TuSimple/naive-ui/issues/1328).
+- Add `n-tab` component, closes [#1630](https://github.com/TuSimple/naive-ui/issues/1630).
+- `n-switch` add `round` prop, closes [#1469](https://github.com/TuSimple/naive-ui/issues/1469).
+- `n-step` add `title` slot.
+- `n-menu` support `divider` type option.
+
+### Fixes
+
+- Fix the default value of the `suffix` internal component's `loading` property.
+- Fix `n-space` is shown when it has no children, closes [#1605](https://github.com/TuSimple/naive-ui/issues/1605).
+- Fix `n-radio` has no `onUpdateChecked` prop.
+- Fix `n-dropdown` animation flicker problem, closes [#1600](https://github.com/TuSimple/naive-ui/issues/1600).
+- Fix `n-data-table`’s `clearSorter` method isn't exported properly.
+- Fix `n-global-style` throws error in SSR.
+- Fix `n-button` will trigger click event twice if pressed, closes [#1626](https://github.com/TuSimple/naive-ui/issues/1626).
+
 ## 2.20.3 (2021-11-15)
 
 ### Fixes

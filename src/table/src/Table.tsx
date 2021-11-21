@@ -21,6 +21,7 @@ const tableProps = {
     type: Boolean,
     default: true
   },
+  striped: Boolean,
   singleColumn: Boolean,
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
@@ -63,6 +64,9 @@ export default defineComponent({
             lineHeight,
             borderColorModal,
             borderColorPopover,
+            tdColorStriped,
+            tdColorStripedModal,
+            tdColorStripedPopover,
             [createKey('fontSize', size)]: fontSize,
             [createKey('tdPadding', size)]: tdPadding,
             [createKey('thPadding', size)]: thPadding
@@ -87,7 +91,10 @@ export default defineComponent({
           '--th-text-color': thTextColor,
           '--line-height': lineHeight,
           '--td-padding': tdPadding,
-          '--th-padding': thPadding
+          '--th-padding': thPadding,
+          '--td-color-striped': tdColorStriped,
+          '--td-color-striped-modal': tdColorStripedModal,
+          '--td-color-striped-popover': tdColorStripedPopover
         }
       })
     }
@@ -102,7 +109,8 @@ export default defineComponent({
             [`${mergedClsPrefix}-table--bottom-bordered`]: this.bottomBordered,
             [`${mergedClsPrefix}-table--bordered`]: this.bordered,
             [`${mergedClsPrefix}-table--single-line`]: this.singleLine,
-            [`${mergedClsPrefix}-table--single-column`]: this.singleColumn
+            [`${mergedClsPrefix}-table--single-column`]: this.singleColumn,
+            [`${mergedClsPrefix}-table--striped`]: this.striped
           }
         ]}
         style={this.cssVars as CSSProperties}

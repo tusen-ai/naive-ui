@@ -29,7 +29,7 @@ describe('n-space', () => {
   it('render space string size', () => {
     const wrapper = mount({
       render () {
-        return <NSpace size="large" />
+        return <NSpace size="large">{{ default: () => 'kirby' }}</NSpace>
       }
     })
     expect(wrapper.attributes('style')).toContain('margin')
@@ -40,7 +40,7 @@ describe('n-space', () => {
     const size = 20
     const wrapper = mount({
       render () {
-        return <NSpace size={size} />
+        return <NSpace size={size}>{{ default: () => 'kirby' }}</NSpace>
       }
     })
     expect(wrapper.attributes('style')).toContain(`margin-top: -${size / 2}px`)
@@ -87,6 +87,9 @@ describe('n-space', () => {
     const wrapper = mount(NSpace, {
       props: {
         inline: true
+      },
+      slots: {
+        default: () => '07akioni'
       }
     })
 

@@ -16,18 +16,17 @@ import NMenuOptionContent from './MenuOptionContent'
 import { itemRenderer } from './utils'
 import { useMenuChild, useMenuChildProps } from './use-menu-child'
 import type { SubmenuInjection } from './use-menu-child'
-import { TreeNode } from 'treemate'
-import { MenuGroupOption, MenuOption, TmNode } from './interface'
+import { MenuMixedOption, TmNode } from './interface'
 import { menuItemGroupInjectionKey } from './MenuOptionGroup'
 
 export const submenuProps = {
   ...useMenuChildProps,
   rawNodes: {
-    type: Array as PropType<Array<MenuOption | MenuGroupOption>>,
+    type: Array as PropType<MenuMixedOption[]>,
     default: () => []
   },
   tmNodes: {
-    type: Array as PropType<Array<TreeNode<MenuOption, MenuGroupOption>>>,
+    type: Array as PropType<TmNode[]>,
     default: () => []
   },
   tmNode: {

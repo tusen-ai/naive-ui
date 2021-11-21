@@ -7,8 +7,8 @@ import { c, cE, cB } from '../../../_utils/cssr'
 // --bezier
 // --size
 export default cB('avatar', `
-  width: var(--size);
-  height: var(--size);
+  width: var(--merged-size);
+  height: var(--merged-size);
   color: #FFF;
   font-size: var(--font-size);
   display: inline-flex;

@@ -44,14 +44,20 @@ describe('n-radio', () => {
   })
 
   it('should work with `size` prop', async () => {
-    const wrapper = mount(NRadio, { props: { size: 'small' } })
-    expect(wrapper.find('.n-radio').attributes('style')).toMatchSnapshot()
+    ;(['small', 'medium', 'large'] as const).forEach((size) => {
+      const wrapper = mount(NRadio, { props: { size: size } })
+      expect(wrapper.find('.n-radio').attributes('style')).toMatchSnapshot()
+    })
+  })
 
-    await wrapper.setProps({ size: 'medium' })
-    expect(wrapper.find('.n-radio').attributes('style')).toMatchSnapshot()
+  it('should work with `onUpdate:checked` prop', async () => {
+    const onUpdate = jest.fn()
+    const wrapper = mount(NRadio, { props: { 'onUpdate:checked': onUpdate } })
 
-    await wrapper.setProps({ size: 'large' })
-    expect(wrapper.find('.n-radio').attributes('style')).toMatchSnapshot()
+    await wrapper.find('.n-radio').trigger('click')
+    setTimeout(() => {
+      expect(onUpdate).toHaveBeenCalled()
+    }, 0)
   })
 })
 
@@ -110,5 +116,72 @@ describe('n-radio-group', () => {
 
     expect(radio1.attributes('name')).toEqual('randomName222')
     expect(radio2.attributes('name')).toEqual('randomName222')
+  })
+
+  it('should work with `size` prop', async () => {
+    ;(['small', 'medium', 'large'] as const).forEach((size) => {
+      const wrapper = mount(NRadioGroup, {
+        props: {
+          size: size
+        },
+        slots: {
+          default: () => [
+            h(NRadio, null, { default: () => 'test-item1' }),
+            h(NRadio, null, { default: () => 'test-item2' })
+          ]
+        }
+      })
+      expect(
+        wrapper.find('.n-radio-group').attributes('style')
+      ).toMatchSnapshot()
+    })
+  })
+
+  it('should work with `value` prop', async () => {
+    const wrapper = mount(NRadioGroup, {
+      props: {
+        value: 'test1'
+      },
+      slots: {
+        default: () => [
+          h(NRadio, { value: 'test1' }, { default: () => 'test-item1' }),
+          h(NRadio, { value: 'test2' }, { default: () => 'test-item2' })
+        ]
+      }
+    })
+    expect(wrapper.findAll('.n-radio')[0].classes()).toContain(
+      'n-radio--checked'
+    )
+    expect(wrapper.findAll('.n-radio')[1].classes()).not.toContain(
+      'n-radio--checked'
+    )
+
+    await wrapper.setProps({ value: 'test2' })
+    expect(wrapper.findAll('.n-radio')[1].classes()).toContain(
+      'n-radio--checked'
+    )
+    expect(wrapper.findAll('.n-radio')[0].classes()).not.toContain(
+      'n-radio--checked'
+    )
+  })
+
+  it('should work with `on-update:value` prop', async () => {
+    const onUpdate = jest.fn()
+    const wrapper = mount(NRadioGroup, {
+      props: {
+        onUpdateValue: onUpdate
+      },
+      slots: {
+        default: () => [
+          h(NRadio, { value: 'test1' }, { default: () => 'test-item1' }),
+          h(NRadio, { value: 'test2' }, { default: () => 'test-item2' })
+        ]
+      }
+    })
+
+    await wrapper.findAll('.n-radio')[1].trigger('click')
+    setTimeout(() => {
+      expect(onUpdate).toHaveBeenCalled()
+    }, 0)
   })
 })

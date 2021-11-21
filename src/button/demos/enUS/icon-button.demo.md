@@ -1,4 +1,4 @@
-# Use Icons as Buttons
+# Use icons as buttons
 
 Sometimes you may want to use an icon as a button and customize its size. You can use the `text` prop and `font-size` style to set it.
 

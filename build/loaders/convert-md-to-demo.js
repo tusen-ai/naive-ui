@@ -1,4 +1,4 @@
-const marked = require('marked')
+const { marked } = require('marked')
 const fs = require('fs')
 const path = require('path')
 const createRenderer = require('./md-renderer')

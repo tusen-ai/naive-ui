@@ -79,7 +79,8 @@ input-props
 
 ### Input Methods
 
-| Name  | Type         | Description              |
-| ----- | ------------ | ------------------------ |
-| blur  | `() => void` | Blur the input element.  |
-| focus | `() => void` | Focus the input element. |
+| Name   | Type         | Description               |
+| ------ | ------------ | ------------------------- |
+| blur   | `() => void` | Blur the input element.   |
+| focus  | `() => void` | Focus the input element.  |
+| select | `() => void` | Select the input element. |

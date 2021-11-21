@@ -19,7 +19,10 @@ export default defineComponent({
       type: Boolean,
       default: undefined
     },
-    loading: Boolean,
+    loading: {
+      type: Boolean,
+      default: false
+    },
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {

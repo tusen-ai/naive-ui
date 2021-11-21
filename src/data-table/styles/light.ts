@@ -43,6 +43,7 @@ export const self = (vars: ThemeCommonVars) => {
     fontSizeLarge,
     borderColor: composite(cardColor, dividerColor),
     tdColorHover: composite(cardColor, tableColorHover),
+    tdColorStriped: composite(cardColor, tableColorHover),
     thColor: composite(cardColor, tableHeaderColor),
     thColorHover: composite(
       composite(cardColor, tableHeaderColor),
@@ -58,6 +59,7 @@ export const self = (vars: ThemeCommonVars) => {
     // modal
     borderColorModal: composite(modalColor, dividerColor),
     tdColorHoverModal: composite(modalColor, tableColorHover),
+    tdColorStripedModal: composite(modalColor, tableColorHover),
     thColorModal: composite(modalColor, tableHeaderColor),
     thColorHoverModal: composite(
       composite(modalColor, tableHeaderColor),
@@ -67,6 +69,7 @@ export const self = (vars: ThemeCommonVars) => {
     // popover
     borderColorPopover: composite(popoverColor, dividerColor),
     tdColorHoverPopover: composite(popoverColor, tableColorHover),
+    tdColorStripedPopover: composite(popoverColor, tableColorHover),
     thColorPopover: composite(popoverColor, tableHeaderColor),
     thColorHoverPopover: composite(
       composite(popoverColor, tableHeaderColor),

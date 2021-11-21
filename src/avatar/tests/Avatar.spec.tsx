@@ -51,13 +51,15 @@ describe('n-avatar', () => {
 
   it('size is string', () => {
     const wrapper = mount(NAvatar, { props: { size: 'medium' } })
-    expect(wrapper.attributes('style')).toContain('--size')
+    expect(wrapper.attributes('style')).toContain('--merged-size')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('size is number', () => {
     const wrapper = mount(NAvatar, { props: { size: 50 } })
-    expect(wrapper.attributes('style')).toContain('--size: 50px;')
+    expect(wrapper.attributes('style')).toContain(
+      '--merged-size: var(--avatar-size-override, 50px);'
+    )
     expect(wrapper.html()).toMatchSnapshot()
   })
 
