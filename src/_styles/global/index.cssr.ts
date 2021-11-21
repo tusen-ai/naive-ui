@@ -1,6 +1,12 @@
 import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
+const {
+  fontSize,
+  fontFamily,
+  lineHeight
+} = commonVariables
+
 // All the components need the style
 // It is static and won't be changed in the app's lifetime
 // If user want to overrides it they need to use `n-global-style` is provided
@@ -13,9 +19,9 @@ import commonVariables from '../common/_common'
 // In some android devices, there will be the style.
 export default c('body', `
   margin: 0;
-  font-size: ${commonVariables.fontSize};
-  font-family: ${commonVariables.fontFamily};
-  line-height: ${commonVariables.lineHeight};
+  font-size: ${fontSize};
+  font-family: ${fontFamily};
+  line-height: ${lineHeight};
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
 `, [

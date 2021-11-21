@@ -8,13 +8,13 @@ Learn more about `n-config-provider`, see [Config Provider](../components/config
 
 ## Configure
 
-Set `n-config-provider`'s `locale` prop to `zhCN` imported from naive-ui to set Chinese theme inside `n-config-provider`.
+Set `n-config-provider`'s `locale` prop to `enUS` imported from naive-ui to set Chinese theme inside `n-config-provider`.
 
-Set `n-config-provider`'s `date-locale` prop to `dateZhCN` imported from naive-ui to set Chinese theme's date inside `n-config-provider`.
+Set `n-config-provider`'s `date-locale` prop to `dateEnUS` imported from naive-ui to set Chinese theme's date inside `n-config-provider`.
 
 ```html
 <template>
-  <n-config-provider :locale="zhCN" :date-locale="dateZhCN">
+  <n-config-provider :locale="enUS" :date-locale="dateEnUS">
     <app />
   </n-config-provider>
 </template>
@@ -22,7 +22,7 @@ Set `n-config-provider`'s `date-locale` prop to `dateZhCN` imported from naive-u
 <script>
   import { defineComponent } from 'vue'
   import { NConfigProvider } from 'naive-ui'
-  import { zhCN, dateZhCN } from 'naive-ui'
+  import { enUS, dateEnUS } from 'naive-ui'
 
   export default defineComponent({
     components: {
@@ -30,27 +30,63 @@ Set `n-config-provider`'s `date-locale` prop to `dateZhCN` imported from naive-u
     },
     setup() {
       return {
-        zhCN,
-        dateZhCN
+        enUS,
+        dateEnUS
       }
     }
   })
 </script>
-
-<style>
-  body {
-    background: black;
-  }
-</style>
 ```
 
 ## Supported languages
 
-| Language             | Config | Date config |
-| -------------------- | ------ | ----------- |
-| English              | enUS   | dateEnUS    |
-| Japanese             | jaJP   | dateJaJP    |
-| Russian              | ruRU   | dateRuRU    |
-| Ukrainian            | ukUA   | dateUkUA    |
-| Chinese (Simplified) | zhCN   | dateZhCN    |
-| Indonesian           | idID   | dateIdID    |
+PR is welcomed for locales that is not supported yet!
+
+| Language                  | Config | Date config |
+| ------------------------- | ------ | ----------- |
+| English                   | enUS   | dateEnUS    |
+| Japanese                  | jaJP   | dateJaJP    |
+| Russian                   | ruRU   | dateRuRU    |
+| Ukrainian                 | ukUA   | dateUkUA    |
+| Chinese (Simplified)      | enUS   | dateEnUS    |
+| German - Germany          | deDE   | dateDeDe    |
+| Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |
+
+## Customize the existing theme
+
+You can use `createLocale` to customize the existing theme.
+
+```html
+<template>
+  <n-config-provider :locale="locale" :date-locale="dateEnUS">
+    <app />
+  </n-config-provider>
+</template>
+
+<script>
+  import { defineComponent } from 'vue'
+  import { NConfigProvider, createLocale, enUS } from 'naive-ui'
+  import { enUS, dateEnUS } from 'naive-ui'
+
+  const customizedLocale = createLocale(
+    {
+      Input: {
+        placeholder: '不提申请不构成加班'
+      }
+    },
+    enUS
+  )
+
+  export default defineComponent({
+    components: {
+      NConfigProvider
+    },
+    setup() {
+      return {
+        locale: customizedLocale,
+        dateEnUS
+      }
+    }
+  })
+</script>
+```

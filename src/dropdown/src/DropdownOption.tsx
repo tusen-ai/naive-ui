@@ -19,7 +19,7 @@ import { render, useDeferredTrue } from '../../_utils'
 import { NIcon } from '../../icon'
 import NDropdownMenu, { dropdownMenuInjectionKey } from './DropdownMenu'
 import { dropdownInjectionKey } from './Dropdown'
-import { isSubmenuNode } from './utils'
+import { isDropdownOptionRelatedTarget, isSubmenuNode } from './utils'
 import { TreeNode } from 'treemate'
 import {
   DropdownGroupOption,
@@ -144,7 +144,7 @@ export default defineComponent({
       const { relatedTarget } = e
       if (
         relatedTarget &&
-        !(relatedTarget as HTMLElement).hasAttribute('__dropdown-option')
+        !isDropdownOptionRelatedTarget(relatedTarget as HTMLElement)
       ) {
         hoverKeyRef.value = null
       }

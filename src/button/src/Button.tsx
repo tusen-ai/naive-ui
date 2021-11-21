@@ -8,7 +8,8 @@ import {
   PropType,
   renderSlot,
   CSSProperties,
-  ButtonHTMLAttributes
+  ButtonHTMLAttributes,
+  watchEffect
 } from 'vue'
 import { useMemo } from 'vooks'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
@@ -21,7 +22,7 @@ import {
   NBaseWave
 } from '../../_internal'
 import type { BaseWaveRef } from '../../_internal'
-import { call, createKey } from '../../_utils'
+import { call, createKey, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { buttonLight } from '../styles'
 import type { ButtonTheme } from '../styles'
@@ -29,6 +30,7 @@ import { buttonGroupInjectionKey } from './ButtonGroup'
 import type { Type, Size } from './interface'
 import style from './styles/button.cssr'
 import useRtl from '../../_mixins/use-rtl'
+import { changeColor } from 'seemly'
 
 const buttonProps = {
   ...(useTheme.props as ThemeProps<ButtonTheme>),
@@ -42,7 +44,10 @@ const buttonProps = {
   size: String as PropType<Size>,
   ghost: Boolean,
   round: Boolean,
-  depth: [Number, String] as PropType<1 | 2 | 3 | '1' | '2' | '3'>,
+  secondary: Boolean,
+  tertiary: Boolean,
+  quaternary: Boolean,
+  strong: Boolean,
   focusable: {
     type: Boolean,
     default: true
@@ -81,11 +86,28 @@ const Button = defineComponent({
   name: 'Button',
   props: buttonProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        const { dashed, ghost, text, secondary, tertiary, quaternary } = props
+        if (
+          (dashed || ghost || text) &&
+          (secondary || tertiary || quaternary)
+        ) {
+          warnOnce(
+            'button',
+            "`dashed`, `ghost` and `text` props can't be used along with `secondary`, `tertiary` and `quaterary` props."
+          )
+        }
+      })
+    }
     const selfRef = ref<HTMLElement | null>(null)
     const waveRef = ref<BaseWaveRef | null>(null)
     const enterPressedRef = ref(false)
     const showBorderRef = useMemo(() => {
       return (
+        !props.quaternary &&
+        !props.tertiary &&
+        !props.secondary &&
         !props.text &&
         (!props.color || props.ghost || props.dashed) &&
         props.bordered
@@ -212,20 +234,27 @@ const Button = defineComponent({
         const {
           rippleDuration,
           opacityDisabled,
-          fontWeightText,
-          fontWeighGhost,
-          fontWeight
+          fontWeight,
+          fontWeightStrong
         } = self
         const size = mergedSizeRef.value
-        const { dashed, type, ghost, text, color, round, circle, textColor } =
-          props
+        const {
+          dashed,
+          type,
+          ghost,
+          text,
+          color,
+          round,
+          circle,
+          textColor,
+          secondary,
+          tertiary,
+          quaternary,
+          strong
+        } = props
         // font
         const fontProps = {
-          fontWeight: text
-            ? fontWeightText
-            : ghost
-              ? fontWeighGhost
-              : fontWeight
+          fontWeight: strong ? fontWeightStrong : fontWeight
         }
         // color
         let colorProps = {
@@ -241,19 +270,13 @@ const Button = defineComponent({
           '--text-color-focus': 'initial',
           '--text-color-disabled': 'initial'
         }
+        const typeIsTertiary = type === 'tertiary'
+        const typeIsDefault = type === 'default'
+        const mergedType = typeIsTertiary ? 'default' : type
         if (text) {
-          const { depth } = props
           const propTextColor = textColor || color
           const mergedTextColor =
-            propTextColor ||
-            (type === 'default' && depth !== undefined
-              ? self[
-                createKey(
-                  'textColorTextDepth',
-                  String(depth) as '1' | '2' | '3'
-                )
-              ]
-              : self[createKey('textColorText', type)])
+            propTextColor || self[createKey('textColorText', mergedType)]
           colorProps = {
             '--color': '#0000',
             '--color-hover': '#0000',
@@ -264,15 +287,16 @@ const Button = defineComponent({
             '--text-color': mergedTextColor,
             '--text-color-hover': propTextColor
               ? createHoverColor(propTextColor)
-              : self[createKey('textColorTextHover', type)],
+              : self[createKey('textColorTextHover', mergedType)],
             '--text-color-pressed': propTextColor
               ? createPressedColor(propTextColor)
-              : self[createKey('textColorTextPressed', type)],
+              : self[createKey('textColorTextPressed', mergedType)],
             '--text-color-focus': propTextColor
               ? createHoverColor(propTextColor)
-              : self[createKey('textColorTextHover', type)],
+              : self[createKey('textColorTextHover', mergedType)],
             '--text-color-disabled':
-              propTextColor || self[createKey('textColorTextDisabled', type)]
+              propTextColor ||
+              self[createKey('textColorTextDisabled', mergedType)]
           }
         } else if (ghost || dashed) {
           const mergedTextColor = textColor || color
@@ -282,60 +306,129 @@ const Button = defineComponent({
             '--color-pressed': '#0000',
             '--color-focus': '#0000',
             '--color-disabled': '#0000',
-            '--ripple-color': color || self[createKey('rippleColor', type)],
+            '--ripple-color':
+              color || self[createKey('rippleColor', mergedType)],
             '--text-color':
-              mergedTextColor || self[createKey('textColorGhost', type)],
+              mergedTextColor || self[createKey('textColorGhost', mergedType)],
             '--text-color-hover': mergedTextColor
               ? createHoverColor(mergedTextColor)
-              : self[createKey('textColorGhostHover', type)],
+              : self[createKey('textColorGhostHover', mergedType)],
             '--text-color-pressed': mergedTextColor
               ? createPressedColor(mergedTextColor)
-              : self[createKey('textColorGhostPressed', type)],
+              : self[createKey('textColorGhostPressed', mergedType)],
             '--text-color-focus': mergedTextColor
               ? createHoverColor(mergedTextColor)
-              : self[createKey('textColorGhostHover', type)],
+              : self[createKey('textColorGhostHover', mergedType)],
             '--text-color-disabled':
-              mergedTextColor || self[createKey('textColorGhostDisabled', type)]
+              mergedTextColor ||
+              self[createKey('textColorGhostDisabled', mergedType)]
           }
+        } else if (secondary) {
+          const typeTextColor = typeIsDefault
+            ? self.textColor
+            : typeIsTertiary
+              ? self.textColorTertiary
+              : self[createKey('color', mergedType)]
+          const mergedTextColor = color || typeTextColor
+          const isColoredType = type !== 'default' && type !== 'tertiary'
+          colorProps = {
+            '--color': isColoredType
+              ? changeColor(mergedTextColor, {
+                alpha: self.colorOpacitySecondary
+              })
+              : self.colorSecondary,
+            '--color-hover': isColoredType
+              ? changeColor(mergedTextColor, {
+                alpha: self.colorOpacitySecondaryHover
+              })
+              : self.colorSecondaryHover,
+            '--color-pressed': isColoredType
+              ? changeColor(mergedTextColor, {
+                alpha: self.colorOpacitySecondaryPressed
+              })
+              : self.colorSecondaryPressed,
+            '--color-focus': isColoredType
+              ? changeColor(mergedTextColor, {
+                alpha: self.colorOpacitySecondaryHover
+              })
+              : self.colorSecondaryHover,
+            '--color-disabled': self.colorSecondary,
+            '--ripple-color': '#0000',
+            '--text-color': mergedTextColor,
+            '--text-color-hover': mergedTextColor,
+            '--text-color-pressed': mergedTextColor,
+            '--text-color-focus': mergedTextColor,
+            '--text-color-disabled': mergedTextColor
+          }
+        } else if (tertiary || quaternary) {
+          const typeColor = typeIsDefault
+            ? self.textColor
+            : typeIsTertiary
+              ? self.textColorTertiary
+              : self[createKey('color', mergedType)]
+          const mergedColor = color || typeColor
+          if (tertiary) {
+            colorProps['--color'] = self.colorTertiary
+            colorProps['--color-hover'] = self.colorTertiaryHover
+            colorProps['--color-pressed'] = self.colorTertiaryPressed
+            colorProps['--color-focus'] = self.colorSecondaryHover
+            colorProps['--color-disabled'] = self.colorTertiary
+          } else {
+            colorProps['--color'] = self.colorQuaternary
+            colorProps['--color-hover'] = self.colorQuaternaryHover
+            colorProps['--color-pressed'] = self.colorQuaternaryPressed
+            colorProps['--color-focus'] = self.colorQuaternaryHover
+            colorProps['--color-disabled'] = self.colorQuaternary
+          }
+          colorProps['--ripple-color'] = '#0000'
+          colorProps['--text-color'] = mergedColor
+          colorProps['--text-color-hover'] = mergedColor
+          colorProps['--text-color-pressed'] = mergedColor
+          colorProps['--text-color-focus'] = mergedColor
+          colorProps['--text-color-disabled'] = mergedColor
         } else {
           colorProps = {
-            '--color': color || self[createKey('color', type)],
+            '--color': color || self[createKey('color', mergedType)],
             '--color-hover': color
               ? createHoverColor(color)
-              : self[createKey('colorHover', type)],
+              : self[createKey('colorHover', mergedType)],
             '--color-pressed': color
               ? createPressedColor(color)
-              : self[createKey('colorPressed', type)],
+              : self[createKey('colorPressed', mergedType)],
             '--color-focus': color
               ? createHoverColor(color)
-              : self[createKey('colorFocus', type)],
-            '--color-disabled': color || self[createKey('colorDisabled', type)],
-            '--ripple-color': color || self[createKey('rippleColor', type)],
+              : self[createKey('colorFocus', mergedType)],
+            '--color-disabled':
+              color || self[createKey('colorDisabled', mergedType)],
+            '--ripple-color':
+              color || self[createKey('rippleColor', mergedType)],
             '--text-color':
               textColor ||
               (color
                 ? self.textColorPrimary
-                : self[createKey('textColor', type)]),
+                : typeIsTertiary
+                  ? self.textColorTertiary
+                  : self[createKey('textColor', mergedType)]),
             '--text-color-hover':
               textColor ||
               (color
                 ? self.textColorHoverPrimary
-                : self[createKey('textColorHover', type)]),
+                : self[createKey('textColorHover', mergedType)]),
             '--text-color-pressed':
               textColor ||
               (color
                 ? self.textColorPressedPrimary
-                : self[createKey('textColorPressed', type)]),
+                : self[createKey('textColorPressed', mergedType)]),
             '--text-color-focus':
               textColor ||
               (color
                 ? self.textColorFocusPrimary
-                : self[createKey('textColorFocus', type)]),
+                : self[createKey('textColorFocus', mergedType)]),
             '--text-color-disabled':
               textColor ||
               (color
                 ? self.textColorDisabledPrimary
-                : self[createKey('textColorDisabled', type)])
+                : self[createKey('textColorDisabled', mergedType)])
           }
         }
         // border
@@ -356,11 +449,11 @@ const Button = defineComponent({
           }
         } else {
           borderProps = {
-            '--border': self[createKey('border', type)],
-            '--border-hover': self[createKey('borderHover', type)],
-            '--border-pressed': self[createKey('borderPressed', type)],
-            '--border-focus': self[createKey('borderFocus', type)],
-            '--border-disabled': self[createKey('borderDisabled', type)]
+            '--border': self[createKey('border', mergedType)],
+            '--border-hover': self[createKey('borderHover', mergedType)],
+            '--border-pressed': self[createKey('borderPressed', mergedType)],
+            '--border-focus': self[createKey('borderFocus', mergedType)],
+            '--border-disabled': self[createKey('borderDisabled', mergedType)]
           }
         }
         // size
@@ -422,6 +515,7 @@ const Button = defineComponent({
           this.enterPressed && `${mergedClsPrefix}-button--pressed`,
           !this.text && this.dashed && `${mergedClsPrefix}-button--dashed`,
           this.color && `${mergedClsPrefix}-button--color`,
+          this.secondary && `${mergedClsPrefix}-button--secondary`,
           this.ghost && `${mergedClsPrefix}-button--ghost` // required for button group border collapse
         ]}
         tabindex={this.mergedFocusable ? 0 : -1}

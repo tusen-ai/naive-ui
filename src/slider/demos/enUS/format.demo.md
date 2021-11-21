@@ -1,4 +1,4 @@
-# Format Tooltip
+# Format tooltip
 
 ```html
 <n-slider

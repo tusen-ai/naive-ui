@@ -1,4 +1,4 @@
-# Text Button
+# Text button
 
 It just looks like text.
 

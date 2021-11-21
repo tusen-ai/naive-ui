@@ -14,7 +14,8 @@ import {
   withDirectives,
   vShow,
   watchEffect,
-  ExtractPropTypes
+  ExtractPropTypes,
+  cloneVNode
 } from 'vue'
 import { VResizeObserver, VXScroll, VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
@@ -407,11 +408,18 @@ export default defineComponent({
       mergedSize,
       $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot }
     } = this
-    const children = defaultSlot
+
+    const tabPaneChildren = defaultSlot
       ? flatten(defaultSlot()).filter((v) => {
         return (v.type as any).__TAB_PANE__ === true
       })
       : []
+    const tabChildren = defaultSlot
+      ? flatten(defaultSlot()).filter((v) => {
+        return (v.type as any).__TAB__ === true
+      })
+      : []
+    const showPane = !tabChildren.length
     const prefix = prefixSlot ? prefixSlot() : null
     const suffix = suffixSlot ? suffixSlot() : null
     const isCard = type === 'card'
@@ -442,17 +450,28 @@ export default defineComponent({
           ) : null}
           {isSegment ? (
             <div class={`${mergedClsPrefix}-tabs-rail`}>
-              {children.map((tabPaneVNode: any, index: number) => {
-                return (
-                  <Tab {...tabPaneVNode.props} leftPadded={index !== 0}>
-                    {tabPaneVNode.children
-                      ? {
-                          default: tabPaneVNode.children.tab
-                        }
-                      : undefined}
-                  </Tab>
-                )
-              })}
+              {showPane
+                ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
+                  return (
+                      <Tab
+                        {...tabPaneVNode.props}
+                        internalLeftPadded={index !== 0}
+                      >
+                        {tabPaneVNode.children
+                          ? {
+                              default: tabPaneVNode.children.tab
+                            }
+                          : undefined}
+                      </Tab>
+                  )
+                })
+                : tabChildren.map((tabVNode: any, index: number) => {
+                  if (index === 0) {
+                    return tabVNode
+                  } else {
+                    return createLeftPaddedTabVNode(tabVNode)
+                  }
+                })}
             </div>
           ) : (
             <VResizeObserver onResize={this.handleNavResize}>
@@ -476,26 +495,47 @@ export default defineComponent({
                                   style={{ width: `${this.tabsPadding}px` }}
                                 />
                               )}
-                              {children.map(
-                                (tabPaneVNode: any, index: number) => {
-                                  return (
-                                    <Tab
-                                      {...tabPaneVNode.props}
-                                      leftPadded={
-                                        index !== 0 && !mergedJustifyContent
-                                      }
-                                    >
-                                      {tabPaneVNode.children
-                                        ? {
-                                            default: tabPaneVNode.children.tab
+                              {showPane
+                                ? tabPaneChildren.map(
+                                  (tabPaneVNode: any, index: number) => {
+                                    return (
+                                        <Tab
+                                          {...tabPaneVNode.props}
+                                          internalLeftPadded={
+                                            index !== 0 && !mergedJustifyContent
                                           }
-                                        : undefined}
-                                    </Tab>
-                                  )
-                                }
-                              )}
+                                        >
+                                          {tabPaneVNode.children
+                                            ? {
+                                                default:
+                                                  tabPaneVNode.children.tab
+                                              }
+                                            : undefined}
+                                        </Tab>
+                                    )
+                                  }
+                                )
+                                : tabChildren.map(
+                                  (tabVNode: any, index: number) => {
+                                    if (
+                                      index !== 0 &&
+                                        !mergedJustifyContent
+                                    ) {
+                                      return createLeftPaddedTabVNode(
+                                        tabVNode
+                                      )
+                                    } else {
+                                      return tabVNode
+                                    }
+                                  }
+                                )}
                               {!addTabFixed && addable && isCard
-                                ? createAddTag(addable, children.length !== 0)
+                                ? createAddTag(
+                                  addable,
+                                  (showPane
+                                    ? tabPaneChildren.length
+                                    : tabChildren.length) !== 0
+                                )
                                 : null}
                               {mergedJustifyContent ? null : (
                                 <div
@@ -547,7 +587,12 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-tabs-nav__suffix`}>{suffix}</div>
           ) : null}
         </div>
-        {filterMapTabPanes(children, this.mergedValue, this.renderedNames)}
+        {showPane &&
+          filterMapTabPanes(
+            tabPaneChildren,
+            this.mergedValue,
+            this.renderedNames
+          )}
       </div>
     )
   }
@@ -588,15 +633,27 @@ function filterMapTabPanes (
   return children
 }
 
-function createAddTag (addable: Addable, leftPadded: boolean): VNode {
+function createAddTag (addable: Addable, internalLeftPadded: boolean): VNode {
   return (
     <Tab
       ref="addTabInstRef"
       key="__addable"
       name="__addable"
-      addable
-      leftPadded={leftPadded}
+      internalAddable
+      internalLeftPadded={internalLeftPadded}
       disabled={typeof addable === 'object' && addable.disabled}
     />
   )
+}
+
+function createLeftPaddedTabVNode (tabVNode: VNode): VNode {
+  const modifiedVNode = cloneVNode(tabVNode)
+  if (modifiedVNode.props) {
+    modifiedVNode.props.internalLeftPadded = true
+  } else {
+    modifiedVNode.props = {
+      internalLeftPadded: true
+    }
+  }
+  return modifiedVNode
 }

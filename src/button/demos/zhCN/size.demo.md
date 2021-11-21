@@ -4,9 +4,9 @@
 
 ```html
 <n-space align="baseline">
-  <n-button size="tiny">小小</n-button>
-  <n-button size="small">小</n-button>
-  <n-button size="medium">不小</n-button>
-  <n-button size="large">不不小</n-button>
+  <n-button size="tiny" secondary strong>小小</n-button>
+  <n-button size="small" secondary strong>小</n-button>
+  <n-button size="medium" secondary strong>不小</n-button>
+  <n-button size="large" secondary strong>不不小</n-button>
 </n-space>
 ```
