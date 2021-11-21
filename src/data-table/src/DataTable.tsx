@@ -399,7 +399,6 @@ export default defineComponent({
       clearSorter,
       page,
       sort,
-      /** @deprecated */
       clearFilter
     }
     return {

@@ -295,7 +295,7 @@ export interface DataTableInst {
   clearSorter: () => void
   page: (page: number) => void
   sort: (columnKey: ColumnKey, order: SortOrder) => void
-  /** @deprecated */
+  /** @deprecated it but just leave it here, it does no harm */
   clearFilter: () => void
 }
 
