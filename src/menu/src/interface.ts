@@ -19,6 +19,7 @@ export interface MenuOptionSharedPart {
  * @private
  */
 export type MenuIgnoredOption = MenuDividerOption | MenuRenderOption
+
 export interface MenuDividerOption {
   type: 'divider'
   key?: Key
@@ -36,7 +37,7 @@ export interface MenuRenderOption {
 
 export interface MenuGroupOptionBase extends MenuOptionSharedPart {
   type: 'group'
-  children: Array<MenuOption | MenuGroupOption>
+  children: Array<MenuOption | MenuDividerOption>
 }
 
 export type MenuOption =
