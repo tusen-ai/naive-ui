@@ -1,6 +1,6 @@
-# 命名空间（卸载内容的类名）
+# 命名空间（挂载内容的类名）
 
-组件的一部分是卸载在 `document.body` 上的。如需给这些卸载的元素添加 class，使用 `n-config-provider` 的 `namespace` 属性。打开开发者工具可以看到被卸载的 DOM。
+组件的一部分是挂载在 `document.body` 上的。如需给这些可卸载的元素添加 class，使用 `n-config-provider` 的 `namespace` 属性。打开开发者工具可以看到被卸载的 DOM。
 
 ```html
 <n-config-provider :namespace="ns">
