@@ -1,4 +1,4 @@
-import { h, ref, computed, defineComponent, PropType, watch, VNode } from 'vue'
+import { h, ref, computed, defineComponent, PropType, inject, watch, VNode } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -7,6 +7,7 @@ import type { AvatarTheme } from '../styles'
 import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/index.cssr'
+import { tagInjectionKey } from '../../tag/src/Tag'
 
 const avatarProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme>),
@@ -67,6 +68,14 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const Tag = inject(tagInjectionKey, null)
+    const mergedRoundRef = computed(() => {
+      if (Tag) {
+        return Tag.roundRef.value || props.round
+      } else {
+        return props.round
+      }
+    })
     const handleError = (e: Event): void => {
       hasLoadErrorRef.value = true
       const { onError } = props
@@ -81,10 +90,11 @@ export default defineComponent({
     return {
       textRef,
       selfRef,
+      mergedRoundRef,
       mergedClsPrefix: mergedClsPrefixRef,
       fitTextTransform,
       cssVars: computed(() => {
-        const { size, round, circle } = props
+        const { size, circle } = props
         const {
           self: { borderRadius, fontSize, color },
           common: { cubicBezierEaseInOut }
@@ -97,10 +107,11 @@ export default defineComponent({
         }
         return {
           '--font-size': fontSize,
-          '--border-radius': round || circle ? '50%' : borderRadius,
+          '--border-radius':
+            mergedRoundRef.value || circle ? '50%' : borderRadius,
           '--color': color,
           '--bezier': cubicBezierEaseInOut,
-          '--size': height
+          '--merged-size': `var(--avatar-size-override, ${height})`
         }
       }),
       hasLoadError: hasLoadErrorRef,

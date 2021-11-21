@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-tag` add `avatar` slot.
 - `n-data-table` add `striped` prop, closes [#1552](https://github.com/TuSimple/naive-ui/issues/1552).
 - `n-table` add `striped` prop, closes [#1552](https://github.com/TuSimple/naive-ui/issues/1552).
 - `n-slider` add `vertical` prop, closes [#1468](https://github.com/TuSimple/naive-ui/issues/1468).
