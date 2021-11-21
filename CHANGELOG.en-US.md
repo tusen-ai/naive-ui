@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `NButton.fontWeightText` & `NButton.fontWeightGhost` theme vars are removed. If you want to change font weight, you can use `strong` prop of `n-button` instead.
+
 ### Feats
 
 - `n-tag` add `avatar` slot.

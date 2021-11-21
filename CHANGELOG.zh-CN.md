@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- 移除了 `NButton.fontWeightText` & `NButton.fontWeightGhost` 主题变量，如果你需要调整字重，可以使用 `n-button` 的 `strong` 属性
+
 ### Feats
 
 - `n-tag` 新增 `avatar` 插槽
