@@ -147,7 +147,7 @@ describe('n-slider', () => {
     expect(wrapper.find('.n-slider').classes()).toContain('n-slider--reverse')
   })
 
-  it('should slided to the specific mark when step is null', async () => {
+  it('should slided to the specific mark when step is `mark`', async () => {
     const wrapper = mount(NSlider, {
       props: {
         defaultValue: 0,
