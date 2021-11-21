@@ -146,4 +146,25 @@ describe('n-slider', () => {
     await wrapper.setProps({ reverse: true })
     expect(wrapper.find('.n-slider').classes()).toContain('n-slider--reverse')
   })
+
+  it('should slided to the specific mark when step is `mark`', async () => {
+    const wrapper = mount(NSlider, {
+      props: {
+        defaultValue: 0,
+        step: 'mark',
+        marks: {
+          30: '30',
+          70: '70'
+        }
+      }
+    })
+    const mouseDown = new MouseEvent('mousedown', {
+      clientX: 25
+    })
+    const slider = wrapper.find('.n-slider')
+    const handle = wrapper.find('.n-slider-handle')
+    ;(slider.element as HTMLElement).style.width = '100px'
+    await (slider.element as HTMLElement).dispatchEvent(mouseDown)
+    expect((handle.element as HTMLElement).style.left).toEqual('30%')
+  })
 })

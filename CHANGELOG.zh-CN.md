@@ -8,6 +8,7 @@
 - `n-table` 新增 `striped` 属性，关闭 [#1552](https://github.com/TuSimple/naive-ui/issues/1552)
 - `n-slider` 新增 `vertical` 属性，关闭 [#1468](https://github.com/TuSimple/naive-ui/issues/1468)
 - `n-slider` 新增 `reverse` 属性
+- `n-slider` 的 `step` 属性支持 `mark` 选项
 - 绕过 Vitejs SSR 渲染问题，关于 [#636](https://github.com/TuSimple/naive-ui/issues/636)
 - `n-button` 新增 `strong` 属性
 - `n-button` 新增 `secondary` 属性
