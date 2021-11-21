@@ -1,6 +1,8 @@
 # Fallback
 
-the `fallback-src` will load when `avatar` load failed
+If `avatar` loading fails, it will show image from `fallback-src`.
+
+Show 07akioni if loading fails.
 
 ```html
 <n-avatar

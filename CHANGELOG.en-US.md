@@ -15,7 +15,8 @@
 - `n-button` add `tertiary` prop.
 - `n-button` add `quaternary` prop.
 - `n-auto-complete` add `input-props` prop, closes [#1610](https://github.com/TuSimple/naive-ui/issues/1610).
-- `n-avatar` add `fallback-src` prop, closes [#702](https://github.com/TuSimple/naive-ui/issues/702)
+- `n-avatar` add `fallback-src` prop, closes [#702](https://github.com/TuSimple/naive-ui/issues/702).
+- `n-avatar` add `on-error` prop.
 - `n-input` add `select` methods, closes [#1328](https://github.com/TuSimple/naive-ui/issues/1328).
 - Add `n-tab` component, closes [#1630](https://github.com/TuSimple/naive-ui/issues/1630).
 - `n-switch` add `round` prop, closes [#1469](https://github.com/TuSimple/naive-ui/issues/1469).
