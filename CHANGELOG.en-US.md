@@ -20,6 +20,7 @@
 
 - Fix the default value of the `suffix` internal component's `loading` property.
 - Fix `n-space` is shown when it has no children, closes [#1605](https://github.com/TuSimple/naive-ui/issues/1605).
+- Fix `n-radio` has no `onUpdateChecked` prop.
 - Fix `n-dropdown` animation flicker problem, closes [#1600](https://github.com/TuSimple/naive-ui/issues/1600).
 - Fix `n-data-table`’s `clearSorter` method isn't exported properly.
 - Fix `n-global-style` throws error in SSR.
