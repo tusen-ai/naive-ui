@@ -3,5 +3,6 @@ export type { DropdownProps } from './src/Dropdown'
 export type {
   DropdownOption,
   DropdownGroupOption,
-  DropdownDividerOption
+  DropdownDividerOption,
+  DropdownRenderOption
 } from './src/interface'
