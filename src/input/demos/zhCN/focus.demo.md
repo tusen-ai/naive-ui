@@ -1,4 +1,4 @@
-# 手动 Focus & Blur & Select
+# 手动 focus & blur & select
 
 ```html
 <n-space vertical>
