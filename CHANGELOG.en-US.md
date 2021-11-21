@@ -8,6 +8,7 @@
 - `n-table` add `striped` prop, closes [#1552](https://github.com/TuSimple/naive-ui/issues/1552).
 - `n-slider` add `vertical` prop, closes [#1468](https://github.com/TuSimple/naive-ui/issues/1468).
 - `n-slider` add `reverse` prop.
+- `n-slider`'s `step` prop support `mark` option.
 - Bypass Vitejs bug on string extrapolation, ref [#636](https://github.com/TuSimple/naive-ui/issues/636).
 - `n-button` add `strong` prop.
 - `n-button` add `secondary` prop.
