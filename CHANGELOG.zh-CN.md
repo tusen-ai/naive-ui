@@ -21,6 +21,7 @@
 - `n-input` 新增 `select` 方法，关闭[#1328](https://github.com/TuSimple/naive-ui/issues/1328)
 - 新增 `n-tab` 组件，关闭 [#1630](https://github.com/TuSimple/naive-ui/issues/1630)
 - `n-switch` 新增 `round` 属性，关闭 [#1469](https://github.com/TuSimple/naive-ui/issues/1469)
+- `n-step` 新增 `title` 插槽
 
 ### Fixes
 

@@ -21,6 +21,7 @@
 - `n-input` add `select` methods, closes [#1328](https://github.com/TuSimple/naive-ui/issues/1328).
 - Add `n-tab` component, closes [#1630](https://github.com/TuSimple/naive-ui/issues/1630).
 - `n-switch` add `round` prop, closes [#1469](https://github.com/TuSimple/naive-ui/issues/1469).
+- `n-step` add `title` slot.
 
 ### Fixes
 
