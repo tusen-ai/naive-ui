@@ -175,7 +175,7 @@ describe('n-tag', () => {
 
     expect(wrapper.find('.n-tag__avatar').exists()).toBe(true)
     expect(wrapper.find('.n-avatar').attributes('style')).toContain(
-      '--merged-size: var(--avatar-size-override, 16px);'
+      '--merged-size: var(--avatar-size-override, 34px);'
     )
   })
 })
