@@ -7,7 +7,7 @@ export interface MenuOptionSharedPart {
   key?: Key
   disabled?: boolean
   icon?: () => VNodeChild
-  children?: Array<MenuOption | MenuGroupOption>
+  children?: Array<MenuOption | MenuGroupOption | MenuDividerOption>
   extra?: string | (() => VNodeChild)
   props?: HTMLAttributes
   [key: string]: unknown
