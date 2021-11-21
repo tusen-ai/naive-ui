@@ -1,4 +1,4 @@
-# Pairwise Value
+# Pairwise value
 
 ```html
 <n-input

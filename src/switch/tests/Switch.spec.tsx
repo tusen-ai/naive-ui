@@ -56,6 +56,13 @@ describe('n-switch', () => {
     )
   })
 
+  it('should work with `round` prop', async () => {
+    const wrapper = mount(NSwitch)
+    expect(wrapper.find('.n-switch--round').exists()).toBe(true)
+    await wrapper.setProps({ round: false })
+    expect(wrapper.find('.n-switch--round').exists()).not.toBe(true)
+  })
+
   it('should work with `size` prop', async () => {
     const wrapper = mount(NSwitch)
 

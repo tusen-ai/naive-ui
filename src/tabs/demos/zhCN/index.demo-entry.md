@@ -7,16 +7,17 @@
 ```demo
 basic
 segment
-flex-label
 card
+flex-label
 size
 prefix
 display-directive
 addable
+before-leave
+no-pane
 line-debug
 style-inherit-debug
 shadow-debug
-before-leave
 ```
 
 ## API
@@ -51,6 +52,14 @@ before-leave
 | tab | `string \| VNode \| () => VNodeChild` | `undefined` | 标签的 `tab` |
 | name | `string \| number` | `undefined` | 必填，标签的名称 |
 
+### Tab Props
+
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| closable | `boolean` | `false` | 是否允许关闭标签，只在标签的 `type` 为 `card` 时生效 |
+| disabled | `boolean` | `false` | 是否禁用 |
+| name | `string \| number` | `undefined` | 必填，标签的名称 |
+
 ### Tabs Slots
 
 | 名称    | 参数 | 说明       |
@@ -65,3 +74,9 @@ before-leave
 | ------- | ---- | ------------------- |
 | default | `()` | 标签项的内容        |
 | tab     | `()` | 标签项 `tab` 的内容 |
+
+### Tab Slots
+
+| 名称    | 参数 | 说明       |
+| ------- | ---- | ---------- |
+| default | `()` | tab 的内容 |

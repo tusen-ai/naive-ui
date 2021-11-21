@@ -1,4 +1,4 @@
-# Word Limit
+# Word limit
 
 Don't waste words.
 
