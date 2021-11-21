@@ -1,4 +1,4 @@
-import { h, ref, computed, defineComponent, PropType, inject } from 'vue'
+import { h, ref, computed, defineComponent, PropType, inject, watch, VNode } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -25,7 +25,8 @@ const avatarProps = {
     default: 'fill'
   },
   round: Boolean,
-  onError: Function as PropType<(e: Event) => void>
+  onError: Function as PropType<(e: Event) => void>,
+  fallbackSrc: String
 } as const
 
 export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>
@@ -35,7 +36,7 @@ export default defineComponent({
   props: avatarProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-
+    const hasLoadErrorRef = ref(false)
     let memoedTextHtml: string | null = null
     const textRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
@@ -75,6 +76,17 @@ export default defineComponent({
         return props.round
       }
     })
+    const handleError = (e: Event): void => {
+      hasLoadErrorRef.value = true
+      const { onError } = props
+      if (onError) {
+        onError(e)
+      }
+    }
+    watch(
+      () => props.src,
+      () => (hasLoadErrorRef.value = false)
+    )
     return {
       textRef,
       selfRef,
@@ -101,38 +113,49 @@ export default defineComponent({
           '--bezier': cubicBezierEaseInOut,
           '--merged-size': `var(--avatar-size-override, ${height})`
         }
-      })
+      }),
+      hasLoadError: hasLoadErrorRef,
+      handleError
     }
   },
   render () {
     const { $slots, src, mergedClsPrefix } = this
+    let img: VNode
+    if (this.hasLoadError) {
+      img = <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
+    } else if (!(!$slots.default && src)) {
+      img = (
+        <VResizeObserver onResize={this.fitTextTransform}>
+          {{
+            default: () => (
+              <span
+                ref="textRef"
+                class={`${mergedClsPrefix}-avatar__text`}
+                style={{ background: this.color }}
+              >
+                {$slots}
+              </span>
+            )
+          }}
+        </VResizeObserver>
+      )
+    } else {
+      img = (
+        <img
+          src={src}
+          onError={this.handleError}
+          style={{ objectFit: this.objectFit }}
+        />
+      )
+    }
+
     return (
       <span
         ref="selfRef"
         class={`${mergedClsPrefix}-avatar`}
         style={this.cssVars as any}
       >
-        {!$slots.default && src ? (
-          <img
-            src={src}
-            onError={this.onError}
-            style={{ objectFit: this.objectFit }}
-          />
-        ) : (
-          <VResizeObserver onResize={this.fitTextTransform}>
-            {{
-              default: () => (
-                <span
-                  ref="textRef"
-                  class={`${mergedClsPrefix}-avatar__text`}
-                  style={{ background: this.color }}
-                >
-                  {$slots}
-                </span>
-              )
-            }}
-          </VResizeObserver>
-        )}
+        {img}
       </span>
     )
   }

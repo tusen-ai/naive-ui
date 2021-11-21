@@ -1,5 +1,9 @@
 import { mount } from '@vue/test-utils'
+import { defineComponent, h, onMounted, ref } from 'vue'
 import { NInput } from '../index'
+import InputGroup from '../src/InputGroup'
+import InputGroupLabel from '../src/InputGroupLabel'
+import WordCount from '../src/WordCount'
 
 describe('n-input', () => {
   it('should work with import on demand', () => {
@@ -82,6 +86,15 @@ describe('n-input', () => {
     wrapper.unmount()
   })
 
+  it('should work with `rows` prop', async () => {
+    const wrapper = mount(NInput, { props: { type: 'textarea' } })
+    expect(wrapper.find('textarea').attributes('rows')).toBe('3')
+
+    await wrapper.setProps({ type: 'textarea', rows: 5 })
+    expect(wrapper.find('textarea').attributes('rows')).toBe('5')
+    wrapper.unmount()
+  })
+
   it('should work with `size` prop', async () => {
     ;(['small', 'medium', 'large'] as const).forEach((size) => {
       const wrapper = mount(NInput, { props: { size: size } })
@@ -98,6 +111,38 @@ describe('n-input', () => {
     await wrapper.setProps({ type: 'textarea' })
     expect(wrapper.find('.n-input').classes()).toContain('n-input--textarea')
     expect(wrapper.find('textarea').exists()).toBe(true)
+  })
+
+  it('should work with `show-count` prop', async () => {
+    const maxlength = 30
+    const wrapper = mount(NInput)
+    expect(wrapper.findComponent(WordCount).exists()).not.toBe(true)
+
+    await wrapper.setProps({ showCount: true, maxlength })
+    expect(
+      wrapper.find('.n-input__suffix').findComponent(WordCount).exists()
+    ).toBe(true)
+    expect(wrapper.find('.n-input-word-count').text()).toBe(`0 / ${maxlength}`)
+
+    await wrapper.setProps({ showCount: true, maxlength, type: 'textarea' })
+    expect(
+      wrapper.find('.n-input--textarea').findComponent(WordCount).exists()
+    ).toBe(true)
+    expect(wrapper.find('.n-input-word-count').text()).toBe(`0 / ${maxlength}`)
+    wrapper.unmount()
+  })
+
+  it('should work with `pair` `separator` `placeholder` prop', async () => {
+    const wrapper = mount(NInput, {
+      props: { pair: true, separator: '-', placeholder: ['从', '到'] }
+    })
+
+    expect(wrapper.find('.n-input').classes()).toContain('n-input--pair')
+    expect(wrapper.find('.n-input__separator').text()).toBe('-')
+    expect(wrapper.findAll('input')[0].attributes('placeholder')).toBe('从')
+    expect(wrapper.findAll('input')[1].attributes('placeholder')).toBe('到')
+
+    wrapper.unmount()
   })
 
   it('should work with `on-blur` prop', async () => {
@@ -152,6 +197,91 @@ describe('n-input', () => {
     wrapper.find('input').element.focus()
     await wrapper.find('input').setValue('test')
     expect(onUpdateValue).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `prefix` slots', async () => {
+    const wrapper = mount(NInput, {
+      slots: { prefix: '￥' }
+    })
+    expect(wrapper.find('.n-input__prefix').exists()).toBe(true)
+    expect(wrapper.find('.n-input__prefix').text()).toBe('￥')
+    wrapper.unmount()
+  })
+
+  it('should work with `suffix` slots', async () => {
+    const wrapper = mount(NInput, {
+      slots: { suffix: '元' }
+    })
+    expect(wrapper.find('.n-input__suffix').exists()).toBe(true)
+    expect(wrapper.find('.n-input__suffix').text()).toBe('元')
+    wrapper.unmount()
+  })
+
+  it('should work with `separator` slot', async () => {
+    const wrapper = mount(NInput, {
+      props: { pair: true },
+      slots: { separator: '-' }
+    })
+
+    expect(wrapper.find('.n-input').classes()).toContain('n-input--pair')
+    expect(wrapper.find('.n-input__separator').text()).toBe('-')
+    wrapper.unmount()
+  })
+
+  it('should work with `InputGroup` `InputGroupLabel` slot', async () => {
+    const wrapper = mount(InputGroup, {
+      slots: {
+        default: () => [
+          h(InputGroupLabel, null, { default: () => 'test1' }),
+          h(NInput),
+          h(InputGroupLabel, null, { default: () => 'test2' })
+        ]
+      }
+    })
+
+    expect(wrapper.find('.n-input-group').exists()).toBe(true)
+    expect(wrapper.find('.n-input-group').element.children.length).toBe(3)
+    expect(
+      wrapper.find('.n-input-group').element.children[0].getAttribute('class')
+    ).toContain('n-input-group-label')
+    expect(wrapper.find('.n-input-group').element.children[0].textContent).toBe(
+      'test1'
+    )
+    expect(
+      wrapper.find('.n-input-group').element.children[1].getAttribute('class')
+    ).toContain('n-input')
+    expect(
+      wrapper.find('.n-input-group').element.children[2].getAttribute('class')
+    ).toContain('n-input-group-label')
+    expect(wrapper.find('.n-input-group').element.children[2].textContent).toBe(
+      'test2'
+    )
+    wrapper.unmount()
+  })
+
+  it('should work with `blur` `focus` methods', async () => {
+    const onBlur = jest.fn()
+    const onFocus = jest.fn()
+    const Mock = defineComponent({
+      setup () {
+        const inputInstRef: any = ref(null)
+        onMounted(() => {
+          inputInstRef.value?.focus()
+          inputInstRef.value?.blur()
+        })
+        return () => {
+          ;<n-input ref={inputInstRef} onBlur={onBlur} onFocus={onFocus} />
+        }
+      }
+    })
+
+    const wrapper = mount(() => <Mock />)
+    setTimeout(() => {
+      expect(onBlur).toHaveBeenCalled()
+      expect(onFocus).toHaveBeenCalled()
+    }, 0)
+
     wrapper.unmount()
   })
 })

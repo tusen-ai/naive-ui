@@ -1,6 +1,6 @@
 # Slider
 
-As far as I know, it is awalys used as volumn control.
+As far as I know, it is always used as a volume control.
 
 ## Demos
 
@@ -8,9 +8,13 @@ As far as I know, it is awalys used as volumn control.
 basic
 range
 mark
+restrict-selectable-values
 disabled
 disable-tooltip
 format
+reverse
+vertical
+multiple-debug
 ```
 
 ## API
@@ -26,7 +30,9 @@ format
 | max | `number` | `100` | Max value of the slider. |
 | min | `number` | `0` | Min value of the slider. |
 | range | `boolean` | `false` | Whether the slider uses range value. |
-| step | `number` | `1` | Step of the slider. |
+| reverse | `boolean` | `false` | Whether to reverse the track. |
+| step | `number \| 'mark'` | `1` | Step of the slider. |
 | tooltip | `boolean` | `true` | Whether to show tooltip. |
+| vertical | `boolean` | `false` | Whether to enable vertical mode. |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the slider. |
 | on-update:value | `(value: number \| [number, number]) => void` | `undefined` | Callback on value update. |

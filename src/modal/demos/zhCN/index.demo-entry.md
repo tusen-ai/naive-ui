@@ -12,6 +12,7 @@ custom-position
 preset-card
 preset-confirm
 preset-confirm-slot
+transform-origin
 raw-debug
 dark-1-debug
 dark-2-debug
@@ -36,17 +37,19 @@ dark-10-debug
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |
 | preset | `'card' \| 'dialog'` | `undefined` | 模态框使用何种预设 |
 | show | `boolean` | `false` | 是否展示 Modal |
+| to | `string \| HTMLElement` | `body` | Modal 的挂载位置 |
+| transform-origin | `'mouse' \| 'center'` | `'mouse'` | 模态框动画出现的位置 |
 | on-update:show | `(value: boolean) => void` | `undefined` | 模态框更新是否展示状态的回调 |
 | on-after-enter | `() => void` | `undefined` | Modal 出现后的回调 |
 | on-after-leave | `() => void` | `undefined` | Modal 关闭后的回调 |
 
 ### Modal（Card 预设）Props
 
-参考 [Card props](card#Props)
+参考 [Card props](card#Card-Props)
 
 ### Modal（Dialog 预设）Props
 
-参考 [Dialog props](dialog#Props)
+参考 [Dialog props](dialog#Dialog-Props)
 
 ### Modal（无预设）Slots
 
@@ -56,8 +59,8 @@ dark-10-debug
 
 ### Modal（Card 预设）Slots
 
-参考 [Card slots](card#Slots)
+参考 [Card slots](card#Card-Slots)
 
 ### Modal（Dialog 预设）Slots
 
-参考 [Dialog slots](dialog#Slots)
+参考 [Dialog slots](dialog#Dialog-Slots)

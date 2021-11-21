@@ -70,4 +70,46 @@ describe('n-auto-complete', () => {
       wrapper.unmount()
     })
   })
+
+  it('should work with `getShow` prop', async () => {
+    const options: AutoCompleteProps['options'] = [
+      '@gmail.com',
+      '@163.com',
+      '@qq.com'
+    ].map((suffix) => {
+      const prefix = 'test'
+      return {
+        label: prefix + suffix,
+        value: prefix + suffix
+      }
+    })
+    const wrapper = mount(NAutoComplete)
+    await wrapper.setProps({
+      getShow: (value: string | null) => {
+        if (value === 'a') {
+          return true
+        }
+        return false
+      },
+      options: options
+    })
+    expect(document.querySelector('.n-auto-complete-menu')).toEqual(null)
+    wrapper.find('input').setValue('a')
+    await wrapper.find('input').trigger('focus')
+    expect(document.querySelector('.n-auto-complete-menu')).not.toEqual(null)
+    wrapper.unmount()
+  })
+
+  it('should work with `input-props` prop', async () => {
+    const wrapper = mount(NAutoComplete, {
+      props: {
+        inputProps: {
+          id: 'input',
+          max: '10'
+        }
+      }
+    })
+    expect(wrapper.find('input').attributes('max')).toEqual('10')
+    wrapper.unmount()
+  })
 })

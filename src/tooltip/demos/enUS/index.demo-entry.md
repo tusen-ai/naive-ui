@@ -17,8 +17,8 @@ arrow
 
 ### Tooltip Props
 
-See [Popover Props](popover#Props)
+See [Popover Props](popover#Popover-Props)
 
 ### Tooltip Slots
 
-See [Popover Slots](popover#Slots)
+See [Popover Slots](popover#Popover-Slots)

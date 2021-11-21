@@ -136,7 +136,7 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     iconMarginSmall: '8px',
     iconMarginMedium: '8px',
     iconMarginLarge: '12px',
-    fontWeightText: '600'
+    fontWeightStrong: '600'
   },
   Checkbox: {
     sizeMedium: '16px',

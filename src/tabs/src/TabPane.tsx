@@ -26,7 +26,7 @@ export const tabPaneProps = {
   },
   disabled: Boolean,
   displayDirective: {
-    type: String as PropType<'if' | 'show'>,
+    type: String as PropType<'if' | 'show' | 'show:lazy'>,
     default: 'if'
   },
   closable: {
@@ -49,12 +49,13 @@ export default defineComponent({
     }
     return {
       style: NTab.paneStyleRef,
+      class: NTab.paneClassRef,
       mergedClsPrefix: NTab.mergedClsPrefixRef
     }
   },
   render () {
     return (
-      <div class={`${this.mergedClsPrefix}-tab-pane`} style={this.style}>
+      <div class={[`${this.mergedClsPrefix}-tab-pane`, this.class]} style={this.style}>
         {this.$slots}
       </div>
     )

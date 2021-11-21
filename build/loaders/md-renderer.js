@@ -1,5 +1,5 @@
 const hljs = require('highlight.js')
-const marked = require('marked')
+const { marked } = require('marked')
 
 function createRenderer (wrapCodeWithCard = true) {
   const renderer = new marked.Renderer()

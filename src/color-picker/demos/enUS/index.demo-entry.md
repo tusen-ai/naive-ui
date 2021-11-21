@@ -10,6 +10,8 @@ alpha
 size
 modes
 form
+swatches
+native
 ```
 
 ## API
@@ -24,7 +26,9 @@ form
 | to | `string \| HTMLElement` | `'body'` | Where to attach the panel to. |
 | show | `boolean` | `undefined` | Whether the color panel is shown. |
 | show-alpha | `boolean` | `true` | Whether the alpha channel can be adjusted. |
+| show-preview | `boolean` | `false` | Whether the color preview is shown. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the picker. |
+| swatches | `string[]` | `undefined` | Value of the swatches. |
 | value | `string \| null` | `undefined` | Value of the picker. |
 | on-complete | `(value: string) => void` | `undefined` | Callback once the value is changed completely (not called during mousemove). |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback once panel the show status is changed. |

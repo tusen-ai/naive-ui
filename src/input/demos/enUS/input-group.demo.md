@@ -1,4 +1,4 @@
-# Input Group
+# Input group
 
 ```html
 <n-space vertical>

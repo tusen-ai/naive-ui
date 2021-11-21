@@ -1,4 +1,4 @@
-# Use as a Component
+# Use as a component
 
 Sometimes you may want to use a component.
 

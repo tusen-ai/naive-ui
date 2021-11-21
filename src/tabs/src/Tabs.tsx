@@ -13,7 +13,9 @@ import {
   nextTick,
   withDirectives,
   vShow,
-  watchEffect
+  watchEffect,
+  ExtractPropTypes,
+  cloneVNode
 } from 'vue'
 import { VResizeObserver, VXScroll, VXScrollInst } from 'vueuc'
 import { throttle } from 'lodash-es'
@@ -28,12 +30,18 @@ import {
   Addable,
   OnClose,
   OnCloseImpl,
+  OnBeforeLeave,
   tabsInjectionKey,
   TabsType
 } from './interface'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import style from './styles/index.cssr'
 import Tab from './Tab'
+import { tabPaneProps } from './TabPane'
+
+type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
+  'display-directive': 'if' | 'show' | 'show:lazy'
+}
 
 const tabsProps = {
   ...(useTheme.props as ThemeProps<TabsTheme>),
@@ -52,12 +60,14 @@ const tabsProps = {
     default: 'medium'
   },
   tabStyle: [String, Object] as PropType<string | CSSProperties>,
+  paneClass: String,
   paneStyle: [String, Object] as PropType<string | CSSProperties>,
   addable: [Boolean, Object] as PropType<Addable>,
   tabsPadding: {
     type: Number,
     default: 0
   },
+  onBeforeLeave: Function as PropType<OnBeforeLeave>,
   onAdd: Function as PropType<() => void>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -135,6 +145,11 @@ export default defineComponent({
       compitableValueRef,
       uncontrolledValueRef
     )
+
+    const tabChangeIdRef = { id: 0 }
+    watch(mergedValueRef, () => {
+      tabChangeIdRef.id = 0
+    })
 
     const tabWrapperStyleRef = computed(() => {
       if (!props.justifyContent || props.type === 'card') return undefined
@@ -270,11 +285,14 @@ export default defineComponent({
     }, 64)
     provide(tabsInjectionKey, {
       tabStyleRef: toRef(props, 'tabStyle'),
+      paneClassRef: toRef(props, 'paneClass'),
       paneStyleRef: toRef(props, 'paneStyle'),
       mergedClsPrefixRef,
       typeRef: toRef(props, 'type'),
       closableRef: toRef(props, 'closable'),
       valueRef: mergedValueRef,
+      tabChangeIdRef,
+      onBeforeLeaveRef: toRef(props, 'onBeforeLeave'),
       handleTabClick,
       handleClose,
       handleAdd
@@ -304,6 +322,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
+      renderedNames: new Set<NonNullable<TabPaneProps['name']>>(),
       tabsElRef,
       barElRef,
       addTabInstRef,
@@ -389,11 +408,18 @@ export default defineComponent({
       mergedSize,
       $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot }
     } = this
-    const children = defaultSlot
+
+    const tabPaneChildren = defaultSlot
       ? flatten(defaultSlot()).filter((v) => {
         return (v.type as any).__TAB_PANE__ === true
       })
       : []
+    const tabChildren = defaultSlot
+      ? flatten(defaultSlot()).filter((v) => {
+        return (v.type as any).__TAB__ === true
+      })
+      : []
+    const showPane = !tabChildren.length
     const prefix = prefixSlot ? prefixSlot() : null
     const suffix = suffixSlot ? suffixSlot() : null
     const isCard = type === 'card'
@@ -424,17 +450,28 @@ export default defineComponent({
           ) : null}
           {isSegment ? (
             <div class={`${mergedClsPrefix}-tabs-rail`}>
-              {children.map((tabPaneVNode: any, index: number) => {
-                return (
-                  <Tab {...tabPaneVNode.props} leftPadded={index !== 0}>
-                    {tabPaneVNode.children
-                      ? {
-                          default: tabPaneVNode.children.tab
-                        }
-                      : undefined}
-                  </Tab>
-                )
-              })}
+              {showPane
+                ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
+                  return (
+                      <Tab
+                        {...tabPaneVNode.props}
+                        internalLeftPadded={index !== 0}
+                      >
+                        {tabPaneVNode.children
+                          ? {
+                              default: tabPaneVNode.children.tab
+                            }
+                          : undefined}
+                      </Tab>
+                  )
+                })
+                : tabChildren.map((tabVNode: any, index: number) => {
+                  if (index === 0) {
+                    return tabVNode
+                  } else {
+                    return createLeftPaddedTabVNode(tabVNode)
+                  }
+                })}
             </div>
           ) : (
             <VResizeObserver onResize={this.handleNavResize}>
@@ -458,26 +495,47 @@ export default defineComponent({
                                   style={{ width: `${this.tabsPadding}px` }}
                                 />
                               )}
-                              {children.map(
-                                (tabPaneVNode: any, index: number) => {
-                                  return (
-                                    <Tab
-                                      {...tabPaneVNode.props}
-                                      leftPadded={
-                                        index !== 0 && !mergedJustifyContent
-                                      }
-                                    >
-                                      {tabPaneVNode.children
-                                        ? {
-                                            default: tabPaneVNode.children.tab
+                              {showPane
+                                ? tabPaneChildren.map(
+                                  (tabPaneVNode: any, index: number) => {
+                                    return (
+                                        <Tab
+                                          {...tabPaneVNode.props}
+                                          internalLeftPadded={
+                                            index !== 0 && !mergedJustifyContent
                                           }
-                                        : undefined}
-                                    </Tab>
-                                  )
-                                }
-                              )}
+                                        >
+                                          {tabPaneVNode.children
+                                            ? {
+                                                default:
+                                                  tabPaneVNode.children.tab
+                                              }
+                                            : undefined}
+                                        </Tab>
+                                    )
+                                  }
+                                )
+                                : tabChildren.map(
+                                  (tabVNode: any, index: number) => {
+                                    if (
+                                      index !== 0 &&
+                                        !mergedJustifyContent
+                                    ) {
+                                      return createLeftPaddedTabVNode(
+                                        tabVNode
+                                      )
+                                    } else {
+                                      return tabVNode
+                                    }
+                                  }
+                                )}
                               {!addTabFixed && addable && isCard
-                                ? createAddTag(addable, children.length !== 0)
+                                ? createAddTag(
+                                  addable,
+                                  (showPane
+                                    ? tabPaneChildren.length
+                                    : tabChildren.length) !== 0
+                                )
                                 : null}
                               {mergedJustifyContent ? null : (
                                 <div
@@ -529,7 +587,12 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-tabs-nav__suffix`}>{suffix}</div>
           ) : null}
         </div>
-        {filterMapTabPanes(children, this.mergedValue)}
+        {showPane &&
+          filterMapTabPanes(
+            tabPaneChildren,
+            this.mergedValue,
+            this.renderedNames
+          )}
       </div>
     )
   }
@@ -537,7 +600,8 @@ export default defineComponent({
 
 function filterMapTabPanes (
   tabPaneVNodes: VNode[],
-  value: string | number | null
+  value: string | number | null,
+  renderedNames: Set<string | number>
 ): VNode[] {
   const children: VNode[] = []
   tabPaneVNodes.forEach((vNode) => {
@@ -545,34 +609,51 @@ function filterMapTabPanes (
       name,
       displayDirective,
       'display-directive': _displayDirective
-    } = vNode.props as {
-      name: string | number
-      displayDirective: 'show' | 'if' | undefined
-      'display-directive': 'show' | 'if' | undefined
-    }
-    const useVShow = displayDirective === 'show' || _displayDirective === 'show'
+    } = vNode.props as TabPaneProps
+    const matchDisplayDirective = (
+      directive: TabPaneProps['displayDirective']
+    ): boolean =>
+      displayDirective === directive || _displayDirective === directive
     const show = value === name
     if (vNode.key !== undefined) {
       vNode.key = name
     }
-    if (useVShow) {
-      children.push(withDirectives(vNode, [[vShow, show]]))
-    } else if (show) {
-      children.push(vNode)
+    if (
+      show ||
+      matchDisplayDirective('show') ||
+      (matchDisplayDirective('show:lazy') && renderedNames.has(name))
+    ) {
+      if (!renderedNames.has(name)) {
+        renderedNames.add(name)
+      }
+      const useVShow = !matchDisplayDirective('if')
+      children.push(useVShow ? withDirectives(vNode, [[vShow, show]]) : vNode)
     }
   })
   return children
 }
 
-function createAddTag (addable: Addable, leftPadded: boolean): VNode {
+function createAddTag (addable: Addable, internalLeftPadded: boolean): VNode {
   return (
     <Tab
       ref="addTabInstRef"
       key="__addable"
       name="__addable"
-      addable
-      leftPadded={leftPadded}
+      internalAddable
+      internalLeftPadded={internalLeftPadded}
       disabled={typeof addable === 'object' && addable.disabled}
     />
   )
+}
+
+function createLeftPaddedTabVNode (tabVNode: VNode): VNode {
+  const modifiedVNode = cloneVNode(tabVNode)
+  if (modifiedVNode.props) {
+    modifiedVNode.props.internalLeftPadded = true
+  } else {
+    modifiedVNode.props = {
+      internalLeftPadded: true
+    }
+  }
+  return modifiedVNode
 }

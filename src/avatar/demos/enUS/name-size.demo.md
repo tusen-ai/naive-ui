@@ -1,4 +1,4 @@
-# Content Size
+# Content size
 
 Text is resized to fit the avatar.
 

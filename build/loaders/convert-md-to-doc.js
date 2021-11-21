@@ -1,6 +1,6 @@
 const path = require('path')
 const fse = require('fs-extra')
-const marked = require('marked')
+const { marked } = require('marked')
 const camelCase = require('lodash/camelCase')
 const createRenderer = require('./md-renderer')
 const projectPath = require('./project-path')
@@ -53,9 +53,10 @@ function genAnchorTemplate (
 ) {
   return `
     <n-anchor
+      internal-scrollable
       :bound="16"
       type="block"
-      style="width: 128px; position: sticky; top: 32px;"
+      style="width: 128px; position: sticky; top: 32px; max-height: calc(100vh - 32px - 64px); height: auto;"
       offset-target="#doc-layout"
       :ignore-gap="${options.ignoreGap}"
     >

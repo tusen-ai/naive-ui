@@ -30,6 +30,7 @@ const enUS = {
     selectDate: 'Select Date',
     datePlaceholder: 'Select Date',
     datetimePlaceholder: 'Select Date and Time',
+    monthPlaceholder: 'Select Month',
     startDatePlaceholder: 'Start Date',
     endDatePlaceholder: 'End Date',
     startDatetimePlaceholder: 'Start Date and Time',

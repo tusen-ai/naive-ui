@@ -1,5 +1,7 @@
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NTimePicker } from '../index'
+import { NInput } from '../../input'
 
 describe('n-time-picker', () => {
   it('should work with import on demand', () => {
@@ -92,6 +94,37 @@ describe('n-time-picker', () => {
     })
     await wrapper.find('input').trigger('focus')
     await wrapper.find('input').trigger('blur')
+    expect(onBlur).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+  it('should work with `on-blur` prop when use `ok` button', async () => {
+    const onBlur = jest.fn()
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    const Render = () => {
+      return h('div', null, [
+        h(NTimePicker, {
+          onBlur,
+          actions: ['confirm']
+        }),
+        h(NInput, {
+          inputProps: {
+            id: 'input'
+          }
+        })
+      ])
+    }
+    const wrapper = mount(Render, {
+      attachTo: document.body
+    })
+    await wrapper.find('input').trigger('click')
+    const button: HTMLElement = document.querySelector(
+      '.n-button'
+    ) as HTMLElement
+    button.click()
+
+    const input = document.querySelector('#input') as HTMLElement
+    input.focus()
+
     expect(onBlur).toHaveBeenCalled()
     wrapper.unmount()
   })

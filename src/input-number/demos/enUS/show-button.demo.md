@@ -1,4 +1,4 @@
-# Hide Button
+# Hide button
 
 Use `show-button` prop to control whether to show control buttons.
 

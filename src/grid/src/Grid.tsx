@@ -16,9 +16,10 @@ import {
 import { useBreakpoints, useMemo } from 'vooks'
 import { VResizeObserver, VResizeObserverOnResize } from 'vueuc'
 import { pxfy, parseResponsivePropValue, beforeNextFrameOnce } from 'seemly'
+import { defaultBreakpoints } from '../../config-provider/src/config'
+import { useConfig } from '../../_mixins'
 import { getSlot, flatten, ExtractPublicPropTypes } from '../../_utils'
 import { defaultSpan } from './GridItem'
-import { useConfig } from '../../_mixins'
 
 const defaultCols = 24
 
@@ -64,10 +65,12 @@ export default defineComponent({
   inheritAttrs: false,
   props: gridProps,
   setup (props) {
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
     const numRegex = /^\d+$/
     const widthRef = ref<number | undefined>(undefined)
-    const breakpointsRef = useBreakpoints()
+    const breakpointsRef = useBreakpoints(
+      NConfigProvider?.mergedBreakpointsRef.value || defaultBreakpoints
+    )
     const isResponsiveRef = useMemo(() => {
       if (props.itemResponsive) return true
       if (!numRegex.test(props.cols.toString())) return true
@@ -174,6 +177,7 @@ export default defineComponent({
         const suffixPropValue = maybeSuffixNode.props?.suffix
         if (suffixPropValue !== undefined && suffixPropValue !== false) {
           suffixSpan = maybeSuffixNode.props?.span ?? defaultSpan
+          maybeSuffixNode.props.privateSpan = suffixSpan
           maybeSuffixNode.props.privateColStart =
             responsiveCols + 1 - suffixSpan
           maybeSuffixNode.props.privateShow = true

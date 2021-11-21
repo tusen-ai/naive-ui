@@ -35,7 +35,7 @@ import {
   InputWrappedRef,
   inputInjectionKey
 } from './interface'
-import { len, isEmptyValue } from './utils'
+import { isEmptyValue } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
 import { off, on } from 'evtd'
@@ -201,7 +201,6 @@ export default defineComponent({
         return [placeholder] as [string]
       }
     })
-
     const showPlaceholder1Ref = computed(() => {
       const { value: isComposing } = isComposingRef
       const { value: mergedValue } = mergedValueRef
@@ -605,6 +604,10 @@ export default defineComponent({
         ;(document.activeElement as HTMLElement).blur()
       }
     }
+    function select (): void {
+      textareaElRef.value?.select()
+      inputElRef.value?.select()
+    }
     function activate (): void {
       if (mergedDisabledRef.value) return
       if (textareaElRef.value) textareaElRef.value.focus()
@@ -658,11 +661,7 @@ export default defineComponent({
     })
 
     provide(inputInjectionKey, {
-      wordCountRef: computed(() => {
-        const { value: mergedValue } = mergedValueRef
-        if (mergedValue === null || Array.isArray(mergedValue)) return 0
-        return len(mergedValue)
-      }),
+      mergedValueRef,
       maxlengthRef,
       mergedClsPrefixRef
     })
@@ -674,6 +673,7 @@ export default defineComponent({
       isCompositing: isComposingRef,
       focus,
       blur,
+      select,
       deactivate,
       activate
     }
@@ -925,8 +925,6 @@ export default defineComponent({
           ) : (
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
-                {...this.inputProps}
-                ref="inputElRef"
                 type={
                   this.type === 'password' &&
                   this.mergedShowPasswordOn &&
@@ -934,7 +932,10 @@ export default defineComponent({
                     ? 'text'
                     : this.type
                 }
+                {...this.inputProps}
+                ref="inputElRef"
                 class={`${mergedClsPrefix}-input__input-el`}
+                style={this.textDecorationStyle[0] as any}
                 tabindex={
                   this.passivelyActivated && !this.activated ? -1 : undefined
                 }
@@ -950,7 +951,6 @@ export default defineComponent({
                 readonly={this.readonly as any}
                 autofocus={this.autofocus}
                 size={this.attrSize}
-                style={this.textDecorationStyle[0] as any}
                 onBlur={this.handleInputBlur}
                 onFocus={this.handleInputFocus}
                 onInput={(e) => this.handleInput(e, 0)}
@@ -1000,7 +1000,7 @@ export default defineComponent({
                   />
                 ) : null,
                 this.showCount && this.type !== 'textarea' ? (
-                  <WordCount />
+                  <WordCount>{{ default: this.$slots.count }}</WordCount>
                 ) : null,
                 this.mergedShowPasswordOn && this.type === 'password' ? (
                   <NBaseIcon
@@ -1082,7 +1082,9 @@ export default defineComponent({
         {this.mergedBordered ? (
           <div class={`${mergedClsPrefix}-input__state-border`} />
         ) : null}
-        {this.showCount && this.type === 'textarea' ? <WordCount /> : null}
+        {this.showCount && this.type === 'textarea' ? (
+          <WordCount>{{ default: this.$slots.count }}</WordCount>
+        ) : null}
       </div>
     )
   }

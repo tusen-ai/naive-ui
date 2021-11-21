@@ -11,7 +11,9 @@ color
 badge
 icon
 name-size
+object-fit
 v-show-debug
+fallback
 ```
 
 ## API
@@ -21,6 +23,7 @@ v-show-debug
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | color | `string` | `undefined` | 头像的背景色 |
+| fallback-src | `string` | `undefined` | 头像加载失败时显示的图片的地址 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | 头像的图片在容器内的的适应类型 |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | 头像的尺寸 |
 | src | `string` | `undefined` | 头像的地址 |

@@ -1,4 +1,4 @@
-# Prefix & Suffix
+# Prefix & suffix
 
 Set a prefix and/or suffix for the input.
 

@@ -2,7 +2,7 @@ import { beforeNextFrameOnce } from 'seemly'
 import { computed, ComputedRef, watch, Ref, ref } from 'vue'
 import { formatLength } from '../../_utils'
 import { DataTableSetupProps } from './DataTable'
-import type { ColumnKey, MainTableRef } from './interface'
+import type { ColumnKey, MainTableRef, TableColumn } from './interface'
 import { getColWidth, getColKey } from './utils'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -33,21 +33,47 @@ export function useScroll (
     return props.columns.filter((column) => column.fixed === 'right')
   })
   const fixedColumnLeftMapRef = computed(() => {
-    const columns: Record<ColumnKey, number | undefined> = {}
+    const columns: Record<
+    ColumnKey,
+    { start: number, end: number } | undefined
+    > = {}
     let left = 0
-    for (const column of leftFixedColumnsRef.value) {
-      columns[getColKey(column)] = left
-      left += getColWidth(column) || 0
+    function traverse (cols: TableColumn[]): void {
+      cols.forEach((col) => {
+        const positionInfo = { start: left, end: 0 }
+        columns[getColKey(col)] = positionInfo
+        if ('children' in col) {
+          traverse(col.children)
+          positionInfo.end = left
+        } else {
+          left += getColWidth(col) || 0
+          positionInfo.end = left
+        }
+      })
     }
+    traverse(leftFixedColumnsRef.value)
     return columns
   })
   const fixedColumnRightMapRef = computed(() => {
-    const columns: Record<ColumnKey, number | undefined> = {}
+    const columns: Record<
+    ColumnKey,
+    { start: number, end: number } | undefined
+    > = {}
     let right = 0
-    for (const column of rightFixedColumnsRef.value.reverse()) {
-      columns[getColKey(column)] = right
-      right += column.width || 0
+    function traverse (cols: TableColumn[]): void {
+      cols.forEach((col) => {
+        const positionInfo = { start: right, end: 0 }
+        columns[getColKey(col)] = positionInfo
+        if ('children' in col) {
+          traverse(col.children)
+          positionInfo.end = right
+        } else {
+          right += getColWidth(col) || 0
+          positionInfo.end = right
+        }
+      })
     }
+    traverse(rightFixedColumnsRef.value.reverse())
     return columns
   })
   function deriveActiveLeftFixedColumn (): void {
@@ -58,9 +84,9 @@ export function useScroll (
     let leftActiveFixedColKey = null
     for (let i = 0; i < leftFixedColumns.length; ++i) {
       const key = getColKey(leftFixedColumns[i])
-      if (scrollLeft > (fixedColumnLeftMap[key] || 0) - leftWidth) {
+      if (scrollLeft > (fixedColumnLeftMap[key]?.start || 0) - leftWidth) {
         leftActiveFixedColKey = key
-        leftWidth += getColWidth(leftFixedColumns[i]) || 0
+        leftWidth = fixedColumnLeftMap[key]?.end || 0
       } else {
         break
       }
@@ -80,11 +106,14 @@ export function useScroll (
       const key = getColKey(rightFixedColumns[i])
       if (
         Math.round(
-          scrollLeft + (fixedColumnRightMap[key] || 0) + tableWidth - rightWidth
+          scrollLeft +
+            (fixedColumnRightMap[key]?.start || 0) +
+            tableWidth -
+            rightWidth
         ) < scrollWidth
       ) {
         rightActiveFixedColKey = key
-        rightWidth += getColWidth(rightFixedColumns[i]) || 0
+        rightWidth = fixedColumnRightMap[key]?.end || 0
       } else {
         break
       }

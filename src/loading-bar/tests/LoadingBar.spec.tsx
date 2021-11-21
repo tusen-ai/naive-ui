@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h, nextTick } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NLoadingBarProvider, useLoadingBar } from '../index'
 
 const Provider = defineComponent({
@@ -13,7 +13,7 @@ describe('n-loading-bar', () => {
     mount(NLoadingBarProvider)
   })
 
-  it('should have start type', () => {
+  it('should have start type', (done) => {
     const Test = defineComponent({
       setup () {
         const loadingBar = useLoadingBar()
@@ -26,17 +26,21 @@ describe('n-loading-bar', () => {
     const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
-    void nextTick(() => {
+    setTimeout(() => {
       expect(document.querySelector('.n-loading-bar')).not.toEqual(null)
       wrapper.unmount()
-    })
+      done()
+    }, 0)
   })
-  it('should have finish type', async () => {
+
+  it('should have finish type', (done) => {
     const Test = defineComponent({
       setup () {
         const loadingBar = useLoadingBar()
         loadingBar.start()
-        loadingBar.finish()
+        setTimeout(() => {
+          loadingBar.finish()
+        }, 0)
       },
       render () {
         return null
@@ -45,14 +49,16 @@ describe('n-loading-bar', () => {
     const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
-    await nextTick()
-    expect(document.querySelector('.n-loading-bar--finishing')).not.toEqual(
-      null
-    )
-    wrapper.unmount()
+    setTimeout(() => {
+      expect(document.querySelector('.n-loading-bar--finishing')).not.toEqual(
+        null
+      )
+      wrapper.unmount()
+      done()
+    }, 0)
   })
 
-  it('should have error type', async () => {
+  it('should have error type', () => {
     const Test = defineComponent({
       setup () {
         const loadingBar = useLoadingBar()
@@ -65,14 +71,10 @@ describe('n-loading-bar', () => {
     const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
-    await nextTick(() => {
-      setTimeout(() => {
-        expect(document.querySelector('.n-loading-bar--error')).not.toEqual(
-          null
-        )
-        wrapper.unmount()
-      }, 300)
-    })
+    setTimeout(() => {
+      expect(document.querySelector('.n-loading-bar--error')).not.toEqual(null)
+      wrapper.unmount()
+    }, 0)
   })
 
   it('should have loadingBarStyle prop', (done) => {
@@ -98,14 +100,12 @@ describe('n-loading-bar', () => {
         default: () => <Test />
       }
     })
-    void nextTick(() => {
-      setTimeout(() => {
-        expect(
-          document.querySelector('.n-loading-bar--error')?.getAttribute('style')
-        ).toContain('height: 5px;')
-        wrapper.unmount()
-        done()
-      }, 300)
-    })
+    setTimeout(() => {
+      expect(
+        document.querySelector('.n-loading-bar--error')?.getAttribute('style')
+      ).toContain('height: 5px;')
+      wrapper.unmount()
+      done()
+    }, 0)
   })
 })

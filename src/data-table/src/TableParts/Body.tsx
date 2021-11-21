@@ -8,7 +8,8 @@ import {
   watchEffect,
   onUnmounted,
   PropType,
-  CSSProperties
+  CSSProperties,
+  computed
 } from 'vue'
 import { pxfy, repeat } from 'seemly'
 import { VirtualList, VirtualListInst } from 'vueuc'
@@ -29,28 +30,58 @@ import RenderSafeCheckbox from './BodyCheckbox'
 import TableHeader from './Header'
 import type { ColItem } from '../use-group-header'
 
+interface NormalRowRenderInfo {
+  striped: boolean
+  tmNode: TmNode
+  key: RowKey
+}
+
 type RowRenderInfo =
   | {
-    summary: true
-    rawNode: SummaryRowData
+    isSummaryRow: true
     key: RowKey
-    disabled: boolean
+    tmNode: {
+      rawNode: SummaryRowData
+      disabled: boolean
+    }
   }
-  | TmNode
+  | NormalRowRenderInfo
+  | {
+    isExpandedRow: true
+    tmNode: TmNode
+    key: RowKey
+  }
 
-function flatten (rows: TmNode[], expandedRowKeys: RowKey[]): TmNode[] {
-  const fRows: TmNode[] = []
+function flatten (
+  rowInfos: NormalRowRenderInfo[],
+  expandedRowKeys: Set<RowKey>
+): NormalRowRenderInfo[] {
+  const fRows: NormalRowRenderInfo[] = []
   function traverse (rs: TmNode[]): void {
     rs.forEach((r) => {
-      if (r.children && expandedRowKeys.includes(r.key)) {
-        fRows.push(r)
+      if (r.children && expandedRowKeys.has(r.key)) {
+        fRows.push({
+          tmNode: r,
+          striped: false,
+          key: r.key
+        })
         traverse(r.children)
       } else {
-        fRows.push(r)
+        fRows.push({
+          key: r.key,
+          tmNode: r,
+          striped: false
+        })
       }
     })
   }
-  traverse(rows)
+  rowInfos.forEach((rowInfo) => {
+    fRows.push(rowInfo)
+    const { children } = rowInfo.tmNode
+    if (children) {
+      traverse(children)
+    }
+  })
   return fRows
 }
 
@@ -128,6 +159,7 @@ export default defineComponent({
       indentRef,
       rowPropsRef,
       maxHeightRef,
+      stripedRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -138,6 +170,9 @@ export default defineComponent({
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
     let lastSelectedKey: string | number = ''
+    const mergedExpandedRowKeySetRef = computed(() => {
+      return new Set(mergedExpandedRowKeysRef.value)
+    })
     function handleCheckboxUpdateChecked (
       tmNode: { key: RowKey },
       checked: boolean,
@@ -279,14 +314,33 @@ export default defineComponent({
       mergedTheme: mergedThemeRef,
       scrollX: scrollXRef,
       cols: colsRef,
-      paginatedData: paginatedDataRef,
+      paginatedData: computed(() => {
+        const { value: striped } = stripedRef
+        return paginatedDataRef.value.map(
+          striped
+            ? (tmNode, index) => {
+                return {
+                  tmNode,
+                  key: tmNode.key,
+                  striped: index % 2 === 1
+                }
+              }
+            : (tmNode) => {
+                return {
+                  tmNode,
+                  key: tmNode.key,
+                  striped: false
+                }
+              }
+        )
+      }),
       rawPaginatedData: rawPaginatedDataRef,
       fixedColumnLeftMap: fixedColumnLeftMapRef,
       fixedColumnRightMap: fixedColumnRightMapRef,
       currentPage: mergedCurrentPageRef,
       rowClassName: rowClassNameRef,
       renderExpand: renderExpandRef,
-      mergedExpandedRowKeys: mergedExpandedRowKeysRef,
+      mergedExpandedRowKeySet: mergedExpandedRowKeySetRef,
       hoverKey: hoverKeyRef,
       mergedSortState: mergedSortStateRef,
       virtualScroll: virtualScrollRef,
@@ -354,8 +408,9 @@ export default defineComponent({
       >
         {{
           default: () => {
+            // coordinate to pass if there are cells that cross row & col
             const cordToPass: Record<number, number[]> = {}
-            // coord to related hover keys
+            // coordinate to related hover keys
             const cordKey: Record<number, Record<number, RowKey[]>> = {}
             const {
               cols,
@@ -366,7 +421,7 @@ export default defineComponent({
               currentPage,
               rowClassName,
               mergedSortState,
-              mergedExpandedRowKeys,
+              mergedExpandedRowKeySet,
               componentId,
               showHeader,
               hasChildren,
@@ -381,7 +436,7 @@ export default defineComponent({
             } = this
             const { length: colCount } = cols
             const rowIndexToKey: Record<number, RowKey> = {}
-            paginatedData.forEach((tmNode, rowIndex) => {
+            paginatedData.forEach(({ tmNode }, rowIndex) => {
               rowIndexToKey[rowIndex] = tmNode.key
             })
 
@@ -390,7 +445,7 @@ export default defineComponent({
             // if there is children in data, we should expand mergedData first
 
             const mergedPaginationData = hasChildren
-              ? flatten(paginatedData, mergedExpandedRowKeys)
+              ? flatten(paginatedData, mergedExpandedRowKeySet)
               : paginatedData
 
             if (summary) {
@@ -399,20 +454,24 @@ export default defineComponent({
                 mergedData = [
                   ...mergedPaginationData,
                   ...summaryRows.map((row, i) => ({
-                    summary: true as const,
-                    rawNode: row,
+                    isSummaryRow: true as const,
                     key: `__n_summary__${i}`,
-                    disabled: true
+                    tmNode: {
+                      rawNode: row,
+                      disabled: true
+                    }
                   }))
                 ]
               } else {
                 mergedData = [
                   ...mergedPaginationData,
                   {
-                    summary: true,
-                    rawNode: summaryRows,
+                    isSummaryRow: true,
                     key: '__n_summary__',
-                    disabled: true
+                    tmNode: {
+                      rawNode: summaryRows,
+                      disabled: true
+                    }
                   }
                 ]
               }
@@ -420,170 +479,45 @@ export default defineComponent({
               mergedData = mergedPaginationData
             }
 
-            const { length: rowCount } = mergedData
-
             const indentStyle = hasChildren
               ? { width: pxfy(this.indent) }
               : undefined
 
-            const rows: VNode[] = []
-            mergedData.forEach((rowInfo, rowIndex) => {
-              const { rawNode: rowData, key: rowKey } = rowInfo
-              const isSummary = 'summary' in rowInfo
-              const expanded = mergedExpandedRowKeys.includes(rowKey)
-              const showExpandContent = renderExpand && expanded
-              const colNodes = cols.map((col, colIndex) => {
-                if (rowIndex in cordToPass) {
-                  const cordOfRowToPass = cordToPass[rowIndex]
-                  const indexInCordOfRowToPass =
-                    cordOfRowToPass.indexOf(colIndex)
-                  if (~indexInCordOfRowToPass) {
-                    cordOfRowToPass.splice(indexInCordOfRowToPass, 1)
-                    return null
-                  }
-                }
-                const { column } = col
-                const colKey = getColKey(col)
-                // If there is no rowSpan
-                // virtual list should have a fast path
-                const { rowSpan, colSpan } = column
-                const mergedColSpan = isSummary
-                  ? rowInfo.rawNode[colKey]?.colSpan || 1 // optional for #1276
-                  : colSpan
-                    ? colSpan(rowData, rowIndex)
-                    : 1
-                const mergedRowSpan = isSummary
-                  ? rowInfo.rawNode[colKey]?.rowSpan || 1 // optional for #1276
-                  : rowSpan
-                    ? rowSpan(rowData, rowIndex)
-                    : 1
-                const isLastCol = colIndex + mergedColSpan === colCount
-                const isLastRow = rowIndex + mergedRowSpan === rowCount
-                const isCrossRowTd = mergedRowSpan > 1
-                if (isCrossRowTd) {
-                  cordKey[rowIndex] = {
-                    [colIndex]: []
-                  }
-                }
-                if (mergedColSpan > 1 || isCrossRowTd) {
-                  for (let i = rowIndex; i < rowIndex + mergedRowSpan; ++i) {
-                    if (isCrossRowTd) {
-                      cordKey[rowIndex][colIndex].push(rowIndexToKey[i])
-                    }
-                    for (let j = colIndex; j < colIndex + mergedColSpan; ++j) {
-                      if (i === rowIndex && j === colIndex) continue
-                      if (!(i in cordToPass)) {
-                        cordToPass[i] = [j]
-                      } else {
-                        cordToPass[i].push(j)
-                      }
-                    }
-                  }
-                }
-                const hoverKey = isCrossRowTd ? this.hoverKey : null
-                const { ellipsis } = column
+            const { length: rowCount } = mergedData
+
+            const renderRow = (
+              rowInfo: RowRenderInfo,
+              rowIndex: number,
+              isVirtual: boolean
+            ): VNode => {
+              if ('isExpandedRow' in rowInfo) {
+                const {
+                  tmNode: { key, rawNode }
+                } = rowInfo
                 return (
-                  <td
-                    key={colKey}
-                    style={{
-                      textAlign: column.align || undefined,
-                      left: pxfy(fixedColumnLeftMap[colKey]),
-                      right: pxfy(fixedColumnRightMap[colKey])
-                    }}
-                    colspan={mergedColSpan}
-                    rowspan={mergedRowSpan}
-                    data-col-key={colKey}
-                    class={[
-                      `${mergedClsPrefix}-data-table-td`,
-                      column.className,
-                      isSummary && `${mergedClsPrefix}-data-table-td--summary`,
-                      ((hoverKey !== null &&
-                        cordKey[rowIndex][colIndex].includes(hoverKey)) ||
-                        isColumnSorting(column, mergedSortState)) &&
-                        `${mergedClsPrefix}-data-table-td--hover`,
-                      column.fixed &&
-                        `${mergedClsPrefix}-data-table-td--fixed-${column.fixed}`,
-                      column.align &&
-                        `${mergedClsPrefix}-data-table-td--${column.align}-align`,
-                      {
-                        [`${mergedClsPrefix}-data-table-td--ellipsis`]:
-                          ellipsis === true ||
-                          // don't add ellipsis class if tooltip exists
-                          (ellipsis && !ellipsis.tooltip),
-                        [`${mergedClsPrefix}-data-table-td--selection`]:
-                          column.type === 'selection',
-                        [`${mergedClsPrefix}-data-table-td--expand`]:
-                          column.type === 'expand',
-                        [`${mergedClsPrefix}-data-table-td--last-col`]:
-                          isLastCol,
-                        [`${mergedClsPrefix}-data-table-td--last-row`]:
-                          isLastRow && !showExpandContent
-                      }
-                    ]}
+                  <tr
+                    class={`${mergedClsPrefix}-data-table-tr`}
+                    key={`${key}__expand`}
                   >
-                    {hasChildren && colIndex === firstContentfulColIndex
-                      ? [
-                          repeat(
-                            isSummary ? 0 : rowInfo.level,
-                            <div
-                              class={`${mergedClsPrefix}-data-table-indent`}
-                              style={indentStyle}
-                            />
-                          ),
-                          isSummary || !rowInfo.children ? (
-                            <div
-                              class={`${mergedClsPrefix}-data-table-expand-placeholder`}
-                            />
-                          ) : (
-                            <ExpandTrigger
-                              class={`${mergedClsPrefix}-data-table-expand-trigger`}
-                              clsPrefix={mergedClsPrefix}
-                              expanded={expanded}
-                              onClick={() => {
-                                handleUpdateExpanded(rowKey)
-                              }}
-                            />
-                          )
-                        ]
-                      : null}
-                    {column.type === 'selection' ? (
-                      !isSummary ? (
-                        <RenderSafeCheckbox
-                          key={currentPage}
-                          rowKey={rowKey}
-                          disabled={rowInfo.disabled}
-                          onUpdateChecked={(checked: boolean, e) =>
-                            handleCheckboxUpdateChecked(
-                              rowInfo,
-                              checked,
-                              e.shiftKey
-                            )
-                          }
-                        />
-                      ) : null
-                    ) : column.type === 'expand' ? (
-                      !isSummary ? (
-                        !column.expandable ||
-                        column.expandable?.(rowData, rowIndex) ? (
-                          <ExpandTrigger
-                            clsPrefix={mergedClsPrefix}
-                            expanded={expanded}
-                            onClick={() => handleUpdateExpanded(rowKey)}
-                          />
-                            ) : null
-                      ) : null
-                    ) : (
-                      <Cell
-                        index={rowIndex}
-                        row={rowData}
-                        column={column}
-                        isSummary={isSummary}
-                        mergedTheme={mergedTheme}
-                      />
-                    )}
-                  </td>
+                    <td
+                      class={[
+                        `${mergedClsPrefix}-data-table-td`,
+                        `${mergedClsPrefix}-data-table-td--last-col`,
+                        rowIndex + 1 === rowCount &&
+                          `${mergedClsPrefix}-data-table-td--last-row`
+                      ]}
+                      colspan={colCount}
+                    >
+                      {renderExpand!(rawNode, rowIndex)}
+                    </td>
+                  </tr>
                 )
-              })
+              }
+              const isSummary = 'isSummaryRow' in rowInfo
+              const striped = !isSummary && rowInfo.striped
+              const { tmNode, key: rowKey } = rowInfo
+              const { rawNode: rowData } = tmNode
+              const expanded = mergedExpandedRowKeySet.has(rowKey)
               const props = rowProps ? rowProps(rowData, rowIndex) : undefined
               const mergedRowClassName =
                 typeof rowClassName === 'string'
@@ -597,47 +531,223 @@ export default defineComponent({
                   key={rowKey}
                   class={[
                     `${mergedClsPrefix}-data-table-tr`,
+                    striped && `${mergedClsPrefix}-data-table-tr--striped`,
                     mergedRowClassName
                   ]}
                   {...props}
                 >
-                  {colNodes}
+                  {cols.map((col, colIndex) => {
+                    if (!isVirtual && rowIndex in cordToPass) {
+                      const cordOfRowToPass = cordToPass[rowIndex]
+                      const indexInCordOfRowToPass =
+                        cordOfRowToPass.indexOf(colIndex)
+                      if (~indexInCordOfRowToPass) {
+                        cordOfRowToPass.splice(indexInCordOfRowToPass, 1)
+                        return null
+                      }
+                    }
+
+                    // TODO: Simplify row calculation
+                    const { column } = col
+                    const colKey = getColKey(col)
+                    const { rowSpan, colSpan } = column
+                    const mergedColSpan = isSummary
+                      ? rowInfo.tmNode.rawNode[colKey]?.colSpan || 1 // optional for #1276
+                      : colSpan
+                        ? colSpan(rowData, rowIndex)
+                        : 1
+                    const mergedRowSpan = isSummary
+                      ? rowInfo.tmNode.rawNode[colKey]?.rowSpan || 1 // optional for #1276
+                      : rowSpan
+                        ? rowSpan(rowData, rowIndex)
+                        : 1
+                    const isLastCol = colIndex + mergedColSpan === colCount
+                    const isLastRow = rowIndex + mergedRowSpan === rowCount
+                    const isCrossRowTd = mergedRowSpan > 1
+                    if (isCrossRowTd) {
+                      cordKey[rowIndex] = {
+                        [colIndex]: []
+                      }
+                    }
+                    if (mergedColSpan > 1 || isCrossRowTd) {
+                      for (
+                        let i = rowIndex;
+                        i < rowIndex + mergedRowSpan;
+                        ++i
+                      ) {
+                        if (isCrossRowTd) {
+                          cordKey[rowIndex][colIndex].push(rowIndexToKey[i])
+                        }
+                        for (
+                          let j = colIndex;
+                          j < colIndex + mergedColSpan;
+                          ++j
+                        ) {
+                          if (i === rowIndex && j === colIndex) continue
+                          if (!(i in cordToPass)) {
+                            cordToPass[i] = [j]
+                          } else {
+                            cordToPass[i].push(j)
+                          }
+                        }
+                      }
+                    }
+                    const hoverKey = isCrossRowTd ? this.hoverKey : null
+                    const { ellipsis } = column
+                    return (
+                      <td
+                        key={colKey}
+                        style={{
+                          textAlign: column.align || undefined,
+                          left: pxfy(fixedColumnLeftMap[colKey]?.start),
+                          right: pxfy(fixedColumnRightMap[colKey]?.start)
+                        }}
+                        colspan={mergedColSpan}
+                        rowspan={isVirtual ? undefined : mergedRowSpan}
+                        data-col-key={colKey}
+                        class={[
+                          `${mergedClsPrefix}-data-table-td`,
+                          column.className,
+                          isSummary &&
+                            `${mergedClsPrefix}-data-table-td--summary`,
+                          ((hoverKey !== null &&
+                            cordKey[rowIndex][colIndex].includes(hoverKey)) ||
+                            isColumnSorting(column, mergedSortState)) &&
+                            `${mergedClsPrefix}-data-table-td--hover`,
+                          column.fixed &&
+                            `${mergedClsPrefix}-data-table-td--fixed-${column.fixed}`,
+                          column.align &&
+                            `${mergedClsPrefix}-data-table-td--${column.align}-align`,
+                          {
+                            [`${mergedClsPrefix}-data-table-td--ellipsis`]:
+                              ellipsis === true ||
+                              // don't add ellipsis class if tooltip exists
+                              (ellipsis && !ellipsis.tooltip),
+                            [`${mergedClsPrefix}-data-table-td--selection`]:
+                              column.type === 'selection',
+                            [`${mergedClsPrefix}-data-table-td--expand`]:
+                              column.type === 'expand',
+                            [`${mergedClsPrefix}-data-table-td--last-col`]:
+                              isLastCol,
+                            [`${mergedClsPrefix}-data-table-td--last-row`]:
+                              isLastRow
+                          }
+                        ]}
+                      >
+                        {hasChildren && colIndex === firstContentfulColIndex
+                          ? [
+                              repeat(
+                                isSummary ? 0 : rowInfo.tmNode.level,
+                                <div
+                                  class={`${mergedClsPrefix}-data-table-indent`}
+                                  style={indentStyle}
+                                />
+                              ),
+                              isSummary || !rowInfo.tmNode.children ? (
+                                <div
+                                  class={`${mergedClsPrefix}-data-table-expand-placeholder`}
+                                />
+                              ) : (
+                                <ExpandTrigger
+                                  class={`${mergedClsPrefix}-data-table-expand-trigger`}
+                                  clsPrefix={mergedClsPrefix}
+                                  expanded={expanded}
+                                  onClick={() => {
+                                    handleUpdateExpanded(rowKey)
+                                  }}
+                                />
+                              )
+                            ]
+                          : null}
+                        {column.type === 'selection' ? (
+                          !isSummary ? (
+                            <RenderSafeCheckbox
+                              key={currentPage}
+                              rowKey={rowKey}
+                              disabled={rowInfo.tmNode.disabled}
+                              onUpdateChecked={(checked: boolean, e) =>
+                                handleCheckboxUpdateChecked(
+                                  rowInfo.tmNode,
+                                  checked,
+                                  e.shiftKey
+                                )
+                              }
+                            />
+                          ) : null
+                        ) : column.type === 'expand' ? (
+                          !isSummary ? (
+                            !column.expandable ||
+                            column.expandable?.(rowData, rowIndex) ? (
+                              <ExpandTrigger
+                                clsPrefix={mergedClsPrefix}
+                                expanded={expanded}
+                                onClick={() => handleUpdateExpanded(rowKey)}
+                              />
+                                ) : null
+                          ) : null
+                        ) : (
+                          <Cell
+                            index={rowIndex}
+                            row={rowData}
+                            column={column}
+                            isSummary={isSummary}
+                            mergedTheme={mergedTheme}
+                          />
+                        )}
+                      </td>
+                    )
+                  })}
                 </tr>
               )
-              if (showExpandContent) {
-                rows.push(
-                  row,
-                  <tr
-                    class={`${mergedClsPrefix}-data-table-tr`}
-                    key={`${rowKey}__expand`}
-                  >
-                    <td
-                      class={[
-                        `${mergedClsPrefix}-data-table-td`,
-                        `${mergedClsPrefix}-data-table-td--last-col`,
-                        rowIndex + 1 === rowCount &&
-                          `${mergedClsPrefix}-data-table-td--last-row`
-                      ]}
-                      colspan={colCount}
-                    >
-                      {renderExpand(rowData, rowIndex)}
-                    </td>
-                  </tr>
-                )
+
+              return row
+            }
+
+            // Tile the data of the expanded row
+            const displayedData: RowRenderInfo[] = []
+            mergedData.forEach((rowInfo) => {
+              if (renderExpand && mergedExpandedRowKeySet.has(rowInfo.key)) {
+                displayedData.push(rowInfo, {
+                  isExpandedRow: true,
+                  key: rowInfo.key,
+                  tmNode: rowInfo.tmNode as TmNode
+                })
               } else {
-                rows.push(row)
+                displayedData.push(rowInfo)
               }
             })
 
-            // Please note that the current virtual scroll mode impl
-            // not very performant, since it supports all the feature of table.
-            // If we can bailout some path it will be much faster. Since it
-            // need to generate all vnodes before using the virtual list.
-            if (virtualScroll) {
+            if (!virtualScroll) {
+              return (
+                <table
+                  class={`${mergedClsPrefix}-data-table-table`}
+                  onMouseleave={handleMouseleaveTable}
+                  onMouseenter={handleMouseenterTable}
+                  style={{
+                    tableLayout: this.mergedTableLayout
+                  }}
+                >
+                  <colgroup>
+                    {cols.map((col) => (
+                      <col key={col.key} style={col.style}></col>
+                    ))}
+                  </colgroup>
+                  {showHeader ? <TableHeader discrete={false} /> : null}
+                  <tbody
+                    data-n-id={componentId}
+                    class={`${mergedClsPrefix}-data-table-tbody`}
+                  >
+                    {displayedData.map((rowInfo, rowIndex) => {
+                      return renderRow(rowInfo, rowIndex, false)
+                    })}
+                  </tbody>
+                </table>
+              )
+            } else {
               return (
                 <VirtualList
                   ref="virtualListRef"
-                  items={rows}
+                  items={displayedData}
                   itemSize={28}
                   visibleItemsTag={VirtualListItemWrapper}
                   visibleItemsProps={{
@@ -654,37 +764,17 @@ export default defineComponent({
                   itemResizable
                 >
                   {{
-                    default: ({ item }: { item: VNode }) => {
-                      return item
-                    }
+                    default: ({
+                      item,
+                      index
+                    }: {
+                      item: RowRenderInfo
+                      index: number
+                    }) => renderRow(item, index, true)
                   }}
                 </VirtualList>
               )
             }
-
-            return (
-              <table
-                class={`${mergedClsPrefix}-data-table-table`}
-                onMouseleave={handleMouseleaveTable}
-                onMouseenter={handleMouseenterTable}
-                style={{
-                  tableLayout: this.mergedTableLayout
-                }}
-              >
-                <colgroup>
-                  {cols.map((col) => (
-                    <col key={col.key} style={col.style}></col>
-                  ))}
-                </colgroup>
-                {showHeader ? <TableHeader discrete={false} /> : null}
-                <tbody
-                  data-n-id={componentId}
-                  class={`${mergedClsPrefix}-data-table-tbody`}
-                >
-                  {rows}
-                </tbody>
-              </table>
-            )
           }
         }}
       </NScrollbar>

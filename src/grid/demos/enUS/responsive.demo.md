@@ -10,6 +10,8 @@ Responsive props in `screen`(default) mode are controlled by viewport width of t
 
 The default screen config is `xs < 640 <= s < 1024 <= m < 1280 <= l < 1536 <= xl < 1920 <= xxl`.
 
+You can customize [breakpoints](config-provider#API) in `n-config-provider`.
+
 ```html
 <n-divider>Self Responsive</n-divider>
 <n-grid cols="2 400:4 600:6">

@@ -175,8 +175,12 @@ export interface DataTableInjection {
   rightFixedColumnsRef: Ref<TableColumns>
   leftActiveFixedColKeyRef: Ref<ColumnKey | null>
   rightActiveFixedColKeyRef: Ref<ColumnKey | null>
-  fixedColumnLeftMapRef: Ref<Record<ColumnKey, number | undefined>>
-  fixedColumnRightMapRef: Ref<Record<ColumnKey, number | undefined>>
+  fixedColumnLeftMapRef: Ref<
+  Record<ColumnKey, { start: number, end: number } | undefined>
+  >
+  fixedColumnRightMapRef: Ref<
+  Record<ColumnKey, { start: number, end: number } | undefined>
+  >
   mergedCurrentPageRef: Ref<number>
   someRowsCheckedRef: Ref<boolean>
   allRowsCheckedRef: Ref<boolean>
@@ -202,6 +206,7 @@ export interface DataTableInjection {
   rowPropsRef: Ref<CreateRowProps | undefined>
   flexHeightRef: Ref<boolean>
   headerCheckboxDisabledRef: Ref<boolean>
+  stripedRef: Ref<boolean>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (
     filters: FilterState,
@@ -286,10 +291,12 @@ export type OnFilterMenuChangeImpl = (
 export interface DataTableInst {
   filter: (filters: FilterState | null) => void
   filters: (filters: FilterState | null) => void
-  clearFilter: () => void
   clearFilters: () => void
+  clearSorter: () => void
   page: (page: number) => void
   sort: (columnKey: ColumnKey, order: SortOrder) => void
+  /** @deprecated it but just leave it here, it does no harm */
+  clearFilter: () => void
 }
 
 export type CreateSummary<T = InternalRowData> = (

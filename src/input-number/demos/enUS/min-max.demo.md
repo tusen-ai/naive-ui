@@ -1,4 +1,4 @@
-# Min and Max
+# Min and max
 
 You can set minimum and maximum values too.
 

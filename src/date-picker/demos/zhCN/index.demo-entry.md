@@ -10,6 +10,7 @@ datetime
 daterange
 datetimerange
 month
+year
 size
 disabled
 disabled-time
@@ -32,9 +33,9 @@ update-on-close
 | disabled | `boolean` | `false` | 是否禁用 |
 | first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | 日历上一周的开始，0 代表周一 |
 | input-readonly | `boolean` | `false` | 设置输入框为只读（避免在移动设备上打开虚拟键盘） |
-| shortcuts | `Record<string, number \| [number, number]>` | `undefined` | 自定义快捷按钮 |
+| shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | 自定义快捷按钮 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |
-| type | `'date' \| 'datetime' \| 'daterange' \|'datetimerange' \|'month'` | `'date'` | Date Picker 的类型 |
+| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year'` | `'date'` | Date Picker 的类型 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |
 | on-focus | `() => void` | `undefined` | 用户 focus 时执行的回调 |

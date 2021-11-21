@@ -34,7 +34,12 @@ import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
-import { MONTH_ITEM_HEIGHT, START_YEAR } from './config'
+import {
+  MONTH_ITEM_HEIGHT,
+  START_YEAR,
+  DATE_FORMAT,
+  DatePickerType
+} from './config'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -54,14 +59,6 @@ import MonthPanel from './panel/month'
 import style from './styles/index.cssr'
 import { DatePickerTheme } from '../styles/light'
 
-const DATE_FORMAT = {
-  date: 'yyyy-MM-dd',
-  datetime: 'yyyy-MM-dd HH:mm:ss',
-  daterange: 'yyyy-MM-dd',
-  datetimerange: 'yyyy-MM-dd HH:mm:ss',
-  month: 'yyyy-MM'
-}
-
 const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),
   to: useAdjustedTo.propTo,
@@ -69,14 +66,8 @@ const datePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  clearable: {
-    type: Boolean,
-    default: false
-  },
-  updateValueOnClose: {
-    type: Boolean,
-    default: false
-  },
+  clearable: Boolean,
+  updateValueOnClose: Boolean,
   defaultValue: {
     type: [Number, Array] as PropType<Value | null>,
     default: null
@@ -92,9 +83,7 @@ const datePickerProps = {
   value: [Number, Array] as PropType<Value | null>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   type: {
-    type: String as PropType<
-    'date' | 'datetime' | 'daterange' | 'datetimerange' | 'month'
-    >,
+    type: String as PropType<DatePickerType>,
     default: 'date'
   },
   separator: String,
@@ -206,6 +195,8 @@ export default defineComponent({
           return localeRef.value.datePlaceholder
         } else if (props.type === 'datetime') {
           return localeRef.value.datetimePlaceholder
+        } else if (props.type === 'month') {
+          return localeRef.value.monthPlaceholder
         }
         return props.placeholder
       } else {
@@ -257,6 +248,9 @@ export default defineComponent({
         }
         case 'month': {
           return ['clear', 'now', 'confirm']
+        }
+        case 'year': {
+          return ['clear', 'now']
         }
         default: {
           warn(
@@ -364,6 +358,7 @@ export default defineComponent({
         yearScrollRef.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
       }
     }
+
     // --- Panel update value
     function handlePanelUpdateValue (
       value: Value | null,
@@ -505,7 +500,7 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
-      if (props.type === 'month') {
+      if (props.type === 'month' || props.type === 'year') {
         void nextTick(scrollYearMonth)
       }
     }
@@ -797,14 +792,17 @@ export default defineComponent({
                         {...commonInputProps}
                       >
                         {{
-                          separator: () => (
-                            <NBaseIcon
-                              clsPrefix={mergedClsPrefix}
-                              class={`${mergedClsPrefix}-date-picker-icon`}
-                            >
-                              {{ default: () => <ToIcon /> }}
-                            </NBaseIcon>
-                          ),
+                          separator: () =>
+                            this.separator === undefined ? (
+                              <NBaseIcon
+                                clsPrefix={mergedClsPrefix}
+                                class={`${mergedClsPrefix}-date-picker-icon`}
+                              >
+                                {{ default: () => <ToIcon /> }}
+                              </NBaseIcon>
+                            ) : (
+                              this.separator
+                            ),
                           [clearable ? 'clear' : 'suffix']: () => (
                             <NBaseIcon
                               clsPrefix={mergedClsPrefix}
@@ -870,7 +868,17 @@ export default defineComponent({
                               ) : this.type === 'datetimerange' ? (
                                   <DatetimerangePanel {...commonPanelProps} />
                               ) : this.type === 'month' ? (
-                                  <MonthPanel {...commonPanelProps} />
+                                  <MonthPanel
+                                    {...commonPanelProps}
+                                    type="month"
+                                    key="month"
+                                  />
+                              ) : this.type === 'year' ? (
+                                  <MonthPanel
+                                    {...commonPanelProps}
+                                    type="year"
+                                    key="year"
+                                  />
                               ) : (
                                   <DatePanel {...commonPanelProps} />
                               ),

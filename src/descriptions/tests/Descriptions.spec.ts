@@ -129,6 +129,7 @@ describe('n-descriptions', () => {
     expect(wrapper.find('.n-descriptions-header').exists()).toBe(true)
     expect(wrapper.find('.n-descriptions-header').text()).toBe('test')
   })
+
   it('should work with `separator` prop', async () => {
     const wrapper = mount(NDescriptions, {
       props: {
@@ -140,5 +141,35 @@ describe('n-descriptions', () => {
 
     await wrapper.setProps({ separator: '/' })
     expect(wrapper.find('.n-descriptions-separator').text()).toEqual('/')
+  })
+
+  it('should work with `content-style` prop', () => {
+    const wrapper = mount(NDescriptions, {
+      props: {
+        contentStyle: { backgroundColor: 'red' }
+      },
+      slots: {
+        default: () => h(NDescriptionsItem, {}, 'test')
+      }
+    })
+
+    expect(
+      wrapper.find('.n-descriptions-table-content').attributes('style')
+    ).toBe('background-color: red;')
+  })
+
+  it('should work with `label-style` prop', () => {
+    const wrapper = mount(NDescriptions, {
+      props: {
+        labelStyle: { fontSize: '30px' }
+      },
+      slots: {
+        default: () => h(NDescriptionsItem, {}, 'test')
+      }
+    })
+
+    expect(
+      wrapper.find('.n-descriptions-table-header').attributes('style')
+    ).toBe('font-size: 30px;')
   })
 })

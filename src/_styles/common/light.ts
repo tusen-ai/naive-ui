@@ -119,7 +119,7 @@ const derived = {
   textColorBase: base.neutralTextBase,
   textColor1: 'rgb(31, 34, 37)',
   textColor2: 'rgb(51, 54, 57)',
-  textColor3: 'rgb(158, 164, 170)',
+  textColor3: 'rgb(118, 124, 130)',
   // textColor4: neutral(base.alpha4), // disabled, placeholder, icon
   // textColor5: neutral(base.alpha5),
 
@@ -183,9 +183,12 @@ const derived = {
   opacityDisabled: base.alphaDisabled,
   inputColorDisabled: 'rgb(250, 250, 252)',
 
+  buttonColor: 'rgba(46, 51, 56, .05)',
+  buttonHoverColor: 'rgba(46, 51, 56, .09)',
+  buttonPressedColor: 'rgba(46, 51, 56, .13)',
+
   boxShadow1:
     '0 1px 2px -2px rgba(0, 0, 0, .08), 0 3px 6px 0 rgba(0, 0, 0, .06), 0 5px 12px 4px rgba(0, 0, 0, .04)',
-
   boxShadow2:
     '0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05)',
   boxShadow3:

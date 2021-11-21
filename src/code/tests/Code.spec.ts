@@ -2,7 +2,9 @@ import { mount } from '@vue/test-utils'
 import { NCode } from '../index'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
+
 hljs.registerLanguage('javascript', javascript)
+
 describe('n-code', () => {
   it('should warn when no hljs is set', () => {
     const spy = jest.spyOn(console, 'error').mockImplementation()
@@ -45,7 +47,9 @@ describe('n-code', () => {
         trim: false
       }
     })
-    expect(wrapper.find('pre').element.textContent).toContain('    console.log( a )  ')
+    expect(wrapper.find('pre').element.textContent).toContain(
+      '    console.log( a )  '
+    )
   })
   it('should work with `default` slot', () => {
     const wrapper = mount(NCode, {

@@ -1,4 +1,6 @@
 import { h, defineComponent, inject, computed } from 'vue'
+import { AddIcon } from '../../_internal/icons'
+import { NBaseIcon } from '../../_internal'
 import { throwError } from '../../_utils'
 import { uploadInjectionKey } from './interface'
 import NUploadDragger from './UploadDragger'
@@ -20,10 +22,10 @@ export default defineComponent({
     const {
       mergedClsPrefixRef,
       mergedDisabledRef,
+      maxReachedRef,
       listTypeRef,
-      disabledRef,
       dragOverRef,
-      openFileDialog,
+      openOpenFileDialog,
       draggerInsideRef,
       handleFileAddition
     } = NUpload
@@ -33,8 +35,8 @@ export default defineComponent({
     )
 
     function handleTriggerClick (): void {
-      if (disabledRef.value) return
-      openFileDialog()
+      if (mergedDisabledRef.value || maxReachedRef.value) return
+      openOpenFileDialog()
     }
     function handleTriggerDragOver (e: DragEvent): void {
       e.preventDefault()
@@ -50,7 +52,13 @@ export default defineComponent({
     }
     function handleTriggerDrop (e: DragEvent): void {
       e.preventDefault()
-      if (!draggerInsideRef.value || disabledRef.value) return
+      if (
+        !draggerInsideRef.value ||
+        mergedDisabledRef.value ||
+        maxReachedRef.value
+      ) {
+        return
+      }
       const dataTransfer = e.dataTransfer
       const files = dataTransfer?.files
       if (files) {
@@ -73,7 +81,7 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-upload-trigger`,
-            mergedDisabledRef.value &&
+            (mergedDisabledRef.value || maxReachedRef.value) &&
               `${mergedClsPrefix}-upload-trigger--disabled`,
             isImageCardTypeRef.value &&
               `${mergedClsPrefix}-upload-trigger--image-card`
@@ -85,7 +93,17 @@ export default defineComponent({
           onDragleave={handleTriggerDragLeave}
         >
           {isImageCardTypeRef.value ? (
-            <NUploadDragger>{slots}</NUploadDragger>
+            <NUploadDragger>
+              {{
+                default:
+                  slots.default ||
+                  (() => (
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
+                      {{ default: () => <AddIcon /> }}
+                    </NBaseIcon>
+                  ))
+              }}
+            </NUploadDragger>
           ) : (
             slots
           )}

@@ -30,7 +30,7 @@ avatar
 | round | `boolean` | `false` | Whether the tag has rounded corners. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |
-| on-click | `(e: MouseEvent) => void` | `undefined` | Click callback. |
+| on-close | `(e: MouseEvent) => void` | `undefined` | Close clicked callback. |
 | on-update:checked | `(value: boolean) => void` | `undefined` | Checked status change callback. |
 
 ### Tag Slots

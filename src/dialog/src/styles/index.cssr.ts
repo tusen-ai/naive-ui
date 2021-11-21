@@ -71,6 +71,7 @@ export default c([
       top: 0;
       margin: var(--close-margin);
       transition: .3s color var(--bezier);
+      z-index: 1;
     `),
     cE('content', `
       font-size: var(--font-size);

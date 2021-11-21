@@ -56,7 +56,6 @@ export type OnUpdateFileList = (fileList: FileInfo[]) => void
 export interface UploadInjection {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<UploadTheme>>
-  disabledRef: Ref<boolean>
   showCancelButtonRef: Ref<boolean>
   showRemoveButtonRef: Ref<boolean>
   showDownloadButtonRef: Ref<boolean>
@@ -73,12 +72,13 @@ export interface UploadInjection {
   draggerInsideRef: { value: boolean }
   fileListStyleRef: Ref<string | CSSProperties | undefined>
   mergedDisabledRef: Ref<boolean>
+  maxReachedRef: Ref<boolean>
   abstractRef: Ref<boolean>
   cssVarsRef: Ref<CSSProperties>
   submit: (fileId?: string) => void
   getFileThumbnailUrl: (file: FileInfo) => Promise<string>
   handleFileAddition: (files: FileList | null, e?: Event) => void
-  openFileDialog: () => void
+  openOpenFileDialog: () => void
 }
 
 export const uploadInjectionKey: InjectionKey<UploadInjection> =
@@ -92,6 +92,7 @@ export interface XhrHandlers {
 }
 
 export interface UploadInst {
+  openOpenFileDialog: () => void
   submit: () => void
 }
 

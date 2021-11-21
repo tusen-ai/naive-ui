@@ -1,4 +1,4 @@
-# Flex Tabs
+# Flex tabs
 
 Only works with `line` typed tabs.
 

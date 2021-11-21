@@ -22,8 +22,7 @@ export default defineComponent({
       listTypeRef,
       mergedFileListRef,
       fileListStyleRef,
-      cssVarsRef,
-      mergedDisabledRef
+      cssVarsRef
     } = NUpload
 
     const isImageCardTypeRef = computed(
@@ -57,8 +56,6 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-upload-file-list`,
-            mergedDisabledRef.value &&
-              `${mergedClsPrefix}-upload-file-list--disabled`,
             isImageCardTypeRef.value &&
               `${mergedClsPrefix}-upload-file-list--grid`
           ]}
