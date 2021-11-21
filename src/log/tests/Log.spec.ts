@@ -13,4 +13,13 @@ describe('n-log', () => {
     })
     expect(spy).toHaveBeenCalled()
   })
+
+  it('should work with `font-size` prop', async () => {
+    const fontSize = 20
+    const wrapper = mount(NLog, { props: { fontSize } })
+
+    expect(wrapper.find('.n-code').attributes('style')).toContain(
+      `--font-size: ${fontSize}px`
+    )
+  })
 })

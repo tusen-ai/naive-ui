@@ -128,11 +128,22 @@ describe('n-slider', () => {
     const element = sliderRailFill.element as HTMLElement
     expect(element.style.bottom).toEqual('24%')
     expect(element.style.height).toEqual('25%')
-    expect(wrapper.findAll('.n-slider-handle')[0].attributes('style')).toContain(
-      'bottom: 24%'
+    expect(
+      wrapper.findAll('.n-slider-handle')[0].attributes('style')
+    ).toContain('bottom: 24%')
+    expect(
+      wrapper.findAll('.n-slider-handle')[1].attributes('style')
+    ).toContain('bottom: 49%')
+  })
+
+  it('should work with `reverse` prop', async () => {
+    const wrapper = mount(NSlider)
+
+    expect(wrapper.find('.n-slider').classes()).not.toContain(
+      'n-slider--reverse'
     )
-    expect(wrapper.findAll('.n-slider-handle')[1].attributes('style')).toContain(
-      'bottom: 49%'
-    )
+
+    await wrapper.setProps({ reverse: true })
+    expect(wrapper.find('.n-slider').classes()).toContain('n-slider--reverse')
   })
 })
