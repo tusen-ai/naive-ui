@@ -36,6 +36,7 @@
 - Fix `n-dropdown` animation flicker problem, closes [#1600](https://github.com/TuSimple/naive-ui/issues/1600).
 - Fix `n-data-table`’s `clearSorter` method isn't exported properly.
 - Fix `n-global-style` throws error in SSR.
+- Fix `n-button` will trigger click event twice if pressed, closes [#1626](https://github.com/TuSimple/naive-ui/issues/1626).
 
 ## 2.20.3 (2021-11-15)
 

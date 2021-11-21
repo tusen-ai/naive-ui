@@ -31,11 +31,12 @@
 ### Fixes
 
 - 修复 `suffix` 内部组件 `loading` 属性的默认值
-- 修复 `n-space` 没有子节点的时候还被展示，关闭 [#1605](https://github.com/TuSimple/naive-ui/issues/1605).
+- 修复 `n-space` 没有子节点的时候还被展示，关闭 [#1605](https://github.com/TuSimple/naive-ui/issues/1605)
 - 修复 `n-radio` 缺少 `onUpdateChecked` 属性
-- 修复 `n-dropdown` 动画闪烁问题，关闭 [#1600](https://github.com/TuSimple/naive-ui/issues/1600).
+- 修复 `n-dropdown` 动画闪烁问题，关闭 [#1600](https://github.com/TuSimple/naive-ui/issues/1600)
 - 修复 `n-data-table` 的 `clearSorter` 方法没有被正常导出
 - 修复 `n-global-style` SSR 报错
+- 修复 `n-button` 按下 Enter 会出发两次 click 时间 [#1626](https://github.com/TuSimple/naive-ui/issues/1626)
 
 ## 2.20.3 (2021-11-15)
 
