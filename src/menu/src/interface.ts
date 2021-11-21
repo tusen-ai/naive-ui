@@ -3,8 +3,6 @@ import { VNodeChild, HTMLAttributes } from 'vue'
 
 export type Key = string | number
 
-export type MenuOptionProps = HTMLAttributes
-
 export interface MenuOptionSharedPart {
   key?: Key
   disabled?: boolean
@@ -12,29 +10,32 @@ export interface MenuOptionSharedPart {
   children?: Array<MenuOption | MenuGroupOption>
   extra?: string | (() => VNodeChild)
   props?: HTMLAttributes
-  type?: 'group' | 'submenu' | 'ignored' | 'divider' | 'render' | undefined
   [key: string]: unknown
   /** @deprecated */
   titleExtra?: string | (() => VNodeChild)
 }
 
-export interface MenuIgnoredOption extends MenuOptionSharedPart {
-  key: Key
-  type: 'ignored' | 'divider'
-}
-
-export interface MenuDividerOption extends MenuOptionSharedPart {
-  key: Key
+/**
+ * @private
+ */
+export type MenuIgnoredOption = MenuDividerOption | MenuRenderOption
+export interface MenuDividerOption {
   type: 'divider'
+  key?: Key
+  props?: HTMLAttributes
+  [key: string]: unknown
 }
 
-export interface MenuRenderOption extends MenuOptionSharedPart {
+export interface MenuRenderOption {
   type: 'render'
-  render: () => VNodeChild
+  key?: Key
+  props?: HTMLAttributes
+  render?: () => VNodeChild
+  [key: string]: unknown
 }
 
 export interface MenuGroupOptionBase extends MenuOptionSharedPart {
-  type: 'group' | 'submenu'
+  type: 'group'
   children: Array<MenuOption | MenuGroupOption>
 }
 
@@ -44,7 +45,6 @@ export type MenuOption =
     title?: string | (() => VNodeChild)
   })
   | (MenuOptionSharedPart & { label?: string | (() => VNodeChild) })
-  | MenuRenderOption
 
 export type MenuGroupOption =
   | (MenuGroupOptionBase & {
@@ -53,7 +53,7 @@ export type MenuGroupOption =
   })
   | (MenuGroupOptionBase & { label?: string | (() => VNodeChild) })
 
-export type MenuMixedOption = MenuIgnoredOption | MenuOption | MenuGroupOption
+export type MenuMixedOption = MenuDividerOption | MenuOption | MenuGroupOption
 
 export type TmNode = TreeNode<MenuOption, MenuGroupOption, MenuIgnoredOption>
 

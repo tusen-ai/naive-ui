@@ -22,6 +22,7 @@
 - Add `n-tab` component, closes [#1630](https://github.com/TuSimple/naive-ui/issues/1630).
 - `n-switch` add `round` prop, closes [#1469](https://github.com/TuSimple/naive-ui/issues/1469).
 - `n-step` add `title` slot.
+- `n-menu` support `divider` type option.
 
 ### Fixes
 

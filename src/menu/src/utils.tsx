@@ -17,29 +17,33 @@ const groupPropKeys = keysOf(menuItemGroupProps)
 const itemPropKeys = keysOf(menuItemProps)
 const submenuPropKeys = keysOf(submenuProps)
 
-export function isIgnoredNode (rawNode: MenuMixedOption): boolean {
-  return rawNode.type === 'divider' || rawNode.type === 'ignored'
+export function isIgnoredNode (
+  rawNode: MenuMixedOption
+): rawNode is MenuIgnoredOption {
+  return rawNode.type === 'divider' || rawNode.type === 'render'
+}
+
+export function isDividerNode (
+  rawNode: MenuMixedOption
+): rawNode is MenuIgnoredOption {
+  return rawNode.type === 'divider' || rawNode.type === 'render'
 }
 
 export function itemRenderer (
   tmNode: TreeNode<MenuOption, MenuGroupOption, MenuIgnoredOption>,
-  menuProps: MenuSetupProps,
-  mergedClsPrefix: string
+  menuProps: MenuSetupProps
 ): VNode | undefined {
-  const nodeType = tmNode.rawNode.type
+  const { rawNode } = tmNode
 
-  if (nodeType === 'ignored') {
+  if (isIgnoredNode(rawNode)) {
+    if (isDividerNode(rawNode)) {
+      return <NMenuDivider key={tmNode.key} {...rawNode.props} />
+    }
     return undefined
-  } else if (nodeType === 'divider') {
-    return h(NMenuDivider, {
-      clsPrefix: mergedClsPrefix,
-      key: tmNode.key
-    })
   }
 
   const { labelField } = menuProps
   const { key, level, isGroup } = tmNode
-  const rawNode = tmNode.rawNode as MenuOption | MenuGroupOption
   const props = {
     ...rawNode,
     title: (rawNode.title || rawNode[labelField]) as

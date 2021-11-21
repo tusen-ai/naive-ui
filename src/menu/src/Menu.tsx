@@ -171,7 +171,7 @@ export default defineComponent({
         props.items || props.options,
         {
           getChildren (node) {
-            return node[childrenField] as any
+            return node[childrenField]
           },
           getKey (node) {
             return (node[keyField] as Key) ?? node.name
@@ -316,9 +316,15 @@ export default defineComponent({
           common: { cubicBezierEaseInOut },
           self
         } = themeRef.value
-        const { borderRadius, borderColorHorizontal, fontSize, itemHeight } =
-          self
+        const {
+          borderRadius,
+          borderColorHorizontal,
+          fontSize,
+          itemHeight,
+          dividerColor
+        } = self
         const vars: any = {
+          '--divider-color': dividerColor,
           '--bezier': cubicBezierEaseInOut,
           '--font-size': fontSize,
           '--border-color-horizontal': borderColorHorizontal,
@@ -383,7 +389,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {this.tmNodes.map((tmNode) => itemRenderer(tmNode, this.$props, mergedClsPrefix))}
+        {this.tmNodes.map((tmNode) => itemRenderer(tmNode, this.$props))}
       </div>
     )
   }

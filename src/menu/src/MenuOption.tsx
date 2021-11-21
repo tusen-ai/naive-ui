@@ -4,7 +4,7 @@ import { render } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import NMenuOptionContent from './MenuOptionContent'
 import { useMenuChild, useMenuChildProps } from './use-menu-child'
-import { MenuOption, TmNode } from './interface'
+import { TmNode } from './interface'
 
 export const menuItemProps = {
   ...useMenuChildProps,
@@ -36,7 +36,7 @@ export default defineComponent({
     }
     function handleClick (e: MouseEvent): void {
       if (!mergedDisabledRef.value) {
-        NMenu.doSelect(props.internalKey, props.tmNode.rawNode as MenuOption)
+        NMenu.doSelect(props.internalKey, props.tmNode.rawNode)
         doClick(e)
       }
     }
@@ -94,9 +94,7 @@ export default defineComponent({
         >
           {{
             default: () =>
-              renderLabel
-                ? renderLabel(tmNode.rawNode as MenuOption)
-                : render(this.title),
+              renderLabel ? renderLabel(tmNode.rawNode) : render(this.title),
             trigger: () => (
               <NMenuOptionContent
                 tmNode={tmNode}

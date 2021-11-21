@@ -1,37 +1,31 @@
 import { TreeNode } from 'treemate'
 import { VNodeChild } from 'vue'
 import {
-  MenuOptionProps,
   MenuOption,
-  MenuRenderOption,
   MenuGroupOption,
+  MenuDividerOption,
   MenuIgnoredOption,
-  MenuDividerOption
+  MenuRenderOption
 } from '../../menu/src/interface'
 
 export type Key = string | number
 
-export type DropdownOptionProps = MenuOptionProps
-
 // Aligned with MenuOption props, has some redundant fields
 export type DropdownOption = MenuOption
 export type DropdownGroupOption = MenuGroupOption
-export type DropdownIgnoredOption = MenuIgnoredOption
-
-export type DropdownOptionBase = DropdownOption | DropdownGroupOption
-
+export type DropdownDividerOption = MenuDividerOption
+export type DropdownRenderOption = MenuRenderOption
 export type DropdownMixedOption =
   | DropdownOption
   | DropdownGroupOption
-  | DropdownIgnoredOption
+  | DropdownDividerOption
+  | DropdownRenderOption
+
+export type DropdownIgnoredOption = MenuIgnoredOption
 
 export type DropdownIntersectionOption = DropdownOption &
 DropdownGroupOption &
-DropdownIgnoredOption
-
-export type DropdownRenderOption = MenuRenderOption
-
-export type DropdownDividerOption = MenuDividerOption
+DropdownDividerOption
 
 export type TmNode = TreeNode<
 DropdownOption,

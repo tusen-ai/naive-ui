@@ -160,7 +160,7 @@ export default defineComponent({
               const { tmNodes, collapsed } = this
               return !collapsed ? (
                 <div class={`${mergedClsPrefix}-submenu-children`} role="menu">
-                  {tmNodes.map((item) => itemRenderer(item, this.menuProps, mergedClsPrefix))}
+                  {tmNodes.map((item) => itemRenderer(item, this.menuProps))}
                 </div>
               ) : null
             }

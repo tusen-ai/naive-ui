@@ -43,7 +43,7 @@ customize-field
 | inverted | `boolean` | `false` | 使用反转样式 |
 | key-field | `string` | `'key'` | key 的字段名 |
 | label-field | `string` | `'label'` | label 的字段名 |
-| options | `Array<MenuOption \| MenuGroupOption>` | `[]` | 菜单的数据 |
+| options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | 菜单的数据 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | 菜单的布局方式 |
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单额外部分渲染 |
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | 批量处理菜单图标渲染 |
@@ -73,3 +73,11 @@ customize-field
 | key      | `string`                               | 菜单项的标识符           |
 | label    | `string \| (() => VNodeChild)`         | 菜单项的内容             |
 | type     | `'group'`                              | 菜单项的类型，**必填！** |
+
+### MenuDividerOption Properties
+
+| 名称  | 类型             | 说明                     |
+| ----- | ---------------- | ------------------------ |
+| key   | `string`         | 菜单项的标识符           |
+| props | `HTMLAttributes` | 分割线的属性             |
+| type  | `'divider'`      | 菜单项的类型，**必填！** |

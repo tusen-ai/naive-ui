@@ -287,11 +287,11 @@ export default c([
       text-decoration: none;
     `)
   ]),
-  cB('menu-item-divider', `
+  cB('menu-divider', `
     transition: background-color .3s var(--bezier);
     background-color: var(--divider-color);
     height: 1px;
-    margin: 4px 0;
+    margin: 6px 18px;
   `)
 ])
 

@@ -24,8 +24,7 @@ import { TreeNode } from 'treemate'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
-  DropdownOption,
-  DropdownOptionProps
+  DropdownOption
 } from './interface'
 
 interface NDropdownOptionInjection {
@@ -56,7 +55,7 @@ export default defineComponent({
       type: String as PropType<FollowerPlacement>,
       default: 'right-start'
     },
-    props: Object as PropType<DropdownOptionProps>
+    props: Object as PropType<HTMLAttributes>
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -204,6 +203,7 @@ export default defineComponent({
   render () {
     const {
       animated,
+      rawNode,
       mergedShowSubmenu,
       clsPrefix,
       siblingHasIcon,
@@ -212,7 +212,6 @@ export default defineComponent({
       renderIcon,
       props
     } = this
-    const rawNode = this.rawNode as DropdownOption | DropdownGroupOption
     const submenuVNode = mergedShowSubmenu ? (
       <NDropdownMenu
         clsPrefix={clsPrefix}
