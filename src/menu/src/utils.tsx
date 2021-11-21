@@ -26,7 +26,7 @@ export function isIgnoredNode (
 export function isDividerNode (
   rawNode: MenuMixedOption
 ): rawNode is MenuIgnoredOption {
-  return rawNode.type === 'divider' || rawNode.type === 'render'
+  return rawNode.type === 'divider'
 }
 
 export function itemRenderer (
