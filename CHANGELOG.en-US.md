@@ -14,6 +14,7 @@
 - `n-button` add `tertiary` prop.
 - `n-button` add `quaternary` prop.
 - `n-auto-complete` add `input-props` prop, closes [#1610](https://github.com/TuSimple/naive-ui/issues/1610).
+- Add `n-tab` component, closes [#1630](https://github.com/TuSimple/naive-ui/issues/1630).
 
 ### Fixes
 
@@ -21,6 +22,7 @@
 - Fix `n-space` is shown when it has no children, closes [#1605](https://github.com/TuSimple/naive-ui/issues/1605).
 - Fix `n-dropdown` animation flicker problem, closes [#1600](https://github.com/TuSimple/naive-ui/issues/1600).
 - Fix `n-data-table`’s `clearSorter` method isn't exported properly.
+- Fix `n-global-style` throws error in SSR.
 
 ## 2.20.3 (2021-11-15)
 
