@@ -15,6 +15,7 @@
 - `n-button` 新增 `tertiary` 属性
 - `n-button` 新增 `quaternary` 属性
 - `n-auto-complete` 新增 `input-props` 属性，关闭 [#1610](https://github.com/TuSimple/naive-ui/issues/1610)
+- `n-avatar` 新增 `fallback-src` 属性，关闭 [#702](https://github.com/TuSimple/naive-ui/issues/702)
 - `n-input` 新增 `select` 方法，关闭[#1328](https://github.com/TuSimple/naive-ui/issues/1328)
 - 新增 `n-tab` 组件，关闭 [#1630](https://github.com/TuSimple/naive-ui/issues/1630)
 - `n-switch` 新增 `round` 属性，关闭 [#1469](https://github.com/TuSimple/naive-ui/issues/1469)

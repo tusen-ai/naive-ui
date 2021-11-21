@@ -13,6 +13,7 @@ icon
 name-size
 object-fit
 v-show-debug
+fallback
 ```
 
 ## API
@@ -27,6 +28,7 @@ v-show-debug
 | src | `string` | `undefined` | Avatar's image source. |
 | round | `boolean` | `false` | Whether to display a rounded avatar. |
 | on-error | `(e: Event) => void` | `undefined` | Callback executed when the avatar image fails to load. |
+| fallback-src | `string` | `undefined` | image url when avatar load failed to dispalay |
 
 ### Avatar Slots
 
