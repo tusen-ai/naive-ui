@@ -264,6 +264,7 @@ export default defineComponent({
       filters,
       clearFilter,
       clearFilters,
+      clearSorter,
       page,
       sort
     } = useTableData(props, { dataRelatedColsRef })
@@ -394,10 +395,11 @@ export default defineComponent({
     const exposedMethods: DataTableInst = {
       filter,
       filters,
-      clearFilter,
       clearFilters,
+      clearSorter,
       page,
-      sort
+      sort,
+      clearFilter
     }
     return {
       mainTableInstRef,
