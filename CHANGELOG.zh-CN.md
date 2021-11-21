@@ -14,12 +14,13 @@
 - `n-button` 新增 `tertiary` 属性
 - `n-button` 新增 `quaternary` 属性
 - `n-auto-complete` 新增 `input-props` 属性，关闭 [#1610](https://github.com/TuSimple/naive-ui/issues/1610)
+- 新增 `n-tab` 组件，关闭 [#1630](https://github.com/TuSimple/naive-ui/issues/1630)
 
 ### Fixes
 
 - 修复 `suffix` 内部组件 `loading` 属性的默认值
-- 修复 `n-space` 没有子节点的时候还被展示，关闭 [#1605](https://github.com/TuSimple/naive-ui/issues/1605).
-- 修复 `n-dropdown` 动画闪烁问题，关闭 [#1600](https://github.com/TuSimple/naive-ui/issues/1600).
+- 修复 `n-space` 没有子节点的时候还被展示，关闭 [#1605](https://github.com/TuSimple/naive-ui/issues/1605)
+- 修复 `n-dropdown` 动画闪烁问题，关闭 [#1600](https://github.com/TuSimple/naive-ui/issues/1600)
 - 修复 `n-global-style` SSR 报错
 
 ## 2.20.3 (2021-11-15)

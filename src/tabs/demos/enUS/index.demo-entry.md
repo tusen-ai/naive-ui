@@ -7,14 +7,14 @@ Switch contents in same area.
 ```demo
 basic
 segment
-flex-label
 card
+flex-label
 size
 prefix
 display-directive
 addable
-line-debug
 before-leave
+no-pane
 ```
 
 ## API
@@ -49,6 +49,14 @@ before-leave
 | tab | `string \| VNode \| () => VNodeChild` | `undefined` | Tab label. |
 | name | `string \| number` | `undefined` | Required, the name of the tab. |
 
+### TabPane Props
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |
+| disabled | `boolean` | `false` | Whether to disable. |
+| name | `string \| number` | `undefined` | Required, the name of the tab. |
+
 ### Tabs Slots
 
 | Name    | Parameters | Description   |
@@ -61,5 +69,11 @@ before-leave
 
 | Name    | Parameters | Description        |
 | ------- | ---------- | ------------------ |
-| default | `()`       | Tab content.       |
+| default | `()`       | Tab pane content.  |
 | tab     | `()`       | Tab label content. |
+
+### Tab Slots
+
+| Name    | Parameters | Description  |
+| ------- | ---------- | ------------ |
+| default | `()`       | Tab content. |

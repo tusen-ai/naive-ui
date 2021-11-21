@@ -1,19 +1,23 @@
 import { h, defineComponent, inject, computed } from 'vue'
 import { AddIcon } from '../../_internal/icons'
 import { NBaseClose, NBaseIcon } from '../../_internal'
-import { render } from '../../_utils'
+import { render, omit } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { OnBeforeLeaveImpl, tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
 
+const typeProps = {
+  internalLeftPadded: Boolean,
+  internalAddable: Boolean,
+  ...omit(tabPaneProps, ['displayDirective'])
+} as const
+
+export type TabProps = ExtractPublicPropTypes<typeof typeProps>
+
 export default defineComponent({
+  __TAB__: true,
   name: 'Tab',
-  props: Object.assign(
-    {
-      leftPadded: Boolean,
-      addable: Boolean
-    },
-    tabPaneProps
-  ),
+  props: typeProps,
   setup (props) {
     const {
       mergedClsPrefixRef,
@@ -30,7 +34,7 @@ export default defineComponent({
     } = inject(tabsInjectionKey)!
     return {
       mergedClosable: computed(() => {
-        if (props.addable) return false
+        if (props.internalAddable) return false
         const { closable } = props
         if (closable === undefined) return closableRef.value
         return closable
@@ -46,7 +50,7 @@ export default defineComponent({
       },
       handleClick () {
         if (props.disabled) return
-        if (props.addable) {
+        if (props.internalAddable) {
           handleAdd()
           return
         }
@@ -71,7 +75,7 @@ export default defineComponent({
   },
   render () {
     const {
-      addable,
+      internalAddable,
       clsPrefix,
       name,
       disabled,
@@ -85,7 +89,7 @@ export default defineComponent({
     const mergedTab = label ?? tab
     return (
       <div class={`${clsPrefix}-tabs-tab-wrapper`}>
-        {this.leftPadded ? (
+        {this.internalLeftPadded ? (
           <div class={`${clsPrefix}-tabs-tab-pad`}></div>
         ) : null}
         <div
@@ -97,13 +101,13 @@ export default defineComponent({
             value === name && `${clsPrefix}-tabs-tab--active`,
             disabled && `${clsPrefix}-tabs-tab--disabled`,
             mergedClosable && `${clsPrefix}-tabs-tab--closable`,
-            addable && `${clsPrefix}-tabs-tab--addable`
+            internalAddable && `${clsPrefix}-tabs-tab--addable`
           ]}
           onClick={this.handleClick}
-          style={addable ? undefined : style}
+          style={internalAddable ? undefined : style}
         >
           <span class={`${clsPrefix}-tabs-tab__label`}>
-            {addable ? (
+            {internalAddable ? (
               <NBaseIcon clsPrefix={clsPrefix}>
                 {{
                   default: () => <AddIcon />
