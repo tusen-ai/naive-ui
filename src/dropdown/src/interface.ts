@@ -23,9 +23,7 @@ export type DropdownMixedOption =
 
 export type DropdownIgnoredOption = MenuIgnoredOption
 
-export type DropdownIntersectionOption = DropdownOption &
-DropdownGroupOption &
-DropdownDividerOption
+export type DropdownIntersectionOption = DropdownOption & DropdownGroupOption
 
 export type TmNode = TreeNode<
 DropdownOption,
