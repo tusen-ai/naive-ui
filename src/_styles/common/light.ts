@@ -184,8 +184,8 @@ const derived = {
   inputColorDisabled: 'rgb(250, 250, 252)',
 
   buttonColor: 'rgba(46, 51, 56, .05)',
-  buttonHoverColor: 'rgba(46, 51, 56, .09)',
-  buttonPressedColor: 'rgba(46, 51, 56, .13)',
+  buttonColorHover: 'rgba(46, 51, 56, .09)',
+  buttonColorPressed: 'rgba(46, 51, 56, .13)',
 
   boxShadow1:
     '0 1px 2px -2px rgba(0, 0, 0, .08), 0 3px 6px 0 rgba(0, 0, 0, .06), 0 5px 12px 4px rgba(0, 0, 0, .04)',
