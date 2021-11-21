@@ -24,7 +24,7 @@ shape
 | default-value | `boolean` | `false` | Default value. |
 | disabled | `boolean` | `false` | Whether to disable the switch. |
 | loading | `boolean` | `false` | Whether to show loading state. |
-| round           | `boolean`                         | `true`       | Whether the switch shows rounded corners.   |
+| round | `boolean` | `true` | Whether the switch has rounded corners.   |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of the switch. |
 | value | `boolean` | `undefined` | Value when being set manually. |
 | unchecked-value | `string \| boolean \| number` | `false` | Value of unchecked state. |

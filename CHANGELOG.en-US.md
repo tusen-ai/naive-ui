@@ -15,6 +15,7 @@
 - `n-button` add `quaternary` prop.
 - `n-auto-complete` add `input-props` prop, closes [#1610](https://github.com/TuSimple/naive-ui/issues/1610).
 - Add `n-tab` component, closes [#1630](https://github.com/TuSimple/naive-ui/issues/1630).
+- `n-switch` add `round` prop, closes [#1469](https://github.com/TuSimple/naive-ui/issues/1469).
 
 ### Fixes
 
@@ -49,7 +50,6 @@
 
 - `n-modal` add `transform-origin` prop, closes [#1498](https://github.com/TuSimple/naive-ui/issues/1498).
 - `n-tabs` add `pane-class` prop, closes [#1500](https://github.com/TuSimple/naive-ui/issues/1500).
-- `n-switch` add `round` prop, closes [#1469](https://github.com/TuSimple/naive-ui/issues/1469).
 
 ### Fixes
 
