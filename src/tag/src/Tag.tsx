@@ -7,7 +7,8 @@ import {
   ref,
   InjectionKey,
   Ref,
-  provide
+  provide,
+  toRef
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -83,7 +84,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     provide(tagInjectionKey, {
-      roundRef: ref(props.round)
+      roundRef: toRef(props, 'round')
     })
     function handleClick (e: MouseEvent): void {
       if (!props.disabled) {
@@ -198,7 +199,6 @@ export default defineComponent({
       color: { borderColor } = {},
       $slots
     } = this
-    const { avatar: avatarSlot } = $slots
     return (
       <div
         class={[
@@ -216,14 +216,13 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
       >
-        {avatarSlot ? (
+        {$slots.avatar && (
           <div class={`${mergedClsPrefix}-tag__avatar`}>
-            {avatarSlot().map((item) => {
-              ;(item.props as any).size = item.props?.size ?? 16
-              return item
-            })}
+            {{
+              default: $slots.avatar
+            }}
           </div>
-        ) : null}
+        )}
         <span class={`${mergedClsPrefix}-tag__content`} ref="contentRef">
           {this.$slots}
         </span>

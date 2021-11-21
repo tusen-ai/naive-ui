@@ -1,5 +1,15 @@
-import { h, ref, computed, defineComponent, PropType, inject, watch, VNode } from 'vue'
+import {
+  h,
+  ref,
+  computed,
+  defineComponent,
+  PropType,
+  inject,
+  watch,
+  VNode
+} from 'vue'
 import { VResizeObserver } from 'vueuc'
+import { tagInjectionKey } from '../../tag/src/Tag'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { avatarLight } from '../styles'
@@ -7,7 +17,6 @@ import type { AvatarTheme } from '../styles'
 import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/index.cssr'
-import { tagInjectionKey } from '../../tag/src/Tag'
 
 const avatarProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme>),
@@ -68,13 +77,13 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const Tag = inject(tagInjectionKey, null)
+    const TagInjection = inject(tagInjectionKey, null)
     const mergedRoundRef = computed(() => {
-      if (Tag) {
-        return Tag.roundRef.value || props.round
-      } else {
-        return props.round
+      if (props.round || props.circle) return true
+      if (TagInjection) {
+        return TagInjection.roundRef.value
       }
+      return false
     })
     const handleError = (e: Event): void => {
       hasLoadErrorRef.value = true
@@ -94,7 +103,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       fitTextTransform,
       cssVars: computed(() => {
-        const { size, circle } = props
+        const { size } = props
         const {
           self: { borderRadius, fontSize, color },
           common: { cubicBezierEaseInOut }
@@ -107,8 +116,7 @@ export default defineComponent({
         }
         return {
           '--font-size': fontSize,
-          '--border-radius':
-            mergedRoundRef.value || circle ? '50%' : borderRadius,
+          '--border-radius': mergedRoundRef.value ? '50%' : borderRadius,
           '--color': color,
           '--bezier': cubicBezierEaseInOut,
           '--merged-size': `var(--avatar-size-override, ${height})`

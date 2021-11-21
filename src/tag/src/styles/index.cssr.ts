@@ -72,14 +72,14 @@ export default cB('tag', `
     padding: 0 calc(var(--height) / 2);
     border-radius: calc(var(--height) / 2);
   `, [
-    cE('avatar', {
-      marginLeft: 'calc((var(--height) - 8px) / -2)'
-    })
+    cE('avatar', `
+      margin-left: calc((var(--height) - 8px) / -2);
+    `)
   ]),
-  cM('disabled', {
-    cursor: 'not-allowed !important',
-    opacity: 'var(--opacity-disabled)'
-  }),
+  cM('disabled', `
+    cursor: not-allowed !important;
+    opacity: var(--opacity-disabled);
+  `),
   cM('checkable', `
     cursor: pointer;
     box-shadow: none;
