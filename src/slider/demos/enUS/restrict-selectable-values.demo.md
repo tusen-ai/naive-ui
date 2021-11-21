@@ -1,4 +1,4 @@
-# Restrict Selectable Values
+# Restrict selectable values
 
 Set `step="mark"` to restrict the selectable values to those provided by the mark prop.
 
