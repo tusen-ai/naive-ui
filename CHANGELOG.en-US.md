@@ -49,6 +49,7 @@
 
 - `n-modal` add `transform-origin` prop, closes [#1498](https://github.com/TuSimple/naive-ui/issues/1498).
 - `n-tabs` add `pane-class` prop, closes [#1500](https://github.com/TuSimple/naive-ui/issues/1500).
+- `n-switch` add `round` prop, closes [#1469](https://github.com/TuSimple/naive-ui/issues/1469).
 
 ### Fixes
 
