@@ -604,6 +604,10 @@ export default defineComponent({
         ;(document.activeElement as HTMLElement).blur()
       }
     }
+    function select (): void {
+      textareaElRef.value?.select()
+      inputElRef.value?.select()
+    }
     function activate (): void {
       if (mergedDisabledRef.value) return
       if (textareaElRef.value) textareaElRef.value.focus()
@@ -669,6 +673,7 @@ export default defineComponent({
       isCompositing: isComposingRef,
       focus,
       blur,
+      select,
       deactivate,
       activate
     }

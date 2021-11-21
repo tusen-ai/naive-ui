@@ -15,6 +15,7 @@ export interface InputWrappedRef {
   isCompositing: Ref<boolean>
   blur: () => void
   focus: () => void
+  select: () => void
   activate: () => void
   deactivate: () => void
 }
