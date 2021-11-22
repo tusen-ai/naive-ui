@@ -29,17 +29,13 @@ import { NBaseIcon } from '../../_internal'
 import { imageLight } from '../styles'
 import { prevIcon, nextIcon, closeIcon } from './icons'
 import style from './styles/index.cssr'
+import { MoveStrategy } from './interface'
 
 export interface ImagePreviewInst {
   setThumbnailEl: (e: HTMLImageElement | null) => void
   setPreviewSrc: (src?: string) => void
   toggleShow: () => void
 }
-type MoveStrategy =
-  | 'verticalTop'
-  | 'verticalBottom'
-  | 'horizontalLeft'
-  | 'horizontalRight'
 
 export default defineComponent({
   name: 'ImagePreview',
@@ -103,6 +99,8 @@ export default defineComponent({
     let startY = 0
     let offsetX = 0
     let offsetY = 0
+    let startOffsetX = 0
+    let startOffsetY = 0
     let mouseDownClientX = 0
     let mouseDownClientY = 0
 
@@ -113,16 +111,12 @@ export default defineComponent({
       offsetY = clientY - startY
       beforeNextFrameOnce(derivePreviewStyle)
     }
-    function getMoveDirection (opts: {
+    function getMoveStrategy (opts: {
       mouseUpClientX: number
       mouseUpClientY: number
       mouseDownClientX: number
       mouseDownClientY: number
-    }):
-      | 'verticalTop'
-      | 'verticalBottom'
-      | 'horizontalLeft'
-      | 'horizontalRight' {
+    }): MoveStrategy {
       const {
         mouseUpClientX,
         mouseUpClientY,
@@ -131,18 +125,22 @@ export default defineComponent({
       } = opts
       const deltaHorizontal = mouseDownClientX - mouseUpClientX
       const deltaVertical = mouseDownClientY - mouseUpClientY
-      const direction =
-        Math.abs(deltaVertical) - Math.abs(deltaHorizontal) > 0
-          ? 'vertical'
-          : 'horizontal'
-      if (direction === 'vertical') {
-        return (direction + (deltaVertical > 0 ? 'Top' : 'Bottom')) as
-          | 'verticalTop'
-          | 'verticalBottom'
-      } else {
-        return (direction + (deltaHorizontal > 0 ? 'Left' : 'Right')) as
-          | 'horizontalLeft'
-          | 'horizontalRight'
+      let moveVerticalDirection = null
+      let moveHorizontalDirection = null
+
+      moveVerticalDirection = ('vertical' +
+        (deltaVertical > 0 ? 'Top' : 'Bottom')) as
+        | 'verticalTop'
+        | 'verticalBottom'
+      moveHorizontalDirection = ('horizontal' +
+        (deltaHorizontal > 0 ? 'Left' : 'Right')) as
+        | 'horizontalLeft'
+        | 'horizontalRight'
+      return {
+        moveVerticalDirection,
+        moveHorizontalDirection,
+        deltaHorizontal,
+        deltaVertical
       }
     }
     // avoid image move outside viewport
@@ -153,6 +151,12 @@ export default defineComponent({
       const { value: preview } = previewRef
       if (!preview) return { offsetX: 0, offsetY: 0 }
       const pbox = preview.getBoundingClientRect()
+      const {
+        moveVerticalDirection,
+        moveHorizontalDirection,
+        deltaHorizontal,
+        deltaVertical
+      } = moveStrategy || {}
 
       let nextOffsetX = 0
       let nextOffsetY = 0
@@ -162,15 +166,15 @@ export default defineComponent({
         nextOffsetX = (pbox.width - window.innerWidth) / 2
       } else if (pbox.right < window.innerWidth) {
         nextOffsetX = -(pbox.width - window.innerWidth) / 2
-      } else if (moveStrategy === 'horizontalRight') {
+      } else if (moveHorizontalDirection === 'horizontalRight') {
         nextOffsetX = Math.min(
           (pbox.width - window.innerWidth) / 2,
-          offsetX + window.innerWidth / 2
+          startOffsetX - (deltaHorizontal ?? 0)
         )
-      } else if (moveStrategy === 'horizontalLeft') {
+      } else {
         nextOffsetX = Math.max(
           -((pbox.width - window.innerWidth) / 2),
-          offsetX - window.innerWidth / 2
+          startOffsetX - (deltaHorizontal ?? 0)
         )
       }
 
@@ -180,15 +184,15 @@ export default defineComponent({
         nextOffsetY = (pbox.height - window.innerHeight) / 2
       } else if (pbox.bottom < window.innerHeight) {
         nextOffsetY = -(pbox.height - window.innerHeight) / 2
-      } else if (moveStrategy === 'verticalBottom') {
+      } else if (moveVerticalDirection === 'verticalBottom') {
         nextOffsetY = Math.min(
           (pbox.height - window.innerHeight) / 2,
-          offsetY + window.innerHeight / 2
+          startOffsetY - (deltaVertical ?? 0)
         )
-      } else if (moveStrategy === 'verticalTop') {
+      } else {
         nextOffsetY = Math.max(
           -((pbox.height - window.innerHeight) / 2),
-          offsetY - window.innerHeight / 2
+          startOffsetY - (deltaVertical ?? 0)
         )
       }
 
@@ -202,7 +206,7 @@ export default defineComponent({
       off('mouseup', document, handleMouseUp)
       const { clientX: mouseUpClientX, clientY: mouseUpClientY } = e
       dragging = false
-      const moveStrategy = getMoveDirection({
+      const moveStrategy = getMoveStrategy({
         mouseUpClientX,
         mouseUpClientY,
         mouseDownClientX,
@@ -218,6 +222,9 @@ export default defineComponent({
       dragging = true
       startX = clientX - offsetX
       startY = clientY - offsetY
+      startOffsetX = offsetX
+      startOffsetY = offsetY
+
       mouseDownClientX = clientX
       mouseDownClientY = clientY
 
