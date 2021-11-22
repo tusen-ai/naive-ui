@@ -260,18 +260,25 @@ describe('n-input', () => {
     wrapper.unmount()
   })
 
-  it('should work with `blur` `focus` methods', async () => {
+  it('should work with `blur` `focus` `select` methods', async () => {
     const onBlur = jest.fn()
     const onFocus = jest.fn()
+    const onSelect = jest.fn()
     const Mock = defineComponent({
       setup () {
         const inputInstRef: any = ref(null)
         onMounted(() => {
           inputInstRef.value?.focus()
           inputInstRef.value?.blur()
+          inputInstRef.value?.select()
         })
         return () => {
-          ;<n-input ref={inputInstRef} onBlur={onBlur} onFocus={onFocus} />
+          ;<n-input
+            ref={inputInstRef}
+            onBlur={onBlur}
+            onFocus={onFocus}
+            onSelect={onSelect}
+          />
         }
       }
     })
@@ -280,6 +287,7 @@ describe('n-input', () => {
     setTimeout(() => {
       expect(onBlur).toHaveBeenCalled()
       expect(onFocus).toHaveBeenCalled()
+      expect(onSelect).toHaveBeenCalled()
     }, 0)
 
     wrapper.unmount()
