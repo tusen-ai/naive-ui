@@ -142,7 +142,10 @@ export default defineComponent({
     function handleMouseLeave (e: MouseEvent): void {
       if (!mergedShowRef.value) return
       const { relatedTarget } = e
-      if (relatedTarget && !happensIn(e, 'dropdown-option')) {
+      if (
+        relatedTarget &&
+        !happensIn({ target: relatedTarget }, 'dropdownOption')
+      ) {
         hoverKeyRef.value = null
       }
     }
