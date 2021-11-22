@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复当 `n-message-provider` 的 `placement` 包含 bottom 时， message 弹窗位置错误
+
 ## 2.21.0 (2021-11-21)
 
 ### Breaking Changes

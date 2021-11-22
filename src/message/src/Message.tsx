@@ -126,10 +126,7 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
         style={{
-          ...(cssVars as CSSProperties),
-          alignItems: this.placement.startsWith('top')
-            ? 'flex-start'
-            : 'flex-end'
+          ...(cssVars as CSSProperties)
         }}
       >
         <div

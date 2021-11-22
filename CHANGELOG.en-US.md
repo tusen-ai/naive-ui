@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix when `n-message-provider` 's `placement` contains bottom, the message popup position is wrong.
+
 ## 2.21.0 (2021-11-21)
 
 ### Breaking Changes
