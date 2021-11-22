@@ -14,18 +14,18 @@ exports[`n-dropdown dropdown clickoutside 1`] = `
       class="n-dropdown-option-body n-dropdown-option-body--group"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       />
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         主角和吃的
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
   </div>
@@ -37,20 +37,20 @@ exports[`n-dropdown dropdown clickoutside 1`] = `
       class="n-dropdown-option-body"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <!---->
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         杰·盖茨比
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
     <!---->
@@ -65,8 +65,8 @@ exports[`n-dropdown dropdown clickoutside 1`] = `
       class="n-dropdown-option-body n-dropdown-option-body--disabled"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <i
           class="n-icon"
@@ -153,14 +153,14 @@ exports[`n-dropdown dropdown clickoutside 1`] = `
         </i>
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         黛西·布坎南
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
     <!---->
@@ -177,20 +177,20 @@ exports[`n-dropdown dropdown clickoutside 1`] = `
       class="n-dropdown-option-body"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <!---->
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         其他角色
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       >
         <i
           class="n-icon"
@@ -256,18 +256,18 @@ exports[`n-dropdown inverted style 1`] = `
       class="n-dropdown-option-body n-dropdown-option-body--group"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       />
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         主角和吃的
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
   </div>
@@ -279,20 +279,20 @@ exports[`n-dropdown inverted style 1`] = `
       class="n-dropdown-option-body"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <!---->
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         杰·盖茨比
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
     <!---->
@@ -307,8 +307,8 @@ exports[`n-dropdown inverted style 1`] = `
       class="n-dropdown-option-body n-dropdown-option-body--disabled"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <i
           class="n-icon"
@@ -395,14 +395,14 @@ exports[`n-dropdown inverted style 1`] = `
         </i>
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         黛西·布坎南
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
     <!---->
@@ -419,20 +419,20 @@ exports[`n-dropdown inverted style 1`] = `
       class="n-dropdown-option-body"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <!---->
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         其他角色
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       >
         <i
           class="n-icon"
@@ -479,18 +479,18 @@ exports[`n-dropdown should work with \`render-icon\` props 1`] = `
       class="n-dropdown-option-body n-dropdown-option-body--group"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       />
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         主角和吃的
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
   </div>
@@ -502,8 +502,8 @@ exports[`n-dropdown should work with \`render-icon\` props 1`] = `
       class="n-dropdown-option-body"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <i
           class="n-icon"
@@ -590,14 +590,14 @@ exports[`n-dropdown should work with \`render-icon\` props 1`] = `
         </i>
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         杰·盖茨比
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
     <!---->
@@ -612,8 +612,8 @@ exports[`n-dropdown should work with \`render-icon\` props 1`] = `
       class="n-dropdown-option-body n-dropdown-option-body--disabled"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <i
           class="n-icon"
@@ -700,14 +700,14 @@ exports[`n-dropdown should work with \`render-icon\` props 1`] = `
         </i>
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         黛西·布坎南
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
     <!---->
@@ -724,8 +724,8 @@ exports[`n-dropdown should work with \`render-icon\` props 1`] = `
       class="n-dropdown-option-body"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <i
           class="n-icon"
@@ -812,14 +812,14 @@ exports[`n-dropdown should work with \`render-icon\` props 1`] = `
         </i>
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         其他角色
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       >
         <i
           class="n-icon"
@@ -866,12 +866,12 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
       class="n-dropdown-option-body n-dropdown-option-body--group"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       />
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         <a
           href="renderLabel"
@@ -880,8 +880,8 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
         </a>
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
   </div>
@@ -893,14 +893,14 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
       class="n-dropdown-option-body"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <!---->
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         <a
           href="renderLabel"
@@ -909,8 +909,8 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
         </a>
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
     <!---->
@@ -925,8 +925,8 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
       class="n-dropdown-option-body n-dropdown-option-body--disabled"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <i
           class="n-icon"
@@ -1013,8 +1013,8 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
         </i>
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         <a
           href="renderLabel"
@@ -1023,8 +1023,8 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
         </a>
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
     <!---->
@@ -1041,14 +1041,14 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
       class="n-dropdown-option-body"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <!---->
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         <a
           href="renderLabel"
@@ -1057,8 +1057,8 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
         </a>
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       >
         <i
           class="n-icon"
@@ -1107,18 +1107,18 @@ exports[`n-dropdown shows menu after click 1`] = `
       class="n-dropdown-option-body n-dropdown-option-body--group"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       />
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         主角和吃的
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
   </div>
@@ -1130,20 +1130,20 @@ exports[`n-dropdown shows menu after click 1`] = `
       class="n-dropdown-option-body"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <!---->
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         杰·盖茨比
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
     <!---->
@@ -1158,8 +1158,8 @@ exports[`n-dropdown shows menu after click 1`] = `
       class="n-dropdown-option-body n-dropdown-option-body--disabled"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <i
           class="n-icon"
@@ -1246,14 +1246,14 @@ exports[`n-dropdown shows menu after click 1`] = `
         </i>
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         黛西·布坎南
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       />
     </div>
     <!---->
@@ -1270,20 +1270,20 @@ exports[`n-dropdown shows menu after click 1`] = `
       class="n-dropdown-option-body"
     >
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__prefix n-dropdown-option-body__prefix--show-icon"
+        data-dropdown-option="true"
       >
         <!---->
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__label"
+        data-dropdown-option="true"
       >
         其他角色
       </div>
       <div
-        __dropdown-option="true"
         class="n-dropdown-option-body__suffix n-dropdown-option-body__suffix--has-submenu"
+        data-dropdown-option="true"
       >
         <i
           class="n-icon"
