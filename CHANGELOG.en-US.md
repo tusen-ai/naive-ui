@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-image` drag the picture to move the position incorrectly when the zoom is large.
+
 ## 2.21.0 (2021-11-21)
 
 ### Breaking Changes
