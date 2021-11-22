@@ -5,6 +5,8 @@
 ### Fixes
 
 - 修复 `n-image` 当放大很大的时候拖动图片移动位置不正确
+- 修复 `n-data-table` 在某些行展开后出现的样式问题
+- 修复 `n-data-table` 未能正确展开树形数据，关闭 [#1644](https://github.com/TuSimple/naive-ui/issues/1644)
 
 ## 2.21.0 (2021-11-21)
 
