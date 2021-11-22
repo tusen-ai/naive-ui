@@ -145,10 +145,6 @@
 - 修复 `n-global-style` SSR 报错
 - 修复 `n-button` 按下 Enter 会出发两次 click 时间 [#1626](https://github.com/TuSimple/naive-ui/issues/1626)
 
-### Fixes
-
-- 修复 `n-dialog` 点击回车键反复弹出新弹窗，关闭 [#1559](https://github.com/TuSimple/naive-ui/issues/1559)
-
 ## 2.20.3 (2021-11-15)
 
 ### Fixes
