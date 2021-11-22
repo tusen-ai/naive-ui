@@ -128,11 +128,43 @@ describe('n-slider', () => {
     const element = sliderRailFill.element as HTMLElement
     expect(element.style.bottom).toEqual('24%')
     expect(element.style.height).toEqual('25%')
-    expect(wrapper.findAll('.n-slider-handle')[0].attributes('style')).toContain(
-      'bottom: 24%'
+    expect(
+      wrapper.findAll('.n-slider-handle')[0].attributes('style')
+    ).toContain('bottom: 24%')
+    expect(
+      wrapper.findAll('.n-slider-handle')[1].attributes('style')
+    ).toContain('bottom: 49%')
+  })
+
+  it('should work with `reverse` prop', async () => {
+    const wrapper = mount(NSlider)
+
+    expect(wrapper.find('.n-slider').classes()).not.toContain(
+      'n-slider--reverse'
     )
-    expect(wrapper.findAll('.n-slider-handle')[1].attributes('style')).toContain(
-      'bottom: 49%'
-    )
+
+    await wrapper.setProps({ reverse: true })
+    expect(wrapper.find('.n-slider').classes()).toContain('n-slider--reverse')
+  })
+
+  it('should slided to the specific mark when step is `mark`', async () => {
+    const wrapper = mount(NSlider, {
+      props: {
+        defaultValue: 0,
+        step: 'mark',
+        marks: {
+          30: '30',
+          70: '70'
+        }
+      }
+    })
+    const mouseDown = new MouseEvent('mousedown', {
+      clientX: 25
+    })
+    const slider = wrapper.find('.n-slider')
+    const handle = wrapper.find('.n-slider-handle')
+    ;(slider.element as HTMLElement).style.width = '100px'
+    await (slider.element as HTMLElement).dispatchEvent(mouseDown)
+    expect((handle.element as HTMLElement).style.left).toEqual('30%')
   })
 })

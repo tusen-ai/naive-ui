@@ -1,4 +1,4 @@
-# Focus & Blur & Select Manually
+# Focus & blur & select manually
 
 ```html
 <n-space vertical>
@@ -19,7 +19,7 @@ export default defineComponent({
     const inputInstRef = ref(null)
     return {
       inputInstRef,
-      inputValue: ref("I heard you're going to Select All?"),
+      inputValue: ref("I heard you're going to select all?"),
       handleFocus () {
         inputInstRef.value.focus()
       },

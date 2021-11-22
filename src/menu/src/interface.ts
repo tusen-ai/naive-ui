@@ -1,5 +1,5 @@
 import { TreeNode } from 'treemate'
-import { VNodeChild } from 'vue'
+import { VNodeChild, HTMLAttributes } from 'vue'
 
 export type Key = string | number
 
@@ -7,16 +7,37 @@ export interface MenuOptionSharedPart {
   key?: Key
   disabled?: boolean
   icon?: () => VNodeChild
-  children?: Array<MenuOption | MenuGroupOption>
+  children?: Array<MenuOption | MenuGroupOption | MenuDividerOption>
   extra?: string | (() => VNodeChild)
+  props?: HTMLAttributes
   [key: string]: unknown
   /** @deprecated */
   titleExtra?: string | (() => VNodeChild)
 }
 
+/**
+ * @private
+ */
+export type MenuIgnoredOption = MenuDividerOption | MenuRenderOption
+
+export interface MenuDividerOption {
+  type: 'divider'
+  key?: Key
+  props?: HTMLAttributes
+  [key: string]: unknown
+}
+
+export interface MenuRenderOption {
+  type: 'render'
+  key?: Key
+  props?: HTMLAttributes
+  render?: () => VNodeChild
+  [key: string]: unknown
+}
+
 export interface MenuGroupOptionBase extends MenuOptionSharedPart {
   type: 'group'
-  children?: Array<MenuOption | MenuGroupOption>
+  children: Array<MenuOption | MenuDividerOption>
 }
 
 export type MenuOption =
@@ -33,7 +54,9 @@ export type MenuGroupOption =
   })
   | (MenuGroupOptionBase & { label?: string | (() => VNodeChild) })
 
-export type TmNode = TreeNode<MenuOption, MenuGroupOption>
+export type MenuMixedOption = MenuDividerOption | MenuOption | MenuGroupOption
+
+export type TmNode = TreeNode<MenuOption, MenuGroupOption, MenuIgnoredOption>
 
 export type OnUpdateValue = (
   value: string & number & (string | number),

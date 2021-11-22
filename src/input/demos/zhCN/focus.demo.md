@@ -1,4 +1,4 @@
-# 手动 Focus & Blur & Select
+# 手动 focus & blur & select
 
 ```html
 <n-space vertical>
@@ -19,7 +19,7 @@ export default defineComponent({
     const inputInstRef = ref(null)
     return {
       inputInstRef,
-      inputValue: ref('小孩子才做选择，听说你要Select All？'),
+      inputValue: ref('马儿乖，马儿好，马儿光跑不吃草'),
       handleFocus () {
         inputInstRef.value.focus()
       },
