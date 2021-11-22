@@ -52,7 +52,7 @@ page-size-option
 
 ### PaginationInfo Type
 
-```__ts
+```ts
 interface PaginationInfo {
   startIndex: number
   endIndex: number

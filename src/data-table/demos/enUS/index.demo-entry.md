@@ -120,7 +120,7 @@ striped
 
 #### DataTableCreateSummary Type
 
-```__ts
+```ts
 type DataTableCreateSummary = (
   pageData: RowData[]
 ) =>
@@ -142,7 +142,7 @@ type DataTableCreateSummary = (
 
 #### SortState Type
 
-```__ts
+```ts
 type SortState = {
   columnKey: string | number,
   sorter: 'default' | function | boolean,

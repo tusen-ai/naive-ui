@@ -169,8 +169,8 @@ export default {
           editInCodeSandbox: '在 CodeSandbox 中编辑',
           copyCode: '复制代码',
           copySuccess: '复制成功',
-          JS: '切换到 JavaScript',
-          TS: '切换到 TypeScript'
+          JS: '切换到 TypeScript',
+          TS: '切换到 JavaScript'
         },
         'en-US': {
           show: 'Show Code',
@@ -179,8 +179,8 @@ export default {
           editInCodeSandbox: 'Edit in CodeSandbox',
           copyCode: 'Copy Code',
           copySuccess: 'Successfully Copied',
-          JS: 'Switch to JavaScript',
-          TS: 'Switch to TypeScript'
+          JS: 'Switch to TypeScript',
+          TS: 'Switch to JavaScript'
         }
       })
     }

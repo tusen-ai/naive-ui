@@ -12,7 +12,7 @@ const tsToJs = (content) => {
     minifyWhitespace: false,
     charset: 'utf8'
   })
-  return code.replaceAll('__blankline;', '')
+  return code.replace(/__blankline;/g, '')
 }
 
 module.exports = tsToJs

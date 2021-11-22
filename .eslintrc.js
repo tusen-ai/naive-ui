@@ -55,6 +55,15 @@ module.exports = {
       }
     },
     {
+      files: ['**/*.md/*.ts'],
+      processor: 'markdown/markdown',
+      rules: {
+        'import/order': 0,
+        'prettier/prettier': 0,
+        '@typescript-eslint/consistent-type-definitions': 0
+      }
+    },
+    {
       files: '*.spec.ts',
       globals: {
         describe: 'readonly',
@@ -71,6 +80,5 @@ module.exports = {
         __DEV__: 'readonly'
       }
     }
-  ],
-  parser: '@typescript-eslint/parser'
+  ]
 }
