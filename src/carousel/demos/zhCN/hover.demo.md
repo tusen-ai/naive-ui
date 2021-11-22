@@ -1,6 +1,6 @@
-# 鼠标经过切换轮播图
+# 鼠标经过指示点切换轮播图
 
-设定 `trigger` 为 `hover` 来触发切换。
+设定 `trigger` 为 `hover` 鼠标经过指示点时触发切换。
 
 ```html
 <n-carousel trigger="hover">
