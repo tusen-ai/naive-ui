@@ -43,7 +43,7 @@ customize-field
 | inverted | `boolean` | `false` | Use inverted style. |
 | key-field | `string` | `'key'` | Field name of key. |
 | label-field | `string` | `'label'` | Field name of label. |
-| options | `Array<MenuOption \| MenuGroupOption>` | `[]` | Items data of menu. |
+| options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | Items data of menu. |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | Menu layout. |
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all extras. |
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | Render function that renders all icons. |
@@ -69,7 +69,15 @@ customize-field
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children | `Array<MenuOption \| MenuGroupOption>` | Group items. **required!** |
+| children | `Array<MenuOption \| MenuGroupOption>` | Group items, **required!** |
 | key | `string` | The indentifier of the menu group. |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |
 | type | `'group'` | The type of the menu item, **required!** |
+
+### MenuDividerOption Properties
+
+| Name  | Type             | Description                              |
+| ----- | ---------------- | ---------------------------------------- |
+| key   | `string`         | The indentifier of the menu group.       |
+| props | `HTMLAttributes` | Attributes of the divider.               |
+| type  | `'divider'`      | The type of the menu item, **required!** |

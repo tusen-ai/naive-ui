@@ -171,7 +171,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-step-content`}>
           <div class={`${mergedClsPrefix}-step-content-header`}>
             <div class={`${mergedClsPrefix}-step-content-header__title`}>
-              {this.title}
+              {renderSlot(this.$slots, 'title', undefined, () => [this.title])}
             </div>
             {!this.vertical ? (
               <div class={`${mergedClsPrefix}-step-splitor`} />

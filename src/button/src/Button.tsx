@@ -3,7 +3,6 @@ import {
   ref,
   computed,
   inject,
-  nextTick,
   defineComponent,
   PropType,
   renderSlot,
@@ -134,7 +133,7 @@ const Button = defineComponent({
     const mergedFocusableRef = computed(() => {
       return props.focusable && !props.disabled
     })
-    const handleMouseDown = (e: MouseEvent): void => {
+    const handleMousedown = (e: MouseEvent): void => {
       e.preventDefault()
       if (props.disabled) {
         return
@@ -155,23 +154,17 @@ const Button = defineComponent({
         }
       }
     }
-    const handleKeyUp = (e: KeyboardEvent): void => {
+    const handleKeyup = (e: KeyboardEvent): void => {
       switch (e.code) {
         case 'Enter':
         case 'NumpadEnter':
           if (!props.keyboard) {
-            e.preventDefault()
             return
           }
           enterPressedRef.value = false
-          void nextTick(() => {
-            if (!props.disabled) {
-              selfRef.value?.click()
-            }
-          })
       }
     }
-    const handleKeyDown = (e: KeyboardEvent): void => {
+    const handleKeydown = (e: KeyboardEvent): void => {
       switch (e.code) {
         case 'Enter':
         case 'NumpadEnter':
@@ -208,10 +201,10 @@ const Button = defineComponent({
       showBorder: showBorderRef,
       enterPressed: enterPressedRef,
       rtlEnabled: rtlEnabledRef,
-      handleMouseDown,
-      handleKeyDown,
+      handleMousedown,
+      handleKeydown,
       handleBlur,
-      handleKeyUp,
+      handleKeyup,
       handleClick,
       customColorCssVars: computed(() => {
         const { color } = props
@@ -524,9 +517,9 @@ const Button = defineComponent({
         disabled={this.disabled}
         onClick={this.handleClick}
         onBlur={this.handleBlur}
-        onMousedown={this.handleMouseDown}
-        onKeyup={this.handleKeyUp}
-        onKeydown={this.handleKeyDown}
+        onMousedown={this.handleMousedown}
+        onKeyup={this.handleKeyup}
+        onKeydown={this.handleKeydown}
       >
         {$slots.default && this.iconPlacement === 'right' ? (
           <div class={`${mergedClsPrefix}-button__content`}>{$slots}</div>

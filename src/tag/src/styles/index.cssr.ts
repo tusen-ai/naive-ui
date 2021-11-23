@@ -58,6 +58,10 @@ export default cB('tag', `
     border: var(--border);
     transition: border-color .3s var(--bezier);
   `),
+  cE('avatar', `
+    display: flex;
+    margin-right: 6px;
+  `),
   cE('close', `
     font-size: var(--close-size);
     margin: var(--close-margin);
@@ -67,11 +71,15 @@ export default cB('tag', `
   cM('round', `
     padding: 0 calc(var(--height) / 2);
     border-radius: calc(var(--height) / 2);
+  `, [
+    cE('avatar', `
+      margin-left: calc((var(--height) - 8px) / -2);
+    `)
+  ]),
+  cM('disabled', `
+    cursor: not-allowed !important;
+    opacity: var(--opacity-disabled);
   `),
-  cM('disabled', {
-    cursor: 'not-allowed !important',
-    opacity: 'var(--opacity-disabled)'
-  }),
   cM('checkable', `
     cursor: pointer;
     box-shadow: none;

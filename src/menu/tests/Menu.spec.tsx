@@ -346,4 +346,41 @@ describe('n-menu', () => {
     })
     expect(wrapper.find('.n-submenu-children').element.children.length).toBe(3)
   })
+
+  it('accepts proper options', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const menu = (
+      <NMenu
+        options={[
+          {
+            type: 'divider'
+          },
+          {
+            type: 'group',
+            key: 'foo'
+          },
+          {
+            key: 'blabla',
+            label: 'kirby'
+          },
+          {
+            key: 'xxxx',
+            children: [
+              {
+                type: 'divider'
+              },
+              {
+                type: 'group',
+                key: 'foo1'
+              },
+              {
+                key: 'blabla1',
+                label: 'kirby'
+              }
+            ]
+          }
+        ]}
+      />
+    )
+  })
 })

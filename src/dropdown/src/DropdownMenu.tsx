@@ -94,7 +94,8 @@ export default defineComponent({
     return (
       <div class={`${clsPrefix}-dropdown-menu`}>
         {this.tmNodes.map((tmNode) => {
-          if (isRenderNode(tmNode.rawNode)) {
+          const { rawNode } = tmNode
+          if (isRenderNode(rawNode)) {
             return (
               <NDropdownRenderOption
                 tmNode={tmNode as unknown as TreeNode<DropdownRenderOption>}
@@ -102,10 +103,10 @@ export default defineComponent({
               />
             )
           }
-          if (isDividerNode(tmNode.rawNode)) {
+          if (isDividerNode(rawNode)) {
             return <NDropdownDivider clsPrefix={clsPrefix} key={tmNode.key} />
           }
-          if (isGroupNode(tmNode.rawNode)) {
+          if (isGroupNode(rawNode)) {
             return (
               <NDropdownGroup
                 clsPrefix={clsPrefix}
@@ -121,7 +122,7 @@ export default defineComponent({
               tmNode={tmNode}
               parentKey={parentKey}
               key={tmNode.key}
-              props={tmNode.rawNode.props}
+              props={rawNode.props}
             />
           )
         })}

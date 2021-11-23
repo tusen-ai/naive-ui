@@ -30,6 +30,9 @@ const radioProps = {
     default: undefined
   },
   size: String as PropType<'small' | 'medium' | 'large'>,
+  onUpdateChecked: [Function, Array] as PropType<
+  undefined | MaybeArray<(value: boolean) => void>
+  >,
   'onUpdate:checked': [Function, Array] as PropType<
   undefined | MaybeArray<(value: boolean) => void>
   >,
@@ -128,9 +131,10 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
       const { value } = props
       call(doUpdateValue as OnUpdateValueImpl, value)
     } else {
-      const { 'onUpdate:checked': updateChecked } = props
+      const { onUpdateChecked, 'onUpdate:checked': _onUpdateChecked } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (updateChecked) call(updateChecked, true)
+      if (onUpdateChecked) call(onUpdateChecked, true)
+      if (_onUpdateChecked) call(_onUpdateChecked, true)
       nTriggerFormInput()
       nTriggerFormChange()
       uncontrolledCheckedRef.value = true

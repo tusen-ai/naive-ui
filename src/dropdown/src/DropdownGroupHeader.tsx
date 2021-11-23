@@ -41,7 +41,7 @@ export default defineComponent({
           class={`${clsPrefix}-dropdown-option-body ${clsPrefix}-dropdown-option-body--group`}
         >
           <div
-            __dropdown-option
+            data-dropdown-option
             class={[
               `${clsPrefix}-dropdown-option-body__prefix`,
               showIcon && `${clsPrefix}-dropdown-option-body__prefix--show-icon`
@@ -51,7 +51,7 @@ export default defineComponent({
           </div>
           <div
             class={`${clsPrefix}-dropdown-option-body__label`}
-            __dropdown-option
+            data-dropdown-option
           >
             {renderLabel
               ? renderLabel(rawNode)
@@ -63,7 +63,7 @@ export default defineComponent({
               hasSubmenu &&
                 `${clsPrefix}-dropdown-option-body__suffix--has-submenu`
             ]}
-            __dropdown-option
+            data-dropdown-option
           />
         </div>
       </div>

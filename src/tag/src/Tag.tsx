@@ -1,4 +1,15 @@
-import { h, defineComponent, computed, PropType, CSSProperties, ref } from 'vue'
+import {
+  h,
+  defineComponent,
+  computed,
+  PropType,
+  CSSProperties,
+  ref,
+  InjectionKey,
+  Ref,
+  provide,
+  toRef
+} from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_internal'
@@ -49,6 +60,12 @@ const tagProps = {
   }
 }
 
+interface TagInjection {
+  roundRef: Ref<boolean>
+}
+
+export const tagInjectionKey: InjectionKey<TagInjection> = Symbol('tag')
+
 export type TagProps = ExtractPublicPropTypes<typeof tagProps>
 
 export default defineComponent({
@@ -66,6 +83,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    provide(tagInjectionKey, {
+      roundRef: toRef(props, 'round')
+    })
     function handleClick (e: MouseEvent): void {
       if (!props.disabled) {
         if (props.checkable) {
@@ -142,6 +162,7 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
+          '--avatar-size-override': `calc(${height} - 8px)`,
           '--bezier': cubicBezierEaseInOut,
           '--border-radius': borderRadius,
           '--border': border,
@@ -172,7 +193,12 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, rtlEnabled, color: { borderColor } = {} } = this
+    const {
+      mergedClsPrefix,
+      rtlEnabled,
+      color: { borderColor } = {},
+      $slots
+    } = this
     return (
       <div
         class={[
@@ -190,6 +216,13 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
       >
+        {$slots.avatar && (
+          <div class={`${mergedClsPrefix}-tag__avatar`}>
+            {{
+              default: $slots.avatar
+            }}
+          </div>
+        )}
         <span class={`${mergedClsPrefix}-tag__content`} ref="contentRef">
           {this.$slots}
         </span>

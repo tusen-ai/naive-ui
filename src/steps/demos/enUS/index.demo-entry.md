@@ -46,3 +46,4 @@ custom-icon
 | Name    | Parameters | Description   |
 | ------- | ---------- | ------------- |
 | default | `()`       | Step content. |
+| title   | `()`       | Step title.   |

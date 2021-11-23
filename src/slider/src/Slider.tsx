@@ -65,7 +65,7 @@ const sliderProps = {
     default: 100
   },
   step: {
-    type: Number,
+    type: [Number, String] as PropType<number | 'mark'>,
     default: 1
   },
   range: Boolean,
@@ -109,7 +109,7 @@ export default defineComponent({
     const handleRailRef = ref<HTMLElement | null>(null)
     const precisionRef = computed(() => {
       const { step } = props
-      if (!step) return 0
+      if (step <= 0 || step === 'mark') return 0
       const stepString = step.toString()
       let precision = 0
       if (stepString.includes('.')) {
@@ -196,7 +196,7 @@ export default defineComponent({
               range
                 ? num >= orderValues[0] &&
                   num <= orderValues[orderValues.length - 1]
-                : num >= orderValues[0]
+                : num <= orderValues[0]
         for (const key of Object.keys(marks)) {
           const num = Number(key)
           mergedMarks.push({
@@ -323,14 +323,15 @@ export default defineComponent({
       }
       const markValues = markValuesRef.value || []
       const { min, max, step } = props
-      if (!step) {
+      if (step === 'mark') {
         const closestMark = getClosestMark(
           value,
           markValues.concat(currentValue),
-          stepBuffer
-        ) as ClosestMark
-        return closestMark.value
+          stepping ? stepBuffer : undefined
+        )
+        return closestMark ? closestMark.value : currentValue
       }
+      if (step <= 0) return currentValue
       const roundValue = getRoundValue(value)
       // ensure accurate step
       const stepValue = new Array(Math.floor((max - min) / step) + 1)
@@ -360,6 +361,7 @@ export default defineComponent({
 
     function getRoundValue (value: number): number {
       const { step, min } = props
+      if (step <= 0 || step === 'mark') return value
       const newValue = Math.round((value - min) / step) * step + min
       return Number(newValue.toFixed(precisionRef.value))
     }
@@ -413,7 +415,10 @@ export default defineComponent({
       if (activeIndex === -1) return
       const { step } = props
       const currentValue = arrifiedValueRef.value[activeIndex]
-      const nextValue = currentValue + step * ratio
+      const nextValue =
+        step <= 0 || step === 'mark'
+          ? currentValue
+          : currentValue + step * ratio
       doDispatchValue(
         // Avoid the number of value does not change when `step` is null
         sanitizeValue(nextValue, currentValue, ratio > 0 ? 1 : -1),

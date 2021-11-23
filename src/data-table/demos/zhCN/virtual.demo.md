@@ -2,6 +2,8 @@
 
 使用 `virtual-scroll` 来应对大量数据，注意需要同时设定 `max-height`。
 
+**注意：当 `virtual-scroll` 为 `true` 时，`rowSpan` 将不生效。**
+
 ```html
 <n-data-table
   ref="table"
