@@ -22,4 +22,13 @@ describe('n-log', () => {
       `--font-size: ${fontSize}px`
     )
   })
+
+  it('should work with `line-height` prop', async () => {
+    const lineHeight = 20
+    const wrapper = mount(NLog, { props: { lineHeight } })
+
+    expect(wrapper.find('.n-log').attributes('style')).toContain(
+      `line-height: ${lineHeight}`
+    )
+  })
 })
