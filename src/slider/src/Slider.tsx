@@ -211,7 +211,7 @@ export default defineComponent({
       return mergedMarks
     })
 
-    const followerEnabledIndexRef = ref<Set<number>>(new Set())
+    const followerEnabledIndexSetRef = ref<Set<number>>(new Set())
 
     function isShowTooltip (index: number): boolean {
       return (
@@ -557,7 +557,7 @@ export default defineComponent({
       getHandleStyle,
       activeIndex: activeIndexRef,
       arrifiedValues: arrifiedValueRef,
-      followerEnabledIndex: followerEnabledIndexRef,
+      followerEnabledIndexSet: followerEnabledIndexSetRef,
       handleRailMouseDown,
       handleHandleFocus,
       handleHandleBlur,
@@ -720,7 +720,7 @@ export default defineComponent({
                           ref={this.setFollowerRefs(index)}
                           show={showTooltip}
                           to={this.adjustedTo}
-                          enabled={this.followerEnabledIndex.has(index)}
+                          enabled={this.followerEnabledIndexSet.has(index)}
                           teleportDisabled={
                             this.adjustedTo === useAdjustedTo.tdkey
                           }
@@ -734,10 +734,10 @@ export default defineComponent({
                                 appear={this.isMounted}
                                 css={this.isSkipCSSDetection(index)}
                                 onEnter={() =>
-                                  this.followerEnabledIndex.add(index)
+                                  this.followerEnabledIndexSet.add(index)
                                 }
                                 onAfterLeave={() =>
-                                  this.followerEnabledIndex.delete(index)
+                                  this.followerEnabledIndexSet.delete(index)
                                 }
                               >
                                 {{
