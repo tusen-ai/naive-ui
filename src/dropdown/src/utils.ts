@@ -23,16 +23,3 @@ export function isRenderNode (
 ): rawNode is DropdownRenderOption {
   return rawNode.type === 'render'
 }
-
-export function isDropdownOptionRelatedTarget (element: HTMLElement): boolean {
-  let currentElement: HTMLElement | null = element
-
-  while (currentElement !== null) {
-    if (currentElement.hasAttribute('__dropdown-option')) {
-      return true
-    }
-    currentElement = currentElement.parentElement
-  }
-
-  return false
-}

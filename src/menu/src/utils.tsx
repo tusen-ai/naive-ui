@@ -4,19 +4,46 @@ import { keep, keysOf } from '../../_utils'
 import NMenuOptionGroup, { menuItemGroupProps } from './MenuOptionGroup'
 import NSubmenu, { submenuProps } from './Submenu'
 import NMenuOption, { menuItemProps } from './MenuOption'
-import { MenuOption, MenuGroupOption } from './interface'
+import NMenuDivider from './MenuDivider'
+import {
+  MenuOption,
+  MenuGroupOption,
+  MenuIgnoredOption,
+  MenuMixedOption
+} from './interface'
 import { MenuSetupProps } from './Menu'
 
 const groupPropKeys = keysOf(menuItemGroupProps)
 const itemPropKeys = keysOf(menuItemProps)
 const submenuPropKeys = keysOf(submenuProps)
 
+export function isIgnoredNode (
+  rawNode: MenuMixedOption
+): rawNode is MenuIgnoredOption {
+  return rawNode.type === 'divider' || rawNode.type === 'render'
+}
+
+export function isDividerNode (
+  rawNode: MenuMixedOption
+): rawNode is MenuIgnoredOption {
+  return rawNode.type === 'divider'
+}
+
 export function itemRenderer (
-  tmNode: TreeNode<MenuOption, MenuGroupOption>,
+  tmNode: TreeNode<MenuOption, MenuGroupOption, MenuIgnoredOption>,
   menuProps: MenuSetupProps
-): VNode {
+): VNode | undefined {
+  const { rawNode } = tmNode
+
+  if (isIgnoredNode(rawNode)) {
+    if (isDividerNode(rawNode)) {
+      return <NMenuDivider key={tmNode.key} {...rawNode.props} />
+    }
+    return undefined
+  }
+
   const { labelField } = menuProps
-  const { rawNode, key, level, isGroup } = tmNode
+  const { key, level, isGroup } = tmNode
   const props = {
     ...rawNode,
     title: (rawNode.title || rawNode[labelField]) as
@@ -42,7 +69,7 @@ export function itemRenderer (
       NSubmenu,
       keep(props, submenuPropKeys, {
         key,
-        rawNodes: tmNode.rawNode[menuProps.childrenField] as any,
+        rawNodes: rawNode[menuProps.childrenField] as any,
         tmNodes: tmNode.children,
         tmNode
       })

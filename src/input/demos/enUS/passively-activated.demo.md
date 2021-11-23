@@ -1,4 +1,4 @@
-# Passively Activateds
+# Passively activated
 
 If you want to activate the input by pressing enter after it's focused, use `passively-activated`. Use Tab to focus on the next input(s).
 

@@ -41,6 +41,15 @@ const menuOptions = [
     icon: renderIcon(HomeIcon)
   },
   {
+    key: 'divider-1',
+    type: 'divider',
+    props: {
+      style: {
+        marginLeft: '32px'
+      }
+    }
+  },
+  {
     label: () =>
       h(
         'a',

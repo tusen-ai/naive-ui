@@ -13,4 +13,39 @@ describe('n-log', () => {
     })
     expect(spy).toHaveBeenCalled()
   })
+
+  it('should work with `font-size` prop', async () => {
+    const fontSize = 20
+    const wrapper = mount(NLog, { props: { fontSize } })
+
+    expect(wrapper.find('.n-code').attributes('style')).toContain(
+      `--font-size: ${fontSize}px`
+    )
+  })
+
+  it('should work with `line-height` prop', async () => {
+    const lineHeight = 20
+    const wrapper = mount(NLog, { props: { lineHeight } })
+
+    expect(wrapper.find('.n-log').attributes('style')).toContain(
+      `line-height: ${lineHeight}`
+    )
+  })
+
+  it('should work with `lines` `log` prop', async () => {
+    const wrapper = mount(NLog, { props: { lines: ['test1', 'test2'] } })
+    expect(wrapper.find('.n-code').element.children.length).toBe(2)
+    expect(wrapper.find('.n-code').element.children[0].textContent).toBe(
+      'test1'
+    )
+    expect(wrapper.find('.n-code').element.children[1].textContent).toBe(
+      'test2'
+    )
+
+    await wrapper.setProps({ log: 'test3' })
+    expect(wrapper.find('.n-code').element.children.length).toBe(1)
+    expect(wrapper.find('.n-code').element.children[0].textContent).toBe(
+      'test3'
+    )
+  })
 })

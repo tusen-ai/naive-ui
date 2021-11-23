@@ -1,5 +1,15 @@
-import { h, ref, computed, defineComponent, PropType } from 'vue'
+import {
+  h,
+  ref,
+  computed,
+  defineComponent,
+  PropType,
+  inject,
+  watch,
+  VNode
+} from 'vue'
 import { VResizeObserver } from 'vueuc'
+import { tagInjectionKey } from '../../tag/src/Tag'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { avatarLight } from '../styles'
@@ -24,7 +34,8 @@ const avatarProps = {
     default: 'fill'
   },
   round: Boolean,
-  onError: Function as PropType<(e: Event) => void>
+  onError: Function as PropType<(e: Event) => void>,
+  fallbackSrc: String
 } as const
 
 export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>
@@ -34,7 +45,7 @@ export default defineComponent({
   props: avatarProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-
+    const hasLoadErrorRef = ref(false)
     let memoedTextHtml: string | null = null
     const textRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
@@ -66,13 +77,33 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const TagInjection = inject(tagInjectionKey, null)
+    const mergedRoundRef = computed(() => {
+      if (props.round || props.circle) return true
+      if (TagInjection) {
+        return TagInjection.roundRef.value
+      }
+      return false
+    })
+    const handleError = (e: Event): void => {
+      hasLoadErrorRef.value = true
+      const { onError } = props
+      if (onError) {
+        onError(e)
+      }
+    }
+    watch(
+      () => props.src,
+      () => (hasLoadErrorRef.value = false)
+    )
     return {
       textRef,
       selfRef,
+      mergedRoundRef,
       mergedClsPrefix: mergedClsPrefixRef,
       fitTextTransform,
       cssVars: computed(() => {
-        const { size, round, circle } = props
+        const { size } = props
         const {
           self: { borderRadius, fontSize, color },
           common: { cubicBezierEaseInOut }
@@ -85,43 +116,54 @@ export default defineComponent({
         }
         return {
           '--font-size': fontSize,
-          '--border-radius': round || circle ? '50%' : borderRadius,
+          '--border-radius': mergedRoundRef.value ? '50%' : borderRadius,
           '--color': color,
           '--bezier': cubicBezierEaseInOut,
-          '--size': height
+          '--merged-size': `var(--avatar-size-override, ${height})`
         }
-      })
+      }),
+      hasLoadError: hasLoadErrorRef,
+      handleError
     }
   },
   render () {
     const { $slots, src, mergedClsPrefix } = this
+    let img: VNode
+    if (this.hasLoadError) {
+      img = <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
+    } else if (!(!$slots.default && src)) {
+      img = (
+        <VResizeObserver onResize={this.fitTextTransform}>
+          {{
+            default: () => (
+              <span
+                ref="textRef"
+                class={`${mergedClsPrefix}-avatar__text`}
+                style={{ background: this.color }}
+              >
+                {$slots}
+              </span>
+            )
+          }}
+        </VResizeObserver>
+      )
+    } else {
+      img = (
+        <img
+          src={src}
+          onError={this.handleError}
+          style={{ objectFit: this.objectFit }}
+        />
+      )
+    }
+
     return (
       <span
         ref="selfRef"
         class={`${mergedClsPrefix}-avatar`}
         style={this.cssVars as any}
       >
-        {!$slots.default && src ? (
-          <img
-            src={src}
-            onError={this.onError}
-            style={{ objectFit: this.objectFit }}
-          />
-        ) : (
-          <VResizeObserver onResize={this.fitTextTransform}>
-            {{
-              default: () => (
-                <span
-                  ref="textRef"
-                  class={`${mergedClsPrefix}-avatar__text`}
-                  style={{ background: this.color }}
-                >
-                  {$slots}
-                </span>
-              )
-            }}
-          </VResizeObserver>
-        )}
+        {img}
       </span>
     )
   }

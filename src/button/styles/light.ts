@@ -35,9 +35,9 @@ export const self = (vars: ThemeCommonVars) => {
     errorColorHover,
     errorColorPressed,
     fontWeight,
-    buttonColor,
-    buttonHoverColor,
-    buttonPressedColor,
+    buttonColor2,
+    buttonColor2Hover,
+    buttonColor2Pressed,
     fontWeightStrong
   } = vars
   return {
@@ -59,17 +59,17 @@ export const self = (vars: ThemeCommonVars) => {
     colorOpacitySecondary: 0.16,
     colorOpacitySecondaryHover: 0.2,
     colorOpacitySecondaryPressed: 0.24,
-    colorSecondary: buttonColor,
-    colorSecondaryHover: buttonHoverColor,
-    colorSecondaryPressed: buttonPressedColor,
+    colorSecondary: buttonColor2,
+    colorSecondaryHover: buttonColor2Hover,
+    colorSecondaryPressed: buttonColor2Pressed,
     // tertiary
-    colorTertiary: buttonColor,
-    colorTertiaryHover: buttonHoverColor,
-    colorTertiaryPressed: buttonPressedColor,
+    colorTertiary: buttonColor2,
+    colorTertiaryHover: buttonColor2Hover,
+    colorTertiaryPressed: buttonColor2Pressed,
     // quaternary
     colorQuaternary: '#0000',
-    colorQuaternaryHover: buttonHoverColor,
-    colorQuaternaryPressed: buttonPressedColor,
+    colorQuaternaryHover: buttonColor2Hover,
+    colorQuaternaryPressed: buttonColor2Pressed,
     // default type
     color: '#0000',
     colorHover: '#0000',
