@@ -4,6 +4,12 @@
 
 ### Fixes
 
+- Fix `n-slider` disabled tooltip at the wrong time.
+
+## 2.21.1 (2021-11-23)
+
+### Fixes
+
 - Fix `n-image` drag the picture to move the position incorrectly when the zoom is large.
 - Fix `n-data-table` style glitches after some rows are expanded.
 - Fix `n-data-table` doesn't expand tree data correctly, closes [#1644](https://github.com/TuSimple/naive-ui/issues/1644).
