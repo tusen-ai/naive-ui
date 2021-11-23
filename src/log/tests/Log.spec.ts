@@ -31,4 +31,21 @@ describe('n-log', () => {
       `line-height: ${lineHeight}`
     )
   })
+
+  it('should work with `lines` `log` prop', async () => {
+    const wrapper = mount(NLog, { props: { lines: ['test1', 'test2'] } })
+    expect(wrapper.find('.n-code').element.children.length).toBe(2)
+    expect(wrapper.find('.n-code').element.children[0].textContent).toBe(
+      'test1'
+    )
+    expect(wrapper.find('.n-code').element.children[1].textContent).toBe(
+      'test2'
+    )
+
+    await wrapper.setProps({ log: 'test3' })
+    expect(wrapper.find('.n-code').element.children.length).toBe(1)
+    expect(wrapper.find('.n-code').element.children[0].textContent).toBe(
+      'test3'
+    )
+  })
 })
