@@ -89,6 +89,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const followerRef = ref<FollowerInst | null>(null)
+    const offsetContentRef = ref<HTMLElement | null>(null)
     const NPopover = inject<PopoverInjection>('NPopover') as PopoverInjection
     const bodyRef = ref<HTMLElement | null>(null)
     const followerEnabledRef = ref(props.show)
@@ -142,6 +143,9 @@ export default defineComponent({
           arrowOffsetVertical
         }
       } = themeRef.value
+
+      syncPosition()
+
       return {
         '--n-box-shadow': boxShadow,
         '--n-bezier': cubicBezierEaseInOut,
@@ -155,6 +159,10 @@ export default defineComponent({
         '--n-arrow-height': arrowHeight,
         '--n-arrow-offset': arrowOffset,
         '--n-arrow-offset-vertical': arrowOffsetVertical,
+        '--n-left-offset':
+          offsetContentRef.value?.getAttribute('v-leftoffet') || '0px',
+        '--n-top-offset':
+          offsetContentRef.value?.getAttribute('v-topoffet') || '0px',
         '--n-padding': padding,
         '--n-space': space,
         '--n-space-arrow': spaceArrow
@@ -177,8 +185,9 @@ export default defineComponent({
       }
     })
     function syncPosition (): void {
-      // eslint-disable-next-line no-unused-expressions
-      followerRef.value?.syncPosition()
+      if (followerRef.value) {
+        offsetContentRef.value = followerRef.value.syncPosition()
+      }
     }
     function handleMouseEnter (e: MouseEvent): void {
       if (props.trigger === 'hover') {
