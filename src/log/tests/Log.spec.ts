@@ -48,4 +48,15 @@ describe('n-log', () => {
       'test3'
     )
   })
+
+  it('should work with `rows` prop', async () => {
+    const lineHeight = 20
+    const fontSize = 10
+    ;([5, 6, 7, 8] as const).forEach((rows) => {
+      const wrapper = mount(NLog, { props: { lineHeight, fontSize, rows } })
+      expect(wrapper.find('.n-log').attributes('style')).toContain(
+        `height: calc(${Math.floor(fontSize * lineHeight) * rows}px)`
+      )
+    })
+  })
 })
