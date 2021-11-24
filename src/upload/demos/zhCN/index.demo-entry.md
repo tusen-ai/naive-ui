@@ -83,9 +83,9 @@ interface CustomRequestOptions {
   data?: FuncOrRecordOrUndef
   withCredentials?: boolean
   headers?: FuncOrRecordOrUndef
-  onProgress: (e: {percent: number}) => void
+  onProgress: (e: { percent: number }) => void
   onFinish: () => void
-  onError: (error: ProgressEvent) => void
+  onError: () => void
 }
 ```
 
