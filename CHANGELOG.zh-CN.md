@@ -252,10 +252,6 @@
 - `n-input-number` 新增 `update-value-on-input` 属性，关闭 [#1662](https://github.com/TuSimple/naive-ui/issues/1662)
 - `n-auto-complete` 新增 `prefix` & `suffix` slot
 
-### Feats
-
-- 修复 `n-popover` 自动调整弹出位置，显示全部弹出信息，关闭 [#1520](https://github.com/TuSimple/naive-ui/issues/1520)
-
 ## 2.21.1 (2021-11-23)
 
 ### Fixes

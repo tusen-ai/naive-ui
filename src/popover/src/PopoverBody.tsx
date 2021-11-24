@@ -19,7 +19,7 @@ import {
   renderSlot,
   Fragment
 } from 'vue'
-import { VFollower, FollowerPlacement, FollowerInst } from 'vueuc'
+import { VFollower, FlipLevel, FollowerPlacement, FollowerInst } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import { useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -47,6 +47,7 @@ export const popoverBodyProps = {
   x: Number,
   y: Number,
   flip: Boolean,
+  flipLevel: Number as PropType<FlipLevel>,
   overlap: Boolean,
   placement: String as PropType<FollowerPlacement>,
   width: [Number, String] as PropType<number | 'trigger'>,
@@ -89,7 +90,6 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const followerRef = ref<FollowerInst | null>(null)
-    const offsetContentRef = ref<HTMLElement | null>(null)
     const NPopover = inject<PopoverInjection>('NPopover') as PopoverInjection
     const bodyRef = ref<HTMLElement | null>(null)
     const followerEnabledRef = ref(props.show)
@@ -144,8 +144,6 @@ export default defineComponent({
         }
       } = themeRef.value
 
-      syncPosition()
-
       return {
         '--n-box-shadow': boxShadow,
         '--n-bezier': cubicBezierEaseInOut,
@@ -185,9 +183,7 @@ export default defineComponent({
       }
     })
     function syncPosition (): void {
-      if (followerRef.value) {
-        offsetContentRef.value = followerRef.value.syncPosition()
-      }
+      followerRef.value?.syncPosition()
     }
     function handleMouseEnter (e: MouseEvent): void {
       if (props.trigger === 'hover') {
@@ -313,6 +309,7 @@ export default defineComponent({
         y: this.y,
         flip: this.flip,
         placement: this.placement,
+        flipLevel: this.flipLevel,
         containerClass: this.namespace,
         ref: 'followerRef',
         overlap: this.overlap,
