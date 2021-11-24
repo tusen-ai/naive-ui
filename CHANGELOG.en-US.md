@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-upload` add `custom-request` prop, closes [#1389](https://github.com/TuSimple/naive-ui/issues/1389).
+
 ## 2.21.0 (2021-11-21)
 
 ### Breaking Changes
@@ -62,7 +68,6 @@
 
 - `n-modal` add `transform-origin` prop, closes [#1498](https://github.com/TuSimple/naive-ui/issues/1498).
 - `n-tabs` add `pane-class` prop, closes [#1500](https://github.com/TuSimple/naive-ui/issues/1500).
-- `n-upload` add `custom-request` prop, closes [#1389](https://github.com/TuSimple/naive-ui/issues/1389).
 
 ### Fixes
 

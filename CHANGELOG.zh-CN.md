@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-upload` add `custom-request` 属性，关闭 [#1389](https://github.com/TuSimple/naive-ui/issues/1389)
+
 ## 2.21.0 (2021-11-21)
 
 ### Breaking Changes
@@ -62,7 +68,6 @@
 
 - `n-modal` 新增 `transform-origin` 属性，关闭 [#1498](https://github.com/TuSimple/naive-ui/issues/1498)
 - `n-tabs` 新增 `pane-class` 属性，关闭 [#1500](https://github.com/TuSimple/naive-ui/issues/1500)
-- `n-upload` 新增 `transform-origin` 属性，关闭 [#1389](https://github.com/TuSimple/naive-ui/issues/1389)
 
 ### Fixes
 
