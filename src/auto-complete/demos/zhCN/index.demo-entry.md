@@ -11,6 +11,7 @@ group
 custom-input
 after-select
 show-options-by-value
+add-tooltip
 ```
 
 ## API
@@ -29,6 +30,7 @@ show-options-by-value
 | loading | `boolean` | `false` | 是否展示加载状态 |
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | 自动填充的自定义选项 |
 | placeholder | `string` | `'请输入'` | 自动填充的提示信息 |
+| render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean } }` | `undefined` | 自动填充选项的渲染函数 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 自动填充的尺寸大小 |
 | value | `string` | `undefined` | 自动填充的数据用户可控 |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | blur 时触发的回调函数 |

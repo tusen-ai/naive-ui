@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-auto-complete` add `render-option` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
+
 ## 2.21.1 (2021-11-23)
 
 ### Fixes

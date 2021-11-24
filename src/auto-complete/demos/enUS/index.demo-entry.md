@@ -11,6 +11,7 @@ group
 custom-input
 after-select
 show-options-by-value
+add-tooltip
 ```
 
 ## API
@@ -29,6 +30,7 @@ show-options-by-value
 | loading | `boolean` | `false` | Whether to show a loading status. |
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | Options to autocomplete from. |
 | placeholder | `string` | `'Please Input'` | Autocomplete's placeholder. |
+| render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean } }` | `undefined` | Render function for each option of autocomplete. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Autocomplete size. |
 | value | `string` | `undefined` | Input of autocomplete. |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | On blur callback function. |
