@@ -6,8 +6,6 @@
 
 - `n-upload` add `custom-request` prop, closes [#1389](https://github.com/TuSimple/naive-ui/issues/1389).
 
-## 2.21.1 (2021-11-23)
-
 ### Fixes
 
 - Fix `n-slider` disabled tooltip at the wrong time.

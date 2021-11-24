@@ -4,9 +4,7 @@
 
 ### Feats
 
-- `n-upload` add `custom-request` 属性，关闭 [#1389](https://github.com/TuSimple/naive-ui/issues/1389)
-
-## 2.21.1 (2021-11-23)
+- `n-upload` 新增 `custom-request` 属性，关闭 [#1389](https://github.com/TuSimple/naive-ui/issues/1389)
 
 ### Fixes
 
