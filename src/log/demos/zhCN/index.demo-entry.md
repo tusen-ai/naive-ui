@@ -64,7 +64,7 @@ loading
 | loading | `boolean` | `false` | 是否显示加载中 |
 | log | `string` | `undefined` | 日志的内容 |
 | rows | `number` | `15` | 日志的尺寸 |
-| trim | `boolean` | `false` | 是否显示 `trim` 后的日志 |
+| trim | `boolean` | `false` | 是否显示 `trim` 后的日志，使用前需要先设置 `language` 属性 |
 | on-require-more | `(from: 'top' \| 'bottom') => void` | `undefined` | 滚动加载日志的回调函数 |
 | on-reach-top | `() => void` | `undefined` | 滚动到顶部的回调函数 |
 | on-reach-bottom | `() => void` | `undefined` | 滚动到底部的回调函数 |

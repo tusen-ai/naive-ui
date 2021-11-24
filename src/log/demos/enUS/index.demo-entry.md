@@ -64,7 +64,7 @@ loading
 | loading | `boolean` | `false` | Whether to show loading. |
 | log | `string` | `undefined` | The content of the log. |
 | rows | `number` | `15` | Log size. |
-| trim | `boolean` | `false` | Whether to display the log after `trim`. |
+| trim | `boolean` | `false` | Whether to display the log after `trim`. You need to set the `language` props before you can use it. |
 | on-require-more | `(from: 'top' \| 'bottom') => void` | `undefined` | Callback function for scroll loading log. |
 | on-reach-top | `() => void` | `undefined` | Scroll to the top callback function. |
 | on-reach-bottom | `() => void` | `undefined` | Scroll to the bottom callback function. |
