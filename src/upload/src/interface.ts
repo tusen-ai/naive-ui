@@ -107,7 +107,7 @@ export type OnPreview = (file: FileInfo) => void
 
 export type CreateThumbnailUrl = (file: File) => Promise<string>
 
-export interface CustomUploadProgressEvent extends ProgressEvent {
+export interface CustomUploadProgressEvent {
   percent: number
 }
 
@@ -120,7 +120,7 @@ export interface CustomRequestOptions {
   headers?: FuncOrRecordOrUndef
   onProgress: (e: CustomUploadProgressEvent) => void
   onFinish: () => void
-  onError: (error: ProgressEvent) => void
+  onError: () => void
 }
 
 export type CustomRequest = (options: CustomRequestOptions) => void

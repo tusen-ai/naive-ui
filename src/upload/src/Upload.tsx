@@ -136,7 +136,7 @@ function customSubmitImpl (options: {
       const progress = event.percent
       fileAfterChange.percentage = progress
       percentage = progress
-      doChange(fileAfterChange, event)
+      doChange(fileAfterChange)
     },
     onFinish () {
       let fileAfterChange: FileInfo = Object.assign({}, file, {
@@ -151,13 +151,13 @@ function customSubmitImpl (options: {
         inst.onFinish?.({ file: fileAfterChange }) || fileAfterChange
       doChange(fileAfterChange)
     },
-    onError (e) {
+    onError () {
       const fileAfterChange: FileInfo = Object.assign({}, file, {
         status: 'error',
         percentage
       })
       XhrMap.delete(file.id)
-      doChange(fileAfterChange, e)
+      doChange(fileAfterChange)
     }
   })
 }
