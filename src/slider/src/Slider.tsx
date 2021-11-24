@@ -165,17 +165,21 @@ export default defineComponent({
     const fillStyleRef = computed(() => {
       if (handleCountExceeds2Ref.value) return
       const values = arrifiedValueRef.value
-      const start = props.range ? Math.min.apply(null, values) : props.min
-      const end = props.range ? Math.max.apply(null, values) : values[0]
+      const start = valueToPercentage(
+        props.range ? Math.min(...values) : props.min
+      )
+      const end = valueToPercentage(
+        props.range ? Math.max(...values) : values[0]
+      )
       const { value: styleDirection } = styleDirectionRef
       return props.vertical
         ? {
-            [styleDirection]: `${valueToPercentage(start)}%`,
-            height: `${valueToPercentage(end - start)}%`
+            [styleDirection]: `${start}%`,
+            height: `${end - start}%`
           }
         : {
-            [styleDirection]: `${valueToPercentage(start)}%`,
-            width: `${valueToPercentage(end - start)}%`
+            [styleDirection]: `${start}%`,
+            width: `${end - start}%`
           }
     })
 
