@@ -166,10 +166,10 @@ export default defineComponent({
       if (handleCountExceeds2Ref.value) return
       const values = arrifiedValueRef.value
       const start = valueToPercentage(
-        props.range ? Math.min.apply(null, values) : props.min
+        props.range ? Math.min(...values) : props.min
       )
       const end = valueToPercentage(
-        props.range ? Math.max.apply(null, values) : values[0]
+        props.range ? Math.max(...values) : values[0]
       )
       const { value: styleDirection } = styleDirectionRef
       return props.vertical
