@@ -97,7 +97,7 @@ striped
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | 非受控状态下表格默认的排序方式 |
 | disabled | `(rowData: object, rowIndex: number) => boolean` | `undefined` | 是否禁用 |
 | ellipsis | `boolean \| EllipsisProps` | `false` | 文本溢出的设置 |
-| expandable | `(rowData: object, rowIndex: number) => boolean` | `undefined` | 行是否可展开，仅在 `type` 为 `'expand'` 时生效 |
+| expandable | `(rowData: object) => boolean` | `undefined` | 行是否可展开，仅在 `type` 为 `'expand'` 时生效 |
 | filter | `boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'` | `undefined` | 这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。 |
 | filterMode | `'and' \| 'or'` | `'or'` | 同一列筛选方式为与还是或 |
 | filterMultiple | `boolean` | `true` | 同一列是否可以筛选多个 |

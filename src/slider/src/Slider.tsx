@@ -211,6 +211,8 @@ export default defineComponent({
       return mergedMarks
     })
 
+    const followerEnabledIndexSetRef = ref<Set<number>>(new Set())
+
     function isShowTooltip (index: number): boolean {
       return (
         props.showTooltip ||
@@ -519,7 +521,10 @@ export default defineComponent({
       }
     }
 
-    watch(activeIndexRef, (_, previous) => (previousIndexRef.value = previous))
+    watch(
+      activeIndexRef,
+      (_, previous) => void nextTick(() => (previousIndexRef.value = previous))
+    )
 
     watch(mergedValueRef, () => {
       if (props.marks) {
@@ -552,6 +557,7 @@ export default defineComponent({
       getHandleStyle,
       activeIndex: activeIndexRef,
       arrifiedValues: arrifiedValueRef,
+      followerEnabledIndexSet: followerEnabledIndexSetRef,
       handleRailMouseDown,
       handleHandleFocus,
       handleHandleBlur,
@@ -714,6 +720,7 @@ export default defineComponent({
                           ref={this.setFollowerRefs(index)}
                           show={showTooltip}
                           to={this.adjustedTo}
+                          enabled={this.followerEnabledIndexSet.has(index)}
                           teleportDisabled={
                             this.adjustedTo === useAdjustedTo.tdkey
                           }
@@ -726,6 +733,12 @@ export default defineComponent({
                                 name="fade-in-scale-up-transition"
                                 appear={this.isMounted}
                                 css={this.isSkipCSSDetection(index)}
+                                onEnter={() =>
+                                  this.followerEnabledIndexSet.add(index)
+                                }
+                                onAfterLeave={() =>
+                                  this.followerEnabledIndexSet.delete(index)
+                                }
                               >
                                 {{
                                   default: () =>

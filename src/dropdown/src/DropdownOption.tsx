@@ -19,13 +19,14 @@ import { render, useDeferredTrue } from '../../_utils'
 import { NIcon } from '../../icon'
 import NDropdownMenu, { dropdownMenuInjectionKey } from './DropdownMenu'
 import { dropdownInjectionKey } from './Dropdown'
-import { isDropdownOptionRelatedTarget, isSubmenuNode } from './utils'
+import { isSubmenuNode } from './utils'
 import { TreeNode } from 'treemate'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
   DropdownOption
 } from './interface'
+import { happensIn } from 'seemly'
 
 interface NDropdownOptionInjection {
   enteringSubmenuRef: Ref<boolean>
@@ -143,7 +144,7 @@ export default defineComponent({
       const { relatedTarget } = e
       if (
         relatedTarget &&
-        !isDropdownOptionRelatedTarget(relatedTarget as HTMLElement)
+        !happensIn({ target: relatedTarget }, 'dropdownOption')
       ) {
         hoverKeyRef.value = null
       }
@@ -236,7 +237,7 @@ export default defineComponent({
       <div class={`${clsPrefix}-dropdown-option`}>
         {h('div', mergeProps(builtinProps as any, props as any), [
           <div
-            __dropdown-option
+            data-dropdown-option
             class={[
               `${clsPrefix}-dropdown-option-body__prefix`,
               siblingHasIcon &&
@@ -246,7 +247,7 @@ export default defineComponent({
             {[renderIcon ? renderIcon(rawNode) : render(rawNode.icon)]}
           </div>,
           <div
-            __dropdown-option
+            data-dropdown-option
             class={`${clsPrefix}-dropdown-option-body__label`}
           >
             {/* TODO: Workaround, menu compatible */}
@@ -255,7 +256,7 @@ export default defineComponent({
               : render(rawNode[this.labelField] ?? rawNode.title)}
           </div>,
           <div
-            __dropdown-option
+            data-dropdown-option
             class={[
               `${clsPrefix}-dropdown-option-body__suffix`,
               siblingHasSubmenu &&
