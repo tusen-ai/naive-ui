@@ -2,11 +2,18 @@ module.exports = {
   extends: ['plugin:markdown/recommended', 'prettier'],
   overrides: [
     {
+      files: '*.vue',
+      extends: [
+        '@vue/typescript/recommended',
+        'plugin:vue/vue3-recommended',
+        '@vue/typescript'
+      ]
+    },
+    {
       files: ['*.vue', '*.js'],
       extends: [
         'plugin:vue/essential',
         '@vue/standard'
-        // '@vue/typescript/recommended'
       ],
       rules: {
         'vue/max-attributes-per-line': [
