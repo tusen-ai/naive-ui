@@ -105,3 +105,76 @@ describe('n-notification', () => {
     })
   })
 })
+describe('notification-provider', () => {
+  it('props.max', (done) => {
+    const Test = defineComponent({
+      setup () {
+        const notification = useNotification()
+        notification.info({
+          title: 'info',
+          content: 'info'
+        })
+        notification.info({
+          title: 'info',
+          content: 'info'
+        })
+        notification.info({
+          title: 'info',
+          content: 'info'
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = mount(NNotificationProvider, {
+      props: {
+        max: 2
+      },
+      slots: {
+        default: () => <Test />
+      }
+    })
+    void nextTick(() => {
+      expect(document.querySelectorAll('.n-notification').length).toBe(2)
+      wrapper.unmount()
+      done()
+    })
+  })
+  it('should work with `placement` prop', () => {
+    const Test = defineComponent({
+      setup () {
+        const notification = useNotification()
+        notification.info({
+          title: 'info',
+          content: 'info'
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = mount(NNotificationProvider, {
+      slots: {
+        default: () => <Test />
+      }
+    })
+    void nextTick(async () => {
+      expect(wrapper.find('.notification-container').classes()).toContain(
+        'notification-container--top-right'
+      )
+      await wrapper.setProps({ placement: 'top-left' })
+      expect(wrapper.find('.notification-container').classes()).toContain(
+        'notification-container--top-right'
+      )
+      await wrapper.setProps({ placement: 'bottom-right' })
+      expect(wrapper.find('.notification-container').classes()).toContain(
+        'notification-container--bottom-right'
+      )
+      await wrapper.setProps({ placement: 'bottom-left' })
+      expect(wrapper.find('.notification-container').classes()).toContain(
+        'notification-container--bottom-left'
+      )
+    })
+  })
+})

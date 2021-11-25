@@ -46,6 +46,8 @@ change-content
 scrollable
 closable
 duration
+max
+placement
 ```
 
 ## API
@@ -54,6 +56,8 @@ duration
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| max | `number` | `undefined` | 限制通知框显示的个数 |
+| placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `top-right` | 所有通知框显示的位置 |
 | scrollable | `boolean` | `true` | 通知是否可滚动 |
 | to | `string \| HTMLElement` | `'body'` | `Notification` 容器节点的位置 |
 

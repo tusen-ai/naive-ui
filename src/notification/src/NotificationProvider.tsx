@@ -75,7 +75,17 @@ const notificationProviderProps = {
   scrollable: {
     type: Boolean,
     default: true
-  }
+  },
+  max: Number,
+  placement: {
+    type: String as PropType<
+    | 'top-left'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-right'
+    >,
+    default: 'top-right'
+  },
 }
 
 export type NotificationProviderProps = ExtractPublicPropTypes<
@@ -99,6 +109,10 @@ export default defineComponent({
         hide: destroy,
         deactivate: destroy
       })
+      const { max } = props
+      if (max && notificationListRef.value.length >= max) {
+        notificationListRef.value.shift()
+      }
       notificationListRef.value.push(notificationReactive)
       return notificationReactive
     }
@@ -157,7 +171,10 @@ export default defineComponent({
         {renderSlot(this.$slots, 'default')}
         {this.notificationList.length ? (
           <Teleport to={this.to ?? 'body'}>
-            <NotificationContainer scrollable={this.scrollable}>
+            <NotificationContainer 
+              scrollable={this.scrollable}
+              placement={this.placement}
+            >
               {{
                 default: () => {
                   return this.notificationList.map((notification) => {
