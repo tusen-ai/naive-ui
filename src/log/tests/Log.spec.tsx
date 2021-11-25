@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { h, defineComponent, ref, watch } from 'vue'
 import { NLog } from '../index'
 
 describe('n-log', () => {
@@ -68,5 +69,45 @@ describe('n-log', () => {
 
     await wrapper.setProps({ trim: true, log: ' test2     ' })
     expect(wrapper.find('pre').element.innerHTML).toBe('test2')
+  })
+
+  it('should work with `scrollTo` `on-require-more` `on-reach-top` `on-reach-bottom` prop', async () => {
+    const lines = ['test1', 'test2', 'test3', 'test4', 'test5', 'test6']
+    const onRequireMore = jest.fn()
+    const onReachTop = jest.fn()
+    const onReachBottom = jest.fn()
+    const wrapper = mount(
+      defineComponent({
+        setup () {
+          const logInstRef = ref<any>(null)
+          watch(logInstRef, (value) => {
+            if (value) {
+              value.scrollTo(0)
+              value.scrollTo(1)
+              value.scrollTo(999)
+            }
+          })
+
+          return () =>
+            h(NLog, {
+              ref: logInstRef,
+              lines,
+              rows: 4,
+              onRequireMore,
+              onReachTop,
+              onReachBottom
+            })
+        }
+      }),
+      {
+        attachTo: document.body
+      }
+    )
+    setTimeout(() => {
+      expect(onRequireMore).toHaveBeenCalled()
+      expect(onReachTop).toHaveBeenCalled()
+      expect(onReachBottom).toHaveBeenCalled()
+      wrapper.unmount()
+    }, 0)
   })
 })
