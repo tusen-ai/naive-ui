@@ -295,27 +295,25 @@ export default defineComponent({
       markValues = markValuesRef.value,
       buffer?: number
     ): ClosestMark | null {
-      if (markValues) {
-        let closestMark = null
-        let index = -1
-        while (++index < markValues.length) {
-          const diff = markValues[index] - currentValue
-          const distance = Math.abs(diff)
-          if (
-            // find marks in the same direction
-            (buffer === undefined || diff * buffer > 0) &&
-            (closestMark === null || distance < closestMark.distance)
-          ) {
-            closestMark = {
-              value: markValues[index],
-              distance,
-              index
-            }
+      if (!markValues || !markValues.length) return null
+      let closestMark = null
+      let index = -1
+      while (++index < markValues.length) {
+        const diff = markValues[index] - currentValue
+        const distance = Math.abs(diff)
+        if (
+          // find marks in the same direction
+          (buffer === undefined || diff * buffer > 0) &&
+          (closestMark === null || distance < closestMark.distance)
+        ) {
+          closestMark = {
+            index,
+            distance,
+            value: markValues[index]
           }
         }
-        return closestMark
       }
-      return null
+      return closestMark
     }
 
     function sanitizeValue (
@@ -328,7 +326,7 @@ export default defineComponent({
         stepBuffer = value - currentValue > 0 ? 1 : -1
       }
       const markValues = markValuesRef.value || []
-      const { min, max, step } = props
+      const { step } = props
       if (step === 'mark') {
         const closestMark = getClosestMark(
           value,
@@ -338,16 +336,28 @@ export default defineComponent({
         return closestMark ? closestMark.value : currentValue
       }
       if (step <= 0) return currentValue
-      const roundValue = getRoundValue(value)
-      // ensure accurate step
-      const stepValue = new Array(Math.floor((max - min) / step) + 1)
-        .fill('')
-        .map((_, index) => step * index + min)
-      // If it is a stepping, priority will be given to the marks
+      const { value: precision } = precisionRef
+      let closestMark
+      // if it is a stepping, priority will be given to the marks
       // on the rail，otherwise take the nearest one
-      const closestMark = stepping
-        ? getClosestMark(currentValue, stepValue.concat(markValues), stepBuffer)
-        : getClosestMark(value, markValues.concat(roundValue))
+      if (stepping) {
+        const simulationStep = Math.floor(
+          Number((currentValue / step).toFixed(precision))
+        )
+        const leftStep = simulationStep - 1
+        const rightStep = simulationStep + 1
+        closestMark = getClosestMark(
+          currentValue,
+          [leftStep * step, rightStep * step, ...markValues],
+          stepBuffer
+        )
+        if (closestMark && !markValues.includes(closestMark.value)) {
+          closestMark.value = Number(closestMark.value.toFixed(precision))
+        }
+      } else {
+        const roundValue = getRoundValue(value)
+        closestMark = getClosestMark(value, [...markValues, roundValue])
+      }
       return closestMark ? clampValue(closestMark.value) : currentValue
     }
 
