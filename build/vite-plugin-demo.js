@@ -12,6 +12,7 @@ const vuePlugin = createVuePlugin({
 const createDemoPlugin = () => {
   const naiveDemoVitePlugin = {
     name: 'demo-vite',
+    enforce: 'pre',
     transform (_, id) {
       if (fileRegex.test(id)) {
         return getTransformedVueSrc(id)
@@ -21,10 +22,7 @@ const createDemoPlugin = () => {
       const { file } = ctx
       if (fileRegex.test(file)) {
         const code = await getTransformedVueSrc(file)
-        return vuePlugin.handleHotUpdate({
-          ...ctx,
-          read: () => code
-        })
+        ctx.read = () => code
       }
     }
   }

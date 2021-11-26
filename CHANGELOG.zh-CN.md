@@ -6,6 +6,7 @@
 
 - 修复 `n-slider` tooltip 禁用时机错误问题
 - 修复 `n-slider` 填充色样式错误问题，关闭 [#1670](https://github.com/TuSimple/naive-ui/issues/1670)
+- 修复 `n-date-picker` 当 `time-picker` 输入为空时报错，关闭 [#1678](https://github.com/TuSimple/naive-ui/issues/1678)
 
 ## 2.21.1 (2021-11-23)
 

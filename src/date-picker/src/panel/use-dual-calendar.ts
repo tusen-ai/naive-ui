@@ -524,10 +524,46 @@ function useDualCalendar (
     )
   }
   function handleStartTimePickerChange (value: number): void {
-    changeStartDateTime(value)
+    if (value === null) {
+      const date = strictParse(
+        startDateInput.value,
+        props.dateFormat,
+        new Date(),
+        panelCommon.dateFnsOptions.value
+      )
+      const newValue = set(new Date(), {
+        year: getYear(date),
+        month: getMonth(date),
+        date: getDate(date),
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+      })
+      changeStartDateTime(sanitizeValue(getTime(newValue)))
+    } else {
+      changeStartDateTime(value)
+    }
   }
   function handleEndTimePickerChange (value: number): void {
-    changeEndDateTime(value)
+    if (value === null) {
+      const date = strictParse(
+        endDateInputRef.value,
+        props.dateFormat,
+        new Date(),
+        panelCommon.dateFnsOptions.value
+      )
+      const newValue = set(new Date(), {
+        year: getYear(date),
+        month: getMonth(date),
+        date: getDate(date),
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+      })
+      changeEndDateTime(sanitizeValue(getTime(newValue)))
+    } else {
+      changeEndDateTime(value)
+    }
   }
   function handleRangeShortcutMouseenter (shortcut: Shortcuts[string]): void {
     panelCommon.cachePendingValue()
