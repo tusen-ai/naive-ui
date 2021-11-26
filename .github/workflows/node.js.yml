@@ -35,6 +35,7 @@ jobs:
           cache: pnpm
 
       - run: pnpm install
+
       - name: Lint
         run: pnpm run lint
 
