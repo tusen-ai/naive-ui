@@ -35,11 +35,11 @@ jobs:
           cache: pnpm
 
       - run: pnpm install
-
-      - run: pnpm run lint
+      - name: Lint
+        run: pnpm run lint
 
       - name: Test
-      - run: pnpm run test:cov
+        run: pnpm run test:cov
 
       - name: Code coverage
         uses: codecov/codecov-action@v2.1.0
