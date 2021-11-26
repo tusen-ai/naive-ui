@@ -66,6 +66,7 @@ placement
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
 | create | `(option: NotificationOption) => NotificationReactive` | 创建通知框 |
+| destroyAll | `() => void` | 销毁所有弹出的通知框 |
 | error | `(option: NotificationOption) => NotificationReactive` | 调用 `error` 类型的通知框 |
 | info | `(option: NotificationOption) => NotificationReactive` | 调用 `info` 类型的通知框 |
 | success | `(option: NotificationOption) => NotificationReactive` | 调用 `success` 类型的通知框 |

@@ -49,6 +49,7 @@ export interface NotificationApiInjection {
   error: TypedCreate
   /** @deprecated */
   open: Create
+  destroyAll: () => void
 }
 
 export type NotificationProviderInst = NotificationApiInjection
@@ -144,7 +145,8 @@ export default defineComponent({
       success: apis[1],
       warning: apis[2],
       error: apis[3],
-      open
+      open,
+      destroyAll
     }
     provide(notificationApiInjectionKey, api)
     provide(notificationProviderInjectionKey, {
@@ -154,6 +156,11 @@ export default defineComponent({
     // deprecated
     function open (options: NotificationOptions): NotificationReactive {
       return create(options)
+    }
+    function destroyAll (): void {
+      Object.values(notificationListRef.value).forEach((notification) => {
+        notification.hide()
+      })
     }
     return Object.assign(
       {

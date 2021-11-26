@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h, ref, Ref, nextTick } from 'vue'
+import { defineComponent, h, ref, Ref, nextTick, onMounted } from 'vue'
 import {
   NNotificationProvider,
   useNotification,
@@ -175,6 +175,37 @@ describe('notification-provider', () => {
       expect(wrapper.find('.notification-container').classes()).toContain(
         'notification-container--bottom-left'
       )
+    })
+  })
+  it('should work with `destroyAll` method', () => {
+    const Test = defineComponent({
+      setup () {
+        const notification = useNotification()
+        onMounted(() => {
+          notification.info({
+            title: 'info',
+            content: 'info'
+          })
+          notification.info({
+            title: 'info',
+            content: 'info'
+          })
+          nextTick(() => {
+            notification.destroyAll()
+          })
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = mount(NNotificationProvider, {
+      slots: {
+        default: () => <Test />
+      }
+    })
+    void nextTick(async () => {
+      expect(wrapper.find('.notification-container').exists()).toBe(false)
     })
   })
 })

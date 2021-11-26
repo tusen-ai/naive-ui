@@ -66,6 +66,7 @@ placement
 | Name | Type | Description |
 | --- | --- | --- |
 | create | `(option: NotificationOption) => NotificationReactive` | Create a notification. |
+| destroyAll | `() => void` | Destroy all popup notifications. |
 | error | `(option: NotificationOption) => NotificationReactive` | Use `error` type notification. |
 | info | `(option: NotificationOption) => NotificationReactive` | Use `info` type notification. |
 | success | `(option: NotificationOption) => NotificationReactive` | Use `success` type notification. |
