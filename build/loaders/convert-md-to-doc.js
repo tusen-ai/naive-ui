@@ -11,10 +11,6 @@ async function resolveDemoTitle (fileName, demoEntryPath) {
     path.resolve(projectPath, demoEntryPath, '..', fileName),
     'utf-8'
   )
-  // 兼容
-  if (fileName.includes('.vue')) {
-    return demoStr.match(/<title(.*)?>(.*)<\/title>(.*)/)[2]
-  }
   return demoStr.match(/# ([^\n]+)/)[1]
 }
 
@@ -211,7 +207,6 @@ async function convertMd2ComponentDocumentation (
       text: genDemosTemplate(demoInfos, colSpan)
     })
   }
-  console.log('tokens', tokens)
   const docMainTemplate = marked.parser(tokens, {
     gfm: true,
     renderer: mdRenderer

@@ -18,7 +18,7 @@ function getPartsOfDemo (tokens) {
   let title = null
   const contentTokens = []
   contentTokens.links = tokens.links
-  let languageType = 'JS'
+  let languageType = 'js'
   for (const token of tokens) {
     if (token.type === 'heading' && token.depth === 1) {
       title = token.text
