@@ -229,8 +229,14 @@ export function useTableData (
   function mergedOnUpdatePage (page: number): void {
     const { pagination } = props
     if (pagination) {
-      const { onChange } = pagination
+      const {
+        onChange,
+        'onUpdate:page': _onUpdatePage,
+        onUpdatePage
+      } = pagination
       if (onChange) call(onChange, page)
+      if (onUpdatePage) call(onUpdatePage, page)
+      if (_onUpdatePage) call(_onUpdatePage, page)
       doUpdatePage(page)
     }
   }
@@ -260,6 +266,7 @@ export function useTableData (
       ...props.pagination,
       // reset deprecated methods
       onChange: undefined,
+      onUpdatePage: undefined,
       onPageSizeChange: undefined,
       'onUpdate:page': mergedOnUpdatePage,
       'onUpdate:pageSize': mergedOnUpdatePageSize,
