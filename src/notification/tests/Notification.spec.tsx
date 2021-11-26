@@ -159,7 +159,7 @@ describe('notification-provider', () => {
         default: () => <Test />
       }
     })
-    void nextTick(async () => {
+    process.nextTick(async () => {
       expect(wrapper.find('.notification-container').classes()).toContain(
         'notification-container--top-right'
       )
@@ -190,7 +190,7 @@ describe('notification-provider', () => {
             title: 'info',
             content: 'info'
           })
-          nextTick(() => {
+          setTimeout(() => {
             notification.destroyAll()
           })
         })
@@ -204,7 +204,7 @@ describe('notification-provider', () => {
         default: () => <Test />
       }
     })
-    void nextTick(async () => {
+    process.nextTick(async () => {
       expect(wrapper.find('.notification-container').exists()).toBe(false)
     })
   })
