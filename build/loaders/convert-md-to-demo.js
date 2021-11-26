@@ -196,4 +196,9 @@ function convertMd2Demo (text, { resourcePath, relativeUrl }) {
   return vueComponent
 }
 
-module.exports = convertMd2Demo
+module.exports = {
+  getFileName,
+  genVueComponent,
+  mergeParts,
+  convertMd2Demo
+}

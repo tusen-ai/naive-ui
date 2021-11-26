@@ -1,8 +1,6 @@
-<markdown>
-  # 基础用法
+<title>基础用法</title>
 
-  Javascript、Python、Cpp 的例子。
-</markdown>
+<content>Javascript、Python、Cpp 的例子。</content>
 
 <template>
   <div style="overflow: auto;">
