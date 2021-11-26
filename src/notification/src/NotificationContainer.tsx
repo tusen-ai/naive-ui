@@ -17,7 +17,7 @@ export default defineComponent({
       | 'bottom-right'
       >,
       required: true
-    },
+    }
   },
   setup () {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

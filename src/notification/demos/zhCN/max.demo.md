@@ -27,7 +27,7 @@ const Button = {
           this.number++
           this.notification.info({
             title: `通知框序号: ${this.number}`,
-            content: `你可以限制通知框的数量`
+            content: '你可以限制通知框的数量'
           })
         }
       },

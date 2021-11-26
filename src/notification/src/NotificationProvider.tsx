@@ -86,7 +86,7 @@ const notificationProviderProps = {
     | 'bottom-right'
     >,
     default: 'top-right'
-  },
+  }
 }
 
 export type NotificationProviderProps = ExtractPublicPropTypes<
@@ -178,7 +178,7 @@ export default defineComponent({
         {renderSlot(this.$slots, 'default')}
         {this.notificationList.length ? (
           <Teleport to={this.to ?? 'body'}>
-            <NotificationContainer 
+            <NotificationContainer
               scrollable={this.scrollable}
               placement={this.placement}
             >

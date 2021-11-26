@@ -92,7 +92,7 @@ export default c([
       `),
       cM('bottom-left', `
         bottom: 0;
-      `),
+      `)
     ]),
     cB('notification', [
       c('&.notification-transition-enter-from, &.notification-transition-leave-to', `
@@ -240,7 +240,7 @@ export default c([
   ])
 ])
 
-function placementTransformStyle (placement: string ): CNode {
+function placementTransformStyle (placement: string): CNode {
   const [position, direction] = placement.split('-')
   const transformYEnter = position === 'top' ? '-100%' : '100%'
   const transformYLeave = position === 'top' ? '0' : '0'
@@ -252,6 +252,6 @@ function placementTransformStyle (placement: string ): CNode {
     `),
     c('&.notification-transition-leave-from, &.notification-transition-enter-to', `
       transform: translate(${transformXLeave}, ${transformYLeave});
-    `),
+    `)
   ])
 }

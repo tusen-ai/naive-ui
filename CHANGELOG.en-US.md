@@ -7,6 +7,11 @@
 - Fix `n-slider` disabled tooltip at the wrong time.
 - Fix `n-slider` incorrect fill color style, closes [#1670](https://github.com/TuSimple/naive-ui/issues/1670).
 
+### Feats
+
+- `n-notification-provider` add `max` & `placement` prop.
+- `n-notification` add `destroyAll` method, closes [#333](https://github.com/TuSimple/naive-ui/issues/333).
+
 ## 2.21.1 (2021-11-23)
 
 ### Fixes
