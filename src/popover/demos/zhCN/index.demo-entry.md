@@ -8,6 +8,7 @@ Popover 在内容周围弹出一些隐藏的信息。Popover 里面没什么内�
 
 ```demo
 basic
+flip
 trigger
 delay
 no-arrow

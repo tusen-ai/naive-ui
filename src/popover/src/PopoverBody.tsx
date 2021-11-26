@@ -309,6 +309,7 @@ export default defineComponent({
         y: this.y,
         flip: this.flip,
         placement: this.placement,
+        flip: this.flip,
         flipLevel: this.flipLevel,
         containerClass: this.namespace,
         ref: 'followerRef',

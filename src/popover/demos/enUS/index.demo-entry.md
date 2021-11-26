@@ -8,6 +8,7 @@ If you just want to display some basic text message, see [Tooltip](tooltip) inst
 
 ```demo
 basic
+flip
 trigger
 delay
 no-arrow
