@@ -9,6 +9,10 @@
 - 修复 `n-log` 的 `trim` 属性不能独立使用
 - 修复 `n-slider` 对于数值精度的处理问题
 
+### Feats
+
+- `n-input-number` 新增 `keyboard` 属性
+
 ## 2.21.1 (2021-11-23)
 
 ### Fixes

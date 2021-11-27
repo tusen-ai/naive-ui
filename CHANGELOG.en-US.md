@@ -9,6 +9,10 @@
 - Fix `n-log`'s `trim` prop not being independent when used.
 - Fix `n-slider` processing of step value precision.
 
+### Feats
+
+- `n-input-number` add `keyboard` prop.
+
 ## 2.21.1 (2021-11-23)
 
 ### Fixes

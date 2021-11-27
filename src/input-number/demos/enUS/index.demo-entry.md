@@ -14,6 +14,7 @@ size
 step
 validator
 show-button
+disable-keyboard
 ```
 
 ## API
@@ -26,6 +27,7 @@ show-button
 | clearable | `boolean` | `false` | Whether the input is clearable. |
 | default-value | `number \| null` | `null` | Default value when not manually set. |
 | disabled | `boolean` | `false` | Whether to disable the input. |
+| keyboard | `{ ArrowUp?: boolean, ArrowDown?: boolean }` | `{}` | Control the keyboard behavior. If you set corresponding to false, the keyboard behavior will be disabled. |
 | max | `number` | `undefined` | The max value. |
 | min | `number` | `undefined` | The min value. |
 | placeholder | `string` | `'Please Input'` | Placeholder. |
