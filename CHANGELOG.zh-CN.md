@@ -6,6 +6,7 @@
 
 - 修复 `n-slider` tooltip 禁用时机错误问题
 - 修复 `n-slider` 填充色样式错误问题，关闭 [#1670](https://github.com/TuSimple/naive-ui/issues/1670)
+- 修复 `n-data-table` 的 `td-color-hover` 变量颜色错误当表格为条纹时，关闭 [#1686](https://github.com/TuSimple/naive-ui/issues/1686)
 - 修复 `n-log` 的 `trim` 属性不能独立使用
 - 修复 `n-slider` 对于数值精度的处理问题
 
