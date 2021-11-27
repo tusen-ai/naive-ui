@@ -50,6 +50,14 @@ describe('n-log', () => {
     )
   })
 
+  it('should work with `loading` prop', async () => {
+    const wrapper = mount(NLog)
+    expect(wrapper.find('.n-log-loader').exists()).toBe(false)
+
+    await wrapper.setProps({ loading: true })
+    expect(wrapper.find('.n-log-loader').exists()).toBe(true)
+  })
+
   it('should work with `rows` prop', async () => {
     const lineHeight = 20
     const fontSize = 10

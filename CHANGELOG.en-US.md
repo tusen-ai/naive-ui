@@ -6,7 +6,8 @@
 
 - Fix `n-slider` disabled tooltip at the wrong time.
 - Fix `n-slider` incorrect fill color style, closes [#1670](https://github.com/TuSimple/naive-ui/issues/1670).
-- Fix `n-slider` processing of step value precision.
+- Fix `n-log`'s `trim` prop not being independent when used.
+- Fix `n-slider` processing of step value precision.Z
 
 ## 2.21.1 (2021-11-23)
 
