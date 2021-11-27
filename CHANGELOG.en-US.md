@@ -16,6 +16,7 @@
 - Add `tableColorStriped` theme variable, closes [#1686](https://github.com/TuSimple/naive-ui/issues/1686).
 - `n-notification-provider` add `max` & `placement` prop.
 - `n-notification` add `destroyAll` method, closes [#333](https://github.com/TuSimple/naive-ui/issues/333).
+- `n-layout-sider` add `on-after-enter` and `on-after-leave` props, closes [#1241](https://github.com/TuSimple/naive-ui/issues/1241).
 
 ## 2.21.1 (2021-11-23)
 
