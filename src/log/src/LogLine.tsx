@@ -22,14 +22,14 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       inject(logInjectionKey)!
     const selfRef = ref<HTMLElement | null>(null)
-    const mergedLineTrimRef = computed(() => {
-      return trimRef.value ? (props.line || '').trim() : props.line
+    const maybeTrimmedLinesRef = computed(() => {
+      return trimRef.value ? props.line.trim() : props.line
     })
     function setInnerHTML (): void {
       if (selfRef.value) {
         selfRef.value.innerHTML = generateCodeHTML(
           languageRef.value,
-          mergedLineTrimRef.value
+          maybeTrimmedLinesRef.value
         )
       }
     }
@@ -58,11 +58,11 @@ export default defineComponent({
     return {
       highlight: highlightRef,
       selfRef,
-      mergedLineTrim: mergedLineTrimRef
+      maybeTrimmedLines: maybeTrimmedLinesRef
     }
   },
   render () {
-    const { highlight, mergedLineTrim } = this
-    return <pre ref="selfRef">{highlight ? null : mergedLineTrim}</pre>
+    const { highlight, maybeTrimmedLines } = this
+    return <pre ref="selfRef">{highlight ? null : maybeTrimmedLines}</pre>
   }
 })
