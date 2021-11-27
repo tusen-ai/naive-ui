@@ -10,6 +10,7 @@ drag
 submit-manually
 controlled
 on-finish
+download
 default-files
 before-upload
 image-style
@@ -43,6 +44,7 @@ retry-debug
 | show-cancel-button | `boolean` | `true` | 是否显示取消按钮（在 pending、uploading、error 的时候展示），点击取消按钮会触发 `on-remove` 回调 |
 | show-remove-button | `boolean` | `true` | 是否显示删除按钮（在 finished 的时候展示），点击删除按钮会触发 `on-remove` 回调 |
 | show-retry-button | `boolean` | `true` | 是否显示重新上传按钮（在 error 时展示） |
+| show-download-button | `boolean` | `false` | 是否显示下载按钮（在 finished 时展示） |
 | show-file-list | `boolean` | `true` | 是否显示文件列表 |
 | show-preview-button | `boolean` | `true` | 是否允许显示预览按钮（在 `list-type` 为 `image-card` 时生效） |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |
@@ -51,6 +53,8 @@ retry-debug
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: UploadFileInfo[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |
 | on-preview | `(file: FileInfo) => void` | `undefined` | 点击文件链接或预览按钮的回调函数 |
+
+| on-download | `(file: FileInfo) => void` | `undefined` | 点击文件下载按钮的回调函数 |
 
 #### UploadFileInfo Type
 

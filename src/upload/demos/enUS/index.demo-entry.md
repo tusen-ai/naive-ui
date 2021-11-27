@@ -15,6 +15,7 @@ before-upload
 image-style
 image-card-style
 abstract
+download
 ```
 
 ## API
@@ -42,6 +43,7 @@ abstract
 | show-cancel-button | `boolean` | `true` | Show a cancel button (while uploading). Use the `on-remove` callback for this event. |
 | show-remove-button | `boolean` | `true` | Show a remove button (after upload completed). Use the `on-remove` callback for this event. |
 | show-retry-button | `boolean` | `true` | Show a retry button (for a failed upload). |
+| show-download-button | `boolean` | `false` | Show a download button (for a completed upload). |
 | show-file-list | `boolean` | `true` | Show a file list. |
 | show-preview-button | `boolean` | `true` | Show a preview button (when `list-type` is `image-card`). Use the `on-preview` callback for this event. |
 | with-credentials | `boolean` | `false` | Any credentials to be sent with the request (e.g. cookie). |
@@ -51,6 +53,7 @@ abstract
 | on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => boolean \| Promise<boolean> \| any` | `() => true` | File removed callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel this removal. |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Upload ready to start callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel the upload. |
 | on-preview | `(file: FileInfo) => void` | `undefined` | Callback for clicking file links or preview buttons. |
+| on-download | `(file: FileInfo) => void` | `undefined` | Callback for clicking download buttons. |
 
 #### UploadFileInfo Type
 
