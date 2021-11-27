@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h, ref, Ref, nextTick } from 'vue'
+import { defineComponent, h, ref, Ref, nextTick, onMounted } from 'vue'
 import {
   NNotificationProvider,
   useNotification,
@@ -106,111 +106,109 @@ describe('n-notification', () => {
   })
 })
 
-// TODO: fix tests
-// notification environment's onBeforeUnmount will be called without any signal
-
-// describe('notification-provider', () => {
-//   it('props.max', (done) => {
-//     const Test = defineComponent({
-//       setup () {
-//         const notification = useNotification()
-//         onMounted(() => {
-//           notification.info({
-//             title: 'info',
-//             content: 'info'
-//           })
-//           notification.info({
-//             title: 'info',
-//             content: 'info'
-//           })
-//           notification.info({
-//             title: 'info',
-//             content: 'info'
-//           })
-//         })
-//       },
-//       render () {
-//         return null
-//       }
-//     })
-//     const wrapper = mount(NNotificationProvider, {
-//       props: {
-//         max: 2
-//       },
-//       slots: {
-//         default: () => <Test />
-//       }
-//     })
-//     setTimeout(() => {
-//       expect(document.querySelectorAll('.n-notification').length).toBe(2)
-//       wrapper.unmount()
-//       done()
-//     })
-//   })
-//   it('should work with `placement` prop', async () => {
-//     const Test = defineComponent({
-//       setup () {
-//         const notification = useNotification()
-//         notification.info({
-//           title: 'info',
-//           content: 'info'
-//         })
-//       },
-//       render () {
-//         return null
-//       }
-//     })
-//     const wrapper = mount(NNotificationProvider, {
-//       slots: {
-//         default: () => <Test />
-//       }
-//     })
-//     expect(wrapper.find('.notification-container').classes()).toContain(
-//       'notification-container--top-right'
-//     )
-//     await wrapper.setProps({ placement: 'top-left' })
-//     expect(wrapper.find('.notification-container').classes()).toContain(
-//       'notification-container--top-right'
-//     )
-//     await wrapper.setProps({ placement: 'bottom-right' })
-//     expect(wrapper.find('.notification-container').classes()).toContain(
-//       'notification-container--bottom-right'
-//     )
-//     await wrapper.setProps({ placement: 'bottom-left' })
-//     expect(wrapper.find('.notification-container').classes()).toContain(
-//       'notification-container--bottom-left'
-//     )
-//   })
-//   it('should work with `destroyAll` method', (done) => {
-//     const Test = defineComponent({
-//       setup () {
-//         const notification = useNotification()
-//         onMounted(() => {
-//           notification.info({
-//             title: 'info',
-//             content: 'info'
-//           })
-//           notification.info({
-//             title: 'info',
-//             content: 'info'
-//           })
-//           setTimeout(() => {
-//             notification.destroyAll()
-//           })
-//         })
-//       },
-//       render () {
-//         return null
-//       }
-//     })
-//     const wrapper = mount(NNotificationProvider, {
-//       slots: {
-//         default: () => <Test />
-//       }
-//     })
-//     setTimeout(() => {
-//       expect(wrapper.find('.notification-container').exists()).toBe(false)
-//       done()
-//     })
-//   })
-// })
+describe('notification-provider', () => {
+  it('props.max', (done) => {
+    const Test = defineComponent({
+      setup () {
+        const notification = useNotification()
+        onMounted(() => {
+          notification.info({
+            title: 'info',
+            content: 'info'
+          })
+          notification.info({
+            title: 'info',
+            content: 'info'
+          })
+          notification.info({
+            title: 'info',
+            content: 'info'
+          })
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = mount(NNotificationProvider, {
+      props: {
+        max: 2
+      },
+      slots: {
+        default: () => <Test />
+      }
+    })
+    setTimeout(() => {
+      expect(document.querySelectorAll('.n-notification').length).toBe(2)
+      wrapper.unmount()
+      done()
+    })
+  })
+  it('should work with `placement` prop', async () => {
+    const Test = defineComponent({
+      setup () {
+        const notification = useNotification()
+        notification.info({
+          title: 'info',
+          content: 'info'
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = mount(NNotificationProvider, {
+      slots: {
+        default: () => <Test />
+      }
+    })
+    await nextTick()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const container = document.querySelector('.n-notification-container')!
+    expect(container).not.toBeFalsy()
+    console.log(container.outerHTML)
+    expect(
+      container.classList.contains('n-notification-container--top-right')
+    ).toEqual(true)
+    await wrapper.setProps({ placement: 'top-left' })
+    expect(
+      container.classList.contains('n-notification-container--top-left')
+    ).toEqual(true)
+    await wrapper.setProps({ placement: 'bottom-right' })
+    expect(
+      container.classList.contains('n-notification-container--bottom-right')
+    ).toEqual(true)
+    await wrapper.setProps({ placement: 'bottom-left' })
+    expect(
+      container.classList.contains('n-notification-container--bottom-left')
+    ).toEqual(true)
+  })
+  it('should work with `destroyAll` method', async () => {
+    const Test = defineComponent({
+      setup () {
+        const notification = useNotification()
+        onMounted(() => {
+          notification.info({
+            title: 'info',
+            content: 'info'
+          })
+          notification.info({
+            title: 'info',
+            content: 'info'
+          })
+          notification.destroyAll()
+        })
+      },
+      render () {
+        return null
+      }
+    })
+    const wrapper = mount(NNotificationProvider, {
+      slots: {
+        default: () => <Test />
+      }
+    })
+    await nextTick()
+    expect(wrapper.find('.notification-container').exists()).toBe(false)
+  })
+})

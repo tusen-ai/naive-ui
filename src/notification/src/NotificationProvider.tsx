@@ -102,7 +102,10 @@ export default defineComponent({
       const key = createId()
       const destroy = (): void => {
         leavingKeySet.add(key)
-        notificationRefs[key].hide()
+        // If you push n + 1 message when max is n, notificationRefs[key] maybe not be set
+        if (notificationRefs[key]) {
+          notificationRefs[key].hide()
+        }
       }
       const notificationReactive = reactive({
         ...options,
@@ -113,11 +116,20 @@ export default defineComponent({
       })
       const { max } = props
       if (max && notificationListRef.value.length - leavingKeySet.size >= max) {
+        let someoneMountedRemoved = false
+        let index = 0
         for (const notification of notificationListRef.value) {
           if (!leavingKeySet.has(notification.key)) {
-            notification.destroy()
+            if (notificationRefs[notification.key]) {
+              notification.destroy()
+              someoneMountedRemoved = true
+            }
             break
           }
+          index++
+        }
+        if (!someoneMountedRemoved) {
+          notificationListRef.value.splice(index, 1)
         }
       }
       notificationListRef.value.push(notificationReactive)
