@@ -6,6 +6,7 @@
 
 - 修复 `n-slider` tooltip 禁用时机错误问题
 - 修复 `n-slider` 填充色样式错误问题，关闭 [#1670](https://github.com/TuSimple/naive-ui/issues/1670)
+- 修复 `n-log` 的 `trim` 属性不能独立使用
 
 ## 2.21.1 (2021-11-23)
 
