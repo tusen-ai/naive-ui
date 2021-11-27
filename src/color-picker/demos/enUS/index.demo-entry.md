@@ -39,7 +39,7 @@ native
 
 ### How to get color value from name?
 
-Naive doesn't provide it builtin. You can create a color map, like (https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L803)[https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L803].
+Naive doesn't provide it builtin. You can create a color map, like [https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L803](https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L803).
 
 Or you can create a function like this.
 

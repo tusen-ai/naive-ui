@@ -39,7 +39,7 @@ native
 
 ### 如何从颜色名称转化为色值
 
-naive 不内置提供这种功能，你可以自己建立一个对象进行映射，见 (https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L803)[https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L803]。
+naive 不内置提供这种功能，你可以自己建立一个对象进行映射，见 [https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L803](https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L803)。
 
 或者你自己写一个函数，例如：
 
