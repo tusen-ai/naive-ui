@@ -14,6 +14,11 @@
 - `n-input-number` add `keyboard` prop.
 - Add `tableColorStriped` theme variable, closes [#1686](https://github.com/TuSimple/naive-ui/issues/1686).
 
+### Feats
+
+- `n-notification-provider` add `max` & `placement` prop.
+- `n-notification` add `destroyAll` method, closes [#333](https://github.com/TuSimple/naive-ui/issues/333).
+
 ## 2.21.1 (2021-11-23)
 
 ### Fixes

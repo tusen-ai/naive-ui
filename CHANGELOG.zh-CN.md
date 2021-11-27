@@ -14,6 +14,11 @@
 - `n-input-number` 新增 `keyboard` 属性
 - 新增 `tableColorStriped` 主题变量，关闭 [#1686](https://github.com/TuSimple/naive-ui/issues/1686)
 
+### Feats
+
+- `n-notification-provider` 新增 `max` & `placement` 属性
+- `n-notification` 新增 `detroyAll` 方法，关闭 [#333](https://github.com/TuSimple/naive-ui/issues/333)
+
 ## 2.21.1 (2021-11-23)
 
 ### Fixes

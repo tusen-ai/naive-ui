@@ -46,6 +46,8 @@ change-content
 scrollable
 closable
 duration
+max
+placement
 ```
 
 ## API
@@ -54,6 +56,8 @@ duration
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `'top-right'` | Placement of all notifications. |
+| max | `number` | `undefined` | Limit the number of notifications to display. |
 | scrollable | `boolean` | `true` | Whether notification can be scroll. |
 | to | `string \| HTMLElement` | `'body'` | Container node of notification container. |
 
@@ -62,6 +66,7 @@ duration
 | Name | Type | Description |
 | --- | --- | --- |
 | create | `(option: NotificationOption) => NotificationReactive` | Create a notification. |
+| destroyAll | `() => void` | Destroy all popup notifications. |
 | error | `(option: NotificationOption) => NotificationReactive` | Use `error` type notification. |
 | info | `(option: NotificationOption) => NotificationReactive` | Use `info` type notification. |
 | success | `(option: NotificationOption) => NotificationReactive` | Use `success` type notification. |

@@ -49,6 +49,7 @@ export interface NotificationApiInjection {
   error: TypedCreate
   /** @deprecated */
   open: Create
+  destroyAll: () => void
 }
 
 export type NotificationProviderInst = NotificationApiInjection
@@ -75,6 +76,16 @@ const notificationProviderProps = {
   scrollable: {
     type: Boolean,
     default: true
+  },
+  max: Number,
+  placement: {
+    type: String as PropType<
+    | 'top-left'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-right'
+    >,
+    default: 'top-right'
   }
 }
 
@@ -99,6 +110,10 @@ export default defineComponent({
         hide: destroy,
         deactivate: destroy
       })
+      const { max } = props
+      if (max && notificationListRef.value.length >= max) {
+        notificationListRef.value.shift()
+      }
       notificationListRef.value.push(notificationReactive)
       return notificationReactive
     }
@@ -130,7 +145,8 @@ export default defineComponent({
       success: apis[1],
       warning: apis[2],
       error: apis[3],
-      open
+      open,
+      destroyAll
     }
     provide(notificationApiInjectionKey, api)
     provide(notificationProviderInjectionKey, {
@@ -140,6 +156,11 @@ export default defineComponent({
     // deprecated
     function open (options: NotificationOptions): NotificationReactive {
       return create(options)
+    }
+    function destroyAll (): void {
+      Object.values(notificationListRef.value).forEach((notification) => {
+        notification.hide()
+      })
     }
     return Object.assign(
       {
@@ -157,7 +178,10 @@ export default defineComponent({
         {renderSlot(this.$slots, 'default')}
         {this.notificationList.length ? (
           <Teleport to={this.to ?? 'body'}>
-            <NotificationContainer scrollable={this.scrollable}>
+            <NotificationContainer
+              scrollable={this.scrollable}
+              placement={this.placement}
+            >
               {{
                 default: () => {
                   return this.notificationList.map((notification) => {
