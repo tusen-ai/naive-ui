@@ -305,7 +305,7 @@ export default defineComponent({
       const { value: precision } = precisionRef
       let closestMark
       // if it is a stepping, priority will be given to the marks
-      // on the rail，otherwise take the nearest one
+      // on the rail, otherwise take the nearest one
       if (stepping) {
         const currentStep = Number((currentValue / step).toFixed(precision))
         const actualStep = Math.floor(currentStep)
