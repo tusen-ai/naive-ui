@@ -2,7 +2,7 @@
 
 ```html
 <n-notification-provider :max="3">
-   <Button />
+  <notification-button />
 </n-notification-provider>
 ```
 
@@ -10,13 +10,13 @@
 import { defineComponent, ref, h } from 'vue'
 import { useNotification, NButton } from 'naive-ui'
 
-const Button = {
+const NotificationButton = {
   setup () {
     const notification = useNotification()
-    const number = ref(0)
+    const index = ref(0)
     return {
       notification,
-      number
+      index
     }
   },
   render () {
@@ -24,21 +24,21 @@ const Button = {
       NButton,
       {
         onClick: () => {
-          this.number++
+          this.index++
           this.notification.info({
-            title: `Notification number: ${this.number}`,
-            content: 'You can limit the number of notifications'
+            title: `Notification index: ${this.index}`,
+            content: 'You can limit the index of notifications'
           })
         }
       },
-      { default: 'Max notifications: 3' }
+      { default: () => 'Max notification count: 3' }
     )
   }
 }
 
 export default defineComponent({
   components: {
-    Button
+    NotificationButton
   }
 })
 ```

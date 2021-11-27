@@ -25,7 +25,6 @@ import { useNotification } from 'naive-ui'
 export default defineComponent({
   setup () {
     const notification = useNotification()
-
     return {
       warning () {
         notification.warning('...')

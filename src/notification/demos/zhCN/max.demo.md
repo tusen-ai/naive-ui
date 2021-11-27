@@ -2,7 +2,7 @@
 
 ```html
 <n-notification-provider :max="3">
-   <Button />
+  <notification-button />
 </n-notification-provider>
 ```
 
@@ -10,13 +10,13 @@
 import { defineComponent, ref, h } from 'vue'
 import { useNotification, NButton } from 'naive-ui'
 
-const Button = {
+const NotificationButton = {
   setup () {
     const notification = useNotification()
-    const number = ref(0)
+    const index = ref(0)
     return {
       notification,
-      number
+      index
     }
   },
   render () {
@@ -24,21 +24,21 @@ const Button = {
       NButton,
       {
         onClick: () => {
-          this.number++
+          this.index++
           this.notification.info({
-            title: `通知框序号: ${this.number}`,
+            title: `通知框序号: ${this.index}`,
             content: '你可以限制通知框的数量'
           })
         }
       },
-      { default: '通知框的最大数: 3' }
+      { default: () => '最多允许 3 个通知' }
     )
   }
 }
 
 export default defineComponent({
   components: {
-    Button
+    NotificationButton
   }
 })
 ```

@@ -56,6 +56,18 @@ export default c([
         ])
       ])
     ]),
+    cM('top-right, bottom-right', [
+      cB('notification', `
+        margin-left: 28px;
+        margin-right: 16px;
+      `)
+    ]),
+    cM('top-left, bottom-left', [
+      cB('notification', `
+        margin-left: 16px;
+        margin-right: 28px;
+      `)
+    ]),
     cM('top-right', `
       right: 0;
       top: 12px;
@@ -132,8 +144,6 @@ export default c([
       overflow: hidden;
       flex-shrink: 0;
       margin-bottom: 12px;
-      margin-left: 28px;
-      margin-right: 16px;
       padding-left: var(--padding-left);
       padding-right: var(--padding-right);
       width: var(--width);

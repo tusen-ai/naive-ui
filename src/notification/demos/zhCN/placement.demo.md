@@ -1,20 +1,22 @@
-# Placement
+# 弹出位置
 
 ```html
 <n-notification-provider :placement="placement">
-  <Buttons @changePlacement="changePlacement" />
+  <placement-buttons @placement-change="handlePlacementChange" />
 </n-notification-provider>
 ```
 
 ```js
 import { defineComponent, h, ref } from 'vue'
-import { useNotification, NButton } from 'naive-ui'
+import { useNotification, NButton, NSpace } from 'naive-ui'
 
-const Buttons = {
-  emits: ['changePlacement'],
+const PlacementButtons = {
+  props: {
+    onPlacementChange: Function
+  },
   setup () {
     const notification = useNotification()
-    const placementArray = [
+    const placementList = [
       { placement: 'top-left', text: '左上' },
       { placement: 'top-right', text: '右上' },
       { placement: 'bottom-left', text: '左下' },
@@ -22,40 +24,40 @@ const Buttons = {
     ]
     return {
       notification,
-      placementArray
+      placementList
     }
   },
   render () {
-    return this.placementArray.map((item) =>
-      h(
-        NButton,
-        {
-          onClick: () => {
-            this.$emit('changePlacement', item.placement)
-            this.notification.info({
-              title: item.placement,
-              content: 'You can change the placement'
-            })
-          },
-          style: {
-            marginRight: '10px'
-          }
-        },
-        { default: () => item.text }
-      )
-    )
+    return h(NSpace, null, {
+      default: () =>
+        this.placementList.map((item) =>
+          h(
+            NButton,
+            {
+              onClick: () => {
+                this.onPlacementChange(item.placement)
+                this.notification.info({
+                  title: item.placement,
+                  content: 'You can change the placement'
+                })
+              }
+            },
+            { default: () => item.text }
+          )
+        )
+    })
   }
 }
 
 export default defineComponent({
   components: {
-    Buttons
+    PlacementButtons
   },
   setup () {
     const placementRef = ref('top-right')
     return {
       placement: placementRef,
-      changePlacement (val) {
+      handlePlacementChange (val) {
         placementRef.value = val
       }
     }
