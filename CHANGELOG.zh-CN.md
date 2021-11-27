@@ -14,8 +14,7 @@
 - 修复 `n-log` 的 `trim` 属性不能独立使用
 - 修复 `n-slider` 对于数值精度的处理问题
 - 修复 `n-date-picker` 当 `time-picker` 输入为空时报错，关闭 [#1678](https://github.com/TuSimple/naive-ui/issues/1678)
-- 修复 `n-popover` 当 `trigger` 为 `focus` 不生效的问题
-- 修复 `n-scrollbar` 对于鼠标外部抬起事件触发对象的判断
+- 修复 `n-popover` 样式中有不合法的行
 
 ### Feats
 
@@ -24,6 +23,11 @@
 - `n-notification-provider` 新增 `max` & `placement` 属性
 - `n-notification` 新增 `detroyAll` 方法，关闭 [#333](https://github.com/TuSimple/naive-ui/issues/333)
 - `n-layout-sider` 新增 `on-after-enter` 和 `on-after-leave` 属性，关闭 [#1241](https://github.com/TuSimple/naive-ui/issues/1241)
+
+### TODO
+
+- `n-popover` focus trigger.
+- `n-scrollbar` click bar.
 
 ## 2.21.1 (2021-11-23)
 
