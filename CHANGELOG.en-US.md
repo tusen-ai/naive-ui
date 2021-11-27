@@ -8,6 +8,7 @@
 - Fix `n-slider` incorrect fill color style, closes [#1670](https://github.com/TuSimple/naive-ui/issues/1670).
 - Fix `n-log`'s `trim` prop not being independent when used.
 - Fix `n-slider` processing of step value precision.
+- Fix `n-date-picker` throw error when `time-picker` input is empty, closes [#1678](https://github.com/TuSimple/naive-ui/issues/1678).
 
 ### Feats
 

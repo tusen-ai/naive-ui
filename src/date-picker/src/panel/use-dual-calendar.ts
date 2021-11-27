@@ -523,10 +523,12 @@ function useDualCalendar (
       panelCommon.dateFnsOptions.value
     )
   }
-  function handleStartTimePickerChange (value: number): void {
+  function handleStartTimePickerChange (value: number | null): void {
+    if (value === null) return
     changeStartDateTime(value)
   }
-  function handleEndTimePickerChange (value: number): void {
+  function handleEndTimePickerChange (value: number | null): void {
+    if (value === null) return
     changeEndDateTime(value)
   }
   function handleRangeShortcutMouseenter (shortcut: Shortcuts[string]): void {
