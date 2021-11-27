@@ -6,6 +6,7 @@
 
 - 修复 `n-slider` tooltip 禁用时机错误问题
 - 修复 `n-slider` 填充色样式错误问题，关闭 [#1670](https://github.com/TuSimple/naive-ui/issues/1670)
+- 修复 `n-slider` 对于数值精度的处理问题
 
 ## 2.21.1 (2021-11-23)
 
