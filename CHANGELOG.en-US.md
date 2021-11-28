@@ -6,6 +6,7 @@
 
 - Fix `n-slider` disabled tooltip at the wrong time.
 - Fix `n-slider` incorrect fill color style, closes [#1670](https://github.com/TuSimple/naive-ui/issues/1670).
+- Fix `n-data-table`'s pagination `onUpdatePage` prop trigger twice, closes [#1666](https://github.com/TuSimple/naive-ui/issues/1666).
 - Fix `n-log`'s `trim` prop not being independent when used.
 - Fix `n-slider` processing of step value precision.
 - Fix `n-date-picker` throw error when `time-picker` input is empty, closes [#1678](https://github.com/TuSimple/naive-ui/issues/1678).

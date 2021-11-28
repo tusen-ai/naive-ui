@@ -266,6 +266,8 @@ export function useTableData (
       ...props.pagination,
       // reset deprecated methods
       onChange: undefined,
+      onUpdatePage: undefined,
+      onUpdatePageSize: undefined,
       onPageSizeChange: undefined,
       'onUpdate:page': mergedOnUpdatePage,
       'onUpdate:pageSize': mergedOnUpdatePageSize,
@@ -285,8 +287,8 @@ export function useTableData (
   function doUpdatePage (page: number): void {
     const { 'onUpdate:page': _onUpdatePage, onPageChange, onUpdatePage } = props
     if (onUpdatePage) call(onUpdatePage, page)
-    if (onPageChange) call(onPageChange, page)
     if (_onUpdatePage) call(_onUpdatePage, page)
+    if (onPageChange) call(onPageChange, page)
     uncontrolledCurrentPageRef.value = page
   }
   function doUpdatePageSize (pageSize: number): void {
