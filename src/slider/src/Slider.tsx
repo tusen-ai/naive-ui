@@ -104,9 +104,16 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
+    // dom ref
+    const handleRailRef = ref<HTMLElement | null>(null)
+    const [handleRefs, setHandleRefs] = useRefs<HTMLElement>()
+    const [followerRefs, setFollowerRefs] = useRefs<FollowerInst>()
+    const followerEnabledIndexSetRef = ref<Set<number>>(new Set())
+
+    // data ref
     const formItem = useFormItem(props)
     const { mergedDisabledRef } = formItem
-    const handleRailRef = ref<HTMLElement | null>(null)
     const precisionRef = computed(() => {
       const { step } = props
       if (step <= 0 || step === 'mark') return 0
@@ -117,9 +124,6 @@ export default defineComponent({
       }
       return precision
     })
-    const [handleRefs, setHandleRefs] = useRefs<HTMLElement>()
-    const [followerRefs, setFollowerRefs] = useRefs<FollowerInst>()
-
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -132,11 +136,9 @@ export default defineComponent({
         clampValue
       )
     })
-
     const handleCountExceeds2Ref = computed(
       () => arrifiedValueRef.value.length > 2
     )
-
     const mergedPlacementRef = computed(() => {
       return props.placement === undefined
         ? props.vertical
@@ -144,24 +146,25 @@ export default defineComponent({
           : 'top'
         : props.placement
     })
-
     const markValuesRef = computed(() => {
       const { marks } = props
       return marks ? Object.keys(marks).map(parseFloat) : null
     })
 
+    // status ref
     const activeIndexRef = ref(-1)
     const previousIndexRef = ref(-1)
     const hoverIndexRef = ref(-1)
     const draggingRef = ref(false)
 
+    // style ref
+    const dotTransitionDisabledRef = ref(false)
     const styleDirectionRef = computed(() => {
       const { vertical, reverse } = props
       const left = reverse ? 'right' : 'left'
       const bottom = reverse ? 'top' : 'bottom'
       return vertical ? bottom : left
     })
-
     const fillStyleRef = computed(() => {
       if (handleCountExceeds2Ref.value) return
       const values = arrifiedValueRef.value
@@ -182,9 +185,6 @@ export default defineComponent({
             width: `${end - start}%`
           }
     })
-
-    const dotTransitionDisabledRef = ref(false)
-
     const markInfosRef = computed(() => {
       const mergedMarks = []
       const { marks } = props
@@ -215,35 +215,6 @@ export default defineComponent({
       return mergedMarks
     })
 
-    const followerEnabledIndexSetRef = ref<Set<number>>(new Set())
-
-    function isShowTooltip (index: number): boolean {
-      return (
-        props.showTooltip ||
-        hoverIndexRef.value === index ||
-        (activeIndexRef.value === index && draggingRef.value)
-      )
-    }
-
-    function isSkipCSSDetection (index: number): boolean {
-      return !(
-        activeIndexRef.value === index && previousIndexRef.value === index
-      )
-    }
-
-    function focusActiveHandle (index: number): void {
-      if (~index) {
-        activeIndexRef.value = index
-        handleRefs.value.get(index)?.focus()
-      }
-    }
-
-    function syncPosition (): void {
-      followerRefs.value.forEach((inst, index) => {
-        if (isShowTooltip(index)) inst.syncPosition()
-      })
-    }
-
     function getHandleStyle (value: number, index: number): Record<string, any> {
       const percentage = valueToPercentage(value)
       const { value: styleDirection } = styleDirectionRef
@@ -252,7 +223,29 @@ export default defineComponent({
         zIndex: index === activeIndexRef.value ? 1 : 0
       }
     }
-
+    function isShowTooltip (index: number): boolean {
+      return (
+        props.showTooltip ||
+        hoverIndexRef.value === index ||
+        (activeIndexRef.value === index && draggingRef.value)
+      )
+    }
+    function isSkipCSSDetection (index: number): boolean {
+      return !(
+        activeIndexRef.value === index && previousIndexRef.value === index
+      )
+    }
+    function focusActiveHandle (index: number): void {
+      if (~index) {
+        activeIndexRef.value = index
+        handleRefs.value.get(index)?.focus()
+      }
+    }
+    function syncPosition (): void {
+      followerRefs.value.forEach((inst, index) => {
+        if (isShowTooltip(index)) inst.syncPosition()
+      })
+    }
     function doUpdateValue (value: number | number[]): void {
       const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
@@ -262,7 +255,6 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
-
     function dispatchValueUpdate (value: number | number[]): void {
       const { range } = props
       if (range) {
@@ -279,7 +271,6 @@ export default defineComponent({
         }
       }
     }
-
     function doDispatchValue (value: number, index: number): void {
       if (props.range) {
         const values = arrifiedValueRef.value.slice()
@@ -290,34 +281,7 @@ export default defineComponent({
       }
     }
 
-    function getClosestMark (
-      currentValue: number,
-      markValues = markValuesRef.value,
-      buffer?: number
-    ): ClosestMark | null {
-      if (markValues) {
-        let closestMark = null
-        let index = -1
-        while (++index < markValues.length) {
-          const diff = markValues[index] - currentValue
-          const distance = Math.abs(diff)
-          if (
-            // find marks in the same direction
-            (buffer === undefined || diff * buffer > 0) &&
-            (closestMark === null || distance < closestMark.distance)
-          ) {
-            closestMark = {
-              value: markValues[index],
-              distance,
-              index
-            }
-          }
-        }
-        return closestMark
-      }
-      return null
-    }
-
+    // value conversion
     function sanitizeValue (
       value: number,
       currentValue: number,
@@ -328,7 +292,7 @@ export default defineComponent({
         stepBuffer = value - currentValue > 0 ? 1 : -1
       }
       const markValues = markValuesRef.value || []
-      const { min, max, step } = props
+      const { step } = props
       if (step === 'mark') {
         const closestMark = getClosestMark(
           value,
@@ -338,61 +302,90 @@ export default defineComponent({
         return closestMark ? closestMark.value : currentValue
       }
       if (step <= 0) return currentValue
-      const roundValue = getRoundValue(value)
-      // ensure accurate step
-      const stepValue = new Array(Math.floor((max - min) / step) + 1)
-        .fill('')
-        .map((_, index) => step * index + min)
-      // If it is a stepping, priority will be given to the marks
-      // on the rail，otherwise take the nearest one
-      const closestMark = stepping
-        ? getClosestMark(currentValue, stepValue.concat(markValues), stepBuffer)
-        : getClosestMark(value, markValues.concat(roundValue))
+      const { value: precision } = precisionRef
+      let closestMark
+      // if it is a stepping, priority will be given to the marks
+      // on the rail, otherwise take the nearest one
+      if (stepping) {
+        const currentStep = Number((currentValue / step).toFixed(precision))
+        const actualStep = Math.floor(currentStep)
+        const leftStep = currentStep > actualStep ? actualStep : actualStep - 1
+        const rightStep = currentStep < actualStep ? actualStep : actualStep + 1
+        closestMark = getClosestMark(
+          currentValue,
+          [
+            Number((leftStep * step).toFixed(precision)),
+            Number((rightStep * step).toFixed(precision)),
+            ...markValues
+          ],
+          stepBuffer
+        )
+      } else {
+        const roundValue = getRoundValue(value)
+        closestMark = getClosestMark(value, [...markValues, roundValue])
+      }
       return closestMark ? clampValue(closestMark.value) : currentValue
     }
-
     function clampValue (value: number): number {
       return Math.min(props.max, Math.max(props.min, value))
     }
-
     function valueToPercentage (value: number): number {
       const { max, min } = props
       return ((value - min) / (max - min)) * 100
     }
-
     function percentageToValue (percentage: number): number {
       const { max, min } = props
       return min + (max - min) * percentage
     }
-
     function getRoundValue (value: number): number {
       const { step, min } = props
       if (step <= 0 || step === 'mark') return value
       const newValue = Math.round((value - min) / step) * step + min
       return Number(newValue.toFixed(precisionRef.value))
     }
-
+    function getClosestMark (
+      currentValue: number,
+      markValues = markValuesRef.value,
+      buffer?: number
+    ): ClosestMark | null {
+      if (!markValues || !markValues.length) return null
+      let closestMark = null
+      let index = -1
+      while (++index < markValues.length) {
+        const diff = markValues[index] - currentValue
+        const distance = Math.abs(diff)
+        if (
+          // find marks in the same direction
+          (buffer === undefined || diff * buffer > 0) &&
+          (closestMark === null || distance < closestMark.distance)
+        ) {
+          closestMark = {
+            index,
+            distance,
+            value: markValues[index]
+          }
+        }
+      }
+      return closestMark
+    }
     function getPointValue (event: MouseEvent | TouchEvent): number | undefined {
       const railEl = handleRailRef.value
       if (!railEl) return
-
       const touchEvent = isTouchEvent(event) ? event.touches[0] : event
       const railRect = railEl.getBoundingClientRect()
-
       let percentage: number
       if (props.vertical) {
         percentage = (railRect.bottom - touchEvent.clientY) / railRect.height
       } else {
         percentage = (touchEvent.clientX - railRect.left) / railRect.width
       }
-
       if (props.reverse) {
         percentage = 1 - percentage
       }
-
       return percentageToValue(percentage)
     }
 
+    // dom event handle
     function handleRailKeyDown (e: KeyboardEvent): void {
       if (mergedDisabledRef.value) return
       const { vertical, reverse } = props
@@ -415,7 +408,6 @@ export default defineComponent({
           break
       }
     }
-
     function handleStepValue (ratio: number): void {
       const activeIndex = activeIndexRef.value
       if (activeIndex === -1) return
@@ -431,7 +423,6 @@ export default defineComponent({
         activeIndex
       )
     }
-
     function handleRailMouseDown (event: MouseEvent | TouchEvent): void {
       if (mergedDisabledRef.value) return
       if (!isTouchEvent(event) && event.button !== eventButtonLeft) {
@@ -439,12 +430,10 @@ export default defineComponent({
       }
       const pointValue = getPointValue(event)
       if (pointValue === undefined) return
-
       const values = arrifiedValueRef.value.slice()
       const activeIndex = props.range
         ? getClosestMark(pointValue, values)?.index ?? -1
         : 0
-
       if (activeIndex !== -1) {
         // avoid triggering scrolling on touch
         event.preventDefault()
@@ -456,47 +445,39 @@ export default defineComponent({
         )
       }
     }
-
     function startDragging (): void {
       if (!draggingRef.value) {
         draggingRef.value = true
-
         on('touchend', document, handleMouseUp)
         on('mouseup', document, handleMouseUp)
         on('touchmove', document, handleMouseMove)
         on('mousemove', document, handleMouseMove)
       }
     }
-
     function stopDragging (): void {
       if (draggingRef.value) {
         draggingRef.value = false
-
         off('touchend', document, handleMouseUp)
         off('mouseup', document, handleMouseUp)
         off('touchmove', document, handleMouseMove)
         off('mousemove', document, handleMouseMove)
       }
     }
-
     function handleMouseMove (event: MouseEvent | TouchEvent): void {
       const { value: activeIndex } = activeIndexRef
       if (!draggingRef.value || activeIndex === -1) {
         stopDragging()
         return
       }
-
       const pointValue = getPointValue(event) as number
       doDispatchValue(
         sanitizeValue(pointValue, arrifiedValueRef.value[activeIndex]),
         activeIndex
       )
     }
-
     function handleMouseUp (): void {
       stopDragging()
     }
-
     function handleHandleFocus (index: number): void {
       activeIndexRef.value = index
       // Wake focus style
@@ -504,7 +485,6 @@ export default defineComponent({
         hoverIndexRef.value = index
       }
     }
-
     function handleHandleBlur (index: number): void {
       if (activeIndexRef.value === index) {
         activeIndexRef.value = -1
@@ -514,22 +494,18 @@ export default defineComponent({
         hoverIndexRef.value = -1
       }
     }
-
     function handleHandleMouseEnter (index: number): void {
       hoverIndexRef.value = index
     }
-
     function handleHandleMouseLeave (index: number): void {
       if (hoverIndexRef.value === index) {
         hoverIndexRef.value = -1
       }
     }
-
     watch(
       activeIndexRef,
       (_, previous) => void nextTick(() => (previousIndexRef.value = previous))
     )
-
     watch(mergedValueRef, () => {
       if (props.marks) {
         if (dotTransitionDisabledRef.value) return

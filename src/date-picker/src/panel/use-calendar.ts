@@ -288,7 +288,8 @@ function useCalendar (
   function handleVirtualListScroll (e: Event): void {
     scrollbarInstRef.value?.sync()
   }
-  function handleTimePickerChange (value: number): void {
+  function handleTimePickerChange (value: number | null): void {
+    if (value === null) return
     panelCommon.doUpdateValue(value, false)
   }
   function handleSingleShortcutMouseenter (shortcut: Shortcuts[string]): void {
