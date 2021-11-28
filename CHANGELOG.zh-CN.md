@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.21.2 (2021-11-29)
 
 ### Fixes
 
@@ -28,6 +28,7 @@
 - `n-data-table` 新增 `expanded-row-keys` 属性
 - `n-popover` 提供更强的自动位置调整能力，关闭 [#1520](https://github.com/TuSimple/naive-ui/issues/1520)、[#1643](https://github.com/TuSimple/naive-ui/issues/1643)
 - `n-input-number` 新增 `update-value-on-input` 属性，关闭 [#1662](https://github.com/TuSimple/naive-ui/issues/1662)
+- `n-auto-complete` 新增 `prefix` & `suffix` slot
 
 ## 2.21.1 (2021-11-23)
 
