@@ -11,8 +11,9 @@
 - Fix `n-slider` processing of step value precision.
 - Fix `n-date-picker` throw error when `time-picker` input is empty, closes [#1678](https://github.com/TuSimple/naive-ui/issues/1678).
 - Fix `n-popover` not working when `trigger` is `focus`.
-- Fix `n-scrollbar` judement error on mouse up away.
+- Fix `n-scrollbar`'s scrollbar will vanish if clicked.
 - Fix `n-popover` has an invalid line in style.
+- Fix `n-popover` `flip=false` doesn't work.
 
 ### Feats
 
@@ -23,6 +24,7 @@
 - `n-layout-sider` add `on-after-enter` and `on-after-leave` props, closes [#1241](https://github.com/TuSimple/naive-ui/issues/1241).
 - `n-upload` add `custom-request` prop, closes [#1389](https://github.com/TuSimple/naive-ui/issues/1389).
 - `n-data-table` add `expanded-row-keys` prop.
+- `n-popover` provides better auto position adjustment, closes [#1520](https://github.com/TuSimple/naive-ui/issues/1520), [#1643](https://github.com/TuSimple/naive-ui/issues/1643).
 
 ## 2.21.1 (2021-11-23)
 
