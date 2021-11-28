@@ -16,6 +16,7 @@ image-style
 image-card-style
 custom-request
 abstract
+download
 ```
 
 ## API
@@ -42,6 +43,7 @@ abstract
 | multiple | `boolean` | `false` | Allow multiple files to be selected. |
 | name | `string` | `'file'` | The field name for the file(s) in the HTTP request's form data. |
 | show-cancel-button | `boolean` | `true` | Show a cancel button (while uploading). Use the `on-remove` callback for this event. |
+| show-download-button | `boolean` | `false` | Show a download button (after upload is finished). |
 | show-remove-button | `boolean` | `true` | Show a remove button (after upload completed). Use the `on-remove` callback for this event. |
 | show-retry-button | `boolean` | `true` | Show a retry button (for a failed upload). |
 | show-file-list | `boolean` | `true` | Show a file list. |
@@ -52,6 +54,7 @@ abstract
 | on-finish | `(options: { file: UploadFileInfo, event: Event }) => UploadFileInfo \| void` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`. Note: file will be null in next event-loop |
 | on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => boolean \| Promise<boolean> \| any` | `() => true` | File removed callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel this removal. |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Upload ready to start callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel the upload. |
+| on-download | `(file: FileInfo) => void` | `undefined` | Callback for clicking download buttons. |
 | on-preview | `(file: FileInfo) => void` | `undefined` | Callback for clicking file links or preview buttons. |
 
 #### UploadFileInfo Type
