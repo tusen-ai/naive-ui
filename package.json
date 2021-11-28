@@ -116,6 +116,7 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "@css-render/plugin-bem": "^0.15.6",
     "@css-render/vue3-ssr": "^0.15.6",
     "@types/lodash": "^4.14.170",

@@ -16,6 +16,7 @@ image-style
 image-card-style
 abstract
 retry-debug
+custom-request
 ```
 
 ## API
@@ -28,6 +29,7 @@ retry-debug
 | accept | `string` | `undefined` | 接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a> |
 | action | `string` | `undefined` | 请求提交的地址 |
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | 自定义文件缩略图 |
+| custom-request | `(CustomRequestOptions) => void` | `undefined` | 自定义上传方法，类型参考 <n-a href="#CustomRequestOptions-Type">CustomRequestOptions</n-a> |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | 提交表单需要附加的数据 |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | 非受控状态下默认的文件列表 |
 | default-upload | `boolean` | `true` | 选择文件时候是否默认上传 |
@@ -47,7 +49,7 @@ retry-debug
 | show-preview-button | `boolean` | `true` | 是否允许显示预览按钮（在 `list-type` 为 `image-card` 时生效） |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |
-| on-finish | `(options: { file: UploadFileInfo, event: Event }) => UploadFileInfo \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo |
+| on-finish | `(options: { file: UploadFileInfo, event: Event }) => UploadFileInfo \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: UploadFileInfo[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |
 | on-preview | `(file: FileInfo) => void` | `undefined` | 点击文件链接或预览按钮的回调函数 |
@@ -70,6 +72,22 @@ retry-debug
 | 名称     | 类型      | 默认值  | 说明                |
 | -------- | --------- | ------- | ------------------- |
 | abstract | `boolean` | `false` | 是否不存在 DOM 包裹 |
+
+#### CustomRequestOptions Type
+
+```__ts
+interface CustomRequestOptions {
+  file: FileInfo
+  action?: string
+  method?: string
+  data?: FuncOrRecordOrUndef
+  withCredentials?: boolean
+  headers?: FuncOrRecordOrUndef
+  onProgress: (e: { percent: number }) => void
+  onFinish: () => void
+  onError: () => void
+}
+```
 
 ### Upload Methods
 

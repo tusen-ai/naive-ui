@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-upload` add `custom-request` prop, closes [#1389](https://github.com/TuSimple/naive-ui/issues/1389).
+
 ### Fixes
 
 - Fix `n-slider` disabled tooltip at the wrong time.

@@ -41,7 +41,8 @@ import {
   OnBeforeUpload,
   listType,
   OnPreview,
-  CreateThumbnailUrl
+  CreateThumbnailUrl,
+  CustomRequest
 } from './interface'
 import { createImageDataUrl } from './utils'
 import NUploadTrigger from './UploadTrigger'
@@ -97,6 +98,68 @@ function createXhrHandlers (
       doChange(fileAfterChange, e)
     }
   }
+}
+
+function customSubmitImpl (options: {
+  inst: UploadInternalInst
+  data?: FuncOrRecordOrUndef
+  headers?: FuncOrRecordOrUndef
+  action?: string
+  withCredentials?: boolean
+  file: FileInfo
+  method?: string
+  customRequest: CustomRequest
+}): void {
+  const {
+    inst,
+    file,
+    data,
+    headers,
+    withCredentials,
+    action,
+    method,
+    customRequest
+  } = options
+  const { doChange, XhrMap } = options.inst
+  let percentage = 0
+  customRequest({
+    file,
+    data,
+    headers,
+    withCredentials,
+    action,
+    method,
+    onProgress (event) {
+      const fileAfterChange: FileInfo = Object.assign({}, file, {
+        status: 'uploading'
+      })
+      const progress = event.percent
+      fileAfterChange.percentage = progress
+      percentage = progress
+      doChange(fileAfterChange)
+    },
+    onFinish () {
+      let fileAfterChange: FileInfo = Object.assign({}, file, {
+        status: 'finished',
+        percentage,
+        file: null
+      })
+      setTimeout(() => {
+        XhrMap.delete(file.id)
+      })
+      fileAfterChange =
+        inst.onFinish?.({ file: fileAfterChange }) || fileAfterChange
+      doChange(fileAfterChange)
+    },
+    onError () {
+      const fileAfterChange: FileInfo = Object.assign({}, file, {
+        status: 'error',
+        percentage
+      })
+      XhrMap.delete(file.id)
+      doChange(fileAfterChange)
+    }
+  })
 }
 
 function registerHandler (
@@ -190,6 +253,7 @@ const uploadProps = {
   },
   accept: String,
   action: String,
+  customRequest: Function as PropType<CustomRequest>,
   // to be impl
   // directory: {
   //   type: Boolean,
@@ -391,22 +455,39 @@ export default defineComponent({
         if (status === 'pending' || (status === 'error' && shouldReupload)) {
           const formData = new FormData()
           formData.append(fieldName, file.file as File)
-          submitImpl(
-            {
-              doChange,
-              XhrMap,
-              onFinish: props.onFinish
-            },
-            file,
-            formData,
-            {
-              method,
+          if (props.customRequest) {
+            customSubmitImpl({
+              inst: {
+                doChange,
+                XhrMap,
+                onFinish: props.onFinish
+              },
+              file,
               action,
               withCredentials,
               headers,
-              data
-            }
-          )
+              data,
+              method,
+              customRequest: props.customRequest
+            })
+          } else {
+            submitImpl(
+              {
+                doChange,
+                XhrMap,
+                onFinish: props.onFinish
+              },
+              file,
+              formData,
+              {
+                method,
+                action,
+                withCredentials,
+                headers,
+                data
+              }
+            )
+          }
         }
       })
     }

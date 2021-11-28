@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-upload` 新增 `custom-request` 属性，关闭 [#1389](https://github.com/TuSimple/naive-ui/issues/1389)
+
 ### Fixes
 
 - 修复 `n-slider` tooltip 禁用时机错误问题

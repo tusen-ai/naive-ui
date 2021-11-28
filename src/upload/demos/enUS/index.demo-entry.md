@@ -15,6 +15,7 @@ before-upload
 image-style
 image-card-style
 abstract
+custom-request
 ```
 
 ## API
@@ -23,17 +24,18 @@ abstract
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| abstract | `boolean` | `false` | Split the upload button (trigger) and file list as child components (`<n-upload-trigger />` and `<n-upload-file-list />`). Not supported for a `list-type` property of `image-card`. |
-| accept | `string` | `undefined` | The upload accept attribute. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a>. |
-| action | `string` | `undefined` | The URL to upload to. |
-| create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | Thumbnail generation function. |
-| data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | `data` field of the HTTP request's form data. |
-| default-file-list | `Array<UploadFileInfo>` | `[]` | The default file list. |
-| default-upload | `boolean` | `true` | Whether the file is uploaded immediately after it is selected. |
-| disabled | `boolean` | `false` | Disabled state. |
-| file-list-style | `Object` | `undefined` | File list area style. |
-| file-list | `Array<UploadFileInfo>` | `undefined` | The uploaded file list. |
-| headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional HTTP Headers for the request. |
+| abstract | `boolean` | `false` | Whether or not DOM wrapping does not exist. Not supported for `image-card` type. |
+| accept | `string` | `undefined` | The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a>. |
+| action | `string` | `undefined` | The URL to submit data to. |
+| create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | Customize file thumbnails. |
+| custom-request | `(CustomRequestOptions) => void` | `undefined` | Customize upload request. For types, see <n-a href="#CustomRequestOptions-Type">CustomRequestOptions</n-a> |
+| data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |
+| default-file-list | `Array<UploadFileInfo>` | `[]` | The default file list in uncontrolled manner. |
+| default-upload | `boolean` | `false` | If file uploaded immediatelly after file is selected. |
+| disabled | `boolean` | `false` | Whether to disable the upload. |
+| file-list-style | `Object` | `undefined` | The style of file list area |
+| file-list | `Array<UploadFileInfo>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |
+| headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional HTTP Headers of request. |
 | list-type | `string` | `'text'` | Built-in styles for file lists, `text`, `image` and `image-card`. |
 | max | `number` | `undefined` | Uploaded files limit. |
 | method | `string` | `'POST'` | The HTTP request method. |
@@ -47,7 +49,7 @@ abstract
 | with-credentials | `boolean` | `false` | Any credentials to be sent with the request (e.g. cookie). |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | Uploaded file(s) status change callback. |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | Callback function triggered on file-list changes. |
-| on-finish | `(options: { file: UploadFileInfo, event: Event }) => UploadFileInfo \| void` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`. |
+| on-finish | `(options: { file: UploadFileInfo, event: Event }) => UploadFileInfo \| void` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`. Note: file will be null in next event-loop |
 | on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => boolean \| Promise<boolean> \| any` | `() => true` | File removed callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel this removal. |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Upload ready to start callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel the upload. |
 | on-preview | `(file: FileInfo) => void` | `undefined` | Callback for clicking file links or preview buttons. |
@@ -70,6 +72,22 @@ abstract
 | Name     | Type      | Default | Description                                |
 | -------- | --------- | ------- | ------------------------------------------ |
 | abstract | `boolean` | `false` | Whether or not to use the `abstract` mode. |
+
+#### CustomRequestOptions Type
+
+```__ts
+interface CustomRequestOptions<T = any> {
+  file: FileInfo
+  action?: string
+  method?: string
+  data?: FuncOrRecordOrUndef
+  withCredentials?: boolean
+  headers?: FuncOrRecordOrUndef
+  onProgress: (e: { percent: number }) => void
+  onFinish: () => void
+  onError: () => void
+}
+```
 
 ### Upload Methods
 
