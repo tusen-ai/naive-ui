@@ -15,6 +15,7 @@ step
 validator
 show-button
 disable-keyboard
+change-timing
 debug
 ```
 
@@ -35,6 +36,7 @@ debug
 | show-button | `boolean` | `true` | 是否有按钮 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框大小 |
 | step | `number` | `1` | 每次改变步数，可以为小数 |
+| update-value-on-input | `boolean` | `true` | 在输入的过程中是否改变值 |
 | validator | `(value) => boolean` | `undefined` | 设置自定义验证 |
 | value | `number \| null` | `undefined` | 受控模式下的值 |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | 移除焦点的回调 |

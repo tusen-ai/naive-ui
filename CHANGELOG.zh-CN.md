@@ -14,6 +14,7 @@
 - 修复 `n-scrollbar` 点击在滚动条上时会消失一次
 - 修复 `n-popover` 样式中有不合法的行
 - 修复 `n-popover` `flip=false` 不生效
+- 修复 `n-input-number` 在设定 `max` 或 `min` 后在输入过程中无法输入中间值，关闭 [#1664](https://github.com/TuSimple/naive-ui/issues/1664)
 
 ### Feats
 
@@ -25,6 +26,7 @@
 - `n-upload` 新增 `custom-request` 属性，关闭 [#1389](https://github.com/TuSimple/naive-ui/issues/1389)
 - `n-data-table` 新增 `expanded-row-keys` 属性
 - `n-popover` 提供更强的自动位置调整能力，关闭 [#1520](https://github.com/TuSimple/naive-ui/issues/1520)、[#1643](https://github.com/TuSimple/naive-ui/issues/1643)
+- `n-input-number` 新增 `update-value-on-input` 属性，关闭 [#1662](https://github.com/TuSimple/naive-ui/issues/1662)
 
 ## 2.21.1 (2021-11-23)
 

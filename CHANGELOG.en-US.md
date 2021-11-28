@@ -14,6 +14,7 @@
 - Fix `n-scrollbar`'s scrollbar will vanish if clicked.
 - Fix `n-popover` has an invalid line in style.
 - Fix `n-popover` `flip=false` doesn't work.
+- Fix `n-input-number` can't accept indeterminate input value when `max` or `min` is set, closes [#1664](https://github.com/TuSimple/naive-ui/issues/1664).
 
 ### Feats
 
@@ -25,6 +26,7 @@
 - `n-upload` add `custom-request` prop, closes [#1389](https://github.com/TuSimple/naive-ui/issues/1389).
 - `n-data-table` add `expanded-row-keys` prop.
 - `n-popover` provides better auto position adjustment, closes [#1520](https://github.com/TuSimple/naive-ui/issues/1520), [#1643](https://github.com/TuSimple/naive-ui/issues/1643).
+- `n-input-number` add `update-value-on-input` prop, closes [#1662](https://github.com/TuSimple/naive-ui/issues/1662).
 
 ## 2.21.1 (2021-11-23)
 
