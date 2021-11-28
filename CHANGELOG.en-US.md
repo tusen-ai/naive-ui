@@ -15,6 +15,7 @@
 - Fix `n-popover` has an invalid line in style.
 - Fix `n-popover` `flip=false` doesn't work.
 - Fix `n-input-number` can't accept indeterminate input value when `max` or `min` is set, closes [#1664](https://github.com/TuSimple/naive-ui/issues/1664).
+- Fix `n-input-number`'s input value is not changed to a valid value if it's input exceeds min or max multiple times.
 
 ### Feats
 

@@ -139,7 +139,10 @@ export default defineComponent({
     })
     const doUpdateValue = (value: number | null): void => {
       const { value: mergedValue } = mergedValueRef
-      if (value === mergedValue) return
+      if (value === mergedValue) {
+        deriveDisplayedValueFromValue()
+        return
+      }
       const {
         'onUpdate:value': _onUpdateValue,
         onUpdateValue,

@@ -15,6 +15,7 @@
 - 修复 `n-popover` 样式中有不合法的行
 - 修复 `n-popover` `flip=false` 不生效
 - 修复 `n-input-number` 在设定 `max` 或 `min` 后在输入过程中无法输入中间值，关闭 [#1664](https://github.com/TuSimple/naive-ui/issues/1664)
+- 修复 `n-input-number` 在连读多次输入超过 `min` 或 `max` 范围的数字后，显示的值不转化为合法值
 
 ### Feats
 
