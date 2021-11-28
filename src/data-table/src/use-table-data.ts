@@ -267,6 +267,7 @@ export function useTableData (
       // reset deprecated methods
       onChange: undefined,
       onUpdatePage: undefined,
+      onUpdatePageSize: undefined,
       onPageSizeChange: undefined,
       'onUpdate:page': mergedOnUpdatePage,
       'onUpdate:pageSize': mergedOnUpdatePageSize,
