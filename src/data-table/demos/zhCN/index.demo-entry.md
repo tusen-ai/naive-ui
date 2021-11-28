@@ -149,7 +149,7 @@ type DataTableCreateSummary = (
 type SortState = {
   columnKey: string | number,
   sorter: 'default' | function | boolean,
-  order: 'ascend' | 'descend' \ false
+  order: 'ascend' | 'descend' | false
 }
 ```
 
