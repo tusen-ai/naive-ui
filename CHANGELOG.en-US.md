@@ -10,6 +10,7 @@
 - Fix `n-slider` processing of step value precision.
 - Fix `n-date-picker` throw error when `time-picker` input is empty, closes [#1678](https://github.com/TuSimple/naive-ui/issues/1678).
 - Fix `n-popover` not working when `trigger` is `focus`.
+- Fix `n-scrollbar` judement error on mouse up away.
 
 ### Feats
 

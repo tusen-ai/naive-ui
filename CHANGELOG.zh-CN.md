@@ -10,6 +10,8 @@
 - 修复 `n-slider` 对于数值精度的处理问题
 - 修复 `n-date-picker` 当 `time-picker` 输入为空时报错，关闭 [#1678](https://github.com/TuSimple/naive-ui/issues/1678)
 - 修复 `n-popover` 当 `trigger` 为 `focus` 不生效的问题
+- 修复 `n-scrollbar` 对于鼠标外部抬起事件触发对象的判断
+
 ### Feats
 
 - `n-input-number` 新增 `keyboard` 属性
