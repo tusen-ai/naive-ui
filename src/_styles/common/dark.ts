@@ -23,6 +23,7 @@ const base = {
   alphaDisabledInput: '0.06',
   alphaPending: '0.09',
   alphaTablePending: '0.06',
+  alphaTableStriped: '0.05',
   alphaPressed: '0.05',
 
   alphaAvatar: '0.18',
@@ -178,6 +179,7 @@ const derived: ThemeCommonVars = {
 
   hoverColor: overlay(base.alphaPending),
   tableColorHover: overlay(base.alphaTablePending),
+  tableColorStriped: overlay(base.alphaTableStriped),
   pressedColor: overlay(base.alphaPressed),
 
   opacityDisabled: base.alphaDisabled,

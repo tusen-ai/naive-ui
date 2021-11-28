@@ -106,6 +106,7 @@ const Scrollbar = defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
 
     // dom ref
+    const wrapperRef = ref<HTMLElement | null>(null)
     const containerRef = ref<HTMLElement | null>(null)
     const contentRef = ref<HTMLElement | null>(null)
     const yRailRef = ref<HTMLElement | null>(null)
@@ -400,6 +401,9 @@ const Scrollbar = defineComponent({
       syncPositionState()
       syncScrollState()
     }
+    function isMouseUpAway (e: MouseEvent): boolean {
+      return !wrapperRef.value?.contains(e.target as any)
+    }
     function handleXScrollMouseDown (e: MouseEvent): void {
       e.preventDefault()
       e.stopPropagation()
@@ -442,8 +446,7 @@ const Scrollbar = defineComponent({
       off('mouseup', window, handleXScrollMouseUp, true)
       xBarPressed = false
       sync()
-      const { value: container } = mergedContainerRef
-      if (!container?.contains(e.target as any)) {
+      if (isMouseUpAway(e)) {
         hideBar()
       }
     }
@@ -487,8 +490,7 @@ const Scrollbar = defineComponent({
       off('mouseup', window, handleYScrollMouseUp, true)
       yBarPressed = false
       sync()
-      const { value: container } = mergedContainerRef
-      if (!container?.contains(e.target as any)) {
+      if (isMouseUpAway(e)) {
         hideBar()
       }
     }
@@ -552,6 +554,7 @@ const Scrollbar = defineComponent({
       scrollTo,
       mergedClsPrefix: mergedClsPrefixRef,
       containerScrollTop: containerScrollTopRef,
+      wrapperRef,
       containerRef,
       contentRef,
       yRailRef,
@@ -600,6 +603,7 @@ const Scrollbar = defineComponent({
       h(
         'div',
         mergeProps(this.$attrs, {
+          ref: 'wrapperRef',
           class: `${mergedClsPrefix}-scrollbar`,
           style: this.cssVars,
           onMouseenter: this.handleMouseEnterWrapper,

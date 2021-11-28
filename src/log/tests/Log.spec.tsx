@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { h, defineComponent, ref, watch } from 'vue'
 import { NLog } from '../index'
 
 describe('n-log', () => {
@@ -49,6 +50,14 @@ describe('n-log', () => {
     )
   })
 
+  it('should work with `loading` prop', async () => {
+    const wrapper = mount(NLog)
+    expect(wrapper.find('.n-log-loader').exists()).toBe(false)
+
+    await wrapper.setProps({ loading: true })
+    expect(wrapper.find('.n-log-loader').exists()).toBe(true)
+  })
+
   it('should work with `rows` prop', async () => {
     const lineHeight = 20
     const fontSize = 10
@@ -58,5 +67,55 @@ describe('n-log', () => {
         `height: calc(${Math.floor(fontSize * lineHeight) * rows}px)`
       )
     })
+  })
+
+  it('should work with `trim` prop', async () => {
+    const wrapper = mount(NLog, {
+      props: { log: ' test1     ', language: 'naive-log' }
+    })
+    expect(wrapper.find('pre').element.innerHTML).toBe(' test1     ')
+
+    await wrapper.setProps({ trim: true, log: ' test2     ' })
+    expect(wrapper.find('pre').element.innerHTML).toBe('test2')
+  })
+
+  it('should work with `scrollTo` `on-require-more` `on-reach-top` `on-reach-bottom` prop', async () => {
+    const lines = ['test1', 'test2', 'test3', 'test4', 'test5', 'test6']
+    const onRequireMore = jest.fn()
+    const onReachTop = jest.fn()
+    const onReachBottom = jest.fn()
+    const wrapper = mount(
+      defineComponent({
+        setup () {
+          const logInstRef = ref<any>(null)
+          watch(logInstRef, (value) => {
+            if (value) {
+              value.scrollTo(0)
+              value.scrollTo(1)
+              value.scrollTo(999)
+            }
+          })
+
+          return () =>
+            h(NLog, {
+              ref: logInstRef,
+              lines,
+              rows: 4,
+              onRequireMore,
+              onReachTop,
+              onReachBottom
+            })
+        }
+      }),
+      {
+        attachTo: document.body
+      }
+    )
+    setTimeout(() => {
+      expect(onRequireMore).toHaveBeenCalled()
+      expect(onReachTop).toHaveBeenCalled()
+      expect(onReachBottom).toHaveBeenCalled()
+      wrapper.unmount()
+    }, 0)
   })
 })

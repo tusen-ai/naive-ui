@@ -72,6 +72,8 @@ scroll-to
 | show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | Whether to show the built-in trigger button on sider. |
 | trigger-style | `string \| Object` | `undefined` | Trigger style. |
 | width | `number \| string` | `272` | Width CSS value. When it is number, px will be added. |
+| on-after-enter | `() => void` | `undefined` | Callback after it's expanded. |
+| on-after-leave | `() => void` | `undefined` | Callback after it's collapsed. |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback function when the content scroll. |
 | on-update:collapsed | `(collapsed: boolean) => void` | `undefined` | Callback function when the folding state changes. |
 

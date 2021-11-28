@@ -35,14 +35,8 @@ export const logInjectionKey: InjectionKey<LogInjection> = Symbol('log')
 
 const logProps = {
   ...(useTheme.props as ThemeProps<LogTheme>),
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  trim: {
-    type: Boolean,
-    default: false
-  },
+  loading: Boolean,
+  trim: Boolean,
   log: String,
   fontSize: {
     type: Number,
@@ -69,10 +63,7 @@ const logProps = {
     type: Number,
     default: 0
   },
-  hljs: {
-    type: Object,
-    default: undefined
-  },
+  hljs: Object,
   onReachTop: Function as PropType<() => void>,
   onReachBottom: Function as PropType<() => void>,
   onRequireMore: Function as PropType<(from: 'top' | 'bottom') => void>
