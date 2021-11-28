@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Pending
+
+- `n-data-table` add `sticky` prop, closes [#1555](https://github.com/TuSimple/naive-ui/issues/1555).
+
 ## 2.21.1 (2021-11-23)
 
 ### Fixes

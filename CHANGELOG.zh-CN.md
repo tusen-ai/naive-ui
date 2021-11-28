@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Pending
+
+- `n-table` 新增 `sticky` 属性，关闭 [#1555](https://github.com/TuSimple/naive-ui/issues/1555)
+
 ## 2.21.1 (2021-11-23)
 
 ### Fixes
