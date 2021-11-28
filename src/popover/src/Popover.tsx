@@ -477,7 +477,7 @@ export default defineComponent({
             },
             onFocus: (e: FocusEvent) => {
               ascendantAndCurrentHandlers.forEach((_handlers) => {
-                _handlers.onBlur(e)
+                _handlers.onFocus(e)
               })
             },
             onClick: (e: MouseEvent) => {
