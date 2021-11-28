@@ -125,11 +125,11 @@ export default c([
       background-clip: padding-box;
       transition: background-color .3s var(--bezier);
     `, [
-      c('&:hover', 'background-color: var(--merged-td-color-hover);', [
-        cB('data-table-td', 'background-color: var(--merged-td-color-hover);')
-      ]),
       cM('striped', 'background-color: var(--merged-td-color-striped);', [
         cB('data-table-td', 'background-color: var(--merged-td-color-striped);')
+      ]),
+      c('&:hover', 'background-color: var(--merged-td-color-hover);', [
+        cB('data-table-td', 'background-color: var(--merged-td-color-hover);')
       ])
     ]),
     cB('data-table-th', `

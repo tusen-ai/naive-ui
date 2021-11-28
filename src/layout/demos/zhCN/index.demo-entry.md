@@ -72,6 +72,8 @@ scroll-to
 | show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | 内置的触发按钮是否展示 |
 | trigger-style | `string \| Object` | `undefined` | 触发器样式 |
 | width | `number \| string` | `272` | 宽度的 CSS 值，为数字时会添加 px |
+| on-after-enter | `() => void` | `undefined` | 完成展开后的回调 |
+| on-after-leave | `() => void` | `undefined` | 完成折叠后的回调 |
 | on-scroll | `(e: Event) => void` | `undefined` | 内容的滚动事件回调函数 |
 | on-update:collapsed | `(collapsed: boolean) => void` | `undefined` | 折叠状态发生改变时的回调函数 |
 

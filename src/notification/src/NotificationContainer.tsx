@@ -1,4 +1,4 @@
-import { h, defineComponent, inject } from 'vue'
+import { h, defineComponent, inject, PropType } from 'vue'
 import { NScrollbar } from '../../_internal'
 import { notificationProviderInjectionKey } from './NotificationProvider'
 
@@ -7,6 +7,12 @@ export default defineComponent({
   props: {
     scrollable: {
       type: Boolean,
+      required: true
+    },
+    placement: {
+      type: String as PropType<
+      'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+      >,
       required: true
     }
   },
@@ -21,12 +27,13 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, scrollable, mergedClsPrefix, mergedTheme } = this
+    const { $slots, scrollable, mergedClsPrefix, mergedTheme, placement } = this
     return (
       <div
         class={[
           `${mergedClsPrefix}-notification-container`,
-          scrollable && `${mergedClsPrefix}-notification-container--scrollable`
+          scrollable && `${mergedClsPrefix}-notification-container--scrollable`,
+          `${mergedClsPrefix}-notification-container--${placement}`
         ]}
       >
         {scrollable ? (
