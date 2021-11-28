@@ -328,6 +328,9 @@ export default c([
         })
       ])
     ]),
+    cM('sticky', [
+      cB('data-table-base-table-header', 'position: sticky; top: 0; z-index: 1;')
+    ]),
     cM('bordered', [
       cB('data-table-wrapper', {
         border: '1px solid var(--merged-border-color)',

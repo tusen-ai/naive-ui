@@ -209,6 +209,7 @@ export interface DataTableInjection {
   flexHeightRef: Ref<boolean>
   headerCheckboxDisabledRef: Ref<boolean>
   stripedRef: Ref<boolean>
+  stickyRef: Ref<boolean>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (
     filters: FilterState,
