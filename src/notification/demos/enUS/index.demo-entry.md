@@ -8,6 +8,7 @@ Notification component is always with low piority so I can make a lot of useless
 <n-alert title="Prerequisite" type="warning">
   If you want use notification, you need to wrap the component where you call related methods inside <n-text code>n-notification-provider</n-text> and use <n-text code>useNotification</n-text> to get the API.
 </n-alert>
+
 For example:
 
 ```html
@@ -25,7 +26,6 @@ import { useNotification } from 'naive-ui'
 export default defineComponent({
   setup () {
     const notification = useNotification()
-
     return {
       warning () {
         notification.warning('...')
@@ -46,6 +46,8 @@ change-content
 scrollable
 closable
 duration
+max
+placement
 ```
 
 ## API
@@ -54,6 +56,8 @@ duration
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `'top-right'` | Placement of all notifications. |
+| max | `number` | `undefined` | Limit the number of notifications to display. |
 | scrollable | `boolean` | `true` | Whether notification can be scroll. |
 | to | `string \| HTMLElement` | `'body'` | Container node of notification container. |
 
@@ -62,6 +66,7 @@ duration
 | Name | Type | Description |
 | --- | --- | --- |
 | create | `(option: NotificationOption) => NotificationReactive` | Create a notification. |
+| destroyAll | `() => void` | Destroy all popup notifications. |
 | error | `(option: NotificationOption) => NotificationReactive` | Use `error` type notification. |
 | info | `(option: NotificationOption) => NotificationReactive` | Use `info` type notification. |
 | success | `(option: NotificationOption) => NotificationReactive` | Use `success` type notification. |
