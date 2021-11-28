@@ -177,7 +177,8 @@ const derived = {
 
   hoverColor: 'rgb(243, 243, 245)',
   // use color with alpha since it can be nested with header filter & sorter effect
-  tableColorHover: 'rgba(0, 0, 100, 0.02)',
+  tableColorHover: 'rgba(0, 0, 100, 0.03)',
+  tableColorStriped: 'rgba(0, 0, 100, 0.02)',
   pressedColor: 'rgb(237, 237, 239)',
 
   opacityDisabled: base.alphaDisabled,

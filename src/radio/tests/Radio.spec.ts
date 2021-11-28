@@ -51,12 +51,16 @@ describe('n-radio', () => {
   })
 
   it('should work with `onUpdate:checked` prop', async () => {
-    const onUpdate = jest.fn()
-    const wrapper = mount(NRadio, { props: { 'onUpdate:checked': onUpdate } })
+    const onUpdate1 = jest.fn()
+    const onUpdate2 = jest.fn()
+    const wrapper = mount(NRadio, {
+      props: { 'onUpdate:checked': onUpdate1, onUpdateChecked: onUpdate2 }
+    })
 
     await wrapper.find('.n-radio').trigger('click')
     setTimeout(() => {
-      expect(onUpdate).toHaveBeenCalled()
+      expect(onUpdate1).toHaveBeenCalled()
+      expect(onUpdate2).toHaveBeenCalled()
     }, 0)
   })
 })

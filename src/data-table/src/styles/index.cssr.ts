@@ -114,7 +114,7 @@ export default c([
       margin-right: 8px;
       cursor: pointer;
       font-size: 16px;
-      vertical-align: -.125em;
+      vertical-align: -0.2em;
     `),
     cB('data-table-thead', {
       transition: 'background-color .3s var(--bezier)',
@@ -125,11 +125,11 @@ export default c([
       background-clip: padding-box;
       transition: background-color .3s var(--bezier);
     `, [
-      c('&:hover', 'background-color: var(--merged-td-color-hover);', [
-        cB('data-table-td', 'background-color: var(--merged-td-color-hover);')
-      ]),
       cM('striped', 'background-color: var(--merged-td-color-striped);', [
         cB('data-table-td', 'background-color: var(--merged-td-color-striped);')
+      ]),
+      c('&:hover', 'background-color: var(--merged-td-color-hover);', [
+        cB('data-table-td', 'background-color: var(--merged-td-color-hover);')
       ])
     ]),
     cB('data-table-th', `

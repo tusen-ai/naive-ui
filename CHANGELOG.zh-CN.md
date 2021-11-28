@@ -1,5 +1,34 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-slider` tooltip 禁用时机错误问题
+- 修复 `n-slider` 填充色样式错误问题，关闭 [#1670](https://github.com/TuSimple/naive-ui/issues/1670)
+- 修复 `n-data-table` 的分页器 `onUpdatePage` 属性会被触发两次, 关闭 [#1666](https://github.com/TuSimple/naive-ui/issues/1666)
+- 修复 `n-log` 的 `trim` 属性不能独立使用
+- 修复 `n-slider` 对于数值精度的处理问题
+- 修复 `n-date-picker` 当 `time-picker` 输入为空时报错，关闭 [#1678](https://github.com/TuSimple/naive-ui/issues/1678)
+- 修复 `n-popover` `trigger` 为 `focus` 时不生效
+- 修复 `n-scrollbar` 点击在滚动条上时会消失一次
+- 修复 `n-popover` 样式中有不合法的行
+- 修复 `n-popover` `flip=false` 不生效
+- 修复 `n-input-number` 在设定 `max` 或 `min` 后在输入过程中无法输入中间值，关闭 [#1664](https://github.com/TuSimple/naive-ui/issues/1664)
+- 修复 `n-input-number` 在连读多次输入超过 `min` 或 `max` 范围的数字后，显示的值不转化为合法值
+
+### Feats
+
+- `n-input-number` 新增 `keyboard` 属性
+- 新增 `tableColorStriped` 主题变量，关闭 [#1686](https://github.com/TuSimple/naive-ui/issues/1686)
+- `n-notification-provider` 新增 `max` & `placement` 属性
+- `n-notification` 新增 `detroyAll` 方法，关闭 [#333](https://github.com/TuSimple/naive-ui/issues/333)
+- `n-layout-sider` 新增 `on-after-enter` 和 `on-after-leave` 属性，关闭 [#1241](https://github.com/TuSimple/naive-ui/issues/1241)
+- `n-upload` 新增 `custom-request` 属性，关闭 [#1389](https://github.com/TuSimple/naive-ui/issues/1389)
+- `n-data-table` 新增 `expanded-row-keys` 属性
+- `n-popover` 提供更强的自动位置调整能力，关闭 [#1520](https://github.com/TuSimple/naive-ui/issues/1520)、[#1643](https://github.com/TuSimple/naive-ui/issues/1643)
+- `n-input-number` 新增 `update-value-on-input` 属性，关闭 [#1662](https://github.com/TuSimple/naive-ui/issues/1662)
+
 ## 2.21.1 (2021-11-23)
 
 ### Fixes

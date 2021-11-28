@@ -1,3 +1,4 @@
+import { CNode } from 'css-render'
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
@@ -28,10 +29,6 @@ export default c([
   cB('notification-container', `
     z-index: 4000;
     position: fixed;
-    top: 12px;
-    left: 0;
-    right: 0;
-    height: 0;
     overflow: visible;
     display: flex;
     flex-direction: column;
@@ -59,18 +56,63 @@ export default c([
         ])
       ])
     ]),
-    cM('scrollable', {
-      top: 0
-    }),
+    cM('top-right, bottom-right', [
+      cB('notification', `
+        margin-left: 28px;
+        margin-right: 16px;
+      `)
+    ]),
+    cM('top-left, bottom-left', [
+      cB('notification', `
+        margin-left: 16px;
+        margin-right: 28px;
+      `)
+    ]),
+    cM('top-right', `
+      right: 0;
+      top: 12px;
+    `, [
+      placementTransformStyle('top-right')
+    ]),
+    cM('top-left', `
+      left: 0;
+      top: 12px;
+    `, [
+      placementTransformStyle('top-left')
+    ]),
+    cM('bottom-right', `
+      right: 0;
+      bottom: 12px;
+    `, [
+      placementTransformStyle('bottom-right')
+    ]),
+    cM('bottom-left', `
+      left: 0;
+      bottom: 12px;
+    `, [
+      placementTransformStyle('bottom-left')
+    ]),
+    cM('scrollable', [
+      cM('top-right', `
+        top: 0;
+      `),
+      cM('top-left', `
+        top: 0;
+      `),
+      cM('bottom-right', `
+        bottom: 0;
+      `),
+      cM('bottom-left', `
+        bottom: 0;
+      `)
+    ]),
     cB('notification', [
       c('&.notification-transition-enter-from, &.notification-transition-leave-to', `
         opacity: 0;
         margin-bottom: 0 !important;
-        transform: translateX(calc(100% + 16px));
       `),
       c('&.notification-transition-leave-from, &.notification-transition-enter-to', `
         opacity: 1;
-        transform: translateX(0);
       `),
       c('&.notification-transition-leave-active', `
         transition:
@@ -102,8 +144,6 @@ export default c([
       overflow: hidden;
       flex-shrink: 0;
       margin-bottom: 12px;
-      margin-left: 28px;
-      margin-right: 16px;
       padding-left: var(--padding-left);
       padding-right: var(--padding-right);
       width: var(--width);
@@ -209,3 +249,19 @@ export default c([
     ])
   ])
 ])
+
+function placementTransformStyle (placement: string): CNode {
+  const [position, direction] = placement.split('-')
+  const transformYEnter = position === 'top' ? '-100%' : '100%'
+  const transformYLeave = position === 'top' ? '0' : '0'
+  const transformXEnter = direction === 'left' ? 'calc(-100%)' : 'calc(100%)'
+  const transformXLeave = '0'
+  return cB('notification', [
+    c('&.notification-transition-enter-from, &.notification-transition-leave-to', `
+      transform: translate(${transformXEnter}, ${transformYEnter});
+    `),
+    c('&.notification-transition-leave-from, &.notification-transition-enter-to', `
+      transform: translate(${transformXLeave}, ${transformYLeave});
+    `)
+  ])
+}

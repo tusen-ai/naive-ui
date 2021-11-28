@@ -44,6 +44,17 @@ const inputNumberProps = {
   },
   readonly: Boolean,
   clearable: Boolean,
+  keyboard: {
+    type: Object as PropType<{
+      ArrowUp?: boolean
+      ArrowDown?: boolean
+    }>,
+    default: {}
+  },
+  updateValueOnInput: {
+    type: Boolean,
+    default: true
+  },
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
@@ -128,7 +139,10 @@ export default defineComponent({
     })
     const doUpdateValue = (value: number | null): void => {
       const { value: mergedValue } = mergedValueRef
-      if (value === mergedValue) return
+      if (value === mergedValue) {
+        deriveDisplayedValueFromValue()
+        return
+      }
       const {
         'onUpdate:value': _onUpdateValue,
         onUpdateValue,
@@ -144,7 +158,8 @@ export default defineComponent({
     }
     const deriveValueFromDisplayedValue = (
       offset = 0,
-      doUpdateIfValid = true
+      doUpdateIfValid = true,
+      applyMinMax = true
     ): null | number | false => {
       const { value: displayedValue } = displayedValueRef
       const parsedValue = parse(displayedValue)
@@ -159,11 +174,13 @@ export default defineComponent({
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
           if (mergedMax !== null && nextValue > mergedMax) {
-            if (!doUpdateIfValid) return false
+            if (!doUpdateIfValid || !applyMinMax) return false
+            // if doUpdateIfValid=true, we try to make it a valid value
             nextValue = mergedMax
           }
           if (mergedMin !== null && nextValue < mergedMin) {
-            if (!doUpdateIfValid) return false
+            if (!doUpdateIfValid || !applyMinMax) return false
+            // if doUpdateIfValid=true, we try to make it a valid value
             nextValue = mergedMin
           }
           if (props.validator && !props.validator(nextValue)) return false
@@ -313,11 +330,13 @@ export default defineComponent({
           inputInstRef.value?.deactivate()
         }
       } else if (e.code === 'ArrowUp') {
+        if (props.keyboard.ArrowUp === false) return
         const value = deriveValueFromDisplayedValue()
         if (value !== false) {
           doAdd()
         }
       } else if (e.code === 'ArrowDown') {
+        if (props.keyboard.ArrowDown === false) return
         const value = deriveValueFromDisplayedValue()
         if (value !== false) {
           doMinus()
@@ -326,7 +345,9 @@ export default defineComponent({
     }
     function handleUpdateDisplayedValue (value: string): void {
       displayedValueRef.value = value
-      deriveValueFromDisplayedValue()
+      if (props.updateValueOnInput) {
+        deriveValueFromDisplayedValue(0, true, false)
+      }
     }
     watch(mergedValueRef, () => {
       deriveDisplayedValueFromValue()

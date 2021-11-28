@@ -1,5 +1,34 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-slider` disabled tooltip at the wrong time.
+- Fix `n-slider` incorrect fill color style, closes [#1670](https://github.com/TuSimple/naive-ui/issues/1670).
+- Fix `n-data-table`'s pagination `onUpdatePage` prop trigger twice, closes [#1666](https://github.com/TuSimple/naive-ui/issues/1666).
+- Fix `n-log`'s `trim` prop not being independent when used.
+- Fix `n-slider` processing of step value precision.
+- Fix `n-date-picker` throw error when `time-picker` input is empty, closes [#1678](https://github.com/TuSimple/naive-ui/issues/1678).
+- Fix `n-popover` not working when `trigger` is `focus`.
+- Fix `n-scrollbar`'s scrollbar will vanish if clicked.
+- Fix `n-popover` has an invalid line in style.
+- Fix `n-popover` `flip=false` doesn't work.
+- Fix `n-input-number` can't accept indeterminate input value when `max` or `min` is set, closes [#1664](https://github.com/TuSimple/naive-ui/issues/1664).
+- Fix `n-input-number`'s input value is not changed to a valid value if it's input exceeds min or max multiple times.
+
+### Feats
+
+- `n-input-number` add `keyboard` prop.
+- Add `tableColorStriped` theme variable, closes [#1686](https://github.com/TuSimple/naive-ui/issues/1686).
+- `n-notification-provider` add `max` & `placement` prop.
+- `n-notification` add `destroyAll` method, closes [#333](https://github.com/TuSimple/naive-ui/issues/333).
+- `n-layout-sider` add `on-after-enter` and `on-after-leave` props, closes [#1241](https://github.com/TuSimple/naive-ui/issues/1241).
+- `n-upload` add `custom-request` prop, closes [#1389](https://github.com/TuSimple/naive-ui/issues/1389).
+- `n-data-table` add `expanded-row-keys` prop.
+- `n-popover` provides better auto position adjustment, closes [#1520](https://github.com/TuSimple/naive-ui/issues/1520), [#1643](https://github.com/TuSimple/naive-ui/issues/1643).
+- `n-input-number` add `update-value-on-input` prop, closes [#1662](https://github.com/TuSimple/naive-ui/issues/1662).
+
 ## 2.21.1 (2021-11-23)
 
 ### Fixes
@@ -1678,7 +1707,7 @@ See vue3.md
 
 ### Fixes
 
-- Fix the problem that all the `console` statements are stripped in the bundle.
+- Fix the problem that all the `console` statements are striped in the bundle.
 
 ## 1.0.5 (2020-03-27)
 
