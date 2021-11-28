@@ -1,4 +1,6 @@
-# Custom Request
+# Custom request
+
+User `custom-request` to customize upload request.
 
 ```html
 <n-upload

@@ -14,8 +14,8 @@ default-files
 before-upload
 image-style
 image-card-style
-abstract
 custom-request
+abstract
 ```
 
 ## API
@@ -28,7 +28,7 @@ custom-request
 | accept | `string` | `undefined` | The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a>. |
 | action | `string` | `undefined` | The URL to submit data to. |
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | Customize file thumbnails. |
-| custom-request | `(CustomRequestOptions) => void` | `undefined` | Customize upload request. For types, see <n-a href="#CustomRequestOptions-Type">CustomRequestOptions</n-a> |
+| custom-request | `(options: UploadCustomRequestOptions) => void` | `undefined` | Customize upload request. For types, see <n-a href="#UploadCustomRequestOptions-Type">UploadCustomRequestOptions</n-a> |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | The default file list in uncontrolled manner. |
 | default-upload | `boolean` | `false` | If file uploaded immediatelly after file is selected. |
@@ -73,16 +73,19 @@ custom-request
 | -------- | --------- | ------- | ------------------------------------------ |
 | abstract | `boolean` | `false` | Whether or not to use the `abstract` mode. |
 
-#### CustomRequestOptions Type
+#### UploadCustomRequestOptions Type
 
 ```__ts
-interface CustomRequestOptions<T = any> {
+interface UploadCustomRequestOptions {
   file: FileInfo
   action?: string
-  method?: string
-  data?: FuncOrRecordOrUndef
+  data?:
+    | Record<string, string>
+    | (({ file }: { file: FileInfo }) => Record<string, string>)
   withCredentials?: boolean
-  headers?: FuncOrRecordOrUndef
+  headers?:
+    | Record<string, string>
+    | (({ file }: { file: FileInfo }) => Record<string, string>)
   onProgress: (e: { percent: number }) => void
   onFinish: () => void
   onError: () => void

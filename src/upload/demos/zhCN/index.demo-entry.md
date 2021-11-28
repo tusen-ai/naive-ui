@@ -14,9 +14,9 @@ default-files
 before-upload
 image-style
 image-card-style
+custom-request
 abstract
 retry-debug
-custom-request
 ```
 
 ## API
@@ -29,7 +29,7 @@ custom-request
 | accept | `string` | `undefined` | 接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a> |
 | action | `string` | `undefined` | 请求提交的地址 |
 | create-thumbnail-url | `(file: File) => Promise<string>` | `undefined` | 自定义文件缩略图 |
-| custom-request | `(CustomRequestOptions) => void` | `undefined` | 自定义上传方法，类型参考 <n-a href="#CustomRequestOptions-Type">CustomRequestOptions</n-a> |
+| custom-request | `(options: UploadCustomRequestOptions) => void` | `undefined` | 自定义上传方法，类型参考 <n-a href="#UploadCustomRequestOptions-Type">UploadCustomRequestOptions</n-a> |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | 提交表单需要附加的数据 |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | 非受控状态下默认的文件列表 |
 | default-upload | `boolean` | `true` | 选择文件时候是否默认上传 |
@@ -73,16 +73,19 @@ custom-request
 | -------- | --------- | ------- | ------------------- |
 | abstract | `boolean` | `false` | 是否不存在 DOM 包裹 |
 
-#### CustomRequestOptions Type
+#### UploadCustomRequestOptions Type
 
 ```__ts
-interface CustomRequestOptions {
+interface UploadCustomRequestOptions {
   file: FileInfo
   action?: string
-  method?: string
-  data?: FuncOrRecordOrUndef
+  data?:
+    | Record<string, string>
+    | (({ file }: { file: FileInfo }) => Record<string, string>)
   withCredentials?: boolean
-  headers?: FuncOrRecordOrUndef
+  headers?:
+    | Record<string, string>
+    | (({ file }: { file: FileInfo }) => Record<string, string>)
   onProgress: (e: { percent: number }) => void
   onFinish: () => void
   onError: () => void

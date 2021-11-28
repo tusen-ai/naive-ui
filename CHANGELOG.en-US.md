@@ -2,10 +2,6 @@
 
 ## Pending
 
-### Feats
-
-- `n-upload` add `custom-request` prop, closes [#1389](https://github.com/TuSimple/naive-ui/issues/1389).
-
 ### Fixes
 
 - Fix `n-slider` disabled tooltip at the wrong time.
@@ -25,6 +21,7 @@
 - `n-notification-provider` add `max` & `placement` prop.
 - `n-notification` add `destroyAll` method, closes [#333](https://github.com/TuSimple/naive-ui/issues/333).
 - `n-layout-sider` add `on-after-enter` and `on-after-leave` props, closes [#1241](https://github.com/TuSimple/naive-ui/issues/1241).
+- `n-upload` add `custom-request` prop, closes [#1389](https://github.com/TuSimple/naive-ui/issues/1389).
 
 ## 2.21.1 (2021-11-23)
 

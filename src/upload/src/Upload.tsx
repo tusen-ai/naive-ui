@@ -107,20 +107,11 @@ function customSubmitImpl (options: {
   action?: string
   withCredentials?: boolean
   file: FileInfo
-  method?: string
   customRequest: CustomRequest
 }): void {
-  const {
-    inst,
-    file,
-    data,
-    headers,
-    withCredentials,
-    action,
-    method,
-    customRequest
-  } = options
-  const { doChange, XhrMap } = options.inst
+  const { inst, file, data, headers, withCredentials, action, customRequest } =
+    options
+  const { doChange } = options.inst
   let percentage = 0
   customRequest({
     file,
@@ -128,7 +119,6 @@ function customSubmitImpl (options: {
     headers,
     withCredentials,
     action,
-    method,
     onProgress (event) {
       const fileAfterChange: FileInfo = Object.assign({}, file, {
         status: 'uploading'
@@ -144,9 +134,6 @@ function customSubmitImpl (options: {
         percentage,
         file: null
       })
-      setTimeout(() => {
-        XhrMap.delete(file.id)
-      })
       fileAfterChange =
         inst.onFinish?.({ file: fileAfterChange }) || fileAfterChange
       doChange(fileAfterChange)
@@ -156,7 +143,6 @@ function customSubmitImpl (options: {
         status: 'error',
         percentage
       })
-      XhrMap.delete(file.id)
       doChange(fileAfterChange)
     }
   })
@@ -303,10 +289,7 @@ const uploadProps = {
     type: Boolean,
     default: true
   },
-  showDownloadButton: {
-    type: Boolean,
-    default: false
-  },
+  showDownloadButton: Boolean,
   showRetryButton: {
     type: Boolean,
     default: true
@@ -467,7 +450,6 @@ export default defineComponent({
               withCredentials,
               headers,
               data,
-              method,
               customRequest: props.customRequest
             })
           } else {

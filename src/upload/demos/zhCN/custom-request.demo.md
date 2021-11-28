@@ -1,5 +1,7 @@
 # 自定义上传
 
+使用 `custom-request` 属性来自定义上传请求。
+
 ```html
 <n-upload
   action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
