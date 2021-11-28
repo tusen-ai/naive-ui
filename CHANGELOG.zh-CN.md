@@ -20,6 +20,7 @@
 - `n-notification` 新增 `detroyAll` 方法，关闭 [#333](https://github.com/TuSimple/naive-ui/issues/333)
 - `n-layout-sider` 新增 `on-after-enter` 和 `on-after-leave` 属性，关闭 [#1241](https://github.com/TuSimple/naive-ui/issues/1241)
 - `n-upload` 新增 `custom-request` 属性，关闭 [#1389](https://github.com/TuSimple/naive-ui/issues/1389)
+- `n-data-table` 新增 `expanded-row-keys` 属性
 
 ### TODO
 
