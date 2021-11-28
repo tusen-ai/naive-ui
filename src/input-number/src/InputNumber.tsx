@@ -44,6 +44,13 @@ const inputNumberProps = {
   },
   readonly: Boolean,
   clearable: Boolean,
+  keyboard: {
+    type: Object as PropType<{
+      ArrowUp?: boolean
+      ArrowDown?: boolean
+    }>,
+    default: {}
+  },
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
@@ -313,11 +320,13 @@ export default defineComponent({
           inputInstRef.value?.deactivate()
         }
       } else if (e.code === 'ArrowUp') {
+        if (props.keyboard.ArrowUp === false) return
         const value = deriveValueFromDisplayedValue()
         if (value !== false) {
           doAdd()
         }
       } else if (e.code === 'ArrowDown') {
+        if (props.keyboard.ArrowDown === false) return
         const value = deriveValueFromDisplayedValue()
         if (value !== false) {
           doMinus()
