@@ -28,6 +28,7 @@
 - `n-data-table` add `expanded-row-keys` prop.
 - `n-popover` provides better auto position adjustment, closes [#1520](https://github.com/TuSimple/naive-ui/issues/1520), [#1643](https://github.com/TuSimple/naive-ui/issues/1643).
 - `n-input-number` add `update-value-on-input` prop, closes [#1662](https://github.com/TuSimple/naive-ui/issues/1662).
+- `n-auto-complete` add `prefix` & `suffix` slot.
 
 ## 2.21.1 (2021-11-23)
 
