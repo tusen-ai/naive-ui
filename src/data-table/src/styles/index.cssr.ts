@@ -114,7 +114,7 @@ export default c([
       margin-right: 8px;
       cursor: pointer;
       font-size: 16px;
-      vertical-align: -.125em;
+      vertical-align: -0.2em;
     `),
     cB('data-table-thead', {
       transition: 'background-color .3s var(--bezier)',
