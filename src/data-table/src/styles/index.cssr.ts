@@ -329,7 +329,7 @@ export default c([
       ])
     ]),
     cM('sticky', [
-      cB('data-table-base-table-header', 'position: sticky; top: 0; z-index: 1;')
+      cB('data-table-base-table-header', 'position: sticky; top: 0; z-index: 4; margin-bottom: -1px;')
     ]),
     cM('bordered', [
       cB('data-table-wrapper', {
