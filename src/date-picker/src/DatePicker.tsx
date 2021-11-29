@@ -52,6 +52,7 @@ import DatetimerangePanel from './panel/datetimerange'
 import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
+import MonthRangePanel from './panel/monthRange'
 import style from './styles/index.cssr'
 import { DatePickerTheme } from '../styles/light'
 
@@ -184,7 +185,7 @@ export default defineComponent({
       )
     })
     const isRangeRef = computed(() => {
-      return ['daterange', 'datetimerange'].includes(props.type)
+      return ['daterange', 'datetimerange', 'monthrange'].includes(props.type)
     })
     const localizedPlacehoderRef = computed(() => {
       const { placeholder } = props
@@ -275,6 +276,9 @@ export default defineComponent({
         case 'quarter': {
           return ['clear', 'now', 'confirm']
         }
+        case 'monthrange': {
+          return ['clear', 'confirm']
+        }
         default: {
           warn(
             'data-picker',
@@ -358,9 +362,9 @@ export default defineComponent({
         disableUpdateOnClose
       })
     }
-    function scrollPickerColumns (value?: number): void {
+    function scrollPickerColumns (value?: number, type?: 'start' | 'end'): void {
       if (!panelInstRef.value) return
-      const { monthScrollRef, yearScrollRef } = panelInstRef.value
+      const { monthScrollRef, yearScrollRef, startYearScroll, startMonthScroll, endYearScroll, endMonthScroll } = panelInstRef.value
       const { value: mergedValue } = mergedValueRef
       if (monthScrollRef) {
         const monthIndex =
@@ -379,6 +383,87 @@ export default defineComponent({
               : getYear(mergedValue as number)
             : getYear(value)) - START_YEAR
         yearScrollRef.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
+      }
+      if (type === 'start') {
+        if (startMonthScroll) {
+          const monthIndex =
+            value === undefined
+              ? mergedValue === null
+                ? getMonth(Date.now())
+                : getMonth(mergedValue[0])
+              : getMonth(value)
+          startMonthScroll.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
+        }
+        if (startYearScroll) {
+          const yearIndex =
+            (value === undefined
+              ? mergedValue === null
+                ? getYear(Date.now())
+                : getYear(mergedValue[0])
+              : getYear(value)) - START_YEAR
+          startYearScroll.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
+        }
+      } else if (type === 'end') {
+        if (endMonthScroll) {
+          const monthIndex =
+            value === undefined
+              ? mergedValue === null
+                ? getMonth(Date.now())
+                : getMonth(mergedValue[1])
+              : getMonth(value)
+          endMonthScroll.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
+        }
+        if (endYearScroll) {
+          const yearIndex =
+            (value === undefined
+              ? mergedValue === null
+                ? getYear(Date.now())
+                : getYear(mergedValue[1])
+              : getYear(value)) - START_YEAR
+          endYearScroll.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
+        }
+      }
+    }
+
+    function scrollRangeYearMonth (value?: number): void {
+      if (!panelInstRef.value) return
+      const { startYearScroll, startMonthScroll, endYearScroll, endMonthScroll } = panelInstRef.value
+      const { value: mergedValue } = mergedValueRef
+      if (startMonthScroll) {
+        const monthIndex =
+          value === undefined
+            ? mergedValue === null
+              ? getMonth(Date.now())
+              : getMonth(mergedValue[0])
+            : getMonth(value)
+        startMonthScroll.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
+      }
+      if (startYearScroll) {
+        const yearIndex =
+          (value === undefined
+            ? mergedValue === null
+              ? getYear(Date.now())
+              : getYear(mergedValue[0])
+            : getYear(value)) - START_YEAR
+        startYearScroll.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
+      }
+      if (endMonthScroll) {
+        const monthIndex =
+          value === undefined
+            ? mergedValue === null
+              ? getMonth(Date.now())
+              : getMonth(mergedValue[1])
+            : getMonth(value)
+        endMonthScroll.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
+      }
+      if (endYearScroll) {
+        const yearIndex =
+          (value === undefined
+            ? mergedValue === null
+              ? getYear(Date.now())
+              : getYear(mergedValue[1])
+            : getYear(value)) - START_YEAR
+        endYearScroll.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
       }
     }
 
@@ -527,6 +612,9 @@ export default defineComponent({
       if (type === 'month' || type === 'year' || type === 'quarter') {
         void nextTick(scrollPickerColumns)
       }
+      if (props.type === 'monthrange') {
+        void nextTick(scrollRangeYearMonth)
+      }
     }
     function closeCalendar ({
       returnFocus,
@@ -572,6 +660,7 @@ export default defineComponent({
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
       scrollPickerColumns,
+      scrollRangeYearMonth,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       timePickerSizeRef,
@@ -910,6 +999,12 @@ export default defineComponent({
                                     type="quarter"
                                     key="quarter"
                                   />
+                              ) : this.type === 'monthrange' ? (
+                                <MonthRangePanel
+                                  {...commonPanelProps}
+                                  type="monthrange"
+                                  key="monthrange"
+                                />
                               ) : (
                                   <DatePanel {...commonPanelProps} />
                               ),

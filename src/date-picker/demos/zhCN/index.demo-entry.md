@@ -12,6 +12,7 @@ datetimerange
 month
 year
 quarter
+monthrange
 size
 default-time
 disabled

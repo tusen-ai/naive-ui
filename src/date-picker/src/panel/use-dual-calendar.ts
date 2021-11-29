@@ -72,6 +72,10 @@ function useDualCalendar (
   const panelCommon = usePanelCommon(props)
   const startDatesElRef = ref<HTMLElement | null>(null)
   const endDatesElRef = ref<HTMLElement | null>(null)
+  const startYearScrollRef = ref<HTMLElement | null>(null)
+  const endYearScrollRef = ref<HTMLElement | null>(null)
+  const startMonthScrollRef = ref<HTMLElement | null>(null)
+  const endMonthScrollRef = ref<HTMLElement | null>(null)
   const startCalendarDateTimeRef = ref(Date.now())
   const endCalendarDateTimeRef = ref(getTime(addMonths(Date.now(), 1)))
   const nowRef = ref(Date.now())
@@ -588,6 +592,10 @@ function useDualCalendar (
     startCalendarYear: startCalendarYearRef,
     endCalendarMonth: endCalendarMonthRef,
     endCalendarYear: endCalendarYearRef,
+    startYearScroll: startYearScrollRef,
+    endYearScroll: endYearScrollRef,
+    startMonthScroll: startMonthScrollRef,
+    endMonthScroll: endMonthScrollRef,
     weekdays: weekdaysRef,
     startDateArray: startDateArrayRef,
     endDateArray: endDateArrayRef,

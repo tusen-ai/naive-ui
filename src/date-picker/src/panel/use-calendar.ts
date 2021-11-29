@@ -44,7 +44,7 @@ const useCalendarProps = {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useCalendar (
   props: ExtractPropTypes<typeof useCalendarProps>,
-  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter'
+  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter' | 'monthrange'
 ) {
   const panelCommon = usePanelCommon(props)
   const {
@@ -59,7 +59,8 @@ function useCalendar (
     localeRef,
     firstDayOfWeekRef,
     datePickerSlots,
-    scrollPickerColumns
+    scrollPickerColumns,
+    scrollRangeYearMonth,
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -102,6 +103,18 @@ function useCalendar (
   })
   const querterArrayRef = computed(() => {
     return quarterArray(calendarValueRef.value, props.value, nowRef.value)
+  }
+  const startYearArrayRef = computed(() => {
+    return yearArray(props.value[0], props.value[0], nowRef.value)
+  })
+  const endYearArrayRef = computed(() => {
+    return yearArray(props.value[1], props.value[1], nowRef.value)
+  })
+  const startMonthArrayRef = computed(() => {
+    return monthArray(props.value[0], props.value[0], nowRef.value)
+  })
+  const endMonthArrayRef = computed(() => {
+    return monthArray(props.value[1], props.value[1], nowRef.value)
   })
   const weekdaysRef = computed(() => {
     return dateArrayRef.value.slice(0, 7).map((dateItem) => {
@@ -152,6 +165,7 @@ function useCalendar (
     if (type === 'month') return getTime(startOfMonth(value))
     if (type === 'year') return getTime(startOfYear(value))
     if (type === 'quarter') return getTime(startOfQuarter(value))
+    if (type === 'monthrange') return getTime(startOfMonth(value))
     return getTime(startOfDay(value))
   }
   function mergedIsDateDisabled (ts: number): boolean {
@@ -269,6 +283,31 @@ function useCalendar (
         break
     }
   }
+  function handleDateRangeClick (dateItem: DateItem | MonthItem | YearItem, clickType: 'start' | 'end'): void {
+    if (mergedIsDateDisabled(dateItem.ts)) {
+      return
+    }
+    let newValue = clickType === 'start' ? props.value[0] : props.value[1]
+    newValue = sanitizeValue(getTime(set(newValue, dateItem.dateObject)))
+    let needScrollAll = false
+    if (newValue > props.value[1] && clickType === 'start') {
+      const temp = props.value[1]
+      props.value[1] = newValue
+      newValue = temp
+      needScrollAll = true
+    }
+    if (newValue < props.value[0] && clickType === 'end') {
+      const temp = props.value[0]
+      props.value[0] = newValue
+      newValue = temp
+      needScrollAll = true
+    }
+    panelCommon.doUpdateValue(
+      clickType === 'start' ? [newValue, props.value[1]] : [props.value[0], newValue],
+      false
+    )
+    needScrollAll ? scrollRangeYearMonth() : scrollYearMonth(newValue, clickType)
+  }
   function deriveDateInputValue (time?: number): void {
     // If not selected, display nothing,
     // else update datetime related string
@@ -345,6 +384,10 @@ function useCalendar (
     monthArray: monthArrayRef,
     yearArray: yearArrayRef,
     quarterArray: querterArrayRef,
+    startYearArray: startYearArrayRef,
+    startMonthArray: startMonthArrayRef,
+    endYearArray: endYearArrayRef,
+    endMonthArray: endMonthArrayRef,
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
     weekdays: weekdaysRef,
@@ -361,6 +404,7 @@ function useCalendar (
     ...panelCommon,
     // datetime only
     handleDateClick,
+    handleDateRangeClick,
     handleDateInputBlur,
     handleDateInput,
     handleTimePickerChange,

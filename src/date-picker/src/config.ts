@@ -10,3 +10,4 @@ export type DatePickerType =
   | 'month'
   | 'year'
   | 'quarter'
+  | 'monthrange'
