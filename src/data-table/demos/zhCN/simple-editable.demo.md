@@ -1,5 +1,7 @@
 # 简单的可编辑表格
 
+虽然简单，但是实用
+
 ```html
 <n-data-table :columns="columns" :data="data" :pagination="pagination" />
 <pre>{{ JSON.stringify(data, null, 2) }}</pre>

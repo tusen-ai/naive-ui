@@ -1,14 +1,19 @@
-# Simple Editable Table
+# 可切换的可编辑表格
 
-Simple, but practical.
+不太简单，胜在好看
 
 ```html
-<n-data-table :columns="columns" :data="data" :pagination="pagination" />
+<n-data-table
+  :key="(row) => row.key"
+  :columns="columns"
+  :data="data"
+  :pagination="pagination"
+/>
 <pre>{{ JSON.stringify(data, null, 2) }}</pre>
 ```
 
 ```js
-import { h, defineComponent, ref } from 'vue'
+import { h, defineComponent, ref, nextTick } from 'vue'
 import { NInput } from 'naive-ui'
 
 const createData = () => [
@@ -32,6 +37,44 @@ const createData = () => [
   }
 ]
 
+const ShowOrEdit = defineComponent({
+  props: {
+    value: [String, Number],
+    onUpdateValue: [Function, Array]
+  },
+  setup (props) {
+    const isEdit = ref(false)
+    const inputRef = ref(null)
+    const inputValue = ref(props.value)
+    function handleOnClick () {
+      isEdit.value = true
+      nextTick(() => {
+        inputRef.value.focus()
+      })
+    }
+    return () =>
+      h(
+        'div',
+        {
+          onClick: handleOnClick
+        },
+        isEdit.value
+          ? h(NInput, {
+            ref: inputRef,
+            value: inputValue.value,
+            onUpdateValue: (v) => {
+              inputValue.value = v
+            },
+            onBlur: () => {
+              props.onUpdateValue(inputValue.value)
+              isEdit.value = false
+            }
+          })
+          : props.value
+      )
+  }
+})
+
 export default defineComponent({
   setup () {
     const data = ref(createData())
@@ -42,7 +85,7 @@ export default defineComponent({
           title: 'Name',
           key: 'name',
           render (row, index) {
-            return h(NInput, {
+            return h(ShowOrEdit, {
               value: row.name,
               onUpdateValue (v) {
                 data.value[index].name = v
@@ -54,7 +97,7 @@ export default defineComponent({
           title: 'Age',
           key: 'age',
           render (row, index) {
-            return h(NInput, {
+            return h(ShowOrEdit, {
               value: String(row.age),
               onUpdateValue (v) {
                 data.value[index].age = Number(v)
@@ -66,7 +109,7 @@ export default defineComponent({
           title: 'Address',
           key: 'address',
           render (row, index) {
-            return h(NInput, {
+            return h(ShowOrEdit, {
               value: row.address,
               onUpdateValue (v) {
                 data.value[index].address = v

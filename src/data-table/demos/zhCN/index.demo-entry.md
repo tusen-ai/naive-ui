@@ -42,6 +42,7 @@ tree
 flex-height
 striped
 simple-editable
+switchable-editable
 fixed-column-debug
 fixed-column2-debug
 scroll-debug
