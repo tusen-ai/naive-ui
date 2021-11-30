@@ -329,7 +329,8 @@ export default c([
       ])
     ]),
     cM('sticky', [
-      cB('data-table-base-table-header', 'position: sticky; top: 0; z-index: 4; margin-bottom: -1px;')
+      cB('data-table-base-table-header', 'position: sticky; top: 0; z-index: 4; margin-bottom: -1px;'),
+      cB('data-table-base-table', 'clip-path: inset(0% 0 0% 0 round var(--border-radius));')
     ]),
     cM('bordered', [
       cB('data-table-wrapper', {
