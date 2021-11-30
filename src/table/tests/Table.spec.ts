@@ -6,7 +6,7 @@ describe('n-table', () => {
     mount(NTable)
   })
 
-  it('should work with `bottom-bordered` slot', async () => {
+  it('should work with `bottom-bordered` prop', async () => {
     const wrapper = mount(NTable)
     expect(wrapper.find('.n-table').classes()).toContain(
       'n-table--bottom-bordered'
