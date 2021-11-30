@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Fix `n-input` 's `borderHover` theme variable doesn't work, closes [#704](https://github.com/TuSimple/naive-ui/issues/1704).
+- Fix `n-input` 's `borderHover` theme variable doesn't work, closes [#1704](https://github.com/TuSimple/naive-ui/issues/1704).
 
 ## 2.21.2 (2021-11-29)
 
