@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- 修复 `n-input` 的 `borderHover` 主题变量不生效， 关闭 [#704](https://github.com/TuSimple/naive-ui/issues/1704)
+- 修复 `n-input` 的 `borderHover` 主题变量不生效， 关闭 [#1704](https://github.com/TuSimple/naive-ui/issues/1704)
 
 ## 2.21.2 (2021-11-29)
 
