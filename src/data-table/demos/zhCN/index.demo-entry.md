@@ -59,7 +59,8 @@ striped
 | columns | `Array<DataTableColumn>` | `[]` | 需要展示的列 |
 | data | `Array<object>` | `[]` | 需要展示的数据 |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | 默认选中的 key 值 |
-| default-expanded-row-keys | `Array<string \| number>` | `[]` | 默认展开树的 key 值 |
+| default-expanded-row-keys | `Array<string \| number>` | `[]` | 默认展开行的 key 值 |
+| expanded-row-keys | `Array<string \| number>` | `undefined` | 展开行的 key 值 |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |
 | flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |
 | loading | `boolean` | `false` | 是否显示 loading 状态 |
@@ -97,7 +98,7 @@ striped
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | 非受控状态下表格默认的排序方式 |
 | disabled | `(rowData: object, rowIndex: number) => boolean` | `undefined` | 是否禁用 |
 | ellipsis | `boolean \| EllipsisProps` | `false` | 文本溢出的设置 |
-| expandable | `(rowData: object, rowIndex: number) => boolean` | `undefined` | 行是否可展开，仅在 `type` 为 `'expand'` 时生效 |
+| expandable | `(rowData: object) => boolean` | `undefined` | 行是否可展开，仅在 `type` 为 `'expand'` 时生效 |
 | filter | `boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'` | `undefined` | 这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。 |
 | filterMode | `'and' \| 'or'` | `'or'` | 同一列筛选方式为与还是或 |
 | filterMultiple | `boolean` | `true` | 同一列是否可以筛选多个 |
@@ -148,7 +149,7 @@ type DataTableCreateSummary = (
 type SortState = {
   columnKey: string | number,
   sorter: 'default' | function | boolean,
-  order: 'ascend' | 'descend' \ false
+  order: 'ascend' | 'descend' | false
 }
 ```
 

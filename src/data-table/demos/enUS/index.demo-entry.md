@@ -58,6 +58,7 @@ striped
 | data | `Array<object>` | `[]` | Data to display. |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | The key value selected by default. |
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |
+| expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |
 | indent | `number` | `16` | Indent of row content when using tree data. |
 | loading | `boolean` | `false` | Whether to display loading status. |
@@ -95,7 +96,7 @@ striped
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | The default sort order of the table in uncontrolled manner. |
 | disabled | `(rowData: object, rowIndex: number) => boolean` | `() => false` | Whether the row is checkable. |
 | ellipsis | `boolean \| EllipsisProps` | `false` | Ellipsis options when content overflows. |
-| expandable | `(rowData: object, rowIndex: number) => boolean` | `undefined` | Whethe the row is expandable. Only works when `type` is `'expand'`. |
+| expandable | `(rowData: object) => boolean` | `undefined` | Whethe the row is expandable. Only works when `type` is `'expand'`. |
 | filter | `boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'` | `false` | The filter of the column. If set to `true`, it will only display filter button on the column, which can be used in async status. |
 | filterMode | `'and' \| 'or'` | `'or'` | The filter mode. |
 | filterMultiple | `boolean` | `true` | Can the column filtered by multiple values. |
@@ -146,7 +147,7 @@ type DataTableCreateSummary = (
 type SortState = {
   columnKey: string | number,
   sorter: 'default' | function | boolean,
-  order: 'ascend' | 'descend' \ false
+  order: 'ascend' | 'descend' | false
 }
 ```
 

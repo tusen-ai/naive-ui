@@ -58,3 +58,5 @@ show-options-by-value
 | Name | Parameters | Description |
 | --- | --- | --- |
 | default | `(options: { handleInput: (value: string) => void, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` | Custom input elements, supplied by the user. |
+| prefix | `()` | Input's prefix content. |
+| suffix | `()` | Input's suffix content. |

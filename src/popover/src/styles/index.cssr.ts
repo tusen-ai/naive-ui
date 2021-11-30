@@ -58,7 +58,6 @@ export default c([
     cNotM('raw', `
       background-color: var(--color);
       border-radius: var(--border-radius);
-      var(--padding);
     `, [
       cNotM('show-header', 'padding: var(--padding);')
     ]),

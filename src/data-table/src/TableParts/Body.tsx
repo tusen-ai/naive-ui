@@ -78,7 +78,7 @@ function flatten (
   rowInfos.forEach((rowInfo) => {
     fRows.push(rowInfo)
     const { children } = rowInfo.tmNode
-    if (children) {
+    if (children && expandedRowKeys.has(rowInfo.key)) {
       traverse(children)
     }
   })
@@ -435,10 +435,6 @@ export default defineComponent({
               handleUpdateExpanded
             } = this
             const { length: colCount } = cols
-            const rowIndexToKey: Record<number, RowKey> = {}
-            paginatedData.forEach(({ tmNode }, rowIndex) => {
-              rowIndexToKey[rowIndex] = tmNode.key
-            })
 
             let mergedData: RowRenderInfo[]
 
@@ -483,7 +479,26 @@ export default defineComponent({
               ? { width: pxfy(this.indent) }
               : undefined
 
-            const { length: rowCount } = mergedData
+            // Tile the data of the expanded row
+            const displayedData: RowRenderInfo[] = []
+            mergedData.forEach((rowInfo) => {
+              if (renderExpand && mergedExpandedRowKeySet.has(rowInfo.key)) {
+                displayedData.push(rowInfo, {
+                  isExpandedRow: true,
+                  key: rowInfo.key,
+                  tmNode: rowInfo.tmNode as TmNode
+                })
+              } else {
+                displayedData.push(rowInfo)
+              }
+            })
+
+            const { length: rowCount } = displayedData
+
+            const rowIndexToKey: Record<number, RowKey> = {}
+            paginatedData.forEach(({ tmNode }, rowIndex) => {
+              rowIndexToKey[rowIndex] = tmNode.key
+            })
 
             const renderRow = (
               rowInfo: RowRenderInfo,
@@ -702,20 +717,6 @@ export default defineComponent({
 
               return row
             }
-
-            // Tile the data of the expanded row
-            const displayedData: RowRenderInfo[] = []
-            mergedData.forEach((rowInfo) => {
-              if (renderExpand && mergedExpandedRowKeySet.has(rowInfo.key)) {
-                displayedData.push(rowInfo, {
-                  isExpandedRow: true,
-                  key: rowInfo.key,
-                  tmNode: rowInfo.tmNode as TmNode
-                })
-              } else {
-                displayedData.push(rowInfo)
-              }
-            })
 
             if (!virtualScroll) {
               return (
