@@ -77,6 +77,7 @@ export default c([
       text-decoration-color: var(--text-decoration-color);
       color: var(--text-color);
       caret-color: var(--caret-color);
+      background-color: transparent;
     `, [
       c('&::placeholder', {
         color: '#0000'
@@ -135,7 +136,6 @@ export default c([
       padding: 0;
       height: var(--height);
       line-height: var(--height);
-      opacity: 0;
     `, [
       c('+', [
         cE('placeholder', `
@@ -176,7 +176,6 @@ export default c([
         padding-top: var(--padding-vertical);
         padding-bottom: var(--padding-vertical);
         display: inline-block;
-        opacity: 0;
         vertical-align: bottom;
         box-sizing: border-box;
         line-height: var(--line-height-textarea);
