@@ -5,6 +5,18 @@ describe('n-table', () => {
   it('should work with import on demand', () => {
     mount(NTable)
   })
+
+  it('should work with `bottom-bordered` prop', async () => {
+    const wrapper = mount(NTable)
+    expect(wrapper.find('.n-table').classes()).toContain(
+      'n-table--bottom-bordered'
+    )
+
+    await wrapper.setProps({ 'bottom-bordered': false })
+    expect(wrapper.find('.n-table').classes()).not.toContain(
+      'n-table--bottom-bordered'
+    )
+  })
 })
 
 describe('n-table-body', () => {
