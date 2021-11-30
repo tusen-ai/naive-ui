@@ -111,7 +111,6 @@ export default c([
         top: 0;
         left: 0;
         height: 100%;
-        opacity: 0;
       `)
     ]),
     // input
@@ -136,6 +135,7 @@ export default c([
       padding: 0;
       height: var(--height);
       line-height: var(--height);
+      opacity: 0;
     `, [
       c('+', [
         cE('placeholder', `
@@ -176,6 +176,7 @@ export default c([
         padding-top: var(--padding-vertical);
         padding-bottom: var(--padding-vertical);
         display: inline-block;
+        opacity: 0;
         vertical-align: bottom;
         box-sizing: border-box;
         line-height: var(--line-height-textarea);
