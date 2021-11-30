@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-input` 的颜色在安卓微信浏览器下异常, 关闭 [#1705](https://github.com/TuSimple/naive-ui/issues/1705)
+
 ## 2.21.2 (2021-11-29)
 
 ### Fixes

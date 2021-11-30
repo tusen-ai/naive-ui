@@ -111,6 +111,7 @@ export default c([
         top: 0;
         left: 0;
         height: 100%;
+        opacity: 0;
       `)
     ]),
     // input

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-input`'s color is abnormal in Android WeChat, closes [#1705](https://github.com/TuSimple/naive-ui/issues/1705).
+
 ## 2.21.2 (2021-11-29)
 
 ### Fixes
