@@ -290,23 +290,34 @@ function useCalendar (
     let newValue = clickType === 'start' ? props.value[0] : props.value[1]
     newValue = sanitizeValue(getTime(set(newValue, dateItem.dateObject)))
     let needScrollAll = false
+    let needChangeValue = null
     if (newValue > props.value[1] && clickType === 'start') {
       const temp = props.value[1]
-      props.value[1] = newValue
+      needChangeValue = newValue
       newValue = temp
       needScrollAll = true
     }
     if (newValue < props.value[0] && clickType === 'end') {
       const temp = props.value[0]
-      props.value[0] = newValue
+      needChangeValue = newValue
       newValue = temp
       needScrollAll = true
     }
     panelCommon.doUpdateValue(
-      clickType === 'start' ? [newValue, props.value[1]] : [props.value[0], newValue],
+      clickType === 'start' ? [newValue, needChangeValue] : [needChangeValue, newValue],
       false
     )
-    needScrollAll ? scrollRangeYearMonth() : scrollYearMonth(newValue, clickType)
+    if (needScrollAll) {
+      if (clickType === 'start') {
+        scrollYearMonth(newValue, 'start')
+        scrollYearMonth(needChangeValue, 'end')
+      } else {
+        scrollYearMonth(needChangeValue, 'start')
+        scrollYearMonth(newValue, 'end')
+      }
+    } else {
+      scrollYearMonth(newValue, clickType)
+    }
   }
   function deriveDateInputValue (time?: number): void {
     // If not selected, display nothing,
