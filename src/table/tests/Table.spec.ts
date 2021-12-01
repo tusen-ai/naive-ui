@@ -27,6 +27,18 @@ describe('n-table', () => {
       'n-table--bordered'
     )
   })
+
+  it('should work with `single-column` prop', async () => {
+    const wrapper = mount(NTable)
+    expect(wrapper.find('.n-table').classes()).not.toContain(
+      'n-table--single-column'
+    )
+
+    await wrapper.setProps({ 'single-column': true })
+    expect(wrapper.find('.n-table').classes()).toContain(
+      'n-table--single-column'
+    )
+  })
 })
 
 describe('n-table-body', () => {
