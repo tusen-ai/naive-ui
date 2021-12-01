@@ -175,15 +175,4 @@ describe('n-image', () => {
     expect(document.querySelector('.n-image-preview-overlay')).toEqual(null)
     wrapper.unmount()
   })
-
-  it('should work with show errorBox', async () => {
-    const wrapper = mount(NImage, {
-      props: {
-        src: 'https:// 07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-      }
-    })
-    await wrapper.find('img').trigger('error')
-    expect(document.querySelector('.n-image-error-box')).not.toEqual(null)
-    wrapper.unmount()
-  })
 })
