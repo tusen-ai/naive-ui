@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-tree` add `watch-props` prop.
+
 ## 2.21.2 (2021-11-29)
 
 ### Fixes
