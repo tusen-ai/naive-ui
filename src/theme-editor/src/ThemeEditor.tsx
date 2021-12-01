@@ -54,7 +54,7 @@ const ColorWandIcon = (
 )
 
 // button colorOpacitySecondary var is number
-const judgeUseColorPicker = (key: string, value: number | string): boolean => {
+const isColorPicker = (key: string, value: number | string): boolean => {
   if (typeof value !== 'string') return false
   if (key.includes('color') || key.includes('Color')) return true
   return false
@@ -404,7 +404,7 @@ export default defineComponent({
                                                         >
                                                           {varKey}
                                                         </div>,
-                                                        judgeUseColorPicker(
+                                                        isColorPicker(
                                                           varKey,
                                                           this.tempOverrides?.[
                                                             themeKey
