@@ -17,6 +17,16 @@ describe('n-table', () => {
       'n-table--bottom-bordered'
     )
   })
+
+  it('should work with `bordered` prop', async () => {
+    const wrapper = mount(NTable)
+    expect(wrapper.find('.n-table').classes()).toContain('n-table--bordered')
+
+    await wrapper.setProps({ bordered: false })
+    expect(wrapper.find('.n-table').classes()).not.toContain(
+      'n-table--bordered'
+    )
+  })
 })
 
 describe('n-table-body', () => {
