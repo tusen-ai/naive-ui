@@ -299,6 +299,7 @@ export default c([
       border-top-left-radius: var(--border-radius);
       border-top-right-radius: var(--border-radius);
       line-height: var(--line-height);
+      clip-path: inset(0 0 0 0 round var(--border-radius));
     `),
     cM('loading', [
       cB('data-table-wrapper', 'opacity: var(--opacity-loading);')
@@ -329,8 +330,34 @@ export default c([
       ])
     ]),
     cM('sticky', [
-      cB('data-table-base-table-header', 'position: sticky; top: 0; z-index: 4; margin-bottom: -1px;'),
-      cB('data-table-base-table', 'clip-path: inset(0% 0 0% 0 round var(--border-radius));')
+      cB('data-table-base-table-header', {
+        position: 'sticky',
+        top: 0,
+        zIndex: 4,
+        marginBottom: '-1px'
+      }
+      , [
+        c('th:first-child::before', `
+          position: absolute;
+          width: var(--border-radius);
+          height: var(--border-radius);
+          top: 0;
+          left: -1px;
+          content: '';
+          display: block;
+          backgroundColor: white;
+        `),
+        c('th:last-child::after', `
+          position: absolute;
+          width: var(--border-radius);
+          height: 'var(--border-radius);
+          top: 0;
+          right: -1px;
+          content: '';
+          display: block;
+          backgroundColor: white;
+        `)
+      ])
     ]),
     cM('bordered', [
       cB('data-table-wrapper', {
