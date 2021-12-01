@@ -299,8 +299,9 @@ export default c([
       border-top-left-radius: var(--border-radius);
       border-top-right-radius: var(--border-radius);
       line-height: var(--line-height);
-      clip-path: inset(0 0 0 0 round var(--border-radius));
-    `),
+    `, [
+      cB('data-table-base-table', 'clip-path: inset(0 0 0 0 round var(--border-radius));')
+    ]),
     cM('loading', [
       cB('data-table-wrapper', 'opacity: var(--opacity-loading);')
     ]),
