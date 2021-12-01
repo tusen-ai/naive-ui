@@ -1,5 +1,12 @@
 # CHANGELOG
 
+### Fixes
+
+### Feats
+
+- `n-image` add `can-preview` & `on-load` prop, closes [#1647](https://github.com/TuSimple/naive-ui/issues/1647).
+- `n-image` add `loading` & `errorbox` slot.
+
 ## 2.21.2 (2021-11-29)
 
 ### Fixes

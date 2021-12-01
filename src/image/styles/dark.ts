@@ -7,7 +7,10 @@ export const imageDark: ImageTheme = {
   self: (vars) => {
     const { textColor2 } = vars
     return {
-      iconColor: textColor2
+      iconColor: textColor2,
+      errorBackgroundColor: 'rgba(24, 24, 28, 1)',
+      loadBackgroundColor: 'rgba(24, 24, 28, .8)',
+      errorDefaultFilter: 'brightness(0.8)'
     }
   }
 }
