@@ -2,7 +2,6 @@ import { defineComponent, h, renderSlot, watchEffect, PropType, VNode } from 'vu
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import { useDualCalendar } from './use-dual-calendar'
-import { useCalendar } from './use-calendar'
 import { warnOnce } from '../../../_utils'
 
 import { VirtualList } from 'vueuc'
@@ -30,7 +29,8 @@ export default defineComponent({
         }
       })
     }
-    const useCalendarRef = useCalendar(props, props.type)
+    const useCalendarRef = useDualCalendar(props, props.type)
+    console.log('xx', useCalendarRef)
     const renderItem = (
       item: YearItem | MonthItem,
       i: number,
@@ -63,7 +63,7 @@ export default defineComponent({
         </div>
       )
     }
-    return { ...useDualCalendar(props, props.type), ...useCalendarRef, renderItem }
+    return { ...useCalendarRef, renderItem }
   },
   render () {
     const { mergedClsPrefix, mergedTheme, shortcuts, type, renderItem } = this
@@ -82,7 +82,7 @@ export default defineComponent({
         >
           <div class={`${mergedClsPrefix}-date-panel-month-calendar`}>
           <NScrollbar
-            ref="scrollbarInstRef"
+            ref="scrollbarInst"
             class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
             theme={mergedTheme.peers.Scrollbar}
             themeOverrides={mergedTheme.peerOverrides.Scrollbar}
@@ -148,7 +148,7 @@ export default defineComponent({
         >
           <div class={`${mergedClsPrefix}-date-panel-month-calendar`}>
           <NScrollbar
-            ref="scrollbarInstRef"
+            ref="scrollbarInst"
             class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
             theme={mergedTheme.peers.Scrollbar}
             themeOverrides={mergedTheme.peerOverrides.Scrollbar}

@@ -48,6 +48,10 @@ export interface PanelRef {
   // Only exists when type is month
   monthScrollRef?: ScrollbarInst | null
   yearScrollRef?: VirtualListInst | null
+  startYearScroll?: VirtualListInst | null
+  endYearScroll?: VirtualListInst | null
+  startMonthScroll?: ScrollbarInst | null
+  endMonthScroll?: ScrollbarInst | null
 }
 
 // 0 is Monday
@@ -65,8 +69,8 @@ export type DatePickerInjection = {
   updateValueOnCloseRef: Ref<boolean>
   firstDayOfWeekRef: Ref<FirstDayOfWeek | undefined>
   datePickerSlots: Slots
-  scrollPickerColumns: (value?: number, type?: 'start' | 'end') => void
-  scrollRangeYearMonth: (value?: number) => void
+  scrollPickerColumns: (value?: number) => void
+  scrollRangeYearMonth: (value?: number, type?: 'start' | 'end' | 'all') => void
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 
