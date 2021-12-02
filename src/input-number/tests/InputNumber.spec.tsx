@@ -154,6 +154,7 @@ describe('n-input-number', () => {
     await wrapper.setProps({ min: 20, max: 50 })
     wrapper.find('input').element.value = '18.'
     await wrapper.find('input').trigger('input')
+    wrapper.find('input').element.value = '.18'
     expect(onUpdateValue).toHaveBeenCalledTimes(2)
     wrapper.find('input').element.value = '22.2'
     await wrapper.find('input').trigger('input')
