@@ -132,4 +132,39 @@ describe('n-input-number', () => {
     expect(wrapper.find('input').element.value).toEqual('6.996633')
     wrapper.unmount()
   })
+
+  it('should work with `updateValueOnInput` prop', async () => {
+    const onUpdateValue = jest.fn()
+    const wrapper = mount(NInputNumber, {
+      attachTo: document.body,
+      props: {
+        defaultValue: 2,
+        onUpdateValue
+      }
+    })
+    wrapper.find('input').element.value = '2.'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledTimes(0)
+    wrapper.find('input').element.value = '2.2'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledWith(2.2)
+    wrapper.find('input').element.value = ''
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledTimes(2)
+    await wrapper.setProps({ min: 20, max: 50 })
+    wrapper.find('input').element.value = '18.'
+    await wrapper.find('input').trigger('input')
+    wrapper.find('input').element.value = '.18'
+    expect(onUpdateValue).toHaveBeenCalledTimes(2)
+    wrapper.find('input').element.value = '22.2'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledWith(22.2)
+    await wrapper.setProps({ updateValueOnInput: false })
+    wrapper.find('input').element.value = '24'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledTimes(3)
+    await wrapper.find('input').trigger('blur')
+    expect(onUpdateValue).toHaveBeenCalledWith(24)
+    wrapper.unmount()
+  })
 })

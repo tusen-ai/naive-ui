@@ -35,7 +35,7 @@ change-timing
 | show-button | `boolean` | `true` | Whether to show increase/decrease buttons. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of input box. |
 | step | `number` | `1` | The number which the current value is increased or decreased on key or button press. It can be an integer or a decimal. |
-| update-value-on-input | `boolean` | `true` | Whether to change the value on input. |
+| update-value-on-input | `boolean` | `true` | Whether to change the value on input if the input value is valid. |
 | validator | `(value) => boolean` | `undefined` | Setup custom validation. |
 | value | `number \| null` | `undefined` | Manually set the input value. |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | Callback triggered when the input is blurred. |

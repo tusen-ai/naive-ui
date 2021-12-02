@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## 2.21.3 (2021-12-03)
+
+### Fixes
+
+- 修复 `n-theme-editor` 点击 button 组件时报错，关闭 [#1708](https://github.com/TuSimple/naive-ui/issues/1708)
+- 修复 `n-input` 的颜色在安卓微信浏览器下异常, 关闭 [#1705](https://github.com/TuSimple/naive-ui/issues/1705)
+- 修复 `n-input` 的 `borderHover` 主题变量不生效， 关闭 [#1704](https://github.com/TuSimple/naive-ui/issues/1704)
+- 修复 `n-dialog` 的 `content` 内容为英文时的换行问题
+- 修复 `n-input-number` 不能输入小数值
+- 修复 `n-data-table` 的表头和主体可能有错误的圆角，关闭 [#1712](https://github.com/TuSimple/naive-ui/issues/1712)
+- 修复 `n-button` `colorOpacityXxx` 主题变量不为 string 类型
+
+### Feats
+
+- `n-switch` 新增 `rail-style` 属性，关闭 [#1718](https://github.com/TuSimple/naive-ui/issues/1718)
+- `n-image` 新增 `preview-disabled` 属性，关闭 [#1647](https://github.com/TuSimple/naive-ui/issues/1647)
+- `n-image` 新增 `on-load` & `on-error` 属性
+- `n-image` 新增 `fallback-src` 属性
+- `n-data-table` 新增 `on-update:expanded-row-keys` 属性
+- `n-tree` 新增 `watch-props` 属性
+
 ## 2.21.2 (2021-11-29)
 
 ### Fixes

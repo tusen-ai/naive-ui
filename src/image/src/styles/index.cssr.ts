@@ -1,4 +1,4 @@
-import { c, cB } from '../../../_utils/cssr'
+import { c, cB, cNotM } from '../../../_utils/cssr'
 import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 import fadeInzoomInTransiton from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
@@ -71,10 +71,12 @@ export default c([
   `),
   cB('image', `
     display: inline-flex;
-    cursor: pointer;
     max-height: 100%;
     max-width: 100%;
   `, [
+    cNotM('preview-disabled', `
+      cursor: pointer;
+    `),
     c('img', `
       border-radius: inherit;
     `)

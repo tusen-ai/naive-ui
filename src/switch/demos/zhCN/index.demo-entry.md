@@ -12,6 +12,7 @@ loading
 event
 customize-value
 shape
+color
 ```
 
 ## API
@@ -24,6 +25,7 @@ shape
 | default-value | `boolean` | `false` | 非受控模式下的默认值 |
 | disabled | `boolean` | `false` | 是否禁用 |
 | loading | `boolean` | `false` | 是否加载 |
+| rail-style | `(info: { focused: boolean, checked: boolean }) => (CSSProperties \| string)` | `undefined` | 创建轨道样式的函数 |
 | round | `boolean` | `true` | 是否为圆形按钮 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 开关大小 |
 | unchecked-value | `string \| boolean \| number` | `false` | 未选中时对应的值 |

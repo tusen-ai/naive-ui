@@ -327,22 +327,22 @@ const Button = defineComponent({
           colorProps = {
             '--color': isColoredType
               ? changeColor(mergedTextColor, {
-                alpha: self.colorOpacitySecondary
+                alpha: Number(self.colorOpacitySecondary)
               })
               : self.colorSecondary,
             '--color-hover': isColoredType
               ? changeColor(mergedTextColor, {
-                alpha: self.colorOpacitySecondaryHover
+                alpha: Number(self.colorOpacitySecondaryHover)
               })
               : self.colorSecondaryHover,
             '--color-pressed': isColoredType
               ? changeColor(mergedTextColor, {
-                alpha: self.colorOpacitySecondaryPressed
+                alpha: Number(self.colorOpacitySecondaryPressed)
               })
               : self.colorSecondaryPressed,
             '--color-focus': isColoredType
               ? changeColor(mergedTextColor, {
-                alpha: self.colorOpacitySecondaryHover
+                alpha: Number(self.colorOpacitySecondaryHover)
               })
               : self.colorSecondaryHover,
             '--color-disabled': self.colorSecondary,
