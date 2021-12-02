@@ -165,10 +165,10 @@ describe('n-image', () => {
   })
 
   it('should work with `canPreview` prop', async () => {
-    const wrapper = mount(NImage)
-
-    await wrapper.setProps({
-      canPreview: false
+    const wrapper = mount(NImage, {
+      props: {
+        previewDisabled: true
+      }
     })
 
     await wrapper.find('img').trigger('click')
