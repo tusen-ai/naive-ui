@@ -21,6 +21,7 @@ import {
   isSameQuarter
 } from 'date-fns'
 import { START_YEAR } from './config'
+import { Value } from './interface'
 
 function getDerivedTimeFromKeyboardEvent (
   prevValue: number | null,
@@ -324,6 +325,21 @@ function getDefaultTime (timeValue: string | undefined):
     seconds: Number(second)
   }
 }
+function getYearAndMonthOfMonthRange (
+  value: Value | null,
+  type: 'start' | 'end'
+): number {
+  return value === null || !Array.isArray(value)
+    ? Date.now()
+    : value[type === 'start' ? 0 : 1]
+}
+
+function getYearAndMonthValue (
+  value: Value | null,
+  type: 'start' | 'end'
+): number | null {
+  return Array.isArray(value) ? value[type === 'start' ? 0 : 1] : null
+}
 
 export {
   dateArray,
@@ -332,5 +348,7 @@ export {
   quarterArray,
   strictParse,
   getDerivedTimeFromKeyboardEvent,
-  getDefaultTime
+  getDefaultTime,
+  getYearAndMonthOfMonthRange,
+  getYearAndMonthValue
 }

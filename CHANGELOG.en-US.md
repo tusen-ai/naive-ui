@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-date-picker`'s `type` prop support `monthrange` option.
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes

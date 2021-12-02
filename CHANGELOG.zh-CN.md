@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-date-picker` 属性 `type` 支持 `monthrange` 选项
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes
