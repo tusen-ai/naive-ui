@@ -105,7 +105,8 @@ export default defineComponent({
         role: 'none',
         class: [
           `${mergedClsPrefix}-image`,
-          this.previewDisabled && `${mergedClsPrefix}-image--preview-disabled`
+          (this.previewDisabled || this.showError) &&
+            `${mergedClsPrefix}-image--preview-disabled`
         ]
       }),
       [
