@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- Fix `n-theme-editor` throw error when click button component, closes [#1708](https://github.com/TuSimple/naive-ui/issues/1708).
 - Fix `n-input`'s color is abnormal in Android WeChat, closes [#1705](https://github.com/TuSimple/naive-ui/issues/1705).
 - Fix `n-input` 's `borderHover` theme variable doesn't work, closes [#1704](https://github.com/TuSimple/naive-ui/issues/1704).
 - Fix `n-dialog`'s `content` word-break.
