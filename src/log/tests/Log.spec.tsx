@@ -71,7 +71,7 @@ describe('n-log', () => {
 
   it('should work with `trim` prop', async () => {
     const wrapper = mount(NLog, {
-      props: { log: ' test1     ', language: 'naive-log' }
+      props: { log: ' test1     ' }
     })
     expect(wrapper.find('pre').element.innerHTML).toBe(' test1     ')
 

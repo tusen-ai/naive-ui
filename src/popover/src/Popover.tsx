@@ -134,7 +134,7 @@ export const popoverBaseProps = {
     default: 'if'
   },
   arrowStyle: [String, Object] as PropType<string | CSSProperties>,
-  filp: {
+  flip: {
     type: Boolean,
     default: true
   },
@@ -202,12 +202,6 @@ export default defineComponent({
   setup (props) {
     if (__DEV__) {
       watchEffect(() => {
-        if (props.maxWidth !== undefined) {
-          warnOnce(
-            'popover',
-            '`max-width` is deprecated, please use `style` instead.'
-          )
-        }
         if (props.minWidth !== undefined) {
           warnOnce(
             'popover',
@@ -477,7 +471,7 @@ export default defineComponent({
             },
             onFocus: (e: FocusEvent) => {
               ascendantAndCurrentHandlers.forEach((_handlers) => {
-                _handlers.onBlur(e)
+                _handlers.onFocus(e)
               })
             },
             onClick: (e: MouseEvent) => {

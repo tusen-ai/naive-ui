@@ -28,7 +28,7 @@ export type OnFinish = ({
   event
 }: {
   file: FileInfo
-  event: Event
+  event?: Event
 }) => FileInfo | undefined
 export type OnRemove = (data: {
   file: FileInfo
@@ -106,3 +106,16 @@ export type listType = 'text' | 'image' | 'image-card'
 export type OnPreview = (file: FileInfo) => void
 
 export type CreateThumbnailUrl = (file: File) => Promise<string>
+
+export interface CustomRequestOptions {
+  file: FileInfo
+  action?: string
+  withCredentials?: boolean
+  data?: FuncOrRecordOrUndef
+  headers?: FuncOrRecordOrUndef
+  onProgress: (e: { percent: number }) => void
+  onFinish: () => void
+  onError: () => void
+}
+
+export type CustomRequest = (options: CustomRequestOptions) => void
