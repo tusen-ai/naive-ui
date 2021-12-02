@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-dialog`'s `content` style problem when use English.
+
 ## 2.21.2 (2021-11-29)
 
 ### Fixes

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-dialog` 的 `content` 内容为英文时的样式问题
+
 ## 2.21.2 (2021-11-29)
 
 ### Fixes
