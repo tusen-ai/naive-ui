@@ -23,7 +23,7 @@ v-show-debug
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | color | `string` | `undefined` | The background color of the avatar. |
-| fallback-src | `string` | `undefined` | image url when avatar load failed to dispalay |
+| fallback-src | `string` | `undefined` | Image URL to show when avatar fails to load. |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | Object-fit type of the image in the container. |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar's size. |
 | src | `string` | `undefined` | Avatar's image source. |
