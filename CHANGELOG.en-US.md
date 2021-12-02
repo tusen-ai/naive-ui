@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- Fix `n-dialog`'s `content` word-break.
 - Fix `n-input-number` cannot input decimals value.
 
 ### Feats

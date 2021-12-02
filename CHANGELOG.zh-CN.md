@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- 修复 `n-dialog` 的 `content` 内容为英文时的换行问题
 - 修复 `n-input-number` 不能输入小数值
 
 ### Feats
