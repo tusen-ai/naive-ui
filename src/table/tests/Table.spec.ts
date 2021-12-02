@@ -17,6 +17,38 @@ describe('n-table', () => {
       'n-table--bottom-bordered'
     )
   })
+
+  it('should work with `bordered` prop', async () => {
+    const wrapper = mount(NTable)
+    expect(wrapper.find('.n-table').classes()).toContain('n-table--bordered')
+
+    await wrapper.setProps({ bordered: false })
+    expect(wrapper.find('.n-table').classes()).not.toContain(
+      'n-table--bordered'
+    )
+  })
+
+  it('should work with `single-column` prop', async () => {
+    const wrapper = mount(NTable)
+    expect(wrapper.find('.n-table').classes()).not.toContain(
+      'n-table--single-column'
+    )
+
+    await wrapper.setProps({ 'single-column': true })
+    expect(wrapper.find('.n-table').classes()).toContain(
+      'n-table--single-column'
+    )
+  })
+
+  it('should work with `single-line` prop', async () => {
+    const wrapper = mount(NTable)
+    expect(wrapper.find('.n-table').classes()).toContain('n-table--single-line')
+
+    await wrapper.setProps({ 'single-line': false })
+    expect(wrapper.find('.n-table').classes()).not.toContain(
+      'n-table--single-line'
+    )
+  })
 })
 
 describe('n-table-body', () => {

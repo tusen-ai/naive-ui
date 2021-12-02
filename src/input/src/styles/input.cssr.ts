@@ -268,7 +268,7 @@ export default c([
       ]),
       c('&:hover', [
         cE('state-border', {
-          border: 'var(--border-focus)'
+          border: 'var(--border-hover)'
         })
       ])
     ]),
