@@ -45,6 +45,9 @@ const jaJP: NLocale = {
     endDatePlaceholder: '終了日',
     startDatetimePlaceholder: '開始時間',
     endDatetimePlaceholder: '終了時間',
+    // TODO: need to change
+    startMonthPlaceholder: 'Start Month',
+    endMonthPlaceholder: 'End Month',
     monthBeforeYear: false,
     firstDayOfWeek: 0,
     today: '今日'

@@ -455,8 +455,9 @@ function useDualCalendar (
   function sanitizeValue (datetime: number): number {
     if (type === 'datetimerange') {
       return getTime(startOfSecond(datetime))
-    } else if (type === 'monthrange') return getTime(startOfMonth(datetime))
-    else {
+    } else if (type === 'monthrange') {
+      return getTime(startOfMonth(datetime))
+    } else {
       // daterange
       return getTime(startOfDay(datetime))
     }

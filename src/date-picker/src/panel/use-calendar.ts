@@ -44,7 +44,7 @@ const useCalendarProps = {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useCalendar (
   props: ExtractPropTypes<typeof useCalendarProps>,
-  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter' | 'monthrange'
+  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter'
 ) {
   const panelCommon = usePanelCommon(props)
   const {

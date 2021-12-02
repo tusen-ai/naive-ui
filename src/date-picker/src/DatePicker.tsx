@@ -216,6 +216,8 @@ export default defineComponent({
           return localeRef.value.startDatePlaceholder
         } else if (props.type === 'datetimerange') {
           return localeRef.value.startDatetimePlaceholder
+        } else if (props.type === 'monthrange') {
+          return localeRef.value.startMonthPlaceholder
         }
         return ''
       } else {
@@ -228,6 +230,8 @@ export default defineComponent({
           return localeRef.value.endDatePlaceholder
         } else if (props.type === 'datetimerange') {
           return localeRef.value.endDatetimePlaceholder
+        } else if (props.type === 'monthrange') {
+          return localeRef.value.endMonthPlaceholder
         }
         return ''
       } else {
@@ -363,7 +367,7 @@ export default defineComponent({
         disableUpdateOnClose
       })
     }
-    function scrollPickerColumns (value?: number, type?: 'start' | 'end'): void {
+    function scrollPickerColumns (value?: number): void {
       if (!panelInstRef.value) return
       const { monthScrollRef, yearScrollRef } = panelInstRef.value
       const { value: mergedValue } = mergedValueRef
@@ -387,9 +391,17 @@ export default defineComponent({
       }
     }
 
-    function scrollRangeYearMonth (value?: number, type?: 'start' | 'end' | 'all'): void {
+    function scrollRangeYearMonth (
+      value?: number,
+      type?: 'start' | 'end' | 'all'
+    ): void {
       if (!panelInstRef.value) return
-      const { startYearScroll, startMonthScroll, endYearScroll, endMonthScroll } = panelInstRef.value
+      const {
+        startYearScroll,
+        startMonthScroll,
+        endYearScroll,
+        endMonthScroll
+      } = panelInstRef.value
       const { value: mergedValue } = mergedValueRef
       if (type === 'start' || type === 'all') {
         if (startMonthScroll) {
@@ -949,33 +961,22 @@ export default defineComponent({
                                   <DaterangePanel {...commonPanelProps} />
                               ) : this.type === 'datetimerange' ? (
                                   <DatetimerangePanel {...commonPanelProps} />
-                              ) : this.type === 'month' ? (
+                              ) : this.type === 'month' ||
+                                  this.type === 'year' ||
+                                  this.type === 'quarter' ? (
                                   <MonthPanel
                                     {...commonPanelProps}
-                                    type="month"
-                                    key="month"
+                                    type={this.type}
+                                    key={this.type}
                                   />
-                              ) : this.type === 'year' ? (
-                                  <MonthPanel
+                                  ) : this.type === 'monthrange' ? (
+                                  <MonthRangePanel
                                     {...commonPanelProps}
-                                    type="year"
-                                    key="year"
+                                    type={this.type}
                                   />
-                              ) : this.type === 'quarter' ? (
-                                  <MonthPanel
-                                    {...commonPanelProps}
-                                    type="quarter"
-                                    key="quarter"
-                                  />
-                              ) : this.type === 'monthrange' ? (
-                                <MonthRangePanel
-                                  {...commonPanelProps}
-                                  type="monthrange"
-                                  key="monthrange"
-                                />
-                              ) : (
+                                  ) : (
                                   <DatePanel {...commonPanelProps} />
-                              ),
+                                  ),
                               [[clickoutside, this.handleClickOutside]]
                             )
                             : null
