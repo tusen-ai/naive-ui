@@ -53,9 +53,9 @@ const ColorWandIcon = (
   </svg>
 )
 
-// button colorOpacitySecondary var is number
-const isColorPicker = (key: string, value: number | string): boolean => {
-  if (typeof value !== 'string') return false
+// button colorOpacitySecondary var is not color
+const showColorPicker = (key: string): boolean => {
+  if (key.includes('opacity')) return false
   if (key.includes('color') || key.includes('Color')) return true
   return false
 }
@@ -404,14 +404,8 @@ export default defineComponent({
                                                         >
                                                           {varKey}
                                                         </div>,
-                                                        isColorPicker(
-                                                          varKey,
-                                                          this.tempOverrides?.[
-                                                            themeKey
-                                                          ]?.[varKey] ||
-                                                            componentTheme[
-                                                              varKey
-                                                            ]
+                                                        showColorPicker(
+                                                          varKey
                                                         ) ? (
                                                           <NColorPicker
                                                             key={varKey}
@@ -499,7 +493,11 @@ export default defineComponent({
                                                                   themeKey
                                                                 ]?.[varKey] || ''
                                                             }
-                                                            placeholder={`${componentTheme[varKey]}`}
+                                                            placeholder={
+                                                              componentTheme[
+                                                                varKey
+                                                              ]
+                                                            }
                                                           />
                                                             )
                                                       ]
