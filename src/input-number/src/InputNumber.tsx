@@ -162,6 +162,10 @@ export default defineComponent({
       applyMinMax = true
     ): null | number | false => {
       const { value: displayedValue } = displayedValueRef
+      const reg = /^\d+\.$/
+      if (reg.test(displayedValue)) {
+        return false
+      }
       const parsedValue = parse(displayedValue)
       if (parsedValue === null) {
         if (doUpdateIfValid) doUpdateValue(null)

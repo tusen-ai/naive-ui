@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-input-number` cannot enter decimals value.
+
 ## 2.21.2 (2021-11-29)
 
 ### Fixes

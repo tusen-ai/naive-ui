@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-input-number` 不能输入小数值
+
 ## 2.21.2 (2021-11-29)
 
 ### Fixes
