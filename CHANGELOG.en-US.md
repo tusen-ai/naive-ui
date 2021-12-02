@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- Fix `n-input` 's `borderHover` theme variable doesn't work, closes [#1704](https://github.com/TuSimple/naive-ui/issues/1704).
 - Fix `n-dialog`'s `content` word-break.
 - Fix `n-input-number` cannot input decimals value.
 
