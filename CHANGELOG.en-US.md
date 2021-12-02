@@ -6,9 +6,10 @@
 
 ### Feats
 
-- `n-switch` add `rail-style` prop, closes [#1718](https://github.com/TuSimple/naive-ui/issues/1718)
-- `n-image` add `can-preview` & `on-load` prop, closes [#1647](https://github.com/TuSimple/naive-ui/issues/1647).
-- `n-image` add `loading` & `errorbox` slot.
+- `n-switch` add `rail-style` prop, closes [#1718](https://github.com/TuSimple/naive-ui/issues/1718).
+- `n-image` add `preview-disabled` props, closes [#1647](https://github.com/TuSimple/naive-ui/issues/1647).
+- `n-image` add `on-load` & `on-error` prop.
+- `n-image` add `fallback-src` prop.
 - `n-data-table` add `on-update:expanded-row-keys` prop.
 
 ## 2.21.2 (2021-11-29)
