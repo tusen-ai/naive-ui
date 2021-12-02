@@ -4,6 +4,8 @@
 
 ### Fixes
 
+- Fix `n-input-number` cannot input decimals value.
+
 ### Feats
 
 - `n-switch` add `rail-style` prop, closes [#1718](https://github.com/TuSimple/naive-ui/issues/1718).

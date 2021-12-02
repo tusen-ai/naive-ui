@@ -4,6 +4,8 @@
 
 ### Fixes
 
+- 修复 `n-input-number` 不能输入小数值
+
 ### Feats
 
 - `n-switch` 新增 `rail-style` 属性，关闭 [#1718](https://github.com/TuSimple/naive-ui/issues/1718)
