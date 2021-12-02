@@ -171,14 +171,9 @@ const treeProps = {
     default: true
   },
   virtualScroll: Boolean,
-  watchProps: {
-    type: Array as PropType<
-    Array<
-    'defaultCheckedKeys' | 'defaultSelectedKeys' | 'defaultExpandedKeys'
-    >
-    >,
-    default: undefined
-  },
+  watchProps: Array as PropType<
+  Array<'defaultCheckedKeys' | 'defaultSelectedKeys' | 'defaultExpandedKeys'>
+  >,
   renderLabel: Function as PropType<RenderLabel>,
   renderPrefix: Function as PropType<RenderPrefix>,
   renderSuffix: Function as PropType<RenderSuffix>,
@@ -269,7 +264,7 @@ export default defineComponent({
       ? toRef(props, 'internalDataTreeMate')
       : displayTreeMateRef
     const { watchProps } = props
-    const uncontrolledCheckedKeysRef = ref<Key[] | null>(null)
+    const uncontrolledCheckedKeysRef = ref<Key[]>([])
     if (watchProps?.includes('defaultCheckedKeys')) {
       watchEffect(() => {
         uncontrolledCheckedKeysRef.value = props.defaultCheckedKeys
@@ -305,10 +300,10 @@ export default defineComponent({
     const uncontrolledSelectedKeysRef = ref<Key[]>([])
     if (watchProps?.includes('defaultSelectedKeys')) {
       watchEffect(() => {
-        uncontrolledCheckedKeysRef.value = props.defaultSelectedKeys
+        uncontrolledSelectedKeysRef.value = props.defaultSelectedKeys
       })
     } else {
-      uncontrolledCheckedKeysRef.value = props.defaultSelectedKeys
+      uncontrolledSelectedKeysRef.value = props.defaultSelectedKeys
     }
     const controlledSelectedKeysRef = toRef(props, 'selectedKeys')
     const mergedSelectedKeysRef = useMergedState(
