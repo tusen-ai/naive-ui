@@ -12,6 +12,7 @@ loading
 event
 customize-value
 shape
+color
 ```
 
 ## API
@@ -29,6 +30,10 @@ shape
 | unchecked-value | `string \| boolean \| number` | `false` | 未选中时对应的值 |
 | value | `boolean` | `undefined` | 受控模式下的值 |
 | on-update:value | `(value: boolean) => void` | `undefined` | 组件值发生变化的回调 |
+| activeColor | `string` | `undefined` | 选中时对应的背景色 |
+| inactiveColor | `string` | `undefined` | 未选中时对应的背景色 |
+| activeButtonColor | `string` | `undefined` | 选中时对应的按钮颜色 |
+| inactiveButtonColor | `string` | `undefined` | 未选中时对应的按钮颜色 |
 
 ### Switch Slots
 

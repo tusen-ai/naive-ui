@@ -57,7 +57,13 @@ const switchProps = {
     default: false
   },
   /** @deprecated */
-  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
+  onChange: [Function, Array] as PropType<
+  MaybeArray<OnUpdateValue> | undefined
+  >,
+  activeColor: String,
+  inactiveColor: String,
+  activeButtonColor: String,
+  inactiveButtonColor: String
 } as const
 
 export type SwitchProps = ExtractPublicPropTypes<typeof switchProps>
@@ -235,7 +241,15 @@ export default defineComponent({
         onKeyup={this.handleKeyup}
         onKeydown={this.handleKeydown}
       >
-        <div class={`${mergedClsPrefix}-switch__rail`} aria-hidden="true">
+        <div
+          class={`${mergedClsPrefix}-switch__rail`}
+          aria-hidden="true"
+          style={
+            this.activeColor || this.inactiveColor
+              ? { background: checked ? this.activeColor : this.inactiveColor }
+              : {}
+          }
+        >
           {(checkedSlot || uncheckedSlot) && (
             <div
               aria-hidden
@@ -251,7 +265,18 @@ export default defineComponent({
               </div>
             </div>
           )}
-          <div class={`${mergedClsPrefix}-switch__button`}>
+          <div
+            class={`${mergedClsPrefix}-switch__button`}
+            style={
+              this.activeButtonColor || this.inactiveButtonColor
+                ? {
+                    background: checked
+                      ? this.activeButtonColor
+                      : this.inactiveButtonColor
+                  }
+                : {}
+            }
+          >
             <Transition name="fade-in-scale-up-transition">
               {{
                 default: () =>

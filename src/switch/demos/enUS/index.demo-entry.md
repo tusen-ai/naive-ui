@@ -12,6 +12,7 @@ loading
 event
 customize-value
 shape
+color
 ```
 
 ## API
@@ -29,6 +30,10 @@ shape
 | value | `boolean` | `undefined` | Value when being set manually. |
 | unchecked-value | `string \| boolean \| number` | `false` | Value of unchecked state. |
 | on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |
+| activeColor | `string` | `undefined` | Background of checked state. |
+| inactiveColor | `string` | `undefined` | Background of unchecked state. |
+| activeButtonColor | `string` | `undefined` | Button background of checked state. |
+| inactiveButtonColor | `string` | `undefined` | Button background of unchecked state. |
 
 ### Switch Slots
 
