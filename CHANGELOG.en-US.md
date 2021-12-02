@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## Pending
+
 ### Fixes
 
 ### Feats
@@ -7,6 +9,7 @@
 - `n-switch` add `activeColor` & `inactiveColor` & `activeButtonColor` & `inactiveButtonColor` prop, closes [#1718](https://github.com/TuSimple/naive-ui/issues/1718)
 - `n-image` add `can-preview` & `on-load` prop, closes [#1647](https://github.com/TuSimple/naive-ui/issues/1647).
 - `n-image` add `loading` & `errorbox` slot.
+- `n-data-table` add `on-update:expanded-row-keys` prop.
 
 ## 2.21.2 (2021-11-29)
 

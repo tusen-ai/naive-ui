@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## Pending
+
 ### Fixes
 
 ### Feats
@@ -7,6 +9,7 @@
 - `n-switch` 新增 `activeColor` & `inactiveColor` & `activeButtonColor` & `inactiveButtonColor` 属性，关闭 [#1718](https://github.com/TuSimple/naive-ui/issues/1718)
 - `n-image` 新增 `can-preview` & `on-load` 属性，关闭 [#1647](https://github.com/TuSimple/naive-ui/issues/1647)
 - `n-image` 新增 `loading` & `errorbox` slot
+- `n-data-table` 新增 `on-update:expanded-row-keys` 属性
 
 ## 2.21.2 (2021-11-29)
 
