@@ -56,14 +56,11 @@ const switchProps = {
     type: [String, Number, Boolean] as PropType<string | number | boolean>,
     default: false
   },
-  /** @deprecated */
-  onChange: [Function, Array] as PropType<
-  MaybeArray<OnUpdateValue> | undefined
+  railStyle: Function as PropType<
+  (params: { focused: boolean, checked: boolean }) => string | CSSProperties
   >,
-  activeColor: String,
-  inactiveColor: String,
-  activeButtonColor: String,
-  inactiveButtonColor: String
+  /** @deprecated */
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
 export type SwitchProps = ExtractPublicPropTypes<typeof switchProps>
@@ -99,7 +96,16 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+    const checkedRef = computed(() => {
+      return mergedValueRef.value === props.checkedValue
+    })
     const pressedRef = ref(false)
+    const focusedRef = ref(false)
+    const mergedRailStyleRef = computed(() => {
+      const { railStyle } = props
+      if (!railStyle) return undefined
+      return railStyle({ focused: focusedRef.value, checked: checkedRef.value })
+    })
     function doUpdateValue (value: string | number | boolean): void {
       const {
         'onUpdate:value': _onUpdateValue,
@@ -132,9 +138,11 @@ export default defineComponent({
       }
     }
     function handleFocus (): void {
+      focusedRef.value = true
       doFocus()
     }
     function handleBlur (): void {
+      focusedRef.value = false
       doBlur()
       pressedRef.value = false
     }
@@ -156,9 +164,11 @@ export default defineComponent({
       handleFocus,
       handleKeyup,
       handleKeydown,
+      mergedRailStyle: mergedRailStyleRef,
       pressed: pressedRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
+      checked: checkedRef,
       mergedDisabled: mergedDisabledRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
@@ -215,12 +225,11 @@ export default defineComponent({
   render () {
     const {
       mergedClsPrefix,
-      mergedValue,
       mergedDisabled,
-      checkedValue,
+      checked,
+      mergedRailStyle,
       $slots
     } = this
-    const checked = mergedValue === checkedValue
     const { checked: checkedSlot, unchecked: uncheckedSlot } = $slots
     return (
       <div
@@ -244,11 +253,7 @@ export default defineComponent({
         <div
           class={`${mergedClsPrefix}-switch__rail`}
           aria-hidden="true"
-          style={
-            this.activeColor || this.inactiveColor
-              ? { background: checked ? this.activeColor : this.inactiveColor }
-              : {}
-          }
+          style={mergedRailStyle}
         >
           {(checkedSlot || uncheckedSlot) && (
             <div
@@ -265,18 +270,7 @@ export default defineComponent({
               </div>
             </div>
           )}
-          <div
-            class={`${mergedClsPrefix}-switch__button`}
-            style={
-              this.activeButtonColor || this.inactiveButtonColor
-                ? {
-                    background: checked
-                      ? this.activeButtonColor
-                      : this.inactiveButtonColor
-                  }
-                : {}
-            }
-          >
+          <div class={`${mergedClsPrefix}-switch__button`}>
             <Transition name="fade-in-scale-up-transition">
               {{
                 default: () =>
