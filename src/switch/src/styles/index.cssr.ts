@@ -140,7 +140,7 @@ export default cB('switch', `
     cursor: pointer;
     position: relative;
     transition:
-      background-color .3s var(--bezier),
+      background .3s var(--bezier),
       box-shadow .3s var(--bezier);
     background-color: var(--rail-color);
   `, [
