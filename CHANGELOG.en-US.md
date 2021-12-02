@@ -2,8 +2,18 @@
 
 ## Pending
 
+### Fixes
+
+- Fix `n-dialog`'s `content` word-break.
+- Fix `n-input-number` cannot input decimals value.
+
 ### Feats
 
+- `n-switch` add `rail-style` prop, closes [#1718](https://github.com/TuSimple/naive-ui/issues/1718).
+- `n-image` add `preview-disabled` props, closes [#1647](https://github.com/TuSimple/naive-ui/issues/1647).
+- `n-image` add `on-load` & `on-error` prop.
+- `n-image` add `fallback-src` prop.
+- `n-data-table` add `on-update:expanded-row-keys` prop.
 - `n-tree` add `watch-props` prop.
 
 ## 2.21.2 (2021-11-29)

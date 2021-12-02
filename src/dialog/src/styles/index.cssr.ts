@@ -77,6 +77,7 @@ export default c([
       font-size: var(--font-size);
       margin: var(--content-margin);
       position: relative;
+      word-break: break-word;
     `, [
       c('&:last-child', 'margin-bottom: 0;')
     ]),
