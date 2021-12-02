@@ -10,6 +10,7 @@
 - Fix `n-dialog`'s `content` word-break.
 - Fix `n-input-number` cannot input decimals value.
 - Fix `n-data-table`'s header & body may have wrong border radius, closes [#1712](https://github.com/TuSimple/naive-ui/issues/1712).
+- Fix `n-button`'s `colorOpacityXxx` theme vars are not string typed.
 
 ### Feats
 

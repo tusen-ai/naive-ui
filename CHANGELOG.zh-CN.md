@@ -10,6 +10,7 @@
 - 修复 `n-dialog` 的 `content` 内容为英文时的换行问题
 - 修复 `n-input-number` 不能输入小数值
 - 修复 `n-data-table` 的表头和主体可能有错误的圆角，关闭 [#1712](https://github.com/TuSimple/naive-ui/issues/1712)
+- 修复 `n-button` `colorOpacityXxx` 主题变量不为 string 类型
 
 ### Feats
 
