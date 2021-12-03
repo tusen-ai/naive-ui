@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-date-picker` 的 `yearPlaceholder` 没被设置当 `type` 为 `year`时
+
 ## 2.21.3 (2021-12-03)
 
 ### Fixes

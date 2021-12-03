@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-date-picker`'s `yearPlaceholder` not set when `type` is `year`.
+
 ## 2.21.3 (2021-12-03)
 
 ### Fixes

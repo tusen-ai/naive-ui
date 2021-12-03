@@ -33,6 +33,7 @@ const zhCN: NLocale = {
     datePlaceholder: '选择日期',
     datetimePlaceholder: '选择日期时间',
     monthPlaceholder: '选择月份',
+    yearPlaceholder: '选择年份',
     startDatePlaceholder: '开始日期',
     endDatePlaceholder: '结束日期',
     startDatetimePlaceholder: '开始日期时间',
