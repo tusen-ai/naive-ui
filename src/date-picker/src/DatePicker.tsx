@@ -412,12 +412,6 @@ export default defineComponent({
       if (value === null) {
         singleInputValueRef.value = ''
       } else {
-        // maybe date-fns/locale problem When the local language is zh-CN, the quarter will be translated into the second moment
-        if (dateFnsOptionsRef.value.locale.code === 'zh-CN') {
-          dateFnsOptionsRef.value.locale.localize &&
-          dateEnUS.locale.localize &&
-          (dateFnsOptionsRef.value.locale.localize.quarter = dateEnUS.locale.localize?.quarter)
-        }
         singleInputValueRef.value = format(
           value,
           mergedFormatRef.value,

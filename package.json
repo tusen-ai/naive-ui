@@ -124,7 +124,7 @@
     "@types/lodash-es": "^4.17.4",
     "async-validator": "^4.0.1",
     "css-render": "^0.15.6",
-    "date-fns": "^2.19.0",
+    "date-fns": "^2.27.0",
     "date-fns-tz": "^1.1.6",
     "evtd": "^0.2.3",
     "highlight.js": "^11.0.1",
