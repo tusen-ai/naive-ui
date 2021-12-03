@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-element` not export `NEl` alias name.
+
 ## 2.21.3 (2021-12-03)
 
 ### Fixes
