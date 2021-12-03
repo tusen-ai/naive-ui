@@ -49,6 +49,13 @@ describe('n-table', () => {
       'n-table--single-line'
     )
   })
+
+  it('should work with `size` prop', async () => {
+    ;(['small', 'medium', 'large'] as const).forEach((size) => {
+      const wrapper = mount(NTable, { props: { size } })
+      expect(wrapper.find('.n-table').attributes('style')).toMatchSnapshot()
+    })
+  })
 })
 
 describe('n-table-body', () => {
