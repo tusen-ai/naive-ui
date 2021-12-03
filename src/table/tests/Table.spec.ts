@@ -56,6 +56,14 @@ describe('n-table', () => {
       expect(wrapper.find('.n-table').attributes('style')).toMatchSnapshot()
     })
   })
+
+  it('should work with `striped` prop', async () => {
+    const wrapper = mount(NTable)
+    expect(wrapper.find('.n-table').classes()).not.toContain('n-table--striped')
+
+    await wrapper.setProps({ striped: true })
+    expect(wrapper.find('.n-table').classes()).toContain('n-table--striped')
+  })
 })
 
 describe('n-table-body', () => {
