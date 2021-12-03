@@ -53,7 +53,6 @@ import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
 import style from './styles/index.cssr'
 import { DatePickerTheme } from '../styles/light'
-import { dateEnUS } from '../../locales'
 
 const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),
