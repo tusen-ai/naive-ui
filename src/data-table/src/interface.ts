@@ -138,6 +138,8 @@ export type RenderExpand<T = InternalRowData> = (
   row: T,
   index: number
 ) => VNodeChild
+
+// TODO: we should deprecate `index` since it would change after row is expanded
 export type Expandable<T = InternalRowData> = (row: T, index: number) => boolean
 export interface TableExpandColumn<T = InternalRowData>
   extends Omit<TableSelectionColumn<T>, 'type'> {
@@ -206,6 +208,7 @@ export interface DataTableInjection {
   rowPropsRef: Ref<CreateRowProps | undefined>
   flexHeightRef: Ref<boolean>
   headerCheckboxDisabledRef: Ref<boolean>
+  stripedRef: Ref<boolean>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (
     filters: FilterState,
@@ -290,10 +293,12 @@ export type OnFilterMenuChangeImpl = (
 export interface DataTableInst {
   filter: (filters: FilterState | null) => void
   filters: (filters: FilterState | null) => void
-  clearFilter: () => void
   clearFilters: () => void
+  clearSorter: () => void
   page: (page: number) => void
   sort: (columnKey: ColumnKey, order: SortOrder) => void
+  /** @deprecated it but just leave it here, it does no harm */
+  clearFilter: () => void
 }
 
 export type CreateSummary<T = InternalRowData> = (

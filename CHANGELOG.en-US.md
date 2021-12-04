@@ -1,6 +1,121 @@
 # CHANGELOG
 
-## Pending
+## 2.21.3 (2021-12-03)
+
+### Fixes
+
+- Fix `n-theme-editor` throw error when click button component, closes [#1708](https://github.com/TuSimple/naive-ui/issues/1708).
+- Fix `n-input`'s color is abnormal in Android WeChat, closes [#1705](https://github.com/TuSimple/naive-ui/issues/1705).
+- Fix `n-input` 's `borderHover` theme variable doesn't work, closes [#1704](https://github.com/TuSimple/naive-ui/issues/1704).
+- Fix `n-dialog`'s `content` word-break.
+- Fix `n-input-number` cannot input decimals value.
+- Fix `n-data-table`'s header & body may have wrong border radius, closes [#1712](https://github.com/TuSimple/naive-ui/issues/1712).
+- Fix `n-button`'s `colorOpacityXxx` theme vars are not string typed.
+
+### Feats
+
+- `n-switch` add `rail-style` prop, closes [#1718](https://github.com/TuSimple/naive-ui/issues/1718).
+- `n-image` add `preview-disabled` props, closes [#1647](https://github.com/TuSimple/naive-ui/issues/1647).
+- `n-image` add `on-load` & `on-error` prop.
+- `n-image` add `fallback-src` prop.
+- `n-data-table` add `on-update:expanded-row-keys` prop.
+- `n-tree` add `watch-props` prop.
+
+## 2.21.2 (2021-11-29)
+
+### Fixes
+
+- Fix `n-slider` disabled tooltip at the wrong time.
+- Fix `n-slider` incorrect fill color style, closes [#1670](https://github.com/TuSimple/naive-ui/issues/1670).
+- Fix `n-data-table`'s pagination `onUpdatePage` prop trigger twice, closes [#1666](https://github.com/TuSimple/naive-ui/issues/1666).
+- Fix `n-log`'s `trim` prop not being independent when used.
+- Fix `n-slider` processing of step value precision.
+- Fix `n-date-picker` throw error when `time-picker` input is empty, closes [#1678](https://github.com/TuSimple/naive-ui/issues/1678).
+- Fix `n-popover` not working when `trigger` is `focus`.
+- Fix `n-scrollbar`'s scrollbar will vanish if clicked.
+- Fix `n-popover` has an invalid line in style.
+- Fix `n-popover` `flip=false` doesn't work.
+- Fix `n-input-number` can't accept indeterminate input value when `max` or `min` is set, closes [#1664](https://github.com/TuSimple/naive-ui/issues/1664).
+- Fix `n-input-number`'s input value is not changed to a valid value if it's input exceeds min or max multiple times.
+
+### Feats
+
+- `n-input-number` add `keyboard` prop.
+- Add `tableColorStriped` theme variable, closes [#1686](https://github.com/TuSimple/naive-ui/issues/1686).
+- `n-notification-provider` add `max` & `placement` prop.
+- `n-notification` add `destroyAll` method, closes [#333](https://github.com/TuSimple/naive-ui/issues/333).
+- `n-layout-sider` add `on-after-enter` and `on-after-leave` props, closes [#1241](https://github.com/TuSimple/naive-ui/issues/1241).
+- `n-upload` add `custom-request` prop, closes [#1389](https://github.com/TuSimple/naive-ui/issues/1389).
+- `n-data-table` add `expanded-row-keys` prop.
+- `n-popover` provides better auto position adjustment, closes [#1520](https://github.com/TuSimple/naive-ui/issues/1520), [#1643](https://github.com/TuSimple/naive-ui/issues/1643).
+- `n-input-number` add `update-value-on-input` prop, closes [#1662](https://github.com/TuSimple/naive-ui/issues/1662).
+- `n-auto-complete` add `prefix` & `suffix` slot.
+
+## 2.21.1 (2021-11-23)
+
+### Fixes
+
+- Fix `n-image` drag the picture to move the position incorrectly when the zoom is large.
+- Fix `n-data-table` style glitches after some rows are expanded.
+- Fix `n-data-table` doesn't expand tree data correctly, closes [#1644](https://github.com/TuSimple/naive-ui/issues/1644).
+
+## 2.21.0 (2021-11-21)
+
+### Breaking Changes
+
+- `NButton.fontWeightText` & `NButton.fontWeightGhost` theme vars are removed. If you want to change font weight, you can use `strong` prop of `n-button` instead.
+
+### Feats
+
+- `n-tag` add `avatar` slot.
+- `n-data-table` add `striped` prop, closes [#1552](https://github.com/TuSimple/naive-ui/issues/1552).
+- `n-table` add `striped` prop, closes [#1552](https://github.com/TuSimple/naive-ui/issues/1552).
+- `n-slider` add `vertical` prop, closes [#1468](https://github.com/TuSimple/naive-ui/issues/1468).
+- `n-slider` add `reverse` prop.
+- `n-slider`'s `step` prop support `mark` option.
+- Bypass Vitejs bug on string extrapolation, ref [#636](https://github.com/TuSimple/naive-ui/issues/636).
+- `n-button` add `strong` prop.
+- `n-button` add `secondary` prop.
+- `n-button` add `tertiary` prop.
+- `n-button` add `quaternary` prop.
+- `n-auto-complete` add `input-props` prop, closes [#1610](https://github.com/TuSimple/naive-ui/issues/1610).
+- `n-avatar` add `fallback-src` prop, closes [#702](https://github.com/TuSimple/naive-ui/issues/702).
+- `n-avatar` add `on-error` prop.
+- `n-input` add `select` methods, closes [#1328](https://github.com/TuSimple/naive-ui/issues/1328).
+- Add `n-tab` component, closes [#1630](https://github.com/TuSimple/naive-ui/issues/1630).
+- `n-switch` add `round` prop, closes [#1469](https://github.com/TuSimple/naive-ui/issues/1469).
+- `n-step` add `title` slot.
+- `n-menu` support `divider` type option.
+
+### Fixes
+
+- Fix the default value of the `suffix` internal component's `loading` property.
+- Fix `n-space` is shown when it has no children, closes [#1605](https://github.com/TuSimple/naive-ui/issues/1605).
+- Fix `n-radio` has no `onUpdateChecked` prop.
+- Fix `n-dropdown` animation flicker problem, closes [#1600](https://github.com/TuSimple/naive-ui/issues/1600).
+- Fix `n-data-table`’s `clearSorter` method isn't exported properly.
+- Fix `n-global-style` throws error in SSR.
+- Fix `n-button` will trigger click event twice if pressed, closes [#1626](https://github.com/TuSimple/naive-ui/issues/1626).
+
+## 2.20.3 (2021-11-15)
+
+### Fixes
+
+- Fix `n-grid` suffix NGridItem does not set right span when collapsed, closes [#1530](https://github.com/TuSimple/naive-ui/issues/1530).
+- Fix `n-button` to shrink abnormally in certain scenarios when using the `circle` prop, closes [#1557](https://github.com/TuSimple/naive-ui/issues/1557).
+- Fix `input-props` does affect `type` prop, closes [#1553](https://github.com/TuSimple/naive-ui/issues/1553)
+
+### Feats
+
+- `n-menu` add a color distinction between selected and unselected arrow, closes [#1535](https://github.com/TuSimple/naive-ui/issues/1535).
+- `n-menu` add `watch-props` prop, closes [#1536](https://github.com/TuSimple/naive-ui/issues/1536).
+- `n-date-picker`'s `type` prop support `year` option.
+
+### i18n
+
+- Add `createLocale` to make locale customizable, closes [#1525](https://github.com/TuSimple/naive-ui/issues/1525).
+
+## 2.20.2 (2021-11-05)
 
 ### Feats
 
@@ -10,12 +125,15 @@
 ### Fixes
 
 - Fix `n-alert` `contentTextColor` and `titleTextColor` type theme variable not working, closes [#1495](https://github.com/TuSimple/naive-ui/issues/1495).
+- Fix `n-time-picker` not trigger blur event when the panel is closed by ok button, closes [#1499](https://github.com/TuSimple/naive-ui/issues/1499).
+- Fix `n-upload` `UploadFileInfo`'s `thumbnailUrl` field not working, closes [#1495](https://github.com/TuSimple/naive-ui/issues/1245).
 - Fix `n-button` `keyboard` prop does not work, closes [#1508](https://github.com/TuSimple/naive-ui/issues/1508).
 - Fix `n-upload` instance misses `openOpenFileDialog` method.
 
 ### i18n
 
 - Add deDE locale.
+- Add nbNO locale.
 
 ## 2.20.1 (2021-11-01)
 
@@ -1611,7 +1729,7 @@ See vue3.md
 
 ### Fixes
 
-- Fix the problem that all the `console` statements are stripped in the bundle.
+- Fix the problem that all the `console` statements are striped in the bundle.
 
 ## 1.0.5 (2020-03-27)
 

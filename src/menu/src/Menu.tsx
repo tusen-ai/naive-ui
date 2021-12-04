@@ -10,7 +10,8 @@ import {
   InjectionKey,
   CSSProperties,
   inject,
-  VNodeChild
+  VNodeChild,
+  watchEffect
 } from 'vue'
 import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
@@ -26,6 +27,8 @@ import style from './styles/index.cssr'
 import {
   MenuOption,
   MenuGroupOption,
+  MenuIgnoredOption,
+  MenuMixedOption,
   OnUpdateValue,
   OnUpdateKeys,
   OnUpdateValueImpl,
@@ -39,7 +42,7 @@ import { DropdownProps } from '../../dropdown'
 const menuProps = {
   ...(useTheme.props as ThemeProps<MenuTheme>),
   options: {
-    type: Array as PropType<Array<MenuOption | MenuGroupOption>>,
+    type: Array as PropType<MenuMixedOption[]>,
     default: () => []
   },
   collapsed: {
@@ -86,6 +89,10 @@ const menuProps = {
   mode: {
     type: String as PropType<'vertical' | 'horizontal'>,
     default: 'vertical'
+  },
+  watchProps: {
+    type: Array as PropType<Array<'defaultExpandedKeys' | 'defaultValue'>>,
+    default: undefined
   },
   disabled: Boolean,
   inverted: Boolean,
@@ -160,11 +167,11 @@ export default defineComponent({
 
     const treeMateRef = computed(() => {
       const { keyField, childrenField } = props
-      return createTreeMate<MenuOption, MenuGroupOption>(
+      return createTreeMate<MenuOption, MenuGroupOption, MenuIgnoredOption>(
         props.items || props.options,
         {
           getChildren (node) {
-            return node[childrenField] as any
+            return node[childrenField]
           },
           getKey (node) {
             return (node[keyField] as Key) ?? node.name
@@ -176,22 +183,36 @@ export default defineComponent({
       () => new Set(treeMateRef.value.treeNodes.map((e) => e.key))
     )
 
-    const uncontrolledValueRef = ref(props.defaultValue)
+    const { watchProps } = props
+
+    const uncontrolledValueRef = ref<Key | null>(null)
+    if (watchProps?.includes('defaultValue')) {
+      watchEffect(() => {
+        uncontrolledValueRef.value = props.defaultValue
+      })
+    } else {
+      uncontrolledValueRef.value = props.defaultValue
+    }
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
       controlledValueRef,
       uncontrolledValueRef
     )
-
-    const uncontrolledExpandedKeysRef = ref(
-      props.defaultExpandAll
+    const uncontrolledExpandedKeysRef = ref<Key[]>([])
+    const initUncontrolledExpandedKeys = (): void => {
+      uncontrolledExpandedKeysRef.value = props.defaultExpandAll
         ? treeMateRef.value.getNonLeafKeys()
         : props.defaultExpandedNames ||
-            props.defaultExpandedKeys ||
-            treeMateRef.value.getPath(mergedValueRef.value, {
-              includeSelf: false
-            }).keyPath
-    )
+          props.defaultExpandedKeys ||
+          treeMateRef.value.getPath(mergedValueRef.value, {
+            includeSelf: false
+          }).keyPath
+    }
+    if (watchProps?.includes('defaultExpandedKeys')) {
+      watchEffect(initUncontrolledExpandedKeys)
+    } else {
+      initUncontrolledExpandedKeys()
+    }
     const controlledExpandedKeysRef = useCompitable(props, [
       'expandedNames',
       'expandedKeys'
@@ -295,9 +316,15 @@ export default defineComponent({
           common: { cubicBezierEaseInOut },
           self
         } = themeRef.value
-        const { borderRadius, borderColorHorizontal, fontSize, itemHeight } =
-          self
+        const {
+          borderRadius,
+          borderColorHorizontal,
+          fontSize,
+          itemHeight,
+          dividerColor
+        } = self
         const vars: any = {
+          '--divider-color': dividerColor,
           '--bezier': cubicBezierEaseInOut,
           '--font-size': fontSize,
           '--border-color-horizontal': borderColorHorizontal,

@@ -8,7 +8,9 @@ import { NDropdown } from '../..'
 
 describe('SSR', () => {
   it('works', async () => {
-    const app = createSSRApp(() => <NDropdown />)
+    const app = createSSRApp(() => (
+      <NDropdown>{{ default: () => 'foo' }}</NDropdown>
+    ))
     setup(app)
     try {
       await renderToString(app)

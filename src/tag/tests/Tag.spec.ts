@@ -1,4 +1,6 @@
+import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { NAvatar } from '../../avatar'
 import { NTag } from '../index'
 
 describe('n-tag', () => {
@@ -47,12 +49,14 @@ describe('n-tag', () => {
     const wrapper = mount(NTag, {
       props: {
         checkable: true,
-        'onUpdate:checked': onChecked
+        'onUpdate:checked': onChecked,
+        onUpdateChecked: onChecked
       }
     })
 
     wrapper.trigger('click')
     expect(onChecked).toBeCalled()
+    expect(onChecked).toBeCalledTimes(2)
   })
 
   it('should work with `closable` prop', () => {
@@ -156,6 +160,22 @@ describe('n-tag', () => {
     )
     expect(wrapper.find('.n-tag__border').attributes('style')).toContain(
       'border-color: rgb(85, 85, 85);'
+    )
+  })
+
+  it('should work with `avatar` slot', () => {
+    const wrapper = mount(NTag, {
+      slots: {
+        avatar: () =>
+          h(NAvatar, {
+            src: 'https://cdnimg103.lizhi.fm/user/2017/02/04/2583325032200238082_160x160.jpg'
+          })
+      }
+    })
+
+    expect(wrapper.find('.n-tag__avatar').exists()).toBe(true)
+    expect(wrapper.find('.n-avatar').attributes('style')).toContain(
+      '--merged-size: var(--avatar-size-override, 34px);'
     )
   })
 })

@@ -23,6 +23,7 @@ const base = {
   alphaDisabledInput: '0.06',
   alphaPending: '0.09',
   alphaTablePending: '0.06',
+  alphaTableStriped: '0.05',
   alphaPressed: '0.05',
 
   alphaAvatar: '0.18',
@@ -178,10 +179,15 @@ const derived: ThemeCommonVars = {
 
   hoverColor: overlay(base.alphaPending),
   tableColorHover: overlay(base.alphaTablePending),
+  tableColorStriped: overlay(base.alphaTableStriped),
   pressedColor: overlay(base.alphaPressed),
 
   opacityDisabled: base.alphaDisabled,
   inputColorDisabled: overlay(base.alphaDisabledInput),
+
+  buttonColor2: 'rgba(255, 255, 255, .06)',
+  buttonColor2Hover: 'rgba(255, 255, 255, .09)',
+  buttonColor2Pressed: 'rgba(255, 255, 255, .05)',
 
   boxShadow1:
     '0 1px 2px -2px rgba(0, 0, 0, .24), 0 3px 6px 0 rgba(0, 0, 0, .18), 0 5px 12px 4px rgba(0, 0, 0, .12)',

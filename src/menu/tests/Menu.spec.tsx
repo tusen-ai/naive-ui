@@ -305,4 +305,82 @@ describe('n-menu', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const menu = <NMenu options={[{}]} />
   })
+
+  it('should work with `defaultExpandedKeys` props', async () => {
+    const menuOptions = [
+      {
+        label: '且听风吟',
+        key: 'hear-the-wind-sing'
+      },
+      {
+        label: '舞，舞，舞',
+        key: 'dance-dance-dance',
+        children: [
+          {
+            label: '叙事者',
+            key: 'narrator'
+          },
+          {
+            label: '食物',
+            key: 'food',
+            children: [
+              {
+                label: '三明治',
+                key: 'sandwich'
+              }
+            ]
+          },
+          {
+            label: '过去增多，未来减少',
+            key: 'the-past-increases-the-future-recedes'
+          }
+        ]
+      }
+    ]
+    const defaultExpandedKeys = ['dance-dance-dance']
+    const wrapper = mount(NMenu, {
+      props: {
+        defaultExpandedKeys,
+        options: menuOptions
+      }
+    })
+    expect(wrapper.find('.n-submenu-children').element.children.length).toBe(3)
+  })
+
+  it('accepts proper options', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const menu = (
+      <NMenu
+        options={[
+          {
+            type: 'divider'
+          },
+          {
+            type: 'group',
+            key: 'foo'
+          },
+          {
+            key: 'blabla',
+            label: 'kirby'
+          },
+          {
+            key: 'xxxx',
+            children: [
+              {
+                type: 'divider'
+              },
+              {
+                type: 'group',
+                key: 'foo1'
+              },
+              {
+                key: 'blabla1',
+                label: 'kirby'
+              }
+            ]
+          }
+        ]}
+      />
+    )
+  })
 })

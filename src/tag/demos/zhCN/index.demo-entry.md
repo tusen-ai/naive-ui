@@ -12,6 +12,7 @@ size
 checkable
 shape
 color
+avatar
 rtl-debug
 ```
 
@@ -37,4 +38,5 @@ rtl-debug
 
 | 名称    | 参数 | 说明     |
 | ------- | ---- | -------- |
+| avatar  | `()` | 图片信息 |
 | default | `()` | 标签内容 |

@@ -119,7 +119,7 @@ const derived = {
   textColorBase: base.neutralTextBase,
   textColor1: 'rgb(31, 34, 37)',
   textColor2: 'rgb(51, 54, 57)',
-  textColor3: 'rgb(158, 164, 170)', // description text & icon
+  textColor3: 'rgb(118, 124, 130)',
   // textColor4: neutral(base.alpha4), // disabled, placeholder, icon
   // textColor5: neutral(base.alpha5),
 
@@ -177,15 +177,21 @@ const derived = {
 
   hoverColor: 'rgb(243, 243, 245)',
   // use color with alpha since it can be nested with header filter & sorter effect
-  tableColorHover: 'rgba(0, 0, 100, 0.02)',
+  tableColorHover: 'rgba(0, 0, 100, 0.03)',
+  tableColorStriped: 'rgba(0, 0, 100, 0.02)',
   pressedColor: 'rgb(237, 237, 239)',
 
   opacityDisabled: base.alphaDisabled,
   inputColorDisabled: 'rgb(250, 250, 252)',
 
+  // secondary button color
+  // can also be used in tertiary button & quaternary button
+  buttonColor2: 'rgba(46, 51, 56, .05)',
+  buttonColor2Hover: 'rgba(46, 51, 56, .09)',
+  buttonColor2Pressed: 'rgba(46, 51, 56, .13)',
+
   boxShadow1:
     '0 1px 2px -2px rgba(0, 0, 0, .08), 0 3px 6px 0 rgba(0, 0, 0, .06), 0 5px 12px 4px rgba(0, 0, 0, .04)',
-
   boxShadow2:
     '0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05)',
   boxShadow3:

@@ -1,4 +1,4 @@
-import { ref, computed, inject, watch, ExtractPropTypes } from 'vue'
+import { ref, computed, inject, watch, ExtractPropTypes, PropType } from 'vue'
 import {
   addMonths,
   addYears,
@@ -12,7 +12,8 @@ import {
   isValid,
   startOfDay,
   startOfSecond,
-  startOfMonth
+  startOfMonth,
+  startOfYear
 } from 'date-fns'
 import { dateArray, monthArray, strictParse, yearArray } from '../utils'
 import { usePanelCommon } from './use-panel-common'
@@ -28,7 +29,7 @@ import { ScrollbarInst } from '../../../_internal'
 const useCalendarProps = {
   ...usePanelCommon.props,
   actions: {
-    type: Array,
+    type: Array as PropType<string[]>,
     default: () => ['now', 'clear', 'confirm']
   }
 } as const
@@ -36,7 +37,7 @@ const useCalendarProps = {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useCalendar (
   props: ExtractPropTypes<typeof useCalendarProps>,
-  type: 'date' | 'datetime' | 'month'
+  type: 'date' | 'datetime' | 'month' | 'year'
 ) {
   const panelCommon = usePanelCommon(props)
   const {
@@ -139,6 +140,7 @@ function useCalendar (
   function sanitizeValue (value: number): number {
     if (type === 'datetime') return getTime(startOfSecond(value))
     if (type === 'month') return getTime(startOfMonth(value))
+    if (type === 'year') return getTime(startOfYear(value))
     return getTime(startOfDay(value))
   }
   function mergedIsDateDisabled (ts: number): boolean {
@@ -219,12 +221,17 @@ function useCalendar (
       newValue = Date.now()
     }
     newValue = getTime(set(newValue, dateItem.dateObject))
-    panelCommon.doUpdateValue(sanitizeValue(newValue), type === 'date')
+    panelCommon.doUpdateValue(
+      sanitizeValue(newValue),
+      type === 'date' || type === 'year'
+    )
     if (type === 'date') {
       panelCommon.doClose()
     } else if (type === 'month') {
       panelCommon.disableTransitionOneTick()
       scrollYearMonth(newValue)
+    } else if (type === 'year') {
+      panelCommon.doClose()
     }
   }
   function deriveDateInputValue (time?: number): void {
@@ -281,7 +288,8 @@ function useCalendar (
   function handleVirtualListScroll (e: Event): void {
     scrollbarInstRef.value?.sync()
   }
-  function handleTimePickerChange (value: number): void {
+  function handleTimePickerChange (value: number | null): void {
+    if (value === null) return
     panelCommon.doUpdateValue(value, false)
   }
   function handleSingleShortcutMouseenter (shortcut: Shortcuts[string]): void {

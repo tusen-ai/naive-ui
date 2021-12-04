@@ -1,3 +1,4 @@
+import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NPagination } from '../index'
 
@@ -25,5 +26,16 @@ describe('n-pagination', () => {
       }
     })
     expect(wrapper.find('.n-pagination-item').text()).toContain('Prev')
+  })
+  it('page-sizes should has correct type', () => {
+    ;<NPagination
+      pageSizes={[
+        10,
+        {
+          label: '20',
+          value: 20
+        }
+      ]}
+    />
   })
 })

@@ -29,6 +29,7 @@ import LineMark from './LineMark'
 import { checkboxGroupInjectionKey } from './CheckboxGroup'
 import type { OnUpdateChecked, OnUpdateCheckedImpl } from './interface'
 import style from './styles/index.cssr'
+import { on } from 'evtd'
 
 const checkboxProps = {
   ...(useTheme.props as ThemeProps<CheckboxTheme>),
@@ -67,7 +68,7 @@ const checkboxProps = {
   >,
   onUpdateChecked: [Function, Array] as PropType<MaybeArray<OnUpdateChecked>>,
   // private
-  privateTableHeader: Boolean,
+  privateInsideTable: Boolean,
   // deprecated
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateChecked>>
 }
@@ -282,7 +283,7 @@ export default defineComponent({
       renderedChecked,
       mergedDisabled,
       indeterminate,
-      privateTableHeader,
+      privateInsideTable,
       cssVars,
       labelId,
       label,
@@ -299,7 +300,7 @@ export default defineComponent({
           renderedChecked && `${mergedClsPrefix}-checkbox--checked`,
           mergedDisabled && `${mergedClsPrefix}-checkbox--disabled`,
           indeterminate && `${mergedClsPrefix}-checkbox--indeterminate`,
-          privateTableHeader && `${mergedClsPrefix}-checkbox--table-header`
+          privateInsideTable && `${mergedClsPrefix}-checkbox--table-header`
         ]}
         tabindex={mergedDisabled || !focusable ? undefined : 0}
         role="checkbox"
@@ -310,13 +311,16 @@ export default defineComponent({
         onKeydown={handleKeyDown}
         onClick={handleClick}
         onMousedown={() => {
-          const preventDefault = (e: Event): void => {
-            e.preventDefault()
-          }
-          window.addEventListener('selectstart', preventDefault)
-          setTimeout(() => {
-            window.removeEventListener('selectstart', preventDefault)
-          }, 0)
+          on(
+            'selectstart',
+            window,
+            (e: Event): void => {
+              e.preventDefault()
+            },
+            {
+              once: true
+            }
+          )
         }}
       >
         <div class={`${mergedClsPrefix}-checkbox-box`}>

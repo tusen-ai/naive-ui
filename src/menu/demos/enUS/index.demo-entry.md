@@ -43,13 +43,14 @@ customize-field
 | inverted | `boolean` | `false` | Use inverted style. |
 | key-field | `string` | `'key'` | Field name of key. |
 | label-field | `string` | `'label'` | Field name of label. |
-| options | `Array<MenuOption \| MenuGroupOption>` | `[]` | Items data of menu. |
+| options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | Items data of menu. |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | Menu layout. |
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all extras. |
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | Render function that renders all icons. |
 | render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all labels. |
 | root-indent | `number` | `undefined` | The indent of menu's first level children. If not set, menu will use `indent` in place of it. |
 | value | `string \| null` | `undefined` | The selected name of menu. |
+| watch-props | `Array<'defaultValue' \| 'defaultExpandedKeys'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. |
 | on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` is the array of expanded menu options' `key`. |
 | on-update:value | `(key: string, item: MenuOption) => void` | `undefined` | Callback when select a menu item. `key` is the `key` of the selected menu item. `item` is then original data of the menu item. |
 
@@ -68,7 +69,15 @@ customize-field
 
 | Name | Type | Description |
 | --- | --- | --- |
-| children | `Array<MenuOption \| MenuGroupOption>` | Group items. **required!** |
+| children | `Array<MenuOption \| MenuGroupOption>` | Group items, **required!** |
 | key | `string` | The indentifier of the menu group. |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |
 | type | `'group'` | The type of the menu item, **required!** |
+
+### MenuDividerOption Properties
+
+| Name  | Type             | Description                              |
+| ----- | ---------------- | ---------------------------------------- |
+| key   | `string`         | The indentifier of the menu group.       |
+| props | `HTMLAttributes` | Attributes of the divider.               |
+| type  | `'divider'`      | The type of the menu item, **required!** |

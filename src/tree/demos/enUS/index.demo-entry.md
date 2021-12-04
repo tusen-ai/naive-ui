@@ -43,7 +43,7 @@ batch-render
 | draggable | `boolean` | `false` | Whether it can be dragged. |
 | expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter. |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |
-| filter | `(node: TreeOption) => boolean` | `undefined` | A simple string based filter. |
+| filter | `(pattern: string, node: TreeOption) => boolean` | A simple string based filter | The function that filter tree nodes based on pattern. |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |
 | key-field | `string` | `'key'` | The key field in `TreeOption`. |
 | label-field | `string` | `'label'` | The label field in `TreeOption`. |
@@ -58,6 +58,7 @@ batch-render
 | selectable | `boolean` | `true` | Whether the node can be selected. |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scroll. You need to set proper style height of the tree in advance. |
+| watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. |
 | on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | The callback function after the node completes the dragging action. |
 | on-dragenter | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | Callback function in node drag and drop. |
 | on-dragleave | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | Drag a node, the callback function after the node leaves other nodes. |

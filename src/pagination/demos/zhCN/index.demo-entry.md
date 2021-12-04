@@ -15,6 +15,7 @@ disabled
 item-count
 prev
 prefix
+page-size-option
 ```
 
 ## API
@@ -29,7 +30,7 @@ prefix
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | 上一页 |
 | item-count | `number` | `undefined` | 总条数 |
 | page-count | `number` | `1` | 总页数 |
-| page-sizes | `Array<number>` | `['10']` | 每页条数 |
+| page-sizes | `Array<number \| PaginationSizeOption>` | `[10]` | 每页条数， 可自定义 |
 | page-size | `number` | `undefined` | 受控模式下的分页大小 |
 | page-slot | `number` | `9` | 页码显示的个数 |
 | page | `number` | `undefined` | 受控模式下的当前页 |

@@ -28,6 +28,7 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // --rail-color
 // --rail-color-hover
 // --rail-height
+// --rail-width-vertical
 export default c([
   cB('slider', `
     display: block;
@@ -36,17 +37,89 @@ export default c([
     z-index: 0;
     width: 100%;
     cursor: pointer;
+    user-select: none;
   `, [
-    cB('slider-marks', `
-      position: absolute;
-      top: 18px;
-      left: calc(var(--handle-size) / 2);
-      right: calc(var(--handle-size) / 2);
+    cM('reverse', [
+      cB('slider-handles', [
+        cB('slider-handle', `
+          transform: translate(50%, -50%);
+        `)
+      ]),
+      cB('slider-dots', [
+        cB('slider-dot', `
+          transform: translateX(50%, -50%);
+        `)
+      ]),
+      cM('vertical', [
+        cB('slider-handles', [
+          cB('slider-handle', `
+            transform: translate(-50%, -50%);
+          `)
+        ]),
+        cB('slider-marks', [
+          cB('slider-mark', `
+            transform: translateY(calc(-50% + var(--dot-height) / 2));
+          `)
+        ]),
+        cB('slider-dots', [
+          cB('slider-dot', `
+            transform: translateX(-50%) translateY(0);
+          `)
+        ])
+      ])
+    ]),
+    cM('vertical', `
+      padding: 0 calc((var(--handle-size) - var(--rail-height)) / 2);
+      width: var(--rail-width-vertical);
+      height: 100%;
     `, [
-      cB('slider-mark', {
-        position: 'absolute',
-        transform: 'translateX(-50%)'
-      })
+      cB('slider-handles', `
+        top: calc(var(--handle-size) / 2);
+        right: 0;
+        bottom: calc(var(--handle-size) / 2);
+        left: 0;
+      `, [
+        cB('slider-handle', `
+          top: unset;
+          left: 50%;
+          transform: translate(-50%, 50%);
+        `)
+      ]),
+      cB('slider-rail', `
+        height: 100%;
+      `, [
+        cE('fill', `
+          top: unset;
+          right: 0;
+          bottom: unset;
+          left: 0;
+        `)
+      ]),
+      cM('with-mark', `
+        width: var(--rail-width-vertical);
+        margin: 0 32px 0 8px;
+      `),
+      cB('slider-marks', `
+        top: calc(var(--handle-size) / 2);
+        right: unset;
+        bottom: calc(var(--handle-size) / 2);
+        left: 22px;
+      `, [
+        cB('slider-mark', `
+          transform: translateY(50%);
+          white-space: nowrap;
+        `)
+      ]),
+      cB('slider-dots', `
+        top: calc(var(--handle-size) / 2);
+        right: unset;
+        bottom: calc(var(--handle-size) / 2);
+        left: 50%;
+      `, [
+        cB('slider-dot', `
+          transform: translateX(-50%) translateY(50%);
+        `)
+      ])
     ]),
     cM('disabled', `
       cursor: not-allowed;
@@ -84,6 +157,17 @@ export default c([
         boxShadow: 'var(--handle-box-shadow-hover)'
       })
     ]),
+    cB('slider-marks', `
+      position: absolute;
+      top: 18px;
+      left: calc(var(--handle-size) / 2);
+      right: calc(var(--handle-size) / 2);
+    `, [
+      cB('slider-mark', {
+        position: 'absolute',
+        transform: 'translateX(-50%)'
+      })
+    ]),
     cB('slider-rail', `
       width: 100%;
       position: relative;
@@ -101,29 +185,37 @@ export default c([
         background-color: var(--fill-color);
       `)
     ]),
-    cB('slider-handle', `
-      outline: none;
-      height: var(--handle-size);
-      width: var(--handle-size);
-      border-radius: 50%;
-      transition: box-shadow .2s var(--bezier), background-color .3s var(--bezier);
+    cB('slider-handles', `
       position: absolute;
       top: 0;
-      transform: translateX(-50%);
-      overflow: hidden;
-      cursor: pointer;
-      background-color: var(--handle-color);
-      box-shadow: var(--handle-box-shadow);
+      right: calc(var(--handle-size) / 2);
+      bottom: 0;
+      left: calc(var(--handle-size) / 2);
     `, [
-      c('&:hover', {
-        boxShadow: 'var(--handle-box-shadow-hover)'
-      }),
-      c('&:hover:focus', {
-        boxShadow: 'var(--handle-box-shadow-active)'
-      }),
-      c('&:focus', {
-        boxShadow: 'var(--handle-box-shadow-focus)'
-      })
+      cB('slider-handle', `
+        outline: none;
+        height: var(--handle-size);
+        width: var(--handle-size);
+        border-radius: 50%;
+        transition: box-shadow .2s var(--bezier), background-color .3s var(--bezier);
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+        cursor: pointer;
+        background-color: var(--handle-color);
+        box-shadow: var(--handle-box-shadow);
+      `, [
+        c('&:hover', {
+          boxShadow: 'var(--handle-box-shadow-hover)'
+        }),
+        c('&:hover:focus', {
+          boxShadow: 'var(--handle-box-shadow-active)'
+        }),
+        c('&:focus', {
+          boxShadow: 'var(--handle-box-shadow-focus)'
+        })
+      ])
     ]),
     cB('slider-dots', `
       position: absolute;
@@ -142,7 +234,7 @@ export default c([
           box-shadow .3s var(--bezier),
           background-color .3s var(--bezier);
         position: absolute;
-        transform: translateX(-50%) translateY(-50%);
+        transform: translate(-50%, -50%);
         height: var(--dot-height);
         width:  var(--dot-width);
         border-radius: var(--dot-border-radius);
@@ -160,12 +252,33 @@ export default c([
   cB('slider-handle-indicator', `
     font-size: var(--font-size);
     padding: 6px 10px;
-    margin-bottom: 12px;
     border-radius: var(--indicator-border-radius);
     color: var(--indicator-text-color);
     background-color: var(--indicator-color);
     box-shadow: var(--indicator-box-shadow);
   `, [
+    fadeInScaleUpTransition()
+  ]),
+  cB('slider-handle-indicator', `
+    font-size: var(--font-size);
+    padding: 6px 10px;
+    border-radius: var(--indicator-border-radius);
+    color: var(--indicator-text-color);
+    background-color: var(--indicator-color);
+    box-shadow: var(--indicator-box-shadow);
+  `, [
+    cM('top', `
+      margin-bottom: 12px;
+    `),
+    cM('right', `
+      margin-left: 12px;
+    `),
+    cM('bottom', `
+      margin-top: 12px;
+    `),
+    cM('left', `
+      margin-right: 12px;
+    `),
     fadeInScaleUpTransition()
   ]),
   insideModal(

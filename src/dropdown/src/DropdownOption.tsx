@@ -24,9 +24,9 @@ import { TreeNode } from 'treemate'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
-  DropdownOption,
-  DropdownOptionProps
+  DropdownOption
 } from './interface'
+import { happensIn } from 'seemly'
 
 interface NDropdownOptionInjection {
   enteringSubmenuRef: Ref<boolean>
@@ -56,7 +56,7 @@ export default defineComponent({
       type: String as PropType<FollowerPlacement>,
       default: 'right-start'
     },
-    props: Object as PropType<DropdownOptionProps>
+    props: Object as PropType<HTMLAttributes>
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -144,7 +144,7 @@ export default defineComponent({
       const { relatedTarget } = e
       if (
         relatedTarget &&
-        !(relatedTarget as HTMLElement).hasAttribute('__dropdown-option')
+        !happensIn({ target: relatedTarget }, 'dropdownOption')
       ) {
         hoverKeyRef.value = null
       }
@@ -237,7 +237,7 @@ export default defineComponent({
       <div class={`${clsPrefix}-dropdown-option`}>
         {h('div', mergeProps(builtinProps as any, props as any), [
           <div
-            __dropdown-option
+            data-dropdown-option
             class={[
               `${clsPrefix}-dropdown-option-body__prefix`,
               siblingHasIcon &&
@@ -247,16 +247,16 @@ export default defineComponent({
             {[renderIcon ? renderIcon(rawNode) : render(rawNode.icon)]}
           </div>,
           <div
-            __dropdown-option
+            data-dropdown-option
             class={`${clsPrefix}-dropdown-option-body__label`}
           >
-            {/* TODO: Workaround, menu campatible */}
+            {/* TODO: Workaround, menu compatible */}
             {renderLabel
               ? renderLabel(rawNode)
               : render(rawNode[this.labelField] ?? rawNode.title)}
           </div>,
           <div
-            __dropdown-option
+            data-dropdown-option
             class={[
               `${clsPrefix}-dropdown-option-body__suffix`,
               siblingHasSubmenu &&

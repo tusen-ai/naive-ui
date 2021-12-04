@@ -20,13 +20,8 @@
         <n-button text tag="a" target="_blank" href="https://www.xicons.org">{{
           t('icons')
         }}</n-button>
-        <n-button
-          text
-          tag="a"
-          target="_blank"
-          href="https://github.com/jekip/naive-ui-admin"
-        >
-          Naive UI Admin
+        <n-button text @click="push('/docs/community')">
+          {{ t('libraries') }}
         </n-button>
       </div>
       <div class="footer-links-col">
@@ -116,6 +111,7 @@ export default {
           tusimple: '图森未来',
           joinUs: '加入我们',
           icons: '图标库',
+          libraries: '社区精选资源',
           dingTalk: '钉钉',
           dingTalkGroupChat: '钉钉交流群',
           memberLimitReached: '（已满）',
@@ -133,6 +129,7 @@ export default {
           tusimple: 'TuSimple',
           joinUs: 'Join Us',
           icons: 'Icon Library',
+          libraries: 'Third-Party Libraries',
           dingTalk: 'DingTalk',
           dingTalkGroupChat: 'DingTalk Group Chat',
           memberLimitReached: '(Member limit reached)',

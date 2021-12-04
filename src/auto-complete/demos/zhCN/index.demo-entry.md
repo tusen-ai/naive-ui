@@ -25,6 +25,7 @@ show-options-by-value
 | default-value | `string` | `null` | 自动填充的默认值 |
 | disabled | `boolean` | `false` | 自动填充是否禁用 |
 | get-show | `(value: string) => boolean` | `undefined` | 根据输入值在聚焦的状态中决定是否显示菜单 |
+| input-props | `HTMLInputAttributes` | `undefined` | 自动填充中 input 元素的属性 |
 | loading | `boolean` | `false` | 是否展示加载状态 |
 | options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | 自动填充的自定义选项 |
 | placeholder | `string` | `'请输入'` | 自动填充的提示信息 |
@@ -57,3 +58,5 @@ show-options-by-value
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |
 | default | `(options: { handleInput: (value: string) => void, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` | 自定义输入元素，由用户填充 |
+| prefix | `()` | 输入框头部内容 |
+| suffix | `()` | 输入框尾部内容 |

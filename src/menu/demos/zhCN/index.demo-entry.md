@@ -43,13 +43,14 @@ customize-field
 | inverted | `boolean` | `false` | 使用反转样式 |
 | key-field | `string` | `'key'` | key 的字段名 |
 | label-field | `string` | `'label'` | label 的字段名 |
-| options | `Array<MenuOption \| MenuGroupOption>` | `[]` | 菜单的数据 |
+| options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | 菜单的数据 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | 菜单的布局方式 |
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单额外部分渲染 |
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | 批量处理菜单图标渲染 |
 | render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单标签渲染 |
 | root-indent | `number` | `32` | 菜单第一级的缩进，如果没有设定，使用 `indent` 代替 |
 | value | `string \| null` | `undefined` | 菜单当前的选中值 |
+| watch-props | `Array<'defaultValue' \| 'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 |
 | on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` 是展开菜单项的 `key` 的数组 |
 | on-update:value | `(key: string, item: MenuOption) => void` | `undefined` | 选中菜单的回调，`key` 是选中菜单项的 `key`，`item` 是菜单项原始数据 |
 
@@ -72,3 +73,11 @@ customize-field
 | key      | `string`                               | 菜单项的标识符           |
 | label    | `string \| (() => VNodeChild)`         | 菜单项的内容             |
 | type     | `'group'`                              | 菜单项的类型，**必填！** |
+
+### MenuDividerOption Properties
+
+| 名称  | 类型             | 说明                     |
+| ----- | ---------------- | ------------------------ |
+| key   | `string`         | 菜单项的标识符           |
+| props | `HTMLAttributes` | 分割线的属性             |
+| type  | `'divider'`      | 菜单项的类型，**必填！** |

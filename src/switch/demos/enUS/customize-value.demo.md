@@ -1,4 +1,4 @@
-# Customize Checked Value
+# Customize checked value
 
 Use `checked-value` and `unchecked-value` to customize respective values.
 

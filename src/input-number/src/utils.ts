@@ -11,6 +11,11 @@ export function parse (value: string): number | null {
   return Number(value)
 }
 
+// can be parsed to number but shouldn't be applied when inputing
+export function isWipValue (value: string): boolean {
+  return /^\d+\.$/.test(value) || /^\.\d+$/.test(value)
+}
+
 // string => boolean (expected, not implemented)
 // number => boolean (legacy)
 export function validator (value: number | undefined | null): boolean {

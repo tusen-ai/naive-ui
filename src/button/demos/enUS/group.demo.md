@@ -1,4 +1,4 @@
-# Button Group
+# Button group
 
 Buttons can be grouped.
 

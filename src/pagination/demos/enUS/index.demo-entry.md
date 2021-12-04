@@ -15,6 +15,7 @@ disabled
 item-count
 prev
 prefix
+page-size-option
 ```
 
 ## API
@@ -29,7 +30,7 @@ prefix
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |
 | item-count | `number` | `undefined` | Total number. |
 | page-count | `number` | `1` | Total pages. |
-| page-sizes | `Array<number>` | `['10']` | Number of items per page. |
+| page-sizes | `Array<number \| PaginationSizeOption>` | `[10]` | Number of items per page, can be customize.  |
 | page-size | `number` | `undefined` | Page size in controlled mode. |
 | page-slot | `number` | `9` | The number of pages displayed. |
 | page | `number` | `undefined` | Current page in controlled mode. |
