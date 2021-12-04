@@ -35,7 +35,7 @@ describe('n-time', () => {
   //   expect(wrapper.find('time').text()).toContain('1969/12/31 20:00:00')
   // })
 
-  it('should work with `type` prop', async () => {
+  it('should work with `type` `to` prop', async () => {
     Date.now = () => mockedNow
 
     const wrapper = mount(NTime, {
