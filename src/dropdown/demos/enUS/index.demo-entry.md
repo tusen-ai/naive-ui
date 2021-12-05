@@ -35,7 +35,7 @@ option-props
 | render-label | `(option: DropdownOption) => VNodeChild` | `undefined` | Render function that renders option labels. |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | Dropdown size. |
 | on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when there is a click outside of the component. |
-| on-select | `(key: string \| number) => void` | `undefined` | Callback function for after an option is selected. |
+| on-select | `(key: string \| number, option: DropdownOption) => void` | `undefined` | Callback function for after an option is selected. |
 
 For other props, for example `placement`, please see [Popover Props](popover#Popover-Props). Note that `raw` is not available.
 
