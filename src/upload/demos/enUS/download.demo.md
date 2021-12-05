@@ -7,7 +7,6 @@ set `show-download-button` to show download button. set `on-download` to provide
   action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
   :default-file-list="fileList"
   list-type="image"
-  :create-thumbnail-url="createThumbnailUrl"
   show-download-button
   @download="handleDownload"
 >
@@ -46,12 +45,6 @@ export default defineComponent({
     }
     return {
       fileList: fileListRef,
-      createThumbnailUrl (file) {
-        message.info(
-          'createThumbnailUrl changes the thumbnail image of the uploaded file.'
-        )
-        return '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-      },
       handleDownload
     }
   }
