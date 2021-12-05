@@ -1,4 +1,4 @@
-# Inline Form
+# Inline form
 
 An example of an inline form.
 

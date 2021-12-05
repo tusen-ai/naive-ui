@@ -18,6 +18,7 @@ disabled
 height-debug
 validator-debug
 show-label
+partially-apply-rules
 ```
 
 ## API
