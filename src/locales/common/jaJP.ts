@@ -33,6 +33,8 @@ const jaJP: NLocale = {
     datePlaceholder: '日付を選択',
     datetimePlaceholder: '選択',
     monthPlaceholder: '月を選択',
+    // FIXME: translation needed
+    yearPlaceholder: 'Select Year',
     startDatePlaceholder: '開始日',
     endDatePlaceholder: '終了日',
     startDatetimePlaceholder: '開始時間',

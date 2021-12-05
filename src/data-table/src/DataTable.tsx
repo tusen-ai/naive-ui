@@ -525,10 +525,8 @@ export default defineComponent({
                   <div
                     class={[
                       `${mergedClsPrefix}-data-table-empty`,
-                      {
-                        [`${mergedClsPrefix}-data-table-empty--hide`]:
-                          this.loading
-                      }
+                      this.loading &&
+                        `${mergedClsPrefix}-data-table-empty--hide`
                     ]}
                   >
                     {renderSlot(this.$slots, 'empty', undefined, () => [

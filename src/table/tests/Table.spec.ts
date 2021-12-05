@@ -49,6 +49,21 @@ describe('n-table', () => {
       'n-table--single-line'
     )
   })
+
+  it('should work with `size` prop', async () => {
+    ;(['small', 'medium', 'large'] as const).forEach((size) => {
+      const wrapper = mount(NTable, { props: { size } })
+      expect(wrapper.find('.n-table').attributes('style')).toMatchSnapshot()
+    })
+  })
+
+  it('should work with `striped` prop', async () => {
+    const wrapper = mount(NTable)
+    expect(wrapper.find('.n-table').classes()).not.toContain('n-table--striped')
+
+    await wrapper.setProps({ striped: true })
+    expect(wrapper.find('.n-table').classes()).toContain('n-table--striped')
+  })
 })
 
 describe('n-table-body', () => {
