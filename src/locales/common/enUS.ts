@@ -31,6 +31,7 @@ const enUS = {
     datePlaceholder: 'Select Date',
     datetimePlaceholder: 'Select Date and Time',
     monthPlaceholder: 'Select Month',
+    yearPlaceholder: 'Select Year',
     startDatePlaceholder: 'Start Date',
     endDatePlaceholder: 'End Date',
     startDatetimePlaceholder: 'Start Date and Time',
