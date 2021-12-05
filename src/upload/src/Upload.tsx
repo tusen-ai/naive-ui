@@ -57,30 +57,36 @@ function createXhrHandlers (
 ): XhrHandlers {
   const { doChange, XhrMap } = inst
   let percentage = 0
+  function handleXHRError (e: ProgressEvent<EventTarget>): void {
+    const fileAfterChange: FileInfo = Object.assign({}, file, {
+      status: 'error',
+      percentage
+    })
+    XhrMap.delete(file.id)
+    doChange(fileAfterChange, e)
+  }
+  function handleXHRLoad (e: ProgressEvent<EventTarget>): void {
+    if (XHR.status !== 200) {
+      handleXHRError(e)
+      return
+    }
+    let fileAfterChange: FileInfo = Object.assign({}, file, {
+      status: 'finished',
+      percentage,
+      file: null
+    })
+    XhrMap.delete(file.id)
+    fileAfterChange =
+      inst.onFinish?.({ file: fileAfterChange, event: e }) || fileAfterChange
+    doChange(fileAfterChange, e)
+  }
   return {
-    handleXHRLoad (e) {
-      let fileAfterChange: FileInfo = Object.assign({}, file, {
-        status: 'finished',
-        percentage,
-        file: null
-      })
-      XhrMap.delete(file.id)
-      fileAfterChange =
-        inst.onFinish?.({ file: fileAfterChange, event: e }) || fileAfterChange
-      doChange(fileAfterChange, e)
-    },
+    handleXHRLoad,
+    handleXHRError,
     handleXHRAbort (e) {
       const fileAfterChange: FileInfo = Object.assign({}, file, {
         status: 'removed',
         file: null,
-        percentage
-      })
-      XhrMap.delete(file.id)
-      doChange(fileAfterChange, e)
-    },
-    handleXHRError (e) {
-      const fileAfterChange: FileInfo = Object.assign({}, file, {
-        status: 'error',
         percentage
       })
       XhrMap.delete(file.id)
