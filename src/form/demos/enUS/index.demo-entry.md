@@ -16,6 +16,7 @@ item-only
 async
 disabled
 show-label
+partially-apply-rules
 ```
 
 ## API

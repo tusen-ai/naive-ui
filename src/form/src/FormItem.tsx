@@ -34,7 +34,7 @@ import { formItemMisc, formItemSize, formItemRule } from './utils'
 import Feedbacks from './Feedbacks'
 import style from './styles/form-item.cssr'
 import {
-  ApplyRule,
+  ShouldRuleBeApplied,
   FormItemRule,
   LabelAlign,
   LabelPlacement,
@@ -209,7 +209,7 @@ export default defineComponent({
       /** the following code is for compatibility */
       let trigger: ValidationTrigger | string | undefined
       let validateCallback: ValidateCallback | undefined
-      let shouldRuleBeApplied: ApplyRule | undefined
+      let shouldRuleBeApplied: ShouldRuleBeApplied | undefined
       let asyncValidatorOptions: {} | undefined
       if (typeof options === 'string') {
         trigger = options
@@ -243,7 +243,7 @@ export default defineComponent({
     }
     const internalValidate: FormItemInternalValidate = async (
       trigger: ValidationTrigger | string | null = null,
-      shouldRuleBeApplied: ApplyRule = () => true,
+      shouldRuleBeApplied: ShouldRuleBeApplied = () => true,
       options: ValidateOption = {
         suppressWarning: true
       }

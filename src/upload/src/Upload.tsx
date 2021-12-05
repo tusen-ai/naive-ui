@@ -57,30 +57,36 @@ function createXhrHandlers (
 ): XhrHandlers {
   const { doChange, XhrMap } = inst
   let percentage = 0
+  function handleXHRError (e: ProgressEvent<EventTarget>): void {
+    const fileAfterChange: FileInfo = Object.assign({}, file, {
+      status: 'error',
+      percentage
+    })
+    XhrMap.delete(file.id)
+    doChange(fileAfterChange, e)
+  }
+  function handleXHRLoad (e: ProgressEvent<EventTarget>): void {
+    if (XHR.status !== 200) {
+      handleXHRError(e)
+      return
+    }
+    let fileAfterChange: FileInfo = Object.assign({}, file, {
+      status: 'finished',
+      percentage,
+      file: null
+    })
+    XhrMap.delete(file.id)
+    fileAfterChange =
+      inst.onFinish?.({ file: fileAfterChange, event: e }) || fileAfterChange
+    doChange(fileAfterChange, e)
+  }
   return {
-    handleXHRLoad (e) {
-      let fileAfterChange: FileInfo = Object.assign({}, file, {
-        status: 'finished',
-        percentage,
-        file: null
-      })
-      XhrMap.delete(file.id)
-      fileAfterChange =
-        inst.onFinish?.({ file: fileAfterChange, event: e }) || fileAfterChange
-      doChange(fileAfterChange, e)
-    },
+    handleXHRLoad,
+    handleXHRError,
     handleXHRAbort (e) {
       const fileAfterChange: FileInfo = Object.assign({}, file, {
         status: 'removed',
         file: null,
-        percentage
-      })
-      XhrMap.delete(file.id)
-      doChange(fileAfterChange, e)
-    },
-    handleXHRError (e) {
-      const fileAfterChange: FileInfo = Object.assign({}, file, {
-        status: 'error',
         percentage
       })
       XhrMap.delete(file.id)
@@ -305,7 +311,11 @@ const uploadProps = {
   onPreview: Function as PropType<OnPreview>,
   createThumbnailUrl: Function as PropType<CreateThumbnailUrl>,
   abstract: Boolean,
-  max: Number
+  max: Number,
+  showTrigger: {
+    type: Boolean,
+    default: true
+  }
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -580,7 +590,8 @@ export default defineComponent({
       maxReachedRef,
       fileListStyleRef: toRef(props, 'fileListStyle'),
       abstractRef: toRef(props, 'abstract'),
-      cssVarsRef
+      cssVarsRef,
+      showTriggerRef: toRef(props, 'showTrigger')
     })
 
     const exposedMethods: UploadInst = {
@@ -635,7 +646,7 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
       >
         {inputNode}
-        {this.listType !== 'image-card' && (
+        {this.showTrigger && this.listType !== 'image-card' && (
           <NUploadTrigger>{$slots}</NUploadTrigger>
         )}
         {this.showFileList && <NUploadFileList>{$slots}</NUploadFileList>}
