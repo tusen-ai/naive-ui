@@ -13,6 +13,7 @@
 ### Feats
 
 - `n-upload` 新增 `show-trigger` 属性
+- `n-data-table` 展示树形数据时会忽略长度为 0 的 `children`，关闭 [#1703](https://github.com/TuSimple/naive-ui/issues/1703)
 
 ## 2.21.3 (2021-12-03)
 

@@ -13,6 +13,7 @@
 ### Feats
 
 - `n-upload` add `show-trigger` prop.
+- `n-data-table` will ignore `children` with length 0 in tree data mode, closes [#1703](https://github.com/TuSimple/naive-ui/issues/1703).
 
 ## 2.21.3 (2021-12-03)
 

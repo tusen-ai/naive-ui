@@ -45,6 +45,7 @@ export function useTableData (
   const treeMateRef = computed(() => {
     const { childrenKey } = props
     return createTreeMate<InternalRowData>(props.data, {
+      ignoreEmptyChildren: true,
       getKey: props.rowKey,
       getChildren: (rowData) => rowData[childrenKey] as any,
       getDisabled: (rowData) => {
