@@ -33,7 +33,7 @@ const ukUA: NLocale = {
     datePlaceholder: 'Обрати дату',
     datetimePlaceholder: 'Обрати дату і час',
     monthPlaceholder: 'Виберіть місяць',
-    // TODO: need to translate
+    // FIXME: translation needed
     yearPlaceholder: 'Select Year',
     startDatePlaceholder: 'Дата початку',
     endDatePlaceholder: 'Дата завершення',

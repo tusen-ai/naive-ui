@@ -190,19 +190,23 @@ export default defineComponent({
       return ['daterange', 'datetimerange'].includes(props.type)
     })
     const localizedPlacehoderRef = computed(() => {
-      if (props.placeholder === undefined) {
-        if (props.type === 'date') {
-          return localeRef.value.datePlaceholder
-        } else if (props.type === 'datetime') {
-          return localeRef.value.datetimePlaceholder
-        } else if (props.type === 'month') {
-          return localeRef.value.monthPlaceholder
-        } else if (props.type === 'year') {
-          return localeRef.value.yearPlaceholder
+      const { placeholder } = props
+      if (placeholder === undefined) {
+        const { type } = props
+        switch (type) {
+          case 'date':
+            return localeRef.value.datePlaceholder
+          case 'datetime':
+            return localeRef.value.datetimePlaceholder
+          case 'month':
+            return localeRef.value.monthPlaceholder
+          case 'year':
+            return localeRef.value.yearPlaceholder
+          default:
+            return ''
         }
-        return props.placeholder
       } else {
-        return props.placeholder
+        return placeholder
       }
     })
     const localizedStartPlaceholderRef = computed(() => {

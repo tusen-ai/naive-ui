@@ -33,7 +33,7 @@ const ruRu: NLocale = {
     datePlaceholder: 'Выбрать дату',
     datetimePlaceholder: 'Выбрать дату и время',
     monthPlaceholder: 'Выберите месяц',
-    // TODO: need to translate
+    // FIXME: translation needed
     yearPlaceholder: 'Select Year',
     startDatePlaceholder: 'Дата начала',
     endDatePlaceholder: 'Дата окончания',
