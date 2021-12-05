@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## 2.21.3 (2021-12-03)
+
+### Fixes
+
+- Fix `n-theme-editor` throw error when click button component, closes [#1708](https://github.com/TuSimple/naive-ui/issues/1708).
+- Fix `n-input`'s color is abnormal in Android WeChat, closes [#1705](https://github.com/TuSimple/naive-ui/issues/1705).
+- Fix `n-input` 's `borderHover` theme variable doesn't work, closes [#1704](https://github.com/TuSimple/naive-ui/issues/1704).
+- Fix `n-dialog`'s `content` word-break.
+- Fix `n-input-number` cannot input decimals value.
+- Fix `n-data-table`'s header & body may have wrong border radius, closes [#1712](https://github.com/TuSimple/naive-ui/issues/1712).
+- Fix `n-button`'s `colorOpacityXxx` theme vars are not string typed.
+
+### Feats
+
+- `n-switch` add `rail-style` prop, closes [#1718](https://github.com/TuSimple/naive-ui/issues/1718).
+- `n-image` add `preview-disabled` props, closes [#1647](https://github.com/TuSimple/naive-ui/issues/1647).
+- `n-image` add `on-load` & `on-error` prop.
+- `n-image` add `fallback-src` prop.
+- `n-data-table` add `on-update:expanded-row-keys` prop.
+- `n-tree` add `watch-props` prop.
+
 ## 2.21.2 (2021-11-29)
 
 ### Fixes
