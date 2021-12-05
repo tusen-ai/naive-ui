@@ -1,4 +1,4 @@
-# Custom Validation
+# Custom validation
 
 If you need to customize the timing and effect of a validation, use `validation-status` and `feedback`. In this case, there's usually no need for providing a `path` for the form item.
 
