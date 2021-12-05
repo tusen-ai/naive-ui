@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-upload` 在 `image-card` 模式下，达到最大上传数量后仍然展示上传按钮，关闭 [#1744](https://github.com/TuSimple/naive-ui/issues/1744)
+
+### Feats
+
+- `n-upload` 新增 `show-trigger` 属性
+
 ## 2.21.3 (2021-12-03)
 
 ### Fixes

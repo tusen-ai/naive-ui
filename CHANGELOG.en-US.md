@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-upload` still shows upload trigger when max limit is reached in `image-card` mode, closes [#1744](https://github.com/TuSimple/naive-ui/issues/1744)
+
+### Feats
+
+- `n-upload` add `show-trigger` prop.
+
 ## 2.21.3 (2021-12-03)
 
 ### Fixes
