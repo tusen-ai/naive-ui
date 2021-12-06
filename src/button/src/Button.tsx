@@ -143,7 +143,7 @@ const Button = defineComponent({
       }
     }
     const handleClick = (e: MouseEvent): void => {
-      if (!props.disabled) {
+      if (!props.disabled && !props.loading) {
         const { onClick } = props
         if (onClick) call(onClick, e)
         if (!props.text) {
@@ -509,6 +509,7 @@ const Button = defineComponent({
           !this.text && this.dashed && `${mergedClsPrefix}-button--dashed`,
           this.color && `${mergedClsPrefix}-button--color`,
           this.secondary && `${mergedClsPrefix}-button--secondary`,
+          this.loading && `${mergedClsPrefix}-button--loading`,
           this.ghost && `${mergedClsPrefix}-button--ghost` // required for button group border collapse
         ]}
         tabindex={this.mergedFocusable ? 0 : -1}
