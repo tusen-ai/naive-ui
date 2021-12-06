@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-input` 点击清除按钮时不触发 `change` 事件，关闭 [#1754](https://agithub.com/TuSimple/naive-ui/issues/1754)
+- 修复 `n-input-number` 按压上、下方向键改变数值时光标移动的问题，关闭 [#1759](https://github.com/TuSimple/naive-ui/issues/1759)
 
 ### i18n
 

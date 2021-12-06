@@ -334,12 +334,14 @@ export default defineComponent({
         }
       } else if (e.code === 'ArrowUp') {
         if (props.keyboard.ArrowUp === false) return
+        e.preventDefault()
         const value = deriveValueFromDisplayedValue()
         if (value !== false) {
           doAdd()
         }
       } else if (e.code === 'ArrowDown') {
         if (props.keyboard.ArrowDown === false) return
+        e.preventDefault()
         const value = deriveValueFromDisplayedValue()
         if (value !== false) {
           doMinus()
