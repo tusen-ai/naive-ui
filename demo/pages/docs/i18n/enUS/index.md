@@ -52,9 +52,9 @@ PR is welcomed for locales that is not supported yet!
 | German - Germany          | deDE   | dateDeDe    |
 | Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |
 
-## Customize the existing theme
+## Customize the existing locale
 
-You can use `createLocale` to customize the existing theme.
+You can use `createLocale` to customize the existing locale.
 
 ```html
 <template>
