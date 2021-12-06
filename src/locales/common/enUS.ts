@@ -13,7 +13,7 @@ const enUS = {
     placeholder: 'Please Select',
     loading: 'Loading',
     loadingRequiredMessage: (label: string): string =>
-      `Please load all ${label}'s descedants before checking it.`
+      `Please load all ${label}'s descendants before checking it.`
   },
   Time: {
     dateFormat: 'yyyy-MM-dd',
