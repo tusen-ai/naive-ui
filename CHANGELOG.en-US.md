@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-input` click clear icon does't trigger `change` event, closes [#1754](https://agithub.com/TuSimple/naive-ui/issues/1754).
+- Fix `n-input-number` the cursor moves when press arrow keys to change value, closes [#1759](https://github.com/TuSimple/naive-ui/issues/1759).
 
 ## 2.21.4 (2021-12-06)
 
