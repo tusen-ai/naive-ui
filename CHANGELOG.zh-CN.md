@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.21.5
+
+### Fixed
+
+- 修复 `b-button` 在 `loading` 状态下可以被点击的问题，关闭 [#1628](https://github.com/TuSimple/naive-ui/issues/1628)
+
 ## 2.21.4 (2021-12-06)
 
 ### Fixes
