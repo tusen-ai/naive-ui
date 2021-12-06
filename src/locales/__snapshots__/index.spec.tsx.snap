@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`locale works 1`] = `"[\\"check date format\\",\\"1970-01-01\\",\\"1970-01-01 08:00:00\\",\\"1970年\\",\\"1970-01\\"]"`;
+exports[`locale works 1`] = `"[\\"check date format\\",\\"1970-01-01\\",\\"1970-01-01 08:00:00\\",\\"1970\\",\\"1970-01\\"]"`;
 
 exports[`locale works 2`] = `
 "<div class=\\"n-config-provider\\">
@@ -568,7 +568,7 @@ exports[`locale works 8`] = `
 </div>"
 `;
 
-exports[`locale works 9`] = `"[\\"check date format\\",\\"1970-01-01\\",\\"1970-01-01 08:00:00\\",\\"1970年\\",\\"1970-01\\"]"`;
+exports[`locale works 9`] = `"[\\"check date format\\",\\"1970-01-01\\",\\"1970-01-01 08:00:00\\",\\"1970\\",\\"1970-01\\"]"`;
 
 exports[`locale works 10`] = `
 "<div class=\\"n-config-provider\\">
