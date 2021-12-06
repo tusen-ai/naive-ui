@@ -1,5 +1,12 @@
 # CHANGELOG
 
+
+## Pending
+
+### Fixes
+
+- Fix `n-input` click clear icon does't trigger `change` event, closes [#1754](https://agithub.com/TuSimple/naive-ui/issues/1754).
+
 ### i18n
 
 - add frFR locale.
