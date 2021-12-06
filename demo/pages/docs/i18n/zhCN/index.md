@@ -52,6 +52,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 印度尼西亚 | idID | dateIdID |
 | 德语       | deDE | dateDeDe |
 | 书面挪威语 | nbNO | dateNbNO |
+| 法语       | frFR | dateFrFR |
 
 ## 在现有国际化基础上调整
 

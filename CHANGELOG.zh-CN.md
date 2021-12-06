@@ -6,6 +6,10 @@
 
 - 修复 `n-input` 点击清除按钮时不触发 `change` 事件，关闭 [#1754](https://agithub.com/TuSimple/naive-ui/issues/1754)
 
+### i18n
+
+- 新增 frFR locale
+
 ## 2.21.4 (2021-12-06)
 
 ### Fixes

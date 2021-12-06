@@ -51,6 +51,7 @@ PR is welcomed for locales that is not supported yet!
 | Chinese (Simplified)      | enUS   | dateEnUS    |
 | German - Germany          | deDE   | dateDeDe    |
 | Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |
+| French                    | frFR   | dateFrFR    |
 
 ## Customize the existing locale
 
