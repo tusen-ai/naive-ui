@@ -9,6 +9,7 @@ import {
   idID,
   deDE,
   nbNO,
+  frFR,
   dateEnUS,
   dateZhCN,
   dateRuRU,
@@ -17,6 +18,7 @@ import {
   dateIdID,
   dateDeDE,
   dateNbNO,
+  dateFrFR,
   NConfigProvider,
   NDateLocale,
   NLocale,
@@ -115,6 +117,14 @@ describe('locale', () => {
         props: {
           dateLocale: dateNbNO,
           locale: nbNO
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateFrFR,
+          locale: frFR
         }
       }).html()
     ).toMatchSnapshot()

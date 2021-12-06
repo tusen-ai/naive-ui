@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### i18n
+
+- 新增 frFR locale
+
 ## 2.21.4 (2021-12-06)
 
 ### Fixes
