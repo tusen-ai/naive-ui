@@ -25,6 +25,8 @@ const ukUA: NLocale = {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
+    dateFormat: 'yyyy-MM-dd',
+    dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     clear: 'Стерти',
     now: 'Зараз',
     confirm: 'Підтвердити',

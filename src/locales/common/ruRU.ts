@@ -25,6 +25,8 @@ const ruRu: NLocale = {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
+    dateFormat: 'yyyy-MM-dd',
+    dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     clear: 'Очистить',
     now: 'Сейчас',
     confirm: 'Подтвердить',

@@ -25,6 +25,8 @@ const nbNO: NLocale = {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
+    dateFormat: 'dd.MM.yyyy',
+    dateTimeFormat: 'dd.MM.yyyy HH:mm:ss',
     clear: 'Tøm',
     now: 'Nå',
     confirm: 'Bekreft',

@@ -25,6 +25,8 @@ const zhCN: NLocale = {
     yearFormat: 'yyyy年',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
+    dateFormat: 'yyyy-MM-dd',
+    dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     clear: '清除',
     now: '此刻',
     confirm: '确认',

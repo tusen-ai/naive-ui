@@ -1,12 +1,15 @@
 # CHANGELOG
 
-
 ## Pending
 
 ### Fixes
 
 - Fix `n-input` click clear icon does't trigger `change` event, closes [#1754](https://agithub.com/TuSimple/naive-ui/issues/1754).
 - Fix `n-input-number` the cursor moves when press arrow keys to change value, closes [#1759](https://github.com/TuSimple/naive-ui/issues/1759).
+
+### Feats
+
+- `n-date-picker`'s default format follows i18n.
 
 ### i18n
 
