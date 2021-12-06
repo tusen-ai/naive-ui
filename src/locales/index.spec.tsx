@@ -43,7 +43,9 @@ const Wrapper = defineComponent({
         JSON.stringify([
           'check date format',
           dateInputEls[0].value,
-          dateInputEls[1].value
+          dateInputEls[1].value,
+          dateInputEls[2].value,
+          dateInputEls[3].value
         ])
       )
     })
@@ -61,6 +63,8 @@ const Wrapper = defineComponent({
               <div ref="datePickerWrapperElRef">
                 <NDatePicker type="date" value={666} />
                 <NDatePicker type="datetime" value={666} />
+                <NDatePicker type="year" value={666} />
+                <NDatePicker type="month" value={666} />
               </div>
             </div>
           )

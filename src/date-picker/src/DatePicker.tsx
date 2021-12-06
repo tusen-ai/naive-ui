@@ -241,7 +241,7 @@ export default defineComponent({
         case 'year':
           return localeRef.value.yearFormat
         case 'month':
-          return localeRef.value.monthFormat
+          return localeRef.value.yearMonthFormat
       }
     })
     const mergedActionsRef = computed(() => {

@@ -23,6 +23,7 @@ const enUS = {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
+    yearMonthFormat: 'yyyy-MM',
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     clear: 'Clear',

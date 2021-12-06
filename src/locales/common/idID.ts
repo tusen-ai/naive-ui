@@ -25,6 +25,7 @@ const idID: NLocale = {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
+    yearMonthFormat: 'MM-yyyy',
     dateFormat: 'dd-MM-yyyy',
     dateTimeFormat: 'dd-MM-yyyy HH:mm:ss',
     clear: 'Bersihkan',
