@@ -239,9 +239,9 @@ export default defineComponent({
         case 'datetimerange':
           return localeRef.value.dateTimeFormat
         case 'year':
-          return localeRef.value.yearFormat
+          return localeRef.value.yearTypeFormat
         case 'month':
-          return localeRef.value.yearMonthFormat
+          return localeRef.value.monthTypeFormat
       }
     })
     const mergedActionsRef = computed(() => {
