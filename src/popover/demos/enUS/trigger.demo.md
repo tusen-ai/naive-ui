@@ -16,7 +16,7 @@
   </n-popover>
   <n-popover trigger="focus">
     <template #trigger>
-      <n-button>Click</n-button>
+      <n-button>Focus</n-button>
     </template>
     <span>I wish they all could be California girls</span>
   </n-popover>

@@ -33,6 +33,8 @@ const nbNO: NLocale = {
     datePlaceholder: 'Velg dato',
     datetimePlaceholder: 'Velg dato og tid',
     monthPlaceholder: 'Velg måned',
+    // FIXME: translation needed
+    yearPlaceholder: 'Select Year',
     startDatePlaceholder: 'Startdato',
     endDatePlaceholder: 'Sluttdato',
     startDatetimePlaceholder: 'Startdato og -tid',

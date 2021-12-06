@@ -53,6 +53,13 @@ const ColorWandIcon = (
   </svg>
 )
 
+// button colorOpacitySecondary var is not color
+const showColorPicker = (key: string): boolean => {
+  if (key.includes('opacity')) return false
+  if (key.includes('color') || key.includes('Color')) return true
+  return false
+}
+
 export default defineComponent({
   name: 'ThemeEditor',
   inheritAttrs: false,
@@ -397,11 +404,8 @@ export default defineComponent({
                                                         >
                                                           {varKey}
                                                         </div>,
-                                                        varKey.includes(
-                                                          'color'
-                                                        ) ||
-                                                        varKey.includes(
-                                                          'Color'
+                                                        showColorPicker(
+                                                          varKey
                                                         ) ? (
                                                           <NColorPicker
                                                             key={varKey}

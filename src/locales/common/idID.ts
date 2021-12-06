@@ -31,6 +31,8 @@ const idID = {
     datePlaceholder: 'Pilih Tanggal',
     datetimePlaceholder: 'Pilih Tanggal dan Waktu',
     monthPlaceholder: 'Pilih Bulan',
+    // FIXME: translation needed
+    yearPlaceholder: 'Select Year',
     startDatePlaceholder: 'Tanggal Mulai',
     endDatePlaceholder: 'Tanggal Selesai',
     startDatetimePlaceholder: 'Tanggal dan Waktu Mulai',

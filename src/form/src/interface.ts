@@ -20,6 +20,7 @@ export type FormItemRuleAsyncValidator = (
 ) => Promise<void> | undefined
 
 export type FormItemRule = Omit<RuleItem, 'validator' | 'asyncValidator'> & {
+  key?: string
   trigger?: ValidationTrigger | string | Array<ValidationTrigger | string>
   validator?: FormItemRuleValidator
   asyncValidator?: FormItemRuleAsyncValidator
@@ -28,13 +29,13 @@ export type FormItemRule = Omit<RuleItem, 'validator' | 'asyncValidator'> & {
 export interface FormItemValidateOptions {
   trigger?: ValidationTrigger | string
   callback?: ValidateCallback
-  shouldRuleBeApplied?: ApplyRule
+  shouldRuleBeApplied?: ShouldRuleBeApplied
   options?: ValidateOption
 }
 
 export type FormItemInternalValidate = (
   trigger: ValidationTrigger | string | null | undefined,
-  shouldRuleBeApplied?: ApplyRule,
+  shouldRuleBeApplied?: ShouldRuleBeApplied,
   options?: ValidateOption
 ) => Promise<{
   valid: boolean
@@ -68,12 +69,14 @@ export type Size = 'small' | 'medium' | 'large'
 
 export type ValidationTrigger = 'input' | 'change' | 'blur' | 'focus'
 
-export type ApplyRule = (rule: FormItemRule) => boolean
+export type ShouldRuleBeApplied = (rule: FormItemRule) => boolean
 export type ValidateCallback = (errors?: ValidateError[]) => void
 
 export type FormValidateCallback = (errors?: ValidateError[][]) => void
-export type FormValidate = ((callback?: FormValidateCallback) => void) &
-(() => Promise<void>)
+export type FormValidate = (
+  callback?: FormValidateCallback,
+  shouldRuleBeApplied?: ShouldRuleBeApplied
+) => Promise<void>
 
 export type FormValidationError = ValidateError[]
 

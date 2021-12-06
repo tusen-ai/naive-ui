@@ -77,6 +77,7 @@ export default c([
       text-decoration-color: var(--text-decoration-color);
       color: var(--text-color);
       caret-color: var(--caret-color);
+      background-color: transparent;
     `, [
       c('&::placeholder', {
         color: '#0000'
@@ -267,7 +268,7 @@ export default c([
       ]),
       c('&:hover', [
         cE('state-border', {
-          border: 'var(--border-focus)'
+          border: 'var(--border-hover)'
         })
       ])
     ]),

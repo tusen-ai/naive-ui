@@ -1,5 +1,43 @@
 # CHANGELOG
 
+## 2.21.4 (2021-12-06)
+
+### Fixes
+
+- 修复 `n-date-picker` 在 `type` 为 `year` 时没有正确的 placeholder
+- 修复 `n-element` 未导出 `NEl` 别名
+- 修复 `n-upload` 在 `image-card` 模式下，达到最大上传数量后仍然展示上传按钮，关闭 [#1744](https://github.com/TuSimple/naive-ui/issues/1744)
+- 修复 `n-form` 的 `FormValidate` 类型缺少 `shouldRuleBeApplied` 参数，关闭 [#1747](https://github.com/TuSimple/naive-ui/issues/1747)
+- 修复 `n-upload` 在 `image-card` 模式时在表格中被展示为垂直的样式，关闭 [#1746](https://github.com/TuSimple/naive-ui/issues/1746).
+- 修复 `n-upload` 文件列表在不显示触发区域的时候的 margin-top
+- 修复 `n-upload` 在响应为 4xx 的情况下文件显示正常状态，关闭 [#1741](https://agithub.com/TuSimple/naive-ui/issues/1741)
+
+### Feats
+
+- `n-upload` 新增 `show-trigger` 属性
+- `n-data-table` 展示树形数据时会忽略长度为 0 的 `children`，关闭 [#1703](https://github.com/TuSimple/naive-ui/issues/1703)
+
+## 2.21.3 (2021-12-03)
+
+### Fixes
+
+- 修复 `n-theme-editor` 点击 button 组件时报错，关闭 [#1708](https://github.com/TuSimple/naive-ui/issues/1708)
+- 修复 `n-input` 的颜色在安卓微信浏览器下异常, 关闭 [#1705](https://github.com/TuSimple/naive-ui/issues/1705)
+- 修复 `n-input` 的 `borderHover` 主题变量不生效， 关闭 [#1704](https://github.com/TuSimple/naive-ui/issues/1704)
+- 修复 `n-dialog` 的 `content` 内容为英文时的换行问题
+- 修复 `n-input-number` 不能输入小数值
+- 修复 `n-data-table` 的表头和主体可能有错误的圆角，关闭 [#1712](https://github.com/TuSimple/naive-ui/issues/1712)
+- 修复 `n-button` `colorOpacityXxx` 主题变量不为 string 类型
+
+### Feats
+
+- `n-switch` 新增 `rail-style` 属性，关闭 [#1718](https://github.com/TuSimple/naive-ui/issues/1718)
+- `n-image` 新增 `preview-disabled` 属性，关闭 [#1647](https://github.com/TuSimple/naive-ui/issues/1647)
+- `n-image` 新增 `on-load` & `on-error` 属性
+- `n-image` 新增 `fallback-src` 属性
+- `n-data-table` 新增 `on-update:expanded-row-keys` 属性
+- `n-tree` 新增 `watch-props` 属性
+
 ## 2.21.2 (2021-11-29)
 
 ### Fixes

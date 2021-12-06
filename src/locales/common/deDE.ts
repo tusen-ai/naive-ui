@@ -33,6 +33,8 @@ const deDE: NLocale = {
     datePlaceholder: 'Datum auswählen',
     datetimePlaceholder: 'Datum und Uhrzeit auswählen',
     monthPlaceholder: 'Monat auswählen',
+    // FIXME: translation needed
+    yearPlaceholder: 'Select Year',
     startDatePlaceholder: 'Anfangsdatum',
     endDatePlaceholder: 'Enddatum',
     startDatetimePlaceholder: 'Anfangsdatum und Uhrzeit',

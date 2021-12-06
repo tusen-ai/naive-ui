@@ -3,7 +3,7 @@ import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expa
 import createIconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 
 export default c([
-  cB('upload', [
+  cB('upload', 'width: 100%;', [
     cM('dragger-inside', [
       cE('trigger', `
         display: block;
@@ -44,6 +44,9 @@ export default c([
     opacity: 1;
     transition: opacity .3s var(--bezier);
   `, [
+    c('+', [
+      cB('upload-file-list', 'margin-top: 8px;')
+    ]),
     cM('disabled', `
       opacity: var(--item-disabled-opacity);
       cursor: not-allowed;
@@ -66,7 +69,6 @@ export default c([
     ])
   ]),
   cB('upload-file-list', `
-    margin-top: 8px;
     line-height: var(--line-height);
     opacity: 1;
     transition: opacity .3s var(--bezier);
