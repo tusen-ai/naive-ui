@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## 2.21.5
+## Pending
 
-### Fixed
+### Fixes
 
 - Fix `b-button` can be click under `loading` status, closes [#1628](https://github.com/TuSimple/naive-ui/issues/1628)
 
