@@ -1,10 +1,14 @@
 # CHANGELOG
 
+### Fixes
+
+- Fix `n-alert`'s `header` slot unable to display normally.
+
 ## 2.21.5（2021-12-07）
 
 ### Fixes
 
-- Fix `n-input` click clear icon does't trigger `change` event, closes [#1754](https://agithub.com/TuSimple/naive-ui/issues/1754).
+- Fix `n-input` click clear icon does't trigger `change` event, closes [#1754](https://github.com/TuSimple/naive-ui/issues/1754).
 - Fix `n-input-number` the cursor moves when press arrow keys to change value, closes [#1759](https://github.com/TuSimple/naive-ui/issues/1759).
 
 ### Feats
@@ -13,7 +17,7 @@
 
 ### i18n
 
-- add frFR locale.
+- Add frFR locale.
 
 ## 2.21.4 (2021-12-06)
 
@@ -25,7 +29,7 @@
 - Fix `n-form`'s `FormValidate` type lacks `shouldRuleBeApplied` parameter, closes [#1747](https://github.com/TuSimple/naive-ui/issues/1747).
 - Fix `n-upload` is displayed vertically in `n-form` in `image-card` mode, closes [#1746](https://github.com/TuSimple/naive-ui/issues/1746).
 - Fix `n-upload`'s file list's top margin if trigger is hidden.
-- Fix `n-upload` shows normal file status when response has 4xx status, closes [#1741](https://agithub.com/TuSimple/naive-ui/issues/1741).
+- Fix `n-upload` shows normal file status when response has 4xx status, closes [#1741](https://github.com/TuSimple/naive-ui/issues/1741).
 
 ### Feats
 
