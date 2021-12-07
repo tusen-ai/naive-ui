@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- 修复 `n-alert` 的 `header` slot 无法正常显示
+
 ## 2.21.5（2021-12-07）
 
 ### Fixes
