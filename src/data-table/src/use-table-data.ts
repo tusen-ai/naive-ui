@@ -244,10 +244,14 @@ export function useTableData (
   function mergedOnUpdatePageSize (pageSize: number): void {
     const { pagination } = props
     if (pagination) {
-      const { onPageSizeChange, 'onUpdate:pageSize': onUpdatePageSize } =
-        pagination
+      const {
+        onPageSizeChange,
+        'onUpdate:pageSize': _onUpdatePageSize,
+        onUpdatePageSize
+      } = pagination
       if (onPageSizeChange) call(onPageSizeChange, pageSize)
       if (onUpdatePageSize) call(onUpdatePageSize, pageSize)
+      if (_onUpdatePageSize) call(_onUpdatePageSize, pageSize)
       doUpdatePageSize(pageSize)
     }
   }
