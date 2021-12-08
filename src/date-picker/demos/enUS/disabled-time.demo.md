@@ -1,4 +1,4 @@
-# Disabled Specific Time
+# Disabled specific time
 
 ```html
 <n-space vertical>

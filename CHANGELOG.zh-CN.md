@@ -5,6 +5,22 @@
 ### Fixes
 
 - 修复 `b-button` 在 `loading` 状态下可以被点击的问题，关闭 [#1628](https://github.com/TuSimple/naive-ui/issues/1628)
+- 修复 `n-alert` 的 `header` slot 无法正常显示
+
+## 2.21.5（2021-12-07）
+
+### Fixes
+
+- 修复 `n-input` 点击清除按钮时不触发 `change` 事件，关闭 [#1754](https://github.com/TuSimple/naive-ui/issues/1754)
+- 修复 `n-input-number` 按压上、下方向键改变数值时光标移动的问题，关闭 [#1759](https://github.com/TuSimple/naive-ui/issues/1759)
+
+### Feats
+
+- `n-date-picker` 跟随国际化变化默认日期格式
+
+### i18n
+
+- 新增 frFR locale
 
 ## 2.21.4 (2021-12-06)
 
@@ -16,7 +32,7 @@
 - 修复 `n-form` 的 `FormValidate` 类型缺少 `shouldRuleBeApplied` 参数，关闭 [#1747](https://github.com/TuSimple/naive-ui/issues/1747)
 - 修复 `n-upload` 在 `image-card` 模式时在表格中被展示为垂直的样式，关闭 [#1746](https://github.com/TuSimple/naive-ui/issues/1746).
 - 修复 `n-upload` 文件列表在不显示触发区域的时候的 margin-top
-- 修复 `n-upload` 在响应为 4xx 的情况下文件显示正常状态，关闭 [#1741](https://agithub.com/TuSimple/naive-ui/issues/1741)
+- 修复 `n-upload` 在响应为 4xx 的情况下文件显示正常状态，关闭 [#1741](https://github.com/TuSimple/naive-ui/issues/1741)
 
 ### Feats
 

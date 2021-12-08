@@ -1,4 +1,4 @@
-# Datetime Range
+# Date time range
 
 ```html
 <n-date-picker v-model:value="range" type="datetimerange" clearable />

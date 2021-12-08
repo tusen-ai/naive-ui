@@ -112,4 +112,15 @@ describe('n-auto-complete', () => {
     expect(wrapper.find('input').attributes('max')).toEqual('10')
     wrapper.unmount()
   })
+
+  it('should work with `on-blur` prop', async () => {
+    const onBlur = jest.fn()
+    const wrapper = mount(NAutoComplete, {
+      props: { onBlur: onBlur }
+    })
+    await wrapper.find('input').trigger('focus')
+    await wrapper.find('input').trigger('blur')
+    expect(onBlur).toHaveBeenCalled()
+    wrapper.unmount()
+  })
 })

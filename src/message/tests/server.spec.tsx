@@ -12,7 +12,6 @@ describe('SSR', () => {
       setup () {
         const message = useMessage()
         expect(message).toBeTruthy()
-        console.log(message)
       },
       render () {
         return '07akioni'
