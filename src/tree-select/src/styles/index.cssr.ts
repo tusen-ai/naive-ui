@@ -7,6 +7,9 @@ import { c, cB, cE } from '../../../_utils/cssr'
 // --menu-border-radius
 // --menu-box-shadow
 // --menu-color
+// --action-padding
+// --action-text-color
+// --action-divider-color
 export default c([
   cB('tree-select', `
     z-index: auto;
@@ -31,6 +34,14 @@ export default c([
       padding: 12px 32px;
       flex: 1;
       justify-content: center;
+    `),
+    cE('action', `
+      padding: var(--action-padding);
+      transition: 
+        color .3s var(--bezier);
+        border-color .3s var(--bezier);
+      border-top: 1px solid var(--action-divider-color);
+      color: var(--action-text-color);
     `),
     fadeInScaleUpTransition()
   ])

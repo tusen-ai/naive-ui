@@ -12,6 +12,7 @@ checkbox
 check-strategy
 filterable
 check-strategy-debug
+action
 debug
 ```
 

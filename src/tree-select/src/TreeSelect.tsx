@@ -12,7 +12,8 @@ import {
   watch,
   nextTick,
   watchEffect,
-  HTMLAttributes
+  HTMLAttributes,
+  renderSlot
 } from 'vue'
 import {
   FollowerPlacement,
@@ -653,21 +654,24 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { menuBoxShadow, menuBorderRadius, menuColor, menuHeight }
+          self: { menuBoxShadow, menuBorderRadius, menuColor, menuHeight, actionPadding, actionDividerColor, actionTextColor }
         } = themeRef.value
         return {
           '--menu-box-shadow': menuBoxShadow,
           '--menu-border-radius': menuBorderRadius,
           '--menu-color': menuColor,
           '--menu-height': menuHeight,
-          '--bezier': cubicBezierEaseInOut
+          '--bezier': cubicBezierEaseInOut,
+          '--action-padding': actionPadding,
+          '--action-text-color': actionTextColor,
+          '--action-divider-color': actionDividerColor
         }
       }),
       mergedTheme: themeRef
     }
   },
   render () {
-    const { mergedTheme, mergedClsPrefix } = this
+    const { mergedTheme, mergedClsPrefix, $slots } = this
     return (
       <div class={`${mergedClsPrefix}-tree-select`}>
         <VBinder>
@@ -711,7 +715,7 @@ export default defineComponent({
               </VTarget>,
               <VFollower
                 ref="followerInstRef"
-                show={this.mergedShow}
+                show={true}
                 placement={this.placement}
                 to={this.adjustedTo}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
@@ -811,6 +815,11 @@ export default defineComponent({
                                       mergedTheme.peerOverrides.Empty
                                     }
                                   />
+                                </div>
+                              )}
+                              {$slots.action && (
+                                <div class={`${mergedClsPrefix}-tree-select-menu__action`} data-action>
+                                  {renderSlot($slots, 'action')}
                                 </div>
                               )}
                               <NBaseFocusDetector onFocus={this.handleTabOut} />
