@@ -202,10 +202,16 @@ export default defineComponent({
   setup (props) {
     if (__DEV__) {
       watchEffect(() => {
-        if (props.minWidth !== undefined) {
+        if (props.maxWidth !== undefined) {
           warnOnce(
             'popover',
             '`max-width` is deprecated, please use `style` instead.'
+          )
+        }
+        if (props.minWidth !== undefined) {
+          warnOnce(
+            'popover',
+            '`min-width` is deprecated, please use `style` instead.'
           )
         }
         if (props.arrow !== undefined) {
