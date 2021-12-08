@@ -201,13 +201,13 @@ export default defineComponent({
                   </div>
                 )}
                 <div class={`${mergedClsPrefix}-alert-body`}>
-                  {this.title !== undefined && (
+                  {this.title || $slots.header ? (
                     <div class={`${mergedClsPrefix}-alert-body__title`}>
                       {renderSlot($slots, 'header', undefined, () => [
                         this.title
                       ])}
                     </div>
-                  )}
+                  ) : null}
                   {$slots.default && (
                     <div class={`${mergedClsPrefix}-alert-body__content`}>
                       {$slots}

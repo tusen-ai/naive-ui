@@ -492,8 +492,10 @@ export default defineComponent({
       doClear(e)
       if (props.pair) {
         doUpdateValue(['', ''])
+        doChange(['', ''])
       } else {
         doUpdateValue('')
+        doChange('')
       }
     }
     function handleMouseDown (e: MouseEvent): void {

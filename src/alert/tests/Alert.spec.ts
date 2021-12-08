@@ -65,6 +65,16 @@ describe('n-alert', () => {
     expect(wrapper.findComponent(NIcon).exists()).toBe(true)
   })
 
+  it('should work with `header` slot', async () => {
+    const wrapper = mount(NAlert, {
+      slots: {
+        header: () => 'test-header'
+      }
+    })
+
+    expect(wrapper.find('.n-alert-body__title').text()).toBe('test-header')
+  })
+
   it('shouldnt be closable by default', () => {
     const wrapper = mount(NAlert)
     expect(wrapper.find('.n-base-close.n-alert__close').exists()).toBe(false)

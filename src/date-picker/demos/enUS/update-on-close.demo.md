@@ -1,4 +1,4 @@
-# Update Value On Close
+# Update value on close
 
 ```html
 <n-space vertical>
