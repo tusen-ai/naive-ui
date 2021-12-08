@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils'
 import {
   ruRU,
   zhCN,
+  zhTW,
   enUS,
   ukUA,
   jaJP,
@@ -12,6 +13,7 @@ import {
   frFR,
   dateEnUS,
   dateZhCN,
+  dateZhTW,
   dateRuRU,
   dateUkUA,
   dateJaJP,
@@ -97,6 +99,15 @@ describe('locale', () => {
         props: {
           dateLocale: dateZhCN,
           locale: zhCN,
+          onMounted: (date: string) => expect(date).toMatchSnapshot()
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateZhTW,
+          locale: zhTW,
           onMounted: (date: string) => expect(date).toMatchSnapshot()
         }
       }).html()

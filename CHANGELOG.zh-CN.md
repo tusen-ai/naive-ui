@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### i18n
+
+- 新增 繁体中文 locale.
+
+## 2.21.6 (2021-12-08)
+
 ### Fixes
 
 - 修复 `n-alert` 的 `header` slot 无法正常显示

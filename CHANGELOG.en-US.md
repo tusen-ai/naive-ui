@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### i18n
+
+- Add zhTW locale.
+
+## 2.21.6 (2021-12-08)
+
 ### Fixes
 
 - Fix `n-alert`'s `header` slot unable to display normally.
