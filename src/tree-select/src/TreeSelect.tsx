@@ -11,7 +11,8 @@ import {
   provide,
   watch,
   nextTick,
-  watchEffect
+  watchEffect,
+  HTMLAttributes
 } from 'vue'
 import {
   FollowerPlacement,
@@ -111,6 +112,7 @@ const props = {
   string | number | Array<string | number> | null
   >,
   to: useAdjustedTo.propTo,
+  menuProps: Object as PropType<HTMLAttributes>,
   virtualScroll: {
     type: Boolean,
     default: true
@@ -735,9 +737,10 @@ export default defineComponent({
                           } = this
                           return withDirectives(
                             <div
-                              class={`${mergedClsPrefix}-tree-select-menu`}
+                              {...this.menuProps}
+                              class={[`${mergedClsPrefix}-tree-select-menu`, this.menuProps?.class]}
                               ref="menuElRef"
-                              style={this.cssVars as CSSProperties}
+                              style={[this.menuProps?.style ?? {}, this.cssVars as CSSProperties]}
                               tabindex={0}
                               onMousedown={this.handleMenuMousedown}
                               onKeyup={this.handleKeyup}

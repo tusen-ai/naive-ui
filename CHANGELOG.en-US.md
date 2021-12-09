@@ -1,15 +1,19 @@
 # CHANGELOG
 
-### i18n
-
-- Add zhTW locale.
-
-## 2.21.6 (2021-12-08)
+## Pending
 
 ### Fixes
 
 - Fix `n-alert`'s `header` slot unable to display normally.
 - Fix `n-data-table`'s pagination `onUpdatePageSize` prop does't trigger, closes [#1774](https://github.com/TuSimple/naive-ui/issues/1774).
+
+### Feats
+
+- `n-tree-select` add `menu-props` prop.
+
+### i18n
+
+- Add zhTW locale.
 
 ## 2.21.5（2021-12-07）
 
