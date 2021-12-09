@@ -1,8 +1,14 @@
 # CHANGELOG
 
+## Pending
+
 ### Fixes
 
 - 修复 `n-alert` 的 `header` slot 无法正常显示
+
+### Feats
+
+- `n-tree-select` 新增 `menu-props` 属性
 
 ## 2.21.5（2021-12-07）
 
