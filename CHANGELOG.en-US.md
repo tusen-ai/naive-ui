@@ -231,6 +231,10 @@
 - `n-input-number` add `update-value-on-input` prop, closes [#1662](https://github.com/TuSimple/naive-ui/issues/1662).
 - `n-auto-complete` add `prefix` & `suffix` slot.
 
+### Feats
+
+- `n-statistic` add `animation` prop and `n-countdown` component, closes [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
+
 ## 2.21.1 (2021-11-23)
 
 ### Fixes
