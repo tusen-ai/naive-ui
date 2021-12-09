@@ -1,7 +1,7 @@
 import type { NLocale } from './enUS'
 
 const zhTW: NLocale = {
-  name: 'zh-CN',
+  name: 'zh-TW',
   global: {
     undo: '撤銷',
     redo: '重做',
