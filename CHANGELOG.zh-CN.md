@@ -1,8 +1,11 @@
 # CHANGELOG
 
+## Pending
+
 ### Fixes
 
 - 修复 `n-alert` 的 `header` slot 无法正常显示
+- 修复 `n-select` 当菜单的显示是受控模式时 `filterable` 属性无效，关闭 [#1723](https://github.com/TuSimple/naive-ui/issues/1723)
 
 ## 2.21.5（2021-12-07）
 

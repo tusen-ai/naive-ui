@@ -400,7 +400,8 @@ export default defineComponent({
     }
     function handleTriggerClick (): void {
       if (mergedDisabledRef.value) return
-      if (!mergedShowRef.value) {
+      // if props.show is controlled, mergedShowRef.value will be true when enter the handleTriggerClick
+      if (!mergedShowRef.value || props.show === true) {
         openMenu()
       } else {
         if (!props.filterable) {

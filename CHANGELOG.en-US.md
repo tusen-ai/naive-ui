@@ -1,8 +1,11 @@
 # CHANGELOG
 
+### Pending
+
 ### Fixes
 
 - Fix `n-alert`'s `header` slot unable to display normally.
+- Fix `n-select` `filterable` prop not work while menu's show is controlled, closes [#1723](https://github.com/TuSimple/naive-ui/issues/1723).
 
 ## 2.21.5（2021-12-07）
 
