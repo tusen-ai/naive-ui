@@ -41,7 +41,11 @@
     <n-space>
       <n-button>催更</n-button>
       <n-dropdown :options="options" placement="bottom-start">
-        <n-button :bordered="false" style="padding: 0 4px">···</n-button>
+        <n-button :bordered="false" style="padding: 0 4px">
+          <n-icon>
+            <ellipsis-horizontal />
+          </n-icon>
+        </n-button>
       </n-dropdown>
     </n-space>
   </template>
