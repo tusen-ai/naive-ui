@@ -107,7 +107,9 @@ export default defineComponent({
           decimal
         }
       }
-      innerValue = format(new Date(Number(innerValue)), props.format)
+      if (typeof props.value === 'number') {
+        innerValue = format(props.value, props.format)
+      }
       return {
         isNumber: false,
         value: innerValue
