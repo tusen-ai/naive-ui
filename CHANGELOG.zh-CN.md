@@ -5,10 +5,15 @@
 ### Fixes
 
 - 修复 `n-alert` 的 `header` slot 无法正常显示
+- 修复 `n-data-table` 的分页器 `onUpdatePageSize` 属性未被触发, 关闭 [#1774](https://github.com/TuSimple/naive-ui/issues/1774)
 
 ### Feats
 
 - `n-tree-select` 新增 `menu-props` 属性
+
+### i18n
+
+- 新增 zhTW locale
 
 ## 2.21.5（2021-12-07）
 
