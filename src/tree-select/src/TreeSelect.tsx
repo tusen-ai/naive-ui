@@ -733,14 +733,21 @@ export default defineComponent({
                             mergedClsPrefix,
                             filteredTreeInfo,
                             checkable,
-                            multiple
+                            multiple,
+                            menuProps
                           } = this
                           return withDirectives(
                             <div
-                              {...this.menuProps}
-                              class={[`${mergedClsPrefix}-tree-select-menu`, this.menuProps?.class]}
+                              {...menuProps}
+                              class={[
+                                `${mergedClsPrefix}-tree-select-menu`,
+                                menuProps?.class
+                              ]}
                               ref="menuElRef"
-                              style={[this.menuProps?.style ?? {}, this.cssVars as CSSProperties]}
+                              style={[
+                                menuProps?.style || '',
+                                this.cssVars as CSSProperties
+                              ]}
                               tabindex={0}
                               onMousedown={this.handleMenuMousedown}
                               onKeyup={this.handleKeyup}
