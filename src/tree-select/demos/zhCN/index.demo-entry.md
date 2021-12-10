@@ -62,3 +62,9 @@ debug
 | label | `string` | 选项的显示内容，可使用 `label-field` 修改字段名 |
 | children? | `TreeSelectOption[]` | 节点的子选项 |
 | disabled? | `boolean` | 是否禁用选项 |
+
+### TreeSelect Slots
+
+| 名称   | 参数 | 说明                |
+| ------ | ---- | ------------------- |
+| empty  | `()` | 菜单无数据时的 slot |
