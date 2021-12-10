@@ -22,11 +22,11 @@ v-show-debug
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| color | `string` | `undefined` | The background color of the avatar. |
 | fallback-src | `string` | `undefined` | Image URL to show when avatar fails to load. |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | Object-fit type of the image in the container. |
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar's size. |
 | src | `string` | `undefined` | Avatar's image source. |
+| style | `string \| Object` | `undefined` | Avatar's style. |
 | round | `boolean` | `false` | Whether to display a rounded avatar. |
 | on-error | `(e: Event) => void` | `undefined` | Callback executed when the avatar image fails to load. |
 

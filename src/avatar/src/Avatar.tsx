@@ -26,7 +26,6 @@ const avatarProps = {
   },
   src: String,
   circle: Boolean,
-  color: String,
   objectFit: {
     type: String as PropType<
     'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
@@ -35,7 +34,9 @@ const avatarProps = {
   },
   round: Boolean,
   onError: Function as PropType<(e: Event) => void>,
-  fallbackSrc: String
+  fallbackSrc: String,
+  /** @deprecated */
+  color: String
 } as const
 
 export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>

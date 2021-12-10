@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-avatar` 的 `color` 属性不再推荐，请使用 `style` 属性
+
 ### Fixes
 
 - 修复 `n-alert` 的 `header` slot 无法正常显示
