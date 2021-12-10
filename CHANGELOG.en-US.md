@@ -1,5 +1,52 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-alert`'s `header` slot unable to display normally.
+- Fix `n-data-table`'s pagination `onUpdatePageSize` prop does't trigger, closes [#1774](https://github.com/TuSimple/naive-ui/issues/1774).
+
+### Feats
+
+- `n-tree-select` add `menu-props` prop.
+
+### i18n
+
+- Add zhTW locale.
+
+## 2.21.5（2021-12-07）
+
+### Fixes
+
+- Fix `n-input` click clear icon does't trigger `change` event, closes [#1754](https://github.com/TuSimple/naive-ui/issues/1754).
+- Fix `n-input-number` the cursor moves when press arrow keys to change value, closes [#1759](https://github.com/TuSimple/naive-ui/issues/1759).
+
+### Feats
+
+- `n-date-picker`'s default format follows i18n.
+
+### i18n
+
+- Add frFR locale.
+
+## 2.21.4 (2021-12-06)
+
+### Fixes
+
+- Fix `n-date-picker` has no placeholder when `type` is `year`.
+- Fix `n-element` doesn't export `NEl` alias name.
+- Fix `n-upload` still shows upload trigger when max limit is reached in `image-card` mode, closes [#1744](https://github.com/TuSimple/naive-ui/issues/1744).
+- Fix `n-form`'s `FormValidate` type lacks `shouldRuleBeApplied` parameter, closes [#1747](https://github.com/TuSimple/naive-ui/issues/1747).
+- Fix `n-upload` is displayed vertically in `n-form` in `image-card` mode, closes [#1746](https://github.com/TuSimple/naive-ui/issues/1746).
+- Fix `n-upload`'s file list's top margin if trigger is hidden.
+- Fix `n-upload` shows normal file status when response has 4xx status, closes [#1741](https://github.com/TuSimple/naive-ui/issues/1741).
+
+### Feats
+
+- `n-upload` add `show-trigger` prop.
+- `n-data-table` will ignore `children` with length 0 in tree data mode, closes [#1703](https://github.com/TuSimple/naive-ui/issues/1703).
+
 ## 2.21.3 (2021-12-03)
 
 ### Fixes

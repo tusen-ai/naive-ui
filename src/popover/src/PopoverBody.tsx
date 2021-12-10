@@ -117,10 +117,10 @@ export default defineComponent({
     const styleRef = computed(() => {
       return [
         {
-          width: props.width === 'trigger' ? '' : formatLength(props.width),
-          maxWidth: formatLength(props.maxWidth),
-          minWidth: formatLength(props.minWidth)
+          width: props.width === 'trigger' ? '' : formatLength(props.width)
         },
+        props.maxWidth ? { maxWidth: formatLength(props.maxWidth) } : {},
+        props.minWidth ? { minWidth: formatLength(props.minWidth) } : {},
         cssVarsRef.value
       ]
     })

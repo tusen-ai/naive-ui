@@ -34,12 +34,7 @@ import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
-import {
-  MONTH_ITEM_HEIGHT,
-  START_YEAR,
-  DATE_FORMAT,
-  DatePickerType
-} from './config'
+import { MONTH_ITEM_HEIGHT, START_YEAR, DatePickerType } from './config'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -190,17 +185,23 @@ export default defineComponent({
       return ['daterange', 'datetimerange'].includes(props.type)
     })
     const localizedPlacehoderRef = computed(() => {
-      if (props.placeholder === undefined) {
-        if (props.type === 'date') {
-          return localeRef.value.datePlaceholder
-        } else if (props.type === 'datetime') {
-          return localeRef.value.datetimePlaceholder
-        } else if (props.type === 'month') {
-          return localeRef.value.monthPlaceholder
+      const { placeholder } = props
+      if (placeholder === undefined) {
+        const { type } = props
+        switch (type) {
+          case 'date':
+            return localeRef.value.datePlaceholder
+          case 'datetime':
+            return localeRef.value.datetimePlaceholder
+          case 'month':
+            return localeRef.value.monthPlaceholder
+          case 'year':
+            return localeRef.value.yearPlaceholder
+          default:
+            return ''
         }
-        return props.placeholder
       } else {
-        return props.placeholder
+        return placeholder
       }
     })
     const localizedStartPlaceholderRef = computed(() => {
@@ -228,7 +229,20 @@ export default defineComponent({
       }
     })
     const mergedFormatRef = computed(() => {
-      return props.format || DATE_FORMAT[props.type]
+      const { format } = props
+      if (format) return format
+      switch (props.type) {
+        case 'date':
+        case 'daterange':
+          return localeRef.value.dateFormat
+        case 'datetime':
+        case 'datetimerange':
+          return localeRef.value.dateTimeFormat
+        case 'year':
+          return localeRef.value.yearTypeFormat
+        case 'month':
+          return localeRef.value.monthTypeFormat
+      }
     })
     const mergedActionsRef = computed(() => {
       const { actions, type } = props

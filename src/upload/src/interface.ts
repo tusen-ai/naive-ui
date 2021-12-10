@@ -60,6 +60,7 @@ export interface UploadInjection {
   showRemoveButtonRef: Ref<boolean>
   showDownloadButtonRef: Ref<boolean>
   showRetryButtonRef: Ref<boolean>
+  showTriggerRef: Ref<boolean>
   mergedFileListRef: Ref<FileInfo[]>
   onRemoveRef: Ref<OnRemove | undefined>
   onDownloadRef: Ref<OnDownload | undefined>

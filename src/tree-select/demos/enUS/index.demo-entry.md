@@ -37,6 +37,7 @@ debug
 | key-field | `string` | `'key'` | The key field used for `TreeSelectOption`. |
 | label-field | `string` | `'label'` | The label field used for `TreeSelectOption`. |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum number of selected options to show before the list is truncated. `'responsive'` will keep all of the selected options in one row. |
+| menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. |
 | multiple | `boolean` | `false` | Allow selecting multiple options. |
 | options | `TreeSelectOption[]` | `[]` | Options. |
 | placeholder | `string` | `'Please Select'` | Placeholder. |

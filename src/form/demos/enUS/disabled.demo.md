@@ -1,4 +1,4 @@
-# Form Disabled
+# Disabled form
 
 ```html
 <n-space vertical>

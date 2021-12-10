@@ -1,4 +1,4 @@
-# Extra Footer
+# Extra footer
 
 ```html
 <n-space vertical>
