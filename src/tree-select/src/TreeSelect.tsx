@@ -12,8 +12,7 @@ import {
   watch,
   nextTick,
   watchEffect,
-  HTMLAttributes,
-  renderSlot
+  HTMLAttributes
 } from 'vue'
 import {
   FollowerPlacement,
@@ -25,6 +24,7 @@ import {
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
 import { createTreeMate, CheckStrategy } from 'treemate'
+import { happensIn } from 'seemly'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
@@ -568,7 +568,7 @@ export default defineComponent({
     function handleMenuMousedown (e: MouseEvent): void {
       // If there's an action slot later, we need to check if mousedown happens
       // in action panel
-      e.preventDefault()
+      if (!happensIn(e, 'action')) e.preventDefault()
     }
     provide(treeSelectInjectionKey, {
       pendingNodeKeyRef
@@ -715,7 +715,7 @@ export default defineComponent({
               </VTarget>,
               <VFollower
                 ref="followerInstRef"
-                show={true}
+                show={this.mergedShow}
                 placement={this.placement}
                 to={this.adjustedTo}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
@@ -819,7 +819,9 @@ export default defineComponent({
                               )}
                               {$slots.action && (
                                 <div class={`${mergedClsPrefix}-tree-select-menu__action`} data-action>
-                                  {renderSlot($slots, 'action')}
+                                  {{
+                                    default: $slots.action
+                                  }}
                                 </div>
                               )}
                               <NBaseFocusDetector onFocus={this.handleTabOut} />

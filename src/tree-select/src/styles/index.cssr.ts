@@ -21,14 +21,13 @@ export default c([
     position: relative;
     overflow: hidden;
     margin: 4px 0;
-    max-height: var(--menu-height);
     transition: box-shadow .3s var(--bezier), background-color .3s var(--bezier);
     border-radius: var(--menu-border-radius);
     box-shadow: var(--menu-box-shadow);
     background-color: var(--menu-color);
     outline: none;
   `, [
-    cB('tree', 'max-height: inherit;'),
+    cB('tree', 'max-height: var(--menu-height);'),
     cE('empty', `
       display: flex;
       padding: 12px 32px;
