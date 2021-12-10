@@ -51,6 +51,14 @@ describe('n-button', () => {
     </div>
   })
 
+  it('should work with `attr-type` prop', () => {
+    ;(['button', 'submit', 'reset'] as const).forEach((type) => {
+      const wrapper = mount(NButton, { props: { attrType: type } })
+      expect(wrapper.find('button').attributes('type')).toContain(type)
+      wrapper.unmount()
+    })
+  })
+
   it('should work with `type` prop', async () => {
     ;(['primary', 'info', 'success', 'warning', 'error'] as const).forEach(
       (type) => {
