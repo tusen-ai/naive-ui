@@ -6,6 +6,7 @@
 
 - Fix `n-alert`'s `header` slot unable to display normally.
 - Fix `n-data-table`'s pagination `onUpdatePageSize` prop does't trigger, closes [#1774](https://github.com/TuSimple/naive-ui/issues/1774).
+- Fix `n-data-table` layout display incorrect when the table is empty and set min-height, closes [#1809](https://github.com/TuSimple/naive-ui/issues/1809).
 
 ### Feats
 

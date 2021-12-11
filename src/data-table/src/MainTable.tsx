@@ -28,7 +28,8 @@ export default defineComponent({
       maxHeightRef,
       minHeightRef,
       flexHeightRef,
-      syncScrollState
+      syncScrollState,
+      paginatedDataRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
 
@@ -43,7 +44,10 @@ export default defineComponent({
     const bodyStyleRef = computed(() => {
       return {
         maxHeight: formatLength(maxHeightRef.value),
-        minHeight: formatLength(minHeightRef.value)
+        minHeight:
+          paginatedDataRef.value.length > 0
+            ? formatLength(minHeightRef.value)
+            : undefined
       }
     })
     function handleBodyResize (entry: ResizeObserverEntry): void {
