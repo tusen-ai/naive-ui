@@ -59,6 +59,14 @@ describe('n-button', () => {
     })
   })
 
+  it('should work with `block` prop', async () => {
+    const wrapper = mount(NButton)
+    expect(wrapper.find('.n-button').classes()).not.toContain('n-button--block')
+
+    await wrapper.setProps({ block: true })
+    expect(wrapper.find('.n-button').classes()).toContain('n-button--block')
+  })
+
   it('should work with `type` prop', async () => {
     ;(['primary', 'info', 'success', 'warning', 'error'] as const).forEach(
       (type) => {
