@@ -8,28 +8,26 @@ import {
   toRef,
   CSSProperties,
   PropType,
-  h
+  h,
+  renderSlot
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { statisticLight } from '../styles'
-import type { StatisticTheme } from '../styles'
+import { countdownLight } from '../styles'
+import type { CountdownTheme } from '../styles'
 import style from './styles/index.cssr'
 import { differenceInMilliseconds } from 'date-fns'
 import { getTimeString } from './utils'
 
 const countdownProps = {
-  ...(useTheme.props as ThemeProps<StatisticTheme>),
-  lable: String,
+  ...(useTheme.props as ThemeProps<CountdownTheme>),
+  label: String,
   value: {
     type: Number,
-    default: () => Date.now() + 300000
+    default: () => Date.now()
   },
-  valueStyle: {
-    type: [Object, String] as PropType<undefined | string | CSSProperties>,
-    default: undefined
-  },
+  valueStyle: [Object, String] as PropType<undefined | string | CSSProperties>,
   start: {
     type: Boolean,
     default: true
@@ -42,7 +40,6 @@ const countdownProps = {
     type: String,
     default: 'HH:mm:ss'
   },
-  onChange: Function as PropType<(value: number) => void>,
   onFinish: Function as PropType<() => void>
 }
 
@@ -56,16 +53,13 @@ export default defineComponent({
     const start = toRef(props, 'start')
     const displayValueRef = ref(
       getTimeString(
-        Math.max(
-          differenceInMilliseconds(new Date(props.value), new Date(props.now)),
-          0
-        ),
+        Math.max(differenceInMilliseconds(props.value, props.now), 0),
         props.format
       )
     )
     const timerRef = ref(0)
     const startTimer = (): void => {
-      if (props.value < Date.now()) return
+      if (props.value <= props.now) return
       timerRef.value = window.setInterval(() => {
         const innerValue = differenceInMilliseconds(props.value, Date.now())
         if (innerValue <= 0) {
@@ -76,7 +70,6 @@ export default defineComponent({
           Math.max(innerValue, 0),
           props.format
         )
-        props.onChange?.(Math.max(innerValue, 0))
       }, REFRESH_INTERVAL)
     }
     const stopTimer = (): void => {
@@ -98,15 +91,15 @@ export default defineComponent({
     })
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
-      'Statistic',
+      'Countdown',
       'Countdown',
       style,
-      statisticLight,
+      countdownLight,
       props,
       mergedClsPrefixRef
     )
     return {
-      displayValueRef,
+      displayValue: displayValueRef,
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         const {
@@ -115,7 +108,6 @@ export default defineComponent({
             valueFontWeight,
             valuePrefixTextColor,
             labelTextColor,
-            valueSuffixTextColor,
             valueTextColor,
             labelFontSize
           },
@@ -128,7 +120,6 @@ export default defineComponent({
           '--label-text-color': labelTextColor,
           '--value-font-weight': valueFontWeight,
           '--value-prefix-text-color': valuePrefixTextColor,
-          '--value-suffix-text-color': valueSuffixTextColor,
           '--value-text-color': valueTextColor
         }
       })
@@ -138,15 +129,20 @@ export default defineComponent({
     const { $slots, mergedClsPrefix } = this
     return (
       <div
-        class={`${mergedClsPrefix}-statistic ${mergedClsPrefix}-statistic-countdown`}
+        class={`${mergedClsPrefix}-countdown`}
         style={this.cssVars as CSSProperties}
       >
-        <div class={`${mergedClsPrefix}-statistic__label`}>
-          {this.lable || $slots.lable?.()}
+        <div class={`${mergedClsPrefix}-countdown__label`}>
+          {this.label || $slots.label?.()}
         </div>
-        <div class={`${mergedClsPrefix}-statistic-value`}>
-          <span class={`${mergedClsPrefix}-statistic-value__content`}>
-            {this.displayValueRef}
+        <div class={`${mergedClsPrefix}-countdown-value`}>
+          {$slots.prefix ? (
+            <span class={`${mergedClsPrefix}-countdown-value__prefix`}>
+              {renderSlot($slots, 'prefix')}
+            </span>
+          ) : null}
+          <span class={`${mergedClsPrefix}-countdown-value__content`}>
+            {this.displayValue}
           </span>
         </div>
       </div>

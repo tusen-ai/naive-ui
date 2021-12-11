@@ -1,9 +1,6 @@
 import {
   defineComponent,
   computed,
-  onMounted,
-  watch,
-  ref,
   CSSProperties,
   PropType,
   h,
@@ -15,9 +12,6 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { statisticLight } from '../styles'
 import type { StatisticTheme } from '../styles'
 import style from './styles/index.cssr'
-import { format } from 'date-fns'
-import { tween } from './utils'
-import { round, isNumber } from 'lodash'
 
 const statisticProps = {
   ...(useTheme.props as ThemeProps<StatisticTheme>),
@@ -29,32 +23,9 @@ const statisticProps = {
     type: [String, Number],
     default: undefined
   },
-  precision: Number,
-  format: {
-    type: String,
-    default: 'HH:mm:ss'
-  },
-  separator: String,
-  showSeprator: {
-    type: Boolean,
-    default: false
-  },
   valueStyle: {
     type: [Object, String] as PropType<undefined | string | CSSProperties>,
     default: undefined
-  },
-  valueFrom: Number,
-  start: {
-    type: Boolean,
-    default: true
-  },
-  animation: {
-    type: Boolean,
-    default: false
-  },
-  animationDuration: {
-    type: Number,
-    default: 3000
   }
 }
 
@@ -64,57 +35,6 @@ export default defineComponent({
   name: 'Statistic',
   props: statisticProps,
   setup (props) {
-    const { animationDuration } = props
-    const valueRef = ref(props.valueFrom ?? props.value)
-    const hastweenRef = ref(false)
-    const onUpdate = (currentValue: number): void => {
-      valueRef.value = currentValue
-    }
-    const onFinish = (): void => {
-      valueRef.value = props.value
-    }
-    const animation = (
-      from: number = props.valueFrom ?? 0,
-      to: number = Number(props.value)
-    ): void => {
-      if (from !== to) {
-        tween({
-          from,
-          to,
-          duration: animationDuration,
-          onUpdate,
-          onFinish
-        })
-        hastweenRef.value = true
-      }
-    }
-    const formatValue = computed(() => {
-      let innerValue = valueRef.value
-      if (isNumber(innerValue)) {
-        if (props.precision) {
-          innerValue = round(innerValue, props.precision).toFixed(
-            props.precision
-          )
-        }
-        const splitValue = innerValue.toString().split('.')
-        const integer = props.showSeprator
-          ? Number(splitValue[0]).toLocaleString('en-US')
-          : splitValue[0]
-        const decimal = splitValue[1]
-        return {
-          isNumber: true,
-          integer,
-          decimal
-        }
-      }
-      if (typeof props.value === 'number') {
-        innerValue = format(props.value, props.format)
-      }
-      return {
-        isNumber: false,
-        value: innerValue
-      }
-    })
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Statistic',
@@ -124,17 +44,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    onMounted(() => {
-      if (props.animation && props.start) animation()
-    })
-    watch(
-      () => props.start,
-      (value) => {
-        if (value && !hastweenRef.value) animation()
-      }
-    )
     return {
-      formatValue,
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         const {
@@ -178,17 +88,10 @@ export default defineComponent({
               {renderSlot($slots, 'prefix')}
             </span>
           ) : null}
-          {this.value ? (
-            this.formatValue.isNumber ? (
-              <span class={`${mergedClsPrefix}-statistic-value__content`}>
-                {this.formatValue.integer ? `${this.formatValue.integer}` : ''}
-                {this.formatValue.decimal ? `.${this.formatValue.decimal}` : ''}
-              </span>
-            ) : (
-              <span class={`${mergedClsPrefix}-statistic-value__content`}>
-                {this.formatValue.value}
-              </span>
-            )
+          {this.value !== undefined ? (
+            <span class={`${mergedClsPrefix}-statistic-value__content`}>
+              {this.value}
+            </span>
           ) : (
             <span class={`${mergedClsPrefix}-statistic-value__content`}>
               {$slots}

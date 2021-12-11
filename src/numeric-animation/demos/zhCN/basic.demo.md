@@ -1,7 +1,7 @@
-# Numberic Animation
+# 基础用法
 
 ```html
-<n-statistic
+<n-numeric-animation
   title="User Grouth"
   :value="50.52"
   :precision="2"
@@ -10,8 +10,8 @@
   animation
 >
   <template #suffix>%</template>
-</n-statistic>
-<n-button @click="start=!start">Start</n-button>
+</n-numeric-animation>
+<n-button @click="start=!start">开启动画</n-button>
 ```
 
 ```js

@@ -233,7 +233,8 @@
 
 ### Feats
 
-- `n-statistic` add `animation` prop and `n-countdown` component, closes [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
+- add `n-countdown` component.
+- add `n-numeric-animation` component, closes [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
 
 ## 2.21.1 (2021-11-23)
 

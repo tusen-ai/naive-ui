@@ -233,7 +233,8 @@
 
 ### Feats
 
-- `n-statistic` 新增 `animation`属性和 `n-countdown` 组件，关闭 [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
+- 新增`n-countdown` 组件
+- 新增`n-numeric-animation` 组件，关闭 [#1465](https://github.com/TuSimple/naive-ui/issues/1465)
 
 ## 2.21.1 (2021-11-23)
 

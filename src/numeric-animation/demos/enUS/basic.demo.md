@@ -1,8 +1,8 @@
-# 数值动画
+# Basic
 
 ```html
-<n-statistic
-  title="用户增长率"
+<n-numeric-animation
+  title="User Grouth"
   :value="50.52"
   :precision="2"
   :value-from="0"
@@ -10,8 +10,8 @@
   animation
 >
   <template #suffix>%</template>
-</n-statistic>
-<n-button @click="start=!start">开启动画</n-button>
+</n-numeric-animation>
+<n-button @click="start=!start">Start</n-button>
 ```
 
 ```js
