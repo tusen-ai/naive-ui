@@ -3,13 +3,12 @@ import {
   computed,
   onMounted,
   onBeforeUnmount,
-  watch,
   ref,
-  toRef,
   CSSProperties,
   PropType,
   h,
-  renderSlot
+  renderSlot,
+  watchEffect
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -50,7 +49,6 @@ export default defineComponent({
   props: countdownProps,
   setup (props) {
     const REFRESH_INTERVAL = 1000 / 30
-    const start = toRef(props, 'start')
     const displayValueRef = ref(
       getTimeString(
         Math.max(differenceInMilliseconds(props.value, props.now), 0),
@@ -61,15 +59,12 @@ export default defineComponent({
     const startTimer = (): void => {
       if (props.value <= props.now) return
       timerRef.value = window.setInterval(() => {
-        const innerValue = differenceInMilliseconds(props.value, Date.now())
-        if (innerValue <= 0) {
+        const diff = differenceInMilliseconds(props.value, Date.now())
+        if (diff <= 0) {
           stopTimer()
           props.onFinish?.()
         }
-        displayValueRef.value = getTimeString(
-          Math.max(innerValue, 0),
-          props.format
-        )
+        displayValueRef.value = getTimeString(Math.max(diff, 0), props.format)
       }, REFRESH_INTERVAL)
     }
     const stopTimer = (): void => {
@@ -79,15 +74,16 @@ export default defineComponent({
       }
     }
     onMounted(() => {
-      if (props.start) {
-        startTimer()
-      }
+      watchEffect(() => {
+        if (props.start && !timerRef.value) {
+          startTimer()
+        } else {
+          stopTimer()
+        }
+      })
     })
     onBeforeUnmount(() => {
       stopTimer()
-    })
-    watch(start, (value) => {
-      value && !timerRef.value ? startTimer() : stopTimer()
     })
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
