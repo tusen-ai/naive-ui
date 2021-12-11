@@ -11,11 +11,11 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 // --text-color-pressed
 // --text-color-focus
 // --text-color-disabled
-// --color
-// --color-hover
-// --color-pressed
-// --color-focus
-// --color-disabled
+// --n-color
+// --n-color-hover
+// --n-color-pressed
+// --n-color-focus
+// --n-color-disabled
 // --border
 // --border-hover
 // --border-pressed
@@ -44,7 +44,7 @@ export default c([
     font-size: var(--font-size);
     border-radius: var(--border-radius);
     color: var(--text-color);
-    background-color: var(--color);
+    background-color: var(--n-color);
     width: var(--width);
     white-space: nowrap;
     outline: none;
@@ -99,7 +99,7 @@ export default c([
       ])
     ]),
     cM('disabled', {
-      backgroundColor: 'var(--color-disabled)',
+      backgroundColor: 'var(--n-color-disabled)',
       color: 'var(--text-color-disabled)'
     }, [
       cE('border', {
@@ -108,7 +108,7 @@ export default c([
     ]),
     cNotM('disabled', [
       c('&:focus', {
-        backgroundColor: 'var(--color-focus)',
+        backgroundColor: 'var(--n-color-focus)',
         color: 'var(--text-color-focus)'
       }, [
         cE('state-border', {
@@ -116,7 +116,7 @@ export default c([
         })
       ]),
       c('&:hover', {
-        backgroundColor: 'var(--color-hover)',
+        backgroundColor: 'var(--n-color-hover)',
         color: 'var(--text-color-hover)'
       }, [
         cE('state-border', {
@@ -124,7 +124,7 @@ export default c([
         })
       ]),
       c('&:active', {
-        backgroundColor: 'var(--color-pressed)',
+        backgroundColor: 'var(--n-color-pressed)',
         color: 'var(--text-color-pressed)'
       }, [
         cE('state-border', {
@@ -132,7 +132,7 @@ export default c([
         })
       ]),
       cM('pressed', {
-        backgroundColor: 'var(--color-pressed)',
+        backgroundColor: 'var(--n-color-pressed)',
         color: 'var(--text-color-pressed)'
       }, [
         cE('state-border', {

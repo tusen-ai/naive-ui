@@ -241,8 +241,8 @@ describe('n-button', () => {
 
     expect(wrapper.find('button').classes()).toContain('n-button--color')
     const colorStyle = [
-      '--color: #8a2be2;',
-      '--color-disabled: #8a2be2;',
+      '--n-color: #8a2be2;',
+      '--n-color-disabled: #8a2be2;',
       '--ripple-color: #8a2be2;'
     ]
     const buttonStyle = wrapper.find('button').attributes('style')
