@@ -18,6 +18,7 @@ import { codeLight } from '../code/styles'
 import { collapseLight } from '../collapse/styles'
 import { collapseTransitionLight } from '../collapse-transition/styles'
 import { colorPickerLight } from '../color-picker/styles'
+import { countdownLight } from '../countdown/styles'
 import { dataTableLight } from '../data-table/styles'
 import { datePickerLight } from '../date-picker/styles'
 import { descriptionsLight } from '../descriptions/styles'
@@ -45,6 +46,7 @@ import { mentionLight } from '../mention/styles'
 import { messageLight } from '../message/styles'
 import { modalLight } from '../modal/styles'
 import { notificationLight } from '../notification/styles'
+import { numericAnimationLight } from '../numeric-animation/styles'
 import { pageHeaderLight } from '../page-header/styles'
 import { paginationLight } from '../pagination/styles'
 import { popconfirmLight } from '../popconfirm/styles'
@@ -96,6 +98,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Collapse: collapseLight,
   CollapseTransition: collapseTransitionLight,
   ColorPicker: colorPickerLight,
+  Countdown: countdownLight,
   DataTable: dataTableLight,
   DatePicker: datePickerLight,
   Descriptions: descriptionsLight,
@@ -123,6 +126,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Message: messageLight,
   Modal: modalLight,
   Notification: notificationLight,
+  NumericAnimation: numericAnimationLight,
   PageHeader: pageHeaderLight,
   Pagination: paginationLight,
   Popconfirm: popconfirmLight,
