@@ -9,6 +9,7 @@
 - Fix `n-tag` line-height is too low that clamps the content.
 - Fix `n-select` displays with mistake in input if `filterable` is `true`, closes [#1823](https://github.com/TuSimple/naive-ui/issues/1823).
 - Fix `n-data-table` uncheck all if indeterminate header checkbox is clicked, closes [#1827](https://github.com/TuSimple/naive-ui/issues/1827).
+- Fix `n-page-header`'s content has margin-top when header is not displayed, closes [#1795](https://github.com/TuSimple/naive-ui/issues/1795).
 
 ### Feats
 

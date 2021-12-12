@@ -9,6 +9,7 @@
 - 修复 `n-tag` 行高过低导致内容截断
 - 修复 `n-select` 设定 `filterable` 后选项过长显示出错，关闭 [#1823](https://github.com/TuSimple/naive-ui/issues/1823)
 - 修复 `n-data-table` 点击表头半选的勾选框之后没有全选，关闭 [#1827](https://github.com/TuSimple/naive-ui/issues/1827)
+- 修复 `n-page-header` 在不显示头部时内容有 margin-top，关闭 [#1795](https://github.com/TuSimple/naive-ui/issues/1795)
 
 ### Feats
 

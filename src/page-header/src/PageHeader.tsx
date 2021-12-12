@@ -97,49 +97,54 @@ export default defineComponent({
         ]}
       >
         {headerSlot ? (
-          <div class={`${mergedClsPrefix}-page-header-header`} key="breadcrumn">
+          <div class={`${mergedClsPrefix}-page-header-header`} key="breadcrumb">
             {headerSlot()}
           </div>
         ) : null}
-        <div class={`${mergedClsPrefix}-page-header`} key="header">
-          <div class={`${mergedClsPrefix}-page-header__main`} key="back">
-            {showBack ? (
-              <div
-                class={`${mergedClsPrefix}-page-header__back`}
-                onClick={onBack}
-              >
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{
-                    default: () => <ArrowBackIcon />
-                  }}
-                </NBaseIcon>
-              </div>
-            ) : null}
-            {avatarSlot ? (
-              <div class={`${mergedClsPrefix}-page-header__avatar`}>
-                {avatarSlot()}
-              </div>
-            ) : null}
-            {showTitle ? (
-              <div class={`${mergedClsPrefix}-page-header__title`} key="title">
-                {title || titleSlot!()}
-              </div>
-            ) : null}
-            {showSubtitle ? (
-              <div
-                class={`${mergedClsPrefix}-page-header__subtitle`}
-                key="subtitle"
-              >
-                {subtitle || subtitleSlot!()}
+        {(showBack || avatarSlot || showTitle || showSubtitle || showExtra) && (
+          <div class={`${mergedClsPrefix}-page-header`} key="header">
+            <div class={`${mergedClsPrefix}-page-header__main`} key="back">
+              {showBack ? (
+                <div
+                  class={`${mergedClsPrefix}-page-header__back`}
+                  onClick={onBack}
+                >
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
+                    {{
+                      default: () => <ArrowBackIcon />
+                    }}
+                  </NBaseIcon>
+                </div>
+              ) : null}
+              {avatarSlot ? (
+                <div class={`${mergedClsPrefix}-page-header__avatar`}>
+                  {avatarSlot()}
+                </div>
+              ) : null}
+              {showTitle ? (
+                <div
+                  class={`${mergedClsPrefix}-page-header__title`}
+                  key="title"
+                >
+                  {title || titleSlot!()}
+                </div>
+              ) : null}
+              {showSubtitle ? (
+                <div
+                  class={`${mergedClsPrefix}-page-header__subtitle`}
+                  key="subtitle"
+                >
+                  {subtitle || subtitleSlot!()}
+                </div>
+              ) : null}
+            </div>
+            {showExtra ? (
+              <div class={`${mergedClsPrefix}-page-header__extra`}>
+                {extra || extraSlot!()}
               </div>
             ) : null}
           </div>
-          {showExtra ? (
-            <div class={`${mergedClsPrefix}-page-header__extra`}>
-              {extra || extraSlot!()}
-            </div>
-          ) : null}
-        </div>
+        )}
         {defaultSlot ? (
           <div class={`${mergedClsPrefix}-page-header-content`} key="content">
             {defaultSlot()}
