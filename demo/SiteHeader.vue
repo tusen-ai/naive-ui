@@ -21,7 +21,12 @@
         clear-after-select
         blur-after-select
         @select="handleSearch"
-      />
+      >
+      </n-auto-complete>
+      <!-- TODO: add it -->
+      <!-- template #suffix>
+        <span style="color: var(--placeholder-color)">⌘ + K</span>
+      </template -->
     </div>
     <n-popover
       v-if="isMobile || isTablet"

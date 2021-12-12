@@ -1,4 +1,13 @@
-import { h, defineComponent, inject, ref, onMounted, watch, toRef } from 'vue'
+import {
+  h,
+  defineComponent,
+  inject,
+  ref,
+  onMounted,
+  watch,
+  toRef,
+  computed
+} from 'vue'
 import { logInjectionKey } from './Log'
 
 export default defineComponent({
@@ -9,27 +18,25 @@ export default defineComponent({
     }
   },
   setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { trimRef, highlightRef, languageRef, mergedHljsRef } = inject(
-      logInjectionKey
-    )!
+    const { trimRef, highlightRef, languageRef, mergedHljsRef } =
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      inject(logInjectionKey)!
     const selfRef = ref<HTMLElement | null>(null)
+    const maybeTrimmedLinesRef = computed(() => {
+      return trimRef.value ? props.line.trim() : props.line
+    })
     function setInnerHTML (): void {
-      const trimmedLine = trimRef.value ? (props.line || '').trim() : props.line
       if (selfRef.value) {
         selfRef.value.innerHTML = generateCodeHTML(
           languageRef.value,
-          trimmedLine,
-          false
+          maybeTrimmedLinesRef.value
         )
       }
     }
     function generateCodeHTML (
       language: string | undefined,
-      code: string,
-      trim: boolean
+      code: string
     ): string {
-      if (trim) code = code.trim()
       const { value: hljs } = mergedHljsRef
       if (hljs) {
         if (language && hljs.getLanguage(language)) {
@@ -50,11 +57,12 @@ export default defineComponent({
     })
     return {
       highlight: highlightRef,
-      selfRef
+      selfRef,
+      maybeTrimmedLines: maybeTrimmedLinesRef
     }
   },
   render () {
-    const { highlight } = this
-    return <pre ref="selfRef">{highlight ? null : this.line}</pre>
+    const { highlight, maybeTrimmedLines } = this
+    return <pre ref="selfRef">{highlight ? null : maybeTrimmedLines}</pre>
   }
 })

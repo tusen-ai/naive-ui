@@ -35,22 +35,13 @@ describe('n-alert', () => {
   })
 
   it('should work with type prop', async () => {
-    const wrapper = mount(NAlert)
-
-    await wrapper.setProps({ type: 'info' })
-    expect(wrapper.find('.n-alert').attributes('style')).toMatchSnapshot()
-
-    await wrapper.setProps({ type: 'success' })
-    expect(wrapper.find('.n-alert').attributes('style')).toMatchSnapshot()
-
-    await wrapper.setProps({ type: 'warning' })
-    expect(wrapper.find('.n-alert').attributes('style')).toMatchSnapshot()
-
-    await wrapper.setProps({ type: 'error' })
-    expect(wrapper.find('.n-alert').attributes('style')).toMatchSnapshot()
+    ;(['info', 'success', 'warning', 'error'] as const).forEach((type) => {
+      const wrapper = mount(NAlert, { props: { type } })
+      expect(wrapper.find('.n-alert').attributes('style')).toMatchSnapshot()
+    })
   })
 
-  it('should work with default slot', () => {
+  it('should work with `default` slot', () => {
     const wrapper = mount(NAlert, {
       slots: {
         default: () => 'default'
@@ -61,7 +52,7 @@ describe('n-alert', () => {
     expect(wrapper.find('.n-alert-body__content').text()).toBe('default')
   })
 
-  it('should work with icon slot', async () => {
+  it('should work with `icon` slot', async () => {
     const wrapper = mount(NAlert, {
       slots: {
         icon: () =>
@@ -72,6 +63,16 @@ describe('n-alert', () => {
     })
 
     expect(wrapper.findComponent(NIcon).exists()).toBe(true)
+  })
+
+  it('should work with `header` slot', async () => {
+    const wrapper = mount(NAlert, {
+      slots: {
+        header: () => 'test-header'
+      }
+    })
+
+    expect(wrapper.find('.n-alert-body__title').text()).toBe('test-header')
   })
 
   it('shouldnt be closable by default', () => {
@@ -106,8 +107,13 @@ describe('n-alert', () => {
 
   it('should trigger callback when closed', async () => {
     const handleCloseClick = jest.fn()
+    const handleOnAfterLeave = jest.fn()
     const wrapper = mount(NAlert, {
-      props: { closable: true, onClose: handleCloseClick }
+      props: {
+        closable: true,
+        onClose: handleCloseClick,
+        onAfterLeave: handleOnAfterLeave
+      }
     })
     const closeBtn = wrapper.find('.n-base-close.n-alert__close')
     expect(closeBtn.exists()).toBe(true)
@@ -116,5 +122,9 @@ describe('n-alert', () => {
     expect(wrapper.emitted()).toHaveProperty('click')
 
     expect(handleCloseClick).toHaveBeenCalled()
+
+    setTimeout(() => {
+      expect(handleOnAfterLeave).toHaveBeenCalled()
+    }, 0)
   })
 })

@@ -1,4 +1,4 @@
-# Expand Rows
+# Expand rows
 
 ```html
 <n-data-table :columns="columns" :data="data" :pagination="pagination" />

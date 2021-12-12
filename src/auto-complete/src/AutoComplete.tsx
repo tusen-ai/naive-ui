@@ -330,7 +330,12 @@ export default defineComponent({
                         onFocus={this.handleFocus}
                         onUpdateValue={this.handleInput}
                         onBlur={this.handleBlur}
-                      />
+                      >
+                        {{
+                          suffix: this.$slots.suffix,
+                          prefix: this.$slots.prefix
+                        }}
+                      </NInput>
                     )
                   }
                 }}

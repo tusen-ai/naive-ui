@@ -1,4 +1,4 @@
-# Use FormItem Alone
+# Use form item alone
 
 You can also use `n-form-item` outside of an `n-form` element.
 

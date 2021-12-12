@@ -1,4 +1,4 @@
-# Controlled Filter
+# Controlled filter
 
 ```html
 <n-space vertical :size="12">

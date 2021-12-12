@@ -59,13 +59,14 @@ export default c([
     --merged-td-color-hover: var(--td-color-hover);
     --merged-td-color-striped: var(--td-color-striped);
   `, [
+    cB('data-table-wrapper', `
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    `),
     cM('flex-height', [
       c('>', [
-        cB('data-table-wrapper', `
-          flex-grow: 1;
-          display: flex;
-          flex-direction: column;
-        `, [
+        cB('data-table-wrapper', [
           c('>', [
             cB('data-table-base-table', `
               display: flex;
@@ -114,7 +115,7 @@ export default c([
       margin-right: 8px;
       cursor: pointer;
       font-size: 16px;
-      vertical-align: -.125em;
+      vertical-align: -0.2em;
     `),
     cB('data-table-thead', {
       transition: 'background-color .3s var(--bezier)',
@@ -125,11 +126,13 @@ export default c([
       background-clip: padding-box;
       transition: background-color .3s var(--bezier);
     `, [
-      c('&:hover', 'background-color: var(--merged-td-color-hover);', [
-        cB('data-table-td', 'background-color: var(--merged-td-color-hover);')
-      ]),
       cM('striped', 'background-color: var(--merged-td-color-striped);', [
         cB('data-table-td', 'background-color: var(--merged-td-color-striped);')
+      ]),
+      cNotM('summary', [
+        c('&:hover', 'background-color: var(--merged-td-color-hover);', [
+          cB('data-table-td', 'background-color: var(--merged-td-color-hover);')
+        ])
       ])
     ]),
     cB('data-table-th', `
@@ -329,19 +332,11 @@ export default c([
       ])
     ]),
     cM('bordered', [
-      cB('data-table-wrapper', {
-        border: '1px solid var(--merged-border-color)',
-        borderBottomLeftRadius: 'var(--border-radius)',
-        borderBottomRightRadius: 'var(--border-radius)'
-      }),
-      cB('data-table-td', [
-        cM('last-row', {
-          borderBottom: '0 solid var(--merged-border-color)'
-        })
-      ]),
-      cB('data-table-base-table-body', `
-        border-bottom-left-radius: calc(var(--border-radius) - 1px);
-        border-bottom-right-radius: calc(var(--border-radius) - 1px);
+      cB('data-table-wrapper', `
+        border: 1px solid var(--merged-border-color);
+        border-bottom-left-radius: var(--border-radius);
+        border-bottom-right-radius: var(--border-radius);
+        overflow: hidden;
       `)
     ]),
     cB('data-table-base-table', [

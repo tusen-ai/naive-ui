@@ -1,6 +1,6 @@
-# Scroll Event
+# Scroll event
 
-A colleague of mine wanted to use a scroll event for loading options asynchronously; here's that example:
+A colleague of mine wanted to use a scroll event for loading options asynchronously. Here's that example.
 
 ```html
 <n-select v-model:value="value" :options="options" @scroll="handleScroll" />

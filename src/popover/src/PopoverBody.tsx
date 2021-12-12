@@ -46,7 +46,7 @@ export const popoverBodyProps = {
   displayDirective: String as PropType<'if' | 'show'>,
   x: Number,
   y: Number,
-  filp: Boolean,
+  flip: Boolean,
   overlap: Boolean,
   placement: String as PropType<FollowerPlacement>,
   width: [Number, String] as PropType<number | 'trigger'>,
@@ -117,10 +117,10 @@ export default defineComponent({
     const styleRef = computed(() => {
       return [
         {
-          width: props.width === 'trigger' ? '' : formatLength(props.width),
-          maxWidth: formatLength(props.maxWidth),
-          minWidth: formatLength(props.minWidth)
+          width: props.width === 'trigger' ? '' : formatLength(props.width)
         },
+        props.maxWidth ? { maxWidth: formatLength(props.maxWidth) } : {},
+        props.minWidth ? { minWidth: formatLength(props.minWidth) } : {},
         cssVarsRef.value
       ]
     })
@@ -302,6 +302,7 @@ export default defineComponent({
         to: this.adjustedTo,
         x: this.x,
         y: this.y,
+        flip: this.flip,
         placement: this.placement,
         containerClass: this.namespace,
         ref: 'followerRef',

@@ -58,3 +58,5 @@ show-options-by-value
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |
 | default | `(options: { handleInput: (value: string) => void, handleFocus: function, handleBlur: function, value: string, theme: string \| null })` | 自定义输入元素，由用户填充 |
+| prefix | `()` | 输入框头部内容 |
+| suffix | `()` | 输入框尾部内容 |

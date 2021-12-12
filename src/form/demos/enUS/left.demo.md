@@ -1,4 +1,4 @@
-# Label Placement Left
+# Label placement left
 
 ```html
 <n-radio-group

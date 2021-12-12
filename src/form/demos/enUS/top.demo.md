@@ -1,4 +1,4 @@
-# Label Placement Top
+# Label placement top
 
 Use `n-grid` and `n-form-item-gi` (grid item) to style the form more exactly.
 

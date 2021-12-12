@@ -55,6 +55,14 @@ describe('n-badge', () => {
     expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
   })
 
+  it('should work with `show` prop', async () => {
+    const wrapper = mount(NBadge, { props: { value: 7 } })
+    expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
+
+    await wrapper.setProps({ show: false })
+    expect(wrapper.find('.n-badge-sup').exists()).not.toBe(true)
+  })
+
   it('should work with `type` prop', () => {
     const data = [
       { type: 'default', color: '#d03050' },

@@ -91,6 +91,26 @@ update-on-close
 | update-value-on-close | `boolean` | `false` | Whether to update value on close. |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` | Value changed callback. |
 
+### Month Type Props
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now']` | Operations supported for the `month` type date picker. |
+| format | `string` | `'yyyy-MM'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |
+| is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the month. |
+| placeholder | `string` | `'Select Month'` | Placeholder. |
+| on-update:value | `(value: number \| null) => void` | `undefined` | Value changed callback. |
+
+### Year Type Props
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Operations supported for the `year` type date picker. |
+| format | `string` | `'yyyy'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |
+| is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the year. |
+| placeholder | `string` | `'Select Year'` | Placeholder. |
+| on-update:value | `(value: number \| null) => void` | `undefined` | Value changed callback. |
+
 ### DatePicker Slots
 
 | Name   | Parameters | Description   |

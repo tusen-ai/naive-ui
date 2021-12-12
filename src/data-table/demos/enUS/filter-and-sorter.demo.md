@@ -1,4 +1,4 @@
-# Uncontrolled Filter and Sorter
+# Uncontrolled filter and sorter
 
 ```html
 <n-space vertical :size="12">

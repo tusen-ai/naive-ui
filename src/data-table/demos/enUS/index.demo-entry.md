@@ -58,6 +58,7 @@ striped
 | data | `Array<object>` | `[]` | Data to display. |
 | default-checked-row-keys | `Array<string \| number>` | `[]` | The key value selected by default. |
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |
+| expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |
 | indent | `number` | `16` | Indent of row content when using tree data. |
 | loading | `boolean` | `false` | Whether to display loading status. |
@@ -77,6 +78,7 @@ striped
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellipsis` or `max-height` or `flex-height` are set, it will always be `'fixed'` regardless of what you set. |
 | virtual-scroll | `boolean` | `false` | Whether to use virtual scroll to deal with large data. Make sure `max-height` is set before using it. When `virtual-scroll` is `true`, `rowSpan` will not take effect. |
 | on-update:checked-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. |
+| on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the expanded-row-keys value changes. |
 | on-update:filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }, initiatorColumn: DataTableColumn)` | `undefined` | The callback function triggered when the filters data changes. |
 | on-update:page | `(page: number)` | `undefined` | Callback function triggered when the page changes. |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function triggered when the page-size changes. |
@@ -146,7 +148,7 @@ type DataTableCreateSummary = (
 type SortState = {
   columnKey: string | number,
   sorter: 'default' | function | boolean,
-  order: 'ascend' | 'descend' \ false
+  order: 'ascend' | 'descend' | false
 }
 ```
 

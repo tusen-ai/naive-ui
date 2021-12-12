@@ -6,7 +6,7 @@ import { formLight } from '../styles'
 import type { FormTheme } from '../styles'
 import style from './styles/form.cssr'
 import {
-  ApplyRule,
+  ShouldRuleBeApplied,
   FormItemInst,
   FormRules,
   FormValidateCallback,
@@ -66,7 +66,7 @@ export default defineComponent({
     const formItems: Record<string, FormItemInst[]> = {}
     async function validate (
       validateCallback?: FormValidateCallback,
-      shouldRuleBeApplied: ApplyRule = () => true
+      shouldRuleBeApplied: ShouldRuleBeApplied = () => true
     ): Promise<void> {
       return await new Promise((resolve, reject) => {
         const formItemValidationPromises = []

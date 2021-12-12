@@ -34,3 +34,22 @@ native
 | on-update:show | `(value: boolean) => void` | `undefined` | 面板可见状态改变的回调 |
 | on-update:value | `(value: string) => void` | `undefined` | 颜色改变时的回调 |
 | actions | `Array<'confirm'> \| null` | `null` | 显示按钮 |
+
+## Q & A
+
+### 如何从颜色名称转化为色值
+
+naive 不内置提供这种功能，你可以自己建立一个对象进行映射，见 [https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L803](https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L803)。
+
+或者你自己写一个函数，例如：
+
+```js
+export function getRgb (colorName) {
+  const el = document.createElement('div')
+  el.style.color = colorName
+  document.body.appendChild(el)
+  const rgbColor = getComputedStyle(el).color
+  document.body.removeChild(el)
+  return rgbColor
+}
+```

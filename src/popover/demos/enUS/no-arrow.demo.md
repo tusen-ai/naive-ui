@@ -1,4 +1,4 @@
-# No Arrow
+# No arrow
 
 ```html
 <n-popover trigger="hover" :show-arrow="false">

@@ -1,4 +1,4 @@
-# Select Person
+# Select person
 
 I've found that people often want to make a people picker. Here is an example that shows you how that can be done with a select.
 
