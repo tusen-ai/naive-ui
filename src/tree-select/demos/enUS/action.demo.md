@@ -1,4 +1,4 @@
-# Action Slot
+# Action slot
 
 Maybe you need to use this slot in the tree selection menu.
 
