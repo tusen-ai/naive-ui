@@ -8,6 +8,7 @@
 - Fix `n-data-table`'s pagination `onUpdatePageSize` prop does't trigger, closes [#1774](https://github.com/TuSimple/naive-ui/issues/1774).
 - Fix `n-tag` line-height is too low that clamps the content.
 - Fix `n-select` displays with mistake in input if `filterable` is `true`, closes [#1823](https://github.com/TuSimple/naive-ui/issues/1823).
+- Fix `n-data-table` uncheck all if indeterminate header checkbox is clicked, closes [#1827](https://github.com/TuSimple/naive-ui/issues/1827).
 
 ### Feats
 

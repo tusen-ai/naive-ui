@@ -61,7 +61,7 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
     function handleCheckboxUpdateChecked (): void {
-      if (someRowsCheckedRef.value || allRowsCheckedRef.value) {
+      if (allRowsCheckedRef.value) {
         doUncheckAll()
       } else {
         doCheckAll()
