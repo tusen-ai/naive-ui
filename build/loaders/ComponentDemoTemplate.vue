@@ -4,6 +4,7 @@
     relative-url="<!--URL-->"
     title="<!--TITLE_SLOT-->"
     code="<!--CODE_SLOT-->"
+    js-code="<!--JS_CODE_SLOT-->"
   >
     <template #title>
       <!--TITLE_SLOT-->

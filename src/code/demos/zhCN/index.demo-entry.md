@@ -35,7 +35,7 @@
 ## 演示
 
 ```demo
-basic
+basic.vue
 inline
 ```
 

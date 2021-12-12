@@ -35,7 +35,7 @@ The following code shows how to set hljs of Code. Importing highlight.js on dema
 ## Demos
 
 ```demo
-basic
+basic.vue
 inline
 ```
 
