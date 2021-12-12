@@ -11,6 +11,7 @@ multiple
 checkbox
 check-strategy
 filterable
+action
 debug
 ```
 
@@ -60,3 +61,10 @@ debug
 | label | `string` | Displayed content of the option. The field used can be set using `label-field`. |
 | children? | `TreeSelectOption[]` | Child options of the option. The field used can be set using `children-field` |
 | disabled? | `boolean` | Option disabled state. |
+
+### TreeSelect Slots
+
+| Name   | Parameters | Description                            |
+| ------ | ---------- | -------------------------------------- |
+| action | `()`       | Options menu slot.                     |
+| empty  | `()`       | Empty state slot for the options menu. |

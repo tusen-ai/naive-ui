@@ -9,6 +9,7 @@ basic
 size
 scrollable
 multiple
+slot
 ```
 
 ## API
@@ -28,3 +29,10 @@ multiple
 For SelectOption & SelectGroupOption, see [Select](select#SelectOption-Properties)
 
 For other props, see [Popover](popover#Popover-Props)
+
+### Popselect Slots
+
+| Name   | Parameters | Description                            |
+| ------ | ---------- | -------------------------------------- |
+| action | `()`       | Options menu slot.                     |
+| empty  | `()`       | Empty state slot for the options menu. |

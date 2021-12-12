@@ -1,4 +1,4 @@
-# Lots of Options
+# Lots of options
 
 1000 times the answer to everything.
 
