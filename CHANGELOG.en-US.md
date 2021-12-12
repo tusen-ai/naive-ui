@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-avatar`'s `color` prop will not be recommended, please use `style` prop.
+
 ### Fixes
 
 - Fix `n-alert`'s `header` slot unable to display normally.
