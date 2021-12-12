@@ -67,3 +67,4 @@ debug
 | Name   | Parameters | Description                            |
 | ------ | ---------- | -------------------------------------- |
 | action | `()`       | Options menu slot.                     |
+| empty  | `()`       | Empty state slot for the options menu. |

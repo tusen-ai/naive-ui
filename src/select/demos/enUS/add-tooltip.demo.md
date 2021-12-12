@@ -1,4 +1,4 @@
-# Add Tooltip to Option
+# Add tooltip to option
 
 Use the `render-option` property to control rendering of the entire option.
 

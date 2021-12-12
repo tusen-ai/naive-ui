@@ -12,7 +12,8 @@ import {
   watch,
   nextTick,
   watchEffect,
-  HTMLAttributes
+  HTMLAttributes,
+  renderSlot
 } from 'vue'
 import {
   FollowerPlacement,
@@ -809,12 +810,14 @@ export default defineComponent({
                                 <div
                                   class={`${mergedClsPrefix}-tree-select-menu__empty`}
                                 >
-                                  <NEmpty
-                                    theme={mergedTheme.peers.Empty}
-                                    themeOverrides={
-                                      mergedTheme.peerOverrides.Empty
-                                    }
-                                  />
+                                  {renderSlot($slots, 'empty', undefined, () => [
+                                    <NEmpty
+                                      theme={mergedTheme.peers.Empty}
+                                      themeOverrides={
+                                        mergedTheme.peerOverrides.Empty
+                                      }
+                                    />
+                                  ])}
                                 </div>
                               )}
                               {$slots.action && (

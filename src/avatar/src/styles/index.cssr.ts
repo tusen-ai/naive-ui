@@ -5,7 +5,7 @@ import { c, cE, cB } from '../../../_utils/cssr'
 // --border-radius
 // --color
 // --bezier
-// --size
+// --merged-size
 export default cB('avatar', `
   width: var(--merged-size);
   height: var(--merged-size);
@@ -34,9 +34,7 @@ export default cB('avatar', `
   `),
   cB('icon', `
     vertical-align: bottom;
-    font-size: var(--size);
+    font-size: calc(var(--merged-size) - 6px);
   `),
-  cE('text', {
-    lineHeight: 1.25
-  })
+  cE('text', 'line-height: 1.25')
 ])

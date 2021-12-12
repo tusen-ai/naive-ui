@@ -2,15 +2,31 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `b-button` 在 `loading` 状态不可再被点击，关闭 [#1628](https://github.com/TuSimple/naive-ui/issues/1628)
+
 ### Fixes
 
 - 修复 `n-alert` 的 `header` slot 无法正常显示
 - 修复 `n-data-table` 的分页器 `onUpdatePageSize` 属性未被触发, 关闭 [#1774](https://github.com/TuSimple/naive-ui/issues/1774)
+- 修复 `n-tag` 行高过低导致内容截断
+- 修复 `n-select` 设定 `filterable` 后选项过长显示出错，关闭 [#1823](https://github.com/TuSimple/naive-ui/issues/1823)
+- 修复 `n-page-header` 在不显示头部时内容有 margin-top，关闭 [#1795](https://github.com/TuSimple/naive-ui/issues/1795)
+- 修复 `n-avatar` `color` 属性不生效
+- 修复 `n-avatar` 内部图标尺寸不正确
+- 修复 `n-image` 缺少 scoped style 的 scope-id，关闭 [#1788](https://github.com/TuSimple/naive-ui/issues/1788)
 
 ### Feats
 
 - `n-tree-select` 新增 `menu-props` 属性
 - `n-tree-select` 新增 `action` slot, 关闭 [#1765](https://github.com/TuSimple/naive-ui/issues/1765)
+- `n-tree-select` 新增 `empty` slot
+- `n-cascader` 新增 `empty` slot
+- `n-popselect` 新增 `action` slot
+- `n-popselect` 新增 `empty` slot
+- `n-data-table` 点击表头半选的勾选框之后会全选，关闭 [#1827](https://github.com/TuSimple/naive-ui/issues/1827)
+- `n-button` 的 CSS 变量使用 `n` 作为前缀, 关闭 [#1808](https://github.com/TuSimple/naive-ui/issues/1808)
 
 ### i18n
 
