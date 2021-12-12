@@ -4,7 +4,8 @@ import {
   InjectionKey,
   Ref,
   VNodeChild,
-  HTMLAttributes
+  HTMLAttributes,
+  Slots
 } from 'vue'
 import { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import { NLocale } from '../../locales'
@@ -161,6 +162,7 @@ export type DataTableSelectionOptions = Array<
 | { label: string, key: string | number, onSelect: () => void }
 >
 export interface DataTableInjection {
+  slots: Slots
   indentRef: Ref<number>
   hasChildrenRef: Ref<boolean>
   firstContentfulColIndexRef: Ref<number>
