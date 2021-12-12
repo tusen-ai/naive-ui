@@ -174,27 +174,27 @@ describe('n-button', () => {
       }
     })
     const circleStyle = [
-      '--width: 34px;',
-      '--padding: initial;',
-      '--border-radius: 34px;'
+      '--n-width: 34px;',
+      '--n-padding: initial;',
+      '--n-border-radius: 34px;'
     ]
     let buttonStyle = wrapper.find('button').attributes('style')
     expect(circleStyle.every((i) => buttonStyle.includes(i))).toBe(true)
 
     await wrapper.setProps({ circle: false, round: true })
     const roundStyle = [
-      '--width: initial;',
-      '--padding: 0 18px;',
-      '--border-radius: 34px;'
+      '--n-width: initial;',
+      '--n-padding: 0 18px;',
+      '--n-border-radius: 34px;'
     ]
     buttonStyle = wrapper.find('button').attributes('style')
     expect(roundStyle.every((i) => buttonStyle.includes(i))).toBe(true)
 
     await wrapper.setProps({ circle: false, round: false })
     const defaultStyle = [
-      '--width: initial;',
-      '--padding: 0 14px;',
-      '--border-radius: 3px;'
+      '--n-width: initial;',
+      '--n-padding: 0 14px;',
+      '--n-border-radius: 3px;'
     ]
     buttonStyle = wrapper.find('button').attributes('style')
     expect(defaultStyle.every((i) => buttonStyle.includes(i))).toBe(true)
@@ -241,9 +241,9 @@ describe('n-button', () => {
 
     expect(wrapper.find('button').classes()).toContain('n-button--color')
     const colorStyle = [
-      '--color: #8a2be2;',
-      '--color-disabled: #8a2be2;',
-      '--ripple-color: #8a2be2;'
+      '--n-color: #8a2be2;',
+      '--n-color-disabled: #8a2be2;',
+      '--n-ripple-color: #8a2be2;'
     ]
     const buttonStyle = wrapper.find('button').attributes('style')
     expect(colorStyle.every((i) => buttonStyle.includes(i))).toBe(true)
@@ -262,7 +262,10 @@ describe('n-button', () => {
     const buttonStyle = wrapper.find('button').attributes('style')
     expect(
       (
-        ['--text-color: #8a2be2;', '--text-color-disabled: #8a2be2;'] as const
+        [
+          '--n-text-color: #8a2be2;',
+          '--n-text-color-disabled: #8a2be2;'
+        ] as const
       ).every((i) => buttonStyle.includes(i))
     ).toBe(true)
   })
