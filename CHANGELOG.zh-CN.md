@@ -10,10 +10,8 @@
 
 - 修复 `n-alert` 的 `header` slot 无法正常显示
 - 修复 `n-data-table` 的分页器 `onUpdatePageSize` 属性未被触发, 关闭 [#1774](https://github.com/TuSimple/naive-ui/issues/1774)
-- 修复 `n-button` 的样式在使用其他样式框架时被覆盖, 关闭 [#1808](https://github.com/TuSimple/naive-ui/issues/1808)
 - 修复 `n-tag` 行高过低导致内容截断
 - 修复 `n-select` 设定 `filterable` 后选项过长显示出错，关闭 [#1823](https://github.com/TuSimple/naive-ui/issues/1823)
-- 修复 `n-data-table` 点击表头半选的勾选框之后没有全选，关闭 [#1827](https://github.com/TuSimple/naive-ui/issues/1827)
 - 修复 `n-page-header` 在不显示头部时内容有 margin-top，关闭 [#1795](https://github.com/TuSimple/naive-ui/issues/1795)
 
 ### Feats
@@ -22,6 +20,8 @@
 - `n-cascader` 新增 `empty` slot
 - `n-popselect` 新增 `action` slot
 - `n-popselect` 新增 `empty` slot
+- `n-data-table` 点击表头半选的勾选框之后会全选，关闭 [#1827](https://github.com/TuSimple/naive-ui/issues/1827)
+- `n-button` 的 CSS 变量使用 `n` 作为前缀, 关闭 [#1808](https://github.com/TuSimple/naive-ui/issues/1808)
 
 ### i18n
 
