@@ -13,6 +13,7 @@
 - Fix `n-page-header`'s content has margin-top when header is not displayed, closes [#1795](https://github.com/TuSimple/naive-ui/issues/1795).
 - Fix `n-avatar` `color` prop not working.
 - Fix `n-avatar`'s inner icon has wrong size.
+- Fix `n-image` lacks scoped style's scope-id, closes [#1788](https://github.com/TuSimple/naive-ui/issues/1788).
 
 ### Feats
 
