@@ -40,9 +40,10 @@ virtual
 custom-filter-menu
 tree
 flex-height
+striped
 fixed-column-debug
 scroll-debug
-striped
+height-debug
 ```
 
 ## API
