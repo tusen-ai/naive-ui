@@ -6,7 +6,7 @@
 
 - 修复 `n-alert` 的 `header` slot 无法正常显示
 - 修复 `n-data-table` 的分页器 `onUpdatePageSize` 属性未被触发, 关闭 [#1774](https://github.com/TuSimple/naive-ui/issues/1774)
-- 修复 `n-data-table` 布局显示错乱当表格为空表格并且设置 min-height 时，关闭 [#1809](https://github.com/TuSimple/naive-ui/issues/1809)
+- 修复 `n-data-table` 当表格为空表格并且设置 min-height 时布局显示错乱，关闭 [#1809](https://github.com/TuSimple/naive-ui/issues/1809)
 
 ### Feats
 
