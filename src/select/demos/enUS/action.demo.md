@@ -1,4 +1,4 @@
-# Action Slot
+# Action slot
 
 Is there anybody who needs an action slot on a select menu?
 

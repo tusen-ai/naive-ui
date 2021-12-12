@@ -11,7 +11,9 @@ import {
   provide,
   watch,
   nextTick,
-  watchEffect
+  watchEffect,
+  HTMLAttributes,
+  renderSlot
 } from 'vue'
 import {
   FollowerPlacement,
@@ -111,6 +113,7 @@ const props = {
   string | number | Array<string | number> | null
   >,
   to: useAdjustedTo.propTo,
+  menuProps: Object as PropType<HTMLAttributes>,
   virtualScroll: {
     type: Boolean,
     default: true
@@ -665,7 +668,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, mergedClsPrefix } = this
+    const { mergedTheme, mergedClsPrefix, $slots } = this
     return (
       <div class={`${mergedClsPrefix}-tree-select`}>
         <VBinder>
@@ -731,13 +734,21 @@ export default defineComponent({
                             mergedClsPrefix,
                             filteredTreeInfo,
                             checkable,
-                            multiple
+                            multiple,
+                            menuProps
                           } = this
                           return withDirectives(
                             <div
-                              class={`${mergedClsPrefix}-tree-select-menu`}
+                              {...menuProps}
+                              class={[
+                                `${mergedClsPrefix}-tree-select-menu`,
+                                menuProps?.class
+                              ]}
                               ref="menuElRef"
-                              style={this.cssVars as CSSProperties}
+                              style={[
+                                menuProps?.style || '',
+                                this.cssVars as CSSProperties
+                              ]}
                               tabindex={0}
                               onMousedown={this.handleMenuMousedown}
                               onKeyup={this.handleKeyup}
@@ -795,12 +806,14 @@ export default defineComponent({
                                 <div
                                   class={`${mergedClsPrefix}-tree-select-menu__empty`}
                                 >
-                                  <NEmpty
-                                    theme={mergedTheme.peers.Empty}
-                                    themeOverrides={
-                                      mergedTheme.peerOverrides.Empty
-                                    }
-                                  />
+                                  {renderSlot($slots, 'empty', undefined, () => [
+                                    <NEmpty
+                                      theme={mergedTheme.peers.Empty}
+                                      themeOverrides={
+                                        mergedTheme.peerOverrides.Empty
+                                      }
+                                    />
+                                  ])}
                                 </div>
                               )}
                               <NBaseFocusDetector onFocus={this.handleTabOut} />

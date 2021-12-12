@@ -2,10 +2,34 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-button` can no longer be clicked under `loading` status, closes [#1628](https://github.com/TuSimple/naive-ui/issues/1628).
+
 ### Fixes
 
-- Fix `b-button` can be click under `loading` status, closes [#1628](https://github.com/TuSimple/naive-ui/issues/1628).
 - Fix `n-alert`'s `header` slot unable to display normally.
+- Fix `n-data-table`'s pagination `onUpdatePageSize` prop does't trigger, closes [#1774](https://github.com/TuSimple/naive-ui/issues/1774).
+- Fix `n-tag` line-height is too low that clamps the content.
+- Fix `n-select` displays with mistake in input if `filterable` is `true`, closes [#1823](https://github.com/TuSimple/naive-ui/issues/1823).
+- Fix `n-page-header`'s content has margin-top when header is not displayed, closes [#1795](https://github.com/TuSimple/naive-ui/issues/1795).
+- Fix `n-avatar` `color` prop not working.
+- Fix `n-avatar`'s inner icon has wrong size.
+- Fix `n-image` lacks scoped style's scope-id, closes [#1788](https://github.com/TuSimple/naive-ui/issues/1788).
+
+### Feats
+
+- `n-tree-select` add `menu-props` prop.
+- `n-tree-select` add `empty` slot.
+- `n-cascader` add `empty` slot.
+- `n-popselect` add `action` slot.
+- `n-popselect` add `empty` slot.
+- `n-data-table` will check all if indeterminate header checkbox is clicked, closes [#1827](https://github.com/TuSimple/naive-ui/issues/1827).
+- `n-button` uses `n` as CSS vars prefix, closes [#1808](https://github.com/TuSimple/naive-ui/issues/1808).
+
+### i18n
+
+- Add zhTW locale.
 
 ## 2.21.5（2021-12-07）
 

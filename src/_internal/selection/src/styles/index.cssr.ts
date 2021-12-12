@@ -87,7 +87,6 @@ export default c([
       display: flex;
       align-items: center;
       white-space: nowrap;
-      overflow: hidden;
       pointer-events: none;
       position: absolute;
       top: 0;
@@ -96,7 +95,14 @@ export default c([
       left: 0;
       padding: var(--padding-single);
       transition: color .3s var(--bezier);
-    `),
+    `, [
+      cE('wrapper', `
+        flex-basis: 0;
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      `)
+    ]),
     cB('base-selection-placeholder', `
       color: var(--placeholder-color);
     `),

@@ -39,6 +39,7 @@ debug
 | label-field | `string` | `'label'` | 替代 `TreeSelectOption` 中的 label 字段名 |
 | leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选时最多直接显示多少选项，设为 `'responsive'` 会保证最多一行 |
+| menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 |
 | multiple | `boolean` | `false` | 是否支持多选 |
 | options | `TreeSelectOption[]` | `[]` | 选项 |
 | placeholder | `string` | `'请选择'` | 占位信息 |
@@ -61,3 +62,9 @@ debug
 | label | `string` | 选项的显示内容，可使用 `label-field` 修改字段名 |
 | children? | `TreeSelectOption[]` | 节点的子选项 |
 | disabled? | `boolean` | 是否禁用选项 |
+
+### TreeSelect Slots
+
+| 名称   | 参数 | 说明                |
+| ------ | ---- | ------------------- |
+| empty  | `()` | 菜单无数据时的 slot |

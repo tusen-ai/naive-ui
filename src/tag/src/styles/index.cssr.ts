@@ -43,7 +43,7 @@ export default cB('tag', `
     color .3s var(--bezier),
     box-shadow .3s var(--bezier),
     opacity .3s var(--bezier);
-  line-height: 1;
+  line-height: 1.2;
   height: var(--height);
   font-size: var(--font-size);
 `, [

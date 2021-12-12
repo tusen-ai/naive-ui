@@ -49,7 +49,7 @@ retry-debug
 | show-retry-button | `boolean` | `true` | 是否显示重新上传按钮（在 error 时展示） |  |
 | show-file-list | `boolean` | `true` | 是否显示文件列表 |  |
 | show-preview-button | `boolean` | `true` | 是否允许显示预览按钮（在 `list-type` 为 `image-card` 时生效） |  |
-| show-trigger | `boolean` | `true` | 是否显示触发元素 | NEXT_VERSION |
+| show-trigger | `boolean` | `true` | 是否显示触发元素 | 2.21.5 |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |  |
 | on-finish | `(options: { file: UploadFileInfo, event: Event }) => UploadFileInfo \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |

@@ -1,4 +1,4 @@
-# Create Option Dynamically
+# Create option dynamically
 
 Use `tag` & `filterable` properties to create options dynamically.
 
