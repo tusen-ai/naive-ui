@@ -10,6 +10,7 @@ import {
   nextTick
 } from 'vue'
 import { createTreeMate, TreeNode } from 'treemate'
+import { happensIn } from 'seemly'
 import { RenderLabel } from '../../_internal/select-menu/src/interface'
 import { tmOptions } from '../../select/src/utils'
 import {
@@ -102,6 +103,9 @@ export default defineComponent({
     function handleToggle (tmNode: TreeNode<SelectBaseOption>): void {
       toggle(tmNode.key)
     }
+    function handleMenuMousedown (e: MouseEvent): void {
+      if (!happensIn(e, 'action')) e.preventDefault()
+    }
     function toggle (value: ValueAtom): void {
       const {
         value: { getNode }
@@ -157,10 +161,12 @@ export default defineComponent({
       mergedTheme: NPopselect.mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       treeMate: treeMateRef,
-      handleToggle
+      handleToggle,
+      handleMenuMousedown
     }
   },
   render () {
+    const { $slots } = this
     return (
       <NInternalSelectMenu
         clsPrefix={this.mergedClsPrefix}
@@ -171,13 +177,17 @@ export default defineComponent({
         size={this.size}
         value={this.value}
         width={this.width}
+        focusable
         virtualScroll={false}
         scrollable={this.scrollable}
         renderLabel={this.renderLabel}
         onToggle={this.handleToggle}
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseenter}
-      />
+        onMousedown={this.handleMenuMousedown}
+      >
+        {$slots}
+      </NInternalSelectMenu>
     )
   }
 })
