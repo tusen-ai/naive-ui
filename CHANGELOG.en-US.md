@@ -10,6 +10,7 @@
 ### Feats
 
 - `n-tree-select` add `menu-props` prop.
+- `n-cascader` add `empty` slot.
 
 ### i18n
 
