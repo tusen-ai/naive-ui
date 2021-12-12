@@ -10,6 +10,8 @@
 ### Feats
 
 - `n-tree-select` add `menu-props` prop.
+- `n-popselect` add `action` slot.
+- `n-popselect` add `empty` slot.
 
 ### i18n
 
