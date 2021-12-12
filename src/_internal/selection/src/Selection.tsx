@@ -767,14 +767,16 @@ export default defineComponent({
                 class={`${clsPrefix}-base-selection-label__render-label ${clsPrefix}-base-selection-overlay`}
                 key="input"
               >
-                {renderTag
-                  ? renderTag({
-                    option: this.selectedOption!,
-                    handleClose: () => {}
-                  })
-                  : renderLabel
-                    ? renderLabel(this.selectedOption!, true)
-                    : render(this.label, this.selectedOption, true)}
+                <div class={`${clsPrefix}-base-selection-overlay__wrapper`}>
+                  {renderTag
+                    ? renderTag({
+                      option: this.selectedOption!,
+                      handleClose: () => {}
+                    })
+                    : renderLabel
+                      ? renderLabel(this.selectedOption!, true)
+                      : render(this.label, this.selectedOption, true)}
+                </div>
               </div>
               )}
             {showPlaceholder ? (
@@ -782,7 +784,9 @@ export default defineComponent({
                 class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
                 key="placeholder"
               >
-                {this.filterablePlaceholder}
+                <div class={`${clsPrefix}-base-selection-overlay__wrapper`}>
+                  {this.filterablePlaceholder}
+                </div>
               </div>
             ) : null}
             {suffix}
