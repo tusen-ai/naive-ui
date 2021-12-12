@@ -18,6 +18,7 @@
 ### Feats
 
 - `n-tree-select` 新增 `menu-props` 属性
+- `n-tree-select` 新增 `empty` slot
 - `n-cascader` 新增 `empty` slot
 - `n-popselect` 新增 `action` slot
 - `n-popselect` 新增 `empty` slot

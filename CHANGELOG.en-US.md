@@ -18,6 +18,7 @@
 ### Feats
 
 - `n-tree-select` add `menu-props` prop.
+- `n-tree-select` add `empty` slot.
 - `n-cascader` add `empty` slot.
 - `n-popselect` add `action` slot.
 - `n-popselect` add `empty` slot.
