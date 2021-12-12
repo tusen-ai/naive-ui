@@ -4,6 +4,8 @@
 
 ### Breaking Changes
 
+- `n-button` can no longer be clicked under `loading` status, closes [#1628](https://github.com/TuSimple/naive-ui/issues/1628).
+
 ### Fixes
 
 - Fix `n-alert`'s `header` slot unable to display normally.

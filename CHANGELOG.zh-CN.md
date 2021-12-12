@@ -4,6 +4,8 @@
 
 ### Breaking Changes
 
+- `b-button` 在 `loading` 状态不可再被点击，关闭 [#1628](https://github.com/TuSimple/naive-ui/issues/1628)
+
 ### Fixes
 
 - 修复 `n-alert` 的 `header` slot 无法正常显示
