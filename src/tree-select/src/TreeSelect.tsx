@@ -25,6 +25,7 @@ import {
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
 import { createTreeMate, CheckStrategy } from 'treemate'
+import { happensIn } from 'seemly'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
@@ -568,7 +569,7 @@ export default defineComponent({
     function handleMenuMousedown (e: MouseEvent): void {
       // If there's an action slot later, we need to check if mousedown happens
       // in action panel
-      e.preventDefault()
+      if (!happensIn(e, 'action')) e.preventDefault()
     }
     provide(treeSelectInjectionKey, {
       pendingNodeKeyRef
@@ -654,14 +655,17 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { menuBoxShadow, menuBorderRadius, menuColor, menuHeight }
+          self: { menuBoxShadow, menuBorderRadius, menuColor, menuHeight, actionPadding, actionDividerColor, actionTextColor }
         } = themeRef.value
         return {
           '--menu-box-shadow': menuBoxShadow,
           '--menu-border-radius': menuBorderRadius,
           '--menu-color': menuColor,
           '--menu-height': menuHeight,
-          '--bezier': cubicBezierEaseInOut
+          '--bezier': cubicBezierEaseInOut,
+          '--action-padding': actionPadding,
+          '--action-text-color': actionTextColor,
+          '--action-divider-color': actionDividerColor
         }
       }),
       mergedTheme: themeRef
@@ -814,6 +818,13 @@ export default defineComponent({
                                       }
                                     />
                                   ])}
+                                </div>
+                              )}
+                              {$slots.action && (
+                                <div class={`${mergedClsPrefix}-tree-select-menu__action`} data-action>
+                                  {{
+                                    default: $slots.action
+                                  }}
                                 </div>
                               )}
                               <NBaseFocusDetector onFocus={this.handleTabOut} />

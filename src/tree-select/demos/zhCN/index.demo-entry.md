@@ -12,6 +12,7 @@ checkbox
 check-strategy
 filterable
 check-strategy-debug
+action
 debug
 ```
 
@@ -67,4 +68,5 @@ debug
 
 | 名称   | 参数 | 说明                |
 | ------ | ---- | ------------------- |
+| action | `()` | 菜单操作区域的 slot |
 | empty  | `()` | 菜单无数据时的 slot |

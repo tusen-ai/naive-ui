@@ -20,6 +20,7 @@
 ### Feats
 
 - `n-tree-select` 新增 `menu-props` 属性
+- `n-tree-select` 新增 `action` slot, 关闭 [#1765](https://github.com/TuSimple/naive-ui/issues/1765)
 - `n-tree-select` 新增 `empty` slot
 - `n-cascader` 新增 `empty` slot
 - `n-popselect` 新增 `action` slot
