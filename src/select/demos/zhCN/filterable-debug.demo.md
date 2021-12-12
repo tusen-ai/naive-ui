@@ -1,22 +1,23 @@
-# Max tag count
-
-Maximum selected options to display. This can be a fixed number or the string `responsive` to set a responsive max count.
+# Filterable debug
 
 ```html
 <n-space vertical>
   <n-select
-    placeholder="maxTagCount = responsive"
-    v-model:value="value"
-    multiple
+    v-model:value="selectedValue"
+    style="width: 200px;"
+    filterable
+    placeholder="选择歌曲"
+    :consistent-menu-width="false"
     :options="options"
-    max-tag-count="responsive"
   />
   <n-select
-    placeholder="maxTagCount = 3"
-    v-model:value="value"
+    v-model:value="selectedValues"
+    style="width: 200px;"
     multiple
+    filterable
+    placeholder="选择歌曲"
+    :consistent-menu-width="false"
     :options="options"
-    :max-tag-count="3"
   />
 </n-space>
 ```
@@ -27,15 +28,12 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup () {
     return {
-      value: ref(null),
+      selectedValue: ref('song1'),
+      selectedValues: ref(['song1']),
       options: [
         {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
-          value: 'song0',
-          disabled: true
-        },
-        {
-          label: 'Drive My Car',
+          label:
+            'Drive My Carfehjuwagheiuwhfiuawgheiawufhiuawghueiwahfaiuwgewiuafhw',
           value: 'song1'
         },
         {
@@ -44,8 +42,7 @@ export default defineComponent({
         },
         {
           label: "You Won't See",
-          value: 'song3',
-          disabled: true
+          value: 'song3'
         },
         {
           label: 'Nowhere Man',
@@ -61,8 +58,7 @@ export default defineComponent({
         },
         {
           label: 'Michelle',
-          value: 'song7',
-          disabled: true
+          value: 'song7'
         },
         {
           label: 'What goes on',

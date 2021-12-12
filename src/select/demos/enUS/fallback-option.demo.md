@@ -1,4 +1,4 @@
-# Fallback Option
+# Fallback option
 
 In some rare cases, you may want to define selected option(s) not present in the options array (e.g. async loading cases, or default values). The `fallback-option` property provides control in creating an option using a value.
 

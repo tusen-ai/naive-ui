@@ -56,11 +56,13 @@ export default c([
     `)
   ]),
   cB('page-header-content', `
-    margin-top: 20px;
     font-size: var(--font-size);
-  `),
+  `, [
+    c('&:not(:first-child)', 'margin-top: 20px;')
+  ]),
   cB('page-header-footer', `
-    margin-top: 20px;
     font-size: var(--font-size);
-  `)
+  `, [
+    c('&:not(:first-child)', 'margin-top: 20px;')
+  ])
 ])
