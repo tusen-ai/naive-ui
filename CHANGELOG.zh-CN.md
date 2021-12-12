@@ -17,6 +17,7 @@
 - 修复 `n-avatar` `color` 属性不生效
 - 修复 `n-avatar` 内部图标尺寸不正确
 - 修复 `n-image` 缺少 scoped style 的 scope-id，关闭 [#1788](https://github.com/TuSimple/naive-ui/issues/1788)
+- 修复 `n-radio` 的点击事件会被触发两次，关闭 [#1680](https://github.com/TuSimple/naive-ui/issues/1680)
 
 ### Feats
 

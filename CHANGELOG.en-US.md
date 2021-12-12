@@ -17,6 +17,7 @@
 - Fix `n-avatar` `color` prop not working.
 - Fix `n-avatar`'s inner icon has wrong size.
 - Fix `n-image` lacks scoped style's scope-id, closes [#1788](https://github.com/TuSimple/naive-ui/issues/1788).
+- Fix `n-radio` click event will be triggered twice, closes [#1680](https://github.com/TuSimple/naive-ui/issues/1680).
 
 ### Feats
 

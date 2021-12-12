@@ -58,12 +58,16 @@ export default cB('radio-group', `
     border-top: 1px solid var(--button-border-color);
     border-bottom: 1px solid var(--button-border-color);
   `, [
-    cE('radio-input', `
+    cB('radio-input', `
+      position: absolute;
       border: 0;
-      width: 0;
-      height: 0;
+      border-radius: inherit;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
       opacity: 0;
-      margin: 0;
+      z-index: 1;
     `),
     cE('state-border', `
       pointer-events: none;

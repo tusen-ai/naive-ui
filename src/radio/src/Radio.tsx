@@ -72,7 +72,7 @@ export default defineComponent({
   render () {
     const { $slots, mergedClsPrefix } = this
     return (
-      <div
+      <label
         class={[
           `${mergedClsPrefix}-radio`,
           {
@@ -82,14 +82,11 @@ export default defineComponent({
           }
         ]}
         style={this.cssVars as CSSProperties}
-        onKeyup={this.handleKeyUp}
-        onClick={this.handleClick}
-        onMousedown={this.handleMouseDown}
       >
         <input
           ref="inputRef"
           type="radio"
-          class={`${mergedClsPrefix}-radio__radio-input`}
+          class={`${mergedClsPrefix}-radio-input`}
           value={this.value}
           name={this.mergedName}
           checked={this.renderSafeChecked}
@@ -109,7 +106,7 @@ export default defineComponent({
             {$slots.default()}
           </div>
         ) : null}
-      </div>
+      </label>
     )
   }
 })
