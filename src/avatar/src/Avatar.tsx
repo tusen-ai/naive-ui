@@ -104,7 +104,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       fitTextTransform,
       cssVars: computed(() => {
-        const { size } = props
+        const { size, color: propColor } = props
         const {
           self: { borderRadius, fontSize, color },
           common: { cubicBezierEaseInOut }
@@ -118,7 +118,7 @@ export default defineComponent({
         return {
           '--font-size': fontSize,
           '--border-radius': mergedRoundRef.value ? '50%' : borderRadius,
-          '--color': color,
+          '--color': propColor || color,
           '--bezier': cubicBezierEaseInOut,
           '--merged-size': `var(--avatar-size-override, ${height})`
         }
@@ -137,11 +137,7 @@ export default defineComponent({
         <VResizeObserver onResize={this.fitTextTransform}>
           {{
             default: () => (
-              <span
-                ref="textRef"
-                class={`${mergedClsPrefix}-avatar__text`}
-                style={{ background: this.color }}
-              >
+              <span ref="textRef" class={`${mergedClsPrefix}-avatar__text`}>
                 {$slots}
               </span>
             )

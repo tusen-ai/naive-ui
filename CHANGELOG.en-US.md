@@ -4,8 +4,6 @@
 
 ### Breaking Changes
 
-- `n-avatar`'s `color` prop will not be recommended, please use `style` prop.
-
 ### Fixes
 
 - Fix `n-alert`'s `header` slot unable to display normally.
@@ -13,6 +11,8 @@
 - Fix `n-tag` line-height is too low that clamps the content.
 - Fix `n-select` displays with mistake in input if `filterable` is `true`, closes [#1823](https://github.com/TuSimple/naive-ui/issues/1823).
 - Fix `n-page-header`'s content has margin-top when header is not displayed, closes [#1795](https://github.com/TuSimple/naive-ui/issues/1795).
+- Fix `n-avatar` `color` prop not working.
+- Fix `n-avatar`'s inner icon has wrong size.
 
 ### Feats
 

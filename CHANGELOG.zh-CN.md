@@ -4,8 +4,6 @@
 
 ### Breaking Changes
 
-- `n-avatar` 的 `color` 属性不再推荐，请使用 `style` 属性
-
 ### Fixes
 
 - 修复 `n-alert` 的 `header` slot 无法正常显示
@@ -13,6 +11,8 @@
 - 修复 `n-tag` 行高过低导致内容截断
 - 修复 `n-select` 设定 `filterable` 后选项过长显示出错，关闭 [#1823](https://github.com/TuSimple/naive-ui/issues/1823)
 - 修复 `n-page-header` 在不显示头部时内容有 margin-top，关闭 [#1795](https://github.com/TuSimple/naive-ui/issues/1795)
+- 修复 `n-avatar` `color` 属性不生效
+- 修复 `n-avatar` 内部图标尺寸不正确
 
 ### Feats
 
