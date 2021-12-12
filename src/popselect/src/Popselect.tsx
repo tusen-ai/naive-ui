@@ -59,7 +59,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, $attrs } = this
+    const { mergedTheme, $attrs, $slots } = this
     const popoverProps: PopoverInternalProps & { ref: string } = {
       theme: mergedTheme.peers.Popover,
       themeOverrides: mergedTheme.peerOverrides.Popover,
@@ -84,7 +84,9 @@ export default defineComponent({
             ref={createRefSetter(ref)}
             onMouseenter={onMouseenter}
             onMouseleave={onMouseleave}
-          />
+          >
+            {$slots}
+          </NPopselectPanel>
         )
       }
     }

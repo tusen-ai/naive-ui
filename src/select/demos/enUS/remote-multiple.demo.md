@@ -1,4 +1,4 @@
-# Remote(Multiple)
+# Remote (multiple)
 
 Asynchronous options example for a multiple select case.
 

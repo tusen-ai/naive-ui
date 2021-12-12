@@ -31,6 +31,7 @@ menu-debug
 render-debug
 spin-debug
 options-change-debug
+filterable-debug
 ```
 
 ## API

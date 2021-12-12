@@ -1,4 +1,4 @@
-# Remote(Single)
+# Remote (single)
 
 Asynchronous example for a single select case.
 

@@ -1,4 +1,4 @@
-# Menu Width
+# Menu width
 
 The options menu width can be made to fit its content. Using this disables virtual scrolling.
 

@@ -7,10 +7,17 @@
 - Fix `n-alert`'s `header` slot unable to display normally.
 - Fix `n-data-table`'s pagination `onUpdatePageSize` prop does't trigger, closes [#1774](https://github.com/TuSimple/naive-ui/issues/1774).
 - Fix `n-button`'s style is overwritten when using other style library, closes [#1808](https://github.com/TuSimple/naive-ui/issues/1808).
+- Fix `n-tag` line-height is too low that clamps the content.
+- Fix `n-select` displays with mistake in input if `filterable` is `true`, closes [#1823](https://github.com/TuSimple/naive-ui/issues/1823).
+- Fix `n-data-table` uncheck all if indeterminate header checkbox is clicked, closes [#1827](https://github.com/TuSimple/naive-ui/issues/1827).
+- Fix `n-page-header`'s content has margin-top when header is not displayed, closes [#1795](https://github.com/TuSimple/naive-ui/issues/1795).
 
 ### Feats
 
 - `n-tree-select` add `menu-props` prop.
+- `n-cascader` add `empty` slot.
+- `n-popselect` add `action` slot.
+- `n-popselect` add `empty` slot.
 
 ### i18n
 
