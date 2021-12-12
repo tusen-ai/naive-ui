@@ -7,7 +7,8 @@ import {
   PropType,
   toRef,
   watch,
-  nextTick
+  nextTick,
+  watchEffect
 } from 'vue'
 import { createTreeMate, TreeNode } from 'treemate'
 import { happensIn } from 'seemly'
@@ -53,17 +54,7 @@ export const panelProps = {
   onMouseleave: Function as PropType<(e: MouseEvent) => void>,
   renderLabel: Function as PropType<RenderLabel>,
   // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
-    validator: () => {
-      warn(
-        'popselect',
-        '`on-change` is deprecated, please use `on-update:value` instead.'
-      )
-      return true
-    },
-    default: undefined
-  }
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
 export const panelPropKeys = keysOf(panelProps)
@@ -72,6 +63,17 @@ export default defineComponent({
   name: 'PopselectPanel',
   props: panelProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange !== undefined) {
+          warn(
+            'popselect',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NPopselect = inject(popselectInjectionKey)!
 
@@ -166,10 +168,10 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots } = this
     return (
       <NInternalSelectMenu
         clsPrefix={this.mergedClsPrefix}
+        focusable
         theme={this.mergedTheme.peers.InternalSelectMenu}
         themeOverrides={this.mergedTheme.peerOverrides.InternalSelectMenu}
         multiple={this.multiple}
@@ -177,7 +179,6 @@ export default defineComponent({
         size={this.size}
         value={this.value}
         width={this.width}
-        focusable
         virtualScroll={false}
         scrollable={this.scrollable}
         renderLabel={this.renderLabel}
@@ -186,7 +187,7 @@ export default defineComponent({
         onMouseleave={this.onMouseenter}
         onMousedown={this.handleMenuMousedown}
       >
-        {$slots}
+        {this.$slots}
       </NInternalSelectMenu>
     )
   }

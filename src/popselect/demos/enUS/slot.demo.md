@@ -1,6 +1,6 @@
 # Slot
 
-Is there anybody who needs slot on a select menu?
+Is there anybody who needs slots in a select menu?
 
 ```html
 <n-popselect v-model:value="value" :options="[]" trigger="click">
