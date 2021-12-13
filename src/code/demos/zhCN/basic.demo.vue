@@ -1,26 +1,26 @@
 <markdown>
-  # 基础用法
+# 基础用法
 
-  Javascript、Python、Cpp 的例子。
+Javascript、Python、Cpp 的例子。
 </markdown>
 
 <template>
-  <div style="overflow: auto;">
+  <div style="overflow: auto">
     <n-space vertical :size="16">
       <n-code
         :code="`
-  function sleep (ms = 1000) {
-    return new Promise(resolve => setTimeout(resolve, ms))
-  }
-  `"
+function sleep (ms = 1000) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+`"
         language="javascript"
       />
 
       <n-code
         :code="`
-  def say_hello():
-      print('Hello Naive UI')
-  `"
+def say_hello():
+    print('Hello Naive UI')
+`"
         language="python"
       />
       <n-code :code="cppCode" language="cpp" />

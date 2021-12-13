@@ -1,26 +1,26 @@
 <markdown>
-  # Basic
+# Basic
 
-  For example, javascript, python and cpp.
+For example, javascript, python and cpp.
 </markdown>
 
 <template>
-  <div style="overflow: auto;">
+  <div style="overflow: auto">
     <n-space vertical :size="16">
       <n-code
         :code="`
-  function sleep (ms = 1000) {
-    return new Promise(resolve => setTimeout(resolve, ms))
-  }
-  `"
+function sleep (ms = 1000) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+`"
         language="javascript"
       />
 
       <n-code
         :code="`
-  def say_hello():
-      print('Hello Naive UI')
-  `"
+def say_hello():
+    print('Hello Naive UI')
+`"
         language="python"
       />
       <n-code :code="cppCode" language="cpp" />
