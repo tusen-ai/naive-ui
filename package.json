@@ -62,7 +62,7 @@
     ]
   },
   "devDependencies": {
-    "esbuild": "^0.13.14",
+    "esbuild": "^0.14.3",
     "@babel/eslint-parser": "^7.15.8",
     "@babel/generator": "^7.12.11",
     "@babel/parser": "^7.12.11",
