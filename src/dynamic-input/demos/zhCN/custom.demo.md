@@ -6,7 +6,7 @@
   :on-create="onCreate"
   #="{ value }"
 >
-  <div style="display: flex; align-items: center;">
+  <div style="display: flex; align-items: center; width: 100%;">
     <n-checkbox v-model:checked="value.isCheck" style="margin-right: 12px;" />
     <n-input-number
       v-model:value="value.num"
