@@ -1,7 +1,7 @@
 <markdown>
 # 基础用法
 
-Javascript、Python、Cpp 的例子。
+JavaScript、Python、C++ 的例子。
 </markdown>
 
 <template>

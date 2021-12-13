@@ -47,20 +47,6 @@
         </template>
         {{ t('copyCode') }}
       </n-tooltip>
-      <n-tooltip v-if="languageType === 'ts'">
-        <template #trigger>
-          <n-button
-            style="padding: 0; margin-right: 6px"
-            size="tiny"
-            text
-            depth="3"
-            @click="toggleLanguageChange"
-          >
-            {{ showTs ? 'TS' : 'JS' }}
-          </n-button>
-        </template>
-        {{ t(showTs ? 'TS' : 'JS') }}
-      </n-tooltip>
       <n-tooltip ref="expandCodeButtonRef">
         <template #trigger>
           <n-button
@@ -83,6 +69,21 @@
     <slot name="content" />
     <slot name="demo" />
     <template v-if="showCode" #footer>
+      <n-tabs
+        v-if="languageType === 'ts'"
+        size="small"
+        type="segment"
+        style="padding: 12px 24px 0 24px"
+        :value="showTs ? 'ts' : 'js'"
+        @update:value="($e) => (showTs = $e === 'ts')"
+      >
+        <n-tab name="ts">
+          TypeScript
+        </n-tab>
+        <n-tab name="js">
+          JavaScript
+        </n-tab>
+      </n-tabs>
       <n-scrollbar x-scrollable content-style="padding: 20px 24px;">
         <n-code v-if="showTs" language="html" :code="sfcTsCode" />
         <n-code v-else language="html" :code="sfcJsCode" />
@@ -140,7 +141,7 @@ export default {
       return !(isDebugDemo && displayModeRef.value !== 'debug')
     })
     const showCodeRef = ref(false)
-    const showTsRef = ref(false)
+    const showTsRef = ref(true)
     const expandCodeButtonRef = ref(null)
     watch(showCodeRef, () => {
       nextTick(() => {
@@ -170,9 +171,7 @@ export default {
           editOnGithub: '在 GitHub 中编辑',
           editInCodeSandbox: '在 CodeSandbox 中编辑',
           copyCode: '复制代码',
-          copySuccess: '复制成功',
-          JS: '切换到 TypeScript',
-          TS: '切换到 JavaScript'
+          copySuccess: '复制成功'
         },
         'en-US': {
           show: 'Show Code',
@@ -180,9 +179,7 @@ export default {
           editOnGithub: 'Edit on GitHub',
           editInCodeSandbox: 'Edit in CodeSandbox',
           copyCode: 'Copy Code',
-          copySuccess: 'Successfully Copied',
-          JS: 'Switch to TypeScript',
-          TS: 'Switch to JavaScript'
+          copySuccess: 'Successfully Copied'
         }
       })
     }

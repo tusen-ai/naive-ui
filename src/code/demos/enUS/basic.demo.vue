@@ -1,7 +1,7 @@
 <markdown>
 # Basic
 
-For example, javascript, python and cpp.
+For example, JavaScript, Python and C++.
 </markdown>
 
 <template>
