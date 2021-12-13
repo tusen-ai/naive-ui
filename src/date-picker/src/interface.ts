@@ -15,16 +15,16 @@ import {
 } from './validation-utils'
 
 export type Value = number | [number, number]
-
+export type FormatValue = string | [string, string]
 export type Shortcuts =
   | Record<string, number | (() => number)>
   | Record<string, [number, number] | (() => [number, number])>
 
 export type OnUpdateValue = (
-  value: number & (number | null) & [number, number] & ([number, number] | null)
+  value: string & (string | null) & [string, string] & ([string, string] | null)
 ) => void
 
-export type OnUpdateValueImpl = (value: Value | null) => void
+export type OnUpdateValueImpl = (value: FormatValue | null) => void
 
 export type OnPanelUpdateValue = (
   value: number &

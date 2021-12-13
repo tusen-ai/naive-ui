@@ -7,6 +7,7 @@
 ```demo
 date
 datetime
+datetimeformat
 daterange
 datetimerange
 month
@@ -30,6 +31,7 @@ update-on-close
 | --- | --- | --- | --- |
 | clearable | `boolean` | `false` | 是否支持清除 |
 | default-value | `number \| [number, number] \| null` | `null` | 默认被选中的日期的时间戳 |
+| value-format | `string` | `timestamp` | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
 | disabled | `boolean` | `false` | 是否禁用 |
 | first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | 日历上一周的开始，0 代表周一 |
 | input-readonly | `boolean` | `false` | 设置输入框为只读（避免在移动设备上打开虚拟键盘） |

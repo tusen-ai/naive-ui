@@ -7,6 +7,7 @@ People have too many ideas on how to set the time.
 ```demo
 date
 datetime
+datetimeformat
 daterange
 datetimerange
 month
@@ -30,6 +31,7 @@ update-on-close
 | --- | --- | --- | --- |
 | clearable | `boolean` | `false` | Whether the date picker is clearable. |
 | default-value | `number \| [number, number] \| null` | `null` | Date picker's default value. |
+| value-format | `string` | `timestamp` | format of binding value. see [format](https://date-fns.org/v2.23.0/docs/format). |
 | disabled | `boolean` | `false` | Whether the date picker is disabled. |
 | first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | The first day of a week on calendar, 0 means Monday. |
 | input-readonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |
