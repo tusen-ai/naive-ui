@@ -356,7 +356,7 @@ export default defineComponent({
         disableUpdateOnClose
       })
     }
-    function scrollYearMonth (value?: number): void {
+    function scrollPickerColumns (value?: number): void {
       if (!panelInstRef.value) return
       const { monthScrollRef, yearScrollRef } = panelInstRef.value
       const { value: mergedValue } = mergedValueRef
@@ -527,7 +527,7 @@ export default defineComponent({
         type === 'year' ||
         type === 'quarter'
       ) {
-        void nextTick(scrollYearMonth)
+        void nextTick(scrollPickerColumns)
       }
     }
     function closeCalendar ({
@@ -573,7 +573,7 @@ export default defineComponent({
     const uniVaidation = uniCalendarValidation(props, pendingValueRef)
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
-      scrollYearMonth,
+      scrollPickerColumns,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       timePickerSizeRef,

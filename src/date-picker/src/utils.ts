@@ -83,7 +83,7 @@ export interface MonthItem {
     month: number
     year: number
   }
-  isCurrentMonth: boolean
+  isCurrent: boolean
   selected: boolean
   ts: number
 }
@@ -93,7 +93,7 @@ export interface YearItem {
   dateObject: {
     year: number
   }
-  isCurrentYear: boolean
+  isCurrent: boolean
   selected: boolean
   ts: number
 }
@@ -104,7 +104,7 @@ export interface QuarterItem {
     quarter: number
     year: number
   }
-  isCurrentQuarter: boolean
+  isCurrent: boolean
   selected: boolean
   ts: number
 }
@@ -153,7 +153,7 @@ function monthItem (
       month: getMonth(monthTs),
       year: getYear(monthTs)
     },
-    isCurrentMonth: isSameMonth(currentTs, monthTs),
+    isCurrent: isSameMonth(currentTs, monthTs),
     selected: valueTs !== null && matchDate(valueTs, monthTs, 'month'),
     ts: getTime(monthTs)
   }
@@ -169,7 +169,7 @@ function yearItem (
     dateObject: {
       year: getYear(yearTs)
     },
-    isCurrentYear: isSameYear(currentTs, yearTs),
+    isCurrent: isSameYear(currentTs, yearTs),
     selected: valueTs !== null && matchDate(valueTs, yearTs, 'year'),
     ts: getTime(yearTs)
   }
@@ -186,7 +186,7 @@ function quarterItem (
       quarter: getQuarter(quarterTs),
       year: getYear(quarterTs)
     },
-    isCurrentQuarter: isSameQuarter(currentTs, quarterTs),
+    isCurrent: isSameQuarter(currentTs, quarterTs),
     selected: valueTs !== null && matchDate(valueTs, quarterTs, 'quarter'),
     ts: getTime(quarterTs)
   }

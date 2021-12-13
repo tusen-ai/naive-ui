@@ -61,7 +61,7 @@ function useCalendar (
     localeRef,
     firstDayOfWeekRef,
     datePickerSlots,
-    scrollYearMonth
+    scrollPickerColumns
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -248,15 +248,18 @@ function useCalendar (
       sanitizeValue(newValue),
       type === 'date' || type === 'year'
     )
-    if (type === 'date') {
-      panelCommon.doClose()
-    } else if (type === 'month') {
-      panelCommon.disableTransitionOneTick()
-      scrollYearMonth(newValue)
-    } else if (type === 'year') {
-      panelCommon.doClose()
-    } else if (type === 'quarter') {
-      scrollYearMonth(newValue)
+    switch (type) {
+      case 'date':
+      case 'year':
+        panelCommon.doClose()
+        break
+      case 'month':
+        panelCommon.disableTransitionOneTick()
+        scrollPickerColumns(newValue)
+        break
+      case 'quarter':
+        scrollPickerColumns(newValue)
+        break
     }
   }
   function deriveDateInputValue (time?: number): void {

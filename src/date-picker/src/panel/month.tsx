@@ -23,6 +23,18 @@ export default defineComponent({
   },
   setup (props) {
     const useCalendarRef = useCalendar(props, props.type)
+    const getRenderContent = (item: YearItem | MonthItem | QuarterItem): number | string => {
+      switch (item.type) {
+        case 'year':
+          return item.dateObject.year
+        case 'month':
+          return item.dateObject.month + 1
+        case 'quarter':
+          return `Q ${item.dateObject.quarter}`
+        default:
+          return ''
+      }
+    }
     const renderItem = (
       item: YearItem | MonthItem | QuarterItem,
       i: number,
@@ -37,13 +49,7 @@ export default defineComponent({
             `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
             {
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`]:
-              item.type === 'year' && item.isCurrentYear
-                ? item.isCurrentYear
-                : item.type === 'month'
-                  ? item.isCurrentMonth
-                  : item.type === 'quarter'
-                    ? item.isCurrentQuarter
-                    : '',
+                item.isCurrent,
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
                 item.selected,
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
@@ -52,14 +58,7 @@ export default defineComponent({
           ]}
           onClick={() => handleDateClick(item)}
         >
-          { item.type === 'year'
-            ? item.dateObject.year
-            : item.type === 'month'
-              ? item.dateObject.month + 1
-              : item.type === 'quarter'
-                ? `Q ${item.dateObject.quarter}`
-                : ''
-          }
+          { getRenderContent(item) }
         </div>
       )
     }
@@ -78,9 +77,11 @@ export default defineComponent({
       <div
         ref="selfRef"
         tabindex={0}
-        class={`${mergedClsPrefix}-date-panel ${mergedClsPrefix}-date-panel--month ${mergedClsPrefix}-date-panel--${
-          type === 'quarter' ? 'quarter' : 'month'
-        }`}
+        class={[
+          `${mergedClsPrefix}-date-panel`,
+          `${mergedClsPrefix}-date-panel--month`,
+          `${mergedClsPrefix}-date-panel--${type === 'quarter' ? 'quarter' : 'month'}`
+        ]}
         onFocus={this.handlePanelFocus}
         onKeydown={this.handlePanelKeyDown}
       >
