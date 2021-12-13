@@ -131,16 +131,17 @@ function genStyle (sourceStyle) {
   return '<style scoped>\n' + rules.join('\n') + '</style>'
 }
 
-function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
+function genVueComponent (parts, fileName, relativeUrl) {
   const demoFileNameReg = /<!--DEMO_FILE_NAME-->/g
   const relativeUrlReg = /<!--URL-->/g
   const titleReg = /<!--TITLE_SLOT-->/g
   const contentReg = /<!--CONTENT_SLOT-->/
-  const codeReg = /<!--CODE_SLOT-->/
+  const tsCodeReg = /<!--TS_CODE_SLOT-->/
   const jsCodeReg = /<!--JS_CODE_SLOT-->/
   const scriptReg = /<!--SCRIPT_SLOT-->/
   const styleReg = /<!--STYLE_SLOT-->/
   const demoReg = /<!--DEMO_SLOT-->/
+  const languageTypeReg = /<!--LANGUAGE_TYPE_SLOT-->/
   let src = demoBlock
   src = src.replace(demoFileNameReg, fileName)
   src = src.replace(relativeUrlReg, relativeUrl)
@@ -151,14 +152,17 @@ function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
     src = src.replace(titleReg, parts.title)
   }
   if (parts.code) {
-    src = src.replace(codeReg, parts.code)
+    src = src.replace(tsCodeReg, parts.code)
   }
   if (parts.jsCode) {
     src = src.replace(jsCodeReg, parts.jsCode)
   }
-  if (parts.script && !noRunning) {
+  if (parts.script) {
     const startScriptTag = parts.language === 'ts' ? '<script lang="ts">\n' : '<script>\n'
     src = src.replace(scriptReg, startScriptTag + parts.script + '\n</script>')
+  }
+  if (parts.language) {
+    src = src.replace(languageTypeReg, parts.language)
   }
   if (parts.style) {
     const style = genStyle(parts.style)
@@ -182,7 +186,6 @@ function getFileName (resourcePath) {
 }
 
 function convertMd2Demo (text, { resourcePath, relativeUrl }) {
-  const noRunning = /<!--no-running-->/.test(text)
   const tokens = marked.lexer(text)
   const parts = getPartsOfDemo(tokens)
   const mergedParts = mergeParts(parts)
@@ -190,8 +193,7 @@ function convertMd2Demo (text, { resourcePath, relativeUrl }) {
   const vueComponent = genVueComponent(
     mergedParts,
     fileName,
-    relativeUrl,
-    noRunning
+    relativeUrl
   )
   return vueComponent
 }
