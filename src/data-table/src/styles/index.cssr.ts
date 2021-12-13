@@ -100,6 +100,9 @@ export default c([
         })
       ])
     ]),
+    cB('data-table-base-table-body', `
+      height: inherit;
+    `),
     cB('data-table-expand-trigger', 'cursor: pointer;'),
     cB('data-table-expand-placeholder', `
       margin-right: 8px;

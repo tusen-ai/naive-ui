@@ -516,7 +516,7 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-data-table-wrapper`}>
-          <MainTable ref="mainTableInstRef" />
+          <MainTable ref="mainTableInstRef">{this.$slots}</MainTable>
         </div>
         {this.pagination ? (
           <div class={`${mergedClsPrefix}-data-table__pagination`}>

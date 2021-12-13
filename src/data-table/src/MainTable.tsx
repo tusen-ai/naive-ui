@@ -99,7 +99,9 @@ export default defineComponent({
           showHeader={headerInBody}
           flexHeight={flexHeight}
           onResize={this.handleBodyResize}
-        />
+        >
+          {this.$slots}
+        </TableBody>
       </div>
     )
   }
