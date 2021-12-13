@@ -2,51 +2,51 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 import fadeInHeightExpandTranstion from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
 // vars:
-// --bezier
-// --color
-// --close-color
-// --close-color-hover
-// --close-color-pressed
-// --icon-color
-// --border
-// --title-text-color
-// --content-text-color
-// --line-height
-// --border-radius
-// --font-size
-// --title-font-weight
-// --icon-size
-// --icon-margin
-// --close-size
-// --close-margin
-// --padding
-// --icon-margin-left
-// --icon-margin-right
+// --n-bezier
+// --n-color
+// --n-close-color
+// --n-close-color-hover
+// --n-close-color-pressed
+// --n-icon-color
+// --n-border
+// --n-title-text-color
+// --n-content-text-color
+// --n-line-height
+// --n-border-radius
+// --n-font-size
+// --n-title-font-weight
+// --n-icon-size
+// --n-icon-margin
+// --n-close-size
+// --n-close-margin
+// --n-padding
+// --n-icon-margin-left
+// --n-icon-margin-right
 export default cB('alert', `
-  line-height: var(--line-height);
-  border-radius: var(--border-radius);
+  line-height: var(--n-line-height);
+  border-radius: var(--n-border-radius);
   position: relative;
-  transition: background-color .3s var(--bezier);
-  background-color: var(--color);
+  transition: background-color .3s var(--n-bezier);
+  background-color: var(--n-color);
   text-align: start;
 `, [
   cE('icon', {
-    color: 'var(--icon-color)'
+    color: 'var(--n-icon-color)'
   }),
   cB('alert-body', {
-    border: 'var(--border)',
-    padding: 'var(--padding)'
+    border: 'var(--n-border)',
+    padding: 'var(--n-padding)'
   }, [
     cE('title', {
-      color: 'var(--title-text-color)'
+      color: 'var(--n-title-text-color)'
     }),
     cE('content', {
-      color: 'var(--content-text-color)'
+      color: 'var(--n-content-text-color)'
     })
   ]
   ),
   fadeInHeightExpandTranstion({
-    originalTransition: 'transform .3s var(--bezier)',
+    originalTransition: 'transform .3s var(--n-bezier)',
     enterToProps: {
       transform: 'scale(1)'
     },
@@ -61,33 +61,33 @@ export default cB('alert', `
     align-items: center;
     justify-content: center;
     display: flex;
-    width: var(--icon-size);
-    height: var(--icon-size);
-    font-size: var(--icon-size);
-    margin: var(--icon-margin);
+    width: var(--n-icon-size);
+    height: var(--n-icon-size);
+    font-size: var(--n-icon-size);
+    margin: var(--n-icon-margin);
   `),
   cE('close', `
-    transition: color .3s var(--bezier);
+    transition: color .3s var(--n-bezier);
     position: absolute;
     right: 0;
     top: 0;
-    margin: var(--close-margin);
-    font-size: var(--close-size);
+    margin: var(--n-close-margin);
+    font-size: var(--n-close-size);
   `),
   cM('show-icon', [
     cB('alert-body', {
-      paddingLeft: 'calc(var(--icon-margin-left) + var(--icon-size) + var(--icon-margin-right))'
+      paddingLeft: 'calc(var(--n-icon-margin-left) + var(--n-icon-size) + var(--n-icon-margin-right))'
     })
   ]),
   cB('alert-body', `
-    border-radius: var(--border-radius);
-    transition: border-color .3s var(--bezier);
+    border-radius: var(--n-border-radius);
+    transition: border-color .3s var(--n-bezier);
   `, [
     cE('title', `
-      transition: color .3s var(--bezier);
+      transition: color .3s var(--n-bezier);
       font-size: 16px;
       line-height: 19px;
-      font-weight: var(--title-font-weight);
+      font-weight: var(--n-title-font-weight);
     `, [
       c('& +', [
         cE('content', {
@@ -96,11 +96,11 @@ export default cB('alert', `
       ])
     ]),
     cE('content', {
-      transition: 'color .3s var(--bezier)',
-      fontSize: 'var(--font-size)'
+      transition: 'color .3s var(--n-bezier)',
+      fontSize: 'var(--n-font-size)'
     })
   ]),
   cE('icon', {
-    transition: 'color .3s var(--bezier)'
+    transition: 'color .3s var(--n-bezier)'
   })
 ])
