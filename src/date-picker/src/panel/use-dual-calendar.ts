@@ -1,8 +1,7 @@
-import { inject, computed, watch, ref, ExtractPropTypes } from 'vue'
+import { inject, computed, watch, ref, ExtractPropTypes, PropType } from 'vue'
 import {
   addMonths,
   format,
-  getTime,
   getYear,
   getMonth,
   startOfMonth,
@@ -10,14 +9,23 @@ import {
   startOfSecond,
   startOfDay,
   set,
-  getDate
+  getDate,
+  getTime,
+  addMilliseconds,
+  parse
 } from 'date-fns'
 import { dateArray, DateItem, strictParse } from '../utils'
 import { usePanelCommon } from './use-panel-common'
-import { datePickerInjectionKey, Shortcuts } from '../interface'
+import { datePickerInjectionKey, Shortcuts, Value } from '../interface'
 
 const useDualCalendarProps = {
   ...usePanelCommon.props,
+  defaultTime: {
+    type: [Number, String, Array] as PropType<
+    Value | string | [string, string] | null
+    >,
+    default: null
+  },
   actions: {
     type: Array,
     default: () => ['clear', 'confirm']
@@ -372,11 +380,60 @@ function useDualCalendar (
   }
   function changeStartEndTime (startTime: number, endTime?: number): void {
     if (endTime === undefined) endTime = startTime
+    let startDefaultTime: number | string | undefined
+    let endDefaultTime: number | string | undefined
+    if (props.defaultTime) {
+      if (typeof props.defaultTime === 'string') {
+        startDefaultTime = props.defaultTime
+        endDefaultTime = props.defaultTime
+      } else if (Array.isArray(props.defaultTime)) {
+        startDefaultTime = props.defaultTime[0]
+        endDefaultTime = props.defaultTime[1]
+      }
+    }
+
     if (typeof startTime !== 'number') {
       startTime = getTime(startTime)
     }
+
+    if (type === 'datetimerange' && startDefaultTime) {
+      if (typeof startDefaultTime === 'string') {
+        const time = parse(startDefaultTime, 'HH:mm:ss', new Date())
+        if (isValid(time)) {
+          startTime = getTime(
+            set(startTime, {
+              hours: time.getHours(),
+              minutes: time.getMinutes(),
+              seconds: time.getSeconds(),
+              milliseconds: 0
+            })
+          )
+        }
+      } else if (typeof startDefaultTime === 'number') {
+        startTime = getTime(
+          addMilliseconds(startOfDay(startTime), startDefaultTime)
+        )
+      }
+    }
     if (typeof endTime !== 'number') {
       endTime = getTime(endTime)
+    }
+    if (type === 'datetimerange' && endDefaultTime) {
+      if (typeof endDefaultTime === 'string') {
+        const time = parse(endDefaultTime, 'HH:mm:ss', new Date())
+        if (isValid(time)) {
+          endTime = getTime(
+            set(endTime, {
+              hours: time.getHours(),
+              minutes: time.getMinutes(),
+              seconds: time.getSeconds(),
+              milliseconds: 0
+            })
+          )
+        }
+      } else if (typeof endDefaultTime === 'number') {
+        endTime = getTime(addMilliseconds(startOfDay(endTime), endDefaultTime))
+      }
     }
     panelCommon.doUpdateValue([startTime, endTime], false)
   }

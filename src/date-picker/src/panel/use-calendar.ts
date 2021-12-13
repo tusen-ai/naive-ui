@@ -13,14 +13,17 @@ import {
   startOfDay,
   startOfSecond,
   startOfMonth,
-  startOfYear
+  startOfYear,
+  addMilliseconds,
+  parse
 } from 'date-fns'
 import { dateArray, monthArray, strictParse, yearArray } from '../utils'
 import { usePanelCommon } from './use-panel-common'
 import {
   IsSingleDateDisabled,
   datePickerInjectionKey,
-  Shortcuts
+  Shortcuts,
+  Value
 } from '../interface'
 import type { DateItem, MonthItem, YearItem } from '../utils'
 import { VirtualListInst } from 'vueuc'
@@ -28,6 +31,12 @@ import { ScrollbarInst } from '../../../_internal'
 
 const useCalendarProps = {
   ...usePanelCommon.props,
+  defaultTime: {
+    type: [Number, String, Array] as PropType<
+    Value | string | [string, string] | null
+    >,
+    default: null
+  },
   actions: {
     type: Array as PropType<string[]>,
     default: () => ['now', 'clear', 'confirm']
@@ -219,6 +228,29 @@ function useCalendar (
       newValue = props.value
     } else {
       newValue = Date.now()
+    }
+    if (
+      type === 'datetime' &&
+      props.defaultTime !== null &&
+      !Array.isArray(props.defaultTime)
+    ) {
+      if (typeof props.defaultTime === 'string') {
+        const time = parse(props.defaultTime, 'HH:mm:ss', new Date())
+        if (isValid(time)) {
+          newValue = getTime(
+            set(newValue, {
+              hours: time.getHours(),
+              minutes: time.getMinutes(),
+              seconds: time.getSeconds(),
+              milliseconds: 0
+            })
+          )
+        }
+      } else if (typeof props.defaultTime === 'number') {
+        newValue = getTime(
+          addMilliseconds(startOfDay(newValue), props.defaultTime)
+        )
+      }
     }
     newValue = getTime(set(newValue, dateItem.dateObject))
     panelCommon.doUpdateValue(
