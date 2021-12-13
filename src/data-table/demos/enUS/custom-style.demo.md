@@ -1,4 +1,4 @@
-# Custom Style
+# Custom style
 
 Row: Set `row-class-name` prop to assign a class name to certain rows.
 

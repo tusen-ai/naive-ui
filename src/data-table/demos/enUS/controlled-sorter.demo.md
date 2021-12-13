@@ -1,4 +1,4 @@
-# Controlled Sorter
+# Controlled sorter
 
 If one of the column objects' `sortOrder` is set to `'ascend'`, `'descend'` or `false`. The sorting behavior the table will be in a controlled manner. If multiple columns' `sortOrder` are set to `'ascend'` or `'descend'`, only first column of them will be applied.
 

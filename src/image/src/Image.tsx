@@ -5,7 +5,6 @@ import {
   ref,
   PropType,
   toRef,
-  mergeProps,
   watchEffect,
   ImgHTMLAttributes
 } from 'vue'
@@ -97,50 +96,51 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, imgProps = {} } = this
+    const { mergedClsPrefix, imgProps = {}, $attrs } = this
+    const imgNode = (
+      <img
+        {...imgProps}
+        class={[this.groupId, imgProps.class]}
+        ref="imageRef"
+        width={this.width || imgProps.width}
+        height={this.height || imgProps.height}
+        src={this.showError ? this.fallbackSrc : this.src || imgProps.src}
+        alt={this.alt || imgProps.alt}
+        aria-label={this.alt || imgProps.alt}
+        onClick={this.click}
+        onError={this.mergedOnError}
+        onLoad={this.mergedOnLoad}
+        style={[imgProps.style || '', { objectFit: this.objectFit }]}
+        data-error={this.showError}
+        data-preview-src={this.previewSrc || this.src}
+      />
+    )
 
-    const imgWrapperNode = h(
-      'div',
-      mergeProps(this.$attrs, {
-        role: 'none',
-        class: [
+    return (
+      <div
+        {...$attrs}
+        role="none"
+        class={[
+          $attrs.class,
           `${mergedClsPrefix}-image`,
           (this.previewDisabled || this.showError) &&
             `${mergedClsPrefix}-image--preview-disabled`
-        ]
-      }),
-      [
-        <img
-          {...imgProps}
-          class={[this.groupId, imgProps.class]}
-          ref="imageRef"
-          width={this.width || imgProps.width}
-          height={this.height || imgProps.height}
-          src={this.showError ? this.fallbackSrc : this.src || imgProps.src}
-          alt={this.alt || imgProps.alt}
-          aria-label={this.alt || imgProps.alt}
-          onClick={this.click}
-          onError={this.mergedOnError}
-          onLoad={this.mergedOnLoad}
-          style={[imgProps.style || '', { objectFit: this.objectFit }]}
-          data-error={this.showError}
-          data-preview-src={this.previewSrc || this.src}
-        />
-      ]
-    )
-
-    return this.groupId ? (
-      imgWrapperNode
-    ) : (
-      <NImagePreview
-        clsPrefix={mergedClsPrefix}
-        ref="previewInstRef"
-        showToolbar={this.showToolbar}
+        ]}
       >
-        {{
-          default: () => imgWrapperNode
-        }}
-      </NImagePreview>
+        {this.groupId ? (
+          imgNode
+        ) : (
+          <NImagePreview
+            clsPrefix={mergedClsPrefix}
+            ref="previewInstRef"
+            showToolbar={this.showToolbar}
+          >
+            {{
+              default: () => imgNode
+            }}
+          </NImagePreview>
+        )}
+      </div>
     )
   }
 })

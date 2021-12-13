@@ -75,9 +75,6 @@ export interface UseRadio {
   handleRadioInputChange: () => void
   handleRadioInputBlur: () => void
   handleRadioInputFocus: () => void
-  handleKeyUp: (e: KeyboardEvent) => void
-  handleMouseDown: () => void
-  handleClick: () => void
 }
 
 function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
@@ -155,24 +152,6 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
   function handleRadioInputFocus (): void {
     focusRef.value = true
   }
-  function handleKeyUp (e: KeyboardEvent): void {
-    switch (e.code) {
-      case 'Enter':
-      case 'NumpadEnter':
-        inputRef.value?.click()
-    }
-  }
-  function handleMouseDown (): void {
-    if (mergedDisabledRef.value) return
-    setTimeout(() => {
-      if (!labelRef.value?.contains(document.activeElement)) {
-        inputRef.value?.focus()
-      }
-    }, 0)
-  }
-  function handleClick (): void {
-    inputRef.value?.click()
-  }
   return {
     mergedClsPrefix: NRadioGroup
       ? NRadioGroup.mergedClsPrefixRef
@@ -187,10 +166,7 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
     mergedSize: mergedSizeRef,
     handleRadioInputChange,
     handleRadioInputBlur,
-    handleRadioInputFocus,
-    handleKeyUp,
-    handleMouseDown,
-    handleClick
+    handleRadioInputFocus
   }
 }
 
