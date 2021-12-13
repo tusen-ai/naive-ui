@@ -1,4 +1,4 @@
-# Large Data
+# Large data
 
 Use `virtual-scroll` to deal with large date. Note that you need to set `max-height` at the same time.
 

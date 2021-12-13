@@ -19,7 +19,7 @@
           <edit-in-code-sandbox-button
             style="padding: 0; margin-right: 6px"
             size="tiny"
-            :code="sfcCode"
+            :code="showLanguage === 'TS' ? sfcTsCode : sfcJsCode"
           />
         </template>
         {{ t('editInCodeSandbox') }}
@@ -41,11 +41,25 @@
             depth="3"
             style="padding: 0; margin-right: 6px"
             size="tiny"
-            :code="sfcCode"
+            :code="showLanguage === 'TS' ? sfcTsCode : sfcJsCode"
             :success-text="t('copySuccess')"
           />
         </template>
         {{ t('copyCode') }}
+      </n-tooltip>
+      <n-tooltip v-if="sfcCodeIsTsType">
+        <template #trigger>
+          <n-button
+            style="padding: 0; margin-right: 6px"
+            size="tiny"
+            text
+            depth="3"
+            @click="toggleLanguageChange"
+          >
+          {{showLanguage}}
+          </n-button>
+        </template>
+        {{ t(showLanguage) }}
       </n-tooltip>
       <n-tooltip ref="expandCodeButtonRef">
         <template #trigger>
@@ -70,7 +84,8 @@
     <slot name="demo" />
     <template v-if="showCode" #footer>
       <n-scrollbar x-scrollable content-style="padding: 20px 24px;">
-        <n-code language="html" :code="sfcCode" />
+        <n-code v-if='showLanguage === "TS"' language="html" :code="sfcTsCode" />
+        <n-code v-else language="html" :code="sfcJsCode" />
       </n-scrollbar>
     </template>
   </n-card>
@@ -108,6 +123,10 @@ export default {
     relativeUrl: {
       type: String,
       required: true
+    },
+    jsCode: {
+      type: String,
+      required: false
     }
   },
   setup (props) {
@@ -117,22 +136,30 @@ export default {
       return !(isDebugDemo && displayModeRef.value !== 'debug')
     })
     const showCodeRef = ref(false)
+    const showLanguageRef = ref('JS')
     const expandCodeButtonRef = ref(null)
     watch(showCodeRef, () => {
       nextTick(() => {
         expandCodeButtonRef.value.syncPosition()
       })
     })
+    const sfcCodeIsTsType = decodeURIComponent(props.code).includes('<script lang="ts">')
     return {
       expandCodeButtonRef,
       showDemo: showDemoRef,
       showCode: showCodeRef,
-      sfcCode: decodeURIComponent(props.code),
+      showLanguage: showLanguageRef,
+      sfcTsCode: decodeURIComponent(props.code),
+      sfcJsCode: decodeURIComponent(props.jsCode),
+      sfcCodeIsTsType,
       toggleCodeDisplay () {
         showCodeRef.value = !showCodeRef.value
       },
       handleTitleClick: () => {
         window.location.hash = `#${props.demoFileName}`
+      },
+      toggleLanguageChange () {
+        showLanguageRef.value = showLanguageRef.value === 'JS' ? 'TS' : 'JS'
       },
       ...i18n({
         'zh-CN': {
@@ -141,7 +168,9 @@ export default {
           editOnGithub: '在 GitHub 中编辑',
           editInCodeSandbox: '在 CodeSandbox 中编辑',
           copyCode: '复制代码',
-          copySuccess: '复制成功'
+          copySuccess: '复制成功',
+          JS: '切换到 TypeScript',
+          TS: '切换到 JavaScript'
         },
         'en-US': {
           show: 'Show Code',
@@ -149,7 +178,9 @@ export default {
           editOnGithub: 'Edit on GitHub',
           editInCodeSandbox: 'Edit in CodeSandbox',
           copyCode: 'Copy Code',
-          copySuccess: 'Successfully Copied'
+          copySuccess: 'Successfully Copied',
+          JS: 'Switch to TypeScript',
+          TS: 'Switch to JavaScript'
         }
       })
     }

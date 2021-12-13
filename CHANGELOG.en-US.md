@@ -1,5 +1,56 @@
 # CHANGELOG
 
+## Pending
+
+### Breaking Changes
+
+- `n-button` can no longer be clicked under `loading` status, closes [#1628](https://github.com/TuSimple/naive-ui/issues/1628).
+
+### Fixes
+
+- Fix `n-alert`'s `header` slot unable to display normally.
+- Fix `n-data-table`'s pagination `onUpdatePageSize` prop does't trigger, closes [#1774](https://github.com/TuSimple/naive-ui/issues/1774).
+- Fix `n-data-table` can select rows when table is loading, closes [#1812](https://github.com/TuSimple/naive-ui/issues/1812).
+- Fix `n-tag` line-height is too low that clamps the content.
+- Fix `n-select` displays with mistake in input if `filterable` is `true`, closes [#1823](https://github.com/TuSimple/naive-ui/issues/1823).
+- Fix `n-page-header`'s content has margin-top when header is not displayed, closes [#1795](https://github.com/TuSimple/naive-ui/issues/1795).
+- Fix `n-avatar` `color` prop not working.
+- Fix `n-avatar`'s inner icon has wrong size.
+- Fix `n-image` lacks scoped style's scope-id, closes [#1788](https://github.com/TuSimple/naive-ui/issues/1788).
+- Fix `n-radio` click event will be triggered twice, closes [#1680](https://github.com/TuSimple/naive-ui/issues/1680).
+- Fix `n-data-table` layout display incorrect when the table is empty and min-height set, closes [#1809](https://github.com/TuSimple/naive-ui/issues/1809).
+- Fix `n-data-table`'s summary has hover style.
+
+### Feats
+
+- `n-tree-select` add `menu-props` prop.
+- `n-tree-select` add `action` slot, closes [#1765](https://github.com/TuSimple/naive-ui/issues/1765).
+- `n-tree-select` add `empty` slot.
+- `n-cascader` add `empty` slot.
+- `n-popselect` add `action` slot.
+- `n-popselect` add `empty` slot.
+- `n-data-table` will check all if indeterminate header checkbox is clicked, closes [#1827](https://github.com/TuSimple/naive-ui/issues/1827).
+- `n-button` uses `n` as CSS vars prefix, closes [#1808](https://github.com/TuSimple/naive-ui/issues/1808).
+
+### i18n
+
+- Add zhTW locale.
+
+## 2.21.5（2021-12-07）
+
+### Fixes
+
+- Fix `n-input` click clear icon does't trigger `change` event, closes [#1754](https://github.com/TuSimple/naive-ui/issues/1754).
+- Fix `n-input-number` the cursor moves when press arrow keys to change value, closes [#1759](https://github.com/TuSimple/naive-ui/issues/1759).
+
+### Feats
+
+- `n-date-picker`'s default format follows i18n.
+
+### i18n
+
+- Add frFR locale.
+
 ## 2.21.4 (2021-12-06)
 
 ### Fixes
@@ -10,7 +61,7 @@
 - Fix `n-form`'s `FormValidate` type lacks `shouldRuleBeApplied` parameter, closes [#1747](https://github.com/TuSimple/naive-ui/issues/1747).
 - Fix `n-upload` is displayed vertically in `n-form` in `image-card` mode, closes [#1746](https://github.com/TuSimple/naive-ui/issues/1746).
 - Fix `n-upload`'s file list's top margin if trigger is hidden.
-- Fix `n-upload` shows normal file status when response has 4xx status, closes [#1741](https://agithub.com/TuSimple/naive-ui/issues/1741).
+- Fix `n-upload` shows normal file status when response has 4xx status, closes [#1741](https://github.com/TuSimple/naive-ui/issues/1741).
 
 ### Feats
 

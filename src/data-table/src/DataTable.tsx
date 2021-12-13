@@ -7,7 +7,6 @@ import {
   PropType,
   ExtractPropTypes,
   toRef,
-  renderSlot,
   CSSProperties,
   Transition
 } from 'vue'
@@ -15,7 +14,6 @@ import { createId } from 'seemly'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
-import { NEmpty } from '../../empty'
 import { NPagination } from '../../pagination'
 import { PaginationProps } from '../../pagination/src/Pagination'
 import { warn, createKey } from '../../_utils'
@@ -518,27 +516,7 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-data-table-wrapper`}>
-          <MainTable ref="mainTableInstRef">
-            {{
-              default: () =>
-                this.paginatedData.length === 0 ? (
-                  <div
-                    class={[
-                      `${mergedClsPrefix}-data-table-empty`,
-                      this.loading &&
-                        `${mergedClsPrefix}-data-table-empty--hide`
-                    ]}
-                  >
-                    {renderSlot(this.$slots, 'empty', undefined, () => [
-                      <NEmpty
-                        theme={this.mergedTheme.peers.Empty}
-                        themeOverrides={this.mergedTheme.peerOverrides.Empty}
-                      />
-                    ])}
-                  </div>
-                ) : null
-            }}
-          </MainTable>
+          <MainTable ref="mainTableInstRef" />
         </div>
         {this.pagination ? (
           <div class={`${mergedClsPrefix}-data-table__pagination`}>

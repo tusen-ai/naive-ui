@@ -1,4 +1,4 @@
-# Unbordered & Single Line
+# Unbordered & single Line
 
 ```html
 <n-space vertical :size="12">

@@ -1,4 +1,4 @@
-# Basic Usage
+# Basic usage
 
 ```html
 <n-data-table :columns="columns" :data="data" :pagination="pagination" />

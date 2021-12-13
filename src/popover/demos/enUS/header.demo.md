@@ -1,4 +1,4 @@
-# With Header
+# With header
 
 Use `header` slot to customize header.
 

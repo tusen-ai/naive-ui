@@ -166,7 +166,6 @@ describe('notification-provider', () => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const container = document.querySelector('.n-notification-container')!
     expect(container).not.toBeFalsy()
-    console.log(container.outerHTML)
     expect(
       container.classList.contains('n-notification-container--top-right')
     ).toEqual(true)

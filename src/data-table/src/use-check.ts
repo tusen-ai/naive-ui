@@ -89,6 +89,7 @@ export function useCheck (
     uncontrolledCheckedRowKeysRef.value = keys
   }
   function doCheck (rowKey: RowKey | RowKey[]): void {
+    if (props.loading) return
     doUpdateCheckedRowKeys(
       treeMateRef.value.check(rowKey, mergedCheckedRowKeysRef.value, {
         cascade: props.cascade
@@ -96,6 +97,7 @@ export function useCheck (
     )
   }
   function doUncheck (rowKey: RowKey | RowKey[]): void {
+    if (props.loading) return
     doUpdateCheckedRowKeys(
       treeMateRef.value.uncheck(rowKey, mergedCheckedRowKeysRef.value, {
         cascade: props.cascade
@@ -104,7 +106,7 @@ export function useCheck (
   }
   function doCheckAll (checkWholeTable: boolean = false): void {
     const { value: column } = selectionColumnRef
-    if (!column) return
+    if (!column || props.loading) return
     const rowKeysToCheck: RowKey[] = []
     ;(checkWholeTable
       ? treeMateRef.value.treeNodes
@@ -123,7 +125,7 @@ export function useCheck (
   }
   function doUncheckAll (checkWholeTable: boolean = false): void {
     const { value: column } = selectionColumnRef
-    if (!column) return
+    if (!column || props.loading) return
     const rowKeysToUncheck: RowKey[] = []
     ;(checkWholeTable
       ? treeMateRef.value.treeNodes

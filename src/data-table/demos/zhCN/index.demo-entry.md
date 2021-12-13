@@ -40,9 +40,10 @@ virtual
 custom-filter-menu
 tree
 flex-height
+striped
 fixed-column-debug
 scroll-debug
-striped
+height-debug
 ```
 
 ## API
@@ -124,7 +125,7 @@ striped
 
 #### DataTableCreateSummary Type
 
-```__ts
+```ts
 type DataTableCreateSummary = (
   pageData: RowData[]
 ) =>
@@ -146,7 +147,7 @@ type DataTableCreateSummary = (
 
 #### SortState Type
 
-```__ts
+```ts
 type SortState = {
   columnKey: string | number,
   sorter: 'default' | function | boolean,

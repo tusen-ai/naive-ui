@@ -9,13 +9,16 @@ import {
   onUnmounted,
   PropType,
   CSSProperties,
-  computed
+  computed,
+  renderSlot,
+  Fragment
 } from 'vue'
 import { pxfy, repeat } from 'seemly'
 import { VirtualList, VirtualListInst } from 'vueuc'
 import { c } from '../../../_utils/cssr'
 import { NScrollbar, ScrollbarInst } from '../../../_internal'
 import { formatLength } from '../../../_utils'
+import { NEmpty } from '../../../empty'
 import {
   dataTableInjectionKey,
   RowKey,
@@ -160,6 +163,7 @@ export default defineComponent({
       rowPropsRef,
       maxHeightRef,
       stripedRef,
+      loadingRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -314,6 +318,7 @@ export default defineComponent({
       mergedTheme: mergedThemeRef,
       scrollX: scrollXRef,
       cols: colsRef,
+      loading: loadingRef,
       paginatedData: computed(() => {
         const { value: striped } = stripedRef
         return paginatedDataRef.value.map(
@@ -372,6 +377,7 @@ export default defineComponent({
       maxHeight,
       mergedTableLayout,
       flexHeight,
+      showHeader,
       onResize,
       setHeaderScrollLeft
     } = this
@@ -389,7 +395,11 @@ export default defineComponent({
       minWidth: formatLength(scrollX) || '100%'
     }
     if (scrollX) contentStyle.width = '100%'
-    return (
+
+    const empty = this.paginatedData.length === 0
+    const shouldDisplaySomeTablePart = showHeader || !empty
+
+    const tableNode = (
       <NScrollbar
         ref="scrollbarInstRef"
         scrollable={scrollable || isBasicAutoLayout}
@@ -423,7 +433,6 @@ export default defineComponent({
               mergedSortState,
               mergedExpandedRowKeySet,
               componentId,
-              showHeader,
               hasChildren,
               firstContentfulColIndex,
               rowProps,
@@ -546,6 +555,7 @@ export default defineComponent({
                   key={rowKey}
                   class={[
                     `${mergedClsPrefix}-data-table-tr`,
+                    isSummary && `${mergedClsPrefix}-data-table-tr--summary`,
                     striped && `${mergedClsPrefix}-data-table-tr--striped`,
                     mergedRowClassName
                   ]}
@@ -780,5 +790,34 @@ export default defineComponent({
         }}
       </NScrollbar>
     )
+
+    if (empty) {
+      const emptyNode = (
+        <div
+          class={[
+            `${mergedClsPrefix}-data-table-empty`,
+            this.loading && `${mergedClsPrefix}-data-table-empty--hide`
+          ]}
+        >
+          {renderSlot(this.$slots, 'empty', undefined, () => [
+            <NEmpty
+              theme={this.mergedTheme.peers.Empty}
+              themeOverrides={this.mergedTheme.peerOverrides.Empty}
+            />
+          ])}
+        </div>
+      )
+      if (shouldDisplaySomeTablePart) {
+        return (
+          <>
+            {tableNode}
+            {emptyNode}
+          </>
+        )
+      } else {
+        return emptyNode
+      }
+    }
+    return tableNode
   }
 })

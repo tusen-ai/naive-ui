@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.21.4",
+  "version": "2.21.5",
   "description": "A Vue 3 Component Library. Fairly Complete, Customizable Themes, Uses TypeScript, Not Too Slow",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -62,6 +62,7 @@
     ]
   },
   "devDependencies": {
+    "esbuild": "^0.13.14",
     "@babel/eslint-parser": "^7.15.8",
     "@babel/generator": "^7.12.11",
     "@babel/parser": "^7.12.11",
