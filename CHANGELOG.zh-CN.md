@@ -36,6 +36,12 @@
 
 - 新增 zhTW locale
 
+## 2.21.5（2021-12-13）
+
+### Fixes
+
+- 修复 `n-data-table` 固定 group column box-shadow 错误和 right fixed column 的渲染顺序错误，关闭 [#1832](https://github.com/TuSimple/naive-ui/issues/1832)
+
 ## 2.21.5（2021-12-07）
 
 ### Fixes
