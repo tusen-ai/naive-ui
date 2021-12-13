@@ -19,10 +19,7 @@ function getPartsOfDemo (text) {
       contentTokens.push(token)
     }
   }
-  const languageArr = text.match(/<script .*?lang="(.+?)"/)
-  let languageType
-  if (!languageArr || !languageArr.length) languageType = 'js'
-  else languageType = languageArr[1]
+  const languageType = text.includes('lang="ts"') ? 'ts' : 'js'
   return {
     template,
     script,
@@ -36,15 +33,13 @@ function getPartsOfDemo (text) {
 }
 
 function convertVue2Demo (content, { resourcePath, relativeUrl }) {
-  const noRunning = /<!--no-running-->/.test(content)
   const parts = getPartsOfDemo(content)
   const mergedParts = mergeParts(parts)
   const [fileName] = getFileName(resourcePath)
   const vueComponent = genVueComponent(
     mergedParts,
     fileName,
-    relativeUrl,
-    noRunning
+    relativeUrl
   )
   return vueComponent
 }

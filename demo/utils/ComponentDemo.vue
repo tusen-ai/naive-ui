@@ -1,8 +1,8 @@
 <template>
   <n-card
     v-if="showDemo"
-    class="demo-card"
     :id="demoFileName"
+    class="demo-card"
     :segmented="{
       footer: true
     }"
@@ -19,7 +19,7 @@
           <edit-in-code-sandbox-button
             style="padding: 0; margin-right: 6px"
             size="tiny"
-            :code="showLanguage === 'TS' ? sfcTsCode : sfcJsCode"
+            :code="showTs ? sfcTsCode : sfcJsCode"
           />
         </template>
         {{ t('editInCodeSandbox') }}
@@ -41,13 +41,13 @@
             depth="3"
             style="padding: 0; margin-right: 6px"
             size="tiny"
-            :code="showLanguage === 'TS' ? sfcTsCode : sfcJsCode"
+            :code="showTs ? sfcTsCode : sfcJsCode"
             :success-text="t('copySuccess')"
           />
         </template>
         {{ t('copyCode') }}
       </n-tooltip>
-      <n-tooltip v-if="sfcCodeIsTsType">
+      <n-tooltip v-if="languageType === 'ts'">
         <template #trigger>
           <n-button
             style="padding: 0; margin-right: 6px"
@@ -56,10 +56,10 @@
             depth="3"
             @click="toggleLanguageChange"
           >
-          {{showLanguage}}
+            {{ showTs ? 'TS' : 'JS' }}
           </n-button>
         </template>
-        {{ t(showLanguage) }}
+        {{ t(showTs ? 'TS' : 'JS') }}
       </n-tooltip>
       <n-tooltip ref="expandCodeButtonRef">
         <template #trigger>
@@ -84,7 +84,7 @@
     <slot name="demo" />
     <template v-if="showCode" #footer>
       <n-scrollbar x-scrollable content-style="padding: 20px 24px;">
-        <n-code v-if='showLanguage === "TS"' language="html" :code="sfcTsCode" />
+        <n-code v-if="showTs" language="html" :code="sfcTsCode" />
         <n-code v-else language="html" :code="sfcJsCode" />
       </n-scrollbar>
     </template>
@@ -112,7 +112,7 @@ export default {
       type: String,
       required: true
     },
-    code: {
+    tsCode: {
       type: String,
       required: true
     },
@@ -126,7 +126,11 @@ export default {
     },
     jsCode: {
       type: String,
-      required: false
+      required: true
+    },
+    languageType: {
+      type: String,
+      default: 'js'
     }
   },
   setup (props) {
@@ -136,22 +140,20 @@ export default {
       return !(isDebugDemo && displayModeRef.value !== 'debug')
     })
     const showCodeRef = ref(false)
-    const showLanguageRef = ref('JS')
+    const showTsRef = ref(false)
     const expandCodeButtonRef = ref(null)
     watch(showCodeRef, () => {
       nextTick(() => {
         expandCodeButtonRef.value.syncPosition()
       })
     })
-    const sfcCodeIsTsType = decodeURIComponent(props.code).includes('<script lang="ts">')
     return {
       expandCodeButtonRef,
       showDemo: showDemoRef,
       showCode: showCodeRef,
-      showLanguage: showLanguageRef,
-      sfcTsCode: decodeURIComponent(props.code),
+      showTs: showTsRef,
+      sfcTsCode: decodeURIComponent(props.tsCode),
       sfcJsCode: decodeURIComponent(props.jsCode),
-      sfcCodeIsTsType,
       toggleCodeDisplay () {
         showCodeRef.value = !showCodeRef.value
       },
@@ -159,7 +161,7 @@ export default {
         window.location.hash = `#${props.demoFileName}`
       },
       toggleLanguageChange () {
-        showLanguageRef.value = showLanguageRef.value === 'JS' ? 'TS' : 'JS'
+        showTsRef.value = !showTsRef.value
       },
       ...i18n({
         'zh-CN': {
