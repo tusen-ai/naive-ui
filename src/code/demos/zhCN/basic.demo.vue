@@ -15,7 +15,6 @@ function sleep (ms = 1000) {
 `"
         language="javascript"
       />
-
       <n-code
         :code="`
 def say_hello():

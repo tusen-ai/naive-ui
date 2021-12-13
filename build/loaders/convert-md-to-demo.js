@@ -54,7 +54,7 @@ function getPartsOfDemo (tokens) {
   }
 }
 
-function mergeParts (parts) {
+function mergeParts ({ parts, isVue }) {
   const mergedParts = {
     ...parts
   }
@@ -64,18 +64,24 @@ function mergeParts (parts) {
   mergedParts.jsCode = ''
   let jsCode = ''
   if (parts.template) {
-    mergedParts.code += `<template>\n${parts.template
-      .split('\n')
-      .map((line) => (line.length ? '  ' + line : line))
-      .join('\n')}\n</template>`
-    mergedParts.jsCode = mergedParts.code
+    if (isVue) {
+      mergedParts.code += `<template>${parts.template}</template>`
+      mergedParts.jsCode += `<template>${parts.template}</template>`
+    } else {
+      mergedParts.code += `<template>\n${parts.template
+        .split('\n')
+        .map((line) => (line.length ? '  ' + line : line))
+        .join('\n')}\n</template>`
+      mergedParts.jsCode = mergedParts.code
+    }
   }
   if (parts.script) {
     if (parts.template) {
       mergedParts.code += '\n\n'
       mergedParts.jsCode += '\n\n'
     }
-    const startScriptTag = parts.language === 'ts' ? '<script lang="ts">' : '<script>'
+    const startScriptTag =
+      parts.language === 'ts' ? '<script lang="ts">' : '<script>'
     mergedParts.code += `${startScriptTag}
 ${parts.script}
 </script>`
@@ -158,7 +164,8 @@ function genVueComponent (parts, fileName, relativeUrl) {
     src = src.replace(jsCodeReg, parts.jsCode)
   }
   if (parts.script) {
-    const startScriptTag = parts.language === 'ts' ? '<script lang="ts">\n' : '<script>\n'
+    const startScriptTag =
+      parts.language === 'ts' ? '<script lang="ts">\n' : '<script>\n'
     src = src.replace(scriptReg, startScriptTag + parts.script + '\n</script>')
   }
   if (parts.language) {
@@ -188,13 +195,9 @@ function getFileName (resourcePath) {
 function convertMd2Demo (text, { resourcePath, relativeUrl }) {
   const tokens = marked.lexer(text)
   const parts = getPartsOfDemo(tokens)
-  const mergedParts = mergeParts(parts)
+  const mergedParts = mergeParts({ parts, isVue: false })
   const [fileName] = getFileName(resourcePath)
-  const vueComponent = genVueComponent(
-    mergedParts,
-    fileName,
-    relativeUrl
-  )
+  const vueComponent = genVueComponent(mergedParts, fileName, relativeUrl)
   return vueComponent
 }
 
