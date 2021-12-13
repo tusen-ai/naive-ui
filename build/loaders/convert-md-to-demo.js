@@ -99,7 +99,9 @@ ${jsCode}
       mergedParts.code += '\n\n'
       mergedParts.jsCode += '\n\n'
     }
-    const style = `<style>
+    const style = isVue
+      ? `<style>${parts.style}</style>`
+      : `<style>
 ${parts.style}
 </style>`
     mergedParts.code += style
