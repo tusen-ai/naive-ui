@@ -79,8 +79,7 @@ export default defineComponent({
         tabindex={0}
         class={[
           `${mergedClsPrefix}-date-panel`,
-          `${mergedClsPrefix}-date-panel--month`,
-          `${mergedClsPrefix}-date-panel--${type === 'quarter' ? 'quarter' : 'month'}`
+          `${mergedClsPrefix}-date-panel--month`
         ]}
         onFocus={this.handlePanelFocus}
         onKeydown={this.handlePanelKeyDown}
