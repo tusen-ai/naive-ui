@@ -1528,7 +1528,7 @@
 ### Fixes
 
 - 修正了 `n-radio` 无法聚焦的问题
-- 修正了 `n-data-table` 的 `max-height` 样式失效的问题 <https://bugs.chromium.org/p/chromium/issues/detail?id=1107223>
+- 修正了 `n-data-table` 的 `max-height` 样式失效的问题 https://bugs.chromium.org/p/chromium/issues/detail?id=1107223
 
 ### Refactors
 
