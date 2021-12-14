@@ -31,6 +31,7 @@
 - `n-popselect` add `empty` slot.
 - `n-data-table` will check all if indeterminate header checkbox is clicked, closes [#1827](https://github.com/TuSimple/naive-ui/issues/1827).
 - `n-button` uses `n` as CSS vars prefix, closes [#1808](https://github.com/TuSimple/naive-ui/issues/1808).
+- `n-date-picker` add `default-time` prop
 
 ### i18n
 
@@ -1526,7 +1527,7 @@ See vue3.md
 ### Fixes
 
 - Fix the problem that `n-radio` can not be focused.
-- Fix the problem that `n-data-table`'s `max-height` style is broken. https://bugs.chromium.org/p/chromium/issues/detail?id=1107223
+- Fix the problem that `n-data-table`'s `max-height` style is broken. <https://bugs.chromium.org/p/chromium/issues/detail?id=1107223>
 
 ### Refactors
 

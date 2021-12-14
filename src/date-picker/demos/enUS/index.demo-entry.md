@@ -12,6 +12,7 @@ datetimerange
 month
 year
 size
+default-time
 disabled
 disabled-time
 actions
