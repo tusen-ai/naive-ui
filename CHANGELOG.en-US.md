@@ -22,6 +22,7 @@
 - Fix `n-data-table`'s summary has hover style.
 - Fix `n-data-table` fixed group column box-shadow error and right fixed column order error, closes [#1832](https://github.com/TuSimple/naive-ui/issues/1832).
 - Fix `n-anchor`'s hover & active style.
+- Fix `n-data-table`'s header fixed column style on data is empty.
 
 ### Feats
 
