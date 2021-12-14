@@ -33,6 +33,7 @@
 - `n-button` uses `n` as CSS vars prefix, closes [#1808](https://github.com/TuSimple/naive-ui/issues/1808).
 - `n-alert` uses `n` as CSS vars prefix.
 - `n-date-picker`'s `type` prop support `quarter` option.
+- `n-anchor` uses `n` as CSS vars prefix.
 
 ### i18n
 

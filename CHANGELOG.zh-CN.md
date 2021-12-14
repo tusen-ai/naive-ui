@@ -33,6 +33,7 @@
 - `n-button` 的 CSS 变量使用 `n` 作为前缀, 关闭 [#1808](https://github.com/TuSimple/naive-ui/issues/1808)
 - `n-alert` 的 CSS 变量使用 `n` 作为前缀
 - `n-date-picker` 属性 `type` 支持 `quarter` 选项
+- `n-anchor` 的 CSS 变量使用 `n` 作为前缀
 
 ### i18n
 
