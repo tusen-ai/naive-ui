@@ -8,6 +8,7 @@
     }"
   >
     <n-layout-sider
+      v-if="showSider"
       :native-scrollbar="false"
       :collapsed-width="0"
       collapse-mode="transform"
@@ -15,7 +16,6 @@
       collapsed-trigger-style="top: 240px; right: -20px;"
       bordered
       show-trigger="arrow-circle"
-      v-if="showSider"
     >
       <n-menu
         :value="menuValue"
@@ -25,6 +25,7 @@
     </n-layout-sider>
     <n-layout
       ref="layoutInstRef"
+      :scrollbar-props="layoutScrollbarProps"
       :native-scrollbar="false"
       :position="isMobile || showSider ? 'static' : 'absolute'"
       content-style="min-height: calc(100vh - var(--header-height)); display: flex; flex-direction: column;"
@@ -78,6 +79,9 @@ export default {
     const isTabletRef = useIsTablet()
 
     return {
+      layoutScrollbarProps: {
+        containerClass: 'document-scroll-container'
+      },
       renderMenuLabel,
       showSider: useMemo(() => {
         return !isMobileRef.value && !isTabletRef.value
