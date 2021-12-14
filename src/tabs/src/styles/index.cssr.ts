@@ -24,6 +24,7 @@ import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
 // --font-weight-strong
 // --tab-color-segment
 export default cB('tabs', `
+  box-sizing: border-box;
   width: 100%;
   transition:
     background-color .3s var(--bezier),

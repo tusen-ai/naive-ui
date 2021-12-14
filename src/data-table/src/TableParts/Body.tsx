@@ -136,6 +136,7 @@ export default defineComponent({
   },
   setup (props) {
     const {
+      slots: dataTableSlots,
       mergedExpandedRowKeysRef,
       mergedClsPrefixRef,
       mergedThemeRef,
@@ -310,6 +311,7 @@ export default defineComponent({
       })
     })
     return {
+      dataTableSlots,
       componentId,
       scrollbarInstRef,
       virtualListRef,
@@ -799,7 +801,7 @@ export default defineComponent({
             this.loading && `${mergedClsPrefix}-data-table-empty--hide`
           ]}
         >
-          {renderSlot(this.$slots, 'empty', undefined, () => [
+          {renderSlot(this.dataTableSlots, 'empty', undefined, () => [
             <NEmpty
               theme={this.mergedTheme.peers.Empty}
               themeOverrides={this.mergedTheme.peerOverrides.Empty}
