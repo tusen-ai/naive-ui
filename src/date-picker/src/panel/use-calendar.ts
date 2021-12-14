@@ -14,10 +14,15 @@ import {
   startOfSecond,
   startOfMonth,
   startOfYear,
-  addMilliseconds,
-  parse
+  addMilliseconds
 } from 'date-fns'
-import { dateArray, monthArray, strictParse, yearArray } from '../utils'
+import {
+  convertTimeToMilliseconds,
+  dateArray,
+  monthArray,
+  strictParse,
+  yearArray
+} from '../utils'
 import { usePanelCommon } from './use-panel-common'
 import {
   IsSingleDateDisabled,
@@ -31,12 +36,9 @@ import { ScrollbarInst } from '../../../_internal'
 
 const useCalendarProps = {
   ...usePanelCommon.props,
-  defaultTime: {
-    type: [Number, String, Array] as PropType<
-    Value | string | [string, string] | null
-    >,
-    default: null
-  },
+  defaultTime: [Number, String, Array] as PropType<
+  Value | string | [string, string] | null
+  >,
   actions: {
     type: Array as PropType<string[]>,
     default: () => ['now', 'clear', 'confirm']
@@ -234,22 +236,9 @@ function useCalendar (
       props.defaultTime !== null &&
       !Array.isArray(props.defaultTime)
     ) {
-      if (typeof props.defaultTime === 'string') {
-        const time = parse(props.defaultTime, 'HH:mm:ss', new Date())
-        if (isValid(time)) {
-          newValue = getTime(
-            set(newValue, {
-              hours: time.getHours(),
-              minutes: time.getMinutes(),
-              seconds: time.getSeconds(),
-              milliseconds: 0
-            })
-          )
-        }
-      } else if (typeof props.defaultTime === 'number') {
-        newValue = getTime(
-          addMilliseconds(startOfDay(newValue), props.defaultTime)
-        )
+      const time = convertTimeToMilliseconds(props.defaultTime)
+      if (time) {
+        newValue = getTime(addMilliseconds(startOfDay(newValue), time))
       }
     }
     newValue = getTime(set(newValue, dateItem.dateObject))

@@ -67,12 +67,9 @@ const datePickerProps = {
     type: [Number, Array] as PropType<Value | null>,
     default: null
   },
-  defaultTime: {
-    type: [Number, String, Array] as PropType<
-    Value | string | [string, string] | null
-    >,
-    default: null
-  },
+  defaultTime: [Number, String, Array] as PropType<
+  Value | string | [string, string] | null
+  >,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
