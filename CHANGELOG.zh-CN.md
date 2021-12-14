@@ -32,6 +32,7 @@
 - `n-data-table` 点击表头半选的勾选框之后会全选，关闭 [#1827](https://github.com/TuSimple/naive-ui/issues/1827)
 - `n-button` 的 CSS 变量使用 `n` 作为前缀, 关闭 [#1808](https://github.com/TuSimple/naive-ui/issues/1808)
 - `n-alert` 的 CSS 变量使用 `n` 作为前缀
+- `n-anchor` 的 CSS 变量使用 `n` 作为前缀
 
 ### i18n
 
