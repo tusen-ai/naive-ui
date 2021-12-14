@@ -16,6 +16,7 @@ import {
 import { pxfy, repeat } from 'seemly'
 import { VirtualList, VirtualListInst } from 'vueuc'
 import { c } from '../../../_utils/cssr'
+import { CNode } from 'css-render'
 import { NScrollbar, ScrollbarInst } from '../../../_internal'
 import { formatLength } from '../../../_utils'
 import { NEmpty } from '../../../empty'
@@ -149,7 +150,9 @@ export default defineComponent({
       mergedCurrentPageRef,
       rowClassNameRef,
       leftActiveFixedColKeyRef,
+      leftActiveFixedChildrenColKeysRef,
       rightActiveFixedColKeyRef,
+      rightActiveFixedChildrenColKeysRef,
       renderExpandRef,
       hoverKeyRef,
       summaryRef,
@@ -263,30 +266,57 @@ export default defineComponent({
     }
     // manually control shadow style to avoid rerender
     const style = c([
-      ({ props: cProps }: { props: Record<string, string> }) =>
-        c([
-          cProps.leftActiveFixedColKey === null
-            ? null
-            : c(
-                `[data-n-id="${cProps.componentId}"] [data-col-key="${cProps.leftActiveFixedColKey}"]::after`,
-                {
-                  boxShadow: 'var(--box-shadow-after)'
-                }
-            ),
-          cProps.rightActiveFixedColKey === null
-            ? null
-            : c(
-                `[data-n-id="${cProps.componentId}"] [data-col-key="${cProps.rightActiveFixedColKey}"]::before`,
-                {
-                  boxShadow: 'var(--box-shadow-before)'
-                }
-            )
+      ({ props: cProps }: { props: Record<string, string | string[]> }) => {
+        const createActiveLeftFixedStyle = (
+          leftActiveFixedColKey: string | null
+        ): CNode | null => {
+          if (leftActiveFixedColKey === null) return null
+          return c(
+            `[data-n-id="${
+              cProps.componentId as string
+            }"] [data-col-key="${leftActiveFixedColKey}"]::after`,
+            {
+              boxShadow: 'var(--box-shadow-after)'
+            }
+          )
+        }
+
+        const createActiveRightFixedStyle = (
+          rightActiveFixedColKey: string | null
+        ): CNode | null => {
+          if (rightActiveFixedColKey === null) return null
+          return c(
+            `[data-n-id="${
+              cProps.componentId as string
+            }"] [data-col-key="${rightActiveFixedColKey}"]::before`,
+            {
+              boxShadow: 'var(--box-shadow-before)'
+            }
+          )
+        }
+
+        return c([
+          createActiveLeftFixedStyle(cProps.leftActiveFixedColKey as string),
+          createActiveRightFixedStyle(cProps.rightActiveFixedColKey as string),
+          (cProps.leftActiveFixedChildrenColKeys as string[]).map(
+            (leftActiveFixedColKey) =>
+              createActiveLeftFixedStyle(leftActiveFixedColKey)
+          ),
+          (cProps.rightActiveFixedChildrenColKeys as string[]).map(
+            (rightActiveFixedColKey) =>
+              createActiveRightFixedStyle(rightActiveFixedColKey)
+          )
         ])
+      }
     ])
     let fixedStyleMounted = false
     watchEffect(() => {
       const { value: leftActiveFixedColKey } = leftActiveFixedColKeyRef
+      const { value: leftActiveFixedChildrenColKeys } =
+        leftActiveFixedChildrenColKeysRef
       const { value: rightActiveFixedColKey } = rightActiveFixedColKeyRef
+      const { value: rightActiveFixedChildrenColKeys } =
+        rightActiveFixedChildrenColKeysRef
       if (
         !fixedStyleMounted &&
         leftActiveFixedColKey === null &&
@@ -299,7 +329,9 @@ export default defineComponent({
         force: true,
         props: {
           leftActiveFixedColKey,
+          leftActiveFixedChildrenColKeys,
           rightActiveFixedColKey,
+          rightActiveFixedChildrenColKeys,
           componentId
         }
       })

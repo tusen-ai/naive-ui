@@ -178,7 +178,9 @@ export interface DataTableInjection {
   leftFixedColumnsRef: Ref<TableColumns>
   rightFixedColumnsRef: Ref<TableColumns>
   leftActiveFixedColKeyRef: Ref<ColumnKey | null>
+  leftActiveFixedChildrenColKeysRef: Ref<ColumnKey[]>
   rightActiveFixedColKeyRef: Ref<ColumnKey | null>
+  rightActiveFixedChildrenColKeysRef: Ref<ColumnKey[]>
   fixedColumnLeftMapRef: Ref<
   Record<ColumnKey, { start: number, end: number } | undefined>
   >
