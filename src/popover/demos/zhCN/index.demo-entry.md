@@ -18,6 +18,7 @@ style
 trigger-width
 manual-position
 header
+width-debug
 hoist-debug
 nested-debug
 nested2-debug
