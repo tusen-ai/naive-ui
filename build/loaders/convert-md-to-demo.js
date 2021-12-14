@@ -2,7 +2,7 @@ const { marked } = require('marked')
 const fs = require('fs')
 const path = require('path')
 const createRenderer = require('./md-renderer')
-const tsToJs = require('../utils/tsToJs')
+const handleMergeCode = require('../utils/handle-merge-code.js')
 const mdRenderer = createRenderer()
 
 const __HTTP__ = process.env.NODE_ENV !== 'production' ? 'http' : 'https'
@@ -62,51 +62,7 @@ function mergeParts ({ parts, isVue }) {
   mergedParts.content = parts.content
   mergedParts.code = ''
   mergedParts.jsCode = ''
-  let jsCode = ''
-  if (parts.template) {
-    if (isVue) {
-      mergedParts.code += `<template>${parts.template}</template>`
-      mergedParts.jsCode += `<template>${parts.template}</template>`
-    } else {
-      mergedParts.code += `<template>\n${parts.template
-        .split('\n')
-        .map((line) => (line.length ? '  ' + line : line))
-        .join('\n')}\n</template>`
-      mergedParts.jsCode = mergedParts.code
-    }
-  }
-  if (parts.script) {
-    if (parts.template) {
-      mergedParts.code += '\n\n'
-      mergedParts.jsCode += '\n\n'
-    }
-    const startScriptTag =
-      parts.language === 'ts' ? '<script lang="ts">' : '<script>'
-    mergedParts.code += `${startScriptTag}
-${parts.script}
-</script>`
-    if (parts.language === 'ts') {
-      jsCode = tsToJs(parts.script)
-      mergedParts.jsCode += `<script>
-${jsCode}
-</script>`
-    } else {
-      mergedParts.jsCode = mergedParts.code
-    }
-  }
-  if (parts.style) {
-    if (parts.template || parts.script) {
-      mergedParts.code += '\n\n'
-      mergedParts.jsCode += '\n\n'
-    }
-    const style = isVue
-      ? `<style>${parts.style}</style>`
-      : `<style>
-${parts.style}
-</style>`
-    mergedParts.code += style
-    mergedParts.jsCode += style
-  }
+  handleMergeCode({ parts, mergedParts, isVue })
   mergedParts.code = encodeURIComponent(mergedParts.code)
   mergedParts.jsCode = encodeURIComponent(mergedParts.jsCode)
   return mergedParts
@@ -194,10 +150,10 @@ function getFileName (resourcePath) {
   return [fileNameWithExtension.split('.')[0], fileNameWithExtension]
 }
 
-function convertMd2Demo (text, { resourcePath, relativeUrl }) {
+function convertMd2Demo (text, { resourcePath, relativeUrl, isVue = false }) {
   const tokens = marked.lexer(text)
   const parts = getPartsOfDemo(tokens)
-  const mergedParts = mergeParts({ parts, isVue: false })
+  const mergedParts = mergeParts({ parts, isVue })
   const [fileName] = getFileName(resourcePath)
   const vueComponent = genVueComponent(mergedParts, fileName, relativeUrl)
   return vueComponent
