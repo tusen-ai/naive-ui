@@ -48,7 +48,8 @@ PR is welcomed for locales that is not supported yet!
 | Japanese                  | jaJP   | dateJaJP    |
 | Russian                   | ruRU   | dateRuRU    |
 | Ukrainian                 | ukUA   | dateUkUA    |
-| Chinese (Simplified)      | enUS   | dateEnUS    |
+| Chinese (Simplified)      | zhCN   | dateZhCN    |
+| Chinese (Traditional)     | zhTW   | dateZhTW    |
 | German - Germany          | deDE   | dateDeDe    |
 | Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |
 | French                    | frFR   | dateFrFR    |

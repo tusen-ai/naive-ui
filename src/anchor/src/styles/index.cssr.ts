@@ -1,23 +1,23 @@
 import { c, cE, cB, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
-// --link-color
-// --link-font-size
-// --link-text-color
-// --link-text-color-hover
-// --link-text-color-active
-// --link-text-color-pressed
-// --bezier
-// --rail-color
-// --rail-color-active
-// --rail-width
-// --link-padding
-// --link-border-radius
+// --n-link-color
+// --n-link-font-size
+// --n-link-text-color
+// --n-link-text-color-hover
+// --n-link-text-color-active
+// --n-link-text-color-pressed
+// --n-bezier
+// --n-rail-color
+// --n-rail-color-active
+// --n-rail-width
+// --n-link-padding
+// --n-link-border-radius
 export default cB('anchor', `
   position: relative;
 `, [
   cNotM('block', `
-    padding-left: var(--rail-width);
+    padding-left: var(--n-rail-width);
   `, [
     cB('anchor-link', [
       c('+, >', [
@@ -41,74 +41,66 @@ export default cB('anchor', `
     cB('anchor-link', `
       margin-bottom: 4px;
       padding: 2px 8px;
-      transition: background-color .3s var(--bezier);
+      transition: background-color .3s var(--n-bezier);
       background-color: transparent;
-      border-radius: var(--link-border-radius);
+      border-radius: var(--n-link-border-radius);
     `, [
       cM('active', `
-        background-color: var(--link-color);
+        background-color: var(--n-link-color);
       `)
     ])
   ]),
   cB('anchor-link-background', `
     position: absolute;
-    left: calc(var(--rail-width) / 2);
+    left: calc(var(--n-rail-width) / 2);
     width: 100%;
-    background-color: var(--link-color);
+    background-color: var(--n-link-color);
     transition:
-      top .15s var(--bezier),
-      max-width .15s var(--bezier),
-      background-color .3s var(--bezier);
+      top .15s var(--n-bezier),
+      max-width .15s var(--n-bezier),
+      background-color .3s var(--n-bezier);
   `),
   cB('anchor-rail', `
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
-    width: var(--rail-width);
-    border-radius: calc(var(--rail-width) / 2);
+    width: var(--n-rail-width);
+    border-radius: calc(var(--n-rail-width) / 2);
     overflow: hidden;
-    transition: background-color .3s var(--bezier);
-    background-color: var(--rail-color);
+    transition: background-color .3s var(--n-bezier);
+    background-color: var(--n-rail-color);
   `, [
     cE('bar', `
       position: absolute;
       left: 0;
-      width: var(--rail-width);
+      width: var(--n-rail-width);
       height: 21px;
       background-color: #0000;
       transition: 
-        top .15s var(--bezier),
-        background-color .3s var(--bezier);
+        top .15s var(--n-bezier),
+        background-color .3s var(--n-bezier);
     `, [
       cM('active', {
-        backgroundColor: 'var(--rail-color-active)'
+        backgroundColor: 'var(--n-rail-color-active)'
       })
     ])
   ]),
   cB('anchor-link', `
-    padding: var(--link-padding);
+    padding: var(--n-link-padding);
     position: relative;
     line-height: 1.5;
-    font-size: var(--link-font-size);
+    font-size: var(--n-link-font-size);
     min-height: 1.5em;
     display: flex;
     flex-direction: column;
   `, [
     cM('active', [
-      cE('title', `
-        color: var(--link-text-color-active);
-      `)
-    ]),
-    c('&:hover, &:focus', [
-      cE('title', `
-        color: var(--link-text-color-hover);
-      `)
-    ]),
-    c('&:active', [
-      cE('title', `
-        color: var(--link-text-color-pressed);
-      `)
+      c('>', [
+        cE('title', `
+          color: var(--n-link-text-color-active);
+        `)
+      ])
     ]),
     cE('title', `
       outline: none;
@@ -120,8 +112,15 @@ export default cB('anchor', `
       cursor: pointer;
       display: inline-block;
       padding-right: 16px;
-      transition: color .3s var(--bezier);
-      color: var(--link-text-color);
-    `)
+      transition: color .3s var(--n-bezier);
+      color: var(--n-link-text-color);
+    `, [
+      c('&:hover, &:focus', `
+        color: var(--n-link-text-color-hover);
+      `),
+      c('&:active', `
+        color: var(--n-link-text-color-pressed);
+      `)
+    ])
   ])
 ])

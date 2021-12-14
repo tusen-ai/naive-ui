@@ -1,4 +1,4 @@
-# Use Trigger Width
+# Use trigger width
 
 Set `width="trigger"` to make popover's width the same as its trigger.
 

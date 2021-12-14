@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.21.5",
+  "version": "2.22.0",
   "description": "A Vue 3 Component Library. Fairly Complete, Customizable Themes, Uses TypeScript, Not Too Slow",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -62,6 +62,7 @@
     ]
   },
   "devDependencies": {
+    "esbuild": "0.14.3",
     "@babel/eslint-parser": "^7.15.8",
     "@babel/generator": "^7.12.11",
     "@babel/parser": "^7.12.11",
@@ -75,7 +76,7 @@
     "@vicons/fluent": "^0.11.0",
     "@vicons/ionicons4": "^0.11.0",
     "@vicons/ionicons5": "^0.11.0",
-    "@vitejs/plugin-vue": "^1.2.1",
+    "@vitejs/plugin-vue": "^2.0.0",
     "@vue/compiler-sfc": "^3.0.10",
     "@vue/eslint-config-standard": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
@@ -123,7 +124,7 @@
     "@types/lodash-es": "^4.17.4",
     "async-validator": "^4.0.1",
     "css-render": "^0.15.6",
-    "date-fns": "^2.19.0",
+    "date-fns": "^2.27.0",
     "date-fns-tz": "^1.1.6",
     "evtd": "^0.2.3",
     "highlight.js": "^11.0.1",

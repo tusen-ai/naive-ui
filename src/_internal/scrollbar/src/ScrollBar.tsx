@@ -79,9 +79,14 @@ const scrollbarProps = {
     type: Boolean,
     default: false
   },
+  showScrollbar: {
+    type: Boolean,
+    default: true
+  },
   // If container is set, resize observer won't not attached
   container: Function as PropType<() => HTMLElement | null | undefined>,
   content: Function as PropType<() => HTMLElement | null | undefined>,
+  containerClass: String,
   containerStyle: [String, Object] as PropType<string | CSSProperties>,
   contentClass: String,
   contentStyle: [String, Object] as PropType<string | CSSProperties>,
@@ -597,7 +602,7 @@ const Scrollbar = defineComponent({
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
+    const { $slots, mergedClsPrefix, showScrollbar } = this
     if (!this.scrollable) return renderSlot($slots, 'default')
     const createChildren = (): VNode =>
       h(
@@ -615,7 +620,10 @@ const Scrollbar = defineComponent({
           ) : (
             <div
               ref="containerRef"
-              class={`${mergedClsPrefix}-scrollbar-container`}
+              class={[
+                `${mergedClsPrefix}-scrollbar-container`,
+                this.containerClass
+              ]}
               style={this.containerStyle}
               onScroll={this.handleScroll}
               onWheel={this.onWheel}
@@ -645,48 +653,52 @@ const Scrollbar = defineComponent({
               </VResizeObserver>
             </div>
           ),
-          <div
-            ref="yRailRef"
-            class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`}
-            style={[this.horizontalRailStyle] as any}
-          >
-            <Transition name="fade-in-transition">
-              {{
-                default: () =>
-                  this.needYBar && this.isShowYBar && !this.isIos ? (
-                    <div
-                      class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
-                      style={{
-                        height: this.yBarSizePx,
-                        top: this.yBarTopPx
-                      }}
-                      onMousedown={this.handleYScrollMouseDown}
-                    />
-                  ) : null
-              }}
-            </Transition>
-          </div>,
-          <div
-            ref="xRailRef"
-            class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`}
-            style={[this.verticalRailStyle] as any}
-          >
-            <Transition name="fade-in-transition">
-              {{
-                default: () =>
-                  this.needXBar && this.isShowXBar && !this.isIos ? (
-                    <div
-                      class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
-                      style={{
-                        width: this.xBarSizePx,
-                        left: this.xBarLeftPx
-                      }}
-                      onMousedown={this.handleXScrollMouseDown}
-                    />
-                  ) : null
-              }}
-            </Transition>
-          </div>
+          showScrollbar && (
+            <div
+              ref="yRailRef"
+              class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`}
+              style={[this.horizontalRailStyle] as any}
+            >
+              <Transition name="fade-in-transition">
+                {{
+                  default: () =>
+                    this.needYBar && this.isShowYBar && !this.isIos ? (
+                      <div
+                        class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
+                        style={{
+                          height: this.yBarSizePx,
+                          top: this.yBarTopPx
+                        }}
+                        onMousedown={this.handleYScrollMouseDown}
+                      />
+                    ) : null
+                }}
+              </Transition>
+            </div>
+          ),
+          showScrollbar && (
+            <div
+              ref="xRailRef"
+              class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`}
+              style={[this.verticalRailStyle] as any}
+            >
+              <Transition name="fade-in-transition">
+                {{
+                  default: () =>
+                    this.needXBar && this.isShowXBar && !this.isIos ? (
+                      <div
+                        class={`${mergedClsPrefix}-scrollbar-rail__scrollbar`}
+                        style={{
+                          width: this.xBarSizePx,
+                          left: this.xBarLeftPx
+                        }}
+                        onMousedown={this.handleXScrollMouseDown}
+                      />
+                    ) : null
+                }}
+              </Transition>
+            </div>
+          )
         ]
       )
     return this.container ? (

@@ -6,19 +6,19 @@
 <n-select :options="options" :render-option="renderOption" />
 ```
 
-```js
-import { defineComponent, h } from 'vue'
-import { NTooltip } from 'naive-ui'
+```ts
+import { defineComponent, h, VNode, ref } from 'vue'
+import { NTooltip, SelectOption } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     return {
-      renderOption: ({ node, option }) =>
+      renderOption: ({ node, option }: { node: VNode, option: SelectOption }) =>
         h(NTooltip, null, {
           trigger: () => node,
           default: () => 'Rubber Soul -' + option.label
         }),
-      options: [
+      options: ref<SelectOption[]>([
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
           value: 'song0',
@@ -74,7 +74,7 @@ export default defineComponent({
           label: 'Wait',
           value: 'song12'
         }
-      ]
+      ])
     }
   }
 })

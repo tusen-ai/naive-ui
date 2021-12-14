@@ -1,10 +1,49 @@
 # CHANGELOG
 
+## 2.22.0 (2021-12-15)
+
+### Breaking Changes
+
+- `n-button` 在 `loading` 状态不可再被点击，关闭 [#1628](https://github.com/TuSimple/naive-ui/issues/1628)
+
 ### Fixes
 
 - 修复 `n-alert` 的 `header` slot 无法正常显示
+- 修复 `n-data-table` 的分页器 `onUpdatePageSize` 属性未被触发, 关闭 [#1774](https://github.com/TuSimple/naive-ui/issues/1774)
+- 修复 `n-data-table` loading 时可以选中行, 关闭 [#1812](https://github.com/TuSimple/naive-ui/issues/1812)
+- 修复 `n-tag` 行高过低导致内容截断
+- 修复 `n-select` 设定 `filterable` 后选项过长显示出错，关闭 [#1823](https://github.com/TuSimple/naive-ui/issues/1823)
+- 修复 `n-page-header` 在不显示头部时内容有 margin-top，关闭 [#1795](https://github.com/TuSimple/naive-ui/issues/1795)
+- 修复 `n-avatar` `color` 属性不生效
+- 修复 `n-avatar` 内部图标尺寸不正确
+- 修复 `n-image` 缺少 scoped style 的 scope-id，关闭 [#1788](https://github.com/TuSimple/naive-ui/issues/1788)
+- 修复 `n-radio` 的点击事件会被触发两次，关闭 [#1680](https://github.com/TuSimple/naive-ui/issues/1680)
+- 修复 `n-data-table` 当表格为空表格并且设置 min-height 时布局显示错乱，关闭 [#1809](https://github.com/TuSimple/naive-ui/issues/1809)
+- 修复 `n-data-table` 总结行有 hover 样式
+- 修复 `n-data-table` 固定 group column box-shadow 错误和 right fixed column 的渲染顺序错误，关闭 [#1832](https://github.com/TuSimple/naive-ui/issues/1832)
+- 修复 `n-anchor` 的 hover & active 的样式
+- 修复 `n-data-table` 在无数据时头部固定列的样式
 
-## 2.21.5（2021-12-07）
+### Feats
+
+- `n-tree-select` 新增 `menu-props` 属性
+- `n-tree-select` 新增 `action` slot, 关闭 [#1765](https://github.com/TuSimple/naive-ui/issues/1765)
+- `n-tree-select` 新增 `empty` slot
+- `n-cascader` 新增 `empty` slot
+- `n-popselect` 新增 `action` slot
+- `n-popselect` 新增 `empty` slot
+- `n-data-table` 点击表头半选的勾选框之后会全选，关闭 [#1827](https://github.com/TuSimple/naive-ui/issues/1827)
+- `n-button` 的 CSS 变量使用 `n` 作为前缀, 关闭 [#1808](https://github.com/TuSimple/naive-ui/issues/1808)
+- `n-date-picker` 新增 `default-time` 属性
+- `n-alert` 的 CSS 变量使用 `n` 作为前缀
+- `n-date-picker` 属性 `type` 支持 `quarter` 选项
+- `n-anchor` 的 CSS 变量使用 `n` 作为前缀
+
+### i18n
+
+- 新增 zhTW locale
+
+## 2.21.5 (2021-12-07)
 
 ### Fixes
 

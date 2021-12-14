@@ -3,7 +3,9 @@
     demo-file-name="<!--DEMO_FILE_NAME-->"
     relative-url="<!--URL-->"
     title="<!--TITLE_SLOT-->"
-    code="<!--CODE_SLOT-->"
+    ts-code="<!--TS_CODE_SLOT-->"
+    js-code="<!--JS_CODE_SLOT-->"
+    language-type="<!--LANGUAGE_TYPE_SLOT-->"
   >
     <template #title>
       <!--TITLE_SLOT-->

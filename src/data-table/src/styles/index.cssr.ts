@@ -59,13 +59,14 @@ export default c([
     --merged-td-color-hover: var(--td-color-hover);
     --merged-td-color-striped: var(--td-color-striped);
   `, [
+    cB('data-table-wrapper', `
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    `),
     cM('flex-height', [
       c('>', [
-        cB('data-table-wrapper', `
-          flex-grow: 1;
-          display: flex;
-          flex-direction: column;
-        `, [
+        cB('data-table-wrapper', [
           c('>', [
             cB('data-table-base-table', `
               display: flex;
@@ -128,8 +129,10 @@ export default c([
       cM('striped', 'background-color: var(--merged-td-color-striped);', [
         cB('data-table-td', 'background-color: var(--merged-td-color-striped);')
       ]),
-      c('&:hover', 'background-color: var(--merged-td-color-hover);', [
-        cB('data-table-td', 'background-color: var(--merged-td-color-hover);')
+      cNotM('summary', [
+        c('&:hover', 'background-color: var(--merged-td-color-hover);', [
+          cB('data-table-td', 'background-color: var(--merged-td-color-hover);')
+        ])
       ])
     ]),
     cB('data-table-th', `
@@ -274,6 +277,7 @@ export default c([
       fixedColumnStyle
     ]),
     cB('data-table-empty', `
+      box-sizing: border-box;
       padding: var(--empty-padding);
       flex-grow: 1;
       flex-shrink: 0;

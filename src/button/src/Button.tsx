@@ -143,7 +143,7 @@ const Button = defineComponent({
       }
     }
     const handleClick = (e: MouseEvent): void => {
-      if (!props.disabled) {
+      if (!props.disabled && !props.loading) {
         const { onClick } = props
         if (onClick) call(onClick, e)
         if (!props.text) {
@@ -168,7 +168,7 @@ const Button = defineComponent({
       switch (e.code) {
         case 'Enter':
         case 'NumpadEnter':
-          if (!props.keyboard) {
+          if (!props.keyboard || props.loading) {
             e.preventDefault()
             return
           }
@@ -211,11 +211,11 @@ const Button = defineComponent({
         if (!color) return null
         const hoverColor = createHoverColor(color)
         return {
-          '--border-color': color,
-          '--border-color-hover': hoverColor,
-          '--border-color-pressed': createPressedColor(color),
-          '--border-color-focus': hoverColor,
-          '--border-color-disabled': color
+          '--n-border-color': color,
+          '--n-border-color-hover': hoverColor,
+          '--n-border-color-pressed': createPressedColor(color),
+          '--n-border-color-focus': hoverColor,
+          '--n-border-color-disabled': color
         }
       }),
       cssVars: computed(() => {
@@ -251,17 +251,17 @@ const Button = defineComponent({
         }
         // color
         let colorProps = {
-          '--color': 'initial',
-          '--color-hover': 'initial',
-          '--color-pressed': 'initial',
-          '--color-focus': 'initial',
-          '--color-disabled': 'initial',
-          '--ripple-color': 'initial',
-          '--text-color': 'initial',
-          '--text-color-hover': 'initial',
-          '--text-color-pressed': 'initial',
-          '--text-color-focus': 'initial',
-          '--text-color-disabled': 'initial'
+          '--n-color': 'initial',
+          '--n-color-hover': 'initial',
+          '--n-color-pressed': 'initial',
+          '--n-color-focus': 'initial',
+          '--n-color-disabled': 'initial',
+          '--n-ripple-color': 'initial',
+          '--n-text-color': 'initial',
+          '--n-text-color-hover': 'initial',
+          '--n-text-color-pressed': 'initial',
+          '--n-text-color-focus': 'initial',
+          '--n-text-color-disabled': 'initial'
         }
         const typeIsTertiary = type === 'tertiary'
         const typeIsDefault = type === 'default'
@@ -271,48 +271,48 @@ const Button = defineComponent({
           const mergedTextColor =
             propTextColor || self[createKey('textColorText', mergedType)]
           colorProps = {
-            '--color': '#0000',
-            '--color-hover': '#0000',
-            '--color-pressed': '#0000',
-            '--color-focus': '#0000',
-            '--color-disabled': '#0000',
-            '--ripple-color': '#0000',
-            '--text-color': mergedTextColor,
-            '--text-color-hover': propTextColor
+            '--n-color': '#0000',
+            '--n-color-hover': '#0000',
+            '--n-color-pressed': '#0000',
+            '--n-color-focus': '#0000',
+            '--n-color-disabled': '#0000',
+            '--n-ripple-color': '#0000',
+            '--n-text-color': mergedTextColor,
+            '--n-text-color-hover': propTextColor
               ? createHoverColor(propTextColor)
               : self[createKey('textColorTextHover', mergedType)],
-            '--text-color-pressed': propTextColor
+            '--n-text-color-pressed': propTextColor
               ? createPressedColor(propTextColor)
               : self[createKey('textColorTextPressed', mergedType)],
-            '--text-color-focus': propTextColor
+            '--n-text-color-focus': propTextColor
               ? createHoverColor(propTextColor)
               : self[createKey('textColorTextHover', mergedType)],
-            '--text-color-disabled':
+            '--n-text-color-disabled':
               propTextColor ||
               self[createKey('textColorTextDisabled', mergedType)]
           }
         } else if (ghost || dashed) {
           const mergedTextColor = textColor || color
           colorProps = {
-            '--color': '#0000',
-            '--color-hover': '#0000',
-            '--color-pressed': '#0000',
-            '--color-focus': '#0000',
-            '--color-disabled': '#0000',
-            '--ripple-color':
+            '--n-color': '#0000',
+            '--n-color-hover': '#0000',
+            '--n-color-pressed': '#0000',
+            '--n-color-focus': '#0000',
+            '--n-color-disabled': '#0000',
+            '--n-ripple-color':
               color || self[createKey('rippleColor', mergedType)],
-            '--text-color':
+            '--n-text-color':
               mergedTextColor || self[createKey('textColorGhost', mergedType)],
-            '--text-color-hover': mergedTextColor
+            '--n-text-color-hover': mergedTextColor
               ? createHoverColor(mergedTextColor)
               : self[createKey('textColorGhostHover', mergedType)],
-            '--text-color-pressed': mergedTextColor
+            '--n-text-color-pressed': mergedTextColor
               ? createPressedColor(mergedTextColor)
               : self[createKey('textColorGhostPressed', mergedType)],
-            '--text-color-focus': mergedTextColor
+            '--n-text-color-focus': mergedTextColor
               ? createHoverColor(mergedTextColor)
               : self[createKey('textColorGhostHover', mergedType)],
-            '--text-color-disabled':
+            '--n-text-color-disabled':
               mergedTextColor ||
               self[createKey('textColorGhostDisabled', mergedType)]
           }
@@ -325,33 +325,33 @@ const Button = defineComponent({
           const mergedTextColor = color || typeTextColor
           const isColoredType = type !== 'default' && type !== 'tertiary'
           colorProps = {
-            '--color': isColoredType
+            '--n-color': isColoredType
               ? changeColor(mergedTextColor, {
                 alpha: Number(self.colorOpacitySecondary)
               })
               : self.colorSecondary,
-            '--color-hover': isColoredType
+            '--n-color-hover': isColoredType
               ? changeColor(mergedTextColor, {
                 alpha: Number(self.colorOpacitySecondaryHover)
               })
               : self.colorSecondaryHover,
-            '--color-pressed': isColoredType
+            '--n-color-pressed': isColoredType
               ? changeColor(mergedTextColor, {
                 alpha: Number(self.colorOpacitySecondaryPressed)
               })
               : self.colorSecondaryPressed,
-            '--color-focus': isColoredType
+            '--n-color-focus': isColoredType
               ? changeColor(mergedTextColor, {
                 alpha: Number(self.colorOpacitySecondaryHover)
               })
               : self.colorSecondaryHover,
-            '--color-disabled': self.colorSecondary,
-            '--ripple-color': '#0000',
-            '--text-color': mergedTextColor,
-            '--text-color-hover': mergedTextColor,
-            '--text-color-pressed': mergedTextColor,
-            '--text-color-focus': mergedTextColor,
-            '--text-color-disabled': mergedTextColor
+            '--n-color-disabled': self.colorSecondary,
+            '--n-ripple-color': '#0000',
+            '--n-text-color': mergedTextColor,
+            '--n-text-color-hover': mergedTextColor,
+            '--n-text-color-pressed': mergedTextColor,
+            '--n-text-color-focus': mergedTextColor,
+            '--n-text-color-disabled': mergedTextColor
           }
         } else if (tertiary || quaternary) {
           const typeColor = typeIsDefault
@@ -361,63 +361,63 @@ const Button = defineComponent({
               : self[createKey('color', mergedType)]
           const mergedColor = color || typeColor
           if (tertiary) {
-            colorProps['--color'] = self.colorTertiary
-            colorProps['--color-hover'] = self.colorTertiaryHover
-            colorProps['--color-pressed'] = self.colorTertiaryPressed
-            colorProps['--color-focus'] = self.colorSecondaryHover
-            colorProps['--color-disabled'] = self.colorTertiary
+            colorProps['--n-color'] = self.colorTertiary
+            colorProps['--n-color-hover'] = self.colorTertiaryHover
+            colorProps['--n-color-pressed'] = self.colorTertiaryPressed
+            colorProps['--n-color-focus'] = self.colorSecondaryHover
+            colorProps['--n-color-disabled'] = self.colorTertiary
           } else {
-            colorProps['--color'] = self.colorQuaternary
-            colorProps['--color-hover'] = self.colorQuaternaryHover
-            colorProps['--color-pressed'] = self.colorQuaternaryPressed
-            colorProps['--color-focus'] = self.colorQuaternaryHover
-            colorProps['--color-disabled'] = self.colorQuaternary
+            colorProps['--n-color'] = self.colorQuaternary
+            colorProps['--n-color-hover'] = self.colorQuaternaryHover
+            colorProps['--n-color-pressed'] = self.colorQuaternaryPressed
+            colorProps['--n-color-focus'] = self.colorQuaternaryHover
+            colorProps['--n-color-disabled'] = self.colorQuaternary
           }
-          colorProps['--ripple-color'] = '#0000'
-          colorProps['--text-color'] = mergedColor
-          colorProps['--text-color-hover'] = mergedColor
-          colorProps['--text-color-pressed'] = mergedColor
-          colorProps['--text-color-focus'] = mergedColor
-          colorProps['--text-color-disabled'] = mergedColor
+          colorProps['--n-ripple-color'] = '#0000'
+          colorProps['--n-text-color'] = mergedColor
+          colorProps['--n-text-color-hover'] = mergedColor
+          colorProps['--n-text-color-pressed'] = mergedColor
+          colorProps['--n-text-color-focus'] = mergedColor
+          colorProps['--n-text-color-disabled'] = mergedColor
         } else {
           colorProps = {
-            '--color': color || self[createKey('color', mergedType)],
-            '--color-hover': color
+            '--n-color': color || self[createKey('color', mergedType)],
+            '--n-color-hover': color
               ? createHoverColor(color)
               : self[createKey('colorHover', mergedType)],
-            '--color-pressed': color
+            '--n-color-pressed': color
               ? createPressedColor(color)
               : self[createKey('colorPressed', mergedType)],
-            '--color-focus': color
+            '--n-color-focus': color
               ? createHoverColor(color)
               : self[createKey('colorFocus', mergedType)],
-            '--color-disabled':
+            '--n-color-disabled':
               color || self[createKey('colorDisabled', mergedType)],
-            '--ripple-color':
+            '--n-ripple-color':
               color || self[createKey('rippleColor', mergedType)],
-            '--text-color':
+            '--n-text-color':
               textColor ||
               (color
                 ? self.textColorPrimary
                 : typeIsTertiary
                   ? self.textColorTertiary
                   : self[createKey('textColor', mergedType)]),
-            '--text-color-hover':
+            '--n-text-color-hover':
               textColor ||
               (color
                 ? self.textColorHoverPrimary
                 : self[createKey('textColorHover', mergedType)]),
-            '--text-color-pressed':
+            '--n-text-color-pressed':
               textColor ||
               (color
                 ? self.textColorPressedPrimary
                 : self[createKey('textColorPressed', mergedType)]),
-            '--text-color-focus':
+            '--n-text-color-focus':
               textColor ||
               (color
                 ? self.textColorFocusPrimary
                 : self[createKey('textColorFocus', mergedType)]),
-            '--text-color-disabled':
+            '--n-text-color-disabled':
               textColor ||
               (color
                 ? self.textColorDisabledPrimary
@@ -426,27 +426,27 @@ const Button = defineComponent({
         }
         // border
         let borderProps = {
-          '--border': 'initial',
-          '--border-hover': 'initial',
-          '--border-pressed': 'initial',
-          '--border-focus': 'initial',
-          '--border-disabled': 'initial'
+          '--n-border': 'initial',
+          '--n-border-hover': 'initial',
+          '--n-border-pressed': 'initial',
+          '--n-border-focus': 'initial',
+          '--n-border-disabled': 'initial'
         }
         if (text) {
           borderProps = {
-            '--border': 'none',
-            '--border-hover': 'none',
-            '--border-pressed': 'none',
-            '--border-focus': 'none',
-            '--border-disabled': 'none'
+            '--n-border': 'none',
+            '--n-border-hover': 'none',
+            '--n-border-pressed': 'none',
+            '--n-border-focus': 'none',
+            '--n-border-disabled': 'none'
           }
         } else {
           borderProps = {
-            '--border': self[createKey('border', mergedType)],
-            '--border-hover': self[createKey('borderHover', mergedType)],
-            '--border-pressed': self[createKey('borderPressed', mergedType)],
-            '--border-focus': self[createKey('borderFocus', mergedType)],
-            '--border-disabled': self[createKey('borderDisabled', mergedType)]
+            '--n-border': self[createKey('border', mergedType)],
+            '--n-border-hover': self[createKey('borderHover', mergedType)],
+            '--n-border-pressed': self[createKey('borderPressed', mergedType)],
+            '--n-border-focus': self[createKey('borderFocus', mergedType)],
+            '--n-border-disabled': self[createKey('borderDisabled', mergedType)]
           }
         }
         // size
@@ -461,30 +461,30 @@ const Button = defineComponent({
           waveOpacity
         } = self
         const sizeProps = {
-          '--width': circle && !text ? height : 'initial',
-          '--height': text ? 'initial' : height,
-          '--font-size': fontSize,
-          '--padding': circle
+          '--n-width': circle && !text ? height : 'initial',
+          '--n-height': text ? 'initial' : height,
+          '--n-font-size': fontSize,
+          '--n-padding': circle
             ? 'initial'
             : text
               ? 'initial'
               : round
                 ? paddingRound
                 : padding,
-          '--icon-size': iconSize,
-          '--icon-margin': iconMargin,
-          '--border-radius': text
+          '--n-icon-size': iconSize,
+          '--n-icon-margin': iconMargin,
+          '--n-border-radius': text
             ? 'initial'
             : circle || round
               ? height
               : borderRadius
         }
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--bezier-ease-out': cubicBezierEaseOut,
-          '--ripple-duration': rippleDuration,
-          '--opacity-disabled': opacityDisabled,
-          '--wave-opacity': waveOpacity,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-bezier-ease-out': cubicBezierEaseOut,
+          '--n-ripple-duration': rippleDuration,
+          '--n-opacity-disabled': opacityDisabled,
+          '--n-wave-opacity': waveOpacity,
           ...fontProps,
           ...colorProps,
           ...borderProps,
@@ -509,6 +509,7 @@ const Button = defineComponent({
           !this.text && this.dashed && `${mergedClsPrefix}-button--dashed`,
           this.color && `${mergedClsPrefix}-button--color`,
           this.secondary && `${mergedClsPrefix}-button--secondary`,
+          this.loading && `${mergedClsPrefix}-button--loading`,
           this.ghost && `${mergedClsPrefix}-button--ghost` // required for button group border collapse
         ]}
         tabindex={this.mergedFocusable ? 0 : -1}
@@ -522,7 +523,7 @@ const Button = defineComponent({
         onKeydown={this.handleKeydown}
       >
         {$slots.default && this.iconPlacement === 'right' ? (
-          <div class={`${mergedClsPrefix}-button__content`}>{$slots}</div>
+          <span class={`${mergedClsPrefix}-button__content`}>{$slots}</span>
         ) : null}
         <NFadeInExpandTransition width>
           {{
