@@ -24,7 +24,7 @@ import {
   dateArray,
   monthArray,
   strictParse,
-  yearArray
+  yearArray,
   quarterArray,
   QuarterItem
 } from '../utils'
