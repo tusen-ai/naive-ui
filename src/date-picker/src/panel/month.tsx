@@ -2,9 +2,9 @@ import { h, defineComponent, VNode, PropType } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
-import { useCalendar } from './use-calendar'
 import type { MonthItem, YearItem, QuarterItem } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
+import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
  * Month Panel
@@ -15,7 +15,7 @@ import { MONTH_ITEM_HEIGHT } from '../config'
 export default defineComponent({
   name: 'MonthPanel',
   props: {
-    ...useCalendar.props,
+    ...useCalendarProps,
     type: {
       type: String as PropType<'month' | 'year' | 'quarter'>,
       required: true
@@ -23,7 +23,9 @@ export default defineComponent({
   },
   setup (props) {
     const useCalendarRef = useCalendar(props, props.type)
-    const getRenderContent = (item: YearItem | MonthItem | QuarterItem): number | string => {
+    const getRenderContent = (
+      item: YearItem | MonthItem | QuarterItem
+    ): number | string => {
       switch (item.type) {
         case 'year':
           return item.dateObject.year
@@ -31,8 +33,6 @@ export default defineComponent({
           return item.dateObject.month + 1
         case 'quarter':
           return `Q ${item.dateObject.quarter}`
-        default:
-          return ''
       }
     }
     const renderItem = (
@@ -58,7 +58,7 @@ export default defineComponent({
           ]}
           onClick={() => handleDateClick(item)}
         >
-          { getRenderContent(item) }
+          {getRenderContent(item)}
         </div>
       )
     }
@@ -132,9 +132,10 @@ export default defineComponent({
               >
                 {{
                   default: () => [
-                    (type === 'month' ? this.monthArray : this.quarterArray).map((item, i) =>
-                      renderItem(item, i, mergedClsPrefix)
-                    ),
+                    (type === 'month'
+                      ? this.monthArray
+                      : this.quarterArray
+                    ).map((item, i) => renderItem(item, i, mergedClsPrefix)),
                     <div
                       class={`${mergedClsPrefix}-date-panel-${type}-calendar__padding`}
                     />

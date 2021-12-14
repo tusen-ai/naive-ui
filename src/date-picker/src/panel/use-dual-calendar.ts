@@ -591,6 +591,4 @@ function useDualCalendar (
   }
 }
 
-useDualCalendar.props = useDualCalendarProps
-
-export { useDualCalendar }
+export { useDualCalendar, useDualCalendarProps }

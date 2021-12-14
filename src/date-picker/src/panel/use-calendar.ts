@@ -15,8 +15,10 @@ import {
   startOfMonth,
   startOfYear,
   startOfQuarter,
-  setQuarter
+  setQuarter,
+  setYear
 } from 'date-fns'
+import { VirtualListInst } from 'vueuc'
 import {
   dateArray,
   monthArray,
@@ -32,7 +34,6 @@ import {
   Shortcuts
 } from '../interface'
 import type { DateItem, MonthItem, YearItem } from '../utils'
-import { VirtualListInst } from 'vueuc'
 import { ScrollbarInst } from '../../../_internal'
 
 const useCalendarProps = {
@@ -236,11 +237,10 @@ function useCalendar (
       newValue = Date.now()
     }
     newValue = getTime(
-      type === 'quarter' &&
-        (dateItem.dateObject as QuarterItem['dateObject']).quarter
+      dateItem.type === 'quarter' && dateItem.dateObject.quarter
         ? setQuarter(
-          new Date(`${dateItem.dateObject.year}`),
-          (dateItem.dateObject as QuarterItem['dateObject']).quarter
+          setYear(newValue, dateItem.dateObject.year),
+          dateItem.dateObject.quarter
         )
         : set(newValue, dateItem.dateObject)
     )
@@ -370,6 +370,4 @@ function useCalendar (
   }
 }
 
-useCalendar.props = useCalendarProps
-
-export { useCalendar }
+export { useCalendar, useCalendarProps }
