@@ -4,15 +4,15 @@ module.exports = function handleMergeCode ({ parts, mergedParts, isVue }) {
     // ts处理
     let jsCode = ''
     if (parts.template) {
-      mergedParts.code += `<template>${parts.template}</template>`
+      mergedParts.tsCode += `<template>${parts.template}</template>`
       mergedParts.jsCode += `<template>${parts.template}</template>`
     }
     if (parts.script) {
       if (parts.template) {
-        mergedParts.code += '\n\n'
+        mergedParts.tsCode += '\n\n'
         mergedParts.jsCode += '\n\n'
       }
-      mergedParts.code += `<script lang="ts">
+      mergedParts.tsCode += `<script lang="ts">
 ${parts.script}
 </script>`
       jsCode = tsToJs(parts.script)
@@ -22,11 +22,11 @@ ${jsCode}
     }
     if (parts.style) {
       if (parts.template || parts.script) {
-        mergedParts.code += '\n\n'
+        mergedParts.tsCode += '\n\n'
         mergedParts.jsCode += '\n\n'
       }
       const style = `<style>${parts.style}</style>`
-      mergedParts.code += style
+      mergedParts.tsCode += style
       mergedParts.jsCode += style
     }
   } else {
@@ -41,7 +41,7 @@ ${jsCode}
       if (parts.template) {
         mergedParts.jsCode += '\n\n'
       }
-      mergedParts.code += `<script>
+      mergedParts.jsCode += `<script>
 ${parts.script}
 </script>`
     }

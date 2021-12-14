@@ -60,10 +60,10 @@ function mergeParts ({ parts, isVue }) {
   }
   mergedParts.title = parts.title
   mergedParts.content = parts.content
-  mergedParts.code = ''
+  mergedParts.tsCode = ''
   mergedParts.jsCode = ''
   handleMergeCode({ parts, mergedParts, isVue })
-  mergedParts.code = encodeURIComponent(mergedParts.code)
+  mergedParts.tsCode = encodeURIComponent(mergedParts.tsCode)
   mergedParts.jsCode = encodeURIComponent(mergedParts.jsCode)
   return mergedParts
 }
@@ -115,8 +115,8 @@ function genVueComponent (parts, fileName, relativeUrl) {
   if (parts.title) {
     src = src.replace(titleReg, parts.title)
   }
-  if (parts.code) {
-    src = src.replace(tsCodeReg, parts.code)
+  if (parts.tsCode) {
+    src = src.replace(tsCodeReg, parts.tsCode)
   }
   if (parts.jsCode) {
     src = src.replace(jsCodeReg, parts.jsCode)

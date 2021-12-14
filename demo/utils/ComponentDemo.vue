@@ -141,7 +141,7 @@ export default {
       return !(isDebugDemo && displayModeRef.value !== 'debug')
     })
     const showCodeRef = ref(false)
-    const showTsRef = ref(false)
+    const showTsRef = ref(props.languageType === 'ts')
     const expandCodeButtonRef = ref(null)
     watch(showCodeRef, () => {
       nextTick(() => {
