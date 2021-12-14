@@ -28,7 +28,7 @@ customize-field
 | --- | --- | --- | --- |
 | accordion | `boolean` | `false` | 是否使用手风琴模式 |
 | children-field | `string` | `'children'` | children 的字段名 |
-| collapsed-icon-size | `number` | `24` | 菜单折叠时图标的大小，如果为设定则使用 `icon-size` 代替 |
+| collapsed-icon-size | `number` | `24` | 菜单折叠时图标的大小，如果未设定则使用 `icon-size` 代替 |
 | collapsed-width | `number` | `48` | 折叠后菜单的宽度 |
 | collapsed | `boolean` | `false` | 菜单是否折叠，值在菜单为垂直时有用 |
 | default-expand-all | `boolean` | `false` | 是否展开全部菜单 |
