@@ -23,6 +23,7 @@ import { NEmpty } from '../../../empty'
 import {
   dataTableInjectionKey,
   RowKey,
+  ColumnKey,
   SummaryRowData,
   MainTableBodyRef,
   TmNode
@@ -266,45 +267,45 @@ export default defineComponent({
     }
     // manually control shadow style to avoid rerender
     const style = c([
-      ({ props: cProps }: { props: Record<string, string | string[]> }) => {
+      ({
+        props: cProps
+      }: {
+        props: {
+          leftActiveFixedColKey: ColumnKey | null
+          leftActiveFixedChildrenColKeys: ColumnKey[]
+          rightActiveFixedColKey: ColumnKey | null
+          rightActiveFixedChildrenColKeys: ColumnKey[]
+          componentId: string
+        }
+      }) => {
         const createActiveLeftFixedStyle = (
-          leftActiveFixedColKey: string | null
+          leftActiveFixedColKey: ColumnKey | null
         ): CNode | null => {
           if (leftActiveFixedColKey === null) return null
           return c(
-            `[data-n-id="${
-              cProps.componentId as string
-            }"] [data-col-key="${leftActiveFixedColKey}"]::after`,
-            {
-              boxShadow: 'var(--box-shadow-after)'
-            }
+            `[data-n-id="${cProps.componentId}"] [data-col-key="${leftActiveFixedColKey}"]::after`,
+            { boxShadow: 'var(--box-shadow-after)' }
           )
         }
 
         const createActiveRightFixedStyle = (
-          rightActiveFixedColKey: string | null
+          rightActiveFixedColKey: ColumnKey | null
         ): CNode | null => {
           if (rightActiveFixedColKey === null) return null
           return c(
-            `[data-n-id="${
-              cProps.componentId as string
-            }"] [data-col-key="${rightActiveFixedColKey}"]::before`,
-            {
-              boxShadow: 'var(--box-shadow-before)'
-            }
+            `[data-n-id="${cProps.componentId}"] [data-col-key="${rightActiveFixedColKey}"]::before`,
+            { boxShadow: 'var(--box-shadow-before)' }
           )
         }
 
         return c([
-          createActiveLeftFixedStyle(cProps.leftActiveFixedColKey as string),
-          createActiveRightFixedStyle(cProps.rightActiveFixedColKey as string),
-          (cProps.leftActiveFixedChildrenColKeys as string[]).map(
-            (leftActiveFixedColKey) =>
-              createActiveLeftFixedStyle(leftActiveFixedColKey)
+          createActiveLeftFixedStyle(cProps.leftActiveFixedColKey),
+          createActiveRightFixedStyle(cProps.rightActiveFixedColKey),
+          cProps.leftActiveFixedChildrenColKeys.map((leftActiveFixedColKey) =>
+            createActiveLeftFixedStyle(leftActiveFixedColKey)
           ),
-          (cProps.rightActiveFixedChildrenColKeys as string[]).map(
-            (rightActiveFixedColKey) =>
-              createActiveRightFixedStyle(rightActiveFixedColKey)
+          cProps.rightActiveFixedChildrenColKeys.map((rightActiveFixedColKey) =>
+            createActiveRightFixedStyle(rightActiveFixedColKey)
           )
         ])
       }
