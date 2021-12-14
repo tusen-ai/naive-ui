@@ -197,6 +197,8 @@ export default defineComponent({
             return localeRef.value.monthPlaceholder
           case 'year':
             return localeRef.value.yearPlaceholder
+          case 'quarter':
+            return localeRef.value.quarterPlaceholder
           default:
             return ''
         }
@@ -242,6 +244,8 @@ export default defineComponent({
           return localeRef.value.yearTypeFormat
         case 'month':
           return localeRef.value.monthTypeFormat
+        case 'quarter':
+          return localeRef.value.quarterFormat
       }
     })
     const mergedActionsRef = computed(() => {
@@ -265,6 +269,9 @@ export default defineComponent({
         }
         case 'year': {
           return ['clear', 'now']
+        }
+        case 'quarter': {
+          return ['clear', 'now', 'confirm']
         }
         default: {
           warn(
@@ -349,7 +356,7 @@ export default defineComponent({
         disableUpdateOnClose
       })
     }
-    function scrollYearMonth (value?: number): void {
+    function scrollPickerColumns (value?: number): void {
       if (!panelInstRef.value) return
       const { monthScrollRef, yearScrollRef } = panelInstRef.value
       const { value: mergedValue } = mergedValueRef
@@ -514,8 +521,13 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
-      if (props.type === 'month' || props.type === 'year') {
-        void nextTick(scrollYearMonth)
+      const { type } = props
+      if (
+        type === 'month' ||
+        type === 'year' ||
+        type === 'quarter'
+      ) {
+        void nextTick(scrollPickerColumns)
       }
     }
     function closeCalendar ({
@@ -561,7 +573,7 @@ export default defineComponent({
     const uniVaidation = uniCalendarValidation(props, pendingValueRef)
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
-      scrollYearMonth,
+      scrollPickerColumns,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       timePickerSizeRef,
@@ -892,6 +904,12 @@ export default defineComponent({
                                     {...commonPanelProps}
                                     type="year"
                                     key="year"
+                                  />
+                              ) : this.type === 'quarter' ? (
+                                  <MonthPanel
+                                    {...commonPanelProps}
+                                    type="quarter"
+                                    key="quarter"
                                   />
                               ) : (
                                   <DatePanel {...commonPanelProps} />

@@ -29,6 +29,7 @@ const ruRu: NLocale = {
     monthTypeFormat: 'yyyy-MM',
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
+    quarterFormat: 'yyyy-qqq',
     clear: 'Очистить',
     now: 'Сейчас',
     confirm: 'Подтвердить',
@@ -39,6 +40,7 @@ const ruRu: NLocale = {
     monthPlaceholder: 'Выберите месяц',
     // FIXME: translation needed
     yearPlaceholder: 'Select Year',
+    quarterPlaceholder: 'Select Quarter',
     startDatePlaceholder: 'Дата начала',
     endDatePlaceholder: 'Дата окончания',
     startDatetimePlaceholder: 'Дата и время начала',

@@ -13,9 +13,18 @@ import {
   startOfDay,
   startOfSecond,
   startOfMonth,
-  startOfYear
+  startOfYear,
+  startOfQuarter,
+  setQuarter
 } from 'date-fns'
-import { dateArray, monthArray, strictParse, yearArray } from '../utils'
+import {
+  dateArray,
+  monthArray,
+  strictParse,
+  yearArray,
+  quarterArray,
+  QuarterItem
+} from '../utils'
 import { usePanelCommon } from './use-panel-common'
 import {
   IsSingleDateDisabled,
@@ -37,7 +46,7 @@ const useCalendarProps = {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useCalendar (
   props: ExtractPropTypes<typeof useCalendarProps>,
-  type: 'date' | 'datetime' | 'month' | 'year'
+  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter'
 ) {
   const panelCommon = usePanelCommon(props)
   const {
@@ -52,7 +61,7 @@ function useCalendar (
     localeRef,
     firstDayOfWeekRef,
     datePickerSlots,
-    scrollYearMonth
+    scrollPickerColumns
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -92,6 +101,9 @@ function useCalendar (
   })
   const yearArrayRef = computed(() => {
     return yearArray(calendarValueRef.value, props.value, nowRef.value)
+  })
+  const querterArrayRef = computed(() => {
+    return quarterArray(calendarValueRef.value, props.value, nowRef.value)
   })
   const weekdaysRef = computed(() => {
     return dateArrayRef.value.slice(0, 7).map((dateItem) => {
@@ -141,6 +153,7 @@ function useCalendar (
     if (type === 'datetime') return getTime(startOfSecond(value))
     if (type === 'month') return getTime(startOfMonth(value))
     if (type === 'year') return getTime(startOfYear(value))
+    if (type === 'quarter') return getTime(startOfQuarter(value))
     return getTime(startOfDay(value))
   }
   function mergedIsDateDisabled (ts: number): boolean {
@@ -210,7 +223,9 @@ function useCalendar (
     calendarValueRef.value = Date.now()
     panelCommon.doClose(true)
   }
-  function handleDateClick (dateItem: DateItem | MonthItem | YearItem): void {
+  function handleDateClick (
+    dateItem: DateItem | MonthItem | YearItem | QuarterItem
+  ): void {
     if (mergedIsDateDisabled(dateItem.ts)) {
       return
     }
@@ -220,18 +235,31 @@ function useCalendar (
     } else {
       newValue = Date.now()
     }
-    newValue = getTime(set(newValue, dateItem.dateObject))
+    newValue = getTime(
+      type === 'quarter' &&
+        (dateItem.dateObject as QuarterItem['dateObject']).quarter
+        ? setQuarter(
+          new Date(`${dateItem.dateObject.year}`),
+          (dateItem.dateObject as QuarterItem['dateObject']).quarter
+        )
+        : set(newValue, dateItem.dateObject)
+    )
     panelCommon.doUpdateValue(
       sanitizeValue(newValue),
       type === 'date' || type === 'year'
     )
-    if (type === 'date') {
-      panelCommon.doClose()
-    } else if (type === 'month') {
-      panelCommon.disableTransitionOneTick()
-      scrollYearMonth(newValue)
-    } else if (type === 'year') {
-      panelCommon.doClose()
+    switch (type) {
+      case 'date':
+      case 'year':
+        panelCommon.doClose()
+        break
+      case 'month':
+        panelCommon.disableTransitionOneTick()
+        scrollPickerColumns(newValue)
+        break
+      case 'quarter':
+        scrollPickerColumns(newValue)
+        break
     }
   }
   function deriveDateInputValue (time?: number): void {
@@ -309,6 +337,7 @@ function useCalendar (
     dateArray: dateArrayRef,
     monthArray: monthArrayRef,
     yearArray: yearArrayRef,
+    quarterArray: querterArrayRef,
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
     weekdays: weekdaysRef,

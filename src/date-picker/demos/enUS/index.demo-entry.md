@@ -11,6 +11,7 @@ daterange
 datetimerange
 month
 year
+quarter
 size
 disabled
 disabled-time
@@ -35,7 +36,7 @@ update-on-close
 | input-readonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | Shortcut button customizations. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |
-| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year'` | `'date'` | Date picker type. |
+| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year' \| 'quarter'` | `'date'` | Date picker type. |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |
 | on-blur | `() => void` | `undefined` | On blur callback. |
 | on-focus | `() => void` | `undefined` | On focus callback. |
