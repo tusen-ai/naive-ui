@@ -14,12 +14,13 @@ import {
   startOfSecond,
   startOfMonth,
   startOfYear,
+  addMilliseconds,
   startOfQuarter,
   setQuarter,
   setYear
 } from 'date-fns'
-import { VirtualListInst } from 'vueuc'
 import {
+  convertTimeToMilliseconds,
   dateArray,
   monthArray,
   strictParse,
@@ -31,13 +32,17 @@ import { usePanelCommon } from './use-panel-common'
 import {
   IsSingleDateDisabled,
   datePickerInjectionKey,
-  Shortcuts
+  Shortcuts,
+  Value
 } from '../interface'
 import type { DateItem, MonthItem, YearItem } from '../utils'
 import { ScrollbarInst } from '../../../_internal'
 
 const useCalendarProps = {
   ...usePanelCommon.props,
+  defaultTime: [Number, String, Array] as PropType<
+  Value | string | [string, string] | null
+  >,
   actions: {
     type: Array as PropType<string[]>,
     default: () => ['now', 'clear', 'confirm']
@@ -235,6 +240,16 @@ function useCalendar (
       newValue = props.value
     } else {
       newValue = Date.now()
+    }
+    if (
+      type === 'datetime' &&
+      props.defaultTime !== null &&
+      !Array.isArray(props.defaultTime)
+    ) {
+      const time = convertTimeToMilliseconds(props.defaultTime)
+      if (time) {
+        newValue = getTime(addMilliseconds(startOfDay(newValue), time))
+      }
     }
     newValue = getTime(
       dateItem.type === 'quarter' && dateItem.dateObject.quarter

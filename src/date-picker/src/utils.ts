@@ -17,6 +17,7 @@ import {
   format,
   Locale,
   startOfYear,
+  startOfDay,
   getQuarter,
   isSameQuarter
 } from 'date-fns'
@@ -304,11 +305,29 @@ function strictParse (
   else return new Date(NaN)
 }
 
+function convertTimeToMilliseconds (
+  timeValue: string | number | undefined,
+  pattern = 'HH:mm:ss'
+): number | undefined {
+  if (timeValue === undefined) {
+    return undefined
+  }
+  if (typeof timeValue === 'number') {
+    return timeValue
+  }
+  const today = startOfDay(Date.now())
+  const time = parse(timeValue, pattern, today)
+  if (isValid(time)) {
+    return Math.max(getTime(time) - getTime(today), 0)
+  }
+}
+
 export {
   dateArray,
   monthArray,
   yearArray,
   quarterArray,
   strictParse,
-  getDerivedTimeFromKeyboardEvent
+  getDerivedTimeFromKeyboardEvent,
+  convertTimeToMilliseconds
 }

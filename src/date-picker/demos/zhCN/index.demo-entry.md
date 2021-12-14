@@ -13,6 +13,7 @@ month
 year
 quarter
 size
+default-time
 disabled
 disabled-time
 actions
@@ -62,6 +63,7 @@ update-on-close
 | placeholder | `string` | `'选择日期时间'` | 提示信息 |
 | update-value-on-close | `boolean` | `false` | 关闭面板时更新值 |
 | on-update:value | `(value: number \| null) => void` | `undefined` | 数据更新时触发的回调函数 |
+| default-time | `string \| number` | `undefined` | 默认时间 |
 
 ### DateRange 类型的 Props
 
@@ -91,6 +93,7 @@ update-on-close
 | start-placeholder | `string` | `'开始日期时间'` | DateTimeRange 中 start 选框的提示信息 |
 | update-value-on-close | `boolean` | `false` | 关闭面板时是否更新值 |
 | on-update:value | `(value: [number, number] \| null) => void` | `undefined` | 数据更新时触发的回调函数 |
+| default-time | `string \| number \| Array<string \| number>` | `undefined` | 默认时间 |
 
 ### Month 类型的 Props
 

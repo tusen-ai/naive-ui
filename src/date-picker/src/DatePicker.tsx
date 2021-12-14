@@ -67,6 +67,9 @@ const datePickerProps = {
     type: [Number, Array] as PropType<Value | null>,
     default: null
   },
+  defaultTime: [Number, String, Array] as PropType<
+  Value | string | [string, string] | null
+  >,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -777,7 +780,8 @@ export default defineComponent({
       active: this.mergedShow,
       actions: this.actions,
       shortcuts: this.shortcuts,
-      style: this.cssVars as CSSProperties
+      style: this.cssVars as CSSProperties,
+      defaultTime: this.defaultTime
     }
     const { mergedClsPrefix } = this
     return (

@@ -13,6 +13,7 @@ month
 year
 quarter
 size
+default-time
 disabled
 disabled-time
 actions
