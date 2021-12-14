@@ -17,7 +17,7 @@ export default cB('anchor', `
   position: relative;
 `, [
   cNotM('block', `
-    padding-left: var(--rail-width);
+    padding-left: var(--n-rail-width);
   `, [
     cB('anchor-link', [
       c('+, >', [
@@ -96,19 +96,11 @@ export default cB('anchor', `
     flex-direction: column;
   `, [
     cM('active', [
-      cE('title', `
-        color: var(--n-link-text-color-active);
-      `)
-    ]),
-    c('&:hover, &:focus', [
-      cE('title', `
-        color: var(--n-link-text-color-hover);
-      `)
-    ]),
-    c('&:active', [
-      cE('title', `
-        color: var(--n-link-text-color-pressed);
-      `)
+      c('>', [
+        cE('title', `
+          color: var(--n-link-text-color-active);
+        `)
+      ])
     ]),
     cE('title', `
       outline: none;
@@ -122,6 +114,13 @@ export default cB('anchor', `
       padding-right: 16px;
       transition: color .3s var(--n-bezier);
       color: var(--n-link-text-color);
-    `)
+    `, [
+      c('&:hover, &:focus', `
+        color: var(--n-link-text-color-hover);
+      `),
+      c('&:active', `
+        color: var(--n-link-text-color-pressed);
+      `)
+    ])
   ])
 ])
