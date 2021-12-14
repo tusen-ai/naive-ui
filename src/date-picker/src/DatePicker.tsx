@@ -43,7 +43,8 @@ import type {
   IsDateDisabled,
   IsTimeDisabled,
   Shortcuts,
-  FirstDayOfWeek
+  FirstDayOfWeek,
+  DefaultTime
 } from './interface'
 import { datePickerInjectionKey } from './interface'
 import DatetimePanel from './panel/datetime'
@@ -67,9 +68,7 @@ const datePickerProps = {
     type: [Number, Array] as PropType<Value | null>,
     default: null
   },
-  defaultTime: [Number, String, Array] as PropType<
-  Value | string | [string, string] | null
-  >,
+  defaultTime: [Number, String, Array] as PropType<DefaultTime>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -525,11 +524,7 @@ export default defineComponent({
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
       const { type } = props
-      if (
-        type === 'month' ||
-        type === 'year' ||
-        type === 'quarter'
-      ) {
+      if (type === 'month' || type === 'year' || type === 'quarter') {
         void nextTick(scrollPickerColumns)
       }
     }

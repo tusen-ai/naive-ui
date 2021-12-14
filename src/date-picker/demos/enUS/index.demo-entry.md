@@ -54,15 +54,16 @@ update-on-close
 
 ### DateTime Type Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported for the `datetime` type date picker. |
-| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |
-| is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |
-| is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
-| placeholder | `string` | `'Select Date and Time'` | Placeholder. |
-| update-value-on-close | `boolean` | `false` | Whether to update value on close. |
-| on-update:value | `(value: number \| null) => void` | `undefined` | Date selected callback. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported for the `datetime` type date picker. |  |
+| default-time | `string` | `undefined` | Default time of the selected date. It's format is `HH:mm:ss`. | NEXT_VERSION |
+| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
+| is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |  |
+| is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |  |
+| placeholder | `string` | `'Select Date and Time'` | Placeholder. |  |
+| update-value-on-close | `boolean` | `false` | Whether to update value on close. |  |
+| on-update:value | `(value: number \| null) => void` | `undefined` | Date selected callback. |  |
 
 ### DateRange Type Props
 
@@ -81,17 +82,18 @@ update-on-close
 
 ### DateTimeRange Type Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported for the `datetimerange` type. |
-| end-placeholder | `string` | `'End Date and Time'` | Placeholder at the end of the input. |
-| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |
-| is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |
-| is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |
-| separator | `string` | `'to'` | The separator between the start input and the end input. |
-| start-placeholder | `string` | `'Start Date and Time'` | The prompt information at the beginning of the input. |
-| update-value-on-close | `boolean` | `false` | Whether to update value on close. |
-| on-update:value | `(value: [number, number] \| null) => void` | `undefined` | Value changed callback. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | Operations supported for the `datetimerange` type. |  |
+| default-time | `string \| Array<string \| undefined>` | `undefined` | Default time of the selected date. It's format is `HH:mm:ss`. | NEXT_VERSION |
+| end-placeholder | `string` | `'End Date and Time'` | Placeholder at the end of the input. |  |
+| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
+| is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |  |
+| is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |  |
+| separator | `string` | `'to'` | The separator between the start input and the end input. |  |
+| start-placeholder | `string` | `'Start Date and Time'` | The prompt information at the beginning of the input. |  |
+| update-value-on-close | `boolean` | `false` | Whether to update value on close. |  |
+| on-update:value | `(value: [number, number] \| null) => void` | `undefined` | Value changed callback. |  |
 
 ### Month Type Props
 

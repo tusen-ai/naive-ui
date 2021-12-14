@@ -1,4 +1,4 @@
-import { inject, computed, watch, ref, ExtractPropTypes, PropType } from 'vue'
+import { inject, computed, watch, ref, ExtractPropTypes } from 'vue'
 import {
   addMonths,
   format,
@@ -10,23 +10,15 @@ import {
   startOfDay,
   set,
   getDate,
-  getTime,
-  addMilliseconds
+  getTime
 } from 'date-fns'
-import {
-  convertTimeToMilliseconds,
-  dateArray,
-  DateItem,
-  strictParse
-} from '../utils'
-import { usePanelCommon } from './use-panel-common'
-import { datePickerInjectionKey, Shortcuts, Value } from '../interface'
+import { getDefaultTime, dateArray, DateItem, strictParse } from '../utils'
+import { datePickerInjectionKey } from '../interface'
+import type { Shortcuts } from '../interface'
+import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 
 const useDualCalendarProps = {
-  ...usePanelCommon.props,
-  defaultTime: [Number, String, Array] as PropType<
-  Value | string | [string, string] | null
-  >,
+  ...usePanelCommonProps,
   actions: {
     type: Array,
     default: () => ['clear', 'confirm']
@@ -381,31 +373,31 @@ function useDualCalendar (
   }
   function changeStartEndTime (startTime: number, endTime?: number): void {
     if (endTime === undefined) endTime = startTime
-    if (typeof endTime !== 'number') {
-      endTime = getTime(endTime)
-    }
     if (typeof startTime !== 'number') {
       startTime = getTime(startTime)
     }
 
-    let startDefaultTime: number | undefined
-    let endDefaultTime: number | undefined
-    if (type === 'datetimerange' && props.defaultTime) {
-      if (Array.isArray(props.defaultTime)) {
-        startDefaultTime = convertTimeToMilliseconds(props.defaultTime[0])
-        endDefaultTime = convertTimeToMilliseconds(props.defaultTime[1])
+    let startDefaultTime:
+    | { hours: number, minutes: number, seconds: number }
+    | undefined
+    let endDefaultTime:
+    | { hours: number, minutes: number, seconds: number }
+    | undefined
+    if (type === 'datetimerange') {
+      const { defaultTime } = props
+      if (Array.isArray(defaultTime)) {
+        startDefaultTime = getDefaultTime(defaultTime[0])
+        endDefaultTime = getDefaultTime(defaultTime[1])
       } else {
-        startDefaultTime = convertTimeToMilliseconds(props.defaultTime)
+        startDefaultTime = getDefaultTime(defaultTime)
         endDefaultTime = startDefaultTime
       }
     }
     if (startDefaultTime) {
-      startTime = getTime(
-        addMilliseconds(startOfDay(startTime), startDefaultTime)
-      )
+      startTime = getTime(set(startTime, startDefaultTime))
     }
     if (endDefaultTime) {
-      endTime = getTime(addMilliseconds(startOfDay(endTime), endDefaultTime))
+      endTime = getTime(set(endTime, endDefaultTime))
     }
 
     panelCommon.doUpdateValue([startTime, endTime], false)

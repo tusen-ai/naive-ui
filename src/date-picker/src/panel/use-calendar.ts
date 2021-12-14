@@ -14,35 +14,27 @@ import {
   startOfSecond,
   startOfMonth,
   startOfYear,
-  addMilliseconds,
   startOfQuarter,
   setQuarter,
   setYear
 } from 'date-fns'
+import { VirtualListInst } from 'vueuc'
+import type { ScrollbarInst } from '../../../_internal'
 import {
-  convertTimeToMilliseconds,
+  getDefaultTime,
   dateArray,
   monthArray,
   strictParse,
   yearArray,
-  quarterArray,
-  QuarterItem
+  quarterArray
 } from '../utils'
-import { usePanelCommon } from './use-panel-common'
-import {
-  IsSingleDateDisabled,
-  datePickerInjectionKey,
-  Shortcuts,
-  Value
-} from '../interface'
-import type { DateItem, MonthItem, YearItem } from '../utils'
-import { ScrollbarInst } from '../../../_internal'
+import type { IsSingleDateDisabled, Shortcuts } from '../interface'
+import { datePickerInjectionKey } from '../interface'
+import type { DateItem, MonthItem, YearItem, QuarterItem } from '../utils'
+import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 
 const useCalendarProps = {
-  ...usePanelCommon.props,
-  defaultTime: [Number, String, Array] as PropType<
-  Value | string | [string, string] | null
-  >,
+  ...usePanelCommonProps,
   actions: {
     type: Array as PropType<string[]>,
     default: () => ['now', 'clear', 'confirm']
@@ -246,9 +238,9 @@ function useCalendar (
       props.defaultTime !== null &&
       !Array.isArray(props.defaultTime)
     ) {
-      const time = convertTimeToMilliseconds(props.defaultTime)
+      const time = getDefaultTime(props.defaultTime)
       if (time) {
-        newValue = getTime(addMilliseconds(startOfDay(newValue), time))
+        newValue = getTime(set(newValue, time)) // setDate getTime(addMilliseconds(startOfDay(newValue), time))
       }
     }
     newValue = getTime(

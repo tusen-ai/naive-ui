@@ -1,23 +1,17 @@
 # 默认时间
 
+你可以设定选择某个日期后默认使用的时间。
+
 ```html
 <n-space vertical>
   <n-date-picker type="datetime" clearable default-time="13:22:11" />
-  <n-date-picker
-    type="datetime"
-    clearable
-    :default-time="16 * 60 * 60 * 1000"
-  />
+  <n-date-picker type="datetime" clearable default-time="16:00:00" />
   <n-date-picker type="datetimerange" clearable default-time="13:22:11" />
+  <n-date-picker type="datetimerange" clearable :default-time="['16:00:00']" />
   <n-date-picker
     type="datetimerange"
     clearable
-    :default-time="[16 * 60 * 60 * 1000]"
-  />
-  <n-date-picker
-    type="datetimerange"
-    clearable
-    :default-time="['13:22:11', 16 * 60 * 60 * 1000]"
+    :default-time="['13:22:11', '16:00:00']"
   />
 </n-space>
 ```
