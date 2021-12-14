@@ -31,7 +31,7 @@
 - `n-popselect` add `empty` slot.
 - `n-data-table` will check all if indeterminate header checkbox is clicked, closes [#1827](https://github.com/TuSimple/naive-ui/issues/1827).
 - `n-button` uses `n` as CSS vars prefix, closes [#1808](https://github.com/TuSimple/naive-ui/issues/1808).
-- `n-date-picker` add `default-time` prop
+- `n-date-picker` add `default-time` prop.
 - `n-alert` uses `n` as CSS vars prefix.
 
 ### i18n
