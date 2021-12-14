@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.22.0 (2021-12-15)
 
 ### Breaking Changes
 
@@ -43,7 +43,7 @@
 
 - 新增 zhTW locale
 
-## 2.21.5（2021-12-07）
+## 2.21.5 (2021-12-07)
 
 ### Fixes
 

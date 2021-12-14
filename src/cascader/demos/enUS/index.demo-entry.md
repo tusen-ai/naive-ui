@@ -63,4 +63,4 @@ custom-field
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | action | `()` | Action content displayed in the cascading menu. |  |
-| empty | `()` | Empty state slot for the options cascading menu. | NEXT_VERSION |
+| empty | `()` | Empty state slot for the options cascading menu. | 2.22.0 |
