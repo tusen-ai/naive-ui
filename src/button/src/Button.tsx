@@ -168,7 +168,7 @@ const Button = defineComponent({
       switch (e.code) {
         case 'Enter':
         case 'NumpadEnter':
-          if (!props.keyboard) {
+          if (!props.keyboard || props.loading) {
             e.preventDefault()
             return
           }
