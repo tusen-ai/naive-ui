@@ -523,7 +523,7 @@ const Button = defineComponent({
         onKeydown={this.handleKeydown}
       >
         {$slots.default && this.iconPlacement === 'right' ? (
-          <div class={`${mergedClsPrefix}-button__content`}>{$slots}</div>
+          <span class={`${mergedClsPrefix}-button__content`}>{$slots}</span>
         ) : null}
         <NFadeInExpandTransition width>
           {{
