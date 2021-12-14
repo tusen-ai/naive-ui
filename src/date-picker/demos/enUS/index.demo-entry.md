@@ -28,19 +28,19 @@ update-on-close
 
 ### General Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| clearable | `boolean` | `false` | Whether the date picker is clearable. |
-| default-value | `number \| [number, number] \| null` | `null` | Date picker's default value. |
-| disabled | `boolean` | `false` | Whether the date picker is disabled. |
-| first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | The first day of a week on calendar, 0 means Monday. |
-| input-readonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |
-| shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | Shortcut button customizations. |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |
-| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year' \| 'quarter'` | `'date'` | Date picker type. |
-| value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |
-| on-blur | `() => void` | `undefined` | On blur callback. |
-| on-focus | `() => void` | `undefined` | On focus callback. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| clearable | `boolean` | `false` | Whether the date picker is clearable. |  |
+| default-value | `number \| [number, number] \| null` | `null` | Date picker's default value. |  |
+| disabled | `boolean` | `false` | Whether the date picker is disabled. |  |
+| first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | The first day of a week on calendar, 0 means Monday. |  |
+| input-readonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |  |
+| shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | Shortcut button customizations. |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
+| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year' \| 'quarter'` | `'date'` | Date picker type. | `'quarter'` vNEXT_VERSION |
+| value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |  |
+| on-blur | `() => void` | `undefined` | On blur callback. |  |
+| on-focus | `() => void` | `undefined` | On focus callback. |  |
 
 ### Date Type Props
 

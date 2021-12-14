@@ -60,7 +60,7 @@ custom-field
 
 ### Cascader Slots
 
-| Name   | Parameters | Description                                      |
-| ------ | ---------- | ------------------------------------------------ |
-| action | `()`       | Action content displayed in the cascading menu.  |
-| empty  | `()`       | Empty state slot for the options cascading menu. |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| action | `()` | Action content displayed in the cascading menu. |  |
+| empty | `()` | Empty state slot for the options cascading menu. | NEXT_VERSION |
