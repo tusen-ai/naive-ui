@@ -15,6 +15,7 @@ import {
 } from 'vue'
 import { pxfy, repeat } from 'seemly'
 import { VirtualList, VirtualListInst } from 'vueuc'
+import { CNode } from 'css-render'
 import { c } from '../../../_utils/cssr'
 import { NScrollbar, ScrollbarInst } from '../../../_internal'
 import { formatLength } from '../../../_utils'
@@ -22,6 +23,7 @@ import { NEmpty } from '../../../empty'
 import {
   dataTableInjectionKey,
   RowKey,
+  ColumnKey,
   SummaryRowData,
   MainTableBodyRef,
   TmNode
@@ -136,6 +138,7 @@ export default defineComponent({
   },
   setup (props) {
     const {
+      slots: dataTableSlots,
       mergedExpandedRowKeysRef,
       mergedClsPrefixRef,
       mergedThemeRef,
@@ -148,7 +151,9 @@ export default defineComponent({
       mergedCurrentPageRef,
       rowClassNameRef,
       leftActiveFixedColKeyRef,
+      leftActiveFixedChildrenColKeysRef,
       rightActiveFixedColKeyRef,
+      rightActiveFixedChildrenColKeysRef,
       renderExpandRef,
       hoverKeyRef,
       summaryRef,
@@ -260,32 +265,58 @@ export default defineComponent({
     const exposedMethods: MainTableBodyRef = {
       getScrollContainer
     }
+
+    interface StyleCProps {
+      leftActiveFixedColKey: ColumnKey | null
+      leftActiveFixedChildrenColKeys: ColumnKey[]
+      rightActiveFixedColKey: ColumnKey | null
+      rightActiveFixedChildrenColKeys: ColumnKey[]
+      componentId: string
+    }
+
     // manually control shadow style to avoid rerender
     const style = c([
-      ({ props: cProps }: { props: Record<string, string> }) =>
-        c([
-          cProps.leftActiveFixedColKey === null
-            ? null
-            : c(
-                `[data-n-id="${cProps.componentId}"] [data-col-key="${cProps.leftActiveFixedColKey}"]::after`,
-                {
-                  boxShadow: 'var(--box-shadow-after)'
-                }
-            ),
-          cProps.rightActiveFixedColKey === null
-            ? null
-            : c(
-                `[data-n-id="${cProps.componentId}"] [data-col-key="${cProps.rightActiveFixedColKey}"]::before`,
-                {
-                  boxShadow: 'var(--box-shadow-before)'
-                }
-            )
+      ({ props: cProps }: { props: StyleCProps }) => {
+        const createActiveLeftFixedStyle = (
+          leftActiveFixedColKey: ColumnKey | null
+        ): CNode | null => {
+          if (leftActiveFixedColKey === null) return null
+          return c(
+            `[data-n-id="${cProps.componentId}"] [data-col-key="${leftActiveFixedColKey}"]::after`,
+            { boxShadow: 'var(--box-shadow-after)' }
+          )
+        }
+
+        const createActiveRightFixedStyle = (
+          rightActiveFixedColKey: ColumnKey | null
+        ): CNode | null => {
+          if (rightActiveFixedColKey === null) return null
+          return c(
+            `[data-n-id="${cProps.componentId}"] [data-col-key="${rightActiveFixedColKey}"]::before`,
+            { boxShadow: 'var(--box-shadow-before)' }
+          )
+        }
+
+        return c([
+          createActiveLeftFixedStyle(cProps.leftActiveFixedColKey),
+          createActiveRightFixedStyle(cProps.rightActiveFixedColKey),
+          cProps.leftActiveFixedChildrenColKeys.map((leftActiveFixedColKey) =>
+            createActiveLeftFixedStyle(leftActiveFixedColKey)
+          ),
+          cProps.rightActiveFixedChildrenColKeys.map((rightActiveFixedColKey) =>
+            createActiveRightFixedStyle(rightActiveFixedColKey)
+          )
         ])
+      }
     ])
     let fixedStyleMounted = false
     watchEffect(() => {
       const { value: leftActiveFixedColKey } = leftActiveFixedColKeyRef
+      const { value: leftActiveFixedChildrenColKeys } =
+        leftActiveFixedChildrenColKeysRef
       const { value: rightActiveFixedColKey } = rightActiveFixedColKeyRef
+      const { value: rightActiveFixedChildrenColKeys } =
+        rightActiveFixedChildrenColKeysRef
       if (
         !fixedStyleMounted &&
         leftActiveFixedColKey === null &&
@@ -293,14 +324,18 @@ export default defineComponent({
       ) {
         return
       }
+
+      const cProps: StyleCProps = {
+        leftActiveFixedColKey,
+        leftActiveFixedChildrenColKeys,
+        rightActiveFixedColKey,
+        rightActiveFixedChildrenColKeys,
+        componentId
+      }
       style.mount({
         id: `n-${componentId}`,
         force: true,
-        props: {
-          leftActiveFixedColKey,
-          rightActiveFixedColKey,
-          componentId
-        }
+        props: cProps
       })
       fixedStyleMounted = true
     })
@@ -310,6 +345,7 @@ export default defineComponent({
       })
     })
     return {
+      dataTableSlots,
       componentId,
       scrollbarInstRef,
       virtualListRef,
@@ -799,7 +835,7 @@ export default defineComponent({
             this.loading && `${mergedClsPrefix}-data-table-empty--hide`
           ]}
         >
-          {renderSlot(this.$slots, 'empty', undefined, () => [
+          {renderSlot(this.dataTableSlots, 'empty', undefined, () => [
             <NEmpty
               theme={this.mergedTheme.peers.Empty}
               themeOverrides={this.mergedTheme.peerOverrides.Empty}

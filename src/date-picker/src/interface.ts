@@ -63,7 +63,7 @@ export type DatePickerInjection = {
   updateValueOnCloseRef: Ref<boolean>
   firstDayOfWeekRef: Ref<FirstDayOfWeek | undefined>
   datePickerSlots: Slots
-  scrollYearMonth: (value?: number) => void
+  scrollPickerColumns: (value?: number) => void
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 

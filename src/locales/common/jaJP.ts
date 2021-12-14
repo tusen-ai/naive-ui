@@ -29,6 +29,7 @@ const jaJP: NLocale = {
     monthTypeFormat: 'yyyy-MM',
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
+    quarterFormat: 'yyyy-qqq',
     clear: 'クリア',
     now: '現在',
     confirm: 'OK',
@@ -39,6 +40,7 @@ const jaJP: NLocale = {
     monthPlaceholder: '月を選択',
     // FIXME: translation needed
     yearPlaceholder: 'Select Year',
+    quarterPlaceholder: 'Select Quarter',
     startDatePlaceholder: '開始日',
     endDatePlaceholder: '終了日',
     startDatetimePlaceholder: '開始時間',

@@ -54,7 +54,7 @@ function getPartsOfDemo (tokens) {
   }
 }
 
-function mergeParts (parts) {
+function mergeParts ({ parts, isVue }) {
   const mergedParts = {
     ...parts
   }
@@ -64,18 +64,24 @@ function mergeParts (parts) {
   mergedParts.jsCode = ''
   let jsCode = ''
   if (parts.template) {
-    mergedParts.code += `<template>\n${parts.template
-      .split('\n')
-      .map((line) => (line.length ? '  ' + line : line))
-      .join('\n')}\n</template>`
-    mergedParts.jsCode = mergedParts.code
+    if (isVue) {
+      mergedParts.code += `<template>${parts.template}</template>`
+      mergedParts.jsCode += `<template>${parts.template}</template>`
+    } else {
+      mergedParts.code += `<template>\n${parts.template
+        .split('\n')
+        .map((line) => (line.length ? '  ' + line : line))
+        .join('\n')}\n</template>`
+      mergedParts.jsCode = mergedParts.code
+    }
   }
   if (parts.script) {
     if (parts.template) {
       mergedParts.code += '\n\n'
       mergedParts.jsCode += '\n\n'
     }
-    const startScriptTag = parts.language === 'ts' ? '<script lang="ts">' : '<script>'
+    const startScriptTag =
+      parts.language === 'ts' ? '<script lang="ts">' : '<script>'
     mergedParts.code += `${startScriptTag}
 ${parts.script}
 </script>`
@@ -93,7 +99,9 @@ ${jsCode}
       mergedParts.code += '\n\n'
       mergedParts.jsCode += '\n\n'
     }
-    const style = `<style>
+    const style = isVue
+      ? `<style>${parts.style}</style>`
+      : `<style>
 ${parts.style}
 </style>`
     mergedParts.code += style
@@ -131,16 +139,17 @@ function genStyle (sourceStyle) {
   return '<style scoped>\n' + rules.join('\n') + '</style>'
 }
 
-function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
+function genVueComponent (parts, fileName, relativeUrl) {
   const demoFileNameReg = /<!--DEMO_FILE_NAME-->/g
   const relativeUrlReg = /<!--URL-->/g
   const titleReg = /<!--TITLE_SLOT-->/g
   const contentReg = /<!--CONTENT_SLOT-->/
-  const codeReg = /<!--CODE_SLOT-->/
+  const tsCodeReg = /<!--TS_CODE_SLOT-->/
   const jsCodeReg = /<!--JS_CODE_SLOT-->/
   const scriptReg = /<!--SCRIPT_SLOT-->/
   const styleReg = /<!--STYLE_SLOT-->/
   const demoReg = /<!--DEMO_SLOT-->/
+  const languageTypeReg = /<!--LANGUAGE_TYPE_SLOT-->/
   let src = demoBlock
   src = src.replace(demoFileNameReg, fileName)
   src = src.replace(relativeUrlReg, relativeUrl)
@@ -151,14 +160,18 @@ function genVueComponent (parts, fileName, relativeUrl, noRunning = false) {
     src = src.replace(titleReg, parts.title)
   }
   if (parts.code) {
-    src = src.replace(codeReg, parts.code)
+    src = src.replace(tsCodeReg, parts.code)
   }
   if (parts.jsCode) {
     src = src.replace(jsCodeReg, parts.jsCode)
   }
-  if (parts.script && !noRunning) {
-    const startScriptTag = parts.language === 'ts' ? '<script lang="ts">\n' : '<script>\n'
+  if (parts.script) {
+    const startScriptTag =
+      parts.language === 'ts' ? '<script lang="ts">\n' : '<script>\n'
     src = src.replace(scriptReg, startScriptTag + parts.script + '\n</script>')
+  }
+  if (parts.language) {
+    src = src.replace(languageTypeReg, parts.language)
   }
   if (parts.style) {
     const style = genStyle(parts.style)
@@ -182,17 +195,11 @@ function getFileName (resourcePath) {
 }
 
 function convertMd2Demo (text, { resourcePath, relativeUrl }) {
-  const noRunning = /<!--no-running-->/.test(text)
   const tokens = marked.lexer(text)
   const parts = getPartsOfDemo(tokens)
-  const mergedParts = mergeParts(parts)
+  const mergedParts = mergeParts({ parts, isVue: false })
   const [fileName] = getFileName(resourcePath)
-  const vueComponent = genVueComponent(
-    mergedParts,
-    fileName,
-    relativeUrl,
-    noRunning
-  )
+  const vueComponent = genVueComponent(mergedParts, fileName, relativeUrl)
   return vueComponent
 }
 
