@@ -15,8 +15,8 @@ import {
 } from 'vue'
 import { pxfy, repeat } from 'seemly'
 import { VirtualList, VirtualListInst } from 'vueuc'
-import { c } from '../../../_utils/cssr'
 import { CNode } from 'css-render'
+import { c } from '../../../_utils/cssr'
 import { NScrollbar, ScrollbarInst } from '../../../_internal'
 import { formatLength } from '../../../_utils'
 import { NEmpty } from '../../../empty'
@@ -265,19 +265,18 @@ export default defineComponent({
     const exposedMethods: MainTableBodyRef = {
       getScrollContainer
     }
+
+    interface StyleCProps {
+      leftActiveFixedColKey: ColumnKey | null
+      leftActiveFixedChildrenColKeys: ColumnKey[]
+      rightActiveFixedColKey: ColumnKey | null
+      rightActiveFixedChildrenColKeys: ColumnKey[]
+      componentId: string
+    }
+
     // manually control shadow style to avoid rerender
     const style = c([
-      ({
-        props: cProps
-      }: {
-        props: {
-          leftActiveFixedColKey: ColumnKey | null
-          leftActiveFixedChildrenColKeys: ColumnKey[]
-          rightActiveFixedColKey: ColumnKey | null
-          rightActiveFixedChildrenColKeys: ColumnKey[]
-          componentId: string
-        }
-      }) => {
+      ({ props: cProps }: { props: StyleCProps }) => {
         const createActiveLeftFixedStyle = (
           leftActiveFixedColKey: ColumnKey | null
         ): CNode | null => {
@@ -325,16 +324,18 @@ export default defineComponent({
       ) {
         return
       }
+
+      const cProps: StyleCProps = {
+        leftActiveFixedColKey,
+        leftActiveFixedChildrenColKeys,
+        rightActiveFixedColKey,
+        rightActiveFixedChildrenColKeys,
+        componentId
+      }
       style.mount({
         id: `n-${componentId}`,
         force: true,
-        props: {
-          leftActiveFixedColKey,
-          leftActiveFixedChildrenColKeys,
-          rightActiveFixedColKey,
-          rightActiveFixedChildrenColKeys,
-          componentId
-        }
+        props: cProps
       })
       fixedStyleMounted = true
     })
