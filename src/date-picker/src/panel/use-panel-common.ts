@@ -13,7 +13,8 @@ import {
   OnPanelUpdateValue,
   OnPanelUpdateValueImpl,
   OnClose,
-  Shortcuts
+  Shortcuts,
+  DefaultTime
 } from '../interface'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
@@ -34,6 +35,7 @@ const usePanelCommonProps = {
     default: null
   },
   shortcuts: Object as PropType<Shortcuts>,
+  defaultTime: [Number, String, Array] as PropType<DefaultTime>,
   onConfirm: Function,
   onClose: Function as PropType<OnClose>,
   onTabOut: Function,
@@ -165,6 +167,4 @@ function usePanelCommon (props: UsePanelCommonProps) {
   }
 }
 
-usePanelCommon.props = usePanelCommonProps
-
-export { usePanelCommon }
+export { usePanelCommon, usePanelCommonProps }

@@ -42,6 +42,7 @@ tree
 flex-height
 striped
 fixed-column-debug
+fixed-column2-debug
 scroll-debug
 height-debug
 ```
@@ -126,9 +127,7 @@ height-debug
 #### DataTableCreateSummary Type
 
 ```ts
-type DataTableCreateSummary = (
-  pageData: RowData[]
-) =>
+type DataTableCreateSummary = (pageData: RowData[]) =>
   | Array<{
       [columnKey: string]: {
         value?: string | number
@@ -149,8 +148,8 @@ type DataTableCreateSummary = (
 
 ```ts
 type SortState = {
-  columnKey: string | number,
-  sorter: 'default' | function | boolean,
+  columnKey: string | number
+  sorter: 'default' | function | boolean
   order: 'ascend' | 'descend' | false
 }
 ```

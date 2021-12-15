@@ -22,7 +22,9 @@ export function useScroll (
 ) {
   let scrollLeft = 0
   const leftActiveFixedColKeyRef = ref<ColumnKey | null>(null)
+  const leftActiveFixedChildrenColKeysRef = ref<ColumnKey[]>([])
   const rightActiveFixedColKeyRef = ref<ColumnKey | null>(null)
+  const rightActiveFixedChildrenColKeysRef = ref<ColumnKey[]>([])
   const styleScrollXRef = computed(() => {
     return formatLength(props.scrollX)
   })
@@ -61,7 +63,8 @@ export function useScroll (
     > = {}
     let right = 0
     function traverse (cols: TableColumn[]): void {
-      cols.forEach((col) => {
+      for (let i = cols.length - 1; i >= 0; --i) {
+        const col = cols[i]
         const positionInfo = { start: right, end: 0 }
         columns[getColKey(col)] = positionInfo
         if ('children' in col) {
@@ -71,9 +74,9 @@ export function useScroll (
           right += getColWidth(col) || 0
           positionInfo.end = right
         }
-      })
+      }
     }
-    traverse(rightFixedColumnsRef.value.reverse())
+    traverse(rightFixedColumnsRef.value)
     return columns
   })
   function deriveActiveLeftFixedColumn (): void {
@@ -93,6 +96,22 @@ export function useScroll (
     }
     leftActiveFixedColKeyRef.value = leftActiveFixedColKey
   }
+  function deriveActiveLeftFixedChildrenColumns (): void {
+    leftActiveFixedChildrenColKeysRef.value = []
+    let activeLeftFixedColumn = props.columns.find(
+      (col) => getColKey(col) === leftActiveFixedColKeyRef.value
+    )
+    while (activeLeftFixedColumn && 'children' in activeLeftFixedColumn) {
+      const length: number = activeLeftFixedColumn.children.length
+      if (length === 0) break
+      const nextActiveLeftFixedColumn =
+        activeLeftFixedColumn.children[length - 1]
+      leftActiveFixedChildrenColKeysRef.value.push(
+        getColKey(nextActiveLeftFixedColumn)
+      )
+      activeLeftFixedColumn = nextActiveLeftFixedColumn
+    }
+  }
   function deriveActiveRightFixedColumn (): void {
     // target is header element
     const { value: rightFixedColumns } = rightFixedColumnsRef
@@ -102,7 +121,7 @@ export function useScroll (
     let rightWidth = 0
     let rightActiveFixedColKey = null
     const { value: fixedColumnRightMap } = fixedColumnRightMapRef
-    for (let i = 0; i < rightFixedColumns.length; ++i) {
+    for (let i = rightFixedColumns.length - 1; i >= 0; --i) {
       const key = getColKey(rightFixedColumns[i])
       if (
         Math.round(
@@ -120,6 +139,24 @@ export function useScroll (
     }
     rightActiveFixedColKeyRef.value = rightActiveFixedColKey
   }
+  function deriveActiveRightFixedChildrenColumns (): void {
+    rightActiveFixedChildrenColKeysRef.value = []
+    let activeRightFixedColumn = props.columns.find(
+      (col) => getColKey(col) === rightActiveFixedColKeyRef.value
+    )
+    while (
+      activeRightFixedColumn &&
+      'children' in activeRightFixedColumn &&
+      activeRightFixedColumn.children.length
+    ) {
+      const nextActiveRightFixedColumn = activeRightFixedColumn.children[0]
+      rightActiveFixedChildrenColKeysRef.value.push(
+        getColKey(nextActiveRightFixedColumn)
+      )
+      activeRightFixedColumn = nextActiveRightFixedColumn
+    }
+  }
+
   function getScrollElements (): {
     header: HTMLElement | null
     body: HTMLElement | null
@@ -174,7 +211,9 @@ export function useScroll (
       scrollLeft = body.scrollLeft
     }
     deriveActiveLeftFixedColumn()
+    deriveActiveLeftFixedChildrenColumns()
     deriveActiveRightFixedColumn()
+    deriveActiveRightFixedChildrenColumns()
   }
   function setHeaderScrollLeft (left: number): void {
     const { header } = getScrollElements()
@@ -192,7 +231,9 @@ export function useScroll (
     leftFixedColumnsRef,
     rightFixedColumnsRef,
     leftActiveFixedColKeyRef,
+    leftActiveFixedChildrenColKeysRef,
     rightActiveFixedColKeyRef,
+    rightActiveFixedChildrenColKeysRef,
     syncScrollState,
     handleTableBodyScroll,
     handleTableHeaderScroll,

@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.22.0 (2021-12-15)
 
 ### Breaking Changes
 
@@ -20,6 +20,9 @@
 - 修复 `n-radio` 的点击事件会被触发两次，关闭 [#1680](https://github.com/TuSimple/naive-ui/issues/1680)
 - 修复 `n-data-table` 当表格为空表格并且设置 min-height 时布局显示错乱，关闭 [#1809](https://github.com/TuSimple/naive-ui/issues/1809)
 - 修复 `n-data-table` 总结行有 hover 样式
+- 修复 `n-data-table` 固定 group column box-shadow 错误和 right fixed column 的渲染顺序错误，关闭 [#1832](https://github.com/TuSimple/naive-ui/issues/1832)
+- 修复 `n-anchor` 的 hover & active 的样式
+- 修复 `n-data-table` 在无数据时头部固定列的样式
 
 ### Feats
 
@@ -31,12 +34,16 @@
 - `n-popselect` 新增 `empty` slot
 - `n-data-table` 点击表头半选的勾选框之后会全选，关闭 [#1827](https://github.com/TuSimple/naive-ui/issues/1827)
 - `n-button` 的 CSS 变量使用 `n` 作为前缀, 关闭 [#1808](https://github.com/TuSimple/naive-ui/issues/1808)
+- `n-date-picker` 新增 `default-time` 属性
+- `n-alert` 的 CSS 变量使用 `n` 作为前缀
+- `n-date-picker` 属性 `type` 支持 `quarter` 选项
+- `n-anchor` 的 CSS 变量使用 `n` 作为前缀
 
 ### i18n
 
 - 新增 zhTW locale
 
-## 2.21.5（2021-12-07）
+## 2.21.5 (2021-12-07)
 
 ### Fixes
 

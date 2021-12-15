@@ -168,7 +168,7 @@ const Button = defineComponent({
       switch (e.code) {
         case 'Enter':
         case 'NumpadEnter':
-          if (!props.keyboard) {
+          if (!props.keyboard || props.loading) {
             e.preventDefault()
             return
           }
@@ -523,7 +523,7 @@ const Button = defineComponent({
         onKeydown={this.handleKeydown}
       >
         {$slots.default && this.iconPlacement === 'right' ? (
-          <div class={`${mergedClsPrefix}-button__content`}>{$slots}</div>
+          <span class={`${mergedClsPrefix}-button__content`}>{$slots}</span>
         ) : null}
         <NFadeInExpandTransition width>
           {{

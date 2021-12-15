@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.22.0 (2021-12-15)
 
 ### Breaking Changes
 
@@ -20,6 +20,9 @@
 - Fix `n-radio` click event will be triggered twice, closes [#1680](https://github.com/TuSimple/naive-ui/issues/1680).
 - Fix `n-data-table` layout display incorrect when the table is empty and min-height set, closes [#1809](https://github.com/TuSimple/naive-ui/issues/1809).
 - Fix `n-data-table`'s summary has hover style.
+- Fix `n-data-table` fixed group column box-shadow error and right fixed column order error, closes [#1832](https://github.com/TuSimple/naive-ui/issues/1832).
+- Fix `n-anchor`'s hover & active style.
+- Fix `n-data-table`'s header fixed column style on data is empty.
 
 ### Feats
 
@@ -31,12 +34,16 @@
 - `n-popselect` add `empty` slot.
 - `n-data-table` will check all if indeterminate header checkbox is clicked, closes [#1827](https://github.com/TuSimple/naive-ui/issues/1827).
 - `n-button` uses `n` as CSS vars prefix, closes [#1808](https://github.com/TuSimple/naive-ui/issues/1808).
+- `n-date-picker` add `default-time` prop.
+- `n-alert` uses `n` as CSS vars prefix.
+- `n-date-picker`'s `type` prop support `quarter` option.
+- `n-anchor` uses `n` as CSS vars prefix.
 
 ### i18n
 
 - Add zhTW locale.
 
-## 2.21.5（2021-12-07）
+## 2.21.5 (2021-12-07)
 
 ### Fixes
 

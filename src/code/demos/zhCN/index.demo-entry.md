@@ -36,7 +36,7 @@
 
 ```demo
 basic.vue
-inline
+inline.vue
 ```
 
 ## API

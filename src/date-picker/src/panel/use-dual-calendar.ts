@@ -2,7 +2,6 @@ import { inject, computed, watch, ref, ExtractPropTypes } from 'vue'
 import {
   addMonths,
   format,
-  getTime,
   getYear,
   getMonth,
   startOfMonth,
@@ -10,14 +9,16 @@ import {
   startOfSecond,
   startOfDay,
   set,
-  getDate
+  getDate,
+  getTime
 } from 'date-fns'
-import { dateArray, DateItem, strictParse } from '../utils'
-import { usePanelCommon } from './use-panel-common'
-import { datePickerInjectionKey, Shortcuts } from '../interface'
+import { getDefaultTime, dateArray, DateItem, strictParse } from '../utils'
+import { datePickerInjectionKey } from '../interface'
+import type { Shortcuts } from '../interface'
+import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 
 const useDualCalendarProps = {
-  ...usePanelCommon.props,
+  ...usePanelCommonProps,
   actions: {
     type: Array,
     default: () => ['clear', 'confirm']
@@ -375,9 +376,30 @@ function useDualCalendar (
     if (typeof startTime !== 'number') {
       startTime = getTime(startTime)
     }
-    if (typeof endTime !== 'number') {
-      endTime = getTime(endTime)
+
+    let startDefaultTime:
+    | { hours: number, minutes: number, seconds: number }
+    | undefined
+    let endDefaultTime:
+    | { hours: number, minutes: number, seconds: number }
+    | undefined
+    if (type === 'datetimerange') {
+      const { defaultTime } = props
+      if (Array.isArray(defaultTime)) {
+        startDefaultTime = getDefaultTime(defaultTime[0])
+        endDefaultTime = getDefaultTime(defaultTime[1])
+      } else {
+        startDefaultTime = getDefaultTime(defaultTime)
+        endDefaultTime = startDefaultTime
+      }
     }
+    if (startDefaultTime) {
+      startTime = getTime(set(startTime, startDefaultTime))
+    }
+    if (endDefaultTime) {
+      endTime = getTime(set(endTime, endDefaultTime))
+    }
+
     panelCommon.doUpdateValue([startTime, endTime], false)
   }
   function sanitizeValue (datetime: number): number {
@@ -591,6 +613,4 @@ function useDualCalendar (
   }
 }
 
-useDualCalendar.props = useDualCalendarProps
-
-export { useDualCalendar }
+export { useDualCalendar, useDualCalendarProps }

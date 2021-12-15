@@ -1,15 +1,17 @@
+<markdown>
 # 行内显示
 
 JavaScript 的例子。
+</markdown>
 
-```html
-<div>
-  JavaScript
-  <n-code :code="code" language="javascript" inline />
-</div>
-```
+<template>
+  <div>
+    JavaScript
+    <n-code :code="code" language="javascript" inline />
+  </div>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -19,4 +21,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
