@@ -1,27 +1,26 @@
-import { BackwardIcon, ForwardIcon } from '../../_internal/icons'
 import {
-  CSSProperties,
-  PropType,
-  cloneVNode,
-  computed,
-  defineComponent,
   h,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
+  defineComponent,
   ref,
   toRef,
-  watchEffect
+  cloneVNode,
+  nextTick,
+  computed,
+  CSSProperties,
+  onMounted,
+  watchEffect,
+  onBeforeUnmount,
+  PropType
 } from 'vue'
-import { off, on } from 'evtd'
-import { useConfig, useTheme } from '../../_mixins'
-
-import type { CarouselTheme } from '../styles'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import type { ThemeProps } from '../../_mixins'
-import { carouselLight } from '../styles'
-import { flatten } from '../../_utils'
 import { indexMap } from 'seemly'
+import { on, off } from 'evtd'
+import { BackwardIcon, ForwardIcon } from '../../_internal/icons'
+import { useConfig, useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
+import { flatten } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { carouselLight } from '../styles'
+import type { CarouselTheme } from '../styles'
 import style from './styles/index.cssr'
 
 const carouselProps = {
@@ -264,11 +263,11 @@ export default defineComponent({
           self: { dotColor, dotColorActive, dotSize, arrowColor }
         } = themeRef.value
         return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-dot-color': dotColor,
-          '--n-dot-color-active': dotColorActive,
-          '--n-dot-size': dotSize,
-          '--n-arrow-color': arrowColor
+          '--bezier': cubicBezierEaseInOut,
+          '--dot-color': dotColor,
+          '--dot-color-active': dotColorActive,
+          '--dot-size': dotSize,
+          '--arrow-color': arrowColor
         }
       })
     }

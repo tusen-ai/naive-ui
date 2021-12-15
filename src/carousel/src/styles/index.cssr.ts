@@ -11,7 +11,7 @@ export default cB('carousel', `
   position: relative;
 `, [
   cE('slides', `
-    transition: transform .3s var(--n-bezier);
+    transition: transform .3s var(--bezier);
     display: flex;
   `, [
     c('> div', `
@@ -28,21 +28,21 @@ export default cB('carousel', `
     flex-wrap: nowrap;
   `),
   cE('dot', `
-    height: var(--n-dot-size);
-    width: var(--n-dot-size);
-    background-color: var(--n-dot-color);
+    height: var(--dot-size);
+    width: var(--dot-size);
+    background-color: var(--dot-color);
     border-radius: 50%;
     cursor: pointer;
     transition:
-      box-shadow .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      box-shadow .3s var(--bezier),
+      background-color .3s var(--bezier);
     outline: none;
   `, [
     c('&:focus', `
-      background-color: var(--n-dot-color-active);
+      background-color: var(--dot-color-active);
     `),
     cM('active', `
-      background-color: var(--n-dot-color-active);
+      background-color: var(--dot-color-active);
     `),
     c('&:last-child', `
       margin-right: 0;
@@ -50,7 +50,7 @@ export default cB('carousel', `
   ]),
   cE('arrow', `
     position: absolute;
-    transition: transform .3s var(--n-bezier);
+    transition: transform .3s var(--bezier);
     transform: scale(1);
     cursor: pointer;
     height: 48px;
@@ -58,7 +58,7 @@ export default cB('carousel', `
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--n-arrow-color);
+    color: var(--arrow-color);
   `, [
     cM('right', `
       transform: translateY(-50%);
