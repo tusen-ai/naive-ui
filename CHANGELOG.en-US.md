@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-input-number` cannot input negative decimals value, closes [#1858](https://github.com/TuSimple/naive-ui/issues/1858).
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes

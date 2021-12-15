@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-input-number` 不能输入为负数的小数，关闭 [#1858](https://github.com/TuSimple/naive-ui/issues/1858)
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes
