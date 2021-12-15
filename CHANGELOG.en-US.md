@@ -4,6 +4,10 @@
 
 ### Feats
 
+- `n-carousel` uses `n` as CSS vars prefix.
+
+### Feats
+
 - Add `n-avatar-group`.
 - `n-message` uses `n` as CSS vars prefix.
 - `n-mention` uses `n` as CSS vars prefix.

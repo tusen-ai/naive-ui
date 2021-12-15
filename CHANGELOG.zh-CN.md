@@ -4,6 +4,10 @@
 
 ### Feats
 
+- `n-carousel` 的 CSS 变量使用 `n` 作为前缀
+
+### Feats
+
 - 新增 `n-avatar-group`
 - `n-message` 的 CSS 变量使用 `n` 作为前缀
 - `n-mention` 的 CSS 变量使用 `n` 作为前缀
