@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-upload` uses `n` as CSS vars prefix.
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes
