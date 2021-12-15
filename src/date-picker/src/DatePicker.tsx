@@ -251,6 +251,7 @@ export default defineComponent({
         case 'year':
           return localeRef.value.yearTypeFormat
         case 'month':
+        case 'monthrange':
           return localeRef.value.monthTypeFormat
         case 'quarter':
           return localeRef.value.quarterFormat

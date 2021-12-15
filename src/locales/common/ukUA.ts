@@ -45,7 +45,7 @@ const ukUA: NLocale = {
     endDatePlaceholder: 'Дата завершення',
     startDatetimePlaceholder: 'Дата і час початку',
     endDatetimePlaceholder: 'Дата і час завершення',
-    // TODO: need to change
+    // FIXME: translation needed
     startMonthPlaceholder: 'Start Month',
     endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,

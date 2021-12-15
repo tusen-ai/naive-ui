@@ -45,7 +45,7 @@ const ruRu: NLocale = {
     endDatePlaceholder: 'Дата окончания',
     startDatetimePlaceholder: 'Дата и время начала',
     endDatetimePlaceholder: 'Дата и время окончания',
-    // TODO: need to change
+    // FIXME: translation needed
     startMonthPlaceholder: 'Start Month',
     endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,

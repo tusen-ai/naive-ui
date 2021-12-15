@@ -45,7 +45,7 @@ const deDE: NLocale = {
     endDatePlaceholder: 'Enddatum',
     startDatetimePlaceholder: 'Anfangsdatum und Uhrzeit',
     endDatetimePlaceholder: 'Enddatum und Uhrzeit',
-    // TODO: need to change
+    // FIXME: translation needed
     startMonthPlaceholder: 'Start Month',
     endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,

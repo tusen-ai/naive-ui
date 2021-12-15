@@ -45,7 +45,7 @@ const nbNO: NLocale = {
     endDatePlaceholder: 'Sluttdato',
     startDatetimePlaceholder: 'Startdato og -tid',
     endDatetimePlaceholder: 'Sluttdato og -tid',
-    // TODO: need to change
+    // FIXME: translation needed
     startMonthPlaceholder: 'Start Month',
     endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,

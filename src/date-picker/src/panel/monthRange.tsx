@@ -8,7 +8,7 @@ import {
 } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
-import { useDualCalendar } from './use-dual-calendar'
+import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 import { warnOnce } from '../../../_utils'
 
 import { VirtualList } from 'vueuc'
@@ -17,9 +17,9 @@ import type { MonthItem, YearItem } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 
 export default defineComponent({
-  name: 'DateRangePanel',
+  name: 'MonthRangePanel',
   props: {
-    ...useDualCalendar.props,
+    ...useDualCalendarProps,
     type: {
       type: String as PropType<'monthrange'>,
       required: true
@@ -39,7 +39,6 @@ export default defineComponent({
       })
     }
     const useCalendarRef = useDualCalendar(props, props.type)
-    console.log('xx', useCalendarRef)
     const renderItem = (
       item: YearItem | MonthItem,
       i: number,
@@ -55,9 +54,7 @@ export default defineComponent({
             `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
             {
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`]:
-                item.type === 'month'
-                  ? item.isCurrentMonth
-                  : item.isCurrentYear,
+                item.isCurrent,
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
                 item.selected,
               [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:

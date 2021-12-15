@@ -45,7 +45,7 @@ const idID: NLocale = {
     endDatePlaceholder: 'Tanggal Selesai',
     startDatetimePlaceholder: 'Tanggal dan Waktu Mulai',
     endDatetimePlaceholder: 'Tanggal dan Waktu Selesai',
-    // TODO: need to change
+    // FIXME: translation needed
     startMonthPlaceholder: 'Start Month',
     endMonthPlaceholder: 'End Month',
     monthBeforeYear: true,
