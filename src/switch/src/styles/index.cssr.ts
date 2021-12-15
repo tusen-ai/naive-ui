@@ -175,5 +175,8 @@ export default cB('switch', `
       cursor: not-allowed;
       opacity: .5;
     `)
-  ])
+  ]),
+  cM('loading', {
+    'pointer-events': 'none'
+  })
 ])

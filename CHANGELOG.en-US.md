@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-switch` can no longer be clicked under `loading` status, closes [#1853](https://github.com/TuSimple/naive-ui/issues/1853).
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes
