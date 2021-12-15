@@ -1,6 +1,6 @@
-import path from 'path'
-import fs from 'fs-extra'
-import { marked } from 'marked'
+const path = require('path')
+const fs = require('fs-extra')
+const { marked } = require('marked')
 
 const fileRegex = /\.demo\.md$/
 
@@ -41,12 +41,12 @@ function getPartsOfMdDemo (tokens) {
   }
 }
 
-export async function loadFile (filepath) {
+async function loadFile (filepath) {
   if (fs.existsSync(filepath)) { return await fs.readFile(filepath, 'utf-8') }
   return undefined
 }
 
-export async function loadAllFile (filePathArr) {
+async function loadAllFile (filePathArr) {
   const filesArr = []
   for (let i = 0; i < filePathArr.length; i++) {
     const filePath = filePathArr[i]
@@ -75,7 +75,7 @@ async function updateIndexEntryDemo (file) {
   await fs.writeFileSync(path.resolve(file.dir, './index.demo-entry.md'), indexFileContent)
 }
 
-export async function handleFile (files) {
+async function handleFile (files) {
   for (const file of files) {
     const fileString = await loadFile(file.path)
     const tokens = marked.lexer(fileString)
@@ -105,15 +105,20 @@ ${parts.style}
     await fs.remove(file.path)
     await fs.ensureDir(file.dir)
     await fs.writeFileSync(path.resolve(file.dir, `./${file.name}.vue`), vueDemo)
+    // 应该可以统一一起修改
     await updateIndexEntryDemo(file)
   }
 }
 
-export const COMPONENT_ROOT = path.resolve(__dirname, '../../src')
+const COMPONENT_ROOT = path.resolve(__dirname, '../../src')
 
-export async function convertFilesByComponentName (componentName) {
+async function convertFilesByComponentName (componentName) {
   const folders = ['zhCN', 'enUS'].map(item => path.resolve(COMPONENT_ROOT, `${componentName}/demos/${item}`))
   if (folders.length) { return await loadAllFile(folders) }
 
   return undefined
+}
+
+module.exports = {
+  convertFilesByComponentName
 }
