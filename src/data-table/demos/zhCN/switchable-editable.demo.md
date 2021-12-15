@@ -65,7 +65,7 @@ const ShowOrEdit = defineComponent({
             onUpdateValue: (v) => {
               inputValue.value = v
             },
-            onBlur: () => {
+            onChange: () => {
               props.onUpdateValue(inputValue.value)
               isEdit.value = false
             }
