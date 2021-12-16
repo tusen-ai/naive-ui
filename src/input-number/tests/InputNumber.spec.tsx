@@ -167,4 +167,28 @@ describe('n-input-number', () => {
     expect(onUpdateValue).toHaveBeenCalledWith(24)
     wrapper.unmount()
   })
+
+  it('should work with negative decimal value', async () => {
+    const onUpdateValue = jest.fn()
+    const wrapper = mount(NInputNumber, {
+      attachTo: document.body,
+      props: {
+        defaultValue: 2,
+        onUpdateValue
+      }
+    })
+    wrapper.find('input').element.value = '-2.'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledTimes(0)
+    wrapper.find('input').element.value = '-2.2'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledWith(-2.2)
+    wrapper.find('input').element.value = '-.'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledTimes(1)
+    wrapper.find('input').element.value = '-.2'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledWith(-0.2)
+    wrapper.unmount()
+  })
 })

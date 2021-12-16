@@ -13,7 +13,7 @@ export function parse (value: string): number | null {
 
 // can be parsed to number but shouldn't be applied when inputing
 export function isWipValue (value: string): boolean {
-  return /^\d+\.$/.test(value) || /^\.\d+$/.test(value)
+  return /^(-)?\d+\.$/.test(value) || /^\.\d+$/.test(value)
 }
 
 // string => boolean (expected, not implemented)
