@@ -3,6 +3,7 @@ import {
   ref,
   computed,
   inject,
+  onMounted,
   defineComponent,
   PropType,
   renderSlot,
@@ -51,6 +52,7 @@ const buttonProps = {
     type: Boolean,
     default: true
   },
+  internalAutoFocus: Boolean,
   keyboard: {
     type: Boolean,
     default: true
@@ -102,6 +104,12 @@ const Button = defineComponent({
     const selfRef = ref<HTMLElement | null>(null)
     const waveRef = ref<BaseWaveRef | null>(null)
     const enterPressedRef = ref(false)
+    onMounted(() => {
+      const { value } = selfRef
+      if (value && props.focusable && props.internalAutoFocus && !props.disabled) {
+        value.focus({ preventScroll: true })
+      }
+    })
     const showBorderRef = useMemo(() => {
       return (
         !props.quaternary &&
