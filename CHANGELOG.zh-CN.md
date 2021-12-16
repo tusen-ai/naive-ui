@@ -7,6 +7,10 @@
 - 修复 `n-data-table` 在未设置 max-height 的情况下横向滚动条消失, 关闭 [#1857](https://github.com/TuSimple/naive-ui/issues/1857)
 - 修复 `n-input-number` 不能输入为负数的小数，关闭 [#1858](https://github.com/TuSimple/naive-ui/issues/1858)
 
+### Feats
+
+- `n-divider` 的 CSS 变量使用 `n` 作为前缀
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes

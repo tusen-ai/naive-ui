@@ -7,6 +7,10 @@
 - Fix `n-data-table` 's horizontal scrollbar disappears when max-height is not set, closes [#1857](https://github.com/TuSimple/naive-ui/issues/1857).
 - Fix `n-input-number` cannot input negative decimals value, closes [#1858](https://github.com/TuSimple/naive-ui/issues/1858).
 
+### Feats
+
+- `n-divider` uses `n` as CSS vars prefix.
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes
