@@ -42,11 +42,11 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--font-size': pFontSize,
-          '--line-height': pLineHeight,
-          '--margin': pMargin,
-          '--text-color': depth === undefined ? pTextColor : depthTextColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-font-size': pFontSize,
+          '--n-line-height': pLineHeight,
+          '--n-margin': pMargin,
+          '--n-text-color': depth === undefined ? pTextColor : depthTextColor
         }
       })
     }
