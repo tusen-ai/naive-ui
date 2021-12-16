@@ -176,7 +176,9 @@ export default cB('switch', `
       opacity: .5;
     `)
   ]),
-  cM('loading', {
-    'pointer-events': 'none'
-  })
+  cM('loading', [
+    cE('rail', `
+      pointer-events: none;
+    `)
+  ])
 ])

@@ -129,7 +129,8 @@ export default defineComponent({
       nTriggerFormBlur()
     }
     function handleClick (): void {
-      if (!mergedDisabledRef.value && !props.loading) {
+      if (props.loading) return
+      if (!mergedDisabledRef.value) {
         if (mergedValueRef.value !== props.checkedValue) {
           doUpdateValue(props.checkedValue)
         } else {
@@ -147,12 +148,14 @@ export default defineComponent({
       pressedRef.value = false
     }
     function handleKeyup (e: KeyboardEvent): void {
+      if (props.loading) return
       if (e.code === 'Space') {
         doUpdateValue(!mergedValueRef.value)
         pressedRef.value = false
       }
     }
     function handleKeydown (e: KeyboardEvent): void {
+      if (props.loading) return
       if (e.code === 'Space') {
         e.preventDefault()
         pressedRef.value = true
