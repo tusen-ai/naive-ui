@@ -23,7 +23,7 @@ export default defineComponent({
         } else {
           style.background = '#2080f0'
           if (focused) {
-            style.boxShadow = '0 0 0 2px #2080f40'
+            style.boxShadow = '0 0 0 2px #2080f040'
           }
         }
         return style
