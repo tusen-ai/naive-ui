@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-divider` uses `n` as CSS vars prefix.
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes
