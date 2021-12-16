@@ -41,13 +41,13 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--font-size': liFontSize,
-          '--line-height': liLineHeight,
-          '--text-color': liTextColor,
-          '--li-margin': liMargin,
-          '--ol-padding': olPadding,
-          '--ul-padding': ulPadding
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-font-size': liFontSize,
+          '--n-line-height': liLineHeight,
+          '--n-text-color': liTextColor,
+          '--n-li-margin': liMargin,
+          '--n-ol-padding': olPadding,
+          '--n-ul-padding': ulPadding
         }
       })
     }

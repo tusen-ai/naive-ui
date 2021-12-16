@@ -24,7 +24,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
         return {
-          '--color': themeRef.value.self.hrColor
+          '--n-color': themeRef.value.self.hrColor
         }
       })
     }

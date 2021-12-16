@@ -129,7 +129,7 @@ export default defineComponent({
       nTriggerFormBlur()
     }
     function handleClick (): void {
-      if (!mergedDisabledRef.value) {
+      if (!mergedDisabledRef.value && !props.loading) {
         if (mergedValueRef.value !== props.checkedValue) {
           doUpdateValue(props.checkedValue)
         } else {
@@ -240,6 +240,7 @@ export default defineComponent({
           checked && `${mergedClsPrefix}-switch--active`,
           mergedDisabled && `${mergedClsPrefix}-switch--disabled`,
           this.round && `${mergedClsPrefix}-switch--round`,
+          this.loading && `${mergedClsPrefix}-switch--loading`,
           this.pressed && `${mergedClsPrefix}-switch--pressed`
         ]}
         tabindex={!this.mergedDisabled ? 0 : undefined}
