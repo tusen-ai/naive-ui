@@ -1,19 +1,19 @@
 import { cB, cM } from '../../../_utils/cssr'
 
 // vars:
-// --text-color
-// --font-weight-strong
-// --font-famliy-mono
-// --code-border-radius
-// --code-text-color
-// --code-color
-// --code-border
+// --n-text-color
+// --n-font-weight-strong
+// --n-font-famliy-mono
+// --n-code-border-radius
+// --n-code-text-color
+// --n-code-color
+// --n-code-border
 export default cB('text', `
-  transition: color .3s var(--bezier);
-  color: var(--text-color);
+  transition: color .3s var(--n-bezier);
+  color: var(--n-text-color);
 `, [
   cM('strong', `
-    font-weight: var(--font-weight-strong);
+    font-weight: var(--n-font-weight-strong);
   `),
   cM('italic', {
     fontStyle: 'italic'
@@ -24,17 +24,17 @@ export default cB('text', `
   cM('code', `
     line-height: 1.4;
     display: inline-block;
-    font-family: var(--font-famliy-mono);
+    font-family: var(--n-font-famliy-mono);
     transition: 
-      color .3s var(--bezier),
-      border-color .3s var(--bezier),
-      background-color .3s var(--bezier);
+      color .3s var(--n-bezier),
+      border-color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier);
     box-sizing: border-box;
     padding: .05em .35em 0 .35em;
-    border-radius: var(--code-border-radius);
+    border-radius: var(--n-code-border-radius);
     font-size: .9em;
-    color: var(--code-text-color);
-    background-color: var(--code-color);
-    border: var(--code-border);
+    color: var(--n-code-text-color);
+    background-color: var(--n-code-color);
+    border: var(--n-code-border);
   `)
 ])

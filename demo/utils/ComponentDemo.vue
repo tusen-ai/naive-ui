@@ -1,8 +1,8 @@
 <template>
   <n-card
     v-if="showDemo"
-    class="demo-card"
     :id="demoFileName"
+    class="demo-card"
     :segmented="{
       footer: true
     }"
@@ -19,7 +19,7 @@
           <edit-in-code-sandbox-button
             style="padding: 0; margin-right: 6px"
             size="tiny"
-            :code="sfcCode"
+            :code="showTs ? sfcTsCode : sfcJsCode"
           />
         </template>
         {{ t('editInCodeSandbox') }}
@@ -41,7 +41,7 @@
             depth="3"
             style="padding: 0; margin-right: 6px"
             size="tiny"
-            :code="sfcCode"
+            :code="showTs ? sfcTsCode : sfcJsCode"
             :success-text="t('copySuccess')"
           />
         </template>
@@ -69,8 +69,24 @@
     <slot name="content" />
     <slot name="demo" />
     <template v-if="showCode" #footer>
+      <n-tabs
+        v-if="languageType === 'ts'"
+        size="small"
+        type="segment"
+        style="padding: 12px 24px 0 24px"
+        :value="showTs ? 'ts' : 'js'"
+        @update:value="($e) => (showTs = $e === 'ts')"
+      >
+        <n-tab name="ts">
+          TypeScript
+        </n-tab>
+        <n-tab name="js">
+          JavaScript
+        </n-tab>
+      </n-tabs>
       <n-scrollbar x-scrollable content-style="padding: 20px 24px;">
-        <n-code language="html" :code="sfcCode" />
+        <n-code v-if="showTs" language="html" :code="sfcTsCode" />
+        <n-code v-else language="html" :code="sfcJsCode" />
       </n-scrollbar>
     </template>
   </n-card>
@@ -97,7 +113,7 @@ export default {
       type: String,
       required: true
     },
-    code: {
+    tsCode: {
       type: String,
       required: true
     },
@@ -108,6 +124,14 @@ export default {
     relativeUrl: {
       type: String,
       required: true
+    },
+    jsCode: {
+      type: String,
+      required: true
+    },
+    languageType: {
+      type: String,
+      default: 'js'
     }
   },
   setup (props) {
@@ -117,6 +141,7 @@ export default {
       return !(isDebugDemo && displayModeRef.value !== 'debug')
     })
     const showCodeRef = ref(false)
+    const showTsRef = ref(true)
     const expandCodeButtonRef = ref(null)
     watch(showCodeRef, () => {
       nextTick(() => {
@@ -127,12 +152,17 @@ export default {
       expandCodeButtonRef,
       showDemo: showDemoRef,
       showCode: showCodeRef,
-      sfcCode: decodeURIComponent(props.code),
+      showTs: showTsRef,
+      sfcTsCode: decodeURIComponent(props.tsCode),
+      sfcJsCode: decodeURIComponent(props.jsCode),
       toggleCodeDisplay () {
         showCodeRef.value = !showCodeRef.value
       },
       handleTitleClick: () => {
         window.location.hash = `#${props.demoFileName}`
+      },
+      toggleLanguageChange () {
+        showTsRef.value = !showTsRef.value
       },
       ...i18n({
         'zh-CN': {

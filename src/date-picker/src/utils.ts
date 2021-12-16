@@ -11,11 +11,14 @@ import {
   addDays,
   addMonths,
   addYears,
+  addQuarters,
   getDay,
   parse,
   format,
   Locale,
-  startOfYear
+  startOfYear,
+  getQuarter,
+  isSameQuarter
 } from 'date-fns'
 import { START_YEAR } from './config'
 
@@ -41,13 +44,14 @@ function getDerivedTimeFromKeyboardEvent (
 const matcherMap = {
   date: isSameDay,
   month: isSameMonth,
-  year: isSameYear
+  year: isSameYear,
+  quarter: isSameQuarter
 } as const
 
 function matchDate (
   sourceTime: number[] | number,
   patternTime: number | Date,
-  type: 'date' | 'month' | 'year' = 'date'
+  type: 'date' | 'month' | 'year' | 'quarter' = 'date'
 ): boolean {
   const matcher = matcherMap[type]
   if (Array.isArray(sourceTime)) {
@@ -79,7 +83,7 @@ export interface MonthItem {
     month: number
     year: number
   }
-  isCurrentMonth: boolean
+  isCurrent: boolean
   selected: boolean
   ts: number
 }
@@ -89,7 +93,18 @@ export interface YearItem {
   dateObject: {
     year: number
   }
-  isCurrentYear: boolean
+  isCurrent: boolean
+  selected: boolean
+  ts: number
+}
+
+export interface QuarterItem {
+  type: 'quarter'
+  dateObject: {
+    quarter: number
+    year: number
+  }
+  isCurrent: boolean
   selected: boolean
   ts: number
 }
@@ -138,7 +153,7 @@ function monthItem (
       month: getMonth(monthTs),
       year: getYear(monthTs)
     },
-    isCurrentMonth: isSameMonth(currentTs, monthTs),
+    isCurrent: isSameMonth(currentTs, monthTs),
     selected: valueTs !== null && matchDate(valueTs, monthTs, 'month'),
     ts: getTime(monthTs)
   }
@@ -154,9 +169,26 @@ function yearItem (
     dateObject: {
       year: getYear(yearTs)
     },
-    isCurrentYear: isSameYear(currentTs, yearTs),
+    isCurrent: isSameYear(currentTs, yearTs),
     selected: valueTs !== null && matchDate(valueTs, yearTs, 'year'),
     ts: getTime(yearTs)
+  }
+}
+
+function quarterItem (
+  quarterTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): QuarterItem {
+  return {
+    type: 'quarter',
+    dateObject: {
+      quarter: getQuarter(quarterTs),
+      year: getYear(quarterTs)
+    },
+    isCurrent: isSameQuarter(currentTs, quarterTs),
+    selected: valueTs !== null && matchDate(valueTs, quarterTs, 'quarter'),
+    ts: getTime(quarterTs)
   }
 }
 
@@ -225,6 +257,21 @@ function monthArray (
   return calendarMonths
 }
 
+function quarterArray (
+  quarterTs: number,
+  valueTs: number | [number, number] | null,
+  currentTs: number
+): QuarterItem[] {
+  const calendarQuarters = []
+  const yearStart = startOfYear(quarterTs)
+  for (let i = 0; i < 4; i++) {
+    calendarQuarters.push(
+      quarterItem(getTime(addQuarters(yearStart, i)), valueTs, currentTs)
+    )
+  }
+  return calendarQuarters
+}
+
 function yearArray (
   yearTs: number,
   valueTs: number | [number, number] | null,
@@ -257,10 +304,33 @@ function strictParse (
   else return new Date(NaN)
 }
 
+function getDefaultTime (timeValue: string | undefined):
+| {
+  hours: number
+  minutes: number
+  seconds: number
+}
+| undefined {
+  if (timeValue === undefined) {
+    return undefined
+  }
+  if (typeof timeValue === 'number') {
+    return timeValue
+  }
+  const [hour, minute, second] = timeValue.split(':')
+  return {
+    hours: Number(hour),
+    minutes: Number(minute),
+    seconds: Number(second)
+  }
+}
+
 export {
   dateArray,
   monthArray,
   yearArray,
+  quarterArray,
   strictParse,
-  getDerivedTimeFromKeyboardEvent
+  getDerivedTimeFromKeyboardEvent,
+  getDefaultTime
 }

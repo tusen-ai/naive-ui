@@ -4,7 +4,7 @@
 
 ```html
 <n-space>
-  <n-button :loading="loading" @click="loading = !loading">
+  <n-button :loading="loading" @click="handleClick">
     <template #icon>
       <n-icon>
         <cash-icon />
@@ -12,7 +12,7 @@
     </template>
     点我
   </n-button>
-  <n-button :loading="loading" @click="loading = !loading"> 点我 </n-button>
+  <n-button :loading="loading" @click="handleClick"> 点我 </n-button>
 </n-space>
 ```
 
@@ -25,8 +25,15 @@ export default defineComponent({
     CashIcon
   },
   setup () {
+    const loadingRef = ref(false)
     return {
-      loading: ref(false)
+      handleClick () {
+        loadingRef.value = true
+        setTimeout(() => {
+          loadingRef.value = false
+        }, 2000)
+      },
+      loading: loadingRef
     }
   }
 })

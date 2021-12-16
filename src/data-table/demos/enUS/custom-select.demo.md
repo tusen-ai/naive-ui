@@ -1,4 +1,4 @@
-# Custom Selection Menu
+# Custom selection menu
 
 Set `options` on a selection type column to create selection dropdown near header checkbox.
 

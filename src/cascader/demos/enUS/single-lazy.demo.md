@@ -1,4 +1,4 @@
-# Single (Async)
+# Single (async)
 
 ```html
 <n-space vertical>

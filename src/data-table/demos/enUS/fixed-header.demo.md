@@ -1,4 +1,4 @@
-# Fixed Header
+# Fixed header
 
 Display large amounts of data in scrollable view by set `max-height`.
 

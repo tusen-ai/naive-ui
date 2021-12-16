@@ -35,8 +35,8 @@
 ## 演示
 
 ```demo
-basic
-inline
+basic.vue
+inline.vue
 ```
 
 ## API
