@@ -23,8 +23,13 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut },
+          self: { hrColor }
+        } = themeRef.value
         return {
-          '--n-color': themeRef.value.self.hrColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-color': hrColor
         }
       })
     }

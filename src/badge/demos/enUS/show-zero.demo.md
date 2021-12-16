@@ -1,4 +1,4 @@
-# Show Zero
+# Show zero
 
 Set `show-zero` prop to display zero.
 

@@ -1,4 +1,4 @@
-# Use NA with Router Link
+# Use n-a with router link
 
 You can use `<n-a />` for links and routes.
 

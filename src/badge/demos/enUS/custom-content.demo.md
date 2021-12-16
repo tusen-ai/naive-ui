@@ -1,4 +1,4 @@
-# Custom Content
+# Customizing content
 
 Insert some custom content in it.
 

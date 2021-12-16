@@ -68,7 +68,7 @@ export default defineComponent({
               : `textColor${depth}Depth`
             : createKey('textColor', type)
         const {
-          common: { fontWeightStrong, fontFamilyMono },
+          common: { fontWeightStrong, fontFamilyMono, cubicBezierEaseInOut },
           self: {
             codeTextColor,
             codeBorderRadius,
@@ -78,6 +78,7 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
+          '--n-bezier': cubicBezierEaseInOut,
           '--n-text-color': textColor,
           '--n-font-weight-strong': fontWeightStrong,
           '--n-font-famliy-mono': fontFamilyMono,
