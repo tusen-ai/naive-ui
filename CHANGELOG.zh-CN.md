@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-tree` 的 CSS 变量使用 `n` 作为前缀
+- `n-tree-select` 的 CSS 变量使用 `n` 作为前缀
+
 ## 2.23.0 (2021-12-17)
 
 ### Breaking Changes
