@@ -39,11 +39,11 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--font-size': blockquoteFontSize,
-          '--line-height': blockquoteLineHeight,
-          '--prefix-color': blockquotePrefixColor,
-          '--text-color': blockquoteTextColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-font-size': blockquoteFontSize,
+          '--n-line-height': blockquoteLineHeight,
+          '--n-prefix-color': blockquotePrefixColor,
+          '--n-text-color': blockquoteTextColor
         }
       })
     }

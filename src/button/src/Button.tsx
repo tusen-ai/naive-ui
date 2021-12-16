@@ -3,6 +3,7 @@ import {
   ref,
   computed,
   inject,
+  onMounted,
   defineComponent,
   PropType,
   renderSlot,
@@ -72,11 +73,12 @@ const buttonProps = {
     type: String as PropType<'button' | 'submit' | 'reset'>,
     default: 'button'
   },
-  onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   bordered: {
     type: Boolean,
     default: true
-  }
+  },
+  onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
+  internalAutoFocus: Boolean
 } as const
 
 export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>
@@ -99,9 +101,20 @@ const Button = defineComponent({
         }
       })
     }
-    const selfRef = ref<HTMLElement | null>(null)
-    const waveRef = ref<BaseWaveRef | null>(null)
+    const selfElRef = ref<HTMLElement | null>(null)
+    const waveElRef = ref<BaseWaveRef | null>(null)
     const enterPressedRef = ref(false)
+    onMounted(() => {
+      const { value: selfEl } = selfElRef
+      if (
+        selfEl &&
+        !props.disabled &&
+        props.focusable &&
+        props.internalAutoFocus
+      ) {
+        selfEl.focus({ preventScroll: true })
+      }
+    })
     const showBorderRef = useMemo(() => {
       return (
         !props.quaternary &&
@@ -139,7 +152,7 @@ const Button = defineComponent({
         return
       }
       if (mergedFocusableRef.value) {
-        selfRef.value?.focus({ preventScroll: true })
+        selfElRef.value?.focus({ preventScroll: true })
       }
     }
     const handleClick = (e: MouseEvent): void => {
@@ -147,10 +160,7 @@ const Button = defineComponent({
         const { onClick } = props
         if (onClick) call(onClick, e)
         if (!props.text) {
-          const { value } = waveRef
-          if (value) {
-            value.play()
-          }
+          waveElRef.value?.play()
         }
       }
     }
@@ -193,8 +203,8 @@ const Button = defineComponent({
       mergedClsPrefixRef
     )
     return {
-      selfRef,
-      waveRef,
+      selfElRef,
+      waveElRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedFocusable: mergedFocusableRef,
       mergedSize: mergedSizeRef,
@@ -497,7 +507,7 @@ const Button = defineComponent({
     const { $slots, mergedClsPrefix, tag: Component } = this
     return (
       <Component
-        ref="selfRef"
+        ref="selfElRef"
         class={[
           `${mergedClsPrefix}-button`,
           `${mergedClsPrefix}-button--${this.type}-type`,
@@ -564,7 +574,7 @@ const Button = defineComponent({
           <span class={`${mergedClsPrefix}-button__content`}>{$slots}</span>
         ) : null}
         {!this.text ? (
-          <NBaseWave ref="waveRef" clsPrefix={mergedClsPrefix} />
+          <NBaseWave ref="waveElRef" clsPrefix={mergedClsPrefix} />
         ) : null}
         {this.showBorder ? (
           <div

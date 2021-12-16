@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 2.23.0 (2021-12-17)
+
+### Breaking Changes
+
+- `n-switch` 在 `loading` 状态不可再被点击，关闭 [#1853](https://github.com/TuSimple/naive-ui/issues/1853)
+
+### Fixes
+
+- 修复 `n-data-table` 在未设置 max-height 的情况下横向滚动条消失, 关闭 [#1857](https://github.com/TuSimple/naive-ui/issues/1857)
+- 修复 `n-input-number` 不能输入为负数的小数，关闭 [#1858](https://github.com/TuSimple/naive-ui/issues/1858)
+- 修复 `n-dialog` 点击回车键反复弹出新弹窗，关闭 [#1559](https://github.com/TuSimple/naive-ui/issues/1559)
+
+### Feats
+
+- `n-divider` 的 CSS 变量使用 `n` 作为前缀
+- `typography` 的 CSS 变量使用 `n` 作为前缀
+- `n-badge` 的 CSS 变量使用 `n` 作为前缀
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes
