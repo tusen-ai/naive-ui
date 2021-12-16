@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.23.0 (2021-12-17)
 
 ### Breaking Changes
 
