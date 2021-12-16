@@ -115,8 +115,6 @@ const COMPONENT_ROOT = path.resolve(__dirname, '../../src')
 async function convertFilesByComponentName (componentName) {
   const folders = ['zhCN', 'enUS'].map(item => path.resolve(COMPONENT_ROOT, `${componentName}/demos/${item}`))
   if (folders.length) { return await loadAllFile(folders) }
-
-  return undefined
 }
 
 module.exports = {
