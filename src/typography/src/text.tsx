@@ -78,13 +78,13 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--text-color': textColor,
-          '--font-weight-strong': fontWeightStrong,
-          '--font-famliy-mono': fontFamilyMono,
-          '--code-border-radius': codeBorderRadius,
-          '--code-text-color': codeTextColor,
-          '--code-color': codeColor,
-          '--code-border': codeBorder
+          '--n-text-color': textColor,
+          '--n-font-weight-strong': fontWeightStrong,
+          '--n-font-famliy-mono': fontFamilyMono,
+          '--n-code-border-radius': codeBorderRadius,
+          '--n-code-text-color': codeTextColor,
+          '--n-code-color': codeColor,
+          '--n-code-border': codeBorder
         }
       })
     }
