@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-switch` 在 `loading` 状态不可再被点击，关闭 [#1853](https://github.com/TuSimple/naive-ui/issues/1853)
+
 ### Fixes
 
 - 修复 `n-data-table` 在未设置 max-height 的情况下横向滚动条消失, 关闭 [#1857](https://github.com/TuSimple/naive-ui/issues/1857)
