@@ -460,7 +460,6 @@ export default defineComponent({
       <NScrollbar
         ref="scrollbarInstRef"
         scrollable={scrollable || isBasicAutoLayout}
-        showScrollbar={!this.bodyShowHeaderOnly}
         class={`${mergedClsPrefix}-data-table-base-table-body`}
         style={this.bodyStyle}
         theme={mergedTheme.peers.Scrollbar}
