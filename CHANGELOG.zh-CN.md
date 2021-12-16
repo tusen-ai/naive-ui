@@ -10,6 +10,7 @@
 ### Feats
 
 - `n-divider` 的 CSS 变量使用 `n` 作为前缀
+- `typography` 的 CSS 变量使用 `n` 作为前缀
 
 ## 2.22.0 (2021-12-15)
 
