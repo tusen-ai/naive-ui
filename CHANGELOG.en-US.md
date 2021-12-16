@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-data-table` 's horizontal scrollbar disappears when max-height is not set, closes [#1857](https://github.com/TuSimple/naive-ui/issues/1857).
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes

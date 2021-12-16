@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-data-table` 在未设置 max-height 的情况下横向滚动条消失, 关闭 [#1857](https://github.com/TuSimple/naive-ui/issues/1857)
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes
