@@ -14,10 +14,10 @@
 
 ### Feats
 
-- `n-avatar` uses `n` as CSS prefix.
+- `n-avatar` uses `n` as CSS vars prefix.
 - `n-divider` uses `n` as CSS vars prefix.
-- `n-dynamic-tags` uses `n` as CSS prefix.
-- `n-tag` uses `n` as CSS prefix.
+- `n-dynamic-tags` uses `n` as CSS vars prefix.
+- `n-tag` uses `n` as CSS vars prefix.
 - `typography` uses `n` as CSS vars prefix.
 - `n-badge` uses `n` as CSS vars prefix.
 
