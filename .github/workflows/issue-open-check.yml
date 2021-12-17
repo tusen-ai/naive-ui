@@ -13,7 +13,7 @@ jobs:
       - run: echo opened by ${{ steps.check.outputs.result }}
 
       - name: check format
-        if: (contains(github.event.issue.body, 'issue-helper') == false&&steps.check.outputs.result == 0)
+        if: (contains(github.event.issue.body, 'issue-helper') == false && steps.check.outputs.result == 0)
         uses: actions-cool/issues-helper@v2.5.0
         with:
           actions: 'create-comment,add-labels,close-issue'
