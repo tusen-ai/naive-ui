@@ -14,6 +14,7 @@
 
 ### Feats
 
+- `n-avatar` uses `n` as CSS prefix.
 - `n-divider` uses `n` as CSS vars prefix.
 - `typography` uses `n` as CSS vars prefix.
 - `n-badge` uses `n` as CSS vars prefix.
