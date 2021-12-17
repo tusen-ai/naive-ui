@@ -168,7 +168,7 @@ export default defineComponent({
           self: { inputWidth }
         } = themeRef.value
         return {
-          '--input-width': inputWidth
+          '--n-input-width': inputWidth
         }
       })
     }
