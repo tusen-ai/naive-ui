@@ -270,27 +270,27 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--bezier-ease-in': cubicBezierEaseIn,
-          '--bezier-ease-out': cubicBezierEaseOut,
-          '--border-color': borderColor,
-          '--border-radius': borderRadius,
-          '--extra-font-size': extraFontSize,
-          '--filter-divider-color': filterDividerColor,
-          '--font-size': fontSize,
-          '--header-color': headerColor,
-          '--header-extra-text-color': extraTextColor,
-          '--header-font-weight': titleFontWeight,
-          '--header-text-color': titleTextColor,
-          '--header-text-color-disabled': titleTextColorDisabled,
-          '--item-color-pending': itemColorPending,
-          '--item-height': itemHeight,
-          '--item-text-color': itemTextColor,
-          '--item-text-color-disabled': itemTextColorDisabled,
-          '--list-color': listColor,
-          '--width': width,
-          '--icon-color': iconColor,
-          '--icon-color-disabled': iconColorDisabled
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-bezier-ease-in': cubicBezierEaseIn,
+          '--n-bezier-ease-out': cubicBezierEaseOut,
+          '--n-border-color': borderColor,
+          '--n-border-radius': borderRadius,
+          '--n-extra-font-size': extraFontSize,
+          '--n-filter-divider-color': filterDividerColor,
+          '--n-font-size': fontSize,
+          '--n-header-color': headerColor,
+          '--n-header-extra-text-color': extraTextColor,
+          '--n-header-font-weight': titleFontWeight,
+          '--n-header-text-color': titleTextColor,
+          '--n-header-text-color-disabled': titleTextColorDisabled,
+          '--n-item-color-pending': itemColorPending,
+          '--n-item-height': itemHeight,
+          '--n-item-text-color': itemTextColor,
+          '--n-item-text-color-disabled': itemTextColorDisabled,
+          '--n-list-color': listColor,
+          '--n-width': width,
+          '--n-icon-color': iconColor,
+          '--n-icon-color-disabled': iconColorDisabled
         }
       })
     }
