@@ -1,4 +1,4 @@
-# Controlled Display
+# Controlled visibility
 
 ```html
 <n-space :size="24" align="center" item-style="display: flex;">

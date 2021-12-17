@@ -2,21 +2,21 @@ import { c, cB, cM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
-// --color
-// --ripple-color
-// --bezier
-// --ripple-bezier
-// --font-size
-// --font-family
+// --n-color
+// --n-ripple-color
+// --n-bezier
+// --n-ripple-bezier
+// --n-font-size
+// --n-font-family
 export default c([
   c('@keyframes badge-wave-spread', {
     from: {
-      boxShadow: '0 0 0.5px 0px var(--ripple-color)',
+      boxShadow: '0 0 0.5px 0px var(--n-ripple-color)',
       opacity: 0.6
     },
     to: {
       // don't use exact 5px since chrome will display the animation with glitches
-      boxShadow: '0 0 0.5px 4.5px var(--ripple-color)',
+      boxShadow: '0 0 0.5px 4.5px var(--n-ripple-color)',
       opacity: 0
     }
   }),
@@ -24,8 +24,8 @@ export default c([
     display: inline-flex;
     position: relative;
     vertical-align: middle;
-    color: var(--color);
-    font-family: var(--font-family);
+    color: var(--n-color);
+    font-family: var(--n-font-family);
   `, [
     cM('as-is', [
       cB('badge-sup', {
@@ -53,10 +53,10 @@ export default c([
       ])
     ]),
     cB('badge-sup', `
-      background: var(--color);
+      background: var(--n-color);
       transition:
-        background-color .3s var(--bezier),
-        color .3s var(--bezier);
+        background-color .3s var(--n-bezier),
+        color .3s var(--n-bezier);
       color: #FFF;
       position: absolute;
       height: 18px;
@@ -64,7 +64,7 @@ export default c([
       border-radius: 9px;
       padding: 0 6px;
       text-align: center;
-      font-size: var(--font-size);
+      font-size: var(--n-font-size);
       transform: translateX(-50%);
       left: 100%;
       bottom: calc(100% - 9px);
@@ -81,7 +81,7 @@ export default c([
         animationDuration: '2s',
         animationIterationCount: 'infinite',
         animationDelay: '1s',
-        animationTimingFunction: 'var(--ripple-bezier)',
+        animationTimingFunction: 'var(--n-ripple-bezier)',
         animationName: 'badge-wave-spread'
       }),
       c('&::before', `

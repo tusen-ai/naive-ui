@@ -46,10 +46,10 @@ export default defineComponent({
           self: { color, textColor, fontWeight }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--color': color,
-          '--text-color': textColor,
-          '--font-weight': fontWeight
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-color': color,
+          '--n-text-color': textColor,
+          '--n-font-weight': fontWeight
         }
       })
     }
