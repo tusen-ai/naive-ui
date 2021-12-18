@@ -20,7 +20,7 @@ describe('n-log', () => {
     const wrapper = mount(NLog, { props: { fontSize } })
 
     expect(wrapper.find('.n-code').attributes('style')).toContain(
-      `--n-font-size: ${fontSize}px`
+      `--font-size: ${fontSize}px`
     )
   })
 
