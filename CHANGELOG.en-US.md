@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-avatar` uses `n` as CSS vars prefix.
+- `n-dynamic-tags` uses `n` as CSS vars prefix.
+- `n-tag` uses `n` as CSS vars prefix.
+
 ## 2.23.0 (2021-12-17)
 
 ### Breaking Changes
@@ -14,10 +22,7 @@
 
 ### Feats
 
-- `n-avatar` uses `n` as CSS vars prefix.
 - `n-divider` uses `n` as CSS vars prefix.
-- `n-dynamic-tags` uses `n` as CSS vars prefix.
-- `n-tag` uses `n` as CSS vars prefix.
 - `typography` uses `n` as CSS vars prefix.
 - `n-badge` uses `n` as CSS vars prefix.
 

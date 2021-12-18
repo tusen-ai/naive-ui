@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-avatar` 的 CSS 变量使用 `n` 作为前缀
+- `n-dynamic-tags` 的 CSS 变量使用 `n` 作为前缀
+- `n-tag` 的 CSS 变量使用 `n` 作为前缀
+
 ## 2.23.0 (2021-12-17)
 
 ### Breaking Changes
@@ -14,10 +22,7 @@
 
 ### Feats
 
-- `n-avatar` 的 CSS 变量使用 `n` 作为前缀
 - `n-divider` 的 CSS 变量使用 `n` 作为前缀
-- `n-dynamic-tags` 的 CSS 变量使用 `n` 作为前缀
-- `n-tag` 的 CSS 变量使用 `n` 作为前缀
 - `typography` 的 CSS 变量使用 `n` 作为前缀
 - `n-badge` 的 CSS 变量使用 `n` 作为前缀
 
