@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Feats
+
+- `n-auto-complete` uses `n` as CSS vars prefix.
+
 ## 2.23.0 (2021-12-17)
 
 ### Breaking Changes
