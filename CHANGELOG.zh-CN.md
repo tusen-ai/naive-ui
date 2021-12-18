@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-time-picker` 的 CSS 变量使用 `n` 作为前缀
+
 ## 2.23.0 (2021-12-17)
 
 ### Breaking Changes
