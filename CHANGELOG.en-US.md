@@ -1,9 +1,21 @@
 # CHANGELOG
 
-## Pending
+# Pending
+
+### Fixes
+
+- Fix `n-transfer` list doesn't follow container height when style.height is set, closes [#1879](https://github.com/TuSimple/naive-ui/issues/1879).
+- Fix `n-skeleton` & `n-gradient-text` cause runtime error in some old browsers, closes [#1867](https://github.com/TuSimple/naive-ui/issues/1867).
+- Fix `n-data-table` `ellipsis` prop in column doesn't support all `n-ellipsis`'s props, closes [#1891](https://github.com/TuSimple/naive-ui/issues/1891).
+- Fix `n-form`'s `blankHeightXxx` theme var doesn't follow `common.heightXxx`, closes [#1880](https://github.com/TuSimple/naive-ui/issues/1880).
 
 ### Feats
 
+- `n-back-top` uses `n` as CSS vars prefix.
+- `n-steps` uses `n` as CSS vars prefix.
+- `n-switch` uses `n` as CSS vars prefix.
+- `n-auto-complete` uses `n` as CSS vars prefix.
+- `n-log` uses `n` as CSS vars prefix.
 - `n-timeline` uses `n` as CSS vars prefix.
 
 ## 2.23.0 (2021-12-17)

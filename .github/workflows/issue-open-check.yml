@@ -8,9 +8,13 @@ jobs:
   check-issue:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions-cool/check-issue-ref@v1
+        id: check
+      - run: echo opened by ${{ steps.check.outputs.result }}
+
       - name: check format
-        if: (contains(github.event.issue.body, 'issue-helper') == false)
-        uses: actions-cool/issues-helper@v2.2.1
+        if: (contains(github.event.issue.body, 'issue-helper') == false && steps.check.outputs.result == 0)
+        uses: actions-cool/issues-helper@v2.5.0
         with:
           actions: 'create-comment,add-labels,close-issue'
           issue-number: ${{ github.event.issue.number }}
