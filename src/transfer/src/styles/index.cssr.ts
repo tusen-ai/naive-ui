@@ -57,14 +57,10 @@ export default c([
     display: flex;
     width: var(--width);
     font-size: var(--font-size);
+    height: 240px;
+    display: flex;
+    flex-wrap: nowrap;
   `, [
-    cM('filterable', [
-      cB('transfer-list', [
-        cB('transfer-list-body', {
-          height: 'calc(var(--item-height) * 5.6 + 45px)'
-        })
-      ])
-    ]),
     cB('transfer-icon', `
       color: var(--icon-color);
       transition: color .3s var(--bezier);
@@ -75,6 +71,9 @@ export default c([
       })
     ]),
     cB('transfer-list', `
+      height: inherit;
+      display: flex;
+      flex-direction: column;
       background-clip: padding-box;
       width: calc(50% - 36px);
       position: relative;
@@ -134,7 +133,8 @@ export default c([
         `)
       ]),
       cB('transfer-list-body', `
-        height: calc(var(--item-height) * 5.6);
+        flex-basis: 0;
+        flex-grow: 1;
         box-sizing: border-box;
         overflow: hidden;
         position: relative;

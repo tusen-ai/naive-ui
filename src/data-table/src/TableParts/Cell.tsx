@@ -42,12 +42,11 @@ export default defineComponent({
         cell = get(row, key) as any
       }
     }
-    const tooltip = typeof ellipsis === 'object' ? ellipsis.tooltip : undefined
-    if (tooltip) {
+    if (ellipsis && typeof ellipsis === 'object') {
       const { mergedTheme } = this
       return (
         <NEllipsis
-          tooltip={tooltip}
+          {...ellipsis}
           theme={mergedTheme.peers.Ellipsis}
           themeOverrides={mergedTheme.peerOverrides.Ellipsis}
         >
