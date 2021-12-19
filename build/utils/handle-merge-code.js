@@ -30,10 +30,12 @@ ${tsToJs(parts.script)}
   } else {
     // only js when md or vue file
     if (parts.template) {
-      mergedParts.jsCode += `<template>\n${parts.template
-        .split('\n')
-        .map((line) => (line.length ? '  ' + line : line))
-        .join('\n')}\n</template>`
+      mergedParts.jsCode += isVue
+        ? `<template>${parts.template}</template>`
+        : `<template>\n${parts.template
+            .split('\n')
+            .map((line) => (line.length ? '  ' + line : line))
+            .join('\n')}\n</template>`
     }
     if (parts.script) {
       if (parts.template) {
@@ -47,7 +49,9 @@ ${parts.script}
       if (parts.template || parts.script) {
         mergedParts.jsCode += '\n\n'
       }
-      const style = `<style>
+      const style = isVue
+        ? `<style>${parts.style}</style>`
+        : `<style>
 ${parts.style}
 </style>`
       mergedParts.jsCode += style
