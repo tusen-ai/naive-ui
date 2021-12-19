@@ -19,6 +19,7 @@ slot
 | Name | Parameters | Default | Description |
 | --- | --- | --- | --- |
 | content-style | `string \| Object` | `undefined` | Style of drawer's scrollable content node. |
+| display-directive | `'if' \| 'show'` | `'if'` | The display directive to use when `n-drawer` is rendered. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. |
 | height | `number \| string` | `251` | Works when placement is `top` and `bottom`. |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on drawer. |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |
