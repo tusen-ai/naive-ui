@@ -279,8 +279,8 @@ export default defineComponent({
           self: { menuBoxShadow }
         } = themeRef.value
         return {
-          '--menu-box-shadow': menuBoxShadow,
-          '--bezier': cubicBezierEaseInOut
+          '--n-menu-box-shadow': menuBoxShadow,
+          '--n-bezier': cubicBezierEaseInOut
         }
       }),
       mergedBordered: mergedBorderedRef,
