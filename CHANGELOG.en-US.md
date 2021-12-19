@@ -9,6 +9,7 @@
 - Fix `n-data-table` `ellipsis` prop in column doesn't support all `n-ellipsis`'s props, closes [#1891](https://github.com/TuSimple/naive-ui/issues/1891).
 - Fix `n-form`'s `blankHeightXxx` theme var doesn't follow `common.heightXxx`, closes [#1880](https://github.com/TuSimple/naive-ui/issues/1880).
 - Fix `n-date-picker`'s panel doesn't use `dateFormat` in locale, closes [#1793](https://github.com/TuSimple/naive-ui/issues/1793).
+- Fix `n-log` text color transition in theme switching.
 
 ### Feats
 

@@ -12,9 +12,7 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 export default cB('log', `
   position: relative;
   box-sizing: border-box;
-  transition:
-    border-color .3s var(--n-bezier),
-    color .3s var(--n-bezier);
+  transition: border-color .3s var(--n-bezier);
 `, [
   cE('lines', `
     margin: 0;
