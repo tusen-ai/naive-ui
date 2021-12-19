@@ -8,6 +8,7 @@
 - Fix `n-skeleton` & `n-gradient-text` cause runtime error in some old browsers, closes [#1867](https://github.com/TuSimple/naive-ui/issues/1867).
 - Fix `n-data-table` `ellipsis` prop in column doesn't support all `n-ellipsis`'s props, closes [#1891](https://github.com/TuSimple/naive-ui/issues/1891).
 - Fix `n-form`'s `blankHeightXxx` theme var doesn't follow `common.heightXxx`, closes [#1880](https://github.com/TuSimple/naive-ui/issues/1880).
+- Fix `n-date-picker`'s panel doesn't use `dateFormat` in locale, closes [#1793](https://github.com/TuSimple/naive-ui/issues/1793).
 
 ### Feats
 
