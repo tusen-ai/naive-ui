@@ -32,6 +32,7 @@
 - `n-divider` uses `n` as CSS vars prefix.
 - `typography` uses `n` as CSS vars prefix.
 - `n-badge` uses `n` as CSS vars prefix.
+- `n-log` uses `n` as CSS vars prefix.
 
 ## 2.22.0 (2021-12-15)
 
