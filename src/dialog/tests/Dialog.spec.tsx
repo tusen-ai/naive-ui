@@ -182,7 +182,7 @@ describe('n-dialog', () => {
     ))
     expect(
       document.querySelector('.n-dialog')?.getAttribute('style')
-    ).toContain('--icon-color: #18a058;')
+    ).toContain('--n-icon-color: #18a058;')
     wrapperCreate.unmount()
 
     const wrapperError = await mount(() => (
@@ -190,7 +190,7 @@ describe('n-dialog', () => {
     ))
     expect(
       document.querySelector('.n-dialog')?.getAttribute('style')
-    ).toContain('--icon-color: #d03050;')
+    ).toContain('--n-icon-color: #d03050;')
     wrapperError.unmount()
 
     const wrapperInfo = await mount(() => (
@@ -198,7 +198,7 @@ describe('n-dialog', () => {
     ))
     expect(
       document.querySelector('.n-dialog')?.getAttribute('style')
-    ).toContain('--icon-color: #2080f0;')
+    ).toContain('--n-icon-color: #2080f0;')
     wrapperInfo.unmount()
 
     const wrapperSuccess = await mount(() => (
@@ -206,7 +206,7 @@ describe('n-dialog', () => {
     ))
     expect(
       document.querySelector('.n-dialog')?.getAttribute('style')
-    ).toContain('--icon-color: #18a058;')
+    ).toContain('--n-icon-color: #18a058;')
     wrapperSuccess.unmount()
 
     const wrapperWarning = await mount(() => (
@@ -214,7 +214,7 @@ describe('n-dialog', () => {
     ))
     expect(
       document.querySelector('.n-dialog')?.getAttribute('style')
-    ).toContain('--icon-color: #f0a020;')
+    ).toContain('--n-icon-color: #f0a020;')
     wrapperWarning.unmount()
   })
 
