@@ -2,14 +2,14 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 import { c, cB, cE } from '../../../_utils/cssr'
 
 // vars:
-// --bezier
-// --menu-height
-// --menu-border-radius
-// --menu-box-shadow
-// --menu-color
-// --action-padding
-// --action-text-color
-// --action-divider-color
+// --n-bezier
+// --n-menu-height
+// --n-menu-border-radius
+// --n-menu-box-shadow
+// --n-menu-color
+// --n-action-padding
+// --n-action-text-color
+// --n-action-divider-color
 export default c([
   cB('tree-select', `
     z-index: auto;
@@ -21,13 +21,13 @@ export default c([
     position: relative;
     overflow: hidden;
     margin: 4px 0;
-    transition: box-shadow .3s var(--bezier), background-color .3s var(--bezier);
-    border-radius: var(--menu-border-radius);
-    box-shadow: var(--menu-box-shadow);
-    background-color: var(--menu-color);
+    transition: box-shadow .3s var(--n-bezier), background-color .3s var(--n-bezier);
+    border-radius: var(--n-menu-border-radius);
+    box-shadow: var(--n-menu-box-shadow);
+    background-color: var(--n-menu-color);
     outline: none;
   `, [
-    cB('tree', 'max-height: var(--menu-height);'),
+    cB('tree', 'max-height: var(--n-menu-height);'),
     cE('empty', `
       display: flex;
       padding: 12px 32px;
@@ -35,12 +35,12 @@ export default c([
       justify-content: center;
     `),
     cE('action', `
-      padding: var(--action-padding);
+      padding: var(--n-action-padding);
       transition: 
-        color .3s var(--bezier);
-        border-color .3s var(--bezier);
-      border-top: 1px solid var(--action-divider-color);
-      color: var(--action-text-color);
+        color .3s var(--n-bezier);
+        border-color .3s var(--n-bezier);
+      border-top: 1px solid var(--n-action-divider-color);
+      color: var(--n-action-text-color);
     `),
     fadeInScaleUpTransition()
   ])

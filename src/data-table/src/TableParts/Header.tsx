@@ -199,9 +199,9 @@ export default defineComponent({
                         {renderTitle(column)}
                       </div>
                     ) // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-                      : ellipsis && ellipsis.tooltip ? (
+                      : ellipsis && typeof ellipsis === 'object' ? (
                       <NEllipsis
-                        tooltip={ellipsis.tooltip}
+                        {...ellipsis}
                         theme={mergedTheme.peers.Ellipsis}
                         themeOverrides={mergedTheme.peerOverrides.Ellipsis}
                       >
