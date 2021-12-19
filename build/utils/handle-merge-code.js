@@ -1,8 +1,7 @@
 const tsToJs = require('./tsToJs')
 module.exports = function handleMergeCode ({ parts, mergedParts, isVue }) {
-  if (isVue) {
-    // ts处理
-    let jsCode = ''
+  if (isVue && parts.language === 'ts') {
+    // ts and js
     if (parts.template) {
       mergedParts.tsCode += `<template>${parts.template}</template>`
       mergedParts.jsCode += `<template>${parts.template}</template>`
@@ -15,9 +14,8 @@ module.exports = function handleMergeCode ({ parts, mergedParts, isVue }) {
       mergedParts.tsCode += `<script lang="ts">
 ${parts.script}
 </script>`
-      jsCode = tsToJs(parts.script)
       mergedParts.jsCode += `<script>
-${jsCode}
+${tsToJs(parts.script)}
 </script>`
     }
     if (parts.style) {
@@ -30,7 +28,7 @@ ${jsCode}
       mergedParts.jsCode += style
     }
   } else {
-    // md文档的js处理，不需要ts代码
+    // only js when md or vue file
     if (parts.template) {
       mergedParts.jsCode += `<template>\n${parts.template
         .split('\n')
