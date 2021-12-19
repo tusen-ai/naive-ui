@@ -46,11 +46,11 @@ export default defineComponent({
         common: { cubicBezierEaseInOut }
       } = themeRef.value
       return {
-        '--bezier': cubicBezierEaseInOut,
-        '--font-size': fontSize,
-        '--text-color': textColor,
-        '--title-font-weight': titleFontWeight,
-        '--title-text-color': titleTextColor
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-font-size': fontSize,
+        '--n-text-color': textColor,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-title-text-color': titleTextColor
       }
     })
     return () => {
