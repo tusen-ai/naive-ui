@@ -9,6 +9,8 @@
 ### Feats
 
 - `n-back-top` uses `n` as CSS vars prefix.
+- `n-steps` uses `n` as CSS vars prefix.
+- `n-switch` uses `n` as CSS vars prefix.
 
 ## 2.23.0 (2021-12-17)
 
@@ -66,7 +68,6 @@
 - `n-alert` uses `n` as CSS vars prefix.
 - `n-date-picker`'s `type` prop support `quarter` option.
 - `n-anchor` uses `n` as CSS vars prefix.
-- `n-switch` uses `n` as CSS vars prefix.
 
 ### i18n
 

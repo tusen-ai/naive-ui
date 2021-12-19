@@ -9,6 +9,8 @@
 ### Feats
 
 - `n-back-top` 的 CSS 变量使用 `n` 作为前缀
+- `n-steps` 的 CSS 变量使用 `n` 作为前缀
+- `n-switch` 的 CSS 变量使用 `n` 作为前缀
 
 ## 2.23.0 (2021-12-17)
 
@@ -66,7 +68,6 @@
 - `n-alert` 的 CSS 变量使用 `n` 作为前缀
 - `n-date-picker` 属性 `type` 支持 `quarter` 选项
 - `n-anchor` 的 CSS 变量使用 `n` 作为前缀
-- `n-switch` 的 CSS 变量使用 `n` 作为前缀
 
 ### i18n
 
