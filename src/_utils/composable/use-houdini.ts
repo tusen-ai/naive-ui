@@ -2,6 +2,7 @@ let houdiniRegistered = false
 
 export function useHoudini (): void {
   if (typeof window === 'undefined') return
+  if (!window.CSS) return
   if (!houdiniRegistered) {
     houdiniRegistered = true
     if ('registerProperty' in window?.CSS) {
