@@ -202,25 +202,25 @@ export default defineComponent({
             ? railWidth
             : pxfy(depx(railWidth) + depx(buttonHeight) - depx(railHeight))
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--button-border-radius': buttonBorderRadius,
-          '--button-box-shadow': buttonBoxShadow,
-          '--button-color': buttonColor,
-          '--button-width': buttonWidth,
-          '--button-width-pressed': buttonWidthPressed,
-          '--button-height': buttonHeight,
-          '--height': height,
-          '--offset': offset,
-          '--opacity-disabled': opacityDisabled,
-          '--rail-border-radius': railBorderRadius,
-          '--rail-color': railColor,
-          '--rail-color-active': railColorActive,
-          '--rail-height': railHeight,
-          '--rail-width': railWidth,
-          '--width': width,
-          '--box-shadow-focus': boxShadowFocus,
-          '--loading-color': loadingColor,
-          '--text-color': textColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-button-border-radius': buttonBorderRadius,
+          '--n-button-box-shadow': buttonBoxShadow,
+          '--n-button-color': buttonColor,
+          '--n-button-width': buttonWidth,
+          '--n-button-width-pressed': buttonWidthPressed,
+          '--n-button-height': buttonHeight,
+          '--n-height': height,
+          '--n-offset': offset,
+          '--n-opacity-disabled': opacityDisabled,
+          '--n-rail-border-radius': railBorderRadius,
+          '--n-rail-color': railColor,
+          '--n-rail-color-active': railColorActive,
+          '--n-rail-height': railHeight,
+          '--n-rail-width': railWidth,
+          '--n-width': width,
+          '--n-box-shadow-focus': boxShadowFocus,
+          '--n-loading-color': loadingColor,
+          '--n-text-color': textColor
         }
       })
     }
