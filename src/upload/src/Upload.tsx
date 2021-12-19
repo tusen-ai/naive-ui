@@ -546,22 +546,22 @@ export default defineComponent({
         }
       } = themeRef.value
       return {
-        '--bezier': cubicBezierEaseInOut,
-        '--border-radius': borderRadius,
-        '--dragger-border': draggerBorder,
-        '--dragger-border-hover': draggerBorderHover,
-        '--dragger-color': draggerColor,
-        '--font-size': fontSize,
-        '--item-color-hover': itemColorHover,
-        '--item-color-hover-error': itemColorHoverError,
-        '--item-disabled-opacity': itemDisabledOpacity,
-        '--item-icon-color': itemIconColor,
-        '--item-text-color': itemTextColor,
-        '--item-text-color-error': itemTextColorError,
-        '--item-text-color-success': itemTextColorSuccess,
-        '--line-height': lineHeight,
-        '--item-border-image-card-error': itemBorderImageCardError,
-        '--item-border-image-card': itemBorderImageCard
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-dragger-border': draggerBorder,
+        '--n-dragger-border-hover': draggerBorderHover,
+        '--n-dragger-color': draggerColor,
+        '--n-font-size': fontSize,
+        '--n-item-color-hover': itemColorHover,
+        '--n-item-color-hover-error': itemColorHoverError,
+        '--n-item-disabled-opacity': itemDisabledOpacity,
+        '--n-item-icon-color': itemIconColor,
+        '--n-item-text-color': itemTextColor,
+        '--n-item-text-color-error': itemTextColorError,
+        '--n-item-text-color-success': itemTextColorSuccess,
+        '--n-line-height': lineHeight,
+        '--n-item-border-image-card-error': itemBorderImageCardError,
+        '--n-item-border-image-card': itemBorderImageCard
       } as any
     })
 
