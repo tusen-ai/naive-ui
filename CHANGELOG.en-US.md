@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-transfer` list doesn't follow container height when style.height is set, closes [#1879](https://github.com/TuSimple/naive-ui/issues/1879).
+- Fix `n-skeleton` & `n-gradient-text` cause runtime error in some old browsers, closes [#1867](https://github.com/TuSimple/naive-ui/issues/1867).
 
 ### Feats
 

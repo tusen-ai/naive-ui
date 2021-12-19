@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-transfer` 在自定义高度后内部列表和容器高度不一致，关闭 [#1879](https://github.com/TuSimple/naive-ui/issues/1879)
+- 修复 `n-skeleton` 和 `n-gradient-text` 在某些较老的浏览器导致运行错误，关闭 [#1867](https://github.com/TuSimple/naive-ui/issues/1867)
 
 ### Feats
 

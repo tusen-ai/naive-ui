@@ -1,12 +1,11 @@
-import { onBeforeMount } from 'vue'
-
 let houdiniRegistered = false
 
 export function useHoudini (): void {
-  onBeforeMount(() => {
-    if (!houdiniRegistered) {
-      houdiniRegistered = true
-      if ((window?.CSS as any)?.registerProperty) {
+  if (typeof window === 'undefined') return
+  if (!houdiniRegistered) {
+    houdiniRegistered = true
+    if ('registerProperty' in window?.CSS) {
+      try {
         ;(CSS as any).registerProperty({
           name: '--color-start',
           syntax: '<color>',
@@ -19,7 +18,7 @@ export function useHoudini (): void {
           inherits: false,
           initialValue: '#0000'
         })
-      }
+      } catch (e) {}
     }
-  })
+  }
 }
