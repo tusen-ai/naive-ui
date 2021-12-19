@@ -11,11 +11,11 @@ describe('n-steps', () => {
 
   it('should work with `current` prop', async () => {
     const processStyle =
-      '--description-text-color: rgb(51, 54, 57); --header-text-color: rgb(31, 34, 37); --indicator-border-color: #18a058; --indicator-color: #18a058;'
+      '--n-description-text-color: rgb(51, 54, 57); --n-header-text-color: rgb(31, 34, 37); --n-indicator-border-color: #18a058; --n-indicator-color: #18a058;'
     const waitStyle =
-      '--description-text-color: rgba(194, 194, 194, 1); --header-text-color: rgba(194, 194, 194, 1); --indicator-border-color: rgba(194, 194, 194, 1); --indicator-color: #0000;'
+      '--n-description-text-color: rgba(194, 194, 194, 1); --n-header-text-color: rgba(194, 194, 194, 1); --n-indicator-border-color: rgba(194, 194, 194, 1); --n-indicator-color: #0000;'
     const finishStyle =
-      ' --description-text-color: rgba(194, 194, 194, 1); --header-text-color: rgba(194, 194, 194, 1); --indicator-border-color: #18a058; --indicator-color: #0000;'
+      ' --n-description-text-color: rgba(194, 194, 194, 1); --n-header-text-color: rgba(194, 194, 194, 1); --n-indicator-border-color: #18a058; --n-indicator-color: #0000;'
     const wrapper = mount(NSteps, {
       slots: {
         default: () => [
@@ -66,9 +66,9 @@ describe('n-steps', () => {
 
   it('should work with `size` prop', async () => {
     const mediumStyle =
-      '--indicator-icon-size: 18px; --indicator-index-font-size: 16px; --indicator-size: 28px;'
+      '--n-indicator-icon-size: 18px; --n-indicator-index-font-size: 16px; --n-indicator-size: 28px;'
     const smallStyle =
-      '--indicator-icon-size: 14px; --indicator-index-font-size: 14px; --indicator-size: 22px;'
+      '--n-indicator-icon-size: 14px; --n-indicator-index-font-size: 14px; --n-indicator-size: 22px;'
     const wrapper = mount(NSteps, {
       props: {
         current: 1
