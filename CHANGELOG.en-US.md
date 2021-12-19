@@ -6,6 +6,7 @@
 
 - Fix `n-transfer` list doesn't follow container height when style.height is set, closes [#1879](https://github.com/TuSimple/naive-ui/issues/1879).
 - Fix `n-skeleton` & `n-gradient-text` cause runtime error in some old browsers, closes [#1867](https://github.com/TuSimple/naive-ui/issues/1867).
+- Fix `n-data-table` `ellipsis` prop in column doesn't support all `n-ellipsis`'s props, closes [#1891](https://github.com/TuSimple/naive-ui/issues/1891).
 
 ### Feats
 
