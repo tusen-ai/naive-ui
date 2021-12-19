@@ -6,6 +6,10 @@
 
 - Fix `n-transfer` list doesn't follow container height when style.height is set, closes [#1879](https://github.com/TuSimple/naive-ui/issues/1879).
 
+### Feats
+
+- `n-back-top` uses `n` as CSS vars prefix.
+
 ## 2.23.0 (2021-12-17)
 
 ### Breaking Changes
