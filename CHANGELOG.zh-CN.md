@@ -18,6 +18,9 @@
 - `n-log` 的 CSS 变量使用 `n` 作为前缀
 - `n-timeline` 的 CSS 变量使用 `n` 作为前缀
 - `n-time-picker` 的 CSS 变量使用 `n` 作为前缀
+- `n-avatar` 的 CSS 变量使用 `n` 作为前缀
+- `n-dynamic-tags` 的 CSS 变量使用 `n` 作为前缀
+- `n-tag` 的 CSS 变量使用 `n` 作为前缀
 
 ## 2.23.0 (2021-12-17)
 

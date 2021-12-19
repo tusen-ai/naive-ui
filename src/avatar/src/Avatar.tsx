@@ -116,11 +116,11 @@ export default defineComponent({
           height = themeRef.value.self[createKey('height', size)]
         }
         return {
-          '--font-size': fontSize,
-          '--border-radius': mergedRoundRef.value ? '50%' : borderRadius,
-          '--color': propColor || color,
-          '--bezier': cubicBezierEaseInOut,
-          '--merged-size': `var(--avatar-size-override, ${height})`
+          '--n-font-size': fontSize,
+          '--n-border-radius': mergedRoundRef.value ? '50%' : borderRadius,
+          '--n-color': propColor || color,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-merged-size': `var(--n-avatar-size-override, ${height})`
         }
       }),
       hasLoadError: hasLoadErrorRef,
