@@ -25,7 +25,8 @@
     "gen-version": "node scripts/gen-version",
     "release-changelog": "node scripts/release-changelog",
     "build:site:ts": "./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "translate": "node scripts/md-to-vue element"
   },
   "author": "07akioni",
   "license": "MIT",
