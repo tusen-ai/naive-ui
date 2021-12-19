@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# Pending
+
+### Fixes
+
+- Fix `n-transfer` list doesn't follow container height when style.height is set, closes [#1879](https://github.com/TuSimple/naive-ui/issues/1879).
+
 ## 2.23.0 (2021-12-17)
 
 ### Breaking Changes

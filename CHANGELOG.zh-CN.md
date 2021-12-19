@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-transfer` 在自定义高度后内部列表和容器高度不一致，关闭 [#1879](https://github.com/TuSimple/naive-ui/issues/1879)
+
 ## 2.23.0 (2021-12-17)
 
 ### Breaking Changes
