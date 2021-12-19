@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Pending
+## 2.23.1 (2021-12-20)
 
 ### Fixes
 

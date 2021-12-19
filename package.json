@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.23.0",
+  "version": "2.23.1",
   "description": "A Vue 3 Component Library. Fairly Complete, Customizable Themes, Uses TypeScript, Not Too Slow",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -10,7 +10,7 @@
     "build:package": "pnpm run gen-version && pnpm run clean && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
     "build:site": "./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "clean": "rimraf site lib es node_modules/naive-ui themes/**/es themes/**/lib",
-    "release:package": "pnpm run test && pnpm run build:package && pnpm publish",
+    "release:package": "pnpm run test && pnpm run build:package && pnpm publish --no-git-checks",
     "release:site": "cross-env TUSIMPLE=true pnpm run build:site && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh",
     "lint": "pnpm run lint:code && pnpm run lint:type",
     "lint:type": "tsc -b --force tsconfig.esm.json",
