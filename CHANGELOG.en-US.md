@@ -17,6 +17,7 @@
 - `n-auto-complete` uses `n` as CSS vars prefix.
 - `n-log` uses `n` as CSS vars prefix.
 - `n-timeline` uses `n` as CSS vars prefix.
+- `n-time-picker` uses `n` as CSS vars prefix.
 
 ## 2.23.0 (2021-12-17)
 
