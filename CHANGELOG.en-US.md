@@ -25,6 +25,8 @@
 - `n-tag` uses `n` as CSS vars prefix.
 - `n-dialog` uses `n` as CSS vars prefix.
 - `n-upload` uses `n` as CSS vars prefix.
+- `n-tree` uses `n` as CSS vars prefix.
+- `n-tree-select` uses `n` as CSS vars prefix.
 
 ## 2.23.0 (2021-12-17)
 

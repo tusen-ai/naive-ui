@@ -655,17 +655,25 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { menuBoxShadow, menuBorderRadius, menuColor, menuHeight, actionPadding, actionDividerColor, actionTextColor }
+          self: {
+            menuBoxShadow,
+            menuBorderRadius,
+            menuColor,
+            menuHeight,
+            actionPadding,
+            actionDividerColor,
+            actionTextColor
+          }
         } = themeRef.value
         return {
-          '--menu-box-shadow': menuBoxShadow,
-          '--menu-border-radius': menuBorderRadius,
-          '--menu-color': menuColor,
-          '--menu-height': menuHeight,
-          '--bezier': cubicBezierEaseInOut,
-          '--action-padding': actionPadding,
-          '--action-text-color': actionTextColor,
-          '--action-divider-color': actionDividerColor
+          '--n-menu-box-shadow': menuBoxShadow,
+          '--n-menu-border-radius': menuBorderRadius,
+          '--n-menu-color': menuColor,
+          '--n-menu-height': menuHeight,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-action-padding': actionPadding,
+          '--n-action-text-color': actionTextColor,
+          '--n-action-divider-color': actionDividerColor
         }
       }),
       mergedTheme: themeRef
@@ -810,18 +818,26 @@ export default defineComponent({
                                 <div
                                   class={`${mergedClsPrefix}-tree-select-menu__empty`}
                                 >
-                                  {renderSlot($slots, 'empty', undefined, () => [
-                                    <NEmpty
-                                      theme={mergedTheme.peers.Empty}
-                                      themeOverrides={
-                                        mergedTheme.peerOverrides.Empty
-                                      }
-                                    />
-                                  ])}
+                                  {renderSlot(
+                                    $slots,
+                                    'empty',
+                                    undefined,
+                                    () => [
+                                      <NEmpty
+                                        theme={mergedTheme.peers.Empty}
+                                        themeOverrides={
+                                          mergedTheme.peerOverrides.Empty
+                                        }
+                                      />
+                                    ]
+                                  )}
                                 </div>
                               )}
                               {$slots.action && (
-                                <div class={`${mergedClsPrefix}-tree-select-menu__action`} data-action>
+                                <div
+                                  class={`${mergedClsPrefix}-tree-select-menu__action`}
+                                  data-action
+                                >
                                   {{
                                     default: $slots.action
                                   }}

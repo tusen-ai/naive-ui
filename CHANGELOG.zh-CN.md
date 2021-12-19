@@ -25,6 +25,8 @@
 - `n-tag` 的 CSS 变量使用 `n` 作为前缀
 - `n-dialog` 的 CSS 变量使用 `n` 作为前缀
 - `n-upload` 的 CSS 变量使用 `n` 作为前缀
+- `n-tree` 的 CSS 变量使用 `n` 作为前缀
+- `n-tree-select` 的 CSS 变量使用 `n` 作为前缀
 
 ## 2.23.0 (2021-12-17)
 
