@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-code` uses `n` as CSS vars prefix.
+
 ## 2.23.1 (2021-12-20)
 
 ### Fixes
