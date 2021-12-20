@@ -29,6 +29,7 @@ const nbNO: NLocale = {
     monthTypeFormat: 'MM.yyyy',
     dateFormat: 'dd.MM.yyyy',
     dateTimeFormat: 'dd.MM.yyyy HH:mm:ss',
+    quarterFormat: 'yyyy-qqq',
     clear: 'Tøm',
     now: 'Nå',
     confirm: 'Bekreft',
@@ -39,6 +40,7 @@ const nbNO: NLocale = {
     monthPlaceholder: 'Velg måned',
     // FIXME: translation needed
     yearPlaceholder: 'Select Year',
+    quarterPlaceholder: 'Select Quarter',
     startDatePlaceholder: 'Startdato',
     endDatePlaceholder: 'Sluttdato',
     startDatetimePlaceholder: 'Startdato og -tid',

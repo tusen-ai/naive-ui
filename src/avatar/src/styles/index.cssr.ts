@@ -1,25 +1,25 @@
 import { c, cE, cB } from '../../../_utils/cssr'
 
 // vars:
-// --font-size
-// --border-radius
-// --color
-// --bezier
-// --merged-size
+// --n-font-size
+// --n-border-radius
+// --n-color
+// --n-bezier
+// --n-merged-size
 export default cB('avatar', `
-  width: var(--merged-size);
-  height: var(--merged-size);
+  width: var(--n-merged-size);
+  height: var(--n-merged-size);
   color: #FFF;
-  font-size: var(--font-size);
+  font-size: var(--n-font-size);
   display: inline-flex;
   position: relative;
   overflow: hidden;
   text-align: center;
-  border-radius: var(--border-radius);
-  background-color: var(--color);
+  border-radius: var(--n-border-radius);
+  background-color: var(--n-color);
   transition:
-    background-color .3s var(--bezier),
-    color .3s var(--bezier);
+    background-color .3s var(--n-bezier),
+    color .3s var(--n-bezier);
 `, [
   c('img', `
     width: 100%;
@@ -34,7 +34,7 @@ export default cB('avatar', `
   `),
   cB('icon', `
     vertical-align: bottom;
-    font-size: calc(var(--merged-size) - 6px);
+    font-size: calc(var(--n-merged-size) - 6px);
   `),
   cE('text', 'line-height: 1.25')
 ])

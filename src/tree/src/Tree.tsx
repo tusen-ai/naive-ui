@@ -1201,17 +1201,17 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--arrow-color': arrowColor,
-          '--loading-color': loadingColor,
-          '--bezier': cubicBezierEaseInOut,
-          '--font-size': fontSize,
-          '--node-border-radius': nodeBorderRadius,
-          '--node-color-active': nodeColorActive,
-          '--node-color-hover': nodeColorHover,
-          '--node-color-pressed': nodeColorPressed,
-          '--node-text-color': nodeTextColor,
-          '--node-text-color-disabled': nodeTextColorDisabled,
-          '--drop-mark-color': dropMarkColor
+          '--n-arrow-color': arrowColor,
+          '--n-loading-color': loadingColor,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-font-size': fontSize,
+          '--n-node-border-radius': nodeBorderRadius,
+          '--n-node-color-active': nodeColorActive,
+          '--n-node-color-hover': nodeColorHover,
+          '--n-node-color-pressed': nodeColorPressed,
+          '--n-node-text-color': nodeTextColor,
+          '--n-node-text-color-disabled': nodeTextColorDisabled,
+          '--n-drop-mark-color': dropMarkColor
         }
       }),
       ...exposedMethods

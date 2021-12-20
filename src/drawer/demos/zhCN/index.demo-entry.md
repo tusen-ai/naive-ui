@@ -24,6 +24,7 @@ dark-4-debug
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | content-style | `string \| Object` | `undefined` | 抽屉可滚动内容节点的样式 |
+| display-directive | `'if' \| 'show'` | `'if'` | `n-drawer` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show` |
 | height | `number \| string` | `251` | 抽屉的高度，在位置是 `top` 和 `bottom` 时生效 |
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |
 | native-scrollbar | `boolean` | `true` | 是否使用原生滚动 |

@@ -52,14 +52,14 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
             }
           } = themeRef.value
           return {
-            '--bezier': cubicBezierEaseInOut,
-            '--font-size': fontSize,
-            '--margin': margin,
-            '--bar-color': barColor,
-            '--bar-width': barWidth,
-            '--font-weight': headerFontWeight,
-            '--text-color': headerTextColor,
-            '--prefix-width': prefixWidth
+            '--n-bezier': cubicBezierEaseInOut,
+            '--n-font-size': fontSize,
+            '--n-margin': margin,
+            '--n-bar-color': barColor,
+            '--n-bar-width': barWidth,
+            '--n-font-weight': headerFontWeight,
+            '--n-text-color': headerTextColor,
+            '--n-prefix-width': prefixWidth
           }
         })
       }

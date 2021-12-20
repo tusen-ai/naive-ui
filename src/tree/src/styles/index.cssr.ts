@@ -3,17 +3,17 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
 // vars:
-// --arrow-color
-// --bezier
-// --font-size
-// --node-border-radius
-// --node-color-active
-// --node-color-hover
-// --node-color-pressed
-// --node-text-color
-// --node-text-color-disabled
+// --n-arrow-color
+// --n-bezier
+// --n-font-size
+// --n-node-border-radius
+// --n-node-color-active
+// --n-node-color-hover
+// --n-node-color-pressed
+// --n-node-text-color
+// --n-node-text-color-disabled
 export default cB('tree', `
-  font-size: var(--font-size);
+  font-size: var(--n-font-size);
   outline: none;
 `, [
   c('ul, li', `
@@ -50,19 +50,19 @@ export default cB('tree', `
   cB('tree-node', `
     position: relative;
     display: flex;
-    border-radius: var(--node-border-radius);
-    transition: background-color .3s var(--bezier);
+    border-radius: var(--n-node-border-radius);
+    transition: background-color .3s var(--n-bezier);
   `, [
     cM('highlight', [
       cB('tree-node-content', [
         cE('text', {
-          borderBottomColor: 'var(--node-text-color-disabled)'
+          borderBottomColor: 'var(--n-node-text-color-disabled)'
         })
       ])
     ]),
     cM('disabled', [
       cB('tree-node-content', `
-        color: var(--node-text-color-disabled);
+        color: var(--n-node-text-color-disabled);
         cursor: not-allowed;
       `)
     ]),
@@ -84,24 +84,24 @@ export default cB('tree', `
       cNotM('disabled', [
         cB('tree-node-content', [
           c('&:hover', {
-            backgroundColor: 'var(--node-color-hover)'
+            backgroundColor: 'var(--n-node-color-hover)'
           })
         ]),
         cM('selectable', [
           cB('tree-node-content', [
             c('&:active', {
-              backgroundColor: 'var(--node-color-pressed)'
+              backgroundColor: 'var(--n-node-color-pressed)'
             })
           ])
         ]),
         cM('pending', [
           cB('tree-node-content', `
-            background-color: var(--node-color-hover);
+            background-color: var(--n-node-color-hover);
           `)
         ]),
         cM('selected', [
           cB('tree-node-content', {
-            backgroundColor: 'var(--node-color-active)'
+            backgroundColor: 'var(--n-node-color-active)'
           })
         ])
       ])
@@ -111,18 +111,18 @@ export default cB('tree', `
     cB('tree-node', [
       cNotM('disabled', [
         c('&:hover', {
-          backgroundColor: 'var(--node-color-hover)'
+          backgroundColor: 'var(--n-node-color-hover)'
         }),
         cM('selectable', [
           c('&:active', {
-            backgroundColor: 'var(--node-color-pressed)'
+            backgroundColor: 'var(--n-node-color-pressed)'
           })
         ]),
         cM('pending', `
-          background-color: var(--node-color-hover);
+          background-color: var(--n-node-color-hover);
         `),
         cM('selected', {
-          backgroundColor: 'var(--node-color-active)'
+          backgroundColor: 'var(--n-node-color-active)'
         })
       ]),
       cM('disabled', `
@@ -138,7 +138,7 @@ export default cB('tree', `
     width: 24px;
     align-items: center;
     justify-content: center;
-    transition: transform .15s var(--bezier);
+    transition: transform .15s var(--n-bezier);
     vertical-align: bottom;
   `, [
     cE('icon', `
@@ -146,13 +146,13 @@ export default cB('tree', `
       height: 14px;
       width: 14px;
       display: flex;
-      color: var(--arrow-color);
-      transition: color .3s var(--bezier);
+      color: var(--n-arrow-color);
+      transition: color .3s var(--n-bezier);
       font-size: 14px;
     `, [
       cB('icon', [iconSwitchTransition()]),
       cB('base-loading', `
-        color: var(--loading-color);
+        color: var(--n-loading-color);
         position: absolute;
         left: 0;
         top: 0;
@@ -188,15 +188,15 @@ export default cB('tree', `
     vertical-align: bottom;
     padding: 0 6px;
     cursor: default;
-    border-radius: var(--node-border-radius);
+    border-radius: var(--n-node-border-radius);
     text-decoration-color: #0000;
     text-decoration-line: underline;
-    color: var(--node-text-color);
+    color: var(--n-node-text-color);
     transition:
-      color .3s var(--bezier),
-      text-decoration-color .3s var(--bezier),
-      background-color .3s var(--bezier),
-      border-color .3s var(--bezier);
+      color .3s var(--n-bezier),
+      text-decoration-color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier),
+      border-color .3s var(--n-bezier);
   `, [
     c('&:last-child', {
       marginBottom: 0
@@ -207,7 +207,7 @@ export default cB('tree', `
     `),
     cE('text', `
       border-bottom: 1px solid #0000;
-      transition: border-color .3s var(--bezier);
+      transition: border-color .3s var(--n-bezier);
       flex-grow:1;
     `),
     cE('suffix', `

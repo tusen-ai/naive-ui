@@ -29,6 +29,7 @@ const frFR: NLocale = {
     monthTypeFormat: 'MM-yyyy',
     dateFormat: 'dd-MM-yyyy',
     dateTimeFormat: 'dd-MM-yyyy HH:mm:ss',
+    quarterFormat: 'yyyy-qqq',
     clear: 'Effacer',
     now: 'Maintenant',
     confirm: 'Confirmer',
@@ -38,6 +39,8 @@ const frFR: NLocale = {
     datetimePlaceholder: "Sélectionner la date et l'heure",
     monthPlaceholder: 'Sélectionner le mois',
     yearPlaceholder: "Sélectionner l'année",
+    // FIXME: translation needed
+    quarterPlaceholder: 'Select Quarter',
     startDatePlaceholder: 'Date de début',
     endDatePlaceholder: 'Date de fin',
     startDatetimePlaceholder: 'Date et heure de début',

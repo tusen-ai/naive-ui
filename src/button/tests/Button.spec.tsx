@@ -213,6 +213,32 @@ describe('n-button', () => {
     expect(wrapper.find('button').classes()).toContain('n-button--ghost')
   })
 
+  it('should work with `icon-placement` prop', async () => {
+    const wrapper = mount(NButton, {
+      slots: {
+        default: () => 'test',
+        icon: () =>
+          h(NIcon, null, {
+            default: () => h(CashIcon)
+          })
+      }
+    })
+    expect(wrapper.findAll('span')[0].attributes('class')).toContain(
+      'n-button__icon'
+    )
+    expect(wrapper.findAll('span')[1].attributes('class')).toContain(
+      'n-button__content'
+    )
+
+    await wrapper.setProps({ iconPlacement: 'right' })
+    expect(wrapper.findAll('span')[0].attributes('class')).toContain(
+      'n-button__content'
+    )
+    expect(wrapper.findAll('span')[1].attributes('class')).toContain(
+      'n-button__icon'
+    )
+  })
+
   it('should work with `loading` prop', () => {
     const wrapper = mount(NButton, {
       props: {

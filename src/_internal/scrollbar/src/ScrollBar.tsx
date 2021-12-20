@@ -82,6 +82,7 @@ const scrollbarProps = {
   // If container is set, resize observer won't not attached
   container: Function as PropType<() => HTMLElement | null | undefined>,
   content: Function as PropType<() => HTMLElement | null | undefined>,
+  containerClass: String,
   containerStyle: [String, Object] as PropType<string | CSSProperties>,
   contentClass: String,
   contentStyle: [String, Object] as PropType<string | CSSProperties>,
@@ -615,7 +616,10 @@ const Scrollbar = defineComponent({
           ) : (
             <div
               ref="containerRef"
-              class={`${mergedClsPrefix}-scrollbar-container`}
+              class={[
+                `${mergedClsPrefix}-scrollbar-container`,
+                this.containerClass
+              ]}
               style={this.containerStyle}
               onScroll={this.handleScroll}
               onWheel={this.onWheel}

@@ -245,19 +245,19 @@ export default defineComponent({
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--border-radius': borderRadius,
-          '--height': height,
-          '--width': width,
-          '--box-shadow': boxShadow,
-          '--box-shadow-hover': boxShadowHover,
-          '--box-shadow-pressed': boxShadowPressed,
-          '--color': color,
-          '--icon-size': iconSize,
-          '--icon-color': iconColor,
-          '--icon-color-hover': iconColorHover,
-          '--icon-color-pressed': iconColorPressed,
-          '--text-color': textColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-border-radius': borderRadius,
+          '--n-height': height,
+          '--n-width': width,
+          '--n-box-shadow': boxShadow,
+          '--n-box-shadow-hover': boxShadowHover,
+          '--n-box-shadow-pressed': boxShadowPressed,
+          '--n-color': color,
+          '--n-icon-size': iconSize,
+          '--n-icon-color': iconColor,
+          '--n-icon-color-hover': iconColorHover,
+          '--n-icon-color-pressed': iconColorPressed,
+          '--n-text-color': textColor
         }
       })
     }
