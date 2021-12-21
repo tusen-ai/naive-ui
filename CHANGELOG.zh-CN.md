@@ -6,6 +6,10 @@
 
 - `n-progress` 的 CSS 变量使用 `n` 作为前缀
 
+### Fixes
+
+- 修复 `n-form-item-gi` 的 `validate` 不生效，关闭 [#1901](https://github.com/TuSimple/naive-ui/issues/1901)
+
 ## 2.23.1 (2021-12-20)
 
 ### Fixes
