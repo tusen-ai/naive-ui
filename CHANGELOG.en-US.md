@@ -13,6 +13,7 @@
 - `n-rate` uses `n` as CSS vars prefix.
 - `n-radio` uses `n` as CSS vars prefix.
 - `n-progress` uses `n` as CSS vars prefix.
+- `n-collapse` uses `n` as CSS vars prefix.
 
 ### Fixes
 
