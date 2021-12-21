@@ -1,16 +1,15 @@
 # 头像组
 
+人多不一定是好事。
+
 ```html
-<n-avatar-group round :options="options" :size="40" :max-avatar-count="2" />
+<n-avatar-group :options="options" :size="40" :max="2" />
 ```
 
 ```js
-import { MdCash } from '@vicons/ionicons4'
 import { defineComponent } from 'vue'
+
 export default defineComponent({
-  components: {
-    MdCash
-  },
   setup () {
     return {
       options: [

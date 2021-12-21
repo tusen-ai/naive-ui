@@ -12,9 +12,8 @@ badge
 icon
 name-size
 fallback
-v-show-debug
 group
-customized-group
+v-show-debug
 ```
 
 ## API
@@ -34,12 +33,12 @@ customized-group
 
 ### AvatarGroup Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| maxAvatarCount | `number` | `undefined` | 组内头像显示的最大个数 |
-| maxAvatarStyle | `Object \| string` | `undefined` | 触发隐藏头像的样式 |
-| options | `Array<AvatarOption>` | `[]` | 头像组传入的 options |
-| vertical | `boolean` | `false` | 组内头像是否垂直排列 |
+| 名称      | 类型                  | 默认值      | 说明                   |
+| --------- | --------------------- | ----------- | ---------------------- |
+| max       | `number`              | `undefined` | 组内头像显示的最大个数 |
+| max-style | `Object \| string`    | `undefined` | 溢出标识的样式         |
+| options   | `Array<AvatarOption>` | `[]`        | 头像组的选项           |
+| vertical  | `boolean`             | `false`     | 组内头像是否垂直排列   |
 
 参考 [Avatar Props](avatar#Props)
 

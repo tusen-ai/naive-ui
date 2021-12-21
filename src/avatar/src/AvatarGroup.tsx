@@ -4,28 +4,22 @@ import {
   PropType,
   CSSProperties,
   InjectionKey,
-  provide
+  provide,
+  computed
 } from 'vue'
 import type { Size } from './interface'
 import NAvatar from './Avatar'
-import { NPopover } from '../../popover'
-import { NTooltip } from '../../tooltip'
-import { NDropdown } from '../../dropdown'
 import { useConfig, useStyle } from '../../_mixins'
-import { flatten } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/avatar-group.cssr'
 
 export interface AvatarGroupInjection {
   size?: Size | undefined
-  round?: Boolean | undefined
-  circle?: Boolean | undefined
   bordered?: Boolean
 }
 
 interface AvatarOption {
   src: string
-  name: string
 }
 
 export const avatarGroupInjectionKey: InjectionKey<AvatarGroupInjection> =
@@ -36,19 +30,14 @@ const avatarGroupProps = {
     type: Boolean,
     default: true
   },
-  circle: Boolean,
-  maxAvatarCount: Number,
-  maxAvatarStyle: [Object, String] as PropType<CSSProperties | string>,
+  max: Number,
+  maxStyle: [Object, String] as PropType<CSSProperties | string>,
   options: {
     type: Array as PropType<AvatarOption[]>,
     default: () => []
   },
-  round: Boolean,
   vertical: Boolean,
-  size: {
-    type: [String, Number] as PropType<Size | undefined>,
-    default: undefined
-  }
+  size: [String, Number] as PropType<Size | undefined>
 } as const
 
 export type AvatarGroupProps = ExtractPublicPropTypes<typeof avatarGroupProps>
@@ -60,68 +49,26 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     useStyle('AvatarGroup', style, mergedClsPrefixRef)
     provide(avatarGroupInjectionKey, props)
+    const restRef = computed(() => {
+      const { max } = props
+      if (max === undefined) return undefined
+      return props.options.length - max
+    })
+    const displayedOptionsRef = computed(() => {
+      const { options, max } = props
+      if (max === undefined) return options
+      if (options.length > max) return options.slice(0, max - 1)
+      if (options.length === max) return options.slice(0, max)
+      return options
+    })
     return {
-      mergedClsPrefix: mergedClsPrefixRef
+      mergedClsPrefix: mergedClsPrefixRef,
+      rest: restRef,
+      displayedOptions: displayedOptionsRef
     }
   },
   render () {
-    const { mergedClsPrefix, maxAvatarCount, maxAvatarStyle, options } = this
-    const children = flatten(this.$slots.default?.() ?? [])
-    let childrenShown
-    if (children.length) {
-      childrenShown = children.slice(0, maxAvatarCount)
-      if (maxAvatarCount && children.length > maxAvatarCount) {
-        const childrenHidden = children.slice(maxAvatarCount, children.length)
-        childrenShown.push(
-          <NPopover>
-            {{
-              trigger: () => (
-                <NAvatar style={maxAvatarStyle}>
-                  {{ default: () => `+${children.length - maxAvatarCount}` }}
-                </NAvatar>
-              ),
-              default: () => (
-                <div class={`${mergedClsPrefix}-avatar-group`}>
-                  {childrenHidden}
-                </div>
-              )
-            }}
-          </NPopover>
-        )
-      }
-    } else {
-      childrenShown = options?.slice(0, maxAvatarCount).map((v) => (
-        <NTooltip>
-          {{
-            trigger: () => <NAvatar src={v.src} />,
-            default: () => v.name
-          }}
-        </NTooltip>
-      ))
-      if (maxAvatarCount && options?.length > maxAvatarCount) {
-        childrenShown.push(
-          <NDropdown
-            options={options
-              .slice(maxAvatarCount, options.length)
-              .map((v, i) => ({
-                label: v.name,
-                icon: () => h(NAvatar, { src: v.src, size: 22 }),
-                key: `${v.name}${i}`
-              }))}
-          >
-            {{
-              default: () => (
-                <NAvatar style={maxAvatarStyle}>
-                  {{
-                    default: () => `+${options.length - maxAvatarCount}`
-                  }}
-                </NAvatar>
-              )
-            }}
-          </NDropdown>
-        )
-      }
-    }
+    const { mergedClsPrefix, displayedOptions, rest } = this
     return (
       <div
         class={[
@@ -130,7 +77,16 @@ export default defineComponent({
         ]}
         role="group"
       >
-        {childrenShown}
+        {displayedOptions.map((option) => {
+          return <NAvatar src={option.src} />
+        })}
+        {rest !== undefined && rest > 0 && (
+          <NAvatar style={this.maxStyle}>
+            {{
+              default: () => `+${rest}`
+            }}
+          </NAvatar>
+        )}
       </div>
     )
   }
