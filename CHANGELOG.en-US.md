@@ -5,6 +5,11 @@
 ### Feats
 
 - `n-radio` uses `n` as CSS vars prefix.
+- `n-progress` uses `n` as CSS vars prefix.
+
+### Fixes
+
+- Fix `n-form-item-gi` 's `validate` doesn't work, closes [#1901](https://github.com/TuSimple/naive-ui/issues/1901).
 
 ## 2.23.1 (2021-12-20)
 
