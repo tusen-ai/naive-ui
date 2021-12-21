@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-transfer` 的 CSS 变量使用 `n` 作为前缀
 - `n-table` 的 CSS 变量使用 `n` 作为前缀
 - `n-statistic` 的 CSS 变量使用 `n` 作为前缀
 - `n-code` 的 CSS 变量使用 `n` 作为前缀

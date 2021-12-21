@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-transfer` uses `n` as CSS vars prefix.
 - `n-table` uses `n` as CSS vars prefix.
 - `n-statistic` uses `n` as CSS vars prefix.
 - `n-code` uses `n` as CSS vars prefix.
