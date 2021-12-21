@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-spin` uses `n` as CSS vars prefix.
 - `n-select` uses `n` as CSS vars prefix.
 - `n-result` uses `n` as CSS vars prefix.
 - `n-calendar` uses `n` as CSS vars prefix.
