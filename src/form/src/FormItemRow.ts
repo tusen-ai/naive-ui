@@ -33,6 +33,7 @@ export default defineComponent({
       }
     }
     return {
+      formItemColInstRef,
       validate,
       restoreValidation
     }
