@@ -2,23 +2,23 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 import fadeInHeightExpandTransition from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
 // vars:
-// --font-size
-// --bezier
-// --text-color
-// --divider-color
-// --title-font-size
-// --title-text-color
-// --title-font-weight
-// --arrow-color
+// --n-font-size
+// --n-bezier
+// --n-text-color
+// --n-divider-color
+// --n-title-font-size
+// --n-title-text-color
+// --n-title-font-weight
+// --n-arrow-color
 export default cB('collapse', {
   width: '100%'
 }, [
   cB('collapse-item', `
-    font-size: var(--font-size);
-    color: var(--text-color);
+    font-size: var(--n-font-size);
+    color: var(--n-text-color);
     transition:
-      color .3s var(--bezier),
-      border-color .3s var(--bezier);
+      color .3s var(--n-bezier),
+      border-color .3s var(--n-bezier);
     margin: 16px 0 0 0;
   `, [
     cB('collapse-item', 'margin-left: 32px;'),
@@ -60,42 +60,42 @@ export default cB('collapse', {
       ])
     ]),
     c('&:not(:first-child)', {
-      borderTop: '1px solid var(--divider-color)'
+      borderTop: '1px solid var(--n-divider-color)'
     }),
     cE('header', `
-      font-size: var(--title-font-size);
+      font-size: var(--n-title-font-size);
       display: flex;
       flex-wrap: nowrap;
       align-items: center;
-      transition: color .3s var(--bezier);
+      transition: color .3s var(--n-bezier);
       position: relative;
       padding: 16px 0 0 0;
-      color: var(--title-text-color);
+      color: var(--n-title-text-color);
     `, [
       cE('header-main', `
         cursor: pointer;
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
-        font-weight: var(--title-font-weight);
-        transition: color .3s var(--bezier);
+        font-weight: var(--n-title-font-weight);
+        transition: color .3s var(--n-bezier);
         flex: 1;
-        color: var(--title-text-color);
+        color: var(--n-title-text-color);
       `),
       cE('header-extra', `
         cursor: pointer;
         display: flex;
         align-items: center;
-        transition: color .3s var(--bezier);
-        color: var(--text-color);
+        transition: color .3s var(--n-bezier);
+        color: var(--n-text-color);
       `),
       cB('collapse-item-arrow', `
         display: flex;
         transition:
-          transform .15s var(--bezier),
-          color .3s var(--bezier);
+          transform .15s var(--n-bezier),
+          color .3s var(--n-bezier);
         font-size: 18px;
-        color: var(--arrow-color);
+        color: var(--n-arrow-color);
       `)
     ])
   ])
