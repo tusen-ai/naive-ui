@@ -103,20 +103,20 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--fill-color': fillColor,
-          '--font-size': fontSize,
-          '--font-size-circle': fontSizeCircle,
-          '--font-weight-circle': fontWeightCircle,
-          '--icon-color': iconColor,
-          '--icon-size-circle': iconSizeCircle,
-          '--icon-size-line': iconSizeLine,
-          '--line-bg-processing': lineBgProcessing,
-          '--rail-color': railColor,
-          '--rail-height': railHeight,
-          '--text-color-circle': textColorCircle,
-          '--text-color-line-inner': textColorLineInner,
-          '--text-color-line-outer': textColorLineOuter
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-fill-color': fillColor,
+          '--n-font-size': fontSize,
+          '--n-font-size-circle': fontSizeCircle,
+          '--n-font-weight-circle': fontWeightCircle,
+          '--n-icon-color': iconColor,
+          '--n-icon-size-circle': iconSizeCircle,
+          '--n-icon-size-line': iconSizeLine,
+          '--n-line-bg-processing': lineBgProcessing,
+          '--n-rail-color': railColor,
+          '--n-rail-height': railHeight,
+          '--n-text-color-circle': textColorCircle,
+          '--n-text-color-line-inner': textColorLineInner,
+          '--n-text-color-line-outer': textColorLineOuter
         }
       })
     }

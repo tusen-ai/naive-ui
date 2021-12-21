@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-progress` 的 CSS 变量使用 `n` 作为前缀
+
 ## 2.23.1 (2021-12-20)
 
 ### Fixes
