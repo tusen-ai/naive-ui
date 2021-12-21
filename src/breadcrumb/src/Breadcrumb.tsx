@@ -66,14 +66,14 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--font-size': fontSize,
-          '--bezier': cubicBezierEaseInOut,
-          '--item-text-color': itemTextColor,
-          '--item-text-color-hover': itemTextColorHover,
-          '--item-text-color-pressed': itemTextColorPressed,
-          '--item-text-color-active': itemTextColorActive,
-          '--separator-color': separatorColor,
-          '--font-weight-active': fontWeightActive
+          '--n-font-size': fontSize,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-item-text-color': itemTextColor,
+          '--n-item-text-color-hover': itemTextColorHover,
+          '--n-item-text-color-pressed': itemTextColorPressed,
+          '--n-item-text-color-active': itemTextColorActive,
+          '--n-separator-color': separatorColor,
+          '--n-font-weight-active': fontWeightActive
         }
       })
     }

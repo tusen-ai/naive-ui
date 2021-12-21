@@ -811,23 +811,23 @@ export default defineComponent({
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--menu-border-radius': menuBorderRadius,
-          '--menu-box-shadow': menuBoxShadow,
-          '--menu-height': menuHeight,
-          '--column-width': columnWidth,
-          '--menu-color': menuColor,
-          '--menu-divider-color': menuDividerColor,
-          '--option-height': optionHeight,
-          '--option-font-size': optionFontSize,
-          '--option-text-color': optionTextColor,
-          '--option-text-color-disabled': optionTextColorDisabled,
-          '--option-text-color-active': optionTextColorActive,
-          '--option-color-hover': optionColorHover,
-          '--option-check-mark-color': optionCheckMarkColor,
-          '--option-arrow-color': optionArrowColor,
-          '--menu-mask-color': changeColor(menuColor, { alpha: 0.75 }),
-          '--loading-color': loadingColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-menu-border-radius': menuBorderRadius,
+          '--n-menu-box-shadow': menuBoxShadow,
+          '--n-menu-height': menuHeight,
+          '--n-column-width': columnWidth,
+          '--n-menu-color': menuColor,
+          '--n-menu-divider-color': menuDividerColor,
+          '--n-option-height': optionHeight,
+          '--n-option-font-size': optionFontSize,
+          '--n-option-text-color': optionTextColor,
+          '--n-option-text-color-disabled': optionTextColorDisabled,
+          '--n-option-text-color-active': optionTextColorActive,
+          '--n-option-color-hover': optionColorHover,
+          '--n-option-check-mark-color': optionCheckMarkColor,
+          '--n-option-arrow-color': optionArrowColor,
+          '--n-menu-mask-color': changeColor(menuColor, { alpha: 0.75 }),
+          '--n-loading-color': loadingColor
         }
       })
     }

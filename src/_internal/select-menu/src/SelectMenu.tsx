@@ -303,27 +303,27 @@ export default defineComponent({
         }
       } = themeRef.value
       return {
-        '--height': height,
-        '--action-divider-color': actionDividerColor,
-        '--action-text-color': actionTextColor,
-        '--bezier': cubicBezierEaseInOut,
-        '--border-radius': borderRadius,
-        '--color': color,
-        '--option-font-size': fontSize,
-        '--group-header-text-color': groupHeaderTextColor,
-        '--option-check-color': optionCheckColor,
-        '--option-color-pending': optionColorPending,
-        '--option-color-active': optionColorActive,
-        '--option-height': optionHeight,
-        '--option-opacity-disabled': optionOpacityDisabled,
-        '--option-text-color': optionTextColor,
-        '--option-text-color-active': optionTextColorActive,
-        '--option-text-color-disabled': optionTextColorDisabled,
-        '--option-text-color-pressed': optionTextColorPressed,
-        '--option-padding': optionPadding,
-        '--option-padding-left': getPadding(optionPadding, 'left'),
-        '--loading-color': loadingColor,
-        '--loading-size': loadingSize
+        '--n-height': height,
+        '--n-action-divider-color': actionDividerColor,
+        '--n-action-text-color': actionTextColor,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-color': color,
+        '--n-option-font-size': fontSize,
+        '--n-group-header-text-color': groupHeaderTextColor,
+        '--n-option-check-color': optionCheckColor,
+        '--n-option-color-pending': optionColorPending,
+        '--n-option-color-active': optionColorActive,
+        '--n-option-height': optionHeight,
+        '--n-option-opacity-disabled': optionOpacityDisabled,
+        '--n-option-text-color': optionTextColor,
+        '--n-option-text-color-active': optionTextColorActive,
+        '--n-option-text-color-disabled': optionTextColorDisabled,
+        '--n-option-text-color-pressed': optionTextColorPressed,
+        '--n-option-padding': optionPadding,
+        '--n-option-padding-left': getPadding(optionPadding, 'left'),
+        '--n-loading-color': loadingColor,
+        '--n-loading-size': loadingSize
       }
     })
     const exposedProps: InternalExposedProps = {
