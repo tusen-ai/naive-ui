@@ -10,7 +10,8 @@
 - `n-result` uses `n` as CSS vars prefix.
 - `n-calendar` uses `n` as CSS vars prefix.
 - `n-card` uses `n` as CSS vars prefix.
-- `color-picker` uses `n` as CSS vars prefix.
+- `n-cascader` uses `n` as CSS vars prefix.
+- `n-color-picker` uses `n` as CSS vars prefix.
 - `n-checkbox` uses `n` as CSS vars prefix.
 - `n-rate` uses `n` as CSS vars prefix.
 - `n-radio` uses `n` as CSS vars prefix.
