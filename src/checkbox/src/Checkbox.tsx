@@ -250,29 +250,30 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--size': size,
-          '--bezier': cubicBezierEaseInOut,
-          '--border-radius': borderRadius,
-          '--border': border,
-          '--border-checked': borderChecked,
-          '--border-focus': borderFocus,
-          '--border-disabled': borderDisabled,
-          '--border-disabled-checked': borderDisabledChecked,
-          '--box-shadow-focus': boxShadowFocus,
-          '--color': color,
-          '--color-checked': colorChecked,
-          '--color-table-header': colorTableHeader,
-          '--color-table-header-modal': colorTableHeaderModal,
-          '--color-table-header-popover': colorTableHeaderPopover,
-          '--color-disabled': colorDisabled,
-          '--color-disabled-checked': colorDisabledChecked,
-          '--text-color': textColor,
-          '--text-color-disabled': textColorDisabled,
-          '--check-mark-color': checkMarkColor,
-          '--check-mark-color-disabled': checkMarkColorDisabled,
-          '--check-mark-color-disabled-checked': checkMarkColorDisabledChecked,
-          '--font-size': fontSize,
-          '--label-padding': labelPadding
+          '--n-size': size,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-border-radius': borderRadius,
+          '--n-border': border,
+          '--n-border-checked': borderChecked,
+          '--n-border-focus': borderFocus,
+          '--n-border-disabled': borderDisabled,
+          '--n-border-disabled-checked': borderDisabledChecked,
+          '--n-box-shadow-focus': boxShadowFocus,
+          '--n-color': color,
+          '--n-color-checked': colorChecked,
+          '--n-color-table-header': colorTableHeader,
+          '--n-color-table-header-modal': colorTableHeaderModal,
+          '--n-color-table-header-popover': colorTableHeaderPopover,
+          '--n-color-disabled': colorDisabled,
+          '--n-color-disabled-checked': colorDisabledChecked,
+          '--n-text-color': textColor,
+          '--n-text-color-disabled': textColorDisabled,
+          '--n-check-mark-color': checkMarkColor,
+          '--n-check-mark-color-disabled': checkMarkColorDisabled,
+          '--n-check-mark-color-disabled-checked':
+            checkMarkColorDisabledChecked,
+          '--n-font-size': fontSize,
+          '--n-label-padding': labelPadding
         }
       })
     })

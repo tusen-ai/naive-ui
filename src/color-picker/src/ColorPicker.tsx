@@ -479,16 +479,16 @@ export default defineComponent({
         }
       } = themeRef.value
       return {
-        '--bezier': cubicBezierEaseInOut,
-        '--text-color': textColor,
-        '--color': color,
-        '--panel-font-size': panelFontSize,
-        '--font-size': fontSize,
-        '--box-shadow': boxShadow,
-        '--border': border,
-        '--border-radius': borderRadius,
-        '--height': height,
-        '--divider-color': dividerColor
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-text-color': textColor,
+        '--n-color': color,
+        '--n-panel-font-size': panelFontSize,
+        '--n-font-size': fontSize,
+        '--n-box-shadow': boxShadow,
+        '--n-border': border,
+        '--n-border-radius': borderRadius,
+        '--n-height': height,
+        '--n-divider-color': dividerColor
       }
     })
 
