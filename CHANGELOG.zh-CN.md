@@ -10,6 +10,7 @@
 - `n-result` 的 CSS 变量使用 `n` 作为前缀
 - `n-calendar` 的 CSS 变量使用 `n` 作为前缀
 - `n-card` 的 CSS 变量使用 `n` 作为前缀
+- `n-checkbox` 的 CSS 变量使用 `n` 作为前缀
 - `n-rate` 的 CSS 变量使用 `n` 作为前缀
 - `n-radio` 的 CSS 变量使用 `n` 作为前缀
 - `n-progress` 的 CSS 变量使用 `n` 作为前缀
