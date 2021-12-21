@@ -16,6 +16,7 @@ basic
 | ----- | -------- | ----------- | ------------------- |
 | label | `string` | `undefined` | 展示的 `label` 信息 |
 | value | `string` | `undefined` | 统计数据的值        |
+| value-style | `string \| CSSProperties` | `undefined` | 值的样式 |
 
 ### Statistic Slots
 
