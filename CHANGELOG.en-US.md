@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-breadcrumb` uses `n` as CSS vars prefix.
 - `n-slider` uses `n` as CSS vars prefix.
 - `n-spin` uses `n` as CSS vars prefix.
 - `n-select` uses `n` as CSS vars prefix.
