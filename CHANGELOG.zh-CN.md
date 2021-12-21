@@ -14,6 +14,7 @@
 - `n-rate` 的 CSS 变量使用 `n` 作为前缀
 - `n-radio` 的 CSS 变量使用 `n` 作为前缀
 - `n-progress` 的 CSS 变量使用 `n` 作为前缀
+- `n-collapse` 的 CSS 变量使用 `n` 作为前缀
 - `n-collapse-transition` 的 CSS 变量使用 `n` 作为前缀
 
 ### Fixes
