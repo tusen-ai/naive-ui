@@ -88,7 +88,7 @@
     "codesandbox": "^2.2.3",
     "cross-env": "^7.0.3",
     "cssnano": "^5.0.5",
-    "esbuild": "0.14.5",
+    "esbuild": "0.14.7",
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.2",
