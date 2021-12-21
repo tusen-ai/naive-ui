@@ -50,6 +50,8 @@ v-show-debug
 
 ### AvatarGroup Slots
 
-| 名称    | 参数 | 说明               |
-| ------- | ---- | ------------------ |
+| 名称 | 参数 | 说明 |
+| --- | --- | --- |
+| avatar | `(info: { option: { src: string } })` | 头像组头像 |
 | default | `()` | 头像组内填充的内容 |
+| rest | `(info: { options: Array<{ src: string }>, rest: number })` | 头像组溢出容器 |

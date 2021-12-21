@@ -15,7 +15,6 @@ import style from './styles/avatar-group.cssr'
 
 export interface AvatarGroupInjection {
   size?: Size | undefined
-  bordered?: Boolean
 }
 
 interface AvatarOption {
@@ -26,10 +25,6 @@ export const avatarGroupInjectionKey: InjectionKey<AvatarGroupInjection> =
   Symbol('avatar-group')
 
 const avatarGroupProps = {
-  bordered: {
-    type: Boolean,
-    default: true
-  },
   max: Number,
   maxStyle: [Object, String] as PropType<CSSProperties | string>,
   options: {
@@ -49,10 +44,11 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     useStyle('AvatarGroup', style, mergedClsPrefixRef)
     provide(avatarGroupInjectionKey, props)
-    const restRef = computed(() => {
+    const restOptionsRef = computed(() => {
       const { max } = props
       if (max === undefined) return undefined
-      return props.options.length - max
+      const { options } = props
+      return options.slice(max, options.length)
     })
     const displayedOptionsRef = computed(() => {
       const { options, max } = props
@@ -63,12 +59,12 @@ export default defineComponent({
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      rest: restRef,
+      restOptions: restOptionsRef,
       displayedOptions: displayedOptionsRef
     }
   },
   render () {
-    const { mergedClsPrefix, displayedOptions, rest } = this
+    const { mergedClsPrefix, displayedOptions, restOptions, $slots } = this
     return (
       <div
         class={[
@@ -78,15 +74,23 @@ export default defineComponent({
         role="group"
       >
         {displayedOptions.map((option) => {
-          return <NAvatar src={option.src} />
+          return $slots.avatar ? (
+            $slots.avatar({ option })
+          ) : (
+            <NAvatar src={option.src} />
+          )
         })}
-        {rest !== undefined && rest > 0 && (
-          <NAvatar style={this.maxStyle}>
-            {{
-              default: () => `+${rest}`
-            }}
-          </NAvatar>
-        )}
+        {restOptions !== undefined &&
+          restOptions.length > 0 &&
+          ($slots.rest ? (
+            $slots.rest({ options: restOptions, rest: restOptions.length })
+          ) : (
+            <NAvatar style={this.maxStyle}>
+              {{
+                default: () => `+${restOptions.length}`
+              }}
+            </NAvatar>
+          ))}
       </div>
     )
   }

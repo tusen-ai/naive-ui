@@ -101,11 +101,8 @@ export default defineComponent({
       return false
     })
     const mergedBorderedRef = computed(() => {
-      const { bordered } = props
-      if (bordered !== undefined) return bordered
-      const { bordered: avatarGroupBordered } = NAvatarGroup
-      if (avatarGroupBordered) return avatarGroupBordered
-      return false
+      if (NAvatarGroup) return true
+      return props.bordered || false
     })
     const handleError = (e: Event): void => {
       hasLoadErrorRef.value = true

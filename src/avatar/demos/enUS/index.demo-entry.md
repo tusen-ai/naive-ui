@@ -50,6 +50,8 @@ see [Avatar Props](avatar#Props)
 
 ### AvatarGroup Slots
 
-| Name    | Parameters | Description                      |
-| ------- | ---------- | -------------------------------- |
-| default | `()`       | The content of the avatar group. |
+| Name | Parameters | Description |
+| --- | --- | --- |
+| avatar | `(info: { option: { src: string } })` | Avatar of the avatar group. |
+| default | `()` | The content of the avatar group. |
+| rest | `(info: { options: Array<{ src: string }>, rest: number })` | Overflow indicator of the avatar group. |
