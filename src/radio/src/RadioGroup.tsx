@@ -202,20 +202,20 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--font-size': fontSize,
-          '--bezier': cubicBezierEaseInOut,
-          '--button-border-color': buttonBorderColor,
-          '--button-border-color-active': buttonBorderColorActive,
-          '--button-border-radius': buttonBorderRadius,
-          '--button-box-shadow': buttonBoxShadow,
-          '--button-box-shadow-focus': buttonBoxShadowFocus,
-          '--button-box-shadow-hover': buttonBoxShadowHover,
-          '--button-color-active': buttonColorActive,
-          '--button-text-color': buttonTextColor,
-          '--button-text-color-hover': buttonTextColorHover,
-          '--button-text-color-active': buttonTextColorActive,
-          '--height': height,
-          '--opacity-disabled': opacityDisabled
+          '--n-font-size': fontSize,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-button-border-color': buttonBorderColor,
+          '--n-button-border-color-active': buttonBorderColorActive,
+          '--n-button-border-radius': buttonBorderRadius,
+          '--n-button-box-shadow': buttonBoxShadow,
+          '--n-button-box-shadow-focus': buttonBoxShadowFocus,
+          '--n-button-box-shadow-hover': buttonBoxShadowHover,
+          '--n-button-color-active': buttonColorActive,
+          '--n-button-text-color': buttonTextColor,
+          '--n-button-text-color-hover': buttonTextColorHover,
+          '--n-button-text-color-active': buttonTextColorActive,
+          '--n-height': height,
+          '--n-opacity-disabled': opacityDisabled
         }
       })
     }

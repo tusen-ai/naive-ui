@@ -1,10 +1,21 @@
 # CHANGELOG
 
-# Pending
+## Pending
 
 ### Feats
 
 - `n-spin` uses `n` as CSS vars prefix.
+- `n-select` uses `n` as CSS vars prefix.
+- `n-result` uses `n` as CSS vars prefix.
+- `n-calendar` uses `n` as CSS vars prefix.
+- `n-card` uses `n` as CSS vars prefix.
+- `n-rate` uses `n` as CSS vars prefix.
+- `n-radio` uses `n` as CSS vars prefix.
+- `n-progress` uses `n` as CSS vars prefix.
+
+### Fixes
+
+- Fix `n-form-item-gi` 's `validate` doesn't work, closes [#1901](https://github.com/TuSimple/naive-ui/issues/1901).
 
 ## 2.23.1 (2021-12-20)
 
