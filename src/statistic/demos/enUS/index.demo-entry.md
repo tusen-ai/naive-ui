@@ -16,6 +16,7 @@ basic
 | ----- | -------- | ----------- | ------------------------ |
 | label | `string` | `undefined` | Label of the statistics. |
 | value | `string` | `undefined` | Statistics value.        |
+| value-style | `string \| CSSProperties` | `undefined` | Statistics value styles. |
 
 ### Statistic Slots
 
