@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-calendar` uses `n` as CSS vars prefix.
 - `n-card` uses `n` as CSS vars prefix.
 - `n-rate` uses `n` as CSS vars prefix.
 - `n-radio` uses `n` as CSS vars prefix.
