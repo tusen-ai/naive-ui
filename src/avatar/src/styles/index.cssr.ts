@@ -1,9 +1,11 @@
-import { c, cE, cB } from '../../../_utils/cssr'
+import { c, cE, cB, insideModal, insidePopover } from '../../../_utils/cssr'
 
 // vars:
 // --n-font-size
 // --n-border-radius
 // --n-color
+// --n-color-modal
+// --n-color-popover
 // --n-bezier
 // --n-merged-size
 export default cB('avatar', `
@@ -17,12 +19,15 @@ export default cB('avatar', `
   text-align: center;
   border: var(--n-border);
   border-radius: var(--n-border-radius);
-  background-color: var(--n-color);
+  --n-merged-color: var(--n-color);
+  background-color: var(--n-merged-color);
   transition:
     border-color .3s var(--n-bezier),
     background-color .3s var(--n-bezier),
     color .3s var(--n-bezier);
 `, [
+  insideModal(c('&', '--n-merged-color: var(--n-color-modal);')),
+  insidePopover(c('&', '--n-merged-color: var(--n-color-popover);')),
   c('img', `
     width: 100%;
     height: 100%;

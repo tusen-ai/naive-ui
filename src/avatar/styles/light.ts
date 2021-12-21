@@ -1,6 +1,7 @@
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import type { Theme } from '../../_mixins'
+import { composite } from 'seemly'
 
 export const self = (vars: ThemeCommonVars) => {
   const {
@@ -12,7 +13,9 @@ export const self = (vars: ThemeCommonVars) => {
     heightSmall,
     heightMedium,
     heightLarge,
-    heightHuge
+    heightHuge,
+    modalColor,
+    popoverColor
   } = vars
   return {
     borderRadius,
@@ -23,7 +26,9 @@ export const self = (vars: ThemeCommonVars) => {
     heightMedium,
     heightLarge,
     heightHuge,
-    color: avatarColor
+    color: composite(cardColor, avatarColor),
+    colorModal: composite(modalColor, avatarColor),
+    colorPopover: composite(popoverColor, avatarColor)
   }
 }
 
