@@ -9,6 +9,8 @@ import {
   VNode
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
+import { avatarGroupInjectionKey } from './AvatarGroup'
+import type { Size, ObjectFit } from './interface'
 import { tagInjectionKey } from '../../tag/src/Tag'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -18,21 +20,23 @@ import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/index.cssr'
 
-const avatarProps = {
+export const avatarProps = {
   ...(useTheme.props as ThemeProps<AvatarTheme>),
-  size: {
-    type: [String, Number] as PropType<number | 'small' | 'medium' | 'large'>,
-    default: 'medium'
-  },
+  size: [String, Number] as PropType<Size>,
   src: String,
-  circle: Boolean,
-  objectFit: {
-    type: String as PropType<
-    'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
-    >,
-    default: 'fill'
+  circle: {
+    type: Boolean,
+    default: undefined
   },
-  round: Boolean,
+  objectFit: String as PropType<ObjectFit>,
+  round: {
+    type: Boolean,
+    default: undefined
+  },
+  bordered: {
+    type: Boolean,
+    default: undefined
+  },
   onError: Function as PropType<(e: Event) => void>,
   fallbackSrc: String,
   /** @deprecated */
@@ -70,6 +74,14 @@ export default defineComponent({
         }
       }
     }
+    const NAvatarGroup = inject(avatarGroupInjectionKey, {})
+    const mergedSizeRef = computed(() => {
+      const { size } = props
+      if (size) return size
+      const { size: avatarGroupSize } = NAvatarGroup
+      if (avatarGroupSize) return avatarGroupSize
+      return 'medium'
+    })
     const themeRef = useTheme(
       'Avatar',
       'Avatar',
@@ -80,10 +92,21 @@ export default defineComponent({
     )
     const TagInjection = inject(tagInjectionKey, null)
     const mergedRoundRef = computed(() => {
-      if (props.round || props.circle) return true
+      const { round, circle } = props
+      if (round !== undefined || circle !== undefined) return round || circle
+      const { round: avatarGroupRound, circle: avatarGroupCircle } =
+        NAvatarGroup
+      if (avatarGroupRound || avatarGroupCircle) return true
       if (TagInjection) {
         return TagInjection.roundRef.value
       }
+      return false
+    })
+    const mergedBorderedRef = computed(() => {
+      const { bordered } = props
+      if (bordered !== undefined) return bordered
+      const { bordered: avatarGroupBordered } = NAvatarGroup
+      if (avatarGroupBordered) return avatarGroupBordered
       return false
     })
     const handleError = (e: Event): void => {
@@ -104,9 +127,12 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       fitTextTransform,
       cssVars: computed(() => {
-        const { size, color: propColor } = props
+        const size = mergedSizeRef.value
+        const round = mergedRoundRef.value
+        const bordered = mergedBorderedRef.value
+        const { color: propColor } = props
         const {
-          self: { borderRadius, fontSize, color },
+          self: { borderRadius, fontSize, color, border },
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         let height: string
@@ -117,7 +143,8 @@ export default defineComponent({
         }
         return {
           '--n-font-size': fontSize,
-          '--n-border-radius': mergedRoundRef.value ? '50%' : borderRadius,
+          '--n-border': bordered ? border : 'none',
+          '--n-border-radius': round ? '50%' : borderRadius,
           '--n-color': propColor || color,
           '--n-bezier': cubicBezierEaseInOut,
           '--n-merged-size': `var(--n-avatar-size-override, ${height})`

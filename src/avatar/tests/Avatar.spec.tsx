@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
-import { NAvatar } from '../index'
+import { NAvatar, NAvatarGroup } from '../index'
 import { h, nextTick } from 'vue'
+import { sleep } from 'seemly'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NIcon } from '../../icon'
 
@@ -66,6 +67,12 @@ describe('n-avatar', () => {
   it('round avatar', () => {
     const wrapper = mount(NAvatar, { props: { round: true } })
     expect(wrapper.attributes('style')).toContain('--n-border-radius: 50%;')
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('bordered avatar', () => {
+    const wrapper = mount(NAvatar, { props: { bordered: true } })
+    expect(wrapper.attributes('style')).toContain('--n-border: 2px solid #fff;')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -141,6 +148,64 @@ describe('n-avatar', () => {
     })
     expect(wrapper.find('img').attributes('style')).toContain(
       'object-fit: contain;'
+    )
+  })
+
+  it('should work with `options` prop in `avatar group`', async () => {
+    const options = [
+      {
+        name: 'test1',
+        src: 'https://www.naiveui.com/assets/naivelogo.93278402.svg'
+      },
+      {
+        name: 'test2',
+        src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+      },
+      {
+        name: 'test3',
+        src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+      },
+      {
+        name: 'test4',
+        src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+      }
+    ]
+    const wrapper = mount(NAvatarGroup, {
+      props: {
+        options: options,
+        maxAvatarCount: 2
+      }
+    })
+    expect(wrapper.findAll('.n-avatar').length).toBe(3)
+    await wrapper.findAll('.n-avatar')[2].trigger('mouseenter')
+    await sleep(150)
+    expect(document.body.querySelector('.n-dropdown')).not.toEqual(null)
+    expect(document.querySelectorAll('.n-dropdown-option').length).toBe(2)
+  })
+
+  it('should work with `avatar group`', async () => {
+    const wrapper = mount(NAvatarGroup, {
+      slots: {
+        default: () => [
+          h(NAvatar, null, {
+            default: () => 'test1'
+          }),
+          h(NAvatar, null, {
+            default: () => 'test2'
+          }),
+          h(NAvatar, null, {
+            default: () => 'test3'
+          })
+        ]
+      }
+    })
+
+    expect(wrapper.find('[role="group"]').classes()).toContain('n-avatar-group')
+    expect(wrapper.findAll('.n-avatar').length).toBe(3)
+
+    await wrapper.setProps({ vertical: true })
+    expect(wrapper.find('[role="group"]').classes()).toContain(
+      'n-avatar-group--vertical'
     )
   })
 })
