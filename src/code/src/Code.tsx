@@ -120,20 +120,22 @@ export default defineComponent({
         } = themeRef.value
         const { internalFontSize } = props
         return {
-          '--font-size': internalFontSize ? `${internalFontSize}px` : fontSize,
-          '--font-family': fontFamilyMono,
-          '--font-weight-strong': fontWeightStrong,
-          '--bezier': cubicBezierEaseInOut,
-          '--text-color': textColor,
-          '--mono-3': $1,
-          '--hue-1': $2,
-          '--hue-2': $3,
-          '--hue-3': $4,
-          '--hue-4': $5,
-          '--hue-5': $6,
-          '--hue-5-2': $7,
-          '--hue-6': $8,
-          '--hue-6-2': $9
+          '--n-font-size': internalFontSize
+            ? `${internalFontSize}px`
+            : fontSize,
+          '--n-font-family': fontFamilyMono,
+          '--n-font-weight-strong': fontWeightStrong,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-text-color': textColor,
+          '--n-mono-3': $1,
+          '--n-hue-1': $2,
+          '--n-hue-2': $3,
+          '--n-hue-3': $4,
+          '--n-hue-4': $5,
+          '--n-hue-5': $6,
+          '--n-hue-5-2': $7,
+          '--n-hue-6': $8,
+          '--n-hue-6-2': $9
         }
       })
     }
