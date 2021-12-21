@@ -6,19 +6,19 @@ Use the `render-option` property to control rendering of the entire option.
 <n-select :options="options" :render-option="renderOption" />
 ```
 
-```ts
-import { defineComponent, h, VNode, ref } from 'vue'
-import { NTooltip, SelectOption } from 'naive-ui'
+```js
+import { defineComponent, h, ref } from 'vue'
+import { NTooltip } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     return {
-      renderOption: ({ node, option }: { node: VNode, option: SelectOption }) =>
+      renderOption: ({ node, option }) =>
         h(NTooltip, null, {
           trigger: () => node,
           default: () => 'Rubber Soul -' + option.label
         }),
-      options: ref<SelectOption[]>([
+      options: ref([
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
           value: 'song0',
