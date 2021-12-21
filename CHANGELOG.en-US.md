@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-radio` uses `n` as CSS vars prefix.
 - `n-progress` uses `n` as CSS vars prefix.
 
 ### Fixes
