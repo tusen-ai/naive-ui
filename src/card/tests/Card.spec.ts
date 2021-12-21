@@ -33,6 +33,18 @@ describe('n-card', () => {
     expect(wrapper.find('.n-card').classes()).toContain('n-card--hoverable')
   })
 
+  it('should work with `embedded` prop', async () => {
+    const wrapper = mount(NCard)
+
+    expect(wrapper.find('.n-card').attributes('style')).toContain(
+      '--n-color: #fff'
+    )
+    await wrapper.setProps({ embedded: true })
+    expect(wrapper.find('.n-card').attributes('style')).toContain(
+      '--n-color: rgb(250, 250, 252)'
+    )
+  })
+
   it('should work with `slots` ', async () => {
     const wrapper = mount(NCard, {
       slots: {
