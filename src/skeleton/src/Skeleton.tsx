@@ -95,9 +95,9 @@ export default defineComponent({
               ? pxfy(mergedHeight)
               : mergedHeight,
           animation: !animated ? 'none' : '',
-          '--bezier': cubicBezierEaseInOut,
-          '--color-start': color,
-          '--color-end': colorEnd
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-color-start': color,
+          '--n-color-end': colorEnd
         }
       })
     }
