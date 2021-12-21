@@ -555,11 +555,11 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--font-size': fontSize,
-          '--indicator-border-radius': indicatorBorderRadius,
-          '--indicator-box-shadow': indicatorBoxShadow,
-          '--indicator-color': indicatorColor,
-          '--indicator-text-color': indicatorTextColor
+          '--n-font-size': fontSize,
+          '--n-indicator-border-radius': indicatorBorderRadius,
+          '--n-indicator-box-shadow': indicatorBoxShadow,
+          '--n-indicator-color': indicatorColor,
+          '--n-indicator-text-color': indicatorTextColor
         }
       }),
       cssVars: computed(() => {
@@ -592,30 +592,30 @@ export default defineComponent({
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--dot-border': dotBorder,
-          '--dot-border-active': dotBorderActive,
-          '--dot-border-radius': dotBorderRadius,
-          '--dot-box-shadow': dotBoxShadow,
-          '--dot-color': dotColor,
-          '--dot-color-modal': dotColorModal,
-          '--dot-color-popover': dotColorPopover,
-          '--dot-height': dotHeight,
-          '--dot-width': dotWidth,
-          '--fill-color': fillColor,
-          '--fill-color-hover': fillColorHover,
-          '--font-size': fontSize,
-          '--handle-box-shadow': handleBoxShadow,
-          '--handle-box-shadow-active': handleBoxShadowActive,
-          '--handle-box-shadow-focus': handleBoxShadowFocus,
-          '--handle-box-shadow-hover': handleBoxShadowHover,
-          '--handle-color': handleColor,
-          '--handle-size': handleSize,
-          '--opacity-disabled': opacityDisabled,
-          '--rail-color': railColor,
-          '--rail-color-hover': railColorHover,
-          '--rail-height': railHeight,
-          '--rail-width-vertical': railWidthVertical
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-dot-border': dotBorder,
+          '--n-dot-border-active': dotBorderActive,
+          '--n-dot-border-radius': dotBorderRadius,
+          '--n-dot-box-shadow': dotBoxShadow,
+          '--n-dot-color': dotColor,
+          '--n-dot-color-modal': dotColorModal,
+          '--n-dot-color-popover': dotColorPopover,
+          '--n-dot-height': dotHeight,
+          '--n-dot-width': dotWidth,
+          '--n-fill-color': fillColor,
+          '--n-fill-color-hover': fillColorHover,
+          '--n-font-size': fontSize,
+          '--n-handle-box-shadow': handleBoxShadow,
+          '--n-handle-box-shadow-active': handleBoxShadowActive,
+          '--n-handle-box-shadow-focus': handleBoxShadowFocus,
+          '--n-handle-box-shadow-hover': handleBoxShadowHover,
+          '--n-handle-color': handleColor,
+          '--n-handle-size': handleSize,
+          '--n-opacity-disabled': opacityDisabled,
+          '--n-rail-color': railColor,
+          '--n-rail-color-hover': railColorHover,
+          '--n-rail-height': railHeight,
+          '--n-rail-width-vertical': railWidthVertical
         }
       })
     }
