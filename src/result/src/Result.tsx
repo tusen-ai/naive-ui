@@ -88,15 +88,15 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--font-size': fontSize,
-          '--icon-size': iconSize,
-          '--line-height': lineHeight,
-          '--text-color': textColor,
-          '--title-font-size': titleFontSize,
-          '--title-font-weight': titleFontWeight,
-          '--title-text-color': titleTextColor,
-          '--icon-color': iconColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-font-size': fontSize,
+          '--n-icon-size': iconSize,
+          '--n-line-height': lineHeight,
+          '--n-text-color': textColor,
+          '--n-title-font-size': titleFontSize,
+          '--n-title-font-weight': titleFontWeight,
+          '--n-title-text-color': titleTextColor,
+          '--n-icon-color': iconColor
         }
       })
     }
@@ -110,7 +110,7 @@ export default defineComponent({
       >
         <div class={`${mergedClsPrefix}-result-icon`}>
           {status in imgMap ? (
-            imgMap[(status as unknown) as keyof typeof imgMap]
+            imgMap[status as unknown as keyof typeof imgMap]
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
               {{ default: () => iconMap[status as keyof typeof iconMap] }}

@@ -1,27 +1,27 @@
 import { c, cB, cM } from '../../../_utils/cssr'
 
 // vars
-// --bezier
-// --fill-color
-// --font-size
-// --font-size-circle
-// --font-weight-circle
-// --icon-color
-// --icon-size-circle
-// --icon-size-line
-// --line-bg-processing
-// --rail-color
-// --rail-height
-// --text-color-circle
-// --text-color-line-inner
-// --text-color-line-outer
+// --n-bezier
+// --n-fill-color
+// --n-font-size
+// --n-font-size-circle
+// --n-font-weight-circle
+// --n-icon-color
+// --n-icon-size-circle
+// --n-icon-size-line
+// --n-line-bg-processing
+// --n-rail-color
+// --n-rail-height
+// --n-text-color-circle
+// --n-text-color-line-inner
+// --n-text-color-line-outer
 export default c([
   cB('progress', {
     display: 'inline-block'
   }, [
     cB('progress-icon', `
-      color: var(--icon-color);
-      transition: color .3s var(--bezier);
+      color: var(--n-icon-color);
+      transition: color .3s var(--n-bezier);
     `),
     cM('line', `
       width: 100%;
@@ -41,17 +41,17 @@ export default c([
       cB('progress-icon', `
         width: 30px;
         padding-left: 14px;
-        height: var(--icon-size-line);
-        line-height: var(--icon-size-line);
-        font-size: var(--icon-size-line);
+        height: var(--n-icon-size-line);
+        line-height: var(--n-icon-size-line);
+        font-size: var(--n-icon-size-line);
       `, [
         cM('as-text', `
-          color: var(--text-color-line-outer);
+          color: var(--n-text-color-line-outer);
           text-align: center;
           width: 40px;
-          font-size: var(--font-size);
+          font-size: var(--n-font-size);
           padding-left: 4px;
-          transition: color .3s var(--bezier);
+          transition: color .3s var(--n-bezier);
         `)
       ])
     ]),
@@ -75,10 +75,10 @@ export default c([
         display: flex;
         align-items: center;
         color: inherit;
-        font-size: var(--font-size-circle);
-        color: var(--text-color-circle);
-        font-weight: var(--font-weight-circle);
-        transition: color .3s var(--bezier);
+        font-size: var(--n-font-size-circle);
+        color: var(--n-text-color-circle);
+        font-weight: var(--n-font-weight-circle);
+        transition: color .3s var(--n-bezier);
         white-space: nowrap;
       `),
       cB('progress-icon', `
@@ -88,8 +88,8 @@ export default c([
         transform: translateX(-50%) translateY(-50%);
         display: flex;
         align-items: center;
-        color: var(--icon-color);
-        font-size: var(--icon-size-circle);
+        color: var(--n-icon-color);
+        font-size: var(--n-icon-size-circle);
       `)
     ]),
     cM('multiple-circle', {
@@ -97,8 +97,8 @@ export default c([
       color: 'inherit'
     }, [
       cB('progress-text', `
-        font-weight: var(--font-weight-circle);
-        color: var(--text-color-circle);
+        font-weight: var(--n-font-weight-circle);
+        color: var(--n-text-color-circle);
         position: absolute;
         left: 50%;
         top: 50%;
@@ -106,7 +106,7 @@ export default c([
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: color .3s var(--bezier);
+        transition: color .3s var(--n-bezier);
       `)
     ]),
     cB('progress-content', {
@@ -120,20 +120,20 @@ export default c([
           verticalAlign: 'bottom'
         }),
         cB('progress-graph-circle-fill', `
-          stroke: var(--fill-color);
+          stroke: var(--n-fill-color);
           transition:
-            opacity .3s var(--bezier),
-            stroke .3s var(--bezier),
-            stroke-dasharray .3s var(--bezier);
+            opacity .3s var(--n-bezier),
+            stroke .3s var(--n-bezier),
+            stroke-dasharray .3s var(--n-bezier);
         `, [
           cM('empty', {
             opacity: 0
           })
         ]),
         cB('progress-graph-circle-rail', `
-          transition: stroke .3s var(--bezier);
+          transition: stroke .3s var(--n-bezier);
           overflow: hidden;
-          stroke: var(--rail-color);
+          stroke: var(--n-rail-color);
         `)
       ]),
       cB('progress-graph-line', [
@@ -155,8 +155,8 @@ export default c([
               height: inherit;
               line-height: 16px;
               font-size: 12px;
-              color: var(--text-color-line-inner);
-              transition: color .3s var(--bezier);
+              color: var(--n-text-color-line-inner);
+              transition: color .3s var(--n-bezier);
             `)
           ])
         ]),
@@ -167,10 +167,10 @@ export default c([
         `, [
           cB('progress-graph-line-rail', {
             flex: 1,
-            transition: 'background-color .3s var(--bezier)'
+            transition: 'background-color .3s var(--n-bezier)'
           }),
           cB('progress-graph-line-indicator', `
-            background: var(--fill-color);
+            background: var(--n-fill-color);
             font-size: 12px;
             transform: translateZ(0);
             display: flex;
@@ -181,37 +181,37 @@ export default c([
             border-radius: 10px;
             position: absolute;
             white-space: nowrap;
-            color: var(--text-color-line-inner);
+            color: var(--n-text-color-line-inner);
             transition:
-              right .2s var(--bezier),
-              color .3s var(--bezier),
-              background-color .3s var(--bezier);
+              right .2s var(--n-bezier),
+              color .3s var(--n-bezier),
+              background-color .3s var(--n-bezier);
           `)
         ]),
         cB('progress-graph-line-rail', `
           position: relative;
           overflow: hidden;
-          height: var(--rail-height);
+          height: var(--n-rail-height);
           border-radius: 5px;
-          background-color: var(--rail-color);
-          transition: background-color .3s var(--bezier);
+          background-color: var(--n-rail-color);
+          transition: background-color .3s var(--n-bezier);
         `, [
           cB('progress-graph-line-fill', `
-            background: var(--fill-color);
+            background: var(--n-fill-color);
             position: relative;
             border-radius: 5px;
             height: inherit;
             width: 100%;
             max-width: 0%;
             transition:
-              background-color .3s var(--bezier),
-              max-width .2s var(--bezier);
+              background-color .3s var(--n-bezier),
+              max-width .2s var(--n-bezier);
           `, [
             cM('processing', [
               c('&::after', `
                 content: "";
-                background-image: var(--line-bg-processing);
-                animation: progress-processing-animation 2s var(--bezier) infinite;
+                background-image: var(--n-line-bg-processing);
+                animation: progress-processing-animation 2s var(--n-bezier) infinite;
               `)
             ])
           ])
