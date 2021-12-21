@@ -4,16 +4,25 @@
 
 ### Feats
 
+- `n-statistic` 的 CSS 变量使用 `n` 作为前缀
+- `n-code` 的 CSS 变量使用 `n` 作为前缀
+- `n-breadcrumb` 的 CSS 变量使用 `n` 作为前缀
 - `n-slider` 的 CSS 变量使用 `n` 作为前缀
 - `n-spin` 的 CSS 变量使用 `n` 作为前缀
 - `n-select` 的 CSS 变量使用 `n` 作为前缀
 - `n-result` 的 CSS 变量使用 `n` 作为前缀
 - `n-calendar` 的 CSS 变量使用 `n` 作为前缀
 - `n-card` 的 CSS 变量使用 `n` 作为前缀
+- `n-cascader` 的 CSS 变量使用 `n` 作为前缀
+- `n-color-picker` 的 CSS 变量使用 `n` 作为前缀
+- `n-checkbox` 的 CSS 变量使用 `n` 作为前缀
 - `n-rate` 的 CSS 变量使用 `n` 作为前缀
 - `n-radio` 的 CSS 变量使用 `n` 作为前缀
 - `n-progress` 的 CSS 变量使用 `n` 作为前缀
 - `n-skeleton` 的 CSS 变量使用 `n` 作为前缀
+- `n-collapse` 的 CSS 变量使用 `n` 作为前缀
+- `n-collapse-transition` 的 CSS 变量使用 `n` 作为前缀
+- `n-thing` 的 CSS 变量使用 `n` 作为前缀
 
 ### Fixes
 
