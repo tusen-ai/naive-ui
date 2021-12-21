@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { NAvatar, NAvatarGroup } from '../index'
 import { h, nextTick } from 'vue'
-import { sleep } from 'seemly'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NIcon } from '../../icon'
 
@@ -173,35 +172,10 @@ describe('n-avatar', () => {
     const wrapper = mount(NAvatarGroup, {
       props: {
         options: options,
-        maxAvatarCount: 2
+        max: 2
       }
     })
-    expect(wrapper.findAll('.n-avatar').length).toBe(3)
-    await wrapper.findAll('.n-avatar')[2].trigger('mouseenter')
-    await sleep(150)
-    expect(document.body.querySelector('.n-dropdown')).not.toEqual(null)
-    expect(document.querySelectorAll('.n-dropdown-option').length).toBe(2)
-  })
-
-  it('should work with `avatar group`', async () => {
-    const wrapper = mount(NAvatarGroup, {
-      slots: {
-        default: () => [
-          h(NAvatar, null, {
-            default: () => 'test1'
-          }),
-          h(NAvatar, null, {
-            default: () => 'test2'
-          }),
-          h(NAvatar, null, {
-            default: () => 'test3'
-          })
-        ]
-      }
-    })
-
-    expect(wrapper.find('[role="group"]').classes()).toContain('n-avatar-group')
-    expect(wrapper.findAll('.n-avatar').length).toBe(3)
+    expect(wrapper.findAll('.n-avatar').length).toBe(2)
 
     await wrapper.setProps({ vertical: true })
     expect(wrapper.find('[role="group"]').classes()).toContain(
