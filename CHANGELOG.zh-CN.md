@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-code` 的 CSS 变量使用 `n` 作为前缀
 - `n-breadcrumb` 的 CSS 变量使用 `n` 作为前缀
 - `n-slider` 的 CSS 变量使用 `n` 作为前缀
 - `n-spin` 的 CSS 变量使用 `n` 作为前缀
