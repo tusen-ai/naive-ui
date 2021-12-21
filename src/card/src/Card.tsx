@@ -118,29 +118,29 @@ export default defineComponent({
           bottom: paddingBottom
         } = getPadding(padding)
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--border-radius': borderRadius,
-          '--color': props.embedded ? colorEmbedded : color,
-          '--color-modal': colorModal,
-          '--color-popover': colorPopover,
-          '--color-target': colorTarget,
-          '--text-color': textColor,
-          '--line-height': lineHeight,
-          '--action-color': actionColor,
-          '--title-text-color': titleTextColor,
-          '--title-font-weight': titleFontWeight,
-          '--close-color': closeColor,
-          '--close-color-hover': closeColorHover,
-          '--close-color-pressed': closeColorPressed,
-          '--border-color': borderColor,
-          '--box-shadow': boxShadow,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-border-radius': borderRadius,
+          '--n-color': props.embedded ? colorEmbedded : color,
+          '--n-color-modal': colorModal,
+          '--n-color-popover': colorPopover,
+          '--n-color-target': colorTarget,
+          '--n-text-color': textColor,
+          '--n-line-height': lineHeight,
+          '--n-action-color': actionColor,
+          '--n-title-text-color': titleTextColor,
+          '--n-title-font-weight': titleFontWeight,
+          '--n-close-color': closeColor,
+          '--n-close-color-hover': closeColorHover,
+          '--n-close-color-pressed': closeColorPressed,
+          '--n-border-color': borderColor,
+          '--n-box-shadow': boxShadow,
           // size
-          '--padding-top': paddingTop,
-          '--padding-bottom': paddingBottom,
-          '--padding-left': paddingLeft,
-          '--font-size': fontSize,
-          '--title-font-size': titleFontSize,
-          '--close-size': closeSize
+          '--n-padding-top': paddingTop,
+          '--n-padding-bottom': paddingBottom,
+          '--n-padding-left': paddingLeft,
+          '--n-font-size': fontSize,
+          '--n-title-font-size': titleFontSize,
+          '--n-close-size': closeSize
         }
       })
     }

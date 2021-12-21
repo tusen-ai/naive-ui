@@ -1,33 +1,33 @@
 import { c, cB } from '../../../_utils/cssr'
 
 // vars:
-// --color
-// --color-end
-// --bezier
+// --n-color-start
+// --n-color-end
+// --n-bezier
 export default c([
   cB('skeleton', `
     height: 1em;
     width: 100%;
-    transition: background-color .3s var(--bezier);
+    transition: background-color .3s var(--n-bezier);
     transition:
-      --color-start .3s var(--bezier),
-      --color-end .3s var(--bezier),
-      background-color .3s var(--bezier);
+      --n-color-start .3s var(--n-bezier),
+      --n-color-end .3s var(--n-bezier),
+      background-color .3s var(--n-bezier);
     animation: 2s skeleton-loading infinite cubic-bezier(0.36, 0, 0.64, 1);
-    background-color: var(--color-start);
+    background-color: var(--n-color-start);
   `),
   c('@keyframes skeleton-loading', `
     0% {
-      background: var(--color-start);
+      background: var(--n-color-start);
     }
     40% {
-      background: var(--color-end);
+      background: var(--n-color-end);
     }
     80% {
-      background: var(--color-start);
+      background: var(--n-color-start);
     }
     100% {
-      background: var(--color-start);
+      background: var(--n-color-start);
     }
   `)
 ])

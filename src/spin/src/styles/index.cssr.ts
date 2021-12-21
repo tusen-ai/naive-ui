@@ -2,12 +2,12 @@ import { c, cM, cB } from '../../../_utils/cssr'
 import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 
 // vars:
-// --bezier
-// --opacity-spinning
-// --size
-// --color
-// --text-color
-// --font-size
+// --n-bezier
+// --n-opacity-spinning
+// --n-size
+// --n-color
+// --n-text-color
+// --n-font-size
 export default c([
   c('@keyframes spin-rotate', `
     from {
@@ -37,10 +37,10 @@ export default c([
   `),
   cB('spin', `
     display: inline-flex;
-    height: var(--size);
-    width: var(--size);
-    font-size: var(--size);
-    color: var(--color);
+    height: var(--n-size);
+    width: var(--n-size);
+    font-size: var(--n-size);
+    color: var(--n-color);
   `, [
     cM('rotate', `
       animation: spin-rotate 2s linear infinite;
@@ -48,20 +48,20 @@ export default c([
   ]),
   cB('spin-description', `
     display: inline-block;
-    font-size: var(--font-size);
-    color: var(--text-color);
-    transition: color .3s var(--bezier);
+    font-size: var(--n-font-size);
+    color: var(--n-text-color);
+    transition: color .3s var(--n-bezier);
     margin-top: 8px;
   `),
   cB('spin-content', `
     opacity: 1;
-    transition: opacity .3s var(--bezier);
+    transition: opacity .3s var(--n-bezier);
     pointer-events: all;
   `, [
     cM('spinning', `
       user-select: none;
       pointer-events: none;
-      opacity: var(--opacity-spinning);
+      opacity: var(--n-opacity-spinning);
     `)
   ])
 ])

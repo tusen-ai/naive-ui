@@ -5,6 +5,29 @@
 ### Feats
 
 - `n-table` uses `n` as CSS vars prefix.
+- `n-statistic` uses `n` as CSS vars prefix.
+- `n-code` uses `n` as CSS vars prefix.
+- `n-breadcrumb` uses `n` as CSS vars prefix.
+- `n-slider` uses `n` as CSS vars prefix.
+- `n-spin` uses `n` as CSS vars prefix.
+- `n-select` uses `n` as CSS vars prefix.
+- `n-result` uses `n` as CSS vars prefix.
+- `n-calendar` uses `n` as CSS vars prefix.
+- `n-card` uses `n` as CSS vars prefix.
+- `n-cascader` uses `n` as CSS vars prefix.
+- `n-color-picker` uses `n` as CSS vars prefix.
+- `n-checkbox` uses `n` as CSS vars prefix.
+- `n-rate` uses `n` as CSS vars prefix.
+- `n-radio` uses `n` as CSS vars prefix.
+- `n-progress` uses `n` as CSS vars prefix.
+- `n-skeleton` uses `n` as CSS vars prefix.
+- `n-collapse` uses `n` as CSS vars prefix.
+- `n-collapse-transition` uses `n` as CSS vars prefix.
+- `n-thing` uses `n` as CSS vars prefix.
+
+### Fixes
+
+- Fix `n-form-item-gi` 's `validate` doesn't work, closes [#1901](https://github.com/TuSimple/naive-ui/issues/1901).
 
 ## 2.23.1 (2021-12-20)
 
