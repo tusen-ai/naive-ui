@@ -96,42 +96,42 @@ export default defineComponent({
             trigger: () => <NAvatar src={v.src} />,
             default: () => v.name
           }}
-          </NTooltip>
+        </NTooltip>
       ))
       if (maxAvatarCount && options?.length > maxAvatarCount) {
         childrenShown.push(
-            <NDropdown
-              options={options
-                .slice(maxAvatarCount, options.length)
-                .map((v, i) => ({
-                  label: v.name,
-                  icon: () => h(NAvatar, { src: v.src, size: 22 }),
-                  key: `${v.name}${i}`
-                }))}
-            >
-              {{
-                default: () => (
-                  <NAvatar style={maxAvatarStyle}>
-                    {{
-                      default: () => `+${options.length - maxAvatarCount}`
-                    }}
-                  </NAvatar>
-                )
-              }}
-            </NDropdown>
+          <NDropdown
+            options={options
+              .slice(maxAvatarCount, options.length)
+              .map((v, i) => ({
+                label: v.name,
+                icon: () => h(NAvatar, { src: v.src, size: 22 }),
+                key: `${v.name}${i}`
+              }))}
+          >
+            {{
+              default: () => (
+                <NAvatar style={maxAvatarStyle}>
+                  {{
+                    default: () => `+${options.length - maxAvatarCount}`
+                  }}
+                </NAvatar>
+              )
+            }}
+          </NDropdown>
         )
       }
     }
     return (
-        <div
-          class={[
-            `${mergedClsPrefix}-avatar-group`,
-            this.vertical && `${mergedClsPrefix}-avatar-group--vertical`
-          ]}
-          role="group"
-        >
-          {childrenShown}
-        </div>
+      <div
+        class={[
+          `${mergedClsPrefix}-avatar-group`,
+          this.vertical && `${mergedClsPrefix}-avatar-group--vertical`
+        ]}
+        role="group"
+      >
+        {childrenShown}
+      </div>
     )
   }
 })

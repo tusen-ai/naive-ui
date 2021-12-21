@@ -11,7 +11,6 @@ color
 badge
 icon
 name-size
-object-fit
 fallback
 v-show-debug
 group
@@ -33,7 +32,7 @@ customized-group
 | round | `boolean` | `false` | 头像是否圆形 |
 | on-error | `(e: Event) => void` | `undefined` | 头像的图片加载失败执行的回调 |
 
-### Avatar Group Props
+### AvatarGroup Props
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -50,7 +49,7 @@ customized-group
 | ------- | ---- | ---------------- |
 | default | `()` | 头像内填充的内容 |
 
-### Avatar Group Slots
+### AvatarGroup Slots
 
 | 名称    | 参数 | 说明               |
 | ------- | ---- | ------------------ |

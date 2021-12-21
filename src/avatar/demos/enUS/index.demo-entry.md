@@ -11,7 +11,6 @@ color
 badge
 icon
 name-size
-object-fit
 fallback
 v-show-debug
 group
@@ -33,7 +32,7 @@ customized-group
 | round | `boolean` | `false` | Whether to display a rounded avatar. |
 | on-error | `(e: Event) => void` | `undefined` | Callback executed when the avatar image fails to load. |
 
-### Avatar Group Props
+### AvatarGroup Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -50,7 +49,7 @@ see [Avatar Props](avatar#Props)
 | ------- | ---------- | -------------------------- |
 | default | `()`       | The content of the avatar. |
 
-### Avatar Group Slots
+### AvatarGroup Slots
 
 | Name    | Parameters | Description                      |
 | ------- | ---------- | -------------------------------- |

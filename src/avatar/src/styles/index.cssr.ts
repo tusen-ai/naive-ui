@@ -19,6 +19,7 @@ export default cB('avatar', `
   border-radius: var(--n-border-radius);
   background-color: var(--n-color);
   transition:
+    border-color .3s var(--n-bezier),
     background-color .3s var(--n-bezier),
     color .3s var(--n-bezier);
 `, [

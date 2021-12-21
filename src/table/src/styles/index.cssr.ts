@@ -35,7 +35,7 @@ export default c([
       background-color .3s var(--n-bezier),
       border-color .3s var(--n-bezier),
       color .3s var(--n-bezier);
-    --merged-border-color: var(--n-border-color);
+    --n-merged-border-color: var(--n-border-color);
   `, [
     c('th', `
       white-space: nowrap;
@@ -119,7 +119,7 @@ export default c([
   insideModal(
     cB('table', `
       background-color: var(--n-td-color-modal);
-      --merged-border-color: var(--n-border-color-modal);
+      --n-merged-border-color: var(--n-border-color-modal);
     `, [
       c('th', `
         background-color: var(--n-th-color-modal);
@@ -132,7 +132,7 @@ export default c([
   insidePopover(
     cB('table', `
       background-color: var(--n-td-color-popover);
-      --merged-border-color: var(--n-border-color-popover);
+      --n-merged-border-color: var(--n-border-color-popover);
     `, [
       c('th', `
         background-color: var(--n-th-color-popover);
