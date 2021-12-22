@@ -13,6 +13,7 @@
 - `n-message` 的 CSS 变量使用 `n` 作为前缀
 - `n-mention` 的 CSS 变量使用 `n` 作为前缀
 - `n-menu` 的 CSS 变量使用 `n` 作为前缀
+- `n-popover` 的 CSS 变量使用 `n` 作为前缀
 - `n-transfer` 的 CSS 变量使用 `n` 作为前缀
 - `n-table` 的 CSS 变量使用 `n` 作为前缀
 - `n-statistic` 的 CSS 变量使用 `n` 作为前缀

@@ -13,6 +13,7 @@
 - `n-message` uses `n` as CSS vars prefix.
 - `n-mention` uses `n` as CSS vars prefix.
 - `n-menu` uses `n` as CSS vars prefix.
+- `n-popover` uses `n` as CSS vars prefix.
 - `n-transfer` uses `n` as CSS vars prefix.
 - `n-table` uses `n` as CSS vars prefix.
 - `n-statistic` uses `n` as CSS vars prefix.
