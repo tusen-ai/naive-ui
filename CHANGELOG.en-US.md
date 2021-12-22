@@ -5,6 +5,7 @@
 ### Feats
 
 - Add `n-avatar-group`.
+- `n-mention` uses `n` as CSS vars prefix.
 - `n-menu` uses `n` as CSS vars prefix.
 - `n-transfer` uses `n` as CSS vars prefix.
 - `n-table` uses `n` as CSS vars prefix.
