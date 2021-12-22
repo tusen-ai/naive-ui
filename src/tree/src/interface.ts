@@ -1,5 +1,5 @@
 import { CheckStrategy, TreeNode } from 'treemate'
-import { InjectionKey, Ref, VNodeChild } from 'vue'
+import { InjectionKey, Ref, VNodeChild, VNode } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { TreeTheme } from '../styles'
 
@@ -14,6 +14,7 @@ export interface TreeOptionBase {
   children?: TreeOption[]
   prefix?: () => VNodeChild
   suffix?: () => VNodeChild
+  switchIcon?: (option: TreeOption) => VNode
 }
 
 export type TreeOption = TreeOptionBase & { [k: string]: unknown }

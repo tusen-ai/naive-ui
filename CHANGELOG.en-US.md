@@ -33,6 +33,7 @@
 - `n-collapse` uses `n` as CSS vars prefix.
 - `n-collapse-transition` uses `n` as CSS vars prefix.
 - `n-thing` uses `n` as CSS vars prefix.
+- `n-tree` add `switch-icon` in `TreeOption`.
 
 ### Fixes
 

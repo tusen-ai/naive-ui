@@ -81,3 +81,4 @@ batch-render
 | isLeaf? | `boolean` | Whether the node is leaf. Required in remote mode. |
 | prefix? | `string \| (() => VNodeChild)` | Prefix of the node. |
 | suffix? | `string \| (() => VNodeChild)` | Suffix of the node. |
+| switchIcon? | `(option: TreeOption) => VNode` | Switch icon of the node. |

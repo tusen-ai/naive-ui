@@ -14,6 +14,7 @@
 ```js
 import { h, defineComponent, ref } from 'vue'
 import { NButton } from 'naive-ui'
+import { CaretForwardOutline } from '@vicons/ionicons5'
 
 function createData (level = 4, baseKey = '') {
   if (!level) return undefined
@@ -31,7 +32,8 @@ function createData (level = 4, baseKey = '') {
           { default: () => 'Suffix' }
         ),
       prefix: () =>
-        h(NButton, { text: true, type: 'primary' }, { default: () => 'Prefix' })
+        h(NButton, { text: true, type: 'primary' }, { default: () => 'Prefix' }),
+      switchIcon: (option) => h(CaretForwardOutline)
     }
   })
 }

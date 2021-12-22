@@ -82,3 +82,4 @@ check-strategy-debug
 | isLeaf? | `boolean` | 节点是否是叶节点，在 `remote` 模式下是必须的 |
 | prefix? | `string \| (() => VNodeChild)` | 节点的前缀 |
 | suffix? | `string \| (() => VNodeChild)` | 节点的后缀 |
+| switchIcon? | `(option: TreeOption) => VNode` | 节点的　switch　图标 |

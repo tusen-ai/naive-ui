@@ -277,6 +277,7 @@ const TreeNode = defineComponent({
             loading={this.loading}
             hide={tmNode.isLeaf}
             onClick={this.handleSwitcherClick}
+            tmNode={tmNode}
           />
           {checkable ? (
             <NTreeNodeCheckbox

@@ -1,6 +1,7 @@
 import { h, defineComponent, PropType } from 'vue'
 import { SwitcherIcon } from '../../_internal/icons'
 import { NIconSwitchTransition, NBaseLoading, NBaseIcon } from '../../_internal'
+import { TmNode } from './interface'
 
 export default defineComponent({
   name: 'NTreeSwitcher',
@@ -12,10 +13,19 @@ export default defineComponent({
     expanded: Boolean,
     hide: Boolean,
     loading: Boolean,
-    onClick: Function as PropType<(e: MouseEvent) => void>
+    onClick: Function as PropType<(e: MouseEvent) => void>,
+    tmNode: {
+      type: Object as PropType<TmNode>,
+      required: true
+    }
   },
   render () {
-    const { clsPrefix } = this
+    const {
+      clsPrefix, tmNode: {
+        rawNode: { switchIcon },
+        rawNode
+      }
+    } = this
     return (
       <span
         data-switcher
@@ -34,7 +44,7 @@ export default defineComponent({
               default: () =>
                 !this.loading ? (
                   <NBaseIcon clsPrefix={clsPrefix} key="switcher">
-                    {{ default: () => <SwitcherIcon /> }}
+                    {{ default: () => switchIcon ? switchIcon(rawNode) : <SwitcherIcon /> }}
                   </NBaseIcon>
                 ) : (
                   <NBaseLoading
