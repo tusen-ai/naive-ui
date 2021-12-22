@@ -7,6 +7,7 @@ People have too many ideas on how to set the time.
 ```demo
 date
 datetime
+datetimeformat
 daterange
 datetimerange
 month
@@ -39,6 +40,7 @@ update-on-close
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
 | type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year' \| 'quarter'` | `'date'` | Date picker type. | `'quarter'` v2.22.0 |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |  |
+| value-format | `string` | `timestamp` | format of binding value. see [format](https://date-fns.org/v2.23.0/docs/format). |
 | on-blur | `() => void` | `undefined` | On blur callback. |  |
 | on-focus | `() => void` | `undefined` | On focus callback. |  |
 
