@@ -5,6 +5,7 @@
 ### Feats
 
 - 新增 `n-avatar-group`
+- `n-menu` 的 CSS 变量使用 `n` 作为前缀
 - `n-transfer` 的 CSS 变量使用 `n` 作为前缀
 - `n-table` 的 CSS 变量使用 `n` 作为前缀
 - `n-statistic` 的 CSS 变量使用 `n` 作为前缀
