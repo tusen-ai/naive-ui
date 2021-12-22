@@ -619,9 +619,9 @@ export default defineComponent({
           self: { iconColor, iconColorDisabled }
         } = themeRef.value
         return {
-          '--icon-color': iconColor,
-          '--icon-color-disabled': iconColorDisabled,
-          '--bezier': cubicBezierEaseInOut
+          '--n-icon-color': iconColor,
+          '--n-icon-color-disabled': iconColorDisabled,
+          '--n-bezier': cubicBezierEaseInOut
         }
       }),
       cssVars: computed(() => {
@@ -644,20 +644,20 @@ export default defineComponent({
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--border-radius': borderRadius,
-          '--item-color-hover': itemColorHover,
-          '--item-font-size': itemFontSize,
-          '--item-height': itemHeight,
-          '--item-opacity-disabled': itemOpacityDisabled,
-          '--item-text-color': itemTextColor,
-          '--item-text-color-active': itemTextColorActive,
-          '--item-width': itemWidth,
-          '--panel-action-padding': panelActionPadding,
-          '--panel-box-shadow': panelBoxShadow,
-          '--panel-color': panelColor,
-          '--panel-divider-color': panelDividerColor,
-          '--item-border-radius': itemBorderRadius
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-border-radius': borderRadius,
+          '--n-item-color-hover': itemColorHover,
+          '--n-item-font-size': itemFontSize,
+          '--n-item-height': itemHeight,
+          '--n-item-opacity-disabled': itemOpacityDisabled,
+          '--n-item-text-color': itemTextColor,
+          '--n-item-text-color-active': itemTextColorActive,
+          '--n-item-width': itemWidth,
+          '--n-panel-action-padding': panelActionPadding,
+          '--n-panel-box-shadow': panelBoxShadow,
+          '--n-panel-color': panelColor,
+          '--n-panel-divider-color': panelDividerColor,
+          '--n-item-border-radius': itemBorderRadius
         }
       })
     }

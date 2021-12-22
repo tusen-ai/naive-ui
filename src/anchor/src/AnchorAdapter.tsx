@@ -56,18 +56,18 @@ export default defineComponent({
         common: { cubicBezierEaseInOut }
       } = themeRef.value
       return {
-        '--link-border-radius': borderRadius,
-        '--link-color': linkColor,
-        '--link-font-size': linkFontSize,
-        '--link-text-color': linkTextColor,
-        '--link-text-color-hover': linkTextColorHover,
-        '--link-text-color-active': linkTextColorActive,
-        '--link-text-color-pressed': linkTextColorPressed,
-        '--link-padding': linkPadding,
-        '--bezier': cubicBezierEaseInOut,
-        '--rail-color': railColor,
-        '--rail-color-active': railColorActive,
-        '--rail-width': railWidth
+        '--n-link-border-radius': borderRadius,
+        '--n-link-color': linkColor,
+        '--n-link-font-size': linkFontSize,
+        '--n-link-text-color': linkTextColor,
+        '--n-link-text-color-hover': linkTextColorHover,
+        '--n-link-text-color-active': linkTextColorActive,
+        '--n-link-text-color-pressed': linkTextColorPressed,
+        '--n-link-padding': linkPadding,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-rail-color': railColor,
+        '--n-rail-color-active': railColorActive,
+        '--n-rail-width': railWidth
       }
     })
     return {

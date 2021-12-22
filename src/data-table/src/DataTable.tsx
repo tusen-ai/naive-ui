@@ -222,7 +222,7 @@ export default defineComponent({
   name: 'DataTable',
   alias: ['AdvancedTable'],
   props: dataTableProps,
-  setup (props) {
+  setup (props, { slots }) {
     const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
     const mergedBottomBorderedRef = computed(() => {
       const { bottomBordered } = props
@@ -292,7 +292,9 @@ export default defineComponent({
       syncScrollState,
       setHeaderScrollLeft,
       leftActiveFixedColKeyRef,
+      leftActiveFixedChildrenColKeysRef,
       rightActiveFixedColKeyRef,
+      rightActiveFixedChildrenColKeysRef,
       leftFixedColumnsRef,
       rightFixedColumnsRef,
       fixedColumnLeftMapRef,
@@ -319,6 +321,7 @@ export default defineComponent({
       return props.tableLayout
     })
     provide(dataTableInjectionKey, {
+      slots,
       indentRef: toRef(props, 'indent'),
       firstContentfulColIndexRef,
       bodyWidthRef,
@@ -331,7 +334,9 @@ export default defineComponent({
       colsRef,
       paginatedDataRef,
       leftActiveFixedColKeyRef,
+      leftActiveFixedChildrenColKeysRef,
       rightActiveFixedColKeyRef,
+      rightActiveFixedChildrenColKeysRef,
       leftFixedColumnsRef,
       rightFixedColumnsRef,
       fixedColumnLeftMapRef,

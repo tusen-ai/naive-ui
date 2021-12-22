@@ -15,6 +15,9 @@ import {
 } from './validation-utils'
 
 export type Value = number | [number, number]
+
+export type DefaultTime = string | [string | undefined, string | undefined]
+
 export type FormatValue = string | [string, string]
 export type Shortcuts =
   | Record<string, number | (() => number)>
@@ -63,7 +66,7 @@ export type DatePickerInjection = {
   updateValueOnCloseRef: Ref<boolean>
   firstDayOfWeekRef: Ref<FirstDayOfWeek | undefined>
   datePickerSlots: Slots
-  scrollYearMonth: (value?: number) => void
+  scrollPickerColumns: (value?: number) => void
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 

@@ -277,6 +277,7 @@ export default c([
       fixedColumnStyle
     ]),
     cB('data-table-empty', `
+      box-sizing: border-box;
       padding: var(--empty-padding);
       flex-grow: 1;
       flex-shrink: 0;

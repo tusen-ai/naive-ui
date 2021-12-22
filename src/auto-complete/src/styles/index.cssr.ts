@@ -2,8 +2,8 @@ import { c, cB } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
-// --bezier
-// --menu-box-shadow
+// --n-bezier
+// --n-menu-box-shadow
 export default c([
   cB('auto-complete', `
     z-index: auto;
@@ -13,10 +13,10 @@ export default c([
   `),
   cB('auto-complete-menu', `
     margin: 4px 0;
-    box-shadow: var(--menu-box-shadow);
+    box-shadow: var(--n-menu-box-shadow);
   `, [
     fadeInScaleUpTransition({
-      originalTransition: 'background-color .3s var(--bezier)'
+      originalTransition: 'background-color .3s var(--n-bezier)'
     })
   ])
 ])

@@ -1,4 +1,4 @@
-# Multiple (Async)
+# Multiple (async)
 
 ```html
 <n-space vertical>

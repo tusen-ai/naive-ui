@@ -44,6 +44,7 @@ import type {
   IsTimeDisabled,
   Shortcuts,
   FirstDayOfWeek,
+  DefaultTime,
   FormatValue
 } from './interface'
 import { datePickerInjectionKey } from './interface'
@@ -68,6 +69,7 @@ const datePickerProps = {
     type: [Number, String, Array] as PropType<FormatValue | null>,
     default: null
   },
+  defaultTime: [Number, String, Array] as PropType<DefaultTime>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -159,10 +161,10 @@ export default defineComponent({
       }
     })
     const uncontrolledValueRef = ref(
-      transferFormat(props.defaultValue) as Value | null
+      transformFormat(props.defaultValue) as Value | null
     )
     const controlledValueRef = computed(() => {
-      return transferFormat(props.value)
+      return transformFormat(props.value)
     })
     const mergedValueRef = useMergedState(
       controlledValueRef,
@@ -206,6 +208,8 @@ export default defineComponent({
             return localeRef.value.monthPlaceholder
           case 'year':
             return localeRef.value.yearPlaceholder
+          case 'quarter':
+            return localeRef.value.quarterPlaceholder
           default:
             return ''
         }
@@ -251,6 +255,8 @@ export default defineComponent({
           return localeRef.value.yearTypeFormat
         case 'month':
           return localeRef.value.monthTypeFormat
+        case 'quarter':
+          return localeRef.value.quarterFormat
       }
     })
     const mergedActionsRef = computed(() => {
@@ -275,6 +281,9 @@ export default defineComponent({
         case 'year': {
           return ['clear', 'now']
         }
+        case 'quarter': {
+          return ['clear', 'now', 'confirm']
+        }
         default: {
           warn(
             'data-picker',
@@ -284,34 +293,56 @@ export default defineComponent({
         }
       }
     })
-    function transferFormat (
+    function transformFormat (
       value: FormatValue | null | undefined
     ): Value | null | undefined {
       if (value === null) return null
       if (value === undefined) return undefined
-      if (props.valueFormat === 'timestamp') return Number(value)
       if (Array.isArray(value)) {
-        return [
-          strictParse(
-            value[0],
-            props.valueFormat,
-            new Date(),
-            dateFnsOptionsRef.value
-          ).getTime(),
-          strictParse(
-            value[1],
+        if (props.valueFormat === 'timestamp') {
+          if (
+            Number.isNaN(Number(value[0])) ||
+            Number.isNaN(Number(value[1]))
+          ) {
+            throw new Error(
+              'The value-format is timestamp, value got String, except [Number, Number]'
+            )
+          } else {
+            return Number(value)
+          }
+        } else {
+          return [
+            strictParse(
+              value[0],
+              props.valueFormat,
+              new Date(),
+              dateFnsOptionsRef.value
+            ).getTime(),
+            strictParse(
+              value[1],
+              props.valueFormat,
+              new Date(),
+              dateFnsOptionsRef.value
+            ).getTime()
+          ]
+        }
+      } else {
+        if (props.valueFormat === 'timestamp') {
+          if (Number.isNaN(Number(value))) {
+            throw new Error(
+              'The value-format is timestamp, value got String, except Number'
+            )
+          } else {
+            return Number(value)
+          }
+        } else {
+          return strictParse(
+            value,
             props.valueFormat,
             new Date(),
             dateFnsOptionsRef.value
           ).getTime()
-        ]
-      } else {
-        return strictParse(
-          value,
-          props.valueFormat,
-          new Date(),
-          dateFnsOptionsRef.value
-        ).getTime()
+        }
       }
     }
     function doUpdatePendingValue (value: Value | null): void {
@@ -325,26 +356,30 @@ export default defineComponent({
         valueFormat
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      let formatValue: FormatValue | null
+      let formattedValue: FormatValue | null
       if (value === null) {
-        formatValue = null
+        formattedValue = null
       } else {
         if (valueFormat === 'timestamp') {
-          formatValue = String(value)
+          formattedValue = String(value)
         } else {
           if (Array.isArray(value)) {
-            formatValue = [
+            formattedValue = [
               format(value[0], valueFormat, dateFnsOptionsRef.value),
               format(value[1], valueFormat, dateFnsOptionsRef.value)
             ]
           } else {
-            formatValue = format(value, valueFormat, dateFnsOptionsRef.value)
+            formattedValue = format(value, valueFormat, dateFnsOptionsRef.value)
           }
         }
       }
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, formatValue)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, formatValue)
-      if (onChange) call(onChange as OnUpdateValueImpl, formatValue)
+      if (onUpdateValue) {
+        call(onUpdateValue as OnUpdateValueImpl, formattedValue)
+      }
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, formattedValue)
+      }
+      if (onChange) call(onChange as OnUpdateValueImpl, formattedValue)
       uncontrolledValueRef.value = value
       nTriggerFormChange()
       nTriggerFormInput()
@@ -405,7 +440,7 @@ export default defineComponent({
         disableUpdateOnClose
       })
     }
-    function scrollYearMonth (value?: number): void {
+    function scrollPickerColumns (value?: number): void {
       if (!panelInstRef.value) return
       const { monthScrollRef, yearScrollRef } = panelInstRef.value
       const { value: mergedValue } = mergedValueRef
@@ -570,8 +605,9 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
-      if (props.type === 'month' || props.type === 'year') {
-        void nextTick(scrollYearMonth)
+      const { type } = props
+      if (type === 'month' || type === 'year' || type === 'quarter') {
+        void nextTick(scrollPickerColumns)
       }
     }
     function closeCalendar ({
@@ -617,7 +653,7 @@ export default defineComponent({
     const uniVaidation = uniCalendarValidation(props, pendingValueRef)
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
-      scrollYearMonth,
+      scrollPickerColumns,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       timePickerSizeRef,
@@ -821,7 +857,8 @@ export default defineComponent({
       active: this.mergedShow,
       actions: this.actions,
       shortcuts: this.shortcuts,
-      style: this.cssVars as CSSProperties
+      style: this.cssVars as CSSProperties,
+      defaultTime: this.defaultTime
     }
     const { mergedClsPrefix } = this
     return (
@@ -948,6 +985,12 @@ export default defineComponent({
                                     {...commonPanelProps}
                                     type="year"
                                     key="year"
+                                  />
+                              ) : this.type === 'quarter' ? (
+                                  <MonthPanel
+                                    {...commonPanelProps}
+                                    type="quarter"
+                                    key="quarter"
                                   />
                               ) : (
                                   <DatePanel {...commonPanelProps} />

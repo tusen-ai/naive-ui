@@ -226,12 +226,12 @@ export default defineComponent({
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--loader-font-size': loaderFontSize,
-          '--loader-border': loaderBorder,
-          '--loader-color': loaderColor,
-          '--loader-text-color': loaderTextColor,
-          '--loading-color': loadingColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-loader-font-size': loaderFontSize,
+          '--n-loader-border': loaderBorder,
+          '--n-loader-color': loaderColor,
+          '--n-loader-text-color': loaderTextColor,
+          '--n-loading-color': loadingColor
         }
       })
     }

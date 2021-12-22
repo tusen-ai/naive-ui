@@ -95,7 +95,7 @@ export default defineComponent({
         {headerInBody ? null : <TableHeader ref="headerInstRef" />}
         <TableBody
           ref="bodyInstRef"
-          style={this.bodyStyle}
+          bodyStyle={this.bodyStyle}
           showHeader={headerInBody}
           flexHeight={flexHeight}
           onResize={this.handleBodyResize}

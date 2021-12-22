@@ -3,17 +3,17 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 const lineHeight = 1.25
 
 // vars:
-// --bezier
-// --circle-border
-// --content-font-size
-// --content-text-color
-// --line-color
-// --meta-text-color
-// --title-font-size
-// --title-font-weight
-// --title-margin
-// --title-text-color
-// --icon-size
+// --n-bezier
+// --n-circle-border
+// --n-content-font-size
+// --n-content-text-color
+// --n-line-color
+// --n-meta-text-color
+// --n-title-font-size
+// --n-title-font-weight
+// --n-title-margin
+// --n-title-text-color
+// --n-icon-size
 export default cB('timeline', `
   position: relative;
   width: 100%;
@@ -29,7 +29,7 @@ export default cB('timeline', `
       padding-right: 40px;
     `, [
       cB('timeline-item-content', `
-        margin-top: calc(var(--icon-size) + 12px);
+        margin-top: calc(var(--n-icon-size) + 12px);
       `, [
         cE('meta', `
           margin-top: 6px;
@@ -38,11 +38,11 @@ export default cB('timeline', `
       ]),
       cB('timeline-item-timeline', `
         width: 100%;
-        height: calc(var(--icon-size) + 12px);
+        height: calc(var(--n-icon-size) + 12px);
       `, [
         cE('line', `
-          left: var(--icon-size);
-          top: calc(var(--icon-size) / 2 - 1px);
+          left: var(--n-icon-size);
+          top: calc(var(--n-icon-size) / 2 - 1px);
           right: 0px;
           width: unset;
           height: 2px;
@@ -54,10 +54,10 @@ export default cB('timeline', `
     cB('timeline-item', [
       cB('timeline-item-content', `
         text-align: right;
-        margin-right: calc(var(--icon-size) + 12px);
+        margin-right: calc(var(--n-icon-size) + 12px);
       `),
       cB('timeline-item-timeline', `
-        width: var(--icon-size);
+        width: var(--n-icon-size);
         right: 0;
       `)
     ])
@@ -65,7 +65,7 @@ export default cB('timeline', `
   cM('left-placement', [
     cB('timeline-item', [
       cB('timeline-item-content', `
-        margin-left: calc(var(--icon-size) + 12px);
+        margin-left: calc(var(--n-icon-size) + 12px);
       `),
       cB('timeline-item-timeline', `
         left: 0;
@@ -89,59 +89,59 @@ export default cB('timeline', `
     ]),
     cB('timeline-item-content', [
       cE('title', `
-        margin: var(--title-margin);
-        font-size: var(--title-font-size);
-        transition: color .3s var(--bezier);
-        font-weight: var(--title-font-weight);
+        margin: var(--n-title-margin);
+        font-size: var(--n-title-font-size);
+        transition: color .3s var(--n-bezier);
+        font-weight: var(--n-title-font-weight);
         margin-bottom: 6px;
-        color: var(--title-text-color);
+        color: var(--n-title-text-color);
       `),
       cE('content', `
-        transition: color .3s var(--bezier);
-        font-size: var(--content-font-size);
-        color: var(--content-text-color);
+        transition: color .3s var(--n-bezier);
+        font-size: var(--n-content-font-size);
+        color: var(--n-content-text-color);
       `),
       cE('meta', `
-        transition: color .3s var(--bezier);
+        transition: color .3s var(--n-bezier);
         font-size: 12px;
         margin-top: 6px;
         margin-bottom: 20px;
-        color: var(--meta-text-color);
+        color: var(--n-meta-text-color);
       `)
     ]),
     cB('timeline-item-timeline', `
-      width: calc(var(--icon-size) + 12px);
+      width: calc(var(--n-icon-size) + 12px);
       position: absolute;
-      top: calc(var(--title-font-size) * ${lineHeight} / 2 - var(--icon-size) / 2);
+      top: calc(var(--n-title-font-size) * ${lineHeight} / 2 - var(--n-icon-size) / 2);
       height: 100%;
     `, [
       cE('circle', `
-        border: var(--circle-border);
+        border: var(--n-circle-border);
         transition:
-          background-color .3s var(--bezier),
-          border-color .3s var(--bezier);
-        width: var(--icon-size);
-        height: var(--icon-size);
-        border-radius: var(--icon-size);
+          background-color .3s var(--n-bezier),
+          border-color .3s var(--n-bezier);
+        width: var(--n-icon-size);
+        height: var(--n-icon-size);
+        border-radius: var(--n-icon-size);
         box-sizing: border-box;
       `),
       cE('icon', `
-        color: var(--icon-color);
-        font-size: var(--icon-size);
-        height: var(--icon-size);
-        width: var(--icon-size);
+        color: var(--n-icon-color);
+        font-size: var(--n-icon-size);
+        height: var(--n-icon-size);
+        width: var(--n-icon-size);
         display: flex;
         align-items: center;
         justify-content: center;
       `),
       cE('line', `
-        transition: background-color .3s var(--bezier);
+        transition: background-color .3s var(--n-bezier);
         position: absolute;
-        top: var(--icon-size);
-        left: calc(var(--icon-size) / 2 - 1px);
+        top: var(--n-icon-size);
+        left: calc(var(--n-icon-size) / 2 - 1px);
         bottom: 0px;
         width: 2px;
-        background-color: var(--line-color);
+        background-color: var(--n-line-color);
       `)
     ])
   ])

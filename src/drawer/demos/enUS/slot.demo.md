@@ -1,4 +1,4 @@
-# Custom Header and Bottom Content
+# Custom header and bottom content
 
 ```html
 <n-button-group>

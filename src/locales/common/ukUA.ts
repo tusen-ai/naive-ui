@@ -29,6 +29,7 @@ const ukUA: NLocale = {
     monthTypeFormat: 'yyyy-MM',
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
+    quarterFormat: 'yyyy-qqq',
     clear: 'Стерти',
     now: 'Зараз',
     confirm: 'Підтвердити',
@@ -39,6 +40,7 @@ const ukUA: NLocale = {
     monthPlaceholder: 'Виберіть місяць',
     // FIXME: translation needed
     yearPlaceholder: 'Select Year',
+    quarterPlaceholder: 'Select Quarter',
     startDatePlaceholder: 'Дата початку',
     endDatePlaceholder: 'Дата завершення',
     startDatetimePlaceholder: 'Дата і час початку',
