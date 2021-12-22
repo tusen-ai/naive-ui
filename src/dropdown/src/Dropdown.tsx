@@ -350,45 +350,47 @@ export default defineComponent({
           [createKey('optionIconSize', size)]: optionIconSize
         } = self
         const vars: any = {
-          '--bezier': cubicBezierEaseInOut,
-          '--font-size': fontSize,
-          '--padding': padding,
-          '--border-radius': borderRadius,
-          '--option-height': optionHeight,
-          '--option-prefix-width': optionPrefixWidth,
-          '--option-icon-prefix-width': optionIconPrefixWidth,
-          '--option-suffix-width': optionSuffixWidth,
-          '--option-icon-suffix-width': optionIconSuffixWidth,
-          '--option-icon-size': optionIconSize,
-          '--divider-color': dividerColor,
-          '--option-opacity-disabled': optionOpacityDisabled
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-font-size': fontSize,
+          '--n-padding': padding,
+          '--n-border-radius': borderRadius,
+          '--n-option-height': optionHeight,
+          '--n-option-prefix-width': optionPrefixWidth,
+          '--n-option-icon-prefix-width': optionIconPrefixWidth,
+          '--n-option-suffix-width': optionSuffixWidth,
+          '--n-option-icon-suffix-width': optionIconSuffixWidth,
+          '--n-option-icon-size': optionIconSize,
+          '--n-divider-color': dividerColor,
+          '--n-option-opacity-disabled': optionOpacityDisabled
         }
         // writing like this is the fastest method
         if (inverted) {
-          vars['--color'] = self.colorInverted
-          vars['--option-color-hover'] = self.optionColorHoverInverted
-          vars['--option-color-active'] = self.optionColorActiveInverted
-          vars['--option-text-color'] = self.optionTextColorInverted
-          vars['--option-text-color-hover'] = self.optionTextColorHoverInverted
-          vars['--option-text-color-active'] =
+          vars['--n-color'] = self.colorInverted
+          vars['--n-option-color-hover'] = self.optionColorHoverInverted
+          vars['--n-option-color-active'] = self.optionColorActiveInverted
+          vars['--n-option-text-color'] = self.optionTextColorInverted
+          vars['--n-option-text-color-hover'] =
+            self.optionTextColorHoverInverted
+          vars['--n-option-text-color-active'] =
             self.optionTextColorActiveInverted
-          vars['--option-text-color-child-active'] =
+          vars['--n-option-text-color-child-active'] =
             self.optionTextColorChildActiveInverted
-          vars['--prefix-color'] = self.prefixColorInverted
-          vars['--suffix-color'] = self.suffixColorInverted
-          vars['--group-header-text-color'] = self.groupHeaderTextColorInverted
+          vars['--n-prefix-color'] = self.prefixColorInverted
+          vars['--n-suffix-color'] = self.suffixColorInverted
+          vars['--n-group-header-text-color'] =
+            self.groupHeaderTextColorInverted
         } else {
-          vars['--color'] = self.color
-          vars['--option-color-hover'] = self.optionColorHover
-          vars['--option-color-active'] = self.optionColorActive
-          vars['--option-text-color'] = self.optionTextColor
-          vars['--option-text-color-hover'] = self.optionTextColorHover
-          vars['--option-text-color-active'] = self.optionTextColorActive
-          vars['--option-text-color-child-active'] =
+          vars['--n-color'] = self.color
+          vars['--n-option-color-hover'] = self.optionColorHover
+          vars['--n-option-color-active'] = self.optionColorActive
+          vars['--n-option-text-color'] = self.optionTextColor
+          vars['--n-option-text-color-hover'] = self.optionTextColorHover
+          vars['--n-option-text-color-active'] = self.optionTextColorActive
+          vars['--n-option-text-color-child-active'] =
             self.optionTextColorChildActive
-          vars['--prefix-color'] = self.prefixColor
-          vars['--suffix-color'] = self.suffixColor
-          vars['--group-header-text-color'] = self.groupHeaderTextColor
+          vars['--n-prefix-color'] = self.prefixColor
+          vars['--n-suffix-color'] = self.suffixColor
+          vars['--n-group-header-text-color'] = self.groupHeaderTextColor
         }
         return vars
       })
