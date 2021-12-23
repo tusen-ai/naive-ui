@@ -632,9 +632,9 @@ export default defineComponent({
           self: { iconColor, iconColorDisabled }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--icon-color': iconColor,
-          '--icon-color-disabled': iconColorDisabled
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-icon-color': iconColor,
+          '--n-icon-color-disabled': iconColorDisabled
         }
       }),
       cssVars: computed(() => {
@@ -686,64 +686,64 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
+          '--n-bezier': cubicBezierEaseInOut,
 
-          '--panel-border-radius': panelBorderRadius,
-          '--panel-color': panelColor,
-          '--panel-box-shadow': panelBoxShadow,
-          '--panel-text-color': panelTextColor,
+          '--n-panel-border-radius': panelBorderRadius,
+          '--n-panel-color': panelColor,
+          '--n-panel-box-shadow': panelBoxShadow,
+          '--n-panel-text-color': panelTextColor,
 
           // panel header
-          '--panel-header-padding': panelHeaderPadding,
-          '--panel-header-divider-color': panelHeaderDividerColor,
+          '--n-panel-header-padding': panelHeaderPadding,
+          '--n-panel-header-divider-color': panelHeaderDividerColor,
 
           // panel calendar
-          '--calendar-left-padding': calendarLeftPadding,
-          '--calendar-right-padding': calendarRightPadding,
-          '--calendar-title-height': calendarTitleHeight,
-          '--calendar-title-padding': calendarTitlePadding,
-          '--calendar-title-font-size': calendarTitleFontSize,
-          '--calendar-title-font-weight': calendarTitleFontWeight,
-          '--calendar-title-text-color': calendarTitleTextColor,
-          '--calendar-title-grid-template-columns':
+          '--n-calendar-left-padding': calendarLeftPadding,
+          '--n-calendar-right-padding': calendarRightPadding,
+          '--n-calendar-title-height': calendarTitleHeight,
+          '--n-calendar-title-padding': calendarTitlePadding,
+          '--n-calendar-title-font-size': calendarTitleFontSize,
+          '--n-calendar-title-font-weight': calendarTitleFontWeight,
+          '--n-calendar-title-text-color': calendarTitleTextColor,
+          '--n-calendar-title-grid-template-columns':
             calendarTitleGridTempateColumns,
-          '--calendar-days-height': calendarDaysHeight,
-          '--calendar-days-divider-color': calendarDaysDividerColor,
-          '--calendar-days-font-size': calendarDaysFontSize,
-          '--calendar-days-text-color': calendarDaysTextColor,
-          '--calendar-divider-color': calendarDividerColor,
+          '--n-calendar-days-height': calendarDaysHeight,
+          '--n-calendar-days-divider-color': calendarDaysDividerColor,
+          '--n-calendar-days-font-size': calendarDaysFontSize,
+          '--n-calendar-days-text-color': calendarDaysTextColor,
+          '--n-calendar-divider-color': calendarDividerColor,
 
           // panel action
-          '--panel-action-padding': panelActionPadding,
-          '--panel-extra-footer-padding': panelExtraFooterPadding,
-          '--panel-action-divider-color': panelActionDividerColor,
+          '--n-panel-action-padding': panelActionPadding,
+          '--n-panel-extra-footer-padding': panelExtraFooterPadding,
+          '--n-panel-action-divider-color': panelActionDividerColor,
 
           // panel item
-          '--item-font-size': itemFontSize,
-          '--item-border-radius': itemBorderRadius,
-          '--item-size': itemSize,
-          '--item-cell-width': itemCellWidth,
-          '--item-cell-height': itemCellHeight,
-          '--item-text-color': itemTextColor,
-          '--item-color-included': itemColorIncluded,
-          '--item-color-disabled': itemColorDisabled,
-          '--item-color-hover': itemColorHover,
-          '--item-color-active': itemColorActive,
-          '--item-text-color-disabled': itemTextColorDisabled,
-          '--item-text-color-active': itemTextColorActive,
+          '--n-item-font-size': itemFontSize,
+          '--n-item-border-radius': itemBorderRadius,
+          '--n-item-size': itemSize,
+          '--n-item-cell-width': itemCellWidth,
+          '--n-item-cell-height': itemCellHeight,
+          '--n-item-text-color': itemTextColor,
+          '--n-item-color-included': itemColorIncluded,
+          '--n-item-color-disabled': itemColorDisabled,
+          '--n-item-color-hover': itemColorHover,
+          '--vitem-color-active': itemColorActive,
+          '--n-item-text-color-disabled': itemTextColorDisabled,
+          '--n-item-text-color-active': itemTextColorActive,
 
           // scroll item
-          '--scroll-item-width': scrollItemWidth,
-          '--scroll-item-height': scrollItemHeight,
-          '--scroll-item-border-radius': scrollItemBorderRadius,
+          '--n-scroll-item-width': scrollItemWidth,
+          '--n-scroll-item-height': scrollItemHeight,
+          '--n-scroll-item-border-radius': scrollItemBorderRadius,
 
           // panel arrow
-          '--arrow-size': arrowSize,
-          '--arrow-color': arrowColor,
+          '--n-arrow-size': arrowSize,
+          '--n-arrow-color': arrowColor,
 
           // icon in trigger
-          '--icon-color': iconColor,
-          '--icon-color-disabled': iconColorDisabled
+          '--n-icon-color': iconColor,
+          '--n-icon-color-disabled': iconColorDisabled
         }
       })
     }

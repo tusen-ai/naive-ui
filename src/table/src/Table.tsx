@@ -74,27 +74,27 @@ export default defineComponent({
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--td-color': tdColor,
-          '--td-color-modal': tdColorModal,
-          '--td-color-popover': tdColorPopover,
-          '--td-text-color': tdTextColor,
-          '--border-color': borderColor,
-          '--border-color-modal': borderColorModal,
-          '--border-color-popover': borderColorPopover,
-          '--border-radius': borderRadius,
-          '--font-size': fontSize,
-          '--th-color': thColor,
-          '--th-color-modal': thColorModal,
-          '--th-color-popover': thColorPopover,
-          '--th-font-weight': thFontWeight,
-          '--th-text-color': thTextColor,
-          '--line-height': lineHeight,
-          '--td-padding': tdPadding,
-          '--th-padding': thPadding,
-          '--td-color-striped': tdColorStriped,
-          '--td-color-striped-modal': tdColorStripedModal,
-          '--td-color-striped-popover': tdColorStripedPopover
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-td-color': tdColor,
+          '--n-td-color-modal': tdColorModal,
+          '--n-td-color-popover': tdColorPopover,
+          '--n-td-text-color': tdTextColor,
+          '--n-border-color': borderColor,
+          '--n-border-color-modal': borderColorModal,
+          '--n-border-color-popover': borderColorPopover,
+          '--n-border-radius': borderRadius,
+          '--n-font-size': fontSize,
+          '--n-th-color': thColor,
+          '--n-th-color-modal': thColorModal,
+          '--n-th-color-popover': thColorPopover,
+          '--n-th-font-weight': thFontWeight,
+          '--n-th-text-color': thTextColor,
+          '--n-line-height': lineHeight,
+          '--n-td-padding': tdPadding,
+          '--n-th-padding': thPadding,
+          '--n-td-color-striped': tdColorStriped,
+          '--n-td-color-striped-modal': tdColorStripedModal,
+          '--n-td-color-striped-popover': tdColorStripedPopover
         }
       })
     }

@@ -3,37 +3,37 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expand.cssr'
 
 // vars:
-// --margin
-// --bezier
-// --padding
-// --max-width
-// --font-size
-// --icon-margin
-// --icon-size
-// --close-size
-// --close-margin
-// --text-color
-// --color
-// --box-shadow
-// --icon-color-info
-// --icon-color-success
-// --icon-color-warning
-// --icon-color-error
-// --icon-color-loading
-// --close-color
-// --close-color-pressed
-// --close-color-hover
-// --border-radius
+// --n-margin
+// --n-bezier
+// --n-padding
+// --n-max-width
+// --n-font-size
+// --n-icon-margin
+// --n-icon-size
+// --n-close-size
+// --n-close-margin
+// --n-text-color
+// --n-color
+// --n-box-shadow
+// --n-icon-color-info
+// --n-icon-color-success
+// --n-icon-color-warning
+// --n-icon-color-error
+// --n-icon-color-loading
+// --n-close-color
+// --n-close-color-pressed
+// --n-close-color-hover
+// --n-border-radius
 export default c([
   cB('message-wrapper', `
-    margin: var(--margin);
+    margin: var(--n-margin);
     z-index: 0;
     transform-origin: top center;
     display: flex;
   `, [
     fadeInHeightExpand({
       overflow: 'visible',
-      originalTransition: 'transform .3s var(--bezier)',
+      originalTransition: 'transform .3s var(--n-bezier)',
       enterToProps: {
         transform: 'scale(1)'
       },
@@ -47,39 +47,39 @@ export default c([
     display: flex;
     align-items: center;
     transition:
-      color .3s var(--bezier),
-      box-shadow .3s var(--bezier),
-      background-color .3s var(--bezier),
-      opacity .3s var(--bezier),
-      transform .3s var(--bezier),
-      margin-bottom .3s var(--bezier);
-    padding: var(--padding);
-    border-radius: var(--border-radius);
+      color .3s var(--n-bezier),
+      box-shadow .3s var(--n-bezier),
+      background-color .3s var(--n-bezier),
+      opacity .3s var(--n-bezier),
+      transform .3s var(--n-bezier),
+      margin-bottom .3s var(--n-bezier);
+    padding: var(--n-padding);
+    border-radius: var(--n-border-radius);
     flex-wrap: nowrap;
     overflow: hidden;
-    max-width: var(--max-width);
-    color: var(--text-color);
-    background-color: var(--color);
-    box-shadow: var(--box-shadow);
+    max-width: var(--n-max-width);
+    color: var(--n-text-color);
+    background-color: var(--n-color);
+    box-shadow: var(--n-box-shadow);
   `, [
     cE('content', `
       display: inline-block;
-      line-height: var(--line-height);
-      font-size: var(--font-size);
+      line-height: var(--n-line-height);
+      font-size: var(--n-font-size);
     `),
     cE('icon', `
       position: relative;
-      margin: var(--icon-margin);
-      height: var(--icon-size);
-      width: var(--icon-size);
-      font-size: var(--icon-size);
+      margin: var(--n-icon-margin);
+      height: var(--n-icon-size);
+      width: var(--n-icon-size);
+      font-size: var(--n-icon-size);
       flex-shrink: 0;
     `, [
       ['info', 'success', 'warning', 'error', 'loading'].map((type) =>
         cM(`${type}-type`, [
           c('> *', `
-            color: var(--icon-color-${type});
-            transition: color .3s var(--bezier);
+            color: var(--n-icon-color-${type});
+            transition: color .3s var(--n-bezier);
           `)
         ])
       ),
@@ -93,16 +93,16 @@ export default c([
       [iconSwitchTransition()])
     ]),
     cE('close', `
-      font-size: var(--close-size);
-      margin: var(--close-margin);
-      transition: color .3s var(--bezier);
+      font-size: var(--n-close-size);
+      margin: var(--n-close-margin);
+      transition: color .3s var(--n-bezier);
       flex-shrink: 0;
     `, [
       c('&:hover', `
-        color: var(--close-color-hover);
+        color: var(--n-close-color-hover);
       `),
       c('&:active', `
-        color: var(--close-color-pressed);
+        color: var(--n-close-color-pressed);
       `)
     ])
   ]),

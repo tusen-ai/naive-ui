@@ -1,34 +1,34 @@
 import { c, cB } from '../../../_utils/cssr'
 
 // vars:
-// --font-size
-// --font-family
-// --font-weight-strong
-// --bezier
-// --text-color
-// --mono-3
-// --hue-1
-// --hue-2
-// --hue-3
-// --hue-4
-// --hue-5
-// --hue-5-2
-// --hue-6
-// --hue-6-2
+// --n-font-size
+// --n-font-family
+// --n-font-weight-strong
+// --n-bezier
+// --n-text-color
+// --n-mono-3
+// --n-hue-1
+// --n-hue-2
+// --n-hue-3
+// --n-hue-4
+// --n-hue-5
+// --n-hue-5-2
+// --n-hue-6
+// --n-hue-6-2
 export default c([
   cB('code', `
-    font-size: var(--font-size);
-    font-family: var(--font-family);
+    font-size: var(--n-font-size);
+    font-family: var(--n-font-family);
   `, [
     c('pre', `
       margin: 0;
       font-family: inherit;
     `),
     c('[class^=hljs]', `
-      color: var(--text-color);
+      color: var(--n-text-color);
       transition: 
-        color .3s var(--bezier),
-        background-color .3s var(--bezier);
+        color .3s var(--n-bezier),
+        background-color .3s var(--n-bezier);
     `)
   ]), ({ props }) => {
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -36,34 +36,34 @@ export default c([
     return [
       `${codeClass} .hljs-comment,
       ${codeClass} .hljs-quote {
-        color: var(--mono-3);
+        color: var(--n-mono-3);
         font-style: italic;
       }`,
       `${codeClass} .hljs-doctag,
       ${codeClass} .hljs-keyword,
       ${codeClass} .hljs-formula {
-        color: var(--hue-3);
+        color: var(--n-hue-3);
       }`,
       `${codeClass} .hljs-section,
       ${codeClass} .hljs-name,
       ${codeClass} .hljs-selector-tag,
       ${codeClass} .hljs-deletion,
       ${codeClass} .hljs-subst {
-        color: var(--hue-5);
+        color: var(--n-hue-5);
       }`,
       `${codeClass} .hljs-literal {
-        color: var(--hue-1);
+        color: var(--n-hue-1);
       }`,
       `${codeClass} .hljs-string,
       ${codeClass} .hljs-regexp,
       ${codeClass} .hljs-addition,
       ${codeClass} .hljs-attribute,
       ${codeClass} .hljs-meta-string {
-        color: var(--hue-4);
+        color: var(--n-hue-4);
       }`,
       `${codeClass} .hljs-built_in,
       ${codeClass} .hljs-class .hljs-title {
-        color: var(--hue-6-2);
+        color: var(--n-hue-6-2);
       }`,
       `${codeClass} .hljs-attr,
       ${codeClass} .hljs-variable,
@@ -73,7 +73,7 @@ export default c([
       ${codeClass} .hljs-selector-attr,
       ${codeClass} .hljs-selector-pseudo,
       ${codeClass} .hljs-number {
-        color: var(--hue-6);
+        color: var(--n-hue-6);
       }`,
       `${codeClass} .hljs-symbol,
       ${codeClass} .hljs-bullet,
@@ -81,13 +81,13 @@ export default c([
       ${codeClass} .hljs-meta,
       ${codeClass} .hljs-selector-id,
       ${codeClass} .hljs-title {
-        color: var(--hue-2);
+        color: var(--n-hue-2);
       }`,
       `${codeClass} .hljs-emphasis {
         font-style: italic;
       }`,
       `${codeClass} .hljs-strong {
-        font-weight: var(--font-weight-strong);
+        font-weight: var(--n-font-weight-strong);
       }`,
       `${codeClass} .hljs-link {
         text-decoration: underline;

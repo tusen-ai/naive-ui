@@ -95,24 +95,24 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--th-padding': thPadding,
-          '--td-padding': tdPadding,
-          '--font-size': fontSize,
-          '--bezier': cubicBezierEaseInOut,
-          '--th-font-weight': thFontWeight,
-          '--line-height': lineHeight,
-          '--th-text-color': thTextColor,
-          '--td-text-color': tdTextColor,
-          '--th-color': thColor,
-          '--th-color-modal': thColorModal,
-          '--th-color-popover': thColorPopover,
-          '--td-color': tdColor,
-          '--td-color-modal': tdColorModal,
-          '--td-color-popover': tdColorPopover,
-          '--border-radius': borderRadius,
-          '--border-color': borderColor,
-          '--border-color-modal': borderColorModal,
-          '--border-color-popover': borderColorPopover
+          '--n-th-padding': thPadding,
+          '--n-td-padding': tdPadding,
+          '--n-font-size': fontSize,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-th-font-weight': thFontWeight,
+          '--n-line-height': lineHeight,
+          '--n-th-text-color': thTextColor,
+          '--n-td-text-color': tdTextColor,
+          '--n-th-color': thColor,
+          '--n-th-color-modal': thColorModal,
+          '--n-th-color-popover': thColorPopover,
+          '--n-td-color': tdColor,
+          '--n-td-color-modal': tdColorModal,
+          '--n-td-color-popover': tdColorPopover,
+          '--n-border-radius': borderRadius,
+          '--n-border-color': borderColor,
+          '--n-border-color-modal': borderColorModal,
+          '--n-border-color-popover': borderColorPopover
         }
       }),
       compitableColumn: useCompitable(props, ['columns', 'column'])
@@ -205,10 +205,11 @@ export default defineComponent({
               >
                 {[
                   ...itemLabel,
-                  separator &&
-                  <span class={`${mergedClsPrefix}-descriptions-separator`}>
-                    {separator}
-                  </span>
+                  separator && (
+                    <span class={`${mergedClsPrefix}-descriptions-separator`}>
+                      {separator}
+                    </span>
+                  )
                 ]}
               </span>
               <span
