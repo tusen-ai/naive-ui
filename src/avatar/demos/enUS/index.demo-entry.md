@@ -11,11 +11,9 @@ color
 badge
 icon
 name-size
-object-fit
 fallback
-v-show-debug
 group
-customized-group
+v-show-debug
 ```
 
 ## API
@@ -33,13 +31,13 @@ customized-group
 | round | `boolean` | `false` | Whether to display a rounded avatar. |
 | on-error | `(e: Event) => void` | `undefined` | Callback executed when the avatar image fails to load. |
 
-### Avatar Group Props
+### AvatarGroup Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| maxAvatarCount | `number` | `undefined` | Max avatar count in the group. |
-| maxAvatarStyle | `Object \| string` | `undefined` | The style to trigger the hidden avatars. |
-| options | `Array<AvatarOption>` | `[]` | avatar group options |
+| max | `number` | `undefined` | Max avatar count in the group. |
+| max-style | `Object \| string` | `undefined` | The style of the overflow placeholder. |
+| options | `Array<AvatarOption>` | `[]` | Avatar group options. |
 | vertical | `boolean` | `false` | Whether display a vertical avatar group. |
 
 see [Avatar Props](avatar#Props)
@@ -50,8 +48,10 @@ see [Avatar Props](avatar#Props)
 | ------- | ---------- | -------------------------- |
 | default | `()`       | The content of the avatar. |
 
-### Avatar Group Slots
+### AvatarGroup Slots
 
-| Name    | Parameters | Description                      |
-| ------- | ---------- | -------------------------------- |
-| default | `()`       | The content of the avatar group. |
+| Name | Parameters | Description |
+| --- | --- | --- |
+| avatar | `(info: { option: { src: string } })` | Avatar of the avatar group. |
+| default | `()` | The content of the avatar group. |
+| rest | `(info: { options: Array<{ src: string }>, rest: number })` | Overflow indicator of the avatar group. |

@@ -92,22 +92,17 @@ export default defineComponent({
     )
     const TagInjection = inject(tagInjectionKey, null)
     const mergedRoundRef = computed(() => {
+      if (NAvatarGroup) return true
       const { round, circle } = props
       if (round !== undefined || circle !== undefined) return round || circle
-      const { round: avatarGroupRound, circle: avatarGroupCircle } =
-        NAvatarGroup
-      if (avatarGroupRound || avatarGroupCircle) return true
       if (TagInjection) {
         return TagInjection.roundRef.value
       }
       return false
     })
     const mergedBorderedRef = computed(() => {
-      const { bordered } = props
-      if (bordered !== undefined) return bordered
-      const { bordered: avatarGroupBordered } = NAvatarGroup
-      if (avatarGroupBordered) return avatarGroupBordered
-      return false
+      if (NAvatarGroup) return true
+      return props.bordered || false
     })
     const handleError = (e: Event): void => {
       hasLoadErrorRef.value = true
@@ -132,7 +127,14 @@ export default defineComponent({
         const bordered = mergedBorderedRef.value
         const { color: propColor } = props
         const {
-          self: { borderRadius, fontSize, color, border },
+          self: {
+            borderRadius,
+            fontSize,
+            color,
+            border,
+            colorModal,
+            colorPopover
+          },
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         let height: string
@@ -146,6 +148,8 @@ export default defineComponent({
           '--n-border': bordered ? border : 'none',
           '--n-border-radius': round ? '50%' : borderRadius,
           '--n-color': propColor || color,
+          '--n-color-modal': propColor || colorModal,
+          '--n-color-popover': propColor || colorPopover,
           '--n-bezier': cubicBezierEaseInOut,
           '--n-merged-size': `var(--n-avatar-size-override, ${height})`
         }

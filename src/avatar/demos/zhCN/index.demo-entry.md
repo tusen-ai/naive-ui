@@ -11,11 +11,9 @@ color
 badge
 icon
 name-size
-object-fit
 fallback
-v-show-debug
 group
-customized-group
+v-show-debug
 ```
 
 ## API
@@ -33,14 +31,14 @@ customized-group
 | round | `boolean` | `false` | 头像是否圆形 |
 | on-error | `(e: Event) => void` | `undefined` | 头像的图片加载失败执行的回调 |
 
-### Avatar Group Props
+### AvatarGroup Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| maxAvatarCount | `number` | `undefined` | 组内头像显示的最大个数 |
-| maxAvatarStyle | `Object \| string` | `undefined` | 触发隐藏头像的样式 |
-| options | `Array<AvatarOption>` | `[]` | 头像组传入的 options |
-| vertical | `boolean` | `false` | 组内头像是否垂直排列 |
+| 名称      | 类型                  | 默认值      | 说明                   |
+| --------- | --------------------- | ----------- | ---------------------- |
+| max       | `number`              | `undefined` | 组内头像显示的最大个数 |
+| max-style | `Object \| string`    | `undefined` | 溢出标识的样式         |
+| options   | `Array<AvatarOption>` | `[]`        | 头像组的选项           |
+| vertical  | `boolean`             | `false`     | 组内头像是否垂直排列   |
 
 参考 [Avatar Props](avatar#Props)
 
@@ -50,8 +48,10 @@ customized-group
 | ------- | ---- | ---------------- |
 | default | `()` | 头像内填充的内容 |
 
-### Avatar Group Slots
+### AvatarGroup Slots
 
-| 名称    | 参数 | 说明               |
-| ------- | ---- | ------------------ |
+| 名称 | 参数 | 说明 |
+| --- | --- | --- |
+| avatar | `(info: { option: { src: string } })` | 头像组头像 |
 | default | `()` | 头像组内填充的内容 |
+| rest | `(info: { options: Array<{ src: string }>, rest: number })` | 头像组溢出容器 |
