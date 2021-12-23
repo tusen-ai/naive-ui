@@ -6,6 +6,8 @@
 
 - 新增 `n-avatar-group`
 - `n-loading-bar` 的 CSS 变量使用 `n` 作为前缀
+- `n-list` 的 CSS 变量使用 `n` 作为前缀
+- `n-layout` 的 CSS 变量使用 `n` 作为前缀
 - `n-message` 的 CSS 变量使用 `n` 作为前缀
 - `n-mention` 的 CSS 变量使用 `n` 作为前缀
 - `n-menu` 的 CSS 变量使用 `n` 作为前缀
@@ -23,6 +25,7 @@
 - `n-cascader` 的 CSS 变量使用 `n` 作为前缀
 - `n-color-picker` 的 CSS 变量使用 `n` 作为前缀
 - `n-checkbox` 的 CSS 变量使用 `n` 作为前缀
+- `n-data-table` 的 CSS 变量使用 `n` 作为前缀
 - `n-date-picker` 的 CSS 变量使用 `n` 作为前缀
 - `n-descriptions` 的 CSS 变量使用 `n` 作为前缀
 - `n-drawer` 的 CSS 变量使用 `n` 作为前缀
@@ -34,6 +37,7 @@
 - `n-collapse` 的 CSS 变量使用 `n` 作为前缀
 - `n-collapse-transition` 的 CSS 变量使用 `n` 作为前缀
 - `n-thing` 的 CSS 变量使用 `n` 作为前缀
+- `n-page-header` 的 CSS 变量使用 `n` 作为前缀
 
 ### Fixes
 

@@ -221,24 +221,24 @@ export default defineComponent({
           siderToggleBarColorHover
         } = self
         const vars: any = {
-          '--bezier': cubicBezierEaseInOut,
-          '--toggle-button-color': siderToggleButtonColor,
-          '--toggle-button-border': siderToggleButtonBorder,
-          '--toggle-bar-color': siderToggleBarColor,
-          '--toggle-bar-color-hover': siderToggleBarColorHover
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-toggle-button-color': siderToggleButtonColor,
+          '--n-toggle-button-border': siderToggleButtonBorder,
+          '--n-toggle-bar-color': siderToggleBarColor,
+          '--n-toggle-bar-color-hover': siderToggleBarColorHover
         }
         if (props.inverted) {
-          vars['--color'] = self.siderColorInverted
-          vars['--text-color'] = self.textColorInverted
-          vars['--border-color'] = self.siderBorderColorInverted
-          vars['--toggle-button-icon-color'] =
+          vars['--n-color'] = self.siderColorInverted
+          vars['--n-text-color'] = self.textColorInverted
+          vars['--n-border-color'] = self.siderBorderColorInverted
+          vars['--n-toggle-button-icon-color'] =
             self.siderToggleButtonIconColorInverted
           vars.__invertScrollbar = self.__invertScrollbar
         } else {
-          vars['--color'] = self.siderColor
-          vars['--text-color'] = self.textColor
-          vars['--border-color'] = self.siderBorderColor
-          vars['--toggle-button-icon-color'] = self.siderToggleButtonIconColor
+          vars['--n-color'] = self.siderColor
+          vars['--n-text-color'] = self.textColor
+          vars['--n-border-color'] = self.siderBorderColor
+          vars['--n-toggle-button-icon-color'] = self.siderToggleButtonIconColor
         }
         return vars
       }),

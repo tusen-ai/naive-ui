@@ -6,6 +6,8 @@
 
 - Add `n-avatar-group`.
 - `n-loading-bar` uses `n` as CSS vars prefix.
+- `n-list` uses `n` as CSS vars prefix.
+- `n-layout` uses `n` as CSS vars prefix.
 - `n-message` uses `n` as CSS vars prefix.
 - `n-mention` uses `n` as CSS vars prefix.
 - `n-menu` uses `n` as CSS vars prefix.
@@ -23,6 +25,7 @@
 - `n-cascader` uses `n` as CSS vars prefix.
 - `n-color-picker` uses `n` as CSS vars prefix.
 - `n-checkbox` uses `n` as CSS vars prefix.
+- `n-data-table` uses `n` as CSS vars prefix.
 - `n-date-picker` uses `n` as CSS vars prefix.
 - `n-descriptions` uses `n` as CSS vars prefix.
 - `n-drawer` uses `n` as CSS vars prefix.
@@ -34,6 +37,7 @@
 - `n-collapse` uses `n` as CSS vars prefix.
 - `n-collapse-transition` uses `n` as CSS vars prefix.
 - `n-thing` uses `n` as CSS vars prefix.
+- `n-page-header` uses `n` as CSS vars prefix.
 
 ### Fixes
 
