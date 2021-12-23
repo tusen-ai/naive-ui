@@ -5,6 +5,7 @@
 ### Feats
 
 - Add `n-avatar-group`.
+- `n-loading-bar` uses `n` as CSS vars prefix.
 - `n-list` uses `n` as CSS vars prefix.
 - `n-layout` uses `n` as CSS vars prefix.
 - `n-message` uses `n` as CSS vars prefix.

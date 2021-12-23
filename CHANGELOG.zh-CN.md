@@ -5,6 +5,7 @@
 ### Feats
 
 - 新增 `n-avatar-group`
+- `n-loading-bar` 的 CSS 变量使用 `n` 作为前缀
 - `n-list` 的 CSS 变量使用 `n` 作为前缀
 - `n-layout` 的 CSS 变量使用 `n` 作为前缀
 - `n-message` 的 CSS 变量使用 `n` 作为前缀
