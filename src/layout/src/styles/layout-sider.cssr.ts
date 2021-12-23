@@ -1,27 +1,27 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
-// --bezier
-// --color
-// --text-color
-// --border-color
-// --toggle-button-color
-// --toggle-bar-color
-// --toggle-bar-color-hover
+// --n-bezier
+// --n-color
+// --n-text-color
+// --n-border-color
+// --n-toggle-button-color
+// --n-toggle-bar-color
+// --n-toggle-bar-color-hover
 export default cB('layout-sider', `
   flex-shrink: 0;
   box-sizing: border-box;
   position: relative;
   z-index: 1;
-  color: var(--text-color);
+  color: var(--n-text-color);
   transition:
-    color .3s var(--bezier),
-    border-color .3s var(--bezier),
-    min-width .3s var(--bezier),
-    max-width .3s var(--bezier),
-    transform .3s var(--bezier),
-    background-color .3s var(--bezier);
-  background-color: var(--color);
+    color .3s var(--n-bezier),
+    border-color .3s var(--n-bezier),
+    min-width .3s var(--n-bezier),
+    max-width .3s var(--n-bezier),
+    transform .3s var(--n-bezier),
+    background-color .3s var(--n-bezier);
+  background-color: var(--n-color);
   display: flex;
   justify-content: flex-end;
 `, [
@@ -30,7 +30,7 @@ export default cB('layout-sider', `
   `, [
     cM('bordered', `
       border-right: none;
-      border-left: 1px solid var(--border-color);
+      border-left: 1px solid var(--n-border-color);
     `),
     cM('collapsed', [
       cB('layout-toggle-button', [
@@ -90,11 +90,11 @@ export default cB('layout-sider', `
   ]),
   cB('layout-toggle-button', `
     transition:
-      color .3s var(--bezier),
-      right .3s var(--bezier),
-      left .3s var(--bezier),
-      border-color .3s var(--bezier),
-      background-color .3s var(--bezier);
+      color .3s var(--n-bezier),
+      right .3s var(--n-bezier),
+      left .3s var(--n-bezier),
+      border-color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier);
     cursor: pointer;
     width: 24px;
     height: 24px;
@@ -106,14 +106,14 @@ export default cB('layout-sider', `
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    color: var(--toggle-button-icon-color);
-    border: var(--toggle-button-border);
-    background-color: var(--toggle-button-color);
+    color: var(--n-toggle-button-icon-color);
+    border: var(--n-toggle-button-border);
+    background-color: var(--n-toggle-button-color);
     box-shadow: 0 2px 4px 0px rgba(0, 0, 0, .06);
     transform: translateX(50%) translateY(-50%);
   `, [
     cB('base-icon', `
-      transition: transform .3s var(--bezier);
+      transition: transform .3s var(--n-bezier);
       transform: rotate(180deg);
     `)
   ]),
@@ -132,8 +132,8 @@ export default cB('layout-sider', `
       height: 38px;
       left: 14px;
       transition: 
-        background-color .3s var(--bezier),
-        transform .3s var(--bezier);
+        background-color .3s var(--n-bezier),
+        transform .3s var(--n-bezier);
     `),
     cE('bottom', `
       position: absolute;
@@ -148,11 +148,11 @@ export default cB('layout-sider', `
       })
     ]),
     cE('top, bottom', {
-      backgroundColor: 'var(--toggle-bar-color)'
+      backgroundColor: 'var(--n-toggle-bar-color)'
     }),
     c('&:hover', [
       cE('top, bottom', {
-        backgroundColor: 'var(--toggle-bar-color-hover)'
+        backgroundColor: 'var(--n-toggle-bar-color-hover)'
       })
     ])
   ]),
@@ -162,7 +162,7 @@ export default cB('layout-sider', `
     right: 0;
     bottom: 0;
     width: 1px;
-    transition: background-color .3s var(--bezier);
+    transition: background-color .3s var(--n-bezier);
   `),
   cB('layout-sider-scroll-container', `
     flex-grow: 1;
@@ -170,7 +170,7 @@ export default cB('layout-sider', `
     box-sizing: border-box;
     height: 100%;
     opacity: 0;
-    transition: opacity .3s var(--bezier);
+    transition: opacity .3s var(--n-bezier);
     max-width: 100%;
   `),
   cM('show-content', [
@@ -185,6 +185,6 @@ export default cB('layout-sider', `
     bottom: 0;
   `),
   cM('bordered', `
-    border-right: 1px solid var(--border-color);
+    border-right: 1px solid var(--n-border-color);
   `)
 ])
