@@ -26,6 +26,7 @@
 - `n-collapse` 的 CSS 变量使用 `n` 作为前缀
 - `n-collapse-transition` 的 CSS 变量使用 `n` 作为前缀
 - `n-thing` 的 CSS 变量使用 `n` 作为前缀
+- `n-date-picker` 新增 `value-format` 属性
 
 ### Fixes
 
