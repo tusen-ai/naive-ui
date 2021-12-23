@@ -42,6 +42,7 @@
 - `n-carousel` uses `n` as CSS vars prefix.
 - `n-page-header` uses `n` as CSS vars prefix.
 - `n-image` uses `n` as CSS vars prefix.
+- `n-icon` uses `n` as CSS vars prefix.
 
 ### Fixes
 
