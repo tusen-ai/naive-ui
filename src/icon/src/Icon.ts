@@ -46,13 +46,13 @@ export default defineComponent({
         if (depth !== undefined) {
           const { color, [`opacity${depth}Depth` as const]: opacity } = self
           return {
-            '--bezier': cubicBezierEaseInOut,
-            '--color': color,
-            '--opacity': opacity
+            '--n-bezier': cubicBezierEaseInOut,
+            '--n-color': color,
+            '--n-opacity': opacity
           }
         }
         return {
-          '--bezier': cubicBezierEaseInOut
+          '--n-bezier': cubicBezierEaseInOut
         }
       })
     }
