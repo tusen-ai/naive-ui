@@ -340,8 +340,8 @@ export default defineComponent({
           self: { iconColor }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--icon-color': iconColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-icon-color': iconColor
         }
       })
     }
