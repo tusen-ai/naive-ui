@@ -24,6 +24,7 @@
 - `n-cascader` uses `n` as CSS vars prefix.
 - `n-color-picker` uses `n` as CSS vars prefix.
 - `n-checkbox` uses `n` as CSS vars prefix.
+- `n-data-table` uses `n` as CSS vars prefix.
 - `n-date-picker` uses `n` as CSS vars prefix.
 - `n-descriptions` uses `n` as CSS vars prefix.
 - `n-drawer` uses `n` as CSS vars prefix.
