@@ -5,6 +5,7 @@
 ### Feats
 
 - Add `n-avatar-group`.
+- `n-popconfirm` uses `n` as CSS vars prefix.
 - `n-pagination` uses `n` as CSS vars prefix.
 - `n-loading-bar` uses `n` as CSS vars prefix.
 - `n-list` uses `n` as CSS vars prefix.
