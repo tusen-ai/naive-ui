@@ -8,6 +8,7 @@
 - `n-popconfirm` uses `n` as CSS vars prefix.
 - `n-pagination` uses `n` as CSS vars prefix.
 - `n-loading-bar` uses `n` as CSS vars prefix.
+- `n-empty` uses `n` as CSS vars prefix.
 - `n-list` uses `n` as CSS vars prefix.
 - `n-layout` uses `n` as CSS vars prefix.
 - `n-message` uses `n` as CSS vars prefix.
