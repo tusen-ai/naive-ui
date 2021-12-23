@@ -34,6 +34,7 @@
 - `n-collapse` uses `n` as CSS vars prefix.
 - `n-collapse-transition` uses `n` as CSS vars prefix.
 - `n-thing` uses `n` as CSS vars prefix.
+- `n-page-header` uses `n` as CSS vars prefix.
 
 ### Fixes
 

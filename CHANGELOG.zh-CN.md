@@ -34,6 +34,7 @@
 - `n-collapse` 的 CSS 变量使用 `n` 作为前缀
 - `n-collapse-transition` 的 CSS 变量使用 `n` 作为前缀
 - `n-thing` 的 CSS 变量使用 `n` 作为前缀
+- `n-page-header` 的 CSS 变量使用 `n` 作为前缀
 
 ### Fixes
 

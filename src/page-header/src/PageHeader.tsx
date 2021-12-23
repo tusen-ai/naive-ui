@@ -58,16 +58,16 @@ export default defineComponent({
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
-          '--title-text-color': titleTextColor,
-          '--title-font-size': titleFontSize,
-          '--title-font-weight': titleFontWeight,
-          '--font-size': fontSize,
-          '--back-size': backSize,
-          '--subtitle-text-color': subtitleTextColor,
-          '--back-color': backColor,
-          '--back-color-hover': backColorHover,
-          '--back-color-pressed': backColorPressed,
-          '--bezier': cubicBezierEaseInOut
+          '--n-title-text-color': titleTextColor,
+          '--n-title-font-size': titleFontSize,
+          '--n-title-font-weight': titleFontWeight,
+          '--n-font-size': fontSize,
+          '--n-back-size': backSize,
+          '--n-subtitle-text-color': subtitleTextColor,
+          '--n-back-color': backColor,
+          '--n-back-color-hover': backColorHover,
+          '--n-back-color-pressed': backColorPressed,
+          '--n-bezier': cubicBezierEaseInOut
         }
       })
     }
