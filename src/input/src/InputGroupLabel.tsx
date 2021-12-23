@@ -55,14 +55,14 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--group-label-color': groupLabelColor,
-          '--group-label-border': groupLabelBorder,
-          '--border-radius': borderRadius,
-          '--group-label-text-color': groupLabelTextColor,
-          '--font-size': fontSize,
-          '--line-height': lineHeight,
-          '--height': height
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-group-label-color': groupLabelColor,
+          '--n-group-label-border': groupLabelBorder,
+          '--n-border-radius': borderRadius,
+          '--n-group-label-text-color': groupLabelTextColor,
+          '--n-font-size': fontSize,
+          '--n-line-height': lineHeight,
+          '--n-height': height
         }
       })
     }
