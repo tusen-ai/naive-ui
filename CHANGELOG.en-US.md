@@ -35,6 +35,7 @@
 - `n-descriptions` uses `n` as CSS vars prefix.
 - `n-drawer` uses `n` as CSS vars prefix.
 - `n-dropdown` uses `n` as CSS vars prefix.
+- `n-element` uses `n` as CSS vars prefix.
 - `n-rate` uses `n` as CSS vars prefix.
 - `n-radio` uses `n` as CSS vars prefix.
 - `n-progress` uses `n` as CSS vars prefix.
