@@ -47,6 +47,7 @@
 - `n-carousel` uses `n` as CSS vars prefix.
 - `n-page-header` uses `n` as CSS vars prefix.
 - `n-image` uses `n` as CSS vars prefix.
+- `n-input` uses `n` as CSS vars prefix.
 - `n-icon` uses `n` as CSS vars prefix.
 - `n-modal` uses `n` as CSS vars prefix.
 - `n-notification` uses `n` as CSS vars prefix.
