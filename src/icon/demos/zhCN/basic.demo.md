@@ -4,9 +4,7 @@
 <n-icon size="40">
   <game-controller-outline />
 </n-icon>
-<n-icon size="40" color="#0e7a0d">
-  <game-controller />
-</n-icon>
+<n-icon size="40" color="#0e7a0d" :icon="GameControllerOutline"> </n-icon>
 ```
 
 ```js
@@ -15,8 +13,13 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: {
-    GameControllerOutline,
-    GameController
+    GameController,
+    GameControllerOutline
+  },
+  setup () {
+    return {
+      GameControllerOutline
+    }
   }
 })
 ```
