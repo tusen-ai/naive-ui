@@ -5,6 +5,7 @@
 ### Feats
 
 - Add `n-avatar-group`.
+- `base-clear` uses `n` as CSS vars prefix.
 - `n-popconfirm` uses `n` as CSS vars prefix.
 - `n-gradient-text` uses `n` as CSS vars prefix.
 - `n-form` uses `n` as CSS vars prefix.
