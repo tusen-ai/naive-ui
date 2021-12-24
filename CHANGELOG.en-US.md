@@ -5,6 +5,7 @@
 ### Feats
 
 - Add `n-avatar-group`.
+- `n-input-number` supports `loading` state.
 - `scrollbar` uses `n` as CSS vars prefix.
 - `base-close` uses `n` as CSS vars prefix.
 - `base-clear` uses `n` as CSS vars prefix.
