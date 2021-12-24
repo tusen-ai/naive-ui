@@ -304,7 +304,7 @@ export default defineComponent({
           if (leftActiveFixedColKey === null) return null
           return c(
             `[data-n-id="${cProps.componentId}"] [data-col-key="${leftActiveFixedColKey}"]::after`,
-            { boxShadow: 'var(--box-shadow-after)' }
+            { boxShadow: 'var(--n-box-shadow-after)' }
           )
         }
 
@@ -314,7 +314,7 @@ export default defineComponent({
           if (rightActiveFixedColKey === null) return null
           return c(
             `[data-n-id="${cProps.componentId}"] [data-col-key="${rightActiveFixedColKey}"]::before`,
-            { boxShadow: 'var(--box-shadow-before)' }
+            { boxShadow: 'var(--n-box-shadow-before)' }
           )
         }
 
@@ -460,7 +460,6 @@ export default defineComponent({
       <NScrollbar
         ref="scrollbarInstRef"
         scrollable={scrollable || isBasicAutoLayout}
-        showScrollbar={!this.bodyShowHeaderOnly}
         class={`${mergedClsPrefix}-data-table-base-table-body`}
         style={this.bodyStyle}
         theme={mergedTheme.peers.Scrollbar}

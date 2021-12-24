@@ -95,11 +95,11 @@ export default defineComponent({
             ? pxfy(spinSize)
             : self[createKey('size', spinSize)]
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--opacity-spinning': opacitySpinning,
-          '--size': size,
-          '--color': color,
-          '--text-color': textColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-opacity-spinning': opacitySpinning,
+          '--n-size': size,
+          '--n-color': color,
+          '--n-text-color': textColor
         }
       })
     }

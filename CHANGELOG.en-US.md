@@ -1,5 +1,110 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- Add `n-avatar-group`.
+- `n-input-number` supports `loading` state.
+- `scrollbar` uses `n` as CSS vars prefix.
+- `base-close` uses `n` as CSS vars prefix.
+- `base-clear` uses `n` as CSS vars prefix.
+- `n-popconfirm` uses `n` as CSS vars prefix.
+- `n-gradient-text` uses `n` as CSS vars prefix.
+- `n-form` uses `n` as CSS vars prefix.
+- `n-pagination` uses `n` as CSS vars prefix.
+- `n-loading-bar` uses `n` as CSS vars prefix.
+- `n-empty` uses `n` as CSS vars prefix.
+- `n-list` uses `n` as CSS vars prefix.
+- `n-layout` uses `n` as CSS vars prefix.
+- `n-message` uses `n` as CSS vars prefix.
+- `n-mention` uses `n` as CSS vars prefix.
+- `n-menu` uses `n` as CSS vars prefix.
+- `n-popover` uses `n` as CSS vars prefix.
+- `n-transfer` uses `n` as CSS vars prefix.
+- `n-table` uses `n` as CSS vars prefix.
+- `n-statistic` uses `n` as CSS vars prefix.
+- `n-code` uses `n` as CSS vars prefix.
+- `n-breadcrumb` uses `n` as CSS vars prefix.
+- `n-slider` uses `n` as CSS vars prefix.
+- `n-spin` uses `n` as CSS vars prefix.
+- `n-select` uses `n` as CSS vars prefix.
+- `n-result` uses `n` as CSS vars prefix.
+- `n-calendar` uses `n` as CSS vars prefix.
+- `n-card` uses `n` as CSS vars prefix.
+- `n-cascader` uses `n` as CSS vars prefix.
+- `n-color-picker` uses `n` as CSS vars prefix.
+- `n-checkbox` uses `n` as CSS vars prefix.
+- `n-data-table` uses `n` as CSS vars prefix.
+- `n-date-picker` uses `n` as CSS vars prefix.
+- `n-descriptions` uses `n` as CSS vars prefix.
+- `n-drawer` uses `n` as CSS vars prefix.
+- `n-dropdown` uses `n` as CSS vars prefix.
+- `n-rate` uses `n` as CSS vars prefix.
+- `n-radio` uses `n` as CSS vars prefix.
+- `n-progress` uses `n` as CSS vars prefix.
+- `n-skeleton` uses `n` as CSS vars prefix.
+- `n-collapse` uses `n` as CSS vars prefix.
+- `n-collapse-transition` uses `n` as CSS vars prefix.
+- `n-thing` uses `n` as CSS vars prefix.
+- `n-carousel` uses `n` as CSS vars prefix.
+- `n-page-header` uses `n` as CSS vars prefix.
+- `n-image` uses `n` as CSS vars prefix.
+- `n-input` uses `n` as CSS vars prefix.
+- `n-icon` uses `n` as CSS vars prefix.
+- `n-modal` uses `n` as CSS vars prefix.
+- `n-notification` uses `n` as CSS vars prefix.
+
+### Fixes
+
+- Fix `n-form-item-gi` 's `validate` doesn't work, closes [#1901](https://github.com/TuSimple/naive-ui/issues/1901).
+
+## 2.23.1 (2021-12-20)
+
+### Fixes
+
+- Fix `n-transfer` list doesn't follow container height when style.height is set, closes [#1879](https://github.com/TuSimple/naive-ui/issues/1879).
+- Fix `n-skeleton` & `n-gradient-text` cause runtime error in some old browsers, closes [#1867](https://github.com/TuSimple/naive-ui/issues/1867).
+- Fix `n-data-table` `ellipsis` prop in column doesn't support all `n-ellipsis`'s props, closes [#1891](https://github.com/TuSimple/naive-ui/issues/1891).
+- Fix `n-form`'s `blankHeightXxx` theme var doesn't follow `common.heightXxx`, closes [#1880](https://github.com/TuSimple/naive-ui/issues/1880).
+- Fix `n-date-picker`'s panel doesn't use `dateFormat` in locale, closes [#1793](https://github.com/TuSimple/naive-ui/issues/1793).
+- Fix `n-log` text color transition in theme switching.
+
+### Feats
+
+- `n-back-top` uses `n` as CSS vars prefix.
+- `n-steps` uses `n` as CSS vars prefix.
+- `n-switch` uses `n` as CSS vars prefix.
+- `n-auto-complete` uses `n` as CSS vars prefix.
+- `n-log` uses `n` as CSS vars prefix.
+- `n-timeline` uses `n` as CSS vars prefix.
+- `n-time-picker` uses `n` as CSS vars prefix.
+- `n-avatar` uses `n` as CSS vars prefix.
+- `n-dynamic-tags` uses `n` as CSS vars prefix.
+- `n-tag` uses `n` as CSS vars prefix.
+- `n-dialog` uses `n` as CSS vars prefix.
+- `n-upload` uses `n` as CSS vars prefix.
+- `n-tree` uses `n` as CSS vars prefix.
+- `n-tree-select` uses `n` as CSS vars prefix.
+
+## 2.23.0 (2021-12-17)
+
+### Breaking Changes
+
+- `n-switch` can no longer be clicked under `loading` status, closes [#1853](https://github.com/TuSimple/naive-ui/issues/1853).
+
+### Fixes
+
+- Fix `n-data-table` 's horizontal scrollbar disappears when max-height is not set, closes [#1857](https://github.com/TuSimple/naive-ui/issues/1857).
+- Fix `n-input-number` cannot input negative decimals value, closes [#1858](https://github.com/TuSimple/naive-ui/issues/1858).
+- Fix `n-dialog` open new dialog again when pressing `enter` key, closes [#1559](https://github.com/TuSimple/naive-ui/issues/1559).
+
+### Feats
+
+- `n-divider` uses `n` as CSS vars prefix.
+- `typography` uses `n` as CSS vars prefix.
+- `n-badge` uses `n` as CSS vars prefix.
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes

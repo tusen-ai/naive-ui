@@ -92,18 +92,18 @@ export default defineComponent({
           }
         } = mergedThemeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--description-text-color': descriptionTextColor,
-          '--header-text-color': headerTextColor,
-          '--indicator-border-color': indicatorBorderColor,
-          '--indicator-color': indicatorColor,
-          '--indicator-icon-size': indicatorIconSize,
-          '--indicator-index-font-size': indicatorIndexFontSize,
-          '--indicator-size': indicatorSize,
-          '--indicator-text-color': indicatorTextColor,
-          '--splitor-color': splitorColor,
-          '--step-header-font-size': stepHeaderFontSize,
-          '--step-header-font-weight': stepHeaderFontWeight
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-description-text-color': descriptionTextColor,
+          '--n-header-text-color': headerTextColor,
+          '--n-indicator-border-color': indicatorBorderColor,
+          '--n-indicator-color': indicatorColor,
+          '--n-indicator-icon-size': indicatorIconSize,
+          '--n-indicator-index-font-size': indicatorIndexFontSize,
+          '--n-indicator-size': indicatorSize,
+          '--n-indicator-text-color': indicatorTextColor,
+          '--n-splitor-color': splitorColor,
+          '--n-step-header-font-size': stepHeaderFontSize,
+          '--n-step-header-font-weight': stepHeaderFontWeight
         }
       })
     }

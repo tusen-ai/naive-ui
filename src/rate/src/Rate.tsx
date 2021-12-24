@@ -121,10 +121,10 @@ export default defineComponent({
           mergedSize = self[createKey('size', size)]
         }
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--item-color': itemColor,
-          '--item-color-active': props.color || itemColorActive,
-          '--item-size': mergedSize
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-item-color': itemColor,
+          '--n-item-color-active': props.color || itemColorActive,
+          '--n-item-size': mergedSize
         }
       })
     }

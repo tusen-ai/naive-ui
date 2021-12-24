@@ -379,7 +379,7 @@ export default defineComponent({
           self: { menuBoxShadow }
         } = themeRef.value
         return {
-          '--menu-box-shadow': menuBoxShadow
+          '--n-menu-box-shadow': menuBoxShadow
         }
       })
     }

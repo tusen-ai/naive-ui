@@ -86,11 +86,11 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--rotate': rotate,
-          '--color-start': colorStart,
-          '--color-end': colorEnd,
-          '--font-weight': fontWeight
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-rotate': rotate,
+          '--n-color-start': colorStart,
+          '--n-color-end': colorEnd,
+          '--n-font-weight': fontWeight
         }
       })
     }

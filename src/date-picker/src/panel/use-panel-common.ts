@@ -17,18 +17,14 @@ import {
   DefaultTime
 } from '../interface'
 
-const DATE_FORMAT = 'yyyy-MM-dd'
 const TIME_FORMAT = 'HH:mm:ss'
 
 const usePanelCommonProps = {
   active: Boolean,
-  dateFormat: {
-    type: String,
-    default: DATE_FORMAT
-  },
+  dateFormat: String,
   timeFormat: {
     type: String,
-    default: TIME_FORMAT
+    value: TIME_FORMAT
   },
   value: {
     type: [Array, Number] as PropType<Value | null>,

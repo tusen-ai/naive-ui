@@ -37,11 +37,15 @@ function getPartsOfDemo (text) {
   }
 }
 
-function convertVue2Demo (content, { resourcePath, relativeUrl }) {
+function convertVue2Demo (content, { resourcePath, relativeUrl, isVue = true }) {
   const parts = getPartsOfDemo(content)
-  const mergedParts = mergeParts({ parts, isVue: true })
+  const mergedParts = mergeParts({ parts, isVue })
   const [fileName] = getFileName(resourcePath)
-  const vueComponent = genVueComponent(mergedParts, fileName, relativeUrl)
+  const vueComponent = genVueComponent(
+    mergedParts,
+    fileName + '.vue',
+    relativeUrl
+  )
   return vueComponent
 }
 

@@ -72,10 +72,13 @@ function useCalendar (
     isMinuteDisabled: isMinuteDisabledRef,
     isSecondDisabled: isSecondDisabledRef
   }
+  const mergedDateFormatRef = computed(
+    () => props.dateFormat || localeRef.value.dateFormat
+  )
   const dateInputValueRef = ref(
     props.value === null || Array.isArray(props.value)
       ? ''
-      : format(props.value, props.dateFormat)
+      : format(props.value, mergedDateFormatRef.value)
   )
   const calendarValueRef = ref(
     props.value === null || Array.isArray(props.value)
@@ -138,7 +141,7 @@ function useCalendar (
       if (value !== null && !Array.isArray(value)) {
         dateInputValueRef.value = format(
           value,
-          props.dateFormat,
+          mergedDateFormatRef.value,
           panelCommon.dateFnsOptions.value
         )
         calendarValueRef.value = value
@@ -164,7 +167,7 @@ function useCalendar (
   function handleDateInput (value: string): void {
     const date = strictParse(
       value,
-      props.dateFormat,
+      mergedDateFormatRef.value,
       new Date(),
       panelCommon.dateFnsOptions.value
     )
@@ -189,7 +192,7 @@ function useCalendar (
   function handleDateInputBlur (): void {
     const date = strictParse(
       dateInputValueRef.value,
-      props.dateFormat,
+      mergedDateFormatRef.value,
       new Date(),
       panelCommon.dateFnsOptions.value
     )
@@ -281,7 +284,7 @@ function useCalendar (
     }
     dateInputValueRef.value = format(
       time,
-      props.dateFormat,
+      mergedDateFormatRef.value,
       panelCommon.dateFnsOptions.value
     )
   }

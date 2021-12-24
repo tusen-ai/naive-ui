@@ -1,5 +1,110 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- 新增 `n-avatar-group`
+- `n-input-number` 支持 `loading` 状态
+- `scrollbar` 的 CSS 变量使用 `n` 作为前缀
+- `base-close` 的 CSS 变量使用 `n` 作为前缀
+- `base-clear` 的 CSS 变量使用 `n` 作为前缀
+- `n-popconfirm` 的 CSS 变量使用 `n` 作为前缀
+- `n-gradient-text` 的 CSS 变量使用 `n` 作为前缀
+- `n-form` 的 CSS 变量使用 `n` 作为前缀
+- `n-pagination` 的 CSS 变量使用 `n` 作为前缀
+- `n-loading-bar` 的 CSS 变量使用 `n` 作为前缀
+- `n-empty` 的 CSS 变量使用 `n` 作为前缀
+- `n-list` 的 CSS 变量使用 `n` 作为前缀
+- `n-layout` 的 CSS 变量使用 `n` 作为前缀
+- `n-message` 的 CSS 变量使用 `n` 作为前缀
+- `n-mention` 的 CSS 变量使用 `n` 作为前缀
+- `n-menu` 的 CSS 变量使用 `n` 作为前缀
+- `n-popover` 的 CSS 变量使用 `n` 作为前缀
+- `n-transfer` 的 CSS 变量使用 `n` 作为前缀
+- `n-table` 的 CSS 变量使用 `n` 作为前缀
+- `n-statistic` 的 CSS 变量使用 `n` 作为前缀
+- `n-code` 的 CSS 变量使用 `n` 作为前缀
+- `n-breadcrumb` 的 CSS 变量使用 `n` 作为前缀
+- `n-slider` 的 CSS 变量使用 `n` 作为前缀
+- `n-spin` 的 CSS 变量使用 `n` 作为前缀
+- `n-select` 的 CSS 变量使用 `n` 作为前缀
+- `n-result` 的 CSS 变量使用 `n` 作为前缀
+- `n-calendar` 的 CSS 变量使用 `n` 作为前缀
+- `n-card` 的 CSS 变量使用 `n` 作为前缀
+- `n-cascader` 的 CSS 变量使用 `n` 作为前缀
+- `n-color-picker` 的 CSS 变量使用 `n` 作为前缀
+- `n-checkbox` 的 CSS 变量使用 `n` 作为前缀
+- `n-data-table` 的 CSS 变量使用 `n` 作为前缀
+- `n-date-picker` 的 CSS 变量使用 `n` 作为前缀
+- `n-descriptions` 的 CSS 变量使用 `n` 作为前缀
+- `n-drawer` 的 CSS 变量使用 `n` 作为前缀
+- `n-dropdown` 的 CSS 变量使用 `n` 作为前缀
+- `n-rate` 的 CSS 变量使用 `n` 作为前缀
+- `n-radio` 的 CSS 变量使用 `n` 作为前缀
+- `n-progress` 的 CSS 变量使用 `n` 作为前缀
+- `n-skeleton` 的 CSS 变量使用 `n` 作为前缀
+- `n-collapse` 的 CSS 变量使用 `n` 作为前缀
+- `n-collapse-transition` 的 CSS 变量使用 `n` 作为前缀
+- `n-thing` 的 CSS 变量使用 `n` 作为前缀
+- `n-carousel` 的 CSS 变量使用 `n` 作为前缀
+- `n-page-header` 的 CSS 变量使用 `n` 作为前缀
+- `n-image` 的 CSS 变量使用 `n` 作为前缀
+- `n-input` 的 CSS 变量使用 `n` 作为前缀
+- `n-icon` 的 CSS 变量使用 `n` 作为前缀
+- `n-modal` 的 CSS 变量使用 `n` 作为前缀
+- `n-notification` 的 CSS 变量使用 `n` 作为前缀
+
+### Fixes
+
+- 修复 `n-form-item-gi` 的 `validate` 不生效，关闭 [#1901](https://github.com/TuSimple/naive-ui/issues/1901)
+
+## 2.23.1 (2021-12-20)
+
+### Fixes
+
+- 修复 `n-transfer` 在自定义高度后内部列表和容器高度不一致，关闭 [#1879](https://github.com/TuSimple/naive-ui/issues/1879)
+- 修复 `n-skeleton` 和 `n-gradient-text` 在某些较老的浏览器导致运行错误，关闭 [#1867](https://github.com/TuSimple/naive-ui/issues/1867)
+- 修复 `n-data-table` 中列的 ellipsis 属性对于 `n-ellipsis` 的属性支持不全，关闭 [#1891](https://github.com/TuSimple/naive-ui/issues/1891)
+- 修复 `n-form` 的 `blankHeightXxx` 主题变量没有跟随 `common.heightXxx`，关闭 [#1880](https://github.com/TuSimple/naive-ui/issues/1880)
+- 修复 `n-date-picker` 面板中的日期输入未使用国际化的 `dateFormat`，关闭 [#1793](https://github.com/TuSimple/naive-ui/issues/1793)
+- 修复 `n-log` 主题切换文字颜色 transition
+
+### Feats
+
+- `n-back-top` 的 CSS 变量使用 `n` 作为前缀
+- `n-steps` 的 CSS 变量使用 `n` 作为前缀
+- `n-switch` 的 CSS 变量使用 `n` 作为前缀
+- `n-auto-complete` 的 CSS 变量使用 `n` 作为前缀
+- `n-log` 的 CSS 变量使用 `n` 作为前缀
+- `n-timeline` 的 CSS 变量使用 `n` 作为前缀
+- `n-time-picker` 的 CSS 变量使用 `n` 作为前缀
+- `n-avatar` 的 CSS 变量使用 `n` 作为前缀
+- `n-dynamic-tags` 的 CSS 变量使用 `n` 作为前缀
+- `n-tag` 的 CSS 变量使用 `n` 作为前缀
+- `n-dialog` 的 CSS 变量使用 `n` 作为前缀
+- `n-upload` 的 CSS 变量使用 `n` 作为前缀
+- `n-tree` 的 CSS 变量使用 `n` 作为前缀
+- `n-tree-select` 的 CSS 变量使用 `n` 作为前缀
+
+## 2.23.0 (2021-12-17)
+
+### Breaking Changes
+
+- `n-switch` 在 `loading` 状态不可再被点击，关闭 [#1853](https://github.com/TuSimple/naive-ui/issues/1853)
+
+### Fixes
+
+- 修复 `n-data-table` 在未设置 max-height 的情况下横向滚动条消失, 关闭 [#1857](https://github.com/TuSimple/naive-ui/issues/1857)
+- 修复 `n-input-number` 不能输入为负数的小数，关闭 [#1858](https://github.com/TuSimple/naive-ui/issues/1858)
+- 修复 `n-dialog` 点击回车键反复弹出新弹窗，关闭 [#1559](https://github.com/TuSimple/naive-ui/issues/1559)
+
+### Feats
+
+- `n-divider` 的 CSS 变量使用 `n` 作为前缀
+- `typography` 的 CSS 变量使用 `n` 作为前缀
+- `n-badge` 的 CSS 变量使用 `n` 作为前缀
+
 ## 2.22.0 (2021-12-15)
 
 ### Breaking Changes
