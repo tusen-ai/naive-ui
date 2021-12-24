@@ -6,7 +6,8 @@ import {
   provide,
   CSSProperties,
   withDirectives,
-  Transition
+  Transition,
+  toRef
 } from 'vue'
 import { VLazyTeleport } from 'vueuc'
 import { zindexable } from 'vdirs'
@@ -180,7 +181,8 @@ export default defineComponent({
       isMountedRef: isMountedRef,
       mergedThemeRef: themeRef,
       mergedClsPrefixRef,
-      doUpdateShow
+      doUpdateShow,
+      nativeScrollRef: toRef(props, 'nativeScrollbar')
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,

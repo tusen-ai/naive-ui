@@ -57,6 +57,7 @@
 ### Fixes
 
 - 修复 `n-form-item-gi` 的 `validate` 不生效，关闭 [#1901](https://github.com/TuSimple/naive-ui/issues/1901)
+- 修复 `n-drawer` 的 `footer` 样式错误当　`native-scrollbar` 为 false 时，关闭 [#2003](https://github.com/TuSimple/naive-ui/issues/2003)
 
 ## 2.23.1 (2021-12-20)
 

@@ -1,9 +1,10 @@
-import { CSSProperties, defineComponent, h, inject, PropType } from 'vue'
+import { CSSProperties, defineComponent, h, inject, PropType, toRef } from 'vue'
 import { NBaseClose, NScrollbar } from '../../_internal'
 import type { ScrollbarProps } from '../../_internal'
 import { throwError } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { drawerInjectionKey } from './interface'
+import { useMergedState } from 'vooks'
 
 const drawerContentProps = {
   title: {
@@ -13,7 +14,10 @@ const drawerContentProps = {
   footerStyle: [Object, String] as PropType<string | CSSProperties>,
   bodyStyle: [Object, String] as PropType<string | CSSProperties>,
   bodyContentStyle: [Object, String] as PropType<string | CSSProperties>,
-  nativeScrollbar: { type: Boolean, default: true },
+  nativeScrollbar: {
+    type: Boolean,
+    default: undefined
+  },
   scrollbarProps: Object as PropType<ScrollbarProps>,
   closable: Boolean
 }
@@ -25,7 +29,7 @@ export type DrawerContentProps = ExtractPublicPropTypes<
 export default defineComponent({
   name: 'DrawerContent',
   props: drawerContentProps,
-  setup () {
+  setup (props) {
     const NDrawer = inject(drawerInjectionKey, null)
     if (!NDrawer) {
       throwError(
@@ -33,21 +37,23 @@ export default defineComponent({
         '`n-drawer-content` must be placed inside `n-drawer`.'
       )
     }
-    const { doUpdateShow } = NDrawer
+    const { doUpdateShow, nativeScrollRef } = NDrawer
     function handleCloseClick (): void {
       doUpdateShow(false)
     }
+    const mergedNativeScrollbarRef = useMergedState(toRef(props, 'nativeScrollbar'), nativeScrollRef)
     return {
       handleCloseClick,
       mergedTheme: NDrawer.mergedThemeRef,
-      mergedClsPrefix: NDrawer.mergedClsPrefixRef
+      mergedClsPrefix: NDrawer.mergedClsPrefixRef,
+      mergedNativeScrollbar: mergedNativeScrollbarRef
     }
   },
   render () {
     const {
       title,
       mergedClsPrefix,
-      nativeScrollbar,
+      mergedNativeScrollbar,
       mergedTheme,
       bodyStyle,
       bodyContentStyle,
@@ -61,7 +67,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-drawer-content`,
-          nativeScrollbar &&
+          mergedNativeScrollbar &&
             `${mergedClsPrefix}-drawer-content--native-scrollbar`
         ]}
       >
@@ -79,7 +85,7 @@ export default defineComponent({
             )}
           </div>
         ) : null}
-        {nativeScrollbar ? (
+        {mergedNativeScrollbar ? (
           <div class={`${mergedClsPrefix}-drawer-body`} style={bodyStyle}>
             <div
               class={`${mergedClsPrefix}-drawer-body-content-wrapper`}

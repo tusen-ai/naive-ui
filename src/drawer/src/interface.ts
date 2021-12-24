@@ -11,6 +11,7 @@ export interface DrawerInjection {
   mergedThemeRef: Ref<MergedTheme<DrawerTheme>>
   mergedClsPrefixRef: Ref<string>
   doUpdateShow: (show: boolean) => void
+  nativeScrollRef: Ref<boolean>
 }
 export const drawerInjectionKey: InjectionKey<DrawerInjection> =
   Symbol('drawer')

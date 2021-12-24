@@ -46,11 +46,11 @@ export default c([
     cM('native-scrollbar', [
       cB('drawer-content-wrapper', `
         overflow: auto;
-        height: 100%;
       `)
     ]),
     cB('drawer-content-wrapper', `
       box-sizing: border-box;
+      height: 100%;
     `),
     cB('drawer-content', `
       height: 100%;
@@ -65,10 +65,12 @@ export default c([
       ]),
       cB('drawer-body', `
         flex: 1 0 0;
+        overflow: hidden;
       `),
       cB('drawer-body-content-wrapper', `
         box-sizing: border-box;
         padding: var(--n-body-padding);
+        overflow: auto;
       `),
       cB('drawer-header', `
         font-weight: var(--n-title-font-weight);

@@ -10,6 +10,7 @@ multiple
 target
 closable
 slot
+scrollable
 ```
 
 ## API
