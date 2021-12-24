@@ -39,7 +39,6 @@
 - `n-descriptions` 的 CSS 变量使用 `n` 作为前缀
 - `n-drawer` 的 CSS 变量使用 `n` 作为前缀
 - `n-dropdown` 的 CSS 变量使用 `n` 作为前缀
-- `n-element` 的 CSS 变量使用 `n` 作为前缀
 - `n-rate` 的 CSS 变量使用 `n` 作为前缀
 - `n-radio` 的 CSS 变量使用 `n` 作为前缀
 - `n-progress` 的 CSS 变量使用 `n` 作为前缀
