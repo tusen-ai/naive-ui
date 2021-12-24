@@ -1,18 +1,14 @@
-# 更改指示点位置
+# 更改指示点样式
 
-设定 `dot-placement` 来更改指示点位置。
+设定 `dot-style` 来更改指示点的样式。
 
 ```html
-<n-radio-group v-model:value="placement" style="margin-bottom: 10px;">
-  <n-radio-button
-    v-for="placement in placements"
-    :key="placement"
-    :value="placement"
-  >
-    {{ placement }}
+<n-radio-group v-model:value="style" style="margin-bottom: 10px;">
+  <n-radio-button v-for="style in styles" :key="style" :value="style">
+    {{ style }}
   </n-radio-button>
 </n-radio-group>
-<n-carousel :dot-placement="placement" style="height: 240px;">
+<n-carousel :dot-style="style" style="height: 240px;">
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
@@ -37,10 +33,10 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const placementRef = ref('bottom')
+    const styleRef = ref('dot')
     return {
-      placement: placementRef,
-      placements: ['top', 'bottom', 'left', 'right']
+      style: styleRef,
+      styles: ['dot', 'line', 'progress', 'never']
     }
   }
 })

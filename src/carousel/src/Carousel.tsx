@@ -2,240 +2,543 @@ import {
   h,
   defineComponent,
   ref,
-  toRef,
+  provide,
   cloneVNode,
-  nextTick,
   computed,
   CSSProperties,
-  onMounted,
-  watchEffect,
   onBeforeUnmount,
-  PropType
+  PropType,
+  VNode,
+  watch,
+  withDirectives,
+  vShow,
+  Transition
 } from 'vue'
-import { indexMap } from 'seemly'
 import { on, off } from 'evtd'
-import { BackwardIcon, ForwardIcon } from '../../_internal/icons'
 import { useConfig, useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { ThemeProps } from '../../_mixins'
 import { flatten } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { ExtractPublicPropTypes } from '../../_utils'
 import { carouselLight } from '../styles'
-import type { CarouselTheme } from '../styles'
+import { CarouselTheme } from '../styles'
+import { VResizeObserver } from 'vueuc'
+import { Direction } from './interface'
+import { calculateSize, isTouchEvent } from './utils'
+import { extend } from 'lodash'
+import { carouselSlideInjectionKey } from './interface'
 import style from './styles/index.cssr'
+import NCarouselDots from './CarouselDots'
+import NCarouselArrow from './CarouselArrow'
+import NCarouselItem from './CarouselItem'
 
 const carouselProps = {
   ...(useTheme.props as ThemeProps<CarouselTheme>),
+  defaultIndex: {
+    type: Number,
+    default: 0
+  },
+  activeIndex: {
+    type: Number,
+    default: 0
+  },
   showArrow: Boolean,
+  effect: {
+    type: String as PropType<'slide' | 'fade' | 'card'>,
+    default: 'slide'
+  },
+  centeredSlides: {
+    type: Boolean
+  },
+  slidesPerView: {
+    type: [Number, String] as PropType<number | 'auto'>,
+    default: 1
+  },
+  spaceBetween: {
+    type: Number,
+    default: 0
+  },
+  direction: {
+    type: String as PropType<Direction>,
+    default: 'horizontal'
+  },
   autoplay: Boolean,
-  dotPlacement: {
-    type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
-    default: 'bottom'
+  loop: {
+    type: Boolean,
+    default: true
   },
   interval: {
     type: Number,
-    default: 5000
+    default: 3000
+  },
+  speed: {
+    type: Number,
+    default: 300
+  },
+  transitionName: String,
+  transitionTimingFunction: String,
+  mousewheel: Boolean,
+  keyboard: Boolean,
+  draggable: {
+    type: Boolean,
+    default: true
   },
   trigger: {
     type: String as PropType<'click' | 'hover'>,
     default: 'click'
+  },
+  dotStyle: {
+    type: String as PropType<'dot' | 'line' | 'progress' | 'never'>,
+    default: 'dot'
+  },
+  dotPlacement: {
+    type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
+    default: 'bottom'
   }
 }
 
 export type CarouselProps = ExtractPublicPropTypes<typeof carouselProps>
+
+// only one carousel is allowed to trigger touch globally
+let globalTounching = false
+
+function clampValue (value: number, min: number, max: number): number {
+  return value < min ? min : value > max ? max : value
+}
 
 export default defineComponent({
   name: 'Carousel',
   props: carouselProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-    const currentRef = ref(1)
-    const lengthRef = { value: 1 }
-    const touchingRef = ref(false)
-    const dragOffsetRef = ref(0)
+    // dom
     const selfElRef = ref<HTMLDivElement | null>(null)
-    const dotPlacementRef = toRef(props, 'dotPlacement')
-    let timerId: number | null = null
-    let inTransition = false
-    // current from 0 to length + 1
-    function next (): void {
-      if (lengthRef.value <= 1) return
-      if (inTransition) return
-      inTransition = true
-      // no need for reset since transitionend handler will handle it
-      currentRef.value++
-    }
-    function prev (): void {
-      if (lengthRef.value <= 1) return
-      if (inTransition) return
-      inTransition = true
-      // no need for reset since transitionend handler will handle it
-      currentRef.value--
-    }
-    function setCurrent (value: number): void {
-      if (lengthRef.value <= 1) return
-      if (inTransition) return
-      const { value: current } = currentRef
-      if (value === current) return
-      inTransition = true
-      if (current === 1 && value === lengthRef.value && value - current > 1) {
-        currentRef.value--
-      } else if (
-        value === 1 &&
-        current === lengthRef.value &&
-        current - value > 1
-      ) {
-        currentRef.value++
-      } else {
-        currentRef.value = value
-      }
-      if (props.autoplay) {
-        resetInterval()
-      }
-    }
+    const slidesRef = ref<HTMLElement[]>([])
+
+    const userWantControlRef = computed(
+      () => typeof props.transitionName === 'string'
+    )
+    const translateableRef = computed(
+      () => !userWantControlRef.value && props.effect === 'slide'
+    )
+
+    // Because of the nature of the loop slide work,
+    // we need to add duplicates to the left and right of the carousel
     // slot    [ 0 1 2 ]
     // index   0 1 2 3 4
     // display 2 0 1 2 0
-    function handleTransitionEnd (e: TransitionEvent): void {
-      const target = e.target as HTMLDivElement
-      if (target !== e.currentTarget) return
-      const { value: current } = currentRef
-      const { value: length } = lengthRef
-      const nextCurrent =
-        current === 0 ? length : current === length + 1 ? 1 : null
-      if (nextCurrent !== null) {
-        currentRef.value = nextCurrent
-        void nextTick(() => {
-          target.style.transition = 'none'
-          void target.offsetWidth
-          target.style.transition = ''
-          inTransition = false
-        })
+    const needDuplicatedRef = computed(
+      // only duplicate the copy operation in `slide` mode,
+      // because other effects have special process
+      () => !userWantControlRef.value && props.loop && props.effect === 'slide'
+    )
+    const initializeIndex =
+      props.defaultIndex + (needDuplicatedRef.value ? 1 : 0)
+    const displayIndexRef = ref(0)
+    const virtualIndexRef = ref(initializeIndex)
+    const realityIndexRef = ref(initializeIndex)
+
+    const wrapperSizeRef = ref({ width: 0, height: 0 })
+    const slideSizesRef = computed(() => {
+      const { value: slides } = slidesRef
+      const { length } = slides
+      if (!length) return []
+      const { value: wrapperSize } = wrapperSizeRef
+      const { direction, slidesPerView } = props
+      const unevent = slidesPerView === 'auto'
+      const axis = direction === 'vertical' ? 'height' : 'width'
+      const perViewSize = wrapperSize[axis] || 0
+      const slidesPerRatio =
+        slidesPerView !== 'auto' ? 1 / Math.max(1, slidesPerView) : 1
+      const slideSizes = []
+      for (let i = 0; i < slides.length; i++) {
+        if (unevent) {
+          slideSizes[i] = calculateSize(slides[i])
+        } else {
+          slideSizes[i] = {
+            ...wrapperSize,
+            [axis]: perViewSize * slidesPerRatio
+          }
+        }
+      }
+      return slideSizes
+    })
+    const slideTranlatesRef = computed(() => {
+      const translates: number[] = []
+      const { value: slideSizes } = slideSizesRef
+      if (!slideSizes.length) return translates
+      const { direction, centeredSlides, spaceBetween } = props
+      const axis = direction === 'vertical' ? 'height' : 'width'
+      const wrapperSize = wrapperSizeRef.value[axis]
+      let previousTranslate = 0
+      for (let i = 0; i < slideSizes.length; i++) {
+        let translate = previousTranslate
+        const slideSize = slideSizes[i][axis]
+        if (centeredSlides) {
+          translate += (slideSize - wrapperSize) / 2
+        }
+        translates.push(translate)
+        previousTranslate += slideSize + spaceBetween
+      }
+      return translates
+    })
+    const slideStylesRef = computed(() => {
+      const { direction, effect, spaceBetween } = props
+      const isVertical = direction === 'vertical'
+      const axis = isVertical ? 'height' : 'width'
+      const directionAxis = isVertical ? 'top' : 'left'
+      const spaceAxis = isVertical ? 'bottom' : 'right'
+      const { value: virtualIndex } = virtualIndexRef
+      const { value: slideSizes } = slideSizesRef
+      const { value: slideTranlates } = slideTranlatesRef
+      const { value: userWantControl } = userWantControlRef
+      return slideSizes.map((size, i) => {
+        if (userWantControl) {
+          return {
+            [axis]: `${size[axis]}px`
+          }
+        }
+        const active = virtualIndex === i
+        const offset = slideTranlates[i]
+        const style: Record<string, any> = {
+          [axis]: `${size[axis]}px`,
+          [`margin-${spaceAxis}`]: `${spaceBetween}px`,
+          transitionDuration: `${props.speed}ms`,
+          transitionTimingFunction: props.transitionTimingFunction
+        }
+        if (effect === 'fade') {
+          extend(style, {
+            opacity: active ? 1 : 0,
+            [directionAxis]: `${-offset}px`
+          })
+        } else if (effect === 'card') {
+          let opacity = active ? 1 : 0
+          let translate = 0
+          let translateZ = active ? 0 : -400
+          if (isPrev(i)) {
+            opacity = 0.4
+            translate = -size[axis] * 0.5
+            translateZ = -200
+          } else if (isNext(i)) {
+            opacity = 0.4
+            translate = size[axis] * 0.5
+            translateZ = -200
+          }
+          extend(style, {
+            opacity,
+            [directionAxis]: `${-offset}px`,
+            transform: `${
+              isVertical
+                ? `translateY(${translate}px)`
+                : `translateX(${translate}px)`
+            } translateZ(${translateZ}px)`,
+            zIndex: active ? 1 : 0
+          })
+        }
+        return style
+      })
+    })
+
+    // provide
+    function isPrev (slide: HTMLElement | number): boolean {
+      return getPrevIndex(virtualIndexRef.value) === getSlideIndex(slide)
+    }
+    function isNext (slide: HTMLElement | number): boolean {
+      return getNextIndex(virtualIndexRef.value) === getSlideIndex(slide)
+    }
+    function isActive (slide: HTMLElement | number): boolean {
+      return virtualIndexRef.value === getSlideIndex(slide)
+    }
+    function getSlideIndex (slide: HTMLElement | number): number {
+      return typeof slide === 'number' ? slide : slidesRef.value.indexOf(slide)
+    }
+    function getPrevIndex (index: number): number | null {
+      return index === 0
+        ? props.loop
+          ? slidesRef.value.length - 1
+          : null
+        : index - 1
+    }
+    function getNextIndex (index: number): number | null {
+      return index === slidesRef.value.length - 1
+        ? props.loop
+          ? 0
+          : null
+        : index + 1
+    }
+    function getSlideStyle (slide: HTMLElement | number): any {
+      const index = getSlideIndex(slide)
+      if (index !== -1) {
+        return slideStylesRef.value[index]
+      }
+    }
+    function getDisplayIndex (slide: HTMLElement | number): number {
+      const index = getSlideIndex(slide)
+      const length = slidesRef.value.length
+      return !needDuplicatedRef.value
+        ? index
+        : index === 0
+          ? length - 3
+          : index === length - 1
+            ? 0
+            : index - 1
+    }
+    function addSlide (slide: HTMLElement): void {
+      slidesRef.value.push(slide)
+    }
+    function removeSlide (slide: HTMLElement): void {
+      const index = getSlideIndex(slide)
+      if (index !== -1) {
+        slidesRef.value.splice(index, 1)
+      }
+    }
+
+    provide(carouselSlideInjectionKey, {
+      slideTo,
+      slidePrev,
+      slideNext,
+      isPrev,
+      isNext,
+      isActive,
+      getSlideIndex,
+      getDisplayIndex,
+      addSlide,
+      removeSlide,
+      getSlideStyle
+    })
+
+    // record the translate of each slide, so that it can be restored at touch
+    let previousTranslate = 0
+
+    // slide
+    function internalSlideTo (index: number, duration = props.speed): void {
+      const length = slidesRef.value.length
+      if (index === -1) index = length - 1
+      if (index === length) index = 0
+      if (index < 0) {
+        index = 0
+      } else if (index > length - 1) {
+        index = length - 1
+      }
+      if (index !== virtualIndexRef.value) {
+        const displayIndex = (displayIndexRef.value = getDisplayIndex(index))
+        virtualIndexRef.value = index
+        realityIndexRef.value = needDuplicatedRef.value
+          ? displayIndex + 1
+          : displayIndex
+        if (translateableRef.value) {
+          translateTo(index, duration)
+        }
+      }
+    }
+    function slideTo (index: number): void {
+      const { value: needDuplicated } = needDuplicatedRef
+      const { length } = slidesRef.value
+      if (needDuplicated) {
+        index = clampValue(index + 1, 1, length - 2)
       } else {
+        index = clampValue(index, 0, length - 1)
+      }
+      internalSlideTo(index)
+    }
+    function slidePrev (): void {
+      const prevIndex = getPrevIndex(realityIndexRef.value)
+      if (prevIndex !== null) {
+        internalSlideTo(prevIndex)
+      }
+    }
+    function slideNext (): void {
+      const nextIndex = getNextIndex(realityIndexRef.value)
+      if (nextIndex !== null) {
+        internalSlideTo(nextIndex)
+      }
+    }
+    function translateTo (index: number, duration = props.speed): void {
+      inTransition = true
+      updateTranslate(
+        (previousTranslate = slideTranlatesRef.value[index] || 0),
+        duration
+      )
+    }
+
+    // autoplay
+    let autoplayTimer: NodeJS.Timeout | null = null
+    function resetAutoplay (cleanOnly?: boolean): void {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer)
+        autoplayTimer = null
+      }
+      const { autoplay, interval } = props
+      if (autoplay && interval && !cleanOnly) {
+        autoplayTimer = setInterval(slideNext, interval)
+      }
+    }
+    function mesureAutoplay (): void {
+      const { autoplay } = props
+      if (!autoplayTimer && autoplay) {
+        resetAutoplay()
+      } else if (!autoplay || !slidesRef.value.length) {
+        resetAutoplay(true)
+      }
+    }
+
+    // translate
+    const translateStyleRef = ref({
+      transform: '',
+      transitionDuration: '',
+      transitionTimingFunction: ''
+    })
+    let inTransition = false
+    function updateTranslate (translate: number, duration = 0): void {
+      const isVersical = props.direction === 'vertical'
+      translateStyleRef.value = {
+        transform: isVersical
+          ? `translateY(${-translate}px)`
+          : `translateX(${-translate}px)`,
+        transitionDuration: `${duration}ms`,
+        transitionTimingFunction: props.transitionTimingFunction || ''
+      }
+    }
+    function handleTransitionEnd (): void {
+      const { value: virtualIndex } = virtualIndexRef
+      const { value: realityIndex } = realityIndexRef
+      if (inTransition && virtualIndex !== realityIndex) {
+        internalSlideTo(realityIndex, 0)
+      } else {
+        resetAutoplay()
         inTransition = false
       }
     }
-    function handleKeydown (e: KeyboardEvent, current: number): void {
-      switch (e.code) {
-        case 'Enter':
-        case 'NumpadEnter':
-        case 'Space':
-          setCurrent(current)
+    function fixTranslate (): void {
+      const translate = slideTranlatesRef.value[realityIndexRef.value]
+      if (translate !== previousTranslate && translateableRef.value) {
+        updateTranslate((previousTranslate = translate))
       }
     }
+
+    // event handle
     let dragStartX = 0
     let dragStartY = 0
+    let dragOffset = 0
     let dragStartTime = 0
-    let memorizedContainerWidth = 0
-    let memorizedContainerHeight = 0
-    function handleTouchstart (e: TouchEvent): void {
-      if (timerId !== null) {
-        window.clearInterval(timerId)
+    function handleTouchstart (event: MouseEvent | TouchEvent): void {
+      if (globalTounching) return
+      globalTounching = true
+      dragStartTime = Date.now()
+      // stop autoplay
+      resetAutoplay(true)
+      const isTouch = isTouchEvent(event)
+      if (!isTouch && !(event.target as HTMLElement).isContentEditable) {
+        event.preventDefault()
       }
-      e.preventDefault()
-      const { value: dotPlacement } = dotPlacementRef
-      if (dotPlacement === 'left' || dotPlacement === 'right') {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        memorizedContainerHeight = selfElRef.value!.offsetHeight
-        touchingRef.value = true
-        dragStartTime = Date.now()
-        dragStartY = e.touches[0].clientY
+      const touchEvent = isTouch ? event.touches[0] : event
+      if (props.direction === 'vertical') {
+        dragStartY = touchEvent.clientY
       } else {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        memorizedContainerWidth = selfElRef.value!.offsetWidth
-        touchingRef.value = true
-        dragStartTime = Date.now()
-        dragStartX = e.touches[0].clientX
+        dragStartX = touchEvent.clientX
       }
       on('touchmove', document, handleTouchmove)
       on('touchend', document, handleTouchend)
       on('touchcancel', document, handleTouchend)
+      on('mousemove', document, handleTouchmove)
+      on('mouseup', document, handleTouchend)
     }
-    function handleTouchmove (e: TouchEvent): void {
-      const { value: dotPlacement } = dotPlacementRef
-      if (dotPlacement === 'left' || dotPlacement === 'right') {
-        const dragOffset = e.touches[0].clientY - dragStartY
-        dragOffsetRef.value =
-          dragOffset > memorizedContainerHeight
-            ? memorizedContainerHeight
-            : dragOffset < -memorizedContainerHeight
-              ? -memorizedContainerHeight
-              : dragOffset
-      } else {
-        const dragOffset = e.touches[0].clientX - dragStartX
-        dragOffsetRef.value =
-          dragOffset > memorizedContainerWidth
-            ? memorizedContainerWidth
-            : dragOffset < -memorizedContainerWidth
-              ? -memorizedContainerWidth
-              : dragOffset
+    function handleTouchmove (event: MouseEvent | TouchEvent): void {
+      const isVertical = props.direction === 'vertical'
+      const axis = isVertical ? 'height' : 'width'
+      const perViewSize = wrapperSizeRef.value[axis]
+      if (!perViewSize) return
+      const touchEvent = isTouchEvent(event) ? event.touches[0] : event
+      const offset = isVertical
+        ? touchEvent.clientY - dragStartY
+        : touchEvent.clientX - dragStartX
+      dragOffset = clampValue(offset, -perViewSize, perViewSize)
+      if (translateableRef.value) {
+        updateTranslate(previousTranslate - dragOffset, 0)
       }
     }
     function handleTouchend (): void {
-      if (props.autoplay) resetInterval()
-      void nextTick(() => {
-        touchingRef.value = false
-      })
-      const { value: selfEl } = selfElRef
-      if (selfEl) {
-        const { offsetWidth, offsetHeight } = selfEl
-        const { value: dragOffset } = dragOffsetRef
-        const duration = Date.now() - dragStartTime
-        const { value: dotPlacement } = dotPlacementRef
-        // more than 50% width or faster than 0.4px per ms
-        if (dotPlacement === 'left' || dotPlacement === 'right') {
-          if (dragOffset > offsetHeight / 2 || dragOffset / duration > 0.4) {
-            prev()
-          } else if (
-            dragOffset < -offsetHeight / 2 ||
-            dragOffset / duration < -0.4
-          ) {
-            next()
+      const duration = Date.now() - dragStartTime
+      const { value: virtualIndex } = virtualIndexRef
+      const { value: translateable } = translateableRef
+      let currentIndex: number | null = virtualIndex
+      // slide drag
+      if (translateable && dragOffset !== 0) {
+        const currentTranslate = previousTranslate - dragOffset
+        const { value: slideTranlates } = slideTranlatesRef
+        let prevOffset = null
+        for (let i = 0; i < slideTranlates.length; i++) {
+          const offset = Math.abs(slideTranlates[i] - currentTranslate)
+          if (prevOffset !== null && prevOffset < offset) {
+            break
           }
-        } else {
-          if (dragOffset > offsetWidth / 2 || dragOffset / duration > 0.4) {
-            prev()
-          } else if (
-            dragOffset < -offsetWidth / 2 ||
-            dragOffset / duration < -0.4
-          ) {
-            next()
-          }
+          prevOffset = offset
+          currentIndex = i
         }
       }
-      dragOffsetRef.value = 0
+      if (currentIndex === virtualIndex) {
+        const axis = props.direction === 'vertical' ? 'height' : 'width'
+        const wrapperSize = wrapperSizeRef.value[axis]
+        // more than 50% width or faster than 0.4px per ms
+        if (dragOffset > wrapperSize / 2 || dragOffset / duration > 0.4) {
+          currentIndex = getPrevIndex(virtualIndex)
+        } else if (
+          dragOffset < -wrapperSize / 2 ||
+          dragOffset / duration < -0.4
+        ) {
+          currentIndex = getNextIndex(virtualIndex)
+        }
+      }
+      if (currentIndex !== null && currentIndex !== virtualIndex) {
+        internalSlideTo(currentIndex)
+      } else if (translateable) {
+        updateTranslate(previousTranslate, props.speed)
+      }
+      dragOffset = 0
+      globalTounching = false
+      mesureAutoplay()
       off('touchmove', document, handleTouchmove)
       off('touchend', document, handleTouchend)
       off('touchcancel', document, handleTouchend)
+      off('mousemove', document, handleTouchmove)
+      off('mouseup', document, handleTouchend)
     }
-    function handleMouseenter (current: number): void {
-      if (props.trigger === 'hover') {
-        setCurrent(current)
-      }
-    }
-    function resetInterval (): void {
-      if (timerId !== null) {
-        window.clearInterval(timerId)
-      }
-      timerId = window.setInterval(() => {
-        next()
-      }, props.interval)
-    }
-    onMounted(() => {
-      watchEffect(() => {
-        if (props.autoplay) {
-          resetInterval()
-        } else {
-          if (timerId !== null) {
-            window.clearInterval(timerId)
-          }
+    function handleMousewheel (event: WheelEvent): void {
+      if (props.mousewheel && props.direction === 'vertical') {
+        const deltaY = event.deltaY
+        if (deltaY >= 100) {
+          event.preventDefault()
+          slideNext()
+        } else if (deltaY <= -100) {
+          event.preventDefault()
+          slidePrev()
         }
-      })
-    })
+      }
+    }
+    function handleResize (): void {
+      wrapperSizeRef.value = calculateSize(selfElRef.value as HTMLElement, true)
+    }
     onBeforeUnmount(() => {
-      if (timerId !== null) {
-        window.clearInterval(timerId)
+      resetAutoplay(true)
+      off('touchmove', document, handleTouchmove)
+      off('touchend', document, handleTouchend)
+      off('touchcancel', document, handleTouchend)
+      off('mousemove', document, handleTouchmove)
+      off('mouseup', document, handleTouchend)
+    })
+    watch(slideSizesRef, () => {
+      if (translateableRef.value) {
+        fixTranslate()
+      }
+      resetAutoplay()
+    })
+    watch(translateableRef, value => {
+      if (!value) {
+        translateTo((previousTranslate = 0))
+      } else {
+        fixTranslate()
       }
     })
+    watch(needDuplicatedRef, () => slideTo(displayIndexRef.value))
     const themeRef = useTheme(
       'Carousel',
       'Carousel',
@@ -244,19 +547,25 @@ export default defineComponent({
       props
     )
     return {
-      selfElRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      current: currentRef,
-      lengthRef,
-      touching: touchingRef,
-      dragOffset: dragOffsetRef,
-      prev,
-      next,
-      setCurrent,
-      handleKeydown,
+      selfElRef,
+      needDuplicated: needDuplicatedRef,
+      userWantControl: userWantControlRef,
+      displayIndex: displayIndexRef,
+      realityIndex: realityIndexRef,
+      slideStyles: slideStylesRef,
+      translateStyle: translateStyleRef,
       handleTouchstart,
       handleTransitionEnd,
-      handleMouseenter,
+      handleResize,
+      handleMousewheel,
+      // public
+      slideTo,
+      slidePrev,
+      slideNext,
+      isPrev,
+      isNext,
+      isActive,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -274,115 +583,103 @@ export default defineComponent({
   },
   render () {
     const {
-      showArrow,
-      dotPlacement,
       mergedClsPrefix,
-      current,
-      lengthRef,
-      autoplay,
-      $slots: { default: defaultSlot }
+      showArrow,
+      userWantControl,
+      displayIndex,
+      slideStyles,
+      dotStyle,
+      dotPlacement,
+      draggable,
+      mousewheel,
+      $slots: { default: defaultSlots }
     } = this
-    const children = flatten(defaultSlot?.() || [])
-    const { length } = children
-    lengthRef.value = length
-    const leftOverflowVNode = length ? cloneVNode(children[length - 1]) : null
-    const rightOverflowVNode = length ? cloneVNode(children[0]) : null
-    const total = length + 2
-    const vertical = dotPlacement === 'left' || dotPlacement === 'right'
+    const children = (defaultSlots && flatten(defaultSlots())) || []
+    let slides = filterCarouselItem(children)
+    if (!slides.length) {
+      slides = children.map((children, i) => (
+        <NCarouselItem>
+          {{
+            default: () => children
+          }}
+        </NCarouselItem>
+      ))
+    }
+    const { length: realityLength } = slides
+    if (realityLength > 1 && this.needDuplicated) {
+      slides.push(cloneVNode(slides[0]))
+      slides.unshift(cloneVNode(slides[realityLength - 1]))
+    }
     return (
       <div
+        ref='selfElRef'
         class={[
           `${mergedClsPrefix}-carousel`,
-          `${mergedClsPrefix}-carousel--${this.dotPlacement}`
+          `${mergedClsPrefix}-carousel--${dotPlacement}`,
+          `${mergedClsPrefix}-carousel--${this.direction}`,
+          {
+            [`${mergedClsPrefix}-carousel--usercontrol`]: userWantControl
+          }
         ]}
         style={this.cssVars as CSSProperties}
-        ref="selfElRef"
       >
-        <div
-          class={`${mergedClsPrefix}-carousel__slides`}
-          onTouchstart={this.handleTouchstart}
-          style={{
-            [vertical ? 'height' : 'width']: `${total}00%`,
-            [vertical ? 'width' : 'height']: '100%',
-            transition: this.touching ? 'none' : '',
-            transform: vertical
-              ? `translate3d(0, -${(100 / total) * (current % total)}%, 0)` +
-                (this.touching ? `translateY(${this.dragOffset}px)` : '')
-              : `translate3d(-${(100 / total) * (current % total)}%, 0, 0)` +
-                (this.touching ? `translateX(${this.dragOffset}px)` : '')
-          }}
-          onTransitionend={this.handleTransitionEnd}
-          role="listbox"
-        >
-          {[leftOverflowVNode, ...children, rightOverflowVNode].map(
-            (vNode, i) => (
+        <VResizeObserver onResize={this.handleResize}>
+          {{
+            default: () => (
               <div
-                data-index={i}
-                style={{ [vertical ? 'height' : 'width']: `${100 / total}%` }}
-                key={i}
-                role="option"
-                aria-hidden={i !== current}
+                class={`${mergedClsPrefix}-carousel__slides`}
+                role='listbox'
+                style={this.translateStyle}
+                onMousedown={draggable ? this.handleTouchstart : undefined}
+                onTouchstart={draggable ? this.handleTouchstart : undefined}
+                onWheel={mousewheel ? this.handleMousewheel : undefined}
+                onTransitionend={this.handleTransitionEnd}
               >
-                {vNode}
+                {userWantControl
+                  ? slides.map((slide, i) => (
+                      <div style={slideStyles[i]}>
+                        {withDirectives(
+                          <Transition name={this.transitionName}>
+                            {{
+                              default: () => slide
+                            }}
+                          </Transition>,
+                          [[vShow, this.isActive(i)]]
+                        )}
+                      </div>
+                    ))
+                  : slides}
               </div>
             )
-          )}
-        </div>
-        <div class={`${mergedClsPrefix}-carousel__dots`} role="tablist">
-          {indexMap(length, (i) => {
-            const selected = i + 1 === current
-            return (
-              <div
-                aria-selected={selected}
-                role="button"
-                tabindex="0"
-                class={[
-                  `${mergedClsPrefix}-carousel__dot`,
-                  selected && `${mergedClsPrefix}-carousel__dot--active`
-                ]}
-                onClick={() => this.setCurrent(i + 1)}
-                onMouseenter={() => this.handleMouseenter(i + 1)}
-                onMousedown={
-                  autoplay
-                    ? (e) => {
-                        e.preventDefault()
-                      }
-                    : undefined
-                }
-                onKeydown={(e) => this.handleKeydown(e, i + 1)}
-              />
-            )
-          })}
-        </div>
-        {showArrow && [
-          <div
-            class={[
-              `${mergedClsPrefix}-carousel__arrow`,
-              `${mergedClsPrefix}-carousel__arrow--${
-                vertical ? 'bottom' : 'right'
-              }`
-            ]}
-            role="button"
-            onClick={() => {
-              this.next()
-            }}
-          >
-            <ForwardIcon />
-          </div>,
-          <div
-            class={[
-              `${mergedClsPrefix}-carousel__arrow`,
-              `${mergedClsPrefix}-carousel__arrow--${vertical ? 'top' : 'left'}`
-            ]}
-            role="button"
-            onClick={() => {
-              this.prev()
-            }}
-          >
-            <BackwardIcon />
-          </div>
-        ]}
+          }}
+        </VResizeObserver>
+        {dotStyle !== 'never' && (
+          <NCarouselDots
+            length={realityLength}
+            activeIndex={displayIndex}
+            dotStyle={dotStyle}
+            dotPlacement={dotPlacement}
+            trigger={this.trigger}
+          />
+        )}
+        {showArrow && (
+          <NCarouselArrow direction={this.direction} keyboard={this.keyboard} />
+        )}
       </div>
     )
   }
 })
+
+function filterCarouselItem (
+  vnodes: VNode[],
+  carouselItems: VNode[] = []
+): VNode[] {
+  if (Array.isArray(vnodes)) {
+    vnodes.forEach(vnode => {
+      if (vnode.type && (vnode.type as any).name === 'CarouselItem') {
+        carouselItems.push(vnode)
+      }
+    })
+  }
+  return carouselItems
+}

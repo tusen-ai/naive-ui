@@ -1,33 +1,31 @@
-# 更改指示点位置
-
-设定 `dot-placement` 来更改指示点位置。
+# 动效
 
 ```html
-<n-radio-group v-model:value="placement" style="margin-bottom: 10px;">
-  <n-radio-button
-    v-for="placement in placements"
-    :key="placement"
-    :value="placement"
-  >
-    {{ placement }}
+<n-radio-group v-model:value="effect" style="margin-bottom: 10px;">
+  <n-radio-button v-for="effect in effects" :key="effect" :value="effect">
+    {{ effect }}
   </n-radio-button>
 </n-radio-group>
-<n-carousel :dot-placement="placement" style="height: 240px;">
+<n-carousel :effect="effect" centered-slides style="height: 240px;">
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
+    :style="{width: effect === 'card' ? '60%' : '100%'}"
   />
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
+    :style="{width: effect === 'card' ? '60%' : '100%'}"
   />
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
+    :style="{width: effect === 'card' ? '60%' : '100%'}"
   />
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
+    :style="{width: effect === 'card' ? '60%' : '100%'}"
   />
 </n-carousel>
 ```
@@ -37,10 +35,10 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const placementRef = ref('bottom')
+    const effectRef = ref('slide')
     return {
-      placement: placementRef,
-      placements: ['top', 'bottom', 'left', 'right']
+      effect: effectRef,
+      effects: ['slide', 'fade', 'card']
     }
   }
 })
@@ -48,6 +46,7 @@ export default defineComponent({
 
 ```css
 .carousel-img {
+  margin: 0 auto;
   width: 100%;
   height: 100%;
   object-fit: cover;

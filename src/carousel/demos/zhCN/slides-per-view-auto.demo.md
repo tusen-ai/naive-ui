@@ -1,32 +1,26 @@
-# 居中
+# 自适应每屏显示数量
 
 ```html
-<n-carousel
-  :loop="false"
-  centered-slides
-  :space-between="30"
-  slides-perView="auto"
-  style="width: 100%;height: 240px;"
->
-  <n-carousel-item style="width: 30%">
+<n-carousel slides-per-view="auto" :space-between="30" :loop="false">
+  <n-carousel-item style="width: 10%">
     <img
       class="carousel-img"
       src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
     />
   </n-carousel-item>
-  <n-carousel-item style="width: 60%">
+  <n-carousel-item style="width: 20%">
     <img
       class="carousel-img"
       src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
     />
   </n-carousel-item>
-  <n-carousel-item style="width: 40%">
+  <n-carousel-item style="width: 30%">
     <img
       class="carousel-img"
       src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
     />
   </n-carousel-item>
-  <n-carousel-item style="width: 20%">
+  <n-carousel-item style="width: 40%">
     <img
       class="carousel-img"
       src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"

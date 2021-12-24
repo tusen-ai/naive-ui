@@ -9,7 +9,16 @@ basic
 autoplay
 hover
 dot-placement
+dot-style
 show-arrow
+centered
+space-between
+slides-per-view
+slides-per-view-auto
+effect
+transition-name
+keyboard
+mousewheel
 ```
 
 ## API
