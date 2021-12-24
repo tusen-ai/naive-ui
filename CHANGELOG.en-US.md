@@ -6,6 +6,7 @@
 
 - Add `n-avatar-group`.
 - `n-popconfirm` uses `n` as CSS vars prefix.
+- `n-gradient-text` uses `n` as CSS vars prefix.
 - `n-form` uses `n` as CSS vars prefix.
 - `n-pagination` uses `n` as CSS vars prefix.
 - `n-loading-bar` uses `n` as CSS vars prefix.
