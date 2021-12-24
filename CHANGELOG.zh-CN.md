@@ -5,6 +5,7 @@
 ### Feats
 
 - 新增 `n-avatar-group`
+- `scrollbar` 的 CSS 变量使用 `n` 作为前缀
 - `base-close` 的 CSS 变量使用 `n` 作为前缀
 - `base-clear` 的 CSS 变量使用 `n` 作为前缀
 - `n-popconfirm` 的 CSS 变量使用 `n` 作为前缀

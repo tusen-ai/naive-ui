@@ -587,12 +587,12 @@ const Scrollbar = defineComponent({
           self: { color, colorHover }
         } = themeRef.value
         return {
-          '--scrollbar-bezier': cubicBezierEaseInOut,
-          '--scrollbar-color': color,
-          '--scrollbar-color-hover': colorHover,
-          '--scrollbar-border-radius': scrollbarBorderRadius,
-          '--scrollbar-width': scrollbarWidth,
-          '--scrollbar-height': scrollbarHeight
+          '--n-scrollbar-bezier': cubicBezierEaseInOut,
+          '--n-scrollbar-color': color,
+          '--n-scrollbar-color-hover': colorHover,
+          '--n-scrollbar-border-radius': scrollbarBorderRadius,
+          '--n-scrollbar-width': scrollbarWidth,
+          '--n-scrollbar-height': scrollbarHeight
         }
       })
     }

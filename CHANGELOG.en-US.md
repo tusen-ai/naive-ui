@@ -5,6 +5,7 @@
 ### Feats
 
 - Add `n-avatar-group`.
+- `scrollbar` uses `n` as CSS vars prefix.
 - `base-close` uses `n` as CSS vars prefix.
 - `base-clear` uses `n` as CSS vars prefix.
 - `n-popconfirm` uses `n` as CSS vars prefix.
