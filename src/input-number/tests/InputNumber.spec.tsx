@@ -92,7 +92,7 @@ describe('n-input-number', () => {
         arr[i].toString()
       )
     }
-    expect(minusBtn.classes()).toContain('n-button--disabled')
+    expect(wrapper.findAll('.n-input__suffix > div')[0].classes()).toContain('n-button--disabled')
     await wrapper.setProps({ step: 0.2 })
     await wrapper.setProps({ max: 0.6 })
     arr = [0.2, 0.4, 0.6]
@@ -102,7 +102,7 @@ describe('n-input-number', () => {
         arr[i].toString()
       )
     }
-    expect(addBtn.classes()).toContain('n-button--disabled')
+    expect(wrapper.findAll('.n-input__suffix > div')[0].classes()).toContain('n-button--disabled')
   })
 
   it('should work with decimal value', async () => {
