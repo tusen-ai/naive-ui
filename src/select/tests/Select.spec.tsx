@@ -337,7 +337,7 @@ describe('n-select', () => {
       menuWrapper
         .find('.n-base-select-menu__empty .n-empty')
         .attributes('style')
-    ).toContain('--text-color: #4fb233;')
+    ).toContain('--n-text-color: #4fb233;')
   })
 
   it('should work with `menuProps` prop', () => {
@@ -354,7 +354,9 @@ describe('n-select', () => {
       }
     })
     const menuWrapper = wrapper.findComponent(NInternalSelectMenu)
-    expect(menuWrapper.attributes('style')).toContain('background: rgb(79, 178, 51);')
+    expect(menuWrapper.attributes('style')).toContain(
+      'background: rgb(79, 178, 51);'
+    )
     expect(menuWrapper.classes()).toContain('menu-test')
   })
 })

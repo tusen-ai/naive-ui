@@ -7,13 +7,16 @@
 - 新增 `n-avatar-group`
 - `n-popconfirm` 的 CSS 变量使用 `n` 作为前缀
 - `n-gradient-text` 的 CSS 变量使用 `n` 作为前缀
+- `n-form` 的 CSS 变量使用 `n` 作为前缀
 - `n-pagination` 的 CSS 变量使用 `n` 作为前缀
 - `n-loading-bar` 的 CSS 变量使用 `n` 作为前缀
+- `n-empty` 的 CSS 变量使用 `n` 作为前缀
 - `n-list` 的 CSS 变量使用 `n` 作为前缀
 - `n-layout` 的 CSS 变量使用 `n` 作为前缀
 - `n-message` 的 CSS 变量使用 `n` 作为前缀
 - `n-mention` 的 CSS 变量使用 `n` 作为前缀
 - `n-menu` 的 CSS 变量使用 `n` 作为前缀
+- `n-popover` 的 CSS 变量使用 `n` 作为前缀
 - `n-transfer` 的 CSS 变量使用 `n` 作为前缀
 - `n-table` 的 CSS 变量使用 `n` 作为前缀
 - `n-statistic` 的 CSS 变量使用 `n` 作为前缀
@@ -43,6 +46,7 @@
 - `n-carousel` 的 CSS 变量使用 `n` 作为前缀
 - `n-page-header` 的 CSS 变量使用 `n` 作为前缀
 - `n-image` 的 CSS 变量使用 `n` 作为前缀
+- `n-notification` 的 CSS 变量使用 `n` 作为前缀
 
 ### Fixes
 
