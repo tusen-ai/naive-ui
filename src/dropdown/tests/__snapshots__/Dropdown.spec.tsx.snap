@@ -71,7 +71,7 @@ exports[`n-dropdown dropdown clickoutside 1`] = `
         <i
           class="n-icon"
           role="img"
-          style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          style="--n-bezier: cubic-bezier(.4, 0, .2, 1);"
         >
           <svg
             viewBox="0 0 512 512"
@@ -195,7 +195,7 @@ exports[`n-dropdown dropdown clickoutside 1`] = `
         <i
           class="n-icon"
           role="img"
-          style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          style="--n-bezier: cubic-bezier(.4, 0, .2, 1);"
         >
           <svg
             fill="none"
@@ -313,7 +313,7 @@ exports[`n-dropdown inverted style 1`] = `
         <i
           class="n-icon"
           role="img"
-          style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          style="--n-bezier: cubic-bezier(.4, 0, .2, 1);"
         >
           <svg
             viewBox="0 0 512 512"
@@ -437,7 +437,7 @@ exports[`n-dropdown inverted style 1`] = `
         <i
           class="n-icon"
           role="img"
-          style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          style="--n-bezier: cubic-bezier(.4, 0, .2, 1);"
         >
           <svg
             fill="none"
@@ -508,7 +508,7 @@ exports[`n-dropdown should work with \`render-icon\` props 1`] = `
         <i
           class="n-icon"
           role="img"
-          style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          style="--n-bezier: cubic-bezier(.4, 0, .2, 1);"
         >
           <svg
             viewBox="0 0 512 512"
@@ -618,7 +618,7 @@ exports[`n-dropdown should work with \`render-icon\` props 1`] = `
         <i
           class="n-icon"
           role="img"
-          style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          style="--n-bezier: cubic-bezier(.4, 0, .2, 1);"
         >
           <svg
             viewBox="0 0 512 512"
@@ -730,7 +730,7 @@ exports[`n-dropdown should work with \`render-icon\` props 1`] = `
         <i
           class="n-icon"
           role="img"
-          style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          style="--n-bezier: cubic-bezier(.4, 0, .2, 1);"
         >
           <svg
             viewBox="0 0 512 512"
@@ -824,7 +824,7 @@ exports[`n-dropdown should work with \`render-icon\` props 1`] = `
         <i
           class="n-icon"
           role="img"
-          style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          style="--n-bezier: cubic-bezier(.4, 0, .2, 1);"
         >
           <svg
             fill="none"
@@ -931,7 +931,7 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
         <i
           class="n-icon"
           role="img"
-          style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          style="--n-bezier: cubic-bezier(.4, 0, .2, 1);"
         >
           <svg
             viewBox="0 0 512 512"
@@ -1063,7 +1063,7 @@ exports[`n-dropdown should work with \`render-label\` props 1`] = `
         <i
           class="n-icon"
           role="img"
-          style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          style="--n-bezier: cubic-bezier(.4, 0, .2, 1);"
         >
           <svg
             fill="none"
@@ -1164,7 +1164,7 @@ exports[`n-dropdown shows menu after click 1`] = `
         <i
           class="n-icon"
           role="img"
-          style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          style="--n-bezier: cubic-bezier(.4, 0, .2, 1);"
         >
           <svg
             viewBox="0 0 512 512"
@@ -1288,7 +1288,7 @@ exports[`n-dropdown shows menu after click 1`] = `
         <i
           class="n-icon"
           role="img"
-          style="--bezier: cubic-bezier(.4, 0, .2, 1);"
+          style="--n-bezier: cubic-bezier(.4, 0, .2, 1);"
         >
           <svg
             fill="none"
