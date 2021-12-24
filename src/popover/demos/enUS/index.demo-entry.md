@@ -18,6 +18,7 @@ style
 trigger-width
 manual-position
 header
+disabled
 ```
 
 ## API

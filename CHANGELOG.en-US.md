@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- `n-button` will be render `div` tag under `disabled` status.
+
 ### Feats
 
 - Add `n-avatar-group`.

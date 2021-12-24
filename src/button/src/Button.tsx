@@ -146,6 +146,10 @@ const Button = defineComponent({
     const mergedFocusableRef = computed(() => {
       return props.focusable && !props.disabled
     })
+    // button disabled will block native events
+    const mergedTagRef = computed(() => {
+      return props.disabled ? 'div' : props.tag
+    })
     const handleMousedown = (e: MouseEvent): void => {
       e.preventDefault()
       if (props.disabled) {
@@ -208,6 +212,7 @@ const Button = defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedFocusable: mergedFocusableRef,
       mergedSize: mergedSizeRef,
+      mergedTag: mergedTagRef,
       showBorder: showBorderRef,
       enterPressed: enterPressedRef,
       rtlEnabled: rtlEnabledRef,
@@ -504,7 +509,7 @@ const Button = defineComponent({
     }
   },
   render () {
-    const { $slots, mergedClsPrefix, tag: Component } = this
+    const { $slots, mergedClsPrefix, mergedTag: Component } = this
     return (
       <Component
         ref="selfElRef"
