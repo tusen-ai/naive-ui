@@ -45,7 +45,7 @@ check-strategy-debug
 | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |
 | filter | `(pattern: string, node: TreeOption) => boolean` | 一个简单的字符串过滤算法 | 基于 pattern 指定过滤节点的函数 |
-| indeterminate-keys | `string \| number` | `undefined` | 部分选中选项的 key |
+| indeterminate-keys | `Array<string \| number>` | `undefined` | 部分选中选项的 key |
 | key-field | `string` | `'key'` | 替代 `TreeOption` 中的 key 字段名 |
 | label-field | `string` | `'label'` | 替代 `TreeOption` 中的 label 字段名 |
 | leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
