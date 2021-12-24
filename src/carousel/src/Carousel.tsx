@@ -15,17 +15,13 @@ import {
   Transition
 } from 'vue'
 import { on, off } from 'evtd'
-import { useConfig, useTheme } from '../../_mixins'
-import { ThemeProps } from '../../_mixins'
-import { flatten } from '../../_utils'
-import { ExtractPublicPropTypes } from '../../_utils'
-import { carouselLight } from '../styles'
-import { CarouselTheme } from '../styles'
+import { useConfig, useTheme, ThemeProps } from '../../_mixins'
+import { flatten, ExtractPublicPropTypes } from '../../_utils'
+import { carouselLight, CarouselTheme } from '../styles'
 import { VResizeObserver } from 'vueuc'
-import { Direction } from './interface'
+import { Direction, carouselSlideInjectionKey } from './interface'
 import { calculateSize, isTouchEvent } from './utils'
 import { extend } from 'lodash'
-import { carouselSlideInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import NCarouselDots from './CarouselDots'
 import NCarouselArrow from './CarouselArrow'
@@ -637,17 +633,17 @@ export default defineComponent({
               >
                 {userWantControl
                   ? slides.map((slide, i) => (
-                      <div style={slideStyles[i]}>
-                        {withDirectives(
-                          <Transition name={this.transitionName}>
-                            {{
-                              default: () => slide
-                            }}
-                          </Transition>,
-                          [[vShow, this.isActive(i)]]
-                        )}
-                      </div>
-                    ))
+                    <div style={slideStyles[i]}>
+                      {withDirectives(
+                        <Transition name={this.transitionName}>
+                          {{
+                            default: () => slide
+                          }}
+                        </Transition>,
+                        [[vShow, this.isActive(i)]]
+                      )}
+                    </div>
+                  ))
                   : slides}
               </div>
             )
