@@ -20,7 +20,6 @@ describe('n-countdown', () => {
         now: Date.now()
       }
     })
-    console.log(wrapper.find('.n-countdown-value__content').text())
     expect(wrapper.find('.n-countdown-value__content').exists()).toBe(true)
     expect(wrapper.find('.n-countdown-value__content').text()).toBe('02:00:00')
   })

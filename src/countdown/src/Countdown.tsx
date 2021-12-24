@@ -110,13 +110,13 @@ export default defineComponent({
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--label-font-size': labelFontSize,
-          '--label-font-weight': labelFontWeight,
-          '--label-text-color': labelTextColor,
-          '--value-font-weight': valueFontWeight,
-          '--value-prefix-text-color': valuePrefixTextColor,
-          '--value-text-color': valueTextColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-label-font-size': labelFontSize,
+          '--n-label-font-weight': labelFontWeight,
+          '--n-label-text-color': labelTextColor,
+          '--n-value-font-weight': valueFontWeight,
+          '--n-value-prefix-text-color': valuePrefixTextColor,
+          '--n-value-text-color': valueTextColor
         }
       })
     }
