@@ -225,10 +225,10 @@ export default defineComponent({
           self: { boxShadow, color, textColor }
         } = themeRef.value
         return {
-          '--bezier-ease-out': cubicBezierEaseOut,
-          '--box-shadow': boxShadow,
-          '--color': color,
-          '--text-color': textColor
+          '--n-bezier-ease-out': cubicBezierEaseOut,
+          '--n-box-shadow': boxShadow,
+          '--n-color': color,
+          '--n-text-color': textColor
         }
       })
     }

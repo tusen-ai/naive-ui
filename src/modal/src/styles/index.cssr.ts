@@ -3,10 +3,10 @@ import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
-// --bezier-ease-out
-// --box-shadow
-// --color
-// --text-color
+// --n-bezier-ease-out
+// --n-box-shadow
+// --n-color
+// --n-text-color
 export default c([
   cB('modal-container', `
     position: fixed;
@@ -27,8 +27,8 @@ export default c([
     fadeInTransition({
       enterDuration: '.25s',
       leaveDuration: '.25s',
-      enterCubicBezier: 'var(--bezier-ease-out)',
-      leaveCubicBezier: 'var(--bezier-ease-out)'
+      enterCubicBezier: 'var(--n-bezier-ease-out)',
+      leaveCubicBezier: 'var(--n-bezier-ease-out)'
     })
   ]),
   cB('modal-body-wrapper', `
@@ -47,9 +47,9 @@ export default c([
   ]),
   cB('modal', `
     align-self: center;
-    color: var(--text-color);
+    color: var(--n-text-color);
     margin: auto;
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--n-box-shadow);
   `, [
     fadeInScaleUpTransition({
       duration: '.25s',

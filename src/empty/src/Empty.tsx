@@ -82,12 +82,12 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--icon-size': iconSize,
-          '--font-size': fontSize,
-          '--bezier': cubicBezierEaseInOut,
-          '--text-color': textColor,
-          '--icon-color': iconColor,
-          '--extra-text-color': extraTextColor
+          '--n-icon-size': iconSize,
+          '--n-font-size': fontSize,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-text-color': textColor,
+          '--n-icon-color': iconColor,
+          '--n-extra-text-color': extraTextColor
         }
       })
     }
