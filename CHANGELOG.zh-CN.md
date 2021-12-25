@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-icon` 新增 `icon` 属性
 - 新增 `n-avatar-group`
 - `n-popconfirm` 的 CSS 变量使用 `n` 作为前缀
 - `n-pagination` 的 CSS 变量使用 `n` 作为前缀

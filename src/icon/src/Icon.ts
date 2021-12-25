@@ -37,7 +37,6 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     return {
-      icon: props.icon,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedStyle: computed(() => {
         const { size, color } = props

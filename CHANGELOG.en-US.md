@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-icon` add `icon` prop.
 - Add `n-avatar-group`.
 - `n-popconfirm` uses `n` as CSS vars prefix.
 - `n-pagination` uses `n` as CSS vars prefix.
