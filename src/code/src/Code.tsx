@@ -80,10 +80,15 @@ export default defineComponent({
         codeEl.textContent = code
         return
       }
-      const warp = document.createElement('pre')
-      warp.textContent = code
-      codeEl.innerHTML = ''
-      codeEl.appendChild(warp)
+      const maybePreEl = codeEl.children[0]
+      if (maybePreEl && maybePreEl.tagName === 'PRE') {
+        maybePreEl.textContent = code
+      } else {
+        const warp = document.createElement('pre')
+        warp.textContent = code
+        codeEl.innerHTML = ''
+        codeEl.appendChild(warp)
+      }
     }
     onMounted(setCode)
     watch(toRef(props, 'language'), setCode)
