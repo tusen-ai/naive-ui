@@ -604,6 +604,7 @@ const Scrollbar = defineComponent({
       h(
         'div',
         mergeProps(this.$attrs, {
+          role: 'none',
           ref: 'wrapperRef',
           class: `${mergedClsPrefix}-scrollbar`,
           style: this.cssVars,
@@ -615,6 +616,7 @@ const Scrollbar = defineComponent({
             renderSlot($slots, 'default')
           ) : (
             <div
+              role="none"
               ref="containerRef"
               class={[
                 `${mergedClsPrefix}-scrollbar-container`,
@@ -629,6 +631,7 @@ const Scrollbar = defineComponent({
                   default: () => (
                     <div
                       ref="contentRef"
+                      role="none"
                       style={
                         [
                           {
@@ -652,7 +655,8 @@ const Scrollbar = defineComponent({
           <div
             ref="yRailRef"
             class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`}
-            style={[this.horizontalRailStyle] as any}
+            style={this.horizontalRailStyle}
+            aria-hidden
           >
             <Transition name="fade-in-transition">
               {{
@@ -673,7 +677,8 @@ const Scrollbar = defineComponent({
           <div
             ref="xRailRef"
             class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`}
-            style={[this.verticalRailStyle] as any}
+            style={this.verticalRailStyle}
+            aria-hidden
           >
             <Transition name="fade-in-transition">
               {{

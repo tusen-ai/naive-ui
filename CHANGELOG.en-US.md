@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-modal` add a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
 - Add `n-avatar-group`.
 - `n-input-number` supports `loading` state.
 - `scrollbar` uses `n` as CSS vars prefix.
@@ -58,6 +59,7 @@
 ### Fixes
 
 - Fix `n-form-item-gi` 's `validate` doesn't work, closes [#1901](https://github.com/TuSimple/naive-ui/issues/1901).
+- Fix `n-card` action's border-radius style.
 
 ## 2.23.1 (2021-12-20)
 

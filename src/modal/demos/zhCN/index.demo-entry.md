@@ -13,6 +13,7 @@ preset-card
 preset-confirm
 preset-confirm-slot
 transform-origin
+a11y-debug
 raw-debug
 dark-1-debug
 dark-2-debug
