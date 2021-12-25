@@ -1,6 +1,6 @@
 # Scroll to latest
 
-when log is gradually increasing scroll to the latest.
+Scroll to the latest when log is gradually increasing.
 
 ```html
 <n-space vertical>
