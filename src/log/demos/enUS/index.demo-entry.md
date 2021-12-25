@@ -43,6 +43,7 @@ In highlight demo, we defined a language called `naive-log` which will highlight
 ## Demos
 
 ```demo
+auto-bottom
 size
 event
 scroll
