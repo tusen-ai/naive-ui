@@ -16,6 +16,7 @@ import type { CheckboxTheme } from '../../checkbox/styles'
 import type { CodeTheme } from '../../code/styles'
 import type { CollapseTheme } from '../../collapse/styles'
 import type { ColorPickerTheme } from '../../color-picker/styles'
+import type { CountdownTheme } from '../../countdown/styles'
 import type { DataTableTheme } from '../../data-table/styles'
 import type { DatePickerTheme } from '../../date-picker/styles'
 import type { DescriptionsTheme } from '../../descriptions/styles'
@@ -43,6 +44,7 @@ import type { MentionTheme } from '../../mention/styles'
 import type { MessageTheme } from '../../message/styles'
 import type { ModalTheme } from '../../modal/styles'
 import type { NotificationTheme } from '../../notification/styles'
+import { NumericAnimationTheme } from '../../numeric-animation/styles'
 import type { PageHeaderTheme } from '../../page-header/styles'
 import type { PaginationTheme } from '../../pagination/styles'
 import type { PopconfirmTheme } from '../../popconfirm/styles'
@@ -105,6 +107,7 @@ export interface GlobalThemeWithoutCommon {
   Collapse?: CollapseTheme
   CollapseTransition?: CollapseTransitionTheme
   ColorPicker?: ColorPickerTheme
+  Countdown?: CountdownTheme
   DataTable?: DataTableTheme
   DatePicker?: DatePickerTheme
   Descriptions?: DescriptionsTheme
@@ -132,6 +135,7 @@ export interface GlobalThemeWithoutCommon {
   Message?: MessageTheme
   Modal?: ModalTheme
   Notification?: NotificationTheme
+  NumericAnimation?: NumericAnimationTheme
   PageHeader?: PageHeaderTheme
   Pagination?: PaginationTheme
   Popconfirm?: PopconfirmTheme
