@@ -37,6 +37,7 @@
 ```demo
 basic.vue
 inline.vue
+loop-debug.vue
 ```
 
 ## API

@@ -82,6 +82,7 @@ export default defineComponent({
       }
       const warp = document.createElement('pre')
       warp.textContent = code
+      codeEl.innerHTML = ''
       codeEl.appendChild(warp)
     }
     onMounted(setCode)

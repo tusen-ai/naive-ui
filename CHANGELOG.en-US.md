@@ -62,6 +62,7 @@
 
 - Fix `n-form-item-gi` 's `validate` doesn't work, closes [#1901](https://github.com/TuSimple/naive-ui/issues/1901).
 - Fix `n-card` action's border-radius style.
+- Fix `n-code`'s content is repeatly appended if language is not set, closes [#2034](https://github.com/TuSimple/naive-ui/issues/2034).
 
 ## 2.23.1 (2021-12-20)
 

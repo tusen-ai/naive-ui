@@ -62,6 +62,7 @@
 
 - 修复 `n-form-item-gi` 的 `validate` 不生效，关闭 [#1901](https://github.com/TuSimple/naive-ui/issues/1901)
 - 修复 `n-card` action 部分的 border-radius 样式
+- 修复 `n-code` 不设定 language 时内容重复添加，关闭 [#2034](https://github.com/TuSimple/naive-ui/issues/2034)
 
 ## 2.23.1 (2021-12-20)
 
