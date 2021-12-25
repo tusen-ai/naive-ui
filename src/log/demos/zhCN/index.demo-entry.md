@@ -43,6 +43,7 @@
 ## 演示
 
 ```demo
+auto-bottom
 size
 event
 scroll
