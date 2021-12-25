@@ -18,18 +18,18 @@ const frFR: NLocale = {
       `Charger tous les enfants de ${label} avant de le sélectionner`
   },
   Time: {
-    dateFormat: 'dd-MM-yyyy',
-    dateTimeFormat: 'dd-MM-yyyy HH:mm:ss'
+    dateFormat: 'dd/MM/yyyy',
+    dateTimeFormat: 'dd/MM/yyyy HH:mm:ss'
   },
   DatePicker: {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
     yearTypeFormat: 'yyyy',
-    monthTypeFormat: 'MM-yyyy',
-    dateFormat: 'dd-MM-yyyy',
-    dateTimeFormat: 'dd-MM-yyyy HH:mm:ss',
-    quarterFormat: 'yyyy-qqq',
+    monthTypeFormat: 'MM/yyyy',
+    dateFormat: 'dd/MM/yyyy',
+    dateTimeFormat: 'dd/MM/yyyy HH:mm:ss',
+    quarterFormat: 'qqq yyyy',
     clear: 'Effacer',
     now: 'Maintenant',
     confirm: 'Confirmer',
@@ -39,8 +39,7 @@ const frFR: NLocale = {
     datetimePlaceholder: "Sélectionner la date et l'heure",
     monthPlaceholder: 'Sélectionner le mois',
     yearPlaceholder: "Sélectionner l'année",
-    // FIXME: translation needed
-    quarterPlaceholder: 'Select Quarter',
+    quarterPlaceholder: 'Sélectionner le trimestre',
     startDatePlaceholder: 'Date de début',
     endDatePlaceholder: 'Date de fin',
     startDatetimePlaceholder: 'Date et heure de début',
