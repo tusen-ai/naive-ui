@@ -61,6 +61,7 @@ export default defineComponent({
         language
       }).value
     }
+    let preFlag = false
     const setCode = (): void => {
       if (slots.default) return
       const { value: codeEl } = codeRef
@@ -80,9 +81,12 @@ export default defineComponent({
         codeEl.textContent = code
         return
       }
-      const warp = document.createElement('pre')
+      const warp = codeEl.querySelector('pre') || document.createElement('pre')
       warp.textContent = code
-      codeEl.appendChild(warp)
+      if (!preFlag) {
+        codeEl.appendChild(warp)
+        preFlag = true
+      }
     }
     onMounted(setCode)
     watch(toRef(props, 'language'), setCode)
