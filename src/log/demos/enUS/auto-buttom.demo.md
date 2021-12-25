@@ -50,8 +50,7 @@ export default defineComponent({
     return {
       log: logRef,
       logInst: logInstRef,
-      handleClick,
-      startRef
+      handleClick
     }
   }
 })
