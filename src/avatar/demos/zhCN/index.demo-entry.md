@@ -12,7 +12,7 @@ badge
 icon
 name-size
 fallback
-group
+group.vue
 v-show-debug
 ```
 
