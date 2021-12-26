@@ -1,44 +1,36 @@
 import {
   defineComponent,
-  computed,
   onMounted,
   onBeforeUnmount,
-  ref,
-  CSSProperties,
   PropType,
-  h,
-  renderSlot,
-  watchEffect
+  watchEffect,
+  VNodeChild,
+  reactive
 } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { countdownLight } from '../styles'
-import type { CountdownTheme } from '../styles'
-import style from './styles/index.cssr'
-import { differenceInMilliseconds } from 'date-fns'
-import { getTimeString } from './utils'
 
 const countdownProps = {
-  ...(useTheme.props as ThemeProps<CountdownTheme>),
   label: String,
-  value: {
+  duration: {
     type: Number,
-    default: () => Date.now()
+    default: 0
   },
-  valueStyle: [Object, String] as PropType<undefined | string | CSSProperties>,
-  start: {
+  active: {
     type: Boolean,
     default: true
   },
-  now: {
-    type: Number,
-    default: () => Date.now()
+  precision: {
+    type: Number as PropType<0 | 1 | 2 | 3>,
+    default: 0
   },
-  format: {
-    type: String,
-    default: 'HH:mm:ss'
-  },
+  render: Function as PropType<
+  (props: {
+    hours: number
+    minutes: number
+    seconds: number
+    milliseconds: number
+  }) => VNodeChild
+  >,
   onFinish: Function as PropType<() => void>
 }
 
@@ -48,36 +40,110 @@ export default defineComponent({
   name: 'Countdown',
   props: countdownProps,
   setup (props) {
-    const REFRESH_INTERVAL = 1000 / 30
-    const displayValueRef = ref(
-      getTimeString(
-        Math.max(differenceInMilliseconds(props.value, props.now), 0),
-        props.format
-      )
-    )
-    const timerRef = ref(0)
-    const startTimer = (): void => {
-      if (props.value <= props.now) return
-      timerRef.value = window.setInterval(() => {
-        const diff = differenceInMilliseconds(props.value, Date.now())
-        if (diff <= 0) {
-          stopTimer()
-          props.onFinish?.()
-        }
-        displayValueRef.value = getTimeString(Math.max(diff, 0), props.format)
-      }, REFRESH_INTERVAL)
+    let timerId: number | null = null
+    let rafId: number | null = null
+    let elapsed = 0
+    let finished = false
+
+    const timeInfo = reactive({
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      milliseconds: 0
+    })
+
+    deriveDisplayValue(props.duration)
+    let pnow = -1
+
+    function getDistance (time: DOMHighResTimeStamp): number {
+      return props.duration - elapsed + pnow - time
     }
+
+    function deriveDisplayValue (distance: number): void {
+      const hours = Math.floor(distance / 3600000)
+      const minutes = Math.floor((distance % 3600000) / 60000)
+      const seconds = Math.floor((distance % 60000) / 1000)
+      const milliseconds = Math.floor(distance % 1000)
+      timeInfo.hours = hours
+      timeInfo.minutes = minutes
+      timeInfo.seconds = seconds
+      timeInfo.milliseconds = milliseconds
+    }
+
+    function getDisplayValue (info: {
+      hours: number
+      minutes: number
+      seconds: number
+      milliseconds: number
+    }): string {
+      const { hours, minutes, seconds, milliseconds } = info
+      const { precision } = props
+      switch (precision) {
+        case 0:
+          return `${hours}:${String(minutes).padStart(2, '0')}:${String(
+            seconds
+          ).padStart(2, '0')}`
+        default:
+          return `${hours}:${String(minutes).padStart(2, '0')}:${String(
+            seconds
+          ).padStart(2, '0')}.${String(
+            Math.floor(
+              milliseconds / (precision === 1 ? 100 : precision === 2 ? 10 : 1)
+            )
+          ).padStart(precision, '0')}`
+      }
+    }
+
+    const frame = (): void => {
+      const { precision } = props
+      const distance = getDistance(performance.now())
+      if (distance <= 0) {
+        deriveDisplayValue(0)
+        stopTimer()
+        if (!finished) {
+          props.onFinish?.()
+          finished = true
+        }
+        return
+      }
+      let leftTime: number
+      switch (precision) {
+        case 3:
+        case 2:
+          leftTime = distance % 34 // about 30 fps
+          break
+        case 1:
+          leftTime = distance % 100
+          break
+        default:
+          leftTime = distance % 1000
+      }
+      deriveDisplayValue(distance)
+      timerId = window.setTimeout(() => {
+        frame()
+      }, leftTime)
+    }
+
     const stopTimer = (): void => {
-      if (timerRef.value) {
-        window.clearInterval(timerRef.value)
-        timerRef.value = 0
+      if (timerId !== null) {
+        window.clearTimeout(timerId)
+        timerId = null
+      }
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId)
+        rafId = null
       }
     }
     onMounted(() => {
       watchEffect(() => {
-        if (props.start && !timerRef.value) {
-          startTimer()
+        if (props.active) {
+          pnow = performance.now()
+          frame()
         } else {
+          const now = performance.now()
+          if (pnow !== -1) {
+            elapsed += now - pnow
+          }
           stopTimer()
         }
       })
@@ -85,63 +151,13 @@ export default defineComponent({
     onBeforeUnmount(() => {
       stopTimer()
     })
-    const { mergedClsPrefixRef } = useConfig(props)
-    const themeRef = useTheme(
-      'Countdown',
-      'Countdown',
-      style,
-      countdownLight,
-      props,
-      mergedClsPrefixRef
-    )
-    return {
-      displayValue: displayValueRef,
-      mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const {
-          self: {
-            labelFontWeight,
-            valueFontWeight,
-            valuePrefixTextColor,
-            labelTextColor,
-            valueTextColor,
-            labelFontSize
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-label-font-size': labelFontSize,
-          '--n-label-font-weight': labelFontWeight,
-          '--n-label-text-color': labelTextColor,
-          '--n-value-font-weight': valueFontWeight,
-          '--n-value-prefix-text-color': valuePrefixTextColor,
-          '--n-value-text-color': valueTextColor
-        }
-      })
+    return () => {
+      const { render } = props
+      if (render) {
+        return render(timeInfo)
+      } else {
+        return getDisplayValue(timeInfo)
+      }
     }
-  },
-  render () {
-    const { $slots, mergedClsPrefix } = this
-    return (
-      <div
-        class={`${mergedClsPrefix}-countdown`}
-        style={this.cssVars as CSSProperties}
-      >
-        <div class={`${mergedClsPrefix}-countdown__label`}>
-          {this.label || $slots.label?.()}
-        </div>
-        <div class={`${mergedClsPrefix}-countdown-value`}>
-          {$slots.prefix ? (
-            <span class={`${mergedClsPrefix}-countdown-value__prefix`}>
-              {renderSlot($slots, 'prefix')}
-            </span>
-          ) : null}
-          <span class={`${mergedClsPrefix}-countdown-value__content`}>
-            {this.displayValue}
-          </span>
-        </div>
-      </div>
-    )
   }
 })

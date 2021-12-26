@@ -74,7 +74,6 @@ import { typographyDark } from '../typography/styles'
 import { treeDark } from '../tree/styles'
 import { uploadDark } from '../upload/styles'
 import type { BuiltInGlobalTheme } from './interface'
-import { countdownDark } from '../countdown/styles'
 import { numericAnimationDark } from '../numeric-animation/styles'
 
 export const darkTheme: BuiltInGlobalTheme = {
@@ -96,7 +95,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   Collapse: collapseDark,
   CollapseTransition: collapseTransitionDark,
   ColorPicker: colorPickerDark,
-  Countdown: countdownDark,
   DataTable: dataTableDark,
   DatePicker: datePickerDark,
   Descriptions: descriptionsDark,

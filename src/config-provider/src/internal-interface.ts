@@ -16,7 +16,6 @@ import type { CheckboxTheme } from '../../checkbox/styles'
 import type { CodeTheme } from '../../code/styles'
 import type { CollapseTheme } from '../../collapse/styles'
 import type { ColorPickerTheme } from '../../color-picker/styles'
-import type { CountdownTheme } from '../../countdown/styles'
 import type { DataTableTheme } from '../../data-table/styles'
 import type { DatePickerTheme } from '../../date-picker/styles'
 import type { DescriptionsTheme } from '../../descriptions/styles'
@@ -107,7 +106,6 @@ export interface GlobalThemeWithoutCommon {
   Collapse?: CollapseTheme
   CollapseTransition?: CollapseTransitionTheme
   ColorPicker?: ColorPickerTheme
-  Countdown?: CountdownTheme
   DataTable?: DataTableTheme
   DatePicker?: DatePickerTheme
   Descriptions?: DescriptionsTheme

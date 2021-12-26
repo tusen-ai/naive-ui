@@ -1,29 +1,23 @@
 # Countdown
 
-As simple as it looks.
+A second is passed after a second has passed.
 
 ## Demos
 
 ```demo
-basic
+basic.vue
+precision.vue
+render.vue
 ```
 
 ## API
 
-### CountDown Props
+### Countdown Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| label | `string` | `undefined` | Label of the countdown. |
-| value | `number` | `() => Date.now() + 300000` | Value of countdown. |
-| start | `boolean` | `true` | Start countdown. |
-| now | `number` | `() => Date.now()` | Current time timestamp. |
-| format | `string` | `'HH:mm:ss'` | The way to format time. |
-| on-finish | `(value: number) => void` | `undefined` | Callback when countdown finish. |
-
-### CountDown Slots
-
-| 名称   | 参数 | 说明        |
-| ------ | ---- | ----------- |
-| label  | `()` | Lable slot  |
-| prefix | `()` | Prefix slot |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| active | `boolean` | `true` | Whether countdown is active. | NEXT_VERSION |
+| duration | `string` | `0` | The duration of the countdown (unit is millisecond). Not reactive. | NEXT_VERSION |
+| precision | `0 \| 1 \| 2 \| 3` | `0` | The precision of the second. | NEXT_VERSION |
+| render | `(props: { hours: number, minutes: number, seconds: number, milliseconds: number }) => VNodeChild` | `undefined` | Time's render function | NEXT_VERSION |
+| on-finish | `() => void` | `undefined` | The callback on countdown is finished. | NEXT_VERSION |

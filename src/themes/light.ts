@@ -18,7 +18,6 @@ import { codeLight } from '../code/styles'
 import { collapseLight } from '../collapse/styles'
 import { collapseTransitionLight } from '../collapse-transition/styles'
 import { colorPickerLight } from '../color-picker/styles'
-import { countdownLight } from '../countdown/styles'
 import { dataTableLight } from '../data-table/styles'
 import { datePickerLight } from '../date-picker/styles'
 import { descriptionsLight } from '../descriptions/styles'
@@ -98,7 +97,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   Collapse: collapseLight,
   CollapseTransition: collapseTransitionLight,
   ColorPicker: colorPickerLight,
-  Countdown: countdownLight,
   DataTable: dataTableLight,
   DatePicker: datePickerLight,
   Descriptions: descriptionsLight,
