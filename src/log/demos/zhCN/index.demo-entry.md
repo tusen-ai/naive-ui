@@ -43,12 +43,12 @@
 ## 演示
 
 ```demo
-auto-bottom
 size
 event
 scroll
 highlight
 loading
+auto-bottom
 ```
 
 ## API
