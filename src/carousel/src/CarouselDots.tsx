@@ -1,15 +1,15 @@
-import { h, defineComponent, PropType, inject } from 'vue'
+import { h, defineComponent, PropType, inject, Fragment } from 'vue'
 import { indexMap } from 'seemly'
 import { useConfig } from '../../_mixins'
 import { ExtractPublicPropTypes } from '../../_utils'
 import { CarouselSlideInjection, carouselSlideInjectionKey } from './interface'
 
 const carouselDotsProps = {
-  length: {
+  total: {
     type: Number,
     default: 0
   },
-  activeIndex: {
+  current: {
     type: Number,
     default: 0
   },
@@ -70,22 +70,16 @@ export default defineComponent({
   render () {
     const {
       mergedClsPrefix,
-      length,
-      activeIndex,
+      total,
+      current,
       speed,
       dotPlacement,
       dotStyle
     } = this
     const isVersical = dotPlacement === 'left' || dotPlacement === 'right'
-    const progress = (activeIndex + 1) / length
+    const progress = (current + 1) / length
     return (
-      <div
-        class={[
-          `${mergedClsPrefix}-carousel__dots`,
-          `${mergedClsPrefix}-carousel__dots--${dotStyle}`
-        ]}
-        role='tablist'
-      >
+      <Fragment>
         {dotStyle === 'progress' ? (
           <div
             class={`${mergedClsPrefix}-carousel__dots-fill`}
@@ -97,8 +91,8 @@ export default defineComponent({
             }}
           ></div>
         ) : (
-          indexMap(this.length, i => {
-            const selected = i === activeIndex
+          indexMap(total, i => {
+            const selected = i === current
             return (
               <div
                 aria-selected={selected}
@@ -115,7 +109,7 @@ export default defineComponent({
             )
           })
         )}
-      </div>
+      </Fragment>
     )
   }
 })

@@ -12,7 +12,9 @@ import {
   watch,
   withDirectives,
   vShow,
-  Transition
+  Transition,
+  toRef,
+  nextTick
 } from 'vue'
 import { on, off } from 'evtd'
 import { useConfig, useTheme, ThemeProps } from '../../_mixins'
@@ -122,13 +124,13 @@ export default defineComponent({
     // slot    [ 0 1 2 ]
     // index   0 1 2 3 4
     // display 2 0 1 2 0
-    const needDuplicatedRef = computed(
+    const duplicatedableRef = computed(
       // only duplicate the copy operation in `slide` mode,
       // because other effects have special process
       () => !userWantControlRef.value && props.loop && props.effect === 'slide'
     )
     const initializeIndex =
-      props.defaultIndex + (needDuplicatedRef.value ? 1 : 0)
+      props.defaultIndex + (duplicatedableRef.value ? 1 : 0)
     const displayIndexRef = ref(0)
     const virtualIndexRef = ref(initializeIndex)
     const realityIndexRef = ref(initializeIndex)
@@ -136,13 +138,16 @@ export default defineComponent({
     const wrapperSizeRef = ref({ width: 0, height: 0 })
     const slideSizesRef = computed(() => {
       const { value: slides } = slidesRef
+      const { value: wrapperSize } = wrapperSizeRef
       const { length } = slides
       if (!length) return []
-      const { value: wrapperSize } = wrapperSizeRef
       const { direction, slidesPerView } = props
-      const unevent = slidesPerView === 'auto'
       const axis = direction === 'vertical' ? 'height' : 'width'
-      const perViewSize = wrapperSize[axis] || 0
+      const unevent = slidesPerView === 'auto' && !userWantControlRef.value
+      let perViewSize = wrapperSize[axis]
+      if (!unevent && slidesPerView !== 'auto') {
+        perViewSize -= (slidesPerView - 1) * props.spaceBetween
+      }
       const slidesPerRatio =
         slidesPerView !== 'auto' ? 1 / Math.max(1, slidesPerView) : 1
       const slideSizes = []
@@ -178,22 +183,25 @@ export default defineComponent({
       return translates
     })
     const slideStylesRef = computed(() => {
+      const { value: slideSizes } = slideSizesRef
+      if (!slideSizes.length) return []
       const { direction, effect, spaceBetween } = props
       const isVertical = direction === 'vertical'
       const axis = isVertical ? 'height' : 'width'
       const directionAxis = isVertical ? 'top' : 'left'
       const spaceAxis = isVertical ? 'bottom' : 'right'
-      const { value: virtualIndex } = virtualIndexRef
-      const { value: slideSizes } = slideSizesRef
       const { value: slideTranlates } = slideTranlatesRef
       const { value: userWantControl } = userWantControlRef
+      // reduce the impact of reactivity effects
+      const _isActive = makeUniqueTrulyFunction(isActive)
+      const _isPrev = makeUniqueTrulyFunction(isPrev)
+      const _isNext = makeUniqueTrulyFunction(isNext)
       return slideSizes.map((size, i) => {
         if (userWantControl) {
           return {
             [axis]: `${size[axis]}px`
           }
         }
-        const active = virtualIndex === i
         const offset = slideTranlates[i]
         const style: Record<string, any> = {
           [axis]: `${size[axis]}px`,
@@ -202,19 +210,21 @@ export default defineComponent({
           transitionTimingFunction: props.transitionTimingFunction
         }
         if (effect === 'fade') {
+          const active = _isActive(i)
           extend(style, {
             opacity: active ? 1 : 0,
             [directionAxis]: `${-offset}px`
           })
         } else if (effect === 'card') {
+          const active = _isActive(i)
           let opacity = active ? 1 : 0
           let translate = 0
           let translateZ = active ? 0 : -400
-          if (isPrev(i)) {
+          if (_isPrev(i)) {
             opacity = 0.4
             translate = -size[axis] * 0.5
             translateZ = -200
-          } else if (isNext(i)) {
+          } else if (_isNext(i)) {
             opacity = 0.4
             translate = size[axis] * 0.5
             translateZ = -200
@@ -270,7 +280,7 @@ export default defineComponent({
     function getDisplayIndex (slide: HTMLElement | number): number {
       const index = getSlideIndex(slide)
       const length = slidesRef.value.length
-      return !needDuplicatedRef.value
+      return !duplicatedableRef.value
         ? index
         : index === 0
           ? length - 3
@@ -318,7 +328,7 @@ export default defineComponent({
       if (index !== virtualIndexRef.value) {
         const displayIndex = (displayIndexRef.value = getDisplayIndex(index))
         virtualIndexRef.value = index
-        realityIndexRef.value = needDuplicatedRef.value
+        realityIndexRef.value = duplicatedableRef.value
           ? displayIndex + 1
           : displayIndex
         if (translateableRef.value) {
@@ -327,9 +337,9 @@ export default defineComponent({
       }
     }
     function slideTo (index: number): void {
-      const { value: needDuplicated } = needDuplicatedRef
+      const { value: duplicatedable } = duplicatedableRef
       const { length } = slidesRef.value
-      if (needDuplicated) {
+      if (duplicatedable) {
         index = clampValue(index + 1, 1, length - 2)
       } else {
         index = clampValue(index, 0, length - 1)
@@ -401,8 +411,8 @@ export default defineComponent({
         internalSlideTo(realityIndex, 0)
       } else {
         resetAutoplay()
-        inTransition = false
       }
+      inTransition = false
     }
     function fixTranslate (): void {
       const translate = slideTranlatesRef.value[realityIndexRef.value]
@@ -499,13 +509,13 @@ export default defineComponent({
       off('mouseup', document, handleTouchend)
     }
     function handleMousewheel (event: WheelEvent): void {
+      event.preventDefault()
+      if (inTransition) return
       if (props.mousewheel && props.direction === 'vertical') {
         const deltaY = event.deltaY
         if (deltaY >= 100) {
-          event.preventDefault()
           slideNext()
         } else if (deltaY <= -100) {
-          event.preventDefault()
           slidePrev()
         }
       }
@@ -534,7 +544,11 @@ export default defineComponent({
         fixTranslate()
       }
     })
-    watch(needDuplicatedRef, () => slideTo(displayIndexRef.value))
+    watch(
+      duplicatedableRef,
+      () => void nextTick(() => slideTo(displayIndexRef.value))
+    )
+    watch(toRef(props, 'activeIndex'), index => slideTo(index))
     const themeRef = useTheme(
       'Carousel',
       'Carousel',
@@ -545,7 +559,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       selfElRef,
-      needDuplicated: needDuplicatedRef,
+      duplicatedable: duplicatedableRef,
       userWantControl: userWantControlRef,
       displayIndex: displayIndexRef,
       realityIndex: realityIndexRef,
@@ -562,6 +576,8 @@ export default defineComponent({
       isPrev,
       isNext,
       isActive,
+      getPrevIndex,
+      getNextIndex,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
@@ -588,7 +604,7 @@ export default defineComponent({
       dotPlacement,
       draggable,
       mousewheel,
-      $slots: { default: defaultSlots }
+      $slots: { default: defaultSlots, dots: dotsSlot, arrow: arrowSlot }
     } = this
     const children = (defaultSlots && flatten(defaultSlots())) || []
     let slides = filterCarouselItem(children)
@@ -596,15 +612,17 @@ export default defineComponent({
       slides = children.map((children, i) => (
         <NCarouselItem>
           {{
-            default: () => children
+            default: () => cloneVNode(children)
           }}
         </NCarouselItem>
       ))
     }
     const { length: realityLength } = slides
-    if (realityLength > 1 && this.needDuplicated) {
-      slides.push(cloneVNode(slides[0]))
-      slides.unshift(cloneVNode(slides[realityLength - 1]))
+    if (realityLength > 1 && this.duplicatedable) {
+      slides.push(duplicateSlide(slides[0], 0, 'append'))
+      slides.unshift(
+        duplicateSlide(slides[realityLength - 1], realityLength - 1, 'prepend')
+      )
     }
     return (
       <div
@@ -650,17 +668,50 @@ export default defineComponent({
           }}
         </VResizeObserver>
         {dotStyle !== 'never' && (
-          <NCarouselDots
-            length={realityLength}
-            activeIndex={displayIndex}
-            dotStyle={dotStyle}
-            dotPlacement={dotPlacement}
-            trigger={this.trigger}
-          />
+          <div
+            class={[
+              `${mergedClsPrefix}-carousel__dots`,
+              `${mergedClsPrefix}-carousel__dots--${dotStyle}`
+            ]}
+            role='tablist'
+          >
+            {dotsSlot ? (
+              dotsSlot({
+                total: realityLength,
+                current: displayIndex + 1,
+                placement: dotPlacement,
+                slideTo: this.slideTo
+              })
+            ) : (
+              <NCarouselDots
+                trigger={this.trigger}
+                total={realityLength}
+                current={displayIndex}
+                dotStyle={dotStyle}
+                dotPlacement={dotPlacement}
+              />
+            )}
+          </div>
         )}
-        {showArrow && (
-          <NCarouselArrow direction={this.direction} keyboard={this.keyboard} />
-        )}
+        {showArrow &&
+          (arrowSlot ? (
+            arrowSlot({
+              total: realityLength,
+              current: displayIndex + 1,
+              slideTo: this.slideTo,
+              slidePrev: this.slidePrev,
+              slideNext: this.slideNext,
+              getPrevIndex: this.getPrevIndex,
+              getNextIndex: this.getNextIndex,
+              disabledPrev: this.getPrevIndex(this.realityIndex) === null,
+              disabledNext: this.getNextIndex(this.realityIndex) === null
+            })
+          ) : (
+            <NCarouselArrow
+              direction={this.direction}
+              keyboard={this.keyboard}
+            />
+          ))}
       </div>
     )
   }
@@ -678,4 +729,29 @@ function filterCarouselItem (
     })
   }
   return carouselItems
+}
+
+function duplicateSlide (
+  child: VNode,
+  index: number,
+  position: 'prepend' | 'append'
+): VNode {
+  return cloneVNode(child, {
+    // for patch
+    key: `carousel-item-duplicate-${index}-${position}`
+  })
+}
+
+function makeUniqueTrulyFunction<T extends (...args: any[]) => boolean> (
+  func: T
+): T {
+  let neverTruly = false
+  return ((...args) => {
+    if (neverTruly) return false
+    const result = func(...args)
+    if (result) {
+      neverTruly = true
+    }
+    return result
+  }) as T
 }

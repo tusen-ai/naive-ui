@@ -19,6 +19,8 @@ effect
 transition-name
 keyboard
 mousewheel
+custom-dots
+custom-arrow
 ```
 
 ## API

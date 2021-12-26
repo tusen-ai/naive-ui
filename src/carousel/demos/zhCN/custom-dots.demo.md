@@ -1,4 +1,4 @@
-# 基础
+# 自定义指示点
 
 ```html
 <n-carousel>
@@ -18,6 +18,11 @@
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
   />
+  <template #dots="{total, current, placement, slideTo}">
+    <span class="custom-dots">
+      {{current}} / {{total}}
+    </span>
+  </template>
 </n-carousel>
 ```
 
@@ -26,5 +31,11 @@
   width: 100%;
   height: 240px;
   object-fit: cover;
+}
+
+.custom-dots {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  transform: translateY(5px);
 }
 ```
