@@ -80,13 +80,15 @@ export default defineComponent({
       const { precision } = props
       switch (precision) {
         case 0:
-          return `${hours}:${String(minutes).padStart(2, '0')}:${String(
-            seconds
-          ).padStart(2, '0')}`
+          return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(
+            2,
+            '0'
+          )}:${String(seconds).padStart(2, '0')}`
         default:
-          return `${hours}:${String(minutes).padStart(2, '0')}:${String(
-            seconds
-          ).padStart(2, '0')}.${String(
+          return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(
+            2,
+            '0'
+          )}:${String(seconds).padStart(2, '0')}.${String(
             Math.floor(
               milliseconds / (precision === 1 ? 100 : precision === 2 ? 10 : 1)
             )
