@@ -38,7 +38,7 @@ debug
 | circle | `boolean` | `false` | 按钮是否为圆形 |
 | color | `string` | `undefined` | 按钮颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |
 | dashed | `boolean` | `false` | 按钮边框是否为虚线 |
-| disabled | `boolean` | `false` | 按钮是否禁用 |
+| disabled | `boolean` | `false` | 按钮是否禁用，当 tag 渲染成 `div` 不影响其他原生事件触发。 |
 | ghost | `boolean` | `false` | 按钮是否透明 |
 | icon-placement | `'left' \| 'right'` | `'left'` | 按钮中图标的位置 |
 | keyboard | `boolean` | `true` | 是否支持键盘操作 |

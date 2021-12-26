@@ -36,7 +36,7 @@ icon-button
 | circle | `boolean` | `false` | Whether the button is round. |
 | color | `string` | `undefined` | Button color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |
 | dashed | `boolean` | `false` | Whether the button's border is a dashed line. |
-| disabled | `boolean` | `false` | Whether the button is disabled. |
+| disabled | `boolean` | `false` | Whether the button is disabled, when tag is `div` does not affect other native events. |
 | ghost | `boolean` | `false` | Whether the button is ghost. |
 | icon-placement | `'left' \| 'right'` | `'left'` | The position of the icon in the button. |
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. |

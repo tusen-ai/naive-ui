@@ -4,7 +4,7 @@
 
 ### Breaking Changes
 
-- `n-button` will be render `div` tag under `disabled` status.
+- `n-button` use tag to render as `div` tag will not affect other native event trigger under `disabled` status.
 
 ### Feats
 

@@ -5,7 +5,7 @@
 ```html
 <n-popover trigger="hover">
   <template #trigger>
-    <n-button disabled> 悬浮 </n-button>
+    <n-button disabled tag="div"> 悬浮 </n-button>
   </template>
   <span>按钮禁用不影响 hover</span>
 </n-popover>

@@ -4,7 +4,7 @@
 
 ### Breaking Changes
 
-- `n-button` 在 `disabled` 状态下将会被渲染为 `div` 标签
+- `n-button` 在 `disabled` 状态下使用 tag 渲染为 `div` 标签将不会影响其他原生事件触发
 
 ### Feats
 
