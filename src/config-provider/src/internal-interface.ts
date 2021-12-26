@@ -43,7 +43,6 @@ import type { MentionTheme } from '../../mention/styles'
 import type { MessageTheme } from '../../message/styles'
 import type { ModalTheme } from '../../modal/styles'
 import type { NotificationTheme } from '../../notification/styles'
-import { NumericAnimationTheme } from '../../numeric-animation/styles'
 import type { PageHeaderTheme } from '../../page-header/styles'
 import type { PaginationTheme } from '../../pagination/styles'
 import type { PopconfirmTheme } from '../../popconfirm/styles'
@@ -133,7 +132,6 @@ export interface GlobalThemeWithoutCommon {
   Message?: MessageTheme
   Modal?: ModalTheme
   Notification?: NotificationTheme
-  NumericAnimation?: NumericAnimationTheme
   PageHeader?: PageHeaderTheme
   Pagination?: PaginationTheme
   Popconfirm?: PopconfirmTheme

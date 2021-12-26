@@ -1,44 +1,15 @@
-import {
-  defineComponent,
-  computed,
-  onMounted,
-  watch,
-  ref,
-  CSSProperties,
-  PropType,
-  h,
-  renderSlot
-} from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { defineComponent, computed, onMounted, watch, ref } from 'vue'
+import { round } from 'lodash'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { numericAnimationLight } from '../styles'
-import type { NumericAnimationTheme } from '../styles'
-import style from './styles/index.cssr'
-import { format } from 'date-fns'
 import { tween } from './utils'
-import { round, isNumber } from 'lodash'
 
 const numericAnimationProps = {
-  ...(useTheme.props as ThemeProps<NumericAnimationTheme>),
-  label: {
-    type: String,
-    default: undefined
-  },
   value: {
-    type: [String, Number],
-    default: undefined
+    type: Number,
+    default: 0
   },
   precision: Number,
-  format: {
-    type: String,
-    default: 'HH:mm:ss'
-  },
   showSeprator: Boolean,
-  valueStyle: {
-    type: [Object, String] as PropType<undefined | string | CSSProperties>,
-    default: undefined
-  },
   valueFrom: Number,
   start: {
     type: Boolean,
@@ -84,41 +55,23 @@ export default defineComponent({
       }
     }
     const formatValue = computed(() => {
-      let innerValue = valueRef.value
-      if (isNumber(innerValue)) {
-        if (props.precision) {
-          innerValue = round(innerValue, props.precision).toFixed(
-            props.precision
-          )
-        }
-        const splitValue = innerValue.toString().split('.')
-        const integer = props.showSeprator
-          ? Number(splitValue[0]).toLocaleString('en-US')
-          : splitValue[0]
-        const decimal = splitValue[1]
-        return {
-          isNumber: true,
-          integer,
-          decimal
-        }
+      let innerValue: string = ''
+      if (props.precision) {
+        innerValue = round(valueRef.value, props.precision).toFixed(
+          props.precision
+        )
       }
-      if (typeof props.value === 'number') {
-        innerValue = format(props.value, props.format)
-      }
+      const splitValue = innerValue.toString().split('.')
+      const integer = props.showSeprator
+        ? Number(splitValue[0]).toLocaleString('en-US')
+        : splitValue[0]
+      const decimal = splitValue[1]
       return {
-        isNumber: false,
-        value: innerValue
+        integer,
+        decimal
       }
     })
-    const { mergedClsPrefixRef } = useConfig(props)
-    const themeRef = useTheme(
-      'NumericAnimation',
-      'NumericAnimation',
-      style,
-      numericAnimationLight,
-      props,
-      mergedClsPrefixRef
-    )
+
     onMounted(() => {
       if (props.animation && props.start) animation()
     })
@@ -129,72 +82,14 @@ export default defineComponent({
       }
     )
     return {
-      formatValue,
-      mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: computed(() => {
-        const {
-          self: {
-            labelFontWeight,
-            valueFontWeight,
-            valuePrefixTextColor,
-            labelTextColor,
-            valueSuffixTextColor,
-            valueTextColor,
-            labelFontSize
-          },
-          common: { cubicBezierEaseInOut }
-        } = themeRef.value
-        return {
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-label-font-size': labelFontSize,
-          '--n-label-font-weight': labelFontWeight,
-          '--n-label-text-color': labelTextColor,
-          '--n-value-font-weight': valueFontWeight,
-          '--n-value-prefix-text-color': valuePrefixTextColor,
-          '--n-value-suffix-text-color': valueSuffixTextColor,
-          '--n-value-text-color': valueTextColor
-        }
-      })
+      formatValue
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
-    return (
-      <div
-        class={`${mergedClsPrefix}-numeric-animation`}
-        style={this.cssVars as CSSProperties}
-      >
-        <div class={`${mergedClsPrefix}-numeric-animation__label`}>
-          {this.label || $slots.label?.()}
-        </div>
-        <div class={`${mergedClsPrefix}-numeric-animation-value`}>
-          {$slots.prefix ? (
-            <span class={`${mergedClsPrefix}-numeric-animation-value__prefix`}>
-              {renderSlot($slots, 'prefix')}
-            </span>
-          ) : null}
-          {this.value &&
-            (this.formatValue.isNumber ? (
-              <span
-                class={`${mergedClsPrefix}-numeric-animation-value__content`}
-              >
-                {this.formatValue.integer ? `${this.formatValue.integer}` : ''}
-                {this.formatValue.decimal ? `.${this.formatValue.decimal}` : ''}
-              </span>
-            ) : (
-              <span
-                class={`${mergedClsPrefix}-numeric-animation-value__content`}
-              >
-                {this.formatValue.value}
-              </span>
-            ))}
-          {$slots.suffix ? (
-            <span class={`${mergedClsPrefix}-numeric-animation-value__suffix`}>
-              {renderSlot($slots, 'suffix')}
-            </span>
-          ) : null}
-        </div>
-      </div>
-    )
+    const { formatValue } = this
+    return [
+      formatValue.integer ? `${formatValue.integer}` : '',
+      formatValue.decimal ? `.${formatValue.decimal}` : ''
+    ]
   }
 })

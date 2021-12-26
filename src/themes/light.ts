@@ -45,7 +45,6 @@ import { mentionLight } from '../mention/styles'
 import { messageLight } from '../message/styles'
 import { modalLight } from '../modal/styles'
 import { notificationLight } from '../notification/styles'
-import { numericAnimationLight } from '../numeric-animation/styles'
 import { pageHeaderLight } from '../page-header/styles'
 import { paginationLight } from '../pagination/styles'
 import { popconfirmLight } from '../popconfirm/styles'
@@ -124,7 +123,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   Message: messageLight,
   Modal: modalLight,
   Notification: notificationLight,
-  NumericAnimation: numericAnimationLight,
   PageHeader: pageHeaderLight,
   Pagination: paginationLight,
   Popconfirm: popconfirmLight,

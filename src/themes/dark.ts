@@ -74,7 +74,6 @@ import { typographyDark } from '../typography/styles'
 import { treeDark } from '../tree/styles'
 import { uploadDark } from '../upload/styles'
 import type { BuiltInGlobalTheme } from './interface'
-import { numericAnimationDark } from '../numeric-animation/styles'
 
 export const darkTheme: BuiltInGlobalTheme = {
   common: commonDark,
@@ -122,7 +121,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   Message: messageDark,
   Modal: modalDark,
   Notification: notificationDark,
-  NumericAnimation: numericAnimationDark,
   PageHeader: pageHeaderDark,
   Pagination: paginationDark,
   Popconfirm: popconfirmDark,
