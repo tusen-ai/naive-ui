@@ -4,11 +4,11 @@
 import { h, createSSRApp } from 'vue'
 import { renderToString } from '@vue/server-renderer'
 import { setup } from '@css-render/vue3-ssr'
-import { NNumericAnimation } from '../..'
+import { NNumberAnimation } from '../..'
 
 describe('SSR', () => {
   it('works', async () => {
-    const app = createSSRApp(() => <NNumericAnimation />)
+    const app = createSSRApp(() => <NNumberAnimation />)
     setup(app)
     try {
       await renderToString(app)

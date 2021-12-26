@@ -445,10 +445,10 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/log'
         },
         {
-          en: 'Numeric Animation',
+          en: 'Number Animation',
           zh: '数值动画',
           enSuffix: true,
-          path: '/numeric-animation'
+          path: '/number-animation'
         },
         {
           en: 'Statistic',

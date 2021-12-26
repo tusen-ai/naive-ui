@@ -487,9 +487,9 @@ export const enComponentRoutes = [
       import('../../src/countdown/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'numeric-animation',
+    path: 'number-animation',
     component: () =>
-      import('../../src/numeric-animation/demos/enUS/index.demo-entry.md')
+      import('../../src/number-animation/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -846,9 +846,9 @@ export const zhComponentRoutes = [
       import('../../src/countdown/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'numeric-animation',
+    path: 'number-animation',
     component: () =>
-      import('../../src/numeric-animation/demos/zhCN/index.demo-entry.md')
+      import('../../src/number-animation/demos/zhCN/index.demo-entry.md')
   }
 ]
 

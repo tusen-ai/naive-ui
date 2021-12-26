@@ -3,7 +3,7 @@ import { round } from 'lodash'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { tween } from './utils'
 
-const numericAnimationProps = {
+const numberAnimationProps = {
   value: {
     type: Number,
     default: 0
@@ -22,13 +22,13 @@ const numericAnimationProps = {
   }
 }
 
-export type NumericAnimationProps = ExtractPublicPropTypes<
-  typeof numericAnimationProps
+export type NumberAnimationProps = ExtractPublicPropTypes<
+  typeof numberAnimationProps
 >
 
 export default defineComponent({
-  name: 'NumericAnimation',
-  props: numericAnimationProps,
+  name: 'NumberAnimation',
+  props: numberAnimationProps,
   setup (props) {
     const { animationDuration } = props
     const valueRef = ref(props.valueFrom ?? props.value)
@@ -55,11 +55,13 @@ export default defineComponent({
       }
     }
     const formatValue = computed(() => {
-      let innerValue: string = ''
+      let innerValue: string
       if (props.precision) {
         innerValue = round(valueRef.value, props.precision).toFixed(
           props.precision
         )
+      } else {
+        innerValue = `${valueRef.value}`
       }
       const splitValue = innerValue.toString().split('.')
       const integer = props.showSeprator

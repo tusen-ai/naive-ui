@@ -1,17 +1,14 @@
-# Basic
+# 基础用法
 
 ```html
-<n-numeric-animation
+<n-number-animation
   title="User Grouth"
   :value="50.52"
   :precision="2"
   :value-from="0"
   v-model:start="start"
-  animation
->
-  <template #suffix>%</template>
-</n-numeric-animation>
-<n-button @click="start=!start">Start</n-button>
+/>
+<n-button @click="start=!start">开启动画</n-button>
 ```
 
 ```js
