@@ -12,6 +12,16 @@ describe('n-input-number', () => {
     ;<NInputNumber value={null} />
   })
 
+  it('should work with `loading` prop', async () => {
+    const wrapper = mount(NInputNumber)
+    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
+    await wrapper.setProps({ loading: false })
+    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(false)
+    await wrapper.setProps({ loading: true })
+    expect(wrapper.find('.n-base-loading__icon').exists()).toBe(true)
+    wrapper.unmount()
+  })
+
   it('should work with `show-button` prop', async () => {
     // Here is a strange case, we must make input number's slots flag to 2
     // (dynamic) to make it work.

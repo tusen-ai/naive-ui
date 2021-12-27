@@ -1,30 +1,32 @@
+<markdown>
 # Avatar Group
 
 Crowded people.
+</markdown>
 
-```html
-<n-avatar-group :options="options" :size="40" :max="3" />
-<n-avatar-group :options="options" :size="40" :max="3">
-  <template #avatar="{ option: { name, src } }">
-    <n-tooltip>
-      <template #trigger>
-        <n-avatar :src="src" />
-      </template>
-      {{ name }}
-    </n-tooltip>
-  </template>
-  <template #rest="{ options, rest }">
-    <n-dropdown
-      :options="options.map((option) => ({ key: option.name, label: option.name }))"
-      placement="top"
-    >
-      <n-avatar>+{{ rest }}</n-avatar>
-    </n-dropdown>
-  </template>
-</n-avatar-group>
-```
+<template>
+  <n-avatar-group :options="options" :size="40" :max="3" />
+  <n-avatar-group :options="options" :size="40" :max="3">
+    <template #avatar="{ option: { name, src } }">
+      <n-tooltip>
+        <template #trigger>
+          <n-avatar :src="src" />
+        </template>
+        {{ name }}
+      </n-tooltip>
+    </template>
+    <template #rest="{ options, rest }">
+      <n-dropdown
+        :options="options.map((option) => ({ key: option.name, label: option.name }))"
+        placement="top"
+      >
+        <n-avatar>+{{ rest }}</n-avatar>
+      </n-dropdown>
+    </template>
+  </n-avatar-group>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -55,4 +57,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

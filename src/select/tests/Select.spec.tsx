@@ -359,4 +359,36 @@ describe('n-select', () => {
     )
     expect(menuWrapper.classes()).toContain('menu-test')
   })
+
+  it('should work with `action` slot', () => {
+    const wrapper = mount(NSelect, {
+      props: {
+        show: true
+      },
+      slots: {
+        action: () => 'test-action-slot'
+      }
+    })
+    const menuWrapper = wrapper.findComponent(NInternalSelectMenu)
+    expect(menuWrapper.find('.n-base-select-menu__action').exists()).toBe(true)
+    expect(menuWrapper.find('.n-base-select-menu__action').text()).toContain(
+      'test-action-slot'
+    )
+  })
+
+  it('should work with `empty` slot', () => {
+    const wrapper = mount(NSelect, {
+      props: {
+        show: true
+      },
+      slots: {
+        empty: () => 'test-empty-slot'
+      }
+    })
+    const menuWrapper = wrapper.findComponent(NInternalSelectMenu)
+    expect(menuWrapper.find('.n-base-select-menu__empty').exists()).toBe(true)
+    expect(menuWrapper.find('.n-base-select-menu__empty').text()).toContain(
+      'test-empty-slot'
+    )
+  })
 })

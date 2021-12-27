@@ -184,6 +184,11 @@ export default defineComponent({
         }
       }
     }
+    function handleKeyup (e: KeyboardEvent): void {
+      if (e.code === 'Escape') {
+        doUpdateShow(false)
+      }
+    }
     provide(modalInjectionKey, {
       getMousePosition: () => {
         if (NDialogProvider) {
@@ -212,6 +217,7 @@ export default defineComponent({
         const pickedProps = keep(props, presetPropsKeys)
         return pickedProps
       }),
+      handleKeyup,
       handleAfterLeave,
       handleClickoutside,
       handleBeforeLeave,
@@ -241,6 +247,7 @@ export default defineComponent({
           default: () => [
             withDirectives(
               <div
+                role="none"
                 ref="containerRef"
                 class={[`${mergedClsPrefix}-modal-container`, this.namespace]}
                 style={this.cssVars as CSSProperties}
@@ -255,6 +262,7 @@ export default defineComponent({
                       default: () => {
                         return this.show ? (
                           <div
+                            aria-hidden
                             ref="containerRef"
                             class={`${mergedClsPrefix}-modal-mask`}
                           />
@@ -278,6 +286,7 @@ export default defineComponent({
                   onAfterEnter={this.onAfterEnter}
                   onAfterLeave={this.handleAfterLeave}
                   onClickoutside={this.handleClickoutside}
+                  onKeyup={this.handleKeyup}
                 >
                   {this.$slots}
                 </NModalBodyWrapper>

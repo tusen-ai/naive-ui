@@ -4,9 +4,15 @@
 
 ### Feats
 
+- `n-empty` 新增 `show-icon` 属性
+- `n-modal` 增加可访问性支持，关闭 [#1877](https://github.com/TuSimple/naive-ui/issues/1877)
 - 新增 `n-avatar-group`
-- `base-close` 的 CSS 变量使用 `n` 作为前缀
-- `base-clear` 的 CSS 变量使用 `n` 作为前缀
+- `n-input-number` 支持 `loading` 状态
+- 新增`n-countdown` 组件
+- 新增`n-number-animation` 组件，关闭 [#1465](https://github.com/TuSimple/naive-ui/issues/1465)
+- `n-pagination` 在不传 itemCount 时会根据 pageSize 和 pageCount 估计一个，关闭 [#2044](https://github.com/TuSimple/naive-ui/issues/2044)
+- `n-cascader` 新增 `on-update:show` 属性，关闭 [#2049](https://github.com/TuSimple/naive-ui/issues/2049)
+- `n-scrollbar` 的 CSS 变量使用 `n` 作为前缀
 - `n-popconfirm` 的 CSS 变量使用 `n` 作为前缀
 - `n-gradient-text` 的 CSS 变量使用 `n` 作为前缀
 - `n-form` 的 CSS 变量使用 `n` 作为前缀
@@ -38,7 +44,6 @@
 - `n-descriptions` 的 CSS 变量使用 `n` 作为前缀
 - `n-drawer` 的 CSS 变量使用 `n` 作为前缀
 - `n-dropdown` 的 CSS 变量使用 `n` 作为前缀
-- `n-element` 的 CSS 变量使用 `n` 作为前缀
 - `n-rate` 的 CSS 变量使用 `n` 作为前缀
 - `n-radio` 的 CSS 变量使用 `n` 作为前缀
 - `n-progress` 的 CSS 变量使用 `n` 作为前缀
@@ -58,6 +63,11 @@
 
 - 修复 `n-form-item-gi` 的 `validate` 不生效，关闭 [#1901](https://github.com/TuSimple/naive-ui/issues/1901)
 - 修复 `n-drawer` 的 `footer` 样式错误当　`native-scrollbar` 为 false 时，关闭 [#2003](https://github.com/TuSimple/naive-ui/issues/2003)
+- 修复 `n-card` action 部分的 border-radius 样式
+- 修复 `n-code` 不设定 language 时内容重复添加，关闭 [#2034](https://github.com/TuSimple/naive-ui/issues/2034)
+- 修复 `n-tabs` `tabTextColorActiveSegment` 和 `tabTextColorHoverSegment` 主题变量不生效，关闭 [#2038](https://github.com/TuSimple/naive-ui/issues/2038)
+- 修复 `n-image` 卸载时可能未解绑键盘事件监听器
+- 修复 `n-image` 在仅有一张图片时按 esc 无法退出预览，关闭 [#2042](https://github.com/TuSimple/naive-ui/issues/2042)
 
 ## 2.23.1 (2021-12-20)
 

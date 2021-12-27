@@ -37,7 +37,7 @@ export default defineComponent({
         return (
           Object.keys(common) as unknown as Array<keyof typeof common>
         ).reduce<Record<string, string | number>>((prevValue, key) => {
-          prevValue[`--n-${kebabCase(key)}`] = common[key]
+          prevValue[`--${kebabCase(key)}`] = common[key]
           return prevValue
         }, {})
       })
