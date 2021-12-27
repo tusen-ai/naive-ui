@@ -22,6 +22,7 @@ width-debug
 hoist-debug
 nested-debug
 nested2-debug
+nested3-debug
 ```
 
 ## API
