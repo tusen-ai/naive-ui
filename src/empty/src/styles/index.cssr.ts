@@ -1,4 +1,4 @@
-import { cB, cE } from '../../../_utils/cssr'
+import { c, cB, cE } from '../../../_utils/cssr'
 
 // vars:
 // --n-font-size
@@ -21,9 +21,14 @@ export default cB('empty', `
     color: var(--n-icon-color);
     transition:
       color .3s var(--n-bezier);
-  `),
+  `, [
+    c('+', [
+      cE('description', `
+        margin-top: 8px;
+      `)
+    ])
+  ]),
   cE('description', `
-    margin-top: 8px;
     transition: color .3s var(--n-bezier);
     color: var(--n-text-color);
   `),

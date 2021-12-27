@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-empty` add `show-icon` prop.
 - `n-modal` add a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
 - Add `n-avatar-group`.
 - `n-input-number` supports `loading` state.

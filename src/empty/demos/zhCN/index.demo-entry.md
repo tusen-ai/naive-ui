@@ -18,6 +18,7 @@ size
 | --- | --- | --- | --- |
 | description | `string` | `'无数据'` | 描述信息 |
 | show-description | `boolean` | `true` | 是否展示描述信息 |
+| show-icon | `boolean` | `true` | 是否展示图标 |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | 尺寸大小 |
 
 ### Empty Slots

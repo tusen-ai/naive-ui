@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `n-empty` 新增 `show-icon` 属性
 - `n-modal` 增加可访问性支持，关闭 [#1877](https://github.com/TuSimple/naive-ui/issues/1877)
 - 新增 `n-avatar-group`
 - `n-input-number` 支持 `loading` 状态
