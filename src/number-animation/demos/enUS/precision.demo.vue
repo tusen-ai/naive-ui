@@ -5,7 +5,7 @@ Use `precision` to set precision.
 </markdown>
 
 <template>
-  <n-statistic label="JNM">
+  <n-statistic label="JNM" tabular-nums>
     <n-number-animation
       ref="numberAnimationInstRef"
       :from="0.0"

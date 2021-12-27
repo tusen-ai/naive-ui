@@ -5,7 +5,7 @@
 </markdown>
 
 <template>
-  <n-statistic label="一个小目标">
+  <n-statistic label="一个小目标" tabular-nums>
     <n-number-animation
       ref="numberAnimationInstRef"
       show-separator

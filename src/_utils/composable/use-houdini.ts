@@ -8,13 +8,13 @@ export function useHoudini (): void {
     if ('registerProperty' in window?.CSS) {
       try {
         ;(CSS as any).registerProperty({
-          name: '--color-start',
+          name: '--n-color-start',
           syntax: '<color>',
           inherits: false,
           initialValue: '#0000'
         })
         ;(CSS as any).registerProperty({
-          name: '--color-end',
+          name: '--n-color-end',
           syntax: '<color>',
           inherits: false,
           initialValue: '#0000'

@@ -3,7 +3,7 @@
 </markdown>
 
 <template>
-  <n-statistic label="你一共处理了">
+  <n-statistic label="你一共处理了" tabular-nums>
     <n-number-animation ref="numberAnimationInstRef" :from="0" :to="12039" />
     <template #suffix>
       条群消息

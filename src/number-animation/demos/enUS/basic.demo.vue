@@ -3,7 +3,7 @@
 </markdown>
 
 <template>
-  <n-statistic label="Well">
+  <n-statistic label="Well" tabular-nums>
     <n-number-animation
       ref="numberAnimationInstRef"
       :from="9.96"

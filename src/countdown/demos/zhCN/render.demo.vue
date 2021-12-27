@@ -6,7 +6,7 @@
 
 <template>
   <n-space item-style="display: flex; align-items: center;">
-    <n-statistic label="大哥你玩技术，玩它有啥用啊">
+    <n-statistic label="大哥你玩技术，玩它有啥用啊" tabular-nums>
       <n-countdown
         :render="renderCountdown"
         :duration="996 * 1000"

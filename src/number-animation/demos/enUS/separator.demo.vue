@@ -5,7 +5,7 @@ The number is too large to count the digits.
 </markdown>
 
 <template>
-  <n-statistic label="A little goal">
+  <n-statistic label="A little goal" tabular-nums>
     <n-number-animation
       ref="numberAnimationInstRef"
       show-separator

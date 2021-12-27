@@ -5,7 +5,7 @@
 </markdown>
 
 <template>
-  <n-statistic label="JJJJNM">
+  <n-statistic label="JJJJNM" tabular-nums>
     <n-number-animation
       ref="numberAnimationInstRef"
       :from="0.0"
