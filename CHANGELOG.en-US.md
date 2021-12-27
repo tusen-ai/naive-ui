@@ -10,6 +10,7 @@
 - `n-input-number` supports `loading` state.
 - Add `n-countdown` component.
 - Add `n-number-animation` component, closes [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
+- `n-pagination` will give `itemCount` a approximate value derived from `pageSize` and `pageCount` if it's not set, closes [#2044](https://github.com/TuSimple/naive-ui/issues/2044).
 - `n-cascader` add `on-update:show` prop, closes [#2049](https://github.com/TuSimple/naive-ui/issues/2049).
 - `n-scrollbar` uses `n` as CSS vars prefix.
 - `n-popconfirm` uses `n` as CSS vars prefix.
