@@ -22,7 +22,7 @@ export default cB('empty', `
     transition:
       color .3s var(--n-bezier);
   `, [
-    c('& +', [
+    c('+', [
       cE('description', `
         margin-top: 8px;
       `)
