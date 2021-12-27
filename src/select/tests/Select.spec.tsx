@@ -375,4 +375,20 @@ describe('n-select', () => {
       'test-action-slot'
     )
   })
+
+  it('should work with `empty` slot', () => {
+    const wrapper = mount(NSelect, {
+      props: {
+        show: true
+      },
+      slots: {
+        empty: () => 'test-empty-slot'
+      }
+    })
+    const menuWrapper = wrapper.findComponent(NInternalSelectMenu)
+    expect(menuWrapper.find('.n-base-select-menu__empty').exists()).toBe(true)
+    expect(menuWrapper.find('.n-base-select-menu__empty').text()).toContain(
+      'test-empty-slot'
+    )
+  })
 })
