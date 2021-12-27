@@ -10,6 +10,7 @@
 - `n-input-number` 支持 `loading` 状态
 - 新增`n-countdown` 组件
 - 新增`n-number-animation` 组件，关闭 [#1465](https://github.com/TuSimple/naive-ui/issues/1465)
+- `n-cascader` 新增 `on-update:show` 属性，关闭 [#2049](https://github.com/TuSimple/naive-ui/issues/2049)
 - `n-scrollbar` 的 CSS 变量使用 `n` 作为前缀
 - `n-popconfirm` 的 CSS 变量使用 `n` 作为前缀
 - `n-gradient-text` 的 CSS 变量使用 `n` 作为前缀

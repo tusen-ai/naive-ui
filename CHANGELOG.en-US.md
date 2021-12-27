@@ -6,10 +6,11 @@
 
 - `n-empty` add `show-icon` prop.
 - `n-modal` add a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
-- Add `n-avatar-group`.
+- Add `n-avatar-group` component.
 - `n-input-number` supports `loading` state.
-- add `n-countdown` component.
-- add `n-number-animation` component, closes [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
+- Add `n-countdown` component.
+- Add `n-number-animation` component, closes [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
+- `n-cascader` add `on-update:show` prop, closes [#2049](https://github.com/TuSimple/naive-ui/issues/2049).
 - `n-scrollbar` uses `n` as CSS vars prefix.
 - `n-popconfirm` uses `n` as CSS vars prefix.
 - `n-gradient-text` uses `n` as CSS vars prefix.
