@@ -11,7 +11,8 @@ import {
   computed,
   CSSProperties,
   PropType,
-  toRef
+  toRef,
+  onBeforeUnmount
 } from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
@@ -74,7 +75,7 @@ export default defineComponent({
       style.transformOrigin = `${tx}px ${ty}px`
     }
 
-    function handleKeyup (e: KeyboardEvent): void {
+    function handleKeydown (e: KeyboardEvent): void {
       switch (e.code) {
         case 'ArrowLeft':
           props.onPrev?.()
@@ -88,12 +89,14 @@ export default defineComponent({
       }
     }
 
-    if (props.onPrev) {
-      watch(showRef, (value) => {
-        if (value) on('keyup', document, handleKeyup)
-        else off('keyup', document, handleKeyup)
-      })
-    }
+    watch(showRef, (value) => {
+      if (value) on('keydown', document, handleKeydown)
+      else off('keydown', document, handleKeydown)
+    })
+
+    onBeforeUnmount(() => {
+      off('keydown', document, handleKeydown)
+    })
 
     let startX = 0
     let startY = 0

@@ -64,6 +64,8 @@
 - 修复 `n-card` action 部分的 border-radius 样式
 - 修复 `n-code` 不设定 language 时内容重复添加，关闭 [#2034](https://github.com/TuSimple/naive-ui/issues/2034)
 - 修复 `n-tabs` `tabTextColorActiveSegment` 和 `tabTextColorHoverSegment` 主题变量不生效，关闭 [#2038](https://github.com/TuSimple/naive-ui/issues/2038)
+- 修复 `n-image` 卸载时可能未解绑键盘事件监听器
+- 修复 `n-image` 在仅有一张图片时按 esc 无法退出预览，关闭 [#2042](https://github.com/TuSimple/naive-ui/issues/2042)
 
 ## 2.23.1 (2021-12-20)
 
