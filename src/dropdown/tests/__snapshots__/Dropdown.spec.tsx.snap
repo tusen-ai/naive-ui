@@ -217,7 +217,7 @@ exports[`n-dropdown dropdown clickoutside 1`] = `
       
       <div
         class="v-binder-follower-container"
-        style="z-index: 2004;"
+        style="z-index: 2000;"
       >
         <div
           class="v-binder-follower-content"
