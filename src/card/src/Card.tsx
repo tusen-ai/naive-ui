@@ -46,6 +46,7 @@ export const cardBaseProps = {
     default: false as boolean
   },
   hoverable: Boolean,
+  role: String,
   onClose: [Function, Array] as PropType<MaybeArray<() => void>>
 } as const
 
@@ -179,6 +180,7 @@ export default defineComponent({
           }
         ]}
         style={this.cssVars as CSSProperties}
+        role={this.role}
       >
         {$slots.cover ? (
           <div class={`${mergedClsPrefix}-card-cover`} role="none">

@@ -5,8 +5,11 @@
 ### Feats
 
 - `n-icon` add `icon` prop.
+- `n-modal` add a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
 - Add `n-avatar-group`.
 - `n-input-number` supports `loading` state.
+- add `n-countdown` component.
+- add `n-number-animation` component, closes [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
 - `scrollbar` uses `n` as CSS vars prefix.
 - `base-close` uses `n` as CSS vars prefix.
 - `base-clear` uses `n` as CSS vars prefix.
@@ -59,6 +62,9 @@
 ### Fixes
 
 - Fix `n-form-item-gi` 's `validate` doesn't work, closes [#1901](https://github.com/TuSimple/naive-ui/issues/1901).
+- Fix `n-card` action's border-radius style.
+- Fix `n-code`'s content is repeatly appended if language is not set, closes [#2034](https://github.com/TuSimple/naive-ui/issues/2034).
+- Fix `n-tabs`'s `tabTextColorActiveSegment` and `tabTextColorHoverSegment` theme variables not working, closes [#2038](https://github.com/TuSimple/naive-ui/issues/2038).
 
 ## 2.23.1 (2021-12-20)
 

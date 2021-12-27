@@ -397,6 +397,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/calendar'
         },
         {
+          en: 'Countdown',
+          zh: '倒计时',
+          enSuffix: true,
+          path: '/countdown'
+        },
+        {
           en: 'Code',
           zh: '代码',
           enSuffix: true,
@@ -437,6 +443,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '日志',
           enSuffix: true,
           path: '/log'
+        },
+        {
+          en: 'Number Animation',
+          zh: '数值动画',
+          enSuffix: true,
+          path: '/number-animation'
         },
         {
           en: 'Statistic',

@@ -5,8 +5,11 @@
 ### Feats
 
 - `n-icon` 新增 `icon` 属性
+- `n-modal` 增加可访问性支持，关闭 [#1877](https://github.com/TuSimple/naive-ui/issues/1877)
 - 新增 `n-avatar-group`
 - `n-input-number` 支持 `loading` 状态
+- 新增`n-countdown` 组件
+- 新增`n-number-animation` 组件，关闭 [#1465](https://github.com/TuSimple/naive-ui/issues/1465)
 - `scrollbar` 的 CSS 变量使用 `n` 作为前缀
 - `base-close` 的 CSS 变量使用 `n` 作为前缀
 - `base-clear` 的 CSS 变量使用 `n` 作为前缀
@@ -59,6 +62,9 @@
 ### Fixes
 
 - 修复 `n-form-item-gi` 的 `validate` 不生效，关闭 [#1901](https://github.com/TuSimple/naive-ui/issues/1901)
+- 修复 `n-card` action 部分的 border-radius 样式
+- 修复 `n-code` 不设定 language 时内容重复添加，关闭 [#2034](https://github.com/TuSimple/naive-ui/issues/2034)
+- 修复 `n-tabs` `tabTextColorActiveSegment` 和 `tabTextColorHoverSegment` 主题变量不生效，关闭 [#2038](https://github.com/TuSimple/naive-ui/issues/2038)
 
 ## 2.23.1 (2021-12-20)
 
