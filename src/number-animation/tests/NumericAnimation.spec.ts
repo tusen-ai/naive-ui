@@ -7,7 +7,9 @@ describe('n-number-animation', () => {
   })
 
   it('should work with `value` prop', async () => {
-    const wrapper = mount(NNumberAnimation, { props: { value: 110 } })
+    const wrapper = mount(NNumberAnimation, {
+      props: { value: 110, from: 110 }
+    })
 
     expect(wrapper.text()).toBe('110')
   })
