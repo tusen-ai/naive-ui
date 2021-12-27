@@ -67,6 +67,7 @@
 - Fix `n-tabs`'s `tabTextColorActiveSegment` and `tabTextColorHoverSegment` theme variables not working, closes [#2038](https://github.com/TuSimple/naive-ui/issues/2038).
 - Fix `n-image` may keep keyboard handler after mounted.
 - Fix `n-image` can't exit preview after esc is pressed when there's only 1 image, closes [#2042](https://github.com/TuSimple/naive-ui/issues/2042).
+- Fix `n-drawer-content`'s content doesn't scroll by default, ref [#2003](https://github.com/TuSimple/naive-ui/issues/2003).
 
 ## 2.23.1 (2021-12-20)
 
