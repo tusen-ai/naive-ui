@@ -377,21 +377,21 @@ export default defineComponent({
         }
 
         const cssVars = {
-          '--bezier': cubicBezierEaseInOut,
-          '--line-height': lineHeight,
-          '--blank-height': blankHeight,
-          '--label-font-size': labelFontSize,
-          '--label-text-align': mergedLabelTextAlign,
-          '--label-height': labelHeight,
-          '--label-padding': labelPadding,
-          '--asterisk-color': asteriskColor,
-          '--label-text-color': labelTextColor,
-          '--feedback-padding': feedbackPadding,
-          '--feedback-font-size': feedbackFontSize,
-          '--feedback-height': feedbackHeight,
-          '--feedback-text-color': feedbackTextColor,
-          '--feedback-text-color-warning': feedbackTextColorWarning,
-          '--feedback-text-color-error': feedbackTextColorError
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-line-height': lineHeight,
+          '--n-blank-height': blankHeight,
+          '--n-label-font-size': labelFontSize,
+          '--n-label-text-align': mergedLabelTextAlign,
+          '--n-label-height': labelHeight,
+          '--n-label-padding': labelPadding,
+          '--n-asterisk-color': asteriskColor,
+          '--n-label-text-color': labelTextColor,
+          '--n-feedback-padding': feedbackPadding,
+          '--n-feedback-font-size': feedbackFontSize,
+          '--n-feedback-height': feedbackHeight,
+          '--n-feedback-text-color': feedbackTextColor,
+          '--n-feedback-text-color-warning': feedbackTextColorWarning,
+          '--n-feedback-text-color-error': feedbackTextColorError
         }
         return cssVars
       })

@@ -480,6 +480,16 @@ export const enComponentRoutes = [
     path: 'scrollbar',
     component: () =>
       import('../../src/scrollbar/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'countdown',
+    component: () =>
+      import('../../src/countdown/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'number-animation',
+    component: () =>
+      import('../../src/number-animation/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -829,6 +839,16 @@ export const zhComponentRoutes = [
     path: 'scrollbar',
     component: () =>
       import('../../src/scrollbar/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'countdown',
+    component: () =>
+      import('../../src/countdown/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'number-animation',
+    component: () =>
+      import('../../src/number-animation/demos/zhCN/index.demo-entry.md')
   }
 ]
 

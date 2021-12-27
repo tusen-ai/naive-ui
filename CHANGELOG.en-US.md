@@ -4,10 +4,26 @@
 
 ### Feats
 
+- `n-modal` add a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
 - Add `n-avatar-group`.
+- `n-input-number` supports `loading` state.
+- add `n-countdown` component.
+- add `n-number-animation` component, closes [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
+- `scrollbar` uses `n` as CSS vars prefix.
+- `base-close` uses `n` as CSS vars prefix.
+- `base-clear` uses `n` as CSS vars prefix.
+- `n-popconfirm` uses `n` as CSS vars prefix.
+- `n-gradient-text` uses `n` as CSS vars prefix.
+- `n-form` uses `n` as CSS vars prefix.
+- `n-pagination` uses `n` as CSS vars prefix.
+- `n-loading-bar` uses `n` as CSS vars prefix.
+- `n-empty` uses `n` as CSS vars prefix.
+- `n-list` uses `n` as CSS vars prefix.
+- `n-layout` uses `n` as CSS vars prefix.
 - `n-message` uses `n` as CSS vars prefix.
 - `n-mention` uses `n` as CSS vars prefix.
 - `n-menu` uses `n` as CSS vars prefix.
+- `n-popover` uses `n` as CSS vars prefix.
 - `n-transfer` uses `n` as CSS vars prefix.
 - `n-table` uses `n` as CSS vars prefix.
 - `n-statistic` uses `n` as CSS vars prefix.
@@ -22,6 +38,7 @@
 - `n-cascader` uses `n` as CSS vars prefix.
 - `n-color-picker` uses `n` as CSS vars prefix.
 - `n-checkbox` uses `n` as CSS vars prefix.
+- `n-data-table` uses `n` as CSS vars prefix.
 - `n-date-picker` uses `n` as CSS vars prefix.
 - `n-descriptions` uses `n` as CSS vars prefix.
 - `n-drawer` uses `n` as CSS vars prefix.
@@ -33,10 +50,20 @@
 - `n-collapse` uses `n` as CSS vars prefix.
 - `n-collapse-transition` uses `n` as CSS vars prefix.
 - `n-thing` uses `n` as CSS vars prefix.
+- `n-carousel` uses `n` as CSS vars prefix.
+- `n-page-header` uses `n` as CSS vars prefix.
+- `n-image` uses `n` as CSS vars prefix.
+- `n-input` uses `n` as CSS vars prefix.
+- `n-icon` uses `n` as CSS vars prefix.
+- `n-modal` uses `n` as CSS vars prefix.
+- `n-notification` uses `n` as CSS vars prefix.
 
 ### Fixes
 
 - Fix `n-form-item-gi` 's `validate` doesn't work, closes [#1901](https://github.com/TuSimple/naive-ui/issues/1901).
+- Fix `n-card` action's border-radius style.
+- Fix `n-code`'s content is repeatly appended if language is not set, closes [#2034](https://github.com/TuSimple/naive-ui/issues/2034).
+- Fix `n-tabs`'s `tabTextColorActiveSegment` and `tabTextColorHoverSegment` theme variables not working, closes [#2038](https://github.com/TuSimple/naive-ui/issues/2038).
 
 ## 2.23.1 (2021-12-20)
 

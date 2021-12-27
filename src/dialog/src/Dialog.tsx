@@ -197,6 +197,7 @@ export default defineComponent({
           bordered && `${mergedClsPrefix}-dialog--bordered`
         ]}
         style={cssVars as CSSProperties}
+        role="dialog"
       >
         {closable ? (
           <NBaseClose
@@ -255,7 +256,6 @@ export default defineComponent({
                         ghost
                         size="small"
                         onClick={handleNegativeClick}
-                        internalAutoFocus={!this.positiveText}
                       >
                         {{
                           default: () => render(this.negativeText)
@@ -271,7 +271,6 @@ export default defineComponent({
                         size="small"
                         type={type === 'default' ? 'primary' : type}
                         onClick={handlePositiveClick}
-                        internalAutoFocus
                       >
                         {{
                           default: () => render(this.positiveText)

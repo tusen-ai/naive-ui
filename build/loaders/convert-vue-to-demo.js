@@ -8,7 +8,11 @@ const {
 } = require('./convert-md-to-demo')
 
 function getPartsOfDemo (text) {
-  const template = text.match(/<template>([\s\S]*?)<\/template>/)[1]
+  // slot template
+  const firstIndex = text.indexOf('<template>')
+  let template = text.slice(firstIndex + 10)
+  const lastIndex = template.lastIndexOf('</template>')
+  template = template.slice(0, lastIndex)
   const script = text.match(/<script.*?>([\s\S]*?)<\/script>/)?.[1]?.trim()
   const style = text.match(/<style>([\s\S]*?)<\/style>/)?.[1]
   const markdownText = text
