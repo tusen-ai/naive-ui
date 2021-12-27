@@ -10,9 +10,7 @@
 - `n-input-number` supports `loading` state.
 - add `n-countdown` component.
 - add `n-number-animation` component, closes [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
-- `scrollbar` uses `n` as CSS vars prefix.
-- `base-close` uses `n` as CSS vars prefix.
-- `base-clear` uses `n` as CSS vars prefix.
+- `n-scrollbar` uses `n` as CSS vars prefix.
 - `n-popconfirm` uses `n` as CSS vars prefix.
 - `n-gradient-text` uses `n` as CSS vars prefix.
 - `n-form` uses `n` as CSS vars prefix.

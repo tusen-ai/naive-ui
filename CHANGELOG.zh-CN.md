@@ -10,9 +10,7 @@
 - `n-input-number` 支持 `loading` 状态
 - 新增`n-countdown` 组件
 - 新增`n-number-animation` 组件，关闭 [#1465](https://github.com/TuSimple/naive-ui/issues/1465)
-- `scrollbar` 的 CSS 变量使用 `n` 作为前缀
-- `base-close` 的 CSS 变量使用 `n` 作为前缀
-- `base-clear` 的 CSS 变量使用 `n` 作为前缀
+- `n-scrollbar` 的 CSS 变量使用 `n` 作为前缀
 - `n-popconfirm` 的 CSS 变量使用 `n` 作为前缀
 - `n-gradient-text` 的 CSS 变量使用 `n` 作为前缀
 - `n-form` 的 CSS 变量使用 `n` 作为前缀
