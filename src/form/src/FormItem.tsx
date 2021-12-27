@@ -460,7 +460,9 @@ export default defineComponent({
                       clsPrefix={mergedClsPrefix}
                       explains={this.explains}
                       feedback={this.feedback}
-                    />
+                    >
+                      {$slots}
+                    </Feedbacks>
                   )
                   const { hasFeedback, mergedValidationStatus } = this
                   return hasFeedback ? (

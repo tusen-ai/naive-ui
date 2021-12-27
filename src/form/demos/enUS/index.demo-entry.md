@@ -107,6 +107,7 @@ To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/
 
 ### FormItem, FormItemGi Slots
 
-| Name  | Parameters | Description   |
-| ----- | ---------- | ------------- |
-| label | `()`       | Label content |
+| Name   | Parameters | Description    |
+| ------ | ---------- | -------------- |
+| label  | `()`       | Label content  |
+| prefix | `()`       | Prefix content |

@@ -9,6 +9,11 @@ If you need to customize the timing and effect of a validation, use `validation-
     :validation-status="inputValidationStatus"
     :feedback="inputFeedback"
   >
+    <template #prefix>
+      <n-icon size="13">
+        <warning-outline />
+      </n-icon>
+    </template>
     <n-input v-model:value="inputValue" clearable />
   </n-form-item>
   <n-form-item
@@ -35,6 +40,7 @@ If you need to customize the timing and effect of a validation, use `validation-
 
 ```js
 import { defineComponent, computed, ref } from 'vue'
+import { WarningOutline } from '@vicons/ionicons5'
 
 function createStatus (value) {
   switch (value) {
@@ -63,6 +69,9 @@ function createTimeForNumber (num) {
 }
 
 export default defineComponent({
+  components: {
+    WarningOutline
+  },
   setup () {
     const inputValueRef = ref('10:29')
     const inputNumberValueRef = ref(1029)

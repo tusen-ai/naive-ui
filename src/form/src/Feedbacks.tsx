@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType } from 'vue'
+import { h, defineComponent, PropType, renderSlot } from 'vue'
 
 export default defineComponent({
   name: 'FormItemFeedback',
@@ -11,9 +11,10 @@ export default defineComponent({
     feedback: String
   },
   render () {
-    const { feedback, clsPrefix } = this
+    const { feedback, clsPrefix, $slots } = this
     return feedback ? (
       <div key={feedback} class={`${clsPrefix}-form-item-feedback__line`}>
+        {$slots.prefix ? renderSlot($slots, 'prefix') : null}
         {feedback}
       </div>
     ) : (
