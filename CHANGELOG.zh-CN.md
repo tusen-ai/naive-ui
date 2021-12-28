@@ -4,6 +4,7 @@
 
 ### Feats
 
+- 可以通过 `<meta name="naive-ui-style" />` 控制组件样式的位置
 - `n-empty` 新增 `show-icon` 属性
 - `n-modal` 增加可访问性支持，关闭 [#1877](https://github.com/TuSimple/naive-ui/issues/1877)
 - 新增 `n-avatar-group`

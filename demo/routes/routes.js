@@ -63,6 +63,10 @@ export const enDocRoutes = [
   {
     path: 'import-on-demand',
     component: () => import('../pages/docs/import-on-demand/enUS/index.md')
+  },
+  {
+    path: 'style-position',
+    component: () => import('../pages/docs/style-position/enUS/index.md')
   }
 ]
 
@@ -131,6 +135,10 @@ export const zhDocRoutes = [
   {
     path: 'import-on-demand',
     component: () => import('../pages/docs/import-on-demand/zhCN/index.md')
+  },
+  {
+    path: 'style-position',
+    component: () => import('../pages/docs/style-position/zhCN/index.md')
   }
 ]
 

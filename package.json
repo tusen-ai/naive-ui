@@ -120,12 +120,12 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
-    "@css-render/plugin-bem": "^0.15.6",
-    "@css-render/vue3-ssr": "^0.15.6",
+    "@css-render/plugin-bem": "^0.15.7",
+    "@css-render/vue3-ssr": "^0.15.7",
     "@types/lodash": "^4.14.170",
     "@types/lodash-es": "^4.17.4",
     "async-validator": "^4.0.1",
-    "css-render": "^0.15.6",
+    "css-render": "^0.15.7",
     "date-fns": "^2.27.0",
     "date-fns-tz": "^1.1.6",
     "evtd": "^0.2.3",

@@ -4,6 +4,7 @@
 
 ### Feats
 
+- `<meta name="naive-ui-style" />` can be used to controll the component style's position.
 - `n-empty` add `show-icon` prop.
 - `n-modal` add a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
 - Add `n-avatar-group` component.
