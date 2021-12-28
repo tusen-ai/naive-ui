@@ -1,9 +1,7 @@
-# Autoplay
-
-Set `autoplay`, it can autoplay。
+# 按键控制箭头
 
 ```html
-<n-carousel autoplay>
+<n-carousel show-arrow keyboard>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"

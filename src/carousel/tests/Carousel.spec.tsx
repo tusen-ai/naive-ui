@@ -12,7 +12,7 @@ describe('n-carousel', () => {
     const wrapper = mount(NCarousel, {
       slots: {
         default: () => {
-          return [...Array(3).keys()].map((i) => {
+          return [...Array(3).keys()].map(i => {
             return h('div', {}, i.toString())
           })
         }
@@ -22,7 +22,7 @@ describe('n-carousel', () => {
     await wrapper.setProps({ autoplay: true, interval: 50 })
 
     await sleep(25)
-    ;([0, 1, 2, 3, 4] as const).forEach((i) => {
+    ;([0, 1, 2, 3, 4] as const).forEach(i => {
       if (i === 1) {
         expect(
           wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
@@ -34,8 +34,8 @@ describe('n-carousel', () => {
       }
     })
 
-    await sleep(75)
-    ;([0, 1, 2, 3, 4] as const).forEach((i) => {
+    await sleep(25)
+    ;([0, 1, 2, 3, 4] as const).forEach(i => {
       if (i === 2) {
         expect(
           wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
@@ -67,7 +67,7 @@ describe('n-carousel', () => {
       },
       slots: {
         default: () => {
-          return [...Array(3).keys()].map((i) => {
+          return [...Array(3).keys()].map(i => {
             return h('div', {}, i.toString())
           })
         }
@@ -92,29 +92,12 @@ describe('n-carousel', () => {
   it('should work with `showArrow` prop', async () => {
     const wrapper = mount(NCarousel)
 
-    const dotToArrow = [
-      {
-        dot: ['top', 'bottom'],
-        arrow: ['left', 'right']
-      },
-      {
-        dot: ['left', 'right'],
-        arrow: ['top', 'bottom']
-      }
-    ]
+    await wrapper.setProps({
+      showArrow: true
+    })
 
-    for (const item of dotToArrow) {
-      for (const dotItem of item.dot) {
-        await wrapper.setProps({ showArrow: true, dotPlacement: dotItem })
-
-        expect(
-          wrapper.find(`.n-carousel__arrow--${item.arrow[0]}`).exists()
-        ).toBe(true)
-        expect(
-          wrapper.find(`.n-carousel__arrow--${item.arrow[1]}`).exists()
-        ).toBe(true)
-      }
-    }
+    expect(wrapper.find('.n-carousel__arrow--right').exists()).toBe(true)
+    expect(wrapper.find('.n-carousel__arrow--left').exists()).toBe(true)
   })
 
   it('arrow button should work', async () => {
@@ -124,11 +107,13 @@ describe('n-carousel', () => {
           return [
             h('img', {
               style: 'width: 100%; height: 240px; object-fit: cover;',
-              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
+              src:
+                'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
             }),
             h('img', {
               style: 'width: 100%; height: 240px; object-fit: cover;',
-              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
+              src:
+                'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
             })
           ]
         }
@@ -139,7 +124,7 @@ describe('n-carousel', () => {
       showArrow: true
     })
 
-    const slidesDOMArray = wrapper.find('.n-carousel__slides').findAll('div')
+    const slidesDOMArray = wrapper.findAll('.n-carousel__slide')
 
     expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
 

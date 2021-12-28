@@ -7,6 +7,12 @@ export const self = (vars: ThemeCommonVars) => {
     dotSize: '8px',
     dotColor: 'rgba(255, 255, 255, .3)',
     dotColorActive: 'rgba(255, 255, 255, 1)',
+    dotColorFocus: 'rgba(255, 255, 255, .6)',
+    dotLineSize: '10px',
+    dotLineSizeActive: '16px',
+    dotProgressSize: '6px',
+    dotProgressColor: 'rgba(235, 235, 235, 1)',
+    dotProgressColorActive: commonLight.primaryColor,
     arrowColor: 'rgba(255, 255, 255, .6)'
   }
 }

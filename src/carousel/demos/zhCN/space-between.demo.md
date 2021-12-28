@@ -1,9 +1,7 @@
-# Autoplay
-
-Set `autoplay`, it can autoplay。
+# 相邻间距
 
 ```html
-<n-carousel autoplay>
+<n-carousel :space-between="20">
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"

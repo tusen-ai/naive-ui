@@ -1,9 +1,11 @@
-# Autoplay
-
-Set `autoplay`, it can autoplay。
+# Vertical
 
 ```html
-<n-carousel autoplay>
+<n-carousel
+  direction="vertical"
+  dot-placement="right"
+  style="width: 100%;height: 240px;"
+>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"

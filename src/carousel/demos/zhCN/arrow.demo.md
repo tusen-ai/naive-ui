@@ -1,9 +1,9 @@
-# Autoplay
+# 箭头
 
-Set `autoplay`, it can autoplay。
+设定 `show-arrow` 来显示箭头。
 
 ```html
-<n-carousel autoplay>
+<n-carousel show-arrow :loop="false">
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
@@ -11,14 +11,6 @@ Set `autoplay`, it can autoplay。
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
   />
 </n-carousel>
 ```

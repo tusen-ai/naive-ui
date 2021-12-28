@@ -1,9 +1,11 @@
-# Set Dot Placement
-
-Set `dot-placement` to change the indication point position.
+# Slides Per View
 
 ```html
-<n-carousel dot-placement="left" style="height: 240px;">
+<n-carousel
+  :slides-per-view="3"
+  :space-between="20"
+  :loop="false"
+>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
@@ -26,7 +28,7 @@ Set `dot-placement` to change the indication point position.
 ```css
 .carousel-img {
   width: 100%;
-  height: 100%;
+  height: 240px;
   object-fit: cover;
 }
 ```

@@ -1,9 +1,12 @@
-# 更改指示点位置
-
-设定 `dot-placement` 来更改指示点位置。
+# 鼠标滚轮控制
 
 ```html
-<n-carousel dot-placement="left" style="height: 240px;">
+<n-carousel
+  direction="vertical"
+  dot-placement="right"
+  mousewheel
+  style="width: 100%;height: 240px;"
+>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
@@ -26,7 +29,7 @@
 ```css
 .carousel-img {
   width: 100%;
-  height: 100%;
+  height: 240px;
   object-fit: cover;
 }
 ```

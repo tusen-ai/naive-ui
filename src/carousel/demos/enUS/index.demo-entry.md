@@ -6,10 +6,20 @@ It's usually used to display good news.
 
 ```demo
 basic
+arrow
+dots
 autoplay
+vertical
+space-between
+slides-per-view
+slides-per-view-auto
+centered
+effect
+transition-name
 hover
-dot-placement
-show-arrow
+keyboard
+mousewheel
+custom-arrow-and-dots
 ```
 
 ## API
@@ -18,14 +28,45 @@ show-arrow
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| default-index | `number` | `0` | default index. |
+| active-index | `number` | `0` | current index. |
+| show-arrow | `boolean` | `false` | Whether to show arrow buttons. |
+| dot-style | `'dot' \| 'line' \| 'progress' \| 'never'` | `'dot'` | Dot style. |
+| dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Dot placement in the panel. |
+| slides-per-view | `'auto' \| number` | `1` | Number of carousels displayed on per view. |
+| space-between | `number` | `0` | The spacing between the carousels. |
+| centered-slides | `boolean` | `false` | Whether to center the current view carousel. |
+| direction | `'horizontal' \| 'vertical'` | `'horizontal'` | Carousel shows the direction. |
 | autoplay | `boolean` | `false` | Whether to scroll automatically. |
 | interval | `number` | `5000` | Auto play interval (ms). |
-| dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Dot placement in the panel. |
-| show-arrow | `boolean` | `false` | Whether to show arrow buttons. |
+| loop | `boolean` | `true` | Whether to loop. |
 | trigger | `'click' \| 'hover'` | `'click'` | The method of manual switching. |
+| effect | `'slide' \| 'fade' \| 'card'` | `'slide'` | Transition effect when switching between carousel. |
+| speed | `number` | `300` | Duration of transition effect (ms). |
+| transition-timing-function | `string` | `undefined` | Transition timing function. |
+| transition-name | `string` | `undefined` | Custom transition name. |
+| draggable | `boolean` | `true` | Whether to switch the carousel by dragging. |
+| mousewheel | `boolean` | `false` | Whether to switch the carousel through the mouse wheel, it is only valid in the vertical mode. |
+| keyboard | `boolean` | `false` | Whether to switch the carousel by keyboard, it only works on the arrow node. |
+| onChange | `(current: number, from: number) => void` | `undefined` | Callback function when the current index changes. |
 
 ### Carousel Slots
 
 | Name    | Parameters | Description       |
-| ------- | ---------- | ----------------- |
-| default | `()`       | Carousel content. |
+| ------- | ---- | ---------- |
+| default | `()` | Carousel content. |
+| arrow | `({total: number,current: number,slideTo: (index: number) => void,slidePrev: () => void,slideNext: (index) => void,isDisabledPrev: () => boolean,isDisabledNext: () => boolean,isActive: (index: number) => boolean,isPrev: : (index: number) => boolean,isNext: (index: number) => boolean,getPrevIndex: (index: number) => number,getNextIndex: (index: number) => number})` | Arrow. |
+| dots | `({total: number,current: number,slideTo: (index: number) => void,slidePrev: () => void,slideNext: (index) => void,isDisabledPrev: () => boolean,isDisabledNext: () => boolean,isActive: (index: number) => boolean,isPrev: : (index: number) => boolean,isNext: (index: number) => boolean,getPrevIndex: (index: number) => number,getNextIndex: (index: number) => number})` | Dots. |
+
+### Carousel Methods
+
+| Name | Type | Description |
+| --- | --- | --- |
+| slideTo | `(index: number) => void` | Slide to index. |
+| slidePrev | `() => void` | Slide to previous page. |
+| slideNext | `() => void` | Slide to next page. |
+| isActive | `(index: number) => boolean` | Determine whether it is the current page. |
+| isPrev | `(index: number) => boolean` | Determine whether it is the previous page. |
+| isNext | `(index: number) => boolean` | Determine whether it is the next page. |
+| getPrevIndex | `(index?: number) => number \| null` | Get previous page index. |
+| getNextIndex | `(index?: number) => number \| null` | Get next page index. |
