@@ -279,19 +279,14 @@ export default defineComponent({
         if (!length) return originLength
         const axis = props.direction === 'vertical' ? 'height' : 'width'
         const { [axis]: perViewSize } = perViewSizeRef.value
-        let total = length
-        let i = 1
-        let lastViewSize = 0
-        while (i < length) {
-          lastViewSize += slideSizes[length - i][axis]
-          if (lastViewSize > perViewSize) {
-            i--
-            break
-          }
-          i++
+        let lastViewSize = slideSizes[slideSizes.length - 1][axis]
+        const { value: translates } = slideTranlatesRef
+        let i = length
+        while (i > 1 && lastViewSize < perViewSize) {
+          i--
+          lastViewSize += translates[i] - translates[i - 1]
         }
-        if (i !== 0) total -= --i
-        return total
+        return Math.max(i + 1, 1)
       }
     })
     const displayTotalViewRef = computed(() => {
