@@ -201,4 +201,37 @@ describe('n-input-number', () => {
     expect(onUpdateValue).toHaveBeenCalledWith(-0.2)
     wrapper.unmount()
   })
+
+  it('should work with decimal value ends at 0', async () => {
+    const onUpdateValue = jest.fn()
+    const wrapper = mount(NInputNumber, {
+      attachTo: document.body,
+      props: {
+        defaultValue: 0,
+        onUpdateValue
+      }
+    })
+    wrapper.find('input').element.value = '2.'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledTimes(0)
+    wrapper.find('input').element.value = '2.0'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledTimes(0)
+    wrapper.find('input').element.value = '2.012'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledWith(2.012)
+    wrapper.find('input').element.value = '-2.0'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledTimes(1)
+    wrapper.find('input').element.value = '-2.02'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledWith(-2.02)
+    wrapper.find('input').element.value = '-2.0200'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledTimes(2)
+    wrapper.find('input').element.value = '-2.02003'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledWith(-2.02003)
+    wrapper.unmount()
+  })
 })

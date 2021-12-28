@@ -71,6 +71,7 @@
 - Fix `n-drawer-content`'s content doesn't scroll by default, ref [#2003](https://github.com/TuSimple/naive-ui/issues/2003).
 - Fix `n-popover` log warnings to console when manually set same zindex on multile instances and closes them, closes [#2050](https://github.com/TuSimple/naive-ui/issues/2050).
 - Fix `n-transfer` has no scrollbar in virtual scroll mode.
+- Fix `n-input-number` cannot input decimals end with 0.
 
 ## 2.23.1 (2021-12-20)
 
