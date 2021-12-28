@@ -137,7 +137,7 @@
     "vdirs": "^0.1.7",
     "vfonts": "^0.1.0",
     "vooks": "^0.2.12",
-    "vueuc": "^0.4.19-1"
+    "vueuc": "^0.4.19"
   },
   "sideEffects": false,
   "homepage": "https://www.naiveui.com",

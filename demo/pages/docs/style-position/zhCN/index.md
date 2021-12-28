@@ -6,11 +6,15 @@
 
 你可以在 `head` 元素中加入一个 `<meta name="naive-ui-style" />` 元素，naive-ui 会把所有的样式刚好插入这个元素的前面。
 
+同时，naive-ui 依赖 [vueuc](https://github.com/07akioni/vueuc)。如果你需要（通常应该不会），它的样式位置可以通过 `<meta name="vueuc-style" />` 控制。
+
 ```html
 <head>
   <xxx />
   <!-- naive-ui 的样式会出现在这里 -->
   <meta name="naive-ui-style" />
+  <!-- vueuc's 的样式会出现在这里 -->
+  <meta name="vueuc-style" />
   <xxx />
 </head>
 ```
