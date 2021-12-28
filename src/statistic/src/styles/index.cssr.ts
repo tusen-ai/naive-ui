@@ -19,7 +19,6 @@ export default cB('statistic', [
   cB('statistic-value', `
     margin-top: 4px;
     font-weight: var(--n-value-font-weight);
-    font-variant-numeric: tabular-nums;
   `, [
     cE('prefix', `
       margin: 0 4px 0 0;

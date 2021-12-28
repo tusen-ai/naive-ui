@@ -1,24 +1,26 @@
-import { defineComponent, computed, onMounted, watch, ref } from 'vue'
-import { round } from 'lodash'
+import { defineComponent, computed, onMounted, ref, watchEffect } from 'vue'
+import { round } from 'lodash-es'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { tween } from './utils'
 
 const numberAnimationProps = {
-  value: {
+  to: {
     type: Number,
     default: 0
   },
-  precision: Number,
-  showSeprator: Boolean,
-  valueFrom: Number,
-  start: {
+  precision: {
+    type: Number,
+    default: 0
+  },
+  showSeparator: Boolean,
+  from: { type: Number, default: 0 },
+  active: {
     type: Boolean,
     default: true
   },
-  animation: Boolean,
-  animationDuration: {
+  duration: {
     type: Number,
-    default: 3000
+    default: 2000
   }
 }
 
@@ -26,45 +28,47 @@ export type NumberAnimationProps = ExtractPublicPropTypes<
   typeof numberAnimationProps
 >
 
+export interface NumberAnimationInst {
+  play: () => void
+}
+
 export default defineComponent({
   name: 'NumberAnimation',
   props: numberAnimationProps,
   setup (props) {
-    const { animationDuration } = props
-    const valueRef = ref(props.valueFrom ?? props.value)
-    const hastweenRef = ref(false)
+    const { duration } = props
+    const displayedValueRef = ref(props.from)
+    let animating = false
     const onUpdate = (currentValue: number): void => {
-      valueRef.value = currentValue
+      displayedValueRef.value = currentValue
     }
     const onFinish = (): void => {
-      valueRef.value = props.value
+      displayedValueRef.value = props.to
+      animating = false
     }
-    const animation = (
-      from: number = props.valueFrom ?? 0,
-      to: number = Number(props.value)
+    const animate = (
+      from: number = props.from,
+      to: number = props.to
     ): void => {
+      animating = true
+      displayedValueRef.value = props.from
       if (from !== to) {
         tween({
           from,
           to,
-          duration: animationDuration,
+          duration: duration,
           onUpdate,
           onFinish
         })
-        hastweenRef.value = true
       }
     }
-    const formatValue = computed(() => {
-      let innerValue: string
-      if (props.precision) {
-        innerValue = round(valueRef.value, props.precision).toFixed(
-          props.precision
-        )
-      } else {
-        innerValue = `${valueRef.value}`
-      }
-      const splitValue = innerValue.toString().split('.')
-      const integer = props.showSeprator
+    const formattedValueRef = computed(() => {
+      const formatted: string = round(
+        displayedValueRef.value,
+        props.precision
+      ).toFixed(props.precision)
+      const splitValue = formatted.split('.')
+      const integer = props.showSeparator
         ? Number(splitValue[0]).toLocaleString('en-US')
         : splitValue[0]
       const decimal = splitValue[1]
@@ -73,25 +77,25 @@ export default defineComponent({
         decimal
       }
     })
-
+    function play (): void {
+      if (animating) return
+      animate()
+    }
     onMounted(() => {
-      if (props.animation && props.start) animation()
+      watchEffect(() => {
+        if (props.active) animate()
+      })
     })
-    watch(
-      () => props.start,
-      (value) => {
-        if (value && !hastweenRef.value) animation()
-      }
-    )
+    const exposedMethods: NumberAnimationInst = { play }
     return {
-      formatValue
+      formattedValue: formattedValueRef,
+      ...exposedMethods
     }
   },
   render () {
-    const { formatValue } = this
-    return [
-      formatValue.integer ? `${formatValue.integer}` : '',
-      formatValue.decimal ? `.${formatValue.decimal}` : ''
-    ]
+    const {
+      formattedValue: { integer, decimal }
+    } = this
+    return [integer, decimal ? '.' : null, decimal]
   }
 })

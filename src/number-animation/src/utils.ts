@@ -1,61 +1,27 @@
-const easingout = (power: number, t: number): number =>
-  1 - Math.abs(Math.pow(t - 1, power))
+const easeOut = (t: number): number => 1 - Math.pow(1 - t, 5)
+
 // Tween
 export interface TweenProps {
   from: number
   to: number
-  duration?: number
-  delay?: number
-  onStart?: (currentValue: number) => void
+  duration: number
   onUpdate: (currentValue: number) => void
   onFinish: () => void
 }
 
 export function tween (props: TweenProps): void {
-  const {
-    from,
-    to,
-    duration = 500,
-    delay = 0,
-    onStart,
-    onUpdate,
-    onFinish
-  } = props
-  const startTime = Date.now() + delay
-  const started = false
-  let finished = false
-  let timerId: number | null = null
-  let currentValue = from
-  const update = (): void => {
-    const current = Date.now()
-    let elapsedTime = current - startTime
-    elapsedTime = elapsedTime > duration ? duration : elapsedTime
-    currentValue = from + (to - from) * easingout(2, elapsedTime / duration)
-
+  const { from, to, duration, onUpdate, onFinish } = props
+  const tick = (): void => {
+    const current = performance.now()
+    const elapsedTime = Math.min(current - startTime, duration)
+    const currentValue = from + (to - from) * easeOut(elapsedTime / duration)
     if (elapsedTime === duration) {
-      if (!finished) {
-        finished = true
-        onFinish()
-      }
+      onFinish()
       return
     }
-
-    if (current < startTime || finished) return
-    if (!started) {
-      onStart?.(currentValue)
-    }
     onUpdate(currentValue)
+    requestAnimationFrame(tick)
   }
-  const start = (): void => {
-    const tick = (): void => {
-      update()
-      timerId = requestAnimationFrame(tick)
-      if (finished) {
-        cancelAnimationFrame(timerId)
-        timerId = null
-      }
-    }
-    tick()
-  }
-  start()
+  const startTime = performance.now()
+  tick()
 }

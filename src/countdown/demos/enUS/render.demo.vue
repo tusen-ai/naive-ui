@@ -6,7 +6,7 @@ Do whatever you want.
 
 <template>
   <n-space item-style="display: flex; align-items: center;">
-    <n-statistic label="I'm free to be whatever I">
+    <n-statistic label="I'm free to be whatever I" tabular-nums>
       <n-countdown
         :render="renderCountdown"
         :duration="996 * 1000"

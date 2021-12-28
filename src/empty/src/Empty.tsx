@@ -28,6 +28,10 @@ const emptyProps = {
     type: Boolean,
     default: true
   },
+  showIcon: {
+    type: Boolean,
+    default: true
+  },
   size: {
     type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
     default: 'medium'
@@ -99,13 +103,15 @@ export default defineComponent({
         class={`${mergedClsPrefix}-empty`}
         style={this.cssVars as CSSProperties}
       >
-        <div class={`${mergedClsPrefix}-empty__icon`}>
-          {renderSlot($slots, 'icon', undefined, () => [
-            <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: this.mergedRenderIcon }}
-            </NBaseIcon>
-          ])}
-        </div>
+        {this.showIcon ? (
+          <div class={`${mergedClsPrefix}-empty__icon`}>
+            {renderSlot($slots, 'icon', undefined, () => [
+              <NBaseIcon clsPrefix={mergedClsPrefix}>
+                {{ default: this.mergedRenderIcon }}
+              </NBaseIcon>
+            ])}
+          </div>
+        ) : null}
         {this.showDescription ? (
           <div class={`${mergedClsPrefix}-empty__description`}>
             {renderSlot($slots, 'default', undefined, () => [

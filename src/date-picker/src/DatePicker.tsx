@@ -728,7 +728,7 @@ export default defineComponent({
           '--n-item-color-included': itemColorIncluded,
           '--n-item-color-disabled': itemColorDisabled,
           '--n-item-color-hover': itemColorHover,
-          '--vitem-color-active': itemColorActive,
+          '--n-item-color-active': itemColorActive,
           '--n-item-text-color-disabled': itemTextColorDisabled,
           '--n-item-text-color-active': itemTextColorActive,
 
