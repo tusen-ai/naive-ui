@@ -65,6 +65,7 @@ export default c([
       ]),
       cB('drawer-body', `
         flex: 1 0 0;
+        overflow: hidden;
       `),
       cB('drawer-body-content-wrapper', `
         box-sizing: border-box;

@@ -123,6 +123,12 @@ const cascaderProps = {
   },
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  'onUpdate:show': [Function, Array] as PropType<
+  MaybeArray<(show: Boolean) => void>
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+  MaybeArray<(show: Boolean) => void>
+  >,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
   // deprecated
@@ -252,6 +258,16 @@ export default defineComponent({
           keyboardKeyRef.value = null
         }
       })
+    }
+    function doUpdateShow (value: boolean): void {
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) {
+        call(onUpdateShow, value)
+      }
+      if (_onUpdateShow) {
+        call(_onUpdateShow, value)
+      }
+      uncontrolledShowRef.value = value
     }
     function doUpdateValue (
       value: Value | null,
@@ -444,7 +460,7 @@ export default defineComponent({
     function openMenu (): void {
       if (!mergedDisabledRef.value) {
         patternRef.value = ''
-        uncontrolledShowRef.value = true
+        doUpdateShow(true)
         if (props.filterable) {
           focusSelectionInput()
         }
@@ -454,7 +470,7 @@ export default defineComponent({
       if (returnFocus) {
         focusSelection()
       }
-      uncontrolledShowRef.value = false
+      doUpdateShow(false)
       patternRef.value = ''
     }
     function handleCascaderMenuClickOutside (e: MouseEvent): void {

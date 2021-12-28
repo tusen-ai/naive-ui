@@ -181,6 +181,11 @@ export default defineComponent({
       }
       return endIndex
     })
+    const mergedItemCountRef = computed(() => {
+      const { itemCount } = props
+      if (itemCount !== undefined) return itemCount
+      return (props.pageCount || 1) * mergedPageSizeRef.value
+    })
 
     const disableTransitionOneTick = (): void => {
       void nextTick(() => {
@@ -319,6 +324,7 @@ export default defineComponent({
       pageItems: computed(() =>
         pageItems(mergedPageRef.value, mergedPageCountRef.value, props.pageSlot)
       ),
+      mergedItemCount: mergedItemCountRef,
       jumperValue: jumperValueRef,
       pageSizeOptions: pageSizeOptionsRef,
       mergedPageSize: mergedPageSizeRef,
@@ -483,7 +489,7 @@ export default defineComponent({
               pageCount: mergedPageCount,
               startIndex: this.startIndex,
               endIndex: this.endIndex,
-              itemCount: this.itemCount
+              itemCount: this.mergedItemCount
             })}
           </div>
         ) : null}
@@ -503,7 +509,7 @@ export default defineComponent({
               pageCount: mergedPageCount,
               startIndex: this.startIndex,
               endIndex: this.endIndex,
-              itemCount: this.itemCount
+              itemCount: this.mergedItemCount
             })
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
@@ -569,7 +575,7 @@ export default defineComponent({
               page: mergedPage,
               pageSize: mergedPageSize,
               pageCount: mergedPageCount,
-              itemCount: this.itemCount,
+              itemCount: this.mergedItemCount,
               startIndex: this.startIndex,
               endIndex: this.endIndex
             })
@@ -617,7 +623,7 @@ export default defineComponent({
               pageCount: mergedPageCount,
               startIndex: this.startIndex,
               endIndex: this.endIndex,
-              itemCount: this.itemCount
+              itemCount: this.mergedItemCount
             })}
           </div>
         ) : null}

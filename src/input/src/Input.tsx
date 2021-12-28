@@ -131,6 +131,7 @@ const inputProps = {
   >,
   internalDeactivateOnEnter: Boolean,
   internalForceFocus: Boolean,
+  internalLoadingBeforeSuffix: Boolean,
   /** deprecated */
   showPasswordToggle: Boolean
 }
@@ -991,7 +992,9 @@ export default defineComponent({
                     {{ default: () => renderSlot(this.$slots, 'clear') }}
                   </NBaseClear>
                 ) : null,
-                renderSlot(this.$slots, 'suffix'),
+                !this.internalLoadingBeforeSuffix
+                  ? renderSlot(this.$slots, 'suffix')
+                  : null,
                 this.loading !== undefined ? (
                   <NBaseSuffix
                     clsPrefix={mergedClsPrefix}
@@ -1001,6 +1004,9 @@ export default defineComponent({
                     style={this.cssVars as CSSProperties}
                   />
                 ) : null,
+                this.internalLoadingBeforeSuffix
+                  ? renderSlot(this.$slots, 'suffix')
+                  : null,
                 this.showCount && this.type !== 'textarea' ? (
                   <WordCount>{{ default: this.$slots.count }}</WordCount>
                 ) : null,

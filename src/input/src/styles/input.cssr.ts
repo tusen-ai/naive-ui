@@ -309,12 +309,11 @@ export default c([
     `, [
       cB('base-loading', `
         font-size: var(--n-icon-size);
-        margin-left: 4px;
+        margin: 0 2px;
         color: var(--n-loading-color);
       `),
       cB('base-clear', `
         font-size: var(--n-icon-size);
-        margin-left: 4px;
       `, [
         cE('placeholder', [
           cB('base-icon', `

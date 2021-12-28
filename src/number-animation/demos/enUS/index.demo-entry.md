@@ -1,11 +1,13 @@
 # Number Animation
 
-number can have animation.
+Tween the number.
 
 ## Demos
 
 ```demo
-basic
+basic.vue
+precision.vue
+separator.vue
 ```
 
 ## API
@@ -14,10 +16,15 @@ basic
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| value | `string` | `undefined` | Numeric animation value. | NEXT_VERSION |
-| precision | `number` | `undefined` | Keep how many decimal places. | NEXT_VERSION |
-| show-separator | `boolean` | `false` | Show separator or not. | NEXT_VERSION |
-| value-from | `number` | `0` | Start value. | NEXT_VERSION |
-| start | `boolean` | `false` | Start the animation. | NEXT_VERSION |
-| animation | `boolean` | `false` | Use animation. | NEXT_VERSION |
-| animation-duration | `number` | `3000` | Duration time of animation. | NEXT_VERSION |
+| active | `boolean` | `true` | Whether to play the animation. | NEXT_VERSION |
+| duration | `number` | `3000` | The duration of | NEXT_VERSION |
+| from | `number` | `0` | Start value of the animation | NEXT_VERSION |
+| precision | `number` | `0` | Decimal precision of the displayed value. | NEXT_VERSION |
+| show-separator | `boolean` | `false` | Whether to show separator. | NEXT_VERSION |
+| to | `number` | `undefined` | Target value. | NEXT_VERSION |
+
+### NumberAnimation Methods
+
+| Name | Parameters | Description         | Version      |
+| ---- | ---------- | ------------------- | ------------ |
+| play | `()`       | Play the animation. | NEXT_VERSION |

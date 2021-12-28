@@ -13,8 +13,8 @@ import { cB, c, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 // --n-color-popover
 export default c([
   cB('list', `
-    --merged-border-color: var(--n-border-color);
-    --merged-color: var(--n-color)
+    --n-merged-border-color: var(--n-border-color);
+    --n-merged-color: var(--n-color)
     font-size: var(--n-font-size);
     transition:
       background-color .3s var(--n-bezier),

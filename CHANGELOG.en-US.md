@@ -4,14 +4,16 @@
 
 ### Feats
 
+- `n-empty` add `show-icon` prop.
 - `n-modal` add a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
-- Add `n-avatar-group`.
+- Add `n-avatar-group` component.
 - `n-input-number` supports `loading` state.
-- add `n-countdown` component.
-- add `n-number-animation` component, closes [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
-- `scrollbar` uses `n` as CSS vars prefix.
-- `base-close` uses `n` as CSS vars prefix.
-- `base-clear` uses `n` as CSS vars prefix.
+- Add `n-countdown` component.
+- Add `n-number-animation` component, closes [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
+- `n-statistic` add `tabular-nums` prop.
+- `n-pagination` will give `itemCount` a approximate value derived from `pageSize` and `pageCount` if it's not set, closes [#2044](https://github.com/TuSimple/naive-ui/issues/2044).
+- `n-cascader` add `on-update:show` prop, closes [#2049](https://github.com/TuSimple/naive-ui/issues/2049).
+- `n-scrollbar` uses `n` as CSS vars prefix.
 - `n-popconfirm` uses `n` as CSS vars prefix.
 - `n-gradient-text` uses `n` as CSS vars prefix.
 - `n-form` uses `n` as CSS vars prefix.
@@ -64,6 +66,11 @@
 - Fix `n-card` action's border-radius style.
 - Fix `n-code`'s content is repeatly appended if language is not set, closes [#2034](https://github.com/TuSimple/naive-ui/issues/2034).
 - Fix `n-tabs`'s `tabTextColorActiveSegment` and `tabTextColorHoverSegment` theme variables not working, closes [#2038](https://github.com/TuSimple/naive-ui/issues/2038).
+- Fix `n-image` may keep keyboard handler after mounted.
+- Fix `n-image` can't exit preview after esc is pressed when there's only 1 image, closes [#2042](https://github.com/TuSimple/naive-ui/issues/2042).
+- Fix `n-drawer-content`'s content doesn't scroll by default, ref [#2003](https://github.com/TuSimple/naive-ui/issues/2003).
+- Fix `n-popover` log warnings to console when manually set same zindex on multile instances and closes them, closes [#2050](https://github.com/TuSimple/naive-ui/issues/2050).
+- Fix `n-transfer` has no scrollbar in virtual scroll mode.
 
 ## 2.23.1 (2021-12-20)
 
