@@ -102,6 +102,9 @@ describe('n-carousel', () => {
 
   it('arrow button should work', async () => {
     const wrapper = mount(NCarousel, {
+      props: {
+        loop: false
+      },
       slots: {
         default: () => {
           return [
@@ -126,20 +129,14 @@ describe('n-carousel', () => {
 
     const slidesDOMArray = wrapper.findAll('.n-carousel__slide')
 
-    expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
+    expect(slidesDOMArray[0].attributes('aria-hidden')).toBe('false')
 
     await wrapper.find('.n-carousel__arrow--right').trigger('click')
 
-    expect(slidesDOMArray[2].attributes('aria-hidden')).toBe('false')
+    expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
 
-    // FIXME: has error in node 16, not quite sure what happened
+    await wrapper.find('.n-carousel__arrow--left').trigger('click')
 
-    // await sleep(1000)
-    // void wrapper
-    //   .find('.n-carousel__arrow--left')
-    //   .trigger('click')
-    //   .then(() => {
-    //     expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
-    //   })
+    expect(slidesDOMArray[0].attributes('aria-hidden')).toBe('false')
   })
 })

@@ -1,7 +1,7 @@
 # 自定义箭头以及控制点
 
 ```html
-<n-carousel show-arrow>
+<n-carousel show-arrow autoplay>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"

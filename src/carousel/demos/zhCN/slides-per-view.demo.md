@@ -22,22 +22,6 @@
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
   />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
-  />
 </n-carousel>
 ```
 

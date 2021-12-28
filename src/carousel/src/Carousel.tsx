@@ -403,7 +403,7 @@ export default defineComponent({
       previousTranslate = getTranslate(realityIndexRef.value)
     }
     function getTranslate (index: number): number {
-      let translate = previousTranslate
+      let translate
       // Deal with auto slides pre view
       if (index >= totalViewRef.value - 1) {
         translate = getLastViewTranslate()
