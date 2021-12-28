@@ -5,7 +5,6 @@ import { NBaseLoading, NBaseIcon } from '../../_internal'
 import { ChevronRightIcon, CheckmarkIcon } from '../../_internal/icons'
 import { cascaderInjectionKey, TmNode } from './interface'
 import { happensIn } from 'seemly'
-import { render } from '../../_utils'
 
 export default defineComponent({
   name: 'NCascaderOption',
@@ -38,7 +37,8 @@ export default defineComponent({
       deleteLoadingKey,
       closeMenu,
       doCheck,
-      doUncheck
+      doUncheck,
+      renderLabelRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(cascaderInjectionKey)!
     const valueRef = computed(() => props.tmNode.key)
@@ -166,11 +166,12 @@ export default defineComponent({
       handleClick,
       handleCheckboxUpdateValue,
       mergedHandleMouseEnter: mergedHandleMouseEnterRef,
-      mergedHandleMouseMove: mergedHandleMouseMoveRef
+      mergedHandleMouseMove: mergedHandleMouseMoveRef,
+      renderLabel: renderLabelRef
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, renderLabel, tmNode: { rawNode } } = this
     return (
       <div
         class={[
@@ -202,7 +203,7 @@ export default defineComponent({
           </div>
         ) : null}
         <span class={`${mergedClsPrefix}-cascader-option__label`}>
-          {render(this.label)}
+          {renderLabel ? renderLabel(rawNode) : this.label}
         </span>
         <div class={`${mergedClsPrefix}-cascader-option__suffix`}>
           <div class={`${mergedClsPrefix}-cascader-option-icon-placeholder`}>

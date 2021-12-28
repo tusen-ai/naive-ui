@@ -14,6 +14,7 @@ action
 virtual
 check-strategy
 custom-field
+custom-render
 ```
 
 ## API

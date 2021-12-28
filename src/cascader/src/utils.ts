@@ -1,6 +1,5 @@
 import type { TmNode, CascaderOption } from './interface'
 import type { SelectBaseOption } from '../../select/src/interface'
-import { render } from '../../_utils'
 
 function getRawNodePath (tmNodes: TmNode[]): CascaderOption[]
 function getRawNodePath (tmNodes: TmNode[] | undefined): CascaderOption[] | null
@@ -72,7 +71,7 @@ function getPathLabel (
 ): string {
   const path: string[] = []
   while (node) {
-    path.push(render((node.rawNode as any)[labelField]))
+    path.push((node.rawNode as any)[labelField])
     node = node.parent
   }
   return path.reverse().join(separator)

@@ -2,7 +2,7 @@ import { CheckStrategy, TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
-import { InjectionKey, Ref, VNode } from 'vue'
+import { InjectionKey, Ref, VNodeChild } from 'vue'
 
 export type ValueAtom = string | number
 export type Value = ValueAtom | ValueAtom[]
@@ -10,7 +10,7 @@ export type Value = ValueAtom | ValueAtom[]
 export type Key = ValueAtom
 
 export interface CascaderOption {
-  label?: () => VNode | string
+  label?: string
   value?: ValueAtom
   disabled?: boolean
   children?: CascaderOption[]
@@ -87,6 +87,7 @@ export interface CascaderInjection {
   closeMenu: (returnFocus?: boolean) => void
   handleSelectMenuClickOutside: (e: MouseEvent) => void
   handleCascaderMenuClickOutside: (e: MouseEvent) => void
+  renderLabelRef: Ref<((option: CascaderOption) => VNodeChild) | undefined>
 }
 
 export interface CascaderSubmenuInstance {
