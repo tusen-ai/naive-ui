@@ -12,8 +12,9 @@ export function parse (value: string): number | null {
 }
 
 // can be parsed to number but shouldn't be applied when inputing
+// Ending with 0 and. doesn't update, if 0 parse func will remove 0
 export function isWipValue (value: string): boolean {
-  return /^(-)?\d+\.$/.test(value) || /^\.\d+$/.test(value)
+  return /^(-)?\d+.*(\.|0)$/.test(value) || /^\.\d+$/.test(value)
 }
 
 // string => boolean (expected, not implemented)

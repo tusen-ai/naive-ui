@@ -147,7 +147,7 @@ export default defineComponent({
                 onKeyup={this.onKeyup}
                 style={
                   {
-                    '--col-count': this.menuModel.length
+                    '--n-col-count': this.menuModel.length
                   } as any
                 }
               >

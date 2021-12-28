@@ -201,14 +201,14 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--font-size': fontSize,
-          '--bezier': cubicBezierEaseInOut,
-          '--text-color': textColor,
-          '--divider-color': dividerColor,
-          '--title-font-size': titleFontSize,
-          '--title-text-color': titleTextColor,
-          '--title-font-weight': titleFontWeight,
-          '--arrow-color': arrowColor
+          '--n-font-size': fontSize,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-text-color': textColor,
+          '--n-divider-color': dividerColor,
+          '--n-title-font-size': titleFontSize,
+          '--n-title-text-color': titleTextColor,
+          '--n-title-font-weight': titleFontWeight,
+          '--n-arrow-color': arrowColor
         }
       })
     }

@@ -7,11 +7,13 @@ module.exports = function (content, path, type) {
   if (type === 'vue') {
     return convertVue2Demo(content, {
       relativeUrl,
-      resourcePath: path
+      resourcePath: path,
+      isVue: true
     })
   }
   return convertMd2Demo(content, {
     relativeUrl,
-    resourcePath: path
+    resourcePath: path,
+    isVue: false
   })
 }

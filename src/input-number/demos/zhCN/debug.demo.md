@@ -7,6 +7,7 @@
   :min="-3"
   :max="5"
   @update:value="handleUpdateValue1"
+  loading
 />
 {{ JSON.stringify(value1) }}
 <n-input-number v-model:value="value2" @update:value="handleUpdateValue2" />

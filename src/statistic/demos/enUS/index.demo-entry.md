@@ -12,11 +12,11 @@ basic
 
 ### Statistic Props
 
-| Name  | Type     | Default     | Description              |
-| ----- | -------- | ----------- | ------------------------ |
-| label | `string` | `undefined` | Label of the statistics. |
-| value | `string` | `undefined` | Statistics value.        |
-| value-style | `string \| CSSProperties` | `undefined` | Statistics value styles. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| label | `string` | `undefined` | Label of the statistics. |  |
+| tabular-nums | `boolean` | `false` | Whether to make numbers with same width. | NEXT_VERSION |
+| value | `string` | `undefined` | Statistics value. |  |
 
 ### Statistic Slots
 

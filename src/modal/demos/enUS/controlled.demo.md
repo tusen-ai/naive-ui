@@ -3,9 +3,16 @@
 Modal can be controlled.
 
 ```html
-<n-button @click="handleClick"> Start Me up </n-button>
+<n-button @click="handleClick">Start Me up</n-button>
 <n-modal :show="showModal">
-  <n-card style="width: 600px;" title="Modal" :bordered="false" size="huge">
+  <n-card
+    style="width: 600px;"
+    title="Modal"
+    :bordered="false"
+    size="huge"
+    role="dialog"
+    aria-modal="true"
+  >
     Countdown {{ timeout / 1000 }}s
   </n-card>
 </n-modal>

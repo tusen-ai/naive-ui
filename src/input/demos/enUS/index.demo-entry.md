@@ -9,6 +9,7 @@ basic
 size
 round
 icon
+loading
 password
 disabled
 clearable
