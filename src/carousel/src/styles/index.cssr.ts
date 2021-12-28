@@ -23,6 +23,7 @@ export default cB('carousel', `
     width: 100%;
     height: 100%;
     transition-timing-function: var(--n-bezier);
+    transition-property: transform;
     touch-action: pan-y;
   `, [
     cE('slide', `

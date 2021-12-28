@@ -1,6 +1,6 @@
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NCarousel } from '../index'
+import { NCarousel, NCarouselItem } from '../index'
 import { sleep } from 'seemly'
 
 describe('n-carousel', () => {
@@ -132,11 +132,86 @@ describe('n-carousel', () => {
     expect(slidesDOMArray[0].attributes('aria-hidden')).toBe('false')
 
     await wrapper.find('.n-carousel__arrow--right').trigger('click')
-
     expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
 
     await wrapper.find('.n-carousel__arrow--left').trigger('click')
-
     expect(slidesDOMArray[0].attributes('aria-hidden')).toBe('false')
+  })
+
+  it('should work with `centeredSlides` prop', async () => {
+    const wrapper = mount(NCarousel, {
+      props: {
+        slidesPerView: 'auto',
+        loop: false
+      },
+      attrs: {
+        style: 'width: 240px;height: 300px;'
+      },
+      slots: {
+        default: () => {
+          return [...Array(5).keys()].map(i => {
+            return h(NCarouselItem, {
+              style: `width: ${(i + 1) * 10}%;`,
+              slots: {
+                default: () => h('div', {}, i.toString())
+              }
+            })
+          })
+        }
+      }
+    })
+
+    const wrapperRect = wrapper.element.getBoundingClientRect()
+
+    const slidesDOMArray = wrapper.findAll('.n-carousel__slide')
+    for (let i = 0; i < slidesDOMArray.length; i++) {
+      const slideDOM = slidesDOMArray[i]
+      const rect = slideDOM.element.getBoundingClientRect()
+      expect(rect.left - wrapperRect.left).toBe(
+        (wrapperRect.width - rect.width) / 2
+      )
+
+      wrapper.vm.slideNext()
+      await nextTick()
+    }
+  })
+
+  it('should work with `trigger` prop', async () => {
+    const wrapper = mount(NCarousel, {
+      props: {
+        loop: false
+      },
+      slots: {
+        default: () => {
+          return [...Array(3).keys()].map(i => {
+            return h('div', {}, i.toString())
+          })
+        }
+      }
+    })
+
+    const dotsDOMArray = wrapper.findAll('.n-carousel__dot')
+    const slidesDOMArray = wrapper.findAll('.n-carousel__slide')
+
+    const triggerEvent = {
+      click: 'click',
+      hover: 'mouseenter'
+    }
+    const triggers = Object.keys(triggerEvent) as Array<
+    keyof typeof triggerEvent
+    >
+    for (let i = 0; i < triggers.length; i++) {
+      const trigger = triggers[i]
+      const event = triggerEvent[triggers[i]]
+      await wrapper.setProps({
+        trigger
+      })
+
+      for (let j = 0; j < dotsDOMArray.length; j++) {
+        const dotsDOM = dotsDOMArray[j]
+        await dotsDOM.trigger(event)
+        expect(slidesDOMArray[j].attributes('aria-hidden')).toBe('false')
+      }
+    }
   })
 })
