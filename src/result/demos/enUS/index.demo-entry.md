@@ -26,7 +26,7 @@ size
 | --- | --- | --- | --- |
 | description | `string` | `undefined` | Description. |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | Size. |
-| status | `'info' \| 'success' \| 'error' \| 'warning' \| 404 \| '404' \| 500 \| '500' \| 400 \| '400' \| 418 \| '418'` | `'info'` | Status. |
+| status | `'info' \| 'success' \| 'warning' \| 'error' \| '404' \| '403' \| '500' \| '418'` | `'info'`| Status. |
 | title | `string` | `undefined` | Title. |
 
 ### Result Slots

@@ -26,7 +26,7 @@ size
 | --- | --- | --- | --- |
 | description | `string` | `undefined` | 描述信息 |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | 大小 |
-| status | `'info' \| 'success' \| 'error' \| 'warning' \| 404 \| '404' \| 500 \| '500' \| 400 \| '400' \| 418 \| '418'` | `'info'` | 状态 |
+| status | `'info' \| 'success' \| 'warning' \| 'error' \| '404' \| '403' \| '500' \| '418'` | `'info'`| 状态 |
 | title | `string` | `undefined` | 标题 |
 
 ### Result Slots
