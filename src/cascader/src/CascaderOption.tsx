@@ -5,6 +5,7 @@ import { NBaseLoading, NBaseIcon } from '../../_internal'
 import { ChevronRightIcon, CheckmarkIcon } from '../../_internal/icons'
 import { cascaderInjectionKey, TmNode } from './interface'
 import { happensIn } from 'seemly'
+import { render } from '../../_utils'
 
 export default defineComponent({
   name: 'NCascaderOption',
@@ -201,7 +202,7 @@ export default defineComponent({
           </div>
         ) : null}
         <span class={`${mergedClsPrefix}-cascader-option__label`}>
-          {this.label}
+          {render(this.label)}
         </span>
         <div class={`${mergedClsPrefix}-cascader-option__suffix`}>
           <div class={`${mergedClsPrefix}-cascader-option-icon-placeholder`}>

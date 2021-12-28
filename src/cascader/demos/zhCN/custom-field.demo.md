@@ -13,14 +13,14 @@
 ```
 
 ```js
-import { defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
       options: [
         {
-          whateverLabel: 'Rubber Soul',
+          whateverLabel: () => h('div', null, 'Rubber Soul'),
           whateverValue: 'Rubber Soul',
           whateverChildren: [
             {
@@ -83,7 +83,7 @@ export default defineComponent({
           ]
         },
         {
-          whateverLabel: 'Let It Be',
+          whateverLabel: () => h('div', null, 'Let It Be'),
           whateverValue: 'Let It Be Album',
           whateverChildren: [
             {

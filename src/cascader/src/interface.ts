@@ -2,7 +2,7 @@ import { CheckStrategy, TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
-import { InjectionKey, Ref } from 'vue'
+import { InjectionKey, Ref, VNode } from 'vue'
 
 export type ValueAtom = string | number
 export type Value = ValueAtom | ValueAtom[]
@@ -10,7 +10,7 @@ export type Value = ValueAtom | ValueAtom[]
 export type Key = ValueAtom
 
 export interface CascaderOption {
-  label?: string
+  label?: () => VNode | string
   value?: ValueAtom
   disabled?: boolean
   children?: CascaderOption[]
