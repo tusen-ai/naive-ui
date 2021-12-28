@@ -3,7 +3,9 @@
     class="edit-button"
     text
     :size="size"
-    @click="handleClick"
+    tag="a"
+    :href="url"
+    target="_blank"
     :depth="depth"
   >
     <template #icon>
@@ -16,7 +18,7 @@
 
 <script>
 import EditIcon from '@vicons/fluent/Compose16Regular.js'
-import { treeUrl } from './github-url'
+import { blobUrl } from './github-url'
 
 export default {
   name: 'EditOnGithubButton',
@@ -34,9 +36,7 @@ export default {
   },
   setup (props) {
     return {
-      handleClick () {
-        window.open(treeUrl + props.relativeUrl, '_blank')
-      }
+      url: blobUrl + props.relativeUrl
     }
   }
 }
