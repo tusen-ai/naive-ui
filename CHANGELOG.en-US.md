@@ -30,6 +30,7 @@
 - `n-form`, `n-form-item`'s `label-width` prop support `auto` option, closes [#2087](https://github.com/TuSimple/naive-ui/issues/2087).
 - `n-result` adds `icon` slot, closes [#2130](https://github.com/TuSimple/naive-ui/issues/2130).
 - `n-date-picker` add `value-format` prop.
+- `n-cascader` add `render-label` prop, closes [#2048](https://github.com/TuSimple/naive-ui/issues/2048).
 
 ## 2.23.2 (2021-12-29)
 

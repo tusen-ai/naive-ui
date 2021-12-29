@@ -39,6 +39,7 @@ custom-render
 | options | `CascaderOption[]` | required | Options of the cascader. |
 | placeholder | `string` | `'Please Select'` | Placeholder text. |
 | remote | `boolean` | `false` | Whether to obtain data remotely. |
+| render-label | `(option: CascaderOption, checked: boolean) => VNodeChild)` | `undefined` | 	Render function for cascader menu option label. |
 | separator | `string` | `' / '` | Selected option path value separator (used with `show-path`). |
 | show | `boolean` | `undefined` | Whether to show the menu. |
 | show-path | `boolean` | `true` | Whether to show the selected options as a path. |

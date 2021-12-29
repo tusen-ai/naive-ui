@@ -203,7 +203,7 @@ export default defineComponent({
           </div>
         ) : null}
         <span class={`${mergedClsPrefix}-cascader-option__label`}>
-          {renderLabel ? renderLabel(rawNode) : this.label}
+          {renderLabel ? renderLabel(rawNode, this.checked) : this.label}
         </span>
         <div class={`${mergedClsPrefix}-cascader-option__suffix`}>
           <div class={`${mergedClsPrefix}-cascader-option-icon-placeholder`}>

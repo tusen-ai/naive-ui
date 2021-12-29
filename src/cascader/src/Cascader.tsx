@@ -123,7 +123,7 @@ const cascaderProps = {
     default: 'children'
   },
   renderLabel: Function as PropType<
-  (option: CascaderOption) => VNodeChild
+  (option: CascaderOption, checked: boolean) => VNodeChild
   >,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,

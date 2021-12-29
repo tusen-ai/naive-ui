@@ -54,7 +54,7 @@ export default defineComponent({
       handleUpdateValue (...args) {
         console.log(...args)
       },
-      renderLabel (option) {
+      renderLabel (option, checked) {
         return option.disabled
           ? option.label
           : h(NTooltip, null, {

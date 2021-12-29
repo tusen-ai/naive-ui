@@ -87,7 +87,7 @@ export interface CascaderInjection {
   closeMenu: (returnFocus?: boolean) => void
   handleSelectMenuClickOutside: (e: MouseEvent) => void
   handleCascaderMenuClickOutside: (e: MouseEvent) => void
-  renderLabelRef: Ref<((option: CascaderOption) => VNodeChild) | undefined>
+  renderLabelRef: Ref<((option: CascaderOption, checked: boolean) => VNodeChild) | undefined>
 }
 
 export interface CascaderSubmenuInstance {

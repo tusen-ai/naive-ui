@@ -30,6 +30,7 @@
 - `n-form`，`n-form-item` 的 `label-width` 选项支持 `auto` 属性，关闭 [#2087](https://github.com/TuSimple/naive-ui/issues/2087)
 - `n-result` 新增 `icon` 插槽，关闭 [#2130](https://github.com/TuSimple/naive-ui/issues/2130)
 - `n-date-picker` 新增 `value-format` 属性
+- `n-cascader` 新增 `render-label` 属性，关闭 [#2048](https://github.com/TuSimple/naive-ui/issues/2048)
 
 ## 2.23.2 (2021-12-29)
 
