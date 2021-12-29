@@ -15,7 +15,7 @@ basic
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | label | `string` | `undefined` | Label of the statistics. |  |
-| tabular-nums | `boolean` | `false` | Whether to make numbers with same width. | NEXT_VERSION |
+| tabular-nums | `boolean` | `false` | Whether to make numbers with same width. | 2.23.2 |
 | value | `string` | `undefined` | Statistics value. |  |
 
 ### Statistic Slots

@@ -20,10 +20,7 @@ import { configProviderInjectionKey } from '../../config-provider/src/ConfigProv
 
 const emptyProps = {
   ...(useTheme.props as ThemeProps<EmptyTheme>),
-  description: {
-    type: String,
-    default: undefined
-  },
+  description: String,
   showDescription: {
     type: Boolean,
     default: true
