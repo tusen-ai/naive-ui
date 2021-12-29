@@ -1,9 +1,10 @@
 # CHANGELOG
 
-## Pending
+## 2.23.2 (2021-12-29)
 
 ### Feats
 
+- `<meta name="naive-ui-style" />` can be used to controll the component style's position.
 - `n-empty` add `show-icon` prop.
 - `n-modal` add a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
 - Add `n-avatar-group` component.
@@ -71,6 +72,7 @@
 - Fix `n-drawer-content`'s content doesn't scroll by default, ref [#2003](https://github.com/TuSimple/naive-ui/issues/2003).
 - Fix `n-popover` log warnings to console when manually set same zindex on multile instances and closes them, closes [#2050](https://github.com/TuSimple/naive-ui/issues/2050).
 - Fix `n-transfer` has no scrollbar in virtual scroll mode.
+- Fix `n-input-number` cannot input decimals end with 0.
 
 ## 2.23.1 (2021-12-20)
 

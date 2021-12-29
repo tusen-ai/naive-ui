@@ -140,6 +140,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/theme'
         },
         {
+          en: 'Style Element Position',
+          zh: '样式元素位置',
+          path: '/style-position'
+        },
+        {
           en: 'Third-Party Libraries',
           zh: '社区精选资源',
           path: '/community'
