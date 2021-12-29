@@ -305,7 +305,7 @@ export default defineComponent({
             Number.isNaN(Number(value[1]))
           ) {
             throw new Error(
-              'The value-format is timestamp, value got String, except [Number, Number]'
+              `The value-format is timestamp, value got [${value[0]}, ${value[1]}], except [timestamp, timestamp]`
             )
           } else {
             return Number(value)
@@ -330,7 +330,7 @@ export default defineComponent({
         if (props.valueFormat === 'timestamp') {
           if (Number.isNaN(Number(value))) {
             throw new Error(
-              'The value-format is timestamp, value got String, except Number'
+              `The value-format is timestamp, value got ${value}, except timestamp`
             )
           } else {
             return Number(value)
