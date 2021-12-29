@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-input-number` add `precision` prop, closes [#2068](https://github.com/TuSimple/naive-ui/issues/2068).
+
 ## 2.23.2 (2021-12-29)
 
 ### Feats

@@ -32,6 +32,7 @@ const inputNumberProps = {
   },
   min: [Number, String],
   max: [Number, String],
+  precision: Number,
   size: String as PropType<'small' | 'medium' | 'large'>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
@@ -111,6 +112,7 @@ export default defineComponent({
     )
     const displayedValueRef = ref('')
     const getMaxPrecision = (currentValue: number): number => {
+      if (props.precision !== undefined) return props.precision
       const precisions = [props.min, props.max, props.step, currentValue].map(
         (item) => {
           const fraction = String(item).split('.')[1]

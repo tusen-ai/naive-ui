@@ -17,6 +17,7 @@ validator
 show-button
 disable-keyboard
 change-timing
+precision
 debug
 ```
 
@@ -35,6 +36,7 @@ debug
 | max | `number` | `undefined` | 最大值 |
 | min | `number` | `undefined` | 最小值 |
 | placeholder | `string` | `'请输入'` | 提示信息 |
+| precision | `number` | `undefined` | 数值保留的精度值 |
 | show-button | `boolean` | `true` | 是否有按钮 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框大小 |
 | step | `number` | `1` | 每次改变步数，可以为小数 |

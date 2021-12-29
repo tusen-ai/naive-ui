@@ -17,6 +17,7 @@ validator
 show-button
 disable-keyboard
 change-timing
+precision
 ```
 
 ## API
@@ -34,6 +35,7 @@ change-timing
 | max | `number` | `undefined` | The max value. |
 | min | `number` | `undefined` | The min value. |
 | placeholder | `string` | `'Please Input'` | Placeholder. |
+| precision | `number` | `undefined` | Precision of input value. |
 | show-button | `boolean` | `true` | Whether to show increase/decrease buttons. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of input box. |
 | step | `number` | `1` | The number which the current value is increased or decreased on key or button press. It can be an integer or a decimal. |
