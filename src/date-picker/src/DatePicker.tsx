@@ -164,6 +164,7 @@ export default defineComponent({
       transformFormat(props.defaultValue) as Value | null
     )
     const controlledValueRef = computed(() => {
+      console.log(props.value)
       return transformFormat(props.value)
     })
     const mergedValueRef = useMergedState(
@@ -313,13 +314,13 @@ export default defineComponent({
         } else {
           return [
             strictParse(
-              value[0],
+              String(value[0]),
               props.valueFormat,
               new Date(),
               dateFnsOptionsRef.value
             ).getTime(),
             strictParse(
-              value[1],
+              String(value[1]),
               props.valueFormat,
               new Date(),
               dateFnsOptionsRef.value
@@ -337,7 +338,7 @@ export default defineComponent({
           }
         } else {
           return strictParse(
-            value,
+            String(value),
             props.valueFormat,
             new Date(),
             dateFnsOptionsRef.value

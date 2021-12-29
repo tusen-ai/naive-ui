@@ -18,7 +18,7 @@ export type Value = number | [number, number]
 
 export type DefaultTime = string | [string | undefined, string | undefined]
 
-export type FormatValue = string | [string, string]
+export type FormatValue = string | [string, string] | number | [number, number]
 export type Shortcuts =
   | Record<string, number | (() => number)>
   | Record<string, [number, number] | (() => [number, number])>
