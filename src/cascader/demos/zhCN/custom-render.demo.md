@@ -1,6 +1,6 @@
 # 自定义渲染
 
-使用 render-label 可以批量控制菜单的选项渲染。
+使用 `render-label` 可以批量控制 cascader 菜单的选项渲染。
 
 ```html
 <n-cascader
@@ -59,7 +59,7 @@ export default defineComponent({
           ? option.label
           : h(NTooltip, null, {
             trigger: () => h('div', null, option.label),
-            default: () => 'Rubber Soul -' + option.label
+            default: () => 'render - ' + option.label
           })
       }
     }

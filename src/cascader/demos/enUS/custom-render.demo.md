@@ -1,6 +1,6 @@
 # Customizing render
 
-The `render-label` can be used to batch render menu options.
+The `render-label` can be used to batch render cascader menu options.
 
 ```html
 <n-cascader
@@ -59,7 +59,7 @@ export default defineComponent({
           ? option.label
           : h(NTooltip, null, {
             trigger: () => h('div', null, option.label),
-            default: () => 'Rubber Soul -' + option.label
+            default: () => 'render - ' + option.label
           })
       }
     }
