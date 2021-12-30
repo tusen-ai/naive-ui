@@ -13,7 +13,7 @@
   <xxx />
   <!-- naive-ui 的样式会出现在这里 -->
   <meta name="naive-ui-style" />
-  <!-- vueuc's 的样式会出现在这里 -->
+  <!-- vueuc 的样式会出现在这里 -->
   <meta name="vueuc-style" />
   <xxx />
 </head>
