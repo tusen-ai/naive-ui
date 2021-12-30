@@ -19,7 +19,7 @@ import {
   renderSlot,
   Fragment
 } from 'vue'
-import { VFollower, FlipLevel, FollowerPlacement, FollowerInst } from 'vueuc'
+import { VFollower, FollowerPlacement, FollowerInst } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import { useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -47,7 +47,7 @@ export const popoverBodyProps = {
   x: Number,
   y: Number,
   flip: Boolean,
-  flipLevel: Number as PropType<FlipLevel>,
+  shift: Boolean,
   overlap: Boolean,
   placement: String as PropType<FollowerPlacement>,
   width: [Number, String] as PropType<number | 'trigger'>,
@@ -157,10 +157,6 @@ export default defineComponent({
         '--n-arrow-height': arrowHeight,
         '--n-arrow-offset': arrowOffset,
         '--n-arrow-offset-vertical': arrowOffsetVertical,
-        '--n-left-offset':
-          offsetContentRef.value?.getAttribute('v-leftoffet') || '0px',
-        '--n-top-offset':
-          offsetContentRef.value?.getAttribute('v-topoffet') || '0px',
         '--n-padding': padding,
         '--n-space': space,
         '--n-space-arrow': spaceArrow
@@ -308,7 +304,7 @@ export default defineComponent({
         x: this.x,
         y: this.y,
         flip: this.flip,
-        flipLevel: this.flipLevel,
+        shift: this.shift,
         placement: this.placement,
         containerClass: this.namespace,
         ref: 'followerRef',

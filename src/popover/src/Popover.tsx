@@ -14,13 +14,7 @@ import {
   cloneVNode,
   watchEffect
 } from 'vue'
-import {
-  VBinder,
-  VTarget,
-  FollowerPlacement,
-  BinderInst,
-  FlipLevel
-} from 'vueuc'
+import { VBinder, VTarget, FollowerPlacement, BinderInst } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
 import {
   call,
@@ -144,10 +138,7 @@ export const popoverBaseProps = {
     type: Boolean,
     default: true
   },
-  flipLevel: {
-    type: Number as PropType<FlipLevel>,
-    default: 1
-  },
+  shift: Boolean,
   animated: {
     type: Boolean,
     default: true
