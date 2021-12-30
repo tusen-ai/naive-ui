@@ -42,7 +42,7 @@ zindex-debug.vue
 | overlap | `boolean` | `false` | 覆盖触发元素 |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | popover 的弹出位置 |
 | raw | `boolean` | `false` | 是否不添加默认样式 |
-| show-arrow | `boolean` | `true` | 是否显示箭头 |
+| show-arrow | `boolean` | `true` | 是否显示箭头, popselect 组件不支持 |
 | show | `boolean` | `undefined` | 是否展示 popover |
 | title | `string` | `undefined` | popover 的 title 信息 |
 | to | `string \| HTMLElement \| false` | `'body'` | 弹出内容的卸载位置，false 会待在原地 |
