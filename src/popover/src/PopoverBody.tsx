@@ -47,6 +47,7 @@ export const popoverBodyProps = {
   x: Number,
   y: Number,
   flip: Boolean,
+  shift: Boolean,
   overlap: Boolean,
   placement: String as PropType<FollowerPlacement>,
   width: [Number, String] as PropType<number | 'trigger'>,
@@ -142,6 +143,7 @@ export default defineComponent({
           arrowOffsetVertical
         }
       } = themeRef.value
+
       return {
         '--n-box-shadow': boxShadow,
         '--n-bezier': cubicBezierEaseInOut,
@@ -177,7 +179,6 @@ export default defineComponent({
       }
     })
     function syncPosition (): void {
-      // eslint-disable-next-line no-unused-expressions
       followerRef.value?.syncPosition()
     }
     function handleMouseEnter (e: MouseEvent): void {
@@ -303,6 +304,7 @@ export default defineComponent({
         x: this.x,
         y: this.y,
         flip: this.flip,
+        shift: this.shift,
         placement: this.placement,
         containerClass: this.namespace,
         ref: 'followerRef',

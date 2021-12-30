@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-popover` add `shift` prop.
+
 ## 2.23.2 (2021-12-29)
 
 ### Feats

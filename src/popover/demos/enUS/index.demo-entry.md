@@ -8,6 +8,7 @@ If you just want to display some basic text message, see [Tooltip](tooltip) inst
 
 ```demo
 basic
+flip
 trigger
 delay
 no-arrow
@@ -36,7 +37,8 @@ header
 | overlap | `boolean` | `false` | Overlap trigger element. |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | Popover placement. |
 | raw | `boolean` | `false` | Whether to use no default styles. |
-| show-arrow | `boolean` | `true` | Whether to show arrow if set, popselect component does not support. |
+| shift | `boolean` | `false` | Whether to shift the popover when there is no space for current placement. |
+| show-arrow | `boolean` | `true` | Whether to show arrow if set. |
 | show | `boolean` | `undefined` | Whether to show popover. |
 | title | `string` | `undefined` | Popover title. |
 | to | `string \| HTMLElement \| false` | `'body'` | Container node of the popover content. `false` will keep it at trigger container. |
