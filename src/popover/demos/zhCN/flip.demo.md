@@ -1,6 +1,6 @@
 # 弹出信息的位置调整
 
-使用 `flip` 决定是否调整，使用`shift`决定是否偏移
+使用 `flip` 决定是否调整，使用 `shift` 决定是否偏移
 
 ```html
 <n-popover trigger="click" placement="bottom" shift>
