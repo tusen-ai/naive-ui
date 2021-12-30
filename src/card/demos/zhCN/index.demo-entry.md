@@ -7,7 +7,7 @@
 ```demo
 basic
 size
-cover
+cover.vue
 hoverable
 slots
 border

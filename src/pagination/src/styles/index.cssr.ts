@@ -1,62 +1,62 @@
 import { cB, c, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
-// --item-font-size
-// --select-width
-// --input-width
-// --input-margin
-// --item-size
-// --item-text-color
-// --item-text-color-disabled
-// --item-text-color-hover
-// --item-text-color-active
-// --item-color
-// --item-color-hover
-// --item-color-disabled
-// --item-color-active
-// --item-color-active-hover
-// --item-border
-// --item-border-hover
-// --item-border-disabled
-// --item-border-active
-// --item-padding
-// --item-font-size
-// --item-border-radius
-// --bezier
-// --jumper-font-size
-// --jumper-text-color
-// --jumper-text-color-disabled
-// --item-margin
-// --button-icon-size
-// --button-icon-color
-// --button-icon-color-hover
-// --button-icon-color-pressed
-// --prefix-margin
-// --suffix-margin
-// --button-color
-// --button-color-hover
-// --button-color-pressed
+// --n-item-font-size
+// --n-select-width
+// --n-input-width
+// --n-input-margin
+// --n-item-size
+// --n-item-text-color
+// --n-item-text-color-disabled
+// --n-item-text-color-hover
+// --n-item-text-color-active
+// --n-item-color
+// --n-item-color-hover
+// --n-item-color-disabled
+// --n-item-color-active
+// --n-item-color-active-hover
+// --n-item-border
+// --n-item-border-hover
+// --n-item-border-disabled
+// --n-item-border-active
+// --n-item-padding
+// --n-item-font-size
+// --n-item-border-radius
+// --n-bezier
+// --n-jumper-font-size
+// --n-jumper-text-color
+// --n-jumper-text-color-disabled
+// --n-item-margin
+// --n-button-icon-size
+// --n-button-icon-color
+// --n-button-icon-color-hover
+// --n-button-icon-color-pressed
+// --n-prefix-margin
+// --n-suffix-margin
+// --n-button-color
+// --n-button-color-hover
+// --n-button-color-pressed
 export default cB('pagination', `
   display: flex;
   vertical-align: middle;
-  font-size: var(--item-font-size);
+  font-size: var(--n-item-font-size);
   flex-wrap: nowrap;
 `, [
   cB('pagination-prefix', `
     display: flex;
     align-items: center;
-    margin: var(--prefix-margin);
+    margin: var(--n-prefix-margin);
   `),
   cB('pagination-suffix', `
     display: flex;
     align-items: center;
-    margin: var(--suffix-margin);
+    margin: var(--n-suffix-margin);
   `),
   c('> *:not(:first-child)', {
-    margin: 'var(--item-margin)'
+    margin: 'var(--n-item-margin)'
   }),
   cB('select', {
-    width: 'var(--select-width)'
+    width: 'var(--n-select-width)'
   }),
   c('&.transition-disabled', [
     cB('pagination-item', {
@@ -66,14 +66,14 @@ export default cB('pagination', `
   cB('pagination-quick-jumper', `
     white-space: nowrap;
     display: flex;
-    color: var(--jumper-text-color);
-    transition: color .3s var(--bezier);
+    color: var(--n-jumper-text-color);
+    transition: color .3s var(--n-bezier);
     align-items: center;
-    font-size: var(--jumter-font-size);
+    font-size: var(--n-jumter-font-size);
   `, [
     cB('input', `
-      margin: var(--input-margin);
-      width: var(--input-width);
+      margin: var(--n-input-margin);
+      width: var(--n-input-width);
     `)
   ]),
   cB('pagination-item', `
@@ -84,69 +84,69 @@ export default cB('pagination', `
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    min-width: var(--item-size);
-    height: var(--item-size);
-    padding: var(--item-padding);
-    background-color: var(--item-color);
-    color: var(--item-text-color);
-    border-radius: var(--item-border-radius);
-    border: var(--item-border);
-    fill: var(--button-icon-color);
+    min-width: var(--n-item-size);
+    height: var(--n-item-size);
+    padding: var(--n-item-padding);
+    background-color: var(--n-item-color);
+    color: var(--n-item-text-color);
+    border-radius: var(--n-item-border-radius);
+    border: var(--n-item-border);
+    fill: var(--n-button-icon-color);
     transition:
-      color .3s var(--bezier),
-      border-color .3s var(--bezier),
-      background-color .3s var(--bezier),
-      fill .3s var(--bezier);
+      color .3s var(--n-bezier),
+      border-color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier),
+      fill .3s var(--n-bezier);
   `, [
     cM('button', `
-      background: var(--button-color);
-      color: var(--button-icon-color);
-      border: var(--button-border);
+      background: var(--n-button-color);
+      color: var(--n-button-icon-color);
+      border: var(--n-button-border);
     `, [
       cB('base-icon', `
-        font-size: var(--button-icon-size);
+        font-size: var(--n-button-icon-size);
       `)
     ]),
     cNotM('disabled', [
       c('&:hover', {
-        background: 'var(--item-color-hover)',
-        color: 'var(--item-text-color-hover)',
-        border: 'var(--item-border-hover)'
+        background: 'var(--n-item-color-hover)',
+        color: 'var(--n-item-text-color-hover)',
+        border: 'var(--n-item-border-hover)'
       }, [
         cM('button', {
-          background: 'var(--button-color-hover)',
-          border: 'var(--button-border-hover)',
-          color: 'var(--button-icon-color-hover)'
+          background: 'var(--n-button-color-hover)',
+          border: 'var(--n-button-border-hover)',
+          color: 'var(--n-button-icon-color-hover)'
         })
       ]),
       c('&:active', {
-        background: 'var(--item-color-pressed)',
-        color: 'var(--item-text-color-pressed)',
-        border: 'var(--item-border-pressed)'
+        background: 'var(--n-item-color-pressed)',
+        color: 'var(--n-item-text-color-pressed)',
+        border: 'var(--n-item-border-pressed)'
       }, [
         cM('button', {
-          background: 'var(--button-color-pressed)',
-          border: 'var(--button-border-pressed)',
-          color: 'var(--button-icon-color-pressed)'
+          background: 'var(--n-button-color-pressed)',
+          border: 'var(--n-button-border-pressed)',
+          color: 'var(--n-button-icon-color-pressed)'
         })
       ]),
       cM('active', {
-        background: 'var(--item-color-active)',
-        color: 'var(--item-text-color-active)',
-        border: 'var(--item-border-active)'
+        background: 'var(--n-item-color-active)',
+        color: 'var(--n-item-text-color-active)',
+        border: 'var(--n-item-border-active)'
       }, [
         c('&:hover', {
-          background: 'var(--item-color-active-hover)'
+          background: 'var(--n-item-color-active-hover)'
         })
       ])
     ]),
     cM('disabled', `
       cursor: not-allowed;
-      color: var(--item-text-color-disabled);
+      color: var(--n-item-text-color-disabled);
     `, [
       cM('active, button', {
-        backgroundColor: 'var(--item-color-disabled)',
-        border: 'var(--item-border-disabled)'
+        backgroundColor: 'var(--n-item-color-disabled)',
+        border: 'var(--n-item-border-disabled)'
       })
     ])
   ]),
@@ -154,7 +154,7 @@ export default cB('pagination', `
     cursor: 'not-allowed'
   }, [
     cB('pagination-quick-jumper', {
-      color: 'var(--jumper-text-color-disabled)'
+      color: 'var(--n-jumper-text-color-disabled)'
     })
   ])
 ])

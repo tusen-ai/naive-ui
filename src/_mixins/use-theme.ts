@@ -14,6 +14,7 @@ import { CNode } from 'css-render'
 import type { GlobalTheme } from '../config-provider'
 import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
 import type { ThemeCommonVars } from '../_styles/common'
+import { cssrAnchorMetaName } from './common'
 
 export interface Theme<N, T = {}, R = any> {
   name: N
@@ -101,11 +102,13 @@ function useTheme<N, T, R> (
         props: {
           bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
         },
+        anchorMetaName: cssrAnchorMetaName,
         ssr: ssrAdapter
       })
       globalStyle.mount({
         id: 'naive-ui/global',
         head: true,
+        anchorMetaName: cssrAnchorMetaName,
         ssr: ssrAdapter
       })
     }

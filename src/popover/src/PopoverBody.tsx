@@ -143,21 +143,21 @@ export default defineComponent({
         }
       } = themeRef.value
       return {
-        '--box-shadow': boxShadow,
-        '--bezier': cubicBezierEaseInOut,
-        '--bezier-ease-in': cubicBezierEaseIn,
-        '--bezier-ease-out': cubicBezierEaseOut,
-        '--font-size': fontSize,
-        '--text-color': textColor,
-        '--color': color,
-        '--divider-color': dividerColor,
-        '--border-radius': borderRadius,
-        '--arrow-height': arrowHeight,
-        '--arrow-offset': arrowOffset,
-        '--arrow-offset-vertical': arrowOffsetVertical,
-        '--padding': padding,
-        '--space': space,
-        '--space-arrow': spaceArrow
+        '--n-box-shadow': boxShadow,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-bezier-ease-in': cubicBezierEaseIn,
+        '--n-bezier-ease-out': cubicBezierEaseOut,
+        '--n-font-size': fontSize,
+        '--n-text-color': textColor,
+        '--n-color': color,
+        '--n-divider-color': dividerColor,
+        '--n-border-radius': borderRadius,
+        '--n-arrow-height': arrowHeight,
+        '--n-arrow-offset': arrowOffset,
+        '--n-arrow-offset-vertical': arrowOffsetVertical,
+        '--n-padding': padding,
+        '--n-space': space,
+        '--n-space-arrow': spaceArrow
       }
     })
     NPopover.setBodyInstance({

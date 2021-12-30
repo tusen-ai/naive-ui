@@ -140,6 +140,11 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/theme'
         },
         {
+          en: 'Style Element Position',
+          zh: '样式元素位置',
+          path: '/style-position'
+        },
+        {
           en: 'Third-Party Libraries',
           zh: '社区精选资源',
           path: '/community'
@@ -397,6 +402,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/calendar'
         },
         {
+          en: 'Countdown',
+          zh: '倒计时',
+          enSuffix: true,
+          path: '/countdown'
+        },
+        {
           en: 'Code',
           zh: '代码',
           enSuffix: true,
@@ -437,6 +448,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '日志',
           enSuffix: true,
           path: '/log'
+        },
+        {
+          en: 'Number Animation',
+          zh: '数值动画',
+          enSuffix: true,
+          path: '/number-animation'
         },
         {
           en: 'Statistic',

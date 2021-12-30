@@ -9,6 +9,7 @@ basic
 disabled
 event
 icon
+loading
 min-max
 size
 step
@@ -30,6 +31,7 @@ debug
 | default-value | `number \| null` | `null` | 非受控模式下的默认值 |
 | disabled | `boolean` | `false` | 是否禁用 |
 | keyboard | `{ ArrowUp?: boolean, ArrowDown?: boolean }` | `{}` | 控制允许的键盘操作，属性值设为 `false` 的时候会禁用对应的键盘操作 |
+| loading | `boolean` | `undefined` | 是否展示加载图标，设为非 `undefined` 会占据空间 |
 | max | `number` | `undefined` | 最大值 |
 | min | `number` | `undefined` | 最小值 |
 | placeholder | `string` | `'请输入'` | 提示信息 |

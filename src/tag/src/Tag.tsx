@@ -169,6 +169,7 @@ export default defineComponent({
           '--n-close-color': closeColor,
           '--n-close-color-hover': closeColorHover,
           '--n-close-color-pressed': closeColorPressed,
+          '--n-close-color-disabled': closeColor,
           '--n-close-margin': closeMargin,
           '--n-close-margin-rtl': closeMarginRtl,
           '--n-close-size': closeSize,

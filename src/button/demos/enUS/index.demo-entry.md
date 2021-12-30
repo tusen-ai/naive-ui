@@ -22,6 +22,7 @@ loading
 color
 group
 icon-button
+popover
 ```
 
 ## API

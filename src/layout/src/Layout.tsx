@@ -106,9 +106,9 @@ export function createLayoutComponent (isContent: boolean) {
             self
           } = themeRef.value
           return {
-            '--bezier': cubicBezierEaseInOut,
-            '--color': props.embedded ? self.colorEmbedded : self.color,
-            '--text-color': self.textColor
+            '--n-bezier': cubicBezierEaseInOut,
+            '--n-color': props.embedded ? self.colorEmbedded : self.color,
+            '--n-text-color': self.textColor
           }
         }),
         ...exposedMethods

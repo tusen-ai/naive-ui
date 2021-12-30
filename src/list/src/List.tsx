@@ -70,16 +70,16 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--font-size': fontSize,
-          '--bezier': cubicBezierEaseInOut,
-          '--text-color': textColor,
-          '--color': color,
-          '--border-radius': borderRadius,
-          '--border-color': borderColor,
-          '--border-color-modal': borderColorModal,
-          '--border-color-popover': borderColorPopover,
-          '--color-modal': colorModal,
-          '--color-popover': colorPopover
+          '--n-font-size': fontSize,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-text-color': textColor,
+          '--n-color': color,
+          '--n-border-radius': borderRadius,
+          '--n-border-color': borderColor,
+          '--n-border-color-modal': borderColorModal,
+          '--n-border-color-popover': borderColorPopover,
+          '--n-color-modal': colorModal,
+          '--n-color-popover': colorPopover
         }
       })
     }

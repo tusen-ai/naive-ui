@@ -1,9 +1,9 @@
-# Use Preset Card
+# Use preset card
 
 Modal has some presets, which means you can use props & slots of the preset after set it.
 
 ```html
-<n-button @click="showModal = true"> Start Me up </n-button>
+<n-button @click="showModal = true">Start Me up</n-button>
 <n-modal
   class="custom-card"
   v-model:show="showModal"

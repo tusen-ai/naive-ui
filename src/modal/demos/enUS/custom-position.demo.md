@@ -1,14 +1,18 @@
-# Custom Position
+# Customizing position
 
 Use fixed position to set the position of the modal.
 
 ```html
-<n-button @click="showModal = true"> Start Me up </n-button>
-<n-modal
-  v-model:show="showModal"
-  style="width: 600px; position: fixed; right: 100px; bottom: 100px;"
->
-  <n-card title="Modal" :bordered="false" size="huge">
+<n-button @click="showModal = true">Start Me up</n-button>
+<n-modal v-model:show="showModal">
+  <n-card
+    title="Modal"
+    :bordered="false"
+    size="huge"
+    role="dialog"
+    aria-modal="true"
+    style="width: 600px; position: fixed; right: 100px; bottom: 100px;"
+  >
     <template #header-extra> Oops! </template>
     Content
     <template #footer> Footer </template>

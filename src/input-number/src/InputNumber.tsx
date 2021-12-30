@@ -16,6 +16,10 @@ import style from './styles/input-number.cssr'
 
 const inputNumberProps = {
   ...(useTheme.props as ThemeProps<InputNumberTheme>),
+  loading: {
+    type: Boolean,
+    default: undefined
+  },
   placeholder: String,
   defaultValue: {
     type: Number as PropType<number | null>,
@@ -411,6 +415,7 @@ export default defineComponent({
         <NInput
           ref="inputInstRef"
           bordered={this.mergedBordered}
+          loading={this.loading}
           value={this.displayedValue}
           onUpdateValue={this.handleUpdateDisplayedValue}
           theme={this.mergedTheme.peers.Input}
@@ -429,6 +434,7 @@ export default defineComponent({
           onMousedown={this.handleMouseDown}
           onClear={this.handleClear}
           clearable={this.clearable}
+          internalLoadingBeforeSuffix
         >
           {{
             _: 2, // input number has dynamic slots
