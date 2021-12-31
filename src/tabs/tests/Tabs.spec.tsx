@@ -80,6 +80,27 @@ describe('n-tabs', () => {
     )
   })
 
+  it('should work with `closable` prop', async () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        type: 'card',
+        defaultValue: '1'
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ]
+      }
+    })
+    expect(wrapper.find('.n-base-close').exists()).toBe(false)
+
+    await wrapper.setProps({ closable: true })
+    expect(wrapper.find('.n-base-close').exists()).toBe(true)
+  })
+
   it('should work with `size` prop', async () => {
     const wrapper = mount(NTabs)
 
