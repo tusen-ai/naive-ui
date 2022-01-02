@@ -4,7 +4,8 @@
 
 ### Feats
 
-`n-popover` 新增 `shift` 属性
+- `n-modal` 新增 `z-index` 属性，关闭 [#2088](https://github.com/TuSimple/naive-ui/issues/2088)
+- `n-drawer` 新增 `z-index` 属性
 
 ## 2.23.2 (2021-12-29)
 

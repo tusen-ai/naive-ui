@@ -4,7 +4,8 @@
 
 ### Feats
 
-- `n-popover` add `shift` prop.
+- `n-modal` add `z-index` prop, closes [#2088](https://github.com/TuSimple/naive-ui/issues/2088).
+- `n-drawer` add `z-index` closes.
 
 ## 2.23.2 (2021-12-29)
 
