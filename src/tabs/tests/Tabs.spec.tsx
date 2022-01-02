@@ -280,4 +280,30 @@ describe('n-tabs', () => {
 
     expect(wrapper.find('.n-tabs-tab').attributes('style')).toBe('color: red;')
   })
+
+  it('should work with `type` prop', () => {
+    ;(['bar', 'line', 'card', 'segment'] as const).forEach((type) => {
+      const wrapper = mount(NTabs, {
+        props: {
+          type
+        },
+        slots: {
+          default: () =>
+            h(
+              NTabPane,
+              {
+                tab: 'Oasis',
+                name: 'oasis'
+              },
+              'Wonderwall'
+            )
+        }
+      })
+
+      expect(wrapper.find('.n-tabs').classes()).toContain(
+        `n-tabs--${type}-type`
+      )
+      wrapper.unmount()
+    })
+  })
 })
