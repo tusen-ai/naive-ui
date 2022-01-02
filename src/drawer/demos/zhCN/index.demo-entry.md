@@ -10,6 +10,7 @@ multiple
 target
 closable
 slot
+a11y-debug.vue
 custom-style-debug
 dark-1-debug
 dark-2-debug

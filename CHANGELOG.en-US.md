@@ -4,23 +4,24 @@
 
 ### Feats
 
-- `n-modal` add `z-index` prop, closes [#2088](https://github.com/TuSimple/naive-ui/issues/2088).
-- `n-drawer` add `z-index` closes.
+- `n-modal` adds `z-index` prop, closes [#2088](https://github.com/TuSimple/naive-ui/issues/2088).
+- `n-drawer` adds `z-index` closes.
+- `n-drawer` adds wai-aria support.
 
 ## 2.23.2 (2021-12-29)
 
 ### Feats
 
 - `<meta name="naive-ui-style" />` can be used to controll the component style's position.
-- `n-empty` add `show-icon` prop.
-- `n-modal` add a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
+- `n-empty` adds `show-icon` prop.
+- `n-modal` adds a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
 - Add `n-avatar-group` component.
 - `n-input-number` supports `loading` state.
 - Add `n-countdown` component.
 - Add `n-number-animation` component, closes [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
-- `n-statistic` add `tabular-nums` prop.
+- `n-statistic` adds `tabular-nums` prop.
 - `n-pagination` will give `itemCount` a approximate value derived from `pageSize` and `pageCount` if it's not set, closes [#2044](https://github.com/TuSimple/naive-ui/issues/2044).
-- `n-cascader` add `on-update:show` prop, closes [#2049](https://github.com/TuSimple/naive-ui/issues/2049).
+- `n-cascader` adds `on-update:show` prop, closes [#2049](https://github.com/TuSimple/naive-ui/issues/2049).
 - `n-scrollbar` uses `n` as CSS vars prefix.
 - `n-popconfirm` uses `n` as CSS vars prefix.
 - `n-gradient-text` uses `n` as CSS vars prefix.

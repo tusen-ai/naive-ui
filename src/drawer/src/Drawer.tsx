@@ -9,7 +9,7 @@ import {
   Transition,
   watchEffect
 } from 'vue'
-import { VLazyTeleport } from 'vueuc'
+import { VLazyTeleport, VFocusTrap } from 'vueuc'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
 import { useTheme, useConfig } from '../../_mixins'
@@ -145,6 +145,11 @@ export default defineComponent({
       }
       if (onMaskClick) onMaskClick(e)
     }
+    function handleKeydown (e: KeyboardEvent): void {
+      if (e.code === 'Escape') {
+        doUpdateShow(false)
+      }
+    }
     function doUpdateShow (show: boolean): void {
       const { onHide, onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
       if (onUpdateShow) call(onUpdateShow, show)
@@ -163,6 +168,7 @@ export default defineComponent({
       namespace: namespaceRef,
       mergedBodyStyle: mergedBodyStyleRef,
       handleMaskClick,
+      handleKeydown,
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
@@ -225,6 +231,7 @@ export default defineComponent({
               <div
                 class={[`${mergedClsPrefix}-drawer-container`, this.namespace]}
                 style={this.cssVars as CSSProperties}
+                onKeydown={this.handleKeydown}
               >
                 <Transition name="fade-in-transition" appear={this.isMounted}>
                   {{
@@ -237,19 +244,25 @@ export default defineComponent({
                       ) : null
                   }}
                 </Transition>
-                <NDrawerBodyWrapper
-                  {...this.$attrs}
-                  class={[this.drawerClass, this.$attrs.class]}
-                  style={[this.mergedBodyStyle, this.$attrs.style]}
-                  contentStyle={this.contentStyle}
-                  placement={this.placement}
-                  scrollbarProps={this.scrollbarProps}
-                  show={this.show}
-                  displayDirective={this.displayDirective}
-                  nativeScrollbar={this.nativeScrollbar}
-                >
-                  {this.$slots}
-                </NDrawerBodyWrapper>
+                <VFocusTrap active={this.show} focusFirstDescendant>
+                  {{
+                    default: () => (
+                      <NDrawerBodyWrapper
+                        {...this.$attrs}
+                        class={[this.drawerClass, this.$attrs.class]}
+                        style={[this.mergedBodyStyle, this.$attrs.style]}
+                        contentStyle={this.contentStyle}
+                        placement={this.placement}
+                        scrollbarProps={this.scrollbarProps}
+                        show={this.show}
+                        displayDirective={this.displayDirective}
+                        nativeScrollbar={this.nativeScrollbar}
+                      >
+                        {this.$slots}
+                      </NDrawerBodyWrapper>
+                    )
+                  }}
+                </VFocusTrap>
               </div>,
               [[zindexable, { zIndex: this.zIndex, enabled: this.show }]]
             )
