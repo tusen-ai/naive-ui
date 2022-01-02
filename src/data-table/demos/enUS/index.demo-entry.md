@@ -70,8 +70,8 @@ striped
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |
-| single-column | `boolean` | `false` | Whether the column content is a whole, when the parameter is `true`, there is no `border-bottom`. |
-| single-line | `boolean` | `true` | Whether the line content is a whole, when the parameter value is `true`, there is no `border-right`. |
+| single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |
+| single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |
 | striped | `boolean` | `false` | Whether to show zebra stripes on rows. |
 | summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |
@@ -123,9 +123,7 @@ striped
 #### DataTableCreateSummary Type
 
 ```ts
-type DataTableCreateSummary = (
-  pageData: RowData[]
-) =>
+type DataTableCreateSummary = (pageData: RowData[]) =>
   | Array<{
       [columnKey: string]: {
         value: string | number
@@ -146,8 +144,8 @@ type DataTableCreateSummary = (
 
 ```ts
 type SortState = {
-  columnKey: string | number,
-  sorter: 'default' | function | boolean,
+  columnKey: string | number
+  sorter: 'default' | function | boolean
   order: 'ascend' | 'descend' | false
 }
 ```
