@@ -9,7 +9,7 @@ import {
   Transition,
   watchEffect
 } from 'vue'
-import { VLazyTeleport, VFocusTrap } from 'vueuc'
+import { VLazyTeleport } from 'vueuc'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
 import { useTheme, useConfig } from '../../_mixins'
@@ -244,25 +244,19 @@ export default defineComponent({
                       ) : null
                   }}
                 </Transition>
-                <VFocusTrap active={this.show} focusFirstDescendant>
-                  {{
-                    default: () => (
-                      <NDrawerBodyWrapper
-                        {...this.$attrs}
-                        class={[this.drawerClass, this.$attrs.class]}
-                        style={[this.mergedBodyStyle, this.$attrs.style]}
-                        contentStyle={this.contentStyle}
-                        placement={this.placement}
-                        scrollbarProps={this.scrollbarProps}
-                        show={this.show}
-                        displayDirective={this.displayDirective}
-                        nativeScrollbar={this.nativeScrollbar}
-                      >
-                        {this.$slots}
-                      </NDrawerBodyWrapper>
-                    )
-                  }}
-                </VFocusTrap>
+                <NDrawerBodyWrapper
+                  {...this.$attrs}
+                  class={[this.drawerClass, this.$attrs.class]}
+                  style={[this.mergedBodyStyle, this.$attrs.style]}
+                  contentStyle={this.contentStyle}
+                  placement={this.placement}
+                  scrollbarProps={this.scrollbarProps}
+                  show={this.show}
+                  displayDirective={this.displayDirective}
+                  nativeScrollbar={this.nativeScrollbar}
+                >
+                  {this.$slots}
+                </NDrawerBodyWrapper>
               </div>,
               [[zindexable, { zIndex: this.zIndex, enabled: this.show }]]
             )
