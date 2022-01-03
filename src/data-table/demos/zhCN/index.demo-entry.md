@@ -90,39 +90,39 @@ height-debug
 
 #### DataTableColumn Properties
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |
-| children | `DataTableColumn[]` | `undefined` | 成组列头的子节点 |
-| className | `string` | `undefined` | 列的类名 |
-| colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的的 col span |
-| defaultFilterOptionValue | `string \| number \| null` | `null` | 非受控状态下默认的过滤器选项值（过滤器单选时生效） |
-| defaultFilterOptionValues | `Array<string \| number>` | `[]` | 非受控状态下默认的过滤器选项值（过滤器多选时生效） |
-| defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | 非受控状态下表格默认的排序方式 |
-| disabled | `(rowData: object, rowIndex: number) => boolean` | `undefined` | 是否禁用 |
-| ellipsis | `boolean \| EllipsisProps` | `false` | 文本溢出的设置 |
-| expandable | `(rowData: object) => boolean` | `undefined` | 行是否可展开，仅在 `type` 为 `'expand'` 时生效 |
-| filter | `boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'` | `undefined` | 这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。 |
-| filterMode | `'and' \| 'or'` | `'or'` | 同一列筛选方式为与还是或 |
-| filterMultiple | `boolean` | `true` | 同一列是否可以筛选多个 |
-| filterOptionValue | `string \| number \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值。如果不做设定，这一列的过滤行为将是非受控的（过滤器单选时生效） |
-| filterOptionValues | `Array<string \| number> \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值数组。如果不做设定，这一列的过滤行为将是非受控的（过滤器多选时生效） |
-| filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | filter 的 options 数据 |
-| fixed | `'left \| 'right' \| false` | `false` | 该列是否需要 fixed |
-| key | `string \| number` | `undefined` | 这一列的 key，不可重复。 |
-| options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | 自定义选择项的选项，只对 `type='selection'` 生效 |
-| render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |
-| renderExpand | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 展开区域的渲染函数，仅在 `type` 为 `'expand'` 的时候生效 |
-| renderFilterMenu | `(actions: { hide: () => void }) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的过滤器菜单 |
-| renderFilterIcon | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | 渲染函数，渲染过滤器图标 |
-| renderFilter | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | 渲染函数，渲染过滤器触发元素 |
-| rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的 row span |
-| sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 |
-| sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |
-| title | `string \| (() => VNodeChild)` | `undefined` | 列的 title 信息，可以是渲染函数 |
-| titleRowSpan | `number` | `undefined` | title 行所占的单元格的个数 |
-| type | `'selection' \| 'expand'` | `undefined` | 列的类型 |
-| width | `number` | `undefined` | 列的宽度，在列固定时是**必需**的 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |  |
+| children | `DataTableColumn[]` | `undefined` | 成组列头的子节点 |  |
+| className | `string` | `undefined` | 列的类名 |  |
+| colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的的 col span |  |
+| defaultFilterOptionValue | `string \| number \| null` | `null` | 非受控状态下默认的过滤器选项值（过滤器单选时生效） |  |
+| defaultFilterOptionValues | `Array<string \| number>` | `[]` | 非受控状态下默认的过滤器选项值（过滤器多选时生效） |  |
+| defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | 非受控状态下表格默认的排序方式 |  |
+| disabled | `(rowData: object, rowIndex: number) => boolean` | `undefined` | 是否禁用 |  |
+| ellipsis | `boolean \| EllipsisProps` | `false` | 文本溢出的设置 |  |
+| expandable | `(rowData: object) => boolean` | `undefined` | 行是否可展开，仅在 `type` 为 `'expand'` 时生效 |  |
+| filter | `boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'` | `undefined` | 这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。 |  |
+| filterMode | `'and' \| 'or'` | `'or'` | 同一列筛选方式为与还是或 |  |
+| filterMultiple | `boolean` | `true` | 同一列是否可以筛选多个 |  |
+| filterOptionValue | `string \| number \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值。如果不做设定，这一列的过滤行为将是非受控的（过滤器单选时生效） |  |
+| filterOptionValues | `Array<string \| number> \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值数组。如果不做设定，这一列的过滤行为将是非受控的（过滤器多选时生效） |  |
+| filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | filter 的 options 数据 |  |
+| fixed | `'left \| 'right' \| false` | `false` | 该列是否需要 fixed |  |
+| key | `string \| number` | `undefined` | 这一列的 key，不可重复。 |  |
+| options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | 自定义选择项的选项，只对 `type='selection'` 生效 |  |
+| render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |  |
+| renderExpand | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 展开区域的渲染函数，仅在 `type` 为 `'expand'` 的时候生效 |  |
+| renderFilterMenu | `(actions: { hide: () => void }) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的过滤器菜单 |  |
+| renderFilterIcon | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | 渲染函数，渲染过滤器图标 |  |
+| renderFilter | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | 渲染函数，渲染过滤器触发元素 |  |
+| rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的 row span |  |
+| sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 |  |
+| sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |  |
+| title | `string \| (() => VNodeChild)` | `undefined` | 列的 title 信息，可以是渲染函数 |  |
+| titleRowSpan | `number` | `undefined` | title 行所占的单元格的个数 |  |
+| type | `'selection' \| 'expand'` | `undefined` | 列的类型 |  |
+| width | `number \| string` | `undefined` | 列的宽度（在列固定时是**必需**的，并且需要为 `number` 类型） | NEXT_VERSION（`string` 类型） |
 
 #### DataTableCreateSummary Type
 

@@ -8,6 +8,7 @@
 - `n-drawer` adds `z-index` closes.
 - `n-drawer` adds wai-aria support.
 - `n-message-provider` adds `render-message` prop.
+- `n-data-table` `TableColumn` supports `string` typed `width`, closes [#2102](https://github.com/TuSimple/naive-ui/issues/2102).
 
 ## 2.23.2 (2021-12-29)
 

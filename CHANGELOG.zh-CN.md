@@ -8,6 +8,7 @@
 - `n-drawer` 新增 `z-index` 属性
 - `n-drawer` 新增 wai-aria 支持
 - `n-message-provider` 新增 `render-message` 属性
+- `n-data-table` `TableColumn` 支持 `string` 类型的 `width`，关闭 [#2102](https://github.com/TuSimple/naive-ui/issues/2102)
 
 ## 2.23.2 (2021-12-29)
 
