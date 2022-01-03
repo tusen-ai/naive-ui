@@ -5,6 +5,7 @@
 ### Fixes
 
 - `n-upload` `on-finish` prop's `event` parameter type should be `ProgressEvent`.
+- `n-upload` doesn't allow 2xx status code except 200.
 
 ### Feats
 

@@ -5,6 +5,7 @@
 ### Fixes
 
 - `n-upload` `on-finish` 回调中 `event` 的类型应为 `ProgressEvent`
+- `n-upload` 不允许 200 之外的 2xx 响应状态码
 
 ### Feats
 

@@ -69,7 +69,7 @@ function createXhrHandlers (
     doChange(fileAfterChange, e)
   }
   function handleXHRLoad (e: ProgressEvent<EventTarget>): void {
-    if (XHR.status !== 200) {
+    if (XHR.status < 200 || XHR.status >= 300) {
       handleXHRError(e)
       return
     }
