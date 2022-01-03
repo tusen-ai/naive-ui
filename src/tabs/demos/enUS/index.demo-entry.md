@@ -49,7 +49,7 @@ no-pane
 | tab | `string \| VNode \| () => VNodeChild` | `undefined` | Tab label. |
 | name | `string \| number` | `undefined` | Required, the name of the tab. |
 
-### TabPane Props
+### Tab Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
