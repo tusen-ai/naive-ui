@@ -18,7 +18,7 @@ export default defineComponent({
     const types = ['success', 'info', 'warning', 'error', 'loading']
     const countRef = ref(0)
     const typeIndexRef = ref(0)
-    let msgReactive = reactive(null)
+    let msgReactive = reactive({})
 
     return {
       plus () {

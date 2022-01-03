@@ -7,6 +7,7 @@
 - `n-modal` adds `z-index` prop, closes [#2088](https://github.com/TuSimple/naive-ui/issues/2088).
 - `n-drawer` adds `z-index` closes.
 - `n-drawer` adds wai-aria support.
+- `n-message-provider` adds `render-message` prop.
 
 ## 2.23.2 (2021-12-29)
 

@@ -15,21 +15,13 @@ import {
   CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
-import { ExtractPublicPropTypes, omit } from '../../_utils'
+import { omit } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import type { MessageTheme } from '../styles'
+import type { MessageOptions, MessageProviderRenderMessage } from './types'
 import MessageEnvironment from './MessageEnvironment'
-import { MessageTheme } from '../styles'
-
-export interface MessageOptions {
-  duration?: number
-  closable?: boolean
-  keepAliveOnHover?: boolean
-  icon?: () => VNodeChild
-  onClose?: () => void
-  onLeave?: () => void
-  onAfterLeave?: () => void
-}
 
 type ContentType = string | (() => VNodeChild)
 
@@ -87,7 +79,8 @@ const messageProviderProps = {
     default: 'top'
   },
   closable: Boolean,
-  containerStyle: [String, Object] as PropType<string | CSSProperties>
+  containerStyle: [String, Object] as PropType<string | CSSProperties>,
+  renderMessage: Function as PropType<MessageProviderRenderMessage>
 }
 
 export type MessageProviderProps = ExtractPublicPropTypes<

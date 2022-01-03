@@ -14,7 +14,7 @@ import { useMessage } from 'naive-ui'
 export default defineComponent({
   setup () {
     const message = useMessage()
-    let messageReactive = reactive(null)
+    let messageReactive = reactive({})
 
     const removeMessage = () => {
       if (messageReactive) {
