@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Fixes
+
+- `n-upload` `on-finish` prop's `event` parameter type should be `ProgressEvent`.
+
 ### Feats
 
 - `n-modal` adds `z-index` prop, closes [#2088](https://github.com/TuSimple/naive-ui/issues/2088).
@@ -9,7 +13,8 @@
 - `n-drawer` adds wai-aria support.
 - `n-message-provider` adds `render-message` prop.
 - `n-data-table` `TableColumn` supports `string` typed `width`, closes [#2102](https://github.com/TuSimple/naive-ui/issues/2102).
-- `n-calendar` adds `on-panel-change` props, closes [#2082](https://github.com/TuSimple/naive-ui/issues/2082).
+- `n-calendar` adds `on-panel-change` prop, closes [#2082](https://github.com/TuSimple/naive-ui/issues/2082).
+- `n-upload` adds `on-error` prop.
 
 ## 2.23.2 (2021-12-29)
 

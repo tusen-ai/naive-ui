@@ -28,7 +28,7 @@ export type OnFinish = ({
   event
 }: {
   file: FileInfo
-  event?: Event
+  event?: ProgressEvent
 }) => FileInfo | undefined
 export type OnRemove = (data: {
   file: FileInfo
@@ -39,7 +39,8 @@ export type OnDownload = (file: FileInfo) => Promise<boolean> | boolean | any
 export interface UploadInternalInst {
   doChange: DoChange
   XhrMap: Map<string, XMLHttpRequest>
-  onFinish?: OnFinish
+  onError: OnError | undefined
+  onFinish: OnFinish | undefined
 }
 
 export type DoChange = (
@@ -68,7 +69,7 @@ export interface UploadInjection {
   doChange: DoChange
   showPreviewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>
-  listTypeRef: Ref<listType>
+  listTypeRef: Ref<ListType>
   dragOverRef: Ref<boolean>
   draggerInsideRef: { value: boolean }
   fileListStyleRef: Ref<string | CSSProperties | undefined>
@@ -102,7 +103,7 @@ export type OnBeforeUpload = (data: {
   fileList: FileInfo[]
 }) => Promise<unknown>
 
-export type listType = 'text' | 'image' | 'image-card'
+export type ListType = 'text' | 'image' | 'image-card'
 
 export type OnPreview = (file: FileInfo) => void
 
@@ -120,3 +121,11 @@ export interface CustomRequestOptions {
 }
 
 export type CustomRequest = (options: CustomRequestOptions) => void
+
+export type OnError = ({
+  file,
+  event
+}: {
+  file: FileInfo
+  event?: ProgressEvent
+}) => FileInfo | undefined

@@ -52,12 +52,13 @@ retry-debug
 | show-trigger | `boolean` | `true` | 是否显示触发元素 | 2.21.5 |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |  |
 | on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |  |
-| on-finish | `(options: { file: UploadFileInfo, event?: Event }) => UploadFileInfo \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |
-| on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |  |
+| on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | 文件上传失败的回调 | NEXT_VERSION |
+| on-finish | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: UploadFileInfo[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |  |
 | on-download | `(file: FileInfo) => void` | `undefined` | 点击文件下载按钮的回调函数 |  |
 | on-preview | `(file: FileInfo) => void` | `undefined` | 点击文件链接或预览按钮的回调函数 |  |
-| on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => Promise<boolean> \| boolean \| any` | `() => true` | 文件删除回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次删除|  |
+| on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => Promise<boolean> \| boolean \| any` | `() => true` | 文件删除回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次删除 |  |
+| on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |  |
 
 #### UploadFileInfo Type
 
