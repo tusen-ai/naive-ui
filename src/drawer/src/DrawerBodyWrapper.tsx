@@ -82,7 +82,7 @@ export default defineComponent({
       ? withDirectives(
           /* Keep the wrapper dom. Make sure the drawer has a host.
             Nor the detached content will disappear without transition */
-          <div>
+          <div role="none">
             <VFocusTrap active={this.show} focusFirstDescendant>
               {{
                 default: () => (
@@ -97,7 +97,9 @@ export default defineComponent({
                           h(
                             'div',
                             mergeProps(this.$attrs, {
+                              role: 'dialog',
                               ref: 'bodyRef',
+                              'aria-modal': 'true',
                               class: [
                                 `${mergedClsPrefix}-drawer`,
                                 `${mergedClsPrefix}-drawer--${this.placement}-placement`,
@@ -110,6 +112,7 @@ export default defineComponent({
                                 <div
                                   class={`${mergedClsPrefix}-drawer-content-wrapper`}
                                   style={this.contentStyle}
+                                  role="none"
                                 >
                                   {$slots}
                                 </div>
