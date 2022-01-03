@@ -8,7 +8,14 @@ import {
   Fragment,
   toRef
 } from 'vue'
-import { format, getYear, addMonths, startOfDay, startOfMonth } from 'date-fns'
+import {
+  format,
+  getYear,
+  addMonths,
+  startOfDay,
+  startOfMonth,
+  getMonth
+} from 'date-fns'
 import { useMergedState } from 'vooks'
 import { dateArray } from '../../date-picker/src/utils'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
@@ -20,7 +27,7 @@ import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { calendarLight } from '../styles'
 import type { CalendarTheme } from '../styles'
-import type { OnUpdateValue, DateItem } from './interface'
+import type { OnUpdateValue, DateItem, OnPanelChange } from './interface'
 import style from './styles/index.cssr'
 
 const calendarProps = {
@@ -31,6 +38,7 @@ const calendarProps = {
     type: Number as PropType<number | null>,
     defualt: null
   },
+  onPanelChange: Function as PropType<OnPanelChange>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
@@ -72,10 +80,20 @@ export default defineComponent({
     }
 
     function handlePrevClick (): void {
-      monthTsRef.value = addMonths(monthTsRef.value, -1).valueOf()
+      const monthTs = addMonths(monthTsRef.value, -1).valueOf()
+      monthTsRef.value = monthTs
+      props.onPanelChange?.({
+        year: getYear(monthTs),
+        month: getMonth(monthTs) + 1
+      })
     }
     function handleNextClick (): void {
-      monthTsRef.value = addMonths(monthTsRef.value, 1).valueOf()
+      const monthTs = addMonths(monthTsRef.value, 1).valueOf()
+      monthTsRef.value = monthTs
+      props.onPanelChange?.({
+        year: getYear(monthTs),
+        month: getMonth(monthTs) + 1
+      })
     }
     function handleTodayClick (): void {
       monthTsRef.value = startOfMonth(now).valueOf()
