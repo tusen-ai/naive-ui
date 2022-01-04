@@ -45,7 +45,7 @@ describe('n-tabs', () => {
     })
   })
 
-  it('should show AddIcon with `addable` prop', async () => {
+  it('should show AddIcon with `addable` `on-add` prop', async () => {
     const onAdd = jest.fn()
     const wrapper = mount(NTabs, {
       props: {
@@ -305,5 +305,29 @@ describe('n-tabs', () => {
       )
       wrapper.unmount()
     })
+  })
+
+  it('should work with `on-close` prop', async () => {
+    const onClose = jest.fn()
+    const wrapper = mount(NTabs, {
+      props: {
+        type: 'card',
+        defaultValue: '1',
+        closable: true,
+        onClose
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ]
+      }
+    })
+
+    const addIcon = wrapper.find('.n-base-close')
+    await addIcon.trigger('click')
+    expect(onClose).toHaveBeenCalled()
   })
 })
