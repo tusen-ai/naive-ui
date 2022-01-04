@@ -28,7 +28,8 @@ module.exports = {
         ],
         'vue/no-multiple-template-root': 0,
         'vue/no-lone-template': 0,
-        'vue/no-v-model-argument': 0
+        'vue/no-v-model-argument': 0,
+        'vue/one-component-per-file': 0
       }
     },
     {
