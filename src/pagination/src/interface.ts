@@ -16,3 +16,12 @@ export type PaginationSizeOption = SelectBaseOption<number, string>
 export type RenderSuffix = RenderPrefix
 export type RenderNext = RenderPrefix
 export type RenderPrev = RenderPrefix
+
+export type RenderItem = (info: {
+  item: {
+    label: string | number
+    type: 'page' | 'fastBackward' | 'fastForward'
+  }
+  showFastBackward: boolean
+  showFastForward: boolean
+}) => VNodeChild

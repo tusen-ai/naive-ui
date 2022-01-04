@@ -35,6 +35,7 @@ import {
   RenderSuffix,
   RenderPrev,
   RenderNext,
+  RenderItem,
   PaginationSizeOption
 } from './interface'
 
@@ -73,6 +74,7 @@ const paginationProps = {
   next: Function as PropType<RenderNext>,
   prefix: Function as PropType<RenderPrefix>,
   suffix: Function as PropType<RenderSuffix>,
+  item: Function as PropType<RenderItem>,
   'onUpdate:page': [Function, Array] as PropType<
   MaybeArray<(page: number) => void>
   >,
@@ -459,6 +461,7 @@ export default defineComponent({
       next,
       prefix,
       suffix,
+      item,
       handleJumperInput,
       handleSizePickerChange,
       handleBackwardClick,
@@ -470,7 +473,7 @@ export default defineComponent({
     } = this
     const renderPrev = prev || $slots.prev
     const renderNext = next || $slots.next
-    const renderItem = next || $slots.item
+    const renderItem = item || $slots.item
     return (
       <div
         ref="selfRef"
@@ -534,35 +537,37 @@ export default defineComponent({
               onMouseenter={() => handlePageItemMouseEnter(pageItem)}
               onMouseleave={() => handlePageItemMouseLeave(pageItem)}
             >
-              {renderItem ? (
-                  renderItem({
-                    item: pageItem
-                  })
-              ) : ([
-                pageItem.type === 'page' ? pageItem.label : null,
-                pageItem.type === 'fastBackward' ? (
-                  showFastBackward ? (
-                    <NBaseIcon clsPrefix={mergedClsPrefix}>
-                      {{ default: () => <FastBackwardIcon /> }}
-                    </NBaseIcon>
-                  ) : (
-                    <NBaseIcon clsPrefix={mergedClsPrefix}>
-                      {{ default: () => <MoreIcon /> }}
-                    </NBaseIcon>
-                  )
-                ) : null,
-                pageItem.type === 'fastForward' ? (
-                  showFastForward ? (
-                    <NBaseIcon clsPrefix={mergedClsPrefix}>
-                      {{ default: () => <FastForwardIcon /> }}
-                    </NBaseIcon>
-                  ) : (
-                    <NBaseIcon clsPrefix={mergedClsPrefix}>
-                      {{ default: () => <MoreIcon /> }}
-                    </NBaseIcon>
-                  )
-                ) : null
-              ])}
+              {renderItem
+                ? renderItem({
+                  item: pageItem,
+                  showFastBackward,
+                  showFastForward
+                })
+                : [
+                    pageItem.type === 'page' ? pageItem.label : null,
+                    pageItem.type === 'fastBackward' ? (
+                      showFastBackward ? (
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
+                          {{ default: () => <FastBackwardIcon /> }}
+                        </NBaseIcon>
+                      ) : (
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
+                          {{ default: () => <MoreIcon /> }}
+                        </NBaseIcon>
+                      )
+                    ) : null,
+                    pageItem.type === 'fastForward' ? (
+                      showFastForward ? (
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
+                          {{ default: () => <FastForwardIcon /> }}
+                        </NBaseIcon>
+                      ) : (
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
+                          {{ default: () => <MoreIcon /> }}
+                        </NBaseIcon>
+                      )
+                    ) : null
+                  ]}
             </div>
           )
         })}
