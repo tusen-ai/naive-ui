@@ -470,6 +470,7 @@ export default defineComponent({
     } = this
     const renderPrev = prev || $slots.prev
     const renderNext = next || $slots.next
+    const renderItem = next || $slots.item
     return (
       <div
         ref="selfRef"
@@ -533,29 +534,35 @@ export default defineComponent({
               onMouseenter={() => handlePageItemMouseEnter(pageItem)}
               onMouseleave={() => handlePageItemMouseLeave(pageItem)}
             >
-              {pageItem.type === 'page' ? pageItem.label : null}
-              {pageItem.type === 'fastBackward' ? (
-                showFastBackward ? (
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => <FastBackwardIcon /> }}
-                  </NBaseIcon>
-                ) : (
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => <MoreIcon /> }}
-                  </NBaseIcon>
-                )
-              ) : null}
-              {pageItem.type === 'fastForward' ? (
-                showFastForward ? (
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => <FastForwardIcon /> }}
-                  </NBaseIcon>
-                ) : (
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => <MoreIcon /> }}
-                  </NBaseIcon>
-                )
-              ) : null}
+              {renderItem ? (
+                  renderItem({
+                    item: pageItem
+                  })
+              ) : ([
+                pageItem.type === 'page' ? pageItem.label : null,
+                pageItem.type === 'fastBackward' ? (
+                  showFastBackward ? (
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
+                      {{ default: () => <FastBackwardIcon /> }}
+                    </NBaseIcon>
+                  ) : (
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
+                      {{ default: () => <MoreIcon /> }}
+                    </NBaseIcon>
+                  )
+                ) : null,
+                pageItem.type === 'fastForward' ? (
+                  showFastForward ? (
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
+                      {{ default: () => <FastForwardIcon /> }}
+                    </NBaseIcon>
+                  ) : (
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
+                      {{ default: () => <MoreIcon /> }}
+                    </NBaseIcon>
+                  )
+                ) : null
+              ])}
             </div>
           )
         })}
