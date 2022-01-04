@@ -8,27 +8,36 @@
     {{ effect }}
   </n-radio-button>
 </n-radio-group>
-<n-carousel :effect="effect" style="height: 240px;">
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
-    :style="{width: effect === 'card' ? '60%' : '100%'}"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
-    :style="{width: effect === 'card' ? '60%' : '100%'}"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
-    :style="{width: effect === 'card' ? '60%' : '100%'}"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
-    :style="{width: effect === 'card' ? '60%' : '100%'}"
-  />
+<n-carousel
+  :effect="effect"
+  :centered-slides="effect === 'card'"
+  :slides-per-view="effect === 'card' ? 'auto' : 1"
+  style="height: 240px;"
+>
+  <n-carousel-item :style="{width: effect === 'card' ? '60%' : '100%'}">
+    <img
+      class="carousel-img"
+      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
+    />
+  </n-carousel-item>
+  <n-carousel-item :style="{width: effect === 'card' ? '60%' : '100%'}">
+    <img
+      class="carousel-img"
+      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
+    />
+  </n-carousel-item>
+  <n-carousel-item :style="{width: effect === 'card' ? '60%' : '100%'}">
+    <img
+      class="carousel-img"
+      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
+    />
+  </n-carousel-item>
+  <n-carousel-item :style="{width: effect === 'card' ? '60%' : '100%'}">
+    <img
+      class="carousel-img"
+      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
+    />
+  </n-carousel-item>
 </n-carousel>
 ```
 

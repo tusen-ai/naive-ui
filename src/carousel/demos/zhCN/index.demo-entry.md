@@ -47,7 +47,7 @@ custom-arrow-and-dots
 | transition-name | `string` | `undefined` | 自定义过渡效果 |
 | draggable | `boolean` | `true` | 是否通过拖拽切换轮播图 |
 | mousewheel | `boolean` | `false` | 是否通过鼠标滚轮切换轮播图，仅在垂直模式有效 |
-| keyboard | `boolean` | `false` | 是否通过按键切换轮播图，仅作用域箭头节点 |
+| keyboard | `boolean` | `false` | 是否通过按键切换轮播图 |
 | onChange | `(current: number, from: number) => void` | `undefined` | 当前页变化时的回调函数 |
 
 ### Carousel Slots
@@ -55,7 +55,7 @@ custom-arrow-and-dots
 | 名称    | 参数 | 说明 |
 | ------- | ---- | ---- |
 | default | `()` | 轮播的内容 |
-| arrow | `({total: number, current: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: (index) => void, isDisabledPrev: () => boolean, isDisabledNext: () => boolean, isActive: (index: number) => boolean, isPrev: : (index: number) => boolean, isNext: (index: number) => boolean})` | 箭头 |
+| arrow | `({total: number, current: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: (index) => void, isDisabledPrev: () => boolean, isDisabledNext: () => boolean})` | 箭头 |
 | dots | `({total: number, current: number, slideTo: (index: number) => void})` | 控制器 |
 
 ### Carousel Methods

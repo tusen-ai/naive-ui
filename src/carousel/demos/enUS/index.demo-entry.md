@@ -47,7 +47,7 @@ custom-arrow-and-dots
 | transition-name | `string` | `undefined` | Custom transition name. |
 | draggable | `boolean` | `true` | Whether to switch the carousel by dragging. |
 | mousewheel | `boolean` | `false` | Whether to switch the carousel through the mouse wheel, it is only valid in the vertical mode. |
-| keyboard | `boolean` | `false` | Whether to switch the carousel by keyboard, it only works on the arrow node. |
+| keyboard | `boolean` | `false` | Whether to switch the carousel by keyboard. |
 | onChange | `(current: number, from: number) => void` | `undefined` | Callback function when the current index changes. |
 
 ### Carousel Slots
@@ -55,8 +55,8 @@ custom-arrow-and-dots
 | Name    | Parameters | Description       |
 | ------- | ---- | ---------- |
 | default | `()` | Carousel content. |
-| arrow | `({total: number,current: number,slideTo: (index: number) => void,slidePrev: () => void,slideNext: (index) => void,isDisabledPrev: () => boolean,isDisabledNext: () => boolean,isActive: (index: number) => boolean,isPrev: : (index: number) => boolean,isNext: (index: number) => boolean,getPrevIndex: (index: number) => number,getNextIndex: (index: number) => number})` | Arrow. |
-| dots | `({total: number,current: number,slideTo: (index: number) => void,slidePrev: () => void,slideNext: (index) => void,isDisabledPrev: () => boolean,isDisabledNext: () => boolean,isActive: (index: number) => boolean,isPrev: : (index: number) => boolean,isNext: (index: number) => boolean,getPrevIndex: (index: number) => number,getNextIndex: (index: number) => number})` | Dots. |
+| arrow | `({total: number, current: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: (index) => void, isDisabledPrev: () => boolean, isDisabledNext: () => boolean})` | Arrow. |
+| dots | `({total: number, current: number, slideTo: (index: number) => void})` | Dots. |
 
 ### Carousel Methods
 

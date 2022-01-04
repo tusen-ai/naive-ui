@@ -10,51 +10,59 @@ import {
 } from 'vue'
 import { useConfig } from '../../_mixins'
 import { throwError } from '../../_utils'
-import {
-  CarouselMethodsInjection,
-  carouselMethodsInjectionKey
-} from './interface'
+import { carouselMethodsInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'CarouselItem',
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-    const NCarousel = inject(
-      carouselMethodsInjectionKey,
-      null
-    ) as CarouselMethodsInjection
+    const NCarousel = inject(carouselMethodsInjectionKey, null)
     if (!NCarousel) {
       throwError(
         'carousel-item',
         '`n-carousel-item` must be placed inside `n-carousel`.'
       )
     }
-    const selfRef = ref<HTMLElement | null>(null)
-    const isPrevRef = computed(
-      () => selfRef.value && NCarousel.isPrev(selfRef.value)
-    )
-    const isNextRef = computed(
-      () => selfRef.value && NCarousel.isNext(selfRef.value)
-    )
-    const isActiveRef = computed(
-      () => selfRef.value && NCarousel.isActive(selfRef.value)
-    )
-    const styleRef = computed(
-      () => selfRef.value && NCarousel.getSlideStyle(selfRef.value)
-    )
-    const indexRef = computed(
-      () => selfRef.value && NCarousel.getSlideIndex(selfRef.value)
-    )
-    onMounted(() => NCarousel.addSlide(selfRef.value as HTMLElement))
-    onBeforeUnmount(() => NCarousel.removeSlide(selfRef.value as HTMLElement))
+    const selfElRef = ref<HTMLElement>()
+    const isPrevRef = computed(() => {
+      const { value: selfEl } = selfElRef
+      return Boolean(selfEl && NCarousel.isPrev(selfEl))
+    })
+    const isNextRef = computed(() => {
+      const { value: selfEl } = selfElRef
+      return Boolean(selfEl && NCarousel.isNext(selfEl))
+    })
+    const isActiveRef = computed(() => {
+      const { value: selfEl } = selfElRef
+      return Boolean(selfEl && NCarousel.isActive(selfEl))
+    })
+    const styleRef = computed(() => {
+      const { value: selfEl } = selfElRef
+      return selfEl && NCarousel.getSlideStyle(selfEl)
+    })
+    const indexRef = computed(() => {
+      const { value: selfEl } = selfElRef
+      return selfEl && NCarousel.getSlideIndex(selfEl)
+    })
+    function handleClick (e: MouseEvent): void {
+      const { value: index } = indexRef
+      if (index !== undefined) {
+        NCarousel?.onCarouselItemClick(index)
+      }
+    }
+    onMounted(() => NCarousel.addSlide(selfElRef.value))
+    onBeforeUnmount(() => {
+      NCarousel.removeSlide(selfElRef.value)
+    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      selfRef,
+      selfElRef,
       isPrev: isPrevRef,
       isNext: isNextRef,
       isActive: isActiveRef,
       index: indexRef,
-      style: styleRef
+      style: styleRef,
+      handleClick
     }
   },
   render () {
@@ -77,12 +85,13 @@ export default defineComponent({
     ]
     return (
       <div
-        ref='selfRef'
+        ref='selfElRef'
         class={className}
         role='option'
         data-index={index}
         aria-hidden={!isActive}
         style={style}
+        onClick={this.handleClick}
       >
         {renderSlot(slots, 'default', {
           isPrev,

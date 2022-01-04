@@ -1,7 +1,9 @@
-# 按键控制箭头
+# 按键控制
+
+在全屏的横向滚动上可能会有用，毕竟大部分的鼠标不能横着滚。
 
 ```html
-<n-carousel show-arrow keyboard>
+<n-carousel keyboard>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"

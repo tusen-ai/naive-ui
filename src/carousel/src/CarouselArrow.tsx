@@ -1,18 +1,14 @@
 import { h, defineComponent, PropType, inject, Fragment } from 'vue'
 import { useConfig } from '../../_mixins'
-import { ExtractPublicPropTypes } from '../../_utils'
 import { BackwardIcon, ForwardIcon } from '../../_internal/icons'
-import {
-  CarouselMethodsInjection,
-  carouselMethodsInjectionKey
-} from './interface'
+import { carouselMethodsInjectionKey } from './interface'
+import { ExtractPublicPropTypes } from '../../_utils'
 
 const carouselArrowProps = {
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal'
-  },
-  keyboard: Boolean
+  }
 }
 
 export type CarouselArrowProps = ExtractPublicPropTypes<
@@ -24,32 +20,21 @@ export default defineComponent({
   props: carouselArrowProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { slidePrev, slideNext, isDisabledPrev, isDisabledNext } = inject(
       carouselMethodsInjectionKey,
       null
-    ) as CarouselMethodsInjection
-    function handleKeydown (e: KeyboardEvent): void {
-      if (!props.keyboard) return
-      switch (e.code) {
-        case 'ArrowRight':
-          slideNext()
-          break
-        case 'ArrowLeft':
-          slidePrev()
-          break
-      }
-    }
+    )!
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       slidePrev,
       slideNext,
       isDisabledPrev,
-      isDisabledNext,
-      handleKeydown
+      isDisabledNext
     }
   },
   render () {
-    const { mergedClsPrefix, direction, keyboard } = this
+    const { mergedClsPrefix, direction } = this
     const isVertical = direction === 'vertical'
     return (
       <Fragment>
@@ -63,10 +48,8 @@ export default defineComponent({
               [`${mergedClsPrefix}-carousel__arrow--disabled`]: this.isDisabledNext()
             }
           ]}
-          tabindex={keyboard ? 0 : -1}
           role='button'
           onClick={this.slideNext}
-          onKeydown={keyboard ? this.handleKeydown : undefined}
         >
           <ForwardIcon />
         </div>
@@ -82,7 +65,6 @@ export default defineComponent({
           ]}
           role='button'
           onClick={this.slidePrev}
-          onKeydown={this.handleKeydown}
         >
           <BackwardIcon />
         </div>

@@ -1,11 +1,8 @@
 import { h, defineComponent, PropType, inject } from 'vue'
 import { indexMap } from 'seemly'
 import { useConfig } from '../../_mixins'
-import { ExtractPublicPropTypes } from '../../_utils'
-import {
-  CarouselMethodsInjection,
-  carouselMethodsInjectionKey
-} from './interface'
+import { carouselMethodsInjectionKey } from './interface'
+import type { ExtractPublicPropTypes } from '../../_utils'
 
 const carouselDotsProps = {
   total: {
@@ -20,10 +17,6 @@ const carouselDotsProps = {
     type: String as PropType<'click' | 'hover'>,
     default: 'click'
   },
-  dotStyle: {
-    type: String as PropType<'dot' | 'line' | 'progress' | 'never'>,
-    default: 'dot'
-  },
   speed: {
     type: Number,
     default: 300
@@ -31,6 +24,10 @@ const carouselDotsProps = {
   dotPlacement: {
     type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
     default: 'bottom'
+  },
+  dotStyle: {
+    type: String as PropType<'dot' | 'line' | 'progress' | 'never'>,
+    default: 'dot'
   }
 }
 
@@ -41,10 +38,8 @@ export default defineComponent({
   props: carouselDotsProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-    const { slideTo } = inject(
-      carouselMethodsInjectionKey,
-      null
-    ) as CarouselMethodsInjection
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const { slideTo } = inject(carouselMethodsInjectionKey, null)!
     function handleKeydown (e: KeyboardEvent, current: number): void {
       switch (e.code) {
         case 'Enter':

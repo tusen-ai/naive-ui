@@ -1,5 +1,7 @@
 # Keyboard
 
+It may be useful for full-screen horizontal scrolling, after all, most mice cannot scroll sideways.
+
 ```html
 <n-carousel show-arrow keyboard>
   <img
