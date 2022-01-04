@@ -735,6 +735,7 @@ export default defineComponent({
     onBeforeUnmount(() => {
       resetDragStatus()
       resetAutoplay(true)
+      off('keydown', document, handleKeydown)
     })
     // Fix index when remounting
     onUpdated(() => {
@@ -780,18 +781,12 @@ export default defineComponent({
         fixTranslate()
       }
     })
-    watch(
-      toRef(props, 'keyboard'),
-      value => {
-        off('keydown', document, handleKeydown)
-        if (value) {
-          on('keydown', document, handleKeydown)
-        }
-      },
-      {
-        immediate: true
+    watch(toRef(props, 'keyboard'), value => {
+      off('keydown', document, handleKeydown)
+      if (value) {
+        on('keydown', document, handleKeydown)
       }
-    )
+    })
     const caroulseSlotProps = {
       arrowSlotProps: computed(() => ({
         total: displayTotalViewRef.value,
