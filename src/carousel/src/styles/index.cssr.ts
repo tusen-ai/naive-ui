@@ -73,6 +73,7 @@ export default cB('carousel', `
           width .3s var(--n-bezier),
           box-shadow .3s var(--n-bezier),
           background-color .3s var(--n-bezier);
+        outline: none;
       `, [
         cM('active', `
           width: var(--n-dot-line-size-active);
