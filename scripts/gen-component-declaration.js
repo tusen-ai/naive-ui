@@ -75,7 +75,7 @@ async function generateComponentsType () {
 declare module 'vue' {
   export interface GlobalComponents {
     ${lines.join('\n    ')}
-    [x: string]: any
+    [key: string]: any
   }
 }
 export { }

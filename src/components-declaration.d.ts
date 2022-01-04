@@ -137,7 +137,7 @@ declare module 'vue' {
     NUploadDragger: typeof import('./upload')['NUploadDragger']
     NUploadFileList: typeof import('./upload')['NUploadFileList']
     NUploadTrigger: typeof import('./upload')['NUploadTrigger']
-    [x: string]: any
+    [key: string]: any
   }
 }
 export { }
