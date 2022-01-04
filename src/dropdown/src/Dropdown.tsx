@@ -289,7 +289,7 @@ export default defineComponent({
       const {
         value: { getFirstAvailableNode }
       } = treemateRef
-      let nextKeyboardKey = null
+      let nextKeyboardKey: Key | null = null
       if (pendingKey === null) {
         const firstNode = getFirstAvailableNode()
         if (firstNode !== null) {

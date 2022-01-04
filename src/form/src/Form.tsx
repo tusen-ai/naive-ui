@@ -69,7 +69,12 @@ export default defineComponent({
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true
     ): Promise<void> {
       return await new Promise((resolve, reject) => {
-        const formItemValidationPromises = []
+        const formItemValidationPromises: Array<
+        Promise<{
+          valid: boolean
+          errors?: ValidateError[]
+        }>
+        > = []
         for (const key of keysOf(formItems)) {
           const formItemInstances = formItems[key]
           for (const formItemInstance of formItemInstances) {

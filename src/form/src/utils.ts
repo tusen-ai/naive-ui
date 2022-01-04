@@ -107,7 +107,7 @@ export function formItemRule (props: FormItemSetupProps) {
     return undefined
   })
   const mergedRulesRef = computed(() => {
-    const rules = []
+    const rules: FormItemRule[] = []
     const { rule } = props
     if (rule !== undefined) {
       if (Array.isArray(rule)) rules.push(...rule)

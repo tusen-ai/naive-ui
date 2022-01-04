@@ -95,7 +95,7 @@ export default defineComponent({
     const followerEnabledRef = ref(props.show)
     const directivesRef = computed<DirectiveArguments>(() => {
       const { trigger, onClickoutside } = props
-      const directives = []
+      const directives: DirectiveArguments = []
       const {
         positionManuallyRef: { value: positionManually }
       } = NPopover
@@ -113,7 +113,7 @@ export default defineComponent({
       if (props.displayDirective === 'show') {
         directives.push([vShow, props.show])
       }
-      return directives as DirectiveArguments
+      return directives
     })
     const styleRef = computed(() => {
       return [
