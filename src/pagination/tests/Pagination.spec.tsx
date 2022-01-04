@@ -39,3 +39,15 @@ describe('n-pagination', () => {
     />
   })
 })
+it('should work with item slot', async () => {
+  const wrapper = mount(NPagination, {
+    slots: {
+      item: ({ item }: { item: { label: string | number } }) =>
+        `(${item.label})`
+    }
+  })
+  await wrapper.setProps({
+    itemCount: 1
+  })
+  expect(wrapper.findAll('.n-pagination-item')[1].text()).toContain('(1)')
+})
