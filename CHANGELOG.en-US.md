@@ -47,6 +47,10 @@
 
 ## 2.25.2 (2022-02-11)
 
+### Breaking Changes
+
+- `n-transfer`'s styles and code are refactored.
+
 ### Fixes
 
 - Remove useless `console.log` in `resolveSlot`.

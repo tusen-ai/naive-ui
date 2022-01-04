@@ -47,6 +47,10 @@
 
 ## 2.25.2 (2022-02-11)
 
+### Breaking Changes
+
+- `n-transfer` 的样式及代码被重构
+
 ### Fixes
 
 - 移除 `resolveSlot` 中无用的 `console.log`

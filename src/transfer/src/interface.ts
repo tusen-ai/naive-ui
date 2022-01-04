@@ -23,18 +23,14 @@ export type Filter = (
 ) => boolean
 
 export interface TransferInjection {
+  tgtValueSetRef: Ref<Set<OptionValue>>
   mergedClsPrefixRef: Ref<string>
-  mergedSizeRef: Ref<'small' | 'medium' | 'large'>
   disabledRef: Ref<boolean>
   mergedThemeRef: Ref<MergedTheme<TransferTheme>>
-  srcCheckedValuesRef: Ref<OptionValue[]>
-  tgtCheckedValuesRef: Ref<OptionValue[]>
   srcOptsRef: Ref<Option[]>
   tgtOptsRef: Ref<Option[]>
   srcCheckedStatusRef: Ref<CheckedStatus>
-  tgtCheckedStatusRef: Ref<CheckedStatus>
   handleSrcCheckboxClick: (checked: boolean, value: OptionValue) => void
-  handleTgtCheckboxClick: (checked: boolean, value: OptionValue) => void
 }
 
 export const transferInjectionKey =

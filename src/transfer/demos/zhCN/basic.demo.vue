@@ -19,15 +19,11 @@ function createOptions () {
   }))
 }
 
-function createValues () {
-  return Array.from({ length: 50 }).map((v, i) => i)
-}
-
 export default defineComponent({
   setup () {
     return {
       options: createOptions(),
-      value: ref(createValues())
+      value: ref([])
     }
   }
 })

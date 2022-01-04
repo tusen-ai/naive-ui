@@ -56,8 +56,8 @@ const idID: NLocale = {
     clear: 'Bersihkan'
   },
   Transfer: {
-    sourceTitle: 'Sumber',
-    targetTitle: 'Tujuan'
+    total: (num: number): string => `Total ${num} items`,
+    selectedTotal: (num: number): string => `Selected ${num} items`
   },
   Empty: {
     description: 'Tidak ada data'

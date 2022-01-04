@@ -1,5 +1,6 @@
-import { h, computed, defineComponent, inject, PropType } from 'vue'
+import { h, defineComponent, inject, PropType } from 'vue'
 import { NCheckbox } from '../../checkbox'
+import { useLocale } from '../../_mixins'
 import { transferInjectionKey } from './interface'
 
 export default defineComponent({
@@ -10,8 +11,7 @@ export default defineComponent({
       default: false
     },
     onChange: {
-      type: Function as PropType<(value: boolean) => void>,
-      required: true
+      type: Function as PropType<(value: boolean) => void>
     },
     title: String
   },
@@ -20,47 +20,39 @@ export default defineComponent({
       srcOptsRef,
       tgtOptsRef,
       srcCheckedStatusRef,
-      tgtCheckedStatusRef,
-      srcCheckedValuesRef,
-      tgtCheckedValuesRef,
       mergedThemeRef,
       disabledRef,
       mergedClsPrefixRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
-    const checkboxPropsRef = computed(() => {
-      const { source } = props
-      if (source) {
-        return srcCheckedStatusRef.value
-      } else {
-        return tgtCheckedStatusRef.value
-      }
-    })
+    const { localeRef } = useLocale('Transfer')
     return () => {
       const { source } = props
-      const { value: checkboxProps } = checkboxPropsRef
+      const { value: srcCheckedStatus } = srcCheckedStatusRef
       const { value: mergedTheme } = mergedThemeRef
       const { value: mergedClsPrefix } = mergedClsPrefixRef
+      const { value: locale } = localeRef
       return (
         <div class={`${mergedClsPrefix}-transfer-list-header`}>
-          <div class={`${mergedClsPrefix}-transfer-list-header__checkbox`}>
-            <NCheckbox
-              theme={mergedTheme.peers.Checkbox}
-              themeOverrides={mergedTheme.peerOverrides.Checkbox}
-              checked={checkboxProps.checked}
-              indeterminate={checkboxProps.indeterminate}
-              disabled={checkboxProps.disabled || disabledRef.value}
-              onUpdateChecked={props.onChange}
-            />
-          </div>
+          {source && (
+            <div class={`${mergedClsPrefix}-transfer-list-header__checkbox`}>
+              <NCheckbox
+                theme={mergedTheme.peers.Checkbox}
+                themeOverrides={mergedTheme.peerOverrides.Checkbox}
+                checked={srcCheckedStatus.checked}
+                indeterminate={srcCheckedStatus.indeterminate}
+                disabled={srcCheckedStatus.disabled || disabledRef.value}
+                onUpdateChecked={props.onChange}
+              />
+            </div>
+          )}
           <div class={`${mergedClsPrefix}-transfer-list-header__header`}>
             {props.title}
           </div>
           <div class={`${mergedClsPrefix}-transfer-list-header__extra`}>
             {source
-              ? srcCheckedValuesRef.value.length
-              : tgtCheckedValuesRef.value.length}
-            /{source ? srcOptsRef.value.length : tgtOptsRef.value.length}
+              ? locale.total(srcOptsRef.value.length)
+              : locale.selectedTotal(tgtOptsRef.value.length)}
           </div>
         </div>
       )

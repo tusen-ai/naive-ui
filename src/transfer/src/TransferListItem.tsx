@@ -25,30 +25,19 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const { source } = props
     const {
+      tgtValueSetRef,
       mergedClsPrefixRef,
       mergedThemeRef,
-      srcCheckedValuesRef,
-      tgtCheckedValuesRef,
-      handleSrcCheckboxClick,
-      handleTgtCheckboxClick
+      handleSrcCheckboxClick
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
-    const checkedRef = source
-      ? useMemo(() => srcCheckedValuesRef.value.includes(props.value))
-      : useMemo(() => tgtCheckedValuesRef.value.includes(props.value))
-    const handleClick = source
-      ? () => {
-          if (!props.disabled) {
-            handleSrcCheckboxClick(!checkedRef.value, props.value)
-          }
-        }
-      : () => {
-          if (!props.disabled) {
-            handleTgtCheckboxClick(!checkedRef.value, props.value)
-          }
-        }
+    const checkedRef = useMemo(() => tgtValueSetRef.value.has(props.value))
+    const handleClick = (): void => {
+      if (!props.disabled) {
+        handleSrcCheckboxClick(!checkedRef.value, props.value)
+      }
+    }
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
@@ -70,14 +59,16 @@ export default defineComponent({
         ]}
         onClick={this.handleClick}
       >
-        <div class={`${mergedClsPrefix}-transfer-list-item__checkbox`}>
-          <NCheckbox
-            theme={mergedTheme.peers.Checkbox}
-            themeOverrides={mergedTheme.peerOverrides.Checkbox}
-            disabled={disabled}
-            checked={checked}
-          />
-        </div>
+        {source && (
+          <div class={`${mergedClsPrefix}-transfer-list-item__checkbox`}>
+            <NCheckbox
+              theme={mergedTheme.peers.Checkbox}
+              themeOverrides={mergedTheme.peerOverrides.Checkbox}
+              disabled={disabled}
+              checked={checked}
+            />
+          </div>
+        )}
         <div
           class={`${mergedClsPrefix}-transfer-list-item__label`}
           title={getTitleAttribute(label)}

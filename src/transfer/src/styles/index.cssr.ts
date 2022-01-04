@@ -1,5 +1,4 @@
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import fadeInTransition from '../../../_styles/transitions/fade-in.cssr'
 
 const animation = c([
   c('@keyframes transfer-slide-in-from-left', `
@@ -81,6 +80,38 @@ export default c([
       border-radius: var(--n-border-radius);
       background-color: var(--n-list-color);
     `, [
+      c('&:first-child', `
+        border-top-right-radius: 0!important;
+        border-bottom-right-radius: 0!important;
+      `),
+      c('&:last-child', `
+        margin-left: -1px!important;
+        border-top-left-radius: 0!important;
+        border-bottom-left-radius: 0!important;
+      `, [
+        cB('transfer-list-header', null, [
+          cE('header', `
+            flex: 1;
+            line-height: 1;
+            font-weight: var(--n-header-font-weight);
+            transition: color .3s var(--n-bezier);
+            color: var(--n-header-text-color);
+            padding-left: 14px;
+        `, [
+            cM('disabled', {
+              color: 'var(--n-header-text-color-disabled)'
+            })
+          ])
+        ]),
+        cB('transfer-list-item', null, [
+          cE('label', `
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-left: 14px;
+          `)
+        ])
+      ]),
       cE('border', `
         border: 1px solid var(--n-border-color);
         transition: border-color .3s var(--n-bezier);
@@ -174,9 +205,7 @@ export default c([
             left: 50%;
             top: 50%;
             transform: translateY(-50%) translateX(-50%);
-          `, [
-            fadeInTransition()
-          ]),
+          `),
           cB('transfer-list-content', `
             padding: 0;
             margin: 0;
@@ -190,9 +219,6 @@ export default c([
             cB('transfer-list-item', `
               height: var(--n-item-height);
               max-height: var(--n-item-height);
-                transition:
-                  background-color .3s var(--n-bezier),
-                  color .3s var(--n-bezier);
               position: relative;
               cursor: pointer;
               display: flex;
@@ -220,59 +246,11 @@ export default c([
                 cursor: not-allowed
                 background-color: #0000;
                 color: var(--n-item-text-color-disabled);
-              `),
-              cM('source', {
-                animationFillMode: 'forwards'
-              }, [
-                c('&.item-enter-active', `
-                  transform: translateX(150%);
-                  animation-duration: .25s, .25s;
-                  animation-timing-function: var(--n-bezier), var(--n-bezier-ease-out);
-                  animation-delay: 0s, .25s;
-                  animation-name: transfer-height-expand, transfer-slide-in-from-right;
-                `),
-                c('&.item-leave-active', `
-                  transform: translateX(-150%);
-                  animation-duration: .25s, .25s;
-                  animation-timing-function: var(--n-bezier), var(--n-bezier-ease-in);
-                  animation-delay: .25s, 0s;
-                  animation-name: transfer-height-collapse, transfer-slide-out-to-right;
-                `)
-              ]),
-              cM('target', {
-                animationFillMode: 'forwards'
-              }, [
-                c('&.item-enter-active', `
-                  transform: translateX(-150%);
-                  animation-duration: .25s, .25s;
-                  animation-timing-function: var(--n-bezier), var(--n-bezier-ease-out);
-                  animation-delay: 0s, .25s;
-                  animation-name: transfer-height-expand, transfer-slide-in-from-left;
-                `),
-                c('&.item-leave-active', `
-                  transform: translateX(150%);
-                  animation-duration: .25s, .25s;
-                  animation-timing-function: var(--n-bezier), var(--n-bezier-ease-in);
-                  animation-delay: .25s, 0s;
-                  animation-name: transfer-height-collapse, transfer-slide-out-to-left;
-                `)
-              ])
+              `)
             ])
           ])
         ])
       ])
-    ]),
-    cB('transfer-gap', {
-      width: '72px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'column'
-    }),
-    cB('button', [
-      c('&:first-child', {
-        marginBottom: '12px'
-      })
     ])
   ]),
   animation
