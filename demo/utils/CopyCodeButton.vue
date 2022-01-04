@@ -3,8 +3,8 @@
     class="edit-button"
     text
     :size="size"
-    @click="handleClick"
     :depth="depth"
+    @click="handleClick"
   >
     <template #icon>
       <n-icon size="14">
@@ -23,10 +23,11 @@
   </n-button>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
-export default {
+export default defineComponent({
   name: 'CopyCodeButton',
   props: {
     code: {
@@ -51,5 +52,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

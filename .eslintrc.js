@@ -11,10 +11,7 @@ module.exports = {
     },
     {
       files: ['*.vue', '*.js'],
-      extends: [
-        'plugin:vue/essential',
-        '@vue/standard'
-      ],
+      extends: ['plugin:vue/essential', '@vue/standard'],
       rules: {
         'vue/max-attributes-per-line': [
           2,
@@ -26,6 +23,7 @@ module.exports = {
             }
           }
         ],
+        'vue/require-default-prop': 0,
         'vue/no-multiple-template-root': 0,
         'vue/no-lone-template': 0,
         'vue/no-v-model-argument': 0,
