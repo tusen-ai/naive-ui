@@ -281,7 +281,7 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     colorError: colors.errorColor,
     textColorError: '#FFF',
     textColorSuccess: '#FFF',
-    textColorInfo: '#FFF',
+    textColorInfo: '#333333',
     textColorWarning: '#FFF',
     iconColorInfo: 'rgb(0, 0, 0)',
     iconColorSuccess: 'rgb(255, 255, 255)',
