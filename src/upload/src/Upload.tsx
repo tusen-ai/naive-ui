@@ -25,7 +25,7 @@ import {
 import { uploadLight, UploadTheme } from '../styles'
 import { uploadDraggerKey } from './UploadDragger'
 import style from './styles/index.cssr'
-import {
+import type {
   XhrHandlers,
   FileInfo,
   DoChange,
@@ -36,14 +36,15 @@ import {
   OnRemove,
   OnDownload,
   OnChange,
-  uploadInjectionKey,
   OnUpdateFileList,
   OnBeforeUpload,
-  listType,
+  ListType,
   OnPreview,
   CreateThumbnailUrl,
-  CustomRequest
+  CustomRequest,
+  OnError
 } from './interface'
+import { uploadInjectionKey } from './interface'
 import { createImageDataUrl } from './utils'
 import NUploadTrigger from './UploadTrigger'
 import NUploadFileList from './UploadFileList'
@@ -58,15 +59,17 @@ function createXhrHandlers (
   const { doChange, XhrMap } = inst
   let percentage = 0
   function handleXHRError (e: ProgressEvent<EventTarget>): void {
-    const fileAfterChange: FileInfo = Object.assign({}, file, {
+    let fileAfterChange: FileInfo = Object.assign({}, file, {
       status: 'error',
       percentage
     })
     XhrMap.delete(file.id)
+    fileAfterChange =
+      inst.onError?.({ file: fileAfterChange, event: e }) || fileAfterChange
     doChange(fileAfterChange, e)
   }
   function handleXHRLoad (e: ProgressEvent<EventTarget>): void {
-    if (XHR.status !== 200) {
+    if (XHR.status < 200 || XHR.status >= 300) {
       handleXHRError(e)
       return
     }
@@ -145,10 +148,12 @@ function customSubmitImpl (options: {
       doChange(fileAfterChange)
     },
     onError () {
-      const fileAfterChange: FileInfo = Object.assign({}, file, {
+      let fileAfterChange: FileInfo = Object.assign({}, file, {
         status: 'error',
         percentage
       })
+      fileAfterChange =
+        inst.onError?.({ file: fileAfterChange }) || fileAfterChange
       doChange(fileAfterChange)
     }
   })
@@ -270,6 +275,7 @@ const uploadProps = {
   onChange: Function as PropType<OnChange>,
   onRemove: Function as PropType<OnRemove>,
   onFinish: Function as PropType<OnFinish>,
+  onError: Function as PropType<OnError>,
   onBeforeUpload: Function as PropType<OnBeforeUpload>,
   /** currently of no usage */
   onDownload: Function as PropType<OnDownload>,
@@ -305,7 +311,7 @@ const uploadProps = {
     default: true
   },
   listType: {
-    type: String as PropType<listType>,
+    type: String as PropType<ListType>,
     default: 'text'
   },
   onPreview: Function as PropType<OnPreview>,
@@ -453,7 +459,8 @@ export default defineComponent({
               inst: {
                 doChange,
                 XhrMap,
-                onFinish: props.onFinish
+                onFinish: props.onFinish,
+                onError: props.onError
               },
               file,
               action,
@@ -467,7 +474,8 @@ export default defineComponent({
               {
                 doChange,
                 XhrMap,
-                onFinish: props.onFinish
+                onFinish: props.onFinish,
+                onError: props.onError
               },
               file,
               formData,

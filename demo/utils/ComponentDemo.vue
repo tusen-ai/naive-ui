@@ -84,7 +84,11 @@
           JavaScript
         </n-tab>
       </n-tabs>
-      <n-scrollbar x-scrollable content-style="padding: 20px 24px;">
+      <n-scrollbar
+        x-scrollable
+        content-style="padding: 20px 24px;"
+        style="height: auto"
+      >
         <n-code v-if="showTs" language="html" :code="sfcTsCode" />
         <n-code v-else language="html" :code="sfcJsCode" />
       </n-scrollbar>

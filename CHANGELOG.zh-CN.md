@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- `n-upload` `on-finish` 回调中 `event` 的类型应为 `ProgressEvent`
+- `n-upload` 不允许 200 之外的 2xx 响应状态码
+
+### Feats
+
+- `n-modal` 新增 `z-index` 属性，关闭 [#2088](https://github.com/TuSimple/naive-ui/issues/2088)
+- `n-drawer` 新增 `z-index` 属性
+- `n-drawer` 新增 wai-aria 支持
+- `n-message-provider` 新增 `render-message` 属性
+- `n-data-table` `TableColumn` 支持 `string` 类型的 `width`，关闭 [#2102](https://github.com/TuSimple/naive-ui/issues/2102)
+- `n-calendar` 新增 `on-panel-change` 属性，关闭 [#2082](https://github.com/TuSimple/naive-ui/issues/2082)
+- `n-upload` 新增 `on-error` 属性
+
 ## 2.23.2 (2021-12-29)
 
 ### Feats

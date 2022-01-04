@@ -1,4 +1,4 @@
-# Caveat About Theme
+# Caveat about theme
 
 If you don't specified the theme, the theme of created message will be the same as its `n-message-provider`.
 
