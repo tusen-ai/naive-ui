@@ -731,6 +731,13 @@ export default defineComponent({
 
     onMounted(() => {
       watchEffect(mesureAutoplay)
+      watchEffect(() => {
+        if (props.keyboard) {
+          on('keydown', document, handleKeydown)
+        } else {
+          off('keydown', document, handleKeydown)
+        }
+      })
     })
     onBeforeUnmount(() => {
       resetDragStatus()
@@ -779,12 +786,6 @@ export default defineComponent({
         updateTranslate((previousTranslate = 0))
       } else {
         fixTranslate()
-      }
-    })
-    watch(toRef(props, 'keyboard'), value => {
-      off('keydown', document, handleKeydown)
-      if (value) {
-        on('keydown', document, handleKeydown)
       }
     })
     const caroulseSlotProps = {
