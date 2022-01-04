@@ -16,6 +16,7 @@
 - `n-data-table` `TableColumn` supports `string` typed `width`, closes [#2102](https://github.com/TuSimple/naive-ui/issues/2102).
 - `n-calendar` adds `on-panel-change` prop, closes [#2082](https://github.com/TuSimple/naive-ui/issues/2082).
 - `n-upload` adds `on-error` prop.
+- `n-pagination` adds `item` slot.
 
 ## 2.23.2 (2021-12-29)
 
