@@ -12,6 +12,7 @@ We have built-in several commonly used effects, if you want to customize the eff
   :effect="effect"
   :centered-slides="card"
   :slides-per-view="card ? 'auto' : 1"
+  draggable
   style="height: 240px;"
 >
   <n-carousel-item :style="{width: card ? '60%' : '100%'}">

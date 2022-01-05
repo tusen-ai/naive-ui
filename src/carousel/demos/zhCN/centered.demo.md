@@ -8,6 +8,7 @@
   :loop="false"
   slides-per-view="auto"
   centered-slides
+  draggable
 >
   <n-carousel-item style="width: 10%">
     <img

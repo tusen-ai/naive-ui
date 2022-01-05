@@ -5,6 +5,7 @@
   :slides-per-view="3"
   :space-between="20"
   :loop="false"
+  draggable
 >
   <img
     class="carousel-img"

@@ -5,6 +5,7 @@
   slides-per-view="auto"
   :space-between="20"
   :loop="false"
+  draggable
 >
   <n-carousel-item style="width: 60%">
     <img
