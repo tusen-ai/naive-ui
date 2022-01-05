@@ -5,7 +5,7 @@ Buttons can be grouped.
 ```html
 <n-space>
   <n-button-group vertical>
-    <n-button round>
+    <n-button>
       <template #icon>
         <n-icon><log-in-icon /></n-icon>
       </template>
@@ -37,7 +37,7 @@ Buttons can be grouped.
       </template>
       Enough
     </n-button>
-    <n-button ghost round>
+    <n-button ghost>
       <template #icon>
         <n-icon><log-in-icon /></n-icon>
       </template>
