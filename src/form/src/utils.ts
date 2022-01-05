@@ -1,7 +1,7 @@
 import { inject, computed, ref, ComputedRef } from 'vue'
 import { get } from 'lodash-es'
 import type { FormItemSetupProps } from './FormItem'
-import { formInjectionKey } from './interface'
+import { formInjectionKey, formItemLabelWidthInjectionKey } from './interface'
 import type { Size, FormItemRule } from './interface'
 import { formatLength } from '../../_utils'
 
@@ -21,10 +21,11 @@ export function formItemSize (props: FormItemSetupProps): {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function formItemMisc (props: FormItemSetupProps) {
   const NForm = inject(formInjectionKey, null)
+  const NFormItemLabelWidth = inject(formItemLabelWidthInjectionKey, null)
   const mergedLabelWidthRef = computed(() => {
     if (mergedLabelPlacementRef.value === 'top') return
     const { labelWidth } = props
-    const autoComputedWidth = NForm?.autoComputedWidth.value
+    const autoComputedWidth = NFormItemLabelWidth?.autoComputedWidth.value
 
     if (labelWidth === 'auto') {
       if (autoComputedWidth !== undefined) {

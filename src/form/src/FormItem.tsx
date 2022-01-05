@@ -47,7 +47,8 @@ import {
   FormItemInst,
   FormItemInternalValidate,
   formItemInstsInjectionKey,
-  formInjectionKey
+  formInjectionKey,
+  formItemLabelWidthInjectionKey
 } from './interface'
 
 export const formItemProps = {
@@ -147,6 +148,7 @@ export default defineComponent({
     )
     const { mergedClsPrefixRef } = useConfig(props)
     const NForm = inject(formInjectionKey, null)
+    const NFormItemLabelWidth = inject(formItemLabelWidthInjectionKey, null)
     const formItemSizeRefs = formItemSize(props)
     const formItemMiscRefs = formItemMisc(props)
     const { validationErrored: validationErroredRef } = formItemMiscRefs
@@ -338,7 +340,7 @@ export default defineComponent({
     const labelElementRef = ref<null | HTMLLabelElement>(null)
     onMounted(() => {
       if (labelElementRef.value !== null) {
-        NForm?.changeAutoComputedWidth(
+        NFormItemLabelWidth?.changeAutoComputedWidth(
           Number(getComputedStyle(labelElementRef.value).width.slice(0, -2))
         )
       }

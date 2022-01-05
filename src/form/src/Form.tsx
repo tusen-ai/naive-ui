@@ -21,7 +21,8 @@ import {
   LabelPlacement,
   FormInst,
   formItemInstsInjectionKey,
-  formInjectionKey
+  formInjectionKey,
+  formItemLabelWidthInjectionKey
 } from './interface'
 import { ExtractPublicPropTypes, keysOf } from '../../_utils'
 
@@ -74,7 +75,9 @@ export default defineComponent({
     // label-width = 'auto'
     const autoComputedWidth = ref(0)
     const changeAutoComputedWidth = (currentWidth: number): void => {
-      if (currentWidth >= autoComputedWidth.value) { autoComputedWidth.value = currentWidth }
+      if (currentWidth >= autoComputedWidth.value) {
+        autoComputedWidth.value = currentWidth
+      }
     }
     async function validate (
       validateCallback?: FormValidateCallback,
@@ -121,8 +124,8 @@ export default defineComponent({
         }
       }
     }
-    provide(formInjectionKey, {
-      ...props,
+    provide(formInjectionKey, props)
+    provide(formItemLabelWidthInjectionKey, {
       autoComputedWidth,
       changeAutoComputedWidth
     })

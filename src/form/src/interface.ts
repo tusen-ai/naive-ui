@@ -57,7 +57,9 @@ export interface FormItemInst {
 export type FormItemColRef = FormItemInst
 export type FormItemRowRef = FormItemInst
 
-export type FormInjection = FormSetupProps & {
+export type FormInjection = FormSetupProps
+
+export interface FormItemLabelWidthInjectionKey {
   autoComputedWidth: Ref<number>
   changeAutoComputedWidth: (currentWidth: number) => void
 }
@@ -65,6 +67,8 @@ export type FormInjection = FormSetupProps & {
 export const formInjectionKey: InjectionKey<FormInjection> = Symbol('form')
 export const formItemInstsInjectionKey: InjectionKey<unknown> =
   Symbol('formItemInsts')
+export const formItemLabelWidthInjectionKey: InjectionKey<FormItemLabelWidthInjectionKey> =
+  Symbol('formItemWidth')
 
 export type LabelAlign = 'left' | 'center' | 'right'
 export type LabelPlacement = 'left' | 'top'
