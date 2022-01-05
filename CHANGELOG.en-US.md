@@ -4,9 +4,10 @@
 
 ### Fixes
 
-- `n-upload` `on-finish` prop's `event` parameter type should be `ProgressEvent`.
-- `n-upload` doesn't allow 2xx status code except 200.
-- `n-form` when `validate` use `validateCallback`, cannot call Promise method.
+- Fix `n-upload` `on-finish` prop's `event` parameter type should be `ProgressEvent`.
+- Fix `n-upload` doesn't allow 2xx status code except 200.
+- Fix `n-form` when `validate` use `validateCallback`, cannot call Promise method.
+- Fix `n-input-number` input integer end with 0 cannot update, closes [#2115](https://github.com/TuSimple/naive-ui/issues/2115).
 
 ### Feats
 
