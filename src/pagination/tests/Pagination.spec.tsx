@@ -39,11 +39,10 @@ describe('n-pagination', () => {
     />
   })
 })
-it('should work with item slot', async () => {
+it('should work with label slot', async () => {
   const wrapper = mount(NPagination, {
     slots: {
-      item: ({ item }: { item: { label: string | number } }) =>
-        `(${item.label})`
+      label: ({ label }: { label: string | number }) => `(${label})`
     }
   })
   await wrapper.setProps({

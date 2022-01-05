@@ -35,7 +35,7 @@ import {
   RenderSuffix,
   RenderPrev,
   RenderNext,
-  RenderItem,
+  RenderLabel,
   PaginationSizeOption
 } from './interface'
 
@@ -74,7 +74,7 @@ const paginationProps = {
   next: Function as PropType<RenderNext>,
   prefix: Function as PropType<RenderPrefix>,
   suffix: Function as PropType<RenderSuffix>,
-  item: Function as PropType<RenderItem>,
+  label: Function as PropType<RenderLabel>,
   'onUpdate:page': [Function, Array] as PropType<
   MaybeArray<(page: number) => void>
   >,
@@ -461,7 +461,7 @@ export default defineComponent({
       next,
       prefix,
       suffix,
-      item,
+      label,
       handleJumperInput,
       handleSizePickerChange,
       handleBackwardClick,
@@ -473,7 +473,7 @@ export default defineComponent({
     } = this
     const renderPrev = prev || $slots.prev
     const renderNext = next || $slots.next
-    const renderItem = item || $slots.item
+    const renderLabel = label || $slots.label
     return (
       <div
         ref="selfRef"
@@ -537,9 +537,10 @@ export default defineComponent({
               onMouseenter={() => handlePageItemMouseEnter(pageItem)}
               onMouseleave={() => handlePageItemMouseLeave(pageItem)}
             >
-              {renderItem
-                ? renderItem({
-                  item: pageItem,
+              {renderLabel
+                ? renderLabel({
+                  label: pageItem.label,
+                  type: pageItem.type,
                   showFastBackward,
                   showFastForward
                 })
