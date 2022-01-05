@@ -446,7 +446,8 @@ export default defineComponent({
       if (translate !== previousTranslate && duration > 0) {
         inTransition = true
       }
-      updateTranslate((previousTranslate = translate), duration)
+      updateTranslate(translate, duration)
+      previousTranslate = getTranslate(realityIndexRef.value)
     }
     function getTranslate (index: number): number {
       let translate

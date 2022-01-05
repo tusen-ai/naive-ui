@@ -27,6 +27,7 @@ Set `dot-placement` to change the position of the dots.
   :dot-style="style"
   :dot-placement="placement"
   :loop="false"
+  draggable
   style="height: 240px;"
 >
   <img
