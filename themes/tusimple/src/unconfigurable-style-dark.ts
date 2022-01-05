@@ -5,20 +5,20 @@ export function mountSvgDefs (): void {
   if (document.getElementById('naive-ui/tusimple/svg-defs')) return
   const svgDefs = `<defs>
     <linearGradient id="progress-info">
-      <stop offset="0%" stop-color="#80c6ff" />
-      <stop offset="100%" stop-color="#335fff" />
+      <stop offset="0%" stop-color="#335fff" />
+      <stop offset="100%" stop-color="#80c6ff" />
     </linearGradient>
     <linearGradient id="progress-success">
-      <stop offset="0%" stop-color="#AFF25E" />
-      <stop offset="100%" stop-color="#4FB233" />
+      <stop offset="0%" stop-color="#4FB233" />
+      <stop offset="100%" stop-color="#AFF25E" />
     </linearGradient>
     <linearGradient id="progress-warning">
-      <stop offset="0%" stop-color="#F2E93D" />
-      <stop offset="100%" stop-color="#FFAC26" />
+      <stop offset="0%" stop-color="#FFAC26" />
+      <stop offset="100%" stop-color="#F2E93D" />
     </linearGradient>
     <linearGradient id="progress-error">
-      <stop offset="0%" stop-color="#FF66BA" />
-      <stop offset="100%" stop-color="#D92149" />
+      <stop offset="0%" stop-color="#D92149" />
+      <stop offset="100%" stop-color="#FF66BA" />
     </linearGradient>
   </defs>`
   const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
@@ -88,7 +88,7 @@ export const unconfigurableStyle = c([
     cM('warning', [
       cB('progress-graph-line-fill', {
         background:
-          'linear-gradient(270deg, #FF66BA 0%, #D92149 100%) !important'
+          'linear-gradient(270deg, #D92149 0%, #FF66BA 100%) !important'
       }),
       cM('circle', [
         cB('progress-graph-circle-fill', {
@@ -99,7 +99,7 @@ export const unconfigurableStyle = c([
     cM('error', [
       cB('progress-graph-line-fill', {
         background:
-          'linear-gradient(270deg, #FF66BA 0%, #D92149 100%) !important'
+          'linear-gradient(270deg, #D92149 0%, #FF66BA 100%) !important'
       }),
       cM('circle', [
         cB('progress-graph-circle-fill', {

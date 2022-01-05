@@ -461,7 +461,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     fillColorSuccess: colors.successColor,
     fillColorWarning: colors.warningColor,
     fillColorError: colors.errorColor,
-    textColorCircle: '#666666'
+    textColorCircle: '#ADADAD'
   },
   Radio: {
     labelPadding: '0 8px 0 12px',
