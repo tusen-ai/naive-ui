@@ -4,10 +4,10 @@
 
 ### Fixes
 
-- `n-upload` `on-finish` prop's `event` parameter type should be `ProgressEvent`.
-- `n-upload` doesn't allow 2xx status code except 200.
-- `n-form` when `validate` use `validateCallback`, cannot call Promise method.
-- `n-tabs` adds `syncBarPosition` method, closes [#2120](https://github.com/TuSimple/naive-ui/issues/2120).
+- Fix `n-upload` `on-finish` prop's `event` parameter type should be `ProgressEvent`.
+- Fix `n-upload` doesn't allow 2xx status code except 200.
+- Fix `n-form` when `validate` use `validateCallback`, cannot call Promise method.
+- Fix `n-input-number` input integer end with 0 cannot update, closes [#2115](https://github.com/TuSimple/naive-ui/issues/2115).
 
 ### Feats
 
@@ -18,6 +18,7 @@
 - `n-data-table` `TableColumn` supports `string` typed `width`, closes [#2102](https://github.com/TuSimple/naive-ui/issues/2102).
 - `n-calendar` adds `on-panel-change` prop, closes [#2082](https://github.com/TuSimple/naive-ui/issues/2082).
 - `n-upload` adds `on-error` prop.
+- `n-tabs` adds `syncBarPosition` method, closes [#2120](https://github.com/TuSimple/naive-ui/issues/2120).
 
 ## 2.23.2 (2021-12-29)
 
