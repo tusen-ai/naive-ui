@@ -28,8 +28,8 @@ import {
   getNextIndex,
   getPrevIndex,
   getDisplayIndex,
-  isTouchEvent,
-  getRealityIndex
+  getRealityIndex,
+  isTouchEvent
 } from './utils'
 import NCarouselDots from './CarouselDots'
 import NCarouselArrow from './CarouselArrow'
@@ -442,9 +442,11 @@ export default defineComponent({
       }
     }
     function translateTo (index: number, duration = props.speed): void {
-      inTransition = true
-      updateTranslate(getTranslate(index), duration)
-      previousTranslate = getTranslate(realityIndexRef.value)
+      const translate = getTranslate(index)
+      if (translate !== previousTranslate && duration > 0) {
+        inTransition = true
+      }
+      updateTranslate((previousTranslate = translate), duration)
     }
     function getTranslate (index: number): number {
       let translate
@@ -789,6 +791,7 @@ export default defineComponent({
     )
     watch(translateableRef, (value) => {
       if (!value) {
+        inTransition = false
         // If the current mode does not support translate, reset the position of the wrapper
         updateTranslate((previousTranslate = 0))
       } else {
