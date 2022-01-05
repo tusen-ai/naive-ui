@@ -5,7 +5,7 @@
 ```html
 <n-space>
   <n-button-group vertical>
-    <n-button>
+    <n-button round>
       <template #icon>
         <n-icon><log-in-icon /></n-icon>
       </template>
