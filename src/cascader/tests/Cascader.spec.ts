@@ -4,7 +4,7 @@ import { CascaderOption } from '../src/interface'
 
 function getOptions (depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
   const length = 12
-  const options = []
+  const options: CascaderOption[] = []
   for (let i = 1; i <= length; ++i) {
     if (iterator === 1) {
       options.push({

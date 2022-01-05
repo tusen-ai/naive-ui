@@ -96,8 +96,8 @@
   </n-card>
 </template>
 
-<script>
-import { computed, nextTick, ref, watch } from 'vue'
+<script lang="ts">
+import { defineComponent, computed, nextTick, ref, watch } from 'vue'
 import { CodeOutline } from '@vicons/ionicons5'
 import { useDisplayMode } from '../store'
 import { i18n } from '../utils/composables'
@@ -105,7 +105,7 @@ import EditOnGithubButton from './EditOnGithubButton.vue'
 import EditInCodeSandboxButton from './EditInCodeSandboxButton.vue'
 import CopyCodeButton from './CopyCodeButton.vue'
 
-export default {
+export default defineComponent({
   components: {
     CodeOutline,
     EditOnGithubButton,
@@ -188,5 +188,5 @@ export default {
       })
     }
   }
-}
+})
 </script>
