@@ -2,7 +2,7 @@ import { h, defineComponent, PropType, inject, Fragment } from 'vue'
 import { useConfig } from '../../_mixins'
 import { BackwardIcon, ForwardIcon } from '../../_internal/icons'
 import { carouselMethodsInjectionKey } from './interface'
-import { ExtractPublicPropTypes } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 
 const carouselArrowProps = {
   direction: {
@@ -21,7 +21,7 @@ export default defineComponent({
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { slidePrev, slideNext, isDisabledPrev, isDisabledNext } = inject(
+    const { slidePrev, slideNext, isPrevDisabled, isNextDisabled } = inject(
       carouselMethodsInjectionKey,
       null
     )!
@@ -29,8 +29,8 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       slidePrev,
       slideNext,
-      isDisabledPrev,
-      isDisabledNext
+      isPrevDisabled,
+      isNextDisabled
     }
   },
   render () {
@@ -44,9 +44,7 @@ export default defineComponent({
             `${mergedClsPrefix}-carousel__arrow--${
               isVertical ? 'bottom' : 'right'
             }`,
-            {
-              [`${mergedClsPrefix}-carousel__arrow--disabled`]: this.isDisabledNext()
-            }
+            this.isNextDisabled() && `${mergedClsPrefix}-carousel__arrow--disabled`
           ]}
           role='button'
           onClick={this.slideNext}
@@ -59,9 +57,7 @@ export default defineComponent({
             `${mergedClsPrefix}-carousel__arrow--${
               isVertical ? 'top' : 'left'
             }`,
-            {
-              [`${mergedClsPrefix}-carousel__arrow--disabled`]: this.isDisabledPrev()
-            }
+            this.isPrevDisabled() && `${mergedClsPrefix}-carousel__arrow--disabled`
           ]}
           role='button'
           onClick={this.slidePrev}

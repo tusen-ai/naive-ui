@@ -1,7 +1,9 @@
-# 自定义过渡效果
+# 模拟拖拽
+
+轮播图会默认启用 `Touch` 事件模拟，如果你需要轮播图响应鼠标拖拽，可以使用 `draggable` 属性。
 
 ```html
-<n-carousel transition-name="creative" show-arrow style="width: 100%;height: 240px;">
+<n-carousel draggable>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
@@ -26,16 +28,5 @@
   width: 100%;
   height: 240px;
   object-fit: cover;
-}
-
-::v-deep .creative-enter-from,
-::v-deep .creative-leave-to {
-  opacity: 0;
-  transform: scale(0.9);
-}
-
-::v-deep .creative-enter-active,
-::v-deep .creative-leave-active {
-  transition: all 0.3s ease;
 }
 ```

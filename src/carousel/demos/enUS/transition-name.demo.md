@@ -1,7 +1,7 @@
-# Transition Name
+# Transition name
 
 ```html
-<n-carousel transition-name="creative" style="width: 100%;height: 240px;">
+<n-carousel transition-name="creative" show-arrow style="width: 100%;height: 240px;">
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"

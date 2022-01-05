@@ -19,6 +19,7 @@ transition-name
 hover
 keyboard
 mousewheel
+simulate-drag
 custom-arrow-and-dots
 ```
 
@@ -45,7 +46,8 @@ custom-arrow-and-dots
 | speed | `number` | `300` | 过渡效果的持续时间（ms） |
 | transition-timing-function | `string` | `undefined` | 过渡效果的速率函数 |
 | transition-name | `string` | `undefined` | 自定义过渡效果 |
-| draggable | `boolean` | `true` | 是否通过拖拽切换轮播图 |
+| draggable | `boolean` | `false` | 是否通过鼠标拖拽切换轮播图 |
+| touchable | `boolean` | `true` | 是否通过触摸拖拽切换轮播图 |
 | mousewheel | `boolean` | `false` | 是否通过鼠标滚轮切换轮播图，仅在垂直模式有效 |
 | keyboard | `boolean` | `false` | 是否通过按键切换轮播图 |
 | onChange | `(current: number, from: number) => void` | `undefined` | 当前页变化时的回调函数 |
@@ -55,7 +57,7 @@ custom-arrow-and-dots
 | 名称    | 参数 | 说明 |
 | ------- | ---- | ---- |
 | default | `()` | 轮播的内容 |
-| arrow | `({total: number, current: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: (index) => void, isDisabledPrev: () => boolean, isDisabledNext: () => boolean})` | 箭头 |
+| arrow | `({total: number, current: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: (index) => void, isPrevDisabled: () => boolean, isNextDisabled: () => boolean})` | 箭头 |
 | dots | `({total: number, current: number, slideTo: (index: number) => void})` | 控制器 |
 
 ### Carousel Methods
@@ -68,5 +70,7 @@ custom-arrow-and-dots
 | isActive | `(index: number) => boolean` | 判断是否为当前页 |
 | isPrev | `(index: number) => boolean` | 判断是否为前一页 |
 | isNext | `(index: number) => boolean` | 判断是否为后一页 |
+| isPrevDisabled | `(index: number) => boolean` | 判断是否可以切换至前一页 |
+| isNextDisabled | `(index: number) => boolean` | 判断是否可以切换至后一页 |
 | getPrevIndex | `(index?: number) => number \| null` | 获取前一页 |
 | getNextIndex | `(index?: number) => number \| null` | 获取后一页 |

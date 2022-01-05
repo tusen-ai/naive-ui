@@ -7,8 +7,8 @@ export interface CarouselMethodsInjection {
   isPrev: (slide: number | HTMLElement) => boolean
   isNext: (slide: number | HTMLElement) => boolean
   isActive: (slide: number | HTMLElement) => boolean
-  isDisabledPrev: () => boolean
-  isDisabledNext: () => boolean
+  isPrevDisabled: () => boolean
+  isNextDisabled: () => boolean
   getSlideIndex: (slide: number | HTMLElement) => number
   getSlideStyle: (slide: HTMLElement) => any
   addSlide: (slide?: HTMLElement) => void
@@ -26,6 +26,8 @@ export interface CarouselInst {
   isPrev: (index: number) => boolean
   isNext: (index: number) => boolean
   isActive: (index: number) => boolean
+  isPrevDisabled: () => boolean
+  isNextDisabled: () => boolean
   getPrevIndex: (index?: number) => number | null
   getNextIndex: (index?: number) => number | null
 }

@@ -1,4 +1,4 @@
-# Space Between
+# Space between
 
 ```html
 <n-carousel :space-between="20">

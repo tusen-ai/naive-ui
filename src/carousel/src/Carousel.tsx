@@ -19,9 +19,10 @@ import {
   watchEffect,
   onUpdated
 } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
 import { on, off } from 'evtd'
-import { flatten } from '../../_utils'
+import { VResizeObserver } from 'vueuc'
+import { useConfig, useTheme } from '../../_mixins'
+import { flatten, keep } from '../../_utils'
 import {
   calculateSize,
   getNextIndex,
@@ -30,7 +31,6 @@ import {
   isTouchEvent,
   getRealityIndex
 } from './utils'
-import { VResizeObserver } from 'vueuc'
 import NCarouselDots from './CarouselDots'
 import NCarouselArrow from './CarouselArrow'
 import NCarouselItem from './CarouselItem'
@@ -96,7 +96,8 @@ const carouselProps = {
   },
   transitionTimingFunction: String,
   transitionName: String,
-  draggable: {
+  draggable: Boolean,
+  touchable: {
     type: Boolean,
     default: true
   },
@@ -121,11 +122,10 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     // Dom
     const selfElRef = ref<HTMLDivElement | null>(null)
-    const slidesElRef = ref<HTMLElement[]>([])
+    const slidesElsRef = ref<HTMLElement[]>([])
     const slideVNodesRef = { value: [] as VNode[] }
 
     const userWantControlRef = computed(() => !!props.transitionName)
-
     const translateableRef = computed(
       () => !userWantControlRef.value && props.effect === 'slide'
     )
@@ -139,7 +139,6 @@ export default defineComponent({
       // because other effects have special process
       () => translateableRef.value && props.loop
     )
-
     const displaySlidesPerViewRef = computed(() =>
       userWantControlRef.value ||
       props.centeredSlides ||
@@ -159,23 +158,23 @@ export default defineComponent({
 
     const perViewSizeRef = ref({ width: 0, height: 0 })
     const slideSizesRef = computed(() => {
-      const { value: slidesEl } = slidesElRef
-      const { length } = slidesEl
+      const { value: slidesEls } = slidesElsRef
+      const { length } = slidesEls
       if (!length) return []
       if (autoSlideSizeRef.value) {
-        return slidesEl.map(slide => calculateSize(slide))
+        return slidesEls.map((slide) => calculateSize(slide))
       }
       const { value: slidesPerView } = displaySlidesPerViewRef
-      const { value: axis } = sizeAxisRef
       const { value: perViewSize } = perViewSizeRef
+      const { value: axis } = sizeAxisRef
       let slideSize = perViewSize[axis]
-      if (typeof slidesPerView === 'number') {
+      if (slidesPerView !== 'auto') {
         const { spaceBetween } = props
         const remaining = slideSize - (slidesPerView - 1) * spaceBetween
         const percentage = 1 / Math.max(1, slidesPerView)
         slideSize = remaining * percentage
       }
-      return slidesEl.map(() => ({ ...perViewSize, [axis]: slideSize }))
+      return slidesEls.map(() => ({ ...perViewSize, [axis]: slideSize }))
     })
 
     // The translate required to reach each slide
@@ -204,7 +203,7 @@ export default defineComponent({
       const { value: axis } = sizeAxisRef
       // When users need to customize the transition, we center each slide
       if (userWantControlRef.value) {
-        return slideSizes.map(size => ({
+        return slideSizes.map((size) => ({
           [axis]: `${size[axis]}px`
         }))
       }
@@ -221,15 +220,15 @@ export default defineComponent({
         const size = slideSizes[i][axis]
         const style: Record<string, any> = {
           [axis]: `${size}px`,
-          [`margin-${spaceAxis}`]: `${spaceBetween}px`,
-          transitionDuration: `${speed}ms`,
-          transitionTimingFunction: transitionTimingFunction
+          [`margin-${spaceAxis}`]: `${spaceBetween}px`
         }
         if (effect === 'fade') {
           const offset = slideTranlates[i]
           Object.assign(style, {
             opacity: i === realityIndex ? 1 : 0,
-            [directionAxis]: `${-offset}px`
+            [directionAxis]: `${-offset}px`,
+            transitionDuration: `${speed}ms`,
+            transitionTimingFunction: transitionTimingFunction
           })
         } else if (effect === 'card') {
           const offset = slideTranlates[i]
@@ -259,6 +258,8 @@ export default defineComponent({
                 ? `translateY(${translate}px)`
                 : `translateX(${translate}px)`
             } translateZ(${translateZ}px)`,
+            transitionDuration: `${speed}ms`,
+            transitionTimingFunction: transitionTimingFunction,
             zIndex: active ? 1 : 0
           })
         }
@@ -270,7 +271,7 @@ export default defineComponent({
     // total
     const totalViewRef = computed(() => {
       const { value: slidesPerView } = displaySlidesPerViewRef
-      const { length: originLength } = slidesElRef.value
+      const { length: originLength } = slidesElsRef.value
       if (slidesPerView !== 'auto') {
         return originLength - slidesPerView + 1
       } else {
@@ -286,7 +287,9 @@ export default defineComponent({
           i--
           lastViewSize += translates[i] - translates[i - 1]
         }
-        return Math.max(i + 1, 1)
+        if (i !== length) i++
+        if (i < 1) i = 1
+        return i
       }
     })
     const displayTotalViewRef = computed(() => {
@@ -384,10 +387,10 @@ export default defineComponent({
       const nextRealityIndex = getNextRealityIndex(index)
       return nextRealityIndex !== null && nextRealityIndex === index
     }
-    function isDisabledPrev (): boolean {
+    function isPrevDisabled (): boolean {
       return getPrevRealityIndex() === null
     }
-    function isDisabledNext (): boolean {
+    function isNextDisabled (): boolean {
       return getNextRealityIndex() === null
     }
 
@@ -477,19 +480,19 @@ export default defineComponent({
     // Provide
     function addSlide (slide?: HTMLElement): void {
       if (!slide) return
-      slidesElRef.value.push(slide)
+      slidesElsRef.value.push(slide)
     }
     function removeSlide (slide?: HTMLElement): void {
       if (!slide) return
       const index = getSlideIndex(slide)
       if (index !== -1) {
-        slidesElRef.value.splice(index, 1)
+        slidesElsRef.value.splice(index, 1)
       }
     }
     function getSlideIndex (slideOrIndex: HTMLElement | number): number {
       return typeof slideOrIndex === 'number'
         ? slideOrIndex
-        : slidesElRef.value.indexOf(slideOrIndex)
+        : slidesElsRef.value.indexOf(slideOrIndex)
     }
     function getSlideStyle (slide: HTMLElement | number): any {
       const index = getSlideIndex(slide)
@@ -520,8 +523,8 @@ export default defineComponent({
       isPrev: isRealityPrev,
       isNext: isRealityNext,
       isActive: isRealityActive,
-      isDisabledPrev,
-      isDisabledNext,
+      isPrevDisabled,
+      isNextDisabled,
       getSlideIndex,
       getSlideStyle,
       addSlide,
@@ -579,11 +582,15 @@ export default defineComponent({
       } else {
         dragStartX = touchEvent.clientX
       }
-      on('touchmove', document, handleTouchmove)
-      on('touchend', document, handleTouchend)
-      on('touchcancel', document, handleTouchend)
-      on('mousemove', document, handleTouchmove)
-      on('mouseup', document, handleTouchend)
+      if (props.touchable) {
+        on('touchmove', document, handleTouchmove)
+        on('touchend', document, handleTouchend)
+        on('touchcancel', document, handleTouchend)
+      }
+      if (props.draggable) {
+        on('mousemove', document, handleTouchmove)
+        on('mouseup', document, handleTouchend)
+      }
     }
     function handleTouchmove (event: MouseEvent | TouchEvent): void {
       const { value: vertical } = verticalRef
@@ -679,15 +686,15 @@ export default defineComponent({
       const isHorizontalPrev = keycode === 'PageDown' || keycode === 'ArrowLeft'
       if (
         vertical &&
-        ((isVerticalNext && isDisabledNext()) ||
-          (isVerticalPrev && isDisabledPrev()))
+        ((isVerticalNext && isNextDisabled()) ||
+          (isVerticalPrev && isPrevDisabled()))
       ) {
         return
       }
       if (
         !vertical &&
-        ((isHorizontalNext && isDisabledNext()) ||
-          (isHorizontalPrev && isDisabledPrev()))
+        ((isHorizontalNext && isNextDisabled()) ||
+          (isHorizontalPrev && isPrevDisabled()))
       ) {
         return
       }
@@ -698,10 +705,10 @@ export default defineComponent({
       if (nodeName === 'input' || nodeName === 'textarea') {
         return
       }
-      if (isVerticalNext || isHorizontalNext) {
+      if (vertical ? isVerticalNext : isHorizontalNext) {
         e.preventDefault()
         carouselMethods.slideNext()
-      } else if (isVerticalPrev || isHorizontalPrev) {
+      } else if (vertical ? isVerticalPrev : isHorizontalPrev) {
         e.preventDefault()
         carouselMethods.slidePrev()
       }
@@ -711,9 +718,9 @@ export default defineComponent({
       if (inTransition) return
       if (props.mousewheel && verticalRef.value) {
         const deltaY = event.deltaY
-        if (deltaY >= 100 && !isDisabledNext()) {
+        if (deltaY >= 100 && !isNextDisabled()) {
           slideNext()
-        } else if (deltaY <= -100 && !isDisabledPrev()) {
+        } else if (deltaY <= -100 && !isPrevDisabled()) {
           slidePrev()
         }
       }
@@ -746,25 +753,25 @@ export default defineComponent({
     })
     // Fix index when remounting
     onUpdated(() => {
-      const { value: slidesEl } = slidesElRef
+      const { value: slidesEls } = slidesElsRef
       const { value: slideVNodes } = slideVNodesRef
       const indexMap = new Map<HTMLElement, number>()
       const getDisplayIndex = (el: HTMLElement): number =>
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         indexMap.has(el) ? indexMap.get(el)! : -1
       let isChanged = false
-      for (let i = 0; i < slidesEl.length; i++) {
-        const index = slideVNodes.findIndex(v => v.el === slidesEl[i])
+      for (let i = 0; i < slidesEls.length; i++) {
+        const index = slideVNodes.findIndex((v) => v.el === slidesEls[i])
         if (index !== i) {
           isChanged = true
         }
-        indexMap.set(slidesEl[i], index)
+        indexMap.set(slidesEls[i], index)
       }
       if (isChanged) {
-        slidesEl.sort((a, b) => getDisplayIndex(a) - getDisplayIndex(b))
+        slidesEls.sort((a, b) => getDisplayIndex(a) - getDisplayIndex(b))
       }
     })
-    watch(toRef(props, 'activeIndex'), index => slideTo(index))
+    watch(toRef(props, 'activeIndex'), (index) => slideTo(index))
     watch(
       duplicatedableRef,
       () => void nextTick(() => slideTo(displayIndexRef.value))
@@ -780,7 +787,7 @@ export default defineComponent({
         deep: true
       }
     )
-    watch(translateableRef, value => {
+    watch(translateableRef, (value) => {
       if (!value) {
         // If the current mode does not support translate, reset the position of the wrapper
         updateTranslate((previousTranslate = 0))
@@ -792,11 +799,13 @@ export default defineComponent({
       arrowSlotProps: computed(() => ({
         total: displayTotalViewRef.value,
         current: displayIndexRef.value,
-        slideTo,
-        slidePrev,
-        slideNext,
-        isDisabledPrev,
-        isDisabledNext
+        ...keep(carouselMethods, [
+          'slideTo',
+          'slidePrev',
+          'slideNext',
+          'isPrevDisabled',
+          'isNextDisabled'
+        ])
       })),
       dotSlotProps: computed(() => ({
         total: displayTotalViewRef.value,
@@ -812,7 +821,8 @@ export default defineComponent({
       isPrev: isDisplayPrev,
       isNext: isDisplayNext,
       getPrevIndex: getPrevDisplayIndex,
-      getNextIndex: getNextDisplayIndex
+      getNextIndex: getNextDisplayIndex,
+      ...keep(carouselMethods, ['isPrevDisabled', 'isNextDisabled'])
     }
     const themeRef = useTheme(
       'Carousel',
@@ -877,6 +887,7 @@ export default defineComponent({
       showArrow,
       userWantControl,
       draggable,
+      touchable,
       slideStyles,
       dotStyle,
       dotPlacement,
@@ -887,7 +898,7 @@ export default defineComponent({
     const children = (defaultSlots && flatten(defaultSlots())) || []
     let slides = filterCarouselItem(children)
     if (!slides.length) {
-      slides = children.map(ch => (
+      slides = children.map((ch) => (
         <NCarouselItem>
           {{
             default: () => cloneVNode(ch)
@@ -906,7 +917,7 @@ export default defineComponent({
     // When users need to customize the size of the slide,
     // we listen to them to fix the current translate
     if (this.autoSlideSize) {
-      slides = slides.map(slide => (
+      slides = slides.map((slide) => (
         <VResizeObserver onResize={this.handleSlideResize}>
           {{
             default: () => slide
@@ -937,7 +948,7 @@ export default defineComponent({
                 role='listbox'
                 style={this.translateStyle}
                 onMousedown={draggable ? this.handleTouchstart : undefined}
-                onTouchstart={draggable ? this.handleTouchstart : undefined}
+                onTouchstart={touchable ? this.handleTouchstart : undefined}
                 onWheel={this.mousewheel ? this.handleMousewheel : undefined}
                 onTransitionend={this.handleTransitionEnd}
               >
@@ -987,7 +998,7 @@ function filterCarouselItem (
   carouselItems: VNode[] = []
 ): VNode[] {
   if (Array.isArray(vnodes)) {
-    vnodes.forEach(vnode => {
+    vnodes.forEach((vnode) => {
       if (vnode.type && (vnode.type as any).name === 'CarouselItem') {
         carouselItems.push(vnode)
       }

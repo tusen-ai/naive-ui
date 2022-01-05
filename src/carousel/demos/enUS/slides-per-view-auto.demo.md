@@ -1,4 +1,4 @@
-# Slides Per View Auto
+# Slides per view auto
 
 ```html
 <n-carousel

@@ -88,6 +88,7 @@ export default defineComponent({
         ref='selfElRef'
         class={className}
         role='option'
+        tabindex="-1"
         data-index={index}
         aria-hidden={!isActive}
         style={style}

@@ -19,6 +19,7 @@ transition-name
 hover
 keyboard
 mousewheel
+simulate-drag
 custom-arrow-and-dots
 ```
 
@@ -45,7 +46,8 @@ custom-arrow-and-dots
 | speed | `number` | `300` | Duration of transition effect (ms). |
 | transition-timing-function | `string` | `undefined` | Transition timing function. |
 | transition-name | `string` | `undefined` | Custom transition name. |
-| draggable | `boolean` | `true` | Whether to switch the carousel by dragging. |
+| draggable | `boolean` | `false` | Whether to switch the carousel by dragging the mouse. |
+| touchable | `boolean` | `true` | Whether to switch the carousel by touch. |
 | mousewheel | `boolean` | `false` | Whether to switch the carousel through the mouse wheel, it is only valid in the vertical mode. |
 | keyboard | `boolean` | `false` | Whether to switch the carousel by keyboard. |
 | onChange | `(current: number, from: number) => void` | `undefined` | Callback function when the current index changes. |
@@ -55,7 +57,7 @@ custom-arrow-and-dots
 | Name    | Parameters | Description       |
 | ------- | ---- | ---------- |
 | default | `()` | Carousel content. |
-| arrow | `({total: number, current: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: (index) => void, isDisabledPrev: () => boolean, isDisabledNext: () => boolean})` | Arrow. |
+| arrow | `({total: number, current: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: (index) => void, isPrevDisabled: () => boolean, isNextDisabled: () => boolean})` | Arrow. |
 | dots | `({total: number, current: number, slideTo: (index: number) => void})` | Dots. |
 
 ### Carousel Methods
@@ -65,8 +67,10 @@ custom-arrow-and-dots
 | slideTo | `(index: number) => void` | Slide to index. |
 | slidePrev | `() => void` | Slide to previous page. |
 | slideNext | `() => void` | Slide to next page. |
-| isActive | `(index: number) => boolean` | Determine whether it is the current page. |
-| isPrev | `(index: number) => boolean` | Determine whether it is the previous page. |
-| isNext | `(index: number) => boolean` | Determine whether it is the next page. |
+| isActive | `(index: number) => boolean` | Whether it is the current page. |
+| isPrev | `(index: number) => boolean` | Whether it is the previous page. |
+| isNext | `(index: number) => boolean` | Whether it is the next page. |
+| isPrevDisabled | `(index: number) => boolean` | Whether you can slide to the previous page. |
+| isNextDisabled | `(index: number) => boolean` | Whether you can slide to the next page. |
 | getPrevIndex | `(index?: number) => number \| null` | Get previous page index. |
 | getNextIndex | `(index?: number) => number \| null` | Get next page index. |
