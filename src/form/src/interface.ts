@@ -59,7 +59,7 @@ export type FormItemRowRef = FormItemInst
 
 export type FormInjection = FormSetupProps & {
   autoComputedWidth: Ref<number>
-  changeAutoComputedWidth: (number) => void
+  changeAutoComputedWidth: (currentWidth: number) => void
 }
 
 export const formInjectionKey: InjectionKey<FormInjection> = Symbol('form')
