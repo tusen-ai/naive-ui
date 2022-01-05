@@ -1,4 +1,4 @@
-# Modify Exist Message
+# Modify exist message
 
 ```html
 <n-space>
@@ -9,7 +9,7 @@
 ```
 
 ```js
-import { defineComponent, ref, reactive } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
 export default defineComponent({
@@ -18,7 +18,7 @@ export default defineComponent({
     const types = ['success', 'info', 'warning', 'error', 'loading']
     const countRef = ref(0)
     const typeIndexRef = ref(0)
-    let msgReactive = reactive(null)
+    let msgReactive = null
 
     return {
       plus () {

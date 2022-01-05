@@ -35,13 +35,13 @@ The following code shows how to set hljs of Code. Importing highlight.js on dema
 ## Demos
 
 ```demo
-basic
-inline
+basic.vue
+inline.vue
 ```
 
 ## API
 
-## Code Props
+### Code Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |

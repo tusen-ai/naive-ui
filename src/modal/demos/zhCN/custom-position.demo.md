@@ -4,14 +4,18 @@
 
 ```html
 <n-button @click="showModal = true"> 来吧 </n-button>
-<n-modal
-  v-model:show="showModal"
-  style="width: 600px; position: fixed; right: 100px; bottom: 100px;"
->
-  <n-card title="模态框" :bordered="false" size="huge">
-    <template #header-extra> 噢！ </template>
+<n-modal v-model:show="showModal">
+  <n-card
+    title="模态框"
+    :bordered="false"
+    size="huge"
+    role="dialog"
+    aria-modal="true"
+    style="width: 600px; position: fixed; right: 100px; bottom: 100px;"
+  >
+    <template #header-extra>噢！</template>
     内容
-    <template #footer> 尾部 </template>
+    <template #footer>尾部</template>
   </n-card>
 </n-modal>
 ```

@@ -1,4 +1,4 @@
-# Multiple Column Sorting
+# Multiple column sorting
 
 Set `multiple` and `compare` on `sorter` to enable multiple column sorting. `multiple` is the priority of sorting (larger value means higher priority).
 

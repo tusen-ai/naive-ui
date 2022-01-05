@@ -36,7 +36,7 @@ const animation = c([
   `),
   c('@keyframes transfer-height-collapse', `
     0% {
-      max-height: var(--item-height);
+      max-height: var(--n-item-height);
     }
     100% {
       max-height: 0;
@@ -47,7 +47,7 @@ const animation = c([
       max-height: 0;
     }
     100% {
-      max-height: var(--item-height);
+      max-height: var(--n-item-height);
     }
   `)
 ])
@@ -55,36 +55,35 @@ const animation = c([
 export default c([
   cB('transfer', `
     display: flex;
-    width: var(--width);
-    font-size: var(--font-size);
+    width: var(--n-width);
+    font-size: var(--n-font-size);
+    height: 240px;
+    display: flex;
+    flex-wrap: nowrap;
   `, [
-    cM('filterable', [
-      cB('transfer-list', [
-        cB('transfer-list-body', {
-          height: 'calc(var(--item-height) * 5.6 + 45px)'
-        })
-      ])
-    ]),
     cB('transfer-icon', `
-      color: var(--icon-color);
-      transition: color .3s var(--bezier);
+      color: var(--n-icon-color);
+      transition: color .3s var(--n-bezier);
     `),
     cM('disabled', [
       cB('transfer-icon', {
-        color: 'var(--icon-color-disabled)'
+        color: 'var(--n-icon-color-disabled)'
       })
     ]),
     cB('transfer-list', `
+      height: inherit;
+      display: flex;
+      flex-direction: column;
       background-clip: padding-box;
       width: calc(50% - 36px);
       position: relative;
-      transition: background-color .3s var(--bezier);
-      border-radius: var(--border-radius);
-      background-color: var(--list-color);
+      transition: background-color .3s var(--n-bezier);
+      border-radius: var(--n-border-radius);
+      background-color: var(--n-list-color);
     `, [
       cE('border', `
-        border: 1px solid var(--border-color);
-        transition: border-color .3s var(--bezier);
+        border: 1px solid var(--n-border-color);
+        transition: border-color .3s var(--n-bezier);
         pointer-events: none;
         border-radius: inherit;
         position: absolute;
@@ -94,7 +93,7 @@ export default c([
         bottom: 0;
       `),
       cB('transfer-list-header', `
-        height: calc(var(--item-height) + 4px);
+        height: calc(var(--n-item-height) + 4px);
         box-sizing: border-box;
         display: flex;
         align-items: center;
@@ -102,10 +101,10 @@ export default c([
         border-radius: inherit;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        background-color: var(--header-color);
+        background-color: var(--n-header-color);
         transition:
-          border-color .3s var(--bezier),
-          background-color .3s var(--bezier);
+          border-color .3s var(--n-bezier),
+          background-color .3s var(--n-bezier);
       `, [
         cE('checkbox', `
           display: flex;
@@ -116,25 +115,26 @@ export default c([
         cE('header', `
           flex: 1;
           line-height: 1;
-          font-weight: var(--header-font-weight);
-          transition: color .3s var(--bezier);
-          color: var(--header-text-color);
+          font-weight: var(--n-header-font-weight);
+          transition: color .3s var(--n-bezier);
+          color: var(--n-header-text-color);
         `, [
           cM('disabled', {
-            color: 'var(--header-text-color-disabled)'
+            color: 'var(--n-header-text-color-disabled)'
           })
         ]),
         cE('extra', `
-          transition: color .3s var(--bezier);
-          font-size: var(--extra-font-size);
+          transition: color .3s var(--n-bezier);
+          font-size: var(--n-extra-font-size);
           justify-self: flex-end;
           margin-right: 14px;
           white-space: nowrap;
-          color: var(--header-extra-text-color);
+          color: var(--n-header-extra-text-color);
         `)
       ]),
       cB('transfer-list-body', `
-        height: calc(var(--item-height) * 5.6);
+        flex-basis: 0;
+        flex-grow: 1;
         box-sizing: border-box;
         overflow: hidden;
         position: relative;
@@ -147,11 +147,11 @@ export default c([
         cB('transfer-filter', `
           padding: 0 8px 8px 8px;
           box-sizing: border-box;
-          background-color: var(--header-color);
+          background-color: var(--n-header-color);
           transition:
-            border-color .3s var(--bezier),
-            background-color .3s var(--bezier);
-          border-bottom: 1px solid var(--filter-divider-color);
+            border-color .3s var(--n-bezier),
+            background-color .3s var(--n-bezier);
+          border-bottom: 1px solid var(--n-filter-divider-color);
         `),
         cB('transfer-list-flex-container', `
           flex: 1;
@@ -188,20 +188,20 @@ export default c([
               })
             ]),
             cB('transfer-list-item', `
-              height: var(--item-height);
-              max-height: var(--item-height);
+              height: var(--n-item-height);
+              max-height: var(--n-item-height);
                 transition:
-                  background-color .3s var(--bezier),
-                  color .3s var(--bezier);
+                  background-color .3s var(--n-bezier),
+                  color .3s var(--n-bezier);
               position: relative;
               cursor: pointer;
               display: flex;
               align-items: center;
-              color: var(--item-text-color);
+              color: var(--n-item-text-color);
             `, [
               cNotM('disabled', [
                 c('&:hover', {
-                  backgroundColor: 'var(--item-color-pending)'
+                  backgroundColor: 'var(--n-item-color-pending)'
                 })
               ]),
               cE('extra', `
@@ -219,7 +219,7 @@ export default c([
               cM('disabled', `
                 cursor: not-allowed
                 background-color: #0000;
-                color: var(--item-text-color-disabled);
+                color: var(--n-item-text-color-disabled);
               `),
               cM('source', {
                 animationFillMode: 'forwards'
@@ -227,14 +227,14 @@ export default c([
                 c('&.item-enter-active', `
                   transform: translateX(150%);
                   animation-duration: .25s, .25s;
-                  animation-timing-function: var(--bezier), var(--bezier-ease-out);
+                  animation-timing-function: var(--n-bezier), var(--n-bezier-ease-out);
                   animation-delay: 0s, .25s;
                   animation-name: transfer-height-expand, transfer-slide-in-from-right;
                 `),
                 c('&.item-leave-active', `
                   transform: translateX(-150%);
                   animation-duration: .25s, .25s;
-                  animation-timing-function: var(--bezier), var(--bezier-ease-in);
+                  animation-timing-function: var(--n-bezier), var(--n-bezier-ease-in);
                   animation-delay: .25s, 0s;
                   animation-name: transfer-height-collapse, transfer-slide-out-to-right;
                 `)
@@ -245,14 +245,14 @@ export default c([
                 c('&.item-enter-active', `
                   transform: translateX(-150%);
                   animation-duration: .25s, .25s;
-                  animation-timing-function: var(--bezier), var(--bezier-ease-out);
+                  animation-timing-function: var(--n-bezier), var(--n-bezier-ease-out);
                   animation-delay: 0s, .25s;
                   animation-name: transfer-height-expand, transfer-slide-in-from-left;
                 `),
                 c('&.item-leave-active', `
                   transform: translateX(150%);
                   animation-duration: .25s, .25s;
-                  animation-timing-function: var(--bezier), var(--bezier-ease-in);
+                  animation-timing-function: var(--n-bezier), var(--n-bezier-ease-in);
                   animation-delay: .25s, 0s;
                   animation-name: transfer-height-collapse, transfer-slide-out-to-left;
                 `)

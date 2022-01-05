@@ -82,6 +82,7 @@ const scrollbarProps = {
   // If container is set, resize observer won't not attached
   container: Function as PropType<() => HTMLElement | null | undefined>,
   content: Function as PropType<() => HTMLElement | null | undefined>,
+  containerClass: String,
   containerStyle: [String, Object] as PropType<string | CSSProperties>,
   contentClass: String,
   contentStyle: [String, Object] as PropType<string | CSSProperties>,
@@ -586,12 +587,12 @@ const Scrollbar = defineComponent({
           self: { color, colorHover }
         } = themeRef.value
         return {
-          '--scrollbar-bezier': cubicBezierEaseInOut,
-          '--scrollbar-color': color,
-          '--scrollbar-color-hover': colorHover,
-          '--scrollbar-border-radius': scrollbarBorderRadius,
-          '--scrollbar-width': scrollbarWidth,
-          '--scrollbar-height': scrollbarHeight
+          '--n-scrollbar-bezier': cubicBezierEaseInOut,
+          '--n-scrollbar-color': color,
+          '--n-scrollbar-color-hover': colorHover,
+          '--n-scrollbar-border-radius': scrollbarBorderRadius,
+          '--n-scrollbar-width': scrollbarWidth,
+          '--n-scrollbar-height': scrollbarHeight
         }
       })
     }
@@ -603,6 +604,7 @@ const Scrollbar = defineComponent({
       h(
         'div',
         mergeProps(this.$attrs, {
+          role: 'none',
           ref: 'wrapperRef',
           class: `${mergedClsPrefix}-scrollbar`,
           style: this.cssVars,
@@ -614,8 +616,12 @@ const Scrollbar = defineComponent({
             renderSlot($slots, 'default')
           ) : (
             <div
+              role="none"
               ref="containerRef"
-              class={`${mergedClsPrefix}-scrollbar-container`}
+              class={[
+                `${mergedClsPrefix}-scrollbar-container`,
+                this.containerClass
+              ]}
               style={this.containerStyle}
               onScroll={this.handleScroll}
               onWheel={this.onWheel}
@@ -625,6 +631,7 @@ const Scrollbar = defineComponent({
                   default: () => (
                     <div
                       ref="contentRef"
+                      role="none"
                       style={
                         [
                           {
@@ -648,7 +655,8 @@ const Scrollbar = defineComponent({
           <div
             ref="yRailRef"
             class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--vertical`}
-            style={[this.horizontalRailStyle] as any}
+            style={this.horizontalRailStyle}
+            aria-hidden
           >
             <Transition name="fade-in-transition">
               {{
@@ -669,7 +677,8 @@ const Scrollbar = defineComponent({
           <div
             ref="xRailRef"
             class={`${mergedClsPrefix}-scrollbar-rail ${mergedClsPrefix}-scrollbar-rail--horizontal`}
-            style={[this.verticalRailStyle] as any}
+            style={this.verticalRailStyle}
+            aria-hidden
           >
             <Transition name="fade-in-transition">
               {{

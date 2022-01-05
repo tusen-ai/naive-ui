@@ -58,16 +58,16 @@ export default defineComponent({
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
-          '--title-text-color': titleTextColor,
-          '--title-font-size': titleFontSize,
-          '--title-font-weight': titleFontWeight,
-          '--font-size': fontSize,
-          '--back-size': backSize,
-          '--subtitle-text-color': subtitleTextColor,
-          '--back-color': backColor,
-          '--back-color-hover': backColorHover,
-          '--back-color-pressed': backColorPressed,
-          '--bezier': cubicBezierEaseInOut
+          '--n-title-text-color': titleTextColor,
+          '--n-title-font-size': titleFontSize,
+          '--n-title-font-weight': titleFontWeight,
+          '--n-font-size': fontSize,
+          '--n-back-size': backSize,
+          '--n-subtitle-text-color': subtitleTextColor,
+          '--n-back-color': backColor,
+          '--n-back-color-hover': backColorHover,
+          '--n-back-color-pressed': backColorPressed,
+          '--n-bezier': cubicBezierEaseInOut
         }
       })
     }
@@ -97,49 +97,54 @@ export default defineComponent({
         ]}
       >
         {headerSlot ? (
-          <div class={`${mergedClsPrefix}-page-header-header`} key="breadcrumn">
+          <div class={`${mergedClsPrefix}-page-header-header`} key="breadcrumb">
             {headerSlot()}
           </div>
         ) : null}
-        <div class={`${mergedClsPrefix}-page-header`} key="header">
-          <div class={`${mergedClsPrefix}-page-header__main`} key="back">
-            {showBack ? (
-              <div
-                class={`${mergedClsPrefix}-page-header__back`}
-                onClick={onBack}
-              >
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{
-                    default: () => <ArrowBackIcon />
-                  }}
-                </NBaseIcon>
-              </div>
-            ) : null}
-            {avatarSlot ? (
-              <div class={`${mergedClsPrefix}-page-header__avatar`}>
-                {avatarSlot()}
-              </div>
-            ) : null}
-            {showTitle ? (
-              <div class={`${mergedClsPrefix}-page-header__title`} key="title">
-                {title || titleSlot!()}
-              </div>
-            ) : null}
-            {showSubtitle ? (
-              <div
-                class={`${mergedClsPrefix}-page-header__subtitle`}
-                key="subtitle"
-              >
-                {subtitle || subtitleSlot!()}
+        {(showBack || avatarSlot || showTitle || showSubtitle || showExtra) && (
+          <div class={`${mergedClsPrefix}-page-header`} key="header">
+            <div class={`${mergedClsPrefix}-page-header__main`} key="back">
+              {showBack ? (
+                <div
+                  class={`${mergedClsPrefix}-page-header__back`}
+                  onClick={onBack}
+                >
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
+                    {{
+                      default: () => <ArrowBackIcon />
+                    }}
+                  </NBaseIcon>
+                </div>
+              ) : null}
+              {avatarSlot ? (
+                <div class={`${mergedClsPrefix}-page-header__avatar`}>
+                  {avatarSlot()}
+                </div>
+              ) : null}
+              {showTitle ? (
+                <div
+                  class={`${mergedClsPrefix}-page-header__title`}
+                  key="title"
+                >
+                  {title || titleSlot!()}
+                </div>
+              ) : null}
+              {showSubtitle ? (
+                <div
+                  class={`${mergedClsPrefix}-page-header__subtitle`}
+                  key="subtitle"
+                >
+                  {subtitle || subtitleSlot!()}
+                </div>
+              ) : null}
+            </div>
+            {showExtra ? (
+              <div class={`${mergedClsPrefix}-page-header__extra`}>
+                {extra || extraSlot!()}
               </div>
             ) : null}
           </div>
-          {showExtra ? (
-            <div class={`${mergedClsPrefix}-page-header__extra`}>
-              {extra || extraSlot!()}
-            </div>
-          ) : null}
-        </div>
+        )}
         {defaultSlot ? (
           <div class={`${mergedClsPrefix}-page-header-content`} key="content">
             {defaultSlot()}

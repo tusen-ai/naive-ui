@@ -1,20 +1,20 @@
 import { cB, cNotM, cE, cM } from '../../../_utils/cssr'
 
 // vars:
-// --bezier
-// --color
-// --text-color
-// --font-weight
+// --n-bezier
+// --n-color
+// --n-text-color
+// --n-font-weight
 export default cB('divider', `
   position: relative;
   display: flex;
   width: 100%;
   box-sizing: border-box;
   font-size: 16px;
-  color: var(--text-color);
+  color: var(--n-text-color);
   transition:
-    color .3s var(--bezier),
-    background-color .3s var(--bezier);
+    color .3s var(--n-bezier),
+    background-color .3s var(--n-bezier);
 `, [
   cNotM('vertical', `
     margin-top: 24px;
@@ -31,7 +31,7 @@ export default cB('divider', `
     margin-left: 12px;
     margin-right: 12px;
     white-space: nowrap;
-    font-weight: var(--font-weight);
+    font-weight: var(--n-font-weight);
   `),
   cM('title-position-left', [
     cE('line', [
@@ -65,22 +65,22 @@ export default cB('divider', `
   `),
   cE('line', `
     border: none;
-    transition: background-color .3s var(--bezier), border-color .3s var(--bezier);
+    transition: background-color .3s var(--n-bezier), border-color .3s var(--n-bezier);
     height: 1px;
     width: 100%;
     margin: 0;
   `),
   cNotM('dashed', [
     cE('line', {
-      backgroundColor: 'var(--color)'
+      backgroundColor: 'var(--n-color)'
     })
   ]),
   cM('dashed', [
     cE('line', {
-      borderColor: 'var(--color)'
+      borderColor: 'var(--n-color)'
     })
   ]),
   cM('vertical', {
-    backgroundColor: 'var(--color)'
+    backgroundColor: 'var(--n-color)'
   })
 ])

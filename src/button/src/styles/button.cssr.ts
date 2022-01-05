@@ -3,49 +3,50 @@ import fadeInWidthExpandTransition from '../../../_styles/transitions/fade-in-wi
 import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 
 // vars:
-// --bezier
-// --ripple-duration
-// --opacity-disabled
-// --text-color
-// --text-color-hover
-// --text-color-pressed
-// --text-color-focus
-// --text-color-disabled
-// --color
-// --color-hover
-// --color-pressed
-// --color-focus
-// --color-disabled
-// --border
-// --border-hover
-// --border-pressed
-// --border-focus
-// --border-disabled
-// --ripple-color
-// --border-radius
-// --height
-// --width
-// --font-size
-// --padding
-// --icon-size
-// --icon-margin
-// --wave-opacity
-// --font-weight
+// --n-bezier
+// --n-bezier-ease-out
+// --n-ripple-duration
+// --n-opacity-disabled
+// --n-text-color
+// --n-text-color-hover
+// --n-text-color-pressed
+// --n-text-color-focus
+// --n-text-color-disabled
+// --n-color
+// --n-color-hover
+// --n-color-pressed
+// --n-color-focus
+// --n-color-disabled
+// --n-border
+// --n-border-hover
+// --n-border-pressed
+// --n-border-focus
+// --n-border-disabled
+// --n-ripple-color
+// --n-border-radius
+// --n-height
+// --n-width
+// --n-font-size
+// --n-padding
+// --n-icon-size
+// --n-icon-margin
+// --n-wave-opacity
+// --n-font-weight
 //
 // private-vars:
-// --border-color-xxx, used for custom color
+// --n-border-color-xxx, used for custom color
 export default c([
   cB('button', `
-    font-weight: var(--font-weight);
+    font-weight: var(--n-font-weight);
     line-height: 1;
     font-family: inherit;
-    padding: var(--padding);
-    height: var(--height);
-    font-size: var(--font-size);
-    border-radius: var(--border-radius);
-    color: var(--text-color);
-    background-color: var(--color);
-    width: var(--width);
+    padding: var(--n-padding);
+    height: var(--n-height);
+    font-size: var(--n-font-size);
+    border-radius: var(--n-border-radius);
+    color: var(--n-text-color);
+    background-color: var(--n-color);
+    width: var(--n-width);
     white-space: nowrap;
     outline: none;
     position: relative;
@@ -61,85 +62,88 @@ export default c([
     cursor: pointer;
     text-decoration: none;
     transition:
-      color .3s var(--bezier),
-      background-color .3s var(--bezier),
-      opacity .3s var(--bezier),
-      border-color .3s var(--bezier);
+      color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier),
+      opacity .3s var(--n-bezier),
+      border-color .3s var(--n-bezier);
   `, [
     cM('color', [
       cE('border', {
-        borderColor: 'var(--border-color)'
+        borderColor: 'var(--n-border-color)'
       }),
       cM('disabled', [
         cE('border', {
-          borderColor: 'var(--border-color-disabled)'
+          borderColor: 'var(--n-border-color-disabled)'
         })
       ]),
       cNotM('disabled', [
         c('&:focus', [
           cE('state-border', {
-            borderColor: 'var(--border-color-focus)'
+            borderColor: 'var(--n-border-color-focus)'
           })
         ]),
         c('&:hover', [
           cE('state-border', {
-            borderColor: 'var(--border-color-hover)'
+            borderColor: 'var(--n-border-color-hover)'
           })
         ]),
         c('&:active', [
           cE('state-border', {
-            borderColor: 'var(--border-color-pressed)'
+            borderColor: 'var(--n-border-color-pressed)'
           })
         ]),
         cM('pressed', [
           cE('state-border', {
-            borderColor: 'var(--border-color-pressed)'
+            borderColor: 'var(--n-border-color-pressed)'
           })
         ])
       ])
     ]),
     cM('disabled', {
-      backgroundColor: 'var(--color-disabled)',
-      color: 'var(--text-color-disabled)'
+      backgroundColor: 'var(--n-color-disabled)',
+      color: 'var(--n-text-color-disabled)'
     }, [
       cE('border', {
-        border: 'var(--border-disabled)'
+        border: 'var(--n-border-disabled)'
       })
     ]),
     cNotM('disabled', [
       c('&:focus', {
-        backgroundColor: 'var(--color-focus)',
-        color: 'var(--text-color-focus)'
+        backgroundColor: 'var(--n-color-focus)',
+        color: 'var(--n-text-color-focus)'
       }, [
         cE('state-border', {
-          border: 'var(--border-focus)'
+          border: 'var(--n-border-focus)'
         })
       ]),
       c('&:hover', {
-        backgroundColor: 'var(--color-hover)',
-        color: 'var(--text-color-hover)'
+        backgroundColor: 'var(--n-color-hover)',
+        color: 'var(--n-text-color-hover)'
       }, [
         cE('state-border', {
-          border: 'var(--border-hover)'
+          border: 'var(--n-border-hover)'
         })
       ]),
       c('&:active', {
-        backgroundColor: 'var(--color-pressed)',
-        color: 'var(--text-color-pressed)'
+        backgroundColor: 'var(--n-color-pressed)',
+        color: 'var(--n-text-color-pressed)'
       }, [
         cE('state-border', {
-          border: 'var(--border-pressed)'
+          border: 'var(--n-border-pressed)'
         })
       ]),
       cM('pressed', {
-        backgroundColor: 'var(--color-pressed)',
-        color: 'var(--text-color-pressed)'
+        backgroundColor: 'var(--n-color-pressed)',
+        color: 'var(--n-text-color-pressed)'
       }, [
         cE('state-border', {
-          border: 'var(--border-pressed)'
+          border: 'var(--n-border-pressed)'
         })
       ])
     ]),
+    cM('loading', {
+      'pointer-events': 'none'
+    }),
     cB('base-wave', `
       pointer-events: none;
       top: 0;
@@ -147,8 +151,8 @@ export default c([
       bottom: 0;
       left: 0;
       animation-iteration-count: 1;
-      animation-duration: var(--ripple-duration);
-      animation-timing-function: var(--bezier-ease-out), var(--bezier-ease-out);
+      animation-duration: var(--n-ripple-duration);
+      animation-timing-function: var(--n-bezier-ease-out), var(--n-bezier-ease-out);
     `, [
       cM('active', {
         zIndex: 1,
@@ -167,30 +171,30 @@ export default c([
       right: 0;
       bottom: 0;
       border-radius: inherit;
-      transition: border-color .3s var(--bezier);
+      transition: border-color .3s var(--n-bezier);
       pointer-events: none;
     `),
     cE('border', {
-      border: 'var(--border)'
+      border: 'var(--n-border)'
     }),
     cE('state-border', {
-      border: 'var(--border)',
+      border: 'var(--n-border)',
       borderColor: '#0000',
       zIndex: 1
     }),
     cE('icon', `
-      margin: var(--icon-margin);
+      margin: var(--n-icon-margin);
       margin-left: 0;
-      height: var(--icon-size);
-      width: var(--icon-size);
-      max-width: var(--icon-size);
-      font-size: var(--icon-size);
+      height: var(--n-icon-size);
+      width: var(--n-icon-size);
+      max-width: var(--n-icon-size);
+      font-size: var(--n-icon-size);
       position: relative;
       flex-shrink: 0;
     `, [
       cB('icon-slot', `
-        height: var(--icon-size);
-        width: var(--icon-size);
+        height: var(--n-icon-size);
+        width: var(--n-icon-size);
         position: absolute;
         left: 0;
         top: 50%;
@@ -211,7 +215,7 @@ export default c([
     `, [
       c('~', [
         cE('icon', {
-          margin: 'var(--icon-margin)',
+          margin: 'var(--n-icon-margin)',
           marginRight: 0
         })
       ])
@@ -227,21 +231,21 @@ export default c([
     ]),
     cM('disabled', {
       cursor: 'not-allowed',
-      opacity: 'var(--opacity-disabled)'
+      opacity: 'var(--n-opacity-disabled)'
     })
   ]),
   c('@keyframes button-wave-spread', {
     from: {
-      boxShadow: '0 0 0.5px 0 var(--ripple-color)'
+      boxShadow: '0 0 0.5px 0 var(--n-ripple-color)'
     },
     to: {
       // don't use exact 5px since chrome will display the animation with glitches
-      boxShadow: '0 0 0.5px 4.5px var(--ripple-color)'
+      boxShadow: '0 0 0.5px 4.5px var(--n-ripple-color)'
     }
   }),
   c('@keyframes button-wave-opacity', {
     from: {
-      opacity: 'var(--wave-opacity)'
+      opacity: 'var(--n-wave-opacity)'
     },
     to: {
       opacity: 0

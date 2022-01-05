@@ -22,7 +22,7 @@ export function renderDropMark ({
     style.top = 0
     style.bottom = 0
     style.borderRadius = 'inherit'
-    style.boxShadow = 'inset 0 0 0 2px var(--drop-mark-color)'
+    style.boxShadow = 'inset 0 0 0 2px var(--n-drop-mark-color)'
   } else {
     const cssPosition = position === 'before' ? 'top' : 'bottom'
     style[cssPosition] = 0
@@ -30,7 +30,7 @@ export function renderDropMark ({
     // Maybe it is possible to use content left
     style.left = `${el.offsetLeft + 6 - offsetLevel * indent}px`
     style.height = '2px'
-    style.backgroundColor = 'var(--drop-mark-color)'
+    style.backgroundColor = 'var(--n-drop-mark-color)'
     style.transformOrigin = cssPosition
     style.borderRadius = '1px'
     style.transform =

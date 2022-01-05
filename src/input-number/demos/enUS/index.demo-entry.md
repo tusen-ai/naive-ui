@@ -9,6 +9,7 @@ basic
 disabled
 event
 icon
+loading
 min-max
 size
 step
@@ -29,6 +30,7 @@ change-timing
 | default-value | `number \| null` | `null` | Default value when not manually set. |
 | disabled | `boolean` | `false` | Whether to disable the input. |
 | keyboard | `{ ArrowUp?: boolean, ArrowDown?: boolean }` | `{}` | Control the keyboard behavior. If you set corresponding to false, the keyboard behavior will be disabled. |
+| loading | `boolean` | `undefined` | Set loading state. If set (true/false), the element will always take up enough space for the loading indicator. |
 | max | `number` | `undefined` | The max value. |
 | min | `number` | `undefined` | The min value. |
 | placeholder | `string` | `'Please Input'` | Placeholder. |

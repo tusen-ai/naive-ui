@@ -35,3 +35,7 @@
 
 - (moderate) Async
 - (easy) Leaf-only check
+
+## DatePicker
+
+- Do not allow start > end

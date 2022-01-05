@@ -5,7 +5,14 @@
 ```html
 <n-button @click="showModal = true">没什么的</n-button>
 <n-modal v-model:show="showModal" transform-origin="center">
-  <n-card style="width: 600px;" title="自愿" :bordered="false" size="huge">
+  <n-card
+    style="width: 600px;"
+    title="自愿"
+    :bordered="false"
+    size="huge"
+    role="dialog"
+    aria-modal="true"
+  >
     <template #header-extra>按需</template>
     原则
     <template #footer>支持一下</template>

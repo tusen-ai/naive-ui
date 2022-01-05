@@ -5,6 +5,7 @@ import { checkboxLight } from '../../checkbox/styles'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
+import { emptyLight } from '../../empty/styles'
 
 export const self = (vars: ThemeCommonVars) => {
   const {
@@ -25,7 +26,7 @@ export const self = (vars: ThemeCommonVars) => {
     menuColor: popoverColor,
     menuBoxShadow: boxShadow2,
     menuDividerColor: dividerColor,
-    menuHeight: 'calc(var(--option-height) * 6.6)',
+    menuHeight: 'calc(var(--n-option-height) * 6.6)',
     optionArrowColor: textColor3,
     optionHeight: heightMedium,
     optionFontSize: fontSizeMedium,
@@ -48,7 +49,8 @@ const cascaderLight = createTheme({
     InternalSelectMenu: internalSelectMenuLight,
     InternalSelection: internalSelectionLight,
     Scrollbar: scrollbarLight,
-    Checkbox: checkboxLight
+    Checkbox: checkboxLight,
+    Empty: emptyLight
   },
   self
 })

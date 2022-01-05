@@ -99,26 +99,26 @@ export default defineComponent({
       const { type } = props
       const { left, right } = getMargin(iconMargin)
       return {
-        '--bezier': cubicBezierEaseInOut,
-        '--color': self[createKey('color', type)],
-        '--close-color': self[createKey('closeColor', type)],
-        '--close-color-hover': self[createKey('closeColorHover', type)],
-        '--close-color-pressed': self[createKey('closeColorPressed', type)],
-        '--icon-color': self[createKey('iconColor', type)],
-        '--border': self[createKey('border', type)],
-        '--title-text-color': self[createKey('titleTextColor', type)],
-        '--content-text-color': self[createKey('contentTextColor', type)],
-        '--line-height': lineHeight,
-        '--border-radius': borderRadius,
-        '--font-size': fontSize,
-        '--title-font-weight': titleFontWeight,
-        '--icon-size': iconSize,
-        '--icon-margin': iconMargin,
-        '--close-size': closeSize,
-        '--close-margin': closeMargin,
-        '--padding': padding,
-        '--icon-margin-left': left,
-        '--icon-margin-right': right
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-color': self[createKey('color', type)],
+        '--n-close-color': self[createKey('closeColor', type)],
+        '--n-close-color-hover': self[createKey('closeColorHover', type)],
+        '--n-close-color-pressed': self[createKey('closeColorPressed', type)],
+        '--n-icon-color': self[createKey('iconColor', type)],
+        '--n-border': self[createKey('border', type)],
+        '--n-title-text-color': self[createKey('titleTextColor', type)],
+        '--n-content-text-color': self[createKey('contentTextColor', type)],
+        '--n-line-height': lineHeight,
+        '--n-border-radius': borderRadius,
+        '--n-font-size': fontSize,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-icon-size': iconSize,
+        '--n-icon-margin': iconMargin,
+        '--n-close-size': closeSize,
+        '--n-close-margin': closeMargin,
+        '--n-padding': padding,
+        '--n-icon-margin-left': left,
+        '--n-icon-margin-right': right
       }
     })
     const visibleRef = ref(true)
@@ -201,13 +201,13 @@ export default defineComponent({
                   </div>
                 )}
                 <div class={`${mergedClsPrefix}-alert-body`}>
-                  {this.title !== undefined && (
+                  {this.title || $slots.header ? (
                     <div class={`${mergedClsPrefix}-alert-body__title`}>
                       {renderSlot($slots, 'header', undefined, () => [
                         this.title
                       ])}
                     </div>
-                  )}
+                  ) : null}
                   {$slots.default && (
                     <div class={`${mergedClsPrefix}-alert-body__content`}>
                       {$slots}

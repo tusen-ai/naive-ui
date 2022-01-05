@@ -1,4 +1,4 @@
-# Large Data
+# Large data
 
 Large datasets are ok. By default `virtual-scroll` is true, which is how cascader works with large sets of data.
 

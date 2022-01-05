@@ -57,8 +57,8 @@ export const self = (vars: ThemeCommonVars) => {
     opacityDisabled: opacityDisabled,
     // secondary
     colorOpacitySecondary: '0.16',
-    colorOpacitySecondaryHover: '0.2',
-    colorOpacitySecondaryPressed: '0.24',
+    colorOpacitySecondaryHover: '0.22',
+    colorOpacitySecondaryPressed: '0.28',
     colorSecondary: buttonColor2,
     colorSecondaryHover: buttonColor2Hover,
     colorSecondaryPressed: buttonColor2Pressed,

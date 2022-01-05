@@ -1,4 +1,4 @@
-# Datetime
+# Date time
 
 ```html
 <n-date-picker v-model:value="timestamp" type="datetime" clearable />

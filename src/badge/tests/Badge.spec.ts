@@ -19,7 +19,7 @@ describe('n-badge', () => {
   it('should work with `color` prop', async () => {
     const wrapper = mount(NBadge, { props: { value: 5, color: 'grey' } })
     expect(wrapper.find('.n-badge').attributes('style')).toContain(
-      '--color: grey;'
+      '--n-color: grey;'
     )
   })
 
@@ -53,6 +53,14 @@ describe('n-badge', () => {
 
     await wrapper.setProps({ 'show-zero': true })
     expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
+  })
+
+  it('should work with `show` prop', async () => {
+    const wrapper = mount(NBadge, { props: { value: 7 } })
+    expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
+
+    await wrapper.setProps({ show: false })
+    expect(wrapper.find('.n-badge-sup').exists()).not.toBe(true)
   })
 
   it('should work with `type` prop', () => {

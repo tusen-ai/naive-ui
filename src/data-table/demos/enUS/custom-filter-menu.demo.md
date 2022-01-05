@@ -1,4 +1,4 @@
-# Custom Filter Menu
+# Custom filter menu
 
 ```html
 <n-data-table :columns="cols" :data="data" />

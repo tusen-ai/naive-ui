@@ -77,21 +77,21 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, mergedClsPrefix, syncVLScroller } = this
+    const { mergedTheme, mergedClsPrefix, virtualScroll, syncVLScroller } = this
     return (
       <>
-        {this.virtualScroll ? (
-          <NScrollbar
-            ref="scrollerInstRef"
-            theme={mergedTheme.peers.Scrollbar}
-            themeOverrides={mergedTheme.peerOverrides.Scrollbar}
-            container={this.scrollContainer}
-            content={this.scrollContent}
-          >
-            {{
-              default: () => (
+        <NScrollbar
+          ref="scrollerInstRef"
+          theme={mergedTheme.peers.Scrollbar}
+          themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+          container={virtualScroll ? this.scrollContainer : undefined}
+          content={virtualScroll ? this.scrollContent : undefined}
+        >
+          {{
+            default: () =>
+              virtualScroll ? (
                 <VirtualList
-                  ref="srcVlInstRef"
+                  ref="vlInstRef"
                   style={{ height: '100%' }}
                   class={`${mergedClsPrefix}-transfer-list-content`}
                   items={this.options}
@@ -116,16 +116,7 @@ export default defineComponent({
                     }
                   }}
                 </VirtualList>
-              )
-            }}
-          </NScrollbar>
-        ) : (
-          <NScrollbar
-            theme={mergedTheme.peers.Scrollbar}
-            themeOverrides={mergedTheme.peerOverrides.Scrollbar}
-          >
-            {{
-              default: () => (
+              ) : (
                 <div class={`${mergedClsPrefix}-transfer-list-content`}>
                   <TransitionGroup
                     name="item"
@@ -149,9 +140,8 @@ export default defineComponent({
                   </TransitionGroup>
                 </div>
               )
-            }}
-          </NScrollbar>
-        )}
+          }}
+        </NScrollbar>
         <Transition
           name="fade-in-transition"
           appear={this.isMounted}

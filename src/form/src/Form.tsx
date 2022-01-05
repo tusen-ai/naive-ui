@@ -6,7 +6,7 @@ import { formLight } from '../styles'
 import type { FormTheme } from '../styles'
 import style from './styles/form.cssr'
 import {
-  ApplyRule,
+  ShouldRuleBeApplied,
   FormItemInst,
   FormRules,
   FormValidateCallback,
@@ -66,10 +66,15 @@ export default defineComponent({
     const formItems: Record<string, FormItemInst[]> = {}
     async function validate (
       validateCallback?: FormValidateCallback,
-      shouldRuleBeApplied: ApplyRule = () => true
+      shouldRuleBeApplied: ShouldRuleBeApplied = () => true
     ): Promise<void> {
       return await new Promise((resolve, reject) => {
-        const formItemValidationPromises = []
+        const formItemValidationPromises: Array<
+        Promise<{
+          valid: boolean
+          errors?: ValidateError[]
+        }>
+        > = []
         for (const key of keysOf(formItems)) {
           const formItemInstances = formItems[key]
           for (const formItemInstance of formItemInstances) {
@@ -87,14 +92,11 @@ export default defineComponent({
               .map((result) => result.errors)
             if (validateCallback) {
               validateCallback(errors as ValidateError[][])
-            } else {
-              reject(errors)
             }
+            reject(errors)
           } else {
             if (validateCallback) validateCallback()
-            else {
-              resolve()
-            }
+            resolve()
           }
         })
       })

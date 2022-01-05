@@ -7,7 +7,6 @@ import {
   PropType,
   ExtractPropTypes,
   toRef,
-  renderSlot,
   CSSProperties,
   Transition
 } from 'vue'
@@ -15,7 +14,6 @@ import { createId } from 'seemly'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
-import { NEmpty } from '../../empty'
 import { NPagination } from '../../pagination'
 import { PaginationProps } from '../../pagination/src/Pagination'
 import { warn, createKey } from '../../_utils'
@@ -224,7 +222,7 @@ export default defineComponent({
   name: 'DataTable',
   alias: ['AdvancedTable'],
   props: dataTableProps,
-  setup (props) {
+  setup (props, { slots }) {
     const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
     const mergedBottomBorderedRef = computed(() => {
       const { bottomBordered } = props
@@ -294,7 +292,9 @@ export default defineComponent({
       syncScrollState,
       setHeaderScrollLeft,
       leftActiveFixedColKeyRef,
+      leftActiveFixedChildrenColKeysRef,
       rightActiveFixedColKeyRef,
+      rightActiveFixedChildrenColKeysRef,
       leftFixedColumnsRef,
       rightFixedColumnsRef,
       fixedColumnLeftMapRef,
@@ -321,6 +321,7 @@ export default defineComponent({
       return props.tableLayout
     })
     provide(dataTableInjectionKey, {
+      slots,
       indentRef: toRef(props, 'indent'),
       firstContentfulColIndexRef,
       bodyWidthRef,
@@ -333,7 +334,9 @@ export default defineComponent({
       colsRef,
       paginatedDataRef,
       leftActiveFixedColKeyRef,
+      leftActiveFixedChildrenColKeysRef,
       rightActiveFixedColKeyRef,
+      rightActiveFixedChildrenColKeysRef,
       leftFixedColumnsRef,
       rightFixedColumnsRef,
       fixedColumnLeftMapRef,
@@ -370,9 +373,9 @@ export default defineComponent({
         } = themeRef.value
         // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         return {
-          '--action-padding': actionPadding,
-          '--action-button-margin': actionButtonMargin,
-          '--action-divider-color': actionDividerColor
+          '--n-action-padding': actionPadding,
+          '--n-action-button-margin': actionButtonMargin,
+          '--n-action-divider-color': actionDividerColor
         } as CSSProperties
       }),
       mergedTableLayoutRef,
@@ -456,45 +459,45 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--font-size': fontSize,
-          '--th-padding': thPadding,
-          '--td-padding': tdPadding,
-          '--bezier': cubicBezierEaseInOut,
-          '--border-radius': borderRadius,
-          '--line-height': lineHeight,
-          '--border-color': borderColor,
-          '--border-color-modal': borderColorModal,
-          '--border-color-popover': borderColorPopover,
-          '--th-color': thColor,
-          '--th-color-hover': thColorHover,
-          '--th-color-modal': thColorModal,
-          '--th-color-hover-modal': thColorHoverModal,
-          '--th-color-popover': thColorPopover,
-          '--th-color-hover-popover': thColorHoverPopover,
-          '--td-color': tdColor,
-          '--td-color-hover': tdColorHover,
-          '--td-color-modal': tdColorModal,
-          '--td-color-hover-modal': tdColorHoverModal,
-          '--td-color-popover': tdColorPopover,
-          '--td-color-hover-popover': tdColorHoverPopover,
-          '--th-text-color': thTextColor,
-          '--td-text-color': tdTextColor,
-          '--th-font-weight': thFontWeight,
-          '--th-button-color-hover': thButtonColorHover,
-          '--th-icon-color': thIconColor,
-          '--th-icon-color-active': thIconColorActive,
-          '--filter-size': filterSize,
-          '--pagination-margin': paginationMargin,
-          '--empty-padding': emptyPadding,
-          '--box-shadow-before': boxShadowBefore,
-          '--box-shadow-after': boxShadowAfter,
-          '--sorter-size': sorterSize,
-          '--loading-size': loadingSize,
-          '--loading-color': loadingColor,
-          '--opacity-loading': opacityLoading,
-          '--td-color-striped': tdColorStriped,
-          '--td-color-striped-modal': tdColorStripedModal,
-          '--td-color-striped-popover': tdColorStripedPopover
+          '--n-font-size': fontSize,
+          '--n-th-padding': thPadding,
+          '--n-td-padding': tdPadding,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-border-radius': borderRadius,
+          '--n-line-height': lineHeight,
+          '--n-border-color': borderColor,
+          '--n-border-color-modal': borderColorModal,
+          '--n-border-color-popover': borderColorPopover,
+          '--n-th-color': thColor,
+          '--n-th-color-hover': thColorHover,
+          '--n-th-color-modal': thColorModal,
+          '--n-th-color-hover-modal': thColorHoverModal,
+          '--n-th-color-popover': thColorPopover,
+          '--n-th-color-hover-popover': thColorHoverPopover,
+          '--n-td-color': tdColor,
+          '--n-td-color-hover': tdColorHover,
+          '--n-td-color-modal': tdColorModal,
+          '--n-td-color-hover-modal': tdColorHoverModal,
+          '--n-n-td-color-popover': tdColorPopover,
+          '--n-td-color-hover-popover': tdColorHoverPopover,
+          '--n-th-text-color': thTextColor,
+          '--n-td-text-color': tdTextColor,
+          '--n-th-font-weight': thFontWeight,
+          '--n-th-button-color-hover': thButtonColorHover,
+          '--n-th-icon-color': thIconColor,
+          '--n-th-icon-color-active': thIconColorActive,
+          '--n-filter-size': filterSize,
+          '--n-pagination-margin': paginationMargin,
+          '--n-empty-padding': emptyPadding,
+          '--n-box-shadow-before': boxShadowBefore,
+          '--n-box-shadow-after': boxShadowAfter,
+          '--n-sorter-size': sorterSize,
+          '--n-loading-size': loadingSize,
+          '--n-loading-color': loadingColor,
+          '--n-opacity-loading': opacityLoading,
+          '--n-td-color-striped': tdColorStriped,
+          '--n-td-color-striped-modal': tdColorStripedModal,
+          '--n-td-color-striped-popover': tdColorStripedPopover
         }
       })
     }
@@ -518,29 +521,7 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-data-table-wrapper`}>
-          <MainTable ref="mainTableInstRef">
-            {{
-              default: () =>
-                this.paginatedData.length === 0 ? (
-                  <div
-                    class={[
-                      `${mergedClsPrefix}-data-table-empty`,
-                      {
-                        [`${mergedClsPrefix}-data-table-empty--hide`]:
-                          this.loading
-                      }
-                    ]}
-                  >
-                    {renderSlot(this.$slots, 'empty', undefined, () => [
-                      <NEmpty
-                        theme={this.mergedTheme.peers.Empty}
-                        themeOverrides={this.mergedTheme.peerOverrides.Empty}
-                      />
-                    ])}
-                  </div>
-                ) : null
-            }}
-          </MainTable>
+          <MainTable ref="mainTableInstRef" />
         </div>
         {this.pagination ? (
           <div class={`${mergedClsPrefix}-data-table__pagination`}>

@@ -135,9 +135,9 @@ export default defineComponent({
           self: { height, colorError, colorLoading }
         } = themeRef.value
         return {
-          '--height': height,
-          '--color-loading': colorLoading,
-          '--color-error': colorError
+          '--n-height': height,
+          '--n-color-loading': colorLoading,
+          '--n-color-error': colorError
         }
       })
     }

@@ -1,4 +1,4 @@
-# Raw Content
+# Raw content
 
 ```html
 <n-popover trigger="hover" raw :show-arrow="false">

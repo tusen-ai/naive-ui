@@ -2,73 +2,73 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
-// --bezier
+// --n-bezier
 
-// --icon-color
-// --icon-color-disabled
+// --n-icon-color
+// --n-icon-color-disabled
 
-// --panel-border-radius
-// --panel-color
-// --panel-box-shadow
-// --panel-text-color
+// --n-panel-border-radius
+// --n-panel-color
+// --n-panel-box-shadow
+// --n-panel-text-color
 
 // panel header
-// --panel-header-padding
-// --panel-header-divider-color
+// --n-panel-header-padding
+// --n-panel-header-divider-color
 
 // panel calendar
-// --calendar-left-padding
-// --calendar-right-padding
-// --calendar-title-height
-// --calendar-title-padding
-// --calendar-title-font-size
-// --calendar-title-text-color
-// --calendar-title-font-weight
-// --calendar-title-grid-template-columns
-// --calendar-days-height
-// --calendar-days-divider-color
-// --calendar-days-font-size
-// --calendar-days-text-color
-// --calendar-divider-color
+// --n-calendar-left-padding
+// --n-calendar-right-padding
+// --n-calendar-title-height
+// --n-calendar-title-padding
+// --n-calendar-title-font-size
+// --n-calendar-title-text-color
+// --n-calendar-title-font-weight
+// --n-calendar-title-grid-template-columns
+// --n-calendar-days-height
+// --n-calendar-days-divider-color
+// --n-calendar-days-font-size
+// --n-calendar-days-text-color
+// --n-calendar-divider-color
 
 // panel action
-// --panel-action-padding
-// --panel-action-divider-color
+// --n-panel-action-padding
+// --n-panel-action-divider-color
 
 // panel item
-// --item-border-radius
-// --item-size
-// --item-cell-width
-// --item-cell-height
-// --item-text-color
-// --item-color-included
-// --item-color-disabled
-// --item-color-hover
-// --item-color-active
-// --item-font-size
-// --item-text-color-disabled
-// --item-text-color-active
+// --n-item-border-radius
+// --n-item-size
+// --n-item-cell-width
+// --n-item-cell-height
+// --n-item-text-color
+// --n-item-color-included
+// --n-item-color-disabled
+// --n-item-color-hover
+// --n-item-color-active
+// --n-item-font-size
+// --n-item-text-color-disabled
+// --n-item-text-color-active
 
 // scroll item
-// --scroll-item-width
-// --scroll-item-height
-// --scroll-item-border-radius
+// --n-scroll-item-width
+// --n-scroll-item-height
+// --n-scroll-item-border-radius
 
 // panel arrow
-// --arrow-size
-// --arrow-color
+// --n-arrow-size
+// --n-arrow-color
 export default c([
   cB('date-picker', `
     position: relative;
     z-index: auto;
   `, [
     cB('date-picker-icon', `
-      color: var(--icon-color);
-      transition: color .3s var(--bezier);
+      color: var(--n-icon-color);
+      transition: color .3s var(--n-bezier);
     `),
     cM('disabled', [
       cB('date-picker-icon', `
-        color: var(--icon-color-disabled);
+        color: var(--n-icon-color-disabled);
       `)
     ])
   ]),
@@ -77,20 +77,20 @@ export default c([
     margin: 4px 0;
     display: grid;
     grid-template-columns: 0fr;
-    border-radius: var(--panel-border-radius);
-    background-color: var(--panel-color);
-    box-shadow: var(--panel-box-shadow);
-    color: var(--panel-text-color);
+    border-radius: var(--n-panel-border-radius);
+    background-color: var(--n-panel-color);
+    box-shadow: var(--n-panel-box-shadow);
+    color: var(--n-panel-text-color);
   `, [
     fadeInScaleUpTransition(),
     cB('date-panel-calendar', {
-      padding: 'var(--calendar-left-padding)',
+      padding: 'var(--n-calendar-left-padding)',
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridArea: 'left-calendar'
     }, [
       cM('end', {
-        padding: 'var(--calendar-right-padding)',
+        padding: 'var(--n-calendar-right-padding)',
         gridArea: 'right-calendar'
       })
     ]),
@@ -99,25 +99,25 @@ export default c([
       gridArea: 'left-calendar'
     }, [
       cE('picker-col', `
-        min-width: var(--scroll-item-width);
-        height: calc(var(--scroll-item-height) * 6);
+        min-width: var(--n-scroll-item-width);
+        height: calc(var(--n-scroll-item-height) * 6);
         user-select: none;
       `, [
         c('&:first-child', `
-          min-width: calc(var(--scroll-item-width) + 4px);
+          min-width: calc(var(--n-scroll-item-width) + 4px);
         `, [
           cE('picker-col-item', [
             c('&::before', 'left: 4px;')
           ])
         ]),
         cE('padding', `
-          height: calc(var(--scroll-item-height) * 5)
+          height: calc(var(--n-scroll-item-height) * 5)
         `)
       ]),
       cE('picker-col-item', `
         z-index: 0;
         cursor: pointer;
-        height: var(--scroll-item-height);
+        height: var(--n-scroll-item-height);
         box-sizing: border-box;
         padding-top: 4px;
         display: flex;
@@ -125,10 +125,10 @@ export default c([
         justify-content: center;
         position: relative;
         transition: 
-          color .3s var(--bezier),
-          background-color .3s var(--bezier);
+          color .3s var(--n-bezier),
+          background-color .3s var(--n-bezier);
         background: #0000;
-        color: var(--item-text-color);
+        color: var(--n-item-text-color);
       `, [
         c('&::before', `
           z-index: -1;
@@ -138,22 +138,22 @@ export default c([
           right: 4px;
           top: 4px;
           bottom: 0;
-          border-radius: var(--scroll-item-border-radius);
+          border-radius: var(--n-scroll-item-border-radius);
           transition: 
-            background-color .3s var(--bezier);
+            background-color .3s var(--n-bezier);
         `),
         cNotM('disabled', [
           c('&:hover::before', `
-            background-color: var(--item-color-hover);
+            background-color: var(--n-item-color-hover);
           `),
           cM('selected', `
-            color: var(--item-color-active);
+            color: var(--n-item-color-active);
           `, [
-            c('&::before', 'background-color: var(--item-color-hover);')
+            c('&::before', 'background-color: var(--n-item-color-hover);')
           ])
         ]),
         cM('disabled', `
-          background-color: var(--item-color-disabled);
+          background-color: var(--n-item-color-disabled);
           cursor: not-allowed;
         `)
       ])
@@ -208,10 +208,10 @@ export default c([
       box-sizing: border-box;
       width: 100%;
       align-items: center;
-      padding: var(--panel-header-padding);
+      padding: var(--n-panel-header-padding);
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px solid var(--panel-header-divider-color);
+      border-bottom: 1px solid var(--n-panel-header-divider-color);
     `, [
       c('>', [
         c('*:not(:last-child)', {
@@ -229,73 +229,73 @@ export default c([
     cB('date-panel-month', `
       box-sizing: border-box;
       display: grid;
-      grid-template-columns: var(--calendar-title-grid-template-columns);
+      grid-template-columns: var(--n-calendar-title-grid-template-columns);
       align-items: center;
       justify-items: center;
-      padding: var(--calendar-title-padding);
-      height: var(--calendar-title-height);
+      padding: var(--n-calendar-title-padding);
+      height: var(--n-calendar-title-height);
     `, [
       cE('prev, next, fast-prev, fast-next', `
         line-height: 0;
         cursor: pointer;
-        width: var(--arrow-size);
-        height: var(--arrow-size);
-        color: var(--arrow-color);
+        width: var(--n-arrow-size);
+        height: var(--n-arrow-size);
+        color: var(--n-arrow-color);
       `),
       cE('month-year', `
-        font-size: var(--calendar-title-font-size);
-        font-weight: var(--calendar-title-font-weight);
+        font-size: var(--n-calendar-title-font-size);
+        font-weight: var(--n-calendar-title-font-weight);
         line-height: 17px;
         flex-grow: 1;
         text-align: center;
-        color: var(--calendar-title-text-color);
+        color: var(--n-calendar-title-text-color);
       `)
     ]),
     cB('date-panel-weekdays', `
       display: grid;
       margin: auto;
-      grid-template-columns: repeat(7, var(--item-cell-width));
-      grid-template-rows: repeat(1, var(--item-cell-height));
+      grid-template-columns: repeat(7, var(--n-item-cell-width));
+      grid-template-rows: repeat(1, var(--n-item-cell-height));
       align-items: center;
       justify-items: center;
       margin-bottom: 4px;
-      border-bottom: 1px solid var(--calendar-days-divider-color);
+      border-bottom: 1px solid var(--n-calendar-days-divider-color);
     `, [
       cE('day', `
         line-height: 15px;
-        width: var(--item-size);
+        width: var(--n-item-size);
         text-align: center;
-        font-size: var(--calendar-days-font-size);
-        color: var(--item-text-color);
+        font-size: var(--n-calendar-days-font-size);
+        color: var(--n-item-text-color);
       `)
     ]),
     cB('date-panel-dates', `
       margin: auto;
       display: grid;
-      grid-template-columns: repeat(7, var(--item-cell-width));
-      grid-template-rows: repeat(6, var(--item-cell-height));
+      grid-template-columns: repeat(7, var(--n-item-cell-width));
+      grid-template-rows: repeat(6, var(--n-item-cell-height));
       align-items: center;
       justify-items: center;
       flex-wrap: wrap;
     `, [
       cB('date-panel-date', `
         position: relative;
-        width: var(--item-size);
-        height: var(--item-size);
-        line-height: var(--item-size);
+        width: var(--n-item-size);
+        height: var(--n-item-size);
+        line-height: var(--n-item-size);
         text-align: center;
-        font-size: var(--item-font-size);
-        border-radius: var(--item-border-radius);
+        font-size: var(--n-item-font-size);
+        border-radius: var(--n-item-border-radius);
         z-index: 0;
         cursor: pointer;
         transition:
-          background-color .2s var(--bezier),
-          color .2s var(--bezier);
+          background-color .2s var(--n-bezier),
+          color .2s var(--n-bezier);
       `, [
         cNotM('disabled', [
           cNotM('selected', [
             c('&:hover', {
-              backgroundColor: 'var(--item-color-hover)'
+              backgroundColor: 'var(--n-item-color-hover)'
             })
           ])
         ]),
@@ -308,9 +308,9 @@ export default c([
             height: 4px;
             width: 4px;
             border-radius: 2px;
-            background-color: var(--item-color-active);
+            background-color: var(--n-item-color-active);
             transition:
-              background-color .2s var(--bezier);
+              background-color .2s var(--n-bezier);
           `)
         ]),
         c('&::after', `
@@ -322,7 +322,7 @@ export default c([
           top: 0;
           bottom: 0;
           border-radius: inherit;
-          transition: background-color .3s var(--bezier);
+          transition: background-color .3s var(--n-bezier);
         `),
         cM('covered, start, end', [
           cNotM('excluded', [
@@ -330,27 +330,27 @@ export default c([
               content: "";
               z-index: -2;
               position: absolute;
-              left: calc((var(--item-size) - var(--item-cell-width)) / 2);
-              right: calc((var(--item-size) - var(--item-cell-width)) / 2);
+              left: calc((var(--n-item-size) - var(--n-item-cell-width)) / 2);
+              right: calc((var(--n-item-size) - var(--n-item-cell-width)) / 2);
               top: 0;
               bottom: 0;
-              background-color: var(--item-color-included);
+              background-color: var(--n-item-color-included);
             `),
             c('&:nth-child(7n + 1)::before', {
-              borderTopLeftRadius: 'var(--item-border-radius)',
-              borderBottomLeftRadius: 'var(--item-border-radius)'
+              borderTopLeftRadius: 'var(--n-item-border-radius)',
+              borderBottomLeftRadius: 'var(--n-item-border-radius)'
             }),
             c('&:nth-child(7n + 7)::before', {
-              borderTopRightRadius: 'var(--item-border-radius)',
-              borderBottomRightRadius: 'var(--item-border-radius)'
+              borderTopRightRadius: 'var(--n-item-border-radius)',
+              borderBottomRightRadius: 'var(--n-item-border-radius)'
             })
           ])
         ]),
         cM('selected', {
-          color: 'var(--item-text-color-active)'
+          color: 'var(--n-item-text-color-active)'
         }, [
           c('&::after', {
-            backgroundColor: 'var(--item-color-active)'
+            backgroundColor: 'var(--n-item-color-active)'
           }),
           cM('start', [
             c('&::before', {
@@ -363,33 +363,33 @@ export default c([
             })
           ]),
           cE('sup', {
-            backgroundColor: 'var(--panel-color)'
+            backgroundColor: 'var(--n-panel-color)'
           })
         ]),
         cM('excluded', {
-          color: 'var(--item-text-color-disabled)'
+          color: 'var(--n-item-text-color-disabled)'
         }, [
           cM('selected', [
             c('&::after', {
-              backgroundColor: 'var(--item-color-disabled)'
+              backgroundColor: 'var(--n-item-color-disabled)'
             })
           ])
         ]),
         cM('disabled', {
           cursor: 'not-allowed',
-          color: 'var(--item-text-color-disabled)'
+          color: 'var(--n-item-text-color-disabled)'
         }, [
           cM('covered', [
             c('&::before', {
-              backgroundColor: 'var(--item-color-disabled)'
+              backgroundColor: 'var(--n-item-color-disabled)'
             })
           ]),
           cM('selected', [
             c('&::before', {
-              backgroundColor: 'var(--item-color-disabled)'
+              backgroundColor: 'var(--n-item-color-disabled)'
             }),
             c('&::after', {
-              backgroundColor: 'var(--item-color-disabled)'
+              backgroundColor: 'var(--n-item-color-disabled)'
             })
           ])
         ])
@@ -399,19 +399,19 @@ export default c([
       grid-area: divider;
       height: 100%;
       width: 1px;
-      background-color: var(--calendar-divider-color);
+      background-color: var(--n-calendar-divider-color);
     `),
     cB('date-panel-footer', {
-      borderTop: '1px solid var(--panel-action-divider-color)',
-      padding: 'var(--panel-extra-footer-padding)'
+      borderTop: '1px solid var(--n-panel-action-divider-color)',
+      padding: 'var(--n-panel-extra-footer-padding)'
     }),
     cB('date-panel-actions', `
       flex: 1;
-      padding: var(--panel-action-padding);
+      padding: var(--n-panel-action-padding);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: 1px solid var(--panel-action-divider-color);
+      border-top: 1px solid var(--n-panel-action-divider-color);
     `, [
       cE('prefix, suffix', `
         display: flex;

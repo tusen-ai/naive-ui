@@ -1,9 +1,9 @@
-# Use Preset Dialog
+# Use preset dialog
 
 An example of preset `dialog`.
 
 ```html
-<n-button @click="showModal = true"> Start Me up </n-button>
+<n-button @click="showModal = true">Start Me up</n-button>
 <n-modal
   v-model:show="showModal"
   preset="dialog"

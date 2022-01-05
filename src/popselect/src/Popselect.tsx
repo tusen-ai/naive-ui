@@ -14,7 +14,7 @@ import { popselectInjectionKey } from './interface'
 
 const popselectProps = {
   ...(useTheme.props as ThemeProps<PopselectTheme>),
-  ...popoverBaseProps,
+  ...omit(popoverBaseProps, ['showArrow', 'arrow']),
   placement: {
     ...popoverBaseProps.placement,
     default: 'bottom'
@@ -23,7 +23,6 @@ const popselectProps = {
     type: String as PropType<PopoverTrigger>,
     default: 'hover'
   },
-  showArrow: Boolean,
   ...panelProps
 }
 
@@ -59,7 +58,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, $attrs } = this
+    const { mergedTheme, $attrs, $slots } = this
     const popoverProps: PopoverInternalProps & { ref: string } = {
       theme: mergedTheme.peers.Popover,
       themeOverrides: mergedTheme.peerOverrides.Popover,
@@ -84,7 +83,9 @@ export default defineComponent({
             ref={createRefSetter(ref)}
             onMouseenter={onMouseenter}
             onMouseleave={onMouseleave}
-          />
+          >
+            {$slots}
+          </NPopselectPanel>
         )
       }
     }

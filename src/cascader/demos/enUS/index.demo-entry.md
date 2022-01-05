@@ -47,6 +47,7 @@ custom-field
 | on-blur | `() => void` | `undefined` | Callback on blurred. |
 | on-focus | `() => void` | `undefined` | Callback on focused. |
 | on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | Callback when a node is loaded. Set `option.children` in the returned promise. Loading will stop after the promise is resolved or rejected. |
+| on-update:show | `(value: boolean) => void` | `undefined` | Callback executed when menu is opened & closed. |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: CascaderOption \| Array<CascaderOption \| null> \| null, pathValues: Array<CascaderOption \| null> \| Array<CascaderOption[] \| null> \| null) => void` | `undefined` | Callback executed when the value changes. |
 
 #### CascaderOption Properties
@@ -60,6 +61,7 @@ custom-field
 
 ### Cascader Slots
 
-| Name   | Parameters | Description                                     |
-| ------ | ---------- | ----------------------------------------------- |
-| action | `()`       | Action content displayed in the cascading menu. |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| action | `()` | Action content displayed in the cascading menu. |  |
+| empty | `()` | Empty state slot for the options cascading menu. | 2.22.0 |

@@ -13,7 +13,7 @@ const enUS = {
     placeholder: 'Please Select',
     loading: 'Loading',
     loadingRequiredMessage: (label: string): string =>
-      `Please load all ${label}'s descedants before checking it.`
+      `Please load all ${label}'s descendants before checking it.`
   },
   Time: {
     dateFormat: 'yyyy-MM-dd',
@@ -23,6 +23,11 @@ const enUS = {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
+    yearTypeFormat: 'yyyy',
+    monthTypeFormat: 'yyyy-MM',
+    dateFormat: 'yyyy-MM-dd',
+    dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
+    quarterFormat: 'yyyy-qqq',
     clear: 'Clear',
     now: 'Now',
     confirm: 'Confirm',
@@ -31,6 +36,8 @@ const enUS = {
     datePlaceholder: 'Select Date',
     datetimePlaceholder: 'Select Date and Time',
     monthPlaceholder: 'Select Month',
+    yearPlaceholder: 'Select Year',
+    quarterPlaceholder: 'Select Quarter',
     startDatePlaceholder: 'Start Date',
     endDatePlaceholder: 'End Date',
     startDatetimePlaceholder: 'Start Date and Time',

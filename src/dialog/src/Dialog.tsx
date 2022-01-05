@@ -144,27 +144,27 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--font-size': fontSize,
-          '--icon-color': iconColor,
-          '--bezier': cubicBezierEaseInOut,
-          '--close-margin': closeMargin,
-          '--icon-margin': iconMargin,
-          '--icon-size': iconSize,
-          '--close-size': closeSize,
-          '--close-color': closeColor,
-          '--close-color-hover': closeColorHover,
-          '--close-color-pressed': closeColorPressed,
-          '--color': color,
-          '--text-color': textColor,
-          '--border-radius': borderRadius,
-          '--padding': padding,
-          '--line-height': lineHeight,
-          '--border': border,
-          '--content-margin': contentMargin,
-          '--title-font-size': titleFontSize,
-          '--title-font-weight': titleFontWeight,
-          '--title-text-color': titleTextColor,
-          '--action-space': actionSpace
+          '--n-font-size': fontSize,
+          '--n-icon-color': iconColor,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-close-margin': closeMargin,
+          '--n-icon-margin': iconMargin,
+          '--n-icon-size': iconSize,
+          '--n-close-size': closeSize,
+          '--n-close-color': closeColor,
+          '--n-close-color-hover': closeColorHover,
+          '--n-close-color-pressed': closeColorPressed,
+          '--n-color': color,
+          '--n-text-color': textColor,
+          '--n-border-radius': borderRadius,
+          '--n-padding': padding,
+          '--n-line-height': lineHeight,
+          '--n-border': border,
+          '--n-content-margin': contentMargin,
+          '--n-title-font-size': titleFontSize,
+          '--n-title-font-weight': titleFontWeight,
+          '--n-title-text-color': titleTextColor,
+          '--n-action-space': actionSpace
         }
       })
     }
@@ -197,6 +197,7 @@ export default defineComponent({
           bordered && `${mergedClsPrefix}-dialog--bordered`
         ]}
         style={cssVars as CSSProperties}
+        role="dialog"
       >
         {closable ? (
           <NBaseClose

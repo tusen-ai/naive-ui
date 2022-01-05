@@ -25,7 +25,12 @@ async function resolveDemoInfos (literal, url, env) {
     if (env === 'production' && debug) {
       continue
     }
-    const fileName = `${id}.demo.md`
+    let fileName
+    if (id.includes('.vue')) {
+      fileName = id.slice(0, -4) + '.demo.vue'
+    } else {
+      fileName = `${id}.demo.md`
+    }
     const variable = `${camelCase(id)}Demo`
     infos.push({
       id,

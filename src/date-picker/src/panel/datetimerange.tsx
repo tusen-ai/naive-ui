@@ -9,12 +9,12 @@ import {
   FastForwardIcon
 } from '../../../_internal/icons'
 import { NBaseFocusDetector } from '../../../_internal'
-import { useDualCalendar } from './use-dual-calendar'
 import { warnOnce } from '../../../_utils'
+import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
 export default defineComponent({
   name: 'DateTimeRangePanel',
-  props: useDualCalendar.props,
+  props: useDualCalendarProps,
   setup (props) {
     if (__DEV__) {
       watchEffect(() => {

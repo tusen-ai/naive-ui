@@ -8,6 +8,7 @@ If you just want to display some basic text message, see [Tooltip](tooltip) inst
 
 ```demo
 basic
+flip
 trigger
 delay
 no-arrow
@@ -36,12 +37,13 @@ header
 | overlap | `boolean` | `false` | Overlap trigger element. |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | Popover placement. |
 | raw | `boolean` | `false` | Whether to use no default styles. |
+| shift | `boolean` | `false` | Whether to shift the popover when there is no space for current placement. |
 | show-arrow | `boolean` | `true` | Whether to show arrow if set. |
-| show | `boolean` | `undefined` | Whether to show arrow. |
+| show | `boolean` | `undefined` | Whether to show popover. |
 | title | `string` | `undefined` | Popover title. |
 | to | `string \| HTMLElement \| false` | `'body'` | Container node of the popover content. `false` will keep it at trigger container. |
 | trigger | `'hover' \| 'click' \| 'focus' \| 'manual'` | `'hover'` | The popover trigger type. |
-| width | `number \| 'trigger'` | `undefined` | `'trigger'` means popover's witdh will follow its trigger's width. |
+| width | `number \| 'trigger'` | `undefined` | `'trigger'` means popover's width will follow its trigger's width. |
 | x | `number` | `undefined` | The CSS `left` pixel value when popover manually positioned (x, y need to be set together). |
 | y | `number` | `undefined` | The CSS `top` pixel value when popover manually positioned (x, y need to be set together). |
 | z-index | `number` | `undefined` | The z-index of the popover. |

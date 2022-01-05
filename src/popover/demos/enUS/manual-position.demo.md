@@ -1,4 +1,4 @@
-# Manually Positioned
+# Manually positioned
 
 Click it.
 

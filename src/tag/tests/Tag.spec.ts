@@ -153,10 +153,10 @@ describe('n-tag', () => {
       }
     })
     expect(wrapper.find('.n-tag').attributes('style')).toContain(
-      '--color: #ccc;'
+      '--n-color: #ccc;'
     )
     expect(wrapper.find('.n-tag').attributes('style')).toContain(
-      '--text-color: #555;'
+      '--n-text-color: #555;'
     )
     expect(wrapper.find('.n-tag__border').attributes('style')).toContain(
       'border-color: rgb(85, 85, 85);'
@@ -175,7 +175,7 @@ describe('n-tag', () => {
 
     expect(wrapper.find('.n-tag__avatar').exists()).toBe(true)
     expect(wrapper.find('.n-avatar').attributes('style')).toContain(
-      '--merged-size: var(--avatar-size-override, 34px);'
+      '--n-merged-size: var(--n-avatar-size-override, 34px);'
     )
   })
 })

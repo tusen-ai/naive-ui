@@ -1,4 +1,4 @@
-# Controlled Pagination
+# Controlled pagination
 
 ```html
 <n-data-table

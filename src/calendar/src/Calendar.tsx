@@ -8,7 +8,14 @@ import {
   Fragment,
   toRef
 } from 'vue'
-import { format, getYear, addMonths, startOfDay, startOfMonth } from 'date-fns'
+import {
+  format,
+  getYear,
+  addMonths,
+  startOfDay,
+  startOfMonth,
+  getMonth
+} from 'date-fns'
 import { useMergedState } from 'vooks'
 import { dateArray } from '../../date-picker/src/utils'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
@@ -20,7 +27,7 @@ import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { calendarLight } from '../styles'
 import type { CalendarTheme } from '../styles'
-import type { OnUpdateValue, DateItem } from './interface'
+import type { OnUpdateValue, DateItem, OnPanelChange } from './interface'
 import style from './styles/index.cssr'
 
 const calendarProps = {
@@ -31,6 +38,7 @@ const calendarProps = {
     type: Number as PropType<number | null>,
     defualt: null
   },
+  onPanelChange: Function as PropType<OnPanelChange>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
@@ -72,10 +80,20 @@ export default defineComponent({
     }
 
     function handlePrevClick (): void {
-      monthTsRef.value = addMonths(monthTsRef.value, -1).valueOf()
+      const monthTs = addMonths(monthTsRef.value, -1).valueOf()
+      monthTsRef.value = monthTs
+      props.onPanelChange?.({
+        year: getYear(monthTs),
+        month: getMonth(monthTs) + 1
+      })
     }
     function handleNextClick (): void {
-      monthTsRef.value = addMonths(monthTsRef.value, 1).valueOf()
+      const monthTs = addMonths(monthTsRef.value, 1).valueOf()
+      monthTsRef.value = monthTs
+      props.onPanelChange?.({
+        year: getYear(monthTs),
+        month: getMonth(monthTs) + 1
+      })
     }
     function handleTodayClick (): void {
       monthTsRef.value = startOfMonth(now).valueOf()
@@ -128,27 +146,27 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--border-color': borderColor,
-          '--border-color-modal': borderColorModal,
-          '--border-color-popover': borderColorPopover,
-          '--border-radius': borderRadius,
-          '--text-color': textColor,
-          '--title-font-weight': titleFontWeight,
-          '--title-font-size': titleFontSize,
-          '--title-text-color': titleTextColor,
-          '--day-text-color': dayTextColor,
-          '--font-size': fontSize,
-          '--line-height': lineHeight,
-          '--date-color-current': dateColorCurrent,
-          '--date-text-color-current': dateTextColorCurrent,
-          '--cell-color': cellColor,
-          '--cell-color-modal': cellColorModal,
-          '--cell-color-popover': cellColorPopover,
-          '--cell-color-hover': cellColorHover,
-          '--cell-color-hover-modal': cellColorHoverModal,
-          '--cell-color-hover-popover': cellColorHoverPopover,
-          '--bar-color': barColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-border-color': borderColor,
+          '--n-border-color-modal': borderColorModal,
+          '--n-border-color-popover': borderColorPopover,
+          '--n-border-radius': borderRadius,
+          '--n-text-color': textColor,
+          '--n-title-font-weight': titleFontWeight,
+          '--n-title-font-size': titleFontSize,
+          '--n-title-text-color': titleTextColor,
+          '--n-day-text-color': dayTextColor,
+          '--n-font-size': fontSize,
+          '--n-line-height': lineHeight,
+          '--n-date-color-current': dateColorCurrent,
+          '--n-date-text-color-current': dateTextColorCurrent,
+          '--n-cell-color': cellColor,
+          '--n-cell-color-modal': cellColorModal,
+          '--n-cell-color-popover': cellColorPopover,
+          '--n-cell-color-hover': cellColorHover,
+          '--n-cell-color-hover-modal': cellColorHoverModal,
+          '--n-cell-color-hover-popover': cellColorHoverPopover,
+          '--n-bar-color': barColor
         }
       })
     }

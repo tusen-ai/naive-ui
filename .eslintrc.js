@@ -2,12 +2,16 @@ module.exports = {
   extends: ['plugin:markdown/recommended', 'prettier'],
   overrides: [
     {
-      files: ['*.vue', '*.js'],
+      files: '*.vue',
       extends: [
-        'plugin:vue/essential',
-        '@vue/standard'
-        // '@vue/typescript/recommended'
-      ],
+        '@vue/typescript/recommended',
+        'plugin:vue/vue3-recommended',
+        '@vue/typescript'
+      ]
+    },
+    {
+      files: ['*.vue', '*.js'],
+      extends: ['plugin:vue/essential', '@vue/standard'],
       rules: {
         'vue/max-attributes-per-line': [
           2,
@@ -19,9 +23,11 @@ module.exports = {
             }
           }
         ],
+        'vue/require-default-prop': 0,
         'vue/no-multiple-template-root': 0,
         'vue/no-lone-template': 0,
-        'vue/no-v-model-argument': 0
+        'vue/no-v-model-argument': 0,
+        'vue/one-component-per-file': 0
       }
     },
     {
@@ -52,6 +58,15 @@ module.exports = {
       files: '**/*.md/*.js',
       rules: {
         'no-undef': 0
+      }
+    },
+    {
+      files: ['**/*.md/*.ts'],
+      processor: 'markdown/markdown',
+      rules: {
+        'import/order': 0,
+        'prettier/prettier': 0,
+        '@typescript-eslint/consistent-type-definitions': 0
       }
     },
     {
