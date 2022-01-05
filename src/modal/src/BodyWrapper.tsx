@@ -237,7 +237,7 @@ export default defineComponent({
                                     themeOverrides={
                                       this.mergedTheme.peerOverrides.Dialog
                                     }
-                                    {...keep(this.$props, dialogPropKeys)}
+                                    {...keep(this.$props, dialogPropKeys) as any}
                                     aria-modal="true"
                                   >
                                     {$slots}
@@ -254,7 +254,7 @@ export default defineComponent({
                                     themeOverrides={
                                       this.mergedTheme.peerOverrides.Card
                                     }
-                                    {...keep(this.$props, cardBasePropKeys)}
+                                    {...keep(this.$props, cardBasePropKeys) as any}
                                     aria-modal="true"
                                     role="dialog"
                                   >
