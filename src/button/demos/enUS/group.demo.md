@@ -37,7 +37,7 @@ Buttons can be grouped.
       </template>
       Enough
     </n-button>
-    <n-button ghost>
+    <n-button ghost round>
       <template #icon>
         <n-icon><log-in-icon /></n-icon>
       </template>

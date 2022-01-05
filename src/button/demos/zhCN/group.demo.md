@@ -37,7 +37,7 @@
       </template>
       刚好
     </n-button>
-    <n-button ghost>
+    <n-button ghost round>
       <template #icon>
         <n-icon><log-in-icon /></n-icon>
       </template>
