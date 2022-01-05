@@ -11,7 +11,8 @@ import {
   inject,
   watch,
   Transition,
-  renderSlot
+  renderSlot,
+  onMounted
 } from 'vue'
 import Schema, {
   ValidateError,
@@ -334,6 +335,14 @@ export default defineComponent({
       restoreValidation,
       internalValidate
     }
+    const labelElementRef = ref<null | HTMLLabelElement>(null)
+    onMounted(() => {
+      if (labelElementRef.value !== null) {
+        NForm?.changeAutoComputedWidth(
+          Number(getComputedStyle(labelElementRef.value).width.slice(0, -2))
+        )
+      }
+    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedRequired: mergedRequiredRef,
@@ -393,7 +402,8 @@ export default defineComponent({
           '--n-feedback-text-color-error': feedbackTextColorError
         }
         return cssVars
-      })
+      }),
+      labelElementRef
     }
   },
   render () {
@@ -418,6 +428,7 @@ export default defineComponent({
           <label
             class={`${mergedClsPrefix}-form-item-label`}
             style={this.mergedLabelStyle as any}
+            ref="labelElementRef"
           >
             {/* 'left' | 'right' | undefined */}
             {mergedRequireMarkPlacement !== 'left'

@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-form`, `n-form-item`'s `label-width` prop support `auto` option, closes [#2087](https://github.com/TuSimple/naive-ui/issues/2087)
+
 ### Fixes
 
 - Fix `n-upload` `on-finish` prop's `event` parameter type should be `ProgressEvent`.

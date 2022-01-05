@@ -1,4 +1,11 @@
-import { h, defineComponent, PropType, provide, ExtractPropTypes } from 'vue'
+import {
+  h,
+  defineComponent,
+  PropType,
+  provide,
+  ExtractPropTypes,
+  ref
+} from 'vue'
 import { ValidateError } from 'async-validator'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -64,6 +71,11 @@ export default defineComponent({
     useTheme('Form', 'Form', style, formLight, props, mergedClsPrefixRef)
     // from path to form-item
     const formItems: Record<string, FormItemInst[]> = {}
+    // label-width = 'auto'
+    const autoComputedWidth = ref(0)
+    const changeAutoComputedWidth = (currentWidth: number): void => {
+      if (currentWidth >= autoComputedWidth.value) { autoComputedWidth.value = currentWidth }
+    }
     async function validate (
       validateCallback?: FormValidateCallback,
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true
@@ -109,7 +121,11 @@ export default defineComponent({
         }
       }
     }
-    provide(formInjectionKey, props)
+    provide(formInjectionKey, {
+      ...props,
+      autoComputedWidth,
+      changeAutoComputedWidth
+    })
     provide(formItemInstsInjectionKey, { formItems })
     const formExposedMethod: FormInst = {
       validate,

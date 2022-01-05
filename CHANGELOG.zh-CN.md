@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Feats
+
+- `n-form`，`n-form-item` 的 `label-width` 选项支持 `auto` 属性，关闭 [#2087](https://github.com/TuSimple/naive-ui/issues/2087)
+
 ### Fixes
 
 - 修复 `n-upload` `on-finish` 回调中 `event` 的类型应为 `ProgressEvent`
