@@ -369,7 +369,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     boxShadowWarning: vars.SPECIAL_BOX_SHADOW_DARK_THEME,
     textColorError: '#FFF',
     textColorSuccess: '#FFF',
-    textColorInfo: '#FFF',
+    textColorInfo: '#333333',
     textColorWarning: '#FFF',
     iconColorInfo: 'rgb(255, 255, 255)',
     iconColorSuccess: '#333333',
