@@ -8,7 +8,6 @@
   <n-input
     placeholder="自动调整尺寸"
     type="textarea"
-    size="small"
     :autosize="{
       minRows: 3,
       maxRows: 5
