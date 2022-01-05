@@ -128,17 +128,15 @@ export default defineComponent({
       } = opts
       const deltaHorizontal = mouseDownClientX - mouseUpClientX
       const deltaVertical = mouseDownClientY - mouseUpClientY
-      let moveVerticalDirection = null
-      let moveHorizontalDirection = null
+      const moveVerticalDirection:
+      | 'verticalTop'
+      | 'verticalBottom' = `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
+      const moveHorizontalDirection:
+      | 'horizontalLeft'
+      | 'horizontalRight' = `horizontal${
+        deltaHorizontal > 0 ? 'Left' : 'Right'
+      }`
 
-      moveVerticalDirection = ('vertical' +
-        (deltaVertical > 0 ? 'Top' : 'Bottom')) as
-        | 'verticalTop'
-        | 'verticalBottom'
-      moveHorizontalDirection = ('horizontal' +
-        (deltaHorizontal > 0 ? 'Left' : 'Right')) as
-        | 'horizontalLeft'
-        | 'horizontalRight'
       return {
         moveVerticalDirection,
         moveHorizontalDirection,

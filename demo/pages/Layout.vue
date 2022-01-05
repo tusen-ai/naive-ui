@@ -36,9 +36,9 @@
   </n-layout>
 </template>
 
-<script>
+<script lang="ts">
 // Frame component for components & docs page
-import { computed, watch, toRef, ref } from 'vue'
+import { defineComponent, computed, watch, toRef, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { findMenuValue } from '../utils/route'
 import { useIsMobile, useIsTablet } from '../utils/composables'
@@ -47,7 +47,7 @@ import { useDocOptions, useComponentOptions } from '../store'
 import { renderMenuLabel } from '../store/menu-options'
 import { useMemo } from 'vooks'
 
-export default {
+export default defineComponent({
   components: {
     SiteFooter
   },
@@ -92,5 +92,5 @@ export default {
       isMobile: isMobileRef
     }
   }
-}
+})
 </script>

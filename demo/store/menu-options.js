@@ -32,11 +32,11 @@ const appendCounts = (item) => {
   }
 }
 
-const createDebugDemos = (item, mode) => {
-  if (__DEV__ && mode === 'debug') {
-    return [item]
-  } else return []
-}
+// const createDebugDemos = (item, mode) => {
+//   if (__DEV__ && mode === 'debug') {
+//     return [item]
+//   } else return []
+// }
 
 function createItems (lang, theme, prefix, items) {
   const isZh = lang === 'zh-CN'
@@ -732,62 +732,6 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/legacy-grid'
         }
       ]
-    },
-    ...createDebugDemos(
-      {
-        en: '--Debug',
-        children: [
-          {
-            en: 'SuffixDebug',
-            path: '/base-suffix-debug'
-          },
-          {
-            en: 'PopoverDebug',
-            path: '/popover-debug'
-          },
-          {
-            en: 'RouterDebug',
-            path: '/router-debug'
-          },
-          {
-            en: 'ModalDebug',
-            path: '/modal-debug'
-          },
-          {
-            en: 'ScrollbarDebug',
-            path: '/scrollbar-debug'
-          },
-          {
-            en: 'ScrollbarDebug2',
-            path: '/scrollbar-debug2'
-          },
-          {
-            en: 'DatePickerDebug',
-            path: '/date-picker-debug'
-          },
-          {
-            en: 'BackTopDebug',
-            path: '/back-top-debug'
-          },
-          {
-            en: 'CascaderDebug',
-            path: '/cascader-debug'
-          },
-          {
-            en: 'VerticalAlignDebug',
-            path: '/vertical-align-debug'
-          },
-          {
-            en: 'IconTransitionDebug',
-            path: '/icon-transition-debug'
-          },
-          {
-            en: 'SelectDebug',
-            path: '/select-debug'
-          }
-        ]
-      },
-      mode
-    )
+    }
   ])
 }

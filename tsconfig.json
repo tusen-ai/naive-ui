@@ -8,6 +8,8 @@
     "jsx": "react",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
     "module": "ES6",
     "moduleResolution": "Node",
     "declaration": true,

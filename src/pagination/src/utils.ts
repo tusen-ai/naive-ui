@@ -24,7 +24,7 @@ function pagesToShow (
   let rightSplit = false
   if (middleStart > firstPage + 2) leftSplit = true
   if (middleEnd < lastPage - 2) rightSplit = true
-  const items = []
+  const items: number[] = []
   items.push(firstPage)
   if (leftSplit) {
     items.push(-2)
