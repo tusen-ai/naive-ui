@@ -330,4 +330,27 @@ describe('n-tabs', () => {
     await addIcon.trigger('click')
     expect(onClose).toHaveBeenCalled()
   })
+
+  it('should work with `prefix` `suffix` slots', async () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        defaultValue: '1'
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ],
+        prefix: () => 'test-prefix',
+        suffix: () => 'test-suffix'
+      }
+    })
+
+    expect(wrapper.find('.n-tabs-nav__prefix').exists()).toBe(true)
+    expect(wrapper.find('.n-tabs-nav__prefix').text()).toBe('test-prefix')
+    expect(wrapper.find('.n-tabs-nav__suffix').exists()).toBe(true)
+    expect(wrapper.find('.n-tabs-nav__suffix').text()).toBe('test-suffix')
+  })
 })
