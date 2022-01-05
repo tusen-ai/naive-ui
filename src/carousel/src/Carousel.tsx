@@ -619,7 +619,7 @@ export default defineComponent({
           ...slideTranlatesRef.value.slice(0, totalViewRef.value - 1),
           getLastViewTranslate()
         ]
-        let prevOffset = null
+        let prevOffset: number | null = null
         for (let i = 0; i < translates.length; i++) {
           const offset = Math.abs(translates[i] - currentTranslate)
           if (prevOffset !== null && prevOffset < offset) {
