@@ -43,7 +43,10 @@ const formProps = {
   rules: Object as PropType<FormRules>,
   disabled: Boolean,
   size: String as PropType<Size>,
-  showRequireMark: Boolean,
+  showRequireMark: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   requireMarkPlacement: String as PropType<'left' | 'right'>,
   showFeedback: {
     type: Boolean,
@@ -53,7 +56,10 @@ const formProps = {
     type: Function as PropType<(e: Event) => void>,
     default: (e: Event) => e.preventDefault()
   },
-  showLabel: Boolean
+  showLabel: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  }
 } as const
 
 export type FormSetupProps = ExtractPropTypes<typeof formProps>
