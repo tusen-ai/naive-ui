@@ -21,6 +21,4 @@ export type RenderLabel = (info: {
   label: string | number
   type: 'page' | 'fastBackward' | 'fastForward'
   active: boolean
-  showFastBackward: boolean
-  showFastForward: boolean
 }) => VNodeChild
