@@ -1,6 +1,5 @@
-import { InjectionKey } from 'vue'
+import { InjectionKey, Ref } from 'vue'
 import { ValidateError, RuleItem, ValidateOption } from 'async-validator'
-import { FormSetupProps } from './Form'
 
 export interface FormRules {
   [path: string]: FormRules | FormItemRule | FormItemRule[]
@@ -57,7 +56,21 @@ export interface FormItemInst {
 export type FormItemColRef = FormItemInst
 export type FormItemRowRef = FormItemInst
 
-export type FormInjection = FormSetupProps
+export interface FormInjection {
+  size: Ref<Size>
+  labelWidth: Ref<number | string>
+  labelPlacement: Ref<LabelPlacement>
+  labelAlign: Ref<LabelAlign>
+  showRequireMark: Ref<boolean | undefined>
+  requireMarkPlacement: Ref<'left' | 'right'>
+  showFeedback: Ref<boolean>
+  showLabel: Ref<boolean | undefined>
+  rules: Ref<FormRules>
+  disabled: Ref<boolean>
+  model: Ref<Record<string, any>>
+  maxChildLabelWidth: Ref<number>
+  deriveMaxChildLabelWidth: (currentWidth: number) => void
+}
 
 export const formInjectionKey: InjectionKey<FormInjection> = Symbol('form')
 export const formItemInstsInjectionKey: InjectionKey<unknown> =

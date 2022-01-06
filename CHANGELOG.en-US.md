@@ -23,6 +23,7 @@
 - `n-calendar` adds `on-panel-change` prop, closes [#2082](https://github.com/TuSimple/naive-ui/issues/2082).
 - `n-upload` adds `on-error` prop.
 - `n-tabs` adds `syncBarPosition` method, closes [#2120](https://github.com/TuSimple/naive-ui/issues/2120).
+- `n-form`, `n-form-item`'s `label-width` prop support `auto` option, closes [#2087](https://github.com/TuSimple/naive-ui/issues/2087).
 
 ## 2.23.2 (2021-12-29)
 
