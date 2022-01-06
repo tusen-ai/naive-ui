@@ -27,7 +27,7 @@ partially-apply-rules
 | --- | --- | --- | --- |
 | disabled | `boolean` | `false` | Whether to disable the form. |
 | inline | `boolean` | `false` | Whether to display as an inline form. |
-| label-width | `number \| string` | `undefined` | The width of label. Particularly useful when `label-placement` is set to `'left'`,Width `'auto'` is supported. |
+| label-width | `number \| string \| 'auto'` | `undefined` | The width of label. Particularly useful when `label-placement` is set to `'left'`,`'auto'` means label width will be auto adjusted. |
 | label-align | `'left' \| 'right'` | `-` | Label text alignment. |
 | label-placement | `'left' \| 'top'` | `'top'` | Label placement. |
 | model | `Object` | `{}` | The object to get/set form item values. |

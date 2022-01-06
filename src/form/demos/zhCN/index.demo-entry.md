@@ -29,7 +29,7 @@ partially-apply-rules
 | --- | --- | --- | --- |
 | disabled | `boolean` | `false` | 是否禁用 |
 | inline | `boolean` | `false` | 是否展示为行内表单 |
-| label-width | `number \| string` | `undefined` | 标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用，支持 `'auto'` |
+| label-width | `number \| string \| 'auto'` | `undefined` | 标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用，`'auto'` 意味着 label width 会被自动调整 |
 | label-align | `'left' \| 'right'` | `-` | 标签的文本对齐方式 |
 | label-placement | `'left' \| 'top'` | `'top'` | 标签显示的位置 |
 | model | `Object` | `{}` | 获取表项中收集到的值的对象 |
