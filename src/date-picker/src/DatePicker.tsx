@@ -460,7 +460,20 @@ export default defineComponent({
     }
     function scrollPickerColumns (value?: number): void {
       if (!panelInstRef.value) return
-      const { monthScrollRef, yearScrollRef } = panelInstRef.value
+      const useMerge = (): Omit<PanelRef, '$el'> => {
+        let { monthScrollRef, yearScrollRef } = panelInstRef.value
+        if (!monthScrollRef) { monthScrollRef = panelInstRef.value.datePanelRef.monthScrollRef }
+        console.log(
+          '111',
+          panelInstRef.value.datePanelRef,
+          panelInstRef.value.datePanelRef.yearScrollRef
+        )
+        if (!yearScrollRef) { yearScrollRef = panelInstRef.value.datePanelRef.yearScrollRef }
+        return { monthScrollRef, yearScrollRef }
+      }
+      const { monthScrollRef, yearScrollRef } = useMerge()
+
+      console.log('panel2', monthScrollRef, yearScrollRef)
       const { value: mergedValue } = mergedValueRef
       if (monthScrollRef) {
         const monthIndex =
@@ -478,6 +491,7 @@ export default defineComponent({
               ? getYear(Date.now())
               : getYear(mergedValue as number)
             : getYear(value)) - START_YEAR
+        console.log('xxx', yearScrollRef, yearIndex)
         yearScrollRef.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
       }
     }

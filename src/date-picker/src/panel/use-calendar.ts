@@ -1,4 +1,12 @@
-import { ref, computed, inject, watch, ExtractPropTypes, PropType } from 'vue'
+import {
+  ref,
+  computed,
+  inject,
+  watch,
+  ExtractPropTypes,
+  PropType,
+  nextTick
+} from 'vue'
 import {
   addMonths,
   addYears,
@@ -343,6 +351,19 @@ function useCalendar (
     panelCommon.clearPendingValue()
     handleConfirmClick()
   }
+  const showMonthYearPanel = ref(false)
+  function quickSelectYear (): void {
+    const currentYear = getYear(calendarValueRef.value)
+    console.log('year', currentYear)
+    showMonthYearPanel.value = true
+    void nextTick(scrollPickerColumns)
+  }
+  function quickSelectMonth (): void {
+    const currentMonth = getMonth(calendarValueRef.value)
+    console.log('month', currentMonth)
+    showMonthYearPanel.value = true
+    void nextTick(scrollPickerColumns)
+  }
   return {
     dateArray: dateArrayRef,
     monthArray: monthArrayRef,
@@ -376,7 +397,10 @@ function useCalendar (
     datePickerSlots,
     monthScrollRef,
     yearScrollRef,
-    scrollbarInstRef
+    scrollbarInstRef,
+    quickSelectYear,
+    quickSelectMonth,
+    showMonthYearPanel
   }
 }
 
