@@ -45,11 +45,19 @@ page-size-option
 #### PaginationRenderLabel Type
 
 ```ts
-type PaginationRenderLabel = (info: {
-  label: string | number
-  type: 'page' | 'fastBackward' | 'fastForward'
-  active: boolean
-}) => VNodeChild
+type PaginationRenderLabel = (
+  info:
+    | {
+        type: 'fast-backward' | 'fast-forward'
+        node: VNode
+        active: boolean
+      }
+    | {
+        type: 'page'
+        node: number
+        active: boolean
+      }
+) => VNodeChild
 ```
 
 #### PaginationInfo Type

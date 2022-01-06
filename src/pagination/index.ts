@@ -3,5 +3,5 @@ export type { PaginationProps } from './src/Pagination'
 export type {
   PaginationInfo,
   PaginationSizeOption,
-  RenderLabel as PaginationRenderLabel
+  PaginationRenderLabel
 } from './src/interface'

@@ -8,7 +8,8 @@ import {
   defineComponent,
   PropType,
   CSSProperties,
-  watchEffect
+  watchEffect,
+  VNodeChild
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { NSelect } from '../../select'
@@ -37,7 +38,7 @@ import {
   RenderSuffix,
   RenderPrev,
   RenderNext,
-  RenderLabel,
+  PaginationRenderLabel,
   PaginationSizeOption
 } from './interface'
 
@@ -76,7 +77,7 @@ const paginationProps = {
   next: Function as PropType<RenderNext>,
   prefix: Function as PropType<RenderPrefix>,
   suffix: Function as PropType<RenderSuffix>,
-  label: Function as PropType<RenderLabel>,
+  label: Function as PropType<PaginationRenderLabel>,
   'onUpdate:page': [Function, Array] as PropType<
   MaybeArray<(page: number) => void>
   >,
@@ -285,10 +286,10 @@ export default defineComponent({
         case 'page':
           doUpdatePage(pageItem.label)
           break
-        case 'fastBackward':
+        case 'fast-backward':
           fastBackward()
           break
-        case 'fastForward':
+        case 'fast-forward':
           fastForward()
           break
       }
@@ -296,10 +297,10 @@ export default defineComponent({
     function handlePageItemMouseEnter (pageItem: PageItem): void {
       if (props.disabled) return
       switch (pageItem.type) {
-        case 'fastBackward':
+        case 'fast-backward':
           showFastBackwardRef.value = true
           break
-        case 'fastForward':
+        case 'fast-forward':
           showFastForwardRef.value = true
           break
         default:
@@ -310,10 +311,10 @@ export default defineComponent({
     function handlePageItemMouseLeave (pageItem: PageItem): void {
       if (props.disabled) return
       switch (pageItem.type) {
-        case 'fastBackward':
+        case 'fast-backward':
           showFastBackwardRef.value = false
           break
-        case 'fastForward':
+        case 'fast-forward':
           showFastForwardRef.value = false
           break
         default:
@@ -536,13 +537,64 @@ export default defineComponent({
           )}
         </div>
         {pageItems.map((pageItem, index) => {
-          const { type, label, active } = pageItem
-          const labelActive =
-            type === 'page'
-              ? active
-              : type === 'fastBackward'
-                ? showFastBackward
-                : showFastForward
+          let contentNode: VNodeChild
+          switch (pageItem.type) {
+            case 'page':
+              // eslint-disable-next-line no-case-declarations
+              const pageNode = pageItem.label
+              if (renderLabel) {
+                contentNode = renderLabel({
+                  type: 'page',
+                  node: pageNode,
+                  active: pageItem.active
+                })
+              } else {
+                contentNode = pageNode
+              }
+              break
+            case 'fast-forward':
+              // eslint-disable-next-line no-case-declarations
+              const fastForwardNode = showFastForward ? (
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{ default: () => <FastBackwardIcon /> }}
+                </NBaseIcon>
+              ) : (
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{ default: () => <MoreIcon /> }}
+                </NBaseIcon>
+              )
+              if (renderLabel) {
+                contentNode = renderLabel({
+                  type: 'fast-forward',
+                  node: fastForwardNode,
+                  active: showFastForward
+                })
+              } else {
+                contentNode = fastForwardNode
+              }
+              break
+            case 'fast-backward':
+              // eslint-disable-next-line no-case-declarations
+              const fastBackwardNode = showFastBackward ? (
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{ default: () => <FastForwardIcon /> }}
+                </NBaseIcon>
+              ) : (
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{ default: () => <MoreIcon /> }}
+                </NBaseIcon>
+              )
+              if (renderLabel) {
+                contentNode = renderLabel({
+                  type: 'fast-backward',
+                  node: fastBackwardNode,
+                  active: showFastBackward
+                })
+              } else {
+                contentNode = fastBackwardNode
+              }
+              break
+          }
           return (
             <div
               key={index}
@@ -558,37 +610,7 @@ export default defineComponent({
               onMouseenter={() => handlePageItemMouseEnter(pageItem)}
               onMouseleave={() => handlePageItemMouseLeave(pageItem)}
             >
-              {renderLabel
-                ? renderLabel({
-                  label,
-                  type,
-                  active: labelActive
-                })
-                : [
-                    type === 'page' ? label : null,
-                    type === 'fastBackward' ? (
-                      showFastBackward ? (
-                        <NBaseIcon clsPrefix={mergedClsPrefix}>
-                          {{ default: () => <FastBackwardIcon /> }}
-                        </NBaseIcon>
-                      ) : (
-                        <NBaseIcon clsPrefix={mergedClsPrefix}>
-                          {{ default: () => <MoreIcon /> }}
-                        </NBaseIcon>
-                      )
-                    ) : null,
-                    type === 'fastForward' ? (
-                      showFastForward ? (
-                        <NBaseIcon clsPrefix={mergedClsPrefix}>
-                          {{ default: () => <FastForwardIcon /> }}
-                        </NBaseIcon>
-                      ) : (
-                        <NBaseIcon clsPrefix={mergedClsPrefix}>
-                          {{ default: () => <MoreIcon /> }}
-                        </NBaseIcon>
-                      )
-                    ) : null
-                  ]}
+              {contentNode}
             </div>
           )
         })}
