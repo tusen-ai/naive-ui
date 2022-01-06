@@ -235,7 +235,6 @@ export default defineComponent({
             if (validateCallback) {
               validateCallback(errors)
             }
-            // eslint-disable-next-line prefer-promise-reject-errors
             reject(errors)
           }
         })

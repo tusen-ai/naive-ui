@@ -92,14 +92,11 @@ export default defineComponent({
               .map((result) => result.errors)
             if (validateCallback) {
               validateCallback(errors as ValidateError[][])
-            } else {
-              reject(errors)
             }
+            reject(errors)
           } else {
             if (validateCallback) validateCallback()
-            else {
-              resolve()
-            }
+            resolve()
           }
         })
       })

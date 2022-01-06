@@ -15,6 +15,7 @@ display-directive
 addable
 before-leave
 no-pane
+update-bar-manually.vue
 line-debug
 style-inherit-debug
 shadow-debug
@@ -81,3 +82,9 @@ unkeyed-debug
 | 名称    | 参数 | 说明       |
 | ------- | ---- | ---------- |
 | default | `()` | tab 的内容 |
+
+### Tabs Methods
+
+| 名称              | 类型         | 说明             | 版本         |
+| ----------------- | ------------ | ---------------- | ------------ |
+| updateBarPosition | `() => void` | 更新指示条的位置 | NEXT_VERSION |

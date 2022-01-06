@@ -34,7 +34,7 @@ export default defineComponent({
     text: Boolean,
     size: {
       type: String as PropType<ButtonProps['size']>,
-      required: true
+      default: 'tiny'
     }
   },
   setup (props) {
