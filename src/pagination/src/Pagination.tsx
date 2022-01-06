@@ -541,6 +541,7 @@ export default defineComponent({
                 ? renderLabel({
                   label: pageItem.label,
                   type: pageItem.type,
+                  active: pageItem.active,
                   showFastBackward,
                   showFastForward
                 })
