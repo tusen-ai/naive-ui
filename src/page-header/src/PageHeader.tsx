@@ -18,7 +18,7 @@ const pageHeaderProps = {
   onBack: Function as PropType<() => void>
 }
 
-export type PageHeaderPorps = ExtractPublicPropTypes<typeof pageHeaderProps>
+export type PageHeaderProps = ExtractPublicPropTypes<typeof pageHeaderProps>
 
 export default defineComponent({
   name: 'PageHeader',
