@@ -35,6 +35,7 @@ import {
   RenderSuffix,
   RenderPrev,
   RenderNext,
+  RenderLabel,
   PaginationSizeOption
 } from './interface'
 
@@ -73,6 +74,7 @@ const paginationProps = {
   next: Function as PropType<RenderNext>,
   prefix: Function as PropType<RenderPrefix>,
   suffix: Function as PropType<RenderSuffix>,
+  label: Function as PropType<RenderLabel>,
   'onUpdate:page': [Function, Array] as PropType<
   MaybeArray<(page: number) => void>
   >,
@@ -459,6 +461,7 @@ export default defineComponent({
       next,
       prefix,
       suffix,
+      label,
       handleJumperInput,
       handleSizePickerChange,
       handleBackwardClick,
@@ -470,6 +473,7 @@ export default defineComponent({
     } = this
     const renderPrev = prev || $slots.prev
     const renderNext = next || $slots.next
+    const renderLabel = label || $slots.label
     return (
       <div
         ref="selfRef"
@@ -533,29 +537,39 @@ export default defineComponent({
               onMouseenter={() => handlePageItemMouseEnter(pageItem)}
               onMouseleave={() => handlePageItemMouseLeave(pageItem)}
             >
-              {pageItem.type === 'page' ? pageItem.label : null}
-              {pageItem.type === 'fastBackward' ? (
-                showFastBackward ? (
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => <FastBackwardIcon /> }}
-                  </NBaseIcon>
-                ) : (
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => <MoreIcon /> }}
-                  </NBaseIcon>
-                )
-              ) : null}
-              {pageItem.type === 'fastForward' ? (
-                showFastForward ? (
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => <FastForwardIcon /> }}
-                  </NBaseIcon>
-                ) : (
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => <MoreIcon /> }}
-                  </NBaseIcon>
-                )
-              ) : null}
+              {renderLabel
+                ? renderLabel({
+                  label: pageItem.label,
+                  type: pageItem.type,
+                  active: pageItem.active,
+                  showFastBackward,
+                  showFastForward
+                })
+                : [
+                    pageItem.type === 'page' ? pageItem.label : null,
+                    pageItem.type === 'fastBackward' ? (
+                      showFastBackward ? (
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
+                          {{ default: () => <FastBackwardIcon /> }}
+                        </NBaseIcon>
+                      ) : (
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
+                          {{ default: () => <MoreIcon /> }}
+                        </NBaseIcon>
+                      )
+                    ) : null,
+                    pageItem.type === 'fastForward' ? (
+                      showFastForward ? (
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
+                          {{ default: () => <FastForwardIcon /> }}
+                        </NBaseIcon>
+                      ) : (
+                        <NBaseIcon clsPrefix={mergedClsPrefix}>
+                          {{ default: () => <MoreIcon /> }}
+                        </NBaseIcon>
+                      )
+                    ) : null
+                  ]}
             </div>
           )
         })}
