@@ -4,7 +4,8 @@ import {
   PropType,
   provide,
   ExtractPropTypes,
-  ref
+  ref,
+  toRef
 } from 'vue'
 import { ValidateError } from 'async-validator'
 import { useConfig, useTheme } from '../../_mixins'
@@ -22,7 +23,7 @@ import {
   FormInst,
   formItemInstsInjectionKey,
   formInjectionKey,
-  formItemLabelWidthInjectionKey
+  Size
 } from './interface'
 import { ExtractPublicPropTypes, keysOf } from '../../_utils'
 
@@ -41,11 +42,8 @@ const formProps = {
   },
   rules: Object as PropType<FormRules>,
   disabled: Boolean,
-  size: String as PropType<'small' | 'medium' | 'large'>,
-  showRequireMark: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
+  size: String as PropType<Size>,
+  showRequireMark: Boolean,
   requireMarkPlacement: String as PropType<'left' | 'right'>,
   showFeedback: {
     type: Boolean,
@@ -55,10 +53,7 @@ const formProps = {
     type: Function as PropType<(e: Event) => void>,
     default: (e: Event) => e.preventDefault()
   },
-  showLabel: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  }
+  showLabel: Boolean
 } as const
 
 export type FormSetupProps = ExtractPropTypes<typeof formProps>
@@ -73,10 +68,10 @@ export default defineComponent({
     // from path to form-item
     const formItems: Record<string, FormItemInst[]> = {}
     // label-width = 'auto'
-    const autoComputedWidth = ref(0)
-    const changeAutoComputedWidth = (currentWidth: number): void => {
-      if (currentWidth >= autoComputedWidth.value) {
-        autoComputedWidth.value = currentWidth
+    const maxChildLabelWidth = ref(0)
+    const deriveMaxChildLabelWidth = (currentWidth: number): void => {
+      if (currentWidth >= maxChildLabelWidth.value) {
+        maxChildLabelWidth.value = currentWidth
       }
     }
     async function validate (
@@ -124,10 +119,20 @@ export default defineComponent({
         }
       }
     }
-    provide(formInjectionKey, props)
-    provide(formItemLabelWidthInjectionKey, {
-      autoComputedWidth,
-      changeAutoComputedWidth
+    provide(formInjectionKey, {
+      size: toRef(props, 'size'),
+      labelWidth: toRef(props, 'labelWidth'),
+      labelPlacement: toRef(props, 'labelPlacement'),
+      labelAlign: toRef(props, 'labelAlign'),
+      showRequireMark: toRef(props, 'showRequireMark'),
+      requireMarkPlacement: toRef(props, 'requireMarkPlacement'),
+      showFeedback: toRef(props, 'showFeedback'),
+      showLabel: toRef(props, 'showLabel'),
+      rules: toRef(props, 'rules'),
+      disabled: toRef(props, 'disabled'),
+      model: toRef(props, 'model'),
+      maxChildLabelWidth,
+      deriveMaxChildLabelWidth
     })
     provide(formItemInstsInjectionKey, { formItems })
     const formExposedMethod: FormInst = {

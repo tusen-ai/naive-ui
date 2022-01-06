@@ -47,8 +47,7 @@ import {
   FormItemInst,
   FormItemInternalValidate,
   formItemInstsInjectionKey,
-  formInjectionKey,
-  formItemLabelWidthInjectionKey
+  formInjectionKey
 } from './interface'
 
 export const formItemProps = {
@@ -148,7 +147,7 @@ export default defineComponent({
     )
     const { mergedClsPrefixRef } = useConfig(props)
     const NForm = inject(formInjectionKey, null)
-    const NFormItemLabelWidth = inject(formItemLabelWidthInjectionKey, null)
+
     const formItemSizeRefs = formItemSize(props)
     const formItemMiscRefs = formItemMisc(props)
     const { validationErrored: validationErroredRef } = formItemMiscRefs
@@ -166,7 +165,7 @@ export default defineComponent({
       if (feedback !== undefined && feedback !== null) return true
       return explainsRef.value.length
     })
-    const mergedDisabledRef = NForm ? toRef(NForm, 'disabled') : ref(false)
+    const mergedDisabledRef = NForm ? NForm.disabled : ref(false)
     const themeRef = useTheme(
       'Form',
       'FormItem',
@@ -261,7 +260,7 @@ export default defineComponent({
       }
       const { value: rules } = mergedRulesRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const value = NForm ? get(NForm.model, path!, null) : undefined
+      const value = NForm ? get(NForm.model.value, path!, null) : undefined
       const activeRules = (
         !trigger
           ? rules
@@ -340,7 +339,7 @@ export default defineComponent({
     const labelElementRef = ref<null | HTMLLabelElement>(null)
     onMounted(() => {
       if (labelElementRef.value !== null) {
-        NFormItemLabelWidth?.changeAutoComputedWidth(
+        NForm?.deriveMaxChildLabelWidth(
           Number(getComputedStyle(labelElementRef.value).width.slice(0, -2))
         )
       }
