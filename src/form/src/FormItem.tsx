@@ -147,7 +147,6 @@ export default defineComponent({
     )
     const { mergedClsPrefixRef } = useConfig(props)
     const NForm = inject(formInjectionKey, null)
-
     const formItemSizeRefs = formItemSize(props)
     const formItemMiscRefs = formItemMisc(props)
     const { validationErrored: validationErroredRef } = formItemMiscRefs
