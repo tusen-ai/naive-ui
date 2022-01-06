@@ -43,6 +43,8 @@ dark-10-debug
 | on-update:show | `(value: boolean) => void` | `undefined` | 模态框更新是否展示状态的回调 |
 | on-after-enter | `() => void` | `undefined` | Modal 出现后的回调 |
 | on-after-leave | `() => void` | `undefined` | Modal 关闭后的回调 |
+| on-close | `() => void` | `undefined` | 点击右上角关闭图标时的回调 |
+| on-mask-click | `() => void` | `undefined` | 点击遮罩时的回调 |
 
 ### Modal（Card 预设）Props
 
