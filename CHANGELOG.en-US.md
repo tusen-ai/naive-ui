@@ -2,6 +2,10 @@
 
 ## Pending
 
+### Breaking Changes
+
+- Fix `type PageHeaderProps` name. It was mispelled as `PageHeaderPorps` before.
+
 ### Fixes
 
 - Fix `n-upload` `on-finish` prop's `event` parameter type should be `ProgressEvent`.

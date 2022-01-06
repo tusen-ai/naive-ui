@@ -2,13 +2,16 @@
 
 ## Pending
 
+### Breaking Changes
+
+- 修复 `type PageHeaderProps` 命名，原先错拼为 `PageHeaderPorps`
+
 ### Fixes
 
 - 修复 `n-upload` `on-finish` 回调中 `event` 的类型应为 `ProgressEvent`
 - 修复 `n-upload` 不允许 200 之外的 2xx 响应状态码
 - 修复 `n-form` 当 `validate` 使用了 `validateCallback` 时调用 Promise 方法无效
 - 修复 `n-input-number` 输入以 0 结尾的整数不更新，关闭 [#2115](https://github.com/TuSimple/naive-ui/issues/2115)
-- 修复 `type PageHeaderProps` 命名
 
 ### Feats
 
