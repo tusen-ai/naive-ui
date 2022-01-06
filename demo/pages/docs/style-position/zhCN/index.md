@@ -18,3 +18,15 @@
   <xxx />
 </head>
 ```
+
+## 关于 tailwind 的样式覆盖
+
+你可能会发现在静态 HTML 文件中加入 meta 标签没用（naive 的样式仍然可能被覆盖），因为你的工具链可能永远会把 tailwind 的样式插入 head 的尾部。这种情况下，你需要在 app 挂载之前动态的插入 meta 标签。
+
+```ts
+const meta = document.createElement('meta')
+meta.name = 'naive-ui-style'
+document.head.appendChild(meta)
+
+vueApp.mount('#app')
+```
