@@ -164,7 +164,9 @@ export default defineComponent({
       if (feedback !== undefined && feedback !== null) return true
       return explainsRef.value.length
     })
-    const mergedDisabledRef = NForm ? NForm.disabled : ref(false)
+    const mergedDisabledRef = NForm
+      ? toRef(NForm.props, 'disabled')
+      : ref(false)
     const themeRef = useTheme(
       'Form',
       'FormItem',
@@ -259,7 +261,7 @@ export default defineComponent({
       }
       const { value: rules } = mergedRulesRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const value = NForm ? get(NForm.model.value, path!, null) : undefined
+      const value = NForm ? get(NForm.props.model, path!, null) : undefined
       const activeRules = (
         !trigger
           ? rules

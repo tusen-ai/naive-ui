@@ -12,7 +12,7 @@ export function formItemSize (props: FormItemSetupProps): {
   return {
     mergedSize: computed(() => {
       if (props.size !== undefined) return props.size
-      if (NForm?.size.value !== undefined) return NForm.size.value
+      if (NForm?.props.size !== undefined) return NForm.props.size
       return 'medium'
     })
   }
@@ -24,7 +24,7 @@ export function formItemMisc (props: FormItemSetupProps) {
   const mergedLabelWidthRef = computed(() => {
     if (mergedLabelPlacementRef.value === 'top') return
     const { labelWidth } = props
-    const autoComputedWidth = NForm?.maxChildLabelWidth.value
+    const autoComputedWidth = NForm?.maxChildLabelWidthRef.value
 
     if (labelWidth === 'auto') {
       if (autoComputedWidth !== undefined) {
@@ -38,7 +38,7 @@ export function formItemMisc (props: FormItemSetupProps) {
       return formatLength(labelWidth)
     }
 
-    if (NForm?.labelWidth.value === 'auto') {
+    if (NForm?.props.labelWidth === 'auto') {
       if (autoComputedWidth !== undefined) {
         return formatLength(autoComputedWidth)
       } else {
@@ -46,21 +46,21 @@ export function formItemMisc (props: FormItemSetupProps) {
       }
     }
 
-    if (NForm?.labelWidth.value !== undefined) {
-      return formatLength(NForm.labelWidth.value)
+    if (NForm?.props.labelWidth !== undefined) {
+      return formatLength(NForm.props.labelWidth)
     }
     return undefined
   })
   const mergedLabelPlacementRef = computed(() => {
     const { labelPlacement } = props
     if (labelPlacement !== undefined) return labelPlacement
-    if (NForm?.labelPlacement.value) return NForm.labelPlacement.value
+    if (NForm?.props.labelPlacement) return NForm.props.labelPlacement
     return 'top'
   })
   const mergedLabelAlignRef = computed(() => {
     const { labelAlign } = props
     if (labelAlign) return labelAlign
-    if (NForm?.labelAlign.value) return NForm.labelAlign.value
+    if (NForm?.props.labelAlign) return NForm.props.labelAlign
     return undefined
   })
   const mergedLabelStyleRef = computed(() => {
@@ -74,12 +74,12 @@ export function formItemMisc (props: FormItemSetupProps) {
   const mergedShowRequireMarkRef = computed(() => {
     const { showRequireMark } = props
     if (showRequireMark !== undefined) return showRequireMark
-    return NForm?.showRequireMark.value
+    return NForm?.props.showRequireMark
   })
   const mergedRequireMarkPlacementRef = computed(() => {
     const { requireMarkPlacement } = props
     if (requireMarkPlacement !== undefined) return requireMarkPlacement
-    return NForm?.requireMarkPlacement.value
+    return NForm?.props.requireMarkPlacement
   })
   const validationErroredRef = ref(false)
   const mergedValidationStatusRef = computed(() => {
@@ -91,13 +91,13 @@ export function formItemMisc (props: FormItemSetupProps) {
   const mergedShowFeedbackRef = computed(() => {
     const { showFeedback } = props
     if (showFeedback !== undefined) return showFeedback
-    if (NForm?.showFeedback.value !== undefined) return NForm.showFeedback.value
+    if (NForm?.props.showFeedback !== undefined) return NForm.props.showFeedback
     return true
   })
   const mergedShowLabelRef = computed(() => {
     const { showLabel } = props
     if (showLabel !== undefined) return showLabel
-    if (NForm?.showLabel.value !== undefined) return NForm.showLabel.value
+    if (NForm?.props.showLabel !== undefined) return NForm.props.showLabel
     return true
   })
   return {
@@ -131,10 +131,10 @@ export function formItemRule (props: FormItemSetupProps) {
       else rules.push(rule)
     }
     if (NForm) {
-      const { rules: formRules } = NForm
+      const { rules: formRules } = NForm.props
       const { value: rulePath } = compatibleRulePathRef
-      if (formRules.value !== undefined && rulePath !== undefined) {
-        const formRule = get(formRules.value, rulePath)
+      if (formRules !== undefined && rulePath !== undefined) {
+        const formRule = get(formRules, rulePath)
         if (formRule !== undefined) {
           if (Array.isArray(formRule)) {
             rules.push(...formRule)

@@ -4,8 +4,7 @@ import {
   PropType,
   provide,
   ExtractPropTypes,
-  ref,
-  toRef
+  ref
 } from 'vue'
 import { ValidateError } from 'async-validator'
 import { useConfig, useTheme } from '../../_mixins'
@@ -74,10 +73,10 @@ export default defineComponent({
     // from path to form-item
     const formItems: Record<string, FormItemInst[]> = {}
     // label-width = 'auto'
-    const maxChildLabelWidth = ref(0)
+    const maxChildLabelWidthRef = ref(0)
     const deriveMaxChildLabelWidth = (currentWidth: number): void => {
-      if (currentWidth >= maxChildLabelWidth.value) {
-        maxChildLabelWidth.value = currentWidth
+      if (currentWidth >= maxChildLabelWidthRef.value) {
+        maxChildLabelWidthRef.value = currentWidth
       }
     }
     async function validate (
@@ -126,18 +125,8 @@ export default defineComponent({
       }
     }
     provide(formInjectionKey, {
-      size: toRef(props, 'size'),
-      labelWidth: toRef(props, 'labelWidth'),
-      labelPlacement: toRef(props, 'labelPlacement'),
-      labelAlign: toRef(props, 'labelAlign'),
-      showRequireMark: toRef(props, 'showRequireMark'),
-      requireMarkPlacement: toRef(props, 'requireMarkPlacement'),
-      showFeedback: toRef(props, 'showFeedback'),
-      showLabel: toRef(props, 'showLabel'),
-      rules: toRef(props, 'rules'),
-      disabled: toRef(props, 'disabled'),
-      model: toRef(props, 'model'),
-      maxChildLabelWidth,
+      props,
+      maxChildLabelWidthRef,
       deriveMaxChildLabelWidth
     })
     provide(formItemInstsInjectionKey, { formItems })
