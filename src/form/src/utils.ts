@@ -24,21 +24,13 @@ export function formItemMisc (props: FormItemSetupProps) {
   const mergedLabelWidthRef = computed(() => {
     if (mergedLabelPlacementRef.value === 'top') return
     const { labelWidth } = props
-    const autoComputedWidth = NForm?.maxChildLabelWidthRef.value
 
-    if (labelWidth === 'auto') {
-      if (autoComputedWidth !== undefined) {
-        return formatLength(autoComputedWidth)
-      } else {
-        return undefined
-      }
-    }
-
-    if (labelWidth !== undefined) {
+    if (labelWidth !== undefined && labelWidth !== 'auto') {
       return formatLength(labelWidth)
     }
 
-    if (NForm?.props.labelWidth === 'auto') {
+    if (labelWidth === 'auto' || NForm?.props.labelWidth === 'auto') {
+      const autoComputedWidth = NForm?.maxChildLabelWidthRef.value
       if (autoComputedWidth !== undefined) {
         return formatLength(autoComputedWidth)
       } else {

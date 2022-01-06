@@ -346,6 +346,7 @@ export default defineComponent({
       }
     })
     return {
+      labelElementRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedRequired: mergedRequiredRef,
       hasFeedback: hasFeedbackRef,
@@ -404,8 +405,7 @@ export default defineComponent({
           '--n-feedback-text-color-error': feedbackTextColorError
         }
         return cssVars
-      }),
-      labelElementRef
+      })
     }
   },
   render () {
