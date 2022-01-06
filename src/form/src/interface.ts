@@ -61,10 +61,10 @@ export interface FormInjection {
   labelWidth: Ref<number | string>
   labelPlacement: Ref<LabelPlacement>
   labelAlign: Ref<LabelAlign>
-  showRequireMark: Ref<boolean>
+  showRequireMark: Ref<boolean | undefined>
   requireMarkPlacement: Ref<'left' | 'right'>
   showFeedback: Ref<boolean>
-  showLabel: Ref<boolean>
+  showLabel: Ref<boolean | undefined>
   rules: Ref<FormRules>
   disabled: Ref<boolean>
   model: Ref<Record<string, any>>
