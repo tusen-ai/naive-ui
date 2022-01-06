@@ -235,6 +235,7 @@ function useCalendar (
   function handleDateClick (
     dateItem: DateItem | MonthItem | YearItem | QuarterItem
   ): void {
+    console.log('0000')
     if (mergedIsDateDisabled(dateItem.ts)) {
       return
     }
@@ -279,6 +280,22 @@ function useCalendar (
         scrollPickerColumns(newValue)
         break
     }
+  }
+
+  function handleQuickMonthClick (
+    dateItem: MonthItem | YearItem | QuarterItem
+  ): void {
+    console.log('111111')
+    let newValue: number
+    if (props.value !== null && !Array.isArray(props.value)) {
+      newValue = props.value
+    } else {
+      newValue = Date.now()
+    }
+    newValue = getTime(set(newValue, dateItem.dateObject))
+    console.log('11111', newValue)
+    calendarValueRef.value = newValue
+    scrollPickerColumns(newValue)
   }
   function deriveDateInputValue (time?: number): void {
     // If not selected, display nothing,
@@ -400,7 +417,8 @@ function useCalendar (
     scrollbarInstRef,
     quickSelectYear,
     quickSelectMonth,
-    showMonthYearPanel
+    showMonthYearPanel,
+    handleQuickMonthClick
   }
 }
 

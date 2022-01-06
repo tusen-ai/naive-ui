@@ -19,6 +19,10 @@ export default defineComponent({
     type: {
       type: String as PropType<'month' | 'year' | 'quarter'>,
       required: true
+    },
+    quickMonth: {
+      type: Boolean,
+      default: false
     }
   },
   setup (props) {
@@ -40,7 +44,8 @@ export default defineComponent({
       i: number,
       mergedClsPrefix: string
     ): VNode => {
-      const { mergedIsDateDisabled, handleDateClick } = useCalendarRef
+      console.log('quick', props.quickMonth)
+      const { mergedIsDateDisabled, handleDateClick, handleQuickMonthClick } = useCalendarRef
       return (
         <div
           data-n-date
@@ -56,7 +61,7 @@ export default defineComponent({
                 mergedIsDateDisabled(item.ts)
             }
           ]}
-          onClick={() => handleDateClick(item)}
+          onClick={() => handleQuickMonthClick(item)}
         >
           {getRenderContent(item)}
         </div>

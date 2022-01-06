@@ -99,8 +99,10 @@ export default defineComponent({
                               {...this.$props}
                               ref={'datePanelRef'}
                               style={this.$attrs.style}
+                              actions={[]}
                               type="year"
                               key="year"
+                              quickMonth={true}
                             />
                           </Transition>
                         )
