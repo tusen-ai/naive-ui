@@ -13,6 +13,7 @@ basic
 pair
 custom
 form
+sort
 ```
 
 ## API

@@ -1,5 +1,6 @@
 export { default as AddIcon } from './Add'
 export { default as ArrowDownIcon } from './ArrowDown'
+export { default as ArrowUpIcon } from './ArrowUp'
 export { default as AttachIcon } from './Attach'
 export { default as BackwardIcon } from './Backward'
 export { default as DateIcon } from './Date'

@@ -14,7 +14,12 @@ import {
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { createId } from 'seemly'
-import { RemoveIcon, AddIcon, ArrowDownIcon } from '../../_internal/icons'
+import {
+  RemoveIcon,
+  AddIcon,
+  ArrowDownIcon,
+  ArrowUpIcon
+} from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { NButton, NButtonGroup } from '../../button'
 import { useTheme, useLocale, useConfig } from '../../_mixins'
@@ -394,7 +399,7 @@ export default defineComponent({
                             icon: () => (
                               <NBaseIcon clsPrefix={mergedClsPrefix}>
                                 {{
-                                  default: () => <ArrowDownIcon />
+                                  default: () => <ArrowUpIcon />
                                 }}
                               </NBaseIcon>
                             )
