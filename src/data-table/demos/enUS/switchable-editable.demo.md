@@ -52,6 +52,10 @@ const ShowOrEdit = defineComponent({
         inputRef.value.focus()
       })
     }
+    function handleChange () {
+      props.onUpdateValue(inputValue.value)
+      isEdit.value = false
+    }
     return () =>
       h(
         'div',
@@ -65,10 +69,8 @@ const ShowOrEdit = defineComponent({
             onUpdateValue: (v) => {
               inputValue.value = v
             },
-            onChange: () => {
-              props.onUpdateValue(inputValue.value)
-              isEdit.value = false
-            }
+            onChange: handleChange,
+            onBlur: handleChange
           })
           : props.value
       )
@@ -84,6 +86,7 @@ export default defineComponent({
         {
           title: 'Name',
           key: 'name',
+          width: 150,
           render (row, index) {
             return h(ShowOrEdit, {
               value: row.name,
@@ -96,6 +99,7 @@ export default defineComponent({
         {
           title: 'Age',
           key: 'age',
+          width: 100,
           render (row, index) {
             return h(ShowOrEdit, {
               value: String(row.age),
