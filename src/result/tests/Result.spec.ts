@@ -37,13 +37,13 @@ describe('n-result', () => {
     const wrapper = mount(NResult, {
       slots: {
         default: () => 'test-default',
-        custom: () => 'test-custom',
+        icon: () => 'test-custom-icon',
         footer: () => 'test-footer'
       }
     })
     expect(wrapper.find('.n-result-content').exists()).toBe(true)
     expect(wrapper.find('.n-result-content').text()).toBe('test-default')
-    expect(wrapper.find('.n-result-icon').text()).toBe('test-custom')
+    expect(wrapper.find('.n-result-icon').text()).toBe('test-custom-icon')
     expect(wrapper.find('.n-result-footer').exists()).toBe(true)
     expect(wrapper.find('.n-result-footer').text()).toBe('test-footer')
   })
