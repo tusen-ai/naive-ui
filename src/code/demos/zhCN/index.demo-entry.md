@@ -37,6 +37,7 @@
 ```demo
 basic.vue
 inline.vue
+softwrap.vue
 loop-debug.vue
 ```
 

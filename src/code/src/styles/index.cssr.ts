@@ -23,6 +23,7 @@ export default c([
     c('pre', `
       margin: 0;
       font-family: inherit;
+      white-space: pre-wrap;
     `),
     c('[class^=hljs]', `
       color: var(--n-text-color);
