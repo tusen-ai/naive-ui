@@ -32,7 +32,7 @@ custom-arrow-and-dots
 | default-index | `number` | `0` | default index. |
 | active-index | `number` | `0` | current index. |
 | show-arrow | `boolean` | `false` | Whether to show arrow buttons. |
-| dot-style | `'dot' \| 'line' \| 'progress' \| 'never'` | `'dot'` | Dot style. |
+| dot-style | `'dot' \| 'line' \| 'never'` | `'dot'` | Dot style. |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Dot placement in the panel. |
 | slides-per-view | `'auto' \| number` | `1` | Number of carousels displayed on per view. |
 | space-between | `number` | `0` | The spacing between the carousels. |
@@ -48,8 +48,8 @@ custom-arrow-and-dots
 | transition-name | `string` | `undefined` | Custom transition name. |
 | draggable | `boolean` | `false` | Whether to switch the carousel by dragging the mouse. |
 | touchable | `boolean` | `true` | Whether to switch the carousel by touch. |
-| mousewheel | `boolean` | `false` | Whether to switch the carousel through the mouse wheel, it is only valid in the vertical mode. |
-| keyboard | `boolean` | `false` | Whether to switch the carousel by keyboard. |
+| mousewheel | `boolean` | `false` | Whether to switch the carousel through the mouse wheel. |
+| keyboard | `boolean` | `false` | Whether to switch the carousel by pressing the key, it is only valid when the focus is on Dots. |
 | onChange | `(current: number, from: number) => void` | `undefined` | Callback function when the current index changes. |
 
 ### Carousel Slots

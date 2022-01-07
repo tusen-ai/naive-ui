@@ -1,6 +1,9 @@
 # Slides per view
 
 ```html
+<n-alert title="Caveat" type="warning" style="margin-bottom: 16px;">
+  This prop will conflict with `loop`. If you need to customize the number of displays per view, then the `loop` prop will be disabled.
+</n-alert>
 <n-carousel
   :slides-per-view="3"
   :space-between="20"

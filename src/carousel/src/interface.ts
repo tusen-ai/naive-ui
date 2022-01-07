@@ -4,6 +4,8 @@ export interface CarouselMethodsInjection {
   slideTo: (index: number) => void
   slidePrev: () => void
   slideNext: () => void
+  isVertical: () => boolean
+  isHorizontal: () => boolean
   isPrev: (slide: number | HTMLElement) => boolean
   isNext: (slide: number | HTMLElement) => boolean
   isActive: (slide: number | HTMLElement) => boolean

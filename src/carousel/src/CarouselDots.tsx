@@ -2,7 +2,7 @@ import { h, defineComponent, PropType, inject } from 'vue'
 import { indexMap } from 'seemly'
 import { useConfig } from '../../_mixins'
 import { carouselMethodsInjectionKey } from './interface'
-import { ExtractPublicPropTypes } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 
 const carouselDotsProps = {
   total: {
@@ -17,6 +17,7 @@ const carouselDotsProps = {
     type: String as PropType<'click' | 'hover'>,
     default: 'click'
   },
+  keyboard: Boolean,
   dotStyle: {
     type: String as PropType<'dot' | 'line' | 'never'>,
     default: 'dot'
@@ -31,23 +32,63 @@ export default defineComponent({
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { slideTo } = inject(carouselMethodsInjectionKey, null)!
+    const NCarousel = inject(carouselMethodsInjectionKey, null)!
     function handleKeydown (e: KeyboardEvent, current: number): void {
       switch (e.code) {
         case 'Enter':
         case 'NumpadEnter':
         case 'Space':
-          slideTo(current)
+          NCarousel.slideTo(current)
+          return
+      }
+      if (props.keyboard) {
+        handleKeyboard(e)
       }
     }
     function handleMouseenter (current: number): void {
       if (props.trigger === 'hover') {
-        slideTo(current)
+        NCarousel.slideTo(current)
       }
     }
     function handleClick (current: number): void {
       if (props.trigger === 'click') {
-        slideTo(current)
+        NCarousel.slideTo(current)
+      }
+    }
+    function handleKeyboard (e: KeyboardEvent): void {
+      const { code: keycode } = e
+      const vertical = NCarousel.isVertical()
+      const isVerticalNext = keycode === 'PageUp' || keycode === 'ArrowUp'
+      const isVerticalPrev = keycode === 'PageDown' || keycode === 'ArrowDown'
+      const isHorizontalNext = keycode === 'PageUp' || keycode === 'ArrowRight'
+      const isHorizontalPrev = keycode === 'PageDown' || keycode === 'ArrowLeft'
+      if (
+        vertical &&
+        ((isVerticalNext && NCarousel.isNextDisabled()) ||
+          (isVerticalPrev && NCarousel.isPrevDisabled()))
+      ) {
+        return
+      }
+      if (
+        !vertical &&
+        ((isHorizontalNext && NCarousel.isNextDisabled()) ||
+          (isHorizontalPrev && NCarousel.isPrevDisabled()))
+      ) {
+        return
+      }
+      if (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) {
+        return
+      }
+      const nodeName = document.activeElement?.nodeName.toLowerCase()
+      if (nodeName === 'input' || nodeName === 'textarea') {
+        return
+      }
+      if (vertical ? isVerticalNext : isHorizontalNext) {
+        e.preventDefault()
+        NCarousel.slideNext()
+      } else if (vertical ? isVerticalPrev : isHorizontalPrev) {
+        e.preventDefault()
+        NCarousel.slidePrev()
       }
     }
     return {
@@ -58,12 +99,7 @@ export default defineComponent({
     }
   },
   render () {
-    const {
-      mergedClsPrefix,
-      total,
-      current,
-      dotStyle
-    } = this
+    const { mergedClsPrefix, total, current, dotStyle } = this
     return (
       <div
         class={[
@@ -72,7 +108,7 @@ export default defineComponent({
         ]}
         role='tablist'
       >
-        {indexMap(total, i => {
+        {indexMap(total, (i) => {
           const selected = i === current
           return (
             <div
@@ -85,7 +121,7 @@ export default defineComponent({
               ]}
               onClick={() => this.handleClick(i)}
               onMouseenter={() => this.handleMouseenter(i)}
-              onKeydown={e => this.handleKeydown(e, i)}
+              onKeydown={(e) => this.handleKeydown(e, i)}
             />
           )
         })}

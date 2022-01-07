@@ -137,7 +137,11 @@ export default defineComponent({
     const duplicatedableRef = computed(
       // only duplicate the copy operation in `slide` mode,
       // because other effects have special process
-      () => translateableRef.value && props.loop
+      () =>
+        translateableRef.value &&
+        props.loop &&
+        // TODO
+        props.slidesPerView === 1
     )
     const displaySlidesPerViewRef = computed(() =>
       userWantControlRef.value ||
@@ -535,6 +539,8 @@ export default defineComponent({
         // wait transition end
         if (!inTransition || !duplicatedableRef.value) slideNext()
       },
+      isVertical: () => verticalRef.value,
+      isHorizontal: () => !verticalRef.value,
       isPrev: isRealityPrev,
       isNext: isRealityNext,
       isActive: isRealityActive,
@@ -692,42 +698,6 @@ export default defineComponent({
       }
       inTransition = false
     }
-    function handleKeydown (e: KeyboardEvent): void {
-      const { code: keycode } = e
-      const { value: vertical } = verticalRef
-      const isVerticalNext = keycode === 'PageUp' || keycode === 'ArrowUp'
-      const isVerticalPrev = keycode === 'PageDown' || keycode === 'ArrowDown'
-      const isHorizontalNext = keycode === 'PageUp' || keycode === 'ArrowRight'
-      const isHorizontalPrev = keycode === 'PageDown' || keycode === 'ArrowLeft'
-      if (
-        vertical &&
-        ((isVerticalNext && isNextDisabled()) ||
-          (isVerticalPrev && isPrevDisabled()))
-      ) {
-        return
-      }
-      if (
-        !vertical &&
-        ((isHorizontalNext && isNextDisabled()) ||
-          (isHorizontalPrev && isPrevDisabled()))
-      ) {
-        return
-      }
-      if (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) {
-        return
-      }
-      const nodeName = document.activeElement?.nodeName.toLowerCase()
-      if (nodeName === 'input' || nodeName === 'textarea') {
-        return
-      }
-      if (vertical ? isVerticalNext : isHorizontalNext) {
-        e.preventDefault()
-        carouselMethods.slideNext()
-      } else if (vertical ? isVerticalPrev : isHorizontalPrev) {
-        e.preventDefault()
-        carouselMethods.slidePrev()
-      }
-    }
     function handleMousewheel (event: WheelEvent): void {
       event.preventDefault()
       if (inTransition) return
@@ -768,18 +738,10 @@ export default defineComponent({
 
     onMounted(() => {
       watchEffect(mesureAutoplay)
-      watchEffect(() => {
-        if (props.keyboard) {
-          on('keydown', document, handleKeydown)
-        } else {
-          off('keydown', document, handleKeydown)
-        }
-      })
     })
     onBeforeUnmount(() => {
       resetDragStatus()
       resetAutoplay(true)
-      off('keydown', document, handleKeydown)
     })
     // Fix index when remounting
     onUpdated(() => {
@@ -1003,6 +965,7 @@ export default defineComponent({
               total={dotSlotProps.total}
               current={dotSlotProps.current}
               trigger={this.trigger}
+              keyboard={this.keyboard}
               dotStyle={dotStyle}
             />
           ))}

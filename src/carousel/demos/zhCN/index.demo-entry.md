@@ -32,7 +32,7 @@ custom-arrow-and-dots
 | default-index | `number` | `0` | 默认显示页 |
 | active-index | `number` | `0` | 当前显示页 |
 | show-arrow | `boolean` | `false` | 是否显示箭头按钮 |
-| dot-style | `'dot' \| 'line' \| 'progress' \| 'never'` | `'dot'` | 轮播指示点样式 |
+| dot-style | `'dot' \| 'line' \| 'never'` | `'dot'` | 轮播指示点样式 |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | 轮播指示点位置 |
 | slides-per-view | `'auto' \| number` | `1` | 每一页显示的轮播图数量 |
 | space-between | `number` | `0` | 轮播图之间的间距 |
@@ -48,8 +48,8 @@ custom-arrow-and-dots
 | transition-name | `string` | `undefined` | 自定义过渡效果 |
 | draggable | `boolean` | `false` | 是否通过鼠标拖拽切换轮播图 |
 | touchable | `boolean` | `true` | 是否通过触摸拖拽切换轮播图 |
-| mousewheel | `boolean` | `false` | 是否通过鼠标滚轮切换轮播图，仅在垂直模式有效 |
-| keyboard | `boolean` | `false` | 是否通过按键切换轮播图 |
+| mousewheel | `boolean` | `false` | 是否通过鼠标滚轮切换轮播图 |
+| keyboard | `boolean` | `false` | 是否通过按键切换轮播图，只有焦点在 Dots 上时才有效 |
 | onChange | `(current: number, from: number) => void` | `undefined` | 当前页变化时的回调函数 |
 
 ### Carousel Slots

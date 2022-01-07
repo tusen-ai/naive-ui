@@ -1,6 +1,6 @@
 # Keyboard
 
-It may be useful for full-screen horizontal scrolling, after all, most mice cannot scroll sideways.
+Whether to switch the carousel by pressing the key, it is only valid when the focus is on Dots.
 
 ```html
 <n-carousel show-arrow keyboard>
