@@ -3,7 +3,7 @@
 Set `show-arrow` to show the arrow。
 
 ```html
-<n-carousel show-arrow :loop="false">
+<n-carousel show-arrow>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
