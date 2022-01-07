@@ -8,7 +8,8 @@ import {
   ExtractPropTypes,
   toRef,
   CSSProperties,
-  Transition
+  Transition,
+  watchEffect
 } from 'vue'
 import { createId } from 'seemly'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
@@ -16,7 +17,7 @@ import type { ThemeProps } from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
 import { NPagination } from '../../pagination'
 import { PaginationProps } from '../../pagination/src/Pagination'
-import { warn, createKey } from '../../_utils'
+import { createKey, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { dataTableLight, DataTableTheme } from '../styles'
 import MainTable from './MainTable'
@@ -144,75 +145,19 @@ export const dataTableProps = {
   MaybeArray<OnUpdateExpandedRowKeys>
   >,
   // deprecated
-  onPageChange: {
-    type: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'data-table',
-          '`on-page-change` is deprecated, please use `on-update:page` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  },
-  onPageSizeChange: {
-    type: [Function, Array] as PropType<PaginationProps['onUpdate:pageSize']>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'data-table',
-          '`on-page-size-change` is deprecated, please use `on-update:page-size` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  },
-  onSorterChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateSorter> | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'data-table',
-          '`on-sorter-change` is deprecated, please use `on-update:sorter` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  },
-  onFiltersChange: {
-    type: [Function, Array] as PropType<
-    MaybeArray<OnUpdateFilters> | undefined
-    >,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'data-table',
-          '`on-filters-change` is deprecated, please use `on-update:filters` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  },
-  onCheckedRowKeysChange: {
-    type: [Function, Array] as PropType<
-    MaybeArray<OnUpdateCheckedRowKeys> | undefined
-    >,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'data-table',
-          '`on-checked-row-keys-change` is deprecated, please use `on-update:checked-row-keys` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onPageChange: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
+  onPageSizeChange: [Function, Array] as PropType<
+  PaginationProps['onUpdate:pageSize']
+  >,
+  onSorterChange: [Function, Array] as PropType<
+  MaybeArray<OnUpdateSorter> | undefined
+  >,
+  onFiltersChange: [Function, Array] as PropType<
+  MaybeArray<OnUpdateFilters> | undefined
+  >,
+  onCheckedRowKeysChange: [Function, Array] as PropType<
+  MaybeArray<OnUpdateCheckedRowKeys> | undefined
+  >
 } as const
 
 export type DataTableProps = ExtractPublicPropTypes<typeof dataTableProps>
@@ -223,6 +168,41 @@ export default defineComponent({
   alias: ['AdvancedTable'],
   props: dataTableProps,
   setup (props, { slots }) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onPageChange !== undefined) {
+          warnOnce(
+            'data-table',
+            '`on-page-change` is deprecated, please use `on-update:page` instead.'
+          )
+        }
+        if (props.onPageSizeChange !== undefined) {
+          warnOnce(
+            'data-table',
+            '`on-page-size-change` is deprecated, please use `on-update:page-size` instead.'
+          )
+        }
+        if (props.onSorterChange !== undefined) {
+          warnOnce(
+            'data-table',
+            '`on-sorter-change` is deprecated, please use `on-update:sorter` instead.'
+          )
+        }
+        if (props.onFiltersChange !== undefined) {
+          warnOnce(
+            'data-table',
+            '`on-filters-change` is deprecated, please use `on-update:filters` instead.'
+          )
+        }
+        if (props.onCheckedRowKeysChange !== undefined) {
+          warnOnce(
+            'data-table',
+            '`on-checked-row-keys-change` is deprecated, please use `on-update:checked-row-keys` instead.'
+          )
+        }
+      })
+    }
+
     const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
     const mergedBottomBorderedRef = computed(() => {
       const { bottomBordered } = props

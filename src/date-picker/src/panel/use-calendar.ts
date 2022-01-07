@@ -103,7 +103,7 @@ function useCalendar (
   const yearArrayRef = computed(() => {
     return yearArray(calendarValueRef.value, props.value, nowRef.value)
   })
-  const querterArrayRef = computed(() => {
+  const quarterArrayRef = computed(() => {
     return quarterArray(calendarValueRef.value, props.value, nowRef.value)
   })
   const weekdaysRef = computed(() => {
@@ -347,7 +347,7 @@ function useCalendar (
     dateArray: dateArrayRef,
     monthArray: monthArrayRef,
     yearArray: yearArrayRef,
-    quarterArray: querterArrayRef,
+    quarterArray: quarterArrayRef,
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
     weekdays: weekdaysRef,
