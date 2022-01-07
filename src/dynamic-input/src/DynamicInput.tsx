@@ -14,7 +14,7 @@ import {
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { createId } from 'seemly'
-import { RemoveIcon, AddIcon } from '../../_internal/icons'
+import { RemoveIcon, AddIcon, ArrowDownIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { NButton, NButtonGroup } from '../../button'
 import { useTheme, useLocale, useConfig } from '../../_mixins'
@@ -64,6 +64,7 @@ const dynamicInputProps = {
     type: String,
     default: ''
   },
+  showSortButton: Boolean,
   onCreate: Function as PropType<(index: number) => any>,
   onRemove: Function as PropType<(index: number) => void>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -212,6 +213,27 @@ export default defineComponent({
       const { onRemove } = props
       if (onRemove) onRemove(index)
     }
+    function swap (
+      array: any[],
+      currentIndex: number,
+      targetIndex: number
+    ): void {
+      const currentItem = array[currentIndex]
+      array[currentIndex] = array[targetIndex]
+      array[targetIndex] = currentItem
+    }
+    function sort (type: 'up' | 'down', index: number): void {
+      const { value: mergedValue } = mergedValueRef
+      if (!Array.isArray(mergedValue)) return
+      const newValue = Array.from(mergedValue)
+      if (type === 'up') {
+        swap(newValue, index, index - 1)
+      }
+      if (type === 'down') {
+        swap(newValue, index, index + 1)
+      }
+      doUpdateValue(newValue)
+    }
     provide(dynamicInputInjectionKey, {
       mergedThemeRef: themeRef,
       keyPlaceholderRef: toRef(props, 'keyPlaceholder'),
@@ -231,6 +253,7 @@ export default defineComponent({
       ensureKey,
       handleValueChange,
       remove,
+      sort,
       createItem,
       mergedTheme: themeRef,
       cssVars: computed(() => {
@@ -258,7 +281,9 @@ export default defineComponent({
       ensureKey,
       handleValueChange,
       remove,
-      createItem
+      sort,
+      createItem,
+      showSortButton
     } = this
     return (
       <div
@@ -356,7 +381,43 @@ export default defineComponent({
                             </NBaseIcon>
                           )
                         }}
-                      </NButton>
+                      </NButton>,
+                      showSortButton ? (
+                        <NButton
+                          disabled={index === 0}
+                          circle
+                          theme={mergedTheme.peers.Button}
+                          themeOverrides={mergedTheme.peerOverrides.Button}
+                          onClick={() => sort('up', index)}
+                        >
+                          {{
+                            icon: () => (
+                              <NBaseIcon clsPrefix={mergedClsPrefix}>
+                                {{
+                                  default: () => <ArrowDownIcon />
+                                }}
+                              </NBaseIcon>
+                            )
+                          }}
+                        </NButton>
+                      ) : null,
+                      showSortButton ? (
+                        <NButton
+                          disabled={index === mergedValue.length - 1}
+                          circle
+                          theme={mergedTheme.peers.Button}
+                          themeOverrides={mergedTheme.peerOverrides.Button}
+                          onClick={() => sort('down', index)}
+                        >
+                          {{
+                            icon: () => (
+                              <NBaseIcon clsPrefix={mergedClsPrefix}>
+                                {{ default: () => <ArrowDownIcon /> }}
+                              </NBaseIcon>
+                            )
+                          }}
+                        </NButton>
+                      ) : null
                     ]
                   }}
                 </NButtonGroup>
