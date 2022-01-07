@@ -49,7 +49,7 @@ custom-arrow-and-dots
 | draggable | `boolean` | `false` | 是否通过鼠标拖拽切换轮播图 |
 | touchable | `boolean` | `true` | 是否通过触摸拖拽切换轮播图 |
 | mousewheel | `boolean` | `false` | 是否通过鼠标滚轮切换轮播图 |
-| keyboard | `boolean` | `false` | 是否通过按键切换轮播图，只有焦点在 Dots 上时才有效 |
+| keyboard | `boolean` | `false` | 是否通过按键切换轮播图，只有焦点在 Dots 上时才起作用 |
 | onChange | `(current: number, from: number) => void` | `undefined` | 当前页变化时的回调函数 |
 
 ### Carousel Slots

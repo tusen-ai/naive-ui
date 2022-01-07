@@ -49,7 +49,7 @@ custom-arrow-and-dots
 | draggable | `boolean` | `false` | Whether to switch the carousel by dragging the mouse. |
 | touchable | `boolean` | `true` | Whether to switch the carousel by touch. |
 | mousewheel | `boolean` | `false` | Whether to switch the carousel through the mouse wheel. |
-| keyboard | `boolean` | `false` | Whether to switch the carousel by pressing the key, it is only valid when the focus is on Dots. |
+| keyboard | `boolean` | `false` | Whether to switch the carousel by pressing the key, it only works when the focus is on Dots. |
 | onChange | `(current: number, from: number) => void` | `undefined` | Callback function when the current index changes. |
 
 ### Carousel Slots
