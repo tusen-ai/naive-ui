@@ -4,7 +4,7 @@
 
 <template>
   <n-result status="success" title="custom" description="anything you want">
-    <template #custom>
+    <template #icon>
       <n-image
         src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
       />

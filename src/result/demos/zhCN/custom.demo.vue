@@ -4,7 +4,7 @@
 
 <template>
   <n-result status="success" title="搞个大新闻" description="是要负责任的">
-    <template #custom>
+    <template #icon>
       <n-image
         src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
       />

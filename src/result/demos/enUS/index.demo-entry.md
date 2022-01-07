@@ -34,6 +34,6 @@ custom.vue
 
 | Name    | Parameters | Description                                    |
 | ------- | ---------- | ---------------------------------------------- |
-| custom  | `()`       | Custom content area.                           |
 | default | `()`       | Results page content information.              |
 | footer  | `()`       | Information at the bottom of the results page. |
+| icon    | `()`       | Custom icon content area.                      |
