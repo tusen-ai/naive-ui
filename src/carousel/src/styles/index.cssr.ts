@@ -8,9 +8,6 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-dot-size
 // --n-dot-line-size
 // --n-dot-line-size-active
-// --n-dot-progress-size
-// --n-dot-progress-color
-// --n-dot-progress-color-active
 // --n-arrow-color
 export default cB('carousel', `
   position: relative;
@@ -75,25 +72,14 @@ export default cB('carousel', `
           background-color .3s var(--n-bezier);
         outline: none;
       `, [
+        c('&:focus', `
+          background-color: var(--n-dot-color-focus);
+        `),
         cM('active', `
           width: var(--n-dot-line-size-active);
           background-color: var(--n-dot-color-active);
         `)
       ])
-    ]),
-    cM('progress', `
-      background: var(--n-dot-progress-color);
-    `, [
-      cE('dots-fill', `
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--n-dot-progress-color-active);
-        translate3d(0px, 0px, 0px) scaleX(0) scaleY(1);
-        transform-origin: left top;
-      `)
     ])
   ]),
   cE('arrow', `
@@ -188,13 +174,6 @@ export default cB('carousel', `
       left: 16px;
       flex-direction: column;
     `, [
-      cM('progress', `
-        top: 0;
-        left: 0;
-        width: 5px;
-        height: 100%;
-        transform: translateY(0);
-      `),
       cM('line', [
         cE('dot', `
           width: 3px;
@@ -218,13 +197,6 @@ export default cB('carousel', `
       right: 16px;
       flex-direction: column;
     `, [
-      cM('progress', `
-        top: 0;
-        right: 0;
-        width: 6px;
-        height: 100%;
-        transform: translateY(0);
-      `),
       cM('line', [
         cE('dot', `
           width: 3px;
@@ -247,13 +219,6 @@ export default cB('carousel', `
       top: 16px;
       left: 50%;
     `, [
-      cM('progress', `
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: var(--n-dot-progress-size);
-        transform: translateX(0);
-      `),
       cM('line', [
         cE('dot', `
           margin: 0 3px;
@@ -270,13 +235,6 @@ export default cB('carousel', `
       bottom: 16px;
       left: 50%;
     `, [
-      cM('progress', `
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: var(--n-dot-progress-size);
-        transform: translateX(0);
-      `),
       cM('line', [
         cE('dot', `
           margin: 0 3px;

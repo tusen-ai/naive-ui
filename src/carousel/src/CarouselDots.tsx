@@ -2,7 +2,7 @@ import { h, defineComponent, PropType, inject } from 'vue'
 import { indexMap } from 'seemly'
 import { useConfig } from '../../_mixins'
 import { carouselMethodsInjectionKey } from './interface'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { ExtractPublicPropTypes } from '../../_utils'
 
 const carouselDotsProps = {
   total: {
@@ -17,16 +17,8 @@ const carouselDotsProps = {
     type: String as PropType<'click' | 'hover'>,
     default: 'click'
   },
-  speed: {
-    type: Number,
-    default: 300
-  },
-  dotPlacement: {
-    type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
-    default: 'bottom'
-  },
   dotStyle: {
-    type: String as PropType<'dot' | 'line' | 'progress' | 'never'>,
+    type: String as PropType<'dot' | 'line' | 'never'>,
     default: 'dot'
   }
 }
@@ -70,12 +62,8 @@ export default defineComponent({
       mergedClsPrefix,
       total,
       current,
-      speed,
-      dotPlacement,
       dotStyle
     } = this
-    const isVersical = dotPlacement === 'left' || dotPlacement === 'right'
-    const progress = (current + 1) / total
     return (
       <div
         class={[
@@ -84,35 +72,23 @@ export default defineComponent({
         ]}
         role='tablist'
       >
-        {dotStyle === 'progress' ? (
-          <div
-            class={`${mergedClsPrefix}-carousel__dots-fill`}
-            style={{
-              transform: `translate3d(0px, 0px, 0px) scaleX(${
-                isVersical ? 1 : progress
-              }) scaleY(${isVersical ? progress : 1})`,
-              transitionDuration: `${speed}ms`
-            }}
-          ></div>
-        ) : (
-          indexMap(total, i => {
-            const selected = i === current
-            return (
-              <div
-                aria-selected={selected}
-                role='button'
-                tabindex='0'
-                class={[
-                  `${mergedClsPrefix}-carousel__dot`,
-                  selected && `${mergedClsPrefix}-carousel__dot--active`
-                ]}
-                onClick={() => this.handleClick(i)}
-                onMouseenter={() => this.handleMouseenter(i)}
-                onKeydown={e => this.handleKeydown(e, i)}
-              />
-            )
-          })
-        )}
+        {indexMap(total, i => {
+          const selected = i === current
+          return (
+            <div
+              aria-selected={selected}
+              role='button'
+              tabindex='0'
+              class={[
+                `${mergedClsPrefix}-carousel__dot`,
+                selected && `${mergedClsPrefix}-carousel__dot--active`
+              ]}
+              onClick={() => this.handleClick(i)}
+              onMouseenter={() => this.handleMouseenter(i)}
+              onKeydown={e => this.handleKeydown(e, i)}
+            />
+          )
+        })}
       </div>
     )
   }

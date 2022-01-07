@@ -53,7 +53,7 @@ const carouselProps = {
   },
   showArrow: Boolean,
   dotStyle: {
-    type: String as PropType<'dot' | 'line' | 'progress' | 'never'>,
+    type: String as PropType<'dot' | 'line' | 'never'>,
     default: 'dot'
   },
   dotPlacement: {
@@ -322,6 +322,18 @@ export default defineComponent({
         (index = clampValue(index, 0, length - 1)) !== realityIndexRef.value
       ) {
         const { value: lastDisplayIndex } = displayIndexRef
+        // When it is loop from the first silde to the last one,
+        // we control its animation effect
+        if (duplicatedableRef.value && displayTotalViewRef.value > 2) {
+          if (lastDisplayIndex === 0 && index === displayTotalViewRef.value) {
+            index = 0
+          } else if (
+            lastDisplayIndex === displayTotalViewRef.value - 1 &&
+            index === 1
+          ) {
+            index = length - 1
+          }
+        }
         const displayIndex = (displayIndexRef.value = getDisplayIndex(
           index,
           totalViewRef.value,
@@ -719,11 +731,26 @@ export default defineComponent({
     function handleMousewheel (event: WheelEvent): void {
       event.preventDefault()
       if (inTransition) return
-      if (props.mousewheel && verticalRef.value) {
-        const deltaY = event.deltaY
-        if (deltaY >= 100 && !isNextDisabled()) {
+      const { value: vertical } = verticalRef
+      let { deltaX, deltaY } = event
+      if (event.shiftKey && !deltaX) {
+        deltaX = deltaY
+      }
+      const PREV_R = -1
+      const NEXT_R = 1
+      const r = (deltaX || deltaY) > 0 ? NEXT_R : PREV_R
+      let rx = 0
+      let ry = 0
+      if (vertical) {
+        ry = r
+      } else {
+        rx = r
+      }
+      const RESPONSE_STEP = 10
+      if (ry * deltaY >= RESPONSE_STEP || rx * deltaX >= RESPONSE_STEP) {
+        if (r === NEXT_R && !isNextDisabled()) {
           slideNext()
-        } else if (deltaY <= -100 && !isPrevDisabled()) {
+        } else if (r === PREV_R && !isPrevDisabled()) {
           slidePrev()
         }
       }
@@ -863,9 +890,6 @@ export default defineComponent({
             dotColorFocus,
             dotLineSize,
             dotLineSizeActive,
-            dotProgressSize,
-            dotProgressColor,
-            dotProgressColorActive,
             arrowColor
           }
         } = themeRef.value
@@ -877,9 +901,6 @@ export default defineComponent({
           '--n-dot-size': dotSize,
           '--n-dot-line-size': dotLineSize,
           '--n-dot-line-size-active': dotLineSizeActive,
-          '--n-dot-progress-size': dotProgressSize,
-          '--n-dot-progress-color': dotProgressColor,
-          '--n-dot-progress-color-active': dotProgressColorActive,
           '--n-arrow-color': arrowColor
         }
       })
@@ -983,7 +1004,6 @@ export default defineComponent({
               current={dotSlotProps.current}
               trigger={this.trigger}
               dotStyle={dotStyle}
-              dotPlacement={dotPlacement}
             />
           ))}
         {showArrow &&

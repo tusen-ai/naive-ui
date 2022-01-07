@@ -58,7 +58,7 @@ export default defineComponent({
     const placementRef = ref('bottom')
     return {
       style: styleRef,
-      styles: ['dot', 'line', 'progress', 'never'],
+      styles: ['dot', 'line', 'never'],
       placement: placementRef,
       placements: ['top', 'bottom', 'left', 'right']
     }
