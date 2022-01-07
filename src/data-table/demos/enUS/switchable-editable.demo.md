@@ -104,7 +104,7 @@ export default defineComponent({
             return h(ShowOrEdit, {
               value: String(row.age),
               onUpdateValue (v) {
-                data.value[index].age = Number(v)
+                data.value[index].age = v
               }
             })
           }
