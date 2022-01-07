@@ -556,7 +556,7 @@ export default defineComponent({
               // eslint-disable-next-line no-case-declarations
               const fastForwardNode = showFastForward ? (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <FastBackwardIcon /> }}
+                  {{ default: () => <FastForwardIcon /> }}
                 </NBaseIcon>
               ) : (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
@@ -577,7 +577,7 @@ export default defineComponent({
               // eslint-disable-next-line no-case-declarations
               const fastBackwardNode = showFastBackward ? (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <FastForwardIcon /> }}
+                  {{ default: () => <FastBackwardIcon /> }}
                 </NBaseIcon>
               ) : (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
