@@ -3,8 +3,9 @@
 </markdown>
 
 <template>
+  auto wrap when code is too long
   <div>
-    <n-code :code="code" language="html" />
+    <n-code :code="code" language="js" />
   </div>
 </template>
 
@@ -15,7 +16,10 @@ export default defineComponent({
   setup () {
     return {
       code: `
-        <p class="n-p" data-v-79af885b="" style="--n-bezier:cubic-bezier(0.4, 0, 0.2, 1); --n-font-size:14px; --n-line-height:1.6; --n-text-color:rgb(51, 54, 57); font-size: 16px; margin-top: 0px; margin-bottom: 0px;">sometimes naive</p>
+function padEnd(string, length, chars) {
+  const strLength = length ? stringSize(string) : 0
+  return (length && strLength < length)? (string + createPadding(length - strLength, chars)): (string || '')
+}
       `
     }
   }

@@ -51,6 +51,17 @@ describe('n-code', () => {
       '    console.log( a )  '
     )
   })
+  it('should work with `wordWrap` prop', async () => {
+    const wrapper = mount(NCode, {
+      props: {
+        code: 'console.log(a)',
+        wordWrap: false
+      }
+    })
+    expect(wrapper.attributes('style')).toContain('--n-word-wrap: pre;')
+    await wrapper.setProps({ wordWrap: true })
+    expect(wrapper.attributes('style')).toContain('--n-word-wrap: pre-wrap;')
+  })
   it('should work with `default` slot', () => {
     const wrapper = mount(NCode, {
       slots: {

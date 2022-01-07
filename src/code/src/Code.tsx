@@ -30,6 +30,7 @@ const codeProps = {
   hljs: Object as PropType<Hljs>,
   uri: Boolean,
   inline: Boolean,
+  wordWrap: Boolean,
   // In n-log, we only need to mount code's style for highlight
   internalFontSize: Number,
   internalNoHighlight: Boolean
@@ -124,8 +125,9 @@ export default defineComponent({
             'hue-6-2': $9
           }
         } = themeRef.value
-        const { internalFontSize } = props
+        const { internalFontSize, wordWrap } = props
         return {
+          '--n-word-wrap': wordWrap ? 'pre-wrap' : 'pre',
           '--n-font-size': internalFontSize
             ? `${internalFontSize}px`
             : fontSize,
