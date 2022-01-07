@@ -12,6 +12,7 @@
 - Fix `n-upload` doesn't allow 2xx status code except 200.
 - Fix `n-form` when `validate` use `validateCallback`, cannot call Promise method.
 - Fix `n-input-number` input integer end with 0 cannot update, closes [#2115](https://github.com/TuSimple/naive-ui/issues/2115).
+- Fix `n-back-top` allow document to be passed to `listen-to` prop.
 
 ### Feats
 
