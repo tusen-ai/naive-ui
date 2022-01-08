@@ -32,8 +32,8 @@ custom.vue
 
 ### Result Slots
 
-| Name    | Parameters | Description                                    |
-| ------- | ---------- | ---------------------------------------------- |
-| default | `()`       | Results page content information.              |
-| footer  | `()`       | Information at the bottom of the results page. |
-| icon    | `()`       | Custom icon content area.                      |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| default | `()` | Results page content information. |  |
+| footer | `()` | Information at the bottom of the results page. |  |
+| icon | `()` | Custom icon content area. | NEXT_VERSION |
