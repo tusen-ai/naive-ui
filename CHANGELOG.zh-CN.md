@@ -39,6 +39,7 @@
 - `n-image` 新增更多主题变量，关闭 [#1531](https://github.com/TuSimple/naive-ui/issues/1531)
 - `n-upload` 新增 `image-group-props` 属性
 - `n-progress` 新增 `offset-degree` 属性，关闭 [#2010](https://github.com/TuSimple/naive-ui/issues/2010)
+- `n-form-item` 新增 `feedback` slot，关闭 [#1142](https://github.com/TuSimple/naive-ui/issues/1142)
 
 ## 2.23.2 (2021-12-29)
 

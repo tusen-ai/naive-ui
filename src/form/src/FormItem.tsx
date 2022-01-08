@@ -472,10 +472,12 @@ export default defineComponent({
                       clsPrefix={mergedClsPrefix}
                       explains={this.explains}
                       feedback={this.feedback}
-                    />
+                    >
+                      {{ default: $slots.feedback }}
+                    </Feedbacks>
                   )
                   const { hasFeedback, mergedValidationStatus } = this
-                  return hasFeedback ? (
+                  return hasFeedback || $slots.feedback ? (
                     mergedValidationStatus === 'warning' ? (
                       <div
                         key="controlled-warning"

@@ -108,6 +108,7 @@ partially-apply-rules
 
 ### FormItem, FormItemGi Slots
 
-| 名称  | 参数 | 说明     |
-| ----- | ---- | -------- |
-| label | `()` | 标签内容 |
+| 名称     | 参数 | 说明           | 版本         |
+| -------- | ---- | -------------- | ------------ |
+| feedback | `()` | 表项的反馈信息 | NEXT_VERSION |
+| label    | `()` | 标签内容       |              |

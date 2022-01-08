@@ -103,10 +103,11 @@ To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
-| default | `()`       | Content     |
+| default | `()`       | Content.    |
 
 ### FormItem, FormItemGi Slots
 
-| Name  | Parameters | Description   |
-| ----- | ---------- | ------------- |
-| label | `()`       | Label content |
+| Name     | Parameters | Description    | Version      |
+| -------- | ---------- | -------------- | ------------ |
+| feedback | `()`       | Feedback.      | NEXT_VERSION |
+| label    | `()`       | Label content. |              |
