@@ -1,6 +1,7 @@
 import { c, cB } from '../../../_utils/cssr'
 
 // vars:
+// --n-word-wrap
 // --n-font-size
 // --n-font-family
 // --n-font-weight-strong
@@ -23,6 +24,7 @@ export default c([
     c('pre', `
       margin: 0;
       font-family: inherit;
+      white-space: var(--n-word-wrap);
     `),
     c('[class^=hljs]', `
       color: var(--n-text-color);

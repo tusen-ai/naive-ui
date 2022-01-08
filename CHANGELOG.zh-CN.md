@@ -17,6 +17,7 @@
 
 ### Feats
 
+- `n-code` 新增 `word-wrap` 属性，关闭 [#2111](https://github.com/TuSimple/naive-ui/issues/2111)
 - `n-modal` 新增 `z-index` 属性，关闭 [#2088](https://github.com/TuSimple/naive-ui/issues/2088)
 - `n-drawer` 新增 `z-index` 属性
 - `n-drawer` 新增 wai-aria 支持

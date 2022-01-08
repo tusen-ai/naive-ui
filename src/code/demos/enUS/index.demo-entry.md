@@ -37,6 +37,7 @@ The following code shows how to set hljs of Code. Importing highlight.js on dema
 ```demo
 basic.vue
 inline.vue
+softwrap.vue
 ```
 
 ## API
@@ -50,3 +51,4 @@ inline.vue
 | language | `string` | `undefined` | Code language in highlightjs. |
 | trim | `boolean` | `true` | Whether to display trimmed code. |
 | inline | `boolean` | `false` | Whether the code is displayed as inline. |
+| word-wrap | `boolean` | `false` | Whether to display word-wrapped code. |
