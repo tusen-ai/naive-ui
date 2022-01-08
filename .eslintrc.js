@@ -13,14 +13,12 @@ module.exports = {
       files: ['*.vue', '*.js'],
       extends: ['plugin:vue/essential', '@vue/standard'],
       rules: {
+        'vue/multi-word-component-names': 0,
         'vue/max-attributes-per-line': [
           2,
           {
             singleline: 20,
-            multiline: {
-              max: 1,
-              allowFirstLine: false
-            }
+            multiline: 1
           }
         ],
         'vue/require-default-prop': 0,
