@@ -125,9 +125,8 @@ export default defineComponent({
             'hue-6-2': $9
           }
         } = themeRef.value
-        const { internalFontSize, wordWrap } = props
+        const { internalFontSize } = props
         return {
-          '--n-word-wrap': wordWrap ? 'pre-wrap' : 'pre',
           '--n-font-size': internalFontSize
             ? `${internalFontSize}px`
             : fontSize,
@@ -149,10 +148,13 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, wordWrap } = this
     return (
       <code
-        class={`${mergedClsPrefix}-code`}
+        class={[
+          `${mergedClsPrefix}-code`,
+          wordWrap && `${mergedClsPrefix}-code--word-wrap`
+        ]}
         style={this.cssVars as CSSProperties}
         ref="codeRef"
       >

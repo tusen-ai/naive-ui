@@ -44,11 +44,11 @@ softwrap.vue
 
 ### Code Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| code | `string` | `''` | Incoming code string. |
-| hljs | `Object` | `undefined` | If you want to set hljs locally, pass it using this prop. |
-| language | `string` | `undefined` | Code language in highlightjs. |
-| trim | `boolean` | `true` | Whether to display trimmed code. |
-| inline | `boolean` | `false` | Whether the code is displayed as inline. |
-| word-wrap | `boolean` | `false` | Whether to display word-wrapped code. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| code | `string` | `''` | Incoming code string. |  |
+| hljs | `Object` | `undefined` | If you want to set hljs locally, pass it using this prop. |  |
+| language | `string` | `undefined` | Code language in highlightjs. |  |
+| trim | `boolean` | `true` | Whether to display trimmed code. |  |
+| inline | `boolean` | `false` | Whether the code is displayed as inline. |  |
+| word-wrap | `boolean` | `false` | Whether to display word-wrapped code. | NEXT_VERSION |

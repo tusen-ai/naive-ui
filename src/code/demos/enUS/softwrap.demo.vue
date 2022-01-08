@@ -1,12 +1,11 @@
 <markdown>
-# soft wrap
+# Soft wrap
+
+Code can wrap content if it overflows.
 </markdown>
 
 <template>
-  auto wrap when code is too long
-  <div>
-    <n-code :code="code" language="js" />
-  </div>
+  <n-code :code="code" language="js" />
 </template>
 
 <script lang="ts">

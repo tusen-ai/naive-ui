@@ -1,12 +1,11 @@
 <markdown>
 # 软换行
+
+code 可以在溢出时自动换行。
 </markdown>
 
 <template>
-  <div>
-    code 可以在溢出时自动换行。
-    <n-code :code="code" language="js" word-wrap />
-  </div>
+  <n-code :code="code" language="js" word-wrap />
 </template>
 
 <script lang="ts">
