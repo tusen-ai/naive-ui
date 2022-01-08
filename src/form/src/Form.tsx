@@ -46,7 +46,7 @@ const formProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  requireMarkPlacement: String as PropType<'left' | 'right'>,
+  requireMarkPlacement: String as PropType<'left' | 'right' | 'right-hanging'>,
   showFeedback: {
     type: Boolean,
     default: true

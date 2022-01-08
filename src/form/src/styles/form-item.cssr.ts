@@ -37,6 +37,9 @@ export default cB('form-item', {
     cE('asterisk', `
       color: var(--n-asterisk-color);
       transition: color .3s var(--n-bezier);
+    `),
+    cE('asterisk-placeholder', `
+      visibility: hidden;      
     `)
   ]),
   cB('form-item-blank', {

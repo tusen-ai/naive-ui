@@ -65,7 +65,7 @@ export const formItemProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  requireMarkPlacement: String as PropType<'left' | 'right'>,
+  requireMarkPlacement: String as PropType<'left' | 'right' | 'right-hanging'>,
   showFeedback: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -416,6 +416,10 @@ export default defineComponent({
       mergedShowRequireMark,
       mergedRequireMarkPlacement
     } = this
+    const renderedShowRequireMark =
+      mergedShowRequireMark !== undefined
+        ? mergedShowRequireMark
+        : this.mergedRequired
     return (
       <div
         class={[
@@ -436,15 +440,19 @@ export default defineComponent({
             {mergedRequireMarkPlacement !== 'left'
               ? renderSlot($slots, 'label', undefined, () => [this.label])
               : null}
-            {(
-              mergedShowRequireMark !== undefined
-                ? mergedShowRequireMark
-                : this.mergedRequired
-            ) ? (
+            {renderedShowRequireMark ? (
               <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
                 {mergedRequireMarkPlacement !== 'left' ? '\u00A0*' : '*\u00A0'}
               </span>
-                ) : null}
+            ) : (
+              mergedRequireMarkPlacement === 'right-hanging' && (
+                <span
+                  class={`${mergedClsPrefix}-form-item-label__asterisk-placeholder`}
+                >
+                  {'\u00A0*'}
+                </span>
+              )
+            )}
             {mergedRequireMarkPlacement === 'left'
               ? renderSlot($slots, 'label', undefined, () => [this.label])
               : null}
