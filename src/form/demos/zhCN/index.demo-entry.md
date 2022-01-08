@@ -29,7 +29,7 @@ partially-apply-rules
 | --- | --- | --- | --- |
 | disabled | `boolean` | `false` | 是否禁用 |
 | inline | `boolean` | `false` | 是否展示为行内表单 |
-| label-width | `number \| string` | `undefined` | 标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用 |
+| label-width | `number \| string \| 'auto'` | `undefined` | 标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用，`'auto'` 意味着 label width 会被自动调整 |
 | label-align | `'left' \| 'right'` | `-` | 标签的文本对齐方式 |
 | label-placement | `'left' \| 'top'` | `'top'` | 标签显示的位置 |
 | model | `Object` | `{}` | 获取表项中收集到的值的对象 |
@@ -65,7 +65,7 @@ partially-apply-rules
 | label-align | `'left' \| 'right'` | `undefined` | 标签的文本对齐方式。如果没有被设定，使用外层表单的 `label-align` |
 | label-placement | `'left' \| 'top'` | `undefined` | 如果没有被设定，使用外层表单的 `label-placement` |
 | label-style | `Object` | `{}` | 标签的样式 |
-| label-width | `number \| string` | `undefined` | 如果没有被设定，使用外层表单的 `label-width` |
+| label-width | `number \| string \| 'auto'` | `undefined` | 如果没有被设定，使用外层表单的 `label-width`，`'auto'` 意味着 label width 会被自动调整 |
 | path | `string` | `undefined` | 将值收集到外层表单 `model` 对象的路径 |
 | rule | `FormItemRule \| Array<FormItemRule>` | `undefined` | 验证表项的规则，它会被通过 `rule-path` 从外层表单获取的规则合并来作为表项的验证规则。推荐还是在外层表单设置所有规则 |
 | rule-path | `string` | `undefined` | 从外层表单的 `rules` 对象获取规则的路径。如果没有设定，使用表项的 `path` 代替 |

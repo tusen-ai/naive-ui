@@ -2,18 +2,52 @@
 
 ## Pending
 
+### Breaking Changes
+
+- Fix `type PageHeaderProps` name. It was mispelled as `PageHeaderPorps` before.
+
+### Fixes
+
+- Fix `n-upload` `on-finish` prop's `event` parameter type should be `ProgressEvent`.
+- Fix `n-upload` doesn't allow 2xx status code except 200.
+- Fix `n-form` when `validate` use `validateCallback`, cannot call Promise method.
+- Fix `n-input-number` input integer end with 0 cannot update, closes [#2115](https://github.com/TuSimple/naive-ui/issues/2115).
+- Fix `n-back-top` allow document to be passed to `listen-to` prop.
+- Fix `n-data-table`'s content can be clicked when loading, closes [#2134](https://github.com/TuSimple/naive-ui/issues/2134).
+
+### Feats
+
+- `n-code` add `word-wrap` prop, closes [#2111](https://github.com/TuSimple/naive-ui/issues/2111).
+- `n-form-item` add `prefix` slot.
+- `n-modal` adds `z-index` prop, closes [#2088](https://github.com/TuSimple/naive-ui/issues/2088).
+- `n-drawer` adds `z-index` closes.
+- `n-drawer` adds wai-aria support.
+- `n-message-provider` adds `render-message` prop.
+- `n-data-table` `TableColumn` supports `string` typed `width`, closes [#2102](https://github.com/TuSimple/naive-ui/issues/2102).
+- `n-calendar` adds `on-panel-change` prop, closes [#2082](https://github.com/TuSimple/naive-ui/issues/2082).
+- `n-upload` adds `on-error` prop.
+- `n-pagination` adds `label` slot.
+- `n-tabs` adds `syncBarPosition` method, closes [#2120](https://github.com/TuSimple/naive-ui/issues/2120).
+- `n-form`, `n-form-item`'s `label-width` prop support `auto` option, closes [#2087](https://github.com/TuSimple/naive-ui/issues/2087).
+- `n-result` adds `icon` slot, closes [#2130](https://github.com/TuSimple/naive-ui/issues/2130).
+- `n-date-picker` add `value-format` prop.
+
+## 2.23.2 (2021-12-29)
+
 ### Feats
 
 - `n-empty` add `show-icon` prop.
-- `n-form-item` add `prefix` slot.
 - `n-modal` add a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
+- `<meta name="naive-ui-style" />` can be used to controll the component style's position.
+- `n-empty` adds `show-icon` prop.
+- `n-modal` adds a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
 - Add `n-avatar-group` component.
 - `n-input-number` supports `loading` state.
 - Add `n-countdown` component.
 - Add `n-number-animation` component, closes [#1465](https://github.com/TuSimple/naive-ui/issues/1465).
-- `n-statistic` add `tabular-nums` prop.
+- `n-statistic` adds `tabular-nums` prop.
 - `n-pagination` will give `itemCount` a approximate value derived from `pageSize` and `pageCount` if it's not set, closes [#2044](https://github.com/TuSimple/naive-ui/issues/2044).
-- `n-cascader` add `on-update:show` prop, closes [#2049](https://github.com/TuSimple/naive-ui/issues/2049).
+- `n-cascader` adds `on-update:show` prop, closes [#2049](https://github.com/TuSimple/naive-ui/issues/2049).
 - `n-scrollbar` uses `n` as CSS vars prefix.
 - `n-popconfirm` uses `n` as CSS vars prefix.
 - `n-gradient-text` uses `n` as CSS vars prefix.
@@ -72,6 +106,7 @@
 - Fix `n-drawer-content`'s content doesn't scroll by default, ref [#2003](https://github.com/TuSimple/naive-ui/issues/2003).
 - Fix `n-popover` log warnings to console when manually set same zindex on multile instances and closes them, closes [#2050](https://github.com/TuSimple/naive-ui/issues/2050).
 - Fix `n-transfer` has no scrollbar in virtual scroll mode.
+- Fix `n-input-number` cannot input decimals end with 0.
 
 ## 2.23.1 (2021-12-20)
 

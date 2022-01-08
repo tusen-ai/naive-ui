@@ -16,20 +16,21 @@ slot
 
 ### Drawer Props
 
-| Name | Parameters | Default | Description |
-| --- | --- | --- | --- |
-| content-style | `string \| Object` | `undefined` | Style of drawer's scrollable content node. |
-| display-directive | `'if' \| 'show'` | `'if'` | The display directive to use when `n-drawer` is rendered. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. |
-| height | `number \| string` | `251` | Works when placement is `top` and `bottom`. |
-| native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on drawer. |
-| mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |
-| placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Drawer placement. |
-| show | `boolean` | `false` | Whether to show drawer. |
-| style | `string \| Object` | `undefined` | Style of the drawer. |
-| to | `string \| HTMLElement` | `'body'` | Container node of the drawer. |
-| width | `number \| string` | `251` | Works when placement is `left` and `right`. |
-| on-mask-click | `(e: MouseEvent) => void` | `undefined` | Callback triggered on mask clicked. |
-| on-update:show | `(show: boolean) => void` | `undefined` | Callback triggered on drawer display status would change. |
+| Name | Parameters | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| content-style | `string \| Object` | `undefined` | Style of drawer's scrollable content node. |  |
+| display-directive | `'if' \| 'show'` | `'if'` | The display directive to use when `n-drawer` is rendered. `'if'` corresponds to `v-if` and `'show'` corresponds to `v-show`. |  |
+| height | `number \| string` | `251` | Works when placement is `top` and `bottom`. |  |
+| native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on drawer. |  |
+| mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |  |
+| placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Drawer placement. |  |
+| show | `boolean` | `false` | Whether to show drawer. |  |
+| style | `string \| Object` | `undefined` | Style of the drawer. |  |
+| to | `string \| HTMLElement` | `'body'` | Container node of the drawer. |  |
+| width | `number \| string` | `251` | Works when placement is `left` and `right`. |  |
+| z-index | `number` | `undefined` | Z index of the drawer. | NEXT_VERSION |
+| on-mask-click | `(e: MouseEvent) => void` | `undefined` | Callback triggered on mask clicked. |  |
+| on-update:show | `(show: boolean) => void` | `undefined` | Callback triggered on drawer display status would change. |  |
 
 ### DrawerContent Props
 

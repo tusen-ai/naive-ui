@@ -2,8 +2,40 @@
 
 ## Pending
 
+### Breaking Changes
+
+- 修复 `type PageHeaderProps` 命名，原先错拼为 `PageHeaderPorps`
+
+### Fixes
+
+- 修复 `n-upload` `on-finish` 回调中 `event` 的类型应为 `ProgressEvent`
+- 修复 `n-upload` 不允许 200 之外的 2xx 响应状态码
+- 修复 `n-form` 当 `validate` 使用了 `validateCallback` 时调用 Promise 方法无效
+- 修复 `n-input-number` 输入以 0 结尾的整数不更新，关闭 [#2115](https://github.com/TuSimple/naive-ui/issues/2115)
+- 修复 `n-back-top` 允许 `listen-to` 为 `document`
+- 修复 `n-data-table` 在 loading 时可以点击内容，关闭 [#2134](https://github.com/TuSimple/naive-ui/issues/2134)
+
 ### Feats
 
+- `n-code` 新增 `word-wrap` 属性，关闭 [#2111](https://github.com/TuSimple/naive-ui/issues/2111)
+- `n-modal` 新增 `z-index` 属性，关闭 [#2088](https://github.com/TuSimple/naive-ui/issues/2088)
+- `n-drawer` 新增 `z-index` 属性
+- `n-drawer` 新增 wai-aria 支持
+- `n-message-provider` 新增 `render-message` 属性
+- `n-data-table` `TableColumn` 支持 `string` 类型的 `width`，关闭 [#2102](https://github.com/TuSimple/naive-ui/issues/2102)
+- `n-calendar` 新增 `on-panel-change` 属性，关闭 [#2082](https://github.com/TuSimple/naive-ui/issues/2082)
+- `n-upload` 新增 `on-error` 属性
+- `n-pagination` 新增 `label` slot
+- `n-tabs` 新增 `syncBarPosition` 方法，关闭 [#2120](https://github.com/TuSimple/naive-ui/issues/2120)
+- `n-form`，`n-form-item` 的 `label-width` 选项支持 `auto` 属性，关闭 [#2087](https://github.com/TuSimple/naive-ui/issues/2087)
+- `n-result` 新增 `icon` 插槽，关闭 [#2130](https://github.com/TuSimple/naive-ui/issues/2130)
+- `n-date-picker` 新增 `value-format` 属性
+
+## 2.23.2 (2021-12-29)
+
+### Feats
+
+- 可以通过 `<meta name="naive-ui-style" />` 控制组件样式的位置
 - `n-empty` 新增 `show-icon` 属性
 - `n-form-item` 新增 `prefix` 插槽
 - `n-modal` 增加可访问性支持，关闭 [#1877](https://github.com/TuSimple/naive-ui/issues/1877)
@@ -72,6 +104,7 @@
 - 修复 `n-drawer-content` 的内容区域默认无法滚动，关于 [#2003](https://github.com/TuSimple/naive-ui/issues/2003)
 - 修复 `n-popover` 手动指定多个 popover 有 相同 zindex 并关闭时控制台打印错误，关闭 [#2050](https://github.com/TuSimple/naive-ui/issues/2050)
 - 修复 `n-transfer` 在虚拟滚动模式下没有滚动条
+- 修复 `n-input-number` 不能输入以 0 结尾的小数
 
 ## 2.23.1 (2021-12-20)
 

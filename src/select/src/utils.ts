@@ -53,7 +53,7 @@ export function filterOptions (
   if (!filter) return originalOpts
   function traverse (options: SelectMixedOption[]): SelectMixedOption[] {
     if (!Array.isArray(options)) return []
-    const filteredOptions = []
+    const filteredOptions: SelectMixedOption[] = []
     for (const option of options) {
       if (getIsGroup(option)) {
         const children = traverse((option as SelectGroupOption).children)

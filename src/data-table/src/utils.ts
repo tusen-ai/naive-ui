@@ -1,5 +1,5 @@
 import { CSSProperties } from 'vue'
-import { pxfy } from 'seemly'
+import { depx, pxfy } from 'seemly'
 import type {
   SortOrder,
   TableBaseColumn,
@@ -19,6 +19,9 @@ export function getColWidth (col: TableColumn): number | undefined {
   if (col.type === 'selection') return selectionColWidth
   if (col.type === 'expand') return expandColWidth
   if ('children' in col) return undefined
+  if (typeof col.width === 'string') {
+    return depx(col.width)
+  }
   return col.width
 }
 

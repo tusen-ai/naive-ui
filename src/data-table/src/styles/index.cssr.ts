@@ -87,14 +87,14 @@ export default c([
     ]),
     c('>', [
       cB('base-loading', `
-      color: var(--n-loading-color);
-      font-size: var(--n-loading-size);
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translateX(-50%) translateY(-50%);
-      transition: color .3s var(--n-bezier);
-    `, [
+        color: var(--n-loading-color);
+        font-size: var(--n-loading-size);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        transition: color .3s var(--n-bezier);
+      `, [
         fadeInScaleUpTransition({
           originalTransform: 'translateX(-50%) translateY(-50%)'
         })
@@ -305,7 +305,10 @@ export default c([
       line-height: var(--n-line-height);
     `),
     cM('loading', [
-      cB('data-table-wrapper', 'opacity: var(--n-opacity-loading);')
+      cB('data-table-wrapper', `
+        opacity: var(--n-opacity-loading);
+        pointer-events: none;
+      `)
     ]),
     cM('single-column', [
       cB('data-table-td', {

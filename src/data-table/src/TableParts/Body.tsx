@@ -16,6 +16,8 @@ import {
 import { pxfy, repeat } from 'seemly'
 import { VirtualList, VirtualListInst, VResizeObserver } from 'vueuc'
 import { CNode } from 'css-render'
+import { useMemo } from 'vooks'
+import { cssrAnchorMetaName } from '../../../_mixins/common'
 import { c } from '../../../_utils/cssr'
 import { NScrollbar, ScrollbarInst } from '../../../_internal'
 import { formatLength } from '../../../_utils'
@@ -34,7 +36,6 @@ import ExpandTrigger from './ExpandTrigger'
 import RenderSafeCheckbox from './BodyCheckbox'
 import TableHeader from './Header'
 import type { ColItem } from '../use-group-header'
-import { useMemo } from 'vooks'
 
 interface NormalRowRenderInfo {
   striped: boolean
@@ -356,7 +357,8 @@ export default defineComponent({
       style.mount({
         id: `n-${componentId}`,
         force: true,
-        props: cProps
+        props: cProps,
+        anchorMetaName: cssrAnchorMetaName
       })
       fixedStyleMounted = true
     })

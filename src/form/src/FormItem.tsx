@@ -11,7 +11,8 @@ import {
   inject,
   watch,
   Transition,
-  renderSlot
+  renderSlot,
+  onMounted
 } from 'vue'
 import Schema, {
   ValidateError,
@@ -163,7 +164,9 @@ export default defineComponent({
       if (feedback !== undefined && feedback !== null) return true
       return explainsRef.value.length
     })
-    const mergedDisabledRef = NForm ? toRef(NForm, 'disabled') : ref(false)
+    const mergedDisabledRef = NForm
+      ? toRef(NForm.props, 'disabled')
+      : ref(false)
     const themeRef = useTheme(
       'Form',
       'FormItem',
@@ -235,7 +238,6 @@ export default defineComponent({
             if (validateCallback) {
               validateCallback(errors)
             }
-            // eslint-disable-next-line prefer-promise-reject-errors
             reject(errors)
           }
         })
@@ -259,7 +261,7 @@ export default defineComponent({
       }
       const { value: rules } = mergedRulesRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const value = NForm ? get(NForm.model, path!, null) : undefined
+      const value = NForm ? get(NForm.props.model, path!, null) : undefined
       const activeRules = (
         !trigger
           ? rules
@@ -335,7 +337,16 @@ export default defineComponent({
       restoreValidation,
       internalValidate
     }
+    const labelElementRef = ref<null | HTMLLabelElement>(null)
+    onMounted(() => {
+      if (labelElementRef.value !== null) {
+        NForm?.deriveMaxChildLabelWidth(
+          Number(getComputedStyle(labelElementRef.value).width.slice(0, -2))
+        )
+      }
+    })
     return {
+      labelElementRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedRequired: mergedRequiredRef,
       hasFeedback: hasFeedbackRef,
@@ -419,6 +430,7 @@ export default defineComponent({
           <label
             class={`${mergedClsPrefix}-form-item-label`}
             style={this.mergedLabelStyle as any}
+            ref="labelElementRef"
           >
             {/* 'left' | 'right' | undefined */}
             {mergedRequireMarkPlacement !== 'left'

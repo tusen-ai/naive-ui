@@ -27,7 +27,7 @@ partially-apply-rules
 | --- | --- | --- | --- |
 | disabled | `boolean` | `false` | Whether to disable the form. |
 | inline | `boolean` | `false` | Whether to display as an inline form. |
-| label-width | `number \| string` | `undefined` | The width of label. Particularly useful when `label-placement` is set to `'left'`. |
+| label-width | `number \| string \| 'auto'` | `undefined` | The width of label. Particularly useful when `label-placement` is set to `'left'`,`'auto'` means label width will be auto adjusted. |
 | label-align | `'left' \| 'right'` | `-` | Label text alignment. |
 | label-placement | `'left' \| 'top'` | `'top'` | Label placement. |
 | model | `Object` | `{}` | The object to get/set form item values. |
@@ -63,7 +63,7 @@ partially-apply-rules
 | label-align | `'left' \| 'right'` | `undefined` | Text alignment inside the label. If not set, it will inherit the parent form's `label-align`. |
 | label-placement | `'left' \| 'top'` | `undefined` | If not set, it will inherit the parent form's `label-placement`. |
 | label-style | `Object` | `{}` | Label style. |
-| label-width | `number \| string` | `undefined` | If not set, it will inherit the parent form's `label-width`. |
+| label-width | `number \| string \| 'auto'` | `undefined` | If not set, it will inherit the parent form's `label-width`,`'auto'` means label width will be auto adjusted. |
 | path | `string` | `undefined` | The path to use in the parent form's model object. |
 | required | `boolean` | `false` | Whether to show the "required" symbol. Note: a required rule has higher priority than this prop & this prop **won't** have any effect on validation. Validation still depends on rules. |
 | rule | `FormItemRule \| Array<FormItemRule>` | `undefined` | The rule to validate this form item. It will be merged with the rules acquired by `rule-path` from the parent form's rules. It's recommended to set all rules on the parent form. |

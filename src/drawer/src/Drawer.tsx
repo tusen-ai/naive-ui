@@ -6,14 +6,15 @@ import {
   provide,
   CSSProperties,
   withDirectives,
-  Transition
+  Transition,
+  watchEffect
 } from 'vue'
 import { VLazyTeleport } from 'vueuc'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
 import { useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, formatLength, call } from '../../_utils'
+import { formatLength, call, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { ScrollbarProps } from '../../_internal'
 import { drawerLight, DrawerTheme } from '../styles'
@@ -50,6 +51,7 @@ const drawerProps = {
     type: Boolean,
     default: true
   },
+  zIndex: Number,
   onMaskClick: Function as PropType<(e: MouseEvent) => void>,
   scrollbarProps: Object as PropType<ScrollbarProps>,
   contentStyle: [Object, String] as PropType<string | CSSProperties>,
@@ -60,68 +62,11 @@ const drawerProps = {
   MaybeArray<(value: boolean) => void>
   >,
   /** @deprecated */
-  drawerStyle: {
-    type: [Object, String] as PropType<CSSProperties | string | undefined>,
-    validator: __DEV__
-      ? () => {
-          warn(
-            'drawer',
-            '`drawer-style` is deprecated, please use `style` instead.'
-          )
-          return true
-        }
-      : undefined,
-    default: undefined
-  },
-  /** @deprecated */
-  drawerClass: {
-    type: String as PropType<string | undefined>,
-    validator: __DEV__
-      ? () => {
-          warn(
-            'drawer',
-            '`drawer-class` is deprecated, please use `class` instead.'
-          )
-          return true
-        }
-      : undefined,
-    default: undefined
-  },
-  target: {
-    validator: __DEV__
-      ? () => {
-          warn('drawer', '`target` is deprecated, please use `to` instead.')
-          return true
-        }
-      : undefined,
-    default: undefined
-  },
-  onShow: {
-    type: [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void> | undefined
-    >,
-    validator: () => {
-      warn(
-        'drawer',
-        '`on-show` is deprecated, please use `on-update:show` instead.'
-      )
-      return true
-    },
-    default: undefined
-  },
-  onHide: {
-    type: [Function, Array] as PropType<
-    MaybeArray<(value: false) => void> | undefined
-    >,
-    validator: () => {
-      warn(
-        'drawer',
-        '`on-hide` is deprecated, please use `on-update:show` instead.'
-      )
-      return true
-    },
-    default: undefined
-  }
+  drawerStyle: [String, Object] as PropType<string | CSSProperties>,
+  drawerClass: String,
+  target: null,
+  onShow: Function as PropType<(value: boolean) => void>,
+  onHide: Function as PropType<(value: boolean) => void>
 } as const
 
 export type DrawerProps = ExtractPublicPropTypes<typeof drawerProps>
@@ -131,6 +76,37 @@ export default defineComponent({
   inheritAttrs: false,
   props: drawerProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.drawerStyle !== undefined) {
+          warnOnce(
+            'drawer',
+            '`drawer-style` is deprecated, please use `style` instead.'
+          )
+        }
+        if (props.drawerClass !== undefined) {
+          warnOnce(
+            'drawer',
+            '`drawer-class` is deprecated, please use `class` instead.'
+          )
+        }
+        if (props.target !== undefined) {
+          warnOnce('drawer', '`target` is deprecated, please use `to` instead.')
+        }
+        if (props.onShow !== undefined) {
+          warnOnce(
+            'drawer',
+            '`on-show` is deprecated, please use `on-update:show` instead.'
+          )
+        }
+        if (props.onHide !== undefined) {
+          warnOnce(
+            'drawer',
+            '`on-hide` is deprecated, please use `on-update:show` instead.'
+          )
+        }
+      })
+    }
     const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
     const isMountedRef = useIsMounted()
     const themeRef = useTheme(
@@ -169,6 +145,11 @@ export default defineComponent({
       }
       if (onMaskClick) onMaskClick(e)
     }
+    function handleKeydown (e: KeyboardEvent): void {
+      if (e.code === 'Escape') {
+        doUpdateShow(false)
+      }
+    }
     function doUpdateShow (show: boolean): void {
       const { onHide, onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
       if (onUpdateShow) call(onUpdateShow, show)
@@ -187,6 +168,7 @@ export default defineComponent({
       namespace: namespaceRef,
       mergedBodyStyle: mergedBodyStyleRef,
       handleMaskClick,
+      handleKeydown,
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
@@ -249,12 +231,15 @@ export default defineComponent({
               <div
                 class={[`${mergedClsPrefix}-drawer-container`, this.namespace]}
                 style={this.cssVars as CSSProperties}
+                onKeydown={this.handleKeydown}
+                role="none"
               >
                 <Transition name="fade-in-transition" appear={this.isMounted}>
                   {{
                     default: () =>
                       this.show ? (
                         <div
+                          aria-hidden
                           class={`${mergedClsPrefix}-drawer-mask`}
                           onClick={this.handleMaskClick}
                         />
@@ -275,7 +260,7 @@ export default defineComponent({
                   {this.$slots}
                 </NDrawerBodyWrapper>
               </div>,
-              [[zindexable, { enabled: this.show }]]
+              [[zindexable, { zIndex: this.zIndex, enabled: this.show }]]
             )
           }
         }}
