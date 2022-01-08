@@ -111,6 +111,8 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-result-icon`}>
           {status in imgMap ? (
             imgMap[status as unknown as keyof typeof imgMap]
+          ) : $slots.icon ? (
+            renderSlot($slots, 'icon')
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
               {{ default: () => iconMap[status as keyof typeof iconMap] }}
