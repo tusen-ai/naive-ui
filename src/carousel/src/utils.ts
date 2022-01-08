@@ -1,5 +1,3 @@
-export const extend = Object.assign
-
 export interface Size {
   width: number
   height: number
@@ -13,9 +11,9 @@ export function calculateSize (
   element: HTMLElement,
   innerOnly?: boolean
 ): Size {
+  let width = element.clientWidth
+  let height = element.clientHeight
   if (innerOnly) {
-    let width = element.clientWidth
-    let height = element.clientHeight
     const style = getComputedStyle(element)
     width =
       width -
@@ -26,13 +24,8 @@ export function calculateSize (
       parseFloat(style.getPropertyValue('padding-top')) -
       parseFloat(style.getPropertyValue('padding-bottom'))
     return { width, height }
-  } else {
-    const rect = element.getBoundingClientRect()
-    return {
-      width: rect.width,
-      height: rect.height
-    }
   }
+  return { width, height }
 }
 
 export function clampValue (value: number, min: number, max: number): number {

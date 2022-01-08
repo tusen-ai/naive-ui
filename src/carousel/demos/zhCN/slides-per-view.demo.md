@@ -2,7 +2,7 @@
 
 ```html
 <n-alert title="注意" type="warning" style="margin-bottom: 16px;">
-  该属性会与 `loop` 冲突，如果需要自定义每屏显示数量，那么 `loop` 功能将被禁用。
+  该属性会与 `loop` 冲突，如果你需要自定义每屏显示数量，那么 `loop` 功能将被禁用。
 </n-alert>
 <n-carousel
   :slides-per-view="3"
