@@ -12,7 +12,8 @@
 - 修复 `n-upload` 不允许 200 之外的 2xx 响应状态码
 - 修复 `n-form` 当 `validate` 使用了 `validateCallback` 时调用 Promise 方法无效
 - 修复 `n-input-number` 输入以 0 结尾的整数不更新，关闭 [#2115](https://github.com/TuSimple/naive-ui/issues/2115)
-- Fix `n-back-top` allow document to be passed to `listen-to` prop.
+- 修复 `n-back-top` 允许 `listen-to` 为 `document`
+- 修复 `n-data-table` 在 loading 时可以点击内容，关闭 [#2134](https://github.com/TuSimple/naive-ui/issues/2134)
 
 ### Feats
 
