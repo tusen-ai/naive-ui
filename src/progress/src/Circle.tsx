@@ -37,6 +37,10 @@ export default defineComponent({
       type: Number,
       default: 0
     },
+    offsetDegree: {
+      type: Number,
+      default: 0
+    },
     showIndicator: {
       type: Boolean,
       reqiuired: true
@@ -51,6 +55,9 @@ export default defineComponent({
   setup (props, { slots }) {
     const strokeDasharrayRef = computed(() => {
       return `${Math.PI * props.percentage}, ${props.viewBoxWidth * 8}`
+    })
+    const strokeDashoffsetRef = computed(() => {
+      return `-${(Math.PI / 3.6) * props.offsetDegree}`
     })
     return () => {
       const {
@@ -101,7 +108,7 @@ export default defineComponent({
                     fill="none"
                     style={{
                       strokeDasharray: strokeDasharrayRef.value,
-                      strokeDashoffset: 0,
+                      strokeDashoffset: strokeDashoffsetRef.value,
                       stroke: fillColor
                     }}
                   />
