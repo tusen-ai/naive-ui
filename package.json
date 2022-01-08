@@ -112,7 +112,7 @@
     "inquirer": "^8.1.0",
     "jest": "^27.0.4",
     "jest-canvas-mock": "^2.3.1",
-    "lint-staged": "^11.2.6",
+    "lint-staged": "^12.1.5",
     "marked": "^4.0.4",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
