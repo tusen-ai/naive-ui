@@ -44,7 +44,8 @@ import type {
   IsTimeDisabled,
   Shortcuts,
   FirstDayOfWeek,
-  DefaultTime
+  DefaultTime,
+  FormatValue
 } from './interface'
 import { datePickerInjectionKey } from './interface'
 import DatetimePanel from './panel/datetime'
@@ -65,7 +66,7 @@ const datePickerProps = {
   clearable: Boolean,
   updateValueOnClose: Boolean,
   defaultValue: {
-    type: [Number, Array] as PropType<Value | null>,
+    type: [Number, String, Array] as PropType<FormatValue | null>,
     default: null
   },
   defaultTime: [Number, String, Array] as PropType<DefaultTime>,
@@ -77,11 +78,15 @@ const datePickerProps = {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom-start'
   },
-  value: [Number, Array] as PropType<Value | null>,
+  value: [Number, String, Array] as PropType<FormatValue | null>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   type: {
     type: String as PropType<DatePickerType>,
     default: 'date'
+  },
+  valueFormat: {
+    type: String,
+    default: 'timestamp'
   },
   separator: String,
   placeholder: String,
@@ -150,8 +155,18 @@ export default defineComponent({
     const uncontrolledShowRef = ref<boolean>(false)
     const controlledShowRef = toRef(props, 'show')
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
-    const uncontrolledValueRef = ref(props.defaultValue)
-    const controlledValueRef = computed(() => props.value)
+    const dateFnsOptionsRef = computed(() => {
+      return {
+        locale: dateLocaleRef.value.locale
+      }
+    })
+    const uncontrolledValueRef = ref(
+      transformFormat(props.defaultValue) as Value | null
+    )
+    const controlledValueRef = computed(() => {
+      console.log(props.value)
+      return transformFormat(props.value)
+    })
     const mergedValueRef = useMergedState(
       controlledValueRef,
       uncontrolledValueRef
@@ -172,11 +187,6 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const dateFnsOptionsRef = computed(() => {
-      return {
-        locale: dateLocaleRef.value.locale
-      }
-    })
     const timePickerSizeRef = computed<TimePickerSize>(() => {
       return (
         NConfigProvider?.mergedComponentPropsRef.value?.DatePicker
@@ -284,7 +294,58 @@ export default defineComponent({
         }
       }
     })
-
+    function transformFormat (
+      value: FormatValue | null | undefined
+    ): Value | null | undefined {
+      if (value === null) return null
+      if (value === undefined) return undefined
+      if (Array.isArray(value)) {
+        if (props.valueFormat === 'timestamp') {
+          if (
+            Number.isNaN(Number(value[0])) ||
+            Number.isNaN(Number(value[1]))
+          ) {
+            throw new Error(
+              `The value-format is timestamp, value got [${value[0]}, ${value[1]}], except [timestamp, timestamp]`
+            )
+          } else {
+            return Number(value)
+          }
+        } else {
+          return [
+            strictParse(
+              String(value[0]),
+              props.valueFormat,
+              new Date(),
+              dateFnsOptionsRef.value
+            ).getTime(),
+            strictParse(
+              String(value[1]),
+              props.valueFormat,
+              new Date(),
+              dateFnsOptionsRef.value
+            ).getTime()
+          ]
+        }
+      } else {
+        if (props.valueFormat === 'timestamp') {
+          if (Number.isNaN(Number(value))) {
+            throw new Error(
+              `The value-format is timestamp, value got ${value}, except timestamp`
+            )
+          } else {
+            return Number(value)
+          }
+        } else {
+          return strictParse(
+            String(value),
+            props.valueFormat,
+            new Date(),
+            dateFnsOptionsRef.value
+          ).getTime()
+        }
+      }
+    }
     function doUpdatePendingValue (value: Value | null): void {
       pendingValueRef.value = value
     }
@@ -292,12 +353,34 @@ export default defineComponent({
       const {
         'onUpdate:value': _onUpdateValue,
         onUpdateValue,
-        onChange
+        onChange,
+        valueFormat
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
-      if (onChange) call(onChange as OnUpdateValueImpl, value)
+      let formattedValue: FormatValue | null
+      if (value === null) {
+        formattedValue = null
+      } else {
+        if (valueFormat === 'timestamp') {
+          formattedValue = String(value)
+        } else {
+          if (Array.isArray(value)) {
+            formattedValue = [
+              format(value[0], valueFormat, dateFnsOptionsRef.value),
+              format(value[1], valueFormat, dateFnsOptionsRef.value)
+            ]
+          } else {
+            formattedValue = format(value, valueFormat, dateFnsOptionsRef.value)
+          }
+        }
+      }
+      if (onUpdateValue) {
+        call(onUpdateValue as OnUpdateValueImpl, formattedValue)
+      }
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, formattedValue)
+      }
+      if (onChange) call(onChange as OnUpdateValueImpl, formattedValue)
       uncontrolledValueRef.value = value
       nTriggerFormChange()
       nTriggerFormInput()

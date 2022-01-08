@@ -298,6 +298,7 @@ function strictParse (
     locale: Locale
   }
 ): Date {
+  if (!Number.isNaN(Number(string))) return new Date(string)
   const result = parse(string, pattern, backup, option)
   if (!isValid(result)) return result
   else if (format(result, pattern, option) === string) return result
