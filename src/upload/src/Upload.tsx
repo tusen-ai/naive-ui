@@ -15,16 +15,11 @@ import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
 import { useConfig, useTheme, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import {
-  ExtractPublicPropTypes,
-  warn,
-  MaybeArray,
-  call,
-  throwError
-} from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { warn, call, throwError } from '../../_utils'
+import type { ImageGroupProps } from '../../image'
 import { uploadLight, UploadTheme } from '../styles'
 import { uploadDraggerKey } from './UploadDragger'
-import style from './styles/index.cssr'
 import type {
   XhrHandlers,
   FileInfo,
@@ -48,6 +43,8 @@ import { uploadInjectionKey } from './interface'
 import { createImageDataUrl } from './utils'
 import NUploadTrigger from './UploadTrigger'
 import NUploadFileList from './UploadFileList'
+import style from './styles/index.cssr'
+
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
  */
@@ -321,7 +318,8 @@ const uploadProps = {
   showTrigger: {
     type: Boolean,
     default: true
-  }
+  },
+  imageGroupProps: Object as PropType<ImageGroupProps>
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -599,7 +597,8 @@ export default defineComponent({
       fileListStyleRef: toRef(props, 'fileListStyle'),
       abstractRef: toRef(props, 'abstract'),
       cssVarsRef,
-      showTriggerRef: toRef(props, 'showTrigger')
+      showTriggerRef: toRef(props, 'showTrigger'),
+      imageGroupPropsRef: toRef(props, 'imageGroupProps')
     })
 
     const exposedMethods: UploadInst = {

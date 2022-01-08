@@ -5,6 +5,7 @@
 ### Breaking Changes
 
 - Fix `type PageHeaderProps` name. It was mispelled as `PageHeaderPorps` before.
+- `n-image`'s `iconColor` theme variable is renamed as `toolbarIconColor`.
 
 ### Fixes
 
@@ -34,6 +35,9 @@
 - `n-date-picker` adds `default-formatted-value` prop.
 - `n-date-picker` adds `on-update:formatted-value` prop.
 - `n-date-picker`'s `on-update:value` prop will pass formatted value out.
+- `n-image` adds `show-toolbar-tooltip` prop.
+- `n-image` adds more theme variables, closes [#1531](https://github.com/TuSimple/naive-ui/issues/1531).
+- `n-upload` adds `image-group-props` prop.
 
 ## 2.23.2 (2021-12-29)
 
