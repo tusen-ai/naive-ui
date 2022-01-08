@@ -12,7 +12,8 @@ import {
   Ref,
   toRef,
   cloneVNode,
-  watchEffect
+  watchEffect,
+  withDirectives
 } from 'vue'
 import { VBinder, VTarget, FollowerPlacement, BinderInst } from 'vueuc'
 import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
@@ -33,6 +34,7 @@ import type { ThemeProps } from '../../_mixins'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
 import type { PopoverTheme } from '../styles'
 import type { PopoverTrigger, InternalRenderBody } from './interface'
+import { zindexable } from 'vdirs'
 
 const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
 keyof typeof popoverBodyProps
@@ -89,6 +91,7 @@ export interface PopoverInjection {
   handleMouseEnter: (e: MouseEvent) => void
   handleMouseMoveOutside: (e: MouseEvent) => void
   handleClickOutside: (e: MouseEvent) => void
+  handleKeydown: (e: KeyboardEvent) => void
   getTriggerElement: () => HTMLElement
   setBodyInstance: (value: BodyInstance | null) => void
   zIndexRef: Ref<number | undefined>
@@ -138,7 +141,6 @@ export const popoverBaseProps = {
     type: Boolean,
     default: true
   },
-  shift: Boolean,
   animated: {
     type: Boolean,
     default: true
@@ -167,6 +169,7 @@ export const popoverBaseProps = {
     type: Array as PropType<TriggerEventHandlers[]>,
     default: () => []
   },
+  internalTrapFocus: Boolean,
   /** @deprecated */
   onShow: [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void> | undefined
@@ -384,6 +387,14 @@ export default defineComponent({
         doUpdateShow(nextShow)
       }
     }
+    function handleKeydown (e: KeyboardEvent): void {
+      if (!props.internalTrapFocus) return
+      if (e.code === 'Escape') {
+        clearShowTimer()
+        clearHideTimer()
+        doUpdateShow(false)
+      }
+    }
     function setShow (value: boolean): void {
       uncontrolledShowRef.value = value
     }
@@ -395,6 +406,7 @@ export default defineComponent({
     }
     provide<PopoverInjection>('NPopover', {
       getTriggerElement,
+      handleKeydown,
       handleMouseEnter,
       handleMouseLeave,
       handleClickOutside,
@@ -523,6 +535,20 @@ export default defineComponent({
             void this.mergedShowConsideringDisabledProp
             const mergedShow = this.getMergedShow()
             return [
+              this.internalTrapFocus && mergedShow
+                ? withDirectives(
+                    <div style={{ position: 'fixed', inset: 0 }} />,
+                    [
+                      [
+                        zindexable,
+                        {
+                          enabled: mergedShow,
+                          zIndex: this.zIndex
+                        }
+                      ]
+                    ]
+                )
+                : null,
               positionManually
                 ? null
                 : h(VTarget, null, {
