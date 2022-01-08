@@ -1,7 +1,8 @@
-import { h, defineComponent, PropType, inject } from 'vue'
+import { h, defineComponent, inject } from 'vue'
 import { indexMap } from 'seemly'
 import { useConfig } from '../../_mixins'
 import { carouselMethodsInjectionKey } from './interface'
+import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 const carouselDotsProps = {
@@ -9,19 +10,19 @@ const carouselDotsProps = {
     type: Number,
     default: 0
   },
-  current: {
+  currentIndex: {
     type: Number,
     default: 0
+  },
+  dotType: {
+    type: String as PropType<'dot' | 'line' | 'never'>,
+    default: 'dot'
   },
   trigger: {
     type: String as PropType<'click' | 'hover'>,
     default: 'click'
   },
-  keyboard: Boolean,
-  dotStyle: {
-    type: String as PropType<'dot' | 'line' | 'never'>,
-    default: 'dot'
-  }
+  keyboard: Boolean
 }
 
 export type CarouselDotsProps = ExtractPublicPropTypes<typeof carouselDotsProps>
@@ -99,17 +100,17 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, total, current, dotStyle } = this
+    const { mergedClsPrefix } = this
     return (
       <div
         class={[
           `${mergedClsPrefix}-carousel__dots`,
-          `${mergedClsPrefix}-carousel__dots--${dotStyle}`
+          `${mergedClsPrefix}-carousel__dots--${this.dotType}`
         ]}
         role='tablist'
       >
-        {indexMap(total, (i) => {
-          const selected = i === current
+        {indexMap(this.total, (i) => {
+          const selected = i === this.currentIndex
           return (
             <div
               aria-selected={selected}
@@ -119,6 +120,7 @@ export default defineComponent({
                 `${mergedClsPrefix}-carousel__dot`,
                 selected && `${mergedClsPrefix}-carousel__dot--active`
               ]}
+              key={i}
               onClick={() => this.handleClick(i)}
               onMouseenter={() => this.handleMouseenter(i)}
               onKeydown={(e) => this.handleKeydown(e, i)}

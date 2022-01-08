@@ -28,6 +28,7 @@ export default cB('carousel', `
       position: relative;
       width: 100%;
       height: 100%;
+      outline: none;
       overflow: hidden;
     `, [
       c('> img', `
@@ -179,6 +180,11 @@ export default cB('carousel', `
           width: 3px;
           height: var(--n-dot-line-size);
           margin: 3px 0;
+          transition:
+            height .3s var(--n-bezier),
+            box-shadow .3s var(--n-bezier),
+            background-color .3s var(--n-bezier);
+          outline: none;
         `, [
           cM('active', `
             height: var(--n-dot-line-size-active);
@@ -202,6 +208,11 @@ export default cB('carousel', `
           width: 3px;
           height: var(--n-dot-line-size);
           margin: 3px 0;
+          transition:
+            height .3s var(--n-bezier),
+            box-shadow .3s var(--n-bezier),
+            background-color .3s var(--n-bezier);
+          outline: none;
         `, [
           cM('active', `
             height: var(--n-dot-line-size-active);

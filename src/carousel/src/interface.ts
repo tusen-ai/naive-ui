@@ -22,14 +22,8 @@ export const carouselMethodsInjectionKey: InjectionKey<CarouselMethodsInjection>
 )
 
 export interface CarouselInst {
+  getCurrentIndex: () => number
   slideTo: (index: number) => void
   slidePrev: () => void
   slideNext: () => void
-  isPrev: (index: number) => boolean
-  isNext: (index: number) => boolean
-  isActive: (index: number) => boolean
-  isPrevDisabled: () => boolean
-  isNextDisabled: () => boolean
-  getPrevIndex: (index?: number) => number | null
-  getNextIndex: (index?: number) => number | null
 }

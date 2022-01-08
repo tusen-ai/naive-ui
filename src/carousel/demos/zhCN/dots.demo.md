@@ -1,14 +1,14 @@
 # 指示点
 
-设定 `dot-style` 来更改指示器的样式，可以使用 `never` 来隐藏指示点。
+设定 `dot-type` 来更改指示器的样式，可以使用 `never` 来隐藏指示点。
 
 设定 `dot-placement` 来更改指示点的位置。
 
 ```html
 <div>
-  <n-radio-group v-model:value="style" style="margin-bottom: 10px;">
-    <n-radio-button v-for="style in styles" :key="style" :value="style">
-      {{ style }}
+  <n-radio-group v-model:value="type" style="margin-bottom: 10px;">
+    <n-radio-button v-for="type in types" :key="type" :value="type">
+      {{ type }}
     </n-radio-button>
   </n-radio-group>
 </div>
@@ -23,13 +23,7 @@
     </n-radio-button>
   </n-radio-group>
 </div>
-<n-carousel
-  :dot-style="style"
-  :dot-placement="placement"
-  :loop="false"
-  draggable
-  style="height: 240px;"
->
+<n-carousel :dot-type="type" :dot-placement="placement" style="height: 240px;">
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
@@ -54,11 +48,11 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const styleRef = ref('dot')
+    const typeRef = ref('dot')
     const placementRef = ref('bottom')
     return {
-      style: styleRef,
-      styles: ['dot', 'line', 'never'],
+      type: typeRef,
+      types: ['dot', 'line', 'never'],
       placement: placementRef,
       placements: ['top', 'bottom', 'left', 'right']
     }

@@ -19,8 +19,8 @@ import {
   watchEffect,
   onUpdated
 } from 'vue'
-import { on, off } from 'evtd'
 import { VResizeObserver } from 'vueuc'
+import { on, off } from 'evtd'
 import { useConfig, useTheme } from '../../_mixins'
 import { flatten, keep } from '../../_utils'
 import {
@@ -29,7 +29,8 @@ import {
   getPrevIndex,
   getDisplayIndex,
   getRealityIndex,
-  isTouchEvent
+  isTouchEvent,
+  clampValue
 } from './utils'
 import NCarouselDots from './CarouselDots'
 import NCarouselArrow from './CarouselArrow'
@@ -47,12 +48,12 @@ const carouselProps = {
     type: Number,
     default: 0
   },
-  activeIndex: {
+  currentIndex: {
     type: Number,
     default: 0
   },
   showArrow: Boolean,
-  dotStyle: {
+  dotType: {
     type: String as PropType<'dot' | 'line' | 'never'>,
     default: 'dot'
   },
@@ -86,13 +87,13 @@ const carouselProps = {
     type: String as PropType<'slide' | 'fade' | 'card'>,
     default: 'slide'
   },
-  speed: {
-    type: Number,
-    default: 300
-  },
   trigger: {
     type: String as PropType<'click' | 'hover'>,
     default: 'click'
+  },
+  transitionDuration: {
+    type: Number,
+    default: 300
   },
   transitionTimingFunction: String,
   transitionName: String,
@@ -103,17 +104,18 @@ const carouselProps = {
   },
   mousewheel: Boolean,
   keyboard: Boolean,
-  onChange: Function as PropType<(current: number, from: number) => void>
+  'onUpdate:currentIndex': Function as PropType<
+  (currentIndex: number, lastIndex: number) => void
+  >,
+  onUpdateCurrentIndex: Function as PropType<
+  (currentIndex: number, lastIndex: number) => void
+  >
 }
 
 export type CarouselProps = ExtractPublicPropTypes<typeof carouselProps>
 
 // only one carousel is allowed to trigger touch globally
 let globalDragging = false
-
-function clampValue (value: number, min: number, max: number): number {
-  return value < min ? min : value > max ? max : value
-}
 
 export default defineComponent({
   name: 'Carousel',
@@ -125,9 +127,18 @@ export default defineComponent({
     const slidesElsRef = ref<HTMLElement[]>([])
     const slideVNodesRef = { value: [] as VNode[] }
 
-    const userWantControlRef = computed(() => !!props.transitionName)
+    // user wants to control the transition animation
+    const userWantsControlRef = computed(
+      () => props.transitionName !== undefined
+    )
     const translateableRef = computed(
-      () => !userWantControlRef.value && props.effect === 'slide'
+      () => !userWantsControlRef.value && props.effect === 'slide'
+    )
+    const allowLoopRef = computed(
+      () =>
+        props.loop &&
+        // TODO
+        props.slidesPerView === 1
     )
     // Because of the nature of the loop slide work,
     // we need to add duplicates to the left and right of the carousel
@@ -137,20 +148,16 @@ export default defineComponent({
     const duplicatedableRef = computed(
       // only duplicate the copy operation in `slide` mode,
       // because other effects have special process
-      () =>
-        translateableRef.value &&
-        props.loop &&
-        // TODO
-        props.slidesPerView === 1
+      () => translateableRef.value && allowLoopRef.value
     )
     const displaySlidesPerViewRef = computed(() =>
-      userWantControlRef.value ||
+      userWantsControlRef.value ||
       props.centeredSlides ||
       props.effect === 'fade'
         ? 1
         : props.slidesPerView
     )
-    // We automatically calculate total view for special slides per view
+    // we automatically calculate total view for special slides per view
     const autoSlideSizeRef = computed(
       () =>
         displaySlidesPerViewRef.value === 'auto' ||
@@ -159,8 +166,8 @@ export default defineComponent({
 
     const verticalRef = computed(() => props.direction === 'vertical')
     const sizeAxisRef = computed(() => (verticalRef.value ? 'height' : 'width'))
-
     const perViewSizeRef = ref({ width: 0, height: 0 })
+
     const slideSizesRef = computed(() => {
       const { value: slidesEls } = slidesElsRef
       const { length } = slidesEls
@@ -205,20 +212,18 @@ export default defineComponent({
       const { length } = slideSizes
       if (!length) return []
       const { value: axis } = sizeAxisRef
-      // When users need to customize the transition, we center each slide
-      if (userWantControlRef.value) {
+      // when user wants to control the transition animation, we center each slide
+      if (userWantsControlRef.value) {
         return slideSizes.map((size) => ({
           [axis]: `${size[axis]}px`
         }))
       }
-      const { effect, spaceBetween, speed, transitionTimingFunction } = props
+      const { effect, spaceBetween } = props
       const { value: slideTranlates } = slideTranlatesRef
       const { value: realityIndex } = realityIndexRef
       const { value: vertical } = verticalRef
       const directionAxis = vertical ? 'top' : 'left'
       const spaceAxis = vertical ? 'bottom' : 'right'
-      const prevIndex = getPrevRealityIndex(realityIndex)
-      const nextIndex = getNextRealityIndex(realityIndex)
       const slideStyles: Record<string, any> = []
       for (let i = 0; i < length; i++) {
         const size = slideSizes[i][axis]
@@ -227,29 +232,31 @@ export default defineComponent({
           [`margin-${spaceAxis}`]: `${spaceBetween}px`
         }
         if (effect === 'fade') {
+          const { transitionDuration, transitionTimingFunction } = props
           const offset = slideTranlates[i]
           Object.assign(style, {
             opacity: i === realityIndex ? 1 : 0,
             [directionAxis]: `${-offset}px`,
-            transitionDuration: `${speed}ms`,
+            transitionDuration: `${transitionDuration}ms`,
             transitionTimingFunction: transitionTimingFunction
           })
         } else if (effect === 'card') {
+          const { transitionDuration, transitionTimingFunction } = props
           const offset = slideTranlates[i]
-          const active = i === realityIndex
-          let opacity = active ? 1 : 0
+          const isActive = i === realityIndex
+          let opacity = isActive ? 1 : 0
           let translate = 0
-          let translateZ = active ? 0 : -400
+          let translateZ = isActive ? 0 : -400
           if (i < realityIndex) {
             translate = -size * 0.5
           } else if (i > realityIndex) {
             translate = size * 0.5
           }
-          if (i === prevIndex) {
+          if (i === getRealityPrevIndex(realityIndex)) {
             opacity = 0.4
             translate = -size * 0.5
             translateZ = -200
-          } else if (i === nextIndex) {
+          } else if (i === getRealityNextIndex(realityIndex)) {
             opacity = 0.4
             translate = size * 0.5
             translateZ = -200
@@ -262,9 +269,9 @@ export default defineComponent({
                 ? `translateY(${translate}px)`
                 : `translateX(${translate}px)`
             } translateZ(${translateZ}px)`,
-            transitionDuration: `${speed}ms`,
+            transitionDuration: `${transitionDuration}ms`,
             transitionTimingFunction: transitionTimingFunction,
-            zIndex: active ? 1 : 0
+            zIndex: isActive ? 1 : 0
           })
         }
         slideStyles.push(style)
@@ -272,7 +279,7 @@ export default defineComponent({
       return slideStyles
     })
 
-    // total
+    // Total
     const totalViewRef = computed(() => {
       const { value: slidesPerView } = displaySlidesPerViewRef
       const { length: originLength } = slidesElsRef.value
@@ -303,7 +310,7 @@ export default defineComponent({
         : totalView
     })
 
-    // index
+    // Index
     const initializeIndex =
       props.defaultIndex + (duplicatedableRef.value ? 1 : 0)
     const displayIndexRef = ref(
@@ -320,7 +327,10 @@ export default defineComponent({
     let previousTranslate = 0
 
     // Reality methods
-    function slideToRealityIndex (index: number, duration = props.speed): void {
+    function slideToRealityIndex (
+      index: number,
+      duration = props.transitionDuration
+    ): void {
       const { value: length } = totalViewRef
       if (
         (index = clampValue(index, 0, length - 1)) !== realityIndexRef.value
@@ -354,27 +364,28 @@ export default defineComponent({
           fixTranslate()
         }
         if (displayIndex !== lastDisplayIndex) {
-          props.onChange?.(displayIndex, lastDisplayIndex)
+          props['onUpdate:currentIndex']?.(displayIndex, lastDisplayIndex)
+          props.onUpdateCurrentIndex?.(displayIndex, lastDisplayIndex)
         }
       }
     }
-    function getPrevRealityIndex (
-      current: number = realityIndexRef.value
+    function getRealityPrevIndex (
+      index: number = realityIndexRef.value
     ): number | null {
-      return getPrevIndex(current, totalViewRef.value, props.loop)
+      return getPrevIndex(index, totalViewRef.value, props.loop)
     }
-    function getNextRealityIndex (
-      current: number = realityIndexRef.value
+    function getRealityNextIndex (
+      index: number = realityIndexRef.value
     ): number | null {
-      return getNextIndex(current, totalViewRef.value, props.loop)
+      return getNextIndex(index, totalViewRef.value, props.loop)
     }
     function isRealityPrev (slideOrIndex: HTMLElement | number): boolean {
       const index = getSlideIndex(slideOrIndex)
-      return index !== null && getPrevRealityIndex() === index
+      return index !== null && getRealityPrevIndex() === index
     }
     function isRealityNext (slideOrIndex: HTMLElement | number): boolean {
       const index = getSlideIndex(slideOrIndex)
-      return index !== null && getNextRealityIndex() === index
+      return index !== null && getRealityNextIndex() === index
     }
     function isRealityActive (slideOrIndex: HTMLElement | number): boolean {
       return realityIndexRef.value === getSlideIndex(slideOrIndex)
@@ -382,32 +393,14 @@ export default defineComponent({
 
     // Display methods
     // They are used to deal with the actual values displayed on the UI
-    function getPrevDisplayIndex (
-      current: number = displayIndexRef.value
-    ): number | null {
-      return getPrevIndex(current, displayTotalViewRef.value, props.loop)
-    }
-    function getNextDisplayIndex (
-      current: number = displayIndexRef.value
-    ): number | null {
-      return getNextIndex(current, displayTotalViewRef.value, props.loop)
-    }
     function isDisplayActive (index: number): boolean {
       return displayIndexRef.value === index
     }
-    function isDisplayPrev (index: number): boolean {
-      const prevRealityIndex = getPrevRealityIndex(index)
-      return prevRealityIndex !== null && prevRealityIndex === index
-    }
-    function isDisplayNext (index: number): boolean {
-      const nextRealityIndex = getNextRealityIndex(index)
-      return nextRealityIndex !== null && nextRealityIndex === index
-    }
     function isPrevDisabled (): boolean {
-      return getPrevRealityIndex() === null
+      return getRealityPrevIndex() === null
     }
     function isNextDisabled (): boolean {
-      return getNextRealityIndex() === null
+      return getRealityNextIndex() === null
     }
 
     // Slide to
@@ -421,13 +414,13 @@ export default defineComponent({
       }
     }
     function slidePrev (): void {
-      const prevIndex = getPrevRealityIndex()
+      const prevIndex = getRealityPrevIndex()
       if (prevIndex !== null) {
         slideToRealityIndex(prevIndex)
       }
     }
     function slideNext (): void {
-      const nextIndex = getNextRealityIndex()
+      const nextIndex = getRealityNextIndex()
       if (nextIndex !== null) {
         slideToRealityIndex(nextIndex)
       }
@@ -457,7 +450,10 @@ export default defineComponent({
         updateTranslate((previousTranslate = 0), duration)
       }
     }
-    function translateTo (index: number, duration = props.speed): void {
+    function translateTo (
+      index: number,
+      duration = props.transitionDuration
+    ): void {
       const translate = getTranslate(index)
       if (translate !== previousTranslate && duration > 0) {
         inTransition = true
@@ -522,7 +518,7 @@ export default defineComponent({
     function onCarouselItemClick (index: number): void {
       if (
         !dragTriggered &&
-        !userWantControlRef.value &&
+        !userWantsControlRef.value &&
         props.effect === 'card' &&
         !isRealityActive(index)
       ) {
@@ -652,19 +648,19 @@ export default defineComponent({
         const perViewSize = perViewSizeRef.value[axis]
         // more than 50% width or faster than 0.4px per ms
         if (dragOffset > perViewSize / 2 || dragOffset / duration > 0.4) {
-          currentIndex = getPrevRealityIndex(realityIndex)
+          currentIndex = getRealityPrevIndex(realityIndex)
         } else if (
           dragOffset < -perViewSize / 2 ||
           dragOffset / duration < -0.4
         ) {
-          currentIndex = getNextRealityIndex(realityIndex)
+          currentIndex = getRealityNextIndex(realityIndex)
         }
       }
       if (currentIndex !== null && currentIndex !== realityIndex) {
         dragTriggered = true
         slideToRealityIndex(currentIndex)
       } else {
-        fixTranslate(props.speed)
+        fixTranslate(props.transitionDuration)
       }
       mesureAutoplay()
       resetDragStatus()
@@ -763,7 +759,7 @@ export default defineComponent({
         slidesEls.sort((a, b) => getDisplayIndex(a) - getDisplayIndex(b))
       }
     })
-    watch(toRef(props, 'activeIndex'), (index) => slideTo(index))
+    watch(toRef(props, 'currentIndex'), (index) => slideTo(index))
     watch(
       duplicatedableRef,
       () => void nextTick(() => slideTo(displayIndexRef.value))
@@ -782,7 +778,7 @@ export default defineComponent({
     watch(translateableRef, (value) => {
       if (!value) {
         inTransition = false
-        // If the current mode does not support translate, reset the position of the wrapper
+        // if the current mode does not support translate, reset the position of the wrapper
         updateTranslate((previousTranslate = 0))
       } else {
         fixTranslate()
@@ -791,7 +787,7 @@ export default defineComponent({
     const caroulseSlotProps = {
       arrowSlotProps: computed(() => ({
         total: displayTotalViewRef.value,
-        current: displayIndexRef.value,
+        currentIndex: displayIndexRef.value,
         ...keep(carouselMethods, [
           'slideTo',
           'slidePrev',
@@ -802,20 +798,15 @@ export default defineComponent({
       })),
       dotSlotProps: computed(() => ({
         total: displayTotalViewRef.value,
-        current: displayIndexRef.value,
+        currentIndex: displayIndexRef.value,
         slideTo
       }))
     }
     const caroulseExposedMethod: CarouselInst = {
+      getCurrentIndex: () => displayIndexRef.value,
       slideTo,
       slidePrev,
-      slideNext,
-      isActive: isDisplayActive,
-      isPrev: isDisplayPrev,
-      isNext: isDisplayNext,
-      getPrevIndex: getPrevDisplayIndex,
-      getNextIndex: getNextDisplayIndex,
-      ...keep(carouselMethods, ['isPrevDisabled', 'isNextDisabled'])
+      slideNext
     }
     const themeRef = useTheme(
       'Carousel',
@@ -829,7 +820,7 @@ export default defineComponent({
       selfElRef,
       slideVNodes: slideVNodesRef,
       duplicatedable: duplicatedableRef,
-      userWantControl: userWantControlRef,
+      userWantControl: userWantsControlRef,
       autoSlideSize: autoSlideSizeRef,
       displayIndex: displayIndexRef,
       realityIndex: realityIndexRef,
@@ -840,6 +831,7 @@ export default defineComponent({
       handleMousewheel,
       handleResize,
       handleSlideResize,
+      isActive: isDisplayActive,
       ...caroulseSlotProps,
       ...caroulseExposedMethod,
       cssVars: computed(() => {
@@ -876,7 +868,7 @@ export default defineComponent({
       draggable,
       touchable,
       slideStyles,
-      dotStyle,
+      dotType,
       dotPlacement,
       arrowSlotProps,
       dotSlotProps,
@@ -941,7 +933,7 @@ export default defineComponent({
               >
                 {userWantControl
                   ? slides.map((slide, i) => (
-                    <div style={slideStyles[i]}>
+                    <div style={slideStyles[i]} key={i}>
                       {withDirectives(
                         <Transition name={this.transitionName}>
                           {{
@@ -957,24 +949,20 @@ export default defineComponent({
             )
           }}
         </VResizeObserver>
-        {dotStyle !== 'never' &&
+        {dotType !== 'never' &&
           (dotsSlot ? (
             dotsSlot(dotSlotProps)
           ) : (
             <NCarouselDots
               total={dotSlotProps.total}
-              current={dotSlotProps.current}
+              currentIndex={dotSlotProps.currentIndex}
+              dotType={dotType}
               trigger={this.trigger}
               keyboard={this.keyboard}
-              dotStyle={dotStyle}
             />
           ))}
         {showArrow &&
-          (arrowSlot ? (
-            arrowSlot(arrowSlotProps)
-          ) : (
-            <NCarouselArrow direction={this.direction} />
-          ))}
+          (arrowSlot ? arrowSlot(arrowSlotProps) : <NCarouselArrow />)}
       </div>
     )
   }

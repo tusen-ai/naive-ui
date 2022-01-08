@@ -28,11 +28,11 @@
       </button>
     </div>
   </template>
-  <template #dots="{ total, current, slideTo }">
+  <template #dots="{ total, currentIndex, slideTo }">
     <ul class="custom-dots">
       <li
-        :class="{ ['is-active']: current === index - 1 }"
         v-for="index of total"
+        :class="{ ['is-active']: currentIndex === index - 1 }"
         :key="index"
         @click="slideTo(index - 1)"
       ></li>

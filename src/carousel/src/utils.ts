@@ -35,6 +35,10 @@ export function calculateSize (
   }
 }
 
+export function clampValue (value: number, min: number, max: number): number {
+  return value < min ? min : value > max ? max : value
+}
+
 export function getDisplayIndex (
   current: number,
   length: number,

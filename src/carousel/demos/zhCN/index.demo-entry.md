@@ -30,9 +30,9 @@ custom-arrow-and-dots
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | default-index | `number` | `0` | 默认显示页 |
-| active-index | `number` | `0` | 当前显示页 |
+| current-index | `number` | `0` | 当前显示页 |
 | show-arrow | `boolean` | `false` | 是否显示箭头按钮 |
-| dot-style | `'dot' \| 'line' \| 'never'` | `'dot'` | 轮播指示点样式 |
+| dot-type | `'dot' \| 'line' \| 'never'` | `'dot'` | 轮播指示点样式 |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | 轮播指示点位置 |
 | slides-per-view | `'auto' \| number` | `1` | 每一页显示的轮播图数量 |
 | space-between | `number` | `0` | 轮播图之间的间距 |
@@ -43,22 +43,22 @@ custom-arrow-and-dots
 | loop | `boolean` | `true` | 是否循环播放 |
 | trigger | `'click' \| 'hover'` | `'click'` | 触发切换的方式 |
 | effect | `'slide' \| 'fade' \| 'card'` | `'slide'` | 轮播图切换时的过渡效果 |
-| speed | `number` | `300` | 过渡效果的持续时间（ms） |
+| transition-duration | `number` | `300` | 过渡效果的持续时间（ms） |
 | transition-timing-function | `string` | `undefined` | 过渡效果的速率函数 |
 | transition-name | `string` | `undefined` | 自定义过渡效果 |
 | draggable | `boolean` | `false` | 是否通过鼠标拖拽切换轮播图 |
 | touchable | `boolean` | `true` | 是否通过触摸拖拽切换轮播图 |
 | mousewheel | `boolean` | `false` | 是否通过鼠标滚轮切换轮播图 |
 | keyboard | `boolean` | `false` | 是否通过按键切换轮播图，只有焦点在 Dots 上时才起作用 |
-| onChange | `(current: number, from: number) => void` | `undefined` | 当前页变化时的回调函数 |
+| on-update:current-index | `(currentIndex: number, lastIndex: number) => void` | `undefined` | 当前页变化时的回调函数 |
 
 ### Carousel Slots
 
 | 名称    | 参数 | 说明 |
 | ------- | ---- | ---- |
 | default | `()` | 轮播的内容 |
-| arrow | `({total: number, current: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: (index) => void, isPrevDisabled: () => boolean, isNextDisabled: () => boolean})` | 箭头 |
-| dots | `({total: number, current: number, slideTo: (index: number) => void})` | 控制器 |
+| arrow | `({total: number, currentIndex: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: () => void})` | 箭头 |
+| dots | `({total: number, currentIndex: number, slideTo: (index: number) => void})` | 指示点 |
 
 ### Carousel Methods
 
@@ -67,10 +67,4 @@ custom-arrow-and-dots
 | slideTo | `(index: number) => void` | 滑动至某一页 |
 | slidePrev | `() => void` | 滑动至前一页 |
 | slideNext | `() => void` | 滑动至后一页 |
-| isActive | `(index: number) => boolean` | 判断是否为当前页 |
-| isPrev | `(index: number) => boolean` | 判断是否为前一页 |
-| isNext | `(index: number) => boolean` | 判断是否为后一页 |
-| isPrevDisabled | `(index: number) => boolean` | 判断是否可以切换至前一页 |
-| isNextDisabled | `(index: number) => boolean` | 判断是否可以切换至后一页 |
-| getPrevIndex | `(index?: number) => number \| null` | 获取前一页 |
-| getNextIndex | `(index?: number) => number \| null` | 获取后一页 |
+| getCurrentIndex | `() => number` | 获取当前页 |
