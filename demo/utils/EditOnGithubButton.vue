@@ -3,8 +3,9 @@
     class="edit-button"
     text
     :size="size"
-    @click="handleClick"
-    :depth="depth"
+    tag="a"
+    :href="url"
+    target="_blank"
   >
     <template #icon>
       <n-icon>
@@ -14,11 +15,13 @@
   </n-button>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, PropType } from 'vue'
+import type { ButtonProps } from 'naive-ui'
 import EditIcon from '@vicons/fluent/Compose16Regular.js'
-import { treeUrl } from './github-url'
+import { blobUrl } from './github-url'
 
-export default {
+export default defineComponent({
   name: 'EditOnGithubButton',
   components: {
     EditIcon
@@ -29,15 +32,15 @@ export default {
       required: true
     },
     text: Boolean,
-    size: String,
-    depth: String
+    size: {
+      type: String as PropType<ButtonProps['size']>,
+      default: 'tiny'
+    }
   },
   setup (props) {
     return {
-      handleClick () {
-        window.open(treeUrl + props.relativeUrl, '_blank')
-      }
+      url: blobUrl + props.relativeUrl
     }
   }
-}
+})
 </script>

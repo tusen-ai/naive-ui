@@ -42,16 +42,16 @@ export default defineComponent({
           self
         } = themeRef.value
         const vars: any = {
-          '--bezier': cubicBezierEaseInOut
+          '--n-bezier': cubicBezierEaseInOut
         }
         if (props.inverted) {
-          vars['--color'] = self.headerColorInverted
-          vars['--text-color'] = self.textColorInverted
-          vars['--border-color'] = self.headerBorderColorInverted
+          vars['--n-color'] = self.headerColorInverted
+          vars['--n-text-color'] = self.textColorInverted
+          vars['--n-border-color'] = self.headerBorderColorInverted
         } else {
-          vars['--color'] = self.headerColor
-          vars['--text-color'] = self.textColor
-          vars['--border-color'] = self.headerBorderColor
+          vars['--n-color'] = self.headerColor
+          vars['--n-text-color'] = self.textColor
+          vars['--n-border-color'] = self.headerBorderColor
         }
         return vars
       })

@@ -47,6 +47,7 @@ const modalProps = {
     type: String as PropType<'center' | 'mouse'>,
     default: 'mouse'
   },
+  zIndex: Number,
   ...presetProps,
   // events
   'onUpdate:show': [Function, Array] as PropType<
@@ -184,6 +185,11 @@ export default defineComponent({
         }
       }
     }
+    function handleKeyup (e: KeyboardEvent): void {
+      if (e.code === 'Escape') {
+        doUpdateShow(false)
+      }
+    }
     provide(modalInjectionKey, {
       getMousePosition: () => {
         if (NDialogProvider) {
@@ -212,6 +218,7 @@ export default defineComponent({
         const pickedProps = keep(props, presetPropsKeys)
         return pickedProps
       }),
+      handleKeyup,
       handleAfterLeave,
       handleClickoutside,
       handleBeforeLeave,
@@ -225,10 +232,10 @@ export default defineComponent({
           self: { boxShadow, color, textColor }
         } = themeRef.value
         return {
-          '--bezier-ease-out': cubicBezierEaseOut,
-          '--box-shadow': boxShadow,
-          '--color': color,
-          '--text-color': textColor
+          '--n-bezier-ease-out': cubicBezierEaseOut,
+          '--n-box-shadow': boxShadow,
+          '--n-color': color,
+          '--n-text-color': textColor
         }
       })
     }
@@ -241,6 +248,7 @@ export default defineComponent({
           default: () => [
             withDirectives(
               <div
+                role="none"
                 ref="containerRef"
                 class={[`${mergedClsPrefix}-modal-container`, this.namespace]}
                 style={this.cssVars as CSSProperties}
@@ -255,6 +263,7 @@ export default defineComponent({
                       default: () => {
                         return this.show ? (
                           <div
+                            aria-hidden
                             ref="containerRef"
                             class={`${mergedClsPrefix}-modal-mask`}
                           />
@@ -278,6 +287,7 @@ export default defineComponent({
                   onAfterEnter={this.onAfterEnter}
                   onAfterLeave={this.handleAfterLeave}
                   onClickoutside={this.handleClickoutside}
+                  onKeyup={this.handleKeyup}
                 >
                   {this.$slots}
                 </NModalBodyWrapper>
@@ -286,6 +296,7 @@ export default defineComponent({
                 [
                   zindexable,
                   {
+                    zIndex: this.zIndex,
                     enabled: this.show
                   }
                 ]

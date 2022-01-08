@@ -74,11 +74,11 @@ export default defineComponent({
         }
       }
     }
-    const NAvatarGroup = inject(avatarGroupInjectionKey, {})
+    const NAvatarGroup = inject(avatarGroupInjectionKey, null)
     const mergedSizeRef = computed(() => {
       const { size } = props
       if (size) return size
-      const { size: avatarGroupSize } = NAvatarGroup
+      const { size: avatarGroupSize } = NAvatarGroup || {}
       if (avatarGroupSize) return avatarGroupSize
       return 'medium'
     })

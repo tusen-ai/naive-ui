@@ -2,9 +2,62 @@
 
 ## Pending
 
+### Breaking Changes
+
+- 修复 `type PageHeaderProps` 命名，原先错拼为 `PageHeaderPorps`
+
+### Fixes
+
+- 修复 `n-upload` `on-finish` 回调中 `event` 的类型应为 `ProgressEvent`
+- 修复 `n-upload` 不允许 200 之外的 2xx 响应状态码
+- 修复 `n-form` 当 `validate` 使用了 `validateCallback` 时调用 Promise 方法无效
+- 修复 `n-input-number` 输入以 0 结尾的整数不更新，关闭 [#2115](https://github.com/TuSimple/naive-ui/issues/2115)
+- 修复 `n-back-top` 允许 `listen-to` 为 `document`
+- 修复 `n-data-table` 在 loading 时可以点击内容，关闭 [#2134](https://github.com/TuSimple/naive-ui/issues/2134)
+
 ### Feats
 
+- `n-code` 新增 `word-wrap` 属性，关闭 [#2111](https://github.com/TuSimple/naive-ui/issues/2111)
+- `n-modal` 新增 `z-index` 属性，关闭 [#2088](https://github.com/TuSimple/naive-ui/issues/2088)
+- `n-drawer` 新增 `z-index` 属性
+- `n-drawer` 新增 wai-aria 支持
+- `n-message-provider` 新增 `render-message` 属性
+- `n-data-table` `TableColumn` 支持 `string` 类型的 `width`，关闭 [#2102](https://github.com/TuSimple/naive-ui/issues/2102)
+- `n-calendar` 新增 `on-panel-change` 属性，关闭 [#2082](https://github.com/TuSimple/naive-ui/issues/2082)
+- `n-upload` 新增 `on-error` 属性
+- `n-pagination` 新增 `label` slot
+- `n-tabs` 新增 `syncBarPosition` 方法，关闭 [#2120](https://github.com/TuSimple/naive-ui/issues/2120)
+- `n-form`，`n-form-item` 的 `label-width` 选项支持 `auto` 属性，关闭 [#2087](https://github.com/TuSimple/naive-ui/issues/2087)
+- `n-result` 新增 `icon` 插槽，关闭 [#2130](https://github.com/TuSimple/naive-ui/issues/2130)
+- `n-date-picker` 新增 `value-format` 属性
+
+## 2.23.2 (2021-12-29)
+
+### Feats
+
+- 可以通过 `<meta name="naive-ui-style" />` 控制组件样式的位置
+- `n-empty` 新增 `show-icon` 属性
+- `n-modal` 增加可访问性支持，关闭 [#1877](https://github.com/TuSimple/naive-ui/issues/1877)
 - 新增 `n-avatar-group`
+- `n-input-number` 支持 `loading` 状态
+- 新增`n-countdown` 组件
+- 新增`n-number-animation` 组件，关闭 [#1465](https://github.com/TuSimple/naive-ui/issues/1465)
+- `n-pagination` 在不传 itemCount 时会根据 pageSize 和 pageCount 估计一个，关闭 [#2044](https://github.com/TuSimple/naive-ui/issues/2044)
+- `n-statistic` 新增 `tabular-nums` 属性
+- `n-cascader` 新增 `on-update:show` 属性，关闭 [#2049](https://github.com/TuSimple/naive-ui/issues/2049)
+- `n-scrollbar` 的 CSS 变量使用 `n` 作为前缀
+- `n-popconfirm` 的 CSS 变量使用 `n` 作为前缀
+- `n-gradient-text` 的 CSS 变量使用 `n` 作为前缀
+- `n-form` 的 CSS 变量使用 `n` 作为前缀
+- `n-pagination` 的 CSS 变量使用 `n` 作为前缀
+- `n-loading-bar` 的 CSS 变量使用 `n` 作为前缀
+- `n-empty` 的 CSS 变量使用 `n` 作为前缀
+- `n-list` 的 CSS 变量使用 `n` 作为前缀
+- `n-layout` 的 CSS 变量使用 `n` 作为前缀
+- `n-message` 的 CSS 变量使用 `n` 作为前缀
+- `n-mention` 的 CSS 变量使用 `n` 作为前缀
+- `n-menu` 的 CSS 变量使用 `n` 作为前缀
+- `n-popover` 的 CSS 变量使用 `n` 作为前缀
 - `n-transfer` 的 CSS 变量使用 `n` 作为前缀
 - `n-table` 的 CSS 变量使用 `n` 作为前缀
 - `n-statistic` 的 CSS 变量使用 `n` 作为前缀
@@ -19,6 +72,11 @@
 - `n-cascader` 的 CSS 变量使用 `n` 作为前缀
 - `n-color-picker` 的 CSS 变量使用 `n` 作为前缀
 - `n-checkbox` 的 CSS 变量使用 `n` 作为前缀
+- `n-data-table` 的 CSS 变量使用 `n` 作为前缀
+- `n-date-picker` 的 CSS 变量使用 `n` 作为前缀
+- `n-descriptions` 的 CSS 变量使用 `n` 作为前缀
+- `n-drawer` 的 CSS 变量使用 `n` 作为前缀
+- `n-dropdown` 的 CSS 变量使用 `n` 作为前缀
 - `n-rate` 的 CSS 变量使用 `n` 作为前缀
 - `n-radio` 的 CSS 变量使用 `n` 作为前缀
 - `n-progress` 的 CSS 变量使用 `n` 作为前缀
@@ -26,11 +84,26 @@
 - `n-collapse` 的 CSS 变量使用 `n` 作为前缀
 - `n-collapse-transition` 的 CSS 变量使用 `n` 作为前缀
 - `n-thing` 的 CSS 变量使用 `n` 作为前缀
-- `n-date-picker` 新增 `value-format` 属性
+- `n-carousel` 的 CSS 变量使用 `n` 作为前缀
+- `n-page-header` 的 CSS 变量使用 `n` 作为前缀
+- `n-image` 的 CSS 变量使用 `n` 作为前缀
+- `n-input` 的 CSS 变量使用 `n` 作为前缀
+- `n-icon` 的 CSS 变量使用 `n` 作为前缀
+- `n-modal` 的 CSS 变量使用 `n` 作为前缀
+- `n-notification` 的 CSS 变量使用 `n` 作为前缀
 
 ### Fixes
 
 - 修复 `n-form-item-gi` 的 `validate` 不生效，关闭 [#1901](https://github.com/TuSimple/naive-ui/issues/1901)
+- 修复 `n-card` action 部分的 border-radius 样式
+- 修复 `n-code` 不设定 language 时内容重复添加，关闭 [#2034](https://github.com/TuSimple/naive-ui/issues/2034)
+- 修复 `n-tabs` `tabTextColorActiveSegment` 和 `tabTextColorHoverSegment` 主题变量不生效，关闭 [#2038](https://github.com/TuSimple/naive-ui/issues/2038)
+- 修复 `n-image` 卸载时可能未解绑键盘事件监听器
+- 修复 `n-image` 在仅有一张图片时按 esc 无法退出预览，关闭 [#2042](https://github.com/TuSimple/naive-ui/issues/2042)
+- 修复 `n-drawer-content` 的内容区域默认无法滚动，关于 [#2003](https://github.com/TuSimple/naive-ui/issues/2003)
+- 修复 `n-popover` 手动指定多个 popover 有 相同 zindex 并关闭时控制台打印错误，关闭 [#2050](https://github.com/TuSimple/naive-ui/issues/2050)
+- 修复 `n-transfer` 在虚拟滚动模式下没有滚动条
+- 修复 `n-input-number` 不能输入以 0 结尾的小数
 
 ## 2.23.1 (2021-12-20)
 

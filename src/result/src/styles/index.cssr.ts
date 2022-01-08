@@ -1,4 +1,4 @@
-import { c, cB, cE } from '../../../_utils/cssr'
+import { cB, cE } from '../../../_utils/cssr'
 
 // --n-bezier
 // --n-font-size
@@ -16,19 +16,19 @@ export default cB('result', `
     color .3s var(--n-bezier);
 `, [
   cB('result-icon', `
-    height: 1em;
     display: flex;
     justify-content: center;
     transition: color .3s var(--n-bezier);
-    color: var(--n-icon-color);
-    font-size: var(--n-icon-size);
   `, [
-    cE('status-image', {
-      width: '1em'
-    }),
-    c('svg', {
-      height: '1em'
-    })
+    cE('status-image', `
+      font-size: var(--n-icon-size);
+      width: 1em;
+      height: 1em;
+    `),
+    cB('base-icon', `
+      color: var(--n-icon-color);
+      font-size: var(--n-icon-size);
+    `)
   ]),
   cB('result-content', {
     marginTop: '24px'

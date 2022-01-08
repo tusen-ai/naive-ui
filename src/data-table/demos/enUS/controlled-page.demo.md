@@ -44,7 +44,7 @@ export default defineComponent({
       onChange: (page) => {
         paginationReactive.page = page
       },
-      onPageSizeChange: (pageSize) => {
+      onUpdatePageSize: (pageSize) => {
         paginationReactive.pageSize = pageSize
         paginationReactive.page = 1
       }

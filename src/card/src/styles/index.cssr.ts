@@ -125,6 +125,8 @@ export default c([
       cE('action', `
         background-color: var(--n-action-color);
         padding: var(--n-padding-bottom) var(--n-padding-left);
+        border-bottom-left-radius: var(--n-border-radius);
+        border-bottom-right-radius: var(--n-border-radius);
       `)
     ]),
     cB('card-cover', `

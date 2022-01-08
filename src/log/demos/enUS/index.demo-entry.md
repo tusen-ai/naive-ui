@@ -48,6 +48,7 @@ event
 scroll
 highlight
 loading
+auto-bottom
 ```
 
 ## API

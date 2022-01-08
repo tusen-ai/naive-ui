@@ -2,9 +2,11 @@
 
 Oracle from the top(always) of the browser.
 
-<n-space vertical>
+<n-space vertical size="large">
 <n-alert title="Prerequisite" type="warning">
   If you want use message, you need to wrap the component where you call related methods inside <n-text code>n-message-provider</n-text> and use <n-text code>useMessage</n-text> to get the API.
+  <br/>
+  If you want use it outside setup, please refer to Q & A part at the bottom of the page.
 </n-alert>
 For example:
 
@@ -46,20 +48,36 @@ manually-close
 about-theme
 multiple-line
 placement
+customize-message.vue
 ```
 
 ## API
 
 ### MessageProvider Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| closable | `boolean` | Whether to show close icon on all messages. |
-| duration | `number` | `3000` | Default duration of on all messages. |
-| keep-alive-on-hover | `boolean` | `false` | Whether to destroy while hovering on all messages. |
-| max | `number` | `undefined` | Limit the number of messages to display. |
-| placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top` | Placement of all messages. |
-| to | `string \| HTMLElement` | `'body'` | Container node of message container. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| closable | `boolean` | Whether to show close icon on all messages. |  |
+| duration | `number` | `3000` | Default duration of on all messages. |  |
+| keep-alive-on-hover | `boolean` | `false` | Whether to destroy while hovering on all messages. |  |
+| max | `number` | `undefined` | Limit the number of messages to display. |  |
+| placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top` | Placement of all messages. |  |
+| render-message | `MessageProviderRenderMessage` | `undefined` | Render function of messages. | NEXT_VERSION |
+| to | `string \| HTMLElement` | `'body'` | Container node of message container. |  |
+
+#### MessageProviderRenderMessage Type
+
+```ts
+type MessageProviderRenderMessage = (props: {
+  content?: string | number | (() => VNodeChild)
+  icon?: () => VNodeChild
+  closable: boolean
+  type: 'info' | 'success' | 'warning' | 'error' | 'loading'
+  onClose?: () => void
+  onMouseenter?: (e: MouseEvent) => void
+  onMouseleave?: (e: MouseEvent) => void
+}) => VNodeChild
+```
 
 ### MessageProvider Injection API
 
@@ -109,7 +127,7 @@ placement
 
 ### Use Message Outside Setup
 
-<n-space vertical>
+<n-space vertical size="large">
 <n-alert type="warning">
   You need to mount the return value of <n-text code>useMessage</n-text> to the window in the top-level setup and then call it. Before calling it, you need to make sure that message has been mounted successfully.
 </n-alert>

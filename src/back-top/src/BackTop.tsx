@@ -49,7 +49,7 @@ const backTopProps = {
     default: 180
   },
   listenTo: [String, Object, Function] as PropType<
-  string | HTMLElement | (() => HTMLElement)
+  string | HTMLElement | Document | (() => HTMLElement | Document)
   >,
   'onUpdate:show': {
     type: Function,

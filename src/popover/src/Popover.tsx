@@ -138,6 +138,7 @@ export const popoverBaseProps = {
     type: Boolean,
     default: true
   },
+  shift: Boolean,
   animated: {
     type: Boolean,
     default: true

@@ -10,6 +10,7 @@ multiple
 target
 closable
 slot
+a11y-debug.vue
 custom-style-debug
 dark-1-debug
 dark-2-debug
@@ -21,20 +22,21 @@ dark-4-debug
 
 ### Drawer Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| content-style | `string \| Object` | `undefined` | 抽屉可滚动内容节点的样式 |
-| display-directive | `'if' \| 'show'` | `'if'` | `n-drawer` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show` |
-| height | `number \| string` | `251` | 抽屉的高度，在位置是 `top` 和 `bottom` 时生效 |
-| mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |
-| native-scrollbar | `boolean` | `true` | 是否使用原生滚动 |
-| placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | 抽屉展示的位置 |
-| show | `boolean` | `false` | 是否展示抽屉 |
-| style | `string \| Object` | `undefined` | 抽屉的样式 |
-| to | `string \| HTMLElement` | `'body'` | 抽屉出现的区域 |
-| width | `number \| string` | `251` | 抽屉的宽度，在位置是 `left` 和 `right` 时生效 |
-| on-mask-click | `(e: MouseEvent) => void` | `undefined` | 点击遮罩的回调 |
-| on-update:show | `(show: boolean) => void` | `undefined` | 抽屉显示状态改变时执行的回调函数 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| content-style | `string \| Object` | `undefined` | 抽屉可滚动内容节点的样式 |  |
+| display-directive | `'if' \| 'show'` | `'if'` | `n-drawer` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show` |  |
+| height | `number \| string` | `251` | 抽屉的高度，在位置是 `top` 和 `bottom` 时生效 |  |
+| mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |  |
+| native-scrollbar | `boolean` | `true` | 是否使用原生滚动 |  |
+| placement | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | 抽屉展示的位置 |  |
+| show | `boolean` | `false` | 是否展示抽屉 |  |
+| style | `string \| Object` | `undefined` | 抽屉的样式 |  |
+| to | `string \| HTMLElement` | `'body'` | 抽屉出现的区域 |  |
+| width | `number \| string` | `251` | 抽屉的宽度，在位置是 `left` 和 `right` 时生效 |  |
+| z-index | `number` | `undefined` | 抽屉的 z-index | NEXT_VERSION |
+| on-mask-click | `(e: MouseEvent) => void` | `undefined` | 点击遮罩的回调 |  |
+| on-update:show | `(show: boolean) => void` | `undefined` | 抽屉显示状态改变时执行的回调函数 |  |
 
 ### DrawerContent Props
 

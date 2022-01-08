@@ -30,7 +30,7 @@ function mapSlot (
     children: VNodeChild[]
     isButtonGroup: boolean
   } {
-  const children = []
+  const children: VNode[] = []
   let isButtonGroup = false
   for (let i = 0; i < defaultSlot.length; ++i) {
     const wrappedInstance = defaultSlot[i]

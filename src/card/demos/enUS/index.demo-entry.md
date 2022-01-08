@@ -7,7 +7,7 @@ Just put something in it.
 ```demo
 basic
 size
-cover
+cover.vue
 hoverable
 slots
 border

@@ -1,11 +1,4 @@
-import {
-  defineComponent,
-  computed,
-  CSSProperties,
-  PropType,
-  h,
-  renderSlot
-} from 'vue'
+import { defineComponent, computed, CSSProperties, h, renderSlot } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -15,18 +8,9 @@ import style from './styles/index.cssr'
 
 const statisticProps = {
   ...(useTheme.props as ThemeProps<StatisticTheme>),
-  label: {
-    type: String,
-    default: undefined
-  },
-  value: {
-    type: [String, Number],
-    default: undefined
-  },
-  valueStyle: {
-    type: [Object, String] as PropType<undefined | string | CSSProperties>,
-    default: undefined
-  }
+  tabularNums: Boolean,
+  label: String,
+  value: [String, Number]
 }
 
 export type StatisticProps = ExtractPublicPropTypes<typeof statisticProps>
@@ -82,7 +66,12 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-statistic__label`}>
           {this.label || $slots.label?.()}
         </div>
-        <div class={`${mergedClsPrefix}-statistic-value`}>
+        <div
+          class={`${mergedClsPrefix}-statistic-value`}
+          style={{
+            fontVariantNumeric: this.tabularNums ? 'tabular-nums' : ''
+          }}
+        >
           {$slots.prefix ? (
             <span class={`${mergedClsPrefix}-statistic-value__prefix`}>
               {renderSlot($slots, 'prefix')}

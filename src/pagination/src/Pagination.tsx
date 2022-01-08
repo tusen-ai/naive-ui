@@ -8,7 +8,8 @@ import {
   defineComponent,
   PropType,
   CSSProperties,
-  watchEffect
+  watchEffect,
+  VNodeChild
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { NSelect } from '../../select'
@@ -23,11 +24,13 @@ import {
 } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { paginationLight, PaginationTheme } from '../styles'
+import { paginationLight } from '../styles'
+import type { PaginationTheme } from '../styles'
 import { pageItems } from './utils'
 import type { PageItem } from './utils'
 import style from './styles/index.cssr'
-import { call, ExtractPublicPropTypes, MaybeArray, warn } from '../../_utils'
+import { call, warn, warnOnce } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { Size as SelectSize } from '../../select/src/interface'
 import {
@@ -35,6 +38,7 @@ import {
   RenderSuffix,
   RenderPrev,
   RenderNext,
+  PaginationRenderLabel,
   PaginationSizeOption
 } from './interface'
 
@@ -52,7 +56,7 @@ const paginationProps = {
     default: 1
   },
   showSizePicker: Boolean,
-  pageSize: Number as PropType<number>,
+  pageSize: Number,
   defaultPageSize: {
     type: Number,
     default: 10
@@ -73,6 +77,7 @@ const paginationProps = {
   next: Function as PropType<RenderNext>,
   prefix: Function as PropType<RenderPrefix>,
   suffix: Function as PropType<RenderSuffix>,
+  label: Function as PropType<PaginationRenderLabel>,
   'onUpdate:page': [Function, Array] as PropType<
   MaybeArray<(page: number) => void>
   >,
@@ -105,6 +110,18 @@ export default defineComponent({
           warn(
             'pagination',
             "`page-count` and `item-count` should't be specified together. Only `item-count` will take effect."
+          )
+        }
+        if (props.onPageSizeChange) {
+          warnOnce(
+            'pagination',
+            '`on-page-size-change` is deprecated, please use `on-update:page-size` instead.'
+          )
+        }
+        if (props.onChange) {
+          warnOnce(
+            'pagination',
+            '`on-change` is deprecated, please use `on-update:page` instead.'
           )
         }
       })
@@ -180,6 +197,11 @@ export default defineComponent({
         return endIndex > itemCount ? itemCount : endIndex
       }
       return endIndex
+    })
+    const mergedItemCountRef = computed(() => {
+      const { itemCount } = props
+      if (itemCount !== undefined) return itemCount
+      return (props.pageCount || 1) * mergedPageSizeRef.value
     })
 
     const disableTransitionOneTick = (): void => {
@@ -264,10 +286,10 @@ export default defineComponent({
         case 'page':
           doUpdatePage(pageItem.label)
           break
-        case 'fastBackward':
+        case 'fast-backward':
           fastBackward()
           break
-        case 'fastForward':
+        case 'fast-forward':
           fastForward()
           break
       }
@@ -275,10 +297,10 @@ export default defineComponent({
     function handlePageItemMouseEnter (pageItem: PageItem): void {
       if (props.disabled) return
       switch (pageItem.type) {
-        case 'fastBackward':
+        case 'fast-backward':
           showFastBackwardRef.value = true
           break
-        case 'fastForward':
+        case 'fast-forward':
           showFastForwardRef.value = true
           break
         default:
@@ -289,10 +311,10 @@ export default defineComponent({
     function handlePageItemMouseLeave (pageItem: PageItem): void {
       if (props.disabled) return
       switch (pageItem.type) {
-        case 'fastBackward':
+        case 'fast-backward':
           showFastBackwardRef.value = false
           break
-        case 'fastForward':
+        case 'fast-forward':
           showFastForwardRef.value = false
           break
         default:
@@ -319,6 +341,7 @@ export default defineComponent({
       pageItems: computed(() =>
         pageItems(mergedPageRef.value, mergedPageCountRef.value, props.pageSlot)
       ),
+      mergedItemCount: mergedItemCountRef,
       jumperValue: jumperValueRef,
       pageSizeOptions: pageSizeOptionsRef,
       mergedPageSize: mergedPageSizeRef,
@@ -383,47 +406,47 @@ export default defineComponent({
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
-          '--prefix-margin': prefixMargin,
-          '--suffix-margin': suffixMargin,
-          '--item-font-size': itemFontSize,
-          '--select-width': selectWidth,
-          '--select-margin': selectMargin,
-          '--input-width': inputWidth,
-          '--input-margin': inputMargin,
-          '--item-size': itemSize,
-          '--item-text-color': itemTextColor,
-          '--item-text-color-disabled': itemTextColorDisabled,
-          '--item-text-color-hover': itemTextColorHover,
-          '--item-text-color-active': itemTextColorActive,
-          '--item-text-color-pressed': itemTextColorPressed,
-          '--item-color': itemColor,
-          '--item-color-hover': itemColorHover,
-          '--item-color-disabled': itemColorDisabled,
-          '--item-color-active': itemColorActive,
-          '--item-color-active-hover': itemColorActiveHover,
-          '--item-color-pressed': itemColorPressed,
-          '--item-border': itemBorder,
-          '--item-border-hover': itemBorderHover,
-          '--item-border-disabled': itemBorderDisabled,
-          '--item-border-active': itemBorderActive,
-          '--item-border-pressed': itemBorderPressed,
-          '--item-padding': itemPadding,
-          '--item-border-radius': itemBorderRadius,
-          '--bezier': cubicBezierEaseInOut,
-          '--jumper-font-size': jumperFontSize,
-          '--jumper-text-color': jumperTextColor,
-          '--jumper-text-color-disabled': jumperTextColorDisabled,
-          '--item-margin': itemMargin,
-          '--button-icon-size': buttonIconSize,
-          '--button-icon-color': buttonIconColor,
-          '--button-icon-color-hover': buttonIconColorHover,
-          '--button-icon-color-pressed': buttonIconColorPressed,
-          '--button-color-hover': buttonColorHover,
-          '--button-color': buttonColor,
-          '--button-color-pressed': buttonColorPressed,
-          '--button-border': buttonBorder,
-          '--button-border-hover': buttonBorderHover,
-          '--button-border-pressed': buttonBorderPressed
+          '--n-prefix-margin': prefixMargin,
+          '--n-suffix-margin': suffixMargin,
+          '--n-item-font-size': itemFontSize,
+          '--n-select-width': selectWidth,
+          '--n-select-margin': selectMargin,
+          '--n-input-width': inputWidth,
+          '--n-input-margin': inputMargin,
+          '--n-item-size': itemSize,
+          '--n-item-text-color': itemTextColor,
+          '--n-item-text-color-disabled': itemTextColorDisabled,
+          '--n-item-text-color-hover': itemTextColorHover,
+          '--n-item-text-color-active': itemTextColorActive,
+          '--n-item-text-color-pressed': itemTextColorPressed,
+          '--n-item-color': itemColor,
+          '--n-item-color-hover': itemColorHover,
+          '--n-item-color-disabled': itemColorDisabled,
+          '--n-item-color-active': itemColorActive,
+          '--n-item-color-active-hover': itemColorActiveHover,
+          '--n-item-color-pressed': itemColorPressed,
+          '--n-item-border': itemBorder,
+          '--n-item-border-hover': itemBorderHover,
+          '--n-item-border-disabled': itemBorderDisabled,
+          '--n-item-border-active': itemBorderActive,
+          '--n-item-border-pressed': itemBorderPressed,
+          '--n-item-padding': itemPadding,
+          '--n-item-border-radius': itemBorderRadius,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-jumper-font-size': jumperFontSize,
+          '--n-jumper-text-color': jumperTextColor,
+          '--n-jumper-text-color-disabled': jumperTextColorDisabled,
+          '--n-item-margin': itemMargin,
+          '--n-button-icon-size': buttonIconSize,
+          '--n-button-icon-color': buttonIconColor,
+          '--n-button-icon-color-hover': buttonIconColorHover,
+          '--n-button-icon-color-pressed': buttonIconColorPressed,
+          '--n-button-color-hover': buttonColorHover,
+          '--n-button-color': buttonColor,
+          '--n-button-color-pressed': buttonColorPressed,
+          '--n-button-border': buttonBorder,
+          '--n-button-border-hover': buttonBorderHover,
+          '--n-button-border-pressed': buttonBorderPressed
         }
       })
     }
@@ -453,6 +476,7 @@ export default defineComponent({
       next,
       prefix,
       suffix,
+      label,
       handleJumperInput,
       handleSizePickerChange,
       handleBackwardClick,
@@ -462,8 +486,11 @@ export default defineComponent({
       handleForwardClick,
       handleQuickJumperKeyUp
     } = this
+    const renderPrefix = ($slots.prefix as RenderPrefix | undefined) || prefix
+    const renderSuffix = ($slots.suffix as RenderSuffix | undefined) || suffix
     const renderPrev = prev || $slots.prev
     const renderNext = next || $slots.next
+    const renderLabel = label || $slots.label
     return (
       <div
         ref="selfRef"
@@ -473,17 +500,15 @@ export default defineComponent({
         ]}
         style={cssVars as CSSProperties}
       >
-        {prefix || $slots.prefix ? (
+        {renderPrefix ? (
           <div class={`${mergedClsPrefix}-pagination-prefix`}>
-            {($slots.prefix
-              ? ($slots.prefix as unknown as RenderPrefix)
-              : prefix!)({
+            {renderPrefix({
               page: mergedPage,
               pageSize: mergedPageSize,
               pageCount: mergedPageCount,
               startIndex: this.startIndex,
               endIndex: this.endIndex,
-              itemCount: this.itemCount
+              itemCount: this.mergedItemCount
             })}
           </div>
         ) : null}
@@ -503,7 +528,7 @@ export default defineComponent({
               pageCount: mergedPageCount,
               startIndex: this.startIndex,
               endIndex: this.endIndex,
-              itemCount: this.itemCount
+              itemCount: this.mergedItemCount
             })
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
@@ -512,6 +537,64 @@ export default defineComponent({
           )}
         </div>
         {pageItems.map((pageItem, index) => {
+          let contentNode: VNodeChild
+          switch (pageItem.type) {
+            case 'page':
+              // eslint-disable-next-line no-case-declarations
+              const pageNode = pageItem.label
+              if (renderLabel) {
+                contentNode = renderLabel({
+                  type: 'page',
+                  node: pageNode,
+                  active: pageItem.active
+                })
+              } else {
+                contentNode = pageNode
+              }
+              break
+            case 'fast-forward':
+              // eslint-disable-next-line no-case-declarations
+              const fastForwardNode = showFastForward ? (
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{ default: () => <FastForwardIcon /> }}
+                </NBaseIcon>
+              ) : (
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{ default: () => <MoreIcon /> }}
+                </NBaseIcon>
+              )
+              if (renderLabel) {
+                contentNode = renderLabel({
+                  type: 'fast-forward',
+                  node: fastForwardNode,
+                  active: showFastForward
+                })
+              } else {
+                contentNode = fastForwardNode
+              }
+              break
+            case 'fast-backward':
+              // eslint-disable-next-line no-case-declarations
+              const fastBackwardNode = showFastBackward ? (
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{ default: () => <FastBackwardIcon /> }}
+                </NBaseIcon>
+              ) : (
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{ default: () => <MoreIcon /> }}
+                </NBaseIcon>
+              )
+              if (renderLabel) {
+                contentNode = renderLabel({
+                  type: 'fast-backward',
+                  node: fastBackwardNode,
+                  active: showFastBackward
+                })
+              } else {
+                contentNode = fastBackwardNode
+              }
+              break
+          }
           return (
             <div
               key={index}
@@ -527,29 +610,7 @@ export default defineComponent({
               onMouseenter={() => handlePageItemMouseEnter(pageItem)}
               onMouseleave={() => handlePageItemMouseLeave(pageItem)}
             >
-              {pageItem.type === 'page' ? pageItem.label : null}
-              {pageItem.type === 'fastBackward' ? (
-                showFastBackward ? (
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => <FastBackwardIcon /> }}
-                  </NBaseIcon>
-                ) : (
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => <MoreIcon /> }}
-                  </NBaseIcon>
-                )
-              ) : null}
-              {pageItem.type === 'fastForward' ? (
-                showFastForward ? (
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => <FastForwardIcon /> }}
-                  </NBaseIcon>
-                ) : (
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{ default: () => <MoreIcon /> }}
-                  </NBaseIcon>
-                )
-              ) : null}
+              {contentNode}
             </div>
           )
         })}
@@ -569,7 +630,7 @@ export default defineComponent({
               page: mergedPage,
               pageSize: mergedPageSize,
               pageCount: mergedPageCount,
-              itemCount: this.itemCount,
+              itemCount: this.mergedItemCount,
               startIndex: this.startIndex,
               endIndex: this.endIndex
             })
@@ -588,7 +649,7 @@ export default defineComponent({
             disabled={disabled}
             theme={mergedTheme.peers.Select}
             themeOverrides={mergedTheme.peerOverrides.Select}
-            onUpdateValue={handleSizePickerChange as any}
+            onUpdateValue={handleSizePickerChange}
           />
         ) : null}
         {showQuickJumper ? (
@@ -607,17 +668,15 @@ export default defineComponent({
             />
           </div>
         ) : null}
-        {suffix || $slots.suffix ? (
+        {renderSuffix ? (
           <div class={`${mergedClsPrefix}-pagination-suffix`}>
-            {($slots.suffix
-              ? ($slots.suffix as unknown as RenderSuffix)
-              : suffix!)({
+            {renderSuffix({
               page: mergedPage,
               pageSize: mergedPageSize,
               pageCount: mergedPageCount,
               startIndex: this.startIndex,
               endIndex: this.endIndex,
-              itemCount: this.itemCount
+              itemCount: this.mergedItemCount
             })}
           </div>
         ) : null}
