@@ -1,25 +1,27 @@
-# Customizing render
+<markdown>
+# 自定义渲染
 
-The `render-label` can be used to batch render cascader menu options.
+使用 `render-label` 可以批量控制 cascader 菜单的选项渲染。
+</markdown>
 
-```html
-<n-cascader
-  v-model:value="value"
-  placeholder="Meaningless values"
-  :options="options"
-  :filterable="true"
-  :render-label="renderLabel"
-  @update:value="handleUpdateValue"
-/>
-```
+<template>
+  <n-cascader
+    v-model:value="value"
+    placeholder="没啥用的值"
+    :options="options"
+    :filterable="true"
+    :render-label="renderLabel"
+    @update:value="handleUpdateValue"
+  />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref, h } from 'vue'
-import { NTooltip } from 'naive-ui'
+import { NTooltip, CascaderOption } from 'naive-ui'
 
 function getOptions (depth = 3, iterator = 1, prefix = '') {
   const length = 12
-  const options = []
+  const options: CascaderOption[] = []
   for (let i = 1; i <= length; ++i) {
     if (iterator === 1) {
       options.push({
@@ -65,4 +67,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
