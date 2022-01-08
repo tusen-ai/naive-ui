@@ -21,12 +21,14 @@ import { format, getTime, isValid, getYear, getMonth } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
 import { happensIn } from 'seemly'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
-import { InputInst, InputProps, NInput } from '../../input'
+import type { DatePickerTheme } from '../styles/light'
+import type { InputInst, InputProps } from '../../input'
+import { NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { DateIcon, ToIcon } from '../../_internal/icons'
-import { warn, call, useAdjustedTo, createKey } from '../../_utils'
+import { warn, call, useAdjustedTo, createKey, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { datePickerLight } from '../styles'
 import { strictParse } from './utils'
@@ -45,7 +47,9 @@ import type {
   Shortcuts,
   FirstDayOfWeek,
   DefaultTime,
-  FormatValue
+  FormattedValue,
+  OnUpdateFormattedValue,
+  OnUpdateFormattedValueImpl
 } from './interface'
 import { datePickerInjectionKey } from './interface'
 import DatetimePanel from './panel/datetime'
@@ -54,7 +58,6 @@ import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
 import style from './styles/index.cssr'
-import { DatePickerTheme } from '../styles/light'
 
 const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),
@@ -65,10 +68,8 @@ const datePickerProps = {
   },
   clearable: Boolean,
   updateValueOnClose: Boolean,
-  defaultValue: {
-    type: [Number, String, Array] as PropType<FormatValue | null>,
-    default: null
-  },
+  defaultValue: [Number, Array] as PropType<Value | null>,
+  defaultFormattedValue: [String, Array] as PropType<FormattedValue | null>,
   defaultTime: [Number, String, Array] as PropType<DefaultTime>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
@@ -78,16 +79,14 @@ const datePickerProps = {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom-start'
   },
-  value: [Number, String, Array] as PropType<FormatValue | null>,
+  value: [Number, Array] as PropType<Value | null>,
+  formattedValue: [String, Array] as PropType<FormattedValue | null>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   type: {
     type: String as PropType<DatePickerType>,
     default: 'date'
   },
-  valueFormat: {
-    type: String,
-    default: 'timestamp'
-  },
+  valueFormat: String,
   separator: String,
   placeholder: String,
   startPlaceholder: String,
@@ -113,24 +112,18 @@ const datePickerProps = {
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,
+  'onUpdate:formattedValue': [Function, Array] as PropType<
+  MaybeArray<OnUpdateFormattedValue>
+  >,
+  onUpdateFormattedValue: [Function, Array] as PropType<
+  MaybeArray<OnUpdateFormattedValue>
+  >,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<(e: FocusEvent) => void>,
   onBlur: [Function, Array] as PropType<(e: FocusEvent) => void>,
   // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'data-picker',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
 export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
@@ -140,6 +133,16 @@ export default defineComponent({
   name: 'DatePicker',
   props: datePickerProps,
   setup (props, { slots }) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange !== undefined) {
+          warnOnce(
+            'data-picker',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
     const { localeRef, dateLocaleRef } = useLocale('DatePicker')
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef } = formItem
@@ -160,12 +163,70 @@ export default defineComponent({
         locale: dateLocaleRef.value.locale
       }
     })
+
+    const mergedFormatRef = computed(() => {
+      const { format } = props
+      if (format) return format
+      switch (props.type) {
+        case 'date':
+        case 'daterange':
+          return localeRef.value.dateFormat
+        case 'datetime':
+        case 'datetimerange':
+          return localeRef.value.dateTimeFormat
+        case 'year':
+          return localeRef.value.yearTypeFormat
+        case 'month':
+          return localeRef.value.monthTypeFormat
+        case 'quarter':
+          return localeRef.value.quarterFormat
+      }
+    })
+    const mergedValueFormatRef = computed(() => {
+      return props.valueFormat ?? mergedFormatRef.value
+    })
+
+    function getTimestampValue (value: FormattedValue | null): Value | null {
+      if (value === null) return null
+      const { value: mergedValueFormat } = mergedValueFormatRef
+      const { value: dateFnsOptions } = dateFnsOptionsRef
+      if (Array.isArray(value)) {
+        return [
+          strictParse(
+            value[0],
+            mergedValueFormat,
+            new Date(),
+            dateFnsOptions
+          ).getTime(),
+          strictParse(
+            value[1],
+            mergedValueFormat,
+            new Date(),
+            dateFnsOptions
+          ).getTime()
+        ]
+      }
+      return strictParse(
+        value,
+        mergedValueFormat,
+        new Date(),
+        dateFnsOptions
+      ).getTime()
+    }
+
+    const { defaultFormattedValue, defaultValue } = props
+
     const uncontrolledValueRef = ref(
-      transformFormat(props.defaultValue) as Value | null
+      (defaultFormattedValue !== undefined
+        ? getTimestampValue(defaultFormattedValue)
+        : defaultValue) ?? null
     )
     const controlledValueRef = computed(() => {
-      console.log(props.value)
-      return transformFormat(props.value)
+      const { formattedValue } = props
+      if (formattedValue !== undefined) {
+        return getTimestampValue(formattedValue)
+      }
+      return props.value
     })
     const mergedValueRef = useMergedState(
       controlledValueRef,
@@ -242,24 +303,6 @@ export default defineComponent({
         return props.endPlaceholder
       }
     })
-    const mergedFormatRef = computed(() => {
-      const { format } = props
-      if (format) return format
-      switch (props.type) {
-        case 'date':
-        case 'daterange':
-          return localeRef.value.dateFormat
-        case 'datetime':
-        case 'datetimerange':
-          return localeRef.value.dateTimeFormat
-        case 'year':
-          return localeRef.value.yearTypeFormat
-        case 'month':
-          return localeRef.value.monthTypeFormat
-        case 'quarter':
-          return localeRef.value.quarterFormat
-      }
-    })
     const mergedActionsRef = computed(() => {
       const { actions, type } = props
       if (actions !== undefined) return actions
@@ -294,94 +337,68 @@ export default defineComponent({
         }
       }
     })
-    function transformFormat (
-      value: FormatValue | null | undefined
-    ): Value | null | undefined {
+    function getFormattedValue (value: Value | null): FormattedValue | null {
       if (value === null) return null
-      if (value === undefined) return undefined
       if (Array.isArray(value)) {
-        if (props.valueFormat === 'timestamp') {
-          if (
-            Number.isNaN(Number(value[0])) ||
-            Number.isNaN(Number(value[1]))
-          ) {
-            throw new Error(
-              `The value-format is timestamp, value got [${value[0]}, ${value[1]}], except [timestamp, timestamp]`
-            )
-          } else {
-            return Number(value)
-          }
-        } else {
-          return [
-            strictParse(
-              String(value[0]),
-              props.valueFormat,
-              new Date(),
-              dateFnsOptionsRef.value
-            ).getTime(),
-            strictParse(
-              String(value[1]),
-              props.valueFormat,
-              new Date(),
-              dateFnsOptionsRef.value
-            ).getTime()
-          ]
-        }
+        const { value: mergedValueFormat } = mergedValueFormatRef
+        const { value: dateFnsOptions } = dateFnsOptionsRef
+        return [
+          format(value[0], mergedValueFormat, dateFnsOptions),
+          format(value[1], mergedValueFormat, dateFnsOptionsRef.value)
+        ]
       } else {
-        if (props.valueFormat === 'timestamp') {
-          if (Number.isNaN(Number(value))) {
-            throw new Error(
-              `The value-format is timestamp, value got ${value}, except timestamp`
-            )
-          } else {
-            return Number(value)
-          }
-        } else {
-          return strictParse(
-            String(value),
-            props.valueFormat,
-            new Date(),
-            dateFnsOptionsRef.value
-          ).getTime()
-        }
+        return format(
+          value,
+          mergedValueFormatRef.value,
+          dateFnsOptionsRef.value
+        )
       }
     }
     function doUpdatePendingValue (value: Value | null): void {
       pendingValueRef.value = value
     }
+    function doUpdateFormattedValue (
+      value: FormattedValue | null,
+      timestampValue: Value | null
+    ): void {
+      const {
+        'onUpdate:formattedValue': _onUpdateFormattedValue,
+        onUpdateFormattedValue
+      } = props
+      if (_onUpdateFormattedValue) {
+        call(
+          _onUpdateFormattedValue as OnUpdateFormattedValueImpl,
+          value,
+          timestampValue
+        )
+      }
+      if (onUpdateFormattedValue) {
+        call(
+          onUpdateFormattedValue as OnUpdateFormattedValueImpl,
+          value,
+          timestampValue
+        )
+      }
+    }
     function doUpdateValue (value: Value | null): void {
       const {
         'onUpdate:value': _onUpdateValue,
         onUpdateValue,
-        onChange,
-        valueFormat
+        onChange
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      let formattedValue: FormatValue | null
-      if (value === null) {
-        formattedValue = null
-      } else {
-        if (valueFormat === 'timestamp') {
-          formattedValue = String(value)
-        } else {
-          if (Array.isArray(value)) {
-            formattedValue = [
-              format(value[0], valueFormat, dateFnsOptionsRef.value),
-              format(value[1], valueFormat, dateFnsOptionsRef.value)
-            ]
-          } else {
-            formattedValue = format(value, valueFormat, dateFnsOptionsRef.value)
-          }
-        }
-      }
+      const formattedValue = getFormattedValue(value)
       if (onUpdateValue) {
-        call(onUpdateValue as OnUpdateValueImpl, formattedValue)
+        call(onUpdateValue as OnUpdateValueImpl, value, formattedValue)
       }
       if (_onUpdateValue) {
-        call(_onUpdateValue as OnUpdateValueImpl, formattedValue)
+        call(_onUpdateValue as OnUpdateValueImpl, value, formattedValue)
       }
-      if (onChange) call(onChange as OnUpdateValueImpl, formattedValue)
+      if (onChange) call(onChange as OnUpdateValueImpl, value, formattedValue)
       uncontrolledValueRef.value = value
+
+      doUpdateFormattedValue(formattedValue, value)
+
       nTriggerFormChange()
       nTriggerFormInput()
     }

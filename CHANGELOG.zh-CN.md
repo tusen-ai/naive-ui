@@ -29,7 +29,11 @@
 - `n-tabs` 新增 `syncBarPosition` 方法，关闭 [#2120](https://github.com/TuSimple/naive-ui/issues/2120)
 - `n-form`，`n-form-item` 的 `label-width` 选项支持 `auto` 属性，关闭 [#2087](https://github.com/TuSimple/naive-ui/issues/2087)
 - `n-result` 新增 `icon` 插槽，关闭 [#2130](https://github.com/TuSimple/naive-ui/issues/2130)
-- `n-date-picker` 新增 `value-format` 属性
+- `n-date-picker` 新增 `value-format` 属性，关闭 [#2076](https://github.com/TuSimple/naive-ui/issues/2076)
+- `n-date-picker` 新增 `formatted-value` 属性
+- `n-date-picker` 新增 `default-formatted-value` 属性
+- `n-date-picker` 新增 `on-update:formatted-value` 属性
+- `n-date-picker` `on-update:value` 属性会传出格式化后的值
 
 ## 2.23.2 (2021-12-29)
 
