@@ -1,4 +1,5 @@
 import { Ref, InjectionKey, CSSProperties } from 'vue'
+import { ImageGroupProps } from '../../image'
 import type { MergedTheme } from '../../_mixins'
 import type { UploadTheme } from '../styles'
 
@@ -76,6 +77,7 @@ export interface UploadInjection {
   mergedDisabledRef: Ref<boolean>
   maxReachedRef: Ref<boolean>
   abstractRef: Ref<boolean>
+  imageGroupPropsRef: Ref<ImageGroupProps | undefined>
   cssVarsRef: Ref<CSSProperties>
   submit: (fileId?: string) => void
   getFileThumbnailUrl: (file: FileInfo) => Promise<string>

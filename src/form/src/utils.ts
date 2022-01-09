@@ -71,7 +71,7 @@ export function formItemMisc (props: FormItemSetupProps) {
   const mergedRequireMarkPlacementRef = computed(() => {
     const { requireMarkPlacement } = props
     if (requireMarkPlacement !== undefined) return requireMarkPlacement
-    return NForm?.props.requireMarkPlacement
+    return NForm?.props.requireMarkPlacement || 'right'
   })
   const validationErroredRef = ref(false)
   const mergedValidationStatusRef = computed(() => {

@@ -5,6 +5,7 @@
 ### Breaking Changes
 
 - Fix `type PageHeaderProps` name. It was mispelled as `PageHeaderPorps` before.
+- `n-image`'s `iconColor` theme variable is renamed as `toolbarIconColor`.
 
 ### Fixes
 
@@ -29,7 +30,17 @@
 - `n-tabs` adds `syncBarPosition` method, closes [#2120](https://github.com/TuSimple/naive-ui/issues/2120).
 - `n-form`, `n-form-item`'s `label-width` prop support `auto` option, closes [#2087](https://github.com/TuSimple/naive-ui/issues/2087).
 - `n-result` adds `icon` slot, closes [#2130](https://github.com/TuSimple/naive-ui/issues/2130).
-- `n-date-picker` add `value-format` prop.
+- `n-date-picker` adds `value-format` prop, closes [#2076](https://github.com/TuSimple/naive-ui/issues/2076).
+- `n-date-picker` adds `formatted-value` prop.
+- `n-date-picker` adds `default-formatted-value` prop.
+- `n-date-picker` adds `on-update:formatted-value` prop.
+- `n-date-picker`'s `on-update:value` prop will pass formatted value out.
+- `n-image` adds `show-toolbar-tooltip` prop.
+- `n-image` adds more theme variables, closes [#1531](https://github.com/TuSimple/naive-ui/issues/1531).
+- `n-upload` adds `image-group-props` prop.
+- `n-progress` adds `offset-degree` prop, closes [#2010](https://github.com/TuSimple/naive-ui/issues/2010).
+- `n-form-item` adds `feedback` slot, closes [#1142](https://github.com/TuSimple/naive-ui/issues/1142).
+- `n-form-item`'s `require-mark-placement` prop adds `'right-hanging'` option, closes [#2094](https://github.com/TuSimple/naive-ui/issues/2094).
 - `n-cascader` add `render-label` prop, closes [#2048](https://github.com/TuSimple/naive-ui/issues/2048).
 
 ## 2.23.2 (2021-12-29)

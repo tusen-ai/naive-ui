@@ -5,6 +5,7 @@
 ### Breaking Changes
 
 - 修复 `type PageHeaderProps` 命名，原先错拼为 `PageHeaderPorps`
+- `n-image` 主题变量的 `iconColor` 重命名为 `toolbarIconColor`
 
 ### Fixes
 
@@ -29,7 +30,17 @@
 - `n-tabs` 新增 `syncBarPosition` 方法，关闭 [#2120](https://github.com/TuSimple/naive-ui/issues/2120)
 - `n-form`，`n-form-item` 的 `label-width` 选项支持 `auto` 属性，关闭 [#2087](https://github.com/TuSimple/naive-ui/issues/2087)
 - `n-result` 新增 `icon` 插槽，关闭 [#2130](https://github.com/TuSimple/naive-ui/issues/2130)
-- `n-date-picker` 新增 `value-format` 属性
+- `n-date-picker` 新增 `value-format` 属性，关闭 [#2076](https://github.com/TuSimple/naive-ui/issues/2076)
+- `n-date-picker` 新增 `formatted-value` 属性
+- `n-date-picker` 新增 `default-formatted-value` 属性
+- `n-date-picker` 新增 `on-update:formatted-value` 属性
+- `n-date-picker` `on-update:value` 属性会传出格式化后的值
+- `n-image` 新增 `show-toolbar-tooltip` 属性
+- `n-image` 新增更多主题变量，关闭 [#1531](https://github.com/TuSimple/naive-ui/issues/1531)
+- `n-upload` 新增 `image-group-props` 属性
+- `n-progress` 新增 `offset-degree` 属性，关闭 [#2010](https://github.com/TuSimple/naive-ui/issues/2010)
+- `n-form-item` 新增 `feedback` slot，关闭 [#1142](https://github.com/TuSimple/naive-ui/issues/1142)
+- `n-form-item` `require-mark-placement` 新增 `'right-hanging'` 选项，关闭 [#2094](https://github.com/TuSimple/naive-ui/issues/2094)
 - `n-cascader` 新增 `render-label` 属性，关闭 [#2048](https://github.com/TuSimple/naive-ui/issues/2048)
 
 ## 2.23.2 (2021-12-29)
