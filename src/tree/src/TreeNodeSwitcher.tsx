@@ -17,7 +17,7 @@ export default defineComponent({
   },
   setup (props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { renderSwitcherIconRef } = inject(treeInjectionKey)!
+    const { renderSwitcherIconRef } = inject(treeInjectionKey, null)!
     return () => {
       const { clsPrefix } = props
       return (
