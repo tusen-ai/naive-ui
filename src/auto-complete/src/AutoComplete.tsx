@@ -15,12 +15,19 @@ import { createTreeMate, TreeNode } from 'treemate'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
-import { useFormItem, useTheme, useConfig, ThemeProps } from '../../_mixins'
+import {
+  RenderOption,
+  RenderLabel
+} from '../../_internal/select-menu/src/interface'
+import { tmOptions } from '../../select/src/utils'
+import { useFormItem, useTheme, useConfig } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import {
   call,
   useAdjustedTo,
   MaybeArray,
-  getFirstSlotVNode
+  getFirstSlotVNode,
+  warnOnce
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
@@ -33,20 +40,14 @@ import type {
 import { autoCompleteLight } from '../styles'
 import type { AutoCompleteTheme } from '../styles'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
-import style from './styles/index.cssr'
-import {
+import type {
   AutoCompleteOptions,
   OnUpdateValue,
   OnSelect,
   OnUpdateImpl,
   AutoCompleteOption
 } from './interface'
-import { tmOptions } from '../../select/src/utils'
-import {
-  RenderOption,
-  RenderLabel
-} from '../../_internal/select-menu/src/interface'
-import { warnOnce } from '../../../es/_utils'
+import style from './styles/index.cssr'
 
 const autoCompleteProps = {
   ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
