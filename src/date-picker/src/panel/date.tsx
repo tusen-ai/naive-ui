@@ -1,11 +1,4 @@
-import {
-  h,
-  defineComponent,
-  renderSlot,
-  watchEffect,
-  Transition,
-  ref
-} from 'vue'
+import { h, defineComponent, renderSlot, watchEffect, ref } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import {
   BackwardIcon,
@@ -16,9 +9,7 @@ import {
 import { NBaseFocusDetector } from '../../../_internal'
 import { useCalendar, useCalendarProps } from './use-calendar'
 import { warnOnce } from '../../../_utils'
-import MonthPanel from './month'
-import { VBinder, VTarget, VFollower } from 'vueuc'
-import { PanelRef } from '../interface'
+import Header from './header'
 
 /**
  * Date Panel
@@ -40,8 +31,27 @@ export default defineComponent({
         }
       })
     }
-    const datePanelRef = ref<PanelRef | null>(null)
-    return { ...useCalendar(props, 'date'), datePanelRef }
+    const triggerPanelRef = ref<HTMLElement | null>(null)
+    const calendarProp = useCalendar(props, 'date')
+    function handleClickOutside (e: MouseEvent): void {
+      console.log(
+        '111',
+        calendarProp.showMonthYearPanel.value,
+        triggerPanelRef.value?.contains(e.target as Node)
+      )
+      if (
+        calendarProp.showMonthYearPanel.value &&
+        !triggerPanelRef.value?.contains(e.target as Node)
+      ) {
+        console.log('2222')
+        calendarProp.showMonthYearPanel.value = false
+      }
+    }
+    return {
+      ...calendarProp,
+      triggerPanelRef,
+      handleClickOutside
+    }
   },
   render () {
     const { mergedClsPrefix, mergedTheme, shortcuts } = this
@@ -67,50 +77,15 @@ export default defineComponent({
             >
               <BackwardIcon />
             </div>
-            <div class={`${mergedClsPrefix}-date-panel-month__month-year`}>
-              <VBinder>
-                {{
-                  default: () => [
-                    <VTarget>
-                      {{
-                        default: () =>
-                          this.locale.monthBeforeYear ? (
-                            <div>
-                              <span>{this.calendarMonth}</span>
-                              <span>{this.calendarYear}</span>
-                            </div>
-                          ) : (
-                            <div>
-                              <span onClick={this.quickSelectYear}>
-                                {this.calendarYear}
-                              </span>
-                              <span onClick={this.quickSelectMonth}>
-                                {this.calendarMonth}
-                              </span>
-                            </div>
-                          )
-                      }}
-                    </VTarget>,
-                    <VFollower show={this.showMonthYearPanel}>
-                      {{
-                        default: () => (
-                          <Transition>
-                            <MonthPanel
-                              {...this.$props}
-                              ref={'datePanelRef'}
-                              style={this.$attrs.style}
-                              actions={[]}
-                              type="year"
-                              key="year"
-                              quickMonth={true}
-                            />
-                          </Transition>
-                        )
-                      }}
-                    </VFollower>
-                  ]
-                }}
-              </VBinder>
+            <div
+              class={`${mergedClsPrefix}-date-panel-month__month-year`}
+              ref="triggerPanelRef"
+            >
+              <Header
+                {...this.$props}
+                {...this.$attrs}
+                onClickOutside={handleClickOutside}
+              />
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}

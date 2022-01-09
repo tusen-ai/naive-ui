@@ -1,4 +1,4 @@
-import { h, defineComponent, VNode, PropType } from 'vue'
+import { h, defineComponent, VNode, PropType, onMounted, nextTick } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
@@ -67,6 +67,9 @@ export default defineComponent({
         </div>
       )
     }
+    onMounted(() => {
+      void nextTick(useCalendarRef.scrollPickerColumns)
+    })
     return { ...useCalendarRef, renderItem }
   },
   render () {

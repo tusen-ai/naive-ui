@@ -40,6 +40,7 @@ import type { IsSingleDateDisabled, Shortcuts } from '../interface'
 import { datePickerInjectionKey } from '../interface'
 import type { DateItem, MonthItem, YearItem, QuarterItem } from '../utils'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
+import { MONTH_ITEM_HEIGHT, START_YEAR } from '../config'
 
 const useCalendarProps = {
   ...usePanelCommonProps,
@@ -66,8 +67,7 @@ function useCalendar (
     isSecondDisabledRef,
     localeRef,
     firstDayOfWeekRef,
-    datePickerSlots,
-    scrollPickerColumns
+    datePickerSlots
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   } = inject(datePickerInjectionKey)!
   const validation = {
@@ -370,17 +370,36 @@ function useCalendar (
   }
   const showMonthYearPanel = ref(false)
   function quickSelectYear (): void {
-    const currentYear = getYear(calendarValueRef.value)
-    console.log('year', currentYear)
     showMonthYearPanel.value = true
     void nextTick(scrollPickerColumns)
   }
   function quickSelectMonth (): void {
-    const currentMonth = getMonth(calendarValueRef.value)
-    console.log('month', currentMonth)
     showMonthYearPanel.value = true
     void nextTick(scrollPickerColumns)
   }
+
+  function scrollPickerColumns (value?: number): void {
+    const { value: mergedValue } = props
+    if (monthScrollRef.value) {
+      const monthIndex =
+        value === undefined
+          ? mergedValue === null
+            ? getMonth(Date.now())
+            : getMonth(mergedValue as number)
+          : getMonth(value)
+      monthScrollRef.value.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
+    }
+    if (yearScrollRef.value) {
+      const yearIndex =
+        (value === undefined
+          ? mergedValue === null
+            ? getYear(Date.now())
+            : getYear(mergedValue as number)
+          : getYear(value)) - START_YEAR
+      yearScrollRef.value.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
+    }
+  }
+
   return {
     dateArray: dateArrayRef,
     monthArray: monthArrayRef,
@@ -418,7 +437,8 @@ function useCalendar (
     quickSelectYear,
     quickSelectMonth,
     showMonthYearPanel,
-    handleQuickMonthClick
+    handleQuickMonthClick,
+    scrollPickerColumns
   }
 }
 
