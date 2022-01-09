@@ -43,6 +43,9 @@ import {
   AutoCompleteOption
 } from './interface'
 import { tmOptions } from '../../select/src/utils'
+import {
+  RenderOption
+} from '../../_internal/select-menu/src/interface'
 
 const autoCompleteProps = {
   ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
@@ -73,6 +76,7 @@ const autoCompleteProps = {
   clearAfterSelect: Boolean,
   getShow: Function as PropType<(inputValue: string) => boolean>,
   inputProps: Object as PropType<InputHTMLAttributes>,
+  renderOption: Function as PropType<RenderOption>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   options: {
     type: Array as PropType<AutoCompleteOptions>,
@@ -374,6 +378,7 @@ export default defineComponent({
                                   style={this.cssVars as CSSProperties}
                                   treeMate={this.treeMate}
                                   multiple={false}
+                                  renderOption={this.renderOption}
                                   size="medium"
                                   onToggle={this.handleToggle}
                                 />,

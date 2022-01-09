@@ -42,6 +42,7 @@
 - `n-form-item` 新增 `feedback` slot，关闭 [#1142](https://github.com/TuSimple/naive-ui/issues/1142)
 - `n-form-item` `require-mark-placement` 新增 `'right-hanging'` 选项，关闭 [#2094](https://github.com/TuSimple/naive-ui/issues/2094)
 - `n-cascader` 新增 `render-label` 属性，关闭 [#2048](https://github.com/TuSimple/naive-ui/issues/2048)
+- `n-auto-complete` 新增 `render-option` 属性，关闭 [#1629](https://github.com/TuSimple/naive-ui/issues/1629)
 
 ## 2.23.2 (2021-12-29)
 
