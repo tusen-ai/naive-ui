@@ -171,7 +171,7 @@ describe('n-carousel', () => {
         (wrapperRect.width - rect.width) / 2
       )
 
-      wrapper.vm.slideNext()
+      wrapper.vm.next()
       await nextTick()
     }
   })

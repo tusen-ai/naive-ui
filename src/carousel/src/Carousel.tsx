@@ -516,7 +516,7 @@ export default defineComponent({
       const { autoplay } = props
       if (!autoplayTimer && autoplay) {
         resetAutoplay()
-      } else if (!autoplay || !displayTotalViewRef.value) {
+      } else if (!autoplay || displayTotalViewRef.value < 2) {
         resetAutoplay(true)
       }
     }
