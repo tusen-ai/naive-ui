@@ -171,7 +171,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, renderLabel, tmNode: { rawNode } } = this
+    const { mergedClsPrefix, renderLabel } = this
     return (
       <div
         class={[
@@ -203,7 +203,9 @@ export default defineComponent({
           </div>
         ) : null}
         <span class={`${mergedClsPrefix}-cascader-option__label`}>
-          {renderLabel ? renderLabel(rawNode, this.checked) : this.label}
+          {renderLabel
+            ? renderLabel(this.tmNode.rawNode, this.checked)
+            : this.label}
         </span>
         <div class={`${mergedClsPrefix}-cascader-option__suffix`}>
           <div class={`${mergedClsPrefix}-cascader-option-icon-placeholder`}>
