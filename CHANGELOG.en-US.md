@@ -43,6 +43,7 @@
 - `n-form-item`'s `require-mark-placement` prop adds `'right-hanging'` option, closes [#2094](https://github.com/TuSimple/naive-ui/issues/2094).
 - `n-cascader` add `render-label` prop, closes [#2048](https://github.com/TuSimple/naive-ui/issues/2048).
 - `n-auto-complete` add `render-option` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
+- `n-auto-complete` add `render-label` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
 
 ## 2.23.2 (2021-12-29)
 

@@ -1,9 +1,14 @@
-# Add Tooltip to Option
+# Add tooltip to option
 
 Use the `render-option` property to control rendering of the entire option.
 
 ```html
-<n-auto-complete :options="options" v-model:value="value" placeholder="Email" :render-option="renderOption" />
+<n-auto-complete
+  :options="options"
+  v-model:value="value"
+  placeholder="Email"
+  :render-option="renderOption"
+/>
 ```
 
 ```js

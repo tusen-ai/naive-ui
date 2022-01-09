@@ -49,7 +49,7 @@ render-person
 | placeholder | `string` | `'Please Select'` | Placeholder. |
 | remote | `boolean` | `false` | Allows options to be fetched asynchronously. Note that if `remote` is set, `filter` & `tag` won't work on `options`. |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function for each option label. |
-| render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean } }` | `undefined` | Render function for each option. |
+| render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | Render function for each option. |
 | render-tag | `(option: SelectBaseOption, onClose: () => void) => VNodeChild` | `undefined` | Render function for each option tag. |
 | show | `boolean` | `undefined` | Whether to show/open the option menu. |
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |

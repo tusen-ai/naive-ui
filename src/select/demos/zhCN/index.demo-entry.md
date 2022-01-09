@@ -56,7 +56,7 @@ filterable-debug
 | placeholder | `string` | `'请选择'` | 提示信息 |
 | remote | `boolean` | `false` | 是否要异步获取选项。注意如果设定了，那么 `filter` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options` |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | 选项标签渲染函数 |
-| render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean } }` | `undefined` | 选项的渲染函数 |
+| render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | 选项的渲染函数 |
 | render-tag | `(option: SelectBaseOption, onClose: () => void) => VNodeChild` | `undefined` | 控制标签的渲染 |
 | show | `boolean` | `undefined` | 是否展示菜单 |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |

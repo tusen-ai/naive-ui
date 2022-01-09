@@ -8,7 +8,8 @@ import {
   PropType,
   withDirectives,
   CSSProperties,
-  InputHTMLAttributes
+  InputHTMLAttributes,
+  watchEffect
 } from 'vue'
 import { createTreeMate, TreeNode } from 'treemate'
 import { VBinder, VTarget, VFollower } from 'vueuc'
@@ -17,7 +18,6 @@ import { useIsMounted, useMergedState } from 'vooks'
 import { useFormItem, useTheme, useConfig, ThemeProps } from '../../_mixins'
 import {
   call,
-  warn,
   useAdjustedTo,
   MaybeArray,
   getFirstSlotVNode
@@ -25,7 +25,6 @@ import {
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { NInternalSelectMenu, InternalSelectMenuRef } from '../../_internal'
 import { NInput } from '../../input'
-
 import type {
   SelectBaseOption,
   SelectGroupOption,
@@ -44,8 +43,10 @@ import {
 } from './interface'
 import { tmOptions } from '../../select/src/utils'
 import {
-  RenderOption
+  RenderOption,
+  RenderLabel
 } from '../../_internal/select-menu/src/interface'
+import { warnOnce } from '../../../es/_utils'
 
 const autoCompleteProps = {
   ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
@@ -77,6 +78,7 @@ const autoCompleteProps = {
   getShow: Function as PropType<(inputValue: string) => boolean>,
   inputProps: Object as PropType<InputHTMLAttributes>,
   renderOption: Function as PropType<RenderOption>,
+  renderLabel: Function as PropType<RenderLabel>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   options: {
     type: Array as PropType<AutoCompleteOptions>,
@@ -89,19 +91,7 @@ const autoCompleteProps = {
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   // deprecated
-  onInput: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'auto-complete',
-          '`on-input` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onInput: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
 export type AutoCompleteProps = ExtractPublicPropTypes<typeof autoCompleteProps>
@@ -110,6 +100,16 @@ export default defineComponent({
   name: 'AutoComplete',
   props: autoCompleteProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onInput !== undefined) {
+          warnOnce(
+            'auto-complete',
+            '`on-input` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
     const { mergedBorderedRef, namespaceRef, mergedClsPrefixRef } =
       useConfig(props)
     const formItem = useFormItem(props)
@@ -378,6 +378,7 @@ export default defineComponent({
                                   style={this.cssVars as CSSProperties}
                                   treeMate={this.treeMate}
                                   multiple={false}
+                                  renderLabel={this.renderLabel}
                                   renderOption={this.renderOption}
                                   size="medium"
                                   onToggle={this.handleToggle}
