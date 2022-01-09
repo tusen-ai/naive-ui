@@ -218,6 +218,7 @@ export default defineComponent({
       })
     })
 
+    let isMounted = false
     const slideStylesRef = computed(() => {
       const { value: slideSizes } = slideSizesRef
       const { length } = slideSizes
@@ -239,7 +240,7 @@ export default defineComponent({
           [axis]: `${size}px`,
           [`margin-${spaceAxis}`]: `${spaceBetween}px`
         }
-        if (effect === 'fade' || effect === 'card') {
+        if (isMounted && (effect === 'fade' || effect === 'card')) {
           Object.assign(style, transitionStyleRef.value)
         }
         slideStyles.push(style)
@@ -694,6 +695,7 @@ export default defineComponent({
 
     onMounted(() => {
       watchEffect(mesureAutoplay)
+      void nextTick(() => (isMounted = true))
     })
     onBeforeUnmount(() => {
       resetDragStatus()
