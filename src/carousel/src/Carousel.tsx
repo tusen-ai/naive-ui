@@ -151,12 +151,17 @@ export default defineComponent({
       // because other effects have special process
       () => translateableRef.value && allowLoopRef.value
     )
+    // used to calculate total views
     const displaySlidesPerViewRef = computed(() =>
       userWantsControlRef.value ||
       props.centeredSlides ||
-      props.effect === 'fade'
+      props.effect !== 'slide'
         ? 1
         : props.slidesPerView
+    )
+    // used to calculate the size of each slide
+    const realSlidesPerViewRef = computed(() =>
+      userWantsControlRef.value ? 1 : props.slidesPerView
     )
     // we automatically calculate total view for special slides per view
     const autoSlideSizeRef = computed(
@@ -186,7 +191,7 @@ export default defineComponent({
       if (autoSlideSizeRef.value) {
         return slidesEls.map((slide) => calculateSize(slide))
       }
-      const { value: slidesPerView } = displaySlidesPerViewRef
+      const { value: slidesPerView } = realSlidesPerViewRef
       const { value: perViewSize } = perViewSizeRef
       const { value: axis } = sizeAxisRef
       let slideSize = perViewSize[axis]
