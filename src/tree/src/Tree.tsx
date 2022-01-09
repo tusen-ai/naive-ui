@@ -51,7 +51,8 @@ import {
   InternalTreeInst,
   RenderLabel,
   RenderPrefix,
-  RenderSuffix
+  RenderSuffix,
+  RenderSwitcherIcon
 } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
@@ -177,6 +178,7 @@ const treeProps = {
   renderLabel: Function as PropType<RenderLabel>,
   renderPrefix: Function as PropType<RenderPrefix>,
   renderSuffix: Function as PropType<RenderSuffix>,
+  renderSwitcherIcon: Function as PropType<RenderSwitcherIcon>,
   onDragenter: [Function, Array] as PropType<
   MaybeArray<(e: TreeDragInfo) => void>
   >,
@@ -1153,6 +1155,7 @@ export default defineComponent({
       renderLabelRef: toRef(props, 'renderLabel'),
       renderPrefixRef: toRef(props, 'renderPrefix'),
       renderSuffixRef: toRef(props, 'renderSuffix'),
+      renderSwitcherIconRef: toRef(props, 'renderSwitcherIcon'),
       labelFieldRef: toRef(props, 'labelField'),
       handleSwitcherClick,
       handleDragEnd,
@@ -1225,6 +1228,7 @@ export default defineComponent({
       draggable,
       disabled,
       internalFocusable,
+      checkable,
       handleKeyup,
       handleKeydown,
       handleFocusout
@@ -1233,6 +1237,7 @@ export default defineComponent({
     const tabindex = mergedFocusable ? '0' : undefined
     const treeClass = [
       `${mergedClsPrefix}-tree`,
+      checkable && `${mergedClsPrefix}-tree--checkable`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
       blockLine && `${mergedClsPrefix}-tree--block-line`
     ]

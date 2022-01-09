@@ -69,6 +69,8 @@ export interface InternalDropInfo {
   dropPosition: DropPosition
 }
 
+export type RenderSwitcherIcon = () => VNodeChild
+
 export interface TreeInjection {
   loadingKeysRef: Ref<Set<Key>>
   highlightKeySetRef: Ref<Set<Key>>
@@ -99,6 +101,7 @@ export interface TreeInjection {
   renderLabelRef: Ref<RenderLabel | undefined>
   renderPrefixRef: Ref<RenderPrefix | undefined>
   renderSuffixRef: Ref<RenderSuffix | undefined>
+  renderSwitcherIconRef: Ref<RenderSwitcherIcon | undefined>
   labelFieldRef: Ref<string>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void

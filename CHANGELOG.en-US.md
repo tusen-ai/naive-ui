@@ -42,9 +42,10 @@
 - `n-progress` adds `offset-degree` prop, closes [#2010](https://github.com/TuSimple/naive-ui/issues/2010).
 - `n-form-item` adds `feedback` slot, closes [#1142](https://github.com/TuSimple/naive-ui/issues/1142).
 - `n-form-item`'s `require-mark-placement` prop adds `'right-hanging'` option, closes [#2094](https://github.com/TuSimple/naive-ui/issues/2094).
-- `n-cascader` add `render-label` prop, closes [#2048](https://github.com/TuSimple/naive-ui/issues/2048).
-- `n-auto-complete` add `render-option` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
-- `n-auto-complete` add `render-label` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
+- `n-cascader` adds `render-label` prop, closes [#2048](https://github.com/TuSimple/naive-ui/issues/2048).
+- `n-auto-complete` adds `render-option` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
+- `n-auto-complete` adds `render-label` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
+- `n-tree` adds `render-switcher-icon` prop, closes [#1551](https://github.com/TuSimple/naive-ui/issues/1551).
 
 ## 2.23.2 (2021-12-29)
 

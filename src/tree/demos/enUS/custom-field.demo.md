@@ -1,4 +1,4 @@
-# Customize Key and Label Field
+# Customize key and label field
 
 Various data would come from backend.
 
