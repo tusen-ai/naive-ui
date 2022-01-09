@@ -15,6 +15,7 @@
 - 修复 `n-input-number` 输入以 0 结尾的整数不更新，关闭 [#2115](https://github.com/TuSimple/naive-ui/issues/2115)
 - 修复 `n-back-top` 允许 `listen-to` 为 `document`
 - 修复 `n-data-table` 在 loading 时可以点击内容，关闭 [#2134](https://github.com/TuSimple/naive-ui/issues/2134)
+- 修复 `n-checkbox` 在 safari 显示 indeterminate 图标
 
 ### Feats
 

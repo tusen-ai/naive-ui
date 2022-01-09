@@ -15,6 +15,7 @@
 - Fix `n-input-number` input integer end with 0 cannot update, closes [#2115](https://github.com/TuSimple/naive-ui/issues/2115).
 - Fix `n-back-top` allow document to be passed to `listen-to` prop.
 - Fix `n-data-table`'s content can be clicked when loading, closes [#2134](https://github.com/TuSimple/naive-ui/issues/2134).
+- Fix `n-checkbox` doesn't show indeterminate icon in safari.
 
 ### Feats
 
