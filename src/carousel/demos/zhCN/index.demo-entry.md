@@ -43,7 +43,7 @@ custom-arrow-and-dots
 | loop | `boolean` | `true` | 是否循环播放 | NEXT_VERSION |
 | trigger | `'click' \| 'hover'` | `'click'` | 触发切换的方式 |
 | effect | `'slide' \| 'fade' \| 'card' \| 'custom'` | `'slide'` | 轮播图切换时的过渡效果 | NEXT_VERSION |
-| transition-style | `{transitionDuration?: string, transitionTimingFunction?: string}` | `{transitionDuration: '300ms'}` | 过渡效果的样式 | NEXT_VERSION |
+| transition-style | `{ transitionDuration?: string, transitionTimingFunction?: string }` | `{ transitionDuration: '300ms' }` | 过渡效果的样式 | NEXT_VERSION |
 | transition-props | `TransitionProps` | `undefined` | 自定义过渡效果属性，[参考](https://v3.cn.vuejs.org/api/built-in-components.html#transition) | NEXT_VERSION |
 | draggable | `boolean` | `false` | 是否通过鼠标拖拽切换轮播图 | NEXT_VERSION |
 | touchable | `boolean` | `true` | 是否通过触摸拖拽切换轮播图 | NEXT_VERSION |
@@ -56,14 +56,14 @@ custom-arrow-and-dots
 | 名称    | 参数 | 说明 | 版本 |
 | ------- | ---- | ---- | --- |
 | default | `()` | 轮播的内容 |
-| arrow | `({total: number, currentIndex: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: () => void})` | 箭头 | NEXT_VERSION |
-| dots | `({total: number, currentIndex: number, slideTo: (index: number) => void})` | 指示点 | NEXT_VERSION |
+| arrow | `(info: { total: number, currentIndex: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: () => void })` | 箭头 | NEXT_VERSION |
+| dots | `(info: { total: number, currentIndex: number, slideTo: (index: number) => void })` | 指示点 | NEXT_VERSION |
 
 ### Carousel Methods
 
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| slideTo | `(index: number) => void` | 滑动至某一页 | NEXT_VERSION |
-| slidePrev | `() => void` | 滑动至前一页 | NEXT_VERSION |
-| slideNext | `() => void` | 滑动至后一页 | NEXT_VERSION |
+| to | `(index: number) => void` | 滑动至某一页 | NEXT_VERSION |
+| prev | `() => void` | 滑动至前一页 | NEXT_VERSION |
+| next | `() => void` | 滑动至后一页 | NEXT_VERSION |
 | getCurrentIndex | `() => number` | 获取当前页 | NEXT_VERSION |

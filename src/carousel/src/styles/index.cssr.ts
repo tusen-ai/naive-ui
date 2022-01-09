@@ -158,15 +158,39 @@ export default cB('carousel', `
     cE('slides', `
       flex-direction: column;
       touch-action: pan-x;
-    `)
+    `),
+    cM('fade', [
+      cE('slide', `
+        top: 50%;
+        left: unset;
+        transform: translateY(-50%);
+      `)
+    ]),
+    cM('card', [
+      cE('slide', `
+        top: 50%;
+        left: unset;
+        transform: translateY(-50%) translateZ(-400px);
+      `, [
+        cM('current', `
+          transform: translateY(-50%) translateZ(0);
+        `),
+        cM('prev', `
+          transform: translateY(-100%) translateZ(-200px);
+        `),
+        cM('next', `
+          transform: translateY(0%) translateZ(-200px);
+        `)
+      ])
+    ])
   ]),
   cM('usercontrol', [
-    cE('slides > div', `
+    cE('slide', `
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-  `)
+    `)
   ]),
   cM('left', [
     cE('dots', `
@@ -256,9 +280,43 @@ export default cB('carousel', `
       margin: 0 6px;
     `)
   ]),
-  cM('3d', [
+  cM('fade', [
+    cE('slide', `
+      position: absolute;
+      left: 50%;
+      opacity: 0;
+      transform: translateX(-50%);
+      transition-property: opacity;
+    `, [
+      cM('current', `
+        opacity: 1;
+      `)
+    ])
+  ]),
+  cM('card', [
     cE('slides', `
       perspective: 1200px;
-    `)
+    `),
+    cE('slide', `
+      position: absolute;
+      left: 50%;
+      opacity: 0;
+      transform: translateX(-50%) translateZ(-400px);
+      transition-property: opacity, transform;
+    `, [
+      cM('current', `
+        opacity: 1;
+        transform: translateX(-50%) translateZ(0);
+        z-index: 1;
+      `),
+      cM('prev', `
+        opacity: 0.4;
+        transform: translateX(-100%) translateZ(-200px);
+      `),
+      cM('next', `
+        opacity: 0.4;
+        transform: translateX(0%) translateZ(-200px);
+      `)
+    ])
   ])
 ])

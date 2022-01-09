@@ -1,4 +1,4 @@
-import { h, defineComponent, inject } from 'vue'
+import { h, defineComponent, inject, ref, onBeforeUpdate } from 'vue'
 import { indexMap } from 'seemly'
 import { useConfig } from '../../_mixins'
 import { carouselMethodsInjectionKey } from './interface'
@@ -32,6 +32,7 @@ export default defineComponent({
   props: carouselDotsProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
+    const dotElsRef = ref<HTMLElement[]>([])
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NCarousel = inject(carouselMethodsInjectionKey, null)!
     function handleKeydown (e: KeyboardEvent, current: number): void {
@@ -87,20 +88,30 @@ export default defineComponent({
       if (vertical ? isVerticalNext : isHorizontalNext) {
         e.preventDefault()
         NCarousel.slideNext()
+        focusDot(NCarousel.getCurrentIndex())
       } else if (vertical ? isVerticalPrev : isHorizontalPrev) {
         e.preventDefault()
         NCarousel.slidePrev()
+        focusDot(NCarousel.getCurrentIndex())
       }
     }
+    function focusDot (index: number = props.currentIndex): void {
+      const { value: dotEls } = dotElsRef
+      if (index >= 0 && index < dotEls.length) {
+        dotEls[index].focus()
+      }
+    }
+    onBeforeUpdate(() => (dotElsRef.value.length = 0))
     return {
       mergedClsPrefix: mergedClsPrefixRef,
+      dotEls: dotElsRef,
       handleKeydown,
       handleMouseenter,
       handleClick
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, dotEls } = this
     return (
       <div
         class={[
@@ -114,6 +125,7 @@ export default defineComponent({
           return (
             <div
               aria-selected={selected}
+              ref={(el) => dotEls.push(el as HTMLElement)}
               role='button'
               tabindex='0'
               class={[

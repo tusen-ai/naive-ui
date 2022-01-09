@@ -15,6 +15,7 @@ If you want to customize the transition effect, you can use `transition-props` a
   :centered-slides="card"
   :slides-per-view="card ? 'auto' : 1"
   draggable
+  :key="effect"
   style="height: 240px;"
 >
   <n-carousel-item :style="{width: card ? '60%' : '100%'}">

@@ -19,6 +19,7 @@ export interface CarouselMethodsInjection {
   isActive: (slide: number | HTMLElement) => boolean
   isPrevDisabled: () => boolean
   isNextDisabled: () => boolean
+  getCurrentIndex: () => number
   getSlideIndex: (slide: number | HTMLElement) => number
   getSlideStyle: (slide: HTMLElement) => any
   addSlide: (slide?: HTMLElement) => void
@@ -31,7 +32,7 @@ export const carouselMethodsInjectionKey: InjectionKey<CarouselMethodsInjection>
 
 export interface CarouselInst {
   getCurrentIndex: () => number
-  slideTo: (index: number) => void
-  slidePrev: () => void
-  slideNext: () => void
+  to: (index: number) => void
+  prev: () => void
+  next: () => void
 }

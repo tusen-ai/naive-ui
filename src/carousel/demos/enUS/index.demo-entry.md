@@ -43,7 +43,7 @@ custom-arrow-and-dots
 | loop | `boolean` | `true` | Whether to loop. | NEXT_VERSION |
 | trigger | `'click' \| 'hover'` | `'click'` | The method of manual switching. |
 | effect | `'slide' \| 'fade' \| 'card' \| 'custom'` | `'slide'` | Transition effect when switching between carousel. | NEXT_VERSION |
-| transition-style | `{transitionDuration?: string, transitionTimingFunction?: string}` | `{transitionDuration: '300ms'}` | The style of the transition effect. | NEXT_VERSION |
+| transition-style | `{ transitionDuration?: string, transitionTimingFunction?: string }` | `{ transitionDuration: '300ms' }` | The style of the transition effect. | NEXT_VERSION |
 | transition-props | `TransitionProps` | `undefined` | Custom transition effect properties, [reference](https://v3.vuejs.org/api/built-in-components.html#transition). | NEXT_VERSION |
 | draggable | `boolean` | `false` | Whether to switch the carousel by dragging the mouse. | NEXT_VERSION |
 | touchable | `boolean` | `true` | Whether to switch the carousel by touch. | NEXT_VERSION |
@@ -56,14 +56,14 @@ custom-arrow-and-dots
 | Name | Parameters | Description | Version |
 | ------- | ---- | ---------- | --- |
 | default | `()` | Carousel content. |
-| arrow | `({total: number, currentIndex: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: () => void})` | Arrow. | NEXT_VERSION |
-| dots | `({total: number, currentIndex: number, slideTo: (index: number) => void})` | Dots. | NEXT_VERSION |
+| arrow | `(info: { total: number, currentIndex: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: () => void })` | Arrow. | NEXT_VERSION |
+| dots | `(info: { total: number, currentIndex: number, slideTo: (index: number) => void })` | Dots. | NEXT_VERSION |
 
 ### Carousel Methods
 
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
-| slideTo | `(index: number) => void` | Slide to index. | NEXT_VERSION |
-| slidePrev | `() => void` | Slide to previous page. | NEXT_VERSION |
-| slideNext | `() => void` | Slide to next page. | NEXT_VERSION |
+| to | `(index: number) => void` | Slide to index. | NEXT_VERSION |
+| prev | `() => void` | Slide to previous page. | NEXT_VERSION |
+| next | `() => void` | Slide to next page. | NEXT_VERSION |
 | getCurrentIndex | `() => number` | Get current index. | NEXT_VERSION |

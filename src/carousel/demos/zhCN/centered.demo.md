@@ -10,7 +10,7 @@
   centered-slides
   draggable
 >
-  <n-carousel-item style="width: 10%">
+  <n-carousel-item style="width: 30%">
     <img
       class="carousel-img"
       src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"

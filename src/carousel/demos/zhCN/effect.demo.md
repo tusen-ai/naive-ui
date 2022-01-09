@@ -15,6 +15,7 @@
   :centered-slides="card"
   :slides-per-view="card ? 'auto' : 1"
   draggable
+  :key="effect"
   style="height: 240px;"
 >
   <n-carousel-item :style="{width: card ? '60%' : '100%'}">

@@ -230,10 +230,7 @@ export default defineComponent({
         }))
       }
       const { effect, spaceBetween } = props
-      const { value: slideTranlates } = slideTranlatesRef
-      const { value: realIndex } = realIndexRef
       const { value: vertical } = verticalRef
-      const directionAxis = vertical ? 'top' : 'left'
       const spaceAxis = vertical ? 'bottom' : 'right'
       const slideStyles: CSSProperties[] = []
       for (let i = 0; i < length; i++) {
@@ -242,42 +239,8 @@ export default defineComponent({
           [axis]: `${size}px`,
           [`margin-${spaceAxis}`]: `${spaceBetween}px`
         }
-        if (effect === 'fade') {
-          const offset = slideTranlates[i]
-          Object.assign(style, transitionStyleRef.value, {
-            opacity: i === realIndex ? 1 : 0,
-            [directionAxis]: `${-offset}px`
-          })
-        } else if (effect === 'card') {
-          const offset = slideTranlates[i]
-          const isActive = i === realIndex
-          let opacity = isActive ? 1 : 0
-          let translate = 0
-          let translateZ = isActive ? 0 : -400
-          if (i < realIndex) {
-            translate = -size * 0.5
-          } else if (i > realIndex) {
-            translate = size * 0.5
-          }
-          if (i === getRealPrevIndex(realIndex)) {
-            opacity = 0.4
-            translate = -size * 0.5
-            translateZ = -200
-          } else if (i === getRealNextIndex(realIndex)) {
-            opacity = 0.4
-            translate = size * 0.5
-            translateZ = -200
-          }
-          Object.assign(style, transitionStyleRef.value, {
-            opacity,
-            [directionAxis]: `${-offset}px`,
-            transform: `${
-              vertical
-                ? `translateY(${translate}px)`
-                : `translateX(${translate}px)`
-            } translateZ(${translateZ}px)`,
-            zIndex: isActive ? 1 : 0
-          })
+        if (effect === 'fade' || effect === 'card') {
+          Object.assign(style, transitionStyleRef.value)
         }
         slideStyles.push(style)
       }
@@ -528,6 +491,7 @@ export default defineComponent({
       isActive: isRealActive,
       isPrevDisabled,
       isNextDisabled,
+      getCurrentIndex: () => displayIndexRef.value,
       getSlideIndex,
       getSlideStyle,
       addSlide,
@@ -795,9 +759,9 @@ export default defineComponent({
     }
     const caroulseExposedMethod: CarouselInst = {
       getCurrentIndex: () => displayIndexRef.value,
-      slideTo,
-      slidePrev,
-      slideNext
+      to: slideTo,
+      prev: slidePrev,
+      next: slideNext
     }
     const themeRef = useTheme(
       'Carousel',
@@ -904,11 +868,8 @@ export default defineComponent({
           `${mergedClsPrefix}-carousel`,
           `${mergedClsPrefix}-carousel--${dotPlacement}`,
           `${mergedClsPrefix}-carousel--${this.direction}`,
-          {
-            [`${mergedClsPrefix}-carousel--usercontrol`]: userWantsControl,
-            [`${mergedClsPrefix}-carousel--3d`]:
-              !userWantsControl && this.effect === 'card'
-          }
+          `${mergedClsPrefix}-carousel--${this.effect}`,
+          userWantsControl && `${mergedClsPrefix}-carousel--usercontrol`
         ]}
         style={this.cssVars as CSSProperties}
       >
