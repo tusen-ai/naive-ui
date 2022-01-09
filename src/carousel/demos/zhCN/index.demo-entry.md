@@ -30,7 +30,7 @@ custom-arrow-and-dots
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | default-index | `number` | `0` | 默认显示页 | NEXT_VERSION |
-| current-index | `number` | `0` | 当前显示页 | NEXT_VERSION |
+| current-index | `number` | `undefined` | 当前显示页 | NEXT_VERSION |
 | show-arrow | `boolean` | `false` | 是否显示箭头按钮 | NEXT_VERSION |
 | dot-type | `'dot' \| 'line' \| 'never'` | `'dot'` | 轮播指示点样式 | NEXT_VERSION |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | 轮播指示点位置 | NEXT_VERSION |
@@ -42,10 +42,9 @@ custom-arrow-and-dots
 | interval | `number` | `5000` | 自动播放的间隔（ms） |
 | loop | `boolean` | `true` | 是否循环播放 | NEXT_VERSION |
 | trigger | `'click' \| 'hover'` | `'click'` | 触发切换的方式 |
-| effect | `'slide' \| 'fade' \| 'card'` | `'slide'` | 轮播图切换时的过渡效果 | NEXT_VERSION |
-| transition-duration | `number` | `300` | 过渡效果的持续时间（ms） | NEXT_VERSION |
-| transition-timing-function | `string` | `undefined` | 过渡效果的速率函数 | NEXT_VERSION |
-| transition-name | `string` | `undefined` | 自定义过渡效果 | NEXT_VERSION |
+| effect | `'slide' \| 'fade' \| 'card' \| 'custom'` | `'slide'` | 轮播图切换时的过渡效果 | NEXT_VERSION |
+| transition-style | `{transitionDuration?: string, transitionTimingFunction?: string}` | `{transitionDuration: '300ms'}` | 过渡效果的样式 | NEXT_VERSION |
+| transition-props | `TransitionProps` | `undefined` | 自定义过渡效果属性，[参考](https://v3.cn.vuejs.org/api/built-in-components.html#transition) | NEXT_VERSION |
 | draggable | `boolean` | `false` | 是否通过鼠标拖拽切换轮播图 | NEXT_VERSION |
 | touchable | `boolean` | `true` | 是否通过触摸拖拽切换轮播图 | NEXT_VERSION |
 | mousewheel | `boolean` | `false` | 是否通过鼠标滚轮切换轮播图 | NEXT_VERSION |

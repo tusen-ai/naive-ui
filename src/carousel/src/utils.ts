@@ -32,6 +32,18 @@ export function clampValue (value: number, min: number, max: number): number {
   return value < min ? min : value > max ? max : value
 }
 
+export function resolveSpeed (value?: string | number): number {
+  if (value === undefined) return 0
+  if (typeof value === 'number') return value
+  const timeRE = /^((\d+)?\.?\d+?)(ms|s)?$/
+  const match = value.match(timeRE)
+  if (match) {
+    const [, number, , unit = 'ms'] = match
+    return Number(number) * (unit === 'ms' ? 1 : 1000)
+  }
+  return 0
+}
+
 export function getDisplayIndex (
   current: number,
   length: number,
@@ -46,7 +58,7 @@ export function getDisplayIndex (
         : current - 1
 }
 
-export function getRealityIndex (
+export function getRealIndex (
   current: number,
   duplicatedable?: boolean
 ): number {

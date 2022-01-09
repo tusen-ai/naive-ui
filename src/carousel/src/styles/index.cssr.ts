@@ -6,8 +6,8 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-dot-color-focus
 // --n-dot-color-active
 // --n-dot-size
-// --n-dot-line-size
-// --n-dot-line-size-active
+// --n-dot-line-width
+// --n-dot-line-width-active
 // --n-arrow-color
 export default cB('carousel', `
   position: relative;
@@ -63,7 +63,7 @@ export default cB('carousel', `
     ]),
     cM('line', [
       cE('dot', `
-        width: var(--n-dot-line-size);
+        width: var(--n-dot-line-width);
         height: 3px;
         background-color: var(--n-dot-color);
         cursor: pointer;
@@ -77,7 +77,7 @@ export default cB('carousel', `
           background-color: var(--n-dot-color-focus);
         `),
         cM('active', `
-          width: var(--n-dot-line-size-active);
+          width: var(--n-dot-line-width-active);
           background-color: var(--n-dot-color-active);
         `)
       ])
@@ -178,7 +178,7 @@ export default cB('carousel', `
       cM('line', [
         cE('dot', `
           width: 3px;
-          height: var(--n-dot-line-size);
+          height: var(--n-dot-line-width);
           margin: 3px 0;
           transition:
             height .3s var(--n-bezier),
@@ -187,7 +187,7 @@ export default cB('carousel', `
           outline: none;
         `, [
           cM('active', `
-            height: var(--n-dot-line-size-active);
+            height: var(--n-dot-line-width-active);
           `)
         ])
       ])
@@ -206,7 +206,7 @@ export default cB('carousel', `
       cM('line', [
         cE('dot', `
           width: 3px;
-          height: var(--n-dot-line-size);
+          height: var(--n-dot-line-width);
           margin: 3px 0;
           transition:
             height .3s var(--n-bezier),
@@ -215,7 +215,7 @@ export default cB('carousel', `
           outline: none;
         `, [
           cM('active', `
-            height: var(--n-dot-line-size-active);
+            height: var(--n-dot-line-width-active);
           `)
         ])
       ])

@@ -1,7 +1,14 @@
 # Transition name
 
+If you want to customize the transition effect, you can use `transition-props` and set `effect` to `custom`, specific configuration [reference](https://v3.vuejs.org/api/built-in-components.html#transition).
+
 ```html
-<n-carousel transition-name="creative" show-arrow style="width: 100%;height: 240px;">
+<n-carousel
+  effect="custom"
+  :transition-props="{ name: 'creative' }"
+  show-arrow
+  style="width: 100%;height: 240px;"
+>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"

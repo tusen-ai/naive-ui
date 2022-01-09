@@ -1,6 +1,8 @@
 # 过渡效果
 
-我们内置了几种常用的过渡效果，如果你想要自定义过渡效果，可以使用 `transition-name`。
+我们内置了几种常用的过渡效果。
+
+如果你想要自定义过渡效果，可以使用 `transition-props`，并把 `effect` 设置为 `custom`。
 
 ```html
 <n-radio-group v-model:value="effect" style="margin-bottom: 10px;">

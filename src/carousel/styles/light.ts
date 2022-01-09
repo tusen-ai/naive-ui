@@ -8,8 +8,8 @@ export const self = (vars: ThemeCommonVars) => {
     dotColor: 'rgba(255, 255, 255, .3)',
     dotColorActive: 'rgba(255, 255, 255, 1)',
     dotColorFocus: 'rgba(255, 255, 255, .6)',
-    dotLineSize: '16px',
-    dotLineSizeActive: '24px',
+    dotLineWidth: '16px',
+    dotLineWidthActive: '24px',
     arrowColor: 'rgba(255, 255, 255, .6)'
   }
 }

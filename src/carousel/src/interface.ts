@@ -1,5 +1,13 @@
 import type { InjectionKey } from 'vue'
 
+export const tuple = <T extends string[]>(...args: T): T => args
+
+export type ElementOf<T> = T extends Array<infer E>
+  ? E
+  : T extends ReadonlyArray<infer F>
+    ? F
+    : never
+
 export interface CarouselMethodsInjection {
   slideTo: (index: number) => void
   slidePrev: () => void

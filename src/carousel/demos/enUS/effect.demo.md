@@ -1,6 +1,8 @@
 # Effect
 
-We have built-in several commonly used effects, if you want to customize the effects, you can use `transition-name`.
+We have built-in several commonly used effects.
+
+If you want to customize the transition effect, you can use `transition-props` and set `effect` to `custom`.
 
 ```html
 <n-radio-group v-model:value="effect" style="margin-bottom: 10px;">

@@ -30,7 +30,7 @@ custom-arrow-and-dots
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | default-index | `number` | `0` | default index. | NEXT_VERSION |
-| current-index | `number` | `0` | current index. | NEXT_VERSION |
+| current-index | `number` | `undefined` | current index. | NEXT_VERSION |
 | show-arrow | `boolean` | `false` | Whether to show arrow buttons. | NEXT_VERSION |
 | dot-type | `'dot' \| 'line' \| 'never'` | `'dot'` | Dot style. | NEXT_VERSION |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Dot placement in the panel. | NEXT_VERSION |
@@ -42,10 +42,9 @@ custom-arrow-and-dots
 | interval | `number` | `5000` | Auto play interval (ms). |
 | loop | `boolean` | `true` | Whether to loop. | NEXT_VERSION |
 | trigger | `'click' \| 'hover'` | `'click'` | The method of manual switching. |
-| effect | `'slide' \| 'fade' \| 'card'` | `'slide'` | Transition effect when switching between carousel. | NEXT_VERSION |
-| transition-duration | `number` | `300` | Duration of transition effect (ms). | NEXT_VERSION |
-| transition-timing-function | `string` | `undefined` | Transition timing function. | NEXT_VERSION |
-| transition-name | `string` | `undefined` | Custom transition name. | NEXT_VERSION |
+| effect | `'slide' \| 'fade' \| 'card' \| 'custom'` | `'slide'` | Transition effect when switching between carousel. | NEXT_VERSION |
+| transition-style | `{transitionDuration?: string, transitionTimingFunction?: string}` | `{transitionDuration: '300ms'}` | The style of the transition effect. | NEXT_VERSION |
+| transition-props | `TransitionProps` | `undefined` | Custom transition effect properties, [reference](https://v3.vuejs.org/api/built-in-components.html#transition). | NEXT_VERSION |
 | draggable | `boolean` | `false` | Whether to switch the carousel by dragging the mouse. | NEXT_VERSION |
 | touchable | `boolean` | `true` | Whether to switch the carousel by touch. | NEXT_VERSION |
 | mousewheel | `boolean` | `false` | Whether to switch the carousel through the mouse wheel. | NEXT_VERSION |

@@ -78,6 +78,7 @@ export default defineComponent({
   background-color: rgba(255, 255, 255, 0.1);
   border-width: 0;
   border-radius: 8px;
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
@@ -106,7 +107,7 @@ export default defineComponent({
   margin: 0 3px;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.4);
-  transition: width 0.3s;
+  transition: width 0.3s, background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
