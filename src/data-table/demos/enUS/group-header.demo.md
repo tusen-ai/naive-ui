@@ -1,4 +1,4 @@
-# Grouped Header
+# Grouped header
 
 ```html
 <n-data-table

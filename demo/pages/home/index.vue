@@ -5,13 +5,12 @@
     :style="isMobile ? undefined : 'top: var(--header-height);'"
   >
     <div class="banner" style="overflow: hidden">
-      <right-image class="right-image" v-if="!(isMobile || isTablet)" />
+      <right-image v-if="!(isMobile || isTablet)" class="right-image" />
       <n-h1 :style="titleStyle" class="naive-title">
         <span
           @mouseenter="handleTitleMouseEnter"
           @mouseleave="handleTitleMouseLeave"
-          >Na{{ hover ? 'ï' : 'i' }}ve UI</span
-        >
+        >Na{{ hover ? 'ï' : 'i' }}ve UI</span>
       </n-h1>
       <n-p style="font-size: 16px; margin-top: 0; margin-bottom: 0">
         {{ t('intro1') }}
@@ -55,15 +54,15 @@
   </n-layout>
 </template>
 
-<script>
-import { computed } from 'vue'
+<script lang="ts">
+import { defineComponent, computed } from 'vue'
 import LandingFooter from './Footer.vue'
 import leftImage from './Left.vue'
 import rightImage from './Right.vue'
 import { i18n, useIsMobile, useIsTablet } from '../../utils/composables'
 import { useThemeName } from '../../store'
 
-export default {
+export default defineComponent({
   components: {
     LandingFooter,
     leftImage,
@@ -128,7 +127,7 @@ export default {
       this.theme = this.themeOptions[this.theme].next
     }
   }
-}
+})
 </script>
 
 <style scoped>

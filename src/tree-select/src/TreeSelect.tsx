@@ -11,7 +11,9 @@ import {
   provide,
   watch,
   nextTick,
-  watchEffect
+  watchEffect,
+  HTMLAttributes,
+  renderSlot
 } from 'vue'
 import {
   FollowerPlacement,
@@ -23,6 +25,7 @@ import {
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
 import { createTreeMate, CheckStrategy } from 'treemate'
+import { happensIn } from 'seemly'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
@@ -111,6 +114,7 @@ const props = {
   string | number | Array<string | number> | null
   >,
   to: useAdjustedTo.propTo,
+  menuProps: Object as PropType<HTMLAttributes>,
   virtualScroll: {
     type: Boolean,
     default: true
@@ -565,7 +569,7 @@ export default defineComponent({
     function handleMenuMousedown (e: MouseEvent): void {
       // If there's an action slot later, we need to check if mousedown happens
       // in action panel
-      e.preventDefault()
+      if (!happensIn(e, 'action')) e.preventDefault()
     }
     provide(treeSelectInjectionKey, {
       pendingNodeKeyRef
@@ -651,21 +655,32 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { menuBoxShadow, menuBorderRadius, menuColor, menuHeight }
+          self: {
+            menuBoxShadow,
+            menuBorderRadius,
+            menuColor,
+            menuHeight,
+            actionPadding,
+            actionDividerColor,
+            actionTextColor
+          }
         } = themeRef.value
         return {
-          '--menu-box-shadow': menuBoxShadow,
-          '--menu-border-radius': menuBorderRadius,
-          '--menu-color': menuColor,
-          '--menu-height': menuHeight,
-          '--bezier': cubicBezierEaseInOut
+          '--n-menu-box-shadow': menuBoxShadow,
+          '--n-menu-border-radius': menuBorderRadius,
+          '--n-menu-color': menuColor,
+          '--n-menu-height': menuHeight,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-action-padding': actionPadding,
+          '--n-action-text-color': actionTextColor,
+          '--n-action-divider-color': actionDividerColor
         }
       }),
       mergedTheme: themeRef
     }
   },
   render () {
-    const { mergedTheme, mergedClsPrefix } = this
+    const { mergedTheme, mergedClsPrefix, $slots } = this
     return (
       <div class={`${mergedClsPrefix}-tree-select`}>
         <VBinder>
@@ -731,13 +746,21 @@ export default defineComponent({
                             mergedClsPrefix,
                             filteredTreeInfo,
                             checkable,
-                            multiple
+                            multiple,
+                            menuProps
                           } = this
                           return withDirectives(
                             <div
-                              class={`${mergedClsPrefix}-tree-select-menu`}
+                              {...menuProps}
+                              class={[
+                                `${mergedClsPrefix}-tree-select-menu`,
+                                menuProps?.class
+                              ]}
                               ref="menuElRef"
-                              style={this.cssVars as CSSProperties}
+                              style={[
+                                menuProps?.style || '',
+                                this.cssVars as CSSProperties
+                              ]}
                               tabindex={0}
                               onMousedown={this.handleMenuMousedown}
                               onKeyup={this.handleKeyup}
@@ -795,12 +818,29 @@ export default defineComponent({
                                 <div
                                   class={`${mergedClsPrefix}-tree-select-menu__empty`}
                                 >
-                                  <NEmpty
-                                    theme={mergedTheme.peers.Empty}
-                                    themeOverrides={
-                                      mergedTheme.peerOverrides.Empty
-                                    }
-                                  />
+                                  {renderSlot(
+                                    $slots,
+                                    'empty',
+                                    undefined,
+                                    () => [
+                                      <NEmpty
+                                        theme={mergedTheme.peers.Empty}
+                                        themeOverrides={
+                                          mergedTheme.peerOverrides.Empty
+                                        }
+                                      />
+                                    ]
+                                  )}
+                                </div>
+                              )}
+                              {$slots.action && (
+                                <div
+                                  class={`${mergedClsPrefix}-tree-select-menu__action`}
+                                  data-action
+                                >
+                                  {{
+                                    default: $slots.action
+                                  }}
                                 </div>
                               )}
                               <NBaseFocusDetector onFocus={this.handleTabOut} />

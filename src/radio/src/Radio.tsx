@@ -50,21 +50,21 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--box-shadow': boxShadow,
-          '--box-shadow-active': boxShadowActive,
-          '--box-shadow-disabled': boxShadowDisabled,
-          '--box-shadow-focus': boxShadowFocus,
-          '--box-shadow-hover': boxShadowHover,
-          '--color': color,
-          '--color-disabled': colorDisabled,
-          '--dot-color-active': dotColorActive,
-          '--dot-color-disabled': dotColorDisabled,
-          '--font-size': fontSize,
-          '--radio-size': radioSize,
-          '--text-color': textColor,
-          '--text-color-disabled': textColorDisabled,
-          '--label-padding': labelPadding
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-box-shadow': boxShadow,
+          '--n-box-shadow-active': boxShadowActive,
+          '--n-box-shadow-disabled': boxShadowDisabled,
+          '--n-box-shadow-focus': boxShadowFocus,
+          '--n-box-shadow-hover': boxShadowHover,
+          '--n-color': color,
+          '--n-color-disabled': colorDisabled,
+          '--n-dot-color-active': dotColorActive,
+          '--n-dot-color-disabled': dotColorDisabled,
+          '--n-font-size': fontSize,
+          '--n-radio-size': radioSize,
+          '--n-text-color': textColor,
+          '--n-text-color-disabled': textColorDisabled,
+          '--n-label-padding': labelPadding
         }
       })
     })
@@ -72,7 +72,7 @@ export default defineComponent({
   render () {
     const { $slots, mergedClsPrefix } = this
     return (
-      <div
+      <label
         class={[
           `${mergedClsPrefix}-radio`,
           {
@@ -82,14 +82,11 @@ export default defineComponent({
           }
         ]}
         style={this.cssVars as CSSProperties}
-        onKeyup={this.handleKeyUp}
-        onClick={this.handleClick}
-        onMousedown={this.handleMouseDown}
       >
         <input
           ref="inputRef"
           type="radio"
-          class={`${mergedClsPrefix}-radio__radio-input`}
+          class={`${mergedClsPrefix}-radio-input`}
           value={this.value}
           name={this.mergedName}
           checked={this.renderSafeChecked}
@@ -109,7 +106,7 @@ export default defineComponent({
             {$slots.default()}
           </div>
         ) : null}
-      </div>
+      </label>
     )
   }
 })

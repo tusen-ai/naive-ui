@@ -76,6 +76,7 @@ export default defineComponent({
   render () {
     const {
       internalAddable,
+      internalLeftPadded,
       clsPrefix,
       name,
       disabled,
@@ -86,6 +87,7 @@ export default defineComponent({
       style,
       $slots: { default: defaultSlot }
     } = this
+    console.log('render tab', name, internalLeftPadded)
     const mergedTab = label ?? tab
     return (
       <div class={`${clsPrefix}-tabs-tab-wrapper`}>

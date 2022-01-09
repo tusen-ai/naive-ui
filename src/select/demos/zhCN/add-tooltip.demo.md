@@ -7,7 +7,7 @@
 ```
 
 ```js
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { NTooltip } from 'naive-ui'
 
 export default defineComponent({
@@ -18,7 +18,7 @@ export default defineComponent({
           trigger: () => node,
           default: () => 'Rubber Soul -' + option.label
         }),
-      options: [
+      options: ref([
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
           value: 'song0',
@@ -74,7 +74,7 @@ export default defineComponent({
           label: 'Wait',
           value: 'song12'
         }
-      ]
+      ])
     }
   }
 })

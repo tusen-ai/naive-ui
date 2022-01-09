@@ -283,8 +283,8 @@ export default defineComponent({
           self: { menuBoxShadow }
         } = themeRef.value
         return {
-          '--menu-box-shadow': menuBoxShadow,
-          '--bezier': cubicBezierEaseInOut
+          '--n-menu-box-shadow': menuBoxShadow,
+          '--n-bezier': cubicBezierEaseInOut
         }
       }),
       mergedBordered: mergedBorderedRef,
@@ -334,7 +334,12 @@ export default defineComponent({
                         onFocus={this.handleFocus}
                         onUpdateValue={this.handleInput}
                         onBlur={this.handleBlur}
-                      />
+                      >
+                        {{
+                          suffix: this.$slots.suffix,
+                          prefix: this.$slots.prefix
+                        }}
+                      </NInput>
                     )
                   }
                 }}

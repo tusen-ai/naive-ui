@@ -39,7 +39,7 @@ export default defineComponent({
     const numbersRef = computed(() => {
       if (typeof props.value === 'string') return []
       if (props.value < 1) return [0]
-      const numbers = []
+      const numbers: number[] = []
       let value = props.value
       if (props.max !== undefined) {
         value = Math.min(props.max, value)

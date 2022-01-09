@@ -11,7 +11,8 @@ import {
   inject,
   watch,
   Transition,
-  renderSlot
+  renderSlot,
+  onMounted
 } from 'vue'
 import Schema, {
   ValidateError,
@@ -34,7 +35,7 @@ import { formItemMisc, formItemSize, formItemRule } from './utils'
 import Feedbacks from './Feedbacks'
 import style from './styles/form-item.cssr'
 import {
-  ApplyRule,
+  ShouldRuleBeApplied,
   FormItemRule,
   LabelAlign,
   LabelPlacement,
@@ -64,7 +65,7 @@ export const formItemProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  requireMarkPlacement: String as PropType<'left' | 'right'>,
+  requireMarkPlacement: String as PropType<'left' | 'right' | 'right-hanging'>,
   showFeedback: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -163,7 +164,9 @@ export default defineComponent({
       if (feedback !== undefined && feedback !== null) return true
       return explainsRef.value.length
     })
-    const mergedDisabledRef = NForm ? toRef(NForm, 'disabled') : ref(false)
+    const mergedDisabledRef = NForm
+      ? toRef(NForm.props, 'disabled')
+      : ref(false)
     const themeRef = useTheme(
       'Form',
       'FormItem',
@@ -209,7 +212,7 @@ export default defineComponent({
       /** the following code is for compatibility */
       let trigger: ValidationTrigger | string | undefined
       let validateCallback: ValidateCallback | undefined
-      let shouldRuleBeApplied: ApplyRule | undefined
+      let shouldRuleBeApplied: ShouldRuleBeApplied | undefined
       let asyncValidatorOptions: {} | undefined
       if (typeof options === 'string') {
         trigger = options
@@ -235,7 +238,6 @@ export default defineComponent({
             if (validateCallback) {
               validateCallback(errors)
             }
-            // eslint-disable-next-line prefer-promise-reject-errors
             reject(errors)
           }
         })
@@ -243,7 +245,7 @@ export default defineComponent({
     }
     const internalValidate: FormItemInternalValidate = async (
       trigger: ValidationTrigger | string | null = null,
-      shouldRuleBeApplied: ApplyRule = () => true,
+      shouldRuleBeApplied: ShouldRuleBeApplied = () => true,
       options: ValidateOption = {
         suppressWarning: true
       }
@@ -259,7 +261,7 @@ export default defineComponent({
       }
       const { value: rules } = mergedRulesRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const value = NForm ? get(NForm.model, path!, null) : undefined
+      const value = NForm ? get(NForm.props.model, path!, null) : undefined
       const activeRules = (
         !trigger
           ? rules
@@ -335,7 +337,16 @@ export default defineComponent({
       restoreValidation,
       internalValidate
     }
+    const labelElementRef = ref<null | HTMLLabelElement>(null)
+    onMounted(() => {
+      if (labelElementRef.value !== null) {
+        NForm?.deriveMaxChildLabelWidth(
+          Number(getComputedStyle(labelElementRef.value).width.slice(0, -2))
+        )
+      }
+    })
     return {
+      labelElementRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedRequired: mergedRequiredRef,
       hasFeedback: hasFeedbackRef,
@@ -377,21 +388,21 @@ export default defineComponent({
         }
 
         const cssVars = {
-          '--bezier': cubicBezierEaseInOut,
-          '--line-height': lineHeight,
-          '--blank-height': blankHeight,
-          '--label-font-size': labelFontSize,
-          '--label-text-align': mergedLabelTextAlign,
-          '--label-height': labelHeight,
-          '--label-padding': labelPadding,
-          '--asterisk-color': asteriskColor,
-          '--label-text-color': labelTextColor,
-          '--feedback-padding': feedbackPadding,
-          '--feedback-font-size': feedbackFontSize,
-          '--feedback-height': feedbackHeight,
-          '--feedback-text-color': feedbackTextColor,
-          '--feedback-text-color-warning': feedbackTextColorWarning,
-          '--feedback-text-color-error': feedbackTextColorError
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-line-height': lineHeight,
+          '--n-blank-height': blankHeight,
+          '--n-label-font-size': labelFontSize,
+          '--n-label-text-align': mergedLabelTextAlign,
+          '--n-label-height': labelHeight,
+          '--n-label-padding': labelPadding,
+          '--n-asterisk-color': asteriskColor,
+          '--n-label-text-color': labelTextColor,
+          '--n-feedback-padding': feedbackPadding,
+          '--n-feedback-font-size': feedbackFontSize,
+          '--n-feedback-height': feedbackHeight,
+          '--n-feedback-text-color': feedbackTextColor,
+          '--n-feedback-text-color-warning': feedbackTextColorWarning,
+          '--n-feedback-text-color-error': feedbackTextColorError
         }
         return cssVars
       })
@@ -405,6 +416,10 @@ export default defineComponent({
       mergedShowRequireMark,
       mergedRequireMarkPlacement
     } = this
+    const renderedShowRequireMark =
+      mergedShowRequireMark !== undefined
+        ? mergedShowRequireMark
+        : this.mergedRequired
     return (
       <div
         class={[
@@ -419,20 +434,25 @@ export default defineComponent({
           <label
             class={`${mergedClsPrefix}-form-item-label`}
             style={this.mergedLabelStyle as any}
+            ref="labelElementRef"
           >
             {/* 'left' | 'right' | undefined */}
             {mergedRequireMarkPlacement !== 'left'
               ? renderSlot($slots, 'label', undefined, () => [this.label])
               : null}
-            {(
-              mergedShowRequireMark !== undefined
-                ? mergedShowRequireMark
-                : this.mergedRequired
-            ) ? (
+            {renderedShowRequireMark ? (
               <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
                 {mergedRequireMarkPlacement !== 'left' ? '\u00A0*' : '*\u00A0'}
               </span>
-                ) : null}
+            ) : (
+              mergedRequireMarkPlacement === 'right-hanging' && (
+                <span
+                  class={`${mergedClsPrefix}-form-item-label__asterisk-placeholder`}
+                >
+                  {'\u00A0*'}
+                </span>
+              )
+            )}
             {mergedRequireMarkPlacement === 'left'
               ? renderSlot($slots, 'label', undefined, () => [this.label])
               : null}
@@ -460,10 +480,12 @@ export default defineComponent({
                       clsPrefix={mergedClsPrefix}
                       explains={this.explains}
                       feedback={this.feedback}
-                    />
+                    >
+                      {{ default: $slots.feedback }}
+                    </Feedbacks>
                   )
                   const { hasFeedback, mergedValidationStatus } = this
-                  return hasFeedback ? (
+                  return hasFeedback || $slots.feedback ? (
                     mergedValidationStatus === 'warning' ? (
                       <div
                         key="controlled-warning"

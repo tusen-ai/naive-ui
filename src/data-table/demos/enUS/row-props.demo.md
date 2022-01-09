@@ -1,4 +1,4 @@
-# Custom Row Props
+# Custom row props
 
 If you want to add attr or event handlers to a row, use `row-props` prop.
 

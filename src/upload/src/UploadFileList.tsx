@@ -22,7 +22,10 @@ export default defineComponent({
       listTypeRef,
       mergedFileListRef,
       fileListStyleRef,
-      cssVarsRef
+      cssVarsRef,
+      maxReachedRef,
+      showTriggerRef,
+      imageGroupPropsRef
     } = NUpload
 
     const isImageCardTypeRef = computed(
@@ -41,7 +44,9 @@ export default defineComponent({
 
     const renderUploadFileList = (): VNode =>
       isImageCardTypeRef.value ? (
-        <NImageGroup>{{ default: renderFileList }}</NImageGroup>
+        <NImageGroup {...imageGroupPropsRef.value}>
+          {{ default: renderFileList }}
+        </NImageGroup>
       ) : (
         <NFadeInExpandTransition group>
           {{
@@ -62,7 +67,11 @@ export default defineComponent({
           style={[cssVarsRef.value, fileListStyleRef.value as CSSProperties]}
         >
           {renderUploadFileList()}
-          {isImageCardTypeRef.value && <NUploadTrigger>{slots}</NUploadTrigger>}
+          {showTriggerRef.value &&
+            !maxReachedRef.value &&
+            isImageCardTypeRef.value && (
+              <NUploadTrigger>{slots}</NUploadTrigger>
+          )}
         </div>
       )
     }

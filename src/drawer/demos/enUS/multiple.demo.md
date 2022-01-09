@@ -1,4 +1,4 @@
-# Multiple Drawers
+# Multiple drawers
 
 ```html
 <n-button @click="doShowOuter">Come on!</n-button>

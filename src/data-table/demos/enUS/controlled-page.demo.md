@@ -1,4 +1,4 @@
-# Controlled Pagination
+# Controlled pagination
 
 ```html
 <n-data-table
@@ -44,7 +44,7 @@ export default defineComponent({
       onChange: (page) => {
         paginationReactive.page = page
       },
-      onPageSizeChange: (pageSize) => {
+      onUpdatePageSize: (pageSize) => {
         paginationReactive.pageSize = pageSize
         paginationReactive.page = 1
       }

@@ -430,54 +430,54 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--border': border,
-          '--border-active': borderActive,
-          '--border-focus': borderFocus,
-          '--border-hover': borderHover,
-          '--border-radius': borderRadius,
-          '--box-shadow-active': boxShadowActive,
-          '--box-shadow-focus': boxShadowFocus,
-          '--box-shadow-hover': boxShadowHover,
-          '--caret-color': caretColor,
-          '--color': color,
-          '--color-active': colorActive,
-          '--color-disabled': colorDisabled,
-          '--font-size': fontSize,
-          '--height': height,
-          '--padding-single': paddingSingle,
-          '--placeholder-color': placeholderColor,
-          '--placeholder-color-disabled': placeholderColorDisabled,
-          '--text-color': textColor,
-          '--text-color-disabled': textColorDisabled,
-          '--arrow-color': arrowColor,
-          '--arrow-color-disabled': arrowColorDisabled,
-          '--loading-color': loadingColor,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-border': border,
+          '--n-border-active': borderActive,
+          '--n-border-focus': borderFocus,
+          '--n-border-hover': borderHover,
+          '--n-border-radius': borderRadius,
+          '--n-box-shadow-active': boxShadowActive,
+          '--n-box-shadow-focus': boxShadowFocus,
+          '--n-box-shadow-hover': boxShadowHover,
+          '--n-caret-color': caretColor,
+          '--n-color': color,
+          '--n-color-active': colorActive,
+          '--n-color-disabled': colorDisabled,
+          '--n-font-size': fontSize,
+          '--n-height': height,
+          '--n-padding-single': paddingSingle,
+          '--n-placeholder-color': placeholderColor,
+          '--n-placeholder-color-disabled': placeholderColorDisabled,
+          '--n-text-color': textColor,
+          '--n-text-color-disabled': textColorDisabled,
+          '--n-arrow-color': arrowColor,
+          '--n-arrow-color-disabled': arrowColorDisabled,
+          '--n-loading-color': loadingColor,
           // form warning
-          '--color-active-warning': colorActiveWarning,
-          '--box-shadow-focus-warning': boxShadowFocusWarning,
-          '--box-shadow-active-warning': boxShadowActiveWarning,
-          '--box-shadow-hover-warning': boxShadowHoverWarning,
-          '--border-warning': borderWarning,
-          '--border-focus-warning': borderFocusWarning,
-          '--border-hover-warning': borderHoverWarning,
-          '--border-active-warning': borderActiveWarning,
+          '--n-color-active-warning': colorActiveWarning,
+          '--n-box-shadow-focus-warning': boxShadowFocusWarning,
+          '--n-box-shadow-active-warning': boxShadowActiveWarning,
+          '--n-box-shadow-hover-warning': boxShadowHoverWarning,
+          '--n-border-warning': borderWarning,
+          '--n-border-focus-warning': borderFocusWarning,
+          '--n-border-hover-warning': borderHoverWarning,
+          '--n-border-active-warning': borderActiveWarning,
           // form error
-          '--color-active-error': colorActiveError,
-          '--box-shadow-focus-error': boxShadowFocusError,
-          '--box-shadow-active-error': boxShadowActiveError,
-          '--box-shadow-hover-error': boxShadowHoverError,
-          '--border-error': borderError,
-          '--border-focus-error': borderFocusError,
-          '--border-hover-error': borderHoverError,
-          '--border-active-error': borderActiveError,
+          '--n-color-active-error': colorActiveError,
+          '--n-box-shadow-focus-error': boxShadowFocusError,
+          '--n-box-shadow-active-error': boxShadowActiveError,
+          '--n-box-shadow-hover-error': boxShadowHoverError,
+          '--n-border-error': borderError,
+          '--n-border-focus-error': borderFocusError,
+          '--n-border-hover-error': borderHoverError,
+          '--n-border-active-error': borderActiveError,
           // clear
-          '--clear-size': clearSize,
-          '--clear-color': clearColor,
-          '--clear-color-hover': clearColorHover,
-          '--clear-color-pressed': clearColorPressed,
+          '--n-clear-size': clearSize,
+          '--n-clear-color': clearColor,
+          '--n-clear-color-hover': clearColorHover,
+          '--n-clear-color-pressed': clearColorPressed,
           // arrow-size
-          '--arrow-size': arrowSize
+          '--n-arrow-size': arrowSize
         }
       })
     }
@@ -767,14 +767,16 @@ export default defineComponent({
                 class={`${clsPrefix}-base-selection-label__render-label ${clsPrefix}-base-selection-overlay`}
                 key="input"
               >
-                {renderTag
-                  ? renderTag({
-                    option: this.selectedOption!,
-                    handleClose: () => {}
-                  })
-                  : renderLabel
-                    ? renderLabel(this.selectedOption!, true)
-                    : render(this.label, this.selectedOption, true)}
+                <div class={`${clsPrefix}-base-selection-overlay__wrapper`}>
+                  {renderTag
+                    ? renderTag({
+                      option: this.selectedOption!,
+                      handleClose: () => {}
+                    })
+                    : renderLabel
+                      ? renderLabel(this.selectedOption!, true)
+                      : render(this.label, this.selectedOption, true)}
+                </div>
               </div>
               )}
             {showPlaceholder ? (
@@ -782,7 +784,9 @@ export default defineComponent({
                 class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
                 key="placeholder"
               >
-                {this.filterablePlaceholder}
+                <div class={`${clsPrefix}-base-selection-overlay__wrapper`}>
+                  {this.filterablePlaceholder}
+                </div>
               </div>
             ) : null}
             {suffix}

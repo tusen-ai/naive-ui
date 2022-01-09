@@ -2,7 +2,6 @@ import { inject, computed, watch, ref, ExtractPropTypes } from 'vue'
 import {
   addMonths,
   format,
-  getTime,
   getYear,
   getMonth,
   startOfMonth,
@@ -10,14 +9,16 @@ import {
   startOfSecond,
   startOfDay,
   set,
-  getDate
+  getDate,
+  getTime
 } from 'date-fns'
-import { dateArray, DateItem, strictParse } from '../utils'
-import { usePanelCommon } from './use-panel-common'
-import { datePickerInjectionKey, Shortcuts } from '../interface'
+import { getDefaultTime, dateArray, DateItem, strictParse } from '../utils'
+import { datePickerInjectionKey } from '../interface'
+import type { Shortcuts } from '../interface'
+import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 
 const useDualCalendarProps = {
-  ...usePanelCommon.props,
+  ...usePanelCommonProps,
   actions: {
     type: Array,
     default: () => ['clear', 'confirm']
@@ -77,16 +78,28 @@ function useDualCalendar (
   const isSelectingRef = ref(false)
   const memorizedStartDateTimeRef = ref<number>(0)
 
-  const { value, dateFormat } = props
+  const mergedDateFormatRef = computed(
+    () => props.dateFormat || localeRef.value.dateFormat
+  )
+
+  const { value } = props
 
   const startDateInput = ref(
     Array.isArray(value)
-      ? format(value[0], dateFormat, panelCommon.dateFnsOptions.value)
+      ? format(
+        value[0],
+        mergedDateFormatRef.value,
+        panelCommon.dateFnsOptions.value
+      )
       : ''
   )
   const endDateInputRef = ref(
     Array.isArray(value)
-      ? format(value[1], dateFormat, panelCommon.dateFnsOptions.value)
+      ? format(
+        value[1],
+        mergedDateFormatRef.value,
+        panelCommon.dateFnsOptions.value
+      )
       : ''
   )
 
@@ -172,15 +185,14 @@ function useDualCalendar (
     (value) => {
       if (value !== null && Array.isArray(value)) {
         const [startMoment, endMoment] = value
-        const { dateFormat } = props
         startDateInput.value = format(
           startMoment,
-          dateFormat,
+          mergedDateFormatRef.value,
           panelCommon.dateFnsOptions.value
         )
         endDateInputRef.value = format(
           endMoment,
-          dateFormat,
+          mergedDateFormatRef.value,
           panelCommon.dateFnsOptions.value
         )
         if (!isSelectingRef.value) {
@@ -375,9 +387,30 @@ function useDualCalendar (
     if (typeof startTime !== 'number') {
       startTime = getTime(startTime)
     }
-    if (typeof endTime !== 'number') {
-      endTime = getTime(endTime)
+
+    let startDefaultTime:
+    | { hours: number, minutes: number, seconds: number }
+    | undefined
+    let endDefaultTime:
+    | { hours: number, minutes: number, seconds: number }
+    | undefined
+    if (type === 'datetimerange') {
+      const { defaultTime } = props
+      if (Array.isArray(defaultTime)) {
+        startDefaultTime = getDefaultTime(defaultTime[0])
+        endDefaultTime = getDefaultTime(defaultTime[1])
+      } else {
+        startDefaultTime = getDefaultTime(defaultTime)
+        endDefaultTime = startDefaultTime
+      }
     }
+    if (startDefaultTime) {
+      startTime = getTime(set(startTime, startDefaultTime))
+    }
+    if (endDefaultTime) {
+      endTime = getTime(set(endTime, endDefaultTime))
+    }
+
     panelCommon.doUpdateValue([startTime, endTime], false)
   }
   function sanitizeValue (datetime: number): number {
@@ -391,7 +424,7 @@ function useDualCalendar (
   function handleStartDateInput (value: string): void {
     const date = strictParse(
       value,
-      props.dateFormat,
+      mergedDateFormatRef.value,
       new Date(),
       panelCommon.dateFnsOptions.value
     )
@@ -419,7 +452,7 @@ function useDualCalendar (
     /** strict check when input */
     const date = strictParse(
       value,
-      props.dateFormat,
+      mergedDateFormatRef.value,
       new Date(),
       panelCommon.dateFnsOptions.value
     )
@@ -446,7 +479,7 @@ function useDualCalendar (
   function handleStartDateInputBlur (): void {
     const date = strictParse(
       startDateInput.value,
-      props.dateFormat,
+      mergedDateFormatRef.value,
       new Date(),
       panelCommon.dateFnsOptions.value
     )
@@ -474,7 +507,7 @@ function useDualCalendar (
   function handleEndDateInputBlur (): void {
     const date = strictParse(
       endDateInputRef.value,
-      props.dateFormat,
+      mergedDateFormatRef.value,
       new Date(),
       panelCommon.dateFnsOptions.value
     )
@@ -508,25 +541,26 @@ function useDualCalendar (
       endDateInputRef.value = ''
       return
     }
-    const { dateFormat } = props
     if (times === undefined) {
       times = value
     }
     startDateInput.value = format(
       times[0],
-      dateFormat,
+      mergedDateFormatRef.value,
       panelCommon.dateFnsOptions.value
     )
     endDateInputRef.value = format(
       times[1],
-      dateFormat,
+      mergedDateFormatRef.value,
       panelCommon.dateFnsOptions.value
     )
   }
-  function handleStartTimePickerChange (value: number): void {
+  function handleStartTimePickerChange (value: number | null): void {
+    if (value === null) return
     changeStartDateTime(value)
   }
-  function handleEndTimePickerChange (value: number): void {
+  function handleEndTimePickerChange (value: number | null): void {
+    if (value === null) return
     changeEndDateTime(value)
   }
   function handleRangeShortcutMouseenter (shortcut: Shortcuts[string]): void {
@@ -589,6 +623,4 @@ function useDualCalendar (
   }
 }
 
-useDualCalendar.props = useDualCalendarProps
-
-export { useDualCalendar }
+export { useDualCalendar, useDualCalendarProps }

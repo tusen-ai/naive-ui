@@ -263,11 +263,11 @@ export default defineComponent({
           self: { dotColor, dotColorActive, dotSize, arrowColor }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--dot-color': dotColor,
-          '--dot-color-active': dotColorActive,
-          '--dot-size': dotSize,
-          '--arrow-color': arrowColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-dot-color': dotColor,
+          '--n-dot-color-active': dotColorActive,
+          '--n-dot-size': dotSize,
+          '--n-arrow-color': arrowColor
         }
       })
     }

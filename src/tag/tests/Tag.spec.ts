@@ -59,7 +59,7 @@ describe('n-tag', () => {
     expect(onChecked).toBeCalledTimes(2)
   })
 
-  it('should work with `closable` prop', () => {
+  it('should work with `closable` `on-close` prop', () => {
     const onClose = jest.fn()
     const wrapper = mount(NTag, {
       props: {
@@ -99,35 +99,23 @@ describe('n-tag', () => {
   })
 
   it('should work with `size` prop', () => {
-    const wrapper = mount(NTag)
-
-    wrapper.setProps({ size: 'small' })
-    expect(wrapper.find('.n-tag').attributes('style')).toMatchSnapshot()
-
-    wrapper.setProps({ size: 'medium' })
-    expect(wrapper.find('.n-tag').attributes('style')).toMatchSnapshot()
-
-    wrapper.setProps({ size: 'large' })
-    expect(wrapper.find('.n-tag').attributes('style')).toMatchSnapshot()
+    ;(['small', 'medium', 'large'] as const).forEach((size) => {
+      const wrapper = mount(NTag)
+      wrapper.setProps({ size })
+      expect(wrapper.find('.n-tag').attributes('style')).toMatchSnapshot()
+      wrapper.unmount()
+    })
   })
 
   it('should work with `type` prop', () => {
-    const wrapper = mount(NTag)
-
-    wrapper.setProps({ type: 'default' })
-    expect(wrapper.find('.n-tag').attributes('style')).toMatchSnapshot()
-
-    wrapper.setProps({ type: 'info' })
-    expect(wrapper.find('.n-tag').attributes('style')).toMatchSnapshot()
-
-    wrapper.setProps({ type: 'success' })
-    expect(wrapper.find('.n-tag').attributes('style')).toMatchSnapshot()
-
-    wrapper.setProps({ type: 'warning' })
-    expect(wrapper.find('.n-tag').attributes('style')).toMatchSnapshot()
-
-    wrapper.setProps({ type: 'error' })
-    expect(wrapper.find('.n-tag').attributes('style')).toMatchSnapshot()
+    ;(['default', 'info', 'success', 'warning', 'error'] as const).forEach(
+      (type) => {
+        const wrapper = mount(NTag)
+        wrapper.setProps({ type })
+        expect(wrapper.find('.n-tag').attributes('style')).toMatchSnapshot()
+        wrapper.unmount()
+      }
+    )
   })
 
   it('should work with default slot', () => {
@@ -153,10 +141,10 @@ describe('n-tag', () => {
       }
     })
     expect(wrapper.find('.n-tag').attributes('style')).toContain(
-      '--color: #ccc;'
+      '--n-color: #ccc;'
     )
     expect(wrapper.find('.n-tag').attributes('style')).toContain(
-      '--text-color: #555;'
+      '--n-text-color: #555;'
     )
     expect(wrapper.find('.n-tag__border').attributes('style')).toContain(
       'border-color: rgb(85, 85, 85);'
@@ -175,7 +163,7 @@ describe('n-tag', () => {
 
     expect(wrapper.find('.n-tag__avatar').exists()).toBe(true)
     expect(wrapper.find('.n-avatar').attributes('style')).toContain(
-      '--merged-size: var(--avatar-size-override, 34px);'
+      '--n-merged-size: var(--n-avatar-size-override, 34px);'
     )
   })
 })

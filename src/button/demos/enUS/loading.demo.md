@@ -4,7 +4,7 @@ Buttons can have loading states.
 
 ```html
 <n-space>
-  <n-button :loading="loading" @click="loading = !loading">
+  <n-button :loading="loading" @click="handleClick">
     <template #icon>
       <n-icon>
         <cash-icon />
@@ -12,11 +12,7 @@ Buttons can have loading states.
     </template>
     Click Me
   </n-button>
-  <n-button
-    :loading="loading"
-    icon-placement="left"
-    @click="loading = !loading"
-  >
+  <n-button :loading="loading" icon-placement="left" @click="handleClick">
     Click Me
   </n-button>
 </n-space>
@@ -31,8 +27,15 @@ export default defineComponent({
     CashIcon
   },
   setup () {
+    const loadingRef = ref(false)
     return {
-      loading: ref(false)
+      handleClick () {
+        loadingRef.value = true
+        setTimeout(() => {
+          loadingRef.value = false
+        }, 2000)
+      },
+      loading: loadingRef
     }
   }
 })

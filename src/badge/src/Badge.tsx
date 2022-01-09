@@ -92,12 +92,12 @@ export default defineComponent({
           self: { [createKey('color', type)]: color, fontFamily, fontSize }
         } = themeRef.value
         return {
-          '--font-size': fontSize,
-          '--font-family': fontFamily,
-          '--color': propColor || color,
-          '--ripple-color': propColor || color,
-          '--bezier': cubicBezierEaseInOut,
-          '--ripple-bezier': cubicBezierEaseOut
+          '--n-font-size': fontSize,
+          '--n-font-family': fontFamily,
+          '--n-color': propColor || color,
+          '--n-ripple-color': propColor || color,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-ripple-bezier': cubicBezierEaseOut
         }
       })
     }

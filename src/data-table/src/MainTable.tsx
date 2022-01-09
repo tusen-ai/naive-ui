@@ -1,13 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {
-  h,
-  ref,
-  defineComponent,
-  inject,
-  computed,
-  renderSlot,
-  watchEffect
-} from 'vue'
+import { h, ref, defineComponent, inject, computed, watchEffect } from 'vue'
 import { formatLength } from '../../_utils'
 import TableHeader from './TableParts/Header'
 import TableBody from './TableParts/Body'
@@ -103,12 +95,11 @@ export default defineComponent({
         {headerInBody ? null : <TableHeader ref="headerInstRef" />}
         <TableBody
           ref="bodyInstRef"
-          style={this.bodyStyle}
+          bodyStyle={this.bodyStyle}
           showHeader={headerInBody}
           flexHeight={flexHeight}
           onResize={this.handleBodyResize}
         />
-        {renderSlot(this.$slots, 'default')}
       </div>
     )
   }

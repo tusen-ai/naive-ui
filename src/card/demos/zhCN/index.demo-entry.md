@@ -7,7 +7,7 @@
 ```demo
 basic
 size
-cover
+cover.vue
 hoverable
 slots
 border
@@ -16,7 +16,7 @@ closable
 no-title
 loading
 custom-style
-embedded
+embedded.vue
 rtl-debug
 ```
 

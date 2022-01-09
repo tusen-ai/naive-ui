@@ -1,4 +1,6 @@
-const idID = {
+import type { NLocale } from './enUS'
+
+const idID: NLocale = {
   name: 'id-ID',
   global: {
     undo: 'Membatalkan',
@@ -23,6 +25,11 @@ const idID = {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
+    yearTypeFormat: 'yyyy',
+    monthTypeFormat: 'MM-yyyy',
+    dateFormat: 'dd-MM-yyyy',
+    dateTimeFormat: 'dd-MM-yyyy HH:mm:ss',
+    quarterFormat: 'yyyy-qqq',
     clear: 'Bersihkan',
     now: 'Sekarang',
     confirm: 'Setuju',
@@ -31,6 +38,9 @@ const idID = {
     datePlaceholder: 'Pilih Tanggal',
     datetimePlaceholder: 'Pilih Tanggal dan Waktu',
     monthPlaceholder: 'Pilih Bulan',
+    // FIXME: translation needed
+    yearPlaceholder: 'Select Year',
+    quarterPlaceholder: 'Select Quarter',
     startDatePlaceholder: 'Tanggal Mulai',
     endDatePlaceholder: 'Tanggal Selesai',
     startDatetimePlaceholder: 'Tanggal dan Waktu Mulai',
@@ -89,8 +99,17 @@ const idID = {
     import: 'Impor',
     export: 'Ekspor',
     restore: 'Setel ulang ke awal'
+  },
+  // TODO: translation
+  Image: {
+    tipPrevious: 'Previous picture (←)',
+    tipNext: 'Next picture (→)',
+    tipCounterclockwise: 'Counterclockwise',
+    tipClockwise: 'Clockwise',
+    tipZoomOut: 'Zoom out',
+    tipZoomIn: 'Zoom in',
+    tipClose: 'Close (Esc)'
   }
 }
 
-export type NLocale = typeof idID
 export default idID

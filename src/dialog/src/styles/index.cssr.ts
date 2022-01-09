@@ -1,53 +1,53 @@
 import { asModal, c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
 
 // vars:
-// --icon-color
-// --bezier
-// --close-margin
-// --icon-margin
-// --icon-size
-// --close-size
-// --close-color
-// --close-color-hover
-// --close-color-pressed
-// --color
-// --text-color
-// --border-radius
-// --padding
-// --line-height
-// --border
-// --content-margin
-// --title-font-size
-// --title-font-weight
-// --title-text-color
-// --action-space
+// --n-icon-color
+// --n-bezier
+// --n-close-margin
+// --n-icon-margin
+// --n-icon-size
+// --n-close-size
+// --n-close-color
+// --n-close-color-hover
+// --n-close-color-pressed
+// --n-color
+// --n-text-color
+// --n-border-radius
+// --n-padding
+// --n-line-height
+// --n-border
+// --n-content-margin
+// --n-title-font-size
+// --n-title-font-weight
+// --n-title-text-color
+// --n-action-space
 export default c([
   cB('dialog', `
-    line-height: var(--line-height);
+    line-height: var(--n-line-height);
     position: relative;
-    background: var(--color);
-    color: var(--text-color);
+    background: var(--n-color);
+    color: var(--n-text-color);
     box-sizing: border-box;
     margin: auto;
-    border-radius: var(--border-radius);
-    padding: var(--padding);
+    border-radius: var(--n-border-radius);
+    padding: var(--n-padding);
     transition: 
-      border-color .3s var(--bezier),
-      background-color .3s var(--bezier),
-      color .3s var(--bezier);
+      border-color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier),
+      color .3s var(--n-bezier);
   `, [
     cE('icon', {
-      color: 'var(--icon-color)'
+      color: 'var(--n-icon-color)'
     }),
     cM('bordered', {
-      border: 'var(--border)'
+      border: 'var(--n-border)'
     }),
     cM('icon-top', [
       cE('close', {
-        margin: 'var(--close-margin)'
+        margin: 'var(--n-close-margin)'
       }),
       cE('icon', {
-        margin: 'var(--icon-margin)'
+        margin: 'var(--n-icon-margin)'
       }),
       cE('content', {
         textAlign: 'center'
@@ -61,22 +61,23 @@ export default c([
     ]),
     cM('icon-left', [
       cE('icon', {
-        margin: 'var(--icon-margin)'
+        margin: 'var(--n-icon-margin)'
       })
     ]),
     cE('close', `
-      font-size: var(--close-size);
+      font-size: var(--n-close-size);
       position: absolute;
       right: 0;
       top: 0;
-      margin: var(--close-margin);
-      transition: .3s color var(--bezier);
+      margin: var(--n-close-margin);
+      transition: .3s color var(--n-bezier);
       z-index: 1;
     `),
     cE('content', `
-      font-size: var(--font-size);
-      margin: var(--content-margin);
+      font-size: var(--n-font-size);
+      margin: var(--n-content-margin);
       position: relative;
+      word-break: break-word;
     `, [
       c('&:last-child', 'margin-bottom: 0;')
     ]),
@@ -85,20 +86,20 @@ export default c([
       justify-content: flex-end;
     `, [
       c('> *:not(:last-child)', {
-        marginRight: 'var(--action-space)'
+        marginRight: 'var(--n-action-space)'
       })
     ]),
     cE('icon', {
-      fontSize: 'var(--icon-size)',
-      transition: 'color .3s var(--bezier)'
+      fontSize: 'var(--n-icon-size)',
+      transition: 'color .3s var(--n-bezier)'
     }),
     cE('title', `
-      transition: color .3s var(--bezier);
+      transition: color .3s var(--n-bezier);
       display: flex;
       align-items: center;
-      font-size: var(--title-font-size);
-      font-weight: var(--title-font-weight);
-      color: var(--title-text-color);
+      font-size: var(--n-title-font-size);
+      font-weight: var(--n-title-font-weight);
+      color: var(--n-title-text-color);
     `),
     cB('dialog-icon-container', {
       display: 'flex',

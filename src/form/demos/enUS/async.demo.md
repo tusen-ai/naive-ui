@@ -1,4 +1,4 @@
-# Async Validation
+# Async validation
 
 Supports async when the provided validator returns a `Promise`.
 

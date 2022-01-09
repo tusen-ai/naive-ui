@@ -2,7 +2,7 @@
 
 ```html
 <n-space vertical>
-  <n-date-picker v-model:value="ts1" type="date" :actions="['confirm']" />
+  <n-date-picker v-model:value="ts1" type="date" :actions="['now']" />
   <n-date-picker v-model:value="ts2" type="datetime" :actions="['now']" />
   <n-date-picker v-model:value="range1" type="daterange" :actions="null" />
   <n-date-picker

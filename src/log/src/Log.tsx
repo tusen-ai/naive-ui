@@ -35,14 +35,8 @@ export const logInjectionKey: InjectionKey<LogInjection> = Symbol('log')
 
 const logProps = {
   ...(useTheme.props as ThemeProps<LogTheme>),
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  trim: {
-    type: Boolean,
-    default: false
-  },
+  loading: Boolean,
+  trim: Boolean,
   log: String,
   fontSize: {
     type: Number,
@@ -69,10 +63,7 @@ const logProps = {
     type: Number,
     default: 0
   },
-  hljs: {
-    type: Object,
-    default: undefined
-  },
+  hljs: Object,
   onReachTop: Function as PropType<() => void>,
   onReachBottom: Function as PropType<() => void>,
   onRequireMore: Function as PropType<(from: 'top' | 'bottom') => void>
@@ -235,12 +226,12 @@ export default defineComponent({
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--loader-font-size': loaderFontSize,
-          '--loader-border': loaderBorder,
-          '--loader-color': loaderColor,
-          '--loader-text-color': loaderTextColor,
-          '--loading-color': loadingColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-loader-font-size': loaderFontSize,
+          '--n-loader-border': loaderBorder,
+          '--n-loader-color': loaderColor,
+          '--n-loader-text-color': loaderTextColor,
+          '--n-loading-color': loadingColor
         }
       })
     }

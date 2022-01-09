@@ -34,3 +34,22 @@ native
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback once panel the show status is changed. |
 | on-update:value | `(value: string) => void` | `undefined` | Callback once the value is changed. |
 | actions | `Array<'confirm'> \| null` | `null` | The types of buttons to be shown in the panel. |
+
+## Q & A
+
+### How to get color value from name?
+
+Naive doesn't provide it builtin. You can create a color map, like [https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L803](https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L803).
+
+Or you can create a function like this.
+
+```js
+export function getRgb (colorName) {
+  const el = document.createElement('div')
+  el.style.color = colorName
+  document.body.appendChild(el)
+  const rgbColor = getComputedStyle(el).color
+  document.body.removeChild(el)
+  return rgbColor
+}
+```

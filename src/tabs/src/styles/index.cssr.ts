@@ -24,6 +24,7 @@ import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
 // --font-weight-strong
 // --tab-color-segment
 export default cB('tabs', `
+  box-sizing: border-box;
   width: 100%;
   transition:
     background-color .3s var(--bezier),
@@ -55,8 +56,12 @@ export default cB('tabs', `
       `, [
         cM('active', `
           font-weight: var(--font-weight-strong);
+          color: var(--tab-text-color-active);
           background-color: var(--tab-color-segment);
           box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
+        `),
+        c('&:hover', `
+          color: var(--tab-text-color-hover);
         `)
       ])
     ])
@@ -261,7 +266,7 @@ export default cB('tabs', `
         `, [
           cNotM('disabled', [
             c('&:hover', `
-              color: var(--tab-text-color-active);
+              color: var(--tab-text-color-hover);
             `)
           ])
         ]),

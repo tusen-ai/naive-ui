@@ -25,6 +25,11 @@ const ukUA: NLocale = {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
+    yearTypeFormat: 'yyyy',
+    monthTypeFormat: 'yyyy-MM',
+    dateFormat: 'yyyy-MM-dd',
+    dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
+    quarterFormat: 'yyyy-qqq',
     clear: 'Стерти',
     now: 'Зараз',
     confirm: 'Підтвердити',
@@ -33,6 +38,9 @@ const ukUA: NLocale = {
     datePlaceholder: 'Обрати дату',
     datetimePlaceholder: 'Обрати дату і час',
     monthPlaceholder: 'Виберіть місяць',
+    // FIXME: translation needed
+    yearPlaceholder: 'Select Year',
+    quarterPlaceholder: 'Select Quarter',
     startDatePlaceholder: 'Дата початку',
     endDatePlaceholder: 'Дата завершення',
     startDatetimePlaceholder: 'Дата і час початку',
@@ -91,6 +99,16 @@ const ukUA: NLocale = {
     import: 'Імпорт',
     export: 'Експорт',
     restore: 'Скинути'
+  },
+  // TODO: translation
+  Image: {
+    tipPrevious: 'Previous picture (←)',
+    tipNext: 'Next picture (→)',
+    tipCounterclockwise: 'Counterclockwise',
+    tipClockwise: 'Clockwise',
+    tipZoomOut: 'Zoom out',
+    tipZoomIn: 'Zoom in',
+    tipClose: 'Close (Esc)'
   }
 }
 

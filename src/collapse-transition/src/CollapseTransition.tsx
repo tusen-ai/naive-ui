@@ -74,7 +74,7 @@ export default defineComponent({
           self: { bezier }
         } = mergedThemeRef.value
         return {
-          '--bezier': bezier
+          '--n-bezier': bezier
         }
       })
     }

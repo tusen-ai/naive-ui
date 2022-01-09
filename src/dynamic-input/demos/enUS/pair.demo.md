@@ -1,4 +1,4 @@
-# Use Preset Pair
+# Using pair preset
 
 ```html
 <n-dynamic-input

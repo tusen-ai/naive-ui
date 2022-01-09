@@ -171,6 +171,9 @@ const treeProps = {
     default: true
   },
   virtualScroll: Boolean,
+  watchProps: Array as PropType<
+  Array<'defaultCheckedKeys' | 'defaultSelectedKeys' | 'defaultExpandedKeys'>
+  >,
   renderLabel: Function as PropType<RenderLabel>,
   renderPrefix: Function as PropType<RenderPrefix>,
   renderSuffix: Function as PropType<RenderSuffix>,
@@ -260,9 +263,15 @@ export default defineComponent({
     const dataTreeMateRef = props.internalDataTreeMate
       ? toRef(props, 'internalDataTreeMate')
       : displayTreeMateRef
-    const uncontrolledCheckedKeysRef = ref(
-      props.defaultCheckedKeys || props.checkedKeys
-    )
+    const { watchProps } = props
+    const uncontrolledCheckedKeysRef = ref<Key[]>([])
+    if (watchProps?.includes('defaultCheckedKeys')) {
+      watchEffect(() => {
+        uncontrolledCheckedKeysRef.value = props.defaultCheckedKeys
+      })
+    } else {
+      uncontrolledCheckedKeysRef.value = props.defaultCheckedKeys
+    }
     const controlledCheckedKeysRef = toRef(props, 'checkedKeys')
     const mergedCheckedKeysRef = useMergedState(
       controlledCheckedKeysRef,
@@ -288,19 +297,30 @@ export default defineComponent({
       if (indeterminateKeys !== undefined) return indeterminateKeys
       return checkedStatusRef.value.indeterminateKeys
     })
-    const uncontrolledSelectedKeysRef = ref(
-      props.defaultSelectedKeys || props.selectedKeys
-    )
+    const uncontrolledSelectedKeysRef = ref<Key[]>([])
+    if (watchProps?.includes('defaultSelectedKeys')) {
+      watchEffect(() => {
+        uncontrolledSelectedKeysRef.value = props.defaultSelectedKeys
+      })
+    } else {
+      uncontrolledSelectedKeysRef.value = props.defaultSelectedKeys
+    }
     const controlledSelectedKeysRef = toRef(props, 'selectedKeys')
     const mergedSelectedKeysRef = useMergedState(
       controlledSelectedKeysRef,
       uncontrolledSelectedKeysRef
     )
-    const uncontrolledExpandedKeysRef = ref(
-      props.defaultExpandAll
+    const uncontrolledExpandedKeysRef = ref<Key[]>([])
+    const initUncontrolledExpandedKeys = (): void => {
+      uncontrolledExpandedKeysRef.value = props.defaultExpandAll
         ? dataTreeMateRef.value!.getNonLeafKeys()
         : props.defaultExpandedKeys
-    )
+    }
+    if (watchProps?.includes('defaultExpandedKeys')) {
+      watchEffect(initUncontrolledExpandedKeys)
+    } else {
+      initUncontrolledExpandedKeys()
+    }
     const controlledExpandedKeysRef = toRef(props, 'expandedKeys')
     const mergedExpandedKeysRef = useMergedState(
       controlledExpandedKeysRef,
@@ -1181,17 +1201,17 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--arrow-color': arrowColor,
-          '--loading-color': loadingColor,
-          '--bezier': cubicBezierEaseInOut,
-          '--font-size': fontSize,
-          '--node-border-radius': nodeBorderRadius,
-          '--node-color-active': nodeColorActive,
-          '--node-color-hover': nodeColorHover,
-          '--node-color-pressed': nodeColorPressed,
-          '--node-text-color': nodeTextColor,
-          '--node-text-color-disabled': nodeTextColorDisabled,
-          '--drop-mark-color': dropMarkColor
+          '--n-arrow-color': arrowColor,
+          '--n-loading-color': loadingColor,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-font-size': fontSize,
+          '--n-node-border-radius': nodeBorderRadius,
+          '--n-node-color-active': nodeColorActive,
+          '--n-node-color-hover': nodeColorHover,
+          '--n-node-color-pressed': nodeColorPressed,
+          '--n-node-text-color': nodeTextColor,
+          '--n-node-text-color-disabled': nodeTextColorDisabled,
+          '--n-drop-mark-color': dropMarkColor
         }
       }),
       ...exposedMethods

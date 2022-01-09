@@ -18,6 +18,7 @@ size
 | --- | --- | --- | --- |
 | description | `string` | `'No Data'` | Description of the empty. |
 | show-description | `boolean` | `true` | Whether to show description of empty. |
+| show-icon | `boolean` | `true` | Whether to show icon of empty. |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | Empty's size. |
 
 ### Empty Slots

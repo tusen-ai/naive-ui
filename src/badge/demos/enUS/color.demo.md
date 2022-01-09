@@ -1,4 +1,4 @@
-# Custom Color
+# Customizing color
 
 ```html
 <n-badge value="15" color="grey">

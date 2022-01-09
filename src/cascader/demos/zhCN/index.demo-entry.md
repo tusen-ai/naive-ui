@@ -14,6 +14,7 @@ action
 virtual
 check-strategy
 custom-field
+custom-render.vue
 ```
 
 ## API
@@ -38,6 +39,7 @@ custom-field
 | options | `CascaderOption[]` | `[]` | 填充的 options 数据 |
 | placeholder | `string` | `'请选择'` | 提示信息 |
 | remote | `boolean` | `false` | 是否远程获取数据 |
+| render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Cascader 菜单选项标签渲染函数 |
 | separator | `string` | `' / '` | 数据分隔符 |
 | show | `boolean` | `undefined` | 是否打开菜单 |
 | show-path | `boolean` | `true` | 是否在选择器中显示选项路径 |
@@ -47,6 +49,7 @@ custom-field
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |
 | on-focus | `() => void` | `undefined` | 用户 focus 时执行的回调 |
 | on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | 在点击未加载完成节点时的回调，在返回的 promise 中设定 `option.children`，在返回的 promise resolve 或 reject 之后完成加载 |
+| on-update:show | `(value: boolean) => void` | `undefined` | 菜单打开关闭的回调 |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: CascaderOption \| Array<CascaderOption \| null> \| null, pathValues: Array<CascaderOption \| null> \| Array<CascaderOption[] \| null> \| null) => void` | `undefined` | 值改变时执行的回调 |
 
 #### CascaderOption Properties
@@ -60,6 +63,7 @@ custom-field
 
 ### Cascader Slots
 
-| 名称   | 参数 | 描述                             |
-| ------ | ---- | -------------------------------- |
-| action | `()` | 级联菜单中显示的 action 填充内容 |
+| 名称   | 参数 | 描述                             | 版本   |
+| ------ | ---- | -------------------------------- | ------ |
+| action | `()` | 级联菜单中显示的 action 填充内容 |        |
+| empty  | `()` | 级联菜单无数据时的 slot          | 2.22.0 |

@@ -9,6 +9,7 @@ basic
 size
 scrollable
 multiple
+slot
 ```
 
 ## API
@@ -28,3 +29,10 @@ multiple
 对于 SelectOption & SelectGroupOption，参考 [Select](select#SelectOption-Properties)
 
 对于其他 props，参考 [Popover](popover#Popover-Props)
+
+### Popselect Slots
+
+| 名称   | 参数 | 说明                | 版本   |
+| ------ | ---- | ------------------- | ------ |
+| action | `()` | 菜单操作区域的 slot | 2.22.0 |
+| empty  | `()` | 菜单无数据时的 slot | 2.22.0 |

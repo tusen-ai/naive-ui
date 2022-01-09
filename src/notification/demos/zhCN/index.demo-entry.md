@@ -4,7 +4,7 @@
 
 像是通知组件这种东西优先级不那么高，所以我可以弄一堆没什么用的动画上去。
 
-<n-space vertical>
+<n-space vertical size="large">
 <n-alert title="使用前提" type="warning">
   如果你想使用通知，你需要把调用其方法的组件放在 <n-text code>n-notification-provider</n-text> 内部并且使用 <n-text code>useNotification</n-text> 来获取 API。
 </n-alert>
@@ -25,7 +25,6 @@ import { useNotification } from 'naive-ui'
 export default defineComponent({
   setup () {
     const notification = useNotification()
-
     return {
       warning () {
         notification.warning('...')
@@ -46,6 +45,8 @@ change-content
 scrollable
 closable
 duration
+max
+placement
 ```
 
 ## API
@@ -54,6 +55,8 @@ duration
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
+| max | `number` | `undefined` | 限制通知框显示的个数 |
+| placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `top-right` | 所有通知框显示的位置 |
 | scrollable | `boolean` | `true` | 通知是否可滚动 |
 | to | `string \| HTMLElement` | `'body'` | `Notification` 容器节点的位置 |
 
@@ -62,6 +65,7 @@ duration
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
 | create | `(option: NotificationOption) => NotificationReactive` | 创建通知框 |
+| destroyAll | `() => void` | 销毁所有弹出的通知框 |
 | error | `(option: NotificationOption) => NotificationReactive` | 调用 `error` 类型的通知框 |
 | info | `(option: NotificationOption) => NotificationReactive` | 调用 `info` 类型的通知框 |
 | success | `(option: NotificationOption) => NotificationReactive` | 调用 `success` 类型的通知框 |

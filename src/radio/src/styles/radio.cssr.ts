@@ -1,21 +1,21 @@
 import { c, cE, cM, cNotM, cB } from '../../../_utils/cssr'
 
 // vars:
-// --bezier
-// --box-shadow
-// --box-shadow-active
-// --box-shadow-disabled
-// --box-shadow-focus
-// --box-shadow-hover
-// --color
-// --color-disabled
-// --dot-color-active
-// --dot-color-disabled
-// --font-size
-// --radio-size
-// --text-color
-// --text-color-disabled
-// --label-padding
+// --n-bezier
+// --n-box-shadow
+// --n-box-shadow-active
+// --n-box-shadow-disabled
+// --n-box-shadow-focus
+// --n-box-shadow-hover
+// --n-color
+// --n-color-disabled
+// --n-dot-color-active
+// --n-dot-color-disabled
+// --n-font-size
+// --n-radio-size
+// --n-text-color
+// --n-text-color-disabled
+// --n-label-padding
 export default cB('radio', `
   line-height: 1;
   outline: none;
@@ -24,25 +24,29 @@ export default cB('radio', `
   display: inline-flex;
   vertical-align: middle;
   align-items: center;
-  font-size: var(--font-size);
+  font-size: var(--n-font-size);
 `, [
   cE('dot', `
-    height: var(--radio-size);
-    width: var(--radio-size);
+    height: var(--n-radio-size);
+    width: var(--n-radio-size);
   `),
-  cE('radio-input', `
+  cB('radio-input', `
+    position: absolute;
     border: 0;
-    width: 0;
-    height: 0;
+    border-radius: inherit;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     opacity: 0;
-    margin: 0;
+    z-index: 1;
   `),
   cE('dot', `
-    background: var(--color);
-    box-shadow: var(--box-shadow);
+    background: var(--n-color);
+    box-shadow: var(--n-box-shadow);
     transition:
-      background-color .3s var(--bezier),
-      box-shadow .3s var(--bezier);
+      background-color .3s var(--n-bezier),
+      box-shadow .3s var(--n-bezier);
       position: relative;
       border-radius: 50%;
   `, [
@@ -56,14 +60,14 @@ export default cB('radio', `
       width: calc(100% - 8px);
       border-radius: 50%;
       transform: scale(.8);
-      background: var(--dot-color-active);
+      background: var(--n-dot-color-active);
       transition: 
-        opacity .3s var(--bezier),
-        background-color .3s var(--bezier),
-        transform .3s var(--bezier);
+        opacity .3s var(--n-bezier),
+        background-color .3s var(--n-bezier),
+        transform .3s var(--n-bezier);
     `),
     cM('checked', {
-      boxShadow: 'var(--box-shadow-active)'
+      boxShadow: 'var(--n-box-shadow-active)'
     }, [
       c('&::before', `
         opacity: 1;
@@ -72,24 +76,24 @@ export default cB('radio', `
     ])
   ]),
   cE('label', `
-    color: var(--text-color);
-    padding: var(--label-padding);
+    color: var(--n-text-color);
+    padding: var(--n-label-padding);
     display: inline-block;
     white-space: nowrap;
-    transition: color .3s var(--bezier);
+    transition: color .3s var(--n-bezier);
   `),
   cNotM('disabled', `
     cursor: pointer;
   `, [
     c('&:hover', [
       cE('dot', {
-        boxShadow: 'var(--box-shadow-hover)'
+        boxShadow: 'var(--n-box-shadow-hover)'
       })
     ]),
     cM('focus', [
       c('&:not(:active)', [
         cE('dot', {
-          boxShadow: 'var(--box-shadow-focus)'
+          boxShadow: 'var(--n-box-shadow-focus)'
         })
       ])
     ])
@@ -98,11 +102,11 @@ export default cB('radio', `
     cursor: not-allowed;
   `, [
     cE('dot', {
-      boxShadow: 'var(--box-shadow-disabled)',
-      backgroundColor: 'var(--color-disabled)'
+      boxShadow: 'var(--n-box-shadow-disabled)',
+      backgroundColor: 'var(--n-color-disabled)'
     }, [
       c('&::before', {
-        backgroundColor: 'var(--dot-color-disabled)'
+        backgroundColor: 'var(--n-dot-color-disabled)'
       }),
       cM('checked', `
         transform: scale(1);
@@ -110,7 +114,7 @@ export default cB('radio', `
       `)
     ]),
     cE('label', {
-      color: 'var(--text-color-disabled)'
+      color: 'var(--n-text-color-disabled)'
     })
   ])
 ])

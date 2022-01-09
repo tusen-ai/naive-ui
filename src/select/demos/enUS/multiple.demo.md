@@ -1,4 +1,4 @@
-# Multiple Select
+# Multiple select
 
 Allow the selection of multiple values.
 

@@ -45,6 +45,7 @@ export function useTableData (
   const treeMateRef = computed(() => {
     const { childrenKey } = props
     return createTreeMate<InternalRowData>(props.data, {
+      ignoreEmptyChildren: true,
       getKey: props.rowKey,
       getChildren: (rowData) => rowData[childrenKey] as any,
       getDisabled: (rowData) => {
@@ -243,10 +244,14 @@ export function useTableData (
   function mergedOnUpdatePageSize (pageSize: number): void {
     const { pagination } = props
     if (pagination) {
-      const { onPageSizeChange, 'onUpdate:pageSize': onUpdatePageSize } =
-        pagination
+      const {
+        onPageSizeChange,
+        'onUpdate:pageSize': _onUpdatePageSize,
+        onUpdatePageSize
+      } = pagination
       if (onPageSizeChange) call(onPageSizeChange, pageSize)
       if (onUpdatePageSize) call(onUpdatePageSize, pageSize)
+      if (_onUpdatePageSize) call(_onUpdatePageSize, pageSize)
       doUpdatePageSize(pageSize)
     }
   }
@@ -266,6 +271,8 @@ export function useTableData (
       ...props.pagination,
       // reset deprecated methods
       onChange: undefined,
+      onUpdatePage: undefined,
+      onUpdatePageSize: undefined,
       onPageSizeChange: undefined,
       'onUpdate:page': mergedOnUpdatePage,
       'onUpdate:pageSize': mergedOnUpdatePageSize,
@@ -285,8 +292,8 @@ export function useTableData (
   function doUpdatePage (page: number): void {
     const { 'onUpdate:page': _onUpdatePage, onPageChange, onUpdatePage } = props
     if (onUpdatePage) call(onUpdatePage, page)
-    if (onPageChange) call(onPageChange, page)
     if (_onUpdatePage) call(_onUpdatePage, page)
+    if (onPageChange) call(onPageChange, page)
     uncontrolledCurrentPageRef.value = page
   }
   function doUpdatePageSize (pageSize: number): void {

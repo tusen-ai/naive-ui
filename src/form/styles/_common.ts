@@ -1,7 +1,4 @@
 export default {
-  blankHeightSmall: '28px',
-  blankHeightMedium: '34px',
-  blankHeightLarge: '40px',
   feedbackPadding: '4px 0 0 2px',
   feedbackHeightSmall: '24px',
   feedbackHeightMedium: '24px',

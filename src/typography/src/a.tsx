@@ -33,8 +33,8 @@ export default defineComponent({
           self: { aTextColor }
         } = themeRef.value
         return {
-          '--text-color': aTextColor,
-          '--bezier': cubicBezierEaseInOut
+          '--n-text-color': aTextColor,
+          '--n-bezier': cubicBezierEaseInOut
         }
       })
     }

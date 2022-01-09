@@ -45,7 +45,7 @@ check-strategy-debug
 | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |
 | filter | `(pattern: string, node: TreeOption) => boolean` | 一个简单的字符串过滤算法 | 基于 pattern 指定过滤节点的函数 |
-| indeterminate-keys | `string \| number` | `undefined` | 部分选中选项的 key |
+| indeterminate-keys | `Array<string \| number>` | `undefined` | 部分选中选项的 key |
 | key-field | `string` | `'key'` | 替代 `TreeOption` 中的 key 字段名 |
 | label-field | `string` | `'label'` | 替代 `TreeOption` 中的 label 字段名 |
 | leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |
@@ -59,6 +59,7 @@ check-strategy-debug
 | selectable | `boolean` | `true` | 节点是否可以被选中 |
 | selected-keys | `Array<string \| number>` | `undefined` | 如果设定则 `selected` 状态受控 |
 | virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动，启用前你需要设定好树的高度样式 |
+| watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 |
 | on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 节点完成拖拽动作后的回调函数 |
 | on-dragenter | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 节点拖拽中的回调函数 |
 | on-dragleave | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 拖拽一个节点，该节点离开其它节点后的回调函数 |
