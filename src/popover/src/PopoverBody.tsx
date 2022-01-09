@@ -119,7 +119,10 @@ export default defineComponent({
     const styleRef = computed(() => {
       return [
         {
-          width: props.width === 'trigger' ? '' : formatLength(props.width)
+          width: props.width === 'trigger' ? '' : formatLength(props.width),
+          // TODO: use vueuc
+          '--v-offset-left': '0px',
+          '--v-offset-top': '0px'
         },
         props.maxWidth ? { maxWidth: formatLength(props.maxWidth) } : {},
         props.minWidth ? { minWidth: formatLength(props.minWidth) } : {},
