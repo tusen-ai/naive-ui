@@ -16,6 +16,7 @@
 - Fix `n-back-top` allow document to be passed to `listen-to` prop.
 - Fix `n-data-table`'s content can be clicked when loading, closes [#2134](https://github.com/TuSimple/naive-ui/issues/2134).
 - Fix `n-checkbox` doesn't show indeterminate icon in safari.
+- Fix `n-progress`'s inner text of `line` type not aligned in center, closes[#2138](https://github.com/TuSimple/naive-ui/issues/2138).
 
 ### Feats
 
