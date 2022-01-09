@@ -108,6 +108,30 @@
 - `n-icon` uses `n` as CSS vars prefix.
 - `n-modal` uses `n` as CSS vars prefix.
 - `n-notification` uses `n` as CSS vars prefix.
+- `n-carousel` add `default-index` prop.
+- `n-carousel` add `current-index` prop.
+- `n-carousel` add `show-arrow` prop.
+- `n-carousel` add `dot-type` prop, closes [#1931](https://github.com/TuSimple/naive-ui/issues/1931).
+- `n-carousel` add `dot-placement` prop, closes [#1462](https://github.com/TuSimple/naive-ui/issues/1462).
+- `n-carousel` add `slides-per-view` prop.
+- `n-carousel` add `space-between` prop.
+- `n-carousel` add `centered-slides` prop.
+- `n-carousel` add `direction` prop, closes [#1931](https://github.com/TuSimple/naive-ui/issues/1931).
+- `n-carousel` add `loop` prop.
+- `n-carousel` add `effect` prop, closes [#1159](https://github.com/TuSimple/naive-ui/issues/1159).
+- `n-carousel` add `transition-duration` prop, closes [#1159](https://github.com/TuSimple/naive-ui/issues/1159).
+- `n-carousel` add `transition-timing-function` prop.
+- `n-carousel` add `transition-name` prop, closes [#1159](https://github.com/TuSimple/naive-ui/issues/1159).
+- `n-carousel` add `draggable` prop.
+- `n-carousel` add `touchable` prop.
+- `n-carousel` add `mousewheel` prop.
+- `n-carousel` add `keyboard` prop.
+- `n-carousel` add `on-update:current-index` prop.
+- `n-carousel` add `arrow` slot.
+- `n-carousel` add `dots` slot.
+- Fix `n-carousel` can't respond quickly and repeatedly on touch, closes [#1892](https://github.com/TuSimple/naive-ui/issues/1892).
+- Fix `n-carousel` style of boundary, closes [#1866](https://github.com/TuSimple/naive-ui/issues/1866).
+- Fix `n-carousel` cannot be clicked on the touchscreen, closes [#1882](https://github.com/TuSimple/naive-ui/issues/1882).
 
 ### Fixes
 

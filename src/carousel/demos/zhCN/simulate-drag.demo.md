@@ -1,7 +1,9 @@
-# Show Arrow Button
+# 模拟拖拽
+
+轮播图会默认启用 `Touch` 事件模拟，如果你需要轮播图响应鼠标拖拽，可以使用 `draggable` 属性。
 
 ```html
-<n-carousel show-arrow>
+<n-carousel draggable>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"

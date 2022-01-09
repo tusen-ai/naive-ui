@@ -1,9 +1,9 @@
-# 更改指示点位置
+# 箭头
 
-设定 `dot-placement` 来更改指示点位置。
+设定 `show-arrow` 来显示箭头。
 
 ```html
-<n-carousel dot-placement="left" style="height: 240px;">
+<n-carousel show-arrow>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
@@ -26,7 +26,7 @@
 ```css
 .carousel-img {
   width: 100%;
-  height: 100%;
+  height: 240px;
   object-fit: cover;
 }
 ```

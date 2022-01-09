@@ -1,7 +1,12 @@
-# 显示箭头按钮
+# 垂直
 
 ```html
-<n-carousel show-arrow>
+<n-carousel
+  direction="vertical"
+  dot-placement="right"
+  show-arrow
+  style="width: 100%;height: 240px;"
+>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"

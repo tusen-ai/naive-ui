@@ -1,9 +1,9 @@
-# Autoplay
+# 按键控制
 
-Set `autoplay`, it can autoplay。
+是否通过按键切换轮播图，只有焦点在 Dots 上时才有效。
 
 ```html
-<n-carousel autoplay>
+<n-carousel keyboard>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"

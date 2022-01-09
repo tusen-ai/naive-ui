@@ -1,9 +1,9 @@
-# Autoplay
+# Arrow
 
-Set `autoplay`, it can autoplay。
+Set `show-arrow` to show the arrow。
 
 ```html
-<n-carousel autoplay>
+<n-carousel show-arrow>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"

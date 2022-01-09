@@ -6,26 +6,64 @@
 
 ```demo
 basic
+arrow
+dots
 autoplay
+vertical
+space-between
+slides-per-view
+slides-per-view-auto
+centered
+effect
+transition-name
 hover
-dot-placement
-show-arrow
+keyboard
+mousewheel
+simulate-drag
+custom-arrow-and-dots
 ```
 
 ## API
 
 ### Carousel Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| default-index | `number` | `0` | 默认显示页 | NEXT_VERSION |
+| current-index | `number` | `undefined` | 当前显示页 | NEXT_VERSION |
+| show-arrow | `boolean` | `false` | 是否显示箭头按钮 | NEXT_VERSION |
+| dot-type | `'dot' \| 'line' \| 'never'` | `'dot'` | 轮播指示点样式 | NEXT_VERSION |
+| dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | 轮播指示点位置 | NEXT_VERSION |
+| slides-per-view | `'auto' \| number` | `1` | 每一页显示的轮播图数量 | NEXT_VERSION |
+| space-between | `number` | `0` | 轮播图之间的间距 | NEXT_VERSION |
+| centered-slides | `boolean` | `false` | 是否居中显示当前页轮播图 | NEXT_VERSION |
+| direction | `'horizontal' \| 'vertical'` | `'horizontal'` | 轮播图显示的方向 |
 | autoplay | `boolean` | `false` | 是否自动播放 |
-| dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | 轮播指示点位置 |
-| interval | `number` | `5000` | 自动播放的间隔 |
-| show-arrow | `boolean` | `false` | 是否显示箭头按钮 |
+| interval | `number` | `5000` | 自动播放的间隔（ms） |
+| loop | `boolean` | `true` | 是否循环播放 | NEXT_VERSION |
 | trigger | `'click' \| 'hover'` | `'click'` | 触发切换的方式 |
+| effect | `'slide' \| 'fade' \| 'card' \| 'custom'` | `'slide'` | 轮播图切换时的过渡效果 | NEXT_VERSION |
+| transition-style | `{ transitionDuration?: string, transitionTimingFunction?: string }` | `{ transitionDuration: '300ms' }` | 过渡效果的样式 | NEXT_VERSION |
+| transition-props | `TransitionProps` | `undefined` | 自定义过渡效果属性，[参考](https://v3.cn.vuejs.org/api/built-in-components.html#transition) | NEXT_VERSION |
+| draggable | `boolean` | `false` | 是否通过鼠标拖拽切换轮播图 | NEXT_VERSION |
+| touchable | `boolean` | `true` | 是否通过触摸拖拽切换轮播图 | NEXT_VERSION |
+| mousewheel | `boolean` | `false` | 是否通过鼠标滚轮切换轮播图 | NEXT_VERSION |
+| keyboard | `boolean` | `false` | 是否通过按键切换轮播图，只有焦点在 Dots 上时才起作用 | NEXT_VERSION |
+| on-update:current-index | `(currentIndex: number, lastIndex: number) => void` | `undefined` | 当前页变化时的回调函数 | NEXT_VERSION |
 
 ### Carousel Slots
 
-| 名称    | 参数 | 说明       |
-| ------- | ---- | ---------- |
+| 名称    | 参数 | 说明 | 版本 |
+| ------- | ---- | ---- | --- |
 | default | `()` | 轮播的内容 |
+| arrow | `(info: { total: number, currentIndex: number, slideTo: (index: number) => void, slidePrev: () => void, slideNext: () => void })` | 箭头 | NEXT_VERSION |
+| dots | `(info: { total: number, currentIndex: number, slideTo: (index: number) => void })` | 指示点 | NEXT_VERSION |
+
+### Carousel Methods
+
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| to | `(index: number) => void` | 滑动至某一页 | NEXT_VERSION |
+| prev | `() => void` | 滑动至前一页 | NEXT_VERSION |
+| next | `() => void` | 滑动至后一页 | NEXT_VERSION |
+| getCurrentIndex | `() => number` | 获取当前页 | NEXT_VERSION |

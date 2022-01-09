@@ -1,9 +1,9 @@
-# Autoplay
+# Simulate drag
 
-Set `autoplay`, it can autoplay。
+Carousel enable the `Touch` event simulation by default. If you need the carousel chart to respond to mouse drag, you can use `draggable` prop.
 
 ```html
-<n-carousel autoplay>
+<n-carousel draggable>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"

@@ -1,9 +1,7 @@
-# Autoplay
-
-Set `autoplay`, it can autoplay。
+# Custom Dots
 
 ```html
-<n-carousel autoplay>
+<n-carousel>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
@@ -20,6 +18,11 @@ Set `autoplay`, it can autoplay。
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
   />
+  <template #dots="{total, current, placement, slideTo}">
+    <span class="custom-dots">
+      {{current + 1}} / {{total}}
+    </span>
+  </template>
 </n-carousel>
 ```
 
@@ -28,5 +31,11 @@ Set `autoplay`, it can autoplay。
   width: 100%;
   height: 240px;
   object-fit: cover;
+}
+
+.custom-dots {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  transform: translateY(5px);
 }
 ```

@@ -1,9 +1,9 @@
-# Autoplay
+# Keyboard
 
-Set `autoplay`, it can autoplay。
+Whether to switch the carousel by pressing the key, it is only valid when the focus is on Dots.
 
 ```html
-<n-carousel autoplay>
+<n-carousel show-arrow keyboard>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
