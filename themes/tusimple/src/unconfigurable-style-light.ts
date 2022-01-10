@@ -55,55 +55,73 @@ export const unconfigurableStyle = c([
     ])
   ]),
   cB('progress', [
-    cB('progress-graph-line-fill', {
-      background: 'linear-gradient(270deg, #FFAC26 0%, #F2E93D 100%) !important'
-    }),
-    cM('circle', [
-      cB('progress-graph-circle-fill', {
-        stroke: 'url(#progress-warning) !important'
-      })
+    cB('progress-graph', [
+      cB('progress-graph-line', [
+        cB('progress-graph-line-rail', [
+          cB('progress-graph-line-fill', {
+            background: 'linear-gradient(270deg, #FFAC26 0%, #F2E93D 100%)'
+          })
+        ])
+      ]),
+      cB('progress-graph-circle', [
+        cB('progress-graph-circle-fill', {
+          stroke: 'url(#progress-warning)'
+        })
+      ])
     ]),
     cM('info', [
-      cB('progress-graph-line-fill', {
-        background:
-          'linear-gradient(270deg, #FFAC26 0%, #F2E93D 100%) !important'
-      }),
+      cB('progress-graph-line', [
+        cB('progress-graph-line-rail', [
+          cB('progress-graph-line-fill', {
+            background: 'linear-gradient(270deg, #FFAC26 0%, #F2E93D 100%)'
+          })
+        ])
+      ]),
       cM('circle', [
         cB('progress-graph-circle-fill', {
-          stroke: 'url(#progress-warning) !important'
+          stroke: 'url(#progress-warning)'
         })
       ])
     ]),
     cM('success', [
-      cB('progress-graph-line-fill', {
-        background:
-          'linear-gradient(270deg, #4FB233 0%, #AFF25E 100%) !important'
-      }),
+      cB('progress-graph-line', [
+        cB('progress-graph-line-rail', [
+          cB('progress-graph-line-fill', {
+            background: 'linear-gradient(270deg, #4FB233 0%, #AFF25E 100%)'
+          })
+        ])
+      ]),
       cM('circle', [
         cB('progress-graph-circle-fill', {
-          stroke: 'url(#progress-success) !important'
+          stroke: 'url(#progress-success)'
         })
       ])
     ]),
     cM('warning', [
-      cB('progress-graph-line-fill', {
-        background:
-          'linear-gradient(270deg, #D92149 0%, #FF66BA 100%) !important'
-      }),
+      cB('progress-graph-line', [
+        cB('progress-graph-line-rail', [
+          cB('progress-graph-line-fill', {
+            background: 'linear-gradient(270deg, #D92149 0%, #FF66BA 100%)'
+          })
+        ])
+      ]),
       cM('circle', [
         cB('progress-graph-circle-fill', {
-          stroke: 'url(#progress-error) !important'
+          stroke: 'url(#progress-error)'
         })
       ])
     ]),
     cM('error', [
-      cB('progress-graph-line-fill', {
-        background:
-          'linear-gradient(270deg, #D92149 0%, #FF66BA 100%) !important'
-      }),
+      cB('progress-graph-line', [
+        cB('progress-graph-line-rail', [
+          cB('progress-graph-line-fill', {
+            background: 'linear-gradient(270deg, #D92149 0%, #FF66BA 100%)'
+          })
+        ])
+      ]),
       cM('circle', [
         cB('progress-graph-circle-fill', {
-          stroke: 'url(#progress-error) !important'
+          stroke: 'url(#progress-error)'
         })
       ])
     ])
