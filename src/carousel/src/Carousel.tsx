@@ -728,7 +728,7 @@ export default defineComponent({
     })
     watch(
       toRef(props, 'currentIndex'),
-      index => index !== undefined && slideTo(index)
+      (index) => index !== undefined && slideTo(index)
     )
     watch(
       duplicatedableRef,
@@ -870,7 +870,7 @@ export default defineComponent({
     }
     return (
       <div
-        ref='selfElRef'
+        ref="selfElRef"
         class={[
           `${mergedClsPrefix}-carousel`,
           `${mergedClsPrefix}-carousel--${dotPlacement}`,
@@ -885,7 +885,7 @@ export default defineComponent({
             default: () => (
               <div
                 class={`${mergedClsPrefix}-carousel__slides`}
-                role='listbox'
+                role="listbox"
                 style={this.translateStyle}
                 onMousedown={draggable ? this.handleTouchstart : undefined}
                 onTouchstart={touchable ? this.handleTouchstart : undefined}
@@ -896,16 +896,16 @@ export default defineComponent({
               >
                 {userWantsControl
                   ? slides.map((slide, i) => (
-                    <div style={slideStyles[i]} key={i}>
-                      {withDirectives(
-                        <Transition {...transitionProps}>
-                          {{
-                            default: () => slide
-                          }}
-                        </Transition>,
-                        [[vShow, this.isActive(i)]]
-                      )}
-                    </div>
+                      <div style={slideStyles[i]} key={i}>
+                        {withDirectives(
+                          <Transition {...transitionProps}>
+                            {{
+                              default: () => slide
+                            }}
+                          </Transition>,
+                          [[vShow, this.isActive(i)]]
+                        )}
+                      </div>
                   ))
                   : slides}
               </div>
@@ -913,17 +913,17 @@ export default defineComponent({
           }}
         </VResizeObserver>
         {dotType !== 'never' &&
-          (dotsSlot ? (
-            dotsSlot(dotSlotProps)
-          ) : (
-            <NCarouselDots
-              total={dotSlotProps.total}
-              currentIndex={dotSlotProps.currentIndex}
-              dotType={dotType}
-              trigger={this.trigger}
-              keyboard={this.keyboard}
-            />
-          ))}
+          (dotsSlot
+            ? dotsSlot(dotSlotProps)
+            : dotSlotProps.total > 1 && (
+                <NCarouselDots
+                  total={dotSlotProps.total}
+                  currentIndex={dotSlotProps.currentIndex}
+                  dotType={dotType}
+                  trigger={this.trigger}
+                  keyboard={this.keyboard}
+                />
+            ))}
         {showArrow &&
           (arrowSlot ? arrowSlot(arrowSlotProps) : <NCarouselArrow />)}
       </div>

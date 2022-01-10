@@ -9,6 +9,7 @@
 
 ### Fixes
 
+- Fix `n-carousel` when Carousel is a single picture dot still existence, closes [#1777](https://github.com/TuSimple/naive-ui/issues/1777).
 - Fix `n-upload` `on-finish` prop's `event` parameter type should be `ProgressEvent`.
 - Fix `n-upload` doesn't allow 2xx status code except 200.
 - Fix `n-form` when `validate` use `validateCallback`, cannot call Promise method.
