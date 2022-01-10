@@ -21,6 +21,7 @@
 - 修复 `n-message` 的 `MessageReactive` 类型缺少 `type` 参数
 - 修复 `n-select` 与 `n-input` `padding` 不一致，关闭 [#2149](https://github.com/TuSimple/naive-ui/issues/2149)
 - 修复 `n-tooltip` 用于 `n-select` `render-option` 时控制台报错，关闭 [#1436](https://github.com/TuSimple/naive-ui/issues/1436)
+- 修复 `n-select` 在 safari 中使用 `render-option` 时 ResizeObserver 报错，关闭 [#1671](https://github.com/TuSimple/naive-ui/issues/1671)
 
 ### Feats
 
@@ -51,7 +52,7 @@
 - `n-auto-complete` 新增 `render-option` 属性，关闭 [#1629](https://github.com/TuSimple/naive-ui/issues/1629)
 - `n-auto-complete` 新增 `render-label` 属性，关闭 [#1629](https://github.com/TuSimple/naive-ui/issues/1629)
 - `n-tree` 新增 `render-switcher-icon` 属性，关闭 [#1551](https://github.com/TuSimple/naive-ui/issues/1551)
-- `n-message` 导出　`MessageType` 类型
+- `n-message` 导出 `MessageType` 类型
 
 ## 2.23.2 (2021-12-29)
 

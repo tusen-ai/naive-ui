@@ -21,6 +21,7 @@
 - Fix `n-message` 's `MessageReactive` type lacks `type` parameter.
 - Fix `n-select` has different `padding` with `n-input`, closes [#2149](https://github.com/TuSimple/naive-ui/issues/2149).
 - Fix `n-tooltip` log errors in console when used in `n-select`'s `render-option`, closes [#1436](https://github.com/TuSimple/naive-ui/issues/1436).
+- Fix `n-select` log ResizeObserver errors when using `render-option` in safari, closes [#1671](https://github.com/TuSimple/naive-ui/issues/1671).
 
 ### Feats
 
