@@ -43,7 +43,7 @@ basic
 icon
 timing
 closable
-modify-content
+modify-content.vue
 manually-close
 about-theme
 multiple-line
