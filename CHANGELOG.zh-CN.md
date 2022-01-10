@@ -22,6 +22,9 @@
 - 修复 `n-select` 与 `n-input` `padding` 不一致，关闭 [#2149](https://github.com/TuSimple/naive-ui/issues/2149)
 - 修复 `n-tooltip` 用于 `n-select` `render-option` 时控制台报错，关闭 [#1436](https://github.com/TuSimple/naive-ui/issues/1436)
 - 修复 `n-select` 在 safari 中使用 `render-option` 时 ResizeObserver 报错，关闭 [#1671](https://github.com/TuSimple/naive-ui/issues/1671)
+- 修复 `n-carousel` 无法快速响应多次滑动，关闭 [#1892](https://github.com/TuSimple/naive-ui/issues/1892)
+- 修复 `n-carousel` 边界样式, 关闭 [#1866](https://github.com/TuSimple/naive-ui/issues/1866)
+- 修复 `n-carousel` 触屏下轮播内容无法点击问题, 关闭 [#1882](https://github.com/TuSimple/naive-ui/issues/1882)
 
 ### Feats
 
@@ -57,6 +60,27 @@
 - `n-time-picker` 新增 `formatted-value` 属性
 - `n-time-picker` 新增 `on-update:formatted-value` 属性
 - `n-time-picker` 新增 `default-formatted-value` 属性
+- `n-carousel` 新增 `default-index` 属性
+- `n-carousel` 新增 `current-index` 属性
+- `n-carousel` 新增 `show-arrow` 属性
+- `n-carousel` 新增 `dot-type` 属性, 关闭 [#1931](https://github.com/TuSimple/naive-ui/issues/1931)
+- `n-carousel` 新增 `dot-placement` 属性, 关闭 [#1462](https://github.com/TuSimple/naive-ui/issues/1462)
+- `n-carousel` 新增 `slides-per-view` 属性
+- `n-carousel` 新增 `space-between` 属性
+- `n-carousel` 新增 `centered-slides` 属性
+- `n-carousel` 新增 `direction` 属性, 关闭 [#1931](https://github.com/TuSimple/naive-ui/issues/1931)
+- `n-carousel` 新增 `loop` 属性
+- `n-carousel` 新增 `effect` 属性, 关闭 [#1159](https://github.com/TuSimple/naive-ui/issues/1159)
+- `n-carousel` 新增 `transition-duration` 属性, 关闭 [#1159](https://github.com/TuSimple/naive-ui/issues/1159)
+- `n-carousel` 新增 `transition-timing-function` 属性
+- `n-carousel` 新增 `transition-name` 属性, 关闭 [#1159](https://github.com/TuSimple/naive-ui/issues/1159)
+- `n-carousel` 新增 `draggable` 属性
+- `n-carousel` 新增 `touchable` 属性
+- `n-carousel` 新增 `mousewheel` 属性
+- `n-carousel` 新增 `keyboard` 属性
+- `n-carousel` 新增 `on-update:current-index` 属性
+- `n-carousel` 新增 `arrow` slot
+- `n-carousel` 新增 `dots` slot
 
 ## 2.23.2 (2021-12-29)
 
@@ -118,30 +142,6 @@
 - `n-icon` 的 CSS 变量使用 `n` 作为前缀
 - `n-modal` 的 CSS 变量使用 `n` 作为前缀
 - `n-notification` 的 CSS 变量使用 `n` 作为前缀
-- `n-carousel` 新增 `default-index` 属性
-- `n-carousel` 新增 `current-index` 属性
-- `n-carousel` 新增 `show-arrow` 属性
-- `n-carousel` 新增 `dot-type` 属性, 关闭 [#1931](https://github.com/TuSimple/naive-ui/issues/1931)
-- `n-carousel` 新增 `dot-placement` 属性, 关闭 [#1462](https://github.com/TuSimple/naive-ui/issues/1462)
-- `n-carousel` 新增 `slides-per-view` 属性
-- `n-carousel` 新增 `space-between` 属性
-- `n-carousel` 新增 `centered-slides` 属性
-- `n-carousel` 新增 `direction` 属性, 关闭 [#1931](https://github.com/TuSimple/naive-ui/issues/1931)
-- `n-carousel` 新增 `loop` 属性
-- `n-carousel` 新增 `effect` 属性, 关闭 [#1159](https://github.com/TuSimple/naive-ui/issues/1159)
-- `n-carousel` 新增 `transition-duration` 属性, 关闭 [#1159](https://github.com/TuSimple/naive-ui/issues/1159)
-- `n-carousel` 新增 `transition-timing-function` 属性
-- `n-carousel` 新增 `transition-name` 属性, 关闭 [#1159](https://github.com/TuSimple/naive-ui/issues/1159)
-- `n-carousel` 新增 `draggable` 属性
-- `n-carousel` 新增 `touchable` 属性
-- `n-carousel` 新增 `mousewheel` 属性
-- `n-carousel` 新增 `keyboard` 属性
-- `n-carousel` 新增 `on-update:current-index` 属性
-- `n-carousel` 新增 `arrow` slot
-- `n-carousel` 新增 `dots` slot
-- 修复 `n-carousel` 无法快速响应多次滑动，关闭 [#1892](https://github.com/TuSimple/naive-ui/issues/1892)
-- 修复 `n-carousel` 边界样式, 关闭 [#1866](https://github.com/TuSimple/naive-ui/issues/1866)
-- 修复 `n-carousel` 触屏下轮播内容无法点击问题, 关闭 [#1882](https://github.com/TuSimple/naive-ui/issues/1882)
 
 ### Fixes
 
