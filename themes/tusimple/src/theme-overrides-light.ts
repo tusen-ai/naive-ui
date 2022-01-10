@@ -420,7 +420,9 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     closeSizeLarge: '20px',
     fontSizeSmall: '12px',
     fontSizeMedium: '16px',
-    fontSizeLarge: '16px'
+    fontSizeLarge: '16px',
+    colorCheckable: 'rgba(102, 102, 102, .1)',
+    colorHoverCheckable: 'rgba(79, 178, 51, 0.1)'
   },
   TimePicker: {
     itemFontSize: '16px',
