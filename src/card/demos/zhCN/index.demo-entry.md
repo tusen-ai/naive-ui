@@ -11,7 +11,7 @@ cover.vue
 hoverable
 slots
 border
-segment
+segment.vue
 closable
 no-title
 loading
@@ -33,7 +33,7 @@ rtl-debug
 | footer-style | `Object \| string` | `undefined` | 卡片底部区域的样式 |
 | header-style | `Object \| string` | `undefined` | 卡片头部区域的样式 |
 | hoverable | `boolean` | `false` | 卡片是否可悬浮 |
-| segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' \| 'hard' }` | `false` | 卡片的分段区域设置 |
+| segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' }` | `false` | 卡片的分段区域设置 |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | 卡片的尺寸 |
 | title | `string` | `undefined` | 卡片的标题 |
 | on-close | `() => void` | `undefined` | 点击卡片关闭图标时的回调 |
