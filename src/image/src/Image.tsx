@@ -11,8 +11,9 @@ import {
 import NImagePreview from './ImagePreview'
 import type { ImagePreviewInst } from './ImagePreview'
 import { imageGroupInjectionKey } from './ImageGroup'
-import { ExtractPublicPropTypes } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
+import { imagePreviewSharedProps } from './interface'
 
 export interface ImageInst {
   click: () => void
@@ -32,11 +33,11 @@ const imageProps = {
   fallbackSrc: String,
   width: [String, Number] as PropType<string | number>,
   src: String,
-  showToolbar: { type: Boolean, default: true },
   previewDisabled: Boolean,
   loadDescription: String,
   onError: Function as PropType<(e: Event) => void>,
-  onLoad: Function as PropType<(e: Event) => void>
+  onLoad: Function as PropType<(e: Event) => void>,
+  ...imagePreviewSharedProps
 }
 
 export type ImageProps = ExtractPublicPropTypes<typeof imageProps>
@@ -131,9 +132,12 @@ export default defineComponent({
           imgNode
         ) : (
           <NImagePreview
+            theme={this.theme}
+            themeOverrides={this.themeOverrides}
             clsPrefix={mergedClsPrefix}
             ref="previewInstRef"
             showToolbar={this.showToolbar}
+            showToolbarTooltip={this.showToolbarTooltip}
           >
             {{
               default: () => imgNode

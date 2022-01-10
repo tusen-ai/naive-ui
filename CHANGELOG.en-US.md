@@ -5,6 +5,7 @@
 ### Breaking Changes
 
 - Fix `type PageHeaderProps` name. It was mispelled as `PageHeaderPorps` before.
+- `n-image`'s `iconColor` theme variable is renamed as `toolbarIconColor`.
 
 ### Fixes
 
@@ -12,9 +13,14 @@
 - Fix `n-upload` doesn't allow 2xx status code except 200.
 - Fix `n-form` when `validate` use `validateCallback`, cannot call Promise method.
 - Fix `n-input-number` input integer end with 0 cannot update, closes [#2115](https://github.com/TuSimple/naive-ui/issues/2115).
+- Fix `n-back-top` allow document to be passed to `listen-to` prop.
+- Fix `n-data-table`'s content can be clicked when loading, closes [#2134](https://github.com/TuSimple/naive-ui/issues/2134).
+- Fix `n-checkbox` doesn't show indeterminate icon in safari.
+- Fix `n-progress`'s inner text of `line` type not aligned in center, closes[#2138](https://github.com/TuSimple/naive-ui/issues/2138).
 
 ### Feats
 
+- `n-code` add `word-wrap` prop, closes [#2111](https://github.com/TuSimple/naive-ui/issues/2111).
 - `n-modal` adds `z-index` prop, closes [#2088](https://github.com/TuSimple/naive-ui/issues/2088).
 - `n-drawer` adds `z-index` closes.
 - `n-drawer` adds wai-aria support.
@@ -25,6 +31,22 @@
 - `n-pagination` adds `label` slot.
 - `n-tabs` adds `syncBarPosition` method, closes [#2120](https://github.com/TuSimple/naive-ui/issues/2120).
 - `n-form`, `n-form-item`'s `label-width` prop support `auto` option, closes [#2087](https://github.com/TuSimple/naive-ui/issues/2087).
+- `n-result` adds `icon` slot, closes [#2130](https://github.com/TuSimple/naive-ui/issues/2130).
+- `n-date-picker` adds `value-format` prop, closes [#2076](https://github.com/TuSimple/naive-ui/issues/2076).
+- `n-date-picker` adds `formatted-value` prop.
+- `n-date-picker` adds `default-formatted-value` prop.
+- `n-date-picker` adds `on-update:formatted-value` prop.
+- `n-date-picker`'s `on-update:value` prop will pass formatted value out.
+- `n-image` adds `show-toolbar-tooltip` prop.
+- `n-image` adds more theme variables, closes [#1531](https://github.com/TuSimple/naive-ui/issues/1531).
+- `n-upload` adds `image-group-props` prop.
+- `n-progress` adds `offset-degree` prop, closes [#2010](https://github.com/TuSimple/naive-ui/issues/2010).
+- `n-form-item` adds `feedback` slot, closes [#1142](https://github.com/TuSimple/naive-ui/issues/1142).
+- `n-form-item`'s `require-mark-placement` prop adds `'right-hanging'` option, closes [#2094](https://github.com/TuSimple/naive-ui/issues/2094).
+- `n-cascader` adds `render-label` prop, closes [#2048](https://github.com/TuSimple/naive-ui/issues/2048).
+- `n-auto-complete` adds `render-option` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
+- `n-auto-complete` adds `render-label` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
+- `n-tree` adds `render-switcher-icon` prop, closes [#1551](https://github.com/TuSimple/naive-ui/issues/1551).
 
 ## 2.23.2 (2021-12-29)
 
@@ -86,6 +108,30 @@
 - `n-icon` uses `n` as CSS vars prefix.
 - `n-modal` uses `n` as CSS vars prefix.
 - `n-notification` uses `n` as CSS vars prefix.
+- `n-carousel` add `default-index` prop.
+- `n-carousel` add `current-index` prop.
+- `n-carousel` add `show-arrow` prop.
+- `n-carousel` add `dot-type` prop, closes [#1931](https://github.com/TuSimple/naive-ui/issues/1931).
+- `n-carousel` add `dot-placement` prop, closes [#1462](https://github.com/TuSimple/naive-ui/issues/1462).
+- `n-carousel` add `slides-per-view` prop.
+- `n-carousel` add `space-between` prop.
+- `n-carousel` add `centered-slides` prop.
+- `n-carousel` add `direction` prop, closes [#1931](https://github.com/TuSimple/naive-ui/issues/1931).
+- `n-carousel` add `loop` prop.
+- `n-carousel` add `effect` prop, closes [#1159](https://github.com/TuSimple/naive-ui/issues/1159).
+- `n-carousel` add `transition-duration` prop, closes [#1159](https://github.com/TuSimple/naive-ui/issues/1159).
+- `n-carousel` add `transition-timing-function` prop.
+- `n-carousel` add `transition-name` prop, closes [#1159](https://github.com/TuSimple/naive-ui/issues/1159).
+- `n-carousel` add `draggable` prop.
+- `n-carousel` add `touchable` prop.
+- `n-carousel` add `mousewheel` prop.
+- `n-carousel` add `keyboard` prop.
+- `n-carousel` add `on-update:current-index` prop.
+- `n-carousel` add `arrow` slot.
+- `n-carousel` add `dots` slot.
+- Fix `n-carousel` can't respond quickly and repeatedly on touch, closes [#1892](https://github.com/TuSimple/naive-ui/issues/1892).
+- Fix `n-carousel` style of boundary, closes [#1866](https://github.com/TuSimple/naive-ui/issues/1866).
+- Fix `n-carousel` cannot be clicked on the touchscreen, closes [#1882](https://github.com/TuSimple/naive-ui/issues/1882).
 
 ### Fixes
 

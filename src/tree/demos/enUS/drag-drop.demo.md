@@ -1,4 +1,4 @@
-# Drag & Drop
+# Drag & drop
 
 Set `draggable` and write bunch of codes to make drag & drop work.
 

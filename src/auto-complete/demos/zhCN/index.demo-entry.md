@@ -11,30 +11,33 @@ group
 custom-input
 after-select
 show-options-by-value
+add-tooltip
 ```
 
 ## API
 
 ### AutoComplete Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| blur-after-select | `boolean` | `false` | 选中后是否 blur |
-| clear-after-select | `boolean` | `false` | 选中后是否清空 |
-| clearable | `boolean` | `false` | 自动填充是否支持可清除 |
-| default-value | `string` | `null` | 自动填充的默认值 |
-| disabled | `boolean` | `false` | 自动填充是否禁用 |
-| get-show | `(value: string) => boolean` | `undefined` | 根据输入值在聚焦的状态中决定是否显示菜单 |
-| input-props | `HTMLInputAttributes` | `undefined` | 自动填充中 input 元素的属性 |
-| loading | `boolean` | `false` | 是否展示加载状态 |
-| options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | 自动填充的自定义选项 |
-| placeholder | `string` | `'请输入'` | 自动填充的提示信息 |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 自动填充的尺寸大小 |
-| value | `string` | `undefined` | 自动填充的数据用户可控 |
-| on-blur | `(event: FocusEvent) => void` | `undefined` | blur 时触发的回调函数 |
-| on-focus | `(event: FocusEvent) => void` | `undefined` | focus 时触发的回调函数 |
-| on-select | `(value: string) => void` | `undefined` | select 选中时触发的回调函数 |
-| on-update:value | `(value: string \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| blur-after-select | `boolean` | `false` | 选中后是否 blur |  |
+| clear-after-select | `boolean` | `false` | 选中后是否清空 |  |
+| clearable | `boolean` | `false` | 自动填充是否支持可清除 |  |
+| default-value | `string` | `null` | 自动填充的默认值 |  |
+| disabled | `boolean` | `false` | 自动填充是否禁用 |  |
+| get-show | `(value: string) => boolean` | `undefined` | 根据输入值在聚焦的状态中决定是否显示菜单 |  |
+| input-props | `HTMLInputAttributes` | `undefined` | 自动填充中 input 元素的属性 |  |
+| loading | `boolean` | `false` | 是否展示加载状态 |  |
+| options | `Array<string \| AutoCompleteOption \| AutoCompleteGroupOption>` | `[]` | 自动填充的自定义选项 |  |
+| placeholder | `string` | `'请输入'` | 自动填充的提示信息 |  |
+| render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | 选项标签渲染函数 | NEXT_VERSION |
+| render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | 选项的渲染函数 | NEXT_VERSION |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 自动填充的尺寸大小 |  |
+| value | `string` | `undefined` | 自动填充的数据用户可控 |  |
+| on-blur | `(event: FocusEvent) => void` | `undefined` | blur 时触发的回调函数 |  |
+| on-focus | `(event: FocusEvent) => void` | `undefined` | focus 时触发的回调函数 |  |
+| on-select | `(value: string) => void` | `undefined` | select 选中时触发的回调函数 |  |
+| on-update:value | `(value: string \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 |  |
 
 #### AutoCompleteOption Properties
 

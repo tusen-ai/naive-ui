@@ -9,7 +9,8 @@ import {
   toRef,
   CSSProperties,
   isReactive,
-  watchEffect
+  watchEffect,
+  VNodeChild
 } from 'vue'
 import { createTreeMate, SubtreeNotLoadedError, CheckStrategy } from 'treemate'
 import {
@@ -121,6 +122,9 @@ const cascaderProps = {
     type: String,
     default: 'children'
   },
+  renderLabel: Function as PropType<
+  (option: CascaderOption, checked: boolean) => VNodeChild
+  >,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:show': [Function, Array] as PropType<
@@ -756,6 +760,7 @@ export default defineComponent({
       optionHeightRef,
       localeRef,
       labelFieldRef: toRef(props, 'labelField'),
+      renderLabelRef: toRef(props, 'renderLabel'),
       syncCascaderMenuPosition,
       syncSelectMenuPosition,
       updateKeyboardKey,

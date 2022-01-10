@@ -1,4 +1,4 @@
-# Disable Nodes
+# Disabled nodes
 
 ```html
 <n-tree

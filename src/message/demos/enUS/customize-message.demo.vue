@@ -32,7 +32,7 @@ const MessageTrigger = defineComponent({
           }
         },
         {
-          default: () => 'Lipsum'
+          default: () => 'Lpsum'
         }
       )
   }

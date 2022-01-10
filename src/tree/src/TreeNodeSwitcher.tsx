@@ -1,6 +1,7 @@
-import { h, defineComponent, PropType } from 'vue'
+import { h, defineComponent, PropType, inject } from 'vue'
 import { SwitcherIcon } from '../../_internal/icons'
 import { NIconSwitchTransition, NBaseLoading, NBaseIcon } from '../../_internal'
+import { treeInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NTreeSwitcher',
@@ -14,40 +15,51 @@ export default defineComponent({
     loading: Boolean,
     onClick: Function as PropType<(e: MouseEvent) => void>
   },
-  render () {
-    const { clsPrefix } = this
-    return (
-      <span
-        data-switcher
-        class={[
-          `${clsPrefix}-tree-node-switcher`,
-          {
-            [`${clsPrefix}-tree-node-switcher--expanded`]: this.expanded,
-            [`${clsPrefix}-tree-node-switcher--hide`]: this.hide
-          }
-        ]}
-        onClick={this.onClick}
-      >
-        <div class={`${clsPrefix}-tree-node-switcher__icon`}>
-          <NIconSwitchTransition>
-            {{
-              default: () =>
-                !this.loading ? (
-                  <NBaseIcon clsPrefix={clsPrefix} key="switcher">
-                    {{ default: () => <SwitcherIcon /> }}
-                  </NBaseIcon>
-                ) : (
-                  <NBaseLoading
-                    clsPrefix={clsPrefix}
-                    key="loading"
-                    radius={85}
-                    strokeWidth={20}
-                  />
-                )
-            }}
-          </NIconSwitchTransition>
-        </div>
-      </span>
-    )
+  setup (props) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const { renderSwitcherIconRef } = inject(treeInjectionKey, null)!
+    return () => {
+      const { clsPrefix } = props
+      return (
+        <span
+          data-switcher
+          class={[
+            `${clsPrefix}-tree-node-switcher`,
+            {
+              [`${clsPrefix}-tree-node-switcher--expanded`]: props.expanded,
+              [`${clsPrefix}-tree-node-switcher--hide`]: props.hide
+            }
+          ]}
+          onClick={props.onClick}
+        >
+          <div class={`${clsPrefix}-tree-node-switcher__icon`}>
+            <NIconSwitchTransition>
+              {{
+                default: () => {
+                  if (props.loading) {
+                    return (
+                      <NBaseLoading
+                        clsPrefix={clsPrefix}
+                        key="loading"
+                        radius={85}
+                        strokeWidth={20}
+                      />
+                    )
+                  }
+                  const { value: renderSwitcherIcon } = renderSwitcherIconRef
+                  return renderSwitcherIcon ? (
+                    renderSwitcherIcon()
+                  ) : (
+                    <NBaseIcon clsPrefix={clsPrefix} key="switcher">
+                      {{ default: () => <SwitcherIcon /> }}
+                    </NBaseIcon>
+                  )
+                }
+              }}
+            </NIconSwitchTransition>
+          </div>
+        </span>
+      )
+    }
   }
 })

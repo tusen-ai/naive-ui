@@ -12,14 +12,15 @@ import {
   watchEffect
 } from 'vue'
 import { createId } from 'seemly'
+import { PaginationProps } from '../../pagination/src/Pagination'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
 import { NPagination } from '../../pagination'
-import { PaginationProps } from '../../pagination/src/Pagination'
 import { createKey, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
-import { dataTableLight, DataTableTheme } from '../styles'
+import { dataTableLight } from '../styles'
+import type { DataTableTheme } from '../styles'
 import MainTable from './MainTable'
 import { useCheck } from './use-check'
 import { useTableData } from './use-table-data'
@@ -40,9 +41,9 @@ import type {
   CreateRowProps
 } from './interface'
 import { dataTableInjectionKey } from './interface'
-import style from './styles/index.cssr'
 import { useGroupHeader } from './use-group-header'
 import { useExpand } from './use-expand'
+import style from './styles/index.cssr'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),

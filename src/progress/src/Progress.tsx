@@ -58,7 +58,8 @@ const progressProps = {
   },
   height: Number,
   borderRadius: [String, Number] as PropType<string | number>,
-  fillBorderRadius: [String, Number] as PropType<string | number>
+  fillBorderRadius: [String, Number] as PropType<string | number>,
+  offsetDegree: Number
 } as const
 
 export type ProgressProps = ExtractPublicPropTypes<typeof progressProps>
@@ -167,6 +168,7 @@ export default defineComponent({
             railColor={railColor as any}
             fillColor={color as any}
             railStyle={railStyle as any}
+            offsetDegree={this.offsetDegree}
             percentage={percentage as number}
             viewBoxWidth={viewBoxWidth}
             strokeWidth={strokeWidth}

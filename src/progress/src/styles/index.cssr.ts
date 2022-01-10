@@ -153,7 +153,6 @@ export default c([
               margin-left: 14px;
               margin-right: 14px;
               height: inherit;
-              line-height: 16px;
               font-size: 12px;
               color: var(--n-text-color-line-inner);
               transition: color .3s var(--n-bezier);

@@ -14,6 +14,7 @@ action
 virtual
 check-strategy
 custom-field
+custom-render.vue
 ```
 
 ## API
@@ -38,6 +39,7 @@ custom-field
 | options | `CascaderOption[]` | `[]` | 填充的 options 数据 |
 | placeholder | `string` | `'请选择'` | 提示信息 |
 | remote | `boolean` | `false` | 是否远程获取数据 |
+| render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Cascader 菜单选项标签渲染函数 |
 | separator | `string` | `' / '` | 数据分隔符 |
 | show | `boolean` | `undefined` | 是否打开菜单 |
 | show-path | `boolean` | `true` | 是否在选择器中显示选项路径 |

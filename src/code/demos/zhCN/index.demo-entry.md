@@ -37,6 +37,7 @@
 ```demo
 basic.vue
 inline.vue
+softwrap.vue
 loop-debug.vue
 ```
 
@@ -44,10 +45,11 @@ loop-debug.vue
 
 ### Code Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| code | `string` | `''` | 传入的 code 字符串 |
-| hljs | `Object` | `undefined` | 如果你想局部设定 hljs，可以通过这个属性传给组件 |
-| language | `string` | `undefined` | 代码在 highlightjs 中的语言 |
-| trim | `boolean` | `true` | 是否显示 trim 后的代码 |
-| inline | `boolean` | `false` | 使用行内样式 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| code | `string` | `''` | 传入的 code 字符串 |  |
+| hljs | `Object` | `undefined` | 如果你想局部设定 hljs，可以通过这个属性传给组件 |  |
+| language | `string` | `undefined` | 代码在 highlightjs 中的语言 |  |
+| trim | `boolean` | `true` | 是否显示 trim 后的代码 |  |
+| inline | `boolean` | `false` | 使用行内样式 |  |
+| word-wrap | `boolean` | `false` | 代码过长时是否自动换行 | NEXT_VERSION |
