@@ -10,6 +10,7 @@
 ### Fixes
 
 - 修复 `n-card` 添加 `segmented` 类型缺失的 `hard`
+- 修复 `n-carousel` 只有一张图片仍显示 `dot` 的问题，关闭 [#1777](https://github.com/TuSimple/naive-ui/issues/1777)
 - 修复 `n-upload` `on-finish` 回调中 `event` 的类型应为 `ProgressEvent`
 - 修复 `n-upload` 不允许 200 之外的 2xx 响应状态码
 - 修复 `n-form` 当 `validate` 使用了 `validateCallback` 时调用 Promise 方法无效
@@ -18,6 +19,10 @@
 - 修复 `n-data-table` 在 loading 时可以点击内容，关闭 [#2134](https://github.com/TuSimple/naive-ui/issues/2134)
 - 修复 `n-checkbox` 在 safari 显示 indeterminate 图标
 - 修复 `n-progress` `line` 类型的进度条中的文字未居中，关闭 [#2138](https://github.com/TuSimple/naive-ui/issues/2138)
+- 修复 `n-message` 的 `MessageReactive` 类型缺少 `type` 参数
+- 修复 `n-select` 与 `n-input` `padding` 不一致，关闭 [#2149](https://github.com/TuSimple/naive-ui/issues/2149)
+- 修复 `n-tooltip` 用于 `n-select` `render-option` 时控制台报错，关闭 [#1436](https://github.com/TuSimple/naive-ui/issues/1436)
+- 修复 `n-select` 在 safari 中使用 `render-option` 时 ResizeObserver 报错，关闭 [#1671](https://github.com/TuSimple/naive-ui/issues/1671)
 
 ### Feats
 
@@ -48,6 +53,7 @@
 - `n-auto-complete` 新增 `render-option` 属性，关闭 [#1629](https://github.com/TuSimple/naive-ui/issues/1629)
 - `n-auto-complete` 新增 `render-label` 属性，关闭 [#1629](https://github.com/TuSimple/naive-ui/issues/1629)
 - `n-tree` 新增 `render-switcher-icon` 属性，关闭 [#1551](https://github.com/TuSimple/naive-ui/issues/1551)
+- `n-message` 导出 `MessageType` 类型
 
 ## 2.23.2 (2021-12-29)
 

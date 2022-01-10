@@ -10,6 +10,7 @@
 ### Fixes
 
 - Fix `n-card` add missing type `hard` of `segmented`
+- Fix `n-carousel` when Carousel is a single picture dot still existence, closes [#1777](https://github.com/TuSimple/naive-ui/issues/1777).
 - Fix `n-upload` `on-finish` prop's `event` parameter type should be `ProgressEvent`.
 - Fix `n-upload` doesn't allow 2xx status code except 200.
 - Fix `n-form` when `validate` use `validateCallback`, cannot call Promise method.
@@ -18,6 +19,10 @@
 - Fix `n-data-table`'s content can be clicked when loading, closes [#2134](https://github.com/TuSimple/naive-ui/issues/2134).
 - Fix `n-checkbox` doesn't show indeterminate icon in safari.
 - Fix `n-progress`'s inner text of `line` type not aligned in center, closes[#2138](https://github.com/TuSimple/naive-ui/issues/2138).
+- Fix `n-message` 's `MessageReactive` type lacks `type` parameter.
+- Fix `n-select` has different `padding` with `n-input`, closes [#2149](https://github.com/TuSimple/naive-ui/issues/2149).
+- Fix `n-tooltip` log errors in console when used in `n-select`'s `render-option`, closes [#1436](https://github.com/TuSimple/naive-ui/issues/1436).
+- Fix `n-select` log ResizeObserver errors when using `render-option` in safari, closes [#1671](https://github.com/TuSimple/naive-ui/issues/1671).
 
 ### Feats
 
@@ -48,6 +53,7 @@
 - `n-auto-complete` adds `render-option` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
 - `n-auto-complete` adds `render-label` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
 - `n-tree` adds `render-switcher-icon` prop, closes [#1551](https://github.com/TuSimple/naive-ui/issues/1551).
+- `n-message` export `MessageType` type.
 
 ## 2.23.2 (2021-12-29)
 

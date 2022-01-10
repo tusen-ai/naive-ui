@@ -135,7 +135,8 @@ export default defineComponent({
                 >
                   {indicatorPlacement === 'inside' ? (
                     <div class={`${clsPrefix}-progress-graph-line-indicator`}>
-                      {`${percentage}${unit}`}
+                      {percentage}
+                      {unit}
                     </div>
                   ) : null}
                 </div>

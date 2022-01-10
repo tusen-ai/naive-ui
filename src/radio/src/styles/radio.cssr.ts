@@ -40,6 +40,7 @@ export default cB('radio', `
     bottom: 0;
     opacity: 0;
     z-index: 1;
+    cursor: pointer;
   `),
   cE('dot', `
     background: var(--n-color);
@@ -115,6 +116,9 @@ export default cB('radio', `
     ]),
     cE('label', {
       color: 'var(--n-text-color-disabled)'
-    })
+    }),
+    cB('radio-input', `
+      cursor: not-allowed;
+    `)
   ])
 ])
