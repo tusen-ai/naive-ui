@@ -17,6 +17,7 @@
 - 修复 `n-data-table` 在 loading 时可以点击内容，关闭 [#2134](https://github.com/TuSimple/naive-ui/issues/2134)
 - 修复 `n-checkbox` 在 safari 显示 indeterminate 图标
 - 修复 `n-progress` `line` 类型的进度条中的文字未居中，关闭 [#2138](https://github.com/TuSimple/naive-ui/issues/2138)
+- 修复 `n-message` 的 `MessageReactive` 类型缺少 `type` 参数
 
 ### Feats
 
@@ -47,6 +48,7 @@
 - `n-auto-complete` 新增 `render-option` 属性，关闭 [#1629](https://github.com/TuSimple/naive-ui/issues/1629)
 - `n-auto-complete` 新增 `render-label` 属性，关闭 [#1629](https://github.com/TuSimple/naive-ui/issues/1629)
 - `n-tree` 新增 `render-switcher-icon` 属性，关闭 [#1551](https://github.com/TuSimple/naive-ui/issues/1551)
+- `n-message` 导出　`MessageType` 类型
 
 ## 2.23.2 (2021-12-29)
 

@@ -1,24 +1,32 @@
+<markdown>
 # 修改创建的信息
+</markdown>
 
-```html
-<n-space>
-  <n-button @click="createMessage"> 先开个信息 </n-button>
-  <n-button @click="changeType">改变类型</n-button>
-  <n-button @click="plus">加一</n-button>
-</n-space>
-```
+<template>
+  <n-space>
+    <n-button @click="createMessage">
+      先开个信息
+    </n-button>
+    <n-button @click="changeType">
+      改变类型
+    </n-button>
+    <n-button @click="plus">
+      加一
+    </n-button>
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useMessage } from 'naive-ui'
+import { useMessage, MessageReactive, MessageType } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     const message = useMessage()
-    const types = ['success', 'info', 'warning', 'error', 'loading']
+    const types: MessageType[] = ['success', 'info', 'warning', 'error', 'loading']
     const countRef = ref(0)
     const typeIndexRef = ref(0)
-    let msgReactive = null
+    let msgReactive:MessageReactive | null = null
 
     return {
       plus () {
@@ -41,4 +49,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

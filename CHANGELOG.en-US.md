@@ -17,6 +17,7 @@
 - Fix `n-data-table`'s content can be clicked when loading, closes [#2134](https://github.com/TuSimple/naive-ui/issues/2134).
 - Fix `n-checkbox` doesn't show indeterminate icon in safari.
 - Fix `n-progress`'s inner text of `line` type not aligned in center, closes[#2138](https://github.com/TuSimple/naive-ui/issues/2138).
+- Fix `n-message` 's `MessageReactive` type lacks `type` parameter.
 
 ### Feats
 
@@ -47,6 +48,7 @@
 - `n-auto-complete` adds `render-option` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
 - `n-auto-complete` adds `render-label` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
 - `n-tree` adds `render-switcher-icon` prop, closes [#1551](https://github.com/TuSimple/naive-ui/issues/1551).
+- `n-message` export `MessageType` type.
 
 ## 2.23.2 (2021-12-29)
 

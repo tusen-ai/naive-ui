@@ -1,24 +1,32 @@
+<markdown>
 # Modify exist message
+</markdown>
 
-```html
-<n-space>
-  <n-button @click="createMessage"> Create a Message Firstly </n-button>
-  <n-button @click="changeType">Change Type</n-button>
-  <n-button @click="plus">Plus 1</n-button>
-</n-space>
-```
+<template>
+  <n-space>
+    <n-button @click="createMessage">
+      Create a Message Firstly
+    </n-button>
+    <n-button @click="changeType">
+      Change Type
+    </n-button>
+    <n-button @click="plus">
+      Plus 1
+    </n-button>
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useMessage } from 'naive-ui'
+import { useMessage, MessageReactive, MessageType } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     const message = useMessage()
-    const types = ['success', 'info', 'warning', 'error', 'loading']
+    const types: MessageType[] = ['success', 'info', 'warning', 'error', 'loading']
     const countRef = ref(0)
     const typeIndexRef = ref(0)
-    let msgReactive = null
+    let msgReactive:MessageReactive | null = null
 
     return {
       plus () {
@@ -41,4 +49,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
