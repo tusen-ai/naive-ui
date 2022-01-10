@@ -9,6 +9,7 @@
 
 ### Fixes
 
+- Fix `n-card` add miss type `hard` of `segmented`
 - Fix `n-upload` `on-finish` prop's `event` parameter type should be `ProgressEvent`.
 - Fix `n-upload` doesn't allow 2xx status code except 200.
 - Fix `n-form` when `validate` use `validateCallback`, cannot call Promise method.

@@ -18,9 +18,9 @@ import style from './styles/index.cssr'
 import useRtl from '../../_mixins/use-rtl'
 
 export interface Segmented {
-  content?: boolean | 'soft'
-  footer?: boolean | 'soft'
-  action?: boolean | 'soft'
+  content?: boolean | 'soft' | 'hard'
+  footer?: boolean | 'soft' | 'hard'
+  action?: boolean | 'soft' | 'hard'
 }
 
 export const cardBaseProps = {
