@@ -118,7 +118,7 @@ export default cB('radio', `
       color: 'var(--n-text-color-disabled)'
     }),
     cB('radio-input', `
-    cursor: not-allowed;
-  `)
+      cursor: not-allowed;
+    `)
   ])
 ])
