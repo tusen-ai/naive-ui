@@ -62,12 +62,12 @@ export const unconfigurableStyle = c([
             background: 'linear-gradient(270deg, #FFAC26 0%, #F2E93D 100%)'
           })
         ])
+      ]),
+      cB('progress-graph-circle', [
+        cB('progress-graph-circle-fill', {
+          stroke: 'url(#progress-warning)'
+        })
       ])
-    ]),
-    cM('circle', [
-      cB('progress-graph-circle-fill', {
-        stroke: 'url(#progress-warning)'
-      })
     ]),
     cM('info', [
       cB('progress-graph-line', [
