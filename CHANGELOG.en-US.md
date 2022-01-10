@@ -53,6 +53,10 @@
 - `n-auto-complete` adds `render-label` prop, closes [#1629](https://github.com/TuSimple/naive-ui/issues/1629).
 - `n-tree` adds `render-switcher-icon` prop, closes [#1551](https://github.com/TuSimple/naive-ui/issues/1551).
 - `n-message` export `MessageType` type.
+- `n-time-picker` adds `value-format` prop.
+- `n-time-picker` adds `formatted-value` prop.
+- `n-time-picker` adds `on-update:formatted-value` prop.
+- `n-time-picker` adds `default-formatted-value` prop.
 
 ## 2.23.2 (2021-12-29)
 

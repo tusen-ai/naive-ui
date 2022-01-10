@@ -53,6 +53,10 @@
 - `n-auto-complete` 新增 `render-label` 属性，关闭 [#1629](https://github.com/TuSimple/naive-ui/issues/1629)
 - `n-tree` 新增 `render-switcher-icon` 属性，关闭 [#1551](https://github.com/TuSimple/naive-ui/issues/1551)
 - `n-message` 导出 `MessageType` 类型
+- `n-time-picker` 新增 `value-format` 属性
+- `n-time-picker` 新增 `formatted-value` 属性
+- `n-time-picker` 新增 `on-update:formatted-value` 属性
+- `n-time-picker` 新增 `default-formatted-value` 属性
 
 ## 2.23.2 (2021-12-29)
 
