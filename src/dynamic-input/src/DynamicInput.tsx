@@ -223,6 +223,13 @@ export default defineComponent({
       currentIndex: number,
       targetIndex: number
     ): void {
+      if (
+        currentIndex < 0 ||
+        targetIndex < 0 ||
+        currentIndex >= array.length ||
+        targetIndex >= array.length
+      ) { return }
+      if (currentIndex === targetIndex) return
       const currentItem = array[currentIndex]
       array[currentIndex] = array[targetIndex]
       array[targetIndex] = currentItem
