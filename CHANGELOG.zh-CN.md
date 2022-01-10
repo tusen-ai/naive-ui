@@ -18,6 +18,7 @@
 - 修复 `n-checkbox` 在 safari 显示 indeterminate 图标
 - 修复 `n-progress` `line` 类型的进度条中的文字未居中，关闭 [#2138](https://github.com/TuSimple/naive-ui/issues/2138)
 - 修复 `n-message` 的 `MessageReactive` 类型缺少 `type` 参数
+- 修复 `n-select` 与 `n-input` `padding` 不一致，关闭 [#2149](https://github.com/TuSimple/naive-ui/issues/2149)
 
 ### Feats
 
