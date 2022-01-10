@@ -6,4 +6,4 @@ export type {
   MessageProviderProps,
   MessageReactive
 } from './src/MessageProvider'
-export type { MessageOptions, MessageProviderRenderMessage } from './src/types'
+export type { MessageOptions, MessageProviderRenderMessage, MessageType } from './src/types'
