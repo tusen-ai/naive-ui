@@ -11,7 +11,8 @@ import {
   withDirectives,
   vShow,
   InputHTMLAttributes,
-  HTMLAttributes
+  HTMLAttributes,
+  watchEffect
 } from 'vue'
 import { happensIn } from 'seemly'
 import { createTreeMate, TreeNode } from 'treemate'
@@ -31,8 +32,8 @@ import {
 import { RenderTag } from '../../_internal/selection/src/interface'
 import { useTheme, useConfig, useLocale, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, useAdjustedTo, ExtractPublicPropTypes } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
+import { call, useAdjustedTo, warnOnce } from '../../_utils'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import {
   NInternalSelectMenu,
   NInternalSelection,
@@ -46,7 +47,6 @@ import {
   filterOptions,
   defaultFilter
 } from './utils'
-import style from './styles/index.cssr'
 import type {
   SelectMixedOption,
   SelectBaseOption,
@@ -58,6 +58,7 @@ import type {
   Size,
   ValueAtom
 } from './interface'
+import style from './styles/index.cssr'
 
 const selectProps = {
   ...(useTheme.props as ThemeProps<SelectTheme>),
@@ -111,7 +112,7 @@ const selectProps = {
   },
   fallbackOption: {
     type: [Function, Boolean] as PropType<
-    ((value: string | number) => SelectBaseOption) | false
+      ((value: string | number) => SelectBaseOption) | false
     >,
     default: () => (value: string | number) => ({
       label: String(value),
@@ -165,34 +166,13 @@ const selectProps = {
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
-  /** deprecated */
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'select',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  },
-  items: {
-    type: Array as PropType<SelectMixedOption[] | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn('select', '`items` is deprecated, please use `options` instead.')
-      }
-      return true
-    },
-    default: undefined
-  },
   displayDirective: {
     type: String as PropType<'if' | 'show'>,
     default: 'show'
-  }
+  },
+  /** deprecated */
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  items: Array as PropType<SelectMixedOption[]>
 } as const
 
 export type SelectProps = ExtractPublicPropTypes<typeof selectProps>
@@ -201,6 +181,23 @@ export default defineComponent({
   name: 'Select',
   props: selectProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.items !== undefined) {
+          warnOnce(
+            'select',
+            '`items` is deprecated, please use `options` instead.'
+          )
+        }
+        if (props.onChange !== undefined) {
+          warnOnce(
+            'select',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
+
     const { mergedClsPrefixRef, mergedBorderedRef, namespaceRef } =
       useConfig(props)
     const themeRef = useTheme(

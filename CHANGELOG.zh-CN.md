@@ -20,6 +20,7 @@
 - 修复 `n-progress` `line` 类型的进度条中的文字未居中，关闭 [#2138](https://github.com/TuSimple/naive-ui/issues/2138)
 - 修复 `n-message` 的 `MessageReactive` 类型缺少 `type` 参数
 - 修复 `n-select` 与 `n-input` `padding` 不一致，关闭 [#2149](https://github.com/TuSimple/naive-ui/issues/2149)
+- 修复 `n-tooltip` 用于 `n-select` `render-option` 时控制台报错，关闭 [#1436](https://github.com/TuSimple/naive-ui/issues/1436)
 
 ### Feats
 
