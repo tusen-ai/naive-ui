@@ -32,7 +32,7 @@
 - `n-modal` adds `z-index` prop, closes [#2088](https://github.com/TuSimple/naive-ui/issues/2088).
 - `n-drawer` adds `z-index` closes.
 - `n-drawer` adds wai-aria support.
-- `n-message-provider` adds `render-message` prop.
+- `useMessage`'s option support `render` prop.
 - `n-data-table` `TableColumn` supports `string` typed `width`, closes [#2102](https://github.com/TuSimple/naive-ui/issues/2102).
 - `n-calendar` adds `on-panel-change` prop, closes [#2082](https://github.com/TuSimple/naive-ui/issues/2082).
 - `n-upload` adds `on-error` prop.
