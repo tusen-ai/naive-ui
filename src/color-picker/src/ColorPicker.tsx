@@ -15,7 +15,8 @@ import {
   ComputedRef,
   Ref,
   watch,
-  nextTick
+  nextTick,
+  renderSlot
 } from 'vue'
 import {
   hsv2rgb,
@@ -106,7 +107,7 @@ export const colorPickerPanelProps = {
   >,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  renderLabel: Function as PropType<RenderLabel>
+  label: Function as PropType<RenderLabel>
 } as const
 
 export type ColorPickerProps = ExtractPublicPropTypes<
@@ -632,7 +633,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     return (
       <div
         class={`${mergedClsPrefix}-color-picker`}
@@ -650,8 +651,12 @@ export default defineComponent({
                       value={this.mergedValue}
                       hsla={this.hsla}
                       onClick={this.handleTriggerClick}
-                      renderLabel={this.renderLabel}
-                    />
+                      label={this.label}
+                    >
+                      {{
+                        label: () => renderSlot($slots, 'label')
+                      }}
+                    </ColorPickerTrigger>
                   )
                 }}
               </VTarget>,

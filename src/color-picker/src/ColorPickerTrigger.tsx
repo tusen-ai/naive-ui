@@ -18,10 +18,12 @@ export default defineComponent({
       default: null
     },
     onClick: Function as PropType<() => void>,
-    renderLabel: Function as PropType<RenderLabel>
+    label: Function as PropType<RenderLabel>
   },
   render () {
-    const { hsla, value, clsPrefix, renderLabel } = this
+    const { $slots, hsla, value, clsPrefix, label } = this
+    const renderLabel = label || $slots.label
+
     return (
       <div class={`${clsPrefix}-color-picker-trigger`} onClick={this.onClick}>
         <div class={`${clsPrefix}-color-picker-trigger__fill`}>
@@ -43,7 +45,7 @@ export default defineComponent({
                 color: hsla[2] > 50 || hsla[3] < 0.5 ? 'black' : 'white'
               }}
             >
-              {renderLabel ? renderLabel(value) : value}
+              {renderLabel ? renderLabel({ value }) : value}
             </div>
           ) : null}
         </div>
