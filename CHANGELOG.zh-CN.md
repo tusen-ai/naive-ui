@@ -82,6 +82,7 @@
 - `n-carousel` 新增 `on-update:current-index` 属性
 - `n-carousel` 新增 `arrow` 插槽
 - `n-carousel` 新增 `dots` 插槽
+- `n-color-picker` 新增 `label` 插槽
 - `n-form-item` 新增 `label-props` 属性
 
 ## 2.23.2 (2021-12-29)

@@ -1,5 +1,6 @@
 import { HSLA, toHslaString } from 'seemly'
 import { defineComponent, PropType, h } from 'vue'
+import { RenderLabel } from './interface'
 
 export default defineComponent({
   name: 'ColorPickerTrigger',
@@ -16,10 +17,13 @@ export default defineComponent({
       type: (Array as unknown) as PropType<HSLA | null>,
       default: null
     },
-    onClick: Function as PropType<() => void>
+    onClick: Function as PropType<() => void>,
+    label: Function as PropType<RenderLabel>
   },
   render () {
-    const { hsla, value, clsPrefix } = this
+    const { $slots, hsla, value, clsPrefix, label } = this
+    const renderLabel = label || $slots.label
+
     return (
       <div class={`${clsPrefix}-color-picker-trigger`} onClick={this.onClick}>
         <div class={`${clsPrefix}-color-picker-trigger__fill`}>
@@ -41,7 +45,7 @@ export default defineComponent({
                 color: hsla[2] > 50 || hsla[3] < 0.5 ? 'black' : 'white'
               }}
             >
-              {value}
+              {renderLabel ? renderLabel(value) : value}
             </div>
           ) : null}
         </div>

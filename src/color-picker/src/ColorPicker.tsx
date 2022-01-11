@@ -15,7 +15,8 @@ import {
   ComputedRef,
   Ref,
   watch,
-  nextTick
+  nextTick,
+  renderSlot
 } from 'vue'
 import {
   hsv2rgb,
@@ -62,7 +63,7 @@ import ColorPickerTrigger from './ColorPickerTrigger'
 import { deriveDefaultValue, getModeFromValue } from './utils'
 import type { ColorPickerMode, ActionType } from './utils'
 import style from './styles/index.cssr'
-import { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import { OnUpdateValue, OnUpdateValueImpl, RenderLabel } from './interface'
 import { NButton } from '../../button'
 import ColorPickerSwatches from './ColorPickerSwatches'
 import ColorPreview from './ColorPreview'
@@ -105,7 +106,8 @@ export const colorPickerPanelProps = {
   MaybeArray<(value: boolean) => void>
   >,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  label: Function as PropType<RenderLabel>
 } as const
 
 export type ColorPickerProps = ExtractPublicPropTypes<
@@ -632,7 +634,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     return (
       <div
         class={`${mergedClsPrefix}-color-picker`}
@@ -650,7 +652,12 @@ export default defineComponent({
                       value={this.mergedValue}
                       hsla={this.hsla}
                       onClick={this.handleTriggerClick}
-                    />
+                      label={this.label}
+                    >
+                      {{
+                        label: $slots.label ? () => renderSlot($slots, 'label') : undefined
+                      }}
+                    </ColorPickerTrigger>
                   )
                 }}
               </VTarget>,
