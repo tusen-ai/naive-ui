@@ -92,10 +92,10 @@ export default c([
         font-size: var(--n-icon-size-circle);
       `)
     ]),
-    cM('multiple-circle', {
-      width: '200px',
-      color: 'inherit'
-    }, [
+    cM('multiple-circle', `
+      width: 200px;
+      color: inherit;
+    `, [
       cB('progress-text', `
         font-weight: var(--n-font-weight-circle);
         color: var(--n-text-color-circle);
@@ -138,14 +138,15 @@ export default c([
       ]),
       cB('progress-graph-line', [
         cM('indicator-inside', [
-          cB('progress-graph-line-rail', {
-            height: '16px',
-            borderRadius: '10px'
-          }, [
-            cB('progress-graph-line-fill', {
-              height: 'inherit',
-              borderRadius: '10px'
-            }),
+          cB('progress-graph-line-rail', `
+            height: 16px;
+            line-height: 16px;
+            border-radius: 10px;
+          `, [
+            cB('progress-graph-line-fill', `
+              height: inherit;
+              border-radius: 10px;
+            `),
             cB('progress-graph-line-indicator', `
               background: #0000;
               white-space: nowrap;
@@ -164,10 +165,10 @@ export default c([
           display: flex;
           align-items: center;
         `, [
-          cB('progress-graph-line-rail', {
-            flex: 1,
-            transition: 'background-color .3s var(--n-bezier)'
-          }),
+          cB('progress-graph-line-rail', `
+            flex: 1;
+            transition: background-color .3s var(--n-bezier);
+          `),
           cB('progress-graph-line-indicator', `
             background: var(--n-fill-color);
             font-size: 12px;

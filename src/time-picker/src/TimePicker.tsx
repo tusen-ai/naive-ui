@@ -38,13 +38,8 @@ import { InputInst, NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { useConfig, useTheme, useLocale, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import {
-  call,
-  useAdjustedTo,
-  MaybeArray,
-  ExtractPublicPropTypes,
-  warnOnce
-} from '../../_utils'
+import { call, useAdjustedTo, warnOnce } from '../../_utils'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { timePickerLight } from '../styles'
 import type { TimePickerTheme } from '../styles'
 import Panel from './Panel'
@@ -53,6 +48,8 @@ import {
   IsMinuteDisabled,
   IsSecondDisabled,
   ItemValue,
+  OnUpdateFormattedValue,
+  OnUpdateFormattedValueImpl,
   OnUpdateValue,
   OnUpdateValueImpl,
   PanelRef,
@@ -86,6 +83,7 @@ const timePickerProps = {
     type: Number as PropType<number | null>,
     default: null
   },
+  defaultFormattedValue: String,
   placeholder: String,
   placement: {
     type: String,
@@ -96,6 +94,8 @@ const timePickerProps = {
     type: String,
     default: 'HH:mm:ss'
   },
+  valueFormat: String,
+  formattedValue: String as PropType<string | null>,
   isHourDisabled: Function as PropType<IsHourDisabled>,
   size: String as PropType<Size>,
   isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
@@ -104,6 +104,12 @@ const timePickerProps = {
   clearable: Boolean,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onUpdateFormattedValue: [Function, Array] as PropType<
+  MaybeArray<OnUpdateFormattedValue>
+  >,
+  'onUpdate:formattedValue': [Function, Array] as PropType<
+  MaybeArray<OnUpdateFormattedValue>
+  >,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   // private
@@ -176,17 +182,43 @@ export default defineComponent({
     const inputInstRef = ref<InputInst | null>(null)
     const panelInstRef = ref<PanelRef | null>(null)
 
-    const uncontrolledValueRef = ref(props.defaultValue)
-    const controlledValueRef = toRef(props, 'value')
-    const mergedValueRef = useMergedState(
-      controlledValueRef,
-      uncontrolledValueRef
-    )
     const dateFnsOptionsRef = computed(() => {
       return {
         locale: dateLocaleRef.value.locale
       }
     })
+
+    function getTimestampFromFormattedValue (
+      value: string | null
+    ): number | null {
+      if (value === null) return null
+      return strictParse(
+        value,
+        props.valueFormat || props.format,
+        new Date(),
+        dateFnsOptionsRef.value
+      ).getTime()
+    }
+
+    const { defaultValue, defaultFormattedValue } = props
+
+    const uncontrolledValueRef = ref(
+      defaultFormattedValue !== undefined
+        ? getTimestampFromFormattedValue(defaultFormattedValue)
+        : defaultValue
+    )
+    const mergedValueRef = computed(() => {
+      const { formattedValue } = props
+      if (formattedValue !== undefined) {
+        return getTimestampFromFormattedValue(formattedValue)
+      }
+      const { value } = props
+      if (value !== undefined) {
+        return value
+      }
+      return uncontrolledValueRef.value
+    })
+
     const { value: mergedValue } = mergedValueRef
     const displayTimeStringRef = ref(
       mergedValue === null
@@ -279,16 +311,46 @@ export default defineComponent({
       if (value === null) return null
       return Number(format(value, 'ss', dateFnsOptionsRef.value))
     })
-    function doChange (value: number | null): void {
+    function doUpdateFormattedValue (
+      value: string | null,
+      timestampValue: number | null
+    ): void {
+      const {
+        onUpdateFormattedValue,
+        'onUpdate:formattedValue': _onUpdateFormattedValue
+      } = props
+      if (onUpdateFormattedValue) {
+        call(
+          onUpdateFormattedValue as OnUpdateFormattedValueImpl,
+          value,
+          timestampValue
+        )
+      }
+      if (_onUpdateFormattedValue) {
+        call(
+          _onUpdateFormattedValue as OnUpdateFormattedValueImpl,
+          value,
+          timestampValue
+        )
+      }
+    }
+    function doUpdateValue (value: number | null): void {
       const {
         onUpdateValue,
         'onUpdate:value': _onUpdateValue,
         onChange
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
-      if (onChange) call(onChange as OnUpdateValueImpl, value)
+      const formattedValue =
+        value === null ? null : format(value, props.valueFormat || props.format)
+      if (onUpdateValue) {
+        call(onUpdateValue as OnUpdateValueImpl, value, formattedValue)
+      }
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, formattedValue)
+      }
+      if (onChange) call(onChange as OnUpdateValueImpl, value, formattedValue)
+      doUpdateFormattedValue(formattedValue, value)
       uncontrolledValueRef.value = value
       nTriggerFormChange()
       nTriggerFormInput()
@@ -307,7 +369,7 @@ export default defineComponent({
     }
     function handleTimeInputClear (e: MouseEvent): void {
       e.stopPropagation()
-      doChange(null)
+      doUpdateValue(null)
       deriveInputValue(null)
     }
     function handleFocusDetectorFocus (): void {
@@ -347,25 +409,25 @@ export default defineComponent({
     function handleHourClick (hour: ItemValue): void {
       if (typeof hour === 'string') return
       if (mergedValueRef.value === null) {
-        doChange(getTime(setHours(startOfHour(new Date()), hour)))
+        doUpdateValue(getTime(setHours(startOfHour(new Date()), hour)))
       } else {
-        doChange(getTime(setHours(mergedValueRef.value, hour)))
+        doUpdateValue(getTime(setHours(mergedValueRef.value, hour)))
       }
     }
     function handleMinuteClick (minute: ItemValue): void {
       if (typeof minute === 'string') return
       if (mergedValueRef.value === null) {
-        doChange(getTime(setMinutes(startOfMinute(new Date()), minute)))
+        doUpdateValue(getTime(setMinutes(startOfMinute(new Date()), minute)))
       } else {
-        doChange(getTime(setMinutes(mergedValueRef.value, minute)))
+        doUpdateValue(getTime(setMinutes(mergedValueRef.value, minute)))
       }
     }
     function handleSecondClick (second: ItemValue): void {
       if (typeof second === 'string') return
       if (mergedValueRef.value === null) {
-        doChange(getTime(setSeconds(startOfSecond(new Date()), second)))
+        doUpdateValue(getTime(setSeconds(startOfSecond(new Date()), second)))
       } else {
-        doChange(getTime(setSeconds(mergedValueRef.value, second)))
+        doUpdateValue(getTime(setSeconds(mergedValueRef.value, second)))
       }
     }
     function handleAmPmClick (amPm: ItemValue): void {
@@ -374,17 +436,17 @@ export default defineComponent({
         const now = new Date()
         const hours = getHours(now)
         if (amPm === 'pm' && hours < 12) {
-          doChange(getTime(setHours(now, hours + 12)))
+          doUpdateValue(getTime(setHours(now, hours + 12)))
         } else if (amPm === 'am' && hours >= 12) {
-          doChange(getTime(setHours(now, hours - 12)))
+          doUpdateValue(getTime(setHours(now, hours - 12)))
         }
-        doChange(getTime(now))
+        doUpdateValue(getTime(now))
       } else {
         const hours = getHours(mergedValue)
         if (amPm === 'pm' && hours < 12) {
-          doChange(getTime(setHours(mergedValue, hours + 12)))
+          doUpdateValue(getTime(setHours(mergedValue, hours + 12)))
         } else if (amPm === 'am' && hours >= 12) {
-          doChange(getTime(setHours(mergedValue, hours - 12)))
+          doUpdateValue(getTime(setHours(mergedValue, hours - 12)))
         }
       }
     }
@@ -482,7 +544,7 @@ export default defineComponent({
     }
     function handleTimeInputUpdateValue (v: string): void {
       if (v === '') {
-        doChange(null)
+        doUpdateValue(null)
         return
       }
       const time = strictParse(
@@ -500,14 +562,14 @@ export default defineComponent({
             minutes: getMinutes(time),
             seconds: getSeconds(time)
           })
-          doChange(getTime(newTime))
+          doUpdateValue(getTime(newTime))
         } else {
-          doChange(getTime(time))
+          doUpdateValue(getTime(time))
         }
       }
     }
     function handleCancelClick (): void {
-      doChange(memorizedValueRef.value)
+      doUpdateValue(memorizedValueRef.value)
       doUpdateShow(false)
     }
     function handleNowClick (): void {
@@ -534,7 +596,7 @@ export default defineComponent({
         ),
         mergeSeconds
       )
-      doChange(getTime(newValue))
+      doUpdateValue(getTime(newValue))
     }
     function handleConfirmClick (): void {
       deriveInputValue()
@@ -556,7 +618,7 @@ export default defineComponent({
     })
     watch(mergedShowRef, () => {
       if (isValueInvalidRef.value) {
-        doChange(memorizedValueRef.value)
+        doUpdateValue(memorizedValueRef.value)
       }
     })
     provide(timePickerInjectionKey, {
