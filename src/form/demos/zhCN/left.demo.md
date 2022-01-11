@@ -16,6 +16,7 @@
   ref="formRef"
   label-placement="left"
   label-width="auto"
+  require-mark-placement="right-hanging"
   :size="size"
   :style="{
     maxWidth: '640px'

@@ -15,6 +15,7 @@
   :rules="rules"
   ref="formRef"
   label-placement="left"
+  require-mark-placement="right-hanging"
   :size="size"
   label-width="auto"
   :style="{

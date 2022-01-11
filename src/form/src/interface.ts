@@ -45,7 +45,7 @@ export type FormItemInternalValidate = (
 export type FormItemValidate = ((
   options: FormItemValidateOptions
 ) => Promise<void>) &
-((trigger?: string, callback?: ValidateCallback) => Promise<void>)
+  ((trigger?: string, callback?: ValidateCallback) => Promise<void>)
 
 export interface FormItemInst {
   validate: FormItemValidate
@@ -59,7 +59,7 @@ export type FormItemRowRef = FormItemInst
 
 export interface FormInjection {
   props: FormSetupProps
-  maxChildLabelWidthRef: Ref<number>
+  maxChildLabelWidthRef: Ref<number | undefined>
   deriveMaxChildLabelWidth: (currentWidth: number) => void
 }
 
