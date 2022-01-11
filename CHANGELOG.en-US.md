@@ -25,6 +25,7 @@
 - Fix `n-carousel` can't respond quickly and repeatedly on touch, closes [#1892](https://github.com/TuSimple/naive-ui/issues/1892).
 - Fix `n-carousel` style of boundary, closes [#1866](https://github.com/TuSimple/naive-ui/issues/1866).
 - Fix `n-carousel` cannot be clicked on the touchscreen, closes [#1882](https://github.com/TuSimple/naive-ui/issues/1882).
+- Fix `n-color-picker` default mode can only be rgb is default value is empty.
 
 ### Feats
 

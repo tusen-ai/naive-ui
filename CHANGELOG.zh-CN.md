@@ -25,6 +25,7 @@
 - 修复 `n-carousel` 无法快速响应多次滑动，关闭 [#1892](https://github.com/TuSimple/naive-ui/issues/1892)
 - 修复 `n-carousel` 边界样式, 关闭 [#1866](https://github.com/TuSimple/naive-ui/issues/1866)
 - 修复 `n-carousel` 触屏下轮播内容无法点击问题, 关闭 [#1882](https://github.com/TuSimple/naive-ui/issues/1882)
+- 修复 `n-color-picker` 在空值的情况下默认模式只能为 rgb
 
 ### Feats
 
