@@ -202,7 +202,7 @@ describe('n-form', () => {
         {{
           default: () => {
             return (
-              <NFormItem label="star kirby" for="input">
+              <NFormItem label="star kirby" labelProps={{ for: 'input' }}>
                 {{
                   default: () => <NInput />
                 }}
@@ -212,8 +212,6 @@ describe('n-form', () => {
         }}
       </NForm>
     ))
-    expect(
-      wrapper.find('.n-form-item-label').attributes('for')
-    ).toBe('input')
+    expect(wrapper.find('.n-form-item-label').attributes('for')).toBe('input')
   })
 })

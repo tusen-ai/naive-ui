@@ -75,10 +75,10 @@ interface PaginationInfo {
 
 ### Pagination Slots
 
-| Name   | Parameters                      | Description    | Version      |
-| ------ | ------------------------------- | -------------- | ------------ |
-| label  | `(info: PaginationRenderLabel)` | Item content.  | NEXT_VERSION |
-| next   | `(info: PaginationInfo)`        | Next page.     |              |
-| prev   | `(info: PaginationInfo)`        | Previous page. |              |
-| prefix | `(info: PaginationInfo)`        | Page prefix.   |              |
-| suffix | `(info: PaginationInfo)`        | Page suffix.   |              |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| label | The same as `PaginationRenderLabel`'s parameters | Item content. | NEXT_VERSION |
+| next | `(info: PaginationInfo)` | Next page. |  |
+| prev | `(info: PaginationInfo)` | Previous page. |  |
+| prefix | `(info: PaginationInfo)` | Page prefix. |  |
+| suffix | `(info: PaginationInfo)` | Page suffix. |  |

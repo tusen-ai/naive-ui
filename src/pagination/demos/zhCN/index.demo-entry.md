@@ -77,7 +77,7 @@ interface PaginationInfo {
 
 | 名称   | 参数                            | 说明         | 版本         |
 | ------ | ------------------------------- | ------------ | ------------ |
-| label  | `(info: PaginationRenderLabel)` | 每一项的内容 | NEXT_VERSION |
+| label  | 同 `PaginationRenderLabel` 参数 | 每一项的内容 | NEXT_VERSION |
 | next   | `(info: PaginationInfo)`        | 下一页       |              |
 | prev   | `(info: PaginationInfo)`        | 上一页       |              |
 | prefix | `(info: PaginationInfo)`        | 分页前缀     |              |

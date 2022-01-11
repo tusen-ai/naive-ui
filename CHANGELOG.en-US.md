@@ -84,6 +84,7 @@
 - `n-carousel` adds `dots` slot.
 - `n-form-item` adds `for` prop.
 - `n-color-picker` adds `label` slot.
+- `n-color-picker` adds `render-label` prop.
 - `n-form-item` adds `label-props` prop.
 
 ## 2.23.2 (2021-12-29)

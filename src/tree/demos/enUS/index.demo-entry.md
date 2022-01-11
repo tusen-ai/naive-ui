@@ -18,7 +18,7 @@ async
 disabled
 prefix-and-suffix
 batch-render
-switcher-icon
+switcher-icon.vue
 ```
 
 ## API

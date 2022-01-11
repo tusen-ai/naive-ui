@@ -62,7 +62,7 @@ partially-apply-rules
 | label | `string` | `undefined` | Label. |  |
 | label-align | `'left' \| 'right'` | `undefined` | Text alignment inside the label. If not set, it will inherit the parent form's `label-align`. |  |
 | label-placement | `'left' \| 'top'` | `undefined` | If not set, it will inherit the parent form's `label-placement`. |  |
-| label-props | `LabelHTMLAttributes` | `undefined` | HTML attributes of the label. | NEXT_VERSION |
+| label-props | `LabelHTMLAttributes` | `undefined` | HTML attributes of the label element inside form item. | NEXT_VERSION |
 | label-style | `CSSProperties \| string` | `undefined` | Label style. |  |
 | label-width | `number \| string \| 'auto'` | `undefined` | If not set, it will inherit the parent form's `label-width`,`'auto'` means label width will be auto adjusted. |  |
 | path | `string` | `undefined` | The path to use in the parent form's model object. |  |
