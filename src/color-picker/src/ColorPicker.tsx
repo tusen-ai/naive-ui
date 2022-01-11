@@ -654,7 +654,7 @@ export default defineComponent({
                       label={this.label}
                     >
                       {{
-                        label: $slots['label'] ? () => renderSlot($slots, 'label') : undefined
+                        label: $slots.label ? () => renderSlot($slots, 'label') : undefined
                       }}
                     </ColorPickerTrigger>
                   )
