@@ -99,8 +99,6 @@ type MessageRenderMessage = (props: {
   closable: boolean
   type: 'info' | 'success' | 'warning' | 'error' | 'loading'
   onClose?: () => void
-  onMouseenter?: (e: MouseEvent) => void
-  onMouseleave?: (e: MouseEvent) => void
 }) => VNodeChild
 ```
 

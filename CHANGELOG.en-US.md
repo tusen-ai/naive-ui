@@ -18,7 +18,7 @@
 - Fix `n-data-table`'s content can be clicked when loading, closes [#2134](https://github.com/TuSimple/naive-ui/issues/2134).
 - Fix `n-checkbox` doesn't show indeterminate icon in safari.
 - Fix `n-progress`'s inner text of `line` type not aligned in center, closes[#2138](https://github.com/TuSimple/naive-ui/issues/2138).
-- Fix `n-message` 's `MessageReactive` type lacks `type` parameter.
+- Fix `n-message`'s `MessageReactive` type lacks `type` parameter.
 - Fix `n-select` has different `padding` with `n-input`, closes [#2149](https://github.com/TuSimple/naive-ui/issues/2149).
 - Fix `n-tooltip` log errors in console when used in `n-select`'s `render-option`, closes [#1436](https://github.com/TuSimple/naive-ui/issues/1436).
 - Fix `n-select` log ResizeObserver errors when using `render-option` in safari, closes [#1671](https://github.com/TuSimple/naive-ui/issues/1671).
@@ -71,9 +71,8 @@
 - `n-carousel` adds `direction` prop, closes [#1931](https://github.com/TuSimple/naive-ui/issues/1931).
 - `n-carousel` adds `loop` prop.
 - `n-carousel` adds `effect` prop, closes [#1159](https://github.com/TuSimple/naive-ui/issues/1159).
-- `n-carousel` adds `transition-duration` prop, closes [#1159](https://github.com/TuSimple/naive-ui/issues/1159).
-- `n-carousel` adds `transition-timing-function` prop.
-- `n-carousel` adds `transition-name` prop, closes [#1159](https://github.com/TuSimple/naive-ui/issues/1159).
+- `n-carousel` adds `transition-props` prop, closes [#1159](https://github.com/TuSimple/naive-ui/issues/1159).
+- `n-carousel` adds `transition-style` prop, closes [#1159](https://github.com/TuSimple/naive-ui/issues/1159).
 - `n-carousel` adds `draggable` prop.
 - `n-carousel` adds `touchable` prop.
 - `n-carousel` adds `mousewheel` prop.

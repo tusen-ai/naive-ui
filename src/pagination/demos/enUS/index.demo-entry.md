@@ -29,7 +29,7 @@ page-size-option
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |  |
 | item-count | `number` | `undefined` | Total number. |  |
-| label | `(info: PaginationRenderLabel) => VNodeChild` | `undefined` | Item content. | NEXT_VERSION |
+| label | `PaginationRenderLabel` | `undefined` | Item content. | NEXT_VERSION |
 | page-count | `number` | `1` | Total pages. |  |
 | page-sizes | `Array<number \| PaginationSizeOption>` | `[10]` | Number of items per page, can be customize. |  |
 | page-size | `number` | `undefined` | Page size in controlled mode. |  |

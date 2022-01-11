@@ -11,7 +11,7 @@ group
 custom-input
 after-select
 show-options-by-value
-add-tooltip
+customized-rendering.vue
 ```
 
 ## API
