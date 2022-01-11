@@ -37,7 +37,7 @@ custom-arrow-and-dots
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Dot placement in the panel. | NEXT_VERSION |
 | dot-type | `'dot' \| 'line' \| 'never'` | `'dot'` | Dot style. | NEXT_VERSION |
 | draggable | `boolean` | `false` | Whether to switch the carousel by dragging the mouse. | NEXT_VERSION |
-| effect | `'slide' \| 'fade' \| 'card' \| 'custom'` | `'slide'` | Transition effect when switching between carousel. | NEXT_VERSION |
+| effect | `'slide' \| 'fade' \| 'custom'` | `'slide'` | Transition effect when switching between carousel. | NEXT_VERSION |
 | interval | `number` | `5000` | Auto play interval (ms). |
 | keyboard | `boolean` | `false` | Whether to switch the carousel by pressing the key, it only works when the focus is on Dots. | NEXT_VERSION |
 | loop | `boolean` | `true` | Whether to loop. | NEXT_VERSION |

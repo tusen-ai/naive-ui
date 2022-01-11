@@ -1,6 +1,6 @@
-# Transition name
+# Customizing transition
 
-If you want to customize the transition effect, you can use `transition-props` and set `effect` to `custom`, specific configuration [reference](https://v3.vuejs.org/api/built-in-components.html#transition).
+If you want to customize the transition effect, you can use `transition-props` and set `effect` to `'custom'`. For transition props, see [reference](https://v3.vuejs.org/api/built-in-components.html#transition).
 
 ```html
 <n-carousel

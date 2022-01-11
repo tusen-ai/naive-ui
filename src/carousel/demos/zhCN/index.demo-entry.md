@@ -37,7 +37,7 @@ custom-arrow-and-dots
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | 轮播指示点位置 | NEXT_VERSION |
 | dot-type | `'dot' \| 'line' \| 'never'` | `'dot'` | 轮播指示点样式 | NEXT_VERSION |
 | draggable | `boolean` | `false` | 是否通过鼠标拖拽切换轮播图 | NEXT_VERSION |
-| effect | `'slide' \| 'fade' \| 'card' \| 'custom'` | `'slide'` | 轮播图切换时的过渡效果 | NEXT_VERSION |
+| effect | `'slide' \| 'fade' \| 'custom'` | `'slide'` | 轮播图切换时的过渡效果 | NEXT_VERSION |
 | interval | `number` | `5000` | 自动播放的间隔（ms） |
 | keyboard | `boolean` | `false` | 是否通过按键切换轮播图，只有焦点在 Dots 上时才起作用 | NEXT_VERSION |
 | loop | `boolean` | `true` | 是否循环播放 | NEXT_VERSION |

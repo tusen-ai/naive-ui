@@ -1,4 +1,4 @@
-# Custom Arrow and Dots
+# Customzing arrow and dots
 
 ```html
 <n-carousel show-arrow autoplay>

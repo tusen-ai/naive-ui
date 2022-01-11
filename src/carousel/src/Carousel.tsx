@@ -90,7 +90,7 @@ const carouselProps = {
     default: true
   },
   effect: {
-    type: String as PropType<'slide' | 'fade' | 'card' | 'custom'>,
+    type: String as PropType<'slide' | 'fade' | 'custom'>,
     default: 'slide'
   },
   showDots: {
@@ -249,7 +249,9 @@ export default defineComponent({
           [axis]: `${size}px`,
           [`margin-${spaceAxis}`]: `${spaceBetween}px`
         }
-        if (isMounted && (effect === 'fade' || effect === 'card')) {
+        // TODO: fix
+        // if (isMounted && (effect === 'fade' || effect === 'card')) {
+        if (isMounted && effect === 'fade') {
           Object.assign(style, transitionStyleRef.value)
         }
         slideStyles.push(style)
@@ -475,14 +477,15 @@ export default defineComponent({
       }
     }
     function onCarouselItemClick (index: number): void {
-      if (
-        !dragTriggered &&
-        !userWantsControlRef.value &&
-        props.effect === 'card' &&
-        !isRealActive(index)
-      ) {
-        to(index)
-      }
+      // TODO fix
+      // if (
+      //   !dragTriggered &&
+      //   !userWantsControlRef.value &&
+      //   props.effect === 'card' &&
+      //   !isRealActive(index)
+      // ) {
+      //   to(index)
+      // }
     }
     const carouselMethods = {
       to,
@@ -539,7 +542,7 @@ export default defineComponent({
     let dragging = false
     let allowClick = true
     // whether the last touch triggered the drag successfully
-    let dragTriggered = false
+    // const dragTriggered = false
     function handleTouchstart (event: MouseEvent | TouchEvent): void {
       allowClick = true
       if (globalDragging) return
@@ -548,7 +551,7 @@ export default defineComponent({
       dragging = true
       globalDragging = true
       dragStartTime = Date.now()
-      dragTriggered = false
+      // dragTriggered = false
       if (
         event.type !== 'touchstart' &&
         !(event.target as HTMLElement).isContentEditable
@@ -620,7 +623,7 @@ export default defineComponent({
         }
       }
       if (currentIndex !== null && currentIndex !== realIndex) {
-        dragTriggered = true
+        // dragTriggered = true
         toRealIndex(currentIndex)
       } else {
         fixTranslate(speedRef.value)

@@ -5,7 +5,6 @@ Use `slides-per-view` prop to control slides count in a view.
 Please note that this prop will conflict with `loop`. If you need to customize the number of displays per view, then the `loop` prop will be disabled.
 
 ```html
-<n-alert title="Caveat" type="warning" style="margin-bottom: 16px;"> </n-alert>
 <n-carousel :slides-per-view="3" :space-between="20" :loop="false" draggable>
   <img
     class="carousel-img"
