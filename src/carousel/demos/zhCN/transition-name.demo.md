@@ -1,6 +1,6 @@
 # 自定义过渡效果
 
-如果你想要自定义过渡效果，可以使用 `transition-props`，并把 `effect` 设置为 `custom`，具体配置[参考](https://v3.cn.vuejs.org/api/built-in-components.html#transition)。
+如果你想要自定义过渡效果，可以使用 `transition-props`，并把 `effect` 设置为 `'custom'`，具体配置见[官方文档](https://v3.cn.vuejs.org/api/built-in-components.html#transition)。
 
 ```html
 <n-carousel

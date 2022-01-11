@@ -83,7 +83,7 @@ export const colorPickerPanelProps = {
   modes: {
     type: Array as PropType<ColorPickerMode[]>,
     // no hsva by default since browser doesn't support it
-    default: ['rgb', 'hex', 'hsl']
+    default: () => ['rgb', 'hex', 'hsl']
   },
   to: useAdjustedTo.propTo,
   showAlpha: {
@@ -169,8 +169,9 @@ export default defineComponent({
 
     const valueModeRef = computed(() => getModeFromValue(mergedValueRef.value))
 
+    const { modes } = props
     const displayedModeRef = ref<ColorPickerMode>(
-      getModeFromValue(mergedValueRef.value) || 'rgb'
+      getModeFromValue(mergedValueRef.value) || modes[0] || 'rgb'
     )
 
     function handleUpdateDisplayedMode (): void {

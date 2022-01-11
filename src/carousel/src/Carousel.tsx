@@ -20,7 +20,11 @@ import type { CSSProperties, PropType, Ref, TransitionProps, VNode } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { on, off } from 'evtd'
 import { useConfig, useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
 import { flatten, keep } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { carouselLight } from '../styles'
+import type { CarouselTheme } from '../styles'
 import {
   calculateSize,
   getNextIndex,
@@ -35,12 +39,8 @@ import NCarouselDots from './CarouselDots'
 import NCarouselArrow from './CarouselArrow'
 import NCarouselItem from './CarouselItem'
 import { carouselMethodsInjectionKey, tuple } from './interface'
-import { carouselLight } from '../styles'
-import style from './styles/index.cssr'
-import type { ThemeProps } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import type { CarouselInst, ElementOf } from './interface'
-import type { CarouselTheme } from '../styles'
+import style from './styles/index.cssr'
 
 const transitionProperties = tuple(
   'transitionDuration',
@@ -60,7 +60,7 @@ const carouselProps = {
   currentIndex: Number,
   showArrow: Boolean,
   dotType: {
-    type: String as PropType<'dot' | 'line' | 'never'>,
+    type: String as PropType<'dot' | 'line'>,
     default: 'dot'
   },
   dotPlacement: {
@@ -90,8 +90,12 @@ const carouselProps = {
     default: true
   },
   effect: {
-    type: String as PropType<'slide' | 'fade' | 'card' | 'custom'>,
+    type: String as PropType<'slide' | 'fade' | 'custom'>,
     default: 'slide'
+  },
+  showDots: {
+    type: Boolean,
+    default: true
   },
   trigger: {
     type: String as PropType<'click' | 'hover'>,
@@ -245,7 +249,9 @@ export default defineComponent({
           [axis]: `${size}px`,
           [`margin-${spaceAxis}`]: `${spaceBetween}px`
         }
-        if (isMounted && (effect === 'fade' || effect === 'card')) {
+        // TODO: fix
+        // if (isMounted && (effect === 'fade' || effect === 'card')) {
+        if (isMounted && effect === 'fade') {
           Object.assign(style, transitionStyleRef.value)
         }
         slideStyles.push(style)
@@ -301,7 +307,7 @@ export default defineComponent({
     let previousTranslate = 0
 
     // Reality methods
-    function slideToRealIndex (index: number, speed = speedRef.value): void {
+    function toRealIndex (index: number, speed = speedRef.value): void {
       const { value: length } = totalViewRef
       if ((index = clampValue(index, 0, length - 1)) !== realIndexRef.value) {
         const { value: lastDisplayIndex } = displayIndexRef
@@ -370,22 +376,22 @@ export default defineComponent({
     }
 
     // Slide to
-    function slideTo (index: number): void {
+    function to (index: number): void {
       const realIndex = getRealIndex(index, duplicatedableRef.value)
       if (index !== displayIndexRef.value || realIndex !== realIndexRef.value) {
-        slideToRealIndex(realIndex)
+        toRealIndex(realIndex)
       }
     }
-    function slidePrev (): void {
+    function prev (): void {
       const prevIndex = getRealPrevIndex()
       if (prevIndex !== null) {
-        slideToRealIndex(prevIndex)
+        toRealIndex(prevIndex)
       }
     }
-    function slideNext (): void {
+    function next (): void {
       const nextIndex = getRealNextIndex()
       if (nextIndex !== null) {
-        slideToRealIndex(nextIndex)
+        toRealIndex(nextIndex)
       }
     }
 
@@ -471,24 +477,25 @@ export default defineComponent({
       }
     }
     function onCarouselItemClick (index: number): void {
-      if (
-        !dragTriggered &&
-        !userWantsControlRef.value &&
-        props.effect === 'card' &&
-        !isRealActive(index)
-      ) {
-        slideTo(index)
-      }
+      // TODO fix
+      // if (
+      //   !dragTriggered &&
+      //   !userWantsControlRef.value &&
+      //   props.effect === 'card' &&
+      //   !isRealActive(index)
+      // ) {
+      //   to(index)
+      // }
     }
     const carouselMethods = {
-      slideTo,
-      slidePrev: () => {
+      to,
+      prev: () => {
         // wait transition end
-        if (!inTransition || !duplicatedableRef.value) slidePrev()
+        if (!inTransition || !duplicatedableRef.value) prev()
       },
-      slideNext: () => {
+      next: () => {
         // wait transition end
-        if (!inTransition || !duplicatedableRef.value) slideNext()
+        if (!inTransition || !duplicatedableRef.value) next()
       },
       isVertical: () => verticalRef.value,
       isHorizontal: () => !verticalRef.value,
@@ -515,7 +522,7 @@ export default defineComponent({
       }
       const { autoplay, interval } = props
       if (autoplay && interval && !cleanOnly) {
-        autoplayTimer = setInterval(slideNext, interval)
+        autoplayTimer = setInterval(next, interval)
       }
     }
     function mesureAutoplay (): void {
@@ -535,7 +542,7 @@ export default defineComponent({
     let dragging = false
     let allowClick = true
     // whether the last touch triggered the drag successfully
-    let dragTriggered = false
+    // const dragTriggered = false
     function handleTouchstart (event: MouseEvent | TouchEvent): void {
       allowClick = true
       if (globalDragging) return
@@ -544,7 +551,7 @@ export default defineComponent({
       dragging = true
       globalDragging = true
       dragStartTime = Date.now()
-      dragTriggered = false
+      // dragTriggered = false
       if (
         event.type !== 'touchstart' &&
         !(event.target as HTMLElement).isContentEditable
@@ -616,8 +623,8 @@ export default defineComponent({
         }
       }
       if (currentIndex !== null && currentIndex !== realIndex) {
-        dragTriggered = true
-        slideToRealIndex(currentIndex)
+        // dragTriggered = true
+        toRealIndex(currentIndex)
       } else {
         fixTranslate(speedRef.value)
       }
@@ -674,9 +681,9 @@ export default defineComponent({
       const RESPONSE_STEP = 10
       if (ry * deltaY >= RESPONSE_STEP || rx * deltaX >= RESPONSE_STEP) {
         if (r === NEXT_R && !isNextDisabled()) {
-          slideNext()
+          next()
         } else if (r === PREV_R && !isPrevDisabled()) {
-          slidePrev()
+          prev()
         }
       }
     }
@@ -728,11 +735,11 @@ export default defineComponent({
     })
     watch(
       toRef(props, 'currentIndex'),
-      (index) => index !== undefined && slideTo(index)
+      (index) => index !== undefined && to(index)
     )
     watch(
       duplicatedableRef,
-      () => void nextTick(() => slideTo(displayIndexRef.value))
+      () => void nextTick(() => to(displayIndexRef.value))
     )
     watch(slideTranlatesRef, () => translateableRef.value && fixTranslate(), {
       deep: true
@@ -751,9 +758,9 @@ export default defineComponent({
         total: displayTotalViewRef.value,
         currentIndex: displayIndexRef.value,
         ...keep(carouselMethods, [
-          'slideTo',
-          'slidePrev',
-          'slideNext',
+          'to',
+          'prev',
+          'next',
           'isPrevDisabled',
           'isNextDisabled'
         ])
@@ -761,14 +768,14 @@ export default defineComponent({
       dotSlotProps: computed(() => ({
         total: displayTotalViewRef.value,
         currentIndex: displayIndexRef.value,
-        slideTo
+        to
       }))
     }
     const caroulseExposedMethod: CarouselInst = {
       getCurrentIndex: () => displayIndexRef.value,
-      to: slideTo,
-      prev: slidePrev,
-      next: slideNext
+      to: to,
+      prev: prev,
+      next: next
     }
     const themeRef = useTheme(
       'Carousel',
@@ -912,11 +919,12 @@ export default defineComponent({
             )
           }}
         </VResizeObserver>
-        {dotType !== 'never' &&
+        {this.showDots &&
           (dotsSlot
             ? dotsSlot(dotSlotProps)
             : dotSlotProps.total > 1 && (
                 <NCarouselDots
+                  key={dotType + dotPlacement}
                   total={dotSlotProps.total}
                   currentIndex={dotSlotProps.currentIndex}
                   dotType={dotType}

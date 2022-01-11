@@ -44,6 +44,23 @@ describe('n-color-picker', () => {
       expect(modeDom?.textContent).toEqual('HSLA')
       wrapper.unmount()
     })
+    it('single mode with empty string', async () => {
+      const wrapper = mount(NColorPicker, {
+        attachTo: document.body,
+        props: {
+          value: '',
+          modes: ['hsl']
+        }
+      })
+      await wrapper.find('.n-color-picker-trigger').trigger('click')
+      expect(document.querySelector('.n-color-picker-panel')).not.toEqual(null)
+      const modeDom = document.querySelector('.n-color-picker-input__mode')
+      expect(modeDom?.textContent).toEqual('HSLA')
+      ;(modeDom as HTMLElement).click()
+      await nextTick()
+      expect(modeDom?.textContent).toEqual('HSLA')
+      wrapper.unmount()
+    })
     it('has correct default value', () => {
       const input: Array<{ modes: ColorPickerMode[], value: string }> = [
         {

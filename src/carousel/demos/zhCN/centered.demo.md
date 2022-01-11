@@ -1,6 +1,6 @@
 # 居中
 
-设定 `centered-slides` 来将所有的 `slide` 居中显示，这仅在 `effect` 为 `slide` 以及 `card` 的时候有用。
+设定 `centered-slides` 来将所有的 `slide` 居中显示，这仅在 `effect` 为 `slide` 的时候有用。
 
 ```html
 <n-carousel

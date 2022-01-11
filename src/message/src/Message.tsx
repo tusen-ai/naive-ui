@@ -4,7 +4,8 @@ import {
   defineComponent,
   inject,
   VNodeChild,
-  CSSProperties
+  CSSProperties,
+  PropType
 } from 'vue'
 import {
   InfoIcon,
@@ -25,6 +26,7 @@ import { messageProps } from './message-props'
 import type { MessageType } from './types'
 import { messageProviderInjectionKey } from './MessageProvider'
 import style from './styles/index.cssr'
+import { MessageRenderMessage } from '..'
 
 const iconMap = {
   info: <InfoIcon />,
@@ -35,7 +37,10 @@ const iconMap = {
 
 export default defineComponent({
   name: 'Message',
-  props: messageProps,
+  props: {
+    ...messageProps,
+    render: Function as PropType<MessageRenderMessage>
+  },
   setup (props) {
     const {
       props: messageProviderProps,
@@ -114,7 +119,7 @@ export default defineComponent({
   },
   render () {
     const {
-      messageProviderProps,
+      render: renderMessage,
       type,
       closable,
       content,
@@ -123,7 +128,6 @@ export default defineComponent({
       icon,
       handleClose
     } = this
-    const { renderMessage } = messageProviderProps
     return (
       <div
         class={`${mergedClsPrefix}-message-wrapper`}

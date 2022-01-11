@@ -1,4 +1,4 @@
-# Custom Arrow and Dots
+# Customzing arrow and dots
 
 ```html
 <n-carousel show-arrow autoplay>
@@ -18,23 +18,23 @@
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
   />
-  <template #arrow="{ slidePrev, slideNext }">
+  <template #arrow="{ prev, next }">
     <div class="custom-arrow">
-      <button type="button" class="curtom-arrow--left" @click="slidePrev">
+      <button type="button" class="curtom-arrow--left" @click="prev">
         <n-icon><ArrowBack /></n-icon>
       </button>
-      <button type="button" class="curtom-arrow--right" @click="slideNext">
+      <button type="button" class="curtom-arrow--right" @click="next">
         <n-icon><ArrowForward /></n-icon>
       </button>
     </div>
   </template>
-  <template #dots="{ total, currentIndex, slideTo }">
+  <template #dots="{ total, currentIndex, to }">
     <ul class="custom-dots">
       <li
         v-for="index of total"
         :class="{ ['is-active']: currentIndex === index - 1 }"
         :key="index"
-        @click="slideTo(index - 1)"
+        @click="to(index - 1)"
       ></li>
     </ul>
   </template>
