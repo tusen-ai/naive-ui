@@ -62,7 +62,7 @@ import ColorPickerTrigger from './ColorPickerTrigger'
 import { deriveDefaultValue, getModeFromValue } from './utils'
 import type { ColorPickerMode, ActionType } from './utils'
 import style from './styles/index.cssr'
-import { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import { OnUpdateValue, OnUpdateValueImpl, RenderLabel } from './interface'
 import { NButton } from '../../button'
 import ColorPickerSwatches from './ColorPickerSwatches'
 import ColorPreview from './ColorPreview'
@@ -106,7 +106,7 @@ export const colorPickerPanelProps = {
   >,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  renderLabel: Function as PropType<RenderLabel>,
+  renderLabel: Function as PropType<RenderLabel>
 } as const
 
 export type ColorPickerProps = ExtractPublicPropTypes<
@@ -650,6 +650,7 @@ export default defineComponent({
                       value={this.mergedValue}
                       hsla={this.hsla}
                       onClick={this.handleTriggerClick}
+                      renderLabel={this.renderLabel}
                     />
                   )
                 }}

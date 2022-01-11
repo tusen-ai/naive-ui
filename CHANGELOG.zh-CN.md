@@ -82,6 +82,7 @@
 - `n-carousel` 新增 `arrow` slot
 - `n-carousel` 新增 `dots` slot
 - `n-form-item` adds `for` prop.
+- `n-color-picker` adds `render-label` prop.
 
 ## 2.23.2 (2021-12-29)
 

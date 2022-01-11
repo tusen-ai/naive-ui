@@ -1,4 +1,4 @@
-import { nextTick } from 'vue'
+import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NColorPicker } from '../index'
 import { ColorPickerMode } from '../src/utils'
@@ -154,6 +154,22 @@ describe('n-color-picker', () => {
         await nextTick()
         length--
       }
+      wrapper.unmount()
     })
+  })
+})
+describe('props.renderLabel', () => {
+  it('render custom label', async () => {
+    const wrapper = mount(NColorPicker, {
+      attachTo: document.body,
+      props: {
+        value: '#FF0000',
+        renderLabel: (value) => h('span', 'custom')
+      }
+    })
+    await nextTick()
+    expect(
+      document.querySelector('.n-color-picker-trigger__value')?.textContent).toEqual('custom')
+    wrapper.unmount()
   })
 })
