@@ -78,7 +78,8 @@ export const formItemProps = {
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
-  }
+  },
+  for: String
 } as const
 
 export type FormItemSetupProps = ExtractPropTypes<typeof formItemProps>
@@ -432,6 +433,7 @@ export default defineComponent({
       >
         {mergedShowLabel && (this.label || $slots.label) ? (
           <label
+            for={this.for}
             class={`${mergedClsPrefix}-form-item-label`}
             style={this.mergedLabelStyle as any}
             ref="labelElementRef"
