@@ -41,19 +41,4 @@ describe('n-dynamic-input', () => {
 
     expect(wrapper.find('input').attributes('placeholder')).toBe('test')
   })
-  it('should work with `show-sort-button` prop', async () => {
-    const wrapper = mount(NDynamicInput, {
-      props: {
-        value: ['']
-      }
-    })
-
-    expect(wrapper.findAll('button').length).toBe(2)
-
-    await wrapper.setProps({
-      showSortButton: true
-    })
-
-    expect(wrapper.findAll('button').length).toBe(4)
-  })
 })
