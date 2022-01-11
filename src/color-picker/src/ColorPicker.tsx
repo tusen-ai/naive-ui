@@ -105,7 +105,8 @@ export const colorPickerPanelProps = {
   MaybeArray<(value: boolean) => void>
   >,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  renderLabel: Function as PropType<RenderLabel>,
 } as const
 
 export type ColorPickerProps = ExtractPublicPropTypes<
