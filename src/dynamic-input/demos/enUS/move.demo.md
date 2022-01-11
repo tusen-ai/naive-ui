@@ -1,7 +1,11 @@
-# 显示排序按钮
+# Show move button
 
 ```html
-<n-dynamic-input v-model:value="value" show-sort-button placeholder="请输入" />
+<n-dynamic-input
+  v-model:value="value"
+  placeholder="Please type here"
+  show-move-button
+/>
 <pre>
 {{  JSON.stringify(value, 0, 2) }}
 </pre>

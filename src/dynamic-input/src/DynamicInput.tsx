@@ -69,7 +69,7 @@ const dynamicInputProps = {
     type: String,
     default: ''
   },
-  showSortButton: Boolean,
+  showMoveButton: Boolean,
   onCreate: Function as PropType<(index: number) => any>,
   onRemove: Function as PropType<(index: number) => void>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -228,13 +228,15 @@ export default defineComponent({
         targetIndex < 0 ||
         currentIndex >= array.length ||
         targetIndex >= array.length
-      ) { return }
+      ) {
+        return
+      }
       if (currentIndex === targetIndex) return
       const currentItem = array[currentIndex]
       array[currentIndex] = array[targetIndex]
       array[targetIndex] = currentItem
     }
-    function sort (type: 'up' | 'down', index: number): void {
+    function move (type: 'up' | 'down', index: number): void {
       const { value: mergedValue } = mergedValueRef
       if (!Array.isArray(mergedValue)) return
       const newValue = Array.from(mergedValue)
@@ -265,7 +267,7 @@ export default defineComponent({
       ensureKey,
       handleValueChange,
       remove,
-      sort,
+      move,
       createItem,
       mergedTheme: themeRef,
       cssVars: computed(() => {
@@ -293,9 +295,9 @@ export default defineComponent({
       ensureKey,
       handleValueChange,
       remove,
-      sort,
+      move,
       createItem,
-      showSortButton
+      showMoveButton
     } = this
     return (
       <div
@@ -394,13 +396,12 @@ export default defineComponent({
                           )
                         }}
                       </NButton>,
-                      showSortButton ? (
+                      showMoveButton && index !== 0 ? (
                         <NButton
-                          disabled={index === 0}
                           circle
                           theme={mergedTheme.peers.Button}
                           themeOverrides={mergedTheme.peerOverrides.Button}
-                          onClick={() => sort('up', index)}
+                          onClick={() => move('up', index)}
                         >
                           {{
                             icon: () => (
@@ -413,13 +414,12 @@ export default defineComponent({
                           }}
                         </NButton>
                       ) : null,
-                      showSortButton ? (
+                      showMoveButton && index !== mergedValue.length - 1 ? (
                         <NButton
-                          disabled={index === mergedValue.length - 1}
                           circle
                           theme={mergedTheme.peers.Button}
                           themeOverrides={mergedTheme.peerOverrides.Button}
-                          onClick={() => sort('down', index)}
+                          onClick={() => move('down', index)}
                         >
                           {{
                             icon: () => (
