@@ -79,7 +79,7 @@ export const formItemProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  for: String,
+  for: String
 } as const
 
 export type FormItemSetupProps = ExtractPropTypes<typeof formItemProps>
