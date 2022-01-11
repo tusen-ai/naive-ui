@@ -81,6 +81,7 @@
 - `n-carousel` adds `on-update:current-index` prop.
 - `n-carousel` adds `arrow` slot.
 - `n-carousel` adds `dots` slot.
+- `n-form-item` adds `for` prop.
 
 ## 2.23.2 (2021-12-29)
 
