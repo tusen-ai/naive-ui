@@ -45,7 +45,7 @@ export default defineComponent({
                 color: hsla[2] > 50 || hsla[3] < 0.5 ? 'black' : 'white'
               }}
             >
-              {renderLabel ? renderLabel({ value }) : value}
+              {renderLabel ? renderLabel(value) : value}
             </div>
           ) : null}
         </div>
