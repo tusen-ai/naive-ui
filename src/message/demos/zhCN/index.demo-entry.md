@@ -83,7 +83,7 @@ customize-message.vue
 | --- | --- | --- | --- |
 | closable | `boolean` | 是否显示 close 图标 |  |
 | duration | `number` | 信息展示的时长 |  |
-| icon | `() => VNode` | 信息图标 |  |
+| icon | `() => VNodeChild` | 信息图标 |  |
 | keepAliveOnHover | `boolean` | Hover 到信息上是否不销毁 |  |
 | render | `MessageRenderMessage` | 消息的渲染函数 | NEXT_VERSION |
 | onAfterLeave | `() => void` | 信息消失动画结束的回调 |  |
@@ -111,7 +111,7 @@ type MessageRenderMessage = (props: {
 | closable | `boolean` | 是否显示 close 图标 |
 | content | `string \| (() => VNodeChild)` | 信息内容 |
 | destroy | `() => void` | 销毁信息的方法 |
-| icon | `() => VNode` | 信息图标 |
+| icon | `() => VNodeChild` | 信息图标 |
 | keepAliveOnHover | `boolean` | Hover 到信息上是否不销毁 |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | 信息类型 |
 | onAfterLeave | `() => void` | 信息消失动画结束的回调 |

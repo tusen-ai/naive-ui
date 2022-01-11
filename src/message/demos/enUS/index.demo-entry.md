@@ -83,7 +83,7 @@ customize-message.vue
 | --- | --- | --- | --- |
 | closable | `boolean` | Whether to show close icon. |  |
 | duration | `number` | The duration of the message. |  |
-| icon | `() => VNode` | Message icon. |  |
+| icon | `() => VNodeChild` | Message icon. |  |
 | keepAliveOnHover | `boolean` | Messages whether to destroy while hover. |  |
 | render | `MessageRenderMessage` | Render function of the entire message. | NEXT_VERSION |
 | onAfterLeave | `() => void` | Callback after message disappeared. |  |
@@ -111,7 +111,7 @@ type MessageRenderMessage = (props: {
 | closable | `boolean` | Whether to show close icon. |
 | content | `string \| (() => VNodeChild)` | Message content. |
 | destroy | `() => void` | Message destroy method. |
-| icon | `() => VNode` | Message icon. |
+| icon | `() => VNodeChild` | Message icon. |
 | keepAliveOnHover | `boolean` | Messages whether to destroy while hover |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | Message type. |
 | onAfterLeave | `() => void` | Callback after message disappeared. |
