@@ -444,7 +444,8 @@ export default defineComponent({
     function handleClickOutside (e: MouseEvent): void {
       if (
         mergedShowRef.value &&
-        !triggerElRef.value?.contains(e.target as Node)
+        !triggerElRef.value?.contains(e.target as Node) &&
+        !panelInstRef.value?.panelHeaderRef?.showMonthYearPanel
       ) {
         closeCalendar({
           returnFocus: false

@@ -9,7 +9,7 @@ import {
 import { NBaseFocusDetector } from '../../../_internal'
 import { useCalendar, useCalendarProps } from './use-calendar'
 import { warnOnce } from '../../../_utils'
-import Header from './header'
+import PanelHeader from './panelHeader'
 
 /**
  * Date Panel
@@ -32,24 +32,20 @@ export default defineComponent({
       })
     }
     const triggerPanelRef = ref<HTMLElement | null>(null)
+    const panelHeaderRef = ref<InstanceType<typeof PanelHeader> | null>(null)
     const calendarProp = useCalendar(props, 'date')
     function handleClickOutside (e: MouseEvent): void {
-      console.log(
-        '111',
-        calendarProp.showMonthYearPanel.value,
-        triggerPanelRef.value?.contains(e.target as Node)
-      )
       if (
-        calendarProp.showMonthYearPanel.value &&
+        panelHeaderRef.value?.showMonthYearPanel &&
         !triggerPanelRef.value?.contains(e.target as Node)
       ) {
-        console.log('2222')
-        calendarProp.showMonthYearPanel.value = false
+        panelHeaderRef.value.showMonthYearPanel = false
       }
     }
     return {
       ...calendarProp,
       triggerPanelRef,
+      panelHeaderRef,
       handleClickOutside
     }
   },
@@ -81,7 +77,8 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__month-year`}
               ref="triggerPanelRef"
             >
-              <Header
+              <PanelHeader
+                ref="panelHeaderRef"
                 {...this.$props}
                 {...this.$attrs}
                 onClickOutside={handleClickOutside}

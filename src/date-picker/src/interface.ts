@@ -13,6 +13,7 @@ import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
+import PanelHeader from '../src/panel/panelHeader'
 
 export type Value = number | [number, number]
 
@@ -76,6 +77,7 @@ export interface PanelRef {
   // Only exists when type is month
   monthScrollRef?: ScrollbarInst | null
   yearScrollRef?: VirtualListInst | null
+  panelHeaderRef?: InstanceType<typeof PanelHeader> | null
 }
 
 // 0 is Monday

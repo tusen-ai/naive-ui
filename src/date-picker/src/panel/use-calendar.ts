@@ -24,7 +24,8 @@ import {
   startOfYear,
   startOfQuarter,
   setQuarter,
-  setYear
+  setYear,
+  setMonth
 } from 'date-fns'
 import { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../../_internal'
@@ -285,17 +286,16 @@ function useCalendar (
   function handleQuickMonthClick (
     dateItem: MonthItem | YearItem | QuarterItem
   ): void {
-    console.log('111111')
-    let newValue: number
-    if (props.value !== null && !Array.isArray(props.value)) {
-      newValue = props.value
-    } else {
-      newValue = Date.now()
-    }
-    newValue = getTime(set(newValue, dateItem.dateObject))
-    console.log('11111', newValue)
-    calendarValueRef.value = newValue
-    scrollPickerColumns(newValue)
+    calendarValueRef.value = getTime(
+      dateItem.type === 'month'
+        ? setMonth(calendarValueRef.value, dateItem.dateObject.month)
+        : setYear(calendarValueRef.value, dateItem.dateObject.year)
+    )
+    panelCommon.doUpdateValue(
+      sanitizeValue(calendarValueRef.value),
+      type === 'date' || type === 'year'
+    )
+    scrollPickerColumns(calendarValueRef.value)
   }
   function deriveDateInputValue (time?: number): void {
     // If not selected, display nothing,
