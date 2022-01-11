@@ -81,6 +81,6 @@ update-bar-manually.vue
 
 ### Tabs Methods
 
-| Name            | Type         | Description              | Version      |
-| --------------- | ------------ | ------------------------ | ------------ |
-| syncBarPosition | `() => void` | Sync tab bar's position. | NEXT_VERSION |
+| Name            | Type         | Description              | Version |
+| --------------- | ------------ | ------------------------ | ------- |
+| syncBarPosition | `() => void` | Sync tab bar's position. | 2.24.0  |

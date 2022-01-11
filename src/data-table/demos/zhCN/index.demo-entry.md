@@ -124,7 +124,7 @@ height-debug
 | title | `string \| (() => VNodeChild)` | `undefined` | 列的 title 信息，可以是渲染函数 |  |
 | titleRowSpan | `number` | `undefined` | title 行所占的单元格的个数 |  |
 | type | `'selection' \| 'expand'` | `undefined` | 列的类型 |  |
-| width | `number \| string` | `undefined` | 列的宽度（在列固定时是**必需**的，并且需要为 `number` 类型） | NEXT_VERSION（`string` 类型） |
+| width | `number \| string` | `undefined` | 列的宽度（在列固定时是**必需**的，并且需要为 `number` 类型） | 2.24.0（`string` 类型） |
 
 #### DataTableCreateSummary Type
 

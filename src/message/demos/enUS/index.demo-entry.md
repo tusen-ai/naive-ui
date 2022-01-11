@@ -85,7 +85,7 @@ customize-message.vue
 | duration | `number` | The duration of the message. |  |
 | icon | `() => VNodeChild` | Message icon. |  |
 | keepAliveOnHover | `boolean` | Messages whether to destroy while hover. |  |
-| render | `MessageRenderMessage` | Render function of the entire message. | NEXT_VERSION |
+| render | `MessageRenderMessage` | Render function of the entire message. | 2.24.0 |
 | onAfterLeave | `() => void` | Callback after message disappeared. |  |
 | onClose | `() => void` | Callback when close icon is clicked. |  |
 | onLeave | `() => void` | Callback when message start to disappear. |  |

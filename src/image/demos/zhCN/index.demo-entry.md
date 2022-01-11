@@ -27,7 +27,7 @@ tooltip.vue
 | preview-src | `string` | `undefined` | 预览图片的图片地址 |  |
 | preview-disabled | `boolean` | `false` | 是否可以点击图片进行预览 |  |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |
-| show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | NEXT_VERSION |
+| show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | 2.24.0 |
 | src | `string` | `undefined` | 图片来源 |  |
 | width | `string \| number` | `undefined` | 图片宽度 |  |
 | on-error | `(e: Event) => void` | `undefined` | 图片加载失败执行的回调 |  |
@@ -38,7 +38,7 @@ tooltip.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |
-| show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | NEXT_VERSION |
+| show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | 2.24.0 |
 
 ### ImageGroup Slots
 

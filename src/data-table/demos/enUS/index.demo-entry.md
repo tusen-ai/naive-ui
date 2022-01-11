@@ -120,7 +120,7 @@ switchable-editable
 | title | `string \| (() => VNodeChild)` | `undefined` | Column title, Can be a render function. |  |
 | titleRowSpan | `number` | `undefined` | The number of cells occupied by the title row. |  |
 | type | `'selection' \| 'expand'` | `undefined` | Column type. |  |
-| width | `number \| string` | `undefined` | Width of the column (**required and should be number** when fixed). | NEXT_VERSION (`string` type) |
+| width | `number \| string` | `undefined` | Width of the column (**required and should be number** when fixed). | 2.24.0 (`string` type) |
 
 #### DataTableCreateSummary Type
 

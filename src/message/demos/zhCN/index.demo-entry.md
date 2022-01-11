@@ -85,7 +85,7 @@ customize-message.vue
 | duration | `number` | 信息展示的时长 |  |
 | icon | `() => VNodeChild` | 信息图标 |  |
 | keepAliveOnHover | `boolean` | Hover 到信息上是否不销毁 |  |
-| render | `MessageRenderMessage` | 消息的渲染函数 | NEXT_VERSION |
+| render | `MessageRenderMessage` | 消息的渲染函数 | 2.24.0 |
 | onAfterLeave | `() => void` | 信息消失动画结束的回调 |  |
 | onClose | `() => void` | 点击关闭图标的回调 |  |
 | onLeave | `() => void` | 信息开始消失的回调 |  |

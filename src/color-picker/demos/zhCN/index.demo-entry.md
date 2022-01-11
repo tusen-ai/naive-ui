@@ -23,7 +23,7 @@ native
 | default-show | `boolean` | `undefined` | 默认是否展示弹出层 |  |
 | default-value | `string \| null` | 和第一个 mode 对应的黑色值 | 默认的颜色值 |  |
 | modes | `Array<'rgb' \| 'hex' \| 'hsl' \| 'hsv'>` | `['rgb', 'hex', 'hsl']` | 颜色选择器支持颜色的格式，注意一旦你在某个模式下选择了值，颜色选择器值的格式将跟随这个格式 |  |
-| render-label | `(color: string \| null) => VNodeChild` | `undefined` | 触发器的内容 | NEXT_VERSION |
+| render-label | `(color: string \| null) => VNodeChild` | `undefined` | 触发器的内容 | 2.24.0 |
 | show | `boolean` | `undefined` | 是否展示面板 |  |
 | show-alpha | `boolean` | `true` | 是否可调节 alpha 通道 |  |
 | show-preview | `boolean` | `false` | 是否展示颜色预览块 |  |
@@ -38,9 +38,9 @@ native
 
 ### ColorPicker Slots
 
-| 名称  | 参数                      | 说明         | 版本         |
-| ----- | ------------------------- | ------------ | ------------ |
-| label | `(color: string \| null)` | 触发器的内容 | NEXT_VERSION |
+| 名称  | 参数                      | 说明         | 版本   |
+| ----- | ------------------------- | ------------ | ------ |
+| label | `(color: string \| null)` | 触发器的内容 | 2.24.0 |
 
 ## Q & A
 

@@ -23,7 +23,7 @@ native
 | default-show | `boolean` | `undefined` | Whether to show the color panel by default. |  |
 | default-value | `string` | Black color value of 1st mode's corresponding value. | Default value of the picker. |  |
 | modes | `Array<'rgb' \| 'hex' \| 'hsl' \| 'hsv'>` | `['rgb', 'hex', 'hsl']` | The value format of the picker. Notice that value will follow the mode once you select a new value from the picker. |  |
-| render-label | `(color: string \| null) => VNodeChild` | `undefined` | Label render function of the color picker trigger. | NEXT_VERSION |
+| render-label | `(color: string \| null) => VNodeChild` | `undefined` | Label render function of the color picker trigger. | 2.24.0 |
 | show | `boolean` | `undefined` | Whether the color panel is shown. |  |
 | show-alpha | `boolean` | `true` | Whether the alpha channel can be adjusted. |  |
 | show-preview | `boolean` | `false` | Whether the color preview is shown. |  |
@@ -40,7 +40,7 @@ native
 
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
-| label | `(color: string \| null)` | Label of the color picker trigger. | NEXT_VERSION |
+| label | `(color: string \| null)` | Label of the color picker trigger. | 2.24.0 |
 
 ## Q & A
 
