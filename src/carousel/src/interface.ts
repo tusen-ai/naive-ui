@@ -9,9 +9,9 @@ export type ElementOf<T> = T extends Array<infer E>
     : never
 
 export interface CarouselMethodsInjection {
-  slideTo: (index: number) => void
-  slidePrev: () => void
-  slideNext: () => void
+  to: (index: number) => void
+  prev: () => void
+  next: () => void
   isVertical: () => boolean
   isHorizontal: () => boolean
   isPrev: (slide: number | HTMLElement) => boolean
@@ -26,9 +26,8 @@ export interface CarouselMethodsInjection {
   removeSlide: (slide?: HTMLElement) => void
   onCarouselItemClick: (index: number) => void
 }
-export const carouselMethodsInjectionKey: InjectionKey<CarouselMethodsInjection> = Symbol(
-  'carouselMethods'
-)
+export const carouselMethodsInjectionKey: InjectionKey<CarouselMethodsInjection> =
+  Symbol('carouselMethods')
 
 export interface CarouselInst {
   getCurrentIndex: () => number

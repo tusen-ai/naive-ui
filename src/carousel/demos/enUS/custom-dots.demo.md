@@ -18,10 +18,8 @@
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
   />
-  <template #dots="{total, current, placement, slideTo}">
-    <span class="custom-dots">
-      {{current + 1}} / {{total}}
-    </span>
+  <template #dots="{total, current, placement, to}">
+    <span class="custom-dots"> {{current + 1}} / {{total}} </span>
   </template>
 </n-carousel>
 ```

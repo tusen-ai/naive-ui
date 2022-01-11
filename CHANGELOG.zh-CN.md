@@ -78,6 +78,7 @@
 - `n-carousel` 新增 `touchable` 属性
 - `n-carousel` 新增 `mousewheel` 属性
 - `n-carousel` 新增 `keyboard` 属性
+- `n-carousel` 新增 `show-dots` 属性
 - `n-carousel` 新增 `on-update:current-index` 属性
 - `n-carousel` 新增 `arrow` slot
 - `n-carousel` 新增 `dots` slot

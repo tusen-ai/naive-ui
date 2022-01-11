@@ -16,7 +16,7 @@
   ref="formRef"
   label-placement="left"
   :size="size"
-  :label-width="160"
+  label-width="auto"
   :style="{
     maxWidth: '640px'
   }"

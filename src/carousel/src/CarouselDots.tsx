@@ -40,7 +40,7 @@ export default defineComponent({
         case 'Enter':
         case 'NumpadEnter':
         case 'Space':
-          NCarousel.slideTo(current)
+          NCarousel.to(current)
           return
       }
       if (props.keyboard) {
@@ -49,12 +49,12 @@ export default defineComponent({
     }
     function handleMouseenter (current: number): void {
       if (props.trigger === 'hover') {
-        NCarousel.slideTo(current)
+        NCarousel.to(current)
       }
     }
     function handleClick (current: number): void {
       if (props.trigger === 'click') {
-        NCarousel.slideTo(current)
+        NCarousel.to(current)
       }
     }
     function handleKeyboard (e: KeyboardEvent): void {
@@ -87,11 +87,11 @@ export default defineComponent({
       }
       if (vertical ? isVerticalNext : isHorizontalNext) {
         e.preventDefault()
-        NCarousel.slideNext()
+        NCarousel.next()
         focusDot(NCarousel.getCurrentIndex())
       } else if (vertical ? isVerticalPrev : isHorizontalPrev) {
         e.preventDefault()
-        NCarousel.slidePrev()
+        NCarousel.prev()
         focusDot(NCarousel.getCurrentIndex())
       }
     }
@@ -118,7 +118,7 @@ export default defineComponent({
           `${mergedClsPrefix}-carousel__dots`,
           `${mergedClsPrefix}-carousel__dots--${this.dotType}`
         ]}
-        role='tablist'
+        role="tablist"
       >
         {indexMap(this.total, (i) => {
           const selected = i === this.currentIndex
@@ -126,8 +126,8 @@ export default defineComponent({
             <div
               aria-selected={selected}
               ref={(el) => dotEls.push(el as HTMLElement)}
-              role='button'
-              tabindex='0'
+              role="button"
+              tabindex="0"
               class={[
                 `${mergedClsPrefix}-carousel__dot`,
                 selected && `${mergedClsPrefix}-carousel__dot--active`

@@ -78,6 +78,7 @@
 - `n-carousel` adds `touchable` prop.
 - `n-carousel` adds `mousewheel` prop.
 - `n-carousel` adds `keyboard` prop.
+- `n-carousel` adds `show-dots` prop.
 - `n-carousel` adds `on-update:current-index` prop.
 - `n-carousel` adds `arrow` slot.
 - `n-carousel` adds `dots` slot.
