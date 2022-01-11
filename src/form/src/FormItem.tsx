@@ -12,7 +12,8 @@ import {
   watch,
   Transition,
   renderSlot,
-  onMounted
+  onMounted,
+  LabelHTMLAttributes
 } from 'vue'
 import Schema, {
   ValidateError,
@@ -79,7 +80,7 @@ export const formItemProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  for: String
+  labelProps: Object as PropType<LabelHTMLAttributes>
 } as const
 
 export type FormItemSetupProps = ExtractPropTypes<typeof formItemProps>
@@ -433,8 +434,11 @@ export default defineComponent({
       >
         {mergedShowLabel && (this.label || $slots.label) ? (
           <label
-            for={this.for}
-            class={`${mergedClsPrefix}-form-item-label`}
+            {...this.labelProps}
+            class={[
+              this.labelProps?.class,
+              `${mergedClsPrefix}-form-item-label`
+            ]}
             style={this.mergedLabelStyle as any}
             ref="labelElementRef"
           >
