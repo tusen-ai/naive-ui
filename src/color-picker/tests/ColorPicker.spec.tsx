@@ -158,13 +158,13 @@ describe('n-color-picker', () => {
     })
   })
 })
-describe('props.renderLabel', () => {
+describe('props.label', () => {
   it('render custom label', async () => {
     const wrapper = mount(NColorPicker, {
       attachTo: document.body,
       props: {
         value: '#FF0000',
-        renderLabel: (value) => h('span', 'custom')
+        label: (value) => h('span', 'custom')
       }
     })
     await nextTick()
