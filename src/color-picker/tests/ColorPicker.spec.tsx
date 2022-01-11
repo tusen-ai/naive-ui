@@ -146,7 +146,9 @@ describe('n-color-picker', () => {
           value: '#000000'
         }
       }
-      const modes = Object.values(output).map(v => v.mode) as ColorPickerMode[]
+      const modes = Object.values(output).map(
+        (v) => v.mode
+      ) as ColorPickerMode[]
       const wrapper = mount(NColorPicker, {
         attachTo: document.body,
         props: {
@@ -181,12 +183,13 @@ describe('props.label', () => {
       attachTo: document.body,
       props: {
         value: '#FF0000',
-        label: (value) => h('span', 'custom')
+        renderLabel: () => h('span', 'custom')
       }
     })
     await nextTick()
     expect(
-      document.querySelector('.n-color-picker-trigger__value')?.textContent).toEqual('custom')
+      document.querySelector('.n-color-picker-trigger__value')?.textContent
+    ).toEqual('custom')
     wrapper.unmount()
   })
 })
