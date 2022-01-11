@@ -8,7 +8,7 @@ The native disabled button won't trigger some mouse events so `n-popover` can't 
     <template #trigger>
       <n-button disabled tag="div">Disabled button as div</n-button>
     </template>
-    Lipsum
+    Lpsum
   </n-tooltip>
 </n-space>
 ```

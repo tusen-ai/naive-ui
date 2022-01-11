@@ -14,7 +14,7 @@ import { popselectInjectionKey } from './interface'
 
 const popselectProps = {
   ...(useTheme.props as ThemeProps<PopselectTheme>),
-  ...popoverBaseProps,
+  ...omit(popoverBaseProps, ['showArrow', 'arrow']),
   placement: {
     ...popoverBaseProps.placement,
     default: 'bottom'
@@ -23,7 +23,6 @@ const popselectProps = {
     type: String as PropType<PopoverTrigger>,
     default: 'hover'
   },
-  showArrow: Boolean,
   ...panelProps
 }
 

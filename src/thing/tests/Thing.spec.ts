@@ -55,7 +55,7 @@ describe('n-thing', () => {
     ).toContain('n-thing-main')
   })
 
-  it('should work with Slots', async () => {
+  it('should work with `avatar` `action` `default` `description` `header-extra` `header` `footer` Slots', async () => {
     const wrapper = mount(NThing, {
       slots: {
         avatar: () => 'test-avatar',
@@ -63,7 +63,8 @@ describe('n-thing', () => {
         default: () => 'test-default',
         description: () => 'test-description',
         'header-extra': () => 'test-header-extra',
-        header: () => 'test-header'
+        header: () => 'test-header',
+        footer: () => 'test-footer'
       }
     })
 
@@ -83,5 +84,7 @@ describe('n-thing', () => {
     )
     expect(wrapper.find('.n-thing-header__title').exists()).toBe(true)
     expect(wrapper.find('.n-thing-header__title').text()).toBe('test-header')
+    expect(wrapper.find('.n-thing-main__footer').exists()).toBe(true)
+    expect(wrapper.find('.n-thing-main__footer').text()).toBe('test-footer')
   })
 })

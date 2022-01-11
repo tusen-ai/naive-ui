@@ -14,9 +14,9 @@ If you need to customize the timing and effect of a validation, use `validation-
   <n-form-item
     label="Airports"
     :validation-status="inputNumberValidationStatus"
-    :feedback="inputNumberFeedback"
   >
     <n-input-number v-model:value="inputNumberValue" />
+    <template #feedback>{{ inputNumberFeedback }}</template>
   </n-form-item>
   <n-form-item
     label="Airports"

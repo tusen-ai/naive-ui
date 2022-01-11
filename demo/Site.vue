@@ -5,14 +5,14 @@
   </n-layout>
 </template>
 
-<script>
-import { onMounted } from 'vue'
+<script lang="ts">
+import { onMounted, defineComponent } from 'vue'
 import { useLoadingBar } from 'naive-ui'
 import SiteHeader from './SiteHeader.vue'
 import { loadingBarApiRef } from './routes/router'
 import { useIsMobile } from './utils/composables'
 
-export default {
+export default defineComponent({
   name: 'Site',
   components: {
     SiteHeader
@@ -28,5 +28,5 @@ export default {
       isMobile: isMobileRef
     }
   }
-}
+})
 </script>

@@ -111,7 +111,7 @@ export default defineComponent({
               const { mode, valueArr, showAlpha } = this
               if (mode === 'hex') {
                 // hex and rgba shares the same value arr
-                let hexValue = null
+                let hexValue: string | null = null
                 try {
                   hexValue =
                     valueArr === null

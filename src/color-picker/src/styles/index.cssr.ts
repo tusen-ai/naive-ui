@@ -98,6 +98,7 @@ export default c([
     height: 180px;
     position: relative;
     margin-bottom: 8px;
+    cursor: crosshair;
   `, [
     cE('layer', `
       position: absolute;

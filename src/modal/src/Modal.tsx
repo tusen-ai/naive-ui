@@ -47,6 +47,7 @@ const modalProps = {
     type: String as PropType<'center' | 'mouse'>,
     default: 'mouse'
   },
+  zIndex: Number,
   ...presetProps,
   // events
   'onUpdate:show': [Function, Array] as PropType<
@@ -295,6 +296,7 @@ export default defineComponent({
                 [
                   zindexable,
                   {
+                    zIndex: this.zIndex,
                     enabled: this.show
                   }
                 ]

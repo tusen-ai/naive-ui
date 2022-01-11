@@ -89,7 +89,7 @@ export default c([
   ]),
   placementStyle('top-start', `
     top: calc(-0.707 * var(--n-arrow-height));
-    left: var(--n-arrow-offset);
+    left: calc(var(--n-arrow-offset) - var(--v-offset-left));
   `),
   placementStyle('top', `
     top: calc(-0.707 * var(--n-arrow-height));
@@ -98,11 +98,11 @@ export default c([
   `),
   placementStyle('top-end', `
     top: calc(-0.707 * var(--n-arrow-height));
-    right: var(--n-arrow-offset);
+    right: calc(var(--n-arrow-offset) + var(--v-offset-left));
   `),
   placementStyle('bottom-start', `
     bottom: calc(-0.707 * var(--n-arrow-height));
-    left: var(--n-arrow-offset);
+    left: calc(var(--n-arrow-offset) - var(--v-offset-left));
   `),
   placementStyle('bottom', `
     bottom: calc(-0.707 * var(--n-arrow-height));
@@ -111,11 +111,11 @@ export default c([
   `),
   placementStyle('bottom-end', `
     bottom: calc(-0.707 * var(--n-arrow-height));
-    right: var(--n-arrow-offset);
+    right: calc(var(--n-arrow-offset) + var(--v-offset-left));
   `),
   placementStyle('left-start', `
     left: calc(-0.707 * var(--n-arrow-height));
-    top: var(--n-arrow-offset-vertical);
+    top: calc(var(--n-arrow-offset-vertical) - var(--v-offset-top));
   `),
   placementStyle('left', `
     left: calc(-0.707 * var(--n-arrow-height));
@@ -124,11 +124,12 @@ export default c([
   `),
   placementStyle('left-end', `
     left: calc(-0.707 * var(--n-arrow-height));
-    bottom: var(--n-arrow-offset-vertical);
+    bottom: calc(var(--n-arrow-offset-vertical) + var(--v-offset-top));
+    
   `),
   placementStyle('right-start', `
     right: calc(-0.707 * var(--n-arrow-height));
-    top: var(--n-arrow-offset-vertical);
+    top: calc(var(--n-arrow-offset-vertical) - var(--v-offset-top));
   `),
   placementStyle('right', `
     right: calc(-0.707 * var(--n-arrow-height));
@@ -137,7 +138,7 @@ export default c([
   `),
   placementStyle('right-end', `
     right: calc(-0.707 * var(--n-arrow-height));
-    bottom: var(--n-arrow-offset-vertical);
+    bottom: calc(var(--n-arrow-offset-vertical) + var(--v-offset-top));
   `)
 ])
 

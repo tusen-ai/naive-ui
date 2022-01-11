@@ -84,7 +84,7 @@ export function useScroll (
     const { value: leftFixedColumns } = leftFixedColumnsRef
     let leftWidth = 0
     const { value: fixedColumnLeftMap } = fixedColumnLeftMapRef
-    let leftActiveFixedColKey = null
+    let leftActiveFixedColKey: string | number | null = null
     for (let i = 0; i < leftFixedColumns.length; ++i) {
       const key = getColKey(leftFixedColumns[i])
       if (scrollLeft > (fixedColumnLeftMap[key]?.start || 0) - leftWidth) {
@@ -119,7 +119,7 @@ export function useScroll (
     const { value: tableWidth } = bodyWidthRef
     if (tableWidth === null) return
     let rightWidth = 0
-    let rightActiveFixedColKey = null
+    let rightActiveFixedColKey: string | number | null = null
     const { value: fixedColumnRightMap } = fixedColumnRightMapRef
     for (let i = rightFixedColumns.length - 1; i >= 0; --i) {
       const key = getColKey(rightFixedColumns[i])
