@@ -53,6 +53,7 @@ PR is welcomed for locales that is not supported yet!
 | German - Germany          | deDE   | dateDeDe    |
 | Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |
 | French                    | frFR   | dateFrFR    |
+| Spanish (Argentina)       | esAR   | dateEsAR    |
 
 ## Customize the existing locale
 
