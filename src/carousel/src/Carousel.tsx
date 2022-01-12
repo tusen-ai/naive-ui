@@ -38,7 +38,7 @@ import {
 import NCarouselDots from './CarouselDots'
 import NCarouselArrow from './CarouselArrow'
 import NCarouselItem from './CarouselItem'
-import { carouselMethodsInjectionKey, tuple } from './interface'
+import { carouselMethodsInjectionKey, DragFlags, tuple } from './interface'
 import type { CarouselInst, ElementOf } from './interface'
 import style from './styles/index.cssr'
 
@@ -90,7 +90,7 @@ const carouselProps = {
     default: true
   },
   effect: {
-    type: String as PropType<'slide' | 'fade' | 'custom'>,
+    type: String as PropType<'slide' | 'fade' | 'card' | 'custom'>,
     default: 'slide'
   },
   showDots: {
@@ -249,9 +249,7 @@ export default defineComponent({
           [axis]: `${size}px`,
           [`margin-${spaceAxis}`]: `${spaceBetween}px`
         }
-        // TODO: fix
-        // if (isMounted && (effect === 'fade' || effect === 'card')) {
-        if (isMounted && effect === 'fade') {
+        if (isMounted && (effect === 'fade' || effect === 'card')) {
           Object.assign(style, transitionStyleRef.value)
         }
         slideStyles.push(style)
@@ -333,6 +331,9 @@ export default defineComponent({
         if (translateableRef.value) {
           translateTo(index, speed)
         } else {
+          if (!userWantsControlRef.value && speed > 0) {
+            inTransition = true
+          }
           fixTranslate()
         }
         if (displayIndex !== lastDisplayIndex) {
@@ -476,16 +477,22 @@ export default defineComponent({
         return slideStylesRef.value[index]
       }
     }
-    function onCarouselItemClick (index: number): void {
-      // TODO fix
-      // if (
-      //   !dragTriggered &&
-      //   !userWantsControlRef.value &&
-      //   props.effect === 'card' &&
-      //   !isRealActive(index)
-      // ) {
-      //   to(index)
-      // }
+    function onCarouselItemClick (index: number, event: MouseEvent): void {
+      const isTryDrag = DragFlags.PROGRESS | DragFlags.SUCCESS | DragFlags.FAIL
+      let allowClick = !inTransition && !(dragStatus & isTryDrag)
+      if (
+        props.effect === 'card' &&
+        !userWantsControlRef.value &&
+        !(dragStatus & DragFlags.SUCCESS) &&
+        !isRealActive(index)
+      ) {
+        to(index)
+        allowClick = false
+      }
+      if (!allowClick) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
     }
     const carouselMethods = {
       to,
@@ -539,19 +546,13 @@ export default defineComponent({
     let dragStartY = 0
     let dragOffset = 0
     let dragStartTime = 0
-    let dragging = false
-    let allowClick = true
-    // whether the last touch triggered the drag successfully
-    // const dragTriggered = false
+    let dragStatus = DragFlags.NORMAL
     function handleTouchstart (event: MouseEvent | TouchEvent): void {
-      allowClick = true
       if (globalDragging) return
-      // pause autoplay
-      resetAutoplay(true)
-      dragging = true
-      globalDragging = true
       dragStartTime = Date.now()
-      // dragTriggered = false
+      dragStatus = DragFlags.START
+      globalDragging = true
+      resetAutoplay(true /** cleanOnly */)
       if (
         event.type !== 'touchstart' &&
         !(event.target as HTMLElement).isContentEditable
@@ -583,7 +584,7 @@ export default defineComponent({
         ? touchEvent.clientY - dragStartY
         : touchEvent.clientX - dragStartX
       dragOffset = clampValue(offset, -perViewSize, perViewSize)
-      allowClick = false
+      dragStatus = DragFlags.PROGRESS
       if (translateableRef.value) {
         updateTranslate(previousTranslate - dragOffset, 0)
       }
@@ -623,18 +624,25 @@ export default defineComponent({
         }
       }
       if (currentIndex !== null && currentIndex !== realIndex) {
-        // dragTriggered = true
+        dragStatus = DragFlags.SUCCESS
         toRealIndex(currentIndex)
       } else {
+        if (dragStatus & DragFlags.PROGRESS) {
+          dragStatus = DragFlags.FAIL
+        } else {
+          dragStatus = DragFlags.END
+        }
         fixTranslate(speedRef.value)
       }
       mesureAutoplay()
       resetDragStatus()
     }
     function resetDragStatus (): void {
-      if (dragging) {
-        dragging = false
+      if (!(dragStatus & DragFlags.NORMAL)) {
         globalDragging = false
+        if (dragStatus & (DragFlags.START | DragFlags.PROGRESS)) {
+          dragStatus = DragFlags.NORMAL
+        }
       }
       dragStartX = 0
       dragStartY = 0
@@ -668,30 +676,23 @@ export default defineComponent({
       if (event.shiftKey && !deltaX) {
         deltaX = deltaY
       }
-      const PREV_R = -1
-      const NEXT_R = 1
-      const r = (deltaX || deltaY) > 0 ? NEXT_R : PREV_R
+      const P_MULTIPLIER = -1
+      const N_MULTIPLIER = 1
+      const MULTIPLIER = (deltaX || deltaY) > 0 ? N_MULTIPLIER : P_MULTIPLIER
       let rx = 0
       let ry = 0
       if (vertical) {
-        ry = r
+        ry = MULTIPLIER
       } else {
-        rx = r
+        rx = MULTIPLIER
       }
       const RESPONSE_STEP = 10
       if (ry * deltaY >= RESPONSE_STEP || rx * deltaX >= RESPONSE_STEP) {
-        if (r === NEXT_R && !isNextDisabled()) {
+        if (MULTIPLIER === N_MULTIPLIER && !isNextDisabled()) {
           next()
-        } else if (r === PREV_R && !isPrevDisabled()) {
+        } else if (MULTIPLIER === P_MULTIPLIER && !isPrevDisabled()) {
           prev()
         }
-      }
-    }
-    function handleClick (event: MouseEvent): void {
-      if (!allowClick) {
-        event.preventDefault()
-        event.stopPropagation()
-        allowClick = true
       }
     }
     function handleResize (): void {
@@ -798,7 +799,6 @@ export default defineComponent({
       handleTouchstart,
       handleTransitionEnd,
       handleMousewheel,
-      handleClick,
       handleResize,
       handleSlideResize,
       isActive: isDisplayActive,
@@ -896,8 +896,6 @@ export default defineComponent({
                 style={this.translateStyle}
                 onMousedown={draggable ? this.handleTouchstart : undefined}
                 onTouchstart={touchable ? this.handleTouchstart : undefined}
-                // @ts-expect-error
-                onClickCapture={this.handleClick}
                 onWheel={this.mousewheel ? this.handleMousewheel : undefined}
                 onTransitionend={this.handleTransitionEnd}
               >
