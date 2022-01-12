@@ -186,12 +186,14 @@ export default cB('carousel', `
     ])
   ]),
   cM('usercontrol', [
-    cE('slides > div', `
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    `)
+    cE('slides', [
+      c('& > div', `
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      `)
+    ])
   ]),
   cM('left', [
     cE('dots', `
