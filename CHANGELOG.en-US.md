@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.24.1 (2022-01-12)
+
+### Fixes
+
+- Fix install error.
+
 ## 2.24.0 (2022-01-12)
 
 ### Breaking Changes
