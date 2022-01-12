@@ -17,6 +17,10 @@
 
 - 修复安装错误
 
+### Feats
+
+- `n-dynamic-input` 新增 `show-move-button` 属性，关闭 [#2121](https://github.com/TuSimple/naive-ui/issues/2121)
+
 ## 2.24.0 (2022-01-12)
 
 ### Breaking Changes
@@ -104,7 +108,6 @@
 - `n-form-item` 新增 `label-props` 属性
 - `n-carousel` 新增 `arrow` slot
 - `n-carousel` 新增 `dots` slot
-- `n-dynamic-input` 新增 `show-move-button` 属性，关闭 [#2121](https://github.com/TuSimple/naive-ui/issues/2121)
 
 ## 2.23.2 (2021-12-29)
 

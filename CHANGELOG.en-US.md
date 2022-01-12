@@ -15,6 +15,10 @@
 
 - Fix install error.
 
+### Feats
+
+- `n-dynamic-input` adds `show-sort-button` prop, closes [#2121](https://github.com/TuSimple/naive-ui/issues/2121).
+
 ## 2.24.0 (2022-01-12)
 
 ### Breaking Changes
@@ -101,7 +105,6 @@
 - `n-color-picker` adds `label` slot.
 - `n-color-picker` adds `render-label` prop.
 - `n-form-item` adds `label-props` prop.
-- `n-dynamic-input` adds `show-sort-button` prop, closes [#2121](https://github.com/TuSimple/naive-ui/issues/2121).
 
 ## 2.23.2 (2021-12-29)
 
