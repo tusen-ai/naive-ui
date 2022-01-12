@@ -93,6 +93,10 @@
 - `n-color-picker` adds `render-label` prop.
 - `n-form-item` adds `label-props` prop.
 
+### i18n
+
+- Add esAR locale.
+
 ## 2.23.2 (2021-12-29)
 
 ### Feats

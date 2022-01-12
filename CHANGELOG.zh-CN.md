@@ -92,6 +92,10 @@
 - `n-color-picker` 新增 `render-label` 属性
 - `n-form-item` 新增 `label-props` 属性
 
+### i18n
+
+- 新增 esAR locale
+
 ## 2.23.2 (2021-12-29)
 
 ### Feats
