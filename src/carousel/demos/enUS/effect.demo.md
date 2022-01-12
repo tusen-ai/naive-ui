@@ -10,35 +10,52 @@ If you want to customize the transition effect, you can use `transition-props` a
     {{ effect }}
   </n-radio-button>
 </n-radio-group>
-<n-carousel :effect="effect" draggable :key="effect" style="height: 240px;">
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
-  />
-  <img
-    class="carousel-img"
-    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
-  />
+<n-carousel
+  :effect="effect"
+  :centered-slides="isCard"
+  :slides-per-view="isCard ? 'auto' : 1"
+  draggable
+  :key="effect"
+  style="height: 240px;"
+>
+  <n-carousel-item :style="{width: isCard ? '60%' : '100%'}">
+    <img
+      class="carousel-img"
+      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
+    />
+  </n-carousel-item>
+  <n-carousel-item :style="{width: isCard ? '60%' : '100%'}">
+    <img
+      class="carousel-img"
+      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
+    />
+  </n-carousel-item>
+  <n-carousel-item :style="{width: isCard ? '60%' : '100%'}">
+    <img
+      class="carousel-img"
+      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
+    />
+  </n-carousel-item>
+  <n-carousel-item :style="{width: isCard ? '60%' : '100%'}">
+    <img
+      class="carousel-img"
+      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
+    />
+  </n-carousel-item>
 </n-carousel>
 ```
 
 ```js
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 
 export default defineComponent({
   setup () {
     const effectRef = ref('slide')
+    const isCardRef = computed(() => effectRef.value === 'card')
     return {
+      isCard: isCardRef,
       effect: effectRef,
-      effects: ['slide', 'fade']
+      effects: ['slide', 'fade', 'card']
     }
   }
 })

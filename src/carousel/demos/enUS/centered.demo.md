@@ -1,6 +1,6 @@
 # Centered
 
-Set `centered-slides` to center all `slides`, this is only useful when `effect` is `slide`.
+Set `centered-slides` to center all `slides`, this is only useful when `effect` is `slide` and `card`.
 
 ```html
 <n-carousel

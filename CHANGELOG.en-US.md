@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix install error.
+- Fix `n-carousel` `card` effect slide problem.
 
 ## 2.24.0 (2022-01-12)
 

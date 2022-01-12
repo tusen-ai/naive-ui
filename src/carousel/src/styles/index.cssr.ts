@@ -186,7 +186,7 @@ export default cB('carousel', `
     ])
   ]),
   cM('usercontrol', [
-    cE('slide', `
+    cE('slides > div', `
       position: absolute;
       top: 50%;
       left: 50%;
