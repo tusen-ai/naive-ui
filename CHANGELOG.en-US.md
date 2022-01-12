@@ -1,11 +1,19 @@
 # CHANGELOG
 
+## Pending
+
+- Fix `n-carousel` `card` effect slide problem.
+- Fix `n-layout-sider` still occupies 1px after collapsed.
+
+### i18n
+
+- Add esAR locale.
+
 ## 2.24.1 (2022-01-12)
 
 ### Fixes
 
 - Fix install error.
-- Fix `n-carousel` `card` effect slide problem.
 
 ## 2.24.0 (2022-01-12)
 
@@ -93,10 +101,6 @@
 - `n-color-picker` adds `label` slot.
 - `n-color-picker` adds `render-label` prop.
 - `n-form-item` adds `label-props` prop.
-
-### i18n
-
-- Add esAR locale.
 
 ## 2.23.2 (2021-12-29)
 

@@ -1,11 +1,21 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-carousel` `card` 过渡模式切换问题
+- 修复 `n-layout-sider` 在折叠时仍占据 1px 宽度
+
+### i18n
+
+- 新增 esAR locale
+
 ## 2.24.1 (2022-01-12)
 
 ### Fixes
 
 - 修复安装错误
-- 修复 `n-carousel` `card` 过渡模式切换问题
 
 ## 2.24.0 (2022-01-12)
 
@@ -92,10 +102,6 @@
 - `n-color-picker` 新增 `label` 插槽
 - `n-color-picker` 新增 `render-label` 属性
 - `n-form-item` 新增 `label-props` 属性
-
-### i18n
-
-- 新增 esAR locale
 
 ## 2.23.2 (2021-12-29)
 
