@@ -37,7 +37,7 @@ partially-apply-rules
 | show-feedback | `boolean` | `true` | 是否展示校验反馈 |  |
 | show-label | `boolean` | `true` | 是否展示标签 |  |
 | show-require-mark | `boolean` | `-` | 是否展示必填的星号 |  |
-| require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | 必填星号的位置 | `'right-hanging'` NEXT_VERSION |
+| require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | 必填星号的位置 | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 
 #### FormItemRule Type
@@ -64,7 +64,8 @@ partially-apply-rules
 | label | `string` | `undefined` | 标签信息 |  |
 | label-align | `'left' \| 'right'` | `undefined` | 标签的文本对齐方式。如果没有被设定，使用外层表单的 `label-align` |  |
 | label-placement | `'left' \| 'top'` | `undefined` | 如果没有被设定，使用外层表单的 `label-placement` |  |
-| label-style | `Object` | `{}` | 标签的样式 |  |
+| label-style | `CSSProperties \| string` | `undefined` | 标签的样式 |  |
+| label-props | `LabelHTMLAttributes` | `undefined` | 标签元素的属性 | 2.24.0 |
 | label-width | `number \| string \| 'auto'` | `undefined` | 如果没有被设定，使用外层表单的 `label-width`，`'auto'` 意味着 label width 会被自动调整 |  |
 | path | `string` | `undefined` | 将值收集到外层表单 `model` 对象的路径 |  |
 | rule | `FormItemRule \| Array<FormItemRule>` | `undefined` | 验证表项的规则，它会被通过 `rule-path` 从外层表单获取的规则合并来作为表项的验证规则。推荐还是在外层表单设置所有规则 |  |
@@ -72,7 +73,7 @@ partially-apply-rules
 | show-feedback | `boolean` | `true` | 是否展示校验反馈 |  |
 | show-label | `boolean` | `true` | 是否展示标签。如果没有被设定，使用外层 `n-form` 的 `show-label` |  |
 | show-require-mark | `boolean` | `-` | 是否展示必填的星号。如果没有被设定，使用外层 `n-form` 的 `show-require-mark` |  |
-| require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | 必填的星号的位置。如果没有被设定，使用外层 `n-form` 的 `require-mark-placement` | `'right-hanging'` NEXT_VERSION |
+| require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | 必填的星号的位置。如果没有被设定，使用外层 `n-form` 的 `require-mark-placement` | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | 表单的验证状态。不设为 `undefined`时，会覆盖规则验证的结果 |  |
 
@@ -108,7 +109,7 @@ partially-apply-rules
 
 ### FormItem, FormItemGi Slots
 
-| 名称     | 参数 | 说明           | 版本         |
-| -------- | ---- | -------------- | ------------ |
-| feedback | `()` | 表项的反馈信息 | NEXT_VERSION |
-| label    | `()` | 标签内容       |              |
+| 名称     | 参数 | 说明           | 版本   |
+| -------- | ---- | -------------- | ------ |
+| feedback | `()` | 表项的反馈信息 | 2.24.0 |
+| label    | `()` | 标签内容       |        |

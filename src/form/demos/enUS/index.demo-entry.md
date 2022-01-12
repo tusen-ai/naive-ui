@@ -35,7 +35,7 @@ partially-apply-rules
 | show-feedback | `boolean` | `true` | Whether to show the feedback area. |  |
 | show-label | `boolean` | `true` | Whether to show the label. |  |
 | show-require-mark | `boolean` | `-` | Whether to show a required symbol when a form item is required. |  |
-| require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement | `'right-hanging'` NEXT_VERSION |
+| require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
 
 #### FormItemRule Type
@@ -62,7 +62,8 @@ partially-apply-rules
 | label | `string` | `undefined` | Label. |  |
 | label-align | `'left' \| 'right'` | `undefined` | Text alignment inside the label. If not set, it will inherit the parent form's `label-align`. |  |
 | label-placement | `'left' \| 'top'` | `undefined` | If not set, it will inherit the parent form's `label-placement`. |  |
-| label-style | `Object` | `{}` | Label style. |  |
+| label-props | `LabelHTMLAttributes` | `undefined` | HTML attributes of the label element inside form item. | 2.24.0 |
+| label-style | `CSSProperties \| string` | `undefined` | Label style. |  |
 | label-width | `number \| string \| 'auto'` | `undefined` | If not set, it will inherit the parent form's `label-width`,`'auto'` means label width will be auto adjusted. |  |
 | path | `string` | `undefined` | The path to use in the parent form's model object. |  |
 | required | `boolean` | `false` | Whether to show the "required" symbol. Note: a required rule has higher priority than this prop & this prop **won't** have any effect on validation. Validation still depends on rules. |  |
@@ -71,7 +72,7 @@ partially-apply-rules
 | show-feedback | `boolean` | `true` | Whether to show the feedback area. |  |
 | show-label | `boolean` | `true` | Whether to show a label. If not set, it will inherit `show-label` from the parent form. |  |
 | show-require-mark | `boolean` | `-` | Whether to show required symbol. If not set, it will use `show-require-mark` from the parent form. |
-| require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement. If not set, it will use `require-mark-placement` from the parent form. | `'right-hanging'` NEXT_VERSION |
+| require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement. If not set, it will use `require-mark-placement` from the parent form. | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | The validation status of the form item. If set, it will replace the result of the rule-based validation. |  |
 
@@ -107,7 +108,7 @@ To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/
 
 ### FormItem, FormItemGi Slots
 
-| Name     | Parameters | Description    | Version      |
-| -------- | ---------- | -------------- | ------------ |
-| feedback | `()`       | Feedback.      | NEXT_VERSION |
-| label    | `()`       | Label content. |              |
+| Name     | Parameters | Description    | Version |
+| -------- | ---------- | -------------- | ------- |
+| feedback | `()`       | Feedback.      | 2.24.0  |
+| label    | `()`       | Label content. |         |

@@ -27,10 +27,11 @@ transform-origin
 | show | `boolean` | `false` | Whether to show modal. |  |
 | to | `string \| HTMLElement` | `body` | Container node of the modal content. |  |
 | transform-origin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the modal's display animation. |  |
-| z-index | `number` | `undefined` | Z index of the modal. | NEXT_VERSION |
-| on-update:show | `(value: boolean) => void` | `undefined` | Callback when modal's display status is changed. |  |
+| z-index | `number` | `undefined` | Z index of the modal. | 2.24.0 |
 | on-after-enter | `() => void` | `undefined` | Callback after modal is opened. |  |
 | on-after-leave | `() => void` | `undefined` | Callback after modal is closed. |  |
+| on-mask-click | `() => void` | `undefined` | Callback on mask is clicked. |  |
+| on-update:show | `(value: boolean) => void` | `undefined` | Callback when modal's display status is changed. |  |
 
 ### Modal with Preset Card Props
 

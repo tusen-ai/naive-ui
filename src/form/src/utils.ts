@@ -57,10 +57,11 @@ export function formItemMisc (props: FormItemSetupProps) {
   })
   const mergedLabelStyleRef = computed(() => {
     return [
+      props.labelProps?.style,
+      props.labelStyle,
       {
         width: mergedLabelWidthRef.value
-      },
-      props.labelStyle
+      }
     ]
   })
   const mergedShowRequireMarkRef = computed(() => {

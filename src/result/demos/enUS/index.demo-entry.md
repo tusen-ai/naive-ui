@@ -36,4 +36,4 @@ custom.vue
 | --- | --- | --- | --- |
 | default | `()` | Results page content information. |  |
 | footer | `()` | Information at the bottom of the results page. |  |
-| icon | `()` | Custom icon content area. | NEXT_VERSION |
+| icon | `()` | Custom icon content area. | 2.24.0 |

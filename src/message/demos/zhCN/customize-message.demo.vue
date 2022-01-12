@@ -5,64 +5,48 @@
 </markdown>
 
 <template>
-  <n-message-provider
-    :render-message="renderMessage"
-    :theme-overrides="{ margin: '0 0 12px 0' }"
-  >
-    <message-trigger />
-  </n-message-provider>
+  <n-button @click="handleClick">
+    No Party For Cao Dong
+  </n-button>
 </template>
 
 <script lang="ts">
 import { defineComponent, h } from 'vue'
-import { NAlert, NButton, useMessage } from 'naive-ui'
-import type { MessageProviderRenderMessage } from 'naive-ui'
+import { NAlert, useMessage } from 'naive-ui'
+import type { MessageRenderMessage } from 'naive-ui'
 
-const MessageTrigger = defineComponent({
-  setup () {
-    const { error } = useMessage()
-    return () =>
-      h(
-        NButton,
-        {
-          onClick: () => {
-            error('那东西我们早就不屑啦，哈哈哈', { closable: true })
-          }
-        },
-        {
-          default: () => 'No Party For Cao Dong'
-        }
-      )
-  }
-})
+const renderMessage: MessageRenderMessage = (props) => {
+  const { type } = props
+  return h(
+    NAlert,
+    {
+      closable: props.closable,
+      onClose: props.onClose,
+      type: type === 'loading' ? 'default' : type,
+      title: '你看你手上拿的是什么啊',
+      style: {
+        boxShadow: 'var(--n-box-shadow)',
+        maxWidth: 'calc(100vw - 32px)',
+        width: '480px'
+      }
+    },
+    {
+      default: () => props.content
+    }
+  )
+}
 
 export default defineComponent({
-  components: { MessageTrigger },
   setup () {
-    const renderMessage: MessageProviderRenderMessage = (props) => {
-      const { type } = props
-      return h(
-        NAlert,
-        {
-          closable: props.closable,
-          onClose: props.onClose,
-          type: type === 'loading' ? 'default' : type,
-          title: '你看你手上拿的是什么啊',
-          onMouseenter: props.onMouseenter,
-          onMouseleave: props.onMouseleave,
-          style: {
-            boxShadow: 'var(--n-box-shadow)',
-            maxWidth: 'calc(100vw - 32px)',
-            width: '480px'
-          }
-        },
-        {
-          default: () => props.content
-        }
-      )
+    const { error } = useMessage()
+    function handleClick () {
+      error('那东西我们早就不屑啦，哈哈哈', {
+        render: renderMessage,
+        closable: true
+      })
     }
     return {
-      renderMessage
+      handleClick
     }
   }
 })

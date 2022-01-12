@@ -29,7 +29,7 @@ processing
 | height | `number` | `undefined` | `'line'` 类型进度条的高度，不填写则维持默认高度 |  |
 | indicator-placement | `'inside' \| 'inside-label' \| 'outside'` | `'outside'` | 设置指标位置 |  |
 | indicator-text-color | `string` | `undefined` | 指标文本颜色 |  |
-| offset-degree | `number` | `0` | 进度的偏移角度，只对 `circle` 类型生效 | NEXT_VERSION |
+| offset-degree | `number` | `0` | 进度的偏移角度，只对 `circle` 类型生效 | 2.24.0 |
 | percentage | `number \| number[]` | `0` | 百分比的值 |  |
 | processing | `boolean` | `false` | 处理中状态 |  |
 | rail-color | `string \| string[]` | `undefined` | 轨道的颜色 |  |

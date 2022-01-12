@@ -10,52 +10,35 @@
     {{ effect }}
   </n-radio-button>
 </n-radio-group>
-<n-carousel
-  :effect="effect"
-  :centered-slides="card"
-  :slides-per-view="card ? 'auto' : 1"
-  draggable
-  :key="effect"
-  style="height: 240px;"
->
-  <n-carousel-item :style="{width: card ? '60%' : '100%'}">
-    <img
-      class="carousel-img"
-      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
-    />
-  </n-carousel-item>
-  <n-carousel-item :style="{width: card ? '60%' : '100%'}">
-    <img
-      class="carousel-img"
-      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
-    />
-  </n-carousel-item>
-  <n-carousel-item :style="{width: card ? '60%' : '100%'}">
-    <img
-      class="carousel-img"
-      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
-    />
-  </n-carousel-item>
-  <n-carousel-item :style="{width: card ? '60%' : '100%'}">
-    <img
-      class="carousel-img"
-      src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
-    />
-  </n-carousel-item>
+<n-carousel :effect="effect" draggable :key="effect" style="height: 240px;">
+  <img
+    class="carousel-img"
+    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
+  />
+  <img
+    class="carousel-img"
+    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
+  />
+  <img
+    class="carousel-img"
+    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
+  />
+  <img
+    class="carousel-img"
+    src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
+  />
 </n-carousel>
 ```
 
 ```js
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
     const effectRef = ref('slide')
-    const cardRef = computed(() => effectRef.value === 'card')
     return {
-      card: cardRef,
       effect: effectRef,
-      effects: ['slide', 'fade', 'card']
+      effects: ['slide', 'fade']
     }
   }
 })

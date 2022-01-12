@@ -63,8 +63,9 @@ export default cB('carousel', `
     ]),
     cM('line', [
       cE('dot', `
+        border-radius: 9999px;
         width: var(--n-dot-line-width);
-        height: 3px;
+        height: 4px;
         background-color: var(--n-dot-color);
         cursor: pointer;
         transition:
@@ -88,8 +89,8 @@ export default cB('carousel', `
     transition: transform .3s var(--n-bezier);
     transform: scale(1);
     cursor: pointer;
-    height: 48px;
-    width: 48px;
+    height: 36px;
+    width: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -99,7 +100,7 @@ export default cB('carousel', `
     cM('right', `
       transform: translateY(-50%);
       top: 50%;
-      right: 0;
+      right: -2px;
     `, [
       c('&:hover', {
         transform: 'translateY(-50%) scale(1.1)'
@@ -111,7 +112,7 @@ export default cB('carousel', `
     cM('left', `
       transform: translateY(-50%);
       top: 50%;
-      left: 0;
+      left: -2px;
     `, [
       c('&:hover', {
         transform: 'translateY(-50%) scale(1.1)'
@@ -122,7 +123,7 @@ export default cB('carousel', `
     ]),
     cM('top', `
       transform: translateX(-50%) rotate(90deg);
-      top: 0;
+      top:  -2px;
       left: 50%;
     `, [
       c('&:hover', {
@@ -134,8 +135,8 @@ export default cB('carousel', `
     ]),
     cM('bottom', `
       transform: translateX(-50%) rotate(90deg);
-      bottom: 0;
-      left: 50%;
+      bottom: -2px;
+      left: 50%
     `, [
       c('&:hover', {
         transform: 'translateX(-50%) scale(1.1) rotate(90deg)'
@@ -196,14 +197,14 @@ export default cB('carousel', `
     cE('dots', `
       transform: translateY(-50%);
       top: 50%;
-      left: 16px;
+      left: 12px;
       flex-direction: column;
     `, [
       cM('line', [
         cE('dot', `
-          width: 3px;
+          width: 4px;
           height: var(--n-dot-line-width);
-          margin: 3px 0;
+          margin: 4px 0;
           transition:
             height .3s var(--n-bezier),
             box-shadow .3s var(--n-bezier),
@@ -217,21 +218,21 @@ export default cB('carousel', `
       ])
     ]),
     cE('dot', `
-      margin: 6px 0;
+      margin: 4px 0;
     `)
   ]),
   cM('right', [
     cE('dots', `
       transform: translateY(-50%);
       top: 50%;
-      right: 16px;
+      right: 12px;
       flex-direction: column;
     `, [
       cM('line', [
         cE('dot', `
-          width: 3px;
+          width: 4px;
           height: var(--n-dot-line-width);
-          margin: 3px 0;
+          margin: 4px 0;
           transition:
             height .3s var(--n-bezier),
             box-shadow .3s var(--n-bezier),
@@ -245,39 +246,39 @@ export default cB('carousel', `
       ])
     ]),
     cE('dot', `
-      margin: 6px 0;
+      margin: 4px 0;
     `)
   ]),
   cM('top', [
     cE('dots', `
       transform: translateX(-50%);
-      top: 16px;
+      top: 12px;
       left: 50%;
     `, [
       cM('line', [
         cE('dot', `
-          margin: 0 3px;
+          margin: 0 4px;
         `)
       ])
     ]),
     cE('dot', `
-      margin: 0 6px;
+      margin: 0 4px;
     `)
   ]),
   cM('bottom', [
     cE('dots', `
       transform: translateX(-50%);
-      bottom: 16px;
+      bottom: 12px;
       left: 50%;
     `, [
       cM('line', [
         cE('dot', `
-          margin: 0 3px;
+          margin: 0 4px;
         `)
       ])
     ]),
     cE('dot', `
-      margin: 0 6px;
+      margin: 0 4px;
     `)
   ]),
   cM('fade', [

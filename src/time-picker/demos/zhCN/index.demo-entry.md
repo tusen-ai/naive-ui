@@ -24,10 +24,10 @@ formatted.vue
 | actions | `Array<'now' \| 'confirm'> \| null` | `['now', 'confirm']` | Time Picker 中支持的操作 |  |
 | clearable | `boolean` | `false` | 是否可清空 |  |
 | default-value | `number \| null` | `null` | 非受控模式下的默认值 |  |
-| default-formatted-value | `string \| null` | `undefined` | 非受控模式下的默认格式化后的值 | NEXT_VERSION |
+| default-formatted-value | `string \| null` | `undefined` | 非受控模式下的默认格式化后的值 | 2.24.0 |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | format | `string` | `'HH:mm:ss'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
-| formatted-value | `string \| null` | `undefined` | 格式化后的值 | NEXT_VERSION |
+| formatted-value | `string \| null` | `undefined` | 格式化后的值 | 2.24.0 |
 | hours | `number \| number[]` | `undefined` | 通过数组指定显示的小时。当值为 `number` 时，将被当做时间步进处理 |  |
 | minutes | `number \| number[]` | `undefined` | 通过数组指定显示的分钟。当值为 `number` 时，将被当做时间步进处理 |  |
 | seconds | `number \| number[]` | `undefined` | 通过数组指定显示的秒。当值为 `number` 时，将被当做时间步进处理 |  |
@@ -39,8 +39,8 @@ formatted.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 选择框的尺寸 |  |
 | use-12-hours | `boolean` | `false` | 是否使用 12 小时制的面板 |  |
 | value | `number \| null` | `undefined` | 受控模式下的值 |  |
-| value-format | `string` | 跟随 `format` | 格式化后值的格式 | NEXT_VERSION |
+| value-format | `string` | 跟随 `format` | 格式化后值的格式 | 2.24.0 |
 | on-blur | `() => void` | `undefined` | 选择框失去焦点时的回调 |  |
 | on-focus | `() => void` | `undefined` | 选择框获得焦点时的回调 |  |
-| on-update:formatted-value | `(value: number \| null, timestampValue: number \| null) => void` | `undefined` | 格式化的值发生改变时的回调 | NEXT_VERSION |
-| on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 值发生改变时的回调 | `formattedValue` NEXT_VERSION |
+| on-update:formatted-value | `(value: number \| null, timestampValue: number \| null) => void` | `undefined` | 格式化的值发生改变时的回调 | 2.24.0 |
+| on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 值发生改变时的回调 | `formattedValue` 2.24.0 |

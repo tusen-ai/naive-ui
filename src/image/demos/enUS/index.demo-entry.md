@@ -27,7 +27,7 @@ tooltip.vue
 | preview-src | `string` | `undefined` | Source of preview image. |  |
 | preview-disabled | `boolean` | `false` | Whether clicking image preview is disabled. |  |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
-| show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | NEXT_VERSION |
+| show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.24.0 |
 | src | `string` | `undefined` | Image source. |  |
 | width | `string \| number` | `undefined` | Image width. |  |
 | on-error | `(e: Event) => void` | `undefined` | Callback executed when the image fails to load. |  |
@@ -38,7 +38,7 @@ tooltip.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
-| show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | NEXT_VERSION |
+| show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.24.0 |
 
 ### ImageGroup Slots
 

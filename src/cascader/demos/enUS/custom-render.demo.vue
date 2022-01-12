@@ -16,8 +16,8 @@ The `render-label` can be used to batch render cascader menu options.
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, h } from 'vue'
-import { NTooltip, CascaderOption } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
+import { CascaderOption } from 'naive-ui'
 
 function getOptions (depth = 3, iterator = 1, prefix = '') {
   const length = 12
@@ -47,7 +47,6 @@ function getOptions (depth = 3, iterator = 1, prefix = '') {
   }
   return options
 }
-
 export default defineComponent({
   setup () {
     return {
@@ -56,13 +55,8 @@ export default defineComponent({
       handleUpdateValue (...args) {
         console.log(...args)
       },
-      renderLabel (option, checked) {
-        return option.disabled
-          ? option.label
-          : h(NTooltip, null, {
-            trigger: () => h('div', null, option.label),
-            default: () => 'render - ' + option.label
-          })
+      renderLabel (option) {
+        return `prefix ${option.label}`
       }
     }
   }

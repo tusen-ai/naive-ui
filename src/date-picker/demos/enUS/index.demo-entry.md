@@ -33,7 +33,7 @@ update-on-close
 | --- | --- | --- | --- | --- |
 | clearable | `boolean` | `false` | Whether the date picker is clearable. |  |
 | default-value | `number \| [number, number] \| null` | `undefined` | Date picker's default value. |  |
-| default-formatted-value | `string \| [string, string] \| null` | `undefined` | Date picker's default formatted value. | NEXT_VERSION |
+| default-formatted-value | `string \| [string, string] \| null` | `undefined` | Date picker's default formatted value. | 2.24.0 |
 | disabled | `boolean` | `false` | Whether the date picker is disabled. |  |
 | first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | The first day of a week on calendar, 0 means Monday. |  |
 | input-readonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |  |
@@ -41,7 +41,7 @@ update-on-close
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
 | type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'year' \| 'quarter'` | `'date'` | Date picker type. | `'quarter'` v2.22.0 |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |  |
-| value-format | `string` | Follow `format` prop | Format of the binding value. see [format](https://date-fns.org/v2.23.0/docs/format). | NEXT_VERSION |
+| value-format | `string` | Follow `format` prop | Format of the binding value. see [format](https://date-fns.org/v2.23.0/docs/format). | 2.24.0 |
 | on-blur | `() => void` | `undefined` | On blur callback. |  |
 | on-focus | `() => void` | `undefined` | On focus callback. |  |
 
@@ -53,8 +53,8 @@ update-on-close
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |  |
 | placeholder | `string` | `'Select Date'` | Placeholder. |  |
-| on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Date selected callback. | NEXT_VERSION |
-| on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Date selected callback. | `formattedValue` NEXT_VERSION |
+| on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Date selected callback. | 2.24.0 |
+| on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Date selected callback. | `formattedValue` 2.24.0 |
 
 ### DateTime Type Props
 
@@ -68,7 +68,7 @@ update-on-close
 | placeholder | `string` | `'Select Date and Time'` | Placeholder. |  |
 | update-value-on-close | `boolean` | `false` | Whether to update value on close. |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Date selected callback. | MEXT_VERSION |
-| on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Date selected callback. | `formattedValue` NEXT_VERSION |
+| on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Date selected callback. | `formattedValue` 2.24.0 |
 
 ### DateRange Type Props
 
@@ -83,8 +83,8 @@ update-on-close
 | separator | `string` | `'to'` | The separator between the start input and the end input. |  |
 | start-placeholder | `string` | `'Start Date'` | The prompt information at the beginning of the input. |  |
 | update-value-on-close | `boolean` | `false` | Whether to update the value on close. |  |
-| on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | Formatted range changed callback. | NEXT_VERSION |
-| on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | Range changed callback. | `formattedValue` NEXT_VERSION |
+| on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | Formatted range changed callback. | 2.24.0 |
+| on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | Range changed callback. | `formattedValue` 2.24.0 |
 
 ### DateTimeRange Type Props
 
@@ -99,8 +99,8 @@ update-on-close
 | separator | `string` | `'to'` | The separator between the start input and the end input. |  |
 | start-placeholder | `string` | `'Start Date and Time'` | The prompt information at the beginning of the input. |  |
 | update-value-on-close | `boolean` | `false` | Whether to update value on close. |  |
-| on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | Formatted value changed callback. | NEXT_VERSION |
-| on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | Value changed callback. | `formattedValue` NEXT_VERSION |
+| on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | Formatted value changed callback. | 2.24.0 |
+| on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | Value changed callback. | `formattedValue` 2.24.0 |
 
 ### Month Type Props
 
@@ -110,8 +110,8 @@ update-on-close
 | format | `string` | `'yyyy-MM'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the month. |  |
 | placeholder | `string` | `'Select Month'` | Placeholder. |  |
-| on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Formatted value changed callback. | NEXT_VERSION |
-| on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Value changed callback. | `formattedValue` NEXT_VERSION |
+| on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Formatted value changed callback. | 2.24.0 |
+| on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Value changed callback. | `formattedValue` 2.24.0 |
 
 ### Year Type Props
 
@@ -121,8 +121,8 @@ update-on-close
 | format | `string` | `'yyyy'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the year. |  |
 | placeholder | `string` | `'Select Year'` | Placeholder. |  |
-| on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Formatted value changed callback. | NEXT_VERSION |
-| on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Value changed callback. | `formattedValue` NEXT_VERSION |
+| on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Formatted value changed callback. | 2.24.0 |
+| on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Value changed callback. | `formattedValue` 2.24.0 |
 
 ### DatePicker Slots
 

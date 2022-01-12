@@ -34,7 +34,7 @@ dark-4-debug
 | style | `string \| Object` | `undefined` | 抽屉的样式 |  |
 | to | `string \| HTMLElement` | `'body'` | 抽屉出现的区域 |  |
 | width | `number \| string` | `251` | 抽屉的宽度，在位置是 `left` 和 `right` 时生效 |  |
-| z-index | `number` | `undefined` | 抽屉的 z-index | NEXT_VERSION |
+| z-index | `number` | `undefined` | 抽屉的 z-index | 2.24.0 |
 | on-mask-click | `(e: MouseEvent) => void` | `undefined` | 点击遮罩的回调 |  |
 | on-update:show | `(show: boolean) => void` | `undefined` | 抽屉显示状态改变时执行的回调函数 |  |
 

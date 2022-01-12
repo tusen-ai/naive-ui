@@ -52,4 +52,4 @@ loop-debug.vue
 | language | `string` | `undefined` | 代码在 highlightjs 中的语言 |  |
 | trim | `boolean` | `true` | 是否显示 trim 后的代码 |  |
 | inline | `boolean` | `false` | 使用行内样式 |  |
-| word-wrap | `boolean` | `false` | 代码过长时是否自动换行 | NEXT_VERSION |
+| word-wrap | `boolean` | `false` | 代码过长时是否自动换行 | 2.24.0 |

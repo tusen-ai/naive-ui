@@ -72,10 +72,14 @@ export default defineComponent({
     useTheme('Form', 'Form', style, formLight, props, mergedClsPrefixRef)
     // from path to form-item
     const formItems: Record<string, FormItemInst[]> = {}
-    // label-width = 'auto'
-    const maxChildLabelWidthRef = ref(0)
+    // for label-width = 'auto'
+    const maxChildLabelWidthRef = ref<number | undefined>(undefined)
     const deriveMaxChildLabelWidth = (currentWidth: number): void => {
-      if (currentWidth >= maxChildLabelWidthRef.value) {
+      const currentMaxChildLabelWidth = maxChildLabelWidthRef.value
+      if (
+        currentMaxChildLabelWidth === undefined ||
+        currentWidth >= currentMaxChildLabelWidth
+      ) {
         maxChildLabelWidthRef.value = currentWidth
       }
     }

@@ -18,7 +18,7 @@ async
 disabled
 prefix-and-suffix
 batch-render
-switcher-icon
+switcher-icon.vue
 ```
 
 ## API
@@ -56,7 +56,7 @@ switcher-icon
 | render-label | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' label. |  |
 | render-prefix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' prefix. |  |
 | render-suffix | `(info: {option: TreeOption, checked: boolean, selected: boolean}) => VNodeChild` | `undefined` | Render function of all the options' suffix. |  |
-| render-switcher-icon | `() => VNodeChild` | `undefined` | Render function of option switcher icon. | NEXT_VERSION |
+| render-switcher-icon | `() => VNodeChild` | `undefined` | Render function of option switcher icon. | 2.24.0 |
 | selectable | `boolean` | `true` | Whether the node can be selected. |  |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |  |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scroll. You need to set proper style height of the tree in advance. |  |

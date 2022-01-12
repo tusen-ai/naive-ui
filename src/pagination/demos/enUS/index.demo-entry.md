@@ -29,7 +29,7 @@ page-size-option
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |  |
 | item-count | `number` | `undefined` | Total number. |  |
-| label | `(info: PaginationRenderLabel) => VNodeChild` | `undefined` | Item content. | NEXT_VERSION |
+| label | `PaginationRenderLabel` | `undefined` | Item content. | 2.24.0 |
 | page-count | `number` | `1` | Total pages. |  |
 | page-sizes | `Array<number \| PaginationSizeOption>` | `[10]` | Number of items per page, can be customize. |  |
 | page-size | `number` | `undefined` | Page size in controlled mode. |  |
@@ -75,10 +75,10 @@ interface PaginationInfo {
 
 ### Pagination Slots
 
-| Name   | Parameters                      | Description    | Version      |
-| ------ | ------------------------------- | -------------- | ------------ |
-| label  | `(info: PaginationRenderLabel)` | Item content.  | NEXT_VERSION |
-| next   | `(info: PaginationInfo)`        | Next page.     |              |
-| prev   | `(info: PaginationInfo)`        | Previous page. |              |
-| prefix | `(info: PaginationInfo)`        | Page prefix.   |              |
-| suffix | `(info: PaginationInfo)`        | Page suffix.   |              |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| label | The same as `PaginationRenderLabel`'s parameters | Item content. | 2.24.0 |
+| next | `(info: PaginationInfo)` | Next page. |  |
+| prev | `(info: PaginationInfo)` | Previous page. |  |
+| prefix | `(info: PaginationInfo)` | Page prefix. |  |
+| suffix | `(info: PaginationInfo)` | Page suffix. |  |

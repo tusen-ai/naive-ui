@@ -29,7 +29,7 @@ page-size-option
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | 下一页 |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | 上一页 |  |
 | item-count | `number` | `undefined` | 总条数 |  |
-| label | `(info: PaginationRenderLabel) => VNodeChild` | `undefined` | 每一项的内容 | NEXT_VERSION |
+| label | `PaginationRenderLabel` | `undefined` | 每一项的内容 | 2.24.0 |
 | page-count | `number` | `1` | 总页数 |  |
 | page-sizes | `Array<number \| PaginationSizeOption>` | `[10]` | 每页条数， 可自定义 |  |
 | page-size | `number` | `undefined` | 受控模式下的分页大小 |  |
@@ -75,10 +75,10 @@ interface PaginationInfo {
 
 ### Pagination Slots
 
-| 名称   | 参数                            | 说明         | 版本         |
-| ------ | ------------------------------- | ------------ | ------------ |
-| label  | `(info: PaginationRenderLabel)` | 每一项的内容 | NEXT_VERSION |
-| next   | `(info: PaginationInfo)`        | 下一页       |              |
-| prev   | `(info: PaginationInfo)`        | 上一页       |              |
-| prefix | `(info: PaginationInfo)`        | 分页前缀     |              |
-| suffix | `(info: PaginationInfo)`        | 分页后缀     |              |
+| 名称   | 参数                            | 说明         | 版本   |
+| ------ | ------------------------------- | ------------ | ------ |
+| label  | 同 `PaginationRenderLabel` 参数 | 每一项的内容 | 2.24.0 |
+| next   | `(info: PaginationInfo)`        | 下一页       |        |
+| prev   | `(info: PaginationInfo)`        | 上一页       |        |
+| prefix | `(info: PaginationInfo)`        | 分页前缀     |        |
+| suffix | `(info: PaginationInfo)`        | 分页后缀     |        |

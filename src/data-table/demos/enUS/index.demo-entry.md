@@ -41,6 +41,8 @@ custom-filter-menu
 tree
 flex-height
 striped
+simple-editable
+switchable-editable
 ```
 
 ## API
@@ -70,8 +72,8 @@ striped
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |
-| single-column | `boolean` | `false` | Whether the column content is a whole, when the parameter is `true`, there is no `border-bottom`. |
-| single-line | `boolean` | `true` | Whether the line content is a whole, when the parameter value is `true`, there is no `border-right`. |
+| single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |
+| single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |
 | striped | `boolean` | `false` | Whether to show zebra stripes on rows. |
 | summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |
@@ -118,7 +120,7 @@ striped
 | title | `string \| (() => VNodeChild)` | `undefined` | Column title, Can be a render function. |  |
 | titleRowSpan | `number` | `undefined` | The number of cells occupied by the title row. |  |
 | type | `'selection' \| 'expand'` | `undefined` | Column type. |  |
-| width | `number \| string` | `undefined` | Width of the column (**required and should be number** when fixed). | NEXT_VERSION (`string` type) |
+| width | `number \| string` | `undefined` | Width of the column (**required and should be number** when fixed). | 2.24.0 (`string` type) |
 
 #### DataTableCreateSummary Type
 

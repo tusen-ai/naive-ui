@@ -1,15 +1,11 @@
 # 每屏显示数量
 
+通过 `slides-per-view` 控制每屏显示数量。
+
+需要注意，`slides-per-view` 属性会与 `loop` 冲突，如果你需要自定义每屏显示数量，那么 `loop` 功能将被禁用。
+
 ```html
-<n-alert title="注意" type="warning" style="margin-bottom: 16px;">
-  该属性会与 `loop` 冲突，如果你需要自定义每屏显示数量，那么 `loop` 功能将被禁用。
-</n-alert>
-<n-carousel
-  :slides-per-view="3"
-  :space-between="20"
-  :loop="false"
-  draggable
->
+<n-carousel :slides-per-view="3" :space-between="20" :loop="false" draggable>
   <img
     class="carousel-img"
     src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
