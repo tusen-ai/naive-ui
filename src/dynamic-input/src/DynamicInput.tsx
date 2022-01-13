@@ -365,22 +365,21 @@ export default defineComponent({
                 <NButtonGroup size={buttonSize}>
                   {{
                     default: () => [
-                      !this.removeDisabled ? (
-                        <NButton
-                          theme={mergedTheme.peers.Button}
-                          themeOverrides={mergedTheme.peerOverrides.Button}
-                          circle
-                          onClick={() => remove(index)}
-                        >
-                          {{
-                            icon: () => (
-                              <NBaseIcon clsPrefix={mergedClsPrefix}>
-                                {{ default: () => <RemoveIcon /> }}
-                              </NBaseIcon>
-                            )
-                          }}
-                        </NButton>
-                      ) : null,
+                      <NButton
+                        disabled={this.removeDisabled}
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        circle
+                        onClick={() => remove(index)}
+                      >
+                        {{
+                          icon: () => (
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{ default: () => <RemoveIcon /> }}
+                            </NBaseIcon>
+                          )
+                        }}
+                      </NButton>,
                       <NButton
                         disabled={this.insertionDisabled}
                         circle
@@ -396,8 +395,9 @@ export default defineComponent({
                           )
                         }}
                       </NButton>,
-                      showMoveButton && index !== 0 ? (
+                      showMoveButton ? (
                         <NButton
+                          disabled={index === 0}
                           circle
                           theme={mergedTheme.peers.Button}
                           themeOverrides={mergedTheme.peerOverrides.Button}
@@ -414,8 +414,9 @@ export default defineComponent({
                           }}
                         </NButton>
                       ) : null,
-                      showMoveButton && index !== mergedValue.length - 1 ? (
+                      showMoveButton ? (
                         <NButton
+                          disabled={index === mergedValue.length - 1}
                           circle
                           theme={mergedTheme.peers.Button}
                           themeOverrides={mergedTheme.peerOverrides.Button}
