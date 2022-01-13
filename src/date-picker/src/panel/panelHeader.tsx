@@ -1,4 +1,11 @@
-import { h, defineComponent, Transition, withDirectives, PropType, ref } from 'vue'
+import {
+  h,
+  defineComponent,
+  Transition,
+  withDirectives,
+  PropType,
+  ref
+} from 'vue'
 import MonthPanel from './month'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
@@ -15,7 +22,7 @@ export default defineComponent({
   setup (props) {
     const panelCommon = usePanelCommon(props)
     const triggerPanelMonthRef = ref<HTMLElement | null>(null)
-    const monthPanelRef = ref<HTMLElement | null>(null)
+    const monthPanelRef = ref<InstanceType<typeof MonthPanel> | null>(null)
     function handleClickOutside (e: MouseEvent): void {
       if (
         panelCommon.showMonthYearPanel.value &&
@@ -36,7 +43,7 @@ export default defineComponent({
     return (
       <div
         class={`${mergedClsPrefix}-date-panel-month__month-year`}
-        ref='triggerPanelMonthRef'
+        ref="triggerPanelMonthRef"
       >
         <VBinder>
           {{
@@ -51,12 +58,8 @@ export default defineComponent({
                       </div>
                     ) : (
                       <div onClick={this.handleOpenQuickSelectMonthPanel}>
-                        <span>
-                          {this.calendarYear}
-                        </span>
-                        <span>
-                          {this.calendarMonth}
-                        </span>
+                        <span>{this.calendarYear}</span>
+                        <span>{this.calendarMonth}</span>
                       </div>
                     )
                 }}
@@ -70,15 +73,17 @@ export default defineComponent({
                           this.showMonthYearPanel
                             ? withDirectives(
                                 <MonthPanel
-                                  ref='monthPanelRef'
+                                  ref="monthPanelRef"
                                   {...this.$props}
                                   style={this.$attrs.style}
                                   actions={[]}
-                                  //month and year click show month type
+                                  // month and year click show month type
                                   type="month"
                                   key="month"
                                   quickMonth={true}
-                                  onUpdatePanelValue={this.onUpdateCalendarValue}
+                                  onUpdatePanelValue={
+                                    this.onUpdateCalendarValue
+                                  }
                                 />,
                                 [[clickoutside, handleClickOutside]]
                             )

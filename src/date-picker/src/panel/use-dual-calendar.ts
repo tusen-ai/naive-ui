@@ -274,12 +274,12 @@ function useDualCalendar (
     )
     adjustCalendarTimes(false)
   }
-  function onUpdateStartPanelValue(value: number) {
+  function onUpdateStartPanelValue (value: number): void {
     startCalendarDateTimeRef.value = value
     adjustCalendarTimes(true)
   }
 
-  function onUpdateEndPanelValue(value: number) {
+  function onUpdateEndPanelValue (value: number): void {
     startCalendarDateTimeRef.value = value
     adjustCalendarTimes(false)
   }
@@ -311,8 +311,7 @@ function useDualCalendar (
   function resetSelectingStatus (e: MouseEvent): void {
     if (
       startDatesElRef.value?.contains(e.target as Node) ||
-      endDatesElRef.value?.contains(e.target as Node) ||
-      panelCommon.showMonthYearPanel.value
+      endDatesElRef.value?.contains(e.target as Node)
     ) {
       // do nothing
     } else {
@@ -632,7 +631,7 @@ function useDualCalendar (
     datePickerSlots,
     shortcuts: shortcutsRef,
     startCalendarDateTime: startCalendarDateTimeRef,
-    endCalendarDateTime:endCalendarDateTimeRef,
+    endCalendarDateTime: endCalendarDateTimeRef,
     onUpdateStartPanelValue,
     onUpdateEndPanelValue
   }

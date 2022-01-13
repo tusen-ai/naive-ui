@@ -46,8 +46,8 @@ export default defineComponent({
       i: number,
       mergedClsPrefix: string
     ): VNode => {
-      console.log('quick', props.quickMonth)
-      const { mergedIsDateDisabled, handleDateClick, handleQuickMonthClick } = useCalendarRef
+      const { mergedIsDateDisabled, handleDateClick, handleQuickMonthClick } =
+        useCalendarRef
       return (
         <div
           data-n-date
@@ -64,8 +64,8 @@ export default defineComponent({
             }
           ]}
           onClick={() => {
-            props.quickMonth
-              ? handleQuickMonthClick(item, props.onUpdatePanelValue!)
+            props.quickMonth && props.onUpdatePanelValue
+              ? handleQuickMonthClick(item, props.onUpdatePanelValue)
               : handleDateClick(item)
           }}
         >

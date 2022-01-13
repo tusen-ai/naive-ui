@@ -25,7 +25,7 @@ export default defineComponent({
     const panelHeaderRef = ref<InstanceType<typeof PanelHeader> | null>(null)
     return {
       ...useCalendar(props, 'datetime'),
-      panelHeaderRef,
+      panelHeaderRef
     }
   },
   render () {
