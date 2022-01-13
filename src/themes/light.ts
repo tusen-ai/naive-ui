@@ -1,5 +1,3 @@
-// The file is for internal usage, do not export it, since all the components
-// have default light theme.
 import { commonLight } from '../_styles/common'
 import { alertLight } from '../alert/styles'
 import { anchorLight } from '../anchor/styles'
