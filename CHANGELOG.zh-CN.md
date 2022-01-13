@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- 修复 `n-carousel` `card` 过渡模式切换问题
+- 修复 `n-layout-sider` 在折叠时仍占据 1px 宽度
+
+### i18n
+
+- 新增 esAR locale
+
 ## 2.24.1 (2022-01-12)
 
 ### Fixes

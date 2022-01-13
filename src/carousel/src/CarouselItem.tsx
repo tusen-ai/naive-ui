@@ -44,10 +44,10 @@ export default defineComponent({
       const { value: selfEl } = selfElRef
       return selfEl && NCarousel.getSlideIndex(selfEl)
     })
-    function handleClick (e: MouseEvent): void {
+    function handleClick (event: MouseEvent): void {
       const { value: index } = indexRef
       if (index !== undefined) {
-        NCarousel?.onCarouselItemClick(index)
+        NCarousel?.onCarouselItemClick(index, event)
       }
     }
     onMounted(() => NCarousel.addSlide(selfElRef.value))
@@ -92,7 +92,8 @@ export default defineComponent({
         data-index={index}
         aria-hidden={!isActive}
         style={style}
-        onClick={this.handleClick}
+        // @ts-expect-error
+        onClickCapture={this.handleClick}
       >
         {renderSlot(slots, 'default', {
           isPrev,

@@ -24,7 +24,7 @@ export interface CarouselMethodsInjection {
   getSlideStyle: (slide: HTMLElement) => any
   addSlide: (slide?: HTMLElement) => void
   removeSlide: (slide?: HTMLElement) => void
-  onCarouselItemClick: (index: number) => void
+  onCarouselItemClick: (index: number, event: MouseEvent) => void
 }
 export const carouselMethodsInjectionKey: InjectionKey<CarouselMethodsInjection> =
   Symbol('carouselMethods')
@@ -34,4 +34,13 @@ export interface CarouselInst {
   to: (index: number) => void
   prev: () => void
   next: () => void
+}
+
+export const enum DragFlags {
+  NORMAL = 1,
+  START = 1 << 1,
+  PROGRESS = 1 << 2,
+  SUCCESS = 1 << 3,
+  FAIL = 1 << 4,
+  END = 1 << 5
 }
