@@ -20,10 +20,12 @@ export default defineComponent({
       type: String as PropType<'month' | 'year' | 'quarter'>,
       required: true
     },
+    // panelHeader prop
     quickMonth: {
       type: Boolean,
       default: false
-    }
+    },
+    onUpdatePanelValue: Function as PropType<(value: number) => void>
   },
   setup (props) {
     const useCalendarRef = useCalendar(props, props.type)
@@ -61,7 +63,11 @@ export default defineComponent({
                 mergedIsDateDisabled(item.ts)
             }
           ]}
-          onClick={() => handleQuickMonthClick(item)}
+          onClick={() => {
+            props.quickMonth
+              ? handleQuickMonthClick(item, props.onUpdatePanelValue!)
+              : handleDateClick(item)
+          }}
         >
           {getRenderContent(item)}
         </div>

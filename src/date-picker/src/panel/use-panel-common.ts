@@ -139,6 +139,10 @@ function usePanelCommon (props: UsePanelCommonProps) {
     return shortcut
   }
 
+  const showMonthYearPanel = ref(false)
+  function handleOpenQuickSelectMonthPanel () {
+    showMonthYearPanel.value = true
+  }
   return {
     mergedTheme: mergedThemeRef,
     mergedClsPrefix: mergedClsPrefixRef,
@@ -159,7 +163,9 @@ function usePanelCommon (props: UsePanelCommonProps) {
     clearPendingValue,
     restorePendingValue,
     getShortcutValue,
-    handleShortcutMouseleave: restorePendingValue
+    handleShortcutMouseleave: restorePendingValue,
+    showMonthYearPanel,
+    handleOpenQuickSelectMonthPanel
   }
 }
 

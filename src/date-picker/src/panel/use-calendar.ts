@@ -236,7 +236,6 @@ function useCalendar (
   function handleDateClick (
     dateItem: DateItem | MonthItem | YearItem | QuarterItem
   ): void {
-    console.log('0000')
     if (mergedIsDateDisabled(dateItem.ts)) {
       return
     }
@@ -284,18 +283,25 @@ function useCalendar (
   }
 
   function handleQuickMonthClick (
-    dateItem: MonthItem | YearItem | QuarterItem
+    dateItem: MonthItem | YearItem | QuarterItem,
+    updatePanelValue: (value: number) => void
   ): void {
-    calendarValueRef.value = getTime(
+    let newValue: number
+    if (props.value !== null && !Array.isArray(props.value)) {
+      newValue = props.value
+    } else {
+      newValue = Date.now()
+    }
+    newValue = getTime(
       dateItem.type === 'month'
-        ? setMonth(calendarValueRef.value, dateItem.dateObject.month)
-        : setYear(calendarValueRef.value, dateItem.dateObject.year)
+        ? setMonth(newValue, dateItem.dateObject.month)
+        : setYear(newValue, dateItem.dateObject.year)
     )
-    panelCommon.doUpdateValue(
-      sanitizeValue(calendarValueRef.value),
-      type === 'date' || type === 'year'
-    )
-    scrollPickerColumns(calendarValueRef.value)
+    updatePanelValue(newValue)
+    scrollPickerColumns(newValue)
+  }
+  function onUpdateCalendarValue(value: number) {
+    calendarValueRef.value = value
   }
   function deriveDateInputValue (time?: number): void {
     // If not selected, display nothing,
@@ -368,15 +374,6 @@ function useCalendar (
     panelCommon.clearPendingValue()
     handleConfirmClick()
   }
-  const showMonthYearPanel = ref(false)
-  function quickSelectYear (): void {
-    showMonthYearPanel.value = true
-    void nextTick(scrollPickerColumns)
-  }
-  function quickSelectMonth (): void {
-    showMonthYearPanel.value = true
-    void nextTick(scrollPickerColumns)
-  }
 
   function scrollPickerColumns (value?: number): void {
     const { value: mergedValue } = props
@@ -434,11 +431,10 @@ function useCalendar (
     monthScrollRef,
     yearScrollRef,
     scrollbarInstRef,
-    quickSelectYear,
-    quickSelectMonth,
-    showMonthYearPanel,
     handleQuickMonthClick,
-    scrollPickerColumns
+    scrollPickerColumns,
+    calendarValue: calendarValueRef,
+    onUpdateCalendarValue
   }
 }
 

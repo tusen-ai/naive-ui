@@ -22,25 +22,14 @@ export default defineComponent({
   name: 'DateTimePanel',
   props: useCalendarProps,
   setup (props) {
-    const triggerPanelRef = ref<HTMLElement | null>(null)
     const panelHeaderRef = ref<InstanceType<typeof PanelHeader> | null>(null)
-    function handleClickOutside (e: MouseEvent): void {
-      if (
-        panelHeaderRef.value?.showMonthYearPanel &&
-        !triggerPanelRef.value?.contains(e.target as Node)
-      ) {
-        panelHeaderRef.value.showMonthYearPanel = false
-      }
-    }
     return {
       ...useCalendar(props, 'datetime'),
-      triggerPanelRef,
       panelHeaderRef,
-      handleClickOutside
     }
   },
   render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts, handleClickOutside } = this
+    const { mergedClsPrefix, mergedTheme, shortcuts } = this
     return (
       <div
         ref="selfRef"
@@ -92,17 +81,16 @@ export default defineComponent({
             >
               <BackwardIcon />
             </div>
-            <div
-              class={`${mergedClsPrefix}-date-panel-month__month-year`}
-              ref="triggerPanelRef"
-            >
-              <PanelHeader
-                ref="panelHeaderRef"
-                {...this.$props}
-                {...this.$attrs}
-                onClickOutside={handleClickOutside}
-              />
-            </div>
+            <PanelHeader
+              ref="panelHeaderRef"
+              {...this.$props}
+              {...this.$attrs}
+              value={this.calendarValue}
+              onUpdateCalendarValue={this.onUpdateCalendarValue}
+              mergedClsPrefix={mergedClsPrefix}
+              calendarMonth={this.calendarMonth}
+              calendarYear={this.calendarYear}
+            />
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.nextMonth}

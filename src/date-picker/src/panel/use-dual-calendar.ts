@@ -274,6 +274,16 @@ function useDualCalendar (
     )
     adjustCalendarTimes(false)
   }
+  function onUpdateStartPanelValue(value: number) {
+    startCalendarDateTimeRef.value = value
+    adjustCalendarTimes(true)
+  }
+
+  function onUpdateEndPanelValue(value: number) {
+    startCalendarDateTimeRef.value = value
+    adjustCalendarTimes(false)
+  }
+
   // The function is used on date panel, not the date-picker value validation
   function mergedIsDateDisabled (ts: number): boolean {
     const isDateDisabled = isDateDisabledRef.value
@@ -301,7 +311,8 @@ function useDualCalendar (
   function resetSelectingStatus (e: MouseEvent): void {
     if (
       startDatesElRef.value?.contains(e.target as Node) ||
-      endDatesElRef.value?.contains(e.target as Node)
+      endDatesElRef.value?.contains(e.target as Node) ||
+      panelCommon.showMonthYearPanel.value
     ) {
       // do nothing
     } else {
@@ -619,7 +630,11 @@ function useDualCalendar (
     handleEndDateInput,
     handleEndDateInputBlur,
     datePickerSlots,
-    shortcuts: shortcutsRef
+    shortcuts: shortcutsRef,
+    startCalendarDateTime: startCalendarDateTimeRef,
+    endCalendarDateTime:endCalendarDateTimeRef,
+    onUpdateStartPanelValue,
+    onUpdateEndPanelValue
   }
 }
 

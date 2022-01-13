@@ -78,6 +78,8 @@ export interface PanelRef {
   monthScrollRef?: ScrollbarInst | null
   yearScrollRef?: VirtualListInst | null
   panelHeaderRef?: InstanceType<typeof PanelHeader> | null
+  panelStartHeaderRef?: InstanceType<typeof PanelHeader> | null
+  panelEndHeaderRef?: InstanceType<typeof PanelHeader> | null
 }
 
 // 0 is Monday
