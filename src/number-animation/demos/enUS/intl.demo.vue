@@ -1,7 +1,7 @@
 <markdown>
 # Internationalization
 
-use `local` to set internationalization language.
+use `locale` to set internationalization language.
 </markdown>
 
 <template>
@@ -12,7 +12,7 @@ use `local` to set internationalization language.
       :to="1879.314"
       :active="false"
       :precision="3"
-      :local="'ru-RU'"
+      :locale="'ru-RU'"
       show-separator
     />
   </n-statistic>

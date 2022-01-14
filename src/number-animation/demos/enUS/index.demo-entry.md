@@ -29,7 +29,7 @@ intl.vue
 | precision | `number` | `0` | Decimal precision of the displayed value. | 2.23.2 |
 | show-separator | `boolean` | `false` | Whether to show separator. | 2.23.2 |
 | to | `number` | `undefined` | Target value. | 2.23.2 |
-| local | `string` | `en-US` | Language of the number. | NEXT_VERSION |
+| locale | `string` | `en-US` | Language of the number. | NEXT_VERSION |
 
 ### NumberAnimation Methods
 

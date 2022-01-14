@@ -1,7 +1,7 @@
 <markdown>
 # 国际化
 
-使用 `local` 设定国际化语言。
+使用 `locale` 设定国际化语言。
 </markdown>
 
 <template>
@@ -12,7 +12,7 @@
       :to="1879.314"
       :active="false"
       :precision="3"
-      :local="'ru-RU'"
+      :locale="'ru-RU'"
       show-separator
     />
   </n-statistic>
