@@ -69,13 +69,11 @@ export default defineComponent({
         props.precision
       ).toFixed(props.precision)
       const splitValue = formatted.split('.')
-      const formattedIntlPats = new Intl.NumberFormat(
-        props.locale
-      ).formatToParts(0.01)
-      const decimalSeparator =
-        formattedIntlPats[formattedIntlPats.length - 2].value
+      const numberFormat = new Intl.NumberFormat(props.locale)
+      const formattedPats = numberFormat.formatToParts(0.01)
+      const decimalSeparator = formattedPats[formattedPats.length - 2].value
       const integer = props.showSeparator
-        ? new Intl.NumberFormat(props.locale).format(Number(splitValue[0]))
+        ? numberFormat.format(Number(splitValue[0]))
         : splitValue[0]
       const decimal = splitValue[1]
       return {
