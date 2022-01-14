@@ -158,5 +158,10 @@
     "ui framework",
     "ui",
     "vue"
-  ]
+  ],
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": ["@babel/core", "postcss", "rollup", "webpack"]
+    }
+  }
 }
