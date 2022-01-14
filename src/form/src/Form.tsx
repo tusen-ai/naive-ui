@@ -1,4 +1,11 @@
-import { h, defineComponent, PropType, provide, ExtractPropTypes } from 'vue'
+import {
+  h,
+  defineComponent,
+  PropType,
+  provide,
+  ExtractPropTypes,
+  ref
+} from 'vue'
 import { ValidateError } from 'async-validator'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -14,7 +21,8 @@ import {
   LabelPlacement,
   FormInst,
   formItemInstsInjectionKey,
-  formInjectionKey
+  formInjectionKey,
+  Size
 } from './interface'
 import { ExtractPublicPropTypes, keysOf } from '../../_utils'
 
@@ -33,12 +41,12 @@ const formProps = {
   },
   rules: Object as PropType<FormRules>,
   disabled: Boolean,
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<Size>,
   showRequireMark: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  requireMarkPlacement: String as PropType<'left' | 'right'>,
+  requireMarkPlacement: String as PropType<'left' | 'right' | 'right-hanging'>,
   showFeedback: {
     type: Boolean,
     default: true
@@ -64,6 +72,17 @@ export default defineComponent({
     useTheme('Form', 'Form', style, formLight, props, mergedClsPrefixRef)
     // from path to form-item
     const formItems: Record<string, FormItemInst[]> = {}
+    // for label-width = 'auto'
+    const maxChildLabelWidthRef = ref<number | undefined>(undefined)
+    const deriveMaxChildLabelWidth = (currentWidth: number): void => {
+      const currentMaxChildLabelWidth = maxChildLabelWidthRef.value
+      if (
+        currentMaxChildLabelWidth === undefined ||
+        currentWidth >= currentMaxChildLabelWidth
+      ) {
+        maxChildLabelWidthRef.value = currentWidth
+      }
+    }
     async function validate (
       validateCallback?: FormValidateCallback,
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true
@@ -109,7 +128,11 @@ export default defineComponent({
         }
       }
     }
-    provide(formInjectionKey, props)
+    provide(formInjectionKey, {
+      props,
+      maxChildLabelWidthRef,
+      deriveMaxChildLabelWidth
+    })
     provide(formItemInstsInjectionKey, { formItems })
     const formExposedMethod: FormInst = {
       validate,

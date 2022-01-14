@@ -25,13 +25,32 @@ export default cB('layout-sider', `
   display: flex;
   justify-content: flex-end;
 `, [
+  cM('bordered', [
+    c('&::after', `
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background-color: var(--n-border-color);
+      transition: background-color .3s var(--bezier);
+    `)
+  ]),
+  cE('left-placement', [
+    cM('bordered', [
+      c('&::after', `
+        right: 0;
+      `)
+    ])
+  ]),
   cM('right-placement', `
     justify-content: flex-start;
   `, [
-    cM('bordered', `
-      border-right: none;
-      border-left: 1px solid var(--n-border-color);
-    `),
+    cM('bordered', [
+      c('&::after', `
+        left: 0;
+      `)
+    ]),
     cM('collapsed', [
       cB('layout-toggle-button', [
         cB('base-icon', `
@@ -111,6 +130,7 @@ export default cB('layout-sider', `
     background-color: var(--n-toggle-button-color);
     box-shadow: 0 2px 4px 0px rgba(0, 0, 0, .06);
     transform: translateX(50%) translateY(-50%);
+    z-index: 1;
   `, [
     cB('base-icon', `
       transition: transform .3s var(--n-bezier);
@@ -183,8 +203,5 @@ export default cB('layout-sider', `
     left: 0;
     top: 0;
     bottom: 0;
-  `),
-  cM('bordered', `
-    border-right: 1px solid var(--n-border-color);
   `)
 ])

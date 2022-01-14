@@ -15,7 +15,9 @@ import {
   ComputedRef,
   Ref,
   watch,
-  nextTick
+  nextTick,
+  renderSlot,
+  Slots
 } from 'vue'
 import {
   hsv2rgb,
@@ -54,6 +56,7 @@ import {
 } from '../../_mixins'
 import { call, createKey, useAdjustedTo } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { NButton } from '../../button'
 import HueSlider from './HueSlider'
 import AlphaSlider from './AlphaSlider'
 import Pallete from './Pallete'
@@ -61,11 +64,10 @@ import ColorInput from './ColorInput'
 import ColorPickerTrigger from './ColorPickerTrigger'
 import { deriveDefaultValue, getModeFromValue } from './utils'
 import type { ColorPickerMode, ActionType } from './utils'
-import style from './styles/index.cssr'
-import { OnUpdateValue, OnUpdateValueImpl } from './interface'
-import { NButton } from '../../button'
+import { OnUpdateValue, OnUpdateValueImpl, RenderLabel } from './interface'
 import ColorPickerSwatches from './ColorPickerSwatches'
 import ColorPreview from './ColorPreview'
+import style from './styles/index.cssr'
 
 export const colorPickerPanelProps = {
   ...(useTheme.props as ThemeProps<ColorPickerTheme>),
@@ -82,7 +84,7 @@ export const colorPickerPanelProps = {
   modes: {
     type: Array as PropType<ColorPickerMode[]>,
     // no hsva by default since browser doesn't support it
-    default: ['rgb', 'hex', 'hsl']
+    default: () => ['rgb', 'hex', 'hsl']
   },
   to: useAdjustedTo.propTo,
   showAlpha: {
@@ -97,6 +99,7 @@ export const colorPickerPanelProps = {
   },
   internalActions: Array as PropType<ReadonlyArray<'redo' | 'undo'>>,
   size: String as PropType<'small' | 'medium' | 'large'>,
+  renderLabel: Function as PropType<RenderLabel>,
   onComplete: Function as PropType<OnUpdateValue>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
@@ -112,9 +115,11 @@ export type ColorPickerProps = ExtractPublicPropTypes<
   typeof colorPickerPanelProps
 >
 
-export const colorPickerThemeInjectionKey: InjectionKey<
-ComputedRef<MergedTheme<ColorPickerTheme>>
-> = Symbol('colorPickerThemeInjection')
+export const colorPickerInjectionKey: InjectionKey<{
+  themeRef: ComputedRef<MergedTheme<ColorPickerTheme>>
+  colorPickerSlots: Slots
+  renderLabelRef: Ref<RenderLabel | undefined>
+}> = Symbol('colorPickerThemeInjection')
 
 export default defineComponent({
   name: 'ColorPicker',
@@ -137,7 +142,11 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
-    provide(colorPickerThemeInjectionKey, themeRef)
+    provide(colorPickerInjectionKey, {
+      themeRef,
+      renderLabelRef: toRef(props, 'renderLabel'),
+      colorPickerSlots: slots
+    })
 
     const uncontrolledShowRef = ref(props.defaultShow)
     const mergedShowRef = useMergedState(
@@ -167,8 +176,9 @@ export default defineComponent({
 
     const valueModeRef = computed(() => getModeFromValue(mergedValueRef.value))
 
+    const { modes } = props
     const displayedModeRef = ref<ColorPickerMode>(
-      getModeFromValue(mergedValueRef.value) || 'rgb'
+      getModeFromValue(mergedValueRef.value) || modes[0] || 'rgb'
     )
 
     function handleUpdateDisplayedMode (): void {
@@ -631,7 +641,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { $slots, mergedClsPrefix } = this
     return (
       <div
         class={`${mergedClsPrefix}-color-picker`}
@@ -649,7 +659,13 @@ export default defineComponent({
                       value={this.mergedValue}
                       hsla={this.hsla}
                       onClick={this.handleTriggerClick}
-                    />
+                    >
+                      {{
+                        label: $slots.label
+                          ? () => renderSlot($slots, 'label')
+                          : undefined
+                      }}
+                    </ColorPickerTrigger>
                   )
                 }}
               </VTarget>,

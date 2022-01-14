@@ -39,3 +39,7 @@ export type Addable =
   }
 
 export const tabsInjectionKey: InjectionKey<TabsInjection> = Symbol('tabs')
+
+export interface TabsInst {
+  syncBarPosition: () => void
+}

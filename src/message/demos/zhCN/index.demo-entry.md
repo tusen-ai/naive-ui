@@ -43,7 +43,7 @@ basic
 icon
 timing
 closable
-modify-content
+modify-content.vue
 manually-close
 about-theme
 multiple-line
@@ -62,22 +62,7 @@ customize-message.vue
 | keep-alive-on-hover | `boolean` | `false` | 所有 Message 在悬浮信息上时是否不销毁 |  |
 | max | `number` | `undefined` | 限制提示信息显示的个数 |  |
 | placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top` | 所有 Message 显示的位置 |  |
-| render-message | `MessageProviderRenderMessage` | `undefined` | 消息的渲染函数 | NEXT_VERSION |
 | to | `string \| HTMLElement` | `'body'` | Message 容器节点的位置 |  |
-
-#### MessageProviderRenderMessage Type
-
-```ts
-type MessageProviderRenderMessage = (props: {
-  content?: string | number | (() => VNodeChild)
-  icon?: () => VNodeChild
-  closable: boolean
-  type: 'info' | 'success' | 'warning' | 'error' | 'loading'
-  onClose?: () => void
-  onMouseenter?: (e: MouseEvent) => void
-  onMouseleave?: (e: MouseEvent) => void
-}) => VNodeChild
-```
 
 ### MessageProvider Injection API
 
@@ -94,15 +79,28 @@ type MessageProviderRenderMessage = (props: {
 
 #### MessageOption Properties
 
-| 名称             | 类型          | 说明                     |
-| ---------------- | ------------- | ------------------------ |
-| closable         | `boolean`     | 是否显示 close 图标      |
-| duration         | `number`      | 信息展示的时长           |
-| icon             | `() => VNode` | 信息图标                 |
-| keepAliveOnHover | `boolean`     | Hover 到信息上是否不销毁 |
-| onAfterLeave     | `() => void`  | 信息消失动画结束的回调   |
-| onClose          | `() => void`  | 点击关闭图标的回调       |
-| onLeave          | `() => void`  | 信息开始消失的回调       |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| closable | `boolean` | 是否显示 close 图标 |  |
+| duration | `number` | 信息展示的时长 |  |
+| icon | `() => VNodeChild` | 信息图标 |  |
+| keepAliveOnHover | `boolean` | Hover 到信息上是否不销毁 |  |
+| render | `MessageRenderMessage` | 消息的渲染函数 | 2.24.0 |
+| onAfterLeave | `() => void` | 信息消失动画结束的回调 |  |
+| onClose | `() => void` | 点击关闭图标的回调 |  |
+| onLeave | `() => void` | 信息开始消失的回调 |  |
+
+#### MessageRenderMessage Type
+
+```ts
+type MessageRenderMessage = (props: {
+  content?: string | number | (() => VNodeChild)
+  icon?: () => VNodeChild
+  closable: boolean
+  type: 'info' | 'success' | 'warning' | 'error' | 'loading'
+  onClose?: () => void
+}) => VNodeChild
+```
 
 #### MessageReactive Properties
 
@@ -111,7 +109,7 @@ type MessageProviderRenderMessage = (props: {
 | closable | `boolean` | 是否显示 close 图标 |
 | content | `string \| (() => VNodeChild)` | 信息内容 |
 | destroy | `() => void` | 销毁信息的方法 |
-| icon | `() => VNode` | 信息图标 |
+| icon | `() => VNodeChild` | 信息图标 |
 | keepAliveOnHover | `boolean` | Hover 到信息上是否不销毁 |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | 信息类型 |
 | onAfterLeave | `() => void` | 信息消失动画结束的回调 |

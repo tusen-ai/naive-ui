@@ -20,7 +20,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { MessageTheme } from '../styles'
-import type { MessageOptions, MessageProviderRenderMessage } from './types'
+import type { MessageOptions, MessageType } from './types'
 import MessageEnvironment from './MessageEnvironment'
 
 type ContentType = string | (() => VNodeChild)
@@ -42,6 +42,7 @@ export interface MessageReactive {
   duration?: number
   closable?: boolean
   keepAliveOnHover?: boolean
+  type: MessageType
   icon?: () => VNodeChild
   onClose?: () => void
   destroy: () => void
@@ -79,8 +80,7 @@ const messageProviderProps = {
     default: 'top'
   },
   closable: Boolean,
-  containerStyle: [String, Object] as PropType<string | CSSProperties>,
-  renderMessage: Function as PropType<MessageProviderRenderMessage>
+  containerStyle: [String, Object] as PropType<string | CSSProperties>
 }
 
 export type MessageProviderProps = ExtractPublicPropTypes<
@@ -124,7 +124,10 @@ export default defineComponent({
       mergedClsPrefixRef
     })
     provide(messageApiInjectionKey, api)
-    function create (content: ContentType, options = {}): MessageReactive {
+    function create (
+      content: ContentType,
+      options: MessageOptions & { type: MessageType }
+    ): MessageReactive {
       const key = createId()
       const messageReactive = reactive({
         ...options,

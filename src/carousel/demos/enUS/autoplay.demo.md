@@ -1,6 +1,6 @@
-# Auto Play
+# Autoplay
 
-Set `autoplay`, then it can auto play.
+Set `autoplay`, it can autoplay。
 
 ```html
 <n-carousel autoplay>

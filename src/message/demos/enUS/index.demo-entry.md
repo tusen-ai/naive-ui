@@ -43,7 +43,7 @@ basic
 icon
 timing
 closable
-modify-content
+modify-content.vue
 manually-close
 about-theme
 multiple-line
@@ -62,22 +62,7 @@ customize-message.vue
 | keep-alive-on-hover | `boolean` | `false` | Whether to destroy while hovering on all messages. |  |
 | max | `number` | `undefined` | Limit the number of messages to display. |  |
 | placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top` | Placement of all messages. |  |
-| render-message | `MessageProviderRenderMessage` | `undefined` | Render function of messages. | NEXT_VERSION |
 | to | `string \| HTMLElement` | `'body'` | Container node of message container. |  |
-
-#### MessageProviderRenderMessage Type
-
-```ts
-type MessageProviderRenderMessage = (props: {
-  content?: string | number | (() => VNodeChild)
-  icon?: () => VNodeChild
-  closable: boolean
-  type: 'info' | 'success' | 'warning' | 'error' | 'loading'
-  onClose?: () => void
-  onMouseenter?: (e: MouseEvent) => void
-  onMouseleave?: (e: MouseEvent) => void
-}) => VNodeChild
-```
 
 ### MessageProvider Injection API
 
@@ -94,15 +79,28 @@ type MessageProviderRenderMessage = (props: {
 
 #### MessageOption Properties
 
-| Name             | Type          | Description                               |
-| ---------------- | ------------- | ----------------------------------------- |
-| closable         | `boolean`     | Whether to show close icon.               |
-| duration         | `number`      | The duration of the message.              |
-| icon             | `() => VNode` | Message icon.                             |
-| keepAliveOnHover | `boolean`     | Messages whether to destroy while hover   |
-| onAfterLeave     | `() => void`  | Callback after message disappeared.       |
-| onClose          | `() => void`  | Callback when close icon is clicked.      |
-| onLeave          | `() => void`  | Callback when message start to disappear. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| closable | `boolean` | Whether to show close icon. |  |
+| duration | `number` | The duration of the message. |  |
+| icon | `() => VNodeChild` | Message icon. |  |
+| keepAliveOnHover | `boolean` | Messages whether to destroy while hover. |  |
+| render | `MessageRenderMessage` | Render function of the entire message. | 2.24.0 |
+| onAfterLeave | `() => void` | Callback after message disappeared. |  |
+| onClose | `() => void` | Callback when close icon is clicked. |  |
+| onLeave | `() => void` | Callback when message start to disappear. |  |
+
+#### MessageRenderMessage Type
+
+```ts
+type MessageRenderMessage = (props: {
+  content?: string | number | (() => VNodeChild)
+  icon?: () => VNodeChild
+  closable: boolean
+  type: 'info' | 'success' | 'warning' | 'error' | 'loading'
+  onClose?: () => void
+}) => VNodeChild
+```
 
 #### MessageReactive Properties
 
@@ -111,7 +109,7 @@ type MessageProviderRenderMessage = (props: {
 | closable | `boolean` | Whether to show close icon. |
 | content | `string \| (() => VNodeChild)` | Message content. |
 | destroy | `() => void` | Message destroy method. |
-| icon | `() => VNode` | Message icon. |
+| icon | `() => VNodeChild` | Message icon. |
 | keepAliveOnHover | `boolean` | Messages whether to destroy while hover |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'` | Message type. |
 | onAfterLeave | `() => void` | Callback after message disappeared. |

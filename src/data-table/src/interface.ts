@@ -151,7 +151,7 @@ export interface TableExpandColumn<T = InternalRowData>
 }
 
 export type TableColumn<T = InternalRowData> =
-  | TableColumnGroup
+  | TableColumnGroup<T>
   | TableBaseColumn<T>
   | TableSelectionColumn<T>
   | TableExpandColumn<T>

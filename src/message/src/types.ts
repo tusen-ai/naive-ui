@@ -6,20 +6,13 @@ export type MessageType = 'info' | 'success' | 'warning' | 'error' | 'loading'
 // We should export keepAliveOnHover since it's not managed by users
 export type RenderMessageProps = Pick<
 MessageSetupProps,
-| 'closable'
-| 'content'
-| 'icon'
-| 'onMouseenter'
-| 'onMouseleave'
-| 'onClose'
-| 'type'
+'closable' | 'content' | 'icon' | 'onClose' | 'type'
 >
 
-export type MessageProviderRenderMessage = (
-  props: RenderMessageProps
-) => VNodeChild
+export type MessageRenderMessage = (props: RenderMessageProps) => VNodeChild
 
 export interface MessageOptions {
+  render?: MessageRenderMessage
   duration?: number
   closable?: boolean
   keepAliveOnHover?: boolean

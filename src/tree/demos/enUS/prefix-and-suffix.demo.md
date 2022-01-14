@@ -1,4 +1,4 @@
-# Prefix and Suffix
+# Prefix and suffix
 
 Add some actions.
 

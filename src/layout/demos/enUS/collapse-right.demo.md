@@ -48,11 +48,9 @@ Sometimes you might want to put the collapsed sidebar on the right.
       :collapsed-width="64"
       :width="240"
       :native-scrollbar="false"
-      :inverted="inverted"
       style="max-height: 320px;"
     >
       <n-menu
-        :inverted="inverted"
         :collapsed-width="64"
         :collapsed-icon-size="22"
         :options="menuOptions"

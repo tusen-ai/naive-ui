@@ -26,18 +26,20 @@ import { createKey, call, flatten, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { tabsLight } from '../styles'
 import type { TabsTheme } from '../styles'
-import {
+import type {
   Addable,
   OnClose,
   OnCloseImpl,
   OnBeforeLeave,
-  tabsInjectionKey,
-  TabsType
+  TabsType,
+  TabsInst,
+  OnUpdateValue,
+  OnUpdateValueImpl
 } from './interface'
-import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
-import style from './styles/index.cssr'
+import { tabsInjectionKey } from './interface'
 import Tab from './Tab'
 import { tabPaneProps } from './TabPane'
+import style from './styles/index.cssr'
 
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'
@@ -147,9 +149,6 @@ export default defineComponent({
     )
 
     const tabChangeIdRef = { id: 0 }
-    watch(mergedValueRef, () => {
-      tabChangeIdRef.id = 0
-    })
 
     const tabWrapperStyleRef = computed(() => {
       if (!props.justifyContent || props.type === 'card') return undefined
@@ -160,6 +159,7 @@ export default defineComponent({
     })
 
     watch(mergedValueRef, () => {
+      tabChangeIdRef.id = 0
       updateCurrentBarStyle()
     })
 
@@ -319,6 +319,13 @@ export default defineComponent({
         el.classList.add(shadowAfterClass)
       }
     })
+
+    const exposedMethods: TabsInst = {
+      syncBarPosition: () => {
+        updateCurrentBarStyle()
+      }
+    }
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
@@ -396,7 +403,8 @@ export default defineComponent({
           '--font-weight-strong': fontWeightStrong,
           '--tab-color-segment': tabColorSegment
         }
-      })
+      }),
+      ...exposedMethods
     }
   },
   render () {
@@ -498,7 +506,7 @@ export default defineComponent({
                               {showPane
                                 ? tabPaneChildren.map(
                                   (tabPaneVNode: any, index: number) => {
-                                    return (
+                                    return justifyTabDynamicProps(
                                         <Tab
                                           {...tabPaneVNode.props}
                                           internalLeftPadded={
@@ -521,11 +529,11 @@ export default defineComponent({
                                       index !== 0 &&
                                         !mergedJustifyContent
                                     ) {
-                                      return createLeftPaddedTabVNode(
-                                        tabVNode
+                                      return justifyTabDynamicProps(
+                                        createLeftPaddedTabVNode(tabVNode)
                                       )
                                     } else {
-                                      return tabVNode
+                                      return justifyTabDynamicProps(tabVNode)
                                     }
                                   }
                                 )}
@@ -656,4 +664,19 @@ function createLeftPaddedTabVNode (tabVNode: VNode): VNode {
     }
   }
   return modifiedVNode
+}
+
+function justifyTabDynamicProps (
+  tabVNode: {
+    dynamicProps?: string[]
+  } & VNode
+): VNode {
+  if (Array.isArray(tabVNode.dynamicProps)) {
+    if (!tabVNode.dynamicProps.includes('internalLeftPadded')) {
+      tabVNode.dynamicProps.push('internalLeftPadded')
+    }
+  } else {
+    tabVNode.dynamicProps = ['internalLeftPadded']
+  }
+  return tabVNode
 }
