@@ -111,13 +111,13 @@ export default defineComponent({
                   onClick={onBack}
                 >
                   {
-                  backIconSlot?.() || (
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{
-                      default: () => <ArrowBackIcon />
-                    }}
-                  </NBaseIcon>
-                )}
+                    backIconSlot?.() || (
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
+                      {{
+                        default: () => <ArrowBackIcon />
+                      }}
+                    </NBaseIcon>
+                  )}
                 </div>
               ) : null}
               {avatarSlot ? (
