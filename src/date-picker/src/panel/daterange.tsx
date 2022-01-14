@@ -27,7 +27,7 @@ export default defineComponent({
     }
     const panelStartHeaderRef = ref<InstanceType<typeof PanelHeader> | null>(null)
     const panelEndHeaderRef = ref<InstanceType<typeof PanelHeader> | null>(null)
-    return {...useDualCalendar(props, 'daterange'), panelStartHeaderRef, panelEndHeaderRef }
+    return { ...useDualCalendar(props, 'daterange'), panelStartHeaderRef, panelEndHeaderRef }
   },
   render () {
     const { mergedClsPrefix, mergedTheme, shortcuts } = this

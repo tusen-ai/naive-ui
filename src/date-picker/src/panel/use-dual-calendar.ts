@@ -280,7 +280,7 @@ function useDualCalendar (
   }
 
   function onUpdateEndPanelValue (value: number): void {
-    startCalendarDateTimeRef.value = value
+    endCalendarDateTimeRef.value = value
     adjustCalendarTimes(false)
   }
 

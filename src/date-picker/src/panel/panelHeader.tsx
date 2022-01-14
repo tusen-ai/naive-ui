@@ -9,6 +9,7 @@ import {
 import MonthPanel from './month'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
+import { useIsMounted } from 'vooks'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 
 export default defineComponent({
@@ -35,7 +36,8 @@ export default defineComponent({
       ...panelCommon,
       triggerPanelMonthRef,
       monthPanelRef,
-      handleClickOutside
+      handleClickOutside,
+      monthPanelIsMounted: useIsMounted()
     }
   },
   render () {
@@ -67,7 +69,10 @@ export default defineComponent({
               <VFollower show={this.showMonthYearPanel}>
                 {{
                   default: () => (
-                    <Transition>
+                    <Transition
+                      name="fade-in-scale-up-transition"
+                      appear={this.monthPanelIsMounted}
+                    >
                       {{
                         default: () =>
                           this.showMonthYearPanel

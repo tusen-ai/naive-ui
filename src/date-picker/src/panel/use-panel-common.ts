@@ -140,7 +140,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
   }
 
   const showMonthYearPanel = ref(false)
-  function handleOpenQuickSelectMonthPanel () {
+  function handleOpenQuickSelectMonthPanel (): void {
     showMonthYearPanel.value = true
   }
   return {

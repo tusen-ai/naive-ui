@@ -4,8 +4,7 @@ import {
   inject,
   watch,
   ExtractPropTypes,
-  PropType,
-  nextTick
+  PropType
 } from 'vue'
 import {
   addMonths,
@@ -300,7 +299,7 @@ function useCalendar (
     updatePanelValue(newValue)
     scrollPickerColumns(newValue)
   }
-  function onUpdateCalendarValue(value: number) {
+  function onUpdateCalendarValue (value: number): void {
     calendarValueRef.value = value
   }
   function deriveDateInputValue (time?: number): void {
