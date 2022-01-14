@@ -117,7 +117,7 @@ export default defineComponent({
                         default: () => <ArrowBackIcon />
                       }}
                     </NBaseIcon>
-                  )}
+                    )}
                 </div>
               ) : null}
               {avatarSlot ? (
