@@ -161,5 +161,22 @@ export const unconfigurableStyle = c([
         backgroundImage: 'linear-gradient(133deg, #E2E5E9 0%, #999999 100%)'
       })
     ])
+  ]),
+  cB('date-panel', [
+    cB('date-panel-dates', [
+      cB('date-panel-date', [
+        cM(
+          'current',
+          {
+            color: '#4FB233'
+          },
+          [
+            cB('date-panel-date__sup', {
+              display: 'none'
+            })
+          ]
+        )
+      ])
+    ])
   ])
 ])

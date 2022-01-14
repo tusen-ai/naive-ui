@@ -151,6 +151,12 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     textColor: commonLight.textColor1,
     textColorDisabled: colors.textColorDisabled
   },
+  Card: {
+    paddingSmall: '20px',
+    paddingMedium: '20px',
+    paddingLarge: '20px',
+    paddingHuge: '20px'
+  },
   Cascader: {
     menuHeight: '290px'
   },
