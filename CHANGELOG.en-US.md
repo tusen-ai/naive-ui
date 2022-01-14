@@ -2,8 +2,14 @@
 
 ## Pending
 
+### Fixes
+
 - Fix `n-carousel` `card` effect slide problem.
 - Fix `n-layout-sider` still occupies 1px after collapsed.
+
+### Feats
+
+- `number-animation` add `local` prop, closes [#2181](https://github.com/TuSimple/naive-ui/issues/2181).
 
 ### i18n
 

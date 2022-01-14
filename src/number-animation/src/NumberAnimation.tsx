@@ -13,6 +13,7 @@ const numberAnimationProps = {
     default: 0
   },
   showSeparator: Boolean,
+  local: { type: String, default: 'en-US' },
   from: { type: Number, default: 0 },
   active: {
     type: Boolean,
@@ -68,13 +69,19 @@ export default defineComponent({
         props.precision
       ).toFixed(props.precision)
       const splitValue = formatted.split('.')
+      const formattedIntlPats = new Intl.NumberFormat(
+        props.local
+      ).formatToParts(0.01)
+      const decimalSeparator =
+        formattedIntlPats[formattedIntlPats.length - 2].value
       const integer = props.showSeparator
-        ? Number(splitValue[0]).toLocaleString('en-US')
+        ? new Intl.NumberFormat(props.local).format(Number(splitValue[0]))
         : splitValue[0]
       const decimal = splitValue[1]
       return {
         integer,
-        decimal
+        decimal,
+        decimalSeparator
       }
     })
     function play (): void {
@@ -94,8 +101,8 @@ export default defineComponent({
   },
   render () {
     const {
-      formattedValue: { integer, decimal }
+      formattedValue: { integer, decimal, decimalSeparator }
     } = this
-    return [integer, decimal ? '.' : null, decimal]
+    return [integer, decimal ? decimalSeparator : null, decimal]
   }
 })

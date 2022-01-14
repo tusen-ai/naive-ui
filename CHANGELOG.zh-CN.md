@@ -7,6 +7,10 @@
 - 修复 `n-carousel` `card` 过渡模式切换问题
 - 修复 `n-layout-sider` 在折叠时仍占据 1px 宽度
 
+### Feats
+
+- `number-animation` 新增 `local` 属性，用于设置国际化语言，关闭 [#2181](https://github.com/TuSimple/naive-ui/issues/2181)
+
 ### i18n
 
 - 新增 esAR locale
