@@ -57,8 +57,7 @@ customize-message.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| closable | `boolean` | `false` | Whether to show close icon on all messages. |  |
-| containerStyle | `string \| CSSProperties` | `undefined` | Message container style. |  |
+| closable | `boolean` | Whether to show close icon on all messages. |  |
 | duration | `number` | `3000` | Default duration of on all messages. |  |
 | keep-alive-on-hover | `boolean` | `false` | Whether to destroy while hovering on all messages. |  |
 | max | `number` | `undefined` | Limit the number of messages to display. |  |
