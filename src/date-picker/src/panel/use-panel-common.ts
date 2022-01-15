@@ -141,7 +141,7 @@ function usePanelCommon (props: UsePanelCommonProps) {
 
   const showMonthYearPanel = ref(false)
   function handleOpenQuickSelectMonthPanel (): void {
-    showMonthYearPanel.value = true
+    showMonthYearPanel.value = !showMonthYearPanel.value
   }
   return {
     mergedTheme: mergedThemeRef,
