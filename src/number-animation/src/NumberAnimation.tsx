@@ -70,8 +70,9 @@ export default defineComponent({
       ).toFixed(props.precision)
       const splitValue = formatted.split('.')
       const numberFormat = new Intl.NumberFormat(props.locale)
-      const formattedPats = numberFormat.formatToParts(0.01)
-      const decimalSeparator = formattedPats[formattedPats.length - 2].value
+      const decimalSeparator = numberFormat
+        .formatToParts(0.01)
+        .find((part) => part.type === 'decimal')?.value
       const integer = props.showSeparator
         ? numberFormat.format(Number(splitValue[0]))
         : splitValue[0]
