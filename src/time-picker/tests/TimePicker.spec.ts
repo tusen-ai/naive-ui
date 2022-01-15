@@ -57,6 +57,14 @@ describe('n-time-picker', () => {
     wrapper.unmount()
   })
 
+  it('should work with `format` prop', async () => {
+    const wrapper = mount(NTimePicker, {
+      props: { value: 1642183200000, format: 'h:mm' }
+    })
+    expect(wrapper.find('input').element.value.length).toBe(4)
+    wrapper.unmount()
+  })
+
   it('should work with `inputReadonly` prop', async () => {
     const wrapper = mount(NTimePicker)
     expect(wrapper.find('input').attributes('readonly')).not.toBe('')
