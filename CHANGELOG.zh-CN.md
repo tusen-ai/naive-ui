@@ -15,7 +15,8 @@
 
 ### Feats
 
-- `number-animation` 新增 `locale` 属性，用于设置国际化语言，关闭 [#2181](https://github.com/TuSimple/naive-ui/issues/2181)
+- `n-number-animation` 新增 `locale` 属性，用于设置国际化语言，关闭 [#2181](https://github.com/TuSimple/naive-ui/issues/2181)
+- `n-number-animation` 跟随 config provider 国际化
 
 ### i18n
 

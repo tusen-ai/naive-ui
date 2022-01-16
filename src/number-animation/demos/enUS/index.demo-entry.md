@@ -13,12 +13,6 @@ intl.vue
 
 ## API
 
-<n-alert title="Caveat" type="warning" style="margin-bottom: 16px;">
-  To support Internationalization we use Intl API. Check the compatibility
-  <n-a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/format" target="_blank">format()</n-a>
-  <n-a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/formatToParts" target="_blank">formatToParts()</n-a>
-</n-alert>
-
 ### NumberAnimation Props
 
 | Name | Type | Default | Description | Version |
@@ -29,7 +23,7 @@ intl.vue
 | precision | `number` | `0` | Decimal precision of the displayed value. | 2.23.2 |
 | show-separator | `boolean` | `false` | Whether to show separator. | 2.23.2 |
 | to | `number` | `undefined` | Target value. | 2.23.2 |
-| locale | `string` | `en-US` | Language of the number. | NEXT_VERSION |
+| locale | `string` | Follows config provider. | Language of the number. | NEXT_VERSION |
 
 ### NumberAnimation Methods
 

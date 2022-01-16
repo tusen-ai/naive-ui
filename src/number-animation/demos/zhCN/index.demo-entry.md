@@ -13,12 +13,6 @@ intl.vue
 
 ## API
 
-<n-alert title="注意" type="warning" style="margin-bottom: 16px;">
-  为支持国际化使用了 Intl API，兼容性请参考 
-  <n-a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/format" target="_blank">format()</n-a>
-  <n-a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/formatToParts" target="_blank">formatToParts()</n-a>
-</n-alert>
-
 ### NumberAnimation Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
@@ -29,7 +23,7 @@ intl.vue
 | precision | `number` | `0` | 精度，保留小数点后几位 | 2.23.2 |
 | show-separator | `boolean` | `false` | 是否显示分隔符 | 2.23.2 |
 | to | `number` | `undefined` | 目标值 | 2.23.2 |
-| locale | `string` | `en-US` | 国际化的语言 | NEXT_VERSION |
+| locale | `string` | 跟随 config provider | 国际化的语言 | NEXT_VERSION |
 
 ### NumberAnimation Methods
 

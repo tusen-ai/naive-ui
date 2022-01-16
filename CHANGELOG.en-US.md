@@ -15,7 +15,8 @@
 
 ### Feats
 
-- `number-animation` add `locale` prop, closes [#2181](https://github.com/TuSimple/naive-ui/issues/2181).
+- `n-number-animation` add `locale` prop, closes [#2181](https://github.com/TuSimple/naive-ui/issues/2181).
+- `n-number-animation`'s locale follows config provider.
 
 ### i18n
 
