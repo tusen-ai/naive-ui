@@ -4,6 +4,7 @@ import type { GlobalThemeWithoutCommon } from './internal-interface'
 
 export { ThemeCommonVars }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ThemeCommonVarsExtension {}
 
 export interface GlobalTheme extends GlobalThemeWithoutCommon {
