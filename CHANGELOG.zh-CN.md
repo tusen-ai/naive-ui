@@ -7,6 +7,10 @@
 - 修复 `n-carousel` `card` 过渡模式切换问题
 - 修复 `n-layout-sider` 在折叠时仍占据 1px 宽度
 
+### Feats
+
+- `n-page-header` 新增 `back-icon` 插槽，关闭 [#2176](https://github.com/TuSimple/naive-ui/issues/2176)
+
 ### i18n
 
 - 新增 esAR locale

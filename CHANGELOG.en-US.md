@@ -5,6 +5,10 @@
 - Fix `n-carousel` `card` effect slide problem.
 - Fix `n-layout-sider` still occupies 1px after collapsed.
 
+### Feats
+
+- `n-page-header` adds `back-icon` slot, closes [#2176](https://github.com/TuSimple/naive-ui/issues/2176).
+
 ### i18n
 
 - Add esAR locale.
