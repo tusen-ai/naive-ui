@@ -64,9 +64,7 @@ customize-message.vue
 | placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top` | 所有 Message 显示的位置 |  |
 | to | `string \| HTMLElement` | `'body'` | Message 容器节点的位置 |  |
 
-### MessageProvider Injection API
-
-#### MessageProvider Injection Methods
+### MessageProvider Injection Methods
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
@@ -77,7 +75,7 @@ customize-message.vue
 | success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 success 类型的信息 |
 | warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | 调用 warning 类型的信息 |
 
-#### MessageOption Properties
+### MessageOption Properties
 
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
@@ -90,7 +88,7 @@ customize-message.vue
 | onClose | `() => void` | 点击关闭图标的回调 |  |
 | onLeave | `() => void` | 信息开始消失的回调 |  |
 
-#### MessageRenderMessage Type
+### MessageRenderMessage Type
 
 ```ts
 type MessageRenderMessage = (props: {
@@ -102,7 +100,7 @@ type MessageRenderMessage = (props: {
 }) => VNodeChild
 ```
 
-#### MessageReactive Properties
+### MessageReactive Properties
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
@@ -115,7 +113,7 @@ type MessageRenderMessage = (props: {
 | onAfterLeave | `() => void` | 信息消失动画结束的回调 |
 | onLeave | `() => void` | 信息开始消失的回调 |
 
-#### MessageReactive Methods
+### MessageReactive Methods
 
 | 名称    | 类型 | 说明           |
 | ------- | ---- | -------------- |

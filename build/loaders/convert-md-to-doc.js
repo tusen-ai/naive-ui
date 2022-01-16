@@ -70,15 +70,19 @@ function genAnchorTemplate (
   `
 }
 
-function genDemosAnchorTemplate (demoInfos, hasApi) {
+function genDemosApiAnchorTemplate (tokens) {
+  return tokens
+    .filter((token) => token.type === 'heading' && token.depth === 3)
+    .map((token) => ({
+      id: token.text.replace(/ /g, '-'),
+      title: token.text,
+      debug: false
+    }))
+}
+
+function genDemosAnchorTemplate (demoInfos, hasApi, tokens) {
   const links = (
-    hasApi
-      ? demoInfos.concat({
-        id: 'API',
-        title: 'API',
-        debug: false
-      })
-      : demoInfos
+    hasApi ? demoInfos.concat(genDemosApiAnchorTemplate(tokens)) : demoInfos
   ).map(
     ({ id, title, debug }) => `<n-anchor-link
     v-if="(displayMode === 'debug') || ${!debug}"
@@ -224,7 +228,7 @@ async function convertMd2ComponentDocumentation (
     <div style="width: 128px;" v-if="showAnchor">
       ${
         demoInfos.length
-          ? genDemosAnchorTemplate(demoInfos, hasApi)
+          ? genDemosAnchorTemplate(demoInfos, hasApi, tokens)
           : genPageAnchorTemplate(tokens)
       }
     </div>
