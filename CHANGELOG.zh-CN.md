@@ -13,6 +13,10 @@
 - `n-select` 新增 `reset-menu-on-options-change` 属性，关闭 [#2168](https://github.com/TuSimple/naive-ui/issues/2168)
 - `n-carousel` `effect` 属性支持 `'card'`
 
+### Feats
+
+- `number-animation` 新增 `locale` 属性，用于设置国际化语言，关闭 [#2181](https://github.com/TuSimple/naive-ui/issues/2181)
+
 ### i18n
 
 - 新增 esAR locale
