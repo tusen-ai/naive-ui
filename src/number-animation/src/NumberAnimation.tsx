@@ -109,6 +109,6 @@ export default defineComponent({
     const {
       formattedValue: { integer, decimal, decimalSeparator }
     } = this
-    return [integer, decimalSeparator, decimal]
+    return [integer, decimal ? decimalSeparator : null, decimal]
   }
 })
