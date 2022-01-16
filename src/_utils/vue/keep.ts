@@ -1,4 +1,4 @@
-export function keep<T, K, R> (
+export function keep<T, K extends keyof T, R> (
   object: T,
   keys: K[] = [],
   rest?: R
