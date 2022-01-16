@@ -64,7 +64,9 @@ customize-message.vue
 | placement | `top \| top-left \| top-right \| bottom \| bottom-left \| bottom-right ` | `top` | Placement of all messages. |  |
 | to | `string \| HTMLElement` | `'body'` | Container node of message container. |  |
 
-### MessageProvider Injection Methods
+### MessageProvider Injection API
+
+#### MessageProvider Injection Methods
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -75,7 +77,7 @@ customize-message.vue
 | success | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use success type message. |
 | warning | `(content: string \| (() => VNodeChild), option?: MessageOption) => MessageReactive` | Use warning type message. |
 
-### MessageOption Properties
+#### MessageOption Properties
 
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
@@ -88,7 +90,7 @@ customize-message.vue
 | onClose | `() => void` | Callback when close icon is clicked. |  |
 | onLeave | `() => void` | Callback when message start to disappear. |  |
 
-### MessageRenderMessage Type
+#### MessageRenderMessage Type
 
 ```ts
 type MessageRenderMessage = (props: {
@@ -100,7 +102,7 @@ type MessageRenderMessage = (props: {
 }) => VNodeChild
 ```
 
-### MessageReactive Properties
+#### MessageReactive Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -113,7 +115,7 @@ type MessageRenderMessage = (props: {
 | onAfterLeave | `() => void` | Callback after message disappeared. |
 | onLeave | `() => void` | Callback when message start to disappear. |
 
-### MessageReactive Methods
+#### MessageReactive Methods
 
 | Name    | Type | Description             |
 | ------- | ---- | ----------------------- |
