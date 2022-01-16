@@ -4,13 +4,14 @@
 
 ### Fixes
 
-- 修复 `n-carousel` `card` 过渡模式切换问题
 - 修复 `n-layout-sider` 在折叠时仍占据 1px 宽度
+- 修复 `n-code` 在 `word-wrap=true` 时不切分单词
 
 ### Feats
 
 - `n-page-header` 新增 `back` 插槽，关闭 [#2176](https://github.com/TuSimple/naive-ui/issues/2176)
 - `n-select` 新增 `reset-menu-on-options-change` 属性，关闭 [#2168](https://github.com/TuSimple/naive-ui/issues/2168)
+- `n-carousel` `effect` 属性支持 `'card'`
 
 ### i18n
 
