@@ -83,7 +83,7 @@ export default defineComponent({
       header: headerSlot,
       avatar: avatarSlot,
       footer: footerSlot,
-      backIcon: backIconSlot
+      back: backSlot
     } = $slots
     const showBack = onBack
     const showTitle = title || titleSlot
@@ -110,14 +110,15 @@ export default defineComponent({
                   class={`${mergedClsPrefix}-page-header__back`}
                   onClick={onBack}
                 >
-                  {
-                    backIconSlot?.() || (
+                  {backSlot ? (
+                    backSlot()
+                  ) : (
                     <NBaseIcon clsPrefix={mergedClsPrefix}>
                       {{
                         default: () => <ArrowBackIcon />
                       }}
                     </NBaseIcon>
-                    )}
+                  )}
                 </div>
               ) : null}
               {avatarSlot ? (

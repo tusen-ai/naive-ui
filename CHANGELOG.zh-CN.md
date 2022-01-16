@@ -9,7 +9,7 @@
 
 ### Feats
 
-- `n-page-header` 新增 `back-icon` 插槽，关闭 [#2176](https://github.com/TuSimple/naive-ui/issues/2176)
+- `n-page-header` 新增 `back` 插槽，关闭 [#2176](https://github.com/TuSimple/naive-ui/issues/2176)
 
 ### i18n
 

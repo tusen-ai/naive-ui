@@ -7,7 +7,7 @@
 
 ### Feats
 
-- `n-page-header` adds `back-icon` slot, closes [#2176](https://github.com/TuSimple/naive-ui/issues/2176).
+- `n-page-header` adds `back` slot, closes [#2176](https://github.com/TuSimple/naive-ui/issues/2176).
 
 ### i18n
 
