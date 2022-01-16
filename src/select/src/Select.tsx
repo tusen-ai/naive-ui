@@ -170,6 +170,10 @@ const selectProps = {
     type: String as PropType<'if' | 'show'>,
     default: 'show'
   },
+  resetMenuOnOptionsChange: {
+    type: Boolean,
+    default: true
+  },
   /** deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   items: Array as PropType<SelectMixedOption[]>
@@ -795,6 +799,9 @@ export default defineComponent({
                               onTabOut={this.handleMenuTabOut}
                               onMousedown={this.handleMenuMousedown}
                               show={this.mergedShow}
+                              resetMenuOnOptionsChange={
+                                this.resetMenuOnOptionsChange
+                              }
                             >
                               {$slots}
                             </NInternalSelectMenu>,
