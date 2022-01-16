@@ -1,24 +1,13 @@
-const { resolve, join } = require('path')
-const fs = require('fs-extra')
-const fg = require('fast-glob')
+import * as globalComponents from '../src/components'
+import { resolve } from 'path'
+import fs from 'fs-extra'
 
 const COMPONENT_ROOT = resolve(__dirname, '../src')
-
-const excludeDir = ['global-style', 'themes', 'composables', 'locales']
 
 function exist (path) {
   return fs.existsSync(path)
 }
 
-async function loadComponent (dir) {
-  return {
-    path: dir,
-    name: `n-${dir}`,
-    components: exist(join(COMPONENT_ROOT, dir, 'index.ts'))
-      ? await require(join(COMPONENT_ROOT, dir, 'index.ts'))
-      : {}
-  }
-}
 function parseComponentsDeclaration (code) {
   if (!code) {
     return {}
@@ -31,26 +20,12 @@ function parseComponentsDeclaration (code) {
 }
 
 async function generateComponentsType () {
-  const folders = (
-    await fg('[^_]*', {
-      onlyDirectories: true,
-      cwd: COMPONENT_ROOT
-    })
-  ).filter((fold) => !excludeDir.includes(fold))
-  const files = await Promise.all(
-    folders.map(async (dir) => await loadComponent(dir))
-  )
-
   const components = {}
-
-  files.forEach((file) => {
-    const fileComponents = file.components
-    Object.keys(fileComponents).forEach((key) => {
-      const entry = `typeof import('naive-ui')['${key}']`
-      if (key.startsWith('N')) {
-        components[key] = entry
-      }
-    })
+  Object.keys(globalComponents).forEach((key) => {
+    const entry = `typeof import('naive-ui')['${key}']`
+    if (key.startsWith('N')) {
+      components[key] = entry
+    }
   })
   const originalContent = exist(
     resolve(COMPONENT_ROOT, 'components-declaration.d.ts')
