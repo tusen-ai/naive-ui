@@ -63,6 +63,16 @@ export const unconfigurableStyle = c([
       ])
     ])
   ]),
+  cB('input', [
+    cM('textarea', [
+      cM('resizable', [
+        cB('input-wrapper', {
+          margin: '0 5px 5px 0',
+          paddingRight: '7px'
+        })
+      ])
+    ])
+  ]),
   cB('tag', [
     cE(
       'close',
