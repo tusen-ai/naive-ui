@@ -65,11 +65,12 @@ export default defineComponent({
           }
         ]}
       >
-        {renderSorterIcon?.(mergedSortOrder) || (
+        {renderSorterIcon
+          ? renderSorterIcon(mergedSortOrder) : (
           <NBaseIcon clsPrefix={mergedClsPrefix}>
             {{ default: () => <ArrowDownIcon /> }}
           </NBaseIcon>
-        )}
+          )}
       </span>
     )
   }
