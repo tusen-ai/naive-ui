@@ -2,7 +2,7 @@ import * as globalComponents from '../src/components'
 import { resolve } from 'path'
 import fs from 'fs-extra'
 
-const COMPONENT_ROOT = resolve(__dirname, '../src')
+const TYPE_ROOT = resolve(__dirname, '../typings')
 
 function exist (path) {
   return fs.existsSync(path)
@@ -28,10 +28,10 @@ async function generateComponentsType () {
     }
   })
   const originalContent = exist(
-    resolve(COMPONENT_ROOT, 'components-declaration.d.ts')
+    resolve(TYPE_ROOT, 'components-declaration.d.ts')
   )
     ? await fs.readFile(
-      resolve(COMPONENT_ROOT, 'components-declaration.d.ts'),
+      resolve(TYPE_ROOT, 'components-declaration.d.ts'),
       'utf-8'
     )
     : ''
@@ -61,7 +61,7 @@ export { }
 `
   if (code !== originalContent) {
     await fs.writeFile(
-      resolve(COMPONENT_ROOT, 'components-declaration.d.ts'),
+      resolve(TYPE_ROOT, 'components-declaration.d.ts'),
       code,
       'utf-8'
     )
