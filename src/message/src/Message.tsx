@@ -4,7 +4,8 @@ import {
   defineComponent,
   inject,
   VNodeChild,
-  CSSProperties
+  CSSProperties,
+  PropType
 } from 'vue'
 import {
   InfoIcon,
@@ -21,9 +22,11 @@ import {
 import { render, createKey } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import { messageLight } from '../styles'
-import { messageProps, MessageType } from './message-props'
+import { messageProps } from './message-props'
+import type { MessageType } from './types'
 import { messageProviderInjectionKey } from './MessageProvider'
 import style from './styles/index.cssr'
+import { MessageRenderMessage } from '..'
 
 const iconMap = {
   info: <InfoIcon />,
@@ -34,7 +37,10 @@ const iconMap = {
 
 export default defineComponent({
   name: 'Message',
-  props: messageProps,
+  props: {
+    ...messageProps,
+    render: Function as PropType<MessageRenderMessage>
+  },
   setup (props) {
     const {
       props: messageProviderProps,
@@ -51,6 +57,7 @@ export default defineComponent({
     )
     return {
       mergedClsPrefix: mergedClsPrefixRef,
+      messageProviderProps,
       handleClose () {
         props.onClose?.()
       },
@@ -112,12 +119,13 @@ export default defineComponent({
   },
   render () {
     const {
-      icon,
+      render: renderMessage,
       type,
       closable,
       content,
       mergedClsPrefix,
       cssVars,
+      icon,
       handleClose
     } = this
     return (
@@ -125,36 +133,42 @@ export default defineComponent({
         class={`${mergedClsPrefix}-message-wrapper`}
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
-        style={{
-          ...(cssVars as CSSProperties),
-          alignItems: this.placement.startsWith('top')
-            ? 'flex-start'
-            : 'flex-end'
-        }}
+        style={Object.assign(
+          {
+            alignItems: this.placement.startsWith('top')
+              ? 'flex-start'
+              : 'flex-end'
+          },
+          cssVars as CSSProperties
+        )}
       >
-        <div
-          class={`${mergedClsPrefix}-message ${mergedClsPrefix}-message--${type}-type`}
-        >
+        {renderMessage ? (
+          renderMessage(this.$props)
+        ) : (
           <div
-            class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
+            class={`${mergedClsPrefix}-message ${mergedClsPrefix}-message--${type}-type`}
           >
-            <NIconSwitchTransition>
-              {{
-                default: () => [createIconVNode(icon, type, mergedClsPrefix)]
-              }}
-            </NIconSwitchTransition>
+            <div
+              class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
+            >
+              <NIconSwitchTransition>
+                {{
+                  default: () => [createIconVNode(icon, type, mergedClsPrefix)]
+                }}
+              </NIconSwitchTransition>
+            </div>
+            <div class={`${mergedClsPrefix}-message__content`}>
+              {render(content)}
+            </div>
+            {closable ? (
+              <NBaseClose
+                clsPrefix={mergedClsPrefix}
+                class={`${mergedClsPrefix}-message__close`}
+                onClick={handleClose}
+              />
+            ) : null}
           </div>
-          <div class={`${mergedClsPrefix}-message__content`}>
-            {render(content)}
-          </div>
-          {closable ? (
-            <NBaseClose
-              clsPrefix={mergedClsPrefix}
-              class={`${mergedClsPrefix}-message__close`}
-              onClick={handleClose}
-            />
-          ) : null}
-        </div>
+        )}
       </div>
     )
   }

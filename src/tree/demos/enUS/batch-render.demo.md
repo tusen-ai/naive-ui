@@ -1,4 +1,4 @@
-# Batch Rendering
+# Batch rendering
 
 As you can see, prefix, label, and suffix all have render functions.
 

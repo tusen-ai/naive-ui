@@ -1,6 +1,6 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NPagination } from '../index'
+import { NPagination, PaginationRenderLabel } from '../index'
 
 describe('n-pagination', () => {
   it('should work with import on demand', () => {
@@ -38,4 +38,19 @@ describe('n-pagination', () => {
       ]}
     />
   })
+})
+it('should work with label slot', async () => {
+  const labelSlot: PaginationRenderLabel = (props) => {
+    if (props.type === 'page') return `(${props.node})`
+    return props.node
+  }
+  const wrapper = mount(NPagination, {
+    slots: {
+      label: labelSlot
+    }
+  })
+  await wrapper.setProps({
+    itemCount: 1
+  })
+  expect(wrapper.findAll('.n-pagination-item')[1].text()).toContain('(1)')
 })

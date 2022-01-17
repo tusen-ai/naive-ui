@@ -63,7 +63,6 @@ export default c([
         cB('checkbox-icon', [
           // if not set width to 100%, safari & old chrome won't display the icon
           c('.check-icon', `
-            width: 100%;
             opacity: 1;
             transform: scale(1);
           `)
@@ -170,6 +169,7 @@ export default c([
         bottom: 1px;
       `, [
         c('.check-icon, .line-icon', `
+          width: 100%;
           fill: var(--n-check-mark-color);
           opacity: 0;
           transform: scale(0.5);

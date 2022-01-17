@@ -1,4 +1,4 @@
-# Async Loading
+# Async loading
 
 After set `remote`, use `on-load` callback to load data. When loading async, all nodes with `isLeaf` set to `false` and `chilren`'s type is not `Array` will be reckon as unloaded nodes.
 

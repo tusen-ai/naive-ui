@@ -18,3 +18,15 @@ Also, naive-ui uses [vueuc](https://github.com/07akioni/vueuc). If you need, its
   <xxx />
 </head>
 ```
+
+## About tailwind's style override
+
+You may find add meta tag to your static html files doesn't work (naive's style would still be overrided), since your toolchain may always insert tailwind style at the end of head tag. In this situation, you need to insert meta tag dynamically right before app is mounted.
+
+```ts
+const meta = document.createElement('meta')
+meta.name = 'naive-ui-style'
+document.head.appendChild(meta)
+
+vueApp.mount('#app')
+```

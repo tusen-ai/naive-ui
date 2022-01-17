@@ -181,5 +181,11 @@ describe('n-avatar', () => {
     expect(wrapper.find('[role="group"]').classes()).toContain(
       'n-avatar-group--vertical'
     )
+
+    await wrapper.setProps({ max: 4 })
+    expect(wrapper.find('.n-avatar__text').exists()).toBe(false)
+
+    await wrapper.setProps({ options: [] })
+    expect(wrapper.findAll('.n-avatar').length).toBe(0)
   })
 })

@@ -6,7 +6,6 @@
     tag="a"
     :href="url"
     target="_blank"
-    :depth="depth"
   >
     <template #icon>
       <n-icon>
@@ -16,11 +15,13 @@
   </n-button>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, PropType } from 'vue'
+import type { ButtonProps } from 'naive-ui'
 import EditIcon from '@vicons/fluent/Compose16Regular.js'
 import { blobUrl } from './github-url'
 
-export default {
+export default defineComponent({
   name: 'EditOnGithubButton',
   components: {
     EditIcon
@@ -31,13 +32,15 @@ export default {
       required: true
     },
     text: Boolean,
-    size: String,
-    depth: String
+    size: {
+      type: String as PropType<ButtonProps['size']>,
+      default: 'tiny'
+    }
   },
   setup (props) {
     return {
       url: blobUrl + props.relativeUrl
     }
   }
-}
+})
 </script>

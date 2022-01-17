@@ -1,6 +1,6 @@
-# Mouseover
+# Hover
 
-Set `trigger` to `hover` to switch when the dot is hovered over.
+Set the `trigger` to `hover` to trigger the switch when the mouse passes over the dots.
 
 ```html
 <n-carousel trigger="hover">

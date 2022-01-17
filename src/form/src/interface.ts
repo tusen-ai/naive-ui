@@ -1,4 +1,4 @@
-import { InjectionKey } from 'vue'
+import { InjectionKey, Ref } from 'vue'
 import { ValidateError, RuleItem, ValidateOption } from 'async-validator'
 import { FormSetupProps } from './Form'
 
@@ -45,7 +45,7 @@ export type FormItemInternalValidate = (
 export type FormItemValidate = ((
   options: FormItemValidateOptions
 ) => Promise<void>) &
-((trigger?: string, callback?: ValidateCallback) => Promise<void>)
+  ((trigger?: string, callback?: ValidateCallback) => Promise<void>)
 
 export interface FormItemInst {
   validate: FormItemValidate
@@ -57,7 +57,11 @@ export interface FormItemInst {
 export type FormItemColRef = FormItemInst
 export type FormItemRowRef = FormItemInst
 
-export type FormInjection = FormSetupProps
+export interface FormInjection {
+  props: FormSetupProps
+  maxChildLabelWidthRef: Ref<number | undefined>
+  deriveMaxChildLabelWidth: (currentWidth: number) => void
+}
 
 export const formInjectionKey: InjectionKey<FormInjection> = Symbol('form')
 export const formItemInstsInjectionKey: InjectionKey<unknown> =

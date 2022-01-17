@@ -24,12 +24,13 @@
   </component>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { initRouter, siteSetup } from './store'
 import Site from './Site.vue'
 
-export default {
+export default defineComponent({
   name: 'SiteProvider',
   components: {
     Site
@@ -38,5 +39,5 @@ export default {
     initRouter(useRouter(), useRoute())
     return siteSetup()
   }
-}
+})
 </script>

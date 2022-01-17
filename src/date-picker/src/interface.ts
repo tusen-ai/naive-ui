@@ -18,21 +18,49 @@ export type Value = number | [number, number]
 
 export type DefaultTime = string | [string | undefined, string | undefined]
 
+export type FormattedValue = string | [string, string]
+
 export type Shortcuts =
   | Record<string, number | (() => number)>
   | Record<string, [number, number] | (() => [number, number])>
 
 export type OnUpdateValue = (
-  value: number & (number | null) & [number, number] & ([number, number] | null)
+  value: number &
+    (number | null) &
+  [number, number] &
+    ([number, number] | null),
+  formattedValue: string &
+    (string | null) &
+  [string, string] &
+    ([string, string] | null)
 ) => void
 
-export type OnUpdateValueImpl = (value: Value | null) => void
+export type OnUpdateFormattedValue = (
+  value: string &
+    (string | null) &
+  [string, string] &
+    ([string, string] | null),
+  timestampValue: number &
+    (number | null) &
+  [number, number] &
+    ([number, number] | null)
+) => void
+
+export type OnUpdateFormattedValueImpl = (
+  value: string | [string, string] | null,
+  timestampValue: number | [number, number] | null
+) => void
+
+export type OnUpdateValueImpl = (
+  value: Value | null,
+  formattedValue: string | [string, string] | null
+) => void
 
 export type OnPanelUpdateValue = (
   value: number &
-  (number | null) &
+    (number | null) &
   [number, number] &
-  ([number, number] | null),
+    ([number, number] | null),
   doUpdate: boolean
 ) => void
 

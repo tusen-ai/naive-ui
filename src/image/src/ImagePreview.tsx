@@ -12,7 +12,8 @@ import {
   CSSProperties,
   PropType,
   toRef,
-  onBeforeUnmount
+  onBeforeUnmount,
+  VNode
 } from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
@@ -25,12 +26,14 @@ import {
   ZoomInIcon,
   ZoomOutIcon
 } from '../../_internal/icons'
-import { useTheme } from '../../_mixins'
+import { useLocale, useTheme } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
 import { imageLight } from '../styles'
 import { prevIcon, nextIcon, closeIcon } from './icons'
+import type { MoveStrategy } from './interface'
+import { imagePreviewSharedProps } from './interface'
 import style from './styles/index.cssr'
-import { MoveStrategy } from './interface'
+import { NTooltip } from '../../tooltip'
 
 export interface ImagePreviewInst {
   setThumbnailEl: (e: HTMLImageElement | null) => void
@@ -41,7 +44,7 @@ export interface ImagePreviewInst {
 export default defineComponent({
   name: 'ImagePreview',
   props: {
-    showToolbar: Boolean,
+    ...imagePreviewSharedProps,
     onNext: Function as PropType<() => void>,
     onPrev: Function as PropType<() => void>,
     clsPrefix: {
@@ -55,7 +58,7 @@ export default defineComponent({
       'Image',
       style,
       imageLight,
-      {},
+      props,
       toRef(props, 'clsPrefix')
     )
     let thumbnailEl: HTMLImageElement | null = null
@@ -64,6 +67,7 @@ export default defineComponent({
     const previewSrcRef = ref<string | undefined>(undefined)
     const showRef = ref(false)
     const displayedRef = ref(false)
+    const { localeRef } = useLocale('Image')
 
     function syncTransformOrigin (): void {
       const { value: previewWrapper } = previewWrapperRef
@@ -128,17 +132,15 @@ export default defineComponent({
       } = opts
       const deltaHorizontal = mouseDownClientX - mouseUpClientX
       const deltaVertical = mouseDownClientY - mouseUpClientY
-      let moveVerticalDirection = null
-      let moveHorizontalDirection = null
+      const moveVerticalDirection:
+      | 'verticalTop'
+      | 'verticalBottom' = `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
+      const moveHorizontalDirection:
+      | 'horizontalLeft'
+      | 'horizontalRight' = `horizontal${
+        deltaHorizontal > 0 ? 'Left' : 'Right'
+      }`
 
-      moveVerticalDirection = ('vertical' +
-        (deltaVertical > 0 ? 'Top' : 'Bottom')) as
-        | 'verticalTop'
-        | 'verticalBottom'
-      moveHorizontalDirection = ('horizontal' +
-        (deltaHorizontal > 0 ? 'Left' : 'Right')) as
-        | 'horizontalLeft'
-        | 'horizontalRight'
       return {
         moveVerticalDirection,
         moveHorizontalDirection,
@@ -312,6 +314,31 @@ export default defineComponent({
       toggleShow
     }
 
+    function withTooltip (
+      node: VNode,
+      tooltipKey: keyof typeof localeRef.value
+    ): VNode {
+      if (props.showToolbarTooltip) {
+        const { value: theme } = themeRef
+        return (
+          <NTooltip
+            to={false}
+            theme={theme.peers.Tooltip}
+            themeOverrides={theme.peerOverrides.Tooltip}
+          >
+            {{
+              default: () => {
+                return localeRef.value[tooltipKey]
+              },
+              trigger: () => node
+            }}
+          </NTooltip>
+        )
+      } else {
+        return node
+      }
+    }
+
     return {
       previewRef,
       previewWrapperRef,
@@ -336,17 +363,26 @@ export default defineComponent({
       rotateClockwise,
       handleSwitchPrev,
       handleSwitchNext,
-      ...exposedMethods,
+      withTooltip,
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { iconColor }
+          self: {
+            toolbarIconColor,
+            toolbarBorderRadius,
+            toolbarBoxShadow,
+            toolbarColor
+          }
         } = themeRef.value
         return {
           '--n-bezier': cubicBezierEaseInOut,
-          '--n-icon-color': iconColor
+          '--n-toolbar-icon-color': toolbarIconColor,
+          '--n-toolbar-color': toolbarColor,
+          '--n-toolbar-border-radius': toolbarBorderRadius,
+          '--n-toolbar-box-shadow': toolbarBoxShadow
         }
-      })
+      }),
+      ...exposedMethods
     }
   },
   render () {
@@ -383,63 +419,89 @@ export default defineComponent({
                           appear={this.appear}
                         >
                           {{
-                            default: () =>
-                              this.show ? (
+                            default: () => {
+                              if (!this.show) return null
+                              const { withTooltip } = this
+                              return (
                                 <div
                                   class={`${clsPrefix}-image-preview-toolbar`}
                                 >
                                   {this.onPrev ? (
                                     <>
-                                      <NBaseIcon
-                                        clsPrefix={clsPrefix}
-                                        onClick={this.handleSwitchPrev}
-                                      >
-                                        {{ default: () => prevIcon }}
-                                      </NBaseIcon>
-                                      <NBaseIcon
-                                        clsPrefix={clsPrefix}
-                                        onClick={this.handleSwitchNext}
-                                      >
-                                        {{ default: () => nextIcon }}
-                                      </NBaseIcon>
+                                      {withTooltip(
+                                        <NBaseIcon
+                                          clsPrefix={clsPrefix}
+                                          onClick={this.handleSwitchPrev}
+                                        >
+                                          {{ default: () => prevIcon }}
+                                        </NBaseIcon>,
+                                        'tipPrevious'
+                                      )}
+                                      {withTooltip(
+                                        <NBaseIcon
+                                          clsPrefix={clsPrefix}
+                                          onClick={this.handleSwitchNext}
+                                        >
+                                          {{ default: () => nextIcon }}
+                                        </NBaseIcon>,
+                                        'tipNext'
+                                      )}
                                     </>
                                   ) : null}
-                                  <NBaseIcon
-                                    clsPrefix={clsPrefix}
-                                    onClick={this.rotateCounterclockwise}
-                                  >
-                                    {{
-                                      default: () => (
-                                        <RotateCounterclockwiseIcon />
-                                      )
-                                    }}
-                                  </NBaseIcon>
-                                  <NBaseIcon
-                                    clsPrefix={clsPrefix}
-                                    onClick={this.rotateClockwise}
-                                  >
-                                    {{ default: () => <RotateClockwiseIcon /> }}
-                                  </NBaseIcon>
-                                  <NBaseIcon
-                                    clsPrefix={clsPrefix}
-                                    onClick={this.zoomOut}
-                                  >
-                                    {{ default: () => <ZoomOutIcon /> }}
-                                  </NBaseIcon>
-                                  <NBaseIcon
-                                    clsPrefix={clsPrefix}
-                                    onClick={this.zoomIn}
-                                  >
-                                    {{ default: () => <ZoomInIcon /> }}
-                                  </NBaseIcon>
-                                  <NBaseIcon
-                                    clsPrefix={clsPrefix}
-                                    onClick={this.toggleShow}
-                                  >
-                                    {{ default: () => closeIcon }}
-                                  </NBaseIcon>
+                                  {withTooltip(
+                                    <NBaseIcon
+                                      clsPrefix={clsPrefix}
+                                      onClick={this.rotateCounterclockwise}
+                                    >
+                                      {{
+                                        default: () => (
+                                          <RotateCounterclockwiseIcon />
+                                        )
+                                      }}
+                                    </NBaseIcon>,
+                                    'tipCounterclockwise'
+                                  )}
+                                  {withTooltip(
+                                    <NBaseIcon
+                                      clsPrefix={clsPrefix}
+                                      onClick={this.rotateClockwise}
+                                    >
+                                      {{
+                                        default: () => <RotateClockwiseIcon />
+                                      }}
+                                    </NBaseIcon>,
+                                    'tipClockwise'
+                                  )}
+                                  {withTooltip(
+                                    <NBaseIcon
+                                      clsPrefix={clsPrefix}
+                                      onClick={this.zoomOut}
+                                    >
+                                      {{ default: () => <ZoomOutIcon /> }}
+                                    </NBaseIcon>,
+                                    'tipZoomOut'
+                                  )}
+                                  {withTooltip(
+                                    <NBaseIcon
+                                      clsPrefix={clsPrefix}
+                                      onClick={this.zoomIn}
+                                    >
+                                      {{ default: () => <ZoomInIcon /> }}
+                                    </NBaseIcon>,
+                                    'tipZoomIn'
+                                  )}
+                                  {withTooltip(
+                                    <NBaseIcon
+                                      clsPrefix={clsPrefix}
+                                      onClick={this.toggleShow}
+                                    >
+                                      {{ default: () => closeIcon }}
+                                    </NBaseIcon>,
+                                    'tipClose'
+                                  )}
                                 </div>
-                              ) : null
+                              )
+                            }
                           }}
                         </Transition>
                       ) : null}
