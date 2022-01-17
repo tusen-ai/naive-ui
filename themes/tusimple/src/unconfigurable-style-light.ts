@@ -89,6 +89,17 @@ export const unconfigurableStyle = c([
       ]
     )
   ]),
+  cB('time-picker-panel', [
+    cB('time-picker-col', [
+      cE('item', [
+        cM('active', [
+          c('&::before', {
+            backgroundColor: 'transparent'
+          })
+        ])
+      ])
+    ])
+  ]),
   cB('message', [
     cE('close', [
       c('&:hover', {
