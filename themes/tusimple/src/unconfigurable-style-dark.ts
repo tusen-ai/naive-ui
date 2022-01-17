@@ -28,6 +28,41 @@ export function mountSvgDefs (): void {
 }
 
 export const unconfigurableStyle = c([
+  cB('dropdown-menu', [
+    cB('dropdown-option', [
+      c('&:first-child', [
+        cB('dropdown-option-body', [
+          cM('pending', {
+            borderRadius: '16px 16px 0 0'
+          })
+        ])
+      ]),
+      c('&:last-child', [
+        cB('dropdown-option-body', [
+          cM('pending', {
+            borderRadius: '0 0 16px 16px'
+          })
+        ])
+      ])
+    ])
+  ]),
+  cB('date-panel', [
+    cB('date-panel-dates', [
+      cB('date-panel-date', [
+        cM(
+          'current',
+          {
+            color: '#4FB233'
+          },
+          [
+            cB('date-panel-date__sup', {
+              display: 'none'
+            })
+          ]
+        )
+      ])
+    ])
+  ]),
   cB('tag', [
     cE(
       'close',
