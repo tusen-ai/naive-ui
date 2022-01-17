@@ -93,17 +93,11 @@ function genDemosAnchorTemplate (demoInfos, hasApi, tokens) {
   const links = (
     hasApi ? demoInfos.concat(genDemosApiAnchorTemplate(tokens)) : demoInfos
   ).map(
-    ({ id, title, debug }) => `<n-ellipsis style='display:block;'>
-      <n-anchor-link
-        class="n-ellipsis"
-        v-if="(displayMode === 'debug') || ${!debug}"
-        title="${title}"
-        href="#${id}"
-      />
-      <template #tooltip>
-        <span>${title}</span>
-      </template>
-    </n-ellipsis>`
+    ({ id, title, debug }) => `<n-anchor-link
+      v-if="(displayMode === 'debug') || ${!debug}"
+      title="${title}"
+      href="#${id}"
+    />`
   )
   return genAnchorTemplate(links.join('\n'), {
     ignoreGap: hasApi
@@ -116,12 +110,7 @@ function genPageAnchorTemplate (tokens) {
     .map((token) => token.text)
   const links = titles.map((title) => {
     const href = title.replace(/ /g, '-')
-    return `<n-ellipsis style='display:block;'>
-      <n-anchor-link class="n-ellipsis" title="${title}" href="#${href}"/>
-      <template #tooltip>
-        <span>${title}</span>
-      </template>
-    </n-ellipsis>`
+    return `<n-anchor-link class="n-ellipsis" title="${title}" href="#${href}"/>`
   })
   return genAnchorTemplate(links.join('\n'), { ignoreGap: true })
 }
