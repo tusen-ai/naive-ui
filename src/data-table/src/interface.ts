@@ -1,18 +1,12 @@
 import { TreeNode } from 'treemate'
-import {
-  CSSProperties,
-  InjectionKey,
-  Ref,
-  VNodeChild,
-  HTMLAttributes,
-  Slots
-} from 'vue'
+import { CSSProperties, Ref, VNodeChild, HTMLAttributes, Slots } from 'vue'
 import { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
 import { DataTableTheme } from '../styles'
 import { RowItem, ColItem } from './use-group-header'
 import { DataTableSelectionOption } from './TableParts/SelectionMenu'
+import { createInjectionKey } from '../../_utils'
 
 export type FilterOptionValue = string | number
 export type ColumnKey = string | number
@@ -229,8 +223,8 @@ export interface DataTableInjection {
   setHeaderScrollLeft: (scrollLeft: number) => void
 }
 
-export const dataTableInjectionKey: InjectionKey<DataTableInjection> =
-  Symbol('dataTable')
+export const dataTableInjectionKey =
+  createInjectionKey<DataTableInjection>('dataTable')
 
 export interface MainTableInjection {
   leftActiveFixedColKey: ColumnKey | null

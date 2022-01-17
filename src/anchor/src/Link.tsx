@@ -6,15 +6,18 @@ import {
   renderSlot,
   defineComponent,
   watch,
-  Ref,
-  InjectionKey
+  Ref
 } from 'vue'
 import { useMemo } from 'vooks'
 import {
   useInjectionCollection,
   useInjectionElementCollection
 } from '../../_utils/composable'
-import { ExtractPublicPropTypes, getTitleAttribute } from '../../_utils'
+import {
+  createInjectionKey,
+  ExtractPublicPropTypes,
+  getTitleAttribute
+} from '../../_utils'
 
 export interface AnchorInjection {
   activeHref: Ref<string | null>
@@ -25,8 +28,7 @@ export interface AnchorInjection {
   titleEls: HTMLElement[]
 }
 
-export const anchorInjectionKey: InjectionKey<AnchorInjection> =
-  Symbol('anchor')
+export const anchorInjectionKey = createInjectionKey<AnchorInjection>('anchor')
 
 const anchorLinkProps = {
   title: String,

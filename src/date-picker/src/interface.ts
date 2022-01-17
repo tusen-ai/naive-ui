@@ -1,4 +1,4 @@
-import { InjectionKey, Ref, Slots } from 'vue'
+import { Ref, Slots } from 'vue'
 import { VirtualListInst } from 'vueuc'
 import { NLocale, NDateLocale } from '../../locales'
 import type { ScrollbarInst } from '../../_internal'
@@ -13,6 +13,7 @@ import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
+import { createInjectionKey } from '../../_utils'
 
 export type Value = number | [number, number]
 
@@ -26,24 +27,24 @@ export type Shortcuts =
 
 export type OnUpdateValue = (
   value: number &
-    (number | null) &
+  (number | null) &
   [number, number] &
-    ([number, number] | null),
+  ([number, number] | null),
   formattedValue: string &
-    (string | null) &
+  (string | null) &
   [string, string] &
-    ([string, string] | null)
+  ([string, string] | null)
 ) => void
 
 export type OnUpdateFormattedValue = (
   value: string &
-    (string | null) &
+  (string | null) &
   [string, string] &
-    ([string, string] | null),
+  ([string, string] | null),
   timestampValue: number &
-    (number | null) &
+  (number | null) &
   [number, number] &
-    ([number, number] | null)
+  ([number, number] | null)
 ) => void
 
 export type OnUpdateFormattedValueImpl = (
@@ -58,9 +59,9 @@ export type OnUpdateValueImpl = (
 
 export type OnPanelUpdateValue = (
   value: number &
-    (number | null) &
+  (number | null) &
   [number, number] &
-    ([number, number] | null),
+  ([number, number] | null),
   doUpdate: boolean
 ) => void
 
@@ -97,8 +98,8 @@ export type DatePickerInjection = {
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 
-export const datePickerInjectionKey: InjectionKey<DatePickerInjection> =
-  Symbol('datePicker')
+export const datePickerInjectionKey =
+  createInjectionKey<DatePickerInjection>('datePicker')
 
 export type IsDateDisabled = IsSingleDateDisabled | IsRangeDateDisabled
 export type IsSingleDateDisabled = (date: number) => boolean
