@@ -37,7 +37,7 @@ const itIT = {
     datetimePlaceholder: 'Seleziona data e ora',
     monthPlaceholder: 'Seleziona mese',
     yearPlaceholder: 'Seleziona anno',
-    quarterPlaceholder: 'Seleziona quadrimestre',
+    quarterPlaceholder: 'Seleziona trimestre',
     startDatePlaceholder: 'Data inizio',
     endDatePlaceholder: 'Data fine',
     startDatetimePlaceholder: 'Data e ora di inizio',
@@ -49,7 +49,7 @@ const itIT = {
   DataTable: {
     checkTableAll: 'Seleziona tutto nella tabella',
     uncheckTableAll: 'Deseleziona tutto nella tabella',
-    confirm: 'Converma',
+    confirm: 'Conferma',
     clear: 'Cancella'
   },
   Transfer: {
