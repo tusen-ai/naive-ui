@@ -21,10 +21,7 @@ export default defineComponent({
       required: true
     },
     // panelHeader prop
-    quickMonth: {
-      type: Boolean,
-      default: false
-    },
+    quickMonth: Boolean,
     onUpdatePanelValue: Function as PropType<(value: number) => void>
   },
   setup (props) {
