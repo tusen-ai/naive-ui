@@ -12,8 +12,8 @@ export interface Option {
 
 export interface CheckedStatus {
   checked: boolean
-  indeterminate: boolean
-  disabled?: boolean
+  allChecked: boolean
+  disabled: boolean
 }
 
 export type Filter = (
@@ -29,8 +29,8 @@ export interface TransferInjection {
   mergedThemeRef: Ref<MergedTheme<TransferTheme>>
   srcOptsRef: Ref<Option[]>
   tgtOptsRef: Ref<Option[]>
-  srcCheckedStatusRef: Ref<CheckedStatus>
-  handleSrcCheckboxClick: (checked: boolean, value: OptionValue) => void
+  headerBtnStatusRef: Ref<CheckedStatus>
+  handleItemClick: (checked: boolean, value: OptionValue) => void
 }
 
 export const transferInjectionKey =

@@ -105,9 +105,6 @@ export default c([
         ]),
         cB('transfer-list-item', null, [
           cE('label', `
-            display: flex;
-            align-items: center;
-            position: relative;
             padding-left: 14px;
           `)
         ])
@@ -126,7 +123,9 @@ export default c([
       cB('transfer-list-header', `
         height: calc(var(--n-item-height) + 4px);
         box-sizing: border-box;
-        display: flex;
+        display: grid;
+        grid-template-areas: "button . extra";
+        grid-template-columns: auto 1fr auto;
         align-items: center;
         background-clip: padding-box;
         border-radius: inherit;
@@ -137,27 +136,15 @@ export default c([
           border-color .3s var(--n-bezier),
           background-color .3s var(--n-bezier);
       `, [
-        cE('checkbox', `
-          display: flex;
-          align-items: center;
+        cE('button', `
+          grid-area: button;
           position: relative;
           padding: 0 9px 0 14px;
         `),
-        cE('header', `
-          flex: 1;
-          line-height: 1;
-          font-weight: var(--n-header-font-weight);
-          transition: color .3s var(--n-bezier);
-          color: var(--n-header-text-color);
-        `, [
-          cM('disabled', {
-            color: 'var(--n-header-text-color-disabled)'
-          })
-        ]),
         cE('extra', `
+          grid-area: extra;
           transition: color .3s var(--n-bezier);
           font-size: var(--n-extra-font-size);
-          justify-self: flex-end;
           margin-right: 14px;
           white-space: nowrap;
           color: var(--n-header-extra-text-color);
@@ -219,9 +206,9 @@ export default c([
             cB('transfer-list-item', `
               height: var(--n-item-height);
               max-height: var(--n-item-height);
-              position: relative;
-              cursor: pointer;
-              display: flex;
+              display: grid;
+              grid-template-areas: "checkbox label suffix";
+              grid-template-columns: auto 1fr auto;
               align-items: center;
               color: var(--n-item-text-color);
             `, [
@@ -230,22 +217,28 @@ export default c([
                   backgroundColor: 'var(--n-item-color-pending)'
                 })
               ]),
-              cE('extra', `
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-                padding-right: 4px;
-              `),
               cE('checkbox', `
-                display: flex;
-                align-items: center;
-                position: relative;
+                grid-area: checkbox;
                 padding: 0 9px 0 14px;
+              `),
+              cE('label', `
+                grid-area: label;
+                padding-left: 14px;
+              `),
+              cE('close', `
+                grid-area: suffix;
+                padding: 4px 14px 0 9px;
               `),
               cM('disabled', `
                 cursor: not-allowed
                 background-color: #0000;
                 color: var(--n-item-text-color-disabled);
+              `),
+              cM('source', `
+                cursor: pointer;
+              `),
+              cM('target', `
+                cursor: default;
               `)
             ])
           ])

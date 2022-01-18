@@ -1,8 +1,9 @@
-import { h, inject, defineComponent } from 'vue'
+import { h, inject, defineComponent, ref } from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
 import { transferInjectionKey } from './interface'
 import { getTitleAttribute } from '../../_utils'
+import { NBaseClose } from '../../_internal'
 
 export default defineComponent({
   name: 'NTransferListItem',
@@ -29,20 +30,30 @@ export default defineComponent({
       tgtValueSetRef,
       mergedClsPrefixRef,
       mergedThemeRef,
-      handleSrcCheckboxClick
+      handleItemClick
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
     const checkedRef = useMemo(() => tgtValueSetRef.value.has(props.value))
-    const handleClick = (): void => {
+    const hasItemHoverRef = ref(false)
+    function handleClick (): void {
       if (!props.disabled) {
-        handleSrcCheckboxClick(!checkedRef.value, props.value)
+        handleItemClick(!checkedRef.value, props.value)
       }
+    }
+    function handleMouseEnter (): void {
+      hasItemHoverRef.value = true
+    }
+    function handleMouseLeave (): void {
+      hasItemHoverRef.value = false
     }
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
       checked: checkedRef,
-      handleClick
+      hasItemHover: hasItemHoverRef,
+      handleClick,
+      handleMouseEnter,
+      handleMouseLeave
     }
   },
   render () {
@@ -57,7 +68,9 @@ export default defineComponent({
             ? `${mergedClsPrefix}-transfer-list-item--source`
             : `${mergedClsPrefix}-transfer-list-item--target`
         ]}
-        onClick={this.handleClick}
+        onClick={() => (source ? this.handleClick() : null)}
+        onMouseenter={this.handleMouseEnter}
+        onMouseleave={this.handleMouseLeave}
       >
         {source && (
           <div class={`${mergedClsPrefix}-transfer-list-item__checkbox`}>
@@ -75,6 +88,15 @@ export default defineComponent({
         >
           {label}
         </div>
+        {!source && this.hasItemHover && (
+          <div class={`${mergedClsPrefix}-transfer-list-item__close`}>
+            <NBaseClose
+              disabled={disabled}
+              clsPrefix={mergedClsPrefix}
+              onClick={this.handleClick}
+            />
+          </div>
+        )}
       </div>
     )
   }

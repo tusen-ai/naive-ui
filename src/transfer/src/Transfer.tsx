@@ -108,7 +108,7 @@ export default defineComponent({
       tgtOpts: tgtOptsRef,
       srcOpts: srcOptsRef,
       filteredSrcOpts: filteredSrcOptsRef,
-      srcCheckedStatus: srcCheckedStatusRef,
+      headerBtnStatus: headerBtnStatusRef,
       srcPattern: srcPatternRef,
       isInputing: isInputingRef,
       handleInputFocus,
@@ -129,20 +129,16 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function handleSrcHeaderCheck (): void {
-      const {
-        value: { checked, indeterminate }
-      } = srcCheckedStatusRef
-      if (checked || indeterminate) {
-        doUpdateValue([])
-      } else {
-        doUpdateValue([...avlSrcValueSetRef.value])
-      }
+
+    function handleClearAll (): void {
+      doUpdateValue([])
     }
-    function handleSrcCheckboxClick (
-      checked: boolean,
-      optionValue: OptionValue
-    ): void {
+
+    function handleCheckedAll (): void {
+      doUpdateValue([...avlSrcValueSetRef.value])
+    }
+
+    function handleItemClick (checked: boolean, optionValue: OptionValue): void {
       if (checked) {
         doUpdateValue([...(mergedValueRef.value || []), optionValue])
       } else {
@@ -161,8 +157,8 @@ export default defineComponent({
       mergedThemeRef: themeRef,
       srcOptsRef,
       tgtOptsRef,
-      srcCheckedStatusRef,
-      handleSrcCheckboxClick
+      headerBtnStatusRef,
+      handleItemClick
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -174,10 +170,11 @@ export default defineComponent({
       filteredSrcOpts: filteredSrcOptsRef,
       tgtOpts: tgtOptsRef,
       srcPattern: srcPatternRef,
-      handleSrcHeaderCheck,
       handleInputFocus,
       handleInputBlur,
       handleSrcFilterUpdateValue,
+      handleCheckedAll,
+      handleClearAll,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const {
@@ -247,7 +244,8 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-transfer-list`}>
           <NTransferHeader
             source
-            onChange={this.handleSrcHeaderCheck}
+            onCheckedAll={this.handleCheckedAll}
+            onClearAll={this.handleClearAll}
             title={this.sourceTitle}
           />
           <div class={`${mergedClsPrefix}-transfer-list-body`}>
@@ -276,7 +274,10 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-transfer-list__border`} />
         </div>
         <div class={`${mergedClsPrefix}-transfer-list`}>
-          <NTransferHeader title={this.targetTitle} />
+          <NTransferHeader
+            title={this.targetTitle}
+            onClearAll={this.handleClearAll}
+          />
           <div class={`${mergedClsPrefix}-transfer-list-body`}>
             <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>
               <NTransferList

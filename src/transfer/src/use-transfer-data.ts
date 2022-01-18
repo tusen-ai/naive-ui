@@ -64,31 +64,14 @@ export function useTransferData (
       )
   )
 
-  // 用于源项头部复选框状态
-  const srcCheckedStatusRef = computed<CheckedStatus>(() => {
+  // 用于头部按钮状态
+  const headerBtnStatusRef = computed<CheckedStatus>(() => {
     const checkedLength = mergedValueRef.value?.length
     const avlValueCount = avlSrcValueSetRef.value.size
-    if (avlValueCount === 0) {
-      return {
-        checked: false,
-        indeterminate: false,
-        disabled: true
-      }
-    } else if (checkedLength === 0) {
-      return {
-        checked: false,
-        indeterminate: false
-      }
-    } else if (checkedLength === avlValueCount) {
-      return {
-        checked: true,
-        indeterminate: false
-      }
-    } else {
-      return {
-        checked: false,
-        indeterminate: true
-      }
+    return {
+      checked: !!checkedLength,
+      allChecked: checkedLength === avlValueCount,
+      disabled: !avlValueCount
     }
   })
   const isInputingRef = ref(false)
@@ -109,7 +92,7 @@ export function useTransferData (
     tgtOpts: tgtOptsRef,
     srcOpts: srcOptsRef,
     filteredSrcOpts: filteredSrcOptsRef,
-    srcCheckedStatus: srcCheckedStatusRef,
+    headerBtnStatus: headerBtnStatusRef,
     srcPattern: srcPatternRef,
     isInputing: isInputingRef,
     handleInputFocus,
