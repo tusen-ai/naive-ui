@@ -28,10 +28,10 @@ async function generateComponentsType () {
     }
   })
   const originalContent = exist(
-    resolve(TYPE_ROOT, 'components-declaration.d.ts')
+    resolve(TYPE_ROOT, 'components.d.ts')
   )
     ? await fs.readFile(
-      resolve(TYPE_ROOT, 'components-declaration.d.ts'),
+      resolve(TYPE_ROOT, 'components.d.ts'),
       'utf-8'
     )
     : ''
@@ -61,7 +61,7 @@ export { }
 `
   if (code !== originalContent) {
     await fs.writeFile(
-      resolve(TYPE_ROOT, 'components-declaration.d.ts'),
+      resolve(TYPE_ROOT, 'components.d.ts'),
       code,
       'utf-8'
     )

@@ -136,10 +136,10 @@ declare module 'vue' {
     NUploadDragger: typeof import('naive-ui')['NUploadDragger']
     NUploadFileList: typeof import('naive-ui')['NUploadFileList']
     NUploadTrigger: typeof import('naive-ui')['NUploadTrigger']
+    NThemeEditor: typeof import('naive-ui')['NThemeEditor']
     NCol: typeof import('naive-ui')['NCol']
     NRow: typeof import('naive-ui')['NRow']
-    NThemeEditor: typeof import('naive-ui')['NThemeEditor']
     [key: string]: any
   }
 }
-export {}
+export { }

@@ -39,7 +39,7 @@
     "lib",
     "web-types.json",
     "README.md",
-    "typings/components-declaration.d.ts"
+    "typings/components.d.ts"
   ],
   "web-types": "./web-types.json",
   "lint-staged": {

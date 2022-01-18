@@ -62,3 +62,17 @@ app.use(naive)
   <n-button>naive-ui</n-button>
 </template>
 ```
+
+### Volar 支持
+
+如果你已经使用了 Volar, 那么需要在 `tsconfig.json` 中配置 `compilerOptions.types` 来指定全局组件类型
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    // ...
+    "types": ["naive-ui/components"]
+  }
+}
+```
