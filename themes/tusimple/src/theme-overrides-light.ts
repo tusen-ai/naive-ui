@@ -388,8 +388,8 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     buttonWidthPressedLarge: '38px',
     buttonBorderRadiusMedium: '12px',
     buttonBorderRadiusLarge: '16px',
-    railColor: '#EBEDF0',
-    railColorActive: '#EBEDF0',
+    railColor: '#D7DAE0',
+    railColorActive: '#D7DAE0',
     buttonBoxShadow: '0 2px 3px 0 rgba(0,0,0,0.10)'
   },
   Table: {
