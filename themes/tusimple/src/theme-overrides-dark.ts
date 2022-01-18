@@ -573,7 +573,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     itemFontSize: '16px',
     itemHeight: '38px',
     itemWidth: '66px',
-    panelActionPadding: '12px 20px',
+    panelActionPadding: '12px 8px',
     itemTextColor: '#FFF'
   },
   Tooltip: {
