@@ -433,11 +433,11 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     buttonIconColorHover: commonDark.primaryColor
   },
   Popover: {
-    padding: '20px',
     fontSize: '16px',
     arrowOffset: '40px',
     arrowOffsetVertical: '16px',
     arrowHeight: '8px',
+    space: '4px',
     spaceArrow: '14px',
     textColor: '#FFF',
     boxShadow: vars.NORMAL_BOX_SHADOW_DARK_THEME

@@ -348,11 +348,11 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     buttonIconColorHover: commonLight.primaryColor
   },
   Popover: {
-    padding: '20px',
     fontSize: '16px',
     arrowOffset: '40px',
     arrowOffsetVertical: '16px',
     arrowHeight: '8px',
+    space: '4px',
     spaceArrow: '14px'
   },
   Progress: {

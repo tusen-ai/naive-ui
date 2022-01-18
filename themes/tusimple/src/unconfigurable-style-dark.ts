@@ -28,6 +28,20 @@ export function mountSvgDefs (): void {
 }
 
 export const unconfigurableStyle = c([
+  cB('base-select-menu', [
+    cB('base-select-option', [
+      c('&:first-child', [
+        cM('pending', {
+          borderRadius: '16px 16px 0 0'
+        })
+      ]),
+      c('&:last-child', [
+        cM('pending', {
+          borderRadius: '0 0 16px 16px'
+        })
+      ])
+    ])
+  ]),
   cB('dropdown-menu', [
     cB('dropdown-option', [
       c('&:first-child', [
