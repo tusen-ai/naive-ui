@@ -115,6 +115,15 @@ export const unconfigurableStyle = c([
       ])
     ])
   ]),
+  cB('transfer', [
+    cB('transfer-gap', [
+      cB('button', {
+        width: '32px',
+        height: '32px',
+        padding: '0'
+      })
+    ])
+  ]),
   cB('message', [
     cE('close', [
       c('&:hover', {
