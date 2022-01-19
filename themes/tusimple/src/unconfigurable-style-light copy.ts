@@ -81,6 +81,21 @@ export const unconfigurableStyle = c([
       ])
     ])
   ]),
+  cB('tabs', [
+    cB('tabs-nav', [
+      cM('line-type', [
+        cB('tabs-bar', {
+          borderRadius: '100px'
+        })
+      ])
+    ]),
+    cB('tabs-bar', {
+      maxWidth: '16px!important',
+      height: '4px',
+      // transform: 'translateX(50%)',
+      borderRadius: '100px'
+    })
+  ]),
   cB('tag', [
     cE(
       'close',
