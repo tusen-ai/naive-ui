@@ -71,6 +71,13 @@ export const unconfigurableStyle = c([
       ])
     ])
   ]),
+  cB('data-table', [
+    cB('data-table-td', [
+      c('&.n-data-table-td--hover', {
+        backgroundColor: 'transparent'
+      })
+    ])
+  ]),
   cB('input', [
     cM('textarea', [
       cM('resizable', [
