@@ -16,11 +16,12 @@ customize-icon
 
 ### Timeline Props
 
-| 名称           | 类型                  | 默认值     | 说明   |
-| -------------- | --------------------- | ---------- | ------ |
-| horizontal     | `boolean`             | `'false'`  | 水平的 |
-| item-placement | `'left' \| 'right'`   | `'left'`   | 方向   |
-| size           | `'medium' \| 'large'` | `'medium'` | 大小   |
+| 名称           | 类型                  | 默认值      | 说明     |
+| -------------- | --------------------- | ----------- | -------- |
+| horizontal     | `boolean`             | `'false'`   | 水平的   |
+| icon-size      | `number`              | `undefined` | 图标大小 |
+| item-placement | `'left' \| 'right'`   | `'left'`    | 方向     |
+| size           | `'medium' \| 'large'` | `'medium'`  | 大小     |
 
 ### TimelineItem Props
 
@@ -28,7 +29,6 @@ customize-icon
 | --- | --- | --- | --- |
 | color | `string` | `undefined` | 选项的颜色 |
 | content | `string` | `undefined` | 选项内容 |
-| icon-size | `number` | `undefined` | 图标大小 |
 | time | `string` | `undefined` | 选项时间 |
 | title | `string` | `undefined` | 选项标题 |
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 选项类型 |
