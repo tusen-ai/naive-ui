@@ -114,6 +114,7 @@ export default c([
       z-index: auto;
       display: flex;
       padding: var(--n-padding-single);
+      padding-top: 3px;
       flex-wrap: wrap;
       align-items: center;
       width: 100%;
