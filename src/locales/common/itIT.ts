@@ -1,4 +1,6 @@
-const itIT = {
+import type { NLocale } from './enUS'
+
+const itIT: NLocale = {
   name: 'it-IT',
   global: {
     undo: 'Annulla',
@@ -108,5 +110,4 @@ const itIT = {
   }
 }
 
-export type NLocale = typeof itIT
 export default itIT
