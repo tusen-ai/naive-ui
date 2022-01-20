@@ -216,7 +216,8 @@ export default defineComponent({
       containerRef,
       presetProps: computed(() => {
         const pickedProps = keep(props, presetPropsKeys)
-        return pickedProps
+        // TODO: remove as any after vue fix the issue introduced in 3.2.27
+        return pickedProps as any
       }),
       handleKeyup,
       handleAfterLeave,
