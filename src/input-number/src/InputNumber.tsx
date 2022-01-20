@@ -163,10 +163,10 @@ export default defineComponent({
     const deriveValueFromDisplayedValue = (
       offset = 0,
       doUpdateIfValid = true,
-      isInputing = false
+      isInputting = false
     ): null | number | false => {
       const { value: displayedValue } = displayedValueRef
-      if (isInputing && isWipValue(displayedValue)) {
+      if (isInputting && isWipValue(displayedValue)) {
         return false
       }
       const parsedValue = parse(displayedValue)
@@ -181,12 +181,12 @@ export default defineComponent({
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
           if (mergedMax !== null && nextValue > mergedMax) {
-            if (!doUpdateIfValid || isInputing) return false
+            if (!doUpdateIfValid || isInputting) return false
             // if doUpdateIfValid=true, we try to make it a valid value
             nextValue = mergedMax
           }
           if (mergedMin !== null && nextValue < mergedMin) {
-            if (!doUpdateIfValid || isInputing) return false
+            if (!doUpdateIfValid || isInputting) return false
             // if doUpdateIfValid=true, we try to make it a valid value
             nextValue = mergedMin
           }

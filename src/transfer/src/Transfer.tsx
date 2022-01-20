@@ -118,7 +118,7 @@ export default defineComponent({
       tgtCheckedStatus: tgtCheckedStatusRef,
       srcPattern: srcPatternRef,
       tgtPattern: tgtPatternRef,
-      isInputing: isInputingRef,
+      isInputting: isInputtingRef,
       fromButtonDisabled: fromButtonDisabledRef,
       toButtonDisabled: toButtonDisabledRef,
       handleInputFocus,
@@ -224,7 +224,7 @@ export default defineComponent({
       mergedDisabled: mergedDisabledRef,
       itemSize: itemSizeRef,
       isMounted: useIsMounted(),
-      isInputing: isInputingRef,
+      isInputting: isInputtingRef,
       mergedTheme: themeRef,
       filteredSrcOpts: filteredSrcOptsRef,
       filteredTgtOpts: filteredTgtOptsRef,
@@ -330,7 +330,7 @@ export default defineComponent({
                 disabled={this.mergedDisabled}
                 virtualScroll={this.virtualScroll}
                 isMounted={this.isMounted}
-                isInputing={this.isInputing}
+                isInputting={this.isInputting}
                 itemSize={this.itemSize}
               />
             </div>
@@ -389,7 +389,7 @@ export default defineComponent({
                 disabled={this.mergedDisabled}
                 virtualScroll={this.virtualScroll}
                 isMounted={this.isMounted}
-                isInputing={this.isInputing}
+                isInputting={this.isInputting}
                 itemSize={this.itemSize}
               />
             </div>

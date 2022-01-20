@@ -132,12 +132,12 @@ export function useTransferData (
     if (mergedDisabledRef.value) return true
     return srcCheckedValuesRef.value.length === 0
   })
-  const isInputingRef = ref(false)
+  const isInputtingRef = ref(false)
   function handleInputFocus (): void {
-    isInputingRef.value = true
+    isInputtingRef.value = true
   }
   function handleInputBlur (): void {
-    isInputingRef.value = false
+    isInputtingRef.value = false
   }
   function handleSrcFilterUpdateValue (value: string | null): void {
     srcPatternRef.value = value ?? ''
@@ -160,7 +160,7 @@ export function useTransferData (
     tgtCheckedStatus: tgtCheckedStatusRef,
     srcPattern: srcPatternRef,
     tgtPattern: tgtPatternRef,
-    isInputing: isInputingRef,
+    isInputting: isInputtingRef,
     fromButtonDisabled: fromButtonDisabledRef,
     toButtonDisabled: toButtonDisabledRef,
     handleInputFocus,

@@ -37,7 +37,7 @@ export default defineComponent({
       type: Boolean,
       required: true
     },
-    isInputing: {
+    isInputting: {
       type: Boolean,
       required: true
     },
@@ -121,7 +121,7 @@ export default defineComponent({
                   <TransitionGroup
                     name="item"
                     appear={this.isMounted}
-                    css={!this.isInputing}
+                    css={!this.isInputting}
                   >
                     {{
                       default: () => {
@@ -145,7 +145,7 @@ export default defineComponent({
         <Transition
           name="fade-in-transition"
           appear={this.isMounted}
-          css={!this.isInputing}
+          css={!this.isInputting}
         >
           {{
             default: () =>
