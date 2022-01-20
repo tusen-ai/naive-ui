@@ -21,6 +21,7 @@
 ### i18n
 
 - Add esAR locale.
+- Add itIT locale.
 
 ## 2.24.1 (2022-01-12)
 
