@@ -12,7 +12,8 @@ import {
   vShow,
   InputHTMLAttributes,
   HTMLAttributes,
-  watchEffect
+  watchEffect,
+  renderSlot
 } from 'vue'
 import { happensIn } from 'seemly'
 import { createTreeMate, TreeNode } from 'treemate'
@@ -739,7 +740,13 @@ export default defineComponent({
                       onFocus={this.handleTriggerFocus}
                       onKeydown={this.handleKeyDown}
                       onKeyup={this.handleKeyUp}
-                    />
+                    >
+                      {$slots.suffix
+                        ? {
+                            suffix: () => renderSlot($slots, 'suffix')
+                          }
+                        : undefined}
+                    </NInternalSelection>
                   )
                 }}
               </VTarget>,

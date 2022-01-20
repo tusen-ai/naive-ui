@@ -19,6 +19,7 @@ scroll-event.vue
 group
 many-options
 custom-option
+custom-suffix
 action
 fallback-option
 max-tag-count
