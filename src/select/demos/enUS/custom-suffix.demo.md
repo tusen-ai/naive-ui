@@ -44,7 +44,6 @@ export default defineComponent({
     return {
       show1: ref(false),
       show2: ref(false),
-      selectedValue: ref(null),
       options: [
         {
           label: 'Drive My Car',

@@ -101,3 +101,4 @@ filterable-debug
 | ------ | ---- | ------------------- |
 | action | `()` | 菜单操作区域的 slot |
 | empty  | `()` | 菜单无数据时的 slot |
+| suffix | `()` | 后缀图标的 slot     |

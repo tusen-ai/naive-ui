@@ -94,3 +94,4 @@ render-person
 | ------ | ---------- | -------------------------------------- |
 | action | `()`       | Options menu slot.                     |
 | empty  | `()`       | Empty state slot for the options menu. |
+| suffix | `()`       | Suffix icon slot.                      |
