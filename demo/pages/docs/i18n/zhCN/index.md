@@ -55,6 +55,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 书面挪威语        | nbNO | dateNbNO |
 | 法语              | frFR | dateFrFR |
 | 西班牙语（阿根廷) | esAR | dateEsAR |
+| 意大利语          | itIT | dateItIT |
 
 ## 在现有国际化基础上调整
 

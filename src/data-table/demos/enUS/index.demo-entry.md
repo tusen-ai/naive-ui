@@ -162,7 +162,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | clearSorter | `() => void` | Clear all sort state. |
 | filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }) => void` | Set the active filters of the table. |
 | page | `(page: number) => void` | Manually set the page. |
-| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | If columnKey set to `null`, it is the same as clearSorter. |
+| sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |
 
 ### DataTable Slots
 

@@ -166,7 +166,7 @@ type SortState = {
 | clearSorter | `() => void` | 清空所有的 sort 状态 |
 | filters | `(filters: { [string \| number]: Array<string \| number> }) => void` | 设定表格当前的过滤器 |
 | page | `(page: number) => void` | 手动设置 page |
-| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 如果 columnKey 设为 `null`，那它和 clearSorter 效果一致 |
+| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的过滤状态 |
 
 ### DataTable Slots
 
