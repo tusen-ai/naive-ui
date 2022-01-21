@@ -6,6 +6,7 @@
 
 - Fix `n-layout-sider` still occupies 1px after collapsed.
 - Fix `n-code` doesn't break word when `word-wrap=true`.
+- Fix `n-tabs` 's tab content can inherit `attrs`, closes [#2221](https://github.com/TuSimple/naive-ui/issues/2221).
 
 ### Feats
 
