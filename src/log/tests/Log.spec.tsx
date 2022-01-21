@@ -20,7 +20,7 @@ describe('n-log', () => {
     const wrapper = mount(NLog, { props: { fontSize } })
 
     expect(wrapper.find('.n-code').attributes('style')).toContain(
-      `--font-size: ${fontSize}px`
+      `--n-font-size: ${fontSize}px`
     )
   })
 
@@ -71,7 +71,7 @@ describe('n-log', () => {
 
   it('should work with `trim` prop', async () => {
     const wrapper = mount(NLog, {
-      props: { log: ' test1     ', language: 'naive-log' }
+      props: { log: ' test1     ' }
     })
     expect(wrapper.find('pre').element.innerHTML).toBe(' test1     ')
 

@@ -1,4 +1,4 @@
-# Custom Render Column Header
+# Customized column header rendering
 
 ```html
 <n-data-table

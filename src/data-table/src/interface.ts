@@ -4,7 +4,8 @@ import {
   InjectionKey,
   Ref,
   VNodeChild,
-  HTMLAttributes
+  HTMLAttributes,
+  Slots
 } from 'vue'
 import { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import { NLocale } from '../../locales'
@@ -61,7 +62,7 @@ export type Ellipsis = boolean | EllipsisProps
 
 export interface CommonColumnInfo {
   fixed?: 'left' | 'right'
-  width?: number
+  width?: number | string
   className?: string
   align?: 'left' | 'center' | 'right'
   ellipsis?: Ellipsis
@@ -150,17 +151,18 @@ export interface TableExpandColumn<T = InternalRowData>
 }
 
 export type TableColumn<T = InternalRowData> =
-  | TableColumnGroup
+  | TableColumnGroup<T>
   | TableBaseColumn<T>
   | TableSelectionColumn<T>
   | TableExpandColumn<T>
 export type TableColumns<T = InternalRowData> = Array<TableColumn<T>>
 
 export type DataTableSelectionOptions = Array<
-| DataTableSelectionOption
-| { label: string, key: string | number, onSelect: () => void }
+  | DataTableSelectionOption
+  | { label: string; key: string | number; onSelect: () => void }
 >
 export interface DataTableInjection {
+  slots: Slots
   indentRef: Ref<number>
   hasChildrenRef: Ref<boolean>
   firstContentfulColIndexRef: Ref<number>
@@ -176,12 +178,14 @@ export interface DataTableInjection {
   leftFixedColumnsRef: Ref<TableColumns>
   rightFixedColumnsRef: Ref<TableColumns>
   leftActiveFixedColKeyRef: Ref<ColumnKey | null>
+  leftActiveFixedChildrenColKeysRef: Ref<ColumnKey[]>
   rightActiveFixedColKeyRef: Ref<ColumnKey | null>
+  rightActiveFixedChildrenColKeysRef: Ref<ColumnKey[]>
   fixedColumnLeftMapRef: Ref<
-  Record<ColumnKey, { start: number, end: number } | undefined>
+    Record<ColumnKey, { start: number; end: number } | undefined>
   >
   fixedColumnRightMapRef: Ref<
-  Record<ColumnKey, { start: number, end: number } | undefined>
+    Record<ColumnKey, { start: number; end: number } | undefined>
   >
   mergedCurrentPageRef: Ref<number>
   someRowsCheckedRef: Ref<boolean>

@@ -144,8 +144,35 @@ describe('n-image', () => {
     expect(document.querySelector('.n-image-preview-toolbar')).not.toEqual(null)
     expect(wrapper.findComponent(NImagePreview).exists()).toBe(true)
     const toolbars = document.querySelector('.n-image-preview-toolbar')
-    toolbars?.children[toolbars?.children.length - 1].dispatchEvent(new MouseEvent('click'))
+    toolbars?.children[toolbars?.children.length - 1].dispatchEvent(
+      new MouseEvent('click')
+    )
     await nextTick()
     expect(document.querySelector('.n-image-preview-toolbar')).toEqual(null)
+  })
+
+  it('should work with `onLoad` prop', async () => {
+    const onLoad = jest.fn()
+    const wrapper = mount(NImage, {
+      props: {
+        src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+        onLoad
+      }
+    })
+    await wrapper.find('img').trigger('load')
+    expect(onLoad).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `canPreview` prop', async () => {
+    const wrapper = mount(NImage, {
+      props: {
+        previewDisabled: true
+      }
+    })
+
+    await wrapper.find('img').trigger('click')
+    expect(document.querySelector('.n-image-preview-overlay')).toEqual(null)
+    wrapper.unmount()
   })
 })

@@ -10,12 +10,16 @@ import { useTheme, useFormItem, useLocale, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { warn, call, MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { inputNumberLight, InputNumberTheme } from '../styles'
-import { parse, validator, format, parseNumber } from './utils'
+import { parse, validator, format, parseNumber, isWipValue } from './utils'
 import type { OnUpdateValue, InputNumberInst } from './interface'
 import style from './styles/input-number.cssr'
 
 const inputNumberProps = {
   ...(useTheme.props as ThemeProps<InputNumberTheme>),
+  loading: {
+    type: Boolean,
+    default: undefined
+  },
   placeholder: String,
   defaultValue: {
     type: Number as PropType<number | null>,
@@ -50,6 +54,10 @@ const inputNumberProps = {
       ArrowDown?: boolean
     }>,
     default: {}
+  },
+  updateValueOnInput: {
+    type: Boolean,
+    default: true
   },
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -135,7 +143,10 @@ export default defineComponent({
     })
     const doUpdateValue = (value: number | null): void => {
       const { value: mergedValue } = mergedValueRef
-      if (value === mergedValue) return
+      if (value === mergedValue) {
+        deriveDisplayedValueFromValue()
+        return
+      }
       const {
         'onUpdate:value': _onUpdateValue,
         onUpdateValue,
@@ -151,9 +162,13 @@ export default defineComponent({
     }
     const deriveValueFromDisplayedValue = (
       offset = 0,
-      doUpdateIfValid = true
+      doUpdateIfValid = true,
+      isInputing = false
     ): null | number | false => {
       const { value: displayedValue } = displayedValueRef
+      if (isInputing && isWipValue(displayedValue)) {
+        return false
+      }
       const parsedValue = parse(displayedValue)
       if (parsedValue === null) {
         if (doUpdateIfValid) doUpdateValue(null)
@@ -166,11 +181,13 @@ export default defineComponent({
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
           if (mergedMax !== null && nextValue > mergedMax) {
-            if (!doUpdateIfValid) return false
+            if (!doUpdateIfValid || isInputing) return false
+            // if doUpdateIfValid=true, we try to make it a valid value
             nextValue = mergedMax
           }
           if (mergedMin !== null && nextValue < mergedMin) {
-            if (!doUpdateIfValid) return false
+            if (!doUpdateIfValid || isInputing) return false
+            // if doUpdateIfValid=true, we try to make it a valid value
             nextValue = mergedMin
           }
           if (props.validator && !props.validator(nextValue)) return false
@@ -321,12 +338,14 @@ export default defineComponent({
         }
       } else if (e.code === 'ArrowUp') {
         if (props.keyboard.ArrowUp === false) return
+        e.preventDefault()
         const value = deriveValueFromDisplayedValue()
         if (value !== false) {
           doAdd()
         }
       } else if (e.code === 'ArrowDown') {
         if (props.keyboard.ArrowDown === false) return
+        e.preventDefault()
         const value = deriveValueFromDisplayedValue()
         if (value !== false) {
           doMinus()
@@ -335,7 +354,9 @@ export default defineComponent({
     }
     function handleUpdateDisplayedValue (value: string): void {
       displayedValueRef.value = value
-      deriveValueFromDisplayedValue()
+      if (props.updateValueOnInput) {
+        deriveValueFromDisplayedValue(0, true, true)
+      }
     }
     watch(mergedValueRef, () => {
       deriveDisplayedValueFromValue()
@@ -394,6 +415,7 @@ export default defineComponent({
         <NInput
           ref="inputInstRef"
           bordered={this.mergedBordered}
+          loading={this.loading}
           value={this.displayedValue}
           onUpdateValue={this.handleUpdateDisplayedValue}
           theme={this.mergedTheme.peers.Input}
@@ -412,6 +434,7 @@ export default defineComponent({
           onMousedown={this.handleMouseDown}
           onClear={this.handleClear}
           clearable={this.clearable}
+          internalLoadingBeforeSuffix
         >
           {{
             _: 2, // input number has dynamic slots

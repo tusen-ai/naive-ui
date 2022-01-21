@@ -1,4 +1,4 @@
-# Use it in Form
+# Using it in a form
 
 `n-dynamic-input` itself cannot be verified. If you need to verify the input of `n-dynamic-input`, you can pass `n-form-item` in the custom content to complete the verification. Here is a complete example.
 

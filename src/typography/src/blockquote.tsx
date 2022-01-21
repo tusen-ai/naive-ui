@@ -16,7 +16,7 @@ export type BlockquoteProps = ExtractPublicPropTypes<typeof blockquoteProps>
 export default defineComponent({
   name: 'Blockquote',
   props: blockquoteProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
@@ -39,16 +39,16 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--font-size': blockquoteFontSize,
-          '--line-height': blockquoteLineHeight,
-          '--prefix-color': blockquotePrefixColor,
-          '--text-color': blockquoteTextColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-font-size': blockquoteFontSize,
+          '--n-line-height': blockquoteLineHeight,
+          '--n-prefix-color': blockquotePrefixColor,
+          '--n-text-color': blockquoteTextColor
         }
       })
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <blockquote

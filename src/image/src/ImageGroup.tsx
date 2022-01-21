@@ -4,23 +4,21 @@ import {
   ref,
   provide,
   InjectionKey,
-  renderSlot,
   getCurrentInstance,
   Ref
 } from 'vue'
 import { createId } from 'seemly'
-import NImagePreview from './ImagePreview'
-import type { ImagePreviewInst } from './ImagePreview'
 import { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig } from '../../_mixins'
+import NImagePreview from './ImagePreview'
+import type { ImagePreviewInst } from './ImagePreview'
+import { imagePreviewSharedProps } from './interface'
 
 export const imageGroupInjectionKey: InjectionKey<
 ImagePreviewInst & { groupId: string, mergedClsPrefixRef: Ref<string> }
 > = Symbol('image-group')
 
-const imageGroupProps = {
-  showToolbar: { type: Boolean, default: true }
-}
+const imageGroupProps = imagePreviewSharedProps
 
 export type ImageGroupProps = ExtractPublicPropTypes<typeof imageGroupProps>
 
@@ -30,7 +28,7 @@ export default defineComponent({
   setup (props) {
     let currentSrc: string | undefined
     const { mergedClsPrefixRef } = useConfig(props)
-    const groupId = createId()
+    const groupId = `c${createId()}`
     const vm = getCurrentInstance()
     const setPreviewSrc = (src: string | undefined): void => {
       currentSrc = src
@@ -40,9 +38,9 @@ export default defineComponent({
       if (!vm?.proxy) return
       const container: HTMLElement = vm.proxy.$el.parentElement
       // use dom api since we can't get the correct order before all children are rendered
-      const imgs = container.getElementsByClassName(
-        groupId
-      ) as HTMLCollectionOf<HTMLImageElement>
+      const imgs: NodeListOf<HTMLImageElement> = container.querySelectorAll(
+        `.${groupId}:not([data-error=true])`
+      )
 
       if (!imgs.length) return
       const index = Array.from(imgs).findIndex(
@@ -78,15 +76,16 @@ export default defineComponent({
   render () {
     return (
       <NImagePreview
+        theme={this.theme}
+        themeOverrides={this.themeOverrides}
         clsPrefix={this.mergedClsPrefix}
         ref="previewInstRef"
         onPrev={this.prev}
         onNext={this.next}
         showToolbar={this.showToolbar}
+        showToolbarTooltip={this.showToolbarTooltip}
       >
-        {{
-          default: () => renderSlot(this.$slots, 'default')
-        }}
+        {this.$slots}
       </NImagePreview>
     )
   }

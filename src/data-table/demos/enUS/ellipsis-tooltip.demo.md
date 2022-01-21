@@ -1,4 +1,4 @@
-# Ellipsis with Tooltip
+# Ellipsis with tooltip
 
 Set `column.ellipsis.tooltip` to make ellipsis have tooltip. `column.ellipsis` accepts the same props as `n-ellipsis`.
 

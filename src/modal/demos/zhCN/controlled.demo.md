@@ -5,7 +5,14 @@
 ```html
 <n-button @click="handleClick"> 来吧 </n-button>
 <n-modal :show="showModal">
-  <n-card style="width: 600px;" title="模态框" size="huge" :bordered="false">
+  <n-card
+    style="width: 600px;"
+    title="模态框"
+    size="huge"
+    :bordered="false"
+    role="dialog"
+    aria-modal="true"
+  >
     倒计时 {{ timeout / 1000 }} 秒
   </n-card>
 </n-modal>

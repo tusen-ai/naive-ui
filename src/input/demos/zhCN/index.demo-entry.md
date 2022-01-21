@@ -9,6 +9,7 @@ basic
 size
 round
 icon
+loading
 password
 disabled
 clearable
@@ -38,7 +39,7 @@ input-props
 | minlength | `number` | `undefined` | 最小输入长度 |
 | pair | `boolean` | `false` | 是否输入成对的值 |
 | passively-activated | `boolean` | `false` | 是否被动激活输入框 |
-| placeholder | `string \| [string, string]` | `undefined` | 文本输入的占位符。如果是 `pair` 是 `true`，`placeholder`是一个数组 |
+| placeholder | `string \| [string, string]` | `undefined` | 文本输入的占位符。如果 `pair` 是 `true`，`placeholder`是一个数组 |
 | readonly | `boolean` | `false` | 是否只读 |
 | round | `boolean` | `false` | 输入框是否圆角 |
 | rows | `number` | `3` | 输入框行数，对 type="textarea" 有效 |
@@ -47,7 +48,7 @@ input-props
 | show-password-on | `'click' \| 'mousedown'` | `undefined` | 显示密码的时机 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框尺寸 |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | 输入框类型 |
-| value | `string \| [string, string] \| null` | `undefined` | 文本输入的值。如果是 `pair` 是 `true`，`value` 是一个数组 |
+| value | `string \| [string, string] \| null` | `undefined` | 文本输入的值。如果 `pair` 是 `true`，`value` 是一个数组 |
 | on-blur | `() => void` | `undefined` | 输入框失去焦点时触发 |
 | on-change | `(value: string \| [string, string]) => void` | `undefined` | 原生 change 事件触发时触发 |
 | on-clear | `() => void` | `undefined` | 输入框点击清空按钮时触发 |

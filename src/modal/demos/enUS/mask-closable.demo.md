@@ -1,9 +1,9 @@
-# Mask Closable
+# Mask closable
 
 Use `mask-closable=false` to make modal not emit the event which may close the modal.
 
 ```html
-<n-button @click="showModal = true"> Start Me up </n-button>
+<n-button @click="showModal = true">Start Me up</n-button>
 <n-modal
   v-model:show="showModal"
   :mask-closable="false"

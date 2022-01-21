@@ -7,15 +7,16 @@ Many thanks to [twemoji](https://github.com/twitter/twemoji) for creating those 
 ## Demos
 
 ```demo
-s-404
-s-403
-s-500
-s-418
-info
-success
-warning
-error
-size
+s-404.vue
+s-403.vue
+s-500.vue
+s-418.vue
+info.vue
+success.vue
+warning.vue
+error.vue
+size.vue
+custom.vue
 ```
 
 ## API
@@ -26,12 +27,13 @@ size
 | --- | --- | --- | --- |
 | description | `string` | `undefined` | Description. |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | Size. |
-| status | `'info' \| 'success' \| 'error' \| 'warning' \| 404 \| '404' \| 500 \| '500' \| 400 \| '400' \| 418 \| '418'` | `'info'` | Status. |
+| status | `'info' \| 'success' \| 'warning' \| 'error' \| '404' \| '403' \| '500' \| '418'` | `'info'` | Status. |
 | title | `string` | `undefined` | Title. |
 
 ### Result Slots
 
-| Name    | Parameters | Description                                    |
-| ------- | ---------- | ---------------------------------------------- |
-| default | `()`       | Results page content information.              |
-| footer  | `()`       | Information at the bottom of the results page. |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| default | `()` | Results page content information. |  |
+| footer | `()` | Information at the bottom of the results page. |  |
+| icon | `()` | Custom icon content area. | 2.24.0 |

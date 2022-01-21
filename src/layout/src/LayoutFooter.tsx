@@ -37,16 +37,16 @@ export default defineComponent({
           self
         } = themeRef.value
         const vars: any = {
-          '--bezier': cubicBezierEaseInOut
+          '--n-bezier': cubicBezierEaseInOut
         }
         if (props.inverted) {
-          vars['--color'] = self.footerColorInverted
-          vars['--text-color'] = self.textColorInverted
-          vars['--border-color'] = self.footerBorderColorInverted
+          vars['--n-color'] = self.footerColorInverted
+          vars['--n-text-color'] = self.textColorInverted
+          vars['--n-border-color'] = self.footerBorderColorInverted
         } else {
-          vars['--color'] = self.footerColor
-          vars['--text-color'] = self.textColor
-          vars['--border-color'] = self.footerBorderColor
+          vars['--n-color'] = self.footerColor
+          vars['--n-text-color'] = self.textColor
+          vars['--n-border-color'] = self.footerBorderColor
         }
         return vars
       })

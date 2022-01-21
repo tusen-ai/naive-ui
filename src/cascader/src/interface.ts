@@ -2,7 +2,7 @@ import { CheckStrategy, TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
-import { InjectionKey, Ref } from 'vue'
+import { InjectionKey, Ref, VNodeChild } from 'vue'
 
 export type ValueAtom = string | number
 export type Value = ValueAtom | ValueAtom[]
@@ -31,19 +31,19 @@ export type OnLoad = (option: CascaderOption) => Promise<void>
 
 export type OnUpdateValue = (
   value: string &
-  number &
-  string[] &
-  number[] &
-  Array<string | number> &
-  (string | null) &
-  (number | null) &
-  (string[] | null) &
-  (number[] | null) &
-  (Array<string | number> | null),
+    number &
+    string[] &
+    number[] &
+    Array<string | number> &
+    (string | null) &
+    (number | null) &
+    (string[] | null) &
+    (number[] | null) &
+    (Array<string | number> | null),
   option: null &
-  CascaderOption &
-  CascaderOption[] &
-  Array<CascaderOption | null>,
+    CascaderOption &
+    CascaderOption[] &
+    Array<CascaderOption | null>,
   path: null & CascaderOption[] & Array<CascaderOption[] | null>
 ) => void
 
@@ -87,6 +87,9 @@ export interface CascaderInjection {
   closeMenu: (returnFocus?: boolean) => void
   handleSelectMenuClickOutside: (e: MouseEvent) => void
   handleCascaderMenuClickOutside: (e: MouseEvent) => void
+  renderLabelRef: Ref<
+    ((option: CascaderOption, checked: boolean) => VNodeChild) | undefined
+  >
 }
 
 export interface CascaderSubmenuInstance {

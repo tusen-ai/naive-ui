@@ -51,10 +51,10 @@ export default defineComponent({
           self: { fontSize, iconSize, iconColor }
         } = mergedThemeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--font-size': fontSize,
-          '--icon-size': iconSize,
-          '--icon-color': iconColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-font-size': fontSize,
+          '--n-icon-size': iconSize,
+          '--n-icon-color': iconColor
         }
       }),
       localizedPositiveText: computed(() => {

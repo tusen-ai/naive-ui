@@ -1,4 +1,4 @@
-# Tree Data
+# Tree data
 
 Set `children` in row data to show tree data. If you want to use other key to get children, you can set another `children-key`.
 

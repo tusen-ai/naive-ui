@@ -5,12 +5,12 @@ import {
   computed,
   defineComponent,
   PropType,
-  watch,
   toRef,
   renderSlot,
   provide,
   nextTick,
-  watchEffect
+  watch,
+  WatchStopHandle
 } from 'vue'
 import { TreeNode, createIndexGetter } from 'treemate'
 import { VirtualList, VirtualListInst } from 'vueuc'
@@ -95,6 +95,10 @@ export default defineComponent({
     onTabOut: Function as PropType<() => void>,
     onMouseenter: Function as PropType<(e: MouseEvent) => void>,
     onMouseleave: Function as PropType<(e: MouseEvent) => void>,
+    resetMenuOnOptionsChange: {
+      type: Boolean,
+      default: true
+    },
     // deprecated
     onToggle: Function as PropType<(tmNode: TreeNode<SelectBaseOption>) => void>
   },
@@ -133,15 +137,32 @@ export default defineComponent({
           : null
       )
     }
-    initPendingNode()
-    onMounted(() => {
-      watchEffect(() => {
-        if (props.show) {
-          initPendingNode()
-          void nextTick(scrollToPendingNode)
+
+    let initPendingNodeWatchStopHandle: WatchStopHandle | undefined
+    watch(
+      toRef(props, 'show'),
+      (value) => {
+        if (value) {
+          initPendingNodeWatchStopHandle = watch(
+            props.resetMenuOnOptionsChange
+              ? [toRef(props, 'treeMate'), toRef(props, 'multiple')]
+              : [toRef(props, 'multiple')],
+            () => {
+              initPendingNode()
+              void nextTick(scrollToPendingNode)
+            },
+            {
+              immediate: true
+            }
+          )
+        } else {
+          initPendingNodeWatchStopHandle?.()
         }
-      })
-    })
+      },
+      {
+        immediate: true
+      }
+    )
     const itemSizeRef = computed(() => {
       return depx(themeRef.value.self[createKey('optionHeight', props.size)])
     })
@@ -160,14 +181,6 @@ export default defineComponent({
     })
     const styleRef = computed(() => {
       return [{ width: formatLength(props.width) }, cssVarsRef.value]
-    })
-    watch(toRef(props, 'treeMate'), () => {
-      if (props.autoPending) {
-        const tmNode = props.treeMate.getFirstAvailableNode()
-        setPendingTmNode(tmNode)
-      } else {
-        setPendingTmNode(null)
-      }
     })
     function doToggle (tmNode: TreeNode<SelectBaseOption>): void {
       const { onToggle } = props
@@ -303,27 +316,27 @@ export default defineComponent({
         }
       } = themeRef.value
       return {
-        '--height': height,
-        '--action-divider-color': actionDividerColor,
-        '--action-text-color': actionTextColor,
-        '--bezier': cubicBezierEaseInOut,
-        '--border-radius': borderRadius,
-        '--color': color,
-        '--option-font-size': fontSize,
-        '--group-header-text-color': groupHeaderTextColor,
-        '--option-check-color': optionCheckColor,
-        '--option-color-pending': optionColorPending,
-        '--option-color-active': optionColorActive,
-        '--option-height': optionHeight,
-        '--option-opacity-disabled': optionOpacityDisabled,
-        '--option-text-color': optionTextColor,
-        '--option-text-color-active': optionTextColorActive,
-        '--option-text-color-disabled': optionTextColorDisabled,
-        '--option-text-color-pressed': optionTextColorPressed,
-        '--option-padding': optionPadding,
-        '--option-padding-left': getPadding(optionPadding, 'left'),
-        '--loading-color': loadingColor,
-        '--loading-size': loadingSize
+        '--n-height': height,
+        '--n-action-divider-color': actionDividerColor,
+        '--n-action-text-color': actionTextColor,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-color': color,
+        '--n-option-font-size': fontSize,
+        '--n-group-header-text-color': groupHeaderTextColor,
+        '--n-option-check-color': optionCheckColor,
+        '--n-option-color-pending': optionColorPending,
+        '--n-option-color-active': optionColorActive,
+        '--n-option-height': optionHeight,
+        '--n-option-opacity-disabled': optionOpacityDisabled,
+        '--n-option-text-color': optionTextColor,
+        '--n-option-text-color-active': optionTextColorActive,
+        '--n-option-text-color-disabled': optionTextColorDisabled,
+        '--n-option-text-color-pressed': optionTextColorPressed,
+        '--n-option-padding': optionPadding,
+        '--n-option-padding-left': getPadding(optionPadding, 'left'),
+        '--n-loading-color': loadingColor,
+        '--n-loading-size': loadingSize
       }
     })
     const exposedProps: InternalExposedProps = {

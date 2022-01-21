@@ -52,7 +52,7 @@ export interface Options {
  * Returns the Absolute (relative to the inner window size) position of the caret in the given element.
  * @param element Input (has to be type='text') or Text Area.
  */
-export function getAbsolutePosition (
+export function getAbsolutePosition(
   element: HTMLInputElement | HTMLTextAreaElement
 ): Position {
   const caretRelPost = getRelativePosition(element)
@@ -69,7 +69,7 @@ export function getAbsolutePosition (
  * Returns the relative position of the caret in the given element.
  * @param element Input (has to be type='text') or Text Area.
  */
-export function getRelativePosition (
+export function getRelativePosition(
   element: HTMLInputElement | HTMLTextAreaElement,
   options: Options = {
     debug: false,
@@ -179,7 +179,6 @@ export function getRelativePosition (
         style.lineHeight = computed.height
       }
     } else {
-      // @ts-expect-error
       style[prop] = computed[prop]
     }
   })
@@ -241,7 +240,7 @@ export function getRelativePosition (
  * @param detectBoundary offsets the position if the position would be outside the window.
  * @param returnOnly if true the element position wont be set.
  */
-export function setElementPositionBasedOnCaret (
+export function setElementPositionBasedOnCaret(
   element: HTMLElement,
   caretElement: HTMLInputElement | HTMLTextAreaElement,
   offset: Point = { top: 0, left: 0 },

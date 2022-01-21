@@ -1,4 +1,4 @@
-# Label Placement Left
+# Label placement left
 
 ```html
 <n-radio-group
@@ -15,8 +15,9 @@
   :rules="rules"
   ref="formRef"
   label-placement="left"
+  require-mark-placement="right-hanging"
   :size="size"
-  :label-width="160"
+  label-width="auto"
   :style="{
     maxWidth: '640px'
   }"

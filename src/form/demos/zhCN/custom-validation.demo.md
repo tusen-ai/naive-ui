@@ -14,9 +14,9 @@
   <n-form-item
     label="飞机场的"
     :validation-status="inputNumberValidationStatus"
-    :feedback="inputNumberFeedback"
   >
     <n-input-number v-model:value="inputNumberValue" />
+    <template #feedback>{{ inputNumberFeedback }}</template>
   </n-form-item>
   <n-form-item
     label="飞机场的"

@@ -51,15 +51,15 @@ export default defineComponent({
           type: 'divider'
         },
         {
-          label: 'lipsum1',
+          label: 'lpsum1',
           key: 'stmt1'
         },
         {
-          label: 'lipsum2',
+          label: 'lpsum2',
           key: 'stmt2'
         },
         {
-          label: 'lipsum3',
+          label: 'lpsum3',
           key: 'stmt3'
         }
       ],

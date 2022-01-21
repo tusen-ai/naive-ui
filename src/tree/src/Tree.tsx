@@ -51,7 +51,8 @@ import {
   InternalTreeInst,
   RenderLabel,
   RenderPrefix,
-  RenderSuffix
+  RenderSuffix,
+  RenderSwitcherIcon
 } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
@@ -63,18 +64,18 @@ import style from './styles/index.cssr'
 
 const ITEM_SIZE = 30 // 24 + 3 + 3
 
-export function createTreeMateOptions<T> (
+export function createTreeMateOptions<T>(
   keyField: string,
   childrenField: string
 ): TreeMateOptions<T, T, T> {
   return {
-    getKey (node: T) {
+    getKey(node: T) {
       return (node as any)[keyField]
     },
-    getChildren (node: T) {
+    getChildren(node: T) {
       return (node as any)[childrenField]
     },
-    getDisabled (node: T) {
+    getDisabled(node: T) {
       return !!((node as any).disabled || (node as any).checkboxDisabled)
     }
   }
@@ -105,14 +106,14 @@ export const treeSharedProps = {
   },
   indeterminateKeys: Array as PropType<Key[]>,
   onUpdateIndeterminateKeys: [Function, Array] as PropType<
-  MaybeArray<OnUpdateKeys>
+    MaybeArray<OnUpdateKeys>
   >,
   'onUpdate:indeterminateKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateKeys>
+    MaybeArray<OnUpdateKeys>
   >,
   onUpdateExpandedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
   'onUpdate:expandedKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateKeys>
+    MaybeArray<OnUpdateKeys>
   >
 } as const
 
@@ -171,32 +172,36 @@ const treeProps = {
     default: true
   },
   virtualScroll: Boolean,
+  watchProps: Array as PropType<
+    Array<'defaultCheckedKeys' | 'defaultSelectedKeys' | 'defaultExpandedKeys'>
+  >,
   renderLabel: Function as PropType<RenderLabel>,
   renderPrefix: Function as PropType<RenderPrefix>,
   renderSuffix: Function as PropType<RenderSuffix>,
+  renderSwitcherIcon: Function as PropType<RenderSwitcherIcon>,
   onDragenter: [Function, Array] as PropType<
-  MaybeArray<(e: TreeDragInfo) => void>
+    MaybeArray<(e: TreeDragInfo) => void>
   >,
   onDragleave: [Function, Array] as PropType<
-  MaybeArray<(e: TreeDragInfo) => void>
+    MaybeArray<(e: TreeDragInfo) => void>
   >,
   onDragend: [Function, Array] as PropType<
-  MaybeArray<(e: TreeDragInfo) => void>
+    MaybeArray<(e: TreeDragInfo) => void>
   >,
   onDragstart: [Function, Array] as PropType<
-  MaybeArray<(e: TreeDragInfo) => void>
+    MaybeArray<(e: TreeDragInfo) => void>
   >,
   onDragover: [Function, Array] as PropType<
-  MaybeArray<(e: TreeDragInfo) => void>
+    MaybeArray<(e: TreeDragInfo) => void>
   >,
   onDrop: [Function, Array] as PropType<MaybeArray<(e: TreeDropInfo) => void>>,
   onUpdateCheckedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
   'onUpdate:checkedKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateKeys>
+    MaybeArray<OnUpdateKeys>
   >,
   onUpdateSelectedKeys: [Function, Array] as PropType<MaybeArray<OnUpdateKeys>>,
   'onUpdate:selectedKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateKeys>
+    MaybeArray<OnUpdateKeys>
   >,
   ...treeSharedProps,
   // internal props for tree-select
@@ -229,7 +234,7 @@ export type TreeProps = ExtractPublicPropTypes<typeof treeProps>
 export default defineComponent({
   name: 'Tree',
   props: treeProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Tree',
@@ -242,27 +247,33 @@ export default defineComponent({
     const selfElRef = ref<HTMLDivElement | null>(null)
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListInstRef = ref<VirtualListInst | null>(null)
-    function getScrollContainer (): HTMLElement | null | undefined {
+    function getScrollContainer(): HTMLElement | null | undefined {
       return virtualListInstRef.value?.listElRef
     }
-    function getScrollContent (): HTMLElement | null | undefined {
+    function getScrollContent(): HTMLElement | null | undefined {
       return virtualListInstRef.value?.itemsElRef
     }
     // We don't expect data source to change so we just determine it once
     const displayTreeMateRef = props.internalDisplayTreeMate
       ? toRef(props, 'internalDisplayTreeMate')
       : computed(() =>
-        createTreeMate<TreeOption>(
-          props.data,
-          createTreeMateOptions(props.keyField, props.childrenField)
+          createTreeMate<TreeOption>(
+            props.data,
+            createTreeMateOptions(props.keyField, props.childrenField)
+          )
         )
-      )
     const dataTreeMateRef = props.internalDataTreeMate
       ? toRef(props, 'internalDataTreeMate')
       : displayTreeMateRef
-    const uncontrolledCheckedKeysRef = ref(
-      props.defaultCheckedKeys || props.checkedKeys
-    )
+    const { watchProps } = props
+    const uncontrolledCheckedKeysRef = ref<Key[]>([])
+    if (watchProps?.includes('defaultCheckedKeys')) {
+      watchEffect(() => {
+        uncontrolledCheckedKeysRef.value = props.defaultCheckedKeys
+      })
+    } else {
+      uncontrolledCheckedKeysRef.value = props.defaultCheckedKeys
+    }
     const controlledCheckedKeysRef = toRef(props, 'checkedKeys')
     const mergedCheckedKeysRef = useMergedState(
       controlledCheckedKeysRef,
@@ -288,19 +299,30 @@ export default defineComponent({
       if (indeterminateKeys !== undefined) return indeterminateKeys
       return checkedStatusRef.value.indeterminateKeys
     })
-    const uncontrolledSelectedKeysRef = ref(
-      props.defaultSelectedKeys || props.selectedKeys
-    )
+    const uncontrolledSelectedKeysRef = ref<Key[]>([])
+    if (watchProps?.includes('defaultSelectedKeys')) {
+      watchEffect(() => {
+        uncontrolledSelectedKeysRef.value = props.defaultSelectedKeys
+      })
+    } else {
+      uncontrolledSelectedKeysRef.value = props.defaultSelectedKeys
+    }
     const controlledSelectedKeysRef = toRef(props, 'selectedKeys')
     const mergedSelectedKeysRef = useMergedState(
       controlledSelectedKeysRef,
       uncontrolledSelectedKeysRef
     )
-    const uncontrolledExpandedKeysRef = ref(
-      props.defaultExpandAll
+    const uncontrolledExpandedKeysRef = ref<Key[]>([])
+    const initUncontrolledExpandedKeys = (): void => {
+      uncontrolledExpandedKeysRef.value = props.defaultExpandAll
         ? dataTreeMateRef.value!.getNonLeafKeys()
         : props.defaultExpandedKeys
-    )
+    }
+    if (watchProps?.includes('defaultExpandedKeys')) {
+      watchEffect(initUncontrolledExpandedKeys)
+    } else {
+      initUncontrolledExpandedKeys()
+    }
     const controlledExpandedKeysRef = toRef(props, 'expandedKeys')
     const mergedExpandedKeysRef = useMergedState(
       controlledExpandedKeysRef,
@@ -393,7 +415,7 @@ export default defineComponent({
         uncontrolledHighlightKeySetRef.value = new Set()
       }
     })
-    async function triggerLoading (node: TmNode): Promise<void> {
+    async function triggerLoading(node: TmNode): Promise<void> {
       const { onLoad } = props
       if (!onLoad) {
         if (__DEV__) {
@@ -535,12 +557,12 @@ export default defineComponent({
       else return fNodesRef.value
     })
 
-    function syncScrollbar (): void {
+    function syncScrollbar(): void {
       const { value: scrollbarInst } = scrollbarInstRef
       if (scrollbarInst) scrollbarInst.sync()
     }
 
-    function handleAfterEnter (): void {
+    function handleAfterEnter(): void {
       aipRef.value = false
       if (props.virtualScroll) {
         // If virtual scroll, we won't listen to resize during animation, so
@@ -550,12 +572,12 @@ export default defineComponent({
       }
     }
 
-    function getOptionsByKeys (keys: Key[]): Array<TreeOption | null> {
+    function getOptionsByKeys(keys: Key[]): Array<TreeOption | null> {
       const { getNode } = dataTreeMateRef.value!
       return keys.map((key) => getNode(key)?.rawNode || null)
     }
 
-    function doUpdateExpandedKeys (
+    function doUpdateExpandedKeys(
       value: Key[],
       option: Array<TreeOption | null>
     ): void {
@@ -567,7 +589,7 @@ export default defineComponent({
       if (_onUpdateExpandedKeys) call(_onUpdateExpandedKeys, value, option)
       if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, value, option)
     }
-    function doUpdateCheckedKeys (
+    function doUpdateCheckedKeys(
       value: Key[],
       option: Array<TreeOption | null>
     ): void {
@@ -579,7 +601,7 @@ export default defineComponent({
       if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, value, option)
       if (_onUpdateCheckedKeys) call(_onUpdateCheckedKeys, value, option)
     }
-    function doUpdateIndeterminateKeys (
+    function doUpdateIndeterminateKeys(
       value: Key[],
       option: Array<TreeOption | null>
     ): void {
@@ -594,7 +616,7 @@ export default defineComponent({
         call(onUpdateIndeterminateKeys, value, option)
       }
     }
-    function doUpdateSelectedKeys (
+    function doUpdateSelectedKeys(
       value: Key[],
       option: Array<TreeOption | null>
     ): void {
@@ -607,52 +629,52 @@ export default defineComponent({
       if (_onUpdateSelectedKeys) call(_onUpdateSelectedKeys, value, option)
     }
     // Drag & Drop
-    function doDragEnter (info: TreeDragInfo): void {
+    function doDragEnter(info: TreeDragInfo): void {
       const { onDragenter } = props
       if (onDragenter) call(onDragenter, info)
     }
-    function doDragLeave (info: TreeDragInfo): void {
+    function doDragLeave(info: TreeDragInfo): void {
       const { onDragleave } = props
       if (onDragleave) call(onDragleave, info)
     }
-    function doDragEnd (info: TreeDragInfo): void {
+    function doDragEnd(info: TreeDragInfo): void {
       const { onDragend } = props
       if (onDragend) call(onDragend, info)
     }
-    function doDragStart (info: TreeDragInfo): void {
+    function doDragStart(info: TreeDragInfo): void {
       const { onDragstart } = props
       if (onDragstart) call(onDragstart, info)
     }
-    function doDragOver (info: TreeDragInfo): void {
+    function doDragOver(info: TreeDragInfo): void {
       const { onDragover } = props
       if (onDragover) call(onDragover, info)
     }
-    function doDrop (info: TreeDropInfo): void {
+    function doDrop(info: TreeDropInfo): void {
       const { onDrop } = props
       if (onDrop) call(onDrop, info)
     }
-    function resetDndState (): void {
+    function resetDndState(): void {
       resetDragState()
       resetDropState()
     }
-    function resetDragState (): void {
+    function resetDragState(): void {
       draggingNodeRef.value = null
     }
-    function resetDropState (): void {
+    function resetDropState(): void {
       droppingOffsetLevelRef.value = 0
       droppingNodeRef.value = null
       droppingMouseNodeRef.value = null
       droppingPositionRef.value = null
       resetDragExpandState()
     }
-    function resetDragExpandState (): void {
+    function resetDragExpandState(): void {
       if (expandTimerId) {
         window.clearTimeout(expandTimerId)
         expandTimerId = null
       }
       nodeKeyToBeExpanded = null
     }
-    function handleCheck (node: TmNode, checked: boolean): void {
+    function handleCheck(node: TmNode, checked: boolean): void {
       // We don't guard for leaf only since we have done it in view layer
       if (props.disabled || node.disabled) {
         return
@@ -673,7 +695,7 @@ export default defineComponent({
         getOptionsByKeys(indeterminateKeys)
       )
     }
-    function toggleExpand (key: Key): void {
+    function toggleExpand(key: Key): void {
       if (props.disabled) return
       const { value: mergedExpandedKeys } = mergedExpandedKeysRef
       const index = mergedExpandedKeys.findIndex(
@@ -695,11 +717,11 @@ export default defineComponent({
         doUpdateExpandedKeys(nextKeys, getOptionsByKeys(nextKeys))
       }
     }
-    function handleSwitcherClick (node: TmNode): void {
+    function handleSwitcherClick(node: TmNode): void {
       if (props.disabled || aipRef.value) return
       toggleExpand(node.key)
     }
-    function handleSelect (node: TmNode): void {
+    function handleSelect(node: TmNode): void {
       if (
         props.disabled ||
         node.disabled ||
@@ -748,7 +770,7 @@ export default defineComponent({
       }
     }
 
-    function expandDragEnterNode (node: TmNode): void {
+    function expandDragEnterNode(node: TmNode): void {
       if (expandTimerId) {
         window.clearTimeout(expandTimerId)
         expandTimerId = null
@@ -784,27 +806,27 @@ export default defineComponent({
     }
 
     // Dnd
-    function handleDragEnter ({ event, node }: InternalDragInfo): void {
+    function handleDragEnter({ event, node }: InternalDragInfo): void {
       // node should be a tmNode
       if (!props.draggable || props.disabled || node.disabled) return
       handleDragOver({ event, node }, false)
       doDragEnter({ event, node: node.rawNode })
     }
-    function handleDragLeave ({ event, node }: InternalDragInfo): void {
+    function handleDragLeave({ event, node }: InternalDragInfo): void {
       if (!props.draggable || props.disabled || node.disabled) return
       doDragLeave({ event, node: node.rawNode })
     }
-    function handleDragLeaveTree (e: DragEvent): void {
+    function handleDragLeaveTree(e: DragEvent): void {
       if (e.target !== e.currentTarget) return
       resetDropState()
     }
     // Dragend is ok, we don't need to add global listener to reset drag status
-    function handleDragEnd ({ event, node }: InternalDragInfo): void {
+    function handleDragEnd({ event, node }: InternalDragInfo): void {
       resetDndState()
       if (!props.draggable || props.disabled || node.disabled) return
       doDragEnd({ event, node: node.rawNode })
     }
-    function handleDragStart ({ event, node }: InternalDragInfo): void {
+    function handleDragStart({ event, node }: InternalDragInfo): void {
       if (!props.draggable || props.disabled || node.disabled) return
       // Most of time, the image will block user's view
       emptyImage && event.dataTransfer?.setDragImage(emptyImage, 0, 0)
@@ -812,7 +834,7 @@ export default defineComponent({
       draggingNodeRef.value = node
       doDragStart({ event, node: node.rawNode })
     }
-    function handleDragOver (
+    function handleDragOver(
       { event, node }: InternalDragInfo,
       emit: boolean = true
     ): void {
@@ -1012,7 +1034,7 @@ export default defineComponent({
       droppingPositionRef.value = finalDropPosition
       droppingNodeRef.value = finalDropNode
     }
-    function handleDrop ({ event, node, dropPosition }: InternalDropInfo): void {
+    function handleDrop({ event, node, dropPosition }: InternalDropInfo): void {
       if (!props.draggable || props.disabled || node.disabled) {
         return
       }
@@ -1068,13 +1090,13 @@ export default defineComponent({
       })
       resetDndState()
     }
-    function handleScroll (): void {
+    function handleScroll(): void {
       syncScrollbar()
     }
-    function handleResize (): void {
+    function handleResize(): void {
       syncScrollbar()
     }
-    function handleFocusout (e: FocusEvent): void {
+    function handleFocusout(e: FocusEvent): void {
       if (props.virtualScroll || props.internalScrollable) {
         const { value: scrollbarInst } = scrollbarInstRef
         if (scrollbarInst?.containerRef?.contains(e.relatedTarget as Element)) {
@@ -1133,6 +1155,7 @@ export default defineComponent({
       renderLabelRef: toRef(props, 'renderLabel'),
       renderPrefixRef: toRef(props, 'renderPrefix'),
       renderSuffixRef: toRef(props, 'renderSuffix'),
+      renderSwitcherIconRef: toRef(props, 'renderSwitcherIcon'),
       labelFieldRef: toRef(props, 'labelField'),
       handleSwitcherClick,
       handleDragEnd,
@@ -1181,23 +1204,23 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--arrow-color': arrowColor,
-          '--loading-color': loadingColor,
-          '--bezier': cubicBezierEaseInOut,
-          '--font-size': fontSize,
-          '--node-border-radius': nodeBorderRadius,
-          '--node-color-active': nodeColorActive,
-          '--node-color-hover': nodeColorHover,
-          '--node-color-pressed': nodeColorPressed,
-          '--node-text-color': nodeTextColor,
-          '--node-text-color-disabled': nodeTextColorDisabled,
-          '--drop-mark-color': dropMarkColor
+          '--n-arrow-color': arrowColor,
+          '--n-loading-color': loadingColor,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-font-size': fontSize,
+          '--n-node-border-radius': nodeBorderRadius,
+          '--n-node-color-active': nodeColorActive,
+          '--n-node-color-hover': nodeColorHover,
+          '--n-node-color-pressed': nodeColorPressed,
+          '--n-node-text-color': nodeTextColor,
+          '--n-node-text-color-disabled': nodeTextColorDisabled,
+          '--n-drop-mark-color': dropMarkColor
         }
       }),
       ...exposedMethods
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       blockNode,
@@ -1205,6 +1228,7 @@ export default defineComponent({
       draggable,
       disabled,
       internalFocusable,
+      checkable,
       handleKeyup,
       handleKeydown,
       handleFocusout
@@ -1213,6 +1237,7 @@ export default defineComponent({
     const tabindex = mergedFocusable ? '0' : undefined
     const treeClass = [
       `${mergedClsPrefix}-tree`,
+      checkable && `${mergedClsPrefix}-tree--checkable`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
       blockLine && `${mergedClsPrefix}-tree--block-line`
     ]

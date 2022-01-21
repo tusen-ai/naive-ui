@@ -1,4 +1,4 @@
-# Set Check Strategy
+# Setting check strategy
 
 Set the way to show checked options. `all` means showing all checked nodes. `parent` means showing all checked parent nodes when all child node are checked. `child` means showing all child nodes.
 

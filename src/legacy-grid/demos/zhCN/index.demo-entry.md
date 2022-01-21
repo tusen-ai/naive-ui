@@ -3,7 +3,7 @@
 <!--single-column-->
 
 <n-alert title="警告" type="warning" style="margin-bottom: 16px">
-  此版栅格不会增加新功能。<br />绝大多数情况下你应该使用<router-link to="grid" #="{ navigate, href }" custom><n-a :href="href" @click="navigate">栅格</n-a></router-link>。
+绝大多数情况下你应该使用<router-link to="grid" #="{ navigate, href }" custom><n-a :href="href" @click="navigate">栅格</n-a></router-link>。
 </n-alert>
 
 一个基本的栅格系统。

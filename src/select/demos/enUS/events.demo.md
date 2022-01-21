@@ -1,4 +1,4 @@
-# UpdateValue Event
+# UpdateValue event
 
 Why make the `update:value` event an example? Because there's so little to write.
 

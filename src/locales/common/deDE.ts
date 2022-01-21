@@ -25,6 +25,11 @@ const deDE: NLocale = {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
+    yearTypeFormat: 'yyyy',
+    monthTypeFormat: 'MM-yyyy',
+    dateFormat: 'dd-MM-yyyy',
+    dateTimeFormat: 'dd-MM-yyyy HH:mm:ss',
+    quarterFormat: 'yyyy-qqq',
     clear: 'Löschen',
     now: 'Jetzt',
     confirm: 'Bestätigen',
@@ -33,6 +38,9 @@ const deDE: NLocale = {
     datePlaceholder: 'Datum auswählen',
     datetimePlaceholder: 'Datum und Uhrzeit auswählen',
     monthPlaceholder: 'Monat auswählen',
+    // FIXME: translation needed
+    yearPlaceholder: 'Select Year',
+    quarterPlaceholder: 'Select Quarter',
     startDatePlaceholder: 'Anfangsdatum',
     endDatePlaceholder: 'Enddatum',
     startDatetimePlaceholder: 'Anfangsdatum und Uhrzeit',
@@ -91,6 +99,16 @@ const deDE: NLocale = {
     import: 'Importieren',
     export: 'Exportieren',
     restore: 'Auf Standard zurücksetzen'
+  },
+  // TODO: translation
+  Image: {
+    tipPrevious: 'Previous picture (←)',
+    tipNext: 'Next picture (→)',
+    tipCounterclockwise: 'Counterclockwise',
+    tipClockwise: 'Clockwise',
+    tipZoomOut: 'Zoom out',
+    tipZoomIn: 'Zoom in',
+    tipClose: 'Close (Esc)'
   }
 }
 

@@ -1,6 +1,6 @@
-import { PropType, VNodeChild } from 'vue'
-
-export type MessageType = 'info' | 'success' | 'warning' | 'error' | 'loading'
+import { ExtractPropTypes, PropType, VNodeChild } from 'vue'
+import { ExtractPublicPropTypes } from '../../_utils'
+import { MessageType } from './types'
 
 export const messageProps = {
   icon: Function as PropType<() => VNodeChild>,
@@ -9,7 +9,7 @@ export const messageProps = {
     default: 'info'
   },
   content: [String, Number, Function] as PropType<
-  string | number | (() => VNodeChild)
+    string | number | (() => VNodeChild)
   >,
   closable: Boolean,
   keepAliveOnHover: Boolean,
@@ -17,3 +17,6 @@ export const messageProps = {
   onMouseenter: Function as PropType<(e: MouseEvent) => void>,
   onMouseleave: Function as PropType<(e: MouseEvent) => void>
 } as const
+
+export type MessageProps = ExtractPublicPropTypes<typeof messageProps>
+export type MessageSetupProps = ExtractPropTypes<typeof messageProps>

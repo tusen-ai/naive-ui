@@ -56,6 +56,9 @@ const switchProps = {
     type: [String, Number, Boolean] as PropType<string | number | boolean>,
     default: false
   },
+  railStyle: Function as PropType<
+  (params: { focused: boolean, checked: boolean }) => string | CSSProperties
+  >,
   /** @deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -93,7 +96,16 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+    const checkedRef = computed(() => {
+      return mergedValueRef.value === props.checkedValue
+    })
     const pressedRef = ref(false)
+    const focusedRef = ref(false)
+    const mergedRailStyleRef = computed(() => {
+      const { railStyle } = props
+      if (!railStyle) return undefined
+      return railStyle({ focused: focusedRef.value, checked: checkedRef.value })
+    })
     function doUpdateValue (value: string | number | boolean): void {
       const {
         'onUpdate:value': _onUpdateValue,
@@ -117,6 +129,7 @@ export default defineComponent({
       nTriggerFormBlur()
     }
     function handleClick (): void {
+      if (props.loading) return
       if (!mergedDisabledRef.value) {
         if (mergedValueRef.value !== props.checkedValue) {
           doUpdateValue(props.checkedValue)
@@ -126,19 +139,23 @@ export default defineComponent({
       }
     }
     function handleFocus (): void {
+      focusedRef.value = true
       doFocus()
     }
     function handleBlur (): void {
+      focusedRef.value = false
       doBlur()
       pressedRef.value = false
     }
     function handleKeyup (e: KeyboardEvent): void {
+      if (props.loading) return
       if (e.code === 'Space') {
         doUpdateValue(!mergedValueRef.value)
         pressedRef.value = false
       }
     }
     function handleKeydown (e: KeyboardEvent): void {
+      if (props.loading) return
       if (e.code === 'Space') {
         e.preventDefault()
         pressedRef.value = true
@@ -150,9 +167,11 @@ export default defineComponent({
       handleFocus,
       handleKeyup,
       handleKeydown,
+      mergedRailStyle: mergedRailStyleRef,
       pressed: pressedRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
+      checked: checkedRef,
       mergedDisabled: mergedDisabledRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
@@ -183,25 +202,25 @@ export default defineComponent({
             ? railWidth
             : pxfy(depx(railWidth) + depx(buttonHeight) - depx(railHeight))
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--button-border-radius': buttonBorderRadius,
-          '--button-box-shadow': buttonBoxShadow,
-          '--button-color': buttonColor,
-          '--button-width': buttonWidth,
-          '--button-width-pressed': buttonWidthPressed,
-          '--button-height': buttonHeight,
-          '--height': height,
-          '--offset': offset,
-          '--opacity-disabled': opacityDisabled,
-          '--rail-border-radius': railBorderRadius,
-          '--rail-color': railColor,
-          '--rail-color-active': railColorActive,
-          '--rail-height': railHeight,
-          '--rail-width': railWidth,
-          '--width': width,
-          '--box-shadow-focus': boxShadowFocus,
-          '--loading-color': loadingColor,
-          '--text-color': textColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-button-border-radius': buttonBorderRadius,
+          '--n-button-box-shadow': buttonBoxShadow,
+          '--n-button-color': buttonColor,
+          '--n-button-width': buttonWidth,
+          '--n-button-width-pressed': buttonWidthPressed,
+          '--n-button-height': buttonHeight,
+          '--n-height': height,
+          '--n-offset': offset,
+          '--n-opacity-disabled': opacityDisabled,
+          '--n-rail-border-radius': railBorderRadius,
+          '--n-rail-color': railColor,
+          '--n-rail-color-active': railColorActive,
+          '--n-rail-height': railHeight,
+          '--n-rail-width': railWidth,
+          '--n-width': width,
+          '--n-box-shadow-focus': boxShadowFocus,
+          '--n-loading-color': loadingColor,
+          '--n-text-color': textColor
         }
       })
     }
@@ -209,12 +228,11 @@ export default defineComponent({
   render () {
     const {
       mergedClsPrefix,
-      mergedValue,
       mergedDisabled,
-      checkedValue,
+      checked,
+      mergedRailStyle,
       $slots
     } = this
-    const checked = mergedValue === checkedValue
     const { checked: checkedSlot, unchecked: uncheckedSlot } = $slots
     return (
       <div
@@ -225,6 +243,7 @@ export default defineComponent({
           checked && `${mergedClsPrefix}-switch--active`,
           mergedDisabled && `${mergedClsPrefix}-switch--disabled`,
           this.round && `${mergedClsPrefix}-switch--round`,
+          this.loading && `${mergedClsPrefix}-switch--loading`,
           this.pressed && `${mergedClsPrefix}-switch--pressed`
         ]}
         tabindex={!this.mergedDisabled ? 0 : undefined}
@@ -235,7 +254,11 @@ export default defineComponent({
         onKeyup={this.handleKeyup}
         onKeydown={this.handleKeydown}
       >
-        <div class={`${mergedClsPrefix}-switch__rail`} aria-hidden="true">
+        <div
+          class={`${mergedClsPrefix}-switch__rail`}
+          aria-hidden="true"
+          style={mergedRailStyle}
+        >
           {(checkedSlot || uncheckedSlot) && (
             <div
               aria-hidden

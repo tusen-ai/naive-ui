@@ -25,6 +25,11 @@ const nbNO: NLocale = {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
+    yearTypeFormat: 'yyyy',
+    monthTypeFormat: 'MM.yyyy',
+    dateFormat: 'dd.MM.yyyy',
+    dateTimeFormat: 'dd.MM.yyyy HH:mm:ss',
+    quarterFormat: 'yyyy-qqq',
     clear: 'Tøm',
     now: 'Nå',
     confirm: 'Bekreft',
@@ -33,6 +38,9 @@ const nbNO: NLocale = {
     datePlaceholder: 'Velg dato',
     datetimePlaceholder: 'Velg dato og tid',
     monthPlaceholder: 'Velg måned',
+    // FIXME: translation needed
+    yearPlaceholder: 'Select Year',
+    quarterPlaceholder: 'Select Quarter',
     startDatePlaceholder: 'Startdato',
     endDatePlaceholder: 'Sluttdato',
     startDatetimePlaceholder: 'Startdato og -tid',
@@ -91,6 +99,16 @@ const nbNO: NLocale = {
     import: 'Importer',
     export: 'Eksporter',
     restore: 'Nullstill til standardvalg'
+  },
+  // TODO: translation
+  Image: {
+    tipPrevious: 'Previous picture (←)',
+    tipNext: 'Next picture (→)',
+    tipCounterclockwise: 'Counterclockwise',
+    tipClockwise: 'Clockwise',
+    tipZoomOut: 'Zoom out',
+    tipZoomIn: 'Zoom in',
+    tipClose: 'Close (Esc)'
   }
 }
 

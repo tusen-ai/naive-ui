@@ -2,40 +2,40 @@ import { c, cB, cM, cE, cNotM } from '../../../_utils/cssr'
 import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-up.cssr'
 
 // vars:
-// --bezier
-// --font-size
-// --padding
-// --border-radius
-// --option-height
-// --option-prefix-width
-// --option-icon-prefix-width
-// --option-suffix-width
-// --option-icon-suffix-width
-// --color
-// --option-color-hover
-// --option-color-active
-// --divider-color
-// --option-text-color
-// --option-text-color-hover
-// --option-text-color-active
-// --option-text-color-child-active
-// --prefix-color
-// --suffix-color
-// --option-icon-size
-// --option-opacity-disabled
+// --n-bezier
+// --n-font-size
+// --n-padding
+// --n-border-radius
+// --n-option-height
+// --n-option-prefix-width
+// --n-option-icon-prefix-width
+// --n-option-suffix-width
+// --n-option-icon-suffix-width
+// --n-color
+// --n-option-color-hover
+// --n-option-color-active
+// --n-divider-color
+// --n-option-text-color
+// --n-option-text-color-hover
+// --n-option-text-color-active
+// --n-option-text-color-child-active
+// --n-prefix-color
+// --n-suffix-color
+// --n-option-icon-size
+// --n-option-opacity-disabled
 
 // shared with popover
-// --box-shadow
+// --n-box-shadow
 
 export default cB('dropdown-menu', `
   transform-origin: inherit;
-  padding: var(--padding);
-  background-color: var(--color);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
+  padding: var(--n-padding);
+  background-color: var(--n-color);
+  border-radius: var(--n-border-radius);
+  box-shadow: var(--n-box-shadow);
   transition:
-    background-color .3s var(--bezier),
-    box-shadow .3s var(--bezier);
+    background-color .3s var(--n-bezier),
+    box-shadow .3s var(--n-bezier);
 `, [
   fadeInScaleUpTransition(),
   cB('dropdown-option', `
@@ -57,68 +57,68 @@ export default cB('dropdown-menu', `
     cB('dropdown-option-body', `
       display: flex;
       cursor: pointer;
-      height: var(--option-height);
-      line-height: var(--option-height);
-      font-size: var(--font-size);
-      color: var(--option-text-color);
+      height: var(--n-option-height);
+      line-height: var(--n-option-height);
+      font-size: var(--n-font-size);
+      color: var(--n-option-text-color);
       transition:
-        background-color .3s var(--bezier),
-        color .3s var(--bezier);
+        background-color .3s var(--n-bezier),
+        color .3s var(--n-bezier);
     `, [
       cM('pending', [
         cNotM('disabled', {
-          color: 'var(--option-text-color-hover)',
-          backgroundColor: 'var(--option-color-hover)'
+          color: 'var(--n-option-text-color-hover)',
+          backgroundColor: 'var(--n-option-color-hover)'
         }),
         cE('prefix, suffix', {
-          color: 'var(--option-text-color-hover)'
+          color: 'var(--n-option-text-color-hover)'
         })
       ]),
       cM('active', [
         cNotM('disabled', {
-          color: 'var(--option-text-color-active)',
-          backgroundColor: 'var(--option-color-active)'
+          color: 'var(--n-option-text-color-active)',
+          backgroundColor: 'var(--n-option-color-active)'
         }),
         cE('prefix, suffix', {
-          color: 'var(--option-text-color-active)'
+          color: 'var(--n-option-text-color-active)'
         })
       ]),
       cM('disabled', {
         cursor: 'not-allowed',
-        opacity: 'var(--option-opacity-disabled)'
+        opacity: 'var(--n-option-opacity-disabled)'
       }),
       cM('child-active', {
-        color: 'var(--option-text-color-child-active)'
+        color: 'var(--n-option-text-color-child-active)'
       }, [
         cE('prefix, suffix', {
-          color: 'var(--option-text-color-child-active)'
+          color: 'var(--n-option-text-color-child-active)'
         })
       ]),
       cM('group', {
-        fontSize: 'calc(var(--font-size) - 1px)',
-        color: 'var(--group-header-text-color)'
+        fontSize: 'calc(var(--n-font-size) - 1px)',
+        color: 'var(--n-group-header-text-color)'
       }, [
         cE('prefix', {
-          width: 'calc(var(--option-prefix-width) / 2)'
+          width: 'calc(var(--n-option-prefix-width) / 2)'
         }, [
           cM('show-icon', {
-            width: 'calc(var(--option-icon-prefix-width) / 2)'
+            width: 'calc(var(--n-option-icon-prefix-width) / 2)'
           })
         ])
       ]),
       cE('prefix', `
-        width: var(--option-prefix-width);
+        width: var(--n-option-prefix-width);
         display: flex;
         justify-content: center;
         align-items: center;
-        color: var(--prefix-color);
-        transition: color .3s var(--bezier);
+        color: var(--n-prefix-color);
+        transition: color .3s var(--n-bezier);
       `, [
         cM('show-icon', {
-          width: 'var(--option-icon-prefix-width)'
+          width: 'var(--n-option-icon-prefix-width)'
         }),
         cB('icon', {
-          fontSize: 'var(--option-icon-size)'
+          fontSize: 'var(--n-option-icon-size)'
         })
       ]),
       cE('label', {
@@ -132,16 +132,16 @@ export default cB('dropdown-menu', `
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        min-width: var(--option-suffix-width);
+        min-width: var(--n-option-suffix-width);
         padding: 0 8px;
-        transition: color .3s var(--bezier);
-        color: var(--suffix-color);
+        transition: color .3s var(--n-bezier);
+        color: var(--n-suffix-color);
       `, [
         cM('has-submenu', {
-          width: 'var(--option-icon-suffix-width)'
+          width: 'var(--n-option-icon-suffix-width)'
         }),
         cB('icon', {
-          fontSize: 'var(--option-icon-size)'
+          fontSize: 'var(--n-option-icon-size)'
         })
       ]),
       cB('dropdown-menu', {
@@ -158,8 +158,8 @@ export default cB('dropdown-menu', `
     `)
   ]),
   cB('dropdown-divider', `
-    transition: background-color .3s var(--bezier);
-    background-color: var(--divider-color);
+    transition: background-color .3s var(--n-bezier);
+    background-color: var(--n-divider-color);
     height: 1px;
     margin: 4px 0;
   `),

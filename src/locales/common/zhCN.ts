@@ -25,6 +25,11 @@ const zhCN: NLocale = {
     yearFormat: 'yyyy年',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
+    yearTypeFormat: 'yyyy',
+    monthTypeFormat: 'yyyy-MM',
+    dateFormat: 'yyyy-MM-dd',
+    dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
+    quarterFormat: 'yyyy-qqq',
     clear: '清除',
     now: '此刻',
     confirm: '确认',
@@ -33,6 +38,8 @@ const zhCN: NLocale = {
     datePlaceholder: '选择日期',
     datetimePlaceholder: '选择日期时间',
     monthPlaceholder: '选择月份',
+    yearPlaceholder: '选择年份',
+    quarterPlaceholder: '选择季度',
     startDatePlaceholder: '开始日期',
     endDatePlaceholder: '结束日期',
     startDatetimePlaceholder: '开始日期时间',
@@ -91,6 +98,15 @@ const zhCN: NLocale = {
     import: '导入',
     export: '导出',
     restore: '恢复默认'
+  },
+  Image: {
+    tipPrevious: '上一张（←）',
+    tipNext: '下一张（→）',
+    tipCounterclockwise: '向左旋转',
+    tipClockwise: '向右旋转',
+    tipZoomOut: '缩小',
+    tipZoomIn: '放大',
+    tipClose: '关闭（Esc）'
   }
 }
 

@@ -15,6 +15,7 @@ display-directive
 addable
 before-leave
 no-pane
+update-bar-manually.vue
 ```
 
 ## API
@@ -49,7 +50,7 @@ no-pane
 | tab | `string \| VNode \| () => VNodeChild` | `undefined` | Tab label. |
 | name | `string \| number` | `undefined` | Required, the name of the tab. |
 
-### TabPane Props
+### Tab Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -77,3 +78,9 @@ no-pane
 | Name    | Parameters | Description  |
 | ------- | ---------- | ------------ |
 | default | `()`       | Tab content. |
+
+### Tabs Methods
+
+| Name            | Type         | Description              | Version |
+| --------------- | ------------ | ------------------------ | ------- |
+| syncBarPosition | `() => void` | Sync tab bar's position. | 2.24.0  |

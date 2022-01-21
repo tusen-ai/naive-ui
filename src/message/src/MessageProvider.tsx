@@ -15,21 +15,13 @@ import {
   CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
-import { ExtractPublicPropTypes, omit } from '../../_utils'
+import { omit } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import type { MessageTheme } from '../styles'
+import type { MessageOptions, MessageType } from './types'
 import MessageEnvironment from './MessageEnvironment'
-import { MessageTheme } from '../styles'
-
-export interface MessageOptions {
-  duration?: number
-  closable?: boolean
-  keepAliveOnHover?: boolean
-  icon?: () => VNodeChild
-  onClose?: () => void
-  onLeave?: () => void
-  onAfterLeave?: () => void
-}
 
 type ContentType = string | (() => VNodeChild)
 
@@ -50,6 +42,7 @@ export interface MessageReactive {
   duration?: number
   closable?: boolean
   keepAliveOnHover?: boolean
+  type: MessageType
   icon?: () => VNodeChild
   onClose?: () => void
   destroy: () => void
@@ -131,7 +124,10 @@ export default defineComponent({
       mergedClsPrefixRef
     })
     provide(messageApiInjectionKey, api)
-    function create (content: ContentType, options = {}): MessageReactive {
+    function create (
+      content: ContentType,
+      options: MessageOptions & { type: MessageType }
+    ): MessageReactive {
       const key = createId()
       const messageReactive = reactive({
         ...options,

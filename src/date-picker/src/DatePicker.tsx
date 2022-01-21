@@ -21,12 +21,14 @@ import { format, getTime, isValid, getYear, getMonth } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
 import { happensIn } from 'seemly'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
-import { InputInst, InputProps, NInput } from '../../input'
+import type { DatePickerTheme } from '../styles/light'
+import type { InputInst, InputProps } from '../../input'
+import { NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import { useFormItem, useTheme, useConfig, useLocale } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { DateIcon, ToIcon } from '../../_internal/icons'
-import { warn, call, useAdjustedTo, createKey } from '../../_utils'
+import { warn, call, useAdjustedTo, createKey, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { datePickerLight } from '../styles'
 import { strictParse } from './utils'
@@ -34,12 +36,7 @@ import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
-import {
-  MONTH_ITEM_HEIGHT,
-  START_YEAR,
-  DATE_FORMAT,
-  DatePickerType
-} from './config'
+import { MONTH_ITEM_HEIGHT, START_YEAR, DatePickerType } from './config'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -48,7 +45,11 @@ import type {
   IsDateDisabled,
   IsTimeDisabled,
   Shortcuts,
-  FirstDayOfWeek
+  FirstDayOfWeek,
+  DefaultTime,
+  FormattedValue,
+  OnUpdateFormattedValue,
+  OnUpdateFormattedValueImpl
 } from './interface'
 import { datePickerInjectionKey } from './interface'
 import DatetimePanel from './panel/datetime'
@@ -57,7 +58,6 @@ import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
 import style from './styles/index.cssr'
-import { DatePickerTheme } from '../styles/light'
 
 const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),
@@ -68,10 +68,9 @@ const datePickerProps = {
   },
   clearable: Boolean,
   updateValueOnClose: Boolean,
-  defaultValue: {
-    type: [Number, Array] as PropType<Value | null>,
-    default: null
-  },
+  defaultValue: [Number, Array] as PropType<Value | null>,
+  defaultFormattedValue: [String, Array] as PropType<FormattedValue | null>,
+  defaultTime: [Number, String, Array] as PropType<DefaultTime>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -81,11 +80,13 @@ const datePickerProps = {
     default: 'bottom-start'
   },
   value: [Number, Array] as PropType<Value | null>,
+  formattedValue: [String, Array] as PropType<FormattedValue | null>,
   size: String as PropType<'small' | 'medium' | 'large'>,
   type: {
     type: String as PropType<DatePickerType>,
     default: 'date'
   },
+  valueFormat: String,
   separator: String,
   placeholder: String,
   startPlaceholder: String,
@@ -111,24 +112,18 @@ const datePickerProps = {
   onUpdateShow: [Function, Array] as PropType<
   MaybeArray<(show: boolean) => void>
   >,
+  'onUpdate:formattedValue': [Function, Array] as PropType<
+  MaybeArray<OnUpdateFormattedValue>
+  >,
+  onUpdateFormattedValue: [Function, Array] as PropType<
+  MaybeArray<OnUpdateFormattedValue>
+  >,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onFocus: [Function, Array] as PropType<(e: FocusEvent) => void>,
   onBlur: [Function, Array] as PropType<(e: FocusEvent) => void>,
   // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'data-picker',
-          '`on-change` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
 export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
@@ -138,6 +133,16 @@ export default defineComponent({
   name: 'DatePicker',
   props: datePickerProps,
   setup (props, { slots }) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange !== undefined) {
+          warnOnce(
+            'data-picker',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
     const { localeRef, dateLocaleRef } = useLocale('DatePicker')
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef } = formItem
@@ -153,8 +158,76 @@ export default defineComponent({
     const uncontrolledShowRef = ref<boolean>(false)
     const controlledShowRef = toRef(props, 'show')
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
-    const uncontrolledValueRef = ref(props.defaultValue)
-    const controlledValueRef = computed(() => props.value)
+    const dateFnsOptionsRef = computed(() => {
+      return {
+        locale: dateLocaleRef.value.locale
+      }
+    })
+
+    const mergedFormatRef = computed(() => {
+      const { format } = props
+      if (format) return format
+      switch (props.type) {
+        case 'date':
+        case 'daterange':
+          return localeRef.value.dateFormat
+        case 'datetime':
+        case 'datetimerange':
+          return localeRef.value.dateTimeFormat
+        case 'year':
+          return localeRef.value.yearTypeFormat
+        case 'month':
+          return localeRef.value.monthTypeFormat
+        case 'quarter':
+          return localeRef.value.quarterFormat
+      }
+    })
+    const mergedValueFormatRef = computed(() => {
+      return props.valueFormat ?? mergedFormatRef.value
+    })
+
+    function getTimestampValue (value: FormattedValue | null): Value | null {
+      if (value === null) return null
+      const { value: mergedValueFormat } = mergedValueFormatRef
+      const { value: dateFnsOptions } = dateFnsOptionsRef
+      if (Array.isArray(value)) {
+        return [
+          strictParse(
+            value[0],
+            mergedValueFormat,
+            new Date(),
+            dateFnsOptions
+          ).getTime(),
+          strictParse(
+            value[1],
+            mergedValueFormat,
+            new Date(),
+            dateFnsOptions
+          ).getTime()
+        ]
+      }
+      return strictParse(
+        value,
+        mergedValueFormat,
+        new Date(),
+        dateFnsOptions
+      ).getTime()
+    }
+
+    const { defaultFormattedValue, defaultValue } = props
+
+    const uncontrolledValueRef = ref(
+      (defaultFormattedValue !== undefined
+        ? getTimestampValue(defaultFormattedValue)
+        : defaultValue) ?? null
+    )
+    const controlledValueRef = computed(() => {
+      const { formattedValue } = props
+      if (formattedValue !== undefined) {
+        return getTimestampValue(formattedValue)
+      }
+      return props.value
+    })
     const mergedValueRef = useMergedState(
       controlledValueRef,
       uncontrolledValueRef
@@ -175,11 +248,6 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const dateFnsOptionsRef = computed(() => {
-      return {
-        locale: dateLocaleRef.value.locale
-      }
-    })
     const timePickerSizeRef = computed<TimePickerSize>(() => {
       return (
         NConfigProvider?.mergedComponentPropsRef.value?.DatePicker
@@ -190,17 +258,25 @@ export default defineComponent({
       return ['daterange', 'datetimerange'].includes(props.type)
     })
     const localizedPlacehoderRef = computed(() => {
-      if (props.placeholder === undefined) {
-        if (props.type === 'date') {
-          return localeRef.value.datePlaceholder
-        } else if (props.type === 'datetime') {
-          return localeRef.value.datetimePlaceholder
-        } else if (props.type === 'month') {
-          return localeRef.value.monthPlaceholder
+      const { placeholder } = props
+      if (placeholder === undefined) {
+        const { type } = props
+        switch (type) {
+          case 'date':
+            return localeRef.value.datePlaceholder
+          case 'datetime':
+            return localeRef.value.datetimePlaceholder
+          case 'month':
+            return localeRef.value.monthPlaceholder
+          case 'year':
+            return localeRef.value.yearPlaceholder
+          case 'quarter':
+            return localeRef.value.quarterPlaceholder
+          default:
+            return ''
         }
-        return props.placeholder
       } else {
-        return props.placeholder
+        return placeholder
       }
     })
     const localizedStartPlaceholderRef = computed(() => {
@@ -227,9 +303,6 @@ export default defineComponent({
         return props.endPlaceholder
       }
     })
-    const mergedFormatRef = computed(() => {
-      return props.format || DATE_FORMAT[props.type]
-    })
     const mergedActionsRef = computed(() => {
       const { actions, type } = props
       if (actions !== undefined) return actions
@@ -252,6 +325,9 @@ export default defineComponent({
         case 'year': {
           return ['clear', 'now']
         }
+        case 'quarter': {
+          return ['clear', 'now', 'confirm']
+        }
         default: {
           warn(
             'data-picker',
@@ -261,9 +337,48 @@ export default defineComponent({
         }
       }
     })
-
+    function getFormattedValue (value: Value | null): FormattedValue | null {
+      if (value === null) return null
+      if (Array.isArray(value)) {
+        const { value: mergedValueFormat } = mergedValueFormatRef
+        const { value: dateFnsOptions } = dateFnsOptionsRef
+        return [
+          format(value[0], mergedValueFormat, dateFnsOptions),
+          format(value[1], mergedValueFormat, dateFnsOptionsRef.value)
+        ]
+      } else {
+        return format(
+          value,
+          mergedValueFormatRef.value,
+          dateFnsOptionsRef.value
+        )
+      }
+    }
     function doUpdatePendingValue (value: Value | null): void {
       pendingValueRef.value = value
+    }
+    function doUpdateFormattedValue (
+      value: FormattedValue | null,
+      timestampValue: Value | null
+    ): void {
+      const {
+        'onUpdate:formattedValue': _onUpdateFormattedValue,
+        onUpdateFormattedValue
+      } = props
+      if (_onUpdateFormattedValue) {
+        call(
+          _onUpdateFormattedValue as OnUpdateFormattedValueImpl,
+          value,
+          timestampValue
+        )
+      }
+      if (onUpdateFormattedValue) {
+        call(
+          onUpdateFormattedValue as OnUpdateFormattedValueImpl,
+          value,
+          timestampValue
+        )
+      }
     }
     function doUpdateValue (value: Value | null): void {
       const {
@@ -272,10 +387,18 @@ export default defineComponent({
         onChange
       } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
-      if (onChange) call(onChange as OnUpdateValueImpl, value)
+      const formattedValue = getFormattedValue(value)
+      if (onUpdateValue) {
+        call(onUpdateValue as OnUpdateValueImpl, value, formattedValue)
+      }
+      if (_onUpdateValue) {
+        call(_onUpdateValue as OnUpdateValueImpl, value, formattedValue)
+      }
+      if (onChange) call(onChange as OnUpdateValueImpl, value, formattedValue)
       uncontrolledValueRef.value = value
+
+      doUpdateFormattedValue(formattedValue, value)
+
       nTriggerFormChange()
       nTriggerFormInput()
     }
@@ -335,7 +458,7 @@ export default defineComponent({
         disableUpdateOnClose
       })
     }
-    function scrollYearMonth (value?: number): void {
+    function scrollPickerColumns (value?: number): void {
       if (!panelInstRef.value) return
       const { monthScrollRef, yearScrollRef } = panelInstRef.value
       const { value: mergedValue } = mergedValueRef
@@ -500,8 +623,9 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
-      if (props.type === 'month' || props.type === 'year') {
-        void nextTick(scrollYearMonth)
+      const { type } = props
+      if (type === 'month' || type === 'year' || type === 'quarter') {
+        void nextTick(scrollPickerColumns)
       }
     }
     function closeCalendar ({
@@ -547,7 +671,7 @@ export default defineComponent({
     const uniVaidation = uniCalendarValidation(props, pendingValueRef)
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
-      scrollYearMonth,
+      scrollPickerColumns,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       timePickerSizeRef,
@@ -608,9 +732,9 @@ export default defineComponent({
           self: { iconColor, iconColorDisabled }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--icon-color': iconColor,
-          '--icon-color-disabled': iconColorDisabled
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-icon-color': iconColor,
+          '--n-icon-color-disabled': iconColorDisabled
         }
       }),
       cssVars: computed(() => {
@@ -662,64 +786,64 @@ export default defineComponent({
           }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
+          '--n-bezier': cubicBezierEaseInOut,
 
-          '--panel-border-radius': panelBorderRadius,
-          '--panel-color': panelColor,
-          '--panel-box-shadow': panelBoxShadow,
-          '--panel-text-color': panelTextColor,
+          '--n-panel-border-radius': panelBorderRadius,
+          '--n-panel-color': panelColor,
+          '--n-panel-box-shadow': panelBoxShadow,
+          '--n-panel-text-color': panelTextColor,
 
           // panel header
-          '--panel-header-padding': panelHeaderPadding,
-          '--panel-header-divider-color': panelHeaderDividerColor,
+          '--n-panel-header-padding': panelHeaderPadding,
+          '--n-panel-header-divider-color': panelHeaderDividerColor,
 
           // panel calendar
-          '--calendar-left-padding': calendarLeftPadding,
-          '--calendar-right-padding': calendarRightPadding,
-          '--calendar-title-height': calendarTitleHeight,
-          '--calendar-title-padding': calendarTitlePadding,
-          '--calendar-title-font-size': calendarTitleFontSize,
-          '--calendar-title-font-weight': calendarTitleFontWeight,
-          '--calendar-title-text-color': calendarTitleTextColor,
-          '--calendar-title-grid-template-columns':
+          '--n-calendar-left-padding': calendarLeftPadding,
+          '--n-calendar-right-padding': calendarRightPadding,
+          '--n-calendar-title-height': calendarTitleHeight,
+          '--n-calendar-title-padding': calendarTitlePadding,
+          '--n-calendar-title-font-size': calendarTitleFontSize,
+          '--n-calendar-title-font-weight': calendarTitleFontWeight,
+          '--n-calendar-title-text-color': calendarTitleTextColor,
+          '--n-calendar-title-grid-template-columns':
             calendarTitleGridTempateColumns,
-          '--calendar-days-height': calendarDaysHeight,
-          '--calendar-days-divider-color': calendarDaysDividerColor,
-          '--calendar-days-font-size': calendarDaysFontSize,
-          '--calendar-days-text-color': calendarDaysTextColor,
-          '--calendar-divider-color': calendarDividerColor,
+          '--n-calendar-days-height': calendarDaysHeight,
+          '--n-calendar-days-divider-color': calendarDaysDividerColor,
+          '--n-calendar-days-font-size': calendarDaysFontSize,
+          '--n-calendar-days-text-color': calendarDaysTextColor,
+          '--n-calendar-divider-color': calendarDividerColor,
 
           // panel action
-          '--panel-action-padding': panelActionPadding,
-          '--panel-extra-footer-padding': panelExtraFooterPadding,
-          '--panel-action-divider-color': panelActionDividerColor,
+          '--n-panel-action-padding': panelActionPadding,
+          '--n-panel-extra-footer-padding': panelExtraFooterPadding,
+          '--n-panel-action-divider-color': panelActionDividerColor,
 
           // panel item
-          '--item-font-size': itemFontSize,
-          '--item-border-radius': itemBorderRadius,
-          '--item-size': itemSize,
-          '--item-cell-width': itemCellWidth,
-          '--item-cell-height': itemCellHeight,
-          '--item-text-color': itemTextColor,
-          '--item-color-included': itemColorIncluded,
-          '--item-color-disabled': itemColorDisabled,
-          '--item-color-hover': itemColorHover,
-          '--item-color-active': itemColorActive,
-          '--item-text-color-disabled': itemTextColorDisabled,
-          '--item-text-color-active': itemTextColorActive,
+          '--n-item-font-size': itemFontSize,
+          '--n-item-border-radius': itemBorderRadius,
+          '--n-item-size': itemSize,
+          '--n-item-cell-width': itemCellWidth,
+          '--n-item-cell-height': itemCellHeight,
+          '--n-item-text-color': itemTextColor,
+          '--n-item-color-included': itemColorIncluded,
+          '--n-item-color-disabled': itemColorDisabled,
+          '--n-item-color-hover': itemColorHover,
+          '--n-item-color-active': itemColorActive,
+          '--n-item-text-color-disabled': itemTextColorDisabled,
+          '--n-item-text-color-active': itemTextColorActive,
 
           // scroll item
-          '--scroll-item-width': scrollItemWidth,
-          '--scroll-item-height': scrollItemHeight,
-          '--scroll-item-border-radius': scrollItemBorderRadius,
+          '--n-scroll-item-width': scrollItemWidth,
+          '--n-scroll-item-height': scrollItemHeight,
+          '--n-scroll-item-border-radius': scrollItemBorderRadius,
 
           // panel arrow
-          '--arrow-size': arrowSize,
-          '--arrow-color': arrowColor,
+          '--n-arrow-size': arrowSize,
+          '--n-arrow-color': arrowColor,
 
           // icon in trigger
-          '--icon-color': iconColor,
-          '--icon-color-disabled': iconColorDisabled
+          '--n-icon-color': iconColor,
+          '--n-icon-color-disabled': iconColorDisabled
         }
       })
     }
@@ -751,7 +875,8 @@ export default defineComponent({
       active: this.mergedShow,
       actions: this.actions,
       shortcuts: this.shortcuts,
-      style: this.cssVars as CSSProperties
+      style: this.cssVars as CSSProperties,
+      defaultTime: this.defaultTime
     }
     const { mergedClsPrefix } = this
     return (
@@ -878,6 +1003,12 @@ export default defineComponent({
                                     {...commonPanelProps}
                                     type="year"
                                     key="year"
+                                  />
+                              ) : this.type === 'quarter' ? (
+                                  <MonthPanel
+                                    {...commonPanelProps}
+                                    type="quarter"
+                                    key="quarter"
                                   />
                               ) : (
                                   <DatePanel {...commonPanelProps} />

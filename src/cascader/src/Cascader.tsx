@@ -9,7 +9,8 @@ import {
   toRef,
   CSSProperties,
   isReactive,
-  watchEffect
+  watchEffect,
+  VNodeChild
 } from 'vue'
 import { createTreeMate, SubtreeNotLoadedError, CheckStrategy } from 'treemate'
 import {
@@ -121,8 +122,17 @@ const cascaderProps = {
     type: String,
     default: 'children'
   },
+  renderLabel: Function as PropType<
+  (option: CascaderOption, checked: boolean) => VNodeChild
+  >,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  'onUpdate:show': [Function, Array] as PropType<
+  MaybeArray<(show: Boolean) => void>
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+  MaybeArray<(show: Boolean) => void>
+  >,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
   // deprecated
@@ -252,6 +262,16 @@ export default defineComponent({
           keyboardKeyRef.value = null
         }
       })
+    }
+    function doUpdateShow (value: boolean): void {
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) {
+        call(onUpdateShow, value)
+      }
+      if (_onUpdateShow) {
+        call(_onUpdateShow, value)
+      }
+      uncontrolledShowRef.value = value
     }
     function doUpdateValue (
       value: Value | null,
@@ -444,7 +464,7 @@ export default defineComponent({
     function openMenu (): void {
       if (!mergedDisabledRef.value) {
         patternRef.value = ''
-        uncontrolledShowRef.value = true
+        doUpdateShow(true)
         if (props.filterable) {
           focusSelectionInput()
         }
@@ -454,7 +474,7 @@ export default defineComponent({
       if (returnFocus) {
         focusSelection()
       }
-      uncontrolledShowRef.value = false
+      doUpdateShow(false)
       patternRef.value = ''
     }
     function handleCascaderMenuClickOutside (e: MouseEvent): void {
@@ -740,6 +760,7 @@ export default defineComponent({
       optionHeightRef,
       localeRef,
       labelFieldRef: toRef(props, 'labelField'),
+      renderLabelRef: toRef(props, 'renderLabel'),
       syncCascaderMenuPosition,
       syncSelectMenuPosition,
       updateKeyboardKey,
@@ -811,29 +832,29 @@ export default defineComponent({
           common: { cubicBezierEaseInOut }
         } = themeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--menu-border-radius': menuBorderRadius,
-          '--menu-box-shadow': menuBoxShadow,
-          '--menu-height': menuHeight,
-          '--column-width': columnWidth,
-          '--menu-color': menuColor,
-          '--menu-divider-color': menuDividerColor,
-          '--option-height': optionHeight,
-          '--option-font-size': optionFontSize,
-          '--option-text-color': optionTextColor,
-          '--option-text-color-disabled': optionTextColorDisabled,
-          '--option-text-color-active': optionTextColorActive,
-          '--option-color-hover': optionColorHover,
-          '--option-check-mark-color': optionCheckMarkColor,
-          '--option-arrow-color': optionArrowColor,
-          '--menu-mask-color': changeColor(menuColor, { alpha: 0.75 }),
-          '--loading-color': loadingColor
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-menu-border-radius': menuBorderRadius,
+          '--n-menu-box-shadow': menuBoxShadow,
+          '--n-menu-height': menuHeight,
+          '--n-column-width': columnWidth,
+          '--n-menu-color': menuColor,
+          '--n-menu-divider-color': menuDividerColor,
+          '--n-option-height': optionHeight,
+          '--n-option-font-size': optionFontSize,
+          '--n-option-text-color': optionTextColor,
+          '--n-option-text-color-disabled': optionTextColorDisabled,
+          '--n-option-text-color-active': optionTextColorActive,
+          '--n-option-color-hover': optionColorHover,
+          '--n-option-check-mark-color': optionCheckMarkColor,
+          '--n-option-arrow-color': optionArrowColor,
+          '--n-menu-mask-color': changeColor(menuColor, { alpha: 0.75 }),
+          '--n-loading-color': loadingColor
         }
       })
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, $slots } = this
     return (
       <div class={`${mergedClsPrefix}-cascader`}>
         <VBinder>
@@ -898,9 +919,7 @@ export default defineComponent({
                       onMousedown={this.handleMenuMousedown}
                       onTabout={this.handleMenuTabout}
                     >
-                      {this.$slots.action && {
-                        action: this.$slots.action
-                      }}
+                      {$slots}
                     </CascaderMenu>
                   )
                 }}

@@ -3,7 +3,7 @@ import fadeInHeightExpand from '../../../_styles/transitions/fade-in-height-expa
 import createIconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 
 export default c([
-  cB('upload', [
+  cB('upload', 'width: 100%;', [
     cM('dragger-inside', [
       cE('trigger', `
         display: block;
@@ -11,7 +11,7 @@ export default c([
     ]),
     cM('drag-over', [
       cB('upload-dragger', `
-        border: var(--dragger-border-hover);
+        border: var(--n-dragger-border-hover);
       `)
     ])
   ]),
@@ -20,21 +20,21 @@ export default c([
     box-sizing: border-box;
     width: 100%;
     text-align: center;
-    border-radius: var(--border-radius);
+    border-radius: var(--n-border-radius);
     padding: 24px;
     opacity: 1;
     transition:
-      opacity .3s var(--bezier),
-      border-color .3s var(--bezier),
-      background-color .3s var(--bezier);
-    background-color: var(--dragger-color);
-    border: var(--dragger-border);
+      opacity .3s var(--n-bezier),
+      border-color .3s var(--n-bezier),
+      background-color .3s var(--n-bezier);
+    background-color: var(--n-dragger-color);
+    border: var(--n-dragger-border);
   `, [
     c('&:hover', `
-      border: var(--dragger-border-hover);
+      border: var(--n-dragger-border-hover);
     `),
     cM('disabled', `
-      opacity: var(--item-disabled-opacity);
+      opacity: var(--n-item-disabled-opacity);
       cursor: not-allowed;
     `)
   ]),
@@ -42,10 +42,13 @@ export default c([
     display: inline-block;
     box-sizing: border-box;
     opacity: 1;
-    transition: opacity .3s var(--bezier);
+    transition: opacity .3s var(--n-bezier);
   `, [
+    c('+', [
+      cB('upload-file-list', 'margin-top: 8px;')
+    ]),
     cM('disabled', `
-      opacity: var(--item-disabled-opacity);
+      opacity: var(--n-item-disabled-opacity);
       cursor: not-allowed;
     `),
     cM('image-card', `
@@ -66,13 +69,12 @@ export default c([
     ])
   ]),
   cB('upload-file-list', `
-    margin-top: 8px;
-    line-height: var(--line-height);
+    line-height: var(--n-line-height);
     opacity: 1;
-    transition: opacity .3s var(--bezier);
+    transition: opacity .3s var(--n-bezier);
   `, [
     cM('disabled', `
-      opacity: var(--item-disabled-opacity);
+      opacity: var(--n-item-disabled-opacity);
       cursor: not-allowed;
     `, [
       cB('upload-file', 'cursor: not-allowed;')
@@ -88,8 +90,8 @@ export default c([
       box-sizing: border-box;
       cursor: default;
       padding: 0px 12px 0 6px;
-      transition: background-color .3s  var(--bezier);
-      border-radius: var(--border-radius);
+      transition: background-color .3s  var(--n-bezier);
+      border-radius: var(--n-border-radius);
     `, [
       fadeInHeightExpand(),
       cB('progress', [
@@ -98,7 +100,7 @@ export default c([
         })
       ]),
       c('&:hover', `
-        background-color: var(--item-color-hover);
+        background-color: var(--n-item-color-hover);
       `, [
         cB('upload-file-info', [
           cE('action', `
@@ -107,7 +109,7 @@ export default c([
         ])
       ]),
       cM('image-type', `
-        border-radius: var(--border-radius);
+        border-radius: var(--n-border-radius);
         text-decoration: underline;
         text-decoration-color: #0000;
       `, [
@@ -153,14 +155,14 @@ export default c([
         position: relative;
         width: 96px;
         height: 96px;
-        border: var(--item-border-image-card);
-        border-radius: var(--border-radius);
+        border: var(--n-item-border-image-card);
+        border-radius: var(--n-border-radius);
         padding: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: border-color .3s var(--bezier), background-color .3s var(--bezier);
-        border-radius: var(--border-radius);
+        transition: border-color .3s var(--n-bezier), background-color .3s var(--n-bezier);
+        border-radius: var(--n-border-radius);
       `, [
         cB('progress', `
           position: absolute;
@@ -197,7 +199,7 @@ export default c([
           bottom: 0;
           border-radius: inherit;
           opacity: 0;
-          transition: opacity .2s var(--bezier);
+          transition: opacity .2s var(--n-bezier);
           content: "";
         `),
         c('&:hover', [
@@ -209,14 +211,14 @@ export default c([
       ]),
       cM('error-status', [
         c('&:hover', `
-          background-color: var(--item-color-hover-error);
+          background-color: var(--n-item-color-hover-error);
         `),
         cB('upload-file-info', [
-          cE('name', 'color: var(--item-text-color-error);'),
-          cE('thumbnail', 'color: var(--item-text-color-error);')
+          cE('name', 'color: var(--n-item-text-color-error);'),
+          cE('thumbnail', 'color: var(--n-item-text-color-error);')
         ]),
         cM('image-card-type', `
-          border: var(--item-border-image-card-error);
+          border: var(--n-item-border-image-card-error);
         `)
       ]),
       cM('with-url', `
@@ -224,8 +226,8 @@ export default c([
       `, [
         cB('upload-file-info', [
           cE('name', `
-            color: var(--item-text-color-success);
-            text-decoration-color: var(--item-text-color-success);
+            color: var(--n-item-text-color-success);
+            text-decoration-color: var(--n-item-text-color-success);
           `, [
             c('a', `
               text-decoration: underline;
@@ -243,13 +245,13 @@ export default c([
         cE('thumbnail', `
           font-size: 18px;
           opacity: 1;
-          transition: opacity .2s var(--bezier);
-          color: var(--item-icon-color);
+          transition: opacity .2s var(--n-bezier);
+          color: var(--n-item-icon-color);
         `, [
           cB('base-icon', `
             margin-right: 2px;
             vertical-align: middle;
-            transition: color .3s var(--bezier);
+            transition: color .3s var(--n-bezier);
           `)
         ]),
         cE('action', `
@@ -262,7 +264,7 @@ export default c([
           width: 80px;
           display: flex;
           align-items: center;
-          transition: opacity .2s var(--bezier);
+          transition: opacity .2s var(--n-bezier);
           justify-content: flex-end;
           opacity: 0;
         `, [
@@ -296,7 +298,7 @@ export default c([
           `)
         ]),
         cE('name', `
-          color: var(--item-text-color);
+          color: var(--n-item-text-color);
           flex: 1;
           display: flex;
           justify-content: center;
@@ -304,10 +306,10 @@ export default c([
           overflow: hidden;
           flex-direction: column;
           text-decoration-color: #0000;
-          font-size: var(--font-size);
+          font-size: var(--n-font-size);
           transition:
-            color .3s var(--bezier),
-            text-decoration-color .3s var(--bezier); 
+            color .3s var(--n-bezier),
+            text-decoration-color .3s var(--n-bezier); 
         `, [
           c('a', `
             color: inherit;

@@ -30,7 +30,7 @@ export type ThingProps = ExtractPublicPropTypes<typeof thingProps>
 export default defineComponent({
   name: 'Thing',
   props: thingProps,
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Thing',
@@ -46,11 +46,11 @@ export default defineComponent({
         common: { cubicBezierEaseInOut }
       } = themeRef.value
       return {
-        '--bezier': cubicBezierEaseInOut,
-        '--font-size': fontSize,
-        '--text-color': textColor,
-        '--title-font-weight': titleFontWeight,
-        '--title-text-color': titleTextColor
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-font-size': fontSize,
+        '--n-text-color': textColor,
+        '--n-title-font-weight': titleFontWeight,
+        '--n-title-text-color': titleTextColor
       }
     })
     return () => {
@@ -107,9 +107,9 @@ export default defineComponent({
                       </div>
                     ) : null}
                   </div>
-                    ) : null}
+                ) : null}
               </div>
-                ) : (
+            ) : (
               <>
                 {slots.header ||
                 props.title ||
@@ -131,7 +131,7 @@ export default defineComponent({
                       </div>
                     ) : null}
                   </div>
-                    ) : null}
+                ) : null}
                 {slots.description || props.description ? (
                   <div class={`${mergedClsPrefix}-thing-main__description`}>
                     {renderSlot(slots, 'description', undefined, () => [
@@ -140,7 +140,7 @@ export default defineComponent({
                   </div>
                 ) : null}
               </>
-                )}
+            )}
             {slots.default || props.content ? (
               <div class={`${mergedClsPrefix}-thing-main__content`}>
                 {renderSlot(slots, 'default', undefined, () => [props.content])}

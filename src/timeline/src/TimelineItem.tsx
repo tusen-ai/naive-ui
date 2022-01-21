@@ -18,7 +18,7 @@ const timelineItemProps = {
   color: String,
   type: {
     type: String as PropType<
-    'default' | 'success' | 'error' | 'warning' | 'info'
+      'default' | 'success' | 'error' | 'warning' | 'info'
     >,
     default: 'default'
   }
@@ -29,7 +29,7 @@ export type TimelineItemProps = ExtractPublicPropTypes<typeof timelineItemProps>
 export default defineComponent({
   name: 'TimelineItem',
   props: timelineItemProps,
-  setup (props) {
+  setup(props) {
     const NTimeline = inject(timelineInjectionKey)
     if (!NTimeline) {
       throwError(
@@ -62,23 +62,23 @@ export default defineComponent({
           common: { cubicBezierEaseInOut }
         } = mergedThemeRef.value
         return {
-          '--bezier': cubicBezierEaseInOut,
-          '--circle-border': circleBorder,
-          '--icon-color': iconColor,
-          '--content-font-size': contentFontSize,
-          '--content-text-color': contentTextColor,
-          '--line-color': lineColor,
-          '--meta-text-color': metaTextColor,
-          '--title-font-size': titleFontSize,
-          '--title-font-weight': titleFontWeight,
-          '--title-margin': titleMargin,
-          '--title-text-color': titleTextColor,
-          '--icon-size': formatLength(iconSizeProp) || iconSize
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-circle-border': circleBorder,
+          '--n-icon-color': iconColor,
+          '--n-content-font-size': contentFontSize,
+          '--n-content-text-color': contentTextColor,
+          '--n-line-color': lineColor,
+          '--n-meta-text-color': metaTextColor,
+          '--n-title-font-size': titleFontSize,
+          '--n-title-font-weight': titleFontWeight,
+          '--n-title-margin': titleMargin,
+          '--n-title-text-color': titleTextColor,
+          '--n-icon-size': formatLength(iconSizeProp) || iconSize
         }
       })
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, color, $slots } = this
     return (
       <div

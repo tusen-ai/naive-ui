@@ -8,13 +8,13 @@
 ```
 
 ```js
-import { defineComponent, onBeforeUnmount, reactive } from 'vue'
+import { defineComponent, onBeforeUnmount } from 'vue'
 import { useMessage } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     const message = useMessage()
-    let messageReactive = reactive(null)
+    let messageReactive = null
 
     const removeMessage = () => {
       if (messageReactive) {

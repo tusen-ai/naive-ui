@@ -14,6 +14,7 @@ import { CNode } from 'css-render'
 import type { GlobalTheme } from '../config-provider'
 import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
 import type { ThemeCommonVars } from '../_styles/common'
+import { cssrAnchorMetaName } from './common'
 
 export interface Theme<N, T = {}, R = any> {
   name: N
@@ -50,9 +51,9 @@ export type ExtractPeerOverrides<T> = T extends Theme<unknown, unknown, infer V>
 
 // V is peers theme
 export type ExtractMergedPeerOverrides<T> = T extends Theme<
-unknown,
-unknown,
-infer V
+  unknown,
+  unknown,
+  infer V
 >
   ? {
       [k in keyof V]?: ExtractPeerOverrides<V[k]>
@@ -60,9 +61,9 @@ infer V
   : T
 
 export type ExtractThemeOverrides<T> = Partial<ExtractThemeVars<T>> &
-ExtractPeerOverrides<T> & { common?: ThemeCommonVars }
+  ExtractPeerOverrides<T> & { common?: ThemeCommonVars }
 
-export function createTheme<N extends string, T, R> (
+export function createTheme<N extends string, T, R>(
   theme: Theme<N, T, R>
 ): Theme<N, T, R> {
   return theme
@@ -83,7 +84,7 @@ export type MergedTheme<T> = T extends Theme<unknown, infer V, infer W>
     }
   : T
 
-function useTheme<N, T, R> (
+function useTheme<N, T, R>(
   resolveId: Exclude<keyof GlobalTheme, 'common'>,
   mountId: string,
   style: CNode | undefined,
@@ -101,11 +102,13 @@ function useTheme<N, T, R> (
         props: {
           bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
         },
+        anchorMetaName: cssrAnchorMetaName,
         ssr: ssrAdapter
       })
       globalStyle.mount({
         id: 'naive-ui/global',
         head: true,
+        anchorMetaName: cssrAnchorMetaName,
         ssr: ssrAdapter
       })
     }
@@ -121,10 +124,10 @@ function useTheme<N, T, R> (
     const {
       theme: { common: selfCommon, self, peers = {} } = {},
       themeOverrides: selfOverrides = {} as ExtractThemeOverrides<
-      Theme<N, T, R>
+        Theme<N, T, R>
       >,
       builtinThemeOverrides: builtinOverrides = {} as ExtractThemeOverrides<
-      Theme<N, T, R>
+        Theme<N, T, R>
       >
     } = props
     const { common: selfCommonOverrides, peers: peersOverrides } = selfOverrides

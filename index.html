@@ -7,11 +7,22 @@
       content="width=device-width, initial-scale=1, maximum-scale=1"
     />
     <title>Naive UI</title>
+    <meta name="naive-ui-style" />
+    <meta name="vueuc-style" />
     <link
       rel="icon"
       type="image/svg+xml"
       href="/demo/assets/images/naivelogo.svg"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@docsearch/css@alpha"
+    />
+    <style>
+      :root {
+        --docsearch-primary-color: #18a058;
+      }
+    </style>
   </head>
   <body>
     <script>
@@ -31,6 +42,20 @@
       deriveTitleFromLocale(pathLocale)
     </script>
     <div id="app"></div>
+    <div id="search" style="display: none"></div>
     <script type="module" src="__INDEX__"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@docsearch/js@alpha"
+    ></script>
+    <script type="text/javascript">
+      docsearch({
+        appId: 'BH4D9OD16A',
+        apiKey: '692b92ecb31aac9ba46d0574b8f8ba81',
+        indexName: 'naiveui',
+        container: '#search',
+        debug: false // Set debug to true if you want to inspect the modal
+      })
+    </script>
   </body>
 </html>

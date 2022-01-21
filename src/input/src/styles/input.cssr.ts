@@ -1,38 +1,38 @@
 import { cB, c, cE, cM, cNotM, insideFormItem } from '../../../_utils/cssr'
 
 // vars:
-// --bezier
-// --color
-// --font-size
-// --border-radius
-// --height
-// --padding-left
-// --padding-right
-// --text-color
-// --text-color-disabled
-// --caret-color
-// --text-decoration-color
-// --border
-// --border-disabled
-// --border-hover
-// --border-focus
-// --placeholder-color
-// --placeholder-color-disabled
-// --line-height-textarea
-// --color-disabled
-// --color-focus
-// --box-shadow-focus
-// --clear-color
-// --clear-size
-// --clear-color-hover
-// --clear-color-pressed
-// --suffix-text-color
-// --icon-color
-// --icon-color-hover
-// --icon-color-pressed
-// --icon-color-disabled
-// --count-text-color
-// --loading-color
+// --n-bezier
+// --n-color
+// --n-font-size
+// --n-border-radius
+// --n-height
+// --n-padding-left
+// --n-padding-right
+// --n-text-color
+// --n-text-color-disabled
+// --n-caret-color
+// --n-text-decoration-color
+// --n-border
+// --n-border-disabled
+// --n-border-hover
+// --n-border-focus
+// --n-placeholder-color
+// --n-placeholder-color-disabled
+// --n-line-height-textarea
+// --n-color-disabled
+// --n-color-focus
+// --n-box-shadow-focus
+// --n-clear-color
+// --n-clear-size
+// --n-clear-color-hover
+// --n-clear-color-pressed
+// --n-suffix-text-color
+// --n-icon-color
+// --n-icon-color-hover
+// --n-icon-color-pressed
+// --n-icon-color-disabled
+// --n-count-text-color
+// --n-loading-color
 // ...form item vars
 export default c([
   cB('input', `
@@ -44,11 +44,11 @@ export default c([
     box-sizing: border-box;
     position: relative;
     display: inline-flex;
-    border-radius: var(--border-radius);
-    background-color: var(--color);
-    transition: background-color .3s var(--bezier);
-    font-size: var(--font-size);
-    --padding-vertical: calc((var(--height) - 1.5 * var(--font-size)) / 2);
+    border-radius: var(--n-border-radius);
+    background-color: var(--n-color);
+    transition: background-color .3s var(--n-bezier);
+    font-size: var(--n-font-size);
+    --n-padding-vertical: calc((var(--n-height) - 1.5 * var(--n-font-size)) / 2);
   `, [
     // common
     cE('input, textarea', `
@@ -66,17 +66,18 @@ export default c([
       background-color: #0000;
       text-align: inherit;
       transition:
-        caret-color .3s var(--bezier),
-        color .3s var(--bezier),
-        text-decoration-color .3s var(--bezier);
+        caret-color .3s var(--n-bezier),
+        color .3s var(--n-bezier),
+        text-decoration-color .3s var(--n-bezier);
     `),
     cE('input-el, textarea-el', `
       -webkit-appearance: none;
       width: 100%;
       min-width: 0;
-      text-decoration-color: var(--text-decoration-color);
-      color: var(--text-color);
-      caret-color: var(--caret-color);
+      text-decoration-color: var(--n-text-decoration-color);
+      color: var(--n-text-color);
+      caret-color: var(--n-caret-color);
+      background-color: transparent;
     `, [
       c('&::placeholder', {
         color: '#0000'
@@ -84,7 +85,7 @@ export default c([
     ]),
     cM('round', [
       cNotM('textarea', {
-        borderRadius: 'calc(var(--height) / 2)'
+        borderRadius: 'calc(var(--n-height) / 2)'
       })
     ]),
     cE('placeholder', `
@@ -95,7 +96,7 @@ export default c([
       top: 0;
       bottom: 0;
       overflow: hidden;
-      color: var(--placeholder-color);
+      color: var(--n-placeholder-color);
     `, [
       c('span', {
         width: '100%',
@@ -119,12 +120,12 @@ export default c([
       display: inline-flex;
       flex-grow: 1;
       position: relative;
-      padding-left: var(--padding-left);
-      padding-right: var(--padding-right);
+      padding-left: var(--n-padding-left);
+      padding-right: var(--n-padding-right);
     `),
     cE('input-mirror', `
       padding: 0;
-      height: var(--height);
+      height: var(--n-height);
       overflow: hidden;
       visibility: hidden;
       position: static;
@@ -133,8 +134,8 @@ export default c([
     `),
     cE('input-el', `
       padding: 0;
-      height: var(--height);
-      line-height: var(--height);
+      height: var(--n-height);
+      line-height: var(--n-height);
     `, [
       c('+', [
         cE('placeholder', `
@@ -149,7 +150,7 @@ export default c([
       })
     ]),
     cE('eye', `
-      transition: color .3s var(--bezier);
+      transition: color .3s var(--n-bezier);
     `),
     // textarea
     cM('textarea', {
@@ -157,14 +158,14 @@ export default c([
     }, [
       cB('input-word-count', `
         position: absolute;
-        right: var(--padding-right);
-        bottom: var(--padding-vertical);
+        right: var(--n-padding-right);
+        bottom: var(--n-padding-vertical);
       `),
       cM('resizable', [
         cB('input-wrapper', `
           resize: vertical;
           overflow: auto;
-          min-height: var(--height);
+          min-height: var(--n-height);
         `)
       ]),
       cE('textarea-el, textarea-mirror, placeholder', `
@@ -172,12 +173,12 @@ export default c([
         height: 100%;
         padding-left: 0;
         padding-right: 0;
-        padding-top: var(--padding-vertical);
-        padding-bottom: var(--padding-vertical);
+        padding-top: var(--n-padding-vertical);
+        padding-bottom: var(--n-padding-vertical);
         display: inline-block;
         vertical-align: bottom;
         box-sizing: border-box;
-        line-height: var(--line-height-textarea);
+        line-height: var(--n-line-height-textarea);
         margin: 0;
         resize: none;
       `),
@@ -198,76 +199,76 @@ export default c([
       cE('separator', `
         display: flex;
         align-items: center;
-        transition: color .3s var(--bezier);
-        color: var(--text-color);
+        transition: color .3s var(--n-bezier);
+        color: var(--n-text-color);
       `, [
         cB('icon', `
-          color: var(--icon-color);
+          color: var(--n-icon-color);
         `),
         cB('base-icon', `
-          color: var(--icon-color);
+          color: var(--n-icon-color);
         `)
       ])
     ]),
     cM('disabled', {
       cursor: 'not-allowed',
-      backgroundColor: 'var(--color-disabled)'
+      backgroundColor: 'var(--n-color-disabled)'
     }, [
       cE('border', {
-        border: 'var(--border-disabled)'
+        border: 'var(--n-border-disabled)'
       }),
       cE('input-el, textarea-el', {
         cursor: 'not-allowed',
-        color: 'var(--text-color-disabled)',
-        textDecorationColor: 'var(--text-color-disabled)'
+        color: 'var(--n-text-color-disabled)',
+        textDecorationColor: 'var(--n-text-color-disabled)'
       }),
       cE('placeholder', {
-        color: 'var(--placeholder-color-disabled)'
+        color: 'var(--n-placeholder-color-disabled)'
       }),
       cE('separator', {
-        color: 'var(--text-color-disabled)'
+        color: 'var(--n-text-color-disabled)'
       }, [
         cB('icon', `
-          color: var(--icon-color-disabled);
+          color: var(--n-icon-color-disabled);
         `),
         cB('base-icon', `
-          color: var(--icon-color-disabled);
+          color: var(--n-icon-color-disabled);
         `)
       ]),
       cE('suffix, prefix', {
-        color: 'var(--text-color-disabled)'
+        color: 'var(--n-text-color-disabled)'
       }, [
         cB('icon', `
-          color: var(--icon-color-disabled);
+          color: var(--n-icon-color-disabled);
         `),
         cB('internal-icon', `
-          color: var(--icon-color-disabled);
+          color: var(--n-icon-color-disabled);
         `)
       ])
     ]),
     cNotM('disabled', [
       cE('eye', `
-        color: var(--icon-color);
+        color: var(--n-icon-color);
         cursor: pointer;
       `, [
         c('&:hover', `
-          color: var(--icon-color-hover);
+          color: var(--n-icon-color-hover);
         `),
         c('&:active', `
-          color: var(--icon-color-pressed);
+          color: var(--n-icon-color-pressed);
         `)
       ]),
       cM('focus', {
-        backgroundColor: 'var(--color-focus)'
+        backgroundColor: 'var(--n-color-focus)'
       }, [
         cE('state-border', {
-          border: 'var(--border-focus)',
-          boxShadow: 'var(--box-shadow-focus)'
+          border: 'var(--n-border-focus)',
+          boxShadow: 'var(--n-box-shadow-focus)'
         })
       ]),
       c('&:hover', [
         cE('state-border', {
-          border: 'var(--border-focus)'
+          border: 'var(--n-border-hover)'
         })
       ])
     ]),
@@ -280,10 +281,10 @@ export default c([
       bottom: 0;
       pointer-events: none;
       border-radius: inherit;
-      border: var(--border);
+      border: var(--n-border);
       transition:
-        box-shadow .3s var(--bezier),
-        border-color .3s var(--bezier);
+        box-shadow .3s var(--n-bezier),
+        border-color .3s var(--n-bezier);
     `),
     cE('state-border', `
       border-color: #0000;
@@ -296,48 +297,47 @@ export default c([
       margin-left: 4px;
     `),
     cE('suffix, prefix', `
-      transition: color .3s var(--bezier);
+      transition: color .3s var(--n-bezier);
       flex-wrap: nowrap;
       flex-shrink: 0;
-      line-height: var(--height);
+      line-height: var(--n-height);
       white-space: nowrap;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: var(--suffix-text-color);
+      color: var(--n-suffix-text-color);
     `, [
       cB('base-loading', `
-        font-size: var(--icon-size);
-        margin-left: 4px;
-        color: var(--loading-color);
+        font-size: var(--n-icon-size);
+        margin: 0 2px;
+        color: var(--n-loading-color);
       `),
       cB('base-clear', `
-        font-size: var(--icon-size);
-        margin-left: 4px;
+        font-size: var(--n-icon-size);
       `, [
         cE('placeholder', [
           cB('base-icon', `
-            transition: color .3s var(--bezier);
-            color: var(--icon-color);
-            font-size: var(--icon-size);
+            transition: color .3s var(--n-bezier);
+            color: var(--n-icon-color);
+            font-size: var(--n-icon-size);
           `)
         ])
       ]),
       cB('icon', `
-        transition: color .3s var(--bezier);
-        color: var(--icon-color);
-        font-size: var(--icon-size);
+        transition: color .3s var(--n-bezier);
+        color: var(--n-icon-color);
+        font-size: var(--n-icon-size);
       `),
       cB('base-icon', `
-        font-size: var(--icon-size);
+        font-size: var(--n-icon-size);
       `)
     ]),
     cB('input-word-count', `
       pointer-events: none;
       line-height: 1.5;
       font-size: .85em;
-      color: var(--count-text-color);
-      transition: color .3s var(--bezier);
+      color: var(--n-count-text-color);
+      transition: color .3s var(--n-bezier);
       margin-left: 4px;
       font-variant: tabular-nums;
     `)
@@ -346,33 +346,33 @@ export default c([
     cB('input', [
       cNotM('disabled', [
         cB('base-loading', `
-          color: var(--loading-color-${status})
+          color: var(--n-loading-color-${status})
         `),
         cE('input-el, textarea-el', {
-          caretColor: `var(--caret-color-${status})`
+          caretColor: `var(--n-caret-color-${status})`
         }),
         cE('state-border', {
-          border: `var(--border-${status})`
+          border: `var(--n-border-${status})`
         }),
         c('&:hover', [
           cE('state-border', `
-            border: var(--border-hover-${status});
+            border: var(--n-border-hover-${status});
           `)
         ]),
         c('&:focus', {
-          backgroundColor: `var(--color-focus-${status})`
+          backgroundColor: `var(--n-color-focus-${status})`
         }, [
           cE('state-border', `
-            box-shadow: var(--box-shadow-focus-${status});
-            border: var(--border-focus-${status});
+            box-shadow: var(--n-box-shadow-focus-${status});
+            border: var(--n-border-focus-${status});
           `)
         ]),
         cM('focus', {
-          backgroundColor: `var(--color-focus-${status})`
+          backgroundColor: `var(--n-color-focus-${status})`
         }, [
           cE('state-border', `
-            box-shadow: var(--box-shadow-focus-${status});
-            border: var(--border-focus-${status});
+            box-shadow: var(--n-box-shadow-focus-${status});
+            border: var(--n-border-focus-${status});
           `)
         ])
       ])

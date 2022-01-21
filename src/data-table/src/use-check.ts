@@ -10,7 +10,7 @@ import { call } from '../../_utils'
 import { TreeMate } from 'treemate'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function useCheck (
+export function useCheck(
   props: DataTableSetupProps,
   data: {
     selectionColumnRef: ComputedRef<TableSelectionColumn | null>
@@ -77,7 +77,7 @@ export function useCheck (
   const headerCheckboxDisabledRef = computed(() => {
     return paginatedDataRef.value.length === 0
   })
-  function doUpdateCheckedRowKeys (keys: RowKey[]): void {
+  function doUpdateCheckedRowKeys(keys: RowKey[]): void {
     const {
       'onUpdate:checkedRowKeys': _onUpdateCheckedRowKeys,
       onUpdateCheckedRowKeys,
@@ -88,23 +88,25 @@ export function useCheck (
     if (onCheckedRowKeysChange) call(onCheckedRowKeysChange, keys)
     uncontrolledCheckedRowKeysRef.value = keys
   }
-  function doCheck (rowKey: RowKey | RowKey[]): void {
+  function doCheck(rowKey: RowKey | RowKey[]): void {
+    if (props.loading) return
     doUpdateCheckedRowKeys(
       treeMateRef.value.check(rowKey, mergedCheckedRowKeysRef.value, {
         cascade: props.cascade
       }).checkedKeys
     )
   }
-  function doUncheck (rowKey: RowKey | RowKey[]): void {
+  function doUncheck(rowKey: RowKey | RowKey[]): void {
+    if (props.loading) return
     doUpdateCheckedRowKeys(
       treeMateRef.value.uncheck(rowKey, mergedCheckedRowKeysRef.value, {
         cascade: props.cascade
       }).checkedKeys
     )
   }
-  function doCheckAll (checkWholeTable: boolean = false): void {
+  function doCheckAll(checkWholeTable: boolean = false): void {
     const { value: column } = selectionColumnRef
-    if (!column) return
+    if (!column || props.loading) return
     const rowKeysToCheck: RowKey[] = []
     ;(checkWholeTable
       ? treeMateRef.value.treeNodes
@@ -121,9 +123,9 @@ export function useCheck (
       }).checkedKeys
     )
   }
-  function doUncheckAll (checkWholeTable: boolean = false): void {
+  function doUncheckAll(checkWholeTable: boolean = false): void {
     const { value: column } = selectionColumnRef
-    if (!column) return
+    if (!column || props.loading) return
     const rowKeysToUncheck: RowKey[] = []
     ;(checkWholeTable
       ? treeMateRef.value.treeNodes

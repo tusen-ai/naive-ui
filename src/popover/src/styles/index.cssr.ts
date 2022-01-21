@@ -10,31 +10,31 @@ const oppositePlacement = {
 }
 
 // vars:
-// --bezier
-// --bezier-ease-in
-// --bezier-ease-out
-// --font-size
-// --text-color
-// --color
-// --border-radius
-// --arrow-height
-// --arrow-offset
-// --arrow-offset-vertical
-// --padding
-// --space
-// --space-arrow
-// --divider-color
+// --n-bezier
+// --n-bezier-ease-in
+// --n-bezier-ease-out
+// --n-font-size
+// --n-text-color
+// --n-color
+// --n-border-radius
+// --n-arrow-height
+// --n-arrow-offset
+// --n-arrow-offset-vertical
+// --n-padding
+// --n-space
+// --n-space-arrow
+// --n-divider-color
 export default c([
   cB('popover', `
     transition:
-      box-shadow .3s var(--bezier),
-      background-color .3s var(--bezier),
-      color .3s var(--bezier);
+      box-shadow .3s var(--n-bezier),
+      background-color .3s var(--n-bezier),
+      color .3s var(--n-bezier);
     transform-origin: inherit;
     position: relative;
-    font-size: var(--font-size);
-    color: var(--text-color);
-    box-shadow: var(--box-shadow);
+    font-size: var(--n-font-size);
+    color: var(--n-text-color);
+    box-shadow: var(--n-box-shadow);
   `, [
     // body transition
     c('&.popover-transition-enter-from, &.popover-transition-leave-to', `
@@ -47,28 +47,27 @@ export default c([
     `),
     c('&.popover-transition-enter-active', `
       transition:
-        opacity .15s var(--bezier-ease-out),
-        transform .15s var(--bezier-ease-out);
+        opacity .15s var(--n-bezier-ease-out),
+        transform .15s var(--n-bezier-ease-out);
     `),
     c('&.popover-transition-leave-active', `
       transition:
-        opacity .15s var(--bezier-ease-in),
-        transform .15s var(--bezier-ease-in);
+        opacity .15s var(--n-bezier-ease-in),
+        transform .15s var(--n-bezier-ease-in);
     `),
     cNotM('raw', `
-      background-color: var(--color);
-      border-radius: var(--border-radius);
-      var(--padding);
+      background-color: var(--n-color);
+      border-radius: var(--n-border-radius);
     `, [
-      cNotM('show-header', 'padding: var(--padding);')
+      cNotM('show-header', 'padding: var(--n-padding);')
     ]),
     cE('header', `
-      padding: var(--padding);
-      border-bottom: 1px solid var(--divider-color);
-      transition: border-color .3s var(--bezier);
+      padding: var(--n-padding);
+      border-bottom: 1px solid var(--n-divider-color);
+      transition: border-color .3s var(--n-bezier);
     `),
     cE('content', `
-      padding: var(--padding);
+      padding: var(--n-padding);
     `),
     cB('popover-arrow-wrapper', `
       position: absolute;
@@ -76,69 +75,70 @@ export default c([
       pointer-events: none;
     `, [
       cB('popover-arrow', `
-        transition: background-color .3s var(--bezier);
+        transition: background-color .3s var(--n-bezier);
         position: absolute;
         display: block;
-        width: calc(var(--arrow-height) * 1.414);
-        height: calc(var(--arrow-height) * 1.414);
+        width: calc(var(--n-arrow-height) * 1.414);
+        height: calc(var(--n-arrow-height) * 1.414);
         box-shadow: 0 0 8px 0 rgba(0, 0, 0, .12);
         transform: rotate(45deg);
-        background-color: var(--color);
+        background-color: var(--n-color);
         pointer-events: all;
       `)
     ])
   ]),
   placementStyle('top-start', `
-    top: calc(-0.707 * var(--arrow-height));
-    left: var(--arrow-offset);
+    top: calc(-0.707 * var(--n-arrow-height));
+    left: calc(var(--n-arrow-offset) - var(--v-offset-left));
   `),
   placementStyle('top', `
-    top: calc(-0.707 * var(--arrow-height));
-    transform: translateX(calc(-0.707 * var(--arrow-height))) rotate(45deg);
+    top: calc(-0.707 * var(--n-arrow-height));
+    transform: translateX(calc(-0.707 * var(--n-arrow-height))) rotate(45deg);
     left: 50%;
   `),
   placementStyle('top-end', `
-    top: calc(-0.707 * var(--arrow-height));
-    right: var(--arrow-offset);
+    top: calc(-0.707 * var(--n-arrow-height));
+    right: calc(var(--n-arrow-offset) + var(--v-offset-left));
   `),
   placementStyle('bottom-start', `
-    bottom: calc(-0.707 * var(--arrow-height));
-    left: var(--arrow-offset);
+    bottom: calc(-0.707 * var(--n-arrow-height));
+    left: calc(var(--n-arrow-offset) - var(--v-offset-left));
   `),
   placementStyle('bottom', `
-    bottom: calc(-0.707 * var(--arrow-height));
-    transform: translateX(calc(-0.707 * var(--arrow-height))) rotate(45deg);
+    bottom: calc(-0.707 * var(--n-arrow-height));
+    transform: translateX(calc(-0.707 * var(--n-arrow-height))) rotate(45deg);
     left: 50%;
   `),
   placementStyle('bottom-end', `
-    bottom: calc(-0.707 * var(--arrow-height));
-    right: var(--arrow-offset);
+    bottom: calc(-0.707 * var(--n-arrow-height));
+    right: calc(var(--n-arrow-offset) + var(--v-offset-left));
   `),
   placementStyle('left-start', `
-    left: calc(-0.707 * var(--arrow-height));
-    top: var(--arrow-offset-vertical);
+    left: calc(-0.707 * var(--n-arrow-height));
+    top: calc(var(--n-arrow-offset-vertical) - var(--v-offset-top));
   `),
   placementStyle('left', `
-    left: calc(-0.707 * var(--arrow-height));
-    transform: translateY(calc(-0.707 * var(--arrow-height))) rotate(45deg);
+    left: calc(-0.707 * var(--n-arrow-height));
+    transform: translateY(calc(-0.707 * var(--n-arrow-height))) rotate(45deg);
     top: 50%;
   `),
   placementStyle('left-end', `
-    left: calc(-0.707 * var(--arrow-height));
-    bottom: var(--arrow-offset-vertical);
+    left: calc(-0.707 * var(--n-arrow-height));
+    bottom: calc(var(--n-arrow-offset-vertical) + var(--v-offset-top));
+    
   `),
   placementStyle('right-start', `
-    right: calc(-0.707 * var(--arrow-height));
-    top: var(--arrow-offset-vertical);
+    right: calc(-0.707 * var(--n-arrow-height));
+    top: calc(var(--n-arrow-offset-vertical) - var(--v-offset-top));
   `),
   placementStyle('right', `
-    right: calc(-0.707 * var(--arrow-height));
-    transform: translateY(calc(-0.707 * var(--arrow-height))) rotate(45deg);
+    right: calc(-0.707 * var(--n-arrow-height));
+    transform: translateY(calc(-0.707 * var(--n-arrow-height))) rotate(45deg);
     top: 50%;
   `),
   placementStyle('right-end', `
-    right: calc(-0.707 * var(--arrow-height));
-    bottom: var(--arrow-offset-vertical);
+    right: calc(-0.707 * var(--n-arrow-height));
+    bottom: calc(var(--n-arrow-offset-vertical) + var(--v-offset-top));
   `)
 ])
 
@@ -152,14 +152,14 @@ function placementStyle (
     | 'bottom'
     | 'left'
   const sizeStyle = ['top', 'bottom'].includes(position)
-    ? 'height: var(--space-arrow);'
-    : 'width: var(--space-arrow);'
+    ? 'height: var(--n-space-arrow);'
+    : 'width: var(--n-space-arrow);'
   return c(`[v-placement="${placement}"] >`, [
     cB('popover', `
-      margin-${oppositePlacement[position]}: var(--space);
+      margin-${oppositePlacement[position]}: var(--n-space);
     `, [
       cM('show-arrow', `
-        margin-${oppositePlacement[position]}: var(--space-arrow);
+        margin-${oppositePlacement[position]}: var(--n-space-arrow);
       `),
       cM('overlap', `
         margin: 0;

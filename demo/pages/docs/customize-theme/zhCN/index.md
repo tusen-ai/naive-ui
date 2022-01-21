@@ -89,9 +89,8 @@ Naive UI 通过使用 `n-config-provider` 调整主题。
 如果你正在使用 ts 写代码，这块比较适合你。
 
 ```html
-
 <script lang="ts">
-  import { NConfigProvider,  GlobalThemeOverrides } from 'naive-ui'
+  import { NConfigProvider, GlobalThemeOverrides } from 'naive-ui'
 
   const themeOverrides: GlobalThemeOverrides = {
     common: {
@@ -124,7 +123,8 @@ Naive UI 通过使用 `n-config-provider` 调整主题。
   type ButtonThemeOverrides = NonNullable<ButtonProps['themeOverrides']>
 
   const selectThemeOverrides: SelectThemeOverrides = {
-    menuBoxShadow: '0 6px 16px -9px rgba(0, 0, 0, .08), 0 9px 28px 0 rgba(0, 0, 0, .05), 0 12px 48px 16px rgba(0, 0, 0, .03)',
+    menuBoxShadow:
+      '0 6px 16px -9px rgba(0, 0, 0, .08), 0 9px 28px 0 rgba(0, 0, 0, .05), 0 12px 48px 16px rgba(0, 0, 0, .03)',
     peers: {
       InternalSelection: {
         textColor: '#FF0000',
@@ -141,7 +141,11 @@ Naive UI 通过使用 `n-config-provider` 调整主题。
 </script>
 
 <template>
-  <n-select v-model:value="value" :options="options" :theme-overrides="selectThemeOverrides" />
+  <n-select
+    v-model:value="value"
+    :options="options"
+    :theme-overrides="selectThemeOverrides"
+  />
   <n-button :theme-overrides="buttonThemeOverrides">theme</n-button>
 </template>
 ```
@@ -204,9 +208,9 @@ peers 相关的主题变量还没有暴露，使用 `GlobalThemeOverrides` 可�
           textColor: '#FF0000'
         },
         InternalSelectMenu: {
-          borderRadius: '6px',
+          borderRadius: '6px'
         }
-      },
+      }
     },
     DataTable: {
       paginationMargin: '40px 0 0 0',
@@ -218,16 +222,14 @@ peers 相关的主题变量还没有暴露，使用 `GlobalThemeOverrides` 可�
           itemTextColor: '#ccc'
         }
       }
-    },
+    }
     // ...
   }
   // ...
 </script>
 
 <template>
-  <n-config-provider
-    :theme-overrides="themeOverrides"
-  >
+  <n-config-provider :theme-overrides="themeOverrides">
     <my-app />
   </n-config-provider>
 </template>

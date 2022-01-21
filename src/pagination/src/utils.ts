@@ -1,4 +1,4 @@
-function pagesToShow (
+function pagesToShow(
   currentPage: number,
   pageCount: number,
   pageSlot: number = 9
@@ -24,7 +24,7 @@ function pagesToShow (
   let rightSplit = false
   if (middleStart > firstPage + 2) leftSplit = true
   if (middleEnd < lastPage - 2) rightSplit = true
-  const items = []
+  const items: number[] = []
   items.push(firstPage)
   if (leftSplit) {
     items.push(-2)
@@ -48,29 +48,27 @@ function pagesToShow (
 
 export type PageItem =
   | {
-    type: 'fastBackward' | 'fastForward'
-    label: string
-    active: false
-  }
+      type: 'fast-backward' | 'fast-forward'
+      label?: undefined
+      active: false
+    }
   | {
-    type: 'page'
-    label: number
-    active: boolean
-  }
+      type: 'page'
+      label: number
+      active: boolean
+    }
 
-function mapPagesToPageItems (pages: number[], currentPage: number): PageItem[] {
+function mapPagesToPageItems(pages: number[], currentPage: number): PageItem[] {
   return pages.map((page) => {
     switch (page) {
       case -2:
         return {
-          type: 'fastBackward',
-          label: 'fastBackward',
+          type: 'fast-backward',
           active: false
         }
       case -1:
         return {
-          type: 'fastForward',
-          label: 'fastForward',
+          type: 'fast-forward',
           active: false
         }
       default:
@@ -91,7 +89,7 @@ function mapPagesToPageItems (pages: number[], currentPage: number): PageItem[] 
   })
 }
 
-function pageItems (
+function pageItems(
   currentPage: number,
   pageCount: number,
   pageSlot?: number

@@ -11,7 +11,9 @@ import {
   provide,
   watch,
   nextTick,
-  watchEffect
+  watchEffect,
+  HTMLAttributes,
+  renderSlot
 } from 'vue'
 import {
   FollowerPlacement,
@@ -23,6 +25,7 @@ import {
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
 import { createTreeMate, CheckStrategy } from 'treemate'
+import { happensIn } from 'seemly'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
@@ -73,7 +76,7 @@ const props = {
   defaultShow: Boolean,
   defaultValue: {
     type: [String, Number, Array] as PropType<
-    string | number | Array<string | number> | null
+      string | number | Array<string | number> | null
     >,
     default: null
   },
@@ -108,9 +111,10 @@ const props = {
   },
   size: String as PropType<'small' | 'medium' | 'large'>,
   value: [String, Number, Array] as PropType<
-  string | number | Array<string | number> | null
+    string | number | Array<string | number> | null
   >,
   to: useAdjustedTo.propTo,
+  menuProps: Object as PropType<HTMLAttributes>,
   virtualScroll: {
     type: Boolean,
     default: true
@@ -119,12 +123,12 @@ const props = {
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
   onUpdateShow: [Function, Array] as PropType<
-  MaybeArray<(show: boolean) => void>
+    MaybeArray<(show: boolean) => void>
   >,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:show': [Function, Array] as PropType<
-  MaybeArray<(show: boolean) => void>
+    MaybeArray<(show: boolean) => void>
   >,
   /**
    * @deprecated
@@ -140,7 +144,7 @@ export type TreeSelectProps = ExtractPublicPropTypes<typeof props>
 export default defineComponent({
   name: 'TreeSelect',
   props,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.leafOnly !== undefined) {
@@ -231,8 +235,8 @@ export default defineComponent({
       props.checkable
         ? null
         : Array.isArray(initMergedValue) && initMergedValue.length
-          ? initMergedValue[initMergedValue.length - 1]
-          : null
+        ? initMergedValue[initMergedValue.length - 1]
+        : null
     )
     const mergedCascadeRef = computed(() => {
       return props.multiple && props.cascade && props.checkable
@@ -279,11 +283,11 @@ export default defineComponent({
         if (tmNode !== null) {
           return showPath
             ? treeOption2SelectOptionWithPath(
-              tmNode,
-              treeMate.getPath(mergedValue).treeNodePath,
-              separator,
-              labelField
-            )
+                tmNode,
+                treeMate.getPath(mergedValue).treeNodePath,
+                separator,
+                labelField
+              )
             : treeOption2SelectOption(tmNode, labelField)
         }
       }
@@ -307,11 +311,11 @@ export default defineComponent({
             res.push(
               showPath
                 ? treeOption2SelectOptionWithPath(
-                  tmNode,
-                  treeMate.getPath(value).treeNodePath,
-                  separator,
-                  labelField
-                )
+                    tmNode,
+                    treeMate.getPath(value).treeNodePath,
+                    separator,
+                    labelField
+                  )
                 : treeOption2SelectOption(tmNode, labelField)
             )
           }
@@ -326,19 +330,19 @@ export default defineComponent({
       } = themeRef.value
       return menuPadding
     })
-    function focusSelection (): void {
+    function focusSelection(): void {
       triggerInstRef.value?.focus()
     }
-    function focusSelectionInput (): void {
+    function focusSelectionInput(): void {
       triggerInstRef.value?.focusInput()
     }
-    function doUpdateShow (value: boolean): void {
+    function doUpdateShow(value: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
       if (onUpdateShow) call(onUpdateShow, value)
       if (_onUpdateShow) call(_onUpdateShow, value)
       uncontrolledShowRef.value = value
     }
-    function doUpdateValue (
+    function doUpdateValue(
       value: string | number | Array<string | number> | null,
       option: TreeSelectOption | null | Array<TreeSelectOption | null>
     ): void {
@@ -351,7 +355,7 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function doUpdateIndeterminateKeys (
+    function doUpdateIndeterminateKeys(
       value: string | number | Array<string | number> | null,
       option: TreeSelectOption | null | Array<TreeSelectOption | null>
     ): void {
@@ -366,7 +370,7 @@ export default defineComponent({
         call(_onUpdateIndeterminateKeys as OnUpdateValueImpl, value, option)
       }
     }
-    function doUpdateExpandedKeys (
+    function doUpdateExpandedKeys(
       keys: Key[],
       option: Array<TreeSelectOption | null>
     ): void {
@@ -378,21 +382,21 @@ export default defineComponent({
       if (_onUpdateExpandedKeys) call(_onUpdateExpandedKeys, keys, option)
       uncontrolledExpandedKeysRef.value = keys
     }
-    function doFocus (e: FocusEvent): void {
+    function doFocus(e: FocusEvent): void {
       const { onFocus } = props
       if (onFocus) onFocus(e)
       nTriggerFormFocus()
     }
-    function doBlur (e: FocusEvent): void {
+    function doBlur(e: FocusEvent): void {
       closeMenu()
       const { onBlur } = props
       if (onBlur) onBlur(e)
       nTriggerFormBlur()
     }
-    function closeMenu (): void {
+    function closeMenu(): void {
       doUpdateShow(false)
     }
-    function openMenu (): void {
+    function openMenu(): void {
       if (!mergedDisabledRef.value) {
         patternRef.value = ''
         doUpdateShow(true)
@@ -401,10 +405,10 @@ export default defineComponent({
         }
       }
     }
-    function handleMenuLeave (): void {
+    function handleMenuLeave(): void {
       patternRef.value = ''
     }
-    function handleMenuClickoutside (e: MouseEvent): void {
+    function handleMenuClickoutside(e: MouseEvent): void {
       if (mergedShowRef.value) {
         if (!triggerInstRef.value?.$el.contains(e.target as Node)) {
           // outside select, don't need to return focus
@@ -412,7 +416,7 @@ export default defineComponent({
         }
       }
     }
-    function handleTriggerClick (): void {
+    function handleTriggerClick(): void {
       if (mergedDisabledRef.value) return
       if (!mergedShowRef.value) {
         openMenu()
@@ -423,13 +427,13 @@ export default defineComponent({
         }
       }
     }
-    function getOptionsByKeys (keys: Key[]): Array<TreeSelectOption | null> {
+    function getOptionsByKeys(keys: Key[]): Array<TreeSelectOption | null> {
       const {
         value: { getNode }
       } = dataTreeMateRef
       return keys.map((key) => getNode(key)?.rawNode || null)
     }
-    function handleUpdateCheckedKeys (keys: Key[]): void {
+    function handleUpdateCheckedKeys(keys: Key[]): void {
       const options = getOptionsByKeys(keys)
       if (props.multiple) {
         doUpdateValue(keys, options)
@@ -449,22 +453,22 @@ export default defineComponent({
         patternRef.value = ''
       }
     }
-    function handleUpdateIndeterminateKeys (keys: Key[]): void {
+    function handleUpdateIndeterminateKeys(keys: Key[]): void {
       if (props.checkable) {
         doUpdateIndeterminateKeys(keys, getOptionsByKeys(keys))
       }
     }
-    function handleTriggerFocus (e: FocusEvent): void {
+    function handleTriggerFocus(e: FocusEvent): void {
       if (menuElRef.value?.contains(e.relatedTarget as Element)) return
       focusedRef.value = true
       doFocus(e)
     }
-    function handleTriggerBlur (e: FocusEvent): void {
+    function handleTriggerBlur(e: FocusEvent): void {
       if (menuElRef.value?.contains(e.relatedTarget as Element)) return
       focusedRef.value = false
       doBlur(e)
     }
-    function handleMenuFocusin (e: FocusEvent): void {
+    function handleMenuFocusin(e: FocusEvent): void {
       if (
         menuElRef.value?.contains(e.relatedTarget as Element) ||
         triggerInstRef.value?.$el?.contains(e.relatedTarget as Element)
@@ -474,7 +478,7 @@ export default defineComponent({
       focusedRef.value = true
       doFocus(e)
     }
-    function handleMenuFocusout (e: FocusEvent): void {
+    function handleMenuFocusout(e: FocusEvent): void {
       if (
         menuElRef.value?.contains(e.relatedTarget as Element) ||
         triggerInstRef.value?.$el?.contains(e.relatedTarget as Element)
@@ -484,7 +488,7 @@ export default defineComponent({
       focusedRef.value = false
       doBlur(e)
     }
-    function handleClear (e: MouseEvent): void {
+    function handleClear(e: MouseEvent): void {
       e.stopPropagation()
       const { multiple } = props
       if (!multiple && props.filterable) {
@@ -496,7 +500,7 @@ export default defineComponent({
         doUpdateValue(null, null)
       }
     }
-    function handleDeleteOption (option: SelectBaseOption): void {
+    function handleDeleteOption(option: SelectBaseOption): void {
       // only work for multiple mode
       const { value: mergedValue } = mergedValueRef
       if (Array.isArray(mergedValue)) {
@@ -519,17 +523,17 @@ export default defineComponent({
         }
       }
     }
-    function handlePatternInput (e: InputEvent): void {
+    function handlePatternInput(e: InputEvent): void {
       const { value } = e.target as unknown as HTMLInputElement
       patternRef.value = value
     }
-    function handleKeydown (e: KeyboardEvent): void {
+    function handleKeydown(e: KeyboardEvent): void {
       const { value: treeInst } = treeInstRef
       if (treeInst) {
         treeInst.handleKeydown(e)
       }
     }
-    function handleKeyup (e: KeyboardEvent): void {
+    function handleKeyup(e: KeyboardEvent): void {
       if (e.code === 'Enter' || e.code === 'NumpadEnter') {
         if (mergedShowRef.value) {
           treeHandleKeyup(e)
@@ -552,25 +556,25 @@ export default defineComponent({
         }
       }
     }
-    function treeHandleKeyup (e: KeyboardEvent): void {
+    function treeHandleKeyup(e: KeyboardEvent): void {
       const { value: treeInst } = treeInstRef
       if (treeInst) {
         treeInst.handleKeyup(e)
       }
     }
-    function handleTabOut (): void {
+    function handleTabOut(): void {
       closeMenu()
       focusSelection()
     }
-    function handleMenuMousedown (e: MouseEvent): void {
+    function handleMenuMousedown(e: MouseEvent): void {
       // If there's an action slot later, we need to check if mousedown happens
       // in action panel
-      e.preventDefault()
+      if (!happensIn(e, 'action')) e.preventDefault()
     }
     provide(treeSelectInjectionKey, {
       pendingNodeKeyRef
     })
-    function syncPosition (): void {
+    function syncPosition(): void {
       followerInstRef.value?.syncPosition()
     }
     watch(mergedValueRef, () => {
@@ -651,21 +655,32 @@ export default defineComponent({
       cssVars: computed(() => {
         const {
           common: { cubicBezierEaseInOut },
-          self: { menuBoxShadow, menuBorderRadius, menuColor, menuHeight }
+          self: {
+            menuBoxShadow,
+            menuBorderRadius,
+            menuColor,
+            menuHeight,
+            actionPadding,
+            actionDividerColor,
+            actionTextColor
+          }
         } = themeRef.value
         return {
-          '--menu-box-shadow': menuBoxShadow,
-          '--menu-border-radius': menuBorderRadius,
-          '--menu-color': menuColor,
-          '--menu-height': menuHeight,
-          '--bezier': cubicBezierEaseInOut
+          '--n-menu-box-shadow': menuBoxShadow,
+          '--n-menu-border-radius': menuBorderRadius,
+          '--n-menu-color': menuColor,
+          '--n-menu-height': menuHeight,
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-action-padding': actionPadding,
+          '--n-action-text-color': actionTextColor,
+          '--n-action-divider-color': actionDividerColor
         }
       }),
       mergedTheme: themeRef
     }
   },
-  render () {
-    const { mergedTheme, mergedClsPrefix } = this
+  render() {
+    const { mergedTheme, mergedClsPrefix, $slots } = this
     return (
       <div class={`${mergedClsPrefix}-tree-select`}>
         <VBinder>
@@ -731,13 +746,21 @@ export default defineComponent({
                             mergedClsPrefix,
                             filteredTreeInfo,
                             checkable,
-                            multiple
+                            multiple,
+                            menuProps
                           } = this
                           return withDirectives(
                             <div
-                              class={`${mergedClsPrefix}-tree-select-menu`}
+                              {...menuProps}
+                              class={[
+                                `${mergedClsPrefix}-tree-select-menu`,
+                                menuProps?.class
+                              ]}
                               ref="menuElRef"
-                              style={this.cssVars as CSSProperties}
+                              style={[
+                                menuProps?.style || '',
+                                this.cssVars as CSSProperties
+                              ]}
                               tabindex={0}
                               onMousedown={this.handleMenuMousedown}
                               onKeyup={this.handleKeyup}
@@ -795,12 +818,29 @@ export default defineComponent({
                                 <div
                                   class={`${mergedClsPrefix}-tree-select-menu__empty`}
                                 >
-                                  <NEmpty
-                                    theme={mergedTheme.peers.Empty}
-                                    themeOverrides={
-                                      mergedTheme.peerOverrides.Empty
-                                    }
-                                  />
+                                  {renderSlot(
+                                    $slots,
+                                    'empty',
+                                    undefined,
+                                    () => [
+                                      <NEmpty
+                                        theme={mergedTheme.peers.Empty}
+                                        themeOverrides={
+                                          mergedTheme.peerOverrides.Empty
+                                        }
+                                      />
+                                    ]
+                                  )}
+                                </div>
+                              )}
+                              {$slots.action && (
+                                <div
+                                  class={`${mergedClsPrefix}-tree-select-menu__action`}
+                                  data-action
+                                >
+                                  {{
+                                    default: $slots.action
+                                  }}
                                 </div>
                               )}
                               <NBaseFocusDetector onFocus={this.handleTabOut} />

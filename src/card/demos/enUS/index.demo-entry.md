@@ -7,16 +7,16 @@ Just put something in it.
 ```demo
 basic
 size
-cover
+cover.vue
 hoverable
 slots
 border
-segment
+segment.vue
 closable
 no-title
 loading
 custom-style
-embedded
+embedded.vue
 ```
 
 ## Card
@@ -31,7 +31,7 @@ embedded
 | footer-style | `Object \| string` | `undefined` | The style of the bottom area of the card. |
 | header-style | `Object \| string` | `undefined` | The style of the card head area. |
 | hoverable | `boolean` | `false` | Whether to show shadow when hovering on the card. |
-| segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' \| 'hard' }` | `false` | Segment divider settings of the card. |
+| segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' }` | `false` | Segment divider settings of the card. |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | Card size. |
 | title | `string` | `undefined` | Card title. |
 | on-close | `() => void` | `undefined` | Callback function triggered upon closing the card. |

@@ -67,7 +67,8 @@ export default defineComponent({
       isMountedRef,
       mergedClsPrefixRef,
       syncCascaderMenuPosition,
-      handleCascaderMenuClickOutside
+      handleCascaderMenuClickOutside,
+      mergedThemeRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(cascaderInjectionKey)!
     const submenuInstRefs: CascaderSubmenuInstance[] = []
@@ -121,6 +122,7 @@ export default defineComponent({
       selfElRef,
       submenuInstRefs,
       maskInstRef,
+      mergedTheme: mergedThemeRef,
       handleFocusin,
       handleFocusout,
       handleClickOutside,
@@ -128,7 +130,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { submenuInstRefs, mergedClsPrefix, $slots } = this
+    const { submenuInstRefs, mergedClsPrefix, $slots, mergedTheme } = this
     return (
       <Transition name="fade-in-scale-up-transition" appear={this.isMounted}>
         {{
@@ -145,7 +147,7 @@ export default defineComponent({
                 onKeyup={this.onKeyup}
                 style={
                   {
-                    '--col-count': this.menuModel.length
+                    '--n-col-count': this.menuModel.length
                   } as any
                 }
               >
@@ -172,7 +174,12 @@ export default defineComponent({
                   </div>
                 ) : (
                   <div class={`${mergedClsPrefix}-cascader-menu__empty`}>
-                    {renderSlot($slots, 'empty', undefined, () => [<NEmpty />])}
+                    {renderSlot($slots, 'empty', undefined, () => [
+                      <NEmpty
+                        theme={mergedTheme.peers.Empty}
+                        themeOverrides={mergedTheme.peerOverrides.Empty}
+                      />
+                    ])}
                   </div>
                 )}
                 {$slots.action && (

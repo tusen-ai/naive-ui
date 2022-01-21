@@ -10,7 +10,7 @@ const headerProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
   type: {
     type: String as PropType<
-    'info' | 'success' | 'warning' | 'error' | 'default'
+      'info' | 'success' | 'warning' | 'error' | 'default'
     >,
     default: 'default'
   },
@@ -25,7 +25,7 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
   defineComponent({
     name: `H${level}`,
     props: headerProps,
-    setup (props) {
+    setup(props) {
       const { mergedClsPrefixRef } = useConfig(props)
       const themeRef = useTheme(
         'Typography',
@@ -52,19 +52,19 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
             }
           } = themeRef.value
           return {
-            '--bezier': cubicBezierEaseInOut,
-            '--font-size': fontSize,
-            '--margin': margin,
-            '--bar-color': barColor,
-            '--bar-width': barWidth,
-            '--font-weight': headerFontWeight,
-            '--text-color': headerTextColor,
-            '--prefix-width': prefixWidth
+            '--n-bezier': cubicBezierEaseInOut,
+            '--n-font-size': fontSize,
+            '--n-margin': margin,
+            '--n-bar-color': barColor,
+            '--n-bar-width': barWidth,
+            '--n-font-weight': headerFontWeight,
+            '--n-text-color': headerTextColor,
+            '--n-prefix-width': prefixWidth
           }
         })
       }
     },
-    render () {
+    render() {
       const { prefix, alignText, mergedClsPrefix, cssVars, $slots } = this
       return h(
         `h${level}`,

@@ -15,7 +15,7 @@ export type AProps = ExtractPublicPropTypes<typeof aProps>
 export default defineComponent({
   name: 'A',
   props: aProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
@@ -33,13 +33,13 @@ export default defineComponent({
           self: { aTextColor }
         } = themeRef.value
         return {
-          '--text-color': aTextColor,
-          '--bezier': cubicBezierEaseInOut
+          '--n-text-color': aTextColor,
+          '--n-bezier': cubicBezierEaseInOut
         }
       })
     }
   },
-  render () {
+  render() {
     return (
       <a
         class={`${this.mergedClsPrefix}-a`}

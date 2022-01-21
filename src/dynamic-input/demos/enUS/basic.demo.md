@@ -1,4 +1,4 @@
-# Use Preset Input
+# Use input preset
 
 By default, the preset element of `n-dynamic-input` is `input`.
 

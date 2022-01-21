@@ -17,7 +17,7 @@ export type FormItemColProps = ExtractPublicPropTypes<typeof formItemColProps>
 export default defineComponent({
   name: 'FormItemCol',
   props: formItemColProps,
-  setup () {
+  setup() {
     const formItemInstRef = ref<FormItemInst | null>(null)
     const validate: FormItemInst['validate'] = ((...args: any[]) => {
       const { value } = formItemInstRef
@@ -32,11 +32,12 @@ export default defineComponent({
       }
     }
     return {
+      formItemInstRef,
       validate,
       restoreValidation
     }
   },
-  render () {
+  render() {
     return h(NCol, keep(this.$props, colPropKeys), {
       default: () => {
         const itemProps = keep(this.$props, formItemPropKeys)

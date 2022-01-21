@@ -18,6 +18,17 @@ describe('n-timeline', () => {
     )
   })
 
+  it('should work with `icon-size` prop', async () => {
+    const iconSize = 50
+    const wrapper = mount(NTimeline, {
+      props: { iconSize },
+      slots: { default: () => h(NTimelineItem) }
+    })
+    expect(wrapper.find('.n-timeline-item').attributes('style')).toContain(
+      `--n-icon-size: ${iconSize}px`
+    )
+  })
+
   it('should work with `size` prop', async () => {
     const wrapper = mount(NTimeline)
     expect(wrapper.find('.n-timeline').classes()).toContain(
@@ -60,6 +71,34 @@ describe('n-timeline', () => {
 })
 
 describe('n-timeline-item', () => {
+  it('should work with `color` prop', async () => {
+    let wrapper = mount(NTimeline, {
+      slots: {
+        default: () =>
+          h(NTimelineItem, { title: 'test-title' }, { icon: () => 'icon' })
+      }
+    })
+    expect(
+      wrapper.find('.n-timeline-item-timeline__icon').attributes('style')
+    ).toBe(undefined)
+
+    wrapper = mount(NTimeline, {
+      slots: {
+        default: () =>
+          h(
+            NTimelineItem,
+            { title: 'test-title', color: 'grey' },
+            { icon: () => 'icon' }
+          )
+      }
+    })
+    expect(
+      wrapper.find('.n-timeline-item-timeline__icon').attributes('style')
+    ).toContain('color: grey')
+
+    wrapper.unmount()
+  })
+
   it('should work with `content`, `time`, `title` props', async () => {
     const wrapper = mount(NTimeline, {
       slots: {

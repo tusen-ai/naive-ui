@@ -1,5 +1,5 @@
 import { CSSProperties } from 'vue'
-import { pxfy } from 'seemly'
+import { depx, pxfy } from 'seemly'
 import type {
   SortOrder,
   TableBaseColumn,
@@ -15,20 +15,23 @@ import type {
 export const selectionColWidth = 40
 export const expandColWidth = 40
 
-export function getColWidth (col: TableColumn): number | undefined {
+export function getColWidth(col: TableColumn): number | undefined {
   if (col.type === 'selection') return selectionColWidth
   if (col.type === 'expand') return expandColWidth
   if ('children' in col) return undefined
+  if (typeof col.width === 'string') {
+    return depx(col.width)
+  }
   return col.width
 }
 
-export function getColKey (col: TableColumn): string | number {
+export function getColKey(col: TableColumn): string | number {
   if (col.type === 'selection') return '__n_selection__'
   if (col.type === 'expand') return '__n_expand__'
   return col.key
 }
 
-export function createShallowClonedObject<T> (object: T): T {
+export function createShallowClonedObject<T>(object: T): T {
   if (!object) return object
   if (typeof object === 'object') {
     return Object.assign({}, object)
@@ -36,13 +39,13 @@ export function createShallowClonedObject<T> (object: T): T {
   return object
 }
 
-export function getFlagOfOrder (order: SortOrder): SortOrderFlag {
+export function getFlagOfOrder(order: SortOrder): SortOrderFlag {
   if (order === 'ascend') return 1
   else if (order === 'descend') return -1
   return 0
 }
 
-export function createCustomWidthStyle (
+export function createCustomWidthStyle(
   column: TableBaseColumn | TableSelectionColumn | TableExpandColumn
 ): CSSProperties {
   const width = pxfy(getColWidth(column))
@@ -52,7 +55,7 @@ export function createCustomWidthStyle (
   }
 }
 
-export function createRowClassName (
+export function createRowClassName(
   row: InternalRowData,
   index: number,
   rowClassName?: string | CreateRowClassName
@@ -64,7 +67,7 @@ export function createRowClassName (
 // for compatibility
 // If column.filterOptionValues or column.defaultFilterOptionValues is set, use
 // array value
-export function shouldUseArrayInSingleMode (column: TableBaseColumn): boolean {
+export function shouldUseArrayInSingleMode(column: TableBaseColumn): boolean {
   return (
     column.filterOptionValues !== undefined ||
     (column.filterOptionValue === undefined &&
@@ -72,25 +75,25 @@ export function shouldUseArrayInSingleMode (column: TableBaseColumn): boolean {
   )
 }
 
-export function isColumnSortable (column: TableColumn): boolean {
+export function isColumnSortable(column: TableColumn): boolean {
   if ('children' in column) return false
   return !!column.sorter
 }
 
-export function isColumnFilterable (column: TableColumn): boolean {
+export function isColumnFilterable(column: TableColumn): boolean {
   if ('children' in column) return false
   return (
     !!column.filter && (!!column.filterOptions || !!column.renderFilterMenu)
   )
 }
 
-function getNextOrderOf (order: SortOrder): SortOrder {
+function getNextOrderOf(order: SortOrder): SortOrder {
   if (!order) return 'descend'
   else if (order === 'descend') return 'ascend'
   return false
 }
 
-export function createNextSorter (
+export function createNextSorter(
   column: TableBaseColumn,
   currentSortState: SortState | null
 ): SortState | null {
@@ -109,7 +112,7 @@ export function createNextSorter (
   }
 }
 
-export function isColumnSorting (
+export function isColumnSorting(
   column: TableColumn,
   mergedSortState: SortState[]
 ): boolean {

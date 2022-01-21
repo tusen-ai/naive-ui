@@ -7,9 +7,11 @@ import {
   PropType,
   toRef,
   watch,
-  nextTick
+  nextTick,
+  watchEffect
 } from 'vue'
 import { createTreeMate, TreeNode } from 'treemate'
+import { happensIn } from 'seemly'
 import { RenderLabel } from '../../_internal/select-menu/src/interface'
 import { tmOptions } from '../../select/src/utils'
 import {
@@ -52,17 +54,7 @@ export const panelProps = {
   onMouseleave: Function as PropType<(e: MouseEvent) => void>,
   renderLabel: Function as PropType<RenderLabel>,
   // deprecated
-  onChange: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
-    validator: () => {
-      warn(
-        'popselect',
-        '`on-change` is deprecated, please use `on-update:value` instead.'
-      )
-      return true
-    },
-    default: undefined
-  }
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
 export const panelPropKeys = keysOf(panelProps)
@@ -71,6 +63,17 @@ export default defineComponent({
   name: 'PopselectPanel',
   props: panelProps,
   setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onChange !== undefined) {
+          warn(
+            'popselect',
+            '`on-change` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NPopselect = inject(popselectInjectionKey)!
 
@@ -101,6 +104,9 @@ export default defineComponent({
     }
     function handleToggle (tmNode: TreeNode<SelectBaseOption>): void {
       toggle(tmNode.key)
+    }
+    function handleMenuMousedown (e: MouseEvent): void {
+      if (!happensIn(e, 'action')) e.preventDefault()
     }
     function toggle (value: ValueAtom): void {
       const {
@@ -157,13 +163,15 @@ export default defineComponent({
       mergedTheme: NPopselect.mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       treeMate: treeMateRef,
-      handleToggle
+      handleToggle,
+      handleMenuMousedown
     }
   },
   render () {
     return (
       <NInternalSelectMenu
         clsPrefix={this.mergedClsPrefix}
+        focusable
         theme={this.mergedTheme.peers.InternalSelectMenu}
         themeOverrides={this.mergedTheme.peerOverrides.InternalSelectMenu}
         multiple={this.multiple}
@@ -177,7 +185,10 @@ export default defineComponent({
         onToggle={this.handleToggle}
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseenter}
-      />
+        onMousedown={this.handleMenuMousedown}
+      >
+        {this.$slots}
+      </NInternalSelectMenu>
     )
   }
 })
