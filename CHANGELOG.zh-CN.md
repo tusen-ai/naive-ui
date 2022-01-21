@@ -6,6 +6,7 @@
 
 - 修复 `n-layout-sider` 在折叠时仍占据 1px 宽度
 - 修复 `n-code` 在 `word-wrap=true` 时不切分单词
+- 修复 `n-drawer` 无法通过 `Esc` 按键关闭，关闭 [#2233](https://github.com/TuSimple/naive-ui/issues/2233)
 
 ### Feats
 

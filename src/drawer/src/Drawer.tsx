@@ -232,6 +232,7 @@ export default defineComponent({
                 class={[`${mergedClsPrefix}-drawer-container`, this.namespace]}
                 style={this.cssVars as CSSProperties}
                 onKeydown={this.handleKeydown}
+                tabindex={-1}
                 role="none"
               >
                 <Transition name="fade-in-transition" appear={this.isMounted}>

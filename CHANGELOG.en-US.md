@@ -6,6 +6,7 @@
 
 - Fix `n-layout-sider` still occupies 1px after collapsed.
 - Fix `n-code` doesn't break word when `word-wrap=true`.
+- Fix `n-drawer` can't be closed by `Esc` key, closes [#2233](https://github.com/TuSimple/naive-ui/issues/2233).
 
 ### Feats
 
