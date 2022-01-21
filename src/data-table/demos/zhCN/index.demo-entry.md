@@ -46,6 +46,8 @@ switchable-editable
 fixed-column-debug
 fixed-column2-debug
 scroll-debug
+striped
+sticky
 height-debug
 ```
 
@@ -80,6 +82,7 @@ height-debug
 | single-line | `boolean` | `true` | 是否不设定列的分割线，当参数值为 `true` 时，则单元格没有右边线 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |
 | striped | `boolean` | `false` | 是否使用斑马线条纹 |
+| sticky | `boolean` | `false` | 是否让表头随滚动固定在页面顶部 |
 | summary | `DataTableCreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a> |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellipsis` 或 `max-height` 的情况下固定为 `'fixed'` |
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height`。当 `virtual-scroll` 为 `true` 时，`rowSpan` 将不生效 |

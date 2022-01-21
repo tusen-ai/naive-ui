@@ -1,4 +1,4 @@
-function pagesToShow (
+function pagesToShow(
   currentPage: number,
   pageCount: number,
   pageSlot: number = 9
@@ -48,17 +48,17 @@ function pagesToShow (
 
 export type PageItem =
   | {
-    type: 'fast-backward' | 'fast-forward'
-    label?: undefined
-    active: false
-  }
+      type: 'fast-backward' | 'fast-forward'
+      label?: undefined
+      active: false
+    }
   | {
-    type: 'page'
-    label: number
-    active: boolean
-  }
+      type: 'page'
+      label: number
+      active: boolean
+    }
 
-function mapPagesToPageItems (pages: number[], currentPage: number): PageItem[] {
+function mapPagesToPageItems(pages: number[], currentPage: number): PageItem[] {
   return pages.map((page) => {
     switch (page) {
       case -2:
@@ -89,7 +89,7 @@ function mapPagesToPageItems (pages: number[], currentPage: number): PageItem[] 
   })
 }
 
-function pageItems (
+function pageItems(
   currentPage: number,
   pageCount: number,
   pageSlot?: number

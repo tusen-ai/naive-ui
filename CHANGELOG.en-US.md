@@ -9,6 +9,7 @@
 
 ### Feats
 
+- `n-data-table` add `sticky` prop, closes [#1555](https://github.com/TuSimple/naive-ui/issues/1555).
 - `n-page-header` adds `back` slot, closes [#2176](https://github.com/TuSimple/naive-ui/issues/2176).
 - `n-select` adds `reset-menu-on-options-change` prop, closes [#2168](https://github.com/TuSimple/naive-ui/issues/2168).
 - `n-carousel` effect supports `'card'`.

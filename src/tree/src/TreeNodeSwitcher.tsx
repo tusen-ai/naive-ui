@@ -15,7 +15,7 @@ export default defineComponent({
     loading: Boolean,
     onClick: Function as PropType<(e: MouseEvent) => void>
   },
-  setup (props) {
+  setup(props) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { renderSwitcherIconRef } = inject(treeInjectionKey, null)!
     return () => {

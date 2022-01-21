@@ -140,4 +140,4 @@ declare module 'vue' {
     [key: string]: any
   }
 }
-export { }
+export {}

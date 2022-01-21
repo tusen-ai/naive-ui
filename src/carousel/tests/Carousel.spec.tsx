@@ -12,7 +12,7 @@ describe('n-carousel', () => {
     const wrapper = mount(NCarousel, {
       slots: {
         default: () => {
-          return [...Array(3).keys()].map(i => {
+          return [...Array(3).keys()].map((i) => {
             return h('div', {}, i.toString())
           })
         }
@@ -22,7 +22,7 @@ describe('n-carousel', () => {
     await wrapper.setProps({ autoplay: true, interval: 50 })
 
     await sleep(25)
-    ;([0, 1, 2, 3, 4] as const).forEach(i => {
+    ;([0, 1, 2, 3, 4] as const).forEach((i) => {
       if (i === 1) {
         expect(
           wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
@@ -35,7 +35,7 @@ describe('n-carousel', () => {
     })
 
     await sleep(25)
-    ;([0, 1, 2, 3, 4] as const).forEach(i => {
+    ;([0, 1, 2, 3, 4] as const).forEach((i) => {
       if (i === 2) {
         expect(
           wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
@@ -67,7 +67,7 @@ describe('n-carousel', () => {
       },
       slots: {
         default: () => {
-          return [...Array(3).keys()].map(i => {
+          return [...Array(3).keys()].map((i) => {
             return h('div', {}, i.toString())
           })
         }
@@ -110,13 +110,11 @@ describe('n-carousel', () => {
           return [
             h('img', {
               style: 'width: 100%; height: 240px; object-fit: cover;',
-              src:
-                'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
+              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
             }),
             h('img', {
               style: 'width: 100%; height: 240px; object-fit: cover;',
-              src:
-                'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
+              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
             })
           ]
         }
@@ -149,7 +147,7 @@ describe('n-carousel', () => {
       },
       slots: {
         default: () => {
-          return [...Array(5).keys()].map(i => {
+          return [...Array(5).keys()].map((i) => {
             return h(NCarouselItem, {
               style: `width: ${(i + 1) * 10}%;`,
               slots: {
@@ -183,7 +181,7 @@ describe('n-carousel', () => {
       },
       slots: {
         default: () => {
-          return [...Array(3).keys()].map(i => {
+          return [...Array(3).keys()].map((i) => {
             return h('div', {}, i.toString())
           })
         }

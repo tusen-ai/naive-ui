@@ -42,7 +42,7 @@ const useCalendarProps = {
 } as const
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function useCalendar (
+function useCalendar(
   props: ExtractPropTypes<typeof useCalendarProps>,
   type: 'date' | 'datetime' | 'month' | 'year' | 'quarter'
 ) {
@@ -150,21 +150,21 @@ function useCalendar (
       }
     }
   )
-  function sanitizeValue (value: number): number {
+  function sanitizeValue(value: number): number {
     if (type === 'datetime') return getTime(startOfSecond(value))
     if (type === 'month') return getTime(startOfMonth(value))
     if (type === 'year') return getTime(startOfYear(value))
     if (type === 'quarter') return getTime(startOfQuarter(value))
     return getTime(startOfDay(value))
   }
-  function mergedIsDateDisabled (ts: number): boolean {
+  function mergedIsDateDisabled(ts: number): boolean {
     const {
       isDateDisabled: { value: isDateDisabled }
     } = validation
     if (!isDateDisabled) return false
     return (isDateDisabled as IsSingleDateDisabled)(ts)
   }
-  function handleDateInput (value: string): void {
+  function handleDateInput(value: string): void {
     const date = strictParse(
       value,
       mergedDateFormatRef.value,
@@ -189,7 +189,7 @@ function useCalendar (
       dateInputValueRef.value = value
     }
   }
-  function handleDateInputBlur (): void {
+  function handleDateInputBlur(): void {
     const date = strictParse(
       dateInputValueRef.value,
       mergedDateFormatRef.value,
@@ -214,17 +214,17 @@ function useCalendar (
       deriveDateInputValue()
     }
   }
-  function clearSelectedDateTime (): void {
+  function clearSelectedDateTime(): void {
     panelCommon.doUpdateValue(null, true)
     dateInputValueRef.value = ''
     panelCommon.doClose(true)
   }
-  function handleNowClick (): void {
+  function handleNowClick(): void {
     panelCommon.doUpdateValue(getTime(sanitizeValue(Date.now())), true)
     calendarValueRef.value = Date.now()
     panelCommon.doClose(true)
   }
-  function handleDateClick (
+  function handleDateClick(
     dateItem: DateItem | MonthItem | YearItem | QuarterItem
   ): void {
     if (mergedIsDateDisabled(dateItem.ts)) {
@@ -249,9 +249,9 @@ function useCalendar (
     newValue = getTime(
       dateItem.type === 'quarter' && dateItem.dateObject.quarter
         ? setQuarter(
-          setYear(newValue, dateItem.dateObject.year),
-          dateItem.dateObject.quarter
-        )
+            setYear(newValue, dateItem.dateObject.year),
+            dateItem.dateObject.quarter
+          )
         : set(newValue, dateItem.dateObject)
     )
     panelCommon.doUpdateValue(
@@ -272,7 +272,7 @@ function useCalendar (
         break
     }
   }
-  function deriveDateInputValue (time?: number): void {
+  function deriveDateInputValue(time?: number): void {
     // If not selected, display nothing,
     // else update datetime related string
     if (props.value === null || Array.isArray(props.value)) {
@@ -288,55 +288,55 @@ function useCalendar (
       panelCommon.dateFnsOptions.value
     )
   }
-  function handleConfirmClick (): void {
+  function handleConfirmClick(): void {
     if (validation.isDateInvalid.value || validation.isTimeInvalid.value) {
       return
     }
     panelCommon.doConfirm()
     closeCalendar()
   }
-  function closeCalendar (): void {
+  function closeCalendar(): void {
     if (props.active) {
       panelCommon.doClose()
     }
   }
-  function nextYear (): void {
+  function nextYear(): void {
     calendarValueRef.value = getTime(addYears(calendarValueRef.value, 1))
   }
-  function prevYear (): void {
+  function prevYear(): void {
     calendarValueRef.value = getTime(addYears(calendarValueRef.value, -1))
   }
-  function nextMonth (): void {
+  function nextMonth(): void {
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, 1))
   }
-  function prevMonth (): void {
+  function prevMonth(): void {
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, -1))
   }
   // For month type
-  function virtualListContainer (): HTMLElement {
+  function virtualListContainer(): HTMLElement {
     const { value } = yearScrollRef
     return value?.listElRef as HTMLElement
   }
   // For month type
-  function virtualListContent (): HTMLElement {
+  function virtualListContent(): HTMLElement {
     const { value } = yearScrollRef
     return value?.itemsElRef as HTMLElement
   }
   // For month type
-  function handleVirtualListScroll (e: Event): void {
+  function handleVirtualListScroll(e: Event): void {
     scrollbarInstRef.value?.sync()
   }
-  function handleTimePickerChange (value: number | null): void {
+  function handleTimePickerChange(value: number | null): void {
     if (value === null) return
     panelCommon.doUpdateValue(value, false)
   }
-  function handleSingleShortcutMouseenter (shortcut: Shortcuts[string]): void {
+  function handleSingleShortcutMouseenter(shortcut: Shortcuts[string]): void {
     panelCommon.cachePendingValue()
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
     if (typeof shortcutValue !== 'number') return
     panelCommon.doUpdateValue(shortcutValue, false)
   }
-  function handleSingleShortcutClick (shortcut: Shortcuts[string]): void {
+  function handleSingleShortcutClick(shortcut: Shortcuts[string]): void {
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
     if (typeof shortcutValue !== 'number') return
     panelCommon.doUpdateValue(shortcutValue, false)

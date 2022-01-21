@@ -350,6 +350,7 @@
 
 ### Feats
 
+- `n-table` 新增 `sticky` 属性，关闭 [#1555](https://github.com/TuSimple/naive-ui/issues/1555)
 - `n-input-number` 新增 `keyboard` 属性
 - 新增 `tableColorStriped` 主题变量，关闭 [#1686](https://github.com/TuSimple/naive-ui/issues/1686)
 - `n-notification-provider` 新增 `max` & `placement` 属性

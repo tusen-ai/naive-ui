@@ -4,7 +4,7 @@ import { c } from '../_utils/cssr'
 
 // window.xxx = 0
 
-export function useCssVarsClass (
+export function useCssVarsClass(
   cssVarsRef: Ref<Record<string, string>>
 ): Ref<string> {
   const cssVarsClassRef = ref('')

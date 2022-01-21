@@ -19,14 +19,14 @@ export type RenderPrev = RenderPrefix
 
 export type PaginationRenderLabel = (
   info:
-  | {
-    type: 'fast-backward' | 'fast-forward'
-    node: VNode
-    active: boolean
-  }
-  | {
-    type: 'page'
-    node: number
-    active: boolean
-  }
+    | {
+        type: 'fast-backward' | 'fast-forward'
+        node: VNode
+        active: boolean
+      }
+    | {
+        type: 'page'
+        node: number
+        active: boolean
+      }
 ) => VNodeChild

@@ -6,7 +6,7 @@ import type { ColumnKey, MainTableRef, TableColumn } from './interface'
 import { getColWidth, getColKey } from './utils'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function useScroll (
+export function useScroll(
   props: DataTableSetupProps,
   {
     mainTableInstRef,
@@ -36,11 +36,11 @@ export function useScroll (
   })
   const fixedColumnLeftMapRef = computed(() => {
     const columns: Record<
-    ColumnKey,
-    { start: number, end: number } | undefined
+      ColumnKey,
+      { start: number; end: number } | undefined
     > = {}
     let left = 0
-    function traverse (cols: TableColumn[]): void {
+    function traverse(cols: TableColumn[]): void {
       cols.forEach((col) => {
         const positionInfo = { start: left, end: 0 }
         columns[getColKey(col)] = positionInfo
@@ -58,11 +58,11 @@ export function useScroll (
   })
   const fixedColumnRightMapRef = computed(() => {
     const columns: Record<
-    ColumnKey,
-    { start: number, end: number } | undefined
+      ColumnKey,
+      { start: number; end: number } | undefined
     > = {}
     let right = 0
-    function traverse (cols: TableColumn[]): void {
+    function traverse(cols: TableColumn[]): void {
       for (let i = cols.length - 1; i >= 0; --i) {
         const col = cols[i]
         const positionInfo = { start: right, end: 0 }
@@ -79,7 +79,7 @@ export function useScroll (
     traverse(rightFixedColumnsRef.value)
     return columns
   })
-  function deriveActiveLeftFixedColumn (): void {
+  function deriveActiveLeftFixedColumn(): void {
     // target is header element
     const { value: leftFixedColumns } = leftFixedColumnsRef
     let leftWidth = 0
@@ -96,7 +96,7 @@ export function useScroll (
     }
     leftActiveFixedColKeyRef.value = leftActiveFixedColKey
   }
-  function deriveActiveLeftFixedChildrenColumns (): void {
+  function deriveActiveLeftFixedChildrenColumns(): void {
     leftActiveFixedChildrenColKeysRef.value = []
     let activeLeftFixedColumn = props.columns.find(
       (col) => getColKey(col) === leftActiveFixedColKeyRef.value
@@ -112,7 +112,7 @@ export function useScroll (
       activeLeftFixedColumn = nextActiveLeftFixedColumn
     }
   }
-  function deriveActiveRightFixedColumn (): void {
+  function deriveActiveRightFixedColumn(): void {
     // target is header element
     const { value: rightFixedColumns } = rightFixedColumnsRef
     const scrollWidth = Number(props.scrollX)
@@ -139,7 +139,7 @@ export function useScroll (
     }
     rightActiveFixedColKeyRef.value = rightActiveFixedColKey
   }
-  function deriveActiveRightFixedChildrenColumns (): void {
+  function deriveActiveRightFixedChildrenColumns(): void {
     rightActiveFixedChildrenColKeysRef.value = []
     let activeRightFixedColumn = props.columns.find(
       (col) => getColKey(col) === rightActiveFixedColKeyRef.value
@@ -157,7 +157,7 @@ export function useScroll (
     }
   }
 
-  function getScrollElements (): {
+  function getScrollElements(): {
     header: HTMLElement | null
     body: HTMLElement | null
   } {
@@ -172,23 +172,23 @@ export function useScroll (
       body
     }
   }
-  function scrollMainTableBodyToTop (): void {
+  function scrollMainTableBodyToTop(): void {
     const { body } = getScrollElements()
     if (body) {
       body.scrollTop = 0
     }
   }
-  function handleTableHeaderScroll (): void {
+  function handleTableHeaderScroll(): void {
     if (scrollPartRef.value === 'head') {
       beforeNextFrameOnce(syncScrollState)
     }
   }
-  function handleTableBodyScroll (): void {
+  function handleTableBodyScroll(): void {
     if (scrollPartRef.value === 'body') {
       beforeNextFrameOnce(syncScrollState)
     }
   }
-  function syncScrollState (): void {
+  function syncScrollState(): void {
     // We can't simply use props.scrollX to determine whether the table has
     // need to be sync since user may set column width for each column.
     // Just let it be, the scroll listener won't be triggered for a basic table.
@@ -215,7 +215,7 @@ export function useScroll (
     deriveActiveRightFixedColumn()
     deriveActiveRightFixedChildrenColumns()
   }
-  function setHeaderScrollLeft (left: number): void {
+  function setHeaderScrollLeft(left: number): void {
     const { header } = getScrollElements()
     if (!header) return
     header.scrollLeft = left

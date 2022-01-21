@@ -158,8 +158,8 @@ export type TableColumn<T = InternalRowData> =
 export type TableColumns<T = InternalRowData> = Array<TableColumn<T>>
 
 export type DataTableSelectionOptions = Array<
-| DataTableSelectionOption
-| { label: string, key: string | number, onSelect: () => void }
+  | DataTableSelectionOption
+  | { label: string; key: string | number; onSelect: () => void }
 >
 export interface DataTableInjection {
   slots: Slots
@@ -182,10 +182,10 @@ export interface DataTableInjection {
   rightActiveFixedColKeyRef: Ref<ColumnKey | null>
   rightActiveFixedChildrenColKeysRef: Ref<ColumnKey[]>
   fixedColumnLeftMapRef: Ref<
-  Record<ColumnKey, { start: number, end: number } | undefined>
+    Record<ColumnKey, { start: number; end: number } | undefined>
   >
   fixedColumnRightMapRef: Ref<
-  Record<ColumnKey, { start: number, end: number } | undefined>
+    Record<ColumnKey, { start: number; end: number } | undefined>
   >
   mergedCurrentPageRef: Ref<number>
   someRowsCheckedRef: Ref<boolean>
@@ -213,6 +213,7 @@ export interface DataTableInjection {
   flexHeightRef: Ref<boolean>
   headerCheckboxDisabledRef: Ref<boolean>
   stripedRef: Ref<boolean>
+  stickyRef: Ref<boolean>
   doUpdateExpandedRowKeys: (keys: RowKey[]) => void
   doUpdateFilters: (
     filters: FilterState,

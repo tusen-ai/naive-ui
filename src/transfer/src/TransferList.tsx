@@ -46,21 +46,21 @@ export default defineComponent({
       default: false
     }
   },
-  setup () {
+  setup() {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { mergedThemeRef, mergedClsPrefixRef } = inject(transferInjectionKey)!
     const scrollerInstRef = ref<ScrollbarInst | null>(null)
     const vlInstRef = ref<VirtualListInst | null>(null)
-    function syncVLScroller (): void {
+    function syncVLScroller(): void {
       scrollerInstRef.value?.sync()
     }
-    function scrollContainer (): HTMLElement | null {
+    function scrollContainer(): HTMLElement | null {
       const { value } = vlInstRef
       if (!value) return null
       const { listElRef } = value
       return listElRef
     }
-    function scrollContent (): HTMLElement | null {
+    function scrollContent(): HTMLElement | null {
       const { value } = vlInstRef
       if (!value) return null
       const { itemsElRef } = value
@@ -76,7 +76,7 @@ export default defineComponent({
       scrollContent
     }
   },
-  render () {
+  render() {
     const { mergedTheme, mergedClsPrefix, virtualScroll, syncVLScroller } = this
     return (
       <>

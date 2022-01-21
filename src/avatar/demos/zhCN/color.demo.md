@@ -8,5 +8,6 @@
     color: 'yellow',
     backgroundColor: 'red'
   }"
-  >M</n-avatar>
+  >M</n-avatar
+>
 ```

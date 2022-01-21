@@ -35,8 +35,8 @@ export interface TabsInjection {
 export type Addable =
   | boolean
   | {
-    disabled?: boolean
-  }
+      disabled?: boolean
+    }
 
 export const tabsInjectionKey: InjectionKey<TabsInjection> = Symbol('tabs')
 

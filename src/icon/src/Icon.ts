@@ -18,7 +18,7 @@ export default defineComponent({
     size: [Number, String],
     color: String
   },
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Icon',
@@ -57,7 +57,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const { $parent, depth, mergedClsPrefix } = this
     if ($parent?.$options?._n_icon__) {
       warn('icon', "don't wrap `n-icon` inside `n-icon`")

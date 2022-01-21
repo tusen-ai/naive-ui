@@ -71,7 +71,7 @@ export type TagProps = ExtractPublicPropTypes<typeof tagProps>
 export default defineComponent({
   name: 'Tag',
   props: tagProps,
-  setup (props) {
+  setup(props) {
     const contentRef = ref<HTMLElement | null>(null)
     const { mergedBorderedRef, mergedClsPrefixRef, NConfigProvider } =
       useConfig(props)
@@ -86,7 +86,7 @@ export default defineComponent({
     provide(tagInjectionKey, {
       roundRef: toRef(props, 'round')
     })
-    function handleClick (e: MouseEvent): void {
+    function handleClick(e: MouseEvent): void {
       if (!props.disabled) {
         if (props.checkable) {
           const {
@@ -102,7 +102,7 @@ export default defineComponent({
         }
       }
     }
-    function handleCloseClick (e: MouseEvent): void {
+    function handleCloseClick(e: MouseEvent): void {
       if (props.internalStopClickPropagation) {
         e.stopPropagation()
       }
@@ -112,7 +112,7 @@ export default defineComponent({
       }
     }
     const tagPublicMethods: TagPublicMethods = {
-      setTextContent (textContent: string) {
+      setTextContent(textContent: string) {
         const { value } = contentRef
         if (value) value.textContent = textContent
       }
@@ -193,7 +193,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       rtlEnabled,

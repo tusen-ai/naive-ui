@@ -63,7 +63,7 @@ const showColorPicker = (key: string): boolean => {
 export default defineComponent({
   name: 'ThemeEditor',
   inheritAttrs: false,
-  setup () {
+  setup() {
     const fileInputRef = ref<HTMLInputElement | null>(null)
     const { NConfigProvider } = useConfig()
     const theme = computed(() => {
@@ -81,7 +81,7 @@ export default defineComponent({
         common
       }
       for (const key of Object.keys(lightTheme) as Array<
-      keyof typeof lightTheme
+        keyof typeof lightTheme
       >) {
         if (key === 'common') continue
         ;(overrides as any)[key] = (mergedTheme[key]?.self?.(common) ||
@@ -108,10 +108,10 @@ export default defineComponent({
     const compNamePatternRef = ref('')
     const tempVarNamePatternRef = ref('')
     const tempCompNamePatternRef = ref('')
-    function applyTempOverrides (): void {
+    function applyTempOverrides(): void {
       overridesRef.value = cloneDeep(toRaw(tempOverridesRef.value))
     }
-    function setTempOverrides (
+    function setTempOverrides(
       compName: string,
       varName: string,
       value: string
@@ -126,16 +126,16 @@ export default defineComponent({
         delete compOverrides[varName]
       }
     }
-    function handleClearAllClick (): void {
+    function handleClearAllClick(): void {
       tempOverridesRef.value = {}
       overridesRef.value = {}
     }
-    function handleImportClick (): void {
+    function handleImportClick(): void {
       const { value: fileInput } = fileInputRef
       if (!fileInput) return
       fileInput.click()
     }
-    function handleInputFileChange (): void {
+    function handleInputFileChange(): void {
       const { value: fileInput } = fileInputRef
       if (!fileInput) return
       const fileList = fileInput.files
@@ -155,7 +155,7 @@ export default defineComponent({
           fileInput.value = ''
         })
     }
-    function handleExportClick (): void {
+    function handleExportClick(): void {
       const url = URL.createObjectURL(
         new Blob([JSON.stringify(overridesRef.value, undefined, 2)])
       )
@@ -190,7 +190,7 @@ export default defineComponent({
       handleInputFileChange
     }
   },
-  render () {
+  render() {
     return (
       <NConfigProvider themeOverrides={this.overrides}>
         {{
@@ -364,8 +364,8 @@ export default defineComponent({
                                   })
                                   .map((themeKey) => {
                                     const componentTheme:
-                                    | Record<string, string>
-                                    | undefined =
+                                      | Record<string, string>
+                                      | undefined =
                                       themeKey === 'common'
                                         ? this.themeCommonDefault
                                         : (theme as any)[themeKey]
@@ -416,8 +416,8 @@ export default defineComponent({
                                                             value={
                                                               this
                                                                 .tempOverrides?.[
-                                                                  themeKey
-                                                                ]?.[varKey] ||
+                                                                themeKey
+                                                              ]?.[varKey] ||
                                                               componentTheme[
                                                                 varKey
                                                               ]
@@ -446,8 +446,8 @@ export default defineComponent({
                                                                     ] ===
                                                                     this
                                                                       .tempOverrides?.[
-                                                                        themeKey
-                                                                      ]?.[varKey]
+                                                                      themeKey
+                                                                    ]?.[varKey]
                                                                   }
                                                                   onClick={() => {
                                                                     this.setTempOverrides(
@@ -471,7 +471,7 @@ export default defineComponent({
                                                               )
                                                             }}
                                                           </NColorPicker>
-                                                            ) : (
+                                                        ) : (
                                                           <NInput
                                                             key={varKey}
                                                             onChange={
@@ -490,8 +490,8 @@ export default defineComponent({
                                                             value={
                                                               this
                                                                 .tempOverrides?.[
-                                                                  themeKey
-                                                                ]?.[varKey] || ''
+                                                                themeKey
+                                                              ]?.[varKey] || ''
                                                             }
                                                             placeholder={
                                                               componentTheme[
@@ -499,7 +499,7 @@ export default defineComponent({
                                                               ]
                                                             }
                                                           />
-                                                            )
+                                                        )
                                                       ]
                                                     })
                                                 }}

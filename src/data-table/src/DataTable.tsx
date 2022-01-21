@@ -78,6 +78,7 @@ export const dataTableProps = {
     default: undefined
   },
   striped: Boolean,
+  sticky: Boolean,
   scrollX: [Number, String] as PropType<string | number>,
   defaultCheckedRowKeys: {
     type: Array as PropType<RowKey[]>,
@@ -340,6 +341,7 @@ export default defineComponent({
       virtualScrollRef: toRef(props, 'virtualScroll'),
       rowPropsRef: toRef(props, 'rowProps'),
       stripedRef: toRef(props, 'striped'),
+      stickyRef: toRef(props, 'sticky'),
       checkOptionsRef: computed(() => {
         const { value: selectionColumn } = selectionColumnRef
         return selectionColumn?.options
@@ -496,7 +498,8 @@ export default defineComponent({
             [`${mergedClsPrefix}-data-table--single-line`]: this.singleLine,
             [`${mergedClsPrefix}-data-table--single-column`]: this.singleColumn,
             [`${mergedClsPrefix}-data-table--loading`]: this.loading,
-            [`${mergedClsPrefix}-data-table--flex-height`]: this.flexHeight
+            [`${mergedClsPrefix}-data-table--flex-height`]: this.flexHeight,
+            [`${mergedClsPrefix}-data-table--sticky`]: this.sticky
           }
         ]}
         style={this.cssVars as CSSProperties}

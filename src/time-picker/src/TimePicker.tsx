@@ -60,7 +60,7 @@ import { findSimilarTime, isTimeInStep } from './utils'
 import style from './styles/index.cssr'
 
 // validate hours, minutes, seconds prop
-function validateUnits (value: MaybeArray<number>, max: number): boolean {
+function validateUnits(value: MaybeArray<number>, max: number): boolean {
   if (value === undefined) {
     return true
   }
@@ -105,10 +105,10 @@ const timePickerProps = {
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateFormattedValue: [Function, Array] as PropType<
-  MaybeArray<OnUpdateFormattedValue>
+    MaybeArray<OnUpdateFormattedValue>
   >,
   'onUpdate:formattedValue': [Function, Array] as PropType<
-  MaybeArray<OnUpdateFormattedValue>
+    MaybeArray<OnUpdateFormattedValue>
   >,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
@@ -151,7 +151,7 @@ export type TimePickerProps = ExtractPublicPropTypes<typeof timePickerProps>
 export default defineComponent({
   name: 'TimePicker',
   props: timePickerProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onChange !== undefined) {
@@ -188,7 +188,7 @@ export default defineComponent({
       }
     })
 
-    function getTimestampFromFormattedValue (
+    function getTimestampFromFormattedValue(
       value: string | null
     ): number | null {
       if (value === null) return null
@@ -311,7 +311,7 @@ export default defineComponent({
       if (value === null) return null
       return Number(format(value, 'ss', dateFnsOptionsRef.value))
     })
-    function doUpdateFormattedValue (
+    function doUpdateFormattedValue(
       value: string | null,
       timestampValue: number | null
     ): void {
@@ -334,7 +334,7 @@ export default defineComponent({
         )
       }
     }
-    function doUpdateValue (value: number | null): void {
+    function doUpdateValue(value: number | null): void {
       const {
         onUpdateValue,
         'onUpdate:value': _onUpdateValue,
@@ -355,29 +355,29 @@ export default defineComponent({
       nTriggerFormChange()
       nTriggerFormInput()
     }
-    function doFocus (e: FocusEvent): void {
+    function doFocus(e: FocusEvent): void {
       const { onFocus } = props
       const { nTriggerFormFocus } = formItem
       if (onFocus) call(onFocus, e)
       nTriggerFormFocus()
     }
-    function doBlur (e: FocusEvent): void {
+    function doBlur(e: FocusEvent): void {
       const { onBlur } = props
       const { nTriggerFormBlur } = formItem
       if (onBlur) call(onBlur, e)
       nTriggerFormBlur()
     }
-    function handleTimeInputClear (e: MouseEvent): void {
+    function handleTimeInputClear(e: MouseEvent): void {
       e.stopPropagation()
       doUpdateValue(null)
       deriveInputValue(null)
     }
-    function handleFocusDetectorFocus (): void {
+    function handleFocusDetectorFocus(): void {
       closePanel({
         returnFocus: true
       })
     }
-    function handleMenuKeyDown (e: KeyboardEvent): void {
+    function handleMenuKeyDown(e: KeyboardEvent): void {
       switch (e.code) {
         case 'Escape':
           closePanel({
@@ -394,19 +394,19 @@ export default defineComponent({
           break
       }
     }
-    function disableTransitionOneTick (): void {
+    function disableTransitionOneTick(): void {
       transitionDisabledRef.value = true
       void nextTick(() => {
         transitionDisabledRef.value = false
       })
     }
-    function handleTriggerClick (e: MouseEvent): void {
+    function handleTriggerClick(e: MouseEvent): void {
       if (mergedDisabledRef.value || happensIn(e, 'clear')) return
       if (!mergedShowRef.value) {
         openPanel()
       }
     }
-    function handleHourClick (hour: ItemValue): void {
+    function handleHourClick(hour: ItemValue): void {
       if (typeof hour === 'string') return
       if (mergedValueRef.value === null) {
         doUpdateValue(getTime(setHours(startOfHour(new Date()), hour)))
@@ -414,7 +414,7 @@ export default defineComponent({
         doUpdateValue(getTime(setHours(mergedValueRef.value, hour)))
       }
     }
-    function handleMinuteClick (minute: ItemValue): void {
+    function handleMinuteClick(minute: ItemValue): void {
       if (typeof minute === 'string') return
       if (mergedValueRef.value === null) {
         doUpdateValue(getTime(setMinutes(startOfMinute(new Date()), minute)))
@@ -422,7 +422,7 @@ export default defineComponent({
         doUpdateValue(getTime(setMinutes(mergedValueRef.value, minute)))
       }
     }
-    function handleSecondClick (second: ItemValue): void {
+    function handleSecondClick(second: ItemValue): void {
       if (typeof second === 'string') return
       if (mergedValueRef.value === null) {
         doUpdateValue(getTime(setSeconds(startOfSecond(new Date()), second)))
@@ -430,7 +430,7 @@ export default defineComponent({
         doUpdateValue(getTime(setSeconds(mergedValueRef.value, second)))
       }
     }
-    function handleAmPmClick (amPm: ItemValue): void {
+    function handleAmPmClick(amPm: ItemValue): void {
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         const now = new Date()
@@ -450,7 +450,7 @@ export default defineComponent({
         }
       }
     }
-    function deriveInputValue (time?: null | number): void {
+    function deriveInputValue(time?: null | number): void {
       if (time === undefined) time = mergedValueRef.value
       if (time === null) displayTimeStringRef.value = ''
       else {
@@ -461,11 +461,11 @@ export default defineComponent({
         )
       }
     }
-    function handleTimeInputFocus (e: FocusEvent): void {
+    function handleTimeInputFocus(e: FocusEvent): void {
       if (isInternalFocusSwitch(e)) return
       doFocus(e)
     }
-    function handleTimeInputBlur (e: FocusEvent): void {
+    function handleTimeInputBlur(e: FocusEvent): void {
       if (isInternalFocusSwitch(e)) return
       if (mergedShowRef.value) {
         const panelEl = panelInstRef.value?.$el
@@ -480,20 +480,20 @@ export default defineComponent({
       }
     }
 
-    function handleTimeInputActivate (): void {
+    function handleTimeInputActivate(): void {
       if (mergedDisabledRef.value) return
       if (!mergedShowRef.value) {
         openPanel()
       }
     }
-    function handleTimeInputDeactivate (): void {
+    function handleTimeInputDeactivate(): void {
       if (mergedDisabledRef.value) return
       deriveInputValue()
       closePanel({
         returnFocus: false
       })
     }
-    function scrollTimer (): void {
+    function scrollTimer(): void {
       if (!panelInstRef.value) return
       const { hourScrollRef, minuteScrollRef, secondScrollRef, amPmScrollRef } =
         panelInstRef.value
@@ -510,21 +510,21 @@ export default defineComponent({
         }
       )
     }
-    function doUpdateShow (value: boolean): void {
+    function doUpdateShow(value: boolean): void {
       uncontrolledShowRef.value = value
     }
-    function isInternalFocusSwitch (e: FocusEvent): boolean {
+    function isInternalFocusSwitch(e: FocusEvent): boolean {
       return !!(
         inputInstRef.value?.wrapperElRef?.contains(e.relatedTarget as Node) ||
         panelInstRef.value?.$el.contains(e.relatedTarget as Node)
       )
     }
-    function openPanel (): void {
+    function openPanel(): void {
       memorizedValueRef.value = mergedValueRef.value
       doUpdateShow(true)
       void nextTick(scrollTimer)
     }
-    function handleClickOutside (e: MouseEvent): void {
+    function handleClickOutside(e: MouseEvent): void {
       if (
         mergedShowRef.value &&
         !inputInstRef.value?.wrapperElRef?.contains(e.target as Node)
@@ -534,7 +534,7 @@ export default defineComponent({
         })
       }
     }
-    function closePanel ({ returnFocus }: { returnFocus: boolean }): void {
+    function closePanel({ returnFocus }: { returnFocus: boolean }): void {
       if (mergedShowRef.value) {
         doUpdateShow(false)
         if (returnFocus) {
@@ -542,7 +542,7 @@ export default defineComponent({
         }
       }
     }
-    function handleTimeInputUpdateValue (v: string): void {
+    function handleTimeInputUpdateValue(v: string): void {
       if (v === '') {
         doUpdateValue(null)
         return
@@ -568,11 +568,11 @@ export default defineComponent({
         }
       }
     }
-    function handleCancelClick (): void {
+    function handleCancelClick(): void {
       doUpdateValue(memorizedValueRef.value)
       doUpdateShow(false)
     }
-    function handleNowClick (): void {
+    function handleNowClick(): void {
       const now = new Date()
       const getNowTime = {
         hours: getHours,
@@ -598,13 +598,13 @@ export default defineComponent({
       )
       doUpdateValue(getTime(newValue))
     }
-    function handleConfirmClick (): void {
+    function handleConfirmClick(): void {
       deriveInputValue()
       closePanel({
         returnFocus: true
       })
     }
-    function handleMenuFocusOut (e: FocusEvent): void {
+    function handleMenuFocusOut(e: FocusEvent): void {
       if (isInternalFocusSwitch(e)) return
       doBlur(e)
       closePanel({
@@ -724,7 +724,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <div
@@ -837,7 +837,7 @@ export default defineComponent({
                                   }
                                 />,
                                 [[clickoutside, this.handleClickOutside]]
-                            )
+                              )
                             : null
                       }}
                     </Transition>

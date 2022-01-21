@@ -20,7 +20,8 @@ export default defineComponent({
       maxHeightRef,
       minHeightRef,
       flexHeightRef,
-      syncScrollState
+      syncScrollState,
+      stickyRef
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
 
@@ -83,13 +84,14 @@ export default defineComponent({
       bodyInstRef,
       bodyStyle: bodyStyleRef,
       flexHeight: flexHeightRef,
+      sticky: stickyRef,
       handleBodyResize,
       ...exposedMethods
     }
   },
   render () {
-    const { mergedClsPrefix, maxHeight, flexHeight } = this
-    const headerInBody = maxHeight === undefined && !flexHeight
+    const { mergedClsPrefix, maxHeight, flexHeight, sticky } = this
+    const headerInBody = maxHeight === undefined && !flexHeight && !sticky
     return (
       <div class={`${mergedClsPrefix}-data-table-base-table`} ref="selfElRef">
         {headerInBody ? null : <TableHeader ref="headerInstRef" />}

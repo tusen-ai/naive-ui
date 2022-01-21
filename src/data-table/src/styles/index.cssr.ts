@@ -308,7 +308,9 @@ export default c([
       cB('data-table-wrapper', `
         opacity: var(--n-opacity-loading);
         pointer-events: none;
-      `)
+      `, [
+      cB('data-table-base-table', 'clip-path: inset(0 0 0 0 round var(--n-border-radius));')
+    ])
     ]),
     cM('single-column', [
       cB('data-table-td', {
@@ -334,6 +336,16 @@ export default c([
           borderRight: '0 solid var(--n-merged-border-color)'
         })
       ])
+    ]),
+    cM('sticky', [
+      cB('data-table-base-table-header', {
+        position: 'sticky',
+        top: 0,
+        zIndex: 4,
+        marginBottom: '-1px',
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0
+      })
     ]),
     cM('bordered', [
       cB('data-table-wrapper', `

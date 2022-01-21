@@ -27,22 +27,22 @@ export type Shortcuts =
 export type OnUpdateValue = (
   value: number &
     (number | null) &
-  [number, number] &
+    [number, number] &
     ([number, number] | null),
   formattedValue: string &
     (string | null) &
-  [string, string] &
+    [string, string] &
     ([string, string] | null)
 ) => void
 
 export type OnUpdateFormattedValue = (
   value: string &
     (string | null) &
-  [string, string] &
+    [string, string] &
     ([string, string] | null),
   timestampValue: number &
     (number | null) &
-  [number, number] &
+    [number, number] &
     ([number, number] | null)
 ) => void
 
@@ -59,7 +59,7 @@ export type OnUpdateValueImpl = (
 export type OnPanelUpdateValue = (
   value: number &
     (number | null) &
-  [number, number] &
+    [number, number] &
     ([number, number] | null),
   doUpdate: boolean
 ) => void
@@ -95,7 +95,7 @@ export type DatePickerInjection = {
   datePickerSlots: Slots
   scrollPickerColumns: (value?: number) => void
 } & ReturnType<typeof uniCalendarValidation> &
-ReturnType<typeof dualCalendarValidation>
+  ReturnType<typeof dualCalendarValidation>
 
 export const datePickerInjectionKey: InjectionKey<DatePickerInjection> =
   Symbol('datePicker')

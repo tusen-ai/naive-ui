@@ -41,6 +41,7 @@ custom-filter-menu
 tree
 flex-height
 striped
+sticky
 simple-editable
 switchable-editable
 ```
@@ -75,6 +76,7 @@ switchable-editable
 | single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |
 | single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |
+| sticky | `boolean` | `false` | Whether table header fix on the top of the page when part of the table is scroll out of view. |
 | striped | `boolean` | `false` | Whether to show zebra stripes on rows. |
 | summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellipsis` or `max-height` or `flex-height` are set, it will always be `'fixed'` regardless of what you set. |

@@ -2,7 +2,7 @@ import { tooltipLight } from '../../tooltip/styles'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
 
-function self () {
+function self() {
   return {
     toolbarIconColor: 'rgba(255, 255, 255, .9)',
     toolbarColor: 'rgba(0, 0, 0, .35)',

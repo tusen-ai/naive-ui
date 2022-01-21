@@ -84,7 +84,7 @@ export type TransferProps = ExtractPublicPropTypes<typeof transferProps>
 export default defineComponent({
   name: 'Transfer',
   props: transferProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Transfer',
@@ -126,7 +126,7 @@ export default defineComponent({
       handleTgtFilterUpdateValue,
       handleSrcFilterUpdateValue
     } = useTransferData(props, mergedDisabledRef)
-    function doUpdateValue (value: OptionValue[]): void {
+    function doUpdateValue(value: OptionValue[]): void {
       const {
         onUpdateValue,
         'onUpdate:value': _onUpdateValue,
@@ -140,7 +140,7 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function handleSrcHeaderCheck (value: boolean): void {
+    function handleSrcHeaderCheck(value: boolean): void {
       const {
         value: { checked, indeterminate }
       } = srcCheckedStatusRef
@@ -150,7 +150,7 @@ export default defineComponent({
         srcCheckedValuesRef.value = Array.from(avlSrcValueSetRef.value)
       }
     }
-    function handleTgtHeaderCheck (): void {
+    function handleTgtHeaderCheck(): void {
       const {
         value: { checked, indeterminate }
       } = tgtCheckedStatusRef
@@ -160,7 +160,7 @@ export default defineComponent({
         tgtCheckedValuesRef.value = Array.from(avlTgtValueSetRef.value)
       }
     }
-    function handleTgtCheckboxClick (
+    function handleTgtCheckboxClick(
       checked: boolean,
       optionValue: OptionValue
     ): void {
@@ -175,7 +175,7 @@ export default defineComponent({
         }
       }
     }
-    function handleSrcCheckboxClick (
+    function handleSrcCheckboxClick(
       checked: boolean,
       optionValue: OptionValue
     ): void {
@@ -190,13 +190,13 @@ export default defineComponent({
         }
       }
     }
-    function handleToTgtClick (): void {
+    function handleToTgtClick(): void {
       doUpdateValue(
         srcCheckedValuesRef.value.concat(mergedValueRef.value || [])
       )
       srcCheckedValuesRef.value = []
     }
-    function handleToSrcClick (): void {
+    function handleToSrcClick(): void {
       const tgtCheckedValueSet = new Set(tgtCheckedValuesRef.value)
       doUpdateValue(
         (mergedValueRef.value || []).filter((v) => !tgtCheckedValueSet.has(v))
@@ -295,7 +295,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <div

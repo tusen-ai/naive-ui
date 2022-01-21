@@ -11,10 +11,7 @@ export default defineComponent({
     },
     placement: {
       type: String as PropType<
-      | 'top-left'
-      | 'top-right'
-      | 'bottom-left'
-      | 'bottom-right'
+      'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
       >,
       required: true
     }

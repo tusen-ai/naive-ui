@@ -5,7 +5,7 @@ import globalStyle from '../_styles/global/index.cssr'
 import { throwError } from '../_utils'
 import { cssrAnchorMetaName } from './common'
 
-export default function useStyle (
+export default function useStyle(
   mountId: string,
   style: CNode,
   clsPrefixRef?: Ref<string | undefined>

@@ -44,7 +44,7 @@ const usePanelCommonProps = {
 type UsePanelCommonProps = ExtractPropTypes<typeof usePanelCommonProps>
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function usePanelCommon (props: UsePanelCommonProps) {
+function usePanelCommon(props: UsePanelCommonProps) {
   const {
     dateLocaleRef,
     timePickerSizeRef,
@@ -60,30 +60,30 @@ function usePanelCommon (props: UsePanelCommonProps) {
   })
   const selfRef = ref<HTMLElement | null>(null)
   const keyboardState = useKeyboard()
-  function doConfirm (): void {
+  function doConfirm(): void {
     const { onConfirm } = props
     if (onConfirm) onConfirm()
   }
-  function doUpdateValue (value: Value | null, doUpdate: boolean): void {
+  function doUpdateValue(value: Value | null, doUpdate: boolean): void {
     const { onUpdateValue } = props
     ;(onUpdateValue as OnPanelUpdateValueImpl)(value, doUpdate)
   }
-  function doClose (disableUpdateOnClose: boolean = false): void {
+  function doClose(disableUpdateOnClose: boolean = false): void {
     const { onClose } = props
     if (onClose) onClose(disableUpdateOnClose)
   }
-  function doTabOut (): void {
+  function doTabOut(): void {
     const { onTabOut } = props
     if (onTabOut) onTabOut()
   }
-  function handleClearClick (): void {
+  function handleClearClick(): void {
     doUpdateValue(null, true)
     doClose(true)
   }
-  function handleFocusDetectorFocus (): void {
+  function handleFocusDetectorFocus(): void {
     doTabOut()
   }
-  function disableTransitionOneTick (): void {
+  function disableTransitionOneTick(): void {
     if (props.active) {
       void nextTick(() => {
         const { value: selfEl } = selfRef
@@ -99,13 +99,13 @@ function usePanelCommon (props: UsePanelCommonProps) {
       })
     }
   }
-  function handlePanelKeyDown (e: KeyboardEvent): void {
+  function handlePanelKeyDown(e: KeyboardEvent): void {
     if (e.code === 'Tab' && e.target === selfRef.value && keyboardState.shift) {
       e.preventDefault()
       doTabOut()
     }
   }
-  function handlePanelFocus (e: FocusEvent): void {
+  function handlePanelFocus(e: FocusEvent): void {
     const { value: el } = selfRef
     if (
       keyboardState.tab &&
@@ -117,20 +117,20 @@ function usePanelCommon (props: UsePanelCommonProps) {
   }
   let cachedValue: Value | null = null
   let cached = false
-  function cachePendingValue (): void {
+  function cachePendingValue(): void {
     cachedValue = props.value
     cached = true
   }
-  function clearPendingValue (): void {
+  function clearPendingValue(): void {
     cached = false
   }
-  function restorePendingValue (): void {
+  function restorePendingValue(): void {
     if (cached) {
       doUpdateValue(cachedValue, false)
       cached = false
     }
   }
-  function getShortcutValue (
+  function getShortcutValue(
     shortcut: Shortcuts[string]
   ): number | [number, number] {
     if (typeof shortcut === 'function') {

@@ -14,7 +14,9 @@ async function loadComponent (dir) {
   return {
     path: dir,
     name: `n-${dir}`,
-    components: exist(join(COMPONENT_ROOT, dir, 'index.ts')) ? await require(join(COMPONENT_ROOT, dir, 'index.ts')) : {}
+    components: exist(join(COMPONENT_ROOT, dir, 'index.ts'))
+      ? await require(join(COMPONENT_ROOT, dir, 'index.ts'))
+      : {}
   }
 }
 function parseComponentsDeclaration (code) {
@@ -29,12 +31,14 @@ function parseComponentsDeclaration (code) {
 }
 
 async function generateComponentsType () {
-  const folders = (await fg('[^_]*', {
-    onlyDirectories: true,
-    cwd: COMPONENT_ROOT
-  })).filter(fold => !excludeDir.includes(fold))
+  const folders = (
+    await fg('[^_]*', {
+      onlyDirectories: true,
+      cwd: COMPONENT_ROOT
+    })
+  ).filter((fold) => !excludeDir.includes(fold))
   const files = await Promise.all(
-    folders.map(async dir => await loadComponent(dir))
+    folders.map(async (dir) => await loadComponent(dir))
   )
 
   const components = {}

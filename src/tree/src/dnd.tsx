@@ -1,7 +1,7 @@
 import { CSSProperties, h, VNode } from 'vue'
 import { DropPosition, TreeOption } from './interface'
 
-export function renderDropMark ({
+export function renderDropMark({
   position,
   offsetLevel,
   indent,
@@ -39,7 +39,7 @@ export function renderDropMark ({
   return <div style={style}></div>
 }
 
-export function defaultAllowDrop ({
+export function defaultAllowDrop({
   dropPosition,
   node
 }: {

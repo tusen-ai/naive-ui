@@ -9,7 +9,7 @@ export interface TweenProps {
   onFinish: () => void
 }
 
-export function tween (props: TweenProps): void {
+export function tween(props: TweenProps): void {
   const { from, to, duration, onUpdate, onFinish } = props
   const tick = (): void => {
     const current = performance.now()

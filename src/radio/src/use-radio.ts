@@ -31,10 +31,10 @@ const radioProps = {
   },
   size: String as PropType<'small' | 'medium' | 'large'>,
   onUpdateChecked: [Function, Array] as PropType<
-  undefined | MaybeArray<(value: boolean) => void>
+    undefined | MaybeArray<(value: boolean) => void>
   >,
   'onUpdate:checked': [Function, Array] as PropType<
-  undefined | MaybeArray<(value: boolean) => void>
+    undefined | MaybeArray<(value: boolean) => void>
   >,
   // deprecated
   checkedValue: {
@@ -77,9 +77,9 @@ export interface UseRadio {
   handleRadioInputFocus: () => void
 }
 
-function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
+function setup(props: ExtractPropTypes<typeof radioProps>): UseRadio {
   const formItem = useFormItem(props, {
-    mergedSize (NFormItem) {
+    mergedSize(NFormItem) {
       const { size } = props
       if (size !== undefined) return size
       if (NRadioGroup) {
@@ -95,7 +95,7 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
       }
       return 'medium'
     },
-    mergedDisabled (NFormItem) {
+    mergedDisabled(NFormItem) {
       if (props.disabled) return true
       if (NRadioGroup?.disabledRef.value) return true
       if (NFormItem?.disabled.value) return true
@@ -122,7 +122,7 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
     if (NRadioGroup) return NRadioGroup.nameRef.value
   })
   const focusRef = ref(false)
-  function doUpdateChecked (): void {
+  function doUpdateChecked(): void {
     if (NRadioGroup) {
       const { doUpdateValue } = NRadioGroup
       const { value } = props
@@ -137,19 +137,19 @@ function setup (props: ExtractPropTypes<typeof radioProps>): UseRadio {
       uncontrolledCheckedRef.value = true
     }
   }
-  function toggle (): void {
+  function toggle(): void {
     if (mergedDisabledRef.value) return
     if (!renderSafeCheckedRef.value) {
       doUpdateChecked()
     }
   }
-  function handleRadioInputChange (): void {
+  function handleRadioInputChange(): void {
     toggle()
   }
-  function handleRadioInputBlur (): void {
+  function handleRadioInputBlur(): void {
     focusRef.value = false
   }
-  function handleRadioInputFocus (): void {
+  function handleRadioInputFocus(): void {
     focusRef.value = true
   }
   return {

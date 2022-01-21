@@ -1,12 +1,7 @@
 # 自动每屏显示数量
 
 ```html
-<n-carousel
-  slides-per-view="auto"
-  :space-between="20"
-  :loop="false"
-  draggable
->
+<n-carousel slides-per-view="auto" :space-between="20" :loop="false" draggable>
   <n-carousel-item style="width: 60%">
     <img
       class="carousel-img"

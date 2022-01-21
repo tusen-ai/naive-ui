@@ -16,7 +16,7 @@ export type BlockquoteProps = ExtractPublicPropTypes<typeof blockquoteProps>
 export default defineComponent({
   name: 'Blockquote',
   props: blockquoteProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
@@ -48,7 +48,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <blockquote

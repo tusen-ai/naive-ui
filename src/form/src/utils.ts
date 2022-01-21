@@ -5,7 +5,7 @@ import { formInjectionKey } from './interface'
 import type { Size, FormItemRule } from './interface'
 import { formatLength } from '../../_utils'
 
-export function formItemSize (props: FormItemSetupProps): {
+export function formItemSize(props: FormItemSetupProps): {
   mergedSize: ComputedRef<Size>
 } {
   const NForm = inject(formInjectionKey, null)
@@ -19,7 +19,7 @@ export function formItemSize (props: FormItemSetupProps): {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function formItemMisc (props: FormItemSetupProps) {
+export function formItemMisc(props: FormItemSetupProps) {
   const NForm = inject(formInjectionKey, null)
   const mergedLabelWidthRef = computed(() => {
     if (mergedLabelPlacementRef.value === 'top') return
@@ -107,7 +107,7 @@ export function formItemMisc (props: FormItemSetupProps) {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function formItemRule (props: FormItemSetupProps) {
+export function formItemRule(props: FormItemSetupProps) {
   const NForm = inject(formInjectionKey, null)
   const compatibleRulePathRef = computed(() => {
     const { rulePath } = props

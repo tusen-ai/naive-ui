@@ -7,7 +7,7 @@ export interface FormRules {
 }
 
 export type FormItemRuleValidatorParams = Parameters<
-NonNullable<RuleItem['validator']>
+  NonNullable<RuleItem['validator']>
 >
 
 export type FormItemRuleValidator = (

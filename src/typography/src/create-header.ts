@@ -10,7 +10,7 @@ const headerProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
   type: {
     type: String as PropType<
-    'info' | 'success' | 'warning' | 'error' | 'default'
+      'info' | 'success' | 'warning' | 'error' | 'default'
     >,
     default: 'default'
   },
@@ -25,7 +25,7 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
   defineComponent({
     name: `H${level}`,
     props: headerProps,
-    setup (props) {
+    setup(props) {
       const { mergedClsPrefixRef } = useConfig(props)
       const themeRef = useTheme(
         'Typography',
@@ -64,7 +64,7 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
         })
       }
     },
-    render () {
+    render() {
       const { prefix, alignText, mergedClsPrefix, cssVars, $slots } = this
       return h(
         `h${level}`,

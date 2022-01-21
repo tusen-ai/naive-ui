@@ -18,7 +18,7 @@ const timelineItemProps = {
   color: String,
   type: {
     type: String as PropType<
-    'default' | 'success' | 'error' | 'warning' | 'info'
+      'default' | 'success' | 'error' | 'warning' | 'info'
     >,
     default: 'default'
   }
@@ -29,7 +29,7 @@ export type TimelineItemProps = ExtractPublicPropTypes<typeof timelineItemProps>
 export default defineComponent({
   name: 'TimelineItem',
   props: timelineItemProps,
-  setup (props) {
+  setup(props) {
     const NTimeline = inject(timelineInjectionKey)
     if (!NTimeline) {
       throwError(
@@ -78,7 +78,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, color, $slots } = this
     return (
       <div

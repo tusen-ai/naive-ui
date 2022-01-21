@@ -5,8 +5,8 @@ export const tuple = <T extends string[]>(...args: T): T => args
 export type ElementOf<T> = T extends Array<infer E>
   ? E
   : T extends ReadonlyArray<infer F>
-    ? F
-    : never
+  ? F
+  : never
 
 export interface CarouselMethodsInjection {
   to: (index: number) => void

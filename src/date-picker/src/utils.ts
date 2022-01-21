@@ -22,7 +22,7 @@ import {
 } from 'date-fns'
 import { START_YEAR } from './config'
 
-function getDerivedTimeFromKeyboardEvent (
+function getDerivedTimeFromKeyboardEvent(
   prevValue: number | null,
   event: KeyboardEvent
 ): number {
@@ -48,7 +48,7 @@ const matcherMap = {
   quarter: isSameQuarter
 } as const
 
-function matchDate (
+function matchDate(
   sourceTime: number[] | number,
   patternTime: number | Date,
   type: 'date' | 'month' | 'year' | 'quarter' = 'date'
@@ -109,7 +109,7 @@ export interface QuarterItem {
   ts: number
 }
 
-function dateItem (
+function dateItem(
   time: number,
   monthTs: number,
   valueTs: number | [number, number] | null,
@@ -142,7 +142,7 @@ function dateItem (
   }
 }
 
-function monthItem (
+function monthItem(
   monthTs: number,
   valueTs: number | [number, number] | null,
   currentTs: number
@@ -159,7 +159,7 @@ function monthItem (
   }
 }
 
-function yearItem (
+function yearItem(
   yearTs: number,
   valueTs: number | [number, number] | null,
   currentTs: number
@@ -175,7 +175,7 @@ function yearItem (
   }
 }
 
-function quarterItem (
+function quarterItem(
   quarterTs: number,
   valueTs: number | [number, number] | null,
   currentTs: number
@@ -196,7 +196,7 @@ function quarterItem (
  * Given time to display calendar, given the selected time, given current time,
  * return the date array of display time's month.
  */
-function dateArray (
+function dateArray(
   monthTs: number,
   valueTs: number | [number, number] | null,
   currentTs: number,
@@ -230,8 +230,8 @@ function dateArray (
     ? calendarDays.length <= 28
       ? 28
       : calendarDays.length <= 35
-        ? 35
-        : 42
+      ? 35
+      : 42
     : 42
   while (calendarDays.length < endIndex) {
     calendarDays.push(
@@ -242,7 +242,7 @@ function dateArray (
   return calendarDays
 }
 
-function monthArray (
+function monthArray(
   monthTs: number,
   valueTs: number | [number, number] | null,
   currentTs: number
@@ -257,7 +257,7 @@ function monthArray (
   return calendarMonths
 }
 
-function quarterArray (
+function quarterArray(
   quarterTs: number,
   valueTs: number | [number, number] | null,
   currentTs: number
@@ -272,7 +272,7 @@ function quarterArray (
   return calendarQuarters
 }
 
-function yearArray (
+function yearArray(
   yearTs: number,
   valueTs: number | [number, number] | null,
   currentTs: number
@@ -290,7 +290,7 @@ function yearArray (
   return calendarYears
 }
 
-function strictParse (
+function strictParse(
   string: string,
   pattern: string,
   backup: Date,
@@ -304,13 +304,13 @@ function strictParse (
   else return new Date(NaN)
 }
 
-function getDefaultTime (timeValue: string | undefined):
-| {
-  hours: number
-  minutes: number
-  seconds: number
-}
-| undefined {
+function getDefaultTime(timeValue: string | undefined):
+  | {
+      hours: number
+      minutes: number
+      seconds: number
+    }
+  | undefined {
   if (timeValue === undefined) {
     return undefined
   }
