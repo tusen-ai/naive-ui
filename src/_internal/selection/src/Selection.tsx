@@ -510,7 +510,7 @@ export default defineComponent({
       >
         {{
           default: () =>
-            $slots.suffix ? renderSlot($slots, 'suffix') : <ChevronDownIcon />
+            renderSlot($slots, 'suffix', undefined, () => [<ChevronDownIcon />])
         }}
       </Suffix>
     )

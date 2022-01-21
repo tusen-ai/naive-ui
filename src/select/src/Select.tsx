@@ -741,11 +741,11 @@ export default defineComponent({
                       onKeydown={this.handleKeyDown}
                       onKeyup={this.handleKeyUp}
                     >
-                      {$slots.suffix
-                        ? {
-                            suffix: () => renderSlot($slots, 'suffix')
-                          }
-                        : undefined}
+                      {{
+                        suffix: $slots.suffix
+                          ? () => renderSlot($slots, 'suffix')
+                          : undefined
+                      }}
                     </NInternalSelection>
                   )
                 }}
