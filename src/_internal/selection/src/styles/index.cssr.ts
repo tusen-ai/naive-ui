@@ -23,7 +23,7 @@ import {
 // --n-color-disabled
 // --n-font-size
 // --n-height
-// --n-padding-single
+// --n-padding-horizontal
 // --n-placeholder-color
 // --n-placeholder-color-disabled
 // --n-text-color
@@ -93,7 +93,8 @@ export default c([
       right: 0;
       bottom: 0;
       left: 0;
-      padding: var(--n-padding-single);
+      padding-right: calc(var(--n-padding-horizontal) + var(--n-arrow-size));
+      padding-left: var(--n-padding-horizontal);
       transition: color .3s var(--n-bezier);
     `, [
       cE('wrapper', `
@@ -113,8 +114,9 @@ export default c([
       position: relative;
       z-index: auto;
       display: flex;
-      padding: var(--n-padding-single);
       padding-top: 3px;
+      padding-right: calc(var(--n-padding-horizontal) + var(--n-arrow-size));
+      padding-left: var(--n-padding-horizontal);
       flex-wrap: wrap;
       align-items: center;
       width: 100%;
@@ -151,7 +153,8 @@ export default c([
         box-sizing: border-box;
         border:none;
         width: 100%;
-        padding: var(--n-padding-single);
+        padding-right: calc(var(--n-padding-horizontal) + var(--n-arrow-size));
+        padding-left: var(--n-padding-horizontal);
         background-color: #0000;
         color: var(--n-text-color);
         transition: color .3s var(--n-bezier);
