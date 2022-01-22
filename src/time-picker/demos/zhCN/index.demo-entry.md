@@ -44,3 +44,9 @@ formatted.vue
 | on-focus | `() => void` | `undefined` | 选择框获得焦点时的回调 |  |
 | on-update:formatted-value | `(value: number \| null, timestampValue: number \| null) => void` | `undefined` | 格式化的值发生改变时的回调 | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 值发生改变时的回调 | `formattedValue` 2.24.0 |
+
+### TimePicker Slots
+
+| 名称 | 参数 | 说明       |
+| ---- | ---- | ---------- |
+| icon | `()` | 自定义图标 |

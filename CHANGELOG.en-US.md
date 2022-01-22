@@ -16,6 +16,7 @@
 - `n-input` doesn't use native scrollbar when `type="textarea"`, closes [#2242](https://github.com/TuSimple/naive-ui/issues/2242), [#1172](https://github.com/TuSimple/naive-ui/issues/1172).
 - `n-number-animation` add `locale` prop, closes [#2181](https://github.com/TuSimple/naive-ui/issues/2181).
 - `n-number-animation`'s locale follows config provider.
+- `n-time-picker` adds `icon` slot, closes [#2228](https://github.com/TuSimple/naive-ui/issues/2228).
 
 ### i18n
 
