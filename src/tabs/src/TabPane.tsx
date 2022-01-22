@@ -42,6 +42,7 @@ export default defineComponent({
   name: 'TabPane',
   alias: ['TabPanel'],
   props: tabPaneProps,
+  inheritAttrs: false,
   setup () {
     const NTab = inject(tabsInjectionKey, null)
     if (!NTab) {
@@ -55,7 +56,10 @@ export default defineComponent({
   },
   render () {
     return (
-      <div class={[`${this.mergedClsPrefix}-tab-pane`, this.class]} style={this.style}>
+      <div
+        class={[`${this.mergedClsPrefix}-tab-pane`, this.class]}
+        style={this.style}
+      >
         {this.$slots}
       </div>
     )

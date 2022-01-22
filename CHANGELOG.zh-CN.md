@@ -6,6 +6,7 @@
 
 - 修复 `n-layout-sider` 在折叠时仍占据 1px 宽度
 - 修复 `n-code` 在 `word-wrap=true` 时不切分单词
+- 修复 `n-tabs` 的 tab 内容区会继承 `attrs`， 关闭 [#2221](https://github.com/TuSimple/naive-ui/issues/2221)
 - 修复 `n-image` 在预览时仍可滚动背景，关闭 [#2241](https://github.com/TuSimple/naive-ui/issues/2241)
 
 ### Feats
