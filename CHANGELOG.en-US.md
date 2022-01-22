@@ -36,6 +36,7 @@
 - `n-checkbox` adds `blur` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
 - `n-cascader` adds `focus` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
 - `n-cascader` adds `blur` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-upload` adds `input-prop` prop, closes [#2204](https://github.com/TuSimple/naive-ui/issues/2204).
 
 ### i18n
 
