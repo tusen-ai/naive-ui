@@ -6,7 +6,7 @@
 
 - Fix `n-layout-sider` still occupies 1px after collapsed.
 - Fix `n-code` doesn't break word when `word-wrap=true`.
-- Fix `n-tabs` 's tab content can inherit `attrs`, closes [#2221](https://github.com/TuSimple/naive-ui/issues/2221).
+- Fix `n-tab-pane`'s tab label area inherits `attrs`, closes [#2221](https://github.com/TuSimple/naive-ui/issues/2221).
 - Fix `n-image` preview popup background can still be scrolled, closes [#2241](https://github.com/TuSimple/naive-ui/issues/2241)
 
 ### Feats
@@ -18,6 +18,7 @@
 - `n-number-animation` add `locale` prop, closes [#2181](https://github.com/TuSimple/naive-ui/issues/2181).
 - `n-number-animation`'s locale follows config provider.
 - `n-time-picker` adds `icon` slot, closes [#2228](https://github.com/TuSimple/naive-ui/issues/2228).
+- `n-tab-pane` adds `tab-props` prop, closes [#2221](https://github.com/TuSimple/naive-ui/issues/2221).
 
 ### i18n
 

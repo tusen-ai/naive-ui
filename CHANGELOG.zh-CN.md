@@ -6,7 +6,7 @@
 
 - 修复 `n-layout-sider` 在折叠时仍占据 1px 宽度
 - 修复 `n-code` 在 `word-wrap=true` 时不切分单词
-- 修复 `n-tabs` 的 tab 内容区会继承 `attrs`， 关闭 [#2221](https://github.com/TuSimple/naive-ui/issues/2221)
+- 修复 `n-tab-pane` 的 tab 区会继承 `attrs`， 关闭 [#2221](https://github.com/TuSimple/naive-ui/issues/2221)
 - 修复 `n-image` 在预览时仍可滚动背景，关闭 [#2241](https://github.com/TuSimple/naive-ui/issues/2241)
 
 ### Feats
@@ -18,6 +18,7 @@
 - `n-number-animation` 新增 `locale` 属性，用于设置国际化语言，关闭 [#2181](https://github.com/TuSimple/naive-ui/issues/2181)
 - `n-number-animation` 跟随 config provider 国际化
 - `n-time-picker` 新增 `icon` 插槽，关闭 [#2228](https://github.com/TuSimple/naive-ui/issues/2228)
+- `n-tab-pane` 新增 `tab-props` 属性，关闭 [#2221](https://github.com/TuSimple/naive-ui/issues/2221)
 
 ### i18n
 
