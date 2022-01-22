@@ -9,6 +9,7 @@
 - Fix `n-tab-pane`'s tab label area inherits `attrs`, closes [#2221](https://github.com/TuSimple/naive-ui/issues/2221).
 - Fix `n-image` preview popup background can still be scrolled, closes [#2241](https://github.com/TuSimple/naive-ui/issues/2241).
 - Fix `n-input` shows placeholder when browser auto completes it, closes [#2234](https://github.com/TuSimple/naive-ui/issues/2234).
+- Fix `n-select` doesn't have padding-top.
 - Fix `n-drawer` can't be closed by `Esc` key, closes [#2233](https://github.com/TuSimple/naive-ui/issues/2233).
 
 ### Feats
@@ -21,6 +22,7 @@
 - `n-number-animation`'s locale follows config provider.
 - `n-time-picker` adds `icon` slot, closes [#2228](https://github.com/TuSimple/naive-ui/issues/2228).
 - `n-tab-pane` adds `tab-props` prop, closes [#2221](https://github.com/TuSimple/naive-ui/issues/2221).
+- Add `CustomThemeCommonVars` to customize `useThemeVars`.
 
 ### i18n
 

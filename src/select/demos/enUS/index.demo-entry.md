@@ -66,7 +66,7 @@ render-person
 | on-search | `(value: string) => void` | `undefined` | Callback triggered when a search is conducted. |  |
 | on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | Callback triggered when the selected value is updated. |  |
 
-### SelectOption Properties
+#### SelectOption Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -77,7 +77,7 @@ render-person
 | style | `string` | Customize the option's style. |
 | value | `string \| number` | Should be unique for each option. |
 
-### SelectGroupOption Properties
+#### SelectGroupOption Properties
 
 | Name | Type | Description |
 | --- | --- | --- |

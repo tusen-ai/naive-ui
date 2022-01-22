@@ -9,6 +9,7 @@
 - 修复 `n-tab-pane` 的 tab 区会继承 `attrs`， 关闭 [#2221](https://github.com/TuSimple/naive-ui/issues/2221)
 - 修复 `n-image` 在预览时仍可滚动背景，关闭 [#2241](https://github.com/TuSimple/naive-ui/issues/2241)
 - 修复 `n-input` 在被浏览器自动填充的时候仍然展示 placeholder，关闭 [#2234](https://github.com/TuSimple/naive-ui/issues/2234)
+- 修复 `n-select` 没有 padding-top
 - 修复 `n-drawer` 无法通过 `Esc` 按键关闭，关闭 [#2233](https://github.com/TuSimple/naive-ui/issues/2233)
 
 ### Feats
@@ -21,6 +22,7 @@
 - `n-number-animation` 跟随 config provider 国际化
 - `n-time-picker` 新增 `icon` 插槽，关闭 [#2228](https://github.com/TuSimple/naive-ui/issues/2228)
 - `n-tab-pane` 新增 `tab-props` 属性，关闭 [#2221](https://github.com/TuSimple/naive-ui/issues/2221)
+- 新增 `CustomThemeCommonVars` 用于拓展 `useThemeVars`
 
 ### i18n
 

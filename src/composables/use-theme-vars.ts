@@ -2,8 +2,11 @@ import { computed, ComputedRef, inject } from 'vue'
 import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
 import { commonLight } from '../_styles/common'
 import type { ThemeCommonVars } from '../_styles/common'
+import type { CustomThemeCommonVars } from '../config-provider'
 
-export function useThemeVars (): ComputedRef<ThemeCommonVars> {
+export function useThemeVars (): ComputedRef<
+ThemeCommonVars & CustomThemeCommonVars
+> {
   const configProviderInjection = inject(configProviderInjectionKey, null)
   return computed(() => {
     if (configProviderInjection === null) return commonLight
