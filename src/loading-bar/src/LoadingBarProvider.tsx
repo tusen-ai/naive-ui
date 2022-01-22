@@ -8,7 +8,6 @@ import {
   nextTick,
   PropType,
   ExtractPropTypes,
-  InjectionKey,
   Ref,
   CSSProperties
 } from 'vue'
@@ -17,7 +16,7 @@ import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import NLoadingBar from './LoadingBar'
 import type { LoadingBarTheme } from '../styles'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 
 interface LoadingBarInst {
   start: () => void
@@ -50,13 +49,13 @@ export type LoadingBarProviderSetupProps = ExtractPropTypes<
   typeof loadingBarProps
 >
 
-export const loadingBarProviderInjectionKey: InjectionKey<{
+export const loadingBarProviderInjectionKey = createInjectionKey<{
   props: LoadingBarProviderSetupProps
   mergedClsPrefixRef: Ref<string>
-}> = Symbol('loadingBar')
+}>('loadingBar')
 
-export const loadingBarApiInjectionKey: InjectionKey<LoadingBarApiInjection> =
-  Symbol('loadingBarApi')
+export const loadingBarApiInjectionKey =
+  createInjectionKey<LoadingBarApiInjection>('loadingBarApi')
 
 export default defineComponent({
   name: 'LoadingBarProvider',

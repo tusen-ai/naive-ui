@@ -2,7 +2,8 @@ import { CheckStrategy, TreeNode } from 'treemate'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
-import { InjectionKey, Ref, VNodeChild } from 'vue'
+import { Ref, VNodeChild } from 'vue'
+import { createInjectionKey } from '../../_utils'
 
 export type ValueAtom = string | number
 export type Value = ValueAtom | ValueAtom[]
@@ -111,8 +112,8 @@ export interface SelectMenuInstance {
   enter: () => boolean
 }
 
-export const cascaderInjectionKey: InjectionKey<CascaderInjection> =
-  Symbol('cascader')
+export const cascaderInjectionKey =
+  createInjectionKey<CascaderInjection>('cascader')
 
 export interface CascaderInst {
   focus: () => void

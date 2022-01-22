@@ -1,9 +1,10 @@
-import { InjectionKey, PropType, Ref } from 'vue'
+import { PropType, Ref } from 'vue'
+import { createInjectionKey } from '../../_utils'
 
-export const layoutSiderInjectionKey: InjectionKey<{
+export const layoutSiderInjectionKey = createInjectionKey<{
   collapsedRef: Ref<boolean>
   collapseModeRef: Ref<'transform' | 'width'>
-}> = Symbol('layoutSiderInjection')
+}>('layoutSiderInjection')
 
 export const positionProp = {
   type: String as PropType<'static' | 'absolute'>,

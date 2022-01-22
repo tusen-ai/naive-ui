@@ -5,13 +5,12 @@ import {
   defineComponent,
   PropType,
   provide,
-  InjectionKey,
   ComputedRef,
   markRaw
 } from 'vue'
 import { useMemo } from 'vooks'
 import { merge } from 'lodash-es'
-import { ExtractPublicPropTypes, warn } from '../../_utils'
+import { createInjectionKey, ExtractPublicPropTypes, warn } from '../../_utils'
 import { defaultClsPrefix, Hljs } from '../../_mixins'
 import type {
   GlobalTheme,
@@ -27,8 +26,8 @@ import type {
 } from './internal-interface'
 import { NDateLocale, NLocale } from '../../locales'
 
-export const configProviderInjectionKey: InjectionKey<ConfigProviderInjection> =
-  Symbol('configProviderInjection')
+export const configProviderInjectionKey =
+  createInjectionKey<ConfigProviderInjection>('configProviderInjection')
 
 export const configProviderProps = {
   abstract: Boolean,

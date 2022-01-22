@@ -7,14 +7,13 @@ import {
   defineComponent,
   provide,
   VNodeChild,
-  InjectionKey,
   ExtractPropTypes,
   Ref,
   PropType,
   CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
-import { omit } from '../../_utils'
+import { createInjectionKey, omit } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -33,8 +32,8 @@ export interface MessageApiInjection {
   destroyAll: () => void
 }
 
-export const messageApiInjectionKey: InjectionKey<MessageApiInjection> =
-  Symbol('messageApi')
+export const messageApiInjectionKey =
+  createInjectionKey<MessageApiInjection>('messageApi')
 
 export interface MessageReactive {
   content?: ContentType
@@ -88,10 +87,10 @@ export type MessageProviderProps = ExtractPublicPropTypes<
 
 type MessageProviderSetupProps = ExtractPropTypes<typeof messageProviderProps>
 
-export const messageProviderInjectionKey: InjectionKey<{
+export const messageProviderInjectionKey = createInjectionKey<{
   props: MessageProviderSetupProps
   mergedClsPrefixRef: Ref<string>
-}> = Symbol('messageProvider')
+}>('messageProvider')
 
 export default defineComponent({
   name: 'MessageProvider',

@@ -5,12 +5,11 @@ import {
   PropType,
   CSSProperties,
   Ref,
-  provide,
-  InjectionKey
+  provide
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 import { listLight } from '../styles'
 import type { ListTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -33,7 +32,7 @@ interface ListInjection {
   mergedClsPrefixRef: Ref<string>
 }
 
-export const listInjectionKey: InjectionKey<ListInjection> = Symbol('list')
+export const listInjectionKey = createInjectionKey<ListInjection>('list')
 
 export default defineComponent({
   name: 'List',

@@ -6,8 +6,7 @@ import {
   provide,
   computed,
   VNode,
-  VNodeChild,
-  InjectionKey
+  VNodeChild
 } from 'vue'
 import { useMemo } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
@@ -18,6 +17,7 @@ import { useMenuChild, useMenuChildProps } from './use-menu-child'
 import type { SubmenuInjection } from './use-menu-child'
 import { MenuMixedOption, TmNode } from './interface'
 import { menuItemGroupInjectionKey } from './MenuOptionGroup'
+import { createInjectionKey } from '../../_utils'
 
 export const submenuProps = {
   ...useMenuChildProps,
@@ -41,8 +41,8 @@ export const submenuProps = {
   onClick: Function as PropType<() => void>
 } as const
 
-export const submenuInjectionKey: InjectionKey<SubmenuInjection> =
-  Symbol('submenu')
+export const submenuInjectionKey =
+  createInjectionKey<SubmenuInjection>('submenu')
 
 export default defineComponent({
   name: 'Submenu',
