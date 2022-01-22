@@ -9,10 +9,8 @@ Don't waste words.
     {{ value.includes('Yes') ? '99+' : value.length }}
   </n-input>
   <n-input type="textarea" maxlength="30" show-count />
-  <n-input type="textarea" show-count #count="{ value }">
-    <n-input type="textarea" default-value="What" show-count #count="{ value }">
-      {{ value.includes('What') ? '99+' : value.length }}
-    </n-input>
+  <n-input type="textarea" default-value="What?" show-count #count="{ value }">
+    {{ value.includes('What?') ? '99+' : value.length }}
   </n-input>
 </n-space>
 ```

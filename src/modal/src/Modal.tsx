@@ -216,7 +216,7 @@ export default defineComponent({
       containerRef,
       presetProps: computed(() => {
         const pickedProps = keep(props, presetPropsKeys)
-        return pickedProps
+        return pickedProps as any
       }),
       handleKeyup,
       handleAfterLeave,
