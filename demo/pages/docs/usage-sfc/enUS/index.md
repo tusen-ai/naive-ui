@@ -65,7 +65,7 @@ After the installation. You can use all the components in you SFC like this.
 
 ### Volar support
 
-If you already use Volar, you specify global component types by configure `compilerOptions.types` in `tsconfig.json`.
+If you are using Volar, you can specify global component types by configure `compilerOptions.types` in `tsconfig.json`.
 
 ```json
 // tsconfig.json
