@@ -85,7 +85,10 @@ export default c([
         height: 0;
         display: none;
       `),
-      c('&::placeholder', 'color: #0000;')
+      c('&::placeholder', 'color: #0000;'),
+      c('&:-webkit-autofill ~', [
+        cE('placeholder', 'display: none;')
+      ])
     ]),
     cM('round', [
       cNotM('textarea', 'border-radius: calc(var(--n-height) / 2);')
