@@ -43,7 +43,7 @@ import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { timePickerLight } from '../styles'
 import type { TimePickerTheme } from '../styles'
 import Panel from './Panel'
-import {
+import type {
   IsHourDisabled,
   IsMinuteDisabled,
   IsSecondDisabled,
@@ -54,8 +54,9 @@ import {
   OnUpdateValueImpl,
   PanelRef,
   Size,
-  timePickerInjectionKey
+  TimePickerInst
 } from './interface'
+import { timePickerInjectionKey } from './interface'
 import { findSimilarTime, isTimeInStep } from './utils'
 import style from './styles/index.cssr'
 
@@ -625,7 +626,16 @@ export default defineComponent({
       mergedThemeRef: themeRef,
       mergedClsPrefixRef
     })
+    const exposedMethods: TimePickerInst = {
+      focus: () => {
+        inputInstRef.value?.focus()
+      },
+      blur: () => {
+        inputInstRef.value?.blur()
+      }
+    }
     return {
+      ...exposedMethods,
       mergedBordered: mergedBorderedRef,
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
@@ -725,7 +735,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, $slots } = this
     return (
       <div
         class={`${mergedClsPrefix}-time-picker`}
@@ -772,7 +782,8 @@ export default defineComponent({
                                 class={`${mergedClsPrefix}-time-picker-icon`}
                               >
                                 {{
-                                  default: () => <TimeIcon />
+                                  default: () =>
+                                    $slots.icon ? $slots.icon() : <TimeIcon />
                                 }}
                               </NBaseIcon>
                             )

@@ -1,5 +1,6 @@
-import { InjectionKey, Ref } from 'vue'
+import { Ref } from 'vue'
 import type { MergedTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
 import type { PopconfirmTheme } from '../styles'
 
 export interface PopconfirmInjection {
@@ -7,6 +8,5 @@ export interface PopconfirmInjection {
   mergedClsPrefixRef: Ref<string>
 }
 
-export const popconfirmInjectionKey: InjectionKey<PopconfirmInjection> = Symbol(
-  'popconfirm'
-)
+export const popconfirmInjectionKey =
+  createInjectionKey<PopconfirmInjection>('n-popconfirm')

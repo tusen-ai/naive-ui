@@ -463,6 +463,7 @@ export default defineComponent({
                   return (
                       <Tab
                         {...tabPaneVNode.props}
+                        internalCreatedByPane={true}
                         internalLeftPadded={index !== 0}
                       >
                         {tabPaneVNode.children
@@ -509,6 +510,7 @@ export default defineComponent({
                                     return justifyTabDynamicProps(
                                         <Tab
                                           {...tabPaneVNode.props}
+                                          internalCreatedByPane={true}
                                           internalLeftPadded={
                                             index !== 0 && !mergedJustifyContent
                                           }
@@ -647,6 +649,7 @@ function createAddTag (addable: Addable, internalLeftPadded: boolean): VNode {
       ref="addTabInstRef"
       key="__addable"
       name="__addable"
+      internalCreatedByPane
       internalAddable
       internalLeftPadded={internalLeftPadded}
       disabled={typeof addable === 'object' && addable.disabled}

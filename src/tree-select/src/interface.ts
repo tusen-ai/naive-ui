@@ -1,6 +1,7 @@
 import { TreeNode } from 'treemate'
-import { InjectionKey, Ref } from 'vue'
+import { Ref } from 'vue'
 import { TreeOptionBase } from '../../tree/src/interface'
+import { createInjectionKey } from '../../_utils'
 
 export type TreeSelectOption = Omit<
 TreeOptionBase,
@@ -15,7 +16,7 @@ export type TreeSelectTmNode = TreeNode<TreeSelectOption>
 export type OnUpdateValue = (
   value: string &
   number &
-  (string | number) &
+    (string | number) &
   string[] &
   number[] &
   Array<string | number> &
@@ -44,5 +45,5 @@ export interface TreeSelectInjection {
   pendingNodeKeyRef: Ref<string | number | null>
 }
 
-export const treeSelectInjectionKey: InjectionKey<TreeSelectInjection> =
-  Symbol('tree-select')
+export const treeSelectInjectionKey =
+  createInjectionKey<TreeSelectInjection>('n-tree-select')

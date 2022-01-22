@@ -24,6 +24,7 @@ import {
 // --n-font-size
 // --n-height
 // --n-padding-single
+// --n-padding-multiple
 // --n-placeholder-color
 // --n-placeholder-color-disabled
 // --n-text-color
@@ -113,7 +114,7 @@ export default c([
       position: relative;
       z-index: auto;
       display: flex;
-      padding: var(--n-padding-single);
+      padding: var(--n-padding-multiple);
       flex-wrap: wrap;
       align-items: center;
       width: 100%;
