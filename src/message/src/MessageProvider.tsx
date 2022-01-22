@@ -8,7 +8,6 @@ import {
   provide,
   VNodeChild,
   ExtractPropTypes,
-  renderSlot,
   Ref,
   PropType,
   CSSProperties
@@ -169,7 +168,7 @@ export default defineComponent({
   render () {
     return (
       <>
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots.default?.()}
         {this.messageList.length ? (
           <Teleport to={this.to ?? 'body'}>
             <div

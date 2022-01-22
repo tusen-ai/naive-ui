@@ -5,7 +5,6 @@ import {
   defineComponent,
   PropType,
   provide,
-  renderSlot,
   ComputedRef,
   markRaw
 } from 'vue'
@@ -187,8 +186,8 @@ export default defineComponent({
         {
           class: `${this.mergedClsPrefix || defaultClsPrefix}-config-provider`
         },
-        renderSlot(this.$slots, 'default')
+        this.$slots.default?.()
       )
-      : renderSlot(this.$slots, 'default')
+      : this.$slots.default?.()
   }
 })

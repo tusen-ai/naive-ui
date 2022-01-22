@@ -48,6 +48,7 @@ import {
   defaultFilter
 } from './utils'
 import type {
+  SelectInst,
   SelectMixedOption,
   SelectBaseOption,
   SelectGroupOption,
@@ -645,7 +646,16 @@ export default defineComponent({
       if (!mergedShowRef.value) return
       void nextTick(syncPosition)
     })
+    const exposedMethods: SelectInst = {
+      focus: () => {
+        triggerRef.value?.focus()
+      },
+      blur: () => {
+        triggerRef.value?.blur()
+      }
+    }
     return {
+      ...exposedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       namespace: namespaceRef,

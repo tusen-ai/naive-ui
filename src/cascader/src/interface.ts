@@ -36,11 +36,11 @@ export type OnUpdateValue = (
   string[] &
   number[] &
   Array<string | number> &
-  (string | null) &
-  (number | null) &
-  (string[] | null) &
-  (number[] | null) &
-  (Array<string | number> | null),
+    (string | null) &
+    (number | null) &
+    (string[] | null) &
+    (number[] | null) &
+    (Array<string | number> | null),
   option: null &
   CascaderOption &
   CascaderOption[] &
@@ -89,7 +89,7 @@ export interface CascaderInjection {
   handleSelectMenuClickOutside: (e: MouseEvent) => void
   handleCascaderMenuClickOutside: (e: MouseEvent) => void
   renderLabelRef: Ref<
-  ((option: CascaderOption, checked: boolean) => VNodeChild) | undefined
+    ((option: CascaderOption, checked: boolean) => VNodeChild) | undefined
   >
 }
 
@@ -114,3 +114,8 @@ export interface SelectMenuInstance {
 
 export const cascaderInjectionKey =
   createInjectionKey<CascaderInjection>('cascader')
+
+export interface CascaderInst {
+  focus: () => void
+  blur: () => void
+}

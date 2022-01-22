@@ -36,7 +36,7 @@ const calendarProps = {
   value: Number,
   defaultValue: {
     type: Number as PropType<number | null>,
-    defualt: null
+    default: null
   },
   onPanelChange: Function as PropType<OnPanelChange>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,

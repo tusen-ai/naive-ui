@@ -6,7 +6,6 @@ import {
   watch,
   nextTick,
   defineComponent,
-  renderSlot,
   mergeProps,
   Transition,
   PropType,
@@ -299,15 +298,12 @@ export default defineComponent({
                           onClick: this.handleClick
                         }),
                         [
-                          renderSlot(
-                            this.$slots,
-                            'default',
-                            undefined,
-                            () => [
-                                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                                  {{ default: () => BackTopIcon }}
-                                </NBaseIcon>
-                            ]
+                          this.$slots.default ? (
+                            this.$slots.default()
+                          ) : (
+                              <NBaseIcon clsPrefix={mergedClsPrefix}>
+                                {{ default: () => BackTopIcon }}
+                              </NBaseIcon>
                           )
                         ]
                       )

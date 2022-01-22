@@ -8,7 +8,6 @@ import {
   nextTick,
   PropType,
   ExtractPropTypes,
-  renderSlot,
   Ref,
   CSSProperties
 } from 'vue'
@@ -109,7 +108,7 @@ export default defineComponent({
         <Teleport to={this.to ?? 'body'}>
           <NLoadingBar ref="loadingBarRef" />
         </Teleport>
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots.default?.()}
       </>
     )
   }

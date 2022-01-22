@@ -25,6 +25,7 @@ max-tag-count
 add-tooltip
 render-tag
 render-person
+focus.vue
 ```
 
 ## API
@@ -64,9 +65,10 @@ render-person
 | on-focus | `() => void` | `undefined` | Callback triggered when the selection element is focussed on. |  |
 | on-scroll | `(e: ScrollEvent) => void` | `undefined` | Callback triggered when the options menu is scrolled. |  |
 | on-search | `(value: string) => void` | `undefined` | Callback triggered when a search is conducted. |  |
+| on-update:show | `(show: boolean) => void` | `undefined` | Callback on menu open status change. | NEXT_VERSION |
 | on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | Callback triggered when the selected value is updated. |  |
 
-### SelectOption Properties
+#### SelectOption Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -77,7 +79,7 @@ render-person
 | style | `string` | Customize the option's style. |
 | value | `string \| number` | Should be unique for each option. |
 
-### SelectGroupOption Properties
+#### SelectGroupOption Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -93,3 +95,10 @@ render-person
 | ------ | ---------- | -------------------------------------- |
 | action | `()`       | Options menu slot.                     |
 | empty  | `()`       | Empty state slot for the options menu. |
+
+### Select Methods
+
+| Name  | Type         | Description | Version      |
+| ----- | ------------ | ----------- | ------------ |
+| focus | `() => void` | Focus.      | NEXT_VERSION |
+| blur  | `() => void` | Blur.       | NEXT_VERSION |

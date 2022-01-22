@@ -15,7 +15,6 @@ import {
   Ref,
   watch,
   nextTick,
-  renderSlot,
   Slots
 } from 'vue'
 import {
@@ -666,8 +665,6 @@ export default defineComponent({
                     >
                       {{
                         label: $slots.label
-                          ? () => renderSlot($slots, 'label')
-                          : undefined
                       }}
                     </ColorPickerTrigger>
                   )

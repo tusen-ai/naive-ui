@@ -54,3 +54,8 @@ export type IsSecondDisabled = (
 ) => boolean
 
 export type Size = 'small' | 'medium' | 'large'
+
+export interface TimePickerInst {
+  focus: () => void
+  blur: () => void
+}

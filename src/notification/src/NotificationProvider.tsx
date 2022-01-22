@@ -9,8 +9,7 @@ import {
   PropType,
   ExtractPropTypes,
   provide,
-  Ref,
-  renderSlot
+  Ref
 } from 'vue'
 import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
@@ -198,7 +197,7 @@ export default defineComponent({
   render () {
     return (
       <>
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots.default?.()}
         {this.notificationList.length ? (
           <Teleport to={this.to ?? 'body'}>
             <NotificationContainer
