@@ -49,4 +49,4 @@ formatted.vue
 
 | Name | Parameters | Description |
 | ---- | ---------- | ----------- |
-| icon | `()`       | custom icon |
+| icon | `()`       | Custom icon |
