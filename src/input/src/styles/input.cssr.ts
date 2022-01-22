@@ -179,6 +179,7 @@ export default c([
         padding-right: 0;
         padding-top: var(--n-padding-vertical);
         padding-bottom: var(--n-padding-vertical);
+        word-break: break-word;
         display: inline-block;
         vertical-align: bottom;
         box-sizing: border-box;
