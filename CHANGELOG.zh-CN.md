@@ -16,6 +16,7 @@
 
 - `n-page-header` 新增 `back` 插槽，关闭 [#2176](https://github.com/TuSimple/naive-ui/issues/2176)
 - `n-select` 新增 `reset-menu-on-options-change` 属性，关闭 [#2168](https://github.com/TuSimple/naive-ui/issues/2168)
+- `n-select` 新增 `suffix` 插槽，关闭 [#2201](https://github.com/TuSimple/naive-ui/issues/2201)
 - `n-carousel` `effect` 属性支持 `'card'`
 - `n-input` 在 `type="textarea"` 不再使用原生滚动条，关闭 [#2242](https://github.com/TuSimple/naive-ui/issues/2242)，关闭 [#1172](https://github.com/TuSimple/naive-ui/issues/1172)
 - `n-number-animation` 新增 `locale` 属性，用于设置国际化语言，关闭 [#2181](https://github.com/TuSimple/naive-ui/issues/2181)

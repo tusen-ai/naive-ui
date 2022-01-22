@@ -19,6 +19,7 @@ scroll-event.vue
 group
 many-options
 custom-option
+custom-suffix
 action
 fallback-option
 max-tag-count
@@ -98,10 +99,11 @@ filterable-debug
 
 ### Select Slots
 
-| 名称   | 参数 | 说明                |
-| ------ | ---- | ------------------- |
-| action | `()` | 菜单操作区域的 slot |
-| empty  | `()` | 菜单无数据时的 slot |
+| 名称   | 参数 | 说明                | 版本 |
+| ------ | ---- | ------------------- | --- |
+| action | `()` | 菜单操作区域的 slot | |
+| empty  | `()` | 菜单无数据时的 slot | |
+| suffix | `()` | 后缀图标的 slot     | NEXT_VERSION |
 
 ### Select Methods
 

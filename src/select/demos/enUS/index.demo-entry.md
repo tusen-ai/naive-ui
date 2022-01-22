@@ -19,6 +19,7 @@ scroll-event.vue
 group
 many-options
 custom-option
+custom-suffix
 action
 fallback-option
 max-tag-count
@@ -91,10 +92,11 @@ focus.vue
 
 ### Select Slots
 
-| Name   | Parameters | Description                            |
-| ------ | ---------- | -------------------------------------- |
-| action | `()`       | Options menu slot.                     |
-| empty  | `()`       | Empty state slot for the options menu. |
+| Name   | Parameters | Description                            | Version      |
+| ------ | ---------- | -------------------------------------- | ------------ |
+| action | `()`       | Options menu slot.                     |              |
+| empty  | `()`       | Empty state slot for the options menu. |              |
+| suffix | `()`       | Suffix icon slot.                      | NEXT_VERSION |
 
 ### Select Methods
 
