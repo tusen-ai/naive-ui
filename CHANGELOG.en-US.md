@@ -25,8 +25,16 @@
 - Add `CustomThemeCommonVars` to customize `useThemeVars`.
 - `n-slider` adds `show-tooltip` prop, closes [#2212](https://github.com/TuSimple/naive-ui/issues/2212).
 - `n-select` adds `on-update:show` prop.
-- `n-select` adds `focus` method.
-- `n-select` adds `blur` method.
+- `n-select` adds `focus` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-select` adds `blur` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-date-picker` adds `focus` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-date-picker` adds `blur` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-time-picker` adds `focus` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-time-picker` adds `blur` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-checkbox` adds `focus` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-checkbox` adds `blur` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-cascader` adds `focus` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-cascader` adds `blur` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
 
 ### i18n
 

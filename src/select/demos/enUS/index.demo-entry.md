@@ -25,6 +25,7 @@ max-tag-count
 add-tooltip
 render-tag
 render-person
+focus.vue
 ```
 
 ## API

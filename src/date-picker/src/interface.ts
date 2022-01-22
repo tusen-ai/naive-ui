@@ -121,3 +121,8 @@ export type IsRangeTimeDisabled = (
   position: 'start' | 'end',
   value: [number, number] // date must exist to have time validation
 ) => TimeValidator
+
+export interface DatePickerInst {
+  focus: () => void
+  blur: () => void
+}

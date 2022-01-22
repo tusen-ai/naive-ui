@@ -33,9 +33,8 @@ import type { CascaderTheme } from '../styles'
 import { getPathLabel, getRawNodePath } from './utils'
 import CascaderMenu from './CascaderMenu'
 import CascaderSelectMenu from './CascaderSelectMenu'
-import {
+import type {
   CascaderOption,
-  cascaderInjectionKey,
   CascaderMenuInstance,
   ExpandTrigger,
   Filter,
@@ -44,8 +43,10 @@ import {
   OnUpdateValue,
   OnUpdateValueImpl,
   SelectMenuInstance,
-  Value
+  Value,
+  CascaderInst
 } from './interface'
+import { cascaderInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
 const cascaderProps = {
@@ -773,7 +774,16 @@ export default defineComponent({
       handleSelectMenuClickOutside,
       handleCascaderMenuClickOutside
     })
+    const exposedMethods: CascaderInst = {
+      focus: () => {
+        triggerInstRef.value?.focus()
+      },
+      blur: () => {
+        triggerInstRef.value?.blur()
+      }
+    }
     return {
+      ...exposedMethods,
       selectMenuFollowerRef,
       cascaderMenuFollowerRef,
       triggerInstRef,
