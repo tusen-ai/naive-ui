@@ -9,6 +9,7 @@
 - 修复 `n-tab-pane` 的 tab 区会继承 `attrs`， 关闭 [#2221](https://github.com/TuSimple/naive-ui/issues/2221)
 - 修复 `n-image` 在预览时仍可滚动背景，关闭 [#2241](https://github.com/TuSimple/naive-ui/issues/2241)
 - 修复 `n-input` 在被浏览器自动填充的时候仍然展示 placeholder，关闭 [#2234](https://github.com/TuSimple/naive-ui/issues/2234)
+- 修复 `n-select` 没有 padding-top
 
 ### Feats
 
