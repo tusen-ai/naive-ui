@@ -544,9 +544,15 @@ export default defineComponent({
     }
     function handleMouseEnter (): void {
       hoverRef.value = true
+      if (props.type === 'textarea') {
+        textareaScrollbarInstRef.value?.handleMouseEnterWrapper()
+      }
     }
     function handleMouseLeave (): void {
       hoverRef.value = false
+      if (props.type === 'textarea') {
+        textareaScrollbarInstRef.value?.handleMouseLeaveWrapper()
+      }
     }
     function handlePasswordToggleClick (): void {
       if (mergedDisabledRef.value) return
@@ -924,6 +930,7 @@ export default defineComponent({
               ref="textareaScrollbarInstRef"
               class={`${mergedClsPrefix}-input__textarea`}
               container={this.getTextareaScrollContainer}
+              triggerDisplayManually
               useUnifiedContainer
             >
               {{
