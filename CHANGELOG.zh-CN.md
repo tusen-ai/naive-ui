@@ -23,6 +23,7 @@
 - `n-time-picker` 新增 `icon` 插槽，关闭 [#2228](https://github.com/TuSimple/naive-ui/issues/2228)
 - `n-tab-pane` 新增 `tab-props` 属性，关闭 [#2221](https://github.com/TuSimple/naive-ui/issues/2221)
 - 新增 `CustomThemeCommonVars` 用于拓展 `useThemeVars`
+- `n-slider` 新增 `show-tooltip` 属性，关闭 [#2212](https://github.com/TuSimple/naive-ui/issues/2212)
 
 ### i18n
 

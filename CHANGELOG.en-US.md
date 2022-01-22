@@ -23,6 +23,7 @@
 - `n-time-picker` adds `icon` slot, closes [#2228](https://github.com/TuSimple/naive-ui/issues/2228).
 - `n-tab-pane` adds `tab-props` prop, closes [#2221](https://github.com/TuSimple/naive-ui/issues/2221).
 - Add `CustomThemeCommonVars` to customize `useThemeVars`.
+- `n-slider` adds `show-tooltip` prop, closes [#2212](https://github.com/TuSimple/naive-ui/issues/2212).
 
 ### i18n
 
