@@ -24,6 +24,7 @@
 - `n-tab-pane` adds `tab-props` prop, closes [#2221](https://github.com/TuSimple/naive-ui/issues/2221).
 - Add `CustomThemeCommonVars` to customize `useThemeVars`.
 - `n-slider` adds `show-tooltip` prop, closes [#2212](https://github.com/TuSimple/naive-ui/issues/2212).
+- `n-select` adds `on-update:show` prop.
 
 ### i18n
 

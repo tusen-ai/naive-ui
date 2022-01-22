@@ -71,6 +71,7 @@ filterable-debug
 | on-focus | `() => void` | `undefined` | `focus` 时执行的回调 |  |
 | on-scroll | `(e: ScrollEvent) => void` | `undefined` | 滚动时执行的回调 |  |
 | on-search | `(value: string) => void` | `undefined` | 搜索时执行的回调 |  |
+| on-update:show | `(show: boolean) => void` | `undefined` | 菜单打开状态变化的回调 | NEXT_VERSION |
 | on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | 值更新时执行的回调 |  |
 
 #### SelectOption Properties

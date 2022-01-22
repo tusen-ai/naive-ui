@@ -64,6 +64,7 @@ render-person
 | on-focus | `() => void` | `undefined` | Callback triggered when the selection element is focussed on. |  |
 | on-scroll | `(e: ScrollEvent) => void` | `undefined` | Callback triggered when the options menu is scrolled. |  |
 | on-search | `(value: string) => void` | `undefined` | Callback triggered when a search is conducted. |  |
+| on-update:show | `(show: boolean) => void` | `undefined` | Callback on menu open status change. | NEXT_VERSION |
 | on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | Callback triggered when the selected value is updated. |  |
 
 #### SelectOption Properties
