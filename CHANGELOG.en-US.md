@@ -12,6 +12,7 @@
 - `n-page-header` adds `back` slot, closes [#2176](https://github.com/TuSimple/naive-ui/issues/2176).
 - `n-select` adds `reset-menu-on-options-change` prop, closes [#2168](https://github.com/TuSimple/naive-ui/issues/2168).
 - `n-carousel` effect supports `'card'`.
+- `n-input` doesn't use native scrollbar when `type="textarea"`, closes [#2242](https://github.com/TuSimple/naive-ui/issues/2242), [#1172](https://github.com/TuSimple/naive-ui/issues/1172).
 
 ### Feats
 
