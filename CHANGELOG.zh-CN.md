@@ -25,6 +25,8 @@
 - 新增 `CustomThemeCommonVars` 用于拓展 `useThemeVars`
 - `n-slider` 新增 `show-tooltip` 属性，关闭 [#2212](https://github.com/TuSimple/naive-ui/issues/2212)
 - `n-select` 新增 `on-update:show` 属性
+- `n-select` 新增 `focus` 方法
+- `n-select` 新增 `blur` 方法
 
 ### i18n
 

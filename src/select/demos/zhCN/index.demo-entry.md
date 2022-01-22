@@ -101,3 +101,10 @@ filterable-debug
 | ------ | ---- | ------------------- |
 | action | `()` | 菜单操作区域的 slot |
 | empty  | `()` | 菜单无数据时的 slot |
+
+### Select Methods
+
+| 名称  | 类型         | 说明 | 版本         |
+| ----- | ------------ | ---- | ------------ |
+| focus | `() => void` | 聚焦 | NEXT_VERSION |
+| blur  | `() => void` | 失焦 | NEXT_VERSION |
