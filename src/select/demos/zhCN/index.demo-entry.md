@@ -73,7 +73,7 @@ filterable-debug
 | on-search | `(value: string) => void` | `undefined` | 搜索时执行的回调 |  |
 | on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | 值更新时执行的回调 |  |
 
-### SelectOption Properties
+#### SelectOption Properties
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
@@ -84,7 +84,7 @@ filterable-debug
 | style | `string \| object` | 自定义一个选项的样式 |
 | value | `string \| number` | 在选项中应该是唯一的 |
 
-### SelectGroupOption Properties
+#### SelectGroupOption Properties
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
