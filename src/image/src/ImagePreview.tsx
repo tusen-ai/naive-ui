@@ -347,7 +347,7 @@ export default defineComponent({
       appear: useIsMounted(),
       displayed: displayedRef,
       handleWheel (e: WheelEvent) {
-        e.stopPropagation()
+        e.preventDefault()
       },
       handlePreviewMousedown,
       handlePreviewDblclick,
