@@ -772,7 +772,8 @@ export default defineComponent({
                                 class={`${mergedClsPrefix}-time-picker-icon`}
                               >
                                 {{
-                                  default: () => $slots.icon?.() || <TimeIcon />
+                                  default: () =>
+                                    $slots.icon ? $slots.icon() : <TimeIcon />
                                 }}
                               </NBaseIcon>
                             )
