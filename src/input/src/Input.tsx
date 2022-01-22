@@ -662,7 +662,12 @@ export default defineComponent({
       updateTextAreaStyle()
     }
 
-    function handleTextAreaScroll (): void {
+    const placeholderStyleRef = ref({
+      top: '0'
+    })
+    function handleTextAreaScroll (e: Event): void {
+      const { scrollTop } = e.target as HTMLElement
+      placeholderStyleRef.value.top = `${-scrollTop}px`
       textareaScrollbarInstRef.value?.syncUnifiedContainer()
     }
 
@@ -738,6 +743,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       mergedShowPasswordOn: mergedShowPasswordOnRef,
+      placeholderStyle: placeholderStyleRef,
       // methods
       handleTextAreaScroll,
       handleCompositionStart,
@@ -951,6 +957,7 @@ export default defineComponent({
                       {this.showPlaceholder1 ? (
                         <div
                           class={`${mergedClsPrefix}-input__placeholder`}
+                          style={this.placeholderStyle}
                           key="placeholder"
                         >
                           {this.mergedPlaceholder[0]}

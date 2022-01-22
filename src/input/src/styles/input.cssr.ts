@@ -108,6 +108,9 @@ export default c([
         display: inline-block;
       `)
     ]),
+    cM('textarea', [
+      cE('placeholder', 'overflow: visible;')
+    ]),
     cNotM('autosize', 'width: 100%;'),
     cM('autosize', [
       cE('textarea-el, input-el', `
@@ -163,7 +166,6 @@ export default c([
       cM('resizable', [
         cB('input-wrapper', `
           resize: vertical;
-          overflow: auto;
           min-height: var(--n-height);
         `)
       ]),
