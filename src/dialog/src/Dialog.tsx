@@ -188,6 +188,8 @@ export default defineComponent({
       type,
       mergedClsPrefix
     } = this
+
+    console.log('action', $slots.action)
     return (
       <div
         class={[
@@ -248,8 +250,8 @@ export default defineComponent({
             {$slots.action
               ? $slots.action()
               : action
-                ? () => [render(action)]
-                : () => [
+                ? render(action)
+                : [
                     this.negativeText && (
                     <NButton
                       theme={mergedTheme.peers.Button}
