@@ -7,7 +7,6 @@ import {
   onMounted,
   onBeforeUnmount,
   mergeProps,
-  renderSlot,
   Transition,
   CSSProperties,
   watchEffect,
@@ -632,7 +631,7 @@ const Scrollbar = defineComponent({
   },
   render () {
     const { $slots, mergedClsPrefix } = this
-    if (!this.scrollable) return renderSlot($slots, 'default')
+    if (!this.scrollable) return $slots.default?.()
     const createChildren = (): VNode =>
       h(
         'div',
@@ -646,7 +645,7 @@ const Scrollbar = defineComponent({
         }),
         [
           this.container ? (
-            renderSlot($slots, 'default')
+            $slots.default?.()
           ) : (
             <div
               role="none"

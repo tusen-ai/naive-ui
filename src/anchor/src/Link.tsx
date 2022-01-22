@@ -3,7 +3,6 @@ import {
   toRef,
   ref,
   inject,
-  renderSlot,
   defineComponent,
   watch,
   Ref,
@@ -80,7 +79,7 @@ export default defineComponent({
           >
             {props.title}
           </a>
-          {renderSlot(slots, 'default')}
+          {slots.default?.()}
         </div>
       )
     }

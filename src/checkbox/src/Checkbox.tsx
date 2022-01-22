@@ -5,7 +5,6 @@ import {
   inject,
   ref,
   toRef,
-  renderSlot,
   PropType,
   CSSProperties,
   watchEffect
@@ -346,7 +345,7 @@ export default defineComponent({
         </div>
         {label !== null || $slots.default ? (
           <span class={`${mergedClsPrefix}-checkbox__label`} id={labelId}>
-            {renderSlot($slots, 'default', undefined, () => [label])}
+            {$slots.default ? $slots.default() : label}
           </span>
         ) : null}
       </div>

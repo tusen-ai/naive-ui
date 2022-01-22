@@ -6,7 +6,6 @@ import {
   defineComponent,
   PropType,
   toRef,
-  renderSlot,
   provide,
   nextTick,
   watch,
@@ -485,17 +484,19 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div class={`${clsPrefix}-base-select-menu__empty`}>
-            {renderSlot($slots, 'empty', undefined, () => [
+            {$slots.empty ? (
+              $slots.empty()
+            ) : (
               <NEmpty
                 theme={mergedTheme.peers.Empty}
                 themeOverrides={mergedTheme.peerOverrides.Empty}
               />
-            ])}
+            )}
           </div>
         )}
         {$slots.action && (
           <div class={`${clsPrefix}-base-select-menu__action`} data-action>
-            {renderSlot($slots, 'action')}
+            {$slots.action()}
           </div>
         )}
         {$slots.action && <NFocusDetector onFocus={this.onTabOut} />}

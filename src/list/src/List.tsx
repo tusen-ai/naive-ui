@@ -2,7 +2,6 @@ import {
   computed,
   defineComponent,
   h,
-  renderSlot,
   PropType,
   CSSProperties,
   Ref,
@@ -95,15 +94,11 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
       >
         {$slots.header ? (
-          <div class={`${mergedClsPrefix}-list__header`}>
-            {renderSlot($slots, 'header')}
-          </div>
+          <div class={`${mergedClsPrefix}-list__header`}>{$slots.header()}</div>
         ) : null}
-        {renderSlot($slots, 'default')}
+        {$slots.default?.()}
         {$slots.footer ? (
-          <div class={`${mergedClsPrefix}-list__footer`}>
-            {renderSlot($slots, 'footer')}
-          </div>
+          <div class={`${mergedClsPrefix}-list__footer`}>{$slots.footer()}</div>
         ) : null}
       </ul>
     )
