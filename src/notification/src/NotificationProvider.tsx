@@ -37,7 +37,7 @@ export interface NotificationProviderInjection {
 }
 
 export const notificationProviderInjectionKey =
-  createInjectionKey<NotificationProviderInjection>('notificationProvider')
+  createInjectionKey<NotificationProviderInjection>('n-notification-provider')
 
 type Create = (options: NotificationOptions) => NotificationReactive
 type TypedCreate = (
@@ -58,7 +58,7 @@ export interface NotificationApiInjection {
 export type NotificationProviderInst = NotificationApiInjection
 
 export const notificationApiInjectionKey =
-  createInjectionKey<NotificationApiInjection>('notificationApi')
+  createInjectionKey<NotificationApiInjection>('n-notification-api')
 
 export type NotificationReactive = {
   readonly key: string

@@ -16,7 +16,7 @@ export type TreeSelectTmNode = TreeNode<TreeSelectOption>
 export type OnUpdateValue = (
   value: string &
   number &
-  (string | number) &
+    (string | number) &
   string[] &
   number[] &
   Array<string | number> &
@@ -46,4 +46,4 @@ export interface TreeSelectInjection {
 }
 
 export const treeSelectInjectionKey =
-  createInjectionKey<TreeSelectInjection>('tree-select')
+  createInjectionKey<TreeSelectInjection>('n-tree-select')

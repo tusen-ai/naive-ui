@@ -39,7 +39,7 @@ export type Addable =
     disabled?: boolean
   }
 
-export const tabsInjectionKey = createInjectionKey<TabsInjection>('tabs')
+export const tabsInjectionKey = createInjectionKey<TabsInjection>('n-tabs')
 
 export interface TabsInst {
   syncBarPosition: () => void

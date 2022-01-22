@@ -32,7 +32,7 @@ interface NDropdownOptionInjection {
 }
 
 const dropdownOptionInjectionKey =
-  createInjectionKey<NDropdownOptionInjection>('dropdown-option')
+  createInjectionKey<NDropdownOptionInjection>('n-dropdown-option')
 
 export default defineComponent({
   name: 'DropdownOption',

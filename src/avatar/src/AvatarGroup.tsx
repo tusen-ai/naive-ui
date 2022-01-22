@@ -21,7 +21,7 @@ interface AvatarOption {
 }
 
 export const avatarGroupInjectionKey =
-  createInjectionKey<AvatarGroupInjection>('avatar-group')
+  createInjectionKey<AvatarGroupInjection>('n-avatar-group')
 
 const avatarGroupProps = {
   max: Number,

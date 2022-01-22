@@ -86,7 +86,8 @@ export interface UploadInjection {
   openOpenFileDialog: () => void
 }
 
-export const uploadInjectionKey = createInjectionKey<UploadInjection>('upload')
+export const uploadInjectionKey =
+  createInjectionKey<UploadInjection>('n-upload')
 
 export interface XhrHandlers {
   handleXHRLoad: (e: ProgressEvent) => void

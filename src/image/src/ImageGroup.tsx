@@ -8,7 +8,7 @@ import { imagePreviewSharedProps } from './interface'
 
 export const imageGroupInjectionKey = createInjectionKey<
 ImagePreviewInst & { groupId: string, mergedClsPrefixRef: Ref<string> }
->('image-group')
+>('n-image-group')
 
 const imageGroupProps = imagePreviewSharedProps
 

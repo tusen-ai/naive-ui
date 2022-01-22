@@ -52,10 +52,10 @@ export type LoadingBarProviderSetupProps = ExtractPropTypes<
 export const loadingBarProviderInjectionKey = createInjectionKey<{
   props: LoadingBarProviderSetupProps
   mergedClsPrefixRef: Ref<string>
-}>('loadingBar')
+}>('n-loading-bar')
 
 export const loadingBarApiInjectionKey =
-  createInjectionKey<LoadingBarApiInjection>('loadingBarApi')
+  createInjectionKey<LoadingBarApiInjection>('n-loading-bar-api')
 
 export default defineComponent({
   name: 'LoadingBarProvider',

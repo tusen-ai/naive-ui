@@ -53,10 +53,10 @@ export interface InternalExposedProps {
 }
 
 export const internalSelectionMenuInjectionKey =
-  createInjectionKey<InternalSelectMenuInjection>('internal-select-menu')
+  createInjectionKey<InternalSelectMenuInjection>('n-internal-select-menu')
 
 export const internalSelectionMenuBodyInjectionKey = createInjectionKey<
 Ref<HTMLElement | null>
->('internal-select-menu-body')
+>('n-internal-select-menu-body')
 
 export type InternalSelectMenuRef = UnwrapRef<InternalExposedProps>

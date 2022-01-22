@@ -32,7 +32,7 @@ interface ListInjection {
   mergedClsPrefixRef: Ref<string>
 }
 
-export const listInjectionKey = createInjectionKey<ListInjection>('list')
+export const listInjectionKey = createInjectionKey<ListInjection>('n-list')
 
 export default defineComponent({
   name: 'List',

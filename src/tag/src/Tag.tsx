@@ -63,7 +63,7 @@ interface TagInjection {
   roundRef: Ref<boolean>
 }
 
-export const tagInjectionKey = createInjectionKey<TagInjection>('tag')
+export const tagInjectionKey = createInjectionKey<TagInjection>('n-tag')
 
 export type TagProps = ExtractPublicPropTypes<typeof tagProps>
 

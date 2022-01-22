@@ -29,7 +29,7 @@ export interface LogInjection {
   mergedHljsRef: Ref<Hljs | undefined>
 }
 
-export const logInjectionKey = createInjectionKey<LogInjection>('log')
+export const logInjectionKey = createInjectionKey<LogInjection>('n-log')
 
 const logProps = {
   ...(useTheme.props as ThemeProps<LogTheme>),

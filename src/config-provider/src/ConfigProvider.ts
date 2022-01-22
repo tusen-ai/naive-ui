@@ -27,7 +27,7 @@ import type {
 import { NDateLocale, NLocale } from '../../locales'
 
 export const configProviderInjectionKey =
-  createInjectionKey<ConfigProviderInjection>('configProviderInjection')
+  createInjectionKey<ConfigProviderInjection>('n-config-provider')
 
 export const configProviderProps = {
   abstract: Boolean,

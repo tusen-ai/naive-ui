@@ -46,7 +46,7 @@ export type FormItemInternalValidate = (
 export type FormItemValidate = ((
   options: FormItemValidateOptions
 ) => Promise<void>) &
-((trigger?: string, callback?: ValidateCallback) => Promise<void>)
+  ((trigger?: string, callback?: ValidateCallback) => Promise<void>)
 
 export interface FormItemInst {
   validate: FormItemValidate
@@ -64,9 +64,9 @@ export interface FormInjection {
   deriveMaxChildLabelWidth: (currentWidth: number) => void
 }
 
-export const formInjectionKey = createInjectionKey<FormInjection>('form')
+export const formInjectionKey = createInjectionKey<FormInjection>('n-form')
 export const formItemInstsInjectionKey =
-  createInjectionKey<unknown>('formItemInsts')
+  createInjectionKey<unknown>('n-form-item-insts')
 
 export type LabelAlign = 'left' | 'center' | 'right'
 export type LabelPlacement = 'left' | 'top'

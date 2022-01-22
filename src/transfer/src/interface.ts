@@ -38,6 +38,6 @@ export interface TransferInjection {
 }
 
 export const transferInjectionKey =
-  createInjectionKey<TransferInjection>('transfer')
+  createInjectionKey<TransferInjection>('n-transfer')
 
 export type OnUpdateValue = (value: OptionValue[]) => void

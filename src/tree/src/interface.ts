@@ -115,7 +115,7 @@ export interface TreeInjection {
   handleDrop: (info: InternalDropInfo) => void
 }
 
-export const treeInjectionKey = createInjectionKey<TreeInjection>('tree')
+export const treeInjectionKey = createInjectionKey<TreeInjection>('n-tree')
 
 export type TmNode = TreeNode<TreeOption>
 

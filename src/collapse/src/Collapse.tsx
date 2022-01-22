@@ -95,7 +95,7 @@ export interface NCollapseInjection {
 }
 
 export const collapseInjectionKey =
-  createInjectionKey<NCollapseInjection>('collapse')
+  createInjectionKey<NCollapseInjection>('n-collapse')
 
 export default defineComponent({
   name: 'Collapse',

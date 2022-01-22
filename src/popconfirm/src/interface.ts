@@ -9,4 +9,4 @@ export interface PopconfirmInjection {
 }
 
 export const popconfirmInjectionKey =
-  createInjectionKey<PopconfirmInjection>('popconfirm')
+  createInjectionKey<PopconfirmInjection>('n-popconfirm')

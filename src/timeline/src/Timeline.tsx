@@ -33,7 +33,7 @@ export interface TimelineInjection {
   mergedClsPrefixRef: Ref<string>
 }
 export const timelineInjectionKey =
-  createInjectionKey<TimelineInjection>('timeline')
+  createInjectionKey<TimelineInjection>('n-timeline')
 
 export type TimelineProps = ExtractPublicPropTypes<typeof timelineProps>
 

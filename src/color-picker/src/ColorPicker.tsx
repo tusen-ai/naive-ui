@@ -122,7 +122,7 @@ export const colorPickerInjectionKey = createInjectionKey<{
   themeRef: ComputedRef<MergedTheme<ColorPickerTheme>>
   colorPickerSlots: Slots
   renderLabelRef: Ref<RenderLabel | undefined>
-}>('colorPickerThemeInjection')
+}>('n-color-picker')
 
 export default defineComponent({
   name: 'ColorPicker',

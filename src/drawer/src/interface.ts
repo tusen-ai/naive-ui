@@ -5,7 +5,7 @@ import type { DrawerTheme } from '../styles'
 
 export type DrawerBodyInjection = Ref<HTMLElement | null> | null
 export const drawerBodyInjectionKey =
-  createInjectionKey<DrawerBodyInjection>('drawerBody')
+  createInjectionKey<DrawerBodyInjection>('n-drawer-body')
 
 export interface DrawerInjection {
   isMountedRef: Ref<boolean>
@@ -13,4 +13,5 @@ export interface DrawerInjection {
   mergedClsPrefixRef: Ref<string>
   doUpdateShow: (show: boolean) => void
 }
-export const drawerInjectionKey = createInjectionKey<DrawerInjection>('drawer')
+export const drawerInjectionKey =
+  createInjectionKey<DrawerInjection>('n-drawer')

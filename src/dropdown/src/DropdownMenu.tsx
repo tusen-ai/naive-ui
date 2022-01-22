@@ -35,7 +35,7 @@ export interface NDropdownMenuInjection {
 }
 
 export const dropdownMenuInjectionKey =
-  createInjectionKey<NDropdownMenuInjection>('dropdownMenu')
+  createInjectionKey<NDropdownMenuInjection>('n-dropdown-menu')
 
 export default defineComponent({
   name: 'DropdownMenu',

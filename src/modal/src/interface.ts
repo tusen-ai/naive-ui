@@ -8,7 +8,7 @@ HTMLElement | ComponentPublicInstance | null
 > | null
 
 export const modalBodyInjectionKey =
-  createInjectionKey<ModalBodyInjection>('modalBody')
+  createInjectionKey<ModalBodyInjection>('n-modal-body')
 
 export interface ModalInjection {
   getMousePosition: () => {
@@ -22,4 +22,4 @@ export interface ModalInjection {
   transformOriginRef: Ref<'mouse' | 'center'>
 }
 
-export const modalInjectionKey = createInjectionKey<ModalInjection>('modal')
+export const modalInjectionKey = createInjectionKey<ModalInjection>('n-modal')

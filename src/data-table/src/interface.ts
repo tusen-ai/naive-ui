@@ -224,7 +224,7 @@ export interface DataTableInjection {
 }
 
 export const dataTableInjectionKey =
-  createInjectionKey<DataTableInjection>('dataTable')
+  createInjectionKey<DataTableInjection>('n-data-table')
 
 export interface MainTableInjection {
   leftActiveFixedColKey: ColumnKey | null

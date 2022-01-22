@@ -27,7 +27,7 @@ export interface CarouselMethodsInjection {
   onCarouselItemClick: (index: number, event: MouseEvent) => void
 }
 export const carouselMethodsInjectionKey =
-  createInjectionKey<CarouselMethodsInjection>('carouselMethods')
+  createInjectionKey<CarouselMethodsInjection>('n-carousel-methods')
 
 export interface CarouselInst {
   getCurrentIndex: () => number

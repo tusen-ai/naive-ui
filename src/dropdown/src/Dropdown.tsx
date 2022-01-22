@@ -64,7 +64,7 @@ export interface DropdownInjection {
 }
 
 export const dropdownInjectionKey =
-  createInjectionKey<DropdownInjection>('dropdown')
+  createInjectionKey<DropdownInjection>('n-dropdown')
 
 const dropdownBaseProps = {
   animated: {

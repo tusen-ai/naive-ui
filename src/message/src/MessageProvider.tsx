@@ -33,7 +33,7 @@ export interface MessageApiInjection {
 }
 
 export const messageApiInjectionKey =
-  createInjectionKey<MessageApiInjection>('messageApi')
+  createInjectionKey<MessageApiInjection>('n-message-api')
 
 export interface MessageReactive {
   content?: ContentType
@@ -90,7 +90,7 @@ type MessageProviderSetupProps = ExtractPropTypes<typeof messageProviderProps>
 export const messageProviderInjectionKey = createInjectionKey<{
   props: MessageProviderSetupProps
   mergedClsPrefixRef: Ref<string>
-}>('messageProvider')
+}>('n-message-provider')
 
 export default defineComponent({
   name: 'MessageProvider',

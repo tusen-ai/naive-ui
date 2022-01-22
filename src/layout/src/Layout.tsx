@@ -41,7 +41,7 @@ const layoutProps = {
 export type LayoutProps = ExtractPublicPropTypes<typeof layoutProps>
 
 export const layoutInjectionKey =
-  createInjectionKey<ExtractPropTypes<typeof layoutProps>>('layout')
+  createInjectionKey<ExtractPropTypes<typeof layoutProps>>('n-layout')
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function createLayoutComponent (isContent: boolean) {

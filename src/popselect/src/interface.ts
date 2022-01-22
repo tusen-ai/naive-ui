@@ -12,4 +12,4 @@ export interface PopselectInjection {
 }
 
 export const popselectInjectionKey =
-  createInjectionKey<PopselectInjection>('popselect')
+  createInjectionKey<PopselectInjection>('n-popselect')

@@ -16,7 +16,7 @@ export const menuItemGroupProps = {
 } as const
 
 export const menuItemGroupInjectionKey =
-  createInjectionKey<MenuOptionGroupInjection>('menu-item-group')
+  createInjectionKey<MenuOptionGroupInjection>('n-menu-item-group')
 
 export default defineComponent({
   name: 'MenuOptionGroup',

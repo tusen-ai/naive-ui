@@ -47,7 +47,7 @@ export interface DialogApiInjection {
 }
 
 export const dialogApiInjectionKey =
-  createInjectionKey<DialogApiInjection>('dialogApi')
+  createInjectionKey<DialogApiInjection>('n-dialog-api')
 
 export interface DialogProviderInjection {
   clickedRef: Ref<boolean>
@@ -55,7 +55,7 @@ export interface DialogProviderInjection {
 }
 
 export const dialogProviderInjectionKey =
-  createInjectionKey<DialogProviderInjection>('dialogProvider')
+  createInjectionKey<DialogProviderInjection>('n-dialog-provider')
 
 interface DialogInst {
   hide: () => void

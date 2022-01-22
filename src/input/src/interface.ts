@@ -27,4 +27,4 @@ export const inputInjectionKey = createInjectionKey<{
   mergedValueRef: Ref<string | [string, string] | null>
   maxlengthRef: Ref<number | undefined>
   mergedClsPrefixRef: Ref<string>
-}>('input')
+}>('n-input')

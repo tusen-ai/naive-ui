@@ -4,7 +4,7 @@ import { createInjectionKey } from '../../_utils'
 export const layoutSiderInjectionKey = createInjectionKey<{
   collapsedRef: Ref<boolean>
   collapseModeRef: Ref<'transform' | 'width'>
-}>('layoutSiderInjection')
+}>('n-layout-sider')
 
 export const positionProp = {
   type: String as PropType<'static' | 'absolute'>,
@@ -13,7 +13,7 @@ export const positionProp = {
 
 export interface LayoutInst {
   scrollTo: ((options: ScrollToOptions) => void) &
-  ((x: number, y: number) => void)
+    ((x: number, y: number) => void)
 }
 
 export type LayoutSiderInst = LayoutInst

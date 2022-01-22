@@ -20,7 +20,7 @@ export interface BreadcrumbInjection {
 }
 
 export const breadcrumbInjectionKey =
-  createInjectionKey<BreadcrumbInjection>('breadcrumb')
+  createInjectionKey<BreadcrumbInjection>('n-breadcrumb')
 
 const breadcrumbProps = {
   ...(useTheme.props as ThemeProps<BreadcrumbTheme>),

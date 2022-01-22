@@ -60,7 +60,7 @@ export interface NGridInjection {
   overflowRef: Ref<boolean>
 }
 
-export const gridInjectionKey = createInjectionKey<NGridInjection>('grid')
+export const gridInjectionKey = createInjectionKey<NGridInjection>('n-grid')
 
 export type GridProps = ExtractPublicPropTypes<typeof gridProps>
 

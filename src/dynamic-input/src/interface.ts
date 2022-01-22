@@ -11,6 +11,6 @@ export interface DynamicInputInjection {
 }
 
 export const dynamicInputInjectionKey =
-  createInjectionKey<DynamicInputInjection>('dynamic-input')
+  createInjectionKey<DynamicInputInjection>('n-dynamic-input')
 
 export type OnUpdateValue = <T>(value: T[]) => void

@@ -113,7 +113,7 @@ export interface SelectMenuInstance {
 }
 
 export const cascaderInjectionKey =
-  createInjectionKey<CascaderInjection>('cascader')
+  createInjectionKey<CascaderInjection>('n-cascader')
 
 export interface CascaderInst {
   focus: () => void

@@ -1,12 +1,4 @@
-import {
-  h,
-  toRef,
-  ref,
-  inject,
-  defineComponent,
-  watch,
-  Ref
-} from 'vue'
+import { h, toRef, ref, inject, defineComponent, watch, Ref } from 'vue'
 import { useMemo } from 'vooks'
 import {
   useInjectionCollection,
@@ -27,7 +19,8 @@ export interface AnchorInjection {
   titleEls: HTMLElement[]
 }
 
-export const anchorInjectionKey = createInjectionKey<AnchorInjection>('anchor')
+export const anchorInjectionKey =
+  createInjectionKey<AnchorInjection>('n-anchor')
 
 const anchorLinkProps = {
   title: String,

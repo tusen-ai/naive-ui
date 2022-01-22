@@ -59,7 +59,7 @@ export interface RadioGroupInjection {
 }
 
 export const radioGroupInjectionKey =
-  createInjectionKey<RadioGroupInjection>('radioGroup')
+  createInjectionKey<RadioGroupInjection>('n-radio-group')
 
 export interface UseRadio {
   mergedClsPrefix: Ref<string>

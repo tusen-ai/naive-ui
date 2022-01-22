@@ -42,7 +42,7 @@ export const submenuProps = {
 } as const
 
 export const submenuInjectionKey =
-  createInjectionKey<SubmenuInjection>('submenu')
+  createInjectionKey<SubmenuInjection>('n-submenu')
 
 export default defineComponent({
   name: 'Submenu',

@@ -57,7 +57,7 @@ export interface StepsInjection {
 
 export type StepsProps = ExtractPublicPropTypes<typeof stepsProps>
 
-export const stepsInjectionKey = createInjectionKey<StepsInjection>('steps')
+export const stepsInjectionKey = createInjectionKey<StepsInjection>('n-steps')
 
 export default defineComponent({
   name: 'Steps',

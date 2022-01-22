@@ -9,7 +9,7 @@ export interface ButtonGroupInjection {
 }
 
 export const buttonGroupInjectionKey =
-  createInjectionKey<ButtonGroupInjection>('button-group')
+  createInjectionKey<ButtonGroupInjection>('n-button-group')
 
 const buttonGroupProps = {
   size: {

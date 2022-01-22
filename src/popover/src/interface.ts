@@ -10,9 +10,8 @@ export interface PopoverInst {
 
 export type PopoverBodyInjection = Ref<HTMLElement | null> | null
 
-export const popoverBodyInjectionKey = createInjectionKey<PopoverBodyInjection>(
-  'popoverBodyInjection'
-)
+export const popoverBodyInjectionKey =
+  createInjectionKey<PopoverBodyInjection>('n-popover-body')
 
 export type InternalRenderBody = (
   className: any,

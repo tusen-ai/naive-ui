@@ -131,7 +131,7 @@ export type MenuSetupProps = ExtractPropTypes<typeof menuProps>
 
 export type MenuProps = Partial<MenuSetupProps>
 
-export const menuInjectionKey = createInjectionKey<MenuInjection>('menu')
+export const menuInjectionKey = createInjectionKey<MenuInjection>('n-menu')
 
 export default defineComponent({
   name: 'Menu',
