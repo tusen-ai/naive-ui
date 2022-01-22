@@ -48,7 +48,8 @@ export default defineComponent({
       const { max } = props
       if (max === undefined) return undefined
       const { options } = props
-      return options.slice(max, options.length)
+      if (options.length > max) return options.slice(max - 1, options.length)
+      return []
     })
     const displayedOptionsRef = computed(() => {
       const { options, max } = props

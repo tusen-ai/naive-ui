@@ -10,6 +10,7 @@
 - 修复 `n-image` 在预览时仍可滚动背景，关闭 [#2241](https://github.com/TuSimple/naive-ui/issues/2241)
 - 修复 `n-input` 在被浏览器自动填充的时候仍然展示 placeholder，关闭 [#2234](https://github.com/TuSimple/naive-ui/issues/2234)
 - 修复 `n-select` 没有 padding-top
+- 修复 `n-avatar-group` 超出 max 之后显示少一人，关闭 [#2244](https://github.com/TuSimple/naive-ui/issues/2244)
 
 ### Feats
 
