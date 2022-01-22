@@ -6,6 +6,7 @@
 
 - Fix `n-layout-sider` still occupies 1px after collapsed.
 - Fix `n-code` doesn't break word when `word-wrap=true`.
+- Fix `n-image` preview popup background can still be scrolled, closes [#2241](https://github.com/TuSimple/naive-ui/issues/2241)
 
 ### Feats
 
@@ -13,9 +14,6 @@
 - `n-select` adds `reset-menu-on-options-change` prop, closes [#2168](https://github.com/TuSimple/naive-ui/issues/2168).
 - `n-carousel` effect supports `'card'`.
 - `n-input` doesn't use native scrollbar when `type="textarea"`, closes [#2242](https://github.com/TuSimple/naive-ui/issues/2242), [#1172](https://github.com/TuSimple/naive-ui/issues/1172).
-
-### Feats
-
 - `n-number-animation` add `locale` prop, closes [#2181](https://github.com/TuSimple/naive-ui/issues/2181).
 - `n-number-animation`'s locale follows config provider.
 

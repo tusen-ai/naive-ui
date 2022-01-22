@@ -6,6 +6,7 @@
 
 - 修复 `n-layout-sider` 在折叠时仍占据 1px 宽度
 - 修复 `n-code` 在 `word-wrap=true` 时不切分单词
+- 修复 `n-image` 在预览时仍可滚动背景，关闭 [#2241](https://github.com/TuSimple/naive-ui/issues/2241)
 
 ### Feats
 
@@ -13,9 +14,6 @@
 - `n-select` 新增 `reset-menu-on-options-change` 属性，关闭 [#2168](https://github.com/TuSimple/naive-ui/issues/2168)
 - `n-carousel` `effect` 属性支持 `'card'`
 - `n-input` 在 `type="textarea"` 不再使用原生滚动条，关闭 [#2242](https://github.com/TuSimple/naive-ui/issues/2242)，关闭 [#1172](https://github.com/TuSimple/naive-ui/issues/1172)
-
-### Feats
-
 - `n-number-animation` 新增 `locale` 属性，用于设置国际化语言，关闭 [#2181](https://github.com/TuSimple/naive-ui/issues/2181)
 - `n-number-animation` 跟随 config provider 国际化
 

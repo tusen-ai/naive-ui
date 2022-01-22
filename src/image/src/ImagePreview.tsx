@@ -28,12 +28,12 @@ import {
 } from '../../_internal/icons'
 import { useLocale, useTheme } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
+import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
 import { prevIcon, nextIcon, closeIcon } from './icons'
 import type { MoveStrategy } from './interface'
 import { imagePreviewSharedProps } from './interface'
 import style from './styles/index.cssr'
-import { NTooltip } from '../../tooltip'
 
 export interface ImagePreviewInst {
   setThumbnailEl: (e: HTMLImageElement | null) => void
@@ -346,6 +346,9 @@ export default defineComponent({
       show: showRef,
       appear: useIsMounted(),
       displayed: displayedRef,
+      handleWheel (e: WheelEvent) {
+        e.stopPropagation()
+      },
       handlePreviewMousedown,
       handlePreviewDblclick,
       syncTransformOrigin,
@@ -398,6 +401,7 @@ export default defineComponent({
                     <div
                       class={`${clsPrefix}-image-preview-container`}
                       style={this.cssVars as CSSProperties}
+                      onWheel={this.handleWheel}
                     >
                       <Transition
                         name="fade-in-transition"
