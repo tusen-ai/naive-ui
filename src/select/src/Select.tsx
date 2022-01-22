@@ -12,8 +12,7 @@ import {
   vShow,
   InputHTMLAttributes,
   HTMLAttributes,
-  watchEffect,
-  renderSlot
+  watchEffect
 } from 'vue'
 import { happensIn } from 'seemly'
 import { createTreeMate, TreeNode } from 'treemate'
@@ -708,9 +707,8 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
     return (
-      <div class={`${mergedClsPrefix}-select`}>
+      <div class={`${this.mergedClsPrefix}-select`}>
         <VBinder>
           {{
             default: () => [
@@ -720,7 +718,7 @@ export default defineComponent({
                     <NInternalSelection
                       ref="triggerRef"
                       inputProps={this.inputProps}
-                      clsPrefix={mergedClsPrefix}
+                      clsPrefix={this.mergedClsPrefix}
                       showArrow={this.showArrow}
                       maxTagCount={this.maxTagCount}
                       bordered={this.mergedBordered}
@@ -752,9 +750,7 @@ export default defineComponent({
                       onKeyup={this.handleKeyUp}
                     >
                       {{
-                        suffix: $slots.suffix
-                          ? () => renderSlot($slots, 'suffix')
-                          : undefined
+                        arrow: () => this.$slots.arrow?.()
                       }}
                     </NInternalSelection>
                   )
@@ -789,10 +785,10 @@ export default defineComponent({
                                 this.consistentMenuWidth && this.virtualScroll
                               }
                               class={[
-                                `${mergedClsPrefix}-select-menu`,
+                                `${this.mergedClsPrefix}-select-menu`,
                                 this.menuProps?.class
                               ]}
-                              clsPrefix={mergedClsPrefix}
+                              clsPrefix={this.mergedClsPrefix}
                               focusable
                               autoPending={true}
                               theme={this.mergedTheme.peers.InternalSelectMenu}
@@ -820,7 +816,7 @@ export default defineComponent({
                                 this.resetMenuOnOptionsChange
                               }
                             >
-                              {$slots}
+                              {this.$slots}
                             </NInternalSelectMenu>,
                             this.displayDirective === 'show'
                               ? [

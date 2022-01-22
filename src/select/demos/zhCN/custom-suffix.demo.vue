@@ -1,44 +1,43 @@
-# Custom suffix
+<markdown>
+# 自定义箭头
 
-Make it different！
+整点不一样的。
+</markdown>
 
-```html
-<n-space vertical>
-  <n-select
-    placeholder="Please Select a Song"
-    :options="options"
-    v-model:show="show1"
-  >
-    <template #suffix>
-      <transition name="slide-left">
-        <animal-rabbit28-regular v-if="show1" />
-        <animal-turtle16-regular v-else />
-      </transition>
-    </template>
-  </n-select>
-  <n-select
-    filterable
-    placeholder="Please Select a Song"
-    :options="options"
-    v-model:show="show2"
-  >
-    <template v-if="show2" #suffix>
-      <md-search />
-    </template>
-  </n-select>
-</n-space>
-```
+<template>
+  <n-space vertical>
+    <n-select v-model:show="show1" placeholder="选择歌曲" :options="options">
+      <template #arrow>
+        <transition name="slide-left">
+          <animal-rabbit16-regular v-if="show1" />
+          <animal-turtle16-regular v-else />
+        </transition>
+      </template>
+    </n-select>
+    <n-select
+      v-model:show="show2"
+      filterable
+      placeholder="选择歌曲"
+      :options="options"
+    >
+      <template v-if="show2" #arrow>
+        <md-search />
+      </template>
+    </n-select>
+  </n-space>
+</template>
 
-```js
-import { MdSearch } from '@vicons/ionicons4'
-import { AnimalTurtle16Regular, AnimalRabbit28Regular } from '@vicons/fluent'
+<script lang="ts">
+import MdSearch from '@vicons/ionicons4/MdSearch'
+import AnimalTurtle16Regular from '@vicons/fluent/AnimalTurtle16Regular'
+import AnimalRabbit16Regular from '@vicons/fluent/AnimalRabbit28Regular'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   components: {
     MdSearch,
     AnimalTurtle16Regular,
-    AnimalRabbit28Regular
+    AnimalRabbit16Regular
   },
   setup () {
     return {
@@ -97,9 +96,9 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
 
-```css
+<style>
 :deep(.slide-left-enter-active),
 :deep(.slide-left-leave-active) {
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -118,4 +117,4 @@ export default defineComponent({
 :deep(.slide-left-leave-to) {
   transform: translateX(10px);
 }
-```
+</style>

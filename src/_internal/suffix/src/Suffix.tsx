@@ -1,7 +1,9 @@
-import { h, defineComponent, PropType, renderSlot } from 'vue'
+import { h, defineComponent, PropType } from 'vue'
 import NBaseClear from '../../clear'
 import NBaseLoading from '../../loading'
 import NBaseIcon from '../../icon'
+import { ChevronDownIcon } from '../../icons'
+import { resolveSlot } from '../../../_utils/vue'
 
 export default defineComponent({
   name: 'InternalSelectionSuffix',
@@ -49,7 +51,12 @@ export default defineComponent({
                         clsPrefix={clsPrefix}
                         class={`${clsPrefix}-base-suffix__arrow`}
                       >
-                        {{ default: () => renderSlot(slots, 'default') }}
+                        {{
+                          default: () =>
+                            resolveSlot(slots.default, () => [
+                              <ChevronDownIcon />
+                            ])
+                        }}
                       </NBaseIcon>
                     )
                   }}

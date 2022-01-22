@@ -12,8 +12,7 @@ import {
   CSSProperties,
   watchEffect,
   onMounted,
-  InputHTMLAttributes,
-  renderSlot
+  InputHTMLAttributes
 } from 'vue'
 import { VOverflow, VOverflowInst } from 'vueuc'
 import type { SelectBaseOption } from '../../../select/src/interface'
@@ -32,7 +31,6 @@ import type {
   RenderLabel,
   RenderLabelImpl
 } from '../../select-menu/src/interface'
-import { ChevronDownIcon } from '../../icons'
 
 export interface InternalSelectionInst {
   focus: () => void
@@ -500,7 +498,6 @@ export default defineComponent({
   },
   render () {
     const {
-      $slots,
       multiple,
       size,
       disabled,
@@ -523,12 +520,10 @@ export default defineComponent({
         onClear={this.handleClear}
       >
         {{
-          default: () =>
-            renderSlot($slots, 'suffix', undefined, () => [<ChevronDownIcon />])
+          default: () => this.$slots.arrow?.()
         }}
       </Suffix>
     )
-
     let body: JSX.Element
     if (multiple) {
       const createTag = (option: SelectBaseOption): JSX.Element => (
