@@ -1120,7 +1120,7 @@ export default defineComponent({
                     show={this.showClearButton}
                     onClear={this.handleClear}
                   >
-                    {{ default: () => $slots.clear }}
+                    {{ default: $slots.clear }}
                   </NBaseClear>
                 ) : null,
                 $slots.suffix?.()

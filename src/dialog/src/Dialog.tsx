@@ -240,7 +240,7 @@ export default defineComponent({
               }}
             </NBaseIcon>
           ) : null}
-          {$slots.header ? $slots.header : render(title)}
+          {$slots.header ? $slots.header() : render(title)}
         </div>
         <div class={`${mergedClsPrefix}-dialog__content`}>
           {$slots.default ? $slots.default() : render(content)}
