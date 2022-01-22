@@ -44,3 +44,9 @@ formatted.vue
 | on-focus | `() => void` | `undefined` | Callback when the selection box gets focus. |  |
 | on-update:formatted-value | `(value: number \| null, timestampValue: number \| null) => void` | `undefined` | Callback when formatted value changes. | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Callback when the value changes. | `formattedValue` 2.24.0 |
+
+### TimePicker Slots
+
+| Name | Parameters | Description |
+| ---- | ---------- | ----------- |
+| icon | `()`       | Custom icon |

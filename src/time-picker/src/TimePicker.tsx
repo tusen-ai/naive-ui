@@ -725,7 +725,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, $slots } = this
     return (
       <div
         class={`${mergedClsPrefix}-time-picker`}
@@ -772,7 +772,7 @@ export default defineComponent({
                                 class={`${mergedClsPrefix}-time-picker-icon`}
                               >
                                 {{
-                                  default: () => <TimeIcon />
+                                  default: () => $slots.icon?.() || <TimeIcon />
                                 }}
                               </NBaseIcon>
                             )
