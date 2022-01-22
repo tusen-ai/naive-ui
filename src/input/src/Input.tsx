@@ -15,30 +15,37 @@ import {
   WatchStopHandle,
   provide,
   InputHTMLAttributes,
-  TextareaHTMLAttributes
+  TextareaHTMLAttributes,
+  Fragment
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
-import { NBaseClear, NBaseIcon, NBaseSuffix } from '../../_internal'
+import { off, on } from 'evtd'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
+import {
+  NBaseClear,
+  NBaseIcon,
+  NBaseSuffix,
+  NScrollbar,
+  ScrollbarInst
+} from '../../_internal'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createKey, ExtractPublicPropTypes, warnOnce } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { inputLight } from '../styles'
 import type { InputTheme } from '../styles'
-import {
+import type {
   OnUpdateValue,
   OnUpdateValueImpl,
   Size,
-  InputWrappedRef,
-  inputInjectionKey
+  InputWrappedRef
 } from './interface'
+import { inputInjectionKey } from './interface'
 import { isEmptyValue } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
-import { off, on } from 'evtd'
 
 const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
@@ -168,6 +175,7 @@ export default defineComponent({
     const inputMirrorElRef = ref<HTMLElement | null>(null)
     const inputElRef = ref<HTMLInputElement | null>(null)
     const inputEl2Ref = ref<HTMLInputElement | null>(null)
+    const textareaScrollbarInstRef = ref<ScrollbarInst | null>(null)
     // local
     const { localeRef } = useLocale('Input')
     // value
@@ -406,6 +414,12 @@ export default defineComponent({
     ): void {
       const targetValue = (e.target as HTMLInputElement).value
       syncMirror(targetValue)
+      if (props.type === 'textarea') {
+        const { value: textareaScrollbarInst } = textareaScrollbarInstRef
+        if (textareaScrollbarInst) {
+          textareaScrollbarInst.syncUnifiedContainer()
+        }
+      }
       syncSource = targetValue
       if (isComposingRef.value) return
       const changedValue = targetValue
@@ -649,17 +663,34 @@ export default defineComponent({
       updateTextAreaStyle()
     }
 
-    let stopWatchMergedValue: WatchStopHandle | null = null
+    function handleTextAreaScroll (): void {
+      textareaScrollbarInstRef.value?.syncUnifiedContainer()
+    }
+
+    let stopWatchMergedValue1: WatchStopHandle | null = null
     watchEffect(() => {
       const { autosize, type } = props
       if (autosize && type === 'textarea') {
-        stopWatchMergedValue = watch(mergedValueRef, (value) => {
+        stopWatchMergedValue1 = watch(mergedValueRef, (value) => {
           if (!Array.isArray(value) && value !== syncSource) {
             syncMirror(value)
           }
         })
       } else {
-        stopWatchMergedValue?.()
+        stopWatchMergedValue1?.()
+      }
+    })
+
+    let stopWatchMergedValue2: WatchStopHandle | null = null
+    watchEffect(() => {
+      if (props.type === 'textarea') {
+        stopWatchMergedValue2 = watch(mergedValueRef, (value) => {
+          if (!Array.isArray(value) && value !== syncSource) {
+            textareaScrollbarInstRef.value?.syncUnifiedContainer()
+          }
+        })
+      } else {
+        stopWatchMergedValue2?.()
       }
     })
 
@@ -690,6 +721,7 @@ export default defineComponent({
       inputEl2Ref,
       textareaElRef,
       textareaMirrorElRef,
+      textareaScrollbarInstRef,
       // value
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
@@ -708,6 +740,7 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       mergedShowPasswordOn: mergedShowPasswordOnRef,
       // methods
+      handleTextAreaScroll,
       handleCompositionStart,
       handleCompositionEnd,
       handleInput,
@@ -725,6 +758,9 @@ export default defineComponent({
       handlePasswordToggleMousedown,
       handleWrapperKeyDown,
       handleTextAreaMirrorResize,
+      getTextareaScrollContainer: () => {
+        return textareaElRef.value
+      },
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
@@ -881,50 +917,68 @@ export default defineComponent({
             </div>
           ) : null}
           {this.type === 'textarea' ? (
-            <div class={`${mergedClsPrefix}-input__textarea`}>
-              <textarea
-                {...this.inputProps}
-                ref="textareaElRef"
-                class={`${mergedClsPrefix}-input__textarea-el`}
-                autofocus={this.autofocus}
-                rows={Number(this.rows)}
-                placeholder={this.placeholder as string | undefined}
-                value={this.mergedValue as string | undefined}
-                disabled={this.mergedDisabled}
-                maxlength={this.maxlength as any}
-                minlength={this.minlength as any}
-                readonly={this.readonly as any}
-                tabindex={
-                  this.passivelyActivated && !this.activated ? -1 : undefined
-                }
-                style={this.textDecorationStyle[0] as any}
-                onBlur={this.handleInputBlur}
-                onFocus={this.handleInputFocus}
-                onInput={this.handleInput}
-                onChange={this.handleChange}
-              />
-              {this.showPlaceholder1 ? (
-                <div
-                  class={`${mergedClsPrefix}-input__placeholder`}
-                  key="placeholder"
-                >
-                  {this.mergedPlaceholder[0]}
-                </div>
-              ) : null}
-              {this.autosize ? (
-                <VResizeObserver onResize={this.handleTextAreaMirrorResize}>
-                  {{
-                    default: () => (
-                      <div
-                        ref="textareaMirrorElRef"
-                        class={`${mergedClsPrefix}-input__textarea-mirror`}
-                        key="mirror"
+            <NScrollbar
+              ref="textareaScrollbarInstRef"
+              class={`${mergedClsPrefix}-input__textarea`}
+              container={this.getTextareaScrollContainer}
+              useUnifiedContainer
+            >
+              {{
+                default: () => {
+                  return (
+                    <>
+                      <textarea
+                        {...this.inputProps}
+                        ref="textareaElRef"
+                        class={`${mergedClsPrefix}-input__textarea-el`}
+                        autofocus={this.autofocus}
+                        rows={Number(this.rows)}
+                        placeholder={this.placeholder as string | undefined}
+                        value={this.mergedValue as string | undefined}
+                        disabled={this.mergedDisabled}
+                        maxlength={this.maxlength as any}
+                        minlength={this.minlength as any}
+                        readonly={this.readonly as any}
+                        tabindex={
+                          this.passivelyActivated && !this.activated
+                            ? -1
+                            : undefined
+                        }
+                        style={this.textDecorationStyle[0] as any}
+                        onBlur={this.handleInputBlur}
+                        onFocus={this.handleInputFocus}
+                        onInput={this.handleInput}
+                        onChange={this.handleChange}
+                        onScroll={this.handleTextAreaScroll}
                       />
-                    )
-                  }}
-                </VResizeObserver>
-              ) : null}
-            </div>
+                      {this.showPlaceholder1 ? (
+                        <div
+                          class={`${mergedClsPrefix}-input__placeholder`}
+                          key="placeholder"
+                        >
+                          {this.mergedPlaceholder[0]}
+                        </div>
+                      ) : null}
+                      {this.autosize ? (
+                        <VResizeObserver
+                          onResize={this.handleTextAreaMirrorResize}
+                        >
+                          {{
+                            default: () => (
+                              <div
+                                ref="textareaMirrorElRef"
+                                class={`${mergedClsPrefix}-input__textarea-mirror`}
+                                key="mirror"
+                              />
+                            )
+                          }}
+                        </VResizeObserver>
+                      ) : null}
+                    </>
+                  )
+                }
+              }}
+            </NScrollbar>
           ) : (
             <div class={`${mergedClsPrefix}-input__input`}>
               <input

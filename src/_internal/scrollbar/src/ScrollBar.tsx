@@ -53,9 +53,13 @@ export interface ScrollTo {
   }): void
 }
 
-export interface ScrollbarInst {
+export interface ScrollbarInstMethods {
+  syncUnifiedContainer: () => void
   scrollTo: ScrollTo
   sync: () => void
+}
+
+export interface ScrollbarInst extends ScrollbarInstMethods {
   containerRef: HTMLElement | null
   contentRef: HTMLElement | null
   containerScrollTop: number
@@ -75,10 +79,8 @@ const scrollbarProps = {
     type: Boolean,
     default: true
   },
-  xScrollable: {
-    type: Boolean,
-    default: false
-  },
+  xScrollable: Boolean,
+  useUnifiedContainer: Boolean,
   // If container is set, resize observer won't not attached
   container: Function as PropType<() => HTMLElement | null | undefined>,
   content: Function as PropType<() => HTMLElement | null | undefined>,
@@ -397,10 +399,37 @@ const Scrollbar = defineComponent({
         yRailSizeRef.value = yRailEl.offsetHeight
       }
     }
+    /**
+     * Sometimes there's only one element that we can scroll,
+     * For example for textarea, there won't be a content element.
+     */
+    function syncUnifiedContainer (): void {
+      const { value: container } = mergedContainerRef
+      if (container) {
+        containerScrollTopRef.value = container.scrollTop
+        containerScrollLeftRef.value = container.scrollLeft
+        containerHeightRef.value = container.offsetHeight
+        containerWidthRef.value = container.offsetWidth
+        contentHeightRef.value = container.scrollHeight
+        contentWidthRef.value = container.scrollWidth
+      }
+      const { value: xRailEl } = xRailRef
+      const { value: yRailEl } = yRailRef
+      if (xRailEl) {
+        xRailSizeRef.value = xRailEl.offsetWidth
+      }
+      if (yRailEl) {
+        yRailSizeRef.value = yRailEl.offsetHeight
+      }
+    }
     function sync (): void {
       if (!props.scrollable) return
-      syncPositionState()
-      syncScrollState()
+      if (props.useUnifiedContainer) {
+        syncUnifiedContainer()
+      } else {
+        syncPositionState()
+        syncScrollState()
+      }
     }
     function isMouseUpAway (e: MouseEvent): boolean {
       return !wrapperRef.value?.contains(e.target as any)
@@ -550,9 +579,13 @@ const Scrollbar = defineComponent({
       props,
       mergedClsPrefixRef
     )
-    return {
-      sync,
+    const exposedMethods: ScrollbarInstMethods = {
       scrollTo,
+      sync,
+      syncUnifiedContainer
+    }
+    return {
+      ...exposedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
       containerScrollTop: containerScrollTopRef,
       wrapperRef,
