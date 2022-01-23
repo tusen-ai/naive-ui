@@ -8,12 +8,13 @@ import {
   IsSecondDisabled
 } from '../../time-picker/src/interface'
 import { MergedTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
+import PanelHeader from '../src/panel/panelHeader'
 import { DatePickerTheme } from '../styles/light'
 import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
-import { createInjectionKey } from '../../_utils'
 
 export type Value = number | [number, number]
 
@@ -77,6 +78,9 @@ export interface PanelRef {
   // Only exists when type is month
   monthScrollRef?: ScrollbarInst | null
   yearScrollRef?: VirtualListInst | null
+  panelHeaderRef?: InstanceType<typeof PanelHeader> | null
+  panelStartHeaderRef?: InstanceType<typeof PanelHeader> | null
+  panelEndHeaderRef?: InstanceType<typeof PanelHeader> | null
 }
 
 // 0 is Monday
@@ -94,7 +98,6 @@ export type DatePickerInjection = {
   updateValueOnCloseRef: Ref<boolean>
   firstDayOfWeekRef: Ref<FirstDayOfWeek | undefined>
   datePickerSlots: Slots
-  scrollPickerColumns: (value?: number) => void
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 

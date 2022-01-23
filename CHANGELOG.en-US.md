@@ -4,6 +4,7 @@
 
 ### Fixes
 
+- Fix `n-carousel` `card` effect slide problem.
 - Fix `n-layout-sider` still occupies 1px after collapsed.
 - Fix `n-code` doesn't break word when `word-wrap=true`.
 - Fix `n-tab-pane`'s tab label area inherits `attrs`, closes [#2221](https://github.com/TuSimple/naive-ui/issues/2221).
@@ -40,6 +41,7 @@
 - `n-upload` adds `input-prop` prop, closes [#2204](https://github.com/TuSimple/naive-ui/issues/2204).
 - `n-data-table` col adds `render-sorter-icon` prop, closes [#1785](https://github.com/TuSimple/naive-ui/issues/1785).
 - `n-data-table` col adds `render-sorter` prop, closes [#1785](https://github.com/TuSimple/naive-ui/issues/1785).
+- `n-date-picker` easy navigation to specific month and year for `date` and `datetime` and `daterange` and `datetimerange` type.
 
 ### i18n
 

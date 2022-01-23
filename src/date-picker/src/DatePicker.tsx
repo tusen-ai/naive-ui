@@ -12,12 +12,11 @@ import {
   CSSProperties,
   toRef,
   Ref,
-  watchEffect,
-  nextTick
+  watchEffect
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { format, getTime, isValid, getYear, getMonth } from 'date-fns'
+import { format, getTime, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
 import { happensIn } from 'seemly'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
@@ -36,7 +35,7 @@ import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
-import { MONTH_ITEM_HEIGHT, START_YEAR, DatePickerType } from './config'
+import { DatePickerType } from './config'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -443,10 +442,29 @@ export default defineComponent({
         returnFocus: true
       })
     }
+    function needClosePanelHeader (
+      ref: PanelRef['panelHeaderRef'],
+      target: Node
+    ): boolean {
+      if (!ref || !ref?.showMonthYearPanel) return true
+      return !ref?.monthPanelRef?.$el.contains(target)
+    }
     function handleClickOutside (e: MouseEvent): void {
       if (
         mergedShowRef.value &&
-        !triggerElRef.value?.contains(e.target as Node)
+        !triggerElRef.value?.contains(e.target as Node) &&
+        needClosePanelHeader(
+          panelInstRef.value?.panelHeaderRef,
+          e.target as Node
+        ) &&
+        needClosePanelHeader(
+          panelInstRef.value?.panelStartHeaderRef,
+          e.target as Node
+        ) &&
+        needClosePanelHeader(
+          panelInstRef.value?.panelEndHeaderRef,
+          e.target as Node
+        )
       ) {
         closeCalendar({
           returnFocus: false
@@ -458,29 +476,6 @@ export default defineComponent({
         returnFocus: true,
         disableUpdateOnClose
       })
-    }
-    function scrollPickerColumns (value?: number): void {
-      if (!panelInstRef.value) return
-      const { monthScrollRef, yearScrollRef } = panelInstRef.value
-      const { value: mergedValue } = mergedValueRef
-      if (monthScrollRef) {
-        const monthIndex =
-          value === undefined
-            ? mergedValue === null
-              ? getMonth(Date.now())
-              : getMonth(mergedValue as number)
-            : getMonth(value)
-        monthScrollRef.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
-      }
-      if (yearScrollRef) {
-        const yearIndex =
-          (value === undefined
-            ? mergedValue === null
-              ? getYear(Date.now())
-              : getYear(mergedValue as number)
-            : getYear(value)) - START_YEAR
-        yearScrollRef.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
-      }
     }
 
     // --- Panel update value
@@ -624,10 +619,6 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
-      const { type } = props
-      if (type === 'month' || type === 'year' || type === 'quarter') {
-        void nextTick(scrollPickerColumns)
-      }
     }
     function closeCalendar ({
       returnFocus,
@@ -672,7 +663,6 @@ export default defineComponent({
     const uniVaidation = uniCalendarValidation(props, pendingValueRef)
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
-      scrollPickerColumns,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       timePickerSizeRef,

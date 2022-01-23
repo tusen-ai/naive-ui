@@ -1,4 +1,4 @@
-import { h, defineComponent, VNode, PropType } from 'vue'
+import { h, defineComponent, VNode, PropType, onMounted, nextTick } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
@@ -19,7 +19,10 @@ export default defineComponent({
     type: {
       type: String as PropType<'month' | 'year' | 'quarter'>,
       required: true
-    }
+    },
+    // panelHeader prop
+    quickMonth: Boolean,
+    onUpdatePanelValue: Function as PropType<(value: number) => void>
   },
   setup (props) {
     const useCalendarRef = useCalendar(props, props.type)
@@ -40,7 +43,8 @@ export default defineComponent({
       i: number,
       mergedClsPrefix: string
     ): VNode => {
-      const { mergedIsDateDisabled, handleDateClick } = useCalendarRef
+      const { mergedIsDateDisabled, handleDateClick, handleQuickMonthClick } =
+        useCalendarRef
       return (
         <div
           data-n-date
@@ -56,12 +60,19 @@ export default defineComponent({
                 mergedIsDateDisabled(item.ts)
             }
           ]}
-          onClick={() => handleDateClick(item)}
+          onClick={() => {
+            props.quickMonth && props.onUpdatePanelValue
+              ? handleQuickMonthClick(item, props.onUpdatePanelValue)
+              : handleDateClick(item)
+          }}
         >
           {getRenderContent(item)}
         </div>
       )
     }
+    onMounted(() => {
+      void nextTick(useCalendarRef.scrollPickerColumns)
+    })
     return { ...useCalendarRef, renderItem }
   },
   render () {

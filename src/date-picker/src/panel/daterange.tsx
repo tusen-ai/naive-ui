@@ -1,4 +1,4 @@
-import { defineComponent, h, watchEffect } from 'vue'
+import { defineComponent, h, watchEffect, ref } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import {
   BackwardIcon,
@@ -8,6 +8,7 @@ import {
 } from '../../../_internal/icons'
 import { NBaseFocusDetector } from '../../../_internal'
 import { warnOnce } from '../../../_utils'
+import PanelHeader from './panelHeader'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
 export default defineComponent({
@@ -24,7 +25,9 @@ export default defineComponent({
         }
       })
     }
-    return useDualCalendar(props, 'daterange')
+    const panelStartHeaderRef = ref<InstanceType<typeof PanelHeader> | null>(null)
+    const panelEndHeaderRef = ref<InstanceType<typeof PanelHeader> | null>(null)
+    return { ...useDualCalendar(props, 'daterange'), panelStartHeaderRef, panelEndHeaderRef }
   },
   render () {
     const { mergedClsPrefix, mergedTheme, shortcuts } = this
@@ -54,11 +57,16 @@ export default defineComponent({
             >
               <BackwardIcon />
             </div>
-            <div class={`${mergedClsPrefix}-date-panel-month__month-year`}>
-              {this.locale.monthBeforeYear
-                ? `${this.startCalendarMonth} ${this.startCalendarYear}`
-                : `${this.startCalendarYear} ${this.startCalendarMonth}`}
-            </div>
+            <PanelHeader
+              ref="panelStartHeaderRef"
+              {...this.$props}
+              {...this.$attrs}
+              value={this.startCalendarDateTime}
+              onUpdateCalendarValue={this.onUpdateStartPanelValue}
+              mergedClsPrefix={mergedClsPrefix}
+              calendarMonth={this.startCalendarMonth}
+              calendarYear={this.startCalendarYear}
+            />
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.startCalendarNextMonth}
@@ -136,11 +144,16 @@ export default defineComponent({
             >
               <BackwardIcon />
             </div>
-            <div class={`${mergedClsPrefix}-date-panel-month__month-year`}>
-              {this.locale.monthBeforeYear
-                ? `${this.endCalendarMonth} ${this.endCalendarYear}`
-                : `${this.endCalendarYear} ${this.endCalendarMonth}`}
-            </div>
+            <PanelHeader
+              ref="panelEndHeaderRef"
+              {...this.$props}
+              {...this.$attrs}
+              value={this.endCalendarDateTime}
+              onUpdateCalendarValue={this.onUpdateEndPanelValue}
+              mergedClsPrefix={mergedClsPrefix}
+              calendarMonth={this.endCalendarMonth}
+              calendarYear={this.endCalendarYear}
+            />
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.endCalendarNextMonth}

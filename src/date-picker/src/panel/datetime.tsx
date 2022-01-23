@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue'
+import { h, defineComponent, ref } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import { NTimePicker } from '../../../time-picker'
 import { NInput } from '../../../input'
@@ -10,6 +10,7 @@ import {
 } from '../../../_internal/icons'
 import { NBaseFocusDetector } from '../../../_internal'
 import { useCalendar, useCalendarProps } from './use-calendar'
+import PanelHeader from './panelHeader'
 
 /**
  * DateTime Panel
@@ -21,7 +22,11 @@ export default defineComponent({
   name: 'DateTimePanel',
   props: useCalendarProps,
   setup (props) {
-    return useCalendar(props, 'datetime')
+    const panelHeaderRef = ref<InstanceType<typeof PanelHeader> | null>(null)
+    return {
+      ...useCalendar(props, 'datetime'),
+      panelHeaderRef
+    }
   },
   render () {
     const { mergedClsPrefix, mergedTheme, shortcuts } = this
@@ -76,11 +81,16 @@ export default defineComponent({
             >
               <BackwardIcon />
             </div>
-            <div class={`${mergedClsPrefix}-date-panel-month__month-year`}>
-              {this.locale.monthBeforeYear
-                ? `${this.calendarMonth} ${this.calendarYear}`
-                : `${this.calendarYear} ${this.calendarMonth}`}
-            </div>
+            <PanelHeader
+              ref="panelHeaderRef"
+              {...this.$props}
+              {...this.$attrs}
+              value={this.calendarValue}
+              onUpdateCalendarValue={this.onUpdateCalendarValue}
+              mergedClsPrefix={mergedClsPrefix}
+              calendarMonth={this.calendarMonth}
+              calendarYear={this.calendarYear}
+            />
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.nextMonth}

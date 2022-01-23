@@ -249,6 +249,7 @@ export default c([
         flex-grow: 1;
         text-align: center;
         color: var(--n-calendar-title-text-color);
+        cursor: pointer;
       `)
     ]),
     cB('date-panel-weekdays', `
