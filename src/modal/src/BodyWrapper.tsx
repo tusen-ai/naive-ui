@@ -20,14 +20,14 @@ import { clickoutside } from 'vdirs'
 import { VFocusTrap } from 'vueuc'
 import { dialogPropKeys } from '../../dialog/src/Dialog'
 import { cardBasePropKeys } from '../../card/src/Card'
+import { drawerBodyInjectionKey } from '../../drawer/src/interface'
+import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { NScrollbar, ScrollbarInst } from '../../_internal'
 import { NDialog } from '../../dialog'
 import { NCard } from '../../card'
 import { getFirstSlotVNode, keep, warn } from '../../_utils'
-import { presetProps } from './presetProps'
-import { drawerBodyInjectionKey } from '../../drawer/src/interface'
-import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { modalBodyInjectionKey, modalInjectionKey } from './interface'
+import { presetProps } from './presetProps'
 
 export default defineComponent({
   name: 'ModalBody',
@@ -202,11 +202,7 @@ export default defineComponent({
     }
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-          <div
-            role="none"
-            class={`${mergedClsPrefix}-modal-body-wrapper`}
-            onKeyup={this.onKeyup}
-          >
+          <div role="none" class={`${mergedClsPrefix}-modal-body-wrapper`}>
             <NScrollbar
               ref="scrollbarRef"
               theme={this.mergedTheme.peers.Scrollbar}
