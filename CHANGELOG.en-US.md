@@ -13,6 +13,7 @@
 - Fix `n-select` doesn't have padding-top.
 - Fix `n-avatar-group` extra count not correct after `max` is set, closes [#2244](https://github.com/TuSimple/naive-ui/issues/2244).
 - Fix `n-calendar` doesn't trigger `on-panel-change` on today button clicked.
+- Fix `n-drawer` can't be closed by esc key when `mask-closable=false`, closes [#2233](https://github.com/TuSimple/naive-ui/issues/2233).
 
 ### Feats
 

@@ -51,7 +51,8 @@ export default defineComponent({
     autoFocus: {
       type: Boolean,
       default: true
-    }
+    },
+    onEsc: Function as PropType<() => void>
   },
   setup (props) {
     const displayedRef = ref(props.show)
@@ -94,7 +95,8 @@ export default defineComponent({
             <VFocusTrap
               disabled={!this.trapFocus}
               active={this.show}
-              focusFirstDescendant={this.autoFocus}
+              autoFocus={this.autoFocus}
+              onEsc={this.onEsc}
             >
               {{
                 default: () => (

@@ -158,12 +158,10 @@ export default defineComponent({
       }
       if (onMaskClick) onMaskClick(e)
     }
-    function handleKeydown (e: KeyboardEvent): void {
-      if (e.code === 'Escape') {
-        props.onEsc?.()
-        if (props.closeOnEsc) {
-          doUpdateShow(false)
-        }
+    function handleEsc (): void {
+      props.onEsc?.()
+      if (props.closeOnEsc) {
+        doUpdateShow(false)
       }
     }
     function doUpdateShow (show: boolean): void {
@@ -184,7 +182,7 @@ export default defineComponent({
       namespace: namespaceRef,
       mergedBodyStyle: mergedBodyStyleRef,
       handleMaskClick,
-      handleKeydown,
+      handleEsc,
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
@@ -247,7 +245,6 @@ export default defineComponent({
               <div
                 class={[`${mergedClsPrefix}-drawer-container`, this.namespace]}
                 style={this.cssVars as CSSProperties}
-                onKeydown={this.handleKeydown}
                 role="none"
               >
                 <Transition name="fade-in-transition" appear={this.isMounted}>
@@ -274,6 +271,7 @@ export default defineComponent({
                   nativeScrollbar={this.nativeScrollbar}
                   trapFocus={this.trapFocus}
                   autoFocus={this.autoFocus}
+                  onEsc={this.handleEsc}
                 >
                   {this.$slots}
                 </NDrawerBodyWrapper>

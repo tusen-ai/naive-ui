@@ -42,19 +42,19 @@ Set `n-config-provider`'s `date-locale` prop to `dateEnUS` imported from naive-u
 
 PR is welcomed for locales that is not supported yet!
 
-| Language                  | Config | Date config |
-| ------------------------- | ------ | ----------- |
-| English                   | enUS   | dateEnUS    |
-| Japanese                  | jaJP   | dateJaJP    |
-| Russian                   | ruRU   | dateRuRU    |
-| Ukrainian                 | ukUA   | dateUkUA    |
-| Chinese (Simplified)      | zhCN   | dateZhCN    |
-| Chinese (Traditional)     | zhTW   | dateZhTW    |
-| German - Germany          | deDE   | dateDeDe    |
-| Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |
-| French                    | frFR   | dateFrFR    |
-| Spanish (Argentina)       | esAR   | dateEsAR    |
-| Italiano                  | itIT   | dateItIT    |
+| Language                  | Config | Date config | Version      |
+| ------------------------- | ------ | ----------- | ------------ |
+| English                   | enUS   | dateEnUS    |              |
+| Japanese                  | jaJP   | dateJaJP    |              |
+| Russian                   | ruRU   | dateRuRU    |              |
+| Ukrainian                 | ukUA   | dateUkUA    |              |
+| Chinese (Simplified)      | zhCN   | dateZhCN    |              |
+| Chinese (Traditional)     | zhTW   | dateZhTW    |              |
+| German - Germany          | deDE   | dateDeDe    |              |
+| Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |              |
+| French                    | frFR   | dateFrFR    |              |
+| Spanish (Argentina)       | esAR   | dateEsAR    | NEXT_VERSION |
+| Italiano                  | itIT   | dateItIT    | NEXT_VERSION |
 
 ## Customize the existing locale
 

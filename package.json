@@ -145,7 +145,7 @@
     "vdirs": "^0.1.7",
     "vfonts": "^0.0.3",
     "vooks": "^0.2.12",
-    "vueuc": "^0.4.21"
+    "vueuc": "^0.4.23"
   },
   "sideEffects": false,
   "homepage": "https://www.naiveui.com",
@@ -162,7 +162,12 @@
   ],
   "pnpm": {
     "peerDependencyRules": {
-      "ignoreMissing": ["@babel/core", "postcss", "rollup", "webpack"],
+      "ignoreMissing": [
+        "@babel/core",
+        "postcss",
+        "rollup",
+        "webpack"
+      ],
       "allowedVersions": {
         "eslint": "^8.6.0",
         "eslint-plugin-promise": "^6.0.0",

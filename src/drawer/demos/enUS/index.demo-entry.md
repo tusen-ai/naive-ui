@@ -7,7 +7,7 @@ I think it is similar with modal, with a bit difference on placement.
 ```demo
 basic
 multiple
-target
+target.vue
 closable
 slot
 ```

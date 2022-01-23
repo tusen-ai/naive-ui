@@ -198,12 +198,10 @@ export default defineComponent({
         }
       }
     }
-    function handleKeyup (e: KeyboardEvent): void {
-      if (e.code === 'Escape') {
-        props.onEsc?.()
-        if (props.closeOnEsc) {
-          doUpdateShow(false)
-        }
+    function handleEsc (e: KeyboardEvent): void {
+      props.onEsc?.()
+      if (props.closeOnEsc) {
+        doUpdateShow(false)
       }
     }
     provide(modalInjectionKey, {
@@ -235,7 +233,7 @@ export default defineComponent({
         // TODO: remove as any after vue fix the issue introduced in 3.2.27
         return pickedProps as any
       }),
-      handleKeyup,
+      handleEsc,
       handleAfterLeave,
       handleClickoutside,
       handleBeforeLeave,
@@ -299,7 +297,7 @@ export default defineComponent({
                   autoFocus={this.autoFocus}
                   trapFocus={this.trapFocus}
                   {...this.presetProps}
-                  onEsc={this.onEsc}
+                  onEsc={this.handleEsc}
                   onClose={this.handleCloseClick}
                   onNegativeClick={this.handleNegativeClick}
                   onPositiveClick={this.handlePositiveClick}
@@ -307,7 +305,6 @@ export default defineComponent({
                   onAfterEnter={this.onAfterEnter}
                   onAfterLeave={this.handleAfterLeave}
                   onClickoutside={this.handleClickoutside}
-                  onKeyup={this.handleKeyup}
                 >
                   {this.$slots}
                 </NModalBodyWrapper>

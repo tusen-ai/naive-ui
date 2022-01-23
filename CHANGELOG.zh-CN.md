@@ -13,6 +13,7 @@
 - 修复 `n-select` 没有 padding-top
 - 修复 `n-avatar-group` 超出 max 之后显示少一人，关闭 [#2244](https://github.com/TuSimple/naive-ui/issues/2244)
 - 修复 `n-calendar` 再点击今天按钮后不触发 `on-panel-change`
+- 修复 `n-drawer` 在设定 `mask-closable=false` 时无法被 esc 键关闭，关闭 [#2233](https://github.com/TuSimple/naive-ui/issues/2233)
 
 ### Feats
 

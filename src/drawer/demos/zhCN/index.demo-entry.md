@@ -7,7 +7,7 @@
 ```demo
 basic
 multiple
-target
+target.vue
 closable
 slot
 a11y-debug.vue

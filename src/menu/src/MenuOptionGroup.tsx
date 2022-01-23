@@ -1,6 +1,7 @@
 import { h, defineComponent, provide, PropType, Fragment, inject } from 'vue'
 import { createInjectionKey, render } from '../../_utils'
-import { useMenuChild, useMenuChildProps } from './use-menu-child'
+import { useMenuChild } from './use-menu-child'
+import { useMenuChildProps } from './use-menu-child-props'
 import type { MenuOptionGroupInjection } from './use-menu-child'
 import { itemRenderer } from './utils'
 import { TmNode } from './interface'

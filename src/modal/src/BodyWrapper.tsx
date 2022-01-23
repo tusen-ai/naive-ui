@@ -76,11 +76,8 @@ export default defineComponent({
       type: Function,
       required: true
     },
-    onKeyup: {
-      type: Function as PropType<(e: KeyboardEvent) => void>,
-      required: true
-    },
-    onAfterEnter: Function as PropType<() => void>
+    onAfterEnter: Function as PropType<() => void>,
+    onEsc: Function as PropType<() => void>
   },
   setup (props) {
     const bodyRef = ref<HTMLElement | ComponentPublicInstance | null>(null)
@@ -221,7 +218,8 @@ export default defineComponent({
                   <VFocusTrap
                     disabled={!this.trapFocus}
                     active={this.show}
-                    focusFirstDescendant={this.autoFocus}
+                    onEsc={this.onEsc}
+                    autoFocus={this.autoFocus}
                   >
                     {{
                       default: () => (
