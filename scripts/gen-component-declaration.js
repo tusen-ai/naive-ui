@@ -2,7 +2,7 @@ import * as globalComponents from '../src/components'
 import { resolve } from 'path'
 import fs from 'fs-extra'
 
-const TYPE_ROOT = resolve(__dirname, '../typings')
+const TYPE_ROOT = resolve(__dirname, '..')
 
 function exist (path) {
   return fs.existsSync(path)
@@ -27,13 +27,8 @@ async function generateComponentsType () {
       components[key] = entry
     }
   })
-  const originalContent = exist(
-    resolve(TYPE_ROOT, 'components.d.ts')
-  )
-    ? await fs.readFile(
-      resolve(TYPE_ROOT, 'components.d.ts'),
-      'utf-8'
-    )
+  const originalContent = exist(resolve(TYPE_ROOT, 'components.d.ts'))
+    ? await fs.readFile(resolve(TYPE_ROOT, 'components.d.ts'), 'utf-8')
     : ''
 
   const originImports = parseComponentsDeclaration(originalContent)
@@ -50,21 +45,17 @@ async function generateComponentsType () {
       }
       return `${name}: ${v}`
     })
-  const code = `// this is global component declaration
+  const code = `// Auto generated component declarations
 declare module 'vue' {
   export interface GlobalComponents {
     ${lines.join('\n    ')}
     [key: string]: any
   }
 }
-export { }
+export {}
 `
   if (code !== originalContent) {
-    await fs.writeFile(
-      resolve(TYPE_ROOT, 'components.d.ts'),
-      code,
-      'utf-8'
-    )
+    await fs.writeFile(resolve(TYPE_ROOT, 'volar.d.ts'), code, 'utf-8')
   }
 }
 generateComponentsType()

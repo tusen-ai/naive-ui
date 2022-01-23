@@ -72,7 +72,7 @@ app.use(naive)
 {
   "compilerOptions": {
     // ...
-    "types": ["naive-ui/components"]
+    "types": ["naive-ui/volar"]
   }
 }
 ```

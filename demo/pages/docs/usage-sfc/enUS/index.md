@@ -72,7 +72,7 @@ If you are using Volar, you can specify global component types by configure `com
 {
   "compilerOptions": {
     // ...
-    "types": ["naive-ui/components"]
+    "types": ["naive-ui/volar"]
   }
 }
 ```

@@ -1,4 +1,4 @@
-// this is global component declaration
+// Auto generated component declarations
 declare module 'vue' {
   export interface GlobalComponents {
     NAffix: typeof import('naive-ui')['NAffix']
