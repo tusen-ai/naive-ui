@@ -4,7 +4,6 @@
 
 ### Fixes
 
-- Fix `n-carousel` `card` effect slide problem.
 - Fix `n-layout-sider` still occupies 1px after collapsed.
 - Fix `n-code` doesn't break word when `word-wrap=true`.
 - Fix `n-tab-pane`'s tab label area inherits `attrs`, closes [#2221](https://github.com/TuSimple/naive-ui/issues/2221).
@@ -12,6 +11,7 @@
 - Fix `n-input` shows placeholder when browser auto completes it, closes [#2234](https://github.com/TuSimple/naive-ui/issues/2234).
 - Fix `n-select` doesn't have padding-top.
 - Fix `n-avatar-group` extra count not correct after `max` is set, closes [#2244](https://github.com/TuSimple/naive-ui/issues/2244).
+- Fix `n-calendar` doesn't trigger `on-panel-change` on today button clicked.
 
 ### Feats
 
