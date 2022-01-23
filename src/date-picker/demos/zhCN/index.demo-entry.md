@@ -23,6 +23,7 @@ events
 format
 footerslot
 update-on-close
+focus.vue
 ```
 
 ## API
@@ -130,3 +131,10 @@ update-on-close
 | 名称   | 参数 | 说明           |
 | ------ | ---- | -------------- |
 | footer | `()` | 添加额外的页脚 |
+
+### DatePicker Methods
+
+| 名称  | 类型         | 说明 | 版本   |
+| ----- | ------------ | ---- | ------ |
+| focus | `() => void` | 聚焦 | 2.24.2 |
+| blur  | `() => void` | 失焦 | 2.24.2 |

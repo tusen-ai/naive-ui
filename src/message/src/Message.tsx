@@ -23,10 +23,9 @@ import { render, createKey } from '../../_utils'
 import { useTheme } from '../../_mixins'
 import { messageLight } from '../styles'
 import { messageProps } from './message-props'
-import type { MessageType } from './types'
+import type { MessageType, MessageRenderMessage } from './types'
 import { messageProviderInjectionKey } from './MessageProvider'
 import style from './styles/index.cssr'
-import { MessageRenderMessage } from '..'
 
 const iconMap = {
   info: <InfoIcon />,

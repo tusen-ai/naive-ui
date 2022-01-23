@@ -48,8 +48,21 @@ const modalProps = {
     default: 'mouse'
   },
   zIndex: Number,
+  autoFocus: {
+    type: Boolean,
+    default: true
+  },
+  trapFocus: {
+    type: Boolean,
+    default: true
+  },
+  closeOnEsc: {
+    type: Boolean,
+    default: true
+  },
   ...presetProps,
   // events
+  onEsc: Function as PropType<() => void>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
@@ -185,8 +198,9 @@ export default defineComponent({
         }
       }
     }
-    function handleKeyup (e: KeyboardEvent): void {
-      if (e.code === 'Escape') {
+    function handleEsc (e: KeyboardEvent): void {
+      props.onEsc?.()
+      if (props.closeOnEsc) {
         doUpdateShow(false)
       }
     }
@@ -216,9 +230,10 @@ export default defineComponent({
       containerRef,
       presetProps: computed(() => {
         const pickedProps = keep(props, presetPropsKeys)
+        // TODO: remove as any after vue fix the issue introduced in 3.2.27
         return pickedProps as any
       }),
-      handleKeyup,
+      handleEsc,
       handleAfterLeave,
       handleClickoutside,
       handleBeforeLeave,
@@ -279,7 +294,10 @@ export default defineComponent({
                   displayDirective={this.displayDirective}
                   show={this.show}
                   preset={this.preset}
+                  autoFocus={this.autoFocus}
+                  trapFocus={this.trapFocus}
                   {...this.presetProps}
+                  onEsc={this.handleEsc}
                   onClose={this.handleCloseClick}
                   onNegativeClick={this.handleNegativeClick}
                   onPositiveClick={this.handlePositiveClick}
@@ -287,7 +305,6 @@ export default defineComponent({
                   onAfterEnter={this.onAfterEnter}
                   onAfterLeave={this.handleAfterLeave}
                   onClickoutside={this.handleClickoutside}
-                  onKeyup={this.handleKeyup}
                 >
                   {this.$slots}
                 </NModalBodyWrapper>

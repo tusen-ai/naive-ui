@@ -15,6 +15,7 @@ virtual
 check-strategy
 custom-field
 custom-render.vue
+focus.vue
 ```
 
 ## API
@@ -67,3 +68,10 @@ custom-render.vue
 | ------ | ---- | -------------------------------- | ------ |
 | action | `()` | 级联菜单中显示的 action 填充内容 |        |
 | empty  | `()` | 级联菜单无数据时的 slot          | 2.22.0 |
+
+### Cascader Methods
+
+| 名称  | 类型         | 说明 | 版本   |
+| ----- | ------------ | ---- | ------ |
+| focus | `() => void` | 聚焦 | 2.24.2 |
+| blur  | `() => void` | 失焦 | 2.24.2 |

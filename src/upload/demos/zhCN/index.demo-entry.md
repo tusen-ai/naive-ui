@@ -39,6 +39,7 @@ retry-debug
 | file-list | `Array<UploadFileInfo>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |  |
 | image-group-props | `ImageGroupProps` | `undefined` | Upload 中预览图片组件的属性，参考 [ImageGroup Props](image#ImageGroup-Props) | 2.24.0 |
+| input-props | `Object` | `undefined` | file input 元素的属性 | 2.24.2 |
 | list-type | `string` | `'text'` | 文件列表的内建样式，`text`、`image` 和 `image-card` |  |
 | max | `number` | `undefined` | 限制上传文件数量 |  |
 | method | `string` | `'POST'` | HTTP 请求的方法 |  |
@@ -101,10 +102,11 @@ interface UploadCustomRequestOptions {
 
 ### Upload Methods
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| submit | `(fileId?: string \| number)` | 提交当前所有处于 pending 状态的文件 |
-| openOpenFileDialog | `() => void` | 打开文件选择对话框 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clear | `() => void` | 清空上传列表 | 2.24.2 |
+| openOpenFileDialog | `() => void` | 打开文件选择对话框 |  |
+| submit | `(fileId?: string \| number)` | 提交当前所有处于 pending 状态的文件 |  |
 
 ### Upload Slots
 

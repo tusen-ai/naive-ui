@@ -7,7 +7,7 @@ Go go go, Filter.
   <n-select
     v-model:value="selectedValue"
     filterable
-    placeholder="Please Select a Song"
+    placeholder="Please select a song"
     :options="options"
   />
   <n-select

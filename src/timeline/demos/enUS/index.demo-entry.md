@@ -16,11 +16,12 @@ customize-icon
 
 ### Timeline Props
 
-| Name           | Type                  | Default    | Description |
-| -------------- | --------------------- | ---------- | ----------- |
-| horizontal     | `boolean`             | `'false'`  | Horizontal  |
-| item-placement | `'left' \| 'right'`   | `'left'`   | Direction.  |
-| size           | `'medium' \| 'large'` | `'medium'` | Size.       |
+| Name           | Type                  | Default     | Description        |
+| -------------- | --------------------- | ----------- | ------------------ |
+| horizontal     | `boolean`             | `'false'`   | Horizontal         |
+| icon-size      | `number`              | `undefined` | Size of icon part. |
+| item-placement | `'left' \| 'right'`   | `'left'`    | Direction.         |
+| size           | `'medium' \| 'large'` | `'medium'`  | Size.              |
 
 ### TimelineItem Props
 
@@ -28,7 +29,6 @@ customize-icon
 | --- | --- | --- | --- |
 | color | `string` | `undefined` | Item color. |
 | content | `string` | `undefined` | Item content. |
-| icon-size | `number` | `undefined` | Size of icon part. |
 | time | `string` | `undefined` | Item time. |
 | title | `string` | `undefined` | Item title. |
 | type | `'default' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Item type. |

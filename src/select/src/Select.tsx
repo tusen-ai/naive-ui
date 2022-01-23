@@ -48,6 +48,7 @@ import {
   defaultFilter
 } from './utils'
 import type {
+  SelectInst,
   SelectMixedOption,
   SelectBaseOption,
   SelectGroupOption,
@@ -169,6 +170,10 @@ const selectProps = {
   displayDirective: {
     type: String as PropType<'if' | 'show'>,
     default: 'show'
+  },
+  resetMenuOnOptionsChange: {
+    type: Boolean,
+    default: true
   },
   /** deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -641,7 +646,16 @@ export default defineComponent({
       if (!mergedShowRef.value) return
       void nextTick(syncPosition)
     })
+    const exposedMethods: SelectInst = {
+      focus: () => {
+        triggerRef.value?.focus()
+      },
+      blur: () => {
+        triggerRef.value?.blur()
+      }
+    }
     return {
+      ...exposedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       namespace: namespaceRef,
@@ -693,9 +707,8 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
     return (
-      <div class={`${mergedClsPrefix}-select`}>
+      <div class={`${this.mergedClsPrefix}-select`}>
         <VBinder>
           {{
             default: () => [
@@ -705,7 +718,7 @@ export default defineComponent({
                     <NInternalSelection
                       ref="triggerRef"
                       inputProps={this.inputProps}
-                      clsPrefix={mergedClsPrefix}
+                      clsPrefix={this.mergedClsPrefix}
                       showArrow={this.showArrow}
                       maxTagCount={this.maxTagCount}
                       bordered={this.mergedBordered}
@@ -735,7 +748,11 @@ export default defineComponent({
                       onFocus={this.handleTriggerFocus}
                       onKeydown={this.handleKeyDown}
                       onKeyup={this.handleKeyUp}
-                    />
+                    >
+                      {{
+                        arrow: () => this.$slots.arrow?.()
+                      }}
+                    </NInternalSelection>
                   )
                 }}
               </VTarget>,
@@ -768,10 +785,10 @@ export default defineComponent({
                                 this.consistentMenuWidth && this.virtualScroll
                               }
                               class={[
-                                `${mergedClsPrefix}-select-menu`,
+                                `${this.mergedClsPrefix}-select-menu`,
                                 this.menuProps?.class
                               ]}
-                              clsPrefix={mergedClsPrefix}
+                              clsPrefix={this.mergedClsPrefix}
                               focusable
                               autoPending={true}
                               theme={this.mergedTheme.peers.InternalSelectMenu}
@@ -795,8 +812,11 @@ export default defineComponent({
                               onTabOut={this.handleMenuTabOut}
                               onMousedown={this.handleMenuMousedown}
                               show={this.mergedShow}
+                              resetMenuOnOptionsChange={
+                                this.resetMenuOnOptionsChange
+                              }
                             >
-                              {$slots}
+                              {this.$slots}
                             </NInternalSelectMenu>,
                             this.displayDirective === 'show'
                               ? [

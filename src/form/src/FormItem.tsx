@@ -11,7 +11,6 @@ import {
   inject,
   watch,
   Transition,
-  renderSlot,
   onMounted,
   LabelHTMLAttributes
 } from 'vue'
@@ -444,7 +443,9 @@ export default defineComponent({
           >
             {/* 'left' | 'right' | undefined */}
             {mergedRequireMarkPlacement !== 'left'
-              ? renderSlot($slots, 'label', undefined, () => [this.label])
+              ? $slots.label
+                ? $slots.label()
+                : this.label
               : null}
             {renderedShowRequireMark ? (
               <span class={`${mergedClsPrefix}-form-item-label__asterisk`}>
@@ -460,7 +461,9 @@ export default defineComponent({
               )
             )}
             {mergedRequireMarkPlacement === 'left'
-              ? renderSlot($slots, 'label', undefined, () => [this.label])
+              ? $slots.label
+                ? $slots.label()
+                : this.label
               : null}
           </label>
         ) : null}

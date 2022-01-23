@@ -7,7 +7,7 @@
 ```demo
 basic
 multiple
-target
+target.vue
 closable
 slot
 a11y-debug.vue
@@ -24,6 +24,8 @@ dark-4-debug
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| auto-focus | `boolean` | `true` | 是否自动聚焦 Drawer 第一个可聚焦的元素 | 2.24.2 |
+| close-on-esc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭 Drawer | 2.24.2 |
 | content-style | `string \| Object` | `undefined` | 抽屉可滚动内容节点的样式 |  |
 | display-directive | `'if' \| 'show'` | `'if'` | `n-drawer` 在控制内容是否渲染时使用的指令，`'if'` 对应 `v-if`，`'show'` 对应 `v-show` |  |
 | height | `number \| string` | `251` | 抽屉的高度，在位置是 `top` 和 `bottom` 时生效 |  |
@@ -33,8 +35,10 @@ dark-4-debug
 | show | `boolean` | `false` | 是否展示抽屉 |  |
 | style | `string \| Object` | `undefined` | 抽屉的样式 |  |
 | to | `string \| HTMLElement` | `'body'` | 抽屉出现的区域 |  |
+| trap-focus | `boolean` | `true` | 是否将焦点锁定在 Drawer 内部 | 2.24.2 |
 | width | `number \| string` | `251` | 抽屉的宽度，在位置是 `left` 和 `right` 时生效 |  |
 | z-index | `number` | `undefined` | 抽屉的 z-index | 2.24.0 |
+| on-esc | `() => void` | `undefined` | 焦点在 Drawer 内部时按下 Esc 键的回调 | 2.24.2 |
 | on-mask-click | `(e: MouseEvent) => void` | `undefined` | 点击遮罩的回调 |  |
 | on-update:show | `(show: boolean) => void` | `undefined` | 抽屉显示状态改变时执行的回调函数 |  |
 

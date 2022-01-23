@@ -1,7 +1,6 @@
 import {
   h,
   defineComponent,
-  renderSlot,
   inject,
   computed,
   ref,
@@ -44,10 +43,10 @@ export default defineComponent({
       const { value: selfEl } = selfElRef
       return selfEl && NCarousel.getSlideIndex(selfEl)
     })
-    function handleClick (e: MouseEvent): void {
+    function handleClick (event: MouseEvent): void {
       const { value: index } = indexRef
       if (index !== undefined) {
-        NCarousel?.onCarouselItemClick(index)
+        NCarousel?.onCarouselItemClick(index, event)
       }
     }
     onMounted(() => NCarousel.addSlide(selfElRef.value))
@@ -85,16 +84,17 @@ export default defineComponent({
     ]
     return (
       <div
-        ref='selfElRef'
+        ref="selfElRef"
         class={className}
-        role='option'
+        role="option"
         tabindex="-1"
         data-index={index}
         aria-hidden={!isActive}
         style={style}
-        onClick={this.handleClick}
+        // @ts-expect-error
+        onClickCapture={this.handleClick}
       >
-        {renderSlot(slots, 'default', {
+        {slots.default?.({
           isPrev,
           isNext,
           isActive,

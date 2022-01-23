@@ -1,4 +1,4 @@
-import type { InjectionKey } from 'vue'
+import { createInjectionKey } from '../../_utils'
 
 export const tuple = <T extends string[]>(...args: T): T => args
 
@@ -24,14 +24,23 @@ export interface CarouselMethodsInjection {
   getSlideStyle: (slide: HTMLElement) => any
   addSlide: (slide?: HTMLElement) => void
   removeSlide: (slide?: HTMLElement) => void
-  onCarouselItemClick: (index: number) => void
+  onCarouselItemClick: (index: number, event: MouseEvent) => void
 }
-export const carouselMethodsInjectionKey: InjectionKey<CarouselMethodsInjection> =
-  Symbol('carouselMethods')
+export const carouselMethodsInjectionKey =
+  createInjectionKey<CarouselMethodsInjection>('n-carousel-methods')
 
 export interface CarouselInst {
   getCurrentIndex: () => number
   to: (index: number) => void
   prev: () => void
   next: () => void
+}
+
+export const enum DragFlags {
+  NORMAL = 1,
+  START = 1 << 1,
+  PROGRESS = 1 << 2,
+  SUCCESS = 1 << 3,
+  FAIL = 1 << 4,
+  END = 1 << 5
 }

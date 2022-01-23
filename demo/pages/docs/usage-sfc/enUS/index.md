@@ -62,3 +62,17 @@ After the installation. You can use all the components in you SFC like this.
   <n-button>naive-ui</n-button>
 </template>
 ```
+
+### Volar support (2.24.2)
+
+If you are using Volar, you can specify global component types by configure `compilerOptions.types` in `tsconfig.json`.
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    // ...
+    "types": ["naive-ui/volar"]
+  }
+}
+```

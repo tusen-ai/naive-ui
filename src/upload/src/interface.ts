@@ -1,6 +1,7 @@
-import { Ref, InjectionKey, CSSProperties } from 'vue'
+import { Ref, CSSProperties } from 'vue'
 import { ImageGroupProps } from '../../image'
 import type { MergedTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
 import type { UploadTheme } from '../styles'
 
 export interface FileInfo {
@@ -85,8 +86,8 @@ export interface UploadInjection {
   openOpenFileDialog: () => void
 }
 
-export const uploadInjectionKey: InjectionKey<UploadInjection> =
-  Symbol('upload')
+export const uploadInjectionKey =
+  createInjectionKey<UploadInjection>('n-upload')
 
 export interface XhrHandlers {
   handleXHRLoad: (e: ProgressEvent) => void
@@ -98,6 +99,7 @@ export interface XhrHandlers {
 export interface UploadInst {
   openOpenFileDialog: () => void
   submit: () => void
+  clear: () => void
 }
 
 export type OnBeforeUpload = (data: {

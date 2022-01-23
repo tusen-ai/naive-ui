@@ -37,6 +37,7 @@ download
 | file-list-style | `Object` | `undefined` | The style of file list area |  |
 | file-list | `Array<UploadFileInfo>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional HTTP Headers of request. |  |
+| input-props | `Object` | `undefined` | Attributes of file input. | 2.24.2 |
 | image-group-props | `ImageGroupProps` | `undefined` | Props of `n-image` inside upload. See [ImageGroup Props](image#ImageGroup-Props). | 2.24.0 |
 | list-type | `string` | `'text'` | Built-in styles for file lists, `text`, `image` and `image-card`. |  |
 | max | `number` | `undefined` | Uploaded files limit. |  |
@@ -100,10 +101,11 @@ interface UploadCustomRequestOptions {
 
 ### Upload Methods
 
-| Name | Type | Description |
-| --- | --- | --- |
-| submit | `(fileId?: string \| number)` | Submit all files with pending status. |
-| openOpenFileDialog | `() => void` | Open the file dialog window. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| clear | `() => void` | Clear current upload list. | 2.24.2 |
+| openOpenFileDialog | `() => void` | Open the file dialog window. |  |
+| submit | `(fileId?: string \| number)` | Submit all files with pending status. |  |
 
 ### Upload Slots
 

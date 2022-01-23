@@ -72,6 +72,7 @@ export default c([
     `),
     cE('input-el, textarea-el', `
       -webkit-appearance: none;
+      scrollbar-width: none;
       width: 100%;
       min-width: 0;
       text-decoration-color: var(--n-text-decoration-color);
@@ -79,14 +80,18 @@ export default c([
       caret-color: var(--n-caret-color);
       background-color: transparent;
     `, [
-      c('&::placeholder', {
-        color: '#0000'
-      })
+      c('&::-webkit-scrollbar, &::-webkit-scrollbar-track-piece, &::-webkit-scrollbar-thumb', `
+        width: 0;
+        height: 0;
+        display: none;
+      `),
+      c('&::placeholder', 'color: #0000;'),
+      c('&:-webkit-autofill ~', [
+        cE('placeholder', 'display: none;')
+      ])
     ]),
     cM('round', [
-      cNotM('textarea', {
-        borderRadius: 'calc(var(--n-height) / 2)'
-      })
+      cNotM('textarea', 'border-radius: calc(var(--n-height) / 2);')
     ]),
     cE('placeholder', `
       pointer-events: none;
@@ -98,14 +103,15 @@ export default c([
       overflow: hidden;
       color: var(--n-placeholder-color);
     `, [
-      c('span', {
-        width: '100%',
-        display: 'inline-block'
-      })
+      c('span', `
+        width: 100%;
+        display: inline-block;
+      `)
     ]),
-    cNotM('autosize', {
-      width: '100%'
-    }),
+    cM('textarea', [
+      cE('placeholder', 'overflow: visible;')
+    ]),
+    cNotM('autosize', 'width: 100%;'),
     cM('autosize', [
       cE('textarea-el, input-el', `
         position: absolute;
@@ -145,17 +151,13 @@ export default c([
       ])
     ]),
     cNotM('textarea', [
-      cE('placeholder', {
-        whiteSpace: 'nowrap'
-      })
+      cE('placeholder', 'white-space: nowrap;')
     ]),
     cE('eye', `
       transition: color .3s var(--n-bezier);
     `),
     // textarea
-    cM('textarea', {
-      width: '100%'
-    }, [
+    cM('textarea', 'width: 100%;', [
       cB('input-word-count', `
         position: absolute;
         right: var(--n-padding-right);
@@ -164,17 +166,22 @@ export default c([
       cM('resizable', [
         cB('input-wrapper', `
           resize: vertical;
-          overflow: auto;
           min-height: var(--n-height);
         `)
       ]),
+      // override scrollbar relative position
+      cE('textarea', `
+        position: static;
+      `),
       cE('textarea-el, textarea-mirror, placeholder', `
-        width: 100%;
         height: 100%;
+        left: var(--n-padding-left);
+        right: var(--n-padding-right);
         padding-left: 0;
         padding-right: 0;
         padding-top: var(--n-padding-vertical);
         padding-bottom: var(--n-padding-vertical);
+        word-break: break-word;
         display: inline-block;
         vertical-align: bottom;
         box-sizing: border-box;
@@ -193,9 +200,7 @@ export default c([
     ]),
     // pair
     cM('pair', [
-      cE('input-el, placeholder', {
-        textAlign: 'center'
-      }),
+      cE('input-el, placeholder', 'text-align: center;'),
       cE('separator', `
         display: flex;
         align-items: center;
@@ -210,24 +215,18 @@ export default c([
         `)
       ])
     ]),
-    cM('disabled', {
-      cursor: 'not-allowed',
-      backgroundColor: 'var(--n-color-disabled)'
-    }, [
-      cE('border', {
-        border: 'var(--n-border-disabled)'
-      }),
-      cE('input-el, textarea-el', {
-        cursor: 'not-allowed',
-        color: 'var(--n-text-color-disabled)',
-        textDecorationColor: 'var(--n-text-color-disabled)'
-      }),
-      cE('placeholder', {
-        color: 'var(--n-placeholder-color-disabled)'
-      }),
-      cE('separator', {
-        color: 'var(--n-text-color-disabled)'
-      }, [
+    cM('disabled', `
+      cursor: not-allowed;
+      background-color: var(--n-color-disabled);
+    `, [
+      cE('border', 'border: var(--n-border-disabled);'),
+      cE('input-el, textarea-el', `
+        cursor: not-allowed;
+        color: var(--n-text-color-disabled);
+        text-decoration-color: var(--n-text-color-disabled);
+      `),
+      cE('placeholder', 'color: var(--n-placeholder-color-disabled);'),
+      cE('separator', 'color: var(--n-text-color-disabled);', [
         cB('icon', `
           color: var(--n-icon-color-disabled);
         `),
@@ -235,9 +234,7 @@ export default c([
           color: var(--n-icon-color-disabled);
         `)
       ]),
-      cE('suffix, prefix', {
-        color: 'var(--n-text-color-disabled)'
-      }, [
+      cE('suffix, prefix', 'color: var(--n-text-color-disabled);', [
         cB('icon', `
           color: var(--n-icon-color-disabled);
         `),
@@ -258,18 +255,14 @@ export default c([
           color: var(--n-icon-color-pressed);
         `)
       ]),
-      cM('focus', {
-        backgroundColor: 'var(--n-color-focus)'
-      }, [
-        cE('state-border', {
-          border: 'var(--n-border-focus)',
-          boxShadow: 'var(--n-box-shadow-focus)'
-        })
+      cM('focus', 'background-color: var(--n-color-focus);', [
+        cE('state-border', `
+          border: var(--n-border-focus);
+          box-shadow: var(--n-box-shadow-focus);
+        `)
       ]),
       c('&:hover', [
-        cE('state-border', {
-          border: 'var(--n-border-hover)'
-        })
+        cE('state-border', 'border: var(--n-border-hover);')
       ])
     ]),
     cE('border, state-border', `
@@ -290,9 +283,7 @@ export default c([
       border-color: #0000;
       z-index: 1;
     `),
-    cE('prefix', {
-      marginRight: '4px'
-    }),
+    cE('prefix', 'margin-right: 4px;'),
     cE('suffix', `
       margin-left: 4px;
     `),
@@ -348,28 +339,28 @@ export default c([
         cB('base-loading', `
           color: var(--n-loading-color-${status})
         `),
-        cE('input-el, textarea-el', {
-          caretColor: `var(--n-caret-color-${status})`
-        }),
-        cE('state-border', {
-          border: `var(--n-border-${status})`
-        }),
+        cE('input-el, textarea-el', `
+          caret-color: var(--n-caret-color-${status});
+        `),
+        cE('state-border', `
+          border: var(--n-border-${status});
+        `),
         c('&:hover', [
           cE('state-border', `
             border: var(--n-border-hover-${status});
           `)
         ]),
-        c('&:focus', {
-          backgroundColor: `var(--n-color-focus-${status})`
-        }, [
+        c('&:focus', `
+          background-color: var(--n-color-focus-${status});
+        `, [
           cE('state-border', `
             box-shadow: var(--n-box-shadow-focus-${status});
             border: var(--n-border-focus-${status});
           `)
         ]),
-        cM('focus', {
-          backgroundColor: `var(--n-color-focus-${status})`
-        }, [
+        cM('focus', `
+          background-color: var(--n-color-focus-${status});
+        `, [
           cE('state-border', `
             box-shadow: var(--n-box-shadow-focus-${status});
             border: var(--n-border-focus-${status});

@@ -243,13 +243,18 @@ export default c([
         color: var(--n-arrow-color);
       `),
       cE('month-year', `
-        font-size: var(--n-calendar-title-font-size);
-        font-weight: var(--n-calendar-title-font-weight);
-        line-height: 17px;
         flex-grow: 1;
-        text-align: center;
-        color: var(--n-calendar-title-text-color);
-      `)
+        position: relative;
+      `, [
+        cE('text', `
+          font-size: var(--n-calendar-title-font-size);
+          font-weight: var(--n-calendar-title-font-weight);
+          line-height: 17px;
+          text-align: center;
+          color: var(--n-calendar-title-text-color);
+          cursor: pointer;
+        `)
+      ])
     ]),
     cB('date-panel-weekdays', `
       display: grid;

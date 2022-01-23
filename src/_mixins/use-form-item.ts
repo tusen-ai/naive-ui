@@ -4,9 +4,9 @@ import {
   provide,
   onBeforeUnmount,
   ComputedRef,
-  InjectionKey,
   Ref
 } from 'vue'
+import { createInjectionKey } from '../_utils'
 
 type FormItemSize = 'small' | 'medium' | 'large'
 type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | number
@@ -22,8 +22,8 @@ export interface FormItemInjection {
   handleContentChange: () => void
 }
 
-export const formItemInjectionKey: InjectionKey<FormItemInjection> =
-  Symbol('formItem')
+export const formItemInjectionKey =
+  createInjectionKey<FormItemInjection>('n-form-item')
 
 interface UseFormItemOptions<T> {
   defaultSize?: FormItemSize

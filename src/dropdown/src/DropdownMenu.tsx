@@ -3,7 +3,6 @@ import {
   defineComponent,
   h,
   inject,
-  InjectionKey,
   PropType,
   provide,
   Ref,
@@ -28,14 +27,15 @@ import {
   DropdownOption,
   DropdownRenderOption
 } from './interface'
+import { createInjectionKey } from '../../_utils'
 
 export interface NDropdownMenuInjection {
   showIconRef: Ref<boolean>
   hasSubmenuRef: Ref<boolean>
 }
 
-export const dropdownMenuInjectionKey: InjectionKey<NDropdownMenuInjection> =
-  Symbol('dropdownMenu')
+export const dropdownMenuInjectionKey =
+  createInjectionKey<NDropdownMenuInjection>('n-dropdown-menu')
 
 export default defineComponent({
   name: 'DropdownMenu',

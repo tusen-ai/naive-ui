@@ -4,7 +4,6 @@ import {
   inject,
   PropType,
   h,
-  renderSlot,
   CSSProperties
 } from 'vue'
 import { createKey, formatLength, throwError } from '../../_utils'
@@ -107,14 +106,14 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-timeline-item-content`}>
           {this.title || $slots.header ? (
             <div class={`${mergedClsPrefix}-timeline-item-content__title`}>
-              {renderSlot($slots, 'header', undefined, () => [this.title])}
+              {$slots.header ? $slots.header() : this.title}
             </div>
           ) : null}
           <div class={`${mergedClsPrefix}-timeline-item-content__content`}>
-            {renderSlot($slots, 'default', undefined, () => [this.content])}
+            {$slots.default ? $slots.default() : this.content}
           </div>
           <div class={`${mergedClsPrefix}-timeline-item-content__meta`}>
-            {renderSlot($slots, 'footer', undefined, () => [this.time])}
+            {$slots.footer ? $slots.footer() : this.time}
           </div>
         </div>
       </div>

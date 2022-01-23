@@ -8,8 +8,7 @@ import {
   inject,
   nextTick,
   Transition,
-  withDirectives,
-  renderSlot
+  withDirectives
 } from 'vue'
 import { FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
@@ -174,12 +173,14 @@ export default defineComponent({
                   </div>
                 ) : (
                   <div class={`${mergedClsPrefix}-cascader-menu__empty`}>
-                    {renderSlot($slots, 'empty', undefined, () => [
+                    {$slots.empty ? (
+                      $slots.empty()
+                    ) : (
                       <NEmpty
                         theme={mergedTheme.peers.Empty}
                         themeOverrides={mergedTheme.peerOverrides.Empty}
                       />
-                    ])}
+                    )}
                   </div>
                 )}
                 {$slots.action && (

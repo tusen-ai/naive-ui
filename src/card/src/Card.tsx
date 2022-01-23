@@ -1,11 +1,4 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  PropType,
-  renderSlot,
-  CSSProperties
-} from 'vue'
+import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { getPadding } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -184,7 +177,7 @@ export default defineComponent({
       >
         {$slots.cover ? (
           <div class={`${mergedClsPrefix}-card-cover`} role="none">
-            {renderSlot($slots, 'cover')}
+            {$slots.cover()}
           </div>
         ) : null}
         {$slots.header || this.title || this.closable ? (
@@ -193,11 +186,11 @@ export default defineComponent({
             style={this.headerStyle}
           >
             <div class={`${mergedClsPrefix}-card-header__main`} role="heading">
-              {renderSlot($slots, 'header', {}, () => [this.title])}
+              {$slots.header ? $slots.header() : this.title}
             </div>
             {$slots['header-extra'] ? (
               <div class={`${mergedClsPrefix}-card-header__extra`}>
-                {renderSlot($slots, 'header-extra')}
+                {$slots['header-extra']()}
               </div>
             ) : null}
             {this.closable ? (
@@ -222,12 +215,12 @@ export default defineComponent({
             style={this.footerStyle}
             role="none"
           >
-            {renderSlot($slots, 'footer')}
+            {$slots.footer()}
           </div>
         ) : null}
         {$slots.action ? (
           <div class={`${mergedClsPrefix}-card__action`} role="none">
-            {renderSlot($slots, 'action')}
+            {$slots.action()}
           </div>
         ) : null}
       </div>

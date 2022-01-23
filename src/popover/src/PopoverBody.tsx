@@ -16,7 +16,6 @@ import {
   provide,
   CSSProperties,
   VNode,
-  renderSlot,
   Fragment,
   VNodeChild
 } from 'vue'
@@ -234,7 +233,7 @@ export default defineComponent({
               <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
             </>
           ) : (
-            renderSlot(slots, 'default')
+            slots.default?.()
           ),
           props.showArrow
             ? renderArrow({
@@ -266,7 +265,7 @@ export default defineComponent({
             attrs
           ),
           internalTrapFocus ? (
-            <VFocusTrap active={props.show} focusFirstDescendant>
+            <VFocusTrap active={props.show} autoFocus>
               {{ default: renderContentInnerNode }}
             </VFocusTrap>
           ) : (
