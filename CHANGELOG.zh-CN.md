@@ -42,6 +42,14 @@
 - `n-data-table` 列增加 `render-sorter-icon` 属性，关闭 [#1785](https://github.com/TuSimple/naive-ui/issues/1785)
 - `n-data-table` 列增加 `render-sorter` 属性，关闭 [#1785](https://github.com/TuSimple/naive-ui/issues/1785)
 - `n-date-picker` 在 `date`、`datetime`、`daterange`、`datetimerange` 类型下可以快速导航到特定的年和月
+- `n-modal` 新增 `close-on-esc` 属性
+- `n-modal` 新增 `auto-focus` 属性
+- `n-modal` 新增 `trap-focus` 属性
+- `n-modal` 新增 `on-esc` 属性
+- `n-drawer` 新增 `close-on-esc` 属性
+- `n-drawer` 新增 `auto-focus` 属性
+- `n-drawer` 新增 `trap-focus` 属性
+- `n-drawer` 新增 `on-esc` 属性
 
 ### i18n
 

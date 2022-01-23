@@ -42,6 +42,14 @@
 - `n-data-table` col adds `render-sorter-icon` prop, closes [#1785](https://github.com/TuSimple/naive-ui/issues/1785).
 - `n-data-table` col adds `render-sorter` prop, closes [#1785](https://github.com/TuSimple/naive-ui/issues/1785).
 - `n-date-picker` easy navigation to specific month and year for `date` and `datetime` and `daterange` and `datetimerange` type.
+- `n-modal` adds `close-on-esc` prop.
+- `n-modal` adds `auto-focus` prop.
+- `n-modal` adds `trap-focus` prop.
+- `n-modal` adds `on-esc` prop.
+- `n-drawer` adds `close-on-esc` prop.
+- `n-drawer` adds `auto-focus` prop.
+- `n-drawer` adds `trap-focus` prop.
+- `n-drawer` adds `on-esc` prop.
 
 ### i18n
 

@@ -42,6 +42,14 @@ export default defineComponent({
       type: String as PropType<'if' | 'show'>,
       required: true
     },
+    trapFocus: {
+      type: Boolean,
+      default: true
+    },
+    autoFocus: {
+      type: Boolean,
+      default: true
+    },
     ...presetProps,
     // events
     onClickoutside: {
@@ -210,7 +218,11 @@ export default defineComponent({
             >
               {{
                 default: () => (
-                  <VFocusTrap active={this.show} focusFirstDescendant>
+                  <VFocusTrap
+                    disabled={!this.trapFocus}
+                    active={this.show}
+                    focusFirstDescendant={this.autoFocus}
+                  >
                     {{
                       default: () => (
                         <Transition

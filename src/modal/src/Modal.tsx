@@ -48,8 +48,21 @@ const modalProps = {
     default: 'mouse'
   },
   zIndex: Number,
+  autoFocus: {
+    type: Boolean,
+    default: true
+  },
+  trapFocus: {
+    type: Boolean,
+    default: true
+  },
+  closeOnEsc: {
+    type: Boolean,
+    default: true
+  },
   ...presetProps,
   // events
+  onEsc: Function as PropType<() => void>,
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
@@ -187,7 +200,10 @@ export default defineComponent({
     }
     function handleKeyup (e: KeyboardEvent): void {
       if (e.code === 'Escape') {
-        doUpdateShow(false)
+        props.onEsc?.()
+        if (props.closeOnEsc) {
+          doUpdateShow(false)
+        }
       }
     }
     provide(modalInjectionKey, {
@@ -280,7 +296,10 @@ export default defineComponent({
                   displayDirective={this.displayDirective}
                   show={this.show}
                   preset={this.preset}
+                  autoFocus={this.autoFocus}
+                  trapFocus={this.trapFocus}
                   {...this.presetProps}
+                  onEsc={this.onEsc}
                   onClose={this.handleCloseClick}
                   onNegativeClick={this.handleNegativeClick}
                   onPositiveClick={this.handlePositiveClick}

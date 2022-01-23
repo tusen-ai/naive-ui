@@ -55,6 +55,19 @@ const drawerProps = {
   onMaskClick: Function as PropType<(e: MouseEvent) => void>,
   scrollbarProps: Object as PropType<ScrollbarProps>,
   contentStyle: [Object, String] as PropType<string | CSSProperties>,
+  trapFocus: {
+    type: Boolean,
+    default: true
+  },
+  onEsc: Function as PropType<() => void>,
+  autoFocus: {
+    type: Boolean,
+    default: true
+  },
+  closeOnEsc: {
+    type: Boolean,
+    default: true
+  },
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
@@ -147,7 +160,10 @@ export default defineComponent({
     }
     function handleKeydown (e: KeyboardEvent): void {
       if (e.code === 'Escape') {
-        doUpdateShow(false)
+        props.onEsc?.()
+        if (props.closeOnEsc) {
+          doUpdateShow(false)
+        }
       }
     }
     function doUpdateShow (show: boolean): void {
@@ -256,6 +272,8 @@ export default defineComponent({
                   show={this.show}
                   displayDirective={this.displayDirective}
                   nativeScrollbar={this.nativeScrollbar}
+                  trapFocus={this.trapFocus}
+                  autoFocus={this.autoFocus}
                 >
                   {this.$slots}
                 </NDrawerBodyWrapper>

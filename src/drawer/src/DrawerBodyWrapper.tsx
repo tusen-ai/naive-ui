@@ -43,7 +43,15 @@ export default defineComponent({
       type: Boolean,
       required: true
     },
-    scrollbarProps: Object as PropType<ScrollbarProps>
+    scrollbarProps: Object as PropType<ScrollbarProps>,
+    trapFocus: {
+      type: Boolean,
+      default: true
+    },
+    autoFocus: {
+      type: Boolean,
+      default: true
+    }
   },
   setup (props) {
     const displayedRef = ref(props.show)
@@ -83,7 +91,11 @@ export default defineComponent({
           /* Keep the wrapper dom. Make sure the drawer has a host.
             Nor the detached content will disappear without transition */
           <div role="none">
-            <VFocusTrap active={this.show} focusFirstDescendant>
+            <VFocusTrap
+              disabled={!this.trapFocus}
+              active={this.show}
+              focusFirstDescendant={this.autoFocus}
+            >
               {{
                 default: () => (
                   <Transition
