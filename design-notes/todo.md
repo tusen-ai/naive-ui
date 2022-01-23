@@ -2,8 +2,8 @@
 
 ## Urgent
 
-- message render XXX
 - carousel refactor arrow style
+- use resolve slot!!!
 
 ## DataTable
 

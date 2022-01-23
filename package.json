@@ -6,8 +6,8 @@
   "module": "es/index.js",
   "scripts": {
     "start": "pnpm run dev",
-    "dev": "pnpm run clean && pnpm run gen-version && cross-env NODE_ENV=development vite",
-    "build:package": "pnpm run gen-version && pnpm run clean && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
+    "dev": "pnpm run clean && pnpm run gen-version && pnpm run gen-component-declaration && cross-env NODE_ENV=development vite",
+    "build:package": "pnpm run gen-version && pnpm run clean && pnpm run gen-component-declaration && tsc -b --force tsconfig.esm.json && node scripts/pre-build/pre-cjs-build.js && tsc -b --force tsconfig.cjs.json && node scripts/post-build && rimraf {es,lib}/*.tsbuildinfo",
     "build:site": "./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "clean": "rimraf site lib es node_modules/naive-ui themes/**/es themes/**/lib",
     "release:package": "pnpm run test && pnpm run build:package && pnpm publish --no-git-checks",
@@ -38,7 +38,8 @@
     "es",
     "lib",
     "web-types.json",
-    "README.md"
+    "README.md",
+    "typings/components.d.ts"
   ],
   "web-types": "./web-types.json",
   "lint-staged": {

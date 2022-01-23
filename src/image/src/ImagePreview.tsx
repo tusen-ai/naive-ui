@@ -6,7 +6,6 @@ import {
   withDirectives,
   Transition,
   vShow,
-  renderSlot,
   watch,
   computed,
   CSSProperties,
@@ -392,7 +391,7 @@ export default defineComponent({
     const { clsPrefix } = this
     return (
       <>
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots.default?.()}
         <LazyTeleport show={this.show}>
           {{
             default: () =>

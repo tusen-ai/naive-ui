@@ -19,12 +19,14 @@ scroll-event.vue
 group
 many-options
 custom-option
+custom-suffix.vue
 action
 fallback-option
 max-tag-count
 add-tooltip
 render-tag
 render-person
+focus.vue
 change-debug
 placeholder-debug
 menu-debug
@@ -71,6 +73,7 @@ filterable-debug
 | on-focus | `() => void` | `undefined` | `focus` 时执行的回调 |  |
 | on-scroll | `(e: ScrollEvent) => void` | `undefined` | 滚动时执行的回调 |  |
 | on-search | `(value: string) => void` | `undefined` | 搜索时执行的回调 |  |
+| on-update:show | `(show: boolean) => void` | `undefined` | 菜单打开状态变化的回调 | NEXT_VERSION |
 | on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | 值更新时执行的回调 |  |
 
 #### SelectOption Properties
@@ -96,7 +99,15 @@ filterable-debug
 
 ### Select Slots
 
-| 名称   | 参数 | 说明                |
-| ------ | ---- | ------------------- |
-| action | `()` | 菜单操作区域的 slot |
-| empty  | `()` | 菜单无数据时的 slot |
+| 名称   | 参数 | 说明                | 版本         |
+| ------ | ---- | ------------------- | ------------ |
+| action | `()` | 菜单操作区域的 slot |              |
+| empty  | `()` | 菜单无数据时的 slot |              |
+| arrow  | `()` | 箭头的 slot         | NEXT_VERSION |
+
+### Select Methods
+
+| 名称  | 类型         | 说明 | 版本         |
+| ----- | ------------ | ---- | ------------ |
+| focus | `() => void` | 聚焦 | NEXT_VERSION |
+| blur  | `() => void` | 失焦 | NEXT_VERSION |

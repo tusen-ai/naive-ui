@@ -13,6 +13,7 @@ format
 actions
 hours12
 formatted.vue
+focus.vue
 ```
 
 ## API
@@ -50,3 +51,10 @@ formatted.vue
 | Name | Parameters | Description |
 | ---- | ---------- | ----------- |
 | icon | `()`       | Custom icon |
+
+### TimePicker Methods
+
+| Name  | Type         | Description | Version      |
+| ----- | ------------ | ----------- | ------------ |
+| focus | `() => void` | Focus.      | NEXT_VERSION |
+| blur  | `() => void` | Blur.       | NEXT_VERSION |

@@ -7,7 +7,6 @@ import {
   onMounted,
   onBeforeUnmount,
   mergeProps,
-  renderSlot,
   Transition,
   CSSProperties,
   watchEffect,
@@ -57,6 +56,8 @@ export interface ScrollbarInstMethods {
   syncUnifiedContainer: () => void
   scrollTo: ScrollTo
   sync: () => void
+  handleMouseEnterWrapper: () => void
+  handleMouseLeaveWrapper: () => void
 }
 
 export interface ScrollbarInst extends ScrollbarInstMethods {
@@ -81,6 +82,7 @@ const scrollbarProps = {
   },
   xScrollable: Boolean,
   useUnifiedContainer: Boolean,
+  triggerDisplayManually: Boolean,
   // If container is set, resize observer won't not attached
   container: Function as PropType<() => HTMLElement | null | undefined>,
   content: Function as PropType<() => HTMLElement | null | undefined>,
@@ -582,7 +584,9 @@ const Scrollbar = defineComponent({
     const exposedMethods: ScrollbarInstMethods = {
       scrollTo,
       sync,
-      syncUnifiedContainer
+      syncUnifiedContainer,
+      handleMouseEnterWrapper,
+      handleMouseLeaveWrapper
     }
     return {
       ...exposedMethods,
@@ -605,8 +609,6 @@ const Scrollbar = defineComponent({
       handleScroll,
       handleContentResize,
       handleContainerResize,
-      handleMouseEnterWrapper,
-      handleMouseLeaveWrapper,
       handleYScrollMouseDown,
       handleXScrollMouseDown,
       cssVars: computed(() => {
@@ -631,8 +633,8 @@ const Scrollbar = defineComponent({
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
-    if (!this.scrollable) return renderSlot($slots, 'default')
+    const { $slots, mergedClsPrefix, triggerDisplayManually } = this
+    if (!this.scrollable) return $slots.default?.()
     const createChildren = (): VNode =>
       h(
         'div',
@@ -641,12 +643,16 @@ const Scrollbar = defineComponent({
           ref: 'wrapperRef',
           class: `${mergedClsPrefix}-scrollbar`,
           style: this.cssVars,
-          onMouseenter: this.handleMouseEnterWrapper,
-          onMouseleave: this.handleMouseLeaveWrapper
+          onMouseenter: triggerDisplayManually
+            ? undefined
+            : this.handleMouseEnterWrapper,
+          onMouseleave: triggerDisplayManually
+            ? undefined
+            : this.handleMouseLeaveWrapper
         }),
         [
           this.container ? (
-            renderSlot($slots, 'default')
+            $slots.default?.()
           ) : (
             <div
               role="none"

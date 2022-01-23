@@ -3,6 +3,8 @@ export type { DataTableProps } from './src/DataTable'
 export type {
   RenderFilter as DataTableRenderFilter,
   RenderSorter as DataTableRenderSorter,
+  RenderFilterIcon as DataTableRenderFilterIcon,
+  RenderSorterIcon as DataTableRenderSorterIcon,
   ColumnKey as DataTableColumnKey,
   TableColumn as DataTableColumn,
   TableColumns as DataTableColumns,

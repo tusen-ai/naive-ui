@@ -11,12 +11,10 @@ import {
   Transition,
   CSSProperties,
   provide,
-  InjectionKey,
   ComputedRef,
   Ref,
   watch,
   nextTick,
-  renderSlot,
   Slots
 } from 'vue'
 import {
@@ -54,7 +52,12 @@ import {
   useTheme,
   useLocale
 } from '../../_mixins'
-import { call, createKey, useAdjustedTo } from '../../_utils'
+import {
+  call,
+  createInjectionKey,
+  createKey,
+  useAdjustedTo
+} from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NButton } from '../../button'
 import HueSlider from './HueSlider'
@@ -115,11 +118,11 @@ export type ColorPickerProps = ExtractPublicPropTypes<
   typeof colorPickerPanelProps
 >
 
-export const colorPickerInjectionKey: InjectionKey<{
+export const colorPickerInjectionKey = createInjectionKey<{
   themeRef: ComputedRef<MergedTheme<ColorPickerTheme>>
   colorPickerSlots: Slots
   renderLabelRef: Ref<RenderLabel | undefined>
-}> = Symbol('colorPickerThemeInjection')
+}>('n-color-picker')
 
 export default defineComponent({
   name: 'ColorPicker',
@@ -662,8 +665,6 @@ export default defineComponent({
                     >
                       {{
                         label: $slots.label
-                          ? () => renderSlot($slots, 'label')
-                          : undefined
                       }}
                     </ColorPickerTrigger>
                   )
