@@ -9,7 +9,8 @@ export {
   render,
   getFirstSlotVNode,
   createDataKey,
-  createRefSetter
+  createRefSetter,
+  createInjectionKey
 } from './vue'
 export type { MaybeArray } from './vue'
 export {
@@ -20,7 +21,11 @@ export {
   largerSize,
   getTitleAttribute
 } from './naive'
-export type { ExtractPublicPropTypes, ExtractInternalPropTypes, Mutable } from './naive'
+export type {
+  ExtractPublicPropTypes,
+  ExtractInternalPropTypes,
+  Mutable
+} from './naive'
 export { formatLength } from './css'
 export { createKey } from './cssr'
 export * from './composable'

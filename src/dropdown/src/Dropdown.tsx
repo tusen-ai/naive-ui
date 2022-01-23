@@ -8,7 +8,6 @@ import {
   watch,
   provide,
   CSSProperties,
-  InjectionKey,
   Ref,
   mergeProps
 } from 'vue'
@@ -27,7 +26,8 @@ import {
   createKey,
   MaybeArray,
   ExtractPublicPropTypes,
-  createRefSetter
+  createRefSetter,
+  createInjectionKey
 } from '../../_utils'
 import { dropdownLight } from '../styles'
 import type { DropdownTheme } from '../styles'
@@ -63,8 +63,8 @@ export interface DropdownInjection {
   doUpdateShow: (value: boolean) => void
 }
 
-export const dropdownInjectionKey: InjectionKey<DropdownInjection> =
-  Symbol('dropdown')
+export const dropdownInjectionKey =
+  createInjectionKey<DropdownInjection>('n-dropdown')
 
 const dropdownBaseProps = {
   animated: {

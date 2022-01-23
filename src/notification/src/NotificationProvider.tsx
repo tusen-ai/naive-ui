@@ -9,14 +9,17 @@ import {
   PropType,
   ExtractPropTypes,
   provide,
-  InjectionKey,
-  Ref,
-  renderSlot
+  Ref
 } from 'vue'
 import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
-import { ExtractPublicPropTypes, omit, Mutable } from '../../_utils'
+import {
+  ExtractPublicPropTypes,
+  omit,
+  Mutable,
+  createInjectionKey
+} from '../../_utils'
 import { notificationLight, NotificationTheme } from '../styles'
 import NotificationContainer from './NotificationContainer'
 import NotificationEnvironment, {
@@ -33,8 +36,8 @@ export interface NotificationProviderInjection {
   mergedThemeRef: Ref<MergedTheme<NotificationTheme>>
 }
 
-export const notificationProviderInjectionKey: InjectionKey<NotificationProviderInjection> =
-  Symbol('notificationProvider')
+export const notificationProviderInjectionKey =
+  createInjectionKey<NotificationProviderInjection>('n-notification-provider')
 
 type Create = (options: NotificationOptions) => NotificationReactive
 type TypedCreate = (
@@ -54,8 +57,8 @@ export interface NotificationApiInjection {
 
 export type NotificationProviderInst = NotificationApiInjection
 
-export const notificationApiInjectionKey: InjectionKey<NotificationApiInjection> =
-  Symbol('notificationApi')
+export const notificationApiInjectionKey =
+  createInjectionKey<NotificationApiInjection>('n-notification-api')
 
 export type NotificationReactive = {
   readonly key: string
@@ -194,7 +197,7 @@ export default defineComponent({
   render () {
     return (
       <>
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots.default?.()}
         {this.notificationList.length ? (
           <Teleport to={this.to ?? 'body'}>
             <NotificationContainer

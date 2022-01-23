@@ -15,6 +15,7 @@ virtual
 check-strategy
 custom-field
 custom-render.vue
+focus.vue
 ```
 
 ## API
@@ -67,3 +68,10 @@ custom-render.vue
 | --- | --- | --- | --- |
 | action | `()` | Action content displayed in the cascading menu. |  |
 | empty | `()` | Empty state slot for the options cascading menu. | 2.22.0 |
+
+### Cascader Methods
+
+| Name  | Type         | Description | Version      |
+| ----- | ------------ | ----------- | ------------ |
+| focus | `() => void` | Focus.      | NEXT_VERSION |
+| blur  | `() => void` | Blur.       | NEXT_VERSION |

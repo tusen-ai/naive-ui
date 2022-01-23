@@ -6,7 +6,6 @@ import {
   toRaw,
   computed,
   defineComponent,
-  renderSlot,
   PropType,
   inject,
   CSSProperties,
@@ -293,7 +292,7 @@ export default defineComponent({
               style={itemStyle}
             >
               {$slots.default ? (
-                renderSlot($slots, 'default', {
+                $slots.default({
                   value: mergedValue[index],
                   index
                 })
