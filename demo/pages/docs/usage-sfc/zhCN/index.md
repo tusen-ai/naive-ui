@@ -63,9 +63,9 @@ app.use(naive)
 </template>
 ```
 
-### Volar 支持
+### Volar 支持（NEXT_VERSION）
 
-如果你已经使用了 Volar, 那么需要在 `tsconfig.json` 中配置 `compilerOptions.types` 来指定全局组件类型
+如果你在使用了 Volar，那么可以在 `tsconfig.json` 中配置 `compilerOptions.types` 来指定全局组件类型。
 
 ```json
 // tsconfig.json

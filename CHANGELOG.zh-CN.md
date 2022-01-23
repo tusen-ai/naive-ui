@@ -150,6 +150,7 @@
 - `n-color-picker` 新增 `label` 插槽
 - `n-color-picker` 新增 `render-label` 属性
 - `n-form-item` 新增 `label-props` 属性
+- 新增 volar 类型支持
 
 ## 2.23.2 (2021-12-29)
 
