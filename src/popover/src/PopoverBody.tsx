@@ -265,7 +265,7 @@ export default defineComponent({
             attrs
           ),
           internalTrapFocus ? (
-            <VFocusTrap active={props.show} focusFirstDescendant>
+            <VFocusTrap active={props.show} autoFocus>
               {{ default: renderContentInnerNode }}
             </VFocusTrap>
           ) : (
