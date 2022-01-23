@@ -46,6 +46,7 @@ module.exports = {
   },
   build: {
     outDir: 'site',
+    minify: false,
     rollupOptions: {
       output: {
         manualChunks: {
