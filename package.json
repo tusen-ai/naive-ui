@@ -37,9 +37,9 @@
   "files": [
     "es",
     "lib",
+    "volar.d.ts",
     "web-types.json",
-    "README.md",
-    "typings/components.d.ts"
+    "README.md"
   ],
   "web-types": "./web-types.json",
   "lint-staged": {
