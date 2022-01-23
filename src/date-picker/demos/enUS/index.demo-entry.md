@@ -133,7 +133,7 @@ focus.vue
 
 ### DatePicker Methods
 
-| Name  | Type         | Description | Version      |
-| ----- | ------------ | ----------- | ------------ |
-| focus | `() => void` | Focus.      | NEXT_VERSION |
-| blur  | `() => void` | Blur.       | NEXT_VERSION |
+| Name  | Type         | Description | Version |
+| ----- | ------------ | ----------- | ------- |
+| focus | `() => void` | Focus.      | 2.24.2  |
+| blur  | `() => void` | Blur.       | 2.24.2  |

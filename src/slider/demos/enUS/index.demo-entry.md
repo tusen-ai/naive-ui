@@ -32,7 +32,7 @@ multiple-debug
 | min | `number` | `0` | Min value of the slider. |  |
 | range | `boolean` | `false` | Whether the slider uses range value. |  |
 | reverse | `boolean` | `false` | Whether to reverse the track. |  |
-| show-tooltip | `boolean` | `false` | Whether to always show tooltip. Only work with non-range slider. | NEXT_VERSION |
+| show-tooltip | `boolean` | `false` | Whether to always show tooltip. Only work with non-range slider. | 2.24.2 |
 | step | `number \| 'mark'` | `1` | Step of the slider. |  |
 | tooltip | `boolean` | `true` | Whether to show tooltip. |  |
 | vertical | `boolean` | `false` | Whether to enable vertical mode. |  |

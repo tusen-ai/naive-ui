@@ -68,7 +68,7 @@ Changelog position:
 
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.24.2
 
 ### Feats
 
@@ -147,7 +147,7 @@ Changelog 位置：
 
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.24.2
 
 ### Feats
 

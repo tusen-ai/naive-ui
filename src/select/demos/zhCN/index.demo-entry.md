@@ -60,7 +60,7 @@ filterable-debug
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | 选项标签渲染函数 |  |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | 选项的渲染函数 |  |
 | render-tag | `(option: SelectBaseOption, onClose: () => void) => VNodeChild` | `undefined` | 控制标签的渲染 |  |
-| reset-menu-on-options-change | `boolean` | `true` | 是否在选项变化时重置菜单状态，例如滚动状态 | NEXT_VERSION |
+| reset-menu-on-options-change | `boolean` | `true` | 是否在选项变化时重置菜单状态，例如滚动状态 | 2.24.2 |
 | show | `boolean` | `undefined` | 是否展示菜单 |  |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
@@ -73,7 +73,7 @@ filterable-debug
 | on-focus | `() => void` | `undefined` | `focus` 时执行的回调 |  |
 | on-scroll | `(e: ScrollEvent) => void` | `undefined` | 滚动时执行的回调 |  |
 | on-search | `(value: string) => void` | `undefined` | 搜索时执行的回调 |  |
-| on-update:show | `(show: boolean) => void` | `undefined` | 菜单打开状态变化的回调 | NEXT_VERSION |
+| on-update:show | `(show: boolean) => void` | `undefined` | 菜单打开状态变化的回调 | 2.24.2 |
 | on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | 值更新时执行的回调 |  |
 
 #### SelectOption Properties
@@ -99,15 +99,15 @@ filterable-debug
 
 ### Select Slots
 
-| 名称   | 参数 | 说明                | 版本         |
-| ------ | ---- | ------------------- | ------------ |
-| action | `()` | 菜单操作区域的 slot |              |
-| empty  | `()` | 菜单无数据时的 slot |              |
-| arrow  | `()` | 箭头的 slot         | NEXT_VERSION |
+| 名称   | 参数 | 说明                | 版本   |
+| ------ | ---- | ------------------- | ------ |
+| action | `()` | 菜单操作区域的 slot |        |
+| empty  | `()` | 菜单无数据时的 slot |        |
+| arrow  | `()` | 箭头的 slot         | 2.24.2 |
 
 ### Select Methods
 
-| 名称  | 类型         | 说明 | 版本         |
-| ----- | ------------ | ---- | ------------ |
-| focus | `() => void` | 聚焦 | NEXT_VERSION |
-| blur  | `() => void` | 失焦 | NEXT_VERSION |
+| 名称  | 类型         | 说明 | 版本   |
+| ----- | ------------ | ---- | ------ |
+| focus | `() => void` | 聚焦 | 2.24.2 |
+| blur  | `() => void` | 失焦 | 2.24.2 |

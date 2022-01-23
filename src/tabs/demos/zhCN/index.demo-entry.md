@@ -53,7 +53,7 @@ unkeyed-debug
 | display-directive | `'if' \| 'show' \| 'show:lazy'` | `'if'` | 选择性渲染使用的指令，`if` 对应 `v-if`，`show` 对应 `v-show`，使用 `show` 的时候标签页状态切换后不会被重置，使用 `show:lazy` 的时候显示效果跟 `show` 一致，不过内容会进行延迟加载 |  |
 | name | `string \| number` | `undefined` | 必填，标签的名称 |  |
 | tab | `string \| VNode \| () => VNodeChild` | `undefined` | 标签的 `tab` |  |
-| tab-props | `Object` | `undefined` | 标签 `tab` 的 DOM 属性 | NEXT_VERSION |
+| tab-props | `Object` | `undefined` | 标签 `tab` 的 DOM 属性 | 2.24.2 |
 
 ### Tab Props
 

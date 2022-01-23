@@ -53,7 +53,7 @@ focus.vue
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function for each option label. |  |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | Render function for each option. |  |
 | render-tag | `(option: SelectBaseOption, onClose: () => void) => VNodeChild` | `undefined` | Render function for each option tag. |  |
-| reset-menu-on-options-change | `boolean` | `true` | Whether to reset menu staus on options change, for example, scroll status. | NEXT_VERSION |
+| reset-menu-on-options-change | `boolean` | `true` | Whether to reset menu staus on options change, for example, scroll status. | 2.24.2 |
 | show | `boolean` | `undefined` | Whether to show/open the option menu. |  |
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |  |
@@ -66,7 +66,7 @@ focus.vue
 | on-focus | `() => void` | `undefined` | Callback triggered when the selection element is focussed on. |  |
 | on-scroll | `(e: ScrollEvent) => void` | `undefined` | Callback triggered when the options menu is scrolled. |  |
 | on-search | `(value: string) => void` | `undefined` | Callback triggered when a search is conducted. |  |
-| on-update:show | `(show: boolean) => void` | `undefined` | Callback on menu open status change. | NEXT_VERSION |
+| on-update:show | `(show: boolean) => void` | `undefined` | Callback on menu open status change. | 2.24.2 |
 | on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | Callback triggered when the selected value is updated. |  |
 
 #### SelectOption Properties
@@ -92,15 +92,15 @@ focus.vue
 
 ### Select Slots
 
-| Name   | Parameters | Description                            | Version      |
-| ------ | ---------- | -------------------------------------- | ------------ |
-| action | `()`       | Options menu slot.                     |              |
-| empty  | `()`       | Empty state slot for the options menu. |              |
-| arrow  | `()`       | Arrow icon slot.                       | NEXT_VERSION |
+| Name   | Parameters | Description                            | Version |
+| ------ | ---------- | -------------------------------------- | ------- |
+| action | `()`       | Options menu slot.                     |         |
+| empty  | `()`       | Empty state slot for the options menu. |         |
+| arrow  | `()`       | Arrow icon slot.                       | 2.24.2  |
 
 ### Select Methods
 
-| Name  | Type         | Description | Version      |
-| ----- | ------------ | ----------- | ------------ |
-| focus | `() => void` | Focus.      | NEXT_VERSION |
-| blur  | `() => void` | Blur.       | NEXT_VERSION |
+| Name  | Type         | Description | Version |
+| ----- | ------------ | ----------- | ------- |
+| focus | `() => void` | Focus.      | 2.24.2  |
+| blur  | `() => void` | Blur.       | 2.24.2  |
