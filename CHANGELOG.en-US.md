@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.24.3
+
+### Fixes
+
+- Fix `n-layout-sider` has no border transition.
+
 ## 2.24.2
 
 ### Fixes

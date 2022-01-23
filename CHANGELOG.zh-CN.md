@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.24.3
+
+### Fixes
+
+- 修复 `n-layout-sider` 边框没有 transition
+
 ## 2.24.2
 
 ### Fixes
