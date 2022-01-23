@@ -7,7 +7,6 @@ import {
   defineComponent,
   provide,
   PropType,
-  InjectionKey,
   Ref,
   mergeProps,
   HTMLAttributes
@@ -15,7 +14,7 @@ import {
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { useMemo } from 'vooks'
 import { ChevronRightIcon } from '../../_internal/icons'
-import { render, useDeferredTrue } from '../../_utils'
+import { createInjectionKey, render, useDeferredTrue } from '../../_utils'
 import { NIcon } from '../../icon'
 import NDropdownMenu, { dropdownMenuInjectionKey } from './DropdownMenu'
 import { dropdownInjectionKey } from './Dropdown'
@@ -32,8 +31,8 @@ interface NDropdownOptionInjection {
   enteringSubmenuRef: Ref<boolean>
 }
 
-const dropdownOptionInjectionKey: InjectionKey<NDropdownOptionInjection> =
-  Symbol('dropdown-option')
+const dropdownOptionInjectionKey =
+  createInjectionKey<NDropdownOptionInjection>('n-dropdown-option')
 
 export default defineComponent({
   name: 'DropdownOption',

@@ -3,14 +3,13 @@ import {
   defineComponent,
   PropType,
   CSSProperties,
-  InjectionKey,
   provide,
   computed
 } from 'vue'
 import type { Size } from './interface'
 import NAvatar from './Avatar'
 import { useConfig, useStyle } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/avatar-group.cssr'
 
 export interface AvatarGroupInjection {
@@ -21,8 +20,8 @@ interface AvatarOption {
   src: string
 }
 
-export const avatarGroupInjectionKey: InjectionKey<AvatarGroupInjection> =
-  Symbol('avatar-group')
+export const avatarGroupInjectionKey =
+  createInjectionKey<AvatarGroupInjection>('n-avatar-group')
 
 const avatarGroupProps = {
   max: Number,
@@ -48,7 +47,8 @@ export default defineComponent({
       const { max } = props
       if (max === undefined) return undefined
       const { options } = props
-      return options.slice(max, options.length)
+      if (options.length > max) return options.slice(max - 1, options.length)
+      return []
     })
     const displayedOptionsRef = computed(() => {
       const { options, max } = props

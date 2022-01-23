@@ -4,21 +4,20 @@ import {
   computed,
   VNodeChild,
   PropType,
-  renderSlot,
   CSSProperties
 } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { render, createKey, keysOf } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { NBaseIcon, NBaseClose } from '../../_internal'
-import { NButton } from '../../button'
 import {
   InfoIcon,
   SuccessIcon,
   WarningIcon,
   ErrorIcon
 } from '../../_internal/icons'
+import { useConfig, useTheme } from '../../_mixins'
+import type { ThemeProps } from '../../_mixins'
+import { render, createKey, keysOf } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { NBaseIcon, NBaseClose } from '../../_internal'
+import { NButton } from '../../button'
 import { dialogLight } from '../styles'
 import type { DialogTheme } from '../styles'
 import type { IconPlacement } from './interface'
@@ -189,6 +188,8 @@ export default defineComponent({
       type,
       mergedClsPrefix
     } = this
+
+    console.log('action', $slots.action)
     return (
       <div
         class={[
@@ -214,9 +215,11 @@ export default defineComponent({
             >
               {{
                 default: () =>
-                  renderSlot($slots, 'icon', undefined, () => [
-                    this.icon ? render(this.icon) : iconMap[this.type]
-                  ])
+                  $slots.icon
+                    ? $slots.icon()
+                    : this.icon
+                      ? render(this.icon)
+                      : iconMap[this.type]
               }}
             </NBaseIcon>
           </div>
@@ -229,56 +232,55 @@ export default defineComponent({
             >
               {{
                 default: () =>
-                  renderSlot($slots, 'icon', undefined, () => [
-                    this.icon ? render(this.icon) : iconMap[this.type]
-                  ])
+                  $slots.icon
+                    ? $slots.icon()
+                    : this.icon
+                      ? render(this.icon)
+                      : iconMap[this.type]
               }}
             </NBaseIcon>
           ) : null}
-          {renderSlot($slots, 'header', undefined, () => [render(title)])}
+          {$slots.header ? $slots.header() : render(title)}
         </div>
         <div class={`${mergedClsPrefix}-dialog__content`}>
-          {renderSlot($slots, 'default', undefined, () => [render(content)])}
+          {$slots.default ? $slots.default() : render(content)}
         </div>
         {$slots.action || positiveText || negativeText || action ? (
           <div class={`${mergedClsPrefix}-dialog__action`}>
-            {renderSlot(
-              $slots,
-              'action',
-              undefined,
-              action
-                ? () => [render(action)]
-                : () => [
+            {$slots.action
+              ? $slots.action()
+              : action
+                ? render(action)
+                : [
                     this.negativeText && (
-                      <NButton
-                        theme={mergedTheme.peers.Button}
-                        themeOverrides={mergedTheme.peerOverrides.Button}
-                        ghost
-                        size="small"
-                        onClick={handleNegativeClick}
-                      >
-                        {{
-                          default: () => render(this.negativeText)
-                        }}
-                      </NButton>
+                    <NButton
+                      theme={mergedTheme.peers.Button}
+                      themeOverrides={mergedTheme.peerOverrides.Button}
+                      ghost
+                      size="small"
+                      onClick={handleNegativeClick}
+                    >
+                      {{
+                        default: () => render(this.negativeText)
+                      }}
+                    </NButton>
                     ),
                     this.positiveText && (
-                      <NButton
-                        theme={mergedTheme.peers.Button}
-                        themeOverrides={mergedTheme.peerOverrides.Button}
-                        disabled={loading}
-                        loading={loading}
-                        size="small"
-                        type={type === 'default' ? 'primary' : type}
-                        onClick={handlePositiveClick}
-                      >
-                        {{
-                          default: () => render(this.positiveText)
-                        }}
-                      </NButton>
+                    <NButton
+                      theme={mergedTheme.peers.Button}
+                      themeOverrides={mergedTheme.peerOverrides.Button}
+                      disabled={loading}
+                      loading={loading}
+                      size="small"
+                      type={type === 'default' ? 'primary' : type}
+                      onClick={handlePositiveClick}
+                    >
+                      {{
+                        default: () => render(this.positiveText)
+                      }}
+                    </NButton>
                     )
-                  ]
-            )}
+                  ]}
           </div>
         ) : null}
       </div>

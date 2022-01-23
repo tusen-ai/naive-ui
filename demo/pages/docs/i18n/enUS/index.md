@@ -54,6 +54,7 @@ PR is welcomed for locales that is not supported yet!
 | Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |
 | French                    | frFR   | dateFrFR    |
 | Spanish (Argentina)       | esAR   | dateEsAR    |
+| Italiano                  | itIT   | dateItIT    |
 
 ## Customize the existing locale
 

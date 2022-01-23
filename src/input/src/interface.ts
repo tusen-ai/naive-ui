@@ -1,4 +1,5 @@
-import { Ref, UnwrapRef, InjectionKey } from 'vue'
+import { Ref, UnwrapRef } from 'vue'
+import { createInjectionKey } from '../../_utils'
 
 export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
@@ -22,8 +23,8 @@ export interface InputWrappedRef {
 
 export type InputInst = UnwrapRef<InputWrappedRef>
 
-export const inputInjectionKey: InjectionKey<{
+export const inputInjectionKey = createInjectionKey<{
   mergedValueRef: Ref<string | [string, string] | null>
   maxlengthRef: Ref<number | undefined>
   mergedClsPrefixRef: Ref<string>
-}> = Symbol('input')
+}>('n-input')
