@@ -79,6 +79,5 @@ export * from './tree'
 export * from './tree-select'
 export * from './typography'
 export * from './upload'
-export * from './theme-editor'
 
 export * from './legacy-grid'
