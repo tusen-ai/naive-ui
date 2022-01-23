@@ -110,7 +110,7 @@ function genPageAnchorTemplate (tokens) {
     .map((token) => token.text)
   const links = titles.map((title) => {
     const href = title.replace(/ /g, '-')
-    return `<n-anchor-link class="n-ellipsis" title="${title}" href="#${href}"/>`
+    return `<n-anchor-link title="${title}" href="#${href}"/>`
   })
   return genAnchorTemplate(links.join('\n'), { ignoreGap: true })
 }
