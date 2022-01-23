@@ -604,6 +604,9 @@ export default defineComponent({
     })
 
     const exposedMethods: UploadInst = {
+      clear: () => {
+        uncontrolledFileListRef.value = []
+      },
       submit,
       openOpenFileDialog
     }

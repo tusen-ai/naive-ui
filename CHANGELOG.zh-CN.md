@@ -52,6 +52,7 @@
 - `n-drawer` 新增 `auto-focus` 属性
 - `n-drawer` 新增 `trap-focus` 属性
 - `n-drawer` 新增 `on-esc` 属性
+- `n-upload` 新增 `clear` 方法，关闭 [#2247](https://github.com/TuSimple/naive-ui/issues/2247)
 
 ### i18n
 

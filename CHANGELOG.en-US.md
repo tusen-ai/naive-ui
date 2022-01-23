@@ -52,6 +52,7 @@
 - `n-drawer` adds `auto-focus` prop.
 - `n-drawer` adds `trap-focus` prop.
 - `n-drawer` adds `on-esc` prop.
+- `n-upload` adds `clear` method, closes [#2247](https://github.com/TuSimple/naive-ui/issues/2247).
 
 ### i18n
 

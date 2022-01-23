@@ -99,6 +99,7 @@ export interface XhrHandlers {
 export interface UploadInst {
   openOpenFileDialog: () => void
   submit: () => void
+  clear: () => void
 }
 
 export type OnBeforeUpload = (data: {

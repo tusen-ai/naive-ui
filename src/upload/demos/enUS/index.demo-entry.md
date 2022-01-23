@@ -101,10 +101,11 @@ interface UploadCustomRequestOptions {
 
 ### Upload Methods
 
-| Name | Type | Description |
-| --- | --- | --- |
-| submit | `(fileId?: string \| number)` | Submit all files with pending status. |
-| openOpenFileDialog | `() => void` | Open the file dialog window. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| clear | `() => void` | Clear current upload list. | NEXT_VERSION |
+| openOpenFileDialog | `() => void` | Open the file dialog window. |  |
+| submit | `(fileId?: string \| number)` | Submit all files with pending status. |  |
 
 ### Upload Slots
 

@@ -102,10 +102,11 @@ interface UploadCustomRequestOptions {
 
 ### Upload Methods
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| submit | `(fileId?: string \| number)` | 提交当前所有处于 pending 状态的文件 |
-| openOpenFileDialog | `() => void` | 打开文件选择对话框 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clear | `() => void` | 清空上传列表 | NEXT_VERSION |
+| openOpenFileDialog | `() => void` | 打开文件选择对话框 |  |
+| submit | `(fileId?: string \| number)` | 提交当前所有处于 pending 状态的文件 |  |
 
 ### Upload Slots
 
