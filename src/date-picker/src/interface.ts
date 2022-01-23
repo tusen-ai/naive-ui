@@ -9,7 +9,6 @@ import {
 } from '../../time-picker/src/interface'
 import { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
-import PanelHeader from '../src/panel/panelHeader'
 import { DatePickerTheme } from '../styles/light'
 import {
   uniCalendarValidation,
@@ -78,9 +77,6 @@ export interface PanelRef {
   // Only exists when type is month
   monthScrollRef?: ScrollbarInst | null
   yearScrollRef?: VirtualListInst | null
-  panelHeaderRef?: InstanceType<typeof PanelHeader> | null
-  panelStartHeaderRef?: InstanceType<typeof PanelHeader> | null
-  panelEndHeaderRef?: InstanceType<typeof PanelHeader> | null
 }
 
 // 0 is Monday

@@ -6,38 +6,52 @@ import {
   PropType,
   ref
 } from 'vue'
-import MonthPanel from './month'
 import { VBinder, VTarget, VFollower } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { useIsMounted } from 'vooks'
-import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
+import MonthPanel from './month'
 
 export default defineComponent({
   props: {
-    ...usePanelCommonProps,
-    mergedClsPrefix: String,
-    calendarMonth: String,
-    calendarYear: String,
-    onUpdateCalendarValue: Function as PropType<(value: number) => void>
+    mergedClsPrefix: {
+      type: String,
+      required: true
+    },
+    value: Number,
+    monthBeforeYear: {
+      type: Boolean,
+      required: true
+    },
+    calendarMonth: {
+      type: String,
+      required: true
+    },
+    calendarYear: {
+      type: String,
+      required: true
+    },
+    onUpdateValue: {
+      type: Function as PropType<(value: number) => void>,
+      required: true
+    }
   },
-  setup (props) {
-    const panelCommon = usePanelCommon(props)
-    const triggerPanelMonthRef = ref<HTMLElement | null>(null)
+  setup () {
+    const triggerRef = ref<HTMLElement | null>(null)
     const monthPanelRef = ref<InstanceType<typeof MonthPanel> | null>(null)
+    const showRef = ref(false)
     function handleClickOutside (e: MouseEvent): void {
-      if (
-        panelCommon.showMonthYearPanel.value &&
-        !triggerPanelMonthRef.value?.contains(e.target as Node)
-      ) {
-        panelCommon.showMonthYearPanel.value = false
+      if (showRef.value && !triggerRef.value?.contains(e.target as Node)) {
+        showRef.value = false
       }
     }
+    function handleHeaderClick (): void {
+      showRef.value = !showRef.value
+    }
     return {
-      ...panelCommon,
-      triggerPanelMonthRef,
+      show: showRef,
+      triggerRef,
       monthPanelRef,
-      handleClickOutside,
-      monthPanelIsMounted: useIsMounted()
+      handleHeaderClick,
+      handleClickOutside
     }
   },
   render () {
@@ -45,50 +59,42 @@ export default defineComponent({
     return (
       <div
         class={`${mergedClsPrefix}-date-panel-month__month-year`}
-        ref="triggerPanelMonthRef"
+        ref="triggerRef"
       >
         <VBinder>
           {{
             default: () => [
               <VTarget>
                 {{
-                  default: () =>
-                    this.locale.monthBeforeYear ? (
-                      <div onClick={this.handleOpenQuickSelectMonthPanel}>
-                        <span>{this.calendarMonth}</span>
-                        <span>{this.calendarYear}</span>
-                      </div>
-                    ) : (
-                      <div onClick={this.handleOpenQuickSelectMonthPanel}>
-                        <span>{this.calendarYear}</span>
-                        <span>{this.calendarMonth}</span>
-                      </div>
-                    )
+                  default: () => (
+                    <div
+                      class={`${mergedClsPrefix}-date-panel-month__text`}
+                      onClick={this.handleHeaderClick}
+                    >
+                      {this.monthBeforeYear
+                        ? [this.calendarMonth, this.calendarYear]
+                        : [this.calendarYear, this.calendarMonth]}
+                    </div>
+                  )
                 }}
               </VTarget>,
-              <VFollower show={this.showMonthYearPanel}>
+              <VFollower show={this.show} teleportDisabled>
                 {{
                   default: () => (
-                    <Transition
-                      name="fade-in-scale-up-transition"
-                      appear={this.monthPanelIsMounted}
-                    >
+                    <Transition name="fade-in-scale-up-transition" appear>
                       {{
                         default: () =>
-                          this.showMonthYearPanel
+                          this.show
                             ? withDirectives(
                                 <MonthPanel
                                   ref="monthPanelRef"
-                                  {...this.$props}
-                                  style={this.$attrs.style}
+                                  onUpdateValue={this.onUpdateValue}
                                   actions={[]}
                                   // month and year click show month type
                                   type="month"
                                   key="month"
-                                  quickMonth={true}
-                                  onUpdatePanelValue={
-                                    this.onUpdateCalendarValue
-                                  }
+                                  useAsQuickJump={true}
+                                  value={this.value}
                                 />,
                                 [[clickoutside, handleClickOutside]]
                             )

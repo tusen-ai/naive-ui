@@ -1,4 +1,4 @@
-import { defineComponent, h, watchEffect, ref } from 'vue'
+import { defineComponent, h, watchEffect } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import { NInput } from '../../../input'
 import { NTimePicker } from '../../../time-picker'
@@ -27,13 +27,7 @@ export default defineComponent({
         }
       })
     }
-    const panelStartHeaderRef = ref<InstanceType<typeof PanelHeader> | null>(null)
-    const panelEndHeaderRef = ref<InstanceType<typeof PanelHeader> | null>(null)
-    return {
-      ...useDualCalendar(props, 'datetimerange'),
-      panelStartHeaderRef,
-      panelEndHeaderRef
-    }
+    return useDualCalendar(props, 'datetimerange')
   },
   render () {
     const { mergedClsPrefix, mergedTheme, shortcuts } = this
@@ -120,11 +114,9 @@ export default defineComponent({
               <BackwardIcon />
             </div>
             <PanelHeader
-              ref="panelStartHeaderRef"
-              {...this.$props}
-              {...this.$attrs}
+              monthBeforeYear={this.locale.monthBeforeYear}
               value={this.startCalendarDateTime}
-              onUpdateCalendarValue={this.onUpdateStartPanelValue}
+              onUpdateValue={this.onUpdateStartCalendarValue}
               mergedClsPrefix={mergedClsPrefix}
               calendarMonth={this.startCalendarMonth}
               calendarYear={this.startCalendarYear}
@@ -207,11 +199,9 @@ export default defineComponent({
               <BackwardIcon />
             </div>
             <PanelHeader
-              ref="panelEndHeaderRef"
-              {...this.$props}
-              {...this.$attrs}
+              monthBeforeYear={this.locale.monthBeforeYear}
               value={this.endCalendarDateTime}
-              onUpdateCalendarValue={this.onUpdateEndPanelValue}
+              onUpdateValue={this.onUpdateEndCalendarValue}
               mergedClsPrefix={mergedClsPrefix}
               calendarMonth={this.endCalendarMonth}
               calendarYear={this.endCalendarYear}

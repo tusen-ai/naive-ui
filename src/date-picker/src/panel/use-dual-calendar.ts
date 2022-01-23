@@ -274,12 +274,12 @@ function useDualCalendar (
     )
     adjustCalendarTimes(false)
   }
-  function onUpdateStartPanelValue (value: number): void {
+  function onUpdateStartCalendarValue (value: number): void {
     startCalendarDateTimeRef.value = value
     adjustCalendarTimes(true)
   }
 
-  function onUpdateEndPanelValue (value: number): void {
+  function onUpdateEndCalendarValue (value: number): void {
     endCalendarDateTimeRef.value = value
     adjustCalendarTimes(false)
   }
@@ -632,8 +632,8 @@ function useDualCalendar (
     shortcuts: shortcutsRef,
     startCalendarDateTime: startCalendarDateTimeRef,
     endCalendarDateTime: endCalendarDateTimeRef,
-    onUpdateStartPanelValue,
-    onUpdateEndPanelValue
+    onUpdateStartCalendarValue,
+    onUpdateEndCalendarValue
   }
 }
 

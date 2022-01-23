@@ -5,6 +5,7 @@ import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import type { MonthItem, YearItem, QuarterItem } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { useCalendar, useCalendarProps } from './use-calendar'
+import { OnPanelUpdateValueImpl } from '../interface'
 
 /**
  * Month Panel
@@ -21,8 +22,7 @@ export default defineComponent({
       required: true
     },
     // panelHeader prop
-    quickMonth: Boolean,
-    onUpdatePanelValue: Function as PropType<(value: number) => void>
+    useAsQuickJump: Boolean
   },
   setup (props) {
     const useCalendarRef = useCalendar(props, props.type)
@@ -61,8 +61,10 @@ export default defineComponent({
             }
           ]}
           onClick={() => {
-            props.quickMonth && props.onUpdatePanelValue
-              ? handleQuickMonthClick(item, props.onUpdatePanelValue)
+            props.useAsQuickJump
+              ? handleQuickMonthClick(item, (value) =>
+                (props.onUpdateValue as OnPanelUpdateValueImpl)(value, false)
+              )
               : handleDateClick(item)
           }}
         >

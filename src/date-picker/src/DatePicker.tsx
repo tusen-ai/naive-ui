@@ -442,29 +442,10 @@ export default defineComponent({
         returnFocus: true
       })
     }
-    function needClosePanelHeader (
-      ref: PanelRef['panelHeaderRef'],
-      target: Node
-    ): boolean {
-      if (!ref || !ref?.showMonthYearPanel) return true
-      return !ref?.monthPanelRef?.$el.contains(target)
-    }
     function handleClickOutside (e: MouseEvent): void {
       if (
         mergedShowRef.value &&
-        !triggerElRef.value?.contains(e.target as Node) &&
-        needClosePanelHeader(
-          panelInstRef.value?.panelHeaderRef,
-          e.target as Node
-        ) &&
-        needClosePanelHeader(
-          panelInstRef.value?.panelStartHeaderRef,
-          e.target as Node
-        ) &&
-        needClosePanelHeader(
-          panelInstRef.value?.panelEndHeaderRef,
-          e.target as Node
-        )
+        !triggerElRef.value?.contains(e.target as Node)
       ) {
         closeCalendar({
           returnFocus: false

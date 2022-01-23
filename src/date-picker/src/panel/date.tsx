@@ -1,4 +1,4 @@
-import { h, defineComponent, watchEffect, ref } from 'vue'
+import { h, defineComponent, watchEffect } from 'vue'
 import {
   BackwardIcon,
   FastBackwardIcon,
@@ -7,8 +7,8 @@ import {
 } from '../../../_internal/icons'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector } from '../../../_internal'
-import { useCalendar, useCalendarProps } from './use-calendar'
 import { warnOnce } from '../../../_utils'
+import { useCalendar, useCalendarProps } from './use-calendar'
 import PanelHeader from './panelHeader'
 
 /**
@@ -31,12 +31,7 @@ export default defineComponent({
         }
       })
     }
-    const panelHeaderRef = ref<InstanceType<typeof PanelHeader> | null>(null)
-    const calendarProp = useCalendar(props, 'date')
-    return {
-      ...calendarProp,
-      panelHeaderRef
-    }
+    return useCalendar(props, 'date')
   },
   render () {
     const { mergedClsPrefix, mergedTheme, shortcuts } = this
@@ -63,11 +58,9 @@ export default defineComponent({
               <BackwardIcon />
             </div>
             <PanelHeader
-              ref="panelHeaderRef"
-              {...this.$props}
-              {...this.$attrs}
+              monthBeforeYear={this.locale.monthBeforeYear}
               value={this.calendarValue}
-              onUpdateCalendarValue={this.onUpdateCalendarValue}
+              onUpdateValue={this.onUpdateCalendarValue}
               mergedClsPrefix={mergedClsPrefix}
               calendarMonth={this.calendarMonth}
               calendarYear={this.calendarYear}
