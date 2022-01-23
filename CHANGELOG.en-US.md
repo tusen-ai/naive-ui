@@ -39,6 +39,7 @@
 - `n-cascader` adds `blur` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
 - `n-upload` adds `input-prop` prop, closes [#2204](https://github.com/TuSimple/naive-ui/issues/2204).
 - `n-data-table` col adds `render-sorter-icon` prop, closes [#1785](https://github.com/TuSimple/naive-ui/issues/1785).
+- `n-data-table` col adds `render-sorter` prop, closes [#1785](https://github.com/TuSimple/naive-ui/issues/1785).
 
 ### i18n
 

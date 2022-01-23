@@ -57,20 +57,19 @@ export default defineComponent({
       <span
         class={[
           `${mergedClsPrefix}-data-table-sorter`,
-          {
-            [`${mergedClsPrefix}-data-table-sorter--asc`]:
-              mergedSortOrder === 'ascend',
-            [`${mergedClsPrefix}-data-table-sorter--desc`]:
-              mergedSortOrder === 'descend'
-          }
+          mergedSortOrder === 'ascend' &&
+            `${mergedClsPrefix}-data-table-sorter--asc`,
+          mergedSortOrder === 'descend' &&
+            `${mergedClsPrefix}-data-table-sorter--desc`
         ]}
       >
-        {renderSorterIcon
-          ? renderSorterIcon(mergedSortOrder) : (
+        {renderSorterIcon ? (
+          renderSorterIcon({ order: mergedSortOrder })
+        ) : (
           <NBaseIcon clsPrefix={mergedClsPrefix}>
             {{ default: () => <ArrowDownIcon /> }}
           </NBaseIcon>
-          )}
+        )}
       </span>
     )
   }
