@@ -5,7 +5,7 @@ import type {
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../../select/src/interface'
-import { createInjectionKey } from '../../../_utils'
+import { createInjectionKey } from '../../../_utils/vue/create-injection-key'
 
 export type Size = 'small' | 'medium' | 'large' | 'huge'
 

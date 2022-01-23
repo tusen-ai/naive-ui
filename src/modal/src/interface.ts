@@ -1,6 +1,6 @@
 import { Ref, ComponentPublicInstance } from 'vue'
 import type { MergedTheme } from '../../_mixins'
-import { createInjectionKey } from '../../_utils'
+import { createInjectionKey } from '../../_utils/vue/create-injection-key'
 import type { ModalTheme } from '../styles'
 
 export type ModalBodyInjection = Ref<
