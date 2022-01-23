@@ -38,6 +38,7 @@
 - `n-cascader` 新增 `focus` 方法，关闭 [#2202](https://github.com/TuSimple/naive-ui/issues/2202)
 - `n-cascader` 新增 `blur` 方法，关闭 [#2202](https://github.com/TuSimple/naive-ui/issues/2202)
 - `n-upload` 新增 `input-prop` 属性，关闭 [#2204](https://github.com/TuSimple/naive-ui/issues/2204)
+- `n-data-table` 列增加 `render-sorter-icon` 属性，关闭 [#1785](https://github.com/TuSimple/naive-ui/issues/1785)
 
 ### i18n
 

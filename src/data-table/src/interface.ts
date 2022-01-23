@@ -109,6 +109,7 @@ export type TableBaseColumn<T = InternalRowData> = {
   renderSorter?: RenderSorter
   renderFilter?: RenderFilter
   renderFilterIcon?: RenderFilter
+  renderSorterIcon?: (order: SortOrder) => VNodeChild
   renderFilterMenu?: RenderFilterMenu
   colSpan?: (rowData: T, rowIndex: number) => number
   rowSpan?: (rowData: T, rowIndex: number) => number
@@ -236,7 +237,7 @@ export type RenderFilter = (props: {
   show: boolean
 }) => VNodeChild
 
-export type RenderSorter = (props: { order: SortOrder | false }) => VNodeChild
+export type RenderSorter = (props: { order: SortOrder }) => VNodeChild
 
 export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 

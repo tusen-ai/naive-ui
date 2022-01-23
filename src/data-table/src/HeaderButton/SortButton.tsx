@@ -50,6 +50,7 @@ export default defineComponent({
   },
   render () {
     const { mergedRenderSorter, mergedSortOrder, mergedClsPrefix } = this
+    const { renderSorterIcon } = this.column
     return mergedRenderSorter ? (
       <RenderSorter render={mergedRenderSorter} order={mergedSortOrder} />
     ) : (
@@ -64,9 +65,12 @@ export default defineComponent({
           }
         ]}
       >
-        <NBaseIcon clsPrefix={mergedClsPrefix}>
-          {{ default: () => <ArrowDownIcon /> }}
-        </NBaseIcon>
+        {renderSorterIcon
+          ? renderSorterIcon(mergedSortOrder) : (
+          <NBaseIcon clsPrefix={mergedClsPrefix}>
+            {{ default: () => <ArrowDownIcon /> }}
+          </NBaseIcon>
+          )}
       </span>
     )
   }
