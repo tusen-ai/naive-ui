@@ -8,7 +8,7 @@
 basic
 size
 color
-icon
+icon.vue
 allow-half
 readonly
 ```
