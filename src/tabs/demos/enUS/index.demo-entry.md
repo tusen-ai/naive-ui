@@ -49,7 +49,7 @@ update-bar-manually.vue
 | display-directive | `'if' \| 'show'` \| 'show:lazy' | `'if'` | The directive to use in conditionally rendering. `if` will use `v-if` and `show` will use `v-show`. When use `show` directive, the status of tab won't be reset after tab changes. When use `show:lazy`, the display effect is the same as `show`, but the content will be lazily loaded. |  |
 | name | `string \| number` | `undefined` | Required, the name of the tab. |  |
 | tab | `string \| VNode \| () => VNodeChild` | `undefined` | Tab label. |  |
-| tab-props | `HTMLAttribute` | `undefined` | DOM attributes of tab label. | NEXT_VERSION |
+| tab-props | `Object` | `undefined` | DOM attributes of tab label. | NEXT_VERSION |
 
 ### Tab Props
 

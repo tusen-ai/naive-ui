@@ -68,7 +68,7 @@ Changelog position:
 
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
 
 ### Feats
 
@@ -147,7 +147,7 @@ Changelog 位置：
 
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
 
 ### Feats
 
