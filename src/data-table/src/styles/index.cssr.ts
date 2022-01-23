@@ -187,18 +187,23 @@ export default c([
         margin-left: 4px;
         position: relative;
         display: inline-flex;
+        align-items: center;
+        justify-content: center;
         vertical-align: -0.2em;
         color: var(--n-th-icon-color);
-        transition: 
-          transform .3s var(--n-bezier),
-          color .3s var(--n-bezier);
+        transition: color .3s var(--n-bezier);
       `, [
-        cM('desc', {
-          transform: 'rotate(0)'
-        }),
-        cM('asc', {
-          transform: 'rotate(-180deg)'
-        }),
+        cB('base-icon', 'transition: transform .3s var(--n-bezier)'),
+        cM('desc', [
+          cB('base-icon', {
+            transform: 'rotate(0deg)'
+          })
+        ]),
+        cM('asc', [
+          cB('base-icon', {
+            transform: 'rotate(-180deg)'
+          })
+        ]),
         cM('asc, desc', {
           color: 'var(--n-th-icon-color-active)'
         })

@@ -8,14 +8,12 @@ import {
   nextTick,
   ref,
   toRef,
-  InjectionKey,
   Ref
 } from 'vue'
 import { throttle } from 'lodash-es'
 import { useTheme, useHljs, ThemeProps, useConfig } from '../../_mixins'
 import type { Hljs } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { warn } from '../../_utils'
+import { createInjectionKey, ExtractPublicPropTypes, warn } from '../../_utils'
 import { NScrollbar } from '../../_internal'
 import type { ScrollbarInst } from '../../_internal'
 import { NCode } from '../../code'
@@ -31,7 +29,7 @@ export interface LogInjection {
   mergedHljsRef: Ref<Hljs | undefined>
 }
 
-export const logInjectionKey: InjectionKey<LogInjection> = Symbol('log')
+export const logInjectionKey = createInjectionKey<LogInjection>('n-log')
 
 const logProps = {
   ...(useTheme.props as ThemeProps<LogTheme>),

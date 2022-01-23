@@ -9,7 +9,8 @@ import {
   CSSProperties,
   Fragment,
   Teleport,
-  nextTick
+  nextTick,
+  InputHTMLAttributes
 } from 'vue'
 import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
@@ -319,7 +320,8 @@ const uploadProps = {
     type: Boolean,
     default: true
   },
-  imageGroupProps: Object as PropType<ImageGroupProps>
+  imageGroupProps: Object as PropType<ImageGroupProps>,
+  inputProps: Object as PropType<InputHTMLAttributes>
 } as const
 
 export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
@@ -629,6 +631,7 @@ export default defineComponent({
 
     const inputNode = (
       <input
+        {...this.inputProps}
         ref="inputElRef"
         type="file"
         class={`${mergedClsPrefix}-upload-file-input`}

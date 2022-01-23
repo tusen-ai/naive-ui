@@ -1,11 +1,11 @@
-import { h, defineComponent, renderSlot, watchEffect, ref } from 'vue'
-import { NButton, NxButton } from '../../../button'
+import { h, defineComponent, watchEffect, ref } from 'vue'
 import {
   BackwardIcon,
   FastBackwardIcon,
   ForwardIcon,
   FastForwardIcon
 } from '../../../_internal/icons'
+import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector } from '../../../_internal'
 import { useCalendar, useCalendarProps } from './use-calendar'
 import { warnOnce } from '../../../_utils'
@@ -125,7 +125,7 @@ export default defineComponent({
         </div>
         {this.datePickerSlots.footer ? (
           <div class={`${mergedClsPrefix}-date-panel-footer`}>
-            {renderSlot(this.datePickerSlots, 'footer')}
+            {this.datePickerSlots.footer()}
           </div>
         ) : null}
         {this.actions?.length || shortcuts ? (

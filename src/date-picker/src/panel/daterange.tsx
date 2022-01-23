@@ -1,4 +1,4 @@
-import { defineComponent, h, renderSlot, watchEffect, ref } from 'vue'
+import { defineComponent, h, watchEffect, ref } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import {
   BackwardIcon,
@@ -7,9 +7,9 @@ import {
   FastForwardIcon
 } from '../../../_internal/icons'
 import { NBaseFocusDetector } from '../../../_internal'
-import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 import { warnOnce } from '../../../_utils'
 import PanelHeader from './panelHeader'
+import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
 export default defineComponent({
   name: 'DateRangePanel',
@@ -215,7 +215,7 @@ export default defineComponent({
         </div>
         {this.datePickerSlots.footer ? (
           <div class={`${mergedClsPrefix}-date-panel-footer`}>
-            {renderSlot(this.datePickerSlots, 'footer')}
+            {this.datePickerSlots.footer()}
           </div>
         ) : null}
         {this.actions?.length || shortcuts ? (

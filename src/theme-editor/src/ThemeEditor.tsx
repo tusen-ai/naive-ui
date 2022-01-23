@@ -1,13 +1,4 @@
-import {
-  h,
-  computed,
-  defineComponent,
-  renderSlot,
-  ref,
-  Fragment,
-  toRaw,
-  watch
-} from 'vue'
+import { h, computed, defineComponent, ref, Fragment, toRaw, watch } from 'vue'
 import { cloneDeep, merge } from 'lodash-es'
 import { lightTheme } from '../../themes/light'
 import {
@@ -522,7 +513,7 @@ export default defineComponent({
                 )
               }}
             </NPopover>,
-            renderSlot(this.$slots, 'default')
+            this.$slots.default?.()
           ]
         }}
       </NConfigProvider>

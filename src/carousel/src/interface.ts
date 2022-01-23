@@ -1,4 +1,4 @@
-import type { InjectionKey } from 'vue'
+import { createInjectionKey } from '../../_utils'
 
 export const tuple = <T extends string[]>(...args: T): T => args
 
@@ -26,8 +26,8 @@ export interface CarouselMethodsInjection {
   removeSlide: (slide?: HTMLElement) => void
   onCarouselItemClick: (index: number, event: MouseEvent) => void
 }
-export const carouselMethodsInjectionKey: InjectionKey<CarouselMethodsInjection> =
-  Symbol('carouselMethods')
+export const carouselMethodsInjectionKey =
+  createInjectionKey<CarouselMethodsInjection>('n-carousel-methods')
 
 export interface CarouselInst {
   getCurrentIndex: () => number

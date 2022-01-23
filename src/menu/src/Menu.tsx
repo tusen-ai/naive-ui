@@ -7,7 +7,6 @@ import {
   provide,
   PropType,
   ExtractPropTypes,
-  InjectionKey,
   CSSProperties,
   inject,
   VNodeChild,
@@ -17,7 +16,7 @@ import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call } from '../../_utils'
+import { call, createInjectionKey } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { itemRenderer } from './utils'
 import { menuLight } from '../styles'
@@ -132,7 +131,7 @@ export type MenuSetupProps = ExtractPropTypes<typeof menuProps>
 
 export type MenuProps = Partial<MenuSetupProps>
 
-export const menuInjectionKey: InjectionKey<MenuInjection> = Symbol('menu')
+export const menuInjectionKey = createInjectionKey<MenuInjection>('n-menu')
 
 export default defineComponent({
   name: 'Menu',

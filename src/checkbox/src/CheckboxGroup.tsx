@@ -6,13 +6,12 @@ import {
   computed,
   toRef,
   ref,
-  InjectionKey,
   Ref,
   ComputedRef
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
-import { warn, call, MaybeArray } from '../../_utils'
+import { warn, call, MaybeArray, createInjectionKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 export interface CheckboxGroupInjection {
@@ -25,8 +24,8 @@ export interface CheckboxGroupInjection {
   toggleCheckbox: (checked: boolean, checkboxValue: string | number) => void
 }
 
-export const checkboxGroupInjectionKey: InjectionKey<CheckboxGroupInjection> =
-  Symbol('checkboxGroup')
+export const checkboxGroupInjectionKey =
+  createInjectionKey<CheckboxGroupInjection>('n-checkbox-group')
 
 const checkboxGroupProps = {
   min: Number,

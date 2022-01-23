@@ -48,7 +48,8 @@ import type {
   DefaultTime,
   FormattedValue,
   OnUpdateFormattedValue,
-  OnUpdateFormattedValueImpl
+  OnUpdateFormattedValueImpl,
+  DatePickerInst
 } from './interface'
 import { datePickerInjectionKey } from './interface'
 import DatetimePanel from './panel/datetime'
@@ -676,7 +677,17 @@ export default defineComponent({
       ...dualValidation,
       datePickerSlots: slots
     })
+
+    const exposedMethods: DatePickerInst = {
+      focus: () => {
+        inputInstRef.value?.focus()
+      },
+      blur: () => {
+        inputInstRef.value?.blur()
+      }
+    }
     return {
+      ...exposedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       namespace: namespaceRef,

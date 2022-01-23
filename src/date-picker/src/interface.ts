@@ -1,4 +1,4 @@
-import { InjectionKey, Ref, Slots } from 'vue'
+import { Ref, Slots } from 'vue'
 import { VirtualListInst } from 'vueuc'
 import { NLocale, NDateLocale } from '../../locales'
 import type { ScrollbarInst } from '../../_internal'
@@ -8,12 +8,13 @@ import {
   IsSecondDisabled
 } from '../../time-picker/src/interface'
 import { MergedTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
+import PanelHeader from '../src/panel/panelHeader'
 import { DatePickerTheme } from '../styles/light'
 import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
-import PanelHeader from '../src/panel/panelHeader'
 
 export type Value = number | [number, number]
 
@@ -100,8 +101,8 @@ export type DatePickerInjection = {
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 
-export const datePickerInjectionKey: InjectionKey<DatePickerInjection> =
-  Symbol('datePicker')
+export const datePickerInjectionKey =
+  createInjectionKey<DatePickerInjection>('n-date-picker')
 
 export type IsDateDisabled = IsSingleDateDisabled | IsRangeDateDisabled
 export type IsSingleDateDisabled = (date: number) => boolean
@@ -124,3 +125,8 @@ export type IsRangeTimeDisabled = (
   position: 'start' | 'end',
   value: [number, number] // date must exist to have time validation
 ) => TimeValidator
+
+export interface DatePickerInst {
+  focus: () => void
+  blur: () => void
+}
