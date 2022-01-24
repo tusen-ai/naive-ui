@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-color-picker` adds `disabled` prop.
+
 ## 2.24.4
 
 ### Fixes
