@@ -96,7 +96,10 @@ export const colorPickerPanelProps = {
   },
   showPreview: Boolean,
   swatches: Array as PropType<string[]>,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   actions: {
     type: Array as PropType<ActionType[]>,
     default: null
