@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-color-picker` 新增 `disabled` 属性
+
 ## 2.24.4
 
 ### Fixes
