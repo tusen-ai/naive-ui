@@ -1,24 +1,28 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
+
+### Fixes
+
+- `n-input` placeholder has no line-wrap with `textarea` type.
 
 ### Feats
 
 - `n-color-picker` adds `disabled` prop.
 
-## 2.24.4
+## 2.24.4 (2022-01-24)
 
 ### Fixes
 
 - Update vueuc version.
 
-## 2.24.3
+## 2.24.3 (2022-01-24)
 
 ### Fixes
 
 - Fix `n-layout-sider` has no border transition.
 
-## 2.24.2
+## 2.24.2 (2022-01-24)
 
 ### Fixes
 

@@ -1,24 +1,28 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
+
+### Fixes
+
+- `n-input` 在类型为 `textarea` 时 placeholder 无法换行
 
 ### Feats
 
 - `n-color-picker` 新增 `disabled` 属性
 
-## 2.24.4
+## 2.24.4 (2022-01-24)
 
 ### Fixes
 
 - 更新 vueuc 版本
 
-## 2.24.3
+## 2.24.3 (2022-01-24)
 
 ### Fixes
 
 - 修复 `n-layout-sider` 边框没有 transition
 
-## 2.24.2
+## 2.24.2 (2022-01-24)
 
 ### Fixes
 
