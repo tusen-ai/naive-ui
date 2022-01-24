@@ -102,6 +102,13 @@ export const unconfigurableStyle = c([
       })
     ])
   ]),
+  cB('tabs', [
+    cB('tabs-bar', {
+      height: '4px !important',
+      borderRadius: '100px !important',
+      transform: 'scaleX(0.395)'
+    })
+  ]),
   cB('input', [
     cM('textarea', [
       cM('resizable', [
