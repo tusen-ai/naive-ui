@@ -8,6 +8,7 @@
 basic
 alpha
 size
+disabled
 modes
 form
 swatches
@@ -28,6 +29,7 @@ native
 | show-alpha | `boolean` | `true` | 是否可调节 alpha 通道 |  |
 | show-preview | `boolean` | `false` | 是否展示颜色预览块 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 颜色选择器的尺寸 |  |
+| disabled | `boolean` | `false` | 是否禁用 | 2.24.5 |
 | swatches | `string[]` | `undefined` | 色板的值 |  |
 | to | `string \| HTMLElement` | `'body'` | 面板的卸载位置 |  |
 | value | `string \| null` | `undefined` | 颜色选择器的值 |  |

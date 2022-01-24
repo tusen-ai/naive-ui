@@ -190,6 +190,7 @@ export default c([
       top: 4px;
       bottom: 4px;
     `),
+    cM('disabled', 'cursor: not-allowed'),
     cB('color-picker-checkboard', `
       border-radius: var(--n-border-radius);
     `, [

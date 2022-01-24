@@ -763,6 +763,7 @@ export default defineComponent({
             iconColor,
             iconColorDisabled,
             scrollItemBorderRadius,
+            calendarTitleColorHover,
             [createKey('calendarLeftPadding', type)]: calendarLeftPadding,
             [createKey('calendarRightPadding', type)]: calendarRightPadding
           }
@@ -782,6 +783,7 @@ export default defineComponent({
           // panel calendar
           '--n-calendar-left-padding': calendarLeftPadding,
           '--n-calendar-right-padding': calendarRightPadding,
+          '--n-calendar-title-color-hover': calendarTitleColorHover,
           '--n-calendar-title-height': calendarTitleHeight,
           '--n-calendar-title-padding': calendarTitlePadding,
           '--n-calendar-title-font-size': calendarTitleFontSize,

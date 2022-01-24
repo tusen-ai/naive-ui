@@ -96,6 +96,10 @@ export const colorPickerPanelProps = {
   },
   showPreview: Boolean,
   swatches: Array as PropType<string[]>,
+  disabled: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   actions: {
     type: Array as PropType<ActionType[]>,
     default: null
@@ -132,7 +136,7 @@ export default defineComponent({
     let upcomingValue: string | null = null
 
     const formItem = useFormItem(props)
-    const { mergedSizeRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef } = formItem
     const { localeRef } = useLocale('global')
     const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
 
@@ -629,6 +633,7 @@ export default defineComponent({
       hsla: hslaRef,
       rgba: rgbaRef,
       mergedShow: mergedShowRef,
+      mergedDisabled: mergedDisabledRef,
       isMounted: useIsMounted(),
       adjustedTo: useAdjustedTo(props),
       mergedValue: mergedValueRef,
@@ -661,6 +666,7 @@ export default defineComponent({
                       clsPrefix={mergedClsPrefix}
                       value={this.mergedValue}
                       hsla={this.hsla}
+                      disabled={this.mergedDisabled}
                       onClick={this.handleTriggerClick}
                     >
                       {{
