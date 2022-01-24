@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.24.4
+
+### Fixes
+
+- 更新 vueuc 版本
+
 ## 2.24.3
 
 ### Fixes
