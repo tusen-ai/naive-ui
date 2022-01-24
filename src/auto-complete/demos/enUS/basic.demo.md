@@ -3,7 +3,14 @@
 Start typing to see how this works.
 
 ```html
-<n-auto-complete :options="options" v-model:value="value" placeholder="Email" />
+<n-auto-complete
+  :input-props="{
+    autocomplete: 'disabled'
+  }"
+  :options="options"
+  v-model:value="value"
+  placeholder="Email"
+/>
 ```
 
 ```js

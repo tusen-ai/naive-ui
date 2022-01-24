@@ -99,6 +99,16 @@ const deDE: NLocale = {
     import: 'Importieren',
     export: 'Exportieren',
     restore: 'Auf Standard zurücksetzen'
+  },
+  // TODO: translation
+  Image: {
+    tipPrevious: 'Previous picture (←)',
+    tipNext: 'Next picture (→)',
+    tipCounterclockwise: 'Counterclockwise',
+    tipClockwise: 'Clockwise',
+    tipZoomOut: 'Zoom out',
+    tipZoomIn: 'Zoom in',
+    tipClose: 'Close (Esc)'
   }
 }
 

@@ -1,15 +1,11 @@
-import {
-  defineComponent,
-  h,
-  InjectionKey,
-  PropType,
-  provide,
-  Ref,
-  toRef
-} from 'vue'
+import { defineComponent, h, PropType, provide, Ref, toRef } from 'vue'
 import { useMemo } from 'vooks'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { formatLength, keysOf } from '../../_utils'
+import {
+  createInjectionKey,
+  ExtractPublicPropTypes,
+  formatLength,
+  keysOf
+} from '../../_utils'
 import { useConfig, useStyle } from '../../_mixins'
 import style from './styles/index.cssr'
 
@@ -20,7 +16,7 @@ export interface RowInjection {
   mergedClsPrefixRef: Ref<string>
 }
 
-export const rowInjectionKey: InjectionKey<RowInjection> = Symbol('row')
+export const rowInjectionKey = createInjectionKey<RowInjection>('n-row')
 
 export const rowProps = {
   gutter: {

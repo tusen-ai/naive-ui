@@ -1,10 +1,11 @@
-import { VNodeChild, InjectionKey, Ref, UnwrapRef, VNode } from 'vue'
+import { VNodeChild, Ref, UnwrapRef, VNode } from 'vue'
 import { TreeNode } from 'treemate'
 import type {
   SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../../select/src/interface'
+import { createInjectionKey } from '../../../_utils/vue/create-injection-key'
 
 export type Size = 'small' | 'medium' | 'large' | 'huge'
 
@@ -51,11 +52,11 @@ export interface InternalExposedProps {
   next: () => void
 }
 
-export const internalSelectionMenuInjectionKey: InjectionKey<InternalSelectMenuInjection> =
-  Symbol('internal-select-menu')
+export const internalSelectionMenuInjectionKey =
+  createInjectionKey<InternalSelectMenuInjection>('n-internal-select-menu')
 
-export const internalSelectionMenuBodyInjectionKey: InjectionKey<
+export const internalSelectionMenuBodyInjectionKey = createInjectionKey<
 Ref<HTMLElement | null>
-> = Symbol('internal-select-menu-body')
+>('n-internal-select-menu-body')
 
 export type InternalSelectMenuRef = UnwrapRef<InternalExposedProps>

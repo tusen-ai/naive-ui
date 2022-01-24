@@ -1,6 +1,6 @@
 # 响应式列数
 
-`n-grid` 的 `cols` `x-gap` `y-gap` 支持响应式参数配置。
+`n-grid` 的 `cols` `x-gap` `y-gap` 支持响应式参数配置。
 
 `n-grid` 具有两种响应式模式，内部的 `n-grid-item` 遵从父级的模式。
 
@@ -8,7 +8,7 @@
 
 `screen` 模式由浏览器视口的宽度控制响应式属性，有 `xs` `s` `m` `l` `xl` `2xl` 几个屏幕尺寸可供选择。一个响应式 `cols` 形如 `2 s:3 m:4 l:5 xl:6 2xl:7`。
 
-默认的屏幕配置为 `xs < 640 <= s < 1024 <= m < 1280 <= l < 1536 <= xl < 1920 <= xxl`。
+默认的屏幕配置为 `xs < 640 <= s < 1024 <= m < 1280 <= l < 1536 <= xl < 1920 <= 2xl`。
 
 你可以在 `n-config-provider` 定制 [breakpoints](config-provider#API)。
 

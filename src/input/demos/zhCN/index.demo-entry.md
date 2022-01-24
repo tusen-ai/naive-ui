@@ -19,6 +19,7 @@ input-group
 passively-activated
 count
 focus
+event
 input-props
 ```
 

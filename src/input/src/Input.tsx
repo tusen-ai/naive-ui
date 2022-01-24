@@ -7,7 +7,6 @@ import {
   toRef,
   onMounted,
   getCurrentInstance,
-  renderSlot,
   PropType,
   CSSProperties,
   watch,
@@ -15,30 +14,37 @@ import {
   WatchStopHandle,
   provide,
   InputHTMLAttributes,
-  TextareaHTMLAttributes
+  TextareaHTMLAttributes,
+  Fragment
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
-import { NBaseClear, NBaseIcon, NBaseSuffix } from '../../_internal'
+import { off, on } from 'evtd'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
+import {
+  NBaseClear,
+  NBaseIcon,
+  NBaseSuffix,
+  NScrollbar,
+  ScrollbarInst
+} from '../../_internal'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createKey, ExtractPublicPropTypes, warnOnce } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { inputLight } from '../styles'
 import type { InputTheme } from '../styles'
-import {
+import type {
   OnUpdateValue,
   OnUpdateValueImpl,
   Size,
-  InputWrappedRef,
-  inputInjectionKey
+  InputWrappedRef
 } from './interface'
+import { inputInjectionKey } from './interface'
 import { isEmptyValue } from './utils'
 import WordCount from './WordCount'
 import style from './styles/input.cssr'
-import { off, on } from 'evtd'
 
 const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
@@ -168,6 +174,7 @@ export default defineComponent({
     const inputMirrorElRef = ref<HTMLElement | null>(null)
     const inputElRef = ref<HTMLInputElement | null>(null)
     const inputEl2Ref = ref<HTMLInputElement | null>(null)
+    const textareaScrollbarInstRef = ref<ScrollbarInst | null>(null)
     // local
     const { localeRef } = useLocale('Input')
     // value
@@ -406,6 +413,12 @@ export default defineComponent({
     ): void {
       const targetValue = (e.target as HTMLInputElement).value
       syncMirror(targetValue)
+      if (props.type === 'textarea') {
+        const { value: textareaScrollbarInst } = textareaScrollbarInstRef
+        if (textareaScrollbarInst) {
+          textareaScrollbarInst.syncUnifiedContainer()
+        }
+      }
       syncSource = targetValue
       if (isComposingRef.value) return
       const changedValue = targetValue
@@ -531,9 +544,15 @@ export default defineComponent({
     }
     function handleMouseEnter (): void {
       hoverRef.value = true
+      if (props.type === 'textarea') {
+        textareaScrollbarInstRef.value?.handleMouseEnterWrapper()
+      }
     }
     function handleMouseLeave (): void {
       hoverRef.value = false
+      if (props.type === 'textarea') {
+        textareaScrollbarInstRef.value?.handleMouseLeaveWrapper()
+      }
     }
     function handlePasswordToggleClick (): void {
       if (mergedDisabledRef.value) return
@@ -649,17 +668,39 @@ export default defineComponent({
       updateTextAreaStyle()
     }
 
-    let stopWatchMergedValue: WatchStopHandle | null = null
+    const placeholderStyleRef = ref({
+      top: '0'
+    })
+    function handleTextAreaScroll (e: Event): void {
+      const { scrollTop } = e.target as HTMLElement
+      placeholderStyleRef.value.top = `${-scrollTop}px`
+      textareaScrollbarInstRef.value?.syncUnifiedContainer()
+    }
+
+    let stopWatchMergedValue1: WatchStopHandle | null = null
     watchEffect(() => {
       const { autosize, type } = props
       if (autosize && type === 'textarea') {
-        stopWatchMergedValue = watch(mergedValueRef, (value) => {
+        stopWatchMergedValue1 = watch(mergedValueRef, (value) => {
           if (!Array.isArray(value) && value !== syncSource) {
             syncMirror(value)
           }
         })
       } else {
-        stopWatchMergedValue?.()
+        stopWatchMergedValue1?.()
+      }
+    })
+
+    let stopWatchMergedValue2: WatchStopHandle | null = null
+    watchEffect(() => {
+      if (props.type === 'textarea') {
+        stopWatchMergedValue2 = watch(mergedValueRef, (value) => {
+          if (!Array.isArray(value) && value !== syncSource) {
+            textareaScrollbarInstRef.value?.syncUnifiedContainer()
+          }
+        })
+      } else {
+        stopWatchMergedValue2?.()
       }
     })
 
@@ -690,6 +731,7 @@ export default defineComponent({
       inputEl2Ref,
       textareaElRef,
       textareaMirrorElRef,
+      textareaScrollbarInstRef,
       // value
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
@@ -707,7 +749,9 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       mergedShowPasswordOn: mergedShowPasswordOnRef,
+      placeholderStyle: placeholderStyleRef,
       // methods
+      handleTextAreaScroll,
       handleCompositionStart,
       handleCompositionEnd,
       handleInput,
@@ -725,6 +769,9 @@ export default defineComponent({
       handlePasswordToggleMousedown,
       handleWrapperKeyDown,
       handleTextAreaMirrorResize,
+      getTextareaScrollContainer: () => {
+        return textareaElRef.value
+      },
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
@@ -835,7 +882,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, $slots } = this
     return (
       <div
         ref="wrapperElRef"
@@ -873,58 +920,76 @@ export default defineComponent({
       >
         {/* textarea & basic input */}
         <div class={`${mergedClsPrefix}-input-wrapper`}>
-          {this.$slots.affix || this.$slots.prefix ? (
+          {$slots.affix || $slots.prefix ? (
             <div class={`${mergedClsPrefix}-input__prefix`}>
-              {renderSlot(this.$slots, 'affix', undefined, () => {
-                return [renderSlot(this.$slots, 'prefix')]
-              })}
+              {($slots.affix || $slots.prefix)?.()}
             </div>
           ) : null}
           {this.type === 'textarea' ? (
-            <div class={`${mergedClsPrefix}-input__textarea`}>
-              <textarea
-                {...this.inputProps}
-                ref="textareaElRef"
-                class={`${mergedClsPrefix}-input__textarea-el`}
-                autofocus={this.autofocus}
-                rows={Number(this.rows)}
-                placeholder={this.placeholder as string | undefined}
-                value={this.mergedValue as string | undefined}
-                disabled={this.mergedDisabled}
-                maxlength={this.maxlength as any}
-                minlength={this.minlength as any}
-                readonly={this.readonly as any}
-                tabindex={
-                  this.passivelyActivated && !this.activated ? -1 : undefined
-                }
-                style={this.textDecorationStyle[0] as any}
-                onBlur={this.handleInputBlur}
-                onFocus={this.handleInputFocus}
-                onInput={this.handleInput}
-                onChange={this.handleChange}
-              />
-              {this.showPlaceholder1 ? (
-                <div
-                  class={`${mergedClsPrefix}-input__placeholder`}
-                  key="placeholder"
-                >
-                  {this.mergedPlaceholder[0]}
-                </div>
-              ) : null}
-              {this.autosize ? (
-                <VResizeObserver onResize={this.handleTextAreaMirrorResize}>
-                  {{
-                    default: () => (
-                      <div
-                        ref="textareaMirrorElRef"
-                        class={`${mergedClsPrefix}-input__textarea-mirror`}
-                        key="mirror"
+            <NScrollbar
+              ref="textareaScrollbarInstRef"
+              class={`${mergedClsPrefix}-input__textarea`}
+              container={this.getTextareaScrollContainer}
+              triggerDisplayManually
+              useUnifiedContainer
+            >
+              {{
+                default: () => {
+                  return (
+                    <>
+                      <textarea
+                        {...this.inputProps}
+                        ref="textareaElRef"
+                        class={`${mergedClsPrefix}-input__textarea-el`}
+                        autofocus={this.autofocus}
+                        rows={Number(this.rows)}
+                        placeholder={this.placeholder as string | undefined}
+                        value={this.mergedValue as string | undefined}
+                        disabled={this.mergedDisabled}
+                        maxlength={this.maxlength as any}
+                        minlength={this.minlength as any}
+                        readonly={this.readonly as any}
+                        tabindex={
+                          this.passivelyActivated && !this.activated
+                            ? -1
+                            : undefined
+                        }
+                        style={this.textDecorationStyle[0] as any}
+                        onBlur={this.handleInputBlur}
+                        onFocus={this.handleInputFocus}
+                        onInput={this.handleInput}
+                        onChange={this.handleChange}
+                        onScroll={this.handleTextAreaScroll}
                       />
-                    )
-                  }}
-                </VResizeObserver>
-              ) : null}
-            </div>
+                      {this.showPlaceholder1 ? (
+                        <div
+                          class={`${mergedClsPrefix}-input__placeholder`}
+                          style={this.placeholderStyle}
+                          key="placeholder"
+                        >
+                          {this.mergedPlaceholder[0]}
+                        </div>
+                      ) : null}
+                      {this.autosize ? (
+                        <VResizeObserver
+                          onResize={this.handleTextAreaMirrorResize}
+                        >
+                          {{
+                            default: () => (
+                              <div
+                                ref="textareaMirrorElRef"
+                                class={`${mergedClsPrefix}-input__textarea-mirror`}
+                                key="mirror"
+                              />
+                            )
+                          }}
+                        </VResizeObserver>
+                      ) : null}
+                    </>
+                  )
+                }
+              }}
+            </NScrollbar>
           ) : (
             <div class={`${mergedClsPrefix}-input__input`}>
               <input
@@ -976,25 +1041,23 @@ export default defineComponent({
             </div>
           )}
           {!this.pair &&
-          (this.$slots.suffix ||
+          ($slots.suffix ||
             this.clearable ||
             this.showCount ||
             this.mergedShowPasswordOn ||
             this.loading !== undefined) ? (
             <div class={`${mergedClsPrefix}-input__suffix`}>
               {[
-                this.clearable || this.$slots.clear ? (
+                this.clearable || $slots.clear ? (
                   <NBaseClear
                     clsPrefix={mergedClsPrefix}
                     show={this.showClearButton}
                     onClear={this.handleClear}
                   >
-                    {{ default: () => renderSlot(this.$slots, 'clear') }}
+                    {{ default: $slots.clear }}
                   </NBaseClear>
                 ) : null,
-                !this.internalLoadingBeforeSuffix
-                  ? renderSlot(this.$slots, 'suffix')
-                  : null,
+                !this.internalLoadingBeforeSuffix ? $slots.suffix?.() : null,
                 this.loading !== undefined ? (
                   <NBaseSuffix
                     clsPrefix={mergedClsPrefix}
@@ -1004,11 +1067,9 @@ export default defineComponent({
                     style={this.cssVars as CSSProperties}
                   />
                 ) : null,
-                this.internalLoadingBeforeSuffix
-                  ? renderSlot(this.$slots, 'suffix')
-                  : null,
+                this.internalLoadingBeforeSuffix ? $slots.suffix?.() : null,
                 this.showCount && this.type !== 'textarea' ? (
-                  <WordCount>{{ default: this.$slots.count }}</WordCount>
+                  <WordCount>{{ default: $slots.count }}</WordCount>
                 ) : null,
                 this.mergedShowPasswordOn && this.type === 'password' ? (
                   <NBaseIcon
@@ -1030,9 +1091,7 @@ export default defineComponent({
         {/* pair input */}
         {this.pair ? (
           <span class={`${mergedClsPrefix}-input__separator`}>
-            {renderSlot(this.$slots, 'separator', undefined, () => [
-              this.separator
-            ])}
+            {$slots.separator ? $slots.separator() : this.separator}
           </span>
         ) : null}
         {this.pair ? (
@@ -1069,16 +1128,16 @@ export default defineComponent({
             </div>
             <div class={`${mergedClsPrefix}-input__suffix`}>
               {[
-                this.clearable || this.$slots.clear ? (
+                this.clearable || $slots.clear ? (
                   <NBaseClear
                     clsPrefix={mergedClsPrefix}
                     show={this.showClearButton}
                     onClear={this.handleClear}
                   >
-                    {{ default: () => renderSlot(this.$slots, 'clear') }}
+                    {{ default: $slots.clear }}
                   </NBaseClear>
                 ) : null,
-                renderSlot(this.$slots, 'suffix')
+                $slots.suffix?.()
               ]}
             </div>
           </div>
@@ -1091,7 +1150,7 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-input__state-border`} />
         ) : null}
         {this.showCount && this.type === 'textarea' ? (
-          <WordCount>{{ default: this.$slots.count }}</WordCount>
+          <WordCount>{{ default: $slots.count }}</WordCount>
         ) : null}
       </div>
     )

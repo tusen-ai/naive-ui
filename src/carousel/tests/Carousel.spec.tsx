@@ -1,6 +1,6 @@
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NCarousel } from '../index'
+import { NCarousel, NCarouselItem } from '../index'
 import { sleep } from 'seemly'
 
 describe('n-carousel', () => {
@@ -12,7 +12,7 @@ describe('n-carousel', () => {
     const wrapper = mount(NCarousel, {
       slots: {
         default: () => {
-          return [...Array(3).keys()].map((i) => {
+          return [...Array(3).keys()].map(i => {
             return h('div', {}, i.toString())
           })
         }
@@ -22,7 +22,7 @@ describe('n-carousel', () => {
     await wrapper.setProps({ autoplay: true, interval: 50 })
 
     await sleep(25)
-    ;([0, 1, 2, 3, 4] as const).forEach((i) => {
+    ;([0, 1, 2, 3, 4] as const).forEach(i => {
       if (i === 1) {
         expect(
           wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
@@ -34,8 +34,8 @@ describe('n-carousel', () => {
       }
     })
 
-    await sleep(75)
-    ;([0, 1, 2, 3, 4] as const).forEach((i) => {
+    await sleep(25)
+    ;([0, 1, 2, 3, 4] as const).forEach(i => {
       if (i === 2) {
         expect(
           wrapper.find(`[data-index="${i}"]`).attributes('aria-hidden')
@@ -67,7 +67,7 @@ describe('n-carousel', () => {
       },
       slots: {
         default: () => {
-          return [...Array(3).keys()].map((i) => {
+          return [...Array(3).keys()].map(i => {
             return h('div', {}, i.toString())
           })
         }
@@ -92,43 +92,31 @@ describe('n-carousel', () => {
   it('should work with `showArrow` prop', async () => {
     const wrapper = mount(NCarousel)
 
-    const dotToArrow = [
-      {
-        dot: ['top', 'bottom'],
-        arrow: ['left', 'right']
-      },
-      {
-        dot: ['left', 'right'],
-        arrow: ['top', 'bottom']
-      }
-    ]
+    await wrapper.setProps({
+      showArrow: true
+    })
 
-    for (const item of dotToArrow) {
-      for (const dotItem of item.dot) {
-        await wrapper.setProps({ showArrow: true, dotPlacement: dotItem })
-
-        expect(
-          wrapper.find(`.n-carousel__arrow--${item.arrow[0]}`).exists()
-        ).toBe(true)
-        expect(
-          wrapper.find(`.n-carousel__arrow--${item.arrow[1]}`).exists()
-        ).toBe(true)
-      }
-    }
+    expect(wrapper.find('.n-carousel__arrow--right').exists()).toBe(true)
+    expect(wrapper.find('.n-carousel__arrow--left').exists()).toBe(true)
   })
 
   it('arrow button should work', async () => {
     const wrapper = mount(NCarousel, {
+      props: {
+        loop: false
+      },
       slots: {
         default: () => {
           return [
             h('img', {
               style: 'width: 100%; height: 240px; object-fit: cover;',
-              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
+              src:
+                'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
             }),
             h('img', {
               style: 'width: 100%; height: 240px; object-fit: cover;',
-              src: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
+              src:
+                'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
             })
           ]
         }
@@ -139,22 +127,91 @@ describe('n-carousel', () => {
       showArrow: true
     })
 
-    const slidesDOMArray = wrapper.find('.n-carousel__slides').findAll('div')
+    const slidesDOMArray = wrapper.findAll('.n-carousel__slide')
 
-    expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
+    expect(slidesDOMArray[0].attributes('aria-hidden')).toBe('false')
 
     await wrapper.find('.n-carousel__arrow--right').trigger('click')
+    expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
 
-    expect(slidesDOMArray[2].attributes('aria-hidden')).toBe('false')
+    await wrapper.find('.n-carousel__arrow--left').trigger('click')
+    expect(slidesDOMArray[0].attributes('aria-hidden')).toBe('false')
+  })
 
-    // FIXME: has error in node 16, not quite sure what happened
+  it('should work with `centeredSlides` prop', async () => {
+    const wrapper = mount(NCarousel, {
+      props: {
+        slidesPerView: 'auto',
+        loop: false
+      },
+      attrs: {
+        style: 'width: 240px;height: 300px;'
+      },
+      slots: {
+        default: () => {
+          return [...Array(5).keys()].map(i => {
+            return h(NCarouselItem, {
+              style: `width: ${(i + 1) * 10}%;`,
+              slots: {
+                default: () => h('div', {}, i.toString())
+              }
+            })
+          })
+        }
+      }
+    })
 
-    // await sleep(1000)
-    // void wrapper
-    //   .find('.n-carousel__arrow--left')
-    //   .trigger('click')
-    //   .then(() => {
-    //     expect(slidesDOMArray[1].attributes('aria-hidden')).toBe('false')
-    //   })
+    const wrapperRect = wrapper.element.getBoundingClientRect()
+
+    const slidesDOMArray = wrapper.findAll('.n-carousel__slide')
+    for (let i = 0; i < slidesDOMArray.length; i++) {
+      const slideDOM = slidesDOMArray[i]
+      const rect = slideDOM.element.getBoundingClientRect()
+      expect(rect.left - wrapperRect.left).toBe(
+        (wrapperRect.width - rect.width) / 2
+      )
+
+      wrapper.vm.next()
+      await nextTick()
+    }
+  })
+
+  it('should work with `trigger` prop', async () => {
+    const wrapper = mount(NCarousel, {
+      props: {
+        loop: false
+      },
+      slots: {
+        default: () => {
+          return [...Array(3).keys()].map(i => {
+            return h('div', {}, i.toString())
+          })
+        }
+      }
+    })
+
+    const dotsDOMArray = wrapper.findAll('.n-carousel__dot')
+    const slidesDOMArray = wrapper.findAll('.n-carousel__slide')
+
+    const triggerEvent = {
+      click: 'click',
+      hover: 'mouseenter'
+    }
+    const triggers = Object.keys(triggerEvent) as Array<
+    keyof typeof triggerEvent
+    >
+    for (let i = 0; i < triggers.length; i++) {
+      const trigger = triggers[i]
+      const event = triggerEvent[triggers[i]]
+      await wrapper.setProps({
+        trigger
+      })
+
+      for (let j = 0; j < dotsDOMArray.length; j++) {
+        const dotsDOM = dotsDOMArray[j]
+        await dotsDOM.trigger(event)
+        expect(slidesDOMArray[j].attributes('aria-hidden')).toBe('false')
+      }
+    }
   })
 })

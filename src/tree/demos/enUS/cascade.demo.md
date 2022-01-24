@@ -1,4 +1,4 @@
-# Cascade Check
+# Cascade checking
 
 Set `cascade` to use cascade check.
 

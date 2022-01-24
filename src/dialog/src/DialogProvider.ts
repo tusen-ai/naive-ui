@@ -7,12 +7,11 @@ import {
   provide,
   PropType,
   reactive,
-  InjectionKey,
   Ref,
   CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
-import { omit } from '../../_utils'
+import { createInjectionKey, omit } from '../../_utils'
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
 import DialogEnvironment, { exposedDialogEnvProps } from './DialogEnvironment'
 import { useClicked, useClickPosition } from 'vooks'
@@ -47,16 +46,16 @@ export interface DialogApiInjection {
   info: (options: DialogOptions) => DialogReactive
 }
 
-export const dialogApiInjectionKey: InjectionKey<DialogApiInjection> =
-  Symbol('dialogApi')
+export const dialogApiInjectionKey =
+  createInjectionKey<DialogApiInjection>('n-dialog-api')
 
 export interface DialogProviderInjection {
   clickedRef: Ref<boolean>
   clickPositionRef: Ref<{ x: number, y: number } | null>
 }
 
-export const dialogProviderInjectionKey: InjectionKey<DialogProviderInjection> =
-  Symbol('dialogProvider')
+export const dialogProviderInjectionKey =
+  createInjectionKey<DialogProviderInjection>('n-dialog-provider')
 
 interface DialogInst {
   hide: () => void

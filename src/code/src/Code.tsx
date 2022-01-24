@@ -30,6 +30,7 @@ const codeProps = {
   hljs: Object as PropType<Hljs>,
   uri: Boolean,
   inline: Boolean,
+  wordWrap: Boolean,
   // In n-log, we only need to mount code's style for highlight
   internalFontSize: Number,
   internalNoHighlight: Boolean
@@ -147,10 +148,13 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, wordWrap } = this
     return (
       <code
-        class={`${mergedClsPrefix}-code`}
+        class={[
+          `${mergedClsPrefix}-code`,
+          wordWrap && `${mergedClsPrefix}-code--word-wrap`
+        ]}
         style={this.cssVars as CSSProperties}
         ref="codeRef"
       >

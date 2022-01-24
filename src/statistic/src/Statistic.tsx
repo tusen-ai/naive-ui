@@ -1,4 +1,4 @@
-import { defineComponent, computed, CSSProperties, h, renderSlot } from 'vue'
+import { defineComponent, computed, CSSProperties, h } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -74,7 +74,7 @@ export default defineComponent({
         >
           {$slots.prefix ? (
             <span class={`${mergedClsPrefix}-statistic-value__prefix`}>
-              {renderSlot($slots, 'prefix')}
+              {$slots.prefix()}
             </span>
           ) : null}
           {this.value !== undefined ? (
@@ -88,7 +88,7 @@ export default defineComponent({
           )}
           {$slots.suffix ? (
             <span class={`${mergedClsPrefix}-statistic-value__suffix`}>
-              {renderSlot($slots, 'suffix')}
+              {$slots.suffix()}
             </span>
           ) : null}
         </div>

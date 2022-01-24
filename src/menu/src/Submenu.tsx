@@ -6,18 +6,19 @@ import {
   provide,
   computed,
   VNode,
-  VNodeChild,
-  InjectionKey
+  VNodeChild
 } from 'vue'
 import { useMemo } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
 import { NDropdown } from '../../dropdown'
 import NMenuOptionContent from './MenuOptionContent'
 import { itemRenderer } from './utils'
-import { useMenuChild, useMenuChildProps } from './use-menu-child'
+import { useMenuChild } from './use-menu-child'
+import { useMenuChildProps } from './use-menu-child-props'
 import type { SubmenuInjection } from './use-menu-child'
 import { MenuMixedOption, TmNode } from './interface'
 import { menuItemGroupInjectionKey } from './MenuOptionGroup'
+import { createInjectionKey } from '../../_utils'
 
 export const submenuProps = {
   ...useMenuChildProps,
@@ -41,8 +42,8 @@ export const submenuProps = {
   onClick: Function as PropType<() => void>
 } as const
 
-export const submenuInjectionKey: InjectionKey<SubmenuInjection> =
-  Symbol('submenu')
+export const submenuInjectionKey =
+  createInjectionKey<SubmenuInjection>('n-submenu')
 
 export default defineComponent({
   name: 'Submenu',

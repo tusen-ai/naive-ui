@@ -324,6 +324,9 @@ export default defineComponent({
             />
           )
         ) : null}
+        {this.bordered ? (
+          <div class={`${mergedClsPrefix}-layout-sider__border`} />
+        ) : null}
       </aside>
     )
   }

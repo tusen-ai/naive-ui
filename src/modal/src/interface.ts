@@ -1,13 +1,14 @@
-import { Ref, ComponentPublicInstance, InjectionKey } from 'vue'
+import { Ref, ComponentPublicInstance } from 'vue'
 import type { MergedTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils/vue/create-injection-key'
 import type { ModalTheme } from '../styles'
 
 export type ModalBodyInjection = Ref<
 HTMLElement | ComponentPublicInstance | null
 > | null
 
-export const modalBodyInjectionKey: InjectionKey<ModalBodyInjection> =
-  Symbol('modalBody')
+export const modalBodyInjectionKey =
+  createInjectionKey<ModalBodyInjection>('n-modal-body')
 
 export interface ModalInjection {
   getMousePosition: () => {
@@ -21,4 +22,4 @@ export interface ModalInjection {
   transformOriginRef: Ref<'mouse' | 'center'>
 }
 
-export const modalInjectionKey: InjectionKey<ModalInjection> = Symbol('modal')
+export const modalInjectionKey = createInjectionKey<ModalInjection>('n-modal')

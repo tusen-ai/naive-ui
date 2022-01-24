@@ -1,22 +1,18 @@
-import { h, defineComponent, inject, PropType, VNodeChild, VNode } from 'vue'
-import { throwError, warn } from '../../_utils'
-import { tabsInjectionKey } from './interface'
+import {
+  h,
+  defineComponent,
+  inject,
+  PropType,
+  VNodeChild,
+  VNode,
+  watchEffect,
+  HTMLAttributes
+} from 'vue'
+import { throwError, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { tabsInjectionKey } from './interface'
 
 export const tabPaneProps = {
-  /** @deprecated */
-  label: {
-    type: [String, Number, Object, Function] as PropType<
-    string | number | VNode | (() => VNodeChild)
-    >,
-    default: undefined,
-    validator: () => {
-      if (__DEV__) {
-        warn('tab-pane', '`label` is deprecated, please use `tab` instead.')
-      }
-      return true
-    }
-  },
   tab: [String, Number, Object, Function] as PropType<
   string | number | VNode | (() => VNodeChild)
   >,
@@ -32,7 +28,12 @@ export const tabPaneProps = {
   closable: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
-  }
+  },
+  tabProps: Object as PropType<HTMLAttributes>,
+  /** @deprecated */
+  label: [String, Number, Object, Function] as PropType<
+  string | number | VNode | (() => VNodeChild)
+  >
 } as const
 
 export type TabPaneProps = ExtractPublicPropTypes<typeof tabPaneProps>
@@ -42,7 +43,17 @@ export default defineComponent({
   name: 'TabPane',
   alias: ['TabPanel'],
   props: tabPaneProps,
-  setup () {
+  setup (props) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.label !== undefined) {
+          warnOnce(
+            'tab-pane',
+            '`label` is deprecated, please use `tab` instead.'
+          )
+        }
+      })
+    }
     const NTab = inject(tabsInjectionKey, null)
     if (!NTab) {
       throwError('tab-pane', '`n-tab-pane` must be placed inside `n-tabs`.')
@@ -55,7 +66,10 @@ export default defineComponent({
   },
   render () {
     return (
-      <div class={[`${this.mergedClsPrefix}-tab-pane`, this.class]} style={this.style}>
+      <div
+        class={[`${this.mergedClsPrefix}-tab-pane`, this.class]}
+        style={this.style}
+      >
         {this.$slots}
       </div>
     )

@@ -121,7 +121,7 @@ All the properties can be modified dynamically.
 | positive-text | `string` | `undefined` | Corresponding button won't show if not set. |
 | show-icon | `boolean` | `true` | Whether to display the `icon`. |
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a `render` function. |
-| type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |
+| type | `'error \| 'success' \| 'warning' \| 'info'` | `'warning'` | Dialog type. |
 | on-close | `() => void` | `undefined` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |
 | on-negative-click | `() => void` | `undefined` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |
 | on-positive-click | `() => void` | `undefined` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |

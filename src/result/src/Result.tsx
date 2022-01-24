@@ -1,11 +1,4 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  PropType,
-  renderSlot,
-  CSSProperties
-} from 'vue'
+import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
@@ -25,14 +18,11 @@ import image418 from './418'
 import image403 from './403'
 import style from './styles/index.cssr'
 
-const imgMap = {
+const iconMap = {
   403: image403,
   404: image404,
   418: image418,
-  500: image500
-}
-
-const iconMap = {
+  500: image500,
   info: <InfoIcon />,
   success: <SuccessIcon />,
   warning: <WarningIcon />,
@@ -109,28 +99,32 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
       >
         <div class={`${mergedClsPrefix}-result-icon`}>
-          {status in imgMap ? (
-            imgMap[status as unknown as keyof typeof imgMap]
-          ) : (
+          {$slots.icon?.() || (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => iconMap[status as keyof typeof iconMap] }}
+              {{ default: () => iconMap[status] }}
             </NBaseIcon>
           )}
         </div>
         <div class={`${mergedClsPrefix}-result-header`}>
-          <div class={`${mergedClsPrefix}-result-header__title`}>
-            {this.title}
-          </div>
-          <div class={`${mergedClsPrefix}-result-header__description`}>
-            {this.description}
-          </div>
+          {this.title ? (
+            <div class={`${mergedClsPrefix}-result-header__title`}>
+              {this.title}
+            </div>
+          ) : null}
+          {this.description ? (
+            <div class={`${mergedClsPrefix}-result-header__description`}>
+              {this.description}
+            </div>
+          ) : null}
         </div>
-        {$slots.default ? (
+        {$slots.default && (
           <div class={`${mergedClsPrefix}-result-content`}>{$slots}</div>
-        ) : null}
-        <div class={`${mergedClsPrefix}-result-footer`}>
-          {renderSlot($slots, 'footer')}
-        </div>
+        )}
+        {$slots.footer && (
+          <div class={`${mergedClsPrefix}-result-footer`}>
+            {$slots.footer()}
+          </div>
+        )}
       </div>
     )
   }

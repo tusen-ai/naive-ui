@@ -34,7 +34,7 @@ Mention requires `v2.2.0` and above.
 | loading | `boolean` | `false` | Whether the selection panel of mentions is in a loading state. |
 | prefix | `string \| string[]` | `'@'` | Prefix character(s) to trigger mentions. The string length(s) must be exactly 1. |
 | placeholder | `string` | `''` | Placeholder. |
-| render-label | `undefined \| (option: MentionOption) => VNodeChild` | `undefined` | Options' labels render function. |
+| render-label | `(option: MentionOption) => VNodeChild` | `undefined` | Options' labels render function. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |
 | on-update:value | `(value: string) => void` | `undefined` | Triggered when the input box value is updated. |
 | on-select | `(option: MentionOption, prefix: string) => void` | `undefined` | Triggered when the input box is selected. |
@@ -55,10 +55,10 @@ Mention requires `v2.2.0` and above.
 
 ### Mention Methods
 
-| Name  | Type         | Description                   |
-| ----- | ------------ | ----------------------------- |
+| Name  | Type         | Description                      |
+| ----- | ------------ | -------------------------------- |
 | focus | `() => void` | Manually focus on the component. |
-| blur  | `() => void` | Manually blur the component.  |
+| blur  | `() => void` | Manually blur the component.     |
 
 ### Mention Slots
 

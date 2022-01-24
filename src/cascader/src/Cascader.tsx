@@ -9,7 +9,8 @@ import {
   toRef,
   CSSProperties,
   isReactive,
-  watchEffect
+  watchEffect,
+  VNodeChild
 } from 'vue'
 import { createTreeMate, SubtreeNotLoadedError, CheckStrategy } from 'treemate'
 import {
@@ -32,9 +33,8 @@ import type { CascaderTheme } from '../styles'
 import { getPathLabel, getRawNodePath } from './utils'
 import CascaderMenu from './CascaderMenu'
 import CascaderSelectMenu from './CascaderSelectMenu'
-import {
+import type {
   CascaderOption,
-  cascaderInjectionKey,
   CascaderMenuInstance,
   ExpandTrigger,
   Filter,
@@ -43,8 +43,10 @@ import {
   OnUpdateValue,
   OnUpdateValueImpl,
   SelectMenuInstance,
-  Value
+  Value,
+  CascaderInst
 } from './interface'
+import { cascaderInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
 const cascaderProps = {
@@ -121,6 +123,9 @@ const cascaderProps = {
     type: String,
     default: 'children'
   },
+  renderLabel: Function as PropType<
+  (option: CascaderOption, checked: boolean) => VNodeChild
+  >,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:show': [Function, Array] as PropType<
@@ -756,6 +761,7 @@ export default defineComponent({
       optionHeightRef,
       localeRef,
       labelFieldRef: toRef(props, 'labelField'),
+      renderLabelRef: toRef(props, 'renderLabel'),
       syncCascaderMenuPosition,
       syncSelectMenuPosition,
       updateKeyboardKey,
@@ -768,7 +774,16 @@ export default defineComponent({
       handleSelectMenuClickOutside,
       handleCascaderMenuClickOutside
     })
+    const exposedMethods: CascaderInst = {
+      focus: () => {
+        triggerInstRef.value?.focus()
+      },
+      blur: () => {
+        triggerInstRef.value?.blur()
+      }
+    }
     return {
+      ...exposedMethods,
       selectMenuFollowerRef,
       cascaderMenuFollowerRef,
       triggerInstRef,

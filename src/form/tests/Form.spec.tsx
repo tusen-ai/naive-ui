@@ -195,4 +195,23 @@ describe('n-form', () => {
     ).toBe(true)
     expect(wrapper.findAll('.n-form-item-label').length).toBe(0)
   })
+
+  it('includes `for` attribute in label', () => {
+    const wrapper = mount(() => (
+      <NForm>
+        {{
+          default: () => {
+            return (
+              <NFormItem label="star kirby" labelProps={{ for: 'input' }}>
+                {{
+                  default: () => <NInput />
+                }}
+              </NFormItem>
+            )
+          }
+        }}
+      </NForm>
+    ))
+    expect(wrapper.find('.n-form-item-label').attributes('for')).toBe('input')
+  })
 })
