@@ -42,6 +42,24 @@ export const unconfigurableStyle = c([
       ])
     ])
   ]),
+  cB('base-selection', [
+    cB('base-suffix', {
+      transition: 'all .3s'
+    }),
+    cM('active', [
+      cB(
+        'base-suffix',
+        {
+          transform: 'translateY(-50%) rotate(180deg)'
+        },
+        [
+          cB('base-suffix__arrow', {
+            color: '#4FB233'
+          })
+        ]
+      )
+    ])
+  ]),
   cB('dropdown-menu', [
     cB('dropdown-option', [
       c('&:first-child', [
