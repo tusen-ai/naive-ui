@@ -269,16 +269,10 @@ export const unconfigurableStyle = c([
         ])
       ])
     ]),
-    cE(
-      'rail',
-      {
-        overflow: 'visible'
-      },
-      [
-        cE('button', {
-          backgroundImage: 'linear-gradient(133deg, #E2E5E9 0%, #999999 100%)'
-        })
-      ]
-    )
+    cE('rail', [
+      cE('button', {
+        backgroundImage: 'linear-gradient(133deg, #E2E5E9 0%, #999999 100%)'
+      })
+    ])
   ])
 ])

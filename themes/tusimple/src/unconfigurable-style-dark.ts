@@ -272,17 +272,11 @@ export const unconfigurableStyle = c([
         ])
       ])
     ]),
-    cE(
-      'rail',
-      {
-        overflow: 'visible'
-      },
-      [
-        cE('button', {
-          backgroundImage: 'linear-gradient(#E2E5E9, #ADADAD)'
-        })
-      ]
-    )
+    cE('rail', [
+      cE('button', {
+        backgroundImage: 'linear-gradient(#E2E5E9, #ADADAD)'
+      })
+    ])
   ]),
   cB('date-panel', [
     cB('date-panel-dates', [
