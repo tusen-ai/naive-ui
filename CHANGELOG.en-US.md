@@ -4,7 +4,8 @@
 
 ### Fixes
 
-- `n-input` placeholder has no line-wrap with `textarea` type.
+- `n-input` placeholder has no line-wrap in `textarea` type.
+- `date-picker` lacks space between panel year & month.
 
 ### Feats
 

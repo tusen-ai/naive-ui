@@ -5,6 +5,7 @@
 ### Fixes
 
 - `n-input` 在类型为 `textarea` 时 placeholder 无法换行
+- `date-picker` 面板年和月之前缺少空格
 
 ### Feats
 
