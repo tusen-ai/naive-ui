@@ -188,6 +188,7 @@ export default c([
         line-height: var(--n-line-height-textarea);
         margin: 0;
         resize: none;
+        white-space: pre-wrap;
       `),
       cE('textarea-mirror', `
         pointer-events: none;
