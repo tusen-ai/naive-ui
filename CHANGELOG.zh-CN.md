@@ -10,6 +10,7 @@
 ### Feats
 
 - `n-color-picker` 新增 `disabled` 属性
+- `n-date-picker` 快速跳转面板增加触发背景区域
 
 ## 2.24.4 (2022-01-24)
 

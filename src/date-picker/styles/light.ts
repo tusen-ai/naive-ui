@@ -43,6 +43,7 @@ export const self = (vars: ThemeCommonVars) => {
     panelTextColor: textColor2,
     arrowColor: iconColor,
     calendarTitleTextColor: textColor1,
+    calendarTitleColorHover: hoverColor,
     calendarDaysTextColor: textColor2,
     panelHeaderDividerColor: dividerColor,
     calendarDaysDividerColor: dividerColor,

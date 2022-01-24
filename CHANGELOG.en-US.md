@@ -10,6 +10,7 @@
 ### Feats
 
 - `n-color-picker` adds `disabled` prop.
+- `n-date-picker` adds trigger area for year & month quick jump.
 
 ## 2.24.4 (2022-01-24)
 

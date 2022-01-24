@@ -68,7 +68,11 @@ export default defineComponent({
                 {{
                   default: () => (
                     <div
-                      class={`${mergedClsPrefix}-date-panel-month__text`}
+                      class={[
+                        `${mergedClsPrefix}-date-panel-month__text`,
+                        this.show &&
+                          `${mergedClsPrefix}-date-panel-month__text--active`
+                      ]}
                       onClick={this.handleHeaderClick}
                     >
                       {this.monthBeforeYear
