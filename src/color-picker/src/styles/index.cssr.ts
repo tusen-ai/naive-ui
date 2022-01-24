@@ -190,18 +190,7 @@ export default c([
       top: 4px;
       bottom: 4px;
     `),
-    cM('disabled', [
-      c('&::after', `
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: rgb(250, 250, 252, 0.7);
-        cursor: not-allowed;
-        content: "";
-      `)
-    ]),
+    cM('disabled', 'cursor: not-allowed'),
     cB('color-picker-checkboard', `
       border-radius: var(--n-border-radius);
     `, [
