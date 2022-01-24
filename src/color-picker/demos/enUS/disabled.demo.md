@@ -1,6 +1,4 @@
-# disabled
-
-If you don't want it to be used now.
+# Disabled
 
 ```html
 <n-color-picker disabled />

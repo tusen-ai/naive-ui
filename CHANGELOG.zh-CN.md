@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.24.5 (2022-01-25)
 
 ### Fixes
 
