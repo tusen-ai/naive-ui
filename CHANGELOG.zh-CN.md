@@ -9,6 +9,10 @@
 - 修复 `n-tree` 在 `happydom` 测试环境下由于 `Image` 对象报错
 - 修复 `selection` `maxTagCount` 标签 size 错误问题
 
+### Feats
+
+- `n-data-table` 的 `on-update:checked-row-keys` 函数增加 `rowData` 参数， 关闭 [#2215](https://github.com/TuSimple/naive-ui/issues/2215)
+
 ### i18n
 
 - 新增 plPL locale，关闭 [#2354](https://github.com/TuSimple/naive-ui/issues/2354)

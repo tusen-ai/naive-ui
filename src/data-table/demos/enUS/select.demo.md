@@ -59,7 +59,7 @@ export default defineComponent({
       pagination: {
         pageSize: 5
       },
-      handleCheck (rowKeys) {
+      handleCheck (rowKeys, rowData) {
         checkedRowKeysRef.value = rowKeys
       }
     }

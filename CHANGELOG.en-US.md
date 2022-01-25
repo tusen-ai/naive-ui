@@ -9,6 +9,10 @@
 - Fix `n-tree` throws `Image` error in `happydom` testing environment.
 - fix `selection` `maxTagCount` tag size error.
 
+### Feats
+
+- `n-data-table` 's `on-update:checked-row-keys` add `rowData` parameter, closes [#2215](https://github.com/TuSimple/naive-ui/issues/2215).
+
 ### i18n
 
 - Add plPL locale, closes [#2354](https://github.com/TuSimple/naive-ui/issues/2354).

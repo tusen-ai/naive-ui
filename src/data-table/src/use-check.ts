@@ -77,50 +77,72 @@ export function useCheck (
   const headerCheckboxDisabledRef = computed(() => {
     return paginatedDataRef.value.length === 0
   })
-  function doUpdateCheckedRowKeys (keys: RowKey[]): void {
+  function doUpdateCheckedRowKeys (
+    keys: RowKey[],
+    rowData: InternalRowData[]
+  ): void {
     const {
       'onUpdate:checkedRowKeys': _onUpdateCheckedRowKeys,
       onUpdateCheckedRowKeys,
       onCheckedRowKeysChange
     } = props
-    if (_onUpdateCheckedRowKeys) call(_onUpdateCheckedRowKeys, keys)
-    if (onUpdateCheckedRowKeys) call(onUpdateCheckedRowKeys, keys)
-    if (onCheckedRowKeysChange) call(onCheckedRowKeysChange, keys)
+    if (_onUpdateCheckedRowKeys) call(_onUpdateCheckedRowKeys, keys, rowData)
+    if (onUpdateCheckedRowKeys) call(onUpdateCheckedRowKeys, keys, rowData)
+    if (onCheckedRowKeysChange) call(onCheckedRowKeysChange, keys, rowData)
     uncontrolledCheckedRowKeysRef.value = keys
   }
   function doCheck (rowKey: RowKey | RowKey[]): void {
     if (props.loading) return
-    doUpdateCheckedRowKeys(
-      treeMateRef.value.check(rowKey, mergedCheckedRowKeysRef.value, {
+    const rowData: InternalRowData[] = []
+    const checkedKeys = treeMateRef.value.check(
+      rowKey,
+      mergedCheckedRowKeysRef.value,
+      {
         cascade: props.cascade
-      }).checkedKeys
-    )
+      }
+    ).checkedKeys
+    checkedKeys.forEach((key) => {
+      const data = treeMateRef.value.getNode(key)?.rawNode
+      data && rowData.push(data)
+    })
+    doUpdateCheckedRowKeys(checkedKeys, rowData)
   }
   function doUncheck (rowKey: RowKey | RowKey[]): void {
     if (props.loading) return
-    doUpdateCheckedRowKeys(
-      treeMateRef.value.uncheck(rowKey, mergedCheckedRowKeysRef.value, {
+    const rowData: InternalRowData[] = []
+    const checkedKeys = treeMateRef.value.uncheck(
+      rowKey,
+      mergedCheckedRowKeysRef.value,
+      {
         cascade: props.cascade
-      }).checkedKeys
-    )
+      }
+    ).checkedKeys
+    checkedKeys.forEach((key) => {
+      const data = treeMateRef.value.getNode(key)?.rawNode
+      data && rowData.push(data)
+    })
+    doUpdateCheckedRowKeys(checkedKeys, rowData)
   }
   function doCheckAll (checkWholeTable: boolean = false): void {
     const { value: column } = selectionColumnRef
     if (!column || props.loading) return
     const rowKeysToCheck: RowKey[] = []
+    const rowData: InternalRowData[] = []
     ;(checkWholeTable
       ? treeMateRef.value.treeNodes
       : paginatedDataRef.value
     ).forEach((tmNode) => {
       if (!tmNode.disabled) {
         rowKeysToCheck.push(tmNode.key)
+        rowData.push(tmNode.rawNode)
       }
     })
     // alway cascade, to emit correct row keys
     doUpdateCheckedRowKeys(
       treeMateRef.value.check(rowKeysToCheck, mergedCheckedRowKeysRef.value, {
         cascade: true
-      }).checkedKeys
+      }).checkedKeys,
+      rowData
     )
   }
   function doUncheckAll (checkWholeTable: boolean = false): void {
@@ -143,7 +165,8 @@ export function useCheck (
         {
           cascade: true
         }
-      ).checkedKeys
+      ).checkedKeys,
+      []
     )
   }
   return {
