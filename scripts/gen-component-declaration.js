@@ -27,8 +27,8 @@ async function generateComponentsType () {
       components[key] = entry
     }
   })
-  const originalContent = exist(resolve(TYPE_ROOT, 'components.d.ts'))
-    ? await fs.readFile(resolve(TYPE_ROOT, 'components.d.ts'), 'utf-8')
+  const originalContent = exist(resolve(TYPE_ROOT, 'volar.d.ts'))
+    ? await fs.readFile(resolve(TYPE_ROOT, 'volar.d.ts'), 'utf-8')
     : ''
 
   const originImports = parseComponentsDeclaration(originalContent)
