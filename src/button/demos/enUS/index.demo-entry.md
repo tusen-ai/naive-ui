@@ -23,6 +23,7 @@ color
 group
 icon-button
 popover
+pressed
 ```
 
 ## API
@@ -43,6 +44,7 @@ popover
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. |
 | quaternary | `boolean` | `false` | Whether the button is quaternary button. |
 | loading | `boolean` | `false` | Whether the button shows the loading status. |
+| pressed | `boolean` | `undefined` | Whether the button shows the pressed status. |
 | round | `boolean` | `false` | Whether the button shows rounded corners. |
 | secondary | `boolean` | `false` | Whether the button is secondary button. |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Button size. |

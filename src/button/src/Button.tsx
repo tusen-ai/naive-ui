@@ -8,7 +8,8 @@ import {
   PropType,
   CSSProperties,
   ButtonHTMLAttributes,
-  watchEffect
+  watchEffect,
+  watch
 } from 'vue'
 import { useMemo } from 'vooks'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
@@ -76,6 +77,10 @@ const buttonProps = {
     type: Boolean,
     default: true
   },
+  pressed: {
+    type: Boolean,
+    default: undefined
+  },
   onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   internalAutoFocus: Boolean
 } as const
@@ -102,7 +107,18 @@ const Button = defineComponent({
     }
     const selfElRef = ref<HTMLElement | null>(null)
     const waveElRef = ref<BaseWaveRef | null>(null)
-    const enterPressedRef = ref(false)
+    const enterPressedRef = ref(
+      typeof props.pressed === 'undefined' ? false : props.pressed
+    )
+    watch(
+      () => props.pressed,
+      (nextPressed) => {
+        enterPressedRef.value =
+          typeof nextPressed === 'undefined'
+            ? enterPressedRef.value
+            : nextPressed
+      }
+    )
     onMounted(() => {
       const { value: selfEl } = selfElRef
       if (
@@ -170,7 +186,8 @@ const Button = defineComponent({
           if (!props.keyboard) {
             return
           }
-          enterPressedRef.value = false
+          enterPressedRef.value =
+            typeof props.pressed === 'undefined' ? false : props.pressed
       }
     }
     const handleKeydown = (e: KeyboardEvent): void => {
@@ -181,11 +198,13 @@ const Button = defineComponent({
             e.preventDefault()
             return
           }
-          enterPressedRef.value = true
+          enterPressedRef.value =
+            typeof props.pressed === 'undefined' ? true : props.pressed
       }
     }
     const handleBlur = (): void => {
-      enterPressedRef.value = false
+      enterPressedRef.value =
+        typeof props.pressed === 'undefined' ? false : props.pressed
     }
     const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
     const themeRef = useTheme(
