@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.24.6 (2022-01-25)
+
+### Feats
+
+- `n-dynamic-tag` adds `input-props` prop.
+
 ## 2.24.5 (2022-01-25)
 
 ### Fixes
@@ -11,7 +17,6 @@
 
 - `n-color-picker` adds `disabled` prop.
 - `n-date-picker` adds trigger area for year & month quick jump.
-- `n-dynamic-tag` adds `input-props` prop.
 
 ## 2.24.4 (2022-01-24)
 

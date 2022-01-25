@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.24.6 (2022-01-25)
+
+### Feats
+
+- `n-dynamic-tag` 新增 `input-props` 属性
+
 ## 2.24.5 (2022-01-25)
 
 ### Fixes
@@ -11,7 +17,6 @@
 
 - `n-color-picker` 新增 `disabled` 属性
 - `n-date-picker` 快速跳转面板增加触发背景区域
-- `n-dynamic-tag` 新增 `input-props` 属性
 
 ## 2.24.4 (2022-01-24)
 
