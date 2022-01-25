@@ -321,4 +321,17 @@ describe('n-button', () => {
       'n-button-group--vertical'
     )
   })
+
+  it('should work with `pressed` prop', () => {
+    const wrapper = mount(NButton, {
+      props: {
+        pressed: true
+      },
+      slots: {
+        default: () => 'test'
+      }
+    })
+
+    expect(wrapper.find('button').classes()).toContain('n-button--pressed')
+  })
 })

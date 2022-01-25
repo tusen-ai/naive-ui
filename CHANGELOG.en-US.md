@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+### Feats
+
+- `n-button` adds `pushed` prop.
+
 ## 2.24.5 (2022-01-25)
 
 ### Fixes
