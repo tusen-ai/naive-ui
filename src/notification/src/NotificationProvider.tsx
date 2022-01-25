@@ -86,6 +86,14 @@ const notificationProviderProps = {
     'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
     >,
     default: 'top-right'
+  },
+  top: {
+    type: String,
+    default: '0px'
+  },
+  bottom: {
+    type: String,
+    default: '0px'
   }
 }
 
@@ -203,6 +211,8 @@ export default defineComponent({
             <NotificationContainer
               scrollable={this.scrollable}
               placement={this.placement}
+              top={this.top}
+              bottom={this.bottom}
             >
               {{
                 default: () => {

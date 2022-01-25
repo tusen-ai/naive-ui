@@ -48,6 +48,8 @@ closable
 duration
 max
 placement
+custom-top
+custom-bottom
 ```
 
 ## API
@@ -57,6 +59,8 @@ placement
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `'top-right'` | Placement of all notifications. |
+| top | `string ` | `0px` | The top pops up in pixels away from the top position. |
+| bottom | `string ` | `0px` | The bottom pops up in pixels away from the bottom position. |
 | max | `number` | `undefined` | Limit the number of notifications to display. |
 | scrollable | `boolean` | `true` | Whether notification can be scroll. |
 | to | `string \| HTMLElement` | `'body'` | Container node of notification container. |
