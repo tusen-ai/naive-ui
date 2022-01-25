@@ -1,18 +1,30 @@
 # CHANGELOG
 
-## 2.24.4
+## 2.24.5 (2022-01-25)
+
+### Fixes
+
+- `n-input` placeholder has no line-wrap in `textarea` type.
+- `date-picker` lacks space between panel year & month.
+
+### Feats
+
+- `n-color-picker` adds `disabled` prop.
+- `n-date-picker` adds trigger area for year & month quick jump.
+
+## 2.24.4 (2022-01-24)
 
 ### Fixes
 
 - Update vueuc version.
 
-## 2.24.3
+## 2.24.3 (2022-01-24)
 
 ### Fixes
 
 - Fix `n-layout-sider` has no border transition.
 
-## 2.24.2
+## 2.24.2 (2022-01-24)
 
 ### Fixes
 

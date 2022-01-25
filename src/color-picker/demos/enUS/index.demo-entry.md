@@ -8,6 +8,7 @@ Unlike the real world, these color values are discrete.
 basic
 alpha
 size
+disabled
 modes
 form
 swatches
@@ -28,6 +29,7 @@ native
 | show-alpha | `boolean` | `true` | Whether the alpha channel can be adjusted. |  |
 | show-preview | `boolean` | `false` | Whether the color preview is shown. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the picker. |  |
+| disabled | `boolean` | `false` | Whether to disable the color picker. | 2.24.5 |
 | swatches | `string[]` | `undefined` | Value of the swatches. |  |
 | to | `string \| HTMLElement` | `'body'` | Where to attach the panel to. |  |
 | value | `string \| null` | `undefined` | Value of the picker. |  |
