@@ -257,7 +257,8 @@ export default defineComponent({
       ensureKey,
       handleValueChange,
       remove,
-      createItem
+      createItem,
+      max
     } = this
     return (
       <div
@@ -269,6 +270,7 @@ export default defineComponent({
             block
             ghost
             dashed
+            disabled={max === 0}
             size={buttonSize}
             theme={mergedTheme.peers.Button}
             themeOverrides={mergedTheme.peerOverrides.Button}
