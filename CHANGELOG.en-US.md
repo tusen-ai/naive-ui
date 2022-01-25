@@ -186,6 +186,7 @@
 
 ### Feats
 
+- `n-icon` add `icon` prop.
 - `<meta name="naive-ui-style" />` can be used to controll the component style's position.
 - `n-empty` adds `show-icon` prop.
 - `n-modal` adds a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
