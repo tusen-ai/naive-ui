@@ -22,6 +22,7 @@ slot
 | default-value | `string[]` | `[]` | Default value. |
 | disabled | `boolean` | `false` | Whether the tag is disabled. |
 | input-style | `string \| Object` | `undefined` | Customize the style of the input. |
+| input-props | `HTMLInputAttributes` | `undefined` | The attributes of the input element within the dynamic tag. |
 | max | `number` | `undefined` | Maximum number of tags. |
 | round | `boolean` | `false` | Whether the tag has rounded corners. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |
