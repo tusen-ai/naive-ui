@@ -24,7 +24,7 @@ export default defineComponent({
     depth: [String, Number] as PropType<Depth>,
     size: [Number, String],
     color: String,
-    icon: Object as PropType<Component>
+    component: Object as PropType<Component>
   },
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
@@ -66,7 +66,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { $parent, depth, mergedClsPrefix, icon } = this
+    const { $parent, depth, mergedClsPrefix, component } = this
     if ($parent?.$options?._n_icon__) {
       warn('icon', "don't wrap `n-icon` inside `n-icon`")
     }
@@ -83,7 +83,7 @@ export default defineComponent({
         ],
         style: Object.assign(this.cssVars, this.mergedStyle)
       }),
-      icon ? h(icon) : this.$slots
+      component ? h(component) : this.$slots
     )
   }
 })

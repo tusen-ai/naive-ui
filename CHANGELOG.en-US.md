@@ -1,10 +1,15 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
+
+### Feats
+
+- `n-icon` add `component` prop.
 
 ### Fixes
 
-- Fix `n-dynamic-input` can add item when max is 0, closes [#2271](https://github.com/TuSimple/naive-ui/issues/2271)
+- Fix `n-dynamic-input` can add item when max is 0, closes [#2271](https://github.com/TuSimple/naive-ui/issues/2271).
+- Fix `n-dialog` useless `console.log`.
 
 ## 2.24.5 (2022-01-25)
 
@@ -186,7 +191,6 @@
 
 ### Feats
 
-- `n-icon` add `icon` prop.
 - `<meta name="naive-ui-style" />` can be used to controll the component style's position.
 - `n-empty` adds `show-icon` prop.
 - `n-modal` adds a11y support, closes [#1877](https://github.com/TuSimple/naive-ui/issues/1877).
