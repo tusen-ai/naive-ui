@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+- Fix `n-dynamic-input` can add item when max is 0, closes [#2271](https://github.com/TuSimple/naive-ui/issues/2271)
+
 ## 2.24.5 (2022-01-25)
 
 ### Fixes
