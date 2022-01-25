@@ -19,7 +19,7 @@ depth.vue
 | color | `string` | `undefined` | Icon color. |  |
 | depth | `1 \| 2 \| 3 \| 4 \| 5` | `undefined` | Icon depth. |  |
 | size | `number \| string` | `undefined` | Icon size (when the unit is not specified the default unit is `px`). |  |
-| component | `Component` | `undefined` | Icon component to display. | NEXT_VERSION |
+| component | `Component` | `undefined` | Icon component to display. | 2.24.6 |
 
 ### Icon Slots
 

@@ -1,5 +1,5 @@
 <markdown>
-# Custom Icon
+# Customize icon
 
 (Make sure SVG's viewBox attribute is set)
 </markdown>

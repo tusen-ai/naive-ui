@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.24.6 (2022-01-26)
 
 ### Feats
 
