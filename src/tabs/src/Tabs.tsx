@@ -55,7 +55,7 @@ const tabsProps = {
   },
   closable: Boolean,
   justifyContent: String as PropType<
-  'space-between' | 'space-around' | 'space-evenly'
+  'space-between' | 'space-around' | 'space-evenly' | 'center' | 'start' | 'end'
   >,
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
