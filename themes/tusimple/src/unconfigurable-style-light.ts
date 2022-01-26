@@ -90,7 +90,7 @@ export const unconfigurableStyle = c([
           c('&:nth-child(7n + 1)::before', {
             left: '0'
           }),
-          c('&:nth-child(7n + 7)::before',{
+          c('&:nth-child(7n + 7)::before', {
             right: '0'
           })
         ])
@@ -103,6 +103,11 @@ export const unconfigurableStyle = c([
         backgroundColor: 'transparent'
       })
     ])
+  ]),
+  cB('dialog', [
+    cB('dialog__title', {
+      marginTop: '20px'
+    })
   ]),
   cB('input', [
     cM('textarea', [

@@ -81,9 +81,12 @@ export const unconfigurableStyle = c([
   cB('date-panel', [
     cB('date-panel-dates', [
       cB('date-panel-date', [
-        cM('current',{
+        cM(
+          'current',
+          {
             color: '#4FB233'
-          },[
+          },
+          [
             cB('date-panel-date__sup', {
               display: 'none'
             })
@@ -106,6 +109,11 @@ export const unconfigurableStyle = c([
         backgroundColor: 'transparent'
       })
     ])
+  ]),
+  cB('dialog', [
+    cB('dialog__title', {
+      marginTop: '20px'
+    })
   ]),
   cB('tabs', [
     cB('tabs-bar', {
