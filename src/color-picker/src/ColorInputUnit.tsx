@@ -1,6 +1,6 @@
 import { defineComponent, h, inject, PropType, ref, watchEffect } from 'vue'
 import { NInput } from '../../input'
-import { colorPickerThemeInjectionKey } from './ColorPicker'
+import { colorPickerInjectionKey } from './ColorPicker'
 
 // 0 - 255
 function normalizeRgbUnit (value: string): number | false {
@@ -66,7 +66,7 @@ export default defineComponent({
   setup (props) {
     const inputValueRef = ref<string>('')
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const themeRef = inject(colorPickerThemeInjectionKey, null)!
+    const { themeRef } = inject(colorPickerInjectionKey, null)!
     watchEffect(() => {
       inputValueRef.value = getInputString()
     })

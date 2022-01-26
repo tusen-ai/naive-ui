@@ -2,7 +2,7 @@ import { inject, computed, Ref } from 'vue'
 import { enUS, dateEnUS } from '../locales'
 import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
 
-export default function createLocaleMixin<T extends keyof typeof enUS> (
+export default function useLocale<T extends keyof typeof enUS> (
   ns: T
 ): {
     localeRef: Ref<typeof enUS[T]>

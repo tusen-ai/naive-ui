@@ -1,4 +1,4 @@
-import { c, cB } from '../../../_utils/cssr'
+import { c, cB, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-font-size
@@ -20,6 +20,12 @@ export default c([
     font-size: var(--n-font-size);
     font-family: var(--n-font-family);
   `, [
+    cM('word-wrap', [
+      c('pre', `
+        white-space: pre-wrap;
+        word-break: break-all;
+      `)
+    ]),
     c('pre', `
       margin: 0;
       font-family: inherit;

@@ -27,7 +27,7 @@ striped
 | --- | --- | --- | --- |
 | bottom-bordered | `boolean` | `true` | 表格底部是否有边框，在 `bordered` 为 `true` 时该参数无效 |
 | bordered | `boolean` | `true` | 是否显示边框 |
-| single-column | `boolean` | `false` | 是否展示为一列（`true` 时每一列都有 `border-right`） |
-| single-line | `boolean` | `true` | 是否展示为一行（`true` 时每一行都有 `border-bottom`） |
+| single-column | `boolean` | `false` | 是否不设定行的分割线，当参数为`true`时，则单元格没有下边线 |
+| single-line | `boolean` | `true` | 是否不设定列的分割线，当参数值为 `true` 时，则单元格没有右边线 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格尺寸大小 |
 | striped | `boolean` | `false` | 是否使用斑马线条纹 |

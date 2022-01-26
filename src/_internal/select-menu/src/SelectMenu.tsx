@@ -5,12 +5,11 @@ import {
   computed,
   defineComponent,
   PropType,
-  watch,
   toRef,
-  renderSlot,
   provide,
   nextTick,
-  watchEffect
+  watch,
+  WatchStopHandle
 } from 'vue'
 import { TreeNode, createIndexGetter } from 'treemate'
 import { VirtualList, VirtualListInst } from 'vueuc'
@@ -95,6 +94,10 @@ export default defineComponent({
     onTabOut: Function as PropType<() => void>,
     onMouseenter: Function as PropType<(e: MouseEvent) => void>,
     onMouseleave: Function as PropType<(e: MouseEvent) => void>,
+    resetMenuOnOptionsChange: {
+      type: Boolean,
+      default: true
+    },
     // deprecated
     onToggle: Function as PropType<(tmNode: TreeNode<SelectBaseOption>) => void>
   },
@@ -133,15 +136,32 @@ export default defineComponent({
           : null
       )
     }
-    initPendingNode()
-    onMounted(() => {
-      watchEffect(() => {
-        if (props.show) {
-          initPendingNode()
-          void nextTick(scrollToPendingNode)
+
+    let initPendingNodeWatchStopHandle: WatchStopHandle | undefined
+    watch(
+      toRef(props, 'show'),
+      (value) => {
+        if (value) {
+          initPendingNodeWatchStopHandle = watch(
+            props.resetMenuOnOptionsChange
+              ? [toRef(props, 'treeMate'), toRef(props, 'multiple')]
+              : [toRef(props, 'multiple')],
+            () => {
+              initPendingNode()
+              void nextTick(scrollToPendingNode)
+            },
+            {
+              immediate: true
+            }
+          )
+        } else {
+          initPendingNodeWatchStopHandle?.()
         }
-      })
-    })
+      },
+      {
+        immediate: true
+      }
+    )
     const itemSizeRef = computed(() => {
       return depx(themeRef.value.self[createKey('optionHeight', props.size)])
     })
@@ -160,14 +180,6 @@ export default defineComponent({
     })
     const styleRef = computed(() => {
       return [{ width: formatLength(props.width) }, cssVarsRef.value]
-    })
-    watch(toRef(props, 'treeMate'), () => {
-      if (props.autoPending) {
-        const tmNode = props.treeMate.getFirstAvailableNode()
-        setPendingTmNode(tmNode)
-      } else {
-        setPendingTmNode(null)
-      }
     })
     function doToggle (tmNode: TreeNode<SelectBaseOption>): void {
       const { onToggle } = props
@@ -472,17 +484,19 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div class={`${clsPrefix}-base-select-menu__empty`}>
-            {renderSlot($slots, 'empty', undefined, () => [
+            {$slots.empty ? (
+              $slots.empty()
+            ) : (
               <NEmpty
                 theme={mergedTheme.peers.Empty}
                 themeOverrides={mergedTheme.peerOverrides.Empty}
               />
-            ])}
+            )}
           </div>
         )}
         {$slots.action && (
           <div class={`${clsPrefix}-base-select-menu__action`} data-action>
-            {renderSlot($slots, 'action')}
+            {$slots.action()}
           </div>
         )}
         {$slots.action && <NFocusDetector onFocus={this.onTabOut} />}

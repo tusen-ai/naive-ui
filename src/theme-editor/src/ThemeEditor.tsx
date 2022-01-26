@@ -1,13 +1,4 @@
-import {
-  h,
-  computed,
-  defineComponent,
-  renderSlot,
-  ref,
-  Fragment,
-  toRaw,
-  watch
-} from 'vue'
+import { h, computed, defineComponent, ref, Fragment, toRaw, watch } from 'vue'
 import { cloneDeep, merge } from 'lodash-es'
 import { lightTheme } from '../../themes/light'
 import {
@@ -55,7 +46,7 @@ const ColorWandIcon = (
 
 // button colorOpacitySecondary var is not color
 const showColorPicker = (key: string): boolean => {
-  if (key.includes('opacity')) return false
+  if (key.includes('pacity')) return false
   if (key.includes('color') || key.includes('Color')) return true
   return false
 }
@@ -522,7 +513,7 @@ export default defineComponent({
                 )
               }}
             </NPopover>,
-            renderSlot(this.$slots, 'default')
+            this.$slots.default?.()
           ]
         }}
       </NConfigProvider>

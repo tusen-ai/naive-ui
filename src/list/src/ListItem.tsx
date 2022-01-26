@@ -1,4 +1,4 @@
-import { h, renderSlot, defineComponent, inject } from 'vue'
+import { h, defineComponent, inject } from 'vue'
 import { throwError } from '../../_utils'
 import { listInjectionKey } from './List'
 
@@ -19,7 +19,7 @@ export default defineComponent({
       <li class={`${mergedClsPrefix}-list-item`}>
         {$slots.prefix ? (
           <div class={`${mergedClsPrefix}-list-item__prefix`}>
-            {renderSlot($slots, 'prefix')}
+            {$slots.prefix()}
           </div>
         ) : null}
         {$slots.default ? (
@@ -27,7 +27,7 @@ export default defineComponent({
         ) : null}
         {$slots.suffix ? (
           <div class={`${mergedClsPrefix}-list-item__suffix`}>
-            {renderSlot($slots, 'suffix')}
+            {$slots.suffix()}
           </div>
         ) : null}
       </li>

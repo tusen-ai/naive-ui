@@ -5,12 +5,11 @@ import {
   ExtractPropTypes,
   PropType,
   Ref,
-  ComputedRef,
-  InjectionKey
+  ComputedRef
 } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
-import { warn, call } from '../../_utils'
+import { warn, call, createInjectionKey } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { OnUpdateValue, OnUpdateValueImpl } from './interface'
 
@@ -59,8 +58,8 @@ export interface RadioGroupInjection {
   doUpdateValue: OnUpdateValue
 }
 
-export const radioGroupInjectionKey: InjectionKey<RadioGroupInjection> =
-  Symbol('radioGroup')
+export const radioGroupInjectionKey =
+  createInjectionKey<RadioGroupInjection>('n-radio-group')
 
 export interface UseRadio {
   mergedClsPrefix: Ref<string>

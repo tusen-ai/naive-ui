@@ -37,10 +37,12 @@ render-header
 custom-style
 ajax-usage
 virtual
-custom-filter-menu
+custom-filter-menu.vue
 tree
 flex-height
 striped
+simple-editable
+switchable-editable
 ```
 
 ## API
@@ -70,8 +72,8 @@ striped
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |
 | row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |
-| single-column | `boolean` | `false` | Whether the column content is a whole, when the parameter is `true`, there is no `border-bottom`. |
-| single-line | `boolean` | `true` | Whether the line content is a whole, when the parameter value is `true`, there is no `border-right`. |
+| single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |
+| single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |
 | striped | `boolean` | `false` | Whether to show zebra stripes on rows. |
 | summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |
@@ -109,16 +111,18 @@ striped
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData) => void }>` | `undefined` | Options of custom selection. Only work with `type='selection'`. |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of column row cell. |  |
 | renderExpand | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of the expand area. Only works when `type` is `'expand'`. |  |
-| renderFilterMenu | `(actions: { hide: () => void }) => VNodeChild` | `undefined` | Render function of column filter menu. |  |
-| renderFilterIcon | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | Render function of column filter icon. |  |
 | renderFilter | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | Render function of column filter trigger. |  |
+| renderFilterIcon | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | Render function of column filter icon. |  |
+| renderFilterMenu | `(actions: { hide: () => void }) => VNodeChild` | `undefined` | Render function of column filter menu. |  |
+| renderSorter | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | Render function of column sorter trigger. | 2.24.2 |
+| renderSorterIcon | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | Render function of column sorter icon. | 2.24.2 |
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The row span of the cell. |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | The controlled sort order of the column. If multiple columns' sortOrder is set, the first one will affect. |  |
 | sorter | `boolean \| function \| 'default'` | `false` | The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function. |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | Column title, Can be a render function. |  |
 | titleRowSpan | `number` | `undefined` | The number of cells occupied by the title row. |  |
 | type | `'selection' \| 'expand'` | `undefined` | Column type. |  |
-| width | `number \| string` | `undefined` | Width of the column (**required and should be number** when fixed). | NEXT_VERSION (`string` type) |
+| width | `number \| string` | `undefined` | Width of the column (**required and should be number** when fixed). | 2.24.0 (`string` type) |
 
 #### DataTableCreateSummary Type
 
@@ -160,7 +164,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | clearSorter | `() => void` | Clear all sort state. |
 | filters | `(filters: { [string \| number]: Array<string \| number> \| string \| number }) => void` | Set the active filters of the table. |
 | page | `(page: number) => void` | Manually set the page. |
-| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | If columnKey set to `null`, it is the same as clearSorter. |
+| sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |
 
 ### DataTable Slots
 

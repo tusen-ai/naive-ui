@@ -1,5 +1,6 @@
-import { InjectionKey, Ref } from 'vue'
+import { Ref } from 'vue'
 import type { MergedTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
 import type { TransferTheme } from '../styles'
 
 export type OptionValue = string | number
@@ -36,7 +37,7 @@ export interface TransferInjection {
   handleTgtCheckboxClick: (checked: boolean, value: OptionValue) => void
 }
 
-export const transferInjectionKey: InjectionKey<TransferInjection> =
-  Symbol('transfer')
+export const transferInjectionKey =
+  createInjectionKey<TransferInjection>('n-transfer')
 
 export type OnUpdateValue = (value: OptionValue[]) => void

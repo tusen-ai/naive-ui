@@ -1,4 +1,4 @@
-# Use with Form
+# Use with form
 
 It seems this example is useless, but it's a data input component so I just left it here.
 

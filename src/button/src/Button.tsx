@@ -6,7 +6,6 @@ import {
   onMounted,
   defineComponent,
   PropType,
-  renderSlot,
   CSSProperties,
   ButtonHTMLAttributes,
   watchEffect
@@ -561,7 +560,7 @@ const Button = defineComponent({
                             class={`${mergedClsPrefix}-icon-slot`}
                             role="none"
                           >
-                            {renderSlot($slots, 'icon')}
+                            {$slots.icon?.()}
                           </div>
                         )
                     }}

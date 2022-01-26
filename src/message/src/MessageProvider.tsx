@@ -7,20 +7,18 @@ import {
   defineComponent,
   provide,
   VNodeChild,
-  InjectionKey,
   ExtractPropTypes,
-  renderSlot,
   Ref,
   PropType,
   CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
-import { omit } from '../../_utils'
+import { createInjectionKey, omit } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { MessageTheme } from '../styles'
-import type { MessageOptions, MessageProviderRenderMessage } from './types'
+import type { MessageOptions, MessageType } from './types'
 import MessageEnvironment from './MessageEnvironment'
 
 type ContentType = string | (() => VNodeChild)
@@ -34,14 +32,15 @@ export interface MessageApiInjection {
   destroyAll: () => void
 }
 
-export const messageApiInjectionKey: InjectionKey<MessageApiInjection> =
-  Symbol('messageApi')
+export const messageApiInjectionKey =
+  createInjectionKey<MessageApiInjection>('n-message-api')
 
 export interface MessageReactive {
   content?: ContentType
   duration?: number
   closable?: boolean
   keepAliveOnHover?: boolean
+  type: MessageType
   icon?: () => VNodeChild
   onClose?: () => void
   destroy: () => void
@@ -79,8 +78,7 @@ const messageProviderProps = {
     default: 'top'
   },
   closable: Boolean,
-  containerStyle: [String, Object] as PropType<string | CSSProperties>,
-  renderMessage: Function as PropType<MessageProviderRenderMessage>
+  containerStyle: [String, Object] as PropType<string | CSSProperties>
 }
 
 export type MessageProviderProps = ExtractPublicPropTypes<
@@ -89,10 +87,10 @@ export type MessageProviderProps = ExtractPublicPropTypes<
 
 type MessageProviderSetupProps = ExtractPropTypes<typeof messageProviderProps>
 
-export const messageProviderInjectionKey: InjectionKey<{
+export const messageProviderInjectionKey = createInjectionKey<{
   props: MessageProviderSetupProps
   mergedClsPrefixRef: Ref<string>
-}> = Symbol('messageProvider')
+}>('n-message-provider')
 
 export default defineComponent({
   name: 'MessageProvider',
@@ -124,7 +122,10 @@ export default defineComponent({
       mergedClsPrefixRef
     })
     provide(messageApiInjectionKey, api)
-    function create (content: ContentType, options = {}): MessageReactive {
+    function create (
+      content: ContentType,
+      options: MessageOptions & { type: MessageType }
+    ): MessageReactive {
       const key = createId()
       const messageReactive = reactive({
         ...options,
@@ -167,7 +168,7 @@ export default defineComponent({
   render () {
     return (
       <>
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots.default?.()}
         {this.messageList.length ? (
           <Teleport to={this.to ?? 'body'}>
             <div

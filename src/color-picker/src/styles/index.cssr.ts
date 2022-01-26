@@ -98,6 +98,7 @@ export default c([
     height: 180px;
     position: relative;
     margin-bottom: 8px;
+    cursor: crosshair;
   `, [
     cE('layer', `
       position: absolute;
@@ -189,6 +190,7 @@ export default c([
       top: 4px;
       bottom: 4px;
     `),
+    cM('disabled', 'cursor: not-allowed'),
     cB('color-picker-checkboard', `
       border-radius: var(--n-border-radius);
     `, [

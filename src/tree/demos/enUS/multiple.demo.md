@@ -1,4 +1,4 @@
-# Select Multiple Nodes
+# Select multiple nodes
 
 Set `multiple` to select multiple nodes.
 

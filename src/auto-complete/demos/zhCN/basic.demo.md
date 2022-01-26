@@ -1,7 +1,14 @@
 # 基础用法
 
 ```html
-<n-auto-complete :options="options" v-model:value="value" placeholder="邮箱" />
+<n-auto-complete
+  :input-props="{
+    autocomplete: 'disabled'
+  }"
+  :options="options"
+  v-model:value="value"
+  placeholder="邮箱"
+/>
 ```
 
 ```js

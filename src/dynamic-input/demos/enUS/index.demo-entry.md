@@ -26,7 +26,7 @@ form
 | key-field | `string` | `undefined` | The key of each item that should be used in the rendering of the list. |
 | min | `number` | `0` | Minimum number of items. |
 | max | `number` | `undefined` | Maximum number of items. |
-| preset | `'input' \| 'preset'` | `'input'` | The preset of `n-dynamic-input`, it work when `$slots.default` is not set. |
+| preset | `'input' \| 'pair'` | `'input'` | The preset of `n-dynamic-input`, it work when `$slots.default` is not set. |
 | value | `Array<any>` | `undefined` | Value in controlled mode. |
 | on-create | `(index: number) => void` | `undefined` | Add button (+) click callback. If set, the return value will be used as the initial value of the new item. `index` is the the new item's corresponding index in the value array, which starts from 1 (the second item). |
 | on-remove | `(index: number) => void` | `undefined` | Remove button (-) callback. |

@@ -186,7 +186,11 @@ export default defineComponent({
           }
     })
     const markInfosRef = computed(() => {
-      const mergedMarks = []
+      const mergedMarks: Array<{
+        active: boolean
+        label: string
+        style: CSSProperties
+      }> = []
       const { marks } = props
       if (marks) {
         const orderValues = arrifiedValueRef.value.slice()
@@ -349,7 +353,7 @@ export default defineComponent({
       buffer?: number
     ): ClosestMark | null {
       if (!markValues || !markValues.length) return null
-      let closestMark = null
+      let closestMark: ClosestMark | null = null
       let index = -1
       while (++index < markValues.length) {
         const diff = markValues[index] - currentValue
@@ -700,7 +704,10 @@ export default defineComponent({
                           ref={this.setFollowerRefs(index)}
                           show={showTooltip}
                           to={this.adjustedTo}
-                          enabled={this.followerEnabledIndexSet.has(index)}
+                          enabled={
+                            (this.showTooltip && !this.range) ||
+                            this.followerEnabledIndexSet.has(index)
+                          }
                           teleportDisabled={
                             this.adjustedTo === useAdjustedTo.tdkey
                           }

@@ -45,6 +45,13 @@ exports.genWebTypes = function genWebTypes () {
             name: kebabCase(propName.slice(2)),
             description: '-'
           })
+        } else if (prop === null) {
+          attributes.push({
+            name: kebabCase(propName),
+            default: '-',
+            description: '-',
+            kind: 'expression'
+          })
         } else {
           const attribute = {
             name: kebabCase(propName),

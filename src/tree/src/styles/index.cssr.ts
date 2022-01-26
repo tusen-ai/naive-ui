@@ -178,6 +178,11 @@ export default cB('tree', `
     justify-content: center;
     margin-right: 4px;
   `),
+  cM('checkable', [
+    cB('tree-node-content', `
+      padding: 0 6px;
+    `)
+  ]),
   cB('tree-node-content', `
     position: relative;
     display: inline-flex;
@@ -186,7 +191,7 @@ export default cB('tree', `
     box-sizing: border-box;
     line-height: 1.5;
     vertical-align: bottom;
-    padding: 0 6px;
+    padding: 0 6px 0 4px;
     cursor: default;
     border-radius: var(--n-node-border-radius);
     text-decoration-color: #0000;

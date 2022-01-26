@@ -15,6 +15,7 @@ display-directive
 addable
 before-leave
 no-pane
+update-bar-manually.vue
 ```
 
 ## API
@@ -41,15 +42,16 @@ no-pane
 
 ### TabPane Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |
-| disabled | `boolean` | `false` | Whether to disable. |
-| display-directive | `'if' \| 'show'` \| 'show:lazy' | `'if'` | The directive to use in conditionally rendering. `if` will use `v-if` and `show` will use `v-show`. When use `show` directive, the status of tab won't be reset after tab changes. When use `show:lazy`, the display effect is the same as `show`, but the content will be lazily loaded. |
-| tab | `string \| VNode \| () => VNodeChild` | `undefined` | Tab label. |
-| name | `string \| number` | `undefined` | Required, the name of the tab. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |  |
+| disabled | `boolean` | `false` | Whether to disable the tabs. |  |
+| display-directive | `'if' \| 'show' \| 'show:lazy'` | `'if'` | The directive to use in conditionally rendering. `if` will use `v-if` and `show` will use `v-show`. When use `show` directive, the status of tab won't be reset after tab changes. When use `show:lazy`, the display effect is the same as `show`, but the content will be lazily loaded. |  |
+| name | `string \| number` | `undefined` | Required, the name of the tab. |  |
+| tab | `string \| VNode \| () => VNodeChild` | `undefined` | Tab label. |  |
+| tab-props | `Object` | `undefined` | DOM attributes of tab label. | 2.24.2 |
 
-### TabPane Props
+### Tab Props
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -77,3 +79,9 @@ no-pane
 | Name    | Parameters | Description  |
 | ------- | ---------- | ------------ |
 | default | `()`       | Tab content. |
+
+### Tabs Methods
+
+| Name            | Type         | Description              | Version |
+| --------------- | ------------ | ------------------------ | ------- |
+| syncBarPosition | `() => void` | Sync tab bar's position. | 2.24.0  |

@@ -234,4 +234,22 @@ describe('n-input-number', () => {
     expect(onUpdateValue).toHaveBeenCalledWith(-2.02003)
     wrapper.unmount()
   })
+
+  it('should work with integer value ends with 0', async () => {
+    const onUpdateValue = jest.fn()
+    const wrapper = mount(NInputNumber, {
+      attachTo: document.body,
+      props: {
+        defaultValue: 0,
+        onUpdateValue
+      }
+    })
+    wrapper.find('input').element.value = '1'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledWith(1)
+    wrapper.find('input').element.value = '10'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledWith(10)
+    wrapper.unmount()
+  })
 })

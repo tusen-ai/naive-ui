@@ -1,14 +1,7 @@
-import {
-  h,
-  defineComponent,
-  provide,
-  PropType,
-  Fragment,
-  InjectionKey,
-  inject
-} from 'vue'
-import { render } from '../../_utils'
-import { useMenuChild, useMenuChildProps } from './use-menu-child'
+import { h, defineComponent, provide, PropType, Fragment, inject } from 'vue'
+import { createInjectionKey, render } from '../../_utils'
+import { useMenuChild } from './use-menu-child'
+import { useMenuChildProps } from './use-menu-child-props'
 import type { MenuOptionGroupInjection } from './use-menu-child'
 import { itemRenderer } from './utils'
 import { TmNode } from './interface'
@@ -23,8 +16,8 @@ export const menuItemGroupProps = {
   }
 } as const
 
-export const menuItemGroupInjectionKey: InjectionKey<MenuOptionGroupInjection> =
-  Symbol('menu-item-group')
+export const menuItemGroupInjectionKey =
+  createInjectionKey<MenuOptionGroupInjection>('n-menu-item-group')
 
 export default defineComponent({
   name: 'MenuOptionGroup',

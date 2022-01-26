@@ -8,6 +8,7 @@ Tween the number.
 basic.vue
 precision.vue
 separator.vue
+intl.vue
 ```
 
 ## API
@@ -22,6 +23,7 @@ separator.vue
 | precision | `number` | `0` | Decimal precision of the displayed value. | 2.23.2 |
 | show-separator | `boolean` | `false` | Whether to show separator. | 2.23.2 |
 | to | `number` | `undefined` | Target value. | 2.23.2 |
+| locale | `string` | Follows config provider. | Language of the number. | 2.24.2 |
 
 ### NumberAnimation Methods
 
