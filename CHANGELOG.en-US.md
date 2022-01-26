@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.24.7 (2022-01-26)
+
+### Fixes
+
+- Update translation for `jaJP` locale.
+
 ## 2.24.6 (2022-01-26)
 
 ### Feats
