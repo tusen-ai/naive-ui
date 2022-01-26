@@ -373,7 +373,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     textColorWarning: '#FFF',
     iconColorInfo: 'FFF',
     iconColorSuccess: '#333333',
-    iconColorWarning: '#FFF',
+    iconColorWarning: '#333333',
     iconColorError: 'rgb(255, 255, 255)',
     iconColorLoading: '#4FB233',
     closeColorInfo: 'rgb(255, 255, 255)',
