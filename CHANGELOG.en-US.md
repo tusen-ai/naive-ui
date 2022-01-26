@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-tabs` props `justify-content` add types `start` `center` `end`
+
 ## 2.24.6 (2022-01-26)
 
 ### Feats
