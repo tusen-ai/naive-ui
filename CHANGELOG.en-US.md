@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### i18n
+
+- Update jaJP locale.
+
 ## 2.24.6 (2022-01-26)
 
 ### Feats
