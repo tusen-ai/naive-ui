@@ -1,5 +1,5 @@
 import { changeColor } from 'seemly'
-import { c, cB, cE, cM } from 'naive-ui'
+import { c, cB, cE, cM, cNotM } from 'naive-ui'
 
 export function mountSvgDefs (): void {
   if (document.getElementById('naive-ui/tusimple/svg-defs')) return
@@ -81,17 +81,22 @@ export const unconfigurableStyle = c([
   cB('date-panel', [
     cB('date-panel-dates', [
       cB('date-panel-date', [
-        cM(
-          'current',
-          {
+        cM('current',{
             color: '#4FB233'
-          },
-          [
+          },[
             cB('date-panel-date__sup', {
               display: 'none'
             })
           ]
-        )
+        ),
+        cM('start, end', [
+          c('&:nth-child(7n + 1)::before', {
+            left: '0'
+          }),
+          c('&:nth-child(7n + 7)::before', {
+            right: '0'
+          })
+        ])
       ])
     ])
   ]),
