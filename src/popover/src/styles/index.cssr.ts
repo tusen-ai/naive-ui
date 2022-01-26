@@ -169,7 +169,7 @@ function placementStyle (
         left: 0;
         top: 0;
         bottom: 0;
-        ${position}: 100%;
+        ${position}: calc(100% - 1px);
         ${oppositePlacement[position]}: auto;
         ${sizeStyle}
       `, [
