@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2.24.6 (2022-01-26)
+
+### Feats
+
+- `n-icon` 新增 `component` 属性
+
+### Fixes
+
+- 修复 `n-dynamic-input` 可以添加子项当 max 为 0 时， 关闭 [#2271](https://github.com/TuSimple/naive-ui/issues/2271)
+- 修复 `n-dialog` 有无用的 `console.log`
+
 ## 2.24.5 (2022-01-25)
 
 ### Fixes

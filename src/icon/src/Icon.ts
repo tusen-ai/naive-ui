@@ -1,9 +1,16 @@
-import { h, defineComponent, computed, mergeProps, PropType } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import {
+  Component,
+  computed,
+  defineComponent,
+  h,
+  mergeProps,
+  PropType
+} from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import { formatLength, warn } from '../../_utils'
-import { iconLight } from '../styles'
 import type { IconTheme } from '../styles'
+import { iconLight } from '../styles'
 import style from './styles/index.cssr'
 
 export type Depth = 1 | 2 | 3 | 4 | 5 | '1' | '2' | '3' | '4' | '5' | undefined
@@ -16,7 +23,8 @@ export default defineComponent({
     ...(useTheme.props as ThemeProps<IconTheme>),
     depth: [String, Number] as PropType<Depth>,
     size: [Number, String],
-    color: String
+    color: String,
+    component: Object as PropType<Component>
   },
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
@@ -58,7 +66,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { $parent, depth, mergedClsPrefix } = this
+    const { $parent, depth, mergedClsPrefix, component } = this
     if ($parent?.$options?._n_icon__) {
       warn('icon', "don't wrap `n-icon` inside `n-icon`")
     }
@@ -75,7 +83,7 @@ export default defineComponent({
         ],
         style: Object.assign(this.cssVars, this.mergedStyle)
       }),
-      this.$slots
+      component ? h(component) : this.$slots
     )
   }
 })

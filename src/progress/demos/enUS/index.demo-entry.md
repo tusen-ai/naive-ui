@@ -27,7 +27,7 @@ processing
 | color | `string \| string[]` | `undefined` | Progress color. |  |
 | fill-border-radius | `number \| string` | `undefined` | `'line'` typed progress's fill's border-radius. Keep `border-radius` if not passed. |  |
 | height | `number` | `undefined` | `'line'` typed progress's height. Keep default height if not passed. |  |
-| indicator-placement | `'inside' \| 'inside-label' \| 'outside'` | `'outside'` | Indicator placement. |  |
+| indicator-placement | `'inside' \| 'outside'` | `'outside'` | Indicator placement. |  |
 | indicator-text-color | `string` | `undefined` | Indicator text color. |  |
 | offset-degress | `number` | `0` | Offset degree of circular progress, only works with `circle` typed progress. | 2.24.0 |
 | percentage | `number \| number[]` | `0` | Percentage value. |  |
