@@ -1,10 +1,10 @@
 # CHANGELOG
 
-## 2.24.7 (2022-01-26)
+## Pending
 
-### Fixes
+### i18n
 
-- Update translation for `jaJP` locale.
+- Update jaJP locale.
 
 ## 2.24.6 (2022-01-26)
 

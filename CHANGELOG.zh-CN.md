@@ -1,10 +1,10 @@
 # CHANGELOG
 
-## 2.24.7 (2022-01-26)
+## Pending
 
-### Fixes
+### i18n
 
-- 为 `jaJP` 添加翻译
+- 更新 jaJP locale
 
 ## 2.24.6 (2022-01-26)
 
