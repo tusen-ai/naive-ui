@@ -119,6 +119,11 @@ export const unconfigurableStyle = c([
       ])
     ])
   ]),
+  cB('table', [
+    c('th', {
+      borderRight: '1px solid transparent'
+    })
+  ]),
   cB('tabs', [
     cB('tabs-bar', {
       height: '4px !important',
