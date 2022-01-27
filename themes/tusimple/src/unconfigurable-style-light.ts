@@ -119,6 +119,11 @@ export const unconfigurableStyle = c([
       marginTop: '20px'
     })
   ]),
+  cB('dynamic-tags', [
+    cB('button', {
+      height: ' 24px'
+    })
+  ]),
   cB('input', [
     cM('textarea', [
       cM('resizable', [
