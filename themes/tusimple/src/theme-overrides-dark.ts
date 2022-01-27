@@ -198,7 +198,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
   },
   DataTable: {
     fontSizeMedium: '16px',
-    borderColor: '5B5B5B',
+    borderColor: '#404040',
     thColor: '#282828',
     thTextColor: '#FFFFFF',
     tdColor: '#1E1E1E',
@@ -508,7 +508,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     tdColor: '#1E1E1E',
     tdTextColor: '#FFFFFF',
     thFontWeight: commonDark.fontWeight,
-    borderColor: '#5B5B5B',
+    borderColor: '#404040',
     thPaddingSmall: '10px 20px',
     thPaddingMedium: '10px 20px',
     thPaddingLarge: '10px 20px',
