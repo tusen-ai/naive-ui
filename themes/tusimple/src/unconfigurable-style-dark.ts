@@ -106,6 +106,13 @@ export const unconfigurableStyle = c([
       c('&.n-data-table-td--hover', {
         backgroundColor: 'transparent'
       })
+    ]),
+    cB('data-table-wrapper', [
+      cB('data-table-base-table', [
+        cB('data-table-base-table-body', {
+          borderRadius: '16px'
+        })
+      ])
     ])
   ]),
   cB('dialog', [
