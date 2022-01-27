@@ -264,6 +264,9 @@ export const themeOverridesDark: GlobalThemeOverrides = {
   Drawer: {
     bodyPadding: '20px'
   },
+  Dropdown: {
+    padding: '0'
+  },
   DynamicTags: {
     peers: {
       Tag: {

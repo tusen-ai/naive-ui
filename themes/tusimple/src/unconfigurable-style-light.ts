@@ -39,6 +39,11 @@ export const unconfigurableStyle = c([
         cM('pending', {
           borderRadius: '0 0 16px 16px'
         })
+      ]),
+      c('&:first-child:last-child', [
+        cM('pending', {
+          borderRadius: '16px'
+        })
       ])
     ])
   ]),
@@ -62,20 +67,18 @@ export const unconfigurableStyle = c([
   ]),
   cB('dropdown-menu', [
     cB('dropdown-option', [
-      c('&:first-child', [
-        cB('dropdown-option-body', [
-          cM('pending', {
-            borderRadius: '16px 16px 0 0'
-          })
-        ])
-      ]),
-      c('&:last-child', [
-        cB('dropdown-option-body', [
-          cM('pending', {
-            borderRadius: '0 0 16px 16px'
-          })
-        ])
-      ])
+      c('&:first-of-type', {
+        borderRadius: '16px 16px 0 0',
+        overflow: 'hidden'
+      }),
+      c('&:last-of-type', {
+        borderRadius: '0 0 16px 16px',
+        overflow: 'hidden'
+      }),
+      c('&:first-of-type:last-of-type', {
+        borderRadius: '16px',
+        overflow: 'hidden'
+      })
     ])
   ]),
   cB('date-panel', [
