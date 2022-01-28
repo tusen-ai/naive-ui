@@ -207,6 +207,9 @@ export const unconfigurableStyle = c([
         cB('transfer-list-header__checkbox', {
           paddingLeft: '12px',
           paddingRight: '13px'
+        }),
+        cB('transfer-list-header__extra', {
+          marginRight: '12px'
         })
       ]),
       cB('transfer-list-body', [

@@ -189,11 +189,30 @@ export const unconfigurableStyle = c([
         width: '56px'
       },
       [
-        cB('button', {
-          width: '32px',
-          height: '32px',
-          padding: '0'
-        })
+        cB(
+          'button',
+          {
+            width: '32px',
+            height: '32px',
+            padding: '0'
+          },
+          [
+            cE('border', {
+              border: '1px solid #ccc'
+            }),
+            cE('icon', {
+              color: '#999'
+            })
+          ]
+        ),
+        cB('button--disabled', [
+          cB('button__border', {
+            border: '1px solid #D7DAE0'
+          }),
+          cB('button__icon', {
+            color: '#D7DAE0'
+          })
+        ])
       ]
     ),
     cB('transfer-list', [
@@ -201,6 +220,9 @@ export const unconfigurableStyle = c([
         cB('transfer-list-header__checkbox', {
           paddingLeft: '12px',
           paddingRight: '13px'
+        }),
+        cB('transfer-list-header__extra', {
+          marginRight: '12px'
         })
       ]),
       cB('transfer-list-body', [
