@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2.24.7 (2022-01-28)
+
+### Fixes
+
+- `n-popselect` 设定 `width="trigger"` 不生效
+
+### i18n
+
+- 更新 jaJP locale
+
 ## 2.24.6 (2022-01-26)
 
 ### Feats
@@ -8,7 +18,7 @@
 
 ### Fixes
 
-- 修复 `n-dynamic-input` 可以添加子项当 max 为 0 时， 关闭 [#2271](https://github.com/TuSimple/naive-ui/issues/2271)
+- 修复 `n-dynamic-input` 当 max 为 0 时可以添加子项， 关闭 [#2271](https://github.com/TuSimple/naive-ui/issues/2271)
 - 修复 `n-dialog` 有无用的 `console.log`
 
 ## 2.24.5 (2022-01-25)
@@ -16,7 +26,7 @@
 ### Fixes
 
 - `n-input` 在类型为 `textarea` 时 placeholder 无法换行
-- `date-picker` 面板年和月之前缺少空格
+- `n-date-picker` 面板年和月之前缺少空格
 
 ### Feats
 

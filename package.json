@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.24.6",
+  "version": "2.24.7",
   "description": "A Vue 3 Component Library. Fairly Complete, Customizable Themes, Uses TypeScript, Not Too Slow",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -29,7 +29,7 @@
     "release-changelog": "node scripts/release-changelog",
     "build:site:ts": "./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "prepare": "husky install",
-    "translate": "node scripts/md-to-vue icon",
+    "transpile-docs": "node scripts/md-to-vue popselect",
     "typecheck": "vue-tsc --noEmit src/**/*.vue"
   },
   "author": "07akioni",

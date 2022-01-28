@@ -38,7 +38,6 @@ export const panelProps = {
     default: null
   },
   cancelable: Boolean,
-  width: [Number, String] as PropType<string | number>,
   options: {
     type: Array as PropType<SelectMixedOption[]>,
     default: () => []
@@ -178,7 +177,6 @@ export default defineComponent({
         treeMate={this.treeMate}
         size={this.size}
         value={this.value}
-        width={this.width}
         virtualScroll={false}
         scrollable={this.scrollable}
         renderLabel={this.renderLabel}
