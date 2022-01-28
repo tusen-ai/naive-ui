@@ -1,8 +1,7 @@
 import { h, nextTick, VNode } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NSelect, SelectProps } from '../index'
+import { NSelect, SelectProps, SelectOption, SelectGroupOption } from '../index'
 import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
-import { SelectOption, SelectGroupOption } from '../'
 import { NTag } from '../../tag'
 import { SelectBaseOption } from '../src/interface'
 
