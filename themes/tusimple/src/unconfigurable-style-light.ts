@@ -175,7 +175,10 @@ export const unconfigurableStyle = c([
           c('&::before', {
             backgroundColor: 'transparent'
           })
-        ])
+        ]),
+        c('&:before', {
+          right: '0'
+        })
       ])
     ])
   ]),
