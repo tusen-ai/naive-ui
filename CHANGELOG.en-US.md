@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
+
+### Fixes
+
+- `n-popselect` doesn't work with `width="trigger"`.
 
 ### i18n
 

@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
+
+### Fixes
+
+- `n-popselect` 设定 `width="trigger"` 不生效
 
 ### i18n
 
