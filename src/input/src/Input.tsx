@@ -436,7 +436,7 @@ export default defineComponent({
       }
       // force update to sync input's view with value
       // if not set, after input, input value won't sync with dom input value
-      ;(vm.$forceUpdate as any)()
+      vm.$forceUpdate()
     }
     function handleInputBlur (e: FocusEvent): void {
       doUpdateValueBlur(e)
