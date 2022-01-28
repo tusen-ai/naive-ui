@@ -104,6 +104,9 @@ export const unconfigurableStyle = c([
     cB('data-table-td', [
       c('&.n-data-table-td--hover', {
         backgroundColor: 'transparent'
+      }),
+      cM('last-col', {
+        paddingLeft: '100px'
       })
     ]),
     cB('data-table-wrapper', [
