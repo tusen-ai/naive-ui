@@ -303,7 +303,7 @@ export const unconfigurableStyle = c([
     cM('active', [
       cE('rail', [
         cE('button', {
-          backgroundImage: 'linear-gradient(#4EB233, #AFF25E)'
+          backgroundImage: 'linear-gradient(45deg, #4EB233 0%, #AFF25E 100%)'
         })
       ])
     ]),
@@ -311,12 +311,15 @@ export const unconfigurableStyle = c([
       cE(
         'rail',
         {
-          backgroundColor: '#EBEDF0'
+          backgroundColor: '#D7DAE0'
         },
         [
           c('&::before', {
             backgroundColor: '#EBEDF0',
             backgroundImage: 'unset'
+          }),
+          cE('button', {
+            backgroundColor: '#D7DAE0'
           })
         ]
       ),
@@ -328,11 +331,17 @@ export const unconfigurableStyle = c([
         ])
       ])
     ]),
-    cE('rail', [
-      cE('button', {
-        backgroundImage: 'linear-gradient(#E2E5E9, #ADADAD)'
-      })
-    ])
+    cE(
+      'rail',
+      {
+        overflow: 'visible'
+      },
+      [
+        cE('button', {
+          backgroundImage: 'linear-gradient(135deg, #E2E5E9 0%, #999999 100%)'
+        })
+      ]
+    )
   ]),
   cB('date-panel', [
     cB('date-panel-dates', [
