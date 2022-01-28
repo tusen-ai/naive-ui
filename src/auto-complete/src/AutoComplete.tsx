@@ -12,7 +12,7 @@ import {
   watchEffect
 } from 'vue'
 import { createTreeMate, TreeNode } from 'treemate'
-import { VBinder, VTarget, VFollower } from 'vueuc'
+import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
@@ -73,6 +73,10 @@ const autoCompleteProps = {
     default: undefined
   },
   placeholder: String,
+  placement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'bottom-start'
+  },
   value: String,
   blurAfterSelect: Boolean,
   clearAfterSelect: Boolean,
@@ -351,7 +355,7 @@ export default defineComponent({
                 containerClass={this.namespace}
                 zIndex={this.zIndex}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                placement="bottom-start"
+                placement={this.placement}
                 width="target"
               >
                 {{
