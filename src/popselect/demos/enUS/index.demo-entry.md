@@ -5,11 +5,11 @@ If you want select some options but don't want a picker, you can use popselect i
 ## Demos
 
 ```demo
-basic
-size
-scrollable
-multiple
-slot
+basic.vue
+size.vue
+scrollable.vue
+multiple.vue
+slot.vue
 ```
 
 ## API

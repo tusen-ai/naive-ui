@@ -1,14 +1,16 @@
-# 可取消
+<markdown>
+# Cancelable
 
-单值的弹出选择可以取消选中值。
+Make single value popselect cancelable.
+</markdown>
 
-```html
-<n-popselect v-model:value="value" cancelable :options="options">
-  <n-button>{{ value || '弹出选择' }}</n-button>
-</n-popselect>
-```
+<template>
+  <n-popselect v-model:value="value" cancelable :options="options">
+    <n-button>{{ value || 'Popselect' }}</n-button>
+  </n-popselect>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -75,4 +77,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

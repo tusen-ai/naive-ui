@@ -58,7 +58,7 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedTheme, $attrs, $slots } = this
+    const { mergedTheme } = this
     const popoverProps: PopoverInternalProps & { ref: string } = {
       theme: mergedTheme.peers.Popover,
       themeOverrides: mergedTheme.peerOverrides.Popover,
@@ -75,7 +75,7 @@ export default defineComponent({
       ) => {
         return (
           <NPopselectPanel
-            {...mergeProps($attrs, {
+            {...mergeProps(this.$attrs, {
               class: className,
               style
             })}
@@ -84,7 +84,7 @@ export default defineComponent({
             onMouseenter={onMouseenter}
             onMouseleave={onMouseleave}
           >
-            {$slots}
+            {{ default: () => this.$slots.default?.() }}
           </NPopselectPanel>
         )
       }
@@ -92,8 +92,7 @@ export default defineComponent({
     return (
       <NPopover {...omit(this.$props, panelPropKeys)} {...popoverProps}>
         {{
-          trigger: this.$slots.default,
-          _: 1
+          trigger: () => this.$slots.default?.()
         }}
       </NPopover>
     )

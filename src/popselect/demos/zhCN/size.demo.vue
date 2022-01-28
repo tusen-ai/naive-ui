@@ -1,12 +1,21 @@
-# 基础用法
+<markdown>
+# 尺寸
+</markdown>
 
-```html
-<n-popselect v-model:value="value" :options="options" trigger="click">
-  <n-button>{{ value || '弹出选择' }}</n-button>
-</n-popselect>
-```
+<template>
+  <n-space>
+    <n-popselect v-model:value="value" :options="options" size="medium">
+      <n-button>
+        {{ value || 'Popselect' }}
+      </n-button>
+    </n-popselect>
+    <n-popselect v-model:value="value" :options="options" size="large">
+      <n-button>{{ value || 'Popselect' }}</n-button>
+    </n-popselect>
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -68,4 +77,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

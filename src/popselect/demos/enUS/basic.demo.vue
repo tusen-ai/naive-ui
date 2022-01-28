@@ -1,15 +1,14 @@
-# 尺寸
+<markdown>
+# Basic
+</markdown>
 
-```html
-<n-popselect v-model:value="value" :options="options" size="medium">
-  <n-button style="margin-right: 8px;">{{ value || 'Popselect' }}</n-button>
-</n-popselect>
-<n-popselect v-model:value="value" :options="options" size="large">
-  <n-button>{{ value || 'Popselect' }}</n-button>
-</n-popselect>
-```
+<template>
+  <n-popselect v-model:value="value" :options="options">
+    <n-button>{{ value || 'Popselect' }}</n-button>
+  </n-popselect>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -71,4 +70,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

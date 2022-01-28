@@ -1,71 +1,80 @@
-# 让它滚动
+<markdown>
+# 可取消
 
-```html
-<n-popselect v-model:value="value" :options="options" size="medium" scrollable>
-  <n-button style="margin-right: 8px;">{{ value || 'Popselect' }}</n-button>
-</n-popselect>
-```
+单值的弹出选择可以取消选中值。
+</markdown>
 
-```js
+<template>
+  <n-popselect v-model:value="value" cancelable :options="options">
+    <n-button>{{ value || '弹出选择' }}</n-button>
+  </n-popselect>
+</template>
+
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
-      value: ref('Drive My Car'),
+      value: ref('song1'),
       options: [
         {
+          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          value: 'song0',
+          disabled: true
+        },
+        {
           label: 'Drive My Car',
-          value: 'Drive My Car'
+          value: 'song1'
         },
         {
           label: 'Norwegian Wood',
-          value: 'Norwegian Wood'
+          value: 'song2'
         },
         {
           label: "You Won't See",
-          value: "You Won't See",
+          value: 'song3',
           disabled: true
         },
         {
           label: 'Nowhere Man',
-          value: 'Nowhere Man'
+          value: 'song4'
         },
         {
           label: 'Think For Yourself',
-          value: 'Think For Yourself'
+          value: 'song5'
         },
         {
           label: 'The Word',
-          value: 'The Word'
+          value: 'song6'
         },
         {
           label: 'Michelle',
-          value: 'Michelle',
+          value: 'song7',
           disabled: true
         },
         {
           label: 'What goes on',
-          value: 'What goes on'
+          value: 'song8'
         },
         {
           label: 'Girl',
-          value: 'Girl'
+          value: 'song9'
         },
         {
           label: "I'm looking through you",
-          value: "I'm looking through you"
+          value: 'song10'
         },
         {
           label: 'In My Life',
-          value: 'In My Life'
+          value: 'song11'
         },
         {
           label: 'Wait',
-          value: 'Wait'
+          value: 'song12'
         }
       ]
     }
   }
 })
-```
+</script>

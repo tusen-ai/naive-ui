@@ -1,22 +1,24 @@
-# 多选
+<markdown>
+# Multiple
 
-在弹出选择选中多个值。
+Select multiple value in popselect.
+</markdown>
 
-```html
-<n-popselect v-model:value="value" multiple :options="options">
-  <n-button
-    >{{ (Array.isArray(value) && value.length) ? value : '没了' }}</n-button
-  >
-</n-popselect>
-```
+<template>
+  <n-popselect v-model:value="value" multiple :options="options">
+    <n-button>
+      {{ Array.isArray(value) && value.length ? value : 'Nothing' }}
+    </n-button>
+  </n-popselect>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
-      value: ref(null),
+      value: ref<string[] | null>(null),
       options: [
         {
           label: 'Go Let It Out',
@@ -39,4 +41,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

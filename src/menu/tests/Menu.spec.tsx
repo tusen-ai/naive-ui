@@ -2,12 +2,35 @@ import { mount } from '@vue/test-utils'
 import { HappyOutline } from '@vicons/ionicons5'
 import { h, Comment } from 'vue'
 import { sleep } from 'seemly'
-import { NMenu } from '../index'
+import { NMenu, MenuOption, MenuGroupOption, MenuDividerOption } from '../index'
 import { NIcon } from '../../icon'
 
 describe('n-menu', () => {
   it('should work with import on demand', () => {
     mount(NMenu)
+  })
+
+  it('props.options type', () => {
+    const options: Array<MenuOption | MenuGroupOption | MenuDividerOption> = [
+      {
+        label: 'l',
+        key: 'key'
+      },
+      {
+        type: 'group',
+        children: [
+          {
+            label: 'l',
+            key: 'key2'
+          },
+          {
+            type: 'divider',
+            key: 'key3'
+          }
+        ]
+      }
+    ]
+    mount(NMenu, { props: { options } })
   })
 
   it('props.onUpdateValue type', () => {
