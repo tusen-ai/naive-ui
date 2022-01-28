@@ -1,7 +1,6 @@
 import { defineComponent, h, inject } from 'vue'
 import { render } from '../../_utils'
-import { dropdownInjectionKey } from './Dropdown'
-import { dropdownMenuInjectionKey } from './DropdownMenu'
+import { dropdownInjectionKey, dropdownMenuInjectionKey } from './context'
 
 export default defineComponent({
   name: 'DropdownGroupHeader',

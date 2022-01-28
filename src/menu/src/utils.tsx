@@ -1,9 +1,11 @@
 import { h, VNode, VNodeChild } from 'vue'
 import type { TreeNode } from 'treemate'
 import { keep, keysOf } from '../../_utils'
-import NMenuOptionGroup, { menuItemGroupProps } from './MenuOptionGroup'
-import NSubmenu, { submenuProps } from './Submenu'
-import NMenuOption, { menuItemProps } from './MenuOption'
+// eslint-disable-next-line import/no-cycle
+import { NMenuOptionGroup, menuItemGroupProps } from './MenuOptionGroup'
+// eslint-disable-next-line import/no-cycle
+import { NSubmenu, submenuProps } from './Submenu'
+import { NMenuOption, menuItemProps } from './MenuOption'
 import NMenuDivider from './MenuDivider'
 import {
   MenuOption,
@@ -11,7 +13,7 @@ import {
   MenuIgnoredOption,
   MenuMixedOption
 } from './interface'
-import { MenuSetupProps } from './Menu'
+import type { MenuSetupProps } from './Menu'
 
 const groupPropKeys = keysOf(menuItemGroupProps)
 const itemPropKeys = keysOf(menuItemProps)

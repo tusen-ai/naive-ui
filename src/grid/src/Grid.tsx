@@ -17,13 +17,8 @@ import { VResizeObserver, VResizeObserverOnResize } from 'vueuc'
 import { pxfy, parseResponsivePropValue, beforeNextFrameOnce } from 'seemly'
 import { defaultBreakpoints } from '../../config-provider/src/config'
 import { useConfig } from '../../_mixins'
-import {
-  getSlot,
-  flatten,
-  ExtractPublicPropTypes,
-  createInjectionKey
-} from '../../_utils'
-import { defaultSpan } from './GridItem'
+import { getSlot, flatten, ExtractPublicPropTypes } from '../../_utils'
+import { defaultSpan, gridInjectionKey } from './config'
 
 const defaultCols = 24
 
@@ -59,8 +54,6 @@ export interface NGridInjection {
   xGapRef: Ref<string | undefined>
   overflowRef: Ref<boolean>
 }
-
-export const gridInjectionKey = createInjectionKey<NGridInjection>('n-grid')
 
 export type GridProps = ExtractPublicPropTypes<typeof gridProps>
 

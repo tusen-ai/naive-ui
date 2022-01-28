@@ -13,7 +13,7 @@ import {
 import { throttle } from 'lodash-es'
 import { useTheme, useHljs, ThemeProps, useConfig } from '../../_mixins'
 import type { Hljs } from '../../_mixins'
-import { createInjectionKey, ExtractPublicPropTypes, warn } from '../../_utils'
+import { ExtractPublicPropTypes, warn } from '../../_utils'
 import { NScrollbar } from '../../_internal'
 import type { ScrollbarInst } from '../../_internal'
 import { NCode } from '../../code'
@@ -21,6 +21,7 @@ import { logLight, LogTheme } from '../styles'
 import NLogLoader from './LogLoader'
 import NLogLine from './LogLine'
 import style from './styles/index.cssr'
+import { logInjectionKey } from './context'
 
 export interface LogInjection {
   trimRef: Ref<boolean>
@@ -28,8 +29,6 @@ export interface LogInjection {
   highlightRef: Ref<boolean>
   mergedHljsRef: Ref<Hljs | undefined>
 }
-
-export const logInjectionKey = createInjectionKey<LogInjection>('n-log')
 
 const logProps = {
   ...(useTheme.props as ThemeProps<LogTheme>),

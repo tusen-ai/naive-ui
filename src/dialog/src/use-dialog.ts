@@ -1,5 +1,5 @@
 import { inject } from 'vue'
-import { dialogApiInjectionKey } from './DialogProvider'
+import { dialogApiInjectionKey } from './context'
 import type { DialogApiInjection } from './DialogProvider'
 import { throwError } from '../../_utils'
 

@@ -1,5 +1,5 @@
 import { computed, ref, ComputedRef } from 'vue'
-import {
+import type {
   ColumnKey,
   InternalRowData,
   SortOrder,

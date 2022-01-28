@@ -16,12 +16,11 @@ import { createTreeMate, Key } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createInjectionKey } from '../../_utils'
+import { call } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { itemRenderer } from './utils'
 import { menuLight } from '../styles'
 import type { MenuTheme } from '../styles'
-import { MenuInjection } from './use-menu-child'
 import style from './styles/index.cssr'
 import {
   MenuOption,
@@ -35,8 +34,9 @@ import {
 } from './interface'
 import { layoutSiderInjectionKey } from '../../layout/src/interface'
 import { FollowerPlacement } from 'vueuc'
-import { useCheckDeprecated } from './useCheckDeprecated'
 import { DropdownProps } from '../../dropdown'
+import { useCheckDeprecated } from './useCheckDeprecated'
+import { menuInjectionKey } from './context'
 
 const menuProps = {
   ...(useTheme.props as ThemeProps<MenuTheme>),
@@ -130,8 +130,6 @@ const menuProps = {
 export type MenuSetupProps = ExtractPropTypes<typeof menuProps>
 
 export type MenuProps = Partial<MenuSetupProps>
-
-export const menuInjectionKey = createInjectionKey<MenuInjection>('n-menu')
 
 export default defineComponent({
   name: 'Menu',

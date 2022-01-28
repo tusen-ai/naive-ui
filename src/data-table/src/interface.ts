@@ -4,8 +4,8 @@ import { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
 import { DataTableTheme } from '../styles'
-import { RowItem, ColItem } from './use-group-header'
-import { DataTableSelectionOption } from './TableParts/SelectionMenu'
+import type { RowItem, ColItem } from './use-group-header'
+import type { DataTableSelectionOption } from './TableParts/SelectionMenu'
 import { createInjectionKey } from '../../_utils'
 
 export type FilterOptionValue = string | number

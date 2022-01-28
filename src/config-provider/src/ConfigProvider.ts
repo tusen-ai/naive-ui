@@ -10,7 +10,7 @@ import {
 } from 'vue'
 import { useMemo } from 'vooks'
 import { merge } from 'lodash-es'
-import { createInjectionKey, ExtractPublicPropTypes, warn } from '../../_utils'
+import { ExtractPublicPropTypes, warn } from '../../_utils'
 import { defaultClsPrefix, Hljs } from '../../_mixins'
 import type {
   GlobalTheme,
@@ -19,15 +19,12 @@ import type {
   GlobalIconConfig
 } from './interface'
 import type {
-  ConfigProviderInjection,
   RtlProp,
   RtlEnabledState,
   Breakpoints
 } from './internal-interface'
 import { NDateLocale, NLocale } from '../../locales'
-
-export const configProviderInjectionKey =
-  createInjectionKey<ConfigProviderInjection>('n-config-provider')
+import { configProviderInjectionKey } from './context'
 
 export const configProviderProps = {
   abstract: Boolean,

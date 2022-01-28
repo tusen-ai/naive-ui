@@ -8,7 +8,8 @@ import {
   onMounted
 } from 'vue'
 import { keep } from '../../_utils'
-import NNotification, {
+import {
+  Notification,
   notificationProps,
   notificationPropKeys
 } from './Notification'
@@ -28,7 +29,7 @@ export const notificationEnvOptions = {
   onAfterHide: Function as PropType<() => void>
 } as const
 
-export default defineComponent({
+export const NotificationEnvironment = defineComponent({
   name: 'NotificationEnvironment',
   props: {
     ...notificationEnvOptions,
@@ -130,7 +131,7 @@ export default defineComponent({
         {{
           default: () => {
             return this.show ? (
-              <NNotification
+              <Notification
                 {...keep(this.$props, notificationPropKeys)}
                 onClose={this.handleClose}
               />

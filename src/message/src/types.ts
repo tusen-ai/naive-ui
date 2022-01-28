@@ -1,5 +1,5 @@
 import { VNodeChild } from 'vue'
-import { MessageSetupProps } from './message-props'
+import type { MessageSetupProps } from './message-props'
 
 export type MessageType = 'info' | 'success' | 'warning' | 'error' | 'loading'
 

@@ -8,18 +8,18 @@ import {
   provide,
   VNodeChild,
   ExtractPropTypes,
-  Ref,
   PropType,
   CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
-import { createInjectionKey, omit } from '../../_utils'
+import { omit } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { MessageTheme } from '../styles'
 import type { MessageOptions, MessageType } from './types'
 import MessageEnvironment from './MessageEnvironment'
+import { messageApiInjectionKey, messageProviderInjectionKey } from './context'
 
 type ContentType = string | (() => VNodeChild)
 
@@ -31,9 +31,6 @@ export interface MessageApiInjection {
   loading: (content: ContentType, options?: MessageOptions) => MessageReactive
   destroyAll: () => void
 }
-
-export const messageApiInjectionKey =
-  createInjectionKey<MessageApiInjection>('n-message-api')
 
 export interface MessageReactive {
   content?: ContentType
@@ -85,12 +82,9 @@ export type MessageProviderProps = ExtractPublicPropTypes<
   typeof messageProviderProps
 >
 
-type MessageProviderSetupProps = ExtractPropTypes<typeof messageProviderProps>
-
-export const messageProviderInjectionKey = createInjectionKey<{
-  props: MessageProviderSetupProps
-  mergedClsPrefixRef: Ref<string>
-}>('n-message-provider')
+export type MessageProviderSetupProps = ExtractPropTypes<
+  typeof messageProviderProps
+>
 
 export default defineComponent({
   name: 'MessageProvider',
