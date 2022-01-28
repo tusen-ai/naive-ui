@@ -121,7 +121,10 @@ export const unconfigurableStyle = c([
           borderRadius: '16px'
         })
       ])
-    ])
+    ]),
+    cB('data-table-empty', {
+      backgroundColor: '#141414'
+    })
   ]),
   cB('dialog', [
     cB('dialog__title', {
