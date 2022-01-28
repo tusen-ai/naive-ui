@@ -5,20 +5,20 @@ export function mountSvgDefs (): void {
   if (document.getElementById('naive-ui/tusimple/svg-defs')) return
   const svgDefs = `<defs>
     <linearGradient id="progress-info">
-      <stop offset="0%" stop-color="#335fff" />
-      <stop offset="100%" stop-color="#80c6ff" />
+      <stop offset="0%" stop-color="#80c6ff" />
+      <stop offset="100%" stop-color="#335fff" />
     </linearGradient>
     <linearGradient id="progress-success">
-      <stop offset="0%" stop-color="#4FB233" />
-      <stop offset="100%" stop-color="#AFF25E" />
+      <stop offset="0%" stop-color="#AFF25E" />
+      <stop offset="100%" stop-color="#4FB233" />
     </linearGradient>
     <linearGradient id="progress-warning">
-      <stop offset="0%" stop-color="#FFAC26" />
-      <stop offset="100%" stop-color="#F2E93D" />
+      <stop offset="0%" stop-color="#F2E93D" />
+      <stop offset="100%" stop-color="#FFAC26" />
     </linearGradient>
     <linearGradient id="progress-error">
-      <stop offset="0%" stop-color="#D92149" />
-      <stop offset="100%" stop-color="#FF66BA" />
+      <stop offset="0%" stop-color="#FF66BA" />
+      <stop offset="100%" stop-color="#D92149" />
     </linearGradient>
   </defs>`
   const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
@@ -39,7 +39,15 @@ export const unconfigurableStyle = c([
         cM('pending', {
           borderRadius: '0 0 16px 16px'
         })
-      ])
+      ]),
+      c('&:first-child:last-child', [
+        cM('pending', {
+          borderRadius: '16px'
+        })
+      ]),
+      cM('selected', {
+        backgroundColor: 'transparent'
+      })
     ])
   ]),
   cB('base-selection', [

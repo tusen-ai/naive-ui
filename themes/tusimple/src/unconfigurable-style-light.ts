@@ -44,7 +44,10 @@ export const unconfigurableStyle = c([
         cM('pending', {
           borderRadius: '16px'
         })
-      ])
+      ]),
+      cM('selected', {
+        backgroundColor: 'transparent'
+      })
     ])
   ]),
   cB('base-selection', [
