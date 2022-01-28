@@ -578,8 +578,8 @@ export const themeOverridesDark: GlobalThemeOverrides = {
   TimePicker: {
     itemFontSize: '16px',
     itemHeight: '38px',
-    itemWidth: '66px',
-    panelActionPadding: '12px 8px',
+    itemWidth: '74px',
+    panelActionPadding: '12px 0',
     itemTextColor: '#FFF'
   },
   Tooltip: {
