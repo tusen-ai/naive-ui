@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-tabs` 的 `justify-content` 新增类型 `start` `center` `end`
+- `n-tabs` 新增 `tab-bar-width` 属性
 
 ## 2.24.7 (2022-01-28)
 

@@ -16,6 +16,7 @@ addable
 before-leave
 no-pane
 update-bar-manually.vue
+bar-width.vue
 line-debug
 style-inherit-debug
 shadow-debug
@@ -37,6 +38,7 @@ unkeyed-debug
 | pane-style | `string \| object` | `undefined` | 面板的样式 |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |
 | tabs-padding | `number` | `0` | 全部标签最左和最右的 `padding` |
+| tab-bar-width | `string \| number` | `undefined` | 标签条的宽度 |
 | type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | 标签类型 |
 | value | `string \| number` | `undefined` | 受控模式下的值 |
 | on-add | `() => void` | `undefined` | 添加标签的回调函数 |

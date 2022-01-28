@@ -16,6 +16,7 @@ addable
 before-leave
 no-pane
 update-bar-manually.vue
+bar-width.vue
 ```
 
 ## API
@@ -33,6 +34,7 @@ update-bar-manually.vue
 | pane-style | `string \| object` | `undefined` | Style of the pane. |
 | tab-style | `string \| object` | `undefined` | Style of the tab. |
 | tabs-padding | `number` | `0` | Left & right `padding` of the group of tabs. |
+| tab-bar-width | `string \| number` | `undefined` | The width of the label bar. |
 | type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | Tabs type. |
 | value | `string \| number` | `undefined` | Value in controlled mode. |
 | on-add | `() => void` | `undefined` | Callback function triggered when add tag. |

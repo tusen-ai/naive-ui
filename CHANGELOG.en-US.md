@@ -4,7 +4,8 @@
 
 ### Feats
 
-- `n-tabs` props `justify-content` add types `start` `center` `end`
+- `n-tabs` props `justify-content` add types `start` `center` `end`.
+- `n-tabs` add `tab-bar-width` prop.
 
 ## 2.24.7 (2022-01-28)
 
