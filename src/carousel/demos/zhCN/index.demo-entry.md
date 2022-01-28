@@ -35,7 +35,7 @@ custom-arrow-and-dots
 | default-index | `number` | `0` | 默认显示页 | 2.24.0 |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | 轮播图显示的方向 |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | 轮播指示点位置 | 2.24.0 |
-| dot-type | `'dot' \| 'line' \| 'never'` | `'dot'` | 轮播指示点样式 | 2.24.0 |
+| dot-type | `'dot' \| 'line'` | `'dot'` | 轮播指示点样式 | 2.24.0 |
 | draggable | `boolean` | `false` | 是否通过鼠标拖拽切换轮播图 | 2.24.0 |
 | effect | `'slide' \| 'fade' \| 'card' \| 'custom'` | `'slide'` | 轮播图切换时的过渡效果 | 2.24.0，`'card'` 2.24.2 |
 | interval | `number` | `5000` | 自动播放的间隔（ms） |
