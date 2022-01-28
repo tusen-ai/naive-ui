@@ -28,7 +28,7 @@ export const renderSorter: DataTableRenderSorter = ({ order }) => {
           color:
             order === 'ascend'
               ? 'var(--n-th-icon-color-active)'
-              : 'var(--n-th-icon-color);'
+              : 'var(--n-th-icon-color)'
         }
       }),
       h(CaretDownOutline, {
@@ -37,7 +37,7 @@ export const renderSorter: DataTableRenderSorter = ({ order }) => {
           color:
             order === 'descend'
               ? 'var(--n-th-icon-color-active)'
-              : 'var(--n-th-icon-color);'
+              : 'var(--n-th-icon-color)'
         }
       })
     ]
@@ -46,7 +46,7 @@ export const renderSorter: DataTableRenderSorter = ({ order }) => {
 
 export const renderFilter: DataTableRenderFilter = ({ active, show }) => {
   const fill =
-    active || show ? 'var(--n-th-icon-color-active)' : 'var(--n-th-icon-color);'
+    active || show ? 'var(--n-th-icon-color-active)' : 'var(--n-th-icon-color)'
   return (
     <div
       style={{
