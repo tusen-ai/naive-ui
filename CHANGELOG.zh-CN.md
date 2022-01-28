@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### Feats
+
+- `n-tabs` 的 `justify-content` 新增类型 `start` `center` `end`
+
 ## 2.24.7 (2022-01-28)
 
 ### Fixes
