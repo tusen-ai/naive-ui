@@ -448,7 +448,7 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     }
   },
   Transfer: {
-    extraTextColor: colors.textColor1
+    extraTextColor: '#666'
   },
   Typography: {
     headerPrefixWidth3: '15px',

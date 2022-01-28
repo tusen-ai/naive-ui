@@ -187,7 +187,27 @@ export const unconfigurableStyle = c([
           padding: '0'
         })
       ]
-    )
+    ),
+    cB('transfer-list', [
+      cB('transfer-list-header', [
+        cB('transfer-list-header__checkbox', {
+          paddingLeft: '12px',
+          paddingRight: '13px'
+        })
+      ]),
+      cB('transfer-list-body', [
+        cB('transfer-list-flex-container', [
+          cB('transfer-list-content', [
+            cB('transfer-list-item', [
+              cB('transfer-list-item__checkbox', {
+                paddingLeft: '12px',
+                paddingRight: '13px'
+              })
+            ])
+          ])
+        ])
+      ])
+    ])
   ]),
   cB('message', [
     cE('close', [

@@ -594,8 +594,8 @@ export const themeOverridesDark: GlobalThemeOverrides = {
   },
   Transfer: {
     borderColor: '#5B5B5B',
-    headerColor: '#333333',
-    extraTextColor: colors.textColor1
+    headerColor: '#363636',
+    extraTextColor: '#D6D6D6'
   },
   Typography: {
     headerPrefixWidth3: '15px',
