@@ -1,78 +1,81 @@
-# Cancelable
+<markdown>
+# 让它滚动
 
-Make single value popselect cancelable.
+</markdown>
 
-```html
-<n-popselect v-model:value="value" cancelable :options="options">
-  <n-button>{{ value || 'Popselect' }}</n-button>
-</n-popselect>
-```
+<template>
+  <n-popselect
+    v-model:value="value"
+    :options="options"
+    size="medium"
+    scrollable
+  >
+    <n-button style="margin-right: 8px">
+      {{ value || 'Popselect' }}
+    </n-button>
+  </n-popselect>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup () {
     return {
-      value: ref('song1'),
+      value: ref('Drive My Car'),
       options: [
         {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
-          value: 'song0',
-          disabled: true
-        },
-        {
           label: 'Drive My Car',
-          value: 'song1'
+          value: 'Drive My Car'
         },
         {
           label: 'Norwegian Wood',
-          value: 'song2'
+          value: 'Norwegian Wood'
         },
         {
           label: "You Won't See",
-          value: 'song3',
+          value: "You Won't See",
           disabled: true
         },
         {
           label: 'Nowhere Man',
-          value: 'song4'
+          value: 'Nowhere Man'
         },
         {
           label: 'Think For Yourself',
-          value: 'song5'
+          value: 'Think For Yourself'
         },
         {
           label: 'The Word',
-          value: 'song6'
+          value: 'The Word'
         },
         {
           label: 'Michelle',
-          value: 'song7',
+          value: 'Michelle',
           disabled: true
         },
         {
           label: 'What goes on',
-          value: 'song8'
+          value: 'What goes on'
         },
         {
           label: 'Girl',
-          value: 'song9'
+          value: 'Girl'
         },
         {
           label: "I'm looking through you",
-          value: 'song10'
+          value: "I'm looking through you"
         },
         {
           label: 'In My Life',
-          value: 'song11'
+          value: 'In My Life'
         },
         {
           label: 'Wait',
-          value: 'song12'
+          value: 'Wait'
         }
       ]
     }
   }
 })
-```
+</script>

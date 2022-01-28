@@ -1,12 +1,21 @@
+<markdown>
 # Scrollable
+</markdown>
 
-```html
-<n-popselect v-model:value="value" :options="options" size="medium" scrollable>
-  <n-button style="margin-right: 8px;">{{ value || 'Popselect' }}</n-button>
-</n-popselect>
-```
+<template>
+  <n-popselect
+    v-model:value="value"
+    :options="options"
+    size="medium"
+    scrollable
+  >
+    <n-button style="margin-right: 8px">
+      {{ value || 'Popselect' }}
+    </n-button>
+  </n-popselect>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -68,4 +77,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

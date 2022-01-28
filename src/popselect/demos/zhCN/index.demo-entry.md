@@ -5,11 +5,11 @@
 ## 演示
 
 ```demo
-basic
-size
-scrollable
-multiple
-slot
+basic.vue
+size.vue
+scrollable.vue
+multiple.vue
+slot.vue
 ```
 
 ## API
