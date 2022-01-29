@@ -1,5 +1,5 @@
 import { changeColor } from 'seemly'
-import { c, cB, cE, cM } from 'naive-ui'
+import { c, cB, cE, cM, cNotM } from 'naive-ui'
 
 export function mountSvgDefs (): void {
   if (document.getElementById('naive-ui/tusimple/svg-defs')) return
@@ -99,6 +99,16 @@ export const unconfigurableStyle = c([
           c('&:nth-child(7n + 7)::before', {
             right: '0'
           })
+        ]),
+        cM('covered, start, end', [
+          cNotM('excluded', [
+            c('&:nth-child(7n + 1)::before', {
+              left: '0'
+            }),
+            c('&:nth-child(7n + 7)::before', {
+              right: '0'
+            })
+          ])
         ])
       ])
     ])
