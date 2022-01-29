@@ -106,7 +106,7 @@ export const unconfigurableStyle = c([
       ])
     ]),
     cB('data-table-empty', {
-      backgroundColor: '#141414'
+      backgroundColor: '#1E1E1E'
     })
   ]),
   cB('dialog', [
