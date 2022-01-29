@@ -199,7 +199,6 @@ export const themeOverridesDark: GlobalThemeOverrides = {
   DataTable: {
     fontSizeMedium: '16px',
     borderColor: '#404040',
-    thColor: '#282828',
     thTextColor: '#FFFFFF',
     tdColor: '#1E1E1E',
     tdTextColor: '#FFFFFF',
@@ -371,7 +370,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     boxShadowError: vars.SPECIAL_BOX_SHADOW_DARK_THEME,
     boxShadowWarning: vars.SPECIAL_BOX_SHADOW_DARK_THEME,
     textColorError: '#FFF',
-    textColorSuccess: '#FFF',
+    textColorSuccess: '#333',
     textColorInfo: '#FFF',
     textColorWarning: '#333',
     iconColorInfo: 'FFF',
