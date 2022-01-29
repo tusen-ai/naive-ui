@@ -6,6 +6,10 @@
 
 - `n-tabs` props `justify-content` add types `start` `center` `end`
 
+### Fixes
+
+- Fix `n-data-table` scroll abnormal when used `virtual-scroll` and `expand` props.
+
 ## 2.24.7 (2022-01-28)
 
 ### Fixes

@@ -6,6 +6,10 @@
 
 - `n-tabs` 的 `justify-content` 新增类型 `start` `center` `end`
 
+### Fixes
+
+- 修复 `n-data-table` 使用 `virtual-scroll` 和 `expand` 属性时发生的滚动异常
+
 ## 2.24.7 (2022-01-28)
 
 ### Fixes

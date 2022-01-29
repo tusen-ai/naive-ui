@@ -553,7 +553,7 @@ export default defineComponent({
               if (renderExpand && mergedExpandedRowKeySet.has(rowInfo.key)) {
                 displayedData.push(rowInfo, {
                   isExpandedRow: true,
-                  key: rowInfo.key,
+                  key: `${rowInfo.key}-expand`,
                   tmNode: rowInfo.tmNode as TmNode
                 })
               } else {
@@ -573,6 +573,9 @@ export default defineComponent({
               rowIndex: number,
               isVirtual: boolean
             ): VNode => {
+              console.log('rowIndex', rowIndex)
+              console.log('rowInfo', rowInfo)
+
               if ('isExpandedRow' in rowInfo) {
                 const {
                   tmNode: { key, rawNode }
