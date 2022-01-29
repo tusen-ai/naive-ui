@@ -93,11 +93,13 @@ export const unconfigurableStyle = c([
         backgroundColor: 'transparent'
       })
     ]),
-    cB('data-table-wrapper', [
-      cB('data-table-base-table', [
-        cB('data-table-base-table-body', {
-          borderRadius: '16px'
-        })
+    cM('bottom-bordered', [
+      cB('data-table-wrapper', [
+        cB('data-table-base-table', [
+          cB('data-table-base-table-body', {
+            borderRadius: 'var(--n-border-radius);'
+          })
+        ])
       ])
     ]),
     cB('data-table-empty', {
