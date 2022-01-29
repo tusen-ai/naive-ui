@@ -60,16 +60,12 @@ export const NSubmenu = defineComponent({
       mergedDisabledRef
     })
     provide(menuItemGroupInjectionKey, null)
-    function doClick (): void {
-      const { onClick } = props
-      if (onClick) onClick()
-    }
     function handleClick (): void {
       if (!mergedDisabledRef.value) {
         if (!mergedCollapsedRef.value) {
           NMenu.toggleExpand(props.internalKey)
         }
-        doClick()
+        props.onClick?.()
       }
     }
     function handlePopoverShowChange (value: boolean): void {

@@ -24,12 +24,8 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       inject(treeInjectionKey)!
     const selfRef = ref<HTMLElement | null>(null)
-    function doClick (e: MouseEvent): void {
-      const { onClick } = props
-      if (onClick) onClick(e)
-    }
     function handleClick (e: MouseEvent): void {
-      doClick(e)
+      props.onClick?.(e)
     }
     return {
       selfRef,

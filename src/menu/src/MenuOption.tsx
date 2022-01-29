@@ -31,14 +31,10 @@ export const NMenuOption = defineComponent({
     const mergedDisabledRef = computed(() => {
       return submenuDisabledRef.value || props.disabled
     })
-    function doClick (e: MouseEvent): void {
-      const { onClick } = props
-      if (onClick) onClick(e)
-    }
     function handleClick (e: MouseEvent): void {
       if (!mergedDisabledRef.value) {
         NMenu.doSelect(props.internalKey, props.tmNode.rawNode)
-        doClick(e)
+        props.onClick?.(e)
       }
     }
     return {
