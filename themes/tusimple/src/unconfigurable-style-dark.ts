@@ -66,6 +66,9 @@ export const unconfigurableStyle = c([
             })
           ]
         ),
+        cM('selected', {
+          color: '#fff'
+        }),
         cM('start, end', [
           c('&:nth-child(7n + 1)::before', {
             left: '0'
@@ -337,22 +340,5 @@ export const unconfigurableStyle = c([
         })
       ]
     )
-  ]),
-  cB('date-panel', [
-    cB('date-panel-dates', [
-      cB('date-panel-date', [
-        cM(
-          'current',
-          {
-            color: '#4FB233'
-          },
-          [
-            cB('date-panel-date__sup', {
-              display: 'none'
-            })
-          ]
-        )
-      ])
-    ])
   ])
 ])

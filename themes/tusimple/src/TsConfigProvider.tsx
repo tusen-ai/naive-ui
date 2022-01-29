@@ -77,7 +77,6 @@ export default defineComponent({
           mountLightTheme()
         } else {
           unmountTheme()
-          console.log(111)
           mountDarkTheme()
         }
       },
