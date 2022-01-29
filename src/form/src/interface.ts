@@ -6,15 +6,22 @@ export interface FormRules {
   [path: string]: FormRules | FormItemRule | FormItemRule[]
 }
 
+type OmitRuleParameter<T, R> = T extends (
+  rule: infer U,
+  ...args: infer K
+) => infer P
+  ? (rule: R, ...args: K) => P
+  : T
+
 export type FormItemRuleValidatorParams = Parameters<
-NonNullable<RuleItem['validator']>
+OmitRuleParameter<NonNullable<RuleItem['validator']>, FormItemRule>
 >
 
 export type FormItemRuleValidator = (
   ...args: FormItemRuleValidatorParams
 ) => boolean | Error | Error[] | Promise<void> | undefined
 
-// In src of async-validator, any non-promise of asyncValidator will be abadoned
+// In src of async-validator, any non-promise of asyncValidator will be abandoned
 export type FormItemRuleAsyncValidator = (
   ...args: FormItemRuleValidatorParams
 ) => Promise<void> | undefined
