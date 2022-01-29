@@ -28,28 +28,9 @@ export function mountSvgDefs (): void {
 }
 
 export const unconfigurableStyle = c([
-  cB('base-select-menu', [
-    cB('base-select-option', [
-      c('&:first-child', [
-        cM('pending', {
-          borderRadius: '16px 16px 0 0'
-        })
-      ]),
-      c('&:last-child', [
-        cM('pending', {
-          borderRadius: '0 0 16px 16px'
-        })
-      ]),
-      c('&:first-child:last-child', [
-        cM('pending', {
-          borderRadius: '16px'
-        })
-      ]),
-      cM('selected', {
-        backgroundColor: 'transparent'
-      })
-    ])
-  ]),
+  cB('base-select-menu', {
+    overflow: 'hidden'
+  }),
   cB('base-selection', [
     cB('base-suffix', {
       transition: 'all .3s'
