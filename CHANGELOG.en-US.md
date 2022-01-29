@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-tabs` props `justify-content` add types `start` `center` `end`
+- `n-dynamic-input` adds `create-button-text` prop
 
 ## 2.24.7 (2022-01-28)
 

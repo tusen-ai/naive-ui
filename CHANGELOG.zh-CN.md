@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-tabs` 的 `justify-content` 新增类型 `start` `center` `end`
+- `n-dynamic-input` 新增 `create-button-text` 属性
 
 ## 2.24.7 (2022-01-28)
 
