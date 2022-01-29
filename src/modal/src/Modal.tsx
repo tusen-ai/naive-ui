@@ -29,7 +29,7 @@ import style from './styles/index.cssr'
 const modalProps = {
   ...(useTheme.props as ThemeProps<ModalTheme>),
   show: Boolean,
-  unstableShowMask: {
+  showMask: {
     type: Boolean,
     default: true
   },
@@ -268,7 +268,7 @@ export default defineComponent({
                 class={[`${mergedClsPrefix}-modal-container`, this.namespace]}
                 style={this.cssVars as CSSProperties}
               >
-                {this.unstableShowMask ? (
+                {this.showMask ? (
                   <Transition
                     name="fade-in-transition"
                     key="mask"

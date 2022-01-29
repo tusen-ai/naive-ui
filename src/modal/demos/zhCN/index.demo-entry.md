@@ -8,6 +8,7 @@
 basic
 controlled
 mask-closable
+show-mask.vue
 custom-position
 preset-card
 preset-confirm
@@ -37,6 +38,7 @@ dark-10-debug
 | auto-focus | `boolean` | `true` | 是否自动聚焦 Modal 第一个可聚焦的元素 | 2.24.2 |
 | close-on-esc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭 Modal | 2.24.2 |
 | display-directive | `'if' \| 'show'` | `'if'` | 使用何种指令控制模态框主体的条件渲染 |  |
+| show-mask | `boolean` | `true` | 是否显示遮罩层 | NEXT_VERISON |
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |  |
 | preset | `'dialog' \| 'card'` | `undefined` | 模态框使用何种预设 |  |
 | show | `boolean` | `false` | 是否展示 Modal |  |

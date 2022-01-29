@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-tabs` 的 `justify-content` 新增类型 `start` `center` `end`
+- `n-modal` 新增 `show-mask` 属性，关闭 [#2261](https://github.com/TuSimple/naive-ui/issues/2261)
 
 ## 2.24.7 (2022-01-28)
 

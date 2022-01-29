@@ -8,6 +8,7 @@ It just pops and shows you something.
 basic
 controlled
 mask-closable
+show-mask.vue
 custom-position
 preset-card
 preset-confirm
@@ -25,6 +26,7 @@ transform-origin
 | close-on-esc | `boolean` | `true` | Whether to close modal on Esc is pressed. | 2.24.2 |
 | display-directive | `'if' \| 'show'` | `'if'` | Use which directive to control the rendering of modal body. |  |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |  |
+| show-mask | `boolean` | `true` | Whether to show mask. | NEXT_VERISON |
 | preset | `'dialog' \| 'card'` | `undefined` | The preset of `n-modal`. |  |
 | show | `boolean` | `false` | Whether to show modal. |  |
 | to | `string \| HTMLElement` | `body` | Container node of the modal content. |  |

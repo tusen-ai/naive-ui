@@ -4,7 +4,8 @@
 
 ### Feats
 
-- `n-tabs` props `justify-content` add types `start` `center` `end`
+- `n-tabs` props `justify-content` add types `start` `center` `end`.
+- `n-modal` add `show-mask` prop, close [#2261](https://github.com/TuSimple/naive-ui/issues/2261).
 
 ## 2.24.7 (2022-01-28)
 
