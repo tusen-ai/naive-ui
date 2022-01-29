@@ -113,7 +113,12 @@ export const unconfigurableStyle = c([
   cB('dynamic-tags', [
     cB('button', {
       height: ' 24px'
-    })
+    }),
+    cB('input', [
+      cM('autosize', {
+        minWidth: '68px'
+      })
+    ])
   ]),
   cB('table', [
     c('th', {
