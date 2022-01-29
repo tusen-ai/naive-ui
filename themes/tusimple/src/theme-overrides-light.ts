@@ -213,9 +213,6 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     actionSpace: '20px',
     contentMargin: '12px 0 40px 0'
   },
-  Dropdown: {
-    padding: '0'
-  },
   DynamicTags: {
     peers: {
       Tag: {

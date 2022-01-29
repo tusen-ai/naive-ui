@@ -68,22 +68,9 @@ export const unconfigurableStyle = c([
       )
     ])
   ]),
-  cB('dropdown-menu', [
-    cB('dropdown-option', [
-      c('&:first-child', {
-        borderRadius: '16px 16px 0 0',
-        overflow: 'hidden'
-      }),
-      c('&:last-child', {
-        borderRadius: '0 0 16px 16px',
-        overflow: 'hidden'
-      }),
-      c('&:first-child:last-child', {
-        borderRadius: '0 0 16px 16px',
-        overflow: 'hidden'
-      })
-    ])
-  ]),
+  cB('dropdown-menu', {
+    overflow: 'hidden'
+  }),
   cB('date-panel', [
     cB('date-panel-dates', [
       cB('date-panel-date', [
