@@ -220,7 +220,7 @@ export const unconfigurableStyle = c([
       cB('progress-graph-line', [
         cB('progress-graph-line-rail', [
           cB('progress-graph-line-fill', {
-            background: 'linear-gradient(270deg, #FFAC26 0%, #F2E93D 100%)'
+            background: 'linear-gradient(270deg, #F2E93D 0%, #FFAC26 100%)'
           })
         ])
       ]),
@@ -234,7 +234,7 @@ export const unconfigurableStyle = c([
       cB('progress-graph-line', [
         cB('progress-graph-line-rail', [
           cB('progress-graph-line-fill', {
-            background: 'linear-gradient(270deg, #FFAC26 0%, #F2E93D 100%)'
+            background: 'linear-gradient(270deg, #F2E93D 0%, #FFAC26 100%)'
           })
         ])
       ]),
@@ -248,7 +248,7 @@ export const unconfigurableStyle = c([
       cB('progress-graph-line', [
         cB('progress-graph-line-rail', [
           cB('progress-graph-line-fill', {
-            background: 'linear-gradient(270deg, #4FB233 0%, #AFF25E 100%)'
+            background: 'linear-gradient(270deg, #AFF25E 0%, #4FB233 100%)'
           })
         ])
       ]),
@@ -262,7 +262,7 @@ export const unconfigurableStyle = c([
       cB('progress-graph-line', [
         cB('progress-graph-line-rail', [
           cB('progress-graph-line-fill', {
-            background: 'linear-gradient(270deg, #D92149 0%, #FF66BA 100%)'
+            background: 'linear-gradient(270deg, #FF66BA 0%, #D92149 100%)'
           })
         ])
       ]),
@@ -276,7 +276,7 @@ export const unconfigurableStyle = c([
       cB('progress-graph-line', [
         cB('progress-graph-line-rail', [
           cB('progress-graph-line-fill', {
-            background: 'linear-gradient(270deg, #D92149 0%, #FF66BA 100%)'
+            background: 'linear-gradient(270deg, #FF66BA 0%, #D92149 100%)'
           })
         ])
       ]),
