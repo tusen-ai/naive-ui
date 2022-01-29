@@ -573,9 +573,6 @@ export default defineComponent({
               rowIndex: number,
               isVirtual: boolean
             ): VNode => {
-              console.log('rowIndex', rowIndex)
-              console.log('rowInfo', rowInfo)
-
               if ('isExpandedRow' in rowInfo) {
                 const {
                   tmNode: { key, rawNode }
