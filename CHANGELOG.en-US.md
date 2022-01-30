@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-icon` add `component` prop.
+- add `n-gradient-picker` component.
 
 ### Fixes
 
