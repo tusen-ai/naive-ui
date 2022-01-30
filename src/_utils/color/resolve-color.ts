@@ -1,20 +1,14 @@
 import colors from './colors'
 
-const brightnessRE = /^(.*)(-(\d+))$/
-
-export function resolveColor (exp: string): string {
-  const brightnessMatch = exp.match(brightnessRE)
-  if (brightnessMatch) {
-    const [, raw, , brightness] = brightnessMatch
-    if (raw in colors) {
-      const color = colors[raw]
-      if (typeof color === 'string') {
-        return color
-      }
-      if (brightness in color) {
-        return color[brightness]
-      }
+export function resolveColor (path: string): string | undefined {
+  if (path.includes('-')) {
+    const segments = path.split('-')
+    let color: any = colors
+    for (let i = 0; i < segments.length; i++) {
+      color = color[segments[i]]
+      if (!color) return
     }
+    return color
   }
-  return exp
+  return path in colors ? colors[path] : path
 }
