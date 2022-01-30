@@ -29,6 +29,7 @@ import type { ElementTheme } from '../../element/styles'
 import type { EllipsisTheme } from '../../ellipsis/styles'
 import type { EmptyTheme } from '../../empty/styles'
 import type { FormTheme } from '../../form/styles'
+import type { GradientPickerTheme } from '../../gradient-picker/styles'
 import type { GradientTextTheme } from '../../gradient-text/styles'
 import type { IconTheme } from '../../icon/styles'
 import type { ImageTheme } from '../../image/styles'
@@ -118,6 +119,7 @@ export interface GlobalThemeWithoutCommon {
   Ellipsis?: EllipsisTheme
   Empty?: EmptyTheme
   Form?: FormTheme
+  GradientPicker?: GradientPickerTheme
   GradientText?: GradientTextTheme
   Icon?: IconTheme
   Image?: ImageTheme

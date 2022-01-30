@@ -1,21 +1,5 @@
 # CHANGELOG
 
-## Pending
-
-### Feats
-
-- `n-tabs` props `justify-content` add types `start` `center` `end`
-
-## 2.24.7 (2022-01-28)
-
-### Fixes
-
-- `n-popselect` doesn't work with `width="trigger"`.
-
-### i18n
-
-- Update jaJP locale.
-
 ## 2.24.6 (2022-01-26)
 
 ### Feats
