@@ -8,7 +8,7 @@
 
 ### Fixes
 
-- Fix `n-data-table` scroll abnormal when used `virtual-scroll` and `expand` props.
+- Fix `n-data-table` scroll abnormal when used `virtual-scroll` and `expand` props, closes [#2239](https://github.com/TuSimple/naive-ui/issues/2239).
 
 ## 2.24.7 (2022-01-28)
 

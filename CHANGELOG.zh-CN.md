@@ -8,7 +8,7 @@
 
 ### Fixes
 
-- 修复 `n-data-table` 使用 `virtual-scroll` 和 `expand` 属性时发生的滚动异常
+- 修复 `n-data-table` 使用 `virtual-scroll` 和 `expand` 属性时发生的滚动异常，关闭 [#2239](https://github.com/TuSimple/naive-ui/issues/2239)
 
 ## 2.24.7 (2022-01-28)
 
