@@ -47,7 +47,7 @@ option-props
 | children? | `Array<DropdownOption \| DropdownDividerOption \| DropdownGroupOptionOption>` | 子菜单的 children 项 |
 | icon? | `() => VNodeChild` | 支持通过 render 方法自定义 icon |
 | key | `string \| number` | 需要唯一 |
-| label | `string` | 显示的 label 值 |
+| label | `string \| () => VNodeChild` | 显示的 label 值 |
 | disabled | `boolean` | 是否禁用 |
 | props | `HTMLAttributes` | 自定义选项属性 |
 

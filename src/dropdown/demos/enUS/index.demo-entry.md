@@ -46,7 +46,7 @@ For other props, for example `placement`, please see [Popover Props](popover#Pop
 | children? | `Array<DropdownOption \| DropdownDividerOption>` | Child options. |
 | icon? | `() => VNodeChild` | Custom render function of an option icon. |
 | key | `string \| number` | Option ID (should be unique). |
-| label | `string` | Displayed label value. |
+| label | `string \| () => VNodeChild)` | Displayed label value. |
 | disabled | `boolean` | Whether to disable the option. |
 | props | `HTMLAttributes` | Customize option props. |
 
