@@ -1,7 +1,7 @@
 <markdown>
-# 上下文菜单
+# 右键菜单
 
-你可以定义一些上下文菜单来完成你需要的功能
+配合 `n-dropdown` 实现右键菜单。
 </markdown>
 
 <template>
@@ -19,18 +19,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, h, reactive, ref, nextTick } from 'vue'
+import { defineComponent, h, ref, nextTick } from 'vue'
 import { DataTableColumns, DropdownOption, useMessage } from 'naive-ui'
 
-const data = [
-  {
-    Left: '1',
-    Right: '1'
-  },
-  {
-    Left: '2',
-    Right: '2'
-  }
+type Song = {
+  no: number
+  title: string
+  length: string
+}
+
+const data: Song[] = [
+  { no: 1, title: 'Hello', length: '3:21' },
+  { no: 2, title: 'Roll with It', length: '3:59' },
+  { no: 3, title: 'Wonderwall', length: '4:18' },
+  { no: 4, title: "Don't Look Back in Anger", length: '4:48' },
+  { no: 5, title: 'Hey Now!', length: '5:41' },
+  { no: 6, title: 'Untitled', length: '0:44' },
+  { no: 7, title: 'Some Might Say', length: '5:29' },
+  { no: 8, title: 'Case No Shadow', length: '4:51' },
+  { no: 9, title: "She's Electric", length: '3:40' },
+  { no: 10, title: 'Monring Glory', length: '5:03' },
+  { no: 11, title: 'Untitled', length: '0:39' },
+  { no: 12, title: 'Champagne Supernova', length: '7:27' }
 ]
 
 const options: DropdownOption[] = [
@@ -50,16 +60,20 @@ export default defineComponent({
     const showDropdownRef = ref(false)
     const xRef = ref(0)
     const yRef = ref(0)
-    const colsReactive: DataTableColumns = reactive([
+    const colsReactive: DataTableColumns<Song> = [
       {
-        title: 'Left',
-        key: 'Left'
+        title: 'No.',
+        key: 'no'
       },
       {
-        title: 'Right',
-        key: 'Right'
+        title: 'Title',
+        key: 'title'
+      },
+      {
+        title: 'Length',
+        key: 'length'
       }
-    ])
+    ]
 
     return {
       cols: colsReactive,
@@ -68,19 +82,16 @@ export default defineComponent({
       showDropdown: showDropdownRef,
       x: xRef,
       y: yRef,
-      handleSelect (key) {
-        message.info(key)
+      handleSelect () {
         showDropdownRef.value = false
       },
-      onClickoutside (e) {
-        message.info('clickoutside')
+      onClickoutside () {
         showDropdownRef.value = false
       },
-      rowProps: (row) => {
+      rowProps: (row: Song) => {
         return {
-          style: 'cursor: pointer;',
           onContextmenu: (e) => {
-            console.log('context menu', row)
+            message.info(JSON.stringify(row, null, 2))
             e.preventDefault()
             showDropdownRef.value = false
             nextTick().then(() => {
