@@ -43,6 +43,7 @@ flex-height
 striped
 simple-editable
 switchable-editable
+context-menu.vue
 ```
 
 ## API
