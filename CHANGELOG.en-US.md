@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
+
+### Fixes
+
+- `n-color-picker`'s hue & alpha slider handle are influenced by rail's box-shadow.
 
 ### Feats
 

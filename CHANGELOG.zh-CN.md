@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
+
+### Fixes
+
+- `n-color-picker` 色阶和不透明度调整滑块 box-shadow 被轨道 box-shadow 影响
 
 ### Feats
 
