@@ -5,6 +5,7 @@
 ### Feats
 
 - `n-tabs` 的 `justify-content` 新增类型 `start` `center` `end`
+- 新增 `n-gradient-picker` 渐变选择器组件
 
 ## 2.24.7 (2022-01-28)
 

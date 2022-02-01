@@ -145,7 +145,8 @@
     "vdirs": "^0.1.7",
     "vfonts": "^0.0.3",
     "vooks": "^0.2.12",
-    "vueuc": "^0.4.24"
+    "vueuc": "^0.4.24",
+    "webskit-gradient-parser": "^1.0.14"
   },
   "sideEffects": false,
   "homepage": "https://www.naiveui.com",

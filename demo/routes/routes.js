@@ -471,6 +471,11 @@ export const enComponentRoutes = [
       import('../../src/color-picker/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'gradient-picker',
+    component: () =>
+      import('../../src/gradient-picker/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'tree-select',
     component: () =>
       import('../../src/tree-select/demos/enUS/index.demo-entry.md')
@@ -828,6 +833,11 @@ export const zhComponentRoutes = [
     path: 'color-picker',
     component: () =>
       import('../../src/color-picker/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'gradient-picker',
+    component: () =>
+      import('../../src/gradient-picker/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'tree-select',

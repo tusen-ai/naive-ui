@@ -287,6 +287,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           path: '/color-picker'
         },
         {
+          en: 'Gradient Picker',
+          zh: '渐变选择器',
+          enSuffix: true,
+          path: '/gradient-picker'
+        },
+        {
           en: 'Checkbox',
           zh: '复选框',
           enSuffix: true,
