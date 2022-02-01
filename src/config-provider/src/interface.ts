@@ -8,6 +8,7 @@ export { ThemeCommonVars }
 export interface CustomThemeCommonVars {}
 
 export interface GlobalTheme extends GlobalThemeWithoutCommon {
+  name: string
   common?: ThemeCommonVars
 }
 

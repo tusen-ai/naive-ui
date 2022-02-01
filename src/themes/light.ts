@@ -78,6 +78,7 @@ import { uploadLight } from '../upload/styles'
 import type { BuiltInGlobalTheme } from './interface'
 
 export const lightTheme: BuiltInGlobalTheme = {
+  name: 'light',
   common: commonLight,
   Alert: alertLight,
   Anchor: anchorLight,

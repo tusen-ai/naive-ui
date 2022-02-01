@@ -76,6 +76,7 @@ import { uploadDark } from '../upload/styles'
 import type { BuiltInGlobalTheme } from './interface'
 
 export const darkTheme: BuiltInGlobalTheme = {
+  name: 'dark',
   common: commonDark,
   Alert: alertDark,
   Anchor: anchorDark,

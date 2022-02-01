@@ -10,8 +10,10 @@ import {
 } from 'vue'
 import { useMemo } from 'vooks'
 import { merge } from 'lodash-es'
+import { hash } from 'css-render'
 import { ExtractPublicPropTypes, warn } from '../../_utils'
 import { defaultClsPrefix, Hljs } from '../../_mixins'
+import { NDateLocale, NLocale } from '../../locales'
 import type {
   GlobalTheme,
   GlobalThemeOverrides,
@@ -23,9 +25,7 @@ import type {
   RtlEnabledState,
   Breakpoints
 } from './internal-interface'
-import { NDateLocale, NLocale } from '../../locales'
 import { configProviderInjectionKey } from './context'
-import { createId } from 'seemly'
 
 export const configProviderProps = {
   abstract: Boolean,
@@ -48,7 +48,7 @@ export const configProviderProps = {
   componentOptions: Object as PropType<GlobalComponentConfig>,
   icons: Object as PropType<GlobalIconConfig>,
   breakpoints: Object as PropType<Breakpoints>,
-  inlineTheme: {
+  disableInlineTheme: {
     type: Boolean,
     default: undefined
   },
@@ -144,14 +144,30 @@ export default defineComponent({
     const mergedBreakpointsRef = computed(() => {
       return props.breakpoints || NConfigProvider?.mergedBreakpointsRef.value
     })
-    const mergedInlineThemeRef = computed(() => {
-      const { inlineTheme } = props
-      if (inlineTheme !== undefined) return inlineTheme
-      if (NConfigProvider) return NConfigProvider.mergedInlineThemeRef.value
-      return true
+    const disableInlineTheme =
+      props.disableInlineTheme || NConfigProvider?.disableInlineTheme
+
+    const mergedThemeHashRef = computed(() => {
+      const { value: theme } = mergedThemeRef
+      const { value: mergedThemeOverrides } = mergedThemeOverridesRef
+      const hasThemeOverrides =
+        mergedThemeOverrides && Object.keys(mergedThemeOverrides).length !== 0
+      if (theme?.name) {
+        if (hasThemeOverrides) {
+          return `${theme.name}-${hash(
+            JSON.stringify(mergedThemeOverridesRef.value)
+          )}`
+        }
+        return ''
+      } else {
+        if (hasThemeOverrides) {
+          return hash(JSON.stringify(mergedThemeOverridesRef.value))
+        }
+        return ''
+      }
     })
     provide(configProviderInjectionKey, {
-      id: createId(),
+      mergedThemeHashRef,
       mergedBreakpointsRef,
       mergedRtlRef,
       mergedIconsRef,
@@ -179,7 +195,7 @@ export default defineComponent({
       }),
       mergedThemeRef,
       mergedThemeOverridesRef,
-      mergedInlineThemeRef
+      disableInlineTheme: disableInlineTheme || false
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
