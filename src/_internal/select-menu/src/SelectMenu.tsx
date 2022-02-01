@@ -104,7 +104,7 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme(
       'InternalSelectMenu',
-      'InternalSelectMenu',
+      '-internal-select-menu',
       style,
       internalSelectMenuLight,
       props,

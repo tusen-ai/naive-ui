@@ -190,7 +190,7 @@ const Button = defineComponent({
     const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
     const themeRef = useTheme(
       'Button',
-      'Button',
+      '-button',
       style,
       buttonLight,
       props,

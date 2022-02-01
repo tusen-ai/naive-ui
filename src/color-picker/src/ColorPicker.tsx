@@ -133,7 +133,7 @@ export default defineComponent({
 
     const themeRef = useTheme(
       'ColorPicker',
-      'ColorPicker',
+      '-color-picker',
       style,
       colorPickerLight,
       props,

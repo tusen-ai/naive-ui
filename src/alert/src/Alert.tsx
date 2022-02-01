@@ -73,7 +73,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Alert',
-      'Alert',
+      '-alert',
       style,
       alertLight,
       props,

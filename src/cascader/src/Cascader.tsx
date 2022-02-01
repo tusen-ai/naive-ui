@@ -167,7 +167,7 @@ export default defineComponent({
       useConfig(props)
     const themeRef = useTheme(
       'Cascader',
-      'Cascader',
+      '-cascader',
       style,
       cascaderLight,
       props,

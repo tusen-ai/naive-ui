@@ -22,7 +22,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Statistic',
-      'Statistic',
+      '-statistic',
       style,
       statisticLight,
       props,

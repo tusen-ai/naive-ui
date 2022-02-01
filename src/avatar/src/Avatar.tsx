@@ -84,7 +84,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'Avatar',
-      'Avatar',
+      '-avatar',
       style,
       avatarLight,
       props,

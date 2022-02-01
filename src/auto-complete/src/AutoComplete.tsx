@@ -133,7 +133,7 @@ export default defineComponent({
 
     const themeRef = useTheme(
       'AutoComplete',
-      'AutoComplete',
+      '-auto-complete',
       style,
       autoCompleteLight,
       props,

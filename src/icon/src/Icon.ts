@@ -30,7 +30,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Icon',
-      'Icon',
+      '-icon',
       style,
       iconLight,
       props,

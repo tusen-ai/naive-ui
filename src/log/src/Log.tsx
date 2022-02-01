@@ -91,7 +91,7 @@ export default defineComponent({
     const scrollbarRef = ref<ScrollbarInst | null>(null)
     const themeRef = useTheme(
       'Log',
-      'Log',
+      '-log',
       style,
       logLight,
       props,

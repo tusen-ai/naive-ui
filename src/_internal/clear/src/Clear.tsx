@@ -16,7 +16,7 @@ export default defineComponent({
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {
-    useStyle('BaseClear', style, toRef(props, 'clsPrefix'))
+    useStyle('-base-clear', style, toRef(props, 'clsPrefix'))
     const { NConfigProvider } = useConfig()
     return {
       NConfigProvider,

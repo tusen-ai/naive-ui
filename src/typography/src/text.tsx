@@ -43,7 +43,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
-      'Text',
+      '-text',
       style,
       typographyLight,
       props,

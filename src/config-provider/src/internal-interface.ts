@@ -222,6 +222,7 @@ Record<keyof GlobalThemeWithoutCommon, RtlItem>
 export type Breakpoints = { [k: string]: number } | undefined
 
 export interface ConfigProviderInjection {
+  id: string
   mergedBreakpointsRef: Ref<Breakpoints | undefined>
   mergedClsPrefixRef: Ref<string | undefined>
   mergedBorderedRef: Ref<boolean | undefined>
@@ -234,4 +235,5 @@ export interface ConfigProviderInjection {
   mergedThemeRef: Ref<GlobalTheme | undefined>
   mergedThemeOverridesRef: Ref<GlobalThemeOverrides | undefined>
   mergedRtlRef: Ref<RtlEnabledState | undefined>
+  mergedInlineThemeRef: Ref<boolean>
 }

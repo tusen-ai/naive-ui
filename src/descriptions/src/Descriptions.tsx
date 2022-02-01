@@ -60,7 +60,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Descriptions',
-      'Descriptions',
+      '-descriptions',
       style,
       descriptionsLight,
       props,

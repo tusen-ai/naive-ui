@@ -98,7 +98,7 @@ export default defineComponent({
     const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
     const themeRef = useTheme(
       'Slider',
-      'Slider',
+      '-slider',
       style,
       sliderLight,
       props,

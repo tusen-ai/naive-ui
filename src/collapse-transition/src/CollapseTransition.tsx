@@ -54,10 +54,11 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const mergedThemeRef = useTheme(
       'CollapseTransition',
-      'CollapseTransition',
+      '-collapse-transition',
       style,
       collapseTransitionLight,
-      props
+      props,
+      mergedClsPrefixRef
     )
     const mergedShowRef = computed(() => {
       if (props.collapsed !== undefined) {

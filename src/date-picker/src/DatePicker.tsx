@@ -242,7 +242,7 @@ export default defineComponent({
     const rangeEndInputValueRef = ref('')
     const themeRef = useTheme(
       'DatePicker',
-      'DatePicker',
+      '-date-picker',
       style,
       datePickerLight,
       props,

@@ -238,7 +238,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Tree',
-      'Tree',
+      '-tree',
       style,
       treeLight,
       props,

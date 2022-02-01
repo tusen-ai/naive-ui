@@ -89,7 +89,7 @@ export default defineComponent({
     const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'InputNumber',
-      'InputNumber',
+      '-input-number',
       style,
       inputNumberLight,
       props,

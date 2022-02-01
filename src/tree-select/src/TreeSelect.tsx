@@ -601,7 +601,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'TreeSelect',
-      'TreeSelect',
+      '-tree-select',
       style,
       treeSelectLight,
       props,

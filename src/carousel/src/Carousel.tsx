@@ -780,10 +780,11 @@ export default defineComponent({
     }
     const themeRef = useTheme(
       'Carousel',
-      'Carousel',
+      '-carousel',
       style,
       carouselLight,
-      props
+      props,
+      mergedClsPrefixRef
     )
     return {
       mergedClsPrefix: mergedClsPrefixRef,

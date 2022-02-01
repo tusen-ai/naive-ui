@@ -74,7 +74,7 @@ export default defineComponent({
     const inputInstRef = ref<InputInst | null>(null)
     const themeRef = useTheme(
       'DynamicTags',
-      'DynamicTags',
+      '-dynamic-tags',
       style,
       dynamicTagsLight,
       props,

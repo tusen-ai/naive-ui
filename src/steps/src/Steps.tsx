@@ -66,7 +66,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Steps',
-      'Steps',
+      '-steps',
       style,
       stepsLight,
       props,

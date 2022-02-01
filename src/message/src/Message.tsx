@@ -48,7 +48,7 @@ export default defineComponent({
     } = inject(messageProviderInjectionKey)!
     const themeRef = useTheme(
       'Message',
-      'Message',
+      '-message',
       style,
       messageLight,
       messageProviderProps,

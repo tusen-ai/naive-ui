@@ -83,7 +83,7 @@ export default defineComponent({
     const { namespaceRef, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Popover',
-      'Popover',
+      '-popover',
       style,
       popoverLight,
       props,

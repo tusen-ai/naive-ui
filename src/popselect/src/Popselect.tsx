@@ -35,7 +35,7 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme(
       'Popselect',
-      'Popselect',
+      '-popselect',
       undefined,
       popselectLight,
       props

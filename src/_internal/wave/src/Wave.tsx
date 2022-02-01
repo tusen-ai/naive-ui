@@ -15,7 +15,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    useStyle('BaseWave', style, toRef(props, 'clsPrefix'))
+    useStyle('-base-wave', style, toRef(props, 'clsPrefix'))
     const selfRef = ref<HTMLElement | null>(null)
     const activeRef = ref(false)
     let animationTimerId: number | null = null

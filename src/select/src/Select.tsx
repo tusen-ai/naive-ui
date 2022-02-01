@@ -207,7 +207,7 @@ export default defineComponent({
       useConfig(props)
     const themeRef = useTheme(
       'Select',
-      'Select',
+      '-select',
       style,
       selectLight,
       props,

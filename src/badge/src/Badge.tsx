@@ -55,7 +55,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Badge',
-      'Badge',
+      '-badge',
       style,
       badgeLight,
       props,

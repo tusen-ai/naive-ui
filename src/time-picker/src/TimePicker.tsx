@@ -171,7 +171,7 @@ export default defineComponent({
     const { mergedSizeRef, mergedDisabledRef } = formItem
     const themeRef = useTheme(
       'TimePicker',
-      'TimePicker',
+      '-time-picker',
       style,
       timePickerLight,
       props,

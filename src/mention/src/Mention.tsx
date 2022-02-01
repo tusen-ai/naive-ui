@@ -116,7 +116,7 @@ export default defineComponent({
       useConfig(props)
     const themeRef = useTheme(
       'Mention',
-      'Mention',
+      '-mention',
       style,
       mentionLight,
       props,

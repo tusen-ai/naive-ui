@@ -20,7 +20,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
-      'Blockquote',
+      '-blockquote',
       style,
       typographyLight,
       props,

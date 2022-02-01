@@ -154,7 +154,7 @@ export default defineComponent({
     }
     const themeRef = useTheme(
       'Notification',
-      'Notification',
+      '-notification',
       style,
       notificationLight,
       props,

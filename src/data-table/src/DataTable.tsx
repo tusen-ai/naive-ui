@@ -215,7 +215,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'DataTable',
-      'DataTable',
+      '-data-table',
       style,
       dataTableLight,
       props,

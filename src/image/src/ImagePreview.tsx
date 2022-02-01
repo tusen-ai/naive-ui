@@ -54,7 +54,7 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme(
       'Image',
-      'Image',
+      '-image',
       style,
       imageLight,
       props,

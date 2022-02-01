@@ -25,6 +25,7 @@ import type {
 } from './internal-interface'
 import { NDateLocale, NLocale } from '../../locales'
 import { configProviderInjectionKey } from './context'
+import { createId } from 'seemly'
 
 export const configProviderProps = {
   abstract: Boolean,
@@ -47,6 +48,10 @@ export const configProviderProps = {
   componentOptions: Object as PropType<GlobalComponentConfig>,
   icons: Object as PropType<GlobalIconConfig>,
   breakpoints: Object as PropType<Breakpoints>,
+  inlineTheme: {
+    type: Boolean,
+    default: undefined
+  },
   // deprecated
   as: {
     type: String as PropType<string | undefined>,
@@ -139,7 +144,14 @@ export default defineComponent({
     const mergedBreakpointsRef = computed(() => {
       return props.breakpoints || NConfigProvider?.mergedBreakpointsRef.value
     })
+    const mergedInlineThemeRef = computed(() => {
+      const { inlineTheme } = props
+      if (inlineTheme !== undefined) return inlineTheme
+      if (NConfigProvider) return NConfigProvider.mergedInlineThemeRef.value
+      return true
+    })
     provide(configProviderInjectionKey, {
+      id: createId(),
       mergedBreakpointsRef,
       mergedRtlRef,
       mergedIconsRef,
@@ -166,7 +178,8 @@ export default defineComponent({
         return hljs === undefined ? NConfigProvider?.mergedHljsRef.value : hljs
       }),
       mergedThemeRef,
-      mergedThemeOverridesRef
+      mergedThemeOverridesRef,
+      mergedInlineThemeRef
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,

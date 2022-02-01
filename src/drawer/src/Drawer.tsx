@@ -124,7 +124,7 @@ export default defineComponent({
     const isMountedRef = useIsMounted()
     const themeRef = useTheme(
       'Drawer',
-      'Drawer',
+      '-drawer',
       style,
       drawerLight,
       props,

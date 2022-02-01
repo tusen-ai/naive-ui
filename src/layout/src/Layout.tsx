@@ -57,7 +57,7 @@ export function createLayoutComponent (isContent: boolean) {
       const { mergedClsPrefixRef } = useConfig(props)
       const themeRef = useTheme(
         'Layout',
-        'Layout',
+        '-layout',
         style,
         layoutLight,
         props,

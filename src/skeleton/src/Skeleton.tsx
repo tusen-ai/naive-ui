@@ -47,7 +47,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Skeleton',
-      'Skeleton',
+      '-skeleton',
       style,
       skeletonLight,
       props,

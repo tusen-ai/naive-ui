@@ -208,7 +208,7 @@ export default defineComponent({
 
     const themeRef = useTheme(
       'Dropdown',
-      'Dropdown',
+      '-dropdown',
       style,
       dropdownLight,
       props,

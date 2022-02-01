@@ -131,7 +131,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Radio',
-      'RadioGroup',
+      '-radio-group',
       style,
       radioLight,
       props,

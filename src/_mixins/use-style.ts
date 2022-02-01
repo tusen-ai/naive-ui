@@ -27,7 +27,7 @@ export default function useStyle (
       ssr: ssrAdapter
     })
     globalStyle.mount({
-      id: 'naive-ui/global',
+      id: 'n-global',
       head: true,
       anchorMetaName: cssrAnchorMetaName,
       ssr: ssrAdapter

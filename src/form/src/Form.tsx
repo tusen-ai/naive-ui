@@ -68,7 +68,7 @@ export default defineComponent({
   props: formProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-    useTheme('Form', 'Form', style, formLight, props, mergedClsPrefixRef)
+    useTheme('Form', '-form', style, formLight, props, mergedClsPrefixRef)
     // from path to form-item
     const formItems: Record<string, FormItemInst[]> = {}
     // for label-width = 'auto'

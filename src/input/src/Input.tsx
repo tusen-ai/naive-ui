@@ -161,7 +161,7 @@ export default defineComponent({
     const { mergedClsPrefixRef, mergedBorderedRef } = useConfig(props)
     const themeRef = useTheme(
       'Input',
-      'Input',
+      '-input',
       style,
       inputLight,
       props,

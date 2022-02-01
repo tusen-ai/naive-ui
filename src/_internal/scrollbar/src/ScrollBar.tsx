@@ -575,7 +575,7 @@ const Scrollbar = defineComponent({
     })
     const themeRef = useTheme(
       'Scrollbar',
-      'Scrollbar',
+      '-scrollbar',
       style,
       scrollbarLight,
       props,

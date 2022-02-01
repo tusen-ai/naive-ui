@@ -64,7 +64,7 @@ export default defineComponent({
     const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
     const themeRef = useTheme(
       'Card',
-      'Card',
+      '-card',
       style,
       cardLight,
       props,

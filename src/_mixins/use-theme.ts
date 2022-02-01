@@ -106,7 +106,7 @@ function useTheme<N, T, R> (
         ssr: ssrAdapter
       })
       globalStyle.mount({
-        id: 'naive-ui/global',
+        id: 'n-global',
         head: true,
         anchorMetaName: cssrAnchorMetaName,
         ssr: ssrAdapter

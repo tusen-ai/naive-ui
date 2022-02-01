@@ -169,7 +169,7 @@ export default defineComponent({
       : ref(false)
     const themeRef = useTheme(
       'Form',
-      'FormItem',
+      '-form-item',
       style,
       formLight,
       props,

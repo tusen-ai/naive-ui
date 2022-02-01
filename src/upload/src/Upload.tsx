@@ -339,7 +339,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Upload',
-      'Upload',
+      '-upload',
       style,
       uploadLight,
       props,

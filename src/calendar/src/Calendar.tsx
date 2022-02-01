@@ -52,7 +52,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Calendar',
-      'Calendar',
+      '-calendar',
       style,
       calendarLight,
       props,

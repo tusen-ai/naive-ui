@@ -5,9 +5,7 @@ import {
   keysOf,
   throwError
 } from '../../_utils'
-import { useStyle } from '../../_mixins'
 import { rowInjectionKey } from './Row'
-import style from './styles/index.cssr'
 import { Span } from './interface'
 
 export const colProps = {
@@ -37,7 +35,6 @@ export default defineComponent({
   name: 'Col',
   props: colProps,
   setup (props) {
-    useStyle('Grid', style)
     const NRow = inject(rowInjectionKey, null)
     if (!NRow) throwError('col', '`n-col` must be placed inside `n-row`.')
     return {
