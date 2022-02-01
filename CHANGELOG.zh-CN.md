@@ -9,6 +9,15 @@
 ### Feats
 
 - `n-tabs` 的 `justify-content` 新增类型 `start` `center` `end`
+- `n-auto-complete` 新增 `placement` 属性
+- `n-cascader` 新增 `placement` 属性
+- `n-color-picker` 新增 `placement` 属性
+- `n-date-picker` 新增 `placement` 属性
+- `n-mention` 新增 `placement` 属性
+- `n-select` 新增 `placement` 属性
+- `n-slider` 新增 `placement` 属性
+- `n-time-picker` 新增 `placement` 属性
+- `n-tree-select` 新增 `placement` 属性
 
 ## 2.24.7 (2022-01-28)
 
