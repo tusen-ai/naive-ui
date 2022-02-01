@@ -9,15 +9,16 @@
 ### Feats
 
 - `n-tabs` props `justify-content` add types `start` `center` `end`
-- `n-auto-complete` add `placement` prop
-- `n-cascader` add `placement` prop
-- `n-color-picker` add `placement` prop
-- `n-date-picker` add `placement` prop
-- `n-mention` add `placement` prop
-- `n-select` add `placement` prop
-- `n-slider` add `placement` prop
-- `n-time-picker` add `placement` prop
-- `n-tree-select` add `placement` prop
+- `n-auto-complete` adds `placement` prop.
+- `n-cascader` adds `placement` prop.
+- `n-color-picker` adds `placement` prop.
+- `n-date-picker` adds `placement` prop.
+- `n-mention` adds `placement` prop.
+- `n-select` adds `placement` prop.
+- `n-slider` adds `placement` prop.
+- `n-time-picker` adds `placement` prop.
+- `n-tree-select` adds `placement` prop.
+- `n-card` adds `header-extra-style` prop.
 
 ## 2.24.7 (2022-01-28)
 
