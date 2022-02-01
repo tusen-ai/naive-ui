@@ -958,7 +958,7 @@ export default defineComponent({
                 containerClass={this.namespace}
                 to={this.adjustedTo}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                placement="bottom-start"
+                placement={this.placement}
               >
                 {{
                   default: () => (

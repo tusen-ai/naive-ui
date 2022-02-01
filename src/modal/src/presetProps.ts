@@ -1,4 +1,4 @@
-import { dialogProps } from '../../dialog/src/Dialog'
+import { dialogProps } from '../../dialog/src/dialogProps'
 import { cardBaseProps } from '../../card/src/Card'
 import { keysOf } from '../../_utils'
 

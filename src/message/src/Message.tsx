@@ -24,7 +24,7 @@ import { useTheme } from '../../_mixins'
 import { messageLight } from '../styles'
 import { messageProps } from './message-props'
 import type { MessageType, MessageRenderMessage } from './types'
-import { messageProviderInjectionKey } from './MessageProvider'
+import { messageProviderInjectionKey } from './context'
 import style from './styles/index.cssr'
 
 const iconMap = {

@@ -12,13 +12,12 @@ import { useMemo } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
 import { NDropdown } from '../../dropdown'
 import NMenuOptionContent from './MenuOptionContent'
+// eslint-disable-next-line import/no-cycle
 import { itemRenderer } from './utils'
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
-import type { SubmenuInjection } from './use-menu-child'
 import { MenuMixedOption, TmNode } from './interface'
-import { menuItemGroupInjectionKey } from './MenuOptionGroup'
-import { createInjectionKey } from '../../_utils'
+import { menuItemGroupInjectionKey, submenuInjectionKey } from './context'
 
 export const submenuProps = {
   ...useMenuChildProps,
@@ -42,10 +41,7 @@ export const submenuProps = {
   onClick: Function as PropType<() => void>
 } as const
 
-export const submenuInjectionKey =
-  createInjectionKey<SubmenuInjection>('n-submenu')
-
-export default defineComponent({
+export const NSubmenu = defineComponent({
   name: 'Submenu',
   props: submenuProps,
   setup (props) {

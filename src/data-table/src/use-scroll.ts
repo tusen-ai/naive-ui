@@ -1,7 +1,7 @@
 import { beforeNextFrameOnce } from 'seemly'
 import { computed, ComputedRef, watch, Ref, ref } from 'vue'
 import { formatLength } from '../../_utils'
-import { DataTableSetupProps } from './DataTable'
+import type { DataTableSetupProps } from './DataTable'
 import type { ColumnKey, MainTableRef, TableColumn } from './interface'
 import { getColWidth, getColKey } from './utils'
 

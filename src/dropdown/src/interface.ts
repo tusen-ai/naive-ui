@@ -1,6 +1,6 @@
 import { TreeNode } from 'treemate'
 import { VNodeChild } from 'vue'
-import {
+import type {
   MenuOption,
   MenuGroupOption,
   MenuDividerOption,

@@ -1,6 +1,6 @@
 import { watchEffect } from 'vue'
 import { warnOnce } from '../../_utils'
-import { MenuSetupProps } from './Menu'
+import type { MenuSetupProps } from './Menu'
 
 export function useCheckDeprecated (props: MenuSetupProps): void {
   watchEffect(() => {

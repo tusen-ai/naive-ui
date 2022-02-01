@@ -33,7 +33,6 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import { formLight, FormTheme } from '../styles'
 import { formItemMisc, formItemSize, formItemRule } from './utils'
 import Feedbacks from './Feedbacks'
-import style from './styles/form-item.cssr'
 import {
   ShouldRuleBeApplied,
   FormItemRule,
@@ -45,10 +44,10 @@ import {
   FormItemRuleValidator,
   FormItemValidateOptions,
   FormItemInst,
-  FormItemInternalValidate,
-  formItemInstsInjectionKey,
-  formInjectionKey
+  FormItemInternalValidate
 } from './interface'
+import { formInjectionKey, formItemInstsInjectionKey } from './context'
+import style from './styles/form-item.cssr'
 
 export const formItemProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),

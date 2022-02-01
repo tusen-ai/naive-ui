@@ -1,6 +1,6 @@
 import { defineComponent, h, inject, PropType, ref, watchEffect } from 'vue'
 import { NInput } from '../../input'
-import { colorPickerInjectionKey } from './ColorPicker'
+import { colorPickerInjectionKey } from './context'
 
 // 0 - 255
 function normalizeRgbUnit (value: string): number | false {

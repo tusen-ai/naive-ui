@@ -14,7 +14,7 @@ import {
   watchEffect
 } from 'vue'
 import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
-import { VBinder, VTarget, VFollower } from 'vueuc'
+import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { happensIn } from 'seemly'
 import {
@@ -87,7 +87,7 @@ const timePickerProps = {
   defaultFormattedValue: String,
   placeholder: String,
   placement: {
-    type: String,
+    type: String as PropType<FollowerPlacement>,
     default: 'bottom-start'
   },
   value: Number as PropType<number | null>,
@@ -798,7 +798,7 @@ export default defineComponent({
                 show={this.mergedShow}
                 to={this.adjustedTo}
                 containerClass={this.namespace}
-                placement="bottom-start"
+                placement={this.placement}
               >
                 {{
                   default: () => (

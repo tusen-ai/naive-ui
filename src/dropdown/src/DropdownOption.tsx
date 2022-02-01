@@ -14,10 +14,15 @@ import {
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { useMemo } from 'vooks'
 import { ChevronRightIcon } from '../../_internal/icons'
-import { createInjectionKey, render, useDeferredTrue } from '../../_utils'
+import { render, useDeferredTrue } from '../../_utils'
 import { NIcon } from '../../icon'
-import NDropdownMenu, { dropdownMenuInjectionKey } from './DropdownMenu'
-import { dropdownInjectionKey } from './Dropdown'
+// eslint-disable-next-line import/no-cycle
+import NDropdownMenu from './DropdownMenu'
+import {
+  dropdownMenuInjectionKey,
+  dropdownInjectionKey,
+  dropdownOptionInjectionKey
+} from './context'
 import { isSubmenuNode } from './utils'
 import { TreeNode } from 'treemate'
 import {
@@ -27,12 +32,9 @@ import {
 } from './interface'
 import { happensIn } from 'seemly'
 
-interface NDropdownOptionInjection {
+export interface NDropdownOptionInjection {
   enteringSubmenuRef: Ref<boolean>
 }
-
-const dropdownOptionInjectionKey =
-  createInjectionKey<NDropdownOptionInjection>('n-dropdown-option')
 
 export default defineComponent({
   name: 'DropdownOption',

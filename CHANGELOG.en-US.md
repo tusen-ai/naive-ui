@@ -1,10 +1,24 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
+
+### Fixes
+
+- `n-color-picker`'s hue & alpha slider handle are influenced by rail's box-shadow.
 
 ### Feats
 
 - `n-tabs` props `justify-content` add types `start` `center` `end`
+- `n-auto-complete` adds `placement` prop.
+- `n-cascader` adds `placement` prop.
+- `n-color-picker` adds `placement` prop.
+- `n-date-picker` adds `placement` prop.
+- `n-mention` adds `placement` prop.
+- `n-select` adds `placement` prop.
+- `n-slider` adds `placement` prop.
+- `n-time-picker` adds `placement` prop.
+- `n-tree-select` adds `placement` prop.
+- `n-card` adds `header-extra-style` prop.
 
 ## 2.24.7 (2022-01-28)
 

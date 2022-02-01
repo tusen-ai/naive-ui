@@ -190,7 +190,10 @@ export default defineComponent({
               {$slots.header ? $slots.header() : this.title}
             </div>
             {$slots['header-extra'] ? (
-              <div class={`${mergedClsPrefix}-card-header__extra`} style={this.headerExtraStyle}>
+              <div
+                class={`${mergedClsPrefix}-card-header__extra`}
+                style={this.headerExtraStyle}
+              >
                 {$slots['header-extra']()}
               </div>
             ) : null}

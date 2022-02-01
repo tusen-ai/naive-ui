@@ -1,11 +1,12 @@
 import { defineComponent, Fragment, h, PropType } from 'vue'
 import { TreeNode } from 'treemate'
 import { warn } from '../../_utils'
+// eslint-disable-next-line import/no-cycle
 import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider'
 import NDropdownGroupHeader from './DropdownGroupHeader'
 import { isDividerNode } from './utils'
-import {
+import type {
   DropdownGroupOption,
   DropdownIgnoredOption,
   DropdownOption

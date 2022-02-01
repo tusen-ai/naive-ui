@@ -12,7 +12,7 @@ import { useSsrAdapter } from '@css-render/vue3-ssr'
 import globalStyle from '../_styles/global/index.cssr'
 import { CNode } from 'css-render'
 import type { GlobalTheme } from '../config-provider'
-import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
+import { configProviderInjectionKey } from '../config-provider/src/context'
 import type { ThemeCommonVars } from '../_styles/common'
 import { cssrAnchorMetaName } from './common'
 

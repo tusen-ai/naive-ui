@@ -1,8 +1,8 @@
 import { h, defineComponent, inject, PropType } from 'vue'
 import { NScrollbar } from '../../_internal'
-import { notificationProviderInjectionKey } from './NotificationProvider'
+import { notificationProviderInjectionKey } from './context'
 
-export default defineComponent({
+export const NotificationContainer = defineComponent({
   name: 'NotificationContainer',
   props: {
     scrollable: {
@@ -11,10 +11,7 @@ export default defineComponent({
     },
     placement: {
       type: String as PropType<
-      | 'top-left'
-      | 'top-right'
-      | 'bottom-left'
-      | 'bottom-right'
+      'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
       >,
       required: true
     }

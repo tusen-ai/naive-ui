@@ -11,7 +11,7 @@ import {
 } from 'vue'
 import { useTheme } from '../../_mixins'
 import { loadingBarLight } from '../styles'
-import { loadingBarProviderInjectionKey } from './LoadingBarProvider'
+import { loadingBarProviderInjectionKey } from './context'
 import style from './styles/index.cssr'
 
 function createClassName (

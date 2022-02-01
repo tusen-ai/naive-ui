@@ -12,7 +12,7 @@ import type { ThemeProps } from '../../_mixins'
 import { formLight } from '../styles'
 import type { FormTheme } from '../styles'
 import style from './styles/form.cssr'
-import {
+import type {
   ShouldRuleBeApplied,
   FormItemInst,
   FormRules,
@@ -20,11 +20,10 @@ import {
   LabelAlign,
   LabelPlacement,
   FormInst,
-  formItemInstsInjectionKey,
-  formInjectionKey,
   Size
 } from './interface'
 import { ExtractPublicPropTypes, keysOf } from '../../_utils'
+import { formInjectionKey, formItemInstsInjectionKey } from './context'
 
 const formProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),

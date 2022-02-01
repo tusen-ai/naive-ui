@@ -1,6 +1,6 @@
 import { inject, computed, ComputedRef } from 'vue'
 import type { ConfigProviderInjection } from '../config-provider/src/internal-interface'
-import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
+import { configProviderInjectionKey } from '../config-provider/src/context'
 
 type UseConfigProps = Readonly<{
   bordered?: boolean
