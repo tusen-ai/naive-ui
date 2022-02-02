@@ -30,6 +30,7 @@
 - `n-card` 新增 `header-extra-style` 属性
 - `n-popover` 新增 `keep-alive-on-hover` 属性，关闭 [#2326](https://github.com/TuSimple/naive-ui/issues/2326)
 - `n-input` 新增 `status` 属性
+- 新增 `n-icon-wrapper` 组件
 
 ## 2.24.7 (2022-01-28)
 

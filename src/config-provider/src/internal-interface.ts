@@ -31,6 +31,7 @@ import type { EmptyTheme } from '../../empty/styles'
 import type { FormTheme } from '../../form/styles'
 import type { GradientTextTheme } from '../../gradient-text/styles'
 import type { IconTheme } from '../../icon/styles'
+import type { IconWrapperTheme } from '../../icon-wrapper/styles'
 import type { ImageTheme } from '../../image/styles'
 import type { InputTheme } from '../../input/styles'
 import type { InputNumberTheme } from '../../input-number/styles'
@@ -120,6 +121,7 @@ export interface GlobalThemeWithoutCommon {
   Form?: FormTheme
   GradientText?: GradientTextTheme
   Icon?: IconTheme
+  IconWrapper?: IconWrapperTheme
   Image?: ImageTheme
   Input?: InputTheme
   InputNumber?: InputNumberTheme

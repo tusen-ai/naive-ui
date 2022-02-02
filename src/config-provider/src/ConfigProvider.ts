@@ -152,13 +152,14 @@ export default defineComponent({
       const { value: mergedThemeOverrides } = mergedThemeOverridesRef
       const hasThemeOverrides =
         mergedThemeOverrides && Object.keys(mergedThemeOverrides).length !== 0
-      if (theme?.name) {
+      const themeName = theme?.name
+      if (themeName) {
         if (hasThemeOverrides) {
-          return `${theme.name}-${hash(
+          return `${themeName}-${hash(
             JSON.stringify(mergedThemeOverridesRef.value)
           )}`
         }
-        return ''
+        return themeName
       } else {
         if (hasThemeOverrides) {
           return hash(JSON.stringify(mergedThemeOverridesRef.value))

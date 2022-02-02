@@ -6,7 +6,7 @@ import { c } from '../_utils/cssr'
 
 export function useCssVarsClass (
   componentName: string,
-  hashRef: Ref<string>,
+  hashRef: Ref<string> | undefined,
   cssVarsRef: ComputedRef<Record<string, string>> | undefined,
   props: { themeOverrides?: unknown }
 ): Ref<string> {
@@ -28,10 +28,10 @@ export function useCssVarsClass (
     }
 
     let finalThemeHash = componentName
-    const { value } = hashRef
+    const hashValue = hashRef ? hashRef.value : undefined
     const themeHash = mergedThemeHashRef?.value
     if (themeHash) finalThemeHash += '-' + themeHash
-    if (value) finalThemeHash += '-' + value
+    if (hashValue) finalThemeHash += '-' + hashValue
     if (props.themeOverrides) {
       finalThemeHash += '-' + hash(JSON.stringify(props.themeOverrides))
     }
