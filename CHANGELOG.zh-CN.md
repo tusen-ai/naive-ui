@@ -24,6 +24,10 @@
 
 - Fix `n-form-item` prevent feedback padding when empty.
 
+### Fixes
+
+- 修复 `n-form` 的 rules 和 `n-form-item` 的 rule 中的 `validator` 与 `asyncValidator` 函数的 `rule` 类型不为 `FormItemRule` 类型， 关闭 [#2299](https://github.com/TuSimple/naive-ui/issues/2299)
+
 ## 2.24.7 (2022-01-28)
 
 ### Fixes
