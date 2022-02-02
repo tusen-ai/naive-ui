@@ -10,6 +10,10 @@
 
 - `n-color-picker`'s hue & alpha slider handle are influenced by rail's box-shadow.
 - Fix `n-form-item` prevent feedback padding when empty.
+- Fix `n-button` has extra margin in safari.
+- Fix `n-form`'s rules and `n-form-item`'s rule about `validator` and `asyncValidator`'s `rule` type is not `FormItemRule`, closes [#2299](https://github.com/TuSimple/naive-ui/issues/2299).
+- Fix `n-log` doesn't break line when line is too long, closes [#2298](https://github.com/TuSimple/naive-ui/issues/2298).
+- Fix `n-log` doesn't export `LogInst` type.
 
 ### Feats
 
@@ -26,12 +30,6 @@
 - `n-card` adds `header-extra-style` prop.
 - `n-popover` adds `keep-alive-on-hover` prop, closes [#2326](https://github.com/TuSimple/naive-ui/issues/2326).
 - `n-input` adds `status` prop.
-
-### Fixes
-
-- Fix `n-form`'s rules and `n-form-item`'s rule about `validator` and `asyncValidator`'s `rule` type is not `FormItemRule`, closes [#2299](https://github.com/TuSimple/naive-ui/issues/2299).
-- Fix `n-log` doesn't break line when line is too long, closes [#2298](https://github.com/TuSimple/naive-ui/issues/2298).
-- Fix `n-log` doesn't export `LogInst` type.
 
 ## 2.24.7 (2022-01-28)
 
