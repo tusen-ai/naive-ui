@@ -50,6 +50,7 @@ export const popoverBodyProps = {
   overlap: Boolean,
   placement: String as PropType<FollowerPlacement>,
   width: [Number, String] as PropType<number | 'trigger'>,
+  keepAliveOnHover: Boolean,
   internalTrapFocus: Boolean,
   // private
   animated: Boolean,
@@ -182,12 +183,12 @@ export default defineComponent({
       followerRef.value?.syncPosition()
     }
     function handleMouseEnter (e: MouseEvent): void {
-      if (props.trigger === 'hover') {
+      if (props.trigger === 'hover' && props.keepAliveOnHover) {
         NPopover.handleMouseEnter(e)
       }
     }
     function handleMouseLeave (e: MouseEvent): void {
-      if (props.trigger === 'hover') {
+      if (props.trigger === 'hover' && props.keepAliveOnHover) {
         NPopover.handleMouseLeave(e)
       }
     }

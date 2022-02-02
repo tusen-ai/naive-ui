@@ -1,20 +1,20 @@
+<markdown>
 # 手动定位
 
-点它
-
 注意：手动定位时，`trigger` 属性必须为 `'manual'`
+</markdown>
 
-```html
-<div
-  style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, .5);"
-  @click="handleClick"
-></div>
-<n-popover :show="showPopover" :x="x" :y="y" trigger="manual">
-  厉害！</n-popover
->
-```
+<template>
+  <div
+    style="width: 200px; height: 200px; background-color: rgba(0, 128, 0, 0.5)"
+    @click="handleClick"
+  />
+  <n-popover :show="showPopover" :x="x" :y="y" trigger="manual">
+    厉害！
+  </n-popover>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -41,4 +41,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

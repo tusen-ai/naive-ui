@@ -24,6 +24,7 @@
 - `n-time-picker` adds `placement` prop.
 - `n-tree-select` adds `placement` prop.
 - `n-card` adds `header-extra-style` prop.
+- `n-popover` adds `keep-alive-on-hover` prop, closes [#2326](https://github.com/TuSimple/naive-ui/issues/2326).
 
 ### Fixes
 

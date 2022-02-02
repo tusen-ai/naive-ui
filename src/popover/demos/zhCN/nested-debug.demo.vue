@@ -1,21 +1,25 @@
+<markdown>
 # Nested Debug
+</markdown>
 
-```html
-<n-popover trigger="click" placement="bottom-end">
-  <template #trigger>
-    <div>
-      <n-tag>hover</n-tag>
-    </div>
-  </template>
-  <n-list bordered>
-    <n-list-item v-for="(item, index) in dataList" :key="index">
-      <n-ellipsis style="max-width: 300px"> {{ item }} </n-ellipsis>
-    </n-list-item>
-  </n-list>
-</n-popover>
-```
+<template>
+  <n-popover trigger="click" placement="bottom-end">
+    <template #trigger>
+      <div>
+        <n-tag>hover</n-tag>
+      </div>
+    </template>
+    <n-list bordered>
+      <n-list-item v-for="(item, index) in dataList" :key="index">
+        <n-ellipsis style="max-width: 300px">
+          {{ item }}
+        </n-ellipsis>
+      </n-list-item>
+    </n-list>
+  </n-popover>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
   setup () {
@@ -29,4 +33,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
