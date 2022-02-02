@@ -21,6 +21,7 @@ count.vue
 focus.vue
 event.vue
 input-props.vue
+status.vue
 ```
 
 ## API
