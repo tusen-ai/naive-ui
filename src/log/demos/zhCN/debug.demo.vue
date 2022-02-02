@@ -1,31 +1,33 @@
+<markdown>
 # Debug
+</markdown>
 
-```html
-<n-card
-  title="Random String Logs"
-  :segmented="{
-  header: 'soft',
-  content: 'hard'
-}"
->
-  <n-log
-    style="margin-top: -12px; margin-bottom: -12px;"
-    :log="log"
-    @require-more="handleRequireMore"
-    :loading="loading"
-    trim
-  />
-  <template #action>
-    <n-button @click="clear">Clear</n-button>
-  </template>
-</n-card>
-```
-
-```js
+<template>
+  <n-card
+    title="Random String Logs"
+    :segmented="{
+      content: true
+    }"
+  >
+    <n-log
+      style="margin-top: -12px; margin-bottom: -12px"
+      :log="log"
+      :loading="loading"
+      trim
+      @require-more="handleRequireMore"
+    />
+    <template #action>
+      <n-button @click="clear">
+        Clear
+      </n-button>
+    </template>
+  </n-card>
+</template>
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 function log () {
-  const l = []
+  const l: string[] = []
   for (let i = 0; i < 40; ++i) {
     l.push(Math.random().toString(16))
   }
@@ -57,4 +59,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

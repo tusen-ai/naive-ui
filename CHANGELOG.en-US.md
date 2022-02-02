@@ -29,6 +29,8 @@
 ### Fixes
 
 - Fix `n-form`'s rules and `n-form-item`'s rule about `validator` and `asyncValidator`'s `rule` type is not `FormItemRule`, closes [#2299](https://github.com/TuSimple/naive-ui/issues/2299).
+- Fix `n-log` doesn't break line when line is too long, closes [#2298](https://github.com/TuSimple/naive-ui/issues/2298).
+- Fix `n-log` doesn't export `LogInst` type.
 
 ## 2.24.7 (2022-01-28)
 

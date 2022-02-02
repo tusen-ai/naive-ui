@@ -1,14 +1,16 @@
-# 加载中
+<markdown>
+# 加载
+</markdown>
 
-```html
-<n-switch v-model:value="loading" /> <n-log :loading="loading" :log="log" />
-```
+<template>
+  <n-switch v-model:value="loading" /> <n-log :loading="loading" :log="log" />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 function log () {
-  const l = []
+  const l: string[] = []
   for (let i = 0; i < 40; ++i) {
     l.push(Math.random().toString(16))
   }
@@ -23,4 +25,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

@@ -1,24 +1,26 @@
+<markdown>
 # 事件
 
 Log 有 `require-more`、`reach-top` 和 `reach-bottom` 事件。需要注意的是即使 Log 已经滚到了头或者尾，你继续滚动鼠标的时候，`require-more` 还是会被触发，而 `reach-xxx` 并不会。如果你不需要这种特性，可以使用 `reach-top` 或者 `reach-bottom`。
+</markdown>
 
-```html
-<n-log
-  :log="log"
-  @require-more="handleRequireMore"
-  @reach-top="handleReachTop"
-  @reach-bottom="handleReachBottom"
-  :loading="loading"
-  trim
-/>
-```
+<template>
+  <n-log
+    :log="log"
+    :loading="loading"
+    trim
+    @require-more="handleRequireMore"
+    @reach-top="handleReachTop"
+    @reach-bottom="handleReachBottom"
+  />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
 function log () {
-  const l = []
+  const l: string[] = []
   for (let i = 0; i < 10; ++i) {
     l.push(Math.random().toString(16))
   }
@@ -33,9 +35,6 @@ export default defineComponent({
     return {
       loading: false,
       log: log(),
-      clear () {
-        logRef.value = ''
-      },
       handleRequireMore (from) {
         message.info('Require More from ' + from)
         if (loadingRef.value) return
@@ -58,4 +57,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
