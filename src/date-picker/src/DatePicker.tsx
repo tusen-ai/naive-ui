@@ -145,7 +145,7 @@ export default defineComponent({
     }
     const { localeRef, dateLocaleRef } = useLocale('DatePicker')
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const {
       NConfigProvider,
       mergedClsPrefixRef,
@@ -669,6 +669,7 @@ export default defineComponent({
     }
     return {
       ...exposedMethods,
+      mergedStatus: mergedStatusRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       namespace: namespaceRef,
@@ -883,6 +884,7 @@ export default defineComponent({
                     this.isRange ? (
                       <NInput
                         ref="inputInstRef"
+                        status={this.mergedStatus}
                         value={[this.displayStartTime, this.displayEndTime]}
                         placeholder={[
                           this.localizedStartPlaceholder,
@@ -925,6 +927,7 @@ export default defineComponent({
                     ) : (
                       <NInput
                         ref="inputInstRef"
+                        status={this.mergedStatus}
                         value={this.displayTime}
                         placeholder={this.localizedPlacehoder}
                         textDecoration={

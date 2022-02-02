@@ -366,6 +366,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       mergedSize: formItem.mergedSizeRef,
+      mergedStatus: formItem.mergedStatusRef,
       mergedTheme: themeRef,
       treeMate: treeMateRef,
       selectMenuInstRef,
@@ -399,6 +400,7 @@ export default defineComponent({
     return (
       <div class={`${mergedClsPrefix}-mention`}>
         <NInput
+          status={this.mergedStatus}
           themeOverrides={mergedTheme.peerOverrides.Input}
           theme={mergedTheme.peers.Input}
           size={this.mergedSize}

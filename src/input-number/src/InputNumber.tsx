@@ -8,8 +8,10 @@ import { NBaseIcon } from '../../_internal'
 import { NButton } from '../../button'
 import { useTheme, useFormItem, useLocale, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, MaybeArray, ExtractPublicPropTypes } from '../../_utils'
-import { inputNumberLight, InputNumberTheme } from '../styles'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
+import { warn, call } from '../../_utils'
+import { inputNumberLight } from '../styles'
+import type { InputNumberTheme } from '../styles'
 import { parse, validator, format, parseNumber, isWipValue } from './utils'
 import type { OnUpdateValue, InputNumberInst } from './interface'
 import style from './styles/input-number.cssr'
@@ -97,7 +99,7 @@ export default defineComponent({
     )
     const { localeRef } = useLocale('InputNumber')
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     // dom ref
     const inputInstRef = ref<InputInst | null>(null)
     const minusButtonInstRef = ref<{ $el: HTMLElement } | null>(null)
@@ -381,6 +383,7 @@ export default defineComponent({
       displayedValue: displayedValueRef,
       addable: addableRef,
       minusable: minusableRef,
+      mergedStatus: mergedStatusRef,
       handleFocus,
       handleBlur,
       handleClear,
@@ -414,6 +417,7 @@ export default defineComponent({
       <div class={`${mergedClsPrefix}-input-number`}>
         <NInput
           ref="inputInstRef"
+          status={this.mergedStatus}
           bordered={this.mergedBordered}
           loading={this.loading}
           value={this.displayedValue}

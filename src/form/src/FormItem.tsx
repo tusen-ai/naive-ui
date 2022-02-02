@@ -326,6 +326,7 @@ export default defineComponent({
       path: toRef(props, 'path'),
       disabled: mergedDisabledRef,
       mergedSize: formItemSizeRefs.mergedSize,
+      mergedValidationStatus: formItemMiscRefs.mergedValidationStatus,
       restoreValidation,
       handleContentBlur,
       handleContentChange,

@@ -21,6 +21,7 @@ import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
 import { off, on } from 'evtd'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import {
   NBaseClear,
@@ -113,6 +114,7 @@ const inputProps = {
   onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   onChange: [Function, Array] as PropType<OnUpdateValue>,
   onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   /** private */
@@ -186,7 +188,7 @@ export default defineComponent({
     )
     // form-item
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     // states
     const focusedRef = ref(false)
     const hoverRef = ref(false)
@@ -750,6 +752,7 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       mergedShowPasswordOn: mergedShowPasswordOnRef,
       placeholderStyle: placeholderStyleRef,
+      mergedStatus: mergedStatusRef,
       // methods
       handleTextAreaScroll,
       handleCompositionStart,
@@ -882,12 +885,13 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, $slots } = this
+    const { mergedClsPrefix, mergedStatus, $slots } = this
     return (
       <div
         ref="wrapperElRef"
         class={[
           `${mergedClsPrefix}-input`,
+          mergedStatus && `${mergedClsPrefix}-input--${mergedStatus}-status`,
           {
             [`${mergedClsPrefix}-input--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-input--textarea`]: this.type === 'textarea',

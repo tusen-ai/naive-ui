@@ -168,7 +168,7 @@ export default defineComponent({
       useConfig(props)
     const { localeRef, dateLocaleRef } = useLocale('TimePicker')
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const themeRef = useTheme(
       'TimePicker',
       '-time-picker',
@@ -636,6 +636,7 @@ export default defineComponent({
     }
     return {
       ...exposedMethods,
+      mergedStatus: mergedStatusRef,
       mergedBordered: mergedBorderedRef,
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
@@ -749,6 +750,7 @@ export default defineComponent({
                   default: () => (
                     <NInput
                       ref="inputInstRef"
+                      status={this.mergedStatus}
                       value={this.displayTimeString}
                       bordered={this.mergedBordered}
                       passivelyActivated

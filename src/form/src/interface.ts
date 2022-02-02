@@ -88,3 +88,5 @@ export interface FormInst {
   validate: FormValidate
   restoreValidation: () => void
 }
+
+export type FormValidationStatus = 'success' | 'error' | 'warning'

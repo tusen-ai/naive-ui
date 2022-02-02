@@ -6,6 +6,7 @@ import {
   ComputedRef,
   Ref
 } from 'vue'
+import { FormValidationStatus } from '../form/src/interface'
 import { createInjectionKey } from '../_utils'
 
 type FormItemSize = 'small' | 'medium' | 'large'
@@ -15,6 +16,7 @@ export interface FormItemInjection {
   path: Ref<string | undefined>
   disabled: Ref<boolean>
   mergedSize: ComputedRef<FormItemSize>
+  mergedValidationStatus: ComputedRef<FormValidationStatus | undefined>
   restoreValidation: () => void
   handleContentBlur: () => void
   handleContentFocus: () => void
@@ -34,11 +36,13 @@ interface UseFormItemOptions<T> {
 interface UseFormItemProps<T> {
   size?: T
   disabled?: boolean
+  status?: FormValidationStatus
 }
 
 export interface UseFormItem<T> {
   mergedSizeRef: ComputedRef<T>
   mergedDisabledRef: ComputedRef<boolean>
+  mergedStatusRef: ComputedRef<FormValidationStatus | undefined>
   nTriggerFormBlur: () => void
   nTriggerFormChange: () => void
   nTriggerFormFocus: () => void
@@ -84,6 +88,11 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
           return false
         }
   )
+  const mergedStatusRef = computed<FormValidationStatus | undefined>(() => {
+    const { status } = props
+    if (status) return status
+    return NFormItem?.mergedValidationStatus.value
+  })
   onBeforeUnmount(() => {
     if (NFormItem) {
       NFormItem.restoreValidation()
@@ -92,6 +101,7 @@ export default function useFormItem<T extends AllowedSize = FormItemSize> (
   return {
     mergedSizeRef,
     mergedDisabledRef,
+    mergedStatusRef,
     nTriggerFormBlur () {
       if (NFormItem) {
         NFormItem.handleContentBlur()
