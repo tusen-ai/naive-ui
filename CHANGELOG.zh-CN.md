@@ -19,6 +19,7 @@
 - `n-time-picker` 新增 `placement` 属性
 - `n-tree-select` 新增 `placement` 属性
 - `n-card` 新增 `header-extra-style` 属性
+- `n-form` adds `default-validation-status` prop
 
 ### Fixes
 

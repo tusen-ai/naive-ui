@@ -25,6 +25,7 @@ partially-apply-rules
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| default-validation-status | `'error' \| 'success' \| 'warning'` | `'error'` | The default validation status of the form if a rule-based validation fails. |  |
 | disabled | `boolean` | `false` | Whether to disable the form. |  |
 | inline | `boolean` | `false` | Whether to display as an inline form. |  |
 | label-width | `number \| string \| 'auto'` | `undefined` | The width of label. Particularly useful when `label-placement` is set to `'left'`,`'auto'` means label width will be auto adjusted. |  |

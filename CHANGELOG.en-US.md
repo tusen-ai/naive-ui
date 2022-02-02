@@ -19,6 +19,7 @@
 - `n-time-picker` adds `placement` prop.
 - `n-tree-select` adds `placement` prop.
 - `n-card` adds `header-extra-style` prop.
+- `n-form` adds `default-validation-status` prop.
 
 ### Fixes
 

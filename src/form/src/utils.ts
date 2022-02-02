@@ -78,7 +78,7 @@ export function formItemMisc (props: FormItemSetupProps) {
   const mergedValidationStatusRef = computed(() => {
     const { validationStatus } = props
     if (validationStatus !== undefined) return validationStatus
-    if (validationErroredRef.value) return 'error'
+    if (validationErroredRef.value) { return NForm?.props.defaultValidationStatus || 'error' }
     return undefined
   })
   const mergedShowFeedbackRef = computed(() => {

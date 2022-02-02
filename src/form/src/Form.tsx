@@ -50,6 +50,10 @@ const formProps = {
     type: Boolean,
     default: true
   },
+  defaultValidationStatus: {
+    type: String as PropType<'error' | 'warning' | 'success'>,
+    default: 'error'
+  },
   onSubmit: {
     type: Function as PropType<(e: Event) => void>,
     default: (e: Event) => e.preventDefault()

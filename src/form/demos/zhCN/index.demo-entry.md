@@ -27,6 +27,7 @@ partially-apply-rules
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| default-validation-status | `'error' \| 'success' \| 'warning'` | `'error'` | The default validation status of the form if a rule-based validation fails. |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | inline | `boolean` | `false` | 是否展示为行内表单 |  |
 | label-width | `number \| string \| 'auto'` | `undefined` | 标签的宽度，在 `label-placement` 是 `'left'` 的时候可能会有用，`'auto'` 意味着 label width 会被自动调整 |  |
