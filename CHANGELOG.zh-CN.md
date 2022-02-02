@@ -20,6 +20,10 @@
 - `n-tree-select` 新增 `placement` 属性
 - `n-card` 新增 `header-extra-style` 属性
 
+### Fixes
+
+- Fix `n-form-item` prevent feedback padding when empty.
+
 ## 2.24.7 (2022-01-28)
 
 ### Fixes

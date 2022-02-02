@@ -20,6 +20,10 @@
 - `n-tree-select` adds `placement` prop.
 - `n-card` adds `header-extra-style` prop.
 
+### Fixes
+
+- Fix `n-form-item` prevent feedback padding when empty.
+
 ## 2.24.7 (2022-01-28)
 
 ### Fixes
