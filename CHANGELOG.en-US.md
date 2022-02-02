@@ -2,9 +2,14 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- Refactor `n-carousel`'s style when `show-arrow` is true.
+
 ### Fixes
 
 - `n-color-picker`'s hue & alpha slider handle are influenced by rail's box-shadow.
+- Fix `n-form-item` prevent feedback padding when empty.
 
 ### Feats
 
@@ -19,10 +24,6 @@
 - `n-time-picker` adds `placement` prop.
 - `n-tree-select` adds `placement` prop.
 - `n-card` adds `header-extra-style` prop.
-
-### Fixes
-
-- Fix `n-form-item` prevent feedback padding when empty.
 
 ### Fixes
 

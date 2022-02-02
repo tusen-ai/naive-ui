@@ -7,7 +7,7 @@ It's usually used to display good news.
 ```demo
 basic
 arrow
-dots
+dots.vue
 autoplay
 vertical
 space-between

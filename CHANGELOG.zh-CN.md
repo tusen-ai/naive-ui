@@ -2,9 +2,14 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- 重构了 `n-carousel` 带箭头时的样式
+
 ### Fixes
 
 - `n-color-picker` 色阶和不透明度调整滑块 box-shadow 被轨道 box-shadow 影响
+- 修复 `n-form-item` feedback DOM 内容为空依然有 padding
 
 ### Feats
 
@@ -19,10 +24,6 @@
 - `n-time-picker` 新增 `placement` 属性
 - `n-tree-select` 新增 `placement` 属性
 - `n-card` 新增 `header-extra-style` 属性
-
-### Fixes
-
-- Fix `n-form-item` prevent feedback padding when empty.
 
 ### Fixes
 

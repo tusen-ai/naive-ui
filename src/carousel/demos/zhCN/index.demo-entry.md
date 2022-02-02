@@ -7,7 +7,7 @@
 ```demo
 basic
 arrow
-dots
+dots.vue
 autoplay
 vertical
 space-between
