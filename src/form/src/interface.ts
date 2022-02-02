@@ -6,15 +6,12 @@ export interface FormRules {
   [path: string]: FormRules | FormItemRule | FormItemRule[]
 }
 
-type OmitRuleParameter<T, R> = T extends (
-  rule: infer U,
-  ...args: infer K
-) => infer P
+type SetRule<T, R> = T extends (rule: any, ...args: infer K) => infer P
   ? (rule: R, ...args: K) => P
-  : T
+  : never
 
 export type FormItemRuleValidatorParams = Parameters<
-OmitRuleParameter<NonNullable<RuleItem['validator']>, FormItemRule>
+SetRule<NonNullable<RuleItem['validator']>, FormItemRule>
 >
 
 export type FormItemRuleValidator = (
