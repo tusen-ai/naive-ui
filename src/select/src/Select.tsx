@@ -316,7 +316,7 @@ export default defineComponent({
     })
 
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     function doUpdateValue (
       value: string | number | Array<string | number> | null,
       option: SelectBaseOption | null | SelectBaseOption[]
@@ -656,6 +656,7 @@ export default defineComponent({
     }
     return {
       ...exposedMethods,
+      mergedStatus: mergedStatusRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       namespace: namespaceRef,
@@ -717,6 +718,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerRef"
+                      status={this.mergedStatus}
                       inputProps={this.inputProps}
                       clsPrefix={this.mergedClsPrefix}
                       showArrow={this.showArrow}

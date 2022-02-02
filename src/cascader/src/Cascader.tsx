@@ -22,8 +22,9 @@ import {
 } from 'vueuc'
 import { depx, changeColor, happensIn } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
-import { SelectBaseOption } from '../../select/src/interface'
-import { NInternalSelection, InternalSelectionInst } from '../../_internal'
+import type { SelectBaseOption } from '../../select/src/interface'
+import { NInternalSelection } from '../../_internal'
+import type { InternalSelectionInst } from '../../_internal'
 import { useLocale, useTheme, useConfig, useFormItem } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, useAdjustedTo, warnOnce } from '../../_utils'
@@ -185,7 +186,7 @@ export default defineComponent({
     })
     const patternRef = ref('')
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const cascaderMenuInstRef = ref<CascaderMenuInstance | null>(null)
     const selectMenuInstRef = ref<SelectMenuInstance | null>(null)
     const triggerInstRef = ref<InternalSelectionInst | null>(null)
@@ -784,6 +785,7 @@ export default defineComponent({
     }
     return {
       ...exposedMethods,
+      mergedStatus: mergedStatusRef,
       selectMenuFollowerRef,
       cascaderMenuFollowerRef,
       triggerInstRef,
@@ -875,6 +877,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerInstRef"
+                      status={this.mergedStatus}
                       clsPrefix={mergedClsPrefix}
                       maxTagCount={this.maxTagCount}
                       bordered={this.mergedBordered}
