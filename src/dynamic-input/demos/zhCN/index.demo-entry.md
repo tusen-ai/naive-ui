@@ -9,10 +9,10 @@
 ## 演示
 
 ```demo
-basic
-pair
-custom
-form
+basic.vue
+pair.vue
+custom.vue
+form.vue
 ```
 
 ## API
