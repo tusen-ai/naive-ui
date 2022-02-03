@@ -421,11 +421,19 @@ export default defineComponent({
     function handleTriggerClick (): void {
       if (mergedDisabledRef.value) return
       if (!mergedShowRef.value) {
-        if (!forceHideMenuRef.value) {
+        if (!props.filterable) {
           openMenu()
         } else {
-          if (props.filterable) {
-            focusSelectionInput()
+          if (!forceHideMenuRef.value) {
+            void nextTick(() => {
+              if (mergedShowRef.value) {
+                openMenu()
+              } else {
+                focusSelectionInput()
+              }
+            })
+          } else {
+            openMenu()
           }
         }
       } else {

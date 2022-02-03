@@ -38,12 +38,12 @@ export default defineComponent({
     return {
       trim: (value: string): SelectOption => {
         return {
-          label: value.slice(0, 2),
+          label: value.split(' ')[0],
           value
         }
       },
-      singleValue: ref('一个不知哪里来的值'),
-      multipleValue: ref(['一个不知哪里来的值', '两个不知哪里来的值']),
+      singleValue: ref('A Nowhere Value'),
+      multipleValue: ref(['First Nowhere Value', 'Second Nowhere Value']),
       options: [
         {
           label: "Everybody's Got Something to Hide Except Me and My Monkey",
