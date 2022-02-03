@@ -13,6 +13,7 @@ basic.vue
 pair.vue
 custom.vue
 form.vue
+move
 ```
 
 ## API
@@ -28,6 +29,7 @@ form.vue
 | max | `number` | `undefined` | Maximum number of items. |
 | preset | `'input' \| 'pair'` | `'input'` | The preset of `n-dynamic-input`, it work when `$slots.default` is not set. |
 | value | `Array<any>` | `undefined` | Value in controlled mode. |
+| show-move-button | `boolean` | `false` | Show move button |
 | on-create | `(index: number) => void` | `undefined` | Add button (+) click callback. If set, the return value will be used as the initial value of the new item. `index` is the the new item's corresponding index in the value array, which starts from 1 (the second item). |
 | on-remove | `(index: number) => void` | `undefined` | Remove button (-) callback. |
 | on-update:value | `(value: any) => void` | `undefined` | On value changed callback. |

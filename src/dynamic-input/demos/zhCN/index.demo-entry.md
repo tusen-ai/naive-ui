@@ -13,6 +13,7 @@ basic.vue
 pair.vue
 custom.vue
 form.vue
+move
 ```
 
 ## API
@@ -28,6 +29,7 @@ form.vue
 | max | `number` | `undefined` | 最多有几项内容 |
 | preset | `'input' \| 'pair'` | `'input'` | 动态录入使用的预设，在不设定 `$slots.default` 的时候生效。 |
 | value | `Array<any>` | `undefined` | 受控模式下的值 |
+| show-move-button | `boolean` | `false` | 显示移动按钮 |
 | on-create | `(index: number) => void` | `undefined` | 点击添加按钮时的回调，如果设定则返回值会被用作新添加的初始值。其中 `index` 是创建内容将要被放置到的位置对应的数组索引，从 1 (第二项)开始计算 |
 | on-remove | `(index: number) => void` | `undefined` | 点击第 index 项删除按钮的回调 |
 | on-update:value | `(value: any) => void` | `undefined` | 组件值发生变化的回调 |

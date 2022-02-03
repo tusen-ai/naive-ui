@@ -14,7 +14,12 @@ import {
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { createId } from 'seemly'
-import { RemoveIcon, AddIcon } from '../../_internal/icons'
+import {
+  RemoveIcon,
+  AddIcon,
+  ArrowDownIcon,
+  ArrowUpIcon
+} from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { NButton, NButtonGroup } from '../../button'
 import { useTheme, useLocale, useConfig } from '../../_mixins'
@@ -69,6 +74,7 @@ const dynamicInputProps = {
     type: String,
     default: ''
   },
+  showMoveButton: Boolean,
   createButtonText: {
     type: String,
     default: ''
@@ -215,6 +221,36 @@ export default defineComponent({
       const { onRemove } = props
       if (onRemove) onRemove(index)
     }
+    function swap (
+      array: any[],
+      currentIndex: number,
+      targetIndex: number
+    ): void {
+      if (
+        currentIndex < 0 ||
+        targetIndex < 0 ||
+        currentIndex >= array.length ||
+        targetIndex >= array.length
+      ) {
+        return
+      }
+      if (currentIndex === targetIndex) return
+      const currentItem = array[currentIndex]
+      array[currentIndex] = array[targetIndex]
+      array[targetIndex] = currentItem
+    }
+    function move (type: 'up' | 'down', index: number): void {
+      const { value: mergedValue } = mergedValueRef
+      if (!Array.isArray(mergedValue)) return
+      const newValue = Array.from(mergedValue)
+      if (type === 'up') {
+        swap(newValue, index, index - 1)
+      }
+      if (type === 'down') {
+        swap(newValue, index, index + 1)
+      }
+      doUpdateValue(newValue)
+    }
     provide(dynamicInputInjectionKey, {
       mergedThemeRef: themeRef,
       keyPlaceholderRef: toRef(props, 'keyPlaceholder'),
@@ -234,6 +270,7 @@ export default defineComponent({
       ensureKey,
       handleValueChange,
       remove,
+      move,
       createItem,
       mergedTheme: themeRef,
       cssVars: computed(() => {
@@ -262,7 +299,9 @@ export default defineComponent({
       handleValueChange,
       remove,
       createItem,
-      createButtonText
+      createButtonText,
+      move,
+      showMoveButton
     } = this
     return (
       <div
@@ -331,22 +370,21 @@ export default defineComponent({
                 <NButtonGroup size={buttonSize}>
                   {{
                     default: () => [
-                      !this.removeDisabled ? (
-                        <NButton
-                          theme={mergedTheme.peers.Button}
-                          themeOverrides={mergedTheme.peerOverrides.Button}
-                          circle
-                          onClick={() => remove(index)}
-                        >
-                          {{
-                            icon: () => (
-                              <NBaseIcon clsPrefix={mergedClsPrefix}>
-                                {{ default: () => <RemoveIcon /> }}
-                              </NBaseIcon>
-                            )
-                          }}
-                        </NButton>
-                      ) : null,
+                      <NButton
+                        disabled={this.removeDisabled}
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        circle
+                        onClick={() => remove(index)}
+                      >
+                        {{
+                          icon: () => (
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{ default: () => <RemoveIcon /> }}
+                            </NBaseIcon>
+                          )
+                        }}
+                      </NButton>,
                       <NButton
                         disabled={this.insertionDisabled}
                         circle
@@ -361,7 +399,43 @@ export default defineComponent({
                             </NBaseIcon>
                           )
                         }}
-                      </NButton>
+                      </NButton>,
+                      showMoveButton ? (
+                        <NButton
+                          disabled={index === 0}
+                          circle
+                          theme={mergedTheme.peers.Button}
+                          themeOverrides={mergedTheme.peerOverrides.Button}
+                          onClick={() => move('up', index)}
+                        >
+                          {{
+                            icon: () => (
+                              <NBaseIcon clsPrefix={mergedClsPrefix}>
+                                {{
+                                  default: () => <ArrowUpIcon />
+                                }}
+                              </NBaseIcon>
+                            )
+                          }}
+                        </NButton>
+                      ) : null,
+                      showMoveButton ? (
+                        <NButton
+                          disabled={index === mergedValue.length - 1}
+                          circle
+                          theme={mergedTheme.peers.Button}
+                          themeOverrides={mergedTheme.peerOverrides.Button}
+                          onClick={() => move('down', index)}
+                        >
+                          {{
+                            icon: () => (
+                              <NBaseIcon clsPrefix={mergedClsPrefix}>
+                                {{ default: () => <ArrowDownIcon /> }}
+                              </NBaseIcon>
+                            )
+                          }}
+                        </NButton>
+                      ) : null
                     ]
                   }}
                 </NButtonGroup>

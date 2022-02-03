@@ -152,6 +152,10 @@
 
 - Fix install error.
 
+### Feats
+
+- `n-dynamic-input` adds `show-sort-button` prop, closes [#2121](https://github.com/TuSimple/naive-ui/issues/2121).
+
 ## 2.24.0 (2022-01-12)
 
 ### Breaking Changes
