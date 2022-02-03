@@ -33,6 +33,7 @@ import { emptyLight } from '../empty/styles'
 import { formLight } from '../form/styles'
 import { gradientTextLight } from '../gradient-text/styles'
 import { iconLight } from '../icon/styles'
+import { iconWrapperLight } from '../icon-wrapper/styles'
 import { imageLight } from '../image/styles'
 import { inputLight } from '../input/styles'
 import { inputNumberLight } from '../input-number/styles'
@@ -112,6 +113,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Form: formLight,
   GradientText: gradientTextLight,
   Icon: iconLight,
+  IconWrapper: iconWrapperLight,
   Image: imageLight,
   Input: inputLight,
   InputNumber: inputNumberLight,

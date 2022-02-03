@@ -31,6 +31,7 @@ import { emptyDark } from '../empty/styles'
 import { formDark } from '../form/styles'
 import { gradientTextDark } from '../gradient-text/styles'
 import { iconDark } from '../icon/styles'
+import { iconWrapperDark } from '../icon-wrapper/styles'
 import { imageDark } from '../image/styles'
 import { inputDark } from '../input/styles'
 import { inputNumberDark } from '../input-number/styles'
@@ -110,6 +111,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Form: formDark,
   GradientText: gradientTextDark,
   Icon: iconDark,
+  IconWrapper: iconWrapperDark,
   Image: imageDark,
   Input: inputDark,
   InputNumber: inputNumberDark,
