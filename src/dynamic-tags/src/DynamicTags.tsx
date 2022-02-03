@@ -6,7 +6,8 @@ import {
   CSSProperties,
   computed,
   nextTick,
-  toRef
+  toRef,
+  InputHTMLAttributes
 } from 'vue'
 import { useMergedState } from 'vooks'
 import commonProps from '../../tag/src/common-props'
@@ -38,6 +39,7 @@ const dynamicTagsProps = {
   },
   value: Array as PropType<string[]>,
   inputStyle: [String, Object] as PropType<string | CSSProperties>,
+  inputProps: Object as PropType<InputHTMLAttributes>,
   max: Number as PropType<number>,
   tagStyle: [String, Object] as PropType<string | CSSProperties>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -232,6 +234,7 @@ export default defineComponent({
                     $slots.input({ submit: handleInputConfirm })
                   ) : (
                     <NInput
+                      inputProps={this.inputProps}
                       ref="inputInstRef"
                       autosize
                       value={inputValue}

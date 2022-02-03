@@ -1009,7 +1009,6 @@ export default defineComponent({
                     ? 'text'
                     : this.type
                 }
-                {...this.inputProps}
                 ref="inputElRef"
                 class={`${mergedClsPrefix}-input__input-el`}
                 style={this.textDecorationStyle[0] as any}
@@ -1028,6 +1027,7 @@ export default defineComponent({
                 readonly={this.readonly as any}
                 autofocus={this.autofocus}
                 size={this.attrSize}
+                {...this.inputProps}
                 onBlur={this.handleInputBlur}
                 onFocus={this.handleInputFocus}
                 onInput={(e) => this.handleInput(e, 0)}
