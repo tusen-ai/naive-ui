@@ -106,8 +106,6 @@
 - `n-color-picker` 新增 `label` 插槽
 - `n-color-picker` 新增 `render-label` 属性
 - `n-form-item` 新增 `label-props` 属性
-- `n-carousel` 新增 `arrow` slot
-- `n-carousel` 新增 `dots` slot
 
 ## 2.23.2 (2021-12-29)
 
