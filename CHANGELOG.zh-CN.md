@@ -16,6 +16,7 @@
 - 修复 `n-log` 未导出 `LogInst` 类型
 - 修复 `n-popselect` action slot & empty slot 不生效
 - 修复 `n-data-table` 不能使用百分比列宽
+- Fix `n-select` add proper tabindex when filterable
 
 ### Feats
 

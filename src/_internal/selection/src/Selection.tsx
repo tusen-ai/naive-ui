@@ -178,11 +178,13 @@ export default defineComponent({
       }
     })
     function doFocus (e: FocusEvent): void {
-      const { onFocus } = props
+      const { onFocus, filterable } = props
+      if (filterable) showInputTag()
       if (onFocus) onFocus(e)
     }
     function doBlur (e: FocusEvent): void {
-      const { onBlur } = props
+      const { onBlur, filterable } = props
+      if (filterable) hideInputTag()
       if (onBlur) onBlur(e)
     }
     function doDeleteOption (value: SelectBaseOption): void {
@@ -571,7 +573,7 @@ export default defineComponent({
           <input
             {...this.inputProps}
             ref="patternInputRef"
-            tabindex={-1}
+            tabindex={0}
             disabled={disabled}
             value={this.pattern}
             autofocus={this.autofocus}
@@ -730,7 +732,7 @@ export default defineComponent({
           <div
             ref="multipleElRef"
             class={`${clsPrefix}-base-selection-tags`}
-            tabindex={disabled ? undefined : 0}
+            tabindex={disabled ? undefined : -1}
           >
             {tags}
             {suffix}
@@ -773,7 +775,7 @@ export default defineComponent({
               placeholder=""
               readonly={disabled}
               disabled={disabled}
-              tabindex={-1}
+              tabindex={0}
               autofocus={this.autofocus}
               onFocus={this.handlePatternInputFocus}
               onBlur={this.handlePatternInputBlur}
