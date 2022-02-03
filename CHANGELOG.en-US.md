@@ -43,6 +43,7 @@
 - `n-dynamic-input` adds `create-button-props` props.
 - `n-dynamic-input` adds `create-button-default` slot.
 - `n-dynamic-input` adds `create-button-icon` slot.
+- `n-dynamic-input` adds `show-sort-button` prop, closes [#2121](https://github.com/TuSimple/naive-ui/issues/2121).
 
 ## 2.24.7 (2022-01-28)
 
@@ -153,10 +154,6 @@
 ### Fixes
 
 - Fix install error.
-
-### Feats
-
-- `n-dynamic-input` adds `show-sort-button` prop, closes [#2121](https://github.com/TuSimple/naive-ui/issues/2121).
 
 ## 2.24.0 (2022-01-12)
 

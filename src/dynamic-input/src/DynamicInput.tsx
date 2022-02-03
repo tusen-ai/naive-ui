@@ -71,7 +71,7 @@ const dynamicInputProps = {
     type: String,
     default: ''
   },
-  showMoveButton: Boolean,
+  showSortButton: Boolean,
   createButtonProps: Object as PropType<ButtonProps>,
   onCreate: Function as PropType<(index: number) => any>,
   onRemove: Function as PropType<(index: number) => void>,
@@ -288,7 +288,7 @@ export default defineComponent({
       keyField,
       itemStyle,
       preset,
-      showMoveButton,
+      showSortButton,
       NFormItem,
       ensureKey,
       handleValueChange,
@@ -408,7 +408,7 @@ export default defineComponent({
                           )
                         }}
                       </NButton>,
-                      showMoveButton ? (
+                      showSortButton ? (
                         <NButton
                           disabled={index === 0}
                           circle
@@ -427,7 +427,7 @@ export default defineComponent({
                           }}
                         </NButton>
                       ) : null,
-                      showMoveButton ? (
+                      showSortButton ? (
                         <NButton
                           disabled={index === mergedValue.length - 1}
                           circle
