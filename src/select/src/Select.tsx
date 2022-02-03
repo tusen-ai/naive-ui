@@ -752,6 +752,7 @@ export default defineComponent({
                       onKeyup={this.handleKeyUp}
                     >
                       {{
+                        _: 3,
                         arrow: () => this.$slots.arrow?.()
                       }}
                     </NInternalSelection>
@@ -818,7 +819,11 @@ export default defineComponent({
                                 this.resetMenuOnOptionsChange
                               }
                             >
-                              {this.$slots}
+                              {{
+                                _: 3,
+                                empty: () => this.$slots.empty?.(),
+                                action: () => this.$slots.action?.()
+                              }}
                             </NInternalSelectMenu>,
                             this.displayDirective === 'show'
                               ? [

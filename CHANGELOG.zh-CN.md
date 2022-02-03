@@ -14,6 +14,7 @@
 - 修复 `n-form` 的 rules 和 `n-form-item` 的 rule 中的 `validator` 与 `asyncValidator` 函数的 `rule` 类型不为 `FormItemRule` 类型， 关闭 [#2299](https://github.com/TuSimple/naive-ui/issues/2299)
 - 修复 `n-log` 在内容过长时不折行，关闭 [#2298](https://github.com/TuSimple/naive-ui/issues/2298)
 - 修复 `n-log` 未导出 `LogInst` 类型
+- 修复 `n-popselect` action slot & empty slot 不生效
 
 ### Feats
 
