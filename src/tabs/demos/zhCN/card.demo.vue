@@ -1,27 +1,29 @@
+<markdown>
 # 卡片类型
 
 设定 `type='card'`。
+</markdown>
 
-```html
-<n-tabs
-  v-model:value="name"
-  type="card"
-  closable
-  @close="handleClose"
-  tab-style="min-width: 80px;"
->
-  <n-tab-pane
-    v-for="panel in panels"
-    :key="panel"
-    :tab="panel.toString()"
-    :name="panel"
+<template>
+  <n-tabs
+    v-model:value="name"
+    type="card"
+    closable
+    tab-style="min-width: 80px;"
+    @close="handleClose"
   >
-    {{ panel }}
-  </n-tab-pane>
-</n-tabs>
-```
+    <n-tab-pane
+      v-for="panel in panels"
+      :key="panel"
+      :tab="panel.toString()"
+      :name="panel"
+    >
+      {{ panel }}
+    </n-tab-pane>
+  </n-tabs>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -30,7 +32,7 @@ export default defineComponent({
     const nameRef = ref(1)
     const message = useMessage()
     const panelsRef = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
-    function handleClose (name) {
+    function handleClose (name: number) {
       const { value: panels } = panelsRef
       if (panels.length === 1) {
         message.error('最后一个了')
@@ -50,4 +52,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

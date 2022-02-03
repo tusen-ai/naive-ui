@@ -1,14 +1,17 @@
+<markdown>
 # Unkeyed
+</markdown>
 
-```html
-<n-tabs type="line" :default-value="list[0].a">
-  <n-tab-pane v-for="i in list" :name="i.a" :tab="i.b">
-    <div>{{ i.a }} {{ i.b }}</div>
-  </n-tab-pane>
-</n-tabs>
-```
+<template>
+  <n-tabs type="line" :default-value="list[0].a">
+    <!-- eslint-disable vue/valid-v-for -->
+    <n-tab-pane v-for="i in list" :name="i.a" :tab="i.b">
+      <div>{{ i.a }} {{ i.b }}</div>
+    </n-tab-pane>
+  </n-tabs>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -31,4 +34,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

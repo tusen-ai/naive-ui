@@ -39,7 +39,7 @@
 - `n-notification-provider` 新增 `container-style` 属性
 - `n-notification-provider` 导出 `NotificationPlacement` 类型
 - `n-notification-provider` 导出 `NotificationType` 类型
-- `n-tabs` 新增 `tab-bar-width` 属性
+- `n-tabs` 新增 `bar-width` 属性
 
 ## 2.24.7 (2022-01-28)
 

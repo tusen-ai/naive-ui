@@ -1,26 +1,32 @@
-# 可增加
+<markdown>
+# Addable
 
-增加一些标签页。只对 `'card'` 类型生效。
+Add some tabs. Only work with `'card'` type.
+</markdown>
 
-```html
-<n-tabs
-  v-model:value="value"
-  type="card"
-  :addable="addable"
-  :closable="closable"
-  @close="handleClose"
-  @add="handleAdd"
-  tab-style="min-width: 80px;"
->
-  <n-tab-pane v-for="panel in panels" :name="panel" :key="panel">
-    {{ panel }}
-  </n-tab-pane>
-  <template #prefix>Prefix</template>
-  <template #suffix>Suffix</template>
-</n-tabs>
-```
+<template>
+  <n-tabs
+    v-model:value="value"
+    type="card"
+    :addable="addable"
+    :closable="closable"
+    tab-style="min-width: 80px;"
+    @close="handleClose"
+    @add="handleAdd"
+  >
+    <n-tab-pane v-for="panel in panels" :key="panel" :name="panel">
+      {{ panel }}
+    </n-tab-pane>
+    <template #prefix>
+      Prefix
+    </template>
+    <template #suffix>
+      Suffix
+    </template>
+  </n-tabs>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
 
 export default defineComponent({
@@ -45,7 +51,7 @@ export default defineComponent({
         panelsRef.value.push(newValue)
         valueRef.value = newValue
       },
-      handleClose (name) {
+      handleClose (name: number) {
         const { value: panels } = panelsRef
         const nameIndex = panels.findIndex((panelName) => panelName === name)
         if (!~nameIndex) return
@@ -57,4 +63,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

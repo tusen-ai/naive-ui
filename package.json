@@ -29,7 +29,7 @@
     "release-changelog": "node scripts/release-changelog",
     "build:site:ts": "./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "prepare": "husky install",
-    "transpile-docs": "node scripts/md-to-vue notification",
+    "transpile-docs": "node scripts/md-to-vue tabs",
     "typecheck": "vue-tsc --noEmit src/**/*.vue"
   },
   "author": "07akioni",

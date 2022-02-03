@@ -1,22 +1,24 @@
+<markdown>
 # Display directive
 
 You can set tab-panel's display directive to `if` or `show`. When use `show`, the tab-panel's content won't be reset after tab changes. When use `show:lazy`, the display effect is the same as `show`, but the content will be lazily loaded.
+</markdown>
 
-```html
-<n-tabs default-value="show">
-  <n-tab-pane name="show" display-directive="show" tab="show">
-    <show-input />
-  </n-tab-pane>
-  <n-tab-pane name="if" display-directive="if" tab="if">
-    <if-input />
-  </n-tab-pane>
-  <n-tab-pane name="show:lazy" display-directive="show:lazy" tab="show:lazy">
-    <show-lazy-input />
-  </n-tab-pane>
-</n-tabs>
-```
+<template>
+  <n-tabs default-value="show">
+    <n-tab-pane name="show" display-directive="show" tab="show">
+      <show-input />
+    </n-tab-pane>
+    <n-tab-pane name="if" display-directive="if" tab="if">
+      <if-input />
+    </n-tab-pane>
+    <n-tab-pane name="show:lazy" display-directive="show:lazy" tab="show:lazy">
+      <show-lazy-input />
+    </n-tab-pane>
+  </n-tabs>
+</template>
 
-```js
+<script lang="ts">
 import { h, defineComponent } from 'vue'
 import { NInput } from 'naive-ui'
 
@@ -52,4 +54,4 @@ export default defineComponent({
     showLazyInput
   }
 })
-```
+</script>
