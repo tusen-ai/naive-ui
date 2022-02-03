@@ -20,17 +20,14 @@ import {
   ArrowDownIcon,
   ArrowUpIcon
 } from '../../_internal/icons'
+import { formItemInjectionKey } from '../../_mixins/use-form-item'
 import { NBaseIcon } from '../../_internal'
 import { NButton, NButtonGroup } from '../../button'
+import type { ButtonProps } from '../../button'
 import { useTheme, useLocale, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import {
-  call,
-  MaybeArray,
-  ExtractPublicPropTypes,
-  warnOnce
-} from '../../_utils'
-import { formItemInjectionKey } from '../../_mixins/use-form-item'
+import { call, warnOnce, resolveSlotWithProps, resolveSlot } from '../../_utils'
+import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { dynamicInputLight } from '../styles'
 import type { DynamicInputTheme } from '../styles'
 import NDynamicInputInputPreset from './InputPreset'
@@ -75,10 +72,7 @@ const dynamicInputProps = {
     default: ''
   },
   showMoveButton: Boolean,
-  createButtonText: {
-    type: String,
-    default: ''
-  },
+  createButtonProps: Object as PropType<ButtonProps>,
   onCreate: Function as PropType<(index: number) => any>,
   onRemove: Function as PropType<(index: number) => void>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -285,23 +279,22 @@ export default defineComponent({
   },
   render () {
     const {
+      $slots,
       buttonSize,
       mergedClsPrefix,
       mergedValue,
       locale,
       mergedTheme,
       keyField,
-      $slots,
-      preset,
       itemStyle,
+      preset,
+      showMoveButton,
       NFormItem,
       ensureKey,
       handleValueChange,
       remove,
       createItem,
-      createButtonText,
-      move,
-      showMoveButton
+      move
     } = this
     return (
       <div
@@ -313,19 +306,24 @@ export default defineComponent({
             block
             ghost
             dashed
-            disabled={this.insertionDisabled}
             size={buttonSize}
+            {...this.createButtonProps}
+            disabled={this.insertionDisabled}
             theme={mergedTheme.peers.Button}
             themeOverrides={mergedTheme.peerOverrides.Button}
             onClick={this.handleCreateClick}
           >
             {{
-              default: () => createButtonText || locale.create,
-              icon: () => (
-                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                  {{ default: () => <AddIcon /> }}
-                </NBaseIcon>
-              )
+              default: () =>
+                resolveSlot($slots['create-button-default'], () => [
+                  locale.create
+                ]),
+              icon: () =>
+                resolveSlot($slots['create-button-icon'], () => [
+                  <NBaseIcon clsPrefix={mergedClsPrefix}>
+                    {{ default: () => <AddIcon /> }}
+                  </NBaseIcon>
+                ])
             }}
           </NButton>
         ) : (
@@ -336,36 +334,46 @@ export default defineComponent({
               class={`${mergedClsPrefix}-dynamic-input-item`}
               style={itemStyle}
             >
-              {$slots.default ? (
-                $slots.default({
+              {resolveSlotWithProps(
+                $slots.default,
+                {
                   value: mergedValue[index],
                   index
-                })
-              ) : preset === 'input' ? (
-                <NDynamicInputInputPreset
-                  clsPrefix={mergedClsPrefix}
-                  value={mergedValue[index]}
-                  parentPath={NFormItem ? NFormItem.path.value : undefined}
-                  path={
-                    NFormItem?.path.value
-                      ? `${NFormItem.path.value}[${index}]`
-                      : undefined
-                  }
-                  onUpdateValue={(v) => handleValueChange(index, v)}
-                />
-              ) : preset === 'pair' ? (
-                <NDynamicInputPairPreset
-                  clsPrefix={mergedClsPrefix}
-                  value={mergedValue[index]}
-                  parentPath={NFormItem ? NFormItem.path.value : undefined}
-                  path={
-                    NFormItem?.path.value
-                      ? `${NFormItem.path.value}[${index}]`
-                      : undefined
-                  }
-                  onUpdateValue={(v) => handleValueChange(index, v)}
-                />
-              ) : null}
+                },
+                () => {
+                  return [
+                    preset === 'input' ? (
+                      <NDynamicInputInputPreset
+                        clsPrefix={mergedClsPrefix}
+                        value={mergedValue[index]}
+                        parentPath={
+                          NFormItem ? NFormItem.path.value : undefined
+                        }
+                        path={
+                          NFormItem?.path.value
+                            ? `${NFormItem.path.value}[${index}]`
+                            : undefined
+                        }
+                        onUpdateValue={(v) => handleValueChange(index, v)}
+                      />
+                    ) : preset === 'pair' ? (
+                      <NDynamicInputPairPreset
+                        clsPrefix={mergedClsPrefix}
+                        value={mergedValue[index]}
+                        parentPath={
+                          NFormItem ? NFormItem.path.value : undefined
+                        }
+                        path={
+                          NFormItem?.path.value
+                            ? `${NFormItem.path.value}[${index}]`
+                            : undefined
+                        }
+                        onUpdateValue={(v) => handleValueChange(index, v)}
+                      />
+                    ) : null
+                  ]
+                }
+              )}
               <div class={`${mergedClsPrefix}-dynamic-input-item__action`}>
                 <NButtonGroup size={buttonSize}>
                   {{

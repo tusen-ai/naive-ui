@@ -40,7 +40,9 @@
 - `n-notification-provider` exports `NotificationPlacement` type.
 - `n-notification-provider` exports `NotificationType` type.
 - `n-tabs` add `bar-width` prop.
-- `n-dynamic-input` adds `create-button-text` prop
+- `n-dynamic-input` adds `create-button-props` props.
+- `n-dynamic-input` adds `create-button-default` slot.
+- `n-dynamic-input` adds `create-button-icon` slot.
 
 ## 2.24.7 (2022-01-28)
 

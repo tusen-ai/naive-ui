@@ -40,7 +40,9 @@
 - `n-notification-provider` 导出 `NotificationPlacement` 类型
 - `n-notification-provider` 导出 `NotificationType` 类型
 - `n-tabs` 新增 `bar-width` 属性
-- `n-dynamic-input` 新增 `create-button-text` 属性
+- `n-dynamic-input` 新增 `create-button-props` 属性
+- `n-dynamic-input` 新增 `create-button-default` slot
+- `n-dynamic-input` 新增 `create-button-icon` slot
 
 ## 2.24.7 (2022-01-28)
 

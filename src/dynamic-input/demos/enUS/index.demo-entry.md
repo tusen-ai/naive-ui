@@ -20,19 +20,20 @@ move
 
 ### DynamicInput Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| default-value | `Array<any>` | `[]` | Default value. |
-| item-style | `string \| Object` | `undefined` | The style of each item of the dynamic input. |
-| key-field | `string` | `undefined` | The key of each item that should be used in the rendering of the list. |
-| min | `number` | `0` | Minimum number of items. |
-| max | `number` | `undefined` | Maximum number of items. |
-| preset | `'input' \| 'pair'` | `'input'` | The preset of `n-dynamic-input`, it work when `$slots.default` is not set. |
-| value | `Array<any>` | `undefined` | Value in controlled mode. |
-| show-move-button | `boolean` | `false` | Show move button |
-| on-create | `(index: number) => void` | `undefined` | Add button (+) click callback. If set, the return value will be used as the initial value of the new item. `index` is the the new item's corresponding index in the value array, which starts from 1 (the second item). |
-| on-remove | `(index: number) => void` | `undefined` | Remove button (-) callback. |
-| on-update:value | `(value: any) => void` | `undefined` | On value changed callback. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| create-button-props | `ButtonProps` | `undefined` | Props of create item button. | NEXT_VERSION |
+| default-value | `unknown[]` | `[]` | Default value. |  |
+| item-style | `string \| Object` | `undefined` | The style of each item of the dynamic input. |  |
+| key-field | `string` | `undefined` | The key of each item that should be used in the rendering of the list. |  |
+| min | `number` | `0` | Minimum number of items. |  |
+| max | `number` | `undefined` | Maximum number of items. |  |
+| preset | `'input' \| 'pair'` | `'input'` | The preset of `n-dynamic-input`, it work when `$slots.default` is not set. |  |
+| show-move-button | `boolean` | `false` | Show move button | NEXT_VERSION |
+| value | `unknown[]` | `undefined` | Value in controlled mode. |  |
+| on-create | `(index: number) => void` | `undefined` | Add button (+) click callback. If set, the return value will be used as the initial value of the new item. `index` is the the new item's corresponding index in the value array, which starts from 1 (the second item). |  |
+| on-remove | `(index: number) => void` | `undefined` | Remove button (-) callback. |  |
+| on-update:value | `(value: any) => void` | `undefined` | On value changed callback. |  |
 
 ### DynamicInput Props (Input Preset)
 
@@ -51,6 +52,8 @@ move
 
 ### DynamicInput Slots
 
-| Name | Parameters | Description |
-| --- | --- | --- |
-| default | `(options: { value: any, index: number })` | The content of each item; `value` and `index` are the value and index of the current item. |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| default | `(options: { value: any, index: number })` | The content of each item; `value` and `index` are the value and index of the current item. |  |
+| create-button-default | `()` | Content of create button. | NEXT_VERSION |
+| create-button-icon | `()` | Icon of create button. | NEXT_VERSION |
