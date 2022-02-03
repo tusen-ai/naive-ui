@@ -48,6 +48,9 @@
 - `n-dynamic-input` adds `create-button-icon` slot.
 - `n-dynamic-input` adds `show-sort-button` prop, closes [#2121](https://github.com/TuSimple/naive-ui/issues/2121).
 - `n-select` can be used as tag input.
+- `n-select` exports `SelectRenderLabel` type.
+- `n-select` exports `SelectRenderOption` type.
+- `n-select` exports `SelectRenderTag` type.
 
 ## 2.24.7 (2022-01-28)
 

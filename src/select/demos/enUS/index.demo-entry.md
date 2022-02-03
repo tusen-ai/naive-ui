@@ -5,28 +5,28 @@ Select something!
 ## Demo
 
 ```demo
-basic
-size
-multiple
-events
-filterable
-tag
-menu-width
-remote
-remote-multiple
-clearable
+basic.vue
+size.vue
+multiple.vue
+events.vue
+filterable.vue
+tag.vue
+menu-width.vue
+remote.vue
+remote-multiple.vue
+clearable.vue
 scroll-event.vue
-group
-many-options
-custom-option
+group.vue
+many-options.vue
+custom-option.vue
 custom-suffix.vue
-action
-fallback-option
-max-tag-count
-add-tooltip
-render-tag
+action.vue
+fallback-option.vue
+max-tag-count.vue
+add-tooltip.vue
+render-tag.vue
 focus.vue
-render-person
+render-person.vue
 tag-input.vue
 ```
 

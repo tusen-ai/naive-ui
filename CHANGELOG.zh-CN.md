@@ -48,6 +48,9 @@
 - `n-dynamic-input` 新增 `create-button-icon` slot
 - `n-dynamic-input` 新增 `show-sort-button` 属性，关闭 [#2121](https://github.com/TuSimple/naive-ui/issues/2121)
 - `n-select` 可以作为标签输入框使用
+- `n-select` 导出 `SelectRenderLabel` 类型
+- `n-select` 导出 `SelectRenderOption` 类型
+- `n-select` 导出 `SelectRenderTag` 类型
 
 ## 2.24.7 (2022-01-28)
 

@@ -50,9 +50,11 @@ import {
 import type {
   SelectInst,
   SelectMixedOption,
-  SelectBaseOption,
+  SelectOption,
   SelectGroupOption,
   SelectIgnoredOption,
+  SelectFallbackOption,
+  SelectFallbackOptionImpl,
   OnUpdateValue,
   OnUpdateValueImpl,
   Value,
@@ -91,7 +93,7 @@ const selectProps = {
   loading: Boolean,
   filter: {
     type: Function as PropType<
-    (pattern: string, option: SelectBaseOption) => boolean
+    (pattern: string, option: SelectOption) => boolean
     >,
     default: defaultFilter
   },
@@ -105,16 +107,14 @@ const selectProps = {
   },
   tag: Boolean,
   onCreate: {
-    type: Function as PropType<(label: string) => SelectBaseOption>,
+    type: Function as PropType<(label: string) => SelectOption>,
     default: (label: string) => ({
       label: label,
       value: label
     })
   },
   fallbackOption: {
-    type: [Function, Boolean] as PropType<
-      ((value: string | number) => SelectBaseOption) | false
-    >,
+    type: [Function, Boolean] as PropType<SelectFallbackOption | false>,
     default: () => (value: string | number) => ({
       label: String(value),
       value
@@ -222,7 +222,7 @@ export default defineComponent({
     const focusedRef = ref(false)
     const patternRef = ref('')
     const treeMateRef = computed(() =>
-      createTreeMate<SelectBaseOption, SelectGroupOption, SelectIgnoredOption>(
+      createTreeMate<SelectOption, SelectGroupOption, SelectIgnoredOption>(
         filteredOptionsRef.value,
         tmOptions
       )
@@ -245,17 +245,20 @@ export default defineComponent({
     })
     const compitableOptionsRef = useCompitable(props, ['items', 'options'])
 
-    const createdOptionsRef = ref<SelectBaseOption[]>([])
-    const beingCreatedOptionsRef = ref<SelectBaseOption[]>([])
-    const memoValOptMapRef = ref(new Map<string | number, SelectBaseOption>())
+    const createdOptionsRef = ref<SelectOption[]>([])
+    const beingCreatedOptionsRef = ref<SelectOption[]>([])
+    const memoValOptMapRef = ref(new Map<string | number, SelectOption>())
 
     const wrappedFallbackOptionRef = computed(() => {
       const { fallbackOption } = props
       if (!fallbackOption) return false
       return (value: string | number) => {
-        return Object.assign(fallbackOption(value), {
-          value
-        }) as SelectBaseOption
+        return Object.assign(
+          (fallbackOption as SelectFallbackOptionImpl)(value),
+          {
+            value
+          }
+        ) as SelectOption
       }
     })
     const localOptionsRef = computed<SelectMixedOption[]>(() => {
@@ -279,12 +282,12 @@ export default defineComponent({
         }
       }
     })
-    function getMergedOptions (values: ValueAtom[]): SelectBaseOption[] {
+    function getMergedOptions (values: ValueAtom[]): SelectOption[] {
       const remote = props.remote
       const { value: memoValOptMap } = memoValOptMapRef
       const { value: valOptMap } = valOptMapRef
       const { value: wrappedFallbackOption } = wrappedFallbackOptionRef
-      const options: SelectBaseOption[] = []
+      const options: SelectOption[] = []
       values.forEach((value) => {
         if (valOptMap.has(value)) {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -309,7 +312,7 @@ export default defineComponent({
       }
       return null
     })
-    const selectedOptionRef = computed<SelectBaseOption | null>(() => {
+    const selectedOptionRef = computed<SelectOption | null>(() => {
       const { value: mergedValue } = mergedValueRef
       if (!props.multiple && !Array.isArray(mergedValue)) {
         if (mergedValue === null) return null
@@ -322,7 +325,7 @@ export default defineComponent({
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     function doUpdateValue (
       value: string | number | Array<string | number> | null,
-      option: SelectBaseOption | null | SelectBaseOption[]
+      option: SelectOption | null | SelectOption[]
     ): void {
       const {
         onChange,
@@ -486,10 +489,10 @@ export default defineComponent({
         }
       }
     }
-    function handleToggleByTmNode (tmNode: TreeNode<SelectBaseOption>): void {
+    function handleToggleByTmNode (tmNode: TreeNode<SelectOption>): void {
       handleToggleByOption(tmNode.rawNode)
     }
-    function handleToggleByOption (option: SelectBaseOption): void {
+    function handleToggleByOption (option: SelectOption): void {
       if (mergedDisabledRef.value) return
       const { tag, remote } = props
       if (tag && !remote) {
