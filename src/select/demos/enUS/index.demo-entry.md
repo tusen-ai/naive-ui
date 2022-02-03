@@ -25,8 +25,9 @@ fallback-option
 max-tag-count
 add-tooltip
 render-tag
-render-person
 focus.vue
+render-person
+tag-input.vue
 ```
 
 ## API

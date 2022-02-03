@@ -34,6 +34,7 @@ import type {
 } from '../../select-menu/src/interface'
 
 export interface InternalSelectionInst {
+  isCompositing: boolean
   focus: () => void
   focusInput: () => void
   blur: () => void
@@ -92,6 +93,8 @@ export default defineComponent({
     maxTagCount: [String, Number] as PropType<number | 'responsive'>,
     onClear: Function as PropType<(e: MouseEvent) => void>,
     onPatternInput: Function as PropType<(e: InputEvent) => void>,
+    onPatternFocus: Function as PropType<(e: FocusEvent) => void>,
+    onPatternBlur: Function as PropType<(e: FocusEvent) => void>,
     renderLabel: Function as PropType<RenderLabel>,
     status: String as PropType<FormValidationStatus>
   },
@@ -262,11 +265,13 @@ export default defineComponent({
       doPatternInput(cachedInputEvent!)
       cachedInputEvent = null
     }
-    function handlePatternInputFocus (): void {
+    function handlePatternInputFocus (e: FocusEvent): void {
       patternInputFocusedRef.value = true
+      props.onPatternFocus?.(e)
     }
     function handlePatternInputBlur (e: FocusEvent): void {
       patternInputFocusedRef.value = false
+      props.onPatternBlur?.(e)
     }
     function blur (): void {
       if (props.filterable) {

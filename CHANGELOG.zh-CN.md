@@ -18,6 +18,7 @@
 - 修复 `n-data-table` 不能使用百分比列宽
 - 修复 `n-select` 在可过滤，关闭菜单并且没有选中任何值的时候选框会空一下
 - 修复 `n-select` 在动态创建选项时关闭菜单后创建中的选项未清空
+- 修复 `n-select` 在 `show=false` 和 `filterable=true` 时无法输入内容，关闭 [#1723](https://github.com/TuSimple/naive-ui/issues/1723)
 
 ### Feats
 
@@ -46,6 +47,7 @@
 - `n-dynamic-input` 新增 `create-button-default` slot
 - `n-dynamic-input` 新增 `create-button-icon` slot
 - `n-dynamic-input` 新增 `show-sort-button` 属性，关闭 [#2121](https://github.com/TuSimple/naive-ui/issues/2121)
+- `n-select` 可以作为标签输入框使用
 
 ## 2.24.7 (2022-01-28)
 

@@ -18,6 +18,7 @@
 - Fix `n-data-table` can't use percent as column width.
 - Fix `n-select` trigger shows blank for a while when `filterable=true` and menu is closing.
 - Fix `n-select`'s being created option is not cleared after menu is closed.
+- Fix `n-select` can't input content when `show=false` and `filterable=true`, closes [#1723](https://github.com/TuSimple/naive-ui/issues/1723).
 
 ### Feats
 
@@ -46,6 +47,7 @@
 - `n-dynamic-input` adds `create-button-default` slot.
 - `n-dynamic-input` adds `create-button-icon` slot.
 - `n-dynamic-input` adds `show-sort-button` prop, closes [#2121](https://github.com/TuSimple/naive-ui/issues/2121).
+- `n-select` can be used as tag input.
 
 ## 2.24.7 (2022-01-28)
 

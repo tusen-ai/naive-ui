@@ -233,6 +233,9 @@ export default defineComponent({
       toRef(props, 'show'),
       uncontrolledShowRef
     )
+    const forceHideMenuRef = computed(() => {
+      return props.show === false
+    })
     const triggerRef = ref<InternalSelectionInst | null>(null)
     const followerRef = ref<FollowerInst | null>(null)
     const menuRef = ref<InternalSelectMenuRef | null>(null)
@@ -400,10 +403,28 @@ export default defineComponent({
       patternRef.value = ''
       beingCreatedOptionsRef.value = []
     }
+    const activeWithoutMenuOpenRef = ref(false)
+    function onTriggerInputFocus (): void {
+      if (props.show === false && props.filterable) {
+        activeWithoutMenuOpenRef.value = true
+      }
+    }
+    function onTriggerInputBlur (): void {
+      if (props.show === false && props.filterable) {
+        activeWithoutMenuOpenRef.value = false
+        handleMenuAfterLeave()
+      }
+    }
     function handleTriggerClick (): void {
       if (mergedDisabledRef.value) return
       if (!mergedShowRef.value) {
-        openMenu()
+        if (!forceHideMenuRef.value) {
+          openMenu()
+        } else {
+          if (props.filterable) {
+            focusSelectionInput()
+          }
+        }
       } else {
         if (!props.filterable) {
           // already focused, don't need to return focus
@@ -524,7 +545,7 @@ export default defineComponent({
       )
     }
     function handlePatternInput (e: InputEvent): void {
-      if (!mergedShowRef.value) {
+      if (!mergedShowRef.value && !forceHideMenuRef.value) {
         openMenu()
       }
       const { value } = e.target as unknown as HTMLInputElement
@@ -588,8 +609,30 @@ export default defineComponent({
               closeMenu()
               focusSelection()
             }
-          } else {
+          } else if (!forceHideMenuRef.value) {
             openMenu()
+          } else if (props.tag && !triggerRef.value?.isCompositing) {
+            if (activeWithoutMenuOpenRef.value) {
+              const beingCreatedOption = beingCreatedOptionsRef.value[0]
+              if (beingCreatedOption) {
+                const optionValue = beingCreatedOption.value
+                const { value: mergedValue } = mergedValueRef
+                if (props.multiple) {
+                  if (
+                    Array.isArray(mergedValue) &&
+                    mergedValue.some((value) => value === optionValue)
+                  ) {
+                    // do nothing
+                  } else {
+                    handleToggleByOption(beingCreatedOption)
+                  }
+                } else {
+                  handleToggleByOption(beingCreatedOption)
+                }
+              }
+            } else {
+              focusSelectionInput()
+            }
           }
           e.preventDefault()
           break
@@ -603,7 +646,7 @@ export default defineComponent({
           if (props.loading) return
           if (mergedShowRef.value) {
             menuRef.value?.next()
-          } else {
+          } else if (!forceHideMenuRef.value) {
             openMenu()
           }
           break
@@ -677,6 +720,9 @@ export default defineComponent({
       mergedSize: mergedSizeRef,
       mergedDisabled: mergedDisabledRef,
       focused: focusedRef,
+      activeWithoutMenuOpen: activeWithoutMenuOpenRef,
+      onTriggerInputFocus,
+      onTriggerInputBlur,
       handleMenuFocus,
       handleMenuBlur,
       handleMenuTabOut,
@@ -724,7 +770,7 @@ export default defineComponent({
                       showArrow={this.showArrow}
                       maxTagCount={this.maxTagCount}
                       bordered={this.mergedBordered}
-                      active={this.mergedShow}
+                      active={this.activeWithoutMenuOpen || this.mergedShow}
                       pattern={this.pattern}
                       placeholder={this.localizedPlaceholder}
                       selectedOption={this.selectedOption}
@@ -750,6 +796,8 @@ export default defineComponent({
                       onFocus={this.handleTriggerFocus}
                       onKeydown={this.handleKeyDown}
                       onKeyup={this.handleKeyUp}
+                      onPatternBlur={this.onTriggerInputBlur}
+                      onPatternFocus={this.onTriggerInputFocus}
                     >
                       {{
                         arrow: () => [this.$slots.arrow?.()]
