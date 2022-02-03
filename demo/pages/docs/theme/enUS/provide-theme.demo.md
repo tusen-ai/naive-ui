@@ -1,6 +1,6 @@
 # Provide Theme
 
-Use `n-config-provider` to set the theme of all its descedant components.
+Use `n-config-provider` to set the theme of all its descendant components.
 
 ```html
 <n-config-provider :theme="theme">

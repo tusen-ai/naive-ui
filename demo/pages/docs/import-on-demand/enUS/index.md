@@ -1,8 +1,8 @@
 # Import on Demand (Tree Shaking)
 
-Naive UI support tree shaking for components, locales and themes.
+Naive UI supports tree shaking for components, locales and themes.
 
-By default the component theme is light, locale is enUS, no extra imports is needed.
+By default the component theme is light, locale is enUS, and no extra imports are needed.
 
 For more info about theming, see [Customizing Theme](customize-theme).
 
@@ -69,7 +69,7 @@ const app = createApp()
 app.use(naive)
 ```
 
-After the installation. You can use the components you installed in SFC like this.
+After the installation, you can use the components you installed in SFC like this.
 
 ```html
 <template>

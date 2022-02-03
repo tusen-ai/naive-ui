@@ -2,7 +2,7 @@
 
 # Third-Party Libraries
 
-Naive-ui is a high-quality Vue component library of unified design specifications, We prefer to provide only UI components with a unified specification and visual presentation. So we recommend the following great resources from the community that complement naive-ui.
+Naive-ui is a high-quality Vue component library of unified design specifications. We prefer to provide only UI components with a unified specification and visual presentation. So we recommend the following great resources from the community that complement naive-ui.
 
 If you want to contribute excellent resources, please contact 07akioni or amadeus711 in the community of `Discord` or `DingTalk`.
 

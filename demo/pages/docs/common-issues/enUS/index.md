@@ -24,4 +24,4 @@ That is because `v-model:value="xxx"` will be transformed to `:onUpdate:value="x
 
 However if you are using `on-update:value="yyy"`, Vue would generate code like `:onUpdate:value="xxx" :on-update-value="yyy"` and the second one would override the first one in Vue runtime. The `v-model:value` would be broken.
 
-If you have any problem, feel free to create a PR or issue on GitHub.
+If you have any problems, feel free to create a PR or issue on GitHub.

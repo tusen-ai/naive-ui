@@ -2,7 +2,7 @@
 
 # Installation
 
-> Please note that naive-ui only support Vue3. If you are using Vue2, you may look at other libraries.
+> Please note that naive-ui only supports Vue3. If you are using Vue2, you may look at other libraries.
 
 Use npm to install.
 
