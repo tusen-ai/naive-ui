@@ -1,10 +1,12 @@
-# 基础用法
+<markdown>
+# 最大标签数量
+</markdown>
 
-```html
-<n-dynamic-tags v-model:value="tags" />
-```
+<template>
+  <n-dynamic-tags v-model:value="tags" :max="3" />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -14,4 +16,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

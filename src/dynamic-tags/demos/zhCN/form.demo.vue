@@ -1,14 +1,16 @@
+<markdown>
 # 在表单中使用
+</markdown>
 
-```html
-<n-form :model="model" :rules="rules">
-  <n-form-item path="tags" :show-label="false">
-    <n-dynamic-tags v-model:value="model.tags" />
-  </n-form-item>
-</n-form>
-```
+<template>
+  <n-form :model="model" :rules="rules">
+    <n-form-item path="tags" :show-label="false">
+      <n-dynamic-tags v-model:value="model.tags" />
+    </n-form-item>
+  </n-form>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -29,4 +31,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

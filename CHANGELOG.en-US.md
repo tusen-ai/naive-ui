@@ -35,7 +35,7 @@
 - Add `n-icon-wrapper` component.
 - `n-popover` exports `PopoverPlacement` type.
 - `n-drawer` exports `DrawerPlacement` type.
-- `n-dynamic-tag` adds `input-props` prop.
+- `n-dynamic-tags` adds `input-props` prop.
 
 ## 2.24.7 (2022-01-28)
 

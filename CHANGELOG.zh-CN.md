@@ -35,7 +35,7 @@
 - 新增 `n-icon-wrapper` 组件
 - `n-popover` 导出 `PopoverPlacement` 类型
 - `n-drawer` 导出 `DrawerPlacement` 类型
-- `n-dynamic-tag` 新增 `input-props` 属性
+- `n-dynamic-tags` 新增 `input-props` 属性
 
 ## 2.24.7 (2022-01-28)
 

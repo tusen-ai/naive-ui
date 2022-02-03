@@ -1,41 +1,44 @@
+<markdown>
 # 自定义输入或触发元素
 
 你可以替换 `dynamic-tags` 的输入或触发元素。
+</markdown>
 
-```html
-<n-dynamic-tags v-model:value="tags" :max="3">
-  <template #input="{ submit }">
-    <n-auto-complete
-      size="small"
-      :options="options"
-      v-model:value="inputValue"
-      placeholder="邮箱"
-      :clear-after-select="true"
-      @select="submit($event)"
-    />
-  </template>
-  <template #trigger="{ activate, disabled }">
-    <n-button
-      size="small"
-      @click="activate()"
-      type="primary"
-      dashed
-      :disabled="disabled"
-    >
-      <template #icon>
-        <n-icon>
-          <Add />
-        </n-icon>
-      </template>
-      添加
-    </n-button>
-  </template>
-</n-dynamic-tags>
-```
+<template>
+  <n-dynamic-tags v-model:value="tags" :max="3">
+    <template #input="{ submit }">
+      <n-auto-complete
+        v-model:value="inputValue"
+        size="small"
+        :options="options"
+        placeholder="邮箱"
+        :clear-after-select="true"
+        @select="submit($event)"
+      />
+    </template>
+    <template #trigger="{ activate, disabled }">
+      <n-button
+        size="small"
+        type="primary"
+        dashed
+        :disabled="disabled"
+        @click="activate()"
+      >
+        <template #icon>
+          <n-icon>
+            <Add />
+          </n-icon>
+        </template>
+        添加
+      </n-button>
+    </template>
+  </n-dynamic-tags>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
-import { Add } from '@vicons/ionicons5'
+import Add from '@vicons/ionicons5/Add'
+
 export default defineComponent({
   components: {
     Add
@@ -70,4 +73,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
