@@ -69,6 +69,10 @@ const dynamicInputProps = {
     type: String,
     default: ''
   },
+  createButtonText: {
+    type: String,
+    default: ''
+  },
   onCreate: Function as PropType<(index: number) => any>,
   onRemove: Function as PropType<(index: number) => void>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -257,7 +261,8 @@ export default defineComponent({
       ensureKey,
       handleValueChange,
       remove,
-      createItem
+      createItem,
+      createButtonText
     } = this
     return (
       <div
@@ -276,7 +281,7 @@ export default defineComponent({
             onClick={this.handleCreateClick}
           >
             {{
-              default: () => locale.create,
+              default: () => createButtonText || locale.create,
               icon: () => (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{ default: () => <AddIcon /> }}

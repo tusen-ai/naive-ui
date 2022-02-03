@@ -1,9 +1,12 @@
 # Customizing input content
 
+Also customize the create button text
+
 ```html
 <n-dynamic-input
   v-model:value="customValue"
   :on-create="onCreate"
+  create-button-text="Add dynamic content"
   #="{ value }"
 >
   <div style="display: flex; align-items: center; width: 100%;">
