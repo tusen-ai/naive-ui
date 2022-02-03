@@ -8,9 +8,7 @@
   <n-space vertical>
     <n-input placeholder="搜索">
       <template #prefix>
-        <n-icon>
-          <flash-icon />
-        </n-icon>
+        <n-icon :component="FlashOutline" />
       </template>
     </n-input>
     <n-input round placeholder="100,000,000">

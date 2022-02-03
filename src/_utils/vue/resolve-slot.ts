@@ -23,7 +23,7 @@ function ensureValidVNode (
 }
 
 /**
- * We shouldn't use it with slot flags `_: 1, 2, 3`
+ * We shouldn't use the following functions with slot flags `_: 1, 2, 3`
  */
 export function resolveSlot (
   slot: Slot | undefined,
@@ -32,9 +32,15 @@ export function resolveSlot (
   return (slot && ensureValidVNode(slot())) || fallback()
 }
 
-/**
- * We shouldn't use it with slot flags `_: 1, 2, 3`
- */
+export function resolveSlotWithProps<T> (
+  slot: Slot | undefined,
+  props: T,
+  fallback: (props: T) => VNodeArrayChildren
+): VNodeArrayChildren {
+  console.log(slot && ensureValidVNode(slot(props)))
+  return (slot && ensureValidVNode(slot(props))) || fallback(props)
+}
+
 export function resolveWrappedSlot (
   slot: Slot | undefined,
   wrapper: (children: VNodeArrayChildren) => VNodeArrayChildren
@@ -44,9 +50,6 @@ export function resolveWrappedSlot (
   return null
 }
 
-/**
- * We shouldn't use it with slot flags `_: 1, 2, 3`
- */
 export function isSlotEmpty (slot: Slot | undefined): boolean {
   return !(slot && ensureValidVNode(slot()))
 }

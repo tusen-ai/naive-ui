@@ -1078,7 +1078,11 @@ export default defineComponent({
                 ) : null,
                 this.internalLoadingBeforeSuffix ? $slots.suffix?.() : null,
                 this.showCount && this.type !== 'textarea' ? (
-                  <WordCount>{{ default: () => $slots.count?.() }}</WordCount>
+                  <WordCount>
+                    {{
+                      default: (props: unknown) => $slots.count?.(props)
+                    }}
+                  </WordCount>
                 ) : null,
                 this.mergedShowPasswordOn && this.type === 'password' ? (
                   <NBaseIcon
@@ -1159,7 +1163,9 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-input__state-border`} />
         ) : null}
         {this.showCount && this.type === 'textarea' ? (
-          <WordCount>{{ default: () => $slots.count?.() }}</WordCount>
+          <WordCount>
+            {{ default: (props: unknown) => $slots.count?.(props) }}
+          </WordCount>
         ) : null}
       </div>
     )

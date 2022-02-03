@@ -12,6 +12,7 @@ export {
   createRefSetter,
   createInjectionKey,
   resolveSlot,
+  resolveSlotWithProps,
   resolveWrappedSlot,
   isSlotEmpty
 } from './vue'

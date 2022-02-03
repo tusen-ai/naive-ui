@@ -8,9 +8,7 @@ Set a prefix and/or suffix for the input.
   <n-space vertical>
     <n-input placeholder="Flash">
       <template #prefix>
-        <n-icon>
-          <flash-icon />
-        </n-icon>
+        <n-icon :component="FlashOutline" />
       </template>
     </n-input>
     <n-input round placeholder="1,400,000">

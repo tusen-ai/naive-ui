@@ -566,7 +566,8 @@ export default defineComponent({
                   show: mergedShow
                 }),
                 {
-                  default: () => this.$slots.default?.()
+                  default: () => this.$slots.default?.(),
+                  header: () => this.$slots.header?.()
                 }
               )
             ]
