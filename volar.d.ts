@@ -138,6 +138,7 @@ declare module 'vue' {
     NUploadTrigger: typeof import('naive-ui')['NUploadTrigger']
     NCol: typeof import('naive-ui')['NCol']
     NRow: typeof import('naive-ui')['NRow']
+    NIconWrapper: typeof import('naive-ui')['NIconWrapper']
     [key: string]: any
   }
 }

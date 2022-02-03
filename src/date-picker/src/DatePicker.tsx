@@ -145,7 +145,7 @@ export default defineComponent({
     }
     const { localeRef, dateLocaleRef } = useLocale('DatePicker')
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const {
       NConfigProvider,
       mergedClsPrefixRef,
@@ -242,7 +242,7 @@ export default defineComponent({
     const rangeEndInputValueRef = ref('')
     const themeRef = useTheme(
       'DatePicker',
-      'DatePicker',
+      '-date-picker',
       style,
       datePickerLight,
       props,
@@ -669,6 +669,7 @@ export default defineComponent({
     }
     return {
       ...exposedMethods,
+      mergedStatus: mergedStatusRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       namespace: namespaceRef,
@@ -883,6 +884,7 @@ export default defineComponent({
                     this.isRange ? (
                       <NInput
                         ref="inputInstRef"
+                        status={this.mergedStatus}
                         value={[this.displayStartTime, this.displayEndTime]}
                         placeholder={[
                           this.localizedStartPlaceholder,
@@ -925,6 +927,7 @@ export default defineComponent({
                     ) : (
                       <NInput
                         ref="inputInstRef"
+                        status={this.mergedStatus}
                         value={this.displayTime}
                         placeholder={this.localizedPlacehoder}
                         textDecoration={
@@ -958,7 +961,7 @@ export default defineComponent({
                 containerClass={this.namespace}
                 to={this.adjustedTo}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                placement="bottom-start"
+                placement={this.placement}
               >
                 {{
                   default: () => (

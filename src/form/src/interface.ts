@@ -6,15 +6,19 @@ export interface FormRules {
   [path: string]: FormRules | FormItemRule | FormItemRule[]
 }
 
+type SetRule<T, R> = T extends (rule: any, ...args: infer K) => infer P
+  ? (rule: R, ...args: K) => P
+  : never
+
 export type FormItemRuleValidatorParams = Parameters<
-NonNullable<RuleItem['validator']>
+SetRule<NonNullable<RuleItem['validator']>, FormItemRule>
 >
 
 export type FormItemRuleValidator = (
   ...args: FormItemRuleValidatorParams
 ) => boolean | Error | Error[] | Promise<void> | undefined
 
-// In src of async-validator, any non-promise of asyncValidator will be abadoned
+// In src of async-validator, any non-promise of asyncValidator will be abandoned
 export type FormItemRuleAsyncValidator = (
   ...args: FormItemRuleValidatorParams
 ) => Promise<void> | undefined
@@ -84,3 +88,5 @@ export interface FormInst {
   validate: FormValidate
   restoreValidation: () => void
 }
+
+export type FormValidationStatus = 'success' | 'error' | 'warning'

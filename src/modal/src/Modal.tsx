@@ -123,7 +123,7 @@ export default defineComponent({
     const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
     const themeRef = useTheme(
       'Modal',
-      'Modal',
+      '-modal',
       style,
       modalLight,
       props,

@@ -1,10 +1,45 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
+
+### Breaking Changes
+
+- Refactor `n-carousel`'s style when `show-arrow` is true.
+
+### Fixes
+
+- `n-color-picker`'s hue & alpha slider handle are influenced by rail's box-shadow.
+- Fix `n-form-item` prevent feedback padding when empty.
+- Fix `n-button` has extra margin in safari.
+- Fix `n-form`'s rules and `n-form-item`'s rule about `validator` and `asyncValidator`'s `rule` type is not `FormItemRule`, closes [#2299](https://github.com/TuSimple/naive-ui/issues/2299).
+- Fix `n-log` doesn't break line when line is too long, closes [#2298](https://github.com/TuSimple/naive-ui/issues/2298).
+- Fix `n-log` doesn't export `LogInst` type.
+- Fix `n-popselect` action slot & empty slot now working.
+- Fix `n-data-table` can't use percent as column width.
 
 ### Feats
 
 - `n-tabs` props `justify-content` add types `start` `center` `end`
+- `n-auto-complete` adds `placement` prop.
+- `n-cascader` adds `placement` prop.
+- `n-color-picker` adds `placement` prop.
+- `n-date-picker` adds `placement` prop.
+- `n-mention` adds `placement` prop.
+- `n-select` adds `placement` prop.
+- `n-slider` adds `placement` prop.
+- `n-time-picker` adds `placement` prop.
+- `n-tree-select` adds `placement` prop.
+- `n-card` adds `header-extra-style` prop.
+- `n-popover` adds `keep-alive-on-hover` prop, closes [#2326](https://github.com/TuSimple/naive-ui/issues/2326).
+- `n-input` adds `status` prop.
+- Add `n-icon-wrapper` component.
+- `n-popover` exports `PopoverPlacement` type.
+- `n-drawer` exports `DrawerPlacement` type.
+- `n-dynamic-tags` adds `input-props` prop.
+- `n-notification-provider` adds `container-style` prop.
+- `n-notification-provider` exports `NotificationPlacement` type.
+- `n-notification-provider` exports `NotificationType` type.
+- `n-tabs` add `bar-width` prop.
 - `n-dynamic-input` adds `create-button-text` prop
 
 ## 2.24.7 (2022-01-28)

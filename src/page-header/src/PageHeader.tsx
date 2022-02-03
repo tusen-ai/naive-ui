@@ -27,7 +27,7 @@ export default defineComponent({
     const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
     const themeRef = useTheme(
       'PageHeader',
-      'PageHeader',
+      '-page-header',
       style,
       pageHeaderLight,
       props,

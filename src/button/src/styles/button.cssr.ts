@@ -37,6 +37,7 @@ import iconSwitchTransition from '../../../_styles/transitions/icon-switch.cssr'
 // --n-border-color-xxx, used for custom color
 export default c([
   cB('button', `
+    margin: 0;
     font-weight: var(--n-font-weight);
     line-height: 1;
     font-family: inherit;

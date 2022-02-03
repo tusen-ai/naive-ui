@@ -12,7 +12,7 @@ import {
   watchEffect
 } from 'vue'
 import { createTreeMate, TreeNode } from 'treemate'
-import { VBinder, VTarget, VFollower } from 'vueuc'
+import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
@@ -73,6 +73,10 @@ const autoCompleteProps = {
     default: undefined
   },
   placeholder: String,
+  placement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'bottom-start'
+  },
   value: String,
   blurAfterSelect: Boolean,
   clearAfterSelect: Boolean,
@@ -114,7 +118,7 @@ export default defineComponent({
     const { mergedBorderedRef, namespaceRef, mergedClsPrefixRef } =
       useConfig(props)
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const triggerElRef = ref<HTMLElement | null>(null)
     const menuInstRef = ref<InternalSelectMenuRef | null>(null)
 
@@ -129,7 +133,7 @@ export default defineComponent({
 
     const themeRef = useTheme(
       'AutoComplete',
-      'AutoComplete',
+      '-auto-complete',
       style,
       autoCompleteLight,
       props,
@@ -268,6 +272,7 @@ export default defineComponent({
       mergedSize: mergedSizeRef,
       mergedDisabled: mergedDisabledRef,
       active: activeRef,
+      mergedStatus: mergedStatusRef,
       handleClear,
       handleFocus,
       handleBlur,
@@ -321,6 +326,7 @@ export default defineComponent({
                     const { mergedTheme } = this
                     return (
                       <NInput
+                        status={this.mergedStatus}
                         theme={mergedTheme.peers.Input}
                         themeOverrides={mergedTheme.peerOverrides.Input}
                         bordered={this.mergedBordered}
@@ -351,7 +357,7 @@ export default defineComponent({
                 containerClass={this.namespace}
                 zIndex={this.zIndex}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                placement="bottom-start"
+                placement={this.placement}
                 width="target"
               >
                 {{

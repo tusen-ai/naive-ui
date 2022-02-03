@@ -141,7 +141,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Menu',
-      'Menu',
+      '-menu',
       style,
       menuLight,
       props,

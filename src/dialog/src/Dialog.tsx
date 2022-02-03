@@ -59,7 +59,7 @@ export const NDialog = defineComponent({
     }
     const themeRef = useTheme(
       'Dialog',
-      'Dialog',
+      '-dialog',
       style,
       dialogLight,
       props,

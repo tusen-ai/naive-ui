@@ -38,7 +38,7 @@ import {
   toHslString
 } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
-import { VBinder, VFollower, VTarget } from 'vueuc'
+import { VBinder, VFollower, VTarget, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { colorPickerLight } from '../styles'
 import type { ColorPickerTheme } from '../styles'
@@ -81,6 +81,10 @@ export const colorPickerPanelProps = {
     type: Array as PropType<ColorPickerMode[]>,
     // no hsva by default since browser doesn't support it
     default: () => ['rgb', 'hex', 'hsl']
+  },
+  placement: {
+    type: String as PropType<FollowerPlacement>,
+    default: 'bottom-start'
   },
   to: useAdjustedTo.propTo,
   showAlpha: {
@@ -129,7 +133,7 @@ export default defineComponent({
 
     const themeRef = useTheme(
       'ColorPicker',
-      'ColorPicker',
+      '-color-picker',
       style,
       colorPickerLight,
       props,
@@ -664,7 +668,7 @@ export default defineComponent({
                 }}
               </VTarget>,
               <VFollower
-                placement="bottom-start"
+                placement={this.placement}
                 show={this.mergedShow}
                 containerClass={this.namespace}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}

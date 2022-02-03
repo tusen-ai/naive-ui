@@ -163,6 +163,7 @@ export default defineComponent({
     const {
       mergedSizeRef,
       mergedDisabledRef,
+      mergedStatusRef,
       nTriggerFormBlur,
       nTriggerFormChange,
       nTriggerFormFocus,
@@ -601,7 +602,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'TreeSelect',
-      'TreeSelect',
+      '-tree-select',
       style,
       treeSelectLight,
       props,
@@ -609,6 +610,7 @@ export default defineComponent({
     )
     return {
       menuElRef,
+      mergedStatus: mergedStatusRef,
       triggerInstRef,
       followerInstRef,
       treeInstRef,
@@ -690,6 +692,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerInstRef"
+                      status={this.mergedStatus}
                       focused={this.focused}
                       clsPrefix={mergedClsPrefix}
                       theme={mergedTheme.peers.InternalSelection}

@@ -56,7 +56,7 @@ export const affixProps = {
     default: undefined
   },
   target: {
-    type: (Function as unknown) as PropType<(() => HTMLElement) | undefined>,
+    type: Function as unknown as PropType<(() => HTMLElement) | undefined>,
     validator: () => {
       if (__DEV__) {
         warn('affix', '`target` is deprecated, please use `listen-to` instead.')
@@ -76,7 +76,7 @@ export default defineComponent({
   props: affixProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-    useStyle('Affix', style, mergedClsPrefixRef)
+    useStyle('-affix', style, mergedClsPrefixRef)
     let scrollTarget: ScrollTarget | null = null
     const stickToTopRef = ref(false)
     const stickToBottomRef = ref(false)

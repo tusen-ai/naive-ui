@@ -112,7 +112,7 @@ export default defineComponent({
     )
     const themeRef = useTheme(
       'Collapse',
-      'Collapse',
+      '-collapse',
       style,
       collapseLight,
       props,

@@ -18,7 +18,7 @@ export default defineComponent({
     onClick: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {
-    useStyle('BaseClose', style, toRef(props, 'clsPrefix'))
+    useStyle('-base-close', style, toRef(props, 'clsPrefix'))
     return () => {
       const { clsPrefix, disabled } = props
       return (

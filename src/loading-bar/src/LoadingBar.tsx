@@ -110,7 +110,7 @@ export default defineComponent({
     }
     const themeRef = useTheme(
       'LoadingBar',
-      'LoadingBar',
+      '-loading-bar',
       style,
       loadingBarLight,
       providerProps,

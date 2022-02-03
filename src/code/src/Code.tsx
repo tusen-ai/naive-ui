@@ -97,7 +97,7 @@ export default defineComponent({
     if (!internalNoHighlight) watch(hljsRef, setCode)
     const themeRef = useTheme(
       'Code',
-      'Code',
+      '-code',
       style,
       codeLight,
       props,

@@ -15,7 +15,7 @@ import style from './styles/index.cssr'
 
 export type Depth = 1 | 2 | 3 | 4 | 5 | '1' | '2' | '3' | '4' | '5' | undefined
 
-export default defineComponent({
+export const NIcon = defineComponent({
   _n_icon__: true,
   name: 'Icon',
   inheritAttrs: false,
@@ -30,7 +30,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Icon',
-      'Icon',
+      '-icon',
       style,
       iconLight,
       props,

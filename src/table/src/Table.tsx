@@ -38,7 +38,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Table',
-      'Table',
+      '-table',
       style,
       tableLight,
       props,
