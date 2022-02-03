@@ -6,6 +6,8 @@ This component's name has been changed so many times.
 
 In the beginning, it was created for entering environment variables.
 
+If you find the component doesn't look like what you want, I recommend you to write a new one. It's probably easier than using this one.
+
 ## Demos
 
 ```demo
