@@ -1,22 +1,28 @@
-# Change Content Dynamically
+<markdown>
+# 动态修改内容
 
-You can change any parts of notifications existed.
+你可以修改已经存在的通知
+</markdown>
 
-```html
-<n-space>
-  <n-button @click="open"> Open it </n-button>
-  <n-button @click="change" :disabled="!n"> Change it </n-button>
-</n-space>
-```
+<template>
+  <n-space>
+    <n-button @click="open">
+      打开它
+    </n-button>
+    <n-button :disabled="!n" @click="change">
+      改它
+    </n-button>
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { h, ref, defineComponent } from 'vue'
-import { NAvatar, useNotification } from 'naive-ui'
+import { NAvatar, useNotification, NotificationReactive } from 'naive-ui'
 
 export default defineComponent({
   setup () {
     const notification = useNotification()
-    const nRef = ref(null)
+    const nRef = ref<NotificationReactive | null>(null)
     return {
       n: nRef,
       open () {
@@ -57,4 +63,4 @@ Hold each other close the whole night through`,
     }
   }
 })
-```
+</script>

@@ -36,6 +36,9 @@
 - `n-popover` 导出 `PopoverPlacement` 类型
 - `n-drawer` 导出 `DrawerPlacement` 类型
 - `n-dynamic-tags` 新增 `input-props` 属性
+- `n-notification-provider` 新增 `container-style` 属性
+- `n-notification-provider` 导出 `NotificationPlacement` 类型
+- `n-notification-provider` 导出 `NotificationType` 类型
 
 ## 2.24.7 (2022-01-28)
 

@@ -1,13 +1,19 @@
+<markdown>
 # 基础用法
+</markdown>
 
-```html
-<n-space>
-  <n-button @click="handleClick1"> Wouldn't it be Nice </n-button>
-  <n-button @click="handleClick2"> Satisfaction </n-button>
-</n-space>
-```
+<template>
+  <n-space>
+    <n-button @click="handleClick1">
+      Wouldn't it be Nice
+    </n-button>
+    <n-button @click="handleClick2">
+      Satisfaction
+    </n-button>
+  </n-space>
+</template>
 
-```js
+<script lang="ts">
 import { h, defineComponent } from 'vue'
 import { useNotification, useMessage, NButton, NAvatar } from 'naive-ui'
 
@@ -77,4 +83,4 @@ I cant get no, I cant get no`,
     }
   }
 })
-```
+</script>

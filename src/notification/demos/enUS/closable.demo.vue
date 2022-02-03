@@ -1,12 +1,16 @@
-# 不可关闭
+<markdown>
+# Unclosable
 
-通知可以不能被关闭
+You can make it unclosable.
+</markdown>
 
-```html
-<n-button @click="handleClick"> 不能关闭 </n-button>
-```
+<template>
+  <n-button @click="handleClick">
+    Unclosable
+  </n-button>
+</template>
 
-```js
+<script lang="ts">
 import { useNotification } from 'naive-ui'
 import { defineComponent } from 'vue'
 
@@ -38,4 +42,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

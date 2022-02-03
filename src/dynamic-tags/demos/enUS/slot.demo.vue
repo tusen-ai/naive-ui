@@ -37,7 +37,7 @@ You can replace a dynamic-tags input or trigger element with another component.
 
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
-import { Add } from '@vicons/ionicons5/Add'
+import Add from '@vicons/ionicons5/Add'
 
 export default defineComponent({
   components: {

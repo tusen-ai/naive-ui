@@ -1,18 +1,28 @@
+<markdown>
 # 弹出位置
 
-```html
-<n-notification-provider :placement="placement">
-  <placement-buttons @placement-change="handlePlacementChange" />
-</n-notification-provider>
-```
+</markdown>
 
-```js
-import { defineComponent, h, ref } from 'vue'
-import { useNotification, NButton, NSpace } from 'naive-ui'
+<template>
+  <n-notification-provider :placement="placement">
+    <placement-buttons @placement-change="handlePlacementChange" />
+  </n-notification-provider>
+</template>
 
-const PlacementButtons = {
+<script lang="ts">
+import { defineComponent, h, ref, PropType } from 'vue'
+import {
+  useNotification,
+  NButton,
+  NSpace,
+  NotificationPlacement
+} from 'naive-ui'
+
+const PlacementButtons = defineComponent({
   props: {
-    onPlacementChange: Function
+    onPlacementChange: Function as PropType<
+      (placement: NotificationPlacement) => void
+    >
   },
   setup () {
     const notification = useNotification()
@@ -21,7 +31,7 @@ const PlacementButtons = {
       { placement: 'top-right', text: '右上' },
       { placement: 'bottom-left', text: '左下' },
       { placement: 'bottom-right', text: '右下' }
-    ]
+    ] as const
     return {
       notification,
       placementList
@@ -35,7 +45,7 @@ const PlacementButtons = {
             NButton,
             {
               onClick: () => {
-                this.onPlacementChange(item.placement)
+                this.onPlacementChange?.(item.placement)
                 this.notification.info({
                   title: item.placement,
                   content: 'You can change the placement'
@@ -47,20 +57,20 @@ const PlacementButtons = {
         )
     })
   }
-}
+})
 
 export default defineComponent({
   components: {
     PlacementButtons
   },
   setup () {
-    const placementRef = ref('top-right')
+    const placementRef = ref<NotificationPlacement>('top-right')
     return {
       placement: placementRef,
-      handlePlacementChange (val) {
+      handlePlacementChange (val: NotificationPlacement) {
         placementRef.value = val
       }
     }
   }
 })
-```
+</script>

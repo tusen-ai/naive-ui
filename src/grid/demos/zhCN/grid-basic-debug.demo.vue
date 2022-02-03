@@ -107,14 +107,14 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
-export default {
+export default defineComponent({
   setup () {
     const collapsedRef = ref(true)
-    return defineComponent({
+    return {
       collapsed: collapsedRef
-    })
+    }
   }
-}
+})
 </script>
 
 <style>

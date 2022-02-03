@@ -1,12 +1,16 @@
+<markdown>
 # 持续时间
 
 自动关闭。
+</markdown>
 
-```html
-<n-button @click="handleClick"> 持续时间 10000ms </n-button>
-```
+<template>
+  <n-button @click="handleClick">
+    持续时间 10000ms
+  </n-button>
+</template>
 
-```js
+<script lang="ts">
 import { useNotification } from 'naive-ui'
 import { defineComponent } from 'vue'
 
@@ -43,4 +47,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

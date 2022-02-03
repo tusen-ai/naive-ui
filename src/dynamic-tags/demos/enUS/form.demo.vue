@@ -22,7 +22,7 @@ export default defineComponent({
       rules: {
         tags: {
           trigger: ['change'],
-          validator (rule, value) {
+          validator (rule: unknown, value: string[]) {
             if (value.length >= 5) return new Error('Up to 4 tags')
             return true
           }

@@ -36,6 +36,9 @@
 - `n-popover` exports `PopoverPlacement` type.
 - `n-drawer` exports `DrawerPlacement` type.
 - `n-dynamic-tags` adds `input-props` prop.
+- `n-notification-provider` adds `container-style` prop.
+- `n-notification-provider` exports `NotificationPlacement` type.
+- `n-notification-provider` exports `NotificationType` type.
 
 ## 2.24.7 (2022-01-28)
 
