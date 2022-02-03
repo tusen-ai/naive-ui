@@ -15,6 +15,7 @@
 - Fix `n-log` doesn't break line when line is too long, closes [#2298](https://github.com/TuSimple/naive-ui/issues/2298).
 - Fix `n-log` doesn't export `LogInst` type.
 - Fix `n-popselect` action slot & empty slot now working.
+- Fix `n-data-table` can't use percent as column width.
 
 ### Feats
 

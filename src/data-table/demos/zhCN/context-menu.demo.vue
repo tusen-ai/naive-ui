@@ -36,7 +36,7 @@ const data: Song[] = [
   { no: 5, title: 'Hey Now!', length: '5:41' },
   { no: 6, title: 'Untitled', length: '0:44' },
   { no: 7, title: 'Some Might Say', length: '5:29' },
-  { no: 8, title: 'Case No Shadow', length: '4:51' },
+  { no: 8, title: 'Cast No Shadow', length: '4:51' },
   { no: 9, title: "She's Electric", length: '3:40' },
   { no: 10, title: 'Monring Glory', length: '5:03' },
   { no: 11, title: 'Untitled', length: '0:39' },
