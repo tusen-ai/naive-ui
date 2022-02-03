@@ -21,26 +21,27 @@ manual-trigger
 
 Mention requires `v2.2.0` and above.
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| autosize | `boolean \| { maxRows?: number, minRows?: number }` | `false` | Autosize. |
-| options | `MentionOption[]` | `[]` | Mention options list. |
-| type | `'text' \| 'textarea'` | `'text'` | Input type. |
-| separator | `string` | `' '` | Character to split mentions. The string length must be exactly 1. |
-| bordered | `boolean` | `true` | Whether to display the border of the input element. |
-| disabled | `boolean` | `false` | Whether to disable the input element. |
-| value | `string \| null` | `undefined` | Manually set input value. |
-| default-value | `string` | `''` | Default value when the value is not manually set. |
-| loading | `boolean` | `false` | Whether the selection panel of mentions is in a loading state. |
-| prefix | `string \| string[]` | `'@'` | Prefix character(s) to trigger mentions. The string length(s) must be exactly 1. |
-| placeholder | `string` | `''` | Placeholder. |
-| render-label | `(option: MentionOption) => VNodeChild` | `undefined` | Options' labels render function. |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |
-| on-update:value | `(value: string) => void` | `undefined` | Triggered when the input box value is updated. |
-| on-select | `(option: MentionOption, prefix: string) => void` | `undefined` | Triggered when the input box is selected. |
-| on-focus | `(e: FocusEvent) => void` | `undefined` | Triggered when the input box is focussed on. |
-| on-search | `(pattern: string, prefix: string) => void` | `undefined` | Triggered when searching in the input box. |
-| on-blur | `(e: FocusEvent) => void` | `undefined` | Triggered when the input box loses focus. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| autosize | `boolean \| { maxRows?: number, minRows?: number }` | `false` | Autosize. |  |
+| options | `MentionOption[]` | `[]` | Mention options list. |  |
+| type | `'text' \| 'textarea'` | `'text'` | Input type. |  |
+| separator | `string` | `' '` | Character to split mentions. The string length must be exactly 1. |  |
+| bordered | `boolean` | `true` | Whether to display the border of the input element. |  |
+| disabled | `boolean` | `false` | Whether to disable the input element. |  |
+| value | `string \| null` | `undefined` | Manually set input value. |  |
+| default-value | `string` | `''` | Default value when the value is not manually set. |  |
+| loading | `boolean` | `false` | Whether the selection panel of mentions is in a loading state. |  |
+| prefix | `string \| string[]` | `'@'` | Prefix character(s) to trigger mentions. The string length(s) must be exactly 1. |  |
+| placeholder | `string` | `''` | Placeholder. |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Selection panel's placement . | NEXT_VERSION |
+| render-label | `(option: MentionOption) => VNodeChild` | `undefined` | Options' labels render function. |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |  |
+| on-update:value | `(value: string) => void` | `undefined` | Triggered when the input box value is updated. |  |
+| on-select | `(option: MentionOption, prefix: string) => void` | `undefined` | Triggered when the input box is selected. |  |
+| on-focus | `(e: FocusEvent) => void` | `undefined` | Triggered when the input box is focussed on. |  |
+| on-search | `(pattern: string, prefix: string) => void` | `undefined` | Triggered when searching in the input box. |  |
+| on-blur | `(e: FocusEvent) => void` | `undefined` | Triggered when the input box loses focus. |  |
 
 ### MentionOption Properties
 

@@ -19,7 +19,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    useStyle('BaseMenuMask', style, toRef(props, 'clsPrefix'))
+    useStyle('-base-menu-mask', style, toRef(props, 'clsPrefix'))
     const messageRef = ref<string | null>(null)
     let timerId: number | null = null
     const uncontrolledShowRef = ref(false)

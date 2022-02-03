@@ -110,7 +110,7 @@ export default defineComponent({
     )
     const themeRef = useTheme(
       'DynamicInput',
-      'DynamicInput',
+      '-dynamic-input',
       style,
       dynamicInputLight,
       props,

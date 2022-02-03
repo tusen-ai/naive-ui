@@ -4,6 +4,8 @@ export type {
   NotificationProviderInst,
   NotificationApiInjection as NotificationApi,
   NotificationOptions,
-  NotificationReactive
+  NotificationReactive,
+  NotificationPlacement,
+  NotificationType
 } from './src/NotificationProvider'
 export { useNotification } from './src/use-notification'

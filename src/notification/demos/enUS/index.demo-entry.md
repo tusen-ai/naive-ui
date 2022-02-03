@@ -5,7 +5,7 @@ If something is to be telled to somebody.
 Notification component is always with low piority so I can make a lot of useless animations on it.
 
 <n-space vertical size="large">
-<n-alert title="Prerequisite" type="warning">
+<n-alert title="Prerequisite" type.vue="warning">
   If you want use notification, you need to wrap the component where you call related methods inside <n-text code>n-notification-provider</n-text> and use <n-text code>useNotification</n-text> to get the API.
 </n-alert>
 
@@ -40,26 +40,27 @@ export default defineComponent({
 ## Demos
 
 ```demo
-basic
+basic.vue
 type
-change-content
-scrollable
-closable
-duration
-max
-placement
+change-content.vue
+scrollable.vue
+closable.vue
+duration.vue
+max.vue
+placement.vue
 ```
 
 ## API
 
 ### NotificationProvider Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `'top-right'` | Placement of all notifications. |
-| max | `number` | `undefined` | Limit the number of notifications to display. |
-| scrollable | `boolean` | `true` | Whether notification can be scroll. |
-| to | `string \| HTMLElement` | `'body'` | Container node of notification container. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| container-style | `string \| Object` | `undefined` | Style of notification container. | NEXT_VERSION |
+| placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `'top-right'` | Placement of all notifications. |  |
+| max | `number` | `undefined` | Limit the number of notifications to display. |  |
+| scrollable | `boolean` | `true` | Whether notification can be scroll. |  |
+| to | `string \| HTMLElement` | `'body'` | Container node of notification container. |  |
 
 ### `notification` Injection Methods
 

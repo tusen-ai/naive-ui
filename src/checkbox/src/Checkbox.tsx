@@ -164,7 +164,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'Checkbox',
-      'Checkbox',
+      '-checkbox',
       style,
       checkboxLight,
       props,
