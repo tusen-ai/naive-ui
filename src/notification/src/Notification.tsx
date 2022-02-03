@@ -8,15 +8,15 @@ import {
   CSSProperties
 } from 'vue'
 import { getPadding } from 'seemly'
-import { createKey, keysOf, render } from '../../_utils'
-import { NBaseIcon, NBaseClose } from '../../_internal'
 import {
   InfoIcon,
   SuccessIcon,
   WarningIcon,
   ErrorIcon
 } from '../../_internal/icons'
-import { notificationProviderInjectionKey } from './NotificationProvider'
+import { createKey, keysOf, render } from '../../_utils'
+import { NBaseIcon, NBaseClose } from '../../_internal'
+import { notificationProviderInjectionKey } from './context'
 
 const iconMap = {
   info: <InfoIcon />,
@@ -53,7 +53,7 @@ export const notificationProps = {
 
 export const notificationPropKeys = keysOf(notificationProps)
 
-export default defineComponent({
+export const Notification = defineComponent({
   name: 'Notification',
   props: notificationProps,
   setup (props) {

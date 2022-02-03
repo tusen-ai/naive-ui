@@ -1,11 +1,4 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  VNodeChild,
-  PropType,
-  CSSProperties
-} from 'vue'
+import { h, defineComponent, computed, CSSProperties } from 'vue'
 import {
   InfoIcon,
   SuccessIcon,
@@ -14,14 +7,13 @@ import {
 } from '../../_internal/icons'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { render, createKey, keysOf } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { render, createKey } from '../../_utils'
 import { NBaseIcon, NBaseClose } from '../../_internal'
 import { NButton } from '../../button'
 import { dialogLight } from '../styles'
 import type { DialogTheme } from '../styles'
-import type { IconPlacement } from './interface'
 import style from './styles/index.cssr'
+import { dialogProps } from './dialogProps'
 
 const infoIcon = <InfoIcon />
 
@@ -33,40 +25,7 @@ const iconMap = {
   error: <ErrorIcon />
 }
 
-const dialogProps = {
-  icon: Function as PropType<() => VNodeChild>,
-  type: {
-    type: String as PropType<
-    'info' | 'success' | 'warning' | 'error' | 'default'
-    >,
-    default: 'default'
-  },
-  title: [String, Function] as PropType<string | (() => VNodeChild)>,
-  closable: {
-    type: Boolean,
-    default: true
-  },
-  negativeText: String,
-  positiveText: String,
-  content: [String, Function] as PropType<string | (() => VNodeChild)>,
-  action: Function as PropType<() => VNodeChild>,
-  showIcon: {
-    type: Boolean,
-    default: true
-  },
-  loading: Boolean,
-  bordered: Boolean,
-  iconPlacement: String as PropType<IconPlacement>,
-  onPositiveClick: Function as PropType<(e: MouseEvent) => void>,
-  onNegativeClick: Function as PropType<(e: MouseEvent) => void>,
-  onClose: Function as PropType<() => void>
-} as const
-
-export type DialogProps = ExtractPublicPropTypes<typeof dialogProps>
-export { dialogProps }
-export const dialogPropKeys = keysOf(dialogProps)
-
-export default defineComponent({
+export const NDialog = defineComponent({
   name: 'Dialog',
   alias: [
     'NimbusConfirmCard', // deprecated
@@ -100,7 +59,7 @@ export default defineComponent({
     }
     const themeRef = useTheme(
       'Dialog',
-      'Dialog',
+      '-dialog',
       style,
       dialogLight,
       props,
@@ -189,7 +148,6 @@ export default defineComponent({
       mergedClsPrefix
     } = this
 
-    console.log('action', $slots.action)
     return (
       <div
         class={[

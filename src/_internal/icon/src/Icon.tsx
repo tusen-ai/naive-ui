@@ -24,7 +24,7 @@ export default defineComponent({
     onMouseup: Function as PropType<(e: MouseEvent) => void>
   },
   setup (props) {
-    useStyle('BaseIcon', style, toRef(props, 'clsPrefix'))
+    useStyle('-base-icon', style, toRef(props, 'clsPrefix'))
   },
   render () {
     return (

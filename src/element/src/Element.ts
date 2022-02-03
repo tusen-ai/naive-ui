@@ -24,7 +24,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Element',
-      'Element',
+      '-element',
       undefined,
       elementLight,
       props,

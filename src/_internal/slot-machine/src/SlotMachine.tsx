@@ -33,7 +33,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    useStyle('BaseSlotMachine', style, toRef(props, 'clsPrefix'))
+    useStyle('-base-slot-machine', style, toRef(props, 'clsPrefix'))
     const oldValueRef = ref<number>()
     const newValueRef = ref<number>()
     const numbersRef = computed(() => {

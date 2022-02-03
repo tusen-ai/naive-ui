@@ -16,6 +16,7 @@ import {
 } from 'vue'
 import { VOverflow, VOverflowInst } from 'vueuc'
 import type { SelectBaseOption } from '../../../select/src/interface'
+import type { FormValidationStatus } from '../../../form/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
 import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
@@ -25,7 +26,7 @@ import { createKey, getTitleAttribute, render } from '../../../_utils'
 import Suffix from '../../suffix'
 import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
-import { RenderTag } from './interface'
+import type { RenderTag } from './interface'
 import style from './styles/index.cssr'
 import type {
   RenderLabel,
@@ -91,7 +92,8 @@ export default defineComponent({
     maxTagCount: [String, Number] as PropType<number | 'responsive'>,
     onClear: Function as PropType<(e: MouseEvent) => void>,
     onPatternInput: Function as PropType<(e: InputEvent) => void>,
-    renderLabel: Function as PropType<RenderLabel>
+    renderLabel: Function as PropType<RenderLabel>,
+    status: String as PropType<FormValidationStatus>
   },
   setup (props) {
     const patternInputMirrorRef = ref<HTMLElement | null>(null)
@@ -110,7 +112,7 @@ export default defineComponent({
     const hoverRef = ref(false)
     const themeRef = useTheme(
       'InternalSelection',
-      'InternalSelection',
+      '-internal-selection',
       style,
       internalSelectionLight,
       props,
@@ -498,6 +500,7 @@ export default defineComponent({
   },
   render () {
     const {
+      status,
       multiple,
       size,
       disabled,
@@ -851,6 +854,7 @@ export default defineComponent({
         ref="selfRef"
         class={[
           `${clsPrefix}-base-selection`,
+          status && `${clsPrefix}-base-selection--${status}-status`,
           {
             [`${clsPrefix}-base-selection--active`]: this.active,
             [`${clsPrefix}-base-selection--selected`]:

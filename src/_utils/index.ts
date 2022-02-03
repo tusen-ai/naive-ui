@@ -10,7 +10,10 @@ export {
   getFirstSlotVNode,
   createDataKey,
   createRefSetter,
-  createInjectionKey
+  createInjectionKey,
+  resolveSlot,
+  resolveWrappedSlot,
+  isSlotEmpty
 } from './vue'
 export type { MaybeArray } from './vue'
 export {

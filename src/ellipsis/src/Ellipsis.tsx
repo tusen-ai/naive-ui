@@ -37,7 +37,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const mergedTheme = useTheme(
       'Ellipsis',
-      'ellipsis',
+      '-ellipsis',
       style,
       ellipsisLight,
       props,

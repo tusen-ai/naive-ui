@@ -22,7 +22,7 @@
 />
 <n-progress
   type="line"
-  indicator-placement="inside-label"
+  indicator-placement="'inside'"
   :color="themeVars.errorColor"
   :rail-color="changeColor(themeVars.errorColor, { alpha: 0.2 })"
   :percentage="20"

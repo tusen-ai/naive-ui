@@ -29,7 +29,7 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
       const { mergedClsPrefixRef } = useConfig(props)
       const themeRef = useTheme(
         'Typography',
-        'H',
+        '-h',
         style,
         typographyLight,
         props,

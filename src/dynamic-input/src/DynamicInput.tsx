@@ -9,7 +9,8 @@ import {
   PropType,
   inject,
   CSSProperties,
-  provide
+  provide,
+  watchEffect
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { createId } from 'seemly'
@@ -18,7 +19,12 @@ import { NBaseIcon } from '../../_internal'
 import { NButton, NButtonGroup } from '../../button'
 import { useTheme, useLocale, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, call, MaybeArray, ExtractPublicPropTypes } from '../../_utils'
+import {
+  call,
+  MaybeArray,
+  ExtractPublicPropTypes,
+  warnOnce
+} from '../../_utils'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
 import { dynamicInputLight } from '../styles'
 import type { DynamicInputTheme } from '../styles'
@@ -68,30 +74,8 @@ const dynamicInputProps = {
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   // deprecated
-  onClear: {
-    type: Function as PropType<() => void>,
-    validator: () => {
-      warn(
-        'dynamic-input',
-        '`on-clear` is deprecated, it is out of usage anymore.'
-      )
-      return true
-    },
-    default: undefined
-  },
-  onInput: {
-    type: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>,
-    validator: () => {
-      if (__DEV__) {
-        warn(
-          'dynamic-input',
-          '`on-input` is deprecated, please use `on-update:value` instead.'
-        )
-      }
-      return true
-    },
-    default: undefined
-  }
+  onClear: Function as PropType<() => void>,
+  onInput: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
 
 export type DynamicInputProps = ExtractPublicPropTypes<typeof dynamicInputProps>
@@ -100,6 +84,22 @@ export default defineComponent({
   name: 'DynamicInput',
   props: dynamicInputProps,
   setup (props, { slots }) {
+    if (__DEV__) {
+      watchEffect(() => {
+        if (props.onClear !== undefined) {
+          warnOnce(
+            'dynamic-input',
+            '`on-clear` is deprecated, it is out of usage anymore.'
+          )
+        }
+        if (props.onInput !== undefined) {
+          warnOnce(
+            'dynamic-input',
+            '`on-input` is deprecated, please use `on-update:value` instead.'
+          )
+        }
+      })
+    }
     const { NConfigProvider, mergedClsPrefixRef } = useConfig()
     const NFormItem = inject(formItemInjectionKey, null)
     const uncontrolledValueRef = ref(props.defaultValue)
@@ -110,7 +110,7 @@ export default defineComponent({
     )
     const themeRef = useTheme(
       'DynamicInput',
-      'DynamicInput',
+      '-dynamic-input',
       style,
       dynamicInputLight,
       props,
@@ -269,6 +269,7 @@ export default defineComponent({
             block
             ghost
             dashed
+            disabled={this.insertionDisabled}
             size={buttonSize}
             theme={mergedTheme.peers.Button}
             themeOverrides={mergedTheme.peerOverrides.Button}

@@ -7,7 +7,7 @@ import {
   inject,
   VNodeChild
 } from 'vue'
-import { configProviderInjectionKey } from '../../config-provider/src/ConfigProvider'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { EmptyIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -45,7 +45,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Empty',
-      'Empty',
+      '-empty',
       style,
       emptyLight,
       props,

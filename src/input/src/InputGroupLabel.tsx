@@ -31,7 +31,7 @@ export default defineComponent({
     const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Input',
-      'InputGroupLabel',
+      '-input-group-label',
       style,
       inputLight,
       props,

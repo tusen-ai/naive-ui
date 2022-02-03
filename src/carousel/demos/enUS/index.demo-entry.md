@@ -7,7 +7,7 @@ It's usually used to display good news.
 ```demo
 basic
 arrow
-dots
+dots.vue
 autoplay
 vertical
 space-between
@@ -35,7 +35,7 @@ custom-arrow-and-dots
 | default-index | `number` | `0` | default index. | 2.24.0 |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | Carousel shows the direction. |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Dot placement in the panel. | 2.24.0 |
-| dot-type | `'dot' \| 'line' \| 'never'` | `'dot'` | Dot style. | 2.24.0 |
+| dot-type | `'dot' \| 'line'` | `'dot'` | Dot style. | 2.24.0 |
 | draggable | `boolean` | `false` | Whether to switch the carousel by dragging the mouse. | 2.24.0 |
 | effect | `'slide' \| 'fade' \| 'card' \| 'custom'` | `'slide'` | Transition effect when switching between carousel. | 2.24.0, `'card'` 2.24.2 |
 | interval | `number` | `5000` | Auto play interval (ms). |

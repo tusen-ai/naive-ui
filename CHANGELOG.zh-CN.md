@@ -1,17 +1,69 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
+
+### Breaking Changes
+
+- 重构了 `n-carousel` 带箭头时的样式
+
+### Fixes
+
+- `n-color-picker` 色阶和不透明度调整滑块 box-shadow 被轨道 box-shadow 影响
+- 修复 `n-form-item` feedback DOM 内容为空依然有 padding
+- 修复 `n-button` 在 safari 下显示有多余 margin
+- 修复 `n-form` 的 rules 和 `n-form-item` 的 rule 中的 `validator` 与 `asyncValidator` 函数的 `rule` 类型不为 `FormItemRule` 类型， 关闭 [#2299](https://github.com/TuSimple/naive-ui/issues/2299)
+- 修复 `n-log` 在内容过长时不折行，关闭 [#2298](https://github.com/TuSimple/naive-ui/issues/2298)
+- 修复 `n-log` 未导出 `LogInst` 类型
+- 修复 `n-popselect` action slot & empty slot 不生效
+- 修复 `n-data-table` 不能使用百分比列宽
 
 ### Feats
 
+- `n-tabs` 的 `justify-content` 新增类型 `start` `center` `end`
+- `n-auto-complete` 新增 `placement` 属性
+- `n-cascader` 新增 `placement` 属性
+- `n-color-picker` 新增 `placement` 属性
+- `n-date-picker` 新增 `placement` 属性
+- `n-mention` 新增 `placement` 属性
+- `n-select` 新增 `placement` 属性
+- `n-slider` 新增 `placement` 属性
+- `n-time-picker` 新增 `placement` 属性
+- `n-tree-select` 新增 `placement` 属性
+- `n-card` 新增 `header-extra-style` 属性
+- `n-popover` 新增 `keep-alive-on-hover` 属性，关闭 [#2326](https://github.com/TuSimple/naive-ui/issues/2326)
+- `n-input` 新增 `status` 属性
+- 新增 `n-icon-wrapper` 组件
+- `n-popover` 导出 `PopoverPlacement` 类型
+- `n-drawer` 导出 `DrawerPlacement` 类型
 - `n-dynamic-tag` 新增 `input-props` 属性
+
+## 2.24.7 (2022-01-28)
+
+### Fixes
+
+- `n-popselect` 设定 `width="trigger"` 不生效
+
+### i18n
+
+- 更新 jaJP locale
+
+## 2.24.6 (2022-01-26)
+
+### Feats
+
+- `n-icon` 新增 `component` 属性
+
+### Fixes
+
+- 修复 `n-dynamic-input` 当 max 为 0 时可以添加子项， 关闭 [#2271](https://github.com/TuSimple/naive-ui/issues/2271)
+- 修复 `n-dialog` 有无用的 `console.log`
 
 ## 2.24.5 (2022-01-25)
 
 ### Fixes
 
 - `n-input` 在类型为 `textarea` 时 placeholder 无法换行
-- `date-picker` 面板年和月之前缺少空格
+- `n-date-picker` 面板年和月之前缺少空格
 
 ### Feats
 

@@ -21,10 +21,12 @@ import {
   createInjectionKey
 } from '../../_utils'
 import { notificationLight, NotificationTheme } from '../styles'
-import NotificationContainer from './NotificationContainer'
-import NotificationEnvironment, {
+import { NotificationContainer } from './NotificationContainer'
+import {
+  NotificationEnvironment,
   notificationEnvOptions
 } from './NotificationEnvironment'
+import { notificationProviderInjectionKey } from './context'
 import style from './styles/index.cssr'
 
 export type NotificationOptions = Partial<
@@ -35,9 +37,6 @@ export interface NotificationProviderInjection {
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<NotificationTheme>>
 }
-
-export const notificationProviderInjectionKey =
-  createInjectionKey<NotificationProviderInjection>('n-notification-provider')
 
 type Create = (options: NotificationOptions) => NotificationReactive
 type TypedCreate = (
@@ -155,7 +154,7 @@ export default defineComponent({
     }
     const themeRef = useTheme(
       'Notification',
-      'Notification',
+      '-notification',
       style,
       notificationLight,
       props,

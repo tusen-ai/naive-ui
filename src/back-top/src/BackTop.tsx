@@ -139,7 +139,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'BackTop',
-      'BackTop',
+      '-back-top',
       style,
       backTopLight,
       props,

@@ -24,16 +24,15 @@ import type {
   Value,
   SelectTreeMate
 } from '../../../select/src/interface'
-import { formatLength } from '../../../_utils'
+import { formatLength, resolveSlot, resolveWrappedSlot } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
 import { useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import NInternalLoading from '../../loading'
 import NFocusDetector from '../../focus-detector'
+import { internalSelectMenuLight, InternalSelectMenuTheme } from '../styles'
 import NSelectOption from './SelectOption'
 import NSelectGroupHeader from './SelectGroupHeader'
-import style from './styles/index.cssr'
-import { internalSelectMenuLight, InternalSelectMenuTheme } from '../styles'
 import type {
   RenderLabel,
   Size,
@@ -44,6 +43,7 @@ import {
   internalSelectionMenuInjectionKey,
   internalSelectionMenuBodyInjectionKey
 } from './interface'
+import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'InternalSelectMenu',
@@ -104,7 +104,7 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme(
       'InternalSelectMenu',
-      'InternalSelectMenu',
+      '-internal-select-menu',
       style,
       internalSelectMenuLight,
       props,
@@ -484,22 +484,24 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div class={`${clsPrefix}-base-select-menu__empty`}>
-            {$slots.empty ? (
-              $slots.empty()
-            ) : (
+            {resolveSlot($slots.empty, () => [
               <NEmpty
                 theme={mergedTheme.peers.Empty}
                 themeOverrides={mergedTheme.peerOverrides.Empty}
               />
-            )}
+            ])}
           </div>
         )}
-        {$slots.action && (
-          <div class={`${clsPrefix}-base-select-menu__action`} data-action>
-            {$slots.action()}
-          </div>
-        )}
-        {$slots.action && <NFocusDetector onFocus={this.onTabOut} />}
+        {resolveWrappedSlot($slots.action, (children) => [
+          <div
+            class={`${clsPrefix}-base-select-menu__action`}
+            data-action
+            key="action"
+          >
+            {children}
+          </div>,
+          <NFocusDetector onFocus={this.onTabOut} key="focus-detector" />
+        ])}
       </div>
     )
   }

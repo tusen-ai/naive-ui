@@ -41,7 +41,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'List',
-      'List',
+      '-list',
       style,
       listLight,
       props,

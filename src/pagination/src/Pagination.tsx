@@ -129,7 +129,7 @@ export default defineComponent({
     const { NConfigProvider, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Pagination',
-      'Pagination',
+      '-pagination',
       style,
       paginationLight,
       props,

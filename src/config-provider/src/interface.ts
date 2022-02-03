@@ -2,12 +2,13 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import type { ExtractThemeOverrides } from '../../_mixins/use-theme'
 import type { GlobalThemeWithoutCommon } from './internal-interface'
 
-export { ThemeCommonVars }
+export type { ThemeCommonVars }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CustomThemeCommonVars {}
 
 export interface GlobalTheme extends GlobalThemeWithoutCommon {
+  name: string
   common?: ThemeCommonVars
 }
 

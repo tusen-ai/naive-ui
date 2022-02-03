@@ -14,7 +14,7 @@ import {
   watchEffect
 } from 'vue'
 import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
-import { VBinder, VTarget, VFollower } from 'vueuc'
+import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
 import { happensIn } from 'seemly'
 import {
@@ -87,7 +87,7 @@ const timePickerProps = {
   defaultFormattedValue: String,
   placeholder: String,
   placement: {
-    type: String,
+    type: String as PropType<FollowerPlacement>,
     default: 'bottom-start'
   },
   value: Number as PropType<number | null>,
@@ -168,10 +168,10 @@ export default defineComponent({
       useConfig(props)
     const { localeRef, dateLocaleRef } = useLocale('TimePicker')
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const themeRef = useTheme(
       'TimePicker',
-      'TimePicker',
+      '-time-picker',
       style,
       timePickerLight,
       props,
@@ -636,6 +636,7 @@ export default defineComponent({
     }
     return {
       ...exposedMethods,
+      mergedStatus: mergedStatusRef,
       mergedBordered: mergedBorderedRef,
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
@@ -749,6 +750,7 @@ export default defineComponent({
                   default: () => (
                     <NInput
                       ref="inputInstRef"
+                      status={this.mergedStatus}
                       value={this.displayTimeString}
                       bordered={this.mergedBordered}
                       passivelyActivated
@@ -798,7 +800,7 @@ export default defineComponent({
                 show={this.mergedShow}
                 to={this.adjustedTo}
                 containerClass={this.namespace}
-                placement="bottom-start"
+                placement={this.placement}
               >
                 {{
                   default: () => (

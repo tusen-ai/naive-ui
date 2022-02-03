@@ -21,6 +21,7 @@ import { useMergedState, useMemo } from 'vooks'
 import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
 import { off, on } from 'evtd'
+import type { FormValidationStatus } from '../../form/src/interface'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import {
   NBaseClear,
@@ -31,7 +32,14 @@ import {
 } from '../../_internal'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createKey, ExtractPublicPropTypes, warnOnce } from '../../_utils'
+import {
+  call,
+  createKey,
+  ExtractPublicPropTypes,
+  resolveSlot,
+  resolveWrappedSlot,
+  warnOnce
+} from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { inputLight } from '../styles'
 import type { InputTheme } from '../styles'
@@ -113,6 +121,7 @@ const inputProps = {
   onClick: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
   onChange: [Function, Array] as PropType<OnUpdateValue>,
   onClear: [Function, Array] as PropType<MaybeArray<(e: MouseEvent) => void>>,
+  status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   /** private */
@@ -161,7 +170,7 @@ export default defineComponent({
     const { mergedClsPrefixRef, mergedBorderedRef } = useConfig(props)
     const themeRef = useTheme(
       'Input',
-      'Input',
+      '-input',
       style,
       inputLight,
       props,
@@ -186,7 +195,7 @@ export default defineComponent({
     )
     // form-item
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     // states
     const focusedRef = ref(false)
     const hoverRef = ref(false)
@@ -436,7 +445,7 @@ export default defineComponent({
       }
       // force update to sync input's view with value
       // if not set, after input, input value won't sync with dom input value
-      ;(vm.$forceUpdate as any)()
+      vm.$forceUpdate()
     }
     function handleInputBlur (e: FocusEvent): void {
       doUpdateValueBlur(e)
@@ -750,6 +759,7 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       mergedShowPasswordOn: mergedShowPasswordOnRef,
       placeholderStyle: placeholderStyleRef,
+      mergedStatus: mergedStatusRef,
       // methods
       handleTextAreaScroll,
       handleCompositionStart,
@@ -882,12 +892,13 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix, $slots } = this
+    const { mergedClsPrefix, mergedStatus, $slots } = this
     return (
       <div
         ref="wrapperElRef"
         class={[
           `${mergedClsPrefix}-input`,
+          mergedStatus && `${mergedClsPrefix}-input--${mergedStatus}-status`,
           {
             [`${mergedClsPrefix}-input--disabled`]: this.mergedDisabled,
             [`${mergedClsPrefix}-input--textarea`]: this.type === 'textarea',
@@ -920,11 +931,9 @@ export default defineComponent({
       >
         {/* textarea & basic input */}
         <div class={`${mergedClsPrefix}-input-wrapper`}>
-          {$slots.affix || $slots.prefix ? (
-            <div class={`${mergedClsPrefix}-input__prefix`}>
-              {($slots.affix || $slots.prefix)?.()}
-            </div>
-          ) : null}
+          {resolveWrappedSlot($slots.prefix, (children) => [
+            <div class={`${mergedClsPrefix}-input__prefix`}>{children}</div>
+          ])}
           {this.type === 'textarea' ? (
             <NScrollbar
               ref="textareaScrollbarInstRef"
@@ -1054,7 +1063,7 @@ export default defineComponent({
                     show={this.showClearButton}
                     onClear={this.handleClear}
                   >
-                    {{ default: $slots.clear }}
+                    {{ default: () => $slots.clear?.() }}
                   </NBaseClear>
                 ) : null,
                 !this.internalLoadingBeforeSuffix ? $slots.suffix?.() : null,
@@ -1069,7 +1078,7 @@ export default defineComponent({
                 ) : null,
                 this.internalLoadingBeforeSuffix ? $slots.suffix?.() : null,
                 this.showCount && this.type !== 'textarea' ? (
-                  <WordCount>{{ default: $slots.count }}</WordCount>
+                  <WordCount>{{ default: () => $slots.count?.() }}</WordCount>
                 ) : null,
                 this.mergedShowPasswordOn && this.type === 'password' ? (
                   <NBaseIcon
@@ -1091,7 +1100,7 @@ export default defineComponent({
         {/* pair input */}
         {this.pair ? (
           <span class={`${mergedClsPrefix}-input__separator`}>
-            {$slots.separator ? $slots.separator() : this.separator}
+            {resolveSlot($slots.separator, () => [this.separator])}
           </span>
         ) : null}
         {this.pair ? (
@@ -1128,15 +1137,15 @@ export default defineComponent({
             </div>
             <div class={`${mergedClsPrefix}-input__suffix`}>
               {[
-                this.clearable || $slots.clear ? (
+                this.clearable && (
                   <NBaseClear
                     clsPrefix={mergedClsPrefix}
                     show={this.showClearButton}
                     onClear={this.handleClear}
                   >
-                    {{ default: $slots.clear }}
+                    {{ default: () => $slots.clear?.() }}
                   </NBaseClear>
-                ) : null,
+                ),
                 $slots.suffix?.()
               ]}
             </div>
@@ -1150,7 +1159,7 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-input__state-border`} />
         ) : null}
         {this.showCount && this.type === 'textarea' ? (
-          <WordCount>{{ default: $slots.count }}</WordCount>
+          <WordCount>{{ default: () => $slots.count?.() }}</WordCount>
         ) : null}
       </div>
     )
