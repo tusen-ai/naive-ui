@@ -67,6 +67,7 @@ const tabsProps = {
     default: 'medium'
   },
   tabStyle: [String, Object] as PropType<string | CSSProperties>,
+  tabBarWidth: [String, Number] as PropType<string | number>,
   paneClass: String,
   paneStyle: [String, Object] as PropType<string | CSSProperties>,
   addable: [Boolean, Object] as PropType<Addable>,
@@ -180,14 +181,23 @@ export default defineComponent({
       if (!barEl) return
       if (tabEl) {
         const disabledClassName = `${mergedClsPrefixRef.value}-tabs-bar--disabled`
+        let { tabBarWidth } = props
+        if (typeof tabBarWidth === 'string') tabBarWidth = parseInt(tabBarWidth)
         if (tabEl.dataset.disabled === 'true') {
           barEl.classList.add(disabledClassName)
         } else {
           barEl.classList.remove(disabledClassName)
         }
-        barEl.style.left = `${tabEl.offsetLeft}px`
+        if (tabBarWidth && tabEl.offsetWidth >= tabBarWidth) {
+          const offsetDiffLeft =
+            Math.floor((tabEl.offsetWidth - tabBarWidth) / 2) + tabEl.offsetLeft
+          barEl.style.left = `${offsetDiffLeft}px`
+          barEl.style.maxWidth = `${tabBarWidth}px`
+        } else {
+          barEl.style.left = `${tabEl.offsetLeft}px`
+          barEl.style.maxWidth = `${tabEl.offsetWidth}px`
+        }
         barEl.style.width = '8192px'
-        barEl.style.maxWidth = `${tabEl.offsetWidth + 1}px`
       }
     }
     function updateCurrentBarStyle (): void {
