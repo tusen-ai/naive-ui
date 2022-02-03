@@ -40,7 +40,7 @@ export default defineComponent({
 
 ```demo
 basic.vue
-type
+type.vue
 change-content.vue
 scrollable.vue
 closable.vue

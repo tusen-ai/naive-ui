@@ -43,7 +43,7 @@ In highlight demo, we defined a language called `naive-log` which will highlight
 ## Demos
 
 ```demo
-size
+size.vue
 event.vue
 scroll.vue
 highlight.vue

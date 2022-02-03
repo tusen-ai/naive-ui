@@ -41,6 +41,10 @@
 - `n-notification-provider` exports `NotificationPlacement` type.
 - `n-notification-provider` exports `NotificationType` type.
 - `n-tabs` add `bar-width` prop.
+- `n-dynamic-input` adds `create-button-props` props.
+- `n-dynamic-input` adds `create-button-default` slot.
+- `n-dynamic-input` adds `create-button-icon` slot.
+- `n-dynamic-input` adds `show-sort-button` prop, closes [#2121](https://github.com/TuSimple/naive-ui/issues/2121).
 
 ## 2.24.7 (2022-01-28)
 

@@ -41,6 +41,10 @@
 - `n-notification-provider` 导出 `NotificationPlacement` 类型
 - `n-notification-provider` 导出 `NotificationType` 类型
 - `n-tabs` 新增 `bar-width` 属性
+- `n-dynamic-input` 新增 `create-button-props` 属性
+- `n-dynamic-input` 新增 `create-button-default` slot
+- `n-dynamic-input` 新增 `create-button-icon` slot
+- `n-dynamic-input` 新增 `show-sort-button` 属性，关闭 [#2121](https://github.com/TuSimple/naive-ui/issues/2121)
 
 ## 2.24.7 (2022-01-28)
 
