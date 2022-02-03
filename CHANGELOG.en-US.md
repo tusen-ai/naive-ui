@@ -1,13 +1,150 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
 
-- Fix `n-carousel` `card` effect slide problem.
+### Breaking Changes
+
+- Refactor `n-carousel`'s style when `show-arrow` is true.
+
+### Fixes
+
+- `n-color-picker`'s hue & alpha slider handle are influenced by rail's box-shadow.
+- Fix `n-form-item` prevent feedback padding when empty.
+- Fix `n-button` has extra margin in safari.
+- Fix `n-form`'s rules and `n-form-item`'s rule about `validator` and `asyncValidator`'s `rule` type is not `FormItemRule`, closes [#2299](https://github.com/TuSimple/naive-ui/issues/2299).
+- Fix `n-log` doesn't break line when line is too long, closes [#2298](https://github.com/TuSimple/naive-ui/issues/2298).
+- Fix `n-log` doesn't export `LogInst` type.
+- Fix `n-popselect` action slot & empty slot now working.
+- Fix `n-data-table` can't use percent as column width.
+
+### Feats
+
+- `n-tabs` props `justify-content` add types `start` `center` `end`
+- `n-auto-complete` adds `placement` prop.
+- `n-cascader` adds `placement` prop.
+- `n-color-picker` adds `placement` prop.
+- `n-date-picker` adds `placement` prop.
+- `n-mention` adds `placement` prop.
+- `n-select` adds `placement` prop.
+- `n-slider` adds `placement` prop.
+- `n-time-picker` adds `placement` prop.
+- `n-tree-select` adds `placement` prop.
+- `n-card` adds `header-extra-style` prop.
+- `n-popover` adds `keep-alive-on-hover` prop, closes [#2326](https://github.com/TuSimple/naive-ui/issues/2326).
+- `n-input` adds `status` prop.
+- Add `n-icon-wrapper` component.
+- `n-popover` exports `PopoverPlacement` type.
+- `n-drawer` exports `DrawerPlacement` type.
+- `n-dynamic-tags` adds `input-props` prop.
+- `n-notification-provider` adds `container-style` prop.
+- `n-notification-provider` exports `NotificationPlacement` type.
+- `n-notification-provider` exports `NotificationType` type.
+- `n-tabs` add `bar-width` prop.
+- `n-dynamic-input` adds `create-button-text` prop
+
+## 2.24.7 (2022-01-28)
+
+### Fixes
+
+- `n-popselect` doesn't work with `width="trigger"`.
+
+### i18n
+
+- Update jaJP locale.
+
+## 2.24.6 (2022-01-26)
+
+### Feats
+
+- `n-icon` add `component` prop.
+
+### Fixes
+
+- Fix `n-dynamic-input` can add item when max is 0, closes [#2271](https://github.com/TuSimple/naive-ui/issues/2271).
+- Fix `n-dialog` useless `console.log`.
+
+## 2.24.5 (2022-01-25)
+
+### Fixes
+
+- `n-input` placeholder has no line-wrap in `textarea` type.
+- `date-picker` lacks space between panel year & month.
+
+### Feats
+
+- `n-color-picker` adds `disabled` prop.
+- `n-date-picker` adds trigger area for year & month quick jump.
+
+## 2.24.4 (2022-01-24)
+
+### Fixes
+
+- Update vueuc version.
+
+## 2.24.3 (2022-01-24)
+
+### Fixes
+
+- Fix `n-layout-sider` has no border transition.
+
+## 2.24.2 (2022-01-24)
+
+### Fixes
+
 - Fix `n-layout-sider` still occupies 1px after collapsed.
+- Fix `n-code` doesn't break word when `word-wrap=true`.
+- Fix `n-tab-pane`'s tab label area inherits `attrs`, closes [#2221](https://github.com/TuSimple/naive-ui/issues/2221).
+- Fix `n-image` preview popup background can still be scrolled, closes [#2241](https://github.com/TuSimple/naive-ui/issues/2241).
+- Fix `n-input` shows placeholder when browser auto completes it, closes [#2234](https://github.com/TuSimple/naive-ui/issues/2234).
+- Fix `n-input` placeholder word break issue with `type="textarea"`.
+- Fix `n-avatar-group` extra count not correct after `max` is set, closes [#2244](https://github.com/TuSimple/naive-ui/issues/2244).
+- Fix `n-calendar` doesn't trigger `on-panel-change` on today button clicked.
+- Fix `n-drawer` can't be closed by esc key when `mask-closable=false`, closes [#2233](https://github.com/TuSimple/naive-ui/issues/2233).
+
+### Feats
+
+- `n-page-header` adds `back` slot, closes [#2176](https://github.com/TuSimple/naive-ui/issues/2176).
+- `n-select` adds `reset-menu-on-options-change` prop, closes [#2168](https://github.com/TuSimple/naive-ui/issues/2168).
+- `n-select` adds `arrow` slot, closes [#2201](https://github.com/TuSimple/naive-ui/issues/2201).
+- `n-carousel` effect supports `'card'`.
+- `n-input` doesn't use native scrollbar when `type="textarea"`, closes [#2242](https://github.com/TuSimple/naive-ui/issues/2242), [#1172](https://github.com/TuSimple/naive-ui/issues/1172).
+- `n-number-animation` add `locale` prop, closes [#2181](https://github.com/TuSimple/naive-ui/issues/2181).
+- `n-number-animation`'s locale follows config provider.
+- Expose `lightTheme`.
+- `n-time-picker` adds `icon` slot, closes [#2228](https://github.com/TuSimple/naive-ui/issues/2228).
+- `n-tab-pane` adds `tab-props` prop, closes [#2221](https://github.com/TuSimple/naive-ui/issues/2221).
+- Add `CustomThemeCommonVars` to customize `useThemeVars`.
+- `n-slider` adds `show-tooltip` prop, closes [#2212](https://github.com/TuSimple/naive-ui/issues/2212).
+- `n-select` adds `on-update:show` prop.
+- `n-select` adds `focus` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-select` adds `blur` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-date-picker` adds `focus` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-date-picker` adds `blur` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-time-picker` adds `focus` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-time-picker` adds `blur` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-checkbox` adds `focus` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-checkbox` adds `blur` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-cascader` adds `focus` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-cascader` adds `blur` method, closes [#2202](https://github.com/TuSimple/naive-ui/issues/2202).
+- `n-upload` adds `input-props` prop, closes [#2204](https://github.com/TuSimple/naive-ui/issues/2204).
+- `n-data-table` col adds `render-sorter-icon` prop, closes [#1785](https://github.com/TuSimple/naive-ui/issues/1785).
+- `n-data-table` col adds `render-sorter` prop, closes [#1785](https://github.com/TuSimple/naive-ui/issues/1785).
+- `n-date-picker` easy navigation to specific month and year for `date` and `datetime` and `daterange` and `datetimerange` type.
+- `n-modal` adds `close-on-esc` prop.
+- `n-modal` adds `auto-focus` prop.
+- `n-modal` adds `trap-focus` prop.
+- `n-modal` adds `on-esc` prop.
+- `n-drawer` adds `close-on-esc` prop.
+- `n-drawer` adds `auto-focus` prop.
+- `n-drawer` adds `trap-focus` prop.
+- `n-drawer` adds `on-esc` prop.
+- `n-upload` adds `clear` method, closes [#2247](https://github.com/TuSimple/naive-ui/issues/2247).
+- Add volar types.
 
 ### i18n
 
 - Add esAR locale.
+- Add itIT locale.
 
 ## 2.24.1 (2022-01-12)
 

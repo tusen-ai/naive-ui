@@ -5,7 +5,6 @@ import {
   provide,
   PropType,
   VNodeChild,
-  InjectionKey,
   ExtractPropTypes,
   Ref,
   Slots
@@ -14,7 +13,12 @@ import type { MergedTheme, ThemeProps } from '../../_mixins'
 import { useConfig, useTheme } from '../../_mixins'
 import { stepsLight } from '../styles'
 import style from './styles/index.cssr'
-import { ExtractPublicPropTypes, flatten, getSlot } from '../../_utils'
+import {
+  createInjectionKey,
+  ExtractPublicPropTypes,
+  flatten,
+  getSlot
+} from '../../_utils'
 import type { StepsTheme } from '../styles'
 
 function stepWithIndex (step: VNodeChild, i: number): VNode | null {
@@ -53,7 +57,7 @@ export interface StepsInjection {
 
 export type StepsProps = ExtractPublicPropTypes<typeof stepsProps>
 
-export const stepsInjectionKey: InjectionKey<StepsInjection> = Symbol('steps')
+export const stepsInjectionKey = createInjectionKey<StepsInjection>('n-steps')
 
 export default defineComponent({
   name: 'Steps',
@@ -62,7 +66,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Steps',
-      'Steps',
+      '-steps',
       style,
       stepsLight,
       props,

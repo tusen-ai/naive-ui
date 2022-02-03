@@ -21,7 +21,10 @@ export default c([
     font-family: var(--n-font-family);
   `, [
     cM('word-wrap', [
-      c('pre', 'white-space: pre-wrap;')
+      c('pre', `
+        white-space: pre-wrap;
+        word-break: break-all;
+      `)
     ]),
     c('pre', `
       margin: 0;

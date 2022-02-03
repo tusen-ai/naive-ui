@@ -5,7 +5,6 @@ import {
   PropType,
   provide,
   ref,
-  InjectionKey,
   Ref,
   ExtractPropTypes,
   CSSProperties,
@@ -14,7 +13,12 @@ import {
 import { useMergedState } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, ExtractPublicPropTypes, warn } from '../../_utils'
+import {
+  call,
+  createInjectionKey,
+  ExtractPublicPropTypes,
+  warn
+} from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { collapseLight, CollapseTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -90,8 +94,8 @@ export interface NCollapseInjection {
   ) => void
 }
 
-export const collapseInjectionKey: InjectionKey<NCollapseInjection> =
-  Symbol('collapse')
+export const collapseInjectionKey =
+  createInjectionKey<NCollapseInjection>('n-collapse')
 
 export default defineComponent({
   name: 'Collapse',
@@ -108,7 +112,7 @@ export default defineComponent({
     )
     const themeRef = useTheme(
       'Collapse',
-      'Collapse',
+      '-collapse',
       style,
       collapseLight,
       props,

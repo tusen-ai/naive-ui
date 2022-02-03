@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType, inject, computed, renderSlot } from 'vue'
+import { h, defineComponent, PropType, inject, computed } from 'vue'
 import { createId } from 'seemly'
 import { useMemo } from 'vooks'
 import { ChevronRightIcon as ArrowIcon } from '../../_internal/icons'
@@ -79,13 +79,13 @@ export default defineComponent({
       $slots,
       arrowPlacement,
       collapsed,
-      title,
       mergedDisplayDirective,
       mergedClsPrefix
     } = this
-    const headerNode = renderSlot($slots, 'header', undefined, () => [title])
+    const headerNode = $slots.header ? $slots.header() : this.title
     const headerExtraSlot =
       $slots['header-extra'] || collapseSlots['header-extra']
+    const arrowSlot = $slots.arrow || collapseSlots.arrow
     return (
       <div
         class={[
@@ -106,21 +106,14 @@ export default defineComponent({
           >
             {arrowPlacement === 'right' && headerNode}
             <div class={`${mergedClsPrefix}-collapse-item-arrow`}>
-              {renderSlot(
-                $slots.arrow
-                  ? $slots
-                  : collapseSlots.arrow
-                    ? collapseSlots
-                    : $slots,
-                'arrow',
-                { collapsed: collapsed },
-                () => [
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{
-                      default: collapseSlots.expandIcon ?? (() => <ArrowIcon />)
-                    }}
-                  </NBaseIcon>
-                ]
+              {arrowSlot ? (
+                arrowSlot({ collapsed })
+              ) : (
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{
+                    default: collapseSlots.expandIcon ?? (() => <ArrowIcon />)
+                  }}
+                </NBaseIcon>
               )}
             </div>
             {arrowPlacement === 'left' && headerNode}

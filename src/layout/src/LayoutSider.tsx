@@ -178,7 +178,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Layout',
-      'LayoutSider',
+      '-layout-sider',
       style,
       layoutLight,
       props,
@@ -323,6 +323,9 @@ export default defineComponent({
               onClick={this.handleTriggerClick}
             />
           )
+        ) : null}
+        {this.bordered ? (
+          <div class={`${mergedClsPrefix}-layout-sider__border`} />
         ) : null}
       </aside>
     )

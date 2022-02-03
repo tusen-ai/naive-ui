@@ -98,7 +98,7 @@ export default defineComponent({
     const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
     const themeRef = useTheme(
       'Slider',
-      'Slider',
+      '-slider',
       style,
       sliderLight,
       props,
@@ -704,7 +704,10 @@ export default defineComponent({
                           ref={this.setFollowerRefs(index)}
                           show={showTooltip}
                           to={this.adjustedTo}
-                          enabled={this.followerEnabledIndexSet.has(index)}
+                          enabled={
+                            (this.showTooltip && !this.range) ||
+                            this.followerEnabledIndexSet.has(index)
+                          }
                           teleportDisabled={
                             this.adjustedTo === useAdjustedTo.tdkey
                           }

@@ -5,7 +5,7 @@ Why make the `update:value` event an example? Because there's so little to write
 ```html
 <n-space vertical>
   <n-select
-    placeholder="Please Select a Song"
+    placeholder="Please select a song"
     :options="options"
     @update:value="handleUpdateValue"
   />

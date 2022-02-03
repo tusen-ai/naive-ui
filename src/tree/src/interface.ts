@@ -1,6 +1,7 @@
 import { CheckStrategy, TreeNode } from 'treemate'
-import { InjectionKey, Ref, VNodeChild } from 'vue'
+import { Ref, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
 import type { TreeTheme } from '../styles'
 
 export type Key = string | number
@@ -114,7 +115,7 @@ export interface TreeInjection {
   handleDrop: (info: InternalDropInfo) => void
 }
 
-export const treeInjectionKey: InjectionKey<TreeInjection> = Symbol('tree')
+export const treeInjectionKey = createInjectionKey<TreeInjection>('n-tree')
 
 export type TmNode = TreeNode<TreeOption>
 

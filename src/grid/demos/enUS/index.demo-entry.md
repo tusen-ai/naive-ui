@@ -5,12 +5,12 @@
 Based on CSS Grid. Responsive. Keep away from IE.
 
 ```demo
-basic
-gap
-offset
-responsive
-responsive-item
-collapse
+basic.vue
+gap.vue
+offset.vue
+responsive.vue
+responsive-item.vue
+collapse.vue
 ```
 
 ## API

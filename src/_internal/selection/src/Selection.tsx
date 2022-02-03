@@ -16,6 +16,7 @@ import {
 } from 'vue'
 import { VOverflow, VOverflowInst } from 'vueuc'
 import type { SelectBaseOption } from '../../../select/src/interface'
+import type { FormValidationStatus } from '../../../form/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
 import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
@@ -25,7 +26,7 @@ import { createKey, getTitleAttribute, render } from '../../../_utils'
 import Suffix from '../../suffix'
 import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
-import { RenderTag } from './interface'
+import type { RenderTag } from './interface'
 import style from './styles/index.cssr'
 import type {
   RenderLabel,
@@ -35,6 +36,7 @@ import type {
 export interface InternalSelectionInst {
   focus: () => void
   focusInput: () => void
+  blur: () => void
   $el: HTMLElement
 }
 
@@ -90,7 +92,8 @@ export default defineComponent({
     maxTagCount: [String, Number] as PropType<number | 'responsive'>,
     onClear: Function as PropType<(e: MouseEvent) => void>,
     onPatternInput: Function as PropType<(e: InputEvent) => void>,
-    renderLabel: Function as PropType<RenderLabel>
+    renderLabel: Function as PropType<RenderLabel>,
+    status: String as PropType<FormValidationStatus>
   },
   setup (props) {
     const patternInputMirrorRef = ref<HTMLElement | null>(null)
@@ -109,7 +112,7 @@ export default defineComponent({
     const hoverRef = ref(false)
     const themeRef = useTheme(
       'InternalSelection',
-      'InternalSelection',
+      '-internal-selection',
       style,
       internalSelectionLight,
       props,
@@ -265,17 +268,27 @@ export default defineComponent({
     function handlePatternInputBlur (e: FocusEvent): void {
       patternInputFocusedRef.value = false
     }
+    function blur (): void {
+      if (props.filterable) {
+        patternInputFocusedRef.value = false
+        patternInputWrapperRef.value?.blur()
+        patternInputRef.value?.blur()
+      } else if (props.multiple) {
+        const { value: multipleEl } = multipleElRef
+        multipleEl?.blur()
+      } else {
+        const { value: singleEl } = singleElRef
+        singleEl?.blur()
+      }
+    }
     function focus (): void {
       if (props.filterable) {
         patternInputFocusedRef.value = false
-        const { value: patternInputWrapperEl } = patternInputWrapperRef
-        if (patternInputWrapperEl) patternInputWrapperEl.focus()
+        patternInputWrapperRef.value?.focus()
       } else if (props.multiple) {
-        const { value: multipleEl } = multipleElRef
-        multipleEl?.focus()
+        multipleElRef.value?.focus()
       } else {
-        const { value: singleEl } = singleElRef
-        singleEl?.focus()
+        singleElRef.value?.focus()
       }
     }
     function focusInput (): void {
@@ -370,6 +383,7 @@ export default defineComponent({
       onPopoverUpdateShow,
       focus,
       focusInput,
+      blur,
       blurInput,
       updateCounter,
       getCounter,
@@ -385,6 +399,7 @@ export default defineComponent({
             placeholderColor,
             textColor,
             paddingSingle,
+            paddingMultiple,
             caretColor,
             colorDisabled,
             textColorDisabled,
@@ -446,6 +461,7 @@ export default defineComponent({
           '--n-font-size': fontSize,
           '--n-height': height,
           '--n-padding-single': paddingSingle,
+          '--n-padding-multiple': paddingMultiple,
           '--n-placeholder-color': placeholderColor,
           '--n-placeholder-color-disabled': placeholderColorDisabled,
           '--n-text-color': textColor,
@@ -484,6 +500,7 @@ export default defineComponent({
   },
   render () {
     const {
+      status,
       multiple,
       size,
       disabled,
@@ -504,9 +521,12 @@ export default defineComponent({
         showArrow={this.showArrow}
         showClear={this.mergedClearable && this.selected}
         onClear={this.handleClear}
-      />
+      >
+        {{
+          default: () => this.$slots.arrow?.()
+        }}
+      </Suffix>
     )
-
     let body: JSX.Element
     if (multiple) {
       const createTag = (option: SelectBaseOption): JSX.Element => (
@@ -834,6 +854,7 @@ export default defineComponent({
         ref="selfRef"
         class={[
           `${clsPrefix}-base-selection`,
+          status && `${clsPrefix}-base-selection--${status}-status`,
           {
             [`${clsPrefix}-base-selection--active`]: this.active,
             [`${clsPrefix}-base-selection--selected`]:

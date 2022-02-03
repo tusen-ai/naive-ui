@@ -274,6 +274,16 @@ function useDualCalendar (
     )
     adjustCalendarTimes(false)
   }
+  function onUpdateStartCalendarValue (value: number): void {
+    startCalendarDateTimeRef.value = value
+    adjustCalendarTimes(true)
+  }
+
+  function onUpdateEndCalendarValue (value: number): void {
+    endCalendarDateTimeRef.value = value
+    adjustCalendarTimes(false)
+  }
+
   // The function is used on date panel, not the date-picker value validation
   function mergedIsDateDisabled (ts: number): boolean {
     const isDateDisabled = isDateDisabledRef.value
@@ -619,7 +629,11 @@ function useDualCalendar (
     handleEndDateInput,
     handleEndDateInputBlur,
     datePickerSlots,
-    shortcuts: shortcutsRef
+    shortcuts: shortcutsRef,
+    startCalendarDateTime: startCalendarDateTimeRef,
+    endCalendarDateTime: endCalendarDateTimeRef,
+    onUpdateStartCalendarValue,
+    onUpdateEndCalendarValue
   }
 }
 

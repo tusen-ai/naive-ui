@@ -4,7 +4,6 @@ import {
   computed,
   inject,
   PropType,
-  renderSlot,
   CSSProperties
 } from 'vue'
 import { NButton } from '../../button'
@@ -98,14 +97,16 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-popconfirm__body`}>
           {this.showIcon ? (
             <div class={`${mergedClsPrefix}-popconfirm__icon`}>
-              {renderSlot($slots, 'icon', undefined, () => [
+              {$slots.icon ? (
+                $slots.icon()
+              ) : (
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{ default: () => <WarningIcon /> }}
                 </NBaseIcon>
-              ])}
+              )}
             </div>
           ) : null}
-          {renderSlot($slots, 'default')}
+          {$slots.default?.()}
         </div>
         {actionContentNode ? (
           <div class={`${mergedClsPrefix}-popconfirm__action`}>

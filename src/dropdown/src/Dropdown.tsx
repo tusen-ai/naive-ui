@@ -8,7 +8,6 @@ import {
   watch,
   provide,
   CSSProperties,
-  InjectionKey,
   Ref,
   mergeProps
 } from 'vue'
@@ -46,6 +45,7 @@ import {
   RenderLabelImpl,
   RenderIconImpl
 } from './interface'
+import { dropdownInjectionKey } from './context'
 
 export interface DropdownInjection {
   renderLabelRef: Ref<RenderLabelImpl | undefined>
@@ -62,9 +62,6 @@ export interface DropdownInjection {
   doSelect: OnUpdateValueImpl
   doUpdateShow: (value: boolean) => void
 }
-
-export const dropdownInjectionKey: InjectionKey<DropdownInjection> =
-  Symbol('dropdown')
 
 const dropdownBaseProps = {
   animated: {
@@ -211,7 +208,7 @@ export default defineComponent({
 
     const themeRef = useTheme(
       'Dropdown',
-      'Dropdown',
+      '-dropdown',
       style,
       dropdownLight,
       props,
@@ -436,8 +433,7 @@ export default defineComponent({
     return (
       <NPopover {...keep(this.$props, popoverPropKeys)} {...popoverProps}>
         {{
-          trigger: this.$slots.default,
-          _: 1
+          trigger: () => this.$slots.default?.()
         }}
       </NPopover>
     )

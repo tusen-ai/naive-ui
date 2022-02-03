@@ -74,7 +74,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Progress',
-      'Progress',
+      '-progress',
       style,
       progressLight,
       props,

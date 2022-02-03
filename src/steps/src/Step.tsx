@@ -4,8 +4,7 @@ import {
   computed,
   inject,
   PropType,
-  CSSProperties,
-  renderSlot
+  CSSProperties
 } from 'vue'
 import {
   CheckmarkIcon as FinishedIcon,
@@ -139,11 +138,10 @@ export default defineComponent({
                     <NBaseIcon clsPrefix={mergedClsPrefix} key="finish">
                       {{
                         default: () =>
-                          renderSlot(
-                            stepsSlots,
-                            'finish-icon',
-                            undefined,
-                            () => [<FinishedIcon />]
+                          stepsSlots['finish-icon'] ? (
+                            stepsSlots['finish-icon']()
+                          ) : (
+                            <FinishedIcon />
                           )
                       }}
                     </NBaseIcon>
@@ -151,11 +149,10 @@ export default defineComponent({
                     <NBaseIcon clsPrefix={mergedClsPrefix} key="error">
                       {{
                         default: () =>
-                          renderSlot(
-                            stepsSlots,
-                            'error-icon',
-                            undefined,
-                            () => [<ErrorIcon />]
+                          stepsSlots['error-icon'] ? (
+                            stepsSlots['error-icon']()
+                          ) : (
+                            <ErrorIcon />
                           )
                       }}
                     </NBaseIcon>
@@ -171,7 +168,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-step-content`}>
           <div class={`${mergedClsPrefix}-step-content-header`}>
             <div class={`${mergedClsPrefix}-step-content-header__title`}>
-              {renderSlot(this.$slots, 'title', undefined, () => [this.title])}
+              {this.$slots.title ? this.$slots.title() : this.title}
             </div>
             {!this.vertical ? (
               <div class={`${mergedClsPrefix}-step-splitor`} />
@@ -179,9 +176,7 @@ export default defineComponent({
           </div>
           {showDescription ? (
             <div class={`${mergedClsPrefix}-step-content__description`}>
-              {renderSlot(this.$slots, 'default', undefined, () => [
-                this.description
-              ])}
+              {this.$slots.default ? this.$slots.default() : this.description}
             </div>
           ) : null}
         </div>

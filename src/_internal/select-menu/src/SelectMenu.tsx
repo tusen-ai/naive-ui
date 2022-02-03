@@ -5,12 +5,11 @@ import {
   computed,
   defineComponent,
   PropType,
-  watch,
   toRef,
-  renderSlot,
   provide,
   nextTick,
-  watchEffect
+  watch,
+  WatchStopHandle
 } from 'vue'
 import { TreeNode, createIndexGetter } from 'treemate'
 import { VirtualList, VirtualListInst } from 'vueuc'
@@ -25,16 +24,15 @@ import type {
   Value,
   SelectTreeMate
 } from '../../../select/src/interface'
-import { formatLength } from '../../../_utils'
+import { formatLength, resolveSlot, resolveWrappedSlot } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
 import { useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import NInternalLoading from '../../loading'
 import NFocusDetector from '../../focus-detector'
+import { internalSelectMenuLight, InternalSelectMenuTheme } from '../styles'
 import NSelectOption from './SelectOption'
 import NSelectGroupHeader from './SelectGroupHeader'
-import style from './styles/index.cssr'
-import { internalSelectMenuLight, InternalSelectMenuTheme } from '../styles'
 import type {
   RenderLabel,
   Size,
@@ -45,6 +43,7 @@ import {
   internalSelectionMenuInjectionKey,
   internalSelectionMenuBodyInjectionKey
 } from './interface'
+import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'InternalSelectMenu',
@@ -95,13 +94,17 @@ export default defineComponent({
     onTabOut: Function as PropType<() => void>,
     onMouseenter: Function as PropType<(e: MouseEvent) => void>,
     onMouseleave: Function as PropType<(e: MouseEvent) => void>,
+    resetMenuOnOptionsChange: {
+      type: Boolean,
+      default: true
+    },
     // deprecated
     onToggle: Function as PropType<(tmNode: TreeNode<SelectBaseOption>) => void>
   },
   setup (props) {
     const themeRef = useTheme(
       'InternalSelectMenu',
-      'InternalSelectMenu',
+      '-internal-select-menu',
       style,
       internalSelectMenuLight,
       props,
@@ -133,15 +136,32 @@ export default defineComponent({
           : null
       )
     }
-    initPendingNode()
-    onMounted(() => {
-      watchEffect(() => {
-        if (props.show) {
-          initPendingNode()
-          void nextTick(scrollToPendingNode)
+
+    let initPendingNodeWatchStopHandle: WatchStopHandle | undefined
+    watch(
+      toRef(props, 'show'),
+      (value) => {
+        if (value) {
+          initPendingNodeWatchStopHandle = watch(
+            props.resetMenuOnOptionsChange
+              ? [toRef(props, 'treeMate'), toRef(props, 'multiple')]
+              : [toRef(props, 'multiple')],
+            () => {
+              initPendingNode()
+              void nextTick(scrollToPendingNode)
+            },
+            {
+              immediate: true
+            }
+          )
+        } else {
+          initPendingNodeWatchStopHandle?.()
         }
-      })
-    })
+      },
+      {
+        immediate: true
+      }
+    )
     const itemSizeRef = computed(() => {
       return depx(themeRef.value.self[createKey('optionHeight', props.size)])
     })
@@ -160,14 +180,6 @@ export default defineComponent({
     })
     const styleRef = computed(() => {
       return [{ width: formatLength(props.width) }, cssVarsRef.value]
-    })
-    watch(toRef(props, 'treeMate'), () => {
-      if (props.autoPending) {
-        const tmNode = props.treeMate.getFirstAvailableNode()
-        setPendingTmNode(tmNode)
-      } else {
-        setPendingTmNode(null)
-      }
     })
     function doToggle (tmNode: TreeNode<SelectBaseOption>): void {
       const { onToggle } = props
@@ -472,7 +484,7 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div class={`${clsPrefix}-base-select-menu__empty`}>
-            {renderSlot($slots, 'empty', undefined, () => [
+            {resolveSlot($slots.empty, () => [
               <NEmpty
                 theme={mergedTheme.peers.Empty}
                 themeOverrides={mergedTheme.peerOverrides.Empty}
@@ -480,12 +492,16 @@ export default defineComponent({
             ])}
           </div>
         )}
-        {$slots.action && (
-          <div class={`${clsPrefix}-base-select-menu__action`} data-action>
-            {renderSlot($slots, 'action')}
-          </div>
-        )}
-        {$slots.action && <NFocusDetector onFocus={this.onTabOut} />}
+        {resolveWrappedSlot($slots.action, (children) => [
+          <div
+            class={`${clsPrefix}-base-select-menu__action`}
+            data-action
+            key="action"
+          >
+            {children}
+          </div>,
+          <NFocusDetector onFocus={this.onTabOut} key="focus-detector" />
+        ])}
       </div>
     )
   }

@@ -17,10 +17,10 @@
 <script lang="ts">
 import { defineComponent, ref, h } from 'vue'
 import { repeat } from 'seemly'
-import { NIcon } from 'naive-ui'
+import { NIcon, TreeOption } from 'naive-ui'
 import { ChevronForward } from '@vicons/ionicons5'
 
-function createData (level = 4, baseKey = '') {
+function createData (level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level) return undefined
   return repeat(6 - level, undefined).map((_, index) => {
     const key = '' + baseKey + level + index
@@ -32,11 +32,12 @@ function createData (level = 4, baseKey = '') {
   })
 }
 
-function createLabel (level) {
+function createLabel (level: number): string {
   if (level === 4) return '道生一'
   if (level === 3) return '一生二'
   if (level === 2) return '二生三'
   if (level === 1) return '三生万物'
+  return ''
 }
 
 export default defineComponent({

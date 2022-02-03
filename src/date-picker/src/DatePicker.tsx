@@ -12,12 +12,11 @@ import {
   CSSProperties,
   toRef,
   Ref,
-  watchEffect,
-  nextTick
+  watchEffect
 } from 'vue'
 import { VBinder, VTarget, VFollower, FollowerPlacement } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { format, getTime, isValid, getYear, getMonth } from 'date-fns'
+import { format, getTime, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
 import { happensIn } from 'seemly'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
@@ -36,7 +35,7 @@ import {
   uniCalendarValidation,
   dualCalendarValidation
 } from './validation-utils'
-import { MONTH_ITEM_HEIGHT, START_YEAR, DatePickerType } from './config'
+import { DatePickerType } from './config'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -49,7 +48,8 @@ import type {
   DefaultTime,
   FormattedValue,
   OnUpdateFormattedValue,
-  OnUpdateFormattedValueImpl
+  OnUpdateFormattedValueImpl,
+  DatePickerInst
 } from './interface'
 import { datePickerInjectionKey } from './interface'
 import DatetimePanel from './panel/datetime'
@@ -145,7 +145,7 @@ export default defineComponent({
     }
     const { localeRef, dateLocaleRef } = useLocale('DatePicker')
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const {
       NConfigProvider,
       mergedClsPrefixRef,
@@ -242,7 +242,7 @@ export default defineComponent({
     const rangeEndInputValueRef = ref('')
     const themeRef = useTheme(
       'DatePicker',
-      'DatePicker',
+      '-date-picker',
       style,
       datePickerLight,
       props,
@@ -458,29 +458,6 @@ export default defineComponent({
         disableUpdateOnClose
       })
     }
-    function scrollPickerColumns (value?: number): void {
-      if (!panelInstRef.value) return
-      const { monthScrollRef, yearScrollRef } = panelInstRef.value
-      const { value: mergedValue } = mergedValueRef
-      if (monthScrollRef) {
-        const monthIndex =
-          value === undefined
-            ? mergedValue === null
-              ? getMonth(Date.now())
-              : getMonth(mergedValue as number)
-            : getMonth(value)
-        monthScrollRef.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
-      }
-      if (yearScrollRef) {
-        const yearIndex =
-          (value === undefined
-            ? mergedValue === null
-              ? getYear(Date.now())
-              : getYear(mergedValue as number)
-            : getYear(value)) - START_YEAR
-        yearScrollRef.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
-      }
-    }
 
     // --- Panel update value
     function handlePanelUpdateValue (
@@ -623,10 +600,6 @@ export default defineComponent({
     function openCalendar (): void {
       if (mergedDisabledRef.value || mergedShowRef.value) return
       doUpdateShow(true)
-      const { type } = props
-      if (type === 'month' || type === 'year' || type === 'quarter') {
-        void nextTick(scrollPickerColumns)
-      }
     }
     function closeCalendar ({
       returnFocus,
@@ -671,7 +644,6 @@ export default defineComponent({
     const uniVaidation = uniCalendarValidation(props, pendingValueRef)
     const dualValidation = dualCalendarValidation(props, pendingValueRef)
     provide(datePickerInjectionKey, {
-      scrollPickerColumns,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
       timePickerSizeRef,
@@ -686,7 +658,18 @@ export default defineComponent({
       ...dualValidation,
       datePickerSlots: slots
     })
+
+    const exposedMethods: DatePickerInst = {
+      focus: () => {
+        inputInstRef.value?.focus()
+      },
+      blur: () => {
+        inputInstRef.value?.blur()
+      }
+    }
     return {
+      ...exposedMethods,
+      mergedStatus: mergedStatusRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       namespace: namespaceRef,
@@ -781,6 +764,7 @@ export default defineComponent({
             iconColor,
             iconColorDisabled,
             scrollItemBorderRadius,
+            calendarTitleColorHover,
             [createKey('calendarLeftPadding', type)]: calendarLeftPadding,
             [createKey('calendarRightPadding', type)]: calendarRightPadding
           }
@@ -800,6 +784,7 @@ export default defineComponent({
           // panel calendar
           '--n-calendar-left-padding': calendarLeftPadding,
           '--n-calendar-right-padding': calendarRightPadding,
+          '--n-calendar-title-color-hover': calendarTitleColorHover,
           '--n-calendar-title-height': calendarTitleHeight,
           '--n-calendar-title-padding': calendarTitlePadding,
           '--n-calendar-title-font-size': calendarTitleFontSize,
@@ -899,6 +884,7 @@ export default defineComponent({
                     this.isRange ? (
                       <NInput
                         ref="inputInstRef"
+                        status={this.mergedStatus}
                         value={[this.displayStartTime, this.displayEndTime]}
                         placeholder={[
                           this.localizedStartPlaceholder,
@@ -941,6 +927,7 @@ export default defineComponent({
                     ) : (
                       <NInput
                         ref="inputInstRef"
+                        status={this.mergedStatus}
                         value={this.displayTime}
                         placeholder={this.localizedPlacehoder}
                         textDecoration={
@@ -974,7 +961,7 @@ export default defineComponent({
                 containerClass={this.namespace}
                 to={this.adjustedTo}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                placement="bottom-start"
+                placement={this.placement}
               >
                 {{
                   default: () => (

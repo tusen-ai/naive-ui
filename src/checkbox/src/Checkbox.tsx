@@ -5,13 +5,13 @@ import {
   inject,
   ref,
   toRef,
-  renderSlot,
   PropType,
   CSSProperties,
   watchEffect
 } from 'vue'
 import { useMergedState, useMemo } from 'vooks'
 import { createId } from 'seemly'
+import { on } from 'evtd'
 import { useConfig, useFormItem, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NIconSwitchTransition } from '../../_internal'
@@ -27,9 +27,12 @@ import type { CheckboxTheme } from '../styles'
 import CheckMark from './CheckMark'
 import LineMark from './LineMark'
 import { checkboxGroupInjectionKey } from './CheckboxGroup'
-import type { OnUpdateChecked, OnUpdateCheckedImpl } from './interface'
+import type {
+  OnUpdateChecked,
+  OnUpdateCheckedImpl,
+  CheckboxInst
+} from './interface'
 import style from './styles/index.cssr'
-import { on } from 'evtd'
 
 const checkboxProps = {
   ...(useTheme.props as ThemeProps<CheckboxTheme>),
@@ -89,6 +92,7 @@ export default defineComponent({
         }
       })
     }
+    const selfRef = ref<HTMLDivElement | null>(null)
     const { mergedClsPrefixRef } = useConfig(props)
     const formItem = useFormItem(props, {
       mergedSize (NFormItem) {
@@ -160,7 +164,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'Checkbox',
-      'Checkbox',
+      '-checkbox',
       style,
       checkboxLight,
       props,
@@ -211,7 +215,16 @@ export default defineComponent({
           e.preventDefault()
       }
     }
-    return Object.assign(formItem, {
+    const exposedMethods: CheckboxInst = {
+      focus: () => {
+        selfRef.value?.focus()
+      },
+      blur: () => {
+        selfRef.value?.blur()
+      }
+    }
+    return Object.assign(formItem, exposedMethods, {
+      selfRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedDisabled: mergedDisabledRef,
       renderedChecked: renderedCheckedRef,
@@ -296,6 +309,7 @@ export default defineComponent({
     } = this
     return (
       <div
+        ref="selfRef"
         class={[
           `${mergedClsPrefix}-checkbox`,
           renderedChecked && `${mergedClsPrefix}-checkbox--checked`,
@@ -346,7 +360,7 @@ export default defineComponent({
         </div>
         {label !== null || $slots.default ? (
           <span class={`${mergedClsPrefix}-checkbox__label`} id={labelId}>
-            {renderSlot($slots, 'default', undefined, () => [label])}
+            {$slots.default ? $slots.default() : label}
           </span>
         ) : null}
       </div>

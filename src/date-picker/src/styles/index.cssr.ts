@@ -19,6 +19,7 @@ import fadeInScaleUpTransition from '../../../_styles/transitions/fade-in-scale-
 // panel calendar
 // --n-calendar-left-padding
 // --n-calendar-right-padding
+// --n-calendar-title-color-hover
 // --n-calendar-title-height
 // --n-calendar-title-padding
 // --n-calendar-title-font-size
@@ -243,13 +244,29 @@ export default c([
         color: var(--n-arrow-color);
       `),
       cE('month-year', `
-        font-size: var(--n-calendar-title-font-size);
-        font-weight: var(--n-calendar-title-font-weight);
-        line-height: 17px;
+        user-select: none;
         flex-grow: 1;
-        text-align: center;
-        color: var(--n-calendar-title-text-color);
-      `)
+        position: relative;
+      `, [
+        cE('text', `
+          font-size: var(--n-calendar-title-font-size);
+          line-height: var(--n-calendar-title-font-size);
+          font-weight: var(--n-calendar-title-font-weight);
+          padding: 6px 8px;
+          text-align: center;
+          color: var(--n-calendar-title-text-color);
+          cursor: pointer;
+          transition: background-color .3s var(--n-bezier);
+          border-radius: var(--n-panel-border-radius);
+        `, [
+          cM('active', `
+            background-color: var(--n-calendar-title-color-hover);
+          `),
+          c('&:hover', `
+            background-color: var(--n-calendar-title-color-hover);
+          `)
+        ])
+      ])
     ]),
     cB('date-panel-weekdays', `
       display: grid;
@@ -262,6 +279,7 @@ export default c([
       border-bottom: 1px solid var(--n-calendar-days-divider-color);
     `, [
       cE('day', `
+        user-select: none;
         line-height: 15px;
         width: var(--n-item-size);
         text-align: center;
@@ -279,6 +297,7 @@ export default c([
       flex-wrap: wrap;
     `, [
       cB('date-panel-date', `
+        user-select: none;
         position: relative;
         width: var(--n-item-size);
         height: var(--n-item-size);

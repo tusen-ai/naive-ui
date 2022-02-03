@@ -9,10 +9,10 @@ In the beginning, it was created for entering environment variables.
 ## Demos
 
 ```demo
-basic
-pair
-custom
-form
+basic.vue
+pair.vue
+custom.vue
+form.vue
 move
 ```
 

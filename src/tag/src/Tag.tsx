@@ -5,7 +5,6 @@ import {
   PropType,
   CSSProperties,
   ref,
-  InjectionKey,
   Ref,
   provide,
   toRef
@@ -13,7 +12,7 @@ import {
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_internal'
-import { warn, createKey, call } from '../../_utils'
+import { warn, createKey, call, createInjectionKey } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { tagLight } from '../styles'
 import type { TagTheme } from '../styles'
@@ -64,7 +63,7 @@ interface TagInjection {
   roundRef: Ref<boolean>
 }
 
-export const tagInjectionKey: InjectionKey<TagInjection> = Symbol('tag')
+export const tagInjectionKey = createInjectionKey<TagInjection>('n-tag')
 
 export type TagProps = ExtractPublicPropTypes<typeof tagProps>
 
@@ -77,7 +76,7 @@ export default defineComponent({
       useConfig(props)
     const themeRef = useTheme(
       'Tag',
-      'Tag',
+      '-tag',
       style,
       tagLight,
       props,

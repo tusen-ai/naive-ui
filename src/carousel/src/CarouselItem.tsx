@@ -1,7 +1,6 @@
 import {
   h,
   defineComponent,
-  renderSlot,
   inject,
   computed,
   ref,
@@ -85,9 +84,9 @@ export default defineComponent({
     ]
     return (
       <div
-        ref='selfElRef'
+        ref="selfElRef"
         class={className}
-        role='option'
+        role="option"
         tabindex="-1"
         data-index={index}
         aria-hidden={!isActive}
@@ -95,7 +94,7 @@ export default defineComponent({
         // @ts-expect-error
         onClickCapture={this.handleClick}
       >
-        {renderSlot(slots, 'default', {
+        {slots.default?.({
           isPrev,
           isNext,
           isActive,

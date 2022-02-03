@@ -1,5 +1,6 @@
-import { InjectionKey, Ref } from 'vue'
+import { Ref } from 'vue'
 import type { MergedTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
 import type { DynamicInputTheme } from '../styles'
 
 export interface DynamicInputInjection {
@@ -9,8 +10,7 @@ export interface DynamicInputInjection {
   placeholderRef: Ref<string | undefined>
 }
 
-export const dynamicInputInjectionKey: InjectionKey<DynamicInputInjection> = Symbol(
-  'dynamic-input'
-)
+export const dynamicInputInjectionKey =
+  createInjectionKey<DynamicInputInjection>('n-dynamic-input')
 
 export type OnUpdateValue = <T>(value: T[]) => void

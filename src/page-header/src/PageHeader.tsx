@@ -27,7 +27,7 @@ export default defineComponent({
     const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
     const themeRef = useTheme(
       'PageHeader',
-      'PageHeader',
+      '-page-header',
       style,
       pageHeaderLight,
       props,
@@ -82,7 +82,8 @@ export default defineComponent({
       default: defaultSlot,
       header: headerSlot,
       avatar: avatarSlot,
-      footer: footerSlot
+      footer: footerSlot,
+      back: backSlot
     } = $slots
     const showBack = onBack
     const showTitle = title || titleSlot
@@ -109,11 +110,15 @@ export default defineComponent({
                   class={`${mergedClsPrefix}-page-header__back`}
                   onClick={onBack}
                 >
-                  <NBaseIcon clsPrefix={mergedClsPrefix}>
-                    {{
-                      default: () => <ArrowBackIcon />
-                    }}
-                  </NBaseIcon>
+                  {backSlot ? (
+                    backSlot()
+                  ) : (
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
+                      {{
+                        default: () => <ArrowBackIcon />
+                      }}
+                    </NBaseIcon>
+                  )}
                 </div>
               ) : null}
               {avatarSlot ? (

@@ -42,19 +42,20 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 
 欢迎提交 PR 来支持尚未支持的语言。
 
-| 语言              | 配置 | 日期配置 |
-| ----------------- | ---- | -------- |
-| 英语              | enUS | dateEnUS |
-| 日语              | jaJP | dateJaJP |
-| 俄罗斯语          | ruRU | dateRuRU |
-| 乌克兰语          | ukUA | dateUkUA |
-| 简体中文          | zhCN | dateZhCN |
-| 繁体中文          | zhTW | dateZhTW |
-| 印度尼西亚        | idID | dateIdID |
-| 德语              | deDE | dateDeDe |
-| 书面挪威语        | nbNO | dateNbNO |
-| 法语              | frFR | dateFrFR |
-| 西班牙语（阿根廷) | esAR | dateEsAR |
+| 语言              | 配置 | 日期配置 | 版本   |
+| ----------------- | ---- | -------- | ------ |
+| 英语              | enUS | dateEnUS |        |
+| 日语              | jaJP | dateJaJP |        |
+| 俄罗斯语          | ruRU | dateRuRU |        |
+| 乌克兰语          | ukUA | dateUkUA |        |
+| 简体中文          | zhCN | dateZhCN |        |
+| 繁体中文          | zhTW | dateZhTW |        |
+| 印度尼西亚        | idID | dateIdID |        |
+| 德语              | deDE | dateDeDe |        |
+| 书面挪威语        | nbNO | dateNbNO |        |
+| 法语              | frFR | dateFrFR |        |
+| 西班牙语（阿根廷) | esAR | dateEsAR | 2.24.2 |
+| 意大利语          | itIT | dateItIT | 2.24.2 |
 
 ## 在现有国际化基础上调整
 

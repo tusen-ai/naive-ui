@@ -1,11 +1,4 @@
-import {
-  h,
-  renderSlot,
-  defineComponent,
-  computed,
-  PropType,
-  CSSProperties
-} from 'vue'
+import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { useCompitable } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -50,7 +43,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
-      'Text',
+      '-text',
       style,
       typographyLight,
       props,
@@ -102,20 +95,20 @@ export default defineComponent({
         [`${mergedClsPrefix}-text--underline`]: this.underline
       }
     ]
-    const defaultSlot = renderSlot(this.$slots, 'default')
+    const children = this.$slots.default?.()
     return this.code ? (
       <code class={textClass} style={this.cssVars as CSSProperties}>
-        {this.delete ? <del>{defaultSlot}</del> : defaultSlot}
+        {this.delete ? <del>{children}</del> : children}
       </code>
     ) : this.delete ? (
       <del class={textClass} style={this.cssVars as CSSProperties}>
-        {defaultSlot}
+        {children}
       </del>
     ) : (
       h(
         this.compitableTag || 'span',
         { class: textClass, style: this.cssVars },
-        defaultSlot
+        children
       )
     )
   }

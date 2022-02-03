@@ -6,18 +6,18 @@ import {
   provide,
   computed,
   VNode,
-  VNodeChild,
-  InjectionKey
+  VNodeChild
 } from 'vue'
 import { useMemo } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
 import { NDropdown } from '../../dropdown'
 import NMenuOptionContent from './MenuOptionContent'
+// eslint-disable-next-line import/no-cycle
 import { itemRenderer } from './utils'
-import { useMenuChild, useMenuChildProps } from './use-menu-child'
-import type { SubmenuInjection } from './use-menu-child'
+import { useMenuChild } from './use-menu-child'
+import { useMenuChildProps } from './use-menu-child-props'
 import { MenuMixedOption, TmNode } from './interface'
-import { menuItemGroupInjectionKey } from './MenuOptionGroup'
+import { menuItemGroupInjectionKey, submenuInjectionKey } from './context'
 
 export const submenuProps = {
   ...useMenuChildProps,
@@ -41,10 +41,7 @@ export const submenuProps = {
   onClick: Function as PropType<() => void>
 } as const
 
-export const submenuInjectionKey: InjectionKey<SubmenuInjection> =
-  Symbol('submenu')
-
-export default defineComponent({
+export const NSubmenu = defineComponent({
   name: 'Submenu',
   props: submenuProps,
   setup (props) {

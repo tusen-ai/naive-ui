@@ -780,10 +780,11 @@ export default defineComponent({
     }
     const themeRef = useTheme(
       'Carousel',
-      'Carousel',
+      '-carousel',
       style,
       carouselLight,
-      props
+      props,
+      mergedClsPrefixRef
     )
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -880,6 +881,9 @@ export default defineComponent({
         ref="selfElRef"
         class={[
           `${mergedClsPrefix}-carousel`,
+          this.direction === 'vertical' &&
+            `${mergedClsPrefix}-carousel--vertical`,
+          this.showArrow && `${mergedClsPrefix}-carousel--show-arrow`,
           `${mergedClsPrefix}-carousel--${dotPlacement}`,
           `${mergedClsPrefix}-carousel--${this.direction}`,
           `${mergedClsPrefix}-carousel--${this.effect}`,

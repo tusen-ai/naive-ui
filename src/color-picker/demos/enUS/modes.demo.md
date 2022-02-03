@@ -1,4 +1,4 @@
-# Set Mode
+# Set mode
 
 Use `modes` to set restrict the available modes.
 

@@ -12,11 +12,11 @@ import {
   watchEffect
 } from 'vue'
 import { createId } from 'seemly'
-import { PaginationProps } from '../../pagination/src/Pagination'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseLoading } from '../../_internal'
 import { NPagination } from '../../pagination'
+import type { PaginationProps } from '../../pagination'
 import { createKey, warnOnce } from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { dataTableLight } from '../styles'
@@ -215,7 +215,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'DataTable',
-      'DataTable',
+      '-data-table',
       style,
       dataTableLight,
       props,

@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, computed } from 'vue'
+import { h, defineComponent, inject, computed, mergeProps } from 'vue'
 import { AddIcon } from '../../_internal/icons'
 import { NBaseClose, NBaseIcon } from '../../_internal'
 import { render, omit } from '../../_utils'
@@ -9,6 +9,7 @@ import { tabPaneProps } from './TabPane'
 const typeProps = {
   internalLeftPadded: Boolean,
   internalAddable: Boolean,
+  internalCreatedByPane: Boolean,
   ...omit(tabPaneProps, ['displayDirective'])
 } as const
 
@@ -16,6 +17,7 @@ export type TabProps = ExtractPublicPropTypes<typeof typeProps>
 
 export default defineComponent({
   __TAB__: true,
+  inheritAttrs: false,
   name: 'Tab',
   props: typeProps,
   setup (props) {
@@ -96,15 +98,22 @@ export default defineComponent({
           key={name}
           data-name={name}
           data-disabled={disabled ? true : undefined}
-          class={[
-            `${clsPrefix}-tabs-tab`,
-            value === name && `${clsPrefix}-tabs-tab--active`,
-            disabled && `${clsPrefix}-tabs-tab--disabled`,
-            mergedClosable && `${clsPrefix}-tabs-tab--closable`,
-            internalAddable && `${clsPrefix}-tabs-tab--addable`
-          ]}
-          onClick={this.handleClick}
-          style={internalAddable ? undefined : style}
+          {...mergeProps(
+            {
+              class: [
+                `${clsPrefix}-tabs-tab`,
+                value === name && `${clsPrefix}-tabs-tab--active`,
+                disabled && `${clsPrefix}-tabs-tab--disabled`,
+                mergedClosable && `${clsPrefix}-tabs-tab--closable`,
+                internalAddable && `${clsPrefix}-tabs-tab--addable`
+              ],
+              onClick: this.handleClick,
+              style: internalAddable ? undefined : style
+            },
+            this.internalCreatedByPane
+              ? ((this.tabProps || {}) as any)
+              : this.$attrs
+          )}
         >
           <span class={`${clsPrefix}-tabs-tab__label`}>
             {internalAddable ? (

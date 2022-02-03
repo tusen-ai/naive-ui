@@ -1,6 +1,6 @@
 import { inject, computed, ComputedRef, Ref, watchEffect } from 'vue'
 import type { HLJSApi } from 'highlight.js'
-import { configProviderInjectionKey } from '../config-provider/src/ConfigProvider'
+import { configProviderInjectionKey } from '../config-provider/src/context'
 import { warn } from '../_utils'
 
 interface UseHljsProps {

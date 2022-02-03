@@ -2,6 +2,7 @@ import { defineComponent, computed, onMounted, ref, watchEffect } from 'vue'
 import { round } from 'lodash-es'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { tween } from './utils'
+import { useLocale } from '../../_mixins'
 
 const numberAnimationProps = {
   to: {
@@ -13,6 +14,7 @@ const numberAnimationProps = {
     default: 0
   },
   showSeparator: Boolean,
+  locale: String,
   from: { type: Number, default: 0 },
   active: {
     type: Boolean,
@@ -36,8 +38,14 @@ export default defineComponent({
   name: 'NumberAnimation',
   props: numberAnimationProps,
   setup (props) {
+    const { localeRef } = useLocale('name')
     const { duration } = props
     const displayedValueRef = ref(props.from)
+    const mergedLocaleRef = computed(() => {
+      const { locale } = props
+      if (locale !== undefined) return locale
+      return localeRef.value
+    })
     let animating = false
     const onUpdate = (currentValue: number): void => {
       displayedValueRef.value = currentValue
@@ -68,13 +76,18 @@ export default defineComponent({
         props.precision
       ).toFixed(props.precision)
       const splitValue = formatted.split('.')
+      const numberFormatter = new Intl.NumberFormat(mergedLocaleRef.value)
+      const decimalSeparator = numberFormatter
+        .formatToParts(0.5)
+        .find((part) => part.type === 'decimal')?.value
       const integer = props.showSeparator
-        ? Number(splitValue[0]).toLocaleString('en-US')
+        ? numberFormatter.format(Number(splitValue[0]))
         : splitValue[0]
       const decimal = splitValue[1]
       return {
         integer,
-        decimal
+        decimal,
+        decimalSeparator
       }
     })
     function play (): void {
@@ -94,8 +107,8 @@ export default defineComponent({
   },
   render () {
     const {
-      formattedValue: { integer, decimal }
+      formattedValue: { integer, decimal, decimalSeparator }
     } = this
-    return [integer, decimal ? '.' : null, decimal]
+    return [integer, decimal ? decimalSeparator : null, decimal]
   }
 })

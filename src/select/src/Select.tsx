@@ -48,6 +48,7 @@ import {
   defaultFilter
 } from './utils'
 import type {
+  SelectInst,
   SelectMixedOption,
   SelectBaseOption,
   SelectGroupOption,
@@ -170,6 +171,10 @@ const selectProps = {
     type: String as PropType<'if' | 'show'>,
     default: 'show'
   },
+  resetMenuOnOptionsChange: {
+    type: Boolean,
+    default: true
+  },
   /** deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   items: Array as PropType<SelectMixedOption[]>
@@ -202,7 +207,7 @@ export default defineComponent({
       useConfig(props)
     const themeRef = useTheme(
       'Select',
-      'Select',
+      '-select',
       style,
       selectLight,
       props,
@@ -311,7 +316,7 @@ export default defineComponent({
     })
 
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef } = formItem
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     function doUpdateValue (
       value: string | number | Array<string | number> | null,
       option: SelectBaseOption | null | SelectBaseOption[]
@@ -641,7 +646,17 @@ export default defineComponent({
       if (!mergedShowRef.value) return
       void nextTick(syncPosition)
     })
+    const exposedMethods: SelectInst = {
+      focus: () => {
+        triggerRef.value?.focus()
+      },
+      blur: () => {
+        triggerRef.value?.blur()
+      }
+    }
     return {
+      ...exposedMethods,
+      mergedStatus: mergedStatusRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       namespace: namespaceRef,
@@ -693,9 +708,8 @@ export default defineComponent({
     }
   },
   render () {
-    const { $slots, mergedClsPrefix } = this
     return (
-      <div class={`${mergedClsPrefix}-select`}>
+      <div class={`${this.mergedClsPrefix}-select`}>
         <VBinder>
           {{
             default: () => [
@@ -704,8 +718,9 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerRef"
+                      status={this.mergedStatus}
                       inputProps={this.inputProps}
-                      clsPrefix={mergedClsPrefix}
+                      clsPrefix={this.mergedClsPrefix}
                       showArrow={this.showArrow}
                       maxTagCount={this.maxTagCount}
                       bordered={this.mergedBordered}
@@ -735,7 +750,11 @@ export default defineComponent({
                       onFocus={this.handleTriggerFocus}
                       onKeydown={this.handleKeyDown}
                       onKeyup={this.handleKeyUp}
-                    />
+                    >
+                      {{
+                        arrow: () => [this.$slots.arrow?.()]
+                      }}
+                    </NInternalSelection>
                   )
                 }}
               </VTarget>,
@@ -768,10 +787,10 @@ export default defineComponent({
                                 this.consistentMenuWidth && this.virtualScroll
                               }
                               class={[
-                                `${mergedClsPrefix}-select-menu`,
+                                `${this.mergedClsPrefix}-select-menu`,
                                 this.menuProps?.class
                               ]}
-                              clsPrefix={mergedClsPrefix}
+                              clsPrefix={this.mergedClsPrefix}
                               focusable
                               autoPending={true}
                               theme={this.mergedTheme.peers.InternalSelectMenu}
@@ -795,8 +814,14 @@ export default defineComponent({
                               onTabOut={this.handleMenuTabOut}
                               onMousedown={this.handleMenuMousedown}
                               show={this.mergedShow}
+                              resetMenuOnOptionsChange={
+                                this.resetMenuOnOptionsChange
+                              }
                             >
-                              {$slots}
+                              {{
+                                empty: () => [this.$slots.empty?.()],
+                                action: () => [this.$slots.action?.()]
+                              }}
                             </NInternalSelectMenu>,
                             this.displayDirective === 'show'
                               ? [

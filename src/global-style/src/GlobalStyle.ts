@@ -7,7 +7,7 @@ import {
 } from 'vue'
 import { warn } from '../../_utils'
 import { commonLight } from '../../_styles/common'
-import { configProviderInjectionKey } from '../../config-provider/src/ConfigProvider'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { merge } from 'lodash-es'
 
 export default defineComponent({

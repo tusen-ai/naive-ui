@@ -15,6 +15,7 @@ virtual
 check-strategy
 custom-field
 custom-render.vue
+focus.vue
 ```
 
 ## API
@@ -38,6 +39,7 @@ custom-render.vue
 | multiple | `boolean` | `false` | 是否支持多选 |  |
 | options | `CascaderOption[]` | `[]` | 填充的 options 数据 |  |
 | placeholder | `string` | `'请选择'` | 提示信息 |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 弹出位置 | NEXT_VERSION |
 | remote | `boolean` | `false` | 是否远程获取数据 |  |
 | render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Cascader 菜单选项标签渲染函数 | 2.24.0 |
 | separator | `string` | `' / '` | 数据分隔符 |  |
@@ -67,3 +69,10 @@ custom-render.vue
 | ------ | ---- | -------------------------------- | ------ |
 | action | `()` | 级联菜单中显示的 action 填充内容 |        |
 | empty  | `()` | 级联菜单无数据时的 slot          | 2.22.0 |
+
+### Cascader Methods
+
+| 名称  | 类型         | 说明 | 版本   |
+| ----- | ------------ | ---- | ------ |
+| focus | `() => void` | 聚焦 | 2.24.2 |
+| blur  | `() => void` | 失焦 | 2.24.2 |

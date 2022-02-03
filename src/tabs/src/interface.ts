@@ -1,4 +1,5 @@
-import { Ref, InjectionKey, CSSProperties } from 'vue'
+import { Ref, CSSProperties } from 'vue'
+import { createInjectionKey } from '../../_utils'
 
 export type TabsType = 'line' | 'card' | 'bar' | 'segment'
 
@@ -38,7 +39,7 @@ export type Addable =
     disabled?: boolean
   }
 
-export const tabsInjectionKey: InjectionKey<TabsInjection> = Symbol('tabs')
+export const tabsInjectionKey = createInjectionKey<TabsInjection>('n-tabs')
 
 export interface TabsInst {
   syncBarPosition: () => void

@@ -14,11 +14,9 @@ export default cB('log', `
   box-sizing: border-box;
   transition: border-color .3s var(--n-bezier);
 `, [
-  cE('lines', `
-    margin: 0;
-    white-space: pre-wrap;
-  `),
   c('pre', `
+    white-space: pre-wrap;
+    word-break: break-word;
     margin: 0;
   `),
   cB('log-loader', `

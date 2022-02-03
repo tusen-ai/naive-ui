@@ -11,7 +11,7 @@ import {
   omit,
   render,
   smallerSize
-} from '..'
+} from '../index'
 
 describe('color', () => {
   it('should work with createHoverColor', () => {

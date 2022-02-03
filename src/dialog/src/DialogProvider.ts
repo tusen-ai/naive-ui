@@ -7,15 +7,15 @@ import {
   provide,
   PropType,
   reactive,
-  InjectionKey,
   Ref,
   CSSProperties
 } from 'vue'
 import { createId } from 'seemly'
+import { useClicked, useClickPosition } from 'vooks'
 import { omit } from '../../_utils'
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
-import DialogEnvironment, { exposedDialogEnvProps } from './DialogEnvironment'
-import { useClicked, useClickPosition } from 'vooks'
+import { NDialogEnvironment, exposedDialogEnvProps } from './DialogEnvironment'
+import { dialogApiInjectionKey, dialogProviderInjectionKey } from './context'
 
 export type DialogOptions = Mutable<
 Omit<
@@ -47,16 +47,10 @@ export interface DialogApiInjection {
   info: (options: DialogOptions) => DialogReactive
 }
 
-export const dialogApiInjectionKey: InjectionKey<DialogApiInjection> =
-  Symbol('dialogApi')
-
 export interface DialogProviderInjection {
   clickedRef: Ref<boolean>
   clickPositionRef: Ref<{ x: number, y: number } | null>
 }
-
-export const dialogProviderInjectionKey: InjectionKey<DialogProviderInjection> =
-  Symbol('dialogProvider')
 
 interface DialogInst {
   hide: () => void
@@ -73,7 +67,7 @@ export type DialogProviderProps = ExtractPublicPropTypes<
   typeof dialogProviderProps
 >
 
-export default defineComponent({
+export const NDialogProvider = defineComponent({
   name: 'DialogProvider',
   props: dialogProviderProps,
   setup () {
@@ -137,7 +131,7 @@ export default defineComponent({
     return h(Fragment, null, [
       this.dialogList.map((dialog) =>
         h(
-          DialogEnvironment,
+          NDialogEnvironment,
           omit(dialog, ['destroy', 'style'], {
             internalStyle: dialog.style,
             to: this.to,

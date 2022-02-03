@@ -5,7 +5,6 @@ import {
   ref,
   PropType,
   defineComponent,
-  renderSlot,
   Transition,
   CSSProperties
 } from 'vue'
@@ -56,7 +55,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Badge',
-      'Badge',
+      '-badge',
       style,
       badgeLight,
       props,
@@ -103,19 +102,19 @@ export default defineComponent({
     }
   },
   render () {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, $slots } = this
     return (
       <div
         class={[
           `${mergedClsPrefix}-badge`,
           {
             [`${mergedClsPrefix}-badge--dot`]: this.dot,
-            [`${mergedClsPrefix}-badge--as-is`]: !this.$slots.default
+            [`${mergedClsPrefix}-badge--as-is`]: !$slots.default
           }
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {renderSlot(this.$slots, 'default')}
+        {$slots.default?.()}
         <Transition
           name="fade-in-scale-up-transition"
           onAfterEnter={this.handleAfterEnter}

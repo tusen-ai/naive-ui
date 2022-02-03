@@ -1,7 +1,7 @@
 import { inject, computed, ref, ComputedRef } from 'vue'
 import { get } from 'lodash-es'
 import type { FormItemSetupProps } from './FormItem'
-import { formInjectionKey } from './interface'
+import { formInjectionKey } from './context'
 import type { Size, FormItemRule } from './interface'
 import { formatLength } from '../../_utils'
 
