@@ -16,6 +16,7 @@
 - Fix `n-log` doesn't export `LogInst` type.
 - Fix `n-popselect` action slot & empty slot now working.
 - Fix `n-data-table` can't use percent as column width.
+- Fix `n-select` trigger shows blank for a while when `filterable=true` and menu is closing.
 
 ### Feats
 

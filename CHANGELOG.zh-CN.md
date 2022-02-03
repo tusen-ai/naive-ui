@@ -16,6 +16,7 @@
 - 修复 `n-log` 未导出 `LogInst` 类型
 - 修复 `n-popselect` action slot & empty slot 不生效
 - 修复 `n-data-table` 不能使用百分比列宽
+- 修复 `n-select` 在可过滤，关闭菜单并且没有选中任何值的时候选框会空一下
 
 ### Feats
 

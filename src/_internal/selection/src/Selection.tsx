@@ -55,7 +55,7 @@ export default defineComponent({
     active: Boolean,
     pattern: {
       type: String,
-      default: null
+      default: ''
     },
     placeholder: String,
     selectedOption: {
@@ -587,7 +587,7 @@ export default defineComponent({
             ref="patternInputMirrorRef"
             class={`${clsPrefix}-base-selection-input-tag__mirror`}
           >
-            {this.pattern ? this.pattern : ''}
+            {this.pattern}
           </span>
         </div>
       ) : null
@@ -691,14 +691,18 @@ export default defineComponent({
             themeOverrides: this.mergedTheme.peerOverrides.Popover
           } as const)
         : null
-      const placeholder =
-        !this.selected && !this.pattern && !this.isCompositing ? (
-          <div
-            class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
-          >
-            {this.placeholder}
-          </div>
-        ) : null
+      const showPlaceholder = this.selected
+        ? false
+        : this.active
+          ? !this.pattern && !this.isCompositing
+          : true
+      const placeholder = showPlaceholder ? (
+        <div
+          class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
+        >
+          {this.placeholder}
+        </div>
+      ) : null
       if (filterable) {
         const popoverTrigger = (
           <div
@@ -754,10 +758,9 @@ export default defineComponent({
       }
     } else {
       if (filterable) {
-        const showPlaceholder =
-          !this.pattern &&
-          (this.active || !this.selected) &&
-          !this.isCompositing
+        const hasInput = this.pattern || this.isCompositing
+        const showPlaceholder = this.active ? !hasInput : !this.selected
+        const showSelectedLabel = this.active ? false : this.selected
         body = (
           <div
             ref="patternInputWrapperRef"
@@ -767,9 +770,7 @@ export default defineComponent({
               {...this.inputProps}
               ref="patternInputRef"
               class={`${clsPrefix}-base-selection-input`}
-              value={
-                this.patternInputFocused && this.active ? this.pattern : ''
-              }
+              value={this.active ? this.pattern : ''}
               placeholder=""
               readonly={disabled}
               disabled={disabled}
@@ -781,8 +782,7 @@ export default defineComponent({
               onCompositionstart={this.handleCompositionStart}
               onCompositionend={this.handleCompositionEnd}
             />
-            {showPlaceholder ? null : this.patternInputFocused &&
-              this.active ? null : (
+            {showSelectedLabel ? (
               <div
                 class={`${clsPrefix}-base-selection-label__render-label ${clsPrefix}-base-selection-overlay`}
                 key="input"
@@ -798,7 +798,7 @@ export default defineComponent({
                       : render(this.label, this.selectedOption, true)}
                 </div>
               </div>
-              )}
+            ) : null}
             {showPlaceholder ? (
               <div
                 class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
