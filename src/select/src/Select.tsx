@@ -712,9 +712,11 @@ export default defineComponent({
       <div class={`${this.mergedClsPrefix}-select`}>
         <VBinder>
           {{
+            _: 3,
             default: () => [
               <VTarget>
                 {{
+                  _: 3,
                   default: () => (
                     <NInternalSelection
                       ref="triggerRef"
@@ -752,7 +754,8 @@ export default defineComponent({
                       onKeyup={this.handleKeyUp}
                     >
                       {{
-                        arrow: () => this.$slots.arrow?.() || []
+                        _: 3,
+                        arrow: () => [this.$slots.arrow?.()]
                       }}
                     </NInternalSelection>
                   )
@@ -769,6 +772,7 @@ export default defineComponent({
                 placement={this.placement}
               >
                 {{
+                  _: 3,
                   default: () => (
                     <Transition
                       name="fade-in-scale-up-transition"
@@ -776,6 +780,7 @@ export default defineComponent({
                       onAfterLeave={this.handleMenuAfterLeave}
                     >
                       {{
+                        _: 3,
                         default: () =>
                           (this.mergedShow ||
                             this.displayDirective === 'show') &&
@@ -819,8 +824,9 @@ export default defineComponent({
                               }
                             >
                               {{
-                                empty: () => this.$slots.empty?.() || [],
-                                action: () => this.$slots.action?.() || []
+                                _: 3,
+                                empty: () => [this.$slots.empty?.()],
+                                action: () => [this.$slots.action?.()]
                               }}
                             </NInternalSelectMenu>,
                             this.displayDirective === 'show'
