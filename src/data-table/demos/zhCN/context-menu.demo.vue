@@ -90,7 +90,7 @@ export default defineComponent({
       },
       rowProps: (row: Song) => {
         return {
-          onContextmenu: (e) => {
+          onContextmenu: (e: MouseEvent) => {
             message.info(JSON.stringify(row, null, 2))
             e.preventDefault()
             showDropdownRef.value = false

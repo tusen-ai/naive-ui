@@ -35,7 +35,7 @@ export default defineComponent({
     return {
       loading: false,
       log: log(),
-      handleRequireMore (from) {
+      handleRequireMore (from: 'top' | 'bottom') {
         message.info('Require More from ' + from)
         if (loadingRef.value) return
         loadingRef.value = true

@@ -44,7 +44,7 @@ export default defineComponent({
       clear () {
         logRef.value = ''
       },
-      handleRequireMore (from) {
+      handleRequireMore (from: 'top' | 'bottom') {
         if (loadingRef.value) return
         loadingRef.value = true
         setTimeout(() => {

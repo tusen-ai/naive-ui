@@ -23,7 +23,7 @@ export default defineComponent({
     const yRef = ref(0)
     const showPopoverRef = ref(false)
 
-    const handleClick = (e) => {
+    const handleClick = (e: MouseEvent) => {
       if (showPopoverRef.value) {
         showPopoverRef.value = false
       } else {

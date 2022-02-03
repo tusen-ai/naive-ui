@@ -33,6 +33,8 @@
 - `n-popover` adds `keep-alive-on-hover` prop, closes [#2326](https://github.com/TuSimple/naive-ui/issues/2326).
 - `n-input` adds `status` prop.
 - Add `n-icon-wrapper` component.
+- `n-popover` exports `PopoverPlacement` type.
+- `n-drawer` exports `DrawerPlacement` type.
 
 ## 2.24.7 (2022-01-28)
 

@@ -38,13 +38,13 @@ export default defineComponent({
       handleBlur () {
         message.info('[Event blur]')
       },
-      handleChange (v) {
+      handleChange (v: string) {
         message.info('[Event change]: ' + v)
       },
       handleKeyUp () {
         message.info('[Event keyup]')
       },
-      handleInput (v) {
+      handleInput (v: string) {
         message.info('[Event input]: ' + v)
       }
     }
