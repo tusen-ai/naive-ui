@@ -386,7 +386,6 @@ export default defineComponent({
     }
     function openMenu (): void {
       if (!mergedDisabledRef.value) {
-        patternRef.value = ''
         doUpdateShow(true)
         uncontrolledShowRef.value = true
         if (props.filterable) {
@@ -399,6 +398,7 @@ export default defineComponent({
     }
     function handleMenuAfterLeave (): void {
       patternRef.value = ''
+      beingCreatedOptionsRef.value = []
     }
     function handleTriggerClick (): void {
       if (mergedDisabledRef.value) return

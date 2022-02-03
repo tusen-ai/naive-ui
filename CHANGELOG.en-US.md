@@ -17,6 +17,7 @@
 - Fix `n-popselect` action slot & empty slot now working.
 - Fix `n-data-table` can't use percent as column width.
 - Fix `n-select` trigger shows blank for a while when `filterable=true` and menu is closing.
+- Fix `n-select`'s being created option is not cleared after menu is closed.
 
 ### Feats
 
