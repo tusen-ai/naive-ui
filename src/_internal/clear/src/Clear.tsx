@@ -47,7 +47,7 @@ export default defineComponent({
                 </NBaseIcon>
               ) : (
                 <div key="icon" class={`${clsPrefix}-base-clear__placeholder`}>
-                  {this.$slots}
+                  {this.$slots.default?.()}
                 </div>
               )
             }

@@ -16,14 +16,18 @@ import {
   provide,
   CSSProperties,
   VNode,
-  Fragment,
   VNodeChild
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerInst, VFocusTrap } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import { useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { formatLength, useAdjustedTo } from '../../_utils'
+import {
+  formatLength,
+  isSlotEmpty,
+  resolveWrappedSlot,
+  useAdjustedTo
+} from '../../_utils'
 import { popoverLight } from '../styles'
 import type { PopoverTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -226,16 +230,10 @@ export default defineComponent({
         const { value: extraClass } = NPopover.extraClassRef
         const { internalTrapFocus } = props
         const renderContentInnerNode = (): VNodeChild[] => [
-          slots.header ? (
-            <>
-              <div class={`${mergedClsPrefix}-popover__header`}>
-                {slots.header()}
-              </div>
-              <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
-            </>
-          ) : (
-            slots.default?.()
-          ),
+          resolveWrappedSlot(slots.header, (children) => [
+            <div class={`${mergedClsPrefix}-popover__header`}>{children}</div>,
+            <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
+          ]) || slots.default?.(),
           props.showArrow
             ? renderArrow({
               arrowStyle: props.arrowStyle,
@@ -253,7 +251,9 @@ export default defineComponent({
                 {
                   [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
                   [`${mergedClsPrefix}-popover--show-arrow`]: props.showArrow,
-                  [`${mergedClsPrefix}-popover--show-header`]: !!slots.header,
+                  [`${mergedClsPrefix}-popover--show-header`]: !isSlotEmpty(
+                    slots.header
+                  ),
                   [`${mergedClsPrefix}-popover--raw`]: props.raw
                 }
               ],

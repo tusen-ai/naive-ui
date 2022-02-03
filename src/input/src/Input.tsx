@@ -32,7 +32,14 @@ import {
 } from '../../_internal'
 import { useTheme, useLocale, useFormItem, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createKey, ExtractPublicPropTypes, warnOnce } from '../../_utils'
+import {
+  call,
+  createKey,
+  ExtractPublicPropTypes,
+  resolveSlot,
+  resolveWrappedSlot,
+  warnOnce
+} from '../../_utils'
 import type { MaybeArray } from '../../_utils'
 import { inputLight } from '../styles'
 import type { InputTheme } from '../styles'
@@ -924,11 +931,9 @@ export default defineComponent({
       >
         {/* textarea & basic input */}
         <div class={`${mergedClsPrefix}-input-wrapper`}>
-          {$slots.affix || $slots.prefix ? (
-            <div class={`${mergedClsPrefix}-input__prefix`}>
-              {($slots.affix || $slots.prefix)?.()}
-            </div>
-          ) : null}
+          {resolveWrappedSlot($slots.prefix, (children) => [
+            <div class={`${mergedClsPrefix}-input__prefix`}>{children}</div>
+          ])}
           {this.type === 'textarea' ? (
             <NScrollbar
               ref="textareaScrollbarInstRef"
@@ -1058,7 +1063,7 @@ export default defineComponent({
                     show={this.showClearButton}
                     onClear={this.handleClear}
                   >
-                    {{ default: $slots.clear }}
+                    {{ default: () => $slots.clear?.() }}
                   </NBaseClear>
                 ) : null,
                 !this.internalLoadingBeforeSuffix ? $slots.suffix?.() : null,
@@ -1073,7 +1078,7 @@ export default defineComponent({
                 ) : null,
                 this.internalLoadingBeforeSuffix ? $slots.suffix?.() : null,
                 this.showCount && this.type !== 'textarea' ? (
-                  <WordCount>{{ default: $slots.count }}</WordCount>
+                  <WordCount>{{ default: () => $slots.count?.() }}</WordCount>
                 ) : null,
                 this.mergedShowPasswordOn && this.type === 'password' ? (
                   <NBaseIcon
@@ -1095,7 +1100,7 @@ export default defineComponent({
         {/* pair input */}
         {this.pair ? (
           <span class={`${mergedClsPrefix}-input__separator`}>
-            {$slots.separator ? $slots.separator() : this.separator}
+            {resolveSlot($slots.separator, () => [this.separator])}
           </span>
         ) : null}
         {this.pair ? (
@@ -1132,15 +1137,15 @@ export default defineComponent({
             </div>
             <div class={`${mergedClsPrefix}-input__suffix`}>
               {[
-                this.clearable || $slots.clear ? (
+                this.clearable && (
                   <NBaseClear
                     clsPrefix={mergedClsPrefix}
                     show={this.showClearButton}
                     onClear={this.handleClear}
                   >
-                    {{ default: $slots.clear }}
+                    {{ default: () => $slots.clear?.() }}
                   </NBaseClear>
-                ) : null,
+                ),
                 $slots.suffix?.()
               ]}
             </div>
@@ -1154,7 +1159,7 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-input__state-border`} />
         ) : null}
         {this.showCount && this.type === 'textarea' ? (
-          <WordCount>{{ default: $slots.count }}</WordCount>
+          <WordCount>{{ default: () => $slots.count?.() }}</WordCount>
         ) : null}
       </div>
     )

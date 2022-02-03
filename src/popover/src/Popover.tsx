@@ -565,7 +565,9 @@ export default defineComponent({
                   showArrow: this.mergedShowArrow,
                   show: mergedShow
                 }),
-                slots
+                {
+                  default: () => this.$slots.default?.()
+                }
               )
             ]
           }

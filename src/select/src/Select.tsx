@@ -715,7 +715,7 @@ export default defineComponent({
             default: () => [
               <VTarget>
                 {{
-                  default: () => [
+                  default: () => (
                     <NInternalSelection
                       ref="triggerRef"
                       status={this.mergedStatus}
@@ -755,7 +755,7 @@ export default defineComponent({
                         arrow: () => [this.$slots.arrow?.()]
                       }}
                     </NInternalSelection>
-                  ]
+                  )
                 }}
               </VTarget>,
               <VFollower
@@ -769,73 +769,70 @@ export default defineComponent({
                 placement={this.placement}
               >
                 {{
-                  default: () => [
+                  default: () => (
                     <Transition
                       name="fade-in-scale-up-transition"
                       appear={this.isMounted}
                       onAfterLeave={this.handleMenuAfterLeave}
                     >
                       {{
-                        default: () => [
+                        default: () =>
                           (this.mergedShow ||
                             this.displayDirective === 'show') &&
-                            withDirectives(
-                              <NInternalSelectMenu
-                                {...this.menuProps}
-                                ref="menuRef"
-                                virtualScroll={
-                                  this.consistentMenuWidth && this.virtualScroll
-                                }
-                                class={[
-                                  `${this.mergedClsPrefix}-select-menu`,
-                                  this.menuProps?.class
-                                ]}
-                                clsPrefix={this.mergedClsPrefix}
-                                focusable
-                                autoPending={true}
-                                theme={
-                                  this.mergedTheme.peers.InternalSelectMenu
-                                }
-                                themeOverrides={
-                                  this.mergedTheme.peerOverrides
-                                    .InternalSelectMenu
-                                }
-                                treeMate={this.treeMate}
-                                multiple={this.multiple}
-                                size={'medium'}
-                                renderOption={this.renderOption}
-                                renderLabel={this.renderLabel}
-                                value={this.mergedValue}
-                                style={[this.menuProps?.style, this.cssVars]}
-                                onToggle={this.handleToggle}
-                                onScroll={this.handleMenuScroll}
-                                onFocus={this.handleMenuFocus}
-                                onBlur={this.handleMenuBlur}
-                                onKeyup={this.handleMenuKeyup}
-                                onKeydown={this.handleMenuKeydown}
-                                onTabOut={this.handleMenuTabOut}
-                                onMousedown={this.handleMenuMousedown}
-                                show={this.mergedShow}
-                                resetMenuOnOptionsChange={
-                                  this.resetMenuOnOptionsChange
-                                }
-                              >
-                                {{
-                                  empty: () => [this.$slots.empty?.()],
-                                  action: () => [this.$slots.action?.()]
-                                }}
-                              </NInternalSelectMenu>,
-                              this.displayDirective === 'show'
-                                ? [
-                                    [vShow, this.mergedShow],
-                                    [clickoutside, this.handleMenuClickOutside]
-                                  ]
-                                : [[clickoutside, this.handleMenuClickOutside]]
-                            )
-                        ]
+                          withDirectives(
+                            <NInternalSelectMenu
+                              {...this.menuProps}
+                              ref="menuRef"
+                              virtualScroll={
+                                this.consistentMenuWidth && this.virtualScroll
+                              }
+                              class={[
+                                `${this.mergedClsPrefix}-select-menu`,
+                                this.menuProps?.class
+                              ]}
+                              clsPrefix={this.mergedClsPrefix}
+                              focusable
+                              autoPending={true}
+                              theme={this.mergedTheme.peers.InternalSelectMenu}
+                              themeOverrides={
+                                this.mergedTheme.peerOverrides
+                                  .InternalSelectMenu
+                              }
+                              treeMate={this.treeMate}
+                              multiple={this.multiple}
+                              size={'medium'}
+                              renderOption={this.renderOption}
+                              renderLabel={this.renderLabel}
+                              value={this.mergedValue}
+                              style={[this.menuProps?.style, this.cssVars]}
+                              onToggle={this.handleToggle}
+                              onScroll={this.handleMenuScroll}
+                              onFocus={this.handleMenuFocus}
+                              onBlur={this.handleMenuBlur}
+                              onKeyup={this.handleMenuKeyup}
+                              onKeydown={this.handleMenuKeydown}
+                              onTabOut={this.handleMenuTabOut}
+                              onMousedown={this.handleMenuMousedown}
+                              show={this.mergedShow}
+                              resetMenuOnOptionsChange={
+                                this.resetMenuOnOptionsChange
+                              }
+                            >
+                              {{
+                                empty: () => [this.$slots.empty?.()],
+                                action: () => [this.$slots.action?.()]
+                              }}
+                            </NInternalSelectMenu>,
+                            this.displayDirective === 'show'
+                              ? [
+                                  [vShow, this.mergedShow],
+                                  [clickoutside, this.handleMenuClickOutside]
+                                ]
+                              : [[clickoutside, this.handleMenuClickOutside]]
+                          )
                       }}
                     </Transition>
-                  ]
+                  )
                 }}
               </VFollower>
             ]

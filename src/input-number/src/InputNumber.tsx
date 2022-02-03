@@ -441,57 +441,57 @@ export default defineComponent({
           internalLoadingBeforeSuffix
         >
           {{
-            _: 2, // input number has dynamic slots
-            prefix: this.$slots.prefix,
-            suffix: this.showButton
-              ? () => [
-                  this.$slots.suffix && (
-                    <span class={`${mergedClsPrefix}-input-number-suffix`}>
-                      {{ default: this.$slots.suffix }}
-                    </span>
-                  ),
-                  <NButton
-                    text
-                    disabled={
-                      !this.minusable || this.mergedDisabled || this.readonly
-                    }
-                    focusable={false}
-                    builtinThemeOverrides={this.buttonThemeOverrides}
-                    onClick={this.handleMinusClick}
-                    ref="minusButtonInstRef"
-                  >
-                    {{
-                      default: () => (
-                        <NBaseIcon clsPrefix={mergedClsPrefix}>
-                          {{
-                            default: () => <RemoveIcon />
-                          }}
-                        </NBaseIcon>
-                      )
-                    }}
-                  </NButton>,
-                  <NButton
-                    text
-                    disabled={
-                      !this.addable || this.mergedDisabled || this.readonly
-                    }
-                    focusable={false}
-                    builtinThemeOverrides={this.buttonThemeOverrides}
-                    onClick={this.handleAddClick}
-                    ref="addButtonInstRef"
-                  >
-                    {{
-                      default: () => (
-                        <NBaseIcon clsPrefix={mergedClsPrefix}>
-                          {{
-                            default: () => <AddIcon />
-                          }}
-                        </NBaseIcon>
-                      )
-                    }}
-                  </NButton>
-                ]
-              : this.$slots.suffix
+            prefix: () => this.$slots.prefix?.(),
+            suffix: () =>
+              this.showButton
+                ? [
+                    this.$slots.suffix && (
+                      <span class={`${mergedClsPrefix}-input-number-suffix`}>
+                        {{ default: this.$slots.suffix }}
+                      </span>
+                    ),
+                    <NButton
+                      text
+                      disabled={
+                        !this.minusable || this.mergedDisabled || this.readonly
+                      }
+                      focusable={false}
+                      builtinThemeOverrides={this.buttonThemeOverrides}
+                      onClick={this.handleMinusClick}
+                      ref="minusButtonInstRef"
+                    >
+                      {{
+                        default: () => (
+                          <NBaseIcon clsPrefix={mergedClsPrefix}>
+                            {{
+                              default: () => <RemoveIcon />
+                            }}
+                          </NBaseIcon>
+                        )
+                      }}
+                    </NButton>,
+                    <NButton
+                      text
+                      disabled={
+                        !this.addable || this.mergedDisabled || this.readonly
+                      }
+                      focusable={false}
+                      builtinThemeOverrides={this.buttonThemeOverrides}
+                      onClick={this.handleAddClick}
+                      ref="addButtonInstRef"
+                    >
+                      {{
+                        default: () => (
+                          <NBaseIcon clsPrefix={mergedClsPrefix}>
+                            {{
+                              default: () => <AddIcon />
+                            }}
+                          </NBaseIcon>
+                        )
+                      }}
+                    </NButton>
+                  ]
+                : this.$slots.suffix?.()
           }}
         </NInput>
       </div>

@@ -12,7 +12,8 @@ export {
   createRefSetter,
   createInjectionKey,
   resolveSlot,
-  resolveWrappedSlot
+  resolveWrappedSlot,
+  isSlotEmpty
 } from './vue'
 export type { MaybeArray } from './vue'
 export {

@@ -85,9 +85,8 @@ export default defineComponent({
             onMouseleave={onMouseleave}
           >
             {{
-              _: 3,
-              action: () => [this.$slots.action?.()],
-              empty: () => [this.$slots.empty?.()]
+              action: () => this.$slots.action?.(),
+              empty: () => this.$slots.empty?.()
             }}
           </NPopselectPanel>
         )
@@ -96,8 +95,7 @@ export default defineComponent({
     return (
       <NPopover {...omit(this.$props, panelPropKeys)} {...popoverProps}>
         {{
-          _: 3,
-          trigger: () => [this.$slots.default?.()]
+          trigger: () => this.$slots.default?.()
         }}
       </NPopover>
     )
