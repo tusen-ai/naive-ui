@@ -31,7 +31,9 @@ exports.genWebTypes = function genWebTypes () {
     if (exportName[0] !== 'N') return
     if (exportName.startsWith('Nx')) return
     const { props } = component
-    const name = kebabCase(exportName)
+    const name = /^NH\d$/.test(exportName)
+      ? exportName.replace('NH', 'n-h')
+      : kebabCase(exportName)
     const slots = []
     const attributes = []
     const events = []
