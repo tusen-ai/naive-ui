@@ -3,9 +3,10 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import type { Theme } from '../../_mixins'
 
 export const self = (vars: ThemeCommonVars) => {
-  const { primaryColor } = vars
+  const { primaryColor, baseColor } = vars
   return {
-    color: primaryColor
+    color: primaryColor,
+    iconColor: baseColor
   }
 }
 

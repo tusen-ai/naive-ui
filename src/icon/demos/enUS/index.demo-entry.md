@@ -28,6 +28,7 @@ icon-wrapper.vue
 | --- | --- | --- | --- | --- |
 | border-radius | `number \| string` | `8` | Border radius. | NEXT_VERSOIN |
 | color | `string` | `undefined` | Color. | NEXT_VERSOIN |
+| icon-color | `string` | `undefined` | Icon color. | NEXT_VERSOIN |
 | size | `number \| string` | `24` | Size. | NEXT_VERSOIN |
 
 ### Icon Slots

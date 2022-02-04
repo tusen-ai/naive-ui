@@ -16,7 +16,8 @@ const iconWrapperProps = {
     type: Number,
     default: 6
   },
-  color: String
+  color: String,
+  iconColor: String
 } as const
 
 export const NIconWrapper = defineComponent({
@@ -35,11 +36,12 @@ export const NIconWrapper = defineComponent({
     const cssVarsRef = computed(() => {
       const {
         common: { cubicBezierEaseInOut },
-        self: { color }
+        self: { color, iconColor }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
-        '--n-color': color
+        '--n-color': color,
+        '--n-icon-color': iconColor
       }
     })
     const cssVarsClassRef = disableInlineTheme
@@ -59,7 +61,8 @@ export const NIconWrapper = defineComponent({
               height: size,
               width: size,
               borderRadius: formatLength(props.borderRadius),
-              backgroundColor: props.color
+              backgroundColor: props.color,
+              color: props.iconColor
             }
           ]}
         >
