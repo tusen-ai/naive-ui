@@ -7,7 +7,7 @@ exports.genWebTypes = function genWebTypes () {
   const components = require('../../lib/components')
   const { default: version } = require('../../lib/version')
 
-  const tags = []
+  const elements = []
 
   const scaffold = {
     $schema:
@@ -18,9 +18,9 @@ exports.genWebTypes = function genWebTypes () {
     contributions: {
       html: {
         // we need to fill tags
-        tags,
+        elements,
         attributes: [],
-        'types-syntax': 'typescript'
+        'js-types-syntax': 'typescript'
       }
     }
   }
@@ -71,11 +71,11 @@ exports.genWebTypes = function genWebTypes () {
           attributes.push(attribute)
         }
       })
-    tags.push({
+    elements.push({
       name,
       slots,
       attributes,
-      events
+      'js/events': events
     })
   })
 
