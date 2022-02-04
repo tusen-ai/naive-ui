@@ -1,6 +1,6 @@
 # useThemeVars
 
-Naive UI provide `useThemeVars`. It contains common theme variables.
+Naive UI provides `useThemeVars`. It contains common theme variables.
 
 ```html
 <pre style="overflow: auto;">{{ themeVars }}</pre>
