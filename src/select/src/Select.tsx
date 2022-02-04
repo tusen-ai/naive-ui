@@ -233,9 +233,6 @@ export default defineComponent({
       toRef(props, 'show'),
       uncontrolledShowRef
     )
-    const forceHideMenuRef = computed(() => {
-      return props.show === false
-    })
     const triggerRef = ref<InternalSelectionInst | null>(null)
     const followerRef = ref<FollowerInst | null>(null)
     const menuRef = ref<InternalSelectMenuRef | null>(null)
@@ -408,12 +405,12 @@ export default defineComponent({
     }
     const activeWithoutMenuOpenRef = ref(false)
     function onTriggerInputFocus (): void {
-      if (props.show === false && props.filterable) {
+      if (props.filterable) {
         activeWithoutMenuOpenRef.value = true
       }
     }
     function onTriggerInputBlur (): void {
-      if (props.show === false && props.filterable) {
+      if (props.filterable) {
         activeWithoutMenuOpenRef.value = false
         handleMenuAfterLeave()
       }
@@ -421,21 +418,7 @@ export default defineComponent({
     function handleTriggerClick (): void {
       if (mergedDisabledRef.value) return
       if (!mergedShowRef.value) {
-        if (!props.filterable) {
-          openMenu()
-        } else {
-          if (!forceHideMenuRef.value) {
-            void nextTick(() => {
-              if (mergedShowRef.value) {
-                openMenu()
-              } else {
-                focusSelectionInput()
-              }
-            })
-          } else {
-            openMenu()
-          }
-        }
+        openMenu()
       } else {
         if (!props.filterable) {
           // already focused, don't need to return focus
@@ -556,7 +539,7 @@ export default defineComponent({
       )
     }
     function handlePatternInput (e: InputEvent): void {
-      if (!mergedShowRef.value && !forceHideMenuRef.value) {
+      if (!mergedShowRef.value) {
         openMenu()
       }
       const { value } = e.target as unknown as HTMLInputElement
@@ -604,11 +587,14 @@ export default defineComponent({
       doScroll(e)
     }
     // keyboard events
-    // also for menu keyup
-    function handleKeyUp (e: KeyboardEvent): void {
+    // also for menu keydown
+    function handleKeydown (e: KeyboardEvent): void {
       switch (e.code) {
         case 'Space':
           if (props.filterable) break
+          else {
+            e.preventDefault()
+          }
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
         case 'NumpadEnter':
@@ -620,10 +606,11 @@ export default defineComponent({
               closeMenu()
               focusSelection()
             }
-          } else if (!forceHideMenuRef.value) {
+          } else {
             openMenu()
-          } else if (props.tag && !triggerRef.value?.isCompositing) {
-            if (activeWithoutMenuOpenRef.value) {
+          }
+          if (props.tag && activeWithoutMenuOpenRef.value) {
+            if (!triggerRef.value?.isCompositing) {
               const beingCreatedOption = beingCreatedOptionsRef.value[0]
               if (beingCreatedOption) {
                 const optionValue = beingCreatedOption.value
@@ -648,36 +635,24 @@ export default defineComponent({
           e.preventDefault()
           break
         case 'ArrowUp':
+          e.preventDefault()
           if (props.loading) return
           if (mergedShowRef.value) {
             menuRef.value?.prev()
           }
           break
         case 'ArrowDown':
+          e.preventDefault()
           if (props.loading) return
           if (mergedShowRef.value) {
             menuRef.value?.next()
-          } else if (!forceHideMenuRef.value) {
+          } else {
             openMenu()
           }
           break
         case 'Escape':
           closeMenu()
           triggerRef.value?.focus()
-          break
-      }
-    }
-    // also for menu
-    function handleKeyDown (e: KeyboardEvent): void {
-      switch (e.code) {
-        case 'Space':
-          if (!props.filterable) {
-            e.preventDefault()
-          }
-          break
-        case 'ArrowUp':
-        case 'ArrowDown':
-          e.preventDefault()
           break
       }
     }
@@ -744,14 +719,12 @@ export default defineComponent({
       handleClear,
       handleTriggerBlur,
       handleTriggerFocus,
-      handleKeyDown,
-      handleKeyUp,
+      handleKeydown,
       syncPosition,
       handleMenuAfterLeave,
       handleMenuClickOutside,
       handleMenuScroll,
-      handleMenuKeyup: handleKeyUp,
-      handleMenuKeydown: handleKeyDown,
+      handleMenuKeydown: handleKeydown,
       handleMenuMousedown,
       mergedTheme: themeRef,
       cssVars: computed(() => {
@@ -805,8 +778,7 @@ export default defineComponent({
                       onClear={this.handleClear}
                       onBlur={this.handleTriggerBlur}
                       onFocus={this.handleTriggerFocus}
-                      onKeydown={this.handleKeyDown}
-                      onKeyup={this.handleKeyUp}
+                      onKeydown={this.handleKeydown}
                       onPatternBlur={this.onTriggerInputBlur}
                       onPatternFocus={this.onTriggerInputFocus}
                     >
@@ -868,7 +840,6 @@ export default defineComponent({
                               onScroll={this.handleMenuScroll}
                               onFocus={this.handleMenuFocus}
                               onBlur={this.handleMenuBlur}
-                              onKeyup={this.handleMenuKeyup}
                               onKeydown={this.handleMenuKeydown}
                               onTabOut={this.handleMenuTabOut}
                               onMousedown={this.handleMenuMousedown}
