@@ -8,7 +8,7 @@
 
 ### Fixes
 
-- `n-color-picker` 色阶和不透明度调整滑块 box-shadow 被轨道 box-shadow 影响
+- 修复 `n-color-picker` 色阶和不透明度调整滑块 box-shadow 被轨道 box-shadow 影响
 - 修复 `n-form-item` feedback DOM 内容为空依然有 padding
 - 修复 `n-button` 在 safari 下显示有多余 margin
 - 修复 `n-form` 的 rules 和 `n-form-item` 的 rule 中的 `validator` 与 `asyncValidator` 函数的 `rule` 类型不为 `FormItemRule` 类型， 关闭 [#2299](https://github.com/TuSimple/naive-ui/issues/2299)

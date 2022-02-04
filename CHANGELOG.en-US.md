@@ -8,7 +8,7 @@
 
 ### Fixes
 
-- `n-color-picker`'s hue & alpha slider handle are influenced by rail's box-shadow.
+- Fix `n-color-picker`'s hue & alpha slider handle are influenced by rail's box-shadow.
 - Fix `n-form-item` prevent feedback padding when empty.
 - Fix `n-button` has extra margin in safari.
 - Fix `n-form`'s rules and `n-form-item`'s rule about `validator` and `asyncValidator`'s `rule` type is not `FormItemRule`, closes [#2299](https://github.com/TuSimple/naive-ui/issues/2299).
@@ -25,7 +25,7 @@
 
 ### Feats
 
-- `n-tabs` props `justify-content` add types `start` `center` `end`
+- `n-tabs` props `justify-content` add types `start` `center` `end`.
 - `n-auto-complete` adds `placement` prop.
 - `n-cascader` adds `placement` prop.
 - `n-color-picker` adds `placement` prop.

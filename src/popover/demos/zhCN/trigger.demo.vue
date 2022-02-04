@@ -12,7 +12,7 @@
     </n-popover>
     <n-popover trigger="hover" :keep-alive-on-hover="false">
       <template #trigger>
-        <n-button>悬浮（不管主体）</n-button>
+        <n-button>悬浮（忽略主体）</n-button>
       </template>
       <span>I wish they all could be California girls</span>
     </n-popover>
