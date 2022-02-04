@@ -1,7 +1,7 @@
 <markdown>
 # 为节点绑定事件
 
-使用 `node-props` 为节点绑定属性。
+使用 `node-props` 为节点绑定属性，比如点击事件或者右键菜单。
 </markdown>
 
 <template>

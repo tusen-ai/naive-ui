@@ -1,7 +1,7 @@
 <markdown>
 # Node events
 
-Use `node-props` to bind HTML attributes to node.
+Use `node-props` to bind HTML attributes to node. For example click or contextmenu event listener.
 </markdown>
 
 <template>
