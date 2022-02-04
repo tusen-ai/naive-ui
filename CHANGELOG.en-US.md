@@ -19,6 +19,7 @@
 - Fix `n-select` trigger shows blank for a while when `filterable=true` and menu is closing.
 - Fix `n-select`'s being created option is not cleared after menu is closed.
 - Fix `n-select` can't input content when `show=false` and `filterable=true`, closes [#1723](https://github.com/TuSimple/naive-ui/issues/1723).
+- Fix `n-dropdown` has extra margin when `trigger="manual"`.
 
 ### Feats
 

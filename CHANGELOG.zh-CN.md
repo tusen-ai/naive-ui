@@ -19,6 +19,7 @@
 - 修复 `n-select` 在可过滤，关闭菜单并且没有选中任何值的时候选框会空一下
 - 修复 `n-select` 在动态创建选项时关闭菜单后创建中的选项未清空
 - 修复 `n-select` 在 `show=false` 和 `filterable=true` 时无法输入内容，关闭 [#1723](https://github.com/TuSimple/naive-ui/issues/1723)
+- 修复 `n-dropdown` 在 `trigger="manual"` 时有额外 margin
 
 ### Feats
 

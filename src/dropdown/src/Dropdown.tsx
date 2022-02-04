@@ -407,6 +407,8 @@ export default defineComponent({
         class: [
           className,
           `${mergedClsPrefix}-dropdown`,
+          this.trigger === 'manual' &&
+            `${mergedClsPrefix}-popover--manual-trigger`,
           this.showArrow && `${mergedClsPrefix}-popover--show-arrow`
         ],
         clsPrefix: mergedClsPrefix,

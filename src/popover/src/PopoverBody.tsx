@@ -254,7 +254,9 @@ export default defineComponent({
                   [`${mergedClsPrefix}-popover--show-header`]: !isSlotEmpty(
                     slots.header
                   ),
-                  [`${mergedClsPrefix}-popover--raw`]: props.raw
+                  [`${mergedClsPrefix}-popover--raw`]: props.raw,
+                  [`${mergedClsPrefix}-popover--manual-trigger`]:
+                    props.trigger === 'manual'
                 }
               ],
               ref: bodyRef,
