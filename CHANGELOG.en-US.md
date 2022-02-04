@@ -41,6 +41,7 @@
 ### i18n
 
 - Update jaJP locale.
+- Update deDE locale.
 
 ## 2.24.6 (2022-01-26)
 
