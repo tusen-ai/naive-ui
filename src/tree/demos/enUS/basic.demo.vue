@@ -1,22 +1,26 @@
+<markdown>
 # Basic
 
 Fortunately, the tree is now alive and it's not balanced.
+</markdown>
 
-```html
-<n-tree
-  block-line
-  :data="data"
-  :default-expanded-keys="defaultExpandedKeys"
-  selectable
-/>
-```
+<template>
+  <n-tree
+    block-line
+    :data="data"
+    :default-expanded-keys="defaultExpandedKeys"
+    selectable
+  />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { repeat } from 'seemly'
+import { TreeOption } from 'naive-ui'
 
-function createData (level = 4, baseKey = '') {
+function createData (level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level) return undefined
-  return Array.apply(null, { length: 6 - level }).map((_, index) => {
+  return repeat(6 - level, undefined).map((_, index) => {
     const key = '' + baseKey + level + index
     return {
       label: createLabel(level),
@@ -26,11 +30,12 @@ function createData (level = 4, baseKey = '') {
   })
 }
 
-function createLabel (level) {
+function createLabel (level: number): string {
   if (level === 4) return 'Out of Tao, One is born'
   if (level === 3) return 'Out of One, Two'
   if (level === 2) return 'Out of Two, Three'
   if (level === 1) return 'Out of Three, the created universe'
+  return ''
 }
 
 export default defineComponent({
@@ -41,4 +46,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

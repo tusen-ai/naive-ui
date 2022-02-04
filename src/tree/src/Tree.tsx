@@ -81,7 +81,14 @@ export function createTreeMateOptions<T> (
   }
 }
 
-type OnUpdateKeys = (value: Key[], option: Array<TreeOption | null>) => void
+export type OnUpdateKeys = (
+  value: Array<string & number>,
+  option: Array<TreeOption | null>
+) => void
+export type OnUpdateKeysImpl = (
+  value: Key[],
+  option: Array<TreeOption | null>
+) => void
 type OnLoad = (node: TreeOption) => Promise<void>
 
 export const treeSharedProps = {
@@ -586,8 +593,12 @@ export default defineComponent({
         onUpdateExpandedKeys
       } = props
       uncontrolledExpandedKeysRef.value = value
-      if (_onUpdateExpandedKeys) call(_onUpdateExpandedKeys, value, option)
-      if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, value, option)
+      if (_onUpdateExpandedKeys) {
+        call(_onUpdateExpandedKeys as OnUpdateKeysImpl, value, option)
+      }
+      if (onUpdateExpandedKeys) {
+        call(onUpdateExpandedKeys as OnUpdateKeysImpl, value, option)
+      }
     }
     function doUpdateCheckedKeys (
       value: Key[],
@@ -598,8 +609,12 @@ export default defineComponent({
         onUpdateCheckedKeys
       } = props
       uncontrolledCheckedKeysRef.value = value
-      if (onUpdateCheckedKeys) call(onUpdateCheckedKeys, value, option)
-      if (_onUpdateCheckedKeys) call(_onUpdateCheckedKeys, value, option)
+      if (onUpdateCheckedKeys) {
+        call(onUpdateCheckedKeys as OnUpdateKeysImpl, value, option)
+      }
+      if (_onUpdateCheckedKeys) {
+        call(_onUpdateCheckedKeys as OnUpdateKeysImpl, value, option)
+      }
     }
     function doUpdateIndeterminateKeys (
       value: Key[],
@@ -610,10 +625,10 @@ export default defineComponent({
         onUpdateIndeterminateKeys
       } = props
       if (_onUpdateIndeterminateKeys) {
-        call(_onUpdateIndeterminateKeys, value, option)
+        call(_onUpdateIndeterminateKeys as OnUpdateKeysImpl, value, option)
       }
       if (onUpdateIndeterminateKeys) {
-        call(onUpdateIndeterminateKeys, value, option)
+        call(onUpdateIndeterminateKeys as OnUpdateKeysImpl, value, option)
       }
     }
     function doUpdateSelectedKeys (
@@ -625,8 +640,12 @@ export default defineComponent({
         onUpdateSelectedKeys
       } = props
       uncontrolledSelectedKeysRef.value = value
-      if (onUpdateSelectedKeys) call(onUpdateSelectedKeys, value, option)
-      if (_onUpdateSelectedKeys) call(_onUpdateSelectedKeys, value, option)
+      if (onUpdateSelectedKeys) {
+        call(onUpdateSelectedKeys as OnUpdateKeysImpl, value, option)
+      }
+      if (_onUpdateSelectedKeys) {
+        call(_onUpdateSelectedKeys as OnUpdateKeysImpl, value, option)
+      }
     }
     // Drag & Drop
     function doDragEnter (info: TreeDragInfo): void {

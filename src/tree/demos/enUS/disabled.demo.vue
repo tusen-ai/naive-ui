@@ -1,17 +1,19 @@
-# 禁用节点
+<markdown>
+# Disabled nodes
+</markdown>
 
-```html
-<n-tree
-  :data="data"
-  block-line
-  checkable
-  default-expand-all
-  cascade
-  :default-checked-keys="['1-1']"
-/>
-```
+<template>
+  <n-tree
+    :data="data"
+    block-line
+    checkable
+    default-expand-all
+    cascade
+    :default-checked-keys="['1-1']"
+  />
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -72,4 +74,4 @@ export default defineComponent({
     }
   }
 })
-```
+</script>

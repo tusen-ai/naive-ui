@@ -7,17 +7,17 @@ What's more, not only biology, I forget balanced tree everytime after I revise i
 ## Demos
 
 ```demo
-basic
-custom-field
-cascade
-multiple
-filter
-drag-drop
-virtual
-async
-disabled
-prefix-and-suffix
-batch-render
+basic.vue
+custom-field.vue
+cascade.vue
+multiple.vue
+filter.vue
+drag-drop.vue
+virtual.vue
+async.vue
+disabled.vue
+prefix-and-suffix.vue
+batch-render.vue
 switcher-icon.vue
 ```
 

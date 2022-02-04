@@ -1,44 +1,67 @@
+<markdown>
 # Check Strategy Debug
+</markdown>
 
-```html
-<n-space vertical>
-  <n-space>
-    <n-radio-group v-model:value="checkStrategy">
-      <n-radio-button value="all">All</n-radio-button>
-      <n-radio-button value="parent">Parent</n-radio-button>
-      <n-radio-button value="child">Child</n-radio-button>
-    </n-radio-group>
-    <n-switch v-model:value="checkable">
-      <template #checked>Checkable</template>
-      <template #unchecked>Unhheckable</template>
-    </n-switch>
-    <n-switch v-model:value="selectable">
-      <template #checked>Selectable</template>
-      <template #unchecked>Unselectable</template>
-    </n-switch>
-    <n-switch v-model:value="multiple">
-      <template #checked>Multiple</template>
-      <template #unchecked>Single</template>
-    </n-switch>
-    <n-switch v-model:value="cascade">
-      <template #checked>Cascade</template>
-      <template #unchecked>Uncascade</template>
-    </n-switch>
+<template>
+  <n-space vertical>
+    <n-space>
+      <n-radio-group v-model:value="checkStrategy">
+        <n-radio-button value="all">
+          All
+        </n-radio-button>
+        <n-radio-button value="parent">
+          Parent
+        </n-radio-button>
+        <n-radio-button value="child">
+          Child
+        </n-radio-button>
+      </n-radio-group>
+      <n-switch v-model:value="checkable">
+        <template #checked>
+          Checkable
+        </template>
+        <template #unchecked>
+          Unhheckable
+        </template>
+      </n-switch>
+      <n-switch v-model:value="selectable">
+        <template #checked>
+          Selectable
+        </template>
+        <template #unchecked>
+          Unselectable
+        </template>
+      </n-switch>
+      <n-switch v-model:value="multiple">
+        <template #checked>
+          Multiple
+        </template>
+        <template #unchecked>
+          Single
+        </template>
+      </n-switch>
+      <n-switch v-model:value="cascade">
+        <template #checked>
+          Cascade
+        </template>
+        <template #unchecked>
+          Uncascade
+        </template>
+      </n-switch>
+    </n-space>
+    <n-tree
+      default-expand-all
+      :selectable="selectable"
+      :multiple="multiple"
+      :cascade="cascade"
+      :checkable="checkable"
+      :check-strategy="checkStrategy"
+      :data="options"
+      :default-checked-keys="['Dig It', 'go']"
+    />
   </n-space>
-  <n-tree
-    default-expand-all
-    :selectable="selectable"
-    :multiple="multiple"
-    :cascade="cascade"
-    :checkable="checkable"
-    :check-strategy="checkStrategy"
-    :data="options"
-    :default-checked-keys="['Dig It', 'go']"
-  />
-</n-space>
-```
-
-```js
+</template>
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -46,7 +69,7 @@ export default defineComponent({
     return {
       cascade: ref(false),
       multiple: ref(false),
-      checkStrategy: ref('all'),
+      checkStrategy: ref<'all' | 'child' | 'parent'>('all'),
       checkable: ref(false),
       selectable: ref(false),
       options: [
@@ -141,10 +164,10 @@ export default defineComponent({
           ]
         }
       ],
-      handleUpdateValue: (values) => {
+      handleUpdateValue: (values: string[]) => {
         console.log(values)
       }
     }
   }
 })
-```
+</script>
