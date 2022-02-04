@@ -8,7 +8,6 @@ If you just want to display some basic.vue text message, see [Tooltip](tooltip) 
 
 ```demo
 basic.vue
-flip.vue
 trigger.vue
 delay.vue
 no-arrow.vue
@@ -38,7 +37,6 @@ header.vue
 | overlap | `boolean` | `false` | Overlap trigger element. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | Popover placement. |  |
 | raw | `boolean` | `false` | Whether to use no default styles. |  |
-| shift | `boolean` | `false` | Whether to shift the popover when there is no space for current placement. |  |
 | show-arrow | `boolean` | `true` | Whether to show arrow if set. |  |
 | show | `boolean` | `undefined` | Whether to show popover. |  |
 | title | `string` | `undefined` | Popover title. |  |
