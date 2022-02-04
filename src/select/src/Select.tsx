@@ -412,7 +412,9 @@ export default defineComponent({
     function onTriggerInputBlur (): void {
       if (props.filterable) {
         activeWithoutMenuOpenRef.value = false
-        handleMenuAfterLeave()
+        if (!mergedShowRef.value) {
+          handleMenuAfterLeave()
+        }
       }
     }
     function handleTriggerClick (): void {
@@ -598,38 +600,36 @@ export default defineComponent({
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
         case 'NumpadEnter':
-          if (mergedShowRef.value) {
-            const pendingTmNode = menuRef.value?.getPendingTmNode()
-            if (pendingTmNode) {
-              handleToggleByTmNode(pendingTmNode)
-            } else if (!props.filterable) {
-              closeMenu()
-              focusSelection()
-            }
-          } else {
-            openMenu()
-          }
-          if (props.tag && activeWithoutMenuOpenRef.value) {
-            if (!triggerRef.value?.isCompositing) {
-              const beingCreatedOption = beingCreatedOptionsRef.value[0]
-              if (beingCreatedOption) {
-                const optionValue = beingCreatedOption.value
-                const { value: mergedValue } = mergedValueRef
-                if (props.multiple) {
-                  if (
-                    Array.isArray(mergedValue) &&
-                    mergedValue.some((value) => value === optionValue)
-                  ) {
-                    // do nothing
+          if (!triggerRef.value?.isCompositing) {
+            if (mergedShowRef.value) {
+              const pendingTmNode = menuRef.value?.getPendingTmNode()
+              if (pendingTmNode) {
+                handleToggleByTmNode(pendingTmNode)
+              } else if (!props.filterable) {
+                closeMenu()
+                focusSelection()
+              }
+            } else {
+              openMenu()
+              if (props.tag && activeWithoutMenuOpenRef.value) {
+                const beingCreatedOption = beingCreatedOptionsRef.value[0]
+                if (beingCreatedOption) {
+                  const optionValue = beingCreatedOption.value
+                  const { value: mergedValue } = mergedValueRef
+                  if (props.multiple) {
+                    if (
+                      Array.isArray(mergedValue) &&
+                      mergedValue.some((value) => value === optionValue)
+                    ) {
+                      // do nothing
+                    } else {
+                      handleToggleByOption(beingCreatedOption)
+                    }
                   } else {
                     handleToggleByOption(beingCreatedOption)
                   }
-                } else {
-                  handleToggleByOption(beingCreatedOption)
                 }
               }
-            } else {
-              focusSelectionInput()
             }
           }
           e.preventDefault()
