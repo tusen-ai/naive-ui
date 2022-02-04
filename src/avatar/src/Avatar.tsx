@@ -9,7 +9,7 @@ import {
   VNode
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
-import { avatarGroupInjectionKey } from './AvatarGroup'
+import { avatarGroupInjectionKey } from './context'
 import type { Size, ObjectFit } from './interface'
 import { tagInjectionKey } from '../../tag/src/Tag'
 import { useConfig, useTheme } from '../../_mixins'
@@ -84,7 +84,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'Avatar',
-      'Avatar',
+      '-avatar',
       style,
       avatarLight,
       props,

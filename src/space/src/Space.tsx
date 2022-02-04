@@ -53,7 +53,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Space',
-      'Space',
+      '-space',
       undefined,
       spaceLight,
       props,

@@ -1,6 +1,6 @@
-export { default as NDialog } from './src/Dialog'
-export type { DialogProps } from './src/Dialog'
-export { default as NDialogProvider } from './src/DialogProvider'
+export { NDialog } from './src/Dialog'
+export type { DialogProps } from './src/dialogProps'
+export { NDialogProvider } from './src/DialogProvider'
 export type {
   DialogProviderProps,
   DialogProviderInst,

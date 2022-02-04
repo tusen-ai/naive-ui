@@ -14,7 +14,7 @@ import {
 import { zindexable } from 'vdirs'
 import { useIsMounted, useClicked, useClickPosition } from 'vooks'
 import { VLazyTeleport } from 'vueuc'
-import { dialogProviderInjectionKey } from '../../dialog/src/DialogProvider'
+import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { keep, call, warnOnce } from '../../_utils'
@@ -123,7 +123,7 @@ export default defineComponent({
     const { mergedClsPrefixRef, namespaceRef } = useConfig(props)
     const themeRef = useTheme(
       'Modal',
-      'Modal',
+      '-modal',
       style,
       modalLight,
       props,

@@ -26,8 +26,7 @@ import {
   createKey,
   MaybeArray,
   ExtractPublicPropTypes,
-  createRefSetter,
-  createInjectionKey
+  createRefSetter
 } from '../../_utils'
 import { dropdownLight } from '../styles'
 import type { DropdownTheme } from '../styles'
@@ -46,6 +45,7 @@ import {
   RenderLabelImpl,
   RenderIconImpl
 } from './interface'
+import { dropdownInjectionKey } from './context'
 
 export interface DropdownInjection {
   renderLabelRef: Ref<RenderLabelImpl | undefined>
@@ -62,9 +62,6 @@ export interface DropdownInjection {
   doSelect: OnUpdateValueImpl
   doUpdateShow: (value: boolean) => void
 }
-
-export const dropdownInjectionKey =
-  createInjectionKey<DropdownInjection>('n-dropdown')
 
 const dropdownBaseProps = {
   animated: {
@@ -211,7 +208,7 @@ export default defineComponent({
 
     const themeRef = useTheme(
       'Dropdown',
-      'Dropdown',
+      '-dropdown',
       style,
       dropdownLight,
       props,
@@ -410,6 +407,8 @@ export default defineComponent({
         class: [
           className,
           `${mergedClsPrefix}-dropdown`,
+          this.trigger === 'manual' &&
+            `${mergedClsPrefix}-popover--manual-trigger`,
           this.showArrow && `${mergedClsPrefix}-popover--show-arrow`
         ],
         clsPrefix: mergedClsPrefix,
@@ -436,8 +435,7 @@ export default defineComponent({
     return (
       <NPopover {...keep(this.$props, popoverPropKeys)} {...popoverProps}>
         {{
-          trigger: this.$slots.default,
-          _: 1
+          trigger: () => this.$slots.default?.()
         }}
       </NPopover>
     )

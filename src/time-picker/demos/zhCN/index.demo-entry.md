@@ -37,6 +37,7 @@ focus.vue
 | is-minute-disabled | `(minute: number, hour: number) => boolean` | `() => false` | 用于禁用分钟的回调函数 |  |
 | is-second-disabled | `(second: number, minute: number, hour: number) => boolean` | `() => false` | 用于禁用秒钟的回调函数 |  |
 | placeholder | `string` | `'请选择时间'` | 选择框的占位符 |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 时间选择器的面板的弹出位置 | 2.25.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 选择框的尺寸 |  |
 | use-12-hours | `boolean` | `false` | 是否使用 12 小时制的面板 |  |
 | value | `number \| null` | `undefined` | 受控模式下的值 |  |

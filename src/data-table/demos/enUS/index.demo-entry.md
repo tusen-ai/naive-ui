@@ -12,7 +12,7 @@ DataTable is used to displays rows of structured data.
   </n-alert>
 
 ```demo
-basic
+basic.vue
 empty
 border
 size

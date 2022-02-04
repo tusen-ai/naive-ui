@@ -87,3 +87,6 @@ export interface SelectInst {
   focus: () => void
   blur: () => void
 }
+
+export type SelectFallbackOption = (value: string & number) => SelectOption
+export type SelectFallbackOptionImpl = (value: string | number) => SelectOption

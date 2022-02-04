@@ -42,6 +42,7 @@ debug
 | multiple | `boolean` | `false` | Allow selecting multiple options. |  |
 | options | `TreeSelectOption[]` | `[]` | Options. |  |
 | placeholder | `string` | `'Please Select'` | Placeholder. |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Tree select menu's placement. | 2.25.0 |
 | separator | `string` | `' / '` | Option value separator. |  |
 | show-path | `boolean` | `false` | Whether to also show the hierarchy of selected nodes in the label. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |  |

@@ -20,6 +20,7 @@ export const cardBaseProps = {
   title: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
+  headerExtraStyle: [Object, String] as PropType<CSSProperties | string>,
   footerStyle: [Object, String] as PropType<CSSProperties | string>,
   embedded: Boolean,
   segmented: {
@@ -63,7 +64,7 @@ export default defineComponent({
     const { mergedClsPrefixRef, NConfigProvider } = useConfig(props)
     const themeRef = useTheme(
       'Card',
-      'Card',
+      '-card',
       style,
       cardLight,
       props,
@@ -189,7 +190,10 @@ export default defineComponent({
               {$slots.header ? $slots.header() : this.title}
             </div>
             {$slots['header-extra'] ? (
-              <div class={`${mergedClsPrefix}-card-header__extra`}>
+              <div
+                class={`${mergedClsPrefix}-card-header__extra`}
+                style={this.headerExtraStyle}
+              >
                 {$slots['header-extra']()}
               </div>
             ) : null}

@@ -38,7 +38,7 @@ export default defineComponent({
   props: rowProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-    useStyle('LegacyGrid', style, mergedClsPrefixRef)
+    useStyle('-legacy-grid', style, mergedClsPrefixRef)
     const verticalGutterRef = useMemo(() => {
       const { gutter } = props
       if (Array.isArray(gutter)) {

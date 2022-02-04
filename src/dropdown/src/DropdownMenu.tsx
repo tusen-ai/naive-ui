@@ -10,9 +10,11 @@ import {
 } from 'vue'
 import { TreeNode } from 'treemate'
 import { renderArrow } from '../../popover/src/PopoverBody'
-import NDropdownOption from './DropdownOption'
 import NDropdownDivider from './DropdownDivider'
+// eslint-disable-next-line import/no-cycle
 import NDropdownGroup from './DropdownGroup'
+// eslint-disable-next-line import/no-cycle
+import NDropdownOption from './DropdownOption'
 import NDropdownRenderOption from './DropdownRenderOption'
 import {
   isSubmenuNode,
@@ -20,22 +22,18 @@ import {
   isDividerNode,
   isRenderNode
 } from './utils'
-import { dropdownInjectionKey } from './Dropdown'
+import { dropdownInjectionKey, dropdownMenuInjectionKey } from './context'
 import {
   DropdownGroupOption,
   DropdownIgnoredOption,
   DropdownOption,
   DropdownRenderOption
 } from './interface'
-import { createInjectionKey } from '../../_utils'
 
 export interface NDropdownMenuInjection {
   showIconRef: Ref<boolean>
   hasSubmenuRef: Ref<boolean>
 }
-
-export const dropdownMenuInjectionKey =
-  createInjectionKey<NDropdownMenuInjection>('n-dropdown-menu')
 
 export default defineComponent({
   name: 'DropdownMenu',

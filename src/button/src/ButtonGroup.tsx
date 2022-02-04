@@ -26,7 +26,7 @@ export default defineComponent({
   props: buttonGroupProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-    useStyle('ButtonGroup', style, mergedClsPrefixRef)
+    useStyle('-button-group', style, mergedClsPrefixRef)
     provide(buttonGroupInjectionKey, props)
     return {
       mergedClsPrefix: mergedClsPrefixRef

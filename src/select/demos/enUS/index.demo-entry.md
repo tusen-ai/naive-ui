@@ -5,28 +5,29 @@ Select something!
 ## Demo
 
 ```demo
-basic
-size
-multiple
-events
-filterable
-tag
-menu-width
-remote
-remote-multiple
-clearable
+basic.vue
+size.vue
+multiple.vue
+events.vue
+filterable.vue
+tag.vue
+menu-width.vue
+remote.vue
+remote-multiple.vue
+clearable.vue
 scroll-event.vue
-group
-many-options
-custom-option
+group.vue
+many-options.vue
+custom-option.vue
 custom-suffix.vue
-action
-fallback-option
-max-tag-count
-add-tooltip
-render-tag
-render-person
+action.vue
+fallback-option.vue
+max-tag-count.vue
+add-tooltip.vue
+render-tag.vue
 focus.vue
+render-person.vue
+tag-input.vue
 ```
 
 ## API
@@ -49,6 +50,7 @@ focus.vue
 | multiple | `boolean` | `false` | Whether to allow selecting multiple values. |  |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | Options that can be selected. For more details see SelectOption Properties (below). |  |
 | placeholder | `string` | `'Please Select'` | Placeholder. |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Option menu's placement. | 2.25.0 |
 | remote | `boolean` | `false` | Allows options to be fetched asynchronously. Note that if `remote` is set, `filter` & `tag` won't work on `options`. |  |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function for each option label. |  |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | Render function for each option. |  |

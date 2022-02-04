@@ -317,6 +317,30 @@ describe('n-tree', () => {
     expect(wrapper.find('.n-tree-node--disabled').exists()).toBe(true)
   })
 
+  it('should work with `children-field`', () => {
+    const wrapper = mount(NTree, {
+      props: {
+        data: [
+          {
+            label: 'test',
+            key: '123',
+            disabled: true,
+            nodes: [
+              {
+                label: '1231',
+                key: '1231'
+              }
+            ]
+          }
+        ],
+        childrenField: 'nodes',
+        defaultExpandAll: true
+      }
+    })
+
+    expect(wrapper.findAll('.n-tree-node')[1].text()).toBe('1231')
+  })
+
   it('should work with `onLoad`', async () => {
     const onLoad = jest.fn()
     const wrapper = mount(NTree, {

@@ -18,7 +18,7 @@ export const menuItemProps = {
   onClick: Function
 } as const
 
-export default defineComponent({
+export const NMenuOption = defineComponent({
   name: 'MenuOption',
   props: menuItemProps,
   setup (props) {

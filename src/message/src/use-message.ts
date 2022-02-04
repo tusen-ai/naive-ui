@@ -1,6 +1,6 @@
 import { inject } from 'vue'
 import { throwError } from '../../_utils'
-import { messageApiInjectionKey } from './MessageProvider'
+import { messageApiInjectionKey } from './context'
 import type { MessageApiInjection } from './MessageProvider'
 
 export function useMessage (): MessageApiInjection {

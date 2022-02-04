@@ -1,5 +1,5 @@
 import { CheckStrategy, TreeNode } from 'treemate'
-import { Ref, VNodeChild } from 'vue'
+import { HTMLAttributes, Ref, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { TreeTheme } from '../styles'
@@ -38,6 +38,8 @@ export type RenderLabel = RenderTreePart
 export type RenderPrefix = RenderTreePart
 
 export type RenderSuffix = RenderTreePart
+
+export type TreeNodeProps = (info: { option: TreeOption }) => HTMLAttributes
 
 export interface TreeDragInfo {
   event: DragEvent
@@ -104,6 +106,7 @@ export interface TreeInjection {
   renderSuffixRef: Ref<RenderSuffix | undefined>
   renderSwitcherIconRef: Ref<RenderSwitcherIcon | undefined>
   labelFieldRef: Ref<string>
+  nodePropsRef: Ref<TreeNodeProps | undefined>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void
