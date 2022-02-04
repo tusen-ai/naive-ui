@@ -35,7 +35,7 @@ import type { TreeTheme } from '../styles'
 import NTreeNode from './TreeNode'
 import { keysWithFilter, emptyImage } from './utils'
 import { useKeyboard } from './keyboard'
-import {
+import type {
   TreeDragInfo,
   TreeDropInfo,
   TreeOptions,
@@ -47,13 +47,14 @@ import {
   DropPosition,
   AllowDrop,
   MotionData,
-  treeInjectionKey,
   InternalTreeInst,
   RenderLabel,
   RenderPrefix,
   RenderSuffix,
-  RenderSwitcherIcon
+  RenderSwitcherIcon,
+  TreeNodeProps
 } from './interface'
+import { treeInjectionKey } from './interface'
 import MotionWrapper from './MotionWrapper'
 import { defaultAllowDrop } from './dnd'
 import style from './styles/index.cssr'
@@ -186,6 +187,7 @@ const treeProps = {
   renderPrefix: Function as PropType<RenderPrefix>,
   renderSuffix: Function as PropType<RenderSuffix>,
   renderSwitcherIcon: Function as PropType<RenderSwitcherIcon>,
+  nodeProps: Function as PropType<TreeNodeProps>,
   onDragenter: [Function, Array] as PropType<
   MaybeArray<(e: TreeDragInfo) => void>
   >,
@@ -1153,6 +1155,7 @@ export default defineComponent({
       mergedExpandedKeysRef,
       mergedThemeRef: themeRef,
       mergedCheckStrategyRef,
+      nodePropsRef: toRef(props, 'nodeProps'),
       disabledRef: toRef(props, 'disabled'),
       checkableRef: toRef(props, 'checkable'),
       selectableRef: toRef(props, 'selectable'),

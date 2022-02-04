@@ -51,6 +51,7 @@
 - `n-select` exports `SelectRenderLabel` type.
 - `n-select` exports `SelectRenderOption` type.
 - `n-select` exports `SelectRenderTag` type.
+- `n-tree` adds `node-props` prop.
 
 ## 2.24.7 (2022-01-28)
 
