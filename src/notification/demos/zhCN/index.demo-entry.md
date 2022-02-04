@@ -55,7 +55,7 @@ placement.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| container-style | `string \| Object` | `undefined` | 容器的样式 | NEXT_VERSION |
+| container-style | `string \| Object` | `undefined` | 容器的样式 | 2.25.0 |
 | max | `number` | `undefined` | 限制通知框显示的个数 |  |
 | placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `top-right` | 所有通知框显示的位置 |  |
 | scrollable | `boolean` | `true` | 通知是否可滚动 |  |

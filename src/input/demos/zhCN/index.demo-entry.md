@@ -49,7 +49,7 @@ status.vue
 | show-count | `boolean` | `false` | 是否显示字数统计 |  |
 | show-password-on | `'click' \| 'mousedown'` | `undefined` | 显示密码的时机 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框尺寸 |  |
-| status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | NEXT_VERSION |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.25.0 |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | 输入框类型 |  |
 | value | `string \| [string, string] \| null` | `undefined` | 文本输入的值。如果 `pair` 是 `true`，`value` 是一个数组 |  |
 | on-blur | `() => void` | `undefined` | 输入框失去焦点时触发 |  |

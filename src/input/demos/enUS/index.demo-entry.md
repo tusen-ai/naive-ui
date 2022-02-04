@@ -49,7 +49,7 @@ status.vue
 | show-count | `boolean` | `false` | Whether to show the word count. |  |
 | show-password-on | `'click' \| 'mousedown'` | `undefined` | The event to show the password. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |  |
-| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | NEXT_VERSION |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validaiton status. | 2.25.0 |
 | type | `'text' \| 'password' \| 'textarea'` | `'text'` | Input type. |  |
 | value | `string \| [string, string] \| null` | `undefined` | Manually set the input value. When `pair` is `true`, this is an array. |  |
 | on-blur | `() => void` | `undefined` | Callback triggered when the input is blurred. |  |

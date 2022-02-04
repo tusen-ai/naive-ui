@@ -32,7 +32,7 @@ rtl-debug
 | embedded | `boolean` | `false` | 使用更深的背景色展现嵌入效果，只对亮色主题生效 |  |
 | footer-style | `Object \| string` | `undefined` | 卡片底部区域的样式 |  |
 | header-style | `Object \| string` | `undefined` | 卡片头部区域的样式 |  |
-| header-extra-style | `Object \| string` | `undefined` | 卡片头部额外内容的样式 | NEXT_VERSION |
+| header-extra-style | `Object \| string` | `undefined` | 卡片头部额外内容的样式 | 2.25.0 |
 | hoverable | `boolean` | `false` | 卡片是否可悬浮 |  |
 | segmented | `boolean \| { [part in 'content' \| 'footer' \| 'action']?: boolean \| 'soft' }` | `false` | 卡片的分段区域设置 |  |
 | size | `'small' \| 'medium' \| 'large' \| 'huge'` | `'medium'` | 卡片的尺寸 |  |

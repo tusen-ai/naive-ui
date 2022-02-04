@@ -56,7 +56,7 @@ placement.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| container-style | `string \| Object` | `undefined` | Style of notification container. | NEXT_VERSION |
+| container-style | `string \| Object` | `undefined` | Style of notification container. | 2.25.0 |
 | placement | `'top-right' \| 'top-left' \| 'bottom-left' \| 'bottom -right'` | `'top-right'` | Placement of all notifications. |  |
 | max | `number` | `undefined` | Limit the number of notifications to display. |  |
 | scrollable | `boolean` | `true` | Whether notification can be scroll. |  |

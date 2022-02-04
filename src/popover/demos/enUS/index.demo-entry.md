@@ -33,7 +33,7 @@ header.vue
 | display-directive | `'if' \| 'show'` | `'if'` | The conditionally render directive to show popover content. `if` means using `v-if` to render content, `show` means using `v-show` to render content. |  |
 | duration | `number` | `100` | Popover vanish delay when trigger is `hover` |  |
 | flip | `boolean` | `true` | Whether to flip the popover when there is no space for current placement. |  |
-| keep-alive-on-hover | `boolean` | `true` | Whether to keep popover shown when hover on popover itself with `trigger="hover"` | NEXT_VERSION |
+| keep-alive-on-hover | `boolean` | `true` | Whether to keep popover shown when hover on popover itself with `trigger="hover"` | 2.25.0 |
 | overlap | `boolean` | `false` | Overlap trigger element. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | Popover placement. |  |
 | raw | `boolean` | `false` | Whether to use no default styles. |  |

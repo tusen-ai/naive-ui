@@ -24,14 +24,14 @@ move.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| create-button-props | `ButtonProps` | `undefined` | Props of create item button. | NEXT_VERSION |
+| create-button-props | `ButtonProps` | `undefined` | Props of create item button. | 2.25.0 |
 | default-value | `unknown[]` | `[]` | Default value. |  |
 | item-style | `string \| Object` | `undefined` | The style of each item of the dynamic input. |  |
 | key-field | `string` | `undefined` | The key of each item that should be used in the rendering of the list. |  |
 | min | `number` | `0` | Minimum number of items. |  |
 | max | `number` | `undefined` | Maximum number of items. |  |
 | preset | `'input' \| 'pair'` | `'input'` | The preset of `n-dynamic-input`, it work when `$slots.default` is not set. |  |
-| show-sort-button | `boolean` | `false` | Whether to show sort button. | NEXT_VERSION |
+| show-sort-button | `boolean` | `false` | Whether to show sort button. | 2.25.0 |
 | value | `unknown[]` | `undefined` | Value in controlled mode. |  |
 | on-create | `(index: number) => void` | `undefined` | Add button (+) click callback. If set, the return value will be used as the initial value of the new item. `index` is the the new item's corresponding index in the value array, which starts from 1 (the second item). |  |
 | on-remove | `(index: number) => void` | `undefined` | Remove button (-) callback. |  |
@@ -57,5 +57,5 @@ move.vue
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | default | `(options: { value: any, index: number })` | The content of each item; `value` and `index` are the value and index of the current item. |  |
-| create-button-default | `()` | Content of create button. | NEXT_VERSION |
-| create-button-icon | `()` | Icon of create button. | NEXT_VERSION |
+| create-button-default | `()` | Content of create button. | 2.25.0 |
+| create-button-icon | `()` | Icon of create button. | 2.25.0 |

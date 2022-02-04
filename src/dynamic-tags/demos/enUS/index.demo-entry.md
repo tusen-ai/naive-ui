@@ -21,7 +21,7 @@ slot.vue
 | color | `{ color?: string, borderColor?: string, textColor?: string }` | `undefined` | Color of the tag. Note: it will override the color set by `type`. |  |
 | default-value | `string[]` | `[]` | Default value. |  |
 | disabled | `boolean` | `false` | Whether the tag is disabled. |  |
-| input-props | `InputProps` | `undefined` | Props of internal `n-input`. | NEXT_VERSION |
+| input-props | `InputProps` | `undefined` | Props of internal `n-input`. | 2.25.0 |
 | input-style | `string \| Object` | `undefined` | Customize the style of the input. |  |
 | max | `number` | `undefined` | Maximum number of tags. |  |
 | round | `boolean` | `false` | Whether the tag has rounded corners. |  |
