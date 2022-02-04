@@ -22,6 +22,7 @@
 - Fix `n-dropdown` has extra margin when `trigger="manual"`.
 - Fix `web-types.json`'s `n-h1` ~ `n-h6` name.
 - Fix `n-select` deletes option on backspace pressed while compisiting.
+- Fix `n-select` uses disabled option as pending option after menu is opened.
 
 ### Feats
 

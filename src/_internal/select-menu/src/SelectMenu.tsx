@@ -18,7 +18,7 @@ import { NEmpty } from '../../../empty'
 import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarInst } from '../../scrollbar'
 import type {
-  SelectBaseOption,
+  SelectOption,
   SelectGroupOption,
   SelectIgnoredOption,
   Value,
@@ -99,7 +99,7 @@ export default defineComponent({
       default: true
     },
     // deprecated
-    onToggle: Function as PropType<(tmNode: TreeNode<SelectBaseOption>) => void>
+    onToggle: Function as PropType<(tmNode: TreeNode<SelectOption>) => void>
   },
   setup (props) {
     const themeRef = useTheme(
@@ -117,24 +117,32 @@ export default defineComponent({
     const fIndexGetterRef = computed(() =>
       createIndexGetter(flattenedNodesRef.value)
     )
-    const pendingNodeRef = ref<TreeNode<SelectBaseOption> | null>(null)
+    const pendingNodeRef = ref<TreeNode<SelectOption> | null>(null)
     function initPendingNode (): void {
       const { treeMate } = props
-      setPendingTmNode(
-        props.autoPending
-          ? props.value === null
-            ? treeMate.getFirstAvailableNode()
-            : props.multiple
-              ? treeMate.getNode(
-                ((props.value as Array<string | number> | null) || [])[
-                  ((props.value as Array<string | number> | null) || [])
-                    .length - 1
-                ]
-              ) || treeMate.getFirstAvailableNode()
-              : treeMate.getNode(props.value as string | number) ||
-              treeMate.getFirstAvailableNode()
-          : null
-      )
+      let defaultPendingNode: TreeNode<SelectOption> | null = null
+      if (props.autoPending) {
+        const { value } = props
+        if (value === null) {
+          defaultPendingNode = treeMate.getFirstAvailableNode()
+        } else {
+          if (props.multiple) {
+            defaultPendingNode = treeMate.getNode(
+              ((value as Array<string | number> | null) || [])[
+                ((value as Array<string | number> | null) || []).length - 1
+              ]
+            )
+          } else {
+            defaultPendingNode = treeMate.getNode(value as string | number)
+          }
+          if (!defaultPendingNode || defaultPendingNode.disabled) {
+            defaultPendingNode = treeMate.getFirstAvailableNode()
+          }
+        }
+        if (defaultPendingNode) {
+          setPendingTmNode(defaultPendingNode)
+        }
+      }
     }
 
     let initPendingNodeWatchStopHandle: WatchStopHandle | undefined
@@ -181,7 +189,7 @@ export default defineComponent({
     const styleRef = computed(() => {
       return [{ width: formatLength(props.width) }, cssVarsRef.value]
     })
-    function doToggle (tmNode: TreeNode<SelectBaseOption>): void {
+    function doToggle (tmNode: TreeNode<SelectOption>): void {
       const { onToggle } = props
       if (onToggle) onToggle(tmNode)
     }
@@ -197,21 +205,21 @@ export default defineComponent({
     function handleVirtualListResize (): void {
       scrollbarRef.value?.sync()
     }
-    function getPendingTmNode (): TreeNode<SelectBaseOption> | null {
+    function getPendingTmNode (): TreeNode<SelectOption> | null {
       const { value: pendingTmNode } = pendingNodeRef
       if (pendingTmNode) return pendingTmNode
       return null
     }
     function handleOptionMouseEnter (
       e: MouseEvent,
-      tmNode: TreeNode<SelectBaseOption>
+      tmNode: TreeNode<SelectOption>
     ): void {
       if (tmNode.disabled) return
       setPendingTmNode(tmNode, false)
     }
     function handleOptionClick (
       e: MouseEvent,
-      tmNode: TreeNode<SelectBaseOption>
+      tmNode: TreeNode<SelectOption>
     ): void {
       if (tmNode.disabled) return
       doToggle(tmNode)
@@ -243,7 +251,7 @@ export default defineComponent({
       }
     }
     function setPendingTmNode (
-      tmNode: TreeNode<SelectBaseOption> | null,
+      tmNode: TreeNode<SelectOption> | null,
       doScroll = false
     ): void {
       pendingNodeRef.value = tmNode
@@ -425,9 +433,7 @@ export default defineComponent({
                         item: tmNode
                       }: {
                         item: TreeNode<
-                        | SelectGroupOption
-                        | SelectBaseOption
-                        | SelectIgnoredOption
+                        SelectGroupOption | SelectOption | SelectIgnoredOption
                         >
                       }) => {
                         return tmNode.isGroup ? (
@@ -442,9 +448,7 @@ export default defineComponent({
                           <NSelectOption
                             clsPrefix={clsPrefix}
                             key={tmNode.key}
-                            tmNode={
-                              tmNode as unknown as TreeNode<SelectBaseOption>
-                            }
+                            tmNode={tmNode as unknown as TreeNode<SelectOption>}
                           />
                         )
                       }
@@ -471,9 +475,7 @@ export default defineComponent({
                         <NSelectOption
                           clsPrefix={clsPrefix}
                           key={tmNode.key}
-                          tmNode={
-                            tmNode as unknown as TreeNode<SelectBaseOption>
-                          }
+                          tmNode={tmNode as unknown as TreeNode<SelectOption>}
                         />
                       )
                     )}

@@ -22,6 +22,7 @@
 - 修复 `n-dropdown` 在 `trigger="manual"` 时有额外 margin
 - 修复 `web-types.json` 中 `n-h1` ~ `n-h6` 的名称
 - 修复 `n-select` 在输入法激活时按退格键会删除选项
+- 修复 `n-select` 在特定情况下打开菜单后会将禁用的选项作为待选选项
 
 ### Feats
 
