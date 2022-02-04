@@ -145,7 +145,7 @@ export default defineComponent({
             NIcon,
             {
               style: {
-                verticalAlign: 'middle',
+                verticalAlign: '-0.15em',
                 marginRight: '4px'
               }
             },

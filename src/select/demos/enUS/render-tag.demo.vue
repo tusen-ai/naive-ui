@@ -1,5 +1,5 @@
 <markdown>
-# Custom tag rendering
+# Customize tag rendering
 
 Give the tag a little color.
 </markdown>

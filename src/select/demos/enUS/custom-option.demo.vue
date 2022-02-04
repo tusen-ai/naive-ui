@@ -1,5 +1,5 @@
 <markdown>
-# Custom option rendering
+# Customize option rendering
 
 After much deliberation, I decided to drop the slot API for rendering options; however, using `render-label`, `style`, and/or `class` properties you can do almost anything.
 </markdown>
@@ -145,7 +145,7 @@ export default defineComponent({
             NIcon,
             {
               style: {
-                verticalAlign: 'middle',
+                verticalAlign: '-0.15em',
                 marginRight: '4px'
               }
             },
