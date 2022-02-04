@@ -21,6 +21,7 @@
 - Fix `n-select` can't input content when `show=false` and `filterable=true`, closes [#1723](https://github.com/TuSimple/naive-ui/issues/1723).
 - Fix `n-dropdown` has extra margin when `trigger="manual"`.
 - Fix `web-types.json`'s `n-h1` ~ `n-h6` name.
+- Fix `n-select` deletes option on backspace pressed while compisiting.
 
 ### Feats
 
