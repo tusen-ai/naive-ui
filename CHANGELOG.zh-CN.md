@@ -41,6 +41,7 @@
 ### i18n
 
 - 更新 jaJP locale
+- 更新 deDE locale
 
 ## 2.24.6 (2022-01-26)
 
