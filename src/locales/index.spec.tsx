@@ -13,6 +13,7 @@ import {
   frFR,
   esAR,
   itIT,
+  enGB,
   dateEnUS,
   dateZhCN,
   dateZhTW,
@@ -25,6 +26,7 @@ import {
   dateFrFR,
   dateEsAR,
   dateItIT,
+  dateEnGB,
   NConfigProvider,
   NDateLocale,
   NLocale,
@@ -200,6 +202,14 @@ describe('locale', () => {
         props: {
           dateLocale: dateItIT,
           locale: itIT
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateEnGB,
+          locale: enGB
         }
       }).html()
     ).toMatchSnapshot()
