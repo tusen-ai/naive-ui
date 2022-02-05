@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### i18n
+
+- Add enGB locale.
+
 ## 2.25.0
 
 ### Breaking Changes
