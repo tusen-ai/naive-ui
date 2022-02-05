@@ -55,6 +55,7 @@ PRs are welcomed for locales that are not supported yet!
 | French                    | frFR   | dateFrFR    |         |
 | Spanish (Argentina)       | esAR   | dateEsAR    | 2.24.2  |
 | Italiano                  | itIT   | dateItIT    | 2.24.2  |
+| English (British)         | enGB   | dateEnGB    | 2.25.1  |
 
 ## Customize the existing locale
 
