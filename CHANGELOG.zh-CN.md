@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.25.1
+
+### i18n
+
+- 新增 enGB locale
+- 完善 deDE locale
+
 ## 2.25.0
 
 ### Breaking Changes
@@ -66,6 +73,7 @@
 ### i18n
 
 - 更新 jaJP locale
+- 更新 deDE locale
 
 ## 2.24.6 (2022-01-26)
 
