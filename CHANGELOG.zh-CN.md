@@ -1,13 +1,13 @@
 # CHANGELOG
 
-## 2.25.1
+## 2.25.1 (2022-02-06)
 
 ### i18n
 
 - 新增 enGB locale
 - 完善 deDE locale
 
-## 2.25.0
+## 2.25.0 (2022-02-04)
 
 ### Breaking Changes
 

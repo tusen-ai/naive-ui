@@ -1,13 +1,13 @@
 # CHANGELOG
 
-## 2.25.1
+## 2.25.1 (2022-02-06)
 
 ### i18n
 
 - Add enGB locale.
 - Fix deDE locale.
 
-## 2.25.0
+## 2.25.0 (2022-02-04)
 
 ### Breaking Changes
 
