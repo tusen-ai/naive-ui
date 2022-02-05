@@ -5,6 +5,7 @@
 ### i18n
 
 - Add enGB locale.
+- Fix deDE locale.
 
 ## 2.25.0
 

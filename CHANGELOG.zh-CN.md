@@ -5,6 +5,7 @@
 ### i18n
 
 - 新增 enGB locale
+- 完善 deDE locale
 
 ## 2.25.0
 
