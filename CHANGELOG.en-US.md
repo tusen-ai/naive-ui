@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+### Feats
+- `n-watermark` add new component, closes [#1745](https://github.com/TuSimple/naive-ui/issues/1745).
+
 ## 2.25.1 (2022-02-06)
 
 ### i18n
