@@ -73,6 +73,7 @@ import { treeSelectDark } from '../tree-select/styles'
 import { typographyDark } from '../typography/styles'
 import { treeDark } from '../tree/styles'
 import { uploadDark } from '../upload/styles'
+import { watermarkDark } from '../watermark/styles'
 import type { BuiltInGlobalTheme } from './interface'
 
 export const darkTheme: BuiltInGlobalTheme = {
@@ -150,5 +151,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   Tree: treeDark,
   TreeSelect: treeSelectDark,
   Typography: typographyDark,
-  Upload: uploadDark
+  Upload: uploadDark,
+  Watermark: watermarkDark
 }

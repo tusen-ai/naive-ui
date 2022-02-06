@@ -73,6 +73,7 @@ import type { TreeTheme } from '../../tree/styles'
 import type { TreeSelectTheme } from '../../tree-select/styles'
 import type { TypographyTheme } from '../../typography/styles'
 import type { UploadTheme } from '../../upload/styles'
+import type { WatermarkTheme } from '../../watermark/styles'
 import type { InternalSelectMenuTheme } from '../../_internal/select-menu/styles'
 import type { InternalSelectionTheme } from '../../_internal/selection/styles'
 import type { NDateLocale, NLocale } from '../../locales'
@@ -162,6 +163,7 @@ export interface GlobalThemeWithoutCommon {
   TreeSelect?: TreeSelectTheme
   Typography?: TypographyTheme
   Upload?: UploadTheme
+  Watermark?: WatermarkTheme
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme

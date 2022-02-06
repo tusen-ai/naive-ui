@@ -79,5 +79,6 @@ export * from './tree'
 export * from './tree-select'
 export * from './typography'
 export * from './upload'
+export * from './watermark'
 
 export * from './legacy-grid'
