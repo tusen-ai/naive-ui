@@ -7,7 +7,7 @@
 ```demo
 basic
 arrow
-dots
+dots.vue
 autoplay
 vertical
 space-between
@@ -35,9 +35,9 @@ custom-arrow-and-dots
 | default-index | `number` | `0` | 默认显示页 | 2.24.0 |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | 轮播图显示的方向 |
 | dot-placement | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | 轮播指示点位置 | 2.24.0 |
-| dot-type | `'dot' \| 'line' \| 'never'` | `'dot'` | 轮播指示点样式 | 2.24.0 |
+| dot-type | `'dot' \| 'line'` | `'dot'` | 轮播指示点样式 | 2.24.0 |
 | draggable | `boolean` | `false` | 是否通过鼠标拖拽切换轮播图 | 2.24.0 |
-| effect | `'slide' \| 'fade' \| 'card' \| 'custom'` | `'slide'` | 轮播图切换时的过渡效果 | 2.24.0，`'card'` 2.24.2 |
+| effect | `'slide' \| 'fade' \| 'card' \| 'custom'` | `'slide'` | 轮播图切换时的过渡效果 | 2.24.0, `'card'` 2.24.2 |
 | interval | `number` | `5000` | 自动播放的间隔（ms） |
 | keyboard | `boolean` | `false` | 是否通过按键切换轮播图，只有焦点在 Dots 上时才起作用 | 2.24.0 |
 | loop | `boolean` | `true` | 是否循环播放 | 2.24.0 |
@@ -48,7 +48,7 @@ custom-arrow-and-dots
 | show-dots | `boolean` | `true` | 是否展示指示点 | 2.24.0 |
 | touchable | `boolean` | `true` | 是否通过触摸拖拽切换轮播图 | 2.24.0 |
 | transition-style | `{ transitionDuration?: string, transitionTimingFunction?: string }` | `{ transitionDuration: '300ms' }` | 过渡效果的样式 | 2.24.0 |
-| transition-props | `TransitionProps` | `undefined` | 自定义过渡效果属性，[参考](https://v3.cn.vuejs.org/api/built-in-components.html#transition) | 2.24.0 |
+| transition-props | `TransitionProps` | `undefined` | 自定义过渡效果属性，[参考 Vue 文档](https://v3.cn.vuejs.org/api/built-in-components.html#transition) | 2.24.0 |
 | trigger | `'click' \| 'hover'` | `'click'` | 触发切换的方式 |
 | on-update:current-index | `(currentIndex: number, lastIndex: number) => void` | `undefined` | 当前页变化时的回调函数 | 2.24.0 |
 

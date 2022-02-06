@@ -72,7 +72,7 @@ export default defineComponent({
         common
       }
       for (const key of Object.keys(lightTheme) as Array<
-      keyof typeof lightTheme
+      Exclude<keyof typeof lightTheme, 'name'>
       >) {
         if (key === 'common') continue
         ;(overrides as any)[key] = (mergedTheme[key]?.self?.(common) ||

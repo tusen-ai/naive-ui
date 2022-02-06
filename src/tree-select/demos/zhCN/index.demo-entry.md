@@ -44,6 +44,7 @@ debug
 | multiple | `boolean` | `false` | 是否支持多选 |  |
 | options | `TreeSelectOption[]` | `[]` | 选项 |  |
 | placeholder | `string` | `'请选择'` | 占位信息 |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 选择器的弹出位置. | 2.25.0 |
 | separator | `string` | `' / '` | 数据分隔符 |  |
 | show-path | `boolean` | `false` | 是否在选择器中显示选项路径 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |

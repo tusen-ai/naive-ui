@@ -7,19 +7,20 @@
 ## 演示
 
 ```demo
-basic
-custom-field
-cascade
-multiple
-filter
-drag-drop
-virtual
-async
-disabled
-prefix-and-suffix
-batch-render
+basic.vue
+custom-field.vue
+multiple.vue
+cascade.vue
+filter.vue
+drag-drop.vue
+virtual.vue
+async.vue
+disabled.vue
+prefix-and-suffix.vue
+batch-render.vue
 switcher-icon.vue
-check-strategy-debug
+node-props.vue
+check-strategy-debug.vue
 ```
 
 ## API
@@ -50,6 +51,7 @@ check-strategy-debug
 | key-field | `string` | `'key'` | 替代 `TreeOption` 中的 key 字段名 |  |
 | label-field | `string` | `'label'` | 替代 `TreeOption` 中的 label 字段名 |  |
 | leaf-only | `boolean` | `false` | 是否开启仅末层树节点可选 |  |
+| node-props | `(info: { option: TreeOption }) => HTMLAttributes` | `undefined` | 节点的 HTML 属性 | 2.25.0 |
 | multiple | `boolean` | `false` | 是否允许节点多选 |  |
 | on-load | `(node: TreeOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 |  |
 | pattern | `string` | `''` | 默认搜索的内容 |  |

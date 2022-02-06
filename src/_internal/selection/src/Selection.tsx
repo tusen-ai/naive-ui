@@ -16,6 +16,7 @@ import {
 } from 'vue'
 import { VOverflow, VOverflowInst } from 'vueuc'
 import type { SelectBaseOption } from '../../../select/src/interface'
+import type { FormValidationStatus } from '../../../form/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
 import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
@@ -25,7 +26,7 @@ import { createKey, getTitleAttribute, render } from '../../../_utils'
 import Suffix from '../../suffix'
 import { internalSelectionLight } from '../styles'
 import type { InternalSelectionTheme } from '../styles'
-import { RenderTag } from './interface'
+import type { RenderTag } from './interface'
 import style from './styles/index.cssr'
 import type {
   RenderLabel,
@@ -33,6 +34,7 @@ import type {
 } from '../../select-menu/src/interface'
 
 export interface InternalSelectionInst {
+  isCompositing: boolean
   focus: () => void
   focusInput: () => void
   blur: () => void
@@ -54,7 +56,7 @@ export default defineComponent({
     active: Boolean,
     pattern: {
       type: String,
-      default: null
+      default: ''
     },
     placeholder: String,
     selectedOption: {
@@ -91,7 +93,10 @@ export default defineComponent({
     maxTagCount: [String, Number] as PropType<number | 'responsive'>,
     onClear: Function as PropType<(e: MouseEvent) => void>,
     onPatternInput: Function as PropType<(e: InputEvent) => void>,
-    renderLabel: Function as PropType<RenderLabel>
+    onPatternFocus: Function as PropType<(e: FocusEvent) => void>,
+    onPatternBlur: Function as PropType<(e: FocusEvent) => void>,
+    renderLabel: Function as PropType<RenderLabel>,
+    status: String as PropType<FormValidationStatus>
   },
   setup (props) {
     const patternInputMirrorRef = ref<HTMLElement | null>(null)
@@ -110,7 +115,7 @@ export default defineComponent({
     const hoverRef = ref(false)
     const themeRef = useTheme(
       'InternalSelection',
-      'InternalSelection',
+      '-internal-selection',
       style,
       internalSelectionLight,
       props,
@@ -225,7 +230,7 @@ export default defineComponent({
       doDeleteOption(option)
     }
     function handlePatternKeyDown (e: KeyboardEvent): void {
-      if (e.code === 'Backspace') {
+      if (e.code === 'Backspace' && !isCompositingRef.value) {
         if (!props.pattern.length) {
           const { selectedOptions } = props
           if (selectedOptions?.length) {
@@ -260,11 +265,13 @@ export default defineComponent({
       doPatternInput(cachedInputEvent!)
       cachedInputEvent = null
     }
-    function handlePatternInputFocus (): void {
+    function handlePatternInputFocus (e: FocusEvent): void {
       patternInputFocusedRef.value = true
+      props.onPatternFocus?.(e)
     }
     function handlePatternInputBlur (e: FocusEvent): void {
       patternInputFocusedRef.value = false
+      props.onPatternBlur?.(e)
     }
     function blur (): void {
       if (props.filterable) {
@@ -498,6 +505,7 @@ export default defineComponent({
   },
   render () {
     const {
+      status,
       multiple,
       size,
       disabled,
@@ -584,7 +592,7 @@ export default defineComponent({
             ref="patternInputMirrorRef"
             class={`${clsPrefix}-base-selection-input-tag__mirror`}
           >
-            {this.pattern ? this.pattern : ''}
+            {this.pattern}
           </span>
         </div>
       ) : null
@@ -688,14 +696,18 @@ export default defineComponent({
             themeOverrides: this.mergedTheme.peerOverrides.Popover
           } as const)
         : null
-      const placeholder =
-        !this.selected && !this.pattern && !this.isCompositing ? (
-          <div
-            class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
-          >
-            {this.placeholder}
-          </div>
-        ) : null
+      const showPlaceholder = this.selected
+        ? false
+        : this.active
+          ? !this.pattern && !this.isCompositing
+          : true
+      const placeholder = showPlaceholder ? (
+        <div
+          class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
+        >
+          {this.placeholder}
+        </div>
+      ) : null
       if (filterable) {
         const popoverTrigger = (
           <div
@@ -751,10 +763,9 @@ export default defineComponent({
       }
     } else {
       if (filterable) {
-        const showPlaceholder =
-          !this.pattern &&
-          (this.active || !this.selected) &&
-          !this.isCompositing
+        const hasInput = this.pattern || this.isCompositing
+        const showPlaceholder = this.active ? !hasInput : !this.selected
+        const showSelectedLabel = this.active ? false : this.selected
         body = (
           <div
             ref="patternInputWrapperRef"
@@ -764,9 +775,7 @@ export default defineComponent({
               {...this.inputProps}
               ref="patternInputRef"
               class={`${clsPrefix}-base-selection-input`}
-              value={
-                this.patternInputFocused && this.active ? this.pattern : ''
-              }
+              value={this.active ? this.pattern : ''}
               placeholder=""
               readonly={disabled}
               disabled={disabled}
@@ -778,8 +787,7 @@ export default defineComponent({
               onCompositionstart={this.handleCompositionStart}
               onCompositionend={this.handleCompositionEnd}
             />
-            {showPlaceholder ? null : this.patternInputFocused &&
-              this.active ? null : (
+            {showSelectedLabel ? (
               <div
                 class={`${clsPrefix}-base-selection-label__render-label ${clsPrefix}-base-selection-overlay`}
                 key="input"
@@ -795,7 +803,7 @@ export default defineComponent({
                       : render(this.label, this.selectedOption, true)}
                 </div>
               </div>
-              )}
+            ) : null}
             {showPlaceholder ? (
               <div
                 class={`${clsPrefix}-base-selection-placeholder ${clsPrefix}-base-selection-overlay`}
@@ -851,6 +859,7 @@ export default defineComponent({
         ref="selfRef"
         class={[
           `${clsPrefix}-base-selection`,
+          status && `${clsPrefix}-base-selection--${status}-status`,
           {
             [`${clsPrefix}-base-selection--active`]: this.active,
             [`${clsPrefix}-base-selection--selected`]:

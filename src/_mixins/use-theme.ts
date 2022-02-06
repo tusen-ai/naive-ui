@@ -8,11 +8,11 @@ import {
   PropType
 } from 'vue'
 import { merge } from 'lodash-es'
+import { CNode } from 'css-render'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
 import globalStyle from '../_styles/global/index.cssr'
-import { CNode } from 'css-render'
-import type { GlobalTheme } from '../config-provider'
 import { configProviderInjectionKey } from '../config-provider/src/context'
+import type { GlobalTheme } from '../config-provider'
 import type { ThemeCommonVars } from '../_styles/common'
 import { cssrAnchorMetaName } from './common'
 
@@ -85,7 +85,7 @@ export type MergedTheme<T> = T extends Theme<unknown, infer V, infer W>
   : T
 
 function useTheme<N, T, R> (
-  resolveId: Exclude<keyof GlobalTheme, 'common'>,
+  resolveId: Exclude<keyof GlobalTheme, 'common' | 'name'>,
   mountId: string,
   style: CNode | undefined,
   defaultTheme: Theme<N, T, R>,
@@ -106,7 +106,7 @@ function useTheme<N, T, R> (
         ssr: ssrAdapter
       })
       globalStyle.mount({
-        id: 'naive-ui/global',
+        id: 'n-global',
         head: true,
         anchorMetaName: cssrAnchorMetaName,
         ssr: ssrAdapter

@@ -82,7 +82,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Switch',
-      'Switch',
+      '-switch',
       style,
       switchLight,
       props,

@@ -39,6 +39,7 @@ focus.vue
 | multiple | `boolean` | `false` | 是否支持多选 |  |
 | options | `CascaderOption[]` | `[]` | 填充的 options 数据 |  |
 | placeholder | `string` | `'请选择'` | 提示信息 |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 弹出位置 | 2.25.0 |
 | remote | `boolean` | `false` | 是否远程获取数据 |  |
 | render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Cascader 菜单选项标签渲染函数 | 2.24.0 |
 | separator | `string` | `' / '` | 数据分隔符 |  |

@@ -88,7 +88,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Transfer',
-      'Transfer',
+      '-transfer',
       style,
       transferLight,
       props,

@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, Fragment } from 'vue'
+import { h, defineComponent, inject } from 'vue'
 import { useConfig } from '../../_mixins'
 import { carouselMethodsInjectionKey } from './interface'
 
@@ -47,29 +47,11 @@ export default defineComponent({
   },
   render () {
     const { mergedClsPrefix } = this
-    const isVertical = this.isVertical()
     return (
-      <Fragment>
+      <div class={`${mergedClsPrefix}-carousel__arrow-group`}>
         <div
           class={[
             `${mergedClsPrefix}-carousel__arrow`,
-            `${mergedClsPrefix}-carousel__arrow--${
-              isVertical ? 'bottom' : 'right'
-            }`,
-            this.isNextDisabled() &&
-              `${mergedClsPrefix}-carousel__arrow--disabled`
-          ]}
-          role="button"
-          onClick={this.next}
-        >
-          {forwardIcon}
-        </div>
-        <div
-          class={[
-            `${mergedClsPrefix}-carousel__arrow`,
-            `${mergedClsPrefix}-carousel__arrow--${
-              isVertical ? 'top' : 'left'
-            }`,
             this.isPrevDisabled() &&
               `${mergedClsPrefix}-carousel__arrow--disabled`
           ]}
@@ -78,7 +60,18 @@ export default defineComponent({
         >
           {backwardIcon}
         </div>
-      </Fragment>
+        <div
+          class={[
+            `${mergedClsPrefix}-carousel__arrow`,
+            this.isNextDisabled() &&
+              `${mergedClsPrefix}-carousel__arrow--disabled`
+          ]}
+          role="button"
+          onClick={this.next}
+        >
+          {forwardIcon}
+        </div>
+      </div>
     )
   }
 })

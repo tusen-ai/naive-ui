@@ -2,9 +2,9 @@
 
 # Internationalization
 
-Naive-ui provide `n-config-provider` to customize the internationalization. By default, all components are in English.
+Naive-ui provides `n-config-provider` to customize the internationalization. By default, all components are in English.
 
-Learn more about `n-config-provider`, see [Config Provider](../components/config-provider).
+To learn more about `n-config-provider`, see [Config Provider](../components/config-provider).
 
 ## Configure
 
@@ -40,7 +40,7 @@ Set `n-config-provider`'s `date-locale` prop to `dateEnUS` imported from naive-u
 
 ## Supported languages
 
-PR is welcomed for locales that is not supported yet!
+PRs are welcomed for locales that are not supported yet!
 
 | Language                  | Config | Date config | Version |
 | ------------------------- | ------ | ----------- | ------- |
@@ -50,11 +50,12 @@ PR is welcomed for locales that is not supported yet!
 | Ukrainian                 | ukUA   | dateUkUA    |         |
 | Chinese (Simplified)      | zhCN   | dateZhCN    |         |
 | Chinese (Traditional)     | zhTW   | dateZhTW    |         |
-| German - Germany          | deDE   | dateDeDe    |         |
+| German (Germany)          | deDE   | dateDeDe    |         |
 | Norwegian Bokmål (Norway) | nbNO   | dateNbNO    |         |
 | French                    | frFR   | dateFrFR    |         |
 | Spanish (Argentina)       | esAR   | dateEsAR    | 2.24.2  |
 | Italiano                  | itIT   | dateItIT    | 2.24.2  |
+| English (British)         | enGB   | dateEnGB    | 2.25.1  |
 
 ## Customize the existing locale
 

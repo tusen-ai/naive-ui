@@ -12,7 +12,7 @@
 </n-alert>
 
 ```demo
-basic
+basic.vue
 empty
 border
 size
@@ -43,6 +43,7 @@ flex-height
 striped
 simple-editable
 switchable-editable
+context-menu.vue
 fixed-column-debug
 fixed-column2-debug
 scroll-debug

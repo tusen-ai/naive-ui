@@ -10,8 +10,10 @@ import {
 } from 'vue'
 import { useMemo } from 'vooks'
 import { merge } from 'lodash-es'
+import { hash } from 'css-render'
 import { ExtractPublicPropTypes, warn } from '../../_utils'
 import { defaultClsPrefix, Hljs } from '../../_mixins'
+import { NDateLocale, NLocale } from '../../locales'
 import type {
   GlobalTheme,
   GlobalThemeOverrides,
@@ -23,7 +25,6 @@ import type {
   RtlEnabledState,
   Breakpoints
 } from './internal-interface'
-import { NDateLocale, NLocale } from '../../locales'
 import { configProviderInjectionKey } from './context'
 
 export const configProviderProps = {
@@ -47,6 +48,10 @@ export const configProviderProps = {
   componentOptions: Object as PropType<GlobalComponentConfig>,
   icons: Object as PropType<GlobalIconConfig>,
   breakpoints: Object as PropType<Breakpoints>,
+  disableInlineTheme: {
+    type: Boolean,
+    default: undefined
+  },
   // deprecated
   as: {
     type: String as PropType<string | undefined>,
@@ -139,7 +144,31 @@ export default defineComponent({
     const mergedBreakpointsRef = computed(() => {
       return props.breakpoints || NConfigProvider?.mergedBreakpointsRef.value
     })
+    const disableInlineTheme =
+      props.disableInlineTheme || NConfigProvider?.disableInlineTheme
+
+    const mergedThemeHashRef = computed(() => {
+      const { value: theme } = mergedThemeRef
+      const { value: mergedThemeOverrides } = mergedThemeOverridesRef
+      const hasThemeOverrides =
+        mergedThemeOverrides && Object.keys(mergedThemeOverrides).length !== 0
+      const themeName = theme?.name
+      if (themeName) {
+        if (hasThemeOverrides) {
+          return `${themeName}-${hash(
+            JSON.stringify(mergedThemeOverridesRef.value)
+          )}`
+        }
+        return themeName
+      } else {
+        if (hasThemeOverrides) {
+          return hash(JSON.stringify(mergedThemeOverridesRef.value))
+        }
+        return ''
+      }
+    })
     provide(configProviderInjectionKey, {
+      mergedThemeHashRef,
       mergedBreakpointsRef,
       mergedRtlRef,
       mergedIconsRef,
@@ -166,7 +195,8 @@ export default defineComponent({
         return hljs === undefined ? NConfigProvider?.mergedHljsRef.value : hljs
       }),
       mergedThemeRef,
-      mergedThemeOverridesRef
+      mergedThemeOverridesRef,
+      disableInlineTheme: disableInlineTheme || false
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,

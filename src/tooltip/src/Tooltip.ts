@@ -25,7 +25,7 @@ export default defineComponent({
   setup (props) {
     const themeRef = useTheme(
       'Tooltip',
-      'Tooltip',
+      '-tooltip',
       undefined,
       tooltipLight,
       props

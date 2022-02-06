@@ -76,7 +76,7 @@ export default defineComponent({
       useConfig(props)
     const themeRef = useTheme(
       'Tag',
-      'Tag',
+      '-tag',
       style,
       tagLight,
       props,

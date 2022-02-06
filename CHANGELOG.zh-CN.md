@@ -1,10 +1,68 @@
 # CHANGELOG
 
-## Pending
+## 2.25.1 (2022-02-06)
+
+### i18n
+
+- 新增 enGB locale
+- 完善 deDE locale
+
+## 2.25.0 (2022-02-04)
+
+### Breaking Changes
+
+- 重构了 `n-carousel` 带箭头时的样式
+
+### Fixes
+
+- 修复 `n-color-picker` 色阶和不透明度调整滑块 box-shadow 被轨道 box-shadow 影响
+- 修复 `n-form-item` feedback DOM 内容为空依然有 padding
+- 修复 `n-button` 在 safari 下显示有多余 margin
+- 修复 `n-form` 的 rules 和 `n-form-item` 的 rule 中的 `validator` 与 `asyncValidator` 函数的 `rule` 类型不为 `FormItemRule` 类型， 关闭 [#2299](https://github.com/TuSimple/naive-ui/issues/2299)
+- 修复 `n-log` 在内容过长时不折行，关闭 [#2298](https://github.com/TuSimple/naive-ui/issues/2298)
+- 修复 `n-log` 未导出 `LogInst` 类型
+- 修复 `n-popselect` action slot & empty slot 不生效
+- 修复 `n-data-table` 不能使用百分比列宽
+- 修复 `n-select` 在可过滤，关闭菜单并且没有选中任何值的时候选框会空一下
+- 修复 `n-select` 在动态创建选项时关闭菜单后创建中的选项未清空
+- 修复 `n-select` 在 `show=false` 和 `filterable=true` 时无法输入内容，关闭 [#1723](https://github.com/TuSimple/naive-ui/issues/1723)
+- 修复 `n-dropdown` 在 `trigger="manual"` 时有额外 margin
+- 修复 `web-types.json` 中 `n-h1` ~ `n-h6` 的名称
+- 修复 `n-select` 在输入法激活时按退格键会删除选项
+- 修复 `n-select` 在特定情况下打开菜单后会将禁用的选项作为待选选项
 
 ### Feats
 
 - `n-tabs` 的 `justify-content` 新增类型 `start` `center` `end`
+- `n-auto-complete` 新增 `placement` 属性
+- `n-cascader` 新增 `placement` 属性
+- `n-color-picker` 新增 `placement` 属性
+- `n-date-picker` 新增 `placement` 属性
+- `n-mention` 新增 `placement` 属性
+- `n-select` 新增 `placement` 属性
+- `n-slider` 新增 `placement` 属性
+- `n-time-picker` 新增 `placement` 属性
+- `n-tree-select` 新增 `placement` 属性
+- `n-card` 新增 `header-extra-style` 属性
+- `n-popover` 新增 `keep-alive-on-hover` 属性，关闭 [#2326](https://github.com/TuSimple/naive-ui/issues/2326)
+- `n-input` 新增 `status` 属性
+- 新增 `n-icon-wrapper` 组件
+- `n-popover` 导出 `PopoverPlacement` 类型
+- `n-drawer` 导出 `DrawerPlacement` 类型
+- `n-dynamic-tags` 新增 `input-props` 属性
+- `n-notification-provider` 新增 `container-style` 属性
+- `n-notification-provider` 导出 `NotificationPlacement` 类型
+- `n-notification-provider` 导出 `NotificationType` 类型
+- `n-tabs` 新增 `bar-width` 属性
+- `n-dynamic-input` 新增 `create-button-props` 属性
+- `n-dynamic-input` 新增 `create-button-default` slot
+- `n-dynamic-input` 新增 `create-button-icon` slot
+- `n-dynamic-input` 新增 `show-sort-button` 属性，关闭 [#2121](https://github.com/TuSimple/naive-ui/issues/2121)
+- `n-select` 可以作为标签输入框使用
+- `n-select` 导出 `SelectRenderLabel` 类型
+- `n-select` 导出 `SelectRenderOption` 类型
+- `n-select` 导出 `SelectRenderTag` 类型
+- `n-tree` 新增 `node-props` 属性
 
 ## 2.24.7 (2022-01-28)
 
@@ -15,6 +73,7 @@
 ### i18n
 
 - 更新 jaJP locale
+- 更新 deDE locale
 
 ## 2.24.6 (2022-01-26)
 

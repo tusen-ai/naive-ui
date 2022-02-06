@@ -178,7 +178,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Layout',
-      'LayoutSider',
+      '-layout-sider',
       style,
       layoutLight,
       props,
