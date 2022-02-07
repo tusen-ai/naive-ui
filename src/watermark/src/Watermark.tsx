@@ -5,6 +5,21 @@ import { ExtractPublicPropTypes, warnOnce } from '../../_utils'
 import { watermarkLight, WatermarkTheme } from '../styles'
 import style from './styles/index.cssr'
 
+function getRatio (context: any): number {
+  if (!context) {
+    return 1
+  }
+  const backingStore =
+    context.backingStorePixelRatio ||
+    context.webkitBackingStorePixelRatio ||
+    context.mozBackingStorePixelRatio ||
+    context.msBackingStorePixelRatio ||
+    context.oBackingStorePixelRatio ||
+    context.backingStorePixelRatio ||
+    1
+  return (window.devicePixelRatio || 1) / backingStore
+}
+
 const watermarkProps = {
   ...(useTheme.props as ThemeProps<WatermarkTheme>),
   width: {
@@ -86,28 +101,30 @@ export default defineComponent({
     const base64UrlRef = ref('')
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
-    const ratio = window.devicePixelRatio || 1
-    const canvasWidth = gapX + width
-    const canvasHeight = gapY + height
+    const ratio = getRatio(ctx)
+    const canvasWidth = (gapX + width) * ratio
+    const canvasHeight = (gapY + height) * ratio
     const canvasOffsetLeft = offsetLeft || gapX / 2
     const canvasOffsetTop = offsetTop || gapY / 2
     canvas.width = canvasWidth
     canvas.height = canvasHeight
     if (ctx) {
-      ctx.scale(ratio, ratio)
-      ctx.translate(canvasOffsetLeft, canvasOffsetTop)
+      ctx.translate(canvasOffsetLeft * ratio, canvasOffsetTop * ratio)
       ctx.rotate(rotate * (Math.PI / 180))
+      const markWidth = width * ratio
+      const markHeight = height * ratio
       if (image) {
         const img = new Image()
         img.crossOrigin = 'anonymous'
         img.referrerPolicy = 'no-referrer'
         img.src = image
         img.onload = () => {
-          ctx.drawImage(img, 0, 0, width, height)
+          ctx.drawImage(img, 0, 0, markWidth, markHeight)
           base64UrlRef.value = canvas.toDataURL()
         }
       } else if (content) {
-        ctx.font = `${fontStyle} normal ${fontWeight} ${fontSize}px/${height} ${fontFamily}`
+        const markSize = Number(fontSize) * ratio
+        ctx.font = `${fontStyle} normal ${fontWeight} ${markSize}px/${markHeight} ${fontFamily}`
         ctx.fillStyle = fontColor
         ctx.fillText(content, 0, 0)
         base64UrlRef.value = canvas.toDataURL()
