@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- Fix `n-tag`'s `background-color` style bug.
+
 ## 2.25.1 (2022-02-06)
 
 ### i18n

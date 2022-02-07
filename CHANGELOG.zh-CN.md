@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### Fixes
+
+- 修复 `n-tag` 的 `background-color` 样式问题.
+
 ## 2.25.1 (2022-02-06)
 
 ### i18n
