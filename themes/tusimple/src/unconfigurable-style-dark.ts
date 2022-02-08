@@ -188,7 +188,20 @@ export const unconfigurableStyle = c([
           right: '0'
         })
       ])
-    ])
+    ]),
+    cB(
+      'time-picker-actions',
+      {
+        width: '100%',
+        display: 'inline-block',
+        textAlign: 'center'
+      },
+      [
+        cB('button', {
+          margin: '0 6px'
+        })
+      ]
+    )
   ]),
   cB('transfer', [
     cB(
