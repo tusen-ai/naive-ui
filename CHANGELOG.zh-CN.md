@@ -5,6 +5,7 @@
 ### Fixes
 
 - 移除 `resolveSlot` 中无用的 `console.log`
+- 修复 `n-tag` 在 `checkable=true` 时缺少背景色
 
 ## 2.25.1 (2022-02-06)
 
