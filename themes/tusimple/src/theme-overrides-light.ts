@@ -78,7 +78,7 @@ export const themeOverridesLight: GlobalThemeOverrides = {
     textColorHoverWarning: '#333',
     textColorFocusWarning: '#333',
     textColorPressedWarning: '#333',
-    iconSizeTiny: '16px',
+    iconSizeTiny: '14px',
     iconSizeSmall: '20px',
     iconSizeMedium: '20px',
     iconSizeLarge: '28px',

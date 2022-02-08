@@ -112,7 +112,7 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     textColorWarning: '#333',
     textColorSuccess: '#333',
     textColorPrimary: '#333',
-    iconSizeTiny: '16px',
+    iconSizeTiny: '14px',
     iconSizeSmall: '20px',
     iconSizeMedium: '20px',
     iconSizeLarge: '28px',
