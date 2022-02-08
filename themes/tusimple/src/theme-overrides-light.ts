@@ -163,6 +163,7 @@ export const themeOverridesLight: GlobalThemeOverrides = {
   DataTable: {
     fontSizeMedium: '16px',
     thColor: '#EBEDF0',
+    thIconColor: '#ccc',
     thTextColor: commonLight.textColor2,
     thFontWeight: commonLight.fontWeight,
     tdColorHover: '#4FB23310',
