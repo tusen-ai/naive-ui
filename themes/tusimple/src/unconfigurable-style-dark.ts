@@ -184,11 +184,36 @@ export const unconfigurableStyle = c([
         width: '56px'
       },
       [
-        cB('button', {
-          width: '32px',
-          height: '32px',
-          padding: '0'
-        })
+        cB(
+          'button',
+          {
+            width: '32px',
+            height: '32px',
+            padding: '0'
+          },
+          [
+            cE('border', {
+              border: '1px solid #848484'
+            }),
+            cE('icon', {
+              color: '#848484'
+            })
+          ]
+        ),
+        cB(
+          'button--disabled',
+          {
+            backgroundColor: 'transparent'
+          },
+          [
+            cB('button__border', {
+              border: '1px solid #5B5B5B'
+            }),
+            cB('button__icon', {
+              color: '#5B5B5B'
+            })
+          ]
+        )
       ]
     ),
     cB('transfer-list', [

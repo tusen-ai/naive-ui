@@ -200,14 +200,20 @@ export const unconfigurableStyle = c([
             })
           ]
         ),
-        cB('button--disabled', [
-          cB('button__border', {
-            border: '1px solid #D7DAE0'
-          }),
-          cB('button__icon', {
-            color: '#D7DAE0'
-          })
-        ])
+        cB(
+          'button--disabled',
+          {
+            backgroundColor: 'transparent'
+          },
+          [
+            cB('button__border', {
+              border: '1px solid #D7DAE0'
+            }),
+            cB('button__icon', {
+              color: '#D7DAE0'
+            })
+          ]
+        )
       ]
     ),
     cB('transfer-list', [
