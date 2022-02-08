@@ -9,7 +9,7 @@ import {
   provide,
   toRef
 } from 'vue'
-import { useConfig, useCssVarsClass, useTheme } from '../../_mixins'
+import { useConfig, useThemeClass, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_internal'
 import {
@@ -190,8 +190,8 @@ export default defineComponent({
         '--n-text-color-pressed-checkable': textColorPressedCheckable
       }
     })
-    const themeClassRef = disableInlineTheme
-      ? useCssVarsClass(
+    const themeClassHandle = disableInlineTheme
+      ? useThemeClass(
         'tag',
         computed(() => {
           let hash = ''
@@ -219,7 +219,7 @@ export default defineComponent({
       handleClick,
       handleCloseClick,
       cssVars: disableInlineTheme ? undefined : cssVarsRef,
-      themeClass: themeClassRef
+      ...themeClassHandle
     }
   },
   render () {
@@ -227,8 +227,10 @@ export default defineComponent({
       mergedClsPrefix,
       rtlEnabled,
       color: { borderColor } = {},
+      onRender,
       $slots
     } = this
+    onRender?.()
     return (
       <div
         class={[

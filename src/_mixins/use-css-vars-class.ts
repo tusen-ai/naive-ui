@@ -5,31 +5,29 @@ import { configProviderInjectionKey } from '../config-provider/src/context'
 import { throwError } from '../_utils'
 import { c } from '../_utils/cssr'
 
-export function useCssVarsClass (
+export function useThemeClass (
   componentName: string,
   hashRef: Ref<string> | undefined,
   cssVarsRef: ComputedRef<Record<string, string>> | undefined,
   props: { themeOverrides?: unknown }
-): Ref<string> {
-  if (!cssVarsRef) throwError('useCssVarsClass', 'cssVarsRef is not passed')
+): {
+    themeClass: Ref<string>
+    onRender: () => void
+  } {
+  if (!cssVarsRef) throwError('useThemeClass', 'cssVarsRef is not passed')
 
   const mergedThemeHashRef = inject(
     configProviderInjectionKey,
     null
   )?.mergedThemeHashRef
 
-  const cssVarsClassRef = ref('')
+  const themeClassRef = ref('')
 
   const ssrAdapter = useSsrAdapter()
 
+  let renderCallback: (() => void) | undefined
+
   const mountStyle = (): void => {
-    const cssVars = cssVarsRef.value
-
-    let style = ''
-    for (const key in cssVars) {
-      style += `${key}: ${cssVars[key]};`
-    }
-
     let finalThemeHash = componentName
     const hashValue = hashRef ? hashRef.value : undefined
     const themeHash = mergedThemeHashRef?.value
@@ -38,17 +36,29 @@ export function useCssVarsClass (
     if (props.themeOverrides) {
       finalThemeHash += '-' + hash(JSON.stringify(props.themeOverrides))
     }
-    cssVarsClassRef.value = finalThemeHash
-
-    c(`.${finalThemeHash}`, style).mount({
-      id: finalThemeHash,
-      ssr: ssrAdapter
-    })
+    themeClassRef.value = finalThemeHash
+    renderCallback = () => {
+      const cssVars = cssVarsRef.value
+      let style = ''
+      for (const key in cssVars) {
+        style += `${key}: ${cssVars[key]};`
+      }
+      c(`.${finalThemeHash}`, style).mount({
+        id: finalThemeHash,
+        ssr: ssrAdapter
+      })
+      renderCallback = undefined
+    }
   }
 
   watchEffect(() => {
     mountStyle()
   })
 
-  return cssVarsClassRef
+  return {
+    themeClass: themeClassRef,
+    onRender: () => {
+      renderCallback?.()
+    }
+  }
 }

@@ -26,7 +26,7 @@ import type {
 } from '../../../select/src/interface'
 import { formatLength, resolveSlot, resolveWrappedSlot } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
-import { useCssVarsClass, useTheme } from '../../../_mixins'
+import { useThemeClass, useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import NInternalLoading from '../../loading'
 import NFocusDetector from '../../focus-detector'
@@ -345,8 +345,8 @@ export default defineComponent({
       }
     })
     const { disableInlineTheme } = props
-    const themeClassRef = disableInlineTheme
-      ? useCssVarsClass(
+    const themeClassHandle = disableInlineTheme
+      ? useThemeClass(
         'internal-select-menu',
         computed(() => props.size[0]),
         cssVarsRef,
@@ -374,7 +374,6 @@ export default defineComponent({
       padding: paddingRef,
       flattenedNodes: flattenedNodesRef,
       empty: emptyRef,
-      themeClass: themeClassRef,
       virtualListContainer () {
         const { value } = virtualListRef
         return value?.listElRef as HTMLElement
@@ -391,11 +390,20 @@ export default defineComponent({
       handleMouseDown,
       handleVirtualListResize,
       handleVirtualListScroll,
-      ...exposedProps
+      ...exposedProps,
+      ...themeClassHandle
     }
   },
   render () {
-    const { $slots, virtualScroll, clsPrefix, mergedTheme, themeClass } = this
+    const {
+      $slots,
+      virtualScroll,
+      clsPrefix,
+      mergedTheme,
+      themeClass,
+      onRender
+    } = this
+    onRender?.()
     return (
       <div
         ref="selfRef"

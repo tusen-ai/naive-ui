@@ -20,7 +20,7 @@ import type { FormValidationStatus } from '../../../form/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
 import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
-import { useCssVarsClass, useTheme } from '../../../_mixins'
+import { useThemeClass, useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import { createKey, getTitleAttribute, render } from '../../../_utils'
 import Suffix from '../../suffix'
@@ -459,8 +459,8 @@ export default defineComponent({
         '--n-arrow-size': arrowSize
       }
     })
-    const themeClassRef = disableInlineTheme
-      ? useCssVarsClass(
+    const themeClassHandle = disableInlineTheme
+      ? useThemeClass(
         'internal-selection',
         computed(() => {
           return props.size[0]
@@ -514,7 +514,7 @@ export default defineComponent({
       getTail,
       renderLabel: props.renderLabel as RenderLabelImpl,
       cssVars: disableInlineTheme ? undefined : cssVarsRef,
-      themeClass: themeClassRef
+      ...themeClassHandle
     }
   },
   render () {
@@ -527,9 +527,11 @@ export default defineComponent({
       maxTagCount,
       bordered,
       clsPrefix,
+      onRender,
       renderTag,
       renderLabel
     } = this
+    onRender?.()
     const maxTagCountResponsive = maxTagCount === 'responsive'
     const maxTagCountNumeric = typeof maxTagCount === 'number'
     const useMaxTagCount = maxTagCountResponsive || maxTagCountNumeric

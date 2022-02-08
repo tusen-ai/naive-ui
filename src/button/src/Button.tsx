@@ -12,12 +12,7 @@ import {
 } from 'vue'
 import { useMemo } from 'vooks'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
-import {
-  useConfig,
-  useFormItem,
-  useTheme,
-  useCssVarsClass
-} from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   NFadeInExpandTransition,
@@ -476,8 +471,8 @@ const Button = defineComponent({
         ...sizeProps
       }
     })
-    const themeClassRef = disableInlineTheme
-      ? useCssVarsClass(
+    const themeClassHandle = disableInlineTheme
+      ? useThemeClass(
         'button',
         computed(() => {
           let hash = ''
@@ -542,12 +537,13 @@ const Button = defineComponent({
           '--n-border-color-disabled': color
         }
       }),
-      themeClass: themeClassRef,
-      cssVars: disableInlineTheme ? undefined : cssVarsRef
+      cssVars: disableInlineTheme ? undefined : cssVarsRef,
+      ...themeClassHandle
     }
   },
   render () {
-    const { $slots, mergedClsPrefix, tag: Component } = this
+    const { $slots, mergedClsPrefix, tag: Component, onRender } = this
+    onRender?.()
     return (
       <Component
         ref="selfElRef"

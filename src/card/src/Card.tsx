@@ -1,6 +1,6 @@
 import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
 import { getPadding } from 'seemly'
-import { useConfig, useTheme, useCssVarsClass } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { call, createKey, keysOf } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -134,8 +134,8 @@ export default defineComponent({
         '--n-close-size': closeSize
       }
     })
-    const themeClassRef = disableInlineTheme
-      ? useCssVarsClass(
+    const themeClassHandle = disableInlineTheme
+      ? useThemeClass(
         'card',
         computed(() => {
           return props.size[0]
@@ -150,7 +150,7 @@ export default defineComponent({
       mergedTheme: themeRef,
       handleCloseClick,
       cssVars: disableInlineTheme ? undefined : cssVarsRef,
-      themeClass: themeClassRef
+      ...themeClassHandle
     }
   },
   render () {
@@ -160,8 +160,10 @@ export default defineComponent({
       hoverable,
       mergedClsPrefix,
       rtlEnabled,
+      onRender,
       $slots
     } = this
+    onRender?.()
     return (
       <div
         class={[
