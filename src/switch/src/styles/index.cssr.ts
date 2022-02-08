@@ -145,6 +145,9 @@ export default cB('switch', `
     background-color: var(--n-rail-color);
   `, [
     cE('button', `
+      display: flex;
+      justify-content: center; 
+      align-items: center;    
       top: var(--n-offset);
       left: var(--n-offset);
       height: var(--n-button-width);

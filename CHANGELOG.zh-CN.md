@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+### Feats
+
+- `n-switch` 新增 `icon` 插槽
+- `n-switch` 新增 `checkedIcon` 插槽
+- `n-switch` 新增 `uncheckedIcon` 插槽
+
 ## 2.25.1 (2022-02-06)
 
 ### i18n

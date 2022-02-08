@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Pending
+
+### Fixes
+
+### Feats
+
+- `n-switch` add `icon` slot.
+- `n-switch` add `checkedIcon` slot.
+- `n-switch` add `uncheckedIcon` slot.
+
 ## 2.25.1 (2022-02-06)
 
 ### i18n

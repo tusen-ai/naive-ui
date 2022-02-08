@@ -13,6 +13,7 @@ event
 customize-value
 shape
 color
+icon.vue
 ```
 
 ## API
@@ -34,7 +35,10 @@ color
 
 ### Switch Slots
 
-| 名称      | 参数 | 说明             |
-| --------- | ---- | ---------------- |
-| checked   | `()` | 开关激活时的内容 |
-| unchecked | `()` | 开关关闭时的内容 |
+| 名称          | 参数 | 说明                   | 版本         |
+| ------------- | ---- | ---------------------- | ------------ |
+| checked       | `()` | 开关激活时的内容       |              |
+| unchecked     | `()` | 开关关闭时的内容       |              |
+| icon          | `()` | 开关按钮的图标         | NEXT_VERSION |
+| checkedIcon   | `()` | 开关按钮选中时的图标   | NEXT_VERSION |
+| uncheckedIcon | `()` | 开关按钮未选中时的图标 | NEXT_VERSION |
