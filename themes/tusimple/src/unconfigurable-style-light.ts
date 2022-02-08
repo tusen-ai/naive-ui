@@ -67,7 +67,7 @@ export const unconfigurableStyle = c([
           ]
         ),
         cM('selected', {
-          color: '#fff'
+          color: 'var(--n-item-text-color-active)'
         }),
         cM('start, end', [
           c('&:nth-child(7n + 1)::before', {

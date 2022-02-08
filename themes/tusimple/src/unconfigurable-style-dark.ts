@@ -215,6 +215,11 @@ export const unconfigurableStyle = c([
       ])
     ])
   ]),
+  cB('layout', [
+    cB('card', {
+      backgroundColor: '#141414'
+    })
+  ]),
   cB('message', [
     cE('close', [
       c('&:hover', {
