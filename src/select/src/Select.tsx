@@ -203,8 +203,12 @@ export default defineComponent({
       })
     }
 
-    const { mergedClsPrefixRef, mergedBorderedRef, namespaceRef } =
-      useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      mergedBorderedRef,
+      namespaceRef,
+      NConfigProvider
+    } = useConfig(props)
     const themeRef = useTheme(
       'Select',
       '-select',
@@ -707,6 +711,7 @@ export default defineComponent({
       mergedDisabled: mergedDisabledRef,
       focused: focusedRef,
       activeWithoutMenuOpen: activeWithoutMenuOpenRef,
+      disableInlineTheme: NConfigProvider?.disableInlineTheme,
       onTriggerInputFocus,
       onTriggerInputBlur,
       handleMenuFocus,
@@ -748,6 +753,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerRef"
+                      disableInlineTheme={this.disableInlineTheme}
                       status={this.mergedStatus}
                       inputProps={this.inputProps}
                       clsPrefix={this.mergedClsPrefix}
@@ -814,6 +820,7 @@ export default defineComponent({
                             <NInternalSelectMenu
                               {...this.menuProps}
                               ref="menuRef"
+                              disableInlineTheme={this.disableInlineTheme}
                               virtualScroll={
                                 this.consistentMenuWidth && this.virtualScroll
                               }
