@@ -20,6 +20,8 @@ export function useCssVarsClass (
 
   const cssVarsClassRef = ref('')
 
+  const ssrAdapter = useSsrAdapter()
+
   const mountStyle = (): void => {
     const cssVars = cssVarsRef.value
 
@@ -40,7 +42,7 @@ export function useCssVarsClass (
 
     c(`.${finalThemeHash}`, style).mount({
       id: finalThemeHash,
-      ssr: useSsrAdapter()
+      ssr: ssrAdapter
     })
   }
 
