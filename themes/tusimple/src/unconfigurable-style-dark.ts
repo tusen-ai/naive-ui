@@ -218,11 +218,16 @@ export const unconfigurableStyle = c([
             padding: '0'
           },
           [
+            c('&:hover:not(.n-button--disabled)', [
+              cB('button__icon', {
+                color: 'var(--n-text-color-hover)'
+              })
+            ]),
             cE('border', {
-              border: '1px solid #848484'
+              border: '1px solid #ccc'
             }),
             cE('icon', {
-              color: '#848484'
+              color: '#999'
             })
           ]
         ),
