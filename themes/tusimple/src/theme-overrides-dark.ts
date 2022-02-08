@@ -343,9 +343,6 @@ export const themeOverridesDark: GlobalThemeOverrides = {
     opacity2Depth: '1',
     opacity3Depth: '1'
   },
-  Layout: {
-    color: '#141414'
-  },
   List: {
     color: '#333',
     borderColor: '#5B5B5B'
