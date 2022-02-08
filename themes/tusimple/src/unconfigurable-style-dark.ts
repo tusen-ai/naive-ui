@@ -365,15 +365,12 @@ export const unconfigurableStyle = c([
       cE(
         'rail',
         {
-          backgroundColor: '#D7DAE0'
+          backgroundColor: '#5B5B5B50'
         },
         [
           c('&::before', {
             backgroundColor: '#EBEDF0',
             backgroundImage: 'unset'
-          }),
-          cE('button', {
-            backgroundColor: '#D7DAE0'
           })
         ]
       ),
