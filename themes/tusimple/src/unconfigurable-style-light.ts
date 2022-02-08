@@ -35,9 +35,17 @@ export const unconfigurableStyle = c([
     },
     [
       cB('base-select-option', [
-        cM('selected', {
-          backgroundColor: 'transparent'
-        })
+        cM(
+          'selected',
+          {
+            backgroundColor: 'transparent'
+          },
+          [
+            c('&:hover', {
+              backgroundColor: 'var(--n-option-color-pending)'
+            })
+          ]
+        )
       ])
     ]
   ),
