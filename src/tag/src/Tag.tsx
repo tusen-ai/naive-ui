@@ -190,24 +190,26 @@ export default defineComponent({
         '--n-text-color-pressed-checkable': textColorPressedCheckable
       }
     })
-    const themeClassRef = useCssVarsClass(
-      'tag',
-      computed(() => {
-        let hash = ''
-        const { type, size, color: { color, textColor } = {} } = props
-        hash += type[0]
-        hash += size[0]
-        if (color) {
-          hash += `a${color2Class(color)}`
-        }
-        if (textColor) {
-          hash += `b${color2Class(textColor)}`
-        }
-        return hash
-      }),
-      cssVarsRef,
-      props
-    )
+    const themeClassRef = disableInlineTheme
+      ? useCssVarsClass(
+        'tag',
+        computed(() => {
+          let hash = ''
+          const { type, size, color: { color, textColor } = {} } = props
+          hash += type[0]
+          hash += size[0]
+          if (color) {
+            hash += `a${color2Class(color)}`
+          }
+          if (textColor) {
+            hash += `b${color2Class(textColor)}`
+          }
+          return hash
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       ...tagPublicMethods,
       rtlEnabled: rtlEnabledRef,
@@ -217,7 +219,7 @@ export default defineComponent({
       handleClick,
       handleCloseClick,
       cssVars: disableInlineTheme ? undefined : cssVarsRef,
-      themeClass: disableInlineTheme ? themeClassRef : undefined
+      themeClass: themeClassRef
     }
   },
   render () {

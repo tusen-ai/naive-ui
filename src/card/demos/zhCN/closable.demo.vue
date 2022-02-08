@@ -1,12 +1,16 @@
+<markdown>
 # 可关闭
 
 用于 Modal 的时候，你可能需要这个属性。
+</markdown>
 
-```html
-<n-card title="卡片" closable @close="handleClose">卡片内容</n-card>
-```
+<template>
+  <n-card title="卡片" closable @close="handleClose">
+    卡片内容
+  </n-card>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -20,10 +24,10 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
 
-```css
+<style>
 .n-card {
   max-width: 300px;
 }
-```
+</style>

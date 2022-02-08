@@ -1,12 +1,16 @@
+<markdown>
 # Closable
 
 You may need this when using it in a modal.
+</markdown>
 
-```html
-<n-card title="Card" closable @close="handleClose">Card Content</n-card>
-```
+<template>
+  <n-card title="Card" closable @close="handleClose">
+    Card Content
+  </n-card>
+</template>
 
-```js
+<script lang="ts">
 import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
 
@@ -20,10 +24,10 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
 
-```css
+<style>
 .n-card {
   max-width: 300px;
 }
-```
+</style>
