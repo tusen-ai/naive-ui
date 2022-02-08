@@ -28,9 +28,19 @@ export function mountSvgDefs (): void {
 }
 
 export const unconfigurableStyle = c([
-  cB('base-select-menu', {
-    overflow: 'hidden'
-  }),
+  cB(
+    'base-select-menu',
+    {
+      overflow: 'hidden'
+    },
+    [
+      cB('base-select-option', [
+        cM('selected', {
+          backgroundColor: 'transparent'
+        })
+      ])
+    ]
+  ),
   cB('base-selection', [
     cB('base-suffix', {
       transition: 'all .3s'
