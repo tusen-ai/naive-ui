@@ -96,7 +96,7 @@ export default cB('tag', `
     ]),
     cM('checked', `
       color: var(--n-text-color-checked);
-      background-color: 'var(--n-color-checked);
+      background-color: var(--n-color-checked);
     `, [
       cNotM('disabled', [
         c('&:hover', 'background-color: var(--n-color-checked-hover);'),

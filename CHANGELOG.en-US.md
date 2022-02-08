@@ -1,6 +1,11 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
+
+### Fixes
+
+- Remove useless `console.log` in `resolveSlot`.
+- Fix `n-tag` misses background color when `checkable=true`.
 
 ### i18n
 

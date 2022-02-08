@@ -26,7 +26,7 @@ import {
   NBaseWave
 } from '../../_internal'
 import type { BaseWaveRef } from '../../_internal'
-import { call, createKey, warnOnce } from '../../_utils'
+import { call, color2Class, createKey, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { buttonLight } from '../styles'
 import type { ButtonTheme } from '../styles'
@@ -504,8 +504,8 @@ const Button = defineComponent({
           if (tertiary) hash += 'g'
           if (quaternary) hash += 'h'
           if (strong) hash += 'i'
-          if (color) hash += 'j' + color.replace(/#|\(|\)|,|\s/g, '_')
-          if (textColor) hash += 'k' + textColor.replace(/#|\(|\)|,|\s/g, '_')
+          if (color) hash += 'j' + color2Class(color)
+          if (textColor) hash += 'k' + color2Class(textColor)
           const { value: size } = mergedSizeRef
           hash += 'l' + size[0]
           hash += 'm' + type[0]

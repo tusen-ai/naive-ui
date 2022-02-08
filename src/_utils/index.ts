@@ -30,6 +30,6 @@ export type {
   ExtractInternalPropTypes,
   Mutable
 } from './naive'
-export { formatLength } from './css'
+export { formatLength, color2Class } from './css'
 export { createKey } from './cssr'
 export * from './composable'
