@@ -6,6 +6,7 @@
 
 - Remove useless `console.log` in `resolveSlot`.
 - Fix `n-tag` misses background color when `checkable=true`.
+- Fix `n-tree` throws `Image` error in `happydom` testing environment.
 
 ### i18n
 
