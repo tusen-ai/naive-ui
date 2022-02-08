@@ -1,5 +1,6 @@
 import { ComputedRef, Ref, ref, inject, watchEffect } from 'vue'
 import { hash } from 'css-render'
+import { useSsrAdapter } from '@css-render/vue3-ssr'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 import { throwError } from '../_utils'
 import { c } from '../_utils/cssr'
@@ -38,7 +39,8 @@ export function useCssVarsClass (
     cssVarsClassRef.value = finalThemeHash
 
     c(`.${finalThemeHash}`, style).mount({
-      id: finalThemeHash
+      id: finalThemeHash,
+      ssr: useSsrAdapter()
     })
   }
 
