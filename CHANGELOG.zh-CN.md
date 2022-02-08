@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Pending
+
+### i18n
+
+- 新增 plPL locale
+
 ## 2.25.1 (2022-02-06)
 
 ### i18n
