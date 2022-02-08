@@ -13,6 +13,7 @@
 
 ### Feats
 
+- `n-carousel` adds `scale` prop, closes [#2340](https://github.com/TuSimple/naive-ui/issues/2340).
 - `n-tree-select` adds `clear-filter-after-select` prop.
 - `n-cascader` adds `clear-filter-after-select` prop.
 - `n-switch` adds `icon` slot.

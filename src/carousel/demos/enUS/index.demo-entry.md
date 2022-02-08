@@ -21,6 +21,7 @@ keyboard.vue
 mousewheel.vue
 simulate-drag.vue
 custom-arrow-and-dots.vue
+scale.vue
 ```
 
 ## API
@@ -42,6 +43,7 @@ custom-arrow-and-dots.vue
 | keyboard | `boolean` | `false` | Whether to switch the carousel by pressing the key, it only works when the focus is on Dots. | 2.24.0 |
 | loop | `boolean` | `true` | Whether to loop. | 2.24.0 |
 | mousewheel | `boolean` | `false` | Whether to switch the carousel through the mouse wheel. | 2.24.0 |
+| scale | `number \| [number, number] \| null` | `undefined` | When `effect` is `card`, the aspect ratio of the main card and the front and rear `card`s. When it is an array type, the first value refers to the width ratio, and the second value refers to the height ratio. |
 | show-arrow | `boolean` | `false` | Whether to show arrow buttons. | 2.24.0 |
 | show-dots | `boolean` | `true` | Whether to show dots. | 2.24.0 |
 | slides-per-view | `'auto' \| number` | `1` | Number of carousels displayed on per view. | 2.24.0 |

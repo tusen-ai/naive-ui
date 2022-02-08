@@ -67,6 +67,9 @@ const carouselProps = {
     type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
     default: 'bottom'
   },
+  scale: {
+    type: [Number, Array] as PropType<number | [number, number] | null>
+  },
   slidesPerView: {
     type: [Number, String] as PropType<number | 'auto'>,
     default: 1
@@ -249,13 +252,43 @@ export default defineComponent({
           [axis]: `${size}px`,
           [`margin-${spaceAxis}`]: `${spaceBetween}px`
         }
-        if (isMounted && (effect === 'fade' || effect === 'card')) {
+        if (isMounted && effect === 'fade') {
           Object.assign(style, transitionStyleRef.value)
+        }
+        if (isMounted && effect === 'card') {
+          Object.assign(
+            style,
+            transitionStyleRef.value,
+            getTransformScaleStyle(i)
+          )
         }
         slideStyles.push(style)
       }
       return slideStyles
     })
+    function getTransformScaleStyle (
+      number = realIndexRef.value
+    ): CSSProperties | null {
+      const { scale } = props
+      if (scale && (isRealPrev(number) || isRealNext(number))) {
+        const translate = isRealPrev(number) ? '-100%' : '0'
+        if (Array.isArray(scale)) {
+          return {
+            transform: `scale(${1 / scale[0]},${
+              1 / scale[1]
+            }) translateX(${translate})`,
+            transformOrigin: '0% 50%'
+          }
+        } else {
+          return {
+            transform: `scale(${1 / scale}) translateX(${translate})`,
+            transformOrigin: '0% 50%'
+          }
+        }
+      } else {
+        return null
+      }
+    }
 
     // Total
     const totalViewRef = computed(() => {

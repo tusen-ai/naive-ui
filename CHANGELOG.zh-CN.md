@@ -13,6 +13,7 @@
 
 ### Feats
 
+- `n-carousel` 新增 `scale` 属性，关闭[#2340](https://github.com/TuSimple/naive-ui/issues/2340)
 - `n-tree-select` 新增 `clear-filter-after-select` 属性
 - `n-cascader` 新增 `clear-filter-after-select` 属性
 - `n-switch` 新增 `icon` 插槽
