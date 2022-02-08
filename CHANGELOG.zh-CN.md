@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 移除 `resolveSlot` 中无用的 `console.log`
+
 ## 2.25.1 (2022-02-06)
 
 ### i18n
