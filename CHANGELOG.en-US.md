@@ -7,6 +7,10 @@
 - Remove useless `console.log` in `resolveSlot`.
 - Fix `n-tag` misses background color when `checkable=true`.
 
+### i18n
+
+- Add plPL locale
+
 ## 2.25.1 (2022-02-06)
 
 ### i18n
