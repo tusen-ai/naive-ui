@@ -120,9 +120,12 @@ export const unconfigurableStyle = c([
     })
   ]),
   cB('dialog', [
-    cB('dialog__title', {
+    cE('title', {
       marginTop: '20px',
       lineHeight: '33px'
+    }),
+    cE('content', {
+      lineHeight: '22px'
     })
   ]),
   cB('dynamic-tags', [
