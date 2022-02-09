@@ -12,6 +12,7 @@ indeterminate
 controlled
 event
 customize-value
+focus.vue
 ```
 
 ## API
@@ -52,3 +53,10 @@ customize-value
 | 名称    | 参数 | 说明                 |
 | ------- | ---- | -------------------- |
 | default | `()` | CheckboxGroup 的内容 |
+
+### Checkbox Methods
+
+| 名称  | 类型         | 说明 | 版本   |
+| ----- | ------------ | ---- | ------ |
+| focus | `() => void` | 聚焦 | 2.24.2 |
+| blur  | `() => void` | 失焦 | 2.24.2 |

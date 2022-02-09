@@ -2,7 +2,7 @@
 import { computed, Ref } from 'vue'
 import { getHours, getMinutes, getSeconds } from 'date-fns'
 import type { DatePickerSetupProps } from './DatePicker'
-import {
+import type {
   IsRangeTimeDisabled,
   IsSingleTimeDisabled,
   IsSingleDateDisabled

@@ -5,33 +5,35 @@
 ## 演示
 
 ```demo
-basic
-size
-multiple
-events
-filterable
-tag
-menu-width
-remote
-remote-multiple
-clearable
+basic.vue
+size.vue
+multiple.vue
+events.vue
+filterable.vue
+tag.vue
+menu-width.vue
+remote.vue
+remote-multiple.vue
+clearable.vue
 scroll-event.vue
-group
-many-options
-custom-option
-action
-fallback-option
-max-tag-count
-add-tooltip
-render-tag
-render-person
-change-debug
-placeholder-debug
-menu-debug
-render-debug
-spin-debug
-options-change-debug
-filterable-debug
+group.vue
+many-options.vue
+custom-option.vue
+custom-suffix.vue
+action.vue
+fallback-option.vue
+max-tag-count.vue
+add-tooltip.vue
+render-tag.vue
+focus.vue
+render-person.vue
+tag-input.vue
+placeholder-debug.vue
+menu-debug.vue
+render-debug.vue
+spin-debug.vue
+options-change-debug.vue
+filterable-debug.vue
 ```
 
 ## API
@@ -54,11 +56,12 @@ filterable-debug
 | multiple | `boolean` | `false` | 是否为多选 |  |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | 配置选项内容，详情见 SelectOption Properties |  |
 | placeholder | `string` | `'请选择'` | 提示信息 |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 菜单的弹出位置 | 2.25.0 |
 | remote | `boolean` | `false` | 是否要异步获取选项。注意如果设定了，那么 `filter` 和 `tag` 都不会对 `options` 生效。这个时候你在全权控制 `options` |  |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | 选项标签渲染函数 |  |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | 选项的渲染函数 |  |
-| render-tag | `(option: SelectBaseOption, onClose: () => void) => VNodeChild` | `undefined` | 控制标签的渲染 |  |
-| reset-menu-on-options-change | `boolean` | `true` | 是否在选项变化时重置菜单状态，例如滚动状态 | NEXT_VERSION |
+| render-tag | `(props: { option: SelectBaseOption, onClose: () => void }) => VNodeChild` | `undefined` | 控制标签的渲染 |  |
+| reset-menu-on-options-change | `boolean` | `true` | 是否在选项变化时重置菜单状态，例如滚动状态 | 2.24.2 |
 | show | `boolean` | `undefined` | 是否展示菜单 |  |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
@@ -71,9 +74,10 @@ filterable-debug
 | on-focus | `() => void` | `undefined` | `focus` 时执行的回调 |  |
 | on-scroll | `(e: ScrollEvent) => void` | `undefined` | 滚动时执行的回调 |  |
 | on-search | `(value: string) => void` | `undefined` | 搜索时执行的回调 |  |
+| on-update:show | `(show: boolean) => void` | `undefined` | 菜单打开状态变化的回调 | 2.24.2 |
 | on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | 值更新时执行的回调 |  |
 
-### SelectOption Properties
+#### SelectOption Properties
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
@@ -84,7 +88,7 @@ filterable-debug
 | style | `string \| object` | 自定义一个选项的样式 |
 | value | `string \| number` | 在选项中应该是唯一的 |
 
-### SelectGroupOption Properties
+#### SelectGroupOption Properties
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
@@ -96,7 +100,15 @@ filterable-debug
 
 ### Select Slots
 
-| 名称   | 参数 | 说明                |
-| ------ | ---- | ------------------- |
-| action | `()` | 菜单操作区域的 slot |
-| empty  | `()` | 菜单无数据时的 slot |
+| 名称   | 参数 | 说明                | 版本   |
+| ------ | ---- | ------------------- | ------ |
+| action | `()` | 菜单操作区域的 slot |        |
+| empty  | `()` | 菜单无数据时的 slot |        |
+| arrow  | `()` | 箭头的 slot         | 2.24.2 |
+
+### Select Methods
+
+| 名称  | 类型         | 说明 | 版本   |
+| ----- | ------------ | ---- | ------ |
+| focus | `() => void` | 聚焦 | 2.24.2 |
+| blur  | `() => void` | 失焦 | 2.24.2 |

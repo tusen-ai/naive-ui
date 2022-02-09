@@ -58,7 +58,7 @@ const self = (vars: ThemeCommonVars) => {
     borderHover: `1px solid ${primaryColorHover}`,
     borderActive: `1px solid ${primaryColor}`,
     borderFocus: `1px solid ${primaryColorHover}`,
-    boxShadowHover: null,
+    boxShadowHover: 'none',
     boxShadowActive: `0 0 0 2px ${changeColor(primaryColor, {
       alpha: 0.2
     })}`,
@@ -74,7 +74,7 @@ const self = (vars: ThemeCommonVars) => {
     borderHoverWarning: `1px solid ${warningColorHover}`,
     borderActiveWarning: `1px solid ${warningColor}`,
     borderFocusWarning: `1px solid ${warningColorHover}`,
-    boxShadowHoverWarning: null,
+    boxShadowHoverWarning: 'none',
     boxShadowActiveWarning: `0 0 0 2px ${changeColor(warningColor, {
       alpha: 0.2
     })}`,
@@ -88,7 +88,7 @@ const self = (vars: ThemeCommonVars) => {
     borderHoverError: `1px solid ${errorColorHover}`,
     borderActiveError: `1px solid ${errorColor}`,
     borderFocusError: `1px solid ${errorColorHover}`,
-    boxShadowHoverError: null,
+    boxShadowHoverError: 'none',
     boxShadowActiveError: `0 0 0 2px ${changeColor(errorColor, {
       alpha: 0.2
     })}`,

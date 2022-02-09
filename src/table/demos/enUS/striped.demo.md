@@ -1,4 +1,4 @@
-# 条纹
+# Stripe
 
 ```html
 <n-space vertical>
@@ -9,7 +9,7 @@
         <th>Abormal</th>
         <th>Abolish</th>
         <th>...</th>
-        <th>万事开头难</th>
+        <th>It's hard to learn words</th>
       </tr>
     </thead>
     <tbody>
@@ -18,7 +18,7 @@
         <td>反常的</td>
         <td>彻底废除</td>
         <td>...</td>
-        <td>干！我刚才背的是啥</td>
+        <td>Damn it! I can't remember those words.</td>
       </tr>
       <tr>
         <td>...</td>

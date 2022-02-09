@@ -100,6 +100,9 @@
     <n-form-item label="Time Picker" path="timePickerValue">
       <n-time-picker v-model:value="model.timePickerValue" />
     </n-form-item>
+    <n-form-item label="Color Picker" path="colorValue">
+      <n-color-picker v-model:value="model.colorValue" />
+    </n-form-item>
     <n-form-item label="Slider" path="sliderValue">
       <n-slider v-model:value="model.sliderValue" :step="5" />
     </n-form-item>
@@ -162,6 +165,7 @@ export default defineComponent({
       radioButtonGroupValue: null,
       inputNumberValue: null,
       timePickerValue: null,
+      colorValue: null,
       sliderValue: 0,
       transferValue: null
     })

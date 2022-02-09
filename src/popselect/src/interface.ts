@@ -1,5 +1,6 @@
-import { Ref, InjectionKey } from 'vue'
+import { Ref } from 'vue'
 import type { MergedTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
 import type { PopselectTheme } from '../styles'
 
 export type PopselectSize = 'small' | 'medium' | 'large' | 'huge'
@@ -10,5 +11,5 @@ export interface PopselectInjection {
   syncPosition: () => void
 }
 
-export const popselectInjectionKey: InjectionKey<PopselectInjection> =
-  Symbol('popselect')
+export const popselectInjectionKey =
+  createInjectionKey<PopselectInjection>('n-popselect')

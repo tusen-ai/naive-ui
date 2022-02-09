@@ -55,13 +55,19 @@ const tabsProps = {
   },
   closable: Boolean,
   justifyContent: String as PropType<
-  'space-between' | 'space-around' | 'space-evenly'
+  | 'space-between'
+  | 'space-around'
+  | 'space-evenly'
+  | 'center'
+  | 'start'
+  | 'end'
   >,
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
   tabStyle: [String, Object] as PropType<string | CSSProperties>,
+  barWidth: Number,
   paneClass: String,
   paneStyle: [String, Object] as PropType<string | CSSProperties>,
   addable: [Boolean, Object] as PropType<Addable>,
@@ -114,7 +120,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Tabs',
-      'Tabs',
+      '-tabs',
       style,
       tabsLight,
       props,
@@ -175,14 +181,22 @@ export default defineComponent({
       if (!barEl) return
       if (tabEl) {
         const disabledClassName = `${mergedClsPrefixRef.value}-tabs-bar--disabled`
+        const { barWidth } = props
         if (tabEl.dataset.disabled === 'true') {
           barEl.classList.add(disabledClassName)
         } else {
           barEl.classList.remove(disabledClassName)
         }
-        barEl.style.left = `${tabEl.offsetLeft}px`
+        if (barWidth && tabEl.offsetWidth >= barWidth) {
+          const offsetDiffLeft =
+            Math.floor((tabEl.offsetWidth - barWidth) / 2) + tabEl.offsetLeft
+          barEl.style.left = `${offsetDiffLeft}px`
+          barEl.style.maxWidth = `${barWidth}px`
+        } else {
+          barEl.style.left = `${tabEl.offsetLeft}px`
+          barEl.style.maxWidth = `${tabEl.offsetWidth}px`
+        }
         barEl.style.width = '8192px'
-        barEl.style.maxWidth = `${tabEl.offsetWidth + 1}px`
       }
     }
     function updateCurrentBarStyle (): void {
@@ -463,6 +477,7 @@ export default defineComponent({
                   return (
                       <Tab
                         {...tabPaneVNode.props}
+                        internalCreatedByPane={true}
                         internalLeftPadded={index !== 0}
                       >
                         {tabPaneVNode.children
@@ -509,6 +524,7 @@ export default defineComponent({
                                     return justifyTabDynamicProps(
                                         <Tab
                                           {...tabPaneVNode.props}
+                                          internalCreatedByPane={true}
                                           internalLeftPadded={
                                             index !== 0 && !mergedJustifyContent
                                           }
@@ -647,6 +663,7 @@ function createAddTag (addable: Addable, internalLeftPadded: boolean): VNode {
       ref="addTabInstRef"
       key="__addable"
       name="__addable"
+      internalCreatedByPane
       internalAddable
       internalLeftPadded={internalLeftPadded}
       disabled={typeof addable === 'object' && addable.disabled}

@@ -13,6 +13,7 @@ format
 actions
 hours12
 formatted.vue
+focus.vue
 ```
 
 ## API
@@ -36,6 +37,7 @@ formatted.vue
 | is-minute-disabled | `(minute: number, hour: number) => boolean` | `() => false` | 用于禁用分钟的回调函数 |  |
 | is-second-disabled | `(second: number, minute: number, hour: number) => boolean` | `() => false` | 用于禁用秒钟的回调函数 |  |
 | placeholder | `string` | `'请选择时间'` | 选择框的占位符 |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 时间选择器的面板的弹出位置 | 2.25.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 选择框的尺寸 |  |
 | use-12-hours | `boolean` | `false` | 是否使用 12 小时制的面板 |  |
 | value | `number \| null` | `undefined` | 受控模式下的值 |  |
@@ -44,3 +46,16 @@ formatted.vue
 | on-focus | `() => void` | `undefined` | 选择框获得焦点时的回调 |  |
 | on-update:formatted-value | `(value: number \| null, timestampValue: number \| null) => void` | `undefined` | 格式化的值发生改变时的回调 | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 值发生改变时的回调 | `formattedValue` 2.24.0 |
+
+### TimePicker Slots
+
+| 名称 | 参数 | 说明       |
+| ---- | ---- | ---------- |
+| icon | `()` | 自定义图标 |
+
+### TimePicker Methods
+
+| 名称  | 类型         | 说明 | 版本   |
+| ----- | ------------ | ---- | ------ |
+| focus | `() => void` | 聚焦 | 2.24.2 |
+| blur  | `() => void` | 失焦 | 2.24.2 |

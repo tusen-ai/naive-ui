@@ -15,6 +15,7 @@ virtual
 check-strategy
 custom-field
 custom-render.vue
+focus.vue
 ```
 
 ## API
@@ -38,6 +39,7 @@ custom-render.vue
 | multiple | `boolean` | `false` | Whether to allow multiple options being selected. |  |
 | options | `CascaderOption[]` | required | Options of the cascader. |  |
 | placeholder | `string` | `'Please Select'` | Placeholder text. |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Cascader placement. | 2.25.0 |
 | remote | `boolean` | `false` | Whether to obtain data remotely. |  |
 | render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Render function for cascader menu option label. | 2.24.0 |
 | separator | `string` | `' / '` | Selected option path value separator (used with `show-path`). |  |
@@ -67,3 +69,10 @@ custom-render.vue
 | --- | --- | --- | --- |
 | action | `()` | Action content displayed in the cascading menu. |  |
 | empty | `()` | Empty state slot for the options cascading menu. | 2.22.0 |
+
+### Cascader Methods
+
+| Name  | Type         | Description | Version |
+| ----- | ------------ | ----------- | ------- |
+| focus | `() => void` | Focus.      | 2.24.2  |
+| blur  | `() => void` | Blur.       | 2.24.2  |

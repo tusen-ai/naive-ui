@@ -121,7 +121,7 @@ action
 | positive-text | `string` | `undefined` | 不填对应的按钮不会出现 |
 | show-icon | `boolean` | `true` | 是否显示 `icon` |
 | title | `string \| (() => VNodeChild)` | `undefined` | 对话框标题，可以是 `render` 函数 |
-| type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |
+| type | `'error \| 'success' \| 'warning' \| 'info'` | `'warning'` | 对话框类型 |
 | on-close | `() => void` | `undefined` | 关闭时执行的回调函数,默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |
 | on-negative-click | `() => void` | `undefined` | 执行 `negative` 时执行的回调函数，默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |
 | on-positive-click | `() => void` | `undefined` | 执行 `positive` 时执行的回调函数，默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |

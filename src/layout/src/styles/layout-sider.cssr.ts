@@ -26,19 +26,19 @@ export default cB('layout-sider', `
   justify-content: flex-end;
 `, [
   cM('bordered', [
-    c('&::after', `
+    cE('border', `
       content: "";
       position: absolute;
       top: 0;
       bottom: 0;
       width: 1px;
       background-color: var(--n-border-color);
-      transition: background-color .3s var(--bezier);
+      transition: background-color .3s var(--n-bezier);
     `)
   ]),
   cE('left-placement', [
     cM('bordered', [
-      c('&::after', `
+      cE('border', `
         right: 0;
       `)
     ])
@@ -47,7 +47,7 @@ export default cB('layout-sider', `
     justify-content: flex-start;
   `, [
     cM('bordered', [
-      c('&::after', `
+      cE('border', `
         left: 0;
       `)
     ]),

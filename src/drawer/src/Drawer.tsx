@@ -55,6 +55,19 @@ const drawerProps = {
   onMaskClick: Function as PropType<(e: MouseEvent) => void>,
   scrollbarProps: Object as PropType<ScrollbarProps>,
   contentStyle: [Object, String] as PropType<string | CSSProperties>,
+  trapFocus: {
+    type: Boolean,
+    default: true
+  },
+  onEsc: Function as PropType<() => void>,
+  autoFocus: {
+    type: Boolean,
+    default: true
+  },
+  closeOnEsc: {
+    type: Boolean,
+    default: true
+  },
   'onUpdate:show': [Function, Array] as PropType<
   MaybeArray<(value: boolean) => void>
   >,
@@ -111,7 +124,7 @@ export default defineComponent({
     const isMountedRef = useIsMounted()
     const themeRef = useTheme(
       'Drawer',
-      'Drawer',
+      '-drawer',
       style,
       drawerLight,
       props,
@@ -145,8 +158,9 @@ export default defineComponent({
       }
       if (onMaskClick) onMaskClick(e)
     }
-    function handleKeydown (e: KeyboardEvent): void {
-      if (e.code === 'Escape') {
+    function handleEsc (): void {
+      props.onEsc?.()
+      if (props.closeOnEsc) {
         doUpdateShow(false)
       }
     }
@@ -168,7 +182,7 @@ export default defineComponent({
       namespace: namespaceRef,
       mergedBodyStyle: mergedBodyStyleRef,
       handleMaskClick,
-      handleKeydown,
+      handleEsc,
       mergedTheme: themeRef,
       cssVars: computed(() => {
         const {
@@ -231,7 +245,6 @@ export default defineComponent({
               <div
                 class={[`${mergedClsPrefix}-drawer-container`, this.namespace]}
                 style={this.cssVars as CSSProperties}
-                onKeydown={this.handleKeydown}
                 role="none"
               >
                 <Transition name="fade-in-transition" appear={this.isMounted}>
@@ -256,6 +269,9 @@ export default defineComponent({
                   show={this.show}
                   displayDirective={this.displayDirective}
                   nativeScrollbar={this.nativeScrollbar}
+                  trapFocus={this.trapFocus}
+                  autoFocus={this.autoFocus}
+                  onEsc={this.handleEsc}
                 >
                   {this.$slots}
                 </NDrawerBodyWrapper>

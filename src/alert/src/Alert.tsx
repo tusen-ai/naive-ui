@@ -5,7 +5,6 @@ import {
   defineComponent,
   PropType,
   mergeProps,
-  renderSlot,
   HTMLAttributes
 } from 'vue'
 import { getMargin } from 'seemly'
@@ -74,7 +73,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Alert',
-      'Alert',
+      '-alert',
       style,
       alertLight,
       props,
@@ -203,9 +202,7 @@ export default defineComponent({
                 <div class={`${mergedClsPrefix}-alert-body`}>
                   {this.title || $slots.header ? (
                     <div class={`${mergedClsPrefix}-alert-body__title`}>
-                      {renderSlot($slots, 'header', undefined, () => [
-                        this.title
-                      ])}
+                      {$slots.header ? $slots.header() : this.title}
                     </div>
                   ) : null}
                   {$slots.default && (

@@ -8,6 +8,7 @@
 basic
 alpha
 size
+disabled
 modes
 form
 swatches
@@ -23,11 +24,13 @@ native
 | default-show | `boolean` | `undefined` | 默认是否展示弹出层 |  |
 | default-value | `string \| null` | 和第一个 mode 对应的黑色值 | 默认的颜色值 |  |
 | modes | `Array<'rgb' \| 'hex' \| 'hsl' \| 'hsv'>` | `['rgb', 'hex', 'hsl']` | 颜色选择器支持颜色的格式，注意一旦你在某个模式下选择了值，颜色选择器值的格式将跟随这个格式 |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 面板的弹出位置 | 2.25.0 |
 | render-label | `(color: string \| null) => VNodeChild` | `undefined` | 触发器的内容 | 2.24.0 |
 | show | `boolean` | `undefined` | 是否展示面板 |  |
 | show-alpha | `boolean` | `true` | 是否可调节 alpha 通道 |  |
 | show-preview | `boolean` | `false` | 是否展示颜色预览块 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 颜色选择器的尺寸 |  |
+| disabled | `boolean` | `false` | 是否禁用 | 2.24.5 |
 | swatches | `string[]` | `undefined` | 色板的值 |  |
 | to | `string \| HTMLElement` | `'body'` | 面板的卸载位置 |  |
 | value | `string \| null` | `undefined` | 颜色选择器的值 |  |

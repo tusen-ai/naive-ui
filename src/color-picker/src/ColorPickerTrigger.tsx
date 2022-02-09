@@ -1,6 +1,6 @@
 import { HSLA, toHslaString } from 'seemly'
 import { defineComponent, PropType, h, inject } from 'vue'
-import { colorPickerInjectionKey } from './ColorPicker'
+import { colorPickerInjectionKey } from './context'
 
 export default defineComponent({
   name: 'ColorPickerTrigger',
@@ -17,6 +17,7 @@ export default defineComponent({
       type: Array as unknown as PropType<HSLA | null>,
       default: null
     },
+    disabled: Boolean,
     onClick: Function as PropType<() => void>
   },
   setup (props) {
@@ -26,10 +27,16 @@ export default defineComponent({
       null
     )!
     return () => {
-      const { hsla, value, clsPrefix, onClick } = props
+      const { hsla, value, clsPrefix, onClick, disabled } = props
       const renderLabel = colorPickerSlots.label || renderLabelRef.value
       return (
-        <div class={`${clsPrefix}-color-picker-trigger`} onClick={onClick}>
+        <div
+          class={[
+            `${clsPrefix}-color-picker-trigger`,
+            disabled && `${clsPrefix}-color-picker-trigger--disabled`
+          ]}
+          onClick={disabled ? undefined : onClick}
+        >
           <div class={`${clsPrefix}-color-picker-trigger__fill`}>
             <div class={`${clsPrefix}-color-picker-checkboard`} />
             <div

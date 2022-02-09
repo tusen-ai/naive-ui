@@ -23,7 +23,7 @@ intl.vue
 | precision | `number` | `0` | 精度，保留小数点后几位 | 2.23.2 |
 | show-separator | `boolean` | `false` | 是否显示分隔符 | 2.23.2 |
 | to | `number` | `undefined` | 目标值 | 2.23.2 |
-| locale | `string` | 跟随 config provider | 国际化的语言 | NEXT_VERSION |
+| locale | `string` | 跟随 config provider | 国际化的语言 | 2.24.2 |
 
 ### NumberAnimation Methods
 

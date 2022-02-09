@@ -36,7 +36,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    useStyle('BaseLoading', style, toRef(props, 'clsPrefix'))
+    useStyle('-base-loading', style, toRef(props, 'clsPrefix'))
   },
   render () {
     const { clsPrefix, radius, strokeWidth, stroke, scale } = this

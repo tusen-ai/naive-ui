@@ -1,18 +1,12 @@
 import { TreeNode } from 'treemate'
-import {
-  CSSProperties,
-  InjectionKey,
-  Ref,
-  VNodeChild,
-  HTMLAttributes,
-  Slots
-} from 'vue'
+import { CSSProperties, Ref, VNodeChild, HTMLAttributes, Slots } from 'vue'
 import { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import { NLocale } from '../../locales'
 import { MergedTheme } from '../../_mixins'
 import { DataTableTheme } from '../styles'
-import { RowItem, ColItem } from './use-group-header'
-import { DataTableSelectionOption } from './TableParts/SelectionMenu'
+import type { RowItem, ColItem } from './use-group-header'
+import type { DataTableSelectionOption } from './TableParts/SelectionMenu'
+import { createInjectionKey } from '../../_utils'
 
 export type FilterOptionValue = string | number
 export type ColumnKey = string | number
@@ -112,9 +106,10 @@ export type TableBaseColumn<T = InternalRowData> = {
   filterMultiple?: boolean
 
   render?: (rowData: T, rowIndex: number) => VNodeChild
-  renderSorter?: RenderSorter
   renderFilter?: RenderFilter
-  renderFilterIcon?: RenderFilter
+  renderFilterIcon?: RenderFilterIcon
+  renderSorter?: RenderSorter
+  renderSorterIcon?: RenderSorterIcon
   renderFilterMenu?: RenderFilterMenu
   colSpan?: (rowData: T, rowIndex: number) => number
   rowSpan?: (rowData: T, rowIndex: number) => number
@@ -229,8 +224,8 @@ export interface DataTableInjection {
   setHeaderScrollLeft: (scrollLeft: number) => void
 }
 
-export const dataTableInjectionKey: InjectionKey<DataTableInjection> =
-  Symbol('dataTable')
+export const dataTableInjectionKey =
+  createInjectionKey<DataTableInjection>('n-data-table')
 
 export interface MainTableInjection {
   leftActiveFixedColKey: ColumnKey | null
@@ -242,7 +237,11 @@ export type RenderFilter = (props: {
   show: boolean
 }) => VNodeChild
 
-export type RenderSorter = (props: { order: SortOrder | false }) => VNodeChild
+export type RenderFilterIcon = RenderFilter
+
+export type RenderSorter = (props: { order: SortOrder }) => VNodeChild
+
+export type RenderSorterIcon = RenderSorter
 
 export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 

@@ -58,7 +58,7 @@ export function keysWithFilter (
 }
 
 const emptyImage: HTMLImageElement | null = null
-if (typeof window !== 'undefined') {
+if (typeof window !== 'undefined' && Image) {
   const emptyImage = new Image()
   emptyImage.src =
     'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='

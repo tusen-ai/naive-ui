@@ -2,7 +2,7 @@ import { computed, ref, ComputedRef } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import { createTreeMate } from 'treemate'
 import type { DataTableSetupProps } from './DataTable'
-import {
+import type {
   ColumnKey,
   Filter,
   FilterOptionValue,

@@ -19,7 +19,7 @@ export default defineComponent({
     const radio = useRadio(props)
     const themeRef = useTheme(
       'Radio',
-      'Radio',
+      '-radio',
       style,
       radioLight,
       props,

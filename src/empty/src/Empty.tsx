@@ -4,19 +4,19 @@ import {
   computed,
   PropType,
   CSSProperties,
-  renderSlot,
   inject,
   VNodeChild
 } from 'vue'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { EmptyIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, ExtractPublicPropTypes } from '../../_utils'
+import { createKey } from '../../_utils'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
 import { emptyLight } from '../styles'
 import type { EmptyTheme } from '../styles'
 import style from './styles/index.cssr'
-import { configProviderInjectionKey } from '../../config-provider/src/ConfigProvider'
 
 const emptyProps = {
   ...(useTheme.props as ThemeProps<EmptyTheme>),
@@ -45,7 +45,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Empty',
-      'Empty',
+      '-empty',
       style,
       emptyLight,
       props,
@@ -102,24 +102,22 @@ export default defineComponent({
       >
         {this.showIcon ? (
           <div class={`${mergedClsPrefix}-empty__icon`}>
-            {renderSlot($slots, 'icon', undefined, () => [
+            {$slots.icon ? (
+              $slots.icon()
+            ) : (
               <NBaseIcon clsPrefix={mergedClsPrefix}>
                 {{ default: this.mergedRenderIcon }}
               </NBaseIcon>
-            ])}
+            )}
           </div>
         ) : null}
         {this.showDescription ? (
           <div class={`${mergedClsPrefix}-empty__description`}>
-            {renderSlot($slots, 'default', undefined, () => [
-              this.localizedDescription
-            ])}
+            {$slots.default ? $slots.default() : this.localizedDescription}
           </div>
         ) : null}
         {$slots.extra ? (
-          <div class={`${mergedClsPrefix}-empty__extra`}>
-            {renderSlot($slots, 'extra')}
-          </div>
+          <div class={`${mergedClsPrefix}-empty__extra`}>{$slots.extra()}</div>
         ) : null}
       </div>
     )

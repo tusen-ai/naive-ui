@@ -1,19 +1,15 @@
-import {
-  h,
-  defineComponent,
-  provide,
-  PropType,
-  Fragment,
-  InjectionKey,
-  inject
-} from 'vue'
+import { h, defineComponent, provide, PropType, Fragment, inject } from 'vue'
 import { render } from '../../_utils'
-import { useMenuChild, useMenuChildProps } from './use-menu-child'
-import type { MenuOptionGroupInjection } from './use-menu-child'
+import { useMenuChild } from './use-menu-child'
+import { useMenuChildProps } from './use-menu-child-props'
+// eslint-disable-next-line import/no-cycle
 import { itemRenderer } from './utils'
 import { TmNode } from './interface'
-import { submenuInjectionKey } from './Submenu'
-import { menuInjectionKey } from './Menu'
+import {
+  submenuInjectionKey,
+  menuInjectionKey,
+  menuItemGroupInjectionKey
+} from './context'
 
 export const menuItemGroupProps = {
   ...useMenuChildProps,
@@ -23,10 +19,7 @@ export const menuItemGroupProps = {
   }
 } as const
 
-export const menuItemGroupInjectionKey: InjectionKey<MenuOptionGroupInjection> =
-  Symbol('menu-item-group')
-
-export default defineComponent({
+export const NMenuOptionGroup = defineComponent({
   name: 'MenuOptionGroup',
   props: menuItemGroupProps,
   setup (props) {

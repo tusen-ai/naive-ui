@@ -3,7 +3,8 @@ import { useMemo } from 'vooks'
 import { render } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import NMenuOptionContent from './MenuOptionContent'
-import { useMenuChild, useMenuChildProps } from './use-menu-child'
+import { useMenuChild } from './use-menu-child'
+import { useMenuChildProps } from './use-menu-child-props'
 import { TmNode } from './interface'
 
 export const menuItemProps = {
@@ -17,7 +18,7 @@ export const menuItemProps = {
   onClick: Function
 } as const
 
-export default defineComponent({
+export const NMenuOption = defineComponent({
   name: 'MenuOption',
   props: menuItemProps,
   setup (props) {

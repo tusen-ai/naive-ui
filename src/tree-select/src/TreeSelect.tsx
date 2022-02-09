@@ -12,8 +12,7 @@ import {
   watch,
   nextTick,
   watchEffect,
-  HTMLAttributes,
-  renderSlot
+  HTMLAttributes
 } from 'vue'
 import {
   FollowerPlacement,
@@ -29,6 +28,7 @@ import { happensIn } from 'seemly'
 import { Key, InternalTreeInst } from '../../tree/src/interface'
 import type { SelectBaseOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
+import type { OnUpdateKeysImpl } from '../../tree/src/Tree'
 import {
   NInternalSelection,
   InternalSelectionInst,
@@ -164,6 +164,7 @@ export default defineComponent({
     const {
       mergedSizeRef,
       mergedDisabledRef,
+      mergedStatusRef,
       nTriggerFormBlur,
       nTriggerFormChange,
       nTriggerFormFocus,
@@ -378,8 +379,8 @@ export default defineComponent({
         onUpdateExpandedKeys,
         'onUpdate:expandedKeys': _onUpdateExpandedKeys
       } = props
-      if (onUpdateExpandedKeys) call(onUpdateExpandedKeys, keys, option)
-      if (_onUpdateExpandedKeys) call(_onUpdateExpandedKeys, keys, option)
+      if (onUpdateExpandedKeys) { call(onUpdateExpandedKeys as OnUpdateKeysImpl, keys, option) }
+      if (_onUpdateExpandedKeys) { call(_onUpdateExpandedKeys as OnUpdateKeysImpl, keys, option) }
       uncontrolledExpandedKeysRef.value = keys
     }
     function doFocus (e: FocusEvent): void {
@@ -602,7 +603,7 @@ export default defineComponent({
     })
     const themeRef = useTheme(
       'TreeSelect',
-      'TreeSelect',
+      '-tree-select',
       style,
       treeSelectLight,
       props,
@@ -610,6 +611,7 @@ export default defineComponent({
     )
     return {
       menuElRef,
+      mergedStatus: mergedStatusRef,
       triggerInstRef,
       followerInstRef,
       treeInstRef,
@@ -691,6 +693,7 @@ export default defineComponent({
                   default: () => (
                     <NInternalSelection
                       ref="triggerInstRef"
+                      status={this.mergedStatus}
                       focused={this.focused}
                       clsPrefix={mergedClsPrefix}
                       theme={mergedTheme.peers.InternalSelection}
@@ -818,18 +821,15 @@ export default defineComponent({
                                 <div
                                   class={`${mergedClsPrefix}-tree-select-menu__empty`}
                                 >
-                                  {renderSlot(
-                                    $slots,
-                                    'empty',
-                                    undefined,
-                                    () => [
-                                      <NEmpty
-                                        theme={mergedTheme.peers.Empty}
-                                        themeOverrides={
-                                          mergedTheme.peerOverrides.Empty
-                                        }
-                                      />
-                                    ]
+                                  {$slots.empty ? (
+                                    $slots.empty()
+                                  ) : (
+                                    <NEmpty
+                                      theme={mergedTheme.peers.Empty}
+                                      themeOverrides={
+                                        mergedTheme.peerOverrides.Empty
+                                      }
+                                    />
                                   )}
                                 </div>
                               )}

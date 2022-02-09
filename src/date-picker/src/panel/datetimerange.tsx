@@ -1,4 +1,4 @@
-import { defineComponent, h, renderSlot, watchEffect } from 'vue'
+import { defineComponent, h, watchEffect } from 'vue'
 import { NButton, NxButton } from '../../../button'
 import { NInput } from '../../../input'
 import { NTimePicker } from '../../../time-picker'
@@ -11,6 +11,7 @@ import {
 import { NBaseFocusDetector } from '../../../_internal'
 import { warnOnce } from '../../../_utils'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
+import PanelHeader from './panelHeader'
 
 export default defineComponent({
   name: 'DateTimeRangePanel',
@@ -112,11 +113,14 @@ export default defineComponent({
             >
               <BackwardIcon />
             </div>
-            <div class={`${mergedClsPrefix}-date-panel-month__month-year`}>
-              {this.locale.monthBeforeYear
-                ? `${this.startCalendarMonth} ${this.startCalendarYear}`
-                : `${this.startCalendarYear} ${this.startCalendarMonth}`}
-            </div>
+            <PanelHeader
+              monthBeforeYear={this.locale.monthBeforeYear}
+              value={this.startCalendarDateTime}
+              onUpdateValue={this.onUpdateStartCalendarValue}
+              mergedClsPrefix={mergedClsPrefix}
+              calendarMonth={this.startCalendarMonth}
+              calendarYear={this.startCalendarYear}
+            />
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.startCalendarNextMonth}
@@ -194,11 +198,14 @@ export default defineComponent({
             >
               <BackwardIcon />
             </div>
-            <div class={`${mergedClsPrefix}-date-panel-month__month-year`}>
-              {this.locale.monthBeforeYear
-                ? `${this.endCalendarMonth} ${this.endCalendarYear}`
-                : `${this.endCalendarYear} ${this.endCalendarMonth}`}
-            </div>
+            <PanelHeader
+              monthBeforeYear={this.locale.monthBeforeYear}
+              value={this.endCalendarDateTime}
+              onUpdateValue={this.onUpdateEndCalendarValue}
+              mergedClsPrefix={mergedClsPrefix}
+              calendarMonth={this.endCalendarMonth}
+              calendarYear={this.endCalendarYear}
+            />
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.endCalendarNextMonth}
@@ -260,7 +267,7 @@ export default defineComponent({
         </div>
         {this.datePickerSlots.footer ? (
           <div class={`${mergedClsPrefix}-date-panel-footer`}>
-            {renderSlot(this.datePickerSlots, 'footer')}
+            {this.datePickerSlots.footer()}
           </div>
         ) : null}
         {this.actions?.length || shortcuts ? (

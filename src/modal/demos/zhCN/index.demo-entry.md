@@ -34,15 +34,19 @@ dark-10-debug
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| auto-focus | `boolean` | `true` | 是否自动聚焦 Modal 第一个可聚焦的元素 | 2.24.2 |
+| close-on-esc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭 Modal | 2.24.2 |
 | display-directive | `'if' \| 'show'` | `'if'` | 使用何种指令控制模态框主体的条件渲染 |  |
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |  |
 | preset | `'dialog' \| 'card'` | `undefined` | 模态框使用何种预设 |  |
 | show | `boolean` | `false` | 是否展示 Modal |  |
 | to | `string \| HTMLElement` | `body` | Modal 的挂载位置 |  |
 | transform-origin | `'mouse' \| 'center'` | `'mouse'` | 模态框动画出现的位置 |  |
+| trap-focus | `boolean` | `true` | 是否将焦点锁定在 Modal 内部 | 2.24.2 |
 | z-index | `number` | `undefined` | Modal 的 z-index | 2.24.0 |
 | on-after-enter | `() => void` | `undefined` | Modal 出现后的回调 |  |
 | on-after-leave | `() => void` | `undefined` | Modal 关闭后的回调 |  |
+| on-esc | `() => void` | `undefined` | 焦点在 Modal 内部时按下 Esc 键的回调 | 2.24.2 |
 | on-mask-click | `() => void` | `undefined` | 点击遮罩时的回调 |  |
 | on-update:show | `(value: boolean) => void` | `undefined` | 模态框更新是否展示状态的回调 |  |
 

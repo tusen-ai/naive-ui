@@ -10,7 +10,6 @@ import {
   PropType,
   CSSProperties,
   computed,
-  renderSlot,
   Fragment
 } from 'vue'
 import { pxfy, repeat } from 'seemly'
@@ -863,12 +862,14 @@ export default defineComponent({
           style={this.bodyStyle}
           ref="emptyElRef"
         >
-          {renderSlot(this.dataTableSlots, 'empty', undefined, () => [
+          {this.dataTableSlots.empty ? (
+            this.dataTableSlots.empty()
+          ) : (
             <NEmpty
               theme={this.mergedTheme.peers.Empty}
               themeOverrides={this.mergedTheme.peerOverrides.Empty}
             />
-          ])}
+          )}
         </div>
       )
       if (this.shouldDisplaySomeTablePart) {

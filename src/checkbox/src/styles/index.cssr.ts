@@ -45,21 +45,21 @@ export default c([
     ]),
     c('&:focus:not(:active)', [
       cB('checkbox-box', [
-        cE('border', {
-          border: 'var(--n-border-focus)',
-          boxShadow: 'var(--n-box-shadow-focus)'
-        })
+        cE('border', `
+          border: var(--n-border-focus);
+          box-shadow: var(--n-box-shadow-focus);
+        `)
       ])
     ]),
     cM('table-header', [
-      cB('checkbox-box', {
-        backgroundColor: 'var(--n-merged-color-table-header)'
-      })
+      cB('checkbox-box', `
+        background-color: var(--n-merged-color-table-header);
+      `)
     ]),
     cM('checked', [
-      cB('checkbox-box', {
-        backgroundColor: 'var(--n-color-checked)'
-      }, [
+      cB('checkbox-box', `
+        background-color: var(--n-color-checked);
+      `, [
         cB('checkbox-icon', [
           // if not set width to 100%, safari & old chrome won't display the icon
           c('.check-icon', `
@@ -86,10 +86,10 @@ export default c([
     cM('checked, indeterminate', [
       c('&:focus:not(:active)', [
         cB('checkbox-box', [
-          cE('border', {
-            border: 'var(--n-border-checked)',
-            boxShadow: 'var(--n-box-shadow-focus)'
-          })
+          cE('border', `
+            border: var(--n-border-checked);
+            box-shadow: var(--n-box-shadow-focus);
+          `)
         ])
       ]),
       cB('checkbox-box', `

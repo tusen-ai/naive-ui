@@ -1,6 +1,7 @@
-import { InjectionKey, Ref } from 'vue'
+import { Ref } from 'vue'
 import { ScrollbarInst } from '../../_internal'
 import type { MergedTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
 import type { TimePickerTheme } from '../styles'
 
 export type ItemValue = number | 'am' | 'pm'
@@ -16,8 +17,8 @@ export interface TimePickerInjection {
   mergedClsPrefixRef: Ref<string>
 }
 
-export const timePickerInjectionKey: InjectionKey<TimePickerInjection> =
-  Symbol('timePicker')
+export const timePickerInjectionKey =
+  createInjectionKey<TimePickerInjection>('n-time-picker')
 
 export interface PanelRef {
   $el: HTMLElement
@@ -53,3 +54,8 @@ export type IsSecondDisabled = (
 ) => boolean
 
 export type Size = 'small' | 'medium' | 'large'
+
+export interface TimePickerInst {
+  focus: () => void
+  blur: () => void
+}

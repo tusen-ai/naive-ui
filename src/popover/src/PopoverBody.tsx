@@ -16,15 +16,18 @@ import {
   provide,
   CSSProperties,
   VNode,
-  renderSlot,
-  Fragment,
   VNodeChild
 } from 'vue'
 import { VFollower, FollowerPlacement, FollowerInst, VFocusTrap } from 'vueuc'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import { useTheme, useConfig } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { formatLength, useAdjustedTo } from '../../_utils'
+import {
+  formatLength,
+  isSlotEmpty,
+  resolveWrappedSlot,
+  useAdjustedTo
+} from '../../_utils'
 import { popoverLight } from '../styles'
 import type { PopoverTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -51,6 +54,7 @@ export const popoverBodyProps = {
   overlap: Boolean,
   placement: String as PropType<FollowerPlacement>,
   width: [Number, String] as PropType<number | 'trigger'>,
+  keepAliveOnHover: Boolean,
   internalTrapFocus: Boolean,
   // private
   animated: Boolean,
@@ -84,7 +88,7 @@ export default defineComponent({
     const { namespaceRef, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Popover',
-      'Popover',
+      '-popover',
       style,
       popoverLight,
       props,
@@ -183,12 +187,12 @@ export default defineComponent({
       followerRef.value?.syncPosition()
     }
     function handleMouseEnter (e: MouseEvent): void {
-      if (props.trigger === 'hover') {
+      if (props.trigger === 'hover' && props.keepAliveOnHover) {
         NPopover.handleMouseEnter(e)
       }
     }
     function handleMouseLeave (e: MouseEvent): void {
-      if (props.trigger === 'hover') {
+      if (props.trigger === 'hover' && props.keepAliveOnHover) {
         NPopover.handleMouseLeave(e)
       }
     }
@@ -226,16 +230,10 @@ export default defineComponent({
         const { value: extraClass } = NPopover.extraClassRef
         const { internalTrapFocus } = props
         const renderContentInnerNode = (): VNodeChild[] => [
-          slots.header ? (
-            <>
-              <div class={`${mergedClsPrefix}-popover__header`}>
-                {slots.header()}
-              </div>
-              <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
-            </>
-          ) : (
-            renderSlot(slots, 'default')
-          ),
+          resolveWrappedSlot(slots.header, (children) => [
+            <div class={`${mergedClsPrefix}-popover__header`}>{children}</div>,
+            <div class={`${mergedClsPrefix}-popover__content`}>{slots}</div>
+          ]) || slots.default?.(),
           props.showArrow
             ? renderArrow({
               arrowStyle: props.arrowStyle,
@@ -253,8 +251,12 @@ export default defineComponent({
                 {
                   [`${mergedClsPrefix}-popover--overlap`]: props.overlap,
                   [`${mergedClsPrefix}-popover--show-arrow`]: props.showArrow,
-                  [`${mergedClsPrefix}-popover--show-header`]: !!slots.header,
-                  [`${mergedClsPrefix}-popover--raw`]: props.raw
+                  [`${mergedClsPrefix}-popover--show-header`]: !isSlotEmpty(
+                    slots.header
+                  ),
+                  [`${mergedClsPrefix}-popover--raw`]: props.raw,
+                  [`${mergedClsPrefix}-popover--manual-trigger`]:
+                    props.trigger === 'manual'
                 }
               ],
               ref: bodyRef,
@@ -266,7 +268,7 @@ export default defineComponent({
             attrs
           ),
           internalTrapFocus ? (
-            <VFocusTrap active={props.show} focusFirstDescendant>
+            <VFocusTrap active={props.show} autoFocus>
               {{ default: renderContentInnerNode }}
             </VFocusTrap>
           ) : (

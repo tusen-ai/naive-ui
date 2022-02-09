@@ -2,11 +2,11 @@
 
 # Customizing theme
 
-Naive-ui provide `n-config-provider` to customize the theme.
+Naive-ui provides `n-config-provider` to customize the theme.
 
-By default all the component is light themed, without any configuration.
+By default all of the components are light themed, without any configuration.
 
-Learn more about `n-config-provider`, see [Config Provider](../components/config-provider).
+To learn more about `n-config-provider`, see [Config Provider](../components/config-provider).
 
 ## Use dark theme
 
@@ -255,7 +255,7 @@ You can use `n-global-style` to sync common global style to the body element. In
 
 ## Theme editor
 
-Naive-ui provides theme editor to help you edit theme and export the corresponding configuration. It can be placed inside `n-config-provider`.
+Naive-ui provides a theme editor to help you edit theme and export the corresponding configuration. It can be placed inside `n-config-provider`.
 
 The theme editor is not included in global installation (`app.use(naive)`). You need to import it explicitly to use it.
 

@@ -5,7 +5,6 @@ import {
   PropType,
   CSSProperties,
   ref,
-  InjectionKey,
   provide,
   ExtractPropTypes
 } from 'vue'
@@ -17,7 +16,7 @@ import { layoutLight } from '../styles'
 import type { LayoutTheme } from '../styles'
 import style from './styles/layout.cssr'
 import { LayoutInst, positionProp } from './interface'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 
 const layoutProps = {
   embedded: Boolean,
@@ -41,9 +40,8 @@ const layoutProps = {
 
 export type LayoutProps = ExtractPublicPropTypes<typeof layoutProps>
 
-export const layoutInjectionKey: InjectionKey<
-ExtractPropTypes<typeof layoutProps>
-> = Symbol('layout')
+export const layoutInjectionKey =
+  createInjectionKey<ExtractPropTypes<typeof layoutProps>>('n-layout')
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function createLayoutComponent (isContent: boolean) {
@@ -59,7 +57,7 @@ export function createLayoutComponent (isContent: boolean) {
       const { mergedClsPrefixRef } = useConfig(props)
       const themeRef = useTheme(
         'Layout',
-        'Layout',
+        '-layout',
         style,
         layoutLight,
         props,

@@ -7,10 +7,7 @@ import {
   defineComponent,
   provide,
   VNodeChild,
-  InjectionKey,
   ExtractPropTypes,
-  renderSlot,
-  Ref,
   PropType,
   CSSProperties
 } from 'vue'
@@ -22,6 +19,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { MessageTheme } from '../styles'
 import type { MessageOptions, MessageType } from './types'
 import MessageEnvironment from './MessageEnvironment'
+import { messageApiInjectionKey, messageProviderInjectionKey } from './context'
 
 type ContentType = string | (() => VNodeChild)
 
@@ -33,9 +31,6 @@ export interface MessageApiInjection {
   loading: (content: ContentType, options?: MessageOptions) => MessageReactive
   destroyAll: () => void
 }
-
-export const messageApiInjectionKey: InjectionKey<MessageApiInjection> =
-  Symbol('messageApi')
 
 export interface MessageReactive {
   content?: ContentType
@@ -87,12 +82,9 @@ export type MessageProviderProps = ExtractPublicPropTypes<
   typeof messageProviderProps
 >
 
-type MessageProviderSetupProps = ExtractPropTypes<typeof messageProviderProps>
-
-export const messageProviderInjectionKey: InjectionKey<{
-  props: MessageProviderSetupProps
-  mergedClsPrefixRef: Ref<string>
-}> = Symbol('messageProvider')
+export type MessageProviderSetupProps = ExtractPropTypes<
+  typeof messageProviderProps
+>
 
 export default defineComponent({
   name: 'MessageProvider',
@@ -170,7 +162,7 @@ export default defineComponent({
   render () {
     return (
       <>
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots.default?.()}
         {this.messageList.length ? (
           <Teleport to={this.to ?? 'body'}>
             <div

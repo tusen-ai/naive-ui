@@ -1,15 +1,8 @@
-import {
-  h,
-  defineComponent,
-  inject,
-  renderSlot,
-  getCurrentInstance,
-  PropType
-} from 'vue'
+import { h, defineComponent, inject, getCurrentInstance, PropType } from 'vue'
 import { pxfy } from 'seemly'
-import { gridInjectionKey } from './Grid'
 import { keysOf } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { gridInjectionKey } from './config'
 
 export const defaultSpan = 1
 
@@ -86,7 +79,7 @@ export default defineComponent({
   render () {
     return (
       <div style={[this.itemStyle as any, this.deriveStyle()]}>
-        {renderSlot(this.$slots, 'default', { overflow: this.overflow })}
+        {this.$slots.default?.({ overflow: this.overflow })}
       </div>
     )
   }

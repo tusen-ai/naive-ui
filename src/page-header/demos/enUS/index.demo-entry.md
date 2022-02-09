@@ -23,13 +23,13 @@ basic
 
 ### PageHeader Slots
 
-| Name     | Parameters | Description           | Version      |
-| -------- | ---------- | --------------------- | ------------ |
-| avatar   | `()`       | Image information.    |              |
-| header   | `()`       | Header information.   |              |
-| default  | `()`       | Content.              |              |
-| extra    | `()`       | Extra information.    |              |
-| footer   | `()`       | Footer information.   |              |
-| subtitle | `()`       | Subtitle information. |              |
-| title    | `()`       | Title information.    |              |
-| back     | `()`       | Back icon.            | NEXT_VERSION |
+| Name     | Parameters | Description           | Version |
+| -------- | ---------- | --------------------- | ------- |
+| avatar   | `()`       | Image information.    |         |
+| header   | `()`       | Header information.   |         |
+| default  | `()`       | Content.              |         |
+| extra    | `()`       | Extra information.    |         |
+| footer   | `()`       | Footer information.   |         |
+| subtitle | `()`       | Subtitle information. |         |
+| title    | `()`       | Title information.    |         |
+| back     | `()`       | Back icon.            | 2.24.2  |

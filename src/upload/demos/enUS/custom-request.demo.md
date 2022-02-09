@@ -42,7 +42,7 @@ export default defineComponent({
           formData.append(key, data[key])
         })
       }
-      formData.append(file.name, file)
+      formData.append(file.name, file.file)
       axios
         .post(action, formData, {
           withCredentials,

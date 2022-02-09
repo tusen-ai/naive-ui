@@ -4,7 +4,6 @@ import {
   defineComponent,
   CSSProperties,
   provide,
-  InjectionKey,
   Ref,
   toRef
 } from 'vue'
@@ -13,15 +12,15 @@ import type { ThemeProps } from '../../_mixins'
 import { breadcrumbLight } from '../styles'
 import type { BreadcrumbTheme } from '../styles'
 import style from './styles/index.cssr'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 
 export interface BreadcrumbInjection {
   separatorRef: Ref<string>
   mergedClsPrefixRef: Ref<string>
 }
 
-export const breadcrumbInjectionKey: InjectionKey<BreadcrumbInjection> =
-  Symbol('breadcrumb')
+export const breadcrumbInjectionKey =
+  createInjectionKey<BreadcrumbInjection>('n-breadcrumb')
 
 const breadcrumbProps = {
   ...(useTheme.props as ThemeProps<BreadcrumbTheme>),
@@ -40,7 +39,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Breadcrumb',
-      'Breadcrumb',
+      '-breadcrumb',
       style,
       breadcrumbLight,
       props,

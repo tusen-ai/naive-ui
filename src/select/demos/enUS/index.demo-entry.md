@@ -5,26 +5,29 @@ Select something!
 ## Demo
 
 ```demo
-basic
-size
-multiple
-events
-filterable
-tag
-menu-width
-remote
-remote-multiple
-clearable
+basic.vue
+size.vue
+multiple.vue
+events.vue
+filterable.vue
+tag.vue
+menu-width.vue
+remote.vue
+remote-multiple.vue
+clearable.vue
 scroll-event.vue
-group
-many-options
-custom-option
-action
-fallback-option
-max-tag-count
-add-tooltip
-render-tag
-render-person
+group.vue
+many-options.vue
+custom-option.vue
+custom-suffix.vue
+action.vue
+fallback-option.vue
+max-tag-count.vue
+add-tooltip.vue
+render-tag.vue
+focus.vue
+render-person.vue
+tag-input.vue
 ```
 
 ## API
@@ -47,11 +50,12 @@ render-person
 | multiple | `boolean` | `false` | Whether to allow selecting multiple values. |  |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | Options that can be selected. For more details see SelectOption Properties (below). |  |
 | placeholder | `string` | `'Please Select'` | Placeholder. |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Option menu's placement. | 2.25.0 |
 | remote | `boolean` | `false` | Allows options to be fetched asynchronously. Note that if `remote` is set, `filter` & `tag` won't work on `options`. |  |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function for each option label. |  |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | Render function for each option. |  |
-| render-tag | `(option: SelectBaseOption, onClose: () => void) => VNodeChild` | `undefined` | Render function for each option tag. |  |
-| reset-menu-on-options-change | `boolean` | `true` | Whether to reset menu staus on options change, for example, scroll status. | NEXT_VERSION |
+| render-tag | `(props: { option: SelectBaseOption, onClose: () => void }) => VNodeChild` | `undefined` | Render function for each option tag. |  |
+| reset-menu-on-options-change | `boolean` | `true` | Whether to reset menu staus on options change, for example, scroll status. | 2.24.2 |
 | show | `boolean` | `undefined` | Whether to show/open the option menu. |  |
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |  |
@@ -64,9 +68,10 @@ render-person
 | on-focus | `() => void` | `undefined` | Callback triggered when the selection element is focussed on. |  |
 | on-scroll | `(e: ScrollEvent) => void` | `undefined` | Callback triggered when the options menu is scrolled. |  |
 | on-search | `(value: string) => void` | `undefined` | Callback triggered when a search is conducted. |  |
+| on-update:show | `(show: boolean) => void` | `undefined` | Callback on menu open status change. | 2.24.2 |
 | on-update:value | `(value: Array \| string \| number \| null, option: SelectBaseOption \| null \| SelectBaseOption[]) => void` | `undefined` | Callback triggered when the selected value is updated. |  |
 
-### SelectOption Properties
+#### SelectOption Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -77,7 +82,7 @@ render-person
 | style | `string` | Customize the option's style. |
 | value | `string \| number` | Should be unique for each option. |
 
-### SelectGroupOption Properties
+#### SelectGroupOption Properties
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -89,7 +94,15 @@ render-person
 
 ### Select Slots
 
-| Name   | Parameters | Description                            |
-| ------ | ---------- | -------------------------------------- |
-| action | `()`       | Options menu slot.                     |
-| empty  | `()`       | Empty state slot for the options menu. |
+| Name   | Parameters | Description                            | Version |
+| ------ | ---------- | -------------------------------------- | ------- |
+| action | `()`       | Options menu slot.                     |         |
+| empty  | `()`       | Empty state slot for the options menu. |         |
+| arrow  | `()`       | Arrow icon slot.                       | 2.24.2  |
+
+### Select Methods
+
+| Name  | Type         | Description | Version |
+| ----- | ------------ | ----------- | ------- |
+| focus | `() => void` | Focus.      | 2.24.2  |
+| blur  | `() => void` | Blur.       | 2.24.2  |

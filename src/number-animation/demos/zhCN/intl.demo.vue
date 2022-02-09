@@ -3,7 +3,7 @@
 
 使用 `locale` 设定国际化语言。
 
-需要注意的是，该功能使用了 `Intl` API，兼容性请参考  为支持国际化使用了 Intl API，兼容性请参考 [format](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/format) 和 [formatToParts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/formatToParts)。
+需要注意的是，该功能使用了 `Intl` API，兼容性请参考 [format](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/format) 和 [formatToParts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/formatToParts)。
 </markdown>
 
 <template>

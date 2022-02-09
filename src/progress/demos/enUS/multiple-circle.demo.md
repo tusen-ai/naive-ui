@@ -30,7 +30,7 @@ Maybe your product manager will need it.
         { stroke: 'var(--error-color)', opacity: 0.3 },
       ]"
     >
-      <div style="text-align: center;">圈圈赛跑！</div>
+      <div style="text-align: center;">Circle racing!</div>
     </n-progress>
   </n-el>
   <n-space>

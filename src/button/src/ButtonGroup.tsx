@@ -1,6 +1,6 @@
-import { h, PropType, defineComponent, provide, InjectionKey } from 'vue'
+import { h, PropType, defineComponent, provide } from 'vue'
 import { useConfig, useStyle } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 import type { Size } from './interface'
 import style from './styles/button-group.cssr'
 
@@ -8,9 +8,8 @@ export interface ButtonGroupInjection {
   size?: Size | undefined
 }
 
-export const buttonGroupInjectionKey: InjectionKey<ButtonGroupInjection> = Symbol(
-  'button-group'
-)
+export const buttonGroupInjectionKey =
+  createInjectionKey<ButtonGroupInjection>('n-button-group')
 
 const buttonGroupProps = {
   size: {
@@ -27,7 +26,7 @@ export default defineComponent({
   props: buttonGroupProps,
   setup (props) {
     const { mergedClsPrefixRef } = useConfig(props)
-    useStyle('ButtonGroup', style, mergedClsPrefixRef)
+    useStyle('-button-group', style, mergedClsPrefixRef)
     provide(buttonGroupInjectionKey, props)
     return {
       mergedClsPrefix: mergedClsPrefixRef

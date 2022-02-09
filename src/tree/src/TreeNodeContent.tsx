@@ -1,4 +1,4 @@
-import { h, defineComponent, ref, PropType, inject } from 'vue'
+import { h, defineComponent, ref, PropType, inject, HTMLAttributes } from 'vue'
 import { render } from '../../_utils'
 import { TmNode, treeInjectionKey } from './interface'
 
@@ -17,7 +17,8 @@ export default defineComponent({
     tmNode: {
       type: Object as PropType<TmNode>,
       required: true
-    }
+    },
+    nodeProps: Object as PropType<HTMLAttributes>
   },
   setup (props) {
     const { renderLabelRef, renderPrefixRef, renderSuffixRef, labelFieldRef } =
@@ -44,6 +45,7 @@ export default defineComponent({
     const {
       clsPrefix,
       labelField,
+      nodeProps,
       checked = false,
       selected = false,
       renderLabel,
@@ -58,8 +60,9 @@ export default defineComponent({
     } = this
     return (
       <span
+        {...nodeProps}
         ref="selfRef"
-        class={[`${clsPrefix}-tree-node-content`]}
+        class={[`${clsPrefix}-tree-node-content`, nodeProps?.class]}
         onClick={handleClick}
         draggable={onDragstart === undefined ? undefined : true}
         onDragstart={onDragstart}

@@ -1,22 +1,179 @@
 # CHANGELOG
 
-## Pending
+## NEXT_VERSION
+
+### Fixes
+
+- 移除 `resolveSlot` 中无用的 `console.log`
+- 修复 `n-tag` 在 `checkable=true` 时缺少背景色
+- 修复 `n-tree` 在 `happydom` 测试环境下由于 `Image` 对象报错
+
+### i18n
+
+- 新增 plPL locale，关闭 [#2354](https://github.com/TuSimple/naive-ui/issues/2354)
+
+## 2.25.1 (2022-02-06)
+
+### i18n
+
+- 新增 enGB locale
+- 完善 deDE locale
+
+## 2.25.0 (2022-02-04)
+
+### Breaking Changes
+
+- 重构了 `n-carousel` 带箭头时的样式
+
+### Fixes
+
+- 修复 `n-color-picker` 色阶和不透明度调整滑块 box-shadow 被轨道 box-shadow 影响
+- 修复 `n-form-item` feedback DOM 内容为空依然有 padding
+- 修复 `n-button` 在 safari 下显示有多余 margin
+- 修复 `n-form` 的 rules 和 `n-form-item` 的 rule 中的 `validator` 与 `asyncValidator` 函数的 `rule` 类型不为 `FormItemRule` 类型， 关闭 [#2299](https://github.com/TuSimple/naive-ui/issues/2299)
+- 修复 `n-log` 在内容过长时不折行，关闭 [#2298](https://github.com/TuSimple/naive-ui/issues/2298)
+- 修复 `n-log` 未导出 `LogInst` 类型
+- 修复 `n-popselect` action slot & empty slot 不生效
+- 修复 `n-data-table` 不能使用百分比列宽
+- 修复 `n-select` 在可过滤，关闭菜单并且没有选中任何值的时候选框会空一下
+- 修复 `n-select` 在动态创建选项时关闭菜单后创建中的选项未清空
+- 修复 `n-select` 在 `show=false` 和 `filterable=true` 时无法输入内容，关闭 [#1723](https://github.com/TuSimple/naive-ui/issues/1723)
+- 修复 `n-dropdown` 在 `trigger="manual"` 时有额外 margin
+- 修复 `web-types.json` 中 `n-h1` ~ `n-h6` 的名称
+- 修复 `n-select` 在输入法激活时按退格键会删除选项
+- 修复 `n-select` 在特定情况下打开菜单后会将禁用的选项作为待选选项
+
+### Feats
+
+- `n-tabs` 的 `justify-content` 新增类型 `start` `center` `end`
+- `n-auto-complete` 新增 `placement` 属性
+- `n-cascader` 新增 `placement` 属性
+- `n-color-picker` 新增 `placement` 属性
+- `n-date-picker` 新增 `placement` 属性
+- `n-mention` 新增 `placement` 属性
+- `n-select` 新增 `placement` 属性
+- `n-slider` 新增 `placement` 属性
+- `n-time-picker` 新增 `placement` 属性
+- `n-tree-select` 新增 `placement` 属性
+- `n-card` 新增 `header-extra-style` 属性
+- `n-popover` 新增 `keep-alive-on-hover` 属性，关闭 [#2326](https://github.com/TuSimple/naive-ui/issues/2326)
+- `n-input` 新增 `status` 属性
+- 新增 `n-icon-wrapper` 组件
+- `n-popover` 导出 `PopoverPlacement` 类型
+- `n-drawer` 导出 `DrawerPlacement` 类型
+- `n-dynamic-tags` 新增 `input-props` 属性
+- `n-notification-provider` 新增 `container-style` 属性
+- `n-notification-provider` 导出 `NotificationPlacement` 类型
+- `n-notification-provider` 导出 `NotificationType` 类型
+- `n-tabs` 新增 `bar-width` 属性
+- `n-dynamic-input` 新增 `create-button-props` 属性
+- `n-dynamic-input` 新增 `create-button-default` slot
+- `n-dynamic-input` 新增 `create-button-icon` slot
+- `n-dynamic-input` 新增 `show-sort-button` 属性，关闭 [#2121](https://github.com/TuSimple/naive-ui/issues/2121)
+- `n-select` 可以作为标签输入框使用
+- `n-select` 导出 `SelectRenderLabel` 类型
+- `n-select` 导出 `SelectRenderOption` 类型
+- `n-select` 导出 `SelectRenderTag` 类型
+- `n-tree` 新增 `node-props` 属性
+
+## 2.24.7 (2022-01-28)
+
+### Fixes
+
+- `n-popselect` 设定 `width="trigger"` 不生效
+
+### i18n
+
+- 更新 jaJP locale
+- 更新 deDE locale
+
+## 2.24.6 (2022-01-26)
+
+### Feats
+
+- `n-icon` 新增 `component` 属性
+
+### Fixes
+
+- 修复 `n-dynamic-input` 当 max 为 0 时可以添加子项， 关闭 [#2271](https://github.com/TuSimple/naive-ui/issues/2271)
+- 修复 `n-dialog` 有无用的 `console.log`
+
+## 2.24.5 (2022-01-25)
+
+### Fixes
+
+- `n-input` 在类型为 `textarea` 时 placeholder 无法换行
+- `n-date-picker` 面板年和月之前缺少空格
+
+### Feats
+
+- `n-color-picker` 新增 `disabled` 属性
+- `n-date-picker` 快速跳转面板增加触发背景区域
+
+## 2.24.4 (2022-01-24)
+
+### Fixes
+
+- 更新 vueuc 版本
+
+## 2.24.3 (2022-01-24)
+
+### Fixes
+
+- 修复 `n-layout-sider` 边框没有 transition
+
+## 2.24.2 (2022-01-24)
 
 ### Fixes
 
 - 修复 `n-layout-sider` 在折叠时仍占据 1px 宽度
 - 修复 `n-code` 在 `word-wrap=true` 时不切分单词
+- 修复 `n-tab-pane` 的 tab 区会继承 `attrs`， 关闭 [#2221](https://github.com/TuSimple/naive-ui/issues/2221)
+- 修复 `n-image` 在预览时仍可滚动背景，关闭 [#2241](https://github.com/TuSimple/naive-ui/issues/2241)
+- 修复 `n-input` 在被浏览器自动填充的时候仍然展示 placeholder，关闭 [#2234](https://github.com/TuSimple/naive-ui/issues/2234)
+- 修复 `n-input` 在 `type="textarea"` 时 placeholder 换行问题
+- 修复 `n-avatar-group` 超出 max 之后显示少一人，关闭 [#2244](https://github.com/TuSimple/naive-ui/issues/2244)
+- 修复 `n-calendar` 再点击今天按钮后不触发 `on-panel-change`
+- 修复 `n-drawer` 在设定 `mask-closable=false` 时无法被 esc 键关闭，关闭 [#2233](https://github.com/TuSimple/naive-ui/issues/2233)
 
 ### Feats
 
 - `n-page-header` 新增 `back` 插槽，关闭 [#2176](https://github.com/TuSimple/naive-ui/issues/2176)
 - `n-select` 新增 `reset-menu-on-options-change` 属性，关闭 [#2168](https://github.com/TuSimple/naive-ui/issues/2168)
+- `n-select` 新增 `arrow` 插槽，关闭 [#2201](https://github.com/TuSimple/naive-ui/issues/2201)
 - `n-carousel` `effect` 属性支持 `'card'`
-
-### Feats
-
+- `n-input` 在 `type="textarea"` 不再使用原生滚动条，关闭 [#2242](https://github.com/TuSimple/naive-ui/issues/2242)，关闭 [#1172](https://github.com/TuSimple/naive-ui/issues/1172)
 - `n-number-animation` 新增 `locale` 属性，用于设置国际化语言，关闭 [#2181](https://github.com/TuSimple/naive-ui/issues/2181)
 - `n-number-animation` 跟随 config provider 国际化
+- 导出 `lightTheme`
+- `n-time-picker` 新增 `icon` 插槽，关闭 [#2228](https://github.com/TuSimple/naive-ui/issues/2228)
+- `n-tab-pane` 新增 `tab-props` 属性，关闭 [#2221](https://github.com/TuSimple/naive-ui/issues/2221)
+- 新增 `CustomThemeCommonVars` 用于拓展 `useThemeVars`
+- `n-slider` 新增 `show-tooltip` 属性，关闭 [#2212](https://github.com/TuSimple/naive-ui/issues/2212)
+- `n-select` 新增 `on-update:show` 属性
+- `n-select` 新增 `focus` 方法，关闭 [#2202](https://github.com/TuSimple/naive-ui/issues/2202)
+- `n-select` 新增 `blur` 方法，关闭 [#2202](https://github.com/TuSimple/naive-ui/issues/2202)
+- `n-date-picker` 新增 `focus` 方法，关闭 [#2202](https://github.com/TuSimple/naive-ui/issues/2202)
+- `n-date-picker` 新增 `blur` 方法，关闭 [#2202](https://github.com/TuSimple/naive-ui/issues/2202)
+- `n-time-picker` 新增 `focus` 方法，关闭 [#2202](https://github.com/TuSimple/naive-ui/issues/2202)
+- `n-time-picker` 新增 `blur` 方法，关闭 [#2202](https://github.com/TuSimple/naive-ui/issues/2202)
+- `n-checkbox` 新增 `focus` 方法，关闭 [#2202](https://github.com/TuSimple/naive-ui/issues/2202)
+- `n-checkbox` 新增 `blur` 方法，关闭 [#2202](https://github.com/TuSimple/naive-ui/issues/2202)
+- `n-cascader` 新增 `focus` 方法，关闭 [#2202](https://github.com/TuSimple/naive-ui/issues/2202)
+- `n-cascader` 新增 `blur` 方法，关闭 [#2202](https://github.com/TuSimple/naive-ui/issues/2202)
+- `n-upload` 新增 `input-props` 属性，关闭 [#2204](https://github.com/TuSimple/naive-ui/issues/2204)
+- `n-data-table` 列增加 `render-sorter-icon` 属性，关闭 [#1785](https://github.com/TuSimple/naive-ui/issues/1785)
+- `n-data-table` 列增加 `render-sorter` 属性，关闭 [#1785](https://github.com/TuSimple/naive-ui/issues/1785)
+- `n-date-picker` 在 `date`、`datetime`、`daterange`、`datetimerange` 类型下可以快速导航到特定的年和月
+- `n-modal` 新增 `close-on-esc` 属性
+- `n-modal` 新增 `auto-focus` 属性
+- `n-modal` 新增 `trap-focus` 属性
+- `n-modal` 新增 `on-esc` 属性
+- `n-drawer` 新增 `close-on-esc` 属性
+- `n-drawer` 新增 `auto-focus` 属性
+- `n-drawer` 新增 `trap-focus` 属性
+- `n-drawer` 新增 `on-esc` 属性
+- `n-upload` 新增 `clear` 方法，关闭 [#2247](https://github.com/TuSimple/naive-ui/issues/2247)
 
 ### i18n
 
@@ -114,6 +271,7 @@
 - `n-color-picker` 新增 `label` 插槽
 - `n-color-picker` 新增 `render-label` 属性
 - `n-form-item` 新增 `label-props` 属性
+- 新增 volar 类型支持
 
 ## 2.23.2 (2021-12-29)
 

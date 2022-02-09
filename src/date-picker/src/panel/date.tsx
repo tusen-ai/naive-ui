@@ -1,14 +1,15 @@
-import { h, defineComponent, renderSlot, watchEffect } from 'vue'
-import { NButton, NxButton } from '../../../button'
+import { h, defineComponent, watchEffect } from 'vue'
 import {
   BackwardIcon,
   FastBackwardIcon,
   ForwardIcon,
   FastForwardIcon
 } from '../../../_internal/icons'
+import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector } from '../../../_internal'
-import { useCalendar, useCalendarProps } from './use-calendar'
 import { warnOnce } from '../../../_utils'
+import { useCalendar, useCalendarProps } from './use-calendar'
+import PanelHeader from './panelHeader'
 
 /**
  * Date Panel
@@ -56,11 +57,14 @@ export default defineComponent({
             >
               <BackwardIcon />
             </div>
-            <div class={`${mergedClsPrefix}-date-panel-month__month-year`}>
-              {this.locale.monthBeforeYear
-                ? `${this.calendarMonth} ${this.calendarYear}`
-                : `${this.calendarYear} ${this.calendarMonth}`}
-            </div>
+            <PanelHeader
+              monthBeforeYear={this.locale.monthBeforeYear}
+              value={this.calendarValue}
+              onUpdateValue={this.onUpdateCalendarValue}
+              mergedClsPrefix={mergedClsPrefix}
+              calendarMonth={this.calendarMonth}
+              calendarYear={this.calendarYear}
+            />
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.nextMonth}
@@ -114,7 +118,7 @@ export default defineComponent({
         </div>
         {this.datePickerSlots.footer ? (
           <div class={`${mergedClsPrefix}-date-panel-footer`}>
-            {renderSlot(this.datePickerSlots, 'footer')}
+            {this.datePickerSlots.footer()}
           </div>
         ) : null}
         {this.actions?.length || shortcuts ? (

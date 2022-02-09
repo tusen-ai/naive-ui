@@ -36,7 +36,7 @@ const calendarProps = {
   value: Number,
   defaultValue: {
     type: Number as PropType<number | null>,
-    defualt: null
+    default: null
   },
   onPanelChange: Function as PropType<OnPanelChange>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -52,7 +52,7 @@ export default defineComponent({
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Calendar',
-      'Calendar',
+      '-calendar',
       style,
       calendarLight,
       props,
@@ -96,7 +96,19 @@ export default defineComponent({
       })
     }
     function handleTodayClick (): void {
-      monthTsRef.value = startOfMonth(now).valueOf()
+      const { value: monthTs } = monthTsRef
+      const oldYear = getYear(monthTs)
+      const oldMonth = getMonth(monthTs)
+      const newMonthTs = startOfMonth(now).valueOf()
+      const newYear = getYear(newMonthTs)
+      const newMonth = getMonth(newMonthTs)
+      if (oldYear !== newYear || oldMonth !== newMonth) {
+        props.onPanelChange?.({
+          year: newYear,
+          month: newMonthTs
+        })
+      }
+      monthTsRef.value = newMonthTs
     }
     return {
       mergedClsPrefix: mergedClsPrefixRef,

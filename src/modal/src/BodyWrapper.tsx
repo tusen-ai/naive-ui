@@ -18,16 +18,16 @@ import {
 } from 'vue'
 import { clickoutside } from 'vdirs'
 import { VFocusTrap } from 'vueuc'
-import { dialogPropKeys } from '../../dialog/src/Dialog'
+import { dialogPropKeys } from '../../dialog/src/dialogProps'
+import { NDialog } from '../../dialog/src/Dialog'
 import { cardBasePropKeys } from '../../card/src/Card'
-import { NScrollbar, ScrollbarInst } from '../../_internal'
-import { NDialog } from '../../dialog'
-import { NCard } from '../../card'
-import { getFirstSlotVNode, keep, warn } from '../../_utils'
-import { presetProps } from './presetProps'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
+import { NScrollbar, ScrollbarInst } from '../../_internal'
+import { NCard } from '../../card'
+import { getFirstSlotVNode, keep, warn } from '../../_utils'
 import { modalBodyInjectionKey, modalInjectionKey } from './interface'
+import { presetProps } from './presetProps'
 
 export default defineComponent({
   name: 'ModalBody',
@@ -41,6 +41,14 @@ export default defineComponent({
     displayDirective: {
       type: String as PropType<'if' | 'show'>,
       required: true
+    },
+    trapFocus: {
+      type: Boolean,
+      default: true
+    },
+    autoFocus: {
+      type: Boolean,
+      default: true
     },
     ...presetProps,
     // events
@@ -68,11 +76,8 @@ export default defineComponent({
       type: Function,
       required: true
     },
-    onKeyup: {
-      type: Function as PropType<(e: KeyboardEvent) => void>,
-      required: true
-    },
-    onAfterEnter: Function as PropType<() => void>
+    onAfterEnter: Function as PropType<() => void>,
+    onEsc: Function as PropType<() => void>
   },
   setup (props) {
     const bodyRef = ref<HTMLElement | ComponentPublicInstance | null>(null)
@@ -197,11 +202,7 @@ export default defineComponent({
     }
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-          <div
-            role="none"
-            class={`${mergedClsPrefix}-modal-body-wrapper`}
-            onKeyup={this.onKeyup}
-          >
+          <div role="none" class={`${mergedClsPrefix}-modal-body-wrapper`}>
             <NScrollbar
               ref="scrollbarRef"
               theme={this.mergedTheme.peers.Scrollbar}
@@ -210,7 +211,12 @@ export default defineComponent({
             >
               {{
                 default: () => (
-                  <VFocusTrap active={this.show} focusFirstDescendant>
+                  <VFocusTrap
+                    disabled={!this.trapFocus}
+                    active={this.show}
+                    onEsc={this.onEsc}
+                    autoFocus={this.autoFocus}
+                  >
                     {{
                       default: () => (
                         <Transition

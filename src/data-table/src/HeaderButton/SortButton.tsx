@@ -50,23 +50,26 @@ export default defineComponent({
   },
   render () {
     const { mergedRenderSorter, mergedSortOrder, mergedClsPrefix } = this
+    const { renderSorterIcon } = this.column
     return mergedRenderSorter ? (
       <RenderSorter render={mergedRenderSorter} order={mergedSortOrder} />
     ) : (
       <span
         class={[
           `${mergedClsPrefix}-data-table-sorter`,
-          {
-            [`${mergedClsPrefix}-data-table-sorter--asc`]:
-              mergedSortOrder === 'ascend',
-            [`${mergedClsPrefix}-data-table-sorter--desc`]:
-              mergedSortOrder === 'descend'
-          }
+          mergedSortOrder === 'ascend' &&
+            `${mergedClsPrefix}-data-table-sorter--asc`,
+          mergedSortOrder === 'descend' &&
+            `${mergedClsPrefix}-data-table-sorter--desc`
         ]}
       >
-        <NBaseIcon clsPrefix={mergedClsPrefix}>
-          {{ default: () => <ArrowDownIcon /> }}
-        </NBaseIcon>
+        {renderSorterIcon ? (
+          renderSorterIcon({ order: mergedSortOrder })
+        ) : (
+          <NBaseIcon clsPrefix={mergedClsPrefix}>
+            {{ default: () => <ArrowDownIcon /> }}
+          </NBaseIcon>
+        )}
       </span>
     )
   }

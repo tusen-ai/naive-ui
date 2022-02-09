@@ -8,6 +8,7 @@ Unlike the real world, these color values are discrete.
 basic
 alpha
 size
+disabled
 modes
 form
 swatches
@@ -23,11 +24,13 @@ native
 | default-show | `boolean` | `undefined` | Whether to show the color panel by default. |  |
 | default-value | `string` | Black color value of 1st mode's corresponding value. | Default value of the picker. |  |
 | modes | `Array<'rgb' \| 'hex' \| 'hsl' \| 'hsv'>` | `['rgb', 'hex', 'hsl']` | The value format of the picker. Notice that value will follow the mode once you select a new value from the picker. |  |
+| placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Color panel placement. | 2.25.0 |
 | render-label | `(color: string \| null) => VNodeChild` | `undefined` | Label render function of the color picker trigger. | 2.24.0 |
 | show | `boolean` | `undefined` | Whether the color panel is shown. |  |
 | show-alpha | `boolean` | `true` | Whether the alpha channel can be adjusted. |  |
 | show-preview | `boolean` | `false` | Whether the color preview is shown. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the picker. |  |
+| disabled | `boolean` | `false` | Whether to disable the color picker. | 2.24.5 |
 | swatches | `string[]` | `undefined` | Value of the swatches. |  |
 | to | `string \| HTMLElement` | `'body'` | Where to attach the panel to. |  |
 | value | `string \| null` | `undefined` | Value of the picker. |  |

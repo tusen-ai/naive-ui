@@ -1,4 +1,4 @@
-import { computed, defineComponent, renderSlot, h, PropType } from 'vue'
+import { computed, defineComponent, h, PropType } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
@@ -31,7 +31,7 @@ export default defineComponent({
     const { mergedBorderedRef, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Input',
-      'InputGroupLabel',
+      '-input-group-label',
       style,
       inputLight,
       props,
@@ -74,7 +74,7 @@ export default defineComponent({
         class={`${mergedClsPrefix}-input-group-label`}
         style={this.cssVars as any}
       >
-        {renderSlot(this.$slots, 'default')}
+        {this.$slots.default?.()}
         {this.mergedBordered ? (
           <div class={`${mergedClsPrefix}-input-group-label__border`} />
         ) : null}

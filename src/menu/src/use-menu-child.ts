@@ -1,14 +1,16 @@
 import { Key } from 'treemate'
-import { useMenuChildProps } from './use-menu-child-props'
-import { inject, computed, ComputedRef, ExtractPropTypes, Ref } from 'vue'
-import { MergedTheme } from '../../_mixins/use-theme'
-import type { MenuTheme } from '../styles'
-import { OnUpdateValueImpl } from './interface'
-import { menuInjectionKey } from './Menu'
-import type { MenuSetupProps } from './Menu'
-import { menuItemGroupInjectionKey } from './MenuOptionGroup'
-import { submenuInjectionKey } from './Submenu'
+import { inject, computed, ComputedRef, Ref } from 'vue'
 import { FollowerPlacement } from 'vueuc'
+import type { MergedTheme } from '../../_mixins/use-theme'
+import type { MenuTheme } from '../styles'
+import type { OnUpdateValueImpl } from './interface'
+import {
+  menuInjectionKey,
+  submenuInjectionKey,
+  menuItemGroupInjectionKey
+} from './context'
+import type { MenuSetupProps } from './Menu'
+import type { UseMenuChildProps } from './use-menu-child-props'
 
 const ICON_MARGIN_RIGHT = 8
 
@@ -34,8 +36,6 @@ export interface SubmenuInjection {
 export interface MenuOptionGroupInjection {
   paddingLeftRef: Ref<number | undefined>
 }
-
-export type UseMenuChildProps = ExtractPropTypes<typeof useMenuChildProps>
 
 export interface UseMenuChild {
   dropdownPlacement: ComputedRef<FollowerPlacement>
@@ -126,5 +126,3 @@ export function useMenuChild (props: UseMenuChildProps): UseMenuChild {
     NSubmenu
   }
 }
-
-export { useMenuChildProps }

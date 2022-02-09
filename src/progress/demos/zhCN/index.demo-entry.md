@@ -27,7 +27,7 @@ processing
 | color | `string \| string[]` | `undefined` | 进度条颜色 |  |
 | fill-border-radius | `number \| string` | `undefined` | `'line'` 类型进度条填充的圆角半径，不填写则维持 `border-radius` |  |
 | height | `number` | `undefined` | `'line'` 类型进度条的高度，不填写则维持默认高度 |  |
-| indicator-placement | `'inside' \| 'inside-label' \| 'outside'` | `'outside'` | 设置指标位置 |  |
+| indicator-placement | `'inside' \| 'outside'` | `'outside'` | 设置指标位置 |  |
 | indicator-text-color | `string` | `undefined` | 指标文本颜色 |  |
 | offset-degree | `number` | `0` | 进度的偏移角度，只对 `circle` 类型生效 | 2.24.0 |
 | percentage | `number \| number[]` | `0` | 百分比的值 |  |

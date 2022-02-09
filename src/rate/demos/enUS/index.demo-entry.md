@@ -8,7 +8,7 @@ Hint: If you are not very confident, think twice before changing the star's colo
 basic
 size
 color
-icon
+icon.vue
 allow-half
 readonly
 ```
@@ -30,6 +30,6 @@ readonly
 
 ### Rate Slots
 
-| Name    | Parameters | Description           |
-| ------- | ---------- | --------------------- |
+| Name    | Parameters | Description             |
+| ------- | ---------- | ----------------------- |
 | default | `()`       | The icon of the rating. |
