@@ -44,7 +44,7 @@ action
 
 ## API
 
-### `useDialog` API
+### useDialog API
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |

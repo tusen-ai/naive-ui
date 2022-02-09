@@ -62,7 +62,7 @@ placement.vue
 | scrollable | `boolean` | `true` | Whether notification can be scroll. |  |
 | to | `string \| HTMLElement` | `'body'` | Container node of notification container. |  |
 
-### `notification` Injection Methods
+### notification Injection Methods
 
 | Name | Type | Description |
 | --- | --- | --- |

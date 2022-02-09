@@ -61,7 +61,7 @@ placement.vue
 | scrollable | `boolean` | `true` | 通知是否可滚动 |  |
 | to | `string \| HTMLElement` | `'body'` | `Notification` 容器节点的位置 |  |
 
-### `notification` Injection Methods
+### notification Injection Methods
 
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
