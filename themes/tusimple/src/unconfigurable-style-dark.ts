@@ -400,7 +400,8 @@ export const unconfigurableStyle = c([
         [
           cE('button', {
             backgroundColor: '#5B5B5B',
-            backgroundImage: 'unset'
+            backgroundImage: 'unset',
+            boxShadow: 'none'
           })
         ]
       ),
