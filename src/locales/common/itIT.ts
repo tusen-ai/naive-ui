@@ -55,8 +55,8 @@ const itIT: NLocale = {
     clear: 'Cancella'
   },
   Transfer: {
-    sourceTitle: 'Fonte',
-    targetTitle: 'Destinazione'
+    total: (num: number): string => `Total ${num} items`,
+    selectedTotal: (num: number): string => `Selected ${num} items`
   },
   Empty: {
     description: 'Nessun Dato'

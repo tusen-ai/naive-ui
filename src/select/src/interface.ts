@@ -46,10 +46,10 @@ export type OnUpdateValue = (
   string[] &
   number[] &
   ValueAtom[] &
-    (ValueAtom | null) &
-    (string[] | null) &
-    (number[] | null) &
-    (ValueAtom[] | null),
+  (ValueAtom | null) &
+  (string[] | null) &
+  (number[] | null) &
+  (ValueAtom[] | null),
   option: SelectBaseOption & null & SelectBaseOption[]
 ) => void
 export type OnUpdateValueImpl = (

@@ -55,8 +55,8 @@ const jaJP: NLocale = {
     clear: 'リセット'
   },
   Transfer: {
-    total: (num: number): string => `合計 ${num} 件`,
-    selectedTotal: (num: number): string => `選択 ${num} 件`
+    total: (num: number): string => `Total ${num} items`,
+    selectedTotal: (num: number): string => `Selected ${num} items`
   },
   Empty: {
     description: 'データなし'

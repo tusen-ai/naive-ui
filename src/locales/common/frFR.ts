@@ -55,8 +55,8 @@ const frFR: NLocale = {
     clear: 'Effacer'
   },
   Transfer: {
-    total: (num: number): string => `Total général ${num}`,
-    selectedTotal: (num: number): string => `Choisis ${num}`
+    total: (num: number): string => `Total ${num} items`,
+    selectedTotal: (num: number): string => `Selected ${num} items`
   },
   Empty: {
     description: 'Aucune donnée'

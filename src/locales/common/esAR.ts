@@ -54,8 +54,8 @@ const esAR = {
     clear: 'Limpiar'
   },
   Transfer: {
-    sourceTitle: 'Fuente',
-    targetTitle: 'Objetivo'
+    total: (num: number): string => `Total ${num} items`,
+    selectedTotal: (num: number): string => `Selected ${num} items`
   },
   Empty: {
     description: 'Sin datos'
