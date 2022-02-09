@@ -93,7 +93,7 @@
     "codesandbox": "^2.2.3",
     "cross-env": "^7.0.3",
     "cssnano": "^5.0.5",
-    "esbuild": "0.14.20",
+    "esbuild": "0.14.21",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.2",
