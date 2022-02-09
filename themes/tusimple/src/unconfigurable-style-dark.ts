@@ -394,6 +394,7 @@ export const unconfigurableStyle = c([
       cE(
         'rail',
         {
+          opacity: '1',
           backgroundColor: 'rgba(91, 91, 91, .5)'
         },
         [
@@ -402,7 +403,14 @@ export const unconfigurableStyle = c([
             backgroundImage: 'unset'
           })
         ]
-      )
+      ),
+      cM('active', [
+        cE('rail', [
+          cE('button', {
+            backgroundColor: '#314A2A'
+          })
+        ])
+      ])
     ]),
     cE(
       'rail',
