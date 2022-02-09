@@ -24,10 +24,7 @@ basic.vue
 | rotate | `number` | `-22` | 旋转角度 | NEXT_VERSION |
 | image | `string` | - | 图片路径 | NEXT_VERSION |
 | content | `string` | - | 文字内容 | NEXT_VERSION |
-| font-size | `number \| string` | `16` | 字体大小 | NEXT_VERSION |
-| font-family | string | `sans-serif` | 字体 | NEXT_VERSION |
 | font-color | string | `rgba(0,0,0,.15)` | 字体颜色 | NEXT_VERSION |
-| font-weight | `'normal' \| 'light' \| 'weight' \| number ` | `normal` | 字体粗细 | NEXT_VERSION |
 | font-style | `'normal' \| 'italic' \| 'oblique' \| number` | `normal` | 字体风格 | NEXT_VERSION |
 | selectable | `boolean` | `true` | 水印覆盖的内容是否可选中 | NEXT_VERSION |
 

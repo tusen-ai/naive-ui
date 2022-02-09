@@ -2,6 +2,7 @@ import { h, defineComponent, PropType, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { ExtractPublicPropTypes, warnOnce } from '../../_utils'
+import { useThemeVars } from '../../composables/index'
 import { watermarkLight, WatermarkTheme } from '../styles'
 import style from './styles/index.cssr'
 
@@ -54,18 +55,6 @@ const watermarkProps = {
     type: String,
     default: 'rgba(0,0,0,.15)'
   },
-  fontFamily: {
-    type: String,
-    default: 'sans-serif'
-  },
-  fontWeight: {
-    type: [String, Number] as PropType<'normal' | 'light' | 'weight' | number>,
-    default: 'normal'
-  },
-  fontSize: {
-    type: [Number, String] as PropType<number | string>,
-    default: 16
-  },
   fontStyle: {
     type: [String, Number] as PropType<
     'normal' | 'italic' | 'oblique' | number
@@ -97,13 +86,11 @@ export default defineComponent({
       image,
       content,
       fontColor,
-      fontSize,
-      fontFamily,
-      fontWeight,
       fontStyle,
       selectable
     } = props
     const base64UrlRef = ref('')
+    const themeVars = useThemeVars().value
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
     const ratio = getRatio(ctx)
@@ -128,8 +115,8 @@ export default defineComponent({
           base64UrlRef.value = canvas.toDataURL()
         }
       } else if (content) {
-        const markSize = Number(fontSize) * ratio
-        ctx.font = `${fontStyle} normal ${fontWeight} ${markSize}px/${markHeight} ${fontFamily}`
+        const markSize = parseInt(themeVars.fontSizeHuge, 10) * ratio
+        ctx.font = `${fontStyle} normal ${themeVars.fontWeight} ${markSize}px/${markHeight} ${themeVars.fontFamily}`
         ctx.fillStyle = fontColor
         ctx.fillText(content, 0, 0)
         base64UrlRef.value = canvas.toDataURL()

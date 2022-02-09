@@ -24,10 +24,7 @@ basic.vue
 | rotate | `number` | `-22` | rotation angle | NEXT_VERSION |
 | image | `string` | - | src of a watermark image | NEXT_VERSION |
 | content | `string` | - | content of watermark | NEXT_VERSION |
-| font-size | `number \| string` | `16` | fontsize | NEXT_VERSION |
-| font-family | string | `sans-serif` | font family | NEXT_VERSION |
 | font-color | string | `rgba(0,0,0,.15)` | font color | NEXT_VERSION |
-| font-weight | `'normal' \| 'light' \| 'weight' \| number ` | `normal` | font weight | NEXT_VERSION |
 | font-style | `'normal' \| 'italic' \| 'oblique' \| number` | `normal` | font style | NEXT_VERSION |
 | selectable | `boolean` | `true` | whether the watermark is selectable | NEXT_VERSION |
 
