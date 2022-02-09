@@ -29,6 +29,7 @@ basic.vue
 | font-color | string | `rgba(0,0,0,.15)` | 字体颜色 | NEXT_VERSION |
 | font-weight | `'normal' \| 'light' \| 'weight' \| number ` | `normal` | 字体粗细 | NEXT_VERSION |
 | font-style | `'normal' \| 'italic' \| 'oblique' \| number` | `normal` | 字体风格 | NEXT_VERSION |
+| selectable | `boolean` | `true` | 水印覆盖的内容是否可选中 | NEXT_VERSION |
 
 ### Watermark Slots
 

@@ -1,9 +1,8 @@
-import { c, cB } from '../../../_utils/cssr'
+import { c, cB, cM } from '../../../_utils/cssr'
 
 export default c([
   cB('watermark-container', `
     position: relative;
-    user-select: none;
   `, [
     cB('watermark', `
       position: absolute;
@@ -14,5 +13,6 @@ export default c([
       pointer-events: none;
       background-repeat: repeat;
     `)
-  ])
+  ]),
+  cM('watermark--selectable', 'user-select: none;')
 ])

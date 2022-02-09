@@ -29,6 +29,7 @@ basic.vue
 | font-color | string | `rgba(0,0,0,.15)` | font color | NEXT_VERSION |
 | font-weight | `'normal' \| 'light' \| 'weight' \| number ` | `normal` | font weight | NEXT_VERSION |
 | font-style | `'normal' \| 'italic' \| 'oblique' \| number` | `normal` | font style | NEXT_VERSION |
+| selectable | `boolean` | `true` | whether the watermark is selectable | NEXT_VERSION |
 
 ### Watermark Slots
 

@@ -71,6 +71,10 @@ const watermarkProps = {
     'normal' | 'italic' | 'oblique' | number
     >,
     default: 'normal'
+  },
+  selectable: {
+    type: Boolean,
+    default: true
   }
 } as const
 
@@ -96,7 +100,8 @@ export default defineComponent({
       fontSize,
       fontFamily,
       fontWeight,
-      fontStyle
+      fontStyle,
+      selectable
     } = props
     const base64UrlRef = ref('')
     const canvas = document.createElement('canvas')
@@ -134,7 +139,12 @@ export default defineComponent({
     }
     useTheme('Watermark', '-watermark', style, watermarkLight, props)
     return () => (
-      <div class={`${mergedClsPrefixRef.value}-watermark-container`}>
+      <div
+        class={[
+          `${mergedClsPrefixRef.value}-watermark-container`,
+          !selectable && `${mergedClsPrefixRef.value}-watermark--selectable`
+        ]}
+      >
         {slots.default?.()}
         <div
           class={`${mergedClsPrefixRef.value}-watermark`}
