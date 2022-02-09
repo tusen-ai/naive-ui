@@ -394,22 +394,15 @@ export const unconfigurableStyle = c([
       cE(
         'rail',
         {
-          backgroundColor: '#5B5B5B50'
+          backgroundColor: 'rgba(91, 91, 91, .5)'
         },
         [
-          c('&::before', {
-            backgroundColor: '#EBEDF0',
+          cE('button', {
+            backgroundColor: '#5B5B5B',
             backgroundImage: 'unset'
           })
         ]
-      ),
-      cM('active', [
-        cE('rail', [
-          c('&::before', {
-            backgroundImage: 'linear-gradient(8deg, #AFE6A1 0%, #C4E6A1 100%)'
-          })
-        ])
-      ])
+      )
     ]),
     cE(
       'rail',
