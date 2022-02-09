@@ -8,6 +8,7 @@ import type {
 } from './interface'
 import { call } from '../../_utils'
 import { TreeMate } from 'treemate'
+import { getCheckedKeysRows } from './utils'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function useCheck (
@@ -93,7 +94,6 @@ export function useCheck (
   }
   function doCheck (rowKey: RowKey | RowKey[]): void {
     if (props.loading) return
-    const rowData: InternalRowData[] = []
     const checkedKeys = treeMateRef.value.check(
       rowKey,
       mergedCheckedRowKeysRef.value,
@@ -101,15 +101,11 @@ export function useCheck (
         cascade: props.cascade
       }
     ).checkedKeys
-    checkedKeys.forEach((key) => {
-      const data = treeMateRef.value.getNode(key)?.rawNode
-      data && rowData.push(data)
-    })
+    const rowData = getCheckedKeysRows(checkedKeys, treeMateRef.value)
     doUpdateCheckedRowKeys(checkedKeys, rowData)
   }
   function doUncheck (rowKey: RowKey | RowKey[]): void {
     if (props.loading) return
-    const rowData: InternalRowData[] = []
     const checkedKeys = treeMateRef.value.uncheck(
       rowKey,
       mergedCheckedRowKeysRef.value,
@@ -117,10 +113,7 @@ export function useCheck (
         cascade: props.cascade
       }
     ).checkedKeys
-    checkedKeys.forEach((key) => {
-      const data = treeMateRef.value.getNode(key)?.rawNode
-      data && rowData.push(data)
-    })
+    const rowData = getCheckedKeysRows(checkedKeys, treeMateRef.value)
     doUpdateCheckedRowKeys(checkedKeys, rowData)
   }
   function doCheckAll (checkWholeTable: boolean = false): void {
@@ -158,16 +151,15 @@ export function useCheck (
       }
     })
     // alway cascade, to emit correct row keys
-    doUpdateCheckedRowKeys(
-      treeMateRef.value.uncheck(
-        rowKeysToUncheck,
-        mergedCheckedRowKeysRef.value,
-        {
-          cascade: true
-        }
-      ).checkedKeys,
-      []
-    )
+    const checkedKeys = treeMateRef.value.uncheck(
+      rowKeysToUncheck,
+      mergedCheckedRowKeysRef.value,
+      {
+        cascade: true
+      }
+    ).checkedKeys
+    const rowData = getCheckedKeysRows(checkedKeys, treeMateRef.value)
+    doUpdateCheckedRowKeys(checkedKeys, rowData)
   }
   return {
     mergedCheckedRowKeySetRef,

@@ -12,6 +12,7 @@ import type {
   TableColumn,
   TableExpandColumn
 } from './interface'
+import { TreeMate, Key } from 'treemate'
 
 export const selectionColWidth = 40
 export const expandColWidth = 40
@@ -130,4 +131,16 @@ export function isColumnSorting (
         state.columnKey === (column as TableBaseColumn).key && state.order
     ) !== undefined
   )
+}
+
+export function getCheckedKeysRows (
+  checkedKeys: Key[],
+  treeMate: TreeMate<InternalRowData>
+): InternalRowData[] {
+  const rowData: InternalRowData[] = []
+  checkedKeys.forEach((key) => {
+    const data = treeMate.getNode(key)?.rawNode
+    data && rowData.push(data)
+  })
+  return rowData
 }
