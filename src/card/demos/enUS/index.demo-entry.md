@@ -5,17 +5,17 @@ Just put something in it.
 ## Demos
 
 ```demo
-basic
-size
+basic.vue
+size.vue
 cover.vue
-hoverable
-slots
-border
+hoverable.vue
+slots.vue
+border.vue
 segment.vue
-closable
-no-title
-loading
-custom-style
+closable.vue
+no-title.vue
+loading.vue
+custom-style.vue
 embedded.vue
 ```
 

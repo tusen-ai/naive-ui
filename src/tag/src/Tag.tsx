@@ -9,10 +9,17 @@ import {
   provide,
   toRef
 } from 'vue'
-import { useConfig, useTheme } from '../../_mixins'
+import { useConfig, useThemeClass, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { NBaseClose } from '../../_internal'
-import { warn, createKey, call, createInjectionKey } from '../../_utils'
+import {
+  warn,
+  createKey,
+  call,
+  createInjectionKey,
+  color2Class,
+  resolveWrappedSlot
+} from '../../_utils'
 import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { tagLight } from '../styles'
 import type { TagTheme } from '../styles'
@@ -121,6 +128,88 @@ export default defineComponent({
       NConfigProvider?.mergedRtlRef,
       mergedClsPrefixRef
     )
+    const disableInlineTheme = NConfigProvider?.disableInlineTheme
+    const cssVarsRef = computed(() => {
+      const { type, size, color: { color, textColor } = {} } = props
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          padding,
+          closeMargin,
+          closeMarginRtl,
+          borderRadius,
+          opacityDisabled,
+          textColorCheckable,
+          textColorHoverCheckable,
+          textColorPressedCheckable,
+          textColorChecked,
+          colorCheckable,
+          colorHoverCheckable,
+          colorPressedCheckable,
+          colorChecked,
+          colorCheckedHover,
+          colorCheckedPressed,
+          [createKey('closeSize', size)]: closeSize,
+          [createKey('fontSize', size)]: fontSize,
+          [createKey('height', size)]: height,
+          [createKey('color', type)]: typedColor,
+          [createKey('textColor', type)]: typeTextColor,
+          [createKey('border', type)]: border,
+          [createKey('closeColor', type)]: closeColor,
+          [createKey('closeColorHover', type)]: closeColorHover,
+          [createKey('closeColorPressed', type)]: closeColorPressed
+        }
+      } = themeRef.value
+      return {
+        '--n-avatar-size-override': `calc(${height} - 8px)`,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-border-radius': borderRadius,
+        '--n-border': border,
+        '--n-close-color': closeColor,
+        '--n-close-color-hover': closeColorHover,
+        '--n-close-color-pressed': closeColorPressed,
+        '--n-close-color-disabled': closeColor,
+        '--n-close-margin': closeMargin,
+        '--n-close-margin-rtl': closeMarginRtl,
+        '--n-close-size': closeSize,
+        '--n-color': color || typedColor,
+        '--n-color-checkable': colorCheckable,
+        '--n-color-checked': colorChecked,
+        '--n-color-checked-hover': colorCheckedHover,
+        '--n-color-checked-pressed': colorCheckedPressed,
+        '--n-color-hover-checkable': colorHoverCheckable,
+        '--n-color-pressed-checkable': colorPressedCheckable,
+        '--n-font-size': fontSize,
+        '--n-height': height,
+        '--n-opacity-disabled': opacityDisabled,
+        '--n-padding': padding,
+        '--n-text-color': textColor || typeTextColor,
+        '--n-text-color-checkable': textColorCheckable,
+        '--n-text-color-checked': textColorChecked,
+        '--n-text-color-hover-checkable': textColorHoverCheckable,
+        '--n-text-color-pressed-checkable': textColorPressedCheckable
+      }
+    })
+    const themeClassHandle = disableInlineTheme
+      ? useThemeClass(
+        'tag',
+        computed(() => {
+          let hash = ''
+          const { type, size, color: { color, textColor } = {} } = props
+          hash += type[0]
+          hash += size[0]
+          if (color) {
+            hash += `a${color2Class(color)}`
+          }
+          if (textColor) {
+            hash += `b${color2Class(textColor)}`
+          }
+          return hash
+        }),
+        cssVarsRef,
+        props
+      )
+      : undefined
     return {
       ...tagPublicMethods,
       rtlEnabled: rtlEnabledRef,
@@ -129,67 +218,8 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       handleClick,
       handleCloseClick,
-      cssVars: computed(() => {
-        const { type, size, color: { color, textColor } = {} } = props
-        const {
-          common: { cubicBezierEaseInOut },
-          self: {
-            padding,
-            closeMargin,
-            closeMarginRtl,
-            borderRadius,
-            opacityDisabled,
-            textColorCheckable,
-            textColorHoverCheckable,
-            textColorPressedCheckable,
-            textColorChecked,
-            colorCheckable,
-            colorHoverCheckable,
-            colorPressedCheckable,
-            colorChecked,
-            colorCheckedHover,
-            colorCheckedPressed,
-            [createKey('closeSize', size)]: closeSize,
-            [createKey('fontSize', size)]: fontSize,
-            [createKey('height', size)]: height,
-            [createKey('color', type)]: typedColor,
-            [createKey('textColor', type)]: typeTextColor,
-            [createKey('border', type)]: border,
-            [createKey('closeColor', type)]: closeColor,
-            [createKey('closeColorHover', type)]: closeColorHover,
-            [createKey('closeColorPressed', type)]: closeColorPressed
-          }
-        } = themeRef.value
-        return {
-          '--n-avatar-size-override': `calc(${height} - 8px)`,
-          '--n-bezier': cubicBezierEaseInOut,
-          '--n-border-radius': borderRadius,
-          '--n-border': border,
-          '--n-close-color': closeColor,
-          '--n-close-color-hover': closeColorHover,
-          '--n-close-color-pressed': closeColorPressed,
-          '--n-close-color-disabled': closeColor,
-          '--n-close-margin': closeMargin,
-          '--n-close-margin-rtl': closeMarginRtl,
-          '--n-close-size': closeSize,
-          '--n-color': color || typedColor,
-          '--n-color-checkable': colorCheckable,
-          '--n-color-checked': colorChecked,
-          '--n-color-checked-hover': colorCheckedHover,
-          '--n-color-checked-pressed': colorCheckedPressed,
-          '--n-color-hover-checkable': colorHoverCheckable,
-          '--n-color-pressed-checkable': colorPressedCheckable,
-          '--n-font-size': fontSize,
-          '--n-height': height,
-          '--n-opacity-disabled': opacityDisabled,
-          '--n-padding': padding,
-          '--n-text-color': textColor || typeTextColor,
-          '--n-text-color-checkable': textColorCheckable,
-          '--n-text-color-checked': textColorChecked,
-          '--n-text-color-hover-checkable': textColorHoverCheckable,
-          '--n-text-color-pressed-checkable': textColorPressedCheckable
-        }
-      })
+      cssVars: disableInlineTheme ? undefined : cssVarsRef,
+      ...themeClassHandle
     }
   },
   render () {
@@ -197,12 +227,15 @@ export default defineComponent({
       mergedClsPrefix,
       rtlEnabled,
       color: { borderColor } = {},
+      onRender,
       $slots
     } = this
+    onRender?.()
     return (
       <div
         class={[
           `${mergedClsPrefix}-tag`,
+          this.themeClass,
           {
             [`${mergedClsPrefix}-tag--rtl`]: rtlEnabled,
             [`${mergedClsPrefix}-tag--disabled`]: this.disabled,
@@ -216,15 +249,11 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
       >
-        {$slots.avatar && (
-          <div class={`${mergedClsPrefix}-tag__avatar`}>
-            {{
-              default: $slots.avatar
-            }}
-          </div>
-        )}
+        {resolveWrappedSlot($slots.avatar, (children) => [
+          <div class={`${mergedClsPrefix}-tag__avatar`}>{children}</div>
+        ])}
         <span class={`${mergedClsPrefix}-tag__content`} ref="contentRef">
-          {this.$slots}
+          {this.$slots.default?.()}
         </span>
         {!this.checkable && this.closable ? (
           <NBaseClose

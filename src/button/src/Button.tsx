@@ -12,12 +12,7 @@ import {
 } from 'vue'
 import { useMemo } from 'vooks'
 import { createHoverColor, createPressedColor } from '../../_utils/color/index'
-import {
-  useConfig,
-  useFormItem,
-  useTheme,
-  useCssVarsClass
-} from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
   NFadeInExpandTransition,
@@ -26,7 +21,7 @@ import {
   NBaseWave
 } from '../../_internal'
 import type { BaseWaveRef } from '../../_internal'
-import { call, createKey, warnOnce } from '../../_utils'
+import { call, color2Class, createKey, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { buttonLight } from '../styles'
 import type { ButtonTheme } from '../styles'
@@ -476,8 +471,8 @@ const Button = defineComponent({
         ...sizeProps
       }
     })
-    const themeClassRef = disableInlineTheme
-      ? useCssVarsClass(
+    const themeClassHandle = disableInlineTheme
+      ? useThemeClass(
         'button',
         computed(() => {
           let hash = ''
@@ -504,8 +499,8 @@ const Button = defineComponent({
           if (tertiary) hash += 'g'
           if (quaternary) hash += 'h'
           if (strong) hash += 'i'
-          if (color) hash += 'j' + color.replace(/#|\(|\)|,|\s/g, '_')
-          if (textColor) hash += 'k' + textColor.replace(/#|\(|\)|,|\s/g, '_')
+          if (color) hash += 'j' + color2Class(color)
+          if (textColor) hash += 'k' + color2Class(textColor)
           const { value: size } = mergedSizeRef
           hash += 'l' + size[0]
           hash += 'm' + type[0]
@@ -542,12 +537,13 @@ const Button = defineComponent({
           '--n-border-color-disabled': color
         }
       }),
-      themeClass: themeClassRef,
-      cssVars: disableInlineTheme ? undefined : cssVarsRef
+      cssVars: disableInlineTheme ? undefined : cssVarsRef,
+      ...themeClassHandle
     }
   },
   render () {
-    const { $slots, mergedClsPrefix, tag: Component } = this
+    const { $slots, mergedClsPrefix, tag: Component, onRender } = this
+    onRender?.()
     return (
       <Component
         ref="selfElRef"

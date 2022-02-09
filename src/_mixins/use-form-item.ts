@@ -6,7 +6,7 @@ import {
   ComputedRef,
   Ref
 } from 'vue'
-import { FormValidationStatus } from '../form/src/interface'
+import type { FormValidationStatus } from '../form/src/interface'
 import { createInjectionKey } from '../_utils'
 
 type FormItemSize = 'small' | 'medium' | 'large'

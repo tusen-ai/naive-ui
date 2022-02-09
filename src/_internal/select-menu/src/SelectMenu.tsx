@@ -26,7 +26,7 @@ import type {
 } from '../../../select/src/interface'
 import { formatLength, resolveSlot, resolveWrappedSlot } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
-import { useTheme } from '../../../_mixins'
+import { useThemeClass, useTheme } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import NInternalLoading from '../../loading'
 import NFocusDetector from '../../focus-detector'
@@ -98,6 +98,7 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    disableInlineTheme: Boolean,
     // deprecated
     onToggle: Function as PropType<(tmNode: TreeNode<SelectOption>) => void>
   },
@@ -185,9 +186,6 @@ export default defineComponent({
     const emptyRef = computed(() => {
       const tmNodes = flattenedNodesRef.value
       return tmNodes && tmNodes.length === 0
-    })
-    const styleRef = computed(() => {
-      return [{ width: formatLength(props.width) }, cssVarsRef.value]
     })
     function doToggle (tmNode: TreeNode<SelectOption>): void {
       const { onToggle } = props
@@ -346,6 +344,21 @@ export default defineComponent({
         '--n-loading-size': loadingSize
       }
     })
+    const { disableInlineTheme } = props
+    const themeClassHandle = disableInlineTheme
+      ? useThemeClass(
+        'internal-select-menu',
+        computed(() => props.size[0]),
+        cssVarsRef,
+        props
+      )
+      : undefined
+    const styleRef = computed(() => {
+      return [
+        { width: formatLength(props.width) },
+        disableInlineTheme ? undefined : cssVarsRef.value
+      ]
+    })
     const exposedProps: InternalExposedProps = {
       selfRef,
       next,
@@ -377,17 +390,27 @@ export default defineComponent({
       handleMouseDown,
       handleVirtualListResize,
       handleVirtualListScroll,
-      ...exposedProps
+      ...exposedProps,
+      ...themeClassHandle
     }
   },
   render () {
-    const { $slots, virtualScroll, clsPrefix, mergedTheme } = this
+    const {
+      $slots,
+      virtualScroll,
+      clsPrefix,
+      mergedTheme,
+      themeClass,
+      onRender
+    } = this
+    onRender?.()
     return (
       <div
         ref="selfRef"
         tabindex={this.focusable ? 0 : -1}
         class={[
           `${clsPrefix}-base-select-menu`,
+          themeClass,
           this.multiple && `${clsPrefix}-base-select-menu--multiple`
         ]}
         style={this.style as any}

@@ -1,8 +1,21 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 移除 `resolveSlot` 中无用的 `console.log`
+- 修复 `n-tag` 在 `checkable=true` 时缺少背景色
+- 修复 `n-tree` 在 `happydom` 测试环境下由于 `Image` 对象报错
+- 修复 `selection` `maxTagCount` 标签 size 错误问题
+
 ### Feats
 
 - `n-watermark` 新增组件，关闭 [#1745](https://github.com/TuSimple/naive-ui/issues/1745)
+
+### i18n
+
+- 新增 plPL locale，关闭 [#2354](https://github.com/TuSimple/naive-ui/issues/2354)
 
 ## 2.25.1 (2022-02-06)
 
