@@ -7,6 +7,7 @@
 - 移除 `resolveSlot` 中无用的 `console.log`
 - 修复 `n-tag` 在 `checkable=true` 时缺少背景色
 - 修复 `n-tree` 在 `happydom` 测试环境下由于 `Image` 对象报错
+- 修复 `selection` `maxTagCount` 标签 size 错误问题
 
 ### i18n
 
