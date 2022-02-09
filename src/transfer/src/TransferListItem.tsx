@@ -88,10 +88,9 @@ export default defineComponent({
         >
           {label}
         </div>
-        {!source && this.hasItemHover && (
+        {!source && this.hasItemHover && !disabled && (
           <div class={`${mergedClsPrefix}-transfer-list-item__close`}>
             <NBaseClose
-              disabled={disabled}
               clsPrefix={mergedClsPrefix}
               onClick={this.handleClick}
             />

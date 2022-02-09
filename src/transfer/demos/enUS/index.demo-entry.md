@@ -2,7 +2,9 @@
 
 <!--single-column-->
 
-Left, right, right, left... I'm a simple man, and I can play this all day.
+~~Left, right, right, left... I'm a simple man, and I can play this all day.~~
+
+Now, the transfer's style is simple and efficient. I can't continue to play.
 
 ## Demos
 

@@ -178,21 +178,15 @@ export default defineComponent({
       cssVars: computed(() => {
         const { value: size } = mergedSizeRef
         const {
-          common: {
-            cubicBezierEaseInOut,
-            cubicBezierEaseIn,
-            cubicBezierEaseOut
-          },
+          common: { cubicBezierEaseInOut },
           self: {
             width,
             borderRadius,
             borderColor,
             listColor,
-            headerColor,
             titleTextColor,
             titleTextColorDisabled,
             extraTextColor,
-            filterDividerColor,
             itemTextColor,
             itemColorPending,
             itemTextColorDisabled,
@@ -206,14 +200,10 @@ export default defineComponent({
         } = themeRef.value
         return {
           '--n-bezier': cubicBezierEaseInOut,
-          '--n-bezier-ease-in': cubicBezierEaseIn,
-          '--n-bezier-ease-out': cubicBezierEaseOut,
           '--n-border-color': borderColor,
           '--n-border-radius': borderRadius,
           '--n-extra-font-size': extraFontSize,
-          '--n-filter-divider-color': filterDividerColor,
           '--n-font-size': fontSize,
-          '--n-header-color': headerColor,
           '--n-header-extra-text-color': extraTextColor,
           '--n-header-font-weight': titleFontWeight,
           '--n-header-text-color': titleTextColor,

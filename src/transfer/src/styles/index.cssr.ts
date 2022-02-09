@@ -131,7 +131,6 @@ export default c([
         border-radius: inherit;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        background-color: var(--n-header-color);
         transition:
           border-color .3s var(--n-bezier),
           background-color .3s var(--n-bezier);
@@ -163,13 +162,11 @@ export default c([
         border-top-right-radius: 0;
       `, [
         cB('transfer-filter', `
-          padding: 0 8px 8px 8px;
+          padding: 2px 8px 8px 8px;
           box-sizing: border-box;
-          background-color: var(--n-header-color);
           transition:
             border-color .3s var(--n-bezier),
             background-color .3s var(--n-bezier);
-          border-bottom: 1px solid var(--n-filter-divider-color);
         `),
         cB('transfer-list-flex-container', `
           flex: 1;
