@@ -620,6 +620,7 @@ export default defineComponent({
               ref="counterWrapperRef"
             >
               <NTag
+                size={size}
                 ref="counterRef"
                 onMouseenter={this.handleMouseEnterCounter}
                 onMouseleave={this.handleMouseLeaveCounter}
@@ -638,6 +639,7 @@ export default defineComponent({
               key="__counter__"
             >
               <NTag
+                size={size}
                 ref="counterRef"
                 onMouseenter={this.handleMouseEnterCounter}
                 disabled={disabled}
