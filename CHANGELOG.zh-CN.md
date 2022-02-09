@@ -9,6 +9,10 @@
 - 修复 `n-tree` 在 `happydom` 测试环境下由于 `Image` 对象报错
 - 修复 `selection` `maxTagCount` 标签 size 错误问题
 
+### Feats
+
+- `n-select` 新增 `clearFilterAfterSelect` 属性，关闭 [#2352](https://github.com/TuSimple/naive-ui/issues/2352)
+
 ### i18n
 
 - 新增 plPL locale，关闭 [#2354](https://github.com/TuSimple/naive-ui/issues/2354)
