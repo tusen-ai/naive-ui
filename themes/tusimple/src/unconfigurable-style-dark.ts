@@ -79,6 +79,9 @@ export const unconfigurableStyle = c([
             color: '#4FB233'
           },
           [
+            cM('disabled', {
+              color: 'rgba(79, 178, 51, .5)'
+            }),
             cB('date-panel-date__sup', {
               display: 'none'
             })
