@@ -9,6 +9,10 @@
 - Fix `n-tree` throws `Image` error in `happydom` testing environment.
 - fix `selection` `maxTagCount` tag size error.
 
+### Feats
+
+- `n-progress` props `type` add type `dashboard`.
+
 ### i18n
 
 - Add plPL locale, closes [#2354](https://github.com/TuSimple/naive-ui/issues/2354).

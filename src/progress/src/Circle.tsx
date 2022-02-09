@@ -1,4 +1,4 @@
-import { h, defineComponent, PropType, computed, CSSProperties } from 'vue'
+import { h, defineComponent, PropType, CSSProperties } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   SuccessIcon,
@@ -43,28 +43,79 @@ export default defineComponent({
     },
     showIndicator: {
       type: Boolean,
-      reqiuired: true
+      required: true
     },
     indicatorTextColor: String,
     unit: String,
     viewBoxWidth: {
       type: Number,
       required: true
+    },
+    gapDegree: {
+      type: Number as PropType<number>,
+      default: 0
+    },
+    gapPosition: {
+      type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
+      default: 'bottom'
     }
   },
   setup (props, { slots }) {
-    const strokeDasharrayRef = computed(() => {
-      return `${Math.PI * props.percentage}, ${props.viewBoxWidth * 8}`
-    })
-    const strokeDashoffsetRef = computed(() => {
-      return `-${(Math.PI / 3.6) * props.offsetDegree}`
-    })
+    function getPathStyles (
+      percent: number,
+      offsetDegree: number,
+      strokeColor?: string
+    ): { pathString: string, pathStyle: CSSProperties } {
+      const { gapPosition, gapDegree, railStyle, viewBoxWidth } = props
+      const radius = 50
+      let beginPositionX = 0
+      let beginPositionY = -radius
+      let endPositionX = 0
+      let endPositionY = -2 * radius
+      switch (gapPosition) {
+        case 'left':
+          beginPositionX = -radius
+          beginPositionY = 0
+          endPositionX = 2 * radius
+          endPositionY = 0
+          break
+        case 'right':
+          beginPositionX = radius
+          beginPositionY = 0
+          endPositionX = -2 * radius
+          endPositionY = 0
+          break
+        case 'bottom':
+          beginPositionY = radius
+          endPositionY = 2 * radius
+          break
+        default:
+      }
+      const pathString = `M 55,55 m ${beginPositionX},${beginPositionY}
+      a ${radius},${radius} 0 1 1 ${endPositionX},${-endPositionY}
+      a ${radius},${radius} 0 1 1 ${-endPositionX},${endPositionY}`
+      const len = Math.PI * 2 * radius
+      const pathStyle = {
+        stroke: strokeColor,
+        strokeDasharray: `${(percent / 100) * (len - gapDegree)}px ${
+          viewBoxWidth * 8
+        }px`,
+        strokeDashoffset: `-${
+          gapDegree / 2 + (Math.PI / 3.6) * offsetDegree
+        }px`,
+        railStyle
+      }
+      return {
+        pathString,
+        pathStyle
+      }
+    }
     return () => {
       const {
         fillColor,
         railColor,
-        railStyle,
         strokeWidth,
+        offsetDegree,
         status,
         percentage,
         showIndicator,
@@ -72,6 +123,10 @@ export default defineComponent({
         unit,
         clsPrefix
       } = props
+      const { pathString: railPathString, pathStyle: railPathStyle } =
+        getPathStyles(100, 0, railColor)
+      const { pathString: fillPathString, pathStyle: fillPathStyle } =
+        getPathStyles(percentage, offsetDegree, fillColor)
       return (
         <div class={`${clsPrefix}-progress-content`} role="none">
           <div class={`${clsPrefix}-progress-graph`} aria-hidden>
@@ -80,19 +135,11 @@ export default defineComponent({
                 <g>
                   <path
                     class={`${clsPrefix}-progress-graph-circle-rail`}
-                    d="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
-                    stroke-width={strokeWidth * 1.1}
+                    d={railPathString}
+                    stroke-width={strokeWidth}
                     stroke-linecap="round"
                     fill="none"
-                    style={
-                      [
-                        {
-                          strokeDashoffset: 0,
-                          stroke: railColor
-                        },
-                        railStyle
-                      ] as any
-                    }
+                    style={railPathStyle}
                   />
                 </g>
                 <g>
@@ -102,15 +149,11 @@ export default defineComponent({
                       percentage === 0 &&
                         `${clsPrefix}-progress-graph-circle-fill--empty`
                     ]}
-                    d="m 55 5 a 50 50 0 1 1 0 100 a 50 50 0 1 1 0 -100"
-                    stroke-width={strokeWidth * 1.1}
+                    d={fillPathString}
+                    stroke-width={strokeWidth}
                     stroke-linecap="round"
                     fill="none"
-                    style={{
-                      strokeDasharray: strokeDasharrayRef.value,
-                      strokeDashoffset: strokeDashoffsetRef.value,
-                      stroke: fillColor
-                    }}
+                    style={fillPathStyle}
                   />
                 </g>
               </svg>
